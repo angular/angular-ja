@@ -3,7 +3,6 @@ include _util-fns
 // #docregion intro
 :marked
   # Angular 2 Glossary
-
   # Angular 2 用語集
   
   Angular 2 has a vocabulary of its own.
@@ -31,6 +30,7 @@ a#aot
 .l-main-section
 :marked
   ## Ahead of Time (AOT) Compilation
+  ## 事前コンパイラ
 .l-sub-section
   :marked
     Angular applications can be compiled by developers at build-time. 
@@ -38,37 +38,60 @@ a#aot
     to a Module Factory, meaning you don't need to include the Angular compiler in your javascript bundle. 
     Ahead of Time compiled applications also benefit from decreased load time and increased performance.
 
+    Angularアプリケーションは、開発者が開発時にコンパイルすることができます。
+    `ngc`というコンパイル用コマンドライン・インターフェイスを使用してアプリケーションをコンパイルすることで、Module Factoryとして直接起動することができます。
+    このことは、Javascriptのバンドルの中にAngularのコンパイラが必要ないことを意味します。
+    事前コンパイルしたアプリケーションは、ロード時間を短縮することで、パフォーマンスが向上する利点があります。
+    
 .l-main-section
 <a id="angular-module"></a>
 :marked
   ## Angular Module
+  ## Angularモジュール
 .l-sub-section
   :marked
     Helps us organize an application into cohesive blocks of functionality.
     An Angular module identifies the components, directives, and pipes that are used by the application
     along with the list of external Angular modules that the application needs, such as `FormsModule`.
+    
+    アプリケーションを機能的にまとまりのあるブロックで構成するものです。
+    Angularモジュールは、コンポーネント、ディレクティブ、パイプから構成されます。これらは、アプリケーションで利用されるものに加えて、`FormsModule`のようにアプリケーションで必要な外部モジュールのリストです。
 
     Every Angular application has an application root module class. By convention the class is
     called `AppModule` and resides in a file named `app.component.ts`.
+    
+    全てのAngularアプリケーションは1つルートモジュールクラスを持ちます。そのクラスは`AppModule`と呼ばれ、`app.component.ts`ファイル内に配置することが慣例です。
 
     See the [Angular Module](/docs/ts/latest/guide/ngmodule.html) chapter for details and examples.
+    
+    詳細やサンプルは[Angular Module](/docs/ts/latest/guide/ngmodule.html)の章を参照してください。
 :marked
   ## Annotation
 .l-sub-section
   :marked
     In practice a synonym for [Decoration](#decorator).
+    
+    [デコレータ](#decorator)と同じ意味です。
+
 // #enddocregion a-1
 // #docregion a-2
 :marked
   ## Attribute Directive
+  ## Attributeディレクティブ
 .l-sub-section
   :marked
     A category of [Directive](#directive) that can listen to and modify the behavior of
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
 
+    [ディレクティブ](#directive)の一種で、監視して他のHTML要素、属性、プロパティやコンポーネントの振る舞いを変えることができます。
+    それらは通常、HTML属性として現れるため、WIP what mean of "the name" in this case?
+
     The `ngClass` directive for adding and removing CSS class names is a good example of
     an Attribute Directive.
+    
+    `ngClass`ディレクティブはCSSクラス名を追加したり削除したするためのもので、Attributeディレクティブの良い例です。
+    
 // #enddocregion a-2
 
 // #docregion b-c
@@ -125,29 +148,44 @@ a#aot
 
 :marked
   ## Binding
+  ## バインディング
 .l-sub-section
   :marked
     Almost always refers to [Data Binding](#data-binding) and the act of
     binding an HTML object property to a data object property.
 
+    ほとんどの場合、[データバインディング](#data-binding)のことを言います。
+    その役割は、HTMLプロパティをデータオブジェクトのプロパティとを結びつけることです。
+
     May refer to a [Dependency Injection](#dependency-injection) binding
     between a "token" or "key" and a dependency [provider](#provider).
     This more rare usage should be clear in context.
 
+    また[依存性注入](#dependency-injection)のことを言っている場合もあり、"token" や "key" と依存性[プロバイダー](#provider)との間を結びつけます。
+    これより稀な利用方法は、時と場合によって明確にされるべきです。
+
 :marked
   ## Bootstrap
+  ## ブートストラップ
 .l-sub-section
   :marked
     We launch an Angular application by "bootstrapping" it using the application root Angular module (`AppModule`).
     The bootstraping identifies an application's top level "root" [Component](#component), which is the first
     component that is loaded for the application. For more information see the [QuickStart](/docs/ts/latest/quickstart.html).
 
+    Angularアプリケーションは、ルートAngularモジュール(`AppModule`)を利用した "ブートストラッピング" により起動します。
+    ブートストラッピングはアプリケーションの最上位の "ルート" [コンポーネント](#component)で構成され、アプリケーションで最初にロードされるコンポーネントです。
+    詳細は[クイックスタート](/docs/ts/latest/quickstart.html)を参照してください。
+
     One can bootstrap multiple apps in the same `index.html`, each with its own top level root.
+
+    一つの `index.html` の中で複数のアプリケーションをブートストラップすることが可能です。その場合、それぞれがそれぞれの最上位のルートとなります。
 
 <a id="C"></a>
 .l-main-section
 :marked
   ## camelCase
+  ## キャメル記法
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter 
@@ -155,6 +193,8 @@ a#aot
     
     Function, property, and method names are typically spelled in camelCase. Examples include: `square`, `firstName` and `getHeroes`.
     
+    関数、プロパティ、メソッド名は一般的にキャメル記法で書かれます。例としては、`square`、 `firstName`、 `getHeroes`。
+
     This form is also known as **lower camel case**, to distinguish it from **upper camel case** which we call [PascalCase](#pascalcase).
     When we write "camelCase" in this documentation we always mean *lower camel case*.
 

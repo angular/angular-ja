@@ -1,7 +1,7 @@
 # Angular-ja
 [![Build Status][travis-badge]][travis-badge-url]
 
-Angular-ja はAngular2のドキュメンテーションサイト **Angular.io**を日本語に翻訳したサイトです。
+Angular-ja はAngular2のドキュメンテーションサイト [Angular.io](https://github.com/angular/angular.io)を日本語に翻訳したサイトです。
 翻訳作業へのコントリビューションについては、[Wiki](https://github.com/angular/angular-ja/wiki)を参考にしてください。 
 
 This site also includes links to other helpful angular resources including 

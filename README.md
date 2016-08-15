@@ -1,7 +1,8 @@
-# Angular.io
+# Angular-ja
 [![Build Status][travis-badge]][travis-badge-url]
 
-Angular.io is site for Angular 2 **documentation** . 
+Angular-ja はAngular2のドキュメンテーションサイト [Angular.io](https://github.com/angular/angular.io)を日本語に翻訳したサイトです。
+翻訳作業へのコントリビューションについては、[Wiki](https://github.com/angular/angular-ja/wiki)を参考にしてください。 
 
 This site also includes links to other helpful angular resources including 
 Angular 2, Angular 1, Angular Material, and AngularFire.

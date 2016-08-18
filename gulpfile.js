@@ -1507,7 +1507,7 @@ function createPrhEngine(baseDir) {
 }
 
 function execPrh() {
-  return getNewLinesPublicFromMaster().then(function(fileLines) {
+  return getNewLinesPublicFromMaster().then(fileLines => {
     if (fileLines.length === 0) {
       return;
     }
@@ -1517,9 +1517,8 @@ function execPrh() {
       var lineNo = fileLine.line.newLineno();
       var filepath = fileLine.filepath;
       var text = fileLine.line.content().trim();
-      prhEngine.makeChangeSet(null, text).diffs.forEach(function (changeSet) {
-          var slicedText = text.slice(changeSet.index);
-          var matchedText = slicedText.slice(0, changeSet.matches[0].length);
+      prhEngine.makeChangeSet(null, text).diffs.forEach(changeSet => {
+          var matchedText = text.slice(changeSet.index, changeSet.index + changeSet.matches[0].length);
           var expected = matchedText.replace(changeSet.pattern, changeSet.expected);
           if (matchedText === expected) {
               return;

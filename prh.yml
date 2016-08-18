@@ -3,7 +3,7 @@ version: 1
 rules:
 
   - expected: もって
-    pattern: 
+    patterns: 
     - 持って
     - 以って
     - 有して

@@ -3,7 +3,6 @@ include _util-fns
 // #docregion intro
 :marked
   # Angular 2 Glossary
-
   # Angular 2 用語集
   
   Angular 2 has a vocabulary of its own.
@@ -31,6 +30,7 @@ a#aot
 .l-main-section
 :marked
   ## Ahead of Time (AOT) Compilation
+  ## 事前コンパイラ
 .l-sub-section
   :marked
     Angular applications can be compiled by developers at build-time. 
@@ -38,37 +38,60 @@ a#aot
     to a Module Factory, meaning you don't need to include the Angular compiler in your javascript bundle. 
     Ahead of Time compiled applications also benefit from decreased load time and increased performance.
 
+    Angularアプリケーションは、開発者が開発時にコンパイルすることができます。
+    compiler-cli、別名`ngc`を使用してアプリケーションをコンパイルすることで、Module Factoryを直接起動することができます。
+    つまり、JavaScriptのバンドルの中にAngularのコンパイラは必要ありません。
+    また、事前コンパイルしたアプリケーションは読み込み時間が短縮され、パフォーマンスも向上する利点があります。
+    
 .l-main-section
 <a id="angular-module"></a>
 :marked
   ## Angular Module
+  ## Angularモジュール
 .l-sub-section
   :marked
     Helps us organize an application into cohesive blocks of functionality.
     An Angular module identifies the components, directives, and pipes that are used by the application
     along with the list of external Angular modules that the application needs, such as `FormsModule`.
+    
+    アプリケーションを機能的にまとまりのあるブロックで構成するのを手助けするものです。
+    Angularモジュールは、`FormsModule`などのアプリケーションで必要とされている外部Angularモジュールのリストに加え、アプリケーションで利用されるコンポーネント、ディレクティブ、パイプなどを識別します。
 
     Every Angular application has an application root module class. By convention the class is
     called `AppModule` and resides in a file named `app.component.ts`.
+    
+    全てのAngularアプリケーションはひとつのルートモジュールクラスを持ちます。そのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置することが慣例です。
 
     See the [Angular Module](/docs/ts/latest/guide/ngmodule.html) chapter for details and examples.
+    
+    詳細や例は[Angular Module](/docs/ts/latest/guide/ngmodule.html)の章を参照してください。
 :marked
   ## Annotation
 .l-sub-section
   :marked
     In practice a synonym for [Decoration](#decorator).
+    
+    [デコレーター](#decorator)のことを指します。
+
 // #enddocregion a-1
 // #docregion a-2
 :marked
   ## Attribute Directive
+  ## 属性ディレクティブ
 .l-sub-section
   :marked
     A category of [Directive](#directive) that can listen to and modify the behavior of
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
 
+    [ディレクティブ](#directive)の一種で、監視して他のHTML要素、属性、プロパティやコンポーネントの振る舞いを変えることができます。
+    その名前のとおり、通常これらはHTML属性として現れます。
+
     The `ngClass` directive for adding and removing CSS class names is a good example of
     an Attribute Directive.
+    
+    `ngClass`ディレクティブはCSSクラス名を追加したり削除したりするためのもので、属性ディレクティブの良い例です。
+    
 // #enddocregion a-2
 
 // #docregion b-c
@@ -125,25 +148,39 @@ a#aot
 
 :marked
   ## Binding
+  ## バインディング
 .l-sub-section
   :marked
     Almost always refers to [Data Binding](#data-binding) and the act of
     binding an HTML object property to a data object property.
 
+    ほとんどの場合、[データバインディング](#data-binding)のことを指します。
+    その役割は、HTMLオブジェクトのプロパティと、データオブジェクトのプロパティを結びつけることです。
+
     May refer to a [Dependency Injection](#dependency-injection) binding
     between a "token" or "key" and a dependency [provider](#provider).
     This more rare usage should be clear in context.
 
+    また[依存性注入](#dependency-injection)のことを指す場合もあり、"トークン" や "キー" と依存性[プロバイダー](#provider)との間を結びつけます。
+    これより稀な利用方法は、時と場合によって明確にされるべきです。
+
 :marked
   ## Bootstrap
+  ## ブートストラップ
 .l-sub-section
   :marked
     We launch an Angular application by "bootstrapping" it using the application root Angular module (`AppModule`).
     The bootstraping identifies an application's top level "root" [Component](#component), which is the first
     component that is loaded for the application. For more information see the [QuickStart](/docs/ts/latest/quickstart.html).
 
+    Angularアプリケーションは、ルートAngularモジュール(`AppModule`)を利用した "ブートストラッピング" により起動します。
+    ブートストラッピングは、アプリケーションで最初にロードされる最上位の "ルート" [コンポーネント](#component)を識別します。
+    詳細は[クイックスタート](/docs/ts/latest/quickstart.html)を参照してください。
+
     One can bootstrap multiple apps in the same `index.html`, each with its own top level root.
 
+    同じ index.html の中で、複数のアプリケーションをそれぞれのルートコンポーネントを用いてブートストラップできます。
+    
 <a id="C"></a>
 .l-main-section
 :marked

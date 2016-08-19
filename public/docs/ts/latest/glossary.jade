@@ -55,12 +55,12 @@ a#aot
     along with the list of external Angular modules that the application needs, such as `FormsModule`.
     
     アプリケーションを機能的にまとまりのあるブロックで構成するのを手助けするものです。
-    Angularモジュールは、`FormsModule`のなどのアプリケーションで必要とされている外部Angualrモジュールのリストとともに、アプリケーションで利用されるコンポーネント、ディレクティブ、パイプなどとして識別できます。
+    Angularモジュールは、`FormsModule`などのアプリケーションで必要とされている外部Angualrモジュールのリストとともに、アプリケーションで利用されるコンポーネント、ディレクティブ、パイプなどを識別します。
 
     Every Angular application has an application root module class. By convention the class is
     called `AppModule` and resides in a file named `app.component.ts`.
     
-    全てのAngularアプリケーションは1つのルートモジュールクラスを持ちます。そのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置することが慣例です。
+    全てのAngularアプリケーションはひとつのルートモジュールクラスを持ちます。そのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置することが慣例です。
 
     See the [Angular Module](/docs/ts/latest/guide/ngmodule.html) chapter for details and examples.
     
@@ -90,7 +90,7 @@ a#aot
     The `ngClass` directive for adding and removing CSS class names is a good example of
     an Attribute Directive.
     
-    `ngClass`ディレクティブはCSSクラス名を追加したり削除したするためのもので、Attributeディレクティブの良い例です。
+    `ngClass`ディレクティブはCSSクラス名を追加したり削除したりするためのもので、属性ディレクティブの良い例です。
     
 // #enddocregion a-2
 
@@ -174,18 +174,17 @@ a#aot
     component that is loaded for the application. For more information see the [QuickStart](/docs/ts/latest/quickstart.html).
 
     Angularアプリケーションは、ルートAngularモジュール(`AppModule`)を利用した "ブートストラッピング" により起動します。
-    ブートストラッピングはアプリケーションの最上位の "ルート" [コンポーネント](#component)として識別され、アプリケーションで最初にロードされるコンポーネントです。
+    ブートストラッピングは、アプリケーションで最初にロードされる最上位の "ルート" [コンポーネント](#component)を識別します。
     詳細は[クイックスタート](/docs/ts/latest/quickstart.html)を参照してください。
 
     One can bootstrap multiple apps in the same `index.html`, each with its own top level root.
 
-    同じ index.html の中で、複数のアプリケーションをそれぞれのルートコンポーネントによってブートストラップできます。
+    同じ index.html の中で、複数のアプリケーションをそれぞれのルートコンポーネントを用いてブートストラップできます。
     
 <a id="C"></a>
 .l-main-section
 :marked
   ## camelCase
-  ## キャメル記法
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter 

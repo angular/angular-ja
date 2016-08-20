@@ -544,17 +544,28 @@ a#N
 +ifDocsFor('ts|js')
   :marked
     ## Observable
+
+    ## オブザーバブル
   .l-sub-section
     :marked
       We can think of an observable as an array whose items arrive asynchronously over time.
       Observables help us manage asynchronous data, such as data coming from a backend service.
       Observables are used within Angular itself, including Angular's event system and its http client service.
 
+      オブザーバブルは、時間と共に非同期的に要素が届く配列であるとみなすことができます。
+      非同期データ、例えばバックエンドサービスから来るデータなどを扱うのに役立ちます。
+      オブザーバブルは、Angularのイベントシステムやhttpクライアントサービスを含んだ、Angular自身の内部で使用されています。
+
       To use observables, Angular uses a third-party library called Reactive Extensions (RxJS).
       Observables are a proposed feature for ES 2016, the next version of JavaScript.
 
+      オブザーバブルを使用するために、AngularはReactive Extensions (RxJS)と呼ばれているライブラリーを使用しています。
+      オブザーバブルは、ES 2016、すなわちJavaScriptの次期バージョンに提案されている機能です。
+
 :marked
   ## Output
+
+  ## アウトプット
 .l-sub-section
   :marked
     A directive property that can be the ***target*** of an
@@ -562,22 +573,38 @@ a#N
     Events stream *out* of this property to the receiver identified
     in the template expression to the right of the equal sign.
 
+    [イベントバインディング](!{docsLatest}/guide/template-syntax.html#property-binding)の***対象***
+    になることができるディレクティブプロパティです。
+    イベントはこのプロパティからレシーバーに流れ*出ます*。レシーバーはテンプレート式の中で等号の右側で識別されます。
+
     See the [Template Syntax](!{docsLatest}/guide/template-syntax.html#inputs-outputs) chapter.
+
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章をご覧ください。
 
 .l-main-section#P
 
 :marked
   ## PascalCase
+
+  ## パスカルケース
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter.
     Class names are typically spelled in PascalCase. Examples include: `Person` and `HeroDetailComponent`.
 
+    複合語や句を、その一つ一つの単語または略語が大文字で始まるように書く方法です。
+    クラス名は一般的にパスカルケースでつづられます。`Person`や`HeroDetailComponent`が例として挙げられます。
+
     This form is also known as **upper camel case**, to distinguish it from **lower camel case** which we simply call [camelCase](#camelcase).
     In this documentation, "PascalCase" means *upper camel case* and  "camelCase" means *lower camel case*.
 
+    この形式は**アッパーキャメルケース**としても知られ、私達が単に[キャメルケース](#camelcase)と呼ぶ**ロウワーキャメルケース**と区別します。
+    このドキュメントでは、「パスカルケース」とは*アッパーキャメルケース*のことで、「キャメルケース」とは*ロウワーキャメルケース*のことです。
+
 :marked
   ## Pipe
+
+  ## パイプ
 .l-sub-section
   :marked
     An Angular pipe is a function that transforms input values to output values for
@@ -585,17 +612,27 @@ a#N
     to associate the pipe function with a name. We can then use that
     name in our HTML to declaratively transform values on screen.
 
+    Angularのパイプは、入力値を[ビュー](#view)での表示のための出力値に変換する関数です。
+    `!{_at}Pipe` !{_decoratorLink}を使用してpipe関数を名前と結びつけます。
+    そうするとHTMLの中で、その名前を画面上の値を宣言的に変換するために使用することができます。
+
     Here's an example that uses the built-in `currency` pipe to display
     a numeric value in the local currency.
+
+    こちらの例では、組み込みの`currency`パイプを使用して、数値を現地通貨表示にしています。
 
   code-example(language="html" escape="html").
     <label>Price: </label>{{product.price | currency}}
   :marked
     Learn more in the chapter on [pipes](!{docsLatest}/guide/pipes.html) .
 
+    詳細は、[パイプ](!{docsLatest}/guide/pipes.html)の章をご覧ください。
+
 - var _ProviderUrl = docsLatest+'/api/'+(lang == 'dart' ? 'angular2.core' : 'core/index')+'/Provider-class.html'
 :marked
   ## Provider
+
+  ## プロバイダー
 .l-sub-section
   :marked
     A [Provider](!{_ProviderUrl}) creates a new instance of a dependency for the
@@ -603,28 +640,50 @@ a#N
     It relates a lookup token to code &mdash; sometimes called a "recipe" &mdash;
     that can create a dependency value.
 
+    [プロバイダー](!{_ProviderUrl})は、[依存性の注入](#dependency-injection)システムのための
+    新しい依存性に関するインスタンスを生成します。
+    プロバイダーは検索トークンを依存性の値を作成することができるコード
+    ――時として「レシピ」と呼ばれます――に関係させることができます。
+
 a#Q
 .l-main-section#R
 
 +ifDocsFor('ts|js')
   :marked
     ## Reactive Forms
+
+    ## リアクティブフォーム
   .l-sub-section
     :marked
       A technique for building Angular forms through code in a component.
       The alternate technique is [Template-Driven Forms](#template-driven-forms).
 
+      Angularのフォームをコンポーネントのコードを通じて組み立てる技法です。
+      別の技法としては[テンプレート駆動フォーム](#template-driven-forms)があります。
+
       When building reactive forms:
+
+      リアクティブフォームを組み立てる際、
+
       - The "source of truth" is the component. The validation is defined using code in the component.
+      - その「真実の情報源」はコンポーネントです。バリデーションはそのコンポーネントのコードを使用して定義されます。
       - Each control is explicitly created in the component class with `new FormControl()` or with `FormBuilder`.
+      - 一つ一つのコントロールはそのコンポーネントのクラスにおいて、`new FormControl()`もしくは`FormBuilder`を使って明示的に生成されます。
       - The template input elements do *not* use `ngModel`.
+      - そのテンプレートのインプット要素は`ngModel`を使用*しません*。
       - The associated Angular directives are all prefixed with `Form` such as `FormGroup`, `FormControl`, and `FormControlName`.
+      - 関連するAngularディレクティブには全て`Form`接頭辞が付けられています。例えば、`FormGroup`、 `FormControl`、 そして`FormControlName`などです。
 
       Reactive forms are powerful, flexible, and great for more complex data entry form scenarios, such as dynamic generation
       of form controls.
 
+      リアクティブフォームは強力で柔軟なので、より複雑なデータの記入をするフォームのような状況に最適です。
+      例えば、動的にフォームのコントロールを生成するような場合などです。
+
 :marked
   ## Router
+
+  ## ルーター
 .l-sub-section
   :marked
     Most applications consist of many screens or [views](#view).
@@ -632,55 +691,97 @@ a#Q
     and taking other similar actions that cause the application to
     replace one view with another.
 
+    たいていのアプリケーションは多くの画面または[ビュー](#view)から成り立ちます。
+    ユーザーはリンクやボタンのクリック、そして他の類似した行為によってアプリケーションの
+    ビューを別のビューに差し替えさせることで、それらの間を移動します。
+
     The Angular [Component Router](!{docsLatest}/guide/router.html) is a richly featured mechanism for configuring
     and managing the entire view navigation process including the creation and destruction
     of views.
-  +ifDocsFor('ts|js')
+
+    Angularの[コンポーネントルーター](!{docsLatest}/guide/router.html)は、ビューの生成と破棄を含めた、
+    全てのビューの移動処理を設定し管理するのために十分な機能を備えたメカニズムです。
+
+    +ifDocsFor('ts|js')
     :marked
       In most cases, components becomes attached to a [router](#router) by means
       of a `RouterConfig` that defines routes to views.
 
+      たいていの場合、コンポーネントはビューへの経路を定義した`RouterConfig`を用いて
+      [ルーター](#router)に接続されることになります。
+
       A [routing component's](#routing-component) template has a `RouterOutlet` element
       where it can display views produced by the router.
+
+      [ルーティングコンポーネント](#routing-component)のテンプレートは`RouterOutlet`要素を持ち、
+      そこでルーターによって引き起こされたビューを表示することができます。
 
       Other views in the application likely have anchor tags or buttons with `RouterLink`
       directives that users can click to navigate.
 
+      アプリケーションの中の他のビューは、ユーザーがクリックして移動することができる`RouterLink`
+      ディレクティブの付いたアンカータグかボタンを持つでしょう。
+
       See the [Component Router](!{docsLatest}/guide/router.html) chapter to learn more.
+
+      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章をご覧ください。
 
 +ifDocsFor('ts|js')
   :marked
     ## RouterModule
+
+    ## ルーターモジュール
   .l-sub-section
     :marked
       A separate [Angular module](#angular-module) that provides the necessary service providers and directives for navigating through application views.
 
+      アプリケーションのビューの間を移動するのに必要なサービスプロバイダーおよびディレクティブを提供する、
+      独立した[Angularモジュール](#angular-module)です。
+
       See the [Component Router](!{docsLatest}/guide/router.html) chapter to learn more.
+
+      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章をご覧ください。
 
 :marked
   ## Routing Component
+
+  ## ルーティングコンポーネント
 .l-sub-section
   block routing-component-defn
     :marked
       An Angular [Component](#component) with a RouterOutlet that displays views based on router navigations.
 
+      ルーターのナビゲーションに基づきビューを表示するRouterOutletを備えたAngular [コンポーネント](#component)です。
+
       See the [Component Router](!{docsLatest}/guide/router.html) chapter to learn more.
+
+      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章をご覧ください。
 
 .l-main-section#S
 
 +ifDocsFor('ts|js')
   :marked
     ## Scoped Package
+
+    ## スコープドパッケージ
   .l-sub-section
     :marked
       Angular modules are delivered within *scoped packages* such as `@angular/core`, `@angular/common`, `@angular/platform-browser-dynamic`,
       `@angular/http`, and `@angular/router`.
 
+      Angularのモジュールは、`@angular/core`、`@angular/common`、`@angular/platform-browser-dynamic`、`@angular/http`、
+      および`@angular/router`のような、*スコープドパッケージ*の内部で実行されます。
+
       A [*scoped package*](https://docs.npmjs.com/misc/scope) is a way to group related *npm* packages.
+
+      [*スコープドパッケージ*](https://docs.npmjs.com/misc/scope)は、関連する*npm*パッケージをグループ化する方法です。
 
       We import a scoped package the same way we'd import a *normal* package.
       The only difference, from a consumer perspective,
       is that the package name begins with the Angular *scope name*, `@angular`.
+
+      *通常の*パッケージをインポートするのと同じ方法でスコープドパッケージをインポートします。
+      唯一の違いは、利用者の観点からは、パッケージ名は`@angular`というAngularの*スコープネーム*で始まることです。
 
     +makeExcerpt('architecture/ts/app/app.component.ts', 'import', '')
 
@@ -688,87 +789,150 @@ a#snake-case
 :marked
   ## snake_case
 
+  ## スネークケース
 .l-sub-section
   block snake-case-defn
     :marked
       The practice of writing compound words or phrases such that each word is separated by an
       underscore (`_`). This form is also known as **underscore case**.
 
+      複合語や句を、その一つ一つの単語が一つのアンダースコア（`_`）で隔てられるように書く方法です。
+      この形式は**アンダースコアケース**としても知られています。
+
 :marked
   ## Service
+
+  ## サービス
 .l-sub-section
   :marked
     Components are great and all, but what do we do with data or logic that are not associated
     with a specific view or that we want to share across components? We build services!
 
+    コンポーネントが重要であり全てですが、しかし特定のビューに関連しない、またはコンポーネントを越えて共有したい
+    データやロジックについてはどうするのでしょうか？サービスを組み立てましょう！
+
     Applications often require services such as a hero data service or a logging service.
     Our components depend on these services to do the heavy lifting.
+
+    アプリケーションはしばしば、ヒーローデータサービスやロギングサービスのようなサービスを必要とします。
+    コンポーネントはこういった重大な仕事をするサービスに依存します。
 
     A service is a class with a focused purpose.
     We often create a service to implement features that are
     independent from any specific view,
     provide share data or logic across components, or encapsulate external interactions.
 
+    サービスは明確な目的を持ったクラスです。
+    私たちはしばしば、どのような特定のビューからも独立した機能や、
+    コンポーネント間にわたる共有データやロジックを提供する機能、
+    または外部との相互作用をカプセル化する機能を実装するためにサービスを作成します。
+
     See the [Services](!{docsLatest}/tutorial/toh-pt4.html) chapter of the tutorial to learn more.
+
+    詳細は、チュートリアルの[サービス](!{docsLatest}/tutorial/toh-pt4.html)の章をご覧ください。
 
 :marked
   ## Structural Directive
+
+  ## 構造ディレクティブ
 .l-sub-section
   :marked
     A category of [Directive](#directive) that can
     shape or re-shape HTML layout, typically by adding, removing, or manipulating
     elements and their children.
 
+    [ディレクティブ](#directive)の一種です。それはHTMLのレイアウトを、典型的には要素とその
+    子孫を追加し、除去し、または操作することによって、成形または再成形することができます。
+
     The `ngIf` "conditional element" directive and the `ngFor` "repeater" directive are
     good examples in this category.
 
+    `ngIf`「条件要素」ディレクティブと、`ngFor`「繰り返し」ディレクティブはこの類の良い例です。
+
     See the [Structural Directives](!{docsLatest}/guide/structural-directives.html) chapter to learn more.
+
+    詳細は、[構造ディレクティブ](!{docsLatest}/guide/structural-directives.html)の章をご覧ください。
 
 .l-main-section#T
 :marked
   ## Template
+
+  ## テンプレート
 .l-sub-section
   :marked
     A template is a chunk of HTML that Angular uses to render a [view](#view) with
     the support and continuing guidance of an Angular [Directive](#directive),
     most notably a [Component](#component).
 
+    テンプレートは、Angularが[ディレクティブ](#directive)によるサポートと一連の指示をもって[ビュー](#view)を
+    描画するために使用するHTMLの塊です。ディレクティブの中でも注目すべきは、[コンポーネント](#component)です。
+
     We write templates in a special [Template Syntax](!{docsLatest}/guide/template-syntax.html).
+
+    テンプレートは、特殊な[テンプレート構文](!{docsLatest}/guide/template-syntax.html)で記述します。
 
 +ifDocsFor('ts|js')
   :marked
     ## Template-Driven Forms
+
+    ## テンプレート駆動フォーム
   .l-sub-section
     :marked
       A technique for building Angular forms using HTML forms and input elements in the view.
       The alternate technique is [Reactive Forms](#reactive-forms).
 
+      ビューにおいてHTMLのフォームとインプット要素を使用してAngularのフォームを組み立てる技法です。
+      別の技法としては[リアクティブフォーム](#reactive-forms)があります。
+
       When building template-driven forms:
+
+      テンプレート駆動フォームを組み立てる際、
+
       - The "source of truth" is the template. The validation is defined using attributes on the individual input elements.
+      - 「真実の情報源」はテンプレートです。バリデーションは個々のインプット要素の属性を使用して定義されます。
       - [Two-way binding](#data-binding) with `ngModel` keeps the component model in synchronization with the user's entry into the input elements.
+      - `ngModel`を用いた[双方向バインディング](#data-binding)が、コンポーネントのモデルとユーザーによるインプット要素への記入との同期を維持します。
       - Behind the scenes, Angular creates a new control for each input element that has a `name` attribute and
       two-way binding set up.
+      - 舞台裏では、Angularは`name`属性および双方向バインディングの設定を持つ各インプット要素のために、新しいコントロールを生成します。
       - The associated Angular directives are all prefixed with `ng` such as `ngForm`, `ngModel`, and `ngModelGroup`.
+      - 関連するAngularディレクティブには全て`ng`接頭辞が付けられています。例えば、`ngForm`、`ngModel`、そして`ngModelGroup`などです。
 
       Template-driven forms are convenient, quick, and simple and are a good choice for many basic data entry form scenarios.
+
+      テンプレート駆動フォームは便利で短時間で作成でき、そして単純なので、多数の基本的なデータ記入をするフォームの状況には良い選択です。
 
       Learn how to build template-driven forms
       in the [Forms](!{docsLatest}/guide/forms.html) chapter.
 
+      あはテンプレート駆動フォームを組み立てる方法の詳細は、
+      [フォーム](!{docsLatest}/guide/forms.html)の章をご覧ください。
+
 :marked
   ## Template Expression
+
+  ## テンプレート式
 .l-sub-section
   :marked
     An expression is a !{_Lang}-like syntax that Angular evaluates within
     a [data binding](#data-binding).  Learn how to write template expressions
     in the [Template Syntax](!{docsLatest}/guide/template-syntax.html#template-expressions) chapter.
 
+    テンプレート式は、Angularが[データバインディング](#data-binding)の内部で評価する
+    !{_Lang}に似た構文です。テンプレート式を記述する方法の詳細は、
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#template-expressions)の章をご覧ください。
+
 :marked
   ## Transpile
+
+  ## トランスパイル
 .l-sub-section
   :marked
     The process of transforming code written in one form of JavaScript
     (e.g., TypeScript) into another form of JavaScript  (e.g., [ES5](#es5)).
+
+    あるJavaScriptについての形式で書かれたコード（例えば、TypeScript）を、
+    別のJavaScriptについての形式（例えば、[ES5](#es5)）に変換する処理。
 
  :marked
   ## TypeScript
@@ -778,34 +942,61 @@ a#snake-case
     language features and many features that may arrive in future versions
     of JavaScript such as [Decorators](#decorator).
 
+    大部分の[ECMAScript 2015](#ecmascript=2015)の言語機能、および[デコレーター](#decorator)のような
+    JavaScriptの将来のバージョンにておそらく到来するであろう機能をサポートしたJavaScriptのバージョンです。
+
     TypeScript is also noteable for its optional typing system which gives
     us compile-time type-checking and strong tooling support (e.g. "intellisense",
     code completion, refactoring, and intelligent search). Many code editors
     and IDEs support TypeScript either natively or with plugins.
 
+    TypeScriptはそのオプショナルタイピングシステムについても注目に値します。
+    それはコンパイル時の型検査と強力なツールのサポート（例えば、「インテリセンス」、
+    コード補完、リファクタリング、インテリジェントな検索）を提供するものです。
+    多くのコードエディターとIDEはTypeScriptをネイティブに、またはプラグインを用いてサポートします。
+
     TypeScript is the preferred language for Angular 2 development although
     we are welcome to write in other JavaScript dialects such as [ES5](#es5).
 
+    [ES5](#es5)のような他のJavaScriptの言語で書くことは歓迎しますが、
+    TypeScriptはAngualr 2の開発において推奨される言語です。
+
     Learn more about TypeScript on its [website](http://www.typescriptlang.org/).
+
+    TypeScriptについての詳細は、その[ウェブサイト](http://www.typescriptlang.org/)をご覧ください。
 
 a#U
 .l-main-section#V
 
 :marked
   ## View
+
+  ## ビュー
 .l-sub-section
   :marked
     A view is a portion of the screen that displays information and responds
     to user actions such as clicks, mouse moves, and keystrokes.
+
+    ビューは画面の一部分です。情報を表示し、そしてクリック、マウス移動、キーの打鍵のような
+    ユーザーのアクションに反応します。
 
     Angular renders a view under the control of one or more [Directives](#directive),
     especially  [Component](#component) directives and their companion [Templates](#template).
     The Component plays such a prominent role that we often
     find it convenient to refer to a component as a view.
 
+    Angularは一つ以上の[ディレクティブ](#directive)、特に、[コンポーネント](#component)ディレクティブと
+    それらに対を成す[テンプレート](#template)の制御下でビューを描画します。
+    コンポーネントはそのような重要な役割を演じるので、
+    私たちはしばしばコンポーネントをビューと呼ぶのが便利だと気づきます。
+
     Views often contain other views and any view might be loaded and unloaded
     dynamically as the user navigates through the application, typically
     under the control of a [router](#router).
+
+    ビューはしばしば他のビューを含み、ユーザーがアプリケーションを通じて移動するにつれ、
+    典型的には[ルーター](#router)の制御下で、どのようなビューも
+    動的に読み込みおよび取り出しがされるかもしれません。
 
 a#W
 a#X
@@ -814,11 +1005,15 @@ a#Y
 
 :marked
   ## Zone
+
+  ## ゾーン
 .l-sub-section
   block zone-defn
     :marked
       Zones are a mechanism for encapsulating and intercepting
       a JavaScript application's asynchronous activity.
+
+      ゾーンは、JavaScriptアプリケーションの非同期動作をカプセル化して横取りする仕組みです。
 
       The browser DOM and JavaScript have a limited number
       of asynchronous activities, activities such as DOM events (e.g., clicks),
@@ -826,12 +1021,26 @@ a#Y
       [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
       calls to remote servers.
 
+      ブラウザーのDOMとJavaScriptが持つ非同期動作の数は限られています。例えば（クリック等の）DOMイベント、
+      [プロミス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise)、そして
+      リモートサーバーへの[XHR](https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest)コールなどです。
+
       Zones intercept all of these activities and give a "zone client" the opportunity
       to take action before and after the async activity completes.
+
+      ゾーンはこれらの全ての動作を横取りし、「ゾーンクライアント」にその非同期動作の前と完了後に
+      操作を行う機会を与えます。
 
       Angular runs our application in a zone where it can respond to
       asynchronous events by checking for data changes and updating
       the information it displays via [data bindings](#data-binding).
 
+      Angularはアプリケーションをゾーンの中で実行します。
+      その中でAngularは非同期イベントに反応することができ、データの変更を検査し、
+      [データバインディング](#data-binding)によって表示する情報を更新します。
+
       Learn more about zones in this
       [Brian Ford video](https://www.youtube.com/watch?v=3IqtmUscE_U).
+
+      ゾーンについての詳細は、この
+      [Brian Fordのビデオ](https://www.youtube.com/watch?v=3IqtmUscE_U)をご覧ください。

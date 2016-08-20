@@ -150,7 +150,7 @@ gulp install-example-angular
 - Grids: A highly customizable CSS Grid Framework built with Sass
 - Prettify: A JS module and CSS for syntax highlighting of source code snippets.
 - Icomoon: Custom built icon fonts
-
+- prh: Proofreading helper
 
 ## License
 Powered by Google ©2010-2017. Code licensed under an [MIT-style License](https://github.com/angular.io/blob/master/LICENSE). Documentation licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/).

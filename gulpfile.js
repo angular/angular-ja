@@ -25,6 +25,7 @@ var treeKill = require("tree-kill");
 var blc = require("broken-link-checker");
 var less = require('gulp-less');
 var tslint = require('gulp-tslint');
+var prh = require('prh');
 
 // TODO:
 //  1. Think about using runSequence
@@ -852,6 +853,9 @@ gulp.task('lint', function() {
     }));
 });
 
+gulp.task('prh', function() {
+  return execPrh();
+});
 
 // Helper functions
 
@@ -1486,4 +1490,71 @@ function renameIfExistsSync(oldPath, newPath) {
   } else {
     gutil.log(`renameIfExistsSync cannot rename, path not found: ${oldPath}`);
   }
+}
+
+function flattenArray(nestedArray) {
+  if (!nestedArray || nestedArray.length === 0) {
+    return [];
+  }
+  return nestedArray.reduce((merged, array) => merged.concat(array), []);
+}
+
+function getNewLinesPublicFromMaster() {
+  var Git = require('nodegit');
+  var publicPath = PUBLIC_PATH;
+  var relativePath = path.relative(process.cwd(), publicPath);
+  return Git.Repository.open('.').then(repo => {
+    return repo.refreshIndex().then(index => {
+      return index.addAll().then(() => repo);
+    }).then(repo => repo.getMasterCommit());
+  }).then(commit => {
+    var repo = commit.owner();
+    return commit.getTree().then(tree => Git.Diff.treeToWorkdirWithIndex(repo, tree));
+  }).then(diff => diff.patches().then(patches => {
+    return Promise.all(patches.map(patch => {
+        var filepath = path.normalize(patch.newFile().path());
+        return {filepath, patch};
+      })
+      .filter(filePatch => filePatch.filepath.indexOf(relativePath) >= 0)
+      .map(filePatch => filePatch.patch.hunks().then(hunks => {
+        return Promise.all(hunks.map(hunk => {
+          return hunk.lines().then(lines => {
+            return lines.filter(line => line.origin() === Git.Diff.LINE.ADDITION)
+              .map(line => ({filepath: filePatch.filepath, line}))
+          })
+        })).then(flattenArray);
+      }))
+    ).then(flattenArray);
+  }));
+}
+
+function createPrhEngine(baseDir) {
+    return prh.fromYAMLFilePath(path.relative(process.cwd(), 'prh.yml'));;
+}
+
+function execPrh() {
+  return getNewLinesPublicFromMaster().then(fileLines => {
+    if (fileLines.length === 0) {
+      return;
+    }
+    var prhEngine = createPrhEngine();
+    var errors = 0;
+    fileLines.forEach(fileLine => {
+      var lineNo = fileLine.line.newLineno();
+      var filepath = fileLine.filepath;
+      var text = fileLine.line.content().trim();
+      prhEngine.makeChangeSet(null, text).diffs.forEach(changeSet => {
+          var matchedText = text.slice(changeSet.index, changeSet.index + changeSet.matches[0].length);
+          var expected = matchedText.replace(changeSet.pattern, changeSet.expected);
+          if (matchedText === expected) {
+              return;
+          }
+          errors++;
+          gutil.log(`[prh] at ${filepath}:${lineNo}\t${gutil.colors.red(matchedText)} => ${gutil.colors.green(expected)}`);
+      });
+      if (errors > 0) {
+        throw new Error(`prh error`);
+      }
+    });
+  });
 }

@@ -5,6 +5,12 @@ node_js:
   - "6"
 os:
   - linux
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++-4.9-dev
 env:
   global:
     - DBUS_SESSION_BUS_ADDRESS=/dev/null
@@ -16,6 +22,7 @@ env:
   matrix:
     # current angular release jobs
     - TASK=lint
+    - TASK=prh
     - TASK="run-e2e-tests --fast" SCRIPT=examples-install.sh
     - TASK=build-compile SCRIPT=deploy-install.sh WAIT="travis_wait 50" POST_SCRIPT="check-docs.sh -v"
     # current angular release branch jobs
@@ -29,6 +36,7 @@ matrix:
   allow_failures:
     # allow current angular release branch and master to fail
     # these should be moved to a daily task instead of being ran on every PR
+    - env: TASK=prh
     - env: TASK="run-e2e-tests --fast" SCRIPT=examples-install-preview.sh PREVIEW_BRANCH=$LATEST_RELEASE_BRANCH
     - env: TASK=build-compile SCRIPT=deploy-install-preview.sh PREVIEW_BRANCH=$LATEST_RELEASE_BRANCH WAIT="travis_wait 50" POST_SCRIPT="check-docs.sh -v"
     - env: TASK="run-e2e-tests --fast" SCRIPT=examples-install-preview.sh PREVIEW_BRANCH=master

@@ -5,7 +5,6 @@ block includes
   - var _Http = 'Http'; // Angular `Http` library name.
   - var _Angular_Http = 'Angular <code>Http</code>'
   - var _Angular_http_library = 'Angular HTTP library'
-  - var _HTTP_PROVIDERS = 'HTTP_PROVIDERS'
   - var _HttpModule = 'HttpModule'
   - var _JSON_stringify = 'JSON.stringify'
 
@@ -54,23 +53,24 @@ block http-library
 block http-providers
   :marked
     Our app will depend upon the Angular `http` service which itself depends upon other supporting services.
-    The `HttpModule` from `@angular/http` library holds providers for the complete set of http services.
+    The `HttpModule` from `@angular/http` library holds providers for the complete set of `http` services.
 
-:marked
-  We should be able to access `!{_Http}` services from anywhere in the application.
-  So we register them in the `imports` array of <span ngio-ex>app.module.ts</span> where we
-  bootstrap the application and its root `AppComponent`.
+    We should be able to access `http` services from anywhere in the application.
+    So we register them in the `imports` array of `app.module.ts` where we
+    bootstrap the application and its root `AppComponent`.
 
-+makeExample('app/app.module.2.ts','', 'app.module.ts (v.1)')
+  +makeExample('app/app.module.ts', 'v1','app/app.module.ts (v1)')
 
-:marked
-  Notice that we supply `!{_HttpModule}` as part of the *imports* !{_array} in root NgModule `AppModule`.
+  :marked
+    Notice that we supply `!{_HttpModule}` as part of the *imports* !{_array} in root NgModule `AppModule`.
 
 .l-main-section
 :marked
   ## Simulating the web API
 
-  We recommend registering application-wide services in the root `NgModule` *providers*.
+  We recommend registering application-wide services in the root
+  `!{_AppModuleVsAppComp}` *providers*.  <span if-docs="dart">Here we're
+  registering in `main` for a special reason.</span>
 
   Our application is in the early stages of development and far from ready for production.
   We don't even have a web server that can handle requests for heroes.
@@ -78,16 +78,26 @@ block http-providers
 
   We're going to *trick* the HTTP client into fetching and saving data from
   a mock service, the *in-memory web API*.
+  <span if-docs="dart"> The application itself doesn't need to know and
+  shouldn't know about this.  So we'll slip the in-memory web API into the
+  configuration *above* the `AppComponent`.</span>
 
-  Here is a version of `app.module.ts` that performs this trick
-+makeExample('app/app.module.1.ts', '', 'app.module.ts (final)')
+  Here is a version of <span ngio-ex>!{_appModuleTsVsMainTs}</span> that performs this trick:
+
++makeExcerpt(_appModuleTsVsMainTs, 'v2')
 
 block backend
   :marked
-    We're replacing the default `XHRBackend`, the service that talks to the remote server,
-    with the in-memory web API service after priming it as follows:
+    We're importing the  `InMemoryWebApiModule` and adding it to the module `imports`.
+    The  `InMemoryWebApiModule` replaces the default `Http` client backend &mdash;
+    the supporting service that talks to the remote server &mdash;
+    with an  _in-memory web API alternative service_.
+  +makeExcerpt(_appModuleTsVsMainTs, 'in-mem-web-api', '')
+  :marked
+    The `forRoot` configuration method takes an `InMemoryDataService` class 
+    that will prime the in-memory database as follows:
 
-+makeExample('app/in-memory-data.service.ts', 'init')
++makeExample('app/in-memory-data.service.ts', 'init')(format='.')
 
 p This file replaces the #[code #[+adjExPath('mock-heroes.ts')]] which is now safe to delete.
 
@@ -496,25 +506,27 @@ block observable-transformers
     We take a different approach in this example.
     We combine all of the RxJS `Observable` extensions that _our entire app_ requires into a single RxJS imports file.
 
-  +makeExample('app/rxjs-extensions.ts')
+  +makeExample('app/rxjs-extensions.ts')(format='.')
 
   :marked
     We load them all at once by importing `rxjs-extensions` in `AppComponent`.
 
-  +makeExcerpt('app/app.component.ts', 'rxjs-extensions')
+  +makeExcerpt('app/app.component.ts', 'rxjs-extensions')(format='.')
 
 :marked
   ### Add the search component to the dashboard
 
   We add the hero search HTML element to the bottom of the `DashboardComponent` template.
 
-+makeExample('app/dashboard.component.html')
++makeExample('app/dashboard.component.html')(format='.')
 
+- var _declarations = _docsFor == 'dart' ? 'directives' : 'declarations'
+- var declFile = _docsFor == 'dart' ? 'app/dashboard.component.ts' : 'app/app.module.ts'
 :marked
-  And finally, we import the `HeroSearchComponent` and add it to the `declarations` !{_array} in
-  `app.module.ts`.
+  And finally, we import the `HeroSearchComponent` from `'./hero-search.component.ts'` 
+  and add it to the `!{_declarations}` !{_array}:
 
-+makeExcerpt('app/app.module.2.ts', 'hero-search-declaration')
++makeExcerpt(declFile, 'search')
 
 :marked
   Run the app again, go to the *Dashboard*, and enter some text in the search box.
@@ -551,7 +563,7 @@ block filetree
         .file hero-search.component.css (new)
         .file hero-search.component.ts (new)
         .file hero-search.service.ts (new)
-        .file rxjs-operators.ts
+        .file rxjs-extensions.ts
         .file hero.service.ts
         .file heroes.component.css
         .file heroes.component.html
@@ -563,7 +575,7 @@ block filetree
       .file index.html
       .file package.json
       .file styles.css
-      .file systemjs.config.json
+      .file systemjs.config.js
       .file tsconfig.json
       .file typings.json
 
@@ -609,12 +621,11 @@ block file-summary
     toh-6/ts/app/hero-search.component.ts,
     toh-6/ts/app/hero-search.component.html,
     toh-6/ts/app/hero-search.component.css,
-    toh-6/ts/app/rxjs-operators.ts`,
+    toh-6/ts/app/rxjs-extensions.ts`,
     null,
     `hero-search.service.ts,
     hero-search.component.ts,
-    hero-search.service.html,
+    hero-search.component.html,
     hero-search.component.css,
-    hero-search.component.css,
-    rxjs-operators.ts`
+    rxjs-extensions.ts`
   )

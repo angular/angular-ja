@@ -26,6 +26,9 @@ rules:
   - expected: Observable
     pattern: オブザーバブル
 
+  - expected: input要素
+    pattern: インプット要素
+
   - expected: たとえば
     pattern: 例えば
 

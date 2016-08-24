@@ -203,22 +203,32 @@ block includes
 
 :marked
   ## Component
+
+  ## コンポーネント
 .l-sub-section
   :marked
     An Angular class responsible for exposing data
     to a [View](#view) and handling most of the view’s display
     and user-interaction logic.
 
+    [ビュー](#view)にデータを伝えること、そしてビューの表示やユーザインタラクションを処理することを担うAngularのクラスです。
+
     The Component is one of the most important building blocks in the Angular system.
     It is, in fact, an Angular [Directive](#directive) with a companion [Template](#template).
 
-    The  developer applies the `!{_at}Component` !{_decoratorLink} to
+    コンポーネントは、Angularシステムにおいてもっとも重要な構成要素のひとつです。実際には、[テンプレート](#template)を使用したAngular[ディレクティブ](#directive)のことです。
+
+    The developer applies the `!{_at}Component` !{_decoratorLink} to
     the component class, thereby attaching to the class the essential component metadata
     that Angular needs to create a component instance and render it with its template
     as a view.
 
+    開発者が`!{_at}Component` !{_decoratorLink}をコンポーネントクラスに付けることによって、Angularがコンポーネントのインスタンスを作成しテンプレートを使ってビューとしてレンダリングするために必要とする基本的なコンポーネントのメタデータをそのクラスに付加します。
+
     Those familiar with "MVC" and "MVVM" patterns will recognize
     the Component in the role of "Controller" or "View Model".
+
+    "MVC"と"MVVM"パターンでは、"コントローラー"と"ビューモデル"にあたります。
 
 .l-main-section#D
 :marked
@@ -280,6 +290,8 @@ block includes
   a#decoration
   :marked
     ## Decorator | Decoration
+
+    ## デコレーター | デコレーション
   .l-sub-section
     block decorator-defn
       :marked

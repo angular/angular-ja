@@ -362,28 +362,45 @@ a#aot
   :marked
     The [official JavaScript language specification](https://en.wikipedia.org/wiki/ECMAScript).
 
+    [公式のJavaScriptの言語仕様](https://ja.wikipedia.org/wiki/ECMAScript)です。
+
     The latest approved version of JavaScript is
     [ECMAScript 2016](http://www.ecma-international.org/ecma-262/7.0/)
     (AKA "ES2016" or "ES7") and many Angular developers write their applications
     either in this version of the language or a dialect that strives to be
     compatible with it, such as [TypeScript](#typescript).
 
+    JavaScriptの最新の承認されたバージョンは
+    [ECMAScript 2016](http://www.ecma-international.org/ecma-262/7.0/)
+    (通称"ES2016"または"ES7")であり、多くのAngular 2開発者はこのバージョンか、[TypeScript](#typesScript)のような、
+    このバージョンの対応に取り組む言語のいずれかを使用してアプリケーションを書くでしょう。
+
     Most modern browsers today only support the much older "ECMAScript 5" (AKA ES5) standard.
     Applications written in ES2016, ES2015 or one of their dialects must be "[transpiled](#transpile)"
     to ES5 JavaScript.
 
+    今日の大部分のモダンブラウザーは、それよりもずっと古い"ECMAScript 5"(通称ES5)標準しかサポートしていません。
+    ES2016、 ES2015か、それらと互換性のある言語で書かれたアプリケーションは、
+    ES5 JavaScriptに"[トランスパイル](#transpile)"されなければなりません。
+    
     Angular developers may choose to write in ES5 directly.
+
+    Angular 2アプリケーションを、ES5で直接書くこともできます。
 
 :marked
   ## ES2015
 .l-sub-section
   :marked
     Short hand for [ECMAScript](#ecmascript) 2015.
+    
+    "[ECMAScript 2015](#ecmascript=2015)"の簡略表現です。
 :marked
   ## ES6
 .l-sub-section
   :marked
     Short hand for [ECMAScript](#ecmascript) 2015.
+    
+    "[ECMAScript 2015](#ecmascript=2015)"の簡略表現です。
 :marked
   ## ES5
 .l-sub-section
@@ -391,20 +408,31 @@ a#aot
     Short hand for [ECMAScript](#ecmascript) 5, the version of JavaScript run by most modern browsers.
     See [ECMAScript](#ecmascript).
 
+    "ECMAScript 5"の簡略表現で、ほとんどのモダンブラウザーで動くJavaScriptのバージョンです。
+    [ECMAScript](#ecmascript)をご覧ください。
+
 a#F
 a#G
 a#H
 .l-main-section#I
 :marked
   ## Injector
+
+  ## インジェクター
 .l-sub-section
   :marked
     An object in the Angular [dependency injection system](#dependency-injection)
     that can find a named "dependency" in its cache or create such a thing
     with a registered [provider](#provider).
 
+    Angularの[依存性の注入システム](#dependency-injection)におけるオブジェクトで、
+    指定された"依存性"をキャッシュから見つけるか、
+    登録された[プロバイダー](#provider)を使用して生成できます。
+
 :marked
   ## Input
+
+  ## インプット
 .l-sub-section
   :marked
     A directive property that can be the ***target*** of a
@@ -412,10 +440,19 @@ a#H
     Data values flow *into* this property from the data source identified
     in the template expression to the right of the equal sign.
 
+    [プロパティバインディング](!{docsLatest}/guide/template-syntax.html#property-binding)の
+    ***対象***になるディレクティブプロパティです。
+    データ値はデータソースからこのプロパティに流れ*こみます*。
+    データソースはテンプレート式の中で等号の右側で識別されます。
+    
     See the [Input and output properties](!{docsLatest}/guide/template-syntax.html#inputs-outputs) section of the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
+
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章をご覧ください。
 
 :marked
   ## Interpolation
+
+  ## 補間（Interpolation）
 .l-sub-section
   :marked
     A form of [property data binding](#data-binding) in which a
@@ -424,12 +461,20 @@ a#H
     before it is assigned to an element property
     or displayed between element tags, as in this example.
 
+    [プロパティデータバインディング](#data-binding)の一形態で、その二重波括弧の間の
+    [テンプレート式](#template-expression)の結果を、テキストとしてレンダリングします。
+    そのテキストは、要素のプロパティに割り当てられるか、この例のように要素のタグの間で表示される前に、
+    隣接したテキストに連結されることがあります。
+
   code-example(language="html" escape="html").
     <label>My current hero is {{hero.name}}</label>
 
   :marked
     Read more about [interpolation](!{docsLatest}/guide/template-syntax.html#interpolation) in the
     [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
+
+    補間についての詳細は、
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#interpolation)の章をご覧ください。
 
 .l-main-section#J
 

@@ -394,19 +394,19 @@ block includes
     JavaScriptの最新の承認されたバージョンは
     [ECMAScript 2016](http://www.ecma-international.org/ecma-262/7.0/)
     (通称"ES2016"または"ES7")であり、多くのAngular 2開発者はこのバージョンか、[TypeScript](#typesScript)のような、
-    このバージョンの対応に取り組む方言のいずれかを使用してアプリケーションを書くでしょう。
+    このバージョンの対応に取り組む言語のいずれかを使用してアプリケーションを書くでしょう。
 
     Most modern browsers today only support the much older "ECMAScript 5" (AKA ES5) standard.
     Applications written in ES2016, ES2015 or one of their dialects must be "[transpiled](#transpile)"
     to ES5 JavaScript.
 
     今日の大部分のモダンブラウザーは、それよりもずっと古い"ECMAScript 5"(通称ES5)標準しかサポートしていません。
-    ES2016、 ES2015か、それらの方言で書かれたアプリケーションは、
+    ES2016、 ES2015か、それらと互換性のある言語で書かれたアプリケーションは、
     ES5 JavaScriptに"[トランスパイル](#transpile)"されなければなりません。
 
     Angular 2 developers may choose to write in ES5 directly.
 
-    ES5で直接書くこともできます。
+    Angular 2アプリケーションを、ES5で直接書くこともできます。
 
 :marked
   ## ES2015
@@ -448,7 +448,7 @@ a#H
 
     Angularの[依存性の注入システム](#dependency-injection)におけるオブジェクトで、
     指定された"依存性"をキャッシュから見つけるか、
-    登録[プロバイダー](#provider)で生成できます。
+    登録された[プロバイダー](#provider)を使用して生成できます。
 
 :marked
   ## Input
@@ -473,7 +473,7 @@ a#H
 :marked
   ## Interpolation
 
-  ## 補間
+  ## 補間（Interpolation）
 .l-sub-section
   :marked
     A form of [Property Data Binding](#data-binding) in which a

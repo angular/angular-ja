@@ -29,6 +29,9 @@ rules:
   - expected: input要素
     pattern: インプット要素
 
+  - expected: 依存性の注入
+    pattern: 依存性注入
+
   - expected: たとえば
     pattern: 例えば
 

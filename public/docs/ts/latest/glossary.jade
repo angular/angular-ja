@@ -331,9 +331,11 @@ block includes
         class as an Angular [Component](#component) and an `@Input` decorator applied to a property
         of that component.
         The elided object argument to the `@Component` decorator would contain the pertinent component metadata.
-        ```
 
-        Angularは独自のデコレーターを持っており、
+        Angularは独自のデコレーターを持っており、Angularとアプリケーションの部品が協調して動く手助けをします。
+        こちらは、クラスをAngularの[コンポーネント](#component)と識別する`@Component`デコレーター、およびそのコンポーネントのプロパティに適用される`@Input`デコレーターの例です。
+        ここでは省略した`@Component`の引数オブジェクトには、関連するコンポーネントのメタデータを含めます。
+        ```
         @Component({...})
         export class AppComponent {
           constructor(@Inject('SpecialFoo') public foo:Foo) {}
@@ -344,10 +346,15 @@ block includes
         that it decorates. None of the decorations shown here will "leak" to other
         classes appearing below it in the file.
 
+        デコレーターの範囲は、修飾するという言語機能に限定されています。ここでいう修飾は、同一ファイルの中でそれ以降にある他のクラスにまで及ぶわけではありません。
+
       .alert.is-important
         :marked
           Always include the parentheses `()` when applying a decorator.
           A decorator is a **function** that must be called when applied.
+
+          デコレーターを適用する際には、常に丸括弧`()`を含めてください。
+          デコレーターは、適用する際に必ず呼び出される**関数**です。
 
 :marked
   ## Dependency Injection

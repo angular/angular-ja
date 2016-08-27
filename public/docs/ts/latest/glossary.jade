@@ -366,26 +366,44 @@ block includes
     for creating and delivering parts of an application to other
     parts of an application that request them.
 
+    依存性の注入は、アプリケーションの部品に求められた部品を作って送り届けるためのデザインパターンでありメカニズムです。
+
     Angular developers prefer to build applications by defining many simple parts
     that each do one thing well and then wire them together at runtime.
+
+    Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てて、実行時にそれぞれをつなぐことを好みます。
 
     These parts often rely on other parts. An Angular [Component](#component)
     part might rely on a service part to get data or perform a calculation. When a
     part "A" relies on another part "B", we say that "A" depends on "B" and
     that "B" is a dependency of "A".
 
+    これらの部品は他の部品に依存していることがよくあります。Angularの[コンポーネント](#component)部分は
+    データを取得し計算を処理するサービス部分に依存しているかもしれません。"A" 部分が他の "B" 部分に依存しているとき、
+    "A" は "B" に依存している、または "B" は "A" の依存であるといいます。
+
     We can ask a "Dependency Injection System" to create "A"
     for us and handle all the dependencies.
     If "A" needs "B" and "B" needs "C", the system resolves that chain of dependencies
     and returns a fully prepared instance of "A".
+
+    "依存性の注入システム" に "A" を作成させてすべての依存を扱わせることができます。
+    もし "A" が "B" を必要とし、かつ "B" が "C" を必要とするならば、
+    このシステムは依存の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
 
     Angular provides and relies upon its own sophisticated
     [Dependency Injection](dependency-injection.html) system
     to assemble and run applications by "injecting" application parts
     into other application parts where and when needed.
 
+    Angularは独自で洗練された[依存性の注入](dependency-injection.html)システムを提供し利用しています。
+    必要なときに必要な場所でアプリケーションの部品を他の部品へ "注入すること" によって、アプリケーションを組み立てて実行します。
+
     At the core there is an [`Injector`](#injector) that returns dependency values on request.
     The expression `injector.get(token)` returns the value associated with the given token.
+
+    この中核には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
+    `injector.get(token)`という式は、与えられたトークンに関連する値を返します。
 
     A token is an Angular type (`OpaqueToken`). We rarely deal with tokens directly; most
     methods accept a class name (`Foo`) or a string ("foo") and Angular converts it

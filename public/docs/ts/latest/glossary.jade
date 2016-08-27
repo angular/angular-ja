@@ -315,10 +315,16 @@ block includes
       :marked
         A Decorator is a **function** that adds metadata to a class, its members (properties, methods) and function arguments.
 
+        デコレーターは**関数**であり、クラス、メンバー（プロパティおよびメソッド）、および関数の引数にメタデータを付加します。
+
         Decorators are a JavaScript language [feature](https://github.com/wycats/javascript-decorators), implemented in TypeScript and proposed for ES2016 (AKA ES7).
+
+        デコレーターはJavaScript言語の[機能](https://github.com/wycats/javascript-decorators)で、TypeScript で実装され、ES2016 (AKA ES7)で提案されています。
 
         We apply a decorator by positioning it
         immediately above or to the left of the thing it decorates.
+
+        デコレーターを適用するには、修飾する対象の直上か左にデコレーターを配置します。
 
         Angular has its own set of decorators to help it interoperate with our application parts.
         Here is an example of a `@Component` decorator that identifies a
@@ -326,6 +332,8 @@ block includes
         of that component.
         The elided object argument to the `@Component` decorator would contain the pertinent component metadata.
         ```
+
+        Angularは独自のデコレーターを持っており、
         @Component({...})
         export class AppComponent {
           constructor(@Inject('SpecialFoo') public foo:Foo) {}

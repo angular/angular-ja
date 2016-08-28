@@ -458,31 +458,55 @@ block includes
     An Angular class responsible for creating, re-shaping, and interacting with HTML elements
     in the browser DOM. Directives are Angular's most fundamental feature.
 
+    Angularのクラスは、ブラウザのDOMでHTML要素を作成し変形し相互に作用することを担当します。
+
     A Directive is almost always associated with an HTML element or attribute.
     We often refer to such an element or attribute as the directive itself.
     When Angular finds a directive in an HTML template,
     it creates the matching directive class instance
     and gives that instance control over that portion of the browser DOM.
 
+    ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
+    その要素や属性をディレクティブ自身としてよく参照します。
+    AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
+    そのインスタンスの制御をブラウザのDOMの一部に渡します。
+
     Developers can invent custom HTML markup (e.g., `<my-directive>`) to
     associate with their custom directives. They add this custom markup to HTML templates
     as if they were writing native HTML. In this way, directives become extensions of
     HTML itself.
 
+    開発者は、新しいディレクティブに紐付いたカスタムHTMLマークアップ(例えば`<my-directive>`)を作ることができます。
+    そのカスタムマークアップはあたかももともとのHTMLを書くかのようにHTMLテンプレートに追加できます。
+    このようにして、ディレクティブはHTML自身を拡張することになります。
+
     Directives fall into one of three categories:
+
+    ディレクティブはみっつの種類に分けられます：
 
     1. [Components](#component) that combine application logic with an HTML template to
     render application [views]. Components are usually represented as HTML elements.
     They are the building blocks of an Angular application and the
     developer can expect to write a lot of them.
 
+    1. [コンポーネント](#component)。アプリケーションの[ビュー]をレンダリングするHTMLテンプレートと、
+    アプリケーションのロジックをつなげるものです。通常、コンポーネントはHTML要素のことを差します。
+    コンポーネントはAngularアプリケーションの構成要素であり、開発者によって記述されることが期待されています。
+
     1. [Attribute Directives](#attribute-directive) that can listen to and modify the behavior of
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
 
+    1. [属性ディレクティブ](#attribute-directive)。他のHTML要素、属性、プロパティ、およびコンポーネントの
+    振る舞いを監視して変更することができるものです。名前からわかるように、通常、属性ディレクティブはHTML属性のことを
+    差します。
+
     1. [Structural Directives](#structural-directive), a directive responsible for
     shaping or re-shaping HTML layout, typically by adding, removing, or manipulating
     elements and their children.
+
+    1. [構造ディレクティブ](#structural-directive)。基本的には要素や子要素の追加、削除、および操作によって
+    HTMLのレイアウトを成形したり再成形することを担当するディレクティブです。
 
 .l-main-section#E
 

@@ -402,32 +402,53 @@ block includes
     At the core there is an [`Injector`](#injector) that returns dependency values on request.
     The expression `injector.get(token)` returns the value associated with the given token.
 
-    この中核には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
-    `injector.get(token)`という式は、与えられたトークンに関連する値を返します。
+    中核には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
+    `injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
 
     A token is an Angular type (`OpaqueToken`). We rarely deal with tokens directly; most
     methods accept a class name (`Foo`) or a string ("foo") and Angular converts it
     to a token. When we write `injector.get(Foo)`, the injector returns
     the value associated with the token for the `Foo` class, typically an instance of `Foo` itself.
 
+    トークンはAngularの型(`OpaqueToken`)です。私達が直接トークンを扱うことはめったにありません。
+    ほとんどのメソッドはクラス名(`Foo`)もしくは文字列("foo")を受け入れて、Angularがトークンに変換するからです。
+    我々が`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
+    通常その値は`Foo`クラスのインスタンスそのものです。
+
     Angular makes similar requests internally during many of its operations
     as when it creates a [`Component`](#component) for display.
+
+    Angularは、表示のために[`コンポーネント`](#component)を作るような処理において、似た要求を内部的にしています。
 
     The `Injector` maintains an internal map of tokens to dependency values.
     If the `Injector` can't find a value for a given token, it creates
     a new value using a `Provider` for that token.
 
+    この`インジェクター`は、トークンと依存性の値とのマップを内部的に管理しています。
+    もし`インジェクター`が与えられたトークンにマップされた値を見つけられないときには、そのトークンの`プロバイダー`を使って新しく値を作成します。
+
     A [Provider](#provider) is a recipe for
     creating new instances of a dependency value associated with a particular token.
+
+    [プロバイダー](#provider)は、特定のトークンに関連した依存性の値の新しいインスタンスを作成するためのレシピです。
 
     An injector can only create a value for a given token if it has
     a `Provider` for that token in its internal provider registry.
     Registering providers is a critical preparatory step.
 
+    インジェクターは、内部的なプロバイダーのレジストリの中にそのトークンのための`プロバイダー`があるときにのみ、
+    依存性の値を作成することができます。
+    プロバイダーをレジストリに登録しておくことは、準備段階において非常に重要なことです。
+
     Angular registers some of its own providers with every injector.
     We can register our own providers.
 
+    Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
+    私達は自分のプロバイダーを登録できます。
+
     Learn more in the [Dependency Injection](!{docsLatest}/guide/dependency-injection.html) chapter.
+
+    詳しく知るには[依存性の注入](!{docsLatest}/guide/dependency-injection.html)の章を参照してください。
 :marked
   ## Directive
 

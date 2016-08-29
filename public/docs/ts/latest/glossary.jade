@@ -101,12 +101,19 @@ block includes
 +ifDocsFor('ts|js')
   :marked
     ## Barrel
+
+    ## バレル
   .l-sub-section
     :marked
       A barrel is a way to *rollup exports* from several ES2015 modules into a single convenience ES2015 module.
       The barrel itself is an ES2015 module file that re-exports *selected* exports of other ES2015 modules.
 
+      バレルは、複数のES2015モジュールをひとつのES2015モジュールにまとめてエクスポートする方法です。
+      バレル自身は、ES2015モジュールのファイルであり、*選択された*他のES2015モジュールのエクスポートを再エクスポートします。
+
       Imagine three ES2015 modules in a `heroes` folder:
+
+      `heroes`フォルダにある、みっつのES2015モジュールをイメージしてください：
     code-example.
       // heroes/hero.component.ts
       export class HeroComponent {}
@@ -118,30 +125,42 @@ block includes
       export class HeroService {}
     :marked
       Without a barrel, a consumer would need three import statements:
+
+      バレル無しでは、みっつのインポート文を書く必要があります。
     code-example.
       import { HeroComponent } from '../heroes/hero.component.ts';
       import { Hero }          from '../heroes/hero.model.ts';
       import { HeroService }   from '../heroes/hero.service.ts';
     :marked
       We can add a barrel to the `heroes` folder (called `index` by convention) that exports all of these items:
+
+      これらすべてをエクスポートしている`heroes`フォルダ（`index`と呼ばれます）にバレルを追加できます。
     code-example.
       export * from './hero.model.ts';   // re-export all of its exports
       export * from './hero.service.ts'; // re-export all of its exports
       export { HeroComponent } from './hero.component.ts'; // re-export the named thing
     :marked
       Now a consumer can import what it needs from the barrel.
+
+      これでバレルから必要なものをインポートできるようになります。
     code-example.
       import { Hero, HeroService } from '../heroes'; // index is implied
     :marked
       The Angular [scoped packages](#scoped-package) each have a barrel named `index`.
 
+      Angularの[スコープ化パッケージ](#scoped-package)それぞれが`index`という名前のバレルを持っています。
+
       That's why we can write this:
+
+      というわけで、下記のように記述することができるのです：
 
     +makeExcerpt('quickstart/ts/app/app.component.ts', 'import', '')
 
     .alert.is-important
       :marked
         Note that you can often achieve this same goal using [Angular modules](#angular-module) instead.
+
+        これと同様のことを[Angularモジュール](#angular-module)で実現することがよくあると心に留めておいてください。
 
 :marked
   ## Binding

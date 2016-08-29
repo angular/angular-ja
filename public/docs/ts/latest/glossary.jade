@@ -217,7 +217,7 @@ block includes
     This form is also known as **lower camel case**, to distinguish it from **upper camel case** which we call [PascalCase](#pascalcase).
     When we write "camelCase" in this documentation we always mean *lower camel case*.
 
-    この形式は**ロウワーキャメルケース**としても知られ、私達が[パスカルケース](#pascalcase)と呼ぶ**アッパーキャメルケース**と区別します。
+    この形式は**ロウワーキャメルケース**としても知られ、[パスカルケース](#pascalcase)と呼ばれる**アッパーキャメルケース**と区別します。
     このドキュメンテーションでは、"キャメルケース"とは常に*ロウワーキャメルケース*のことです。
 
 :marked
@@ -235,14 +235,17 @@ block includes
     The Component is one of the most important building blocks in the Angular system.
     It is, in fact, an Angular [Directive](#directive) with a companion [Template](#template).
 
-    コンポーネントは、Angularシステムにおいてもっとも重要な構成要素のひとつです。実際には、[テンプレート](#template)を使用したAngular[ディレクティブ](#directive)のことです。
+    コンポーネントは、Angularシステムにおいてもっとも重要な構成要素のひとつです。
+    実際には、[テンプレート](#template)を使用したAngular[ディレクティブ](#directive)のことです。
 
     The  developer applies the `!{_at}Component` !{_decoratorLink} to
     the component class, thereby attaching to the class the essential component metadata
     that Angular needs to create a component instance and render it with its template
     as a view.
 
-    開発者が`!{_at}Component` !{_decoratorLink}をコンポーネントクラスに付けることによって、Angularがコンポーネントのインスタンスを作成しテンプレートを使ってビューとしてレンダリングするために必要とする基本的なコンポーネントのメタデータをそのクラスに付加します。
+    開発者が`!{_at}Component` !{_decoratorLink}をコンポーネントクラスに付けることによって、
+    Angularがコンポーネントのインスタンスを作成しテンプレートを使ってビューとしてレンダリングするために
+    必要とする基本的なコンポーネントのメタデータをそのクラスに付加します。
 
     Those familiar with "MVC" and "MVVM" patterns will recognize
     the Component in the role of "Controller" or "View Model".
@@ -260,13 +263,13 @@ block includes
     This form is also known as [kebab-case](#kebab-case).
 
     複合語や句を、それぞれの単語がひとつのダッシュやハイフン (`-`) で隔てられるように書く方法です。
-    この形式は[kebab-case](#kebab-case)としても知られています。
+    この形式は[ケバブケース](#kebab-case)としても知られています。
 
     [Directive](#directive) selectors (like `my-app`) <span if-docs="ts">and
     the root of filenames (such as `hero-list.component.ts`)</span> are often
     spelled in dash-case.
 
-    (`my-app`のような)[Directive](#directive)セレクター <span if-docs="ts">や(`hero-list.component.ts`のような)ファイル名
+    (`my-app`のような)[ディレクティブ](#directive)セレクター <span if-docs="ts">や(`hero-list.component.ts`のような)ファイル名
     </span>は、よくダッシュケースで記述されます。
 
 :marked
@@ -278,7 +281,7 @@ block includes
     Applications display data values to a user and respond to user
     actions (clicks, touches, keystrokes).
 
-    アプリケーションはデータの値をユーザーに表示し、ユーザからのアクション(clicks, touches, keystrokes)に反応します。
+    アプリケーションはデータの値をユーザーに表示し、ユーザからのアクション(クリック、タッチ、キーストローク)に反応します。
 
     We could push application data values into HTML, attach
     event listeners, pull changed values from the screen, and
@@ -300,7 +303,7 @@ block includes
 
      The many forms of binding include:
 
-     バインディングの多くの形式は次を含みます：
+     バインディングには多くの形式があります：
      * [Interpolation](!{docsLatest}/guide/template-syntax.html#interpolation)
      * [補間](!{docsLatest}/guide/template-syntax.html#interpolation)
      * [Property Binding](!{docsLatest}/guide/template-syntax.html#property-binding)
@@ -463,7 +466,7 @@ block includes
     We can register our own providers.
 
     Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
-    私達は自分のプロバイダーを登録できます。
+    そして私達は自分のプロバイダーを登録できます。
 
     Learn more in the [Dependency Injection](!{docsLatest}/guide/dependency-injection.html) chapter.
 
@@ -496,7 +499,7 @@ block includes
     HTML itself.
 
     開発者は、新しいディレクティブに紐付いたカスタムHTMLマークアップ(例えば`<my-directive>`)を作ることができます。
-    そのカスタムマークアップはあたかももともとのHTMLを書くかのようにHTMLテンプレートに追加できます。
+    そのカスタムマークアップはあたかも本来のHTMLを書くかのようにHTMLテンプレートに追加できます。
     このようにして、ディレクティブはHTML自身を拡張することになります。
 
     Directives fall into one of three categories:

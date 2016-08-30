@@ -126,7 +126,7 @@ block includes
     :marked
       Without a barrel, a consumer would need three import statements:
 
-      バレル無しでは、みっつのインポート文を書く必要があります。
+      バレル無しでは、3つのインポート文を書く必要があります。
     code-example.
       import { HeroComponent } from '../heroes/hero.component.ts';
       import { Hero }          from '../heroes/hero.model.ts';
@@ -480,7 +480,8 @@ block includes
     An Angular class responsible for creating, re-shaping, and interacting with HTML elements
     in the browser DOM. Directives are Angular's most fundamental feature.
 
-    Angularのクラスは、ブラウザのDOMでHTML要素を作成し変形し相互に作用することを担当します。
+    ブラウザのDOM内で、HTML要素を作成し変形し相互に作用することを担当する、Angularのクラスです。
+    ディレクティブはAngularのもっとも基本的な機能です。
 
     A Directive is almost always associated with an HTML element or attribute.
     We often refer to such an element or attribute as the directive itself.
@@ -491,7 +492,7 @@ block includes
     ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
     その要素や属性をディレクティブ自身としてよく参照します。
     AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
-    そのインスタンスの制御をブラウザのDOMの一部に渡します。
+    ブラウザのDOMの一部においてそのインスタンスに制御を与えます。
 
     Developers can invent custom HTML markup (e.g., `<my-directive>`) to
     associate with their custom directives. They add this custom markup to HTML templates

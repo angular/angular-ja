@@ -481,70 +481,116 @@ a#H
 a#jit
 :marked
   ## Just-in-time (JIT) compilation
+  ## 実行時コンパイラ
 .l-sub-section
   :marked
     With Angular _just-in-time_  bootstrapping you compile your components<span if-docs="ts"> and modules</span> in the browser
     and launch the application dynamically. This is a good choice during development.
     Consider using the [ahead-of-time](#aot) mode for production apps.
+    
+    Angularの実行時ブートストラッピングでは、コンポーネントやモジュールをブラウザ上でコンパイルし、アプリケーションを動的に実行します。
+    これは開発期間中においては良い選択です。
+    ただし、プロダクション用のアプリケーションでは[事前コンパイラ](#aot)モードを検討してください。
 
 .l-main-section#K
 :marked
   ## kebab-case
+  
+  ## ケバブケース
 .l-sub-section
   :marked
     See [dash-case](#dash-case).
-
+    
+    [ダッシュケース](#dash-case)を参照してください。
 .l-main-section#L
 :marked
   ## Lifecycle hooks
+  ## ライフサイクル・フック
 .l-sub-section
   :marked
     [Directives](#directive) and [components](#component) have a lifecycle
     managed by Angular as it creates, updates, and destroys them.
 
+    [ディレクティブ](#directive) と [コンポーネント](#component)は、Angularがそれらの作成、更新、破棄を管理するためのライフサイクルを持っています。
+    
     You can tap into key moments in that lifecycle by implementing
     one or more of the lifecycle hook interfaces.
+
+    開発者は、ひとつかそれ以上の "Lifecycle Hook" インターフェイスを実装することで、そのライフサイクルの契機を活用することができます。
 
     Each interface has a single hook method whose name is the interface name prefixed with `ng`.
     For example, the `OnInit` interface has a hook method named `ngOnInit`.
 
+    それぞれのインターフェイスは、 `ng`という接頭語でインターフェースを名前付けされた、ひとつのフック関数を持っています。
+
     Angular calls these hook methods in the following order:
+    
+    Angularはこれらのフック関数を次の順序で呼び出します。
+    
     * `ngOnChanges` - when an [input](#input)/[output](#output) binding value changes.
+    * `ngOnChanges` - [インプット](#input)/[アウトプット](#output)にバインドされている値が変わった時
     * `ngOnInit` - after the first `ngOnChanges`.
+    * `ngOnInit` - 最初の`ngOnChanges`の後
     * `ngDoCheck` - developer's custom change detection.
+    * `ngDoCheck` - 開発者による任意の変更検知
     * `ngAfterContentInit` - after component content initialized.
+    * `ngAfterContentInit` - コンポーネントの内容を初期化後
     * `ngAfterContentChecked` - after every check of component content.
+    * `ngAfterContentChecked` - コンポーネントの内容チェック後、毎回
     * `ngAfterViewInit` - after component's view(s) are initialized.
+    * `ngAfterViewInit` - コンポーネントのビュー初期化後
     * `ngAfterViewChecked` - after every check of a component's view(s).
+    * `ngAfterViewChecked` - コンポーネントのビューをチェック後、毎回
     * `ngOnDestroy` - just before the directive is destroyed.
+    * `ngOnDestroy` - ディレクティブが破棄される直前
 
     Read more in the [Lifecycle Hooks](!{docsLatest}/guide/lifecycle-hooks.html) page.
 
+    [Lifecycle Hooks](!{docsLatest}/guide/lifecycle-hooks.html)章でさらに学習することができます。
+    
 .l-main-section#M
 
 :marked
   ## Module
+  
+  ## モジュール
 .l-sub-section
   block module-defn
     .alert.is-important
       :marked
        In Angular, there are two types of modules:
+       
+       Angularには2種類のモジュールがあります。
        - [Angular modules](#angular-module).
+       - [Angularモジュール](#angular-module)。詳細や例は[Angularモジュール](!{docsLatest}/guide/ngmodule.html)の章を参照してください。
        For details and examples, see the [Angular Modules](!{docsLatest}/guide/ngmodule.html) page.
        - ES2015 modules, as described in this section.
+       - この節で説明するようなES2015モジュール。
 
     :marked
       Angular apps are modular.
+      
+      Angularアプリケーションはモジュール化されています。
 
       In general, you assemble your application from many modules, both the ones you write and the ones you acquire from others.
+      
+      一般的に、私たちのアプリケーションは自分自身で作成したもの、他から取得したものの両方からなる、多くのモジュールで組み立てられています。
 
       A typical module is a cohesive block of code dedicated to a single purpose.
+      
+      典型的なモジュールは単一の目的を満たすためのコードを凝縮したブロックです。
 
       A module **exports** something of value in that code, typically one thing such as a class.
       A module that needs that thing, **imports** it.
+      
+      モジュールは、そのコードの中で何か価値があるものを**エクスポート**します。
+      それを必要とするモジュールは、それを**インポート**します。
 
       The structure of Angular modules and the import/export syntax
       is based on the [ES2015 module standard](http://www.2ality.com/2014/09/es6-modules-final.html).
+      
+      Angularのモジュール構造とimport/export構文は、[ここ](http://www.2ality.com/2014/09/es6-modules-final.html)で説明されている
+      [ES2015](#es2015)モジュール標準仕様に基づいています。
 
       An application that adheres to this standard requires a module loader to
       load modules on request, and resolve inter-module dependencies.
@@ -552,11 +598,23 @@ a#jit
       for any particular 3rd party library (although most examples use SystemJS).
       You may pick any module library that conforms to the standard.
 
+      この標準に準拠したアプリケーションは、リクエストに応じてモジュールをロードしたり、モジュール間の依存関係を解決するためのモジュールローダーが必要です。
+      Angularはモジュールローダーを付属していませんし、特定のサードパーティ製のモジュールローダーをひいきにしていません。
+      （しかし、多くのサンプルはSystemJSを利用しています。）
+      アプリケーション開発者は、標準に準拠した任意のモジュールローダーを選択することができます。
+
       Modules are typically named after the file in which the exported thing is defined.
       The Angular [DatePipe](https://github.com/angular/angular/blob/master/modules/@angular/common/src/pipes/date_pipe.ts)
       class belongs to a feature module named `date_pipe` in the file `date_pipe.ts`.
 
+      モジュールは慣例として、エクスポートしたものが定義されているファイルに因んで命名されます。
+      Angularの[DatePipe](https://github.com/angular/angular/blob/master/modules/@angular/common/src/pipes/date_pipe.ts)クラスは、
+      `date_pipe.ts`ファイルの中の`date_pipe`と名前付けられた機能モジュールに所属します。
+      
       You rarely access Angular feature modules directly. You usually import them from one of the Angular [scoped packages](#scoped-package) such as `@angular/core`.
+
+      開発者は、めったにAngular機能モジュールを直接アクセスすることはありません。
+      通常それらを`@angular/core`のような、ひとつのAngular[スコープ化パッケージ](#scoped-package)からインポートします。
 
 a#N
 .l-main-section#O

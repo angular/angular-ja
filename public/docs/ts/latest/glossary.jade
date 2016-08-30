@@ -102,7 +102,7 @@ block includes
   :marked
     ## Barrel
 
-    ## バレル
+    ## バレル (Barrel)
   .l-sub-section
     :marked
       A barrel is a way to *rollup exports* from several ES2015 modules into a single convenience ES2015 module.
@@ -113,7 +113,7 @@ block includes
 
       Imagine three ES2015 modules in a `heroes` folder:
 
-      `heroes`フォルダにある、みっつのES2015モジュールをイメージしてください：
+      `heroes`フォルダにある、3つのES2015モジュールをイメージしてください：
     code-example.
       // heroes/hero.component.ts
       export class HeroComponent {}
@@ -134,7 +134,7 @@ block includes
     :marked
       We can add a barrel to the `heroes` folder (called `index` by convention) that exports all of these items:
 
-      これらすべてをエクスポートしている`heroes`フォルダ（`index`と呼ばれます）にバレルを追加できます。
+      これらすべてをエクスポートしている`heroes`フォルダ（慣例的に`index`と呼ばれます）にバレルを追加できます。
     code-example.
       export * from './hero.model.ts';   // re-export all of its exports
       export * from './hero.service.ts'; // re-export all of its exports
@@ -160,7 +160,7 @@ block includes
       :marked
         Note that you can often achieve this same goal using [Angular modules](#angular-module) instead.
 
-        これと同様のことを[Angularモジュール](#angular-module)で実現することがよくあると心に留めておいてください。
+        同じ目的のために、[Angularモジュール](#angular-module)を使うことがあるので覚えておきましょう。
 
 :marked
   ## Binding
@@ -202,7 +202,7 @@ block includes
 :marked
   ## camelCase
 
-  ## キャメルケース
+  ## キャメルケース (camelCase)
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter
@@ -223,14 +223,14 @@ block includes
 :marked
   ## Component
 
-  ## コンポーネント
+  ## コンポーネント (Component)
 .l-sub-section
   :marked
     An Angular class responsible for exposing data
     to a [View](#view) and handling most of the view’s display
     and user-interaction logic.
 
-    [ビュー](#view)にデータを伝えること、そしてビューの表示やユーザインタラクションを処理することを担うAngularのクラスです。
+    [ビュー](#view)にデータを伝えること、そしてビューの表示やユーザーインタラクションを処理することを担うAngularのクラスです。
 
     The Component is one of the most important building blocks in the Angular system.
     It is, in fact, an Angular [Directive](#directive) with a companion [Template](#template).
@@ -244,8 +244,8 @@ block includes
     as a view.
 
     開発者が`!{_at}Component` !{_decoratorLink}をコンポーネントクラスに付けることによって、
-    Angularがコンポーネントのインスタンスを作成しテンプレートを使ってビューとしてレンダリングするために
-    必要とする基本的なコンポーネントのメタデータをそのクラスに付加します。
+    Angularがコンポーネントのインスタンスを作成し、テンプレートを使ってビューとしてレンダリングするために
+    必要とする基本的なコンポーネントのメタデータを、そのクラスに付加します。
 
     Those familiar with "MVC" and "MVVM" patterns will recognize
     the Component in the role of "Controller" or "View Model".
@@ -256,7 +256,7 @@ block includes
 :marked
   ## dash-case
 
-  ## ダッシュケース
+  ## ダッシュケース (dash-case)
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word is separated by a dash or hyphen (`-`).
@@ -275,13 +275,13 @@ block includes
 :marked
   ## Data Binding
 
-  ## データバインディング
+  ## データバインディング (Data Binding)
 .l-sub-section
   :marked
     Applications display data values to a user and respond to user
     actions (clicks, touches, keystrokes).
 
-    アプリケーションはデータの値をユーザーに表示し、ユーザからのアクション(クリック、タッチ、キーストローク)に反応します。
+    アプリケーションはデータの値をユーザーに表示し、ユーザーからのアクション(クリック、タッチ、キーストローク)に反応します。
 
     We could push application data values into HTML, attach
     event listeners, pull changed values from the screen, and
@@ -331,7 +331,7 @@ block includes
   :marked
     ## Decorator | Decoration
 
-    ## デコレーター | デコレーション
+    ## デコレーター | デコレーション (Decorator | Decoration)
   .l-sub-section
     block decorator-defn
       :marked
@@ -381,7 +381,7 @@ block includes
 :marked
   ## Dependency Injection
 
-  ## 依存性の注入
+  ## 依存性の注入 (Dependency Injection)
 .l-sub-section
   :marked
     Dependency Injection is both a design pattern and a mechanism
@@ -402,16 +402,16 @@ block includes
 
     これらの部品は他の部品に依存していることがよくあります。Angularの[コンポーネント](#component)部分は
     データを取得し計算を処理するサービス部分に依存しているかもしれません。"A" 部分が他の "B" 部分に依存しているとき、
-    "A" は "B" に依存している、または "B" は "A" の依存であるといいます。
+    "A" は "B" に依存している、または "B" は "A" の依存性であるといいます。
 
     We can ask a "Dependency Injection System" to create "A"
     for us and handle all the dependencies.
     If "A" needs "B" and "B" needs "C", the system resolves that chain of dependencies
     and returns a fully prepared instance of "A".
 
-    "依存性の注入システム" に "A" を作成させてすべての依存を扱わせることができます。
+    "依存性の注入システム" に "A" を作成させてすべての依存性を扱わせることができます。
     もし "A" が "B" を必要とし、かつ "B" が "C" を必要とするならば、
-    このシステムは依存の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
+    このシステムは依存性の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
 
     Angular provides and relies upon its own sophisticated
     [Dependency Injection](dependency-injection.html) system
@@ -424,7 +424,7 @@ block includes
     At the core there is an [`Injector`](#injector) that returns dependency values on request.
     The expression `injector.get(token)` returns the value associated with the given token.
 
-    中核には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
+    その中心には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
     `injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
 
     A token is an Angular type (`OpaqueToken`). We rarely deal with tokens directly; most
@@ -432,9 +432,9 @@ block includes
     to a token. When we write `injector.get(Foo)`, the injector returns
     the value associated with the token for the `Foo` class, typically an instance of `Foo` itself.
 
-    トークンはAngularの型(`OpaqueToken`)です。私達が直接トークンを扱うことはめったにありません。
+    トークンはAngularの型(`OpaqueToken`)です。わたしたちが直接トークンを扱うことはめったにありません。
     ほとんどのメソッドはクラス名(`Foo`)もしくは文字列("foo")を受け入れて、Angularがトークンに変換するからです。
-    我々が`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
+    わたしたちが`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
     通常その値は`Foo`クラスのインスタンスそのものです。
 
     Angular makes similar requests internally during many of its operations
@@ -466,7 +466,7 @@ block includes
     We can register our own providers.
 
     Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
-    そして私達は自分のプロバイダーを登録できます。
+    そしてわたしたちは自分のプロバイダーを登録できます。
 
     Learn more in the [Dependency Injection](!{docsLatest}/guide/dependency-injection.html) chapter.
 
@@ -474,7 +474,7 @@ block includes
 :marked
   ## Directive
 
-  ## ディレクティブ
+  ## ディレクティブ (Directive)
 .l-sub-section
   :marked
     An Angular class responsible for creating, re-shaping, and interacting with HTML elements
@@ -504,7 +504,7 @@ block includes
 
     Directives fall into one of three categories:
 
-    ディレクティブはみっつの種類に分けられます：
+    ディレクティブは3つの種類に分けられます：
 
     1. [Components](#component) that combine application logic with an HTML template to
     render application [views]. Components are usually represented as HTML elements.
@@ -512,7 +512,7 @@ block includes
     developer can expect to write a lot of them.
 
     1. [コンポーネント](#component)。アプリケーションの[ビュー]をレンダリングするHTMLテンプレートと、
-    アプリケーションのロジックをつなげるものです。通常、コンポーネントはHTML要素のことを差します。
+    アプリケーションのロジックをつなげるものです。通常、コンポーネントはHTML要素のことを指します。
     コンポーネントはAngularアプリケーションの構成要素であり、開発者によって記述されることが期待されています。
 
     1. [Attribute Directives](#attribute-directive) that can listen to and modify the behavior of
@@ -521,7 +521,7 @@ block includes
 
     1. [属性ディレクティブ](#attribute-directive)。他のHTML要素、属性、プロパティ、およびコンポーネントの
     振る舞いを監視して変更することができるものです。名前からわかるように、通常、属性ディレクティブはHTML属性のことを
-    差します。
+    指します。
 
     1. [Structural Directives](#structural-directive), a directive responsible for
     shaping or re-shaping HTML layout, typically by adding, removing, or manipulating

@@ -481,14 +481,14 @@ a#H
 a#jit
 :marked
   ## Just-in-time (JIT) compilation
-  ## 実行時コンパイラ
+  ## 実行時コンパイラ (Just-in-time (JIT) compilation)
 .l-sub-section
   :marked
     With Angular _just-in-time_  bootstrapping you compile your components<span if-docs="ts"> and modules</span> in the browser
     and launch the application dynamically. This is a good choice during development.
     Consider using the [ahead-of-time](#aot) mode for production apps.
     
-    Angularの実行時ブートストラッピングでは、コンポーネントやモジュールをブラウザ上でコンパイルし、アプリケーションを動的に実行します。
+    Angularの_実行時_ブートストラッピングでは、コンポーネントやモジュールをブラウザ上でコンパイルし、アプリケーションを動的に実行します。
     これは開発期間中においては良い選択です。
     ただし、プロダクション用のアプリケーションでは[事前コンパイラ](#aot)モードを検討してください。
 
@@ -496,7 +496,7 @@ a#jit
 :marked
   ## kebab-case
   
-  ## ケバブケース
+  ## ケバブケース (kebab-case)
 .l-sub-section
   :marked
     See [dash-case](#dash-case).
@@ -505,7 +505,7 @@ a#jit
 .l-main-section#L
 :marked
   ## Lifecycle hooks
-  ## ライフサイクル・フック
+  ## ライフサイクルフック (Lifecycle hooks)
 .l-sub-section
   :marked
     [Directives](#directive) and [components](#component) have a lifecycle
@@ -516,19 +516,20 @@ a#jit
     You can tap into key moments in that lifecycle by implementing
     one or more of the lifecycle hook interfaces.
 
-    開発者は、ひとつかそれ以上の "Lifecycle Hook" インターフェイスを実装することで、そのライフサイクルの契機を活用することができます。
+    開発者は、ひとつかそれ以上の "ライフサイクルフック" インターフェイスを実装することで、そのライフサイクル中の重要な瞬間に介入することができます。
 
     Each interface has a single hook method whose name is the interface name prefixed with `ng`.
     For example, the `OnInit` interface has a hook method named `ngOnInit`.
 
-    それぞれのインターフェイスは、 `ng`という接頭語でインターフェースを名前付けされた、ひとつのフック関数を持っています。
+    それぞれのインターフェイスは、 `ng`という接頭語でインターフェースを名前付けされた、ひとつのフックメソッドを持っています。
+    例えば、`OnInit`インターフェースは`ngOnInit`という名前のフックメソッドを持っています。
 
     Angular calls these hook methods in the following order:
     
     Angularはこれらのフック関数を次の順序で呼び出します。
     
     * `ngOnChanges` - when an [input](#input)/[output](#output) binding value changes.
-    * `ngOnChanges` - [インプット](#input)/[アウトプット](#output)にバインドされている値が変わった時
+    * `ngOnChanges` - [インプット](#input)/[アウトプット](#output)に紐付いている値が変わった時
     * `ngOnInit` - after the first `ngOnChanges`.
     * `ngOnInit` - 最初の`ngOnChanges`の後
     * `ngDoCheck` - developer's custom change detection.
@@ -553,7 +554,7 @@ a#jit
 :marked
   ## Module
   
-  ## モジュール
+  ## モジュール (Module)
 .l-sub-section
   block module-defn
     .alert.is-important
@@ -574,7 +575,7 @@ a#jit
 
       In general, you assemble your application from many modules, both the ones you write and the ones you acquire from others.
       
-      一般的に、私たちのアプリケーションは自分自身で作成したもの、他から取得したものの両方からなる、多くのモジュールで組み立てられています。
+      一般的に、わたしたちのアプリケーションは自分自身で作成したもの、他から取得したものの両方からなる、多くのモジュールで組み立てられています。
 
       A typical module is a cohesive block of code dedicated to a single purpose.
       
@@ -613,8 +614,8 @@ a#jit
       
       You rarely access Angular feature modules directly. You usually import them from one of the Angular [scoped packages](#scoped-package) such as `@angular/core`.
 
-      開発者は、めったにAngular機能モジュールを直接アクセスすることはありません。
-      通常それらを`@angular/core`のような、ひとつのAngular[スコープ化パッケージ](#scoped-package)からインポートします。
+      開発者は、めったにAngularの機能モジュールを直接アクセスすることはありません。
+      通常それらを`@angular/core`のような、ひとつのAngularの[スコープ化パッケージ](#scoped-package)からインポートします。
 
 a#N
 .l-main-section#O

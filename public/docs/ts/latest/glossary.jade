@@ -108,7 +108,7 @@ block includes
       A barrel is a way to *rollup exports* from several ES2015 modules into a single convenience ES2015 module.
       The barrel itself is an ES2015 module file that re-exports *selected* exports of other ES2015 modules.
 
-      バレルは、複数のES2015モジュールをひとつのES2015モジュールにまとめてエクスポートする方法です。
+      バレルは、複数のES2015モジュールをひとつのES2015モジュールに*まとめてエクスポートする*方法です。
       バレル自身は、ES2015モジュールのファイルであり、*選択された*他のES2015モジュールのエクスポートを再エクスポートします。
 
       Imagine three ES2015 modules in a `heroes` folder:
@@ -341,7 +341,8 @@ block includes
 
         Decorators are a JavaScript language [feature](https://github.com/wycats/javascript-decorators), implemented in TypeScript and proposed for ES2016 (AKA ES7).
 
-        デコレーターはJavaScript言語の[機能](https://github.com/wycats/javascript-decorators)で、TypeScript で実装され、ES2016 (AKA ES7)で提案されています。
+        デコレーターはJavaScript言語の[機能](https://github.com/wycats/javascript-decorators)で、TypeScript で実装され、
+        (ES7として知られる)ES2016で提案されています。
 
         We apply a decorator by positioning it
         immediately above or to the left of the thing it decorates.
@@ -368,7 +369,8 @@ block includes
         that it decorates. None of the decorations shown here will "leak" to other
         classes appearing below it in the file.
 
-        デコレーターの範囲は、修飾するという言語機能に限定されています。ここでいう修飾は、同一ファイルの中でそれ以降にある他のクラスにまで及ぶわけではありません。
+        デコレーターの範囲は、修飾するという言葉通りの機能に限定されています。
+        ここでいう修飾は、同一ファイルの中でそれ以降にある他のクラスにまで及ぶわけではありません。
 
       .alert.is-important
         :marked
@@ -393,7 +395,8 @@ block includes
     Angular developers prefer to build applications by defining many simple parts
     that each do one thing well and then wire them together at runtime.
 
-    Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てて、実行時にそれぞれをつなぐことを好みます。
+    Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てることを好み、
+    その後、実行時にそれぞれをつなぎます。
 
     These parts often rely on other parts. An Angular [Component](#component)
     part might rely on a service part to get data or perform a calculation. When a

@@ -96,12 +96,19 @@ a#aot
 +ifDocsFor('ts|js')
   :marked
     ## Barrel
+
+    ## バレル (Barrel)
   .l-sub-section
     :marked
       A barrel is a way to *rollup exports* from several ES2015 modules into a single convenient ES2015 module.
       The barrel itself is an ES2015 module file that re-exports *selected* exports of other ES2015 modules.
 
+      バレルは、複数のES2015モジュールをひとつのES2015モジュールに*まとめてエクスポートする*方法です。
+      バレル自身は、ES2015モジュールのファイルであり、*選択された*他のES2015モジュールのエクスポートを再エクスポートします。
+
       Imagine three ES2015 modules in a `heroes` folder:
+
+      `heroes`フォルダにある、3つのES2015モジュールをイメージしてください：
     code-example.
       // heroes/hero.component.ts
       export class HeroComponent {}
@@ -113,26 +120,35 @@ a#aot
       export class HeroService {}
     :marked
       Without a barrel, a consumer would need three import statements:
+
+      バレル無しでは、3つのインポート文を書く必要があります。
     code-example.
       import { HeroComponent } from '../heroes/hero.component.ts';
       import { Hero }          from '../heroes/hero.model.ts';
       import { HeroService }   from '../heroes/hero.service.ts';
     :marked
       You can add a barrel to the `heroes` folder (called `index`, by convention) that exports all of these items:
+      
+      これらすべてをエクスポートしている`heroes`フォルダ（慣例的に`index`と呼ばれます）にバレルを追加できます。
     code-example.
       export * from './hero.model.ts';   // re-export all of its exports
       export * from './hero.service.ts'; // re-export all of its exports
       export { HeroComponent } from './hero.component.ts'; // re-export the named thing
     :marked
       Now a consumer can import what it needs from the barrel.
+
+      これでバレルから必要なものをインポートできるようになります。
     code-example.
       import { Hero, HeroService } from '../heroes'; // index is implied
     :marked
       The Angular [scoped packages](#scoped-package) each have a barrel named `index`.
-
+      
+      Angularの[スコープ化パッケージ](#scoped-package)それぞれが`index`という名前のバレルを持っています。
     .alert.is-important
       :marked
         Note that you can often achieve this using [Angular modules](#angular-module) instead.
+
+        同じ目的のために、[Angularモジュール](#angular-module)を使うことがあるので覚えておきましょう。
 
 :marked
   ## Binding
@@ -173,88 +189,150 @@ a#aot
 .l-main-section#C
 :marked
   ## camelCase
+
+  ## キャメルケース (camelCase)
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter
     _except the first letter, which is lowercase_.
+    
+    複合語や句を、_最初の文字は小文字で書き_、以降はそれぞれの単語または略語が大文字で始まるように書く方法です。
 
     Function, property, and method names are typically spelled in camelCase. Examples include: `square`, `firstName` and `getHeroes`. Notice that `square` is an example of how you write a single word in camelCase.
+
+    関数、プロパティ、およびメソッド名は一般的にキャメルケースでつづられます。`square`、`firstName`、および`getHeroes`が例として挙げられます。
 
     This form is also known as **lower camel case**, to distinguish it from **upper camel case**, which is [PascalCase](#pascalcase).
     When you see "camelCase" in this documentation it always means *lower camel case*.
 
+    この形式は**ロウワーキャメルケース**としても知られ、[パスカルケース](#pascalcase)と呼ばれる**アッパーキャメルケース**と区別します。
+    このドキュメンテーションでは、"キャメルケース"とは常に*ロウワーキャメルケース*のことです。
+
 :marked
   ## Component
+
+  ## コンポーネント (Component)
 .l-sub-section
   :marked
     An Angular class responsible for exposing data to a [view](#view) and handling most of the view’s display and user-interaction logic.
 
+    [ビュー](#view)にデータを伝えること、そしてビューの表示やユーザーインタラクションを処理することを担うAngularのクラスです。
+
     The *component* is one of the most important building blocks in the Angular system.
     It is, in fact, an Angular [directive](#directive) with a companion [template](#template).
 
+    コンポーネントは、Angularシステムにおいてもっとも重要な構成要素のひとつです。
+    実際には、[テンプレート](#template)を使用したAngular[ディレクティブ](#directive)のことです。
+    
     You apply the `!{_at}Component` !{_decoratorLink} to
     the component class, thereby attaching to the class the essential component metadata
     that Angular needs to create a component instance and render it with its template
     as a view.
 
+    開発者が`!{_at}Component` !{_decoratorLink}をコンポーネントクラスに付けることによって、
+    Angularがコンポーネントのインスタンスを作成し、テンプレートを使ってビューとしてレンダリングするために
+    必要とする基本的なコンポーネントのメタデータを、そのクラスに付加します。
+
     Those familiar with "MVC" and "MVVM" patterns will recognize
     the component in the role of "controller" or "view model".
+
+    "MVC"と"MVVM"パターンでは、"コントローラー"と"ビューモデル"にあたります。
 
 .l-main-section#D
 :marked
   ## dash-case
+
+  ## ダッシュケース (dash-case)
 .l-sub-section
   :marked
     The practice of writing compound words or phrases such that each word is separated by a dash or hyphen (`-`).
     This form is also known as [kebab-case](#kebab-case).
 
+    複合語や句を、それぞれの単語がひとつのダッシュやハイフン (`-`) で隔てられるように書く方法です。
+    この形式は[ケバブケース](#kebab-case)としても知られています。
+
     [Directive](#directive) selectors (like `my-app`) <span if-docs="ts">and
     the root of filenames (such as `hero-list.component.ts`)</span> are often
     spelled in dash-case.
 
+    (`my-app`のような)[ディレクティブ](#directive)セレクター <span if-docs="ts">や(`hero-list.component.ts`のような)ファイル名
+    </span>は、よくダッシュケースで記述されます。
+
 :marked
   ## Data binding
+  ## データバインディング (Data binding)
 .l-sub-section
   :marked
     Applications display data values to a user and respond to user
     actions (clicks, touches, keystrokes).
+
+    アプリケーションはデータの値をユーザーに表示し、ユーザーからのアクション(クリック、タッチ、キーストローク)に反応します。
 
     Instead of manually pushing application data values into HTML, attaching
     event listeners, pulling changed values from the screen, and
     updating application data values, you can use data binding by declaring the relationship between an HTML widget and data source and let the
     framework handle the details.
 
+    データの値をHTMLに与え、イベントリスナーを付加し、スクリーンから変更された値を取得し、そしてデータの値を更新します。これらはすべて手動でやることもできます。
+
     Angular has a rich data binding framework with a variety of data binding
     operations and supporting declaration syntax.
 
-     Read about the forms of binding in the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page:
-     * [Interpolation](!{docsLatest}/guide/template-syntax.html#interpolation).
-     * [Property binding](!{docsLatest}/guide/template-syntax.html#property-binding).
-     * [Event binding](!{docsLatest}/guide/template-syntax.html#event-binding).
-     * [Attribute binding](!{docsLatest}/guide/template-syntax.html#attribute-binding).
-     * [Class binding](!{docsLatest}/guide/template-syntax.html#class-binding).
-     * [Style binding](!{docsLatest}/guide/template-syntax.html#style-binding).
-     * [Two-way data binding with ngModel](!{docsLatest}/guide/template-syntax.html#ngModel).
+    もしくは、HTMLウィジェットとアプリケーションデータソースの間の関係を定義して、データバインディングフレームワークが詳細を処理するようにすることもできます。
 
+     Read about the forms of binding in the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page:
+     
+     バインディングには多くの形式があります：
+     * [Interpolation](!{docsLatest}/guide/template-syntax.html#interpolation).
+     * [補間](!{docsLatest}/guide/template-syntax.html#interpolation)
+     * [Property binding](!{docsLatest}/guide/template-syntax.html#property-binding).
+     * [プロパティバインディング](!{docsLatest}/guide/template-syntax.html#property-binding)
+     * [Event binding](!{docsLatest}/guide/template-syntax.html#event-binding).
+     * [イベントバインディング](!{docsLatest}/guide/template-syntax.html#event-binding)
+     * [Attribute binding](!{docsLatest}/guide/template-syntax.html#attribute-binding).
+     * [属性バインディング](!{docsLatest}/guide/template-syntax.html#attribute-binding)
+     * [Class binding](!{docsLatest}/guide/template-syntax.html#class-binding).
+     * [クラスバインディング](!{docsLatest}/guide/template-syntax.html#class-binding)
+     * [Style binding](!{docsLatest}/guide/template-syntax.html#style-binding).
+     * [スタイルバインディング](!{docsLatest}/guide/template-syntax.html#style-binding)
+     * [Two-way data binding with ngModel](!{docsLatest}/guide/template-syntax.html#ngModel).
+     * [ngModelによる双方向バインディング](!{docsLatest}/guide/template-syntax.html#ng-model)
+
+
+    データバインディングについて詳しく知るには
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#data-binding)の章を参照してください。
 
 +ifDocsFor('ts|dart')
   a#decorator
   a#decoration
   :marked
     ## Decorator | decoration
+    ## デコレーター | デコレーション (Decorator | decoration)
   .l-sub-section
     block decorator-defn
       :marked
         A decorator is a **function** that adds metadata to a class, its members (properties, methods) and function arguments.
 
+        デコレーターは**関数**であり、クラス、メンバー（プロパティおよびメソッド）、および関数の引数にメタデータを付加します。
+
         Decorators are a JavaScript language [feature](https://github.com/wycats/javascript-decorators), implemented in TypeScript and proposed for ES2016 (AKA ES7).
 
+        デコレーターはJavaScript言語の[機能](https://github.com/wycats/javascript-decorators)で、TypeScript で実装され、
+        (ES7として知られる)ES2016で提案されています。
+        
         To apply a decorator, position it immediately above or to the left of the thing it decorates.
 
+        デコレーターを適用するには、修飾する対象の直上か左にデコレーターを配置します。
+        
         Angular has its own set of decorators to help it interoperate with your application parts.
         Here is an example of a `@Component` decorator that identifies a
         class as an Angular [component](#component) and an `@Input` decorator applied to the `name` property
         of that component. The elided object argument to the `@Component` decorator would contain the pertinent component metadata.
+
+        Angularは独自のデコレーターを持っており、Angularとアプリケーションの部品が協調して動く手助けをします。
+        こちらは、クラスをAngularの[コンポーネント](#component)と識別する`@Component`デコレーター、およびそのコンポーネントのプロパティに適用される`@Input`デコレーターの例です。
+        ここでは省略した`@Component`の引数オブジェクトには、関連するコンポーネントのメタデータを含めます。
+        
         ```
         @Component({...})
         export class AppComponent {
@@ -266,67 +344,119 @@ a#aot
         that it decorates. None of the decorations shown here will "leak" to other
         classes appearing below it in the file.
 
+        デコレーターの範囲は、それが修飾するJavaScript言語の機能に限られます。
+        ここでいう修飾は、同一ファイルの中でそれ以降にある他のクラスにまで及ぶわけではありません。
+
       .alert.is-important
         :marked
           Always include parentheses `()` when applying a decorator.
 
+          デコレーターを適用する際には、常に丸括弧`()`を含めてください。
+          デコレーターは、適用する際に必ず呼び出される**関数**です。
+
 :marked
   ## Dependency injection
+  ## 依存性の注入 (Dependency injection)
 .l-sub-section
   :marked
     Dependency injection is both a design pattern and a mechanism
     for creating and delivering parts of an application to other
     parts of an application that request them.
 
+    依存性の注入は、アプリケーションの部品に求められた部品を作って送り届けるためのデザインパターンでありメカニズムです。
+
     Angular developers prefer to build applications by defining many simple parts
     that each do one thing well and then wiring them together at runtime.
 
+    Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てることを好み、
+    その後、実行時にそれぞれをつなぎます。
+    
     These parts often rely on other parts. An Angular [component](#component)
     part might rely on a service part to get data or perform a calculation. When
     part "A" relies on another part "B", you say that "A" depends on "B" and
     that "B" is a dependency of "A".
 
+    これらの部品は他の部品に依存していることがよくあります。Angularの[コンポーネント](#component)部分は
+    データを取得し計算を処理するサービス部分に依存しているかもしれません。"A" 部分が他の "B" 部分に依存しているとき、
+    "A" は "B" に依存している、または "B" は "A" の依存性であるといいます。
+    
     You can ask a "dependency injection system" to create "A"
     for us and handle all the dependencies.
     If "A" needs "B" and "B" needs "C", the system resolves that chain of dependencies
     and returns a fully prepared instance of "A".
+
+    "依存性の注入システム" に "A" を作成させてすべての依存性を扱わせることができます。
+    もし "A" が "B" を必要とし、かつ "B" が "C" を必要とするならば、
+    このシステムは依存性の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
 
     Angular provides and relies upon its own sophisticated
     [dependency injection](!{docsLatest}/guide/dependency-injection.html) system
     to assemble and run applications by "injecting" application parts
     into other application parts where and when needed.
 
+    Angularは独自で洗練された[依存性の注入](dependency-injection.html)システムを提供し利用しています。
+    必要なときに必要な場所でアプリケーションの部品を他の部品へ "注入すること" によって、アプリケーションを組み立てて実行します。
+    
     At the core there is an [`injector`](#injector) that returns dependency values on request.
     The expression `injector.get(token)` returns the value associated with the given token.
 
+    その中心には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
+    `injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
+        
     A token is an Angular type (`OpaqueToken`). You rarely deal with tokens directly; most
     methods accept a class name (`Foo`) or a string ("foo") and Angular converts it
     to a token. When you write `injector.get(Foo)`, the injector returns
     the value associated with the token for the `Foo` class, typically an instance of `Foo` itself.
 
+    トークンはAngularの型(`OpaqueToken`)です。わたしたちが直接トークンを扱うことはめったにありません。
+    ほとんどのメソッドはクラス名(`Foo`)もしくは文字列("foo")を受け入れて、Angularがトークンに変換するからです。
+    わたしたちが`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
+    通常その値は`Foo`クラスのインスタンスそのものです。
+    
     During many of its operations, Angular makes similar requests internally, such as when it creates a [`component`](#component) for display.
+
+    Angularは、表示のために[`コンポーネント`](#component)を作るような処理において、似た要求を内部的にしています。
 
     The `Injector` maintains an internal map of tokens to dependency values.
     If the `Injector` can't find a value for a given token, it creates
     a new value using a `Provider` for that token.
 
+    この`インジェクター`は、トークンと依存性の値とのマップを内部的に管理しています。
+    もし`インジェクター`が与えられたトークンにマップされた値を見つけられないときには、そのトークンの`プロバイダー`を使って新しく値を作成します。
+    
     A [provider](#provider) is a recipe for
     creating new instances of a dependency value associated with a particular token.
+
+    [プロバイダー](#provider)は、特定のトークンに関連した依存性の値の新しいインスタンスを作成するためのレシピです。
 
     An injector can only create a value for a given token if it has
     a `provider` for that token in its internal provider registry.
     Registering providers is a critical preparatory step.
 
+    インジェクターは、内部的なプロバイダーのレジストリの中にそのトークンのための`プロバイダー`があるときにのみ、
+    依存性の値を作成することができます。
+    プロバイダーをレジストリに登録しておくことは、準備段階において非常に重要なことです。
+
     Angular registers some of its own providers with every injector.
     We can register our own providers.
 
+    Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
+    そしてわたしたちは自分のプロバイダーを登録できます。
+    
     Read more in the [Dependency Injection](!{docsLatest}/guide/dependency-injection.html) page.
+    
+    詳しく知るには[依存性の注入](!{docsLatest}/guide/dependency-injection.html)の章を参照してください。    
 :marked
   ## Directive
+
+  ## ディレクティブ (Directive)
 .l-sub-section
   :marked
     An Angular class responsible for creating, reshaping, and interacting with HTML elements
     in the browser DOM. Directives are Angular's most fundamental feature.
+
+    ブラウザのDOM内で、HTML要素を作成し変形し相互に作用することを担当する、Angularのクラスです。
+    ディレクティブはAngularのもっとも基本的な機能です。
 
     A Directive is almost always associated with an HTML element or attribute.
     We often refer to such an element or attribute as the directive itself.
@@ -334,25 +464,47 @@ a#aot
     it creates the matching directive class instance
     and gives the instance control over that portion of the browser DOM.
 
+    ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
+    その要素や属性をディレクティブ自身としてよく参照します。
+    AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
+    ブラウザのDOMの一部においてそのインスタンスに制御を与えます。
+    
     You can invent custom HTML markup (for example, `<my-directive>`) to
     associate with your custom directives. You add this custom markup to HTML templates
     as if you were writing native HTML. In this way, directives become extensions of
     HTML itself.
 
+    開発者は、新しいディレクティブに紐付いたカスタムHTMLマークアップ(例えば`<my-directive>`)を作ることができます。
+    そのカスタムマークアップはあたかも本来のHTMLを書くかのようにHTMLテンプレートに追加できます。
+    このようにして、ディレクティブはHTML自身を拡張することになります。
+
     Directives fall into one of three categories:
+
+    ディレクティブは3つの種類に分けられます：
 
     1. [Components](#component) that combine application logic with an HTML template to
     render application [views]. Components are usually represented as HTML elements.
     They are the building blocks of an Angular application and the
     developer can expect to write a lot of them.
 
+    1. [コンポーネント](#component)。アプリケーションの[ビュー]をレンダリングするHTMLテンプレートと、
+    アプリケーションのロジックをつなげるものです。通常、コンポーネントはHTML要素のことを指します。
+    コンポーネントはAngularアプリケーションの構成要素であり、開発者によって記述されることが期待されています。
+    
     1. [Attribute directives](#attribute-directive) that can listen to and modify the behavior of
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
 
+    1. [属性ディレクティブ](#attribute-directive)。他のHTML要素、属性、プロパティ、およびコンポーネントの
+    振る舞いを監視して変更することができるものです。名前からわかるように、通常、属性ディレクティブはHTML属性のことを
+    指します。
+    
     1. [Structural directives](#structural-directive), a directive responsible for
     shaping or reshaping HTML layout, typically by adding, removing, or manipulating
     elements and their children.
+
+    1. [構造ディレクティブ](#structural-directive)。基本的には要素や子要素の追加、削除、および操作によって
+    HTMLのレイアウトを成形したり再成形することを担当するディレクティブです。
 
 .l-main-section#E
 

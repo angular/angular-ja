@@ -7,14 +7,23 @@ include ../_util-fns
 
   Every story starts somewhere. Our story starts where the [QuickStart](../quickstart.html) ends.
 
+  どんなお話にも始まりがあります。このお話は[クイックスタート](../quickstart.html)が終わったところから始まります。
+
   Run the <live-example></live-example> for this part.
+
+  この章では、<live-example></live-example>を実行してください。
 
   Create a folder called `angular2-tour-of-heroes` and follow the [QuickStart](../quickstart.html) steps
   which provide the prerequisites, the folder structure, and the core files for our Tour of Heroes.
 
+  `angular2-tour-of-heroes`という名前のフォルダーを作成したあと、[クイックスタート](../quickstart.html)のステップを
+  追って、ヒーロー達のツアーのための事前準備、フォルダー構成、および主なファイルを用意してください。
+
 include ../_quickstart_repo
 :marked
   We should have the following structure:
+
+  以下の構造が必要です：
 
 .filetree
   .file angular2-tour-of-heroes
@@ -36,6 +45,9 @@ include ../_quickstart_repo
   ## Keep the app transpiling and running
   We want to start the TypeScript compiler, have it watch for changes, and start our server. We'll do this by typing
 
+  ## アプリケーションをトランスパイルし実行し続ける
+  TypeScriptコンパイラを起動し、変更を監視させて、サーバを起動しておきたいと思います。そうするには下記をタイプします。
+
 code-example(language="bash").
   npm start
 
@@ -43,13 +55,22 @@ code-example(language="bash").
   This command runs the compiler in watch mode, starts the server, launches the app in a browser,
   and keeps the app running while we continue to build the Tour of Heroes.
 
+  このコマンドは監視モードでコンパイラを実行し、サーバを起動し、ブラウザ上でアプリケーションを起動し、
+  そしてヒーローのツアーをビルドし続ける間はそのアプリケーションを実行し続けます。
+
 .l-main-section
   :marked
     ## Show our Hero
     We want to display Hero data in our app
 
+    ## ヒーローを登場させる
+    アプリケーション上にヒーローを表示させたいと思います。
+
     Let's add two properties to our `AppComponent`, a `title` property for the application name and a `hero` property
     for a hero named "Windstorm".
+
+   アプリケーション名のために`title`プロパティと、"Windstorm"という名前のヒーローのために`hero`プロパティという、
+   ふたつのプロパティを`AppComponent`に追加してみましょう。
 
   +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'app-component-1', 'app.component.ts (AppComponent class)')(format=".")
 

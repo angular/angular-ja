@@ -101,11 +101,19 @@ code-example(language="bash").
 :marked
   ### Hero object
 
+  ### Hero オブジェクト
+
   At the moment, our hero is just a name.  Our hero needs more properties.
   Let's convert the `hero` from a literal string to a class.
 
+  今のところ、ヒーローは名前だけしかありません。ヒーローにはもっとプロパティが必要です。
+  `hero`を文字リテラルからクラスへ改造しましょう。
+
   Create a `Hero` class with `id` and `name` properties.
   For now put this near the top of the `app.component.ts` file, just below the import statement.
+
+  `id`プロパティと`name`プロパティを持った`Hero`クラスを作ります。
+  今はこれを、`app.component.ts`ファイル上部のインポート文の直下に置きます。
 
 +makeExample('toh-1/ts/app/app.component.ts', 'hero-class-1', 'app.component.ts (Hero class)')(format=".")
 
@@ -113,25 +121,42 @@ code-example(language="bash").
   Now that we have a `Hero` class, let’s refactor our component’s `hero` property to be of type `Hero`.
   Then initialize it with an id of `1` and the name, "Windstorm".
 
+  `Hero`クラスができたので、コンポーネントの`hero`プロパティを`Hero`型にするようにリファクタリングしましょう。
+
 +makeExample('toh-1/ts/app/app.component.ts', 'hero-property-1', 'app.component.ts (hero property)')(format=".")
 
 :marked
   Because we changed the hero from a string to an object,
   we update the binding in the template to refer to the hero’s `name` property.
 
+  heroを文字列からオブジェクトに変えたので、
+  heroの`name`プロパティを参照するように、テンプレートのバインディングを更新します。
+
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero-2')
 :marked
   The browser refreshes and continues to display our hero’s name.
 
+  ブラウザがリフレッシュされても、ヒーローの名前が変わらず表示されます。
+
   ### Adding more HTML
+
+  ### 更にHTMLを追加する
   Displaying a name is good, but we want to see all of our hero’s properties.
   We’ll add a `<div>` for our hero’s `id` property and another `<div>` for our hero’s `name`.
+
+  名前の表示はうまくできましたが、ヒーローのすべてのプロパティを見たいと思います。
+  `id`プロパティのために`<div>`を、そして`name`プロパティのためにもうひとつ`<div>`を追加します。
 
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero-properties')
 :marked
   Uh oh, our template string is getting long. We better take care of that to avoid the risk of making a typo in the template.
 
+  うわー、テンプレートの文字列が長くなってしまいました。
+  テンプレートの中でタイポしないように注意しなくてはいけません。
+
   ### Multi-line template strings
+
+  ### 複数行テンプレート文字列
 
   We could make a more readable template with string concatenation
   but that gets ugly fast, it is harder to read, and

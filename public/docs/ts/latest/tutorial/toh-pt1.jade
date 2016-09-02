@@ -43,9 +43,10 @@ include ../_quickstart_repo
     .file typings.json
 :marked
   ## Keep the app transpiling and running
-  We want to start the TypeScript compiler, have it watch for changes, and start our server. We'll do this by typing
 
   ## アプリケーションをトランスパイルし実行し続ける
+  We want to start the TypeScript compiler, have it watch for changes, and start our server. We'll do this by typing
+
   TypeScriptコンパイラを起動し、変更を監視させて、サーバを起動しておきたいと思います。そうするには下記をタイプします。
 
 code-example(language="bash").
@@ -61,16 +62,17 @@ code-example(language="bash").
 .l-main-section
   :marked
     ## Show our Hero
-    We want to display Hero data in our app
 
     ## ヒーローを登場させる
+    We want to display Hero data in our app.
+
     アプリケーション上にヒーローを表示させたいと思います。
 
     Let's add two properties to our `AppComponent`, a `title` property for the application name and a `hero` property
     for a hero named "Windstorm".
 
-   アプリケーション名のために`title`プロパティと、"Windstorm"という名前のヒーローのために`hero`プロパティという、
-   ふたつのプロパティを`AppComponent`に追加してみましょう。
+    アプリケーション名のために`title`プロパティと、"Windstorm"という名前のヒーローのために`hero`プロパティという、
+    2つのプロパティを`AppComponent`に追加してみましょう。
 
   +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'app-component-1', 'app.component.ts (AppComponent class)')(format=".")
 

@@ -79,16 +79,25 @@ code-example(language="bash").
   :marked
     Now we update the template in the `@Component` decoration with data bindings to these new properties.
 
+    ここで、この新しいプロパティにデータを紐付けるように、`@Component`デコレーションの中のテンプレートを更新します。
+
   +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero')
 
   :marked
     The browser should refresh and display our title and hero.
 
+    ブラウザがリフレッシュされて、タイトルとヒーローが表示されるはずです。
+
     The double curly braces tell our app to read the `title` and `hero` properties from the component and render them.
     This is the "interpolation" form of one-way data binding.
+
+    このふたつの波括弧は、コンポーネントから`title`プロパティと`hero`プロパティを読み込んでレンダリングするよう、
+    アプリケーションに指示します。
 .l-sub-section
   :marked
     Learn more about interpolation in the [Displaying Data chapter](../guide/displaying-data.html).
+
+    補間についての詳細は[データを表示する](../guide/displaying-data.html)の章を参照してください。
 :marked
   ### Hero object
 

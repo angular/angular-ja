@@ -11,13 +11,13 @@ include ../_util-fns
 
   Run the <live-example></live-example> for this part.
 
-  この章では、<live-example></live-example>を実行してください。
+  この部分では、<live-example></live-example>を実行してください。
 
   Create a folder called `angular2-tour-of-heroes` and follow the [QuickStart](../quickstart.html) steps
   which provide the prerequisites, the folder structure, and the core files for our Tour of Heroes.
 
   `angular2-tour-of-heroes`という名前のフォルダーを作成したあと、[クイックスタート](../quickstart.html)のステップを
-  追って、ヒーロー達のツアーのための事前準備、フォルダー構成、および主なファイルを用意してください。
+  追って、ヒーローの旅のための事前準備、フォルダー構成、および主なファイルを用意してください。
 
 include ../_quickstart_repo
 :marked
@@ -57,7 +57,7 @@ code-example(language="bash").
   and keeps the app running while we continue to build the Tour of Heroes.
 
   このコマンドは監視モードでコンパイラを実行し、サーバを起動し、ブラウザ上でアプリケーションを起動し、
-  そしてヒーローのツアーをビルドし続ける間はそのアプリケーションを実行し続けます。
+  そしてヒーローの旅をビルドし続ける間はそのアプリケーションを実行し続けます。
 
 .l-main-section
   :marked
@@ -93,6 +93,7 @@ code-example(language="bash").
 
     このふたつの波括弧は、コンポーネントから`title`プロパティと`hero`プロパティを読み込んでレンダリングするよう、
     アプリケーションに指示します。
+    これは一方向データバインディングの"補間"形式です。
 .l-sub-section
   :marked
     Learn more about interpolation in the [Displaying Data chapter](../guide/displaying-data.html).
@@ -229,10 +230,19 @@ code-example(language="bash").
   and see those changes wherever we bind to the hero’s name.
   In short, we want two-way data binding.
 
+  `<input>`にヒーローの名前を表示し、その名前を変更し、そしてそのヒーローの名前に紐付けられているところならばどこででも、
+  その変更が見られるようにしようとしています。
+  端的に言うと、双方向データバインディングをしたいのです。
+
   Before we can use two-way data binding for **form inputs**, we need to import the `FormsModule`
   package in our Angular module. We add it to the `NgModule` decorator's `imports` array. This array contains the list
   of external modules used by our application.
   Now we have included the forms package which includes `ngModel`.
+
+  **フオームのインプット**に双方向データバインディングを使えるようになるために、`FormsModule`パッケージを
+  わたしたちのAngularモジュールにインポートする必要があります。`NgModule`デコレーターの`imports`配列に
+  そのパッケージを追加します。この配列は、わたしたちのアプリケーションが使う外部モジュールのリストです。
+  これで、`ngModel`を含んだフォームパッケージを入れられました。
 
 +makeExample('toh-1/ts/app/app.module.ts', '', 'app.module.ts (FormsModule import)')
 
@@ -242,10 +252,17 @@ code-example(language="bash").
     [Forms](../guide/forms.html#ngModel) and
     [Template Syntax](../guide/template-syntax.html#ngModel) chapters.
 
+    `FormsModule`および`ngModel`についての詳細は、[フォーム](../guide/forms.html#ngModel)および
+    [テンプレート構文](../guide/template-syntax.html#ngModel)の章を参照してください。
+
 :marked
   Let’s update the template to use the  **`ngModel`** built-in directive for two-way binding.
 
+  テンプレートを更新して、双方向バインディングのために**`ngModel`**組み込みディレクティブを使いましょう。
+
   Replace the `<input>` with the following HTML
+
+  `<input>`を以下のHTMLで置き換えます。
 
 code-example(language="html").
   &lt;input [(ngModel)]="hero.name" placeholder="name">
@@ -254,29 +271,54 @@ code-example(language="html").
   The browser refreshes. We see our hero again. We can edit the hero’s name and
   see the changes reflected immediately in the `<h2>`.
 
+  ブラウザがリフレッシュされます。再びヒーローが表示されます。ヒーローの名前を編集できて、
+  その変更がすぐに`<h2>`に反映されるのを見ることができます。
+
 .l-main-section
 :marked
   ## The Road We’ve Travelled
+
+  ## 旅してきた道
   Let’s take stock of what we’ve built.
+
+  何を作ってきたか振り返ってみましょう。
 
   * Our Tour of Heroes uses the double curly braces of interpolation (a kind of one-way data binding)
   to display the application title and properties of a `Hero` object.
+  * ヒーローの旅は補間（一種の一方向データバインディング）のふたつの丸括弧を使って、アプリケーションのタイトルと
+  `Hero`オブジェクトのプロパティを表示します。
   * We wrote a multi-line template using ES2015’s template strings to make our template readable.
+  * テンプレートを読みやすくするために、ES2015のテンプレート文字列を使って複数行テンプレートを書きました。
   * We can both display and change the hero’s name after adding a two-way data binding to the `<input>` element
   using the built-in `ngModel` directive.
+  * `ngModel`組み込みディレクティブを使って`<input>`要素に双方向データバインディングを追加したのちに、
+  ヒーローの名前を表示することと変更することの両方ができるようになりました。
   * The `ngModel` directive also propagates changes to every other binding of the `hero.name`.
+  * また、`ngModel`ディレクティブは、この変更を`hero.name`として紐付けているすべての場所に伝えます。
 
   Run the <live-example></live-example> for this part.
 
+  この部分では、<live-example></live-example>を実行してください。
+
   Here's the complete `app.component.ts` as it stands now:
+
+  これが現在の完全な`app.component.ts`です：
 
 +makeExample('toh-1/ts/app/app.component.ts', 'pt1', 'app.component.ts')
 
 .l-main-section
 :marked
   ## The Road Ahead
+
+  ## この先の道
   Our Tour of Heroes only displays one hero and we really want to display a list of heroes.
   We also want to allow the user to select a hero and display their details.
   We’ll learn more about how to retrieve lists, bind them to the
   template, and allow a user to select a hero in the
   [next tutorial chapter](./toh-pt2.html).
+
+  ここでのヒーローの旅はひとりのヒーローを表示しただけで、本当はヒーローのリストを表示したいのです。
+  また、ユーザーがヒーローを選択できるようにして、その詳細を編集できるようにしたいのです。
+  どのようにリストを取得し、どのようにそれらをテンプレートに紐付けて、そしてどのように
+  ユーザーがヒーローを選択できるようにするのかについてを、[次のチュートリアルの章](./toh-pt2.html)で
+  学ぶことになります。

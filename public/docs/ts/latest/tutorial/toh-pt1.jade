@@ -198,9 +198,15 @@ code-example(language="bash").
 :marked
   ## Editing Our Hero
 
+  ## ヒーローを編集する
+
   We want to be able to edit the hero name in a textbox.
 
+  テキストボックスでヒーローの名前を編集できるようにしたいと思います。
+
   Refactor the hero name `<label>` with `<label>` and `<input>` elements as shown below:
+
+  ヒーロー名の`<label>`を、下記に示すように`<label>`と`<input>`要素に書き変えます：
 
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'editing-Hero', 'app.component.ts (input element)')
 :marked
@@ -210,7 +216,14 @@ code-example(language="bash").
   is not reflected in the `<h2>`. We won't get the desired behavior
   with a one-way binding to `<input>`.
 
+  ブラウザには、`<input>`テキストボックスの中にヒーローの名前が表示されています。
+  しかし、なにかがおかしく感じます。
+  その名前を変更したときに、その変更が`<h2>`に反映されていないことに気が付きます。
+  `<input>`への一方向のバインディングでは求める振る舞いを得られないようです。
+
   ### Two-Way Binding
+
+  ### 双方向バインディング
 
   We intend to display the name of the hero in the `<input>`, change it,
   and see those changes wherever we bind to the hero’s name.

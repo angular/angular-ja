@@ -11,13 +11,13 @@ include ../_util-fns
 
   Run the <live-example></live-example> for this part.
 
-  この部分では、<live-example></live-example>を実行してください。
+  この部分では <live-example></live-example> を実行してください。
 
   Create a folder called `angular2-tour-of-heroes` and follow the [QuickStart](../quickstart.html) steps
   which provide the prerequisites, the folder structure, and the core files for our Tour of Heroes.
 
-  `angular2-tour-of-heroes`という名前のフォルダーを作成したあと、[クイックスタート](../quickstart.html)のステップを
-  追って、ヒーローの旅のための事前準備、フォルダー構成、および主なファイルを用意してください。
+  `angular2-tour-of-heroes`という名前のフォルダーを作成したあと、[クイックスタート](../quickstart.html)のステップを追って、
+  ヒーローの旅のための事前準備、フォルダー構成、および主なファイルを用意してください。
 
 include ../_quickstart_repo
 :marked
@@ -57,7 +57,7 @@ code-example(language="bash").
   and keeps the app running while we continue to build the Tour of Heroes.
 
   このコマンドは監視モードでコンパイラを実行し、サーバを起動し、ブラウザ上でアプリケーションを起動し、
-  そしてヒーローの旅をビルドし続ける間はそのアプリケーションを実行し続けます。
+  そしてヒーローの旅をビルドし続ける間そのアプリケーションを実行し続けます。
 
 .l-main-section
   :marked
@@ -79,7 +79,7 @@ code-example(language="bash").
   :marked
     Now we update the template in the `@Component` decoration with data bindings to these new properties.
 
-    ここで、この新しいプロパティにデータを紐付けるように、`@Component`デコレーションの中のテンプレートを更新します。
+    ここで、この新しいプロパティへのデータバインディングで、`@Component`デコレーションの中のテンプレートを更新します。
 
   +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero')
 
@@ -91,8 +91,7 @@ code-example(language="bash").
     The double curly braces tell our app to read the `title` and `hero` properties from the component and render them.
     This is the "interpolation" form of one-way data binding.
 
-    このふたつの波括弧は、コンポーネントから`title`プロパティと`hero`プロパティを読み込んでレンダリングするよう、
-    アプリケーションに指示します。
+    このふたつの波括弧は、コンポーネントから`title`プロパティと`hero`プロパティを読み込んでレンダリングするように、アプリケーションに指示します。
     これは一方向データバインディングの"補間"形式です。
 .l-sub-section
   :marked
@@ -130,8 +129,7 @@ code-example(language="bash").
   Because we changed the hero from a string to an object,
   we update the binding in the template to refer to the hero’s `name` property.
 
-  heroを文字列からオブジェクトに変えたので、
-  heroの`name`プロパティを参照するように、テンプレートのバインディングを更新します。
+  heroを文字列からオブジェクトに変えたので、heroの`name`プロパティを参照するように、テンプレートのバインディングを更新します。
 
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero-2')
 :marked
@@ -152,7 +150,7 @@ code-example(language="bash").
 :marked
   Uh oh, our template string is getting long. We better take care of that to avoid the risk of making a typo in the template.
 
-  うわー、テンプレートの文字列が長くなってしまいました。
+  おっと、テンプレートの文字列が長くなってしまいました。
   テンプレートの中で入力間違いをしないように注意しなくてはいけません。
 
   ### Multi-line template strings
@@ -207,7 +205,7 @@ code-example(language="bash").
 
   Refactor the hero name `<label>` with `<label>` and `<input>` elements as shown below:
 
-  ヒーロー名の`<label>`を、下記に示すように`<label>`と`<input>`要素に書き変えます：
+  ヒーローの名前の`<label>`を、下記に示すように`<label>`と`<input>`要素に書き変えます：
 
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'editing-Hero', 'app.component.ts (input element)')
 :marked
@@ -239,7 +237,7 @@ code-example(language="bash").
   of external modules used by our application.
   Now we have included the forms package which includes `ngModel`.
 
-  **フオームのインプット**に双方向データバインディングを使えるようになるために、`FormsModule`パッケージを
+  **フォームのインプット**に双方向データバインディングを使えるようになるために、`FormsModule`パッケージを
   わたしたちのAngularモジュールにインポートする必要があります。`NgModule`デコレーターの`imports`配列に
   そのパッケージを追加します。この配列は、わたしたちのアプリケーションが使う外部モジュールのリストです。
   これで、`ngModel`を含んだフォームパッケージを入れられました。
@@ -285,7 +283,7 @@ code-example(language="html").
 
   * Our Tour of Heroes uses the double curly braces of interpolation (a kind of one-way data binding)
   to display the application title and properties of a `Hero` object.
-  * ヒーローの旅は補間（一種の一方向データバインディング）のふたつの丸括弧を使って、アプリケーションのタイトルと
+  * ヒーローの旅は補間（一種の一方向データバインディング）のふたつの波括弧を使って、アプリケーションのタイトルと
   `Hero`オブジェクトのプロパティを表示します。
   * We wrote a multi-line template using ES2015’s template strings to make our template readable.
   * テンプレートを読みやすくするために、ES2015のテンプレート文字列を使って複数行テンプレートを書きました。
@@ -298,7 +296,7 @@ code-example(language="html").
 
   Run the <live-example></live-example> for this part.
 
-  この部分では、<live-example></live-example>を実行してください。
+  この部分では <live-example></live-example> を実行してください。
 
   Here's the complete `app.component.ts` as it stands now:
 
@@ -320,5 +318,5 @@ code-example(language="html").
   ここでのヒーローの旅はひとりのヒーローを表示しただけで、本当はヒーローのリストを表示したいのです。
   また、ユーザーがヒーローを選択できるようにして、その詳細を編集できるようにしたいのです。
   どのようにリストを取得し、どのようにそれらをテンプレートに紐付けて、そしてどのように
-  ユーザーがヒーローを選択できるようにするのかについてを、[次のチュートリアルの章](./toh-pt2.html)で
+  ユーザーがヒーローを選択できるようにするのかについては、[次のチュートリアルの章](./toh-pt2.html)で
   学ぶことになります。

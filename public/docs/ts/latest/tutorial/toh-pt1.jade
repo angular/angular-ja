@@ -152,7 +152,7 @@ code-example(language="bash").
   Uh oh, our template string is getting long. We better take care of that to avoid the risk of making a typo in the template.
 
   うわー、テンプレートの文字列が長くなってしまいました。
-  テンプレートの中でタイポしないように注意しなくてはいけません。
+  テンプレートの中で入力間違いをしないように注意しなくてはいけません。
 
   ### Multi-line template strings
 
@@ -164,13 +164,22 @@ code-example(language="bash").
   let’s take advantage of the template strings feature
   in ES2015 and TypeScript to maintain our sanity.
 
+  文字列を連結することでもっと読みやすいテンプレートすることはできるかもしれません。
+  しかし、すぐに見苦しくなってしまい、読みにくく、スペルミスを簡単にするようになってしまいます。
+  それよりも、正しさを維持するためにES2015とTypeScriptのテンプレート文字列の機能を利用しましょう。
+
   Change the quotes around the template to back-ticks and
   put the `<h1>`, `<h2>` and `<div>` elements on their own lines.
+
+  テンプレートを囲んでいたクオートをバッククオートに変えて、
+  `<h1>`、`<h2>`、および`<div>`要素を各行に置きます。
 
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'multi-line-strings', 'app.component.ts (AppComponent\'s template)')
 
   .callout.is-important
     header A back-tick is not a single quote
+
+    header バッククオートはシングルクオートではありません。
     :marked
       **Be careful!** A back-tick (`) looks a lot like a single quote (').
       It's actually a completely different character.
@@ -178,6 +187,12 @@ code-example(language="bash").
       Here we use them in a limited way to spread the template over multiple lines.
       Everything between the back-ticks at the beginning and end of the template
       is part of a single template string.
+
+      **注意してくだい！** バッククオート(`)は、シングルクオート(')に見た目がよく似ています。
+      実際はまったく異なる文字です。
+      バッククオートは文字を区別する以上のことができます。
+      ここでは、テンプレートを複数行に広げるような限定した方法で使っています。
+      テンプレートの最初と最後にあるバッククオートの間はすべて、ひとつのテンプレート文字列です。
 
 .l-main-section
 :marked

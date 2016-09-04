@@ -1560,7 +1560,10 @@ function getNewLinesPublicFromMaster() {
         })).then(flattenArray);
       }))
     ).then(flattenArray);
-  }));
+  })).catch(err => {
+    gutil.log(`[prh] warning: ${err}`);
+    return [];
+  });
 }
 
 function createPrhEngine(baseDir) {

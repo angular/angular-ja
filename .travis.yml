@@ -28,7 +28,6 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
-    - env: TASK=prh
     - env: TASK="run-e2e-tests --fast" SCRIPT=examples-install-preview.sh
     - env: TASK=build-compile SCRIPT=deploy-install-preview.sh WAIT="travis_wait 50" POST_SCRIPT="check-docs.sh -v"
 before_install:

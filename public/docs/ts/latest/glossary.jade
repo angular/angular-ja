@@ -17,7 +17,7 @@ block includes
   with a specific meaning within the Angular system.
 
   Angular 2には独自の用語があります。
-  ほとんどのAngular 2の用語は日常英語の単語ですが、Angularシステムの中において特別な意味をもっています。
+  ほとんどのAngular 2の用語は、Angularシステムの中で特別な意味をもつ常用英単語です。
 
   We have gathered here the most prominent terms
   and a few less familiar ones that have unusual or
@@ -63,7 +63,8 @@ block includes
       Every Angular application has an application root module class. By convention the class is
       called `AppModule` and resides in a file named `app.component.ts`.
 
-      すべてのAngularアプリケーションはひとつのルートモジュールクラスを持ちます。慣例的にそのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置します。
+      あらゆるAngularアプリケーションはひとつのアプリケーションルートモジュールクラスをもちます。
+      慣例的にそのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置されます。
 
       See the [Angular Module](!{docsLatest}/guide/ngmodule.html) chapter for details and examples.
 
@@ -89,7 +90,7 @@ block includes
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
 
-    [ディレクティブ](#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視したり、変更したりできます。
+    [ディレクティブ](#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。
     その名前のとおり、通常これらはHTML属性として現れます。
 
     The `ngClass` directive for adding and removing CSS class names is a good example of
@@ -178,8 +179,8 @@ block includes
     between a "token" or "key" and a dependency [provider](#provider).
     This more rare usage should be clear in context.
 
-    また[依存性の注入](#dependency-injection)のことを指す場合もあり、"トークン" や "キー" と依存性の[プロバイダー](#provider)との間を結びつけます。
-    これより稀な利用方法は、時と場合によって明確にされるべきです。
+    また、"トークン"または"キー" と依存性の[プロバイダー](#provider)との間を結びつける、[依存性の注入](#dependency-injection)を指すこともあります。
+    このより稀な用法は、文脈により理解できるはずです。
 
 :marked
   ## Bootstrap
@@ -197,7 +198,7 @@ block includes
 
   :marked
     One can bootstrap multiple apps in the same `index.html`, each with its own top level root.
-    
+
     同じ`index.html`の中で、複数のアプリケーションをそれぞれのルートコンポーネントを使ってブートストラップできます。
 
 .l-main-section#C
@@ -252,7 +253,7 @@ block includes
     Those familiar with "MVC" and "MVVM" patterns will recognize
     the Component in the role of "Controller" or "View Model".
 
-    "MVC"や"MVVM"のようなパターンに馴染んだ人であれば、コンポーネントが"コントローラー"あるいは"ビューモデル"の役割だとわかるでしょう。
+    "MVC"あるいは"MVVM"パターンを熟知した人であれば、コンポーネントが"コントローラー"あるいは"ビューモデル"の役割だとわかるでしょう。
 
 .l-main-section#D
 :marked
@@ -497,7 +498,7 @@ block includes
     ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
     その要素や属性をディレクティブ自身としてよく参照します。
     AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
-    そのインスタンスにブラウザのDOMの一部の制御を与えます。
+    そのインスタンスにブラウザのDOMの一部における制御を与えます。
 
     Developers can invent custom HTML markup (e.g., `<my-directive>`) to
     associate with their custom directives. They add this custom markup to HTML templates
@@ -1085,9 +1086,9 @@ a#snake-case
     provide share data or logic across components, or encapsulate external interactions.
 
     サービスは明確な目的を持ったクラスです。
-    わたしたちはしばしば、どのような特定のビューからも独立した機能や、
+    わたしたちは、どのような特定のビューからも独立した機能や、
     コンポーネント間にわたる共有データやロジックを提供する機能、
-    または外部との相互作用をカプセル化する機能を実装するためにサービスを作成します。
+    または外部との相互作用をカプセル化する機能を実装するために、サービスを作成することがよくあります。
 
     See the [Services](!{docsLatest}/tutorial/toh-pt4.html) chapter of the tutorial to learn more.
 
@@ -1103,8 +1104,8 @@ a#snake-case
     shape or re-shape HTML layout, typically by adding, removing, or manipulating
     elements and their children.
 
-    [ディレクティブ](#directive)の一種で、HTMLのレイアウトを、典型的には要素とその
-    子孫を追加、除去あるいは操作して、成形または再成形することができます。
+    [ディレクティブ](#directive)の一種で、HTMLのレイアウトを成形または再成形することができます。
+    典型的には要素とその子孫を追加、除去、または操作することにより行います。
 
     The `ngIf` "conditional element" directive and the `ngFor` "repeater" directive are
     good examples in this category.
@@ -1221,7 +1222,7 @@ a#snake-case
     we are welcome to write in other JavaScript dialects such as [ES5](#es5).
 
     TypeScriptはAngualr 2の開発において推奨される言語ですが、
-    [ES5](#es5)のような他のJavaScriptの言語で書くことは歓迎します。
+    [ES5](#es5)のような他のJavaScriptの言語で書くことも歓迎します。
 
     Learn more about TypeScript on its [website](http://www.typescriptlang.org/).
 
@@ -1250,15 +1251,14 @@ a#U
     Angularはひとつ以上の[ディレクティブ](#directive)、特に、[コンポーネント](#component)ディレクティブと
     それらに対を成す[テンプレート](#template)の制御下でビューを描画します。
     コンポーネントはそのような重要な役割を演じるので、
-    わたしたちはしばしばコンポーネントをビューと呼ぶのが便利だと気づきます。
+    わたしたちはコンポーネントをビューと呼ぶのが便利だと気づきます。
 
     Views often contain other views and any view might be loaded and unloaded
     dynamically as the user navigates through the application, typically
     under the control of a [router](#router).
 
-    ビューはしばしば他のビューを含み、ユーザーがアプリケーションを通じて移動するにつれ、
-    典型的には[ルーター](#router)の制御下で、どのようなビューも
-    動的に読み込みおよび取り出しがされるかもしれません。
+    ビューは他のビューを含むことがよくあり、あらゆるビューは動的に読み込まれたり取り出されたりするかもしれません。
+    典型的には[ルーター](#router)の制御下で、ユーザーがアプリケーション内を移動することで行われます。
 
 a#W
 a#X

@@ -8,8 +8,15 @@ rules:
     - 以って
     - 有して
 
-  - expected: 有する
-    pattern: もつ
+  - expected: もつ
+    patterns: 
+    - 有する
+    - 持つ
+
+  - expected: もち
+    patterns: 
+    - 有し
+    - 持ち
   
   - expected: あります
     pattern: 存在します
@@ -43,6 +50,9 @@ rules:
 
   - expected: プロバイダー
     pattern:  /プロバイダ(?!ー)/
+
+  - expected: ユーザー
+    pattern: /ユーザ(?!ー)/
 
   - expected: もっとも
     pattern:  最も

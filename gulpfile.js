@@ -1587,9 +1587,9 @@ function execPrh() {
           errors++;
           gutil.log(`[prh] at ${filepath}:${lineNo}\t${gutil.colors.red(matchedText)} => ${gutil.colors.green(expected)}`);
       });
-      if (errors > 0) {
-        throw new Error(`prh error`);
-      }
     });
+    if (errors > 0) {
+      throw new Error(`prh error`);
+    }
   });
 }

@@ -50,8 +50,8 @@
   },
 
   "glossary": {
-    "title": "Glossary",
-    "intro": "Brief definitions of the most important words in the Angular 2 vocabulary",
+    "title": "用語集",
+    "intro": "Angular 2の用語の中でももっとも重要なものに関する、簡潔な定義集です。",
     "reference": false
   },
 

@@ -1525,7 +1525,10 @@ function getNewLinesPublicFromMaster() {
         })).then(flattenArray);
       }))
     ).then(flattenArray);
-  }));
+  })).catch(err => {
+    gutil.log(`[prh] warning: ${err}`);
+    return [];
+  });
 }
 
 function createPrhEngine(baseDir) {
@@ -1552,9 +1555,9 @@ function execPrh() {
           errors++;
           gutil.log(`[prh] at ${filepath}:${lineNo}\t${gutil.colors.red(matchedText)} => ${gutil.colors.green(expected)}`);
       });
-      if (errors > 0) {
-        throw new Error(`prh error`);
-      }
     });
+    if (errors > 0) {
+      throw new Error(`prh error`);
+    }
   });
 }

@@ -13,8 +13,8 @@ block includes
   Most Angular terms are everyday English words
   with a specific meaning within the Angular system.
   
-  Angular2には独自の用語が存在します。
-  ほとんどのAngular2の用語は日常英語の単語ですが、Angularシステムの中において特別な意味を有しています。
+  Angular 2には独自の用語があります。
+  ほとんどのAngular 2の用語は、Angularシステムの中で特別な意味をもつ常用英単語です。
 
   This glossary lists the most prominent terms
   and a few less familiar ones that have unusual or
@@ -31,7 +31,7 @@ block includes
 a#aot
 :marked
   ## Ahead-of-time (AOT) compilation
-  ## 事前コンパイラ
+  ## 事前コンパイラ(Ahead-of-time (AOT) compilation)
 .l-sub-section
   :marked
     You can compile Angular applications at build-time.
@@ -47,7 +47,7 @@ a#aot
 +ifDocsFor('ts')
   :marked
     ## Angular module
-    ## Angularモジュール
+    ## Angularモジュール (Angular module)
   .l-sub-section
     :marked
       Helps you organize an application into cohesive blocks of functionality.
@@ -59,7 +59,8 @@ a#aot
       Every Angular application has an application root module class. By convention, the class is
       called `AppModule` and resides in a file named `app.module.ts`.
 
-      全てのAngularアプリケーションはひとつのルートモジュールクラスを持ちます。そのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置することが慣例です。
+      あらゆるAngularアプリケーションはひとつのアプリケーションルートモジュールクラスをもちます。
+      慣例的にそのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置されます。
       
       For details and examples, see the [Angular Module](!{docsLatest}/guide/ngmodule.html) page.
 
@@ -68,23 +69,24 @@ a#aot
 +ifDocsFor('ts|dart')
   :marked
     ## Annotation
+    ## アノテーション (Annotation)
   .l-sub-section
     block annotation-defn
       :marked
         In practice, a synonym for [Decoration](#decorator).
-        
+
         [デコレーター](#decorator)のことを指します。
 
 :marked
   ## Attribute directive
-  ## 属性ディレクティブ
+  ## 属性ディレクティブ (Attribute directive)
 .l-sub-section
   :marked
     A category of [directive](#directive) that can listen to and modify the behavior of
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
 
-    [ディレクティブ](#directive)の一種で、監視して他のHTML要素、属性、プロパティやコンポーネントの振る舞いを変えることができます。
+    [ディレクティブ](#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。
     その名前のとおり、通常これらはHTML属性として現れます。
 
     A good example of an attribute directive is the `ngClass` directive for adding and removing CSS class names.
@@ -152,7 +154,7 @@ a#aot
 
 :marked
   ## Binding
-  ## バインディング
+  ## バインディング (Binding)
 .l-sub-section
   :marked
     Almost always refers to [Data Binding](#data-binding) and the act of
@@ -165,12 +167,12 @@ a#aot
     between a "token", also referred to as a "key", and a dependency [provider](#provider).
     This more rare usage should be clear in context.
 
-    また[依存性注入](#dependency-injection)のことを指す場合もあり、"トークン" や "キー" と依存性[プロバイダー](#provider)との間を結びつけます。
-    これより稀な利用方法は、時と場合によって明確にされるべきです。
+    また、"トークン"または"キー" と依存性の[プロバイダー](#provider)との間を結びつける、[依存性の注入](#dependency-injection)を指すこともあります。
+    この珍しい使い方は、文脈により理解できるはずです。
 
 :marked
   ## Bootstrap
-  ## ブートストラップ
+  ## ブートストラップ (Bootstrap)
 .l-sub-section
   block bootstrap-defn-top
     :marked
@@ -184,7 +186,7 @@ a#aot
 :marked
     You can bootstrap multiple apps in the same `index.html`, each with its own top level root.
   
-    同じ index.html の中で、複数のアプリケーションをそれぞれのルートコンポーネントを用いてブートストラップできます。
+    同じ`index.html`の中で、複数のアプリケーションをそれぞれのルートコンポーネントを使ってブートストラップできます。
 
 .l-main-section#C
 :marked
@@ -222,7 +224,7 @@ a#aot
     It is, in fact, an Angular [directive](#directive) with a companion [template](#template).
 
     コンポーネントは、Angularシステムにおいてもっとも重要な構成要素のひとつです。
-    実際には、[テンプレート](#template)を使用したAngular[ディレクティブ](#directive)のことです。
+    その実体は、[テンプレート](#template)を使用したAngular[ディレクティブ](#directive)のことです。
     
     You apply the `!{_at}Component` !{_decoratorLink} to
     the component class, thereby attaching to the class the essential component metadata
@@ -236,7 +238,7 @@ a#aot
     Those familiar with "MVC" and "MVVM" patterns will recognize
     the component in the role of "controller" or "view model".
 
-    "MVC"と"MVVM"パターンでは、"コントローラー"と"ビューモデル"にあたります。
+    "MVC"あるいは"MVVM"パターンを熟知した人であれば、コンポーネントが"コントローラー"あるいは"ビューモデル"の役割だとわかるでしょう。
 
 .l-main-section#D
 :marked
@@ -467,7 +469,7 @@ a#aot
     ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
     その要素や属性をディレクティブ自身としてよく参照します。
     AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
-    ブラウザのDOMの一部においてそのインスタンスに制御を与えます。
+    そのインスタンスにブラウザのDOMの一部における制御を与えます。
     
     You can invent custom HTML markup (for example, `<my-directive>`) to
     associate with your custom directives. You add this custom markup to HTML templates
@@ -561,7 +563,7 @@ a#aot
     See [ECMAScript](#ecmascript).
 
     "ECMAScript 5"の簡略表現で、ほとんどのモダンブラウザーで動くJavaScriptのバージョンです。
-    [ECMAScript](#ecmascript)をご覧ください。
+    [ECMAScript](#ecmascript)を参照してください。
 
 a#F
 a#G
@@ -570,7 +572,7 @@ a#H
 :marked
   ## Injector
 
-  ## インジェクター
+  ## インジェクター (Injector)
 .l-sub-section
   :marked
     An object in the Angular [dependency injection system](#dependency-injection)
@@ -584,7 +586,7 @@ a#H
 :marked
   ## Input
 
-  ## インプット
+  ## インプット (Input)
 .l-sub-section
   :marked
     A directive property that can be the ***target*** of a
@@ -599,7 +601,7 @@ a#H
     
     See the [Input and output properties](!{docsLatest}/guide/template-syntax.html#inputs-outputs) section of the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
 
-    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章をご覧ください。
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章を参照してください。
 
 :marked
   ## Interpolation
@@ -626,7 +628,7 @@ a#H
     [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
 
     補間についての詳細は、
-    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#interpolation)の章をご覧ください。
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#interpolation)の章を参照してください。
 
 .l-main-section#J
 
@@ -794,7 +796,7 @@ a#N
 :marked
   ## Output
 
-  ## アウトプット
+  ## アウトプット (Output)
 .l-sub-section
   :marked
     A directive property that can be the ***target*** of
@@ -808,14 +810,14 @@ a#N
 
     See the [Input and output properties](!{docsLatest}/guide/template-syntax.html#inputs-outputs) section of the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
 
-    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章をご覧ください。
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章を参照してください。
 
 .l-main-section#P
 
 :marked
   ## PascalCase
 
-  ## パスカルケース
+  ## パスカルケース (PascalCase)
 .l-sub-section
   :marked
     The practice of writing individual words, compound words, or phrases such that each word or abbreviation begins with a capital letter. Class names are typically spelled in PascalCase. Examples include: `Person` and `HeroDetailComponent`.
@@ -825,13 +827,13 @@ a#N
 
     This form is also known as **upper camel case** to distinguish it from **lower camel case**, which is simply called [camelCase](#camelcase). In this documentation, "PascalCase" means *upper camel case* and  "camelCase" means *lower camel case*.
 
-    この形式は**アッパーキャメルケース**としても知られ、私達が単に[キャメルケース](#camelcase)と呼ぶ**ロウワーキャメルケース**と区別します。
+    この形式は**アッパーキャメルケース**としても知られ、わたしたちが単に[キャメルケース](#camelcase)と呼ぶ**ロウワーキャメルケース**と区別します。
     このドキュメンテーションでは、"パスカルケース"とは*アッパーキャメルケース*のことで、"キャメルケース"とは*ロウワーキャメルケース*のことです。
 
 :marked
   ## Pipe
 
-  ## パイプ
+  ## パイプ (Pipe)
 .l-sub-section
   :marked
     An Angular pipe is a function that transforms input values to output values for
@@ -853,12 +855,12 @@ a#N
   :marked
     Read more in the page on [pipes](!{docsLatest}/guide/pipes.html).
     
-    詳細は、[パイプ](!{docsLatest}/guide/pipes.html)の章をご覧ください。
+    詳細は、[パイプ](!{docsLatest}/guide/pipes.html)の章を参照してください。
 
 :marked
   ## Provider
 
-  ## プロバイダー
+  ## プロバイダー (Provider)
 .l-sub-section
   :marked
     A _provider_ creates a new instance of a dependency for the
@@ -867,7 +869,7 @@ a#N
 
     [プロバイダー](!{_ProviderUrl})は[依存性の注入](#dependency-injection)システムのための、
     新しい依存性に関するインスタンスを生成します。
-    プロバイダーは検索トークンを、依存性の値を作成するコード（”レシピ”と呼ばれることがあります）に紐付けます。
+    プロバイダーは検索トークンを、依存性の値を作成するコード（"レシピ"と呼ばれることがあります）に紐付けます。
 
 a#Q
 .l-main-section#R
@@ -875,7 +877,7 @@ a#Q
 +ifDocsFor('ts|js')
   :marked
     ## Reactive forms
-    ## リアクティブフォーム
+    ## リアクティブフォーム (Reactive forms)
   .l-sub-section
     :marked
       A technique for building Angular forms through code in a component.
@@ -905,7 +907,7 @@ a#Q
 :marked
   ## Router
 
-  ## ルーター
+  ## ルーター (Router)
 .l-sub-section
   :marked
     Most applications consist of many screens or [views](#view).
@@ -945,12 +947,11 @@ a#Q
 
       For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
-      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章をご覧ください。
+      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
 
 +ifDocsFor('ts|js')
   :marked
-    ## Router module
-    ## ルーターモジュール
+    ## RouterModule
   .l-sub-section
     :marked
       A separate [Angular module](#angular-module) that provides the necessary service providers and directives for navigating through application views.
@@ -960,11 +961,11 @@ a#Q
       
       For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
-      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章をご覧ください。
+      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
 
 :marked
   ## Routing component
-  ## ルーティングコンポーネント
+  ## ルーティングコンポーネント (Routing component)
 .l-sub-section
   :marked
     An Angular [component](#component) with a `RouterOutlet` that displays views based on router navigations.
@@ -973,14 +974,14 @@ a#Q
 
     For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
-    詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章をご覧ください。
+    詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
 
 .l-main-section#S
 
 +ifDocsFor('ts|js')
   :marked
     ## Scoped package
-    ## スコープ化パッケージ
+    ## スコープ化パッケージ (Scoped package)
   .l-sub-section
     :marked
       Angular modules are delivered within *scoped packages* such as `@angular/core`, `@angular/common`, `@angular/platform-browser-dynamic`,
@@ -1000,7 +1001,7 @@ a#Q
       The only difference, from a consumer perspective,
       is that the *scoped package* name begins with the Angular *scope name*, `@angular`.
 
-      唯一の違いは、利用者の観点からは、パッケージ名は`@angular`というAngularの*スコープネーム*で始まることです。
+      唯一の違いは、利用者の観点からは、パッケージ名は`@angular`というAngularの*スコープ名*で始まることです。
 
     +makeExcerpt('architecture/ts/app/app.component.ts', 'import', '')
 
@@ -1008,7 +1009,7 @@ a#snake-case
 :marked
   ## snake_case
 
-  ## スネークケース
+  ## スネークケース (snake_case)
 .l-sub-section
   block snake-case-defn
     :marked
@@ -1021,7 +1022,7 @@ a#snake-case
 :marked
   ## Service
 
-  ## サービス
+  ## サービス (Service)
 .l-sub-section
   :marked
     For data or logic that is not associated
@@ -1041,36 +1042,35 @@ a#snake-case
     provide shared data or logic across components, or encapsulate external interactions.
 
     サービスは明確な目的を持ったクラスです。
-    私たちはしばしば、どのような特定のビューからも独立した機能や、
+    わたしたちは、どのような特定のビューからも独立した機能や、
     コンポーネント間にわたる共有データやロジックを提供する機能、
-    または外部との相互作用をカプセル化する機能を実装するためにサービスを作成します。
+    または外部との相互作用をカプセル化する機能を実装するために、サービスを作成することがよくあります。
 
     For more information, see the [Services](!{docsLatest}/tutorial/toh-pt4.html) page of the [Tour of Heroes](!{docsLatest}/tutorial/) tutorial.
 
-    詳細は、チュートリアルの[サービス](!{docsLatest}/tutorial/toh-pt4.html)の章をご覧ください。
+    詳細は、チュートリアルの[サービス](!{docsLatest}/tutorial/toh-pt4.html)の章を参照してください。
 
 :marked
   ## Structural directive
-  ## 構造ディレクティブ
+  ## 構造ディレクティブ (Structural directive)
 .l-sub-section
   :marked
     A category of [directive](#directive) that can
     shape or reshape HTML layout, typically by adding, removing, or manipulating
     elements and their children; for example, the `ngIf` "conditional element" directive and the `ngFor` "repeater" directive.
 
-    [ディレクティブ](#directive)の一種です。それはHTMLのレイアウトを、典型的には要素とその
-    子孫を追加し、除去し、または操作することによって、成形または再成形することができます。
-    `ngIf`"条件要素"ディレクティブと、`ngFor`"繰り返し"ディレクティブはこの類の良い例です。
+    [ディレクティブ](#directive)の一種で、HTMLのレイアウトを成形または再成形することができます。
+    典型的には要素とその子孫を追加、除去、または操作することにより行います。
 
     Read more in the [Structural Directives](!{docsLatest}/guide/structural-directives.html) page.
 
-    詳細は、[構造ディレクティブ](!{docsLatest}/guide/structural-directives.html)の章をご覧ください。
+    詳細は、[構造ディレクティブ](!{docsLatest}/guide/structural-directives.html)の章を参照してください。
 
 .l-main-section#T
 :marked
   ## Template
 
-  ## テンプレート
+  ## テンプレート (Template)
 .l-sub-section
   :marked
     A template is a chunk of HTML that Angular uses to render a [view](#view) with
@@ -1083,7 +1083,7 @@ a#snake-case
 +ifDocsFor('ts|js')
   :marked
     ## Template-driven forms
-    ## テンプレート駆動フォーム
+    # テンプレート駆動フォーム (Template-driven forms)
   .l-sub-section
     :marked
       A technique for building Angular forms using HTML forms and input elements in the view.
@@ -1112,12 +1112,12 @@ a#snake-case
       Read about how to build template-driven forms
       in the [Forms](!{docsLatest}/guide/forms.html) page.
 
-      あはテンプレート駆動フォームを組み立てる方法の詳細は、
-      [フォーム](!{docsLatest}/guide/forms.html)の章をご覧ください。
+      テンプレート駆動フォームを組み立てる方法の詳細は、
+      [フォーム](!{docsLatest}/guide/forms.html)の章を参照してください。
 
 :marked
   ## Template expression
-  ## テンプレート式
+  ## テンプレート式 (Template expression)
 .l-sub-section
   :marked
     An expression is a !{_Lang}-like syntax that Angular evaluates within
@@ -1128,12 +1128,12 @@ a#snake-case
 
     テンプレート式は、Angularが[データバインディング](#data-binding)の内部で評価する
     !{_Lang}に似た構文です。テンプレート式を記述する方法の詳細は、
-    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#template-expressions)の章をご覧ください。
+    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#template-expressions)の章を参照してください。
 
 :marked
   ## Transpile
 
-  ## トランスパイル
+  ## トランスパイル (Transpile)
 .l-sub-section
   :marked
     The process of transforming code written in one form of JavaScript
@@ -1165,12 +1165,12 @@ a#snake-case
     TypeScript is the preferred language for Angular development although
     you can use other JavaScript dialects such as [ES5](#es5).
 
-    [ES5](#es5)のような他のJavaScriptの言語で書くことは歓迎しますが、
-    TypeScriptはAngualr 2の開発において推奨される言語です。
+    TypeScriptはAngualr 2の開発において推奨される言語ですが、
+    [ES5](#es5)のような他のJavaScriptの言語で書くことも歓迎します。
     
     Read more about TypeScript at [typescript.org](http://www.typescriptlang.org/).
 
-    TypeScriptについての詳細は、その[ウェブサイト](http://www.typescriptlang.org/)をご覧ください。
+    TypeScriptについての詳細は、その[ウェブサイト](http://www.typescriptlang.org/)を参照してください。
 
 a#U
 .l-main-section#V
@@ -1178,7 +1178,7 @@ a#U
 :marked
   ## View
 
-  ## ビュー
+  ## ビュー (View)
 .l-sub-section
   :marked
     A view is a portion of the screen that displays information and responds
@@ -1194,16 +1194,14 @@ a#U
 
     Angularはひとつ以上の[ディレクティブ](#directive)、特に、[コンポーネント](#component)ディレクティブと
     それらに対を成す[テンプレート](#template)の制御下でビューを描画します。
-    コンポーネントはそのような重要な役割を演じるので、
-    私たちはしばしばコンポーネントをビューと呼ぶのが便利だと気づきます。
+    コンポーネントはそのような、コンポーネントをビューと呼ぶのが都合がいいと感じるほどの重要な役割を担っています。
 
     Views often contain other views and any view might be loaded and unloaded
     dynamically as the user navigates through the application, typically
     under the control of a [router](#router).
 
-    ビューはしばしば他のビューを含み、ユーザーがアプリケーションを通じて移動するにつれ、
-    典型的には[ルーター](#router)の制御下で、どのようなビューも
-    動的に読み込みおよび取り出しがされるかもしれません。
+    ビューは他のビューを含むことがよくあり、あらゆるビューは動的に読み込まれたり取り出されたりするかもしれません。
+    典型的には[ルーター](#router)の制御下で、ユーザーがアプリケーション内を移動することで行われます。
 
 a#W
 a#X
@@ -1248,4 +1246,4 @@ a#Y
       [Brian Ford video](https://www.youtube.com/watch?v=3IqtmUscE_U).
 
       Zoneについての詳細は、この
-      [Brian Fordのビデオ](https://www.youtube.com/watch?v=3IqtmUscE_U)をご覧ください。
+      [Brian Fordのビデオ](https://www.youtube.com/watch?v=3IqtmUscE_U)を参照してください。

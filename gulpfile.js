@@ -525,7 +525,10 @@ gulp.task('remove-example-boilerplate', function() {
 // either release or current build packages
 // Examples:
 //   gulp install-example-angular --build  // use current build packages
+//   gulp install-example-angular --build=2.0.0-b43f954  // use tagged packages
 //   gulp install-example-angular          // restore release packages
+//
+// Find the tags here: https://github.com/angular/core-builds/releases
 gulp.task('install-example-angular', installExampleAngular);
 
 function installExampleAngular() {
@@ -536,14 +539,28 @@ function installExampleAngular() {
     'platform-browser', 'platform-browser-dynamic',
     'forms', 'http', 'router', 'upgrade'];
 
+  var build = argv.build;
+  if (build) {
+    if (typeof build === 'string') {
+      build = (build[0]==='#' ? '' : '#') + build;
+    } else {
+      build = '';
+    }
+  } else{
+    build = 'npm';
+  }
   // Like: "angular/core-builds" or "@angular/core"
-  sources = libs.map( lib => argv.build ? `angular/${lib}-builds` : `@angular/${lib}`);
+  sources = libs.map( lib => {
+    return build === 'npm'
+      ? `@angular/${lib}`
+      : `git+https://github.com/angular/${lib}-builds${build}`;
+  });
 
   if (argv.build) { sources.push('@angular/tsc-wrapped');} // tsc-wrapped needed for builds
 
   sources.push('@angular/router-deprecated');
 
-  gutil.log(`Installing Angular npm packages from ${argv.build ? 'BUILD' : 'RELEASE'}`);
+  gutil.log(`Installing Angular packages from ${build === 'npm' ? 'NPM' : 'BUILD ' + build}`);
 
   var spawnInfo = spawnExt('rm', ['-rf', 'node_modules/@angular'], { cwd: EXAMPLES_PATH});
   return spawnInfo.promise
@@ -617,6 +634,7 @@ gulp.task('build-dart-api-docs', ['_shred-api-examples', 'dartdoc'], function() 
   return buildApiDocsForDart();
 });
 
+// Using the --build flag will use systemjs.config.plunker.build.js (for preview builds)
 gulp.task('build-plunkers', ['_copy-example-boilerplate'], function() {
   regularPlunker.buildPlunkers(EXAMPLES_PATH, LIVE_EXAMPLES_PATH, { errFn: gutil.log, build: argv.build });
   return embeddedPlunker.buildPlunkers(EXAMPLES_PATH, LIVE_EXAMPLES_PATH, { errFn: gutil.log, build: argv.build });
@@ -1133,11 +1151,16 @@ function watchAndSync(options, cb) {
   var browserSync = require('browser-sync').create();
   browserSync.init({proxy: 'localhost:9000'});
 
+  // When using the --focus=name flag, only **/name/**/*.* example files and
+  // **/name.jade files are watched. This is useful for performance reasons.
+  // Example: gulp serve-and-sync --focus=architecture 
+  var focus = argv.focus;
+
   if (options.devGuide) {
-    devGuideExamplesWatch(_devguideShredOptions, browserSync.reload);
+    devGuideExamplesWatch(_devguideShredOptions, browserSync.reload, focus);
   }
   if (options.devGuideJade) {
-    devGuideSharedJadeWatch( { jadeDir: DOCS_PATH}, browserSync.reload);
+    devGuideSharedJadeWatch( { jadeDir: DOCS_PATH}, browserSync.reload, focus);
   }
   if (options.apiDocs) {
     apiSourceWatch(browserSync.reload);
@@ -1204,8 +1227,9 @@ function apiExamplesWatch(postShredAction) {
   });
 }
 
-function devGuideExamplesWatch(shredOptions, postShredAction) {
-  var includePattern = path.join(shredOptions.examplesDir, '**/*.*');
+function devGuideExamplesWatch(shredOptions, postShredAction, focus) {
+  var watchPattern = focus ? '**/' + focus + '/**/*.*' : '**/*.*';
+  var includePattern = path.join(shredOptions.examplesDir, watchPattern);
   // removed this version because gulp.watch has the same glob issue that dgeni has.
   // var excludePattern = '!' + path.join(shredOptions.examplesDir, '**/node_modules/**/*.*');
   // gulp.watch([includePattern, excludePattern], {readDelay: 500}, function (event, done) {
@@ -1221,8 +1245,9 @@ function devGuideExamplesWatch(shredOptions, postShredAction) {
   });
 }
 
-function devGuideSharedJadeWatch(shredOptions, postShredAction) {
-  var includePattern = path.join(DOCS_PATH, '**/*.jade');
+function devGuideSharedJadeWatch(shredOptions, postShredAction, focus) {
+  var watchPattern = focus ? '**/' + focus + '.jade' : '**/*.jade';
+  var includePattern = path.join(DOCS_PATH, watchPattern);
   // removed this version because gulp.watch has the same glob issue that dgeni has.
   // var excludePattern = '!' + path.join(shredOptions.jadeDir, '**/node_modules/**/*.*');
   // gulp.watch([includePattern, excludePattern], {readDelay: 500}, function (event, done) {

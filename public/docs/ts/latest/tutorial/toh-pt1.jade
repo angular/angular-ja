@@ -11,13 +11,13 @@ include ../_util-fns
 
   Run the <live-example></live-example> for this part.
 
-  この部分では <live-example></live-example> を実行してください。
+  この章の <live-example></live-example> を実行してください。
 
   Create a folder called `angular2-tour-of-heroes` and follow the [QuickStart](../quickstart.html) steps
   which provide the prerequisites, the folder structure, and the core files for our Tour of Heroes.
 
-  `angular2-tour-of-heroes`という名前のフォルダーを作成したあと、[クイックスタート](../quickstart.html)のステップを追って、
-  ヒーローの旅のための事前準備、フォルダー構成、および主なファイルを用意してください。
+  `angular2-tour-of-heroes`という名前のフォルダーを作成したあと、[クイックスタート](../quickstart.html)のステップにしたがって、
+  Tour of Heroes のための事前準備、フォルダー構成、および主なファイルを用意してください。
 
 include ../_quickstart_repo
 :marked
@@ -44,10 +44,10 @@ include ../_quickstart_repo
 :marked
   ## Keep the app transpiling and running
 
-  ## アプリケーションをトランスパイルし実行し続ける
+  ## トランスパイルと実行を維持する
   We want to start the TypeScript compiler, have it watch for changes, and start our server. We'll do this by typing
 
-  TypeScriptコンパイラを起動し、変更を監視させて、サーバを起動しておきたいと思います。そうするには下記をタイプします。
+  TypeScriptコンパイラを起動し、変更を監視させて、サーバーを起動しておきたいと思います。そうするには次のように打ち込みましょう。
 
 code-example(language="bash").
   npm start
@@ -56,8 +56,8 @@ code-example(language="bash").
   This command runs the compiler in watch mode, starts the server, launches the app in a browser,
   and keeps the app running while we continue to build the Tour of Heroes.
 
-  このコマンドは監視モードでコンパイラを実行し、サーバを起動し、ブラウザ上でアプリケーションを起動し、
-  そしてヒーローの旅をビルドし続ける間そのアプリケーションを実行し続けます。
+  このコマンドは監視モードでコンパイラを実行し、サーバーを起動し、ブラウザ上でアプリケーションを起動し、
+  そして Tour of Heroes をビルドしつつ、アプリケーションの実行を維持します。
 
 .l-main-section
   :marked
@@ -71,7 +71,7 @@ code-example(language="bash").
     Let's add two properties to our `AppComponent`, a `title` property for the application name and a `hero` property
     for a hero named "Windstorm".
 
-    アプリケーション名のために`title`プロパティと、"Windstorm"という名前のヒーローのために`hero`プロパティという、
+    アプリケーション名のための`title`プロパティと、"Windstorm"という名前のヒーローのための`hero`プロパティという、
     2つのプロパティを`AppComponent`に追加してみましょう。
 
   +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'app-component-1', 'app.component.ts (AppComponent class)')(format=".")
@@ -79,7 +79,7 @@ code-example(language="bash").
   :marked
     Now we update the template in the `@Component` decoration with data bindings to these new properties.
 
-    ここで、この新しいプロパティへのデータバインディングで、`@Component`デコレーションの中のテンプレートを更新します。
+    ここで、この新しいプロパティへのデータバインディングを使って、`@Component`デコレーションの中のテンプレートを更新します。
 
   +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero')
 
@@ -91,8 +91,8 @@ code-example(language="bash").
     The double curly braces tell our app to read the `title` and `hero` properties from the component and render them.
     This is the "interpolation" form of one-way data binding.
 
-    このふたつの波括弧は、コンポーネントから`title`プロパティと`hero`プロパティを読み込んでレンダリングするように、アプリケーションに指示します。
-    これは一方向データバインディングの"補間"形式です。
+    この二重波括弧は、コンポーネントから`title`プロパティと`hero`プロパティを読み込んで描画するように、アプリケーションに指示します。
+    これは単方向データバインディングの"補間"形式です。
 .l-sub-section
   :marked
     Learn more about interpolation in the [Displaying Data chapter](../guide/displaying-data.html).
@@ -107,7 +107,7 @@ code-example(language="bash").
   Let's convert the `hero` from a literal string to a class.
 
   今のところ、ヒーローは名前だけしかありません。ヒーローにはもっとプロパティが必要です。
-  `hero`を文字リテラルからクラスへ改造しましょう。
+  `hero`を文字リテラルからクラスへ変換しましょう。
 
   Create a `Hero` class with `id` and `name` properties.
   For now put this near the top of the `app.component.ts` file, just below the import statement.
@@ -144,7 +144,7 @@ code-example(language="bash").
   We’ll add a `<div>` for our hero’s `id` property and another `<div>` for our hero’s `name`.
 
   名前の表示はうまくできましたが、ヒーローのすべてのプロパティを見たいと思います。
-  `id`プロパティのために`<div>`を、そして`name`プロパティのためにもうひとつ`<div>`を追加します。
+  `id`プロパティのための`<div>`を、そしてもうひとつ`name`プロパティのための`<div>`を追加します。
 
 +makeExample('toh-1/ts-snippets/app.component.snippets.pt1.ts', 'show-hero-properties')
 :marked
@@ -218,7 +218,7 @@ code-example(language="bash").
   ブラウザには、`<input>`テキストボックスの中にヒーローの名前が表示されています。
   しかし、なにかがおかしく感じます。
   その名前を変更したときに、その変更が`<h2>`に反映されていないことに気が付きます。
-  `<input>`への一方向のバインディングでは求める振る舞いを得られないようです。
+  `<input>`への単方向のバインディングでは求める振る舞いを得られないようです。
 
   ### Two-Way Binding
 
@@ -283,7 +283,7 @@ code-example(language="html").
 
   * Our Tour of Heroes uses the double curly braces of interpolation (a kind of one-way data binding)
   to display the application title and properties of a `Hero` object.
-  * ヒーローの旅は補間（一種の一方向データバインディング）のふたつの波括弧を使って、アプリケーションのタイトルと
+  * Tour of Heroes は補間（一種の単方向データバインディング）の二重波括弧を使って、アプリケーションのタイトルと
   `Hero`オブジェクトのプロパティを表示します。
   * We wrote a multi-line template using ES2015’s template strings to make our template readable.
   * テンプレートを読みやすくするために、ES2015のテンプレート文字列を使って複数行テンプレートを書きました。
@@ -296,7 +296,7 @@ code-example(language="html").
 
   Run the <live-example></live-example> for this part.
 
-  この部分では <live-example></live-example> を実行してください。
+  この章の <live-example></live-example> を実行してください。
 
   Here's the complete `app.component.ts` as it stands now:
 
@@ -315,7 +315,7 @@ code-example(language="html").
   template, and allow a user to select a hero in the
   [next tutorial chapter](./toh-pt2.html).
 
-  ここでのヒーローの旅はひとりのヒーローを表示しただけで、本当はヒーローのリストを表示したいのです。
+  ここでの Tour of Heroes はひとりのヒーローを表示しただけで、本当はヒーローのリストを表示したいのです。
   また、ユーザーがヒーローを選択できるようにして、その詳細を編集できるようにしたいのです。
   どのようにリストを取得し、どのようにそれらをテンプレートに紐付けて、そしてどのように
   ユーザーがヒーローを選択できるようにするのかについては、[次のチュートリアルの章](./toh-pt2.html)で

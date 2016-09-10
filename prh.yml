@@ -2,6 +2,8 @@ version: 1
 
 rules:
 
+# 言い換え
+
   - expected: もって
     patterns: 
     - 持って
@@ -21,11 +23,55 @@ rules:
   - expected: あります
     pattern: 存在します
 
+  - expected: 使って
+    pattern: 用いて
+
+  - expected: 依存性の注入
+    pattern: 依存性注入
+
+  - expected: 単方向
+    pattarn: 一方向
+
+  - expected: 双方向
+    pattarn: 二方向   
+    
+# 漢字 <-> ひらがな
+
   - expected: ひとつ
     patterns:
     - 1つ
     - 一つ
     prh: 通常は、ひとつ。数詞は１つ、漢数字は数えられる固有名詞を指す場合に利用します
+
+  - expected: たとえば
+    pattern: 例えば
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+  - expected: すべて
+    pattern: 全て
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+  - expected: もっとも
+    pattern:  最も
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+  - expected: さらに
+    pattern:  更に
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+# カタカナ語
+
+  - expected: プロバイダー
+    pattern:  /プロバイダ(?!ー)/
+
+  - expected: サーバー
+    pattern: /サーバ(?!ー)/
+  
+  - expected: ユーザー
+    pattern: /ユーザ(?!ー)/
+
+  - expected: クオート
+    pattern: クォート
 
   - expected: Promise
     pattern: プロミス
@@ -36,27 +82,7 @@ rules:
   - expected: input要素
     pattern: インプット要素
 
-  - expected: 依存性の注入
-    pattern: 依存性注入
-
-  - expected: たとえば
-    pattern: 例えば
-
-  - expected: すべて
-    pattern: 全て
-
-  - expected: 使って
-    pattern: 用いて
-
-  - expected: プロバイダー
-    pattern:  /プロバイダ(?!ー)/
-
-  - expected: ユーザー
-    pattern: /ユーザ(?!ー)/
-
-  - expected: もっとも
-    pattern:  最も
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+# 記号
 
   - expected: 、
     pattern:  ，

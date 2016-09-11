@@ -9,6 +9,9 @@ figure
   This is a practical guide to Angular for experienced programmers who
   are building client applications in HTML and #{langName}.
 
+  これは、HTMLと#{langName}でクライアントアプリケーションを構築する経験豊富なプログラマーのための、
+  Angularの実践的な入門書です。
+
   <br clear="all">
 // #enddocregion intro
 
@@ -17,8 +20,13 @@ figure
 :marked
   # Organization
 
+  # 構成
+
   The documentation is divided into major thematic sections, each
   a collection of pages devoted to that theme.
+
+  ドキュメンテーションは主要なテーマ別に章立てされ、
+  それぞれの章では複数のページをさいてそのテーマについて説明しています。
 // #enddocregion how-to-read-1
 // #docregion how-to-read-2
 - var top="vertical-align:top"
@@ -26,97 +34,168 @@ table(width="100%")
   col(width="15%")
   col
   tr(style=top)
-    td <b>QuickStart</b>
+    td <b style="white-space: nowrap">クイックスタート</b>
     td
       :marked
         The foundation for every page and sample in this documentation.
+
+        このドキュメンテーションのあらゆるページのための基礎とサンプルです。
   tr(style=top)
-    td <b>Tutorial</b>
+    td <b>チュートリアル</b>
     td
       :marked
         A step-by-step, immersive approach to learning Angular that
         introduces the major features of Angular in an application context.
+
+        段階的な、没入感のあるAngularの学習の手引きです。
+        アプリケーション開発を通じてAngularの主な特徴を紹介します。
   tr(style=top)
-    td <b>Basics</b>
+    td <b>基礎</b>
     td
       :marked
         The essential ingredients of Angular development.
+
+        Angular開発の本質的な構成要素です。
   tr(style=top)
-    td <b>Developer Guide</b>
+    td <b>開発書ガイド</b>
     td
       :marked
         In-depth analysis of Angular features and development practices.
+
+        Angularの特徴と開発プラクティスに関する詳細な分析です。
   tr(style=top)
-    td <b>Cookbook</b>
+    td <b>クックブック</b>
     td
       :marked
         Recipes for specific application challenges, mostly code snippets with a minimum of exposition.
+
+        特定の応用問題についてのレシピ集です。たいていは最小限の解説つきのコードスニペットです。
   tr(style=top)
-    td <b>API Reference</b>
+    td <b>APIリファレンス</b>
     td
       :marked
         Authoritative details about each member of the Angular libraries.
+
+        Angularのライブラリの、それぞれのAPIについての正式な詳細です。
 :marked
   # Learning path
+
+  # 学習の流れ
   You don't have to read the guide straight through.  Most pages stand on their own.
+
+  この入門書を順番に読んでいく必要はありません。ほとんどのページは独立しています。
 
   For those new to Angular, the recommended learning path runs through the *Basics* section:
 
+  Angularに初めてふれる人は、*基礎*の章をひととおり学習することをおすすめします。
+
   1. For the big picture, read the [Architecture](architecture.html) overview.
+
+  1. 全体像をつかむには、[アーキテクチャ](architecture.html)の概要をお読みください。
 
   1. Try [QuickStart](../quickstart.html). QuickStart is the "Hello, World" of Angular 2.
   It shows you how to set up the libraries and tools you'll need to write *any* Angular app.
+
+  1. [クイックスタート](../quickstart.html)に挑戦してください。クイックスタートはAngular 2の"Hello, World"です。
+  *どのような*Angularアプリを書く場合でも必要となるライブラリとツールをセットアップする方法を案内しています。
 
   1. Take the *Tour of Heroes* [tutorial](../tutorial), which picks up where QuickStart leaves off,
   and builds a simple data-driven app. The app demonstrates the essential characteristics of a professional application:
   a sensible project structure, data binding, master/detail, services, dependency injection, navigation, and remote data access.
 
+  1. クイックスタートに続く*Tour of Heroes*[チュートリアル](../tutorial)で、単純なデータ駆動のアプリを構築しましょう。
+  そのアプリでは、機能的なプロジェクト構造、データバインディング、master/detail、サービス、依存性の注入、ナビゲーション、
+  そしてリモートデータアクセスといった、高度なアプリケーションに必要不可欠な特色を実演しています。
+
   1. [Displaying Data](displaying-data.html) explains how to display information on the screen.
+
+  1. [データの表示](displaying-data.html)で、情報を画面に表示する方法を説明します。
 
   1. [User Input](user-input.html) covers how Angular responds to user behavior.
 
+  1. [ユーザーインプット](user-input.html)で、ユーザーの行動にAngularが応答する方法を扱います。
+
   1. [Forms](forms.html) handles user data entry and validation within the UI.
+
+  1. [フォーム](forms.html)で、UIにおけるユーザーのデータ入力とバリデーションについて扱います。
 
   1. [Dependency Injection](dependency-injection.html) is the way to build large, maintainable applications
   from small, single-purpose parts.
 
+  1. [依存性の注入](dependency-injection.html)は、単一目的の部品から大規模で保守可能なアプリケーションを構築する方法です。
+
   1. [Template Syntax](template-syntax.html) is a comprehensive study of Angular template HTML.
 
+  1. [テンプレート構文](template-syntax.html)で、AngularのテンプレートHTMLの包括的な学習をします。
+
   After reading the above sections, you can skip to any other pages on this site.
+
+  上記の章を読みおえたら、このサイトの他のどのページに飛んでも差しつかえありません。
 // #enddocregion how-to-read-2
 // #docregion the-rest
 :marked
   # Code samples
 
+  # コードサンプル
+
   Each page includes code snippets that you can reuse in your applications.
   These snippets are excerpts from a sample application that accompanies the page.
+
+  それぞれのページにはあなたのアプリケーションで再利用可能なコードスニペットが含まれてます。
+  これらのスニペットは、ページに付随するサンプルアプリケーションから抜粋したものです。
 
 block example-links
   :marked
     Look for a link to a running version of that sample near the top of each page,
     such as this <live-example name="architecture"></live-example> from the [Architecture](architecture.html) page.
 
+    それぞれのページの先頭付近にある、そのサンプルの動作例へのリンクを探してください。
+    たとえば、[アーキテクチャ](architecture.html)ページではこの<live-example name="architecture">動作例</live-example>です。
+
     The link launches a browser-based code editor where you can inspect, modify, save, and download the code.
+
+    そのリンク先ではブラウザーベースのコードエディターが起動し、コードの検査、編集、保存、そしてダウンロードができます。
 
 :marked
   A few early pages are written as tutorials and are clearly marked as such.
   The rest of the pages highlight key points in code rather than explain each step necessary to build the sample.
   You can always get the full source through the #{_liveLink}.
 
+  はじめの方の少しのページはチュートリアルとして書かれており、はっきりとそのように記されています。
+  のこりのページは、サンプルを構築するために必要なそれぞれの段階を説明するよりも、
+  コードの中で鍵となる点に脚光を当てています。
+  動作例へのリンクを通じて、いつでも完全なソースコードを手に入れることができます。
+
   # Reference pages
+
+  # リファレンスページ
 
   The [Cheat Sheet](cheatsheet.html) lists Angular syntax for common scenarios.
 
+  [チートシート](cheatsheet.html)では、よくある状況でのAngularの構文を列挙しています。
+
   The [Glossary](glossary.html) defines terms that Angular developers should know.
+
+  [用語集](glossary.html)では、Angular開発者が知るべき用語を定義しています。
 
   The [API Reference](../api/) is the authority on every public-facing member of the Angular libraries.
 
+  [APIリファレンス](../api/)は、Angularライブラリのあらゆる公開APIの出典です。
+
   # Feedback
 
-  We welcome feedback! 
+  # フィードバック
+
+  We welcome feedback!
+
+  フィードバックを歓迎します！
 
   Use the [angular.io Github repo](https://github.com/angular/angular.io) for **documentation** issues and pull requests.
 
+  **ドキュメンテーション**の課題とプルリクエストについては、
+  [angular.ioのGitHubリポジトリ](https://github.com/angular/angular.io)を使用してください。
 
   Use the [Angular Github repo](https://github.com/angular/angular) to report issues with **Angular 2** itself.
+
+  **Angular 2**自体の課題の報告には、[AngularのGitHubリポジトリ](https://github.com/angular/angular)を使用してください。
 // #enddocregion the-rest

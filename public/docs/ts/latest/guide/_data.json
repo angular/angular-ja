@@ -1,8 +1,8 @@
 {
   "index": {
-    "title": "Documentation Overview",
-    "navTitle": "Overview",
-    "description": "How to read and use this documentation",
+    "title": "ドキュメンテーションの概要",
+    "navTitle": "概要",
+    "description": "このドキュメンテーションの読み方と使い方",
     "nextable": true,
     "basics": true
   },

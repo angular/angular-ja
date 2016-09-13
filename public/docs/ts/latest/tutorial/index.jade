@@ -27,20 +27,39 @@ include ../_util-fns
   We’ll learn to select a hero from a master list and edit that hero in the details view. We'll
   format data with pipes. We'll create a shared service to assemble our heroes. And we'll use routing to navigate among different views and their components.
 
+  ヒーローツアーは、Angularの中核となる機能を網羅しています。
+  私たちは、ビルトインディレクティブを使って要素を見え隠れさせ、ヒーローデータの一覧を表示します。
+  ヒーローの詳細を表示したり、ヒーローの配列を見せるためのコンポーネントを作成します。
+  読み取り専用のデータのために、単方向データバインディングを使います。
+  双方向データバインディングを利用して、モデルを変更する編集可能なフィールドを追加します。
+  マスターリストからヒーローを選択し、詳細ビューでそのヒーローを編集することを学びます。
+  また、パイプを使ってデータをフォーマットします。ヒーローたちを集約するために共有サービスを作成します。
+  そして、異なるビューとそれらのコンポーネント間を移動するためにルーティングを利用します。
+
   We’ll learn enough core Angular to get started and gain confidence that
   Angular can do whatever we need it to do.
   We'll be covering a lot of ground at an introductory level but we’ll find plenty of links
   to chapters with greater depth.
+  
+  私たちは始めるためにAngularの中核を十分に学習し、我々がやりたいことはなんでもAngualrでできるという確信を得るでしょう。
+  入門レベルを多岐に渡って網羅していますが、より深堀りする章へのリンクを多く見つけることができます。
 
   Run the <live-example name="toh-6"></live-example>.
+  
+  <live-example name="toh-6"></live-example>を実行してみてください。
+  
 // #enddocregion intro
 // #docregion main
 .l-main-section
 :marked
   ## The End Game
 
+  ## 最後に
+  
   Here's a visual idea of where we're going in this tour, beginning with the "Dashboard"
   view and our most heroic heroes:
+  
+  これはこのツアーがどのように進むかを可視化したもので、"Dashboard" ビューと私たちの最も英雄的なヒーローから始まります。
 
 figure.image-display
   img(src='/resources/images/devguide/toh/heroes-dashboard-1.png' alt="Output of heroes dashboard")
@@ -49,15 +68,15 @@ figure.image-display
   Above the dashboard are two links ("Dashboard" and "Heroes").
   We could click them to navigate between this Dashboard and a Heroes view.
   
-  上のダッシュボードには2つのリンク("Dashboard" と "Heroes")があります。それらをクリックすることで、ダッシュボードとヒーロー一覧を行き来することができます。
+  上のダッシュボードには2つのリンク("Dashboard" と "Heroes")があります。
+  それらをクリックすることで、ダッシュボードとヒーローリストビューを行き来することができます。
 
   Instead we click the dashboard hero named "Magneta" and the router takes us to a "Hero Details" view
   of that hero where we can change the hero's name.
   
-  代わりに、ダッシュボードの"Magneta"というヒーロー名をクリックすると、
-  ルーターは私たちをヒーローの名前を変更するためのビュー "Hero Details" に連れていきます。
+  その代わりに、ダッシュボードの "Magneta" というヒーロー名をクリックすると、
+  ルーターは私たちをヒーローの名前を変更するためのビュー "Hero Details" へ連れて行きます。
   
-
 figure.image-display
   img(src='/resources/images/devguide/toh/hero-details-1.png' alt="Details of hero in app")
 
@@ -66,8 +85,9 @@ figure.image-display
   Links at the top can take us to either of the main views.
   We'll click "Heroes". The app takes to the "Heroes" master list view.
 
-  "Back" ボタンをクリックすることで "Dashboard" に戻ります。
-  トップのリンクはどちらかのメインビューに行くことができます。
+  "Back" ボタンをクリックすると "Dashboard" に戻ります。
+  トップのリンクはどちらかのメインビューに行くことためのものです。
+  "Heroes" をクリックすると。アプリケーションは "Heroes" マスターリストビューに移動します。
   
 figure.image-display
   img(src='/resources/images/devguide/toh/heroes-list-2.png' alt="Output of heroes list app")
@@ -75,16 +95,24 @@ figure.image-display
 :marked
   We click a different hero and the readonly mini-detail beneath the list reflects our new choice.
 
+  異なるヒーローをクリックすると、リスト下の読み取り専用の小さな詳細には、新しく選択したものが表示されます。
+
   We click the "View Details" button to drill into the
   editable details of our selected hero.
 
+  ”View Details” ボタンをクリックすることで。選択したヒーローを編集するための詳細へ掘り下がっていきます。
+
   The following diagram captures all of our navigation options.
+  
+  次の図は、アプリケーションの全てのナビゲーションオプションを図式化したものです。
 
 figure.image-display
   img(src='/resources/images/devguide/toh/nav-diagram.png' alt="View navigations")
 
 :marked
   Here's our app in action
+  
+  こちらがアプリケーションの動きです。
 
 figure.image-display
   img(src='/resources/images/devguide/toh/toh-anim.gif' alt="Tour of Heroes in Action")
@@ -92,12 +120,20 @@ figure.image-display
 .l-main-section
 :marked
   ## Up Next
+  
+  ## 次に
 
   We’ll build this Tour of Heroes together, step by step.
   We'll motivate each step with a requirement that we've
   met in countless applications. Everything has a reason.
+  
+  これから、このヒーローツアーを順番に作っていきます。
+  それぞれのステップで様々なアプリケーション。。。
+  すべての事には理由があります。
 
   And we’ll meet many of the core fundamentals of Angular along the way.
+  
+  そして、道に沿って多くのAngularの中核機能に出会うことでしょう。
 
   [Let's get started!](./toh-pt1.html)
 // #enddocregion main

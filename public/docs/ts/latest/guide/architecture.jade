@@ -13,17 +13,29 @@ block angular-parts
   :marked
     The framework consists of several libraries, some of them core and some optional.
 
+    tkフレームワークはいくつかのライブラリから構成されています。いくつかはコアなもので、いくつかは選択的なものです。
+
 :marked
   You write Angular applications by composing HTML *templates* with Angularized markup,
   writing *component* classes to manage those templates, adding application logic in *services*,
   and boxing components and services in *modules*.
+
+  tkAngularアプリケーションをAngularナイズされたマークアップを使用したHTML*テンプレート*を編集して書きます。
+  *コンポーネント*クラスをそれらのテンプレートを管理するために書きます。*サービス*にアプリケーションのロジックを追加します。
+  *モジュール*にコンポーネントとサービスを詰めこみます。
   
   Then you launch the app by *bootstrapping* the _root module_.
   Angular takes over, presenting your application content in a browser and
   responding to user interactions according to the instructions you've provided.
 
+  次に_ルートモジュール_をブートストラップすることで、アプリを起動します。
+  tkAngularは引き継ぎます。ブラウザのアプリケーションのコンテンツを表示する。そしてユーザーのインタラクションあなたが提供した指示に従って応答します。
+
   Of course, there is more to it than this.
   You'll learn the details in the pages that follow. For now, focus on the big picture.
+
+  tkもちろん、これ以外にももっとあります。
+  tk詳細はこのページの下方で学ぶことになります。今のところは、全体像に集中しましょう。
 
 figure
   img(src="/resources/images/devguide/architecture/overview2.png" alt="overview" style="margin-left:-40px;" width="700")
@@ -31,16 +43,28 @@ figure
 :marked
   The architecture diagram identifies the eight main building blocks of an Angular application:
 
+  このアーキテクチャの図が、Angular 2アプリケーションの８つの主な構成要素を明確にしています。
+
   * [Modules](#modules)
+  * [モジュール](#modules)
   * [Components](#components)
+  * [コンポーネント](#components)
   * [Templates](#templates)
+  * [テンプレート](#templates)
   * [Metadata](#metadata)
+  * [メタデータ](#metadata)
   * [Data binding](#data-binding)
+  * [データバインディング](#data-binding)
   * [Directives](#directives)
+  * [ディレクティブ](#directives)
   * [Services](#services)
+  * [サービス](#services)
   * [Dependency injection](#dependency-injection)
+  * [依存性の注入](#dependency-injection)
 
   Learn these building blocks, and you're on your way.
+
+  これらの構成要素を学び、tkそしてあなたの方法で開発しましょう。
 
 .l-sub-section
   p The code referenced on this page is available as a #[+liveExampleLink2()].
@@ -48,23 +72,38 @@ figure
 .l-main-section
 :marked
   ## Modules
+
+  ## モジュール
 figure
   img(src="/resources/images/devguide/architecture/module.png" alt="Component" align="left" style="width:240px; margin-left:-40px;margin-right:10px" )
 :marked
   Angular apps are modular and Angular has its own modularity system called _Angular modules_ or _NgModules_.
 
+  Angularアプリはモジュラーであり、Angularは、_Angular モジュール_、または_NgModules_と呼ばれている自前のモジュールシステムを備えています。
+
   _Angular modules_ are a big deal. 
   This page introduces modules; the [Angular modules](ngmodule.html) page covers them in depth.
+
+  _Angular モジュール_は重要です。
+  このページではモジュールを紹介し、その詳細は[Angular モジュール](ngmodule.html)のページで扱います。
 
 <br clear="all"><br>
 :marked
   Every Angular app has at least one module, the _root module_, conventionally named `AppModule`.
 
+  あらゆるAngularアプリには少なくともひとつのモジュールがあり、慣習的に`AppModule`と名づけられます。
+
   While the _root module_ may be the only module in a small application, most apps have many more 
   _feature modules_, each a cohesive block of code dedicated to an application domain,
-  a workflow, or a closely related set of capabilities. 
+  a workflow, or a closely related set of capabilities.
+
+  小規模なアプリケーションでは_root module_が唯一のモジュールかもしれませが、ほとんどのアプリではもっと多くの
+  _機能モジュール_があります。それぞれ、アプリケーションの領域、ワークフロー、またはtkケーパビリティの一式に専念した、
+  凝集したコードブロックです。
 
   An Angular module, whether a _root_ or _feature_, is a class with an `@NgModule` decorator.
+
+  Angularのモジュールは、それが_ルート_であろうと_機能_であろうと、`@NgModule`デコレーターつきのクラスです。
 .l-sub-section
   :marked
     Decorators are functions that modify JavaScript classes.

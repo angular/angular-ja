@@ -2,22 +2,39 @@ include ../_util-fns
 
 :marked
   # It Takes Many Heroes
+
+  # ヒーロー集結
   Our story needs more heroes.
   We’ll expand our Tour of Heroes app to display a list of heroes,
   allow the user to select a hero, and display the hero’s details.
 
+  このお話にはさらなるヒーローが必要です。
+  ヒーローのリストを表示し、そこから選択したヒーローの詳細を表示できるように、
+  Tour of Heroes を拡張しましょう。
+
   Run the <live-example></live-example> for this part.
+
+  この章の <live-example></live-example> を実行してください。
 
   Let’s take stock of what we’ll need to display a list of heroes.
   First, we need a list of heroes. We want to display those heroes in the view’s template,
   so we’ll need a way to do that.
 
+  ヒーローのリストを表示するために必要なことを確認しましょう。
+  はじめに、ヒーローのリストが要ります。また、それをテンプレートに表示するための方法が必要となります。
+
 .l-main-section
 :marked
   ## Where We Left Off
+
+  ## 休んでいたところ
   Before we continue with Part 2 of the Tour of Heroes,
   let’s verify we have the following structure after [Part 1](./toh-pt1.html).
   If not, we’ll need to go back to Part 1 and figure out what we missed.
+
+  Tour of Heroes の2章に進む前に、
+  [1章](./toh-pt1.html)が終わって、以下のような構成になっているかどうか見てみましょう。
+  もし違っていたら、1章に戻ってどこで間違えたかを確認してください。
 
 .filetree
   .file angular2-tour-of-heroes
@@ -37,7 +54,11 @@ include ../_util-fns
     .file typings.json
 :marked
   ### Keep the app transpiling and running
+
+  ### トランスパイルと実行を維持する
   We want to start the TypeScript compiler, have it watch for changes, and start our server. We'll do this by typing
+
+  TypeScriptコンパイラを起動し、変更を監視させて、サーバーを起動しておきたいと思います。そうするには次のように打ち込みましょう。
 
 code-example(language="bash").
   npm start
@@ -45,11 +66,19 @@ code-example(language="bash").
 :marked
   This will keep the application running while we continue to build the Tour of Heroes.
 
+  これで Tour of Heroes をビルドしながら、アプリケーションの実行を維持できます。
+
 .l-main-section
 :marked
   ## Displaying Our Heroes
+
+  ## ヒーローたちを表示する
   ### Creating heroes
+
+  ### ヒーローたちを作成する
   Let’s create an array of ten heroes.
+
+  ヒーロー10人分の配列を作成しましょう。
 
 +makeExample('toh-2/ts/app/app.component.ts', 'hero-array', 'app.component.ts (hero array)')
 
@@ -59,36 +88,64 @@ code-example(language="bash").
   We aspire to fetch this list of heroes from a web service, but let’s take small steps
   first and display mock heroes.
 
+  `HEROES`配列は、前の章で定義した`Hero`型で構成されます。
+  あるウェブサービスからこのヒーローのリストを取得したいところですが、
+  まずは少しずつ進むためにモックを表示することにしましょう。
+
   ### Exposing heroes
+
+  ### ヒーローたちを公開する
   Let’s create a public property in `AppComponent` that exposes the heroes for binding.
+
+  バインディングしてヒーローたちを公開するためのプロパティを`AppComponent`に作りましょう。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'hero-array-1', 'app.component.ts (hero array property)')
 
 :marked
   We did not have to define the `heroes` type.  TypeScript can infer it from the `HEROES` array.
+
+  `heroes`の型を定義する必要はありません。TypeScriptは`HEROES`配列から型推論が可能です。
 .l-sub-section
   :marked
     We could have defined the heroes list here in this component class.
     But we know that ultimately we’ll get the heroes from a data service.
     Because we know where we are heading, it makes sense to separate the hero data
     from the class implementation from the start.
+
+    このコンポーネントクラス内で、ヒーローリストを定義することもできます。
+    しかし、私たちは最終的に外部のサービスからヒーローを取得しようとしています。
+    どこに向かっているかわかっているので、はじめからヒーローのデータはクラスの実装から切り離しています。
 :marked
   ### Displaying heroes in a template
+
+  ### テンプレートにヒーローたちを表示する
   Our component has `heroes`. Let’s create an unordered list in our template to display them.
   We’ll insert the following chunk of HTML below the title and above the hero details.
+
+  コンポーネントは`heroes`を保持しています。それを表示するために、テンプレートに番号なしリストを作ってみましょう。
+  タイトルとヒーロー詳細の間に、以下のHTMLを差し込んでください。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'heroes-template-1', 'app.component.ts (heroes template)')
 
 :marked
   Now we have a template that we can fill with our heroes.
 
+  これでヒーローを表示できるテンプレートができました。
+
   ### Listing heroes with ngFor
+
+  ### ngForを使ってヒーローをリスト表示する
 
   We want to bind the array of `heroes` in our component to our template, iterate over them,
   and display them individually.
   We’ll need some help from Angular to do this. Let’s do this step by step.
 
+  コンポーネントの`heroes`配列をテンプレートにバインディングして、繰り返してひとつずつ表示させましょう。
+  このためには、Angularの助けが必要です。一歩ずつ見ていきましょう。
+
   First modify the `<li>` tag by adding the built-in directive `*ngFor`.
+
+  はじめに`<li>`タグに組み込みディレクティブ`*ngFor`を追加してください。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'heroes-ngfor-1', 'app.component.ts (ngFor)')
 
@@ -96,74 +153,126 @@ code-example(language="bash").
   :marked
     The leading asterisk (`*`) in front of `ngFor` is a critical part of this syntax.
 
+    `ngFor`の頭にあるアスタリスク(`*`)は、この構文の重要な部分となります。
+
 .l-sub-section
   :marked
     The (`*`) prefix to `ngFor` indicates that the `<li>` element and its children
     constitute a master template.
 
+    `ngFor`の(`*`)プリフィックスは、マスターテンプレートが`<li>`要素とその子要素によって構成されていることを示しています。
+
     The `ngFor` directive iterates over the `heroes` array returned by the `AppComponent.heroes` property
     and stamps out instances of this template.
+
+    `ngFor`ディレクティブは、`AppComponent.heroes`プロパティによって返された`heroes`配列を繰り返し、
+    テンプレートのインスタンスを複製します。
 
     The quoted text assigned to `ngFor` means
     “*take each hero in the `heroes` array, store it in the local `hero` variable,
     and make it available to the corresponding template instance*”.
 
+    `nfFor`に割り当てられたテキストは次のことを意味しています。
+    "*`heroes`配列から取り出したヒーローをローカル変数`hero`に格納して、対応するテンプレートのインスタンスが利用できるようにする。*"
+
     The `let` keyword before "hero" identifies `hero` as a template input variable.
     We can reference this variable within the template to access a hero’s properties.
+
+    "hero"の前にある`let`キーワードは、`hero`がテンプレート入力変数であることを意味しています。
+    ヒーロープロパティにアクセスするために、テンプレートのこの変数を参照することができます。
 
     Learn more about `ngFor` and template input variables in the
     [Displaying Data](../guide/displaying-data.html#ngFor) and
     [Template Syntax](../guide/template-syntax.html#ngFor) chapters.
 
+    `nfFor`とテンプレート入力変数についての詳細は、
+    [データを表示する](../guide/displaying-data.html#ngFor)と[テンプレート構文](../guide/template-syntax.html#ngFor)の章を参照してください。
+
 :marked
   Now we insert some content between the `<li>` tags
   that uses the `hero` template variable to display the hero’s properties.
+
+  ここで、ヒーロープロパティを表示するために`hero`テンプレート変数を使った要素を`<li>`タグの間に差し込みましょう。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'ng-for', 'app.component.ts (ngFor template)')(format=".")
 
 :marked
   When the browser refreshes, we see a list of heroes!
 
+  ブラウザがリフレッシュされると、ヒーローリストが表示されます！
+
   ### Styling our heroes
+
+  ### ヒーローたちのスタイル
   Our list of heroes looks pretty bland.
   We want to make it visually obvious to a user which hero we are hovering over and which hero is selected.
 
+  このヒーローリストはかなり淡白です。
+  ヒーローをホバーした時や選択した時には、視覚的にわかりやすくしたいところです。
+
   Let’s add some styles to our component by setting the `styles` property on the `@Component` decorator
   to the following CSS classes:
+
+  以下のCSSを`@Component`デコレーターの`styles`プロパティにセットして、コンポーネントにスタイルを当ててみましょう。
 
 +makeExample('toh-2/ts/app/app.component.ts', 'styles', 'app.component.ts (styles)')(format=".")
 
 :marked
   Notice that we again use the back-tick notation for multi-line strings.
 
+  複数行の文字列のためにバッククオートを再び使っていることに気をつけてください。
+
   That's a lot of styles! We can put them inline as shown here, or we can move them out to their own file which will make it easier to code our component. 
   We'll do this in a later chapter. For now let's keep rolling.
+
+  スタイルの量が多すぎる！ここで見ているようにスタイルをインラインで記述することもできますし、コンポーネントの記述を簡単にするために別ファイルに切り出すこともできます。
+  これは後の章でやります。今はこのまま進めましょう。
 
   When we assign styles to a component they are scoped to that specific component.
   Our styles will only apply to our `AppComponent` and won't "leak" to the outer HTML.
 
+  コンポーネントにスタイルを当てた場合、スコープはこの特定のコンポーネントとなります。
+  先ほどのスタイルは`AppComponent`にのみ適用されて、他のHTMLに"漏れる"ことはありません。
+
   Our template for displaying the heroes should now look like this:
+
+  この時点で、ヒーローを表示するためのテンプレートは次のようになっているはずです。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'heroes-styled', 'app.component.ts (styled heroes)')
 
 .l-main-section
   :marked
     ## Selecting a Hero
+
+    ## ヒーローを選択する
     We have a list of heroes and we have a single hero displayed in our app.
     The list and the single hero are not connected in any way.
     We want the user to select a hero from our list, and have the selected hero appear in the details view.
     This UI pattern is widely known as "master-detail".
     In our case, the master is the heroes list and the detail is the selected hero.
 
+    アプリケーションには、ヒーローのリストと1人のヒーローが表示されていますが、それらは全く繋がっていません。
+    リストからヒーローを選択して、そのヒーローの詳細が表示されるようにしたいところです。
+    このUIパターンは、"master-detail"パターンとして広く知られています。
+    このケースでは、masterがヒーローリストで、detailが選択されたヒーローとなります。
+
     Let’s connect the master to the detail through a `selectedHero` component property bound to a click event.
 
+    クリックイベントに紐付いた`selectedHero`コンポーネントプロパティを通して、masterとdetailをつなげましょう。
+
     ### Click event
+
+    ### クリックイベント
     We modify the `<li>` by inserting an Angular event binding to its click event.
+
+    `<li>`を修正して、クリックイベントに紐付いているAngularイベントを追加しましょう。
 
   +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'selectedHero-click', 'app.component.ts (template excerpt)')
 
   :marked
     Focus on the event binding
+
+    イベントバインディングに注目しましょう。
   code-example(format="." language="bash").
     (click)="onSelect(hero)"
   :marked
@@ -171,24 +280,45 @@ code-example(language="bash").
     The expression to the right of the equal sign calls the  `AppComponent` method, `onSelect()`,
     passing the template input variable `hero` as an argument.
     That’s the same `hero` variable we defined previously in the `ngFor`.
+
+    丸括弧によって、`<li>`要素の`click`イベントとして識別されます。
+    イコール記号の右辺の式は`AppComponent`メソッドである`onSelect()`を呼んでいて、引数としてテンプレート入力変数`hero`を渡しています。
+    これは、`ngFor`で以前定義したのと同じ`hero`変数です。
   .l-sub-section
     :marked
       Learn more about Event Binding in the 
       [User Input](../guide/user-input.html) and
       [Templating Syntax](../guide/template-syntax.html#event-binding) chapters.
+
+      イベントバインディングについての詳細は、
+      [ユーザ入力](../guide/user-input.html)と[テンプレート構文](../guide/template-syntax.html#event-binding)の章を参照してください。
   :marked
     ### Add the click handler
+
+    ### クリックハンドラを追加する
     Our event binding refers to an `onSelect` method that doesn’t exist yet.
     We’ll add that method to our component now.
 
+    このイベントバインディングは`onSelect`メソッドを参照していますが、まだ存在していません。
+    コンポーネントにこのメソッドを追加しましょう。
+
     What should that method do? It should set the component’s selected hero to the hero that the user clicked.
+
+    このメソッドは何を行うべきでしょうか？クリックしたヒーローをコンポーネントの選択したヒーローにセットしなければなりません。
 
     Our component doesn’t have a “selected hero” yet either. We’ll start there.
 
+    コンポーネントには"selected hero"もまだ定義されていません。それでは、ここから始めましょう。
+
     ### Expose the selected hero
+
+    ## 選択したヒーローを公開する
 
     We no longer need the static `hero` property of the `AppComponent`.
     **Replace** it with this simple `selectedHero` property:
+
+    もはや`AppComponent`の静的な`hero`プロパティは必要ありません。
+    それをこのシンプルな`selectedHero`プロパティに**置き換えます**。
 
   +makeExample('toh-2/ts/app/app.component.ts', 'selected-hero', 'app.component.ts (selectedHero)')
 
@@ -196,7 +326,12 @@ code-example(language="bash").
     We’ve decided that none of the heroes should be selected before the user picks a hero so
     we won’t initialize the `selectedHero` as we were doing with `hero`.
 
+    ユーザーがヒーローを選ぶまでは、選択されたヒーローは存在しないと決めていますので、
+    `hero`に対して行ったような初期化を`selectedHero`には行いません。
+
     Now **add an `onSelect` method** that sets the `selectedHero` property to the `hero` the user clicked.
+
+    ここで、クリックされた`hero`を`selectedHero`プロパティにセットする**`onSelect`メソッドを追加**してみましょう。
   +makeExample('toh-2/ts/app/app.component.ts', 'on-select', 'app.component.ts (onSelect)')
 
   :marked
@@ -204,13 +339,23 @@ code-example(language="bash").
     At the moment, it is still referring to the old `hero` property.
     Let’s fix the template to bind to the new `selectedHero` property.
 
+    テンプレートには選択したヒーローの詳細を表示するつもりですが、
+    現時点では、古い`hero`プロパティが参照されたままです。
+    テンプレートを修正して、新しい`selectedHero`プロパティをバインディングしましょう。
+
   +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'selectedHero-details', 'app.component.ts (template excerpt)')
   :marked
     ### Hide the empty detail with ngIf
 
+    ### ngIfを使って空のdetailを隠す
+
     When our app loads we see a list of heroes, but a hero is not selected.
     The `selectedHero` is `undefined`.
     That’s why we'll see the following error in the browser’s console:
+
+    アプリケーションを読み込むと、ヒーローリストが表示されますが、誰も選択されていません。
+    `selectedHero`は`undefined`です。
+    なので、ブラウザコンソールには以下のようなエラーが表示されます。
 
   code-example(language="html").
     EXCEPTION: TypeError: Cannot read property 'name' of undefined in [null]
@@ -219,10 +364,18 @@ code-example(language="bash").
     Remember that we are displaying `selectedHero.name` in the template.
     This name property does not exist because `selectedHero` itself is undefined.
 
+    テンプレートに`selectedHero.name`を表示していることを思い出しましょう。
+    `selectedHero`自体が定義されていないので、このnameプロパティは存在していません。
+
     We'll address this problem by keeping the hero detail out of the DOM until there is a selected hero.
+
+    選択されたヒーローが現れるまでDOMからヒーロー詳細を取り除くことで、この問題に対処しましょう。
 
     We wrap the HTML hero detail content of our template with a `<div>`.
     Then we add the `ngIf` built-in directive and set it to the `selectedHero` property of our component.
+
+    テンプレートのヒーロー詳細部分を`<div>`でくるみます。
+    そして`ngIf`組み込みディレクティブを追加して、コンポーネントの`selectedHero`プロパティをそこにセットします。
 
   +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'ng-if', 'app.component.ts (ngIf)')
 
@@ -230,21 +383,35 @@ code-example(language="bash").
     :marked
       Remember that the leading asterisk (`*`) in front of `ngIf` is
       a critical part of this syntax.
+
+      `nfIf`の頭にあるアスタリスクがこの構文の重要な部分となることを思い出しましょう。
   :marked
     When there is no `selectedHero`, the `ngIf` directive removes the hero detail HTML from the DOM.
     There will be no hero detail elements and no bindings to worry about.
 
+    `selectedHero`が存在しない場合、`nfIf`ディレクティブがDOMからヒーロー詳細のHTMLを取り除いてくれます。
+    ヒーロー詳細の要素やバインディングに関して心配せずにすみます。
+
     When the user picks a hero, `selectedHero` becomes "truthy" and
     `ngIf` puts the hero detail content into the DOM and evaluates the nested bindings.
+
+    ヒーローを選択したとき、`selectedHero`は"真値"となり、
+    `ngIf`はヒーロー詳細の要素をDOMに差し込み、ネストしたバインディングを評価します。
   .l-sub-section
     :marked
       `ngIf` and `ngFor` are called “structural directives” because they can change the
       structure of portions of the DOM.
       In other words, they give structure to the way Angular displays content in the DOM.
 
+      DOMの構成を一部変更できるので、`ngIf`と`nfFor`は“構造ディレクティブ”と呼ばれています。
+      つまり、AngularがDOMに要素を表示する手段として構成を変更できるようにしています。
+
       Learn more about `ngIf`, `ngFor` and other structural directives in the
       [Structural Directives](../guide/structural-directives.html) and
       [Template Syntax](../guide/template-syntax.html#directives) chapters.
+
+      `ngIf`や`ngFor`、その他の構造ディレクティブについての詳細は、
+      [構造ディレクティブ](../guide/structural-directives.html)と[テンプレート構文](../guide/template-syntax.html#directives)の章を参照してください。
 
   :marked
     The browser refreshes and we see the list of heroes but not the selected hero detail.
@@ -252,25 +419,45 @@ code-example(language="bash").
     When we click on a hero in the list, the selected hero displays in the hero details.
     Everything is working as we expect.
 
+    ブラウザをリフレッシュすると、ヒーローリストを見ることができますがヒーロー詳細は表示されません。
+    `selectedHero`が定義されない限り、`ngIf`がDOMから切り出しています。
+    リストの中からあるヒーローをクリックすると、選択したヒーローの詳細が表示されます。
+    すべて期待通りに動いています。
+
     ### Styling the selection
+
+    ### 選択のスタイル
 
     We see the selected hero in the details area below but we can’t quickly locate that hero in the list above.
     We can fix that by applying the `selected` CSS class to the appropriate `<li>` in the master list.
     For example, when we select Magneta from the heroes list,
     we can make it pop out visually by giving it a subtle background color as shown here.
 
+    下部の詳細エリアで選択したヒーローを見ることができますが、上部のリストの中から選択したヒーローをすぐに見つけられません。
+    リストの`<li>`に`selected`CSSクラスを適用することで、この問題を直しましょう。
+    例えばリストからMagnetaを選択した場合、以下にあるように薄い背景色を付けることで視覚的に目立たせることができます。
+
   figure.image-display
     img(src='/resources/images/devguide/toh/heroes-list-selected.png' alt="Selected hero")
   :marked
     We’ll add a property binding on `class` for the `selected` class to the template. We'll set this to an expression that compares the current `selectedHero` to the `hero`.
 
+    テンプレートに`selected`クラスを適用するために、`class`に対してプロパティバインディングを追加しましょう。
+    現在の`selectedHero`と`hero`の値を比べる式をここにセットします。
     The key is the name of the CSS class (`selected`). The value is `true` if the two heroes match and `false` otherwise.
     We’re saying “*apply the `selected` class if the heroes match, remove it if they don’t*”.
+
+    鍵はCSSクラスの名前(`selected`)です。2つのヒーローが一致すれば、この値は`true`、そうでなければ`false`となります。
+    要するに、"ヒーローが一致すれば、`selected`クラスが適用されて、そうでなければ取り除かれる"ということです。
   +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'class-selected-1', 'app.component.ts (setting the CSS class)')(format=".")
   :marked
     Notice in the template that the `class.selected` is surrounded in square brackets (`[]`).
     This is the syntax for a **property binding**, a binding in which data flows one way
     from the data source (the expression `hero === selectedHero`) to a property of `class`.
+
+    テンプレートでは、`class.selected`が角括弧(`[]`)で囲まれていることに注目してください。
+    これは**プロパティバインディング**の構文であり、
+    データソース(`hero === selectedHero`の式)から`class`のプロパティへの単方向のデータバインディングを行っています。
   +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'class-selected-2', 'app.component.ts (styling each hero)')(format=".")
 
   .l-sub-section
@@ -278,9 +465,15 @@ code-example(language="bash").
       Learn more about [property bindings](../guide/template-syntax.html#property-binding)
       in the Template Syntax chapter.
 
+      [プロパティバインディング](../guide/template-syntax.html#property-binding)についての詳細は、
+      テンプレート構文の章を参照してください。
+
   :marked
     The browser reloads our app.
     We select the hero Magneta and the selection is clearly identified by the background color.
+
+    ブラウザがアプリケーションをリロードします。
+    Magnetaを選ぶと、背景色によって選択したことがはっきりと認識されます。
 
   figure.image-display
     img(src='/resources/images/devguide/toh/heroes-list-1.png' alt="Output of heroes list app")
@@ -288,23 +481,44 @@ code-example(language="bash").
   :marked
     We select a different hero and the tell-tale color switches to that hero.
 
+    違うヒーローを選択すると、このしるしの色はそのヒーローに移ります。
+
     Here's the complete `app.component.ts` as it stands now:
+
+    以下にある通り、これで`app.component.ts`が完成しました。
 
   +makeExample('toh-2/ts/app/app.component.ts', '', 'app.component.ts')
 
 .l-main-section
 :marked
   ## The Road We’ve Travelled
+
+  ## 歩んできた道
   Here’s what we achieved in this chapter:
+
+  この章で達成したこと:
 
   * Our Tour of Heroes now displays a list of selectable heroes
   * We added the ability to select a hero and show the hero’s details
   * We learned how to use the built-in directives `ngIf` and `ngFor` in a component’s template
 
+  * Tour of Heroes に選択可能なヒーローリストを表示させる
+  * 選択したヒーローの詳細を表示できるようにする
+  * コンポーネントのテンプレートで、組み込みディレクティブの`ngIf`と`nfFor`を使えるようになる
+
   Run the <live-example></live-example> for this part.
 
+  この章の <live-example></live-example> を実行してください。
+
   ### The Road Ahead
+
+  ### この先の道
   Our Tour of Heroes has grown, but it’s far from complete.
   We can't put the entire app into a single component.
   We need to break it up into sub-components and teach them to work together
   as we learn in the [next chapter](toh-pt3.html).
+
+  Tour of Heroes は成長していますが、完成には程遠いです。
+  単一のコンポーネントにアプリケーション全体を記述することはできません。
+  サブコンポーネントに分解して、協働するようにする必要があるので、
+  [次の章](toh-pt3.html)で学んでいきましょう。

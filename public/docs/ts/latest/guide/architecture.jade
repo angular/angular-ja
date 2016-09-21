@@ -111,45 +111,86 @@ figure
     what those classes mean and how they should work.
     <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.x5c2ndtx0" target="_blank">
     Learn more</a> about decorators on the web.
+
+    デコレーターは、JavaScriptのクラスを修飾する関数です。
+    Angularはクラスにメタデータを付加するたくさんのデコレーターを持ち、
+    そのためそれらのクラスがどのようなもので、どうのように動作するべきかを知っています。
+    デコレーターについては、このwebサイトでさらに
+    <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.x5c2ndtx0" target="_blank">
+    学んでください。</a>
 :marked
   `NgModule` is a decorator function that takes a single metadata object whose properties describe the module. 
   The most important properties are:
+
+  tk`NgModule`は、プロパティがモジュールを表現する単一のメタデータオブジェクトを受けとるデコレーター関数です。
+  もっとも重要なプロパティは、
   * `declarations` - the _view classes_ that belong to this module.
+
+  * `declarations` - このモジュールに属する_view classes_です。
   Angular has three kinds of view classes: [components](#components), [directives](#directives), and [pipes](pipes.html).
+
+  Angularでは三種類のビュークラスがあります。[コンポーネント](#components)、 [ディレクティブ](#directives)、そして[パイプ](pipes.html)です。
 
   * `exports` - the subset of declarations that should be visible and usable in the component [templates](#templates) of other modules.
 
+  * `exports` - tk他のモジュールのコンポーネントの[テンプレート](#templates)の中で使用できるようにする宣言のサブセットです。
+
   * `imports` - other modules whose exported classes are needed by component templates declared in _this_ module.
+
+  * `imports` - tkこのモジュールで宣言されたコンポーネントのテンプレートにおいて必要な、エクスポートされたクラスの他のモジュールです。
 
   * `providers` - creators of [services](#services) that this module contributes to
   the global collection of services; they become accessible in all parts of the app.
 
+  * `providers` - [サービス](#services)のクリエイターで、このモジュールはサービスのグローバルなコレクションを提供します。
+  それらはアプリのすべての部分からアクセス可能になります。
+
   * `bootstrap` - the main application view, called the _root component_, 
   that hosts all other app views. Only the _root module_ should set this `bootstrap` property.
 
+  * `bootstrap` - _ルートコンポーネント_と呼ばれる、主要なアプリケーションのビューです。
+  他のすべてのビューを提供します。_ルートモジュール_だけが`bootstrap`プロパティを置くべきです。
+
   Here's a simple root module:
+  単純なルートモジュールがこちらです。
 +makeExample('app/mini-app.ts', 'module', 'app/app.module.ts')(format='.')
 
 .l-sub-section
   :marked
-    The `export` of `AppComponent` is just to show how to export; it isn't actually necessary in this example. A root module has no reason to _export_ anything because other components don't need to _import_ the root module. 
+    The `export` of `AppComponent` is just to show how to export; it isn't actually necessary in this example. A root module has no reason to _export_ anything because other components don't need to _import_ the root module.
+
+    `AppComponent`の`export`は、単にexportの方法を示しています。この例では実際には必要ありません。ルートモジュールはなにも_export_する
+    理由はありません。なぜならば、他のコンポーネントはルートモジュールを_import_する必要がないからです。
 :marked
   Launch an application by _bootstrapping_ its root module. 
   During development you're likely to bootstrap the `AppModule` in a `main.ts` file like this one.
+
+  ルートモジュールを_ブートストラップ_して、アプリケーションを起動しましょう。
+  開発中は、このように`main.ts`ファイルの`AppModule`を起動することになるでしょう。
     
 +makeExample('app/main.ts', '', 'app/main.ts')(format='.')
 
 :marked
   ### Angular modules vs. JavaScript modules
 
+  ### Angularモジュール対JavaScriptモジュール
+
   The Angular module &mdash; a class decorated with `@NgModule` &mdash; is a fundamental feature of Angular.
+
+  Angularモジュール（`@NgModule`で修飾されたクラス）は、Angularの根底をなす機能です。
 
   JavaScript also has its own module system for managing collections of JavaScript objects.
   It's completely different and unrelated to the Angular module system.
+
+  JavaScriptにもJavaScriptのオブジェクトの集まりを管理する独自のモジュールシステムがあります。
   
   In JavaScript each _file_ is a module and all objects defined in the file belong to that module.
   The module declares some objects to be public by marking them with the `export` key word. 
   Other JavaScript modules use *import statements* to access public objects from other modules.
+
+  JavaScriptではそれぞれの_ファイル_はモジュールであり、そのファイルで定義されたすべてのオブジェクトはそのモジュールに属すします。
+  モジュールは`export`という予約語でいくつかのオブジェクトを公開する宣言をします。
+  他のJavaScriptのモジュールは、他のモジュールからの公開オブジェクトにアクセスするために*インポート文*を使用します。
 
 +makeExample('app/app.module.ts', 'imports', '')(format='.')
 +makeExample('app/app.module.ts', 'export', '')(format='.')
@@ -157,10 +198,16 @@ figure
 .l-sub-section
   :marked
     <a href="http://exploringjs.com/es6/ch_modules.html" target="_blank">Learn more about the JavaScript module system on the web.</a>
+
+    <a href="http://exploringjs.com/es6/ch_modules.html" target="_blank">このwebサイトで、JavaScriptのモジュールについてさらに学んでください。</a>
 :marked
   These are two different and _complementary_ module systems. Use them both to write your apps.
 
+  これらはふたつの異なる相補的なモジュールシステムです。アプリを書くために両方を使用してください。
+
   ### Angular libraries
+
+  ### Angularのライブラリ
 
 figure
   img(src="/resources/images/devguide/architecture/library-module.png" alt="Component" align="left" style="width:240px; margin-left:-40px;margin-right:10px" )
@@ -168,12 +215,20 @@ figure
 :marked
   Angular ships as a collection of JavaScript modules. You can think of them as library modules. 
 
+  AngularはJavaScriptモジュールの集まりとして提供されています。それらをライブラリのモジュールとして考えることができます。
+
   Each Angular library name begins with the `!{_at_angular}` prefix.
-  
+
+  それぞれのAngularのライブラリ名は、`!{_at_angular}`接頭辞で始まります。
+
   You install them with the **npm** package manager and import parts of them with JavaScript `import` statements.
+
+  それらは**npm**パッケージ管理システムでインストールし、JavaScript`import`文でそれらの一部をインポートします。
 <br clear="all"><br>
 :marked
   For example, import Angular's `Component` decorator from the `@angular/core` library like this:
+
+  たとえば、`@angular/core`からAngularの`コンポーネント`デコレーターを、このようにインポートします。
 +makeExample('app/app.component.ts', 'import', '')(format='.')
 :marked
   You also import Angular _modules_ from Angular _libraries_ using JavaScript import statements:

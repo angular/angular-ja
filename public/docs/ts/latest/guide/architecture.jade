@@ -223,28 +223,40 @@ figure
 
   You install them with the **npm** package manager and import parts of them with JavaScript `import` statements.
 
-  それらは**npm**パッケージ管理システムでインストールし、JavaScript`import`文でそれらの一部をインポートします。
+  それらは**npm**パッケージ管理システムでインストールし、JavaScriptの`import`文でそれらの一部をインポートします。
 <br clear="all"><br>
 :marked
   For example, import Angular's `Component` decorator from the `@angular/core` library like this:
 
-  たとえば、`@angular/core`からAngularの`コンポーネント`デコレーターを、このようにインポートします。
+  たとえば、このように`@angular/core`ライブラリからAngularの`Component`デコレーターをインポートします。
 +makeExample('app/app.component.ts', 'import', '')(format='.')
 :marked
   You also import Angular _modules_ from Angular _libraries_ using JavaScript import statements:
+
+  また、Angularの_ライブラリ_からの_モジュール_のインポートにも、JavaScriptのimport文を使用します。
 +makeExample('app/mini-app.ts', 'import-browser-module', '')(format='.')
 :marked
   In the example of the simple root module above, the application module needs material from within that `BrowserModule`. To access that material, add it to the `@NgModule` metadata `imports` like this.
+
+  上記の単純なルートモジュールの例では、そのアプリケーションモジュールは`BrowserModule`の中にある情報を必要とします。
+  その情報にアクセスするには、それをこのように`@NgModule`の`imports`メタデータに追加します。
 +makeExample('app/mini-app.ts', 'ngmodule-imports', '')(format='.')
 :marked
   In this way you're using both the Angular and JavaScript module systems _together_.
 
+  この方法では、AngularとJavaScriptの両方のモジュールシステムを合わせて使用しています。
+
   It's easy to confuse the two systems because they share the common vocabulary of "imports" and "exports".
   Hang in there. The confusion yields to clarity with time and experience.
+
+  それらは"imports"と"exports"という共通の語彙を共有しているので、その二つのシステムを混同しやすいですね。
+  がんばりましょう。時間と経験とともに混同せずに明確に判別できるようになります。
 
 .l-sub-section
   :marked
     Learn more from the [Angular modules](ngmodule.html) page.
+
+    詳細は、[Angularモジュール](ngmodule.html)ページを参照してください。
 
 .l-hr 
 
@@ -252,63 +264,99 @@ figure
 :marked
   <a id="components"></a>
   ## Components
+
+  ## コンポーネント
 figure
   img(src="/resources/images/devguide/architecture/hero-component.png" alt="Component" align="left" style="width:200px; margin-left:-40px;margin-right:10px" )
 
 :marked
   A _component_ controls a patch of screen called a *view*.
 
+  _コンポーネント_は、*ビュー*と呼ばれる画面の一部分を制御します。
+
   For example, the following views are controlled by components:
 
+  例えば、以下のビューはコンポーネントにより制御されます。
+
   * The app root with the navigation links.
+  * ナビゲーションリンク付きのアプリのルート。
   * The list of heroes.
+  * ヒーローの一覧。
   * The hero editor.
+  * ヒーローエディタ。
 
 
   You define a component's application logic&mdash;what it does to support the view&mdash;inside a class.
   The class interacts with the view through an API of properties and methods.
+
+  クラスの内部で、コンポーネントのアプリケーションロジック&mdash;ビューをサポートするために行うこと&mdash;を定義します。
+  クラスはプロパティとメソッドのAPIを通じて、ビューとインタラクトします。
 
   <a id="component-code"></a>
   For example, this `HeroListComponent` has a `heroes` property that returns !{_an} !{_array} of heroes
   that it acquires from a service.
   `HeroListComponent` also has a `selectHero()` method that sets a `selectedHero` property when the user clicks to choose a hero from that list.
 
+  例えば、この`HeroListComponent`は、サービスから取得したひとつのheroes配列を返す`heroes`プロパティを持っています。
+  `HeroListComponent`もまた、ユーザーがそのリストからヒーローを選択するためにクリックした際に、
+  `selectedHero`プロパティをセットする`selectHero()`メソッドを持っています。
+
 +makeExcerpt('app/hero-list.component.ts', 'class')
 :marked
   Angular creates, updates, and destroys components as the user moves through the application.
   Your app can take action at each moment in this lifecycle through optional [lifecycle hooks](lifecycle-hooks.html), like `ngOnInit()` declared above.
 
+  Angularは、ユーザーがアプリケーションのあちこちに移動する際に、コンポーネントを生成し、更新し、破棄します。
+  あなたのアプリはこのライフサイクルの中のそれぞれの瞬間に、上記で宣言した`ngOnInit()`のような任意の[ライフサイクルフック](lifecycle-hooks.html)
+  を通じてコードを実行できます。
+
 .l-hr 
 
 .l-main-section
 :marked
-  ## Templates
+  ## テンプレート
 figure
   img(src="/resources/images/devguide/architecture/template.png" alt="Template" align="left" style="width:200px; margin-left:-40px;margin-right:10px" )
 :marked
   You define a component's view with its companion **template**. A template is a form of HTML
   that tells Angular how to render the component.
 
+  コンポーネントに付随する*テンプレート*を使用して、ビューを定義できます。テンプレートはHTMLのひとつの形で、
+  コンポーネントをレンダリングする方法をAngularに指示します。
+
   A template looks like regular HTML, except for a few differences. Here is a
   template for our `HeroListComponent`:
+
+  テンプレートは、すこしの違いのほかはふつうのHTMLのように見えます。こちらは、`HeroListComponent`のテンプレートです。
 
 +makeExample('app/hero-list.component.html')
 
 :marked
   Although this template uses typical HTML elements like `<h2>` and  `<p>`, it also has some differences. Code like `*ngFor`, `{{hero.name}}`, `(click)`, `[hero]`, and `<hero-detail>` uses Angular's [template syntax](template-syntax.html).
 
+  このテンプレートは`<h2>`や`<p>`のような、典型的なHTML要素を使用していますが、いくつかの違いもあります。`*ngFor`、`{{hero.name}}`、`(click)`、`[hero]`、そして`<hero-detail>`のようなコードはAngularの[テンプレート構文](template-syntax.html)を使用しています。
 
   In the last line of the template, the `<hero-detail>` tag is a custom element that represents a new component, `HeroDetailComponent`.
+
+  テンプレートの最後の行において、`<hero-detail>`タグは`HeroDetailComponent`という新しいコンポーネントを表すカスタムエレメントです。
   
   The `HeroDetailComponent` is a *different* component than the `HeroListComponent` you've been reviewing.
   The `HeroDetailComponent` (code not shown) presents facts about a particular hero, the
   hero that the user selects from the list presented by the `HeroListComponent`.
   The `HeroDetailComponent` is a **child** of the `HeroListComponent`.
 
+  `HeroDetailComponent`は、今まで見てきた`HeroListComponent`とは*異なる*コンポーネントです。
+  `HeroDetailComponent`（非表示）は、`HeroListComponent`により表示された一覧からユーザーが選択した、
+  特定のヒーローに関する事実に関して表示しています。
+  `HeroDetailComponent`は、`HeroListComponent`の*子*です。
+
 figure
   img(src="/resources/images/devguide/architecture/component-tree.png" alt="Metadata" align="left" style="width:300px; margin-left:-40px;margin-right:10px" )
 :marked
   Notice how `<hero-detail>` rests comfortably among native HTML elements. Custom components mix seamlessly with native HTML in the same layouts.
+
+  `<hero-detail>`がネイティブのHTMLエレメントの中に、いかに不自由なく置かれているかに注目してください。
+  カスタムコンポーネントはネイティブのHTMLと、同じレイアウトの中で一体となって混在しています。
 
 <br clear="all">
 
@@ -317,22 +365,35 @@ figure
 .l-main-section
 :marked
   ## Metadata
+
+  ## メタデータ
 figure
   img(src="/resources/images/devguide/architecture/metadata.png" alt="Metadata" align="left" style="width:150px; margin-left:-40px;margin-right:10px" )
 
 :marked
 <p style="padding-top:10px">Metadata tells Angular how to process a class.</p>
+<p style="padding-top:10px">メタデータはAngularにクラスを処理する方法を指示します。</p>
 <br clear="all">
 :marked
   [Looking back at the code](#component-code) for `HeroListComponent`, you can see that it's just a class.
   There is no evidence of a framework, no "Angular" in it at all.
 
+  `HeroListComponent`の[コードを振り返れば](#component-code)、それはただのクラスであることが分かります。
+  そこにはフレームワークの徴候、"Angular"は全くありません。
+
   In fact, `HeroListComponent` really is *just a class*. It's not a component until you *tell Angular about it*.
+
+  実際、`HeroListComponent`は本当に*ただのクラス*です。*Angularにそれがコンポーネントであると指示する*までは。
 
   To tell Angular that `HeroListComponent` is a component, attach **metadata** to the class.
 
+  Angularに`HeroListComponent`はコンポーネントであると指示するには、そのクラスに*メタデータ*をつけ加えます。
+
   In !{_Lang}, you attach metadata by using !{_a} **!{_decorator}**.
   Here's some metadata for `HeroListComponent`:
+
+  !{_Lang}では、**デコレーター**を使用してメタデータをつけ加えます。
+  `HeroListComponent`のいくつかのメタデータがこちらです。
 
 +makeExcerpt('app/hero-list.component.ts', 'metadata')
 
@@ -340,12 +401,18 @@ figure
   Here is the `@Component` !{_decorator}, which identifies the class
   immediately below it as a component class.
 
+  ここには`@Component`デコレーターがあり、その直下のクラスをコンポーネントのクラスとして識別させます。
+
 block ts-decorator
   :marked
     The `@Component` decorator takes a required configuration object with the
     information Angular needs to create and present the component and its view.
 
+    `@Component`デコレーターは、Angularがコンポーネントとそのビューを作成し表示するために必要な情報を持った設定オブジェクトを持ちます。
+
     Here are a few of the possible `@Component` configuration options:
+
+    こちらは、`@Component`の設定オプションとなりうる少数の例です。
 
 :marked
   - `moduleId`: sets the source of the base address (`module.id`) for module-relative URLs such as the `templateUrl`.
@@ -355,11 +422,32 @@ block ts-decorator
   For example, if an app's  HTML contains `<hero-list></hero-list>`, then
   Angular inserts an instance of the `HeroListComponent` view between those tags.
 
+  - `selector`: *親*HTMLの中で`<hero-list>`タグを探し、このコンポーネントのインスタンスを生成し挿入する場所を
+  Angularに指示するCSSセレクタです。
+  たとえば、もしアプリのHTMLが`<hero-list></hero-list>`を含むならば、Angularはそのタグの間に
+  `HeroListComponent`のビューのインスタンスを挿入します。
+
   - `templateUrl`: module-relative address of this component's HTML template, shown [above](#templates).
+
+  - `templateUrl`: [上記](#templates)に示した、このコンポーネントのHTMLテンプレートのアドレスです。
+
+  - `directives`: !{_array} of the components or directives that *this* template requires.
+  In the last line of `hero-list.component.html`, Angular inserts a `HeroDetailComponent`
+  in the space indicated by `<hero-detail>` tags.
+  Angular does so only if `HeroDetailComponent` is in this `directives` !{_array}.
+
+  - `directives`: *この*テンプレートで必要とされるコンポーネントまたはディレクティブの配列です。
+  `hero-list.component.html`の最後の行の中で、Angularは`<hero-detail>`タグで示された空間に
+  `HeroDetailComponent`を挿入します。
+  Angularは、`HeroDetailComponent`がこの`ディレクティブ`の配列にある場合にだけそうします。
 
   - `providers`: !{_array} of **dependency injection providers** for services that the component requires.
   This is one way to tell Angular that the component's constructor requires a `HeroService`
-  so it can get the list of heroes to display. 
+  so it can get the list of heroes to display.
+
+  - `providers`: コンポーネントが必要とするサービスのための*依存性の注入のプロバイダー*の配列です。
+  これはコンポーネントのコンストラクタが`HeroService`を必要とするとAngularに指示するひとつの方法で、
+  それによりヒーローの一覧を手に入れ表示することができます。
 
 figure
   img(src="/resources/images/devguide/architecture/template-metadata-component.png" alt="Metadata" align="left" style="height:200px; margin-left:-40px;margin-right:10px" )
@@ -367,23 +455,39 @@ figure
 :marked
   The metadata in the `@Component` tells Angular where to get the major building blocks you specify for the component.
 
+  `@Component`のメタデータは、コンポーネントのために指定された主要なビルディングブロックをどこで手に入れるかをAngularに指示します。
+
   The template, metadata, and component together describe a view.
+
+  テンプレート、メタデータ、そしてコンポーネントは、共同でビューを表現します。
 
   Apply other metadata !{_decorator}s in a similar fashion to guide Angular behavior.
   `@Injectable`, `@Input`, and `@Output` are a few of the more popular !{_decorator}s.
+
+  他のメタデータのデコレーターにもこれは当てはまりまり、おなじようなやり方でAngularの振る舞いを手引きします。
+  `@Injectable`、`@Input`、そして`@Output`はtkさらなる一般的なデコレーターの例です。
 <br clear="all">
 :marked
   The architectural takeaway is that you must add metadata to your code
   so that Angular knows what to do.
+
+  アーキテクチャについて覚えておくことは、あなたはコードにメタデータを追加する必要があり、
+  それによりAngularはなにをするべきかを知るということです。
 
 .l-hr 
 
 .l-main-section
 :marked
   ## Data binding
+
+  ## データバインディング
   Without a framework, you would be responsible for pushing data values into the HTML controls and turning user responses
   into actions and value updates. Writing such push/pull logic by hand is tedious, error-prone, and a nightmare to
   read as any experienced jQuery programmer can attest.
+
+  フレームワークなしでは、データ値をHTMLにプッシュして制御し、ユーザーの反応をアクションに変換して値を更新することを自分でしなければなりません。
+  そのようなプッシュ/プルのロジックを手で書くのは、経験豊富なjQueryプログラマーなら誰でも証言できるように、退屈で、エラーが発生しやすく、
+  それを読み解くのは悪夢です。
 figure
   img(src="/resources/images/devguide/architecture/databinding.png" alt="Data Binding" style="width:220px; float:left; margin-left:-40px;margin-right:20px" )
 :marked
@@ -391,10 +495,18 @@ figure
   a mechanism for coordinating parts of a template with parts of a component.
   Add binding markup to the template HTML to tell Angular how to connect both sides.
 
+  Angularは**データバインディング**をサポートしています。
+  それはコンポーネントの一部とテンプレートの一部を同調させるメカニズムです。
+  双方を接続する方法をAngularに指示するために、バインディングのマークアップをテンプレートHTMLに追加します。
+
   As the diagram shows, there are four forms of data binding syntax. Each form has a direction &mdash; to the DOM, from the DOM, or in both directions.
+
+  図表が示すように、データバインディングの文法は四種類あります。それぞれの種類は、DOMへ、DOMから、または双方向に、といった方向を持っています。
 <br clear="all">
 :marked
   The `HeroListComponent` [example](#templates) template has three forms:
+
+  `HeroListComponent`の[例](#templates)のテンプレートは三種類を持っています。
 
 +makeExcerpt('app/hero-list.component.1.html', 'binding')
 
@@ -402,14 +514,27 @@ figure
   * The `{{hero.name}}` [*interpolation*](displaying-data.html#interpolation)
   displays the component's `hero.name` property value within the `<li>` tags.
 
+  * `{{hero.name}}`[*補間*](displaying-data.html#interpolation)は、コンポーネントの`hero.name`プロパティの値を
+  `<li>`タグの内側に表示します。
+
   * The `[hero]` [*property binding*](template-syntax.html#property-binding) passes the value of `selectedHero` from
   the parent `HeroListComponent` to the `hero` property of the child `HeroDetailComponent`.
 
+  * `[hero]`[*プロパティバインディング*](template-syntax.html#property-binding)は、
+  親の`HeroListComponent`からの`selectedHero`の値を、子の`HeroDetailComponent`の`hero`プロパティに渡します。
+
   * The `(click)` [*event binding*](user-input.html#click) calls the component's `selectHero` method when the user clicks a hero's name.
+
+  * `(click)`[*イベントバインディング*](user-input.html#click)は、
+  ユーザーがヒーローの名前をクリックしたとき、コンポーネントの`selectHero`メソッドをコールします。
 
   **Two-way data binding** is an important fourth form
   that combines property and event binding in a single notation, using the `ngModel` directive.
   Here's an example from the `HeroDetailComponent` template:
+
+  **双方向データバインディング**は重要な四番目の種類で、`ngModel`ディレクティブを使用して、
+  プロパティとイベントのバインディングを単一の表記で組みあわせます。
+  `HeroDetailComponent`テンプレートからの例がこちらです。
 
 +makeExcerpt('app/hero-detail.component.html', 'ngModel')
 
@@ -418,19 +543,29 @@ figure
   The user's changes also flow back to the component, resetting the property to the latest value,
   as with event binding.
 
+  双方向バインディングでは、データプロパティの値はプロパティバインディングと同様に、コンポーネントからinputボックスに流れます。
+  ユーザーの変更もまたイベントバインディングと同様に、コンポーネントに流れ戻ってそのプロパティを最新の値に更新します。
+
   Angular processes *all* data bindings once per JavaScript event cycle,
   from the root of the application component tree through all child components.
+
+  Angularは、JavaScriptのイベントのサイクルごとに、アプリケーションのコンポーネントツリーのルートから
+  すべての子コンポーネントにわたっての、*すべての*データバインディングをいちどに処理します。
 
 figure
   img(src="/resources/images/devguide/architecture/component-databinding.png" alt="Data Binding" style="float:left; width:300px; margin-left:-40px;margin-right:10px" )
 :marked
   Data binding plays an important role in communication
   between a template and its component.
+
+  データバインディングは、テンプレートとそのコンポーネントの間のコミュニケーションにおいて重要な役割を演じます。
 <br clear="all">
 figure
   img(src="/resources/images/devguide/architecture/parent-child-binding.png" alt="Parent/Child binding" style="float:left; width:300px; margin-left:-40px;margin-right:10px" )
 :marked
   Data binding is also important for communication between parent and child components.
+
+  データバインディングは、親と子のコンポーネントの間のコミュニケーションにおいても重要です。
 <br clear="all">
 
 .l-hr 
@@ -438,18 +573,29 @@ figure
 .l-main-section
 :marked
   ## Directives
+
+  ## ディレクティブ
 figure
   img(src="/resources/images/devguide/architecture/directive.png" alt="Parent child" style="float:left; width:150px; margin-left:-40px;margin-right:10px" )
 :marked
   Angular templates are *dynamic*. When Angular renders them, it transforms the DOM
   according to the instructions given by **directives**.
 
+  Angularのテンプレートは*動的*です。Angularがそれらをレンダリングするとき、**ディレクティブ**により与えられた指示に従って、
+  DOMを変形させます。
+
   A directive is a class with directive metadata. In !{_Lang}, apply the `@Directive` !{_decorator}
   to attach metadata to the class.
+
+  ディレクティブはディレクティブメタデータつきのクラスです。
+  !{_Lang}では、クラスにメタデータを付加するために`@Directive`デコレーターを適用します。
 <br clear="all">
 :marked
   A component is a *directive-with-a-template*;
   a `@Component` !{_decorator} is actually a `@Directive` !{_decorator} extended with template-oriented features.
+
+  コンポーネントは、*テンプレートつきのディレクティブ*です。`@Component`デコレーターは実際、テンプレート指向の機能をもって
+  継承された`@Directive`デコレーターです。
 
 .l-sub-section
   :marked

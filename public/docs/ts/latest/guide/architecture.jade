@@ -43,7 +43,7 @@ figure
 :marked
   The architecture diagram identifies the eight main building blocks of an Angular application:
 
-  このアーキテクチャの図が、Angular 2アプリケーションの８つの主な構成要素を明確にしています。
+  このアーキテクチャの図が、Angular 2アプリケーションの八つの主な基礎的要素を明確にしています。
 
   * [Modules](#modules)
   * [モジュール](#modules)
@@ -64,7 +64,7 @@ figure
 
   Learn these building blocks, and you're on your way.
 
-  これらの構成要素を学び、tkそしてあなたの方法で開発しましょう。
+  これらの基礎的要素を学び、tkそしてあなたの方法で開発しましょう。
 
 .l-sub-section
   p The code referenced on this page is available as a #[+liveExampleLink2()].
@@ -455,7 +455,7 @@ figure
 :marked
   The metadata in the `@Component` tells Angular where to get the major building blocks you specify for the component.
 
-  `@Component`のメタデータは、コンポーネントのために指定された主要なビルディングブロックをどこで手に入れるかをAngularに指示します。
+  `@Component`のメタデータは、コンポーネントのために指定された主な基礎的要素をどこで手に入れるかをAngularに指示します。
 
   The template, metadata, and component together describe a view.
 
@@ -601,21 +601,35 @@ figure
   :marked
     While **a component is technically a directive**,
     components are so distinctive and central to Angular applications that this architectural overview  separates components from directives.
+
+    **コンポーネントは技術的にはディレクティブです**が、コンポーネントはAngularアプリケーションにとってたいへん特徴的で主要なものなので、
+    このアーキテクチャの概要では、ディレクティブからコンポーネントを区別しています。
 :marked
   Two *other* kinds of directives exist: _structural_ and _attribute_ directives.
+
+  *他に*ふたつの種類のディレクティブが存在します。_構造_ディレクティブと、_属性_ディレクティブです。
 
   They tend to appear within an element tag as attributes do,
   sometimes by name but more often as the target of an assignment or a binding.
 
+  それらは、属性がそうであるように、要素のなかに現れる傾向があります。
+  ときには名前により、しかしより頻繁には代入かバインディングの対象として現れます。
+
   **Structural** directives alter layout by adding, removing, and replacing elements in DOM.
 
+  **構造**ディレクティブは、DOMのなかの要素を追加し、削除し、そして取りかえることにより、レイアウトを変更します。
+
   The [example template](#templates) uses two built-in structural directives:
+
+  [例のテンプレート](#templates)は、ふたつの組み込みの構造ディレクティブを使用しています。
 
 +makeExcerpt('app/hero-list.component.1.html', 'structural')
 
 :marked
   * [`*ngFor`](displaying-data.html#ngFor) tells Angular to stamp out one `<li>` per hero in the `heroes` list.
+  * [`*ngFor`](displaying-data.html#ngFor)は、tk`heroes`一覧のなかのヒーローあたりひとつの`<li>`を型で打ち抜くようにAngularに指示します。
   * [`*ngIf`](displaying-data.html#ngIf) includes the `HeroDetail` component only if a selected hero exists.
+  * [`*ngIf`](displaying-data.html#ngIf)は、選択したヒーローが存在する場合のみ、`HeroDetail`コンポーネントを加えます。
 
 block dart-bool
   //- N/A
@@ -624,10 +638,17 @@ block dart-bool
   **Attribute** directives alter the appearance or behavior of an existing element.
   In templates they look like regular HTML attributes, hence the name.
 
+  **属性**ディレクティブは、存在する要素の外見または振る舞いを変更します。
+  テンプレートのなかで、それらはその名のとおり、通常のHTMLの属性のように見えます。
+
   The `ngModel` directive, which implements two-way data binding, is
   an example of an attribute directive. `ngModel` modifies the behavior of
   an existing element (typically an `<input>`)
   by setting its display value property and responding to change events.
+
+  双方向データバインディングを実装する`ngModel`ディレクティブが、属性ディレクティブの例です。
+  `ngModel`は、（典型的には`<input>`のような）既存の要素の振る舞いについて、
+  表示している値のプロパティをセットし、変更イベントに反応することによってそれを変更します。
 
 +makeExcerpt('app/hero-detail.component.html', 'ngModel')
 :marked
@@ -636,37 +657,65 @@ block dart-bool
   or modify aspects of DOM elements and components
   (for example, [ngStyle](template-syntax.html#ngStyle) and [ngClass](template-syntax.html#ngClass)).
 
+  Angularにはさらにいくつかのディレクティブがあり、それらはレイアウトの構造を変更したり、
+  （たとえば, [ngSwitch](template-syntax.html#ngSwitch)）またはDOM要素とコンポーネントの外見を変更したりします。（たとえば, [ngStyle](template-syntax.html#ngStyle)と[ngClass](template-syntax.html#ngClass)）
+
   Of course, you can also write your own directives. Components such as
   `HeroListComponent` are one kind of custom directive.
   <!-- PENDING: link to where to learn more about other kinds! -->
+
+  もちろん、独自のディレクティブを書くこともできます。`HeroListComponent`のようなコンポーネントは、
+  カスタムディレクティブの一種です。
 
 .l-hr 
 
 .l-main-section
 :marked
   ## Services
+
+  ## サービス
 figure
   img(src="/resources/images/devguide/architecture/service.png" alt="Service" style="float:left; margin-left:-40px;margin-right:10px" )
 :marked
   _Service_ is a broad category encompassing any value, function, or feature that your application needs.
 
+  _サービス_は、あなたのアプリケーションが必要とするどのような値、関数、または機能も包含する広範囲に及ぶカテゴリーです。
+
   Almost anything can be a service.
   A service is typically a class with a narrow, well-defined purpose. It should do something specific and do it well.
+
+  ほとんどすべてのものはサービスになれます。
+  サービスは、典型的には、範囲をしぼって十分に明確にされた目的をもつクラスです。
+  なにか特定のものを実行すべきで、そしてそれをうまくやるべきです。
 <br clear="all">
 :marked
   Examples include:
+
+  以下の例が挙げられます。
   * logging service
+  * ロギングサービス
   * data service
+  * データサービス
   * message bus
+  * メッセージバス
   * tax calculator
+  * 税金計算機
   * application configuration
+  * アプリケーションの設定
 
   There is nothing specifically _Angular_ about services. Angular has no definition of a service.
   There is no service base class, and no place to register a service.
 
+  サービスに関しては、_Angular_特有のものはありません。Angularにはサービスについての定義はありません。
+  サービスの基底クラスはありませんし、サービスを登録する場所もありません。
+
   Yet services are fundamental to any Angular application. Components are big consumers of services.
 
+  それでもサービスは、どのようなAngularアプリケーションにとっても欠かせません。コンポーネントはサービスの大きな消費者です。
+
   Here's an example of a service class that logs to the browser console:
+
+  ブラウザーのコンソールにログを吐くサービスの例がこちらです。
 
 +makeExcerpt('app/logger.service.ts', 'class')
 
@@ -674,47 +723,76 @@ figure
   Here's a `HeroService` that fetches heroes and returns them in a resolved !{_PromiseLinked}.
   The `HeroService` depends on the `Logger` service and another `BackendService` that handles the server communication grunt work.
 
+  ヒーローたちをフェッチして、解決された!{_PromiseLinked}につつまれた彼らを返す`HeroService`がこちらです。
+  その`HeroService`は`Logger`サービスと、もう一つのサーバーとのコミュニケーションというつまらない仕事をあつかう
+  `BackendService`に依存しています。
+
 +makeExcerpt('app/hero.service.ts', 'class')
 
 :marked
   Services are everywhere.
 
+  サービスはどこにでもあります。
+
   Component classes should be lean. They don't fetch data from the server,
   validate user input, or log directly to the console.
   They delegate such tasks to services.
+
+  コンポーネントのクラスたちはうすくあるべきです。それらはデータをサーバーからフェッチしたり、ユーザーのインプットをバリデートしたり、
+  コンソールに直接ログを吐いたりはしません。
+  それらはそのような作業をサービスに移譲します。
 
   A component's job is to enable the user experience and nothing more. It mediates between the view (rendered by the template)
   and the application logic (which often includes some notion of a _model_).
   A good component presents properties and methods for data binding.
   It delegates everything nontrivial to services.
 
+  コンポーネントの仕事はユーザー体験を可能にすることで、それ以上のものではありません。それは（テンプレートによりレンダリングされた）ビューと
+  （しばしば_モデル_に関するなんらかの概念をふくむ）アプリケーションのロジックの間を仲介します。
+
   Angular doesn't *enforce* these principles.
   It won't complain if you write a "kitchen sink" component with 3000 lines.
 
+  Angularはこれらの原則を*強制しません*。
+  あなたが3000行からなる"キッチンシンク"コンポーネントを書いても、不平を言うことは無いでしょう。
+
   Angular does help you *follow* these principles by making it easy to factor your
   application logic into services and make those services available to components through *dependency injection*.
+
+  Angularは、あなたのアプリケーションロジックをサービスに含めることを簡単にし、
+  それらのサービスを*依存性の注入*を通じてコンポーネントで利用可能にすることによって、あなたがこれらの原則を*守る*手助けをします。
 
 .l-hr 
 
 .l-main-section
 :marked
   ## Dependency injection
+
+  ## 依存性の注入
 figure
   img(src="/resources/images/devguide/architecture/dependency-injection.png" alt="Service" style="float:left; width:200px; margin-left:-40px;margin-right:10px" )
 :marked
   _Dependency injection_ is a way to supply a new instance of a class
   with the fully-formed dependencies it requires. Most dependencies are services.
   Angular uses dependency injection to provide new components with the services they need.
+
+  _依存性の注入_は、クラスとそれが必要とする完全な形の依存性についての新しいインスタンスを提供する方法です。依存性のほとんどはサービスです。
+  Angularは、必要なサービスつきの新しいコンポーネントを提供するために、依存性の注入を使用します。
 <br clear="all">
 :marked
   Angular can tell which services a component needs by looking at the types of its constructor parameters.
   For example, the constructor of your `HeroListComponent` needs a `HeroService`:
+
+  Angularは、コンポーネントがどのサービスを必要とするかを、そのコンストラクタのパラメーターの型を見ることで判断できます。
+  たとえば、`HeroListComponent`のコンストラクタは`HeroService`を必要とします。
 
 +makeExcerpt('app/hero-list.component.ts (constructor)', 'ctor')
 
 :marked
   When Angular creates a component, it first asks an **injector** for
   the services that the component requires.
+
+  Angularがコンポーネントを生成するとき、Angularは最初に、コンポーネントが必要とするサービスについて**インジェクター**に尋ねます。
 
   An injector maintains a container of service instances that it has previously created.
   If a requested service instance is not in the container, the injector makes one and adds it to the container
@@ -723,24 +801,42 @@ figure
   Angular can call the component's constructor with those services as arguments.
   This is *dependency injection*.
 
+  インジェクターは、以前に生成されたサービスのインスタンスについてのコンテナを維持します。
+  要求されたサービスのインスタンスがコンテナにない場合は、インジェクターはそのサービスをAngularに返す前にそれを生成してコンテナに追加します。
+  すべての要求されたサービスが解決され返されたとき、Angularはコンポーネントのコンストラクタを、引数となるそれらのサービスと共にコールできます。
+  これが、*依存性の注入*です。
+
   The process of `HeroService` injection looks a bit like this:
+
+  `HeroService`の注入の処理は、いくらかこのように見えます。
 figure
   img(src="/resources/images/devguide/architecture/injector-injects.png" alt="Service" )
 :marked
   If the injector doesn't have a `HeroService`, how does it know how to make one?
 
+  もしもインジェクターが`HeroService`を持っていなかったら、それを作成する方法をどうやって知るのでしょう？
+
   In brief, you must have previously registered a **provider** of the `HeroService` with the injector.
   A provider is something that can create or return a service, typically the service class itself.
 
+  手短に言えば、事前に`HeroService`の**プロバイダー**をインジェクターに登録する必要があります。
+  プロバイダーはサービスを生成するか、または返すことができるもので、典型的にはサービスのクラスそのものです。
+
   You can register providers in modules or in components.
+
+  モジュールかコンポーネントのなかでプロバイダーを登録することができます。
   
   In general, add providers to the [root module](#module) so that
   the same instance of a service is available everywhere.
+
+  一般的には、プロバイダーを[ルートモジュール](#module)に追加することで、サービスの同じインスタンスがどこでも利用可能になります。
 
 +makeExample('app/app.module.ts', 'providers', 'app/app.module.ts (module providers)')(format='.')
 
 :marked
   Alternatively, register at a component level in the `providers` property of the `@Component` metadata:
+
+  あるいは、`@Component`メタデータの`providers`プロパティのなかで、コンポーネントのレベルで登録します。
 
 +makeExample('app/hero-list.component.ts', 'providers', 'app/hero-list.component.ts (component providers)')(format='.')
 
@@ -748,20 +844,31 @@ figure
   Registering at a component level means you get a new instance of the
   service with each new instance of that component.
 
+  コンポーネントのレベルで登録するということは、そのコンポーネントの新しいインスタンスごとにサービスの新しいインスタンスが手に入るということです。
+
   <!-- We've vastly oversimplified dependency injection for this overview.
   The full story is in the [dependency injection](dependency-injection.html) page. -->
 
   Points to remember about dependency injection:
 
+  依存性の注入について覚えておく点は、
+
   * Dependency injection is wired into the Angular framework and used everywhere.
+  * 依存性の注入はAngularのフレームワークの内側につながれており、あらゆるところで使用されています。
 
   * The *injector* is the main mechanism.
+  * *インジェクター*が主なメカニズムです。
+
     * An injector maintains a *container* of service instances that it created.
+    * インジェクターは、生成されたサービスのインスタンスについての*コンテナ*を維持します。
     * An injector can create a new service instance from a *provider*.
+    * インジェクターは、*プロバイダー*から新しいサービスのインスタンスを生成できます。
 
   * A *provider* is a recipe for creating a service.
+  * *プロバイダー*は、サービスを生成するレシピです。
 
   * Register *providers* with injectors.
+  * インジェクターで*プロバイダー*を登録します。
 
 .l-hr 
 
@@ -769,41 +876,75 @@ figure
 :marked
   ## Wrap up
 
+  ## まとめ
+
   You've learned the basics about the eight main building blocks of an Angular application:
 
+  あなたはAngularアプリケーションの八つの主な基礎的要素についての基礎を学習しました。
+
   * [Modules](#modules)
+  * [モジュール](#modules)
   * [Components](#components)
+  * [コンポーネント](#components)
   * [Templates](#templates)
+  * [テンプレート](#templates)
   * [Metadata](#metadata)
+  * [メタデータ](#metadata)
   * [Data binding](#data-binding)
-  * [Directives](#directives)
-  * [Services](#services)
-  * [Dependency injection](#dependency-injection)
+  * [データバインディング](#data-binding)
+  * [ディレクティブ](#directives)
+  * [サービス](#services)
+  * [依存性の注入](#dependency-injection)
 
   That's a foundation for everything else in an Angular application,
   and it's more than enough to get going.
   But it doesn't include everything you need to know.
 
+  それはAngularアプリケーションにおける他のあらゆることのための基礎で、
+  これで十二分にアプリケーションを書き始めることができます。
+
   Here is a brief, alphabetical list of other important Angular features and services.
   Most of them are covered in this documentation (or soon will be).
+
+  こちらは、Angularの他の重要な機能とサービスについての、簡潔なアルファベット順の一覧です。
 
   > [**Animations**](animations.html): Animate component behavior
   without deep knowledge of animation techniques or CSS with Angular's animation library.
 
+  > [**アニメーション**](animations.html): Angularのアニメーションライブラリを使用して、
+  アニメーションの技術やCSSの深い知識なしでコンポーネントの振る舞いをアニメーションさせます。
+
   > **Change detection**: The change detection documentation will cover how Angular decides that a component property value has changed,
   when to update the screen, and how it uses **zones** to intercept asynchronous activity and run its change detection strategies.
+
+  > **変更検知**: 変更検知のドキュメンテーションは、Angularがコンポーネントのプロパティの値が変更されたことを判断する方法について
+  扱います。
+  いつ画面を更新するべきか、そして非同期の動作横取りし、変更検知の戦略を実行するためにどのように**zone**を使用しているかについてです。
 
   > **Events**: The events documentation will cover how to use components and services to raise events with mechanisms for
   publishing and subscribing to events.
 
+  > **イベント**: イベントのドキュメンテーションは、tkイベントを公開して購読するためにイベントをメカニズムを発生されるためにコンポーネントとサービスを使用する方法ついて扱います。
+
   > [**Forms**](forms.html): Support complex data entry scenarios with HTML-based validation and dirty checking.
 
+  > [**フォーム**](forms.html): HTMLベースのバリデーションとダーティーチェッキングを使用した複雑なデータ記入のシナリオをサポートします。
+
   > [**HTTP**](server-communication.html): Communicate with a server to get data, save data, and invoke server-side actions with an HTTP client.
+
+  > [**HTTP**](server-communication.html): HTTPクライアントを使用して、データを取得し、保存し、そしてサーバーサイドのアクションを
+  呼び出すことでサーバーとコミュニケーションします。
 
   > [**Lifecycle hooks**](lifecycle-hooks.html): Tap into key moments in the lifetime of a component, from its creation to its destruction,
   by implementing the lifecycle hook interfaces.
 
+  > [**ライフサイクルフック**](lifecycle-hooks.html): ライフサイクルフックインターフェースを実装することで、
+  コンポーネントの生成から破棄までの一生のなかで鍵となる瞬間を利用します。
+
   > [**Pipes**](pipes.html): Use pipes in your templates to improve the user experience by transforming values for display. Consider this `currency` pipe expression:
+
+  > [**パイプ**](pipes.html): 表示する値を変換することでユーザー体験を向上させるために、テンプレートのなかでパイプを使用します。
+  `currency`パイプ式を検討してみます。
 <div style="margin-left:40px">
 code-example().
   price | currency:'USD':true
@@ -811,8 +952,15 @@ code-example().
 :marked
   > It displays a price of "42.33" as `$42.33`.
 
+  > "42.33"という値段を`$42.33`として表示します。
+
   > [**Router**](router.html): Navigate from page to page within the client
     application and never leave the browser.
 
+  > [**ルーター**](router.html): クライアントアプリケーションのうちのページからページへ案内し、ブラウザーから離れることはありません。
+
   > [**Testing**](testing.html): Run unit tests on your application parts as they interact with the Angular framework
   using the _Angular Testing Platform_.
+
+  > [**テスト**](testing.html): Angularのフレームワークと相互作用させるため、tk_Angular Testing Platform_を使用して、
+  あなたのアプリケーションの一部分の上で単体テストを実行します。

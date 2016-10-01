@@ -8,9 +8,9 @@
   },
 
   "architecture": {
-    "title": "Architecture Overview",
-    "navTitle": "Architecture",
-    "intro": "The basic building blocks of Angular applications",
+    "title": "アーキテクチャの概要",
+    "navTitle": "アーキテクチャ",
+    "intro": "Angularアプリケーションの基礎的要素",
     "nextable": true,
     "basics": true
   },

@@ -165,9 +165,9 @@ class PlunkerBuilder {
     if (!this.options.embedded) {
       postData.private = true;
 
-      postData.description = "Angular 2 Example - " + config.description;
+      postData.description = "Angular Example - " + config.description;
     } else {
-      postData.title = "Angular 2 Example - " + config.description;
+      postData.title = "Angular Example - " + config.description;
     }
 
     // Embedded needs to add more content, so if the callback is available, we call it
@@ -244,11 +244,13 @@ class PlunkerBuilder {
     } else {
       config.files = defaultIncludes;
     }
+    var includeSpec = false;
     var gpaths = config.files.map(function(fileName) {
       fileName = fileName.trim();
       if (fileName.substr(0,1) == '!') {
         return "!" + path.join(basePath, fileName.substr(1));
       } else {
+        includeSpec = includeSpec || /.*\.spec.(ts|js)$/.test(fileName);
         return path.join(basePath, fileName);
       }
     });
@@ -261,15 +263,19 @@ class PlunkerBuilder {
       '!**/*plnkr.*',
       '!**/package.json',
       '!**/example-config.json',
-      '!**/*.spec.*',
       '!**/tslint.json',
       '!**/.editorconfig',
       '!**/systemjs.config.js',
       '!**/wallaby.js',
       '!**/karma-test-shim.js',
-      '!**/karma.conf.js',
-      '!**/spec.js'
+      '!**/karma.conf.js'
     ];
+
+    // exclude all specs if no spec is mentioned in `files[]`
+    if (!includeSpec) {
+      defaultExcludes = defaultExcludes.concat(['!**/*.spec.*','!**/spec.js']);
+    }
+
     Array.prototype.push.apply(gpaths, defaultExcludes);
 
     config.fileNames = globby.sync(gpaths, { ignore: ["**/node_modules/**"] });

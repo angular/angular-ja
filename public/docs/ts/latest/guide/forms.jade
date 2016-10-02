@@ -85,7 +85,7 @@ figure.image-display
 
 :marked
   ## Setup
-  Create a new project folder (`angular2-forms`) and follow the steps in the [QuickStart](../quickstart.html).
+  Create a new project folder (`angular-forms`) and follow the steps in the [QuickStart](../quickstart.html).
 
 include ../_quickstart_repo
 :marked
@@ -141,6 +141,8 @@ code-example(format="").
 
   1. The `@Component` selector value of "hero-form" means we can drop this form in a parent template with a `<hero-form>` tag.
 
+  1. The `moduleId: module.id` property sets the base for module-relative loading of the `templateUrl`.
+  
   1. The `templateUrl` property points to a separate file for the template HTML called `hero-form.component.html`.
 
   1. We defined dummy data for `model` and `powers` as befits a demo.
@@ -206,7 +208,7 @@ code-example(format="").
 :marked
 .l-sub-section
   :marked
-    There is only one changes:
+    There is only one change:
 
     1. The `template` is simply the new element tag identified by the component's `selector` property.
     This will display the hero form when the application component is loaded.
@@ -500,7 +502,7 @@ figure.image-display
 .l-sub-section
   :marked
     Why "ngModel"?
-    A directive's [exportAs](../api/core/index/DirectiveMetadata-class.html#!#exportAs-anchor) property
+    A directive's [exportAs](../api/core/index/Directive-decorator.html) property
     tells Angular how to link the reference variable to the directive.
     We set `name` to `ngModel` because the `ngModel` directive's `exportAs` property happens to be "ngModel".
 
@@ -601,7 +603,7 @@ figure.image-display
 .l-sub-section
   :marked
     ### The NgForm directive
-    What `NgForm` directive? We didn't add an [NgForm](../api/common/index/NgForm-directive.html) directive!
+    What `NgForm` directive? We didn't add an [NgForm](../api/forms/index/NgForm-directive.html) directive!
 
     Angular did. Angular creates and attaches an `NgForm` directive to the `<form>` tag automatically.
 
@@ -693,7 +695,7 @@ figure.image-display
 
   Our final project folder structure should look like this:
 .filetree
-  .file angular2-forms
+  .file angular-forms
   .children
     .file app
     .children

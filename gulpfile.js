@@ -39,6 +39,7 @@ var DOCS_PATH = path.join(PUBLIC_PATH, 'docs');
 
 var EXAMPLES_PATH = path.join(DOCS_PATH, '_examples');
 var EXAMPLES_PROTRACTOR_PATH = path.join(EXAMPLES_PATH, '_protractor');
+var EXAMPLES_TESTING_PATH = path.join(EXAMPLES_PATH, 'testing/ts');
 var NOT_API_DOCS_GLOB = path.join(PUBLIC_PATH, './{docs/*/latest/!(api),!(docs)}/**/*.*');
 var RESOURCES_PATH = path.join(PUBLIC_PATH, 'resources');
 var LIVE_EXAMPLES_PATH = path.join(RESOURCES_PATH, 'live-examples');
@@ -92,21 +93,23 @@ var _excludeMatchers = _excludePatterns.map(function(excludePattern){
 var _exampleBoilerplateFiles = [
   '.editorconfig',
   'a2docs.css',
-  'karma.conf.js',
-  'karma-test-shim.js',
   'package.json',
   'styles.css',
   'systemjs.config.js',
   'tsconfig.json',
   'tslint.json',
-  'typings.json',
-  'wallaby.js'
- ];
+  'typings.json'
+];
 
 var _exampleDartWebBoilerPlateFiles = ['a2docs.css', 'styles.css'];
 
 var _exampleProtractorBoilerplateFiles = [
   'tsconfig.json'
+];
+
+var _exampleUnitTestingBoilerplateFiles = [
+  'karma-test-shim.js',
+  'karma.conf.js'
 ];
 
 var _exampleConfigFilename = 'example-config.json';
@@ -293,14 +296,16 @@ function runE2eTsTests(appDir, outputFile) {
   try {
     var exampleConfig = fs.readJsonSync(`${appDir}/${_exampleConfigFilename}`);
   } catch (e) {
-    exampleConfig = {
-      build: 'tsc',
-      run: 'http-server:e2e'
-    };
+    exampleConfig = {};
   }
 
-  var appBuildSpawnInfo = spawnExt('npm', ['run', exampleConfig.build], { cwd: appDir });
-  var appRunSpawnInfo = spawnExt('npm', ['run', exampleConfig.run, '--', '-s'], { cwd: appDir });
+  var config = {
+    build: exampleConfig.build || 'tsc',
+    run: exampleConfig.run || 'http-server:e2e'
+  };
+
+  var appBuildSpawnInfo = spawnExt('npm', ['run', config.build], { cwd: appDir });
+  var appRunSpawnInfo = spawnExt('npm', ['run', config.run, '--', '-s'], { cwd: appDir });
 
   return runProtractor(appBuildSpawnInfo.promise, appDir, appRunSpawnInfo, outputFile);
 }
@@ -465,7 +470,7 @@ gulp.task('_copy-example-boilerplate', function (done) {
   return argv.fast ? done() : buildStyles(copyExampleBoilerplate, done);
 });
 
-//Builds Angular 2 Docs CSS file from Bootstrap npm LESS source
+//Builds Angular Docs CSS file from Bootstrap npm LESS source
 //and copies the result to the _examples folder to be included as
 //part of the example boilerplate.
 function buildStyles(cb, done){
@@ -501,9 +506,17 @@ function copyExampleBoilerplate() {
     .then(function() {
       var protractorSourceFiles =
         _exampleProtractorBoilerplateFiles
-          .map(function(name) {return path.join(EXAMPLES_PROTRACTOR_PATH, name);});;
+          .map(function(name) {return path.join(EXAMPLES_PROTRACTOR_PATH, name); });
       var e2eSpecPaths = getE2eSpecPaths(EXAMPLES_PATH);
       return copyFiles(protractorSourceFiles, e2eSpecPaths, destFileMode);
+    })
+    // copy the unit test boilerplate
+    .then(function() {
+      var unittestSourceFiles =
+        _exampleUnitTestingBoilerplateFiles
+          .map(function(name) { return path.join(EXAMPLES_TESTING_PATH, name); });
+      var unittestPaths = getUnitTestingPaths(EXAMPLES_PATH);
+      return copyFiles(unittestSourceFiles, unittestPaths, destFileMode);
     });
 }
 
@@ -637,7 +650,7 @@ gulp.task('build-dart-api-docs', ['_shred-api-examples', 'dartdoc'], function() 
 // Using the --build flag will use systemjs.config.plunker.build.js (for preview builds)
 gulp.task('build-plunkers', ['_copy-example-boilerplate'], function() {
   regularPlunker.buildPlunkers(EXAMPLES_PATH, LIVE_EXAMPLES_PATH, { errFn: gutil.log, build: argv.build });
-  return embeddedPlunker.buildPlunkers(EXAMPLES_PATH, LIVE_EXAMPLES_PATH, { errFn: gutil.log, build: argv.build });
+  return embeddedPlunker.buildPlunkers(EXAMPLES_PATH, LIVE_EXAMPLES_PATH, { errFn: gutil.log, build: argv.build, targetSelf: argv.targetSelf });
 });
 
 gulp.task('build-dart-cheatsheet', [], function() {
@@ -893,7 +906,7 @@ function harpCompile() {
   env({ vars: { NODE_ENV: "production" } });
   gutil.log("NODE_ENV: " + process.env.NODE_ENV);
 
-  if(skipLangs && fs.existsSync('www')) {
+  if(skipLangs && fs.existsSync('www') && backupApiHtmlFilesExist('www')) {
     gutil.log(`Harp site recompile: skipping recompilation of API docs for [${skipLangs}]`);
     gutil.log(`API docs will be copied from existing www folder.`)
     del.sync('www-backup'); // remove existing backup if it exists
@@ -901,7 +914,8 @@ function harpCompile() {
   } else {
     gutil.log(`Harp full site compile, including API docs for all languages.`);
     if (skipLangs)
-      gutil.log(`Ignoring API docs skip set (${skipLangs}) because full site has not been built yet.`);
+      gutil.log(`Ignoring API docs skip set (${skipLangs}) because full ` +
+      `site has not been built yet or some API HTML files are missing.`);
   }
 
   var deferred = Q.defer();
@@ -1047,9 +1061,26 @@ function restoreApiHtml() {
     const relApiDir = path.join('docs', lang, vers, 'api');
     const wwwApiSubdir = path.join('www', relApiDir);
     const backupApiSubdir = path.join('www-backup', relApiDir);
-    gutil.log(`cp ${backupApiSubdir} ${wwwApiSubdir}`)
-    fs.copySync(backupApiSubdir, wwwApiSubdir);
+    if (fs.existsSync(backupApiSubdir) || argv.forceSkipApi !== true) {
+      gutil.log(`cp ${backupApiSubdir} ${wwwApiSubdir}`)
+      fs.copySync(backupApiSubdir, wwwApiSubdir);
+    }
   });
+}
+
+// For each lang in skipLangs, ensure API dir exists in www-backup
+function backupApiHtmlFilesExist(folderName) {
+  const vers = 'latest';
+  var result = 1;
+  skipLangs.forEach(lang => {
+    const relApiDir = path.join('docs', lang, vers, 'api');
+    const backupApiSubdir = path.join(folderName, relApiDir);
+    if (!fs.existsSync(backupApiSubdir)) {
+      gutil.log(`WARNING: API docs HTML folder doesn't exist: ${backupApiSubdir}`);
+      result = 0;
+    }
+  });
+  return result;
 }
 
 // Copies fileNames into destPaths, setting the mode of the
@@ -1119,6 +1150,14 @@ function getDartExampleWebPaths(basePath) {
   return paths;
 }
 
+function getUnitTestingPaths(basePath) {
+  var examples = getPaths(basePath, _exampleConfigFilename, true);
+  return examples.filter((example) => {
+    var exampleConfig = fs.readJsonSync(`${example}/${_exampleConfigFilename}`, {throws: false});
+    return exampleConfig && !!exampleConfig.unittesting;
+  });
+}
+
 function getPaths(basePath, filename, includeBase) {
   var filenames = getFilenames(basePath, filename, includeBase);
   var paths = filenames.map(function(fileName) {
@@ -1153,7 +1192,7 @@ function watchAndSync(options, cb) {
 
   // When using the --focus=name flag, only **/name/**/*.* example files and
   // **/name.jade files are watched. This is useful for performance reasons.
-  // Example: gulp serve-and-sync --focus=architecture 
+  // Example: gulp serve-and-sync --focus=architecture
   var focus = argv.focus;
 
   if (options.devGuide) {
@@ -1200,7 +1239,7 @@ function filterOutExcludedPatterns(fileNames, excludeMatchers) {
 }
 
 function apiSourceWatch(postBuildAction) {
-  var srcPattern = [path.join(ANGULAR_PROJECT_PATH, 'modules/@angular/src/**/*.*')];
+  var srcPattern = [path.join(ANGULAR_PROJECT_PATH, 'modules/@angular/**/*.*')];
   gulp.watch(srcPattern, {readDelay: 500}, function (event, done) {
     gutil.log('API source changed');
     gutil.log('Event type: ' + event.event); // added, changed, or deleted
@@ -1228,7 +1267,7 @@ function apiExamplesWatch(postShredAction) {
 }
 
 function devGuideExamplesWatch(shredOptions, postShredAction, focus) {
-  var watchPattern = focus ? '**/' + focus + '/**/*.*' : '**/*.*';
+  var watchPattern = focus ? '**/{' + focus + ',cb-' + focus+ '}/**/*.*' : '**/*.*';
   var includePattern = path.join(shredOptions.examplesDir, watchPattern);
   // removed this version because gulp.watch has the same glob issue that dgeni has.
   // var excludePattern = '!' + path.join(shredOptions.examplesDir, '**/node_modules/**/*.*');

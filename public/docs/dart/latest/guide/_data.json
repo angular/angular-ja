@@ -10,7 +10,7 @@
   "architecture": {
     "title": "Architecture Overview",
     "navTitle": "Architecture",
-    "intro": "The basic building blocks of Angular 2 applications",
+    "intro": "The basic building blocks of Angular applications",
     "nextable": true,
     "basics": true
   },
@@ -36,13 +36,6 @@
     "basics": true
   },
 
-  "forms-deprecated": {
-    "title": "Forms",
-    "intro": "A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors.",
-    "basics": true,
-    "hide": true
-  },
-
   "dependency-injection": {
     "title": "Dependency Injection",
     "intro": "Angular's dependency injection system creates and delivers dependent services \"just-in-time\".",
@@ -59,14 +52,14 @@
 
   "cheatsheet": {
     "title": "Angular Cheat Sheet",
-    "intro": "A quick guide to Angular syntax.",
+    "intro": "A quick guide to Angular syntax. (Content is provisional and may change.)",
     "nextable": true,
     "basics": true
   },
 
   "style-guide": {
     "title": "Style Guide",
-    "intro": "Write Angular 2 with style.",
+    "intro": "Write Angular with style.",
     "basics": true
   },
 
@@ -87,6 +80,11 @@
     "intro": "Attribute directives attach behavior to elements."
   },
 
+  "browser-support": {
+    "title": "Browser support",
+    "intro": "Browser support and polyfills guide."
+  },
+
   "component-styles": {
     "title": "Component Styles",
     "intro": "Learn how to apply CSS styles to components."
@@ -94,7 +92,7 @@
 
   "glossary": {
     "title": "Glossary",
-    "intro": "Brief definitions of the most important words in the Angular 2 vocabulary",
+    "intro": "Brief definitions of the most important words in the Angular vocabulary",
     "basics": true
   },
 
@@ -125,15 +123,9 @@
     "intro": "Pipes transform displayed values within a template."
   },
 
-  "router-deprecated": {
-    "title": "Routing & Navigation",
-    "intro": "Discover the basics of screen navigation with the Angular 2 Component Router.",
-    "hide": true
-  },
-
   "router": {
     "title": "Routing & Navigation",
-    "intro": "Discover the basics of screen navigation with the Angular 2 Component Router."
+    "intro": "Discover the basics of screen navigation with the Angular Component Router."
   },
 
   "security": {
@@ -148,13 +140,13 @@
 
   "testing": {
     "title": "Testing",
-    "intro": "Techniques and practices for testing an Angular 2 app",
+    "intro": "Techniques and practices for testing an Angular app",
     "hide": true
   },
 
   "typescript-configuration": {
     "title": "TypeScript Configuration",
-    "intro": "TypeScript configuration for Angular 2 developers",
+    "intro": "TypeScript configuration for Angular developers",
     "hide": true
   },
 
@@ -166,7 +158,7 @@
 
   "webpack": {
     "title": "Webpack: an introduction",
-    "intro": "Create your Angular 2 applications with a Webpack based tooling",
+    "intro": "Create your Angular applications with a Webpack based tooling",
     "hide": true
   }
 }

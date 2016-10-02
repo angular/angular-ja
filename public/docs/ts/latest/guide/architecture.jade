@@ -4,7 +4,7 @@ block includes
   - var _at_angular = '@angular'
 
 :marked
-  Angular 2 is a framework for building client applications in HTML and
+  Angular is a framework for building client applications in HTML and
   either JavaScript or a language (like Dart or TypeScript) that compiles to JavaScript.
 
 block angular-parts
@@ -27,7 +27,7 @@ figure
   img(src="/resources/images/devguide/architecture/overview2.png" alt="overview" style="margin-left:-40px;" width="700")
 
 :marked
-  The architecture diagram identifies the eight main building blocks of an Angular 2 application:
+  The architecture diagram identifies the eight main building blocks of an Angular application:
 
   * [Modules](#modules)
   * [Components](#components)
@@ -154,6 +154,7 @@ figure
 
 .l-main-section
 :marked
+  <a id="components"></a>
   ## Components
 figure
   img(src="/resources/images/devguide/architecture/hero-component.png" alt="Component" align="left" style="width:200px; margin-left:-40px;margin-right:10px" )
@@ -251,17 +252,14 @@ block ts-decorator
     Here are a few of the possible `@Component` configuration options:
 
 :marked
+  - `moduleId`: sets the source of the base address (`module.id`) for module-relative URLs such as the `templateUrl`.
+
   - `selector`: CSS selector that tells Angular to create and insert an instance of this component
   where it finds a `<hero-list>` tag in *parent* HTML.
   For example, if an app's  HTML contains `<hero-list></hero-list>`, then
   Angular inserts an instance of the `HeroListComponent` view between those tags.
 
-  - `templateUrl`: address of this component's HTML template, shown [above](#templates).
-
-  - `directives`: !{_array} of the components or directives that *this* template requires.
-  In the last line of `hero-list.component.html`, Angular inserts a `HeroDetailComponent`
-  in the space indicated by `<hero-detail>` tags.
-  Angular does so only if `HeroDetailComponent` is in this `directives` !{_array}.
+  - `templateUrl`: module-relative address of this component's HTML template, shown [above](#templates).
 
   - `providers`: !{_array} of **dependency injection providers** for services that the component requires.
   This is one way to tell Angular that the component's constructor requires a `HeroService`
@@ -574,6 +572,5 @@ code-example().
   > [**Router**](router.html): Navigate from page to page within the client
     application and never leave the browser.
 
-  > [**Testing**](testing.html): Run unit tests with Angular's 
-  [testing library](https://pub.dartlang.org/packages/angular2_testing)
-   on your application parts as they interact with the Angular framework.
+  > [**Testing**](testing.html): Run unit tests on your application parts as they interact with the Angular framework
+  using the _Angular Testing Platform_.

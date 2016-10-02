@@ -101,6 +101,11 @@ var _exampleUnitTestingBoilerplateFiles = [
   'karma.conf.js'
 ];
 
+var _exampleUnitTestingBoilerplateFiles = [
+  'karma-test-shim.js',
+  'karma.conf.js'
+];
+
 var _exampleConfigFilename = 'example-config.json';
 
 var _styleLessName = 'a2docs.less';

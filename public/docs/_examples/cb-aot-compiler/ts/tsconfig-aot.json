@@ -6,14 +6,15 @@
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2015", "dom"],
+    "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
   },
 
   "files": [
     "app/app.module.ts",
-    "app/main.ts"
+    "app/main.ts",
+    "./typings/index.d.ts"
   ],
 
   "angularCompilerOptions": {

@@ -1,7 +1,7 @@
 # Angular-ja
 [![Build Status][travis-badge]][travis-badge-url]
 
-Angular-ja はAngular2のドキュメンテーションサイト [Angular.io](https://github.com/angular/angular.io)を日本語に翻訳したサイトです。
+Angular-ja はAngularのドキュメンテーションサイト [Angular.io](https://github.com/angular/angular.io)を日本語に翻訳したサイトです。
 翻訳作業へのコントリビューションについては、[Wiki](https://github.com/angular/angular-ja/wiki)を参考にしてください。 
 
 This site also includes links to other helpful angular resources including 
@@ -21,6 +21,8 @@ We can't handle those topics here and will ask you to re-post them on the angula
 Filing issues is helpful but **pull requests** that improve the docs are even better!
 
 Learn how to [contribute to Angular.io](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md).
+
+> **IMPORTANT**: Do _NOT_ make changes to cached files under `public/docs/ts/_cache`. Cached files are updated through a separate workflow.
 
 ## Development Setup
 This site relies heavily on node and npm.

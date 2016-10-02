@@ -30,7 +30,7 @@ block package-and-config-files
     packages as dependencies, as well as the `angular2` transformer.
     It can also specify other packages and transformers for the app to use,
     such as [dart_to_js_script_rewriter](https://pub.dartlang.org/packages/dart_to_js_script_rewriter).
-    Angular 2 is still changing, so provide an exact version: **2.0.0-beta.20**.
+    Angular 2 is still changing, so provide an exact version: **2.0.0-beta.22**.
 
     [pubspec]: https://www.dartlang.org/tools/pub/pubspec.html
 
@@ -41,7 +41,7 @@ block install-packages
     From the project folder, run `pub get` to install the angular2 and browser
     packages (along with the packages they depend on).
 
-  code-example(language="sh").
+  code-example(language="sh" class="code-shell").
     &gt; <span class="blk">pub get</span>
     Resolving dependencies...
 
@@ -79,7 +79,7 @@ block run-app
 block build-app
   .alert.is-important
     :marked
-      If you don't see **My First Angular 2 App**, make sure you've entered all the code correctly,
+      If you don't see **My First Angular App**, make sure you've entered all the code correctly,
       in the [proper folders](#wrap-up),
       and run `pub get`.
 
@@ -90,7 +90,7 @@ block build-app
       Before deploying the app, we need to generate JavaScript files.
       The `pub build` command makes that easy.
 
-    code-example(language="sh").
+    code-example(language="sh" class="code-shell").
       &gt; <span class="blk">pub build</span>
       Loading source assets...
 

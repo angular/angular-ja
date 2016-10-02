@@ -5,6 +5,11 @@
     "description": "A collection of recipes for common Angular application scenarios"
   },
 
+  "aot-compiler": {
+    "title": "Ahead-of-Time Compilation",
+    "intro": "Learn how to use Ahead-of-time compilation"
+  },
+
   "a1-a2-quick-reference": {
     "title": "Angular 1 to 2 Quick Reference",
     "navTitle": "Angular 1 to 2 Quick Ref",
@@ -31,13 +36,6 @@
     "intro": "Techniques for Dependency Injection"
   },
 
-  "dynamic-form-deprecated": {
-    "title": "Dynamic Forms",
-    "intro": "Render dynamic forms with NgFormModel",
-    "basics": true,
-    "hide": true
-  },
-
   "dynamic-form": {
     "title": "Dynamic Forms",
     "intro": "Render dynamic forms with FormGroup"
@@ -48,9 +46,9 @@
     "intro": "Validate user's form entries"
   },
 
-  "rc4-to-rc5": {
-    "title": "RC4 to RC5 Migration",
-    "intro": "Migrate your RC4 app to RC5 in minutes."
+  "i18n": {
+    "title": "Internationalization (i18n)",
+    "intro": "Translate the app's template text into multiple languages"
   },
 
   "set-document-title": {
@@ -60,7 +58,7 @@
 
   "ts-to-js": {
     "title": "TypeScript to JavaScript",
-    "intro": "Convert Angular 2 TypeScript examples into ES5 JavaScript"
+    "intro": "Convert Angular TypeScript examples into ES5 JavaScript"
   },
 
   "visual-studio-2015": {

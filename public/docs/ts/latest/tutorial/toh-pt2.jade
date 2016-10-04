@@ -21,13 +21,13 @@ include ../_util-fns
   so we’ll need a way to do that.
 
   ヒーローのリストを表示するために必要なことを確認しましょう。
-  はじめに、ヒーローのリストが要ります。また、それをテンプレートに表示するための方法が必要となります。
+  はじめに、ヒーローのリストが必要です。また、それをテンプレートに表示するための方法が必要となります。
 
 .l-main-section
 :marked
   ## Where We Left Off
 
-  ## 休んでいたところ
+  ## これまでの歩み
   Before we continue with Part 2 of the Tour of Heroes,
   let’s verify we have the following structure after [Part 1](./toh-pt1.html).
   If not, we’ll need to go back to Part 1 and figure out what we missed.
@@ -58,7 +58,7 @@ include ../_util-fns
   ### トランスパイルと実行を維持する
   We want to start the TypeScript compiler, have it watch for changes, and start our server. We'll do this by typing
 
-  TypeScriptコンパイラを起動し、変更を監視させて、サーバーを起動しておきたいと思います。そうするには次のように打ち込みましょう。
+  TypeScriptコンパイラを起動し、変更を監視させて、サーバーを起動しておきたいと思います。次のように打ち込みましょう。
 
 code-example(language="bash").
   npm start
@@ -97,7 +97,7 @@ code-example(language="bash").
   ### ヒーローたちを公開する
   Let’s create a public property in `AppComponent` that exposes the heroes for binding.
 
-  バインディングしてヒーローたちを公開するためのプロパティを`AppComponent`に作りましょう。
+  バインディングのためにヒーローたちを公開するプロパティを`AppComponent`に作りましょう。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'hero-array-1', 'app.component.ts (hero array property)')
 
@@ -122,7 +122,7 @@ code-example(language="bash").
   Our component has `heroes`. Let’s create an unordered list in our template to display them.
   We’ll insert the following chunk of HTML below the title and above the hero details.
 
-  コンポーネントは`heroes`を保持しています。それを表示するために、テンプレートに番号なしリストを作ってみましょう。
+  コンポーネントは`heroes`を持っています。それを表示するために、テンプレートに番号なしリストを作ってみましょう。
   タイトルとヒーロー詳細の間に、以下のHTMLを差し込んでください。
 
 +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'heroes-template-1', 'app.component.ts (heroes template)')
@@ -160,7 +160,7 @@ code-example(language="bash").
     The (`*`) prefix to `ngFor` indicates that the `<li>` element and its children
     constitute a master template.
 
-    `ngFor`の(`*`)プリフィックスは、マスターテンプレートが`<li>`要素とその子要素によって構成されていることを示しています。
+    `ngFor`の(`*`)接頭辞は、マスターテンプレートが`<li>`要素とその子要素によって構成されていることを示しています。
 
     The `ngFor` directive iterates over the `heroes` array returned by the `AppComponent.heroes` property
     and stamps out instances of this template.
@@ -172,7 +172,7 @@ code-example(language="bash").
     “*take each hero in the `heroes` array, store it in the local `hero` variable,
     and make it available to the corresponding template instance*”.
 
-    `nfFor`に割り当てられたテキストは次のことを意味しています。
+    `ngFor`に割り当てられたテキストは次のことを意味しています。
     "*`heroes`配列から取り出したヒーローをローカル変数`hero`に格納して、対応するテンプレートのインスタンスが利用できるようにする。*"
 
     The `let` keyword before "hero" identifies `hero` as a template input variable.
@@ -185,7 +185,7 @@ code-example(language="bash").
     [Displaying Data](../guide/displaying-data.html#ngFor) and
     [Template Syntax](../guide/template-syntax.html#ngFor) chapters.
 
-    `nfFor`とテンプレート入力変数についての詳細は、
+    `ngFor`とテンプレート入力変数についての詳細は、
     [データを表示する](../guide/displaying-data.html#ngFor)と[テンプレート構文](../guide/template-syntax.html#ngFor)の章を参照してください。
 
 :marked
@@ -225,7 +225,7 @@ code-example(language="bash").
   That's a lot of styles! We can put them inline as shown here, or we can move them out to their own file which will make it easier to code our component. 
   We'll do this in a later chapter. For now let's keep rolling.
 
-  スタイルの量が多すぎる！ここで見ているようにスタイルをインラインで記述することもできますし、コンポーネントの記述を簡単にするために別ファイルに切り出すこともできます。
+  スタイルの量が多すぎます！ここで見ているようにスタイルをインラインで記述することもできますし、コンポーネントの記述を簡単にするために別ファイルに切り出すこともできます。
   これは後の章でやります。今はこのまま進めましょう。
 
   When we assign styles to a component they are scoped to that specific component.
@@ -265,7 +265,7 @@ code-example(language="bash").
     ### クリックイベント
     We modify the `<li>` by inserting an Angular event binding to its click event.
 
-    `<li>`を修正して、クリックイベントに紐付いているAngularイベントを追加しましょう。
+    `<li>`を修正して、Angularのイベントバインディングをクリックイベントに追加しましょう。
 
   +makeExample('toh-2/ts-snippets/app.component.snippets.pt2.ts', 'selectedHero-click', 'app.component.ts (template excerpt)')
 
@@ -281,8 +281,8 @@ code-example(language="bash").
     passing the template input variable `hero` as an argument.
     That’s the same `hero` variable we defined previously in the `ngFor`.
 
-    丸括弧によって、`<li>`要素の`click`イベントとして識別されます。
-    イコール記号の右辺の式は`AppComponent`メソッドである`onSelect()`を呼んでいて、引数としてテンプレート入力変数`hero`を渡しています。
+    丸括弧は`<li>`要素の`click`イベントをターゲットとして識別します。
+    等号の右辺の式は`AppComponent`メソッドである`onSelect()`を呼んでいて、引数としてテンプレート入力変数`hero`を渡しています。
     これは、`ngFor`で以前定義したのと同じ`hero`変数です。
   .l-sub-section
     :marked
@@ -384,12 +384,12 @@ code-example(language="bash").
       Remember that the leading asterisk (`*`) in front of `ngIf` is
       a critical part of this syntax.
 
-      `nfIf`の頭にあるアスタリスクがこの構文の重要な部分となることを思い出しましょう。
+      `ngIf`の頭にあるアスタリスク(`*`)がこの構文の重要な部分となることを思い出しましょう。
   :marked
     When there is no `selectedHero`, the `ngIf` directive removes the hero detail HTML from the DOM.
     There will be no hero detail elements and no bindings to worry about.
 
-    `selectedHero`が存在しない場合、`nfIf`ディレクティブがDOMからヒーロー詳細のHTMLを取り除いてくれます。
+    `selectedHero`が存在しない場合、`ngIf`ディレクティブがDOMからヒーロー詳細のHTMLを取り除いてくれます。
     ヒーロー詳細の要素やバインディングに関して心配せずにすみます。
 
     When the user picks a hero, `selectedHero` becomes "truthy" and
@@ -403,7 +403,7 @@ code-example(language="bash").
       structure of portions of the DOM.
       In other words, they give structure to the way Angular displays content in the DOM.
 
-      DOMの構成を一部変更できるので、`ngIf`と`nfFor`は“構造ディレクティブ”と呼ばれています。
+      DOMの構成を一部変更できるので、`ngIf`と`ngFor`は“構造ディレクティブ”と呼ばれています。
       つまり、AngularがDOMに要素を表示する手段として構成を変更できるようにしています。
 
       Learn more about `ngIf`, `ngFor` and other structural directives in the
@@ -504,7 +504,7 @@ code-example(language="bash").
 
   * Tour of Heroes に選択可能なヒーローリストを表示させる
   * 選択したヒーローの詳細を表示できるようにする
-  * コンポーネントのテンプレートで、組み込みディレクティブの`ngIf`と`nfFor`を使えるようになる
+  * コンポーネントのテンプレートで、組み込みディレクティブの`ngIf`と`ngFor`を使えるようになる
 
   Run the <live-example></live-example> for this part.
 

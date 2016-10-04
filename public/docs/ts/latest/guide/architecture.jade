@@ -116,7 +116,7 @@ figure
     Learn more</a> about decorators on the web.
 
     デコレーターは、JavaScriptのクラスを修飾する関数です。
-    Angularはクラスにメタデータをつけ加えるたくさんのデコレーターを持っており、
+    Angularはクラスにメタデータをつけ加えるたくさんのデコレーターをもっており、
     そのためそれらのクラスがどのようなもので、どのように動作するべきかを知っています。
     デコレーターについては、このwebサイトで
     <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.x5c2ndtx0" target="_blank">
@@ -301,8 +301,8 @@ figure
   that it acquires from a service.
   `HeroListComponent` also has a `selectHero()` method that sets a `selectedHero` property when the user clicks to choose a hero from that list.
 
-  たとえば、この`HeroListComponent`は、サービスから取得したheroes配列を返す`heroes`プロパティをもっています。
-  `HeroListComponent`は`selectHero()`メソッドも持っており、それはユーザーがクリックして一覧からひとりのヒーローを選択した時に、
+  たとえば、この`HeroListComponent`には、サービスから取得したheroes配列を返す`heroes`プロパティがあります。
+  `HeroListComponent`には`selectHero()`メソッドもあり、それはユーザーがクリックして一覧からひとりのヒーローを選択した時に、
   `selectedHero`プロパティをセットします。
 
 +makeExcerpt('app/hero-list.component.ts', 'class')
@@ -501,7 +501,7 @@ figure
 
   As the diagram shows, there are four forms of data binding syntax. Each form has a direction &mdash; to the DOM, from the DOM, or in both directions.
 
-  図が示すように、データバインディングの構文は四種類あります。それぞれの種類は、DOMへ、DOMから、または双方向に、といった方向を持っています。
+  図が示すように、データバインディングの構文は四種類あります。それぞれの種類は、DOMへ、DOMから、または双方向に、といった方向をもっています。
 <br clear="all">
 :marked
   The `HeroListComponent` [example](#templates) template has three forms:
@@ -723,7 +723,7 @@ figure
   The `HeroService` depends on the `Logger` service and another `BackendService` that handles the server communication grunt work.
 
   ヒーローたちをフェッチして、解決された!{_PromiseLinked}につつまれた彼らを返す`HeroService`がこちらです。
-  `HeroService`は`Logger`サービスと、もう一つの`BackendService`に依存しています。
+  `HeroService`は`Logger`サービスと、もうひとつの`BackendService`に依存しています。
   `BackendService`はサーバーとの通信のつまらない仕事を処理します。
 
 
@@ -815,7 +815,7 @@ figure
 :marked
   If the injector doesn't have a `HeroService`, how does it know how to make one?
 
-  もしインジェクターが`HeroService`を持っていないならば、それを作成する方法をどうやって知るのでしょうか？
+  もしインジェクターが`HeroService`をもっていないならば、それを作成する方法をどうやって知るのでしょうか？
 
   In brief, you must have previously registered a **provider** of the `HeroService` with the injector.
   A provider is something that can create or return a service, typically the service class itself.

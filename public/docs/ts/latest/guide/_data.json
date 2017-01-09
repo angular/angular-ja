@@ -44,7 +44,7 @@
 
   "displaying-data": {
     "title": "Displaying Data",
-    "intro": "Property binding helps show app data in the UI.",
+    "intro": "Interpolation and other forms of property binding help us show app data in the UI.",
     "nextable": true,
     "basics": true
   },
@@ -91,8 +91,8 @@
   },
 
   "glossary": {
-    "title": "Glossary",
-    "intro": "Brief definitions of the most important words in the Angular vocabulary",
+    "title": "用語集",
+    "intro": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。",
     "basics": true
   },
 

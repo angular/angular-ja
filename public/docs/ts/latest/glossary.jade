@@ -12,9 +12,9 @@ block includes
   Angular has a vocabulary of its own.
   Most Angular terms are everyday English words
   with a specific meaning within the Angular system.
-  
-  Angular 2には独自の用語があります。
-  ほとんどのAngular 2の用語は、Angularシステムの中で特別な意味をもつ常用英単語です。
+
+  Angularには独自の用語があります。
+  ほとんどのAngularの用語は、Angularシステムの中で特別な意味をもつ常用英単語です。
 
   This glossary lists the most prominent terms
   and a few less familiar ones that have unusual or
@@ -276,15 +276,16 @@ a#aot
     framework handle the details.
 
     データの値をHTMLに与え、イベントリスナーを付加し、スクリーンから変更された値を取得し、そしてデータの値を更新します。これらはすべて手動でやることもできます。
+    もしくは、HTMLウィジェットとアプリケーションデータソースの間の関係を定義して、データバインディングフレームワークが詳細を処理するようにすることもできます。
 
     Angular has a rich data binding framework with a variety of data binding
     operations and supporting declaration syntax.
 
-    もしくは、HTMLウィジェットとアプリケーションデータソースの間の関係を定義して、データバインディングフレームワークが詳細を処理するようにすることもできます。
+    Angularは、多様なデータバインディング操作と宣言構文をサポートする高機能なデータバインディングフレームワークを供えています。
 
      Read about the forms of binding in the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page:
      
-     バインディングには多くの形式があります：
+     データバインディングについて詳しく知るには[テンプレート構文](!{docsLatest}/guide/template-syntax.html#data-binding)の章を参照してください。
      * [Interpolation](!{docsLatest}/guide/template-syntax.html#interpolation).
      * [補間](!{docsLatest}/guide/template-syntax.html#interpolation)
      * [Property binding](!{docsLatest}/guide/template-syntax.html#property-binding).
@@ -324,8 +325,12 @@ a#aot
         
         To apply a decorator, position it immediately above or to the left of the thing it decorates.
 
+        To apply a decorator, position it immediately above or to the left of the thing it decorates.
+
         デコレーターを適用するには、修飾する対象の直上か左にデコレーターを配置します。
         
+        Angular has its own set of decorators to help it interoperate with your application parts.
+
         Angular has its own set of decorators to help it interoperate with your application parts.
         Here is an example of a `@Component` decorator that identifies a
         class as an Angular [component](#component) and an `@Input` decorator applied to the `name` property
@@ -335,6 +340,7 @@ a#aot
         こちらは、クラスをAngularの[コンポーネント](#component)と識別する`@Component`デコレーター、およびそのコンポーネントのプロパティに適用される`@Input`デコレーターの例です。
         ここでは省略した`@Component`の引数オブジェクトには、関連するコンポーネントのメタデータを含めます。
         
+
         ```
         @Component({...})
         export class AppComponent {
@@ -372,7 +378,7 @@ a#aot
 
     Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てることを好み、
     その後、実行時にそれぞれをつなぎます。
-    
+
     These parts often rely on other parts. An Angular [component](#component)
     part might rely on a service part to get data or perform a calculation. When
     part "A" relies on another part "B", you say that "A" depends on "B" and
@@ -381,7 +387,7 @@ a#aot
     これらの部品は他の部品に依存していることがよくあります。Angularの[コンポーネント](#component)部分は
     データを取得し計算を処理するサービス部分に依存しているかもしれません。"A" 部分が他の "B" 部分に依存しているとき、
     "A" は "B" に依存している、または "B" は "A" の依存性であるといいます。
-    
+
     You can ask a "dependency injection system" to create "A"
     for us and handle all the dependencies.
     If "A" needs "B" and "B" needs "C", the system resolves that chain of dependencies
@@ -404,7 +410,7 @@ a#aot
 
     その中心には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
     `injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
-        
+
     A token is an Angular type (`OpaqueToken`). You rarely deal with tokens directly; most
     methods accept a class name (`Foo`) or a string ("foo") and Angular converts it
     to a token. When you write `injector.get(Foo)`, the injector returns
@@ -414,7 +420,7 @@ a#aot
     ほとんどのメソッドはクラス名(`Foo`)もしくは文字列("foo")を受け入れて、Angularがトークンに変換するからです。
     わたしたちが`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
     通常その値は`Foo`クラスのインスタンスそのものです。
-    
+
     During many of its operations, Angular makes similar requests internally, such as when it creates a [`component`](#component) for display.
 
     Angularは、表示のために[`コンポーネント`](#component)を作るような処理において、似た要求を内部的にしています。
@@ -425,7 +431,7 @@ a#aot
 
     この`インジェクター`は、トークンと依存性の値とのマップを内部的に管理しています。
     もし`インジェクター`が与えられたトークンにマップされた値を見つけられないときには、そのトークンの`プロバイダー`を使って新しく値を作成します。
-    
+
     A [provider](#provider) is a recipe for
     creating new instances of a dependency value associated with a particular token.
 
@@ -444,9 +450,9 @@ a#aot
 
     Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
     そしてわたしたちは自分のプロバイダーを登録できます。
-    
+
     Read more in the [Dependency Injection](!{docsLatest}/guide/dependency-injection.html) page.
-    
+
     詳しく知るには[依存性の注入](!{docsLatest}/guide/dependency-injection.html)の章を参照してください。    
 :marked
   ## Directive
@@ -492,7 +498,7 @@ a#aot
     1. [コンポーネント](#component)。アプリケーションの[ビュー]をレンダリングするHTMLテンプレートと、
     アプリケーションのロジックをつなげるものです。通常、コンポーネントはHTML要素のことを指します。
     コンポーネントはAngularアプリケーションの構成要素であり、開発者によって記述されることが期待されています。
-    
+
     1. [Attribute directives](#attribute-directive) that can listen to and modify the behavior of
     other HTML elements, attributes, properties, and components. They are usually represented
     as HTML attributes, hence the name.
@@ -500,7 +506,7 @@ a#aot
     1. [属性ディレクティブ](#attribute-directive)。他のHTML要素、属性、プロパティ、およびコンポーネントの
     振る舞いを監視して変更することができるものです。名前からわかるように、通常、属性ディレクティブはHTML属性のことを
     指します。
-    
+
     1. [Structural directives](#structural-directive), a directive responsible for
     shaping or reshaping HTML layout, typically by adding, removing, or manipulating
     elements and their children.
@@ -526,7 +532,7 @@ a#aot
 
     JavaScriptの最新の承認されたバージョンは
     [ECMAScript 2016](http://www.ecma-international.org/ecma-262/7.0/)
-    (通称"ES2016"または"ES7")であり、多くのAngular 2開発者はこのバージョンか、[TypeScript](#typesScript)のような、
+    (通称"ES2016"または"ES7")であり、多くのAngular開発者はこのバージョンか、[TypeScript](#typesScript)のような、
     このバージョンの対応に取り組む言語のいずれかを使用してアプリケーションを書くでしょう。
 
     Most modern browsers today only support the much older "ECMAScript 5" (AKA ES5) standard.
@@ -539,7 +545,7 @@ a#aot
     
     Angular developers may choose to write in ES5 directly.
 
-    Angular 2アプリケーションを、ES5で直接書くこともできます。
+    Angularアプリケーションを、ES5で直接書くこともできます。
 
 :marked
   ## ES2015
@@ -598,7 +604,7 @@ a#H
     ***対象***になるディレクティブプロパティです。
     データ値はデータソースからこのプロパティに流れ*こみます*。
     データソースはテンプレート式の中で等号の右側で識別されます。
-    
+
     See the [Input and output properties](!{docsLatest}/guide/template-syntax.html#inputs-outputs) section of the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
 
     [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章を参照してください。
@@ -666,7 +672,7 @@ a#jit
     managed by Angular as it creates, updates, and destroys them.
 
     [ディレクティブ](#directive) と [コンポーネント](#component)は、Angularがそれらの作成、更新、破棄を管理するためのライフサイクルを持っています。
-    
+
     You can tap into key moments in that lifecycle by implementing
     one or more of the lifecycle hook interfaces.
 
@@ -765,7 +771,7 @@ a#jit
       モジュールは慣例として、エクスポートしたものが定義されているファイルに因んで命名されます。
       Angularの[DatePipe](https://github.com/angular/angular/blob/master/modules/@angular/common/src/pipes/date_pipe.ts)クラスは、
       `date_pipe.ts`ファイルの中の`date_pipe`と名前付けられた機能モジュールに所属します。
-      
+
       You rarely access Angular feature modules directly. You usually import them from one of the Angular [scoped packages](#scoped-package) such as `@angular/core`.
 
       開発者がAngularの機能モジュールに直接アクセスすることは、ほとんどありません。
@@ -810,7 +816,7 @@ a#N
 
     See the [Input and output properties](!{docsLatest}/guide/template-syntax.html#inputs-outputs) section of the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page.
 
-    [テンプレート構文](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章を参照してください。
+    [インプットとアウトプット](!{docsLatest}/guide/template-syntax.html#inputs-outputs)の章を参照してください。
 
 .l-main-section#P
 
@@ -947,11 +953,11 @@ a#Q
 
       For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
-      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
+      詳細は、[ルーティングとナビゲーション](!{docsLatest}/guide/router.html)の章を参照してください。
 
 +ifDocsFor('ts|js')
   :marked
-    ## RouterModule
+    ## Router module
   .l-sub-section
     :marked
       A separate [Angular module](#angular-module) that provides the necessary service providers and directives for navigating through application views.
@@ -961,7 +967,7 @@ a#Q
       
       For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
-      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
+      詳細は、[ルーティングとナビゲーション](!{docsLatest}/guide/router.html)の章を参照してください。
 
 :marked
   ## Routing component
@@ -1106,7 +1112,7 @@ a#snake-case
       - 関連するAngularディレクティブには全て`ng`接頭辞が付けられています。たとえば、`ngForm`、`ngModel`、そして`ngModelGroup`などです。
 
       Template-driven forms are convenient, quick, and simple. They are a good choice for many basic data entry form scenarios.
-      
+
       テンプレート駆動フォームは便利で短時間で作成でき、そして単純なので、多数の基本的なデータ入力をするフォームの場合には良い選択です。
 
       Read about how to build template-driven forms
@@ -1165,7 +1171,7 @@ a#snake-case
     TypeScript is the preferred language for Angular development although
     you can use other JavaScript dialects such as [ES5](#es5).
 
-    TypeScriptはAngualr 2の開発において推奨される言語ですが、
+    TypeScriptはAngualrの開発において推奨される言語ですが、
     [ES5](#es5)のような他のJavaScriptの言語で書くことも歓迎します。
     
     Read more about TypeScript at [typescript.org](http://www.typescriptlang.org/).

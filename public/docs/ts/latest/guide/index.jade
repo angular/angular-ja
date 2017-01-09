@@ -15,10 +15,18 @@ block includes
   This page describes the Angular documentation at a high level.
   If you're new to Angular, you may want to visit "[Learning Angular](learning-angular.html)" first.
 
+  これは、HTMLと#{langName}でクライアントアプリケーションを構築する経験豊富なプログラマーのための、Angularの実践的な入門書です。
+  If you're new to Angular, you may want to visit "[Learning Angular](learning-angular.html)" first.
+
   ## Themes
+
+  ## 構成
 
   The documentation is divided into major thematic sections, each
   a collection of pages devoted to that theme.
+
+  ドキュメンテーションは主要なテーマ別に章立てされ、
+  それぞれの章では複数のページをさいてそのテーマについて説明しています。
 
 block js-alert
 
@@ -44,49 +52,84 @@ table(width="100%")
     td
       :marked
         Authoritative details about each of the Angular libraries.
+
+        Angularのライブラリの、それぞれのAPIについての正式な詳細です。
   tr(style=top)
     td <b><a href="../tutorial/">Tutorial</a></b>
     td
       :marked
         A step-by-step, immersive approach to learning Angular that
         introduces the major features of Angular in an application context.
+
+        段階的な、没入感のあるAngularの学習の手引きです。
+        アプリケーション開発を通じてAngularの主な特徴を紹介します。
   tr(style=top)
     td <b><a href="!{advancedUrl}">Advanced</a></b>
     td
       :marked
         In-depth analysis of Angular features and development practices.
+
+        Angularの特徴と開発プラクティスに関する詳細な分析です。
   tr(style=top if-docs="ts")
     td <b><a href="../cookbook/">Cookbook</a></b>
     td
       :marked
         Recipes for specific application challenges, mostly code snippets with a minimum of exposition.
 
+        特定の応用問題についてのレシピ集です。たいていは最小限の解説つきのコードスニペットです。
 :marked
   A few early pages are written as tutorials and are clearly marked as such.
   The rest of the pages highlight key points in code rather than explain each step necessary to build the sample.
   You can always get the full source through the #{_liveLink}s.
 
+  はじめの方の少しのページはチュートリアルとして書かれており、はっきりとそのように記されています。
+  のこりのページは、サンプルを構築するために必要なそれぞれの段階を説明するよりも、
+  コードの中で鍵となる点に脚光を当てています。
+  動作例へのリンクを通じて、いつでも完全なソースコードを手に入れることができます。
   ## Code samples
+
+  ## コードサンプル
 
   Each page includes code snippets from a sample application that accompanies the page.
   You can reuse these snippets in your applications.
 
+  それぞれのページにはあなたのアプリケーションで再利用可能なコードスニペットが含まれてます。
+  これらのスニペットは、ページに付随するサンプルアプリケーションから抜粋したものです。
+
   Look for a link to a running version of that sample, often near the top of the page,
   such as this <live-example name="architecture"></live-example> from the [Architecture](architecture.html) page.
+
+  それぞれのページの先頭付近にある、そのサンプルの動作例へのリンクを探してください。
+  たとえば、[アーキテクチャ](architecture.html)ページではこの<live-example name="architecture">動作例</live-example>です。
+
   <span if-docs="ts">
   The link launches a browser-based, code editor where you can inspect, modify, save, and download the code.
+  
+  そのリンク先ではブラウザーベースのコードエディターが起動し、コードの検査、編集、保存、そしてダウンロードができます。
   </span>
 
   ## Reference pages
+  
+  ## リファレンスページ
 
   * The [Cheat Sheet](cheatsheet.html) lists Angular syntax for common scenarios.
+  * [チートシート](cheatsheet.html)では、よくある状況でのAngularの構文を列挙しています。
   * The [Glossary](glossary.html) defines terms that Angular developers should know.
+  * [用語集](glossary.html)では、Angular開発者が知るべき用語を定義しています。
+  <li if-docs="ts">The [Change Log](change-log.html) announces what's new and changed in the documentation.</li>
   <li if-docs="ts">The [Change Log](change-log.html) announces what's new and changed in the documentation.</li>
   * The [API Reference](../api/) is the authority on every public-facing member of the Angular libraries.
+  * [APIリファレンス](../api/)は、Angularライブラリのあらゆる公開APIの出典です。
 
   ## Feedback
+  
+  ## フィードバック
 
   We welcome feedback! 
 
+  フィードバックを歓迎します！
+  
   * Use the <a href="!{_ngDocRepoURL}" target="_blank" title="angular docs on github">!{_angular_io} Github repository</a> for **documentation** issues and pull requests.
+  * **ドキュメンテーション**の課題とプルリクエストについては、[angular.ioのGitHubリポジトリ](https://github.com/angular/angular.io)を使用してください。
   * Use the <a href="!{_ngRepoURL}" target="_blank" title="angular source on github">Angular Github repository</a> to report issues with **Angular** itself.
+  * **Angular**自体の課題の報告には、[AngularのGitHubリポジトリ](https://github.com/angular/angular)を使用してください。

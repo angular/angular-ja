@@ -1,50 +1,36 @@
 (function(app) {
 
-  // #docregion
-  var TitleComponent = ng.core.Component({
-    selector: 'hero-title',
-    template:
-      '<h1>{{titlePrefix}} {{title}}</h1>' +
-      '<button (click)="ok()">OK</button>' +
-      '<p>{{ msg }}</p>'
-  }).Class({
-    constructor: [
-      [
-        new ng.core.Optional(),
-        new ng.core.Inject('titlePrefix')
-      ],
-      new ng.core.Attribute('title'),
-      function(titlePrefix, title) {
-        this.titlePrefix = titlePrefix;
-        this.title  = title;
-        this.msg = '';
-      }
-    ],
-    ok: function() {
-      this.msg = 'OK!';
-    }
-  });
-  // #enddocregion
+  var old = app.HeroComponent;
 
-  var AppComponent = ng.core.Component({
-    selector: 'hero-di-inject-additional',
-    template: '<hero-title title="Tour of Heroes">' +
-    '</hero-title>'
-  }).Class({
-    constructor: function() { }
-  });
- 
-  app.HeroesDIInjectAdditionalModule =
-    ng.core.NgModule({
-      imports: [ ng.platformBrowser.BrowserModule ],
-      declarations: [
-        AppComponent,
-        TitleComponent
-      ],
-      bootstrap: [ AppComponent ]
+  app.HeroComponent = HeroComponent;
+
+  HeroComponent.annotations = [
+    new ng.core.Component({
+      selector: 'hero-di-inject-additional',
+      template: '<hero-title title="Tour of Heroes"></hero-title>'
     })
-    .Class({
-      constructor: function() {}
-    });
+  ];
+
+  function HeroComponent() {}
+
+  app.HeroDIInjectAdditionalComponent = app.HeroComponent;
+  app.HeroComponent = old;
+
+})(window.app = window.app || {});
+
+////// DSL Version /////////
+(function(app) {
+
+  var old = app.HeroComponent;
+
+  app.HeroComponent = ng.core.Component({
+    selector: 'hero-di-inject-additional-dsl',
+    template: '<hero-title-dsl title="Tour of Heroes"></hero-title-dsl>'
+  }).Class({
+    constructor: function HeroComponent() { }
+  });
+
+  app.HeroDIInjectAdditionalDslComponent = app.HeroComponent;
+  app.HeroComponent = old;
 
 })(window.app = window.app || {});

@@ -14,7 +14,7 @@
 </div>
 <br>
 <a href="#event-binding">Event Binding</a><br>
-
+<a href="#two-way">Two-way Binding</a><br>
 <br>
 <div>Directives</div>
 <div style="margin-left:8px">
@@ -242,9 +242,6 @@ button</button>
 
   <button [attr.disabled]="!isUnchanged">Disabled as well</button>
 
-  <!-- can't remove it with [attr.disabled] either -->
-  <button disabled [attr.disabled]>Still disabled</button>
-
   <!-- we'd have to remove it with property binding -->
   <button disabled [disabled]="false">Enabled (but inert)</button>
 </div>
@@ -308,10 +305,10 @@ button</button>
 
 <div>
 <!-- #docregion event-binding-3 -->
-<!-- `myClick` is an event on the custom `MyClickDirective` -->
-<!-- #docregion my-click -->
+<!-- `myClick` is an event on the custom `ClickDirective` -->
+<!-- #docregion myClick -->
 <div (myClick)="clickMessage=$event">click with myClick</div>
-<!-- #enddocregion my-click -->
+<!-- #enddocregion myClick -->
 <!-- #enddocregion event-binding-3 -->
 {{clickMessage}}
 </div>
@@ -348,6 +345,24 @@ button</button>
   <button (click)="onSave() || true">Save w/ propagation</button>
 </div>
 <!-- #enddocregion event-binding-propagation -->
+<br><br>
+<a class="to-toc" href="#toc">top</a>
+
+<hr><h2 id="two-way">Two-way Binding</h2>
+<div id="two-way-1">
+  <!-- #docregion two-way-1 -->
+  <my-sizer [(size)]="fontSizePx"></my-sizer>
+  <div [style.font-size.px]="fontSizePx">Resizable Text</div>
+  <!-- #enddocregion two-way-1 -->
+  <label>FontSize (px): <input [(ngModel)]="fontSizePx"></label>
+</div>
+<br>
+<div id="two-way-2">
+  <h3>De-sugared two-way binding</h3>
+  <!-- #docregion two-way-2 -->
+  <my-sizer [size]="fontSizePx" (sizeChange)="fontSizePx=$event"></my-sizer>
+  <!-- #enddocregion two-way-2 -->
+</div>
 <br><br>
 
 <a class="to-toc" href="#toc">top</a>
@@ -394,15 +409,23 @@ bindon-ngModel
 <!-- NgClass binding -->
 <hr><h2 id="ngClass">NgClass Binding</h2>
 
-<p>setClasses returns {{setClasses() | json}}</p>
+<p>currentClasses returns {{currentClasses | json}}</p>
 <!-- #docregion NgClass-1 -->
-<div [ngClass]="setClasses()">This div is saveable and special</div>
+<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
 <!-- #enddocregion NgClass-1 -->
-<div [ngClass]="setClasses()" #classDiv>
-  After setClasses(), the classes are "{{classDiv.className}}"
-</div>
 
 <!-- not used in chapter -->
+<br>
+<label>saveable   <input type="checkbox" [(ngModel)]="canSave"></label> |
+<label>modified: <input type="checkbox" [value]="!isUnchanged" (change)="isUnchanged=!isUnchanged"></label> |
+<label>special:   <input type="checkbox" [(ngModel)]="isSpecial"></label>
+<button (click)="setCurrentClasses()">Refresh currentClasses</button>
+<br><br>
+<div [ngClass]="currentClasses">
+  This div should be {{ canSave ? "": "not"}} saveable,
+                  {{ isUnchanged ? "unchanged" : "modified" }} and,
+                  {{ isSpecial ? "": "not"}} special after clicking "refresh".</div>
+<br><br>
 
 <div [ngClass]="isSpecial ? 'special' : ''">This div is special</div>
 
@@ -420,20 +443,26 @@ bindon-ngModel
 </div>
 <!-- #enddocregion NgStyle-1 -->
 
-<h3>Use setStyles() - CSS property names</h3>
-<p>setStyles returns {{setStyles() | json}}</p>
+<h3>[ngStyle] binding to `currentStyles` - CSS property names</h3>
+<p>currentStyles returns {{currentStyles | json}}</p>
 <!-- #docregion NgStyle-2 -->
-<div [ngStyle]="setStyles()">
-  This div is italic, normal weight, and extra large (24px).
+<div [ngStyle]="currentStyles">
+  This div is initially italic, normal weight, and extra large (24px).
 </div>
 <!-- #enddocregion NgStyle-2 -->
-<p>After setStyles(), the DOM confirms that the styles are
-  <span [ngStyle]="setStyles()" #styleDiv>
-    {{getStyles(styleDiv)}}
-  </span>.
-</p>
 
 <!-- not used in chapter -->
+<br>
+<label>italic: <input type="checkbox" [(ngModel)]="canSave"></label> |
+<label>normal: <input type="checkbox" [(ngModel)]="isUnchanged"></label> |
+<label>xlarge: <input type="checkbox" [(ngModel)]="isSpecial"></label>
+<button (click)="setCurrentStyles()">Refresh currentStyles</button>
+<br><br>
+<div [ngStyle]="currentStyles">
+  This div should be {{ canSave ? "italic": "plain"}},
+                  {{ isUnchanged ? "normal weight" : "bold" }} and,
+                  {{ isSpecial ? "extra large": "normal size"}} after clicking "refresh".</div>
+<br>
 
 <a class="to-toc" href="#toc">top</a>
 

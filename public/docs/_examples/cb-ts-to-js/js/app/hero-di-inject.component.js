@@ -1,57 +1,51 @@
 (function(app) {
 
-// #docregion parameters
-  function HeroComponent(name) {
-    this.name = name;
-  }
-  HeroComponent.parameters = [
-    'heroName'
-  ];
+  var old = app.HeroComponent;
+
+  // #docregion
+  app.HeroComponent = HeroComponent;
+
   HeroComponent.annotations = [
     new ng.core.Component({
       selector: 'hero-di-inject',
       template: '<h1>Hero: {{name}}</h1>'
     })
   ];
-// #enddocregion parameters
 
-  app.HeroesDIInjectModule =
-    ng.core.NgModule({
-      imports: [ ng.platformBrowser.BrowserModule ],
-      providers: [ { provide: 'heroName', useValue: 'Windstorm' } ],
-      declarations: [ HeroComponent ],
-      bootstrap: [ HeroComponent ]
-    })
-    .Class({
-      constructor: function() {}
-    });
-  
+  HeroComponent.parameters = [ 'heroName' ];
+
+  function HeroComponent(name) {
+    this.name = name;
+  }
+  // #enddocregion
+
+  app.HeroDIInjectComponent = app.HeroComponent;
+  app.HeroComponent = old;
+
 })(window.app = window.app || {});
 
+/////// DSL version ////////
+
 (function(app) {
-// #docregion ctor
-  var HeroComponent = ng.core.Component({
-    selector: 'hero-di-inline2',
+
+  var old = app.HeroComponent;
+
+  // #docregion dsl
+  app.HeroComponent = ng.core.Component({
+    selector: 'hero-di-inject-dsl',
     template: '<h1>Hero: {{name}}</h1>'
   })
   .Class({
-    constructor:
-      [new ng.core.Inject('heroName'), 
-       function(name) {
-         this.name = name;
-       }]
+    constructor: [
+      new ng.core.Inject('heroName'),
+      function HeroComponent(name) {
+        this.name = name;
+      }
+    ]
   });
-// #enddocregion ctor
+  // #enddocregion dsl
 
-  app.HeroesDIInjectModule2 =
-    ng.core.NgModule({
-      imports: [ ng.platformBrowser.BrowserModule ],
-      providers: [ { provide: 'heroName', useValue: 'Bombasto' } ],
-      declarations: [ HeroComponent ],
-      bootstrap: [ HeroComponent ]
-    })
-    .Class({
-      constructor: function() {}
-    });
+  app.HeroDIInjectDslComponent = app.HeroComponent;
+  app.HeroComponent = old;
 
 })(window.app = window.app || {});

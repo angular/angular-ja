@@ -1,9 +1,27 @@
 {
   "index": {
-    "title": "ドキュメンテーションの概要",
-    "navTitle": "概要",
-    "description": "このドキュメンテーションの読み方と使い方",
+    "title": "Documentation Overview",
+    "navTitle": "Overview",
+    "intro": "How to read and use this documentation",
     "nextable": true,
+    "basics": true
+  },
+
+  "setup": {
+    "title": "Setup for local development",
+    "navTitle": "Setup",
+    "intro": "Install the Angular QuickStart seed for faster, more efficient development on your machine",
+    "nextable": true,
+    "hideNextPage": true,
+    "basics": true
+  },
+
+  "learning-angular": {
+    "title": "Learning Angular",
+    "navTitle": "Learning Angular",
+    "intro": "A suggested path through the documentation for Angular newcomers",
+    "nextable": true,
+    "hideNextPage": true,
     "basics": true
   },
 
@@ -11,6 +29,15 @@
     "title": "Architecture Overview",
     "navTitle": "Architecture",
     "intro": "The basic building blocks of Angular applications",
+    "nextable": true,
+    "basics": true
+  },
+
+
+  "appmodule": {
+    "title": "AppModule: the root module",
+    "navTitle": "The Root Module",
+    "intro": "Tell Angular how to construct and bootstrap the app in the root \"AppModule\".",
     "nextable": true,
     "basics": true
   },
@@ -51,8 +78,8 @@
   },
 
   "cheatsheet": {
-    "title": "Angular Cheat Sheet",
-    "intro": "A quick guide to Angular syntax. (Content is provisional and may change.)",
+    "title": "Cheat Sheet",
+    "subtitle": "TypeScript",
     "nextable": true,
     "basics": true
   },
@@ -60,6 +87,18 @@
   "style-guide": {
     "title": "Style Guide",
     "intro": "Write Angular with style.",
+    "basics": true
+  },
+
+  "glossary": {
+    "title": "Glossary",
+    "intro": "Brief definitions of the most important words in the Angular vocabulary",
+    "basics": true
+  },
+
+  "change-log": {
+    "title": "Change Log",
+    "intro": "An annotated history of recent documentation improvements.",
     "basics": true
   },
 
@@ -88,12 +127,6 @@
     "intro": "Learn how to apply CSS styles to components."
   },
 
-  "glossary": {
-    "title": "用語集",
-    "intro": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。",
-    "basics": true
-  },
-
   "hierarchical-dependency-injection": {
     "title": "Hierarchical Dependency Injectors",
     "navTitle": "Hierarchical Injectors",
@@ -102,7 +135,7 @@
 
   "server-communication": {
     "title": "HTTP Client",
-    "intro": "Talk to a remote server with an HTTP Client."
+    "intro": "Use an HTTP Client to talk to a remote server."
   },
 
   "lifecycle-hooks": {
@@ -128,6 +161,11 @@
   "security": {
     "title": "Security",
     "intro": "Developing for content security in Angular applications"
+  },
+
+  "setup-systemjs-anatomy": {
+    "title": "Setup Anatomy",
+    "intro": "Inside the local development environment for SystemJS"
   },
 
   "structural-directives": {

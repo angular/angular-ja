@@ -1,4 +1,3 @@
-// #docplaster
 // #docregion
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
@@ -8,12 +7,12 @@ import { AdminDashboardComponent }  from './admin-dashboard.component';
 import { ManageCrisesComponent }    from './manage-crises.component';
 import { ManageHeroesComponent }    from './manage-heroes.component';
 
-import { adminRouting } from './admin.routing';
+import { AdminRoutingModule }       from './admin-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    adminRouting
+    AdminRoutingModule
   ],
   declarations: [
     AdminComponent,
@@ -22,7 +21,4 @@ import { adminRouting } from './admin.routing';
     ManageHeroesComponent
   ]
 })
-// #docregion admin-module-export
 export class AdminModule {}
-// #enddocregion admin-module-export
-// #enddocregion

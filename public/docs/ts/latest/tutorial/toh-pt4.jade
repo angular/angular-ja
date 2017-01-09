@@ -1,7 +1,6 @@
 include ../_util-fns
 
 :marked
-  # Services
   The Tour of Heroes is evolving and we anticipate adding more components in the near future.
   
   Multiple components will need access to hero data and we don't want to copy and 
@@ -34,20 +33,18 @@ include ../_util-fns
       .file hero-detail.component.ts
       .file main.ts
     .file node_modules ...
-    .file typings ...
     .file index.html
     .file package.json
     .file styles.css
     .file systemjs.config.js
     .file tsconfig.json
-    .file typings.json
 
 :marked
   ### Keep the app transpiling and running
   Open a terminal/console window. 
   Start the TypeScript compiler, watch for changes, and start our server by entering the command:
 
-code-example(language="bash").
+code-example(language="sh" class="code-shell").
   npm start
 
 :marked
@@ -73,7 +70,7 @@ code-example(language="bash").
 .l-sub-section
   :marked
     We've adopted a convention in which we spell the name of a service in lowercase followed by `.service`.
-    If the service name were multi-word, we'd spell the base filename in lower [dash-case](../guide/glossary.html#!#dash-case).
+    If the service name were multi-word, we'd spell the base filename in lower [dash-case](../guide/glossary.html#dash-case).
     The `SpecialSuperHeroService` would be defined in the `special-super-hero.service.ts` file.
 :marked
   We name the class `HeroService` and export it for others to import.
@@ -315,14 +312,12 @@ a#child-component
       .file hero.service.ts
       .file main.ts      
       .file mock-heroes.ts
-    .file node_modules ...
-    .file typings ...      
+    .file node_modules ...   
     .file index.html
     .file package.json
     .file styles.css
     .file systemjs.config.js
     .file tsconfig.json
-    .file typings.json
 :marked
   Here are the code files we discussed in this chapter.
 

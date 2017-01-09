@@ -1,5 +1,7 @@
-/// <reference path='../_protractor/e2e.d.ts' />
-'use strict';
+'use strict'; // necessary for es6 output in node
+
+import { browser, element, by, ElementFinder } from 'protractor';
+import { promise } from 'selenium-webdriver';
 
 const expectedH1 = 'Tour of Heroes';
 const expectedTitle = `Angular ${expectedH1}`;
@@ -7,8 +9,6 @@ const targetHero = { id: 15, name: 'Magneta' };
 const targetHeroDashboardIndex = 3;
 const nameSuffix = 'X';
 const newHeroName = targetHero.name + nameSuffix;
-
-type WPromise<T> = webdriver.promise.Promise<T>;
 
 class Hero {
     id: number;
@@ -25,7 +25,7 @@ class Hero {
     }
 
     // Get hero id and name from the given detail element.
-    static async fromDetail(detail: protractor.ElementFinder): Promise<Hero> {
+    static async fromDetail(detail: ElementFinder): Promise<Hero> {
         // Get hero id from the first <div>
         let _id = await detail.all(by.css('div')).first().getText();
         // Get name from the h2
@@ -42,16 +42,16 @@ describe('Tutorial part 5', () => {
   beforeAll(() => browser.get(''));
 
   function getPageElts() {
-    let hrefElts = element.all(by.css('my-app a'));
+    let navElts = element.all(by.css('my-app nav a'));
 
     return {
-      hrefs: hrefElts,
+      navElts: navElts,
 
-      myDashboardHref: hrefElts.get(0),
+      myDashboardHref: navElts.get(0),
       myDashboard: element(by.css('my-app my-dashboard')),
       topHeroes: element.all(by.css('my-app my-dashboard > div h4')),
 
-      myHeroesHref: hrefElts.get(1),
+      myHeroesHref: navElts.get(1),
       myHeroes: element(by.css('my-app my-heroes')),
       allHeroes: element.all(by.css('my-app my-heroes li')),
       selectedHero: element(by.css('my-app li.selected')),
@@ -73,7 +73,7 @@ describe('Tutorial part 5', () => {
 
     const expectedViewNames = ['Dashboard', 'Heroes'];
     it(`has views ${expectedViewNames}`, () => {
-      let viewNames = getPageElts().hrefs.map(el => el.getText());
+      let viewNames = getPageElts().navElts.map((el: ElementFinder) => el.getText());
       expect(viewNames).toEqual(expectedViewNames);
     });
 
@@ -173,9 +173,9 @@ describe('Tutorial part 5', () => {
 
 });
 
-function addToHeroName(text: string): WPromise<void> {
+function addToHeroName(text: string): promise.Promise<void> {
   let input = element(by.css('input'));
-  return sendKeys(input, text);
+  return input.sendKeys(text);
 }
 
 function expectHeading(hLevel: number, expectedText: string): void {

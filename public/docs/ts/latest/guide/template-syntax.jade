@@ -21,6 +21,7 @@ block includes
   * [Property binding](#property-binding)
   * [Attribute, class, and style bindings](#other-bindings)
   * [Event binding](#event-binding)
+  * [Two-way data binding](#two-way)
   * [Two-way data binding with `NgModel`](#ngModel)
   * [Built-in directives](#directives)
     * [NgClass](#ngClass)
@@ -41,10 +42,11 @@ block includes
 .l-main-section
 :marked
   ## HTML
-  HTML is the language of the Angular template. Our [QuickStart](../quickstart.html) application has a template that is pure HTML:
+  HTML is the language of the Angular template. 
+  The [QuickStart](../quickstart.html) application has a template that is pure HTML:
 
 code-example(language="html" escape="html").
-  <h1>My First Angular App</h1>
+  <h1>Hello Angular</h1>
 
 :marked
   Almost all HTML syntax is valid template syntax. The `<script>` element is a notable exception; it is forbidden, eliminating the risk of script injection attacks. (In practice, `<script>` is simply ignored.)
@@ -400,7 +402,7 @@ table
   (element | component | directive) event, or (rarely) an attribute name.
   The following table summarizes:
 
-// If you update this table, UPDATE it in Dart & JS, too.
+//- If you update this table, UPDATE it in Dart & JS, too.
 <div width="90%">
 table
   tr
@@ -489,8 +491,8 @@ table
     If we must read a target element property or call one of its methods,
     we'll need a different technique.
     See the API reference for
-    [viewChild](../api/core/index/ViewChild-decorator.html) and
-    [contentChild](../api/core/index/ContentChild-decorator.html).
+    [ViewChild](../api/core/index/ViewChild-decorator.html) and
+    [ContentChild](../api/core/index/ContentChild-decorator.html).
 
 :marked
   ### Binding target
@@ -569,18 +571,17 @@ a(id="one-time-initialization")
   The following binding pairs do the same thing:
 +makeExample('template-syntax/ts/app/app.component.html', 'property-binding-vs-interpolation')(format=".")
 :marked
-  Interpolation is a convenient alternative for property binding in many cases.
-  In fact, Angular  translates those interpolations into the corresponding property bindings
-  before rendering the view.
+  _Interpolation_ is a convenient alternative to _property binding_ in many cases.
 
-  There is no technical reason to prefer one form to the other.
+  When rendering data values as strings, there is no technical reason to prefer one form to the other.
   We lean toward readability, which tends to favor interpolation.
   We suggest establishing coding style rules and choosing the form that
   both conforms to the rules and feels most natural for the task at hand.
 
+  When setting an element property to a non-string data value, you must use _property binding_.
 
 :marked
-  #### Content Security
+  #### Content security
   Imagine the following *malicious content*.
 +makeExample('template-syntax/ts/app/app.component.ts', 'evil-title')(format=".")    
 :marked
@@ -598,10 +599,10 @@ figure.image-display
 .l-main-section
 :marked
   <a id="other-bindings"></a>
-  ## Attribute, Class, and Style Bindings
+  ## Attribute, class, and style bindings
   The template syntax provides specialized one-way bindings for scenarios less well suited to property binding.
 
-  ### Attribute Binding
+  ### Attribute binding
   We can set the value of an attribute directly with an **attribute binding**.
 .l-sub-section
   :marked
@@ -651,7 +652,7 @@ code-example(format="nocode").
   is to set ARIA attributes, as in this example:
 +makeExample('template-syntax/ts/app/app.component.html', 'attrib-binding-aria')(format=".")
 :marked
-  ### Class Binding
+  ### Class binding
 
   We can add and remove CSS class names from an element’s `class` attribute with
   a **class binding**.
@@ -667,9 +668,6 @@ code-example(format="nocode").
   We can replace that with a binding to a string of the desired class names; this is an all-or-nothing, replacement binding.
 +makeExample('template-syntax/ts/app/app.component.html', 'class-binding-2')(format=".")
 
-block dart-class-binding-bug
-  //- N/A
-
 :marked
   Finally, we can bind to a specific class name.
   Angular adds the class when the template expression evaluates to #{_truthy}.
@@ -682,7 +680,7 @@ block dart-class-binding-bug
     we generally prefer the [NgClass directive](#ngClass) for managing multiple class names at the same time.
 
 :marked
-  ### Style Binding
+  ### Style binding
 
   We can set inline styles with a **style binding**.
 
@@ -746,7 +744,7 @@ block style-property-name-dart-diff
     on [aliasing input/output properties](#aliasing-io).
 
 :marked
-  If the name fails to match element event or output property of a known directive,
+  If the name fails to match an element event or an output property of a known directive,
   Angular reports an “unknown directive” error.
 
   ### *$event* and event handling statements
@@ -777,7 +775,7 @@ block style-property-name-dart-diff
 
   <a id="eventemitter"></a>
   <a id="custom-event"></a>
-  ### Custom Events with EventEmitter
+  ### Custom events with *EventEmitter*
 
   Directives typically raise custom events with an Angular [EventEmitter](../api/core/index/EventEmitter-class.html).
   The directive creates an `EventEmitter` and exposes it as a property.
@@ -789,10 +787,8 @@ block style-property-name-dart-diff
   The best it can do is raise an event reporting the user's delete request.
 
   Here are the pertinent excerpts from that `HeroDetailComponent`:
-+makeExample('template-syntax/ts/app/hero-detail.component.ts',
-'template-1', 'HeroDetailComponent.ts (template)')(format=".")
-+makeExample('template-syntax/ts/app/hero-detail.component.ts',
-'deleteRequest', 'HeroDetailComponent.ts (delete logic)')(format=".")
++makeExcerpt('app/hero-detail.component.ts (template)', 'template-1')
++makeExcerpt('app/hero-detail.component.ts', 'deleteRequest')
 
 :marked
   The component defines a `deleteRequest` property that returns an `EventEmitter`.
@@ -801,8 +797,8 @@ block style-property-name-dart-diff
 
   Now imagine a hosting parent component that binds to the `HeroDetailComponent`'s `deleteRequest` event.
 
-+makeExample('template-syntax/ts/app/app.component.html',
-'event-binding-to-component')(format=".")
++makeExcerpt('app/app.component.html', 'event-binding-to-component', '')
+
 :marked
   When the `deleteRequest` event fires, Angular calls the parent component's `deleteHero` method,
   passing the *hero-to-delete* (emitted by `HeroDetail`) in the `$event` variable.
@@ -815,7 +811,7 @@ block style-property-name-dart-diff
   including queries and saves to a remote server.
   These changes percolate through the system and are ultimately displayed in this and other views.
 
-//
+//-
   :marked
     ### Event bubbling and propagation [TODO: reinstate this section when it becomes true]
     Angular invokes the event-handling statement if the event is raised by the current element or one of its child elements.
@@ -841,19 +837,71 @@ block style-property-name-dart-diff
     and the outer `<div>`, causing a double save.
   +makeExample('template-syntax/ts/app/app.component.html', 'event-binding-propagation')(format=".")
 
-
+#two-way
 .l-main-section
 :marked
-  <a id="ngModel"></a>
+  ## Two-way binding
+  We often want to both display a data property and update that property when the user makes changes.
+
+  On the element side that takes a combination of setting a specific element property
+  and listening for an element change event.
+
+  Angular offers a special _two-way data binding_ syntax for this purpose, **`[(x)]`**.
+  The `[(x)]` syntax combines the brackets 
+  of _property binding_, `[x]`, with the parentheses of _event binding_, `(x)`.
+
+.callout.is-important
+  header [( )] = banana in a box
+  :marked
+    Visualize a *banana in a box* to remember that the parentheses go _inside_ the brackets.
+
+:marked
+  The `[(x)]` syntax is easy to demonstrate when the element has a settable property called `x`
+  and a corresponding event named `xChange`. 
+  Here's a `SizerComponent` that fits the pattern.
+  It has a `size` value property and a companion `sizeChange` event:
+
++makeExample('app/sizer.component.ts')
+
+:marked
+  The initial `size` is an input value from a property binding.
+  Clicking the buttons increases or decreases the `size`, within min/max values constraints,
+  and then raises (_emits_) the `sizeChange` event with the adjusted size.
+
+  Here's an example in which the `AppComponent.fontSizePx` is two-way bound to the `SizerComponent`:
+
++makeExcerpt('app/app.component.html', 'two-way-1', '')
+
+:marked
+  The `AppComponent.fontSizePx` establishes the initial `SizerComponent.size` value.
+  Clicking the buttons updates the `AppComponent.fontSizePx` via the two-way binding.
+  The revised `AppComponent.fontSizePx` value flows through to the _style_ binding, making the displayed text bigger or smaller.
+  Try it in the <live-example></live-example>.
+
+  The two-way binding syntax is really just syntactic sugar for a _property_ binding and an _event_ binding.
+  Angular _desugars_ the `SizerComponent` binding into this:
+
++makeExcerpt('app/app.component.html', 'two-way-2', '')
+
+:marked
+  The `$event` variable contains the payload of the `SizerComponent.sizeChange` event.
+  Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
+
+  Clearly the two-way binding syntax is a great convenience compared to separate property and event bindings.
+
+  We'd like to use two-way binding with HTML form elements like `<input>` and `<select>`.
+  Sadly, no native HTML element follows the `x` value and `xChange` event pattern.
+
+  Fortunately, the Angular [_NgModel_](#ngModel) directive is a bridge that enables two-way binding to form elements.
+
+a#ngModel
+.l-main-section
+:marked
   ## Two-way binding with NgModel
   When developing data entry forms, we often want to both display a data property and update that property when the user makes changes.
 
-  The `[(ngModel)]` two-way data binding syntax makes that easy. Here's an example:
-+makeExample('template-syntax/ts/app/app.component.html', 'NgModel-1')(format=".")
-.callout.is-important
-  header [()] = banana in a box
-  :marked
-    To remember that the parentheses go inside the brackets, visualize a *banana in a box*.
+  Two-way data binding with the `NgModel` directive makes that easy. Here's an example:
++makeExcerpt('app/app.component.html', 'NgModel-1', '')
 
 +ifDocsFor('ts|js')
   .callout.is-important
@@ -863,18 +911,18 @@ block style-property-name-dart-diff
       we must import the `FormsModule` and add it to the Angular module's `imports` list.
       Learn more about the `FormsModule` and `ngModel` in the
       [Forms](../guide/forms.html#ngModel) chapter.
-
-  +makeExample('template-syntax/ts/app/app.module.1.ts', '', 'app.module.ts (FormsModule import)')
+  :marked
+    Here's how to import the `FormsModule` to make `[(ngModel)]` available.
+  +makeExcerpt('app/app.module.1.ts (FormsModule import)', '')
 
 :marked
-  There’s a story behind this construction, a story that builds on the property and event binding techniques we learned previously.
-
   ### Inside `[(ngModel)]`
-  We could have achieved the same result with separate bindings to
+  Looking back at the `firstName` binding, it's important to note that
+  we could have achieved the same result with separate bindings to
   the `<input>` element's  `value` property and `input` event.
 +makeExample('template-syntax/ts/app/app.component.html', 'without-NgModel')(format=".")
 :marked
-  That’s cumbersome. Who can remember which element property to set and what event reports user changes?
+  That’s cumbersome. Who can remember which element property to set and which element event emits user changes?
   How do we extract the currently displayed text from the input box so we can update the data property?
   Who wants to look that up each time?
 
@@ -882,35 +930,29 @@ block style-property-name-dart-diff
 +makeExample('template-syntax/ts/app/app.component.html', 'NgModel-3')(format=".")
 .l-sub-section
   :marked
-    The `ngModel` input property sets the element's value property and the `ngModelChange` output property
+    The `ngModel` data property sets the element's value property and the `ngModelChange` event property
     listens for changes to the element's value.
-    The details are specific to each kind of element and therefore the `NgModel` directive only works for elements,
+    
+    The details are specific to each kind of element and therefore the `NgModel` directive only works for specific form elements,
     such as the input text box, that are supported by a [ControlValueAccessor](../api/forms/index/ControlValueAccessor-interface.html).
-    We can't apply `[(ngModel)]` to our custom components until we write a suitable *value accessor*,
+
+    We can't apply `[(ngModel)]` to a custom component until we write a suitable *value accessor*,
     a technique that is beyond the scope of this chapter.
+    That's something we might want to do for an Angular component or a WebComponent whose API we can't control.
+    
+    It's completely unnecessary for an Angular component that we _do_ control ... because we can name the value and event properties
+    to suit Angular's basic [two-way binding syntax](#two-way) and skip `NgModel` altogether.
 
 :marked
-  Separate `ngModel` bindings is an improvement. We can do better.
+  Separate `ngModel` bindings is an improvement over binding to the element's native properties. We can do better.
 
   We shouldn't have to mention the data property twice. Angular should be able to capture the component’s data property and set it
-  with a single declaration &mdash; which it can with the `[( )]` syntax:
+  with a single declaration &mdash; which it can with the `[(ngModel)]` syntax:
 +makeExample('template-syntax/ts/app/app.component.html', 'NgModel-1')(format=".")
-
-.l-sub-section
-  :marked
-    `[(ngModel)]` is a specific example of a more general pattern in which Angular "de-sugars" the `[(x)]` syntax
-    into an `x` input property for property binding and an `xChange` output property for event binding.
-    Angular constructs the event property binding's template statement by appending `=$event`
-    to the literal string of the template expression.
-
-    > <span style="font-family:courier">[(_x_)]="_e_" &lt;==> [_x_]="_e_" (<i>x</i>Change)="_e_=$event"</span>
-
-    We can write a two-way binding directive of our own to exploit this behavior.
-
 :marked
   Is `[(ngModel)]` all we need? Is there ever a reason to fall back to its expanded form?
 
-  The `[( )]` syntax can only _set_ a data-bound property.
+  The `[(ngModel)]` syntax can only _set_ a data-bound property.
   If we need to do something more or something different, we need to write the expanded form ourselves.
 
   Let's try something silly like forcing the input value to uppercase:
@@ -955,15 +997,22 @@ figure.image-display
   The `NgClass` directive may be the better choice
   when we want to add or remove *many* CSS classes at the same time.
 
-  A good way to apply `NgClass` is by binding it to a key:value control !{__objectAsMap}. Each key of the object is a CSS class name; its value is `true` if the class should be added, `false` if it should be removed.
+  A good way to apply `NgClass` is by binding it to a key:value control !{__objectAsMap}. 
+  Each key of the object is a CSS class name; its value is `true` if the class should be added, 
+  `false` if it should be removed.
 
 :marked
-  Consider a component method such as `setClasses` that manages the state of three CSS classes:
+  Consider a 
+  `setCurrentClasses` component method that sets a component property, `currentClasses`
+  with an object that adds or removes three classes based on the 
+  `true`/`false` state of three other component propertes:
 +makeExample('template-syntax/ts/app/app.component.ts', 'setClasses')(format=".")
 :marked
-  Now we can add an `NgClass` property binding that calls `setClasses`
-  and sets the element's classes accordingly:
+  Adding an `NgClass` property binding to `currentClasses` sets the element's classes accordingly:  
 +makeExample('template-syntax/ts/app/app.component.html', 'NgClass-1')(format=".")
+.l-sub-section
+  :marked
+    It's up to you to call `setCurrentClassess()`, both initially and when the dependent properties change.
 
 <a id="ngStyle"></a>
 .l-main-section
@@ -981,12 +1030,15 @@ figure.image-display
   We apply `NgStyle` by binding it to a key:value control !{__objectAsMap}.
   Each key of the object is a style name; its value is whatever is appropriate for that style.
 
-  Consider a component method such as `setStyles` that returns an object defining three styles:
+  Consider a `setCurrentStyles` component method that sets a component property, `currentStyles`
+  with an object that defines three styles, based on the state of three other component propertes:
 +makeExample('template-syntax/ts/app/app.component.ts', 'setStyles')(format=".")
 :marked
-  Now we just add an `NgStyle` property binding that calls `setStyles`
-  and sets the element's styles accordingly:
+  Adding an `NgStyle` property binding to `currentStyles` sets the element's styles accordingly:
 +makeExample('template-syntax/ts/app/app.component.html', 'NgStyle-2')(format=".")
+.l-sub-section
+  :marked
+    It's up to you to call `setCurrentStyles()`, both initially and when the dependent properties change.
 
 <a id="ngIf"></a>
 .l-main-section
@@ -1201,7 +1253,7 @@ block remember-the-brackets
 
 :marked
   ### Expanding `*ngSwitch`
-  A similar transformation applies to `*ngSwitch`. We can de-sugar the syntax ourselves.
+  A similar transformation applies to `*ngSwitch`. We can unfold the syntax ourselves.
   Here's an example, first with `*ngSwitchCase` and `*ngSwitchDefault` and then again with `<template>` tags:
 +makeExample('template-syntax/ts/app/app.component.html', 'NgSwitch-expanded')(format=".")
 :marked
@@ -1244,9 +1296,13 @@ figure.image-display
 :marked
   ### Referencing a template reference variable
 
-  We can reference a template reference variable on the same element, on a sibling element, or on
-  any child elements.
+  We can refer to a template reference variable _anywhere_ in the current template.
+.l-sub-section
+  :marked
+    Do not define the same variable name more than once in the same template.
+    The runtime value will be unpredictable.
 
+:marked
   Here are two other examples of creating and consuming a Template reference variable:
 +makeExample('template-syntax/ts/app/app.component.html', 'ref-phone')(format=".")
 :marked
@@ -1374,7 +1430,7 @@ h3#aliasing-io Aliasing input/output properties
   Directive consumers expect to bind to the name of the directive.
   For example, when we apply a directive with a `myClick` selector to a `<div>` tag,
   we expect to bind to an event property that is also called `myClick`.
-+makeExample('template-syntax/ts/app/app.component.html', 'my-click')(format=".")
++makeExample('template-syntax/ts/app/app.component.html', 'myClick')(format=".")
 :marked
   However, the directive name is often a poor choice for the name of a property within the directive class.
   The directive name rarely describes what the property does.
@@ -1387,14 +1443,14 @@ h3#aliasing-io Aliasing input/output properties
 
   We can specify the alias for the property name by passing it into the input/output decorator like this:
 
-+makeExample('template-syntax/ts/app/my-click.directive.ts', 'my-click-output-1')(format=".")
++makeExample('template-syntax/ts/app/click.directive.ts', 'output-myClick')(format=".")
 
 .l-sub-section
   :marked
     We can also alias property names in the `inputs` and `outputs` #{_array}s.
     We write a colon-delimited (`:`) string with
     the directive property name on the *left* and the public alias on the *right*:
-  +makeExample('template-syntax/ts/app/my-click.directive.ts', 'my-click-output-2')(format=".")
+  +makeExample('template-syntax/ts/app/click.directive.ts', 'output-myClick2')(format=".")
 
 <a id="expression-operators"></a>
 .l-main-section

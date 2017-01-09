@@ -37,12 +37,19 @@
 
 //- Location of sample code
 - var _liveLink = 'live link';
+- var _ngRepoURL = 'https://github.com/angular/angular';
+- var _ngDocRepoURL = 'https://github.com/angular/angular.io';
+- var _qsRepo = 'https://github.com/angular/quickstart';
+- var _qsRepoZip = _qsRepo + '/archive/master.zip';
+
+- var _npm = 'npm';
 
 //- NgModule related
 - var _AppModuleVsAppComp = 'AppModule'
 - var _appModuleTsVsAppCompTs = 'app/app.module.ts'
 - var _appModuleTsVsMainTs = 'app/app.module.ts'
 - var _bootstrapModule = 'bootstrapModule'
+- var _declsVsDirectives = 'declarations'
 - var _moduleVsComp = 'module'
 - var _moduleVsRootComp = 'module'
 - var _platformBrowserDynamicVsBootStrap = 'platformBrowserDynamic'
@@ -300,7 +307,7 @@ if !jade2ng
 -   } else {
 -     // ``` gets translated to <pre><code>.....</code></pre> and we need
 -     // to remove this from the fragment prefix is 11 long and suffix is 13 long
--     frag = jade2ng ? frag : frag.substring(11, frag.length-13);
+-     frag = frag.substring(11, frag.length-13);
 -     // Uncomment next line for debugging.
 -     // frag = "FileName: " + fullFileName + "   Current path: " + current.path +  " PathToDocs: " + getPathToDocs() + "\n" + frag;
 -     return frag;

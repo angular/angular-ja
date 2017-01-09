@@ -2,7 +2,7 @@
 // #docplaster
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router }   from '@angular/router';
-import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/map';
 
 import { Hero }              from '../model';
 import { HeroDetailService } from './hero-detail.service';
@@ -11,8 +11,8 @@ import { HeroDetailService } from './hero-detail.service';
 @Component({
   moduleId: module.id,
   selector:    'app-hero-detail',
-  templateUrl: 'hero-detail.component.html',
-  styleUrls:  ['hero-detail.component.css' ],
+  templateUrl: './hero-detail.component.html',
+  styleUrls:  ['./hero-detail.component.css' ],
   providers:  [ HeroDetailService ]
 })
 export class HeroDetailComponent implements OnInit {
@@ -30,7 +30,7 @@ export class HeroDetailComponent implements OnInit {
   // #docregion ng-on-init
   ngOnInit(): void {
     // get hero when `id` param changes
-    this.route.params.pluck<string>('id')
+    this.route.params.map(p => p['id'])
       .forEach(id => this.getHero(id))
       .catch(() => this.hero = new Hero()); // no id; should edit new hero
   }

@@ -1,5 +1,6 @@
-/// <reference path='../_protractor/e2e.d.ts' />
-'use strict';
+'use strict'; // necessary for es6 output in node
+
+import { browser, element, by } from 'protractor';
 
 // Angular E2E Testing Guide:
 // https://docs.angularjs.org/guide/e2e-testing
@@ -10,7 +11,7 @@ describe('PhoneCat Application', function() {
   it('should redirect `index.html` to `index.html#!/phones', function() {
     browser.get('index.html');
     browser.waitForAngular();
-    browser.getCurrentUrl().then(function(url) {
+    browser.getCurrentUrl().then(function(url: string) {
       expect(url.endsWith('/phones')).toBe(true);
     });
   });
@@ -28,11 +29,11 @@ describe('PhoneCat Application', function() {
 
       expect(phoneList.count()).toBe(20);
 
-      sendKeys(query, 'nexus');
+      query.sendKeys('nexus');
       expect(phoneList.count()).toBe(1);
 
       query.clear();
-      sendKeys(query, 'motorola');
+      query.sendKeys('motorola');
       expect(phoneList.count()).toBe(8);
     });
 
@@ -48,7 +49,7 @@ describe('PhoneCat Application', function() {
         });
       }
 
-      sendKeys(queryField, 'tablet');   // Let's narrow the dataset to make the assertions shorter
+      queryField.sendKeys('tablet');   // Let's narrow the dataset to make the assertions shorter
 
       expect(getNames()).toEqual([
         'Motorola XOOM\u2122 with Wi-Fi',
@@ -66,13 +67,9 @@ describe('PhoneCat Application', function() {
     // #docregion links
     it('should render phone specific links', function() {
       let query = element(by.css('input'));
-      // https://github.com/angular/protractor/issues/2019
-      let str = 'nexus';
-      for (let i = 0; i < str.length; i++) {
-        query.sendKeys(str.charAt(i));
-      }
+      query.sendKeys('nexus');
       element.all(by.css('.phones li a')).first().click();
-      browser.getCurrentUrl().then(function(url) {
+      browser.getCurrentUrl().then(function(url: string) {
         expect(url.endsWith('/phones/nexus-s')).toBe(true);
       });
     });

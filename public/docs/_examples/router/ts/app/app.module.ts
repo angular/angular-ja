@@ -1,37 +1,47 @@
+// #docplaster
 // #docregion
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
+// #docregion inspect-config
+import { Router } from '@angular/router';
 
-import { AppComponent }         from './app.component';
-import { routing,
-         appRoutingProviders }  from './app.routing';
+// #enddocregion inspect-config
+import { AppComponent }            from './app.component';
+import { AppRoutingModule }        from './app-routing.module';
 
-import { HeroesModule }         from './heroes/heroes.module';
-import { CrisisCenterModule }   from './crisis-center/crisis-center.module';
+import { HeroesModule }            from './heroes/heroes.module';
+import { ComposeMessageComponent } from './compose-message.component';
+import { LoginRoutingModule }      from './login-routing.module';
+import { LoginComponent }          from './login.component';
+import { PageNotFoundComponent }   from './not-found.component';
 
-import { LoginComponent }       from './login.component';
-
-import { DialogService }        from './dialog.service';
+import { DialogService }           from './dialog.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    routing,
     HeroesModule,
-    CrisisCenterModule
+    LoginRoutingModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
-    LoginComponent
+    ComposeMessageComponent,
+    LoginComponent,
+    PageNotFoundComponent
   ],
   providers: [
-    appRoutingProviders,
     DialogService
   ],
   bootstrap: [ AppComponent ]
 })
+// #docregion inspect-config
 export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
 }
-// #enddocregion
+// #enddocregion inspect-config

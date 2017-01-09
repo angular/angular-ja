@@ -1,44 +1,29 @@
-// #docplaster
 // #docregion
-// #docregion crisis-center-module, admin-module
 import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
+import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 
-import { AppComponent }           from './app.component';
-import { routing,
-         appRoutingProviders }    from './app.routing';
+import { AppComponent }     from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeroesModule }     from './heroes/heroes.module';
 
-import { HeroesModule }           from './heroes/heroes.module';
-// #docregion crisis-center-module
-import { CrisisCenterModule }     from './crisis-center/crisis-center.module';
-// #enddocregion crisis-center-module
-// #docregion admin-module
-import { AdminModule }            from './admin/admin.module';
-// #docregion crisis-center-module
-
-import { DialogService }          from './dialog.service';
+import { CrisisListComponent }   from './crisis-list.component';
+import { PageNotFoundComponent } from './not-found.component';
 
 @NgModule({
+// #docregion module-imports
   imports: [
-    CommonModule,
+    BrowserModule,
     FormsModule,
-    routing,
     HeroesModule,
-    CrisisCenterModule,
-// #enddocregion crisis-center-module
-    AdminModule
-// #docregion crisis-center-module
+    AppRoutingModule
   ],
+// #enddocregion module-imports
   declarations: [
-    AppComponent
-  ],
-  providers: [
-    appRoutingProviders,
-    DialogService
+    AppComponent,
+    CrisisListComponent,
+    PageNotFoundComponent
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {
-}
-// #enddocregion
+export class AppModule { }

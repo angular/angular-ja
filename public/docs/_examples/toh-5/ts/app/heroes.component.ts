@@ -8,11 +8,13 @@ import { HeroService } from './hero.service';
 
 // #docregion renaming, metadata
 @Component({
+  // #enddocregion renaming
   moduleId: module.id,
+  // #docregion renaming
   selector: 'my-heroes',
   // #enddocregion renaming
-  templateUrl: 'heroes.component.html',
-  styleUrls: [ 'heroes.component.css' ]
+  templateUrl: './heroes.component.html',
+  styleUrls: [ './heroes.component.css' ]
   // #docregion renaming
 })
 // #enddocregion metadata
@@ -38,8 +40,10 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
+  // #docregion gotoDetail
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedHero.id]);
   }
+  // #enddocregion gotoDetail
   // #docregion renaming
 }

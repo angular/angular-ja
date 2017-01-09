@@ -12,8 +12,6 @@ block includes
 - var _promise = _Promise.toLowerCase()
 
 :marked
-  # Getting and Saving Data
-
   Our stakeholders appreciate our progress.
   Now they want to get the hero data from a server, let users add, edit, and delete heroes,
   and save these changes back to the server.
@@ -36,7 +34,7 @@ block start-server-and-watch
     Open a terminal/console window and enter the following command to
     start the TypeScript compiler, start the server, and watch for changes:
 
-  code-example(language="bash").
+  code-example(language="sh" class="code-shell").
     npm start
 
 :marked
@@ -93,10 +91,9 @@ block http-providers
 
 block backend
   :marked
-    We're importing the  `InMemoryWebApiModule` and adding it to the module `imports`.
-    The  `InMemoryWebApiModule` replaces the default `Http` client backend &mdash;
-    the supporting service that talks to the remote server &mdash;
-    with an  _in-memory web API alternative service_.
+    Rather than require a real API server, this example simulates communication with the remote server by adding the
+    <a href="https://github.com/angular/in-memory-web-api" target="_blank" title="In-memory Web API"><i>InMemoryWebApiModule</i></a>
+    to the module `imports`, effectively  replacing the `Http` client's XHR backend service with an in-memory alternative.
 
   +makeExcerpt(_appModuleTsVsMainTs, 'in-mem-web-api', '')
 
@@ -114,7 +111,7 @@ block dont-be-distracted-by-backend-subst
       This chapter is an introduction to the !{_Angular_http_library}.
       Please don't be distracted by the details of this backend substitution. Just follow along with the example.
 
-      Learn more later about the in-memory web API in the [HTTP client chapter](../guide/server-communication.html#!#in-mem-web-api).
+      Learn more later about the in-memory web API in the [HTTP client chapter](../guide/server-communication.html#in-mem-web-api).
       Remember, the in-memory web API is only useful in the early stages of development and for demonstrations such as this Tour of Heroes.
       Skip it when you have a real web API server.
 
@@ -155,7 +152,7 @@ block get-heroes-details
     *Observables* are a powerful way to manage asynchronous data flows.
     We'll learn about [Observables](#observables) later in this chapter.
 
-    For *now* we get back on familiar ground by immediately by
+    For *now* we get back on familiar ground by immediately
     converting that `Observable` to a `Promise` using the `toPromise` operator.
 
   +makeExcerpt('app/hero.service.ts', 'to-promise', '')
@@ -170,6 +167,10 @@ block get-heroes-details
     That's as easy as importing them from the RxJS library like this:
 
   +makeExcerpt('app/hero.service.ts', 'rxjs', '')
+
+  .l-sub-section
+    :marked
+      You'll add more operators, and learn why you must do so, [later in this tutorial](#rxjs-imports).
 
   :marked
     ### Extracting the data in the *then* callback
@@ -214,12 +215,32 @@ block get-heroes-details
   We've also decided to return a user friendly form of the error to
   the caller in a !{rejected_promise} so that the caller can display a proper error message to the user.
 
-  ### Unchanged `getHeroes` API
+  ### Get hero by id
+  The `HeroDetailComponent` asks the `HeroService` to fetch a single hero to edit.
+  
+  The `HeroService` currently fetches all heroes and then finds the desired hero 
+  by filtering for the one with the matching `id`.
+  That's fine in a simulation. It's wasteful to ask a real server for _all_ heroes when we only want one.
+  Most web APIs support a _get-by-id_ request in the form `api/hero/:id` (e.g., `api/hero/11`).
 
-  Although we made significant *internal* changes to `getHeroes()`, the public signature did not change.
-  We still return a !{_Promise}. We won't have to update any of the components that call `getHeroes()`.
+  Update the `HeroService.getHero` method to make a _get-by-id_ request,
+  applying what we just learned to write `getHeroes`:
++makeExcerpt('app/hero.service.ts', 'getHero', '')
+:marked
+  It's almost the same as `getHeroes`. 
+  The URL identifies _which_ hero the server should update by encoding the hero id into the URL
+  to match the `api/hero/:id` pattern.
 
-  Our stakeholders are thrilled with the added flexibility from the API integration. 
+  We also adjust to the fact that the `data` in the response is a single hero object rather than !{_an} !{_array}.
+
+  ### Unchanged _getHeroes_ API
+
+  Although we made significant *internal* changes to `getHeroes()` and `getHero()`, 
+  the public signatures did not change.
+  We still return a !{_Promise} from both methods. 
+  We won't have to update any of the components that call them.
+
+  Our stakeholders are thrilled with the web API integration so far.
   Now they want the ability to create and delete heroes.
 
   Let's see first what happens when we try to update a hero's details.
@@ -229,18 +250,15 @@ block get-heroes-details
   ## Update hero details
 
   We can edit a hero's name already in the hero detail view. Go ahead and try
-  it. As we type, the hero name is updated in the view heading. 
+  it. As we type, the hero name is updated in the view heading.
   But when we hit the `Back` button, the changes are lost!
 
-.l-sub-section
-  :marked
-    Updates weren't lost before, what's happening?
-    When the app used a list of mock heroes, changes were made directly to the
-    hero objects in the single, app-wide shared list. Now that we are fetching data
-    from a server, if we want changes to persist, we'll need to write them back to
-    the server.
+  Updates weren't lost before. What changed?
+  When the app used a list of mock heroes, updates were applied directly to the
+  hero objects within the single, app-wide, shared list. Now that we are fetching data
+  from a server, if we want changes to persist, we'll need to write them back to
+  the server.
 
-:marked
   ### Save hero details
 
   Let's ensure that edits to a hero's name aren't lost. Start by adding,
@@ -363,8 +381,9 @@ block observables-section-intro
     ### Background
     An *observable* is a stream of events that we can process with array-like operators.
 
-    Angular core has basic support for observables. We developers augment that support with
-    operators and extensions from the [RxJS Observables](http://reactivex.io/rxjs/) library.
+    Angular core has basic support for observables. 
+    We developers augment that support with operators and extensions from the
+    <a href="http://reactivex.io/rxjs" target="_blank" title="RxJS">RxJS library</a>.
     We'll see how shortly.
 
     Recall that our `HeroService` quickly chained the `toPromise` operator to the `Observable` result of `http.get`.
@@ -392,8 +411,15 @@ block observables-section-intro
 :marked
   The `!{_priv}http.get()` call in `HeroSearchService` is similar to the one
   in the `HeroService`, although the URL now has a query string.
-  <span if-docs="ts">Another notable difference: we no longer call `toPromise`,
-  we simply return the *observable* instead.</span>
+
+  <span if-docs="ts">A more important difference: we no longer call `toPromise`.
+  Instead we return the *observable* from the the `htttp.get`, 
+  after chaining it to another RxJS operator, <code>map</code>, 
+  to extract heroes from the response data.
+
+  RxJS operator chaining makes response processing easy and readable.
+  See the [discuss below about operators](#rxjs-imports).
+  </span>
 
   ### HeroSearchComponent
 
@@ -484,26 +510,24 @@ block observable-transformers
     Our simple example prints the error to the console; a real life application should do better.
     Then we return an observable containing an empty array to clear the search result.
 
+  a#rxjs-imports
+  :marked
     ### Import RxJS operators
-    The RxJS operators are not available in Angular's base `Observable` implementation.
-    We have to extend  `Observable` by *importing* them.
+    Most RxJS operators are not included in Angular's base `Observable` implementation.
+    The base implementation includes only what Angular itself requires.
 
-    We could extend `Observable` with just the operators we need here by
-    including the pertinent `import` statements at the top of this file.
+    If we want more RxJS features, we have to extend  `Observable` by *importing* the libraries in which they are defined.
+    Here are all the RxJS imports _this_ component needs:
 
-  .l-sub-section
-    :marked
-      Many authorities say we should do just that.
-  :marked
-    We take a different approach in this example.
-    We combine all of the RxJS `Observable` extensions that _our entire app_ requires into a single RxJS imports file.
-
-  +makeExample('app/rxjs-extensions.ts')(format='.')
+  +makeExample('app/hero-search.component.ts','rxjs-imports','app/hero-search.component.ts (rxjs imports)')(format='.')
 
   :marked
-    We load them all at once by importing `rxjs-extensions` at the top of `AppModule`.
-
-  +makeExcerpt('app/app.module.ts', 'rxjs-extensions')(format='.')
+    The `import 'rxjs/add/...'` syntax may be unfamiliar.
+    It's missing the usual list of symbols between the braces: `{...}`.
+    
+    We don't need the operator symbols themselves. 
+    In each case, the mere act of importing the library
+    loads and executes the library's script file which, in turn, adds the operator to the `Observable` class.
 
 :marked
   ### Add the search component to the dashboard
@@ -515,7 +539,7 @@ block observable-transformers
 - var _declarations = _docsFor == 'dart' ? 'directives' : 'declarations'
 - var declFile = _docsFor == 'dart' ? 'app/dashboard.component.ts' : 'app/app.module.ts'
 :marked
-  Finally, we import `HeroSearchComponent` from 
+  Finally, we import `HeroSearchComponent` from
   <span ngio-ex>hero-search.component.ts</span>
   and add it to the `!{_declarations}` !{_array}:
 
@@ -544,7 +568,7 @@ block filetree
         .file app.component.ts
         .file app.component.css
         .file app.module.ts
-        .file app.routing.ts
+        .file app-routing.module.ts
         .file dashboard.component.css
         .file dashboard.component.html
         .file dashboard.component.ts
@@ -556,7 +580,6 @@ block filetree
         .file hero-search.component.css (new)
         .file hero-search.component.ts (new)
         .file hero-search.service.ts (new)
-        .file rxjs-extensions.ts
         .file hero.service.ts
         .file heroes.component.css
         .file heroes.component.html
@@ -564,13 +587,11 @@ block filetree
         .file main.ts
         .file in-memory-data.service.ts (new)
       .file node_modules ...
-      .file typings ...
       .file index.html
       .file package.json
       .file styles.css
       .file systemjs.config.js
       .file tsconfig.json
-      .file typings.json
 
 .l-main-section
 :marked
@@ -584,7 +605,7 @@ block filetree
   - We configured an in-memory web API.
   - We learned how to use !{_Observable}s.
 
-  Here are the files we added or changed in this chapter.
+  Here are the files we _added or changed_ in this chapter.
 
 block file-summary
   +makeTabs(
@@ -613,12 +634,17 @@ block file-summary
     `toh-6/ts/app/hero-search.service.ts,
     toh-6/ts/app/hero-search.component.ts,
     toh-6/ts/app/hero-search.component.html,
-    toh-6/ts/app/hero-search.component.css,
-    toh-6/ts/app/rxjs-extensions.ts`,
+    toh-6/ts/app/hero-search.component.css`,
     null,
     `hero-search.service.ts,
     hero-search.component.ts,
     hero-search.component.html,
-    hero-search.component.css,
-    rxjs-extensions.ts`
+    hero-search.component.css`
   )
+
+.l-sub-section
+  :marked
+    ### Next Step
+
+    Return to the [learning path](../guide/learning-angular.html#architecture) where 
+    you can read about the concepts and practices you discovered in this tutorial.

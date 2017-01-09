@@ -1,10 +1,10 @@
 /* tslint:disable:forin */
-import { Component, ContentChildren, Directive, ElementRef, EventEmitter,
+import { Component, ContentChildren, Directive, EventEmitter,
          Injectable, Input, Output, Optional,
          HostBinding, HostListener,
          OnInit, OnChanges, OnDestroy,
          Pipe, PipeTransform,
-         Renderer, SimpleChange } from '@angular/core';
+         SimpleChange } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -76,9 +76,10 @@ export class BankAccountComponent {
   @Input() bank: string;
   @Input('account') id: string;
 
-  constructor(private renderer: Renderer, private el: ElementRef ) {
-    renderer.setElementProperty(el.nativeElement, 'customProperty', true);
-  }
+  // Removed on 12/02/2016 when ceased public discussion of the `Renderer`. Revive in future?
+  // constructor(private renderer: Renderer, private el: ElementRef ) {
+  //   renderer.setElementProperty(el.nativeElement, 'customProperty', true);
+  // }
 }
 
 /** A component with attributes, styles, classes, and property setting */
@@ -152,7 +153,7 @@ export class InputComponent {
 //   selector: 'input[value]',
 //   host: {
 //     '[value]': 'value',
-//     '(input)': 'valueChange.next($event.target.value)'
+//     '(input)': 'valueChange.emit($event.target.value)'
 //   },
 //   inputs:  ['value'],
 //   outputs: ['valueChange']
@@ -173,7 +174,7 @@ export class InputValueBinderDirective {
   valueChange: EventEmitter<any> = new EventEmitter();
 
   @HostListener('input', ['$event.target.value'])
-  onInput(value: any) { this.valueChange.next(value); }
+  onInput(value: any) { this.valueChange.emit(value); }
 }
 
 @Component({
@@ -250,7 +251,7 @@ export class TestViewProvidersComponent {
 @Component({
   moduleId: module.id,
   selector: 'external-template-comp',
-  templateUrl: 'bag-external-template.html'
+  templateUrl: './bag-external-template.html'
 })
 export class ExternalTemplateComponent implements OnInit {
   serviceValue: string;
@@ -274,7 +275,7 @@ export class InnerCompWithExternalTemplateComponent { }
 @Component({
   moduleId: module.id,
   selector: 'bad-template-comp',
-  templateUrl: 'non-existant.html'
+  templateUrl: './non-existant.html'
 })
 export class BadTemplateUrlComponent { }
 

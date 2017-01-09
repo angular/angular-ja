@@ -1,8 +1,7 @@
-# Angular-ja
+# Angular.io
 [![Build Status][travis-badge]][travis-badge-url]
 
-Angular-ja はAngularのドキュメンテーションサイト [Angular.io](https://github.com/angular/angular.io)を日本語に翻訳したサイトです。
-翻訳作業へのコントリビューションについては、[Wiki](https://github.com/angular/angular-ja/wiki)を参考にしてください。 
+Angular.io is site for Angular **documentation** . 
 
 This site also includes links to other helpful angular resources including 
 Angular 2, Angular 1, Angular Material, and AngularFire.
@@ -22,23 +21,24 @@ Filing issues is helpful but **pull requests** that improve the docs are even be
 
 Learn how to [contribute to Angular.io](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md).
 
-> **IMPORTANT**: Do _NOT_ make changes to cached files under `public/docs/ts/_cache`. Cached files are updated through a separate workflow.
-
 ## Development Setup
 This site relies heavily on node and npm.
 
 1. Make sure you are using at least node v.5+ and latest npm; 
 if not install [nvm](https://github.com/creationix/nvm) to get node going on your machine.
 
-1. Install these npm packages *globally*: `npm install -g harp gulp`
+1. Install global npm packages by running `./scripts/before-install.sh`
 
-1. Clone this repo, the [angular/angular source code repo](https://github.com/angular/angular), and the [dart-lang/angular2 source code repo](https://github.com/dart-lang/angular2) to the same parent directory.
-The three cloned repo directories must be siblings, with the latter two repo directories named **angular** and **angular-dart**, respectively.
+1. Clone
+
+  - this repo
+  - [angular/angular source code repo](https://github.com/angular/angular)
+
+  to the same parent directory. The **cloned repo directories must be siblings**, with the latter named **angular**.
 
 1. cd into root directory `angular.io/`
 
-1. install the *all-docs* local packages by running `npm install`
-> You probably must rebuild `node-sass` in a separate step: `npm rebuild node-sass`
+1. Install local npm packages by running `./scripts/install.sh`
 
 1. See [below](#code-sample-development) for code sample development preparation.
 
@@ -90,7 +90,7 @@ take the following extra steps to prepare the environment:
 1. cd back up to `angular.io` root: `cd ../../..`
 
 1. run `gulp add-example-boilerplate` (elevate to admin on Windows) 
-to copy canonical files to the sample directories and create symlinks there for node_modules and typings. 
+to copy canonical files to the sample directories and create symlinks there for node_modules. 
 
 Now cd into any particular sample's language directory (e.g., `public/docs/_examples/quickstart/ts`) and try:
 - `npm start`  to simultaneously compile-with-watch and serve-in-browser-with-watch
@@ -108,8 +108,7 @@ You must check that your example is free of lint errors.
 
 All samples should be covered to some degree by end-to-end tests:
 - `gulp run-e2e-tests` to run all TypeScript and JavaScript tests
-- `gulp run-e2e-tests --lang=dart` to run all Dart tests
-- `gulp run-e2e-tests --lang=all` to run TypeScript, JavaScript, and Dart tests
+- `gulp run-e2e-tests --lang=all` to run TypeScript and JavaScript tests
 - `gulp run-e2e-tests --filter=quickstart` to filter the examples to run, by name
 - `gulp run-e2e-tests --fast` to ignore npm install, webdriver update and boilerplate copy
 
@@ -150,10 +149,10 @@ gulp install-example-angular
 - Grids: A highly customizable CSS Grid Framework built with Sass
 - Prettify: A JS module and CSS for syntax highlighting of source code snippets.
 - Icomoon: Custom built icon fonts
-- prh: Proofreading helper
+
 
 ## License
-Powered by Google ©2010-2016. Code licensed under an [MIT-style License](https://github.com/angular.io/blob/master/LICENSE). Documentation licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/).
+Powered by Google ©2010-2017. Code licensed under an [MIT-style License](https://github.com/angular.io/blob/master/LICENSE). Documentation licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/).
 
-[travis-badge]: https://travis-ci.org/angular/angular-ja.svg?branch=master
-[travis-badge-url]: https://travis-ci.org/angular/angular-ja
+[travis-badge]: https://travis-ci.org/angular/angular.io.svg?branch=master
+[travis-badge-url]: https://travis-ci.org/angular/angular.io

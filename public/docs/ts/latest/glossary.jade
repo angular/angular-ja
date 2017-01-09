@@ -9,9 +9,6 @@ block includes
 - var _decoratorLink = '<a href="#' + _decorator + '">' + _decorator + '</a>'
 
 :marked
-  # Angular Glossary
-  # Angular  用語集
-
   Angular has a vocabulary of its own.
   Most Angular terms are everyday English words
   with a specific meaning within the Angular system.
@@ -31,23 +28,23 @@ block includes
 
 .l-main-section#A
 
-+ifDocsFor('ts')
-  a#aot
+a#aot
+:marked
+  ## Ahead-of-time (AOT) compilation
+  ## 事前コンパイラ (Ahead-of-time (AoT) compilation)
+.l-sub-section
   :marked
-    ## Ahead-of-time (AoT) compilation
-    ## 事前コンパイラ (Ahead-of-time (AoT) compilation)
-  .l-sub-section
-    :marked
-      You can compile Angular applications at build-time.
-      By compiling your application using the compiler-cli, `ngc`, you can bootstrap directly
-      to a module factory, meaning you don't need to include the Angular compiler in your JavaScript bundle.
-      Ahead-of-time compiled applications also benefit from decreased load time and increased performance.
+    You can compile Angular applications at build-time.
+    By compiling your application<span if-docs="ts"> using the compiler-cli, `ngc`</span>, you can bootstrap directly
+    to a<span if-docs="ts"> module</span> factory, meaning you don't need to include the Angular compiler in your JavaScript bundle.
+    Ahead-of-time compiled applications also benefit from decreased load time and increased performance.
 
-      Angularアプリケーションは、開発者が開発時にコンパイルすることができます。
-      compiler-cli、別名`ngc`を使用してアプリケーションをコンパイルすることで、Module Factoryを直接起動することができます。
-      つまり、JavaScriptのバンドルの中にAngularのコンパイラは必要ありません。
-      また、事前コンパイルしたアプリケーションは読み込み時間が短縮され、パフォーマンスも向上する利点があります。
+    Angularアプリケーションは、開発者が開発時にコンパイルすることができます。
+    compiler-cli、別名`ngc`を使用してアプリケーションをコンパイルすることで、Module Factoryを直接起動することができます。
+    つまり、JavaScriptのバンドルの中にAngularのコンパイラは必要ありません。
+    また、事前コンパイルしたアプリケーションは読み込み時間が短縮され、パフォーマンスも向上する利点があります。
 
++ifDocsFor('ts')
   :marked
     ## Angular module
     ## Angularモジュール (Angular module)
@@ -55,9 +52,12 @@ block includes
     :marked
       Helps you organize an application into cohesive blocks of functionality.
       An Angular module identifies the components, directives, and pipes that the application uses along with the list of external Angular modules that the application needs, such as `FormsModule`.
+      
+       Helps you organize an application into cohesive blocks of functionality.
+      An Angular module identifies the components, directives, and pipes that the application uses along with the list of external Angular modules that the application needs, such as `FormsModule`.
 
       Every Angular application has an application root module class. By convention, the class is
-      called `AppModule` and resides in a file named `app.component.ts`.
+      called `AppModule` and resides in a file named `app.module.ts`.
 
       あらゆるAngularアプリケーションはひとつのアプリケーションルートモジュールクラスをもちます。
       慣例的にそのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置されます。
@@ -98,7 +98,6 @@ block includes
 +ifDocsFor('ts|js')
   :marked
     ## Barrel
-
     ## バレル (Barrel)
   .l-sub-section
     :marked
@@ -147,18 +146,11 @@ block includes
 
       Angularの[スコープ化パッケージ](#scoped-package)それぞれが`index`という名前のバレルを持っています。
 
-      That's why we can write this:
-
-      というわけで、下記のように記述することができるのです：
-
-    +makeExcerpt('quickstart/ts/app/app.component.ts', 'import', '')
-
     .alert.is-important
       :marked
         Note that you can often achieve this using [Angular modules](#angular-module) instead.
 
         同じ目的のために、[Angularモジュール](#angular-module)を使うことがあるので覚えておきましょう。
-
 :marked
   ## Binding
   ## バインディング (Binding)
@@ -183,12 +175,12 @@ block includes
 .l-sub-section
   block bootstrap-defn-top
     :marked
-      You launch an Angular application by "bootstrapping" it using the application root Angular module (`AppModule`). Bootstrapping identifies an application's top level "root" [component](#component), which is the first component that is loaded for the application. For more information, see [QuickStart](!{docsLatest}/quickstart.html).
+      You launch an Angular application by "bootstrapping" it using the application root Angular module (`AppModule`). Bootstrapping identifies an application's top level "root" [component](#component), which is the first component that is loaded for the application. 
+      For more information, see the [Setup](!{docsLatest}/guide/setup.html) page.
 
       Angularアプリケーションは、ルートAngularモジュール(`AppModule`)を利用した "ブートストラッピング" により起動します。
       ブートストラッピングは、アプリケーションで最初にロードされる最上位の "ルート" [コンポーネント](#component)を識別します。
       詳細は[クイックスタート](/docs/ts/latest/quickstart.html)を参照してください。
-
   :marked
     You can bootstrap multiple apps in the same `index.html`, each with its own top level root.
 
@@ -197,7 +189,6 @@ block includes
 .l-main-section#C
 :marked
   ## camelCase
-
   ## キャメルケース (camelCase)
 .l-sub-section
   :marked
@@ -218,7 +209,6 @@ block includes
 
 :marked
   ## Component
-
   ## コンポーネント (Component)
 .l-sub-section
   :marked
@@ -249,7 +239,6 @@ block includes
 .l-main-section#D
 :marked
   ## dash-case
-
   ## ダッシュケース (dash-case)
 .l-sub-section
   :marked
@@ -289,7 +278,7 @@ block includes
 
     Angularは、多様なデータバインディング操作と宣言構文をサポートする高機能なデータバインディングフレームワークを供えています。
 
-     Read about the forms of binding in the [Template Syntax](!{docsLatest}/guide/template-syntax.html#data-binding) page:
+     Read about the forms of binding in the [Template Syntax](!{docsLatest}/guide/template-syntax.html) page:
 
      データバインディングについて詳しく知るには
     [テンプレート構文](!{docsLatest}/guide/template-syntax.html#data-binding)の章を参照してください。
@@ -312,7 +301,7 @@ block includes
   a#decorator
   a#decoration
   :marked
-    ## 
+    ## Decorator | decoration
     ## デコレーター | デコレーション (Decorator | decoration)
   .l-sub-section
     block decorator-defn
@@ -396,7 +385,7 @@ block includes
     このシステムは依存性の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
 
     Angular provides and relies upon its own sophisticated
-    [dependency injection](dependency-injection.html) system
+    [dependency injection](!{docsLatest}/guide/dependency-injection.html) system
     to assemble and run applications by "injecting" application parts
     into other application parts where and when needed.
 
@@ -408,7 +397,6 @@ block includes
 
     その中心には、要求によって依存している値を返す[`インジェクター`](#injector)があります。
     `injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
-
 
     A token is an Angular type (`OpaqueToken`). You rarely deal with tokens directly; most
     methods accept a class name (`Foo`) or a string ("foo") and Angular converts it
@@ -455,7 +443,6 @@ block includes
     詳しく知るには[依存性の注入](!{docsLatest}/guide/dependency-injection.html)の章を参照してください。
 :marked
   ## Directive
-
   ## ディレクティブ (Directive)
 .l-sub-section
   :marked
@@ -576,7 +563,6 @@ a#H
 .l-main-section#I
 :marked
   ## Injector
-
   ## インジェクター (Injector)
 .l-sub-section
   :marked
@@ -590,7 +576,6 @@ a#H
 
 :marked
   ## Input
-
   ## インプット (Input)
 .l-sub-section
   :marked
@@ -610,7 +595,6 @@ a#H
 
 :marked
   ## Interpolation
-
   ## 補間（Interpolation）
 .l-sub-section
   :marked
@@ -637,32 +621,29 @@ a#H
 
 .l-main-section#J
 
-+ifDocsFor('ts')
-  a#jit
+a#jit
+:marked
+  ## Just-in-time (JIT) compilation
+  ## 実行時コンパイラ (Just-in-time (JiT) compilation)
+.l-sub-section
   :marked
-    ## Just-in-time (JiT) compilation
+    With Angular _just-in-time_  bootstrapping you compile your components<span if-docs="ts"> and modules</span> in the browser
+    and launch the application dynamically. This is a good choice during development.
+    Consider using the [ahead-of-time](#aot) mode for production apps.
 
-    ## 実行時コンパイラ (Just-in-time (JiT) compilation)
-  .l-sub-section
-    :marked
-      With Angular _just-in-time_  bootstrapping you compile your components and modules in the browser
-      and launch the application dynamically. This is a good choice during development.
-      Consider using the [ahead-of-time](#aot) mode for production apps.
-      
-      Angularの_実行時_ブートストラッピングでは、コンポーネントやモジュールをブラウザ上でコンパイルし、アプリケーションを動的に実行します。
-      これは開発期間中においては良い選択です。
-      ただし、プロダクション用のアプリケーションでは[事前コンパイラ](#aot)モードを検討してください。
-
+    Angularの_実行時_ブートストラッピングでは、コンポーネントやモジュールをブラウザ上でコンパイルし、アプリケーションを動的に実行します。
+    これは開発期間中においては良い選択です。
+    ただし、プロダクション用のアプリケーションでは[事前コンパイラ](#aot)モードを検討してください。
 .l-main-section#K
 :marked
   ## kebab-case
-  
   ## ケバブケース (kebab-case)
 .l-sub-section
   :marked
     See [dash-case](#dash-case).
     
     [ダッシュケース](#dash-case)を参照してください。
+
 .l-main-section#L
 :marked
   ## Lifecycle hooks
@@ -682,7 +663,7 @@ a#H
     Each interface has a single hook method whose name is the interface name prefixed with `ng`.
 
     それぞれのインターフェイスは、 `ng`という接頭語でインターフェースを名前付けされた、ひとつのフックメソッドを持っています。
-    
+
     For example, the `OnInit` interface has a hook method named `ngOnInit`.
 
     例えば、`OnInit`インターフェースは`ngOnInit`という名前のフックメソッドを持っています。
@@ -690,7 +671,7 @@ a#H
     Angular calls these hook methods in the following order:
     
     Angularはこれらのフック関数を次の順序で呼び出します。
-    
+
     * `ngOnChanges` - when an [input](#input)/[output](#output) binding value changes.
     * `ngOnChanges` - [インプット](#input)/[アウトプット](#output)に紐付いている値が変わった時
     * `ngOnInit` - after the first `ngOnChanges`.
@@ -711,12 +692,11 @@ a#H
     Read more in the [Lifecycle Hooks](!{docsLatest}/guide/lifecycle-hooks.html) page.
 
     [Lifecycle Hooks](!{docsLatest}/guide/lifecycle-hooks.html)章でさらに学習することができます。
-    
+
 .l-main-section#M
 
 :marked
   ## Module
-  
   ## モジュール (Module)
 .l-sub-section
   block module-defn
@@ -807,7 +787,6 @@ a#N
 
 :marked
   ## Output
-
   ## アウトプット (Output)
 .l-sub-section
   :marked
@@ -828,7 +807,6 @@ a#N
 
 :marked
   ## PascalCase
-
   ## パスカルケース (PascalCase)
 .l-sub-section
   :marked
@@ -844,7 +822,6 @@ a#N
 
 :marked
   ## Pipe
-
   ## パイプ (Pipe)
 .l-sub-section
   :marked
@@ -871,7 +848,6 @@ a#N
 
 :marked
   ## Provider
-
   ## プロバイダー (Provider)
 .l-sub-section
   :marked
@@ -918,7 +894,6 @@ a#Q
 
 :marked
   ## Router
-
   ## ルーター (Router)
 .l-sub-section
   :marked
@@ -956,7 +931,7 @@ a#Q
 
       アプリケーションの中の他のビューは、ユーザーがクリックして移動することができる`RouterLink`
       ディレクティブの付いたアンカータグかボタンを持つでしょう。
-      
+
       For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
       詳細は、[ルーティングとナビゲーション](!{docsLatest}/guide/router.html)の章を参照してください。
@@ -979,16 +954,14 @@ a#Q
   ## Routing component
   ## ルーティングコンポーネント (Routing component)
 .l-sub-section
-  block routing-component-defn
-    :marked
-      An Angular [component](#component) with a RouterOutlet that displays views based on router navigations.
+  :marked
+    An Angular [component](#component) with a `RouterOutlet` that displays views based on router navigations.
 
-      ルーターのナビゲーションに基づきビューを表示するRouterOutletを備えたAngular [コンポーネント](#component)です。
+    ルーターのナビゲーションに基づきビューを表示するRouterOutletを備えたAngular [コンポーネント](#component)です。
 
-      For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
+    For more information, see the [Routing & Navigation](!{docsLatest}/guide/router.html) page.
 
-      詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
-
+    詳細は、[コンポーネントルーター](!{docsLatest}/guide/router.html)の章を参照してください。
 .l-main-section#S
 
 +ifDocsFor('ts|js')
@@ -1019,7 +992,6 @@ a#Q
 a#snake-case
 :marked
   ## snake_case
-
   ## スネークケース (snake_case)
 .l-sub-section
   block snake-case-defn
@@ -1032,7 +1004,6 @@ a#snake-case
 
 :marked
   ## Service
-
   ## サービス (Service)
 .l-sub-section
   :marked
@@ -1081,7 +1052,6 @@ a#snake-case
 .l-main-section#T
 :marked
   ## Template
-
   ## テンプレート (Template)
 .l-sub-section
   :marked
@@ -1144,7 +1114,6 @@ a#snake-case
 
 :marked
   ## Transpile
-
   ## トランスパイル (Transpile)
 .l-sub-section
   :marked
@@ -1158,7 +1127,7 @@ a#snake-case
   ## TypeScript
 .l-sub-section
   :marked
-    A version of JavaScript that supports most [ECMAScript 2015](#ecmascript=2015)
+    A version of JavaScript that supports most [ECMAScript 2015](#es2015)
     language features such as [decorators](#decorator).
 
     大部分の[ECMAScript 2015](#ecmascript=2015)の言語機能、および[デコレーター](#decorator)のような
@@ -1189,7 +1158,6 @@ a#U
 
 :marked
   ## View
-
   ## ビュー (View)
 .l-sub-section
   :marked

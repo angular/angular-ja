@@ -1,4 +1,5 @@
 // #docregion
+declare var angular: angular.IAngularStatic;
 import { Phone, PhoneData } from '../core/phone/phone.service';
 
 class PhoneListController {

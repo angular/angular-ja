@@ -37,22 +37,11 @@ class PlunkerBuilder {
   }
 
   _addPlunkerFiles(config, postData) {
-    this._addReadme(config, postData);
     if (config.basePath.indexOf('/ts') > -1) {
-      // uses systemjs.config.js so add plunker version
-      this.options.addField(postData, 'systemjs.config.js', this.systemjsConfig);
-      this.options.addField(postData, 'tsconfig.json', this.tsconfig);
-    }
-  }
-
-  _addReadme(config, postData) {
-    var existingFiles = config.fileNames.map(function(file) {
-      return file.substr(file.lastIndexOf('/') + 1);
-    });
-
-    if (existingFiles.indexOf('README.md') === -1) {
-      var plunkerReadme = this.readme + config.description;
-      this.options.addField(postData, 'README.md', plunkerReadme);
+      if (config.includeSystemConfig) {
+        // uses systemjs.config.js so add plunker version
+        this.options.addField(postData, 'systemjs.config.js', this.systemjsConfig);
+      }
     }
   }
 
@@ -65,11 +54,13 @@ class PlunkerBuilder {
     this.copyrights.html = `${pad}<!-- \n${copyright}\n-->`;
   }
 
-  // config has
-  //   files: [] - optional array of globs - defaults to all js, ts, html, json, css and md files (with certain files removed)
-  //   description: optional string - description of this plunker - defaults to the title in the index.html page.
-  //   tags: [] - optional array of strings
-  //   main: string - filename of what will become index.html in the plunker - defaults to index.html
+  // Build plunker from JSON configuration file (e.g., plnkr.json):
+  // all properties are optional
+  //   files: string[] - array of globs - defaults to all js, ts, html, json, css and md files (with certain files removed)
+  //   description: string - description of this plunker - defaults to the title in the index.html page.
+  //   tags: string[] - optional array of plunker tags (for searchability)
+  //   main: string - name of file that will become index.html in the plunker - defaults to index.html
+  //   open: string - name of file to display within the plunker as in "open": "app/app.module.ts"
   _buildPlunkerFrom(configFileName) {
     // replace ending 'plnkr.json' with 'plnkr.no-link.html' to create output file name;
     var outputFileName = `${this.options.plunkerFileName}.no-link.html`;
@@ -83,7 +74,7 @@ class PlunkerBuilder {
       var config = this._initConfigAndCollectFileNames(configFileName);
       var postData = this._createPostData(config);
       this._addPlunkerFiles(config, postData);
-      var html = this._createPlunkerHtml(postData);
+      var html = this._createPlunkerHtml(config, postData);
       if (this.options.writeNoLink) {
         fs.writeFileSync(outputFileName, html, 'utf-8');
       }
@@ -106,13 +97,19 @@ class PlunkerBuilder {
     }
   }
 
-  _createBasePlunkerHtml(embedded) {
-    var html = '<!DOCTYPE html><html lang="en"><body>'
-    html += `<form id="mainForm" method="post" action="${this.options.url}" target="_self">`
+  _createBasePlunkerHtml(config, embedded) {
+    var open = '';
+
+    if (config.open) {
+      open = embedded ? `&show=${config.open}` : `&open=${config.open}`;
+    }
+    var action = `${this.options.url}${open}`;
+    var html = '<!DOCTYPE html><html lang="en"><body>';
+    html += `<form id="mainForm" method="post" action="${action}" target="_self">`;
 
     // html += '<div class="button"><button id="formButton" type="submit">Create Plunker</button></div>'
     // html += '</form><script>document.getElementById("formButton").click();</script>'
-    html +=  '</form><script>document.getElementById("mainForm").submit();</script>'
+    html +=  '</form><script>document.getElementById("mainForm").submit();</script>';
     html += '</body></html>';
     return html;
   }
@@ -125,6 +122,8 @@ class PlunkerBuilder {
       if (extn == '.png') {
         content = this._encodeBase64(fileName);
         fileName = fileName.substr(0, fileName.length - 4) + '.base64.png'
+      } else if (-1 < fileName.indexOf('systemjs.config.extras')) {
+        content = this._getSystemjsConfigExtras(config);
       } else {
         content = fs.readFileSync(fileName, 'utf-8');
       }
@@ -157,7 +156,7 @@ class PlunkerBuilder {
       this.options.addField(postData, relativeFileName, content);
     });
 
-    var tags = ['angular2', 'example'].concat(config.tags || []);
+    var tags = ['angular', 'example'].concat(config.tags || []);
     tags.forEach(function(tag,ix) {
       postData['tags[' + ix + ']'] = tag;
     });
@@ -177,8 +176,8 @@ class PlunkerBuilder {
     return postData;
   }
 
-  _createPlunkerHtml(postData) {
-    var baseHtml = this._createBasePlunkerHtml(this.options.embedded);
+  _createPlunkerHtml(config, postData) {
+    var baseHtml = this._createBasePlunkerHtml(config, this.options.embedded);
     var doc = jsdom.jsdom(baseHtml);
     var form = doc.querySelector('form');
     _.forEach(postData, (value, key) => {
@@ -208,15 +207,34 @@ class PlunkerBuilder {
   }
 
   _getPlunkerFiles() {
-    // Assume plunker version is sibling of node_modules version
-    this.readme = fs.readFileSync(this.basePath +  '/plunker.README.md', 'utf-8');
-    var systemJsConfigPath = '/systemjs.config.plunker.js';
+    var systemJsConfigPath = '/_boilerplate/systemjs.config.web.js';
     if (this.options.build) {
-      systemJsConfigPath = '/systemjs.config.plunker.build.js';
+      systemJsConfigPath = '/_boilerplate/systemjs.config.web.build.js';
     }
     this.systemjsConfig = fs.readFileSync(this.basePath + systemJsConfigPath, 'utf-8');
-    this.systemjsConfig +=  this.copyrights.jsCss;
-    this.tsconfig = fs.readFileSync(`${this.basePath}/tsconfig.json`, 'utf-8');
+
+    // Copyright already added to web versions of systemjs.config
+    // this.systemjsConfig +=  this.copyrights.jsCss;
+  }
+
+  // Try to replace `systemjs.config.extras.js` with the
+  // `systemjs.config.extras.web.js` web version that
+  // should default SystemJS barrels to `.ts` files rather than `.js` files
+  // Example: see docs `testing`.
+  // HACK-O-MATIC!
+  _getSystemjsConfigExtras(config) {
+    var extras =    config.basePath + '/systemjs.config.extras.js';
+    var webExtras = config.basePath + '/systemjs.config.extras.web.js';
+    if (fs.existsSync(webExtras)) {
+      // console.log('** Substituted "' + webExtras + '"  for "' + extras + '".');
+      return fs.readFileSync(webExtras, 'utf-8');
+    } else if (fs.existsSync(extras)){
+      console.log('** WARNING: no "' + webExtras + '" replacement for "' + extras + '".');
+      return fs.readFileSync(extras, 'utf-8');
+    } else {
+      console.log('** WARNING: no "' + extras + '" file; returning empty content.');
+      return '';
+    }
   }
 
   _htmlToElement(document, html) {
@@ -255,10 +273,8 @@ class PlunkerBuilder {
       }
     });
 
-    // var defaultExcludes = [ '!**/node_modules/**','!**/typings/**','!**/tsconfig.json', '!**/*plnkr.json', '!**/*plnkr.html', '!**/*plnkr.no-link.html' ];
     var defaultExcludes = [
-      '!**/typings/**',
-      '!**/typings.json',
+      '!**/a2docs.css',
       '!**/tsconfig.json',
       '!**/*plnkr.*',
       '!**/package.json',
@@ -268,7 +284,10 @@ class PlunkerBuilder {
       '!**/systemjs.config.js',
       '!**/wallaby.js',
       '!**/karma-test-shim.js',
-      '!**/karma.conf.js'
+      '!**/karma.conf.js',
+      // AoT related files
+      '!**/aot/**/*.*',
+      '!**/*-aot.*'
     ];
 
     // exclude all specs if no spec is mentioned in `files[]`

@@ -1,68 +1,52 @@
 (function(app) {
-  // #docregion
-  var ConfirmComponent = ng.core.Component({
-    selector: 'my-confirm',
-    inputs: [
-      'okMsg',
-      'notOkMsg: cancelMsg'
-    ],
-    outputs: [
-      'ok',
-      'notOk: cancel'
-    ],
-    template:
-      '<button (click)="onOkClick()">' +
-        '{{okMsg}}' +
-      '</button>' +
-      '<button (click)="onNotOkClick()">' +
-        '{{notOkMsg}}' +
-      '</button>'
-  }).Class({
-    constructor: function() {
-      this.ok = new ng.core.EventEmitter();
-      this.notOk = new ng.core.EventEmitter();
-    },
-    onOkClick: function() {
-      this.ok.next(true);
-    },
-    onNotOkClick: function() {
-      this.notOk.next(true);
-    }
-  });
-  // #enddocregion
 
-  function AppComponent() {
-  }
-  AppComponent.annotations = [
+  var old = app.HeroComponent
+
+  app.HeroComponent = HeroComponent;
+
+  HeroComponent.annotations = [
     new ng.core.Component({
       selector: 'hero-io',
-      template: '<my-confirm [okMsg]="\'OK\'"' +
-        '[cancelMsg]="\'Cancel\'"' +
-        '(ok)="onOk()"' +
-        '(cancel)="onCancel()">' +
-        '</my-confirm>' +
-        '<span *ngIf="okClicked">OK clicked</span>' +
-        '<span *ngIf="cancelClicked">Cancel clicked</span>'
+      templateUrl: 'app/hero-io.component.html'
     })
   ];
-  AppComponent.prototype.onOk = function() {
+
+  function HeroComponent() { }
+
+  HeroComponent.prototype.onOk = function() {
     this.okClicked = true;
   }
-  AppComponent.prototype.onCancel = function() {
+
+  HeroComponent.prototype.onCancel = function() {
     this.cancelClicked = true;
   }
 
-  app.HeroesIOModule =
-    ng.core.NgModule({
-      imports: [ ng.platformBrowser.BrowserModule ],
-      declarations: [
-        AppComponent,
-        ConfirmComponent
-      ],
-      bootstrap: [ AppComponent ]
-    })
-    .Class({
-      constructor: function() {}
-    });
+  app.HeroIOComponent = app.HeroComponent;
+  app.HeroComponent = old;
+
+})(window.app = window.app || {});
+
+///// DSL Version ////
+
+(function(app) {
+
+  var old = app.HeroComponent
+
+  app.HeroComponent = ng.core.Component({
+    selector: 'hero-io-dsl',
+    templateUrl: 'app/hero-io-dsl.component.html'
+  })
+  .Class({
+    constructor: function HeroComponent() { },
+    onOk: function() {
+      this.okClicked = true;
+    },
+    onCancel: function() {
+      this.cancelClicked = true;
+    }
+  });
+
+  app.HeroIODslComponent = app.HeroComponent;
+  app.HeroComponent = old;
 
 })(window.app = window.app || {});

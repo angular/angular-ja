@@ -32,6 +32,7 @@ import {
     AppComponent,
     CarComponent,
     HeroesComponent,
+    // #enddocregion ngmodule
     HeroListComponent,
     InjectorComponent,
     TestComponent,
@@ -46,6 +47,7 @@ import {
     Provider8Component,
     Provider9Component,
     Provider10Component,
+    // #docregion ngmodule
   ],
   // #docregion ngmodule-providers
   providers: [
@@ -53,7 +55,6 @@ import {
     { provide: APP_CONFIG, useValue: HERO_DI_CONFIG }
   ],
   // #enddocregion ngmodule-providers
-  bootstrap: [ AppComponent, ProvidersComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
-// #enddocregion ngmodule

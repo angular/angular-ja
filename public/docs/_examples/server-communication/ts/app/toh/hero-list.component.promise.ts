@@ -7,8 +7,9 @@ import { HeroService }       from './hero.service.promise';
 @Component({
   selector: 'hero-list-promise',
   moduleId: module.id,
-  templateUrl: 'hero-list.component.html',
-  providers: [ HeroService ]
+  templateUrl: './hero-list.component.html',
+  providers: [ HeroService ],
+  styles: ['.error {color:red;}']
 })
 // #docregion component
 export class HeroListPromiseComponent implements OnInit {

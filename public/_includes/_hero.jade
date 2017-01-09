@@ -1,4 +1,4 @@
-// template: public/_includes/_hero
+//- template: public/_includes/_hero
 //- Refer to jade.template.html and addJadeDataDocsProcessor to figure out where the context of this jade file originates
 - var textFormat = '';
 - var headerTitle = title + (typeof varType !== 'undefined' ? (': ' + varType) : '');
@@ -13,8 +13,12 @@
 if current.path[4] && current.path[3] == 'api'
   - var textFormat = 'is-standard-case'
 
+if current.path.indexOf('cheatsheet') > 0 || current.path[current.path.length-2] === 'api'
+  - var base = current.path[4] ? '../guide' : './guide';
+  - var ngVersion = '(v<ngio-cheatsheet src="' + base + '/cheatsheet.json" version-only>2.X.Y</ngio-cheatsheet>)'; 
+
 header.hero.background-sky
-  h1(class="hero-title #{textFormat}") #{headerTitle}
+  h1(class="hero-title #{textFormat}") #{headerTitle} !{ngVersion}
 
   if useBadges
     if stability
@@ -24,16 +28,14 @@ header.hero.background-sky
       span(class="badge is-deprecated").
         Security Risk
 
-  //CLEAR FLOAT ELEMENTS
+  //- CLEAR FLOAT ELEMENTS
   .clear
 
   if subtitle
     h2.hero-subtitle #{subtitle}
-
   else if docType
     h2.hero-subtitle #{renamer(capitalize(docType))}
 
-
-if current.path[3] == 'api' && current.path[1] == 'dart'
-  block breadcrumbs
+  if current.path[3] == 'api' && current.path[1] == 'dart'
+    block breadcrumbs
 

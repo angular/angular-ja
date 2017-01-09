@@ -1,11 +1,5 @@
-// #docplaster
 // #docregion
 import { Component }         from '@angular/core';
-
-// #docregion import-rxjs
-// Add the RxJS Observable operators we need in this app.
-import './rxjs-operators';
-// #enddocregion import-rxjs
 
 @Component({
   selector: 'my-app',
@@ -17,4 +11,3 @@ import './rxjs-operators';
   `
 })
 export class AppComponent { }
-// #enddocregion

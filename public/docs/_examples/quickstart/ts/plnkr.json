@@ -1,9 +1,0 @@
-{
-  "description": "QuickStart",
-  "files": [
-    "app/app.component.ts",
-    "index.html"
-  ],
-  "open": "app/app.component.ts",
-  "tags": ["quickstart"]
-}

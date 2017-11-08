@@ -1,9 +1,0 @@
-{
-  "description": "Http",
-  "files":[
-    "!**/*.d.ts",
-    "!**/*.js",
-    "!**/*.[1].*"
-  ],
-  "tags": ["http", "jsonp"]
-}

@@ -1,4 +1,0 @@
-{
-  "build": "build:webpack",
-  "run": "http-server:cli"
-}

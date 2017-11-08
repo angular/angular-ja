@@ -1,4 +1,0 @@
-# Comments & blank lines are ignored. Entry format (make pattern as specific as possible):
-# <grep-pattern-to-match-file-path> # reason / issue number
-
-/[jt]s/.*/api/forms/index/NG_VALIDATORS-let.html    # RC6 contains broken example tags

@@ -1,9 +1,0 @@
-{
-  "description": "Component Styles",
-  "files": [
-    "!**/*.d.ts",
-    "!**/*.js",
-    "!**/*.native.*"
-  ],
-  "tags": ["CSS"]
-}

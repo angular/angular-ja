@@ -1,0 +1,3 @@
+[submodule "en"]
+	path = en
+	url = git@github.com:angular/angular.git

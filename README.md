@@ -105,7 +105,7 @@ https://github.com/angular/angular/tree/master/aio
 ```
 origin/aio/
 ├── README.md
-├── content # Markdownで書かれたドキュメンテーションファイル。主にここのファイルを翻訳する
+├── content # MarkdownやHTMLなどで書かれたドキュメンテーションのリソースファイル。主にここのファイルを翻訳する
 │   ├── examples # サンプルコードのソースコード
 │   ├── guide # ガイドドキュメントのリソース
 │   ├── images # ドキュメンテーション中の画像

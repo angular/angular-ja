@@ -1,0 +1,15 @@
+{
+  "name": "angular-ja",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/angular/angular-ja",
+  "author": "Suguru Inatomi <suguru.inatomi@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "deploy": "firebase deploy --token \"$FIREBASE_TOKEN\""
+  },
+  "devDependencies": {
+    "firebase-tools": "^3.14.0"
+  }
+}

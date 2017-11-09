@@ -19,6 +19,10 @@
     {
       "url": "https://blog.angular.io/",
       "title": "公式ブログ"
+    },
+    {
+      "url": "https://github.com/angular/angular-ja",
+      "title": "翻訳に協力する"
     }
   ],
 

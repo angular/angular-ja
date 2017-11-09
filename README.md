@@ -6,7 +6,13 @@
 
 現在は https://angular-ja.firebaseapp.com/ でホストされたサイトを確認できます。
 
-## コントリビューション歓迎
+## コントリビューター
+
+<!---begin contributors -->
+[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco)
+<!---end contributors -->
+
+## コントリビューション大歓迎！
 
 この翻訳プロジェクトにはみなさんの協力が必要です。
 

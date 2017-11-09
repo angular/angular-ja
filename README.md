@@ -9,7 +9,9 @@
 ## コントリビューター
 
 <!---begin contributors -->
-[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco)
+[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco) |
+:---: |
+[lacolaco](https://github.com/lacolaco) |
 <!---end contributors -->
 
 ## コントリビューション大歓迎！

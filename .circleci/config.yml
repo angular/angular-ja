@@ -42,10 +42,10 @@ jobs:
         
       # Deployment
       - deploy:
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            ./deploy.sh
-          fi
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              yarn deploy
+            fi
 
 
 

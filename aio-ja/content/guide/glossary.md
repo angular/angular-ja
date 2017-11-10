@@ -1,12 +1,9 @@
-# Angular Glossary
+# Angular用語集
 
-Angular has its own vocabulary.
-Most Angular terms are common English words
-with a specific meaning within the Angular system.
+Angularには独自の用語があります。
+ほとんどのAngularの用語は、Angularシステムの中で特別な意味をもつ常用英単語です。
 
-This glossary lists the most prominent terms
-and a few less familiar ones that have unusual or
-unexpected definitions.
+ここには主要な用語といくつかのあまり馴染みのない用語を集めています。
 
 [A](guide/glossary#A) [B](guide/glossary#B) [C](guide/glossary#C) [D](guide/glossary#D) [E](guide/glossary#E) [F](guide/glossary#F) [G](guide/glossary#G) [H](guide/glossary#H) [I](guide/glossary#I)
 [J](guide/glossary#J) [K](guide/glossary#K) [L](guide/glossary#L) [M](guide/glossary#M) [N](guide/glossary#N) [O](guide/glossary#O) [P](guide/glossary#P) [Q](guide/glossary#Q) [R](guide/glossary#R)
@@ -18,20 +15,17 @@ unexpected definitions.
 
 
 ## Ahead-of-time (AOT) compilation
+_事前コンパイル_
 
-You can compile Angular applications at build time.
-By compiling your application using the compiler-cli, `ngc`, you can bootstrap directly
-to a module factory, meaning you don't need to include the Angular compiler in your JavaScript bundle.
-Ahead-of-time compiled applications also benefit from decreased load time and increased performance.
-
-
-
-</div>
-
+Angularアプリケーションは、開発者が開発時にコンパイルすることができます。
+compiler-cli、別名`ngc`を使用してアプリケーションをコンパイルすることで、Module Factoryを直接起動することができます。
+つまり、JavaScriptのバンドルの中にAngularのコンパイラは必要ありません。
+また、事前コンパイルしたアプリケーションは読み込み時間が短縮され、パフォーマンスも向上する利点があります。
 
 ## Annotation
+_アノテーション_
 
-In practice, a synonym for [Decoration](guide/glossary#decorator).
+[デコレーター](guide/glossary#decorator)のことを指します。
 
 
 {@a attribute-directive}
@@ -41,24 +35,24 @@ In practice, a synonym for [Decoration](guide/glossary#decorator).
 
 
 ## Attribute directives
+_属性ディレクティブ_
 
-A category of [directive](guide/glossary#directive) that can listen to and modify the behavior of
-other HTML elements, attributes, properties, and components. They are usually represented
-as HTML attributes, hence the name.
+[ディレクティブ](guide/glossary#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。その名前のとおり、通常これらはHTML属性として現れます。
 
-For example, you can use the `ngClass` directive to add and remove CSS class names.
+例えば、`ngClass`ディレクティブを使ってCSSクラス名を追加したり削除したりできます。
 
-Learn about them in the [_Attribute Directives_](guide/attribute-directives) guide.
+[_属性ディレクティブ_](guide/attribute-directives)ガイドで詳しく学びましょう。
 
 
 {@a B}
 
 ## Barrel
+_バレル_
 
-A way to *roll up exports* from several ES2015 modules into a single convenient ES2015 module.
-The barrel itself is an ES2015 module file that re-exports *selected* exports of other ES2015 modules.
+バレルは、複数のES2015モジュールをひとつのES2015モジュールに*まとめてエクスポートする*方法です。
+バレル自身は、ES2015モジュールのファイルであり、*選択された*他のES2015モジュールのエクスポートを再エクスポートします。
 
-For example, imagine three ES2015 modules in a `heroes` folder:
+例として、`heroes`フォルダにある、3つのES2015モジュールをイメージしてください：
 
 <code-example>
   // heroes/hero.component.ts
@@ -73,7 +67,7 @@ For example, imagine three ES2015 modules in a `heroes` folder:
 
 
 
-Without a barrel, a consumer needs three import statements:
+バレル無しでは、3つのインポート文を書く必要があります。
 
 <code-example>
   import { HeroComponent } from '../heroes/hero.component.ts';
@@ -83,7 +77,7 @@ Without a barrel, a consumer needs three import statements:
 
 
 
-You can add a barrel to the `heroes` folder (called `index`, by convention) that exports all of these items:
+これらすべてをエクスポートしている`heroes`フォルダ（慣例的に`index`と呼ばれます）にバレルを追加できます。
 
 <code-example>
   export * from './hero.model.ts';   // re-export all of its exports
@@ -93,7 +87,7 @@ You can add a barrel to the `heroes` folder (called `index`, by convention) that
 
 
 
-Now a consumer can import what it needs from the barrel.
+これでバレルから必要なものをインポートできるようになります。
 
 <code-example>
   import { Hero, HeroService } from '../heroes'; // index is implied
@@ -101,73 +95,65 @@ Now a consumer can import what it needs from the barrel.
 
 
 
-The Angular [scoped packages](guide/glossary#scoped-package) each have a barrel named `index`.
-
+Angularの[スコープ化パッケージ](guide/glossary#scoped-package)それぞれが`index`という名前のバレルを持っています。
 
 <div class="alert is-important">
 
 
 
-You can often achieve the same result using [NgModules](guide/glossary#ngmodule) instead.
+同じ目的のために、[Angularモジュール](guide/glossary#ngmodule)を使うことがあるので覚えておきましょう。
 
 
 </div>
 
-
 ## Binding
+_バインディング_
 
-Usually refers to [data binding](guide/glossary#data-binding) and the act of
-binding an HTML object property to a data object property.
+ほとんどの場合、[データバインディング](guide/glossary#data-binding)のことを指します。
+その役割は、HTMLオブジェクトのプロパティと、データオブジェクトのプロパティを結びつけることです。
 
-Sometimes refers to a [dependency-injection](guide/glossary#dependency-injection) binding
-between a "token"&mdash;also referred to as a "key"&mdash;and a dependency [provider](guide/glossary#provider).
-
+また、"トークン"または"キー" と依存性の[プロバイダー](guide/glossary#provider)との間を結びつける、[依存性の注入](guide/glossary#dependency-injection)を指すこともあります。
 
 ## Bootstrap
+_ブートストラップ_
 
 
-<div class="l-sub-section">
+アプリケーションルートのNgModule (`AppModule`) を使って "ブートストラップ"することでAngularアプリケーションが起動します。
 
-You launch an Angular application by "bootstrapping" it using the application root NgModule (`AppModule`).
+ブートストラップは、アプリケーションにロードされる最初のコンポーネントであるアプリケーションの最上位の「ルート」[コンポーネント](guide/glossary#component)を識別します。
+詳細については、[セットアップ](guide/setup)を参照してください。
 
-Bootstrapping identifies an application's top level "root" [component](guide/glossary#component),
-which is the first component that is loaded for the application.
-For more information, see the [Setup](guide/setup) page.
-
-You can bootstrap multiple apps in the same `index.html`, each app with its own top-level root.
-
+同じ`index.html`の中で、複数のアプリケーションをそれぞれのルートコンポーネントを使ってブートストラップできます。
 
 {@a C}
 
 ## camelCase
+_キャメルケース_
 
-The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter
-_except the first letter, which is lowercase_.
+複合語や句を、_最初の文字は小文字で書き_、以降はそれぞれの単語または略語が大文字で始まるように書く方法です。
 
-Function, property, and method names are typically spelled in camelCase. For example, `square`, `firstName`, and `getHeroes`. Notice that `square` is an example of how you write a single word in camelCase.
+関数、プロパティ、およびメソッド名は一般的にキャメルケースでつづられます。`square`、`firstName`、および`getHeroes`が例として挙げられます。`square`は、あなたがcamelCaseでどのように1つの単語を書くかの例です。
 
-camelCase is also known as *lower camel case* to distinguish it from *upper camel case*, or [PascalCase](guide/glossary#pascalcase).
-In Angular documentation, "camelCase" always means *lower camel case*.
+この形式は**ロウワーキャメルケース**としても知られ、[パスカルケース](guide/glossary#pascalcase)と呼ばれる**アッパーキャメルケース**と区別します。
+このドキュメンテーションでは、"キャメルケース"とは常に*ロウワーキャメルケース*のことです。
 
 
 {@a component}
 
 
 ## Component
+_コンポーネント_
 
-An Angular class responsible for exposing data to a [view](guide/glossary#view) and handling most of the view’s display and user-interaction logic.
+[ビュー](guide/glossary#view)にデータを伝えること、そしてビューの表示やユーザーインタラクションを処理することを担うAngularのクラスです。
 
-The *component* is one of the most important building blocks in the Angular system.
-It is, in fact, an Angular [directive](guide/glossary#directive) with a companion [template](guide/glossary#template).
+*コンポーネント*は、Angularシステムにおいてもっとも重要な構成要素のひとつです。
+その実体は、[テンプレート](guide/glossary#template)を使用したAngular[ディレクティブ](guide/glossary#directive)のことです。
 
-Apply the `@Component` [decorator](guide/glossary#decorator) to
-the component class, thereby attaching to the class the essential component metadata
-that Angular needs to create a component instance and render the component with its template
-as a view.
+開発者が`@Component` [デコレーター](guide/glossary#decorator)をコンポーネントクラスに付けることによって、
+Angularがコンポーネントのインスタンスを作成し、テンプレートを使ってビューとしてレンダリングするために
+必要とする基本的なコンポーネントのメタデータを、そのクラスに付加します。
 
-Those familiar with "MVC" and "MVVM" patterns will recognize
-the component in the role of "controller" or "view model".
-
+"MVC"あるいは"MVVM"パターンを熟知した人であれば、コンポーネントが"コントローラー"あるいは"ビューモデル"の役割だとわかるでしょう。
 
 {@a D}
 
@@ -511,9 +497,6 @@ You rarely access Angular feature modules directly. You usually import them from
 
 ## NgModule
 
-<div class="l-sub-section">
-
-
 
 Helps you organize an application into cohesive blocks of functionality.
 An NgModule identifies the components, directives, and pipes that the application uses along with the list of external NgModules that the application needs, such as `FormsModule`.
@@ -523,8 +506,6 @@ called `AppModule` and resides in a file named `app.module.ts`.
 
 For details and examples, see [NgModules](guide/ngmodule).
 
-
-</div>
 
 {@a O}
 
@@ -628,8 +609,6 @@ For more information, see the [Routing & Navigation](guide/router) page.
 
 
 ## Router module
-
-<div class="l-sub-section">
 
 A separate [NgModule](guide/glossary#ngmodule) that provides the necessary service providers and directives for navigating through application views.
 

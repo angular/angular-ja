@@ -383,8 +383,8 @@
         },
         {
           "url": "guide/glossary",
-          "title": "Glossary",
-          "tooltip": "Brief definitions of the most important words in the Angular vocabulary."
+          "title": "用語集",
+          "tooltip": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。"
         }
       ]
     },

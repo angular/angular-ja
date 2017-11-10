@@ -1,12 +1,9 @@
-# Angular Glossary
+# Angular用語集
 
-Angular has its own vocabulary.
-Most Angular terms are common English words
-with a specific meaning within the Angular system.
+Angularには独自の用語があります。
+ほとんどのAngularの用語は、Angularシステムの中で特別な意味をもつ常用英単語です。
 
-This glossary lists the most prominent terms
-and a few less familiar ones that have unusual or
-unexpected definitions.
+ここには主要な用語といくつかのあまり馴染みのない用語を集めています。
 
 [A](guide/glossary#A) [B](guide/glossary#B) [C](guide/glossary#C) [D](guide/glossary#D) [E](guide/glossary#E) [F](guide/glossary#F) [G](guide/glossary#G) [H](guide/glossary#H) [I](guide/glossary#I)
 [J](guide/glossary#J) [K](guide/glossary#K) [L](guide/glossary#L) [M](guide/glossary#M) [N](guide/glossary#N) [O](guide/glossary#O) [P](guide/glossary#P) [Q](guide/glossary#Q) [R](guide/glossary#R)
@@ -18,20 +15,17 @@ unexpected definitions.
 
 
 ## Ahead-of-time (AOT) compilation
+_事前コンパイル_
 
-You can compile Angular applications at build time.
-By compiling your application using the compiler-cli, `ngc`, you can bootstrap directly
-to a module factory, meaning you don't need to include the Angular compiler in your JavaScript bundle.
-Ahead-of-time compiled applications also benefit from decreased load time and increased performance.
-
-
-
-</div>
-
+Angularアプリケーションは、開発者が開発時にコンパイルすることができます。
+compiler-cli、別名`ngc`を使用してアプリケーションをコンパイルすることで、Module Factoryを直接起動することができます。
+つまり、JavaScriptのバンドルの中にAngularのコンパイラは必要ありません。
+また、事前コンパイルしたアプリケーションは読み込み時間が短縮され、パフォーマンスも向上する利点があります。
 
 ## Annotation
+_アノテーション_
 
-In practice, a synonym for [Decoration](guide/glossary#decorator).
+[デコレーター](guide/glossary#decorator)のことを指します。
 
 
 {@a attribute-directive}
@@ -41,24 +35,24 @@ In practice, a synonym for [Decoration](guide/glossary#decorator).
 
 
 ## Attribute directives
+_属性ディレクティブ_
 
-A category of [directive](guide/glossary#directive) that can listen to and modify the behavior of
-other HTML elements, attributes, properties, and components. They are usually represented
-as HTML attributes, hence the name.
+[ディレクティブ](guide/glossary#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。その名前のとおり、通常これらはHTML属性として現れます。
 
-For example, you can use the `ngClass` directive to add and remove CSS class names.
+例えば、`ngClass`ディレクティブを使ってCSSクラス名を追加したり削除したりできます。
 
-Learn about them in the [_Attribute Directives_](guide/attribute-directives) guide.
+[_属性ディレクティブ_](guide/attribute-directives)ガイドで詳しく学びましょう。
 
 
 {@a B}
 
 ## Barrel
+_バレル_
 
-A way to *roll up exports* from several ES2015 modules into a single convenient ES2015 module.
-The barrel itself is an ES2015 module file that re-exports *selected* exports of other ES2015 modules.
+バレルは、複数のES2015モジュールをひとつのES2015モジュールに*まとめてエクスポートする*方法です。
+バレル自身は、ES2015モジュールのファイルであり、*選択された*他のES2015モジュールのエクスポートを再エクスポートします。
 
-For example, imagine three ES2015 modules in a `heroes` folder:
+例として、`heroes`フォルダにある、3つのES2015モジュールをイメージしてください：
 
 <code-example>
   // heroes/hero.component.ts
@@ -73,7 +67,7 @@ For example, imagine three ES2015 modules in a `heroes` folder:
 
 
 
-Without a barrel, a consumer needs three import statements:
+バレル無しでは、3つのインポート文を書く必要があります。
 
 <code-example>
   import { HeroComponent } from '../heroes/hero.component.ts';
@@ -83,7 +77,7 @@ Without a barrel, a consumer needs three import statements:
 
 
 
-You can add a barrel to the `heroes` folder (called `index`, by convention) that exports all of these items:
+これらすべてをエクスポートしている`heroes`フォルダ（慣例的に`index`と呼ばれます）にバレルを追加できます。
 
 <code-example>
   export * from './hero.model.ts';   // re-export all of its exports
@@ -93,7 +87,7 @@ You can add a barrel to the `heroes` folder (called `index`, by convention) that
 
 
 
-Now a consumer can import what it needs from the barrel.
+これでバレルから必要なものをインポートできるようになります。
 
 <code-example>
   import { Hero, HeroService } from '../heroes'; // index is implied
@@ -101,109 +95,97 @@ Now a consumer can import what it needs from the barrel.
 
 
 
-The Angular [scoped packages](guide/glossary#scoped-package) each have a barrel named `index`.
-
+Angularの[スコープ化パッケージ](guide/glossary#scoped-package)それぞれが`index`という名前のバレルを持っています。
 
 <div class="alert is-important">
 
 
 
-You can often achieve the same result using [NgModules](guide/glossary#ngmodule) instead.
+同じ目的のために、[Angularモジュール](guide/glossary#ngmodule)を使うことがあるので覚えておきましょう。
 
 
 </div>
 
-
 ## Binding
+_バインディング_
 
-Usually refers to [data binding](guide/glossary#data-binding) and the act of
-binding an HTML object property to a data object property.
+ほとんどの場合、[データバインディング](guide/glossary#data-binding)のことを指します。
+その役割は、HTMLオブジェクトのプロパティと、データオブジェクトのプロパティを結びつけることです。
 
-Sometimes refers to a [dependency-injection](guide/glossary#dependency-injection) binding
-between a "token"&mdash;also referred to as a "key"&mdash;and a dependency [provider](guide/glossary#provider).
-
+また、"トークン"または"キー" と依存性の[プロバイダー](guide/glossary#provider)との間を結びつける、[依存性の注入](guide/glossary#dependency-injection)を指すこともあります。
 
 ## Bootstrap
+_ブートストラップ_
 
 
-<div class="l-sub-section">
+アプリケーションルートのNgModule (`AppModule`) を使って "ブートストラップ"することでAngularアプリケーションが起動します。
 
-You launch an Angular application by "bootstrapping" it using the application root NgModule (`AppModule`).
+ブートストラップは、アプリケーションにロードされる最初のコンポーネントであるアプリケーションの最上位の「ルート」[コンポーネント](guide/glossary#component)を識別します。
+詳細については、[セットアップ](guide/setup)を参照してください。
 
-Bootstrapping identifies an application's top level "root" [component](guide/glossary#component),
-which is the first component that is loaded for the application.
-For more information, see the [Setup](guide/setup) page.
-
-You can bootstrap multiple apps in the same `index.html`, each app with its own top-level root.
-
+同じ`index.html`の中で、複数のアプリケーションをそれぞれのルートコンポーネントを使ってブートストラップできます。
 
 {@a C}
 
 ## camelCase
+_キャメルケース_
 
-The practice of writing compound words or phrases such that each word or abbreviation begins with a capital letter
-_except the first letter, which is lowercase_.
+複合語や句を、_最初の文字は小文字で書き_、以降はそれぞれの単語または略語が大文字で始まるように書く方法です。
 
-Function, property, and method names are typically spelled in camelCase. For example, `square`, `firstName`, and `getHeroes`. Notice that `square` is an example of how you write a single word in camelCase.
+関数、プロパティ、およびメソッド名は一般的にキャメルケースでつづられます。`square`、`firstName`、および`getHeroes`が例として挙げられます。`square`は、あなたがcamelCaseでどのように1つの単語を書くかの例です。
 
-camelCase is also known as *lower camel case* to distinguish it from *upper camel case*, or [PascalCase](guide/glossary#pascalcase).
-In Angular documentation, "camelCase" always means *lower camel case*.
+この形式は**ロウワーキャメルケース**としても知られ、[パスカルケース](guide/glossary#pascalcase)と呼ばれる**アッパーキャメルケース**と区別します。
+このドキュメンテーションでは、"キャメルケース"とは常に*ロウワーキャメルケース*のことです。
 
 
 {@a component}
 
 
 ## Component
+_コンポーネント_
 
-An Angular class responsible for exposing data to a [view](guide/glossary#view) and handling most of the view’s display and user-interaction logic.
+[ビュー](guide/glossary#view)にデータを伝えること、そしてビューの表示やユーザーインタラクションを処理することを担うAngularのクラスです。
 
-The *component* is one of the most important building blocks in the Angular system.
-It is, in fact, an Angular [directive](guide/glossary#directive) with a companion [template](guide/glossary#template).
+*コンポーネント*は、Angularシステムにおいてもっとも重要な構成要素のひとつです。
+その実体は、[テンプレート](guide/glossary#template)を使用したAngular[ディレクティブ](guide/glossary#directive)のことです。
 
-Apply the `@Component` [decorator](guide/glossary#decorator) to
-the component class, thereby attaching to the class the essential component metadata
-that Angular needs to create a component instance and render the component with its template
-as a view.
+開発者が`@Component` [デコレーター](guide/glossary#decorator)をコンポーネントクラスに付けることによって、
+Angularがコンポーネントのインスタンスを作成し、テンプレートを使ってビューとしてレンダリングするために
+必要とする基本的なコンポーネントのメタデータを、そのクラスに付加します。
 
-Those familiar with "MVC" and "MVVM" patterns will recognize
-the component in the role of "controller" or "view model".
-
+"MVC"あるいは"MVVM"パターンを熟知した人であれば、コンポーネントが"コントローラー"あるいは"ビューモデル"の役割だとわかるでしょう。
 
 {@a D}
 
 ## dash-case
+_ダッシュケース_
 
-The practice of writing compound words or phrases such that each word is separated by a dash or hyphen (`-`).
-This form is also known as kebab-case.
+複合語や句を、それぞれの単語がひとつのダッシュやハイフン (`-`) で隔てられるように書く方法です。
+この形式はケバブケースとしても知られています。
 
-[Directive](guide/glossary#directive) selectors (like `my-app`) and
-the root of filenames (such as `hero-list.component.ts`) are often
-spelled in dash-case.
+(`my-app`のような)[ディレクティブ](guide/glossary#directive)セレクターや(`hero-list.component.ts`のような)ファイル名
+は、よくダッシュケースで記述されます。
 
 
 ## Data binding
+_データバインディング_
 
-Applications display data values to a user and respond to user
-actions (such as clicks, touches, and keystrokes).
+アプリケーションはデータの値をユーザーに表示し、ユーザーからのアクション(クリック、タッチ、キーストローク)に反応します。
 
-In data binding, you declare the relationship between an HTML widget and data source
-and let the framework handle the details.
-Data binding is an alternative to manually pushing application data values into HTML, attaching
-event listeners, pulling changed values from the screen, and
-updating application data values.
+データバインディングにおいて、HTMLウィジェットとアプリケーションデータソースの間の関係を定義することで、フレームワークが詳細を処理します。
+データバインディングは、アプリケーションデータ値をHTMLに手動でプッシュしたり、イベントリスナーをアタッチしたり、変更された値を画面から取得したり、アプリケーションデータ値を更新する代わりに使用できます。
 
-Angular has a rich data-binding framework with a variety of data-binding
-operations and supporting declaration syntax.
+Angularは、多様なデータバインディング操作と宣言構文をサポートする高機能なデータバインディングフレームワークを供えています。
 
- Read about the following forms of binding in the [Template Syntax](guide/template-syntax) page:
+データバインディングについて詳しく知るには[テンプレート構文](guide/template-syntax)の章を参照してください。
 
- * [Interpolation](guide/template-syntax#interpolation).
- * [Property binding](guide/template-syntax#property-binding).
- * [Event binding](guide/template-syntax#event-binding).
- * [Attribute binding](guide/template-syntax#attribute-binding).
- * [Class binding](guide/template-syntax#class-binding).
- * [Style binding](guide/template-syntax#style-binding).
- * [Two-way data binding with ngModel](guide/template-syntax#ngModel).
+ * [補間](guide/template-syntax#interpolation).
+ * [プロパティバインディング](guide/template-syntax#property-binding).
+ * [イベントバインディング](guide/template-syntax#event-binding).
+ * [属性バインディング](guide/template-syntax#attribute-binding).
+ * [クラスバインディング](guide/template-syntax#class-binding).
+ * [スタイルバインディング](guide/template-syntax#style-binding).
+ * [ngModelによる双方向バインディング](guide/template-syntax#ngModel).
 
 
 {@a decorator}
@@ -213,17 +195,17 @@ operations and supporting declaration syntax.
 
 
 ## Decorator | decoration
+_デコレーター | デコレーション_
 
-A *function* that adds metadata to a class, its members (properties, methods) and function arguments.
+デコレーターは*関数*であり、クラス、メンバー（プロパティおよびメソッド）、および関数の引数にメタデータを付加します。
 
-Decorators are an experimental (stage 2), JavaScript language [feature](https://github.com/wycats/javascript-decorators). TypeScript adds support for decorators.
+デコレーターはJavaScript言語のステージ2の実験的な[機能](https://github.com/wycats/javascript-decorators)で、TypeScript で実装されています。
 
-To apply a decorator, position it immediately above or to the left of the item it decorates.
+デコレーターを適用するには、修飾する対象の直上か左にデコレーターを配置します。
 
-Angular has its own set of decorators to help it interoperate with your application parts.
-The following example is a `@Component` decorator that identifies a
-class as an Angular [component](guide/glossary#component) and an `@Input` decorator applied to the `name` property
-of that component. The elided object argument to the `@Component` decorator would contain the pertinent component metadata.
+Angularは独自のデコレーターを持っており、Angularとアプリケーションの部品が協調して動く手助けをします。
+こちらは、クラスをAngularの[コンポーネント](guide/glossary#component)と識別する`@Component`デコレーター、およびそのコンポーネントの`name`プロパティに適用される`@Input`デコレーターの例です。
+ここでは省略した`@Component`の引数オブジェクトには、関連するコンポーネントのメタデータを含めます。
 ```
 @Component({...})
 export class AppComponent {
@@ -231,71 +213,60 @@ export class AppComponent {
   @Input() name:string;
 }
 ```
-The scope of a decorator is limited to the language feature
-that it decorates. None of the decorations shown here will "leak" to other
-classes that follow it in the file.
+デコレーターの範囲は、それが修飾するJavaScript言語の機能に限られます。
+ここでいう修飾は、同一ファイルの中でそれ以降にある他のクラスにまで及ぶわけではありません。
 
 
 <div class="alert is-important">
 
 
 
-Always include parentheses `()` when applying a decorator.
+デコレーターを適用する際には、常に丸括弧`()`を含めてください。
 
 
 </div>
 
 
 ## Dependency injection
+_依存性の注入_
 
-A design pattern and mechanism
-for creating and delivering parts of an application to other
-parts of an application that request them.
+依存性の注入は、アプリケーションの部品に求められた部品を作って送り届けるためのデザインパターンでありメカニズムです。
 
-Angular developers prefer to build applications by defining many simple parts
-that each do one thing well and then wiring them together at runtime.
+Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てることを好み、その後、実行時にそれぞれをつなぎます。
 
-These parts often rely on other parts. An Angular [component](guide/glossary#component)
-part might rely on a service part to get data or perform a calculation. When
-part "A" relies on another part "B," you say that "A" depends on "B" and
-that "B" is a dependency of "A."
+これらの部品は他の部品に依存していることがよくあります。Angularの[コンポーネント](guide/glossary#component)部分は
+データを取得し計算を処理するサービス部分に依存しているかもしれません。"A" 部分が他の "B" 部分に依存しているとき、
+"A" は "B" に依存している、または "B" は "A" の依存性であるといいます。
 
-You can ask a "dependency injection system" to create "A"
-for us and handle all the dependencies.
-If "A" needs "B" and "B" needs "C," the system resolves that chain of dependencies
-and returns a fully prepared instance of "A."
+"依存性の注入システム" に "A" を作成させてすべての依存性を扱わせることができます。
+もし "A" が "B" を必要とし、かつ "B" が "C" を必要とするならば、
+このシステムは依存性の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
 
+Angularは独自で洗練された依存性の注入システムを提供し利用しています。
+必要なときに必要な場所でアプリケーションの部品を他の部品へ "注入すること" によって、アプリケーションを組み立てて実行します。
 
-Angular provides and relies upon its own sophisticated
-dependency-injection system
-to assemble and run applications by "injecting" application parts
-into other application parts where and when needed.
+その中心には、要求によって依存している値を返す[`インジェクター`](guide/glossary#injector)があります。
+`injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
 
-At the core, an [`injector`](guide/glossary#injector) returns dependency values on request.
-The expression `injector.get(token)` returns the value associated with the given token.
+トークンはAngularの型(`InjectionToken`)です。わたしたちが直接トークンを扱うことはめったにありません。
+ほとんどのメソッドはクラス名(`Foo`)もしくは文字列("foo")を受け入れて、Angularがトークンに変換するからです。
+わたしたちが`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
+通常その値は`Foo`クラスのインスタンスそのものです。
 
-A token is an Angular type (`InjectionToken`). You rarely need to work with tokens directly; most
-methods accept a class name (`Foo`) or a string ("foo") and Angular converts it
-to a token. When you write `injector.get(Foo)`, the injector returns
-the value associated with the token for the `Foo` class, typically an instance of `Foo` itself.
+Angularは、表示のために[`コンポーネント`](guide/glossary#component)を作るような処理において、似た要求を内部的にしています。
 
-During many of its operations, Angular makes similar requests internally, such as when it creates a [`component`](guide/glossary#component) for display.
+この`インジェクター`は、トークンと依存性の値とのマップを内部的に管理しています。
+もし`インジェクター`が与えられたトークンにマップされた値を見つけられないときには、そのトークンの`プロバイダー`を使って新しく値を作成します。
 
-The `Injector` maintains an internal map of tokens to dependency values.
-If the `Injector` can't find a value for a given token, it creates
-a new value using a `Provider` for that token.
+[プロバイダー](guide/glossary#provider)は、特定のトークンに関連した依存性の値の新しいインスタンスを作成するためのレシピです。
 
-A [provider](guide/glossary#provider) is a recipe for
-creating new instances of a dependency value associated with a particular token.
+インジェクターは、内部的なプロバイダーのレジストリの中にそのトークンのための`プロバイダー`があるときにのみ、依存性の値を作成することができます。
+プロバイダーをレジストリに登録しておくことは、準備段階において非常に重要なことです。
 
-An injector can only create a value for a given token if it has
-a `provider` for that token in its internal provider registry.
-Registering providers is a critical preparatory step.
+Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
+そしてわたしたちは自分のプロバイダーを登録できます。
 
-Angular registers some of its own providers with every injector.
-You can register your own providers.
-
-Read more in the [Dependency Injection](guide/dependency-injection) page.
+詳しく知るには[依存性の注入](guide/dependency-injection)の章を参照してください。
 
 
 {@a directive}
@@ -305,69 +276,61 @@ Read more in the [Dependency Injection](guide/dependency-injection) page.
 
 
 ## Directive
+_ディレクティブ_
 
-An Angular class responsible for creating, reshaping, and interacting with HTML elements
-in the browser DOM. The directive is Angular's most fundamental feature.
+ブラウザのDOM内で、HTML要素を作成し変形し相互に作用することを担当する、Angularのクラスです。
+ディレクティブはAngularのもっとも基本的な機能です。
 
-A directive is usually associated with an HTML element or attribute.
-This element or attribute is often referred to as the directive itself.
+ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
+その要素や属性をディレクティブ自身としてよく参照します。
 
-When Angular finds a directive in an HTML template,
-it creates the matching directive class instance
-and gives the instance control over that portion of the browser DOM.
+AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
+そのインスタンスにブラウザのDOMの一部における制御を与えます。
 
-You can invent custom HTML markup (for example, `<my-directive>`) to
-associate with your custom directives. You add this custom markup to HTML templates
-as if you were writing native HTML. In this way, directives become extensions of
-HTML itself.
+開発者は、新しいディレクティブに紐付いたカスタムHTMLマークアップ(例えば`<my-directive>`)を作ることができます。
+そのカスタムマークアップはあたかも本来のHTMLを書くかのようにHTMLテンプレートに追加できます。
+このようにして、ディレクティブはHTML自身を拡張することになります。
 
-Directives fall into one of the following categories:
+ディレクティブは次の種類に分けられます：
 
-* [Components](guide/glossary#component) combine application logic with an HTML template to
-render application [views](guide/glossary#view). Components are usually represented as HTML elements.
-They are the building blocks of an Angular application.
+* [コンポーネント](guide/glossary#component)はアプリケーションの[ビュー](guide/glossary#view)をレンダリングするHTMLテンプレートと、アプリケーションのロジックをつなげます。
+通常、コンポーネントはHTML要素のことを指します。コンポーネントはAngularアプリケーションの構成要素です。
 
-* [Attribute directives](guide/glossary#attribute-directive) can listen to and modify the behavior of
-other HTML elements, attributes, properties, and components. They are usually represented
-as HTML attributes, hence the name.
+* [属性ディレクティブ](guide/glossary#attribute-directive)は他のHTML要素、属性、プロパティ、およびコンポーネントの振る舞いを監視して変更することができます。
+名前からわかるように、通常、属性ディレクティブはHTML属性のことを指します。
 
-* [Structural directives](guide/glossary#structural-directive) are responsible for
-shaping or reshaping HTML layout, typically by adding, removing, or manipulating
-elements and their children.
-
+* [構造ディレクティブ](guide/glossary#structural-directive)は要素や子要素の追加、削除、および操作によってHTMLのレイアウトを成形したり再成形することを担当するディレクティブです。
 
 {@a E}
 
 ## ECMAScript
 
-The [official JavaScript language specification](https://en.wikipedia.org/wiki/ECMAScript).
+[公式のJavaScriptの言語仕様](https://ja.wikipedia.org/wiki/ECMAScript)です。
 
-The latest approved version of JavaScript is
+JavaScriptの最新の承認されたバージョンは
 [ECMAScript 2017](http://www.ecma-international.org/ecma-262/8.0/)
-(also known as "ES2017" or "ES8"). Many Angular developers write their applications
-in ES8 or a dialect that strives to be
-compatible with it, such as [TypeScript](guide/glossary#typescript).
+(通称"ES2017"または"ES8")であり、多くのAngular開発者はこのバージョンか、[TypeScript](guide/glossary#typescript)のような、
+このバージョンの対応に取り組む言語のいずれかを使用してアプリケーションを書くでしょう。
 
-Most modern browsers only support the much older "ECMAScript 5" (also known as "ES5") standard.
-Applications written in ES2017, ES2016, ES2015, or one of their dialects must be [transpiled](guide/glossary#transpile)
-to ES5 JavaScript.
+今日の大部分のモダンブラウザーは、それよりもずっと古い"ECMAScript 5"(通称ES5)標準しかサポートしていません。
+ES2017、ES2016、 ES2015か、それらと互換性のある言語で書かれたアプリケーションは、
+ES5 JavaScriptに"[トランスパイル](guide/glossary#transpile)"されなければなりません。
 
-Angular developers can write in ES5 directly.
-
+Angularアプリケーションを、ES5で直接書くこともできます。
 
 ## ES2015
 
-Short hand for [ECMAScript](guide/glossary#ecmascript) 2015.
+[ECMAScript 2015](guide/glossary#ecmascript)の簡略表現です。
 
 
 ## ES5
 
-Short hand for [ECMAScript](guide/glossary#ecmascript) 5, the version of JavaScript run by most modern browsers.
-
+ECMAScript 5の簡略表現で、ほとんどのモダンブラウザーで動くJavaScriptのバージョンです。
+[ECMAScript](guide/glossary#ecmascript)を参照してください。
 
 ## ES6
 
-Short hand for [ECMAScript](guide/glossary#ecmascript) 2015.
+[ECMAScript 2015](guide/glossary#ecmascript)の簡略表現です。
 
 
 {@a F}
@@ -381,30 +344,24 @@ Short hand for [ECMAScript](guide/glossary#ecmascript) 2015.
 {@a I}
 
 ## Injector
+_インジェクター_
 
-An object in the Angular [dependency-injection system](guide/glossary#dependency-injection)
-that can find a named dependency in its cache or create a dependency
-with a registered [provider](guide/glossary#provider).
-
+Angularの[依存性の注入システム](guide/glossary#dependency-injection)におけるオブジェクトで、
+指定された"依存性"をキャッシュから見つけるか、登録された[プロバイダー](guide/glossary#provider)を使用して生成できます。
 
 ## Input
+_インプット_
 
-A directive property that can be the *target* of a
-[property binding](guide/template-syntax#property-binding) (explained in detail in the [Template Syntax](guide/template-syntax) page).
-Data values flow *into* this property from the data source identified
-in the template expression to the right of the equal sign.
+[プロパティバインディング](guide/template-syntax#property-binding)([テンプレート構文](guide/template-syntax)のページで詳しく説明されています)の*対象*になるディレクティブプロパティです。
+データ値はデータソースからこのプロパティに流れ*こみます*。データソースはテンプレートの中で等号の右側で識別されます。
 
-See the [Input and output properties](guide/template-syntax#inputs-outputs) section of the [Template Syntax](guide/template-syntax) page.
-
+[テンプレート構文](guide/template-syntax)ページの[インプット・アウトプットプロパティ](guide/template-syntax#inputs-outputs)のセクションを参照してください。
 
 ## Interpolation
+_補間_
 
-A form of [property data binding](guide/glossary#data-binding) in which a
-[template expression](guide/glossary#template-expression) between double-curly braces
-renders as text.  That text may be concatenated with neighboring text
-before it is assigned to an element property
-or displayed between element tags, as in this example.
-
+[プロパティデータバインディング](guide/glossary#data-binding)の一形態で、その二重波括弧の間の[テンプレート式](guide/glossary#template-expression)の結果を、テキストとしてレンダリングします。
+そのテキストは、要素のプロパティに割り当てられるか、この例のように要素のタグの間で表示される前に、隣接したテキストに連結されることがあります。
 
 <code-example language="html" escape="html">
   <label>My current hero is {{hero.name}}</label>
@@ -413,9 +370,7 @@ or displayed between element tags, as in this example.
 
 
 
-Read more about [interpolation](guide/template-syntax#interpolation) in the
-[Template Syntax](guide/template-syntax) page.
-
+補間についての詳細は[テンプレート構文](guide/template-syntax) ページの[補間](guide/template-syntax#interpolation)のセクションを参照してください。
 
 {@a J}
 
@@ -423,149 +378,142 @@ Read more about [interpolation](guide/template-syntax#interpolation) in the
 
 
 ## Just-in-time (JIT) compilation
+_実行時コンパイラ_
 
-A bootstrapping method of compiling components and modules in the browser
-and launching the application dynamically. Just-in-time mode is a good choice during development.
-Consider using the [ahead-of-time](guide/glossary#aot) mode for production apps.
+コンポーネントやモジュールをブラウザ上でコンパイルし、アプリケーションを動的に実行します。
+これは開発期間中においては良い選択です。
+ただし、プロダクション用のアプリケーションでは[事前コンパイラ](guide/glossary#aot)モードを検討してください。
 
 
 {@a K}
 
 ## kebab-case
+_ケバブケース_
 
-See [dash-case](guide/glossary#dash-case).
+[ダッシュケース](guide/glossary#dash-case)を参照してください。
 
 
 {@a L}
 
 ## Lifecycle hooks
+_ライフサイクルフック_
 
-[Directives](guide/glossary#directive) and [components](guide/glossary#component) have a lifecycle
-managed by Angular as it creates, updates, and destroys them.
+[ディレクティブ](guide/glossary#directive) と [コンポーネント](guide/glossary#component)は、Angularがそれらの作成、更新、破棄を管理するためのライフサイクルを持っています。
 
-You can tap into key moments in that lifecycle by implementing
-one or more of the lifecycle hook interfaces.
+開発者は、ひとつかそれ以上の ライフサイクルフックインターフェイスを実装することで、そのライフサイクル中の重要な瞬間に介入することができます。
 
-Each interface has a single hook method whose name is the interface name prefixed with `ng`.
-For example, the `OnInit` interface has a hook method named `ngOnInit`.
+それぞれのインターフェイスは、 `ng`という接頭語でインターフェースを名前付けされた、ひとつのフックメソッドを持っています。
+例えば、`OnInit`インターフェースは`ngOnInit`という名前のフックメソッドを持っています。
 
-Angular calls these hook methods in the following order:
+Angularはこれらのフック関数を次の順序で呼び出します。
 
-* `ngOnChanges`: when an [input](guide/glossary#input)/[output](guide/glossary#output) binding value changes.
-* `ngOnInit`: after the first `ngOnChanges`.
-* `ngDoCheck`: developer's custom change detection.
-* `ngAfterContentInit`: after component content initialized.
-* `ngAfterContentChecked`: after every check of component content.
-* `ngAfterViewInit`: after a component's views are initialized.
-* `ngAfterViewChecked`: after every check of a component's views.
-* `ngOnDestroy`: just before the directive is destroyed.
+* `ngOnChanges`: [インプット](guide/glossary#input)/[アウトプット](guide/glossary#output)に紐付いている値が変わった時
+* `ngOnInit`: 最初の`ngOnChanges`の後
+* `ngDoCheck`: 開発者による任意の変更検知
+* `ngAfterContentInit`: コンポーネントのコンテンツの初期化後
+* `ngAfterContentChecked`: コンポーネントのコンテンツのチェック後、毎回
+* `ngAfterViewInit`: コンポーネントのビュー初期化後
+* `ngAfterViewChecked`: コンポーネントのビューをチェック後、毎回
+* `ngOnDestroy`: ディレクティブが破棄される直前
 
-Read more in the [Lifecycle Hooks](guide/lifecycle-hooks) page.
+[ライフサイクルフック](guide/lifecycle-hooks)のページでさらに学習することができます。
 
 
 {@a M}
 
 ## Module
+_モジュール_
 
 <div class="alert is-important">
 
 
-Angular has the following types of modules:
+Angularには2種類のモジュールがあります。
+* [Angularモジュール](guide/glossary#ngmodule)。詳細や例は[Angularモジュール](guide/ngmodule)のページを参照してください。
+* この節で説明するようなES2015モジュール。
 
-* [NgModules](guide/glossary#ngmodule).
-For details and examples, see the [NgModules](guide/ngmodule) page.
-* ES2015 modules, as described in this section.
 
 
 </div>
 
 
 
-A cohesive block of code dedicated to a single purpose.
+単一の目的のためにまとまったコードブロックのことです。
 
-Angular apps are modular.
+Angularアプリケーションはモジュール化されています。
 
-In general, you assemble an application from many modules, both the ones you write and the ones you acquire from others.
+一般的に、わたしたちのアプリケーションは自分自身で作成したもの、他から取得したものの両方からなる、多くのモジュールで組み立てられています。
 
-A module *exports* something of value in that code, typically one thing such as a class;
-a module that needs that class *imports* it.
+モジュールは、そのコード内で何か価値のあるもの、典型的にはクラスのようなものを*エクスポート*します。そのクラスを必要とするモジュールがそれを*インポート*します。
 
-The structure of NgModules and the import/export syntax
-is based on the [ES2015 module standard](http://www.2ality.com/2014/09/es6-modules-final.html).
+NgModuleの構造とインポート/エクスポート構文は、[ES2015モジュール標準](http://www.2ality.com/2014/09/es6-modules-final.html)に基づいています。
 
-An application that adheres to this standard requires a module loader to
-load modules on request and resolve inter-module dependencies.
-Angular doesn't include a module loader and doesn't have a preference
-for any particular third-party library (although most examples use SystemJS).
-You can use any module library that conforms to the standard.
+この標準に準拠したアプリケーションは、リクエストに応じてモジュールをロードしたり、モジュール間の依存関係を解決するためのモジュールローダーが必要です。
+Angularはモジュールローダーを付属していませんし、特定のサードパーティ製のモジュールローダーをひいきにしていません。（しかし、多くのサンプルはSystemJSを利用しています。）
+アプリケーション開発者は、標準に準拠した任意のモジュールローダーを選択することができます。
 
-Modules are typically named after the file in which the exported thing is defined.
-The Angular [DatePipe](https://github.com/angular/angular/blob/master/packages/common/src/pipes/date_pipe.ts)
-class belongs to a feature module named `date_pipe` in the file `date_pipe.ts`.
+モジュールは慣例として、エクスポートしたものが定義されているファイルに因んで命名されます。
+Angularの[DatePipe](https://github.com/angular/angular/blob/master/packages/common/src/pipes/date_pipe.ts)クラスは、
+`date_pipe.ts`ファイルの中の`date_pipe`と名前付けられた機能モジュールに所属します。
 
-You rarely access Angular feature modules directly. You usually import them from an Angular [scoped package](guide/glossary#scoped-package) such as `@angular/core`.
+開発者がAngularの機能モジュールに直接アクセスすることは、ほとんどありません。
+通常それらを`@angular/core`のような、ひとつのAngularの[スコープ化パッケージ](guide/glossary#scoped-package)からインポートします。
 
 
 {@a N}
 
 
 ## NgModule
+_Angularモジュール_
 
-<div class="l-sub-section">
+アプリケーションを機能的にまとまりのあるブロックで構成するのを手助けするものです。
+Angularモジュールは、`FormsModule`などのアプリケーションで必要とされている外部Angularモジュールのリストに加え、
+アプリケーションで利用されるコンポーネント、ディレクティブ、パイプなどを識別します。
 
+あらゆるAngularアプリケーションはひとつのアプリケーションルートモジュールクラスをもちます。
+慣例的にそのクラスは`AppModule`と呼ばれ、`app.module.ts`ファイル内に配置されます。
 
-
-Helps you organize an application into cohesive blocks of functionality.
-An NgModule identifies the components, directives, and pipes that the application uses along with the list of external NgModules that the application needs, such as `FormsModule`.
-
-Every Angular application has an application root-module class. By convention, the class is
-called `AppModule` and resides in a file named `app.module.ts`.
-
-For details and examples, see [NgModules](guide/ngmodule).
+詳細や例は[Angularモジュール](guide/ngmodule)を参照してください。
 
 
-</div>
 
 {@a O}
 
 ## Observable
 
-An array whose items arrive asynchronously over time.
-Observables help you manage asynchronous data, such as data coming from a backend service.
-Observables are used within Angular itself, including Angular's event system and its HTTP client service.
+アイテムが時間の経過とともに非同期に到着する配列です。
+Observableは、バックエンドサービスからのデータなどの非同期データの管理に役立ちます。 
+Observableは、AngularのイベントシステムとそのHTTPクライアントサービスを含むAngular自体で使用されます。
 
-To use observables, Angular uses a third-party library called Reactive Extensions (RxJS).
-Observables are a proposed feature for ES2016, the next version of JavaScript.
+Observableを使用するために、AngularはReactive Extensions（RxJS）と呼ばれるサードパーティのライブラリを使用します。
+Observableは、JavaScriptの次のバージョンであるES2016に提案されている機能です。
 
 
 ## Output
+_アウトプット_
 
-A directive property that can be the *target* of event binding
-(read more in the [event binding](guide/template-syntax#event-binding)
-section of the [Template Syntax](guide/template-syntax) page).
-Events stream *out* of this property to the receiver identified
-in the template expression to the right of the equal sign.
+イベントバインディングの*対象*となるディレクティブのプロパティです（[テンプレート構文](guide/template-syntax)ページの[イベントバインディング](guide/template-syntax#event-binding)の項を参照してください）。
+イベントはこのプロパティからレシーバーに流れ*出ます*。レシーバーはテンプレート式の中で等号の右側で識別されます。
 
-See the [Input and output properties](guide/template-syntax#inputs-outputs) section of the [Template Syntax](guide/template-syntax) page.
 
+[テンプレート構文](guide/template-syntax)ページの[インプット・アウトプットプロパティ](guide/template-syntax#inputs-outputs)のセクションを参照してください。
 
 {@a P}
 
 ## PascalCase
+_パスカルケース_
 
-The practice of writing individual words, compound words, or phrases such that each word or abbreviation begins with a capital letter.
-Class names are typically spelled in PascalCase. For example, `Person` and `HeroDetailComponent`.
+複合語や句を、それぞれの単語または略語が大文字で始まるように書く方法です。
+クラス名は一般的にパスカルケースでつづられます。`Person`や`HeroDetailComponent`が例として挙げられます。
 
-This form is also known as *upper camel case* to distinguish it from *lower camel case* or simply [camelCase](guide/glossary#camelcase).
-In this documentation, "PascalCase" means *upper camel case* and  "camelCase" means *lower camel case*.
+この形式は**アッパーキャメルケース**としても知られ、わたしたちが単に[キャメルケース](guide/glossary#camelcase)と呼ぶ**ロウワーキャメルケース**と区別します。
+このドキュメンテーションでは、"パスカルケース"とは*アッパーキャメルケース*のことで、"キャメルケース"とは*ロウワーキャメルケース*のことです。
 
 
 ## Pipe
+_パイプ_
 
-An Angular pipe is a function that transforms input values to output values for
-display in a [view](guide/glossary#view).
-Here's an example that uses the built-in `currency` pipe to display
-a numeric value in the local currency.
+Angularパイプは、入力値を出力値に変換して[ビュー](guide/glossary#view)に表示する関数です。
+次に、組み込みの`currency`パイプを使用して数値を現地通貨で表示する例を示します。
 
 
 <code-example language="html" escape="html">
@@ -574,16 +522,16 @@ a numeric value in the local currency.
 </code-example>
 
 
+独自のカスタムパイプを作成することもできます。
+詳細は[パイプ](guide/pipes)のページを参照してください。
 
-You can also write your own custom pipes.
-Read more in the page on [pipes](guide/pipes).
 
 
 ## Provider
+_プロバイダー_
 
-A _provider_ creates a new instance of a dependency for the
-[dependency injection](guide/glossary#dependency-injection) system.
-It relates a lookup token to code&mdash;sometimes called a "recipe"&mdash;that can create a dependency value.
+_プロバイダー_は[依存性の注入](guide/glossary#dependency-injection)システムのための、新しい依存性に関するインスタンスを生成します。
+プロバイダーは検索トークンを、依存性の値を作成するコード（"レシピ"と呼ばれることがあります）に紐付けます。
 
 
 {@a Q}
@@ -591,71 +539,72 @@ It relates a lookup token to code&mdash;sometimes called a "recipe"&mdash;that c
 {@a R}
 
 ## Reactive forms
+_リアクティブフォーム_
 
-A technique for building Angular forms through code in a component.
-The alternative technique is [template-driven forms](guide/glossary#template-driven-forms).
+Angularのフォームをコンポーネントのコードを通じて組み立てる技法です。
+別の技法としては[テンプレート駆動フォーム](guide/glossary#template-driven-forms)があります。
 
-When building reactive forms:
+リアクティブフォームを組み立てる際、
 
-* The "source of truth" is the component. The validation is defined using code in the component.
-* Each control is explicitly created in the component class with `new FormControl()` or with `FormBuilder`.
-* The template input elements do *not* use `ngModel`.
-* The associated Angular directives are all prefixed with `Form`, such as `FormGroup`, `FormControl`, and `FormControlName`.
+* その"真実の情報源"はコンポーネントです。バリデーションはそのコンポーネントのコードを使用して定義されます。
+* それぞれのコントロールはそのコンポーネントのクラスにおいて、`new FormControl()`もしくは`FormBuilder`を使って明示的に生成されます。
+* そのテンプレートのinput要素は`ngModel`を使用*しません*。
+* 関連するAngularディレクティブには全て`Form`接頭辞が付けられています。たとえば、`FormGroup`、 `FormControl`、 そして`FormControlName`などです。
 
-Reactive forms are powerful, flexible, and a good choice for more complex data-entry form scenarios, such as dynamic generation of form controls.
+リアクティブフォームは強力で柔軟なので、より複雑なデータ入力をするフォームの場合には最適です。
+たとえば、動的にフォームのコントロールを生成するような場合などです。
 
 
 ## Router
+_ルーター_
 
-Most applications consist of many screens or [views](guide/glossary#view).
-The user navigates among them by clicking links and buttons,
-and performing other similar actions that cause the application to
-replace one view with another.
+たいていのアプリケーションは多くの画面または[ビュー](guide/glossary#view)から成り立ちます。
+ユーザーはリンクやボタンのクリック、そして他の類似した行為によってアプリケーションの
+ビューを別のビューに差し替えさせることで、それらの間を移動します。
 
-The Angular component router is a richly featured mechanism for configuring and managing the entire view navigation process, including the creation and destruction
-of views.
+Angularのコンポーネントルーターは、ビューの生成と破棄を含めた、
+全てのビューの移動処理を設定し管理するための十分な機能を備えたメカニズムです。
 
-In most cases, components become attached to a router by means
-of a `RouterConfig` that defines routes to views.
 
-A [routing component's](guide/glossary#routing-component) template has a `RouterOutlet` element
-where it can display views produced by the router.
+たいていの場合、コンポーネントはビューへの経路を定義した`RouterConfig`によってルーターに接続されることになります。
 
-Other views in the application likely have anchor tags or buttons with `RouterLink`
-directives that users can click to navigate.
+[ルーティングコンポーネント](guide/glossary#routing-component)のテンプレートは`RouterOutlet`要素を持ち、
+そこでルーターによって生成されたビューを表示することができます
 
-For more information, see the [Routing & Navigation](guide/router) page.
+アプリケーションの中の他のビューは、ユーザーがクリックして移動することができる`RouterLink`
+ディレクティブの付いたアンカータグかボタンを持つでしょう。
 
+詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
 
 ## Router module
 
-<div class="l-sub-section">
+アプリケーションのビューの間を移動するのに必要なサービスプロバイダーおよびディレクティブを提供する、
+独立した[Angularモジュール](guide/glossary#ngmodule)です。
 
-A separate [NgModule](guide/glossary#ngmodule) that provides the necessary service providers and directives for navigating through application views.
-
-For more information, see the [Routing & Navigation](guide/router) page.
+詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
 
 
 ## Routing component
+_ルーティングコンポーネント_
 
-An Angular [component](guide/glossary#component) with a `RouterOutlet` that displays views based on router navigations.
+ルーターのナビゲーションに基づきビューを表示する`RouterOutlet`を備えたAngular [コンポーネント](guide/glossary#component)です。
 
-For more information, see the [Routing & Navigation](guide/router) page.
+詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
 
 
 {@a S}
 
 ## Scoped package
+_スコープ化パッケージ_
 
-A way to group related *npm* packages.
-Read more at the [npm-scope](https://docs.npmjs.com/misc/scope) page.
+関連するnpmパッケージをグループ化する方法です。
+[npm-scope](https://docs.npmjs.com/misc/scope)ページで詳しく読むことができます。
 
-NgModules are delivered within *scoped packages* such as `@angular/core`,
-`@angular/common`, `@angular/platform-browser-dynamic`, `@angular/http`, and `@angular/router`.
+Angularのモジュールは、`@angular/core`、`@angular/common`、`@angular/platform-browser-dynamic`、`@angular/http`、
+および`@angular/router`のような、*スコープ化パッケージ*の範囲内で提供されます。
 
-Import a scoped package the same way that you import a normal package.
-The only difference, from a consumer perspective,
-is that the scoped package name begins with the Angular *scope name*, `@angular`.
+通常のパッケージをインポートするのと同じ方法でスコープされたパッケージをインポートします。
+唯一の違いは、利用者の観点からは、パッケージ名は`@angular`というAngularの*スコープ名*で始まることです。
 
 
 <code-example path="architecture/src/app/app.component.ts" linenums="false" title="architecture/src/app/app.component.ts (import)" region="import">
@@ -664,30 +613,30 @@ is that the scoped package name begins with the Angular *scope name*, `@angular`
 
 
 ## Service
+_サービス_
 
-For data or logic that is not associated
-with a specific view or that you want to share across components, build services.
 
-Applications often require services such as a hero data service or a logging service.
+特定のビューに関連付けられていないデータやロジック、またはコンポーネント間で共有したいデータやロジックの場合は、サービスを構築します。
 
-A service is a class with a focused purpose.
-You often create a service to implement features that are
-independent from any specific view,
-provide shared data or logic across components, or encapsulate external interactions.
 
-Applications often require services such as a data service or a logging service.
+アプリケーションはしばしば、ヒーローデータサービスやロギングサービスのようなサービスを必要とします。
 
-For more information, see the [Services](tutorial/toh-pt4) page of the [Tour of Heroes](tutorial) tutorial.
+サービスは明確な目的を持ったクラスです。
+わたしたちは、どのような特定のビューからも独立した機能や、
+コンポーネント間にわたる共有データやロジックを提供する機能、
+または外部との相互作用をカプセル化する機能を実装するために、サービスを作成することがよくあります。
 
+詳細については、[Tour of Heroes](tutorial)チュートリアルの[サービス](tutorial/toh-pt4)のページを参照してください。
 
 {@a snake-case}
 
 
 ## snake_case
+_スネークケース_
 
-The practice of writing compound words or phrases such that an
-underscore (`_`) separates one word from the next. This form is also known as *underscore case*.
 
+複合語や句を、それぞれの単語がひとつのアンダースコア（`_`）で隔てられるように書く方法です。
+この形式は*アンダースコアケース*としても知られています。
 
 {@a structural-directive}
 
@@ -696,91 +645,91 @@ underscore (`_`) separates one word from the next. This form is also known as *u
 
 
 ## Structural directives
+_構造ディレクティブ_
 
-A category of [directive](guide/glossary#directive) that can
-shape or reshape HTML layout, typically by adding and removing elements in the DOM.
-The `ngIf` "conditional element" directive and the `ngFor` "repeater" directive are well-known examples.
+[ディレクティブ](#directive)の一種で、HTMLのレイアウトを成形または再成形することができます。
+典型的には要素とその子孫を追加、除去、または操作することにより行います。
+`ngIf` "条件要素" ディレクティブと`ngFor` "繰り返し"ディレクティブはよく知られた例です。
 
-Read more in the [Structural Directives](guide/structural-directives) page.
+詳しくは[構造ディレクティブ](guide/structural-directives)ページを参照してください。
 
 
 {@a T}
 
 ## Template
+_テンプレート_
 
-A chunk of HTML that Angular uses to render a [view](guide/glossary#view) with
-the support and guidance of an Angular [directive](guide/glossary#directive),
-most notably a [component](guide/glossary#component).
 
+テンプレートは、[ディレクティブ](guide/glossary#directive)、特に[コンポーネント](guide/glossary#component)によるサポートと一連の指示をもって[ビュー](guide/glossary#view)を描画するために、Angularが使用するHTMLの塊です。
 
 ## Template-driven forms
+_テンプレート駆動フォーム_
 
-A technique for building Angular forms using HTML forms and input elements in the view.
-The alternate technique is [Reactive Forms](guide/glossary#reactive-forms).
 
-When building template-driven forms:
+ビューにおいてHTMLのフォームとinput要素を使用してAngularのフォームを組み立てる技法です。
+別の技法としては[リアクティブフォーム](guide/glossary#reactive-forms)があります。
 
-* The "source of truth" is the template. The validation is defined using attributes on the individual input elements.
-* [Two-way binding](guide/glossary#data-binding) with `ngModel` keeps the component model synchronized with the user's entry into the input elements.
-* Behind the scenes, Angular creates a new control for each input element, provided you have set up a `name` attribute and two-way binding for each input.
-* The associated Angular directives are all prefixed with `ng` such as `ngForm`, `ngModel`, and `ngModelGroup`.
+テンプレート駆動フォームを組み立てる際、
 
-Template-driven forms are convenient, quick, and simple. They are a good choice for many basic data-entry form scenarios.
+* "真実の情報源"はテンプレートです。バリデーションは個々のinput要素の属性を使用して定義されます。
+* `ngModel`を用いた[双方向バインディング](guide/glossary#data-binding)が、コンポーネントのモデルとユーザーによるinput要素への入力との同期を維持します。
+* 舞台裏では、Angularは`name`属性および双方向バインディングの設定を持つ各input要素のために、新しいコントロールを生成します。
+* 関連するAngularディレクティブには全て`ng`接頭辞が付けられています。たとえば、`ngForm`、`ngModel`、そして`ngModelGroup`などです。
 
-Read about how to build template-driven forms
-in the [Forms](guide/forms) page.
+テンプレート駆動フォームは便利で短時間で作成でき、そして単純なので、多数の基本的なデータ入力をするフォームの場合には良い選択です。
 
+テンプレート駆動フォームを組み立てる方法の詳細は、[フォーム](guide/forms)のページを参照してください。
 
 ## Template expression
+_テンプレート式_
 
 A TypeScript-like syntax that Angular evaluates within
 a [data binding](guide/glossary#data-binding).
 
-Read about how to write template expressions
-in the [Template expressions](guide/template-syntax#template-expressions) section
-of the [Template Syntax](guide/template-syntax) page.
+テンプレート式は、Angularが[データバインディング][data binding](guide/glossary#data-binding)の内部で評価する、TypeScriptに似た構文です。
+
+テンプレート式を記述する方法の詳細は、[テンプレート構文](guide/template-syntax)ページの[テンプレート式](guide/template-syntax#template-expressions)の項を参照してください。
 
 
 ## Transpile
+_トランスパイル_
 
-The process of transforming code written in one form of JavaScript
-(such as TypeScript) into another form of JavaScript  (such as [ES5](guide/glossary#es5)).
 
+あるJavaScriptについての形式で書かれたコード（たとえば、TypeScript）を、
+別のJavaScriptについての形式（たとえば、[ES5](guide/glossary#es5)）に変換する処理のことです。
 
 ## TypeScript
 
-A version of JavaScript that supports most [ECMAScript 2015](guide/glossary#es2015)
-language features such as [decorators](guide/glossary#decorator).
+大部分の[ECMAScript 2015](guide/glossary#es2015)の言語機能、および[デコレーター](guide/glossary#decorator)のような
+JavaScriptの将来のバージョンにておそらく到来するであろう機能をサポートしたJavaScriptのバージョンです。
 
-TypeScript is also notable for its optional typing system, which provides
-compile-time type checking and strong tooling support (such as "intellisense,"
-code completion, refactoring, and intelligent search). Many code editors
-and IDEs support TypeScript either natively or with plugins.
 
-TypeScript is the preferred language for Angular development, although
-you can use other JavaScript dialects such as [ES5](guide/glossary#es5).
+TypeScriptはそのオプショナルな型システムについても注目に値します。
+それはコンパイル時の型検査と強力なツールのサポート（たとえば、"インテリセンス"、コード補完、リファクタリング、インテリジェントな検索）を提供するものです。
+多くのコードエディターとIDEはTypeScriptをネイティブに、またはプラグインを用いてサポートします。
 
-Read more about TypeScript at [typescriptlang.org](http://www.typescriptlang.org/).
+TypeScriptはAngualrの開発において推奨される言語ですが、
+[ES5](guide/glossary#es5)のような他のJavaScriptの言語で書くことも歓迎します。
 
+TypeScriptについての詳細は、[typescriptlang.org](http://www.typescriptlang.org/)を参照してください。
 
 {@a U}
 
 {@a V}
 
 ## View
+_ビュー_
 
-A portion of the screen that displays information and responds
-to user actions such as clicks, mouse moves, and keystrokes.
 
-Angular renders a view under the control of one or more [directives](guide/glossary#directive),
-especially  [component](guide/glossary#component) directives and their companion [templates](guide/glossary#template).
-The component plays such a prominent role that it's often
-convenient to refer to a component as a view.
+情報を表示し、そしてクリック、マウス移動、キーストロークのような
+ユーザーのアクションに反応する画面の一部分です。
 
-Views often contain other views. Any view might be loaded and unloaded
-dynamically as the user navigates through the application, typically
-under the control of a [router](guide/glossary#router).
+Angularはひとつ以上の[ディレクティブ](guide/glossary#directive)、
+特に、[コンポーネント](guide/glossary#component) ディレクティブと、それらに対を成す[テンプレート](guide/glossary#template)の制御下でビューを描画します。
+コンポーネントはそのような、コンポーネントをビューと呼ぶのが都合がいいと感じるほどの重要な役割を担っています。
 
+ビューは他のビューを含むことがよくあり、あらゆるビューは動的に読み込まれたり取り出されたりするかもしれません。
+典型的には[ルーター](guide/glossary#router)の制御下で、ユーザーがアプリケーション内を移動することで行われます。
 
 {@a W}
 
@@ -795,21 +744,18 @@ under the control of a [router](guide/glossary#router).
 
 ## Zone
 
-A mechanism for encapsulating and intercepting
-a JavaScript application's asynchronous activity.
+JavaScriptアプリケーションの非同期動作をカプセル化して横取りする仕組みです。
 
-The browser DOM and JavaScript have a limited number
-of asynchronous activities, such as DOM events (for example, clicks),
-[promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and
-[XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
-calls to remote servers.
 
-Zones intercept all of these activities and give a "zone client" the opportunity
-to take action before and after the async activity finishes.
+ブラウザーのDOMとJavaScriptが持つ非同期動作の数は限られています。
+たとえば（クリック等の）DOMイベント、[Promise](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise)、そして
+リモートサーバーへの[XHR](https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest)コールなどです。
 
-Angular runs your application in a zone where it can respond to
-asynchronous events by checking for data changes and updating
-the information it displays via [data bindings](guide/glossary#data-binding).
+Zoneはこれらの全ての動作を横取りし、"Zoneクライアント"に、その非同期動作の前と完了後に操作を行う機会を与えます。
 
-Learn more about zones in this
-[Brian Ford video](https://www.youtube.com/watch?v=3IqtmUscE_U).
+AngularはアプリケーションをZoneの中で実行します。
+その中でAngularは非同期イベントに反応することができ、データの変更を検査し、
+[データバインディング](guide/glossary#data-binding)によって表示する情報を更新します。
+
+Zoneについての詳細は、この
+[Brian Fordのビデオ](https://www.youtube.com/watch?v=3IqtmUscE_U)を参照してください。

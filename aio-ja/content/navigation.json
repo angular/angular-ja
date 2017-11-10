@@ -28,7 +28,7 @@
 
   "TopBarNarrow": [
     {
-      "title": "About Angular",
+      "title": "Angularについて",
       "children": [
         {
           "url": "features",
@@ -73,13 +73,13 @@
 
     {
       "url": "guide/quickstart",
-      "title": "Getting Started",
-      "tooltip": "A gentle introduction to Angular."
+      "title": "はじめに",
+      "tooltip": "Angularへのやさしい導入"
     },
 
     {
-      "title": "Tutorial",
-      "tooltip": "The Tour of Heroes tutorial takes you through the steps of creating an Angular application in TypeScript.",
+      "title": "チュートリアル",
+      "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
       "children": [
         {
           "url": "tutorial",
@@ -125,8 +125,8 @@
     },
 
     {
-      "title": "Fundamentals",
-      "tooltip": "The fundamentals of Angular",
+      "title": "基礎ガイド",
+      "tooltip": "Angularの基礎",
       "children": [
         {
           "url": "guide/architecture",
@@ -288,8 +288,8 @@
     ]},
 
     {
-      "title": "Techniques",
-      "tooltip": "Techniques for putting Angular to work in your environment",
+      "title": "テクニック",
+      "tooltip": "環境に合わせたAngularの活用テクニック",
       "children": [
 
         {
@@ -391,7 +391,7 @@
 
     {
       "title": "API",
-      "tooltip": "Details of the Angular classes and values.",
+      "tooltip": "Angularのクラスや値の詳細情報",
       "url": "api"
     },
     {
@@ -404,7 +404,7 @@
 
   "Footer": [
     {
-      "title": "Resources",
+      "title": "資料集",
       "children": [
         {
           "url": "about",
@@ -429,7 +429,7 @@
       ]
     },
     {
-      "title": "Help",
+      "title": "ヘルプ",
       "children": [
         {
           "url": "https://stackoverflow.com/questions/tagged/angular",
@@ -454,7 +454,7 @@
       ]
     },
     {
-      "title": "Community",
+      "title": "コミュニティ",
       "children": [
         {
           "url": "events",
@@ -484,7 +484,7 @@
       ]
     },
     {
-      "title": "Languages",
+      "title": "他の言語",
       "children": [
         {
           "url": "https://angular.io/",

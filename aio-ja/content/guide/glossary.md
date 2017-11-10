@@ -309,7 +309,7 @@ AngularはHTMLテンプレートの中にディレクティブを見つけると
 
 JavaScriptの最新の承認されたバージョンは
 [ECMAScript 2017](http://www.ecma-international.org/ecma-262/8.0/)
-(通称"ES2017"または"ES8")であり、多くのAngular開発者はこのバージョンか、[TypeScript](#typesScript)のような、
+(通称"ES2017"または"ES8")であり、多くのAngular開発者はこのバージョンか、[TypeScript](guide/glossary#typescript)のような、
 このバージョンの対応に取り組む言語のいずれかを使用してアプリケーションを書くでしょう。
 
 今日の大部分のモダンブラウザーは、それよりもずっと古い"ECMAScript 5"(通称ES5)標準しかサポートしていません。

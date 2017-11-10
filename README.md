@@ -28,6 +28,9 @@
 翻訳対象のファイルは`aio-ja`ディレクトリ内に管理されています。
 まだ日本語化されていない部分についての翻訳にご協力ください
 
+翻訳作業を開始する前に、同じファイルを翻訳しようとしている人がいないかどうかを確認しましょう。
+[Translation Checkout](https://github.com/angular/angular-ja/labels/type%3A%20Translation%20Checkout)ラベルのイシューを見ると、現在翻訳に取り掛かっている領域がわかります。
+新しく翻訳をおこないたい場合は、まず[イシューを作成](https://github.com/angular/angular-ja/issues/new)し、テンプレートにしたがって情報を記入してください。
 
 ## セットアップ
 
@@ -85,6 +88,12 @@ $ yarn serve-and-sync # localhost:4200でサーバーが立ち上がります
 ## 翻訳作業
 
 現在の翻訳ワークフローは以下のとおりです。
+
+### 0. 翻訳宣言のイシューを作成する
+
+翻訳作業を開始する前に、同じファイルを翻訳しようとしている人がいないかどうかを確認しましょう。
+[Translation Checkout](https://github.com/angular/angular-ja/labels/type%3A%20Translation%20Checkout)ラベルのイシューを見ると、現在翻訳に取り掛かっている領域がわかります。
+新しく翻訳をおこないたい場合は、まず[イシューを作成](https://github.com/angular/angular-ja/issues/new)し、テンプレートにしたがって情報を記入してください。
 
 ### 1. 翻訳で置き換えたいファイルを `aio-ja` ディレクトリにコピーする
 

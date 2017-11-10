@@ -34,7 +34,7 @@
 ### 1. リポジトリのクローン
 
 ```
-$ git clone git:github.com@angular/angular-ja
+$ git clone git@github.com:angular/angular-ja.git
 ```
 
 ### 2. angular/angularリポジトリのダウンロード

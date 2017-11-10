@@ -158,38 +158,34 @@ Angularがコンポーネントのインスタンスを作成し、テンプレ�
 {@a D}
 
 ## dash-case
+_ダッシュケース_
 
-The practice of writing compound words or phrases such that each word is separated by a dash or hyphen (`-`).
-This form is also known as kebab-case.
+複合語や句を、それぞれの単語がひとつのダッシュやハイフン (`-`) で隔てられるように書く方法です。
+この形式はケバブケースとしても知られています。
 
-[Directive](guide/glossary#directive) selectors (like `my-app`) and
-the root of filenames (such as `hero-list.component.ts`) are often
-spelled in dash-case.
+(`my-app`のような)[ディレクティブ](guide/glossary#directive)セレクターや(`hero-list.component.ts`のような)ファイル名
+は、よくダッシュケースで記述されます。
 
 
 ## Data binding
+_データバインディング_
 
-Applications display data values to a user and respond to user
-actions (such as clicks, touches, and keystrokes).
+アプリケーションはデータの値をユーザーに表示し、ユーザーからのアクション(クリック、タッチ、キーストローク)に反応します。
 
-In data binding, you declare the relationship between an HTML widget and data source
-and let the framework handle the details.
-Data binding is an alternative to manually pushing application data values into HTML, attaching
-event listeners, pulling changed values from the screen, and
-updating application data values.
+データバインディングにおいて、HTMLウィジェットとアプリケーションデータソースの間の関係を定義することで、フレームワークが詳細を処理します。
+データバインディングは、アプリケーションデータ値をHTMLに手動でプッシュしたり、イベントリスナーをアタッチしたり、変更された値を画面から取得したり、アプリケーションデータ値を更新する代わりに使用できます。
 
-Angular has a rich data-binding framework with a variety of data-binding
-operations and supporting declaration syntax.
+Angularは、多様なデータバインディング操作と宣言構文をサポートする高機能なデータバインディングフレームワークを供えています。
 
- Read about the following forms of binding in the [Template Syntax](guide/template-syntax) page:
+データバインディングについて詳しく知るには[テンプレート構文](guide/template-syntax)の章を参照してください。
 
- * [Interpolation](guide/template-syntax#interpolation).
- * [Property binding](guide/template-syntax#property-binding).
- * [Event binding](guide/template-syntax#event-binding).
- * [Attribute binding](guide/template-syntax#attribute-binding).
- * [Class binding](guide/template-syntax#class-binding).
- * [Style binding](guide/template-syntax#style-binding).
- * [Two-way data binding with ngModel](guide/template-syntax#ngModel).
+ * [補間](guide/template-syntax#interpolation).
+ * [プロパティバインディング](guide/template-syntax#property-binding).
+ * [イベントバインディング](guide/template-syntax#event-binding).
+ * [属性バインディング](guide/template-syntax#attribute-binding).
+ * [クラスバインディング](guide/template-syntax#class-binding).
+ * [スタイルバインディング](guide/template-syntax#style-binding).
+ * [ngModelによる双方向バインディング](guide/template-syntax#ngModel).
 
 
 {@a decorator}
@@ -199,17 +195,17 @@ operations and supporting declaration syntax.
 
 
 ## Decorator | decoration
+_デコレーター | デコレーション_
 
-A *function* that adds metadata to a class, its members (properties, methods) and function arguments.
+デコレーターは*関数*であり、クラス、メンバー（プロパティおよびメソッド）、および関数の引数にメタデータを付加します。
 
-Decorators are an experimental (stage 2), JavaScript language [feature](https://github.com/wycats/javascript-decorators). TypeScript adds support for decorators.
+デコレーターはJavaScript言語のステージ2の実験的な[機能](https://github.com/wycats/javascript-decorators)で、TypeScript で実装されています。
 
-To apply a decorator, position it immediately above or to the left of the item it decorates.
+デコレーターを適用するには、修飾する対象の直上か左にデコレーターを配置します。
 
-Angular has its own set of decorators to help it interoperate with your application parts.
-The following example is a `@Component` decorator that identifies a
-class as an Angular [component](guide/glossary#component) and an `@Input` decorator applied to the `name` property
-of that component. The elided object argument to the `@Component` decorator would contain the pertinent component metadata.
+Angularは独自のデコレーターを持っており、Angularとアプリケーションの部品が協調して動く手助けをします。
+こちらは、クラスをAngularの[コンポーネント](guide/glossary#component)と識別する`@Component`デコレーター、およびそのコンポーネントの`name`プロパティに適用される`@Input`デコレーターの例です。
+ここでは省略した`@Component`の引数オブジェクトには、関連するコンポーネントのメタデータを含めます。
 ```
 @Component({...})
 export class AppComponent {
@@ -217,71 +213,60 @@ export class AppComponent {
   @Input() name:string;
 }
 ```
-The scope of a decorator is limited to the language feature
-that it decorates. None of the decorations shown here will "leak" to other
-classes that follow it in the file.
+デコレーターの範囲は、それが修飾するJavaScript言語の機能に限られます。
+ここでいう修飾は、同一ファイルの中でそれ以降にある他のクラスにまで及ぶわけではありません。
 
 
 <div class="alert is-important">
 
 
 
-Always include parentheses `()` when applying a decorator.
+デコレーターを適用する際には、常に丸括弧`()`を含めてください。
 
 
 </div>
 
 
 ## Dependency injection
+_依存性の注入_
 
-A design pattern and mechanism
-for creating and delivering parts of an application to other
-parts of an application that request them.
+依存性の注入は、アプリケーションの部品に求められた部品を作って送り届けるためのデザインパターンでありメカニズムです。
 
-Angular developers prefer to build applications by defining many simple parts
-that each do one thing well and then wiring them together at runtime.
+Angularの開発者は、ひとつのことだけをするシンプルな部品をたくさん定義することでアプリケーションを組み立てることを好み、その後、実行時にそれぞれをつなぎます。
 
-These parts often rely on other parts. An Angular [component](guide/glossary#component)
-part might rely on a service part to get data or perform a calculation. When
-part "A" relies on another part "B," you say that "A" depends on "B" and
-that "B" is a dependency of "A."
+これらの部品は他の部品に依存していることがよくあります。Angularの[コンポーネント](guide/glossary#component)部分は
+データを取得し計算を処理するサービス部分に依存しているかもしれません。"A" 部分が他の "B" 部分に依存しているとき、
+"A" は "B" に依存している、または "B" は "A" の依存性であるといいます。
 
-You can ask a "dependency injection system" to create "A"
-for us and handle all the dependencies.
-If "A" needs "B" and "B" needs "C," the system resolves that chain of dependencies
-and returns a fully prepared instance of "A."
+"依存性の注入システム" に "A" を作成させてすべての依存性を扱わせることができます。
+もし "A" が "B" を必要とし、かつ "B" が "C" を必要とするならば、
+このシステムは依存性の連鎖を解決したうえで、完全に準備された "A" を返してくれます。
 
+Angularは独自で洗練された依存性の注入システムを提供し利用しています。
+必要なときに必要な場所でアプリケーションの部品を他の部品へ "注入すること" によって、アプリケーションを組み立てて実行します。
 
-Angular provides and relies upon its own sophisticated
-dependency-injection system
-to assemble and run applications by "injecting" application parts
-into other application parts where and when needed.
+その中心には、要求によって依存している値を返す[`インジェクター`](guide/glossary#injector)があります。
+`injector.get(token)`という式は、与えられたトークンに関連する依存性の値を返します。
 
-At the core, an [`injector`](guide/glossary#injector) returns dependency values on request.
-The expression `injector.get(token)` returns the value associated with the given token.
+トークンはAngularの型(`InjectionToken`)です。わたしたちが直接トークンを扱うことはめったにありません。
+ほとんどのメソッドはクラス名(`Foo`)もしくは文字列("foo")を受け入れて、Angularがトークンに変換するからです。
+わたしたちが`injector.get(Foo)`と書くときには、インジェクターは`Foo`クラスのためのトークンに関連した値を返します。
+通常その値は`Foo`クラスのインスタンスそのものです。
 
-A token is an Angular type (`InjectionToken`). You rarely need to work with tokens directly; most
-methods accept a class name (`Foo`) or a string ("foo") and Angular converts it
-to a token. When you write `injector.get(Foo)`, the injector returns
-the value associated with the token for the `Foo` class, typically an instance of `Foo` itself.
+Angularは、表示のために[`コンポーネント`](guide/glossary#component)を作るような処理において、似た要求を内部的にしています。
 
-During many of its operations, Angular makes similar requests internally, such as when it creates a [`component`](guide/glossary#component) for display.
+この`インジェクター`は、トークンと依存性の値とのマップを内部的に管理しています。
+もし`インジェクター`が与えられたトークンにマップされた値を見つけられないときには、そのトークンの`プロバイダー`を使って新しく値を作成します。
 
-The `Injector` maintains an internal map of tokens to dependency values.
-If the `Injector` can't find a value for a given token, it creates
-a new value using a `Provider` for that token.
+[プロバイダー](guide/glossary#provider)は、特定のトークンに関連した依存性の値の新しいインスタンスを作成するためのレシピです。
 
-A [provider](guide/glossary#provider) is a recipe for
-creating new instances of a dependency value associated with a particular token.
+インジェクターは、内部的なプロバイダーのレジストリの中にそのトークンのための`プロバイダー`があるときにのみ、依存性の値を作成することができます。
+プロバイダーをレジストリに登録しておくことは、準備段階において非常に重要なことです。
 
-An injector can only create a value for a given token if it has
-a `provider` for that token in its internal provider registry.
-Registering providers is a critical preparatory step.
+Angularは、すべてのインジェクターにいくつか独自のプロバイダーを登録します。
+そしてわたしたちは自分のプロバイダーを登録できます。
 
-Angular registers some of its own providers with every injector.
-You can register your own providers.
-
-Read more in the [Dependency Injection](guide/dependency-injection) page.
+詳しく知るには[依存性の注入](guide/dependency-injection)の章を参照してください。
 
 
 {@a directive}
@@ -291,69 +276,61 @@ Read more in the [Dependency Injection](guide/dependency-injection) page.
 
 
 ## Directive
+_ディレクティブ_
 
-An Angular class responsible for creating, reshaping, and interacting with HTML elements
-in the browser DOM. The directive is Angular's most fundamental feature.
+ブラウザのDOM内で、HTML要素を作成し変形し相互に作用することを担当する、Angularのクラスです。
+ディレクティブはAngularのもっとも基本的な機能です。
 
-A directive is usually associated with an HTML element or attribute.
-This element or attribute is often referred to as the directive itself.
+ディレクティブはほとんどの場合HTML要素もしくは属性と連携します。
+その要素や属性をディレクティブ自身としてよく参照します。
 
-When Angular finds a directive in an HTML template,
-it creates the matching directive class instance
-and gives the instance control over that portion of the browser DOM.
+AngularはHTMLテンプレートの中にディレクティブを見つけると、対応するディレクティブクラスのインスタンスを作成し、
+そのインスタンスにブラウザのDOMの一部における制御を与えます。
 
-You can invent custom HTML markup (for example, `<my-directive>`) to
-associate with your custom directives. You add this custom markup to HTML templates
-as if you were writing native HTML. In this way, directives become extensions of
-HTML itself.
+開発者は、新しいディレクティブに紐付いたカスタムHTMLマークアップ(例えば`<my-directive>`)を作ることができます。
+そのカスタムマークアップはあたかも本来のHTMLを書くかのようにHTMLテンプレートに追加できます。
+このようにして、ディレクティブはHTML自身を拡張することになります。
 
-Directives fall into one of the following categories:
+ディレクティブは次の種類に分けられます：
 
-* [Components](guide/glossary#component) combine application logic with an HTML template to
-render application [views](guide/glossary#view). Components are usually represented as HTML elements.
-They are the building blocks of an Angular application.
+* [コンポーネント](guide/glossary#component)はアプリケーションの[ビュー](guide/glossary#view)をレンダリングするHTMLテンプレートと、アプリケーションのロジックをつなげます。
+通常、コンポーネントはHTML要素のことを指します。コンポーネントはAngularアプリケーションの構成要素です。
 
-* [Attribute directives](guide/glossary#attribute-directive) can listen to and modify the behavior of
-other HTML elements, attributes, properties, and components. They are usually represented
-as HTML attributes, hence the name.
+* [属性ディレクティブ](guide/glossary#attribute-directive)は他のHTML要素、属性、プロパティ、およびコンポーネントの振る舞いを監視して変更することができます。
+名前からわかるように、通常、属性ディレクティブはHTML属性のことを指します。
 
-* [Structural directives](guide/glossary#structural-directive) are responsible for
-shaping or reshaping HTML layout, typically by adding, removing, or manipulating
-elements and their children.
-
+* [構造ディレクティブ](guide/glossary#structural-directive)は要素や子要素の追加、削除、および操作によってHTMLのレイアウトを成形したり再成形することを担当するディレクティブです。
 
 {@a E}
 
 ## ECMAScript
 
-The [official JavaScript language specification](https://en.wikipedia.org/wiki/ECMAScript).
+[公式のJavaScriptの言語仕様](https://ja.wikipedia.org/wiki/ECMAScript)です。
 
-The latest approved version of JavaScript is
+JavaScriptの最新の承認されたバージョンは
 [ECMAScript 2017](http://www.ecma-international.org/ecma-262/8.0/)
-(also known as "ES2017" or "ES8"). Many Angular developers write their applications
-in ES8 or a dialect that strives to be
-compatible with it, such as [TypeScript](guide/glossary#typescript).
+(通称"ES2017"または"ES8")であり、多くのAngular開発者はこのバージョンか、[TypeScript](#typesScript)のような、
+このバージョンの対応に取り組む言語のいずれかを使用してアプリケーションを書くでしょう。
 
-Most modern browsers only support the much older "ECMAScript 5" (also known as "ES5") standard.
-Applications written in ES2017, ES2016, ES2015, or one of their dialects must be [transpiled](guide/glossary#transpile)
-to ES5 JavaScript.
+今日の大部分のモダンブラウザーは、それよりもずっと古い"ECMAScript 5"(通称ES5)標準しかサポートしていません。
+ES2017、ES2016、 ES2015か、それらと互換性のある言語で書かれたアプリケーションは、
+ES5 JavaScriptに"[トランスパイル](guide/glossary#transpile)"されなければなりません。
 
-Angular developers can write in ES5 directly.
-
+Angularアプリケーションを、ES5で直接書くこともできます。
 
 ## ES2015
 
-Short hand for [ECMAScript](guide/glossary#ecmascript) 2015.
+[ECMAScript 2015](guide/glossary#ecmascript)の簡略表現です。
 
 
 ## ES5
 
-Short hand for [ECMAScript](guide/glossary#ecmascript) 5, the version of JavaScript run by most modern browsers.
-
+ECMAScript 5の簡略表現で、ほとんどのモダンブラウザーで動くJavaScriptのバージョンです。
+[ECMAScript](guide/glossary#ecmascript)を参照してください。
 
 ## ES6
 
-Short hand for [ECMAScript](guide/glossary#ecmascript) 2015.
+[ECMAScript 2015](guide/glossary#ecmascript)の簡略表現です。
 
 
 {@a F}
@@ -367,30 +344,24 @@ Short hand for [ECMAScript](guide/glossary#ecmascript) 2015.
 {@a I}
 
 ## Injector
+_インジェクター_
 
-An object in the Angular [dependency-injection system](guide/glossary#dependency-injection)
-that can find a named dependency in its cache or create a dependency
-with a registered [provider](guide/glossary#provider).
-
+Angularの[依存性の注入システム](guide/glossary#dependency-injection)におけるオブジェクトで、
+指定された"依存性"をキャッシュから見つけるか、登録された[プロバイダー](guide/glossary#provider)を使用して生成できます。
 
 ## Input
+_インプット_
 
-A directive property that can be the *target* of a
-[property binding](guide/template-syntax#property-binding) (explained in detail in the [Template Syntax](guide/template-syntax) page).
-Data values flow *into* this property from the data source identified
-in the template expression to the right of the equal sign.
+[プロパティバインディング](guide/template-syntax#property-binding)([テンプレート構文](guide/template-syntax)のページで詳しく説明されています)の*対象*になるディレクティブプロパティです。
+データ値はデータソースからこのプロパティに流れ*こみます*。データソースはテンプレートの中で等号の右側で識別されます。
 
-See the [Input and output properties](guide/template-syntax#inputs-outputs) section of the [Template Syntax](guide/template-syntax) page.
-
+[テンプレート構文](guide/template-syntax)ページの[インプット・アウトプットプロパティ](guide/template-syntax#inputs-outputs)のセクションを参照してください。
 
 ## Interpolation
+_補間_
 
-A form of [property data binding](guide/glossary#data-binding) in which a
-[template expression](guide/glossary#template-expression) between double-curly braces
-renders as text.  That text may be concatenated with neighboring text
-before it is assigned to an element property
-or displayed between element tags, as in this example.
-
+[プロパティデータバインディング](guide/glossary#data-binding)の一形態で、その二重波括弧の間の[テンプレート式](guide/glossary#template-expression)の結果を、テキストとしてレンダリングします。
+そのテキストは、要素のプロパティに割り当てられるか、この例のように要素のタグの間で表示される前に、隣接したテキストに連結されることがあります。
 
 <code-example language="html" escape="html">
   <label>My current hero is {{hero.name}}</label>
@@ -399,9 +370,7 @@ or displayed between element tags, as in this example.
 
 
 
-Read more about [interpolation](guide/template-syntax#interpolation) in the
-[Template Syntax](guide/template-syntax) page.
-
+補間についての詳細は[テンプレート構文](guide/template-syntax) ページの[補間](guide/template-syntax#interpolation)のセクションを参照してください。
 
 {@a J}
 

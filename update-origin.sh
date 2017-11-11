@@ -15,7 +15,7 @@ if [ -n "${aioDiff}" ]; then
     echo "Some changes are in aio."
     echo -e "\n${aioDiff}\n"
     echo "Please check diffs and sync to origin manually."
-    echo -e "\n\tgit diff master origin/master --relative aio"
+    echo -e "\n\tgit -C origin diff master origin/master --relative aio"
     open "https://github.com/angular/angular/compare/${localRev}...${remoteRev}"
     exit 0
 else

@@ -1,14 +1,12 @@
 #!/bin/bash -eu
 
-cd origin
-
 echo "Checking aio changes in origin..."
 
-git fetch
-localRev=$(git rev-parse master)
-remoteRev=$(git rev-parse origin/master)
+git -C origin fetch
+localRev=$(git -C origin rev-parse master)
+remoteRev=$(git -C origin rev-parse origin/master)
 
-aioDiff=$(git diff master origin/master --name-only --relative aio)
+aioDiff=$(git -C origin diff master origin/master --name-only --relative aio)
 
 if [ -n "${aioDiff}" ]; then
     # Diffs exist
@@ -21,9 +19,7 @@ if [ -n "${aioDiff}" ]; then
 else
     # no diff = automatic sync
     echo "No changes are in aio. Syncing origin automatically..."
-    git pull origin master
+    git -C origin pull origin master
 fi
 
 echo "Finished!"
-
-cd ../

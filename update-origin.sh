@@ -8,7 +8,7 @@ git fetch
 localRev=$(git rev-parse master)
 remoteRev=$(git rev-parse origin/master)
 
-aioDiff=$(git diff master origin/master --name-only)
+aioDiff=$(git diff master origin/master --name-only --relative aio)
 
 if [ -n "${aioDiff}" ]; then
     # Diffs exist

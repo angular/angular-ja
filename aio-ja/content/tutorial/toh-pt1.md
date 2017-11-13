@@ -75,7 +75,7 @@ Angular CLIで生成されたデフォルトのテキストを削除し、
 <code-example path="toh-pt1/src/app/app.component.html" title="src/app/app.component.html" linenums="false">
 </code-example>
 
-CLIの`ng serve`コマンドがまだ実行中であると仮定すると,
+CLIの`ng serve`コマンドがまだ実行中であれば、
 ブラウザが更新され、アプリケーションのタイトルとヒーローの名前が表示されます。
 
 {@a create-a-hero-class}
@@ -141,8 +141,8 @@ Angularは複数のビルトインパイプを備えており、あなた自身�
 
 テキストボックスにはヒーローの`name`プロパティが _表示_ され、
 ユーザーの入力時にそのプロパティが _更新_ されます。
-これは、コンポーネントクラスから _画面への_ 、
-画面から _コンポーネントクラスへの_ データフローを意味します。
+これは、コンポーネントクラスから _画面へ_ 、
+そして画面から _コンポーネントクラスへの_ データフローを意味します。
 
 そのデータフローを自動化するには、`<input>`フォーム要素と`hero.name`プロパティとの間に双方向データバインディングを設定します。
 
@@ -196,7 +196,7 @@ Angular CLI は、プロジェクトを作成するときに`src/app/app.module.
 
 `AppModule` (`app.module.ts`) を開き、`@angular/forms`ライブラリから`FormsModule`シンボルをインポートします。
 
-<code-example path="toh-pt1/src/app/app.module.ts" title="app.module.ts (FormsModule symbol import)"
+<code-example path="toh-pt1/src/app/app.module.ts" title="app.module.ts (FormsModule シンボルのインポート)"
  region="formsmodule-js-import">
 </code-example>
 
@@ -212,7 +212,7 @@ region="ng-imports">
 {@a declare-heroescomponent}
 ### _HeroesComponent_ を宣言する
 
-すべてのコンポーネントは、 _ちょうど1つの_ [NgModule](guide/ngmodule)で宣言されなければなりません。
+すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodule)で宣言されなければなりません。
 
 _あなたは_ `HeroesComponent`を宣言していません。
 では、なぜアプリケーションは動作したのでしょうか？
@@ -260,7 +260,7 @@ region="ng-imports">
 </code-tabs>
 
 {@a summary}
-## 要約
+## まとめ
 
 * CLIを使用して、2番目の `HeroesComponent` を作成しました。
 * `HeroesComponent` を `AppComponent` シェルに追加して表示しました。

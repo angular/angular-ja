@@ -1,409 +1,389 @@
 # HTTP
 
-In this tutorial, you'll add the following data persistence features with help from
-Angular's `HttpClient`.
+このチュートリアルではAngularの`HttpClient`を使用して、次のデータ永続の機能を追加します。
 
-* The `HeroService` gets hero data with HTTP requests.
-* Users can add, edit, and delete heroes and save these changes over HTTP.
-* Users can search for heroes by name.
+* `HeroService`はHTTPリクエストを介してヒーローデータを取得します。
+* ユーザーはヒーロー情報を追加、編集、削除ができ、その変更をHTTPを通して保存することができます。
+* ユーザーは名前でヒーロー情報を検索できます。
 
-When you're done with this page, the app should look like this <live-example></live-example>.
+このページを終えたとき、このアプリは次のようになります。<live-example></lib-example>
 
-## Enable HTTP services
+## HTTPサービスの有効化
 
-`HttpClient` is Angular's mechanism for communicating with a remote server over HTTP. 
+`HttpClient` はHTTPを通してリモートサーバーと通信するための仕組みです。
 
-To make `HttpClient` available everywhere in the app,
+アプリ内のどこでも`HttpClient`を利用可能にするには
 
-* open the root `AppModule`, 
-* import the `HttpClientModule` symbol from `@angular/common/http`,
-* add it to the `@NgModule.imports` array.
+* ルート`AppModule`を開く
+* `@angular/common/http`から`HttpClientModule`をインポート
+* `@NgModule.imports`の配列に`HttpClientModule`を追加
 
-## Simulate a data server
+## データサーバーをシミュレート
 
-This tutorial sample _mimics_ communication with a remote data server by using the
-[_In-memory Web API_](https://github.com/angular/in-memory-web-api "In-memory Web API") module.
+本チュートリアルでは [_In-memory Web API_](https://github.com/angular/in-memory-web-api "インメモリWebAPI")モジュール
+を利用してリモートデータサーバーとの通信を再現します。
 
-After installing the module, the app will make requests to and receive responses from the `HttpClient`
-without knowing that the *In-memory Web API* is intercepting those requests,
-applying them to an in-memory data store, and returning simulated responses.
+このモジュールをインストールすると、アプリは*インメモリWeb API*がリクエストをインターセプトして、そのリクエストを
+インメモリデータストアに適用し、シミュレートされたレスポンスを返すということを知らずに
+`HttpClient`を使ってリクエストを送信し、レスポンスを受信することができます。
 
-This facility is a great convenience for the tutorial.
-You won't have to set up a server to learn about `HttpClient`.
+この機能は本チュートリアルにおいて非常に有用なものです。
+`HttpClient`を学ぶにあたり、サーバーを用意する必要がないためです。
 
-It may also be convenient in the early stages of your own app development when
-the server's web api is ill-defined or not yet implemented.
+また、サーバーWebAPIが明確に定義されていなかったり、未実装だったりする開発の初期段階においても便利です。
 
 <div class="alert is-important">
 
-**Important:** the *In-memory Web API* module has nothing to do with HTTP in Angular.
+**重要** *インメモリWeb API*モジュールはAngularのHTTPとは関係がありません。
 
-If you're just _reading_ this tutorial to learn about `HttpClient`, you can [skip over](#import-heroes) this step.
-If you're _coding along_ with this tutorial, stay here and add the *In-memory Web API* now.
+`HttpClient`を学ぶためにこのチュートリアルを読んでいるのであれば、このステップを[読み飛ばして](#import-heroes)ください。
+本チュートリアルとともにコーディングしている場合は、ここで*インメモリWeb API*を追加しましょう。
 
 </div>
 
-Install the *In-memory Web API* package from _npm_
+_npm_から*インメモリWeb API*をインストールします。
 
 <code-example language="sh" class="code-shell">
   npm install angular-in-memory-web-api --save
 </code-example>
 
-Import the `InMemoryWebApiModule` and the `InMemoryDataService` class, 
-which you will create in a moment.
+`InMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。
 
 <code-example 
   path="toh-pt6/src/app/app.module.ts" 
   region="import-in-mem-stuff" 
-  title="src/app/app.module.ts (In-memory Web API imports)">
+  title="src/app/app.module.ts (インメモリ Web API をインポート)">
 </code-example>
 
-Add the `InMemoryWebApiModule` to the `@NgModule.imports` array&mdash;
-_after importing the `HttpClient`_,
-&mdash;while configuring it with the `InMemoryDataService`.
+`InMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
+&mdash;_`HttpClient`をインポートしたあとに_&mdash;
+さらにそれを`InMemoryDataService`で設定します。
 
 <code-example   
   path="toh-pt6/src/app/app.module.ts" 
   region="in-mem-web-api-imports">
 </code-example>
 
-The `forRoot()` configuration method takes an `InMemoryDataService` class
-that primes the in-memory database.
+`forRoot()`メソッドはインメモリデータベースを用意する`InMemoryDataService`クラスを引数に取ります。
 
-The _Tour of Heroes_ sample creates such a class 
-`src/app/in-memory-data.service.ts` which has the following content:
+_Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-data.service.ts`を作ります。
 
 <code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" title="src/app/in-memory-data.service.ts" linenums="false"></code-example>
 
-This file replaces `mock-heroes.ts`, which is now safe to delete.
+このファイルは`mock-heros.ts`の置き換えなので、`mock-heros.ts`は削除してしまっても問題ありません。
 
-When your server is ready, detach the *In-memory Web API*, and the app's requests will go through to the server.
+サーバーが準備されたら、*インメモリWeb API*を外せば、アプリのリクエストはサーバーに送信されます。
 
-Now back to the `HttpClient` story.
+それでは`HttpClient`の話に戻りましょう。
 
 {@a import-heroes}
-## Heroes and HTTP
+## ヒーローとHTTP
 
-Import some HTTP symbols that you'll need:
+必要なHTTPシンボルをいくつかインポートします。
 
 <code-example
   path="toh-pt6/src/app/hero.service.ts" 
   region="import-httpclient" 
-  title="src/app/hero.service.ts (import HTTP symbols)">
+  title="src/app/hero.service.ts (HTTPシンボルをインポート)">
 </code-example>
 
-Inject `HttpClient` into the constructor in a private property called `http`.
+`HttpClient`をプライベートプロパティ`http`にコンストラクタで注入します。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="ctor" >
 </code-example>
 
-Keep injecting the `MessageService`. You'll call it so frequently that
-you'll wrap it in private `log` method.
+`MessageService`はそのままにしておきます。
+これは頻繁に呼ぶことになるので、プライベートメソッド`log`にラップしておきましょう。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="log" >
 </code-example>
 
-Define the `heroesUrl` with the address of the heroes resource on the server.
+`heroesUrl`をサーバー上のヒーローリソースのアドレスで定義します。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="heroesUrl" >
 </code-example>
 
-### Get heroes with _HttpClient_
+### _HttpClient_を使ってヒーローを取得
 
-The current `HeroService.getHeroes()` 
-uses the RxJS `of()` function to return an array of mock heroes
-as an `Observable<Hero[]>`.
+現在の`HeroService.getHeroes()`はRxJSの`of()`を使って、モックのヒーロー配列を`Observable<Hero[]>`として返します。
 
 <code-example 
   path="toh-pt4/src/app/hero.service.ts" 
   region="getHeroes-1" 
-  title="src/app/hero.service.ts (getHeroes with RxJs 'of()')">
+  title="src/app/hero.service.ts (RxJSの'of()'を使ったgetHeroes)">
 </code-example>
 
-Convert that method to use `HttpClient`
+このメソッドを`HttpClient`を使うように改修します。
+
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="getHeroes-1">
 </code-example>
 
-Refresh the browser. The hero data should successfully load from the
-mock server.
+ブラウザをリフレッシュしましょう。ヒーローデータがモックサーバーから正しくロードされているはずです。
 
-You've swapped `http.get` for `of` and the app keeps working without any other changes
-because both functions return an `Observable<Hero[]>`.
+`http.get`と`of`を取り替えましたが、
+どちらの関数も`Observable<Hero[]>`を返すので、
+アプリは他の変更を加えずに動作しています。
 
-### Http methods return one value
+### Httpメソッドはひとつの値を返す
 
-All `HttpClient` methods return an RxJS `Observable` of something.
+すべての`HttpClient`メソッドはRxJSの`Observable`を返します。
 
-HTTP is a request/response protocol. 
-You make a request, it returns a single response.
+HTTPはリクエスト/レスポンスプロトコルです。
+リクエストを送信すると、ひとつのレスポンスを返却します。
 
-In general, an `Observable` _can_ return multiple values over time.
-An `Observable` from `HttpClient` always emits a single value and then completes, never to emit again.
+一般には、`Observable`は時間によって複数の値を返すことができます。
 
-This particular `HttpClient.get` call returns an `Observable<Hero[]>`, literally "_an observable of hero arrays_". In practice, it will only return a single hero array.
+`HttpClient`が返す`Observable`は常にひとつの値を発行してから完了するので、再び値を発行することはありません。
 
-### _HttpClient.get_ returns response data
+特に今回の`HttpClient.get`の呼び出しは`Observable<Hero[]>`、逐語的には「_ヒーローの配列のobservable_」です。
+実際やってみると、ひとつのヒーロー配列を返します。
 
-`HttpClient.get` returns the _body_ of the response as an untyped JSON object by default.
-Applying the optional type specifier, `<Hero[]>` , gives you a typed result object.
+### _HttpClient.get_はレスポンスデータを返す
 
-The shape of the JSON data is determined by the server's data API.
-The _Tour of Heroes_ data API returns the hero data as an array.
+`HttpClient.get`はデフォルトではレスポンスの本文を型のないJSONで返します。
+特定の型 `<Hero[]>` 指定をすると、その型のオブジェクトを返します。
+
+JSONデータの形はサーバーのデータAPIにより決まります。
+_Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
 <div class="l-sub-section">
 
-Other APIs may bury the data that you want within an object.
-You might have to dig that data out by processing the `Observable` result
-with the RxJS `map` operator.
+他のAPIでは取得したいデータがオブジェクトの中に埋もれているかもしれません。
+その場合は、RxJSの`map`を使って`Observable`を処理してデータを掘り出します。
 
-Although not discussed here, there's an example of `map` in the `getHeroNo404()`
-method included in the sample source code.
+ここでは取り扱いませんが、サンプルソースコード内にある`getHeroNo404()`メソッドに`map`の例があります。
 
 </div>
 
-### Error handling
+### エラーハンドリング
 
-Things go wrong, especially when you're getting data from a remote server.
-The `HeroService.getHeroes()` method should catch errors and do something appropriate.
+リモートサーバーからのデータを受け取るときに、何かうまくいかない場合。
+`HeroService.getHeroes()`メソッドはエラーをキャッチして、適切に対応する必要があります。
 
-To catch errors, you **"pipe" the observable** result from `http.get()` through an RxJS `catchError()` operator.
+エラーをキャッチするには`http.get()`で得られた`observerable`な結果をRxJSの`catchError()`オペレーターに**連結**します。
 
-Import the `catchError` symbol from `rxjs/operators`, along with some other operators you'll need later.
+あとで必要になるオペレーターと一緒に、`rxjs/operators`から`catchError`をインポートします。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="import-rxjs-operators">
 </code-example>
 
-Now extend the observable result with the `.pipe()` method and
-give it a `catchError()` operator.
+それではobservableの結果を`pipe()`で拡張して、それを`catchError()`オペレーターに渡しましょう。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="getHeroes-2" >
 </code-example>
 
-The `catchError()` operator intercepts an **`Observable that failed**.
-It passes the error an _error handler_ that can do what it wants with the error.
+`catchError()`オペレーターは**失敗したObservable**をインターセプトします。
+これはエラーをそれを処理する_error handler_に渡します。
 
-The following `handleError()` method reports the error and then returns an
-innocuous result so that the application keeps working.
+次の`handleError()`メソッドはエラーを報告し、アプリを動作し続けるために無害な結果を返します。
 
 #### _handleError_
 
-The following `errorHandler()` will be shared by many `HeroService` methods
-so it's generalized to meet their different needs.
+次の`errorHandler()`は数々の`HeroService`メソッドで共有されるので、様々な要件を満たすために一般化されています。
 
-Instead of handling the error directly, it returns an _error handler_ function to `catchError` that it 
-has configured with both the name of the operation that failed and a safe return value.
+エラーを直接ハンドリングするかわりに、処理に失敗した処理の名前と、安全な返却値の両方で構成された
+_error handler_関数を`catchError`に返します。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="handleError">
 </code-example>
 
-After reporting the error to console, the handler constructs
-a user friendly message and returns a safe value to the app so it can keep working.
+エラーをコンソールに出力したあと、ハンドラーはユーザフレンドリーなメッセージを生成し、アプリを
+動作し続けるための安全な値を返却します。
 
-Because each service method returns a different kind of `Observable` result,
-`errorHandler()` takes a type parameter so it can return the safe value as the type that the app expects.
+サービスの各メソッドはそれぞれ違う種類の`Observable`な結果を返すため、
+`errorHandler()`は型パラメーターを取り、アプリが期待する型の値を返却できます。
 
-### Tap into the _Observable_
+### _Observable_に侵入
 
-The `HeroService` methods will **tap** into the flow of observable values
-and send a message (via `log()`) to the message area at the bottom of the page.
+`HeroService`のメソットはObservableな値の流れに入り込んで、(`log()`を通して)ページ下部にメッセージを送信します。
 
-They'll do that with the RxJS `tap` operator,
-which _looks_ at the observable values, does _something_ with those values,
-and passes them along.
-The `tap` call back doesn't touch the values themselves.
+これはRxJSの`tap`オペレーターを使って行います。
+これはObservableな値を見て、その値に何か処理を行い、それらを渡します。
+`tap()`コールバックは、値そのものには触れません。
 
-Here is the final version of `getHeroes` with the `tap` that logs the operation.
+次が、ログ処理を`tap`した`getHeroes`の最終版です。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="getHeroes" >
 </code-example>
 
-### Get hero by id
+### IDでヒーローを取得
 
-Most web APIs support a _get by id_ request in the form `api/hero/:id` 
-(such as `api/hero/11`).
-Add a `HeroService.getHero()` method to make that request:
+ほとんどのWeb APIは `api/hero/:id` (`api/hero/11`のような) 形式のリクエストで_IDにより取得する_ことをサポートしています。
+
+`HeroService.getHero()`メソッドを追加して、そのようなリクエストができるようにしましょう:
 
 <code-example path="toh-pt6/src/app/hero.service.ts" region="getHero" title="src/app/hero.service.ts"></code-example>
 
-There are three significant differences from  `getHeroes()`.
+`getHeroes()`とくらべて3つ重要な違いがあります。
 
-* it constructs a request URL with the desired hero's id.
-* the server should respond with a single hero rather than an array of heroes.
-* therefore, `getHero` returns an `Observable<Hero>` ("_an observable of Hero objects_")
- rather than an observable of hero _arrays_ .
+* 求めたいヒーローのIDを含んだURLを生成すること。
+* サーバーはヒーローたちの配列ではなく、一人のヒーローの情報を返す必要があること。
+* したがって、`getHero`はヒーローの配列のObservableを返すのではなく、
+`Observable<Hero>` (_ヒーローオブジェクトのObservable_)を返すこと。
 
+## ヒーローを更新
 ## Update heroes
 
-Editing a hero's name in the _hero detail_ view.
-As you type, the hero name updates the heading at the top of the page.
-But when you click the "go back button", the changes are lost.
+_ヒーロー詳細_画面で、ヒーローの名前を編集します。
+タイプすると、ページ上部のヒーローの名前が更新されます。
+ですが、"go back button"をクリックすると、その変更は失われてしまいます。
 
-If you want changes to persist, you must write them back to
-the server.
+その変更を永続化したい場合は、それをサーバーに送り返す必要があります。
 
-At the end of the hero detail template, add a save button with a `click` event
-binding that invokes a new component method named `save()`.
+ヒーロー詳細ページのテンプレートの終わりに、新しい`save()`というメソッドを呼び出す保存ボタンを追加します。
 
-<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.html" region="save" title="src/app/hero-detail/hero-detail.component.html (save)"></code-example>
+<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.html" region="save" title="src/app/hero-detail/hero-detail.component.html (保存)"></code-example>
 
-Add the following `save()` method, which persists hero name changes using the hero service
-`updateHero()` method and then navigates back to the previous view.
+hero serviceの`updateHero()`を呼び出して名前の変更を永続化したのち、前のビューに戻る`save()`メソッドを追加しましょう。
 
-<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.ts" region="save" title="src/app/hero-detail/hero-detail.component.ts (save)"></code-example>
+<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.ts" region="save" title="src/app/hero-detail/hero-detail.component.ts (保存)"></code-example>
 
-#### Add _HeroService.updateHero()_
+#### _HeroService.updateHero()_の追加
 
-The overall structure of the `updateHero()` method is similar to that of
-`getHeroes()`, but it uses `http.put()` to persist the changed hero
-on the server.
+`updateHero()`メソッドの全体の構造は`getHeroes()`のそれと似ていますが、
+こちらではサーバー上でヒーローの変更を永続化するために`http.put()`を使用しています。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="updateHero" 
-  title="src/app/hero.service.ts (update)">
+  title="src/app/hero.service.ts (更新)">
 </code-example>
 
-The `HttpClient.put()` method takes three parameters
-* the URL
-* the data to update (the modified hero in this case)
-* options
+`HttpClient.put()`メソッドは3つのパラメーターを取ります。
 
-The URL is unchanged. The heroes web API knows which hero to update by looking at the hero's `id`.
+* URL
+* アップデート用のデータ (今回の場合は編集されたヒーロー)
+* オプション
 
-The heroes web API expects a special header in HTTP save requests.
-That header is in the `httpOption` constant defined in the `HeroService`.
+URLは変わりません。
+ヒーローWeb APIはヒーローの`id`を見てどのヒーローを更新すべきかを知ります。
+
+ヒーローWeb APIはHTTPの保存リクエストのとき特別なヘッダーを期待します。
+そのヘッダーは`HeroService`の定数`httpOption`で定義されています。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="http-options">
 </code-example>
 
-Refresh the browser, change a hero name, save your change,
-and click the "go back" button. 
-The hero now appears in the list with the changed name.
+ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存し、"go back"ボタンをクリックしてください。
+リストに変更された名前のヒーローが現れているはずです。
 
-## Add a new hero
+## 新しいヒーローを追加
 
-To add a hero, this app only needs the hero's name. You can use an `input`
-element paired with an add button.
+ヒーローを追加するためには、このアプリではヒーローの名前だけ必要です。
+追加ボタンとペアになった`input`要素が使えます。
 
-Insert the following into the `HeroesComponent` template, just after
-the heading:
+下記を`HeroesComponent`のテンプレートの先頭に挿入します。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="add" title="src/app/heroes/heroes.component.html (add)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="add" title="src/app/heroes/heroes.component.html (追加)"></code-example>
 
-In response to a click event, call the component's click handler and then
-clear the input field so that it's ready for another name.
+クリックイベントに反応し、コンポーネントのクリックハンドラーが呼び出され、そのあと次の名前の入力を可能にするためにinputフィールドをクリアします。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="add" title="src/app/heroes/heroes.component.ts (add)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="add" title="src/app/heroes/heroes.component.ts (追加)"></code-example>
 
-When the given name is non-blank, the handler creates a `Hero`-like object
-from the name (it's only missing the `id`) and passes it to the services `addHero()` method.
+与えられた名前が空文字でない場合、ハンドラーは名前から(`id`だけが抜けた)`Hero`-ライクなオブジェクトを作成し、
+サービスの`addHero()`メソッドに渡します。
 
-When `addHero` saves successfully, the `subscribe` callback
-receives the new hero and pushes it into to the `heroes` list for display.
+`addHero`が正常に登録すると、`subscribe`コールバックが新しいヒーローを受取、表示用の`heroes`リストに追加します。
 
-You'll write `HeroService.addHero` in the next section.
+`HeroService.addHero`は次のセクションで書きます。
 
-#### Add _HeroService.addHero()_
+#### _HeroService.addHero()_の追加
 
-Add the following `addHero()` method to the `HeroService` class.
+`HeroService`クラスに次のメソッド`addHero()`を追加します。
 
 <code-example path="toh-pt6/src/app/hero.service.ts" region="addHero" title="src/app/hero.service.ts (addHero)"></code-example>
 
-`HeroService.addHero()` differs from `updateHero` in two ways.
+`HeroService.addHero()`は`updateHero`と2つ違う点があります。
 
-* it calls `HttpClient.post()` instead of `put()`.
-* it expects the server to generates an id for the new hero, 
-which it returns in the `Observable<Hero>` to the caller.
+* `put()`の代わりに`HttpClient.post()`を呼び出します。
+* サーバーで新しいヒーローのIDが生成されることを期待します。そしてそれは呼び出し元に`Observable<Hero>`として戻ります。
 
-Refresh the browser and add some heroes.
+ブラウザをリフレッシュして、いくつかヒーローを登録しましょう。
 
-## Delete a hero
+## ヒーローを削除
 
-Each hero in the heroes list should have a delete button.
+リスト内の各ヒーローは削除ボタンを持つべきです。
 
-Add the following button element to the `HeroesComponent` template, after the hero
-name in the repeated `<li>` element.
+次のボタンを`HeroesComponent`のテンプレートに追加します。
+繰り返されている`<li>`エレメント内のヒーロー名の後ろです。
 
 <code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="delete"></code-example>
 
-The HTML for the list of heroes should look like this:
+ヒーローたちのリストのHTMLは次のようになるはずです。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="list" title="src/app/heroes/heroes.component.html (list of heroes)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="list" title="src/app/heroes/heroes.component.html (ヒーローのリスト)"></code-example>
 
-To position the delete button at the far right of the hero entry,
-add some CSS to the `heroes.component.css`.  You'll find that CSS
-in the [final review code](#heroescomponent) below.
+削除ボタンをヒーロー項目の右寄りに配置するためには、`heroes.component.css`にCSSを追加します。
+どのようなCSSになるのかは、下部の[最終的なコードレビュー](#heroescomponent)で見ることができます。
 
-Add the `delete()` handler to the component.
+`delete()`ハンドラーをコンポーネントに追加しましょう。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="delete" title="src/app/heroes/heroes.component.ts (delete)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="delete" title="src/app/heroes/heroes.component.ts (削除)"></code-example>
 
-Although the component delegates hero deletion to the `HeroService`,
-it remains responsible for updating its own list of heroes.
-The component's `delete()` method immediately removes the _hero-to-delete_ from that list,
-anticipating that the `HeroService` will succeed on the server.
+削除処理は`HeroService`に任されますが、コンポーネントでもそれ自身がもつヒーローリストの更新処理は必要です。
+コンポーネント側の`delete()`メソッドは`HeroService`がサーバーとの処理を成功するものと予測して、
+_削除されるべきヒーロー_をリストから即座に削除します。
 
-There's really nothing for the component to do with the `Observable` returned by
-`heroService.delete()`. **It must subscribe anyway**.
+`heroService.delete()`が返却する`Observable`に対してはコンポーネント側で何もする必要はありません。
+**いずれにしろsubscribeはしなければなりません**
 
 <div class="alert is-important">
 
-  If you neglect to `subscribe()`, the service will not send the delete request to the server!
-  As a rule, an `Observable` _does nothing_ until something subscribes!
-  
-  Confirm this for yourself by temporarily removing the `subscribe()`,
-  clicking "Dashboard", then clicking "Heroes".
-  You'll see the full list of heroes again.
+  もし`subscribe()`をし忘れると、サービスはDELETEリクエストをサーバーに送信しません！
+  ルールとして、`Observable`はsubscribeされるまで_なにもしません_
+
+  これを確認するためには、一時的に`subscribe()`を外して、
+  "Dashboard"をクリックし、それから"Heroes"をクリックしてください。
+  そうするとヒーローのフルリストが再び現れるはずです。
 
 </div>
 
-#### Add _HeroService.deleteHero()_
+#### _HeroService.deleteHero()_の追加
 
-Add a `deleteHero()` method to `HeroService` like this.
+次のように`HeroService`にメソッド`deleteHero()`を追加しましょう。
 
-<code-example path="toh-pt6/src/app/hero.service.ts" region="deleteHero" title="src/app/hero.service.ts (delete)"></code-example>
+<code-example path="toh-pt6/src/app/hero.service.ts" region="deleteHero" title="src/app/hero.service.ts (削除)"></code-example>
 
-Note that
+下記に注目
 
-* it calls `HttpClient.delete`.
-* the URL is the heroes resource URL plus the `id` of the hero to delete
-* you don't send data as you did with `put` and `post`.
-* you still send the `httpOptions`.
+* `HttpClient.delete`を実行。
+* URLはヒーローリソースのURLと削除するヒーローの`id`
+* `put`や`post`で行っていたようなデータ送信はしません。
+* `httpOptions`は送信しています。
 
-Refresh the browser and try the new delete functionality.
+ブラウザをリフレッシュして、新しい削除機能を試しましょう。
 
-## Search by name
+## 名前で検索
 
-In this last exercise, you learn to chain `Observable` operators together
-so you can minimize the number of similar HTTP requests
-and consume network bandwidth economically.
+この最後のエクササイズでは、`Observable`オペレーターをチェーンを学んで、
+同じようなHTTPリクエストの数を減らし、効率よくネットワーク帯域を使えるようにします。
 
-You will add a *heroes search* feature to the *Dashboard*.
-As the user types a name into a search box, 
-you'll make repeated HTTP requests for heroes filtered by that name.
-Your goal is to issue only as many requests as necessary.
+*Dashboard*に*ヒーロー検索*の機能をつけましょう。
+ユーザーが検索ボックスに名前をタイプすると、
+その名前でフィルターするHTTPリクエストを繰り返し送信します。
+ゴールは必要最低限のリクエストを送信することです。
 
 #### _HeroService.searchHeroes_
 
-Start by adding a `searchHeroes` method to the `HeroService`.
+`HeroService`に`searchHeroes`メソッドを追加するところから始めましょう。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
@@ -411,12 +391,13 @@ Start by adding a `searchHeroes` method to the `HeroService`.
   title="src/app/hero.service.ts">
 </code-example>
 
-The method returns immediately with an empty array if there is no search term.
-The rest of it closely resembles `getHeroes()`.
-The only significant difference is the URL, 
-which includes a query string with the search term.
+検索ワードがない場合、このメソッドはただちに空の配列を返します。
+それ以外の場合は`getHeroes()`ととても似ています。
+ただひとつの重要な違いはURLで、検索ワードがついたクエリ文字列を含んでいます。
 
-### Add search to the Dashboard
+### ダッシュボードに検索を追加
+
+`DashboardComponent`のテンプレートを開いて、ヒーロー検索のエレメント、`<app-hero-search>`をテンプレートの下部に追加します。
 
 Open the `DashboardComponent` _template_ and
 Add the hero search element, `<app-hero-search>`, to the bottom of the `DashboardComponent` template.
@@ -425,150 +406,139 @@ Add the hero search element, `<app-hero-search>`, to the bottom of the `Dashboar
   path="toh-pt6/src/app/dashboard/dashboard.component.html" title="src/app/dashboard/dashboard.component.html" linenums="false">
 </code-example>
 
-This template looks a lot like the `*ngFor` repeater in the `HeroesComponent` template.
+このテンプレートは`HeroesComponent`のテンプレートの`*ngFor`にとても似ています。
 
-Unfortunately, adding this element breaks the app.
-Angular can't find a component with a selector that matches `<app-hero-search>`.
+残念ながら、この要素を追加することでアプリが壊れます。
+Angularが`app-hero-search`にマッチするコンポーネントを見つけることができないためです。
 
-The `HeroSearchComponent` doesn't exist yet. Fix that.
+`HeroSearchComponent`がまだありません。直しましょう。
 
-### Create _HeroSearchComponent_
+### _HeroSearchComponent_作成
 
-Create a `HeroSearchComponent` with the CLI.
+CLIで`HeroSearchComponent`を作ります。
 
 <code-example language="sh" class="code-shell">
   ng generate component hero-search
 </code-example>
 
-The CLI generates the three `HeroSearchComponent` and adds the component to the `AppModule' declarations
+CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコンポーネントを追加します。
 
-Replace the generated `HeroSearchComponent` _template_ with a text box and a list of matching search results like this.
+作成された`HeroSearchComponent`のテンプレートを次のようにテキストボックスと、マッチした検索結果一覧を表示するように書き換えます。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" title="src/app/hero-search/hero-search.component.html"></code-example>
 
-Add private CSS styles to `hero-search.component.css`
-as listed in the [final code review](#herosearchcomponent) below.
+下にある[final code review](#herosearchcomponent)にあるようにプライベートCSSスタイルを`hero-search.component.css`を追加します。
 
-As the user types in the search box, a *keyup* event binding calls the component's `search()`
-method with the new search box value.
+ユーザーが検索ボックス内でタイプすると、*keyup*イベントのバインディングが
+コンポーネントの`search()`メソッドを呼び出して、検索ボックス内の新しい値を渡します。
 
 {@a asyncpipe}
 
 ### _AsyncPipe_
 
-As expected, the `*ngFor` repeats hero objects.
+予想どおり、`*ngFor`がヒーローオブジェクトを繰り返します。
 
-Look closely and you'll see that the `*ngFor` iterates over a list called `heroes$`, not `heroes`.
+よく見ると、`*ngFor`は`heroes`ではなく`heroes$`を繰り返していることに気づくでしょう。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" region="async"></code-example>
 
-The `$` is a convention that indicates `heroes$` is an `Observable`, not an array.
+`$`は`heroes$`が配列ではなく`Observable`であることを示すために慣例でつけられるものです。
 
-The `*ngFor` can't do anything with an `Observable`.
-But there's also a pipe character (`|`) followed by `async`,
-which identifies Angular's `AsyncPipe`.
+`*ngFor`が`Observable`について何もできません。
+しかしパイプ文字(`|`)に続く`async`もあり、これはAngularの`AsyncPipe`を意味します。
 
-The `AsyncPipe` subscribes to an `Observable` automatically so you won't have to
-do so in the component class.
+`AsyncPipe`は自動的に`Observable`をsubscribeするので、コンポーネントクラスで何もする必要はありません。
 
-### Fix the _HeroSearchComponent_ class
+### _HeroSearchComponent_クラスの修正
 
-Replace the generated `HeroSearchComponent` class and metadata as follows.
+生成された`HeroSearchComponent`クラスとメタデータを次のように置き換えます。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.ts" title="src/app/hero-search/hero-search.component.ts"></code-example>
 
-Notice the declaration of `heroes$` as an `Observable`
+`heroes$`の宣言が`Observable`であることに注意
 <code-example 
   path="toh-pt6/src/app/hero-search/hero-search.component.ts" 
   region="heroes-stream">
 </code-example>
 
-You'll set it in [`ngOnInit()`](#search-pipe). 
-Before you do, focus on the definition of `searchTerms`.
+これを[`ngOnInit()`](#search-pipe)内でセットします。
+これをする前に、`searchTerms`の定義に注目しましょう。
 
-### The _searchTerms_ RxJS subject
+### RxJS subjectの_searchTerms_
 
-The `searchTerms` property is declared as an RxJS `Subject`.
+`searchTerms`プロパティはRxJSの`Subject`として定義されています。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.ts" region="searchTerms"></code-example>
 
-A `Subject` is both a source of _observable_ values and an `Observable` itself.
-You can subscribe to a `Subject` as you would any `Observable`.
+`Subject`は_observable_な値の元でもあり、`Observable`そのものでもあります。
+`Observable`にするように`Subject`をsubscribeすることができます。
 
-You can also push values into that `Observable` by calling its `next(value)` method
-as the `search()` method does.
+また、`search()`メソッドで実行している様に、`next(value)`メソッドを呼ぶことで、`Observable`に値をpushすることができます。
 
-The `search()` method is called via an _event binding_ to the
-textbox's `keystroke` event.
+`search()`メソッドはテキストボックスの`keystroke`のイベントバインディングにより呼び出されます。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" region="input"></code-example>
 
-Every time the user types in the textbox, the binding calls `search()` with the textbox value, a "search term". 
-The `searchTerms` becomes an `Observable` emitting a steady stream of search terms.
+テキストボックス内でユーザーがタイプする度、テキストボックスの値、検索語と共に`search()`を呼び出します。
+`searchTerms`は検索語の安定したストリームを発行する`Observable`になります。
 
 {@a search-pipe}
 
-### Chaining RxJS operators
+### RxJSオペレーターのチェーン
 
-Passing a new search term directly to the `searchHeroes()` after every user keystroke would create an excessive amount of HTTP requests,
-taxing server resources and burning through the cellular network data plan.
+ユーザーのすべてのキーストロークの度に`searchHeroes()`に新しい検索語を渡していては、
+極端に多いHTTPリクエストを送信することになり、サーバーリソースを圧迫したり、
+セルラー方式ネットワークのデータプランをすぐに溶かしてしまいます。
 
-Instead, the `ngOnInit()` method pipes the `searchTerms` _observable_  through a sequence of RxJS operators that reduce the number of calls to the `searchHeroes()`,
-ultimately returning an _observable_ of timely hero search results (each a `Hero[]`).
+代わりに、`ngOnInit()`メソッドが`searchTerms`_observable_を`searchHeroes()`を呼ぶ回数を抑えるための
+いくつかのRxJSオペレーターをつなげていて、
+最終的にヒーローのタイムリーな検索結果の_observable_(それぞれは`Hero[]`)を返します。
 
-Here's the code.
+次がそのコードです。
 
 <code-example 
   path="toh-pt6/src/app/hero-search/hero-search.component.ts" 
   region="search">
 </code-example>
 
+* `debounceTime(300)`は最新の文字列を渡す前に、新しい文字列の入力を300ミリ秒待ちます。
 
+* `distinctUntilChanged`はフィルター用の文字列が変わったときだけリクエストを送信することを保証します。
 
-* `debounceTime(300)` waits until the flow of new string events pauses for 300 milliseconds
-before passing along the latest string. You'll never make requests more frequently than 300ms.
-
-
-* `distinctUntilChanged` ensures that a request is sent only if the filter text changed.
-
-
-* `switchMap()` calls the search service for each search term that makes it through `debounce` and `distinctUntilChanged`.
-It cancels and discards previous search observables, returning only the latest search service observable.
-
+* `switchMap()`は`debounce`と`distinctUntilChanged`を通り抜けた各検索語について検索サービスを呼び出します。
+これは破棄された直前のobservableらをキャンセルして、最新の検索サービスのobservableのみを返却します。
 
 <div class="l-sub-section">
+  
+  [switchMap operator](http://www.learnrxjs.io/operators/transformation/switchmap.html)により
+  すべての適格なキーイベントが`HttpClient.get`メソッドを呼び出すことができます。
+  各リクエスト間の300msの休止により、複数のHTTPリクエストを送信できますが、それらは順序どおりに戻ってこないかもしれません。
 
-  With the [switchMap operator](http://www.learnrxjs.io/operators/transformation/switchmap.html),
-  every qualifying key event can trigger an `HttpClient.get()` method call.
-  Even with a 300ms pause between requests, you could have multiple HTTP requests in flight
-  and they may not return in the order sent.
+  `swtichMap()`は元のリクエスト順を保持しますが、最も新しいHTTPメソッドコールからのobservableのみを返します。
+  前の呼び出しはキャンセルされ、破棄されます。
 
-  `switchMap()` preserves the original request order while returning only the observable from the most recent HTTP method call.
-  Results from prior calls are canceled and discarded.
-
-  Note that _canceling_ a previous `searchHeroes()` _Observable_
-  doesn't actually abort a pending HTTP request.
-  Unwanted results are simply discarded before they reach your application code.
+  前の`searchHeroes`の_Observable_を_キャンセルする_というのは実際には保留中のHTTPリクエストを中止しているということに注意してください。
+  不本意な結果はアプリケーションのコードに到達する前に破棄されます。
 
 </div>
 
-Remember that the component _class_ does not subscribe to the `heroes$` _observable_.
-That's the job of the [`AsyncPipe`](#asyncpipe) in the template.
+コンポーネント_クラス_が`heroes$`_observable_をsubscribeしていないことを思い出してください。
+それはテンプレート内の[`AsyncPipe`](#asyncpipe)の役割です。
 
-#### Try it
+#### 試しましょう
 
-Run the app again. In the *Dashboard*, enter some text in the search box.
-If you enter characters that match any existing hero names, you'll see something like this.
+アプリを再度起動しましょう。*Dashboard*にて、検索ボックスで何かテキストを入力してください。
+ヒーロー名にマッチするような文字を入力すると、こんなふうに見えるはずです。
 
 <figure>
   <img src='generated/images/guide/toh/toh-hero-search.png' alt="Hero Search Component">
 </figure>
 
-## Final code review
+## 最終的なコードレビュー
 
-Your app should look like this <live-example></live-example>.
+アプリはこの<live-example></live-example>のようになっているはずです。
 
-Here are the code files discussed on this page (all in the `src/app/` folder).
+これがこのページで説明していたコードファイルです。(すべて`src/app/`フォルダーの中にあります)
 
 {@a heroservice}
 {@a inmemorydataservice}
@@ -640,16 +610,18 @@ Here are the code files discussed on this page (all in the `src/app/` folder).
   </code-pane>
 </code-tabs>
 
-## Summary
+## まとめ
 
-You're at the end of your journey, and you've accomplished a lot.
-* You added the necessary dependencies to use HTTP in the app.
-* You refactored `HeroService` to load heroes from a web API.
-* You extended `HeroService` to support `post()`, `put()`, and `delete()` methods.
-* You updated the components to allow adding, editing, and deleting of heroes.
-* You configured an in-memory web API.
-* You learned how to use Observables.
+旅はここで終わりです。あなたは多くのことを成し遂げました。
 
-This concludes the "Tour of Heroes" tutorial.
-You're ready to learn more about Angular development in the fundamentals section,
-starting with the [Architecture](guide/architecture "Architecture") guide.
+* アプリにHTTPで必要な依存パッケージを追加しました。
+* `HeroService`をリファクタリングして、Web APIからヒーローを読み込めるようにしました。
+* `HeroService`を拡張して、`post()`, `put()`, そして `delete()`メソッドを使えるようにしました。
+* コンポーネントを更新して、ヒーローを追加、更新、そして削除できるようにしました。
+* インメモリWeb APIを設定しました。
+* Observableをどのように扱うかを学びました。
+
+これで"Tour of Heroes"のチュートリアルは終了です。
+基礎ガイドのセクションで、さらにAngularでの開発について学べるようになりました。
+[Architecture](guide/architecture "Architecture")ガイドから始めましょう。
+

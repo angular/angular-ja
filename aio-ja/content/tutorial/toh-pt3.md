@@ -1,135 +1,131 @@
-# Master/Detail Components
+# Master/Detail コンポーネント
 
-At the moment, the `HeroesComponent` displays both the list of heroes and the selected hero's details. 
+現時点では、 `HeroesComponent` はヒーローのリストと選択されたヒーローの詳細の両方を表示しています。
 
-Keeping all features in one component as the application grows will not be maintainable.
-You'll want to split up large components into smaller sub-components, each focused on a specific task or workflow.
+1つのコンポーネントにすべての機能を保持しておくと、アプリケーションが成長するにつれて維持できなくなります。
+大きなコンポーネントを、特定のタスクやワークフローに焦点を当てた小さなサブコンポーネントに分割したいと思うでしょう。
 
-In this page, you'll take the first step in that direction by moving the hero details into a separate, reusable `HeroDetailsComponent`.
+このページでは、ヒーローの詳細を別の再利用可能な `HeroDetailsComponent` に移動させることで、その道への第一歩を踏み出します。
 
-The `HeroesComponent` will only present the list of heroes.
-The `HeroDetailsComponent` will present details of a selected hero.
+`HeroesComponent` はヒーローのリストのみを表示します。
+`HeroDetailsComponent` は選択されたヒーローの詳細を表示します。
 
-## Make the _HeroDetailComponent_
+## _HeroDetailComponent_ を作成する
 
-Use the Angular CLI to generate a new component named `hero-detail`.
+Angular CLIを使用して､ `hero-detail` という名前の新しいコンポーネントを生成します。
 
 <code-example language="sh" class="code-shell">
   ng generate component hero-detail
 </code-example>
 
-The command scaffolds the `HeroDetailComponent` files and declares the component in `AppModule`.
+このコマンドは `HeroDetailComponent` ファイルの雛形を生成して、`AppModule` でこのコンポーネントを宣言します。
 
-### Write the template
+### template を記述する
 
-Cut the HTML for the hero detail from the bottom of the `HeroesComponent` template and paste it over the generated boilerplate in the `HeroDetailComponent` template.
+ヒーローの詳細のHTMLを `HeroesComponent` テンプレートの下部から切り取り、 `HeroDetailComponent` テンプレートに生成されたボイラープレートへ貼り付けます。
 
-The pasted HTML refers to a `selectedHero`.
-The new `HeroDetailComponent` can present _any_ hero, not just a selected hero.
-So replace "selectedHero" with "hero" everywhere in the template. 
+貼り付けられたHTMLは `selectedHero` を参照しています。
+新しい `HeroDetailComponent` は、選択されたヒーローだけでなく、_どんな_ ヒーローも表示することができます。
+なので、テンプレート内すべての "selectedHero" を "hero" に置き換えてください。
 
-When you're done, the `HeroDetailComponent` template should look like this:
+完了したら、 `HeroDetailComponent` テンプレートは次のようになります。
 
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.html" title="src/app/hero-detail/hero-detail.component.html" linenums="false">
 
 </code-example>
 
-### Add the *@Input() hero* property
+### *@Input() hero* プロパティを追加する
 
-The `HeroDetailComponent` template binds to the component's `hero` property
-which is of type `Hero`.
+`HeroDetailComponent` テンプレートは、 `Hero` 型であるコンポーネントの `hero` プロパティにバインドされます。
 
-Open the `HeroDetailComponent` class file and import the `Hero` symbol.
+`HeroDetailComponent` クラスのファイルを開いて、` Hero` シンボルをインポートします。
 
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" 
 region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import Hero)">
 </code-example>
 
-The `hero` property 
-[must be an _Input_ property](guide/template-syntax#inputs-outputs "Input and Output properties"),
-annotated with the `@Input()` decorator,
-because the _external_ `HeroesComponent` [will bind to it](#heroes-component-template) like this.
+`hero` プロパティは `@Input()` デコレータで注釈された[ _Input_ プロパティでなければなりません](guide/template-syntax#inputs-outputs "Input and Output properties")。
+これは、_外部の_ `HeroesComponent` がこのようにバインドするためです。
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding">
 </code-example>
 
-Amend the `@angular/core` import statement to include the `Input` symbol.
+`Input` シンボルを含めるために、 `@angular/core` のimport文を修正してください。
 
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" title="src/app/hero-detail/hero-detail.component.ts (import Input)" linenums="false">
 </code-example>
 
-Add a `hero` property, preceded by the `@Input()` decorator.
+`@Input()` デコレータが前に付いた `hero` プロパティを追加します。
 
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="input-hero"  linenums="false">
 </code-example>
 
-That's the only change you should make to the `HeroDetailComponent` class.
-There are no more properties. There's no presentation logic. 
-This component simply receives a hero object through its `hero` property and displays it.
+これが `HeroDetailComponent` クラスに行うべき唯一の変更です。
+これ以上のプロパティも、表示のためのロジックも必要ありません。
+このコンポーネントは `hero` プロパティを通してheroオブジェクトを受け取り、それを表示するだけです。
 
-## Show the _HeroDetailComponent_
+## _HeroDetailComponent_ を表示する
 
-The `HeroesComponent` is still a master/detail view. 
+`HeroesComponent` は、まだ master/detail ビューのままです。
 
-It used to display the hero details on its own, before you cut that portion of the template. Now it will delegate to the `HeroDetailComponent`.
+テンプレートからヒーローの詳細を切り取るまでは、このコンポーネント自身でそれを表示していました。今度は `HeroDetailComponent` に委譲しましょう。
 
-The two components will have a parent/child relationship.
-The parent `HeroesComponent` will control the child `HeroDetailComponent` 
-by sending it a new hero to display whenever
-the user selects a hero from the list.
+2つのコンポーネントには親子関係があります。
+ユーザーがリストからヒーローを選択するたびに新しいヒーローを表示するため、
+親の `HeroesComponent` はそれを送ることで、子の `HeroDetailComponent` を制御します。
 
-You won't change the `HeroesComponent` _class_ but you will change its _template_.
+`HeroesComponent` _class_ は変更せず、_template_ を変更します。
 
 {@a heroes-component-template}
 
-### Update the _HeroesComponent_ template
+### _HeroesComponent_ テンプレートを更新する
 
-The `HeroDetailComponent` selector is `'app-hero-detail'`.
-Add an `<app-hero-detail>` element near the bottom of the `HeroesComponent` template, where the hero detail view used to be.
+`HeroDetailComponent` のセレクタは `'app-hero-detail'` です。
 
-Bind the `HeroesComponent.selectedHero` to the element's `hero` property like this.
+ヒーローの詳細ビューがかつて存在した `HeroesComponent` テンプレートの下部に `<app-hero-detail>` 要素を追加してください。
+
+次のように `HeroesComponent.selectedHero` を、この要素の `hero` プロパティにバインドさせます。
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding" title="hero-detail.component.html (HeroDetail binding)">
 
 </code-example>
 
-`[hero]="selectedHero"` is an Angular [property binding](guide/template-syntax#property-binding).
+`[hero]="selectedHero"` は、Angularの[プロパティバインディング](guide/template-syntax#property-binding)です。
 
-It's a _one way_ data binding from
-the `selectedHero` property of the `HeroComponent` to the `hero` property of the target element, which maps to the `hero` property of the `HeroDetailComponent`.
+これは `HeroComponent` の `selectedHero` プロパティから、ターゲット要素の `hero` プロパティへの単方向データバインディングです。
+ここでは、`HeroDetailComponent` の `hero` プロパティがマッピングされています。
 
-Now when the user clicks a hero in the list, the `selectedHero` changes.
-When the `selectedHero` changes, the _property binding_ updates `hero`
-and the `HeroDetailComponent` displays the new hero.
+ユーザーがリスト内のヒーローをクリックすると、 `selectedHero` が変更されます。
+`selectedHero` が変更されると、_property binding_ は `hero` を更新して、
+ `HeroDetailComponent` は新しいヒーローを表示します。
 
-The revised `HeroesComponent` template should look like this:
+修正された `HeroesComponent` テンプレートはこのようになります：
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html"
   title="heroes.component.html" linenums="false">
 </code-example>
 
-The browser refreshes and the app starts working again as it did before.
+ブラウザがリフレッシュされると、以前と同じようにアプリケーションが再び動き始めます。
 
-## What changed?
+## 何が変わったのか？
 
-As [before](tutorial/toh-pt2), whenever a user clicks on a hero name,
-the hero detail appears below the hero list.
-Now the `HeroDetailComponent` is presenting those details instead of the `HeroesComponent`.
+[以前](tutorial/toh-pt2)は、ユーザーがヒーロー名をクリックするたびに、
+ヒーローのリストの下にヒーローの詳細が表示されていました。
+今では `HeroDetailComponent` が `HeroesComponent` の代わりにそれらの詳細を表示しています。
 
-Refactoring the original `HeroesComponent` into two components yields benefits, both now and in the future:
+元の `HeroesComponent` を2つのコンポーネントにリファクタリングすることで、現在も未来も利益が得られます。
 
-1. You simplified the `HeroesComponent` by reducing its responsibilities.
+1. `HeroesComponent` をその責任を減らすことによって単純化しました。
 
-1. You can evolve the `HeroDetailComponent` into a rich hero editor
-without touching the parent `HeroesComponent`.
+1. 親の `HeroesComponent` を触れずに、`HeroDetailComponent` をリッチなヒーローエディタに進化させることができます。
 
-1. You can evolve the `HeroesComponent` without touching the hero detail view.
+1. ヒーローの詳細ビューを触れずに、 `HeroesComponent` を進化させることができます。
 
-1. You can re-use the `HeroDetailComponent` in the template of some future component.
+1. 未来のコンポーネントのテンプレートで `HeroDetailComponent` を再利用することができます。
 
-## Final code review
+## 最終的なコードレビュー
 
-Here are the code files discussed on this page and your app should look like this <live-example></live-example>.
+このページで解説したコードファイルは次のとおりで、あなたのアプリケーションはこのように見えるはずです <live-example></live-example>。
 
 <code-tabs>
 
@@ -144,14 +140,13 @@ Here are the code files discussed on this page and your app should look like thi
 
 </code-tabs>
 
-## Summary
+## まとめ
 
-* You created a separate, reusable `HeroDetailComponent`.
-
-
-* You used a [property binding](guide/template-syntax#property-binding) to give the parent `HeroesComponent` control over the child `HeroDetailComponent`.
+* 別の再利用可能な `HeroDetailComponent` を作成しました。
 
 
-* You used the [`@Input` decorator](guide/template-syntax#inputs-outputs) 
-to make the `hero` property available for binding
-by the external `HeroesComponent`.
+* 親の `HeroesComponent` が子の`HeroDetailComponent` を制御できるように、[プロパティバインディング](guide/template-syntax#property-binding)を使用しました。
+
+
+* 外部の `HeroesComponent` によるバインディングが `hero` プロパティを利用できるように
+[`@Input` デコレータ](guide/template-syntax#inputs-outputs)を使用しました。

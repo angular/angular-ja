@@ -9,9 +9,9 @@
 ## コントリビューター
 
 <!---begin contributors -->
-[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco) |
-:---: |
-[lacolaco](https://github.com/lacolaco) |
+[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |
+:---: |:---: |:---: |
+[lacolaco](https://github.com/lacolaco) |[imamoto](https://github.com/imamoto) |[massa142](https://github.com/massa142) |
 <!---end contributors -->
 
 ## コントリビューション大歓迎！

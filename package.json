@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "deploy": "firebase deploy --token \"$FIREBASE_TOKEN\"",
-    "contributors": "githubcontrib --owner angular --repo angular-ja --cols 6 --format md --showlogin true | pbcopy",
+    "contributors": "githubcontrib --owner angular --repo angular-ja --cols 6 --format md --showlogin true --sortOrder desc | pbcopy",
     "update-origin": "./update-origin.sh"
   },
   "devDependencies": {

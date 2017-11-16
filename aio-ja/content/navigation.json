@@ -93,8 +93,8 @@
         },
         {
           "url": "tutorial/toh-pt1",
-          "title": "3. The Hero Editor",
-          "tooltip": "Part 3: Build a simple hero editor"
+          "title": "3. ヒーローエディター",
+          "tooltip": "Part 3: シンプルなヒーローエディターを組み立てます"
         },
         {
           "url": "tutorial/toh-pt2",
@@ -103,8 +103,8 @@
         },
         {
           "url": "tutorial/toh-pt3",
-          "title": "5. Master/Detail Components",
-          "tooltip": "Part 5: Refactor the master/detail view into separate components."
+          "title": "5. Master/Detail コンポーネント",
+          "tooltip": "Part 5: master/detailビューを複数のコンポーネントに分割してリファクタリングします"
         },
         {
           "url": "tutorial/toh-pt4",

@@ -6,7 +6,7 @@
 * ユーザーはヒーロー情報を追加、編集、削除ができ、その変更をHTTPを通して保存することができます。
 * ユーザーは名前でヒーロー情報を検索できます。
 
-このページを終えたとき、このアプリは次のようになります。<live-example></lib-example>
+このページを終えたとき、このアプリは次のようになります。<live-example></live-example>
 
 ## HTTPサービスの有効化
 
@@ -14,11 +14,11 @@
 
 アプリ内のどこでも`HttpClient`を利用可能にするには
 
-* ルート`AppModule`を開く
+* ルートの`AppModule`を開く
 * `@angular/common/http`から`HttpClientModule`をインポート
 * `@NgModule.imports`の配列に`HttpClientModule`を追加
 
-## データサーバーをシミュレート
+## データサーバーをシミュレートする
 
 本チュートリアルでは [_In-memory Web API_](https://github.com/angular/in-memory-web-api "インメモリWebAPI")モジュール
 を利用してリモートデータサーバーとの通信を再現します。
@@ -109,7 +109,7 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
   region="heroesUrl" >
 </code-example>
 
-### _HttpClient_を使ってヒーローを取得
+### _HttpClient_を使ってヒーローを取得する
 
 現在の`HeroService.getHeroes()`はRxJSの`of()`を使って、モックのヒーロー配列を`Observable<Hero[]>`として返します。
 
@@ -209,7 +209,7 @@ _error handler_関数を`catchError`に返します。
 
 ### _Observable_に侵入
 
-`HeroService`のメソットはObservableな値の流れに入り込んで、(`log()`を通して)ページ下部にメッセージを送信します。
+`HeroService`のメソッドはObservableな値の流れに入り込んで、(`log()`を通して)ページ下部にメッセージを送信します。
 
 これはRxJSの`tap`オペレーターを使って行います。
 これはObservableな値を見て、その値に何か処理を行い、それらを渡します。
@@ -222,7 +222,7 @@ _error handler_関数を`catchError`に返します。
   region="getHeroes" >
 </code-example>
 
-### IDでヒーローを取得
+### IDでヒーローを取得する
 
 ほとんどのWeb APIは `api/hero/:id` (`api/hero/11`のような) 形式のリクエストで_IDにより取得する_ことをサポートしています。
 
@@ -237,8 +237,7 @@ _error handler_関数を`catchError`に返します。
 * したがって、`getHero`はヒーローの配列のObservableを返すのではなく、
 `Observable<Hero>` (_ヒーローオブジェクトのObservable_)を返すこと。
 
-## ヒーローを更新
-## Update heroes
+## ヒーローを更新する
 
 _ヒーロー詳細_画面で、ヒーローの名前を編集します。
 タイプすると、ページ上部のヒーローの名前が更新されます。
@@ -285,7 +284,7 @@ URLは変わりません。
 ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存し、"go back"ボタンをクリックしてください。
 リストに変更された名前のヒーローが現れているはずです。
 
-## 新しいヒーローを追加
+## 新しいヒーローを追加する
 
 ヒーローを追加するためには、このアプリではヒーローの名前だけ必要です。
 追加ボタンとペアになった`input`要素が使えます。
@@ -318,7 +317,7 @@ URLは変わりません。
 
 ブラウザをリフレッシュして、いくつかヒーローを登録しましょう。
 
-## ヒーローを削除
+## ヒーローを削除する
 
 リスト内の各ヒーローは削除ボタンを持つべきです。
 
@@ -362,7 +361,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 <code-example path="toh-pt6/src/app/hero.service.ts" region="deleteHero" title="src/app/hero.service.ts (削除)"></code-example>
 
-下記に注目
+下記に注目しましょう
 
 * `HttpClient.delete`を実行。
 * URLはヒーローリソースのURLと削除するヒーローの`id`
@@ -371,7 +370,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 ブラウザをリフレッシュして、新しい削除機能を試しましょう。
 
-## 名前で検索
+## 名前で検索する
 
 この最後のエクササイズでは、`Observable`オペレーターをチェーンを学んで、
 同じようなHTTPリクエストの数を減らし、効率よくネットワーク帯域を使えるようにします。
@@ -399,9 +398,6 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 `DashboardComponent`のテンプレートを開いて、ヒーロー検索のエレメント、`<app-hero-search>`をテンプレートの下部に追加します。
 
-Open the `DashboardComponent` _template_ and
-Add the hero search element, `<app-hero-search>`, to the bottom of the `DashboardComponent` template.
-
 <code-example 
   path="toh-pt6/src/app/dashboard/dashboard.component.html" title="src/app/dashboard/dashboard.component.html" linenums="false">
 </code-example>
@@ -413,7 +409,7 @@ Angularが`app-hero-search`にマッチするコンポーネントを見つけ�
 
 `HeroSearchComponent`がまだありません。直しましょう。
 
-### _HeroSearchComponent_作成
+### _HeroSearchComponent_を作成する
 
 CLIで`HeroSearchComponent`を作ります。
 
@@ -444,18 +440,18 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 `$`は`heroes$`が配列ではなく`Observable`であることを示すために慣例でつけられるものです。
 
-`*ngFor`が`Observable`について何もできません。
+`*ngFor`は`Observable`について何もできません。
 しかしパイプ文字(`|`)に続く`async`もあり、これはAngularの`AsyncPipe`を意味します。
 
 `AsyncPipe`は自動的に`Observable`をsubscribeするので、コンポーネントクラスで何もする必要はありません。
 
-### _HeroSearchComponent_クラスの修正
+### _HeroSearchComponent_クラスを修正する
 
 生成された`HeroSearchComponent`クラスとメタデータを次のように置き換えます。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.ts" title="src/app/hero-search/hero-search.component.ts"></code-example>
 
-`heroes$`の宣言が`Observable`であることに注意
+`heroes$`の宣言が`Observable`であることに注意しましょう。
 <code-example 
   path="toh-pt6/src/app/hero-search/hero-search.component.ts" 
   region="heroes-stream">
@@ -484,7 +480,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 {@a search-pipe}
 
-### RxJSオペレーターのチェーン
+### RxJSオペレーターの連結
 
 ユーザーのすべてのキーストロークの度に`searchHeroes()`に新しい検索語を渡していては、
 極端に多いHTTPリクエストを送信することになり、サーバーリソースを圧迫したり、
@@ -506,7 +502,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 * `distinctUntilChanged`はフィルター用の文字列が変わったときだけリクエストを送信することを保証します。
 
 * `switchMap()`は`debounce`と`distinctUntilChanged`を通り抜けた各検索語について検索サービスを呼び出します。
-これは破棄された直前のobservableらをキャンセルして、最新の検索サービスのobservableのみを返却します。
+これはそれまでの検索のobservableをキャンセルし、最新の検索サービスのobservableだけを返します。
 
 <div class="l-sub-section">
   

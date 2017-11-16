@@ -14,7 +14,7 @@
 
 <code-example language="sh" class="code-shell">
   ng new angular-tour-of-heroes
-</code-example> 
+</code-example>
 
 Angular CLIが、デフォルトのアプリケーションとサポートファイルを持つ新しいプロジェクトを作成しました。
 
@@ -26,7 +26,7 @@ Angular CLIが、デフォルトのアプリケーションとサポートファ
   cd angular-tour-of-heroes
   ng serve --open
 </code-example>
- 
+
 <div class="l-sub-section">
 
 `ng serve`コマンドはアプリケーションをビルド、開発用サーバーを起動し、ソースファイルを監視します。
@@ -66,12 +66,12 @@ _コンポーネント_ はAngularアプリケーションの基礎的な構成�
 Angular CLIにより生成されたデフォルトのテンプレートを削除してください。
 代わりに以下のHTMLを配置してください。
 
-<code-example path="toh-pt0/src/app/app.component.html" 
+<code-example path="toh-pt0/src/app/app.component.html"
   title="app.component.html (template)" linenums="false">
 </code-example>
 
-二重の波括弧はAngularの*内挿バインディング*の構文です。
-この内挿バインディングはコンポーネントの`title`プロパティの値を、HTMLのheaderタグの中に渡します。
+二重の波括弧はAngularの*補間バインディング*の構文です。
+この補間バインディングはコンポーネントの`title`プロパティの値を、HTMLのheaderタグの中に渡します。
 
 ブラウザがページを更新し、新しいアプリケーションのタイトルが表示されます。
 
@@ -103,8 +103,8 @@ CLIはこの目的のために、空の`styles.css`を生成しました。
   <code-pane title="src/app/app.component.html" path="toh-pt0/src/app/app.component.html">
   </code-pane>
 
-  <code-pane 
-    title="src/styles.css (excerpt)" 
+  <code-pane
+    title="src/styles.css (excerpt)"
     path="toh-pt0/src/styles.1.css">
   </code-pane>
 </code-tabs>
@@ -113,5 +113,4 @@ CLIはこの目的のために、空の`styles.css`を生成しました。
 
 * Angular CLIを用いて初期アプリケーションの骨組みを作成しました。
 * Angularのコンポーネントがデータを表示することを学びました。
-* アプリケーションのタイトルを表示するために二重波カッコによる内挿を使いました。
-
+* アプリケーションのタイトルを表示するために二重波カッコによる補間を使いました。

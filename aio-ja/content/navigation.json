@@ -119,7 +119,7 @@
         {
           "url": "tutorial/toh-pt6",
           "title": "8. HTTP",
-          "tooltip": "Part 8: Use HTTP to retrieve and save hero data."
+          "tooltip": "Part 8: HTTPを使ってヒーローのデータを取得・保存します"
         }
       ]
     },

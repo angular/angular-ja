@@ -1,69 +1,66 @@
-<h1 class="no-toc">Tutorial: Tour of Heroes</h1>
+<h1 class="no-toc">チュートリアル: ツアー・オブ・ヒーローズ</h1>
 
-The _Tour of Heroes_ tutorial covers the fundamentals of Angular.  
-In this tutorial you will build an app that helps a staffing agency manage its stable of heroes.
+_ツアー・オブ・ヒーローズ_ チュートリアルはAngularの基礎をカバーしています。
+このチュートリアルでは人財派遣会社がヒーローの集合を管理するためのアプリケーションを開発します。
 
-This basic app has many of the features you'd expect to find in a data-driven application.
-It acquires and displays a list of heroes, edits a selected hero's detail, and navigates among different views of heroic data.
+この基本的なアプリケーションは、データ駆動型アプリケーションで期待される多くの機能を持っています。
+ヒーローのリストを取得して表示し、選択したヒーローの詳細を編集し、ヒーローデータのさまざまなビュー間を遷移します。
 
-By the end of the tutorial you will be able to do the following:
+このチュートリアルが終わるときには、あなたは以下のことが出来るようになっています。
 
-* Use built-in Angular directives to show and hide elements and display lists of hero data.
-* Create Angular components to display hero details and show an array of heroes.
-* Use one-way data binding for read-only data.
-* Add editable fields to update a model with two-way data binding.
-* Bind component methods to user events, like keystrokes and clicks.
-* Enable users to select a hero from a master list and edit that hero in the details view. 
-* Format data with pipes.
-* Create a shared service to assemble the heroes.
-* Use routing to navigate among different views and their components.
+* Angularに組み込まれているディレクティブを利用して、要素を表示および隠し、ヒーローデータのリストを表示する。
+* ヒーローの詳細やヒーローのリストを表示するためのAngularコンポーネントを作成する。
+* 読み取り専用データのための一方向データバインディングを使用する。
+* 双方向データバインディングを用いて、モデルを更新するための編集可能なフィールドを設置する。
+* キー入力やクリックといったユーザーのイベントに対しコンポーネントが持つメソッドをバインドする。
+* ユーザーがマスターリストからヒーローを選択し、詳細画面でそのヒーロを編集できるようにする。
+* パイプによりデータを整形する。
+* ヒーローを組み立てるための共有サービスを作成する。
+* 様々なビューとそれらのコンポーネント間を遷移可能にするためにルーティングを使用する。
 
-You'll learn enough Angular to get started and gain confidence that
-Angular can do whatever you need it to do. 
+Angularを始めるためにAngularのことを十分に学び、Angularは必要なことを何でもできるということを確信するようになります。
 
-After completing all tutorial steps, the final app will look like this <live-example name="toh-pt6"></live-example>.
+チュートリアルの全てのステップを完了した時、最終的なアプリケーションはこのようになります。
+<live-example name="toh-pt6"></live-example>
 
 
-## What you'll build
+## これから何を作るか
 
-Here's a visual idea of where this tutorial leads, beginning with the "Dashboard"
-view and the most heroic heroes:
+これは、このチュートリアルがもっとも勇敢なヒーローを表示するダッシュボードから始まり、どこに誘導するか
+という視覚的アイデアです。
 
 <figure>
   <img src='generated/images/guide/toh/heroes-dashboard-1.png' alt="Output of heroes dashboard">
 </figure>
 
-You can click the two links above the dashboard ("Dashboard" and "Heroes")
-to navigate between this Dashboard view and a Heroes view.
+ダッシュボード上の2つのリンク("Dashboard" と "Heroes")をクリックすることができ、
+このダッシュボード画面とヒーロの画面を遷移します。
 
-If you click the dashboard hero "Magneta," the router opens a "Hero Details" view
-where you can change the hero's name.
+ダッシュボードで"Magenta"というヒーローをクリックしたら、ルーターはヒーローの名前を編集できる"Hero Details"画面を開きます。
 
 <figure>
   <img src='generated/images/guide/toh/hero-details-1.png' alt="Details of hero in app">
 </figure>
 
-Clicking the "Back" button returns you to the Dashboard.
-Links at the top take you to either of the main views.
-If you click "Heroes," the app displays the "Heroes" master list view.
-
+”Back"ボタンをクリックすることでダッシュボードに戻ります。
+上部にあるリンクはそれぞれのメインビューに遷移させます。
+"Heroes"をクリックしたら、アプリケーションは"Heroes"のマスターリストのビューを表示します。
 
 <figure>
   <img src='generated/images/guide/toh/heroes-list-2.png' alt="Output of heroes list app">
 </figure>
 
-When you click a different hero name, the read-only mini detail beneath the list reflects the new choice.
+別のヒーローの名前をクリックすると、リストの下にある読み取り専用の小さな詳細ビューが、新しく選択されたものを反映します。
 
-You can click the "View Details" button to drill into the
-editable details of the selected hero.
+"View Details"ボタンをクリックすることで、選択されたヒーローを編集可能な詳細ビューに移ることができます。
 
-The following diagram captures all of the navigation options.
+次の図は全ての遷移の選択肢をキャプチャしたものです。
 
 <figure>
   <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
 </figure>
 
-Here's the app in action:
+以下がアプリケーションでユーザーがアクションを取っている様子です。
 
 <figure>
   <img src='generated/images/guide/toh/toh-anim.gif' alt="Tour of Heroes in Action">

@@ -1,47 +1,38 @@
-# QuickStart
+# クイックスタート
 
-Good tools make application development quicker and easier to maintain than
-if you did everything by hand.
+良いツールは、あなたが手作業で全てをやるよりも
+アプリケーションの開発を素早く、そして保守を簡単にします。
 
-The [**Angular CLI**](https://cli.angular.io/) is a **_command line interface_** tool
-that can create a project, add files, and perform a variety of ongoing development tasks such
-as testing, bundling, and deployment.
+[**Angular CLI**](https://cli.angular.io/) はプロジェクトの作成、ファイルの追加に加え、開発で行うテスト、ビルド、デプロイのタスクを行うための **_コマンドライン・インターフェース・ツール_** です。
 
-The goal in this guide is to build and run a simple Angular
-application in TypeScript, using the Angular CLI
-while adhering to the [Style Guide](guide/styleguide) recommendations that
-benefit _every_ Angular project.
+このガイドの最終目標は、TypeScriptを用いた簡単なAngularアプリケーションの構築です。
+Angular CLIを使うことで、[スタイルガイド](guide/styleguide) に準拠したAngularプロジェクトを生成できます。
 
-By the end of the chapter, you'll have a basic understanding of development with the CLI
-and a foundation for both these documentation samples and for real world applications.
+この章を読み終える頃には、CLIを使った開発について、そしてドキュメントのサンプルや実際のアプリケーションに対する基礎知識を身につけられるでしょう。
 
-And you can also <a href="generated/zips/cli-quickstart/cli-quickstart.zip" target="_blank">download the example.</a>
+このドキュメントで使うサンプルは<a href="generated/zips/cli-quickstart/cli-quickstart.zip" target="_blank">こちらからダウンロード</a>できます。
+
 
 <h2 id='devenv'>
-  Step 1. Set up the Development Environment
+  Step 1. 開発環境の構築
 </h2>
 
 
+まずは開発環境を構築するところからはじめましょう。
 
-You need to set up your development environment before you can do anything.
-
-Install **[Node.js® and npm](https://nodejs.org/en/download/)**
-if they are not already on your machine.
+**[Node.js® と npm](https://nodejs.org/en/download/)** がインストールされていなければ、インストールしてください。
 
 <div class="l-sub-section">
 
 
-
-**Verify that you are running at least node `6.9.x` and npm `3.x.x`**
-by running `node -v` and `npm -v` in a terminal/console window.
-Older versions produce errors, but newer versions are fine.
+**node `6.9.X` 以上とnpm `3.x.x` 以上がインストールされていることを確認してください。**  
+ターミナルまたはコンソールで `node -v` と `npm -v` コマンドを使うことで確認できます。  
+古いバージョンをお使いの場合はエラーの原因となりますが、新しいぶんには問題ありません。
 
 </div>
 
 
-
-Then **install the [Angular CLI](https://github.com/angular/angular-cli)** globally.
-
+グローバル環境に **[Angular CLI](https://github.com/angular/angular-cli) をインストール**してください。
 
 <code-example language="sh" class="code-shell">
   npm install -g @angular/cli
@@ -50,18 +41,14 @@ Then **install the [Angular CLI](https://github.com/angular/angular-cli)** globa
 
 
 
-
 <h2 id='create-proj'>
-  Step 2. Create a new project
+  Step 2. 新規プロジェクトを作成する
 </h2>
 
 
+ターミナルを開いてください。
 
-Open a terminal window.
-
-
-Generate a new project and skeleton application by running the following commands:
-
+以下のコマンドを実行して、新規プロジェクトと空のアプリケーションを生成してください。
 
 <code-example language="sh" class="code-shell">
   ng new my-app
@@ -73,24 +60,19 @@ Generate a new project and skeleton application by running the following command
 <div class="l-sub-section">
 
 
-
-Patience please.
-It takes time to set up a new project, most of it spent installing npm packages.
+しばらく待ちましょう。  
+新規プロジェクト生成には時間がかかります（待ち時間の大半はnpmでパッケージをインストールする時間です）。
 
 
 </div>
 
 
-
-
 <h2 id='serve'>
-  Step 3: Serve the application
+  Step 3: アプリケーションをサーブする
 </h2>
 
 
-
-Go to the project directory and launch the server.
-
+プロジェクトのディレクトリに移動して、サーバーを起動してください。
 
 <code-example language="sh" class="code-shell">
   cd my-app
@@ -98,15 +80,12 @@ Go to the project directory and launch the server.
 </code-example>
 
 
+`ng serve` コマンドはサーバーを起動します。  
+プロジェクトのファイル変更を監視して、変更があれば再度ビルドを行います。
 
-The `ng serve` command launches the server, watches your files,
-and rebuilds the app as you make changes to those files.
+`--open` （または `-o` ）コマンドを使うことで、ブラウザで`http://localhost:4200/` を自動的に開くようにすることもできます。
 
-Using the `--open` (or just `-o`) option will automatically open your browser
-on `http://localhost:4200/`.
-
-Your app greets you with a message:
-
+アプリケーションで以下のような挨拶文が表示されればOKです。
 
 <figure>
   <img src='generated/images/guide/cli-quickstart/app-works.png' alt="The app works!">
@@ -114,73 +93,63 @@ Your app greets you with a message:
 
 
 
-
 <h2 id='first-component'>
-  Step 4: Edit your first Angular component
+  Step 4: Angularコンポーネントを編集してみる
 </h2>
 
 
+CLIがあなたのために一つ目のコンポーネントを作成してくれました。
+これは _ルートコンポーネント_ で、 `app-root` と名付けられています。  
+このファイルは `./src/app/app.component.ts` にあります。
 
-The CLI created the first Angular component for you.
-This is the _root component_ and it is named `app-root`.
-You can find it in `./src/app/app.component.ts`.
-
-
-Open the component file and change the `title` property from _Welcome to app!!_ to _Welcome to My First Angular App!!_:
-
+コンポーネントのファイルを開いて、 `title` プロパティを _Welcome to app!!_ から _Welcome to My First Angular App!!_ に変更してみてください。
 
 <code-example path="cli-quickstart/src/app/app.component.ts" region="title" title="src/app/app.component.ts" linenums="false"></code-example>
 
 
+ブラウザが自動的に更新されて、変更したタイトルになっていますね。
+これでも素敵ですが、もっと見た目を良くしましょう。
 
-The browser reloads automatically with the revised title. That's nice, but it could look better.
-
-Open `src/app/app.component.css` and give the component some style.
-
+`src/app/app.component.css` を開いてコンポーネントにスタイルをつけていきましょう。
 
 <code-example path="cli-quickstart/src/app/app.component.css" title="src/app/app.component.css" linenums="false"></code-example>
 
 
 
 <figure>
-  <img src='generated/images/guide/cli-quickstart/my-first-app.png' alt="Output of QuickStart app">
+  <img src='generated/images/guide/cli-quickstart/my-first-app.png' alt="クイックスタートアプリの表示結果">
 </figure>
 
+見た目がよくなりましたね！
 
 
-Looking good!
+## 次に…
+"Hello, World"アプリを使った説明は以上です。
+
+Angularでできるすばらしいことを体験できる
+デモアプリケーションを、 [Tour of Heroesのチュートリアル](tutorial) を通して作成する準備ができました。
+
+それとも、もう少しだけ今作ったプロジェクトについて掘り下げて学ぶこともできます。
+
+## プロジェクトファイルについて
 
 
+Angular CLIプロジェクトは、迅速な実験とエンタープライズソリューションの両方の基礎です。
 
-## What's next?
-That's about all you'd expect to do in a "Hello, World" app.
+最初に見るべきファイルは `README.md` です。
+このファイルにはCLIコマンドについての基本的な情報が載っています。
+ここに書いてあること以外に、もっとAngularCLIについて知りたくなったら
+[Angular CLIのリポジトリ](https://github.com/angular/angular-cli) や [Wiki](https://github.com/angular/angular-cli/wiki) を参照してください。
 
-You're ready to take the [Tour of Heroes Tutorial](tutorial) and build
-a small application that demonstrates the great things you can build with Angular.
+いくつかの生成されたファイルは初めて見るものもあるかもしれませんね。
 
-Or you can stick around a bit longer to learn about the files in your brand new project.
+### `src` フォルダ
 
+あなたのアプリケーションは `src` フォルダの中にあります。
+Angularコンポーネント、テンプレート、スタイル、画像などのアプリに必要なものは全てこのフォルダの中に
+入っている必要があります。
 
-
-## Project file review
-
-An Angular CLI project is the foundation for both quick experiments and enterprise solutions.
-
-The first file you should check out is `README.md`.
-It has some basic information on how to use CLI commands.
-Whenever you want to know more about how Angular CLI works make sure to visit
-[the Angular CLI repository](https://github.com/angular/angular-cli) and
-[Wiki](https://github.com/angular/angular-cli/wiki).
-
-Some of the generated files might be unfamiliar to you.
-
-
-
-### The `src` folder
-Your app lives in the `src` folder.
-All Angular components, templates, styles, images, and anything else your app needs go here.
-Any files outside of this folder are meant to support building your app.
-
+このフォルダの外にあるファイルは、アプリをビルドするためのものとして捉えてください。
 
 <div class='filetree'>
   <div class='file'>src</div>
@@ -242,9 +211,8 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      Defines the `AppComponent` along with an HTML template, CSS stylesheet, and a unit test.
-      It is the **root** component of what will become a tree of nested components
-      as the application evolves.
+      HTMLテンプレート、CSSスタイルシート、ユニットテストからなる `AppComponent` を構成します。
+      これは成長していく、ネストされたコンポーネントからなるアプリケーションツリーの **根** となるコンポーネントです。
 
     </td>
   </tr>
@@ -256,10 +224,9 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      Defines `AppModule`, the [root module](guide/bootstrapping "AppModule: the root module") that tells Angular how to assemble the application.
-      Right now it declares only the `AppComponent`.
-      Soon there will be more components to declare.
-
+      Angularにどのようにアプリを組み立てるかを伝えるための [root モジュール](guide/bootstrapping "AppModule: the root module") である `AppModule` を定義します。
+      現時点では `AppComponent` のみ宣言していますが、進めていくうちに他のコンポーネントを宣言するようになります。
+      
     </td>
   </tr>
   <tr>
@@ -269,9 +236,7 @@ Any files outside of this folder are meant to support building your app.
 
     </td>
     <td>
-
-      A folder where you can put images and anything else to be copied wholesale
-      when you build your application.
+      画像など、アプリケーションをビルドするときにまるごとコピーするようなものを入れてください。
 
     </td>
   </tr>
@@ -282,15 +247,12 @@ Any files outside of this folder are meant to support building your app.
 
     </td>
     <td>
-
-      This folder contains one file for each of your destination environments,
-      each exporting simple configuration variables to use in your application.
-      The files are replaced on-the-fly when you build your app.
-      You might use a different API endpoint for development than you do for production
-      or maybe different analytics tokens.
-      You might even use some mock services.
-      Either way, the CLI has you covered.
-
+      このフォルダには、環境毎にひとつのファイルを用意してください。
+      ビルドをする際に、環境に合ったファイルに動的に置き換えられます。
+      例えば、APIのエンドポイントやアナリティクスのトークンなどを開発と本番で分けるような目的に使ってください。
+      モックサービスを使うこともあるかもしれません。
+      その場合でも、CLIがあなたをサポートします。
+      
     </td>
   </tr>
   <tr>
@@ -300,9 +262,8 @@ Any files outside of this folder are meant to support building your app.
 
     </td>
     <td>
-
-      Every site wants to look good on the bookmark bar.
-      Get started with your very own Angular icon.
+      どのサイトもブックマークバーではよく見せたいものです。
+      あなただけのアイコンを使ってみましょう。
 
     </td>
   </tr>
@@ -314,10 +275,10 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      The main HTML page that is served when someone visits your site.
-      Most of the time you'll never need to edit it.
-      The CLI automatically adds all `js` and `css` files when building your app so you
-      never need to add any `<script>` or `<link>` tags here manually.
+      誰かがあなたのサイトを訪れたときに提供されるHTMLです。
+      ほとんどあなたが編集することがありません。
+      CLIがビルド時に　`js` や `css` ファイルを追加してくれるので
+      `<script>` や `<link>` タグをあなたが手作業で書く必要はありません。      
 
     </td>
   </tr>
@@ -329,11 +290,11 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      The main entry point for your app.
-      Compiles the application with the [JIT compiler](guide/glossary#jit)
-      and bootstraps the application's root module (`AppModule`) to run in the browser.
-      You can also use the [AOT compiler](guide/aot-compiler)
-      without changing any code by appending the`--aot` flag to the `ng build` and `ng serve` commands.
+      アプリのメインとなるエントリーポイントです。
+      アプリケーションを [JITコンパイラ](guide/glossary#jit) でコンパイルし、ブラウザで実行するために
+      root モジュール(`AppModule`)を起動します。
+      
+      ソースコードは何も変えず、 `--aot` フラグを `ng build` や `ng serve` コマンドの後ろにつけるだけで[AOT コンパイラ](guide/aot-compiler)を使用することもできます。
 
     </td>
   </tr>
@@ -345,10 +306,9 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      Different browsers have different levels of support of the web standards.
-      Polyfills help normalize those differences.
-      You should be pretty safe with `core-js` and `zone.js`, but be sure to check out
-      the [Browser Support guide](guide/browser-support) for more information.
+      ブラウザ毎に使える機能は異なり、サポートされるWeb標準の機能はばらばらです。
+      ポリフィルはそれらの差を埋めてくれます。
+      `core-js` と `zone.js` でかなり安全になっていますが、 [ブラウザサポートガイド](guide/browser-support) で情報を確認することをおすすめします。
 
     </td>
   </tr>
@@ -360,9 +320,9 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      Your global styles go here.
-      Most of the time you'll want to have local styles in your components for easier maintenance,
-      but styles that affect all of your app need to be in a central place.
+      グローバルに適用したいスタイルはここに書いてください。
+      多くの場合、保守性を高めるためにコンポーネントごとにローカルのスタイルを適用しますが、
+      アプリ全体で適用したいものがあればここに書く必要があります。
 
     </td>
   </tr>
@@ -374,9 +334,9 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      This is the main entry point for your unit tests.
-      It has some custom configuration that might be unfamiliar, but it's not something you'll
-      need to edit.
+      ユニットテストのエントリーポイントです。
+      見慣れない設定が多く書かれていますが、あなたがなにか編集する必要はありません。
+
     </td>
   </tr>
   <tr>
@@ -386,19 +346,19 @@ Any files outside of this folder are meant to support building your app.
     </td>
     <td>
 
-      TypeScript compiler configuration for the Angular app (`tsconfig.app.json`)
-      and for the unit tests (`tsconfig.spec.json`).
+      TSコンパイラ設定ファイルです。Angularアプリには `tsconfig.app.json` を、
+      ユニットテストには `tsconfig.spec.json` を使用します。
 
     </td>
   </tr>
 </table>
 
-### The root folder
 
-The `src/` folder is just one of the items inside the project's root folder.
-Other files help you build, test, maintain, document, and deploy the app.
-These files go in the root folder next to `src/`.
+### ルートフォルダ
 
+`src/` フォルダはプロジェクトのルートフォルダに一つしかないフォルダです。
+他のファイルはあなたのアプリのビルド、テスト、保守、ドキュメント作成、デプロイするのを助けるファイルです。
+これらのファイルは `src/` と同じくルートフォルダに置かれます。
 
 <div class='filetree'>
   <div class="file">my-app</div>
@@ -436,10 +396,10 @@ These files go in the root folder next to `src/`.
   </col>
   <tr>
     <th>
-      File
+      ファイル
     </th>
     <th>
-      Purpose
+      目的
     </th>
   </tr>
   <tr>
@@ -450,10 +410,10 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Inside `e2e/` live the end-to-end tests.
-      They shouldn't be inside `src/` because e2e tests are really a separate app that
-      just so happens to test your main app.
-      That's also why they have their own `tsconfig.e2e.json`.
+      `e2e/` フォルダの中には end-to-endテストが置かれます。
+      それらのファイルはあなたのメインアプリをテストするための別のアプリです。
+      よって`src/` フォルダの中には置かれるべきではありません。
+      また、 `tsconfig.e2e.json` も同じ理由で存在します。
 
     </td>
   </tr>
@@ -465,8 +425,9 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      `Node.js` creates this folder and puts all third party modules listed in
-      `package.json` inside of it.
+      `Node.js` は `package.json` にリストアップされた
+      サードパーティのモジュール類をこのフォルダ内に格納します。
+
     </td>
   </tr>
   <tr>
@@ -477,10 +438,10 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Configuration for Angular CLI.
-      In this file you can set several defaults and also configure what files are included
-      when your project is built.
-      Check out the official documentation if you want to know more.
+      Angular CLIのための設定ファイルです。
+      このファイルを使っていくつかのデフォルト設定を変更したり、
+      ビルド時に含めるファイルを変更することもできます。
+      もっと知りたい場合は公式ドキュメントを参照してください。
 
     </td>
   </tr>
@@ -492,10 +453,10 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Simple configuration for your editor to make sure everyone that uses your project
-      has the same basic configuration.
-      Most editors support an `.editorconfig` file.
-      See http://editorconfig.org for more information.
+      あなたのプロジェクトを使う人が全員
+      同じエディタの設定を適用できるようにするための設定ファイルです。
+      多くのエディタでは `.editorconfig` ファイルをサポートしています。
+      詳細は  http://editorconfig.org を参照してください。
 
     </td>
   </tr>
@@ -507,7 +468,7 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Git configuration to make sure autogenerated files are not commited to source control.
+      ソース管理に自動生成されるファイルを含めないようにするための設定ファイルです。
 
     </td>
   </tr>
@@ -519,8 +480,8 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Unit test configuration for the [Karma test runner](https://karma-runner.github.io),
-      used when running `ng test`.
+      `ng test` で実行できるユニットテスト [Karma test runner](https://karma-runner.github.io) 
+      を使うための設定ファイルです。
 
     </td>
   </tr>
@@ -532,8 +493,8 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      `npm` configuration listing the third party packages your project uses.
-      You can also add your own [custom scripts](https://docs.npmjs.com/misc/scripts) here.
+      あなたのプロジェクトで使う、サードパーティのパッケージを並べた `npm` の設定ファイルです。
+      [カスタムスクリプト](https://docs.npmjs.com/misc/scripts) をここに追加することもできます。
 
     </td>
   </tr>
@@ -545,8 +506,7 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      End-to-end test configuration for [Protractor](http://www.protractortest.org/),
-      used when running `ng e2e`.
+      `ng e2e` で End-to-endテストを実行する [Protractor](http://www.protractortest.org/) の設定ファイルです。
 
     </td>
   </tr>
@@ -558,9 +518,9 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Basic documentation for your project, pre-filled with CLI command information.
-      Make sure to enhance it with project documentation so that anyone
-      checking out the repo can build your app!
+      あなたのプロジェクトの基本となるドキュメントです。初期状態ではCLIのコマンドについて書かれています。
+      他人があなたのリポジトリをチェックアウトした際にアプリをビルドできるように
+      アプリと一緒にこのドキュメントも拡張するようにしてください。
 
     </td>
   </tr>
@@ -572,7 +532,7 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      TypeScript compiler configuration for your IDE to pick up and give you helpful tooling.
+      TypeScriptコンパイラの設定ファイルです。IDEがこのファイルを利用してあなたに便利なツールを提供します。
 
     </td>
   </tr>
@@ -584,9 +544,9 @@ These files go in the root folder next to `src/`.
     </td>
     <td>
 
-      Linting configuration for [TSLint](https://palantir.github.io/tslint/) together with
-      [Codelyzer](http://codelyzer.com/), used when running `ng lint`.
-      Linting helps keep your code style consistent.
+      `ng lint` で[TSLint](https://palantir.github.io/tslint/) と [Codelyzer](http://codelyzer.com/)
+      を利用したソースコードのチェック(Lint)を行うための設定ファイルです。
+      Lintはコードスタイルに一貫性を持たせるのに役立ちます。
 
     </td>
   </tr>
@@ -594,10 +554,8 @@ These files go in the root folder next to `src/`.
 
 <div class="l-sub-section">
 
-### Next Step
+### 次のステップ
 
-If you're new to Angular, continue with the
-[tutorial](tutorial "Tour of Heroes tutorial").
-You can skip the "Setup" step since you're already using the Angular CLI setup.
-
+Angular初心者であれば、[チュートリアル](tutorial "Tour of Heroes チュートリアル") に進みましょう。  
+その際は、すでにAngularCLIを使うための準備は終わっていますので、"セットアップ"の項目は飛ばして構いません。
 </div>

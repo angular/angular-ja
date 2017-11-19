@@ -3,12 +3,12 @@
 このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
 
-## ヒーローのmockを作成する
+## ヒーローのモックを作成する
 
 まずは、表示するためのいくつかのヒーローが必要でしょう。
 
 最終的には、リモートのデータサーバーからそれらのヒーローを取得します。
-ひとまず、サーバーからデータが返ってきたと仮定して _ヒーローのmock_ を作成しましょう。
+ひとまず、サーバーからデータが返ってきたと仮定して _ヒーローのモック_ を作成しましょう。
 
 `mock-heroes.ts` と呼ばれるファイルを `src/app/` フォルダに作成してください。
 `HEROES` 定数を10人のヒーローの配列として定義し、エクスポートしてください。
@@ -22,7 +22,7 @@ title="src/app/heroes/mock-heroes.ts">
 
 あなたは `HeroesComponent` の1番上にヒーローのリストを表示しようとしています。
 
-`HeroesComponent` クラスのファイルを開いて `HEROES` mockをインポートしてください。
+`HeroesComponent` クラスのファイルを開いて `HEROES` モックをインポートしてください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes" title="src/app/heroes/heroes.component.ts (import HEROES)">
 </code-example>
@@ -37,7 +37,7 @@ title="src/app/heroes/mock-heroes.ts">
 `HeroesComponent` テンプレートを開き、次のように変更してください：
 
 * `<h2>` を先頭に追加してください
-* その下にHTMLの順序付けられていないリスト (`<ul>`) を追加してください
+* その下にHTMLの順不同リスト (`<ul>`) を追加してください
 * `<li>` を `hero` プロパティを表示する `<ul>` の内側に挿入してください
 * スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは簡潔に記述してください）
 
@@ -51,14 +51,14 @@ title="src/app/heroes/mock-heroes.ts">
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-[`*ngFor`](guide/template-syntax#ngFor) はAngularの _repeater_ ディレクティブです。
+[`*ngFor`](guide/template-syntax#ngFor) はAngularの _繰り返し_ ディレクティブです。
 これは、リスト内の各要素のホスト要素を繰り返します。
 
 この例では
 
 * `<li>` はホスト要素です
 * `heroes` は `HeroesComponent` クラスのリストです
-* `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持しています
+* `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持します
 
 <div class="alert is-important">
 
@@ -83,7 +83,7 @@ title="src/app/heroes/mock-heroes.ts">
 
 このアプローチは他の場所でコンポーネントを再利用することを容易にし、グローバルに適用されたスタイルが異なる場合であってもコンポーネントが意図した外観を提供します。
 
-プライベートなスタイルは `@Component.styles` 内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 内に定義します。
+プライベートなスタイルは `@Component.styles` 内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 配列の中で識別されるスタイルシートファイルとして定義します。
 
 CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
 `@Component.styleUrls` はこのように指し示されます。
@@ -97,14 +97,14 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 <div class="alert is-important">
 
-`@Component` のメタデータで特定されたスタイルとスタイルシートは、特定のコンポーネントにスコープされます。
+`@Component` のメタデータで識別されたスタイルとスタイルシートは、特定のコンポーネントにスコープされます。
 `heroes.component.css` のスタイルは `HeroesComponent` にのみ適用され、他のHTMLや他のどのコンポーネント内のHTMLにも影響しません。
 
 </div>
 
 ## Master/Detail
 
-あなたが **master** リストの中のヒーローをクリックしたとき、コンポーネントは選択されたヒーローの **details** をページの下部に表示させる必要があります。
+あなたが **master** リストの中のヒーローをクリックしたとき、コンポーネントは選択されたヒーローの **詳細** をページの下部に表示させる必要があります。
 
 この章では、ヒーローのアイテムがクリックされるのを待ち、クリックされたらヒーローの詳細を更新してみましょう。
 
@@ -115,27 +115,27 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" title="heroes.component.html (template excerpt)" linenums="false">
 </code-example>
 
-これはAngularの [event binding](guide/template-syntax#event-binding) シンタックスにおける1つの例です。
+これはAngularの [イベントバインディング](guide/template-syntax#event-binding) シンタックスにおける1つの例です。
 
 `click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
 ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
 
-`onSelect()` は、これから書こうとしている `HeroesComponent` メソッドです。
-Angularはこのメソッドをクリックされた `<li>` 内に表示された `hero` オブジェクトと共に呼び出し、同じ `hero` が先ほどの `*ngFor` 式の中で定義されます。
+`onSelect()` は、これから書こうとしている `HeroesComponent` のメソッドです。
+Angularはこのメソッドをクリックされた `<li>` 内に表示された `hero` オブジェクトと共に呼び出します。すなわち、先ほどの `*ngFor` 式の中で定義された同じ `hero` です。
 
 ### クリックイベントのハンドラを追加する
 
 コンポーネントである `hero` プロパティを `selectedHero` にリネームしますが、まだ割り当てません。
 これはアプリケーション起動時の _選択されたヒーロー_ ではありません。
 
-以下のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントである `selectedHero` に割り当ててください。
+以下のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" title="src/app/heroes/heroes.component.ts (onSelect)" linenums="false">
 </code-example>
 
-### detailsテンプレートを更新する
+### 詳細のテンプレートを更新する
 
-テンプレートはまだ、存在しなくなったコンポーネントの古い `hero` プロパティを参照しています。
+テンプレートはもう存在していないコンポーネントの古い `hero` プロパティをまだ参照しています。
 `hero` を `selectedHero` にリネームしてください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" title="heroes.component.html (selected hero details)" linenums="false">
@@ -157,7 +157,7 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 
 ### なにが起きたのか？
 
-アプリを起動した際、 `selectedHero` は _設計により_ `undefined` です。
+アプリを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
 
 `selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
 
@@ -178,12 +178,12 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 </code-example>
 
 ブラウザを更新すると、名前の一覧が再度表示されます。
-detailsエリアは空白になっています。
+詳細のエリアは空白になっています。
 ヒーローをクリックするとヒーローの詳細が表示されます。
 
 ### なぜこれが動くのか
 
-`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。これらは `selectedHero` のバインディングの役割ではありません。
+`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。これらは心配する `selectedHero` へのバインディングは存在しません。
 
 ユーザーがヒーローを選択すると `selectedHero` は値を持ち `ngIf` はヒーローの詳細をDOMの中に挿入します。
 
@@ -202,7 +202,7 @@ detailsエリアは空白になっています。
 _選択されたヒーロー_ の着色は [あなたが先ほど追加したスタイル](#styles) の `.selected` CSSクラスの仕事です。
 あなたはただ、ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するだけです。
 
-Angularの [class binding](guide/template-syntax#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
+Angularの [クラスバインディング](guide/template-syntax#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
 ただ `[class.some-css-class]="some-condition"` をあなたが装飾させたい要素に追加するだけです。
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：

@@ -1,207 +1,197 @@
-# Display a Heroes List
+# ヒーローのリストを表示する
 
-In this page, you'll expand the Tour of Heroes app to display a list of heroes, and
-allow users to select a hero and display the hero's details.
+このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
 
-## Create mock heroes
+## ヒーローのモックを作成する
 
-You'll need some heroes to display.
+まずは、表示するためのいくつかのヒーローが必要でしょう。
 
-Eventually you'll get them from a remote data server.
-For now, you'll create some _mock heroes_ and pretend they came from the server.
+最終的には、リモートのデータサーバーからそれらのヒーローを取得します。
+ひとまず、サーバーからデータが返ってきたと仮定して _ヒーローのモック_ を作成しましょう。
 
-Create a file called `mock-heroes.ts` in the `src/app/` folder.
-Define a `HEROES` constant as an array of ten heroes and export it.
-The file should look like this.
+`mock-heroes.ts` と呼ばれるファイルを `src/app/` フォルダに作成してください。
+`HEROES` 定数を10人のヒーローの配列として定義し、エクスポートしてください。
+ファイルは次のようになるでしょう。
 
 <code-example path="toh-pt2/src/app/mock-heroes.ts" linenums="false"
 title="src/app/heroes/mock-heroes.ts">
 </code-example>
 
-## Displaying heroes
+## ヒーローを表示する
 
-You're about to display the list of heroes at the top of the `HeroesComponent`.
+あなたは `HeroesComponent` の1番上にヒーローのリストを表示しようとしています。
 
-Open the `HeroesComponent` class file and import the mock `HEROES`.
+`HeroesComponent` クラスのファイルを開いて `HEROES` モックをインポートしてください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes" title="src/app/heroes/heroes.component.ts (import HEROES)">
 </code-example>
 
-Add a `heroes` property to the class that exposes these heroes for binding.
+これらのヒーローをバインディングするために、ヒーローを公開するクラスに `heroes` プロパティを追加してください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="heroes">
 </code-example>
 
-### List heroes with _*ngFor_
+### _*ngFor_ でヒーローを一覧表示する
 
-Open the `HeroesComponent` template file and make the following changes:
+`HeroesComponent` テンプレートを開き、次のように変更してください：
 
-* Add an `<h2>` at the top, 
-* Below it add an HTML unordered list (`<ul>`)
-* Insert an `<li>` within the `<ul>` that displays properties of a `hero`.
-* Sprinkle some CSS classes for styling (you'll add the CSS styles shortly).
+* `<h2>` を先頭に追加してください
+* その下にHTMLの順不同リスト (`<ul>`) を追加してください
+* `<li>` を `hero` プロパティを表示する `<ul>` の内側に挿入してください
+* スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは簡潔に記述してください）
 
-Make it look like this:
+このようになります：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" title="heroes.component.html (heroes template)" linenums="false">
 </code-example>
 
-Now change the `<li>` to this:
+これから `<li>` をこのように変更していきます：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-The [`*ngFor`](guide/template-syntax#ngFor) is Angular's _repeater_ directive. 
-It repeats the host element for each element in a list.
+[`*ngFor`](guide/template-syntax#ngFor) はAngularの _繰り返し_ ディレクティブです。
+これは、リスト内の各要素のホスト要素を繰り返します。
 
-In this example
+この例では
 
-* `<li>` is the host element
-* `heroes` is the list from the `HeroesComponent` class.
-* `hero` holds the current hero object for each iteration through the list. 
+* `<li>` はホスト要素です
+* `heroes` は `HeroesComponent` クラスのリストです
+* `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持します
 
 <div class="alert is-important">
 
-Don't forget the asterisk (*) in front of `ngFor`. It's a critical part of the syntax.
+`ngFor` の前のアスタリスク(*)を忘れないでください。これは構文において重要な部分です。
 
 </div>
 
-After the browser refreshes, the list of heroes appears.
+ブラウザを更新すると、ヒーローのリストが表示されます。
 
 {@a styles}
 
-### Style the heroes
+### ヒーローを装飾する
 
-The heroes list should be attractive and should respond visually when users 
-hover over and select a hero from the list.
+ユーザーがカーソルを置いてリストからヒーローを選択するとき、ヒーローのリストは魅力的で視覚的に目立たせる必要があります。
 
-In the [first tutorial](tutorial/toh-pt0#app-wide-styles), you set the basic styles for the entire application in `styles.css`.
-That stylesheet didn't include styles for this list of heroes.
+[最初のチュートリアル](tutorial/toh-pt0#app-wide-styles) では、アプリケーション全体の基本的なスタイルを `styles.css` に設定しました。
+このスタイルシートにはヒーローのリストのためのスタイルは含めていませんでいた。
 
-You could add more styles to `styles.css` and keep growing that stylesheet as you add components.
+`styles.css` にさらにスタイルを追加し、コンポーネントを追加するようにスタイルシートを増やし続けることができます。
 
-You may prefer instead to define private styles for a specific component and keep everything a component needs&mdash; the code, the HTML,
-and the CSS &mdash;together in one place.
+あなたは特定のコンポーネントのためにプライベートなスタイルを定義し、コンポーネントが必要とするすべて &mdash; コードや、HTML、CSS&mdash; を1箇所にまとめて管理することを好むかもしれません。
 
-This approach makes it easier to re-use the component somewhere else
-and deliver the component's intended appearance even if the global styles are different.
+このアプローチは他の場所でコンポーネントを再利用することを容易にし、グローバルに適用されたスタイルが異なる場合であってもコンポーネントが意図した外観を提供します。
 
-You define private styles either inline in the `@Component.styles` array or
-as stylesheet file(s) identified in the `@Component.styleUrls` array.
+プライベートなスタイルは `@Component.styles` 内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 配列の中で識別されるスタイルシートファイルとして定義します。
 
-When the CLI generated the `HeroesComponent`, it created an empty `heroes.component.css` stylesheet for the `HeroesComponent`
-and pointed to it in `@Component.styleUrls` like this.
+CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
+`@Component.styleUrls` はこのように指し示されます。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="metadata"
  title="src/app/heroes/heroes.component.ts (@Component)">
 </code-example>
 
-Open the `heroes.component.css` file and paste in the private CSS styles for the `HeroesComponent`.
-You'll find them in the [final code review](#final-code-review) at the bottom of this guide.
+`heroes.component.css` を開いて、 `HeroesComponent` のためのプライベートなスタイルを貼り付けます。
+これらは、このガイドの末尾にある [最終的なコードレビュー](#final-code-review) から見つけることができます。
 
 <div class="alert is-important">
 
-Styles and stylesheets identified in `@Component` metadata are scoped to that specific component.
-The `heroes.component.css` styles apply only to the `HeroesComponent` and don't affect the outer HTML or the HTML in any other component.
+`@Component` のメタデータで識別されたスタイルとスタイルシートは、特定のコンポーネントにスコープされます。
+`heroes.component.css` のスタイルは `HeroesComponent` にのみ適用され、他のHTMLや他のどのコンポーネント内のHTMLにも影響しません。
 
 </div>
 
 ## Master/Detail
 
-When the user clicks a hero in the **master** list, 
-the component should display the selected hero's **details** at the bottom of the page.
+あなたが **master** リストの中のヒーローをクリックしたとき、コンポーネントは選択されたヒーローの **詳細** をページの下部に表示させる必要があります。
 
-In this section, you'll listen for the hero item click event
-and update the hero detail.
+この章では、ヒーローのアイテムがクリックされるのを待ち、クリックされたらヒーローの詳細を更新してみましょう。
 
-### Add a click event binding
+### クリックイベントのバインディングを追加する
 
-Add a click event binding to the `<li>` like this:
+クリックイベントのバインディングを `<li>` にこのように追加してください：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" title="heroes.component.html (template excerpt)" linenums="false">
 </code-example>
 
-This is an example of Angular's [event binding](guide/template-syntax#event-binding) syntax.
+これはAngularの [イベントバインディング](guide/template-syntax#event-binding) シンタックスにおける1つの例です。
 
-The parentheses around `click` tell Angular to listen for the `<li>` element's  `click` event.
-When the user clicks in the `<li>`, Angular executes the `onSelect(hero)` expression.
+`click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
+ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
 
-`onSelect()` is a `HeroesComponent` method that you're about to write.
-Angular calls it with the `hero` object displayed in the clicked `<li>`,
-the same `hero` defined previously in the `*ngFor` expression.
+`onSelect()` は、これから書こうとしている `HeroesComponent` のメソッドです。
+Angularはこのメソッドをクリックされた `<li>` 内に表示された `hero` オブジェクトと共に呼び出します。すなわち、先ほどの `*ngFor` 式の中で定義された同じ `hero` です。
 
-### Add the click event handler
+### クリックイベントのハンドラを追加する
 
-Rename the component's `hero` property to `selectedHero` but don't assign it.
-There is no _selected hero_ when the application starts.
+コンポーネントである `hero` プロパティを `selectedHero` にリネームしますが、まだ割り当てません。
+これはアプリケーション起動時の _選択されたヒーロー_ ではありません。
 
-Add the following `onSelect()` method, which assigns the clicked hero from the template
-to the component's `selectedHero`.
+以下のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" title="src/app/heroes/heroes.component.ts (onSelect)" linenums="false">
 </code-example>
 
-### Update the details template
+### 詳細のテンプレートを更新する
 
-The template still refers to the component's old `hero` property which no longer exists. 
-Rename `hero` to `selectedHero`.
+テンプレートはもう存在していないコンポーネントの古い `hero` プロパティをまだ参照しています。
+`hero` を `selectedHero` にリネームしてください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" title="heroes.component.html (selected hero details)" linenums="false">
 </code-example>
 
-### Hide empty details with _*ngIf_
+### _*ngIf_ を使って空のdetailsを非表示にする
 
-After the browser refreshes, the application is broken.
+ブラウザを更新すると、アプリケーションは壊れてしまっています。
 
-Open the browser developer tools and look in the console for an error message like this:
+ブラウザの開発者ツールを開いて、コンソールの中のこのようなエラーメッセージを探してください：
 
 <code-example language="sh" class="code-shell">
   HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
 </code-example>
 
-Now click one of the list items.
-The app seems to be working again.
-The heroes appear in a list and details about the clicked hero appear at the bottom of the page.
+リストのアイテムを1つクリックしてみましょう。
+アプリは再び機能し始めたように見えるでしょう。
+リストにヒーローが表示され、クリックされたヒーローがページの下部に表示されます。
 
-#### What happened?
+### なにが起きたのか？
 
-When the app starts, the `selectedHero` is `undefined` _by design_.
+アプリを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
 
-Binding expressions in the template that refer to properties of `selectedHero` &mdash; expressions like `{{selectedHero.name}}` &mdash; _must fail_ because there is no selected hero.
+`selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
 
-#### The fix
+### 修正しましょう
 
-The component should only display the selected hero details if the `selectedHero` exists.
+コンポーネントは `selectedHero` が存在する場合のみ、選択されたヒーローの詳細を表示する必要があります。
 
-Wrap the hero detail HTML in a `<div>`.
-Add Angular's `*ngIf` directive to the `<div>` and set it to `selectedHero`.
+ヒーローの詳細をHTMLの `<div>` で囲ってください。
+Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHero` に設定してください。
 
 <div class="alert is-important">
 
-Don't forget the asterisk (*) in front of `ngIf`. It's a critical part of the syntax.
+`ngIf` の前のアスタリスク(*)を忘れないでください。これは構文において重要な部分です。
 
 </div>
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if" title="src/app/heroes/heroes.component.html (*ngIf)" linenums="false">
 </code-example>
 
-After the browser refreshes, the list of names reappears.
-The details area is blank.
-Click a hero and its details appear.
+ブラウザを更新すると、名前の一覧が再度表示されます。
+詳細のエリアは空白になっています。
+ヒーローをクリックするとヒーローの詳細が表示されます。
 
-#### Why it works
+### なぜこれが動くのか
 
-When `selectedHero` is undefined, the `ngIf` removes the hero detail from the DOM. There are no `selectedHero` bindings to worry about.
+`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。これらは心配する `selectedHero` へのバインディングは存在しません。
 
-When the user picks a hero, `selectedHero` has a value and
-`ngIf` puts the hero detail into the DOM.
+ユーザーがヒーローを選択すると `selectedHero` は値を持ち `ngIf` はヒーローの詳細をDOMの中に挿入します。
 
-### Style the selected hero
+### 選択されたヒーローを装飾する
 
-It's difficult to identify the _selected hero_ in the list when all `<li>` elements look alike.
+すべての `<li>` 要素が同じように見える場合 _選択されたヒーロー_ をリスト内で識別することは困難です。
 
-If the user clicks "Magneta", that hero should render with a distinctive but subtle background color like this:
+もしユーザーが "Magneta" をクリックすると、そのヒーローはこのような目立った背景色で描画されるべきです：
 
 <figure>
 
@@ -209,20 +199,20 @@ If the user clicks "Magneta", that hero should render with a distinctive but sub
 
 </figure>
 
-That _selected hero_ coloring is the work of the `.selected` CSS class in the [styles you added earlier](#styles).
-You just have to apply the `.selected` class to the `<li>` when the user clicks it.
+_選択されたヒーロー_ の着色は [あなたが先ほど追加したスタイル](#styles) の `.selected` CSSクラスの仕事です。
+あなたはただ、ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するだけです。
 
-The Angular [class binding](guide/template-syntax#class-binding) makes it easy to add and remove a CSS class conditionally. 
-Just add `[class.some-css-class]="some-condition"` to the element you want to style.
+Angularの [クラスバインディング](guide/template-syntax#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
+ただ `[class.some-css-class]="some-condition"` をあなたが装飾させたい要素に追加するだけです。
 
-Add the following `[class.selected]` binding to  the `<li>` in the `HeroesComponent` template:
+`HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" title="heroes.component.html (toggle the 'selected' CSS class)" linenums="false">
 </code-example>
 
-When the current row hero is the same as the `selectedHero`, Angular adds the `selected` CSS class. When the two heroes are different, Angular removes the class.
+現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはクラスを削除します。
 
-The finished `<li>` looks like this:
+完成した `<li>` はこのようになります：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="li" title="heroes.component.html (list item hero)" linenums="false">
 
@@ -230,11 +220,11 @@ The finished `<li>` looks like this:
 
 {@a final-code-review}
 
-## Final code review
+## 最終的なコードレビュー
 
-Your app should look like this <live-example></live-example>. 
+あなたのアプリはこのように見えるはずです。 <live-example></live-example>
 
-Here are the code files discussed on this page, including the `HeroesComponent` styles.
+こちらが `HeroesComponent` のスタイルを含んだ、このページで解説したコードファイルです。
 
 <code-tabs>
   <code-pane title="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts">
@@ -247,10 +237,10 @@ Here are the code files discussed on this page, including the `HeroesComponent` 
   </code-pane>
 </code-tabs>
 
-## Summary
+## まとめ
 
-* The Tour of Heroes app displays a list of heroes in a Master/Detail view.
-* The user can select a hero and see that hero's details.
-* You used `*ngFor` to display a list.
-* You used `*ngIf` to conditionally include or exclude a block of HTML.
-* You can toggle a CSS style class with a `class` binding.
+* 「Tour of Heroes」アプリはMaster/Detail画面にヒーローのリストを表示します
+* ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
+* リストを表示するために `*ngFor` を使いました
+* HTMLのブロックに条件を付けて表示・非表示を切り替えるために `*ngIf` を使いました
+* CSSスタイルのclassを `class` バインディングで切り替えることができます

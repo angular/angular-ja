@@ -108,8 +108,8 @@
         },
         {
           "url": "tutorial/toh-pt4",
-          "title": "6. Services",
-          "tooltip": "Part 6: Create a reusable service to manage hero data."
+          "title": "6. サービス",
+          "tooltip": "Part 6: ヒーローのデータを管理するための再利用可能なサービスを作ります"
         },
         {
           "url": "tutorial/toh-pt5",

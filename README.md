@@ -9,9 +9,14 @@
 ## コントリビューター
 
 <!---begin contributors -->
-[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco) |[<img alt="Allajah" src="https://avatars1.githubusercontent.com/u/5627119?v=4&s=117" width="117">](https://github.com/Allajah) |[<img alt="chloe463" src="https://avatars2.githubusercontent.com/u/6651523?v=4&s=117" width="117">](https://github.com/chloe463) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |
-:---: |:---: |:---: |:---: |:---: |
-[lacolaco](https://github.com/lacolaco) |[Allajah](https://github.com/Allajah) |[chloe463](https://github.com/chloe463) |[imamoto](https://github.com/imamoto) |[massa142](https://github.com/massa142) |
+[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco) |[<img alt="Allajah" src="https://avatars1.githubusercontent.com/u/5627119?v=4&s=117" width="117">](https://github.com/Allajah) |[<img alt="Pittan" src="https://avatars1.githubusercontent.com/u/6269639?v=4&s=117" width="117">](https://github.com/Pittan) |[<img alt="kappy" src="https://avatars3.githubusercontent.com/u/26835913?v=4&s=117" width="117">](https://github.com/kappy) |[<img alt="chloe463" src="https://avatars2.githubusercontent.com/u/6651523?v=4&s=117" width="117">](https://github.com/chloe463) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[lacolaco](https://github.com/lacolaco) |[Allajah](https://github.com/Allajah) |[Pittan](https://github.com/Pittan) |[kappy](https://github.com/kappy) |[chloe463](https://github.com/chloe463) |[imamoto](https://github.com/imamoto) |
+
+[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |
+:---: |
+[massa142](https://github.com/massa142) |
+
 <!---end contributors -->
 
 ## コントリビューション大歓迎！

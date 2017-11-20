@@ -13,9 +13,9 @@
 :---: |:---: |:---: |:---: |:---: |:---: |
 [lacolaco](https://github.com/lacolaco) |[Allajah](https://github.com/Allajah) |[Pittan](https://github.com/Pittan) |[kappy](https://github.com/kappy) |[chloe463](https://github.com/chloe463) |[imamoto](https://github.com/imamoto) |
 
-[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |
-:---: |
-[massa142](https://github.com/massa142) |
+[<img alt="MasanobuAkiba" src="https://avatars2.githubusercontent.com/u/7288676?v=4&s=117" width="117">](https://github.com/MasanobuAkiba) |[<img alt="adwd" src="https://avatars2.githubusercontent.com/u/7473222?v=4&s=117" width="117">](https://github.com/adwd) |[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |
+:---: |:---: |:---: |
+[MasanobuAkiba](https://github.com/MasanobuAkiba) |[adwd](https://github.com/adwd) |[massa142](https://github.com/massa142) |
 
 <!---end contributors -->
 

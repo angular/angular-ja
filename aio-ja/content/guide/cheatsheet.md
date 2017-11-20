@@ -1,4 +1,4 @@
-<h1 class="no-toc">Cheat Sheet</h1>
+<h1 class="no-toc">チートシート</h1>
 
 <div id="cheatsheet">
 <table class="is-full-width is-fixed-layout">

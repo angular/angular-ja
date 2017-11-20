@@ -282,8 +282,8 @@
         },
         {
           "url": "guide/cheatsheet",
-          "title": "Cheat Sheet",
-          "tooltip": "A quick guide to common Angular coding techniques."
+          "title": "チートシート",
+          "tooltip": "よく使われるAngularのコーディングテクニックへのガイド"
         }
     ]},
 

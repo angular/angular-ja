@@ -1,28 +1,29 @@
-# Routing
+# ルーティング
 
-There are new requirements for the Tour of Heroes app:
+Tour of Heroes アプリケーションには新しい要求があります：
 
-* Add a *Dashboard* view.
-* Add the ability to navigate between the *Heroes* and *Dashboard* views.
-* When users click a hero name in either view, navigate to a detail view of the selected hero.
-* When users click a *deep link* in an email, open the detail view for a particular hero.
+* *ダッシュボード*ビューを追加する。
+* *ヒーローズ*ビューと*ダッシュボード*ビューの間で行き来できる機能を追加する。
+* ユーザーが各ビューでヒーロー名をクリックしたとき、選択されたヒーローの詳細ビューを表示する。
+* ユーザーがEメール上で*ディープリンク*をクリックしたとき、特定のヒーローの詳細ビューを開く。
 
-When you’re done, users will be able to navigate the app like this:
+これらの変更が完了したら、ユーザは図のようにアプリケーションを行き来できるようになるでしょう：
 
 <figure>
 
-  <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
+  <img src='generated/images/guide/toh/nav-diagram.png' alt="ビューのナビゲーション">
 
 </figure>
 
-## Add the _AppRoutingModule_
+## _AppRoutingModule_ を追加する
 
-An Angular best practice is to load and configure the router in a separate, top-level module
-that is dedicated to routing and imported by the root `AppModule`.
+Angularのベストプラクティスは、
+ルートの`AppModule`からインポートされるルーティング専用のトップレベルモジュールで、
+ルーターをロードして管理することです。
 
-By convention, the module class name is `AppRoutingModule` and it belongs in the `app-routing.module.ts` in the `src/app` folder.
+慣例では、そのモジュールのクラス名は`AppRoutingModule`とし、`src/app`フォルダの`app-routing.module.ts`に書きます。
 
-Use the CLI to generate it.
+CLIを使って生成することができます。
 
 <code-example language="sh" class="code-shell">
   ng generate module app-routing --flat --module=app
@@ -30,122 +31,118 @@ Use the CLI to generate it.
 
 <div class="l-sub-section">
 
-`--flat` puts the file in `src/app` instead of its own folder.<br>
-`--module=app` tells the CLI to register it in the `imports` array of the `AppModule`.
+`--flat`は、固有のフォルダの代わりに、`src/app`に生成したファイルを置きます。<br>
+`--module=app`は、`AppModule`の`imports`配列に、生成したモジュールを登録するようCLIに指示します。
 </div>
 
-The generated file looks like this:
+生成されたファイルはこのようになります：
 
 <code-example path="toh-pt5/src/app/app-routing.module.0.ts" 
   title="src/app/app-routing.module.ts (generated)">
 </code-example>
 
-You generally don't declare components in a routing module so you can delete the
-`@NgModule.declarations` array and delete `CommonModule` references too.
+通常、ルーティングモジュールでコンポーネントの宣言はしないので、`@NgModule.declarations`配列と`CommonModule`への参照は削除できます。
 
-You'll configure the router with `Routes` in the `RouterModule`
-so import those two symbols from the `@angular/router` library.
+`RouterModule`の`Routes`を使ってルーターを管理するので、
+`@angular/router`ライブラリからこれらふたつのシンボルをインポートしておきます。
 
-Add an `@NgModule.exports` array with `RouterModule` in it.
-Exporting `RouterModule` makes router directives available for use
-in the `AppModule` components that will need them.
+`@NgModule.exports`の配列の中に`RouterModule`を追加します。
+`RouterModule`をエクスポートすることで、
+ルーターのディレクティブを必要とする`AppModule`コンポーネントで利用できるようになります。
 
-`AppRoutingModule` looks like this now:
+編集後の`AppRoutingModule`はこのようになります：
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" 
   region="v1"
   title="src/app/app-routing.module.ts (v1)">
 </code-example>
 
-### Add routes
+### ルートを追加する
 
-*Routes* tell the router which view to display when a user clicks a link or
-pastes a URL into the browser address bar.
+*ルート*は、ユーザーがリンクをクリックしたとき、またはURLをブラウザのアドレスバーに貼り付けたときに、
+どのビューを表示したらよいかをルーターに伝えます。
 
-A typical Angular `Route` has two properties:
+典型的なAngularの`Route`はふたつのプロパティを持っています：
 
-1. `path`: a string that matches the URL in the browser address bar.
-1. `component`: the component that the router should create when navigating to this route.
+1. `path`：ブラウザのアドレスバーにある URL にマッチする文字列
+1. `component`：そのルートに遷移するときにルーターが作成すべきコンポーネント
 
-You intend to navigate to the `HeroesComponent` when the URL is something like `localhost:4200/heroes`.
+URLが`localhost:4200/heroes`のようであったときに`HeroesComponent`へ遷移させようとしている、とします。
 
-Import the `HeroesComponent` so you can reference it in a `Route`.
-Then define an array of routes with a single `route` to that component.
+`Route`で`HeroesComponent`を参照できるようにインポートします。
+そして、そのコンポーネントへのひとつの`route`としてルートの配列を定義します。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" 
   region="heroes-route">
 </code-example>
 
-Once you've finished setting up, the router will match that URL to `path: 'heroes'` 
-and display the `HeroesComponent`, .
+一度このセットアップが完了すると、ルーターはURLを`path: 'heroes'`にマッチして`HeroesComponent`を表示するようになります。
 
 ### _RouterModule.forRoot()_
 
-You first must initialize the router and start it listening for browser location changes.
+まず始めにルーターの初期化をおこない、ルーターにブラウザのロケーション変化の検知を始めさせます。
 
-Add `RouterModule` to the `@NgModule.imports` array and 
-configure it with the `routes` in one step by calling 
-`RouterModule.forRoot()` _within_ the `imports` array, like this:
+次のように、`@NgModule.imports`配列に`RouterModule`を追加して、
+`imports`配列の_中で_`RouterModule.forRoot()`を呼び出すことで`routes`を使ってそれを設定します：
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" 
   region="ngmodule-imports">
 </code-example>
 
 <div class="l-sub-section">
-
-  The method is called `forRoot()` because you configure the router at the application's root level.
-  The `forRoot()` method supplies the service providers and directives needed for routing, 
-  and performs the initial navigation based on the current browser URL.
+  アプリケーションのルートのレベルでルーターを設定しているので、このメソッドは`forRoot()`と呼ばれています。
+  この`forRoot()`メソッドは、ルーティングに必要なサービス・プロバイダーとディレクティブを提供し、
+  ブラウザの現在のURLを元に最初の遷移を行います。
 
 </div>
 
-## Add _RouterOutlet_
+## _RouterOutlet_ を追加する
 
-Open the `AppComponent` template replace the `<app-heroes>` element with a `<router-outlet>` element.
+`AppComponent`テンプレートを開き、`<app-heroes>`要素を`<router-outlet>`で置き換えます。
 
 <code-example path="toh-pt5/src/app/app.component.html" 
   region="outlet"
   title="src/app/app.component.html (router-outlet)">
 </code-example>
 
-You removed `<app-heroes>` because you will only display the `HeroesComponent` when the user navigates to it.
+ユーザーが`HeroesComponent`に来たときに`HeroesComponent`だけを表示したいので、
+`<app-heroes>`を削除します。
 
-The `<router-outlet>` tells the router where to display routed views.
+この`<router-outlet>`は、ルーティングされたビューをどこに表示するかをルーターに教えます。
 
 <div class="l-sub-section">
 
-The `RouterOutlet` is one of the router directives that became available to the `AppComponent`
-because `AppModule` imports `AppRoutingModule` which exported `RouterModule`.
+`RouterModule`をエクスポートした`AppRoutingModule`を`AppModule`がインポートしているので、
+この`RouterOutlet`は、この`AppComponent`で利用できるようになったルーターのディレクティブのひとつです。
 
 </div>
 
-#### Try it
+#### 試す
 
-You should still be running with this CLI command.
+こちらのCLIコマンドを使用して実行する必要があります。
 
 <code-example language="sh" class="code-shell">
   ng serve
 </code-example>
 
-The browser should refresh and display the app title but not the list of heroes.
+ブラウザを更新するとアプリのタイトルは表示されますがヒーローのリストは表示されないはずです。
 
-Look at the browser's address bar. 
-The URL ends in `/`.
-The route path to `HeroesComponent` is `/heroes`.
+ブラウザのアドレスバーを見てみましょう。
+URLが`/`で終わっています。
+`HeroesComponent`へのルーターのパスは`/heroes`です。
 
-Append `/heroes` to the URL in the browser address bar.
-You should see the familiar heroes master/detail view.
+ブラウザのアドレスバーでURLに`/heroes`を追加します。
+おなじみのヒーローのマスター／詳細ビューが見れるはずです。
 
 {@a routerlink}
 
-## Add a navigation link (_routerLink_)
+## ナビゲーションのリンクを追加する (_routerLink_)
 
-Users shouldn't have to paste a route URL into the address bar. 
-They should be able to click a link to navigate.
+ユーザーはブラウザのアドレスバーにルーターのURLを貼り付ける必要はありません。
+行き来するためのリンクをクリックできるべきです。
 
-Add a `<nav>` element and, within that, an anchor element that, when clicked, 
-triggers navigation to the `HeroesComponent`.
-The revised `AppComponent` template looks like this:
+`<nav>`要素を追加して、その中に、クリックされると`HeroesComponent`へ遷移するトリガーになるアンカー要素を追加します。
+修正された`AppComponent`テンプレートはこのようになります：
 
 <code-example 
   path="toh-pt5/src/app/app.component.html" 
@@ -153,40 +150,36 @@ The revised `AppComponent` template looks like this:
   title="src/app/app.component.html (heroes RouterLink)">
 </code-example>
 
-A [`routerLink` attribute](#routerlink) is set to `"/heroes"`,
-the string that the router matches to the route to `HeroesComponent`.
-The `routerLink` is the selector for the [`RouterLink` directive](#routerlink)
-that turns user clicks into router navigations.
-It's another of the public directives in the `RouterModule`.
+[`routerLink`属性](#routerlink)は、ルーターが`HeroesComponent`へのルートとして一致する文字列である`"/heroes"`に設定されます。
+この`routerLink`は、ユーザーのクリックをルーターのナビゲーションへ変換する[`RouterLink`ディレクティブ](#routerlink)のためのセレクターです。
+これは、`RouterModule`のもうひとつのパブリックなディレクティブです。
 
-The browser refreshes and displays the app title and heroes link, 
-but not the heroes list.
+ブラウザを更新するとアプリケーションのタイトルとヒーローのリンクは表示されますが、ヒーローのリストは表示されません。
 
-Click the link. 
-The address bar updates to `/heroes` and the list of heroes appears.
+リンクをクリックしてください。アドレスバーが`/heroes`に更新されて、ヒーローのリストが現れます。
 
 <div class="l-sub-section">
 
-Make this and future navigation links look better by adding private CSS styles to `app.component.css`
-as listed in the [final code review](#appcomponent) below.
+一番下の[最終的なコードレビュー](#appcomponent)に記載されているように、プライベートなCSSのスタイルを`app.component.css`に追加することで、
+このナビゲーションのリンクと今後のナビゲーションのリンクをさらに見栄えのよいものにすることができます。
 
 </div>
 
 
-## Add a dashboard view
+## ダッシュボードビューを追加する
 
-Routing makes more sense when there are multiple views.
-So far there's only the heroes view. 
+ルーティングは、複数のビューがある場合にさらに意味を持ちます。
+これまでのところ、ヒーローのビューだけがあります。
 
-Add a `DashboardComponent` using the CLI:
+CLIを使って`DashboardComponent`を追加します：
 
 <code-example language="sh" class="code-shell">
   ng generate component dashboard
 </code-example>
 
-The CLI generates the files for the `DashboardComponent` and declares it in `AppModule`.
+CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`の中でそれを宣言します。
 
-Replace the default file content in these three files as follows and then return for a little discussion:
+これら3つのファイルのデフォルトの内容を次のように置き換えてから、少しの間議論に戻りましょう：
 
 <code-tabs>
   <code-pane 
@@ -202,28 +195,27 @@ Replace the default file content in these three files as follows and then return
   </code-pane>
 </code-tabs>
 
-The  _template_ presents a grid of hero name links.
+この_template_には、ヒーロー名のリンクのグリッドが表示されます。
 
-* The `*ngFor` repeater creates as many links as are in the component's `heroes` array.
-* The links are styled as colored blocks by the `dashboard.component.css`.
-* The links don't go anywhere yet but [they will shortly](#hero-details).
+* この`*ngFor`リピーターは、コンポーネントの`heroes`配列と同じ数のリンクを作成します。
+* このリンクは、`dashboard.component.css`によって色付きのブロックとしてスタイル設定されています。
+* このリンクはまだどこにも行きませんが、[すぐにそうなります](#hero-details)。
 
-The _class_ is similar to the `HeroesComponent` class.
-* It defines a `heroes` array property.
-* The constructor expects Angular to inject the `HeroService` into a private `heroService` property.
-* The `ngOnInit()` lifecycle hook calls `getHeroes`.
+この_class_は`HeroesComponent`クラスに似ています。
+* `heroes`の配列のプロパティを定義します。
+* このコンストラクターは、Angular が`HeroService`をプライベートの`heroService`プロパティに注入することを期待しています。
+* この`ngOnInit()`ライフサイクル・フックは`getHeroes`を呼び出します。
 
-This `getHeroes` reduces the number of heroes displayed to four
-(2nd, 3rd, 4th, and 5th).
+この`getHeroes`は、表示されるヒーローの数を4つ（2番目、3番目、4番目、5番目）に減らします。
 
 <code-example path="toh-pt5/src/app/dashboard/dashboard.component.ts" region="getHeroes">
 </code-example>
 
-### Add the dashboard route
+### ダッシュボードのルートを追加する
 
-To navigate to the dashboard, the router needs an appropriate route.
+ダッシュボードに遷移するには、ルーターに適切なルートが必要です。
 
-Import the `DashboardComponent` in the `AppRoutingModule`.
+`AppRoutingModule`で`DashboardComponent`をインポートします。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
@@ -231,75 +223,74 @@ Import the `DashboardComponent` in the `AppRoutingModule`.
   title="src/app/app-routing.module.ts (import DashboardComponent)">
 </code-example>
 
-Add a route to the `AppRoutingModule.routes` array that matches a path to the `DashboardComponent`.
+`AppRoutingModule.routes`配列に、` DashboardComponent`へのパスにマッチするルートを追加します。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
   region="dashboard-route">
 </code-example>
 
-### Add a default route
+### デフォルトルートを追加する
 
-When the app starts, the browsers address bar points to the web site's root.
-That doesn't match any existing route so the router doesn't navigate anywhere.
-The space below the `<router-outlet>` is blank.
+アプリケーションが起動すると、ブラウザのアドレスバーはWebサイトのルートを指します。
+これは既存のルートと一致しないため、ルータはどこにも移動しません。
+`<router-outlet>`の下のスペースが空白になってしまうのです。
 
-To make the app navigate to the dashboard automatically, add the following
-route to the `AppRoutingModule.Routes` array.
+アプリケーションをダッシュボードに自動的に遷移するには、以下のルートを
+`AppRoutingModule.Routes`配列に追加します。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" region="redirect-route">
 </code-example>
 
-This route redirects a URL that fully matches the empty path to the route whose path is `'/dashboard'`.
+このルートは、空のパスと完全に一致するURLを、パスが`'/dashboard'`であるルートにリダイレクトします。
 
-After the browser refreshes, the router loads the `DashboardComponent
-and the browser address bar shows the `/dashboard` URL.
+ブラウザが更新されると、ルータは`DashboardComponent`をロードし、
+ブラウザのアドレスバーには `/dashboard`の URL が表示されます。
 
-### Add dashboard link to the shell
+### ダッシュボードのリンクをシェルに追加する
 
-The user should be able to navigate back and forth between the
-`DashboardComponent` and the `HeroesComponent` by clicking links in the
-navigation area near the top of the page.
+ユーザーは、ページのトップにあるナビゲーション領域のリンクをクリックすることで、
+`DashboardComponent`と`HeroesComponent`の間を行き来することができるべきです。
 
-Add a dashboard navigation link to the `AppComponent` shell template, just above the *Heroes* link.
+*Heroes*リンクのすぐ上、`AppComponent`シェルテンプレートにダッシュボードのナビゲーションリンクを追加します。。
 
 <code-example path="toh-pt5/src/app/app.component.html" title="src/app/app.component.html">
 </code-example>
 
-After the browser refreshes you can navigate freely between the two views by clicking the links.
+ブラウザが更新されたら、リンクをクリックすることでふたつのビューの間を自由に遷移できるようになります。
 
 {@a hero-details}
-## Navigating to hero details
+## ヒーローの詳細へ遷移する
 
-The `HeroDetailsComponent` displays details of a selected hero.
-At the moment the `HeroDetailsComponent` is only visible at the bottom of the `HeroesComponent`
+`HeroDetailsComponent`は選択されたヒーローの詳細を表示します。
+現時点では `HeroDetailsComponent`は`HeroesComponent`の一番下にしか見えません。
 
-The user should be able to get to these details in three ways.
-1. By clicking a hero in the dashboard.
-1. By clicking a hero in the heroes list.
-1. By pasting a "deep link" URL into the browser address bar that identifies the hero to display.
+ユーザーは3つの方法でこれらの詳細にアクセスできるはずです。
+1. ダッシュボードのヒーローをクリックする。
+1. ヒーローリストのヒーローをクリックする。
+1. 表示するヒーローを識別するブラウザのアドレスバーに"ディープリンク"URLを貼り付ける。
 
-In this section, you'll enable navigation to the `HeroDetailsComponent`
-and liberate it from the `HeroesComponent`.
+このセクションでは、 `HeroDetailsComponent`への遷移を有効にして、
+`HeroesComponent`から解き放ちます。
 
-### Delete _hero details_ from _HeroesComponent_
+### _HeroesComponent_から_ヒーローの詳細_を削除する
 
-When the user clicks a hero item in the `HeroesComponent`,
-the app should navigate to the `HeroDetailComponent`,
-replacing the heroes list view with the hero detail view.
-The heroes list view should no longer show hero details as it does now.
+ユーザーが `HeroesComponent`でひとつのヒーローをクリックすると、
+アプリケーションは `HeroDetailComponent`に遷移する必要があり、
+ヒーローリストビューをヒーロー詳細ビューに置き換えます。
+ヒーローリストビューは、今のようにヒーローの詳細を表示しなくなるはずです。
 
-Open the `HeroesComponent` template (`heroes/heroes.component.html`) and
-delete the `<app-hero-detail>` element from the bottom.
+`HeroesComponent`テンプレート (`heroes/heroes.component.html`) を開き、
+`<app-hero-detail>`要素を一番下から削除します。
 
-Clicking a hero item now does nothing. 
-You'll [fix that shortly](#heroes-component-links) after you enable routing to the `HeroDetailComponent`.
+今はもうヒーローアイテムをクリックしても、何も起こりません。
+そこは`HeroDetailComponent`への遷移を有効にした後に、[すぐに修正します](#heroes-component-links)。
 
-### Add a _hero detail_ route
+### _ヒーロー詳細_ルートを追加する
 
-A URL like `~/detail/11` would be a good URL for navigating to the *Hero Detail* view of the hero whose `id` is `11`. 
+`~/detail/11`のようなURLは、`id`が`11`のヒーローの*ヒーロー詳細*ビューにナビゲートするための正しいURLになります。
 
-Open `AppRoutingModule` and import `HeroDetailComponent`.
+`AppRoutingModule`を開き、`HeroDetailComponent`をインポートします。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
@@ -307,16 +298,16 @@ Open `AppRoutingModule` and import `HeroDetailComponent`.
   title="src/app/app-routing.module.ts (import HeroDetailComponent)">
 </code-example>
 
-Then add a _parameterized_ route to the `AppRoutingModule.routes` array that matches the path pattern to the _hero detail_ view.
+次に、_ヒーロー詳細_ビューへのパスのパターンと一致する_パラメータ付き_ルートを`AppRoutingModule.routes`配列に追加します。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
   region="detail-route">
 </code-example>
 
-The colon (:) in the `path` indicates that `:id` is a placeholder for a specific hero `id`.
+`path`のコロン (:) は`:id`が特定のヒーローの`id`のプレースホルダーであることを表しています。
 
-At this point, all application routes are in place.
+この時点で、すべてのアプリケーションルートが配置されています。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
@@ -324,12 +315,12 @@ At this point, all application routes are in place.
   title="src/app/app-routing.module.ts (all routes)">
 </code-example>
 
-### _DashboardComponent_ hero links
+### _DashboardComponent_ヒーローのリンク
 
-The `DashboardComponent` hero links do nothing at the moment.
+現時点では`DashboardComponent`ヒーローのリンクは何もしません。
 
-Now that the router has a route to `HeroDetailComponent`,
-fix the dashboard hero links to navigate via the _parameterized_ dashboard route.
+ルーターは `HeroDetailComponent`へのルートを持っているので、
+ダッシュボードのヒーローのリンクを修正して、_パラメータ付き_ダッシュボードのルート経由で遷移します。
 
 <code-example 
   path="toh-pt5/src/app/dashboard/dashboard.component.html" 
@@ -337,15 +328,14 @@ fix the dashboard hero links to navigate via the _parameterized_ dashboard route
   title="src/app/dashboard/dashboard.component.html (hero links)">
 </code-example>
 
-You're using Angular [interpolation binding](guide/template-syntax#interpolation) within the `*ngFor` repeater 
-to insert the current interation's `hero.id` into each 
-[`routerLink`](#routerlink).
+`*ngFor`リピーター内でAngularの[補間バインディング](guide/template-syntax#interpolation)を使用していて、
+現在のインタラクションの `hero.id`をそれぞれの[`routerLink`](#routerlink)に挿入します。
 
 {@a heroes-component-links}
-### _HeroesComponent_ hero links
+### _HeroesComponent_ヒーローのリンク
 
-The hero items in the `HeroesComponent` are `<li>` elements whose click events
-are bound to the component's `onSelect()` method.
+`HeroesComponent`のヒーローのアイテムは、
+コンポーネントの onSelect() メソッドにバインドされたクリック・イベントを持つ`<li>`要素です。
 
 <code-example 
   path="toh-pt4/src/app/heroes/heroes.component.html" 
@@ -353,10 +343,9 @@ are bound to the component's `onSelect()` method.
   title="src/app/heroes/heroes.component.html (list with onSelect)">
 </code-example>
 
-Strip the `<li>` back to just its `*ngFor`,
-wrap the badge and name in an anchor element (`<a>`),
-and add a `routerLink` attribute to the anchor that 
-is the same as in the dashboard template
+この`<li>`を`*ngFor`だけを持つように戻し、
+アンカー要素 (`<a>`) でバッジと名前を囲み、
+ダッシュボードのテンプレートと同じようにアンカーに`routerLink`要素を追加します。
 
 <code-example 
   path="toh-pt5/src/app/heroes/heroes.component.html" 
@@ -364,17 +353,17 @@ is the same as in the dashboard template
   title="src/app/heroes/heroes.component.html (list with links)">
 </code-example>
 
-You'll have to fix the private stylesheet (`heroes.component.css`) to make
-the list look as it did before.
-Revised styles are in the [final code review](#heroescomponent) at the bottom of this guide.
+プライベートなスタイルシート (`heroes.component.css`) を修正して
+これまでと同じようにリストが見えるようにすべきです。
+修正したスタイルは、このガイドの最後にある[最終コードレビュー](#heroescomponent)にあります。
 
-#### Remove dead code (optional)
+#### 不要なコードを削除する（オプション）
 
-While the `HeroesComponent` class still works, 
-the `onSelect()` method and `selectedHero` property are no longer used.
+`HeroesComponent`クラスはまだ動作しますが、
+`onSelect()`メソッドと`selectedHero`プロパティはもはや使われません。
 
-It's nice to tidy up and you'll be grateful to yourself later.
-Here's the class after pruning away the dead code.
+きちんと整理するといいですし、後で自分自身に感謝することでしょう。
+これが不要なコードを整理した後のクラスです。
 
 <code-example 
   path="toh-pt5/src/app/heroes/heroes.component.ts"
@@ -382,21 +371,21 @@ Here's the class after pruning away the dead code.
   title="src/app/heroes/heroes.component.ts (cleaned up)" linenums="false">
 </code-example>
 
-## Routable *HeroDetailComponent*
+## ルーティング可能な *HeroDetailComponent*
 
-Previously, the parent `HeroesComponent` set the `HeroDetailComponent.hero`
-property and the `HeroDetailComponent` displayed the hero.
+以前は、親の`HeroesComponent`が`HeroDetailComponent.hero`プロパティを設定していて、
+`HeroDetailComponent`がヒーローを表示していました。
 
-`HeroesComponent` doesn't do that anymore.
-Now the router creates the `HeroDetailComponent` in response to a URL such as `~/detail/11`.
+もう`HeroesComponent`はこれをやりません。
+今は、ルータが `~/detail/11`のような URL に応答して`HeroDetailComponent`を作成します。
 
-The `HeroDetailComponent` needs a new way to obtain the _hero-to-display_.
+`HeroDetailComponent`は_表示するヒーロー_を得るための新しい方法が必要です。
 
-* Get the route that created it, 
-* Extract the `id` from the route
-* Acquire the hero with that `id` from the server via the `HeroService`
+* それを作成したルートを取得し
+* ルートから`id`を抽出し
+* `HeroService`を介してサーバーからその`id`でヒーローを取得する
 
-Add the following imports:
+次のインポートを追加します：
 
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" 
@@ -406,48 +395,47 @@ Add the following imports:
 
 {@a hero-detail-ctor}
 
-Inject the `ActivatedRoute`, `HeroService`, and `Location` services
-into the constructor, saving their values in private fields:
+`ActivatedRoute`, ` HeroService`,  `Location`サービスをコンストラクタに注入し、
+それらの値をプライベートフィールドに保存します。
 
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="ctor">
 </code-example>
 
-The [`ActivatedRoute`](api/router/ActivatedRoute) holds information about the route to this instance of the `HeroDetailComponent`.
-This component is interested in the route's bag of parameters extracted from the URL.
-The _"id"_ parameter is the `id` of the hero to display.
+[`ActivatedRoute`](api/router/ActivatedRoute)は、この`HeroDetailComponent`のインスタンスへのルートに関する情報を保持します。
+このコンポーネントは、URLから抽出されたパラメータが入ったルートのバッグに関心があります。
+_"id"_パラメータは、表示するヒーローの`id`です。
 
-The [`HeroService`](tutorial/toh-pt4) gets hero data from the remote server
-and this component will use it to get the _hero-to-display_.
+[`HeroService`](tutorial/toh-pt4)は、リモートサーバーからヒーローのデータを取得し、
+このコンポーネントはそれを使用して_表示するヒーロー_を取得します。
 
-The [`location`](api/common/Location) is an Angular service for interacting with the browser.
-You'll use it [later](#goback) to navigate back to the view that navigated here.
+[`location`](api/common/Location)は、ブラウザと対話するためのAngularサービスです。
+ここへナビゲートしたビューに戻るために、[後で](#goback)使うことになるでしょう。
 
-### Extract the _id_ route parameter
+### _id_ルートパラメータを抽出する
 
-In the `ngOnInit()` [lifecycle hook](guide/lifecycle-hooks#oninit)
-call `getHero()` and define it as follows.
+`ngOnInit()` [ライフサイクルフック](guide/lifecycle-hooks#oninit)で、
+`getHero()`を呼び出し、以下のように定義します。
 
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="ngOnInit">
 </code-example>
 
-The `route.snapshot` is a static image of the route information shortly after the component was created.
+`route.snapshot`は、コンポーネントが作成された直後のルート情報の静的イメージです。
 
-The `paramMap` is a dictionary of route parameter values extracted from the URL.
-The `"id"` key returns the `id` of the hero to fetch.
+`paramMap`は、URL から抽出されたルートパラメータ値の辞書です。
+`"id"`キーは、フェッチするヒーローの`id`を返します。
 
-Route parameters are always strings.
-The JavaScript (+) operator converts the string to a number,
-which is what a hero `id` should be.
+ルートパラメータは常に文字列です。
+JavaScript (+) 演算子は文字列を数値に変換します。これがヒーローの`id`の値です。
 
-The browser refreshes and the app crashes with a compiler error.
-`HeroService` doesn't have a `getHero()` method.
-Add it now.
+ブラウザがリフレッシュされ、コンパイラのエラーでアプリケーションがクラッシュします。
+`HeroService`は`getHero()`メソッドを持っていません。
+今すぐ追加しましょう。
 
-### Add *HeroService.getHero()*
+### *HeroService.getHero()* を追加する
 
-Open `HeroService` and add this `getHero()` method
+`HeroService`を開き、`getHero()`メソッドを追加します。
 
 <code-example 
   path="toh-pt5/src/app/hero.service.ts" 
@@ -462,33 +450,34 @@ define a JavaScript
 [_template literal_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) for embedding the `id`.
 </div>
 
-Like [`getHeroes()`](tutorial/toh-pt4#observable-heroservice),
-`getHero()` has an asynchronous signature.
-It returns a _mock hero_ as an `Observable`, using the RxJS `of()` function.
+[`getHeroes()`](tutorial/toh-pt4#observable-heroservice)と同様に、
+`getHero()`には非同期のシグネチャーがあります。
+RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`として返します。
 
-You'll be able to re-implement `getHero()` as a real `Http` request
-without having to change the `HeroDetailComponent` that calls it.
+`getHero()`を呼び出す `HeroDetailComponent`を変更することなく、
+実際の`Http`リクエストとして `getHero()`を再実装することができます。
 
-#### Try it
+#### 試す
 
-The browser refreshes and the app is working again.
-You can click a hero in the dashboard or in the heroes list and navigate to that hero's detail view.
+ブラウザがリフレッシュされ、アプリは再び動くようになります。
+ダッシュボードまたはヒーローリストでヒーローをクリックでき、
+そのヒーローの詳細ビューに移動することができます。
 
-If you paste `localhost:4200/detail/11` in the browser address bar,
-the router navigates to the detail view for the hero with `id: 11`,  "Mr. Nice".
+`localhost:4200/detail/11`をブラウザのアドレスバーに貼り付けると、
+ルーターは、`id:11`つまり "Mr. Nice" というヒーローの詳細ビューに遷移します。
 
 {@a goback}
 
-### Find the way back
+### 戻る方法を探す
 
-By clicking the browser's back button, 
-you can go back to the hero list or dashboard view,
-depending upon which sent you to the detail view.
+ブラウザの戻るボタンをクリックすると、
+詳細ビューに来たときの経路によって、
+ヒーローリストまたはダッシュボード画面に戻ることができます。
 
-It would be nice to have a button on the `HeroDetail` view that can do that.
+`HeroDetail`ビュー上にそうできるボタンを持っているといいでしょう。
 
-Add a *go back* button to the bottom of the component template and bind it
-to the component's `goBack()` method.
+コンポーネントのテンプレートの最後に*戻る*ボタンを追加し、
+コンポーネントの `goBack()`メソッドにバインドします。
 
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.html" 
@@ -496,24 +485,25 @@ to the component's `goBack()` method.
   title="src/app/hero-detail/hero-detail.component.html (back button)">
 </code-example>
 
-Add a `goBack()` _method_ to the component class that navigates backward one step 
-in the browser's history stack
-using the `Location` service that you [injected previously](#hero-detail-ctor).
+[先ほど注入した](#hero-detail-ctor)`Location`サービスを使用して、
+ブラウザの履歴のひとつ前にナビゲートする`goBack()`メソッドをコンポーネントのクラスに追加します。
 
 <code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="goBack" title="src/app/hero-detail/hero-detail.component.ts (goBack)">
 
 </code-example>
 
 
-Refresh the browser and start clicking.
-Users can navigate around the app, from the dashboard to hero details and back,
-from heroes list to the mini detail to the hero details and back to the heroes again.
+ブラウザを更新して、クリックしてみましょう。
+ユーザーは、ダッシュボードからヒーローの詳細に行って戻ったり、ヒーローリストから小さな詳細へ行き
+ヒーローの詳細に行って再びヒーローリストに戻ったりと、アプリケーションのあちこちを行き来することができます。
 
-You've met all of the navigational requirements that propelled this page.
+このページで進めてきたすべてのナビゲーション要件を満たしています。
 
-## Final code review
 
-Here are the code files discussed on this page and your app should look like this <live-example></live-example>.
+## 最後のコード・レビュー
+
+このページで解説したコードのファイルは次のとおりで、
+アプリは<live-example> </live-example>のようになっているはずです。
 
 {@a approutingmodule}
 {@a appmodule}
@@ -597,13 +587,13 @@ Here are the code files discussed on this page and your app should look like thi
   </code-pane>
 </code-tabs>
 
-## Summary
+## まとめ
 
-* You added the Angular router to navigate among different components.
-* You turned the `AppComponent` into a navigation shell with a links and a `<router-outlet>`.
-* You configured the router in an `AppRoutingModule` 
-* You defined simple routes, a redirect route, and a parameterized route.
-* You used the `routerLink` directive in anchor elements.
-* You refactored a tightly-coupled master/detail view into a routed detail view.
-* You used router link parameters to navigate to the detail view of a user-selected hero.
-* You shared the `HeroService` among multiple components.
+* さまざまなコンポーネント間を行き来するためにAngularルーターを追加しました。
+* `AppComponent`を、リンクと`<router-outlet>`を持つナビゲーション・シェルに変更しました。
+* `AppRoutingModule`でルータを設定しました。
+* シンプルなルート、リダイレクトするルート、およびパラメータ付きルートを定義しました。
+* アンカー要素で`routerLink`ディレクティブを使用しました。
+* 密接に結合されたmaster/detailビューをルート化した詳細ビューにリファクタリングしました。
+* ユーザーが選択したヒーローの詳細ビューに移動するために、ルーターリンクのパラメータを使用しました。
+* 複数のコンポーネント間で`HeroService`を共有しました。

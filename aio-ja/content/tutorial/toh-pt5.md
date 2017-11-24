@@ -11,13 +11,15 @@ Tour of Heroes アプリケーションには新しい要求があります：
 
 <figure>
 
-  <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
+  <img src='generated/images/guide/toh/nav-diagram.png' alt="ビューのナビゲーション">
 
 </figure>
 
 ## _AppRoutingModule_ を追加する
 
-Angularのベストプラクティスは、ルーティングのみを行いルートの`AppModule`からインポートされる独立したトップレベルのモジュールにて、ルーターをロードし管理することです。
+Angularのベストプラクティスは、
+ルートの`AppModule`からインポートされるルーティング専用のトップレベルモジュールで、
+ルーターをロードして管理することです。
 
 慣例では、そのモジュールのクラス名は`AppRoutingModule`とし、`src/app`フォルダの`app-routing.module.ts`に書きます。
 
@@ -29,7 +31,7 @@ CLIを使って生成することができます。
 
 <div class="l-sub-section">
 
-`--flat`は、コマンドが実行されたフォルダの代わりに、`src/app`に生成したファイルを置きます。<br>
+`--flat`は、固有のフォルダの代わりに、`src/app`に生成したファイルを置きます。<br>
 `--module=app`は、`AppModule`の`imports`配列に、生成したモジュールを登録するようCLIに指示します。
 </div>
 
@@ -39,9 +41,10 @@ CLIを使って生成することができます。
   title="src/app/app-routing.module.ts (generated)">
 </code-example>
 
-通常、ルーティング・モジュールでコンポーネントの宣言はしないので、`@NgModule.declarations`配列と`CommonModule`への参照は削除できます。
+通常、ルーティングモジュールでコンポーネントの宣言はしないので、`@NgModule.declarations`配列と`CommonModule`への参照は削除できます。
 
-`RouterModule`の`Routes`を使ってルーターを管理するので、`@angular/router`ライブラリからこれらふたつのシンボルをインポートしておきます。
+`RouterModule`の`Routes`を使ってルーターを管理するので、
+`@angular/router`ライブラリからこれらふたつのシンボルをインポートしておきます。
 
 `@NgModule.exports`の配列の中に`RouterModule`を追加します。
 `RouterModule`をエクスポートすることで、
@@ -77,8 +80,7 @@ URLが`localhost:4200/heroes`のようであったときに`HeroesComponent`へ�
 
 ### _RouterModule.forRoot()_
 
-まず始めにルーターの初期化が必要で、ルーターがブラウザのロケーションの変化を検知し始めます。
-You first must initialize the router and start it listening for browser location changes.
+まず始めにルーターの初期化をおこない、ルーターにブラウザのロケーション変化の検知を始めさせます。
 
 次のように、`@NgModule.imports`配列に`RouterModule`を追加して、
 `imports`配列の_中で_`RouterModule.forRoot()`を呼び出すことで`routes`を使ってそれを設定します：
@@ -106,7 +108,7 @@ You first must initialize the router and start it listening for browser location
 ユーザーが`HeroesComponent`に来たときに`HeroesComponent`だけを表示したいので、
 `<app-heroes>`を削除します。
 
-この`<router-outlet>`はルーターに辿ってきたビューをどこに表示するかを教えます。
+この`<router-outlet>`は、ルーティングされたビューをどこに表示するかをルーターに教えます。
 
 <div class="l-sub-section">
 
@@ -134,7 +136,7 @@ URLが`/`で終わっています。
 
 {@a routerlink}
 
-## ナビゲーション・リンクを追加する (_routerLink_)
+## ナビゲーションのリンクを追加する (_routerLink_)
 
 ユーザーはブラウザのアドレスバーにルーターのURLを貼り付ける必要はありません。
 行き来するためのリンクをクリックできるべきです。
@@ -150,7 +152,7 @@ URLが`/`で終わっています。
 
 [`routerLink`属性](#routerlink)は、ルーターが`HeroesComponent`へのルートとして一致する文字列である`"/heroes"`に設定されます。
 この`routerLink`は、ユーザーのクリックをルーターのナビゲーションへ変換する[`RouterLink`ディレクティブ](#routerlink)のためのセレクターです。
-これは、`RouterModule`のパブリックなディレクティブとは別のものです。
+これは、`RouterModule`のもうひとつのパブリックなディレクティブです。
 
 ブラウザを更新するとアプリケーションのタイトルとヒーローのリンクは表示されますが、ヒーローのリストは表示されません。
 
@@ -159,14 +161,14 @@ URLが`/`で終わっています。
 <div class="l-sub-section">
 
 一番下の[最終的なコードレビュー](#appcomponent)に記載されているように、プライベートなCSSのスタイルを`app.component.css`に追加することで、
-このナビゲーション・リンクと今後のナビゲーション・リンクをさらに見栄えのよいものにすることができます。
+このナビゲーションのリンクと今後のナビゲーションのリンクをさらに見栄えのよいものにすることができます。
 
 </div>
 
 
-## ダッシュボード・ビューを追加する
+## ダッシュボードビューを追加する
 
-ルーティングは、複数のビューがある場合にはより意味があります。
+ルーティングは、複数のビューがある場合にさらに意味を持ちます。
 これまでのところ、ヒーローのビューだけがあります。
 
 CLIを使って`DashboardComponent`を追加します：
@@ -177,7 +179,7 @@ CLIを使って`DashboardComponent`を追加します：
 
 CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`の中でそれを宣言します。
 
-これらみっつのファイルのデフォルトの内容を次のように置き換えてから、ちょっとした議論に戻りましょう：
+これら3つのファイルのデフォルトの内容を次のように置き換えてから、少しの間議論に戻りましょう：
 
 <code-tabs>
   <code-pane 
@@ -197,14 +199,14 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 * この`*ngFor`リピーターは、コンポーネントの`heroes`配列と同じ数のリンクを作成します。
 * このリンクは、`dashboard.component.css`によって色付きのブロックとしてスタイル設定されています。
-* このリンクはまだどこにも行きませんが、[まもなく表示されます](#hero-details)。
+* このリンクはまだどこにも行きませんが、[すぐにそうなります](#hero-details)。
 
 この_class_は`HeroesComponent`クラスに似ています。
 * `heroes`の配列のプロパティを定義します。
 * このコンストラクターは、Angular が`HeroService`をプライベートの`heroService`プロパティに注入することを期待しています。
 * この`ngOnInit()`ライフサイクル・フックは`getHeroes`を呼び出します。
 
-この`getHeroes`は、表示されるヒーローの数をよっつ（ふたつ目、みっつ目、よっつ目、いつつ目）に減らします。
+この`getHeroes`は、表示されるヒーローの数を4つ（2番目、3番目、4番目、5番目）に減らします。
 
 <code-example path="toh-pt5/src/app/dashboard/dashboard.component.ts" region="getHeroes">
 </code-example>
@@ -213,7 +215,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 ダッシュボードに遷移するには、ルーターに適切なルートが必要です。
 
-`AppRoutingModule`の`DashboardComponent`をインポートします。
+`AppRoutingModule`で`DashboardComponent`をインポートします。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
@@ -228,11 +230,11 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
   region="dashboard-route">
 </code-example>
 
-### デフォルト・ルートを追加する
+### デフォルトルートを追加する
 
 アプリケーションが起動すると、ブラウザのアドレスバーはWebサイトのルートを指します。
 これは既存のルートと一致しないため、ルータはどこにも移動しません。
-`<router-outlet>'の下のスペースが空白になってしまうのです。
+`<router-outlet>`の下のスペースが空白になってしまうのです。
 
 アプリケーションをダッシュボードに自動的に遷移するには、以下のルートを
 `AppRoutingModule.Routes`配列に追加します。
@@ -245,12 +247,12 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 ブラウザが更新されると、ルータは`DashboardComponent`をロードし、
 ブラウザのアドレスバーには `/dashboard`の URL が表示されます。
 
-### ダッシュボード・リンクをシェルに追加する
+### ダッシュボードのリンクをシェルに追加する
 
 ユーザーは、ページのトップにあるナビゲーション領域のリンクをクリックすることで、
 `DashboardComponent`と`HeroesComponent`の間を行き来することができるべきです。
 
-*Heroes*リンクのすぐ上の`AppComponent`シェル・テンプレートへのダッシュボード・ナビゲーション・リンクを追加します。
+*Heroes*リンクのすぐ上、`AppComponent`シェルテンプレートにダッシュボードのナビゲーションリンクを追加します。。
 
 <code-example path="toh-pt5/src/app/app.component.html" title="src/app/app.component.html">
 </code-example>
@@ -263,7 +265,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `HeroDetailsComponent`は選択されたヒーローの詳細を表示します。
 現時点では `HeroDetailsComponent`は`HeroesComponent`の一番下にしか見えません。
 
-ユーザーはみっつの方法でこれらの詳細にアクセスできるはずです。
+ユーザーは3つの方法でこれらの詳細にアクセスできるはずです。
 1. ダッシュボードのヒーローをクリックする。
 1. ヒーローリストのヒーローをクリックする。
 1. 表示するヒーローを識別するブラウザのアドレスバーに"ディープリンク"URLを貼り付ける。
@@ -271,7 +273,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 このセクションでは、 `HeroDetailsComponent`への遷移を有効にして、
 `HeroesComponent`から解き放ちます。
 
-### _HeroesComponent_から_hero_の詳細を削除する
+### _HeroesComponent_から_ヒーローの詳細_を削除する
 
 ユーザーが `HeroesComponent`でひとつのヒーローをクリックすると、
 アプリケーションは `HeroDetailComponent`に遷移する必要があり、
@@ -284,7 +286,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 今はもうヒーローアイテムをクリックしても、何も起こりません。
 そこは`HeroDetailComponent`への遷移を有効にした後に、[すぐに修正します](#heroes-component-links)。
 
-### _hero detail_ルートを追加する
+### _ヒーロー詳細_ルートを追加する
 
 `~/detail/11`のようなURLは、`id`が`11`のヒーローの*ヒーロー詳細*ビューにナビゲートするための正しいURLになります。
 
@@ -296,14 +298,14 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
   title="src/app/app-routing.module.ts (import HeroDetailComponent)">
 </code-example>
 
-次に、_hero detail_ビューへのパスのパターンと一致する_parameterized_ルートを`AppRoutingModule.routes`配列に追加します。
+次に、_ヒーロー詳細_ビューへのパスのパターンと一致する_パラメータ付き_ルートを`AppRoutingModule.routes`配列に追加します。
 
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
   region="detail-route">
 </code-example>
 
-`path`のコロン (:) は`:id`が特定のヒーロー`id`のプレースホルダーであることを表しています。
+`path`のコロン (:) は`:id`が特定のヒーローの`id`のプレースホルダーであることを表しています。
 
 この時点で、すべてのアプリケーションルートが配置されています。
 
@@ -313,12 +315,12 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
   title="src/app/app-routing.module.ts (all routes)">
 </code-example>
 
-### _DashboardComponent_ヒーロー・リンク
+### _DashboardComponent_ヒーローのリンク
 
-現時点では`DashboardComponent`ヒーロー・リンクは何もしません。
+現時点では`DashboardComponent`ヒーローのリンクは何もしません。
 
 ルーターは `HeroDetailComponent`へのルートを持っているので、
-ダッシュボードのヒーロー・リンクを修正して、_パラメータ化された_ダッシュボード・ルート経由で遷移します。
+ダッシュボードのヒーローのリンクを修正して、_パラメータ付き_ダッシュボードのルート経由で遷移します。
 
 <code-example 
   path="toh-pt5/src/app/dashboard/dashboard.component.html" 
@@ -326,13 +328,13 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
   title="src/app/dashboard/dashboard.component.html (hero links)">
 </code-example>
 
-`*ngFor`リピータ内でAngularの[補間バインディング](guide/template-syntax#interpolation)を使用していて、
+`*ngFor`リピーター内でAngularの[補間バインディング](guide/template-syntax#interpolation)を使用していて、
 現在のインタラクションの `hero.id`をそれぞれの[`routerLink`](#routerlink)に挿入します。
 
 {@a heroes-component-links}
-### _HeroesComponent_ヒーロー・リンク
+### _HeroesComponent_ヒーローのリンク
 
-`HeroesComponent`のヒーロー項目は、
+`HeroesComponent`のヒーローのアイテムは、
 コンポーネントの onSelect() メソッドにバインドされたクリック・イベントを持つ`<li>`要素です。
 
 <code-example 
@@ -343,7 +345,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 この`<li>`を`*ngFor`だけを持つように戻し、
 アンカー要素 (`<a>`) でバッジと名前を囲み、
-ダッシュボード・テンプレートと同じようにアンカーに`routerLink`要素を追加します。
+ダッシュボードのテンプレートと同じようにアンカーに`routerLink`要素を追加します。
 
 <code-example 
   path="toh-pt5/src/app/heroes/heroes.component.html" 
@@ -424,7 +426,7 @@ _"id"_パラメータは、表示するヒーローの`id`です。
 `paramMap`は、URL から抽出されたルートパラメータ値の辞書です。
 `"id"`キーは、フェッチするヒーローの`id`を返します。
 
-ルート・パラメータは常に文字列です。
+ルートパラメータは常に文字列です。
 JavaScript (+) 演算子は文字列を数値に変換します。これがヒーローの`id`の値です。
 
 ブラウザがリフレッシュされ、コンパイラのエラーでアプリケーションがクラッシュします。
@@ -449,7 +451,7 @@ define a JavaScript
 </div>
 
 [`getHeroes()`](tutorial/toh-pt4#observable-heroservice)と同様に、
-`getHero()`には非同期の印があります。
+`getHero()`には非同期のシグネチャーがあります。
 RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`として返します。
 
 `getHero()`を呼び出す `HeroDetailComponent`を変更することなく、
@@ -458,7 +460,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 #### 試す
 
 ブラウザがリフレッシュされ、アプリは再び動くようになります。
-ダッシュボードまたはヒーロー・リストでヒーローをクリックでき、
+ダッシュボードまたはヒーローリストでヒーローをクリックでき、
 そのヒーローの詳細ビューに移動することができます。
 
 `localhost:4200/detail/11`をブラウザのアドレスバーに貼り付けると、
@@ -470,11 +472,11 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 ブラウザの戻るボタンをクリックすると、
 詳細ビューに来たときの経路によって、
-ヒーロー・リストまたはダッシュボード・ビューに戻ることができます。
+ヒーローリストまたはダッシュボード画面に戻ることができます。
 
 `HeroDetail`ビュー上にそうできるボタンを持っているといいでしょう。
 
-コンポーネント・テンプレートの最後に*戻る*ボタンを追加し、
+コンポーネントのテンプレートの最後に*戻る*ボタンを追加し、
 コンポーネントの `goBack()`メソッドにバインドします。
 
 <code-example 
@@ -483,8 +485,8 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
   title="src/app/hero-detail/hero-detail.component.html (back button)">
 </code-example>
 
-[前に挿入した](#hero-detail-ctor) `Location`サービスを使用して、
-ブラウザの履歴のひとつ前にナビゲートするコンポーネント・クラスに`goBack()`メソッドを追加します。
+[先ほど注入した](#hero-detail-ctor)`Location`サービスを使用して、
+ブラウザの履歴のひとつ前にナビゲートする`goBack()`メソッドをコンポーネントのクラスに追加します。
 
 <code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="goBack" title="src/app/hero-detail/hero-detail.component.ts (goBack)">
 
@@ -492,16 +494,16 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 
 ブラウザを更新して、クリックしてみましょう。
-ユーザーは、ダッシュボードからヒーローの詳細に行って戻ったり、ヒーロー・リストから小さな詳細へ行き
-ヒーローの詳細に行って再びヒーロー・リストに戻ったりと、アプリケーションのあちこちを行き来することができます。
+ユーザーは、ダッシュボードからヒーローの詳細に行って戻ったり、ヒーローリストから小さな詳細へ行き
+ヒーローの詳細に行って再びヒーローリストに戻ったりと、アプリケーションのあちこちを行き来することができます。
 
 このページで進めてきたすべてのナビゲーション要件を満たしています。
 
 
 ## 最後のコード・レビュー
 
-このページで解説したコード・ファイルは次のとおりで、
-アプリは<live-example> </ live-example>のようになっているはずです。
+このページで解説したコードのファイルは次のとおりで、
+アプリは<live-example> </live-example>のようになっているはずです。
 
 {@a approutingmodule}
 {@a appmodule}
@@ -587,11 +589,11 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 ## まとめ
 
-* さまざまなコンポーネント間を行き来するためにAngularルーターを追加した。
-* `AppComponent`を、リンクと`<router-outlet>`を持つナビゲーション・シェルに変更した。
-* `AppRoutingModule`でルータを設定した。
-* シンプルなルート、リダイレクトするルート、およびパラメータ化されたルートを定義した。
-* アンカー要素で`routerLink`ディレクティブを使用した。
-* 密接に結合されたマスター/詳細ビューをルート化した詳細ビューにリファクタリングした。
-* ユーザーが選択したヒーローの詳細ビューに移動するために、ルーター・リンクのパラメータを使用した。
-* 複数のコンポーネント間で`HeroService`を共有した。
+* さまざまなコンポーネント間を行き来するためにAngularルーターを追加しました。
+* `AppComponent`を、リンクと`<router-outlet>`を持つナビゲーション・シェルに変更しました。
+* `AppRoutingModule`でルータを設定しました。
+* シンプルなルート、リダイレクトするルート、およびパラメータ付きルートを定義しました。
+* アンカー要素で`routerLink`ディレクティブを使用しました。
+* 密接に結合されたmaster/detailビューをルート化した詳細ビューにリファクタリングしました。
+* ユーザーが選択したヒーローの詳細ビューに移動するために、ルーターリンクのパラメータを使用しました。
+* 複数のコンポーネント間で`HeroService`を共有しました。

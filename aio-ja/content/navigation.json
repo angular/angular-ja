@@ -113,8 +113,8 @@
         },
         {
           "url": "tutorial/toh-pt5",
-          "title": "7. Routing",
-          "tooltip": "Part 7: Add the Angular router and navigate among the views."
+          "title": "7. ルーティング",
+          "tooltip": "Part 7: Angularルーターを追加してビュー間を移動します"
         },
         {
           "url": "tutorial/toh-pt6",

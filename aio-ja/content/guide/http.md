@@ -3,7 +3,7 @@
 たいていのフロントエンドアプリケーションは、HTTPプロトコルを通してバックエンドサービスと通信します。モダンブラウザはHTTPリクエストを行うために2つのAPIをサポートします。`XMLHttpRequest` インターフェースと `fetch()` APIです。
 
 `HttpClient` は、 `@angular/common/http` の中に含まれていて、Angularアプリケーションで使われるHTTPのためのシンプルなAPIです。ブラウザが公開している `XMLHttpRequest` インターフェースの上にAPIを築きます。
-さらに `HttpClient` は、リクエストやレスポンスオブジェクトの強力な型付け、リクエストとレスポンスのインターセプタ、そしてオブザーバブルに基づくAPIを通してエラーハンドリングすることで、テストを簡単にします。
+さらに `HttpClient` は、リクエストやレスポンスオブジェクトの強力な型付け、リクエストとレスポンスのインターセプター、そしてObservableに基づくAPIを通してエラーハンドリングすることで、テストを簡単にします。
 
 ## セットアップ: モジュールをインストールする
 
@@ -15,14 +15,14 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
-// @angular/common/http から HttpClientModule をインポートする
+// @angular/common/http から HttpClientModule をインポートします。
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
-    // application moduleの 'imports' に含める
-    // BrowserModuleの後に置く
+    // application moduleの 'imports' に含めます。
+    // BrowserModuleの後に置きます。
     HttpClientModule,
   ],
 })
@@ -31,7 +31,7 @@ export class MyAppModule {}
 
 appモジュールに `HttpClientModule` をインポートすると、コンポーネントやサービスに `HttpClient` を注入できるようになります。
 
-## JSONデータのリクエストを作る
+## JSONデータを要求する
 
 アプリケーションはバックエンドへリクエストするケースではたいていJSONデータをリクエストします。例えば、アイテムをリストするAPIエンドポイント `/api/items` では、以下のようにフォームのJSONオブジェクトとして返却します。
 
@@ -53,13 +53,13 @@ export class MyComponent implements OnInit {
 
   results: string[];
 
-  // コンポーネントやサービスの中にHttpClientを注入する
+  // コンポーネントやサービスの中にHttpClientを注入します。
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    // HTTPリクエストを作る:
+    // HTTPリクエストを作ります。
     this.http.get('/api/items').subscribe(data => {
-      // JSONレスポンスからresultsプロパティを読む
+      // JSONレスポンスからresultsプロパティを読みます。
       this.results = data['results'];
     });
   }
@@ -71,7 +71,7 @@ export class MyComponent implements OnInit {
 
 上記の例では、ブラケット記法を使って `data['results']` とアクセスしていることに注目しましょう。 `data.results` と書こうとしても、TypeScriptが HTTPから戻される `Object` に `results` プロパティが無いと正しくエラーを出すでしょう。 `HttpClient` がJSONレスポンスの `Object` をパースした時にどんなオブジェクトであるかわからないからです。
 
-とはいえ、レスポンスがどんな型であるか `HttpClient` に教えることができます。そのために、まず次のように正しい型のインターフェースを定義します。
+しかしながら、レスポンスがどんな型であるか `HttpClient` に教えることができます。そのために、まず次のように正しい型のインターフェースを定義します。
 
 ```javascript
 interface ItemsResponse {
@@ -83,7 +83,7 @@ interface ItemsResponse {
 
 ```javascript
 http.get<ItemsResponse>('/api/items').subscribe(data => {
-  // dataはItemsResponse型になっているので次のように書ける
+  // dataはItemsResponse型になっているので次のように書けます。
   this.results = data.results;
 });
 ```
@@ -96,15 +96,15 @@ http.get<ItemsResponse>('/api/items').subscribe(data => {
 http
   .get<MyJsonData>('/data.json', {observe: 'response'})
   .subscribe(resp => {
-    // ここでrespはHttpResponse<MyJsonData>型である。
-    // ヘッダーを読める
+    // ここでrespはHttpResponse<MyJsonData>型です。
+    // ヘッダーを読めます。
     console.log(resp.headers.get('X-Custom-Header'));
-    // ボディに直接アクセスするとリクエストしたようにMyJsonData型である。
+    // ボディに直接アクセスすると、要求通りMyJsonData型です。
     console.log(resp.body.someField);
   });
 ```
 
-ご覧のように、結果として得られるオブジェクトは正しいタイプの `body` プロパティを持っています。
+ご覧のように、結果として得られるオブジェクトは正しい型の `body` プロパティを持っています。
 
 
 
@@ -118,9 +118,9 @@ http
 http
   .get<ItemsResponse>('/api/items')
   .subscribe(
-    // 成功した場合は最初のコールバックが呼ばれる
+    // 成功した場合は最初のコールバックが呼ばれます。
     data => {...},
-    // エラーならこちらのコールバックが呼ばれる
+    // エラーならこちらのコールバックが呼ばれます。
     err => {
       console.log('Something went wrong!');
     }
@@ -142,11 +142,11 @@ http
     data => {...},
     (err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
-        // クライアントサイドまたはネットワークでエラーが発生した。それに応じて処理を行う。
+        // クライアントサイドまたはネットワークでエラーが発生しました。エラーに応じて処理を行います。
         console.log('An error occurred:', err.error.message);
       } else {
-        // バックエンドが失敗ステータスコードを返した。
-        // レスポンスボディに何が間違っていたかの手がかりが含まれているかもしれない。
+        // バックエンドが失敗ステータスコードを返しました。
+        // レスポンスボディに何が間違っていたかの手がかりが含まれているかもしれません。
         console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
       }
     }
@@ -170,13 +170,13 @@ import 'rxjs/add/operator/retry';
 ```javascript
 http
   .get<ItemsResponse>('/api/items')
-  // このリクエストを最大3回までリトライする
+  // このリクエストを最大3回までリトライします。
   .retry(3)
-  // 3回目の再試行してもエラーならアプリに送信される
+  // 3回目の再試行してもエラーならアプリに送信されます。
   .subscribe(...);
 ```
 
-### non-JSONデータをリクエストする
+### JSON以外のデータをリクエストする
 
 すべてのAPIがJSONデータを返すわけではありません。サーバー上のテキストファイルを読み込みたいとします。 `HttpClient` にテキストが返ってくることを伝える必要があります。
 
@@ -184,7 +184,7 @@ http
 http
   .get('/textfile.txt', {responseType: 'text'})
   // get()によって返却されるObservableは、テキストレスポンスが定義されているので
-  // Observable<string>型になる。get()に<string>型パラメータを渡す必要はない。
+  // Observable<string>型です。get()に<string>型パラメータを渡す必要はありません。
   .subscribe(data => console.log(data));
 ```
 
@@ -202,20 +202,20 @@ const body = {name: 'Brad'};
 
 http
   .post('/api/developers/add', body)
-  // 下記のようにpost()でもsubscribe()が必要になる。
+  // 下記のようにpost()でもsubscribe()が必要になります。
   .subscribe(...);
 ```
 <div class="alert is-important">
 
-*Note `subscribe()` メソッド* `HttpClient` から返されたObservablesはすべて、_cold_です。つまり、リクエストを行うための_blueprint_です。あなたが `subscribe()` を呼び出すまで何も起こりません。そのような呼び出しはたいてい別のリクエストも行います。たとえば、次のコードでは、同じデータを持つPOST要求を2回送信しています。
+* `subscribe()` メソッドに注意しましょう。 * `HttpClient` から返されたObservablesはすべて、 _cold_ です。つまり、リクエストを行うための _設計図_ です。あなたが `subscribe()` を呼び出すまで何も起こりません。そのような呼び出しはたいてい別のリクエストも行います。たとえば、次のコードでは、同じデータを持つPOST要求を2回送信しています。
 
 ```javascript
 const req = http.post('/api/items/add', body);
-// .subscribe()が呼ばれていないため、まだ 0リクエストである
+// .subscribe()が呼ばれていないため、まだ0リクエストです。
 req.subscribe();
-// 1リクエスト実施
+// 1つ目のリクエストが作られます。
 req.subscribe();
-// 2リクエスト実施
+// 2つ目のリクエストが作られます。
 ```
 </div>
 
@@ -225,7 +225,7 @@ URLとリクエストボディだけでなく、リクエストの他の部分�
 
 #### Headers
 
-一般的なユースーケースは、 `Authorization` ヘッダーをつけることです。以下に例を示します。
+一般的なユースケースは、 `Authorization` ヘッダーをつけることです。以下に例を示します。
 
 ```javascript
 http
@@ -257,11 +257,11 @@ http
 
 ### すべてのリクエストまたはレスポンスをインターセプトする
 
-`@angular/Common/http` で実装された主要な機能に、アプリケーションとバックエンドの間で動くインターセプタを定義した _interception_ があります。アプリケーションがリクエストを行うと、サーバーに送信する前にインターセプタがリクエストオブジェクトを変換します。また、インターセプタはレスポンスをアプリケーションが読む前に変換して戻すことができます。これは、認証からロギングまでのあらゆることに役立ちます。
+`@angular/Common/http` で実装された主要な機能は _介入_ です。アプリケーションとバックエンドの間で動くインターセプターを定義するためのものです。アプリケーションがリクエストを行うと、サーバーに送信する前にインターセプターがリクエストオブジェクトを変換します。また、インターセプターはレスポンスをアプリケーションが読む前に変換して戻すことができます。これは、認証からロギングまでのあらゆることに役立ちます。
 
 #### インターセプターを書く
 
-インターセプタを作るために `HttpInterceptor` を実装したクラスを宣言します。 `HttpInterceptor` は単一の `intercept()` メソッドを持っています。単純なインターセプタは、リクエストを変更せずに転送するだけです。
+インターセプターを作るために `HttpInterceptor` を実装したクラスを宣言します。 `HttpInterceptor` は単一の `intercept()` メソッドを持っています。単純なインターセプターは、リクエストを変更せずに転送するだけです。
 
 ```javascript
 import {Injectable} from '@angular/core';
@@ -276,17 +276,17 @@ export class NoopInterceptor implements HttpInterceptor {
 ```
 
 
-`intercept` は、リクエストをObservableに変換して最終的にレスポンスを返すメソッドです。この意味では、各インターセプタは、それぞれ一つのリクエストを処理する責務となります。
+`intercept` は、リクエストをObservableに変換して最終的にレスポンスを返すメソッドです。この意味では、各インターセプターは、それぞれ一つのリクエストを処理する責務となります。
 
-しかし、ほとんどの場合、インターセプタはリクエストに若干の変更を加え、チェーンの後続に転送します。それは `next` パラメータが入るところです。 `next` は、 `intercept` に似たインタフェースの `HttpHandler` であり、リクエストをレスポンスのためにObservableに変換します。インターセプタでは、 `next` はチェーン内の次のインターセプタが存在していれば次のインターセプタを表し、他のインターセプトがもう無ければ最後のバックエンドを表します。したがって、ほとんどのインターセプタは、彼らが変換したリクエストで `next` を呼ぶことで終了します。
+しかし、ほとんどの場合、インターセプターはリクエストに若干の変更を加え、チェーンの後続に転送します。それが `next` パラメータが入るところです。 `next` は、 `intercept` に似たインターフェースの `HttpHandler` であり、リクエストをレスポンスのためにObservableに変換します。インターセプターでは、 `next` はチェーン内の次のインターセプターが存在していれば次のインターセプターを表し、他のインターセプトがもう無ければ最後のバックエンドを表します。したがって、ほとんどのインターセプターは、彼らが変換したリクエストで `next` を呼ぶことで終了します。
 
 上記の何もしないハンドラは、元のリクエストで単に `next.handle` を呼び出すだけで、それをまったく変更せずに転送します。
 
 このパターンは、Express.jsなどのミドルウェアフレームワークのパターンに似ています。
 
-##### インターセプタを供給する
+##### インターセプターを供給する
 
-上記の `NoopInterceptor` を宣言しても、アプリがそれを使用することはありません。次のように、モジュールでプロバイダーにインターセプタを登録する必要があります。
+上記の `NoopInterceptor` を宣言しても、アプリがそれを使用することはありません。次のように、モジュールでプロバイダーにインターセプターを登録する必要があります。
 
 ```javascript
 import {NgModule} from '@angular/core';
@@ -302,47 +302,47 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 export class AppModule {}
 ```
 
-*Note `multi: true` オプション* これは必須であり、Angleに `HTTP_INTERCEPTORS` は単一の値ではなく配列であることを伝えます。
+* `multi: true` オプションに注意しましょう * これは必須であり、Angleに `HTTP_INTERCEPTORS` は単一の値ではなく配列であることを伝えます。
 
 
 ##### イベント
 
-`intercept` と `HttpHandler.handle` によって返されたObservableが `Observable<HttpResponse<any>>` ではなく `Observable<HttpEvent<any>>` であることに気づいたかもしれません。インターセプタは `HttpClient` インタフェースよりも低いレベルで動作するからです。1回のリクエストでアップロードおよびダウンロードの進行状況イベントを含む複数のイベントを生成し得ます。 `HttpResponse` クラスは、実際には `HttpEventType.HttpResponseEvent` の `type` を持ったイベントそのものになります。
+`intercept` と `HttpHandler.handle` によって返されたObservableが `Observable<HttpResponse<any>>` ではなく `Observable<HttpEvent<any>>` であることに気づいたかもしれません。インターセプターは `HttpClient` インターフェースよりも低いレベルで動作するからです。1回のリクエストでアップロードおよびダウンロードの進行状況イベントを含む複数のイベントを生成し得ます。 `HttpResponse` クラスは、実際には `HttpEventType.HttpResponseEvent` の `type` を持ったイベントそのものになります。
 
-インターセプタは、たとえ解釈できなかったり変更することがわかっているイベントでも全て通過させる必要があります。処理する予定のないイベントを除外してはなりません。とはいえ、多くのインターセプタは発信リクエストのみに関心があり、 `next` からのイベントストリームを変更を行わずに単に返すだけでしょう。
+インターセプターは、たとえ解釈できなかったり変更することがわかっているイベントでも全て通過させる必要があります。処理する予定のないイベントを除外してはなりません。とはいえ、多くのインターセプターは発信リクエストのみに関心があり、 `next` からのイベントストリームを変更を行わずに単に返すだけでしょう。
 
 
-##### 並べる順番
+##### 順序
 
-アプリケーションで複数のインターセプタを提供する場合、Angularではあなたが供給した順番でそれらを適用します。
+アプリケーションで複数のインターセプターを提供する場合、Angularではあなたが提供した順番でそれらを適用します。
 
 ##### イミュータビリティ（不変性）
 
-インターセプタは、リクエストとレスポンスを検査して変更するために存在します。しかし、 `HttpRequest` クラスと `HttpResponse` クラスがほとんどイミュータブルであることを知ると驚くかもしれません。
+インターセプターは、リクエストとレスポンスを検査して変更するために存在します。しかし、 `HttpRequest` クラスと `HttpResponse` クラスがほとんどイミュータブルであることを知ると驚くかもしれません。
 
-これは、アプリがリクエストを再試行することがあり得るため、インターセプタチェーンは個別のリクエストを複数回処理する可能性があるためです。リクエストがミュータブルであった場合、再試行されたリクエストは元のリクエストと変わってしまいます。イミュータビリティは、インターセプタが各試行に対して同じリクエストを見ることを保証します。
+これは、アプリがリクエストを再試行することがあり得るため、インターセプターチェーンは個別のリクエストを複数回処理する可能性があるためです。リクエストがミュータブルであった場合、再試行されたリクエストは元のリクエストと変わってしまいます。イミュータビリティは、インターセプターが各試行に対して同じリクエストを見ることを保証します。
 
-インターセプタを書くときに型安全があなたを守ることができない場合があります。リクエストボディがそうです。インターセプタ内のリクエストボディを変更することは無効になりますが、これは型システムによってチェックされません。
+インターセプターを書くときに型安全があなたを守ることができない場合があります。リクエストボディがそうです。インターセプター内のリクエストボディを変更することは無効になりますが、これは型システムによってチェックされません。
 
-リクエストボディを変更するためには、リクエストボディをコピーし、コピーを変更し、 `clone（）` を使用してリクエストをコピーし、新しいボディを設定する必要があります。
+リクエストボディを変更するためには、リクエストボディをコピーし、コピーを変更する必要があります。その時に `clone()` を使用して、リクエストをコピーし、新しいボディを設定します。
 
-リクエストは不変なので、直接変更することはできません。それらを変更するには、 `clone（）` を使います：
+リクエストは不変なので、直接変更することはできません。それらを変更するには、 `clone()` を使います：
 
 ```javascript
 intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  // これは複製です。オリジナルと全く同一です。
+  // これは複製です。オリジナルと全く同じです。
   const dupReq = req.clone();
 
-  // URLを変更し、 'http：//' を 'https：//' に置き換えます。
+  // URLを変更し、'http：//'を'https://'に置き換えます。
   const secureReq = req.clone({url: req.url.replace('http://', 'https://')});
 }
 ```
 
-ご覧のように、 `clone（）` でハッシュ引数を取ると、他のものをコピーしながらリクエストの特定のプロパティを変更できます。
+ご覧のように、 `clone()` で受け取られた断片は、他のものをコピーしながらリクエストの特定のプロパティを変更できます。
 
 #### 新しいヘッダーをセットする
 
-インターセプタの一般的な活用場面は、デフォルトのヘッダを発信リクエストに設定することです。たとえば、認証トークンを提供する注入可能な `AuthService` があると仮定すると、これをすべての発信リクエストに追加するインターセプタを作成する方法は次のとおりです。
+インターセプターの一般的な活用場面は、デフォルトのヘッダを発信リクエストに設定することです。たとえば、認証トークンを提供する注入可能な `AuthService` があると仮定すると、これをすべての発信リクエストに追加するインターセプターを作成する方法は次のとおりです。
 
 ```javascript
 import {Injectable} from '@angular/core';
@@ -353,11 +353,11 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // サービスから認証ヘッダーを取得する
+    // サービスから認証ヘッダーを取得します。
     const authHeader = this.auth.getAuthorizationHeader();
-    // 新しいヘッダーを加えたリクエストを複製する
+    // 新しいヘッダーを加えたリクエストを複製します。
     const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
-    // オリジナルのリクエストの代わりに複製したリクエストを投げる
+    // オリジナルのリクエストの代わりに複製したリクエストを投げます。
     return next.handle(authReq);
   }
 }
@@ -375,9 +375,9 @@ const authReq = req.clone({setHeaders: {Authorization: authHeader}});
 * キャッシュ動作 たとえば、If-Modified-Since
 * XSRFプロテクション
 
-#### ログを取る
+#### ロギング
 
-インターセプタはリクエストとレスポンスを _一緒に_ で処理できるので、ログやリクエスト時間などの処理を行うことができます。 `console.log` を使って各リクエストの所要時間を示すインターセプタを考えてみましょう：
+インターセプターはリクエストとレスポンスを _一緒に_ で処理できるので、ログやリクエスト時間などの処理を行うことができます。 `console.log` を使って各リクエストの所要時間を示すインターセプターを考えてみましょう：
 
 ```javascript
 import 'rxjs/add/operator/do';
@@ -402,23 +402,23 @@ RxJSの `do()` 演算子に注目してください。ストリームの値に�
 
 #### キャッシュ
 
-インターセプタを使用してキャッシングを実装することもできます。この例では、シンプルなインターフェースでHTTPキャッシュを作成することを想定します。
+インターセプターを使用してキャッシュを実装することもできます。この例では、シンプルなインターフェースでHTTPキャッシュを作成することを想定します。
 
 ```javascript
 abstract class HttpCache {
   /**
-   * キャッシュされたレスポンスがあれば返す。存在しない場合はnullを返す
+   * キャッシュされたレスポンスがあれば返す。存在しない場合はnullを返します。
    */
   abstract get(req: HttpRequest<any>): HttpResponse<any>|null;
 
   /**
-   * キャッシュ内のレスポンスを追加または更新する
+   * キャッシュ内のレスポンスを追加または更新します。
    */
   abstract put(req: HttpRequest<any>, resp: HttpResponse<any>): void;
 }
 ```
 
-インターセプタは、このキャッシュを発信リクエストに適用できます。
+インターセプターは、このキャッシュを発信リクエストに適用できます。
 
 ```javascript
 @Injectable()
@@ -426,26 +426,26 @@ export class CachingInterceptor implements HttpInterceptor {
   constructor(private cache: HttpCache) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  	// 何かをする前に、GETリクエストだけをキャッシュすることが重要である
-    // リクエストメソッドがGETではないなら、インターセプタをスキップする
+  	// 何かをする前に、GETリクエストだけをキャッシュすることが重要です。
+    // リクエストメソッドがGETではないなら、インターセプターをスキップします。
     if (req.method !== 'GET') {
       return next.handle(req);
     }
 
-    // まず、キャッシュをチェックして、このリクエストが存在するかどうかを確認する
+    // まず、キャッシュをチェックして、このリクエストが存在するかどうかを確認します。
     const cachedResponse = this.cache.get(req);
     if (cachedResponse) {
-      // キャッシュされたレスポンスが存在する。 
-      // 次のハンドラにリクエストを転送する代わりにキャッシュを返す
+      // キャッシュされたレスポンスが存在します。
+      // 次のハンドラにリクエストを転送する代わりにキャッシュを返します。
       return Observable.of(cachedResponse);
     }
 
-    // キャッシュされたレスポンスは存在しない
-    // ネットワークにアクセスし、レスポンスが到着したらキャッシュする
+    // キャッシュされたレスポンスは存在しません。
+    // ネットワークにアクセスし、レスポンスが到着したらキャッシュします。
     return next.handle(req).do(event => {
-      // レスポンス以外の他のイベントがあるかもしれないことを忘れるな
+      // レスポンス以外の他のイベントがあるかもしれないことを覚えておいてください。
       if (event instanceof HttpResponse) {
-      	// キャッシュを更新する
+      	// キャッシュを更新します。
       	this.cache.put(req, event);
       }
     });
@@ -453,30 +453,30 @@ export class CachingInterceptor implements HttpInterceptor {
 }
 ```
 
-明らかに、この例では、要求の一致、キャッシュの無効化などについて説明していますが、要求を変換する以外にも、インターセプタには多くの機能が備わっています。必要に応じて、これらを使用して要求フローを完全に引き継ぐことができます。
+明らかに、この例では、要求の一致、キャッシュの無効化などについて説明していますが、要求を変換する以外にも、インターセプターには多くの機能が備わっています。必要に応じて、これらを使用して要求フローを完全に引き継ぐことができます。
 
 柔軟性を例示するために、リクエストがキャッシュに存在する場合は _２つの_ レスポンスイベントを返すように上記の例を変更できます。最初にキャッシュされたレスポンスを返し、後で更新されたネットワークレスポンスが返されます。
 
 ```javascript
 intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  // 今回もGET以外のリクエストはスキップする
+  // 今回もGET以外のリクエストはスキップします。
   if (req.method !== 'GET') {
     return next.handle(req);
   }
 
   // これは、キャッシュされた値がある場合にはObservableとなり、
-  // そうでなければ空のObservableになる。まず空のObservableで初期化する。
+  // そうでなければ空のObservableです。まず空のObservableで初期化します。
   let maybeCachedResponse: Observable<HttpEvent<any>> = Observable.empty();
 
-  // キャッシュをチェックする
+  // キャッシュをチェックします。
   const cachedResponse = this.cache.get(req);
   if (cachedResponse) {
     maybeCachedResponse = Observable.of(cachedResponse);
   }
 
-  // ネットワークリクエストの作成と値のキャッシュを表すObservable（サブスクライブしない）を作成する
+  // ネットワークリクエストの作成と値のキャッシュを表すObservable（サブスクライブしない）を作成します。
   const networkResponse = next.handle(req).do(event => {
-    // Just like before, check for the HttpResponse event and cache it.
+    // これまでと同様に、HttpResponseイベントをチェックしてキャッシュします。
     if (event instanceof HttpResponse) {
       this.cache.put(req, event);
     }
@@ -503,14 +503,14 @@ const req = new HttpRequest('POST', '/upload/file', file, {
 
 このオプションを使用すると、プログレスイベントを追跡できます。プログレスイベントごとに変更検出がトリガーされるので、各イベントでUIを実際に更新する場合のみオンにすべきと覚えておいてください。
 
-次に、 `HttpClient` の `request()` メソッドを通してリクエストを作ります。結果は、インターセプタの場合と同様に、Observableのイベントになります。
+次に、 `HttpClient` の `request()` メソッドを通してリクエストを作ります。結果は、インターセプターの場合と同様に、Observableのイベントになります。
 
 ```javascript
 http.request(req).subscribe(event => {
-  // このAPIを使用すると、生のイベントストリームにアクセスできる
-  // アップロードのプログレスイベントを見る
+  // このAPIを使用すると、生のイベントストリームにアクセスできます。
+  // アップロードのプログレスイベントを見ます。
   if (event.type === HttpEventType.UploadProgress) {
-    // これはアップロード進捗イベントである。何％終了したかを計算して表示する
+    // これはアップロード進捗イベントです。何％終了したかを計算して表示します。
     const percentDone = Math.round(100 * event.loaded / event.total);
     console.log(`File is ${percentDone}% uploaded.`);
   } else if (event instanceof HttpResponse) {
@@ -521,14 +521,14 @@ http.request(req).subscribe(event => {
 
 ## セキュリティ: XSRFプロテクション
 
-[XSRF（Cross-Site Request Forgery）]（https://en.wikipedia.org/wiki/Cross-site_request_forgery）は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。 `HttpClient` は、XSRF攻撃を防ぐための[common mechanism]（https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token）をサポートしています。HTTPリクエストを実行するとき、インターセプタはデフォルトでは `XSRF-TOKEN` によってクッキーからトークンを読み込み、それをHTTPヘッダの `X-XSRF-TOKEN` として設定します。ドメイン上で動作するコードだけがCookieを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションからのものであることを保証できます。
+[XSRF（Cross-Site Request Forgery）]（https://en.wikipedia.org/wiki/Cross-site_request_forgery）は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。 `HttpClient` は、XSRF攻撃を防ぐための[共通メカニズム]（https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token）をサポートしています。HTTPリクエストを実行するとき、インターセプターはデフォルトでは `XSRF-TOKEN` によってクッキーからトークンを読み込み、それをHTTPヘッダの `X-XSRF-TOKEN` として設定します。ドメイン上で動作するコードだけがCookieを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションからのものであることを保証できます。
 
-デフォルトでは、インターセプタはURLに関するすべての変更要求（POSTなど）に対してこのCookieを送信します。GET/HEADリクエストや絶体的なURLに基づくものではありません。
+デフォルトでは、インターセプターはURLに関するすべての変更要求（POSTなど）に対してこのCookieを送信します。GET/HEADリクエストや絶体URLに基づくものではありません。
 
-これを利用するには、サーバーがページ読み込みまたは最初のGET要求のいずれかで、 `XSRF-TOKEN` というJavaScriptで読み取れるセッションクッキーにトークンを設定する必要があります。その後のリクエストでは、サーバーはCookieが `X-XSRF-TOKEN` HTTPヘッダーと一致することを検証することができ、したがって、ドメイン上で実行されているコードだけがリクエストを送信できたと確認できます。トークンは、各ユーザーごとに一意でなければならず、サーバーによって検証可能でなければなりません。これにより、クライアントは独自のトークンを作成することができなくなります。セキュリティを強化するために、トークンをサイトの認証クッキーのdigestに設定します。
+これを利用するには、サーバーがページ読み込みまたは最初のGET要求のいずれかで、 `XSRF-TOKEN` というJavaScriptで読み取れるセッションクッキーにトークンを設定する必要があります。その後のリクエストでは、サーバーはCookieが `X-XSRF-TOKEN` HTTPヘッダーと一致することを検証することができ、したがって、ドメイン上で実行されているコードだけがリクエストを送信できたと確認できます。トークンは、各ユーザーごとに一意でなければならず、サーバーによって検証可能でなければなりません。これにより、クライアントは独自のトークンを作成することができなくなります。セキュリティを強化するために、トークンをサイトの認証クッキーのダイジェストに設定します。
 
 <div class="alert is-important">
-*Note `HttpClient` のサポートはクライアント側だけであり、XSRFプロテクションのスキーマの半分である* あなたのバックエンドサービスは、ページのCookieを設定し、該当するすべてのリクエストにヘッダが存在することを検証するように構成する必要があります。そうでない場合、Angularのデフォルトの保護は効果がありません。
+* `HttpClient` のサポートはクライアント側だけであり、XSRFプロテクションのスキーマの半分であることに注意しましょう * あなたのバックエンドサービスは、ページのCookieを設定し、該当するすべてのリクエストにヘッダが存在することを検証するように構成する必要があります。そうでない場合、Angularのデフォルトの保護は効果がありません。
 </div>
 
 ### cookie/headerにカスタムで名前をつける
@@ -549,7 +549,7 @@ imports: [
 
 外部依存関係と同様に、HTTPバックエンドは良いテストプラクティスの一環としてモックされる必要があります。 `@angular/common/http` は、このようなっモックを簡単に設定するテストライブラリ `@angular/common/http/testing` を提供します。
 
-### モックのフィロソフィー
+### モックの思想
 
 AngularのHTTPテストライブラリは、アプリケーションがコードを実行してリクエストを最初に実行するテストパターン用に設計されています。その後、テストでは、特定のリクエストがあるかどうか、それらのリクエストに対してアサーションを実行し、最後に期待されるリクエストを「flashing」することによってレスポンスを提供します。これにより、より多くの新しいリクエストがトリガーされる可能性があります。最後に、アプリが予期せぬリクエストを行なっていないことを確認します。
 
@@ -573,31 +573,31 @@ beforeEach(() => {
 
 それでおしまいです。これでテストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドに当たるでしょう。
 
-### リクエストのexpectとanswer
+### リクエストの待ち受けと応答
 
 モックをモジュール経由でインストールすると、モックレスポンスを提供するGETリクエストを期待したテストを作成できます。次の例では、テストに `HttpClient` と `HttpTestingController` というクラスを注入しています。
 
 ```javascript
 it('expects a GET request', inject([HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
-  // HTTP GETリクエストを作成し、{name: 'Test Data'}という形式のオブジェクトが返ることを期待する
+  // HTTP GETリクエストを作成し、{name: 'Test Data'}という形式のオブジェクトが返ることを期待します。
   http
     .get('/data')
     .subscribe(data => expect(data['name']).toEqual('Test Data'));
 
-  // この時点で、リクエストは保留中であり、レスポンスは送信されていない
-  // 次のステップは、リクエストが発生したと予想することである
+  // この時点で、リクエストは保留中であり、レスポンスは送信されていません。
+  // 次のステップは、リクエストが発生したと予想することです。
   const req = httpMock.expectOne('/data');
 
-  // そのURLのリクエストがなかった場合、または複数のリクエストが一致した場合、expectOne()はスローする
-  // ただし、このテストではこのURLに対して1回のリクエストしか行われないため、モックリクエストと一致して返される
-  // モックリクエストは、レスポンスを送信するか、リクエストに対してアサーションを行うために使用できる
-  // 今回は、テストでリクエストがGETであることをアサートする
+  // そのURLのリクエストがなかった場合、または複数のリクエストが一致した場合、expectOne()は例外を投げます。
+  // ただし、このテストではこのURLに対して1回のリクエストしか行われないため、モックリクエストと一致して返されます。
+  // モックリクエストは、レスポンスを送信するか、リクエストに対してアサーションを行うために使用できます。
+  // 今回は、テストでリクエストがGETであることをアサートします。
   expect(req.request.method).toEqual('GET');
 
-  // 次に、レスポンスを送信してリクエストを実行する
+  // 次に、レスポンスを送信してリクエストを実行します。
   req.flush({name: 'Test Data'});
 
-  // 最後に、未処理のリクエストがないことを確認する
+  // 最後に、未処理のリクエストがないことを確認します。
   httpMock.verify();
 }));
 ```
@@ -610,7 +610,7 @@ afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
 }));
 ```
 
-#### リクエストのカスタムエクスペクト
+#### 独自のリクエスト待ち受け
 
 URLによる照合では不十分な場合は、独自の照合機能を実装することができます。たとえば、Authorizationヘッダーを持つ発信リクエストを検索できます。
 
@@ -618,14 +618,14 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 const req = httpMock.expectOne((req) => req.headers.has('Authorization'));
 ```
 
-上記のテストではURLによる `expectOne()` と同様に、0または2以上のリクエストがこの期待値に一致すると、スローされます。
+上記のテストではURLによる `expectOne()` と同様に、0または2以上のリクエストがこの期待値に一致すると、例外を投げます。
 
 #### 1つ以上のリクエストの処理
 
 テストで重複したリクエストに応答する必要がある場合は、 `expect()` の代わりに `match()` APIを使用します。これは同じ引数を取りますが、一致するリクエストの配列を返します。 ここで返却されたリクエストは、今後の照合から削除され、きちんとテストで検証してフラッシュしなければいけません。
 
 ```javascript
-// 5回のpingが行われることを期待して、フラッシュする
+// 5回のpingが行われることを期待して、フラッシュします。
 const reqs = httpMock.match('/ping');
 expect(reqs.length).toBe(5);
 reqs.forEach(req => req.flush());

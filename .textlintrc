@@ -1,7 +1,9 @@
 {
   "filters": {},
   "rules": {
-    "preset-jtf-style": true,
+    "preset-jtf-style": {
+      "4.3.5.二重引用符": false
+    },
     "prh": {
       "rulePaths" :[
         "prh.yml"

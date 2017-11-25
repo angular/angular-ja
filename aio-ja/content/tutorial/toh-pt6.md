@@ -191,7 +191,7 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
 #### _handleError_
 
-次の`errorHandler()`は数々の`HeroService`メソッドで共有されるので、様々な要件を満たすために一般化されています。
+次の`errorHandler()`は数々の`HeroService`メソッドで共有されるので、さまざまな要件を満たすために一般化されています。
 
 エラーを直接ハンドリングするかわりに、処理に失敗した処理の名前と、安全な返却値の両方で構成された
 _error handler_関数を`catchError`に返します。
@@ -201,7 +201,7 @@ _error handler_関数を`catchError`に返します。
   region="handleError">
 </code-example>
 
-エラーをコンソールに出力したあと、ハンドラーはユーザフレンドリーなメッセージを生成し、アプリを
+エラーをコンソールに出力したあと、ハンドラーはユーザーフレンドリーなメッセージを生成し、アプリを
 動作し続けるための安全な値を返却します。
 
 サービスの各メソッドはそれぞれ違う種類の`Observable`な結果を返すため、
@@ -319,7 +319,7 @@ URLは変わりません。
 
 ## ヒーローを削除する
 
-リスト内の各ヒーローは削除ボタンを持つべきです。
+リスト内の各ヒーローは削除ボタンをもつべきです。
 
 次のボタンを`HeroesComponent`のテンプレートに追加します。
 繰り返されている`<li>`エレメント内のヒーロー名の後ろです。
@@ -361,7 +361,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 <code-example path="toh-pt6/src/app/hero.service.ts" region="deleteHero" title="src/app/hero.service.ts (削除)"></code-example>
 
-下記に注目しましょう
+次に注目しましょう
 
 * `HttpClient.delete`を実行。
 * URLはヒーローリソースのURLと削除するヒーローの`id`
@@ -501,7 +501,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 * `distinctUntilChanged`はフィルター用の文字列が変わったときだけリクエストを送信することを保証します。
 
-* `switchMap()`は`debounce`と`distinctUntilChanged`を通り抜けた各検索語について検索サービスを呼び出します。
+* `switchMap()`は`debounce`と`distinctUntilChanged`をとおり抜けた各検索語について検索サービスを呼び出します。
 これはそれまでの検索のobservableをキャンセルし、最新の検索サービスのobservableだけを返します。
 
 <div class="l-sub-section">
@@ -510,7 +510,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
   すべての適格なキーイベントが`HttpClient.get`メソッドを呼び出すことができます。
   各リクエスト間の300msの休止により、複数のHTTPリクエストを送信できますが、それらは順序どおりに戻ってこないかもしれません。
 
-  `swtichMap()`は元のリクエスト順を保持しますが、最も新しいHTTPメソッドコールからのobservableのみを返します。
+  `swtichMap()`は元のリクエスト順を保持しますが、もっとも新しいHTTPメソッドコールからのobservableのみを返します。
   前の呼び出しはキャンセルされ、破棄されます。
 
   前の`searchHeroes`の_Observable_を_キャンセルする_というのは実際には保留中のHTTPリクエストを中止しているということに注意してください。

@@ -1,6 +1,9 @@
 version: 1
 imports:
-  - test/techbooster.yml
+  - path: test/techbooster.yml
+    ignoreRules:
+      # 日本語以外のファイルでは半角カッコを使うため
+      - expected: （$1）
 rules:
 
 # 言い換え

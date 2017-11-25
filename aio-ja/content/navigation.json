@@ -268,7 +268,7 @@
         {
           "url": "guide/http",
           "title": "HttpClient",
-          "tooltip": "Use HTTP to talk to a remote server."
+          "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう"
         },
         {
           "url": "guide/router",

@@ -1,0 +1,92 @@
+version: 1
+
+rules:
+
+# 言い換え
+
+  - expected: もって
+    patterns: 
+    - 持って
+    - 以って
+    - 有して
+
+  - expected: もつ
+    patterns: 
+    - 有する
+    - 持つ
+
+  - expected: もち
+    patterns: 
+    - 有し
+    - 持ち
+  
+  - expected: あります
+    pattern: 存在します
+
+  - expected: 使って
+    pattern: 用いて
+
+  - expected: 依存性の注入
+    pattern: 依存性注入
+
+  - expected: 単方向
+    pattarn: 一方向
+
+  - expected: 双方向
+    pattarn: 二方向   
+    
+# 漢字 <-> ひらがな
+
+  - expected: ひとつ
+    patterns:
+    - 1つ
+    - 一つ
+    prh: 通常は、ひとつ。数詞は１つ、漢数字は数えられる固有名詞を指す場合に利用します
+
+  - expected: たとえば
+    pattern: 例えば
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+  - expected: すべて
+    pattern: 全て
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+  - expected: もっとも
+    pattern:  最も
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+  - expected: さらに
+    pattern:  更に
+    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
+
+# カタカナ語
+
+  - expected: プロバイダー
+    pattern:  /プロバイダ(?!ー)/
+
+  - expected: サーバー
+    pattern: /サーバ(?!ー)/
+  
+  - expected: ユーザー
+    pattern: /ユーザ(?!ー)/
+
+  - expected: クオート
+    pattern: クォート
+
+  - expected: Promise
+    pattern: プロミス
+
+  - expected: Observable
+    pattern: オブザーバブル
+
+  - expected: input要素
+    pattern: インプット要素
+
+# 記号
+
+  - expected: 、
+    pattern:  ，
+    prh: カンマとコンマではなく句点読点を使います。
+  - expected: 。
+    pattern:  ．
+    prh: カンマとコンマではなく句点読点を使います。

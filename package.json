@@ -16,6 +16,7 @@
     "firebase-tools": "^3.14.0",
     "github-contributors-list": "^1.2.2",
     "textlint": "^9.1.1",
-    "textlint-rule-preset-jtf-style": "^2.3.0"
+    "textlint-rule-preset-jtf-style": "^2.3.0",
+    "textlint-rule-prh": "^5.0.1"
   }
 }

@@ -3588,7 +3588,7 @@ textlint-rule-preset-jtf-style@^2.3.0:
     textlint-rule-helper "^2.0.0"
     textlint-rule-prh "^5.0.0"
 
-textlint-rule-prh@^5.0.0:
+textlint-rule-prh@^5.0.0, textlint-rule-prh@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/textlint-rule-prh/-/textlint-rule-prh-5.0.1.tgz#bab66be6b03258880f3fbf466b689ed2ff379b0c"
   dependencies:

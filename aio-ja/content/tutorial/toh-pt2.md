@@ -128,7 +128,7 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 コンポーネントである `hero` プロパティを `selectedHero` にリネームしますが、まだ割り当てません。
 これはアプリケーション起動時の _選択されたヒーロー_ ではありません。
 
-以下のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
+次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" title="src/app/heroes/heroes.component.ts (onSelect)" linenums="false">
 </code-example>

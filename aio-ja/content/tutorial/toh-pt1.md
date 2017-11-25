@@ -186,7 +186,7 @@ Angularでは、アプリケーションの部品がどのように合わさる�
 一部のメタデータは、コンポーネントクラスに追加した`@Component`デコレータ内にあります。
 その他の重要なメタデータは[`@NgModule`](guide/ngmodule)デコレータ内にあります。
 
-最も重要な`@NgModule`デコレータは、トップレベルの **AppModule** クラスに注釈を付けます。
+もっとも重要な`@NgModule`デコレータは、トップレベルの **AppModule** クラスに注釈を付けます。
 
 Angular CLI は、プロジェクトを作成するときに`src/app/app.module.ts`に`AppModule`クラスを作成しました。
 ここで`FormsModule`をオプトインします。

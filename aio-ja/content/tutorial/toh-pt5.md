@@ -7,7 +7,7 @@ Tour of Heroes アプリケーションには新しい要求があります：
 * ユーザーが各ビューでヒーロー名をクリックしたとき、選択されたヒーローの詳細ビューを表示する。
 * ユーザーがEメール上で*ディープリンク*をクリックしたとき、特定のヒーローの詳細ビューを開く。
 
-これらの変更が完了したら、ユーザは図のようにアプリケーションを行き来できるようになるでしょう：
+これらの変更が完了したら、ユーザーは図のようにアプリケーションを行き来できるようになるでしょう：
 
 <figure>
 
@@ -236,7 +236,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 これは既存のルートと一致しないため、ルータはどこにも移動しません。
 `<router-outlet>`の下のスペースが空白になってしまうのです。
 
-アプリケーションをダッシュボードに自動的に遷移するには、以下のルートを
+アプリケーションをダッシュボードに自動的に遷移するには、次のルートを
 `AppRoutingModule.Routes`配列に追加します。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" region="redirect-route">
@@ -335,7 +335,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 ### _HeroesComponent_ヒーローのリンク
 
 `HeroesComponent`のヒーローのアイテムは、
-コンポーネントの onSelect() メソッドにバインドされたクリック・イベントを持つ`<li>`要素です。
+コンポーネントの onSelect() メソッドにバインドされたクリック・イベントをもつ`<li>`要素です。
 
 <code-example 
   path="toh-pt4/src/app/heroes/heroes.component.html" 
@@ -343,7 +343,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
   title="src/app/heroes/heroes.component.html (list with onSelect)">
 </code-example>
 
-この`<li>`を`*ngFor`だけを持つように戻し、
+この`<li>`を`*ngFor`だけをもつように戻し、
 アンカー要素 (`<a>`) でバッジと名前を囲み、
 ダッシュボードのテンプレートと同じようにアンカーに`routerLink`要素を追加します。
 
@@ -362,7 +362,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `HeroesComponent`クラスはまだ動作しますが、
 `onSelect()`メソッドと`selectedHero`プロパティはもはや使われません。
 
-きちんと整理するといいですし、後で自分自身に感謝することでしょう。
+きちんと整理するといいですし、あとで自分自身に感謝することでしょう。
 これが不要なコードを整理した後のクラスです。
 
 <code-example 
@@ -415,7 +415,7 @@ _"id"_パラメータは、表示するヒーローの`id`です。
 ### _id_ルートパラメータを抽出する
 
 `ngOnInit()` [ライフサイクルフック](guide/lifecycle-hooks#oninit)で、
-`getHero()`を呼び出し、以下のように定義します。
+`getHero()`を呼び出し、次のように定義します。
 
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="ngOnInit">
@@ -590,7 +590,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 ## まとめ
 
 * さまざまなコンポーネント間を行き来するためにAngularルーターを追加しました。
-* `AppComponent`を、リンクと`<router-outlet>`を持つナビゲーション・シェルに変更しました。
+* `AppComponent`を、リンクと`<router-outlet>`をもつナビゲーション・シェルに変更しました。
 * `AppRoutingModule`でルータを設定しました。
 * シンプルなルート、リダイレクトするルート、およびパラメータ付きルートを定義しました。
 * アンカー要素で`routerLink`ディレクティブを使用しました。

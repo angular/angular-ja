@@ -1,0 +1,41 @@
+version: 1
+imports:
+  - path: test/techbooster.yml
+    ignoreRules:
+      # 日本語以外のファイルでは半角カッコを使うため
+      - expected: （$1）
+rules:
+
+# 言い換え
+
+  - expected: 依存性の注入
+    pattern: 依存性注入
+
+  - expected: 単方向
+    pattarn: 一方向
+
+  - expected: 双方向
+    pattarn: 二方向
+
+# カタカナ語
+
+  - expected: プロバイダー
+    pattern:  /プロバイダ(?!ー)/
+
+  - expected: サーバー
+    pattern: /サーバ(?!ー)/
+  
+  - expected: ユーザー
+    pattern: /ユーザ(?!ー)/
+
+  - expected: クオート
+    pattern: クォート
+
+  - expected: Promise
+    pattern: プロミス
+
+  - expected: Observable
+    pattern: オブザーバブル
+
+  - expected: input要素
+    pattern: インプット要素

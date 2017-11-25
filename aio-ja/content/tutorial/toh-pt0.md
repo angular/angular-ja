@@ -16,7 +16,7 @@
   ng new angular-tour-of-heroes
 </code-example>
 
-Angular CLIが、デフォルトのアプリケーションとサポートファイルを持つ新しいプロジェクトを作成しました。
+Angular CLIが、デフォルトのアプリケーションとサポートファイルをもつ新しいプロジェクトを作成しました。
 
 ## アプリケーションをサーブする
 
@@ -50,7 +50,7 @@ _コンポーネント_ はAngularアプリケーションの基礎的な構成�
 
 好きなテキストエディタまたはIDEでプロジェクトを開き、`src/app`に移動してください。
 
-以下の3つのファイルに分割された、`AppComponent`シェルの実装が見つかります。
+次の3つのファイルに分割された、`AppComponent`シェルの実装が見つかります。
 
 1. `app.component.ts`&mdash; TypeScriptで書かれたコンポーネントクラスのコードです。
 1. `app.component.html`&mdash; HTMLで書かれたコンポーネントのテンプレートです。
@@ -64,7 +64,7 @@ _コンポーネント_ はAngularアプリケーションの基礎的な構成�
 
 コンポーネントのテンプレートファイル(`app.component.html`)を開き、
 Angular CLIにより生成されたデフォルトのテンプレートを削除してください。
-代わりに以下のHTMLを配置してください。
+代わりに次のHTMLを配置してください。
 
 <code-example path="toh-pt0/src/app/app.component.html"
   title="app.component.html (template)" linenums="false">

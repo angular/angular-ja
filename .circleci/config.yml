@@ -30,8 +30,11 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      # Build
+      # Install
       - run: yarn install
+      # Test
+      - run: yarn test
+      # Build
       - run: ./build.sh
 
       - save_cache:

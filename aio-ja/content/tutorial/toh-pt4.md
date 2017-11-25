@@ -44,14 +44,14 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 
 <div class="l-sub-section">
 
-Angular の [スタイルガイド](guide/styleguide#style-07-04) ではそれを強くおすすめしています。
+Angular の [スタイルガイド](guide/styleguide#style-07-04) ではそれを強くお勧めしています。
 また、リンターはこのルールを基準として指摘を行います。
 
 </div>
 
 ### ヒーローデータの取得
 
-`HeroService` は様々な場所からヒーローデータを取得する可能性があります。&mdash; 外部Webサービス、ローカルストレージ、またはモックデータかもしれません。
+`HeroService` はさまざまな場所からヒーローデータを取得する可能性があります。&mdash; 外部Webサービス、ローカルストレージ、またはモックデータかもしれません。
 
 コンポーネントからデータ取得ロジックを切り離すということは、そういったサービス側の事情にとらわれず、いつでも実装方針の変更ができることを意味しています。
 コンポーネント側は、サービスがどのように動いていようと関係ありません。
@@ -319,7 +319,7 @@ Angular は `HeroService` を生成する際、そのプロパティへシング
 
 ### `HeroService` からのメッセージを表示する
 
-`MessagesComponent` は `HeroService` がヒーローを取得した際に送信するメッセージを含め、全てのメッセージを表示しなければなりません。
+`MessagesComponent` は `HeroService` がヒーローを取得した際に送信するメッセージを含め、すべてのメッセージを表示しなければなりません。
 
 `MessagesComponent` を開き、`MessageService` をインポートしてください。
 
@@ -361,7 +361,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 * Angular の [イベントバインディング](guide/template-syntax#event-binding) は、ボタンのクリックイベントと `MessageService.clear()` を紐付けます
 
-["最終的なコードレビュー"](#final-code-review) タブ内に記載されている `messages.component.css` をコンポーネントのスタイルに追加すると、このメッセージUIの外観はより良いものになるでしょう。
+["最終的なコードレビュー"](#final-code-review) タブ内に記載されている `messages.component.css` をコンポーネントのスタイルに追加すると、このメッセージUIの外観はよりよいものになるでしょう。
 
 ブラウザの更新後、ページにはヒーローの一覧が表示されます。
 ページを下へスクロールすると、メッセージエリア内に `HeroService` からのメッセージを確認できます。
@@ -372,7 +372,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 ## 最終的なコードレビュー
 
-このページで解説したコードを以下に記載します。
+このページで解説したコードを次に記載します。
 また、アプリケーションの見た目はリンク先のようになっているはずです。 <live-example></live-example>.
 
 <code-tabs>

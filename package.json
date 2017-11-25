@@ -9,10 +9,13 @@
   "scripts": {
     "deploy": "firebase deploy --token \"$FIREBASE_TOKEN\"",
     "contributors": "githubcontrib --owner angular --repo angular-ja --cols 6 --format md --showlogin true --sortOrder desc | pbcopy",
-    "update-origin": "./update-origin.sh"
+    "update-origin": "./update-origin.sh",
+    "textlint": "textlint aio-ja/*"
   },
   "devDependencies": {
     "firebase-tools": "^3.14.0",
-    "github-contributors-list": "^1.2.2"
+    "github-contributors-list": "^1.2.2",
+    "textlint": "^9.1.1",
+    "textlint-rule-preset-jtf-style": "^2.3.0"
   }
 }

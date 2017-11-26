@@ -4,7 +4,7 @@
 
 このリポジトリは[Angular](https://github.com/angular/angular)の公式サイト [angular.io](https://angular.io) を日本語に翻訳するためのものです。
 
-現在は https://angular-ja.firebaseapp.com/ でホストされたサイトを確認できます。
+現在は https://angular.jp でホストされたサイトを確認できます。
 
 ## コントリビューター
 

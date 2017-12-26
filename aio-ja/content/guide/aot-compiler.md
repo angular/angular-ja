@@ -2,7 +2,7 @@
 
 The Angular Ahead-of-Time (AOT) compiler converts your Angular HTML and TypeScript code into efficient JavaScript code during the build phase _before_ the browser downloads and runs that code.
 
-This guide explains how to to build with the AOT compiler and how to write Angular metadata that AOT can compile.
+This guide explains how to build with the AOT compiler and how to write Angular metadata that AOT can compile.
 
 <div class="l-sub-section">
 
@@ -127,7 +127,7 @@ You can think of `.metadata.json` as a diagram of the overall structure of a dec
 
 <div class="l-sub-section">
 
-Angular's [schema.ts](https://github.com/angular/angular/blob/master/packages/tsc-wrapped/src/schema.ts)
+Angular's [schema.ts](https://github.com/angular/angular/blob/master/packages/compiler-cli/src/metadata/schema.ts)
 describes the JSON format as a collection of TypeScript interfaces.
 
 </div>
@@ -409,7 +409,7 @@ function; it can only contain a single `return` statement.
 
 The Angular [`RouterModule`](api/router/RouterModule) exports two macro static methods, `forRoot` and `forChild`, to help declare root and child routes.
 Review the [source code](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")
-for these methods to see how macros can simplify configuration of complex Angular modules.
+for these methods to see how macros can simplify configuration of complex [NgModules](guide/ngmodule).
 
 ### Metadata rewriting
 

@@ -28,7 +28,7 @@ Angular CLI を使用して `HeroService` を作成しましょう。
   ng generate service hero
 </code-example>
 
-このコマンドは `HeroService` のスケルトンファイルを `src/app.hero.service.ts` に生成します。`HeroService` クラスは次のようになっているはずです。
+このコマンドは `HeroService` のスケルトンファイルを `src/app/hero.service.ts` に生成します。`HeroService` クラスは次のようになっているはずです。
 
 <code-example path="toh-pt4/src/app/hero.service.1.ts" region="new"
  title="src/app/hero.service.ts (new service)" linenums="false">
@@ -73,7 +73,7 @@ Angular の [スタイルガイド](guide/styleguide#style-07-04) ではそれ�
 
 Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）よりも前に、 _依存性の注入システム_ に `HeroService` を _提供_ する必要があります。
 
-`HeroService` を _提供_ する方法はいくつか存在し、`HeroesComponent`、`AppComponent` または `AppModule` で行うことができます。
+`HeroService` を提供する方法はいくつか存在し、`HeroesComponent`、`AppComponent` または `AppModule` で行うことができます。
 また、それぞれの方法にはメリット・デメリットが存在します。
 
 このチュートリアルでは、 `AppModule` 内で提供を行います。

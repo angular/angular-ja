@@ -10,7 +10,7 @@
 `HeroesComponent` はヒーローのリストのみを表示します。
 `HeroDetailsComponent` は選択されたヒーローの詳細を表示します。
 
-## _HeroDetailComponent_ を作成する
+## `HeroDetailComponent` を作成する
 
 Angular CLIを使用して､ `hero-detail` という名前の新しいコンポーネントを生成します。
 
@@ -34,7 +34,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 
 </code-example>
 
-### *@Input() hero* プロパティを追加する
+### `@Input()` heroプロパティを追加する
 
 `HeroDetailComponent` テンプレートは、 `Hero` 型であるコンポーネントの `hero` プロパティにバインドされます。
 
@@ -64,7 +64,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 これ以上のプロパティも、表示のためのロジックも必要ありません。
 このコンポーネントは `hero` プロパティを通してheroオブジェクトを受け取り、それを表示するだけです。
 
-## _HeroDetailComponent_ を表示する
+## `HeroDetailComponent` を表示する
 
 `HeroesComponent` は、まだ master/detail ビューのままです。
 
@@ -78,7 +78,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 {@a heroes-component-template}
 
-### _HeroesComponent_ テンプレートを更新する
+### `HeroesComponent` テンプレートを更新する
 
 `HeroDetailComponent` のセレクタは `'app-hero-detail'` です。
 
@@ -86,7 +86,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 次のように `HeroesComponent.selectedHero` を、この要素の `hero` プロパティにバインドさせます。
 
-<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding" title="hero-detail.component.html (HeroDetail binding)">
+<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding" title="heroes.component.html (HeroDetail binding)">
 
 </code-example>
 
@@ -135,7 +135,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
   <code-pane title="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html">
   </code-pane>
 
-  <code-pane title="src/app/heroes/heroes-component.html" path="toh-pt3/src/app/heroes/heroes.component.html">
+  <code-pane title="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html">
   </code-pane>
 
 </code-tabs>

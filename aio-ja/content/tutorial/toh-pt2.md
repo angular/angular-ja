@@ -15,7 +15,7 @@
 ファイルは次のようになるでしょう。
 
 <code-example path="toh-pt2/src/app/mock-heroes.ts" linenums="false"
-title="src/app/heroes/mock-heroes.ts">
+title="src/app/mock-heroes.ts">
 </code-example>
 
 ## ヒーローを表示する

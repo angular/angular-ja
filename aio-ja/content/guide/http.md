@@ -304,7 +304,7 @@ export class AppModule {}
 
 <div class="alert is-important">
 
-*`multi: true` オプションに注意しましょう。* これは必須であり、Angleに `HTTP_INTERCEPTORS` は単一の値ではなく配列であることを伝えます。
+*`multi: true` オプションに注意しましょう。* これは必須であり、Angularに `HTTP_INTERCEPTORS` は単一の値ではなく配列であることを伝えます。
 
 </div>
 

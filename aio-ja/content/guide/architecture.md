@@ -1,15 +1,15 @@
 # アーキテクチャー概要
 
-Angular は、HTMLとJavaScriptまたはTypescriptのようにJavascriptにコンパイルできるような言語で書かれるような
+Angular は、HTMLとJavaScriptまたはTypeScriptのようにJavaScriptにコンパイルできるような言語で書かれる
 クライアントアプリケーションを開発するためのフレームワークです。
 
-このフレームワークはいくつかのライブラリからなり、いくつかはコアなもので、いくつかは任意のものです。
+このフレームワークはいくつかのコアライブラリとオプショナルなライブラリからなります。
 
 Angularアプリケーションを書くために、Angular化されたマークアップをもつHTML *テンプレート* を構成したり、
 それらのテンプレートを管理するための *コンポーネント* クラスを書いたり、
 アプリケーションロジックを *サービス* に追加したり、コンポーネントとサービスを *モジュール* に詰め込んだりします。
 
-そして _ルートのモジュール_ を *ブートストラップ* することでアプリを起動します。
+そして _ルートモジュール_ を *ブートストラップ* することでアプリを起動します。
 Angularはあなたのアプリケーションのコンテンツをブラウザに表示することと、
 提供した手順にしたがってユーザーの操作に応答することを引き受けます。
 
@@ -32,17 +32,17 @@ Angularはあなたのアプリケーションのコンテンツをブラウザ�
 <img src="generated/images/guide/architecture/module.png" alt="Component" class="left">
 
 
-Angularのアプリはモジュール式で、Angularは _NgModule_ と呼ばれる独自のモジュール方式を持っています。
+Angularのアプリはモジュール化されており、Angularは _NgModule_ と呼ばれる独自のモジュール方式を持っています。
 
 NgModuleはすごいものです。
 このページではモジュールを紹介します。[NgModules](guide/ngmodule) のページではさらに詳細に取り上げます。
 
 <br class="clear">
 
-すべてのAngularアプリは少なくとも1つNgModuleクラス、[_ルートモジュール_](guide/bootstrapping "Bootstrapping")を持ちます。
-便宜上`AppModule`と名付けます。
+すべてのAngularアプリは少なくともひとつのNgModuleクラス、[_ルートモジュール_](guide/bootstrapping "Bootstrapping")を持ちます。
+これは慣例的に`AppModule`と呼ばれます。
 
-小さなアプリケーションでは、_ルートモジュール_がただ1つのモジュールかもしれませんが、ほとんどのアプリはたくさんの
+小さなアプリケーションでは、_ルートモジュール_がただひとつのモジュールかもしれませんが、ほとんどのアプリはたくさんの
 _機能モジュール_を持ちます。それはアプリケーションドメインに特化したコードの集合、ワークフロー、
 または密接に関連した一連の機能の集合です。
 
@@ -58,7 +58,7 @@ _ルート_ または _機能_ にかかわらず、NgModuleは`@NgModule`デコ
 
 </div>
 
-`NgModule` はモジュールを説明するプロパティをもつ1つのメタデータオブジェクトを引数に取るデコレータ関数です。
+`NgModule` はモジュールを説明するプロパティをもつひとつのメタデータオブジェクトを引数に取るデコレータ関数です。
 もっとも重要なプロパティは
 * `declarations` - そのモジュールに属す _ビュークラス_群です。
 Angularには3種類のビュークラス: [components](guide/architecture#components), [directives](guide/architecture#directives), [pipes](guide/pipes)
@@ -67,13 +67,13 @@ Angularには3種類のビュークラス: [components](guide/architecture#compo
 * `exports` - 他のモジュールのコンポーネント[テンプレート](guide/architecture#templates)から見えて、使えるべき
 declarationsのサブセットです。
 
-* `imports` - _この_モジュールのコンポーネントテンプレートで必要とされている、他のモジュールからexportされているクラス群です。
+* `imports` - _この_モジュールで宣言されたコンポーネントテンプレートで必要なクラスをエクスポートする他のモジュール。
 
-* `providers` - このモジュールが貢献する[サービス](guide/architecture#services)の創作者、サービスのグローバルコレクション;
+* `providers` - このモジュールがグローバルコレクションに提供する[サービス](guide/architecture#services)のクリエイター、サービスのグローバルコレクション;
 これらはこのアプリのすべてのパーツからアクセス可能になります。
 
-* `bootstrap` - メインアプリケーションビュー、_ルートコンポーネント_と呼ばれます、これはアプリの他のすべてのビューをホストしています。
-_ルートモジュール_のみがこの`bootstrap`プロパティをセットしているべきです。
+* `bootstrap` - メインアプリケーションビュー（_ルートコンポーネント_と呼ばれます）これはアプリの他のすべてのビューをホストしています。
+_ルートモジュール_のみがこの`bootstrap`プロパティをセットすべきです。
 
 これがシンプルなルートモジュールです。
 
@@ -102,7 +102,7 @@ JavaScriptもオブジェクトのコレクションを管理するためのモ�
 
 JavaScriptでは各_ファイル_はモジュールで、またそのファイル内で定義されているオブジェクトはそのモジュールに属します。
 モジュールは`export`キーワードをつけることで、いくつかのオブジェクトをpublicとして宣言することができます。
-他のJavaScriptモジュールは*インポートステートメント*を使うことで、他のモジュールからのpublicオブジェクトにアクセスできます。
+他のJavaScriptモジュールは*インポート文*を使うことで、他のモジュールからのpublicオブジェクトにアクセスできます。
 
 <code-example path="architecture/src/app/app.module.ts" region="imports" linenums="false"></code-example>
 
@@ -120,9 +120,9 @@ JavaScriptでは各_ファイル_はモジュールで、またそのファイ�
 
 AngularはJavaScriptのモジュールの集まりとして出荷します。ライブラリモジュールとして考えることができます。
 
-それぞれのAngularライブラリの名前は`@angular`プリフィックスから始まります。
+それぞれのAngularライブラリの名前は`@angular`プレフィックスから始まります。
 
-**npm**パッケージマネージャーでインストールすることができ、Javascriptの`import`宣言によって、それらのパーツをインポートできます。
+**npm**パッケージマネージャーでインストールすることができ、JavaScriptの`import`文によって、それらのパーツをインポートできます。
 
 <br class="clear">
 
@@ -130,7 +130,7 @@ AngularはJavaScriptのモジュールの集まりとして出荷します。ラ
 
 <code-example path="architecture/src/app/app.component.ts" region="import" linenums="false"></code-example>
 
-また、Angular _ライブラリ_からNgModuleをインポートするにはJavaScriptのインポート宣言を使います。
+また、Angular _ライブラリ_からNgModuleをインポートするにはJavaScriptのインポート文を使います。
 
 <code-example path="architecture/src/app/mini-app.ts" region="import-browser-module" linenums="false"></code-example>
 
@@ -220,14 +220,14 @@ Angularはユーザーがアプリケーション内を移動する中でコン�
 <br class="clear">
 
 `HeroListComponent`の[このコードを見返す](guide/architecture#component-code)と、それがただのクラスだということが分かるでしょう。
-フレームワークである証拠もありませんし、"Angular"がその中にあるわけでもありません。
+フレームワークの形跡もありませんし、"Angular"がその中にあるわけでもありません。
 
 実際、`HeroListComponent`は本当に*ただのクラス*です。これは*Angularにそれについて教える*までコンポーネントではありません。
 
 Angularに`HeroListComponent`がコンポーネントであると教えるためには、そのクラスに**metadata**を与えます。
 
 TypeScriptは、**デコレータ**を使うことでメタデータを付与します。
-次は`HeroListComponent`のためのいくつかのメタデータです。
+これは`HeroListComponent`のためのいくつかのメタデータです。
 
 <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (metadata)" region="metadata"></code-example>
 
@@ -235,7 +235,7 @@ TypeScriptは、**デコレータ**を使うことでメタデータを付与し
 
 `@Component`デコレータはAngularがコンポーネントとそのビューを作成して表示するのに必要な情報をもつ設定情報を取ります。
 
-次はもっともよく使う`@Component`設定オプションのいくつかです:
+これはもっともよく使う`@Component`設定オプションの一例です:
 
 * `selector`: Angularが*親*HTML内の`<app-hero-list>`が見つかった場所にこのコンポーネントのインスタンスを作成して挿入するように指示するCSSセレクタです。
 たとえば、もしアプリのHTMLが `<app-hero-list></app-hero-list>`を含んでいたら、Angularは`HeroListComponent`のインスタンスをそれらのタグの間に挿入します。
@@ -253,7 +253,7 @@ TypeScriptは、**デコレータ**を使うことでメタデータを付与し
 テンプレート、メタデータ、そしてコンポーネントが一緒にビューを記述します。
 
 他のメタデータデコレータを同じような方法で適用し、Angularの動作をガイドします。
-`@Injectable`, `@Input`, そして `@Output` はより一般的なデコレータのいくつかです。
+`@Injectable`, `@Input`, そして `@Output` はよく使われるデコレータです。
 
 <br class="clear">
 
@@ -289,7 +289,7 @@ Angularはテンプレート内のパーツとコンポーネント内のパー�
 * `(click)` [*イベントバインディング*](guide/user-input#click)はヒーロー名がクリックされたときに、
 このコンポーネントの`selectHero`メソッドを呼び出します。
 
-**双方向データバインディング** は重要な4つ目の形式で、プロパティバインディングとデータバインディングを1つの記述にまとめたもので、
+**双方向データバインディング** は重要な4つ目の形式で、プロパティバインディングとデータバインディングをひとつの記述にまとめたもので、
 `ngModel`ディレクティブを使用します。
 つぎが`HeroDetailComponent`のテンプレートからの例です。
 
@@ -329,11 +329,9 @@ Angularのテンプレートは*動的*です。Angularがそれらをレンダ�
 
 <div class="l-sub-section">
 
-
   **コンポーネントは厳密にはディレクティブ** ですが、
   コンポーネントはとても特徴的で、Angularアプリケーションの中心にあり、このアーキテクチャの概要ではコンポーネントをディレクティブとは切り離します。
  
-
 </div>
 
 2つの種類のディレクティブが存在します: _構造_ディレクティブと_属性_ディレクティブです。
@@ -349,7 +347,7 @@ Angularのテンプレートは*動的*です。Angularがそれらをレンダ�
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
-* [`*ngFor`](guide/displaying-data#ngFor) はAngularに`heroes`リストの各ヒーローにつき1つの`<li>`を置くように指示します。
+* [`*ngFor`](guide/displaying-data#ngFor) はAngularに`heroes`リストの各ヒーローにつきひとつの`<li>`を置くように指示します。
 * [`*ngIf`](guide/displaying-data#ngIf) は選択されたヒーローが存在するときに限り`HeroDetail`コンポーネントを含みます。
 
 **属性**ディレクティブは実際の要素の見た目や挙動を変更します。
@@ -365,7 +363,7 @@ DOM要素とコンポーネントの外見を変更するディレクティブ([
 を持っています。
 
 もちろん、あなたのディレクティブを書くこともできます。
-`HeroListComponent`のようなコンポーネントはカスタムディレクティブの1つの種類です。
+`HeroListComponent`のようなコンポーネントはカスタムディレクティブのひとつの種類です。
 
 <!-- PENDING: link to where to learn more about other kinds! -->
 
@@ -381,7 +379,6 @@ _サービス_はアプリケーションに必要な値、関数、または機
 ほとんど何でもサービスになることができます。
 サービスは通常、狭く、明確な目的を持ったクラスです。
 それは特定の何かをして、それをうまくやるべきです。
-
 <br class="clear">
 
 例では下記を含みます。
@@ -466,7 +463,7 @@ Angularがコンポーネントを作るとき、最初にそのコンポーネ�
 
 プロバイダーはモジュールまたはコンポーネントに登録することができます。
 
-一般には、どこでも同じサービスインスタンスを使えるように[ルートのモジュール](guide/architecture#modules)に追加します。
+一般には、どこでも同じサービスインスタンスを使えるように[ルートモジュール](guide/architecture#modules)に追加します。
 
 <code-example path="architecture/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts (module providers)" region="providers"></code-example>
 

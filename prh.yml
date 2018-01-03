@@ -17,6 +17,11 @@ rules:
   - expected: 双方向
     pattarn: 二方向
 
+  - expected: Service Worker
+    pattern:
+      - ServiceWorker
+      - サービスワーカー
+
 # カタカナ語
 
   - expected: プロバイダー

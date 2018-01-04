@@ -126,10 +126,12 @@ AngularにおけるService Workerを追加すると、アプリケーション�
 networkタブを見ると、Service Workerがアクティブであることを確認できます。
 
 <figure>
+  <!-- textlint-disable prh -->
   <img src="generated/images/guide/service-worker/sw-active.png" alt="Requests are marked as from ServiceWorker">
+  <!-- textlint-enable prh -->
 </figure>
 
-「サイズ」列の下にある要求状態は、(from ServiceWorker)となっていることに注目してください。これは、リソースがネットワークからロードされていないことを意味します。代わりに、Service Workerのキャッシュからロードされています。
+「サイズ」列の下にある要求状態は、<!-- textlint-disable prh -->(from ServiceWorker)<!-- textlint-enable prh -->となっていることに注目してください。これは、リソースがネットワークからロードされていないことを意味します。代わりに、Service Workerのキャッシュからロードされています。
 
 
 ### 何がキャッシュされているのか？

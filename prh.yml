@@ -21,6 +21,8 @@ rules:
     pattern:
       - ServiceWorker
       - サービスワーカー
+    options:
+      wordBoundary: true
 
 # カタカナ語
 

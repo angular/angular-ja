@@ -141,7 +141,7 @@ networkタブを見ると、Service Workerがアクティブであることを�
 * `index.html`
 * `favicon.ico`
 * ビルド成果物（JSおよびCSSバンドル）
-* `assets`の下にあるもの（訳注:assets下にさらに階層を作っている場合は、`ngsw-config.json`の設定を階層に合わせて`/assets/**/**`などのように変えてください。）
+* `assets`の下にあるもの
 
 ### アプリケーションを変更する
 

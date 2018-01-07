@@ -1,16 +1,15 @@
 # Testing
 
-This guide offers tips and techniques for testing Angular applications.
-Though this page includes some general testing principles and techniques,
-the focus is on testing applications written with Angular.
-
+このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
+このページには一般的なテストの原則と技術が含まれていますが、
+Angular で、書かれたアプリケーションのテストに重点を置いています。
 
 {@a top}
 
 ## Live examples
 
-This guide presents tests of a sample application that is much like the [_Tour of Heroes_ tutorial](tutorial).
-The sample application and all tests in this guide are available as live examples for inspection, experiment, and download:
+このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
+サンプルアプリケーションとこのガイドのすべてのテストは、インスペクション、テスト、およびダウンロードの実例として利用できます。
 
 * <live-example plnkr="1st-specs" embedded-style>A spec to verify the test environment</live-example>.
 * <live-example plnkr="banner-inline-specs" embedded-style>The first component spec with inline template</live-example>.

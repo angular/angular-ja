@@ -8,7 +8,7 @@
 <hr />
 
 
-Angular 5.0.0から、どのCLIプロジェクトでもAngular Service Workerのサポートを簡単に有効にすることができます。このドキュメントでは、新規および既存のプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを確認し、読み込みとキャッシングの基本をデモで行います。
+Angular 5.0.0から、どのCLIプロジェクトでもAngular Service Workerのサポートを簡単に有効にすることができます。このドキュメントでは、新規および既存のプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを確認し、読み込みとキャッシングの基本を実演します。
 
 ## 新しいアプリケーションにService Workerを追加する
 
@@ -29,7 +29,7 @@ ng new my-project --service-worker
 1. Service Workerのパッケージを追加します。
 2. CLIでService Workerのビルドサポートを有効にします。
 3. Service Workerをインポートして登録します。
-4. キャッシングビヘイビアなどの設定を指定するService Workerの設定ファイルを作成します。
+4. キャッシュの振る舞いなどの設定を指定するService Workerの設定ファイルを作成します。
 5. プロジェクトをビルドします。
 
 ### ステップ1: Service Workerのパッケージを追加します
@@ -42,7 +42,7 @@ yarn add @angular/service-worker
 
 ### ステップ2: CLIでService Workerのビルドサポートを有効にします
 
-AngularにおけるService Workerを有効にするために、CLIはビルド時にAngular Service Workerマニフェストを生成する必要があります。CLIが既存のプロジェクトでマニフェストを生成するようにするためには、プロジェクトの`.angular-cli.json`ファイルで`serviceWorker`フラグを`true`に設定します。
+Angular Service Workerを有効にするために、CLIはビルド時にAngular Service Workerマニフェストを生成する必要があります。CLIが既存のプロジェクトでマニフェストを生成するようにするためには、プロジェクトの`.angular-cli.json`ファイルで`serviceWorker`フラグを`true`に設定します。
 
 ```sh
 ng set apps.0.serviceWorker=true
@@ -50,7 +50,7 @@ ng set apps.0.serviceWorker=true
 
 ### ステップ3: Service Workerをインポートして登録します
 
-AngularにおけるService Workerをインポートして登録するために
+Angular Service Workerをインポートして登録するために
 
 ルートモジュール`src/app/app.module.ts`のトップで、`ServiceWorkerModule`と`environment`をインポートしてください。
 
@@ -61,13 +61,13 @@ AngularにおけるService Workerをインポートして登録するために
 
 <code-example path="service-worker-getting-started/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts" region="sw-module"> </code-example>
 
-`ngsw-worker.js`ファイルは、CLIがあなたのサーバーに一緒にデプロイするために`dist/`にコピーする、事前構築されたService Workerのスクリプト名称です。
+`ngsw-worker.js`ファイルは、あなたのサーバーに一緒にデプロイするためにCLIが`dist/`にコピーする、事前構築されたService Workerのスクリプトの名前です。
 
 ### ステップ4: 設定ファイル`ngsw-config.json`を作成します
 
 Angular CLIには、`ngsw-config.json`というService Workerの設定ファイルが必要です。設定ファイルは、Service Workerがファイルおよびデータリソースをどのようにキャッシュするかを制御します。
 
-CLIからボイラープレート版を始めることができます。このボイラープレート版では、多くのアプリケーションで適切であろう推奨設定が行われています。
+CLIによるひな形を使って始めることができます。このひな形では、多くのアプリケーションで適切であろう推奨設定が行われています。
 
 代わりに、以下を`src/ngsw-config.json`として保存してください。
 
@@ -81,18 +81,18 @@ CLIからボイラープレート版を始めることができます。この�
 ng build --prod
 ```
 
-CLIプロジェクトはAngularにおけるService Workerを使用するように設定されました。
+CLIプロジェクトはAngular Service Workerを使用するように設定されました。
 
 
 ## Service Workerを動かす: ツアー
 
-このセクションでは、サンプルアプリケーションを使用して、Service Workerが実際に動かします。
+このセクションでは、サンプルアプリケーションを使用して、Service Workerを実際に動かします。
 
 ### `http-server`を供給する
 
-`ng serve`はService Workerでは機能しないので、プロジェクトをローカルでテストするためには、別個のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らすために、専用ポートでテストしてください。
+`ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らすために、専用ポートでテストしてください。
 
-`http-server`で供給するために、Webファイルが入っているディレクトリ(訳注:`ng build --prod`で作成されたフォルダ。通常なら`dist`)に移動し、Webサーバーを起動してください。
+`http-server`で供給するために、Webファイルが入っているディレクトリに移動し、Webサーバーを起動してください。
 
 ```sh
 cd dist
@@ -119,9 +119,9 @@ http-server -p 8080
 
 これで、アプリケーションはネットワークにアクセスできなくなりました。
 
-AngularにおけるService Workerを使用しないアプリケーションの場合、リフレッシュすると「インターネット接続がありません」と記載されたChromeのインターネット切断ページが表示されます。
+Angular Service Workerを使用しないアプリケーションの場合、リフレッシュすると「インターネット接続がありません」と記載されたChromeのインターネット切断ページが表示されます。
 
-AngularにおけるService Workerを追加すると、アプリケーションの動作が変更されます。リフレッシュ時に、ページが正常にロードされます。
+Angular Service Workerを追加すると、アプリケーションの動作が変更されます。リフレッシュ時に、ページが正常にロードされます。
 
 networkタブを見ると、Service Workerがアクティブであることを確認できます。
 
@@ -152,7 +152,7 @@ Service Workerがアプリケーションをキャッシュする方法を見て
 
 2. アプリケーションタブを閉じますが、ウィンドウは閉じません。これにより、開発者ツールも閉じる必要があります。
 
-3. `http-server`を落とします。
+3. `http-server`をシャットダウンします。
 
 4. 次に、アプリケーションを変更して、Service Workerが更新プログラムをインストールするのを確認します。
 
@@ -178,7 +178,7 @@ http-server -p 8080
   <img src="generated/images/guide/service-worker/welcome-msg-en.png" alt="It still says Welcome to Service Workers!">
 </figure>
 
-何が駄目だったのでしょうか？実際には何も悪いことは起こっていません。AngularにおけるService Workerは、利用可能なアップデートがあるにもかかわらず、**インストールされている**アプリケーションのバージョンを提供しています。速度の観点から、Service Workerは、キャッシュされたアプリケーションを提供する前に、更新の確認を待つことはありません。
+何が駄目だったのでしょうか？実際には何も悪いことは起こっていません。Angular Service Workerは、利用可能なアップデートがあるにもかかわらず、**インストールされている**アプリケーションのバージョンを提供しています。速度の観点から、Service Workerは、キャッシュされたアプリケーションを提供する前に、更新の確認を待つことはありません。
 
 `http-server`ログを見ると、`/ngsw.json`を要求しているService Workerを見ることができます。これは、Service Workerが更新をチェックする方法です。
 
@@ -192,7 +192,7 @@ Service Workerは、あなたのアプリケーションの更新版を*バッ�
 
 <hr />
 
-## もっとAngularにおけるService Workerを知りたい
+## もっとAngular Service Workerを知りたい
 
 次の記事がお勧めです。
 * [Service Workerと通信する](guide/service-worker-communications)

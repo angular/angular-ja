@@ -1,54 +1,54 @@
-# Service Worker Communication
+# Service Workerと通信する
 
-Importing `ServiceWorkerModule` into your `AppModule` doesn't just register the service worker, it also provides a few services you can use to interact with the service worker and control the caching of your app.
+`AppModule`に`ServiceWorkerModule`をインポートしたら、Service Workerを登録するだけではなく、Service Workerと対話してアプリケーションのキャッシュを制御するためのサービスも使えるようになります。
 
-#### Prerequisites
+#### 前提条件
 
-A basic understanding of the following:
-* [Getting Started with Service Workers](guide/service-worker-getting-started).
+次の基本的理解があること
+* [Service Workerを始める](guide/service-worker-getting-started)
 
 <hr />
 
 
-## `SwUpdate` service
+## `SwUpdate`サービス
 
-The `SwUpdate` service gives you access to events that indicate when the service worker has discovered an available update for your app or when it has activated such an update&mdash;meaning it is now serving content from that update to your app.
+`SwUpdate`サービスは、Service Workerがあなたのアプリケーションで利用可能なアップデートを発見したとき、またはそのアップデートをアクティブにしたときを示すイベントへのアクセスを提供します。
 
-The `SwUpdate` service supports four separate operations:
-* Getting notified of *available* updates. These are new versions of the app to be loaded if the page is refreshed.
-* Getting notified of update *activation*. This is when the service worker starts serving a new version of the app immediately.
-* Asking the service worker to check the server for new updates.
-* Asking the service worker to activate the latest version of the app for the current tab.
+`SwUpdate`サービスは4つの操作をサポートします。
+* *利用可能*なアップデートの通知を受け取る。これらは、ページが更新されたときに読み込まれる新しいバージョンのアプリケーションです。
+* *アクティブ化*したアップデートの通知を受け取る。これは、Service Workerがすぐに新しいバージョンのアプリケーションのサービスを開始するときです。
+* 新しい更新のためにサーバーをチェックするようにService Workerに依頼する。
+* 現在のタブの最新バージョンのアプリケーションを有効にするようにService Workerに依頼する。
 
-### Available and activated updates
+### 利用可能でアクティブ化したアップデート
 
-The two update events, `available` and `activated`, are `Observable` properties of `SwUpdate`:
+`available`と`activated`の2つのアップデートイベントは、`SwUpdate`の`Observable`プロパティです。
 
 <code-example path="service-worker-getting-started/src/app/log-update.service.ts" linenums="false" title="log-update.service.ts" region="sw-update"> </code-example>
 
 
-You can use these events to notify the user of a pending update or to refresh their pages when the code they are running is out of date.
+これらのイベントを使用して、保留中のアップデートをユーザーに通知したり、実行中のコードが古い場合にページを更新したりすることができます。
 
-### Checking for updates
+### アップデートをチェックする
 
-It's possible to ask the service worker to check if any updates have been deployed to the server. You might choose to do this if you have a site that changes frequently or want updates to happen on a schedule.
+Service Workerに、サーバーにデプロイされたアップデートがあるかどうかを確認させることができます。頻繁に変更されるサイトがある場合やスケジュールに基づいて更新が行われるようにする場合は、これを選択することもできます。
 
-Do this with the `checkForUpdate()` method:
+`checkForUpdate()`メソッドで行います。
 
 <code-example path="service-worker-getting-started/src/app/check-for-update.service.ts" linenums="false" title="check-for-update.service.ts" region="sw-check-update"> </code-example>
 
 
-This method returns a `Promise` which indicates that the update check has completed successfully, though it does not indicate whether an update was discovered as a result of the check. Even if one is found, the service worker must still successfully download the changed files, which can fail. If successful, the `available` event will indicate availability of a new version of the app.
+このメソッドは、更新チェックが正常に完了したことを示すPromiseを返しますが、チェックの結果アップデートが検出されたかどうかは示しません。アップデートが見つかったとしても、Service Workerは変更されたファイルを正常にダウンロードする必要があり、まだ失敗する可能性があるからです。成功した場合、availableイベントが、新しいバージョンのアプリケーションが使用可能になったことを示します。
 
-### Forcing update activation
+### アップデートのアクティブ化を強制する
 
-If the current tab needs to be updated to the latest app version immediately, it can ask to do so with the `activateUpdate()` method:
+現在のタブを最新のアプリケーションバージョンに直ちに更新する必要がある場合は、`activateUpdate()`メソッドを使用して要求することができます。
 
 <code-example path="service-worker-getting-started/src/app/prompt-update.service.ts" linenums="false" title="prompt-update.service.ts" region="sw-activate"> </code-example>
 
-Doing this could break lazy-loading into currently running apps, especially if the lazy-loaded chunks use filenames with hashes, which change every version.
+これを行うと、現在実行中のアプリケーションの遅延ロードが中断される可能性があります。特に遅延ロードされるチャンクが、バージョンごとに変更されるハッシュをファイル名に使用している場合です。
 
-## More on Angular service workers
+## もっとAngular Service Workerを知りたい
 
-You may also be interested in the following:
-* [Service Worker in Production](guide/service-worker-devops).
+次の記事がお勧めです。
+* [プロダクション環境のService Worker](guide/service-worker-devops).

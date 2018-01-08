@@ -277,8 +277,8 @@
         },
         {
           "url": "guide/testing",
-          "title": "Testing",
-          "tooltip": "Techniques and practices for testing an Angular app."
+          "title": "テスト",
+          "tooltip": "Angular アプリケーションテストのテクニックと実戦"
         },
         {
           "url": "guide/cheatsheet",

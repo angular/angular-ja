@@ -51,11 +51,10 @@ Learn more about basic Jasmine testing here
 {@a tools-and-tech}
 
 
-### Tools and technologies
+### ツールと技術
 
-You can write and run Angular tests with a variety of tools and technologies.
-This guide describes specific choices that are known to work well.
-
+様々なツールとテクノロジを使用して、Angular テストを作成して実行できます。  
+このガイドでは、正常動作することが分かっている特定の選択肢について説明します。
 
 <table width="100%">
 

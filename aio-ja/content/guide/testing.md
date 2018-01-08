@@ -11,13 +11,13 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
 サンプルアプリケーションとこのガイドのすべてのテストは、インスペクション、テスト、およびダウンロードの実例として利用できます。
 
-* <live-example plnkr="1st-specs" embedded-style>A spec to verify the test environment</live-example>.
-* <live-example plnkr="banner-inline-specs" embedded-style>The first component spec with inline template</live-example>.
-* <live-example plnkr="banner-specs" embedded-style>A component spec with external template</live-example>.
-* <live-example name="setup" plnkr="quickstart-specs" embedded-style>The QuickStart seed's AppComponent spec</live-example>.
-* <live-example embedded-style>The sample application to be tested</live-example>.
-* <live-example plnkr="app-specs" embedded-style>All specs that test the sample application</live-example>.
-* <live-example plnkr="bag-specs" embedded-style>A grab bag of additional specs</live-example>.
+* <live-example plnkr="1st-specs" embedded-style>テスト環境を検証するための仕様</live-example>.
+* <live-example plnkr="banner-inline-specs" embedded-style>インラインテンプレートを使用した最初のコンポーネント仕様</live-example>.
+* <live-example plnkr="banner-specs" embedded-style>外部テンプレートを使用したコンポーネント仕様</live-example>.
+* <live-example name="setup" plnkr="quickstart-specs" embedded-style>クイックスタートシード Appコンポーネントの仕様</live-example>.
+* <live-example embedded-style>テストされるサンプルアプリケーション</live-example>.
+* <live-example plnkr="app-specs" embedded-style>サンプルアプリケーションをテストするすべての仕様</live-example>.
+* <live-example plnkr="bag-specs" embedded-style>様々な追加仕様</live-example>.
 
 <hr/>
 

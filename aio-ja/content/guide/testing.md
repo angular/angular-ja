@@ -26,15 +26,14 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 {@a testing-intro}
 
 
-## Introduction to Angular Testing
+## Angular テスト入門
 
-This page guides you through writing tests to explore
-and confirm the behavior of the application. Testing
-does the following:
+このページでは、テストを作成して、アプリケーションの動作を確認します。  
+テストでは以下のことが行われます:
 
 1. Guards against changes that break existing code (“regressions”).
 
-1. Clarifies what the code does both when used as intended and when faced with deviant conditions.
+1. 意図したとおりに使用された場合と想定外の条件に直面した場合の両方で、コードが何を行うかを明確にします。
 
 1. Reveals mistakes in design and implementation.
 Tests shine a harsh light on the code from many angles.

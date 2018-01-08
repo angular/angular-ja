@@ -48,7 +48,7 @@ Service Workerに、サーバーにデプロイされたアップデートがあ
 
 これを行うと、現在実行中のアプリケーションの遅延ロードが中断される可能性があります。特に遅延ロードされるチャンクが、バージョンごとに変更されるハッシュをファイル名に使用している場合です。
 
-## もっとAngularにおけるService Workerを知りたい
+## もっとAngular Service Workerを知りたい
 
 次の記事がお勧めです。
 * [プロダクション環境のService Worker](guide/service-worker-devops).

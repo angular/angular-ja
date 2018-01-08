@@ -1,4 +1,4 @@
-# Testing
+# テスト
 
 このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
 このページには一般的なテストの原則と技術が含まれていますが、
@@ -31,14 +31,14 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 このページでは、テストを作成して、アプリケーションの動作を確認します。  
 テストでは以下のことが行われます:
 
-1. Guards against changes that break existing code (“regressions”).
+1. 既存のコードを破る変更に対する予防線 (“回帰”).
 
 1. 意図したとおりに使用された場合と想定外の条件に直面した場合の両方で、コードが何を行うかを明確にします。
 
-1. Reveals mistakes in design and implementation.
-Tests shine a harsh light on the code from many angles.
-When a part of the application seems hard to test, the root cause is often a design flaw,
-something to cure now rather than later when it becomes expensive to fix.
+1. 設計と実装の間違いを明らかにする。  
+テストでは、あらゆる角度からコードに厳しい光が、当たっています。  
+アプリケーションの一部がテストするのが難しいように見える場合、根本的な原因は設計上の欠陥であることが多く、
+修正するのに費用がかかってしまった時よりもむしろ再実装べきものです。
 
 <!-- TODO
 :marked

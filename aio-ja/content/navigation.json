@@ -351,32 +351,32 @@
         },
         {
           "title": "Service Workers",
-          "tooltip": "Angular service workers: Controlling caching of application resources.",
+          "tooltip": "Angular Service Worker: アプリケーションリソースのキャッシュをコントロールします",
           "children": [
             {
               "url": "guide/service-worker-intro",
-              "title": "Introduction",
-              "tooltip": "Angular's implementation of service workers improves user experience with slow or unreliable network connectivity."
+              "title": "イントロダクション",
+              "tooltip": "AngularのService Worker実装は低速なネットワーク接続におけるユーザー体験を改善します。"
             },
             {
               "url": "guide/service-worker-getting-started",
-              "title": "Getting Started",
-              "tooltip": "Enabling the service worker in a CLI project and observing behavior in the browser."
+              "title": "Service Workerを始める",
+              "tooltip": "CLIプロジェクトでService Workerを有効化し、ブラウザでの振る舞いを監視します。"
             },
             {
               "url": "guide/service-worker-communications",
-              "title": "Service Worker Communication",
-              "tooltip": "Services that enable you to interact with an Angular service worker."
+              "title": "Service Workerとの通信",
+              "tooltip": "Angular Service Workerとやりとりするためのサービスについて。"
             },
             {
               "url": "guide/service-worker-devops",
-              "title": "Service Worker in Production",
-              "tooltip": "Running applications with service workers, managing application update, debugging, and killing applications."
+              "title": "プロダクションにおけるService Worker",
+              "tooltip": "Service Workerと共にアプリケーションを実行し、アプリケーションの更新を管理し、デバッグし、そして終了させます。"
             },
             {
               "url": "guide/service-worker-config",
-              "title": "Service Worker Configuration",
-              "tooltip": "Configuring service worker caching behavior."
+              "title": "Service Workerの設定",
+              "tooltip": "Service Workerのキャッシュの振る舞いを設定します。"
             }
           ]
         },

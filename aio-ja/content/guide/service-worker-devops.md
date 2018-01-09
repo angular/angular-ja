@@ -1,166 +1,96 @@
-# Service Worker in Production
+# プロダクションにおけるService Worker
 
-This page is a reference for deploying and supporting production apps that use the Angular service worker. It explains how the Angular service worker fits into the larger production environment, the service worker's behavior under various conditions, and available recourses and fail-safes.
+このページは、Angular Service Workerを使用するプロダクションアプリケーションのデプロイと運用についてのリファレンスです。Angular Service Workerが、より大きなプロダクション環境で、さまざまな条件下でのService Workerの振る舞い、利用可能な手段、およびフェイルセーフにどのように適合するかについて説明します。
 
-#### Prerequisites
+#### 前提条件
 
-A basic understanding of the following:
-* [Service Worker Communication](guide/service-worker-communications).
+次の基本的理解があること
+* [Service Workerと通信する](guide/service-worker-communications)
 
 <hr />
 
-## Service worker and caching of app resources
+## Service Workerとアプリケーションリソースのキャッシュ
 
-Conceptually, you can imagine the Angular service worker as a forward cache or a CDN edge that is installed in the end user's web browser. The service worker's job is to satisfy requests made by the Angular app for resources or data from a local cache, without needing to wait for the network. Like any cache, it has rules for how content is expired and updated.
+概念的には、Angular Service Workerは、エンドユーザーのWebブラウザにインストールされているフォワードキャッシュまたはCDNエッジと考えることができます。Service Workerの仕事は、ネットワークを待つことなく、Angularアプリケーションがリソースまたはデータを要求したら、ローカルキャッシュからその要求を満たすことです。他のキャッシュと同様に、コンテンツの期限切れおよび更新方法に関するルールがあります。
 
 {@a versions}
 
-### App versions
+### アプリケーションのバージョン
 
-In the context of an Angular service worker, a "version" is a collection of resources that represent a specific build of the Angular app. Whenever a new build of the app is deployed, the service worker treats that build as a new version of the app. This is true even if only a single file is updated. At any given time, the service worker may have multiple versions of the app in its cache and it may be serving them simultaneously. For more information, see the [App tabs](guide/service-worker-devops#tabs) section below.
+Angular Service Workerのコンテキストでは、"バージョン"はAngularアプリケーションの特定のビルドを表すリソースの集合です。アプリケーションの新しいビルドがデプロイされるたびに、Service Workerはそのビルドを新しいバージョンのアプリケーションとして扱います。これは、単一のファイルのみが更新された場合でも当てはまります。ある時点で、Service Workerはキャッシュ内に複数のバージョンのアプリケーションをもつことができ、同時にサービスを提供している可能性があります。詳細については、後の[タブ間のアプリケーション](guide/service-worker-devops#tabs)セクションを参照してください。
 
-To preserve app integrity, the Angular service worker groups all files into a version together. The files grouped into a version usually include HTML, JS, and CSS files. Grouping of these files is essential for integrity because HTML, JS, and CSS files frequently refer to each other and depend on specific content. For example, an `index.html` file might have a `<script>` tag that references `bundle.js` and it might attempt to call a function `startApp()` from within that script. Any time this version of `index.html` is served, the corresponding `bundle.js` must be served with it. For example, assume that the `startApp()` function is renamed to `runApp()` in both files. In this scenario, it is not valid to serve the old `index.html`, which calls `startApp()`, along with the new bundle, which defines `runApp()`.
+アプリケーションの整合性を保つために、Angular Service Workerはすべてのファイルを一緒にバージョンとしてグループ化します。バージョンにグループ化されたファイルには、通常、HTML、JS、およびCSSファイルが含まれます。HTML、JS、およびCSSファイルは頻繁に相互参照し、特定のコンテンツに依存するため、これらのファイルのグループ化は整合性にとって不可欠です。たとえば、`index.html`ファイルに`bundle.js`を参照する`<script>`タグがあり、そのスクリプト内から`startApp()`関数を呼び出そうとするかもしれません。このバージョンの`index.html`が提供されるたびに、それに対応する`bundle.js`が提供されなければなりません。たとえば、`startApp()`関数の名前が両方のファイルで`runApp()`に変更されたとします。このシナリオでは`runApp()`を定義する新しいバンドルとともに`startApp()`を呼び出す古い`index.html`を提供することは妥当ではありません。
 
-This file integrity is especially important when lazy loading modules. 
-A JS bundle may reference many lazy chunks, and the filenames of the 
-lazy chunks are unique to the particular build of the app. If a running 
-app at version `X` attempts to load a lazy chunk, but the server has 
-updated to version `X + 1` already, the lazy loading operation will fail.
 
-The version identifier of the app is determined by the contents of all 
-resources, and it changes if any of them change. In practice, the version 
-is determined by the contents of the `ngsw.json` file, which includes 
-hashes for all known content. If any of the cached files change, the file's 
-hash will change in `ngsw.json`, causing the Angular service worker to 
-treat the active set of files as a new version. 
+このファイルの整合性は、遅延読み込みモジュールの場合に特に重要です。JSバンドルは多くの遅延チャンクを参照しますが、遅延チャンクのファイル名は、アプリケーションの特定のビルドに固有のものです。実行中のバージョン`X`のアプリケーションは遅延チャンクを読み込もうとしますが、サーバーではバージョン`X+1`にすでに更新されている場合、遅延読み込み操作は失敗します。
 
-With the versioning behavior of the Angular service worker, an application 
-server can ensure that the Angular app always has a consistent set of files.
+アプリケーションのバージョン識別子は、すべてのリソースのコンテンツによって決まります。リソースの何かが変更されれば変わります。実際には、バージョンは、すべての既知のコンテンツのハッシュを持っている`ngsw.json`ファイルの内容によって決まります。キャッシュされたファイルのいずれかが変更された場合、ファイルのハッシュは`ngsw.json`で変更され、Angular Service Workerは、アクティブなファイルセットを新しいバージョンとして扱います。
 
-#### Update checks
+Angular Service Workerのバージョン管理動作により、アプリケーションサーバーが、Angularアプリケーションに常に一貫性のあるファイルセットを持たせることを保証できます。
 
-Every time the user opens or refreshes the application, the Angular service worker
-checks for updates to the app by looking for updates to the `ngsw.json` manifest. If
-an update is found, it is downloaded and cached automatically, and will be served
-the next time the application is loaded.
+#### アップデートのチェック
 
-### Resource integrity
+ユーザーがアプリケーションを開いたり更新したりするたびに、Angular Service Workerは、`ngsw.json`マニフェストの更新を探して、アプリケーションのアップデートをチェックします。もしアップデートが見つかると、それは自動的にダウンロードされ、キャッシュされ、次回アプリケーションがロードされたときに配信されます。
 
-One of the potential side effects of long caching is inadvertently 
-caching an invalid resource. In a normal HTTP cache, a hard refresh 
-or cache expiration limits the negative effects of caching an invalid 
-file. A service worker ignores such constraints and effectively long 
-caches the entire app. Consequently, it is essential that the service worker 
-get the correct content.
+### リソースの整合性
 
-To ensure resource integrity, the Angular service worker validates 
-the hashes of all resources for which it has a hash. Typically for 
-a CLI app, this is everything in the `dist` directory covered by 
-the user's `src/ngsw-config.json` configuration.
+長いキャッシングの潜在的な副作用の1つは、無効なリソースを誤ってキャッシュすることです。通常のHTTPキャッシュでは、ハードリフレッシュまたはキャッシュの有効期限が、無効なファイルをキャッシュしてしまうという負の影響を制限します。Service Workerはこのような制約を無視し、アプリケーション全体をキャッシュします。したがって、Service Workerが正しいコンテンツを入手することが不可欠です。
 
-If a particular file fails validation, the Angular service worker 
-attempts to re-fetch the content using a "cache-busting" URL 
-parameter to eliminate the effects of browser or intermediate 
-caching. If that content also fails validation, the service worker 
-considers the entire version of the app to be invalid and it stops 
-serving the app. If necessary, the service worker enters a safe mode 
-where requests fall back on the network, opting not to use its cache 
-if the risk of serving invalid, broken, or outdated content is high.
+リソースの整合性を保証するために、Angular Service Workerは、ハッシュを持っているリソースならすべてのハッシュを検証します。通常、CLIアプリケーションの場合、これはユーザーの`src/ngsw-config.json`で設定されている`dist`ディレクトリのすべてが対象になります。
 
-Hash mismatches can occur for a variety of reasons:
+特定のファイルが検証に失敗した場合、Angular Service Workerは、ブラウザまたは中間キャッシングの影響を排除するために、URLパラメーター"cache-busting"を使用してコンテンツを再取得しようとします。そのコンテンツも検証に失敗すると、Service Workerはアプリケーション全体のバージョンが無効であるとみなし、アプリケーションの配信を止めます。必要に応じて、Service Workerは、無効な、破損した、または古くなったコンテンツを配信するリスクが高い場合に、キャッシュを使用しないように、リクエストの処理をネットワークに戻すセーフモードに入ります。
 
-* Caching layers in between the origin server and the end user could serve stale content.
-* A non-atomic deployment could result in the Angular service worker having visibility of partially updated content.
-* Errors during the build process could result in updated resources without `ngsw.json` being updated. The reverse could also happen resulting in an updated `ngsw.json` without updated resources.
+ハッシュのミスマッチは、さまざまな理由で発生する可能性があります。
 
-#### Unhashed content
+* オリジンサーバーとエンドユーザーの間のレイヤーをキャッシュすると、古いコンテンツが配信される可能性があります。
+* 非アトミックなデプロイを行うと、途中段階の更新コンテンツをAngular Service Workerに見せてしまう可能性があります。
+* ビルドプロセス中にエラーが発生すると、`ngsw.json`が更新されずにリソースが更新される可能性があります。その逆もまた起こり、更新されたリソースが無いのに`ngsw.json`だけが更新される状況を引き起こします。
 
-The only resources that have hashes in the `ngsw.json` 
-manifest are resources that were present in the `dist` 
-directory at the time the manifest was built. Other 
-resources, especially those loaded from CDNs, have 
-content that is unknown at build time or are updated 
-more frequently than the app is deployed.
+#### ハッシュされていないコンテンツ
 
-If the Angular service worker does not have a hash to validate 
-a given resource, it still caches its contents but it honors 
-the HTTP caching headers by using a policy of "stale while 
-revalidate." That is, when HTTP caching headers for a cached 
-resource indicate that the resource has expired, the Angular 
-service worker continues to serve the content and it attempts 
-to refresh the resource in the background. This way, broken 
-unhashed resources do not remain in the cache beyond their 
-configured lifetimes.
+`ngsw.json`マニフェストの中でハッシュを持っているリソースは、マニフェストの作成時に`dist`ディレクトリにあったリソースだけになります。その他のリソース、特にCDNから読み込まれたリソースには、ビルド時に不明であるコンテンツや、アプリケーションのデプロイメントより頻繁に更新されるコンテンツがあります。
+
+Angular Service Workerが特定のリソースを検証するためのハッシュを持っていない場合でも、その内容はキャッシュされますが、"stale while revalidate"というポリシーを使用してHTTPキャッシュヘッダーを受け入れます。つまり、キャッシュされたリソースのHTTPキャッシュヘッダーがリソースの有効期限が切れたことを示す場合、Angular Service Workerはコンテンツの配信を続けつつ、バックグラウンドでリソースを更新しようとします。このように、ハッシュされていない壊れたリソースは、設定されたライフタイムを超えてキャッシュに残りません。
 
 {@a tabs}
 
-### App tabs
+### タブ間のアプリケーション
 
-It can be problematic for an app if the version of resources 
-it's receiving changes suddenly or without warning. See the 
-[Versions](guide/service-worker-devops#versions) section above 
-for a description of such issues.
+受信しているリソースのバージョンが突然変更されるか、または警告なしで問題が発生する可能性があります。このような問題の説明については、上記の[アプリケーションのバージョン](guide/service-worker-devops#versions)のセクションを参照してください。
 
-The Angular service worker provides a guarantee: a running app 
-will continue to run the same version of the app. If another 
-instance of the app is opened in a new web browser tab, then 
-the most current version of the app is served. As a result, 
-that new tab can be running a different version of the app 
-than the original tab.
+Angular Service Workerは保証を提供します。実行中のアプリケーションは引き続き同じバージョンのアプリケーションを実行します。アプリケーションの別のインスタンスが新しいウェブブラウザタブで開かれている場合、最新バージョンのアプリケーションが提供されます。その結果、新しいタブでは元のタブとは異なるバージョンのアプリケーションが実行される可能性があります。
 
-It's important to note that this guarantee is **stronger** 
-than that provided by the normal web deployment model. Without 
-a service worker, there is no guarantee that code lazily loaded 
-later in a running app is from the same version as the initial 
-code for the app.
+この保証は、通常のWebデプロイモデルで提供されているものより**強力**であることに注意することが重要です。実行中のアプリケーションより後のタイミングに遅延ロードされるコードは、Service Workerがなければ、そのアプリケーションの初期コードと同じバージョンからのものであるという保証はありません。
 
-There are a few limited reasons why the Angular service worker 
-might change the version of a running app. Some of them are 
-error conditions:
+Angular Service Workerが実行中のアプリケーションのバージョンを変更する理由はいくつかに限られています。それらのいくつかはエラーのケースです。
 
-* The current version becomes invalid due to a failed hash.
-* An unrelated error causes the service worker to enter safe mode; that is, temporary deactivation.
+* ハッシュに失敗すると、現在のバージョンが無効になります。
+* 無関係のエラーが発生すると、Service Workerはセーフモードに入ります。すなわち、一時的な非活性化です。
 
-The Angular service worker is aware of which versions are in 
-use at any given moment and it cleans up versions when 
-no tab is using them.
+Angular Service Workerは、特定の時点でどのバージョンが使用されているかを認識しており、タブで使用されていないバージョンをクリーンアップします。
 
-Other reasons the Angular service worker might change the version 
-of a running app are normal events:
+Angular Service Workerが実行中のアプリケーションのバージョンを変更するその他の理由は、通常のイベントになります。
 
-* The page is reloaded/refreshed.
-* The page requests an update be immediately activated via the `SwUpdate` service.
+* ページが再読み込み、または更新された。
+* `SwUpdate`サービスを介して、ページがアップデートを直ちにアクティブ化するように要求した。
 
-### Service worker updates
+### Service workerの更新
 
-The Angular service worker is a small script that runs in web browsers. 
-From time to time, the service worker will be updated with bug 
-fixes and feature improvements. 
+Angular Service Workerは、Webブラウザで動作する小さなスクリプトです。
+時折、Service Workerはバグフィックスや機能改善で更新されます。
 
-The Angular service worker is downloaded when the app is first opened 
-and when the app is accessed after a period of inactivity. If the 
-service worker has changed, the service worker will be updated in the background.  
+Angular Service Workerは、アプリケーションが最初に開かれたとき、および一定期間使用しないでアクセスしたときにダウンロードされます。Service Workerが変更された場合、Service Workerはバックグラウンドで更新されます。
 
-Most updates to the Angular service worker are transparent to the 
-app&mdash;the old caches are still valid and content is still served 
-normally. However, occasionally a bugfix or feature in the Angular 
-service worker requires the invalidation of old caches. In this case, 
-the app will be refreshed transparently from the network.
+Angular Service Workerの最新情報は、アプリケーションにはわかりません。古いキャッシュは引き続き有効で、コンテンツは引き続き配信されます。ただし、Angular Service Workerのバグフィックスや機能では、古いキャッシュが無効になることがあります。この場合、アプリケーションはネットワークから透過的にリフレッシュされます。
 
 
-## Debugging the Angular service worker
+## Angular Service Workerのデバッグ
 
-Occasionally, it may be necessary to examine the Angular service 
-worker in a running state to investigate issues or to ensure that 
-it is operating as designed. Browsers provide built-in tools for 
-debugging service workers and the Angular service worker itself 
-includes useful debugging features.
+時には、問題を調査したり、設計どおりに動作しているかどうかを確認するために、実行状態のAngular Service Workerを調べることが必要な場合があります。ブラウザにはService Workerをデバッグするための組み込みツールが用意されていますが、Angular Service Worker自体にも便利なデバッグ機能があります。
 
-### Locating and analyzing debugging information
+### デバッグ情報の検索と分析
 
-The Angular service worker exposes debugging information under 
-the `ngsw/` virtual directory. Currently, the single exposed URL 
-is `ngsw/state`. Here is an example of this debug page's contents:
+Angular Service Workerは、デバッグ情報を`ngsw/`仮想ディレクトリの下に公開します。現在、公開されている唯一のURLは`ngsw/state`です。このデバッグページの内容の例を次に示します。
 
 ```
 NGSW Debug Info:
@@ -184,28 +114,21 @@ Debug log:
 
 #### Driver state
 
-The first line indicates the driver state: 
+最初の行はドライバの状態を示します。
 
 ```
 Driver state: NORMAL ((nominal))
 ```
 
-`NORMAL` indicates that the service worker is operating normally and is not in a degraded state. 
+`NORMAL`は、Service Workerが正常に動作しており、デグレード状態にないことを示します。
 
-There are two possible degraded states:
+2つのデグレード状態が考えられます。
 
-* `EXISTING_CLIENTS_ONLY`: the service worker does not have a 
-clean copy of the latest known version of the app. Older cached 
-versions are safe to use, so existing tabs continue to run from 
-cache, but new loads of the app will be served from the network.
+* `EXISTING_CLIENTS_ONLY`: Service Workerは、既知の最新バージョンのクリーンコピーを持っていません。古いバージョンのキャッシュは安全に使用できるので、既存のタブはキャッシュから引き続き実行されますが、新しいアプリケーションのセットがネットワークから配信されるでしょう。
 
-* `SAFE_MODE`: the service worker cannot guarantee the safety of 
-using cached data. Either an unexpected error occurred or all 
-cached versions are invalid. All traffic will be served from the 
-network, running as little service worker code as possible.
+* `SAFE_MODE`: Service Workerはキャッシュされたデータの安全性を保証できません。予期しないエラーが発生したか、またはキャッシュされたすべてのバージョンが無効です。すべてのトラフィックはネットワークから提供され、最小限のService Workerのコードを実行します。
 
-In both cases, the parenthetical annotation provides the 
-error that caused the service worker to enter the degraded state.
+いずれの場合も、括弧内の注釈は、Service Workerがデグレード状態に入る原因となったエラーを提示します。
 
 
 #### Latest manifest hash
@@ -214,7 +137,7 @@ error that caused the service worker to enter the degraded state.
 Latest manifest hash: eea7f5f464f90789b621170af5a569d6be077e5c
 ```
 
-This is the SHA1 hash of the most up-to-date version of the app that the service worker knows about.
+これは、Service Workerが知っている最新のバージョンのアプリケーションのSHA1ハッシュです。
 
 
 #### Last update check
@@ -223,9 +146,9 @@ This is the SHA1 hash of the most up-to-date version of the app that the service
 Last update check: never
 ```
 
-This indicates the last time the service worker checked for a new version, or update, of the app. `never` indicates that the service worker has never checked for an update. 
+これは、Service Workerがアプリケーションの新しいバージョンまたはアップデートを最後に確認した時刻を示します。`never`は、まだService Workerがアップデートをチェックしたことがないことを示します。
 
-In this example debug file, the update check is currently scheduled, as explained the next section.
+このサンプルのデバッグファイルでは、アップデートチェックは現在スケジュールされています。次のセクションで説明します。
 
 #### Version
 
@@ -235,11 +158,7 @@ In this example debug file, the update check is currently scheduled, as explaine
 Clients: 7b79a015-69af-4d3d-9ae6-95ba90c79486, 5bc08295-aaf2-42f3-a4cc-9e4ef9100f65
 ```
 
-In this example, the service worker has one version of the app cached and 
-being used to serve two different tabs. Note that this version hash 
-is the "latest manifest hash" listed above. Both clients are on the 
-latest version. Each client is listed by its ID from the `Clients` 
-API in the browser.
+この例では、Service Workerは、1つのバージョンのアプリケーションをキャッシュし、2つの異なるタブに提供するために使用しています。このバージョンハッシュは、上記の"最新のマニフェストのハッシュ"です。どちらのクライアントも最新バージョンです。各クライアントはブラウザの `Clients`APIからIDでリストされています。
 
 
 #### Idle task queue
@@ -252,17 +171,9 @@ Task queue:
  * init post-load (update, cleanup)
 ```
 
-The Idle Task Queue is the queue of all pending tasks that happen 
-in the background in the service worker. If there are any tasks 
-in the queue, they are listed with a description. In this example, 
-the service worker has one such task scheduled, a post-initialization 
-operation involving an update check and cleanup of stale caches.
+アイドルタスクキューは、Service Workerのバックグラウンドで発生する保留中のすべてのタスクのキューです。キューにタスクがある場合は、説明とともにリストされています。この例では、Service Workerにスケジュールされたタスクが1つあり、アップデートチェックと古いキャッシュのクリーンアップを含む初期化後の操作があります。
 
-The last update tick/run counters give the time since specific 
-events happened related to the idle queue. The "Last update run" 
-counter shows the last time idle tasks were actually executed. 
-"Last update tick" shows the time since the last event after 
-which the queue might be processed.
+Last update tick/run カウンターは、アイドルキューに関連する特定のイベントが発生してからの時間を示します。"Last update run"カウンターには、アイドルタスクが実際に最後に実行された時刻が表示されます。"Last update tick"は、キューが処理された最後のイベント以降の時間を示します。
 
 
 #### Debug log
@@ -271,41 +182,27 @@ which the queue might be processed.
 Debug log:
 ```
 
-Errors that occur within the service worker will be logged here.
+Service Worker内で発生するエラーがここに記録されます。
 
 
-### Developer Tools
+### デベロッパーツール
 
-Browsers such as Chrome provide developer tools for interacting 
-with service workers. Such tools can be powerful when used properly, 
-but there are a few things to keep in mind.
+Chromeなどのブラウザは、Service Workerとやり取りするための開発ツールを提供します。そのようなツールは、適切に使用されると強力になりますが、いくつか注意事項があります。
 
-* When using developer tools, the service worker is kept running 
-in the background and never restarts. This can cause behavior with Dev
-Tools open to differ from behavior a user might experience.
+* デベロッパーツールを使用している場合、Service Workerはバックグラウンドで稼動し続け、再起動しません。DevToolsを開いた状態での動作がユーザーの動作と異なることがあります。
 
-* If you look in the Cache Storage viewer, the cache is frequently 
-out of date. Right click the Cache Storage title and refresh the caches.
+* Cache Storageビューアを見ると、キャッシュは頻繁に古くなっています。Cache Storageタイトルを右クリックし、キャッシュをリフレッシュしてください。
 
-Stopping and starting the service worker in the Service Worker 
-pane triggers a check for updates.
+Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
 
-## Fail-safe
+## フェールセーフ
 
-Like any complex system, bugs or broken configurations can cause 
-the Angular service worker to act in unforeseen ways. While its 
-design attempts to minimize the impact of such problems, the 
-Angular service worker contains a failsafe mechanism in case 
-an administrator ever needs to deactivate the service worker quickly.
+あらゆる複雑なシステムと同様に、バグや壊れた設定によって、Angular Service Workerが予期しない方法でふるまう可能性があります。そのような問題の影響を最小限に抑えるよう設計されていますが、管理者がService Workerを迅速に非アクティブ化する必要がある場合に備えて、AngularService Workerにはフェールセーフメカニズムが組み込まれています。
 
-To deactivate the service worker, remove or rename the 
-`ngsw-config.json` file. When the service worker's request 
-for `ngsw.json` returns a `404`, then the service worker 
-removes all of its caches and de-registers itself, 
-essentially self-destructing.
+Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、自身を登録解除し、自己破棄します。
 
-## More on Angular service workers
+## もっとAngular Service Workerを知りたい
 
-You may also be interested in the following:
-* [Service Worker Configuration](guide/service-worker-config).
+次の記事がお勧めです。
+* [Service Workerの設定](guide/service-worker-config).
 

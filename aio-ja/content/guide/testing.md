@@ -69,11 +69,11 @@ Learn more about basic Jasmine testing here
   <tr>
 
     <th>
-      Technology
+      技術
     </th>
 
     <th>
-      Purpose
+      目的
     </th>
 
   </tr>
@@ -87,9 +87,9 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      The [Jasmine test framework](http://jasmine.github.io/2.4/introduction.html)
-      provides everything needed to write basic tests.
-      It ships with an HTML test runner that executes tests in the browser.
+      [Jasmine テスト フレームワーク](http://jasmine.github.io/2.4/introduction.html)は、
+      基本的なテストを書くために必要なすべてを提供します。  
+      ブラウザにテストを実行するHTMLテストランナーが同梱されています。
     </td>
 
   </tr>
@@ -97,7 +97,7 @@ Learn more about basic Jasmine testing here
   <tr style=top>
 
     <td style="vertical-align: top">
-      Angular testing utilities
+      Angular テスト ユーティリティ
     </td>
 
     <td>

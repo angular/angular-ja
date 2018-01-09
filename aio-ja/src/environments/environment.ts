@@ -13,7 +13,7 @@ import 'core-js/es7/reflect';
 
 
 export const environment = {
-  gaId: 'UA-8594346-26', // Development id
+  gaId: 'UA-59853299-36', // Development id
   production: false,
   mode: 'stable'
 };

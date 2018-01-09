@@ -31,7 +31,7 @@ AngularにおけるService Workerのインストールは、`NgModule`に含め�
 
 ## 前提条件
 
-AngularにおけるService Workerを使用するために、次のAngularとCLIのバージョンが必要です。
+Angular Service Workerを使用するために、次のAngularとCLIのバージョンが必要です。
 
 * Angular 5.0.0 以上
 * Angular CLI 1.6.0 以上
@@ -46,7 +46,7 @@ Service Workerの一般的な情報については、[Service Workerの紹介](h
 
 このドキュメンテーションの続きでは、Service WorkerをAngularに実装することに取り組みます。
 
-## もっとAngularにおけるService Workerを知りたい
+## もっとAngular Service Workerを知りたい
 
 次の記事がお勧めです。
 * [Service Workerを始める](guide/service-worker-getting-started)

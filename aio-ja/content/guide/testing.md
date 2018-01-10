@@ -103,10 +103,8 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      テスト中のAngularアプリケーションコードの場合、  
-      Angular テストユーティリティがテスト環境を作成します。
-      それらを使用してアプリケーションの部分を調整、制御して  
-      Angular 環境と相互利用します。
+      テスト中のAngularアプリケーションコードの場合、Angular テストユーティリティがテスト環境を作成します。  
+      それらを使用してアプリケーションの部分を調整、制御して Angular 環境と相互利用します。
     </td>
 
   </tr>
@@ -120,10 +118,9 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      The [karma test runner](https://karma-runner.github.io/1.0/index.html)
-      is ideal for writing and running unit tests while developing the application.
-      It can be an integral part of the project's development and continuous integration processes.
-      This guide describes how to set up and run tests with karma.
+      [karma テストランナー](https://karma-runner.github.io/1.0/index.html)は、アプリケーションの開発中に単体テストを作成し実行するのに理想的です。
+      プロジェクトの開発および継続的な統合プロセスの不可欠な部分となります。  
+      このガイドでは、 karma でテストを設定して実行する方法について説明します。
     </td>
 
   </tr>
@@ -137,8 +134,8 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      Use protractor to write and run _end-to-end_ (e2e) tests.
-      End-to-end tests explore the application _as users experience it_.
+      protractor は、  _end-to-end_ (e2e) テストを作成、実行する時に使います。
+      End-to-end は、アプリケーションが _ユーザーが操作したような動作を行います。_.
       In e2e testing, one process runs the real application
       and a second process runs protractor tests that simulate user behavior
       and assert that the application respond in the browser as expected.

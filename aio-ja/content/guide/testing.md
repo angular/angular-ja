@@ -103,10 +103,10 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      Angular testing utilities create a test environment
-      for the Angular application code under test.
-      Use them to condition and control parts of the application as they
-      interact _within_ the Angular environment.
+      テスト中のAngularアプリケーションコードの場合、  
+      Angular テストユーティリティがテスト環境を作成します。
+      それらを使用してアプリケーションの部分を調整、制御して  
+      Angular 環境と相互利用します。
     </td>
 
   </tr>

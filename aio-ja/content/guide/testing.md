@@ -171,27 +171,28 @@ Learn more about basic Jasmine testing here
 {@a isolated-v-testing-utilities}
 
 
-### Isolated unit tests vs. the Angular testing utilities
+### 単体テストと Angular テストユーティリティ
 
-[Isolated unit tests](guide/testing#isolated-unit-tests "Unit testing without the Angular testing utilities")
-examine an instance of a class all by itself without any dependence on Angular or any injected values.
-The tester creates a test instance of the class with `new`, supplying test doubles for the constructor parameters as needed, and
-then probes the test instance API surface.
+[単体テスト](guide/testing#isolated-unit-tests "Angular テストユーティリティを使用しない単体テスト")
+Angular に対する依存性又は注入された値に関わりなく、すべてのクラスのインスタンスを単独で調べます。
+テスタはクラスのテストインスタンスを `new` で作成し、必要に応じてコンストラクタパラメータのテストダブルを提供します。
+テストインスタンスの API 面 を厳密にテストします。
 
-*You should write isolated unit tests for pipes and services.*
+*pipes と services の単体テストを記述する必要があります。*
 
-You can test components in isolation as well.
-However, isolated unit tests don't reveal how components interact with Angular.
-In particular, they can't reveal how a component class interacts with its own template or with other components.
+コンポーネントを個別にテストすることもできます。
+しかし、単体テストでは、コンポーネントが Angular とどのように対話するかは明確になりません。
+特に、コンポーネントクラスがそれ自身のテンプレートや他のコンポーネントとどのようにやり取りするかを明らかにすることはできません。
 
-Such tests require the **Angular testing utilities**.
-The  Angular testing utilities include the `TestBed` class and several helper functions from `@angular/core/testing`.
-They are the main focus of this guide and you'll learn about them
-when you write your [first component test](guide/testing#simple-component-test).
-A comprehensive review of the Angular testing utilities appears [later in this guide](guide/testing#atu-apis).
+このようなテストでは、 **Angular テストユーティリティ**が必要です。
+Angularテストユーティリティには `TestBed` クラスと `@angular/core/testing` のいくつかのヘルパー関数が含まれています。
+このガイドの主な焦点であり、あなたはそれらについて学びます
+それは、[最初のコンポーネントテストを書く時](guide/testing#simple-component-test)です。
 
-But first you should write a dummy test to verify that your test environment is set up properly
-and to lock in a few basic testing skills.
+Angular テストユーティリティの包括的なレビューは、[このガイドの後半](guide/testing#atu-apis)に記載されています。
+
+しかし、まず、テスト環境が適切に設定されていることを確認するためのダミーテストを作成する必要があります。
+いくつかの基本的なテストスキルを確保することができます。
 
 <hr/>
 

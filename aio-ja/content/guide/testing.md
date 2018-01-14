@@ -135,7 +135,7 @@ Learn more about basic Jasmine testing here
 
 
       protractor は、  _end-to-end_ (e2e) テストを作成、実行する時に使います。
-      End-to-end は、アプリケーションが _ユーザーが操作したような動作を行います。_.
+      End-to-end は、アプリケーションが _ユーザーが操作したような動作を行います。_
       e2e テストで、 第1のプロセスが実際のアプリケーションを実行され、
       第2のプロセスは、ユーザ挙動をシミュレートする protractor テストを実行し、
       アプリケーションが期待どおりにブラウザで応答することを通知します。
@@ -151,22 +151,21 @@ Learn more about basic Jasmine testing here
 {@a setup}
 
 
-### Setup
+### セットアップ
 
-There are two fast paths to getting started with unit testing.
+ユニットテストを開始するには、2つの方法があります。
 
-1. Start a new project following the instructions in [Setup](guide/setup "Setup").
+1. [セットアップ](guide/setup "セットアップ") の指示に従って新しいプロジェクトを作成します。
 
-1. Start a new project with the
-<a href="https://github.com/angular/angular-cli/blob/master/README.md" title="Angular CLI">Angular CLI</a>.
+1. <a href="https://github.com/angular/angular-cli/blob/master/README.md" title="Angular CLI">Angular CLI</a> で新しいプロジェクトを作成します。
 
-Both approaches install npm packages, files, and scripts pre-configured for applications
-built in their respective modalities.
-Their artifacts and procedures differ slightly but their essentials are the same
-and there are no differences in the test code.
+どちらの方法でも、npmパッケージ、ファイル、およびアプリケーション用に事前設定されたスクリプトがインストールされます。
+それぞれの方法で構築されています。
+生成物と手順はわずかに異なりますが、それらの本質は同じです。
+テストコードに違いはありません。
 
-In this guide, the application and its tests are based on the [setup instructions](guide/setup "Setup").
-For a discussion of the unit testing setup files, [see below](guide/testing#setup-files).
+このガイドでは、アプリケーションとそのテストは [セットアップ手順](guide/setup "セットアップ") に基づいています。  
+ユニットテストのセットアップファイルの説明については、[以下を参照してください](guide/testing#setup-files)。
 
 
 {@a isolated-v-testing-utilities}

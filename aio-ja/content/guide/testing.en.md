@@ -1,23 +1,24 @@
-# テスト
+# Testing
 
-このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
-このページには一般的なテストの原則と技術が含まれていますが、
-Angular で、書かれたアプリケーションのテストに重点を置いています。
+This guide offers tips and techniques for testing Angular applications.
+Though this page includes some general testing principles and techniques,
+the focus is on testing applications written with Angular.
+
 
 {@a top}
 
 ## Live examples
 
-このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
-サンプルアプリケーションとこのガイドのすべてのテストは、インスペクション、テスト、およびダウンロードの実例として利用できます。
+This guide presents tests of a sample application that is much like the [_Tour of Heroes_ tutorial](tutorial).
+The sample application and all tests in this guide are available as live examples for inspection, experiment, and download:
 
-* <live-example plnkr="1st-specs" embedded-style>テスト環境を検証するための仕様</live-example>.
-* <live-example plnkr="banner-inline-specs" embedded-style>インラインテンプレートを使用した最初のコンポーネント仕様</live-example>.
-* <live-example plnkr="banner-specs" embedded-style>外部テンプレートを使用したコンポーネント仕様</live-example>.
-* <live-example name="setup" plnkr="quickstart-specs" embedded-style>クイックスタートシード Appコンポーネントの仕様</live-example>.
-* <live-example embedded-style>テストされるサンプルアプリケーション</live-example>.
-* <live-example plnkr="app-specs" embedded-style>サンプルアプリケーションをテストするすべての仕様</live-example>.
-* <live-example plnkr="bag-specs" embedded-style>様々な追加仕様</live-example>.
+* <live-example plnkr="1st-specs" embedded-style>A spec to verify the test environment</live-example>.
+* <live-example plnkr="banner-inline-specs" embedded-style>The first component spec with inline template</live-example>.
+* <live-example plnkr="banner-specs" embedded-style>A component spec with external template</live-example>.
+* <live-example name="setup" plnkr="quickstart-specs" embedded-style>The QuickStart seed's AppComponent spec</live-example>.
+* <live-example embedded-style>The sample application to be tested</live-example>.
+* <live-example plnkr="app-specs" embedded-style>All specs that test the sample application</live-example>.
+* <live-example plnkr="bag-specs" embedded-style>A grab bag of additional specs</live-example>.
 
 <hr/>
 
@@ -26,19 +27,20 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 {@a testing-intro}
 
 
-## Angular テスト入門
+## Introduction to Angular Testing
 
-このページでは、テストを作成して、アプリケーションの動作を確認します。  
-テストでは以下のことが行われます:
+This page guides you through writing tests to explore
+and confirm the behavior of the application. Testing
+does the following:
 
-1. 既存のコードを破る変更に対する予防線 (“回帰”).
+1. Guards against changes that break existing code (“regressions”).
 
-1. 意図したとおりに使用された場合と想定外の条件に直面した場合の両方で、コードが何を行うかを明確にします。
+1. Clarifies what the code does both when used as intended and when faced with deviant conditions.
 
-1. 設計と実装の間違いを明らかにする。  
-テストでは、あらゆる角度からコードに厳しい光が、当たっています。  
-アプリケーションの一部がテストするのが難しいように見える場合、根本的な原因は設計上の欠陥であることが多く、
-修正するのに費用がかかってしまった時よりもむしろ再実装べきものです。
+1. Reveals mistakes in design and implementation.
+Tests shine a harsh light on the code from many angles.
+When a part of the application seems hard to test, the root cause is often a design flaw,
+something to cure now rather than later when it becomes expensive to fix.
 
 <!-- TODO
 :marked
@@ -51,10 +53,11 @@ Learn more about basic Jasmine testing here
 {@a tools-and-tech}
 
 
-### ツールと技術
+### Tools and technologies
 
-様々なツールとテクノロジを使用して、Angular テストを作成して実行できます。  
-このガイドでは、正常動作することが分かっている特定の選択肢について説明します。
+You can write and run Angular tests with a variety of tools and technologies.
+This guide describes specific choices that are known to work well.
+
 
 <table width="100%">
 
@@ -69,11 +72,11 @@ Learn more about basic Jasmine testing here
   <tr>
 
     <th>
-      技術
+      Technology
     </th>
 
     <th>
-      目的
+      Purpose
     </th>
 
   </tr>
@@ -87,9 +90,9 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      [Jasmine テスト フレームワーク](http://jasmine.github.io/2.4/introduction.html)は、
-      基本的なテストを書くために必要なすべてを提供します。  
-      ブラウザにテストを実行するHTMLテストランナーが同梱されています。
+      The [Jasmine test framework](http://jasmine.github.io/2.4/introduction.html)
+      provides everything needed to write basic tests.
+      It ships with an HTML test runner that executes tests in the browser.
     </td>
 
   </tr>
@@ -97,14 +100,16 @@ Learn more about basic Jasmine testing here
   <tr style=top>
 
     <td style="vertical-align: top">
-      Angular テスト ユーティリティ
+      Angular testing utilities
     </td>
 
     <td>
 
 
-      テスト中のAngularアプリケーションコードの場合、Angular テストユーティリティがテスト環境を作成します。  
-      それらを使用してアプリケーションの部分を調整、制御して Angular 環境と相互利用します。
+      Angular testing utilities create a test environment
+      for the Angular application code under test.
+      Use them to condition and control parts of the application as they
+      interact _within_ the Angular environment.
     </td>
 
   </tr>
@@ -118,9 +123,10 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      [karma テストランナー](https://karma-runner.github.io/1.0/index.html)は、アプリケーションの開発中に単体テストを作成し実行するのに理想的です。
-      プロジェクトの開発および継続的な統合プロセスの不可欠な部分となります。  
-      このガイドでは、 karma でテストを設定して実行する方法について説明します。
+      The [karma test runner](https://karma-runner.github.io/1.0/index.html)
+      is ideal for writing and running unit tests while developing the application.
+      It can be an integral part of the project's development and continuous integration processes.
+      This guide describes how to set up and run tests with karma.
     </td>
 
   </tr>
@@ -134,11 +140,11 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      protractor は、  _end-to-end_ (e2e) テストを作成、実行する時に使います。
-      End-to-end は、アプリケーションが _ユーザーが操作したような動作を行います。_.
-      e2e テストで、 第1のプロセスが実際のアプリケーションを実行され、
-      第2のプロセスは、ユーザ挙動をシミュレートする protractor テストを実行し、
-      アプリケーションが期待どおりにブラウザで応答することを通知します。
+      Use protractor to write and run _end-to-end_ (e2e) tests.
+      End-to-end tests explore the application _as users experience it_.
+      In e2e testing, one process runs the real application
+      and a second process runs protractor tests that simulate user behavior
+      and assert that the application respond in the browser as expected.
 
     </td>
 

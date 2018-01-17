@@ -74,7 +74,8 @@
     {
       "url": "guide/quickstart",
       "title": "はじめに",
-      "tooltip": "Angularへのやさしい導入"
+      "tooltip": "Angularへのやさしい導入",
+      "translated": true
     },
 
     {
@@ -84,42 +85,50 @@
         {
           "url": "tutorial",
           "title": "1. イントロダクション",
-          "tooltip": "Part 1: Tour of Heroesチュートリアルの紹介"
+          "tooltip": "Part 1: Tour of Heroesチュートリアルの紹介",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt0",
           "title": "2. アプリケーションシェル",
-          "tooltip": "Part 2: アプリケーションシェルを作成します"
+          "tooltip": "Part 2: アプリケーションシェルを作成します",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt1",
           "title": "3. ヒーローエディター",
-          "tooltip": "Part 3: シンプルなヒーローエディターを組み立てます"
+          "tooltip": "Part 3: シンプルなヒーローエディターを組み立てます",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt2",
           "title": "4. リストの表示",
-          "tooltip": "Part 4: ヒーローのリストを備えたmaster/detailページを組み立てます"
+          "tooltip": "Part 4: ヒーローのリストを備えたmaster/detailページを組み立てます",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt3",
           "title": "5. Master/Detail コンポーネント",
-          "tooltip": "Part 5: master/detailビューを複数のコンポーネントに分割してリファクタリングします"
+          "tooltip": "Part 5: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt4",
           "title": "6. サービス",
-          "tooltip": "Part 6: ヒーローのデータを管理するための再利用可能なサービスを作ります"
+          "tooltip": "Part 6: ヒーローのデータを管理するための再利用可能なサービスを作ります",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt5",
           "title": "7. ルーティング",
-          "tooltip": "Part 7: Angularルーターを追加してビュー間を移動します"
+          "tooltip": "Part 7: Angularルーターを追加してビュー間を移動します",
+          "translated": true
         },
         {
           "url": "tutorial/toh-pt6",
           "title": "8. HTTP",
-          "tooltip": "Part 8: HTTPを使ってヒーローのデータを取得・保存します"
+          "tooltip": "Part 8: HTTPを使ってヒーローのデータを取得・保存します",
+          "translated": true
         }
       ]
     },
@@ -130,8 +139,9 @@
       "children": [
         {
           "url": "guide/architecture",
-          "title": "Architecture",
-          "tooltip": "The basic building blocks of Angular applications."
+          "title": "アーキテクチャ",
+          "tooltip": "The basic building blocks of Angular applications.",
+          "translated": true
         },
         {
           "title": "Template & Data Binding",
@@ -268,7 +278,8 @@
         {
           "url": "guide/http",
           "title": "HttpClient",
-          "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう"
+          "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
+          "translated": true
         },
         {
           "url": "guide/router",
@@ -283,7 +294,8 @@
         {
           "url": "guide/cheatsheet",
           "title": "チートシート",
-          "tooltip": "よく使われるAngularのコーディングテクニックへのガイド"
+          "tooltip": "よく使われるAngularのコーディングテクニックへのガイド",
+          "translated": true
         }
     ]},
 
@@ -356,27 +368,32 @@
             {
               "url": "guide/service-worker-intro",
               "title": "イントロダクション",
-              "tooltip": "AngularのService Worker実装は低速なネットワーク接続におけるユーザー体験を改善します。"
+              "tooltip": "AngularのService Worker実装は低速なネットワーク接続におけるユーザー体験を改善します。",
+              "translated": true
             },
             {
               "url": "guide/service-worker-getting-started",
               "title": "Service Workerを始める",
-              "tooltip": "CLIプロジェクトでService Workerを有効化し、ブラウザでの振る舞いを監視します。"
+              "tooltip": "CLIプロジェクトでService Workerを有効化し、ブラウザでの振る舞いを監視します。",
+              "translated": true
             },
             {
               "url": "guide/service-worker-communications",
               "title": "Service Workerとの通信",
-              "tooltip": "Angular Service Workerとやりとりするためのサービスについて。"
+              "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
+              "translated": true
             },
             {
               "url": "guide/service-worker-devops",
               "title": "プロダクションにおけるService Worker",
-              "tooltip": "Service Workerと共にアプリケーションを実行し、アプリケーションの更新を管理し、デバッグし、そして終了させます。"
+              "tooltip": "Service Workerと共にアプリケーションを実行し、アプリケーションの更新を管理し、デバッグし、そして終了させます。",
+              "translated": true
             },
             {
               "url": "guide/service-worker-config",
               "title": "Service Workerの設定",
-              "tooltip": "Service Workerのキャッシュの振る舞いを設定します。"
+              "tooltip": "Service Workerのキャッシュの振る舞いを設定します。",
+              "translated": true
             }
           ]
         },
@@ -415,7 +432,8 @@
         {
           "url": "guide/glossary",
           "title": "用語集",
-          "tooltip": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。"
+          "tooltip": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。",
+          "translated": true
         }
       ]
     },

@@ -12,10 +12,10 @@ rules:
     pattern: 依存性注入
 
   - expected: 単方向
-    pattarn: 一方向
+    pattern: 一方向
 
   - expected: 双方向
-    pattarn: 二方向
+    pattern: 二方向
 
   - expected: Service Worker
     pattern:

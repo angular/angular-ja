@@ -201,31 +201,30 @@ Angular テストユーティリティの包括的なレビューは、[この�
 {@a 1st-karma-test}
 
 
-## The first karma test
+## 初めての karma テスト
 
-Start with a simple test to make sure that the setup works properly.
+簡単なテストから始め、セットアップが適切に動作することを確認します。
 
-Create a new file called `1st.spec.ts` in the application root folder, `src/app/`
+アプリケーションルートフォルダに `1st.spec.ts` という名前の新しいファイルを作成します、 `src/app/`
 
 
 <div class="alert is-important">
 
 
 
-Tests written in Jasmine are called _specs_ .
-**The filename extension must be `.spec.ts`**,
-the convention adhered to by  `karma.conf.js` and other tooling.
-
+Jasmine で書かれたテストは _specs_ と呼ばれます。  
+**ファイル名の拡張子は、 `.spec.ts` でなければなりません。**  
+`karma.conf.js` やその他のツールで、遵守しています。
 
 </div>
 
 
 
-**Put spec files somewhere within the `src/app/` folder.**
-The `karma.conf.js` tells karma to look for spec files there,
-for reasons explained [below](guide/testing#q-spec-file-location).
+**spec ファイルを `src / app /` フォルダのどこかに置いてください。**  
+`karma.conf.js` が karma に spec ファイルを探しすよう指示します。   
+[以下の理由](guide/testing#q-spec-file-location)について説明されています。
 
-Add the following code to `src/app/1st.spec.ts`.
+`src/app/1st.spec.ts` に以下のコードを追加してください。
 
 <code-example path="testing/src/app/1st.spec.ts" title="src/app/1st.spec.ts" linenums="false"></code-example>
 

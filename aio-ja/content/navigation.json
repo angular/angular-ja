@@ -289,7 +289,8 @@
         {
           "url": "guide/testing",
           "title": "テスト",
-          "tooltip": "Angular アプリケーションテストのテクニックと実戦"
+          "tooltip": "Angular アプリケーションテストのテクニックと実戦",
+          "translated": true
         },
         {
           "url": "guide/cheatsheet",

@@ -231,8 +231,8 @@ Jasmine で書かれたテストは _specs_ と呼ばれます。
 {@a run-karma}
 
 
-### Run with karma
-Compile and run it in karma from the command line using the following command:
+### karma の実行
+次のコマンドを使用して、コマンドラインから karma でコンパイルして実行します。
 
 <code-example format="." language="bash">
   npm test
@@ -240,21 +240,22 @@ Compile and run it in karma from the command line using the following command:
 
 
 
-The command compiles the application and test code and starts karma.
-Both processes watch pertinent files, write messages to the console, and re-run when they detect changes.
+コマンドはアプリケーションとテストコードをコンパイルし、 karma を開始します。  
+どちらのプロセスも関連のァイルを監視し、コンソールにメッセージを書き込み、変更を検出したときに再実行します。
 
 <div class="l-sub-section">
 
 
 
-The documentation setup defines the `test` command in the `scripts` section of npm's `package.json`.
-The Angular CLI has different commands to do the same thing. Adjust accordingly.
-
+ドキュメントのセットアップでは、 npm の `package.json` の `scripts` セクションに  
+`test`コマンドが定義されています。  
+Angular CLIには、同じことをするためのコマンドがあります。  
+それに応じて調整してください。
 </div>
 
 
 
-After a few moments, karma opens a browser and starts writing to the console.
+しばらくすると、 karma はブラウザを開き、コンソールに出力し始めます。
 
 <figure>
   <img src='generated/images/guide/testing/karma-browser.png' alt="Karma browser">
@@ -262,9 +263,8 @@ After a few moments, karma opens a browser and starts writing to the console.
 
 
 
-Hide (don't close!) the browser and focus on the console output, which
-should look something like this:
-
+ブラウザを隠す（閉じないでください！）コンソール出力に焦点を当てます。  
+次のようになります。
 
 <code-example format="." language="bash">
   > npm test
@@ -279,13 +279,13 @@ should look something like this:
 
 
 
-Both the compiler and karma continue to run. The compiler output is preceded by `[0]`;
-the karma output by `[1]`.
+コンパイラと karma の両方が実行し続けます。  
+コンパイラの出力は `[0]`で始まります。  
+karma は `[1]`によって出力されます。
 
-Change the expectation from `true` to `false`.
+期待値を `true` から `false`に変更してください。
 
-The _compiler_ watcher detects the change and recompiles.
-
+_コンパイラ_ウォッチャーは、変更を検出し、再コンパイルします。
 
 <code-example format="." language="bash">
   [0] 1:49:21 PM - File change detected. Starting incremental compilation...
@@ -295,7 +295,7 @@ The _compiler_ watcher detects the change and recompiles.
 
 
 
-The _karma_ watcher detects the change to the compilation output and re-runs the test.
+_karma_ ウォッチャーはコンパイル出力の変更を検出し、テストを再実行します。
 
 <code-example format="." language="bash">
   [1] Chrome 51.0.2704 1st tests true is true FAILED
@@ -306,19 +306,18 @@ The _karma_ watcher detects the change to the compilation output and re-runs the
 
 
 
-It fails of course.
+もちろん失敗します。
 
-Restore the expectation from `false` back to `true`.
-Both processes detect the change, re-run, and karma reports complete success.
-
+期待値を `false` からの `true` に戻します。  
+どちらのプロセスも変化を検出、再実行し、 karma は完全な成功を報告します。
 
 <div class="alert is-helpful">
 
 
 
-The console log can be quite long. Keep your eye on the last line.
-When all is well, it reads `SUCCESS`.
-
+コンソールログはかなり長くなる可能性があります。  
+最後の行に注目してください。  
+すべてがうまくいくと、それは `SUCCESS` と読みます。
 
 </div>
 

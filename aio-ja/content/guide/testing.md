@@ -326,18 +326,17 @@ _karma_ ウォッチャーはコンパイル出力の変更を検出し、テス
 {@a test-debugging}
 
 
-### Test debugging
+### デバッグのテスト
 
-Debug specs in the browser in the same way that you debug an application.
+アプリケーションをデバッグするのと同じ方法で、ブラウザの仕様をデバッグします。
 
-  1. Reveal the karma browser window (hidden earlier).
-  1. Click the **DEBUG** button; it opens a new browser tab and re-runs the tests.
-  1. Open the browser's “Developer Tools” (`Ctrl-Shift-I` on windows; `Command-Option-I` in OSX).
-  1. Pick the "sources" section.
-  1. Open the `1st.spec.ts` test file (Control/Command-P, then start typing the name of the file).
-  1. Set a breakpoint in the test.
-  1. Refresh the browser, and it stops at the breakpoint.
-
+  1. karma のブラウザウィンドウを表示します（前に隠れています）。
+  1. **DEBUG** ボタンをクリックします。新しいブラウザタブを開き、テストを再実行します。
+  1. ブラウザの「開発者ツール」（ Windows では `Ctrl-Shift-I` 、OSX では `Command-Option-I` ）を開きます。
+  1. "Sources" セクションを選択します。
+  1. `1st.spec.ts` テストファイル（ Control / Command-P を開き、ファイル名の入力を開始します。）を開きます。
+  1. テストにブレークポイントを設定します。
+  1. ブラウザを更新すると、ブレークポイントで停止します。
 
 <figure>
   <img src='generated/images/guide/testing/karma-1st-spec-debug.png' alt="Karma debugging">
@@ -348,10 +347,10 @@ Debug specs in the browser in the same way that you debug an application.
 {@a live-karma-example}
 
 
-### Try the live example
+### 実例を試してみてください
 
-You can also try this test as a <live-example plnkr="1st-specs" title="First spec" embedded-style></live-example> in plunker.
-All of the tests in this guide are available as [live examples](guide/testing#live-examples "Live examples of these tests").
+また、このテストを plunker で <live-example plnkr="1st-specs" title="最初の仕様" embedded-style></live-example> として試すこともできます。  
+このガイドのすべてのテストは、[実際のサンプル](guide/testing#live-examples "Live examples of these tests")として利用できます。
 
 <hr/>
 
@@ -360,26 +359,25 @@ All of the tests in this guide are available as [live examples](guide/testing#li
 {@a simple-component-test}
 
 
-## Test a component
+## component のテスト
 
-An Angular component is the first thing most developers want to test.
-The `BannerComponent` in `src/app/banner-inline.component.ts` is the simplest component in this application and
-a good place to start.
-It presents the application title at the top of the screen within an `<h1>` tag.
+Angular コンポーネントは、ほとんどの開発者が最初にテストしたいものです。  
+`src/app/banner-inline.component.ts` の `BannerComponent` は、このアプリケーションでは最も単純なコンポーネントであり、開始するのに適しています。  
+これは `<h1>` タグ内で画面上部にアプリケーションのタイトルを表示します。
 
 <code-example path="testing/src/app/banner-inline.component.ts" title="src/app/banner-inline.component.ts" linenums="false"></code-example>
 
 
 
-This version of the `BannerComponent` has an inline template and an interpolation binding.
-The component is probably too simple to be worth testing in real life but
-it's perfect for a first encounter with the Angular testing utilities.
+このバージョンの `BannerComponent` には、インラインテンプレートと補完バインディングがあります。
+このコンポーネントは実際にはテストする価値があるとは言い難いですが、Angular テストユーティリティを最初に経験するには最適です。
 
-The corresponding `src/app/banner-inline.component.spec.ts` sits in the same folder as the component,
-for reasons explained in the [FAQ](guide/testing#faq) answer to
-["Why put specs next to the things they test?"](guide/testing#q-spec-file-location).
+対応する `src/app/banner-inline.component.spec.ts` はコンポーネントと同じフォルダにあります。  
+理由は [FAQ](guide/testing#faq) の答えで説明されています。  
+[なぜテストするものと同じ場所にスペックを置くのか？](guide/testing#q-spec-file-location)
 
-Start with ES6 import statements to get access to symbols referenced in the spec.
+
+スペックで参照されているシンボルにアクセスするには、 ES6 のインポートステートメントから始めます。
 
 <code-example path="testing/src/app/banner-inline.component.spec.ts" region="imports" title="src/app/banner-inline.component.spec.ts (imports)" linenums="false"></code-example>
 
@@ -389,6 +387,7 @@ Start with ES6 import statements to get access to symbols referenced in the spec
 
 
 Here's the `describe` and the `beforeEach` that precedes the tests:
+テストに先立って `describe` と `beforeEach` があります：
 
 <code-example path="testing/src/app/banner-inline.component.spec.ts" region="setup" title="src/app/banner-inline.component.spec.ts (beforeEach)" linenums="false"></code-example>
 

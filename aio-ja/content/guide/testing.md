@@ -398,70 +398,60 @@ Here's the `describe` and the `beforeEach` that precedes the tests:
 
 ### _TestBed_
 
-`TestBed` is the first and most important of the  Angular testing utilities.
-It creates an Angular testing module&mdash;an `@NgModule` class&mdash;that
-you configure with the `configureTestingModule` method to produce the module environment for the class you want to test.
-In effect, you detach the tested component from its own application module
-and re-attach it to a dynamically-constructed Angular test module
-tailored specifically for this battery of tests.
+`TestBed` はAngular テストユーティリティの中で最も重要なものです。
+Angular テストモジュールを作成する &mdash; `@NgModule` クラス &mdash;
+ `configureTestingModule` メソッドで設定して、テストするクラスのモジュール環境を作ります。
 
-The `configureTestingModule` method takes an `@NgModule`-like metadata object.
-The metadata object can have most of the properties of a normal [NgModule](guide/ngmodule).
+実際には、テストされたコンポーネントを独自のアプリケーションモジュールから切り離し、動的に構築された Angular テストモジュールに再接続する為に一組のテストが特別に調整されています。
 
-_This metadata object_ simply declares the component to test, `BannerComponent`.
-The metadata lack `imports` because (a) the default testing module configuration already has what `BannerComponent` needs
-and (b) `BannerComponent` doesn't interact with any other components.
+`configureTestingModule` メソッドは　`@NgModule` のようなメタデータオブジェクトを取ります。  
+メタデータオブジェクトは、通常の [NgModule](guide/ngmodule) のプロパティのほとんどを持つことができます。
+
+_メタデータオブジェクト_は、単にテストするコンポーネント、 `BannerComponent` を宣言します。  
+メタデータには、 `imports` がありません。  
+なぜなら、 (a) デフォルトのテストモジュールは、既に `BannerComponent` に必要なの設定がされており、 (b) `BannerComponent` は他のコンポーネントと対話しません。
 
 
-Call `configureTestingModule` within a `beforeEach` so that
-`TestBed` can reset itself to a base state before each test runs.
+`beforeEach` の中で、 `configureTestingModule` を呼び出すと `TestBed` は、各テストが実行される前にそれ自身を基本状態にリセットすることができます。
 
-The base state includes a default testing module configuration consisting of the
-declarables (components, directives, and pipes) and providers (some of them mocked)
-that almost everyone needs.
+基本状態には、殆どの誰もが必要とする宣言（components, directives, pipes）と provider （それらの一部の mock ）からなるデフォルトのテストモジュール構成が含まれます。
 
 <div class="l-sub-section">
 
 
 
-The testing shims mentioned [later](guide/testing#testbed-methods) initialize the testing module configuration
-to something like the `BrowserModule` from `@angular/platform-browser`.
+[後述](guide/testing#testbed-methods)のテスト shims は、テストモジュールの設定を `@angular/platform-browser` の `BrowserModule` のようなものに初期化します。
 
 </div>
 
 
 
-This default configuration is merely a _foundation_ for testing an app.
-Later you'll call `TestBed.configureTestingModule` with more metadata that define additional
-imports, declarations, providers, and schemas to fit your application tests.
-Optional `override` methods can fine-tune aspects of the configuration.
+このデフォルト設定は、単にアプリケーションをテストするためのものです。
+後で、アプリケーションテストに合う追加のインポート、宣言、プロバイダ、スキーマを定義するメタデータを含む  `TestBed.configureTestingModule` を呼び出します。
 
+オプションの `override` メソッドは、設定を微調整できます。
 
 {@a create-component}
 
 
 ### _createComponent_
 
-After configuring `TestBed`, you tell it to create an instance of the _component-under-test_.
-In this example, `TestBed.createComponent` creates an instance of `BannerComponent` and
-returns a [_component test fixture_](guide/testing#component-fixture).
-
+`TestBed` を設定後、 _component-under-test_ のインスタンスを作成するように指示します。  
+この例では、 `TestBed.createComponent` は `BannerComponent` のインスタンスを作成し、 [_component test fixture_](guide/testing#component-fixture) を返します。
 
 <div class="alert is-important">
 
 
 
-Do not re-configure `TestBed` after calling `createComponent`.
-
+`createComponent` を呼び出した後、 `TestBed` を再設定しないでください。
 
 </div>
 
 
 
-The `createComponent` method closes the current `TestBed` instance to further configuration.
-You cannot call any more `TestBed` configuration methods, not `configureTestingModule`
-nor any of the `override...` methods. If you try, `TestBed` throws an error.
-
+`createComponent` メソッドは、現在の `TestBed` インスタンスを閉じて、さらに設定を行います。  
+`configureTestingModule` や `override...`メソッドのいずれも `TestBed` 設定メソッドを呼び出すことはできません。  
+試してみると、 `TestBed`はエラーを投げます。
 
 {@a component-fixture}
 

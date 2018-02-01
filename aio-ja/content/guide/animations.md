@@ -13,7 +13,7 @@ Angularのアニメーションシステムでは、純粋なCSSアニメーシ�
 
 Angularのアニメーションは、標準の[Web Animations API](https://w3c.github.io/web-animations/)の上に構築され、それを[サポートするブラウザ](http://caniuse.com/#feat=web-animation)でネイティブに実行されます。
 
-他のブラウザーでは、ポリフィルが必要です。 `polyfills.ts` ファイルから `web-animations-js` polyfillのコメントを外します。
+他のブラウザでは、ポリフィルが必要です。 `polyfills.ts` ファイルから `web-animations-js` polyfillのコメントを外します。
 
 </div>
 

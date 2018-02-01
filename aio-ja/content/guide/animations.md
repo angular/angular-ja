@@ -148,7 +148,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 
 ワイルドカードステート`*`は`void`にも適用されます。
 
-## 例: entering と leaving
+## 例：entering と leaving
 
 <img src="generated/images/guide/animations/animation_enter_leave.gif" alt="Enter and leave animations" class="right" width="250">
 

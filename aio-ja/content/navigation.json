@@ -331,7 +331,7 @@
           "url": "guide/http",
           "title": "HttpClient",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
-          "translated": true
+          "translated": false
         },
         {
           "url": "guide/router",

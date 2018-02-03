@@ -195,11 +195,33 @@ Chromeなどのブラウザは、Service Workerとやり取りするための開
 
 Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
 
-## フェールセーフ
+## Service Workerの安全性
 
 あらゆる複雑なシステムと同様に、バグや壊れた設定によって、Angular Service Workerが予期しない方法でふるまう可能性があります。そのような問題の影響を最小限に抑えるよう設計されていますが、管理者がService Workerを迅速に非アクティブ化する必要がある場合に備えて、AngularService Workerにはフェールセーフメカニズムが組み込まれています。
 
+## フェールセーフ
+
 Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、自身を登録解除し、自己破棄します。
+
+### Safety Worker
+
+Also included in the `@angular/service-worker` NPM package is a small
+script `safety-worker.js`, which when loaded will unregister itself
+from the browser. This script can be used as a last resort to get rid
+of unwanted service workers already installed on client pages.
+
+It's important to note that you cannot register this worker directly,
+as old clients with cached state may not see a new `index.html` which
+installs the different worker script. Instead, you must serve the
+contents of `safety-worker.js` at the URL of the Service Worker script
+you are trying to unregister, and must continue to do so until you are
+certain all users have successfully unregistered the old worker. For
+most sites, this means that you should serve the safety worker at the
+old Service Worker URL forever.
+
+This script can be used both to deactivate `@angular/service-worker`
+as well as any other Service Workers which might have been served in
+the past on your site.
 
 ## もっとAngular Service Workerを知りたい
 

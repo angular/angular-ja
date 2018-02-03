@@ -35,7 +35,7 @@ Angularはあなたのアプリケーションのコンテンツをブラウザ�
 Angularのアプリはモジュール化されており、Angularは _NgModule_ と呼ばれる独自のモジュール方式を持っています。
 
 NgModuleはすごいものです。
-このページではモジュールを紹介します。[NgModules](guide/ngmodule) のページではさらに詳細に取り上げます。
+このページではモジュールを紹介します。[NgModules](guide/ngmodules) のページではさらに詳細に取り上げます。
 
 <br class="clear">
 
@@ -146,7 +146,7 @@ AngularはJavaScriptのモジュールの集まりとして出荷します。ラ
 
 <div class="l-sub-section">
 
-  [NgModules](guide/ngmodule)のページでさらに学びましょう。
+  [NgModules](guide/ngmodules)のページでさらに学びましょう。
 
 </div>
 
@@ -194,7 +194,7 @@ Angularはユーザーがアプリケーション内を移動する中でコン�
 <code-example path="architecture/src/app/hero-list.component.html" title="src/app/hero-list.component.html"></code-example>
 
 このテンプレートは典型的なHTML要素の`<h2>`と`<p>`を使用していますが、これもいくつかの違いがあります。
-`*ngFor`, `{{hero.name}}`, `(click)`, `[hero]`, そして `<hero-detail>` といったコードはAngularの[テンプレートシンタックス](guide/template-syntax)を使用しています。
+`*ngFor`, `{{hero.name}}`, `(click)`, `[hero]`, そして `<app-hero-detail>` といったコードはAngularの[テンプレートシンタックス](guide/template-syntax)を使用しています。
 
 テンプレートの最後の行、`<app-hero-detail>`タグは新しいコンポーネント`HeroDetailComponent`を表すカスタム要素です。
 

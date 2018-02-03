@@ -79,6 +79,7 @@
     },
 
     {
+      "url": "tutorial",
       "title": "チュートリアル",
       "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
       "children": [
@@ -134,6 +135,7 @@
     },
 
     {
+      "url": "guide/architecture",
       "title": "基礎ガイド",
       "tooltip": "Angularの基礎",
       "children": [
@@ -231,26 +233,75 @@
             }
           ]
         },
-
         {
           "url": "guide/bootstrapping",
           "title": "Bootstrapping",
           "tooltip": "Tell Angular how to construct and bootstrap the app in the root \"AppModule\"."
         },
-
         {
+
           "title": "NgModules",
-          "tooltip": "Learn how to use NgModules to make your apps efficient.",
+          "tooltip": "NgModules.",
           "children": [
             {
-              "url": "guide/ngmodule",
-              "title": "NgModules",
-              "tooltip": "Define application modules with @NgModule."
+              "url": "guide/ngmodules",
+              "title": "NgModules Introduction",
+              "tooltip": "Use NgModules to make your apps efficient."
+            },
+            {
+              "url": "guide/ngmodule-vs-jsmodule",
+              "title": "JS Modules vs NgModules",
+              "tooltip": "Differentiate between JavaScript modules and NgModules."
+            },
+            {
+              "url": "guide/frequent-ngmodules",
+              "title": "Frequently Used NgModules",
+              "tooltip": "Introduction to the most frequently used NgModules."
+            },
+            {
+              "url": "guide/module-types",
+              "title": "Types of Feature Modules",
+              "tooltip": "Description of the different types of feature modules."
+            },
+            {
+              "url": "guide/entry-components",
+              "title": "Entry Components",
+              "tooltip": "All about entry components in Angular."
+            },
+            {
+              "url": "guide/feature-modules",
+              "title": "Feature Modules",
+              "tooltip": "Create feature modules to organize your code."
+            },
+            {
+              "url": "guide/providers",
+              "title": "Providers",
+              "tooltip": "Providers and NgModules."
+            },
+            {
+              "url": "guide/singleton-services",
+              "title": "Singleton Services",
+              "tooltip": "Creating singleton services."
+            },
+            {
+              "url": "guide/lazy-loading-ngmodules",
+              "title": "Lazy Loading Feature Modules",
+              "tooltip": "Lazy load modules to speed up your apps."
+            },
+            {
+              "url": "guide/sharing-ngmodules",
+              "title": "Sharing NgModules",
+              "tooltip": "Share NgModules to streamline your apps."
+            },
+            {
+              "url": "guide/ngmodule-api",
+              "title": "NgModule API",
+              "tooltip": "Understand the details of NgModules."
             },
             {
               "url": "guide/ngmodule-faq",
               "title": "NgModule FAQs",
-              "tooltip": "Answers to frequently asked questions about @NgModule."
+              "tooltip": "Answers to frequently asked questions about NgModules."
             }
         ]},
 
@@ -280,7 +331,7 @@
           "url": "guide/http",
           "title": "HttpClient",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
-          "translated": true
+          "translated": false
         },
         {
           "url": "guide/router",

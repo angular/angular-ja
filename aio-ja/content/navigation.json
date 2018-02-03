@@ -200,13 +200,14 @@
           ]
         },
         {
-          "title": "Forms",
-          "tooltip": "Angular Forms",
+          "title": "フォーム",
+          "tooltip": "Angularのフォーム",
           "children": [
             {
               "url": "guide/user-input",
-              "title": "User Input",
-              "tooltip": "User input triggers DOM events. We listen to those events with event bindings that funnel updated values back into our components and models."
+              "title": "ユーザー入力",
+              "tooltip": "ユーザー入力はDOMイベントを発火します。イベントバインディングを使用してこれらのイベントをリッスンし、更新された値をコンポーネントとモデルに戻します。",
+              "translated": true
             },
             {
               "url": "guide/forms",

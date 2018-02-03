@@ -97,7 +97,7 @@ Angular は `providers` からひとつの `HeroService` インスタンスを�
 
 <div class="alert is-helpful">
 
-_providers_ についてより詳しく知りたい方は [NgModules](guide/ngmodule#providers) を参照してください。
+_providers_ についてより詳しく知りたい方は [Providers](guide/providers) を参照してください。
 
 </div>
 
@@ -216,11 +216,11 @@ title="src/app/hero.service.ts (Observable imports)" region="import-observable">
 
 <code-tabs>
 
-  <code-pane title="hero.component.ts (Observable)" 
+  <code-pane title="heroes.component.ts (Observable)" 
     path="toh-pt4/src/app/heroes/heroes.component.ts" region="getHeroes">
   </code-pane>
 
-  <code-pane title="hero.component.ts (Original)" 
+  <code-pane title="heroes.component.ts (Original)" 
     path="toh-pt4/src/app/heroes/heroes.component.1.ts" region="getHeroes">
   </code-pane>
 

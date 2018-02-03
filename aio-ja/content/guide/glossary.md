@@ -433,7 +433,7 @@ _モジュール_
 
 
 Angularには2種類のモジュールがあります。
-* [Angularモジュール](guide/glossary#ngmodule)。詳細や例は[Angularモジュール](guide/ngmodule)のページを参照してください。
+* [Angularモジュール](guide/glossary#ngmodule)。詳細や例は[Angularモジュール](guide/ngmodules)のページを参照してください。
 * この節で説明するようなES2015モジュール。
 
 比較は[JavaScript Modules vs. NgModules](guide/ngmodule-vs-jsmodule)をご覧ください。

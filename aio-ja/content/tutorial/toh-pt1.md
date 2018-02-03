@@ -212,7 +212,7 @@ region="ng-imports">
 {@a declare-heroescomponent}
 ### _HeroesComponent_ を宣言する
 
-すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodule)で宣言されなければなりません。
+すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodules)で宣言されなければなりません。
 
 _あなたは_ `HeroesComponent`を宣言していません。
 では、なぜアプリケーションは動作したのでしょうか？

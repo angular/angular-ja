@@ -1,24 +1,21 @@
-# User Input
+# ユーザー入力
 
-User actions such as clicking a link, pushing a button, and entering
-text raise DOM events.
-This page explains how to bind those events to component event handlers using the Angular
-event binding syntax.
+リンクをクリックしたり、ボタンを押したり、テキストを入力したりするようなユーザーアクションはDOMイベントを発生させます。
+このページでは、Angularのイベントバインディング構文を使用してコンポーネントのイベントハンドラにそれらのイベントをバインドする方法を説明します。
 
-Run the <live-example></live-example>.
+<live-example></live-example> を実行してください。
 
 
-## Binding to user input events
+## ユーザー入力イベントにバインドする
 
-You can use [Angular event bindings](guide/template-syntax#event-binding)
-to respond to any [DOM event](https://developer.mozilla.org/en-US/docs/Web/Events).
-Many DOM events are triggered by user input. Binding to these events provides a way to
-get input from the user.
+[Angularイベントバインディング](guide/template-syntax#event-binding)を使用して、[DOMイベント](https://developer.mozilla.org/en-US/docs/Web/Events)に応答できます。
+多くのDOMイベントはユーザー入力によってトリガーされます。 
+これらのイベントにバインドすることで、ユーザーからの入力を得ることができます。
 
-To bind to a DOM event, surround the DOM event name in parentheses and assign a quoted
-[template statement](guide/template-syntax#template-statements) to it.
+DOMイベントにバインドするには、DOMイベント名をカッコで囲み、
+クォーテーションの中に[テンプレート文](guide/template-syntax#template-statements)を割り当てます。
 
-The following example shows an event binding that implements a click handler:
+次の例は、クリックハンドラを実装するイベントバインディングを示しています。
 
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-button" title="src/app/click-me.component.ts" linenums="false">
 
@@ -26,16 +23,14 @@ The following example shows an event binding that implements a click handler:
 
 {@a click}
 
-The `(click)` to the left of the equals sign identifies the button's click event as the **target of the binding**.
-The text in quotes to the right of the equals sign
-is the **template statement**, which responds
-to the click event by calling the component's `onClickMe` method.
+等号の左側の`(click)`は、**バインディングのターゲット**としてボタンのクリックイベントを識別します。 
+等号の右側のクォーテーションで囲まれたテキストは、
+コンポーネントの`onClickMe`メソッドを呼び出すことによってclickイベントに応答する**テンプレート文**です。
 
-When writing a binding, be aware of a template statement's **execution context**.
-The identifiers in a template statement belong to a specific context object,
-usually the Angular component controlling the template.
-The example above shows a single line of HTML, but that HTML belongs to a larger component:
-
+バインディングを記述するときは、テンプレート文の**実行コンテキスト**に注意してください。
+テンプレート文中の識別子は、特定のコンテキストオブジェクトに属します。
+それは通常、テンプレートを制御するAngularコンポーネントです。 
+上の例はHTMLの1行を示していますが、HTMLはより大きなコンポーネントに属しています。
 
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" title="src/app/click-me.component.ts" linenums="false">
 
@@ -43,15 +38,14 @@ The example above shows a single line of HTML, but that HTML belongs to a larger
 
 
 
-When the user clicks the button, Angular calls the `onClickMe` method from `ClickMeComponent`.
+ユーザーがボタンをクリックすると、Angularは`ClickMeComponent`の`onClickMeメソッド`を呼び出します。
 
 
+## $eventオブジェクトからユーザー入力を取得する
+DOMイベントは、コンポーネントにとって有益な情報のペイロードを保持します。 
+このセクションでは、各キーストローク後に入力ボックスの`keyup`イベントにバインドしてユーザーの入力を取得する方法を示します。
 
-## Get user input from the $event object
-DOM events carry a payload of information that may be useful to the component.
-This section shows how to bind to the `keyup` event of an input box to get the user's input after each keystroke.
-
-The following code listens to the `keyup` event and passes the entire event payload (`$event`) to the component event handler.
+次のコードは、`keyup`イベントをリッスンし、イベントペイロード（`$event`）全体をコンポーネントイベントハンドラに渡します。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-template" title="src/app/keyup.components.ts (template v.1)" linenums="false">
 
@@ -59,8 +53,8 @@ The following code listens to the `keyup` event and passes the entire event payl
 
 
 
-When a user presses and releases a key, the `keyup` event occurs, and Angular provides a corresponding
-DOM event object in the `$event` variable which this code passes as a parameter to the component's `onKey()` method.
+ユーザーがキーを押して離すと、`keyup`イベントが発生し、
+Angularは対応するDOMイベントオブジェクトをコンポーネントの`onKey()`メソッドに渡される`$event`変数に提供します。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class-no-type" title="src/app/keyup.components.ts (class v.1)" linenums="false">
 
@@ -68,21 +62,19 @@ DOM event object in the `$event` variable which this code passes as a parameter 
 
 
 
-The properties of an `$event` object vary depending on the type of DOM event. For example,
-a mouse event includes different information than a input box editing event.
+`$event`オブジェクトのプロパティは、DOMイベントのタイプによって異なります。
+たとえば、マウスイベントは、入力ボックス編集イベントとは異なる情報を含みます。
 
-All [standard DOM event objects](https://developer.mozilla.org/en-US/docs/Web/API/Event)
-have a `target` property, a reference to the element that raised the event.
-In this case, `target` refers to the [`<input>` element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement) and
-`event.target.value` returns the current contents of that element.
+すべての[標準DOMイベントオブジェクト](https://developer.mozilla.org/en-US/docs/Web/API/Event)には、
+イベントを発生させた要素への参照である`target`プロパティがあります。
+この場合、`target`は[`<input>`要素](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)を参照し、
+`event.target.value`はその要素の現在の内容を返します。
 
-After each call, the `onKey()` method appends the contents of the input box value to the list
-in the component's `values` property, followed by a  separator character (|).
-The [interpolation](guide/template-syntax#interpolation)
-displays the accumulating input box changes from the `values` property.
+各呼び出しの後、`onKey()`メソッドは、入力ボックス値の内容をコンポーネントの`values`プロパティのリストに追加し、
+その後に区切り文字（|）を続けます。
+[補間](guide/template-syntax#interpolation)は、`values`プロパティからの累積された入力ボックスの変更を表示します。
 
-Suppose the user enters the letters "abc", and then backspaces to remove them one by one.
-Here's what the UI displays:
+ユーザーが文字「abc」を入力した後、バックスペースで1つずつ削除するとします。 UIに表示される内容は次のとおりです。
 
 <code-example>
   a | ab | abc | ab | a | |
@@ -100,8 +92,8 @@ Here's what the UI displays:
 
 
 
-Alternatively, you could accumulate the individual keys themselves by substituting `event.key`
-for `event.target.value` in which case the same user input would produce:
+あるいは、`event.key`を`event.target.value`の代わりに代入することによって、
+個々のキー自体を累積することができます。この場合、同じユーザー入力は次のようになります。
 
 <code-example>
   a | b | c | backspace | backspace | backspace |
@@ -117,14 +109,13 @@ for `event.target.value` in which case the same user input would produce:
 {@a keyup1}
 
 
-### Type the _$event_
+### _$event_の型
 
-The example above casts the `$event` as an `any` type.
-That simplifies the code at a cost.
-There is no type information
-that could reveal properties of the event object and prevent silly mistakes.
+上記の例は`$event`を`any`型としてキャストします。
+これは代償のあるコードの簡素化です。
+イベントオブジェクトのプロパティを明らかにし、愚かな間違いを防ぐことができる型情報はありません。
 
-The following example rewrites the method with types:
+次の例では、メソッドを型を使って書き換えます。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class" title="src/app/keyup.components.ts (class v.1 - typed )" linenums="false">
 
@@ -132,29 +123,26 @@ The following example rewrites the method with types:
 
 
 
-The `$event` is now a specific `KeyboardEvent`.
-Not all elements have a `value` property so it casts `target` to an input element.
-The `OnKey` method more clearly expresses what it expects from the template and how it interprets the event.
+`$event`は、特定の`KeyboardEvent`になりました。
+すべての要素が`value`プロパティを持っているわけではないので、input要素に`target`をキャストします。
+`onKey`メソッドは、テンプレートから期待されるものと、イベントをどのように解釈するかをより明確に表現します。
 
-### Passing _$event_ is a dubious practice
-Typing the event object reveals a significant objection to passing the entire DOM event into the method:
-the component has too much awareness of the template details.
-It can't extract information without knowing more than it should about the HTML implementation.
-That breaks the separation of concerns between the template (_what the user sees_)
-and the component (_how the application processes user data_).
+### _$event_を渡すべきでしょうか？
+イベントオブジェクトに型を付けることは、DOMイベント全体をメソッドに渡すことへの重大な反論を生みます。
+コンポーネントはテンプレートの詳細を知りすぎています。
+これはHTMLの実装以上のことを知らないと情報を取り出せません。
+これはテンプレート（_ユーザーが見るもの_）とコンポーネント（_アプリケーションがユーザーデータをどのように処理するか_）の間における関心の分離を壊します。
 
-The next section shows how to use template reference variables to address this problem.
-
+次のセクションでは、テンプレート参照変数を使用してこの問題に対処する方法を示します。
 
 
-## Get user input from a template reference variable
-There's another way to get the user data: use Angular
-[**template reference variables**](guide/template-syntax#ref-vars).
-These variables provide direct access to an element from within the template.
-To declare a template reference variable, precede an identifier with a hash (or pound) character (#).
+## テンプレート参照変数からユーザー入力を取得する
+ユーザーデータを取得するもう1つの方法は、
+Angularの[**テンプレート参照変数**](guide/template-syntax#ref-vars)を使用することです。
+これらの変数は、テンプレート内から要素への直接アクセスを提供します。
+テンプレート参照変数を宣言するには、識別子の前にハッシュ（またはポンド）文字（#）を付けます。
 
-The following example uses a template reference variable
-to implement a keystroke loopback in a simple template.
+次の例では、テンプレート参照変数を使用して、単純なテンプレートにキーストロークループバックを実装しています。
 
 <code-example path="user-input/src/app/loop-back.component.ts" region="loop-back-component" title="src/app/loop-back.component.ts" linenums="false">
 
@@ -162,15 +150,14 @@ to implement a keystroke loopback in a simple template.
 
 
 
-The template reference variable named `box`, declared on the `<input>` element,
-refers to the `<input>` element itself.
-The code uses the `box` variable to get the input element's `value` and display it
-with interpolation between `<p>` tags.
+`<input>`要素で宣言されたboxという名前のテンプレート参照変数は、`<input>`要素自体を参照します。
+このコードでは、`box`変数を使用してinput要素の`value`を取得し、
+`<p>`タグ間に補間を使って表示します。
 
-The template is completely self contained. It doesn't bind to the component,
-and the component does nothing.
+テンプレートは完全に自己完結しています。
+コンポーネントにバインドされず、コンポーネントは何もしません。
 
-Type something in the input box, and watch the display update with each keystroke.
+入力ボックスに何かを入力し、各キーストロークでディスプレイの更新を見てください。
 
 
 <figure>
@@ -183,22 +170,19 @@ Type something in the input box, and watch the display update with each keystrok
 
 
 
-**This won't work at all unless you bind to an event**.
+**これは、イベントにバインドしない限り、まったく動作しません**
 
-Angular updates the bindings (and therefore the screen)
-only if the app does something in response to asynchronous events, such as keystrokes.
-This example code binds the `keyup` event
-to the number 0, the shortest template statement possible.
-While the statement does nothing useful,
-it satisfies Angular's requirement so that Angular will update the screen.
+Angularは、アプリケーションがキーストロークなどの非同期イベントに応答して何かを行う場合にのみ、
+バインディング（つまり画面）を更新します。
+この例のコードは、可能な限り最短のテンプレートステートメントである数字0に`keyup`イベントをバインドしています。
+このステートメントは何も役に立ちませんが、Angularの要求を満たし、Angularが画面を更新するようにします。
 
 </div>
 
 
 
-It's easier to get to the input box with the template reference
-variable than to go through the `$event` object. Here's a rewrite of the previous
-`keyup` example that uses a template reference variable to get the user's input.
+`$event`オブジェクトを調べるよりも、テンプレート参照変数を使って入力ボックスに行く方が簡単です。
+テンプレート参照変数を使用してユーザーの入力を取得する、以前の`keyup`の例を書き直しました。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-2" title="src/app/keyup.components.ts (v2)" linenums="false">
 
@@ -206,18 +190,18 @@ variable than to go through the `$event` object. Here's a rewrite of the previou
 
 
 
-A nice aspect of this approach is that the component gets clean data values from the view.
-It no longer requires knowledge of the `$event` and its structure.
+このアプローチの素晴らしい点は、コンポーネントがビューからクリーンなデータ値を取得することです。 
+`$event`とその構造についての知識はもはや必要ありません。
 {@a key-event}
 
 
-## Key event filtering (with `key.enter`)
-The `(keyup)` event handler hears *every keystroke*.
-Sometimes only the _Enter_ key matters, because it signals that the user has finished typing.
-One way to reduce the noise would be to examine every `$event.keyCode` and take action only when the key is _Enter_.
+## キーイベントフィルタリング (`key.enter`を使う)
+`(keyup)`イベントハンドラはすべてのキーストロークを拾います。
+ユーザーが入力を完了したことを知らせるため、_Enter_キーだけが重要な場合があります。
+ノイズを減らす1つの方法は、毎回`$event.keyCode`を調べ、キーが_Enter_の場合にのみアクションを取ることです。
 
-There's an easier way: bind to Angular's `keyup.enter` pseudo-event.
-Then Angular calls the event handler only when the user presses _Enter_.
+もっと簡単な方法は、Angularの`keyup.enter`疑似イベントにバインドすることです。 
+Angularは、ユーザーが_Enter_キーを押したときにのみイベントハンドラを呼び出します。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-3" title="src/app/keyup.components.ts (v3)" linenums="false">
 
@@ -225,7 +209,7 @@ Then Angular calls the event handler only when the user presses _Enter_.
 
 
 
-Here's how it works.
+このように動作します。
 
 <figure>
   <img src='generated/images/guide/user-input/keyup3-anim.gif' alt="key up 3">
@@ -234,15 +218,12 @@ Here's how it works.
 
 
 
-## On blur
+## blurイベント
 
-In the previous example, the current state of the input box
-is lost if the user mouses away and clicks elsewhere on the page
-without first pressing _Enter_.
-The component's `value` property is updated only when the user presses _Enter_.
+前の例では、入力ボックスの現在の状態は、ユーザーが一度も_Enter_キーを押さずにページ上の他の場所にマウスを移動してクリックすると失われます。
+コンポーネントの`value`プロパティは、ユーザーが_Enter_キーを押したときにのみ更新されます。
 
-To fix this issue, listen to both the _Enter_ key and the _blur_ event.
-
+この問題を解決するには、_Enter_キーと_blur_イベントの両方をリッスンします。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-4" title="src/app/keyup.components.ts (v4)" linenums="false">
 
@@ -251,14 +232,12 @@ To fix this issue, listen to both the _Enter_ key and the _blur_ event.
 
 
 
-## Put it all together
-The previous page showed how to [display data](guide/displaying-data).
-This page demonstrated event binding techniques.
+## すべてをまとめましょう
+前のページに、[データを表示する](guide/displaying-data)方法を示しました。
+このページでは、イベントバインディング手法について説明しました。
 
-Now, put it all together in a micro-app
-that can display a list of heroes and add new heroes to the list.
-The user can add a hero by typing the hero's name in the input box and
-clicking **Add**.
+それでは、すべてのヒーローのリストを表示し、新しいヒーローをリストに追加できるマイクロアプリにまとめましょう。
+ユーザーは、入力ボックスにヒーローの名前を入力して**Add**をクリックすると、ヒーローを追加できます。
 
 
 <figure>
@@ -267,7 +246,7 @@ clicking **Add**.
 
 
 
-Below is the "Little Tour of Heroes"  component.
+以下は「Little Tour of Heroes」のコンポーネントです。
 
 
 <code-example path="user-input/src/app/little-tour.component.ts" region="little-tour" title="src/app/little-tour.component.ts" linenums="false">
@@ -276,26 +255,26 @@ Below is the "Little Tour of Heroes"  component.
 
 
 
-### Observations
+### 注目するポイント
 
-* **Use template variables to refer to elements** &mdash;
-The `newHero` template variable refers to the `<input>` element.
-You can reference `newHero` from any sibling or child of the `<input>` element.
+* **テンプレート変数を使用して要素を参照する** &mdash;
+`newHero`テンプレート変数は`<input>`要素を参照します。 
+`<input>`要素の任意の兄弟または子から`newHero`を参照できます。
 
-* **Pass values, not elements** &mdash;
-Instead of passing the `newHero` into the component's `addHero` method,
-get the input box value and pass *that* to `addHero`.
+* **要素ではなく値を渡す** &mdash;
+`newHero`をコンポーネントの`addHero`メソッドに渡す代わりに、
+入力ボックスの値を取得して`addHero`に渡します。
 
-* **Keep template statements simple** &mdash;
-The `(blur)` event is bound to two JavaScript statements.
-The first statement calls `addHero`.  The second statement, `newHero.value=''`,
-clears the input box after a new hero is added to the list.
+* **テンプレートステートメントをシンプルに保つ** &mdash;
+`(blur)`イベントは、2つのJavaScriptステートメントにバインドされています。
+最初の文は`addHero`を呼び出します。 2番目の`newHero.value=''`は、
+新しいヒーローがリストに追加された後に入力ボックスをクリアします。
 
 
 
-## Source code
+## ソースコード
 
-Following is all the code discussed in this page.
+このページで説明したすべてのコードを示します。
 
 <code-tabs>
 
@@ -320,13 +299,12 @@ Following is all the code discussed in this page.
 
 
 
-## Summary
+## まとめ
 
-You have mastered the basic primitives for responding to user input and gestures.
+ユーザー入力とジェスチャーに応答するための基本的なプリミティブをマスターしました。
 
-These techniques are useful for small-scale demonstrations, but they
-quickly become verbose and clumsy when handling large amounts of user input.
-Two-way data binding is a more elegant and compact way to move
-values between data entry fields and model properties.
-The next page, `Forms`, explains how to write
-two-way bindings with `NgModel`.
+これらの手法は小規模のデモンストレーションには便利ですが、
+大量のユーザー入力を処理する場合は、すぐに煩雑になります。
+双方向データバインディングは、データ入力フィールドとモデルプロパティの間で値を移動するための、
+よりエレガントでコンパクトな方法です。
+次のページ `フォーム` では、`NgModel`を使用して双方向バインディングを作成する方法について説明します。

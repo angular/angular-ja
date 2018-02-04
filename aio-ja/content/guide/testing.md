@@ -18,6 +18,8 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 * <live-example embedded-style>テストされるサンプルアプリケーション</live-example>.
 * <live-example plnkr="app-specs" embedded-style>サンプルアプリケーションをテストするすべての仕様</live-example>.
 * <live-example plnkr="bag-specs" embedded-style>様々な追加仕様</live-example>.
+* <live-example embedded-style>The sample application to be tested</live-example>.
+* <live-example stackblitz="specs" embedded-style>All specs that test the sample application</live-example>.
 
 <hr/>
 
@@ -406,6 +408,8 @@ Angular テストモジュールを作成する &mdash; `@NgModule` クラス &m
 
 `configureTestingModule` メソッドは　`@NgModule` のようなメタデータオブジェクトを取ります。  
 メタデータオブジェクトは、通常の [NgModule](guide/ngmodule) のプロパティのほとんどを持つことができます。
+The `configureTestingModule` method takes an `@NgModule`-like metadata object.
+The metadata object can have most of the properties of a normal [NgModule](guide/ngmodules).
 
 _メタデータオブジェクト_は、単にテストするコンポーネント、 `BannerComponent` を宣言します。  
 メタデータには、 `imports` がありません。  
@@ -533,14 +537,6 @@ a fact demonstrated in the following test:
 This behavior (or lack of it) is intentional.
 It gives the tester an opportunity to inspect or change the state of
 the component _before Angular initiates data binding or calls lifecycle hooks_.
-
-
-{@a try-example}
-
-
-### Try the live example
-Take a moment to explore this component spec as a <live-example plnkr="banner-inline-specs" title="Spec for component with inline template" embedded-style></live-example> and
-lock in these fundamentals of component unit testing.
 
 
 {@a auto-detect-changes}
@@ -729,20 +725,9 @@ into a `compileComponents().then(...)` callback and write only one `beforeEach`.
 Most developers find that hard to read.
 The two `beforeEach` calls are widely preferred.
 
-{@a live-external-template-example}
-
-### Try the live example
-
-Take a moment to explore this component spec as a <live-example plnkr="banner-specs" title="Spec for component with external template" embedded-style></live-example>.
-
 
 <div class="l-sub-section">
 
-
-
-The [Quickstart seed](guide/setup) provides a similar test of its `AppComponent`
-as you can see in _this_ <live-example name="setup" plnkr="quickstart-specs" title="QuickStart seed spec" embedded-style></live-example>.
-It too calls `compileComponents` although it doesn't have to because the `AppComponent`'s template is inline.
 
 There's no harm in it and you might call `compileComponents` anyway
 in case you decide later to re-factor the template into a separate file.
@@ -1645,7 +1630,8 @@ New heroes have `id=0` and a blank `name`. This test confirms that the component
 
 
 
-Inspect and download _all_ of the guide's application test code with this <live-example plnkr="app-specs" embedded-style>live example</live-example>.
+Inspect and download _all_ of the guide's application test code with this 
+<live-example stackblitz="specs" embedded-style>live example</live-example>.
 
 
 </div>
@@ -1763,7 +1749,7 @@ It's a bit tighter and smaller, with fewer import statements (not shown).
 
 ### Import the feature module
 
-The `HeroDetailComponent` is part of the `HeroModule` [Feature Module](guide/ngmodule#feature-modules) that aggregates more of the interdependent pieces
+The `HeroDetailComponent` is part of the `HeroModule` [Feature Module](guide/feature-modules) that aggregates more of the interdependent pieces
 including the `SharedModule`.
 Try a test configuration that imports the `HeroModule` like this one:
 

@@ -184,7 +184,7 @@ Angularでは、アプリケーションの部品がどのように合わさる�
 この情報を _メタデータ_ といいます。
 
 一部のメタデータは、コンポーネントクラスに追加した`@Component`デコレータ内にあります。
-その他の重要なメタデータは[`@NgModule`](guide/ngmodule)デコレータ内にあります。
+その他の重要なメタデータは[`@NgModule`](guide/ngmodules)デコレータ内にあります。
 
 もっとも重要な`@NgModule`デコレータは、トップレベルの **AppModule** クラスに注釈を付けます。
 
@@ -212,7 +212,7 @@ region="ng-imports">
 {@a declare-heroescomponent}
 ### _HeroesComponent_ を宣言する
 
-すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodule)で宣言されなければなりません。
+すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodules)で宣言されなければなりません。
 
 _あなたは_ `HeroesComponent`を宣言していません。
 では、なぜアプリケーションは動作したのでしょうか？

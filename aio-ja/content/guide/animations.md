@@ -1,6 +1,6 @@
 # アニメーション
 
-モーションは、最新のWebアプリケーションの設計において重要な側面を担っています。  
+モーションは、モダンなWebアプリケーションの設計において重要な側面を担っています。  
 適切なユーザーインターフェースは、必要な箇所で注意を促す魅力的なアニメーションの状態をスムーズにトランジションさせます。
 うまく設計されたアニメーションは、UIをより楽しくするだけでなく使いやすくすることができます。
 
@@ -38,7 +38,7 @@ Angularのアニメーションは、標準の[Web Animations API](https://w3c.g
 
 <code-example path="animations/src/app/hero.service.ts" region="hero" title="hero.service.ts (Hero class)" linenums="false"></code-example>
 
-画面上部 (`app.hero-team-builder.component.ts`) には、(`HeroService`) のリストを介して、ヒーローを追加または削除する一連のボタンがあります。
+画面上部 (`app.hero-team-builder.component.ts`) には、(`HeroService` 介して) ヒーローを追加または削除する一連のボタンがあります。
 そのボタンは、すべてのサンプルコンポーネントが同時に参照するリストに変更をトリガーをします。
 
 {@a example-transitioning-between-states}
@@ -55,7 +55,7 @@ Angularのアニメーションは、標準の[Web Animations API](https://w3c.g
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="imports" title="hero-list-basic.component.ts" linenums="false"></code-example>
 
 これらを使用して、コンポーネントメタデータに `heroState` という *アニメーショントリガー* を定義できます。
-アニメーションを使用して、`アクティブ` 状態と `非アクティブ` 状態の2つの状態の間で推移します。
+アニメーションを使用して、`active` 状態と `inactive` 状態の2つの状態の間で推移します。
 ヒーローがアクティブになると、要素はやや大きなサイズと明るい色で表示されます。
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="animationdef" title="hero-list-basic.component.ts (@Component excerpt)" linenums="false"></code-example>
@@ -72,7 +72,7 @@ Angularのアニメーションは、標準の[Web Animations API](https://w3c.g
 
 ここで、アニメーショントリガーは、 `ngFor` で繰り返されるすべての要素に適用されます。
 繰り返し要素のそれぞれは、独立してアニメーション化されます。
-属性の値は、式 `hero.state` にバインドされ、常に `アクティブ` または `非アクティブ` のいずれかになります。
+属性の値は、式 `hero.state` にバインドされ、常に `active` または `inactive` のいずれかになります。
 
 この設定では、ヒーローオブジェクトが状態を変えるたびにアニメーションのトランジションが表示されます。
 完全なコンポーネントの実装は次の通りになります:
@@ -115,7 +115,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 
 また、アニメーションの途中でスタイルを適用することもできますが、アニメーションが終了した後にスタイルを維持することはできません。
 このようなスタイルは、`transition` でインラインで定義することができます。
-この例では、その要素はすぐに1組のスタイルを受け取り、次のスタイルにアニメートされます。
+この例では、その要素はすぐに1組のスタイルを受け取り、次のスタイルにアニメーションされます。
 トランジションが終了すると、これらのスタイルは `state` で定義されていないため保持されません。
 
 <code-example path="animations/src/app/hero-list-inline-styles.component.ts" region="transitions" title="src/app/hero-list-inline-styles.component.ts" linenums="false"></code-example>
@@ -138,7 +138,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 `void` と呼ばれる特別な状態は、どのアニメーションにも適用できます。
 これは、要素がビューにアタッチされて *いない* 場合に適用されます。
 これは、要素がまだ追加されていないか、または除去されたためです。
-`void` ステートは、アニメーションの入力と終了を定義するのに便利です。
+`void` ステートは、アニメーションの入場と退場を定義するのに便利です。
 
 例えば、`* => void`トランジションは、要素に残していた状態にかかわらず、要素がビューから離れるときに適用されます。
 
@@ -175,7 +175,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 
 </div>
 
-## 例：entering と leaving でそれぞれ異なる状態にする
+## 例：異なる状態からの入場と退場
 
 <img src="generated/images/guide/animations/animation_enter_leave_states.gif" alt="Enter and leave animations combined with state animations" class="right" width="200">
 
@@ -221,7 +221,7 @@ W3Cの、[CSS Transitions ページ](https://www.w3.org/TR/css3-transitions)に[
 
 これらの場合、特殊な `*` プロパティ値を使用することでプロパティの値が実行時に計算され、その後アニメーションにプラグインされるようにすることができます。
 
-この例では、Leaveアニメーションは、要素が離れる前の任意の高さをとり、その高さから0までアニメーションします。
+この例では、退場アニメーションは、要素が離れる前の任意の高さをとり、その高さから0までアニメーションします。
 
 <code-example path="animations/src/app/hero-list-auto.component.ts" region="animationdef" title="src/app/hero-list-auto.component.ts" linenums="false"></code-example>
 

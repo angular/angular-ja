@@ -196,8 +196,9 @@
             },
             {
               "url": "guide/animations",
-              "title": "Animations",
-              "tooltip": "A guide to Angular's animation system."
+              "title": "アニメーション",
+              "tooltip": "Angularのアニメーションシステムについて",
+              "translated": true
             }
           ]
         },

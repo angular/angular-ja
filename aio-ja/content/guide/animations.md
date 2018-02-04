@@ -75,7 +75,7 @@ Angularのアニメーションは、標準の[Web Animations API](https://w3c.g
 属性の値は、式 `hero.state` にバインドされ、常に `active` または `inactive` のいずれかになります。
 
 この設定では、ヒーローオブジェクトが状態を変えるたびにアニメーションのトランジションが表示されます。
-完全なコンポーネントの実装は次の通りになります:
+完全なコンポーネントの実装は次のとおりになります:
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" title="hero-list-basic.component.ts"></code-example>
 
@@ -105,11 +105,11 @@ Angular のアニメーションは、論理 **状態** および状態間の **
   <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active.png" alt="In Angular animations you define states and transitions between states" width="400">
 </figure>
 
-複数のトランジションが同じタイミング構成を持つ場合、それらを同じ `transition` の定義に組み合わせることができます:
+複数のトランジションが同じタイミング構成をもつ場合、それらを同じ `transition` の定義に組み合わせることができます:
 
 <code-example path="animations/src/app/hero-list-combined-transitions.component.ts" region="transitions" title="src/app/hero-list-combined-transitions.component.ts" linenums="false"></code-example>
 
-トランジションの両方向が同じタイミングを持つ場合、前の例のように、簡略構文 `<=>` を利用できます。
+トランジションの両方向が同じタイミングをもつ場合、前の例のように、簡略構文 `<=>` を利用できます。
 
 <code-example path="animations/src/app/hero-list-twoway.component.ts" region="transitions" title="src/app/hero-list-twoway.component.ts" linenums="false"></code-example>
 
@@ -140,7 +140,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 これは、要素がまだ追加されていないか、または除去されたためです。
 `void` ステートは、アニメーションの入場と退場を定義するのに便利です。
 
-例えば、`* => void`トランジションは、要素に残していた状態にかかわらず、要素がビューから離れるときに適用されます。
+たとえば、`* => void`トランジションは、要素に残していた状態にかかわらず、要素がビューから離れるときに適用されます。
 
 <figure>
   <img src="generated/images/guide/animations/ng_animate_transitions_void_in.png" alt="The void state can be used for enter and leave transitions" width="400">
@@ -157,7 +157,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 * enter: `void => *`
 * leave: `* => void`
 
-たとえば、以下のアニメーション配列には、`void => *`および`* => void`構文を使用してビューの内外に要素をアニメーションさせる2つのトランジションがあります。
+たとえば、次のアニメーション配列には、`void => *`および`* => void`構文を使用してビューの内外に要素をアニメーションさせる2つのトランジションがあります。
 
 <code-example path="animations/src/app/hero-list-enter-leave.component.ts" region="animationdef" title="hero-list-enter-leave.component.ts (excerpt)" linenums="false"></code-example>
 
@@ -201,7 +201,7 @@ Angular のアニメーションサポートは Web アニメーションの上�
 これには、位置、サイズ、変形、色、枠線、その他多くのものが含まれます。
 W3Cの、[CSS Transitions ページ](https://www.w3.org/TR/css3-transitions)に[アニメーション可能なプロパティのリスト](https://www.w3.org/TR/css3-transitions/#animatable-properties)が記載されています。
 
-数値を持つ定位置プロパティの場合、適切な接尾辞を持つ文字列として値を指定して単位を定義できます。
+数値をもつ定位置プロパティの場合、適切な接尾辞をつ文字列として値を指定して単位を定義できます。
 
 * `'50px'`
 * `'3em'`

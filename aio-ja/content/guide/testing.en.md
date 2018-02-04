@@ -1,25 +1,24 @@
-# テスト
+# Testing
 
-このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
-このページには一般的なテストの原則と技術が含まれていますが、
-Angular で、書かれたアプリケーションのテストに重点を置いています。
+This guide offers tips and techniques for testing Angular applications.
+Though this page includes some general testing principles and techniques,
+the focus is on testing applications written with Angular.
+
 
 {@a top}
 
 ## Live examples
 
-このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
-サンプルアプリケーションとこのガイドのすべてのテストは、インスペクション、テスト、およびダウンロードの実例として利用できます。
+This guide presents tests of a sample application that is much like the [_Tour of Heroes_ tutorial](tutorial).
+The sample application and all tests in this guide are available as live examples for inspection, experiment, and download:
 
-* <live-example plnkr="1st-specs" embedded-style>テスト環境を検証するための仕様</live-example>.
-* <live-example plnkr="banner-inline-specs" embedded-style>インラインテンプレートを使用した最初のコンポーネント仕様</live-example>.
-* <live-example plnkr="banner-specs" embedded-style>外部テンプレートを使用したコンポーネント仕様</live-example>.
-* <live-example name="setup" plnkr="quickstart-specs" embedded-style>クイックスタートシード Appコンポーネントの仕様</live-example>.
-* <live-example embedded-style>テストされるサンプルアプリケーション</live-example>.
-* <live-example plnkr="app-specs" embedded-style>サンプルアプリケーションをテストするすべての仕様</live-example>.
-* <live-example plnkr="bag-specs" embedded-style>様々な追加仕様</live-example>.
+* <live-example plnkr="1st-specs" embedded-style>A spec to verify the test environment</live-example>.
+* <live-example plnkr="banner-inline-specs" embedded-style>The first component spec with inline template</live-example>.
+* <live-example plnkr="banner-specs" embedded-style>A component spec with external template</live-example>.
+* <live-example name="setup" plnkr="quickstart-specs" embedded-style>The QuickStart seed's AppComponent spec</live-example>.
 * <live-example embedded-style>The sample application to be tested</live-example>.
-* <live-example stackblitz="specs" embedded-style>All specs that test the sample application</live-example>.
+* <live-example plnkr="app-specs" embedded-style>All specs that test the sample application</live-example>.
+* <live-example plnkr="bag-specs" embedded-style>A grab bag of additional specs</live-example>.
 
 <hr/>
 
@@ -28,19 +27,20 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 {@a testing-intro}
 
 
-## Angular テスト入門
+## Introduction to Angular Testing
 
-このページでは、テストを作成して、アプリケーションの動作を確認します。  
-テストでは以下のことが行われます:
+This page guides you through writing tests to explore
+and confirm the behavior of the application. Testing
+does the following:
 
-1. 既存のコードを破る変更に対する予防線 (“回帰”).
+1. Guards against changes that break existing code (“regressions”).
 
-1. 意図したとおりに使用された場合と想定外の条件に直面した場合の両方で、コードが何を行うかを明確にします。
+1. Clarifies what the code does both when used as intended and when faced with deviant conditions.
 
-1. 設計と実装の間違いを明らかにする。  
-テストでは、あらゆる角度からコードに厳しい光が、当たっています。  
-アプリケーションの一部がテストするのが難しいように見える場合、根本的な原因は設計上の欠陥であることが多く、
-修正するのに費用がかかってしまった時よりもむしろ再実装べきものです。
+1. Reveals mistakes in design and implementation.
+Tests shine a harsh light on the code from many angles.
+When a part of the application seems hard to test, the root cause is often a design flaw,
+something to cure now rather than later when it becomes expensive to fix.
 
 <!-- TODO
 :marked
@@ -53,10 +53,11 @@ Learn more about basic Jasmine testing here
 {@a tools-and-tech}
 
 
-### ツールと技術
+### Tools and technologies
 
-様々なツールとテクノロジを使用して、Angular テストを作成して実行できます。  
-このガイドでは、正常動作することが分かっている特定の選択肢について説明します。
+You can write and run Angular tests with a variety of tools and technologies.
+This guide describes specific choices that are known to work well.
+
 
 <table width="100%">
 
@@ -71,11 +72,11 @@ Learn more about basic Jasmine testing here
   <tr>
 
     <th>
-      技術
+      Technology
     </th>
 
     <th>
-      目的
+      Purpose
     </th>
 
   </tr>
@@ -89,9 +90,9 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      [Jasmine テスト フレームワーク](http://jasmine.github.io/2.4/introduction.html)は、
-      基本的なテストを書くために必要なすべてを提供します。  
-      ブラウザにテストを実行するHTMLテストランナーが同梱されています。
+      The [Jasmine test framework](http://jasmine.github.io/2.4/introduction.html)
+      provides everything needed to write basic tests.
+      It ships with an HTML test runner that executes tests in the browser.
     </td>
 
   </tr>
@@ -99,14 +100,16 @@ Learn more about basic Jasmine testing here
   <tr style=top>
 
     <td style="vertical-align: top">
-      Angular テスト ユーティリティ
+      Angular testing utilities
     </td>
 
     <td>
 
 
-      テスト中のAngularアプリケーションコードの場合、Angular テストユーティリティがテスト環境を作成します。  
-      それらを使用してアプリケーションの部分を調整、制御して Angular 環境と相互利用します。
+      Angular testing utilities create a test environment
+      for the Angular application code under test.
+      Use them to condition and control parts of the application as they
+      interact _within_ the Angular environment.
     </td>
 
   </tr>
@@ -120,9 +123,10 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      [karma テストランナー](https://karma-runner.github.io/1.0/index.html)は、アプリケーションの開発中に単体テストを作成し実行するのに理想的です。
-      プロジェクトの開発および継続的な統合プロセスの不可欠な部分となります。  
-      このガイドでは、 karma でテストを設定して実行する方法について説明します。
+      The [karma test runner](https://karma-runner.github.io/1.0/index.html)
+      is ideal for writing and running unit tests while developing the application.
+      It can be an integral part of the project's development and continuous integration processes.
+      This guide describes how to set up and run tests with karma.
     </td>
 
   </tr>
@@ -136,11 +140,11 @@ Learn more about basic Jasmine testing here
     <td>
 
 
-      protractor は、  _end-to-end_ (e2e) テストを作成、実行する時に使います。
-      End-to-end は、アプリケーションが _ユーザーが操作したような動作を行います。_
-      e2e テストで、 第1のプロセスが実際のアプリケーションを実行され、
-      第2のプロセスは、ユーザ挙動をシミュレートする protractor テストを実行し、
-      アプリケーションが期待どおりにブラウザで応答することを通知します。
+      Use protractor to write and run _end-to-end_ (e2e) tests.
+      End-to-end tests explore the application _as users experience it_.
+      In e2e testing, one process runs the real application
+      and a second process runs protractor tests that simulate user behavior
+      and assert that the application respond in the browser as expected.
 
     </td>
 
@@ -153,48 +157,48 @@ Learn more about basic Jasmine testing here
 {@a setup}
 
 
-### セットアップ
+### Setup
 
-ユニットテストを開始するには、2つの方法があります。
+There are two fast paths to getting started with unit testing.
 
-1. [セットアップ](guide/setup "セットアップ") の指示に従って新しいプロジェクトを作成します。
+1. Start a new project following the instructions in [Setup](guide/setup "Setup").
 
-1. <a href="https://github.com/angular/angular-cli/blob/master/README.md" title="Angular CLI">Angular CLI</a> で新しいプロジェクトを作成します。
+1. Start a new project with the
+<a href="https://github.com/angular/angular-cli/blob/master/README.md" title="Angular CLI">Angular CLI</a>.
 
-どちらの方法でも、npmパッケージ、ファイル、およびアプリケーション用に事前設定されたスクリプトがインストールされます。
-それぞれの方法で構築されています。
-生成物と手順はわずかに異なりますが、それらの本質は同じです。
-テストコードに違いはありません。
+Both approaches install npm packages, files, and scripts pre-configured for applications
+built in their respective modalities.
+Their artifacts and procedures differ slightly but their essentials are the same
+and there are no differences in the test code.
 
-このガイドでは、アプリケーションとそのテストは [セットアップ手順](guide/setup "セットアップ") に基づいています。  
-ユニットテストのセットアップファイルの説明については、[以下を参照してください](guide/testing#setup-files)。
+In this guide, the application and its tests are based on the [setup instructions](guide/setup "Setup").
+For a discussion of the unit testing setup files, [see below](guide/testing#setup-files).
 
 
 {@a isolated-v-testing-utilities}
 
 
-### 単体テストと Angular テストユーティリティ
+### Isolated unit tests vs. the Angular testing utilities
 
-[単体テスト](guide/testing#isolated-unit-tests "Angular テストユーティリティを使用しない単体テスト")
-Angular に対する依存性又は注入された値に関わりなく、すべてのクラスのインスタンスを単独で調べます。
-テスタはクラスのテストインスタンスを `new` で作成し、必要に応じてコンストラクタパラメータのテストダブルを提供します。
-テストインスタンスの API 面 を厳密にテストします。
+[Isolated unit tests](guide/testing#isolated-unit-tests "Unit testing without the Angular testing utilities")
+examine an instance of a class all by itself without any dependence on Angular or any injected values.
+The tester creates a test instance of the class with `new`, supplying test doubles for the constructor parameters as needed, and
+then probes the test instance API surface.
 
-*pipes と services の単体テストを記述する必要があります。*
+*You should write isolated unit tests for pipes and services.*
 
-コンポーネントを個別にテストすることもできます。
-しかし、単体テストでは、コンポーネントが Angular とどのように対話するかは明確になりません。
-特に、コンポーネントクラスがそれ自身のテンプレートや他のコンポーネントとどのようにやり取りするかを明らかにすることはできません。
+You can test components in isolation as well.
+However, isolated unit tests don't reveal how components interact with Angular.
+In particular, they can't reveal how a component class interacts with its own template or with other components.
 
-このようなテストでは、 **Angular テストユーティリティ**が必要です。
-Angularテストユーティリティには `TestBed` クラスと `@angular/core/testing` のいくつかのヘルパー関数が含まれています。
-このガイドの主な焦点であり、あなたはそれらについて学びます
-それは、[最初のコンポーネントテストを書く時](guide/testing#simple-component-test)です。
+Such tests require the **Angular testing utilities**.
+The  Angular testing utilities include the `TestBed` class and several helper functions from `@angular/core/testing`.
+They are the main focus of this guide and you'll learn about them
+when you write your [first component test](guide/testing#simple-component-test).
+A comprehensive review of the Angular testing utilities appears [later in this guide](guide/testing#atu-apis).
 
-Angular テストユーティリティの包括的なレビューは、[このガイドの後半](guide/testing#atu-apis)に記載されています。
-
-しかし、まず、テスト環境が適切に設定されていることを確認するためのダミーテストを作成する必要があります。
-いくつかの基本的なテストスキルを確保することができます。
+But first you should write a dummy test to verify that your test environment is set up properly
+and to lock in a few basic testing skills.
 
 <hr/>
 
@@ -203,38 +207,39 @@ Angular テストユーティリティの包括的なレビューは、[この�
 {@a 1st-karma-test}
 
 
-## 初めての karma テスト
+## The first karma test
 
-簡単なテストから始め、セットアップが適切に動作することを確認します。
+Start with a simple test to make sure that the setup works properly.
 
-アプリケーションルートフォルダに `1st.spec.ts` という名前の新しいファイルを作成します、 `src/app/`
+Create a new file called `1st.spec.ts` in the application root folder, `src/app/`
 
 
 <div class="alert is-important">
 
 
 
-Jasmine で書かれたテストは _specs_ と呼ばれます。  
-**ファイル名の拡張子は、 `.spec.ts` でなければなりません。**  
-`karma.conf.js` やその他のツールで、遵守しています。
+Tests written in Jasmine are called _specs_ .
+**The filename extension must be `.spec.ts`**,
+the convention adhered to by  `karma.conf.js` and other tooling.
+
 
 </div>
 
 
 
-**spec ファイルを `src / app /` フォルダのどこかに置いてください。**  
-`karma.conf.js` が karma に spec ファイルを探しすよう指示します。   
-[以下の理由](guide/testing#q-spec-file-location)について説明されています。
+**Put spec files somewhere within the `src/app/` folder.**
+The `karma.conf.js` tells karma to look for spec files there,
+for reasons explained [below](guide/testing#q-spec-file-location).
 
-`src/app/1st.spec.ts` に以下のコードを追加してください。
+Add the following code to `src/app/1st.spec.ts`.
 
 <code-example path="testing/src/app/1st.spec.ts" title="src/app/1st.spec.ts" linenums="false"></code-example>
 
 {@a run-karma}
 
 
-### karma の実行
-次のコマンドを使用して、コマンドラインから karma でコンパイルして実行します。
+### Run with karma
+Compile and run it in karma from the command line using the following command:
 
 <code-example format="." language="bash">
   npm test
@@ -242,22 +247,21 @@ Jasmine で書かれたテストは _specs_ と呼ばれます。
 
 
 
-コマンドはアプリケーションとテストコードをコンパイルし、 karma を開始します。  
-どちらのプロセスも関連のァイルを監視し、コンソールにメッセージを書き込み、変更を検出したときに再実行します。
+The command compiles the application and test code and starts karma.
+Both processes watch pertinent files, write messages to the console, and re-run when they detect changes.
 
 <div class="l-sub-section">
 
 
 
-ドキュメントのセットアップでは、 npm の `package.json` の `scripts` セクションに  
-`test`コマンドが定義されています。  
-Angular CLIには、同じことをするためのコマンドがあります。  
-それに応じて調整してください。
+The documentation setup defines the `test` command in the `scripts` section of npm's `package.json`.
+The Angular CLI has different commands to do the same thing. Adjust accordingly.
+
 </div>
 
 
 
-しばらくすると、 karma はブラウザを開き、コンソールに出力し始めます。
+After a few moments, karma opens a browser and starts writing to the console.
 
 <figure>
   <img src='generated/images/guide/testing/karma-browser.png' alt="Karma browser">
@@ -265,8 +269,9 @@ Angular CLIには、同じことをするためのコマンドがあります。
 
 
 
-ブラウザを隠す（閉じないでください！）コンソール出力に焦点を当てます。  
-次のようになります。
+Hide (don't close!) the browser and focus on the console output, which
+should look something like this:
+
 
 <code-example format="." language="bash">
   > npm test
@@ -281,13 +286,13 @@ Angular CLIには、同じことをするためのコマンドがあります。
 
 
 
-コンパイラと karma の両方が実行し続けます。  
-コンパイラの出力は `[0]`で始まります。  
-karma は `[1]`によって出力されます。
+Both the compiler and karma continue to run. The compiler output is preceded by `[0]`;
+the karma output by `[1]`.
 
-期待値を `true` から `false`に変更してください。
+Change the expectation from `true` to `false`.
 
-_コンパイラ_ウォッチャーは、変更を検出し、再コンパイルします。
+The _compiler_ watcher detects the change and recompiles.
+
 
 <code-example format="." language="bash">
   [0] 1:49:21 PM - File change detected. Starting incremental compilation...
@@ -297,7 +302,7 @@ _コンパイラ_ウォッチャーは、変更を検出し、再コンパイル
 
 
 
-_karma_ ウォッチャーはコンパイル出力の変更を検出し、テストを再実行します。
+The _karma_ watcher detects the change to the compilation output and re-runs the test.
 
 <code-example format="." language="bash">
   [1] Chrome 51.0.2704 1st tests true is true FAILED
@@ -308,18 +313,19 @@ _karma_ ウォッチャーはコンパイル出力の変更を検出し、テス
 
 
 
-もちろん失敗します。
+It fails of course.
 
-期待値を `false` からの `true` に戻します。  
-どちらのプロセスも変化を検出、再実行し、 karma は完全な成功を報告します。
+Restore the expectation from `false` back to `true`.
+Both processes detect the change, re-run, and karma reports complete success.
+
 
 <div class="alert is-helpful">
 
 
 
-コンソールログはかなり長くなる可能性があります。  
-最後の行に注目してください。  
-すべてがうまくいくと、それは `SUCCESS` と読みます。
+The console log can be quite long. Keep your eye on the last line.
+When all is well, it reads `SUCCESS`.
+
 
 </div>
 
@@ -328,17 +334,18 @@ _karma_ ウォッチャーはコンパイル出力の変更を検出し、テス
 {@a test-debugging}
 
 
-### デバッグのテスト
+### Test debugging
 
-アプリケーションをデバッグするのと同じ方法で、ブラウザの仕様をデバッグします。
+Debug specs in the browser in the same way that you debug an application.
 
-  1. karma のブラウザウィンドウを表示します（前に隠れています）。
-  1. **DEBUG** ボタンをクリックします。新しいブラウザタブを開き、テストを再実行します。
-  1. ブラウザの「開発者ツール」（ Windows では `Ctrl-Shift-I` 、OSX では `Command-Option-I` ）を開きます。
-  1. "Sources" セクションを選択します。
-  1. `1st.spec.ts` テストファイル（ Control / Command-P を開き、ファイル名の入力を開始します。）を開きます。
-  1. テストにブレークポイントを設定します。
-  1. ブラウザを更新すると、ブレークポイントで停止します。
+  1. Reveal the karma browser window (hidden earlier).
+  1. Click the **DEBUG** button; it opens a new browser tab and re-runs the tests.
+  1. Open the browser's “Developer Tools” (`Ctrl-Shift-I` on windows; `Command-Option-I` in OSX).
+  1. Pick the "sources" section.
+  1. Open the `1st.spec.ts` test file (Control/Command-P, then start typing the name of the file).
+  1. Set a breakpoint in the test.
+  1. Refresh the browser, and it stops at the breakpoint.
+
 
 <figure>
   <img src='generated/images/guide/testing/karma-1st-spec-debug.png' alt="Karma debugging">
@@ -349,10 +356,10 @@ _karma_ ウォッチャーはコンパイル出力の変更を検出し、テス
 {@a live-karma-example}
 
 
-### 実例を試してみてください
+### Try the live example
 
-また、このテストを plunker で <live-example plnkr="1st-specs" title="最初の仕様" embedded-style></live-example> として試すこともできます。  
-このガイドのすべてのテストは、[実際のサンプル](guide/testing#live-examples "Live examples of these tests")として利用できます。
+You can also try this test as a <live-example plnkr="1st-specs" title="First spec" embedded-style></live-example> in plunker.
+All of the tests in this guide are available as [live examples](guide/testing#live-examples "Live examples of these tests").
 
 <hr/>
 
@@ -361,25 +368,26 @@ _karma_ ウォッチャーはコンパイル出力の変更を検出し、テス
 {@a simple-component-test}
 
 
-## component のテスト
+## Test a component
 
-Angular コンポーネントは、ほとんどの開発者が最初にテストしたいものです。  
-`src/app/banner-inline.component.ts` の `BannerComponent` は、このアプリケーションでは最も単純なコンポーネントであり、開始するのに適しています。  
-これは `<h1>` タグ内で画面上部にアプリケーションのタイトルを表示します。
+An Angular component is the first thing most developers want to test.
+The `BannerComponent` in `src/app/banner-inline.component.ts` is the simplest component in this application and
+a good place to start.
+It presents the application title at the top of the screen within an `<h1>` tag.
 
 <code-example path="testing/src/app/banner-inline.component.ts" title="src/app/banner-inline.component.ts" linenums="false"></code-example>
 
 
 
-このバージョンの `BannerComponent` には、インラインテンプレートと補完バインディングがあります。
-このコンポーネントは実際にはテストする価値があるとは言い難いですが、Angular テストユーティリティを最初に経験するには最適です。
+This version of the `BannerComponent` has an inline template and an interpolation binding.
+The component is probably too simple to be worth testing in real life but
+it's perfect for a first encounter with the Angular testing utilities.
 
-対応する `src/app/banner-inline.component.spec.ts` はコンポーネントと同じフォルダにあります。  
-理由は [FAQ](guide/testing#faq) の答えで説明されています。  
-[なぜテストするものと同じ場所にスペックを置くのか？](guide/testing#q-spec-file-location)
+The corresponding `src/app/banner-inline.component.spec.ts` sits in the same folder as the component,
+for reasons explained in the [FAQ](guide/testing#faq) answer to
+["Why put specs next to the things they test?"](guide/testing#q-spec-file-location).
 
-
-スペックで参照されているシンボルにアクセスするには、 ES6 のインポートステートメントから始めます。
+Start with ES6 import statements to get access to symbols referenced in the spec.
 
 <code-example path="testing/src/app/banner-inline.component.spec.ts" region="imports" title="src/app/banner-inline.component.spec.ts (imports)" linenums="false"></code-example>
 
@@ -389,7 +397,6 @@ Angular コンポーネントは、ほとんどの開発者が最初にテスト
 
 
 Here's the `describe` and the `beforeEach` that precedes the tests:
-テストに先立って `describe` と `beforeEach` があります：
 
 <code-example path="testing/src/app/banner-inline.component.spec.ts" region="setup" title="src/app/banner-inline.component.spec.ts (beforeEach)" linenums="false"></code-example>
 
@@ -400,62 +407,70 @@ Here's the `describe` and the `beforeEach` that precedes the tests:
 
 ### _TestBed_
 
-`TestBed` はAngular テストユーティリティの中で最も重要なものです。
-Angular テストモジュールを作成する &mdash; `@NgModule` クラス &mdash;
- `configureTestingModule` メソッドで設定して、テストするクラスのモジュール環境を作ります。
+`TestBed` is the first and most important of the  Angular testing utilities.
+It creates an Angular testing module&mdash;an `@NgModule` class&mdash;that
+you configure with the `configureTestingModule` method to produce the module environment for the class you want to test.
+In effect, you detach the tested component from its own application module
+and re-attach it to a dynamically-constructed Angular test module
+tailored specifically for this battery of tests.
 
-実際には、テストされたコンポーネントを独自のアプリケーションモジュールから切り離し、動的に構築された Angular テストモジュールに再接続する為に一組のテストが特別に調整されています。
-
-`configureTestingModule` メソッドは　`@NgModule` のようなメタデータオブジェクトを取ります。  
-メタデータオブジェクトは、通常の [NgModule](guide/ngmodule) のプロパティのほとんどを持つことができます。
 The `configureTestingModule` method takes an `@NgModule`-like metadata object.
-The metadata object can have most of the properties of a normal [NgModule](guide/ngmodules).
+The metadata object can have most of the properties of a normal [NgModule](guide/ngmodule).
 
-_メタデータオブジェクト_は、単にテストするコンポーネント、 `BannerComponent` を宣言します。  
-メタデータには、 `imports` がありません。  
-なぜなら、 (a) デフォルトのテストモジュールは、既に `BannerComponent` に必要なの設定がされており、 (b) `BannerComponent` は他のコンポーネントと対話しません。
+_This metadata object_ simply declares the component to test, `BannerComponent`.
+The metadata lack `imports` because (a) the default testing module configuration already has what `BannerComponent` needs
+and (b) `BannerComponent` doesn't interact with any other components.
 
 
-`beforeEach` の中で、 `configureTestingModule` を呼び出すと `TestBed` は、各テストが実行される前にそれ自身を基本状態にリセットすることができます。
+Call `configureTestingModule` within a `beforeEach` so that
+`TestBed` can reset itself to a base state before each test runs.
 
-基本状態には、殆どの誰もが必要とする宣言（components, directives, pipes）と provider （それらの一部の mock ）からなるデフォルトのテストモジュール構成が含まれます。
+The base state includes a default testing module configuration consisting of the
+declarables (components, directives, and pipes) and providers (some of them mocked)
+that almost everyone needs.
 
 <div class="l-sub-section">
 
 
 
-[後述](guide/testing#testbed-methods)のテスト shims は、テストモジュールの設定を `@angular/platform-browser` の `BrowserModule` のようなものに初期化します。
+The testing shims mentioned [later](guide/testing#testbed-methods) initialize the testing module configuration
+to something like the `BrowserModule` from `@angular/platform-browser`.
 
 </div>
 
 
 
-このデフォルト設定は、単にアプリケーションをテストするためのものです。
-後で、アプリケーションテストに合う追加のインポート、宣言、プロバイダ、スキーマを定義するメタデータを含む  `TestBed.configureTestingModule` を呼び出します。
+This default configuration is merely a _foundation_ for testing an app.
+Later you'll call `TestBed.configureTestingModule` with more metadata that define additional
+imports, declarations, providers, and schemas to fit your application tests.
+Optional `override` methods can fine-tune aspects of the configuration.
 
-オプションの `override` メソッドは、設定を微調整できます。
 
 {@a create-component}
 
 
 ### _createComponent_
 
-`TestBed` を設定後、 _component-under-test_ のインスタンスを作成するように指示します。  
-この例では、 `TestBed.createComponent` は `BannerComponent` のインスタンスを作成し、 [_component test fixture_](guide/testing#component-fixture) を返します。
+After configuring `TestBed`, you tell it to create an instance of the _component-under-test_.
+In this example, `TestBed.createComponent` creates an instance of `BannerComponent` and
+returns a [_component test fixture_](guide/testing#component-fixture).
+
 
 <div class="alert is-important">
 
 
 
-`createComponent` を呼び出した後、 `TestBed` を再設定しないでください。
+Do not re-configure `TestBed` after calling `createComponent`.
+
 
 </div>
 
 
 
-`createComponent` メソッドは、現在の `TestBed` インスタンスを閉じて、さらに設定を行います。  
-`configureTestingModule` や `override...`メソッドのいずれも `TestBed` 設定メソッドを呼び出すことはできません。  
-試してみると、 `TestBed`はエラーを投げます。
+The `createComponent` method closes the current `TestBed` instance to further configuration.
+You cannot call any more `TestBed` configuration methods, not `configureTestingModule`
+nor any of the `override...` methods. If you try, `TestBed` throws an error.
+
 
 {@a component-fixture}
 
@@ -537,6 +552,14 @@ a fact demonstrated in the following test:
 This behavior (or lack of it) is intentional.
 It gives the tester an opportunity to inspect or change the state of
 the component _before Angular initiates data binding or calls lifecycle hooks_.
+
+
+{@a try-example}
+
+
+### Try the live example
+Take a moment to explore this component spec as a <live-example plnkr="banner-inline-specs" title="Spec for component with inline template" embedded-style></live-example> and
+lock in these fundamentals of component unit testing.
 
 
 {@a auto-detect-changes}
@@ -725,9 +748,20 @@ into a `compileComponents().then(...)` callback and write only one `beforeEach`.
 Most developers find that hard to read.
 The two `beforeEach` calls are widely preferred.
 
+{@a live-external-template-example}
+
+### Try the live example
+
+Take a moment to explore this component spec as a <live-example plnkr="banner-specs" title="Spec for component with external template" embedded-style></live-example>.
+
 
 <div class="l-sub-section">
 
+
+
+The [Quickstart seed](guide/setup) provides a similar test of its `AppComponent`
+as you can see in _this_ <live-example name="setup" plnkr="quickstart-specs" title="QuickStart seed spec" embedded-style></live-example>.
+It too calls `compileComponents` although it doesn't have to because the `AppComponent`'s template is inline.
 
 There's no harm in it and you might call `compileComponents` anyway
 in case you decide later to re-factor the template into a separate file.
@@ -1630,8 +1664,7 @@ New heroes have `id=0` and a blank `name`. This test confirms that the component
 
 
 
-Inspect and download _all_ of the guide's application test code with this 
-<live-example stackblitz="specs" embedded-style>live example</live-example>.
+Inspect and download _all_ of the guide's application test code with this <live-example plnkr="app-specs" embedded-style>live example</live-example>.
 
 
 </div>
@@ -1749,7 +1782,7 @@ It's a bit tighter and smaller, with fewer import statements (not shown).
 
 ### Import the feature module
 
-The `HeroDetailComponent` is part of the `HeroModule` [Feature Module](guide/feature-modules) that aggregates more of the interdependent pieces
+The `HeroDetailComponent` is part of the `HeroModule` [Feature Module](guide/ngmodule#feature-modules) that aggregates more of the interdependent pieces
 including the `SharedModule`.
 Try a test configuration that imports the `HeroModule` like this one:
 

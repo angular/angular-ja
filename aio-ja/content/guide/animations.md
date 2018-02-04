@@ -1,113 +1,103 @@
-# Animations
+# アニメーション
 
-Motion is an important aspect in the design of modern web applications. Good
-user interfaces transition smoothly between states with engaging animations
-that call attention where it's needed. Well-designed animations can make a UI not only
-more fun but also easier to use.
+モーションは、モダンなWebアプリケーションの設計において重要な側面を担っています。  
+適切なユーザーインターフェースは、必要な箇所で注意を促す魅力的なアニメーションの状態をスムーズにトランジションさせます。
+うまく設計されたアニメーションは、UIをより楽しくするだけでなく使いやすくすることができます。
 
-## Overview
+## 概要
 
-Angular's animation system lets you build animations that run with the same kind of native
-performance found in pure CSS animations. You can also tightly integrate your
-animation logic with the rest of your application code, for ease of control.
+Angularのアニメーションシステムでは、純粋なCSSアニメーションと同じ類いのネイティブパフォーマンスで動作するアニメーションを作成することができます。  
+アニメーションロジックを他のアプリケーションコードと緊密に統合して、制御を容易にすることもできます。
 
 <div class="alert is-helpful">
 
-Angular animations are built on top of the standard [Web Animations API](https://w3c.github.io/web-animations/)
-and run natively on [browsers that support it](http://caniuse.com/#feat=web-animation).
+Angularのアニメーションは、標準の[Web Animations API](https://w3c.github.io/web-animations/)の上に構築され、それを[サポートするブラウザ](http://caniuse.com/#feat=web-animation)でネイティブに実行されます。
 
-For other browsers, a polyfill is required. Uncomment the `web-animations-js` polyfill from the `polyfills.ts` file.
+他のブラウザでは、ポリフィルが必要です。 `polyfills.ts` ファイルから `web-animations-js` polyfillのコメントを外します。
 
 </div>
 
 <div class="l-sub-section">
 
-The examples in this page are available as a <live-example></live-example>.
+このページの例は、<live-example></live-example> として利用できます。
 
 </div>
 
-## Setup
+## 設定
 
-Before you can add animations to your application, you need
-to import a few animation-specific modules and functions to the root application module.
+アプリケーションにアニメーションを追加する前に、
+いくつかのアニメーション固有のモジュールと関数をルートアプリケーションモジュールにインポートします。
 
 <code-example path="animations/src/app/app.module.ts" region="animations-module" title="app.module.ts (animation module import excerpt)" linenums="false"></code-example>
 
-#### Example basics
+#### 基本例
 
-The animations examples in this guide animate a list of heroes.
+このガイドのアニメーションの例では、ヒーローのリストをアニメーションさせています。
 
-A `Hero` class has a `name` property, a `state` property that indicates if the hero is active or not,
-and a `toggleState()` method to switch between the states.
+`Hero` クラスには、 `name` プロパティ、ヒーローがアクティブかどうかを示す `state` プロパティ、および状態を切り替える `toggleState（）` メソッドがあります。
 
 <code-example path="animations/src/app/hero.service.ts" region="hero" title="hero.service.ts (Hero class)" linenums="false"></code-example>
 
-Across the top of the screen (`app.hero-team-builder.component.ts`)
-are a series of buttons that add and remove heroes from the list (via the `HeroService`). 
-The buttons trigger changes to the list that all of the example components see at the same time.
+画面上部 (`app.hero-team-builder.component.ts`) には、(`HeroService` を介して) ヒーローを追加または削除する一連のボタンがあります。
+そのボタンは、すべてのサンプルコンポーネントが同時に参照するリストに変更をトリガーをします。
 
 {@a example-transitioning-between-states}
 
-## Transitioning between two states
+## 2つの状態間の推移
 
 <img src="generated/images/guide/animations/animation_basic_click.gif" alt="A simple transition animation" class="right">
 
-You can build a simple animation that transitions an element between two states
-driven by a model attribute.
+モデル属性を利用することによって、2つの状態の間で要素を推移させるシンプルなアニメーションを構築できます。
 
 
-Animations can be defined inside `@Component` metadata. 
+アニメーションは `@Component` のメタデータ内で定義できます。
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="imports" title="hero-list-basic.component.ts" linenums="false"></code-example>
 
-With these, you can define an *animation trigger* called `heroState` in the component
-metadata. It uses animations to transition between two states: `active` and `inactive`. When a
-hero is active, the element appears in a slightly larger size and lighter color.
+これらを使用して、コンポーネントメタデータに `heroState` という *アニメーショントリガー* を定義できます。
+アニメーションを使用して、`active` 状態と `inactive` 状態の2つの状態の間で推移します。
+ヒーローがアクティブになると、要素はやや大きなサイズと明るい色で表示されます。
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="animationdef" title="hero-list-basic.component.ts (@Component excerpt)" linenums="false"></code-example>
 
 <div class="alert is-helpful">
 
-In this example, you are defining animation styles (color and transform) inline in the
-animation metadata.
+この例では、アニメーションメタデータでアニメーションスタイル（colorとtransform）をインラインで定義しています。
 
 </div>
 
-Now, using the `[@triggerName]` syntax, attach the animation that you just defined to
-one or more elements in the component's template.
+次に、`[@triggerName]` 構文を利用して、定義したアニメーションをコンポーネントのテンプレートに含まれている1つ以上の要素にアタッチします。
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="template" title="hero-list-basic.component.ts (excerpt)" linenums="false"></code-example>
 
-Here, the animation trigger applies to every element repeated by an `ngFor`. Each of
-the repeated elements animates independently. The value of the
-attribute is bound to the expression `hero.state` and is always either `active` or `inactive`.
+ここで、アニメーショントリガーは、 `ngFor` で繰り返されるすべての要素に適用されます。
+繰り返し要素のそれぞれは、独立してアニメーション化されます。
+属性の値は、式 `hero.state` にバインドされ、常に `active` または `inactive` のいずれかになります。
 
-With this setup, an animated transition appears whenever a hero object changes state.
-Here's the full component implementation:
+この設定では、ヒーローオブジェクトが状態を変えるたびにアニメーションのトランジションが表示されます。
+完全なコンポーネントの実装は次の通りになります:
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" title="hero-list-basic.component.ts"></code-example>
 
-## States and transitions
+## 状態とトランジション
 
-Angular animations are defined as logical **states** and **transitions**
-between states.
+Angular のアニメーションは、論理 **状態** および状態間の **推移** として定義されます。
 
-An animation state is a string value that you define in your application code. In the example
-above, the states `'active'` and `'inactive'` are based on the logical state of
-hero objects. The source of the state can be a simple object attribute, as it was in this case,
-or it can be a value computed in a method. The important thing is that you can read it into the
-component's template.
+アニメーションの状態は、アプリケーションコードで定義された文字列です。
+上記の例では、 `'active'` と `'inactive'` の状態は、ヒーローオブジェクトの論理状態に基づいています。
+その状態のソースは、この場合と同様に単純なオブジェクト属性でも、メソッド内で計算された値でもかまいません。
+重要なことは、それをコンポーネントのテンプレートに読み込むことができるということです。
 
-You can define *styles* for each animation state:
+各アニメーション状態の *スタイル* を定義することができます:
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="states" title="src/app/hero-list-basic.component.ts" linenums="false"></code-example>
 
-These `state` definitions specify the *end styles* of each state.
-They are applied to the element once it has transitioned to that state, and stay
-*as long as it remains in that state*. In effect, you're defining what styles the element has in different states.
+これらの `状態` の定義は、各状態の *終了スタイル* を指定します。
+それらは、その状態に移行した後に要素に適用され、*その状態のままである限り*、その要素に適用されます。
+実際には、要素が異なる状態にあるスタイルを定義しています。
 
-After you define states, you can define *transitions* between the states. Each transition
-controls the timing of switching between one set of styles and the next:
+状態を定義した後、状態間の*トランジション*を定義することができます。
+各トランジションは、1組のスタイルと次のスタイルの切り替えタイミングを制御します:
 
 <code-example path="animations/src/app/hero-list-basic.component.ts" region="transitions" title="src/app/hero-list-basic.component.ts" linenums="false"></code-example>
 
@@ -115,75 +105,68 @@ controls the timing of switching between one set of styles and the next:
   <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active.png" alt="In Angular animations you define states and transitions between states" width="400">
 </figure>
 
-If several transitions have the same timing configuration, you can combine
-them into the same `transition` definition:
+複数のトランジションが同じタイミング構成を持つ場合、それらを同じ `transition` の定義に組み合わせることができます:
 
 <code-example path="animations/src/app/hero-list-combined-transitions.component.ts" region="transitions" title="src/app/hero-list-combined-transitions.component.ts" linenums="false"></code-example>
 
-When both directions of a transition have the same timing, as in the previous
-example, you can use the shorthand syntax `<=>`:
+トランジションの両方向が同じタイミングを持つ場合、前の例のように、簡略構文 `<=>` を利用できます。
 
 <code-example path="animations/src/app/hero-list-twoway.component.ts" region="transitions" title="src/app/hero-list-twoway.component.ts" linenums="false"></code-example>
 
-You can also apply a style during an animation but not keep it around
-after the animation finishes. You can define such styles inline, in the `transition`. In this example,
-the element receives one set of styles immediately and is then animated to the next.
-When the transition finishes, none of these styles are kept because they're not
-defined in a `state`.
+また、アニメーションの途中でスタイルを適用することもできますが、アニメーションが終了した後にスタイルを維持することはできません。
+このようなスタイルは、`transition` でインラインで定義することができます。
+この例では、その要素はすぐに1組のスタイルを受け取り、次のスタイルにアニメーションされます。
+トランジションが終了すると、これらのスタイルは `state` で定義されていないため保持されません。
 
 <code-example path="animations/src/app/hero-list-inline-styles.component.ts" region="transitions" title="src/app/hero-list-inline-styles.component.ts" linenums="false"></code-example>
 
-### The wildcard state `*`
+### ワイルドカードステート `*`
 
-The `*` ("wildcard") state matches *any* animation state. This is useful for defining styles and
-transitions that apply regardless of which state the animation is in. For example:
+`*` ("ワイルドカード") ステートは *どの* アニメーション状態にもマッチします。
+これは、アニメーションがどの状態にあるかにかかわらず適用されるスタイルとトランジションを定義するのに便利です。  
+例：
 
-* The `active => *` transition applies when the element's state changes from `active` to anything else.
-* The `* => *` transition applies when *any* change between two states takes place.
+* `active => *` トランジションは、要素の状態が `active` から他の何かに変化したときに適用されます。
+* `* => *` トランジションは、2つの状態の間の *変化が起こる* ときに適用されます。
 
 <figure>
   <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active_wildcards.png" alt="The wildcard state can be used to match many different transitions at once" width="400">
 </figure>
 
-### The `void` state
+### `void` ステート
 
-The special state called `void` can apply to any animation. It applies
-when the element is *not* attached to a view, perhaps because it has not yet been
-added or because it has been removed. The `void` state is useful for defining enter and
-leave animations.
+`void` と呼ばれる特別な状態は、どのアニメーションにも適用できます。
+これは、要素がビューにアタッチされて *いない* 場合に適用されます。
+これは、要素がまだ追加されていないか、または除去されたためです。
+`void` ステートは、アニメーションの入場と退場を定義するのに便利です。
 
-For example the `* => void` transition applies when the element leaves the view,
-regardless of what state it was in before it left.
+例えば、`* => void`トランジションは、要素に残していた状態にかかわらず、要素がビューから離れるときに適用されます。
 
 <figure>
   <img src="generated/images/guide/animations/ng_animate_transitions_void_in.png" alt="The void state can be used for enter and leave transitions" width="400">
 </figure>
 
-The wildcard state `*` also matches `void`.
+ワイルドカードステート`*`は`void`にも適用されます。
 
-## Example: Entering and leaving
+## 例：entering と leaving
 
 <img src="generated/images/guide/animations/animation_enter_leave.gif" alt="Enter and leave animations" class="right" width="250">
 
-Using the `void` and `*` states you can define transitions that animate the
-entering and leaving of elements:
+`void` と `*` ステートを利用することで、要素の出入りのアニメーションをさせるトランジション定義することができます。
 
-* Enter: `void => *`
-* Leave: `* => void`
+* enter: `void => *`
+* leave: `* => void`
 
-For example, in the `animations` array below there are two transitions that use
-the `void => *` and `* => void` syntax to animate the element in and out of the view.
+たとえば、以下のアニメーション配列には、`void => *`および`* => void`構文を使用してビューの内外に要素をアニメーションさせる2つのトランジションがあります。
 
 <code-example path="animations/src/app/hero-list-enter-leave.component.ts" region="animationdef" title="hero-list-enter-leave.component.ts (excerpt)" linenums="false"></code-example>
 
-Note that in this case the styles are applied to the void state directly in the
-transition definitions, and not in a separate `state(void)` definition. Thus, the transforms
-are different on enter and leave: the element enters from the left
-and leaves to the right.
+この場合、スタイルはトランジション定義では直接 void ステートに適用され、別の`ステート（void）`定義には適用されないことに注意してください。
+したがって、変換は出入で異なります。要素は左から入り、右から出ていきます。
 
 <div class="l-sub-section">
 
-These two common animations have their own aliases:
+これらの2つの一般的なアニメーションには、独自のエイリアスがあります。
 
 <code-example language="typescript">
   transition(':enter', [ ... ]); // void => *
@@ -192,21 +175,19 @@ These two common animations have their own aliases:
 
 </div>
 
-## Example: Entering and leaving from different states
+## 例：異なる状態からの入場と退場
 
 <img src="generated/images/guide/animations/animation_enter_leave_states.gif" alt="Enter and leave animations combined with state animations" class="right" width="200">
 
-You can also combine this animation with the earlier state transition animation by
-using the hero state as the animation state. This lets you configure
-different transitions for entering and leaving based on what the state of the hero
-is:
+ヒーローの状態をアニメーションの状態として利用することで、このアニメーションと以前のステートトランジションのアニメーションを組み合わせることもできます。
+ヒーローの状態に基づいて、出入りのさまざまなトランジションを設定できます。
 
-* Inactive hero enter: `void => inactive`
-* Active hero enter: `void => active`
-* Inactive hero leave: `inactive => void`
-* Active hero leave: `active => void`
+* 非アクティブなヒーローが入る: `void => inactive`
+* アクティブなヒーローが入る: `void => active`
+* 非アクティブなヒーローが出る: `inactive => void`
+* アクティブなヒーローが出る: `active => void`
 
-This gives you fine-grained control over each transition:
+これにより、各トランジションの細かな制御が可能になります。
 
 <figure>
   <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active_void.png" alt="This example transitions between active, inactive, and void states" width="400">
@@ -214,139 +195,124 @@ This gives you fine-grained control over each transition:
 
 <code-example path="animations/src/app/hero-list-enter-leave-states.component.ts" region="animationdef" title="hero-list-enter-leave.component.ts (excerpt)" linenums="false"></code-example>
 
-## Animatable properties and units
+## アニメーション可能なプロパティと単位
 
-Since Angular's animation support builds on top of Web Animations, you can animate any property
-that the browser considers *animatable*. This includes positions, sizes, transforms, colors,
-borders, and many others. The W3C maintains
-[a list of animatable properties](https://www.w3.org/TR/css3-transitions/#animatable-properties)
-on its [CSS Transitions page](https://www.w3.org/TR/css3-transitions).
+Angular のアニメーションサポートは Web アニメーションの上に構築されているため、ブラウザが*サポートしている*すべてのプロパティをアニメーションさせることができます。
+これには、位置、サイズ、変形、色、枠線、その他多くのものが含まれます。
+W3Cの、[CSS Transitions ページ](https://www.w3.org/TR/css3-transitions)に[アニメーション可能なプロパティのリスト](https://www.w3.org/TR/css3-transitions/#animatable-properties)が記載されています。
 
-For positional properties that have a numeric value, you can define a unit by providing
-the value as a string with the appropriate suffix:
+数値を持つ定位置プロパティの場合、適切な接尾辞を持つ文字列として値を指定して単位を定義できます。
 
 * `'50px'`
 * `'3em'`
 * `'100%'`
 
-If you don't provide a unit when specifying dimension, Angular assumes the default of `px`:
+プロパティの値の指定をするときに単位を設定しないと、Angular での初期値は `px` になります。
 
-* `50` is the same as saying `'50px'`
+* `50` は `'50px'` と同じ意味になります。
 
-## Automatic property calculation
+## 自動的なプロパティの計算
 
 <img src="generated/images/guide/animations/animation_auto.gif" alt="Animation with automated height calculation" class="right" width="220">
 
-Sometimes you don't know the value of a dimensional style property until runtime.
-For example, elements often have widths and heights that
-depend on their content and the screen size. These properties are often tricky
-to animate with CSS.
+次元的なスタイルプロパティは、実行時まで値がわからないことがあります。
+たとえば、要素の内容や画面サイズによって幅と高さが異なることがよくあります。
+これらのプロパティは、CSSでアニメーション化するのが難しい場合がよくあります。
 
-In these cases, you can use a special `*` property value so that the value of the
-property is computed at runtime and then plugged into the animation.
+これらの場合、特殊な `*` プロパティ値を使用することでプロパティの値が実行時に計算され、その後アニメーションにプラグインされるようにすることができます。
 
-In this example, the leave animation takes whatever height the element has before it
-leaves and animates from that height to zero:
+この例では、退場アニメーションは、要素が離れる前の任意の高さをとり、その高さから0までアニメーションします。
 
 <code-example path="animations/src/app/hero-list-auto.component.ts" region="animationdef" title="src/app/hero-list-auto.component.ts" linenums="false"></code-example>
 
-## Animation timing
+## アニメーションのタイミング
 
-There are three timing properties you can tune for every animated transition:
-the duration, the delay, and the easing function. They are all combined into
-a single transition *timing string*.
+アニメーション化されたトランジションには、デュレーション、ディレイ、およびイージング関数の3つのタイミングプロパティがあります。
+それらはすべて1つの遷移の *タイミング文字列* として結合されています。
 
-### Duration
+### デュレーション
 
-The duration controls how long the animation takes to run from start to finish.
-You can define a duration in three ways:
+デュレーションは、アニメーションの開始から終了までの時間を制御します。次の3つの方法で期間を定義できます:
 
-* As a plain number, in milliseconds: `100`
-* In a string, as milliseconds: `'100ms'`
-* In a string, as seconds: `'0.1s'`
+* 純粋な値（ミリ秒単位）: `100`
+* 文字列（ミリ秒単位）: `'100ms'`
+* 文字列（秒単位）: `'0.1s'`
 
-### Delay
+### ディレイ
 
-The delay controls the length of time between the animation trigger and the beginning
-of the transition. You can define one by adding it to the same string
-following the duration. It also has the same format options as the duration:
+ディレイは、アニメーショントリガーとトランジションの開始の間の時間の長さを制御します。
+デュレーションの後に同じ文字列に追加することで定義することができます。
+また、期間と同じ書式オプションがあります:
 
-* Wait for 100ms and then run for 200ms: `'0.2s 100ms'`
+* 100ms待機してから200msかけて実行する: `'0.2s 100ms'`
 
-### Easing
+### イージング
 
-The [easing function](http://easings.net/) controls how the animation accelerates
-and decelerates during its runtime. For example, an `ease-in` function causes
-the animation to begin relatively slowly but pick up speed as it progresses. You
-can control the easing by adding it as a *third* value in the string after the duration
-and the delay (or as the *second* value when there is no delay):
+[イージング関数](http://easings.net/)は、実行時にアニメーションがどのように加速および減速するかを制御します。
+たとえば、`ease-in` 関数を使用すると、アニメーションは比較的ゆっくりと開始されますが、進行するにつれて速度が上がります。
+デュレーションとディレイの後の文字列の`3番目`の値（またはディレイがない場合の`2番目`の値）を追加することでイージングを制御することができます:
 
-* Wait for 100ms and then run for 200ms, with easing: `'0.2s 100ms ease-out'`
-* Run for 200ms, with easing: `'0.2s ease-in-out'`
+* 100ms待機してから、  イージングとともに200msかけて実行する: `'0.2s 100ms ease-out'`
+* イージングとともに200msかけて実行する: `'0.2s ease-in-out'`
 
 <img src="generated/images/guide/animations/animation_timings.gif" alt="Animations with specific timings" class="right" width="220">
 
-### Example
+### 例
 
-Here are a couple of custom timings in action. Both enter and leave last for
-200 milliseconds, that is `0.2s`, but they have different easings. The leave begins after a
-slight delay of 10 milliseconds as specified in `'0.2s 10 ease-out'`:
+ここでは実際のタイミングをいくつか紹介します。
+どちらも200ミリ秒、すなわち`0.2秒`で最後に出入りするが、イージングが異なります。
+`'0.2s 0.1s ease-out'` で指定されているように、100ミリ秒のわずかな遅延の後にアニメーションが開始されます:
 
 <code-example path="animations/src/app/hero-list-timings.component.ts" region="animationdef" title="hero-list-timings.component.ts (excerpt)" linenums="false"></code-example>
 
-## Multi-step animations with keyframes
+## キーフレーム付きの複数のステップアニメーション
 
 <img src="generated/images/guide/animations/animation_multistep.gif" alt="Animations with some bounce implemented with keyframes" class="right" width="220">
 
-Animation *keyframes* go beyond a simple transition to a more intricate animation
-that goes through one or more intermediate styles when transitioning between two sets of styles.
+アニメーションの*キーフレーム*は、2つのスタイルセット間を遷移するときに1つ以上の中間スタイルを経由し、単純な遷移を超えてより複雑なアニメーションになります。
 
-For each keyframe, you specify an *offset* that defines at which point
-in the animation that keyframe applies. The offset is a number between zero,
-which marks the beginning of the animation, and one, which marks the end.
+各キーフレームに対して、アニメーション内でキーフレームが適用されるポイントを定義する*オフセット*を指定します。
+オフセットは、アニメーションの開始を示す0から終了を示す1の間の数値です。
 
-This example adds some "bounce" to the enter and leave animations with
-keyframes:
+次の例では、入力に "bounce" を追加し、アニメーションにキーフレームを適用します:
 
 <code-example path="animations/src/app/hero-list-multistep.component.ts" region="animationdef" title="hero-list-multistep.component.ts (excerpt)" linenums="false"></code-example>
 
-Note that the offsets are *not* defined in terms of absolute time. They are relative
-measures from zero to one. The final timeline of the animation is based on the combination
-of keyframe offsets, duration, delay, and easing.
+オフセットは絶対時間で定義されて*いない*ことに注意してください。
+それらはゼロから1への相対的な尺度です。
+アニメーションの最終的なタイムラインは、キーフレームのオフセット、デュレーション、ディレイ、およびイージングの組み合わせに基づいています。
 
-Defining offsets for keyframes is optional. If you omit them, offsets with even
-spacing are automatically assigned. For example, three keyframes without predefined
-offsets receive offsets `0`, `0.5`, and `1`.
+キーフレームのオフセットの定義はオプションです。
+それらを省略すると、均等間隔のオフセットが自動的に割り当てられます。
+たとえば、あらかじめ定義されたオフセットのない3つのキーフレームは、オフセット`0`、`0.5`、および`1`を受け取ります。
 
-## Parallel animation groups
+## 並列アニメーショングループ
 
 <img src="generated/images/guide/animations/animation_groups.gif" alt="Parallel animations with different timings, implemented with groups" class="right" width="220px">
 
-You've seen how to animate multiple style properties at the same time:
-just put all of them into the same `style()` definition.
+同時に複数のスタイルプロパティをアニメーション化する方法を見てきました。
+すべてのスタイルプロパティを同じ`style（）`定義に入れるだけです。
 
-But you may also want to configure different *timings* for animations that happen
-in parallel. For example, you may want to animate two CSS properties but use a
-different easing function for each one.
+しかし、並行して発生するアニメーションのさまざまな*タイミング*を設定することもできます。
+たとえば、2つのCSSプロパティをアニメーションさせるときに、それぞれに異なるイージング関数を使用することができます。
 
-For this you can use animation *groups*. In this example, using groups both on
-enter and leave allows for two different timing configurations. Both
-are applied to the same element in parallel, but run independently of each other:
+このために、アニメーション*グループ*を使用できます。
+次の例では、enterとleaveの両方でグループを使用することで、2つの異なるタイミング構成が可能にしています。
+両方とも同じ要素に並列に適用されますが、互いに独立して実行されます:
 
 <code-example path="animations/src/app/hero-list-groups.component.ts" region="animationdef" title="hero-list-groups.component.ts (excerpt)" linenums="false"></code-example>
 
-One group animates the element transform and width; the other group animates the opacity.
+1つのグループは要素の変換と幅をアニメートします。
+もう一方のグループは不透明度をアニメートします。
 
-## Animation callbacks
+## アニメーションのコールバック
 
-A callback is fired when an animation is started and also when it is done.
+コールバックは、アニメーションが開始されたときおよび終了したときに発火します。
 
-In the keyframes example, you have a `trigger` called `@flyInOut`. You can hook
-those callbacks like this:
+キーフレームの例では、`@flyInOut`という`トリガー`があります。このようなコールバックをフックすることができます:
 
 <code-example path="animations/src/app/hero-list-multistep.component.ts" region="template" title="hero-list-multistep.component.ts (excerpt)" linenums="false"></code-example>
 
-The callbacks receive an `AnimationEvent` that contains useful properties such as
-`fromState`, `toState` and `totalTime`.
+そのコールバックは、`fromState`、`toState`、`totalTime`などの有用なプロパティを含む`AnimationEvent`を受け取ります。
 
-Those callbacks will fire whether or not an animation is picked up.
+これらのコールバックは、アニメーションが取得されたかどうかにかかわらず発火します。

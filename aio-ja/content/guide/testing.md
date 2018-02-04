@@ -11,13 +11,13 @@ Angular で、書かれたアプリケーションのテストに重点を置い
 このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
 サンプルアプリケーションとこのガイドのすべてのテストは、インスペクション、テスト、およびダウンロードの実例として利用できます。
 
-* <live-example plnkr="1st-specs" embedded-style>テスト環境を検証するための仕様</live-example>.
+<!-- * <live-example plnkr="1st-specs" embedded-style>テスト環境を検証するための仕様</live-example>.
 * <live-example plnkr="banner-inline-specs" embedded-style>インラインテンプレートを使用した最初のコンポーネント仕様</live-example>.
 * <live-example plnkr="banner-specs" embedded-style>外部テンプレートを使用したコンポーネント仕様</live-example>.
 * <live-example name="setup" plnkr="quickstart-specs" embedded-style>クイックスタートシード Appコンポーネントの仕様</live-example>.
 * <live-example embedded-style>テストされるサンプルアプリケーション</live-example>.
 * <live-example plnkr="app-specs" embedded-style>サンプルアプリケーションをテストするすべての仕様</live-example>.
-* <live-example plnkr="bag-specs" embedded-style>様々な追加仕様</live-example>.
+* <live-example plnkr="bag-specs" embedded-style>様々な追加仕様</live-example>. -->
 * <live-example embedded-style>The sample application to be tested</live-example>.
 * <live-example stackblitz="specs" embedded-style>All specs that test the sample application</live-example>.
 
@@ -217,12 +217,11 @@ Angular テストユーティリティの包括的なレビューは、[この�
 Jasmine で書かれたテストは _specs_ と呼ばれます。  
 **ファイル名の拡張子は、 `.spec.ts` でなければなりません。**  
 `karma.conf.js` やその他のツールで、遵守しています。
-
 </div>
 
 
 
-**spec ファイルを `src / app /` フォルダのどこかに置いてください。**  
+**spec ファイルを `src/app/` フォルダのどこかに置いてください。**  
 `karma.conf.js` が karma に spec ファイルを探しすよう指示します。   
 [以下の理由](guide/testing#q-spec-file-location)について説明されています。
 
@@ -267,6 +266,7 @@ Angular CLIには、同じことをするためのコマンドがあります。
 
 ブラウザを隠す（閉じないでください！）コンソール出力に焦点を当てます。  
 次のようになります。
+
 
 <code-example format="." language="bash">
   > npm test
@@ -345,15 +345,6 @@ _karma_ ウォッチャーはコンパイル出力の変更を検出し、テス
 </figure>
 
 
-
-{@a live-karma-example}
-
-
-### 実例を試してみてください
-
-また、このテストを plunker で <live-example plnkr="1st-specs" title="最初の仕様" embedded-style></live-example> として試すこともできます。  
-このガイドのすべてのテストは、[実際のサンプル](guide/testing#live-examples "Live examples of these tests")として利用できます。
-
 <hr/>
 
 
@@ -388,7 +379,6 @@ Angular コンポーネントは、ほとんどの開発者が最初にテスト
 {@a configure-testing-module}
 
 
-Here's the `describe` and the `beforeEach` that precedes the tests:
 テストに先立って `describe` と `beforeEach` があります：
 
 <code-example path="testing/src/app/banner-inline.component.spec.ts" region="setup" title="src/app/banner-inline.component.spec.ts (beforeEach)" linenums="false"></code-example>
@@ -407,9 +397,7 @@ Angular テストモジュールを作成する &mdash; `@NgModule` クラス &m
 実際には、テストされたコンポーネントを独自のアプリケーションモジュールから切り離し、動的に構築された Angular テストモジュールに再接続する為に一組のテストが特別に調整されています。
 
 `configureTestingModule` メソッドは　`@NgModule` のようなメタデータオブジェクトを取ります。  
-メタデータオブジェクトは、通常の [NgModule](guide/ngmodule) のプロパティのほとんどを持つことができます。
-The `configureTestingModule` method takes an `@NgModule`-like metadata object.
-The metadata object can have most of the properties of a normal [NgModule](guide/ngmodules).
+メタデータオブジェクトは、通常の [NgModule](guide/ngmodules) のプロパティのほとんどを持つことができます。
 
 _メタデータオブジェクト_は、単にテストするコンポーネント、 `BannerComponent` を宣言します。  
 メタデータには、 `imports` がありません。  

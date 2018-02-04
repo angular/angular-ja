@@ -38,7 +38,7 @@ Angularのアニメーションは、標準の[Web Animations API](https://w3c.g
 
 <code-example path="animations/src/app/hero.service.ts" region="hero" title="hero.service.ts (Hero class)" linenums="false"></code-example>
 
-画面上部 (`app.hero-team-builder.component.ts`) には、(`HeroService` 介して) ヒーローを追加または削除する一連のボタンがあります。
+画面上部 (`app.hero-team-builder.component.ts`) には、(`HeroService` を介して) ヒーローを追加または削除する一連のボタンがあります。
 そのボタンは、すべてのサンプルコンポーネントが同時に参照するリストに変更をトリガーをします。
 
 {@a example-transitioning-between-states}

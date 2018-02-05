@@ -214,8 +214,9 @@
             },
             {
               "url": "guide/forms",
-              "title": "Template-driven Forms",
-              "tooltip": "A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors."
+              "title": "テンプレート駆動フォーム",
+              "tooltip": "フォームは、密接で効果的で説得力のあるデータ入力体験を作り出します。 Angularフォームは、データバインドされたユーザーコントロールのセットを調整し、変更を追跡し、入力を検証し、エラーを表示します。",
+              "translated": true
             },
             {
               "url": "guide/form-validation",

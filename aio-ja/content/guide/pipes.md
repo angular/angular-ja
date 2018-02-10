@@ -1,29 +1,27 @@
-# Pipes
+# パイプ
 
-Every application starts out with what seems like a simple task: get data, transform them, and show them to users.
-Getting data could be as simple as creating a local variable or as complex as streaming data over a WebSocket.
+すべてのアプリケーションは、単純なタスクのようなところから始めます。つまり、データを取得し、変換し、ユーザーに表示します。
+データの取得は、ローカル変数の作成のように単純になったり、あるいはWebSocketを介したデータのストリーミングのように複雑になったりします。
 
-Once data arrive, you could push their raw `toString` values directly to the view,
-but that rarely makes for a good user experience.
-For example, in most use cases, users prefer to see a date in a simple format like
-<samp>April 15, 1988</samp> rather than the raw string format
-<samp>Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)</samp>.
+データが届いたあと、生の`toString`の値を直接ビューに挿入できますが、
+これがよいユーザー体験になることはめったにありません。
+たとえば、ほとんどのユースケースでは、ユーザーは<samp>Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)</samp>のような生の文字列ではなく、
+<samp>1988年4月15日<samp>のような簡単な形式で日付を表示することを好みます。 
 
-Clearly, some values benefit from a bit of editing. You may notice that you
-desire many of the same transformations repeatedly, both within and across many applications.
-You can almost think of them as styles.
-In fact, you might like to apply them in your HTML templates as you do styles.
+明らかに、一部の値には編集による恩恵があります。同じ変換の多くが、
+多くのアプリケーションの中、そしてアプリケーションを超えて繰り返し必要であることに気付くでしょう。
+あなたはほとんどそれらをスタイルとして考えることができます。
+実際には、スタイルをおこなうように、HTMLテンプレート中で適用したいと思うかもしれません。
 
-Introducing Angular pipes, a way to write display-value transformations that you can declare in your HTML.
+ここではHTMLで宣言できる表示値の変換方法であるAngularパイプを紹介します。
 
-You can run the <live-example></live-example> in Stackblitz and download the code from there.
+Stackblitzの<live-example></live-example>を実行し、コードをダウンロードしてください。
 
 
-## Using pipes
+## パイプを使う
 
-A pipe takes in data as input and transforms it to a desired output.
-In this page, you'll use pipes to transform a component's birthday property into
-a human-friendly date.
+パイプは入力としてデータを取り込み、それを望んだ出力に変換します。
+このページでは、パイプを使用してコンポーネントの誕生日プロパティを人に優しい日付に変換します。
 
 
 <code-example path="pipes/src/app/hero-birthday1.component.ts" title="src/app/hero-birthday1.component.ts" linenums="false">
@@ -32,7 +30,7 @@ a human-friendly date.
 
 
 
-Focus on the component's template.
+コンポーネントのテンプレートに注目します。
 
 
 <code-example path="pipes/src/app/app.component.html" region="hero-birthday-template" title="src/app/app.component.html" linenums="false">
@@ -41,42 +39,38 @@ Focus on the component's template.
 
 
 
-Inside the interpolation expression, you flow the component's `birthday` value through the
-[pipe operator](guide/template-syntax#pipe) ( | ) to the [Date pipe](api/common/DatePipe)
-function on the right. All pipes work this way.
+補間式の内部では、コンポーネントの`birthday`の値を、
+[パイプ演算子](guide/template-syntax#pipe)（|）を介して右側の[Dateパイプ](api/common/DatePipe)関数に渡します。
+すべてのパイプはこのように動作します。
 
 
 
-
-## Built-in pipes
-Angular comes with a stock of pipes such as
-`DatePipe`, `UpperCasePipe`, `LowerCasePipe`, `CurrencyPipe`, and `PercentPipe`.
-They are all available for use in any template.
-
-
+## ビルトインのパイプ
+Angularには`DatePipe`、`UpperCasePipe`、`LowerCasePipe`、`CurrencyPipe`や`PercentPipe`というようなパイプが付属しています。
+それらはすべてテンプレートで使用できます。
 <div class="l-sub-section">
 
 
 
-Read more about these and many other built-in pipes in the [pipes topics](api?type=pipe) of the
-[API Reference](api); filter for entries that include the word "pipe".
+これらの機能や他の多くのビルトイン機能について詳しくは、[APIリファレンス](api)の[パイプトピック](api?type=pipe)をご覧ください。
+"pipe"という単語を含むエントリをフィルタリングします。
 
-Angular doesn't have a `FilterPipe` or an `OrderByPipe` for reasons explained in the [Appendix](guide/pipes#no-filter-pipe) of this page.
+Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由のために、`FilterPipe`や`OrderByPipe`はもちません。
 
 
 </div>
 
 
+{@a parameterizing-a-pipe}
 
+## パイプのパラメータ化
 
-## Parameterizing a pipe
+パイプは、任意の数のオプションパラメータを受け取り、その出力を微調整することができます。
+パイプにパラメータを追加するには、パイプ名の後にコロン（：）とパラメータ値を付けます（たとえば`currency:'EUR'`など）。
+パイプが複数のパラメータを受け取る場合は、値をコロンで区切ります（たとえば`slice:1:5`）。
 
-A pipe can accept any number of optional parameters to fine-tune its output.
-To add parameters to a pipe, follow the pipe name with a colon ( : ) and then the parameter value
-(such as `currency:'EUR'`). If the pipe accepts multiple parameters, separate the values with colons (such as `slice:1:5`)
-
-Modify the birthday template to give the date pipe a format parameter.
-After formatting the hero's April 15th birthday, it renders as **<samp>04/15/88</samp>**:
+誕生日のテンプレートを変更して、Dateパイプに書式パラメータを与えます。
+ヒーローの4月15日の誕生日をフォーマットした後、出力結果は**<samp>04/15/88</samp>**のようになります。
 
 
 <code-example path="pipes/src/app/app.component.html" region="format-birthday" title="src/app/app.component.html" linenums="false">
@@ -85,14 +79,12 @@ After formatting the hero's April 15th birthday, it renders as **<samp>04/15/88<
 
 
 
-The parameter value can be any valid template expression,
-(see the [Template expressions](guide/template-syntax#template-expressions) section of the
-[Template Syntax](guide/template-syntax) page)
-such as a string literal or a component property.
-In other words, you can control the format through a binding the same way you control the birthday value through a binding.
+パラメータ値には、文字列リテラルやコンポーネントプロパティなど、
+任意の有効なテンプレート式を使用できます（[テンプレート構文](guide/template-syntax)ページの[テンプレート式](guide/template-syntax#template-expressions)セクションを参照してください）。
+つまり、バインドを介して誕生日の値を制御するのと同じ方法で、バインディングを通じて書式を制御できます。
 
-Write a second component that *binds* the pipe's format parameter
-to the component's `format` property. Here's the template for that component:
+パイプのformatパラメータをコンポーネントの`format`プロパティにバインドする、2番目のコンポーネントを記述します。
+そのコンポーネントのテンプレートは次のとおりです。
 
 
 <code-example path="pipes/src/app/hero-birthday2.component.ts" region="template" title="src/app/hero-birthday2.component.ts (template)" linenums="false">
@@ -101,9 +93,8 @@ to the component's `format` property. Here's the template for that component:
 
 
 
-You also added a button to the template and bound its click event to the component's `toggleFormat()` method.
-That method toggles the component's `format` property between a short form
-(`'shortDate'`) and a longer form (`'fullDate'`).
+また、テンプレートにボタンを追加し、そのクリックイベントをコンポーネントの`toggleFormat()`メソッドにバインドしました。
+このメソッドは、コンポーネントの`format`プロパティを短い書式（`'shortDate'`）と長い書式（`'fullDate'`）の間で切り替えます。
 
 
 <code-example path="pipes/src/app/hero-birthday2.component.ts" region="class" title="src/app/hero-birthday2.component.ts (class)" linenums="false">
@@ -112,9 +103,7 @@ That method toggles the component's `format` property between a short form
 
 
 
-As you click the button, the displayed date alternates between
-"**<samp>04/15/1988</samp>**" and
-"**<samp>Friday, April 15, 1988</samp>**".
+ボタンをクリックすると、"**<samp>04/15/1988</samp>**"と"**<samp>Friday, April 15, 1988</samp>**"の間で切り替わります。
 
 
 <figure>
@@ -127,20 +116,19 @@ As you click the button, the displayed date alternates between
 
 
 
-Read more about the `DatePipe` format options in the [Date Pipe](api/common/DatePipe)
-API Reference page.
+`DatePipe`のフォーマットオプションの詳細については、APIリファレンスの[Date Pipe](api/common/DatePipe)ページを参照してください。
 
 
 </div>
 
 
 
-## Chaining pipes
+## パイプを繋げる
 
-You can chain pipes together in potentially useful combinations.
-In the following example, to display the birthday in uppercase,
-the birthday is chained to the `DatePipe` and on to the `UpperCasePipe`.
-The birthday displays as **<samp>APR 15, 1988</samp>**.
+便利になるような組み合わせでパイプを連鎖させることができます。
+次の例では、誕生日を大文字で表示するために、
+誕生日は`DatePipe`と`UpperCasePipe`を連鎖させています。
+誕生日は**<samp>APR 15, 1988</samp>**のように表示されます。.
 
 
 <code-example path="pipes/src/app/app.component.html" region="chained-birthday" title="src/app/app.component.html" linenums="false">
@@ -149,8 +137,8 @@ The birthday displays as **<samp>APR 15, 1988</samp>**.
 
 
 
-This example&mdash;which displays **<samp>FRIDAY, APRIL 15, 1988</samp>**&mdash;chains
-the same pipes as above, but passes in a parameter to `date` as well.
+この例&mdash;**<samp>FRIDAY, APRIL 15, 1988</samp>を表示しています**&mdash;では
+先ほどと同じパイプを繋いで、しかし`date`にパラメーターを渡してます。
 
 
 <code-example path="pipes/src/app/app.component.html" region="chained-parameter-birthday" title="src/app/app.component.html" linenums="false">
@@ -160,10 +148,10 @@ the same pipes as above, but passes in a parameter to `date` as well.
 
 
 
-## Custom pipes
+## カスタムパイプ
 
-You can write your own custom pipes.
-Here's a custom pipe named `ExponentialStrengthPipe` that can boost a hero's powers:
+独自のカスタムパイプを書くことができます。
+この`ExponentialStrengthPipe`という名前のパイプはヒーローの力を高めることができます。
 
 
 <code-example path="pipes/src/app/exponential-strength.pipe.ts" title="src/app/exponential-strength.pipe.ts" linenums="false">
@@ -172,33 +160,33 @@ Here's a custom pipe named `ExponentialStrengthPipe` that can boost a hero's pow
 
 
 
-This pipe definition reveals the following key points:
+このパイプ定義は、次の重要な点を明らかにします。
 
-* A pipe is a class decorated with pipe metadata.
-* The pipe class implements the `PipeTransform` interface's `transform` method that
-accepts an input value followed by optional parameters and returns the transformed value.
-* There will be one additional argument to the `transform` method for each parameter passed to the pipe.
-Your pipe has one such parameter: the `exponent`.
-* To tell Angular that this is a pipe, you apply the
-`@Pipe` decorator, which you import from the core Angular library.
-* The `@Pipe` decorator allows you to define the
-   pipe name that you'll use within template expressions. It must be a valid JavaScript identifier.
-   Your pipe's name is `exponentialStrength`.
+* パイプはパイプメタデータで装飾されたクラスです。
+* パイプクラスは、入力値の後にオプションのパラメータを受け入れ、
+変換された値を返す`PipeTransform`インターフェイスの`transform`メソッドを実装します
+* パイプに渡されたそれぞれのパラメータについて、`transform`メソッドには引数が追加されます。
+このパイプはそのような`exponent`パラメーターをもちます。
+* これがパイプであることをAngularに伝えるには、
+Angularコアライブラリからインポートする`@Pipe`デコレータを適用します。
+* `@Pipe`デコレータはあなたがテンプレート式の中で使用するパイプ名を定義することができます。
+名前はJavaScriptの識別子として有効である必要があります。
+あなたのパイプの名前は`exponentialStrength`です。
 
 
 <div class="l-sub-section">
 
 
 
-## The *PipeTransform* interface
+## *PipeTransform*インターフェース
 
-The `transform` method is essential to a pipe.
-The `PipeTransform` *interface* defines that method and guides both tooling and the compiler.
-Technically, it's optional; Angular looks for and executes the `transform` method regardless.
+この`transform`メソッドはパイプにとって不可欠です。
+`PipeTransform`*インターフェース*は、そのメソッドを定義し、ツールとコンパイラの両方に情報を与えます。
+技術的にはこれはオプションであり、Angularはこの`transform`メソッドを無関係に探して実行します。
 
 </div>
 
-Now you need a component to demonstrate the pipe.
+パイプをデモンストレーションするコンポーネントが必要です。
 
 <code-example path="pipes/src/app/power-booster.component.ts" title="src/app/power-booster.component.ts" linenums="false">
 </code-example>
@@ -209,35 +197,34 @@ Now you need a component to demonstrate the pipe.
 
 
 
-Note the following:
+次の点に注意してください。
 
-* You use your custom pipe the same way you use built-in pipes.
-* You must include your pipe in the `declarations` array of the `AppModule`.
+* 組み込みパイプと同じ方法でカスタムパイプを使用します。
+* パイプを`AppModule`の`declarations`配列に含める必要があります。
 
 <div class="callout is-helpful">
 
 <header>
-  Remember the declarations array
+  declarations配列を思い出しましょう
 </header>
 
 
-You must register custom pipes.
-If you don't, Angular reports an error.
-Angular CLI's generator registers the pipe automatically.
+カスタムパイプは登録する必要があります。
+そうしなければ、Angularはエラーを報告します。
+Angular CLIのジェネレータはパイプを自動的に登録します。
 
 
 </div>
 
 
 
-To probe the behavior in the <live-example></live-example>,
-change the value and optional exponent in the template.
+その動作を確認するには <live-example></live-example> でテンプレートの中の値とオプションの指数を変更してみましょう。
 
-## Power Boost Calculator
+## パワーブースト計算機
 
-It's not much fun updating the template to test the custom pipe.
-Upgrade the example to a "Power Boost Calculator" that combines
-your pipe and two-way data binding with `ngModel`.
+カスタムパイプをテストするためにテンプレートを更新するのは楽しいことではありません。
+この例を、パイプと`ngModel`による双方向データバインディングを組み合わせた
+"Power Boost Calculator"にアップグレードしましょう。
 
 
 <code-example path="pipes/src/app/power-boost-calculator.component.ts" title="src/app/power-boost-calculator.component.ts">
@@ -256,18 +243,18 @@ your pipe and two-way data binding with `ngModel`.
 {@a change-detection}
 
 
-## Pipes and change detection
+## パイプと変更検知
 
-Angular looks for changes to data-bound values through a *change detection* process that runs after every DOM event:
-every keystroke, mouse move, timer tick, and server response. This could be expensive.
-Angular strives to lower the cost whenever possible and appropriate.
+Angularは、すべてのDOMイベント（キーストローク、マウス移動、タイマー、およびサーバーレスポンス）の後に実行される*変更検知*のプロセスごとに、
+データバインド値の変更を探します。これはコストが高くなる可能性があります。
+Angularは可能な限り適切なコストを下げるよう努力しています。
 
-Angular picks a simpler, faster change detection algorithm when you use a pipe.
+パイプを使用するときには、Angularは簡単で迅速な変更検知アルゴリズムを選択します。
 
-<h3 class="no-toc">No pipe</h3>
+<h3 class="no-toc">パイプがない場合</h3>
 
-In the next example, the component uses the default, aggressive change detection strategy to monitor and update
-its display of every hero in the `heroes` array. Here's the template:
+次の例では、コンポーネントはデフォルトの積極的な変更検知ストラテジーを使用して、
+`heroes`配列内のすべてのヒーローの表示を監視および更新します。テンプレートは次のとおりです。
 
 
 <code-example path="pipes/src/app/flying-heroes.component.html" region="template-1" title="src/app/flying-heroes.component.html (v1)" linenums="false">
@@ -276,7 +263,7 @@ its display of every hero in the `heroes` array. Here's the template:
 
 
 
-The companion component class provides heroes, adds heroes into the array, and can reset the array.
+対となるコンポーネントクラスはヒーローを提供し、ヒーローを配列に追加し、配列をリセットすることができます。
 
 <code-example path="pipes/src/app/flying-heroes.component.ts" region="v1" title="src/app/flying-heroes.component.ts (v1)" linenums="false">
 
@@ -284,13 +271,13 @@ The companion component class provides heroes, adds heroes into the array, and c
 
 
 
-You can add heroes and Angular updates the display when you do.
-If you click the `reset` button, Angular replaces `heroes` with a new array of the original heroes and updates the display.
-If you added the ability to remove or change a hero, Angular would detect those changes and update the display as well.
+ヒーローを追加すると、、Angularは表示を更新します。
+`reset`ボタンをクリックすると、`heroes`配列がオリジナルのヒーローの配列に置き換えられ、表示が更新されます。
+ヒーローを削除または変更する機能を追加した場合、Angularはこれらの変更を検出して表示を更新します。
 
 <h3 class="no-toc"><i>FlyingHeroesPipe</i></h3>
 
-Add a `FlyingHeroesPipe` to the `*ngFor` repeater that filters the list of heroes to just those heroes who can fly.
+飛行可能なヒーローだけをフィルタリングする`FlyingHeroesPipe`を`*ngFor`リピーターに追加します。
 
 <code-example path="pipes/src/app/flying-heroes.component.html" region="template-flying-heroes" title="src/app/flying-heroes.component.html (flyers)" linenums="false">
 
@@ -298,7 +285,7 @@ Add a `FlyingHeroesPipe` to the `*ngFor` repeater that filters the list of heroe
 
 
 
-Here's the `FlyingHeroesPipe` implementation, which follows the pattern for custom pipes described earlier.
+これは`FlyingHeroesPipe`の実装です。先に説明したカスタムパイプのパターンにしたがっています。
 
 <code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pure" title="src/app/flying-heroes.pipe.ts" linenums="false">
 
@@ -306,13 +293,13 @@ Here's the `FlyingHeroesPipe` implementation, which follows the pattern for cust
 
 
 
-Notice the odd behavior in the <live-example></live-example>:
-when you add flying heroes, none of them are displayed under "Heroes who fly."
+<live-example></live-example> の奇妙な行動に注目してください。
+飛行するヒーローを追加しても、"Heroes who fly."の下には表示されません。
 
-Although you're not getting the behavior you want, Angular isn't broken.
-It's just using a different change-detection algorithm that ignores changes to the list or any of its items.
+あなたが望む振る舞いを得られていないにもかかわらず、Angularは壊れていません。
+これは、リストまたはその要素の変更を無視する、異なる変更検知アルゴリズムを使用しているだけです。
 
-Notice how a hero is added:
+ヒーローがどのように追加されたかを確認しましょう。
 
 <code-example path="pipes/src/app/flying-heroes.component.ts" region="push" title="src/app/flying-heroes.component.ts" linenums="false">
 
@@ -320,17 +307,17 @@ Notice how a hero is added:
 
 
 
-You add the hero into the `heroes` array.  The reference to the array hasn't changed.
-It's the same array. That's all Angular cares about. From its perspective, *same array, no change, no display update*.
+ヒーローを`heroes`配列に追加しています。配列への参照は変更されていません。
+それは同じ配列です。それだけがAngularが気にしていることです。その視点からすれば、*同じ配列、変更なし、表示更新はありません*。
 
-To fix that, create an array with the new hero appended and assign that to `heroes`.
-This time Angular detects that the array reference has changed.
-It executes the pipe and updates the display with the new array, which includes the new flying hero.
+これを修正するには、新しいヒーローが追加された配列を作成し、`heroes`に割り当てます。
+そうすれば、Angularは配列の参照が変更されたことを検知します。
+パイプを実行し、新しい飛行ヒーローを含む新しい配列で表示を更新します。
 
-If you *mutate* the array, no pipe is invoked and the display isn't updated;
-if you *replace* the array, the pipe executes and the display is updated.
-The Flying Heroes application extends the
-code with checkbox switches and additional displays to help you experience these effects.
+もし配列を*変更*した場合には、パイプは呼び出されず、表示は更新されません。
+しかし配列を*置き換え*た場合は、パイプが実行され、表示が更新されます。
+Flying Heroesアプリケーションは、
+チェックボックススイッチと追加の表示でコードを拡張し、これらの効果を体験するのに役立ちます。
 
 
 <figure>
@@ -339,29 +326,28 @@ code with checkbox switches and additional displays to help you experience these
 
 
 
-Replacing the array is an efficient way to signal Angular to update the display.
-When do you replace the array? When the data change.
-That's an easy rule to follow in *this* example
-where the only way to change the data is by adding a hero.
+配列を置換すると、Angularに信号を送信して表示を更新できます。
+いつ配列を置換するか、それはデータが変更されたときです。
+*この*例での簡単なルールでは、データを変更する唯一の方法は主人公を追加することです。
 
-More often, you don't know when the data have changed,
-especially in applications that mutate data in many ways,
-perhaps in application locations far away.
-A component in such an application usually can't know about those changes.
-Moreover, it's unwise to distort the component design to accommodate a pipe.
-Strive to keep the component class independent of the HTML.
-The component should be unaware of pipes.
+多くの場合、データがいつ変更されたかはわかりません。
+さまざまな方法でデータを変更するアプリケーションでは特にそうですし、アプリケーションの場所が離れているときにもそうなるでしょう。
+そのようなアプリケーションのコンポーネントは、通常、その変更について知ることができません。
+さらに、パイプを乗せるためにコンポーネントの設計を歪めることは賢明ではありません。
+コンポーネントクラスをHTMLとは独立に保つように努めます。
+コンポーネントはパイプを認識していないはずです。
 
-For filtering flying heroes, consider an *impure pipe*.
+飛行するヒーローをフィルタリングするには、*不純なパイプ*を検討しましょう。
 
 
+{@a pure-and-impure-pipes}
 
-## Pure and impure pipes
+## 純粋なパイプと不純なパイプ
 
-There are two categories of pipes: *pure* and *impure*.
-Pipes are pure by default. Every pipe you've seen so far has been pure.
-You make a pipe impure by setting its pure flag to false. You could make the `FlyingHeroesPipe`
-impure like this:
+パイプには*純粋*なものと*不純*なものがあります。
+パイプはデフォルトで純粋です。これまでに見たパイプはすべて純粋です。
+パイプのpureフラグをfalseに設定することによって、パイプを不純にします。
+このように`FlyingHeroesPipe`を不純にできます。
 
 
 <code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pipe-decorator" title="src/app/flying-heroes.pipe.ts" linenums="false">
@@ -370,55 +356,54 @@ impure like this:
 
 
 
-Before doing that, understand the difference between pure and impure, starting with a pure pipe.
+これをおこなう前に、純粋なものと純粋でないものとの違いを、まずは純粋なパイプから理解しましょう。
 
-<h3 class="no-toc">Pure pipes</h3>
+<h3 class="no-toc">純粋パイプ</h3>
 
-Angular executes a *pure pipe* only when it detects a *pure change* to the input value.
-A pure change is either a change to a primitive input value (`String`, `Number`, `Boolean`, `Symbol`)
-or a changed object reference (`Date`, `Array`, `Function`, `Object`).
+Angularが*純粋なパイプ*を実行するのは、入力値に対する*純粋な変更*を検出した場合だけです。
+純粋な変更とは、プリミティブな入力値への変更（`String`、`Number`、`Boolean`、`Symbol`）、
+あるいはオブジェクト参照の変更です（`Date`、`Array`、`Function`、`Object`）。
 
-Angular ignores changes within (composite) objects.
-It won't call a pure pipe if you change an input month, add to an input array, or update an input object property.
+Angularは（複合した）オブジェクト内の変更を無視します。
+月を変更したり、配列に追加したり、オブジェクトのプロパティを更新しても、純粋なパイプは呼び出されません。
 
-This may seem restrictive but it's also fast.
-An object reference check is fast&mdash;much faster than a deep check for
-differences&mdash;so Angular can quickly determine if it can skip both the
-pipe execution and a view update.
+これは制限的なように見えるかもしれませんが、高速です。
+オブジェクトの参照チェックは、&mdash;差分の深いチェックよりもはるかに&mdash;高速です。
+そのため、Angularはパイプの実行とビューの更新の両方をスキップできるかどうかを迅速に判断できます。
 
-For this reason, a pure pipe is preferable when you can live with the change detection strategy.
-When you can't, you *can* use the impure pipe.
+このため、この変更検知ストラテジーを使用する場合は、純粋なパイプが適しています。
+できない場合は、不純なパイプを使用することが*可能です*。
 
 
 <div class="l-sub-section">
 
 
 
-Or you might not use a pipe at all.
-It may be better to pursue the pipe's purpose with a property of the component,
-a point that's discussed later in this page.
+あるいは、パイプをまったく使用しないかもしれません。
+コンポーネントのプロパティを使ってパイプの目的を追求する方がよいかもしれません。
+この点については、このページの後半で説明します。
 
 
 </div>
 
 
 
-<h3 class="no-toc">Impure pipes</h3>
+<h3 class="no-toc">不純パイプ</h3>
 
-Angular executes an *impure pipe*  during every component change detection cycle.
-An impure pipe is called often, as often as every keystroke or mouse-move.
+Angularは、 コンポーネントの変更検知サイクルごとに*不純なパイプ*を実行します。
+不純なパイプは、すべてのキーストロークやマウス移動のように、頻繁に呼び出されます。
 
-With that concern in mind, implement an impure pipe with great care.
-An expensive, long-running pipe could destroy the user experience.
+それを念頭に置いて、細心の注意を払って不純なパイプを実装してください。
+ハイコストで長時間実行するパイプは、ユーザーエクスペリエンスを破壊する可能性があります。
 
 
 {@a impure-flying-heroes}
 
 
-<h3 class="no-toc">An impure <i>FlyingHeroesPipe</i></h3>
+<h3 class="no-toc">不純な<i>FlyingHeroesPipe</i></h3>
 
-A flip of the switch turns the `FlyingHeroesPipe` into a `FlyingHeroesImpurePipe`.
-The complete implementation is as follows:
+`FlyingHeroesPipe`から`FlyingHeroesImpurePipe`にスイッチを切り替えます。
+完全な実装は次のとおりです。
 
 <code-tabs>
 
@@ -434,10 +419,10 @@ The complete implementation is as follows:
 
 
 
-You inherit from `FlyingHeroesPipe` to prove the point that nothing changed internally.
-The only difference is the `pure` flag in the pipe metadata.
+あなたは内部が何も変わっていないということを証明するために`FlyingHeroesPipe`を継承しています。
+唯一の違いは、パイプメタデータの`pure`フラグです。
 
-This is a good candidate for an impure pipe because the `transform` function is trivial and fast.
+この`transform`関数は簡単で速いため、不純なパイプにしてもよいでしょう。
 
 
 <code-example path="pipes/src/app/flying-heroes.pipe.ts" linenums="false" title="src/app/flying-heroes.pipe.ts (filter)" region="filter">
@@ -446,7 +431,7 @@ This is a good candidate for an impure pipe because the `transform` function is 
 
 
 
-You can derive a `FlyingHeroesImpureComponent` from `FlyingHeroesComponent`.
+`FlyingHeroesComponent`から`FlyingHeroesImpureComponent`を派生させることができます。
 
 
 <code-example path="pipes/src/app/flying-heroes-impure.component.html" linenums="false" title="src/app/flying-heroes-impure.component.html (excerpt)" region="template-flying-heroes">
@@ -455,25 +440,25 @@ You can derive a `FlyingHeroesImpureComponent` from `FlyingHeroesComponent`.
 
 
 
-The only substantive change is the pipe in the template.
-You can confirm in the <live-example></live-example> that the _flying heroes_
-display updates as you add heroes, even when you mutate the `heroes` array.
+実質的な変更は、テンプレート内のパイプだけです。
+<live-example></live-example>では、`heroes`配列を変更してヒーローを追加したときに
+_flying heroes_の表示が更新されることを確認できます。
 
 
 {@a async-pipe}
-<h3 class="no-toc">The impure <i>AsyncPipe</i></h3>
+<h3 class="no-toc">不純な<i>AsyncPipe</i></h3>
 
 
-The Angular `AsyncPipe` is an interesting example of an impure pipe.
-The `AsyncPipe` accepts a `Promise` or `Observable` as input
-and subscribes to the input automatically, eventually returning the emitted values.
+Angularの`AsyncPipe`は不純なパイプの興味深い例です。
+`AsyncPipe`は`Promise`または`Observable`を入力として受け入れ、
+自動的にサブスクライブし、最終的に出力された値を返します。
 
-The `AsyncPipe` is also stateful.
-The pipe maintains a subscription to the input `Observable` and
-keeps delivering values from that `Observable` as they arrive.
+`AsyncPipe`はステートフルでもあります。
+パイプは入力された`Observable`のサブスクリプションを維持し、
+その`Observable`から到着した値を渡し続けます。
 
-This next example binds an `Observable` of message strings
-(`message$`) to a view with the `async` pipe.
+次の例では、メッセージ文字列の`Observable`（`message$`）を
+`async`パイプを使ってビューにバインドします。
 
 
 <code-example path="pipes/src/app/hero-async-message.component.ts" title="src/app/hero-async-message.component.ts">
@@ -482,21 +467,20 @@ This next example binds an `Observable` of message strings
 
 
 
-The Async pipe saves boilerplate in the component code.
-The component doesn't have to subscribe to the async data source,
-extract the resolved values and expose them for binding,
-and have to unsubscribe when it's destroyed
-(a potent source of memory leaks).
+Asyncパイプは、コンポーネントコードから定型文を削減します。
+コンポーネントは、非同期データソースをサブスクライブする必要はなく、
+解決された値を抽出してバインドするために公開する必要はなく、
+破棄されたときに購読を解除する必要もありません（メモリリークの強力な原因）。
 
-<h3 class="no-toc">An impure caching pipe</h3>
+<h3 class="no-toc">不純なキャッシングパイプ</h3>
 
-Write one more impure pipe, a pipe that makes an HTTP request.
+不純なパイプをもうひとつ作りましょう。これはHTTP要求をおこないます。
 
-Remember that impure pipes are called every few milliseconds.
-If you're not careful, this pipe will punish the server with requests.
+不純なパイプは数ミリ秒ごとに呼び出されることに注意してください。
+慎重にならなければ、このパイプはリクエストでサーバーを攻撃するでしょう。
 
-In the following code, the pipe only calls the server when the request URL changes and it caches the server response.
-The code uses the [Angular http](guide/http) client to retrieve data</span>:
+次のコードでは、リクエストURLが変更されたときにのみパイプがサーバーを呼び出し、サーバーのレスポンスをキャッシュします。
+このコードでは、[Angular http](guide/http)クライアントを使用してデータを取得しています。
 
 
 <code-example path="pipes/src/app/fetch-json.pipe.ts" title="src/app/fetch-json.pipe.ts">
@@ -505,8 +489,8 @@ The code uses the [Angular http](guide/http) client to retrieve data</span>:
 
 
 
-Now demonstrate it in a harness component whose template defines two bindings to this pipe,
-both requesting the heroes from the `heroes.json` file.
+それではこのパイプへの2つのバインディングをテンプレートで定義するコンポーネントで、
+`heroes.json`ファイルからヒーローを要求してみましょう。
 
 
 <code-example path="pipes/src/app/hero-list.component.ts" title="src/app/hero-list.component.ts">
@@ -515,7 +499,7 @@ both requesting the heroes from the `heroes.json` file.
 
 
 
-The component renders as the following:
+コンポーネントは次のようにレンダリングされます。
 
 
 <figure>
@@ -524,16 +508,16 @@ The component renders as the following:
 
 
 
-A breakpoint on the pipe's request for data shows the following:
+パイプのデータ要求のブレークポイントは、次のことを示します。
 
-* Each binding gets its own pipe instance.
-* Each pipe instance caches its own URL and data.
-* Each pipe instance only calls the server once.
+* 各バインディングは、それぞれのパイプインスタンスを取得します。
+* 各パイプインスタンスは、それぞれのURLとデータをキャッシュします。
+* 各パイプ・インスタンスはサーバーを1回だけ呼び出します。
 
 <h3 class="no-toc"><i>JsonPipe</i></h3>
 
-In the previous code sample, the second `fetch` pipe binding demonstrates more pipe chaining.
-It displays the same hero data in JSON format by chaining through to the built-in `JsonPipe`.
+先ほどのコードサンプルでは、​​2番目の`fetch`パイプバインディングはより多くのパイプを連鎖しています。
+JSON形式の同じヒーローデータをビルトインの`JsonPipe`にチェーンして表示します。
 
 
 <div class="callout is-helpful">
@@ -541,15 +525,14 @@ It displays the same hero data in JSON format by chaining through to the built-i
 
 
 <header>
-  Debugging with the json pipe
+  JSONパイプによるデバッグ
 </header>
 
 
 
-The [JsonPipe](api/common/JsonPipe)
-provides an easy way to diagnosis a mysteriously failing data binding or
-inspect an object for future binding.
-
+[JsonPipe](api/common/JsonPipe)は、
+不思議な障害が発生したデータバインディングや、
+将来のバインディングのためのオブジェクトを検査する簡単な方法を提供します。
 
 </div>
 
@@ -558,57 +541,55 @@ inspect an object for future binding.
 {@a pure-pipe-pure-fn}
 
 
-<h3 class="no-toc">Pure pipes and pure functions</h3>
+<h3 class="no-toc">純粋なパイプと純粋な関数</h3>
 
-A pure pipe uses pure functions.
-Pure functions process inputs and return values without detectable side effects.
-Given the same input, they should always return the same output.
+純粋なパイプは純粋な関数を使用します。
+純粋な関数は、検出可能な副作用なしに入力と戻り値を処理します。
+同じ入力が与えられた場合、それらは常に同じ出力を返すべきです。
 
-The pipes discussed earlier in this page are implemented with pure functions.
-The built-in `DatePipe` is a pure pipe with a pure function implementation.
-So are the `ExponentialStrengthPipe` and `FlyingHeroesPipe`.
-A few steps back, you reviewed the `FlyingHeroesImpurePipe`&mdash;an impure pipe with a pure function.
+このページの前半で説明したパイプは、純粋な機能で実装されています。
+ビルトインの`DatePipe`は純粋な関数による純粋なパイプであり、
+`ExponentialStrengthPipe`や`FlyingHeroesPipe`もそうです。
+少し前には、`FlyingHeroesImpurePipe`&mdash;純粋な関数による不純なパイプを見直しました。
 
-But always implement a *pure pipe* with a *pure function*.
-Otherwise, you'll see many console errors regarding expressions that changed after they were checked.
+ただし、*純粋なパイプ*は常に*純粋な関数*を使って実装してください。
+そうしなければ、チェックした後に変更された式に関するコンソールエラーが多数表示されます。
 
 
 
-## Next steps
+## 次のステップ
 
-Pipes are a great way to encapsulate and share common display-value
-transformations. Use them like styles, dropping them
-into your template's expressions to enrich the appeal and usability
-of your views.
+パイプは、共通の表示値変換をカプセル化して共有するための優れた方法です。
+スタイルのように使い、テンプレートの式に適用して、
+ビューの魅力と利便性を高めることができます。
 
-Explore Angular's inventory of built-in pipes in the [API Reference](api?type=pipe).
-Try writing a custom pipe and perhaps contributing it to the community.
+Angularの組み込みパイプのインベントリについては、[APIリファレンス](api?type=pipe)を参照してください。
+また、カスタムパイプを作成し、それをコミュニティに提供してみてください。
 
 
 {@a no-filter-pipe}
 
 
 
-## Appendix: No *FilterPipe* or *OrderByPipe*
+## Appendix: 付録：*FilterPipe*あるいは*OrderByPipe*の不在
 
-Angular doesn't provide pipes for filtering or sorting lists.
-Developers familiar with AngularJS know these as `filter` and `orderBy`.
-There are no equivalents in Angular.
+Angularはリストのフィルタリングやソートにパイプを提供しません。
+AngularJSに精通している開発者は、それを`filter`や`orderBy`として知っていますが、
+Angularに同じものはありません。
 
-This isn't an oversight. Angular doesn't offer such pipes because
-they perform poorly and prevent aggressive minification.
-Both `filter` and `orderBy` require parameters that reference object properties.
-Earlier in this page, you learned that such pipes must be [impure](guide/pipes#pure-and-impure-pipes) and that
-Angular calls impure pipes in almost every change-detection cycle.
+これは見落としではありません。このようなパイプは性能が悪く、
+積極的な最小化を阻害するため、Angularは提供していません。
+`filter`と`orderBy`は両方とも、オブジェクトのプロパティを参照するパラメータが必要です。
+このページの前半では、このようなパイプは[不純](guide/pipes#pure-and-impure-pipes)である必要があり、
+Angularはほぼすべての変更検知サイクルで不純なパイプを呼び出すことを学びました。
 
-Filtering and especially sorting are expensive operations.
-The user experience can degrade severely for even moderate-sized lists when Angular calls these pipe methods many times per second.
-`filter` and `orderBy` have often been abused in AngularJS apps, leading to complaints that Angular itself is slow.
-That charge is fair in the indirect sense that AngularJS prepared this performance trap
-by offering `filter` and `orderBy` in the first place.
+フィルタリング、特にソートは高価な操作です。
+Angularがこれらのパイプメソッドを毎秒何度も呼び出すと、ユーザーエクスペリエンスは中程度のサイズのリストでもひどく低下します。
+`filter`そして`orderBy`はAngularJSアプリの中でよく濫用され、Angular自体が遅いという苦情につながります。
+そもそも`filter`と`orderBy`を提供することでAngularJSがパフォーマンスの罠を用意しているという間接的な意味では、それは正しいです。
 
-The minification hazard is also compelling, if less obvious. Imagine a sorting pipe applied to a list of heroes.
-The list might be sorted by hero `name` and `planet` of origin properties in the following way:
+顕著ではないかもしれませんが、最小化における危険性も切実です。ヒーローのリストに適用されたソートパイプを想像してみてください。
+リストは、ヒーローの`name`と出身の`planet`のプロパティによって次のようにソートされます。
 
 <code-example language="html">
   &lt;!-- NOT REAL CODE! -->
@@ -617,21 +598,19 @@ The list might be sorted by hero `name` and `planet` of origin properties in the
 
 
 
-You identify the sort fields by text strings, expecting the pipe to reference a property value by indexing
-(such as `hero['name']`).
-Unfortunately, aggressive minification manipulates the `Hero` property names so that `Hero.name` and `Hero.planet`
-become something like `Hero.a` and `Hero.b`. Clearly `hero['name']` doesn't work.
+並べ替えフィールドをテキスト文字列で指定し、パイプがインデックスなどでプロパティ値を参照することを期待します（たとえば`hero['name']`のような）。
+残念ながら、積極的な最小化は`Hero`のプロパティ名を操作し、`Hero.name`や`Hero.planet`は`Hero.a`や`Hero.b`のようになります。明らかに`hero['name']`は機能しません。
 
-While some may not care to minify this aggressively,
-the Angular product shouldn't prevent anyone from minifying aggressively.
-Therefore, the Angular team decided that everything Angular provides will minify safely.
+積極的に最小化することを気にしない人もいますが、
+Angularのプロダクトは積極的に最小化する人を妨げるべきではありません。
+したがって、AngularチームはAngularが提供するすべてのものが安全に最小化されるように決めています。
 
-The Angular team and many experienced Angular developers strongly recommend moving
-filtering and sorting logic into the component itself.
-The component can expose a `filteredHeroes` or `sortedHeroes` property and take control
-over when and how often to execute the supporting logic.
-Any capabilities that you would have put in a pipe and shared across the app can be
-written in a filtering/sorting service and injected into the component.
+Angularチームと多くの経験豊富なAngular開発者は、
+フィルタリングと並べ替えロジックをコンポーネント自体に移動することを強くお勧めします。
+コンポーネントは`filteredHeroes`または`sortedHeroes`プロパティを公開して、
+サポートロジックを実行する時期と頻度を制御できます。
+パイプに入れてアプリ全体で共有しようとした機能は、
+フィルタリング/並べ替えのサービスに書き込んで、コンポーネントに注入することができます。
 
-If these performance and minification considerations don't apply to you, you can always create your own such pipes
-(similar to the [FlyingHeroesPipe](guide/pipes#impure-flying-heroes)) or find them in the community.
+これらのパフォーマンスと最小化の考慮事項があなたには当てはまらない場合は、
+いつでも独自のパイプ（[FlyingHeroesPipe](guide/pipes#impure-flying-heroes)のような）を作成したり、コミュニティで見つけることができます。

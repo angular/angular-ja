@@ -191,8 +191,9 @@
             },
             {
               "url": "guide/pipes",
-              "title": "Pipes",
-              "tooltip": "Pipes transform displayed values within a template."
+              "title": "パイプ",
+              "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
+              "translated": true
             },
             {
               "url": "guide/animations",

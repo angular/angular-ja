@@ -5,7 +5,7 @@ module.exports = {
   entry: { server: './server.ts' },
   resolve: { extensions: ['.js', '.ts'] },
   target: 'node',
-  // これは node_modules や他のサードパーティーライブラリを確実に読み込みます
+  // これはnode_modulesや他のサードパーティーライブラリを確実に読み込みます
   externals: [/(node_modules|main\..*\.js)/],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -19,7 +19,7 @@ module.exports = {
     // 'WARNING Critical dependency: the request of a dependency is an expression'
     new webpack.ContextReplacementPlugin(
       /(.+)?angular(\\|\/)core(.+)?/,
-      path.join(__dirname, 'src'), // src のロケーション
+      path.join(__dirname, 'src'), // srcのロケーション
       {} // ルートのマッピング
     ),
     new webpack.ContextReplacementPlugin(

@@ -376,13 +376,14 @@
           "tooltip": "Developing for content security in Angular applications."
         },
         {
-          "title": "Setup & Deployment",
-          "tooltip": "Setup and Deployment",
+          "title": "セットアップ & デプロイ",
+          "tooltip": "セットアップとデプロイ",
           "children": [
             {
               "url": "guide/setup",
-              "title": "Setup for local development",
-              "tooltip": "Install the Angular QuickStart seed for faster, more efficient development on your machine."
+              "title": "ローカル開発環境のセットアップ",
+              "tooltip": "より高速で効率的な開発のためにマシン上にAngularクイックスタートをインストールします。",
+              "translated": true
             },
             {
               "url": "guide/setup-systemjs-anatomy",

@@ -3,8 +3,8 @@
 {@a develop-locally}
 
 <live-example name=quickstart>クイックスタートライブコーディング</live-example> の例はAngularの_遊び場_です。
-これは本物のアプリケーションを開発する場ではありません。
-あなた自身のマシン上で[ローカルに開発](guide/setup#why-locally "Why develop locally")をすべきです ... またそれが我々が考えるあなたがAngularを学ぶべき方法です。
+これは実際のアプリケーションを開発する場ではありません。
+あなたは自分のマシン上で[ローカルに開発をするべきです](guide/setup#why-locally "なぜローカルで開発するのか")...そしてそれはあなたがAngularを学ばなければならないと思う方法です。
 
 あなたのマシン上に新しいプロジェクトをセットアップするのは、[github](https://github.com/angular/quickstart "Install the github QuickStart repo")で管理されている**クイックスタートシード**を使って素早く、簡単にすることができます。
 
@@ -73,7 +73,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 
 ## _必要ではない_ファイルの削除 (任意)
 
-テストに関するファイルとクリックスタートのリポジトリ管理のためのファイル(`.git`フォルダと`.gitignore`のような***git関連のアーティファクトを含みます。***)はすぐに削除することができます。
+テストに関するファイルとクリックスタートのリポジトリ管理のためのファイル(`.git`フォルダと`.gitignore`のような***git関連のアーティファクトを含みます。***)はすぐに削除できます。
 
 
 <div class="alert is-important">
@@ -324,13 +324,12 @@ _npm_パッケージマネージャーは、それ自身が_node_アプリケー
 ほぼすべてのドキュメントページ上のリンクが完成されたサンプルをブラウザに表示します。
 サンプルコードで遊ぶこともできますし、改修したものを友達とシェアできますし、ダウンロードしてマシン上で実行することもできます。
 
-[クイックスタート](guide/quickstart "Angular QuickStart Playground")は`AppComponent`ファイルしか示しません。
+[クイックスタート](guide/quickstart "Angularクイックスタートプレイグラウンド")は`AppComponent`ファイルしか示しません。
 それは_プレイグラウンドだけのために_`app.module.ts`と`main.ts`に等しいものを作ります。
 なので、読み手は注意散漫にならずにAngularについて知ることができます。
 他のサンプルはクイックスタートのシードにもとづいています。
 
 これほど楽しいですが...
-As much fun as this is ...
 
 * アプリケーションをStackblitzにはデプロイできません
 * コードを書くとき常にオンラインとは限りません

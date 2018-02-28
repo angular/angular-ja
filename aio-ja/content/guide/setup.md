@@ -6,9 +6,9 @@
 これは実際のアプリケーションを開発する場ではありません。
 あなたは自分のマシン上で[ローカルに開発をするべきです](guide/setup#why-locally "なぜローカルで開発するのか")...そしてそれはあなたがAngularを学ばなければならないと思う方法です。
 
-あなたのマシン上に新しいプロジェクトをセットアップするのは、[github](https://github.com/angular/quickstart "Install the github QuickStart repo")で管理されている**クイックスタートシード**を使って素早く、簡単にすることができます。
+あなたのマシン上に新しいプロジェクトをセットアップするのは、[github](https://github.com/angular/quickstart "github上のクイックスタートリポジトリをインストール")で管理されている**クイックスタートシード**を使って素早く、簡単にできます。
 
-[nodeとnpm](guide/setup#install-prerequisites "What if you don't have node and npm?")がインストールされていることが必要です。
+[nodeとnpm](guide/setup#install-prerequisites "nodeとnpmがない場合は?")がインストールされていることが必要です。
 
 {@a clone}
 
@@ -122,7 +122,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 **クイックスタートシード**にはクイックスタートプレイグラウンドと同じアプリケーションが入っています。
 しかし、このプロジェクトの真の目的は_ローカル_開発環境の確かな基盤を提供することです。
 結果として、マシン上のプロジェクトフォルダには_もっと数多くの_ファイルがあり、
-それらのほとんどは[あとで学ぶ](guide/setup-systemjs-anatomy "Setup Anatomy")ことができます。
+それらのほとんどは[あとで学ぶ](guide/setup-systemjs-anatomy "セットアップの解剖学")ことができます。
 
 
 
@@ -248,7 +248,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
     <td>
 
 
-      Angularにどのようにアプリケーションを組み立てるのかを伝える[ルートモジュール](guide/bootstrapping "AppModule: the root module") `AppModule`を定義します。
+      Angularにどのようにアプリケーションを組み立てるのかを伝える[ルートモジュール](guide/bootstrapping "AppModule: ルートモジュール") `AppModule`を定義します。
       いま時点では、`AppComponent`のみを宣言しています。
       すぐに他のコンポーネントも定義することになります。
     </td>
@@ -284,7 +284,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 
 ### 次のステップ
 
-もしAngularになじみがないのであれば、この[チュートリアル](tutorial "Tour of Heroes tutorial")に進むことをお勧めします。
+もしAngularになじみがないのであれば、この[チュートリアル](tutorial "ツアー・オブ・ヒーローズ チュートリアル")に進むことをお勧めします。
 
 
 </div>
@@ -339,8 +339,8 @@ _npm_パッケージマネージャーは、それ自身が_node_アプリケー
 <live-example title="QuickStart Seed in Stackblitz">ライブコーディング</live-example>環境は遊び場として使ってください。
 ドキュメントのサンプルを試したり、あなた自身で実験するために使ってください。
 また
-<a href="https://github.com/angular/angular/issues/new" title="File a documentation issue">ドキュメントに関してのイシューを報告</a> したり
-<a href="https://github.com/angular/angular/issues/new" title="File an Angular issue">Angular自体のイシューを報告</a>
+<a href="https://github.com/angular/angular/issues/new" title="ドキュメントのイシューを報告">ドキュメントに関してのイシューを報告</a> したり
+<a href="https://github.com/angular/angular/issues/new" title="Angularのイシューを報告">Angular自体のイシューを報告</a>
 したりするときのバグの再現環境として最適です。
 
 実際の開発では、[ローカル開発](guide/setup#develop-locally)を強く推奨します。

@@ -221,8 +221,9 @@
             },
             {
               "url": "guide/form-validation",
-              "title": "Form Validation",
-              "tooltip": "Validate user's form entries."
+              "title": "フォームバリデーション",
+              "tooltip": "ユーザーのフォーム入力を検証しましょう。",
+              "translated": true
             },
             {
               "url": "guide/reactive-forms",

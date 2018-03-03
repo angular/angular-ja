@@ -19,7 +19,7 @@
 テンプレート駆動フォームにバリデーションを追加するには、[ネイティブHTMLフォーム](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)の検証と同じ検証属性を追加します。
 Angularは、これらの属性をフレームワーク内のバリデータ関数と照合するディレクティブを使用します。
 
-フォームコントロールの値が変更されるたびに, Angularは検証を実行し、検証エラーのリストを生成し, INVALIDステータスまたはVALIDステータスまたはnullが返されます。
+フォームコントロールの値が変更されるたびに, Angularは検証を実行し、INVALIDステータスに起因する検証エラーのリスト、あるいはVALIDステータスに起因するnullを返します。
 
 `ngModel`をローカルテンプレートの変数にエクスポートすることで、コントロールの状態を調べることができます。
 次の例では、`NgModel`を`name`という名前の変数にエクスポートします:
@@ -33,7 +33,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 * `<input>`要素は、HTML検証属性、`required`および`minlength`を保持します。 また、カスタムバリデータディレクティブの`forbiddenName`も持ちます。 詳細については、[カスタムバリデータ](guide/form-validation#custom-validators)のセクションを参照してください。
 
-* `#name="ngModel"`は、`NgModel`を`name`というローカル変数にエクスポートします。 `NgModel`は、基本となる`FormControl`インスタンスの多くのプロパティを反映しているため、テンプレート内でこれを使用して、`valid`または`dirty`なコントロールの状態をチェックできます。コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
+* `#name="ngModel"`は、`NgModel`を`name`というローカル変数にエクスポートします。 `NgModel`は、基本となる`FormControl`インスタンスの多くのプロパティを反映しているため、テンプレート内でこれを使用して、`valid`や`dirty`のようなコントロールの状態をチェックできます。コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
 
 * `<div>`要素の`*ngIf`はネストされたメッセージ`divs`のセットを表示しますが、`name`が`dirty`か`touched`の場合にのみ表示されます。
 
@@ -44,7 +44,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 
 
-#### なぜ、_dirty_と_touched_ をチェックするのですか
+#### なぜ、_dirty_と_touched_ をチェックするのでしょうか？
 
 ユーザーがフォームを編集する前に、アプリケーションでエラーを表示したくない場合があります。`dirty`と`touched`のチェックはユーザーが次の2つのうちのいずれかを実行するまで、エラーが表示されることを防ぎます: 値を変更し,コントロールをdirtyに変更します; フォームコントロール要素をblurするか、コントロールをtouthedするように設定します。
 
@@ -57,7 +57,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 ### バリデータ関数
 
 バリデータ関数には、同期バリデータと非同期バリデータの2種類があります。
-
+みてください
 * **同期バリデータ**: コントロールインスタンスを取得し、ただちに一連の検証エラーまたは`null`を返します。`FormControl`をインスタンス化するときに、2番目の引数として渡すことができます。
 
 * **非同期バリデータ**: コントロールインスタンスを取得し、PromiseまたはObservableを返し、あとで一連の検証エラーまたはnullを返します。 `FormControl`をインスタンス化するときに、3番目の引数として渡すことができます。
@@ -70,7 +70,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 `required`や`minlength`など、テンプレート駆動型フォームの属性として使用できる同じ組み込みバリデータは、すべて`Validators`クラスの関数として使用できます。組み込みバリデータの完全なリストについては、[Validators](api/forms/Validators) APIリファレンスを参照してください。
 
-ヒーローフォームをリアクティブフォームに更新するには,今回は同じ組み込みバリデーターを関数形式で使用することができます。下記参照:
+ヒーローフォームをリアクティブフォームに更新するには,今回は同じ組み込みバリデーターを関数形式で使用することができます。次のコードを見てください:
 
 {@a reactive-component-class}
 
@@ -90,7 +90,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="name-with-error-msg" title="reactive/hero-form-reactive.component.html (name with error msg)" linenums="false">
 </code-example>
 
-主な取り組み:
+重要なポイント:
  
  * このフォームはディレクティブをエクスポートしなくなり、代わりにコンポーネントクラスで定義された`name`getterを使用します。
  * `required`属性は引き続き存在します。検証の目的では必要ではありませんが、CSSのスタイリングやアクセシビリティ上の理由から、テンプレートにそのスタイルを保持したい場合があります。
@@ -112,7 +112,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 `forbiddenNameValidator`ファクトリは、設定されたバリデータ関数を返します。
 この関数はAngularコントロールオブジェクトをとり、コントロール値が有効な場合はnull _または_ 検証エラーオブジェクトを返します。
-検証エラーオブジェクトには、通常、nameが検証キーであるプロパティ`'forbiddenName'`と,エラーメッセージ`{name}`に挿入できる任意のdictionaryです。
+検証エラーオブジェクトには、通常、nameが検証キーであるプロパティ`'forbiddenName'`と,エラーメッセージ`{name}`に挿入できる値の順不同な辞書です。
 
 カスタム非同期バリデータは同期バリデータと似ていますが、あとでnullまたは検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。Observableの場合は、Observableを完了しなければなりません。この時点で、フォームは検証のために発行された最後の値を使用します。
 
@@ -134,12 +134,12 @@ Angularは、ディレクティブが拡張可能なバリデータのコレク�
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" title="shared/forbidden-name.directive.ts (providers)" linenums="false">
 </code-example>
 
-ディレクティブクラスは、`Validator`インターフェイスを実装しているため、Angularフォームと簡単に統合できます。 それがすべて一緒に来る方法のアイデアを得るのを助けるためのディレクティブの残りはここにあります:
+ディレクティブクラスは、`Validator`インターフェイスを実装しているため、Angularフォームと簡単に統合できます。 これはどのようにそれらをまとめるかを理解するための、ディレクティブの残りの部分です:
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" title="shared/forbidden-name.directive.ts (directive)">
 </code-example>
 
-`ForbiddenValidatorDirective`が準備されたら、そのセレクタ`forbiddenName`を任意の入力要素に追加して、その要素をアクティブ化することができます。 例:
+`ForbiddenValidatorDirective`が準備されたら、`forbiddenName`セレクタを任意の入力要素に追加して、アクティブ化できます。これは一例です:
 
 <code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" title="template/hero-form-template.component.html (forbidden-name-input)" linenums="false">
 
@@ -148,7 +148,7 @@ Angularは、ディレクティブが拡張可能なバリデータのコレク�
 
 <div class="l-sub-section">
 
-カスタム検証ディレクティブは、`useClass`ではなく`useExisting`でインスタンス化されていることに気付かれるかもしれません。登録されたバリデータは、この`ForbiddenValidatorDirective`の _インスタンス_ でなければなりません&mdash;`forbiddenName`プロパティが "bob"にバインドされたフォームのインスタンス。`useExisting`を`useClass`に置き換えた場合は、新しいクラスインスタンスを登録することになります。1つは`forbiddenName`を持たないインスタンスです。
+カスタム検証ディレクティブは、`useClass`ではなく`useExisting`でインスタンス化されていることに気付かれるかもしれません。登録されたバリデータは、この`ForbiddenValidatorDirective`の _インスタンス_ でなければなりません&mdash;`forbiddenName`プロパティが "bob"にバインドされたフォームのインスタンス。`useExisting`を`useClass`に置き換えた場合は、`forbiddenName`を持たない新しいクラスインスタンスを登録することになります。
 
 </div>
 
@@ -171,4 +171,4 @@ Angularは、AngularJSと同様に、多くのコントロールプロパティ�
 </code-example>
 
 
-**<live-example></live-example> 完全なリアクティブおよびテンプレート駆動のサンプルコードを実行することができます。**
+**<live-example></live-example> を実行して、リアクティブおよびテンプレート駆動の完全なサンプルコードを見ることができます。**

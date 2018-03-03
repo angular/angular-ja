@@ -9,7 +9,7 @@
 
 <div class="l-sub-section">
 
-フォームを初めてお使いの場合は、[テンプレート駆動フォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)のガイドを確認してください。
+フォームをはじめてお使いの場合は、[テンプレート駆動フォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)のガイドを確認してください。
 
 </div>
 
@@ -60,7 +60,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 * **同期バリデータ**: コントロールインスタンスを取得し、ただちに一連の検証エラーまたは`null`を返します。`FormControl`をインスタンス化するときに、2番目の引数として渡すことができます。
 
-* **非同期バリデータ**: コントロールインスタンスを取得し、PromiseまたはObservableを返し、後で一連の検証エラーまたはnullを返します。 `FormControl`をインスタンス化するときに、3番目の引数として渡すことができます。
+* **非同期バリデータ**: コントロールインスタンスを取得し、PromiseまたはObservableを返し、あとで一連の検証エラーまたはnullを返します。 `FormControl`をインスタンス化するときに、3番目の引数として渡すことができます。
 
 注意: パフォーマンス上の理由から、Angularはすべての同期バリデータが通過する場合にのみ非同期バリデータを実行します。エラーが設定される前にそれぞれ完了しなければなりません。
 
@@ -114,7 +114,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 この関数はAngularコントロールオブジェクトをとり、コントロール値が有効な場合はnull _または_ 検証エラーオブジェクトを返します。
 検証エラーオブジェクトには、通常、nameが検証キーであるプロパティ`'forbiddenName'`と,エラーメッセージ`{name}`に挿入できる任意のdictionaryです。
 
-カスタム非同期バリデータは同期バリデータと似ていますが、後でnullまたは検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。Observableの場合は、Observableを完了しなければなりません。この時点で、フォームは検証のために発行された最後の値を使用します。
+カスタム非同期バリデータは同期バリデータと似ていますが、あとでnullまたは検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。Observableの場合は、Observableを完了しなければなりません。この時点で、フォームは検証のために発行された最後の値を使用します。
 
 ### リアクティブフォームへ追加
 
@@ -129,7 +129,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 対応する`ForbiddenValidatorDirective`は、`forbiddenNameValidator`のラッパーとして機能します。
 
-Angularは、ディレクティブが拡張可能なバリデータのコレクションを持つプロバイダである`NG_VALIDATORS`プロバイダに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。
+Angularは、ディレクティブが拡張可能なバリデータのコレクションをもつプロバイダーである`NG_VALIDATORS`プロバイダーに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" title="shared/forbidden-name.directive.ts (providers)" linenums="false">
 </code-example>

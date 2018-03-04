@@ -38,7 +38,7 @@ CLIの `ng new` コマンドは、デフォルトの `package.json` を作成し
 {@a dependencies}
 
 ## *Dependencies*
-`package.json` の `dependencies区分`には、次のものが含まれています:
+`package.json` の `dependencies`セクションには、次のものが含まれています:
 
 * **Angularパッケージ**: パッケージ名が `@angular/` から始まる、Angular のコアライブラリ及びオプションライブラリ
 
@@ -52,7 +52,7 @@ CLIの `ng new` コマンドは、デフォルトの `package.json` を作成し
 詳細は [Animations guide](guide/animations) を参照してください。
 
 **@angular/common**: Angularチームが提供する service/pipe/directive。
-また、[`HttpClientModule`](guide/http) は、 '@ angular / common / http'内にあります。
+また、[`HttpClientModule`](guide/http) は、 '@angular/common/http'内にあります。
 
 **@angular/core**: Angularの重要なランタイム部。
 すべてのメタデータデコレータ・`Component`・`Directive`・依存関係注入・コンポーネントのライフサイクルフックが含まれています。
@@ -98,7 +98,7 @@ Zone.jsは、JavaScriptの標準仕様を決定している[TC39](http://www.ecm
 
 ## *DevDependencies*
 
-`package.json`の*devDependencies区分*にリストされているパッケージは、ローカルマシン上でのアプリケーション開発に役立ちます。
+`package.json`の*devDependencies*セクションにリストされているパッケージは、ローカルマシン上でのアプリケーション開発に役立ちます。
 
 プロダクションアプリケーションでは、これらをデプロイしないでください。
 
@@ -118,10 +118,10 @@ Zone.jsは、JavaScriptの標準仕様を決定している[TC39](http://www.ecm
 **[codelyzer](https://www.npmjs.com/package/codelyzer)**: [Angularのスタイルガイド](guide/styleguide)に準拠しているリンター。
 
 
-**jasmine/... **: テストライブラリ([Jasmine](https://jasmine.github.io/))をサポートするパッケージ。
+**jasmine/... **: [Jasmine](https://jasmine.github.io/)テストライブラリをサポートするパッケージ。
 
 
-**karma/... **: テストランナー([karma](https://www.npmjs.com/package/karma))をサポートするパッケージ。
+**karma/... **: [karma](https://www.npmjs.com/package/karma)テストランナーをサポートするパッケージ。
 
 
 **[protractor](https://www.npmjs.com/package/protractor)**: Angularアプリケーションのエンドツーエンド（e2e）フレームワーク。 

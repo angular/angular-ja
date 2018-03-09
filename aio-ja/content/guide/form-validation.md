@@ -1,177 +1,145 @@
-# Form Validation
+# フォームバリデーション
 
 
 
 
-Improve overall data quality by validating user input for accuracy and completeness.
+ユーザー入力を検証することにより、正確さと完全性のために全体的なデータ品質を改善します。
 
-This page shows how to validate user input in the UI and display useful validation messages
-using both reactive and template-driven forms. It assumes some basic knowledge of the two 
-forms modules.
+このページでは、UIでのユーザー入力の検証方法と、リアクティブおよびテンプレート駆動フォームの両方を使用した有効な検証メッセージの表示方法を示します。これは、2つのフォームモジュールの基本的な知識を前提としています。
 
 <div class="l-sub-section">
 
-If you're new to forms, start by reviewing the [Forms](guide/forms) and 
-[Reactive Forms](guide/reactive-forms) guides.
+フォームをはじめてお使いの場合は、[テンプレート駆動フォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)のガイドを確認してください。
 
 </div>
 
 
-## Template-driven validation
+## テンプレート駆動バリデーション
 
-To add validation to a template-driven form, you add the same validation attributes as you 
-would with [native HTML form validation](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). 
-Angular uses directives to match these attributes with validator functions in the framework.
+テンプレート駆動フォームにバリデーションを追加するには、[ネイティブHTMLフォーム](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)の検証と同じ検証属性を追加します。
+Angularは、これらの属性をフレームワーク内のバリデータ関数と照合するディレクティブを使用します。
 
-Every time the value of a form control changes, Angular runs validation and generates 
-either a list of validation errors, which results in an INVALID status, or null, which results in a VALID status.
+フォームコントロールの値が変更されるたびに, Angularは検証を実行し、INVALIDステータスに起因する検証エラーのリスト、あるいはVALIDステータスに起因するnullを返します。
 
-You can then inspect the control's state by exporting `ngModel` to a local template variable.
-The following example exports `NgModel` into a variable called `name`:
+`ngModel`をローカルテンプレートの変数にエクスポートすることで、コントロールの状態を調べることができます。
+次の例では、`NgModel`を`name`という名前の変数にエクスポートします:
 
 <code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-with-error-msg" title="template/hero-form-template.component.html (name)" linenums="false">
 
 </code-example>
 
 
-Note the following:
+次の点に注意してください:
 
-* The `<input>` element carries the HTML validation attributes: `required` and `minlength`. It 
-also carries a custom validator directive, `forbiddenName`. For more 
-information, see [Custom validators](guide/form-validation#custom-validators) section.
+* `<input>`要素は、HTML検証属性、`required`および`minlength`を保持します。 また、カスタムバリデータディレクティブの`forbiddenName`も持ちます。 詳細については、[カスタムバリデータ](guide/form-validation#custom-validators)のセクションを参照してください。
 
-* `#name="ngModel"` exports `NgModel` into a local variable called `name`. `NgModel` mirrors many of the properties of its underlying 
-`FormControl` instance, so you can use this in the template to check for control states such as `valid` and `dirty`. For a full list of control properties, see the [AbstractControl](api/forms/AbstractControl) 
-API reference.
+* `#name="ngModel"`は、`NgModel`を`name`というローカル変数にエクスポートします。 `NgModel`は、基本となる`FormControl`インスタンスの多くのプロパティを反映しているため、テンプレート内でこれを使用して、`valid`や`dirty`のようなコントロールの状態をチェックできます。コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
 
-* The `*ngIf` on the `<div>` element reveals a set of nested message `divs`
-but only if the `name` is invalid and the control is either `dirty` or `touched`.
+* `<div>`要素の`*ngIf`はネストされたメッセージ`divs`のセットを表示しますが、`name`が`dirty`か`touched`の場合にのみ表示されます。
 
-* Each nested `<div>` can present a custom message for one of the possible validation errors.
-There are messages for `required`, `minlength`, and `forbiddenName`.
+* ネストされた各`<div>`は、考えられる検証エラーの1つに対してカスタムメッセージを表示できます。 `required`、`minlength`、および`forbiddenName`のメッセージがあります。
  
 
 <div class="l-sub-section">
 
 
 
-#### Why check _dirty_ and _touched_?
+#### なぜ、_dirty_と_touched_ をチェックするのでしょうか？
 
-You may not want your application to display errors before the user has a chance to edit the form.
-The checks for `dirty` and `touched` prevent errors from showing until the user 
-does one of two things: changes the value, 
-turning the control dirty; or blurs the form control element, setting the control to touched.
+ユーザーがフォームを編集する前に、アプリケーションでエラーを表示したくない場合があります。`dirty`と`touched`のチェックはユーザーが次の2つのうちのいずれかを実行するまで、エラーが表示されることを防ぎます: 値を変更し,コントロールをdirtyに変更します; フォームコントロール要素をblurするか、コントロールをtouthedするように設定します。
 
 </div>
 
-## Reactive form validation
+## リアクティブフォームバリデーション
 
-In a reactive form, the source of truth is the component class. Instead of adding validators through attributes in the template, you add validator functions directly to the form control model in the component class. Angular then calls these functions whenever the value of the control changes.
+リアクティブフォームでは, 情報源はコンポーネントクラスです。テンプレートの属性を介してバリデータを追加する代わりに、バリデータ関数をコンポーネントクラスのフォームコントロールモデルに直接追加します。Angularは、コントロールの値が変更されるたびにこれらの関数を呼び出します。
 
-### Validator functions
+### バリデータ関数
 
-There are two types of validator functions: sync validators and async validators.  
+バリデータ関数には、同期バリデータと非同期バリデータの2種類があります。
 
-* **Sync validators**: functions that take a control instance and immediately return either a set of validation errors or `null`. You can pass these in as the second argument when you instantiate a `FormControl`.
+* **同期バリデータ**: コントロールインスタンスを取得し、ただちに一連の検証エラーまたは`null`を返します。`FormControl`をインスタンス化するときに、2番目の引数として渡すことができます。
 
-* **Async validators**: functions that take a control instance and return a Promise 
-or Observable that later emits a set of validation errors or `null`. You can 
-pass these in as the third argument when you instantiate a `FormControl`. 
+* **非同期バリデータ**: コントロールインスタンスを取得し、PromiseまたはObservableを返し、あとで一連の検証エラーまたはnullを返します。 `FormControl`をインスタンス化するときに、3番目の引数として渡すことができます。
 
-Note: for performance reasons, Angular only runs async validators if all sync validators pass. Each must complete before errors are set.
+注意: パフォーマンス上の理由から、Angularはすべての同期バリデータが通過する場合にのみ非同期バリデータを実行します。エラーが設定される前にそれぞれ完了しなければなりません。
 
-### Built-in validators
+### 組み込みバリデータ
 
-You can choose to [write your own validator functions](guide/form-validation#custom-validators), or you can use some of 
-Angular's built-in validators. 
+[独自のバリデータ関数を記述する](guide/form-validation#custom-validators)ことも、Angularの組み込みバリデータを使用することもできます。
 
-The same built-in validators that are available as attributes in template-driven forms, such as `required` and `minlength`, are all available to use as functions from the `Validators` class. For a full list of built-in validators, see the [Validators](api/forms/Validators) API reference.
+`required`や`minlength`など、テンプレート駆動型フォームの属性として使用できる同じ組み込みバリデータは、すべて`Validators`クラスの関数として使用できます。組み込みバリデータの完全なリストについては、[Validators](api/forms/Validators) APIリファレンスを参照してください。
 
-To update the hero form to be a reactive form, you can use some of the same 
-built-in validators&mdash;this time, in function form. See below:
+ヒーローフォームをリアクティブフォームに更新するには,今回は同じ組み込みバリデーターを関数形式で使用することができます。次のコードを見てください:
 
 {@a reactive-component-class}
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.ts" region="form-group" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
 
-Note that:
+注意してください:
 
-* The name control sets up two built-in validators&mdash;`Validators.required` and `Validators.minLength(4)`&mdash;and one custom validator, `forbiddenNameValidator`. For more details see the [Custom validators](guide/form-validation#custom-validators) section in this guide.
-* As these validators are all sync validators, you pass them in as the second argument. 
-* Support multiple validators by passing the functions in as an array.
-* This example adds a few getter methods. In a reactive form, you can always access any form control through the `get` method on its parent group, but sometimes it's useful to define getters as shorthands 
-for the template.
+* nameコントロールは、2つの組み込みバリデータ&mdash;`Validators.required`と`Validators.minLength(4)`&mdash;と1つのカスタムバリデータ`forbiddenNameValidator`を設定します。詳細については、このガイドの[カスタムバリデータ](guide/form-validation#custom-validators)セクションを参照してください。
+* これらのバリデータはすべて同期バリデータであるため、2番目の引数として渡します。
+* 複数のバリデータをサポートするには、関数を配列として渡します。
+* この例では、いくつかのgetterメソッドを追加しています。リアクティブフォームでは、親グループの`get`メソッドを通じて常にフォームコントロールにアクセスできますが、getterをテンプレートの省略名として定義すると便利なことがあります。
 
 
-If you look at the template for the name input again, it is fairly similar to the template-driven example. 
+再度入力したnameテンプレートを見ると、テンプレート駆動型の例とかなり似ています。
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="name-with-error-msg" title="reactive/hero-form-reactive.component.html (name with error msg)" linenums="false">
 </code-example>
 
-Key takeaways:
+重要なポイント:
  
- * The form no longer exports any directives, and instead uses the `name` getter defined in 
- the component class.
- * The `required` attribute is still present. While it's not necessary for validation purposes, 
- you may want to keep it in your template for CSS styling or accessibility reasons.
+ * このフォームはディレクティブをエクスポートしなくなり、代わりにコンポーネントクラスで定義された`name`getterを使用します。
+ * `required`属性は引き続き存在します。検証の目的では必要ではありませんが、CSSのスタイリングやアクセシビリティ上の理由から、テンプレートにそのスタイルを保持したい場合があります。
 
+{@a custom-validators}
+## カスタムバリデータ
 
-## Custom validators
+組み込みバリデータは、アプリケーションのユースケースとは必ずしも一致しないので、場合によってはカスタムバリデータを作成することがあります。
 
-Since the built-in validators won't always match the exact use case of your application, sometimes you'll want to create a custom validator. 
-
-Consider the `forbiddenNameValidator` function from previous
-[examples](guide/form-validation#reactive-component-class) in 
-this guide. Here's what the definition of that function looks like:
+このガイドの前の[例](guide/form-validation#reactive-component-class)の`forbiddenNameValidator`関数について考えてみましょう。その関数の定義は次のようになります:
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="custom-validator" title="shared/forbidden-name.directive.ts (forbiddenNameValidator)" linenums="false">
 </code-example>
 
-The function is actually a factory that takes a regular expression to detect a _specific_ forbidden name and returns a validator function.
+この関数は実際には、_特定_ の禁止された名前を検出するために正規表現を取り、バリデータ関数を返すファクトリです。
 
-In this sample, the forbidden name is "bob", so the validator will reject any hero name containing "bob".
-Elsewhere it could reject "alice" or any name that the configuring regular expression matches.
+このサンプルでは、 禁じられた名前は "bob"なので、バリデータは "bob"を含むヒーロー名を拒否します。
+それ以外の場所では、 "alice"または正規表現で名前を拒否することができます。
 
-The `forbiddenNameValidator` factory returns the configured validator function.
-That function takes an Angular control object and returns _either_
-null if the control value is valid _or_ a validation error object.
-The validation error object typically has a property whose name is the validation key, `'forbiddenName'`,
-and whose value is an arbitrary dictionary of values that you could insert into an error message, `{name}`.
+`forbiddenNameValidator`ファクトリは、設定されたバリデータ関数を返します。
+この関数はAngularコントロールオブジェクトをとり、コントロール値が有効な場合はnull _または_ 検証エラーオブジェクトを返します。
+検証エラーオブジェクトには、通常、nameが検証キーであるプロパティ`'forbiddenName'`と,エラーメッセージ`{name}`に挿入できる値の順不同な辞書です。
 
-Custom async validators are similar to sync validators, but they must instead return a Promise or Observable
-that later emits null or a validation error object. In the case of an Observable, the Observable must complete,
-at which point the form uses the last value emitted for validation.
+カスタム非同期バリデータは同期バリデータと似ていますが、あとでnullまたは検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。Observableの場合は、Observableを完了しなければなりません。この時点で、フォームは検証のために発行された最後の値を使用します。
 
-### Adding to reactive forms
+### リアクティブフォームへ追加
 
-In reactive forms, custom validators are fairly simple to add. All you have to do is pass the function directly 
-to the `FormControl`.
+リアクティブフォームでは、カスタムバリデータは簡単に追加できます。関数を`FormControl`に直接渡すだけです。
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.ts" region="custom-validator" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
 
-### Adding to template-driven forms
+### テンプレート駆動型フォームへ追加
 
-In template-driven forms, you don't have direct access to the `FormControl` instance, so you can't pass the 
-validator in like you can for reactive forms. Instead, you need to add a directive to the template.
+テンプレート駆動フォームでは、`FormControl`インスタンスに直接アクセスすることはできません。したがって、リアクティブフォームの場合と同じようにバリデータを渡すことはできません。代わりに、ディレクティブをテンプレートに追加する必要があります。
 
-The corresponding `ForbiddenValidatorDirective` serves as a wrapper around the `forbiddenNameValidator`.
+対応する`ForbiddenValidatorDirective`は、`forbiddenNameValidator`のラッパーとして機能します。
 
-Angular recognizes the directive's role in the validation process because the directive registers itself
-with the `NG_VALIDATORS` provider, a provider with an extensible collection of validators.
+Angularは、ディレクティブが拡張可能なバリデータのコレクションをもつプロバイダーである`NG_VALIDATORS`プロバイダーに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" title="shared/forbidden-name.directive.ts (providers)" linenums="false">
 </code-example>
 
-The directive class then implements the `Validator` interface, so that it can easily integrate 
-with Angular forms. Here is the rest of the directive to help you get an idea of how it all 
-comes together:
+ディレクティブクラスは、`Validator`インターフェイスを実装しているため、Angularフォームと簡単に統合できます。 これはどのようにそれらをまとめるかを理解するための、ディレクティブの残りの部分です:
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" title="shared/forbidden-name.directive.ts (directive)">
 </code-example>
 
-Once the `ForbiddenValidatorDirective` is ready, you can simply add its selector, `forbiddenName`, to any input element to activate it. For example:
+`ForbiddenValidatorDirective`が準備されたら、`forbiddenName`セレクタを任意の入力要素に追加して、アクティブ化できます。これは一例です:
 
 <code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" title="template/hero-form-template.component.html (forbidden-name-input)" linenums="false">
 
@@ -180,18 +148,13 @@ Once the `ForbiddenValidatorDirective` is ready, you can simply add its selector
 
 <div class="l-sub-section">
 
-You may have noticed that the custom validation directive is instantiated with `useExisting`
-rather than `useClass`. The registered validator must be _this instance_ of
-the `ForbiddenValidatorDirective`&mdash;the instance in the form with
-its `forbiddenName` property bound to “bob". If you were to replace
-`useExisting` with `useClass`, then you’d be registering a new class instance, one that
-doesn’t have a `forbiddenName`.
+カスタム検証ディレクティブは、`useClass`ではなく`useExisting`でインスタンス化されていることに気付かれるかもしれません。登録されたバリデータは、この`ForbiddenValidatorDirective`の _インスタンス_ でなければなりません&mdash;`forbiddenName`プロパティが "bob"にバインドされたフォームのインスタンス。`useExisting`を`useClass`に置き換えた場合は、`forbiddenName`を持たない新しいクラスインスタンスを登録することになります。
 
 </div>
 
-## Control status CSS classes
+## コントロールステータスCSSクラス
 
-Like in AngularJS, Angular automatically mirrors many control properties onto the form control element as CSS classes. You can use these classes to style form control elements according to the state of the form. The following classes are currently supported:
+Angularは、AngularJSと同様に、多くのコントロールプロパティをCSSクラスとしてフォームコントロール要素に自動的に反映します。これらのクラスを使用して、フォームの状態に応じてフォームコントロール要素にスタイルを設定できます。現在サポートされているクラスは次のとおりです:
 
 * `.ng-valid`
 * `.ng-invalid`
@@ -201,12 +164,11 @@ Like in AngularJS, Angular automatically mirrors many control properties onto th
 * `.ng-untouched`
 * `.ng-touched`
 
-The hero form uses the `.ng-valid` and `.ng-invalid` classes to 
-set the color of each form control's border.
+ヒーローフォームでは、`.ng-valid`クラスと`.ng-invalid`クラスを使用して、各フォームコントロールの境界線の色を設定します。
 
 <code-example path="form-validation/src/assets/forms.css" title="forms.css (status classes)">
 
 </code-example>
 
 
-**You can run the <live-example></live-example> to see the complete reactive and template-driven example code.**
+**<live-example></live-example> を実行して、リアクティブおよびテンプレート駆動の完全なサンプルコードを見ることができます。**

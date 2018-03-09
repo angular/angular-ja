@@ -191,13 +191,15 @@
             },
             {
               "url": "guide/pipes",
-              "title": "Pipes",
-              "tooltip": "Pipes transform displayed values within a template."
+              "title": "パイプ",
+              "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
+              "translated": true
             },
             {
               "url": "guide/animations",
-              "title": "Animations",
-              "tooltip": "A guide to Angular's animation system."
+              "title": "アニメーション",
+              "tooltip": "Angularのアニメーションシステムについて",
+              "translated": true
             }
           ]
         },
@@ -213,13 +215,15 @@
             },
             {
               "url": "guide/forms",
-              "title": "Template-driven Forms",
-              "tooltip": "A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors."
+              "title": "テンプレート駆動フォーム",
+              "tooltip": "フォームは、密接で効果的で説得力のあるデータ入力体験を作り出します。 Angularフォームは、データバインドされたユーザーコントロールのセットを調整し、変更を追跡し、入力を検証し、エラーを表示します。",
+              "translated": true
             },
             {
               "url": "guide/form-validation",
-              "title": "Form Validation",
-              "tooltip": "Validate user's form entries."
+              "title": "フォームバリデーション",
+              "tooltip": "ユーザーのフォーム入力を検証しましょう。",
+              "translated": true
             },
             {
               "url": "guide/reactive-forms",
@@ -235,8 +239,9 @@
         },
         {
           "url": "guide/bootstrapping",
-          "title": "Bootstrapping",
-          "tooltip": "Tell Angular how to construct and bootstrap the app in the root \"AppModule\"."
+          "title": "ブートストラップ",
+          "tooltip": "ルートの\"AppModule\"で、アプリケーションをどのように構築、起動するかをAngularに伝えましょう。",
+          "translated": true
         },
         {
 
@@ -373,13 +378,14 @@
           "tooltip": "Developing for content security in Angular applications."
         },
         {
-          "title": "Setup & Deployment",
-          "tooltip": "Setup and Deployment",
+          "title": "セットアップ & デプロイ",
+          "tooltip": "セットアップとデプロイ",
           "children": [
             {
               "url": "guide/setup",
-              "title": "Setup for local development",
-              "tooltip": "Install the Angular QuickStart seed for faster, more efficient development on your machine."
+              "title": "ローカル開発環境のセットアップ",
+              "tooltip": "より高速で効率的な開発のためにマシン上にAngularクイックスタートをインストールします。",
+              "translated": true
             },
             {
               "url": "guide/setup-systemjs-anatomy",
@@ -469,8 +475,9 @@
         },
         {
           "url": "guide/universal",
-          "title": "Server-side Rendering",
-          "tooltip": "Render HTML server-side with Angular Universal."
+          "title": "サーバーサイドレンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "translated": true
         },
         {
           "url": "guide/visual-studio-2015",

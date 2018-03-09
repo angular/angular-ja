@@ -1,23 +1,21 @@
-# Setup for local development
+# ローカル開発環境のセットアップ
 
 {@a develop-locally}
 
-The <live-example name=quickstart>QuickStart live-coding</live-example> example is an Angular _playground_.
-It's not where you'd develop a real application.
-You [should develop locally](guide/setup#why-locally "Why develop locally") on your own machine ... and that's also how we think you should learn Angular.
+<live-example name=quickstart>クイックスタートライブコーディング</live-example> の例はAngularの_遊び場_です。
+これは実際のアプリケーションを開発する場ではありません。
+あなたは自分のマシン上で[ローカルに開発をするべきです](guide/setup#why-locally "なぜローカルで開発するのか")...そして私たちはそうやってAngularを学ぶべきだと考えています。
 
-Setting up a new project on your machine is quick and easy with the **QuickStart seed**,
-maintained [on github](https://github.com/angular/quickstart "Install the github QuickStart repo").
+あなたのマシン上に新しいプロジェクトをセットアップするのは、[github](https://github.com/angular/quickstart "github上のクイックスタートリポジトリをインストール")で管理されている**クイックスタートシード**を使って素早く、簡単にできます。
 
-
-Make sure you have [node and npm installed](guide/setup#install-prerequisites "What if you don't have node and npm?").
+[nodeとnpm](guide/setup#install-prerequisites "nodeとnpmがない場合は?")がインストールされていることが必要です。
 
 {@a clone}
 
 
-## Clone
+## クローン
 
-Perform the _clone-to-launch_ steps with these terminal commands.
+次のコマンドを使って、_クローンから起動まで_を実行します。
 
 
 <code-example language="sh" class="code-shell">
@@ -34,7 +32,7 @@ Perform the _clone-to-launch_ steps with these terminal commands.
 
 
 
-`npm start` fails in _Bash for Windows_ in versions earlier than the Creator's Update (April 2017).
+Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windows_では`npm start`が失敗します。
 
 
 </div>
@@ -44,9 +42,9 @@ Perform the _clone-to-launch_ steps with these terminal commands.
 {@a download}
 
 
-## Download
-<a href="https://github.com/angular/quickstart/archive/master.zip" title="Download the QuickStart seed repository">Download the QuickStart seed</a>
-and unzip it into your project folder. Then perform the remaining steps with these terminal commands.
+## ダウンロード
+<a href="https://github.com/angular/quickstart/archive/master.zip" title="クイックスタートシードリポジトリをダウンロード">クイックスタートシードをダウンロード</a>
+し、あなたのプロジェクトフォルダーの中に解凍します。そして残りのステップを次のターミナルコマンドで実行します。
 
 
 <code-example language="sh" class="code-shell">
@@ -62,7 +60,7 @@ and unzip it into your project folder. Then perform the remaining steps with the
 
 
 
-`npm start` fails in _Bash for Windows_ in versions earlier than the Creator's Update (April 2017).
+Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windows_では`npm start`が失敗します。
 
 
 </div>
@@ -73,24 +71,23 @@ and unzip it into your project folder. Then perform the remaining steps with the
 
 
 
-## Delete _non-essential_ files (optional)
+## _必要ではない_ファイルの削除 (任意)
 
-You can quickly delete the _non-essential_ files that concern testing and QuickStart repository maintenance
-(***including all git-related artifacts*** such as the `.git` folder and `.gitignore`!).
+テストに関するファイルとクリックスタートのリポジトリ管理のためのファイル(`.git`フォルダと`.gitignore`のような***git関連のアーティファクトを含みます。***)はすぐに削除できます。
 
 
 <div class="alert is-important">
 
 
 
-Do this only in the beginning to avoid accidentally deleting your own tests and git setup!
+あなた自身のテストやgitセットアップを誤って削除しないようにセットアップの開始時にだけ行ってください！
 
 
 </div>
 
 
 
-Open a terminal window in the project folder and enter the following commands for your environment:
+プロジェクトフォルダでターミナルを開いて、次のコマンドを環境に合わせて実行してください。
 
 ### OS/X (bash)
 
@@ -118,21 +115,21 @@ Open a terminal window in the project folder and enter the following commands fo
 
 
 
-## What's in the QuickStart seed?
+## クイックスタートのシードには何が入っているでしょうか？
 
 
 
-The **QuickStart seed** contains the same application as the QuickStart playground.
-But its true purpose is to provide a solid foundation for _local_ development.
-Consequently, there are _many more files_ in the project folder on your machine,
-most of which you can [learn about later](guide/setup-systemjs-anatomy "Setup Anatomy").
+**クイックスタートシード**にはクイックスタートプレイグラウンドと同じアプリケーションが入っています。
+しかし、このプロジェクトの真の目的は_ローカル_開発環境の確かな基盤を提供することです。
+結果として、マシン上のプロジェクトフォルダには_もっと数多くの_ファイルがあり、
+それらのほとんどは[あとで学ぶ](guide/setup-systemjs-anatomy "セットアップの解剖学")ことができます。
 
 
 
 {@a app-files}
 
 
-Focus on the following three TypeScript (`.ts`) files in the **`/src`** folder.
+**`/src`**フォルダ内の次の3つのTypeScript (`.ts`) ファイルに注目しましょう。
 
 
 <div class='filetree'>
@@ -187,17 +184,16 @@ Focus on the following three TypeScript (`.ts`) files in the **`/src`** folder.
 
 
 
-All guides and cookbooks have _at least these core files_.
-Each file has a distinct purpose and evolves independently as the application grows.
+すべてのガイドとクックブックは_少なくともこのコアファイル_を持っています。
+それぞれのファイルはそれぞれの目的があり、アプリケーションが成長するにつれ独立して発達していきます。
 
-Files outside `src/` concern building, deploying, and testing your app.
-They include configuration files and external dependencies.
+`src/`の外側にあるファイルはビルド、デプロイ、そしてテストに関するものです。
+それらは設定ファイルや外部の依存です。
 
-Files inside `src/` "belong" to your app.
-Add new Typescript, HTML and CSS files inside the `src/` directory, most of them inside `src/app`,
-unless told to do otherwise.
+`src/`内のファイルはあなたのアプリに属します。
+特に指示がない限り、新規のTypeScript, HTML, CSSファイルは`src/`ディレクトリ、ほとんどは`src/app`に追加します。
 
-The following are all in `src/`
+次のファイルはすべて`src/`内にあります。
 
 
 <style>
@@ -237,9 +233,8 @@ The following are all in `src/`
     <td>
 
 
-      Defines the same `AppComponent` as the one in the QuickStart playground.
-      It is the **root** component of what will become a tree of nested components
-      as the application evolves.
+      クイックスタートプレイグラウンドのものと同じ`AppComponent`を定義しています。
+      これはアプリが成長するにつれてコンポーネントの入れ子の木のルートコンポーネントになります。
     </td>
 
   </tr>
@@ -253,9 +248,9 @@ The following are all in `src/`
     <td>
 
 
-      Defines `AppModule`, the  [root module](guide/bootstrapping "AppModule: the root module") that tells Angular how to assemble the application.
-      Right now it declares only the `AppComponent`.
-      Soon there will be more components to declare.
+      Angularにどのようにアプリケーションを組み立てるのかを伝える[ルートモジュール](guide/bootstrapping "AppModule: ルートモジュール") `AppModule`を定義します。
+      いま時点では、`AppComponent`のみを宣言しています。
+      すぐに他のコンポーネントも定義することになります。
     </td>
 
   </tr>
@@ -269,12 +264,11 @@ The following are all in `src/`
     <td>
 
 
-      Compiles the application with the [JIT compiler](guide/glossary#jit) and
-      [bootstraps](guide/bootstrapping)
-      the application's main module (`AppModule`) to run in the browser.
-      The JIT compiler is a reasonable choice during the development of most projects and
-      it's the only viable choice for a sample running in a _live-coding_ environment like Stackblitz.
-      You'll learn about alternative compiling and [deployment](guide/deployment) options later in the documentation.
+      アプリケーションをブラウザで実行するために、アプリケーションを[JITコンパイラ](guide/glossary#jit)でコンパイルし、
+      メインモジュール(`AppModule`)を[ブートストラップ](guide/bootstrapping)します。
+      JITコンパイラはほとんどのプロジェクトの開発期間中には現実的な選択であり、
+      Stackblitzのようにサンプルを実行する_ライブコーディング_環境ではただひとつの実行可能な選択です。
+      別のコンパイルと[デプロイ](guide/deployment)の選択肢についてはこのドキュメントの後半で学びます。
 
     </td>
 
@@ -288,9 +282,9 @@ The following are all in `src/`
 
 
 
-### Next Step
+### 次のステップ
 
-If you're new to Angular, we recommend you follow the [tutorial](tutorial "Tour of Heroes tutorial").
+もしAngularになじみがないのであれば、この[チュートリアル](tutorial "ツアー・オブ・ヒーローズ チュートリアル")に進むことをお勧めします。
 
 
 </div>
@@ -301,59 +295,62 @@ If you're new to Angular, we recommend you follow the [tutorial](tutorial "Tour 
 
 
 
-## Appendix: node and npm
+## 付録: nodeとnpm
 
 
-Node.js and npm are essential to modern web development with Angular and other platforms.
-Node powers client development and build tools.
-The _npm_ package manager, itself a _node_ application, installs JavaScript libraries.
+Node.jsとnpmはAngularと他のプラットフォームを使ってモダンなWeb開発をするにあたり不可欠なものです。
+Nodeはクライアント開発とビルドツールを供給します。
+_npm_パッケージマネージャーは、それ自身が_node_アプリケーションであり、JavaScriptのライブラリをインストールします。
 
-<a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" title="Installing Node.js and updating npm">
-Get them now</a> if they're not already installed on your machine.
+もしまだマシン上にインストールされていない場合は<a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" title="Node.jsをインストール、npmをアップデートしましょう">
+いますぐ手に入れましょう。</a>
 
-**Verify that you are running node `v4.x.x` or higher and npm `3.x.x` or higher**
-by running the commands `node -v` and `npm -v` in a terminal/console window.
-Older versions produce errors.
+ターミナル/コンソール上で`node -v`と`npm -v`を実行して、
+**node `v4.x.x` 以上とnpm `3.x.x`以上で実行していることを確認してください。**
+古いバージョンではエラーになります。
 
-We recommend [nvm](https://github.com/creationix/nvm) for managing multiple versions of node and npm.
-You may need [nvm](https://github.com/creationix/nvm) if you already have projects running on your machine that
-use other versions of node and npm.
+我々はnodeとnpmの複数バージョンを管理するために[nvm](https://github.com/creationix/nvm)を使用することを推奨しています。
+もしあなたのマシン上で古いバージョンのnodeとnpmで動作するプロジェクトがある場合には[nvm](https://github.com/creationix/nvm)が必要になるでしょう。
 
 
 {@a why-locally}
 
 
 
-## Appendix: Why develop locally
+## 付録: なぜローカルで開発するのか
 
-<live-example title="QuickStart Seed in Stackblitz">Live coding</live-example> in the browser is a great way to explore Angular.
+ブラウザ上での<live-example title="QuickStart Seed in Stackblitz">ライブコーディング</live-example>はAngularを探るのにとてもよいです。
 
-Links on almost every documentation page open completed samples in the browser.
-You can play with the sample code, share your changes with friends, and download and run the code on your own machine.
+ほぼすべてのドキュメントページ上のリンクが完成されたサンプルをブラウザに表示します。
+サンプルコードで遊ぶこともできますし、改修したものを友達とシェアできますし、ダウンロードしてマシン上で実行することもできます。
 
-The [QuickStart](guide/quickstart "Angular QuickStart Playground") shows just the `AppComponent` file.
-It creates the equivalent of `app.module.ts` and `main.ts` internally _for the playground only_.
-so the reader can discover Angular without distraction.
-The other samples are based on the QuickStart seed.
+[クイックスタート](guide/quickstart "Angularクイックスタートプレイグラウンド")は`AppComponent`ファイルしか示しません。
+それは_プレイグラウンドだけのために_`app.module.ts`と`main.ts`に等しいものを作ります。
+なので、読み手は注意散漫にならずにAngularについて知ることができます。
+他のサンプルはクイックスタートのシードにもとづいています。
 
-As much fun as this is ...
+これほど楽しいですが...
 
-* you can't ship your app in Stackblitz
-* you aren't always online when writing code
-* transpiling TypeScript in the browser is slow
-* the type support, refactoring, and code completion only work in your local IDE
+* アプリケーションをStackblitzにはデプロイできません
+* コードを書くとき常にオンラインとは限りません
+* TypeScriptをブラウザでトランスパイルするのは遅いです
+* 型サポート、リファクタリング、コード補完はローカルのIDEでのみ機能します
 
-Use the <live-example title="QuickStart Seed in Stackblitz">live coding</live-example> environment as a _playground_,
-a place to try the documentation samples and experiment on your own.
-It's the perfect place to reproduce a bug when you want to
-<a href="https://github.com/angular/angular/issues/new" title="File a documentation issue">file a documentation issue</a> or
-<a href="https://github.com/angular/angular/issues/new" title="File an Angular issue">file an issue with Angular itself</a>.
+<live-example title="QuickStart Seed in Stackblitz">ライブコーディング</live-example>環境は遊び場として使ってください。
+ドキュメントのサンプルを試したり、あなた自身で実験するために使ってください。
+また
+<a href="https://github.com/angular/angular/issues/new" title="ドキュメントのイシューを報告">ドキュメントに関してのイシューを報告</a> したり
+<a href="https://github.com/angular/angular/issues/new" title="Angularのイシューを報告">Angular自体のイシューを報告</a>
+したりするときのバグの再現環境として最適です。
 
-For real development, we strongly recommend [developing locally](guide/setup#develop-locally).
+実際の開発では、[ローカル開発](guide/setup#develop-locally)を強く推奨します。
 
-## Appendix: develop locally with IE
+## 付録: IEを使ったローカル開発
 
-If you develop angular locally with `ng serve`, there will be `websocket` connection being setup automatically between browser and local dev server, so when your code change, browser can automatically refresh.
+`ng serve`を使ってローカルでAngular開発をする際、自動的にブラウザとローカル開発サーバーとの間で`websocket`接続がセットアップされるためコードが変更されると、ブラウザは自動的にリフレッシュします。
 
-In windows, by default one application can only have 6 websocket connections, <a href="https://msdn.microsoft.com/library/ee330736%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396#websocket_maxconn" title="MSDN WebSocket settings">MSDN WebSocket Settings</a>.
-So if IE was refreshed manunally or automatically by `ng serve`, sometimes, the websocket will not close properly, when websocket connections exceed limitations, `SecurityError` will be thrown, this error will not affect the angular application, you can just restart IE to clear this error, or modify the windows registry to update the limitations.
+windowsではデフォルトではアプリケーションは6つの接続しかできません。
+<a href="https://msdn.microsoft.com/library/ee330736%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396#websocket_maxconn" title="MSDN WebSocket settings">MSDN WebSocket Settings</a>.
+なので、IEが手動または`ng serve`によって自動的にリフレッシュされると、たまに、websocketが適切に切断されず、
+websocketの接続が限度を超えると、`SecurityError`が投げられます。このエラーはAngularアプリケーションに影響しません。
+このエラーをクリアするためにはIEを再起動するか、またはwindowsのレジストリを書き換えて限度数を更新します。

@@ -205,23 +205,11 @@ Service Workerを非アクティブにするには、 `ngsw-config.json`ファ�
 
 ### Safety Worker
 
-Also included in the `@angular/service-worker` NPM package is a small
-script `safety-worker.js`, which when loaded will unregister itself
-from the browser. This script can be used as a last resort to get rid
-of unwanted service workers already installed on client pages.
+`@angular/service-worker`NPMパッケージには`safety-worker.js`という小さなスクリプトも含まれています。このスクリプトは読み込まれるとブラウザから自身を登録解除します。クライアントページにすでにインストールされている不要なService Workerを取り除く最後の手段として使用できます。
 
-It's important to note that you cannot register this worker directly,
-as old clients with cached state may not see a new `index.html` which
-installs the different worker script. Instead, you must serve the
-contents of `safety-worker.js` at the URL of the Service Worker script
-you are trying to unregister, and must continue to do so until you are
-certain all users have successfully unregistered the old worker. For
-most sites, this means that you should serve the safety worker at the
-old Service Worker URL forever.
+このワーカーを直接登録できないことに注意してください。キャッシュされた状態の古いクライアントは、別のワーカースクリプトをインストールする新しい`index.html`を見ないかもしれないからです。代わりに、Service Workerスクリプトの登録を取り消そうとしているURLに`safety-worker.js`のスクリプト内容を供給しなければなりません。すべてのユーザーが古いワーカーを正常に登録解除したことが分かるまで、引き続き行う必要があります。ほとんどのサイトでは、古いService Worker URLに永久にSafety Workerを供給するべきこととなります。
 
-This script can be used both to deactivate `@angular/service-worker`
-as well as any other Service Workers which might have been served in
-the past on your site.
+このスクリプトは、あなたのサイトで過去に提供されていたService Workerだけでなく`@angular/service-worker`を無効にするためにも使用できます。
 
 ## もっとAngular Service Workerを知りたい
 

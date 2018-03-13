@@ -13,13 +13,13 @@
 :---: |:---: |:---: |:---: |:---: |:---: |
 [lacolaco](https://github.com/lacolaco) |[studioTeaTwo](https://github.com/studioTeaTwo) |[Allajah](https://github.com/Allajah) |[chloe463](https://github.com/chloe463) |[Pittan](https://github.com/Pittan) |[kappy](https://github.com/kappy) |
 
-[<img alt="MasanobuAkiba" src="https://avatars2.githubusercontent.com/u/7288676?v=4&s=117" width="117">](https://github.com/MasanobuAkiba) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |[<img alt="shioyang" src="https://avatars0.githubusercontent.com/u/4098243?v=4&s=117" width="117">](https://github.com/shioyang) |[<img alt="doutori" src="https://avatars0.githubusercontent.com/u/25642027?v=4&s=117" width="117">](https://github.com/doutori) |[<img alt="adwd" src="https://avatars2.githubusercontent.com/u/7473222?v=4&s=117" width="117">](https://github.com/adwd) |[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |
+[<img alt="MasanobuAkiba" src="https://avatars2.githubusercontent.com/u/7288676?v=4&s=117" width="117">](https://github.com/MasanobuAkiba) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |[<img alt="shioyang" src="https://avatars0.githubusercontent.com/u/4098243?v=4&s=117" width="117">](https://github.com/shioyang) |[<img alt="doutori" src="https://avatars0.githubusercontent.com/u/25642027?v=4&s=117" width="117">](https://github.com/doutori) |[<img alt="briete" src="https://avatars0.githubusercontent.com/u/8341971?v=4&s=117" width="117">](https://github.com/briete) |[<img alt="adwd" src="https://avatars2.githubusercontent.com/u/7473222?v=4&s=117" width="117">](https://github.com/adwd) |
 :---: |:---: |:---: |:---: |:---: |:---: |
-[MasanobuAkiba](https://github.com/MasanobuAkiba) |[imamoto](https://github.com/imamoto) |[shioyang](https://github.com/shioyang) |[doutori](https://github.com/doutori) |[adwd](https://github.com/adwd) |[massa142](https://github.com/massa142) |
+[MasanobuAkiba](https://github.com/MasanobuAkiba) |[imamoto](https://github.com/imamoto) |[shioyang](https://github.com/shioyang) |[doutori](https://github.com/doutori) |[briete](https://github.com/briete) |[adwd](https://github.com/adwd) |
 
-[<img alt="sayanaka" src="https://avatars1.githubusercontent.com/u/28511464?v=4&s=117" width="117">](https://github.com/sayanaka) |[<img alt="t-cool" src="https://avatars0.githubusercontent.com/u/3023976?v=4&s=117" width="117">](https://github.com/t-cool) | [<img alt="briete" src="https://avatars0.githubusercontent.com/u/8341971?v=4&s=117" width="117">](https://github.com/briete) |
+[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |[<img alt="sayanaka" src="https://avatars1.githubusercontent.com/u/28511464?v=4&s=117" width="117">](https://github.com/sayanaka) |[<img alt="t-cool" src="https://avatars0.githubusercontent.com/u/3023976?v=4&s=117" width="117">](https://github.com/t-cool) |
 :---: |:---: |:---: |
-[sayanaka](https://github.com/sayanaka) |[t-cool](https://github.com/t-cool) | [briete](https://github.com/briete) |
+[massa142](https://github.com/massa142) |[sayanaka](https://github.com/sayanaka) |[t-cool](https://github.com/t-cool) |
 <!---end contributors -->
 
 ## コントリビューション大歓迎！

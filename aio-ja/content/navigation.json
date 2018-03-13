@@ -398,8 +398,9 @@
             },
             {
               "url": "guide/npm-packages",
-              "title": "Npm Packages",
-              "tooltip": "Recommended npm packages, and how to specify package dependencies."
+              "title": "npmパッケージ",
+              "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
+              "translated": true
             },
 
             {

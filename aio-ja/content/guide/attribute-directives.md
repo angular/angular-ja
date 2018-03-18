@@ -15,18 +15,18 @@ Angularには、3つのディレクティブがあります。
 1. 属性ディレクティブ(Attribute directives)&mdash;要素やコンポーネント、別のディレクティブの見た目や動作を変更するディレクティブ
 
 *コンポーネント*は、3つのディレクティブのうち、もっとも一般的なものです。
-[クイックスタート](guide/quickstart)でコンポーネントを初めて見たことがあります。
+[クイックスタート](guide/quickstart)でコンポーネントをはじめて見たことがあります。
 
 *構造ディレクティブ*は、ビューの構造を変更します。
 2つの例としては、[NgFor](guide/template-syntax#ngFor)と[NgIf](guide/template-syntax#ngIf)です。それらについては[構造ディレクティブ](guide/structural-directives)ガイドで学んでください。
 
-*属性ディレクティブ*は、要素の属性として扱われます。例えば、[テンプレートシンタックス](guide/template-syntax)ガイドの組み込みの[NgStyle](guide/template-syntax#ngStyle)ディレクティブは、同時に複数の要素のスタイルを変更することができます。
+*属性ディレクティブ*は、要素の属性として扱われます。たとえば、[テンプレートシンタックス](guide/template-syntax)ガイドの組み込みの[NgStyle](guide/template-syntax#ngStyle)ディレクティブは、同時に複数の要素のスタイルを変更することができます。
 
 ## シンプルな属性ディレクティブを作成する
 
 属性ディレクティブは、最低限`@Directive`でアノテートされたコントローラークラスを作成する必要があり、それには属性を識別するセレクタを指定します。コントローラークラスには、必要なディレクティブの動作を実装します。
 
-このページでは、ユーザーがその要素の上を移動したときに、要素の背景色を設定するシンプルな _appHighlight_ 属性ディレクティブを作成する方法を示します。これは以下のように書くことができます。
+このページでは、ユーザーがその要素の上を移動したときに、要素の背景色を設定するシンプルな _appHighlight_ 属性ディレクティブを作成する方法を示します。これは次のように書くことができます。
 
 <code-example path="attribute-directives/src/app/app.component.1.html" linenums="false" title="src/app/app.component.html (applied)" region="applied"></code-example>
 
@@ -34,7 +34,7 @@ Angularには、3つのディレクティブがあります。
 
 ### ディレクティブのコードを書く
 
-以下のCLIコマンドをターミナル画面に入力して、ディレクティブクラスを作成します。
+次のCLIコマンドをターミナル画面に入力して、ディレクティブクラスを作成します。
 
 <code-example language="sh" class="code-shell">
 ng generate directive highlight
@@ -48,7 +48,7 @@ _ディレクティブ_ は、 _コンポーネント_ と同じ方法で[Angul
 
 </div >
 
-生成された`src/app/highlight.directive.ts`は以下の通りです。
+生成された`src/app/highlight.directive.ts`は次のとおりです。
 
 <code-example path="attribute-directives/src/app/highlight.directive.0.ts" title="src/app/highlight.directive.ts"></code-example>
 
@@ -56,7 +56,7 @@ _ディレクティブ_ は、 _コンポーネント_ と同じ方法で[Angul
 
 `@Directive`デコレータの唯一の設定プロパティは、ディレクティブの[CSS属性セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)`appHighlight`を指定します。
 
-属性セレクタとして扱うには、角括弧（`[]`）を使います。Angularは、テンプレート内の`appHighlight`という名前の属性を持つ各要素を見つけ、その要素にこのディレクティブのロジックを適用します。
+属性セレクタとして扱うには、角括弧（`[]`）を使います。Angularは、テンプレート内の`appHighlight`という名前の属性をもつ各要素を見つけ、その要素にこのディレクティブのロジックを適用します。
 
 _属性セレクタ_ パターンは、この種のディレクティブの名前を説明します。
 
@@ -72,7 +72,7 @@ _属性セレクタ_ パターンは、この種のディレクティブの名�
 
 `@Directive`メタデータの後には、ディレクティブのコントローラークラス(`HighlightDirective`)がきます。このクラスには、ディレクティブの(現在は空の)ロジックが含まれています。`HighlightDirective`をエクスポートすると、このディレクティブにアクセスできるようになります。
 
-生成された`src/app/highlight.directive.ts`を以下のように編集します。
+生成された`src/app/highlight.directive.ts`を次のように編集します。
 
 <code-example path="attribute-directives/src/app/highlight.directive.1.ts" title="src/app/highlight.directive.ts"></code-example>
 
@@ -152,7 +152,7 @@ ng serve
 `@angular/core`からインポートされたシンボルのリストに`Input`を追加することから始めてください。
 <code-example path="attribute-directives/src/app/highlight.directive.3.ts" linenums="false" title="src/app/highlight.directive.ts (imports)" region="imports"></code-example>
 
-以下のように、ディレクティブクラスに`highlightColor`プロパティを追加します。
+次のように、ディレクティブクラスに`highlightColor`プロパティを追加します。
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (highlightColor)" region="color"></code-example>
 
@@ -164,7 +164,7 @@ ng serve
 
 *input*プロパティと呼ばれるのは、データがバインディング式からディレクティブ _へ_ 流れるためです。その入力メタデータがなければ、Angularは、バインディング拒否します。詳細は[以下](guide/attribute-directives#why-input "なぜ、@Inputを追加するのか？")を参照してください。
 
-`AppComponent`のテンプレートに以下のバリエーションを追加してみてください。
+`AppComponent`のテンプレートに次のバリエーションを追加してみてください。
 
 <code-example path="attribute-directives/src/app/app.component.1.html" linenums="false" title="src/app/app.component.html (excerpt)" region="color-1"></code-example>
 
@@ -176,7 +176,7 @@ ng serve
 
 <code-example path="attribute-directives/src/app/app.component.1.html" linenums="false" title="src/app/app.component.html (excerpt)" region="color-2"></code-example>
 
-ディレクティブを同時に適用し、このような _同じ属性_ に色を設定するとより良いでしょう。
+ディレクティブを同時に適用し、このような _同じ属性_ に色を設定するとよりよいでしょう。
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (color)" region="color"></code-example>
 
@@ -218,7 +218,7 @@ ng serve
 
 このディレクティブが実際のどのように動作するかを想像することは難しいかもしれません。このセクションでは、`AppComponent`をハーネスに変換して、ラジオボタンからハイライトカラーを選択し、ディレクティブへ選択した色をバインドするようにします。
 
-以下のように<code>app.component.html</code>を更新します。
+次のように<code>app.component.html</code>を更新します。
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (v2)" region="v2"></code-example>
 
@@ -252,13 +252,13 @@ ng serve
 
 コンポーネントの場合と同様に、必要に応じてテンプレート内で文字列を並べ替えることで、多くのディれクティプロパティバインディングを追加できます。
 
-開発者は、以下のテンプレートHTMLを書くことができ、どちらも`AppComponent.color`へバインドします。デフォルトの色として「紫」に戻ります。
+開発者は、次のテンプレートHTMLを書くことができ、どちらも`AppComponent.color`へバインドします。デフォルトの色として「紫」に戻ります。
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (defaultColor)" region="defaultColor"></code-example>
 
 Angularは、`@Input`デコレータで _パブリック_ にしたため、`defaultColor`が`HighlightDirective`に属していることを知っています。
 
-コーディングが完了したら、ハーネスがどのように機能するかを以下に示します。
+コーディングが完了したら、ハーネスがどのように機能するかを次に示します。
 
 <figure>
   <img src="generated/images/guide/attribute-directives/highlight-directive-final-anim.gif" alt="Final Highlight">
@@ -273,7 +273,7 @@ Angularは、`@Input`デコレータで _パブリック_ にしたため、`def
 * ディレクティブの動作を変更する[イベントに**応答**](guide/attribute-directives#respond-to-user)する。
 * [ディレクティブへ値をバインド](guide/attribute-directives#bindings)する。
 
-最終的なソースコードは以下の通りです。
+最終的なソースコードは次のとおりです。
 
 <code-tabs>
   <code-pane title="app/app.component.ts" path="attribute-directives/src/app/app.component.ts"></code-pane>
@@ -314,7 +314,7 @@ Angularは、`@Input`デコレータで _パブリック_ にしたため、`def
 
 * 等式(=)の左側に角括弧([])で表示されている場合、それは _他_ のコンポーネントやディレクティブに属し、そのプロパティは、`@Input`デコレータで飾らなければなりません。
 
-次に、その理屈を以下の例に適用します。
+次に、その理屈を次の例に適用します。
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (color)" region="color"></code-example>
 

@@ -15,7 +15,7 @@ Angularには、3つのディレクティブがあります。
 1. 属性ディレクティブ(Attribute directives)&mdash;要素やコンポーネント、別のディレクティブの見た目や動作を変更するディレクティブ
 
 *コンポーネント*は、3つのディレクティブのうち、もっとも一般的なものです。
-[クイックスタート](guide/quickstart)でコンポーネントをはじめて見たことがあります。
+[クイックスタート](guide/quickstart)でコンポーネントをはじめて見たはずです。
 
 *構造ディレクティブ*は、ビューの構造を変更します。
 2つの例としては、[NgFor](guide/template-syntax#ngFor)と[NgIf](guide/template-syntax#ngIf)です。それらについては[構造ディレクティブ](guide/structural-directives)ガイドで学んでください。
@@ -54,7 +54,7 @@ _ディレクティブ_ は、 _コンポーネント_ と同じ方法で[Angul
 
 インポートされた`Directive`シンボルは、Angularの`@Directive`デコレータを提供します。
 
-`@Directive`デコレータの唯一の設定プロパティは、ディレクティブの[CSS属性セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)`appHighlight`を指定します。
+`@Directive`デコレータの唯一の設定プロパティは、ディレクティブの[CSS属性セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)`[appHighlight]`を指定します。
 
 属性セレクタとして扱うには、角括弧（`[]`）を使います。Angularは、テンプレート内の`appHighlight`という名前の属性をもつ各要素を見つけ、その要素にこのディレクティブのロジックを適用します。
 
@@ -222,7 +222,7 @@ ng serve
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (v2)" region="v2"></code-example>
 
-初期値を持たないように`AppComponent.conf`を修正してください。
+初期値を持たないように`AppComponent.color`を修正してください。
 
 <code-example path="attribute-directives/src/app/app.component.ts" linenums="false" title="src/app/app.component.ts (class)" region="class"></code-example>
 
@@ -250,7 +250,7 @@ ng serve
 
 すでに`appHighlight`属性へバインドしているとき、2番目のプロパティへどのようにバインドしますか？
 
-コンポーネントの場合と同様に、必要に応じてテンプレート内で文字列を並べ替えることで、多くのディれクティプロパティバインディングを追加できます。
+コンポーネントの場合と同様に、必要に応じてテンプレート内で文字列を並べることで、多くのディレクティブプロパティバインディングを追加できます。
 
 開発者は、次のテンプレートHTMLを書くことができ、どちらも`AppComponent.color`へバインドします。デフォルトの色として「紫」に戻ります。
 
@@ -304,7 +304,7 @@ Angularは、`@Input`デコレータで _パブリック_ にしたため、`def
 テンプレートHTMLをコンポーネントへバインドしてから、`@Input`を使用したことはありません。
 その違いは何でしょうか？
 
-違いは、信頼の問題です。Angularは、コンポーネントのテンプレートをコンポーネントに属するものとして扱います。コンポーネントとそのテンプレートは、暗黙のうちに違いに信頼し合います。したがって、コンポーネントの独自のテンプレートは、`@Input`デコレータの有無にかかわらず、そのコンポーネントの任意のプロパティへバインドすることができます。
+違いは、信頼の問題です。Angularは、コンポーネントのテンプレートをコンポーネントに属するものとして扱います。コンポーネントとそのテンプレートは、暗黙のうちに互いに信頼し合います。したがって、コンポーネントの独自のテンプレートは、`@Input`デコレータの有無にかかわらず、そのコンポーネントの任意のプロパティへバインドすることができます。
 
 しかし、コンポーネントやディレクティブは、他のコンポーネントやディレクティブを盲目的に信頼するべきではありません。コンポーネントやディレクティブのプロパティは、デフォルトではバインディングから隠されています。それらは、Angularのバインディング機構からは _プライベート_ です。`@Input`デコレータで装飾されると、プロパティはAngularのバインディング機構から _パブリック_ になります。その後、他のコンポーネントやディレクティブへバインドすることができます。
 

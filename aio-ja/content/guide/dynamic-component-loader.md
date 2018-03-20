@@ -47,13 +47,13 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 ## コンポーネントのロード
 
-広告バナーの実装のほとんどは `ad-banner.component.ts` です。
-この例では、HTMLを `@Component` デコレータの `template` プロパティにテンプレート文字列として入れています。
+広告バナーの実装のほとんどは `ad-banner.component.ts` にあります。
+この例では簡単のため、HTMLを `@Component` デコレータの `template` プロパティにテンプレート文字列として入れています。
 
 `<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
-`AdDirective` を適用するには、セレクタを `ad.directive.ts` 、 `ad-host` から呼び出します。
+`AdDirective` を適用するには、 `ad.directive.ts`のセレクタ 、すなわち `ad-host` から呼び出します。
 それを大括弧なしで `<ng-template>` に適用してください。
-これで、Angularはコンポーネントを動的にロードする場所を認識しています。
+これで、Angularはコンポーネントを動的にロードする場所を認識します。
 
 
 <code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" title="src/app/ad-banner.component.ts (template)" linenums="false">
@@ -87,20 +87,20 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 
 
-`loadComponent()` メソッドは、ここで、沢山の 重要な持ち上げ(heavy lifting) を行なっています。
-ステップバイステップで、それを取ります。最初に、広告を選びます。
+`loadComponent()` メソッドは、ここで、沢山の力仕事を行なっています。
+ひとつずつ取り上げましょう。まず最初に、広告を選びます。
 
 
 <div class="l-sub-section">
 
 
 
-**どのように _loadComponent()_ ひとつの広告を選ぶのか**
+**どのように _loadComponent()_ 広告を選ぶのでしょうか**
 
 `loadComponent()` メソッドは、数式を使って広告を選択します。
 
-まず、 `currentAddIndex` を設定します。これは、現在の値+1をプラスし、
-それを `AdItem` 配列の長さで割って、新しい `currentAddIndex` 値として _remainder_　を使います。
+まず、 `currentAddIndex` を設定します。これは、現在の値に+1をプラスし、
+それを `AdItem` 配列の長さで割って、その _余り_　を新しい `currentAddIndex` 値として使います。
 次に、その値を使用して配列から `adItem` を選択します。
 
 

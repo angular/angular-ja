@@ -181,8 +181,9 @@
             },
             {
               "url": "guide/attribute-directives",
-              "title": "Attribute Directives",
-              "tooltip": "Attribute directives attach behavior to elements."
+              "title": "属性ディレクティブ",
+              "tooltip": "属性ディレクティブは要素に振る舞いを付与します。",
+              "translated": true
             },
             {
               "url": "guide/structural-directives",

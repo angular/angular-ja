@@ -1,6 +1,6 @@
-# ダイナミック(動的)・コンポーネント・ローダー
+# 動的コンポーネントローダー
 
-コンポーネントテンプレートは常に固定ではありません。 アプリケーションは、実行時に新しいコンポーネントをロードする必要があります。
+コンポーネントテンプレートは常に固定ではありません。 アプリケーションは、実行時に新しいコンポーネントをロードする必要があるかもしれません。
 
 このクックブックでは、 `ComponentFactoryResolver`を使ってコンポーネントを動的に追加する方法を説明します。
 
@@ -9,13 +9,13 @@
 
 {@a dynamic-loading}
 
-## ダイナミック(動的)・コンポーネントの読み込み
+## 動的コンポーネント読み込み
 
 次の例は、動的広告バナーを作成する方法を示しています。
 
 ヒーローエージェンシーは、いくつかの異なる広告がバナーを循環する広告キャンペーンを計画しています。
 新しい広告コンポーネントは、いくつかの異なるチームによって頻繁に追加されます。
-このため、静的なコンポーネント構造を持つテンプレートを使用することは現実的ではありません。
+このため、静的なコンポーネント構造をもつテンプレートを使用することは現実的ではありません。
 
 代わりに、広告バナーのテンプレート内のコンポーネントへの固定参照なしに新しいコンポーネントを読み込む方法が必要です。
 
@@ -24,7 +24,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 {@a directive}
 
-## anchor ディレクティブ
+## アンカーディレクティブ
 
 コンポーネントを追加する前に、アンカーポイントを定義して、Angularにコンポーネントを挿入する場所を指定する必要があります。
 
@@ -47,13 +47,13 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 ## コンポーネントのロード
 
-広告バナーの実装のほとんどは `ad-banner.component.ts` です。
-この例では、HTMLを `@Component` デコレータの `template` プロパティにテンプレート文字列として入れています。
+広告バナーの実装のほとんどは `ad-banner.component.ts` にあります。
+この例では簡単のため、HTMLを `@Component` デコレータの `template` プロパティにテンプレート文字列として入れています。
 
 `<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
-`AdDirective` を適用するには、セレクタを `ad.directive.ts` 、 `ad-host` から呼び出します。
+`AdDirective` を適用するには、 `ad.directive.ts`のセレクタ 、すなわち `ad-host` から呼び出します。
 それを大括弧なしで `<ng-template>` に適用してください。
-これで、Angularはコンポーネントを動的にロードする場所を認識しています。
+これで、Angularはコンポーネントを動的にロードする場所を認識します。
 
 
 <code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" title="src/app/ad-banner.component.ts (template)" linenums="false">
@@ -87,20 +87,20 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 
 
-`loadComponent()` メソッドは、ここで、沢山の 重要な持ち上げ(heavy lifting) を行なっています。
-ステップバイステップで、それを取ります。最初に、広告を選びます。
+`loadComponent()` メソッドは、ここで、沢山の力仕事を行なっています。
+ひとつずつ取り上げましょう。まず最初に、広告を選びます。
 
 
 <div class="l-sub-section">
 
 
 
-**どのように _loadComponent()_ 一つの広告を選ぶのか**
+**どのように _loadComponent()_ 広告を選ぶのでしょうか**
 
 `loadComponent()` メソッドは、数式を使って広告を選択します。
 
-まず、 `currentAddIndex` を設定します。これは、現在の値+1をプラスし、
-それを `AdItem` 配列の長さで割って、新しい `currentAddIndex` 値として _remainder_　を使います。
+まず、 `currentAddIndex` を設定します。これは、現在の値に+1をプラスし、
+それを `AdItem` 配列の長さで割って、その _余り_　を新しい `currentAddIndex` 値として使います。
 次に、その値を使用して配列から `adItem` を選択します。
 
 
@@ -112,10 +112,10 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 特定のコンポーネントごとに `ComponentFactory` を解決します。
 `ComponentFactory` は各コンポーネントのインスタンスを作成します。
 
-次に、コンポーネントのこの特定のインスタンスに存在する `viewContainerRef` をターゲットにします。
-この特定のインスタンスがどのように分かっていますか？
-`adHost` と `adHost` を参照しているのは、あなたが以前に設定した、
-動的コンポーネントをどこに挿入するのかをAngularに指示する命令です。
+次に、このコンポーネントのインスタンスに存在する `viewContainerRef` をターゲットにします。
+この特定のインスタンスがどうして分かるのでしょうか？
+なぜならそれが `adHost` を指していて、 `adHost` は以前に設定した、
+Angularに動的コンポーネントをどこに挿入するのかを指示するためのディレクティブだからです。
 
 あなたが思い出しているように、 `AdDirective` はコンストラクタに `ViewContainerRef` を挿入します。
 これは、ディレクティブが、動的コンポーネントをホストするために使用する要素にアクセスする方法です。
@@ -134,7 +134,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 一般に、Angularコンパイラは、テンプレートで参照されているコンポーネントのために `ComponentFactory` を生成します。
 ただし、動的にロードされるコンポーネントのテンプレートには、実行時にロードされるため、セレクタ参照はありません。
 
-コンパイラが、まだファクトリを生成するようにするには、動的にロードされたコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
+コンパイラが引き続きファクトリを生成するようにするには、動的にロードされるコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
 
 <code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" title="src/app/app.module.ts (entry components)" linenums="false">
 
@@ -149,7 +149,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 広告バナーでは、すべてのコンポーネントが共通の `AdComponent` インターフェースを実装して、コンポーネントにデータを渡すためのAPIを標準化します。
 
-以下の2つのサンプルコンポーネントと、参照のための `AdComponent` インタフェースがあります：
+次の2つのサンプルコンポーネントと、参照のための `AdComponent` インタフェースがあります：
 
 
 <code-tabs>
@@ -182,4 +182,4 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 
 
-参照 <live-example name="dynamic-component-loader"></live-example>.
+<live-example name="dynamic-component-loader"></live-example>を参照してください。

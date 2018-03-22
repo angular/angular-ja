@@ -176,8 +176,9 @@
             },
             {
               "url": "guide/dynamic-component-loader",
-              "title": "Dynamic Components",
-              "tooltip": "Load components dynamically."
+              "title": "動的コンポーネント",
+              "tooltip": "コンポーネントを動的に読み込みます。",
+              "translated": true
             },
             {
               "url": "guide/attribute-directives",

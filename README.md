@@ -13,13 +13,13 @@
 :---: |:---: |:---: |:---: |:---: |:---: |
 [lacolaco](https://github.com/lacolaco) |[studioTeaTwo](https://github.com/studioTeaTwo) |[Allajah](https://github.com/Allajah) |[chloe463](https://github.com/chloe463) |[Pittan](https://github.com/Pittan) |[kappy](https://github.com/kappy) |
 
-[<img alt="MasanobuAkiba" src="https://avatars2.githubusercontent.com/u/7288676?v=4&s=117" width="117">](https://github.com/MasanobuAkiba) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |[<img alt="shioyang" src="https://avatars0.githubusercontent.com/u/4098243?v=4&s=117" width="117">](https://github.com/shioyang) |[<img alt="doutori" src="https://avatars0.githubusercontent.com/u/25642027?v=4&s=117" width="117">](https://github.com/doutori) |[<img alt="briete" src="https://avatars0.githubusercontent.com/u/8341971?v=4&s=117" width="117">](https://github.com/briete) |[<img alt="adwd" src="https://avatars2.githubusercontent.com/u/7473222?v=4&s=117" width="117">](https://github.com/adwd) |
+[<img alt="MasanobuAkiba" src="https://avatars2.githubusercontent.com/u/7288676?v=4&s=117" width="117">](https://github.com/MasanobuAkiba) |[<img alt="imamoto" src="https://avatars2.githubusercontent.com/u/9498383?v=4&s=117" width="117">](https://github.com/imamoto) |[<img alt="sayanaka" src="https://avatars1.githubusercontent.com/u/28511464?v=4&s=117" width="117">](https://github.com/sayanaka) |[<img alt="shioyang" src="https://avatars0.githubusercontent.com/u/4098243?v=4&s=117" width="117">](https://github.com/shioyang) |[<img alt="doutori" src="https://avatars0.githubusercontent.com/u/25642027?v=4&s=117" width="117">](https://github.com/doutori) |[<img alt="mitsuhisaT" src="https://avatars0.githubusercontent.com/u/21700509?v=4&s=117" width="117">](https://github.com/mitsuhisaT) |
 :---: |:---: |:---: |:---: |:---: |:---: |
-[MasanobuAkiba](https://github.com/MasanobuAkiba) |[imamoto](https://github.com/imamoto) |[shioyang](https://github.com/shioyang) |[doutori](https://github.com/doutori) |[briete](https://github.com/briete) |[adwd](https://github.com/adwd) |
+[MasanobuAkiba](https://github.com/MasanobuAkiba) |[imamoto](https://github.com/imamoto) |[sayanaka](https://github.com/sayanaka) |[shioyang](https://github.com/shioyang) |[doutori](https://github.com/doutori) |[mitsuhisaT](https://github.com/mitsuhisaT) |
 
-[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |[<img alt="sayanaka" src="https://avatars1.githubusercontent.com/u/28511464?v=4&s=117" width="117">](https://github.com/sayanaka) |[<img alt="t-cool" src="https://avatars0.githubusercontent.com/u/3023976?v=4&s=117" width="117">](https://github.com/t-cool) |
-:---: |:---: |:---: |
-[massa142](https://github.com/massa142) |[sayanaka](https://github.com/sayanaka) |[t-cool](https://github.com/t-cool) |
+[<img alt="briete" src="https://avatars0.githubusercontent.com/u/8341971?v=4&s=117" width="117">](https://github.com/briete) |[<img alt="TomohiroAkutsu" src="https://avatars1.githubusercontent.com/u/18062365?v=4&s=117" width="117">](https://github.com/TomohiroAkutsu) |[<img alt="adwd" src="https://avatars2.githubusercontent.com/u/7473222?v=4&s=117" width="117">](https://github.com/adwd) |[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |[<img alt="t-cool" src="https://avatars0.githubusercontent.com/u/3023976?v=4&s=117" width="117">](https://github.com/t-cool) |
+:---: |:---: |:---: |:---: |:---: |
+[briete](https://github.com/briete) |[TomohiroAkutsu](https://github.com/TomohiroAkutsu) |[adwd](https://github.com/adwd) |[massa142](https://github.com/massa142) |[t-cool](https://github.com/t-cool) |
 <!---end contributors -->
 
 ## コントリビューション大歓迎！
@@ -35,6 +35,8 @@
 
 翻訳対象のファイルは`aio-ja`ディレクトリ内に管理されています。
 まだ日本語化されていない部分についての翻訳にご協力ください
+
+[翻訳作業のガイド](https://github.com/angular/angular-ja/blob/master/README.md#%E7%BF%BB%E8%A8%B3%E4%BD%9C%E6%A5%AD)
 
 翻訳作業を開始する前に、同じファイルを翻訳しようとしている人がいないかどうかを確認しましょう。
 [Translation Checkout](https://github.com/angular/angular-ja/labels/type%3A%20Translation%20Checkout)ラベルのイシューを見ると、現在翻訳に取り掛かっている領域がわかります。
@@ -110,8 +112,9 @@ $ yarn serve-and-sync # localhost:4200でサーバーが立ち上がります
 
 ### 2. 翻訳する
 
-コピーしたファイルを翻訳します。かならずしもファイル全体を翻訳してしまう必要はありません。
-翻訳時点でのオリジナルファイルは `*.en.md` ファイルとして保存しておきます。オリジナル側に変更があったときに差異を確認するためです。
+**コピーしたファイルを翻訳します**。かならずしもファイル全体を翻訳してしまう必要はありません。
+
+**注意**: 翻訳時点でのオリジナルファイルは `*.en.md` ファイルとして保存しておきます。オリジナル側に変更があったときに差異を確認するためです。
 
 ### 3. プルリクエストを作成する
 

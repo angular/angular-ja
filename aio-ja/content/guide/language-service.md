@@ -1,7 +1,7 @@
 # Angular Language Service
 
 Angular Language Serviceは、HTMLファイルの外部にあるか、
-または文字列内のアノテーション/デコレータに埋め込まれているかに関わらず、
+または文字列内のアノテーション/デコレータに埋め込まれているかにかかわらず、
 Angularテンプレート内で補完、エラー、ヒント、およびナビゲーションを取得する方法です。
 Angular Language Serviceは、Angularファイルを開いたことを自動検出し、
 `tsconfig.json`ファイルを読み込み、アプリケーションの中のすべてのテンプレートを見つけ、
@@ -125,7 +125,7 @@ npm install --save-dev @angular/language-service
 
 Language Serviceを備えたエディターを使うときには、[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)を介して話す別の言語プロセス/サービスを起動するエディタープロセスがあります。エディタの中に入力するたびに、他のプロセスに情報を送信してプロジェクトの状態を追跡します。テンプレート内で補完リストをトリガーすると、エディタプロセスは最初にテンプレートをHTML ASTまたは[抽象構文木](https://en.wikipedia.org/wiki/Abstract_syntax_tree)に解析します。次に、Angularコンパイラは、テンプレートが含まれているモジュール、現在のスコープ、コンポーネントセレクタを解釈します。次に、カーソルがテンプレートASTのどこにあるかを調べます。コンテキストを判断すると、子ができることを判断できます。
 
-補間をしている場合はもう少し複雑です。`div`内に`{{data.---}}`の補間があり、`data.---`の後に補完リストが必要な場合、コンパイラはHTML ASTを使用して答えを見つけることはできません。HTML ASTは、文字"`{{data.---}}`"を持つテキストがあることをコンパイラに通知するだけです。テンプレートパーサーがテンプレートAST内にある式ASTを生成します。次に、Angular Language Serviceは、その文脈の中で`data.---`を調べ、TypeScript Language Serviceにデータのメンバーが何であるかを尋ねます。 TypeScriptは可能性のあるリストを返します。
+補間をしている場合はもう少し複雑です。`div`内に`{{data.---}}`の補間があり、`data.---`の後に補完リストが必要な場合、コンパイラはHTML ASTを使用して答えを見つけることはできません。HTML ASTは、文字"`{{data.---}}`"をもつテキストがあることをコンパイラに通知するだけです。テンプレートパーサーがテンプレートAST内にある式ASTを生成します。次に、Angular Language Serviceは、その文脈の中で`data.---`を調べ、TypeScript Language Serviceにデータのメンバーが何であるかを尋ねます。 TypeScriptは可能性のあるリストを返します。
 
 
 詳細な情報については[Angular Language Service API](https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts)を参照してください。

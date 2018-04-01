@@ -1,6 +1,11 @@
-# Angular 言語サービス
+# Angular Language Service
 
-Angular言語サービスは、HTMLファイルの外部にあるか、または文字列内の注釈/デコレータに埋め込まれているかにかかわらず、Angularテンプレート内で補完、エラー、ヒント、およびナビゲーションを取得する方法です。Angular言語サービスは、Angularファイルを開いたり、`tsconfig.json`ファイルを読み込んだり、アプリケーションにあるすべてのテンプレートを見つけたり、開いているテンプレートの言語サービスを提供したりすることを自動検出します。
+Angular Language Serviceは、HTMLファイルの外部にあるか、
+または文字列内のアノテーション/デコレータに埋め込まれているかに関わらず、
+Angularテンプレート内で補完、エラー、ヒント、およびナビゲーションを取得する方法です。
+Angular Language Serviceは、Angularファイルを開いたことを自動検出し、
+`tsconfig.json`ファイルを読み込み、アプリケーションの中のすべてのテンプレートを見つけ、
+そして開いたテンプレートにLanguage Serviceを提供します。
 
 
 ## オートコンプリート
@@ -15,7 +20,7 @@ Angular言語サービスは、HTMLファイルの外部にあるか、または
 
 ## エラーチェック
 
-Angular言語サービスは、コード内の間違いを予告することもできます。この例では、Angularは`orders`が何であるか、どこから来るのかを知らない。 
+Angular Language Serviceは、コード内の間違いを予告することもできます。この例では、Angularは`orders`が何であるか、どこから来るのかを知りません。 
 
 <figure>
   <img src="generated/images/guide/language-service/language-error.gif" alt="error checking">
@@ -30,27 +35,27 @@ Angular言語サービスは、コード内の間違いを予告することも�
 </figure>
 
 
-## エディタのAngular言語サービス
+## エディタのAngular Language Service
 
-Angular言語サービスは現在、[Visual Studio Code](https://code.visualstudio.com/)と[WebStorm](https://www.jetbrains.com/webstorm)で利用可能です。
+Angular Language Serviceは現在、[Visual Studio Code](https://code.visualstudio.com/)と[WebStorm](https://www.jetbrains.com/webstorm)で利用可能です。
 
 ### Visual Studio Code
 
-Visual Studioのコードでは、左側のメニューペインの下のアイコンからアクセスできるストアからAngular言語サービスをインストールします。また、VS Quick Open（⌘+ P）を使用して拡張子を検索することもできます。それを開いたら、次のコマンドを入力してください: 
+Visual Studio Codeでは、左側のメニューペインの下のアイコンからアクセスできるストアからAngular Language Serviceをインストールします。また、VS Quick Open（⌘+P）を使用して拡張子を検索することもできます。それを開いたら、次のコマンドを入力してください: 
 
 ```sh
 ext install ng-template
 ```
 
-その後、インストールボタンをクリックして、Angular言語サービスをインストールします。 
+その後、インストールボタンをクリックして、Angular Language Serviceをインストールします。 
 
 
 ### WebStorm
 
-WebStormでは、言語サービスをdev依存関係としてインストールする必要があります。 
-Angularはこのdev依存関係を見ると、WebStormの内部で言語サービスを提供します。WebStormは、言語サービスに加えて、テンプレート内の色付けとオートコンプリートを提供します。
+WebStormでは、Language Serviceをdev依存関係としてインストールする必要があります。 
+Angularはこのdev依存関係を見ると、WebStormの内部でLanguage Serviceを提供します。WebStormは、Language Serviceに加えて、テンプレート内の色付けとオートコンプリートを提供します。
 
-`package.json`に必要なdevの依存関係は次のとおりです:
+`package.json`に必要なdev依存関係は次のとおりです:
 
 ```json
 
@@ -85,14 +90,14 @@ yarn install
 npm install --save-dev typescript
 ```
 
-次に、Angular言語サービスを同じ場所にインストールします:
+次に、Angular Language Serviceを同じ場所にインストールします:
 ```sh
 npm install --save-dev @angular/language-service
 ```
 
-TypeScript 2.3以降、TypeScriptには、言語サービスが使用できる言語サービスプラグインモデルがあります。 
+TypeScript 2.3以降、TypeScriptには、Language Serviceが使用できるLanguage Serviceプラグインモデルがあります。 
 
-次に、ユーザーの設定（`Cmd +,` または `Ctrl +,`）で、次を追加します:
+次に、ユーザーの設定（`Cmd+,` または `Ctrl+,`）で、次を追加します:
 
 ```json
 "typescript-tsdk": "<path to your folder>/node_modules/typescript/lib"
@@ -101,7 +106,7 @@ TypeScript 2.3以降、TypeScriptには、言語サービスが使用できる�
 
 ## プロジェクトへのインストール
 
-次の`npm`コマンドを使用して、プロジェクトにAngular言語サービスをインストールすることもできます。
+次の`npm`コマンドを使用して、プロジェクトにAngular Language Serviceをインストールすることもできます。
 
 ```sh
 npm install --save-dev @angular/language-service
@@ -116,14 +121,14 @@ npm install --save-dev @angular/language-service
 これは、`.ts`ファイル内の診断と補完のみを提供することに注意してください。HTMLファイルの補完のためにカスタムのsublimeプラグイン（または現在のプラグインの変更）が必要です。
 
 
-## 言語サービスの仕組み
+## Language Serviceの仕組み
 
-言語サービスでエディタを使用する場合、[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)を介して話す別の言語プロセス/サービスを開始するエディタプロセスがあります。エディタの中に入力するたびに、他のプロセスに情報を送信してプロジェクトの状態を追跡します。テンプレート内で補完リストをトリガすると、エディタプロセスは最初にテンプレートをHTML ASTまたは[抽象構文ツリー](https://en.wikipedia.org/wiki/Abstract_syntax_tree)に解析します。次に、Angularコンパイラは、テンプレートが含まれているモジュール、現在のスコープ、コンポーネントセレクタを解釈します。次に、カーソルがテンプレートASTのどこにあるかを調べます。コンテキストを判断すると、子ができることを判断できます。
+Language Serviceを備えたエディターを使うときには、[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)を介して話す別の言語プロセス/サービスを起動するエディタープロセスがあります。エディタの中に入力するたびに、他のプロセスに情報を送信してプロジェクトの状態を追跡します。テンプレート内で補完リストをトリガーすると、エディタプロセスは最初にテンプレートをHTML ASTまたは[抽象構文木](https://en.wikipedia.org/wiki/Abstract_syntax_tree)に解析します。次に、Angularコンパイラは、テンプレートが含まれているモジュール、現在のスコープ、コンポーネントセレクタを解釈します。次に、カーソルがテンプレートASTのどこにあるかを調べます。コンテキストを判断すると、子ができることを判断できます。
 
-補間をしている場合はもう少し複雑です。`div`内に`{{data.---}}`の補間があり、`data.---`の後に補完リストが必要な場合、コンパイラはHTML ASTを使用して答えを見つけることはできません。HTML ASTは、文字"`{{data.---}}`"をもつテキストがあることをコンパイラに通知するだけです。テンプレートパーサーがテンプレートAST内にある式ASTを生成します。次に、Angular言語サービスは、その文脈の中で`data.---`を調べ、TypeScript言語サービスにデータのメンバーが何であるかを尋ねる。 TypeScriptは可能性のあるリストを返します。
+補間をしている場合はもう少し複雑です。`div`内に`{{data.---}}`の補間があり、`data.---`の後に補完リストが必要な場合、コンパイラはHTML ASTを使用して答えを見つけることはできません。HTML ASTは、文字"`{{data.---}}`"を持つテキストがあることをコンパイラに通知するだけです。テンプレートパーサーがテンプレートAST内にある式ASTを生成します。次に、Angular Language Serviceは、その文脈の中で`data.---`を調べ、TypeScript Language Serviceにデータのメンバーが何であるかを尋ねます。 TypeScriptは可能性のあるリストを返します。
 
 
-詳細な情報については[Angular言語サービス API](https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts)を参照してください。
+詳細な情報については[Angular Language Service API](https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts)を参照してください。
 
 
 
@@ -136,6 +141,7 @@ npm install --save-dev @angular/language-service
 
 ## 詳細な情報
 
-詳細については、[ng-conf](https://www.ng-conf.org/) 2017の[Chuck Jazdzewski's presentation](https://www.youtube.com/watch?v=ez3R0Gi4z5A&t=368s)のAngular言語サービスに関するプレゼンテーションを参照してください。
+詳細については、[ng-conf](https://www.ng-conf.org/) 2017の
+Angular Language Serviceに関する[Chuck Jazdzewskiのプレゼンテーション](https://www.youtube.com/watch?v=ez3R0Gi4z5A&t=368s)を参照してください。
 
 

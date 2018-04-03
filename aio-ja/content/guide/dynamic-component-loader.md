@@ -1,38 +1,34 @@
-# Dynamic Component Loader
+# 動的コンポーネントローダー
 
-Component templates are not always fixed. An application may need to load new components at runtime.
+コンポーネントテンプレートは常に固定ではありません。 アプリケーションは、実行時に新しいコンポーネントをロードする必要があるかもしれません。
 
-This cookbook shows you how to use `ComponentFactoryResolver` to add components dynamically.
+このクックブックでは、 `ComponentFactoryResolver`を使ってコンポーネントを動的に追加する方法を説明します。
 
-See the <live-example name="dynamic-component-loader"></live-example>
-of the code in this cookbook.
+このcookbookのコードの <live-example name="dynamic-component-loader"></live-example>
+を参照してください。
 
 {@a dynamic-loading}
 
-## Dynamic component loading
+## 動的コンポーネント読み込み
 
-The following example shows how to build a dynamic ad banner.
+次の例は、動的広告バナーを作成する方法を示しています。
 
-The hero agency is planning an ad campaign with several different
-ads cycling through the banner. New ad components are added
-frequently by several different teams. This makes it impractical
-to use a template with a static component structure.
+ヒーローエージェンシーは、いくつかの異なる広告がバナーを循環する広告キャンペーンを計画しています。
+新しい広告コンポーネントは、いくつかの異なるチームによって頻繁に追加されます。
+このため、静的なコンポーネント構造をもつテンプレートを使用することは現実的ではありません。
 
-Instead, you need a way to load a new component without a fixed
-reference to the component in the ad banner's template.
+代わりに、広告バナーのテンプレート内のコンポーネントへの固定参照なしに新しいコンポーネントを読み込む方法が必要です。
 
-Angular comes with its own API for loading components dynamically.
+Angularにはコンポーネントを動的にロードする独自のAPIが付属しています。
 
 
 {@a directive}
 
-## The anchor directive
+## アンカーディレクティブ
 
-Before you can add components you have to define an anchor point
-to tell Angular where to insert components.
+コンポーネントを追加する前に、アンカーポイントを定義して、Angularにコンポーネントを挿入する場所を指定する必要があります。
 
-The ad banner uses a helper directive called `AdDirective` to
-mark valid insertion points in the template.
+広告バナーは、テンプレート内の有効な挿入ポイントをマークするために、`AdDirective` と呼ばれるヘルパー・ディレクティブを使用します。
 
 
 <code-example path="dynamic-component-loader/src/app/ad.directive.ts" title="src/app/ad.directive.ts" linenums="false">
@@ -41,25 +37,23 @@ mark valid insertion points in the template.
 
 
 
-`AdDirective` injects `ViewContainerRef` to gain access to the view
-container of the element that will host the dynamically added component.
+`AdDirective` は動的に追加されたコンポーネントをホストする要素のビューコンテナへのアクセスを得るために `ViewContainerRef` を挿入します。
 
-In the `@Directive` decorator, notice the selector name, `ad-host`;
-that's what you use to apply the directive to the element.
-The next section shows you how.
+`@Directive` デコレータでは、セレクタ名 `ad-host` に注目してください；
+これは、要素にディレクティブを適用するために使用します。
+次のセクションでは、その方法について説明します。
 
 {@a loading-components}
 
-## Loading components
+## コンポーネントのロード
 
-Most of the ad banner implementation is in `ad-banner.component.ts`.
-To keep things simple in this example, the HTML is in the `@Component`
-decorator's `template` property as a template string.
+広告バナーの実装のほとんどは `ad-banner.component.ts` です。
+この例では、HTMLを `@Component` デコレータの `template` プロパティにテンプレート文字列として入れています。
 
-The `<ng-template>` element is where you apply the directive you just made.
-To apply the `AdDirective`, recall the selector from `ad.directive.ts`,
-`ad-host`. Apply that to `<ng-template>` without the square brackets. Now Angular knows
-where to dynamically load components.
+`<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
+`AdDirective` を適用するには、セレクタを `ad.directive.ts` 、 `ad-host` から呼び出します。
+それを大括弧なしで `<ng-template>` に適用してください。
+これで、Angularはコンポーネントを動的にロードする場所を認識しています。
 
 
 <code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" title="src/app/ad-banner.component.ts (template)" linenums="false">
@@ -68,27 +62,23 @@ where to dynamically load components.
 
 
 
-The `<ng-template>` element is a good choice for dynamic components
-because it doesn't render any additional output.
+`<ng-template>` 要素は、追加の出力を表示しないため、動的コンポーネントに適しています。
 
 
 {@a resolving-components}
 
 
-## Resolving components
+## コンポーネントの解決
 
-Take a closer look at the methods in `ad-banner.component.ts`.
+`ad-banner.component.ts` のメソッドを詳しく見てみましょう。
 
-`AdBannerComponent` takes an array of `AdItem` objects as input,
-which ultimately comes from `AdService`.  `AdItem` objects specify
-the type of component to load and any data to bind to the
-component.`AdService` returns the actual ads making up the ad campaign.
+`AdBannerComponent` は `AdItem` オブジェクトの配列を入力として受け取ります。これは最終的に `AdService` から来ます。
+`AdItem` オブジェクトは、ロードするコンポーネントのタイプと、そのコンポーネントにバインドするデータを指定します。
+`AdService` は、広告キャンペーンを構成する実際の広告を返します。
 
-Passing an array of components to `AdBannerComponent` allows for a
-dynamic list of ads without static elements in the template.
+コンポーネントの配列を `AdBannerComponent` に渡すことで、テンプレート内の静的要素のない広告の動的リストが可能になります。
 
-With its `getAds()` method, `AdBannerComponent` cycles through the array of `AdItems`
-and loads a new component every 3 seconds by calling `loadComponent()`.
+`AdBannerComponent` は `getAds()` メソッドを使って、 `AdItems` の配列を循環し、 `loadComponent()` を呼び出すことで3秒ごとに新しいコンポーネントを読み込みます。
 
 
 <code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="class" title="src/app/ad-banner.component.ts (excerpt)" linenums="false">
@@ -97,58 +87,54 @@ and loads a new component every 3 seconds by calling `loadComponent()`.
 
 
 
-The `loadComponent()` method is doing a lot of the heavy lifting here.
-Take it step by step. First, it picks an ad.
+`loadComponent()` メソッドは、ここで、沢山の 重要な持ち上げ(heavy lifting) を行なっています。
+ステップバイステップで、それを取ります。最初に、広告を選びます。
 
 
 <div class="l-sub-section">
 
 
 
-**How _loadComponent()_ chooses an ad**
+**どのように _loadComponent()_ ひとつの広告を選ぶのか**
 
-The `loadComponent()` method chooses an ad using some math.
+`loadComponent()` メソッドは、数式を使って広告を選択します。
 
-First, it sets the `currentAddIndex` by taking whatever it
-currently is plus one, dividing that by the length of the `AdItem` array, and
-using the _remainder_ as the new `currentAddIndex` value. Then, it uses that
-value to select an `adItem` from the array.
+まず、 `currentAddIndex` を設定します。これは、現在の値+1をプラスし、
+それを `AdItem` 配列の長さで割って、新しい `currentAddIndex` 値として _remainder_　を使います。
+次に、その値を使用して配列から `adItem` を選択します。
 
 
 </div>
 
 
 
-After `loadComponent()` selects an ad, it uses `ComponentFactoryResolver`
-to resolve a `ComponentFactory` for each specific component.
-The `ComponentFactory` then creates an instance of each component.
+`loadComponent()` が広告を選択した後、それは `ComponentFactoryResolver` を使って
+特定のコンポーネントごとに `ComponentFactory` を解決します。
+`ComponentFactory` は各コンポーネントのインスタンスを作成します。
 
-Next, you're targeting the `viewContainerRef` that
-exists on this specific instance of the component. How do you know it's
-this specific instance? Because it's referring to `adHost` and `adHost` is the
-directive you set up earlier to tell Angular where to insert dynamic components.
+次に、このコンポーネントのインスタンスに存在する `viewContainerRef` をターゲットにします。
+この特定のインスタンスがどうして分かるのでしょうか？
+なぜならそれが `adHost` を指していて、 `adHost` は以前に設定した、
+Angularに動的コンポーネントをどこに挿入するのかを指示するためのディレクティブだからです。
 
-As you may recall, `AdDirective` injects `ViewContainerRef` into its constructor.
-This is how the directive accesses the element that you want to use to host the dynamic component.
+あなたが思い出しているように、 `AdDirective` はコンストラクタに `ViewContainerRef` を挿入します。
+これは、ディレクティブが、動的コンポーネントをホストするために使用する要素にアクセスする方法です。
 
-To add the component to the template, you call `createComponent()` on `ViewContainerRef`.
+コンポーネントをテンプレートに追加するには、 `ViewContainerRef` に対して `createComponent()` を呼び出します。
 
-The `createComponent()` method returns a reference to the loaded component.
-Use that reference to interact with the component by assigning to its properties or calling its methods.
+`createComponent()` メソッドはロードされたコンポーネントへの参照を返します。
+その参照を使用して、そのプロパティに割り当てたり、そのメソッドを呼び出したりして、コンポーネントとやり取りします。
 
 
 {@a selector-references}
 
 
-#### Selector references
+#### セレクタ参照
 
-Generally, the Angular compiler generates a `ComponentFactory`
-for any component referenced in a template. However, there are
-no selector references in the templates for
-dynamically loaded components since they load at runtime.
+一般に、Angularコンパイラは、テンプレートで参照されているコンポーネントのために `ComponentFactory` を生成します。
+ただし、動的にロードされるコンポーネントのテンプレートには、実行時にロードされるため、セレクタ参照はありません。
 
-To ensure that the compiler still generates a factory,
-add dynamically loaded components to the `NgModule`'s `entryComponents` array:
+コンパイラが引き続きファクトリを生成するようにするには、動的にロードされるコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
 
 <code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" title="src/app/app.module.ts (entry components)" linenums="false">
 
@@ -159,12 +145,11 @@ add dynamically loaded components to the `NgModule`'s `entryComponents` array:
 {@a common-interface}
 
 
-## The _AdComponent_ interface
+## _AdComponent_ インターフェース
 
-In the ad banner, all components implement a common `AdComponent` interface to
-standardize the API for passing data to the components.
+広告バナーでは、すべてのコンポーネントが共通の `AdComponent` インターフェースを実装して、コンポーネントにデータを渡すためのAPIを標準化します。
 
-Here are two sample components and the `AdComponent` interface for reference:
+次の2つのサンプルコンポーネントと、参照のための `AdComponent` インタフェースがあります：
 
 
 <code-tabs>
@@ -188,8 +173,8 @@ Here are two sample components and the `AdComponent` interface for reference:
 {@a final-ad-baner}
 
 
-## Final ad banner
- The final ad banner looks like this:
+## 最終的な広告バナー
+ 最終的な広告バナーは次のようになります。
 
 <figure>
   <img src="generated/images/guide/dynamic-component-loader/ads.gif" alt="Ads">
@@ -197,4 +182,4 @@ Here are two sample components and the `AdComponent` interface for reference:
 
 
 
-See the <live-example name="dynamic-component-loader"></live-example>.
+<live-example name="dynamic-component-loader"></live-example>を参照してください。

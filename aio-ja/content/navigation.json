@@ -176,13 +176,15 @@
             },
             {
               "url": "guide/dynamic-component-loader",
-              "title": "Dynamic Components",
-              "tooltip": "Load components dynamically."
+              "title": "動的コンポーネント",
+              "tooltip": "コンポーネントを動的に読み込みます。",
+              "translated": true
             },
             {
               "url": "guide/attribute-directives",
-              "title": "Attribute Directives",
-              "tooltip": "Attribute directives attach behavior to elements."
+              "title": "属性ディレクティブ",
+              "tooltip": "属性ディレクティブは要素に振る舞いを付与します。",
+              "translated": true
             },
             {
               "url": "guide/structural-directives",

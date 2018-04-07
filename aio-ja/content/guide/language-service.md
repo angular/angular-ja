@@ -10,17 +10,22 @@ Angular Language Serviceは、Angularファイルを開いたことを自動検�
 
 ## オートコンプリート
 
-オートコンプリートを使用すると、入力時にコンテキスト上の可能性やヒントを提供して開発時間を短縮できます。この例は、補間でのオートコンプリートを示しています。あなたがそれを入力すると、タブを押して完了することができます。
+オートコンプリートを使用すると、入力時にコンテキスト上の可能性やヒントを提供して開発時間を短縮できます。
+この例は、補間でのオートコンプリートを示しています。
+あなたがそれを入力すると、タブを押して完了することができます。
 
 <figure>
   <img src="generated/images/guide/language-service/language-completion.gif" alt="autocompletion">
 </figure>
 
-要素内に補完もあります。コンポーネントセレクタとして持っているすべての要素が補完リストに表示されます。
+要素内に補完もあります。
+コンポーネントセレクタとして持っているすべての要素が
+補完リストに表示されます。
 
 ## エラーチェック
 
-Angular Language Serviceは、コード内の間違いを予告することもできます。この例では、Angularは`orders`が何であるか、どこから来るのかを知りません。 
+Angular Language Serviceは、コード内の間違いを予告することもできます。
+この例では、Angularは`orders`が何であるか、どこから来るのかを知りません。 
 
 <figure>
   <img src="generated/images/guide/language-service/language-error.gif" alt="error checking">
@@ -28,7 +33,9 @@ Angular Language Serviceは、コード内の間違いを予告することも�
 
 ## ナビゲーション
 
-ナビゲーションを使用すると、コンポーネント、ディレクティブ、モジュールなどがどこにあるかを確認し、F12キーを押してその定義に直接移動できます。
+ナビゲーションを使用すると、
+コンポーネント、ディレクティブ、モジュールなどがどこにあるかを確認し、
+F12キーを押してその定義に直接移動できます。
 
 <figure>
   <img src="generated/images/guide/language-service/language-navigation.gif" alt="navigation">
@@ -41,7 +48,10 @@ Angular Language Serviceは現在、[Visual Studio Code](https://code.visualstud
 
 ### Visual Studio Code
 
-Visual Studio Codeでは、左側のメニューペインの下のアイコンからアクセスできるストアからAngular Language Serviceをインストールします。また、VS Quick Open（⌘+P）を使用して拡張子を検索することもできます。それを開いたら、次のコマンドを入力してください: 
+Visual Studio Codeでは、左側のメニューペインの下のアイコンからアクセスできるストアから
+Angular Language Serviceをインストールします。
+また、VS Quick Open（⌘+P）を使用して拡張子を検索することもできます。
+それを開いたら、次のコマンドを入力してください: 
 
 ```sh
 ext install ng-template
@@ -53,7 +63,9 @@ ext install ng-template
 ### WebStorm
 
 WebStormでは、Language Serviceをdev依存関係としてインストールする必要があります。 
-Angularはこのdev依存関係を見ると、WebStormの内部でLanguage Serviceを提供します。WebStormは、Language Serviceに加えて、テンプレート内の色付けとオートコンプリートを提供します。
+Angularはこのdev依存関係を見ると、
+WebStormの内部でLanguage Serviceを提供します。
+WebStormは、Language Serviceに加えて、テンプレート内の色付けとオートコンプリートを提供します。
 
 `package.json`に必要なdev依存関係は次のとおりです:
 
@@ -64,7 +76,8 @@ devDependencies {
 }
 ```
 
-次にターミナルで、プロジェクトのルートで、`npm`または`yarn`を使用して`devDependencies`をインストールします: 
+次にターミナルで、プロジェクトのルートで、
+`npm`または`yarn`を使用して`devDependencies`をインストールします: 
 
 ```sh
 npm install 
@@ -84,7 +97,8 @@ yarn install
 
 ### Sublime Text
 
-[Sublime Text](https://www.sublimetext.com/)では、まずTypeScriptを可能にする拡張機能が必要です。TypeScriptの最新バージョンをローカルの`node_modules`ディレクトリにインストールします:
+[Sublime Text](https://www.sublimetext.com/)では、まずTypeScriptを可能にする拡張機能が必要です。
+TypeScriptの最新バージョンをローカルの`node_modules`ディレクトリにインストールします:
 
 ```sh
 npm install --save-dev typescript
@@ -118,12 +132,19 @@ npm install --save-dev @angular/language-service
       {"name": "@angular/language-service"}
   ]
 ```
-これは、`.ts`ファイル内の診断と補完のみを提供することに注意してください。HTMLファイルの補完のためにカスタムのsublimeプラグイン（または現在のプラグインの変更）が必要です。
+これは、`.ts`ファイル内の診断と補完のみを提供することに注意してください。
+HTMLファイルの補完のためにカスタムのsublimeプラグイン（または現在のプラグインの変更）が必要です。
 
 
 ## Language Serviceの仕組み
 
-Language Serviceを備えたエディターを使うときには、[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)を介して話す別の言語プロセス/サービスを起動するエディタープロセスがあります。エディタの中に入力するたびに、他のプロセスに情報を送信してプロジェクトの状態を追跡します。テンプレート内で補完リストをトリガーすると、エディタプロセスは最初にテンプレートをHTML ASTまたは[抽象構文木](https://en.wikipedia.org/wiki/Abstract_syntax_tree)に解析します。次に、Angularコンパイラは、テンプレートが含まれているモジュール、現在のスコープ、コンポーネントセレクタを解釈します。次に、カーソルがテンプレートASTのどこにあるかを調べます。コンテキストを判断すると、子ができることを判断できます。
+Language Serviceを備えたエディターを使うときには、
+[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)を介して話す
+別の言語プロセス/サービスを起動するエディタープロセスがあります。
+エディタの中に入力するたびに、他のプロセスに情報を送信してプロジェクトの状態を追跡します。
+テンプレート内で補完リストをトリガーすると、エディタプロセスは最初にテンプレートをHTML ASTまたは[抽象構文木](https://en.wikipedia.org/wiki/Abstract_syntax_tree)に解析します。
+次に、Angularコンパイラは、テンプレートが含まれているモジュール、現在のスコープ、コンポーネントセレクタを解釈します。
+次に、カーソルがテンプレートASTのどこにあるかを調べます。コンテキストを判断すると、子ができることを判断できます。
 
 補間をしている場合はもう少し複雑です。`div`内に`{{data.---}}`の補間があり、`data.---`の後に補完リストが必要な場合、コンパイラはHTML ASTを使用して答えを見つけることはできません。HTML ASTは、文字"`{{data.---}}`"をもつテキストがあることをコンパイラに通知するだけです。テンプレートパーサーがテンプレートAST内にある式ASTを生成します。次に、Angular Language Serviceは、その文脈の中で`data.---`を調べ、TypeScript Language Serviceにデータのメンバーが何であるかを尋ねます。 TypeScriptは可能性のあるリストを返します。
 

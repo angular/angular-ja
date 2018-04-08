@@ -99,8 +99,8 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 `loadComponent()` メソッドは、数式を使って広告を選択します。
 
-まず、 `currentAddIndex` を設定します。これは、現在の値+1をプラスし、
-それを `AdItem` 配列の長さで割って、新しい `currentAddIndex` 値として _remainder_　を使います。
+まず、 `currentAdIndex` を設定します。これは、現在の値+1をプラスし、
+それを `AdItem` 配列の長さで割って、新しい `currentAdIndex` 値として _remainder_　を使います。
 次に、その値を使用して配列から `adItem` を選択します。
 
 

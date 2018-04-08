@@ -139,6 +139,11 @@
 <td><p>要素のCSSクラスの有無を、関連付けられたマップ値の真偽値にバインドします。 右側の式は {class-name: true/false } なマップを返さなければなりません。</p>
 </td>
 </tr>
+<tr>
+<td><code>&lt;div <b>[ngStyle]</b>="{'property': 'value'}"&gt;</code><br><code>&lt;div <b>[ngStyle]</b>="dynamicStyles()"&gt;</code></td>
+<td><p>CSSを使ってスタイルをHTML要素に適用します。最初の例のようにCSSを直接使うこともできますし、コンポーネントのメソッドを呼び出すこともできます。</p>
+</td>
+</tr>
 </tbody></table>
 
 <table class="is-full-width is-fixed-layout">

@@ -92,7 +92,7 @@ You can control your app compilation by providing template compiler options in t
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "preserveWhiteSpaces": false,
+    "preserveWhitespaces": false,
     ...
   }
 }
@@ -204,7 +204,7 @@ JavaScript with [JsDoc](http://usejsdoc.org/) comments needed by the
 ### *annotationsAs*
 
 Use this option to modify how the Angular specific annotations are emitted to improve tree-shaking. Non-Angular
-annotations and decorators are unnaffected. Default is `static fields`.
+annotations and decorators are unaffected. Default is `static fields`.
 
 value           | description
 ----------------|-------------------------------------------------------------
@@ -244,16 +244,6 @@ Tells the compiler to generate all the possible generated files even if they are
 `false` by default. This is an option used by `bazel` build rules and is needed to simplify
 how `bazel` rules track file dependencies. It is not recommended to use this option outside of the `bazel`
 rules.
-
-  ### *enableIvy*
-
-  Tells the compiler to generate definitions using the Render3 style code generation. This option defaults to `false`.
-
-  Not all features are supported with this option enabled. It is only supported
-  for experimentation and testing of Render3 style code generation.
-
-  *Note*: Is it not recommended to use this option as it is not yet feature complete with the Render2 code generation.
-
 
 ## Angular Metadata and AOT
 

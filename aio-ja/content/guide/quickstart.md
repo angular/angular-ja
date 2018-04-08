@@ -102,7 +102,7 @@ CLIがあなたのためにひとつ目のコンポーネントを作成して�
 これは _ルートコンポーネント_ で、 `app-root` と名付けられています。  
 このファイルは `./src/app/app.component.ts` にあります。
 
-コンポーネントのファイルを開いて、 `title` プロパティを _Welcome to app!!_ から _Welcome to My First Angular App!!_ に変更してみてください。
+コンポーネントのファイルを開いて、 `title` プロパティを`'app'`から`'My First Angular App!'` に変更してみてください。
 
 <code-example path="cli-quickstart/src/app/app.component.ts" region="title" title="src/app/app.component.ts" linenums="false"></code-example>
 

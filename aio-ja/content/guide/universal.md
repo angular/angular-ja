@@ -183,9 +183,9 @@ Angularは、サーバーでレンダリングされたページのスタイル�
 
 #### HTTPリクエストの絶対URL
 
-このチュートリアルの`HeroService`と`HeroSearchService`は、アプリケーションデータの取得をAngularの`Http`モジュールに委譲します。これらのサービスは、`api/heroes`などの _相対_ URLにリクエストを送信します。
+このチュートリアルの`HeroService`と`HeroSearchService`は、アプリケーションデータの取得をAngularの`HttpClient`モジュールに委譲します。これらのサービスは、`api/heroes`などの _相対_ URLにリクエストを送信します。
 
-Universalアプリケーションにおいて`Http`のURLは、Universal webサーバーがこれらのリクエストを扱える場合でも _絶対_ パスでなければなりません。（例 `https://my-server.com/api/heroes`）
+UniversalアプリケーションにおいてHTTPのURLは、Universal webサーバーがこれらのリクエストを扱える場合でも、たとえば`https://my-server.com/api/heroes`のような _絶対_ パスでなければなりません。
 
 サーバーで実行している際は絶対URLで、ブラウザーで実行している場合は相対URLをリクエストするように、それらのサービスを変更する必要があります。
 

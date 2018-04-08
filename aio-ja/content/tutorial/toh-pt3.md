@@ -92,7 +92,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 `[hero]="selectedHero"` は、Angularの[プロパティバインディング](guide/template-syntax#property-binding)です。
 
-これは `HeroComponent` の `selectedHero` プロパティから、ターゲット要素の `hero` プロパティへの単方向データバインディングです。
+これは `HeroesComponent` の `selectedHero` プロパティから、ターゲット要素の `hero` プロパティへの単方向データバインディングです。
 ここでは、`HeroDetailComponent` の `hero` プロパティがマッピングされています。
 
 ユーザーがリスト内のヒーローをクリックすると、 `selectedHero` が変更されます。

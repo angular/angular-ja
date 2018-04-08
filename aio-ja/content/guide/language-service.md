@@ -54,7 +54,7 @@ Angular Language Serviceをインストールします。
 それを開いたら、次のコマンドを入力してください: 
 
 ```sh
-ext install ng-template
+ext install Angular.ng-template
 ```
 
 その後、インストールボタンをクリックして、Angular Language Serviceをインストールします。 

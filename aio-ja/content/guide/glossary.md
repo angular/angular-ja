@@ -584,14 +584,10 @@ Angularのコンポーネントルーターは、ビューの生成と破棄を�
 
 ## Router module
 
-<div class="l-sub-section">
-
 アプリケーションのビューの間を移動するのに必要なサービスプロバイダーおよびディレクティブを提供する、
 独立した[Angularモジュール](guide/glossary#ngmodule)です。
 
 詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
-
-</div>
 
 ## Routing component
 _ルーティングコンポーネント_

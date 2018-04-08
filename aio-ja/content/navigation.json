@@ -371,7 +371,8 @@
         {
           "url": "guide/language-service",
           "title": "Language Service",
-          "tooltip": "Use Angular Language Service to speed up dev time."
+          "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
+          "translated": true
         },
         {
           "url": "guide/security",

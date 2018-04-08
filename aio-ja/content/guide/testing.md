@@ -1,10 +1,10 @@
 {@a top}
-# Testing
+# テスト
 
-This guide offers tips and techniques for unit and integration testing Angular applications.
+このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
 
-The guide presents tests of a sample CLI application that is much like the [_Tour of Heroes_ tutorial](tutorial).
-The sample application and all tests in this guide are available for inspection and experimentation:
+このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
+サンプルアプリケーションとこのガイドのすべてのテストは、インスペクション、テスト、およびダウンロードの実例として利用できます。
 
 * <live-example embedded-style>Sample app</live-example>
 * <live-example stackblitz="specs">Tests</live-example>
@@ -13,10 +13,10 @@ The sample application and all tests in this guide are available for inspection 
 
 ## Setup
 
-The Angular CLI downloads and install everything you need to test an Angular application with the [Jasmine test framework](http://jasmine.github.io/2.4/introduction.html).
+Angular CLI は、[Jasmine test framework](http://jasmine.github.io/2.4/introduction.html)を使用して Angular アプリケーションをテストするために必要なものすべてをダウンロードしてインストールします。
 
-The project you create with the CLI is immediately ready to test.
-Just run this one CLI command:
+CLI を使用して作成したプロジェクトは、すぐにテストする準備ができています。
+この1つのCLIコマンドを実行するだけです。
 
 <code-example language="sh" class="code-shell">
   ng test
@@ -25,7 +25,9 @@ Just run this one CLI command:
 The `ng test` command builds the app in _watch mode_,
 and launches the [karma test runner](https://karma-runner.github.io/1.0/index.html).
 
-The console output looks a bit like this:
+`ng test` コマンドは _watch mode_ でアプリをビルドし、 [karma test runner](https://karma-runner.github.io/1.0/index.html) を起動します。
+
+コンソールの出力はこのように表示されます。
 
 <code-example language="sh" class="code-shell">
 10% building modules 1/1 modules 0 active
@@ -36,36 +38,43 @@ The console output looks a bit like this:
 Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 </code-example>
 
-The last line of the log is the most important. 
-It shows that Karma ran three tests that all passed.
+ログの最後の行が最も重要です。
+それは Karma がすべて3つのテストを実行したことを示しています。
 
-A chrome browser also opens and displays the test output in the "Jasmine HTML Reporter" like this.
+chrome ブラウザも開き、このように "Jasmine HTML .Reporter" にテスト出力を表示します。
 
 <figure>
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
 </figure>
 
-Most people find this browser output easier to read than the console log.
-You can click on a test row to re-run just that test or click on a description to re-run the tests in the selected test group ("test suite").
+ほとんどの人は、このブラウザの出力がコンソールログより読みやすくなっています。
+テスト行をクリックしてそのテストだけを再実行するか、説明をクリックして、選択したtest group ("test suite")でテストを再実行することができます。
 
-Meanwhile, the `ng test` command is watching for changes.
+一方、 `ng test` コマンドは変更を監視しています。
 
-To see this in action, make a small change to `app.component.ts` and save.
-The tests run again, the browser refreshes, and the new test results appear.
+この動作を確認するには、 `app.component.ts` を少し変更して保存します。
+テストが再度実行され、ブラウザがリフレッシュされ、新しいテスト結果が表示されます。
 
-#### Configuration
+#### 構成
 
 The CLI takes care of Jasmine and karma configuration for you.
 
 You can fine-tune many options by editing the `karma.conf.js` file in the project root folder and
 the `test.ts` file in the `src/` folder.
 
+<<<<<<< HEAD
+### ツールと技術
+
+様々なツールとテクノロジを使用して、Angular テストを作成して実行できます。  
+このガイドでは、正常動作することが分かっている特定の選択肢について説明します。
+=======
 The `karma.conf.js` file is a partial karma configuration file.
 The CLI constructs the full runtime configuration in memory,based on application structure specified in the `.angular-cli.json` file, supplemented by `karma.conf.js`.
 
 Search the web for more details about Jasmine and karma configuration.
 
 #### Other test frameworks
+>>>>>>> upstream/master
 
 You can also unit test an Angular app with other testing libraries and test runners.
 Each library and runner has its own distinctive installation procedures, configuration, and syntax.
@@ -80,9 +89,19 @@ The CLI generated a test file for the `AppComponent` named `app.component.spec.t
 
 <div class="alert is-important">
 
+<<<<<<< HEAD
+    <th>
+      技術
+    </th>
+
+    <th>
+      目的
+    </th>
+=======
 The test file extension **must be `.spec.ts`** so that tooling can identify it as a file with tests (AKA, a _spec_ file).
 
 </div>
+>>>>>>> upstream/master
 
 The `app.component.ts` and `app.component.spec.ts` files  are siblings in the same folder.
 The root file names (`app.component`) are the same for both files. 
@@ -97,7 +116,14 @@ written without assistance from Angular testing utilities.
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="ValueService" title="app/demo/demo.spec.ts"></code-example>
 
+<<<<<<< HEAD
+      [Jasmine テスト フレームワーク](http://jasmine.github.io/2.4/introduction.html)は、
+      基本的なテストを書くために必要なすべてを提供します。  
+      ブラウザにテストを実行するHTMLテストランナーが同梱されています。
+    </td>
+=======
 {@a services-with-dependencies}
+>>>>>>> upstream/master
 
 #### Services with dependencies
 
@@ -105,13 +131,25 @@ Services often depend on other services that Angular injects into the constructo
 In many cases, it easy to create and _inject_ these dependencies by hand while
 calling the service's constructor.
 
+<<<<<<< HEAD
+    <td style="vertical-align: top">
+      Angular テスト ユーティリティ
+    </td>
+=======
 The `MasterService` is a simple example:
+>>>>>>> upstream/master
 
 <code-example path="testing/src/app/demo/demo.ts" region="MasterService" title="app/demo/demo.ts" linenums="false"></code-example>
 
 `MasterService` delegates its only method, `getValue`, to the injected `ValueService`.
 
+<<<<<<< HEAD
+      テスト中のAngularアプリケーションコードの場合、Angular テストユーティリティがテスト環境を作成します。  
+      それらを使用してアプリケーションの部分を調整、制御して Angular 環境と相互利用します。
+    </td>
+=======
 Here are several ways to test it.
+>>>>>>> upstream/master
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="MasterService" title="app/demo/demo.spec.ts"></code-example>
 
@@ -127,7 +165,14 @@ on the pertinent service method.
 
 Prefer spies as they are usually the easiest way to mock services.
 
+<<<<<<< HEAD
+      [karma テストランナー](https://karma-runner.github.io/1.0/index.html)は、アプリケーションの開発中に単体テストを作成し実行するのに理想的です。
+      プロジェクトの開発および継続的な統合プロセスの不可欠な部分となります。  
+      このガイドでは、 karma でテストを設定して実行する方法について説明します。
+    </td>
+=======
 </div>
+>>>>>>> upstream/master
 
 These standard testing techniques are great for unit testing services in isolation.
 
@@ -145,9 +190,17 @@ And if that dependent service has its own dependencies, DI finds-or-creates them
 As service _consumer_, you don't worry about any of this.
 You don't worry about the order of constructor arguments or how they're created.
 
+<<<<<<< HEAD
+      protractor は、  _end-to-end_ (e2e) テストを作成、実行する時に使います。
+      End-to-end は、アプリケーションが _ユーザーが操作したような動作を行います。_
+      e2e テストで、 第1のプロセスが実際のアプリケーションを実行され、
+      第2のプロセスは、ユーザ挙動をシミュレートする protractor テストを実行し、
+      アプリケーションが期待どおりにブラウザで応答することを通知します。
+=======
 As a service _tester_, you must at least think about the first level of service dependencies
 but you _can_ let Angular DI do the service creation and deal with constructor argument order
 when you use the `TestBed` testing utility to provide and create services.
+>>>>>>> upstream/master
 
 {@a testbed}
 
@@ -170,6 +223,23 @@ array of the services that you'll test or mock.
 
 Then inject it inside a test by calling `TestBed.get()` with the service class as the argument.
 
+<<<<<<< HEAD
+### セットアップ
+
+ユニットテストを開始するには、2つの方法があります。
+
+1. [セットアップ](guide/setup "セットアップ") の指示に従って新しいプロジェクトを作成します。
+
+1. <a href="https://github.com/angular/angular-cli/blob/master/README.md" title="Angular CLI">Angular CLI</a> で新しいプロジェクトを作成します。
+
+どちらの方法でも、npmパッケージ、ファイル、およびアプリケーション用に事前設定されたスクリプトがインストールされます。
+それぞれの方法で構築されています。
+生成物と手順はわずかに異なりますが、それらの本質は同じです。
+テストコードに違いはありません。
+
+このガイドでは、アプリケーションとそのテストは [セットアップ手順](guide/setup "セットアップ") に基づいています。  
+ユニットテストのセットアップファイルの説明については、[以下を参照してください](guide/testing#setup-files)。
+=======
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
   region="value-service-inject-it">
@@ -190,6 +260,7 @@ In the following example, the mock is a spy object.
   path="testing/src/app/demo/demo.testbed.spec.ts" 
   region="master-service-before-each" linenums="false">
 </code-example>
+>>>>>>> upstream/master
 
 The test consumes that spy in the same way it did earlier.
 
@@ -201,6 +272,30 @@ The test consumes that spy in the same way it did earlier.
 {@a no-before-each}
 #### Testing without _beforeEach()_
 
+<<<<<<< HEAD
+### 単体テストと Angular テストユーティリティ
+
+[単体テスト](guide/testing#isolated-unit-tests "Angular テストユーティリティを使用しない単体テスト")
+Angular に対する依存性又は注入された値に関わりなく、すべてのクラスのインスタンスを単独で調べます。
+テスタはクラスのテストインスタンスを `new` で作成し、必要に応じてコンストラクタパラメータのテストダブルを提供します。
+テストインスタンスの API 面 を厳密にテストします。
+
+*pipes と services の単体テストを記述する必要があります。*
+
+コンポーネントを個別にテストすることもできます。
+しかし、単体テストでは、コンポーネントが Angular とどのように対話するかは明確になりません。
+特に、コンポーネントクラスがそれ自身のテンプレートや他のコンポーネントとどのようにやり取りするかを明らかにすることはできません。
+
+このようなテストでは、 **Angular テストユーティリティ**が必要です。
+Angularテストユーティリティには `TestBed` クラスと `@angular/core/testing` のいくつかのヘルパー関数が含まれています。
+このガイドの主な焦点であり、あなたはそれらについて学びます
+それは、[最初のコンポーネントテストを書く時](guide/testing#simple-component-test)です。
+
+Angular テストユーティリティの包括的なレビューは、[このガイドの後半](guide/testing#atu-apis)に記載されています。
+
+しかし、まず、テスト環境が適切に設定されていることを確認するためのダミーテストを作成する必要があります。
+いくつかの基本的なテストスキルを確保することができます。
+=======
 Most test suites in this guide call `beforeEach()` to set the preconditions for each `it()` test
 and rely on the `TestBed` to create classes and inject services.
 
@@ -221,6 +316,7 @@ The `setup()` function returns an object literal
 with the variables, such as `masterService`, that a test might reference.
 You don't define _semi-global_ variables (e.g., `let masterService: MasterService`) 
 in the body of the `describe()`.
+>>>>>>> upstream/master
 
 Then each test invokes `setup()` in its first line, before continuing
 with steps that manipulate the test subject and assert expectations.
@@ -242,6 +338,13 @@ to extract the setup variables that it needs.
 Many developers feel this approach is cleaner and more explicit than the
 traditional `beforeEach()` style.
 
+<<<<<<< HEAD
+## 初めての karma テスト
+
+簡単なテストから始め、セットアップが適切に動作することを確認します。
+
+アプリケーションルートフォルダに `1st.spec.ts` という名前の新しいファイルを作成します、 `src/app/`
+=======
 Although this testing guide follows the tradition style and 
 the default [CLI schematics](https://github.com/angular/devkit) 
 generate test files with `beforeEach()` and `TestBed`,
@@ -251,6 +354,7 @@ feel free to adopt _this alternative approach_ in your own projects.
 
 Data services that make HTTP calls to remote servers typically inject and delegate 
 to the Angular [`HttpClient`](guide/http) service for XHR calls.
+>>>>>>> upstream/master
 
 You can test a data service with an injected `HttpClient` spy as you would
 test any service with a dependency.
@@ -269,9 +373,15 @@ assert that the method succeeds or fails.
 The `subscribe()` method takes a success and fail callback.
 Make sure you provide _both_ callbacks so that you capture errors.
 
+<<<<<<< HEAD
+Jasmine で書かれたテストは _specs_ と呼ばれます。  
+**ファイル名の拡張子は、 `.spec.ts` でなければなりません。**  
+`karma.conf.js` やその他のツールで、遵守しています。
+=======
 Neglecting to do so produces an asynchronous uncaught observable error that
 the test runner will likely attribute to a completely different test.
 
+>>>>>>> upstream/master
 </div>
 
 #### _HttpClientTestingModule_
@@ -279,7 +389,34 @@ the test runner will likely attribute to a completely different test.
 Extended interactions between a data service and the `HttpClient` can be complex
 and difficult to mock with spies.
 
+<<<<<<< HEAD
+**spec ファイルを `src/app/` フォルダのどこかに置いてください。**  
+`karma.conf.js` が karma に spec ファイルを探しすよう指示します。   
+[以下の理由](guide/testing#q-spec-file-location)について説明されています。
+
+`src/app/1st.spec.ts` に以下のコードを追加してください。
+
+<code-example path="testing/src/app/1st.spec.ts" title="src/app/1st.spec.ts" linenums="false"></code-example>
+
+{@a run-karma}
+
+
+### karma の実行
+次のコマンドを使用して、コマンドラインから karma でコンパイルして実行します。
+
+<code-example format="." language="bash">
+  npm test
+</code-example>
+
+
+
+コマンドはアプリケーションとテストコードをコンパイルし、 karma を開始します。  
+どちらのプロセスも関連のァイルを監視し、コンソールにメッセージを書き込み、変更を検出したときに再実行します。
+
+<div class="l-sub-section">
+=======
 The `HttpClientTestingModule` can make these testing scenarios more manageable.
+>>>>>>> upstream/master
 
 While the _code sample_ accompanying this guide demonstrates `HttpClientTestingModule`,
 this page defers to the [Http guide](guide/http#testing-http-requests),
@@ -287,19 +424,34 @@ which covers testing with the `HttpClientTestingModule` in detail.
 
 <div class="alert is-helpful">
 
+<<<<<<< HEAD
+ドキュメントのセットアップでは、 npm の `package.json` の `scripts` セクションに  
+`test`コマンドが定義されています。  
+Angular CLIには、同じことをするためのコマンドがあります。  
+それに応じて調整してください。
+=======
 This guide's sample code also demonstrates testing of the _legacy_ `HttpModule`
 in `app/model/http-hero.service.spec.ts`.
 
+>>>>>>> upstream/master
 </div>
 
 
 ## Component Test Basics
 
+<<<<<<< HEAD
+しばらくすると、 karma はブラウザを開き、コンソールに出力し始めます。
+
+<figure>
+  <img src='generated/images/guide/testing/karma-browser.png' alt="Karma browser">
+</figure>
+=======
 A component, unlike all other parts of an Angular application,
 combines an HTML template and a TypeScript class.
 The component truly is the template and the class _working together_.
 and to adequately test a component, you should test that they work together
 as intended.
+>>>>>>> upstream/master
 
 Such tests require creating the component's host element in the browser DOM,
 as Angular does, and investigating the component class's interaction with
@@ -309,7 +461,12 @@ The Angular `TestBed` facilitates this kind of testing as you'll see in the sect
 But in many cases, _testing the component class alone_, without DOM involvement,
 can validate much of the component's behavior in an easier, more obvious way.
 
+<<<<<<< HEAD
+ブラウザを隠す（閉じないでください！）コンソール出力に焦点を当てます。  
+次のようになります。
+=======
 ### Component class testing
+>>>>>>> upstream/master
 
 Test a component class on its own as you would test a service class.
 
@@ -330,10 +487,25 @@ To test a service with no dependencies, you create it with `new`, poke at its AP
 and assert expectations on its public state.
 Do the same with the component class.
 
+<<<<<<< HEAD
+コンパイラと karma の両方が実行し続けます。  
+コンパイラの出力は `[0]`で始まります。  
+karma は `[1]`によって出力されます。
+
+期待値を `true` から `false`に変更してください。
+
+_コンパイラ_ウォッチャーは、変更を検出し、再コンパイルします。
+
+<code-example format="." language="bash">
+  [0] 1:49:21 PM - File change detected. Starting incremental compilation...
+  [0] 1:49:25 PM - Compilation complete. Watching for file changes.
+
+=======
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
   region="Lightswitch" 
   title="app/demo/demo.spec.ts (Lightswitch tests)" linenums="false">
+>>>>>>> upstream/master
 </code-example>
 
 Here is the `DashboardHeroComponent` from the _Tour of Heroes_ tutorial.
@@ -344,9 +516,13 @@ Here is the `DashboardHeroComponent` from the _Tour of Heroes_ tutorial.
   title="app/dashboard/dashboard-hero.component.ts (component)" linenums="false">
 </code-example>
 
+<<<<<<< HEAD
+_karma_ ウォッチャーはコンパイル出力の変更を検出し、テストを再実行します。
+=======
 It appears within the template of a parent component,
 which binds a _hero_ to the `@Input` property and
 listens for an event raised through the _selected_ `@Output` property.
+>>>>>>> upstream/master
 
 You can test that the class code works without creating the the `DashboardHeroComponent`
 or its parent component.
@@ -362,11 +538,18 @@ create the component and its dependencies.
 
 The following `WelcomeComponent` depends on the `UserService` to know the name of the user to greet.
 
+<<<<<<< HEAD
+もちろん失敗します。
+
+期待値を `false` からの `true` に戻します。  
+どちらのプロセスも変化を検出、再実行し、 karma は完全な成功を報告します。
+=======
 <code-example 
   path="testing/src/app/welcome/welcome.component.ts" 
   region="class"
   title="app/welcome/welcome.component.ts" linenums="false">
 </code-example>
+>>>>>>> upstream/master
 
 You might start by creating a mock of the `UserService` that meets the minimum needs of this component.
 
@@ -378,6 +561,11 @@ You might start by creating a mock of the `UserService` that meets the minimum n
 
 Then provide and inject _both the_ **component** _and the service_ in the `TestBed` configuration.
 
+<<<<<<< HEAD
+コンソールログはかなり長くなる可能性があります。  
+最後の行に注目してください。  
+すべてがうまくいくと、それは `SUCCESS` と読みます。
+=======
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
   region="class-only-before-each" 
@@ -385,6 +573,7 @@ Then provide and inject _both the_ **component** _and the service_ in the `TestB
 </code-example>
 
 Then exercise the component class, remembering to call the [lifecycle hook methods](guide/lifecycle-hooks) as Angular does when running the app.
+>>>>>>> upstream/master
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -405,6 +594,19 @@ respond to user input and gestures, or integrate with its parent and and child c
 None of the _class-only_ tests above can answer key questions about how the
 components actually behave on screen.
 
+<<<<<<< HEAD
+### デバッグのテスト
+
+アプリケーションをデバッグするのと同じ方法で、ブラウザの仕様をデバッグします。
+
+  1. karma のブラウザウィンドウを表示します（前に隠れています）。
+  1. **DEBUG** ボタンをクリックします。新しいブラウザタブを開き、テストを再実行します。
+  1. ブラウザの「開発者ツール」（ Windows では `Ctrl-Shift-I` 、OSX では `Command-Option-I` ）を開きます。
+  1. "Sources" セクションを選択します。
+  1. `1st.spec.ts` テストファイル（ Control / Command-P を開き、ファイル名の入力を開始します。）を開きます。
+  1. テストにブレークポイントを設定します。
+  1. ブラウザを更新すると、ブレークポイントで停止します。
+=======
 * Is `Lightswitch.clicked()` bound to anything such that the user can invoke it?
 * Is the `Lightswitch.message` displayed?
 * Can the user actually select the hero displayed by `DashboardHeroComponent`?
@@ -424,6 +626,7 @@ behave as expected.
 
 To write these kinds of test, you'll use additional features of the `TestBed`
 as well as other testing helpers.
+>>>>>>> upstream/master
 
 #### CLI-generated tests
 
@@ -446,10 +649,18 @@ It also generates an initial test file for the component, `banner-external.compo
 
 #### Reduce the setup
 
+<<<<<<< HEAD
+## component のテスト
+
+Angular コンポーネントは、ほとんどの開発者が最初にテストしたいものです。  
+`src/app/banner-inline.component.ts` の `BannerComponent` は、このアプリケーションでは最も単純なコンポーネントであり、開始するのに適しています。  
+これは `<h1>` タグ内で画面上部にアプリケーションのタイトルを表示します。
+=======
 Only the last three lines of this file actually test the component
 and all they do is assert that Angular can create the component.
 
 The rest of the file is boilerplate setup code anticipating more advanced tests that _might_ become necessary if the component evolves into something substantial.
+>>>>>>> upstream/master
 
 You'll learn about these advanced test features below.
 For now, you can radically reduce this test file to a more manageable size:
@@ -463,6 +674,17 @@ For now, you can radically reduce this test file to a more manageable size:
 In this example, the metadata object passed to `TestBed.configureTestingModule` 
 simply declares `BannerComponent`, the component to test.
 
+<<<<<<< HEAD
+このバージョンの `BannerComponent` には、インラインテンプレートと補完バインディングがあります。
+このコンポーネントは実際にはテストする価値があるとは言い難いですが、Angular テストユーティリティを最初に経験するには最適です。
+
+対応する `src/app/banner-inline.component.spec.ts` はコンポーネントと同じフォルダにあります。  
+理由は [FAQ](guide/testing#faq) の答えで説明されています。  
+[なぜテストするものと同じ場所にスペックを置くのか？](guide/testing#q-spec-file-location)
+
+
+スペックで参照されているシンボルにアクセスするには、 ES6 のインポートステートメントから始めます。
+=======
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="configureTestingModule">
@@ -473,6 +695,7 @@ simply declares `BannerComponent`, the component to test.
 There's no need to declare or import anything else.
 The default test module is pre-configured with 
 something like the `BrowserModule` from `@angular/platform-browser`.
+>>>>>>> upstream/master
 
 Later you'll call `TestBed.configureTestingModule()` with
 imports, providers, and more declarations to suit your testing needs.
@@ -486,10 +709,14 @@ Optional `override` methods can further fine-tune aspects of the configuration.
 
 After configuring `TestBed`, you call its `createComponent()` method.
 
+<<<<<<< HEAD
+テストに先立って `describe` と `beforeEach` があります：
+=======
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="createComponent">
 </code-example>
+>>>>>>> upstream/master
 
 `TestBed.createComponent()` creates an instance of the `BannerComponent`, 
 adds a corresponding element to the test-runner DOM,
@@ -508,20 +735,41 @@ If you try, `TestBed` throws an error.
 
 </div>
 
+<<<<<<< HEAD
+`TestBed` はAngular テストユーティリティの中で最も重要なものです。
+Angular テストモジュールを作成する &mdash; `@NgModule` クラス &mdash;
+ `configureTestingModule` メソッドで設定して、テストするクラスのモジュール環境を作ります。
+
+実際には、テストされたコンポーネントを独自のアプリケーションモジュールから切り離し、動的に構築された Angular テストモジュールに再接続する為に一組のテストが特別に調整されています。
+
+`configureTestingModule` メソッドは　`@NgModule` のようなメタデータオブジェクトを取ります。  
+メタデータオブジェクトは、通常の [NgModule](guide/ngmodules) のプロパティのほとんどを持つことができます。
+
+_メタデータオブジェクト_は、単にテストするコンポーネント、 `BannerComponent` を宣言します。  
+メタデータには、 `imports` がありません。  
+なぜなら、 (a) デフォルトのテストモジュールは、既に `BannerComponent` に必要なの設定がされており、 (b) `BannerComponent` は他のコンポーネントと対話しません。
+=======
 {@a component-fixture}
 
 #### _ComponentFixture_
 
 The [ComponentFixture](api/core/testing/ComponentFixture) is a test harness for interacting with the created component and its corresponding element.
+>>>>>>> upstream/master
 
 Access the component instance through the fixture and confirm it exists with a Jasmine expectation:
 
+<<<<<<< HEAD
+`beforeEach` の中で、 `configureTestingModule` を呼び出すと `TestBed` は、各テストが実行される前にそれ自身を基本状態にリセットすることができます。
+
+基本状態には、殆どの誰もが必要とする宣言（components, directives, pipes）と provider （それらの一部の mock ）からなるデフォルトのテストモジュール構成が含まれます。
+=======
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="componentInstance">
 </code-example>
 
 #### _beforeEach()_
+>>>>>>> upstream/master
 
 You will add more tests as this component evolves.
 Rather than duplicate the `TestBed` configuration for each test,
@@ -536,10 +784,14 @@ you refactor to pull the setup into a Jasmine `beforeEach()` and some supporting
 Now add a test that gets the component's element from `fixture.nativeElement` and 
 looks for the expected text.
 
+<<<<<<< HEAD
+[後述](guide/testing#testbed-methods)のテスト shims は、テストモジュールの設定を `@angular/platform-browser` の `BrowserModule` のようなものに初期化します。
+=======
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v4-test-2">
 </code-example>
+>>>>>>> upstream/master
 
 {@a native-element}
 
@@ -548,6 +800,12 @@ looks for the expected text.
 The value of `ComponentFixture.nativeElement` has the `any` type.
 Later you'll encounter the `DebugElement.nativeElement` and it too has the `any` type.
 
+<<<<<<< HEAD
+このデフォルト設定は、単にアプリケーションをテストするためのものです。
+後で、アプリケーションテストに合う追加のインポート、宣言、プロバイダ、スキーマを定義するメタデータを含む  `TestBed.configureTestingModule` を呼び出します。
+
+オプションの `override` メソッドは、設定を微調整できます。
+=======
 Angular can't know at compile time what kind of HTML element the `nativeElement` is or 
 if it even is an HTML element.
 The app might be running on a _non-browser platform_, such as the server or a
@@ -557,6 +815,7 @@ where the element may have a diminished API or not exist at all.
 The tests in this guide are designed to run in a browser so a
 `nativeElement` value will always be an `HTMLElement` or 
 one of its derived classes. 
+>>>>>>> upstream/master
 
 Knowing that it is an `HTMLElement` of some sort, you can use
 the standard HTML `querySelector` to dive deeper into the element tree.
@@ -568,9 +827,14 @@ Here's another test that calls `HTMLElement.querySelector` to get the paragraph 
   region="v4-test-3">
 </code-example>
 
+<<<<<<< HEAD
+`TestBed` を設定後、 _component-under-test_ のインスタンスを作成するように指示します。  
+この例では、 `TestBed.createComponent` は `BannerComponent` のインスタンスを作成し、 [_component test fixture_](guide/testing#component-fixture) を返します。
+=======
 {@a debug-element}
 
 #### _DebugElement_
+>>>>>>> upstream/master
 
 The Angular _fixture_ provides the component's element directly through the `fixture.nativeElement`.
 
@@ -581,12 +845,16 @@ The Angular _fixture_ provides the component's element directly through the `fix
 
 This is actually a convenience method, implemented as `fixture.debugElement.nativeElement`.
 
+<<<<<<< HEAD
+`createComponent` を呼び出した後、 `TestBed` を再設定しないでください。
+=======
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="debugElement-nativeElement">
 </code-example>
 
 There's a good reason for this circuitous path to the element.
+>>>>>>> upstream/master
 
 The properties of the `nativeElement` depend upon the runtime environment.
 You could be running these tests on a _non-browser_ platform that doesn't have a DOM or 
@@ -600,12 +868,18 @@ Because the sample tests for this guide are designed to run only in a browser,
 a `nativeElement` in these tests is always an `HTMLElement`
 whose familiar methods and properties you can explore within a test.
 
+<<<<<<< HEAD
+`createComponent` メソッドは、現在の `TestBed` インスタンスを閉じて、さらに設定を行います。  
+`configureTestingModule` や `override...`メソッドのいずれも `TestBed` 設定メソッドを呼び出すことはできません。  
+試してみると、 `TestBed`はエラーを投げます。
+=======
 Here's the previous test, re-implemented with `fixture.debugElement.nativeElement`:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v4-test-4">
 </code-example>
+>>>>>>> upstream/master
 
 The `DebugElement` has other methods and properties that
 are useful in tests, as you'll see elsewhere in this guide.

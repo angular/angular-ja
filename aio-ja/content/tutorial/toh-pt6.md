@@ -128,7 +128,7 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
 
 ブラウザをリフレッシュしましょう。ヒーローデータがモックサーバーから正しくロードされているはずです。
 
-`http.get`と`of`を取り替えましたが、
+`of`と`http.get`を取り替えましたが、
 どちらの関数も`Observable<Hero[]>`を返すので、
 アプリは他の変更を加えずに動作しています。
 
@@ -274,7 +274,7 @@ URLは変わりません。
 ヒーローWeb APIはヒーローの`id`を見てどのヒーローを更新すべきかを知ります。
 
 ヒーローWeb APIはHTTPの保存リクエストのとき特別なヘッダーを期待します。
-そのヘッダーは`HeroService`の定数`httpOption`で定義されています。
+そのヘッダーは`HeroService`の定数`httpOptions`で定義されています。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 

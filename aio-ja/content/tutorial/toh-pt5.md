@@ -233,7 +233,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 ### デフォルトルートを追加する
 
 アプリケーションが起動すると、ブラウザのアドレスバーはWebサイトのルートを指します。
-これは既存のルートと一致しないため、ルータはどこにも移動しません。
+これは既存のルートと一致しないため、ルーターはどこにも移動しません。
 `<router-outlet>`の下のスペースが空白になってしまうのです。
 
 アプリケーションをダッシュボードに自動的に遷移するには、次のルートを
@@ -244,7 +244,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 このルートは、空のパスと完全に一致するURLを、パスが`'/dashboard'`であるルートにリダイレクトします。
 
-ブラウザが更新されると、ルータは`DashboardComponent`をロードし、
+ブラウザが更新されると、ルーターは`DashboardComponent`をロードし、
 ブラウザのアドレスバーには `/dashboard`の URL が表示されます。
 
 ### ダッシュボードのリンクをシェルに追加する
@@ -378,7 +378,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `HeroDetailComponent`がヒーローを表示していました。
 
 もう`HeroesComponent`はこれをやりません。
-今は、ルータが `~/detail/11`のような URL に応答して`HeroDetailComponent`を作成します。
+今は、ルーターが `~/detail/11`のような URL に応答して`HeroDetailComponent`を作成します。
 
 `HeroDetailComponent`は_表示するヒーロー_を得るための新しい方法が必要です。
 
@@ -597,7 +597,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 * さまざまなコンポーネント間を行き来するためにAngularルーターを追加しました。
 * `AppComponent`を、`<a>`リンクと`<router-outlet>`をもつナビゲーション・シェルに変更しました。
-* `AppRoutingModule`でルータを設定しました。
+* `AppRoutingModule`でルーターを設定しました。
 * シンプルなルート、リダイレクトするルート、およびパラメータ付きルートを定義しました。
 * アンカー要素で`routerLink`ディレクティブを使用しました。
 * 密接に結合されたmaster/detailビューをルート化した詳細ビューにリファクタリングしました。

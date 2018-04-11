@@ -139,13 +139,14 @@
       "tooltip": "Angularの基礎",
       "children": [
         {
-          "title": "Architecture",
-          "tooltip": "The basic building blocks of Angular applications.",
+          "title": "アーキテクチャ",
+          "tooltip": "Angularアプリケーションの基本構成要素",
           "children": [
             {
               "url": "guide/architecture",
-              "title": "Architecture Overview",
-              "tooltip": "Basic building blocks of Angular applications."
+              "title": "アーキテクチャ概要",
+              "tooltip": "Angularアプリケーションの基本構成要素",
+              "translated": true
             },
             {
               "url": "guide/architecture-modules",

@@ -1,7 +1,7 @@
 # Angular Language Service
 
 Angular Language Serviceは、HTMLファイルの外部にあるか、
-または文字列内のアノテーション/デコレータに埋め込まれているかにかかわらず、
+または文字列内のアノテーション/デコレーターに埋め込まれているかにかかわらず、
 Angularテンプレート内で補完、エラー、ヒント、およびナビゲーションを取得する方法です。
 Angular Language Serviceは、Angularファイルを開いたことを自動検出し、
 `tsconfig.json`ファイルを読み込み、アプリケーションの中のすべてのテンプレートを見つけ、

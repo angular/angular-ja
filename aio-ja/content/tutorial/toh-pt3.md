@@ -44,7 +44,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import Hero)">
 </code-example>
 
-`hero` プロパティは `@Input()` デコレータで注釈された[ _Input_ プロパティでなければなりません](guide/template-syntax#inputs-outputs "Input and Output properties")。
+`hero` プロパティは `@Input()` デコレーターで注釈された[ _Input_ プロパティでなければなりません](guide/template-syntax#inputs-outputs "Input and Output properties")。
 これは、_外部の_ `HeroesComponent` がこのようにバインドするためです。
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding">
@@ -55,7 +55,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" title="src/app/hero-detail/hero-detail.component.ts (import Input)" linenums="false">
 </code-example>
 
-`@Input()` デコレータが前に付いた `hero` プロパティを追加します。
+`@Input()` デコレーターが前に付いた `hero` プロパティを追加します。
 
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="input-hero"  linenums="false">
 </code-example>

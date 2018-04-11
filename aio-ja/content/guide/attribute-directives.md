@@ -52,9 +52,9 @@ _ディレクティブ_ は、 _コンポーネント_ と同じ方法で[Angul
 
 <code-example path="attribute-directives/src/app/highlight.directive.0.ts" title="src/app/highlight.directive.ts"></code-example>
 
-インポートされた`Directive`シンボルは、Angularの`@Directive`デコレータを提供します。
+インポートされた`Directive`シンボルは、Angularの`@Directive`デコレーターを提供します。
 
-`@Directive`デコレータの唯一の設定プロパティは、ディレクティブの[CSS属性セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)`[appHighlight]`を指定します。
+`@Directive`デコレーターの唯一の設定プロパティは、ディレクティブの[CSS属性セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)`[appHighlight]`を指定します。
 
 属性セレクタとして扱うには、角括弧（`[]`）を使います。Angularは、テンプレート内の`appHighlight`という名前の属性をもつ各要素を見つけ、その要素にこのディレクティブのロジックを適用します。
 
@@ -110,11 +110,11 @@ ng serve
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (imports)" region="imports"></code-example>
 
-次に、マウスの出入りに応答する2つのイベントハンドラを追加します。それぞれのイベントハンドラは、`HostListener`デコレータによって装飾されます。
+次に、マウスの出入りに応答する2つのイベントハンドラを追加します。それぞれのイベントハンドラは、`HostListener`デコレーターによって装飾されます。
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (mouse-methods)" region="mouse-methods"></code-example>
 
-`@HostListener`デコレータは、属性ディレクティブをホストする要素（この場合は`<p>`）DOM要素のイベントに登録することができます。
+`@HostListener`デコレーターは、属性ディレクティブをホストする要素（この場合は`<p>`）DOM要素のイベントに登録することができます。
 
 <div class="l-sub-section">
 
@@ -160,7 +160,7 @@ ng serve
 
 ### `@Input`プロパティへのバインド
 
-`@Input`デコレータに注目してください。ディレクティブの`highlightColor`プロパティをバインディングに使用できるように、クラスへメタデータを追加します。
+`@Input`デコレーターに注目してください。ディレクティブの`highlightColor`プロパティをバインディングに使用できるように、クラスへメタデータを追加します。
 
 *input*プロパティと呼ばれるのは、データがバインディング式からディレクティブ _へ_ 流れるためです。その入力メタデータがなければ、Angularは、バインディング拒否します。詳細は[以下](guide/attribute-directives#why-input "なぜ、@Inputを追加するのか？")を参照してください。
 
@@ -256,7 +256,7 @@ ng serve
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (defaultColor)" region="defaultColor"></code-example>
 
-Angularは、`@Input`デコレータで _パブリック_ にしたため、`defaultColor`が`HighlightDirective`に属していることを知っています。
+Angularは、`@Input`デコレーターで _パブリック_ にしたため、`defaultColor`が`HighlightDirective`に属していることを知っています。
 
 コーディングが完了したら、ハーネスがどのように機能するかを次に示します。
 
@@ -299,25 +299,25 @@ Angularは、`@Input`デコレータで _パブリック_ にしたため、`def
 
 <code-example path="attribute-directives/src/app/highlight.directive.ts" linenums="false" title="src/app/highlight.directive.ts (color)" region="color"></code-example>
 
-どちらも場合でも、`@Input`デコレータは、Angularにこのプロパティが _パブリック_ であり、親コンポーネントによるバインドが可能であることを伝えています。`@Input`がなければ、Angularはプロパティへバインドすることを拒否します。
+どちらも場合でも、`@Input`デコレーターは、Angularにこのプロパティが _パブリック_ であり、親コンポーネントによるバインドが可能であることを伝えています。`@Input`がなければ、Angularはプロパティへバインドすることを拒否します。
 
 テンプレートHTMLをコンポーネントへバインドしてから、`@Input`を使用したことはありません。
 その違いは何でしょうか？
 
-違いは、信頼の問題です。Angularは、コンポーネントのテンプレートをコンポーネントに属するものとして扱います。コンポーネントとそのテンプレートは、暗黙のうちに互いに信頼し合います。したがって、コンポーネントの独自のテンプレートは、`@Input`デコレータの有無にかかわらず、そのコンポーネントの任意のプロパティへバインドすることができます。
+違いは、信頼の問題です。Angularは、コンポーネントのテンプレートをコンポーネントに属するものとして扱います。コンポーネントとそのテンプレートは、暗黙のうちに互いに信頼し合います。したがって、コンポーネントの独自のテンプレートは、`@Input`デコレーターの有無にかかわらず、そのコンポーネントの任意のプロパティへバインドすることができます。
 
-しかし、コンポーネントやディレクティブは、他のコンポーネントやディレクティブを盲目的に信頼するべきではありません。コンポーネントやディレクティブのプロパティは、デフォルトではバインディングから隠されています。それらは、Angularのバインディング機構からは _プライベート_ です。`@Input`デコレータで装飾されると、プロパティはAngularのバインディング機構から _パブリック_ になります。その後、他のコンポーネントやディレクティブへバインドすることができます。
+しかし、コンポーネントやディレクティブは、他のコンポーネントやディレクティブを盲目的に信頼するべきではありません。コンポーネントやディレクティブのプロパティは、デフォルトではバインディングから隠されています。それらは、Angularのバインディング機構からは _プライベート_ です。`@Input`デコレーターで装飾されると、プロパティはAngularのバインディング機構から _パブリック_ になります。その後、他のコンポーネントやディレクティブへバインドすることができます。
 
 バインディング内のプロパティ名の位置によって`@Input`が必要かどうかを知ることができます。
 
-* 等式(=)の右側のテンプレート式に表示されている場合、それはテンプレートのコンポーネントに属し、`@Input`デコレータは必要ありません。
+* 等式(=)の右側のテンプレート式に表示されている場合、それはテンプレートのコンポーネントに属し、`@Input`デコレーターは必要ありません。
 
-* 等式(=)の左側に角括弧([])で表示されている場合、それは _他_ のコンポーネントやディレクティブに属し、そのプロパティは、`@Input`デコレータで飾らなければなりません。
+* 等式(=)の左側に角括弧([])で表示されている場合、それは _他_ のコンポーネントやディレクティブに属し、そのプロパティは、`@Input`デコレーターで飾らなければなりません。
 
 次に、その理屈を次の例に適用します。
 
 <code-example path="attribute-directives/src/app/app.component.html" linenums="false" title="src/app/app.component.html (color)" region="color"></code-example>
 
-* 右側の式の`color`プロパティは、テンプレートのコンポーネントに属します。テンプレートとそのコンポーネントは、お互いを信頼します。`color`プロパティは`@Input`デコレータを必要としません。
+* 右側の式の`color`プロパティは、テンプレートのコンポーネントに属します。テンプレートとそのコンポーネントは、お互いを信頼します。`color`プロパティは`@Input`デコレーターを必要としません。
 
-* 左側の`appHighlight`プロパティは、テンプレートのコンポーネントのプロパティではなく、`HighlightDirective`のエイリアス化されたプロパティを参照しています。これには信頼の問題があります。したがって、ディレクティブのプロパティは、`@Input`デコレータを持っている必要があります。
+* 左側の`appHighlight`プロパティは、テンプレートのコンポーネントのプロパティではなく、`HighlightDirective`のエイリアス化されたプロパティを参照しています。これには信頼の問題があります。したがって、ディレクティブのプロパティは、`@Input`デコレーターを持っている必要があります。

@@ -44,7 +44,7 @@
 _npm_から*インメモリWeb API*をインストールします。
 
 <code-example language="sh" class="code-shell">
-  npm install angular-in-memory-web-api --save
+  npm install angular-in-memory-web-api@0.5 --save
 </code-example>
 
 `InMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。

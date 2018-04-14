@@ -46,7 +46,7 @@ If you're _coding along_ with this tutorial, stay here and add the *In-memory We
 Install the *In-memory Web API* package from _npm_
 
 <code-example language="sh" class="code-shell">
-  npm install angular-in-memory-web-api --save
+  npm install angular-in-memory-web-api@0.5 --save
 </code-example>
 
 Import the `InMemoryWebApiModule` and the `InMemoryDataService` class, 

@@ -1,12 +1,11 @@
-# Displaying Data
+# データの表示
 
-You can display data by binding controls in an HTML template to properties of an Angular component.
+HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることで、データを表示できます。
 
-In this page, you'll create a component with a list of heroes.
-You'll display the list of hero names and
-conditionally show a message below the list.
+このページでは、ヒーローのリストを含むコンポーネントを作成します。
+あなたはヒーロー名のリストを表示し、条件付きでリストの下にメッセージを表示します。
 
-The final UI looks like this:
+最終的なUIは次のようになります：
 
 
 <figure>
@@ -17,8 +16,7 @@ The final UI looks like this:
 
 
 
-The <live-example></live-example> demonstrates all of the syntax and code
-snippets described in this page.
+<live-example></live-example> は、このページで説明しているすべての構文とコードスニペットを示しています。
 
 
 </div>
@@ -26,20 +24,19 @@ snippets described in this page.
 
 {@a interpolation}
 
-## Showing component properties with interpolation
-The easiest way to display a component property
-is to bind the property name through interpolation.
-With interpolation, you put the property name in the view template, enclosed in double curly braces: `{{myHero}}`.
+## 補間によるコンポーネントプロパティの表示
+コンポーネントプロパティを表示するもっとも簡単な方法は、
+補間によってプロパティ名をバインドすることです。
+補間では、プロパティ名をビューテンプレートに入れ、二重中括弧で囲みます： `{{myHero}}`
 
-Follow the [quickstart](guide/quickstart) instructions for creating a new project
-named <code>displaying-data</code>.
+[クイックスタート](guide/quickstart)の説明のとおりに、<code>displaying-data</code>
+という名前の新しいプロジェクトを作成します。
 
-Delete the <code>app.component.html</code> file. It is not needed for this example.
+<code>app.component.html</code>ファイルを削除します。この例では必要ありません。
 
-Then modify the <code>app.component.ts</code> file by
-changing the template and the body of the component.
+次に、テンプレートとコンポーネントの本体を変更して<code>app.component.ts</code>ファイルを変更します。
 
-When you're done, it should look like this:
+完了したら、このようになります。
 
 
 <code-example path="displaying-data/src/app/app.component.1.ts" title="src/app/app.component.ts">
@@ -48,10 +45,9 @@ When you're done, it should look like this:
 
 
 
-You added two properties to the formerly empty component: `title` and `myHero`.
+空のコンポーネントには、`title` と　`myHero` の2つのプロパティを追加しました。
 
-The template displays the two component properties using double curly brace
-interpolation:
+テンプレートは、二重中括弧補間を使用して2つのコンポーネントプロパティを表示します：
 
 
 <code-example path="displaying-data/src/app/app.component.1.ts" linenums="false" title="src/app/app.component.ts (template)" region="template">
@@ -64,38 +60,37 @@ interpolation:
 
 
 
-The template is a multi-line string within ECMAScript 2015 backticks (<code>\`</code>).
-The backtick (<code>\`</code>)&mdash;which is *not* the same character as a single
-quote (`'`)&mdash;allows you to compose a string over several lines, which makes the
-HTML more readable.
+テンプレートは、ECMAScript 2015バッククオート(<code>\`</code>)内の複数行の文字列です。
+一重引用符(`'`)と同じ文字ではないバッククオート(<code>\`</code>)&mdash;は複数行にわたって
+文字列を構成することができ、HTMLをより読みやすくします 。
 
 
 </div>
 
 
 
-Angular automatically pulls the value of the `title` and `myHero` properties from the component and
-inserts those values into the browser. Angular updates the display
-when these properties change.
+Angularは自動的にコンポーネントから `title` と `myHero` プロパティの値を取り出し、
+それらの値をブラウザに挿入します。
+Angularは、これらのプロパティが変更されると、表示を更新します。
 
 
 <div class="l-sub-section">
 
 
 
-More precisely, the redisplay occurs after some kind of asynchronous event related to
-the view, such as a keystroke, a timer completion, or a response to an HTTP request.
+より正確には、再表示は、キーストローク、タイマー完了、HTTPリクエストへの応答など、
+ビューに関連する何らかの非同期イベントの後に発生します。
 
 
 </div>
 
 
 
-Notice that you don't call **new** to create an instance of the `AppComponent` class.
-Angular is creating an instance for you. How?
+`AppComponent` クラスのインスタンスを作成するために、**new** を呼び出さないことに注目してください。
+Angularがインスタンスを作成しています。どのように？
 
-The CSS `selector` in the `@Component` decorator specifies an element named `<app-root>`.
-That element is a placeholder in the body of your `index.html` file:
+`@Component` デコレータの CSSセレクタは、`<app-root>` という名前の要素を指定します。
+その要素は `index.html` ファイルの本文のプレースホルダです：
 
 
 <code-example path="displaying-data/src/index.html" linenums="false" title="src/index.html (body)" region="body">
@@ -104,11 +99,11 @@ That element is a placeholder in the body of your `index.html` file:
 
 
 
-When you bootstrap with the `AppComponent` class (in <code>main.ts</code>), Angular looks for a `<app-root>`
-in the `index.html`, finds it, instantiates an instance of `AppComponent`, and renders it
-inside the `<app-root>` tag.
+`AppComponent` クラス（<code>main.ts</code>内）でブートストラップすると、
+Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
+`AppComponent` を呼び出して、 `<app-root>` タグの中にレンダリングします。
 
-Now run the app. It should display the title and hero name:
+今すぐアプリケーションを実行しましょう。 タイトルとヒーロー名が表示されます。
 
 <figure>
   <img src="generated/images/guide/displaying-data/title-and-hero.png" alt="Title and Hero">
@@ -116,26 +111,27 @@ Now run the app. It should display the title and hero name:
 
 
 
-The next few sections review some of the coding choices in the app.
+次のいくつかのセクションでは、アプリケーションのコーディングの選択肢のいくつかをレビューします。
 
 
-## Template inline or template file?
+## テンプレートインラインまたはテンプレートファイル？
 
-You can store your component's template in one of two places.
-You can define it *inline* using the `template` property, or you can define
-the template in a separate HTML file and link to it in
-the component metadata using the `@Component` decorator's `templateUrl` property.
+コンポーネントのテンプレートは、2つの場所のいずれかに格納できます。
+`template` プロパティを使って *インライン* で定義するか、
+あるいは別のHTMLファイルにテンプレートを定義し、
+`@Component` デコレータの `templateUrl` プロパティを使って
+コンポーネントのメタデータで紐付けられます。
 
-The choice between inline and separate HTML is a matter of taste,
-circumstances, and organization policy.
-Here the app uses inline HTML because the template is small and the demo
-is simpler without the additional HTML file.
+インラインHTMLと個別HTMLの選択は、好み、状況、および組織ポリシーの問題です。
+ここでは、テンプレートが小さく、追加のHTMLファイルなしでデモが簡単であるため、
+アプリケーションはインラインHTMLを使用します。
 
-In either style, the template data bindings have the same access to the component's properties.
+どちらのスタイルでも、テンプレートデータバインディングはコンポーネントのプロパティと同じアクセス権を持ちます。
 
 <div class="alert is-helpful">
-  
-  By default, the Angular CLI generates components with a template file. You can override that with:
+
+  デフォルトでは、Angular CLIはテンプレートファイルを使用してコンポーネントを生成します。
+  あなたはそれを次のようにオーバーライドできます：
 
   <code-example hideCopy language="sh" class="code-shell">
     ng generate component hero -it
@@ -144,9 +140,10 @@ In either style, the template data bindings have the same access to the componen
 </div>
 
 
-## Constructor or variable initialization?
+## コンストラクタまたは変数の初期化？
 
-Although this example uses variable assignment to initialize the components, you could instead declare and initialize the properties using a constructor:
+この例では、変数の割り当てを使用してコンポーネントを初期化していますが、
+コンストラクタを使用してプロパティを宣言して初期化することもできます。
 
 
 <code-example path="displaying-data/src/app/app-ctor.component.ts" linenums="false" region="class">
@@ -155,13 +152,14 @@ Although this example uses variable assignment to initialize the components, you
 
 
 
-This app uses more terse "variable assignment" style simply for brevity.
+このアプリは、簡潔にするために、より簡潔な「変数割り当て」スタイルを使用しています。
 
 {@a ngFor}
 
-## Showing an array property with ***ngFor**
+## ** *ngFor ** の配列プロパティを表示する
 
-To display a list of heroes, begin by adding an array of hero names to the component and redefine `myHero` to be the first name in the array.
+ヒーローのリストを表示するには、ヒーロー名の配列をコンポーネントに追加し、
+配列の最初の名前になるように `myHero` を再定義します。
 
 
 <code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" title="src/app/app.component.ts (class)" region="class">
@@ -170,8 +168,8 @@ To display a list of heroes, begin by adding an array of hero names to the compo
 
 
 
-Now use the Angular `ngFor` directive in the template to display
-each item in the `heroes` list.
+テンプレートのAngular `ngFor` ディレクティブを使用して、
+各項目を `heroes` リストに表示します。
 
 
 <code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" title="src/app/app.component.ts (template)" region="template">
@@ -180,9 +178,9 @@ each item in the `heroes` list.
 
 
 
-This UI uses the HTML unordered list with `<ul>` and `<li>` tags. The `*ngFor`
-in the `<li>` element is the Angular "repeater" directive.
-It marks that `<li>` element (and its children) as the "repeater template":
+このUIでは、HTMLの順序付けられていないリストを `<ul>`および `<li>`タグとともに使用します。
+`<li>` 要素の `*ngFor` はAngular 「繰り返し」 ディレクティブです。
+これは `<li>`要素（とその子要素）を「リピータテンプレート」としてマークします：
 
 
 <code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" title="src/app/app.component.ts (li)" region="li">
@@ -195,36 +193,35 @@ It marks that `<li>` element (and its children) as the "repeater template":
 
 
 
-Don't forget the leading asterisk (\*) in `*ngFor`. It is an essential part of the syntax.
-For more information, see the [Template Syntax](guide/template-syntax#ngFor) page.
+`*ngFor` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
+詳細については、[テンプレート構文](guide/template-syntax#ngFor) ページを参照してください.
 
 
 </div>
 
 
 
-Notice the `hero` in the `ngFor` double-quoted instruction;
-it is an example of a template input variable. Read
-more about template input variables in the [microsyntax](guide/template-syntax#microsyntax) section of
-the [Template Syntax](guide/template-syntax) page.
+`ngFor` 二重引用符命令の `hero` に注目してください。
+これはテンプレート入力変数の例です。
+さらに詳しいテンプレート入力変数につては、[テンプレート構文](guide/template-syntax) ページの
+[ミクロ構文](guide/template-syntax#microsyntax) セクションを読んでください。
 
-Angular duplicates the `<li>` for each item in the list, setting the `hero` variable
-to the item (the hero) in the current iteration. Angular uses that variable as the
-context for the interpolation in the double curly braces.
+Angularはリスト内の各項目の `<li>` を複製し、 `hero`　変数を現在の反復の項目（ヒーロー）に設定します。
+Angularはその変数を二重中括弧内の補間のコンテキストとして使用します。
 
 
 <div class="l-sub-section">
 
 
 
-In this case, `ngFor` is displaying an array, but `ngFor` can
-repeat items for any [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) object.
+この場合、 `ngFor` は配列を表示していますが、 `ngFor` は任意のオブジェクトの項目を繰り返すことができます。
+[繰り返し処理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 
 </div>
 
 
 
-Now the heroes appear in an unordered list.
+今、ヒーローは順不同のリストに表示されます。
 
 
 <figure>
@@ -234,22 +231,23 @@ Now the heroes appear in an unordered list.
 
 
 
-## Creating a class for the data
+## データのクラスを作成する
 
-The app's code defines the data directly inside the component, which isn't best practice.
-In a simple demo, however, it's fine.
+アプリケーションのコードは、コンポーネント内に直接データを定義しますが、これはベストプラクティスではありません。
+しかし、簡単なデモでは大丈夫です。
 
-At the moment, the binding is to an array of strings.
-In real applications, most bindings are to more specialized objects.
+現時点では、文字列の配列に対するバインドが行われます。
+実際のアプリケーションでは、ほとんどのバインディングはより特殊なオブジェクトになります。
 
-To convert this binding to use specialized objects, turn the array
-of hero names into an array of `Hero` objects. For that you'll need a `Hero` class:
+このバインディングを特殊なオブジェクトを使用するように変換するには、
+ヒーロー名の配列を `Hero` オブジェクトの配列に変換します。
+そのためには、 `Hero` クラスが必要です。
 
 <code-example language="sh" class="code-shell">
   ng generate class hero
 </code-example>
 
-With the following code:
+次のコードを使用します。
 
 
 <code-example path="displaying-data/src/app/hero.ts" linenums="false" title="src/app/hero.ts">
@@ -258,12 +256,12 @@ With the following code:
 
 
 
-You've defined a class with a constructor and two properties: `id` and `name`.
+コンストラクタと2つのプロパティ、 `id` と `name` をもつクラスを定義しました。
 
-It might not look like the class has properties, but it does.
-The declaration of the constructor parameters takes advantage of a TypeScript shortcut.
+クラスにプロパティがあるように見えないかもしれませんが、それはあります。
+コンストラクタパラメータの宣言は、TypeScriptのショートカットを利用します。
 
-Consider the first parameter:
+最初のパラメータを考えてみましょう：
 
 
 <code-example path="displaying-data/src/app/hero.ts" linenums="false" title="src/app/hero.ts (id)" region="id">
@@ -272,18 +270,18 @@ Consider the first parameter:
 
 
 
-That brief syntax does a lot:
+簡単な構文で多くのことをしています。：
 
-* Declares a constructor parameter and its type.
-* Declares a public property of the same name.
-* Initializes that property with the corresponding argument when creating an instance of the class.
+* コンストラクタパラメータとその型を宣言します。
+* 同じ名前のパブリックプロパティを宣言します。
+* クラスのインスタンスを作成するときに、対応する引数でそのプロパティを初期化します。
 
 
 
-### Using the Hero class
+### Heroクラスの使用
 
-After importing the `Hero` class, the `AppComponent.heroes` property can return a _typed_ array
-of `Hero` objects:
+`Hero` クラスをインポートした後、`AppComponent.heroes` プロパティは `Hero` オブジェクト
+の _型付きの_ 配列を返すことができます：
 
 
 <code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" title="src/app/app.component.ts (heroes)" region="heroes">
@@ -292,9 +290,9 @@ of `Hero` objects:
 
 
 
-Next, update the template.
-At the moment it displays the hero's `id` and `name`.
-Fix that to display only the hero's `name` property.
+次に、テンプレートを更新します。
+現時点では、主人公の`id` と `name` が表示されます。
+ヒーローの `name` プロパティだけを表示するように修正しました。
 
 
 <code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" title="src/app/app.component.ts (template)" region="template">
@@ -303,18 +301,18 @@ Fix that to display only the hero's `name` property.
 
 
 
-The display looks the same, but the code is clearer.
+ディスプレイは同じように見えますが、コードはきれいになります。
 
 {@a ngIf}
 
-## Conditional display with NgIf
+## NgIfによる条件付き表示
 
-Sometimes an app needs to display a view or a portion of a view only under specific circumstances.
+時には、特定の状況下でのみアプリケーションがビューまたはビューの一部を表示する必要がある場合があります。
 
-Let's change the example to display a message if there are more than three heroes.
+3人以上のヒーローがいる場合、メッセージを表示するように例を変更しましょう。
 
-The Angular `ngIf` directive inserts or removes an element based on a _truthy/falsy_ condition.
-To see it in action, add the following paragraph at the bottom of the template:
+Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要素を挿入または削除します。
+実際の動作を確認するには、テンプレートの一番下に次の段落を追加します。
 
 
 <code-example path="displaying-data/src/app/app.component.ts" linenums="false" title="src/app/app.component.ts (message)" region="message">
@@ -327,50 +325,50 @@ To see it in action, add the following paragraph at the bottom of the template:
 
 
 
-Don't forget the leading asterisk (\*) in `*ngIf`. It is an essential part of the syntax.
-Read more about `ngIf` and `*` in the [ngIf section](guide/template-syntax#ngIf) of the [Template Syntax](guide/template-syntax) page.
+`*ngIf` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
+さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの
+[ngIf セクション](guide/template-syntax#ngIf) を読んでください。
 
 
 </div>
 
 
 
-The template expression inside the double quotes,
-`*ngIf="heroes.length > 3"`, looks and behaves much like TypeScript.
-When the component's list of heroes has more than three items, Angular adds the paragraph
-to the DOM and the message appears. If there are three or fewer items, Angular omits the
-paragraph, so no message appears. For more information,
-see the [template expressions](guide/template-syntax#template-expressions) section of the
-[Template Syntax](guide/template-syntax) page.
+`*ngIf ="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、TypeScriptとよく似ています。
+コンポーネントのヒーローのリストに3つより多いアイテムがある場合、Angularは段落をDOMに追加し、
+メッセージが表示されます。 3つあるいはいくつかのアイテムがある場合、 Angularは段落を省略するので、
+メッセージは表示されません。 詳細については、
+[テンプレート構文](guide/template-syntax) ページの
+[テンプレート式](guide/template-syntax#template-expressions) を参照してください。
+.
 
 
 <div class="alert is-helpful">
 
 
 
-Angular isn't showing and hiding the message. It is adding and removing the paragraph element from the DOM. That improves performance, especially in larger projects when conditionally including or excluding
-big chunks of HTML with many data bindings.
-
-
+Angularはメッセージを表示したり隠したりしていません。DOMから段落要素を追加したり削除したりしています。
+これは、特に大規模なプロジェクトで多くのデータバインディングを含むHTMLを
+条件により含めたり除外したりするときに、パフォーマンスを改善します。
 </div>
 
 
 
-Try it out. Because the array has four items, the message should appear.
-Go back into <code>app.component.ts"</code> and delete or comment out one of the elements from the hero array.
-The browser should refresh automatically and the message should disappear.
+やってみましょう。 配列には4つの項目があるため、メッセージが表示されます。
+<code>app.component.ts</code>に戻り、ヒーロー配列の要素の1つを削除またはコメントアウトします。
 
 
 
-## Summary
-Now you know how to use:
 
-* **Interpolation** with double curly braces to display a component property.
-* **ngFor** to display an array of items.
-* A TypeScript class to shape the **model data** for your component and display properties of that model.
-* **ngIf** to conditionally display a chunk of HTML based on a boolean expression.
+## まとめ
+これらの使い方を学びました：
 
-Here's the final code:
+* コンポーネントのプロパティを表示するための二重中括弧による **補間**。
+* 配列の要素を示すための **ngFor**
+* コンポーネントのための **モデルデータ** を型作り、そのプロパティを表示するためのTypeScriptクラス。
+* 真偽式に基づいて条件付きでHTMLの塊を表示するための **ngIf** 。
+
+最終的なコードはこちらです：
 
 
 <code-tabs>
@@ -392,4 +390,3 @@ Here's the final code:
   </code-pane>
 
 </code-tabs>
-

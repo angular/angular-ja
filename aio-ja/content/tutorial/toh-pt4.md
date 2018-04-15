@@ -36,11 +36,11 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 
 ### _@Injectable()_ サービス
 
-生成されたファイル内で Angular の Injectable シンボルがインポートされ、`@Injectable()` デコレータとしてクラスを注釈していることに注目してください。
+生成されたファイル内で Angular の Injectable シンボルがインポートされ、`@Injectable()` デコレーターとしてクラスを注釈していることに注目してください。
 
-`@Injectable()` デコレータは、このサービス自体が依存関係を注入している可能性があることを示しています。
+`@Injectable()` デコレーターは、このサービス自体が依存関係を注入している可能性があることを示しています。
 現時点で依存関係があるわけではありませんが、[この後すぐに設定します](#inject-message-service)。
-依存関係の有無にかかわらず、このデコレータを付けておくとよいでしょう。
+依存関係の有無にかかわらず、このデコレーターを付けておくとよいでしょう。
 
 <div class="l-sub-section">
 
@@ -88,12 +88,19 @@ Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）�
 
 `AppModule` クラスを開いた後、インポートした `HeroService` を `@NgModule.providers` に追加します。
 
-<code-example path="toh-pt4/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts (providers)" region="providers">
+<code-example path="toh-pt4/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts (providers)" region="providers-heroservice">
 </code-example>
 
 Angular は `providers` からひとつの `HeroService` インスタンスを生成し、それを利用しているクラスへ注入します。
 
 これにより、 `HeroService` は `HeroesComponent` で利用できる状態になりました。
+
+<div class="alert is-important">
+
+これは、`HeroService`の提供と使用を可能にする暫定的なコードサンプルです。
+この時点で、コードは["最終的なコードレビュー"](#final-code-review)の`HeroService`とは異なります。
+
+</div>
 
 <div class="alert is-helpful">
 
@@ -399,6 +406,10 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
   <code-pane title="src/app/messages/messages.component.css"
   path="toh-pt4/src/app/messages/messages.component.css">
+  </code-pane>
+
+  <code-pane title="src/app/app.module.ts"
+  path="toh-pt4/src/app/app.module.ts">
   </code-pane>
 
   <code-pane title="src/app/app.component.html"

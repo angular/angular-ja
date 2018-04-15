@@ -1,77 +1,73 @@
 # Angular Language Service
 
-The Angular Language Service is a way to get completions, errors, 
-hints, and navigation inside your Angular templates whether they 
-are external in an HTML file or embedded in annotations/decorators 
-in a string. The Angular Language Service autodetects that you are 
-opening an Angular file, reads your `tsconfig.json` file, finds all the 
-templates you have in your application, and then provides language 
-services for any templates that you open.
+Angular Language Serviceは、HTMLファイルの外部にあるか、
+または文字列内のアノテーション/デコレーターに埋め込まれているかにかかわらず、
+Angularテンプレート内で補完、エラー、ヒント、およびナビゲーションを取得する方法です。
+Angular Language Serviceは、Angularファイルを開いたことを自動検出し、
+`tsconfig.json`ファイルを読み込み、アプリケーションの中のすべてのテンプレートを見つけ、
+そして開いたテンプレートにLanguage Serviceを提供します。
 
 
-## Autocompletion
+## オートコンプリート
 
-Autocompletion can speed up your development time by providing you with 
-contextual possibilities and hints as you type. This example shows 
-autocomplete in an interpolation. As you type it out, 
-you can hit tab to complete.
+オートコンプリートを使用すると、入力時にコンテキスト上の可能性やヒントを提供して開発時間を短縮できます。
+この例は、補間でのオートコンプリートを示しています。
+あなたがそれを入力すると、タブを押して完了することができます。
 
 <figure>
   <img src="generated/images/guide/language-service/language-completion.gif" alt="autocompletion">
 </figure>
 
-There are also completions within 
-elements. Any elements you have as a component selector will 
-show up in the completion list.
+要素内に補完もあります。
+コンポーネントセレクタとして持っているすべての要素が
+補完リストに表示されます。
 
-## Error checking
+## エラーチェック
 
-The Angular Language Service can also forewarn you of mistakes in your code. 
-In this example, Angular doesn't know what `orders` is or where it comes from. 
+Angular Language Serviceは、コード内の間違いを予告することもできます。
+この例では、Angularは`orders`が何であるか、どこから来るのかを知りません。 
 
 <figure>
   <img src="generated/images/guide/language-service/language-error.gif" alt="error checking">
 </figure>
 
-## Navigation
+## ナビゲーション
 
-Navigation allows you to hover to 
-see where a component, directive, module, etc. is from and then 
-click and press F12 to go directly to its definition.
+ナビゲーションを使用すると、
+コンポーネント、ディレクティブ、モジュールなどがどこにあるかを確認し、
+F12キーを押してその定義に直接移動できます。
 
 <figure>
   <img src="generated/images/guide/language-service/language-navigation.gif" alt="navigation">
 </figure>
 
 
-## Angular Language Service in your editor
+## エディタのAngular Language Service
 
-Angular Language Service is currently available for [Visual Studio Code](https://code.visualstudio.com/) and 
-[WebStorm](https://www.jetbrains.com/webstorm). 
+Angular Language Serviceは現在、[Visual Studio Code](https://code.visualstudio.com/)と[WebStorm](https://www.jetbrains.com/webstorm)で利用可能です。
 
 ### Visual Studio Code
 
-In Visual Studio Code, install Angular Language Service from the store, 
-which is accessible from the bottom icon on the left menu pane. 
-You can also use the VS Quick Open (⌘+P) to search for the extension. When you've opened it, 
-enter the following command: 
+Visual Studio Codeでは、左側のメニューペインの下のアイコンからアクセスできるストアから
+Angular Language Serviceをインストールします。
+また、VS Quick Open（⌘+P）を使用して拡張子を検索することもできます。
+それを開いたら、次のコマンドを入力してください: 
 
 ```sh
-ext install ng-template
+ext install Angular.ng-template
 ```
 
-Then click the install button to install the Angular Language Service. 
+その後、インストールボタンをクリックして、Angular Language Serviceをインストールします。 
 
 
 ### WebStorm
 
-In webstorm, you have to install the language service as a dev dependency. 
-When Angular sees this dev dependency, it provides the 
-language service inside of WebStorm. Webstorm then gives you 
-colorization inside the template and autocomplete in addition to the Angular Language Service.
+WebStormでは、Language Serviceをdev依存関係としてインストールする必要があります。 
+Angularはこのdev依存関係を見ると、
+WebStormの内部でLanguage Serviceを提供します。
+WebStormは、Language Serviceに加えて、テンプレート内の色付けとオートコンプリートを提供します。
 
-Here's the dev dependency 
-you need to have in `package.json`:
+`package.json`に必要なdev依存関係は次のとおりです:
 
 ```json
 
@@ -80,19 +76,19 @@ devDependencies {
 }
 ```
 
-Then in the terminal window at the root of your project, 
-install the `devDependencies` with `npm` or `yarn`: 
+次にターミナルで、プロジェクトのルートで、
+`npm`または`yarn`を使用して`devDependencies`をインストールします: 
 
 ```sh
 npm install 
 ```
-*OR* 
+*または* 
 
 ```sh
 yarn
 ```
 
-*OR* 
+*または* 
 
 ```sh
 yarn install
@@ -101,63 +97,59 @@ yarn install
 
 ### Sublime Text
 
-In [Sublime Text](https://www.sublimetext.com/), you first need an extension to allow Typescript. 
-Install the latest version of typescript in a local `node_modules` directory:
+[Sublime Text](https://www.sublimetext.com/)では、まずTypeScriptを可能にする拡張機能が必要です。
+TypeScriptの最新バージョンをローカルの`node_modules`ディレクトリにインストールします:
 
 ```sh
 npm install --save-dev typescript
 ```
 
-Then install the Angular Language Service in the same location:
+次に、Angular Language Serviceを同じ場所にインストールします:
 ```sh
 npm install --save-dev @angular/language-service
 ```
 
-Starting with TypeScript 2.3, TypeScript has a language service plugin model that the language service can use. 
+TypeScript 2.3以降、TypeScriptには、Language Serviceが使用できるLanguage Serviceプラグインモデルがあります。 
 
-Next, in your user preferences (`Cmd+,` or `Ctrl+,`), add:
+次に、ユーザーの設定（`Cmd+,` または `Ctrl+,`）で、次を追加します:
 
 ```json
 "typescript-tsdk": "<path to your folder>/node_modules/typescript/lib"
 ```
 
 
-## Installing in your project
+## プロジェクトへのインストール
 
-You can also install Angular Language Service in your project with the 
-following `npm` command:
+次の`npm`コマンドを使用して、プロジェクトにAngular Language Serviceをインストールすることもできます。
 
 ```sh
 npm install --save-dev @angular/language-service
 ```
-Additionally, add the following to the `"compilerOptions"` section of 
-your project's `tsconfig.json`.
+さらに、プロジェクトの`tsconfig.json`の`"compilerOptions"`セクションに以下を追加します。
 
 ```json
   "plugins": [
       {"name": "@angular/language-service"}
   ]
 ```
-Note that this only provides diagnostics and completions in `.ts` 
-files. You need a custom sublime plugin (or modifications to the current plugin) 
-for completions in HTML files.
+これは、`.ts`ファイル内の診断と補完のみを提供することに注意してください。
+HTMLファイルの補完のためにカスタムのsublimeプラグイン（または現在のプラグインの変更）が必要です。
 
 
-## How the Language Service works
+## Language Serviceの仕組み
 
-When you use an editor with a language service, there's an 
-editor process which starts a separate language process/service 
-to which it speaks through an [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). 
-Any time you type inside of the editor, it sends information to the other process to 
-track the state of your project. When you trigger a completion list within a template, the editor process first parses the template into an HTML AST, or [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree). Then the Angular compiler interprets 
-what module the template is part of, the scope you're in, and the component selector. Then it figures out where in the template AST your cursor is. When it determines the 
-context, it can then determine what the children can be.
+Language Serviceを備えたエディターを使うときには、
+[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)を介して話す
+別の言語プロセス/サービスを起動するエディタープロセスがあります。
+エディタの中に入力するたびに、他のプロセスに情報を送信してプロジェクトの状態を追跡します。
+テンプレート内で補完リストをトリガーすると、エディタプロセスは最初にテンプレートをHTML ASTまたは[抽象構文木](https://en.wikipedia.org/wiki/Abstract_syntax_tree)に解析します。
+次に、Angularコンパイラは、テンプレートが含まれているモジュール、現在のスコープ、コンポーネントセレクタを解釈します。
+次に、カーソルがテンプレートASTのどこにあるかを調べます。コンテキストを判断すると、子ができることを判断できます。
 
-It's a little more involved if you are in an interpolation. If you have an interpolation of `{{data.---}}` inside a `div` and need the completion list after `data.---`, the compiler can't use the HTML AST to find the answer. The HTML AST can only tell the compiler that there is some text with the characters "`{{data.---}}`". That's when the template parser produces an expression AST, which resides within the template AST. The Angular Language Services then looks at `data.---` within its context and asks the TypeScript Language Service what the members of data are. TypeScript then returns the list of possibilities.
+補間をしている場合はもう少し複雑です。`div`内に`{{data.---}}`の補間があり、`data.---`の後に補完リストが必要な場合、コンパイラはHTML ASTを使用して答えを見つけることはできません。HTML ASTは、文字"`{{data.---}}`"をもつテキストがあることをコンパイラに通知するだけです。テンプレートパーサーがテンプレートAST内にある式ASTを生成します。次に、Angular Language Serviceは、その文脈の中で`data.---`を調べ、TypeScript Language Serviceにデータのメンバーが何であるかを尋ねます。 TypeScriptは可能性のあるリストを返します。
 
 
-For more in-depth information, see the 
-[Angular Language Service API](https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts)
+詳細な情報については[Angular Language Service API](https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts)を参照してください。
 
 
 
@@ -168,9 +160,9 @@ For more in-depth information, see the
 
 <hr>
 
-## More on Information
+## 詳細な情報
 
-For more information, see [Chuck Jazdzewski's presentation](https://www.youtube.com/watch?v=ez3R0Gi4z5A&t=368s) on the Angular Language 
-Service from [ng-conf](https://www.ng-conf.org/) 2017.
+詳細については、[ng-conf](https://www.ng-conf.org/) 2017の
+Angular Language Serviceに関する[Chuck Jazdzewskiのプレゼンテーション](https://www.youtube.com/watch?v=ez3R0Gi4z5A&t=368s)を参照してください。
 
 

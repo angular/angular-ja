@@ -39,7 +39,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 `AdDirective` は動的に追加されたコンポーネントをホストする要素のビューコンテナへのアクセスを得るために `ViewContainerRef` を挿入します。
 
-`@Directive` デコレータでは、セレクタ名 `ad-host` に注目してください；
+`@Directive` デコレーターでは、セレクタ名 `ad-host` に注目してください；
 これは、要素にディレクティブを適用するために使用します。
 次のセクションでは、その方法について説明します。
 
@@ -48,7 +48,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 ## コンポーネントのロード
 
 広告バナーの実装のほとんどは `ad-banner.component.ts` です。
-この例では、HTMLを `@Component` デコレータの `template` プロパティにテンプレート文字列として入れています。
+この例では、HTMLを `@Component` デコレーターの `template` プロパティにテンプレート文字列として入れています。
 
 `<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
 `AdDirective` を適用するには、セレクタを `ad.directive.ts` 、 `ad-host` から呼び出します。
@@ -99,8 +99,8 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 `loadComponent()` メソッドは、数式を使って広告を選択します。
 
-まず、 `currentAddIndex` を設定します。これは、現在の値+1をプラスし、
-それを `AdItem` 配列の長さで割って、新しい `currentAddIndex` 値として _remainder_　を使います。
+まず、 `currentAdIndex` を設定します。これは、現在の値+1をプラスし、
+それを `AdItem` 配列の長さで割って、新しい `currentAdIndex` 値として _remainder_　を使います。
 次に、その値を使用して配列から `adItem` を選択します。
 
 

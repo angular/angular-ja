@@ -1,539 +1,141 @@
-# アーキテクチャー概要
+# アーキテクチャ概要
 
-Angular は、HTMLとJavaScriptまたはTypeScriptのようにJavaScriptにコンパイルできるような言語で書かれる
-クライアントアプリケーションを開発するためのフレームワークです。
+Angularは、HTMLとTypeScriptでクライアントアプリケーションを開発するためのプラットフォームであり、そしてフレームワークです。
+Angularはそれ自身がTypeScriptで書かれています。コア部分と、アプリケーションにインポートするオプショナルな機能をTypeScriptライブラリのセットとして実装しています。
 
-このフレームワークはいくつかのコアライブラリとオプショナルなライブラリからなります。
+Angularアプリケーションの基本となる構成要素は _NgModule_ です。これは _コンポーネント_ のコンパイルコンテキストを提供します。NgModuleは関連するコードを機能的なセットに集約します。つまり、AngularアプリケーションはNgModuleのセットとして定義されます。アプリケーションは少なくともブートストラップのための _ルートモジュール_ を常に持ち、普通はさらに多くの _フィーチャーモジュール_ を持ちます。
 
-Angularアプリケーションを書くために、Angular化されたマークアップをもつHTML *テンプレート* を構成したり、
-それらのテンプレートを管理するための *コンポーネント* クラスを書いたり、
-アプリケーションロジックを *サービス* に追加したり、コンポーネントとサービスを *モジュール* に詰め込んだりします。
+* コンポーネントは *ビュー* を定義します。ビューは、プログラムのロジックとデータの中からAngularが選択し、変更できる画面要素のセットです。すべてのアプリには、少なくともルートコンポーネントがあります。
 
-そして _ルートモジュール_ を *ブートストラップ* することでアプリを起動します。
-Angularはあなたのアプリケーションのコンテンツをブラウザに表示することと、
-提供した手順にしたがってユーザーの操作に応答することを引き受けます。
+* コンポーネントは、ビューに直接関係しない特定の機能を提供する *サービス* を使用します。サービスプロバイダーは、 *依存性* としてコンポーネントに *注入* することができ、コードをモジュール化し、再利用可能で効率的にします。
 
-もちろん、それ以上のこともあります。
-詳細はこのページの続きで学びます。いまのところはこの全体像に集中しましょう。
+コンポーネントとサービスはどちらも、型をマークしてAngularに用途を示すためのメタデータを提供する *デコレーター* が付与された単純なクラスです。
 
-<figure>
-  <img src="generated/images/guide/architecture/overview2.png" alt="overview">
-</figure>
+* コンポーネントクラスのメタデータは、それをビューを定義する *テンプレート* に関連付けます。テンプレートは通常のHTMLとAngular *ディレクティブ* と *バインディングマークアップ* を組み合わせています。これによりAngularは表示用にレンダリングする前にHTMLを変更できます。
 
-<div class="l-sub-section">
+* サービスクラスのメタデータは、*Dependency Injection（DI）* を通してコンポーネントが使用できるようにするための情報を提供します。
 
-  このページで参照されているコードはここにあります。<live-example></live-example>
-
-</div>
+アプリのコンポーネントは通常、階層的に配置された多数のビューを定義します。 Angularは、ビュー間のナビゲーションパスを定義するための`Router`サービスを提供します。ルーターは、高度なブラウザ内ナビゲーション機能を提供します。
 
 {@a modules}
+
 ## モジュール
 
-<img src="generated/images/guide/architecture/module.png" alt="Component" class="left">
+AngularはJavaScript（ES2015）のモジュールとは異なり、それを補完する`NgModule`を定義します。 NgModuleは、アプリケーションドメイン、ワークフロー、あるいは一連の機能と密接に関連するコンポーネントセットのコンパイルコンテキストを宣言します。 NgModuleは、そのコンポーネントをサービスなどの関連コードをまとめて、機能単位を形成できます。
 
+すべてのAngularアプリケーションには、通常は`AppModule`という名前の _ルートモジュール_ があり、アプリケーションを起動するブートストラップメカニズムを提供します。アプリには、通常、多くの機能モジュールが含まれています。
 
-Angularのアプリはモジュール化されており、Angularは _NgModule_ と呼ばれる独自のモジュール方式を持っています。
+JavaScriptモジュールと同様に、NgModuleは他のNgModuleから機能をインポートし、独自の機能をエクスポートして他のNgModuleから使用できるようにします。たとえば、アプリでルーターのサービスを使用するには、`Router`のNgModuleをインポートします。
 
-NgModuleはすごいものです。
-このページではモジュールを紹介します。[NgModules](guide/ngmodules) のページではさらに詳細に取り上げます。
-
-<br class="clear">
-
-すべてのAngularアプリは少なくともひとつのNgModuleクラス、[_ルートモジュール_](guide/bootstrapping "Bootstrapping")を持ちます。
-これは慣例的に`AppModule`と呼ばれます。
-
-小さなアプリケーションでは、_ルートモジュール_がただひとつのモジュールかもしれませんが、ほとんどのアプリはたくさんの
-_機能モジュール_を持ちます。それはアプリケーションドメインに特化したコードの集合、ワークフロー、
-または密接に関連した一連の機能の集合です。
-
-_ルート_ または _機能_ にかかわらず、NgModuleは`@NgModule`デコレータをもつクラスです。
+コードを機能モジュールに組織することで、複雑なアプリケーションの開発や再利用性の設計を管理するのに役立ちます。さらに、この技術を使用すると、起動時にロードする必要のあるコードの量を最小限に抑えるために、 _遅延ロード_ 、&mdash;つまり要求に応じてモジュールをロードする&mdash;ことができます。
 
 <div class="l-sub-section">
 
-  デコレータはJavaScriptクラスを装飾する関数です。
-  Angularはクラスが何を意味し、それらがどう動くべきかを知るためにメタデータをクラスに付与できる数々のデコレータを持っています。
-  デコレータについてはウェブ上で
-  <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.x5c2ndtx0">
-  さらに学んで</a>ください。
+  より詳細な議論については、[モジュールの概要](guide/architecture-modules)を参照してください。
 
 </div>
-
-`NgModule` はモジュールを説明するプロパティをもつひとつのメタデータオブジェクトを引数に取るデコレータ関数です。
-もっとも重要なプロパティは
-* `declarations` - そのモジュールに属す _ビュークラス_群です。
-Angularには3種類のビュークラス: [components](guide/architecture#components), [directives](guide/architecture#directives), [pipes](guide/pipes)
-があります。
-
-* `exports` - 他のモジュールのコンポーネント[テンプレート](guide/architecture#templates)から見えて、使えるべき
-declarationsのサブセットです。
-
-* `imports` - _この_モジュールで宣言されたコンポーネントテンプレートで必要なクラスをエクスポートする他のモジュール。
-
-* `providers` - このモジュールがグローバルコレクションに提供する[サービス](guide/architecture#services)のクリエイター、サービスのグローバルコレクション;
-これらはこのアプリのすべてのパーツからアクセス可能になります。
-
-* `bootstrap` - メインアプリケーションビュー（_ルートコンポーネント_と呼ばれます）これはアプリの他のすべてのビューをホストしています。
-_ルートモジュール_のみがこの`bootstrap`プロパティをセットすべきです。
-
-これがシンプルなルートモジュールです。
-
-<code-example path="architecture/src/app/mini-app.ts" region="module" title="src/app/app.module.ts" linenums="false"></code-example>
-
-<div class="l-sub-section">
-
-  `AppComponent`を`export`しているのは、コンポーネントをエクスポートするためにどう`exports`配列を使うかを示すためです。
-  これは実はこの例の中では必要のないものです。
-  ルートモジュールは何も_エクスポート_する必要はありません。
-  なぜなら、他のコンポーネントはルートモジュールを_インポート_する必要がないためです。
-
-</div>
-
-ルートモジュールを_ブートストラップ_することでアプリケーションを起動します。
-開発中はこのファイルのような`main.ts`内で`AppModule`を起動することになります。
-
-<code-example path="architecture/src/main.ts" title="src/main.ts" linenums="false"></code-example>
-
-### NgModules vs. JavaScript モジュール
-
-NgModule &mdash; `@NgModule` で装飾されたクラス &mdash; はAngularの基礎的な機能です。
-
-JavaScriptもオブジェクトのコレクションを管理するためのモジュールシステムを持っています。
-それは NgModule システムとはまったく異なり、関係のないものです。
-
-JavaScriptでは各_ファイル_はモジュールで、またそのファイル内で定義されているオブジェクトはそのモジュールに属します。
-モジュールは`export`キーワードをつけることで、いくつかのオブジェクトをpublicとして宣言することができます。
-他のJavaScriptモジュールは*インポート文*を使うことで、他のモジュールからのpublicオブジェクトにアクセスできます。
-
-<code-example path="architecture/src/app/app.module.ts" region="imports" linenums="false"></code-example>
-
-<code-example path="architecture/src/app/app.module.ts" region="export" linenums="false"></code-example>
-
-<div class="l-sub-section">
-  <a href="http://exploringjs.com/es6/ch_modules.html">ウェブ上でさらにJavaScriptモジュールシステムについて学んでください</a>
-</div>
-
-相違があり、_補完しあう_ 2つのモジュールシステムがあります。アプリを書くためにこれら両方を使用しましょう。
-
-### Angular ライブラリ
-
-<img src="generated/images/guide/architecture/library-module.png" alt="Component" class="left">
-
-AngularはJavaScriptのモジュールの集まりとして出荷します。ライブラリモジュールとして考えることができます。
-
-それぞれのAngularライブラリの名前は`@angular`プレフィックスから始まります。
-
-**npm**パッケージマネージャーでインストールすることができ、JavaScriptの`import`文によって、それらのパーツをインポートできます。
-
-<br class="clear">
-
-たとえば、`@angular/core`ライブラリから`Component`デコレータをインポートするためには次のようにします。
-
-<code-example path="architecture/src/app/app.component.ts" region="import" linenums="false"></code-example>
-
-また、Angular _ライブラリ_からNgModuleをインポートするにはJavaScriptのインポート文を使います。
-
-<code-example path="architecture/src/app/mini-app.ts" region="import-browser-module" linenums="false"></code-example>
-
-上記のシンプルなルートモジュールの例では、アプリケーションモジュールは`BrowswerModule`に含まれる部品を必要とします。
-その部品にアクセスするためには、次のように`@NgModule`のメタデータの`imports`に追加します。
-
-<code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports" linenums="false"></code-example>
-
-このように、AngularとJavaScriptモジュールシステムの両方を_一緒に_使います。
-
-この2つのシステムは`imports`と`exports`という共通の用語を共有するため、混乱しやすいです。
-ですが諦めないでください。その混乱は時間と経験によってクリアになっていきます。
-
-<div class="l-sub-section">
-
-  [NgModules](guide/ngmodules)のページでさらに学びましょう。
-
-</div>
-
-<hr/>
 
 {@a components}
+
 ## コンポーネント
 
-<img src="generated/images/guide/architecture/hero-component.png" alt="Component" class="left">
+すべてのAngularアプリケーションには、少なくとも1つのコンポーネントがあります。その *ルートコンポーネント* は、コンポーネントの階層をページのDOMに接続します。各コンポーネントは、アプリケーションデータとロジックを含むクラスを定義し、ターゲット環境に表示されるビューを定義するHTML *テンプレート* に関連付けられます。
 
-_コンポーネント_ は*ビュー*と呼ばれる画面の一部分をコントロールします。
-
-たとえば、次のビューはコンポーネントによりコントロールされます。
-
-* ナビゲーションのリンクをもつアプリケーションのルート。
-* ヒーローのリスト。
-* ヒーローエディター。
-
-コンポーネントのアプリケーションロジック&mdash;ビューをサポートするもの&mdash;はクラスの中に定義します。
-クラスはプロパティとメソッドのAPIを通じてビューとやり取りします。
-
-{@a component-code}
-
-たとえば、この`HeroListComponent`はサービスから取得するヒーローの配列を返す`heroes`プロパティを持ちます。
-`HeroListComponent`はユーザーがリストから1人のヒーローを選択するためにクリックしたときに`selectedHero`プロパティをセットする`selectHero()`メソッドも持ちます。
-
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (class)" region="class"></code-example>
-
-Angularはユーザーがアプリケーション内を移動する中でコンポーネントを作成し、更新し、破棄します。
-アプリは上で宣言した`ngOnInit()`のような[ライフサイクルフック](guide/lifecycle-hooks)を通じてライフサイクルの各時点でアクションを起こすことができます。
-
-<hr/>
-
-{@a templates}
-## テンプレート
-
-<img src="generated/images/guide/architecture/template.png" alt="Template" class="left">
-
-コンポーネントのビューをそれに対応する**テンプレート**で定義します。
-テンプレートはAngularにどうコンポーネントを描画するかを教えるHTMLの一形式です。
-
-テンプレートは通常のHTMLと似ていますが、いくつかの点で異なります。
-次は`HeroListComponent`のテンプレートです。
-
-<code-example path="architecture/src/app/hero-list.component.html" title="src/app/hero-list.component.html"></code-example>
-
-このテンプレートは典型的なHTML要素の`<h2>`と`<p>`を使用していますが、これもいくつかの違いがあります。
-`*ngFor`, `{{hero.name}}`, `(click)`, `[hero]`, そして `<app-hero-detail>` といったコードはAngularの[テンプレートシンタックス](guide/template-syntax)を使用しています。
-
-テンプレートの最後の行、`<app-hero-detail>`タグは新しいコンポーネント`HeroDetailComponent`を表すカスタム要素です。
-
-`HeroDetailComponent`はレビューしてきた`HeroListComponent`とは*異なる*コンポーネントです。
-`HeroDetailComponent` (まだ見せていません) は`HeroListComponent`で表示されたリストから
-ユーザーが選択した特定のヒーローの情報を示すものです。
-`HeroDetailComponent`は`HeroListComponent`の**子**です。
-
-<img src="generated/images/guide/architecture/component-tree.png" alt="Metadata" class="left">
-
-`<app-hero-detail>`がネイティブHTML要素の中で違和感なく置かれていることに注目してください。
-カスタムコンポーネントは同じレイアウトでシームレスにネイティブHTMLと混ざり合います。
-
-<hr class="clear"/>
-
-{@a metadata}
-## メタデータ
-
-<img src="generated/images/guide/architecture/metadata.png" alt="Metadata" class="left">
-
-メタデータはAngularにクラスをどのように扱うかを教えます。
-
-<br class="clear">
-
-`HeroListComponent`の[このコードを見返す](guide/architecture#component-code)と、それがただのクラスだということが分かるでしょう。
-フレームワークの形跡もありませんし、"Angular"がその中にあるわけでもありません。
-
-実際、`HeroListComponent`は本当に*ただのクラス*です。これは*Angularにそれについて教える*までコンポーネントではありません。
-
-Angularに`HeroListComponent`がコンポーネントであると教えるためには、そのクラスに**metadata**を与えます。
-
-TypeScriptは、**デコレータ**を使うことでメタデータを付与します。
-これは`HeroListComponent`のためのいくつかのメタデータです。
-
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (metadata)" region="metadata"></code-example>
-
-これは`@Component`デコレータで、その直下にあるクラスがコンポーネントクラスであると特定するものです。
-
-`@Component`デコレータはAngularがコンポーネントとそのビューを作成して表示するのに必要な情報をもつ設定情報を取ります。
-
-これはもっともよく使う`@Component`設定オプションの一例です:
-
-* `selector`: Angularが*親*HTML内の`<app-hero-list>`が見つかった場所にこのコンポーネントのインスタンスを作成して挿入するように指示するCSSセレクタです。
-たとえば、もしアプリのHTMLが `<app-hero-list></app-hero-list>`を含んでいたら、Angularは`HeroListComponent`のインスタンスをそれらのタグの間に挿入します。
-
-* `templateUrl`: [上](guide/architecture#templates)で示した、このコンポーネントのHTMLテンプレートのモジュール相対アドレスです。
-
-* `providers`: このコンポーネントが必要とするサービスに対する**依存性の注入のプロバイダー**の配列。
-これはAngularにこのコンポーネントのコンストラクタが`HeroService`を必要としていることを指示する方法なので、
-これは表示すべきヒーローのリストを取得することができます。
-
-<img src="generated/images/guide/architecture/template-metadata-component.png" alt="Metadata" class="left">
-
-@Componentのメタデータは、コンポーネントに対して指定した主要な構成要素を取得する場所をAngularに通知します。
-
-テンプレート、メタデータ、そしてコンポーネントが一緒にビューを記述します。
-
-他のメタデータデコレータを同じような方法で適用し、Angularの動作をガイドします。
-`@Injectable`, `@Input`, そして `@Output` はよく使われるデコレータです。
-
-<br class="clear">
-
-アーキテクチャ上で考慮しておくべきことは、Angularが何をすべきかを知るために、コードにメタデータを追加しなければいけないということです。
-
-<hr/>
-
-{@a data-binding}
-## データバインディング
-
-フレームワークなしの場合、HTMLコントロールに値をプッシュし、ユーザーのレスポンスをアクションと値の更新に変える責任が出てくるでしょう。
-このようなpush/pull側のロジックを手で書くのは面倒で、エラーが起こりやすく、経験豊富なjQueryプログラマが読むことができる悪夢です。
-
-<img src="generated/images/guide/architecture/databinding.png" alt="Data Binding" class="left">
-
-Angularはテンプレート内のパーツとコンポーネント内のパーツを対応させるメカニズム、**データバインディング**をサポートしています。
-バインディングマークアップをテンプレートHTMLに追加して、Angularに両サイドをどう連携させるかを通知します。
-
-ダイアグラムで示したように、4つの形式のデータバインディングのシンタックスがあります。
-各形式は方向を持ちます。&mdash;DOMへ、DOMから、または双方向です。
-
-<br class="clear">
-
-[例](guide/architecture#templates)の`HeroListComponent`のテンプレートは3つの形式を持ちます。
-
-<code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (binding)" region="binding"></code-example>
-
-* `{{hero.name}}` [*補完*](guide/displaying-data#interpolation)は`<li>`要素内にコンポーネントの`hero.name`プロパティの値を表示します。
-
-* `[hero]` [*プロパティバインディング*](guide/displaying-data#interpolation)は、親の`HeroListComponent`の`selectedHero`の値を、
-子の`HeroDetailComponent`の`hero`プロパティに渡します。
-
-* `(click)` [*イベントバインディング*](guide/user-input#click)はヒーロー名がクリックされたときに、
-このコンポーネントの`selectHero`メソッドを呼び出します。
-
-**双方向データバインディング** は重要な4つ目の形式で、プロパティバインディングとデータバインディングをひとつの記述にまとめたもので、
-`ngModel`ディレクティブを使用します。
-つぎが`HeroDetailComponent`のテンプレートからの例です。
-
-<code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
-
-双方向バインディングでは、プロパティの値がプロパティバインディングとして、コンポーネントからインプットボックスに渡ります。
-ユーザーが値を変更すると、イベントバインディングとしてコンポーネントに戻り、最新の値にプロパティがリセットされます。
-
-Angularはアプリケーションコンポーネントツリーのルートからすべての子コンポーネントまで、
-JavaScriptのイベントサイクルごとに1回、*すべての*データバインディングを処理します。
-
-<figure>
-  <img src="generated/images/guide/architecture/component-databinding.png" alt="Data Binding">
-</figure>
-
-データバインディングはテンプレートとそのコンポーネント間のコミュニケーションにおいて非常に重要な役割を果たします。
-
-<figure>
-  <img src="generated/images/guide/architecture/parent-child-binding.png" alt="Parent/Child binding">
-</figure>
-
-データバインディングはまた親コンポーネントと子コンポーネント間のコミュニケーションについても重要です。
-
-<hr/>
-
-{@a directives}
-## ディレクティブ
-
-<img src="generated/images/guide/architecture/directive.png" alt="Parent child" class="left">
-
-Angularのテンプレートは*動的*です。Angularがそれらをレンダリングする際、
-**directive**により与えられる指示によりDOMに変換されます。
-
-ディレクティブは`@Directive`デコレータをもったクラスです。
-コンポーネントは*テンプレートをもったディレクティブ*です。
-`@Component`デコレータは実際はテンプレート指向の機能で拡張された`@Directive`です。
+`@Component`デコレーターは、コンポーネントのすぐ下のクラスをコンポーネントとして識別し、テンプレートおよび関連するコンポーネント固有のメタデータを提供します。
 
 <div class="l-sub-section">
 
-  **コンポーネントは厳密にはディレクティブ** ですが、
-  コンポーネントはとても特徴的で、Angularアプリケーションの中心にあり、このアーキテクチャの概要ではコンポーネントをディレクティブとは切り離します。
- 
+   デコレーターは、JavaScriptクラスを変更する関数です。 Angularは、特定の種類のメタデータをクラスに付加するようなデコレーターをいくつか定義しているため、それらのクラスの意味や動作方法を知ることができます。
+
+   <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.x5c2ndtx0">ウェブにおけるデコレーターの詳細を学びましょう。</a>
+
 </div>
 
-2つの種類のディレクティブが存在します: _構造_ディレクティブと_属性_ディレクティブです。
+### テンプレート、ディレクティブ、およびデータバインディング
 
-それらは要素タグの中に属性として現れることがよくあり、名前により指定されることもありますが、
-割り当てやバインディングにより指定されることの方が多いです。
+テンプレートはHTMLと、HTML要素を表示する前に変更できるAngularマークアップを組み合わせています。
+テンプレート *ディレクティブ* はプログラムロジックを提供し、 *バインディングマークアップ* はアプリケーションデータとドキュメントオブジェクトモデル（DOM）を接続します。
 
-それらは要素タグの中に属性としてよく現れますが、名前により指定されたり、さらには割り当てやバインディングでよく使用されます。
+* *イベントバインディング* を使用すると、アプリケーションデータを更新することで、ターゲット環境のユーザー入力に応答できます。
+* *プロパティバインディング* を使用すると、アプリケーションデータから計算された値をHTMLに補間できます。
 
-**構造**ディレクティブはDOM内で追加、削除または置き換えることでレイアウトを変更します。
+ビューが表示される前に、Angularはディレクティブを評価し、テンプレートのバインディング構文を解決して、プログラムデータとロジックにしたがってHTML要素とDOMを変更します。 Angularは *双方向データバインディング* をサポートしています。つまり、ユーザーの選択などDOMの変更をプログラムデータに反映させることができます。
 
-[テンプレート例](guide/architecture#templates) では2つのビルトイン構造ディレクティブを使用しています。
+テンプレートでは、 *パイプ* を使用して値を表示用に変換することで、ユーザーエクスペリエンスを向上させることもできます。たとえば、日付と通貨の値をユーザーのロケールに適した方法で表示するためにパイプを使用します。 Angularは一般的な変換用に事前定義されたパイプを提供し、さらに独自のパイプを定義することもできます。
 
-<code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (structural)" region="structural"></code-example>
+<div class="l-sub-section">
 
-* [`*ngFor`](guide/displaying-data#ngFor) はAngularに`heroes`リストの各ヒーローにつきひとつの`<li>`を置くように指示します。
-* [`*ngIf`](guide/displaying-data#ngIf) は選択されたヒーローが存在するときに限り`HeroDetail`コンポーネントを含みます。
+  これらの概念の詳細については、[コンポーネントの概要](guide/architecture-components)を参照してください。
 
-**属性**ディレクティブは実際の要素の見た目や挙動を変更します。
-テンプレート内ではそれらは普通のHTML属性のようです。したがってそのような名前がついています。
-
-`ngModel`ディレクティブは属性ディレクティブの例で、双方向バインディングを実現します。
-`ngModel`は表示用の値プロパティと変更イベントへの応答をセットすることで、実際の要素の挙動を変更します。(典型的には`<input>`)
-
-<code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
-
-Angularはさらにいくつかレイアウト構造を変更するディレクティブ(たとえば、[ngSwitch](guide/template-syntax#ngSwitch)) や、
-DOM要素とコンポーネントの外見を変更するディレクティブ([ngStyle](guide/template-syntax#ngStyle)と[ngClass](guide/template-syntax#ngClass))
-を持っています。
-
-もちろん、あなたのディレクティブを書くこともできます。
-`HeroListComponent`のようなコンポーネントはカスタムディレクティブのひとつの種類です。
-
-<!-- PENDING: link to where to learn more about other kinds! -->
-
-<hr/>
-
-{@a services}
-## サービス
-
-<img src="generated/images/guide/architecture/service.png" alt="Service" class="left">
-
-_サービス_はアプリケーションに必要な値、関数、または機能を含む幅広いカテゴリです。
-
-ほとんど何でもサービスになることができます。
-サービスは通常、狭く、明確な目的を持ったクラスです。
-それは特定の何かをして、それをうまくやるべきです。
-<br class="clear">
-
-例では下記を含みます。
-
-* ロギングサービス
-* データサービス
-* メッセージバス
-* 税計算
-* アプリケーション設定
-
-サービスについて_Angular_として特別なことはなにもありません。
-Angularはサービスの定義をもちません。
-サービスのベースクラスも、登録する場所もありません。
-
-しかしサービスはAngularアプリケーションの基礎となるものです。
-コンポーネントはサービスの大きな消費者です。
-
-次はブラウザコンソールにログを出力するサービスクラスの例です。
-
-<code-example path="architecture/src/app/logger.service.ts" linenums="false" title="src/app/logger.service.ts (class)" region="class"></code-example>
-
-`HeroService`は[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)を利用してヒーローを取得します。
-`HeroService`は`Logger`サービスと、サービスとの通信を処理する`BackendService`に依存しています。
-
-
-<code-example path="architecture/src/app/hero.service.ts" linenums="false" title="src/app/hero.service.ts (class)" region="class"></code-example>
-
-サービスはどこにでもあります。
-
-コンポーネントクラスは無駄がないようにあるべきです。
-それらはサーバーからデータを取得しませんし、ユーザーの入力をバリデートしませんし、コンソールにログを直接出力しません。
-そのようなタスクはサービスに委譲します。
-
-コンポーネントの仕事はユーザー体験を有効化することで、それ以上はありません。
-それは(テンプレートによってレンダリングされた)ビューと、(モデルの概念を含んだ)アプリケーションロジックを仲介します。
-よいコンポーネントはデータバインディングのためにプロパティとメソッドを提供します。
-重要ではないことはすべてサービスに委譲します。
-
-Angularはこれらの原則を*強制*しません。
-もし3000行もある"全部入りの(kitchen sink)"コンポーネントを書いたとしても不満を言いません。
-
-Angularはアプリケーションロジックをサービスに組み込むことを容易にし、またそれらのサービスを*依存性の注入*によって
-コンポーネントで使用できるようにして、その原則に*従う*ように助けます。
-
-<hr/>
+</div>
 
 {@a dependency-injection}
-## 依存性の注入
-
-<img src="generated/images/guide/architecture/dependency-injection.png" alt="Service" class="left">
-
-_依存性の注入_ はそのクラスが必要とする依存を完全な形を持ったインスタンスを提供する方法のひとつです。
-ほとんどの依存はサービスです。
-Angularは必要とするサービスを持った状態の新しいコンポーネントを提供するために依存性の注入を使用します。
-
-<br class="clear">
-
-Angularはコンポーネントがどのサービスを必要としているか、そのクラスのコンストラクタのパラメータの型を見ることで知ることができます。
-たとえば、`HeroListComponent`のコンストラクタは`HeroService`を必要としています。
 
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (constructor)" region="ctor"></code-example>
+## サービスと依存性の注入
 
-Angularがコンポーネントを作るとき、最初にそのコンポーネントがどのサービスを必要としているか**インジェクタ**に問い合わせます。
+特定のビューに関連付けられておらず、コンポーネント間で共有したいデータまたはロジックの場合は、 *サービス* クラスを作成します。 サービスクラスの定義は直前に`@Injectable`デコレーターがあります。デコレーターは、依存関係としてクライアントコンポーネントにサービスを *注入* するためのメタデータを提供します。
 
-インジェクタは前に作成したサービスインスタンスのコンテナを管理しています。
-もし必要とされたサービスインスタンスがコンテナ内にない場合、インジェクタはAngularにそのサービスを返す前に
-インスタンスを作成してコンテナに追加します。
-リクエストされたすべてのサービスが解決されて返されると、Angularはそれらサービスを引数としてコンポーネントのコンストラクタを呼ぶことができます。
-これが*依存性の注入*です。
+*Dependency Injection*（またはDI）を使用すると、コンポーネントクラスをリーンかつ効率的に保つことができます。コンポーネントがサーバーからデータを取得したり、ユーザーの入力を検証したり、コンソールに直接ログしたりすることはありません。そのようなタスクをサービスに委譲します。
 
-`HeroService`の注入の処理は次のようになります。
+<div class="l-sub-section">
 
-<figure>
-  <img src="generated/images/guide/architecture/injector-injects.png" alt="Service">
-</figure>
+  詳細な議論については、[サービスとDIの紹介](guide/architecture-services)を参照してください。
 
-インジェクタに`HeroService`がない場合、それをどうやって作るのかどう知るのでしょうか？
+</div>
 
-手短にいえば、インジェクタに`HeroService`の**プロバイダー**を事前に登録しておく必要があります。
-プロバイダーはサービスを作成または返すことができるもので、普通はサービスクラスそのものです。
+### ルーティング
 
-プロバイダーはモジュールまたはコンポーネントに登録することができます。
+Angularの`Router` NgModuleは、アプリケーションのさまざまなアプリケーション状態とビュー階層の間でナビゲーションパスを定義できるサービスを提供します。これは使い慣れたブラウザのナビゲーションの規約に基づいています。
 
-一般には、どこでも同じサービスインスタンスを使えるように[ルートモジュール](guide/architecture#modules)に追加します。
+* アドレスバーにURLを入力すると、ブラウザが対応するページに移動します。
+* ページ上のリンクをクリックすると、ブラウザが新しいページに移動します。
+* ブラウザの前後のボタンをクリックすると、ブラウザはあなたが見たページの履歴を前後にナビゲートします。
 
-<code-example path="architecture/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts (module providers)" region="providers"></code-example>
+ルーターはURLのようなパスをページの代わりにビューにマップします。リンクのクリックなど、ユーザーが新しいページをブラウザでロードするアクションを実行すると、ルーターはブラウザの動作に介入し、ビュー階層を表示または非表示にします。
 
-または、`@Component`メタデータのプロパティ`providers`に追加して、コンポーネントレベルで登録します。
+もし現在のアプリケーション状態に特定の機能が必要であり、それを定義するモジュールがロードされていないとルーターが判断した場合、ルーターは必要に応じてモジュールを _遅延ロード_ できます。
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (component providers)" region="providers"></code-example>
+ルーターは、あなたのアプリのビューナビゲーションルールとデータの状態にしたがってリンクURLを解釈します。ユーザーがボタンをクリックしたり、ドロップボックスから選択したり、あるいは任意のソースからの他の刺激に応答したとき、新しいビューに移動できます。ルーターはブラウザの履歴にアクティビティを記録するので、戻るボタンと進むボタンも機能します。
 
-コンポーネントレベルで登録するということは、コンポーネントが作成されるたびに、新しいサービスインスタンスを得ることになるということです。
+ナビゲーションルールを定義するには、 *ナビゲーションパス* をコンポーネントに関連付けます。パスは、テンプレート構文がプログラムデータとビューを統合するのと同じ方法で、プログラムデータを統合するURLライクな構文を使用します。次に、プログラムロジックを適用して、ユーザーの入力と独自のアクセスルールに応じて、どのビューを表示または非表示にするかを選択できます。
 
-<!-- We've vastly oversimplified dependency injection for this overview.
-The full story is in the [dependency injection](guide/dependency-injection) page. -->
+ <div class="l-sub-section">
 
-依存性の注入について覚えるべきポイント:
+   詳細については、[ルーティングとナビゲーション](guide/router)を参照してください。
 
-* 依存性の注入はAngularフレームワークに配線されていて、至る所で使用されています。
-
-* *インジェクタ*はメインのメカニズムです。
-  * インジェクタは作成されたサービスインスタンスのコンテナを保持しています。
-  * インジェクタは*プロバイダー*から新しいサービスインスタンスを作成することができます。
-
-* *プロバイダー*はサービスを作成するためのレシピです。
-
-* インジェクタとともに*プロバイダー*に登録します。
+ </div>
 
 <hr/>
 
-{@a wrap-up}
-## まとめ
+## 次へ進む
 
-Angularアプリケーションの8つの主要な構成要素の基礎を学びました:
+Angularアプリケーションの主要な構成要素についての基礎を学びました。次の図は、これらの基本パーツがどのように関連しているかを示しています。
 
-* [モジュール](guide/architecture#modules)
-* [コンポーネント](guide/architecture#components)
-* [テンプレート](guide/architecture#templates)
-* [メタデータ](guide/architecture#metadata)
-* [データバインディング](guide/architecture#data-binding)
-* [ディレクティブ](guide/architecture#directives)
-* [サービス](guide/architecture#services)
-* [依存性の注入](guide/architecture#dependency-injection)
+<figure>
+  <img src="generated/images/guide/architecture/overview2.png" alt="概要">
+</figure>
 
-Angularアプリケーションではこれらがすべての基礎となり、先に進むのに十分なものです。
-しかし、これはあなたが知るべきことすべてではありません。
+* コンポーネントとテンプレートを合わせて、Angularのビューを定義します。
+  * コンポーネントクラスのデコレーターは、関連するテンプレートへの参照を含むメタデータを追加します。
+  * コンポーネントのテンプレート内のディレクティブとバインディングマークアップは、プログラムデータとロジックに基づいてビューを変更します。
+* 依存性のインジェクターは、ビュー間のナビゲーションを定義できるようにするルーターサービスなどのサービスをコンポーネントに提供します。
 
-ここに少し、重要なAngularの機能とサービスについてのリストがアルファベット順であります。
-ほとんどのものはこのドキュメントの中で網羅されています。(または近いうちに網羅されます。)
+これらのテーマのそれぞれについては、次のページで詳しく説明します。
 
-> [**アニメーション**](guide/animations): アニメーション技術やCSSの深い知識がなくともコンポーネントの挙動に
-アニメーションをつけられるAngularのアニメーションライブラリ。
+* [モジュール](guide/architecture-modules)
+* [コンポーネント](guide/architecture-components)
+  * [テンプレート](guide/architecture-components#templates-and-views)
+  * [メタデータ](guide/architecture-components#component-metadata)
+  * [データバインディング](guide/architecture-components#data-binding)
+  * [ディレクティブ](guide/architecture-components#directives)
+  * [パイプ](guide/architecture-components#pipes)
+* [サービスと依存性の注入](guide/architecture-services)
 
-> **変更検知**: 変更検知のドキュメントでは、コンポーネントのプロパティの値が変更されたこと
-いつスクリーンを更新するか、**zones**を利用してどのように非同期の動作をインターセプトして変更検知の戦略を実行するのかを
-Angularがどうやって決定するのかについて網羅する予定です。
+<div class="l-sub-section">
 
-> **イベント**: イベントのドキュメントでは、コンポーネントとサービスを使用してイベントを発行し、
-イベントを購読する仕組みを使ってイベントを発生させる方法について説明します。
+   これらのページで参照されているコードは、<live-example></live-example>として利用できます。
+</div>
 
-> [**フォーム**](guide/forms): HTML-ベースのバリデーションとダーティチェックを備えた複雑なデータ入力のシナリオをサポートします。
-
-> [**HTTP**](guide/http): HTTPクライアントを使って、サーバーと通信してデータを取得したり、保存したりサーバーサイドのアクションを呼び出します。
-
-> [**ライフサイクルフック**](guide/lifecycle-hooks): ライフサイクルフックのインターフェイスを実装することにより、作成から破棄までのコンポーネントのライフタイムの重要な瞬間に触れることができます。
-
-> [**パイプ**](guide/pipes): テンプレート内でパイプを使用することで、表示するために値を変換することができ、ユーザー体験を向上することができます。この通貨のパイプの式を見てみましょう。
-
->
-> > `price | currency:'USD':true`
->
-> これは42.23という金額を`$42.23`と表示します。
-
-> [**ルーター**](guide/router): ブラウザから離れることなく、クライアントアプリケーション内でページからページへとナビゲートします。
-
-> [**テスティング**](guide/testing): _Angular Testing Platform_を使いAngularフレームワークとやりとりして、アプリケーション部分のユニットテストを実行します。
-
+これらの基本的な構成要素に精通していれば、ドキュメンテーションでもっと詳しく調べることができます。Angularアプリケーションの作成とデプロイに役立つツールやテクニックの詳細については、[次のステップ](guide/architecture-next-steps)を参照してください。
+</div>

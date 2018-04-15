@@ -5,6 +5,7 @@
 
 <live-example></live-example> を実行してください。
 
+{@a binding-to-user-input-events}
 
 ## ユーザー入力イベントにバインドする
 

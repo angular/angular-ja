@@ -823,6 +823,7 @@ _cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー*
   linenums="false">
 </code-example>
 
+{@a testing-http-requests}
 ## HTTPリクエストをテストする
 
 外部依存関係と同様に、HTTPバックエンドをモックして、テストでリモートサーバーとのやりとりをシミュレートできるようにする必要があります。

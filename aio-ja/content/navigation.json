@@ -171,13 +171,14 @@
           ]
         },
         {
-          "title": "Components & Templates",
-          "tooltip": "Building dynamic views with data binding",
+          "title": "コンポーネント & テンプレート",
+          "tooltip": "データバインディングによる動的ビューの構築",
           "children": [
             {
               "url": "guide/displaying-data",
-              "title": "Displaying Data",
-              "tooltip": "Property binding helps show app data in the UI."
+              "title": "データの表示",
+              "tooltip": "プロパティのバインディングは、UIにアプリデータを表示するのに役立ちます。",
+              "translated": true
             },
             {
               "url": "guide/template-syntax",

@@ -8,6 +8,7 @@ const copyTargets = [
     'content/marketing/**/*',
     'content/tutorial/**/*.md',
     'content/navigation.json',
+    'src/index.html',
 ];
 
 const promiseGlob = promisify(glob);

@@ -12,4 +12,11 @@ rsync -ar aio-ja/ .tmp/aio
 # build angular.io
 cd .tmp/aio
 yarn build
+
 cd ../../
+
+# Copy robots.txt
+cp -rf aio-ja/src/robots.txt .tmp/aio/dist/
+
+# Modify sitemap
+sed -i -e "s/angular.io/angular.jp/g" .tmp/aio/dist/generated/sitemap.xml

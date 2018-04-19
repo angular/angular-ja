@@ -42,7 +42,7 @@ export class AppModule { }
 import文の後に、
 **`@NgModule`**[デコレータ](guide/glossary#decorator '"Decorator" の説明')をもつクラスがあります。
 
-`@NgModule`デコレータは`AppModule`を`NgModule`クラスとして識別します。
+`@NgModule`デコレーターは`AppModule`を`NgModule`クラスとして識別します。
 `@NgModule`はアプリケーションのコンパイルと起動の方法をAngularに伝えるメタデータオブジェクトを受け取ります。
 
 * **_declarations_**&mdash;このアプリケーションの唯一のコンポーネントです。

@@ -55,7 +55,7 @@ CLIの `ng new` コマンドは、デフォルトの `package.json` を作成し
 また、[`HttpClientModule`](guide/http) は、 '@angular/common/http'内にあります。
 
 **@angular/core**: Angularの重要なランタイム部。
-すべてのメタデータデコレータ・`Component`・`Directive`・依存関係注入・コンポーネントのライフサイクルフックが含まれています。
+すべてのメタデータデコレーター・`Component`・`Directive`・依存関係注入・コンポーネントのライフサイクルフックが含まれています。
 
 **@angular/compiler**: Angularの *テンプレートコンパイラ*。
 テンプレートを理解し、アプリケーションを実行・レンダリングするコードに変換します。

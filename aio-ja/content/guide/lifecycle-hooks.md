@@ -20,7 +20,7 @@ Angular は **ライフサイクル・フック** を勧めます、
 Angular `core` ライブラリの　*ライフサイクル・フック*　インタフェースの1つ以上を使用します。
 
 各インターフェースは、名前が `ng` で始まるインターフェース名である単一のフックメソッドを持っています。
-例えば、 `OnInit` インタフェースは　`ngOnInit()` という名前のフックメソッドを持っています。
+たとえば、 `OnInit` インタフェースは　`ngOnInit()` という名前のフックメソッドを持っています。
 Angularはコンポーネントの作成直後に呼び出します。
 
 <code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" title="peek-a-boo.component.ts (excerpt)" linenums="false"></code-example>
@@ -155,7 +155,7 @@ JavaScript言語にはインタフェースがありません。
 フック自身の利益を得るために、ディレクティブとコンポーネントにライフサイクル・フック・インターフェイスを追加する必要はありません。
 
 Angularではディレクティブ・クラスとコンポーネント・クラスを検査し、*定義されている場合は* フックメソッドを呼び出します。
-Angularは `ngOnInit()` のようなインタフェースを持つかどうかを調べ、呼び出します。
+Angularは `ngOnInit()` のようなインタフェースをもつかどうかを調べ、呼び出します。
 
 それでもやはり、タイピングやエディタ・ツールの恩恵を受けるには、TypeScriptのディレクティブ・クラスに
 インターフェイスを追加することをお勧めします。
@@ -164,7 +164,7 @@ Angularは `ngOnInit()` のようなインタフェースを持つかどうか�
 
 ## 他の Angular ライフサイクル・フック
 
-他のAngularサブシステムは、これらのコンポーネント・フックとは別のライフサイクル・フックを持つことがあります。
+他のAngularサブシステムは、これらのコンポーネント・フックとは別のライフサイクル・フックをもつことがあります。
 
 サードパーティのライブラリは、開発者がこれらのライブラリの使用方法をより詳細に制御できるように、
 フックを実装することもできます。
@@ -177,7 +177,7 @@ Angularは `ngOnInit()` のようなインタフェースを持つかどうか�
 の制御下でコンポーネントとして提示された一連の演習を通して、
 ライフサイクルのフックを実演しています。
 
-それらは共通のパターンに従います： 一つの *親* コンポーネントは、ライフサイクル・フック・メソッド
+それらは共通のパターンに従います： ひとつの *親* コンポーネントは、ライフサイクル・フック・メソッド
 の1つ以上を示す *子* コンポーネントのテスト・リグ(用具)として機能します。
 
 各エクササイズについて簡単に説明します：
@@ -325,7 +325,7 @@ Angularは `ngOnInit()` のようなインタフェースを持つかどうか�
 
 <div class="l-sub-section">
 
-  冗談はさておき、二つの重要な点に注意を払います：
+  冗談はさておき、ふたつの重要な点に注意を払います：
 
   1. *ディレクティブ* およびコンポーネントのAngular呼び出しフックメソッド。<br><br>
 
@@ -347,7 +347,7 @@ Angularは `ngOnInit()` のようなインタフェースを持つかどうか�
 
 <code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" title="src/app/spy.component.html" linenums="false"></code-example>
 
-それぞれのスパイの出生と死は、付属のヒーロー `<div>` の出生と死を、以下に示すように
+それぞれのスパイの出生と死は、付属のヒーロー `<div>` の出生と死を、つぎに示すように
  *フック・ログ* に記入して記録します。
 
 <figure>
@@ -539,7 +539,7 @@ Angularは `AfterViewChecked()` を頻繁に呼び出します。多くの場合
 
 ## AfterContent
 
-*AfterContent* サンプルは、AngularがAngularの *後* に呼び出す `AfterContentInit()` と 
+*AfterContent* サンプルは、AngularがAngularの *後* に呼び出す `AfterContentInit()` と
 `AfterContentChecked()` がフックし、外部コンテンツをコンポーネントに投影することを探ります。
 
 {@a content-projection}
@@ -596,11 +596,11 @@ Angularはそのコンテンツをどこに挿入するかを指示します。
 * *AfterView* フックは、要素のタグがコンポーネントのテンプレート *内に*
 表示されている子コンポーネントである `ViewChildren` に関係します。
 
-* *AfterContent* フックは、Angularがコンポーネントに投影した子コンポーネントである 
+* *AfterContent* フックは、Angularがコンポーネントに投影した子コンポーネントである
 `ContentChildren` に関係します。
 
 次の *AfterContent* フックは、[@ContentChild](api/core/ContentChild) で装飾された
-プロパティを介してそれらを照会することによってのみ達することができる 
+プロパティを介してそれらを照会することによってのみ達することができる
 *コンテント チャイルド* の値を変更することに基づいてアクションを実行します。
 
 <code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="hooks" title="AfterContentComponent (class excerpts)" linenums="false"></code-example>

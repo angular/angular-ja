@@ -43,11 +43,13 @@
 
 _npm_から*インメモリWeb API*をインストールします。
 
+**重要:** 現在の`@anular/cli`のリリースと互換性をもたせるため、ここではパッケージバージョンを`v0.5`に固定しています。
+
 <code-example language="sh" class="code-shell">
-  npm install angular-in-memory-web-api --save
+  npm install angular-in-memory-web-api@0.5 --save
 </code-example>
 
-`InMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。
+`HttpClientInMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。
 
 <code-example 
   path="toh-pt6/src/app/app.module.ts" 
@@ -55,7 +57,7 @@ _npm_から*インメモリWeb API*をインストールします。
   title="src/app/app.module.ts (インメモリ Web API をインポート)">
 </code-example>
 
-`InMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
+`HttpClientInMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
 &mdash;_`HttpClient`をインポートしたあとに_&mdash;
 さらにそれを`InMemoryDataService`で設定します。
 

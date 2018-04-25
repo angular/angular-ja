@@ -33,6 +33,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
 
   <script>
+    // Redirect to custom domain hosted version
+    if (location.hostname === 'angular-ja.firebaseapp.com') {
+      location.href = `https://angular.jp${location.pathname}`;
+    }
+  </script>
+
+  <script>
     // Dynamically, pre-emptively, add `noindex`, which will be removed when the doc is ready and valid
     var tag = document.createElement('meta'); tag.name = 'googlebot'; tag.content = 'noindex';
     document.head.appendChild(tag);

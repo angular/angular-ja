@@ -31,3 +31,7 @@ https://github.com/angular/angular-ja/commit/d0b7be4a43769c3ef554b56159747ce626b
 - layout/doc-viewer
 - index.html
 - pwa-manifest.json
+
+## angular.jpへリダイレクト
+
+- index.html

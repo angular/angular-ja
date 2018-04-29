@@ -19,3 +19,19 @@ https://github.com/angular/angular-ja/commit/d0b7be4a43769c3ef554b56159747ce626b
 ### favicon.ico差し替え
 
 - aio-ja/src/favicon.ico
+
+### aio-ja/src/index.html
+
+- Google Search Console 用のverification
+- lang="ja"指定
+
+
+## タイトルをAngular JPに変更
+
+- layout/doc-viewer
+- index.html
+- pwa-manifest.json
+
+## angular.jpへリダイレクト
+
+- index.html

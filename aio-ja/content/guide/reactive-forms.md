@@ -52,7 +52,7 @@ _リアクティブ_ フォームでは、
 元の値を純粋なソースとして扱います。
 コンポーネントはデータモデルを直接更新するのではなく、
 ユーザーの変更を検知して外部コンポーネントまたはサービスに転送します。
-これらのコンポーネントまたはサービス側では、何か処理を実行し（例えば保存など）、
+これらのコンポーネントまたはサービス側では、何か処理を実行し（たとえば保存など）、
 更新されたモデル状態を反映する新しいデータモデルをコンポーネントに返します。
 
 リアクティブフォームディレクティブを使用する場合、
@@ -104,7 +104,7 @@ Angularは、`ngModel`を用いて、ユーザーの変更に合わせて _デ�
 また、テンプレート駆動フォームの非同期性はユニットテストを複雑にします。
 テストブロックを `async()`または `fakeAsync()`にラップする必要があります。
 まだ存在しないフォームの値を探すのは避けてください。
-リアクティブフォームでは、期待通りのものがすべて利用可能です。
+リアクティブフォームでは、期待どおりのものがすべて利用可能です。
 
 ### リアクティブフォームとテンプレート駆動フォームの選び方
 
@@ -416,7 +416,7 @@ JavaScriptの`import`文を使用します。
 ユーザーが`<input>`にデータを入力すると、その値は**_フォームモデル_**に入ります。
 フォームモデルを表示するには、
 `hero-detail.component.html`の`<form>`の閉じタグの後に、
-以下の行を追加します:
+次の行を追加します:
 
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-2.component.html" region="form-value-json" title="src/app/hero-detail/hero-detail.component.html" linenums="false">
@@ -452,10 +452,10 @@ JavaScriptの`import`文を使用します。
 
 </code-example>
 
-以下の方針で`HeroDetailComponent`をリファクタリングして、
+次の方針で`HeroDetailComponent`をリファクタリングして、
 コードの読み書きが容易なものにできます:
 
-* `heroForm`プロパティの型を`FormGroup`と明示的に宣言します。後でそれを初期化します。
+* `heroForm`プロパティの型を`FormGroup`と明示的に宣言します。あとでそれを初期化します。
 * コンストラクタに `FormBuilder` を注入します。
 * `FormBuilder`を使って`heroForm`を定義する新しいメソッド（`createForm()`）を追加します。
 * コンストラクタで `createForm()`を呼び出します。
@@ -541,13 +541,13 @@ Angularフォームのバリデーションについての詳細は、
 
 </code-example>
 
-`states`プロパティを宣言し、いくつかの住所`FormControls`を`heroForm`に以下のように追加してください。
+`states`プロパティを宣言し、いくつかの住所`FormControls`を`heroForm`に次のように追加してください。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-4.component.ts" region="v4" title="src/app/hero-detail/hero-detail.component.ts (excerpt)" linenums="false">
 
 </code-example>
 
-次に、対応するマークアップを`hero-detail.component.html`に以下のように追加します。
+次に、対応するマークアップを`hero-detail.component.html`に次のように追加します。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-4.component.html" title="src/app/hero-detail/hero-detail.component.html" linenums="false">
 
@@ -589,7 +589,7 @@ Angular `FormGroup`および`FormControl`プロパティにバインドします
 
 肥大化していくフォームをより効率良く管理するために、
 関連する`FormControl`のいくつかを`FormGroup`の中にまとめてグループ化するという方法があります。
-例えば、`street`、`city`、`state`、`zip`といったプロパティは、address `FormGroup`としてグループ化するのが理想的です。
+たとえば、`street`、`city`、`state`、`zip`といったプロパティは、address `FormGroup`としてグループ化するのが理想的です。
 このようにグループとコントロールをネストすると、データモデルの階層構造をミラー化し、
 関連する一連のコントロールのバリーデションステータスのトラッキングに役立ちます。
 
@@ -637,7 +637,7 @@ Angular `FormGroup`および`FormControl`プロパティにバインドします
 フォーム内の個々の`FormControl`をチェックするには、
 `get() `メソッドを使ってフォームを抽出します。
 これをコンポーネントクラス内で行うこともできますし、
-テンプレートの `{{form.value | json}}` インターポレーションの直後に、以下のように追加して表示することもできます:
+テンプレートの `{{form.value | json}}` インターポレーションの直後に、次のように追加して表示することもできます:
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-5.component.html" region="inspect-value" title="src/app/hero-detail/hero-detail.component.html" linenums="false">
 
@@ -739,7 +739,7 @@ Angular `FormGroup`および`FormControl`プロパティにバインドします
     <td>
 
 
-      ユーザがまだ当該HTMLコントロールに入っていない状態でblurイベントがトリガーされた場合に`true`を返します。
+      ユーザーがまだ当該HTMLコントロールに入っていない状態でblurイベントがトリガーされた場合に`true`を返します。
       これの反対の動きをするのが`myControl.touched`になります。
 
     </td>
@@ -768,7 +768,7 @@ Angular フォームのバリデーションについての詳細については
 
 このアプリでは、`HeroDetailComponent`は親の`HeroListComponent`からヒーローを取得します。
 
-これより、サーバから受け取った `hero` オブジェクトのことを **_データモデル_** と記しています。
+これより、サーバーから受け取った `hero` オブジェクトのことを **_データモデル_** と記しています。
 `FormControl` の構造のことを **_フォームモデル_** と記しています。
 
 コンポーネントは、データモデルのヒーロー値をフォームモデルにコピーする必要があります。
@@ -787,7 +787,7 @@ Angular フォームのバリデーションについての詳細については
 
 この`HeroDetailComponent`では、2つのモデルが非常に近いです。
 
-`data-model.ts`の`Hero`と`Address`の定義は以下の通りです:
+`data-model.ts`の`Hero`と`Address`の定義は次のとおりです:
 
 <code-example path="reactive-forms/src/app/data-model.ts" region="model-classes" title="src/app/data-model.ts (classes)" linenums="false">
 
@@ -841,7 +841,7 @@ Angular フォームのバリデーションについての詳細については
 
 ### `setValue()`
 `setValue()`では、すべてのフォーム制御値を一度に割り当てます。
-`FormGroup`の背後にあるフォームモデルと完全に一致するプロパティを持つデータオブジェクトを渡します。
+`FormGroup`の背後にあるフォームモデルと完全に一致するプロパティをもつデータオブジェクトを渡します。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-7.component.ts" region="set-value" title="src/app/hero-detail/hero-detail.component.ts (excerpt)" linenums="false">
 
@@ -869,7 +869,7 @@ Angular フォームのバリデーションについての詳細については
 **`patchValue()`** を使うと、`FormGroup`内の特定のコントロールに対して、
 キーと値のペアのオブジェクトを渡すことで、値をセットすることができます。
 
-以下の例では、フォームの`name`コントロールのみをセットします。
+次の例では、フォームの`name`コントロールのみをセットします。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-6.component.ts" region="patch-value" title="src/app/hero-detail/hero-detail.component.ts (excerpt)" linenums="false">
 
@@ -888,7 +888,7 @@ Angular フォームのバリデーションについての詳細については
 
 リアクティブフォームのさらなる使い方とテクニックを知るために、`HeroListComponent`と`HeroService`を追加していきます。リアクティブフォームの便利さは、このサンプルにもっと多くの機能を追加することで感じとれるでしょう。
 
-`HeroDetailComponent`は、 _master/detail_ ビュー内の`HeroListComponent`のネストされたサブコンポーネントです。両者は以下のようになっています:
+`HeroDetailComponent`は、 _master/detail_ ビュー内の`HeroListComponent`のネストされたサブコンポーネントです。両者は次のようになっています:
 
 
 <figure>
@@ -904,14 +904,14 @@ Angular フォームのバリデーションについての詳細については
 
 </code-example>
 
-`HeroListComponent` に以下の記述を行います:
+`HeroListComponent` に次の記述を行います:
 
 <code-example path="reactive-forms/src/app/hero-list/hero-list.component.ts" title="hero-list.component.ts" linenums="false">
 
 </code-example>
 
 
-次に、以下のコマンドを実行して`HeroService`を追加します:
+次に、次のコマンドを実行して`HeroService`を追加します:
 
 <code-example language="sh" class="code-shell">
 
@@ -919,7 +919,7 @@ Angular フォームのバリデーションについての詳細については
 
 </code-example>
 
-そして、以下のように記述します:
+そして、次のように記述します:
 
 <code-example path="reactive-forms/src/app/hero.service.ts" title="hero.service.ts" linenums="false">
 
@@ -980,8 +980,8 @@ Refreshボタンはヒーローリストと現在選択されているヒーロ�
 
 フォームモデル値をセットするタイミングは、コンポーネントがデータモデル値を取得するタイミングによって異なります。
 
-`HeroListComponent`はヒーロー名をユーザに表示します。
-ユーザがヒーローをクリックすると、`HeroListComponent`は`hero`  `@Input()`プロパティにバインドすることによって、選択されたヒーローを`HeroDetailComponent`に渡します。
+`HeroListComponent`はヒーロー名をユーザーに表示します。
+ユーザーがヒーローをクリックすると、`HeroListComponent`は`hero` `@Input()`プロパティにバインドすることによって、選択されたヒーローを`HeroDetailComponent`に渡します。
 
 <code-example path="reactive-forms/src/app/hero-list/hero-list.component.1.html" title="hero-list.component.html (simplified)" linenums="false">
 
@@ -1029,7 +1029,7 @@ Refreshボタンはヒーローリストと現在選択されているヒーロ�
 `FormGroup`は、そのプロパティの値が`FormControl`と他の`FormGroup`で構成される、名前付きオブジェクトです。
 
 場合によっては、任意の数のコントロールやグループを表示する必要があります。
-たとえば、ヒーローの住所は、0、1、または任意の数の住所を持つことができます。
+たとえば、ヒーローの住所は、0、1、または任意の数の住所をもつことができます。
 
 `Hero.addresses`プロパティは`Address`インスタンスの配列です。
 `address` `FormGroup`は、1つの`Address`を表示することができます。
@@ -1050,7 +1050,7 @@ Angular `FormArray`は、`address` `FormGroup`の配列を表示できます。
 1. ユーザーが必要とするアイテムを追加・削除します。
 
 `Hero.addresses`のために`FormArray`を定義して、
-ユーザが住所を追加したり変更したりできるようにします。
+ユーザーが住所を追加したり変更したりできるようにします。
 
 そうなると、`HeroDetailComponent` `createForm()`メソッドでフォームモデルを再定義する必要が生じます。
 現在、`address`は`FormGroup`なので、住所は1つしか表示できません:
@@ -1131,12 +1131,12 @@ _プレゼンテーション_ 要件は _データ_ 要件と異なる場合が�
 ヒーローの `address` `FormGroup` が複数表示できるように修正していきます。
 
 主な修正としては、これまでマークアップしたテンプレートHTMLの住所にある `<div>`をラップするかたちで、
-  `<div>`と`*ngFor`を繰り返すことです。
+`<div>`と`*ngFor`を繰り返すことです。
 
 `*ngFor`を書くときには3つのポイントがあります:
 
 1. `<div>`と`*ngFor`を使って、別のラッピング`<div>`を追加し、
-  `formArrayName`ディレクティブを`secretLairs`にセットしてください。
+`formArrayName`ディレクティブを`secretLairs`にセットしてください。
 このステップは、繰り返されるHTMLテンプレート内のフォームコントロールのコンテキストとして`secretLairs` `FormArray`を確立します。
 
 1. 繰り返される項目のソースは、FormArray自体ではなく、`FormArray.controls`です。
@@ -1177,7 +1177,7 @@ HTMLテンプレートの隠れ家セクションの骨組みは次のとおり�
 
 button要素のtype属性はデフォルト値が "submit" なので、
 必ず `type="button"` を追加してください。
-type属性を指定せずに、後でフォーム送信アクションを実装すると、
+type属性を指定せずに、あとでフォーム送信アクションを実装すると、
 すべてのボタンが送信アクションをトリガーすることになり、現在の変更を保存するようなことが起こります。
 ユーザーが _Add a Secret Lair_ ボタンをクリックしたタイミングでは、ユーザーの変更を保存する必要はありません。
 
@@ -1205,7 +1205,7 @@ type属性を指定せずに、後でフォーム送信アクションを実装�
 
 ## コントロールの変更を監視する
 
-Angularは、ユーザが親`HeroListComponent`のヒーローを選んだタイミングで`ngOnChanges()`を呼び出します。
+Angularは、ユーザーが親`HeroListComponent`のヒーローを選んだタイミングで`ngOnChanges()`を呼び出します。
 ヒーローを選ぶと、`HeroDetailComponent.hero` `@Input() `プロパティが変更されます。
 
 Angularは、ユーザーがヒーローの `name`または`secretLairs`を変更したときに`ngOnChanges()`を呼び出すことはありません。
@@ -1221,7 +1221,7 @@ Angularは、ユーザーがヒーローの `name`または`secretLairs`を変�
 
 </code-example>
 
-コンストラクタの`createForm()`の後で呼び出します。
+コンストラクタの`createForm()`のあとで呼び出します。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-8.component.ts" region="ctor" title="src/app/hero-detail/hero-detail.component.ts" linenums="false">
 
@@ -1236,7 +1236,7 @@ Angularは、ユーザーがヒーローの `name`または`secretLairs`を変�
 
 
 
-ブラウザに戻り、ヒーローを選択します。例えば、Magnetaを選択し、`name` `<input> `への入力を開始します。
+ブラウザに戻り、ヒーローを選択します。たとえば、Magnetaを選択し、`name` `<input> `への入力を開始します。
 各キーストローク後にログに新しい名前が表示されます。
 
 ### 使うタイミング
@@ -1249,7 +1249,7 @@ Angularは、ユーザーがヒーローの `name`または`secretLairs`を変�
 
 ## フォームデータを保存する
 
-`HeroDetailComponent`はユーザ入力を取得できるようになりましたが、現時点では取得しただけで何もしていません。
+`HeroDetailComponent`はユーザー入力を取得できるようになりましたが、現時点では取得しただけで何もしていません。
 実際のアプリでは、ヒーローの変更を保存したり、保存されていない変更を元に戻したり、編集を再開することができるはずです。
 このセクションでは、保存と元に戻す機能を実装します。フォームは次のようになります:
 
@@ -1337,7 +1337,7 @@ Revertボタンをクリックすると、コンポーネントの`revert`メソ
 {@a source-code}
 
 
-最終バージョンのキーとなるファイルは次の通りです:
+最終バージョンのキーとなるファイルは次のとおりです:
 
 
 <code-tabs>

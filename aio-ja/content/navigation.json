@@ -187,8 +187,9 @@
             },
             {
               "url": "guide/lifecycle-hooks",
-              "title": "Lifecycle Hooks",
-              "tooltip": "Angular calls lifecycle hook methods on directives and components as it creates, changes, and destroys them."
+              "title": "ライフサイクル・フック",
+              "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
+              "translated": true
             },
             {
               "url": "guide/component-interaction",
@@ -309,8 +310,9 @@
           "children": [
             {
               "url": "guide/ngmodules",
-              "title": "NgModules Introduction",
-              "tooltip": "Use NgModules to make your apps efficient."
+              "title": "NgModuleイントロダクション",
+              "tooltip": "アプリケーションを効率的にするためにNgModuleを使用しましょう。",
+              "translated": true  
             },
             {
               "url": "guide/ngmodule-vs-jsmodule",
@@ -395,7 +397,7 @@
           "url": "guide/http",
           "title": "HttpClient",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
-          "translated": false
+          "translated": true
         },
         {
           "url": "guide/router",

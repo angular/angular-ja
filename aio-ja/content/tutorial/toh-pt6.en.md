@@ -43,13 +43,15 @@ If you're _coding along_ with this tutorial, stay here and add the *In-memory We
 
 </div>
 
-Install the *In-memory Web API* package from _npm_
+Install the *In-memory Web API* package from _npm_.
+
+**Note:** This package's version is locked to `v0.5` to maintain compatibility with the current release of `@angular/cli`.
 
 <code-example language="sh" class="code-shell">
-  npm install angular-in-memory-web-api --save
+  npm install angular-in-memory-web-api@0.5 --save
 </code-example>
 
-Import the `InMemoryWebApiModule` and the `InMemoryDataService` class, 
+Import the `HttpClientInMemoryWebApiModule` and the `InMemoryDataService` class, 
 which you will create in a moment.
 
 <code-example 
@@ -58,7 +60,7 @@ which you will create in a moment.
   title="src/app/app.module.ts (In-memory Web API imports)">
 </code-example>
 
-Add the `InMemoryWebApiModule` to the `@NgModule.imports` array&mdash;
+Add the `HttpClientInMemoryWebApiModule` to the `@NgModule.imports` array&mdash;
 _after importing the `HttpClient`_,
 &mdash;while configuring it with the `InMemoryDataService`.
 

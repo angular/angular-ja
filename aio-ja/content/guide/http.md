@@ -1,29 +1,27 @@
 # HttpClient
 
-Most front-end applications communicate with backend services over the HTTP protocol. Modern browsers support two different APIs for making HTTP requests: the `XMLHttpRequest` interface and the `fetch()` API.
+ほとんどのフロントエンドアプリケーションは、HTTPプロトコルを使用してバックエンドサービスと通信します。
+モダンブラウザは、HTTPリクエストを行うための2つのAPIをサポートしています。`XMLHttpRequest`インターフェースと`fetch()`APIです。
 
-The `HttpClient` in `@angular/common/http` offers a simplified client HTTP API for Angular applications
-that rests on the `XMLHttpRequest` interface exposed by browsers.
-Additional benefits of `HttpClient` include testability features, typed request and response objects, request and response interception, `Observable` apis, and streamlined error handling.
+`@angular/common/http`の`HttpClient`は、Angularアプリケーション用のシンプルなクライアントHTTP APIを提供します。
+これはブラウザによって公開される`XMLHttpRequest`インタフェースに依存します。
+さらに`HttpClient`の利点としては、テスト機能、リクエストとレスポンスオブジェクトの型付け、リクエストとレスポンスのインターセプト、`Observable`のAPI、そして合理化されたエラー処理が含まれます。
 
-You can run the <live-example></live-example> that accompanies this guide.
+このガイドに付属の<live-example></live-example>はその場で実行できます。
 
 <div class="alert is-helpful">
 
-The sample app does not require a data server.
-It relies on the 
-[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md),
-which replaces the _HttpClient_ module's `HttpBackend`.
-The replacement service simulates the behavior of a REST-like backend.
+サンプルアプリはデータサーバーを必要としません。
+_HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
+このサービスはRESTのようなバックエンドの動作をシミュレートします。
 
-Look at the `AppModule` _imports_ to see how it is configured.
+`AppModule`の_imports_を見て、それがどのように設定されているかを見てください。
 
 </div>
 
-## Setup
+## セットアップ
 
-Before you can use the `HttpClient`, you need to import the Angular `HttpClientModule`. 
-Most apps do so in the root `AppModule`.
+`HttpClient`を使う前に、Angular`HttpClientModule`をインポートする必要があります。ほとんどのアプリはルート`AppModule`で行います。
 
 <code-example 
   path="http/src/app/app.module.ts"
@@ -31,8 +29,7 @@ Most apps do so in the root `AppModule`.
   title="app/app.module.ts (excerpt)" linenums="false">
 </code-example>
 
-Having imported `HttpClientModule` into the `AppModule`, you can inject the `HttpClient`
-into an application class as shown in the following `ConfigService` example.
+`HttpClientModule`を`AppModule`にインポートしたら、次の`ConfigService`の例に示すように`HttpClient`をアプリケーションクラスに注入できるようになります。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -40,18 +37,17 @@ into an application class as shown in the following `ConfigService` example.
   title="app/config/config.service.ts (excerpt)" linenums="false">
 </code-example>
 
-## Getting JSON data
+## JSONデータを取得する
 
-Applications often request JSON data from the server. 
-For example, the app might need a configuration file on the server, `config.json`, 
-that specifies resource URLs.
+アプリケーションはしばしばJSONデータをサーバーに要求します。
+たとえば、リソースURLを指定するサーバーの設定ファイル`config.json`が必要になるかもしれません。
 
 <code-example 
   path="http/src/assets/config.json"
   title="assets/config.json" linenums="false">
 </code-example>
 
-The `ConfigService` fetches this file with a `get()` method on `HttpClient`.
+`ConfigService`はこのファイルを`HttpClient`の`get()`メソッドでフェッチします。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -59,8 +55,7 @@ The `ConfigService` fetches this file with a `get()` method on `HttpClient`.
   title="app/config/config.service.ts (getConfig v.1)" linenums="false">
 </code-example>
 
-A component, such as `ConfigComponent`, injects the `ConfigService` and calls
-the `getConfig` service method.
+`ConfigComponent`というコンポーネントは、`ConfigService`を注入し`getConfig`サービスメソッドを呼び出します。
 
 <code-example 
   path="http/src/app/config/config.component.ts"
@@ -68,50 +63,45 @@ the `getConfig` service method.
   title="app/config/config.component.ts (showConfig v.1)" linenums="false">
 </code-example>
 
-Because the service method returns an `Observable` of configuration data,
-the component **subscribes** to the method's return value.
-The subscription callback copies the data fields into the component's `config` object,
-which is data-bound in the component template for display.
+サービスメソッドは構成データの`Observable`を返すので、コンポーネントはメソッドの戻り値を**購読**します。
+サブスクリプションのコールバックでは、データフィールドをコンポーネントの`config`オブジェクトにコピーします。
+このオブジェクトは、表示のためにコンポーネントのテンプレート内でデータバインドされています。
 
-### Why write a service
+### なぜサービスを書くのか？
 
-This example is so simple that it is tempting to write the `Http.get()` inside the
-component itself and skip the service.
+この例はとてもシンプルで、`Http.get()`をコンポーネント自身に書いてサービスは作りません。
 
-However, data access rarely stays this simple.
-You typically post-process the data, add error handling, and maybe some retry logic to
-cope with intermittent connectivity.
+しかし、データアクセスはめったにこのようなシンプルな形にはなりません。
+典型的には、データの後処理、エラー処理の追加、断続的な接続に対処するためのリトライロジックなどがあります。
 
-The component quickly becomes cluttered with data access minutia.
-The component becomes harder to understand, harder to test, and the data access logic can't be re-used or standardized.
+このコンポーネントは、データアクセスの細分化ですぐに乱雑になります。
+コンポーネントの理解が難しくなり、テストが難しくなり、データアクセスロジックを再利用したり標準化することができなくなります。
 
-That's why it is a best practice to separate presentation of data from data access by
-encapsulating data access in a separate service and delegating to that service in
-the component, even in simple cases like this one.
+そのため、このサービスのような単純なケースでも、データアクセスを別のサービスにカプセル化し、コンポーネント内のそのサービスに委任することによって、データの表示とデータアクセスを分離することがベストプラクティスです。
 
-### Type-checking the response
+### レスポンスを型判定する
 
-The subscribe callback above requires bracket notation to extract the data values.
+上記のサブスクライブのコールバックは、データ値を抽出するためにブラケット記法が必要です。
 
 <code-example 
   path="http/src/app/config/config.component.ts"
   region="v1_callback" linenums="false">
 </code-example>
 
-You can't write `data.heroesUrl` because TypeScript correctly complains that the `data` object from the service does not have a `heroesUrl` property. 
+`data.heroesUrl`と書くことはできません。TypeScriptは、サービスの`data`オブジェクトに`heroesUrl`プロパティがないと正しく警告するからです。
 
-The `HttpClient.get()` method parsed the JSON server response into the anonymous `Object` type. It doesn't know what the shape of that object is.
+`HttpClient.get()`メソッドは、JSONのサーバーレスポンスを匿名の`Object`型に解析しました。そのオブジェクトの形が何であるかはわかりません。
 
-You can tell `HttpClient` the type of the response to make consuming the output easier and more obvious.
+`HttpClient`にレスポンスの型を伝えれば、アウトプットをより簡単かつ明瞭に使えます。
 
-First, define an interface with the correct shape:
+はじめに、正しい型でインターフェースを定義します。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="config-interface" linenums="false">
 </code-example>
 
-Then, specify that interface as the `HttpClient.get()` call's type parameter in the service:
+次に、そのインターフェースをサービスの`HttpClient.get()`呼び出しの型パラメーターとして指定します。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -119,8 +109,7 @@ Then, specify that interface as the `HttpClient.get()` call's type parameter in 
   title="app/config/config.service.ts (getConfig v.2)" linenums="false">
 </code-example>
 
-The callback in the updated component method receives a typed data object, which is
-easier and safer to consume:
+更新されたコンポーネントメソッドのコールバックは、より簡単で安全な型指定されたデータオブジェクトを受け取ります。
 
 <code-example 
   path="http/src/app/config/config.component.ts"
@@ -128,20 +117,21 @@ easier and safer to consume:
   title="app/config/config.component.ts (showConfig v.2)" linenums="false">
 </code-example>
 
-### Reading the full response
+### レスポンス全体を読む
 
-The response body doesn't return all the data you may need. Sometimes servers return special headers or status codes to indicate certain conditions that are important to the application workflow. 
+レスポンスボディはすべてのデータを返しません。場合によっては、サーバーは特別なヘッダーやステータスコードを返すことがあります。
+アプリケーションのワークフローに重要な特定の条件を示すためにです。
 
-Tell `HttpClient` that you want the full response with the `observe` option:
+`HttpClient`に`observe`オプションをつければレスポンス全体が読めるようになります。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="getConfigResponse" linenums="false">
 </code-example>
 
-Now `HttpClient.get()` returns an `Observable` of typed `HttpResponse` rather than just the JSON data.
+今度は`HttpClient.get()`は、JSONデータだけではなく、型付けされた`HttpResponse`の`Observable`を返します。
 
-The component's `showConfigResponse()` method displays the response headers as well as the configuration:
+コンポーネントの`showConfigResponse()`メソッドはレスポンスヘッダとコンフィグレーションを表示します。
 
 <code-example 
   path="http/src/app/config/config.component.ts"
@@ -150,13 +140,14 @@ The component's `showConfigResponse()` method displays the response headers as w
   linenums="false">
 </code-example>
 
-As you can see, the response object has a `body` property of the correct type.
+ご覧のように、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
 
-## Error handling
+## エラーハンドリング
 
-What happens if the request fails on the server, or if a poor network connection prevents it from even reaching the server? `HttpClient` will return an _error_ object instead of a successful response.
+サーバーでリクエストが失敗した場合、または貧弱なネットワーク接続が原因でサーバーに到達できない場合はどうなるでしょうか？
+`HttpClient`は成功したレスポンスの代わりに _エラー_ オブジェクトを返します。
 
-You _could_ handle in the component by adding a second callback to the `.subscribe()`:
+`.subscribe()`に2番目のコールバックを追加することでコンポーネント内で処理 _できました_
 
 <code-example 
   path="http/src/app/config/config.component.ts"
@@ -165,25 +156,25 @@ You _could_ handle in the component by adding a second callback to the `.subscri
   linenums="false">
 </code-example>
 
-It's certainly a good idea to give the user some kind of feedback when data access fails.
-But displaying the raw error object returned by `HttpClient` is far from the best way to do it.
+データアクセスが失敗したときにユーザーに何らかのフィードバックを与えることは、確かによい考えです。
+しかし、`HttpClient`によって返された生のエラーオブジェクトを表示することは、最善の方法からほど遠いです。
 
 {@a error-details}
-### Getting error details
+### エラーの詳細を得る
 
-Detecting that an error occurred is one thing.
-Interpreting that error and composing a user-friendly response is a bit more involved.
+エラーが発生したことを検出することが重要です。そのエラーを解釈し、ユーザーフレンドリーなレスポンスを構成することはもう少し複雑です。
 
-Two types of errors can occur. The server backend might reject the request, returning an HTTP response with a status code such as 404 or 500. These are error _responses_.
+2種類のエラーが発生する可能性があります。サーバーバックエンドはリクエストを拒否し、HTTPレスポンスに404または500などのステータスコードを返します。
+これらはエラー_レスポンス_です。
 
-Or something could go wrong on the client-side such as a network error that prevents the request from completing successfully or an exception thrown in an RxJS operator. These errors produce JavaScript `ErrorEvent` objects.
+あるいは、リクエストが正常に完了するのを妨げるネットワークエラーや、RxJSオペレータでスローされた例外など、クライアント側で何かが間違っている可能性があります。
+これらのエラーは、JavaScriptの`ErrorEvent`オブジェクトを生成します。
 
-The `HttpClient` captures both kinds of errors in its `HttpErrorResponse` and you can inspect that response to figure out what really happened.
+`HttpClient`は`HttpErrorResponse`で両方の種類のエラーを捕捉し、実際に何が起きたのかを調べるためにレスポンスを調べることができます。
 
-Error inspection, interpretation, and resolution is something you want to do in the _service_, 
-not in the _component_.  
+エラー検査、解釈、および解決は、_component_ではなく_service_で実行したいことです。
 
-You might first devise an error handler like this one:
+このようなエラーハンドラを最初に考案するかもしれません。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -191,12 +182,10 @@ You might first devise an error handler like this one:
   title="app/config/config.service.ts (handleError)" linenums="false">
 </code-example>
 
-Notice that this handler returns an RxJS [`ErrorObservable`](#rxjs) with a user-friendly error message.
-Consumers of the service expect service methods to return an `Observable` of some kind,
-even a "bad" one.
+このハンドラは、RxJSの[`ErrorObservable`](#rxjs)を使いやすいエラーメッセージとともに返します。
+サービスの利用者は、サービスメソッドが何らかの`Observable`、特に"悪い"Observableを返すことを期待しています。
 
-Now you take the `Observables` returned by the `HttpClient` methods
-and _pipe them through_ to the error handler.
+今度は、`HttpClient`メソッドによって返された`Observables`を取得し、エラーハンドラに_それらを渡します。_
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -206,14 +195,14 @@ and _pipe them through_ to the error handler.
 
 ### `retry()`
 
-Sometimes the error is transient and will go away automatically if you try again.
-For example, network interruptions are common in mobile scenarios, and trying again
-may produce a successful result.
+場合によってはエラーが一時的で、再試行すると自動的に消えます。
+たとえば、ネットワークの中断はモバイルシナリオでは一般的であり、再試行すると成功する可能性があります。
 
-The [RxJS library](#rxjs) offers several _retry_ operators that are worth exploring.
-The simplest is called `retry()` and it automatically re-subscribes to a failed `Observable` a specified number of times. _Re-subscribing_ to the result of an `HttpClient` method call has the effect of reissuing the HTTP request.
+[RxJSライブラリ](#rxjs)には、価値のある_retry_オペレーターがいくつか用意されています。
+もっとも単純なものは`retry()`と呼ばれ、失敗した`Observable`に指定された回数だけ自動的に再購読します。
+`HttpClient`メソッド呼び出しの結果を_再購読_することは、HTTPリクエストを再発行するという効果があります。
 
-_Pipe_ it onto the `HttpClient` method result just before the error handler.
+それをエラーハンドラの直前の`HttpClient`メソッドの結果に_パイプ_します。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -222,19 +211,19 @@ _Pipe_ it onto the `HttpClient` method result just before the error handler.
 </code-example>
 
 {@a rxjs}
-## Observables and operators
+## Observablesとオペレーター
 
-The previous sections of this guide referred to RxJS `Observables` and operators such as `catchError` and `retry`.
-You will encounter more RxJS artifacts as you continue below.
+このガイドの前のセクションでは、RxJSの`Observables`と`catchError`や`retry`などのオペレーターについて説明しました。
+以降のセクションに進むと、もっと多くのRxJS由来のものに出会います。
 
-[RxJS](http://reactivex.io/rxjs/) is a library for composing asynchronous and callback-based code
-in a _functional, reactive style_.
-Many Angular APIs, including `HttpClient`, produce and consume RxJS `Observables`. 
+[RxJS](http://reactivex.io/rxjs/)は、非同期およびコールバックベースのコードを_関数的かつリアクティブなスタイル_で作成するためのライブラリです。
+`HttpClient`を含む多くのAngular APIは、RxJSの`Observables`を生成し、利用します。
 
-RxJS itself is out-of-scope for this guide. You will find many learning resources on the web.
-While you can get by with a minimum of RxJS knowledge, you'll want to grow your RxJS skills over time in order to use `HttpClient` effectively.
+RxJS自体はこのガイドの範囲外です。 あなたはウェブ上で多くの学習リソースを見つけるでしょう。
+最低限のRxJS知識を身に付けることができますが、やがて`HttpClient`を効果的に使用するためにRxJSスキルを成長させたくなるでしょう。
 
-If you're following along with these code snippets, note that you must import the RxJS observable and operator symbols that appear in those snippets. These `ConfigService` imports are typical.
+これらのコードスニペットにしたがっている場合、そのスニペットに表示されるRxJSのObservableとオペレーターのシンボルをインポートする必要があることに注意してください。
+次の`ConfigService`のインポートは典型的なものです。
 
 <code-example 
   path="http/src/app/config/config.service.ts"
@@ -242,12 +231,10 @@ If you're following along with these code snippets, note that you must import th
   title="app/config/config.service.ts (RxJS imports)" linenums="false">
 </code-example>
 
-## Requesting non-JSON data
+## JSON以外のデータをリクエストする
 
-Not all APIs return JSON data. In this next example,
-a `DownloaderService` method reads a text file from the server
-and logs the file contents, before returning those contents to the caller
-as an `Observable<string>`. 
+すべてのAPIがJSONデータを返すわけではありません。
+この次の例では、`DownloaderService`メソッドはサーバーからテキストファイルを読み込み、`Observable<string>`としてファイルの内容を呼び出し元に返す前に、その内容を記録します。
 
 <code-example 
   path="http/src/app/downloader/downloader.service.ts"
@@ -255,11 +242,11 @@ as an `Observable<string>`.
   title="app/downloader/downloader.service.ts (getTextFile)" linenums="false">
 </code-example>
 
-`HttpClient.get()` returns a string rather than the default JSON because of the `responseType` option.
+`HttpClient.get()`は`responseType`オプションのためにデフォルトのJSONではなく文字列を返します。
 
-The RxJS `tap` operator (as in "wiretap") lets the code inspect good and error values passing through the observable without disturbing them. 
+RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを通して値の流れを妨害することなく正常値とエラー値をコードが検査できるようにします。
 
-A `download()` method in the `DownloaderComponent` initiates the request by subscribing to the service method.
+`DownloaderComponent`の`download()`メソッドは、サービスのメソッドを購読することによってリクエストを開始します。
 
 <code-example 
   path="http/src/app/downloader/downloader.component.ts"
@@ -267,24 +254,22 @@ A `download()` method in the `DownloaderComponent` initiates the request by subs
   title="app/downloader/downloader.component.ts (download)" linenums="false">
 </code-example>
 
-## Sending data to the server
+## サーバーにデータを送る
 
-In addition to fetching data from the server, `HttpClient` supports mutating requests, that is, sending data to the server with other HTTP methods such as PUT, POST, and DELETE.
+`HttpClient`は、サーバーからデータを取得するだけでなく、PUT、POST、DELETEなどの他のHTTPメソッドを使用してサーバーにデータを送信するという、変更リクエストをサポートします。
 
-The sample app for this guide includes a simplified version of the "Tour of Heroes" example
-that fetches heroes and enables users to add, delete, and update them.
+このガイドのサンプルアプリケーションには、ヒーローを取得してユーザーが追加、削除、および更新できるようにする、ツアー・オブ・ヒーローの簡略版が含まれています。
 
-The following sections excerpt methods of the sample's `HeroesService`.
+次のセクションでは、サンプルのHeroesServiceメソッドの抜粋を示します。
 
-### Adding headers
+{@a adding-headers}
+### ヘッダーを追加する
 
-Many servers require extra headers for save operations.
-For example, they may require a "Content-Type" header to explicitly declare 
-the MIME type of the request body.
-Or perhaps the server requires an authorization token.
+多くのサーバーでは、保存操作に追加のヘッダーが必要です。
+たとえば、リクエストボディのMIMEタイプを明示的に宣言するために、「Content-Type」ヘッダーが必要な場合があります。
+あるいは、サーバーに認証トークンが必要なのかもしれません。
 
-The `HeroesService` defines such headers in an `httpOptions` object that will be passed
-to every `HttpClient` save method.
+`HeroesService`は、`HttpClient`の保存操作ごとに渡される`httpOptions`オブジェクトでそのようなヘッダーを定義しています。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
@@ -292,10 +277,10 @@ to every `HttpClient` save method.
   title="app/heroes/heroes.service.ts (httpOptions)" linenums="false">
 </code-example>
 
-### Making a POST request
+### POSTリクエストを行う
 
-Apps often POST data to a server. They POST when submitting a form. 
-In the following example, the `HeroService` posts when adding a hero to the database.
+アプリケーションはしばしばサーバーにデータをPOSTします。 フォームを送信するときにPOSTします。
+次の例では、ヒーローをデータベースに追加するときに `HeroService`がポストします。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
@@ -303,20 +288,17 @@ In the following example, the `HeroService` posts when adding a hero to the data
   title="app/heroes/heroes.service.ts (addHero)" linenums="false">
 </code-example>
 
-The `HttpClient.post()` method is similar to `get()` in that it has a type parameter
-(you're expecting the server to return the new hero)
-and it takes a resource URL.
+`HttpClient.post()`メソッドは、型パラメーター（サーバーが新しいヒーローを返すことを期待しています）を持っていてリソースURLを必要とする点で`get()`と似ています。
 
-It takes two more parameters:
+さらに2つのパラメーターを取ります。
 
-1. `hero` - the data to POST in the body of the request.
-1. `httpOptions` - the method options which, in this case, [specify required headers](#adding-headers).
+1. `hero` - リクエストのボディでPOSTするデータ
+1. `httpOptions` - このケースでは[要求されたヘッダーを定義する](#adding-headers)メソッドオプション
 
-Of course it catches errors in much the same manner [described above](#error-details).
-It also _taps_ the returned observable in order to log the successful POST.
+もちろん、これは[前述](#error-details)とほぼ同じ方法でエラーを捕捉します。
+また、成功したPOSTを記録するために、戻されたobservableを_tap_します。
 
-The `HeroesComponent` initiates the actual POST operation by subscribing to 
-the `Observable` returned by this service method.
+`HeroesComponent`は、このサービスメソッドによって返された`Observable`を購読することによって、実際のPOST操作を開始します。
 
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
@@ -324,13 +306,11 @@ the `Observable` returned by this service method.
   title="app/heroes/heroes.component.ts (addHero)" linenums="false">
 </code-example>
 
-When the server responds successfully with the newly added hero, the component adds
-that hero to the displayed `heroes` list.
+サーバーが新しくヒーローを追加することに成功してレスポンスすると、コンポーネントはそのヒーローを表示中の`heroes`リストに追加します。
 
-### Making a DELETE request
+### DELETEリクエストを作る
 
-This application deletes a hero with the `HttpClient.delete` method by passing the hero's id
-in the request URL.
+このアプリケーションは、リクエストURLにヒーローのIDを渡すことによって、`HttpClient.delete`メソッドでヒーローを削除します。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
@@ -338,8 +318,7 @@ in the request URL.
   title="app/heroes/heroes.service.ts (deleteHero)" linenums="false">
 </code-example>
 
-The `HeroesComponent` initiates the actual DELETE operation by subscribing to 
-the `Observable` returned by this service method.
+`HeroesComponent`は、このサービスメソッドによって返された`Observable`を購読することによって、実際のDELETEオペレーションを開始します。
 
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
@@ -349,16 +328,14 @@ the `Observable` returned by this service method.
 
 <div class="alert is-important">
 
-You must call _subscribe()_ or nothing happens!
+_subscribe()_を呼び出してください。そうしないと何も起こりません!
 
 </div>
 
-The component isn't expecting a result from the delete operation and
-subscribes without a callback.
-The bare `.subscribe()` _seems_ pointless.
+コンポーネントは削除操作の結果を期待しておらず、コールバックなしで購読します。空の `.subscribe()`は無意味_なように見えます_。
 
-In fact, it is essential.
-Merely calling `HeroService.deleteHero()` **does not initiate the DELETE request.**
+しかし、それは不可欠です。
+単に`HeroService.addHero()`を呼び出すだけでは、**DELETEリクエストは開始されません。**
 
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
@@ -366,45 +343,43 @@ Merely calling `HeroService.deleteHero()` **does not initiate the DELETE request
 </code-example>
 
 {@a always-subscribe}
-### Always _subscribe_!
+### 常に_subscribe_を忘れないでください!
 
-An `HttpClient` method does not begin its HTTP request until you call `subscribe()` on the observable returned by that method. This is true for _all_ `HttpClient` _methods_.
+`HttpClient`メソッドは、そのメソッドから返されたObservableで`subscribe()`を呼び出すまでHTTPリクエストを開始しません。
+これは_すべての`HttpClient`メソッド_に当てはまります。
 
 <div class="alert is-helpful">
 
-The [`AsyncPipe`](api/common/AsyncPipe) subscribes (and unsubscribes) for you automatically.
+[`AsyncPipe`](api/common/AsyncPipe)なら自動的に購読したり購読を取り消しします。
 
 </div>
 
-All observables returned from `HttpClient` methods are _cold_ by design.
-Execution of the HTTP request is _deferred_, allowing you to extend the
-observable with additional operations such as  `tap` and `catchError`
- before anything actually happens.
+`HttpClient`メソッドから返されたすべてのObservableは、意図的に_cold_です。
+HTTPリクエストは_遅延実行_され、実際に何かが起こる前に、`tap`や`catchError`のような追加の操作でObservableを拡張することができます。
 
-Calling `subscribe(...)` triggers execution of the observable and causes
-`HttpClient` to compose and send the HTTP request to the server.
+`subscribe(...)`を呼び出すと、Observableの実行がトリガーされ、`HttpClient`がHTTPリクエストを作成してサーバーに送信します。
 
-You can think of these observables as _blueprints_ for actual HTTP requests.
+これらのObservableは実際のHTTPリクエストの_設計図_と考えることができます。
 
 <div class="alert is-helpful">
 
-In fact, each `subscribe()` initiates a separate, independent execution of the observable.
-Subscribing twice results in two HTTP requests.
+実際、それぞれの`subscribe()`はObservableを分離して独立した実行を開始します。
+2回の購読は2つのHTTPリクエストを引き起こします。
 
 ```javascript
 const req = http.get<Heroes>('/api/heroes');
-// 0 requests made - .subscribe() not called.
+// .subscribe()が呼ばれていないため、まだ0リクエストです。
 req.subscribe();
-// 1 request made.
+// 1つ目のリクエストが作られます。
 req.subscribe();
-// 2 requests made.
+// 2つ目のリクエストが作られます。
 ```
 </div>
 
-### Making a PUT request
+### PUTリクエストを作る
 
-An app will send a PUT request to completely replace a resource with updated data.
-The following `HeroService` example is just like the POST example.
+アプリケーションはリソースを更新されたデータで完全に置き換えるためにPUTリクエストを送信します。
+次の`HeroService`の例はPOSTの例と似ています。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
@@ -412,60 +387,55 @@ The following `HeroService` example is just like the POST example.
   title="app/heroes/heroes.service.ts (updateHero)" linenums="false">
 </code-example>
 
-For the reasons [explained above](#always-subscribe), the caller (`HeroesComponent.update()` in this case) must `subscribe()` to the observable returned from the `HttpClient.put()`
-in order to initiate the request.
+[上記で説明](#always-subscribe)した理由で、呼び出し元（この場合は`HeroesComponent.update()`）は、リクエストを開始するために`HttpClient.put()`から返されたObservableを`subscribe()`する必要があります。
 
-## Advanced usage
+## 高度な使い方
 
-The above sections detail how to use the basic HTTP functionality in `@angular/common/http`, but sometimes you need to do more than make simple requests and get data back.
+上記のセクションでは、基本的なHTTP機能を`@angular/common/http`で使用する方法について詳しく説明していますが、単純なリクエストを作成してデータを戻す以上のことが必要な場合もあります。
 
-### Configuring the request
+### リクエストの設定
 
-Other aspects of an outgoing request can be configured via the options object
-passed as the last argument to the `HttpClient` method.
+外部へのリクエストの他の設定は、`HttpClient`メソッドの最後の引数として渡されたオプションオブジェクトを介して行えます。
 
-You [saw earlier](#adding-headers) that the `HeroService` sets the default headers by
-passing an options object (`httpOptions`) to its save methods.
-You can do more.
+`HeroService`がオプションオブジェクト（`httpOptions`）をその保存メソッドに渡すことでデフォルトヘッダーを設定していることを[前に](#adding-headers)見てきました。
+もっと他のこともできます。
 
-#### Update headers
+#### ヘッダーを更新する
 
-You can't directly modify the existing headers within the previous options
-object because instances of the `HttpHeaders` class are immutable.
+`HttpHeaders`クラスのインスタンスはイミュータブルなので、以前のオプションオブジェクト内の既存のヘッダを直接変更することはできません。
 
-Use the `set()` method instead. 
-It returns a clone of the current instance with the new changes applied.
+代わりに`set()`メソッドを使用してください。
+新しい変更が適用された現在のインスタンスのクローンを返します。
 
-Here's how you might update the authorization header (after the old token expired) 
-before making the next request.
+（以前のトークンが期限切れになった後に）次のリクエストを行う前に、承認ヘッダーを更新する方法は次のとおりです。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
   region="update-headers" linenums="false">
 </code-example>
 
-#### URL Parameters
+#### URLパラメータ
 
-Adding URL search parameters works a similar way.
-Here is a `searchHeroes` method that queries for heroes whose names contain the search term.
+URL検索パラメータを追加する方法も同様です。
+名前に検索語が含まれるヒーローを照会する`searchHeroes`メソッドがあります。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
   region="searchHeroes" linenums="false">
 </code-example>
 
-If there is a search term, the code constructs an options object with an HTML URL encoded search parameter. If the term were "foo", the GET request URL would be `api/heroes/?name=foo`.
+検索語であるtermがある場合、コードは、HTML URLでエンコードされた検索パラメータを使用してオプションオブジェクトを作成します。
+termが「foo」の場合、GETリクエストURLは`api/heroes/?name=foo`になります。
 
-The `HttpParms` are immutable so you'll have to use the `set()` method to update the options.
+`HttpParms`はイミュータブルなので、`set()`メソッドを使ってオプションを更新する必要があります。
 
-### Debouncing requests
+### リクエストのデバウンス
 
-The sample includes an _npm package search_ feature.
+このサンプルには_npmパッケージのsearch_機能が含まれています。
 
-When the user enters a name in a search-box, the `PackageSearchComponent` sends
-a search request for a package with that name to the NPM web api.
+ユーザーが検索ボックスに名前を入力すると、「PackageSearchComponent」は、その名前をもつパッケージの検索リクエストをNPMのwebAPIに送信します。
 
-Here's a pertinent excerpt from the template:
+ここにテンプレートからの関連する抜粋があります。
 
 <code-example 
   path="http/src/app/package-search/package-search.component.html"
@@ -473,11 +443,11 @@ Here's a pertinent excerpt from the template:
   title="app/package-search/package-search.component.html (search)">
 </code-example>
 
-The `(keyup)` event binding sends every keystroke to the component's `search()` method.
+`(keyup)`イベントバインディングはすべてのキーストロークをコンポーネントの`search()`メソッドに送ります。
 
-Sending a request for every keystroke could be expensive.
-It's better to wait until the user stops typing and then send a request.
-That's easy to implement with RxJS operators, as shown in this excerpt.
+すべてのキーストロークに対してリクエストを送信することは高いコストになる可能性があります。
+ユーザーが入力をやめるのを待ってからリクエストを送信する方がよいでしょう。
+この抜粋に示すように、RxJSオペレーターで実装すれば簡単です。
 
 <code-example 
   path="http/src/app/package-search/package-search.component.ts"
@@ -485,78 +455,70 @@ That's easy to implement with RxJS operators, as shown in this excerpt.
   title="app/package-search/package-search.component.ts (excerpt))">
 </code-example>
 
-The `searchText$` is the sequence of search-box values coming from the user.
-It's defined as an RxJS `Subject`, which means it is an `Observable`
-that can also produce values for itself by calling `next(value)`,
-as happens in the `search()` method.
+`searchText$`は、ユーザーからの検索ボックス値のシーケンスです。
+RxJSの`Subject`として定義されています。これは、`search()`メソッドのように、`next(value)`を呼び出すことによって値を生成する`Observable`を意味します。
 
-Rather than forward every `searchText` value directly to the injected `PackageSearchService`,
-the code in `ngOnInit()` _pipes_ search values through three operators:
+注入された`PackageSearchService`にすべての`searchText`値を直接転送するのではなく、`ngOnInit()`のコードは3つのオペレーターを使って検索値を_パイプ_します。
 
-1. `debounceTime(500)` - wait for the user to stop typing (1/2 second in this case).
-1. `distinctUntilChanged()` - wait until the search text changes.
-1. `switchMap()` - send the search request to the service.
+1. `debounceTime(500)` - ユーザーが入力を停止するのを待ちます（この場合は1/2秒）。
+1. `distinctUntilChanged()` - 検索テキストが変わるまで待ちます。
+1. `switchMap()` - 検索リクエストをサービスに送ります。
 
-The code sets `packages$` to this re-composed `Observable` of search results.
-The template subscribes to `packages$` with the [AsyncPipe](api/common/AsyncPipe)
-and displays search results as they arrive.
+コードでは、この再構成された検索結果の`Observable`に`packages$`をセットします。
+テンプレートは[AsyncPipe](api/common/AsyncPipe)を使用して`packages$`を購読し、値が来たら検索結果を表示します。
 
-A search value reaches the service only if it's a new value and the user has stopped typing.
+検索値が新しい値であり、ユーザーが入力を停止した場合にのみ、値がサービスに到達します。
 
 <div class="l-sub-section">
 
-The `withRefresh` option is explained [below](#cache-refresh).
+`withRefresh`オプションについては[後述](#cache-refresh)します。
 
 </div>
 
 #### _switchMap()_
 
-The `switchMap()` operator has three important characteristics.
+`switchMap()`オペレーターには3つの重要な特徴があります。
 
-1. It takes a function argument that returns an `Observable`.
-`PackageSearchService.search` returns an `Observable`, as other data service methods do.
+1. `Observable`を返す関数の引数をとります。
+`PackageSearchService.search`は他のデータサービスメソッドと同様に`Observable`を返します。
 
-2. If a previous search request is still _in-flight_ (as when the connection is poor),
-it cancels that request and sends a new one.
+2. 以前の検索リクエストがまだ_実行中である場合_（接続が悪い場合など）、そのリクエストをキャンセルして新しいリクエストを送信します。
 
-3. It returns service responses in their original request order, even if the
-server returns them out of order. 
+3. サーバーがそれらを順不同で戻しても、サービスのレスポンスは元のリクエストの順序で戻されます。
 
 
 <div class="l-sub-section">
 
-If you think you'll reuse this debouncing logic,
-consider moving it to a utility function or into the `PackageSearchService` itself.
+このデバウンスロジックを再利用しようと考えるなら、ユーティリティ関数または`PackageSearchService`自体に移すことを検討してください。
 
 </div>
 
-### Intercepting requests and responses
+### リクエストとレスポンスのインターセプト
 
-_HTTP Interception_ is a major feature of `@angular/common/http`. 
-With interception, you declare _interceptors_ that inspect and transform HTTP requests from your application to the server.
-The same interceptors may also inspect and transform the server's responses on their way back to the application.
-Multiple interceptors form a _forward-and-backward_ chain of request/response handlers.
+_HTTP Interception_は`@angular/common/http`の主要な機能です。
+インターセプトのために、アプリケーションからサーバーへのHTTPリクエストを検査および変換する_interceptors_を宣言します。
+また、同じインターセプターは、アプリケーションの途中でサーバーのレスポンスを検査して変換することもできます。
+複数のインターセプターは、リクエスト/レスポンスハンドラの_前後の_チェインを形成します。
 
-Interceptors can perform a variety of  _implicit_ tasks, from authentication to logging, in a routine, standard way, for every HTTP request/response. 
+インターセプターは、すべてのHTTPリクエスト/レスポンスに対して、認証からロギングまで、さまざまな_暗黙_のタスクを一まとまりの標準的な方法で実行できます。
 
-Without interception, developers would have to implement these tasks _explicitly_ 
-for each `HttpClient` method call.
+インターセプト無しでは、開発者は各HttpClientメソッド呼び出しに対してこれらのタスクを_明示的_に行う必要があります。
 
-#### Write an interceptor
+#### インターセプターを書く
 
-To implement an interceptor, declare a class that implements the `intercept()` method of the `HttpInterceptor` interface.
+インターセプターを実装するには、`HttpInterceptor`インタフェースの`intercept()`メソッドを実装するクラスを宣言します。
 
- Here is a do-nothing _noop_ interceptor that simply passes the request through without touching it:
+ここに、何も触れずにリクエストを単に渡すだけの_noop_インターセプターがあります。
 <code-example 
   path="http/src/app/http-interceptors/noop-interceptor.ts"
   title="app/http-interceptors/noop-interceptor.ts"
   linenums="false">
 </code-example>
 
-The `intercept` method transforms a request into an `Observable` that eventually returns the HTTP response. 
-In this sense, each interceptor is fully capable of handling the request entirely by itself.
+`intercept`メソッドは、リクエストを最終的にHTTPレスポンスを含む`Observable`に変換します。
+この意味で、各インターセプターは完全に単独でリクエストを処理することができます。
 
-Most interceptors inspect the request on the way in and forward the (perhaps altered) request to the `handle()` method of the `next` object which implements the [`HttpHandler`](api/common/http/HttpHandler) interface.
+ほとんどのインターセプターは、リクエストを検査し、[`HttpHandler`](api/common/http/HttpHandler)インタフェースを実装している`next`オブジェクトの`handle()`メソッドへ（おそらく変更された）リクエストを転送します。
 
 ```javascript
 export abstract class HttpHandler {
@@ -564,52 +526,49 @@ export abstract class HttpHandler {
 }
 ```
 
-Like `intercept()`, the `handle()` method transforms an HTTP request into an `Observable` of [`HttpEvents`](#httpevents) which ultimately include the server's response. The `intercept()` method could inspect that observable and alter it before returning it to the caller.
+`intercept()`と同様に、`handle()`メソッドは、HTTPリクエストを最終的にサーバーのレスポンスを含む[`HttpEvents`](#httpevents)の`Observable`に変換します。
+`intercept()`メソッドは、そのObservableを検査し、それを呼び出し側に返す前に変更することができます。
 
-This _no-op_ interceptor simply calls `next.handle()` with the original request and returns the observable without doing a thing.
+この_何もしない_インターセプターは、単に元のリクエストとともに`next.handle()`を呼び出し、何もせずにobservableを返します。
 
-#### The _next_ object
+#### _next_オブジェクト
 
-The `next` object represents the next interceptor in the chain of interceptors. 
-The final `next` in the chain is the `HttpClient` backend handler that sends the request to the server and receives the server's response.
+`next`オブジェクトは、インターセプターのチェーン内の次のインターセプターを表します。
+チェーンの最後の`next`は、リクエストをサーバーに送信し、サーバーのレスポンスを受け取る`HttpClient`バックエンドハンドラです。
 
 
-Most interceptors call `next.handle()` so that the request flows through to the next interceptor and, eventually, the backend handler.
-An interceptor _could_ skip calling `next.handle()`, short-circuit the chain, and [return its own `Observable`](#caching) with an artificial server response. 
+ほとんどのインターセプターは、`next.handle()`を呼び出して、リクエストが次のインターセプター、そして最終的にはバックエンドハンドラに流れるようにします。
+インターセプターは、`next.handle()`をスキップしチェーンを近道して、人工のサーバーレスポンスで[自身の`Observable`を返す](#caching)こともできます。
 
-This is a common middleware pattern found in frameworks such as Express.js.
+これは、Express.jsなどのフレームワークでよく見られるミドルウェアパターンです。
 
-#### Provide the interceptor
+#### インターセプターを提供する
 
-The `NoopInterceptor` is a service managed by Angular's [dependency injection (DI)](guide/dependency-injection) system. 
-Like other services, you must provide the interceptor class before the app can use it.
+`NoopInterceptor`は、Angularの[Dependency Injection（DI）](guide/dependency-injection)システムによって管理されるサービスです。
+他のサービスと同様に、アプリケーションが使用する前にインターセプタークラスを提供する必要があります。
 
-Because interceptors are (optional) dependencies of the `HttpClient` service, 
-you must provide them in the same injector (or a parent of the injector) that provides `HttpClient`. 
-Interceptors provided _after_ DI creates the `HttpClient` are ignored.
+インターセプターは`HttpClient`サービスの（オプショナルな）依存関係であるため、
+`HttpClient`を提供する同じインジェクタ（またはインジェクタの親）にそれらを指定する必要があります。
+DIが`HttpClient`を作成した_後に_提供されるインターセプターは無視されます。
 
-This app provides `HttpClient` in the app's root injector, as a side-effect of importing the `HttpClientModule` in `AppModule`.
-You should provide interceptors in `AppModule` as well.
+このアプリケーションは、`AppModule`の`HttpClientModule`をインポートする副作用として、アプリケーションのルートインジェクタに`HttpClient`を提供します。
+同様にインターセプターは`AppModule`の中で提供すべきです。
 
-After importing the `HTTP_INTERCEPTORS` injection token from `@angular/common/http`,
-write the `NoopInterceptor` provider like this:
+`@angular/common/http`から`HTTP_INTERCEPTORS`インジェクショントークンをインポートした後、
+次のように`NoopInterceptor`プロバイダーを記述します。
 
 <code-example 
   path="http/src/app/http-interceptors/index.ts"
   region="noop-provider" linenums="false">
 </code-example>
 
-Note the `multi: true` option. 
-This required setting tells Angular that `HTTP_INTERCEPTORS` is a token for a _multiprovider_ 
-that injects an array of values, rather than a single value.
+`multi：true`オプションに注意してください。
+この必須設定は、Angularに`HTTP_INTERCEPTORS`は単一の値ではなく値の配列を注入する_マルチプロバイダー_のトークンであることを伝えます。
 
-You _could_ add this provider directly to the providers array of the `AppModule`.
-However, it's rather verbose and there's a good chance that 
-you'll create more interceptors and provide them in the same way.
-You must also pay [close attention to the order](#interceptor-order) 
-in which you provide these interceptors.
+このプロバイダーを`AppModule`のプロバイダー配列に直接追加することができますが、それはむしろ冗長であり、より多くのインターセプターを作成し、同じ方法でそれらを提供するよい方法があります。
+これらのインターセプターを提供する[順序に細心の注意](#インターセプターの順番)を払う必要があります。
 
-Consider creating a "barrel" file that gathers all the interceptor providers into an `httpInterceptorProviders` array, starting with this first one, the `NoopInterceptor`.
+最初のインターセプターである`NoopInterceptor`から始まる`httpInterceptorProviders`配列の中にすべてのインターセプタープロバイダーを集める「バレル」ファイルを作成することを検討してください。
 
 <code-example 
   path="http/src/app/http-interceptors/index.ts"
@@ -617,7 +576,7 @@ Consider creating a "barrel" file that gathers all the interceptor providers int
   title="app/http-interceptors/index.ts" linenums="false">
 </code-example>
 
-Then import and add it to the `AppModule` _providers array_ like this:
+次に、それをインポートして`AppModule`_providers配列_に追加します。
 
 <code-example 
   path="http/src/app/app.module.ts"
@@ -625,55 +584,55 @@ Then import and add it to the `AppModule` _providers array_ like this:
   title="app/app.module.ts (interceptor providers)" linenums="false">
 </code-example>
 
-As you create new interceptors, add them to the `httpInterceptorProviders` array and
-you won't have to revisit the `AppModule`.
+新しいインターセプターを作成するとき、それらを`httpInterceptorProviders`配列に追加するだけです。`AppModule`を開く必要はありません。
 
 <div class="l-sub-section">
 
-There are many more interceptors in the complete sample code.
+完全なサンプルコードには、より多くのインターセプターがあります。
 
 </div>
 
-#### Interceptor order
+#### インターセプターの順番
 
-Angular applies interceptors in the order that you provide them.
-If you provide interceptors _A_, then _B_, then _C_,  requests will flow in _A->B->C_ and
-responses will flow out _C->B->A_.
+Angularは、あなたが提供した順序でインターセプターを適用します。
+インターセプター_A_、_B_、_C_を提供すると、リクエストは_A-> B-> C_で流れ、レスポンスは_C-> B-> A_で流れます。
 
-You cannot change the order or remove interceptors later.
-If you need to enable and disable an interceptor dynamically, you'll have to build that capability into the interceptor itself.
+後でインターセプターを変更したり、インターセプターを削除したりすることはできません。
+インターセプターを動的に有効または無効にする必要がある場合は、その機能をインターセプター自体に組み込む必要があります。
 
 #### _HttpEvents_
 
-You may have expected the `intercept()` and `handle()` methods to return observables of `HttpResponse<any>` as most `HttpClient` methods do.
+ほとんどの`HttpClient`メソッドが行うように、`intercept()`と`handle()`メソッドは`HttpResponse<any>`のObservableを返すと思っていたかもしれません。
 
-Instead they return observables of `HttpEvent<any>`.
+代わりに`HttpEvent<any>`のObservableを返します。
 
-That's because interceptors work at a lower level than those `HttpClient` methods. A single HTTP request can generate multiple _events_, including upload and download progress events. The `HttpResponse` class itself is actually an event, whose type is `HttpEventType.HttpResponseEvent`.
+これは、インターセプターがそれらの`HttpClient`のメソッドよりも低いレベルで動作するためです。
+ひとつのHTTPリクエストでは、アップロードおよびダウンロードの進行状況イベントを含む複数の_イベント_を生成できます。
+`HttpResponse`クラス自体は実際にはイベントで、その型は`HttpEventType.HttpResponseEvent`です。
 
-Many interceptors are only concerned with the outgoing request and simply return the event stream from `next.handle()` without modifying it.
+多くのインターセプターは外に出ていくリクエストのみに関心があり、単に`next.handle()`からイベントストリームを変更せずに返します。
 
-But interceptors that examine and modify the response from `next.handle()` 
-will see all of these events. 
-Your interceptor should return _every event untouched_ unless it has a _compelling reason to do otherwise_.
+しかし、`next.handle()`からのレスポンスを調べて変更するインターセプターは、これらすべてのイベントが表示されます。
+インターセプターは、_やむを得ない理由_がない限り、_すべてのイベントをそのまま_返す必要があります。
 
-#### Immutability
+{@a immutability}
+#### イミュータビリティ（不変性）
 
-Although interceptors are capable of mutating requests and responses,
-the `HttpRequest` and `HttpResponse` instance properties are `readonly`,
-rendering them largely immutable.
+インターセプターはリクエストとレスポンスを変更することができますが、`HttpRequest`と`HttpResponse`のインスタンスのプロパティは`readonly`で、それらをほぼ不変にします。
 
-They are immutable for a good reason: the app may retry a request several times before it succeeds, which means that the interceptor chain may re-process the same request multiple times.
-If an interceptor could modify the original request object, the re-tried operation would start from the modified request rather than the original. Immutability ensures that interceptors see the same request for each try.
+それらは正当な理由からイミュータブルです。アプリケーションは、成功する前にリクエストを何度か再試行することがあります。
+つまり、インターセプターのチェーンが同じリクエストを複数回再処理する可能性があります。
+インターセプターが元のリクエストオブジェクトを変更できる場合、再試行された操作は元のものではなく変更されたリクエストから開始されます。
+不変性は、インターセプターが各試行に対して同じリクエストを見ることを保証します。
 
-TypeScript will prevent you from setting `HttpRequest` readonly properties. 
+TypeScriptは、`HttpRequest`の読み取り専用プロパティにセットできないようにします。
 
 ```javascript
-  // Typescript disallows the following assignment because req.url is readonly
+  // req.urlが読み取り専用であるため、Typescriptは次の割り当てを許可しません
   req.url = req.url.replace('http://', 'https://');
 ```
-To alter the request, clone it first and modify the clone before passing it to `next.handle()`. 
-You can clone and modify the request in a single step as in this example.
+リクエストを変更するには、最初にクローンを作成し、クローンを変更してから`next.handle()`に渡します。
+この例のように、ひとつの手順でリクエストを複製して変更することができます。
 
 <code-example 
   path="http/src/app/http-interceptors/ensure-https-interceptor.ts"
@@ -681,19 +640,18 @@ You can clone and modify the request in a single step as in this example.
   title="app/http-interceptors/ensure-https-interceptor.ts (excerpt)" linenums="false">
 </code-example>
 
-The `clone()` method's hash argument allows you to mutate specific properties of the request while copying the others.
+`clone()`メソッドのハッシュ引数は、他のものをコピーしながらリクエストの特定のプロパティを変更することを可能にします。
 
-##### The request body
+##### リクエストボディ
 
-The `readonly` assignment guard can't prevent deep updates and, in particular, 
-it can't prevent you from modifying a property of a request body object.
+`readonly`代入ガードは、プロパティの深い更新を防ぐことはできません。
+特に、リクエストボディオブジェクトのプロパティを変更できないようにすることはできません。
 
 ```javascript
   req.body.name = req.body.name.trim(); // bad idea!
 ```
 
-If you must mutate the request body, copy it first, change the copy, 
-`clone()` the request, and set the clone's body with the new body, as in the following example.
+リクエストボディを変更する必要がある場合は、次の例のように、最初にコピーし、コピーを変更し、リクエストを`clone()`して、クローンのボディを新しいボディで設定します。
 
 <code-example 
   path="http/src/app/http-interceptors/trim-name-interceptor.ts"
@@ -701,54 +659,50 @@ If you must mutate the request body, copy it first, change the copy,
   title="app/http-interceptors/trim-name-interceptor.ts (excerpt)" linenums="false">
 </code-example>
 
-##### Clearing the request body
+##### リクエストボディを消去する
 
-Sometimes you need to clear the request body rather than replace it.
-If you set the cloned request body to `undefined`, Angular assumes you intend to leave the body as is.
-That is not what you want.
-If you set the cloned request body to `null`, Angular knows you intend to clear the request body.
+場合によっては、リクエストボディを置き換えるのではなく消去する必要があります。
+クローンされたリクエストボディを`undefined`に設定した場合、Angularはボディをそのまま保持しようとしていると推論します。
+これはあなたが望むものではありません。
+クローンされたリクエストボディを`null`に設定すると、Angularはリクエストボディをクリアしようとしていることを知ります。
 
 ```javascript
-  newReq = req.clone({ ... }); // body not mentioned => preserve original body
-  newReq = req.clone({ body: undefined }); // preserve original body
-  newReq = req.clone({ body: null }); // clear the body
+  newReq = req.clone({ ... }); // ボディは言及しない=>元のボディを保持する
+  newReq = req.clone({ body: undefined }); // 元のボディを保持する
+  newReq = req.clone({ body: null }); // ボディを消去する
 ```
 
-#### Set default headers
+#### デフォルトのヘッダーをセットする
 
-Apps often use an interceptor to set default headers on outgoing requests. 
+アプリケーションでは、インターセプターを使用して外に出ていくリクエストにデフォルトのヘッダーを設定することがよくあります。
 
-The sample app has an `AuthService` that produces an authorization token.
-Here is its `AuthInterceptor` that injects that service to get the token and
-adds an authorization header with that token to every outgoing request:
+サンプルアプリケーションには、認証トークンを生成する`AuthService`があります。
+トークンを取得するためにそのサービスを注入する`AuthInterceptor`があり、そのトークンをもつ承認ヘッダーをすべての外部リクエストに追加します。
 
 <code-example 
   path="http/src/app/http-interceptors/auth-interceptor.ts"
   title="app/http-interceptors/auth-interceptor.ts">
 </code-example>
 
-The practice of cloning a request to set new headers is so common that 
-there's a `setHeaders` shortcut for it:
+新しいヘッダーを設定するリクエストを複製する方法は非常に一般的です。そのために`setHeaders`ショートカットがあります。
 
 <code-example 
   path="http/src/app/http-interceptors/auth-interceptor.ts"
   region="set-header-shortcut">
 </code-example>
 
-An interceptor that alters headers can be used for a number of different operations, including:
+ヘッダーを変更するインターセプターは、次のようなさまざまな操作に使用できます。
 
-* Authentication/authorization
-* Caching behavior; for example, `If-Modified-Since`
-* XSRF protection
+* 認証/承認
+* キャッシュ動作 たとえば、`If-Modified-Since`
+* XSRFプロテクション
 
-#### Logging
+#### ロギング
 
-Because interceptors can process the request and response _together_, they can do things like time and log 
-an entire HTTP operation. 
+インターセプターはリクエストとレスポンスを_一緒に_処理できるため、HTTP操作全体について時間の計測やログの記録ができます。
 
-Consider the following `LoggingInterceptor`, which captures the time of the request,
-the time of the response, and logs the outcome with the elapsed time
-with the injected `MessageService`.
+次の`LoggingInterceptor`を考えてみましょう。
+これは、リクエストの時間とレスポンスの時間を取得し、注入された`MessageService`で経過時間とともに結果を記録します。
 
 <code-example 
   path="http/src/app/http-interceptors/logging-interceptor.ts"
@@ -756,20 +710,20 @@ with the injected `MessageService`.
   title="app/http-interceptors/logging-interceptor.ts)">
 </code-example>
 
-The RxJS `tap` operator captures whether the request succeed or failed.
-The RxJS `finalize` operator is called when the response observable either errors or completes (which it must),
-and reports the outcome to the `MessageService`.
+RxJSの`tap`オペレーターは、リクエストが成功するか失敗したかを取得します。
+RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーか（必ず起きる）完了のいずれかを返したときに呼ばれ、その結果を`MessageService`に報告します。
 
-Neither `tap` nor `finalize` touch the values of the observable stream returned to the caller.
+`tap`も`finalize`も、呼び出し元に返されたObservableのストリームの値には触れません。
 
-#### Caching
+{@a caching}
+#### キャッシング
 
-Interceptors can handle requests by themselves, without forwarding to `next.handle()`.
+インターセプターは`next.handle()`に転送せずに、リクエスト自体を処理できます。
 
-For example, you might decide to cache certain requests and responses to improve performance.
-You can delegate caching to an interceptor without disturbing your existing data services. 
+たとえば、特定の要求と応答をキャッシュして、パフォーマンスを向上させることができます。
+既存のデータサービスを妨げることなく、インターセプターにキャッシュを委任できます。
 
-The `CachingInterceptor` demonstrates this approach.
+`CachingInterceptor`はこのアプローチを示しています。
 
 <code-example 
   path="http/src/app/http-interceptors/caching-interceptor.ts"
@@ -777,16 +731,14 @@ The `CachingInterceptor` demonstrates this approach.
   title="app/http-interceptors/caching-interceptor.ts)" linenums="false">
 </code-example>
 
-The `isCachable()` function determines if the request is cachable.
-In this sample, only GET requests to the npm package search api are cachable.
+`isCachable()`関数はリクエストがキャッシュ可能かどうかを決定します。
+このサンプルでは、npmパッケージの検索APIに対するGETリクエストのみがキャッシュ可能です。
 
-If the request is not cachable, the interceptor simply forwards the request 
-to the next handler in the chain.
+リクエストがキャッシュ可能でない場合、インターセプターはリクエストをチェーン内の次のハンドラに転送します。
 
-If a cachable request is found in the cache, the interceptor returns an `of()` _observable_ with
-the cached response, by-passing the `next` handler (and all other interceptors downstream).
+キャッシング可能なリクエストがキャッシュ内に見つかった場合、インターセプターはキャッシュされたレスポンスをもつ`of()`_observable_を返し、`next`ハンドラ（および他のすべての下流のインターセプター）をバイパスします。
 
-If a cachable request is not in cache, the code calls `sendRequest`.
+キャッシュ可能なリクエストがキャッシュにない場合、コードは`sendRequest`を呼び出します。
 
 {@a send-request}
 <code-example 
@@ -794,72 +746,57 @@ If a cachable request is not in cache, the code calls `sendRequest`.
   region="send-request">
 </code-example>
 
-The `sendRequest` function creates a [request clone](#immutability) without headers
-because the npm api forbids them.
+`sendRequest`関数は、npm apiが禁止しているため、ヘッダーを保たない[リクエストのクローン](#immutability)を作成します。
 
-It forwards that request to `next.handle()` which ultimately calls the server and
-returns the server's response.
+そのリクエストを`next.handle()`に転送します。これは最終的にサーバーを呼び出し、サーバーのレスポンスを返します。
 
-Note how `sendRequest` _intercepts the response_ on its way back to the application.
-It _pipes_ the response through the `tap()` operator,
-whose callback adds the response to the cache.
+`sendRequest`がアプリケーションに戻る途中で_レスポンスをインターセプトする_方法に注意してください。
+`tap()`オペレーターによりレスポンスを_パイプ_して、そのコールバックでレスポンスをキャッシュに追加します。
 
-The original response continues untouched back up through the chain of interceptors
-to the application caller. 
+元のレスポンスは、インターセプターのチェーンを通ってアプリケーション呼び出し元にオリジナルの状態で戻ります。
 
-Data services, such as `PackageSearchService`, are unaware that 
-some of their `HttpClient` requests actually return cached responses.
+`PackageSearchService`のようなデータサービスは、`HttpClient`リクエストのいくつかは実際にはキャッシュされたレスポンスを返すものがあることに気づいていません。
 
 {@a cache-refresh}
-#### Return a multi-valued _Observable_
+#### 複数の値を返す_Observable_
 
-The `HttpClient.get()` method normally returns an _observable_ 
-that either emits the data or an error. 
-Some folks describe it as a "_one and done_" observable.
+`HttpClient.get()`メソッドは、通常、データまたはエラーを発行する_Observable_を返します。
+一部の人々は、それを "_one and done_"Observableと表現しています。
 
-But an interceptor can change this to an _observable_ that emits more than once.
+しかし、インターセプターはこれを1回以上発火する_Observable_に変更することができます。
 
-A revised version of the `CachingInterceptor` optionally returns an _observable_ that
-immediately emits the cached response, sends the request to the npm web api anyway,
-and emits again later with the updated search results.
+改訂されたバージョンの`CachingInterceptor`は、オプションでキャッシュされたレスポンスを直ちに出力する_Observable_を返します。
+これは、リクエストをnpm web APIに送信し、更新された検索結果で後で再度出力します。
 
 <code-example 
   path="http/src/app/http-interceptors/caching-interceptor.ts"
   region="intercept-refresh">
 </code-example>
 
-The _cache-then-refresh_ option is triggered by the presence of a **custom `x-refresh` header**.
+_cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー**の存在によってトリガーされます。
 
 <div class="l-sub-section">
 
-A checkbox on the `PackageSearchComponent` toggles a `withRefresh` flag,
-which is one of the arguments to `PackageSearchService.search()`.
-That `search()` method creates the custom `x-refresh` header
-and adds it to the request before calling `HttpClient.get()`.
+`PackageSearchComponent`のチェックボックスは、`PackageSearchService.search()`の引数の1つである`withRefresh`フラグをトグルします。
+その`search()`メソッドは、`HttpClient.get()`を呼び出す前にカスタム`x-refresh`ヘッダを作成し、それをリクエストに追加します。
 
 </div>
 
-The revised `CachingInterceptor` sets up a server request 
-whether there's a cached value or not, 
-using the same `sendRequest()` method described [above](#send-request).
-The `results$` observable will make the request when subscribed.
+改訂された`CachingInterceptor`は、[上記](#send-request)の`sendRequest()`メソッドを使用して、キャッシュされた値があるかどうかにかかわらずサーバーリクエストを準備します。
+`results$`observableは購読したときにリクエストを行います。
 
-If there's no cached value, the interceptor returns `results$`.
+キャッシュされた値がない場合、インターセプターは`results$`を返します。
 
-If there is a cached value, the code _pipes_ the cached response onto
-`results$`, producing a recomposed observable that emits twice,
-the cached response first (and immediately), followed later
-by the response from the server.
-Subscribers see a sequence of _two_ responses.
+キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`にパイプし、2回発行する再構成されたObservableを生成します。
+最初に（そして直ちに）キャッシュされたレスポンスを、その後サーバーからのレスポンスが続きます。subscriberは_2つ_のレスポンスのシーケンスを参照します。
 
-### Listening to progress events
+### プログレスイベントをリッスンする
 
-Sometimes applications transfer large amounts of data and those transfers can take a long time.
-File uploads are a typical example. 
-Give the users a better experience by providing feedback on the progress of such transfers.
+アプリケーションによって大量のデータが転送され、転送に時間がかかることがあります。
+ファイルのアップロードは典型的な例です。
+そのような転送の進捗状況に関するフィードバックを提供することにより、ユーザーによりよい経験を提供します。
 
-To make a request with progress events enabled, you can create an instance of `HttpRequest` 
-with the `reportProgress` option set true to enable tracking of progress events.
+プログレスイベントを有効にしてリクエストを行うには、`reportProgress`オプションをtrueに設定して`HttpRequest`のインスタンスを作成し、プログレスイベントを追跡できるようにします。
 
 <code-example 
   path="http/src/app/uploader/uploader.service.ts"
@@ -869,12 +806,13 @@ with the `reportProgress` option set true to enable tracking of progress events.
 
 <div class="alert is-important">
 
-Every progress event triggers change detection, so only turn them on if you truly intend to report progress in the UI.
+すべてのプログレスイベントはchange detectionをトリガします。
+したがって、UIで進捗状況を本当に報告するつもりの場合にのみ、それらを有効にしてください。
 
 </div>
 
-Next, pass this request object to the `HttpClient.request()` method, which
-returns an `Observable` of `HttpEvents`, the same events processed by interceptors:
+次に、このリクエストオブジェクトを`HttpClient.request()`メソッドに渡します。
+このメソッドは、インターセプターによって処理された同じイベントである`HttpEvents`の`Observable`を返します。
 
 <code-example 
   path="http/src/app/uploader/uploader.service.ts"
@@ -882,7 +820,7 @@ returns an `Observable` of `HttpEvents`, the same events processed by intercepto
   title="app/uploader/uploader.service.ts (upload body)" linenums="false">
 </code-example>
 
-The `getEventMessage` method interprets each type of `HttpEvent` in the event stream.
+`getEventMessage`メソッドは、イベントストリーム中の各タイプの`HttpEvent`を解釈します。
 
 <code-example 
   path="http/src/app/uploader/uploader.service.ts"
@@ -892,39 +830,37 @@ The `getEventMessage` method interprets each type of `HttpEvent` in the event st
 
 <div class="alert is-helpful">
 
-The sample app for this guide doesn't have a server that accepts uploaded files.
-The `UploadInterceptor` in `app/http-interceptors/upload-interceptor.ts` 
-intercepts and short-circuits upload requests
-by returning an observable of simulated events.
+このガイドのサンプルアプリケーションには、アップロードされたファイルを受け入れるサーバーがありません。
+`app/http-interceptors/upload-interceptor.ts`の`UploadInterceptor`は、アップロードリクエストにインターセプトし、シミュレートされたイベントのObservableを返して省略します。
 
 </div>
 
-## Security: XSRF Protection
+## セキュリティ: XSRFプロテクション
 
-[Cross-Site Request Forgery (XSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery) is an attack technique by which the attacker can trick an authenticated user into unknowingly executing actions on your website. `HttpClient` supports a [common mechanism](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token) used to prevent XSRF attacks. When performing HTTP requests, an interceptor reads a token from a cookie, by default `XSRF-TOKEN`, and sets it as an HTTP header, `X-XSRF-TOKEN`. Since only code that runs on your domain could read the cookie, the backend can be certain that the HTTP request came from your client application and not an attacker.
+[XSRF(Cross-Site Request Forgery)](https://en.wikipedia.org/wiki/Cross-site_request_forgery)は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。`HttpClient`は、XSRF攻撃を防ぐための[共通メカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token)をサポートしています。
+HTTPリクエストを実行するとき、インターセプターはデフォルトでは`XSRF-TOKEN`によってクッキーからトークンを読み込み、それをHTTPヘッダの`X-XSRF-TOKEN`として設定します。
+ドメイン上で動作するコードだけがCookieを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションからのものであることを保証できます。
 
-By default, an interceptor sends this cookie on all mutating requests (POST, etc.)
-to relative URLs but not on GET/HEAD requests or
-on requests with an absolute URL.
+デフォルトでは、インターセプターは相対URLへのすべての変更リクエスト（POSTなど）に対してこのCookieを送信しますが、GET/HEADリクエストや絶体URLには送りません。
 
-To take advantage of this, your server needs to set a token in a JavaScript readable session cookie called `XSRF-TOKEN` on either the page load or the first GET request. On subsequent requests the server can verify that the cookie matches the `X-XSRF-TOKEN` HTTP header, and therefore be sure that only code running on your domain could have sent the request. The token must be unique for each user and must be verifiable by the server; this prevents the client from making up its own tokens. Set the token to a digest of your site's authentication
-cookie with a salt for added security.
+これを利用するには、サーバーがページ読み込みまたは最初のGET要求のいずれかで、`XSRF-TOKEN`というJavaScriptで読み取れるセッションクッキーにトークンを設定する必要があります。
+その後のリクエストでは、サーバーはCookieが`X-XSRF-TOKEN`HTTPヘッダーと一致することを検証することができ、したがって、ドメイン上で実行されているコードだけがリクエストを送信できたと確認できます。
+トークンは、各ユーザーごとに一意でなければならず、サーバーによって検証可能でなければなりません。これにより、クライアントは独自のトークンを作成することができなくなります。
+セキュリティを強化するために、トークンをサイトの認証クッキーのダイジェストに設定します。
 
-In order to prevent collisions in environments where multiple Angular apps share the same domain or subdomain, give each application a unique cookie name.
+複数のAngularアプリケーションが同じドメインまたはサブドメインを共有する環境での衝突を防ぐために、各アプリケーションに固有のCookie名を付けましょう。
 
 <div class="alert is-important">
 
-*Note that `HttpClient` supports only the client half of the XSRF protection scheme.* 
-Your backend service must be configured to set the cookie for your page, and to verify that 
-the header is present on all eligible requests. 
-If not, Angular's default protection will be ineffective.
+*`HttpClient`のサポートはクライアント側だけであり、XSRFプロテクションのスキーマの半分だけであることに注意しましょう。*
+あなたのバックエンドサービスは、ページのCookieを設定し、該当するすべてのリクエストにヘッダが存在することを検証するように構成する必要があります。
+そうでない場合、Angularのデフォルトの保護は効果がありません。
 
 </div>
 
-### Configuring custom cookie/header names
+### カスタムcookie/headerの名前を設定する
 
-If your backend service uses different names for the XSRF token cookie or header, 
-use `HttpClientXsrfModule.withOptions()` to override the defaults.
+バックエンドサービスがXSRFトークンのクッキーまたはヘッダーに異なる名前を使っている場合、`HttpClientXsrfModule.withConfig()`を使用してデフォルト設定を上書きします。
 
 <code-example 
   path="http/src/app/app.module.ts"
@@ -932,40 +868,33 @@ use `HttpClientXsrfModule.withOptions()` to override the defaults.
   linenums="false">
 </code-example>
 
-## Testing HTTP requests
+{@a testing-http-requests}
+## HTTPリクエストをテストする
 
-Like any external dependency, the HTTP backend needs to be mocked
-so your tests can simulate interaction with a remote server. 
-The `@angular/common/http/testing` library makes 
-setting up such mocking straightforward.
+外部依存関係と同様に、HTTPバックエンドをモックして、テストでリモートサーバーとのやりとりをシミュレートできるようにする必要があります。
+`@angular/common/http/testing`ライブラリでは、そのようなモッキングを簡単に設定できます。
 
-### Mocking philosophy
+### モックの思想
 
-Angular's HTTP testing library is designed for a pattern of testing wherein 
-the the app executes code and makes requests first.
+Angular HTTPテストライブラリは、アプリケーションがコードを実行してリクエストを最初に行うテストパターン用に設計されています。
 
-Then a test expects that certain requests have or have not been made, 
-performs assertions against those requests, 
-and finally provide responses by "flushing" each expected request.
+そして、ある種のリクエストがあったかどうかをテストします。
+これらのリクエストに対してアサーションを実行し、最終的に各リクエストを「フラッシュ」することによってレスポンスを提供します。
  
-At the end, tests may verify that the app has made no unexpected requests.
+最後に、予期しないリクエストをしていないことを確認します。
 
 <div class="alert is-helpful">
 
-You can run <live-example stackblitz="specs">these sample tests</live-example> 
-in a live coding environment.
+実際のコーディング環境で<live-example stackblitz = "specs">これらのサンプルテスト</live-example>を実行できます。
 
-The tests described in this guide are in `src/testing/http-client.spec.ts`.
-There are also tests of an application data service that call `HttpClient` in
-`src/app/heroes/heroes.service.spec.ts`.
+このガイドで説明されているテストは、`src/testing/http-client.spec.ts`にあります。
+`src/app/heroes/heroes.service.spec.ts`に`HttpClient`を呼び出すアプリケーションデータサービスのテストもあります。
 
 </div>
 
-### Setup
+### セットアップ
 
-To begin testing calls to `HttpClient`, 
-import the `HttpClientTestingModule` and the mocking controller, `HttpTestingController`,
-along with the other symbols your tests require.
+`HttpClient`への呼び出しをテストするには、`HttpClientTestingModule`とモックコントローラ`HttpTestingController`をテストに必要な他のシンボルと共にインポートしてください。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
@@ -973,8 +902,7 @@ along with the other symbols your tests require.
   title="app/testing/http-client.spec.ts (imports)" linenums="false">
 </code-example>
 
-Then add the `HttpClientTestingModule` to the `TestBed` and continue with
-the setup of the _service-under-test_.
+次に`HttpClientTestingModule`を`TestBed`に追加し_テスト環境のサービス_の設定を続けます。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
@@ -982,14 +910,13 @@ the setup of the _service-under-test_.
   title="app/testing/http-client.spec.ts(setup)" linenums="false">
 </code-example>
 
-Now requests made in the course of your tests will hit the testing backend instead of the normal backend.
+テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットするでしょう。
 
-This setup also calls `TestBed.get()` to inject the `HttpClient` service and the mocking controller
-so they can be referenced during the tests.
+この設定では`TestBed.get()`を呼び出してテスト中に参照できるように`HttpClient`サービスとモックコントローラを注入します。
 
-### Expecting and answering requests
+### リクエストの待ち受けと応答
 
-Now you can write a test that expects a GET Request to occur and provides a mock response. 
+これで、GETリクエストが発生することを待ち受けるテストを作成し、モックレスポンスを提供することができます。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
@@ -997,7 +924,7 @@ Now you can write a test that expects a GET Request to occur and provides a mock
   title="app/testing/http-client.spec.ts(httpClient.get)" linenums="false">
 </code-example>
 
-The last step, verifying that no requests remain outstanding, is common enough for you to move it into an `afterEach()` step:
+最後のステップは、まだ未解決のリクエストが残ってないことを確認することです。これは、`afterEach()`ステップに移動して行うことが一般的です。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
@@ -1005,10 +932,10 @@ The last step, verifying that no requests remain outstanding, is common enough f
   linenums="false">
 </code-example>
 
-#### Custom request expectations
+#### カスタムリクエストの待ち受け
 
-If matching by URL isn't sufficient, it's possible to implement your own matching function. 
-For example, you could look for an outgoing request that has an authorization header:
+URLによる照合では不十分な場合は、独自の照合機能を実装することができます。
+たとえば、認証ヘッダーをもつ外部リクエストを検索できます。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
@@ -1016,15 +943,13 @@ For example, you could look for an outgoing request that has an authorization he
   linenums="false">
 </code-example>
 
-As with the previous `expectOne()`, 
-the test will fail if 0 or 2+ requests satisfy this predicate.
+以前の`expectOne()`と同様に、0または2以上のリクエストがこの条件を満たしていれば、テストは失敗します。
 
-#### Handling more than one request
+#### 複数のリクエストの処理
 
-If you need to respond to duplicate requests in your test, use the `match()` API instead of `expectOne()`.
-It takes the same arguments but returns an array of matching requests. 
-Once returned, these requests are removed from future matching and 
-you are responsible for flushing and verifying them.
+テストで重複したリクエストに応答する必要がある場合は、`expectOne()`の代わりに`match()`APIを使用してください。
+同じ引数をとりますが、一致するリクエストの配列を返します。
+戻されたこれらのリクエストは、今後の照合から削除され、それらをフラッシュして検証する責任があります。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
@@ -1032,11 +957,11 @@ you are responsible for flushing and verifying them.
   linenums="false">
 </code-example>
 
-### Testing for errors
+### エラーのテスト
 
-You should test the app's defenses against HTTP requests that fail.
+失敗したHTTPリクエストに対してアプリケーションがどう防御しているかテストする必要があります。
 
-Call `request.error()` with an `ErrorEvent` instead of `request.flush()`, as in this example.
+この例のように、`request.flush()`ではなく`ErrorEvent`を使って`request.error()`を呼び出してください。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"

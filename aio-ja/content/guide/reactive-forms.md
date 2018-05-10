@@ -940,8 +940,7 @@ Angular フォームのバリデーションについての詳細については
 
 Refreshボタンはヒーローリストと現在選択されているヒーローをクリアしてからヒーロー情報を更新します。
 
-`hero-list.component.ts`は、`Observable`と`finally`をインポートし、`hero.service.ts`は`Observable`、`of`、
-`delay`を`rxjs`からインポートします。
+`hero-list.component.ts`は、`Observable`と`finalize`オペレーターをインポートし、`hero.service.ts`は`Observable`、`of`、そして`delay`オペレーターを`rxjs`からインポートします。
 
 残りのHeroListComponentとHeroService実装の詳細については、このチュートリアルで扱う範囲を超えてしまいますが、
 関連するテクニックについては _Tour of Heroes_ ドキュメンテーションの
@@ -1069,7 +1068,7 @@ Angular `FormArray`は、`address` `FormGroup`の配列を表示できます。
 
 </code-example>
 
-`hero-detail.component.html`では、`formArrayName="address"`を`formArrayName="secretLairs"`に変更します。
+`hero-detail.component.html`では、`formGroupName="address"`を`formArrayName="secretLairs"`に変更します。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-8.component.html" region="form-array-name" title="src/app/hero-detail/hero-detail.component.ts" linenums="false">
 

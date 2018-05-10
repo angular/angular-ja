@@ -561,7 +561,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 
 <code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" title="AfterContentParentComponent (template excerpt)" linenums="false"></code-example>
 
-`<my-child>` タグは `<after-content>` タグの間に挟まれています。
+`<app-child>` タグは `<after-content>` タグの間に挟まれています。
 そのコンテンツをコンポーネントに投影するつもりでない限り、コンポーネントの要素タグ
 *の間にコンテンツを置かないでください*。
 
@@ -571,7 +571,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 
 `<ng-content>` タグは、外部コンテンツの *プレースホルダー* です。
 Angularはそのコンテンツをどこに挿入するかを指示します。
-この場合、投影されるコンテンツは親からの `<my-child>` です。
+この場合、投影されるコンテンツは親からの `<app-child>` です。
 
 <figure>
   <img src='generated/images/guide/lifecycle-hooks/projected-child-view.png' alt="Projected Content">

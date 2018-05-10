@@ -256,8 +256,9 @@
             },
             {
               "url": "guide/reactive-forms",
-              "title": "Reactive Forms",
-              "tooltip": "Create a reactive form using FormBuilder, groups, and arrays."
+              "title": "リアクティブフォーム",
+              "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
+              "translated": true
             },
             {
               "url": "guide/dynamic-form",

@@ -9,7 +9,7 @@ _リアクティブフォーム_ は、 _リアクティブ_ スタイルでフ�
 <live-example stackblitz="final" title="Reactive Forms (final) in Stackblitz">リアクティブフォームの live-example</live-example>もご参照ください。
 
 また、<live-example title="Reactive Forms Demo in Stackblitz">Reactive Forms Demo</live-example>にライブサンプルがあります。
-“Demo Picker”から実装途中のステップも参照できます。
+"Demo Picker"から実装途中のステップも参照できます。
 
 
 {@a intro}
@@ -279,8 +279,8 @@ JavaScriptの`import`文を使用します。
 
     <td>
 
-      [`AbstractControl`](api/forms/AbstractControl "API Reference: FormControl") は、3つの具体的なフォームコントロールクラスの抽象基本クラスです。
-`FormControl`、`FormGroup`、および`FormArray`です。
+      [`AbstractControl`](api/forms/AbstractControl "API Reference: FormControl") は、3つの具体的なフォームコントロールクラス、
+すなわち`FormControl`、`FormGroup`、および`FormArray`の抽象基本クラスです。
 共通のプロパティと振る舞いを提供します。
 
     </td>
@@ -388,7 +388,7 @@ JavaScriptの`import`文を使用します。
 
 </code-example>
 
-単一の `<input>`が `<form>`要素にあることに注目してください。
+単一の `<input>`が `<form>`要素の中にあることに注目してください。
 
 `formGroup`はリアクティブフォームのディレクティブであり、既存の
 `FormGroup`インスタンスとHTML要素を関連付けます。
@@ -530,12 +530,12 @@ JavaScriptの`import`文を使用します。
 Angularフォームのバリデーションについての詳細は、
 [フォームバリデーション](guide/form-validation) のガイドを参照ください。
 
-### `FormControl` のもっと知る
+### `FormControl` をもっと知る
 
 ここまではヒーローの名前をフォームにセットしましたが、このセクションでは、住所、スーパーパワー、およびサイドキックという追加の`FormControl`をヒーローフォームに追加してみましょう。
 
-住所にはstateプロパティになります。ユーザーは`<select>`でstateを選択し、
-`<option>`要素は状態を持ちます。したがって、`data-model.ts`から`states`をインポートしてください。
+住所は州プロパティを持ちます。ユーザーは`<select>`で州を選択します。
+そしてあなたは複数の州について`<option>`要素を配置します。したがって、`data-model.ts`から`states`をインポートしてください。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-4.component.ts" region="imports" title="src/app/hero-detail/hero-detail.component.ts (excerpt)" linenums="false">
 
@@ -585,7 +585,7 @@ Angular `FormGroup`および`FormControl`プロパティにバインドします
 {@a grouping}
 
 
-### FormGroupの中にFormGroupを入れる（ネスト）
+### 入れ子になったFormGroups
 
 肥大化していくフォームをより効率良く管理するために、
 関連する`FormControl`のいくつかを`FormGroup`の中にまとめてグループ化するという方法があります。
@@ -831,7 +831,7 @@ Angular フォームのバリデーションについての詳細については
 
 <div class="alert is-helpful">
 
-*注意*: もしいま解説を読みながらコーディングしている場合、このセクションはオプションコンテンツです（残りのステップがこのセクションに依存していないため）。
+*注意*: もしいまこの解説を読みながらコーディングしている場合、残りのステップがこのセクションに依存していないため、このセクションはオプションコンテンツです。
 
 </div>
 
@@ -1119,7 +1119,7 @@ _プレゼンテーション_ 要件は _データ_ 要件と異なる場合が�
 `HeroDetailComponent`は、`secretLairs` `FormArray`からアイテムを表示、追加、および削除することができるはずです。
 
 当該`FormArray`への参照を取得するには、`FormGroup.get()`メソッドを使います。
-明快さと再利用性を考慮して、式を`secretLairs`という都合のよいプロパティがあるのでこれで囲みます。`HeroDetailComponent`に以下を追加してください。
+明快さと再利用性を考慮して、式を`secretLairs`という都合のよいプロパティで囲みます。`HeroDetailComponent`に以下を追加してください。
 
 <code-example path="reactive-forms/src/app/hero-detail/hero-detail-8.component.ts" region="get-secret-lairs" title="src/app/hero-detail/hero-detail.component.ts (secretLairs property)" linenums="false">
 
@@ -1186,7 +1186,7 @@ type属性を指定せずに、あとでフォーム送信アクションを実�
 ### 試してみましょう！
 
 ブラウザに戻り、"Magneta"という名前のヒーローを選択します。
-フォームの下部にあるデバッグ用JSONに表示されているように、"Magneta" には住所（address）はありません。
+フォームの下部にあるデバッグ用JSONに表示されているように、"Magneta"には住所はありません。
 
 <figure>
   <img src="generated/images/guide/reactive-forms/addresses-array.png" alt="JSON output of addresses array">

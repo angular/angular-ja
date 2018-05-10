@@ -316,8 +316,9 @@
             },
             {
               "url": "guide/ngmodule-vs-jsmodule",
-              "title": "JS Modules vs NgModules",
-              "tooltip": "Differentiate between JavaScript modules and NgModules."
+              "title": "JavaScriptモジュールとNgModule",
+              "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
+              "translated": true
             },
             {
               "url": "guide/frequent-ngmodules",

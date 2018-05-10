@@ -10,7 +10,7 @@ JavaScriptとAngularにはコードを整理するためのモジュールとい
 
 ## JavaScriptモジュール
 
-JavaScriptモジュールはJavaScriptコードが含まれる単一のファイルです。モジュール内のものを利用するためには、次のようにエクスポート式を記述して、大抵はそのあとに関連するコードを書きます:
+JavaScriptモジュールはJavaScriptコードが含まれる単一のファイルです。モジュール内のものを利用するためには、次のようにエクスポート文を記述して、大抵はそのあとに関連するコードを書きます:
 
 ```typescript
 export class AppComponent { ... }
@@ -22,7 +22,7 @@ export class AppComponent { ... }
 import { AppComponent } from './app.component';
 ```
 
-JavaScriptモジュールは名前空間や、グローバル変数名の競合することを防ぐのに役立ちます。
+JavaScriptモジュールは名前空間や、グローバル変数名が競合することを防ぐのに役立ちます。
 
 ## NgModule
 
@@ -55,11 +55,11 @@ export class AppModule { }
 
 NgModuleクラスはJavaScriptモジュールとは次のような点で異なります:
 
-* NgModuleは[宣言可能なクラス](guide/ngmodule-faq#q-declarable)のみを束縛します。
-宣言可能なクラスは単なるクラス([Angularコンパイラ](guide/ngmodule-faq#q-angular-compiler)にとっては重要)です。
+* NgModuleは[宣言クラス](guide/ngmodule-faq#q-declarable)のみを束縛します。
+宣言クラスは単なるクラス([Angularコンパイラ](guide/ngmodule-faq#q-angular-compiler)にとっては重要)です。
 * JavaScriptモジュールのようにすべてのメンバークラスを1つの巨大なファイルに定義するかわりに、
 モジュールのクラスを`@NgModule.declarations`リストに記述します。
-* NgModuleは自身が持っている、または他のモジュールからインポートした[宣言可能なクラス](guide/ngmodule-faq#q-declarable)のみエクスポートすることができます。
+* NgModuleは自身が持っている、または他のモジュールからインポートした[宣言クラス](guide/ngmodule-faq#q-declarable)のみエクスポートすることができます。
 他の種類のクラスを宣言したりエクスポートすることはしません。
 * JavaScriptモジュールとは異なり、
 NgModuleはプロバイダーを`@NgModule.providers`リストに追加することでアプリケーション_全体_をサービスで拡張することができます。

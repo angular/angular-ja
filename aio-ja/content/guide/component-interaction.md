@@ -1,31 +1,44 @@
 # Component Interaction
+# コンポーネントの相互作用
 
 {@a top}
 
 This cookbook contains recipes for common component communication scenarios
 in which two or more components share information.
+このクックブックには、2つ以上のコンポーネントが情報を共有する
+一般的なコンポーネントの通信シナリオのレシピが含まれています。
 {@a toc}
 
 <!--
 
 # Contents
+# コンテンツ
 
 * [Pass data from parent to child with input binding](guide/component-interaction#parent-to-child)
+* [親から入力バインディングを持つ子へのデータ渡し](guide/component-interaction#parent-to-child)
 * [Intercept input property changes with a setter](guide/component-interaction#parent-to-child-setter)
+* [インターセプト(傍受)がセッターによるプロパティ変更を入力する](guide/component-interaction#parent-to-child-setter)
 * [Intercept input property changes with `ngOnChanges()`](guide/component-interaction#parent-to-child-on-changes)
+* [インターセプト(傍受)が `ngOnChanges()` によるプロパティの変更へ入力する](guide/component-interaction#parent-to-child-on-changes)
 * [Parent calls an `@ViewChild()`](guide/component-interaction#parent-to-view-child)
+* [親が `@ViewChild()` を呼び出す](guide/component-interaction#parent-to-view-child)
 * [Parent and children communicate via a service](guide/component-interaction#bidirectional-service)
+* [サービスによる親と子の通信](guide/component-interaction#bidirectional-service)
 
 -->
 
 **See the <live-example name="component-interaction"></live-example>**.
+**<live-example name="component-interaction"></live-example>を参照してください。**.
 
 {@a parent-to-child}
 
 ## Pass data from parent to child with input binding
+## 親から入力バインディングを持つ子へのデータ渡し
 
 `HeroChildComponent` has two ***input properties***,
 typically adorned with [@Input decorations](guide/template-syntax#inputs-outputs).
+`HeroChildComponent` は、二つの ***入力プロパティ*** を持っています,
+一般的に [@Input デコレーション](guide/template-syntax#inputs-outputs)で装飾しています。
 
 
 <code-example path="component-interaction/src/app/hero-child.component.ts" title="component-interaction/src/app/hero-child.component.ts">
@@ -35,10 +48,14 @@ typically adorned with [@Input decorations](guide/template-syntax#inputs-outputs
 
 
 The second `@Input` aliases the child component property name `masterName` as `'master'`.
+二番目の `@Input` は、子コンポーネント名 `masterName` を `'master'` としてエイリアスします。
 
 The `HeroParentComponent` nests the child `HeroChildComponent` inside an `*ngFor` repeater,
 binding its `master` string property to the child's `master` alias,
 and each iteration's `hero` instance to the child's `hero` property.
+`HeroParentComponent` は、内部の `*ngFor` リピーターで、子の `HeroChildComponent` を繰り返します、
+それ(親)の `master` プロパティ文字列を子の `master` エイリアスに結び付け(バインディングし)ます、
+そして、それぞれのインスタンスの `hero` は、子の `hero` プロパティにインスタンスします。 
 
 
 <code-example path="component-interaction/src/app/hero-parent.component.ts" title="component-interaction/src/app/hero-parent.component.ts">
@@ -48,6 +65,7 @@ and each iteration's `hero` instance to the child's `hero` property.
 
 
 The running application displays three heroes:
+動作するアプリケーションは、三人のヒーローを表示します:
 
 
 <figure>
@@ -56,9 +74,10 @@ The running application displays three heroes:
 
 
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 E2E test that all children were instantiated and displayed as expected:
+E2E は、予想通りに、全ての子をインスタンス化と表示化される事をテストします：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -67,16 +86,20 @@ E2E test that all children were instantiated and displayed as expected:
 
 
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
 
 {@a parent-to-child-setter}
 
 ## Intercept input property changes with a setter
+## インターセプト(傍受)がセッターを持つプロパティ変更を入力
 
 Use an input property setter to intercept and act upon a value from the parent.
+インターセプトの為に入力プロパティのセッターを利用し、親からの値に基いて活動します。
 
 The setter of the `name` input property in the child `NameChildComponent`
 trims the whitespace from a name and replaces an empty value with default text.
+`name` のセッターが、子の `NameChildComponent` の中のプロパティに入力します。
+子の `NameChildComponent` は、名前の前後の空白を取り除き(空白をトリムし)、そしてデフォルトテキストがある空の値に置き換えする。
 
 
 <code-example path="component-interaction/src/app/name-child.component.ts" title="component-interaction/src/app/name-child.component.ts">
@@ -86,6 +109,7 @@ trims the whitespace from a name and replaces an empty value with default text.
 
 
 Here's the `NameParentComponent` demonstrating name variations including a name with all spaces:
+ここで `NameParentComponent` は、全て空白の名前を含む名前のバリエーションをデモンストレーションします：
 
 
 <code-example path="component-interaction/src/app/name-parent.component.ts" title="component-interaction/src/app/name-parent.component.ts">
@@ -100,9 +124,10 @@ Here's the `NameParentComponent` demonstrating name variations including a name 
 
 
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 E2E tests of input property setter with empty and non-empty names:
+E2E は、空と空では無い名前を含む入力プロパティのセッターをテストします：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-setter" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -111,27 +136,32 @@ E2E tests of input property setter with empty and non-empty names:
 
 
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
 
 {@a parent-to-child-on-changes}
 
 ## Intercept input property changes with *ngOnChanges()*
+## インターセプト(傍受)が `ngOnChanges()` によるプロパティの変更へ入力
 
 Detect and act upon changes to input property values with the `ngOnChanges()` method of the `OnChanges` lifecycle hook interface.
+ライフサイクル・フック・インターフェースの `OnChanges` の `ngOnChanges()` メソッドによる入力プロパティー値の変化にもとづく活動と検知
 
 <div class="l-sub-section">
 
 
 
 You may prefer this approach to the property setter when watching multiple, interacting input properties.
+あなたは、このアプローチ、すなわち、多くを監視し、プロパティの入力をインタラクトするプロパティの方法、を好むかもしれません。
 
 Learn about `ngOnChanges()` in the [LifeCycle Hooks](guide/lifecycle-hooks) chapter.
+`ngOnChanges()` については [ライフサイクル・フック](guide/lifecycle-hooks) の章で学びましょう。
 
 </div>
 
 
 
 This `VersionChildComponent` detects changes to the `major` and `minor` input properties and composes a log message reporting these changes:
+この `VersionChildComponent` は、`メジャー` と `マイナー` 入力プロパティの変化を検出し、これらの変化をレポート(報告)するログメッセージを構成します：
 
 
 <code-example path="component-interaction/src/app/version-child.component.ts" title="component-interaction/src/app/version-child.component.ts">
@@ -141,6 +171,7 @@ This `VersionChildComponent` detects changes to the `major` and `minor` input pr
 
 
 The `VersionParentComponent` supplies the `minor` and `major` values and binds buttons to methods that change them.
+`VersionParentComponent` は `マイナー` と `メジャー` の値を供給し(満たし)、ボタンをそれらを変更するメソッドに結び付けます。
 
 
 <code-example path="component-interaction/src/app/version-parent.component.ts" title="component-interaction/src/app/version-parent.component.ts">
@@ -150,6 +181,7 @@ The `VersionParentComponent` supplies the `minor` and `major` values and binds b
 
 
 Here's the output of a button-pushing sequence:
+ここに、ボタン押下シーケンスのアウトプット(出力)があります：
 
 
 <figure>
@@ -158,10 +190,13 @@ Here's the output of a button-pushing sequence:
 
 
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 Test that ***both*** input properties are set initially and that button clicks trigger
 the expected `ngOnChanges` calls and values:
+テストは、***両方*** の入力プロパティは初期値を設定し、ボタンのクリックは
+`ngOnChanges` の呼出と値を期待します：
+
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-onchanges" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -170,18 +205,24 @@ the expected `ngOnChanges` calls and values:
 
 
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
 
 {@a child-to-parent}
 
 ## Parent listens for child event
+## 親は子のイベントを聞いてます
 
 The child component exposes an `EventEmitter` property with which it `emits` events when something happens.
+子コンポーネントは、何かが起こった時にイベントを `発行する` `EventEmitter` プロパティをむき出しにします。
 The parent binds to that event property and reacts to those events.
+親は、そのイベント・プロパティを結び付け、それらのイベントに反応します。
 
 The child's `EventEmitter` property is an ***output property***,
   typically adorned with an [@Output decoration](guide/template-syntax#inputs-outputs)
   as seen in this `VoterComponent`:
+子の `EventEmitter` プロパティは、一つの ***出力プロパティ*** です、
+ 　一般的に、この `VoterComponent` に見られる様な
+  [@Output デコレーション](guide/template-syntax#inputs-outputs) で装飾します：
 
 
 <code-example path="component-interaction/src/app/voter.component.ts" title="component-interaction/src/app/voter.component.ts">
@@ -191,6 +232,7 @@ The child's `EventEmitter` property is an ***output property***,
 
 
 Clicking a button triggers emission of a `true` or `false`, the boolean *payload*.
+ボタンのクリックは、 ブールの *ペイロード* に `true` か `false` の放出を引き起こします。
 
 The parent `VoteTakerComponent` binds an event handler called `onVoted()` that responds to the child event
 payload `$event` and updates a counter.
@@ -212,7 +254,7 @@ and the method processes it:
 
 
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 Test that clicking the *Agree* and *Disagree* buttons update the appropriate counters:
 
@@ -223,7 +265,7 @@ Test that clicking the *Agree* and *Disagree* buttons update the appropriate cou
 
 
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
 
 
 
@@ -277,7 +319,7 @@ Here we see the parent and child working together.
 {@a countdown-tests}
 
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 Test that the seconds displayed in the parent template
 match the seconds displayed in the child's status message.
@@ -290,7 +332,7 @@ Test also that clicking the *Stop* button pauses the countdown timer:
 
 
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
 
 {@a parent-to-view-child}
 
@@ -355,11 +397,11 @@ in the same cycle. The app has to *wait one turn* before it can display the seco
 Use `setTimeout()` to wait one tick and then revise the `seconds()` method so
 that it takes future values from the timer component.
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 Use [the same countdown timer tests](guide/component-interaction#countdown-tests) as before.
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
 
 {@a bidirectional-service}
 
@@ -427,7 +469,7 @@ facilitated by the service:
 
 
 
-<h3 class="no-toc">Test it</h3>
+<h3 class="no-toc">テストしよう</h3>
 
 Tests click buttons of both the parent `MissionControlComponent` and the `AstronautComponent` children
 and verify that the history meets expectations:
@@ -439,4 +481,5 @@ and verify that the history meets expectations:
 
 
 
-[Back to top](guide/component-interaction#top)
+[最初に戻る](guide/component-interaction#top)
+

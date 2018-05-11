@@ -37,17 +37,10 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 ### _@Injectable()_ サービス
 
 生成されたファイル内で Angular の Injectable シンボルがインポートされ、`@Injectable()` デコレーターとしてクラスを注釈していることに注目してください。
+これは、クラスを _依存関係注入システム_ に参加するものとしてマークします。 `HeroService`クラスは、注入可能なサービスを提供する予定であり、それ自身が依存関係をもつこともできます。
+まだ依存関係はありませんが、[間もなくそうなります](#inject-message-service)。
 
-`@Injectable()` デコレーターは、このサービス自体が依存関係を注入している可能性があることを示しています。
-現時点で依存関係があるわけではありませんが、[この後すぐに設定します](#inject-message-service)。
-依存関係の有無にかかわらず、このデコレーターを付けておくとよいでしょう。
-
-<div class="l-sub-section">
-
-Angular の [スタイルガイド](guide/styleguide#style-07-04) ではそれを強くお勧めしています。
-また、リンターはこのルールを基準として指摘を行います。
-
-</div>
+`@Injectable()`デコレーターは、`@Component()`デコレーターがコンポーネントクラスに対して行ったのと同じ方法で、サービスのメタデータオブジェクトを受け入れます。
 
 ### ヒーローデータの取得
 
@@ -71,27 +64,39 @@ Angular の [スタイルガイド](guide/styleguide#style-07-04) ではそれ�
 {@a provide}
 ## `HeroService` の提供
 
-Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）よりも前に、 _依存性の注入システム_ に `HeroService` を _提供_ する必要があります。
+Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）よりも前に、
+`HeroService`が依存性の注入システムで利用できるようにする必要があります。
+これは _プロバイダ_ を登録することで行います。プロバイダーとは、サービスを作成または提供できるものです。この場合、`HeroService`クラスをインスタンス化してサービスを提供します。
 
-`HeroService` を提供する方法はいくつか存在し、`HeroesComponent`、`AppComponent` または `AppModule` で行うことができます。
-また、それぞれの方法にはメリット・デメリットが存在します。
+ここで、`HeroService`がこのサービスのプロバイダーとして登録されていることを確認する必要があります。
+あなたは _インジェクタ_ にこれを登録しています。インジェクタは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
 
-このチュートリアルでは、 `AppModule` 内で提供を行います。
+デフォルトで、Angular CLIコマンド`ng generate service`は、プロバイダーのメタデータを`@Injectable`デコレーターに含めることによって、サービスの _ルートインジェクタ_ でプロバイダーを登録します。
 
-`--module=app` オプションを付与して提供を自動化するようにCLIに伝えるのが一般的な選択です。
+`HeroService`クラス定義の直前で`@Injectable()`の文を見ると、`providedIn`メタデータの値が 'root'であることがわかります。
+
+```
+@Injectable({
+  providedIn: 'root',
+})
+```
+
+ルートレベルでサービスを提供すると、Angularは`HeroService`の単一の共有インスタンスを作成し、それを要求する任意のクラスに注入します。
+`@Injectable`メタデータでプロバイダーを登録すると、Angularはサービスが使用されなくなった場合にそれを削除することでアプリケーションを最適化することもできます。
+
+<div class="l-sub-section">
+
+必要な場合は、`HeroesComponent`、`AppComponent`、`AppModule`の各レベルでプロバイダーを登録できます。
+たとえば、`--module=app`を追加することで、
+モジュールレベルで自動的にサービスを提供するようCLIに指示することができます。
 
 <code-example language="sh" class="code-shell">
   ng generate service hero --module=app
 </code-example>
 
-そのオプションを利用しない場合は、手動で提供する必要があります。
+プロバイダーとインジェクタの詳細については、[依存性の注入ガイド](guide/dependency-injection)を参照してください。
 
-`AppModule` クラスを開いた後、インポートした `HeroService` を `@NgModule.providers` に追加します。
-
-<code-example path="toh-pt4/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts (providers)" region="providers-heroservice">
-</code-example>
-
-Angular は `providers` からひとつの `HeroService` インスタンスを生成し、それを利用しているクラスへ注入します。
+</div>
 
 これにより、 `HeroService` は `HeroesComponent` で利用できる状態になりました。
 
@@ -113,7 +118,8 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 
 `HeroesComponent` クラスを開いてください。
 
-不要となった `HEROES` を削除する代わりに、 `HeroService` をインポートしましょう。
+もう必要ないので、`HEROES`のインポートを削除してください。
+代わりに`HeroService`をインポートしましょう。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" title="src/app/heroes/heroes.component.ts (import HeroService)" region="hero-service-import">
 </code-example>
@@ -277,10 +283,9 @@ Angular CLI は `src/app/messages` 配下にコンポーネントファイル群
 ### _MessageService_ の作成
 
 Angular CLI を使い、`src/app` 配下に `MessageService` を作成します。
-この際 `--module=app` オプションを利用し、`AppModule` へ [このサービスを_提供_](#provide) するように伝えましょう。
 
 <code-example language="sh" class="code-shell">
-  ng generate service message --module=app
+  ng generate service message
 </code-example>
 
 `MessageService` を開き、次のコードへ修正してください。
@@ -336,7 +341,7 @@ Angular は `HeroService` を生成する際、そのプロパティへシング
 </code-example>
 
 コンストラクタに **パブリック** な `messageService` プロパティを宣言しましょう。
-Angular は `HeroService` を作成する際、シングルトンな `MessageService` インスタンスをそのプロパティへ注入します。
+Angular は `MessagesComponent` を作成する際、シングルトンな `MessageService` インスタンスをそのプロパティへ注入します。
 
 <code-example
   path="toh-pt4/src/app/messages/messages.component.ts" region="ctor">
@@ -421,11 +426,11 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 ## まとめ
 
 * `HeroService` クラスのデータ利用方法を修正しました
-* ルートモジュールである `AppModule` に `HeroService` を提供することで、それをどこへでも注入できるようにしました
+* `HeroService`をルートレベルでサービスの _プロバイダ_ として登録し、アプリ内のどこにでも注入できるようにしました。
 * [Angular の依存性の注入](guide/dependency-injection) を使用して、それをコンポーネントに注入しました
 * `HeroService` の _データ取得_ メソッドを非同期化しました
 * `Observable` および、それを扱うために利用する RxJS ライブラリについて学びました
-* モックヒーローを _Observable_ (`Observable<Hero[]>`) 型で返すために、RxJS の `of()` を使用しました
+* モックヒーローを Observable (`Observable<Hero[]>`) 型で返すために、RxJS の `of()` を使用しました
 * コンポーネントのコンストラクタ内ではなく、`ngOnInit` ライフサイクルフックで `HeroService` メソッドを呼び出しました
 * クラス間で疎結合な情報伝達を行うため、 `MessageService` を作成しました
 * コンポーネントに注入された `HeroService` は、もうひとつのサービスである `MessageService` とともに作成されます

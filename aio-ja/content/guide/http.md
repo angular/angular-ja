@@ -280,7 +280,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 ### POSTリクエストを行う
 
 アプリケーションはしばしばサーバーにデータをPOSTします。 フォームを送信するときにPOSTします。
-次の例では、ヒーローをデータベースに追加するときに `HeroService`がポストします。
+次の例では、ヒーローをデータベースに追加するときに `HeroesService`がポストします。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
@@ -326,16 +326,14 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
   title="app/heroes/heroes.component.ts (deleteHero)" linenums="false">
 </code-example>
 
+コンポーネントは削除操作の結果を期待していないため、コールバックなしで購読します。結果を使用していなくても、依然として購読する必要があります。 `subscribe()`メソッドを呼び出すと、observableが _実行_ されます。これは、DELETEリクエストを開始するものです。
+
 <div class="alert is-important">
 
-_subscribe()_を呼び出してください。そうしないと何も起こりません!
+_subscribe()_ を呼ばなければ何も起こりません。 `HeroesService.deleteHero()`を呼び出すだけでは、**DELETEリクエストは開始されません。**
 
 </div>
 
-コンポーネントは削除操作の結果を期待しておらず、コールバックなしで購読します。空の `.subscribe()`は無意味_なように見えます_。
-
-しかし、それは不可欠です。
-単に`HeroService.addHero()`を呼び出すだけでは、**DELETEリクエストは開始されません。**
 
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
@@ -343,7 +341,7 @@ _subscribe()_を呼び出してください。そうしないと何も起こり�
 </code-example>
 
 {@a always-subscribe}
-### 常に_subscribe_を忘れないでください!
+**常に_subscribe_を忘れないでください!**
 
 `HttpClient`メソッドは、そのメソッドから返されたObservableで`subscribe()`を呼び出すまでHTTPリクエストを開始しません。
 これは_すべての`HttpClient`メソッド_に当てはまります。
@@ -379,7 +377,7 @@ req.subscribe();
 ### PUTリクエストを作る
 
 アプリケーションはリソースを更新されたデータで完全に置き換えるためにPUTリクエストを送信します。
-次の`HeroService`の例はPOSTの例と似ています。
+次の`HeroesService`の例はPOSTの例と似ています。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
@@ -391,13 +389,13 @@ req.subscribe();
 
 ## 高度な使い方
 
-上記のセクションでは、基本的なHTTP機能を`@angular/common/http`で使用する方法について詳しく説明していますが、単純なリクエストを作成してデータを戻す以上のことが必要な場合もあります。
+私たちは、`@angular/common/http`の基本的なHTTP機能について議論しましたが、単純な要求をしてデータを戻す以上のことを行う必要があることもあります。
 
 ### リクエストの設定
 
 外部へのリクエストの他の設定は、`HttpClient`メソッドの最後の引数として渡されたオプションオブジェクトを介して行えます。
 
-`HeroService`がオプションオブジェクト（`httpOptions`）をその保存メソッドに渡すことでデフォルトヘッダーを設定していることを[前に](#adding-headers)見てきました。
+`HeroesService`がオプションオブジェクト（`httpOptions`）をその保存メソッドに渡すことでデフォルトヘッダーを設定していることを[前に](#adding-headers)見てきました。
 もっと他のこともできます。
 
 #### ヘッダーを更新する
@@ -424,7 +422,7 @@ URL検索パラメータを追加する方法も同様です。
   region="searchHeroes" linenums="false">
 </code-example>
 
-検索語であるtermがある場合、コードは、HTML URLでエンコードされた検索パラメータを使用してオプションオブジェクトを作成します。
+検索語であるtermがある場合、コードは、HTML URLエンコードされた検索パラメータを使用してオプションオブジェクトを作成します。
 termが「foo」の場合、GETリクエストURLは`api/heroes/?name=foo`になります。
 
 `HttpParms`はイミュータブルなので、`set()`メソッドを使ってオプションを更新する必要があります。
@@ -456,7 +454,7 @@ termが「foo」の場合、GETリクエストURLは`api/heroes/?name=foo`にな
 </code-example>
 
 `searchText$`は、ユーザーからの検索ボックス値のシーケンスです。
-RxJSの`Subject`として定義されています。これは、`search()`メソッドのように、`next(value)`を呼び出すことによって値を生成する`Observable`を意味します。
+RxJSの`Subject`として定義されています。これは、`search()`メソッドのように、`next(value)`を呼び出すことによって値を生成するマルチキャスト`Observable`を意味します。
 
 注入された`PackageSearchService`にすべての`searchText`値を直接転送するのではなく、`ngOnInit()`のコードは3つのオペレーターを使って検索値を_パイプ_します。
 
@@ -766,7 +764,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 しかし、インターセプターはこれを1回以上発火する_Observable_に変更することができます。
 
 改訂されたバージョンの`CachingInterceptor`は、オプションでキャッシュされたレスポンスを直ちに出力する_Observable_を返します。
-これは、リクエストをnpm web APIに送信し、更新された検索結果で後で再度出力します。
+これは、リクエストをNPM web APIに送信し、更新された検索結果で後で再度出力します。
 
 <code-example 
   path="http/src/app/http-interceptors/caching-interceptor.ts"
@@ -961,10 +959,18 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 
 失敗したHTTPリクエストに対してアプリケーションがどう防御しているかテストする必要があります。
 
-この例のように、`request.flush()`ではなく`ErrorEvent`を使って`request.error()`を呼び出してください。
+次の例に示すように、`request.flush()`を呼び出してエラーメッセージを表示します。
 
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="404" 
+  linenums="false">
+</code-example>
+
+あるいは、`ErrorEvent`と共に`request.error()`を呼び出すこともできます。
+
+<code-example
+  path="http/src/testing/http-client.spec.ts"
+  region="network-error"
   linenums="false">
 </code-example>

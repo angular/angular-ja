@@ -2,7 +2,7 @@
 
  [**Angular CLI**](https://cli.angular.io/)・Angularアプリケーション・Angular本体は、[**npm**](https://docs.npmjs.com/)パッケージとして提供されているライブラリに依存しています。
 
-これらのnpmパッケージは、node.jsアプリケーションとして実行される[**npmクライアント**](https://docs.npmjs.com/cli/install)を使用してインストールできます。
+これらのnpmパッケージは、Node.js®アプリケーションとして実行される[**npmクライアント**](https://docs.npmjs.com/cli/install)を使用してインストールできます。
 
 [**yarn**](https://yarnpkg.com/en/)は、npmパッケージをインストールするための一般的な方法です。
 Angular CLIは新しいプロジェクトを作成する際、`yarn`を用いてnpmパッケージをインストールしています。
@@ -13,7 +13,7 @@ Node.jsとnpmは、Angularの開発に不可欠です。
 
 まだインストールされていない場合は、[こちら](https://docs.npmjs.com/getting-started/installing-node "Node.jsのインストールと npmのアップデート")から入手してください。
 
-ターミナル/コンソールウィンドウで、コマンド`node -v` および` npm -v` を実行して、**Node.js `v4.x.x以上` かつ `npm 3.x.x以上`を実行していること**を確認します。これより古いバージョンではエラーが発生します。
+ターミナル/コンソールウィンドウで、コマンド`node -v` および` npm -v` を実行して、**Node.js `v8.x`以上 かつ `npm 5.x`以上を実行していること**を確認します。これより古いバージョンではエラーが発生します。
 
 他のバージョンのNode.jsとnpmを使用しているプロジェクトが存在している場合は、[nvm](https://github.com/creationix/nvm) を用いて、複数バージョンのNode.jsとnpmを管理することを検討してください。
 
@@ -112,7 +112,7 @@ Zone.jsは、JavaScriptの標準仕様を決定している[TC39](http://www.ecm
 たとえば、[VS CodeのAngular language serviceプラグイン](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)を参照してください。
 
 
-**@types/... **: Jasmineやnodeなどのサードライブラリ用のTypeScript定義ファイル。
+**@types/... **: JasmineやNode.jsなどのサードライブラリ用のTypeScript定義ファイル。
 
 
 **[codelyzer](https://www.npmjs.com/package/codelyzer)**: [Angularのスタイルガイド](guide/styleguide)に準拠しているリンター。
@@ -128,7 +128,7 @@ Zone.jsは、JavaScriptの標準仕様を決定している[TC39](http://www.ecm
 [WebDriverJS](https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs)の上に構築されています。
 
 
-**[ts-node](https://www.npmjs.com/package/ts-node)**: nodeのためのTypeScript実行環境とREPL。
+**[ts-node](https://www.npmjs.com/package/ts-node)**: Node.jsのためのTypeScript実行環境とREPL。
 
 
 **[tslint](https://www.npmjs.com/package/tslint)**: TypeScriptコードの可読性/保守性/機能性のエラーをチェックする静的解析ツールです。

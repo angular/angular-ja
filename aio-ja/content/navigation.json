@@ -532,8 +532,9 @@
           "children": [
             {
               "url": "guide/updating",
-              "title": "Updating Your Projects",
-              "tooltip": "Information about updating Angular applications and libraries to the latest version."
+              "title": "プロジェクトの更新",
+              "tooltip": "Angularアプリケーションとライブラリの最新バージョンへの更新に関する情報",
+              "translated": true
             },
             {
               "url": "guide/releases",

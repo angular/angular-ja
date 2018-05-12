@@ -1,134 +1,134 @@
-# Angular versioning and releases
+# Angularのバージョンとリリース
 
-We recognize that you need stability from the Angular framework. Stability ensures that reusable components and libraries, tutorials, tools, and learned practices don't become obsolete unexpectedly. Stability is essential for the ecosystem around Angular to thrive.
+私たちはAngularフレームワークには安定性が必要であると認識しています。安定性によって、再利用可能なコンポーネントやライブラリ、チュートリアル、ツール、学習されたプラクティスが予期せず時代遅れになることはありません。 Angularが発展するまわりのエコシステムには安定性が不可欠です。
 
-We also share with you the desire for Angular to keep evolving. We strive to ensure that the foundation on top of which you are building is continuously improving and enabling you to stay up-to-date with the rest of the web ecosystem and your user needs.
+また、Angularが進化を続けたいという願望も共有しています。私たちは、あなたが構築している基盤が継続的に改善されていること、そしてその他のウェブ・エコシステムとユーザーのニーズを常に最新の状態に保てることを確実にするよう努めています。
 
-This document contains the practices that we follow to provide you with a leading-edge app development platform, balanced with stability. We strive to ensure that future changes are always introduced in a predictable way. We want everyone who depends on Angular to know when and how new features are added, and to be well-prepared when obsolete ones are removed.
+このドキュメントには、安定性とバランスのとれた最先端のアプリケーション開発プラットフォームを提供するために私たちが従うプラクティスが含まれています。私たちは将来の変化が常に予測可能な方法で導入されるように努めています。 Angularに依存しているすべての人に、新しい機能が追加される時期と方法を知り、時代遅れの機能が削除されたときに十分に準備されることを願っています。
 
-See [Updating your projects](guide/updating "Updating your projects") for information about how to update your apps and libraries to the latest version of Angular.
+アプリケーションとライブラリを最新バージョンのAngularに更新する方法については、[プロジェクトの更新](guide/updating "Updating your projects")を参照してください。
 
 <div class="l-sub-section">
 
-The practices described in this document apply to Angular 2.0 and later. If you are currently using AngularJS, see [Upgrading from AngularJS](guide/upgrade "Upgrading from Angular JS"). _AngularJS_ is the name for all v1.x versions of Angular.
+このドキュメントで説明するプラクティスは、Angular 2.0以降に適用されます。現在AngularJSを使用している場合は、[AngularJSからのアップグレード](guide/upgrade "Upgrading from Angular JS")を参照してください。 _AngularJS_はすべてのv1.xバージョンのAngularの名前です。
 
 </div>
 
 
 {@a angular-versioning}
-## Angular versioning
+## Angularのバージョニング
 
-Angular version numbers indicate the level of changes that are introduced by the release. This use of [semantic versioning](https://semver.org/ "Semantic Versioning Specification") helps you understand the potential impact of updating to a new version. 
+Angularのバージョン番号は、リリースで導入された変更のレベルを示します。この[セマンティックバージョン](https://semver.org/ "Semantic Versioning Specification")管理を使用すると、新しいバージョンへの更新の潜在的な影響を理解するのに役立ちます。
 
-Angular version numbers have three parts: `major.minor.patch`. For example, version 5.2.9 indicates major version 5, minor version 2, and patch version 9. 
+Angularのバージョン番号には3つの部分があります: `major.minor.patch`。たとえば、バージョン5.2.9は、メジャーバージョン5、マイナーバージョン2、およびパッチバージョン9を示します。
 
-The version number is incremented based on the level of change included in the release. 
+バージョン番号は、リリースに含まれる変更のレベルに基づいて増えていきます。
 
-* Major releases contain significant new features, some but minimal developer assistance is expected during the update. When updating to a new major release, you may need to run update scripts, refactor code, run additional tests, and learn new APIs. 
+* メジャーリリースには重要な新機能が含まれていますが、更新には最小限の開発者の協力が求められます。新しいメジャーリリースにアップデートするときは、アップデートスクリプト、リファクタリングコード、追加テストの実行、新しいAPIの学習が必要な場合があります。
 
-* Minor releases contain new smaller features. Minor releases are fully backward-compatible; no developer assistance is expected during update, but you can optionally modify your apps and libraries to begin using new APIs, features, and capabilities that were added in the release. We update peer dependencies in minor versions by expanding the supported versions, but we do not require projects to update these dependencies. 
+* マイナーリリースには新しい小さな機能が含まれています。マイナーリリースは完全に後方互換性があります。アップデート中に開発者の協力は必要ありませんが、リリースで追加された新しいAPI、機能、および機能を使用するようにアプリケーションやライブラリを修正することもできます。サポートされているバージョンを拡張することで、マイナーバージョンのピア依存関係を更新しますが、プロジェクトにこれらの依存関係を更新を求めることはありません。
 
-* Patch releases are low risk, bug fix releases. No developer assistance is expected during update.
+* パッチリリースは低リスクでなバグ修正リリースです。更新中に開発者の協力は求められません。
 
-If you are updating within the same major version, then you can skip any intermediate versions and update directly to the targeted version. For example, if you want to update from 5.0.0 to 5.2.9, then you can update directly; you do not need to update from 5.0.0 to 5.1.0 before updating to 5.2.9. 
+同じメジャーバージョン内で更新する場合は、中間バージョンをスキップしてターゲットバージョンに直接更新することができます。たとえば、5.0.0から5.2.9に更新する場合は、直接更新できます。5.2.9にアップデートする前に5.0.0から5.1.0に更新する必要はありません。
 
-If you are updating from one major version to another, then we recommend that you don't skip major versions. Follow the instructions to incrementally update to the next major version, testing and validating at each step. For example, if you want to update from version 4.x.x to version 6.x.x, we recommend that you update to the latest 5.x.x release first. After successfully updating to 5.x.x, you can then update to 6.x.x. 
+メジャーバージョンを別のメジャーバージョンに更新する場合は、メジャーバージョンをスキップしないことをお勧めします。手順にしたがって、次のメジャーバージョンに段階的に更新し、各ステップでテストし、検証します。たとえば、バージョン4.x.xからバージョン6.x.xに更新する場合は、まず最新の5.x.xリリースに更新することをお勧めします。5.x.xに正常に更新した後には、6.x.xに更新できます
 
-Pre-release previews&mdash;such as Beta and Release Candidate versions&mdash;are indicated by appending a dash and a beta or rc identifier, such as version 5.2.9-rc.3.
+プレリリースプレビュー&mdash;BetaやRelease Candidateなど&mdash;には、バージョン5.2.9-rc.3のように、ダッシュ記号とのベータまたはrc識別子が追加されています。
 
 {@a frequency}
-## Release frequency
+## リリース周期
 
-We work toward a regular schedule of releases, so that you can plan and coordinate your updates with the continuing evolution of Angular.
+定期的なリリーススケジュールに向けて作業を進めており、Angularの進化と共にアップデートを計画し、調整することができます。
 
-In general, you can expect the following release cycle:
+基本的に、次のリリースサイクルが予想されます。
 
-* A major release every 6 months
+* 6か月ごとのメジャーリリース
 
-* 1-3 minor releases for each major release
+* メジャーリリースごとに1回から3回のマイナーリリース
 
-* A patch release almost every week
+* ほぼ毎週のパッチリリース
 
-We bake quality into our releases&mdash;and let you preview what's coming next&mdash;by providing Beta releases and release candidates (RCs) for each major and minor release.
+メジャーリリースとマイナーリリースそれぞれにベータリリースとリリース候補（RC）を提供することで、我々のリリースに品質をもたらし、&mdash;次のリリースをプレビューすることもできます&mdash;。
 
-This cadence of releases gives you access to new beta features as soon as they are ready, while maintaining the stability and reliability of the platform for production users.
+このリリースのリズムは、プロダクションユーザーにとってのプラットフォームの安定性と信頼性を維持しながら、新しいベータ機能をすぐに利用できるようにします。
 
 
 {@a schedule}
-## Release schedule
+## リリーススケジュール
 
 <div class="l-sub-section">
 
-Disclaimer: The dates are offered as general guidance and may be adjusted by us when necessary to ensure delivery of a high-quality platform. 
+免責事項：日付は一般的なガイダンスとして提供され、高品質なプラットフォームの提供を確実にするために必要な場合は調整される場合があります。
 
 </div>
 
-The following table contains our current target release dates for the next two major versions of Angular: 
+次の表は、Angularの次の2つのメジャーバージョンの、現在の目標リリース日を示しています。
 
- Date                   | Stable Release | Compatibility
+ 日付                   | 安定版リリース | 互換性
  ---------------------- | -------------- | ----------------
- September/October 2018 | 7.0.0          | ^6.0.0
- March/April 2019       | 8.0.0          | ^7.0.0
+ 2018年 9月/10月         | 7.0.0          | ^6.0.0
+ 2019年 3月/4月          | 8.0.0          | ^7.0.0
 
- Compatiblity note: The primary goal of the backwards compatibility promise is to ensure that changes in the core framework and tooling don't break the existing ecosystem of components and applications and don't put undue upgrade/migration burden on Angular application and component authors.
+互換性に関する注記：下位互換性の約束の第一の目的は、コアフレームワークおよびツールの変更がコンポーネントおよびアプリケーションの既存のエコシステムを壊さず、Angularアプリケーションおよびコンポーネント作成者に過度のアップグレード/移行負担をかけることがないようにすることです。
 
 
 {@a lts}
-## Long-term support
+## 長期サポート（LTS）
 
-All of our releases are supported actively for about 6 months (until the next major release), and then they are supported through long-term support (LTS) for another 12 months.
+すべてのリリースは約6ヶ月間（次のメジャーリリースまで）積極的にサポートされ、さらに12ヶ月間の長期サポート（LTS）によってサポートされています。
 
-During the LTS period, only critical fixes and security patches will be merged and released.
+LTS期間中は、重要な修正プログラムとセキュリティ修正プログラムのみが追加され、リリースされます。
 
-The LTS state of one major version starts on the day of the next major release. LTS status ends approximately one year later, when we release another major version. 
+メジャーバージョンのLTS状態は、次のメジャーリリースの日に開始されます。LTS状態は、約1年後に別のメジャーバージョンをリリースすると終了します。
 
 
 
- Version     | LTS Start Date | LTS End Date
+ バージョン    | LTS 開始日      | LTS 終了日
  ----------- | -------------- | ------------
- ^4.0.0      | October 2017   | October 2018
- ^5.0.0      | April 2018     | April 2019
- ^6.0.0      | October 2018   | October 2019
+ ^4.0.0      | 2017年 10月     | 2018年 10月
+ ^5.0.0      | 2018年 4月      | 2019年 4月
+ ^6.0.0      | 2018年 10月     | 2019年 10月 
 
 
 
 
 {@a deprecation}
-## Deprecation practices
+## 廃止のプラクティス
 
-Sometimes &quot;breaking changes&quot;, such as the removal of support for select APIs and features, are necessary to innovate and stay current with new best practices, changing dependencies, or changes in the (web) platform itself. 
+新しいベストプラクティスへの変更、依存関係の変更、（Web）プラットフォーム自体の変更と共に最新の状態に保つため、そして革新のために、ときには&quot;破壊的変更&quot;選択したAPIや機能のサポートの削除などが必要になります。
 
-To make these transitions as easy as possible, we make two commitments to you:
+これらの移行をできるだけ簡単にするために、私たちは2つの約束をしています。
 
-* We work hard to minimize the number of breaking changes and to provide migration tools when possible. 
+* 私たちは、変化の激しさを最小限に抑え、可能な限り移行ツールを提供するために努めています。
 
-* We follow the deprecation policy described here, so you have time to update your apps to the latest APIs and best practices.
+* ここで説明している廃止方針に従い、アプリを最新のAPIとベストプラクティスに更新するための時間を確保します。
 
-To help ensure that you have sufficient time and a clear path to update, this is our deprecation policy:
+更新に十分な時間と明確なパスがあることを確認するための、非推奨化のポリシーはこちらです。
 
-* When announce deprecated features in the [change log](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log").
+* 廃止予定の機能を[チェンジログ](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log")にアナウンスするとき
 
-* When we announce a deprecation, we also announce a recommended update path.
+* 推奨されなくなったことをアナウンスすると、推奨される更新パスもアナウンスされます。
 
-* We support existing use of a stable API during the deprecation period, so  your code will keep working during that period. 
+* 推奨されていないAPIの既存の使用は廃止期間中にもサポートしているため、コードはその期間中も動作し続けます。
 
-* We support each deprecated API for at least two subsequent major releases, which means at least 12 months after deprecation.
+* 非推奨となる各APIは少なくとも2回の後続のメジャーリリース、つまり非推奨のあと少なくとも12か月間サポートされます。
 
-* We only make peer dependency updates that require changes to your apps in a major release. In minor releases, we update peer dependencies by expanding the supported versions, but we do not require projects to update these dependencies until a future major version. 
+* アプリケーションの変更を要求するピア依存関係の更新をおこなうのはメジャーリリースのときだけです。マイナーリリースでは、サポートされているバージョンを拡張してピア依存関係を更新しますが、将来のメジャーバージョンまでこれらの依存関係を更新を求めることはありません。
 
 
 {@a public-api}
-## Public API surface
+## パブリックAPI
 
-Angular is a collection of many packages, sub-projects, and tools. To prevent accidental use of private APIs&mdash;and so that you can clearly understand what is covered by the practices described here&mdash;we document what is and is not considered our public API surface. For details, see [Supported Public API Surface of Angular](https://github.com/angular/angular/blob/master/docs/PUBLIC_API.md "Supported Public API Surface of Angular").
+Angularは、多くのパッケージ、サブプロジェクト、ツールのコレクションです。プライベートAPIの偶発的な使用を防ぐために&mdash;ここで説明するプラクティスの対象を明確に理解できるように&mdash;私たちはパブリックAPIと見なされるものとそうでないものを明文化します。詳細については、[AngularのサポートされたパブリックAPI](https://github.com/angular/angular/blob/master/docs/PUBLIC_API.md "Supported Public API Surface of Angular")を参照してください。
 
-Any changes to the public API surface will be done using the versioning, support, and depreciation policies describe above.
+パブリックAPIのあらゆる変更は、上述ののバージョニング、サポート、および非推奨化ポリシーが適用されます。
 
 {@a labs}
 ## Angular Labs
 
-Angular Labs is an initiative to cultivate new features and iterate on them quickly. Angular Labs provides a safe place for exploration and experimentation by the Angular team. 
+Angular Labsは、新機能を開発して迅速にイテレーションするためのイニシアチブです。Angular Labsは、Angularチームによる探索と実験のための安全な場所を提供します。
 
-Angular Labs projects are are not ready for production use, and no commitment is made to bring them to production. The policies and practices that are described in this document do not apply to Angular Labs projects. 
+Angular Labsのプロジェクトはプロダクションで使用する準備ができておらず、プロダクションに持ち込むことを約束していません。このドキュメントで説明されているポリシーとプラクティスは、Angular Labsプロジェクトには適用されません。
 
-Angular Labs projects typically are in separate branches in the Angular repo, clearly separated from the main Angular codebase. 
+Angular Labsプロジェクトは、通常Angularリポジトリの別々のブランチにあり、主要なAngularコードベースから明確に分離されています。

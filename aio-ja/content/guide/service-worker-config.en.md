@@ -175,7 +175,7 @@ This optional section enables you to specify a custom list of URLs that will be 
 
 ### Handling navigation requests
 
-The Service Worker will redirect navigation requests that don't match any `asset` or `data` group to the specified [index file](#index-file). A request is considered to be a navigation request if:
+The ServiceWorker will redirect navigation requests that don't match any `asset` or `data` group to the specified [index file](#index-file). A request is considered to be a navigation request if:
 
 1. Its [mode](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode) is `navigation`.
 2. It accepts a `text/html` response (as determined by the value of the `Accept` header).

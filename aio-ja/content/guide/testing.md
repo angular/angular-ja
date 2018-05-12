@@ -22,10 +22,10 @@ CLI を使用して作成したプロジェクトは、すぐにテストする�
   ng test
 </code-example>
 
-The `ng test` command builds the app in _watch mode_,
-and launches the [karma test runner](https://karma-runner.github.io/1.0/index.html).
+`ng test` コマンドは _watch mode_ でアプリをビルドし、 [karma test runner](https://karma-runner.github.io/1.0/index.html) を起動します。
 
-The console output looks a bit like this:
+
+コンソールの出力はこのように表示されます:
 
 <code-example language="sh" class="code-shell">
 10% building modules 1/1 modules 0 active
@@ -36,10 +36,10 @@ The console output looks a bit like this:
 Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 </code-example>
 
-The last line of the log is the most important. 
-It shows that Karma ran three tests that all passed.
+ログの最後の行が最も重要です。
+それは Karma がすべて3つのテストを実行したことを示しています。
 
-A chrome browser also opens and displays the test output in the "Jasmine HTML Reporter" like this.
+chrome ブラウザも開き、このように "Jasmine HTML Reporter" にテスト出力を表示します。
 
 <figure>
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">

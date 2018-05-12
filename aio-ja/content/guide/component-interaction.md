@@ -55,7 +55,7 @@ binding its `master` string property to the child's `master` alias,
 and each iteration's `hero` instance to the child's `hero` property.
 `HeroParentComponent` は、内部の `*ngFor` リピーターで、子の `HeroChildComponent` を繰り返します、
 それ(親)の `master` プロパティ文字列を子の `master` エイリアスに結び付け(バインディングし)ます、
-そして、それぞれのインスタンスの `hero` は、子の `hero` プロパティにインスタンスします。 
+そして、それぞれのインスタンスの `hero` は、子の `hero` プロパティにインスタンスします。
 
 
 <code-example path="component-interaction/src/app/hero-parent.component.ts" title="component-interaction/src/app/hero-parent.component.ts">
@@ -215,7 +215,7 @@ the expected `ngOnChanges` calls and values:
 The child component exposes an `EventEmitter` property with which it `emits` events when something happens.
 子コンポーネントは、何かが起こった時にイベントを `発行する` `EventEmitter` プロパティをむき出しにします。
 The parent binds to that event property and reacts to those events.
-親は、そのイベント・プロパティを結び付け、それらのイベントに反応します。
+親は、そのイベント・プロパティを結び付け(バインドし)、それらのイベントに反応します。
 
 The child's `EventEmitter` property is an ***output property***,
   typically adorned with an [@Output decoration](guide/template-syntax#inputs-outputs)
@@ -236,6 +236,8 @@ Clicking a button triggers emission of a `true` or `false`, the boolean *payload
 
 The parent `VoteTakerComponent` binds an event handler called `onVoted()` that responds to the child event
 payload `$event` and updates a counter.
+親の `VoteTakerComponent` は `onVoted()` と呼ばれるイベント・ハンドラーを結び付け(バインドし)ます。`onVoted()` は、子のイベント
+ペイロード `$event` に反応し、カウンターを更新します。
 
 
 <code-example path="component-interaction/src/app/votetaker.component.ts" title="component-interaction/src/app/votetaker.component.ts">
@@ -246,6 +248,8 @@ payload `$event` and updates a counter.
 
 The framework passes the event argument&mdash;represented by `$event`&mdash;to the handler method,
 and the method processes it:
+フレームワークは、 &mdash;`$event`により表された &mdash; イベント引数をハンドラー・メソッドに渡し、
+メソッドは処理を行います：
 
 
 <figure>
@@ -257,6 +261,7 @@ and the method processes it:
 <h3 class="no-toc">テストしよう</h3>
 
 Test that clicking the *Agree* and *Disagree* buttons update the appropriate counters:
+*Agree* と *Disagree* ボタンをクリックすることによる適切なカウンターが更新されるテスト：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="child-to-parent" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -270,17 +275,26 @@ Test that clicking the *Agree* and *Disagree* buttons update the appropriate cou
 
 
 ## Parent interacts with child via *local variable*
+## *ローカル変数* による親から子への相互作用
 
 A parent component cannot use data binding to read child properties
 or invoke child methods. You can do both
 by creating a template reference variable for the child element
 and then reference that variable *within the parent template*
 as seen in the following example.
+親のコンポーネントは、データ・バインディングを使って子のプロパティ或いは、子のメソッド
+を読む事はできません。どちらも、
+つぎの例で見れる様に、子の要素のための参照値ひな形を生成すると出来ます、そして、
+*親のひな形による* 変数を参照します。
+
 
 {@a countdown-timer-example}
 The following is a child `CountdownTimerComponent` that repeatedly counts down to zero and launches a rocket.
+次は、ゼロになるまで繰り返しカウントダウンし、ロケットを発射する子の `CountdownTimerComponent`　です。
 It has `start` and `stop` methods that control the clock and it displays a
 countdown status message in its own template.
+それには、時計を制御しテンプレート内のカウントダウン状況のメッセージを表示する
+`start` と `stop` メソッドを持っています。
 
 <code-example path="component-interaction/src/app/countdown-timer.component.ts" title="component-interaction/src/app/countdown-timer.component.ts">
 
@@ -289,6 +303,7 @@ countdown status message in its own template.
 
 
 The `CountdownLocalVarParentComponent` that hosts the timer component is as follows:
+タイマー・コンポーネントを提供する `CountdownLocalVarParentComponent` はこちらです：
 
 
 <code-example path="component-interaction/src/app/countdown-parent.component.ts" region="lv" title="component-interaction/src/app/countdown-parent.component.ts">
@@ -299,15 +314,24 @@ The `CountdownLocalVarParentComponent` that hosts the timer component is as foll
 
 The parent component cannot data bind to the child's
 `start` and `stop` methods nor to its `seconds` property.
+親のコンポーネントは、子の `start` と `stop` メソッドにも、子の `seconds` プロパティにも
+データ・バインド(データの結び付き)を出来ません。
 
 You can place a local variable, `#timer`, on the tag `<countdown-timer>` representing the child component.
+子のコンポーネントに相当する　`<countdown-timer>` タグ内に `#timer` ローカル変数を設置する事は出来ます。
 That gives you a reference to the child component and the ability to access
 *any of its properties or methods* from within the parent template.
+子のコンポーネントへの参照と、*いかなるプロパティまたはメソッド* へアクセスする能力と
+を親のテンプレートを通じて与えます。
 
 This example wires parent buttons to the child's `start` and `stop` and
 uses interpolation to display the child's `seconds` property.
+この例は、親のボタンを子の `start` と `stop`　に結び付け、
+子の `seconds` プロパティを表示します。
+
 
 Here we see the parent and child working together.
+ここで親と子が一緒に動いているのを確認できます。
 
 
 <figure>
@@ -323,7 +347,10 @@ Here we see the parent and child working together.
 
 Test that the seconds displayed in the parent template
 match the seconds displayed in the child's status message.
+親のテンプレート内に表示されている秒と子のステータス・メッセージ内に
+表示されている秒が一致している事をテストしましょう。
 Test also that clicking the *Stop* button pauses the countdown timer:
+カウントダウン・タイマーが *Stop* ボタンのクリックによって一時停止する事をテストしましょう：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="countdown-timer-tests" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -337,21 +364,34 @@ Test also that clicking the *Stop* button pauses the countdown timer:
 {@a parent-to-view-child}
 
 ## Parent calls an _@ViewChild()_
+## 親の _@ViewChild()_ 呼び出し
 
 The *local variable* approach is simple and easy. But it is limited because
 the parent-child wiring must be done entirely within the parent template.
+*ローカル変数* は、簡素で簡単です。しかし、制限があります、何故ならば
+親-子の結び付きは完全に親のテンプレート内で無ければなりません。
 The parent component *itself* has no access to the child.
+親コンポーネントは *それ自身* に子へのアクセスは何一つ無いです。
 
 You can't use the *local variable* technique if an instance of the parent component *class*
 must read or write child component values or must call child component methods.
+仮に親のコンポーネント *クラス* のインスタンスが、子のコンポーネントの変数の読み書きの必要性、または子の
+コンポーネント・メソッド呼び出しの必要性があったとしても、*ローカル変数* テクニックを使う事はできません、
 
 When the parent component *class* requires that kind of access,
 ***inject*** the child component into the parent as a *ViewChild*.
+親コンポーネント *クラス* が、そのような種類のアクセスを要求する際、
+子のコンポーネントを 親の *ViewChild* として ***注入します*** 。
 
 The following example illustrates this technique with the same
 [Countdown Timer](guide/component-interaction#countdown-timer-example) example.
+つぎの例は、同じ[カウントダウン タイマー](guide/component-interaction#countdown-timer-example)の例
+と共に説明しています。
+
 Neither its appearance nor its behavior will change.
+どの外見も、どのふるまいも変わりません。
 The child [CountdownTimerComponent](guide/component-interaction#countdown-timer-example) is the same as well.
+子の [CountdownTimerComponent](guide/component-interaction#countdown-timer-example) は一緒です。
 
 <div class="l-sub-section">
 
@@ -359,12 +399,15 @@ The child [CountdownTimerComponent](guide/component-interaction#countdown-timer-
 
 The switch from the *local variable* to the *ViewChild* technique
 is solely for the purpose of demonstration.
+*ローカル変数* から *ViewChild*　テクニックへの切替は、
+デモンストレーションのたった一つの目的です。
 
 </div>
 
 
 
 Here is the parent, `CountdownViewChildParentComponent`:
+ここに親があります、`CountdownViewChildParentComponent`：
 
 <code-example path="component-interaction/src/app/countdown-parent.component.ts" region="vc" title="component-interaction/src/app/countdown-parent.component.ts">
 
@@ -373,8 +416,10 @@ Here is the parent, `CountdownViewChildParentComponent`:
 
 
 It takes a bit more work to get the child view into the parent component *class*.
+親のコンポーネント *クラス* の中に表示する子を獲得する働きをちょこっと見てみましょう。
 
 First, you have to import references to the `ViewChild` decorator and the `AfterViewInit` lifecycle hook.
+まず始めに、 `ViewChild` デコレーターの参照をインポートする必要があります、そして `AfterViewInit` ライフサイクルをフックします。
 
 Next, inject the child `CountdownTimerComponent` into the private `timerComponent` property
 via the `@ViewChild` property decoration.
@@ -482,4 +527,3 @@ and verify that the history meets expectations:
 
 
 [最初に戻る](guide/component-interaction#top)
-

@@ -1,22 +1,22 @@
 {@a top}
-# Testing
+# テスト
 
-This guide offers tips and techniques for unit and integration testing Angular applications.
+このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
 
-The guide presents tests of a sample CLI application that is much like the [_Tour of Heroes_ tutorial](tutorial).
-The sample application and all tests in this guide are available for inspection and experimentation:
+このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
+サンプルアプリケーションとこのガイドのすべてのテストは、検査と実験に使用できます。
 
 * <live-example embedded-style>Sample app</live-example>
 * <live-example stackblitz="specs">Tests</live-example>
 
 <hr>
 
-## Setup
+## セットアップ
 
-The Angular CLI downloads and install everything you need to test an Angular application with the [Jasmine test framework](http://jasmine.github.io/2.4/introduction.html).
+Angular CLI は、[Jasmine test framework](http://jasmine.github.io/2.4/introduction.html)を使用して Angular アプリケーションをテストするために必要なものすべてをダウンロードしてインストールします。
 
-The project you create with the CLI is immediately ready to test.
-Just run this one CLI command:
+CLI を使用して作成したプロジェクトは、すぐにテストする準備ができています。
+この1つのCLIコマンドを実行するだけです。
 
 <code-example language="sh" class="code-shell">
   ng test

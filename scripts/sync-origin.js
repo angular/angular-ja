@@ -9,6 +9,9 @@ const copyTargets = [
     'content/tutorial/**/*.md',
     'content/navigation.json',
     'src/index.html',
+    'src/app/layout/doc-viewer/doc-viewer.component.ts',
+    'src/app/layout/nav-item/nav-item.component.html',
+    'src/app/navigation/navigation.model.ts'
 ];
 
 const promiseGlob = promisify(glob);

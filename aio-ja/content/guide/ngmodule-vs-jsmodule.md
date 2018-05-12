@@ -1,49 +1,49 @@
-# JavaScript Modules vs. NgModules
+# JavaScriptモジュールとNgModule
 
-#### Prerequisites
-A basic understanding of [JavaScript/ECMAScript modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/).
+#### 前提条件
+[JavaScript/ECMAScript modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)の基本的な理解
 
 <hr>
 
-JavaScript and Angular use modules to organize code, and
-though they organize it differently, Angular apps rely on both.
+JavaScriptとAngularにはコードを整理するためのモジュールという仕組みがあります。
+両者は別々の方法でモジュールを管理しますが、Angularアプリケーションは両方に依存しています。
 
-## JavaScript modules
+## JavaScriptモジュール
 
-In JavaScript, modules are individual files with JavaScript code in them. To make what’s in them available, you write an export statement, usually after the relevant code, like this:
+JavaScriptモジュールはJavaScriptコードが含まれる単一のファイルです。モジュール内のものを利用するためには、次のようにエクスポート文を記述して、大抵はそのあとに関連するコードを書きます:
 
 ```typescript
 export class AppComponent { ... }
 ```
 
-Then, when you need that file’s code in another file, you import it like this:
+それから、他のファイルからそのファイルのコードが必要になったときには次のようにインポートします:
 
 ```typescript
 import { AppComponent } from './app.component';
 ```
 
-JavaScript modules help you namespace, preventing accidental global variables.
+JavaScriptモジュールは名前空間や、グローバル変数名が競合することを防ぐのに役立ちます。
 
-## NgModules
+## NgModule
 
 <!-- KW-- perMisko: let's discuss. This does not answer the question why it is different. Also, last sentence is confusing.-->
-NgModules are classes decorated with `@NgModule`. The `@NgModule` decorator’s `imports` array tells Angular what other NgModules the current module needs. The modules in the `imports` array are different than JavaScript modules because they are NgModules rather than regular JavaScript modules. Classes with an `@NgModule` decorator are by convention kept in their own files, but what makes them an `NgModule` isn’t being in their own file, like JavaScript modules; it’s the presence of `@NgModule` and its metadata.
+NgModuleは`@NgModule`デコレーターで装飾されたクラスです。`@NgModule`デコレーターの`imports`配列はAngularに現在のモジュールが他のどのようなモジュールが必要かを教えてくれます。`imports`配列内のモジュールは通常のJavaScriptモジュールではなくNgModuleです。`@NgModule`デコレーターをもつクラスは慣例によりそれを定義したファイルが持っていますが、そのクラスを`NgModule`にしているのはJavaScriptモジュールのようなファイルではなく、`@NgModule`とそのメタデータによるものです。
 
-The `AppModule` generated from the Angular CLI demonstrates both kinds of modules in action:
+Angular CLIに生成された`AppModule`では両方のモジュールが使用されていることを確認できます:
 
 ```typescript
-/* These are JavaScript import statements. Angular doesn’t know anything about these. */
+/* これはJavaScriptのインポート文です。Angularはこれについては何も知りません。 */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-/* The @NgModule decorator lets Angular know that this is an NgModule. */
+/* @NgModuleデコレーターは、このクラスがNgModuleであることをAngularに知らせます。 */
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [     /* These are NgModule imports. */
+  imports: [     /* ここでNgModuleをインポートしています。 */
     BrowserModule
   ],
   providers: [],
@@ -53,22 +53,22 @@ export class AppModule { }
 ```
 
 
-The NgModule classes differ from JavaScript module in the following key ways:
+NgModuleクラスはJavaScriptモジュールとは次のような点で異なります:
 
-* An NgModule bounds [declarable classes](guide/ngmodule-faq#q-declarable) only.
-Declarables are the only classes that matter to the [Angular compiler](guide/ngmodule-faq#q-angular-compiler).
-* Instead of defining all member classes in one giant file as in a JavaScript module,
-you list the module's classes in the `@NgModule.declarations` list.
-* An NgModule can only export the [declarable classes](guide/ngmodule-faq#q-declarable)
-it owns or imports from other modules. It doesn't declare or export any other kind of class.
-* Unlike JavaScript modules, an NgModule can extend the _entire_ application with services
-by adding providers to the `@NgModule.providers` list.
+* NgModuleは[宣言クラス](guide/ngmodule-faq#q-declarable)のみを束縛します。
+宣言クラスは単なるクラス([Angularコンパイラ](guide/ngmodule-faq#q-angular-compiler)にとっては重要)です。
+* JavaScriptモジュールのようにすべてのメンバークラスを1つの巨大なファイルに定義するかわりに、
+モジュールのクラスを`@NgModule.declarations`リストに記述します。
+* NgModuleは自身が持っている、または他のモジュールからインポートした[宣言クラス](guide/ngmodule-faq#q-declarable)のみエクスポートすることができます。
+他の種類のクラスを宣言したりエクスポートすることはしません。
+* JavaScriptモジュールとは異なり、
+NgModuleはプロバイダーを`@NgModule.providers`リストに追加することでアプリケーション_全体_をサービスで拡張することができます。
 
 <hr />
 
-## More on NgModules
+## NgModule についてのさらに詳しい情報
 
-For more information on NgModules, see:
-* [Bootstrapping](guide/bootstrapping).
-* [Frequently used modules](guide/frequent-ngmodules).
-* [Providers](guide/providers).
+NgModule についてのさらに詳しい情報については次の記事を参照してください:
+* [ブートストラップ](guide/bootstrapping)
+* [よく使用されるモジュール](guide/frequent-ngmodules)
+* [プロバイダー](guide/providers)

@@ -13,8 +13,10 @@ Angularのアニメーションシステムでは、純粋なCSSアニメーシ�
 
 Angularのアニメーションは、標準の[Web Animations API](https://w3c.github.io/web-animations/)の上に構築され、それを[サポートするブラウザ](http://caniuse.com/#feat=web-animation)でネイティブに実行されます。
 
-他のブラウザでは、ポリフィルが必要です。 `polyfills.ts` ファイルから `web-animations-js` polyfillのコメントを外します。
-
+Angular 6の時点で、Web Animations APIがブラウザによってネイティブにサポートされていない場合、代わりにAngularは自動的にCSSキーフレームをフォールバックとして使用します。
+つまり、[AnimationBuilder](/api/animations/AnimationBuilder)を使用するコードがない限り、ポリフィルは不要になります。
+コードでAnimationBuilderを使用している場合は、
+Angular CLIで生成された`polyfills.ts`ファイルから`web-animations-js` polyfillのコメントを外してください。
 </div>
 
 <div class="l-sub-section">

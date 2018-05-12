@@ -1,81 +1,38 @@
 # Service Workerを始める
 
+
+このドキュメントでは、CLIプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを示し、ロードと基本的なキャッシングを実演します。
+
 #### 前提条件
 
 次の基本的理解があること
 * [Angular Service Worker イントロダクション](guide/service-worker-intro)
+* Angular CLI v6を含むAngular v6
 
 <hr />
 
+## アプリケーションにService Workerを追加する
 
-Angular 5.0.0から、どのCLIプロジェクトでもAngular Service Workerのサポートを簡単に有効にすることができます。このドキュメントでは、新規および既存のプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを確認し、読み込みとキャッシングの基本を実演します。
-
-## 新しいアプリケーションにService Workerを追加する
-
-新しくCLIプロジェクトを作る場合は、CLIを使用して、プロジェクト作成の一環としてAngular Service Workerを設定できます。これを行うには、`--service-worker`フラグを`ng new`コマンドに追加します。
+プロジェクトでAngular Service Workerを設定するには、CLIコマンド`ng add @angular/pwa`を使用します。
+必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリを設定します。
 
 ```sh
-ng new my-project --service-worker 
+ng add  @angular/pwa --project *project-name* 
 ```
 
-`--service-worker`フラグにより、`service-worker`パッケージを追加して、Service Workerを使うために必要なファイルをアプリケーションに設定します。詳細については、次のセクションを参照してください。Service Workerを既存のアプリに手動で追加するために、プロセスを詳しく説明しています。
+上記のコマンドを実行すると、次の操作が完了します。
 
-
-
-## 既存のアプリケーションにService Workerを追加する
-
-既存のアプリケーションにService Workerを追加するためには、次のステップになります。
-
-1. Service Workerのパッケージを追加します。
+1. `@angular/service-worker`パッケージをプロジェクトに追加します。
 2. CLIでService Workerのビルドサポートを有効にします。
-3. Service Workerをインポートして登録します。
-4. キャッシュの振る舞いなどの設定を指定するService Workerの設定ファイルを作成します。
-5. プロジェクトをビルドします。
-
-### ステップ1: Service Workerのパッケージを追加します
-
-次のように、yarnを使用して、`@angular/service-worker`パッケージを追加してください。
-
-```sh
-yarn add @angular/service-worker
-```
-
-### ステップ2: CLIでService Workerのビルドサポートを有効にします
-
-Angular Service Workerを有効にするために、CLIはビルド時にAngular Service Workerマニフェストを生成する必要があります。CLIが既存のプロジェクトでマニフェストを生成するようにするためには、プロジェクトの`.angular-cli.json`ファイルで`serviceWorker`フラグを`true`に設定します。
-
-```sh
-ng set apps.0.serviceWorker=true
-```
-
-### ステップ3: Service Workerをインポートして登録します
-
-Angular Service Workerをインポートして登録するために
-
-ルートモジュール`src/app/app.module.ts`のトップで、`ServiceWorkerModule`と`environment`をインポートしてください。
-
-<code-example path="service-worker-getting-started/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts" region="sw-import"> </code-example>
+3. アプリケーションモジュールにService Workerをインポートして登録します。
+4. `index.html`ファイルを更新します。
+    * `manifest.json`ファイルを追加するためのリンクを含めます。
+    * `theme=color`のメタタグを追加します。
+5. インストール可能なプログレッシブウェブアプリ（PWA）をサポートするアイコンファイルをインストールします。 
+6. [`ngsw-config.json`](/guide/service-worker-config)というService Worker構成ファイルを作成します。このファイルは、キャッシュの動作やその他の設定を指定します。
 
 
-`ServiceWorkerModule`を`@NgModule`の`imports`配列に追加してください。プロダクションモードで実行していないときに、Service Workerを無効にするように登録するためには、`register()`ヘルパーを使用してください。
-
-<code-example path="service-worker-getting-started/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts" region="sw-module"> </code-example>
-
-`ngsw-worker.js`ファイルは、あなたのサーバーに一緒にデプロイするためにCLIが`dist/`にコピーする、事前構築されたService Workerのスクリプトの名前です。
-
-### ステップ4: 設定ファイル`ngsw-config.json`を作成します
-
-Angular CLIには、`ngsw-config.json`というService Workerの設定ファイルが必要です。設定ファイルは、Service Workerがファイルおよびデータリソースをどのようにキャッシュするかを制御します。
-
-CLIによるひな形を使って始めることができます。このひな形では、多くのアプリケーションで適切であろう推奨設定が行われています。
-
-代わりに、以下を`src/ngsw-config.json`として保存してください。
-
-<code-example path="service-worker-getting-started/src/ngsw-config.json" linenums="false" title="src/ngsw-config.json"> </code-example>
-
-### ステップ5: プロジェクトをビルドします
-
-最後にプロジェクトをビルドします。
+今度は、プロジェクトをビルドします。
 
 ```sh
 ng build --prod

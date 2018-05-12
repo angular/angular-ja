@@ -527,8 +527,8 @@
         },
 
         {
-          "title": "Keeping Up-to-Date",
-          "tooltip": "Angular release practices, planning for updates, and update resources.",
+          "title": "最新に保つ",
+          "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
           "children": [
             {
               "url": "guide/updating",
@@ -537,8 +537,9 @@
             },
             {
               "url": "guide/releases",
-              "title": "Angular Releases",
-              "tooltip": "Angular versioning, release, support, and deprecation policies and practices."
+              "title": "Angularのリリース",
+              "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
+              "translated": true
             }
           ]
         },

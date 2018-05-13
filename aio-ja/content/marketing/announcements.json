@@ -1,16 +1,9 @@
 [
   {
-    "startDate": "2018-02-14",
-    "endDate": "2018-04-18",
-    "message": "Join us for ng-conf<br/>Apr 18th-20th, 2018",
-    "imageUrl": "generated/images/marketing/home/ng-conf.png",
-    "linkUrl": "http://ng-conf.org/"
-  },
-  {
-    "startDate": "2018-04-18",
-    "endDate": "2018-04-22",
-    "message": "Watch ng-conf live stream <br/>Apr 18th-20th, 2018",
-    "imageUrl": "generated/images/marketing/home/ng-conf.png",
-    "linkUrl": "https://www.ng-conf.org/livestream/"
+    "startDate": "2018-05-16",
+    "endDate": "2018-06-16",
+    "message": "ng-japanに参加しよう！<br/>2018/6/16",
+    "imageUrl": "generated/images/marketing/home/ng-japan-2018.svg",
+    "linkUrl": "https://ngjapan.org/"
   }
 ]

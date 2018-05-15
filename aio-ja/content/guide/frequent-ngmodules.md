@@ -50,7 +50,7 @@ Angularアプリケーションにはルートモジュールとして機能す�
  <tr>
    <td><code>ReactiveFormsModule</code></td>
    <td><code>@angular/forms</code></td>
-   <td>リアクティブフォームを作成する</td>
+   <td>リアクティブフォームを作成するため</td>
  </tr>
 
  <tr>

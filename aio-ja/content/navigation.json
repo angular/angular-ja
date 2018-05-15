@@ -328,8 +328,9 @@
             },
             {
               "url": "guide/frequent-ngmodules",
-              "title": "Frequently Used NgModules",
-              "tooltip": "Introduction to the most frequently used NgModules."
+              "title": "よく使用されるモジュール",
+              "tooltip": "よく使用されるモジュールの紹介",
+              "translated": true
             },
             {
               "url": "guide/module-types",

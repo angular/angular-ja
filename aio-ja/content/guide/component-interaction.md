@@ -159,17 +159,9 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 <h3 class="no-toc">テストしよう</h3>
-<<<<<<< HEAD
 
 テストは、***両方*** の入力プロパティは初期値を設定し、ボタンのクリックは
 `ngOnChanges` の呼出と値を期待します：
-=======
-
-テストは、***両方*** の入力プロパティは初期値を設定し、ボタンのクリックは
-`ngOnChanges` の呼出と値を期待します：
-
->>>>>>> fc3256c23f8d406536df145545d88ebd5db215b3
-
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-onchanges" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -243,7 +235,6 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 生成すると出来ます、そして、
 *親のひな形による* 変数を参照します。
 
-
 {@a countdown-timer-example}
 次は、ゼロになるまで繰り返しカウントダウンし、ロケットを発射する子の `CountdownTimerComponent`　です。
 それには、時計を制御しテンプレート内のカウントダウン状況のメッセージを表示する
@@ -273,7 +264,6 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 この例は、親のボタンを子の `start` と `stop`　に結び付け、
 子の `seconds` プロパティを表示します。
-
 
 ここで親と子が一緒に動いているのを確認できます。
 
@@ -318,7 +308,6 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 つぎの例は、同じ[カウントダウン タイマー](guide/component-interaction#countdown-timer-example) の例
 と共に説明しています。
-
 どの外見も、どのふるまいも変わりません。
 子の [CountdownTimerComponent](guide/component-interaction#countdown-timer-example) は一緒です。
 
@@ -363,8 +352,6 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 Angularの一定方向のみのデータの流れのルールは、同じサイクルの中の親のビューの更新を妨げます。アプリケーションは、
 秒を表示する前に、*1回の待ち* を持っています。
 
-Use `setTimeout()` to wait one tick and then revise the `seconds()` method so
-that it takes future values from the timer component.
 一つのカチカチを待つために `setTimeout()` を使い、 `seconds()`メソッドがタイマー・コンポーネント
 からの未来の値を取るように改定する。
 
@@ -418,7 +405,8 @@ that it takes future values from the timer component.
 
 
 注意、この例は、`subscription` と `AstronautComponent` が破棄されたときの `unsubscribe()` とを表現します。
-これは、メモリーリークの防護ステップです。ここには、このアプリの現実のリスクは有りません、なぜならば lifetime `AstronautComponent` のライフタイムは、アプリそれ自身のライフタイムと同じだからです。
+これは、メモリーリークの防護ステップです。ここには、このアプリの現実のリスクは有りません、なぜならば ライフタイム
+ `AstronautComponent` のライフタイムは、アプリそれ自身のライフタイムと同じだからです。
 より複雑なアプリケーションでは、常に真であると **いうことでは無い** 。
 
 `MissionControlComponent` には、このガードを加えられない、何故ならば、親として、
@@ -428,7 +416,8 @@ that it takes future values from the timer component.
 
 
 
-*ヒストリー* ログは、メッセージが、親の `MissionControlComponent` と子の `AstronautComponent` の間で両方
+*ヒストリー* ログは、メッセージが、
+親の `MissionControlComponent` と子の `AstronautComponent` の間で両方
 方向に伝わることを示し、サービスによって容易になります：
 
 

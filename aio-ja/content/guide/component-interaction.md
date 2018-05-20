@@ -76,7 +76,7 @@ E2E は、予想通りに、全ての子をインスタンス化と表示化さ�
 インターセプトの為に入力プロパティのセッターを利用し、親からの値に基いて活動します。
 
 `name` のセッターが、子の `NameChildComponent` の中のプロパティに入力し、子の `NameChildComponent`
-は、名前の前後の空白を取り除き(空白をトリムし)、そしてデフォルトテキストがある空の値に置き換えする。
+は、名前の前後の空白を取り除き(空白をトリムし)、そしてデフォルトテキストがある空の値に置き換えします。
 
 
 <code-example path="component-interaction/src/app/name-child.component.ts" title="component-interaction/src/app/name-child.component.ts">
@@ -131,7 +131,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-この `VersionChildComponent` は、`メジャー` と `マイナー` 入力プロパティの変化を検出し、これらの変化をレポート(報告)するログメッセージを構成します：
+この `VersionChildComponent` は、`major` と `minor` 入力プロパティの変化を検出し、これらの変化をレポート(報告)するログメッセージを構成します：
 
 
 <code-example path="component-interaction/src/app/version-child.component.ts" title="component-interaction/src/app/version-child.component.ts">
@@ -140,7 +140,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-`VersionParentComponent` は `マイナー` と `メジャー` の値を供給し(満たし)、ボタンをそれらを変更するメソッドに結び付けます。
+`VersionParentComponent` は `minor` と `major` の値を供給し(満たし)、ボタンをそれらを変更するメソッドに結び付けます。
 
 
 <code-example path="component-interaction/src/app/version-parent.component.ts" title="component-interaction/src/app/version-parent.component.ts">
@@ -407,7 +407,7 @@ Angularの一定方向のみのデータの流れのルールは、同じサイ�
 注意、この例は、`subscription` と `AstronautComponent` が破棄されたときの `unsubscribe()` とを表現します。
 これは、メモリーリークの防護ステップです。ここには、このアプリの現実のリスクは有りません、なぜならば ライフタイム
  `AstronautComponent` のライフタイムは、アプリそれ自身のライフタイムと同じだからです。
-より複雑なアプリケーションでは、常に真であると **いうことでは無い** 。
+より複雑なアプリケーションでは、常に真であると **いうことでは無いです** 。
 
 `MissionControlComponent` には、このガードを加えられない、何故ならば、親として、
 `MissionService` のライフタイムを制御するから。

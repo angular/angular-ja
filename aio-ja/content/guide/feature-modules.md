@@ -44,7 +44,7 @@ ng generate module CustomerDashboard
 ```
 
 
-結果的に、CLIは次のような内容の`customer-dashboard.module.ts`というファイルを中に持つ`customer-dashboard`フォルダーを作ります:
+結果的に、CLIは次のような内容の`customer-dashboard.module.ts`というファイルを中にもつ`customer-dashboard`フォルダーを作ります:
 
 ```typescript
 import { NgModule } from '@angular/core';

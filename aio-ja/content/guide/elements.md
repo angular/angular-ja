@@ -1,37 +1,65 @@
-# Angular Elements Overview
+# Angular Elements概要
 
 Angular Elements are Angular components packaged as custom elements, a web standard for defining new html elements in a framework-agnostic way.
+
+Angular Elementsは、フレームワークに依存しない形で新しいHTML要素を定義するためのWeb標準技術であるCustom Elementsとしてパッケージ化されるAnuglarコンポーネントです。
 
 [Custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) are a Web Platform feature currently supported by Chrome, Opera, and Safari, and available in other browsers through polyfills (see [Browser Support](#browser-support)).
 A custom element extends HTML by allowing you to define a tag whose content is created and controlled by JavaScript code. 
 The browser maintains a `CustomElementRegistry` of defined custom elements (also called Web Components), which maps an instantiable JavaScript class to an HTML tag.
 
+[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)は、現在Chrome、Opera、Safariでサポートされている機能で、それ以外のブラウザでもPolyfillを通して利用することができます（[Browser Support](#browser-support)参照）。
+Custom Elementsは、独自にタグを定義することによってHTMLを拡張します。定義したタグの中のコンテンツは、JavaScriptのコードで作成し、制御します。
+ブラウザは、定義されたカスタム要素（Web Componentsとも呼ばれます）の `CustomElementRegistry` を持ち続けます。この `CustomElementRegistry` は、インスタンス化可能なJavaScriptのクラスをHTMLのタグにマップします。
+
 The `@angular/elements` package exports a `createCustomElement()` API that provides a bridge from Angular's component interface and change detection functionality to the built-in DOM API. 
+
+`@angular/elements` パッケージは、 `createCustomElement()` APIをエクスポートします。このAPIは、Angularのコンポーネントインターフェースと変更検知機能から予め組み込まれているビルトインDOM APIへのブリッジを提供します。
 
 Transforming a component to a custom element makes all of the required Angular infrastructure available to the browser. Creating a custom element is simple and straightforward, and automatically connects your component-defined view with change detection and data binding, mapping Angular functionality to the corresponding native HTML equivalents. 
 
+コンポーネントをカスタム要素に変換すると、必要なすべてのAngularのインフラストラクチャ（基盤）がブラウザで利用可能となります。カスタム要素は簡単に作成することができ、変更検知とデータバインディングは、Angularの機能を対応するネイティブHTMLにマッピングする際に、自動的にビューとして定義したコンポーネントに結びつけられます。
+
 ## Using custom elements
+
+## Custom Elementsを使用する
 
 Custom elements bootstrap themselves - they start automatically when they are added to the DOM, and are automatically destroyed when removed from the DOM. Once a custom element is added to the DOM for any page, it looks and behaves like any other HTML element, and does not require any special knowledge of Angular terms or usage conventions.  
 
+Custom Elementsは自分自身をブートストラップします。つまり、DOMに追加されたタイミングで自動的にブートストラップを開始し、DOMから取り除かれたタイミングで自動的に破棄します。カスタム要素は一度DOMに追加されると、通常のHTML要素と同じように表示され、振る舞います。特別なAngularの専門用語や使用方法などは一切必要ありません。
+
 - <b>Easy dynamic content in an Angular app</b>
 
+- <b></b>
+
   Transforming a component to a custom element provides an easy path to creating dynamic HTML content in your Angular app. HTML content that you add directly to the DOM in an Angular app is normally displayed without Angular processing, unless you define a _dynamic component_, adding your own code to connect the HTML tag to your app data, and participate in change detection. With a custom element, all of that wiring is taken care of automatically.
+
+  コンテンツをカスタム要素に変換することで、Angularアプリ内にダイナミックHTMLコンテンツを容易に作成することができます。Angularアプリ内で直接DOMに追加したHTMLコンテンツは、通常Angularの処理なしで表示され
+
+  _dynamic component_ を定義しない限り、
+  HTMLタグをアプリのデータに結びつけるためにコードを追加し、変更検知
 
 - <b>Content-rich applications</b>
 
   If you have a content-rich app, such as the Angular app that presents this documentation, custom elements let you give your content providers sophisticated Angular functionality without requiring knowledge of Angular. For example, an Angular guide like this one is added directly to the DOM by the Angular navigation tools, but can include special elements like `<code-snippet>` that perform complex operations. All you need to tell your content provider is the syntax of your custom element. They don't need to know anything about Angular, or anything about your component's data structures or implementation.
+
+  もしこのドキュメントのような豊富なコンテンツを持ったAngularアプリをお持ちであれば、カスタム要素を使うことで、Angularの知識を必要とすることなく、洗練されたAngularの機能をコンテンツに持たせることができます。例えば、このAngularガイドはAngularナビゲーションツールによって直接DOMに追加されていますが、複雑な操作が可能な `<code-snippet>` のような特別な要素を含めることができます。必要なのは、コンテンツプロバイダにカスタム要素の構文を伝えることだけです。Angularや、コンポーネントのデータ構造、実装ついての知識などは必要ありません。
 
 ### How it works
 
 Use the `createCustomElement()` function to convert a component into a class that can be registered with the browser as a custom element. 
 After you register your configured class with the browser's custom-element registry, you can use the new element just like a built-in HTML element in content that you add directly into the DOM: 
 
+コンポーネントをカスタム要素としてブラウザに登録されるクラスに変換するには、 `createCustomElement()` 関数を使います。
+設定したクラスをブラウザのカスタム要素のレジストリに登録した後に、組み込みのHTML要素のように振る舞う新しい要素を、DOMに直接追加したコンテンツの中で使用することができるようになります。
+
 ```
 <my-popup message="Use Angular!"></my-popup>
 ```
 
 When your custom element is placed on a page, the browser creates an instance of the registered class and adds it to the DOM. The content is provided by the component's template, which  uses Angular template syntax, and is rendered using the component and DOM data. Input properties in the component correspond to input attributes for the element. 
+
+カスタム要素がページ上に置かれると、ブラウザは登録されたクラスのインスタンスを作成し、それをDOMに追加します。コンテンツはコンポーネントのテンプレートによって提供され、コンポーネントとDOMデータを使ってレンダリングされます。コンポーネントのinputプロパティは、要素のinput属性に対応します。
 
 <figure>
 
@@ -71,6 +99,8 @@ When the browser encounters the tag for the registered element, it uses the cons
 
 ### Mapping 
 
+### マッピング
+
 A custom element _hosts_ an Angular component, providing a bridge between the data and logic defined in the component and standard DOM APIs. Component properties and logic maps directly into HTML attributes and the browser's event system.
 
 - The creation API parses the component looking for input properties, and defines corresponding attributes for the custom element. It transforms the property names to make them compatible with custom elements, which do not recognize case distinctions. The resulting attribute names use dash-separated lowercase. For example, for a component with `@Input('myInputProp') inputProp`, the corresponding custom element defines an attribute `my-input-prop`.
@@ -79,8 +109,9 @@ A custom element _hosts_ an Angular component, providing a bridge between the da
 
 
 For more information, see Web Component documentation for [Creating custom events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events).
- 
 
+より詳しい情報については、Web Componentsのドキュメント[Creating custom events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events)を見てください。
+ 
 {@a browser-support}
 
 ## Browser support for custom elements

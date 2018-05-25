@@ -36,7 +36,7 @@
 
 二番目の `@Input` は、子コンポーネントのプロパティ名である `masterName` を `'master'` としてエイリアスします。
 
-`HeroParentComponent` は子の　` HeroChildComponent`　を `*ngFor` リピーターの中にネストし、
+`HeroParentComponent` は子の `HeroChildComponent` を `*ngFor` リピーターの中にネストし、
 その `master` 文字列プロパティを子の `master` エイリアスにバインドし、
 それぞれの繰り返しの `hero` インスタンスを子の `hero` プロパティに渡します。
 
@@ -58,7 +58,7 @@
 
 <h3 class="no-toc">テストしよう</h3>
 
-E2E は、予想とおりに、すべての子をインスタンス化と表示化されることをテストします：
+E2E は、予想とおりに、すべての子をインスタンス化と表示されることをテストします：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -123,7 +123,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-複数の相互作用する入力プロパティを監視するときには、プロパティのセッターへこのアプローチをおすすめします。
+複数の相互作用する入力プロパティを監視するときには、プロパティのセッターへのアプローチを推奨します。
 
 `ngOnChanges()` については [ライフサイクル・フック](guide/lifecycle-hooks) の章で学びましょう。
 
@@ -380,7 +380,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-`MissionControlComponent` は、子と共有するサービスのインスタンスを(`プロバイダ` のメタデータ配列を介して)提供し、
+`MissionControlComponent` は、子と共有するサービスのインスタンスを(`providers` のメタデータ配列を介して)提供し、
 そのインスタンスをそのコンストラクタを通じて自身に注入します。
 
 

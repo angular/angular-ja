@@ -1,64 +1,93 @@
 # Component Styles
+# コンポーネントスタイル
 
 Angular applications are styled with standard CSS. That means you can apply
 everything you know about CSS stylesheets, selectors, rules, and media queries
 directly to Angular applications.
+Angularアプリケーションは、標準CSSでデザインされます。これは、貴方が知っているCSSスタイルシート、
+セレクター、ルール、そしてメディアクエリーついての全てを
+適用できる事を意味します。
 
 Additionally, Angular can bundle *component styles*
 with components, enabling a more modular design than regular stylesheets.
+加えて、Angularは、 コンポーネントに、標準スタイルシートでは無く
+*コンポーネントスタイル* をバンドルできます。
 
 This page describes how to load and apply these component styles.
+このページでは、これらのコンポーネントスタイルをどのように読み込み適用するのか説明します。
 
 You can run the <live-example></live-example> in Stackblitz and download the code from there.
+Stackblitz で <live-example></live-example> を実行でき、ここからコードをダウンロードできます。
 
 ## Using component styles
+## コンポーネントスタイルを使いましょう
 
 For every Angular component you write, you may define not only an HTML template,
 but also the CSS styles that go with that template,
 specifying any selectors, rules, and media queries that you need.
+あなたが書く全ての Angular コンポーネントのために、HTMLテンプレートだけでは無く、
+CSSスタイル、必要な、あらゆるセレクターの指定、ルール、メディアクエリー、
+などを定義して良いです、
 
 One way to do this is to set the `styles` property in the component metadata.
+一つの方法は、コンポーネントメタデータに `styles` プロパティをセットすることです。
 The `styles` property takes an array of strings that contain CSS code.
+この `styles` プロパティは、CSSコードを含む、文字列の配列を持ちます。
 Usually you give it one string, as in the following example:
+一般的に、一つの文字を与えます、次のような例です：
 
 <code-example path="component-styles/src/app/hero-app.component.ts" title="src/app/hero-app.component.ts" linenums="false">
 </code-example>
 
 ## Style scope
+## スタイルの有効範囲
 
 <div class="alert is-critical">
 
 The styles specified in `@Component` metadata _apply only within the template of that component_.
+スタイルは、 `@Component` _そのテンプレートのコンポーネントにだけ適用される_ メタデータで定義します。
 
 </div>
 
 They are _not inherited_ by any components nested within the template nor by any content projected into the component.
+テンプレートの中のコンポーネントの入れ子や、コンポーネントに投げられたコンテントでも、_引き継がない_。
 
 In this example, the `h1` style applies only to the `HeroAppComponent`,
 not to the nested `HeroMainComponent` nor to `<h1>` tags anywhere else in the application.
+この例では、 `h1` スタイルは、ただ `HeroAppComponent` だけに現れ、
+ネストされた `HeroMainComponent` には無く、 `<h1>` タグは、アプリケーションの何処にも現れない。
 
 This scoping restriction is a ***styling modularity feature***.
+この有効範囲の制限は、 ***モジュール式スタイリング特徴*** です。
 
 * You can use the CSS class names and selectors that make the most sense in the context of each component.
+* それぞれのコンポーネントのコンテキストの大部分の表現を作るCSSクラス名、セレクターを利用できます。
 
 
 * Class names and selectors are local to the component and don't collide with
   classes and selectors used elsewhere in the application.
+* クラス名とセレクターは、コンポーネント内で局所的で、アプリケーションの他の場所で使われている
+  クラスやセレクターと衝突しません。
 
 
 * Changes to styles elsewhere in the application don't affect the component's styles.
+* スタイルの変更は、他の場所のアプリケーションのコンポーネントスタイルに影響しません。
 
 
 * You can co-locate the CSS code of each component with the TypeScript and HTML code of the component,
   which leads to a neat and tidy project structure.
+* きちんとした、そして整然としたプロジェクト構造に導く、
+  コンポーネントの TypeScript と HTMLコードと共に、各々のコンポーネントの CSSコードを配置できます。
 
 
 * You can change or remove component CSS code without searching through the
   whole application to find where else the code is used.
+* アプリケーションの他の場所で使われているか探す検索を行わずに、コンポーネント CSS コードの変更或いは除去が可能です。
 
 {@a special-selectors}
 
 ## Special selectors
+## 特別なセレクター
 
 Component styles have a few special *selectors* from the world of shadow DOM style scoping
 (described in the [CSS Scoping Module Level 1](https://www.w3.org/TR/css-scoping-1) page on the

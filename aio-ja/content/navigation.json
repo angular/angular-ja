@@ -193,8 +193,9 @@
             },
             {
               "url": "guide/component-interaction",
-              "title": "Component Interaction",
-              "tooltip": "Share information between different directives and components."
+              "title": "コンポーネントの相互作用",
+              "tooltip": "異なるディレクティブとコンポーネント間で情報を共有しましょう。",
+              "translated": true
             },
             {
               "url": "guide/component-styles",
@@ -344,8 +345,9 @@
             },
             {
               "url": "guide/feature-modules",
-              "title": "Feature Modules",
-              "tooltip": "Create feature modules to organize your code."
+              "title": "フィーチャーモジュール",
+              "tooltip": "コードを整理するためのフィーチャーモジュールを作成します。",
+              "translated": true
             },
             {
               "url": "guide/providers",

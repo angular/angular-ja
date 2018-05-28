@@ -2,7 +2,7 @@
 
 _Angular Elements_ は、 _Custom Elements_ としてパッケージ化される Anuglar コンポーネントです。Custom Elements は、フレームワークに依存しない形で新たな HTML 要素を定義するウェブ標準技術です。
 
-[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Opera、Safari でサポートされている機能で、それ以外のブラウザーでもポリフィルを通して利用することができます（[ブラウザーサポート状況](#browser-support)参照）。
+[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Opera、Safari でサポートされている機能で、それ以外のブラウザーでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
 Custom Elements は、独自にタグを定義することによって HTML を拡張します。定義したタグの中のコンテンツは、JavaScript のコードで作成し、制御します。
 ブラウザーは、定義された Custom Elements（ Web Components とも呼ばれます）の `CustomElementRegistry` を持ち続けます。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
 
@@ -84,7 +84,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 <table>
 <tr>
   <th>ブラウザー名</th>
-  <th>カスタム要素のサポート状況</th>
+  <th>Custom Elements のサポート状況</th>
 </tr>
 <tr>
   <td>Chrome</td>
@@ -110,7 +110,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 </tr>
 </table>
 
-Custom Elements をサポートしているブラウザーにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。カスタム要素と ES2015 はすべてのブラウザーで利用可能であるとは限らないので、古いブラウザーや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
+Custom Elements をサポートしているブラウザーにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザーで利用可能であるとは限らないので、古いブラウザーや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
 
 自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](https://cli.angular.io/) をお使いください。
 - ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を見てくだい。
@@ -122,9 +122,9 @@ Custom Elements をサポートしているブラウザーにおいて、Custom 
 
 これまでは、ランタイムでアプリにコンポーネントを追加したかったら、_dynamic component_ を定義する必要がありました。アプリはスタートアップ時にコンポーネントが存在していることがわからず、ご自身でコンポーネントをロードし、DOM 内の要素に適用し、[Dynamic Component Loader](guide/dynamic-component-loader) で定義されているように、すべての依存関係、変更検知、イベントハンドリングを解決しなければいけないため、アプリのモジュールの `entryComponents` の部分に Dynamic Component を記述する必要がありました。
 
-Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。つまり、必要なイベントハンドリングを定義するだけでよくなります。（もしご自身のアプリで Angular のカスタム要素を使用する予定がないのであれば、ご自身でコンパイルからコンポーネントを除外する必要があります。）
+Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。つまり、必要なイベントハンドリングを定義するだけでよくなります。（もしご自身のアプリで Angular の Custom Elements を使用する予定がないのであれば、ご自身でコンパイルからコンポーネントを除外する必要があります。）
 
-サンプルアプリのポップアップ・サービスでは、自動的にロードすることも、カスタム要素に変換することも可能です。
+サンプルアプリのポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
 
 - `popup.component.ts` は、シンプルな pop-up 要素をアニメーションとスタイルとともに定義しています。
 - `popup.service.ts` は、Dynamic Component または Custom Elements として PopupComponent を実行する2つの異なる方法を提供するインジェクト可能な Service を作成しています。dynamic-loading メソッドのために、どれだけ多くの設定が必要となるかご注意ください。

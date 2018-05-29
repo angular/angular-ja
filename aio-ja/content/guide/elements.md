@@ -4,17 +4,17 @@ _Angular Elements_ は、 _Custom Elements_ としてパッケージ化される
 
 [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Opera、Safari でサポートされている機能で、それ以外のブラウザーでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
 Custom Elements は、独自にタグを定義することによって HTML を拡張します。定義したタグの中のコンテンツは、JavaScript のコードで作成し、制御します。
-ブラウザーは、定義された Custom Elements（ Web Components とも呼ばれます）の `CustomElementRegistry` を持ち続けます。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
+ブラウザーは、定義された Custom Elements（ Web Components とも呼ばれます）の `CustomElementRegistry` を管理します。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
 
-`@angular/elements` パッケージは、`createCustomElement()` API をエクスポートします。この API は、Angular のコンポーネントインターフェースと変更検知機能からあらかじめ組み込まれているビルトイン DOM API へのブリッジを提供します。
+`@angular/elements` パッケージは、`createCustomElement()` API をエクスポートします。この API は、Angular のコンポーネントインターフェースと変更検出機能からあらかじめ組み込まれているビルトイン DOM API へのブリッジを提供します。
 
 コンポーネントを Custom Elements に変換すると、必要なすべての Angular のインフラストラクチャ（基盤）がブラウザーで利用できるようになります。
-Custom Elements は簡単に作成することができ、Angular の機能を対応するネイティブ HTML にマッピングする際に、変更検知とデータバインディングを自動的にビューとして定義したコンポーネントに結びつけます。
+Custom Elements は簡単に作成することができ、Angular の機能を対応するネイティブ HTML にマッピングする際に、変更検出とデータバインディングを自動的にビューとして定義したコンポーネントに結びつけます。
 
 <div class="l-sub-section">
 
     他のフレームワークで作られているウェブアプリでも Custom Elements が使用できるように、われわれは開発を進めています。
-    Angular フレームワークにおける必要最小限の機能だけが備わっているバージョンは、コンポーネントの変更検知とデータバインディング機能をサポートするために Service としてインジェクトされる予定です。
+    Angular フレームワークの最小限の自己完結型バージョンが、コンポーネントの変更検出およびデータバインディング機能をサポートするサービスとしてインジェクトされます。
     開発の方向性についての詳細は、この [ビデオ・プレゼンテーション](https://www.youtube.com/watch?v=Z1gLFPLVJjY&t=4s) をチェックしてください。
 
 </div>
@@ -23,9 +23,9 @@ Custom Elements は簡単に作成することができ、Angular の機能を�
 
 Custom Elements は自分自身をブートストラップします。つまり、DOM に追加されたタイミングで自動的にブートストラップを開始し、DOM から取り除かれたタイミングで自動的に破棄します。Custom Elements は一度 DOM に追加されると、通常の HTML 要素と同じように表示され、振る舞います。特別な Angular の専門用語や使用方法などは一切必要ありません。
 
-- <b>Angularアプリで簡単な動的コンテンツ</b>
+- <b>Angularアプリ内の簡単な動的コンテンツ</b>
 
-  コンテンツを Custom Elements に変換すると、Angular アプリ内にダイナミック HTML コンテンツを容易に作成することができるようになります。Angular アプリ内の DOM に直接追加した HTML コンテンツは、通常 Angular の処理なしで表示されます。もっとも、ご自身で _dynamic component_ を定義して、HTML タグをアプリのデータに結びつけ、変更検知の対象となるようにコードを追加した場合、話は別ですが。Custom Elements を使用すると、これらのすべての処理は自動的に行われるようになります。
+  コンテンツを Custom Elements に変換すると、Angular アプリ内にダイナミック HTML コンテンツを容易に作成することができるようになります。Angular アプリ内の DOM に直接追加した HTML コンテンツは、通常 Angular の処理なしで表示されます。もっとも、ご自身で _動的コンポーネント_ を定義して、HTML タグをアプリのデータに結びつけ、変更検出の対象となるようにコードを追加した場合、話は別ですが。Custom Elements を使用すると、これらのすべての処理は自動的に行われるようになります。
 
 - <b>コンテンツリッチなアプリケーション</b>
 
@@ -40,7 +40,7 @@ Custom Elements は自分自身をブートストラップします。つまり�
 <my-popup message="Use Angular!"></my-popup>
 ```
 
-Custom Elements がページ上に置かれると、ブラウザーは登録されたクラスのインスタンスを作成し、それを DOM に追加します。コンテンツはコンポーネントのテンプレートによって提供され、コンポーネントと DOM データを使ってレンダリングされます。コンポーネントの input プロパティは、要素の input 属性に対応します。
+Custom Elements がページ上に置かれると、ブラウザーは登録されたクラスのインスタンスを作成し、それを DOM に追加します。コンテンツはコンポーネントのテンプレートによって提供され、コンポーネントと DOM データを使ってレンダリングされます。コンポーネントの入力プロパティは、その要素の入力属性に対応します。
 
 <figure>
 
@@ -52,11 +52,15 @@ Custom Elements がページ上に置かれると、ブラウザーは登録さ�
 
 ## コンポーネントをカスタムエレメンツに変換する
 
-Angular では、`createCustomElement()` 関数を使って、Angular コンポーネントをその依存関係を含めて Custom Elements に変換します。この関数は、ブラウザーがインスタンスの作成と破棄を行い、変更に対して検知と応答を行うために必要な Angular の機能に加えて、コンポーネントが観測可能なObservableなプロパティをまとめます。
+Angular は、Angular コンポーネントとその依存関係をカスタム要素に変換する
+`createCustomElement()` 関数を提供します。
+この関数は、コンポーネントの観測可能なプロパティと、ブラウザがインスタンスを作成および破棄し、
+変更を検出して対応するために必要なAngular機能を収集します。
 
-変換処理では、`NgElementConstructor` インターフェースが実装され、コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタクラスを作成されます。
+変換処理では、`NgElementConstructor` インターフェースが実装され、
+コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタクラスを作成されます。
 
-設定されたコンストラクとその関連した Custom Elements タグをブラウザーの `CustomElementRegistry` に登録するには、JavaScript の関数 `customElements.define()` を使ってください。
+設定されたコンストラクタとその関連した Custom Elements タグをブラウザーの `CustomElementRegistry` に登録するには、JavaScript の関数 `customElements.define()` を使ってください。
 ブラウザーは、登録された要素のタグに遭遇した際に、Custom Elements のインスタンスを生成するためにコンストラクタを使用します。
 
 <figure>
@@ -69,17 +73,17 @@ Angular では、`createCustomElement()` 関数を使って、Angular コンポ�
 
 Custom Elements は Angular コンポーネントを _ホスト_ し、 コンポーネントで定義されるデータやロジックを標準 DOM API に結びつけるブリッジを提供します。コンポーネントのプロパティとロジックは HTML の属性とブラウザーのイベントシステムに直接関連付けられます。
 
-- 生成のためのクリエーション API は、input プロパティをもつコンポーネントをパースし、Custom Elements のために対応する属性を定義します。その際に、大文字/小文字を区別しない Custom Elements とその属性を対応させるために属性のプロパティ名を変換します。変換の結果として生じる属性名は、ダッシュで区切った小文字が使用されます。たとえば、`@Input('myInputProp') inputProp` を持ったコンポーネントであれば、対応する Custom Elements の属性は `my-input-prop` として定義されます。
+- 生成 API は、input プロパティをもつコンポーネントをパースし、Custom Elements のために対応する属性を定義します。その際に、大文字/小文字を区別しない Custom Elements とその属性を対応させるために属性のプロパティ名を変換します。変換の結果として生じる属性名は、ダッシュで区切った小文字が使用されます。たとえば、`@Input('myInputProp') inputProp` を持ったコンポーネントであれば、対応する Custom Elements の属性は `my-input-prop` として定義されます。
 
-- コンポーネントの output は、output 名にマッチしたカスタムイベント名をもつ HTML の [Custom Events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) としてディスパッチされます。たとえば、`@Output() valueChanged = new EventEmitter()` を持ったコンポーネントであれば、対応するカスタムイベントは "valueChanged" というイベント名でディスパッチされ、emit されるデータは event の `detail` プロパティに格納されます。もしエイリアスを定義していた場合、その値が使用されます。たとえば、`@Output('myClick') clicks = new EventEmitter<string>();` であれば、"myClick" というイベント名でディスパッチされます。
+- コンポーネントの出力は、出力名にマッチしたカスタムイベント名をもつ HTML の [Custom Events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) としてディスパッチされます。たとえば、`@Output() valueChanged = new EventEmitter()` を持ったコンポーネントであれば、対応するカスタムイベントは "valueChanged" というイベント名でディスパッチされ、発信されるデータはイベントの `detail` プロパティに格納されます。もしエイリアスを定義していた場合、その値が使用されます。たとえば、`@Output('myClick') clicks = new EventEmitter<string>();` であれば、"myClick" というイベント名でディスパッチされます。
 
-より詳しい情報については、Web Components のドキュメント [Creating custom events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events) を見てください。
+より詳しい情報については、Web Components のドキュメント [Creating custom events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events) を参照してください。
  
 {@a browser-support}
 
-## カスタムエレメンツのブラウザーのサポート状況
+## Custom Elementsのブラウザーのサポート状況
 
-この新しい機能である [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) のウェブプラットフォームでの機能は、現在多くのブラウザーでネイティブサポートされています。いくつかのブラウザーでは、まだサポートが保留中だったり計画中だったりします。
+最近開発された [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) のWebプラットフォーム機能は、現在多くのブラウザでネイティブにサポートされています。他のブラウザではサポートが保留中または計画中です。
 
 <table>
 <tr>
@@ -113,25 +117,25 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 Custom Elements をサポートしているブラウザーにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザーで利用可能であるとは限らないので、古いブラウザーや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
 
 自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](https://cli.angular.io/) をお使いください。
-- ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を見てくだい。
+- ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を参照してください。
 
-- Angular のブラウザーサポート状況についての詳細は、[Browser Support](guide/browser-support) を見てください。
+- Angular のブラウザーサポート状況についての詳細は、[Browser Support](guide/browser-support) を参照してください。
 
 
 ## サンプル: ポップアップサービス
 
-これまでは、ランタイムでアプリにコンポーネントを追加したかったら、_dynamic component_ を定義する必要がありました。アプリはスタートアップ時にコンポーネントが存在していることがわからず、ご自身でコンポーネントをロードし、DOM 内の要素に適用し、[Dynamic Component Loader](guide/dynamic-component-loader) で定義されているように、すべての依存関係、変更検知、イベントハンドリングを解決しなければいけないため、アプリのモジュールの `entryComponents` の部分に Dynamic Component を記述する必要がありました。
+以前は、実行時にコンポーネントをアプリケーションに追加する場合、_動的コンポーネント_ を定義する必要がありました。アプリケーションモジュールは、動的コンポーネントを `entryComponents` の下にリストアップする必要があり、アプリケーションは起動時にそれらが存在することを知りません。そして [動的コンポーネントローダー](guide/dynamic-component-loader) で説明されているように、ロードしてDOMの要素にアタッチし、依存関係、変更検出、およびイベント処理について記述する必要がありました。
 
-Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。つまり、必要なイベントハンドリングを定義するだけでよくなります。（もしご自身のアプリで Angular の Custom Elements を使用する予定がないのであれば、ご自身でコンパイルからコンポーネントを除外する必要があります。）
+Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。&mdash; つまり、必要なイベントハンドリングを定義するだけでよくなります（アプリケーションで使用しない場合は、コンポーネントをコンパイルから除外する必要があります）。
 
 サンプルアプリのポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
 
 - `popup.component.ts` は、シンプルな pop-up 要素をアニメーションとスタイルとともに定義しています。
-- `popup.service.ts` は、Dynamic Component または Custom Elements として PopupComponent を実行する2つの異なる方法を提供するインジェクト可能な Service を作成しています。dynamic-loading メソッドのために、どれだけ多くの設定が必要となるかご注意ください。
+- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として PopupComponent を実行する2つの異なる方法を提供するインジェクト可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
 - `app.module.ts` は、PopupComponent をモジュールの `entryComponents` のリストに追加します。そうすることで、PopupComponent をコンパイルから除外し、スタートアップ時の警告やエラーを防ぐようにしています。
 - `app.component.ts` は、アプリのルートコンポーネントを定義しています。このコンポーネントは、PopupService を使用して、実行時に pop-up を DOM に追加します。アプリが起動すると、ルートコンポーネントのコンストラクタは PopupComponent を Custom Elements に変換します。
 
-比較のため、デモでは、両方のメソッドを使っています。ひとつは dynamic-loading メソッドを使って popup を追加するボタンです。もうひとつは Custom Elements を使って popup を追加するボタンです。準備の方法が異なるだけで、結果は同じだということが分かるでしょう。
+比較のため、デモでは、両方の手法を使っています。ひとつは動的読み込みの手法を使ってポップアップを追加するボタンです。もうひとつは Custom Elements を使って popup を追加するボタンです。準備の方法が異なるだけで、結果は同じだということが分かるでしょう。
 
 <code-tabs>
 

@@ -92,24 +92,35 @@ This scoping restriction is a ***styling modularity feature***.
 Component styles have a few special *selectors* from the world of shadow DOM style scoping
 (described in the [CSS Scoping Module Level 1](https://www.w3.org/TR/css-scoping-1) page on the
 [W3C](https://www.w3.org) site).
+コンポーネントスタイルは、いくつかの DOMスタイルのスコーピングの影の世界からの特別な *セレクター* があります
+([W3C](https://www.w3.org) サイトの
+[CSS スコーピング モデル レベル 1](https://www.w3.org/TR/css-scoping-1) ページに記述されている)。
 The following sections describe these selectors.
+次のセクションで、これらのセレクターを説明します。
 
+
+### :host
 ### :host
 
 Use the `:host` pseudo-class selector to target styles in the element that *hosts* the component (as opposed to
+コンポーネントを *提供する* 要素のスタイルを対象にする `:host` 偽クラスセレクターを使います(
 targeting elements *inside* the component's template).
-
+対して、コンポーネントの雛形の *内部の* エレメントを対象とする)。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="host" title="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 The `:host` selector is the only way to target the host element. You can't reach
+`:host` セレクターは、ホストのエレメントを対象とする唯一の方法です。別のセレクターを用いて
 the host element from inside the component with other selectors because it's not part of the
+コンポーネントの内側からホスト要素には到達できない、なぜならば、それは、コンポーネント自身の
 component's own template. The host element is in a parent component's template.
+雛形の一部ではないから。ホストの要素は、親のコンポーネントの雛形の中にあるから。
 
 Use the *function form* to apply host styles conditionally by
+`:host` の後のカッコの中の別なセレクターを含むことにより、
 including another selector inside parentheses after `:host`.
-
+条件付きのホストのスタイルを適用するために *function form* を使います。
 The next example targets the host element again, but only when it also has the `active` CSS class.
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" title="src/app/hero-details.component.css" linenums="false">

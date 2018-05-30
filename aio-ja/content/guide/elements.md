@@ -1,37 +1,46 @@
-# Angular Elements Overview
+# Angular Elements概要
 
-Angular Elements are Angular components packaged as custom elements, a web standard for defining new html elements in a framework-agnostic way.
+_Angular Elements_ は、 _Custom Elements_ としてパッケージ化される Anuglar コンポーネントです。Custom Elements は、フレームワークに依存しない形で新たな HTML 要素を定義するウェブ標準技術です。
 
-[Custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) are a Web Platform feature currently supported by Chrome, Opera, and Safari, and available in other browsers through polyfills (see [Browser Support](#browser-support)).
-A custom element extends HTML by allowing you to define a tag whose content is created and controlled by JavaScript code. 
-The browser maintains a `CustomElementRegistry` of defined custom elements (also called Web Components), which maps an instantiable JavaScript class to an HTML tag.
+[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Opera、Safari でサポートされている機能で、それ以外のブラウザーでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
+Custom Elements は、独自にタグを定義することによって HTML を拡張します。定義したタグの中のコンテンツは、JavaScript のコードで作成し、制御します。
+ブラウザーは、定義された Custom Elements（ Web Components とも呼ばれます）の `CustomElementRegistry` を管理します。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
 
-The `@angular/elements` package exports a `createCustomElement()` API that provides a bridge from Angular's component interface and change detection functionality to the built-in DOM API. 
+`@angular/elements` パッケージは、`createCustomElement()` API をエクスポートします。この API は、Angular のコンポーネントインターフェースと変更検出機能からあらかじめ組み込まれているビルトイン DOM API へのブリッジを提供します。
 
-Transforming a component to a custom element makes all of the required Angular infrastructure available to the browser. Creating a custom element is simple and straightforward, and automatically connects your component-defined view with change detection and data binding, mapping Angular functionality to the corresponding native HTML equivalents. 
+コンポーネントを Custom Elements に変換すると、必要なすべての Angular のインフラストラクチャ（基盤）がブラウザーで利用できるようになります。
+Custom Elements は簡単に作成することができ、Angular の機能を対応するネイティブ HTML にマッピングする際に、変更検出とデータバインディングを自動的にビューとして定義したコンポーネントに結びつけます。
 
-## Using custom elements
+<div class="l-sub-section">
 
-Custom elements bootstrap themselves - they start automatically when they are added to the DOM, and are automatically destroyed when removed from the DOM. Once a custom element is added to the DOM for any page, it looks and behaves like any other HTML element, and does not require any special knowledge of Angular terms or usage conventions.  
+    他のフレームワークで作られているウェブアプリでも Custom Elements が使用できるように、われわれは開発を進めています。
+    Angular フレームワークの最小限の自己完結型バージョンが、コンポーネントの変更検出およびデータバインディング機能をサポートするサービスとしてインジェクトされます。
+    開発の方向性についての詳細は、この [ビデオ・プレゼンテーション](https://www.youtube.com/watch?v=Z1gLFPLVJjY&t=4s) をチェックしてください。
 
-- <b>Easy dynamic content in an Angular app</b>
+</div>
 
-  Transforming a component to a custom element provides an easy path to creating dynamic HTML content in your Angular app. HTML content that you add directly to the DOM in an Angular app is normally displayed without Angular processing, unless you define a _dynamic component_, adding your own code to connect the HTML tag to your app data, and participate in change detection. With a custom element, all of that wiring is taken care of automatically.
+## Custom Elementsを使用する
 
-- <b>Content-rich applications</b>
+Custom Elements は自分自身をブートストラップします。つまり、DOM に追加されたタイミングで自動的にブートストラップを開始し、DOM から取り除かれたタイミングで自動的に破棄します。Custom Elements は一度 DOM に追加されると、通常の HTML 要素と同じように表示され、振る舞います。特別な Angular の専門用語や使用方法などは一切必要ありません。
 
-  If you have a content-rich app, such as the Angular app that presents this documentation, custom elements let you give your content providers sophisticated Angular functionality without requiring knowledge of Angular. For example, an Angular guide like this one is added directly to the DOM by the Angular navigation tools, but can include special elements like `<code-snippet>` that perform complex operations. All you need to tell your content provider is the syntax of your custom element. They don't need to know anything about Angular, or anything about your component's data structures or implementation.
+- <b>Angularアプリ内の簡単な動的コンテンツ</b>
 
-### How it works
+  コンテンツを Custom Elements に変換すると、Angular アプリ内にダイナミック HTML コンテンツを容易に作成することができるようになります。Angular アプリ内の DOM に直接追加した HTML コンテンツは、通常 Angular の処理なしで表示されます。もっとも、ご自身で _動的コンポーネント_ を定義して、HTML タグをアプリのデータに結びつけ、変更検出の対象となるようにコードを追加した場合、話は別ですが。Custom Elements を使用すると、これらのすべての処理は自動的に行われるようになります。
 
-Use the `createCustomElement()` function to convert a component into a class that can be registered with the browser as a custom element. 
-After you register your configured class with the browser's custom-element registry, you can use the new element just like a built-in HTML element in content that you add directly into the DOM: 
+- <b>コンテンツリッチなアプリケーション</b>
+
+  もしこのドキュメントのような豊富なコンテンツを持った Angular アプリをお持ちであれば、Custom Elements を使うことで、Angular の知識を必要とすることなく、洗練された Angular の機能をコンテンツに持たせることができます。たとえば、この Angular ガイドは、Angular ナビゲーションツールによって直接 DOM に追加されています。しかしながら、複雑な操作が可能な `<code-snippet>` のような特別な要素を含めることができます。必要なのは、コンテンツプロバイダーにCustom Elements の構文を伝えることだけです。Angular や、コンポーネントのデータ構造、実装ついての知識などは必要ありません。
+
+### 仕組みについて
+
+コンポーネントを、Custom Elements としてブラウザーに登録されるクラスに変換するには、`createCustomElement()` 関数を使います。
+設定したクラスを、ブラウザーの Custom Elements のレジストリに登録すると、あらかじめ組み込まれている HTML 要素のように振る舞う新たな要素が、DOM に直接追加したコンテンツの中で使用することができるようになります。
 
 ```
 <my-popup message="Use Angular!"></my-popup>
 ```
 
-When your custom element is placed on a page, the browser creates an instance of the registered class and adds it to the DOM. The content is provided by the component's template, which  uses Angular template syntax, and is rendered using the component and DOM data. Input properties in the component correspond to input attributes for the element. 
+Custom Elements がページ上に置かれると、ブラウザーは登録されたクラスのインスタンスを作成し、それを DOM に追加します。コンテンツはコンポーネントのテンプレートによって提供され、コンポーネントと DOM データを使ってレンダリングされます。コンポーネントの入力プロパティは、その要素の入力属性に対応します。
 
 <figure>
 
@@ -41,27 +50,18 @@ When your custom element is placed on a page, the browser creates an instance of
 
 <hr class="clear">
 
-<div class="l-sub-section">
+## コンポーネントをカスタムエレメンツに変換する
 
-    We are working on custom elements that can be used by web apps built on other frameworks. 
-    A minimal, self-contained version of the Angular framework will be injected as a service to support the component's change-detection and data-binding functionality. 
-    For more about the direction of development, check out this [video presentation](https://www.youtube.com/watch?v=vHI5C-9vH-E).
+Angular は、Angular コンポーネントとその依存関係をカスタム要素に変換する
+`createCustomElement()` 関数を提供します。
+この関数は、コンポーネントの観測可能なプロパティと、ブラウザがインスタンスを作成および破棄し、
+変更を検出して対応するために必要なAngular機能を収集します。
 
-</div>
+変換処理では、`NgElementConstructor` インターフェースが実装され、
+コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタクラスを作成されます。
 
-## Transforming components to custom elements
-
-Angular provides the `createCustomElement()` function for converting an Angular component, 
-together with its dependencies, to a custom element. The function collects the component's 
-observable properties, along with the Angular functionality the browser needs to 
-create and destroy instances, and to detect and respond to changes. 
-
-The conversion process implements the `NgElementConstructor` interface, and creates a 
-constructor class that is configured to produce a self-bootstrapping instance of your component. 
-
-Use a JavaScript function, `customElements.define()`,  to register the configured constructor 
-and its associated custom-element tag with the browser's `CustomElementRegistry`. 
-When the browser encounters the tag for the registered element, it uses the constructor to create a custom-element instance.
+設定されたコンストラクタとその関連した Custom Elements タグをブラウザーの `CustomElementRegistry` に登録するには、JavaScript の関数 `customElements.define()` を使ってください。
+ブラウザーは、登録された要素のタグに遭遇した際に、Custom Elements のインスタンスを生成するためにコンストラクタを使用します。
 
 <figure>
 
@@ -69,75 +69,73 @@ When the browser encounters the tag for the registered element, it uses the cons
 
 </figure>
 
-### Mapping 
+### マッピング
 
-A custom element _hosts_ an Angular component, providing a bridge between the data and logic defined in the component and standard DOM APIs. Component properties and logic maps directly into HTML attributes and the browser's event system.
+Custom Elements は Angular コンポーネントを _ホスト_ し、 コンポーネントで定義されるデータやロジックを標準 DOM API に結びつけるブリッジを提供します。コンポーネントのプロパティとロジックは HTML の属性とブラウザーのイベントシステムに直接関連付けられます。
 
-- The creation API parses the component looking for input properties, and defines corresponding attributes for the custom element. It transforms the property names to make them compatible with custom elements, which do not recognize case distinctions. The resulting attribute names use dash-separated lowercase. For example, for a component with `@Input('myInputProp') inputProp`, the corresponding custom element defines an attribute `my-input-prop`.
+- 生成 API は、input プロパティをもつコンポーネントをパースし、Custom Elements のために対応する属性を定義します。その際に、大文字/小文字を区別しない Custom Elements とその属性を対応させるために属性のプロパティ名を変換します。変換の結果として生じる属性名は、ダッシュで区切った小文字が使用されます。たとえば、`@Input('myInputProp') inputProp` を持ったコンポーネントであれば、対応する Custom Elements の属性は `my-input-prop` として定義されます。
 
-- Component outputs are dispatched as HTML [Custom Events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent), with the name of the custom event matching the output name. For example, for a component with `@Output() valueChanged = new EventEmitter()`, the corresponding custom element will dispatch events with the name "valueChanged", and the emitted data will be stored on the event’s `detail` property. If you provide an alias, that value is used; for example, `@Output('myClick') clicks = new EventEmitter<string>();` results in dispatch events with the name "myClick".
+- コンポーネントの出力は、出力名にマッチしたカスタムイベント名をもつ HTML の [Custom Events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) としてディスパッチされます。たとえば、`@Output() valueChanged = new EventEmitter()` を持ったコンポーネントであれば、対応するカスタムイベントは "valueChanged" というイベント名でディスパッチされ、発信されるデータはイベントの `detail` プロパティに格納されます。もしエイリアスを定義していた場合、その値が使用されます。たとえば、`@Output('myClick') clicks = new EventEmitter<string>();` であれば、"myClick" というイベント名でディスパッチされます。
 
-
-For more information, see Web Component documentation for [Creating custom events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events).
+より詳しい情報については、Web Components のドキュメント [Creating custom events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events) を参照してください。
  
-
 {@a browser-support}
 
-## Browser support for custom elements
+## Custom Elementsのブラウザーのサポート状況
 
-The recently-developed [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) Web Platform feature is currently supported natively in a number of browsers. Support is pending or planned in other browsers. 
+最近開発された [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) のWebプラットフォーム機能は、現在多くのブラウザでネイティブにサポートされています。他のブラウザではサポートが保留中または計画中です。
 
 <table>
 <tr>
-  <th>Browser</th>
-  <th>Custom Element Support</th>
+  <th>ブラウザー名</th>
+  <th>Custom Elements のサポート状況</th>
 </tr>
 <tr>
   <td>Chrome</td>
-  <td>Supported natively.</td>
+  <td>ネイティブサポート済み</td>
 </tr>
 <tr>
   <td>Opera</td>
-  <td>Supported natively.</td>
+  <td>ネイティブサポート済み</td>
 </tr>
 <tr>
   <td>Safari</td>
-  <td>Supported natively.</td>
+  <td>ネイティブサポート済み</td>
 </tr>
 <tr>
   <td>Firefox</td>
-  <td> Set the <code>dom.webcomponents.enabled</code> and <code>dom.webcomponents.customelements.enabled</code> preferences to true. Planned to be enabled by default in version 60/61.</td>
+  <td><code>dom.webcomponents.enabled</code> と <code>dom.webcomponents.customelements.enabled</code> の設定項目を true に設定してください。バージョン 60/61 にてデフォルトで使えるようになる予定です。</td>
 </tr>
 <tr>
   <td>Edge</td>
-  <td>Working on an implementation. <br>    
+  <td>実装中<br>    
 
   </td>
 </tr>
 </table>
 
-In browsers that support Custom Elements natively, the specification requires developers use ES2015 classes to define Custom Elements - developers can opt-in to this by setting the `target: "es2015"` property in their project's `tsconfig.json`. As Custom Element and ES2015 support may not be available in all browsers, developers can instead choose to use a polyfill to support older browsers and ES5 code.
+Custom Elements をサポートしているブラウザーにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザーで利用可能であるとは限らないので、古いブラウザーや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
 
-Use the [Angular CLI](https://cli.angular.io/) to automatically set up your project with the correct polyfill: `ng add @angular/elements --name=*your_project_name*`.
-- For more information about polyfills, see [polyfill documentation](https://www.webcomponents.org/polyfills). 
+自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](https://cli.angular.io/) をお使いください。
+- ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を参照してください。
 
-- For more information about Angular browser support, see [Browser Support](guide/browser-support).
+- Angular のブラウザーサポート状況についての詳細は、[Browser Support](guide/browser-support) を参照してください。
 
 
-## Example: A Popup Service
+## サンプル: ポップアップサービス
 
-Previously, when you wanted to add a component to an app at runtime, you had to define a _dynamic component_. The app module would have to list your dynamic component under `entryComponents`, so that the app wouldn't expect it to be present at startup, and then you would have to load it, attach it to an element in the DOM, and wire up all of the dependencies, change detection, and event handling, as described in [Dynamic Component Loader](guide/dynamic-component-loader).
+以前は、実行時にコンポーネントをアプリケーションに追加する場合、_動的コンポーネント_ を定義する必要がありました。アプリケーションモジュールは、動的コンポーネントを `entryComponents` の下にリストアップする必要があり、アプリケーションは起動時にそれらが存在することを知りません。そして [動的コンポーネントローダー](guide/dynamic-component-loader) で説明されているように、ロードしてDOMの要素にアタッチし、依存関係、変更検出、およびイベント処理について記述する必要がありました。
 
-Using an Angular custom element makes the process much simpler and more transparent, by providing all of the infrastructure and framework automatically&mdash;all you have to do is define the kind of event handling you want. (You do still have to exclude the component from compilation, if you are not going to use it in your app.)
+Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。&mdash; つまり、必要なイベントハンドリングを定義するだけでよくなります（アプリケーションで使用しない場合は、コンポーネントをコンパイルから除外する必要があります）。
 
-The Popup Service example app defines a component that you can either load dynamically or convert to a custom element. 
+サンプルアプリのポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
 
-- `popup.component.ts`  defines a simple pop-up element that displays an input message, with some animation and styling. 
-- `popup.service.ts` creates an injectable service that provides two different ways to invoke the PopupComponent; as a dynamic component, or as a custom element. Notice how much more setup is required for the dynamic-loading method.
-- `app.module.ts` adds the PopupComponent in the module's `entryComponents` list, to exclude it from compilation and avoid startup warnings or errors.
-- `app.component.ts` defines the app's root component, which uses the PopupService to add the pop-up to the DOM at run time. When the app runs, the root component's constructor converts PopupComponent to a custom element. 
+- `popup.component.ts` は、シンプルな pop-up 要素をアニメーションとスタイルとともに定義しています。
+- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として PopupComponent を実行する2つの異なる方法を提供するインジェクト可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
+- `app.module.ts` は、PopupComponent をモジュールの `entryComponents` のリストに追加します。そうすることで、PopupComponent をコンパイルから除外し、スタートアップ時の警告やエラーを防ぐようにしています。
+- `app.component.ts` は、アプリのルートコンポーネントを定義しています。このコンポーネントは、PopupService を使用して、実行時に pop-up を DOM に追加します。アプリが起動すると、ルートコンポーネントのコンストラクタは PopupComponent を Custom Elements に変換します。
 
-For comparison, the demo shows both methods. One button adds the popup using the dynamic-loading method, and the other uses the custom element. You can see that the result is the same; only the preparation is different.
+比較のため、デモでは、両方の手法を使っています。ひとつは動的読み込みの手法を使ってポップアップを追加するボタンです。もうひとつは Custom Elements を使って popup を追加するボタンです。準備の方法が異なるだけで、結果は同じだということが分かるでしょう。
 
 <code-tabs>
 

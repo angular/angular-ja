@@ -122,15 +122,20 @@ Use the *function form* to apply host styles conditionally by
 including another selector inside parentheses after `:host`.
 条件付きのホストのスタイルを適用するために *function form* を使います。
 The next example targets the host element again, but only when it also has the `active` CSS class.
+つぎの例は、再びホストの要素を目標にします、が、`active` CSS クラスがある時だけです。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" title="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 ### :host-context
+### :host-context
 
 Sometimes it's useful to apply styles based on some condition *outside* of a component's view.
+時々、コンポーネントのビューの *外側* のいくつかの状態の基づいたスタイルを表すのに役立ちます。
 For example, a CSS theme class could be applied to the document `<body>` element, and
+例えば、CSS テーマクラスは、ドキュメントの `<body>` 要素に適用させることが可能です、そして
 you want to change how your component looks based on that.
+あなたは、どの様にコンポーネントが見えるのかを変えたいと、望んでいます。
 
 Use the `:host-context()` pseudo-class selector, which works just like the function
 form of `:host()`. The `:host-context()` selector looks for a CSS class in any ancestor of the component host element,

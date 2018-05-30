@@ -1,191 +1,191 @@
 
 
-# Types of Feature Modules
+# フィーチャーモジュールの種類
 
-#### Prerequisites
+#### 前提条件
 
-A basic understanding of the following concepts:
-* [Feature Modules](guide/feature-modules).
-* [JavaScript Modules vs. NgModules](guide/ngmodule-vs-jsmodule).
-* [Frequently Used Modules](guide/frequent-ngmodules).
+次の基本的な理解:
+* [フィーチャーモジュール](guide/feature-modules)
+* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
+* [よく使用されるモジュール](guide/frequent-ngmodules)
 
 <hr>
 
-There are five general categories of feature modules which
-tend to fall into the following groups:
+フィーチャーモジュールは、
+大きく分けて次のような5つのカテゴリーに分類される傾向があります:
 
-* Domain feature modules.
-* Routed feature modules.
-* Routing modules.
-* Service feature modules.
-* Widget feature modules.
+* ドメインフィーチャーモジュール(Domain feature module)
+* ルーテッドフィーチャーモジュール(Routed feature module)
+* ルーティングモジュール(Routing module)
+* サービスフィーチャーモジュール(Service feature module)
+* ウィジェットフィーチャーモジュール(Widget feature module)
 
-While the following guidelines describe the use of each type and their
-typical characteristics, in real world apps, you may see hybrids.
+次のガイドラインでは、それぞれの種類の使用方法とその典型的な特性について説明します。
+ただし、実際のアプリケーションでは混合して使われるかもしれません。
 
 <table>
 
  <tr>
-   <th style="vertical-align: top">
-     Feature Module
+   <th style="vertical-align: top; min-width: 90px">
+     種類
    </th>
 
    <th style="vertical-align: top">
-     Guidelines
+     ガイドライン
    </th>
  </tr>
 
  <tr>
-   <td>Domain</td>
+   <td>ドメイン</td>
    <td>
-     Domain feature modules deliver a user experience dedicated to a particular application domain like editing a customer or placing an order.
+     ドメインフィーチャーモジュールは、顧客の編集や発注など、特定のアプリケーションドメインに特化したのユーザー体験を提供します。
 
-     They typically have a top component that acts as the feature root and private, supporting sub-components descend from it.
+     通常、機能のルートとして振る舞うトップのコンポーネントと、プライベートでサポートする下位のサブコンポーネントで構成されます。
 
-     Domain feature modules consist mostly of declarations. Only the top component is exported.
+     ドメインフィーチャーモジュールは主に宣言で構成され、トップのコンポーネントだけがエクスポートされます。
 
-     Domain feature modules rarely have providers. When they do, the lifetime of the provided services should be the same as the lifetime of the module.
+     ドメインフィーチャーモジュールがプロバイダーを持つことはめったにありません。持つ場合、提供されるサービスの寿命はモジュールの寿命と同じでなければなりません。
 
-     Domain feature modules are typically imported exactly once by a larger feature module.
+     ドメインフィーチャーモジュールは、通常、より大きなフィーチャモジュールによって一度だけインポートされます。
 
-     They might be imported by the root `AppModule` of a small application that lacks routing.
+     ルーティングがない小さなアプリケーションのルートモジュールである`AppModule`によってインポートされるかもしれません。
    </td>
  </tr>
  <tr>
-   <td>Routed</td>
+   <td>ルーテッド</td>
    <td>
-     Routed feature modules are domain feature modules whose top components are the targets of router navigation routes.
+     ルーテッドフィーチャーモジュールは、トップのコンポーネントがルーターナビゲーションルートのターゲットであるドメインフィーチャーモジュールです。
 
-     All lazy-loaded modules are routed feature modules by definition.
+     すべての遅延ロードされるモジュールはルーテッドフィーチャーモジュールとして定義されます。
 
-     Routed feature modules don’t export anything because their components never appear in the template of an external component.
+     ルーテッドフィーチャーモジュールは、モジュール内のコンポーネントが外部コンポーネントのテンプレートに表示されることがないため、何もエクスポートしません。
 
-     A lazy-loaded routed feature module should not be imported by any module. Doing so would trigger an eager load, defeating the purpose of lazy loading.That means you won’t see them mentioned among the `AppModule` imports. An eager loaded routed feature module must be imported by another module so that the compiler learns about its components.
+     遅延ロードされるルーテッドフィーチャーモジュールは、どのモジュールもインポートすべきではありません。そうすることで、遅延ロードの目的を無駄にして事前ロードに含まれてしまいます。つまり、`AppModule`のインポートの中に存在してはいけないということを意味します。事前ロードされるルーテッドフィーチャーモジュールは、コンパイラがそのコンポーネントの情報について知るために、別のモジュールによってインポートされなければなりません。
 
-     Routed feature modules rarely have providers for reasons explained in [Lazy Loading Feature Modules](/guide/lazy-loading-ngmodules). When they do, the lifetime of the provided services should be the same as the lifetime of the module. Don't provide application-wide singleton services in a routed feature module or in a module that the routed module imports.
+     ルーテッドフィーチャーモジュールは、[フィーチャーモジュールの遅延ロード](/guide/lazy-loading-ngmodules)で説明されているようにプロバイダーを持つことはめったにありません。持つ場合、提供されるサービスの寿命は、モジュールの寿命と同じでなければなりません。ルーテッドフィーチャーモジュールまたはルーテッドモジュールがインポートするモジュールではアプリケーション全体でシングルトンになるサービスを提供しないでください。
    </td>
  </tr>
 
  <tr>
-   <td>Routing</td>
+   <td>ルーティング</td>
    <td>
 
-     A routing module provides routing configuration for another module and separates routing concerns from its companion module.
+     ルーティングモジュールは、別のモジュールのルーティング構成を提供し、ルーティングの興味を対応するモジュールから分離します。
 
-     A routing module typically does the following:
+     ルーティングモジュールは、通常、次のことを行います:
 
      <ul>
-     <li>Defines routes.</li>
-     <li>Adds router configuration to the module's imports.</li>
-     <li>Adds guard and resolver service providers to the module's providers.</li>
-     <li>The name of the routing module should parallel the name of its companion module, using the suffix "Routing". For example, <code>FooModule</code> in <code>foo.module.ts</code> has a routing module named <code>FooRoutingModule</code> in <code>foo-routing.module.ts</code>. If the companion module is the root <code>AppModule</code>, the <code>AppRoutingModule</code> adds router configuration to its imports with <code>RouterModule.forRoot(routes)</code>. All other routing modules are children that import <code>RouterModule.forChild(routes)</code>.</li>
-     <li>A routing module re-exports the <code>RouterModule</code> as a convenience so that components of the companion module have access to router directives such as <code>RouterLink</code> and <code>RouterOutlet</code>.</li>
-     <li>A routing module does not have its own declarations. Components, directives, and pipes are the responsibility of the feature module, not the routing module.</li>
+     <li>ルーティングを定義します。</li>
+     <li>ルーターの設定をモジュールのインポートに追加します。</li>
+     <li>ガード、リゾルバサービスプロバイダーをモジュールのプロバイダーに追加します。</li>
+     <li>ルーティングモジュールの名前は、"Routing"サフィックスを使用して、対応するモジュールと平行する名前をつける必要があります。 たとえば、<code>foo.module.ts</code>の<code>FooModule</code>だった場合は、<code>foo-routing.module.ts</code>の<code>FooRoutingModule</code>となります。対応するモジュールがルートモジュールである<code>AppModule</code>の場合、<code>AppRoutingModule</code>は<code>RouterModule.forRoot(routes)</code>を使用してそのインポートにルーター設定を追加します。他のすべてのルーティングモジュールは、<code>RouterModule.forChild(routes)</code>をインポートする子ルーターとなります。</li>
+     <li>ルーティングモジュールは、対応するモジュールのコンポーネントが<code>RouterLink</code>や<code>RouterOutlet</code>などのルーターディレクティブにアクセスできるように<code>RouterModule</code>を再エクスポートします。</li>
+     <li>ルーティングモジュールには自分自身の宣言がありません。コンポーネント、ディレクティブ、およびパイプは、ルーティングモジュールではなく、フィーチャーモジュールの責務です。</li>
      </ul>
 
-     A routing module should only be imported by its companion module.
+     ルーティングモジュールは、その対応するモジュールによってのみインポートすべきです。
 
    </td>
  </tr>
 
  <tr>
-   <td>Service</td>
+   <td>サービス</td>
    <td>
 
-     Service modules provide utility services such as data access and messaging. Ideally, they consist entirely of providers and have no declarations. Angular's `HttpClientModule` is a good example of a service module.
+     サービスモジュールは、データアクセスやメッセージングなどのユーティリティー的なサービスを提供します。完全にプロバイダーで構成され、宣言は存在しないのが理想的です。 Angularの`HttpClientModule`はサービスモジュールの良い例です。
 
-     The root `AppModule` is the only module that should import service modules.
+     ルートモジュールである`AppModule`は、サービスモジュールをインポートすべき唯一のモジュールです。
 
    </td>
  </tr>
 
  <tr>
-   <td>Widget</td>
+   <td>ウィジェット</td>
    <td>
 
-     A widget module makes components, directives, and pipes available to external modules. Many third-party UI component libraries are widget modules.
+     ウィジェットモジュールは、コンポーネント、ディレクティブ、およびパイプを外部モジュールで使用できるようにします。多くのサードパーティのUIコンポーネントライブラリは、ウィジェットモジュールです。
 
-     A widget module should consist entirely of declarations, most of them exported.
+     ウィジェットモジュールは完全に宣言で構成され、そのほとんどはエクスポートされるべきです。
 
-     A widget module should rarely have providers.
+     ウィジェットモジュールがプロバイダーを持つことはめったにありません。
 
-     Import widget modules in any module whose component templates need the widgets.
+     コンポーネントテンプレートにウィジェットが必要な他のモジュールにウィジェットモジュールをインポートします。
 
    </td>
  </tr>
 
 </table>
 
-The following table summarizes the key characteristics of each feature module group.
+次の表は、それぞれのフィーチャーモジュールの主な特性をまとめたものです。
 
 <table>
  <tr>
    <th style="vertical-align: top">
-     Feature Module
+     フィーチャーモジュールの種類
    </th>
 
    <th style="vertical-align: top">
-     Declarations
+     宣言
    </th>
 
    <th style="vertical-align: top">
-     Providers
+     プロバイダー
    </th>
 
    <th style="vertical-align: top">
-     Exports
+     エクスポート
    </th>
 
    <th style="vertical-align: top">
-     Imported by
+     インポート先
    </th>
  </tr>
 
  <tr>
-   <td>Domain</td>
-   <td>Yes</td>
-   <td>Rare</td>
-   <td>Top component</td>
-   <td>Feature, AppModule</td>
+   <td>ドメイン</td>
+   <td>あり</td>
+   <td>まれ</td>
+   <td>トップのコンポーネント</td>
+   <td>フィーチャーモジュール、 AppModule</td>
  </tr>
 
  <tr>
-   <td>Routed</td>
-   <td>Yes</td>
-   <td>Rare</td>
-   <td>No</td>
-   <td>None</td>
+   <td>ルーテッド</td>
+   <td>あり</td>
+   <td>まれ</td>
+   <td>なし</td>
+   <td>なし</td>
  </tr>
 
  <tr>
-   <td>Routing</td>
-   <td>No</td>
-   <td>Yes (Guards)</td>
+   <td>ルーティング</td>
+   <td>なし</td>
+   <td>あり (ガード)</td>
    <td>RouterModule</td>
-   <td>Feature (for routing)</td>
+   <td>(ルーティングのための)フィーチャーモジュール</td>
  </tr>
 
  <tr>
-   <td>Service</td>
-   <td>No</td>
-   <td>Yes</td>
-   <td>No</td>
+   <td>サービス</td>
+   <td>なし</td>
+   <td>あり</td>
+   <td>なし</td>
    <td>AppModule</td>
  </tr>
 
  <tr>
-   <td>Widget</td>
-   <td>Yes</td>
-   <td>Rare</td>
-   <td>Yes</td>
-   <td>Feature</td>
+   <td>ウィジェット</td>
+   <td>あり</td>
+   <td>まれ</td>
+   <td>あり</td>
+   <td>フィーチャーモジュール</td>
  </tr>
 </table>
 
 <hr />
 
-## More on NgModules
+## NgModuleについてのさらに詳しい情報
 
-You may also be interested in the following:
-* [Lazy Loading Modules with the Angular Router](guide/lazy-loading-ngmodules).
-* [Providers](guide/providers).
+NgModuleについてのさらに詳しい情報については次の記事を参照してください:
+* [Angularルーターによるモジュールの遅延ロード](guide/lazy-loading-ngmodules)
+* [プロバイダー](guide/providers)

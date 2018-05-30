@@ -205,7 +205,8 @@
             {
               "url": "guide/elements",
               "title": "Angular Elements",
-              "tooltip": "Convert components to Custom Elements."
+              "tooltip": "コンポーネントをCustom Elementsに変換しましょう。",
+              "translated": true
             },
             {
               "url": "guide/dynamic-component-loader",
@@ -335,8 +336,9 @@
             },
             {
               "url": "guide/module-types",
-              "title": "Types of Feature Modules",
-              "tooltip": "Description of the different types of feature modules."
+              "title": "フィーチャーモジュールの種類",
+              "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
+              "translated": true
             },
             {
               "url": "guide/entry-components",

@@ -17,6 +17,9 @@ rules:
   - expected: 双方向
     pattern: 二方向
 
+  - expected: 変更検知
+    pattern: 変更検出
+
   - expected: Service Worker
     pattern:
       - ServiceWorker
@@ -34,6 +37,9 @@ rules:
 
   - expected: サーバー
     pattern: /サーバ(?!ー)/
+
+  - expected: ブラウザ
+    pattern: /ブラウザー/
 
   - expected: サブスクライバー
     pattern: /サブスクライバ(?!ー)/

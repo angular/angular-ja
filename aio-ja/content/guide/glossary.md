@@ -138,7 +138,7 @@ _カスタム要素_
 
 カスタム要素機能は、JavaScriptコードによってコンテンツが作成および制御されるタグを定義できるようにすることで、HTMLを拡張します。カスタム要素（*Webコンポーネント*とも呼ばれます）は、[CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)に追加されるときにブラウザによって認識されます。
 
-APIを使用してAngularコンポーネントを変換し、ブラウザに登録し、Angularアプリ内のDOMに直接追加するHTMLで使用できるようにすることができます。カスタム要素タグは、変更検出およびデータバインディング機能を備えたコンポーネントのビューを、Angular処理なしで表示されるコンテンツに挿入します。
+APIを使用してAngularコンポーネントを変換し、ブラウザに登録し、Angularアプリ内のDOMに直接追加するHTMLで使用できるようにすることができます。カスタム要素タグは、変更検知およびデータバインディング機能を備えたコンポーネントのビューを、Angular処理なしで表示されるコンテンツに挿入します。
 
 [動的コンポーネント](guide/glossary#dynamic-components)も参照してください。
 

@@ -91,7 +91,7 @@
 
 次に`QuestionControlService`です。
 これは設問を`FormGroup`に変換するためのシンプルなサービスで、
-一言でいえば、フォームグループは質問モデルのメタデータを用いて、デフォルト値とバリデーションルールをセットすることができます。
+一言でいえば、フォームグループは設問モデルのメタデータを用いて、デフォルト値とバリデーションルールをセットすることができます。
 
 
 <code-example path="dynamic-form/src/app/question-control.service.ts" title="src/app/question-control.service.ts" linenums="false">
@@ -122,7 +122,7 @@
 
 
 これは設問のリストを提示し、それぞれ`<app-question>`コンポーネント要素に束縛されています。
-`<app-question>` タグは、データバインドされた質問オブジェクトの値に基づいて _個々の_ 質問の詳細を表現するコンポーネントである、
+`<app-question>` タグは、データバインドされた設問オブジェクトの値に基づいて _個々の_ 設問の詳細を表現するコンポーネントである、
 DynamicFormQuestionComponentにマッチします。
 
 
@@ -153,15 +153,15 @@ DynamicFormQuestionComponentにマッチします。
 
 ## アンケートデータ
 
-`DynamicFormComponent`は`@Input() questions`に束縛された配列の形で設問のリストを期待しています。
+`DynamicFormComponent`は、`@Input() questions`で宣言されている配列のかたちで、設問のリストがバインディングされることを期待しています。
 
  求人申請のために定義した一連の設問は、`QuestionService`から返されます。
  実際のアプリでは、これらの設問をストレージから取得します。
 
  キーポイントは、あなたが`QuestionService`から返されたオブジェクトを通して
- ヒーロージョブのアプリケーションの質問を完全に制御することです。
- アンケートのメンテナンスは、`questions`配列から
- オブジェクトを追加、更新、削除するという単純な作業です。
+ ヒーローを雇用するためのアプリケーションの設問を完全に制御することです。
+ アンケートのメンテナンスは、`questions`配列の
+ オブジェクトを追加、更新、削除するというシンプルな作業で済みます。
 
 
 <code-example path="dynamic-form/src/app/question.service.ts" title="src/app/question.service.ts">
@@ -186,7 +186,7 @@ DynamicFormQuestionComponentにマッチします。
 
 これは、*設問* オブジェクトモデルと互換性がある限り、
 任意のタイプの調査のコンポーネントを再利用することができるので、非常に重要です。
-キーは、特定の質問についてハードコーディングされた前提を作らずに
+キーは、特定の設問についてハードコーディングされた前提を作らずに
 フォームをレンダリングするために使用されるメタデータの動的データバインディングです。
 コントロールのメタデータに加えて、動的なバリデーションを追加します。
 

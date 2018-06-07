@@ -342,8 +342,9 @@
             },
             {
               "url": "guide/entry-components",
-              "title": "Entry Components",
-              "tooltip": "All about entry components in Angular."
+              "title": "エントリーコンポーネント",
+              "tooltip": "Angularのエントリコンポーネントに関するすべて。",
+              "translated": true
             },
             {
               "url": "guide/feature-modules",

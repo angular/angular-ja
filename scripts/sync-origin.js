@@ -11,7 +11,8 @@ const copyTargets = [
     'src/index.html',
     'src/app/layout/doc-viewer/doc-viewer.component.ts',
     'src/app/layout/nav-item/nav-item.component.html',
-    'src/app/navigation/navigation.model.ts'
+    'src/app/navigation/navigation.model.ts',
+    'content/examples/**/*',
 ];
 
 const promiseGlob = promisify(glob);

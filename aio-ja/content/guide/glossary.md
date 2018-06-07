@@ -27,6 +27,12 @@ Angular HTMLとTypeScriptコードをビルド段階で効率的なJavaScriptコ
 
 [just-in-time (JIT) コンパイル](guide/glossary#jit)と比較してください。
 
+## Angular element
+
+[Custom Elements](guide/glossary#custom-element)としてパッケージされたAngularの[コンポーネント](guide/glossary#component)。
+
+[_Angular Elements_](guide/elements)ガイドを参照してください。
+
 ## Annotation
 _アノテーション_
 

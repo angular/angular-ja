@@ -8,7 +8,6 @@ export interface NavigationNode {
   tooltip?: string;
   hidden?: boolean;
   children?: NavigationNode[];
-  translated?: boolean;
 }
 
 export type NavigationResponse = {__versionInfo: VersionInfo } & { [name: string]: NavigationNode[]|VersionInfo };

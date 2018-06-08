@@ -172,7 +172,7 @@ Angular Service Workerは、データリソース用の2つのキャッシング
 
 ### ナビゲーションリクエストの処理
 
-ServiceWorkerは、`asset`または`data`グループと一致しないナビゲーションリクエストを指定された[index file](#index-file)にリダイレクトします。次の場合、リクエストはナビゲーション要求とみなされます。
+Service Workerは、`asset`または`data`グループと一致しないナビゲーションリクエストを指定された[index file](#index-file)にリダイレクトします。次の場合、リクエストはナビゲーション要求とみなされます。
 
 
 1. [mode](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode)が`navigation`である。

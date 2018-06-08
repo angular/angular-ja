@@ -157,7 +157,7 @@ npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-lo
 
 {@a transition}
 
-### クライアントアプリケーションの編集
+## クライアントアプリケーションの編集
 
 Universalアプリケーションは、動的でユーザーを引き付けるコンテンツ満載の"スプラッシュ画面"として機能します。それは、ほぼ瞬間的にアプリケーションの外観を提供します。
 
@@ -165,7 +165,9 @@ Universalアプリケーションは、動的でユーザーを引き付ける�
 
 サーバー側のレンダリングとクライアントアプリケーションへの移行を共にサポートするためには、アプリケーションのコードを少し変更する必要があります。
 
-#### ルート`AppModule`
+{@a root-app-module}
+
+### ルート`AppModule`
 
 `src/app/app.module.ts`を開き、`NgModule`のメタデータ内で`BrowserModule`インポートを探します。そのインポートを次の内容へ置き換えます：
 
@@ -179,9 +181,29 @@ Angularは、サーバーでレンダリングされたページのスタイル�
 <code-example path="universal/src/app/app.module.ts" region="platform-detection" title="src/app/app.module.ts (platform detection)">
 </code-example>
 
+{@a cli-output}
+
+### ビルド出力先
+
+ユニバーサルアプリケーションは、最初のアプリケーションを処理するサーバー側のコードと、動的にロードされるクライアント側のコードの2つの部分に分かれています。
+
+Angular CLIは、デフォルトでは`dist`ディレクトリにクライアント側のコードを出力するので、クライアント側のビルド出力をサーバー側のコードとは別に保存するために、`angular.json`内の __build__ ターゲットの `outputPath`を変更してください。クライアント側ビルド出力は、Expressサーバーによって提供されます。
+
+```
+...
+"build": {
+  "builder": "@angular-devkit/build-angular:browser",
+  "options": {
+    "outputPath": "dist/browser",
+    ...
+  } 
+}
+...
+```
+
 {@a http-urls}
 
-#### HTTPリクエストの絶対URL
+### HTTPリクエストの絶対URL
 
 このチュートリアルの`HeroService`と`HeroSearchService`は、アプリケーションデータの取得をAngularの`HttpClient`モジュールに委譲します。これらのサービスは、`api/heroes`などの _相対_ URLにリクエストを送信します。
 
@@ -229,6 +251,19 @@ Angular Universalアプリケーションを実行するためには、クライ
 `ModuleMapLoaderModule`は、ルートの遅延ロードを可能にするサーバー側のモジュールです。
 
 これは、Universal環境下でアプリケーションを実行するために特定のプロバイダーを登録する場所でもあります。
+
+{@a app-server-entry-point}
+
+### アプリケーションサーバーのエントリポイント
+
+`Angular CLI`は` AppServerModule`を使用してサーバー側のバンドルを構築します。
+
+`src/`ディレクトリに`AppServerModule`をエクスポートする`main.server.ts`ファイルを作成します:
+
+<code-example path="universal/src/main.server.ts" title="src/main.server.ts">
+</code-example>
+
+`main.server.ts`は後で`Angular CLI`の設定に `server`ターゲットを追加するために参照されます。
 
 {@a web-server}
 
@@ -388,13 +423,38 @@ Universalアプリケーションは、追加のWebpackの設定を一切必要�
 
 **Webpackの設定**は、このガイドで扱う範囲を超えた情報量のトピックです。
 
+{@a universal-cli-configuration}
+
+### Angular CLI設定
+
+CLIは、さまざまなタイプの __ターゲット__ 用のビルダーを提供します。 `build`や`serve`のような一般的に知られているターゲットは `angular.json`設定ですでに存在しています。サーバーサイドビルドをターゲットにするには、 `server`ターゲットを`architect`設定オブジェクトに追加します。
+
+* `outputPath`は、結果のビルドがどこで作成されるかを示します。
+* `main`は、前に作成した`main.server.ts`ファイルのメインエントリポイントを提供します。
+* `tsConfig`はTypeScriptとAOTのコンパイルのための設定として`tsconfig.server.json`を使います。
+
+```
+"architect": {
+  ...
+  "server": {
+    "builder": "@angular-devkit/build-angular:server",
+    "options": {
+      "outputPath": "dist/server",
+      "main": "src/main.server.ts",
+      "tsConfig": "src/tsconfig.server.json"
+    }
+  }
+  ...
+}
+```
+
 ## Universalでビルドし実行する
 
-TypeScriptとWebpackの設定ファイルを作成したので、Universalアプリケーションをビルドして実行できます。
+TypeScriptとWebpackの設定ファイルを作成し、Angular CLIを設定したので、Universalアプリケーションをビルドして実行できます。
 
 まず、_build_ と _serve_ コマンドを`package.json`の`scripts`セクションに追加してください:
 
-<code-example format="." language="ts">
+```
 "scripts": {
     ...
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
@@ -403,7 +463,7 @@ TypeScriptとWebpackの設定ファイルを作成したので、Universalアプ
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
     ...
 }
-</code-example>
+```
 
 {@a build}
 

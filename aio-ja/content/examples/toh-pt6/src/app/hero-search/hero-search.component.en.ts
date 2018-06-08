@@ -29,7 +29,7 @@ export class HeroSearchComponent implements OnInit {
   constructor(private heroService: HeroService) {}
   // #docregion searchTerms
 
-  // 検索語をobservableストリームにpushする
+  // Push a search term into the observable stream.
   search(term: string): void {
     this.searchTerms.next(term);
   }
@@ -38,13 +38,13 @@ export class HeroSearchComponent implements OnInit {
   ngOnInit(): void {
     // #docregion search
     this.heroes$ = this.searchTerms.pipe(
-      // 各キーストロークの後、検索前に300ms待つ
+      // wait 300ms after each keystroke before considering the term
       debounceTime(300),
 
-      // 直前の検索語と同じ場合は無視する
+      // ignore new term if same as previous term
       distinctUntilChanged(),
 
-      // 検索語が変わる度に、新しい検索observableにスイッチする
+      // switch to new search observable each time the term changes
       switchMap((term: string) => this.heroService.searchHeroes(term)),
     );
     // #enddocregion search

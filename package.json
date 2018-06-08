@@ -11,8 +11,8 @@
     "deploy": "firebase deploy --token \"$FIREBASE_TOKEN\"",
     "contributors": "githubcontrib --owner angular --repo angular-ja --cols 6 --format md --showlogin true --sortOrder desc | pbcopy",
     "update-origin": "./update-origin.sh",
-    "textlint": "textlint aio-ja/*",
-    "textlint:f": "textlint --fix aio-ja/*"
+    "textlint": "textlint 'aio-ja/**/!(*.en.*)'",
+    "textlint:f": "textlint --fix 'aio-ja/**/!(*.en.*)'"
   },
   "devDependencies": {
     "firebase-tools": "^3.14.0",

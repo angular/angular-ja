@@ -70,9 +70,8 @@ WebStormは、Language Serviceに加えて、テンプレート内の色付け�
 `package.json`に必要なdev依存関係は次のとおりです:
 
 ```json
-
 devDependencies {
-	"@angular/language-service": "^4.0.0"
+	"@angular/language-service": "^6.0.0"
 }
 ```
 

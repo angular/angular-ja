@@ -10,9 +10,9 @@
 
 # コンテンツ
 
-* [親から入力バインディングを持つ子へのデータ渡し](guide/component-interaction#parent-to-child)
-* [インターセプト(傍受)がセッターによるプロパティ変更を入力する](guide/component-interaction#parent-to-child-setter)
-* [インターセプト(傍受)が `ngOnChanges()` によるプロパティの変更へ入力する](guide/component-interaction#parent-to-child-on-changes)
+* [入力バインディングで親から子へデータを渡す](guide/component-interaction#parent-to-child)
+* [セッターによって入力プロパティの変更を傍受する](guide/component-interaction#parent-to-child-setter)
+* [ngOnChanges()によって入力プロパティの変更を傍受する](guide/component-interaction#parent-to-child-on-changes)
 * [親が `@ViewChild()` を呼び出す](guide/component-interaction#parent-to-view-child)
 * [サービスによる親と子の通信](guide/component-interaction#bidirectional-service)
 
@@ -22,9 +22,9 @@
 
 {@a parent-to-child}
 
-## 親から入力バインディングを持つ子へのデータ渡し
+## 入力バインディングで親から子へデータを渡す
 
-`HeroChildComponent` は、二つの ***入力プロパティ*** を持っています,
+`HeroChildComponent` は、ふたつの ***入力プロパティ*** を持っています,
 一般的に [@Input デコレーション](guide/template-syntax#inputs-outputs) で装飾しています。
 
 
@@ -34,11 +34,11 @@
 
 
 
-二番目の `@Input` は、子コンポーネント名 `masterName` を `'master'` としてエイリアスします。
+二番目の `@Input` は、子コンポーネントのプロパティ名である `masterName` を `'master'` としてエイリアスします。
 
-`HeroParentComponent` は、内部の `*ngFor` リピーターで、子の `HeroChildComponent` を繰り返します、
-それ(親)の `master` プロパティ文字列を子の `master` エイリアスに結び付け(バインディングし)ます、
-そして、それぞれのインスタンスの `hero` は、子の `hero` プロパティにインスタンスします。
+`HeroParentComponent` は子の `HeroChildComponent` を `*ngFor` リピーターの中にネストし、
+その `master` 文字列プロパティを子の `master` エイリアスにバインドし、
+それぞれの繰り返しの `hero` インスタンスを子の `hero` プロパティに渡します。
 
 
 <code-example path="component-interaction/src/app/hero-parent.component.ts" title="component-interaction/src/app/hero-parent.component.ts">
@@ -58,7 +58,7 @@
 
 <h3 class="no-toc">テストしよう</h3>
 
-E2E は、予想通りに、全ての子をインスタンス化と表示化される事をテストします：
+E2E は、予想とおりに、すべての子をインスタンス化と表示されることをテストします：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -71,12 +71,12 @@ E2E は、予想通りに、全ての子をインスタンス化と表示化さ�
 
 {@a parent-to-child-setter}
 
-## インターセプト(傍受)がセッターによるプロパティ変更を入力
+## セッターによって入力プロパティの変更を傍受する
 
-インターセプトの為に入力プロパティのセッターを利用し、親からの値に基いて活動します。
+親からの値を傍受して行動するために、入力プロパティのセッターを使いましょう。
 
-`name` のセッターが、子の `NameChildComponent` の中のプロパティに入力し、子の `NameChildComponent`
-は、名前の前後の空白を取り除き(空白をトリムし)、そしてデフォルトテキストがある空の値に置き換えします。
+子の `NameChildComponent` にある `name` 入力プロパティのセッターは、
+名前から空白を削除し、空の値をデフォルトのテキストに置き換えます。
 
 
 <code-example path="component-interaction/src/app/name-child.component.ts" title="component-interaction/src/app/name-child.component.ts">
@@ -85,7 +85,7 @@ E2E は、予想通りに、全ての子をインスタンス化と表示化さ�
 
 
 
-ここで `NameParentComponent` は、全て空白の名前を含む名前のバリエーションをデモンストレーションします：
+これは `NameParentComponent`があらゆる空白を含む名前のバリエーションのデモンストレーションです：
 
 
 <code-example path="component-interaction/src/app/name-parent.component.ts" title="component-interaction/src/app/name-parent.component.ts">
@@ -115,15 +115,15 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 {@a parent-to-child-on-changes}
 
-## インターセプト(傍受)が `ngOnChanges()` によるプロパティの変更へ入力
+## ngOnChanges()によって入力プロパティの変更を傍受する
 
-ライフサイクル・フック・インターフェースの `OnChanges` の `ngOnChanges()` メソッドによる入力プロパティー値の変化にもとづく検知し活動する。
+`OnChanges` ライフサイクルフックのインターフェースの `ngOnChanges()` メソッドによって、入力プロパティの値の変化を検知して行動しましょう。
 
 <div class="l-sub-section">
 
 
 
-あなたは、このアプローチ、すなわち、多くを監視し、プロパティの入力をインタラクトするプロパティの方法、を好むかもしれません。
+複数の相互作用する入力プロパティを監視するときには、プロパティのセッターへのアプローチを推奨します。
 
 `ngOnChanges()` については [ライフサイクル・フック](guide/lifecycle-hooks) の章で学びましょう。
 
@@ -131,7 +131,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-この `VersionChildComponent` は、`major` と `minor` 入力プロパティの変化を検出し、これらの変化をレポート(報告)するログメッセージを構成します：
+この `VersionChildComponent` は、`major` と `minor` 入力プロパティの変化を検出し、これらの変化を報告するログメッセージを構成します：
 
 
 <code-example path="component-interaction/src/app/version-child.component.ts" title="component-interaction/src/app/version-child.component.ts">
@@ -140,7 +140,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-`VersionParentComponent` は `minor` と `major` の値を供給し(満たし)、ボタンをそれらを変更するメソッドに結び付けます。
+`VersionParentComponent` は `minor` と `major` の値を提供し、ボタンをそれらを変更するメソッドに結び付けます。
 
 
 <code-example path="component-interaction/src/app/version-parent.component.ts" title="component-interaction/src/app/version-parent.component.ts">
@@ -149,7 +149,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-ここに、ボタン押下シーケンスのアウトプット(出力)があります：
+これはボタン押下シーケンスの出力です：
 
 
 <figure>
@@ -160,8 +160,8 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 <h3 class="no-toc">テストしよう</h3>
 
-テストは、***両方*** の入力プロパティは初期値を設定し、ボタンのクリックは
-`ngOnChanges` の呼出と値を期待します：
+***両方*** の入力プロパティが初期値を設定され、
+ボタンのクリックが期待された `ngOnChanges` の呼び出しと値を引き起こすことをテストします。：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-onchanges" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -174,14 +174,14 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 {@a child-to-parent}
 
-## 親は子のイベントを聞いてます
+## 親が子のイベントをリッスンする
 
-子コンポーネントは、何かが起こった時にイベントを `発行する` `EventEmitter` プロパティをむき出しにします。
-親は、そのイベント・プロパティを結び付け(バインドし)、それらのイベントに反応します。
+子コンポーネントは、何かが起こった時にイベントを `発行する` `EventEmitter` プロパティを公開します。
+親は、そのイベントプロパティにバインドし、イベントに反応します。
 
-子の `EventEmitter` プロパティは、一つの ***出力プロパティ*** です、
- 　一般的に、この `VoterComponent` に見られる様な
-  [@Output デコレーション](guide/template-syntax#inputs-outputs) で装飾します：
+子の `EventEmitter` プロパティはひとつの ***出力プロパティ*** であり、
+ 　一般的に、この `VoterComponent` に見られるような
+  [@Output デコレーション](guide/template-syntax#inputs-outputs) で装飾されます：
 
 
 <code-example path="component-interaction/src/app/voter.component.ts" title="component-interaction/src/app/voter.component.ts">
@@ -190,10 +190,10 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-ボタンのクリックは、 ブールの *ペイロード* に `true` か `false` の放出を引き起こします。
+ボタンをクリックすると、 `true` または `false` の真偽値の *ペイロード* が発生します。
 
-親の `VoteTakerComponent` は `onVoted()` と呼ばれるイベント・ハンドラーを結び付け(バインドし)ます。`onVoted()` は、子のイベント
-ペイロード `$event` に反応し、カウンターを更新します。
+親の `VoteTakerComponent` は子のイベントペイロードの `$event` に反応してカウンターを更新する
+`onVoted()` イベントハンドラーをバインドします。
 
 
 <code-example path="component-interaction/src/app/votetaker.component.ts" title="component-interaction/src/app/votetaker.component.ts">
@@ -202,7 +202,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-フレームワークは、 &mdash;`$event`により表された &mdash; イベント引数をハンドラー・メソッドに渡し、
+フレームワークは、 &mdash;`$event`により表された &mdash; イベント引数をハンドラーメソッドに渡し、
 メソッドは処理を行います：
 
 
@@ -214,7 +214,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 <h3 class="no-toc">テストしよう</h3>
 
-*Agree* と *Disagree* ボタンをクリックすることによる適切なカウンターが更新されるテスト：
+*Agree* と *Disagree* ボタンをクリックすることで適切にカウンターが更新されることをテストしましょう：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="child-to-parent" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -229,16 +229,16 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 ## *ローカル変数* による親から子への相互作用
 
-親のコンポーネントは、データ・バインディングを使って子のプロパティ或いは、
-子のメソッドを読む事はできません。どちらも、
-つぎの例で見れる様に、子の要素のための参照値ひな形を
-生成すると出来ます、そして、
-*親のひな形による* 変数を参照します。
+親のコンポーネントは、データ・バインディングを使って子のプロパティあるいは、
+次の例のように、
+子要素のテンプレート参照変数を作成し、
+*親テンプレート内で* その変数を参照することで、
+両方を実行できます。
 
 {@a countdown-timer-example}
 次は、ゼロになるまで繰り返しカウントダウンし、ロケットを発射する子の `CountdownTimerComponent`　です。
-それには、時計を制御しテンプレート内のカウントダウン状況のメッセージを表示する
-`start` と `stop` メソッドを持っています。
+時計を制御しカウントダウンの状況のメッセージをテンプレート内に表示する
+`start` と `stop` メソッドを持ちます。
 
 <code-example path="component-interaction/src/app/countdown-timer.component.ts" title="component-interaction/src/app/countdown-timer.component.ts">
 
@@ -246,7 +246,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-タイマー・コンポーネントを提供する `CountdownLocalVarParentComponent` はこちらです：
+タイマーコンポーネントを提供する `CountdownLocalVarParentComponent` はこちらです：
 
 
 <code-example path="component-interaction/src/app/countdown-parent.component.ts" region="lv" title="component-interaction/src/app/countdown-parent.component.ts">
@@ -255,15 +255,15 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-親のコンポーネントは、子の `start` と `stop` メソッドにも、子の `seconds` プロパティにも
-データ・バインド(データの結び付き)を出来ません。
+親コンポーネントは、子の `start` および `stop` メソッド、
+あるいは `seconds` プロパティのどれにもデータをバインドできません。
 
-子のコンポーネントに相当する　`<countdown-timer>` タグ内に `#timer` ローカル変数を設置する事は出来ます。
-子のコンポーネントへの参照と、*いかなるプロパティまたはメソッド* へアクセスする能力と
-を親のテンプレートを通じて与えます。
+子コンポーネントを表す `<countdown-timer>` タグに、ローカル変数 `#timer` を配置できます。
+これにより、子コンポーネントへの参照が与えられ、親テンプレート内から *あらゆるプロパティやメソッド* に
+アクセスすることができます。
 
-この例は、親のボタンを子の `start` と `stop`　に結び付け、
-子の `seconds` プロパティを表示します。
+この例では、親のボタンを子の `start` と `stop` に結びつけ、
+補間を使用して子の `seconds` プロパティを表示しています。
 
 ここで親と子が一緒に動いているのを確認できます。
 
@@ -280,8 +280,8 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 <h3 class="no-toc">テストしよう</h3>
 
 親のテンプレート内に表示されている秒と子のステータス・メッセージ内に
-表示されている秒が一致している事をテストしましょう。
-カウントダウン・タイマーが *Stop* ボタンのクリックによって一時停止する事をテストしましょう：
+表示されている秒が一致していることをテストしましょう。
+カウントダウンタイマーが *Stop* ボタンのクリックによって一時停止することをテストしましょう：
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="countdown-timer-tests" title="component-interaction/e2e/src/app.e2e-spec.ts">
@@ -294,19 +294,19 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 {@a parent-to-view-child}
 
-## 親の _@ViewChild()_ 呼び出し
+## 親が _@ViewChild()_ を呼び出す
 
-*ローカル変数* は、簡素で簡単です。しかし、制限があります、何故ならば
-親-子の結び付きは完全に親のテンプレート内で無ければなりません。
-親コンポーネントは *それ自身* に子へのアクセスは何一つ無いです。
+*ローカル変数* のアプローチはシンプルで簡単です。
+しかし、親子の結びつきは親のテンプレート内で完結する必要があるため、制限があります。
+親コンポーネント *自身* は子へのアクセス権を持ちません。
 
 仮に親のコンポーネント *クラス* のインスタンスが、子のコンポーネントの変数の読み書きの必要性、または子の
-コンポーネント・メソッド呼び出しの必要性があったとしても、*ローカル変数* テクニックを使う事はできません、
+コンポーネントメソッド呼び出しの必要性があったとしても、*ローカル変数* テクニックを使うことはできません、
 
 親コンポーネント *クラス* が、そのような種類のアクセスを要求する際、
 子のコンポーネントを 親の *ViewChild* として ***注入します*** 。
 
-つぎの例は、同じ[カウントダウン タイマー](guide/component-interaction#countdown-timer-example) の例
+つぎの例は、同じ[カウントダウンタイマー](guide/component-interaction#countdown-timer-example) の例
 と共に説明しています。
 どの外見も、どのふるまいも変わりません。
 子の [CountdownTimerComponent](guide/component-interaction#countdown-timer-example) は一緒です。
@@ -315,14 +315,14 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-*ローカル変数* から *ViewChild*　テクニックへの切替は、
-デモンストレーションのたった一つの目的です。
+*ローカル変数* から *ViewChild* テクニックへの切り替えは、
+デモンストレーションの目的のみのためです。
 
 </div>
 
 
 
-ここに親があります、`CountdownViewChildParentComponent`：
+ここに親の `CountdownViewChildParentComponent` があります：
 
 <code-example path="component-interaction/src/app/countdown-parent.component.ts" region="vc" title="component-interaction/src/app/countdown-parent.component.ts">
 
@@ -330,48 +330,48 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-親のコンポーネント *クラス* の中に表示する子を獲得する働きをちょこっと見てみましょう。
+親コンポーネント *クラス* に子ビューを取得するにはもう少し作業が必要です。
 
-まず始めに、 `ViewChild` デコレーターの参照をインポートする必要があります、そして `AfterViewInit` ライフサイクルをフックします。
+まず、`ViewChild` デコレーターと `AfterViewInit` ライフサイクルフックへの参照をインポートする必要があります。
 
-つぎは、子の `CountdownTimerComponent`　を `@ViewChild`　プロパティ・デコレーションを付けて
-プライベートな `timerComponent` プロパティとしてインジェクション(注入)します。
+次に、`@ViewChild` プロパティデコレーションを使用して、
+子の `CountdownTimerComponent` をプライベートな `timerComponent` プロパティに挿入します。
 
-`#timer` ローカル変数は、コンポーネント・メタデータになります。
-その代わりに、親自身の `start` と `stop` メソッドをボタンに結び付け、そして
-親のコンポーネントの `seconds` メソッドとの補間により現在の秒を刻々と表示します。
+`#timer` ローカル変数はコンポーネントのメタデータから削除されました。
+代わりに、ボタンを親コンポーネント自身の `start` および `stop` メソッドにバインドし、
+親コンポーネントの `seconds` メソッドの補間として秒の刻みを表示しましょう。
 
-これらのメソッドは、直接注入されたタイマー・コンポーネントをアクセスします。
+これらのメソッドは、直接注入されたタイマーコンポーネントをアクセスします。
 
-`ngAfterViewInit()` のライフサイクル・フックは重要なコツ(名案)です。
-タイマーコンポーネントは、Angular が親のビューを表示した *後* まで有効ではありません。
-それは、初めは `0` 秒で表示します。
+この `ngAfterViewInit()` ライフサイクルフックは重要な妙案です。
+タイマーコンポーネントは、Angularが親ビューを表示した *後* まで使用できません。
+したがって、最初は `0` 秒を表示します。
 
-そして Angularは、*遅すぎる* 秒のカウントダウンを表示する親のビューの更新の時に
-`ngAfterViewInit` ライフサイクル・フックを呼び出します。
-Angularの一定方向のみのデータの流れのルールは、同じサイクルの中の親のビューの更新を妨げます。アプリケーションは、
-秒を表示する前に、*1回の待ち* を持っています。
+その後Angularは、親ビューのカウントダウン秒の表示を更新するには *遅すぎる* 時に
+`ngAfterViewInit` ライフサイクルフックを呼び出します。
+ Angularの単方向データフロールールは、同じサイクル内の親ビューの更新を防ぎます。
+アプリは秒を表示するようになる前に　*1ターン待つ*　必要があります。
 
-一つのカチカチを待つために `setTimeout()` を使い、 `seconds()`メソッドがタイマー・コンポーネント
-からの未来の値を取るように改定する。
+`setTimeout()` を使用して1回の刻みを待ってから、
+タイマーコンポーネントから将来の値を取得するように `seconds()` メソッドを変更します。
 
 <h3 class="no-toc">テストしよう</h3>
 
-以前の [同じカウントダウン・タイマーのテスト](guide/component-interaction#countdown-tests) を使おう。
+以前と[同じカウントダウンタイマーのテスト](guide/component-interaction#countdown-tests)を使用してください。
 
 [最初に戻る](guide/component-interaction#top)
 
 {@a bidirectional-service}
 
-## サービスを介した親と子のコミュニケーション
+## 親と子がサービスを介して通信する
 
-親のコンポーネントとその子は、 *家族の範囲内で* 双方向のコミュニケーションが可能なインターフェースするサービス
-を共有します。
+親コンポーネントとその子コンポーネントは、そのインタフェースが *家族内での* 双方向通信を可能にするサービスを
+共有します。
 
-サービス・インスタンスの範囲(スコープ)は、親コンポーネントとそれの子です。
-コンポーネントの外、コンポーネントのサブツリーは、サービスへのアクセスや彼らとのコミュニケーションが有りません。
+サービスインスタンスのスコープは、親コンポーネントとその子です。
+このコンポーネントのサブツリー外のコンポーネントは、サービスまたはその通信にアクセスできません。
 
-この `MissionService` は、複数の `AstronautComponent` の子と `MissionControlComponent` に繋がります。
+この `MissionService` は、 `MissionControlComponent` を複数の子の `AstronautComponent` に接続します。
 
 
 <code-example path="component-interaction/src/app/mission.service.ts" title="component-interaction/src/app/mission.service.ts">
@@ -380,8 +380,8 @@ Angularの一定方向のみのデータの流れのルールは、同じサイ�
 
 
 
-`MissionControlComponent` は、子(`providers` メタデータの配列を通して)と共有しているサービスのインスタンスと
-コンストラクターを通したそれ自身のインスタンスの注入(インジェクト)の両方を提供します。
+`MissionControlComponent` は、子と共有するサービスのインスタンスを(`providers` のメタデータ配列を介して)提供し、
+そのインスタンスをそのコンストラクタを通じて自身に注入します。
 
 
 <code-example path="component-interaction/src/app/missioncontrol.component.ts" title="component-interaction/src/app/missioncontrol.component.ts">
@@ -390,8 +390,8 @@ Angularの一定方向のみのデータの流れのルールは、同じサイ�
 
 
 
-`AstronautComponent` は、コンストラクター内でサービスとしてインジェクト(注入)もします。
-どの `AstronautComponent` は `MissionControlComponent` の子どもです、それゆえに親のサービス・インスタンスを受信します。：
+また、`AstronautComponent` はコンストラクタにサービスを挿入します。
+それぞれの `AstronautComponent` は `MissionControlComponent` の子であるため、親のサービスインスタンスを受け取ります：
 
 
 <code-example path="component-interaction/src/app/astronaut.component.ts" title="component-interaction/src/app/astronaut.component.ts">
@@ -404,21 +404,21 @@ Angularの一定方向のみのデータの流れのルールは、同じサイ�
 
 
 
-注意、この例は、`subscription` と `AstronautComponent` が破棄されたときの `unsubscribe()` とを表現します。
-これは、メモリーリークの防護ステップです。ここには、このアプリの現実のリスクは有りません、なぜならば ライフタイム
- `AstronautComponent` のライフタイムは、アプリそれ自身のライフタイムと同じだからです。
-より複雑なアプリケーションでは、常に真であると **いうことでは無いです** 。
+この例は `subscription` を捕捉し、 `AstronautComponent` が破棄されたときに `unsubscribe()` していることに注意してください。
+これはメモリリークガードのステップです。 `AstronautComponent` のライフタイムは、
+アプリ自体のライフタイムと同じなので、このアプリには実際のリスクはありません。
+それは、より複雑なアプリケーションでは常に **真ではありません** 。
 
-`MissionControlComponent` には、このガードを加えられない、何故ならば、親として、
-`MissionService` のライフタイムを制御するから。
+このガードを`MissionControlComponent`に追加しないのは、
+親として`MissionService`のライフタイムを制御するためです。
 
 </div>
 
 
 
-*ヒストリー* ログは、メッセージが、
-親の `MissionControlComponent` と子の `AstronautComponent` の間で両方
-方向に伝わることを示し、サービスによって容易になります：
+*History* ログは、
+親の`MissionControlComponent`と`AstronautComponent`の子の間で、
+サービスによって容易になったメッセージの双方向の移動を示します：
 
 
 <figure>
@@ -429,8 +429,8 @@ Angularの一定方向のみのデータの流れのルールは、同じサイ�
 
 <h3 class="no-toc">テストしよう</h3>
 
-親の `MissionControlComponent` と子の `AstronautComponent` 両方のボタんをクリックして試験して、
-ヒストリーが期待に直面するのを検証しよう。
+親の `MissionControlComponent` と `AstronautComponent` の子の両方のボタンをクリックして、
+履歴が期待とおりのものであることを確認します。
 
 
 <code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="bidirectional-service" title="component-interaction/e2e/src/app.e2e-spec.ts">

@@ -92,7 +92,7 @@ This scoping restriction is a ***styling modularity feature***.
 Component styles have a few special *selectors* from the world of shadow DOM style scoping
 (described in the [CSS Scoping Module Level 1](https://www.w3.org/TR/css-scoping-1) page on the
 [W3C](https://www.w3.org) site).
-コンポーネントスタイルは、いくつかの DOMスタイルのスコーピングの影の世界からの特別な *セレクター* があります
+コンポーネントスタイルは、いくつかの Shadow DOMスタイルのスコーピングの影の世界からの特別な *セレクター* があります
 ([W3C](https://www.w3.org) サイトの
 [CSS スコーピング モデル レベル 1](https://www.w3.org/TR/css-scoping-1) ページに記述されている)。
 The following sections describe these selectors.
@@ -404,13 +404,21 @@ Choose from the following modes:
 * `Emulated` view encapsulation (the default) emulates the behavior of shadow DOM by preprocessing
   (and renaming) the CSS code to effectively scope the CSS to the component's view.
   For details, see [Appendix 1](guide/component-styles#inspect-generated-css).
+* `Emulated` ビューのカプセル化(デフォルト) は、コンポーネントのビューの CSS の CSS コードの有効なスコープの前処理(そして)
+  によって、Shadow DOM の振る舞いをエミュレートします。
+  詳細は、[付録 1](guide/component-styles#inspect-generated-css) を参照してください。
 
 * `None` means that Angular does no view encapsulation.
   Angular adds the CSS to the global styles.
   The scoping rules, isolations, and protections discussed earlier don't apply.
   This is essentially the same as pasting the component's styles into the HTML.
+* `None` は、Angular にビューのカプセル化が無い事を意味します。
+  Angular は、グローバルスタイルとして CSS を追加します。
+  前に論じたスコープルール、分離、そして保護は、適用されません。
+  これは、コンポーネントのスタイルを HTML 内に貼り付ける事と本質的に同じ事です。
 
 To set the components encapsulation mode, use the `encapsulation` property in the component metadata:
+コンポーネントのカプセル化モードを設定するために、コンポーネントメタデータの `encapsulation` プロパティを利用します：
 
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" title="src/app/quest-summary.component.ts" linenums="false">
 </code-example>
@@ -420,17 +428,26 @@ for shadow DOM (see [Shadow DOM v0](http://caniuse.com/#feat=shadowdom) on the
 [Can I use](http://caniuse.com) site). The support is still limited,
 which is why `Emulated` view encapsulation is the default mode and recommended
 in most cases.
+`Native` ビューのカプセル化は、Shadow DOM をネイティブサポートしているブラウザー上のみで
+動きます( [使えますか](http://caniuse.com) サイトの[Shadow DOM v0](http://caniuse.com/#feat=shadowdom) を参照してください)。
 
 {@a inspect-generated-css}
 
 ## Inspecting generated CSS
+## 検閲により生成された CSS
 
 When using emulated view encapsulation, Angular preprocesses
 all component styles so that they approximate the standard shadow CSS scoping rules.
+エミュレートされたビューのカプセル化を使う場合、Angular は、
+標準 Shadow CSS のスコープルールを見積もるために、全てのコンポーネントスタイルを前処理します。
 
 In the DOM of a running Angular application with emulated view
 encapsulation enabled, each DOM element has some extra attributes
 attached to it:
+エミュレートされたビューを伴った Angular アプリケーションが
+稼働している DOM の中でカプセル化は可能になり、それぞれの DOM エレメントは、添付された
+いくつかの特別なアトリビュートを持っています：
+
 
 <code-example format="">
   &lt;hero-details _nghost-pmm-5>
@@ -443,15 +460,23 @@ attached to it:
 </code-example>
 
 There are two kinds of generated attributes:
+ここには、二種類の生成されたアトリビュートがあります：
 
 * An element that would be a shadow DOM host in native encapsulation has a
   generated `_nghost` attribute. This is typically the case for component host elements.
+* 先天的なカプセル化内の Shadow DOM ホストの一つのエレメントは、
+`_nghost` アトリビュートを生成します。これは、典型的なホストエレメントのコンポーネントの事例です。
 * An element within a component's view has a `_ngcontent` attribute
 that identifies to which host's emulated shadow DOM this element belongs.
+* コンポーネントのビューの中のエレメントは、`_ngcontent` アトリビュートを持っています、これは、
+このエレメントが属している Shadow DOM がどのホストをエミューレートしているのかを特定します。
 
 The exact values of these attributes aren't important. They are automatically
 generated and you never refer to them in application code. But they are targeted
 by the generated component styles, which are in the `<head>` section of the DOM:
+これらのアトリビュートの正確な値は、重要ではありません。自動的に生成され、
+アプリケーションコード内で決して参照しません。しかし、生成されたコンポーネントスタイルにより
+対象とされ、DOM の `<head>` セクション内に有ります。
 
 <code-example format="">
   [_nghost-pmm-5] {
@@ -467,4 +492,7 @@ by the generated component styles, which are in the `<head>` section of the DOM:
 
 These styles are post-processed so that each selector is augmented
 with `_nghost` or `_ngcontent` attribute selectors.
+これらのスタイルは、それぞれのセレクターは `_nghost` あるいは `_ngcontent`
+アトリビュートセレクターと共に増強するために、前処理されます。
 These extra selectors enable the scoping rules described in this page.
+これらの追加のセレクターは、このページで記述されたスコープルールを可能にします。

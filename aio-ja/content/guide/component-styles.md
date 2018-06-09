@@ -340,9 +340,12 @@ See the [CLI documentation](https://github.com/angular/angular-cli/wiki/stories-
 もっと学びたい場合は、 [CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-global-styles) を参照してください。
 
 ### Non-CSS style files
+### CSSスタイルでは無いファイル
 
 If you're building with the CLI,
+CLI を使って生成しているならば、
 you can write style files in [sass](http://sass-lang.com/), [less](http://lesscss.org/), or [stylus](http://stylus-lang.com/) and specify those files in the `@Component.styleUrls` metadata with the appropriate extensions (`.scss`, `.less`, `.styl`) as in the following example:
+スタイルファイルを、つぎの例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、  あるいは、[stylus](http://stylus-lang.com/) で書け、 `@Component.styleUrls` メタデータで適切な拡張子 (`.scss`, `.less`, `.styl`) を定義します：
 
 <code-example>
 @Component({
@@ -354,33 +357,48 @@ you can write style files in [sass](http://sass-lang.com/), [less](http://lesscs
 </code-example>
 
 The CLI build process runs the pertinent CSS preprocessor.
+CLI 構築プロセスは、適切な CSS プリプロセッサを実行します。
 
 When generating a component file with `ng generate component`, the CLI emits an empty CSS styles file (`.css`) by default.
+`ng generate component` を使ってコンポーネントを生成すれば、CLI は、デフォルトで空の CSS　スタイルファイル(`.css`)を作ります。
 You can configure the CLI to default to your preferred CSS preprocessor
+[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
+"CSS プリプロセッサ統合") 
+に記述してあるように、あなたのお気に入りの CSS プリプロセッサに環境設定できます。
 as explained in the [CLI documentation](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
 "CSS Preprocessor integration").
 
 <div class="alert is-important">
 
 Style strings added to the `@Component.styles` array _must be written in CSS_ because the CLI cannot apply a preprocessor to inline styles.
+`@Component.styles` 配列に追加されたスタイル文字列は、_CSS に記述されなければならない_ 、何故ならば、CLI は、インラインスタイルのプリプロセッサに適用できないから。
 
 </div>
 
 {@a view-encapsulation}
 
 ## View encapsulation
+#＃ ビューのカプセル化
 
 As discussed earlier, component CSS styles are encapsulated into the component's view and don't
 affect the rest of the application.
+コンポーネント CSS スタイルは、コンポーネントのビューの中に含まれ、アプリケーションの残りに影響しない、と前に論じました。
 
 To control how this encapsulation happens on a *per
 component* basis, you can set the *view encapsulation mode* in the component metadata.
+*プリコンポーネント* 基礎の上で、どの様にカプセル化が起きるのかを制御し、コンポーネント メタデータで、*ビューカプセル化モード* を設定できます。
 Choose from the following modes:
+つぎのモードから選択してください：
 
 * `Native` view encapsulation uses the browser's native shadow DOM implementation (see
   [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)
   on the [MDN](https://developer.mozilla.org) site)
+* `Native` ビューカプセル化は、コンポーネントのホストエレメントのシャドウDOMを接続するために
+ブラウザーのネイティブ・シャドウDOM実装
+  ([MDN](https://developer.mozilla.org) サイト上の [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)
+  参照) を利用し、そして、シャドウDOMの中のコンポーネントビューに入れます。
   to attach a shadow DOM to the component's host element, and then puts the component
+  
   view inside that shadow DOM. The component's styles are included within the shadow DOM.
 
 * `Emulated` view encapsulation (the default) emulates the behavior of shadow DOM by preprocessing

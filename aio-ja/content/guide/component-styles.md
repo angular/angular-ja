@@ -281,7 +281,7 @@ CLI 構築プロセスは、適切な CSS プリプロセッサを実行しま�
 つぎのモードから選択してください：
 
 * `Native` ビューカプセル化は、コンポーネントのホスト要素の Shadow DOM を接続するために
-ブラウザーのネイティブ Shadow DOM 実装([MDN](https://developer.mozilla.org) サイト上の
+ブラウザのネイティブ Shadow DOM 実装([MDN](https://developer.mozilla.org) サイト上の
   [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)
   参照) を利用し、そして、 Shadow DOM の中のコンポーネントビューに入れます。
   コンポーネントのスタイルは、Shadow DOM と共に含まれています。
@@ -300,7 +300,7 @@ CLI 構築プロセスは、適切な CSS プリプロセッサを実行しま�
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" title="src/app/quest-summary.component.ts" linenums="false">
 </code-example>
 
-`Native` ビューのカプセル化は、Shadow DOM をネイティブサポートしているブラウザー上のみで動きます
+`Native` ビューのカプセル化は、Shadow DOM をネイティブサポートしているブラウザ上のみで動きます
 ( [Can I use](http://caniuse.com) サイトの
 [Shadow DOM v0](http://caniuse.com/#feat=shadowdom) を参照してください)。多くのケースで、
 なぜ `Emulated` ビューのカプセル化が、デフォルトモードとお勧めということ、に関する

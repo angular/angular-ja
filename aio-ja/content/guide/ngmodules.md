@@ -1,75 +1,75 @@
-# NgModules
+# NgModule
 
-#### Prerequisites
+#### 前提条件
 
-A basic understanding of the following concepts:
-* [Bootstrapping](guide/bootstrapping).
-* [JavaScript Modules vs. NgModules](guide/ngmodule-vs-jsmodule).
+次の基本的な理解
+* [ブートストラップ](guide/bootstrapping)
+* [JavaScript モジュールと NgModule](guide/ngmodule-vs-jsmodule)
 
 <hr>
 
-**NgModules** configure the injector and the compiler and help organize related things together.
+**NgModule**はインジェクターとコンパイラを設定し関連するものをまとめます。
 
-An NgModule is a class marked by the `@NgModule` decorator.
-`@NgModule` takes a metadata object that describes how to compile a component's template and how to create an injector at runtime.
-It identifies the module's own components, directives, and pipes,
-making some of them public, through the `exports` property, so that external components can use them.
-`@NgModule` can also add service providers to the application dependency injectors.
+NgModule とは`@NgModule`デコレーターが付与されたクラスのことです。
+`@NgModule`デコレーターはコンポーネントのテンプレートをコンパイルする方法、実行時にインジェクターを作成する方法が記述されたメタデータオブジェクトを引数に取ります。
+モジュール自身がもつコンポーネント、ディレクティブやパイプを識別し、
+この中のいくつかを`exports`プロパティを通して公開し、外部コンポーネントから使用できるようにすることができます。
+`@NgModule`はアプリケーションの依存性の注入のためのサービスプロバイダーを加えることもできます。
 
-For an example app showcasing all the techniques that NgModules related pages
-cover, see the <live-example></live-example>. For explanations on the individual techniques, visit the relevant NgModule pages under the NgModules
-section.
+NgModule に関連するページをカバーしているすべてのテクニックを見ることができるサンプルアプリケーションについては<live-example></live-example>を参照してください。
+個別のテクニックについての解説は、
+NgModule セクションの関連ページを参照してください。
 
 
-## Angular modularity
+## Angular のモジュール性
 
-Modules are a great way to organize an application and extend it with capabilities from external libraries.
+モジュールはアプリケーションを整理し、外部ライブラリの機能を使って拡張するための素晴らしい方法です。
 
-Angular libraries are NgModules, such as `FormsModule`, `HttpClientModule`, and `RouterModule`.
-Many third-party libraries are available as NgModules such as
-<a href="https://material.angular.io/">Material Design</a>,
-<a href="http://ionicframework.com/">Ionic</a>, and
-<a href="https://github.com/angular/angularfire2">AngularFire2</a>.
+`FormsModule`、`HttpClientModule`や`RouterModule`などの Angular ライブラリは NgModule です。
+<a href="https://material.angular.io/">Material Design</a>、
+<a href="http://ionicframework.com/">Ionic</a>や
+<a href="https://github.com/angular/angularfire2">AngularFire2</a>
+のような多くのサードパーティライブラリも NgModule として利用することができます。
 
-NgModules consolidate components, directives, and pipes into
-cohesive blocks of functionality, each focused on a
-feature area, application business domain, workflow, or common collection of utilities.
+NgModule はコンポーネント、ディレクティブやパイプを機能の密なブロックとしてまとめます。
+それぞれのモジュールはアプリケーションのビジネスドメイン、
+ワークフローや共通のユーティリティのコレクションなどの機能の領域に焦点が当てられています。
 
-Modules can also add services to the application.
-Such services might be internally developed, like something you'd develop yourself or come from outside sources, such as the Angular router and HTTP client.
+モジュールはアプリケーションにサービスを追加することもできます。
+そのようなサービス(あなた自身が開発したものや Angular router や HTTP クライアントのような外部ソース)は内部的に使われることになるでしょう。
 
-Modules can be loaded eagerly when the application starts or lazy loaded asynchronously by the router.
+モジュールはアプリケーションが開始したときに積極的にロードされるか、ルーターから非同期に遅延ロードすることができます。
 
-NgModule metadata does the following:
+NgModule のメタデータでは次のようなことを行います:
 
-* Declares which components, directives, and pipes belong to the module.
-* Makes some of those components, directives, and pipes public so that other module's component templates can use them.
-* Imports other modules with the components, directives, and pipes that components in the current module need.
-* Provides services that the other application components can use.
+* モジュールに属するコンポーネント、ディレクティブやパイプを宣言します
+* それらのコンポーネント、ディレクティブやパイプが他のコンポーネントのテンプレートから呼び出せるように公開します
+* 現在のモジュールが必要なコンポーネント、ディレクティブ、パイプをもつ他のモジュールをインポートします
+* 他のアプリケーションのコンポーネントから使えるようにサービスを提供します
 
-Every Angular app has at least one module, the root module.
-You [bootstrap](guide/bootstrapping) that module to launch the application.
+すべての Angular アプリケーションは少なくとも 1 つのモジュール(ルートモジュール)を持ちます。
+あなたはアプリケーションを起動するときにそのモジュールを [ブートストラップ](guide/bootstrapping) します。
 
-The root module is all you need in a simple application with a few components.
-As the app grows, you refactor the root module into [feature modules](guide/feature-modules)
-that represent collections of related functionality.
-You then import these modules into the root module.
+ルートモジュールは、必要なだけのいくつかのコンポーネントを備えたシンプルなアプリケーションです。
+アプリケーションが育ってきたらルートモジュールから関連した機能をまとめた [フィーチャーモジュール](guide/feature-modules)
+にリファクタリングします。
+そうしたらそのモジュールをルートモジュールにインポートします。
 
-## The basic NgModule
+## 基本の NgModule
 
-The CLI generates the following basic app module when creating a new app.
+CLI で新しいアプリケーションを作成したとき、次のようなモジュールが生成されます。
 
 <code-example path="bootstrapping/src/app/app.module.ts" region="whole-ngmodule" title="src/app/app.module.ts" linenums="false">
 </code-example>
 
-At the top are the import statements. The next section is where you configure the `@NgModule` by stating what components and directives belong to it (`declarations`) as well as which other modules it uses (`imports`). This page builds on [Bootstrapping](guide/bootstrapping), which covers the structure of an NgModule in detail. If you need more information on the structure of an `@NgModule`, be sure to read [Bootstrapping](guide/bootstrapping).
+まずはインポート文から始まります。次にどのようなコンポーネントとディレクティブが属するか(`declarations`)、使用する他のモジュール(`imports`)を記述することで`@NgModule`の設定を行います。このページは NgModule の構造の詳細についてカバーしている[ブートストラップ](guide/bootstrapping)でビルドします。もし、`@NgModule` の構造のより詳細な情報について知りたい場合は [ブートストラップ](guide/bootstrapping) を参照してください。
 
 <hr />
 
-## More on NgModules
+## NgModule についてのさらに詳しい情報
 
-You may also be interested in the following:
-* [Feature Modules](guide/feature-modules).
-* [Entry Components](guide/entry-components).
-* [Providers](guide/providers).
-* [Types of NgModules](guide/module-types).
+あなたは次の記事に興味があるかもしれません:
+* [フィーチャーモジュール](guide/feature-modules)
+* [エントリーコンポーネント](guide/entry-components)
+* [プロバイダー](guide/providers)
+* [NgModule の種類](guide/module-types)

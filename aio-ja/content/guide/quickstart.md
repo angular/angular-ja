@@ -25,14 +25,14 @@ Angular CLIを使うことで、[スタイルガイド](guide/styleguide) に準
 <div class="l-sub-section">
 
 
-**node `6.9.X` 以上とnpm `3.x.x` 以上がインストールされていることを確認してください。**  
+**node `8.x` 以上とnpm `5.x` 以上がインストールされていることを確認してください。**  
 ターミナルまたはコンソールで `node -v` と `npm -v` コマンドを使うことで確認できます。  
 古いバージョンをお使いの場合はエラーの原因となりますが、新しいぶんには問題ありません。
 
 </div>
 
 
-グローバル環境に **[Angular CLI](https://github.com/angular/angular-cli) をインストール**してください。
+グローバル環境に [Angular CLI](https://github.com/angular/angular-cli) をインストールしてください。
 
 <code-example language="sh" class="code-shell">
   npm install -g @angular/cli
@@ -48,7 +48,8 @@ Angular CLIを使うことで、[スタイルガイド](guide/styleguide) に準
 
 ターミナルを開いてください。
 
-次のコマンドを実行して、新規プロジェクトと空のアプリケーションを生成してください。
+
+次のコマンドを実行して、新規プロジェクトとデフォルトのアプリケーションを生成してください。
 
 <code-example language="sh" class="code-shell">
   ng new my-app
@@ -56,12 +57,19 @@ Angular CLIを使うことで、[スタイルガイド](guide/styleguide) に準
 </code-example>
 
 
+Angular CLIは、必要なnpmパッケージをインストールし、プロジェクトファイルを作成し、プロジェクトにシンプルなデフォルトアプリケーションを取り込みます。これには時間がかかることがあります。
+
+
 
 <div class="l-sub-section">
 
 
-しばらく待ちましょう。  
-新規プロジェクト生成には時間がかかります（待ち時間の大半はnpmでパッケージをインストールする時間です）。
+
+`ng add`コマンドを使用すると、パッケージ化された機能を新しいプロジェクトに追加できます。 
+`ng add`コマンドは、指定されたパッケージにschematicsを適用してプロジェクトを変換します。詳細については、[Angular CLIのドキュメンテーション](https://github.com/angular/angular-cli/wiki/add "Angular CLI documentation")を参照してください。
+
+Angular Materialは、典型的なアプリケーションレイアウトのschematicsを提供します。
+詳細については、[Angular Materialのドキュメンテーション](https://material.angular.io/guides "Angular Material documentation")を参照してください。
 
 
 </div>
@@ -171,14 +179,17 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
       <div class="file">environment.prod.ts</div>
       <div class="file">environment.ts</div>
     </div>
+    <div class="file">browserslist</div>
     <div class="file">favicon.ico</div>
     <div class="file">index.html</div>
+    <div class="file">karma.conf.js</div>
     <div class="file">main.ts</div>
     <div class="file">polyfills.ts</div>
     <div class="file">styles.css</div>
     <div class="file">test.ts</div>
     <div class="file">tsconfig.app.json</div>
     <div class="file">tsconfig.spec.json</div>
+    <div class="file">tslint.json</div>
   </div>
 </div>
 
@@ -258,6 +269,18 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
   <tr>
     <td>
 
+      `browserslist`
+
+    </td>
+    <td>
+
+      異なるフロントエンドツール間で[ターゲットブラウザ](https://github.com/browserslist/browserslist)を共有するための設定ファイル。
+
+    </td>
+  </tr>  
+  <tr>
+    <td>
+
       `favicon.ico`
 
     </td>
@@ -279,6 +302,19 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
       ほとんどあなたが編集することがありません。
       CLIがビルド時に　`js` や `css` ファイルを追加してくれるので
       `<script>` や `<link>` タグをあなたが手作業で書く必要はありません。      
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      `karma.conf.js`
+
+    </td>
+    <td>
+
+      `ng test`で実行できるユニットテスト [Karma test runner](https://karma-runner.github.io) 
+      を使うための設定ファイルです。
 
     </td>
   </tr>
@@ -351,6 +387,20 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
 
     </td>
   </tr>
+  <tr>
+    <td>
+
+      `tslint.json`
+
+    </td>
+    <td>
+
+      `ng lint`で[TSLint](https://palantir.github.io/tslint/) と [Codelyzer](http://codelyzer.com/)
+      を利用したソースコードのチェック(Lint)を行うための設定ファイルです。
+      Lintはコードスタイルに一貫性を持たせるのに役立ちます。
+
+    </td>
+  </tr>
 </table>
 
 
@@ -365,18 +415,23 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
   <div class='children'>
     <div class="file">e2e</div>
     <div class='children'>
-      <div class="file">app.e2e-spec.ts</div>
-      <div class="file">app.po.ts</div>
+      <div class="file">src</div>
+      <div class='children'>
+        <div class="file">app.e2e-spec.ts</div>
+        <div class="file">app.po.ts</div>
+      </div>      
       <div class="file">tsconfig.e2e.json</div>
+      <div class="file">protractor.conf.js</div>
     </div>
     <div class="file">node_modules/...</div>
     <div class="file">src/...</div>
-    <div class="file">.angular-cli.json</div>
+    <div class='children'>
+      <div class="file">karma.conf.js</div>
+    </div>    
     <div class="file">.editorconfig</div>
     <div class="file">.gitignore</div>
-    <div class="file">karma.conf.js</div>
+    <div class="file">angular.json</div>
     <div class="file">package.json</div>
-    <div class="file">protractor.conf.js</div>
     <div class="file">README.md</div>
     <div class="file">tsconfig.json</div>
     <div class="file">tslint.json</div>
@@ -433,21 +488,6 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
   <tr>
     <td>
 
-      `.angular-cli.json`
-
-    </td>
-    <td>
-
-      Angular CLIのための設定ファイルです。
-      このファイルを使っていくつかのデフォルト設定を変更したり、
-      ビルド時に含めるファイルを変更することもできます。
-      もっと知りたい場合は公式ドキュメントを参照してください。
-
-    </td>
-  </tr>
-  <tr>
-    <td>
-
       `.editorconfig`
 
     </td>
@@ -468,20 +508,22 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
     </td>
     <td>
 
-      ソース管理に自動生成されるファイルを含めないようにするための設定ファイルです。
+      ソース管理に自動生成されるファイルを含めないようにするためのGit設定ファイルです。
 
     </td>
   </tr>
-  <tr>
+    <tr>
     <td>
 
-      `karma.conf.js`
+      `angular.json`
 
     </td>
     <td>
 
-      `ng test` で実行できるユニットテスト [Karma test runner](https://karma-runner.github.io) 
-      を使うための設定ファイルです。
+      Angular CLIのための設定ファイルです。
+      このファイルを使っていくつかのデフォルト設定を変更したり、
+      ビルド時に含めるファイルを変更することもできます。
+      もっと知りたい場合は公式ドキュメントを参照してください。
 
     </td>
   </tr>
@@ -544,7 +586,7 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
     </td>
     <td>
 
-      `ng lint` で[TSLint](https://palantir.github.io/tslint/) と [Codelyzer](http://codelyzer.com/)
+      `ng lint`で[TSLint](https://palantir.github.io/tslint/) と [Codelyzer](http://codelyzer.com/)
       を利用したソースコードのチェック(Lint)を行うための設定ファイルです。
       Lintはコードスタイルに一貫性を持たせるのに役立ちます。
 

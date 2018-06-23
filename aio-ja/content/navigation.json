@@ -187,18 +187,26 @@
             },
             {
               "url": "guide/lifecycle-hooks",
-              "title": "Lifecycle Hooks",
-              "tooltip": "Angular calls lifecycle hook methods on directives and components as it creates, changes, and destroys them."
+              "title": "ライフサイクル・フック",
+              "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
+              "translated": true
             },
             {
               "url": "guide/component-interaction",
-              "title": "Component Interaction",
-              "tooltip": "Share information between different directives and components."
+              "title": "コンポーネントの相互作用",
+              "tooltip": "異なるディレクティブとコンポーネント間で情報を共有しましょう。",
+              "translated": true
             },
             {
               "url": "guide/component-styles",
               "title": "Component Styles",
               "tooltip": "Add CSS styles that are specific to a component."
+            },
+            {
+              "url": "guide/elements",
+              "title": "Angular Elements",
+              "tooltip": "コンポーネントをCustom Elementsに変換しましょう。",
+              "translated": true
             },
             {
               "url": "guide/dynamic-component-loader",
@@ -255,8 +263,9 @@
             },
             {
               "url": "guide/reactive-forms",
-              "title": "Reactive Forms",
-              "tooltip": "Create a reactive form using FormBuilder, groups, and arrays."
+              "title": "リアクティブフォーム",
+              "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
+              "translated": true
             },
             {
               "url": "guide/dynamic-form",
@@ -309,33 +318,39 @@
           "children": [
             {
               "url": "guide/ngmodules",
-              "title": "NgModules Introduction",
-              "tooltip": "Use NgModules to make your apps efficient."
+              "title": "NgModuleイントロダクション",
+              "tooltip": "アプリケーションを効率的にするためにNgModuleを使用しましょう。",
+              "translated": true  
             },
             {
               "url": "guide/ngmodule-vs-jsmodule",
-              "title": "JS Modules vs NgModules",
-              "tooltip": "Differentiate between JavaScript modules and NgModules."
+              "title": "JavaScriptモジュールとNgModule",
+              "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
+              "translated": true
             },
             {
               "url": "guide/frequent-ngmodules",
-              "title": "Frequently Used NgModules",
-              "tooltip": "Introduction to the most frequently used NgModules."
+              "title": "よく使用されるモジュール",
+              "tooltip": "よく使用されるモジュールの紹介",
+              "translated": true
             },
             {
               "url": "guide/module-types",
-              "title": "Types of Feature Modules",
-              "tooltip": "Description of the different types of feature modules."
+              "title": "フィーチャーモジュールの種類",
+              "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
+              "translated": true
             },
             {
               "url": "guide/entry-components",
-              "title": "Entry Components",
-              "tooltip": "All about entry components in Angular."
+              "title": "エントリーコンポーネント",
+              "tooltip": "Angularのエントリコンポーネントに関するすべて。",
+              "translated": true
             },
             {
               "url": "guide/feature-modules",
-              "title": "Feature Modules",
-              "tooltip": "Create feature modules to organize your code."
+              "title": "フィーチャーモジュール",
+              "tooltip": "コードを整理するためのフィーチャーモジュールを作成します。",
+              "translated": true
             },
             {
               "url": "guide/providers",
@@ -395,7 +410,7 @@
           "url": "guide/http",
           "title": "HttpClient",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
-          "translated": false
+          "translated": true
         },
         {
           "url": "guide/router",
@@ -518,17 +533,36 @@
         },
 
         {
-          "title": "Upgrading",
+          "title": "最新に保つ",
+          "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
+          "children": [
+            {
+              "url": "guide/updating",
+              "title": "プロジェクトの更新",
+              "tooltip": "Angularアプリケーションとライブラリの最新バージョンへの更新に関する情報",
+              "translated": true
+            },
+            {
+              "url": "guide/releases",
+              "title": "Angularのリリース",
+              "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
+              "translated": true
+            }
+          ]
+        },
+
+        {
+          "title": "Upgrading from AngularJS",
           "tooltip": "Incrementally upgrade an AngularJS application to Angular.",
           "children": [
             {
               "url": "guide/upgrade",
-              "title": "Upgrading from AngularJS",
+              "title": "Upgrading Instructions",
               "tooltip": "Incrementally upgrade an AngularJS application to Angular."
             },
             {
               "url": "guide/ajs-quick-reference",
-              "title": "Upgrade Cheatsheet",
+              "title": "AngularJS-Angular Concepts",
               "tooltip": "Learn how AngularJS concepts and techniques map to Angular."
             }
           ]
@@ -662,15 +696,19 @@
         {
           "title": "中文版",
           "url": "https://angular.cn/"
+        },
+        {
+          "title": "日本語版",
+          "url": "https://angular.jp/"
         }
       ]
     }
   ],
 
   "docVersions": [
-    { "title": "v4 (LTS)", "url": "https://v4.angular.io" },
+    { "title": "v5", "url": "https://v5.angular.io" },
+    { "title": "v4", "url": "https://v4.angular.io" },
     { "title": "v2", "url": "https://v2.angular.io" },
     { "title": "AngularDart", "url": "https://webdev.dartlang.org/angular" }
-
   ]
 }

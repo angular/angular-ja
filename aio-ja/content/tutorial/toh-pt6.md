@@ -47,7 +47,7 @@ _npm_から*インメモリWeb API*をインストールします。
   npm install angular-in-memory-web-api --save
 </code-example>
 
-`InMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。
+`HttpClientInMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。
 
 <code-example 
   path="toh-pt6/src/app/app.module.ts" 
@@ -55,7 +55,7 @@ _npm_から*インメモリWeb API*をインストールします。
   title="src/app/app.module.ts (インメモリ Web API をインポート)">
 </code-example>
 
-`InMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
+`HttpClientInMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
 &mdash;_`HttpClient`をインポートしたあとに_&mdash;
 さらにそれを`InMemoryDataService`で設定します。
 
@@ -139,9 +139,9 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
 HTTPはリクエスト/レスポンスプロトコルです。
 リクエストを送信すると、ひとつのレスポンスを返却します。
 
-一般には、`Observable`は時間によって複数の値を返すことができます。
+一般には、Observableは時間によって複数の値を返すことが _可能_ です。
 
-`HttpClient`が返す`Observable`は常にひとつの値を発行してから完了するので、再び値を発行することはありません。
+`HttpClient`が返すObservableは常にひとつの値を発行してから完了するので、再び値を発行することはありません。
 
 特に今回の`HttpClient.get`の呼び出しは`Observable<Hero[]>`、逐語的には「_ヒーローの配列のobservable_」です。
 実際やってみると、ひとつのヒーロー配列を返します。
@@ -486,9 +486,9 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 極端に多いHTTPリクエストを送信することになり、サーバーリソースを圧迫したり、
 セルラー方式ネットワークのデータプランをすぐに溶かしてしまいます。
 
-代わりに、`ngOnInit()`メソッドが`searchTerms`_observable_を`searchHeroes()`を呼ぶ回数を抑えるための
+代わりに、`ngOnInit()`メソッドが`searchTerms` observableを`searchHeroes()`を呼ぶ回数を抑えるための
 いくつかのRxJSオペレーターをつなげていて、
-最終的にヒーローのタイムリーな検索結果の_observable_(それぞれは`Hero[]`)を返します。
+最終的にヒーローのタイムリーな検索結果のobservable(それぞれは`Hero[]`)を返します。
 
 次がそのコードです。
 

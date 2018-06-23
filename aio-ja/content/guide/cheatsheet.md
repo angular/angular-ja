@@ -310,11 +310,11 @@
 </td>
 </tr><tr>
 <td><code><b>ngAfterViewInit()</b> { ... }</code></td>
-<td><p>コンポーネントのビューの初期化が完了したときに<code>ngAfterContentInit</code>の後に呼び出されます。 コンポーネントにのみ適用されます。</p>
+<td><p>コンポーネントのビューとと子のビュー、あるいはディレクティブがあるビューの初期化が完了したときに<code>ngAfterContentInit</code>の後に呼び出されます。</p>
 </td>
 </tr><tr>
 <td><code><b>ngAfterViewChecked()</b> { ... }</code></td>
-<td><p>コンポーネントのビューをチェックするたびに呼び出されます。 コンポーネントにのみ適用されます。</p>
+<td><p>コンポーネントのビューとと子のビュー、あるいはディレクティブがあるビューをチェックするたびに呼び出されます。 </p>
 </td>
 </tr><tr>
 <td><code><b>ngOnDestroy()</b> { ... }</code></td>

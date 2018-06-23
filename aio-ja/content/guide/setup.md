@@ -8,7 +8,7 @@
 
 あなたのマシン上に新しいプロジェクトをセットアップするのは、[github](https://github.com/angular/quickstart "github上のクイックスタートリポジトリをインストール")で管理されている**クイックスタートシード**を使って素早く、簡単にできます。
 
-[nodeとnpm](guide/setup#install-prerequisites "nodeとnpmがない場合は?")がインストールされていることが必要です。
+[Node.js®とnpm](guide/setup#install-prerequisites "Node.jsとnpmがない場合は?")がインストールされていることが必要です。
 
 {@a clone}
 
@@ -295,22 +295,22 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 
 
 
-## 付録: nodeとnpm
+## 付録: Node.jsとnpm
 
 
-Node.jsとnpmはAngularと他のプラットフォームを使ってモダンなWeb開発をするにあたり不可欠なものです。
-Nodeはクライアント開発とビルドツールを供給します。
-_npm_パッケージマネージャーは、それ自身が_node_アプリケーションであり、JavaScriptのライブラリをインストールします。
+[Node.js](https://nodejs.org/ja/)と[npm](https://www.npmjs.com/)パッケージマネージャはAngularと他のプラットフォームを使ってモダンなWeb開発をするにあたり不可欠なものです。
+Node.jsはクライアント開発とビルドツールを供給します。
+_npm_ パッケージマネージャーは、それ自身が _Node.js_ アプリケーションであり、JavaScriptのライブラリをインストールします。
 
 もしまだマシン上にインストールされていない場合は<a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" title="Node.jsをインストール、npmをアップデートしましょう">
 いますぐ手に入れましょう。</a>
 
 ターミナル/コンソール上で`node -v`と`npm -v`を実行して、
-**node `v4.x.x` 以上とnpm `3.x.x`以上で実行していることを確認してください。**
+**Node.js `v8.x` 以上とnpm `5.x`以上で実行していることを確認してください。**
 古いバージョンではエラーになります。
 
-我々はnodeとnpmの複数バージョンを管理するために[nvm](https://github.com/creationix/nvm)を使用することを推奨しています。
-もしあなたのマシン上で古いバージョンのnodeとnpmで動作するプロジェクトがある場合には[nvm](https://github.com/creationix/nvm)が必要になるでしょう。
+我々はNode.jsとnpmの複数バージョンを管理するために[nvm](https://github.com/creationix/nvm)を使用することを推奨しています。
+もしあなたのマシン上で古いバージョンのNode.jsとnpmで動作するプロジェクトがある場合には[nvm](https://github.com/creationix/nvm)が必要になるでしょう。
 
 
 {@a why-locally}

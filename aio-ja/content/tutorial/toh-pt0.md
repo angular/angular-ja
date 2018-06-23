@@ -18,6 +18,20 @@
 
 Angular CLIが、デフォルトのアプリケーションとサポートファイルをもつ新しいプロジェクトを作成しました。
 
+
+<div class="l-sub-section">
+
+
+
+`ng add`コマンドを使用すると、パッケージ化された機能を新しいプロジェクトに追加できます。 
+`ng add`コマンドは、指定されたパッケージにschematicsを適用してプロジェクトを変換します。詳細については、[Angular CLIのドキュメンテーション](https://github.com/angular/angular-cli/wiki/add "Angular CLI documentation")を参照してください。
+
+Angular Materialは、典型的なアプリケーションレイアウトのschematicsを提供します。
+詳細については、[Angular Materialのドキュメンテーション](https://material.angular.io/guides "Angular Material documentation")を参照してください。
+
+</div>
+
+
 ## アプリケーションをサーブする
 
 プロジェクトディレクトリに移動し、アプリケーションを起動します。

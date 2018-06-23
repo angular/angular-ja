@@ -8,6 +8,16 @@ const copyTargets = [
     'content/marketing/**/*',
     'content/tutorial/**/*.md',
     'content/navigation.json',
+    'src/index.html',
+    'src/app/layout/doc-viewer/doc-viewer.component.ts',
+    'src/app/layout/nav-item/nav-item.component.html',
+    'src/app/navigation/navigation.model.ts',
+    'content/examples/toh-pt6/src/app/hero-search/hero-search.component.ts',
+    'content/examples/toh-pt6/src/app/heroes/heroes.component.html',
+    'content/examples/toh-pt6/src/app/hero.service.ts',
+    'content/examples/universal/src/app/app.server.module.ts',
+    'content/examples/universal/src/server.ts',
+    'content/examples/universal/src/webpack.server.config.js',
 ];
 
 const promiseGlob = promisify(glob);
@@ -41,4 +51,9 @@ async function main() {
     files.forEach(copy);
 }
 
-main();
+
+main().catch(err => {
+    console.error(err);
+    process.exit(1);
+});
+

@@ -39,7 +39,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 このスコープの制限は、 ***スタイルのモジュール性の機能*** です。
 
-* CSSクラス名とセレクタは、各コンポーネントの文脈で最も合理的に利用できます。
+* CSSクラス名とセレクタは、各コンポーネントの文脈でもっとも合理的に利用できます。
 
 
 * クラス名とセレクターは、コンポーネント内で局所的で、アプリケーションの他の場所で使われている
@@ -123,7 +123,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 <div class="alert is-important">
 
 `/deep/`、 `>>>` および `::ng-deep` は、 *エミュレートされた* ビューカプセル化でのみ使用してください。
-Emulatedは、デフォルトで最もよく使用されるビューカプセル化です。
+Emulatedは、デフォルトでもっともよく使用されるビューカプセル化です。
 詳細については、[ビューのカプセル化の制御](guide/component-styles#view-encapsulation) セクションを参照してください。
 
 </div>
@@ -172,7 +172,7 @@ ng generate component hero-app --inline-style
 
 ### コンポーネントメタデータ内のスタイルファイル
 
-コンポーネントの `@Component` デコレータに `styleUrls` プロパティを追加すると、
+コンポーネントの `@Component` デコレーターに `styleUrls` プロパティを追加すると、
 外部CSSファイルからスタイルをロードできます。
 
 <code-tabs>
@@ -219,7 +219,7 @@ CSSスタイルをHTMLテンプレートに直接埋め込むことができま�
 リンクタグの `href` URLは、コンポーネントファイルからではなく、
 _**アプリケーションルート**_ からの相対パスでなければなりません。
 
-CLIを使用して構築する場合は、[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明に従って、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
+CLIを使用して構築する場合は、[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
 
 </div>
 
@@ -245,7 +245,7 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 ### CSS以外のスタイルファイル
 
 CLIを使用して構築する場合、
-スタイルファイルを、つぎの例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](http://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) を持つファイルを次のように指定できます：
+スタイルファイルを、つぎの例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](http://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
 
 <code-example>
 @Component({

@@ -1,10 +1,10 @@
 # コンポーネントスタイル
 
-Angularアプリケーションは、標準 CSS でスタイルされます。これは、貴方が知っているCSSスタイルシート、
+Angularアプリケーションは、標準CSSでスタイルされます。これは、あなたが知っているCSSスタイルシート、
 セレクター、ルール、そしてメディアクエリーついてのすべてを Angularアプリケーションに直接
 適用できることを意味します。
 
-加えて、Angularは、 コンポーネントに、標準スタイルシートでは無く、よりモジュールデザインを可能にする
+加えて、Angularは、コンポーネントに標準スタイルシートでは無く、よりモジュールデザインを可能にする
 コンポーネントと共に *コンポーネントスタイル* をバンドルできます。
 
 このページでは、これらのコンポーネントスタイルをどのように読み込み適用するのか説明します。
@@ -13,33 +13,33 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 ## コンポーネントスタイルを使いましょう
 
-あなたが書くすべての Angular コンポーネントのために、HTMLテンプレートだけでは無く、
-そのテンプレートに付随する CSSスタイル、必要な、あらゆるセレクター、ルール、
+あなたが書くすべての Angular コンポーネントについて、HTMLテンプレートだけではなく、
+そのテンプレートに付随するCSSスタイルを定義し、必要な、あらゆるセレクター、ルール、
 そしてメディアクエリーを細く指定することなどを定義できます。
 
-ひとつの方法は、コンポーネントメタデータに `styles` プロパティをセットすることです。
-この `styles` プロパティは、CSSコードを含む、文字列の配列を使います。
-一般的に、ひとつの文字を与えます、次のような例です：
+これを行うひとつの方法は、コンポーネントのメタデータに `styles` プロパティをセットすることです。
+`styles` プロパティは、CSSコードを含む文字列の配列を使います。
+通常は、次の例のようにひとつの文字列を与えます：
 
 <code-example path="component-styles/src/app/hero-app.component.ts" title="src/app/hero-app.component.ts" linenums="false">
 </code-example>
 
-## スタイルの有効範囲
+## スタイルのスコープ
 
 <div class="alert is-critical">
 
-スタイルは、 _そのテンプレートのコンポーネントにだけ適用される_  `@Component` メタデータで定義します。
+`@Component` メタデータで定義されたスタイルは、 _そのコンポーネントのテンプレート内でのみ適用されます_  。
 
 </div>
 
-テンプレートの中のコンポーネントの入れ子や、コンポーネントに投げられたコンテントでも、_引き継ぎません_ 。
+テンプレート内にネストされたコンポーネント、コンポーネントに投影されたコンテントによって、_継承されることはありません_ 。
 
-この例では、 `h1` スタイルは、ただ `HeroAppComponent` だけに現れ、
-ネストされた `HeroMainComponent` には無く、 `<h1>` タグは、アプリケーションの何処にも現れない。
+この例では、 `h1` スタイルは `HeroAppComponent` にのみ適用され、
+ネストされた `HeroMainComponent` にもアプリケーションの他の場所の `<h1>` タグにも適用されません。
 
-この有効範囲の制限は、 ***モジュール式スタイルの特徴*** です。
+このスコープの制限は、 ***スタイルのモジュール性の機能*** です。
 
-* それぞれのコンポーネントのコンテキストの大部分の表現を作るCSSクラス名、セレクターを利用できます。
+* CSSクラス名とセレクタは、各コンポーネントの文脈で最も合理的に利用できます。
 
 
 * クラス名とセレクターは、コンポーネント内で局所的で、アプリケーションの他の場所で使われている
@@ -49,70 +49,70 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 * スタイルの変更は、他の場所のアプリケーションのコンポーネントスタイルに影響しません。
 
 
-* きちんとした、そして整然としたプロジェクト構造に至らせる
-  コンポーネントの TypeScript と HTMLコードと共に、各々のコンポーネントの CSSコードを配置できます。
+* 各コンポーネントのCSSコードをコンポーネントの TypeScript と HTMLコードと一緒に配置すると、
+  きちんと整理されたプロジェクト構造になります。
 
 
-* アプリケーションの他の場所で使われているか探す検索を行わずに、コンポーネント CSS コードの
-変更あるいは除去が可能です。
+* アプリケーション全体を検索してコードが使用されている場所を見つけることなく、
+コンポーネントのCSSコードを変更または削除できます。
 
 {@a special-selectors}
 
 ## 特別なセレクター
 
-コンポーネントスタイルは、いくつかの Shadow DOM スタイルのスコーピングの世界からの
-特別な *セレクター* があります([W3C](https://www.w3.org) サイトの
-[CSS スコーピング モデル レベル 1](https://www.w3.org/TR/css-scoping-1) ページに記述されています)。
-次のセクションで、これらのセレクターを説明します。
+コンポーネントスタイルには、Shadow DOMスタイルスコーピング([W3C](https://www.w3.org) サイトの
+[CSS スコーピング モデル レベル 1](https://www.w3.org/TR/css-scoping-1) ページに記述されています)
+の世界からの特別な *セレクター* がいくつかあります。
+次のセクションでは、これらのセレクターについて説明します。
 
 ### :host
 
-コンポーネントを *提供する* 要素のスタイルを対象にする `:host` 偽クラスセレクターを使います(
-対して、コンポーネントのテンプレートの *内部の* 要素を対象とします)。
-
+`:host` 擬似クラスセレクターを使用して、(コンポーネントのテンプレートの *内部の* ターゲティング要素とは対象的に)
+コンポーネントを *ホスト* する要素のスタイルをターゲットにします。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="host" title="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
-`:host` セレクターは、ホストの要素を対象とする唯一の方法です。別のセレクターを用いて
-コンポーネントの内側からホスト要素には到達できません、なぜならば、それは、コンポーネント自身の
-テンプレートの一部ではないからです。ホストの要素は、親のコンポーネントのテンプレートの中にあります。
+`:host` セレクターは、ホスト要素をターゲットにする唯一の方法です。
+コンポーネント自身のテンプレートの一部ではないため、他のセレクタを使用してコンポーネント内
+からホスト要素に到達することはできません。ホスト要素は、親コンポーネントのテンプレート内にあります。
 
-`:host` の後のカッコの中に別なセレクターを含むことにより、
-条件付きのホストのスタイルを適用するために *function form* を使います。
+*関数形式* を使用して、`:host` の後のカッコ内に別なセレクターを含むことで、
+ホストスタイルを条件付きで適用します。
 
-つぎの例は、再びホストの要素を目標にします、が、`active` CSS クラスがある時だけです。
+つぎの例では、ホスト要素を再びターゲットにしていますが、
+`active` CSS クラスも持っている場合に限ります。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" title="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 ### :host-context
 
-時々、コンポーネントのビューの *外側* のいくつかの状態の基づいたスタイルを表すのに役立ちます。
-たとえば、CSS テーマクラスは、ドキュメントの `<body>` 要素に適用させることが可能です、そして
-あなたは、どのようにコンポーネントが見えるのかを変えたいと、望んでいます。
+場合によっては、コンポーネントのビューの *外* にある条件に基づいてスタイルを適用すると便利です
+たとえば、CSSのテーマクラスをドキュメントの `<body>` 要素に適用すると、
+それに基づいてコンポーネントの外観を変更することができます。
 
-`:host-context()` 仮クラスセレクターを使いましょう、`:host()` からの関数のように働きます。
-`:host-context()` セレクターは、コンポーネントのホスト要素の任意の先祖のうち、
-ドキュメントルートまでのCSSクラスを探します。`:host-context()` セレクターは、他のセレクターと結びつけた時に便利です。
+`:host()` の関数形式と同じように動作する `:host-context()` 疑似クラスセレクタを使用します。
+`:host-context()` セレクタは、コンポーネントのホスト要素の先祖のうち、ドキュメントルートまでのCSSクラスを探します。
+`:host-context()` セレクタは、別のセレクターと組み合わせたときに便利です。
 
-つぎの例は、いくつかの先祖の要素が、`theme-light` CSSクラスを備えている時の場合にのみ、
-コンポーネントの *内部* のすべての `<h2>` 要素のスタイルに `background-color` を適用します。
+次の例では、コンポーネント *内* のすべての `<h2>` 要素に `background-color`　のスタイルを適用します。
+ただし、一部の祖先要素にCSSクラス `theme-light` がある場合にのみ適用されます。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" title="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 ### (非推奨) `/deep/` 、 `>>>` と `::ng-deep`
 
-コンポーネントスタイルは、普通は、HTML 内のコンポーネント自身のテンプレートにだけ適用されます。
+コンポーネントスタイルは通常、コンポーネント自身のテンプレートのHTMLにのみ適用されます。
 
-`/deep/` シャドウピアスの子孫コンビネーターを利用して、子のコンポーネント ツリーを介して
-すべての子のコンポーネントの見え方にスタイルを強制的におろしますます。
-`/deep/` コンビネーターは、あらゆる深さのネストされたコンポーネントとして作動し、子のビューとしても
-コンポーネントの子のコンテンツとしてもあてはまります。
+`/deep/` shadow-piercing子孫コンビネータを使用して、子のコンポーネントツリーを介して
+すべての子のコンポーネントビューにスタイルを強制的に適用します。
+`/deep/` コンビネータは、ネストされたコンポーネントのあらゆる深さに作用し、
+コンポーネントの子コンポーネントとコンテンツコンポーネントの両方に適用されます。
 
-つぎの例は、すべての `<h3>` 要素、つまり、ホストの要素から、このコンポーネントを下がり降り、
-DOM のすべてのそれの子の要素まで、を対象とします。
+次の例では、ホスト要素からこのコンポーネントを経由してDOM内のすべての子要素に至るまで、
+すべての `<h3>` 要素を対象としています。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="deep" title="src/app/hero-details.component.css" linenums="false">
 
@@ -122,23 +122,23 @@ DOM のすべてのそれの子の要素まで、を対象とします。
 
 <div class="alert is-important">
 
-`/deep/`、 `>>>` と `::ng-deep` は、 *エミュレート化* ビューがカプセルされている時だけ使います。
-エミュレート化は、デフォルトで、そして、大抵、ビューのカプセル化に使われます。追加の情報は、
-[ビューのカプセル化制御法](guide/component-styles#view-encapsulation) セクションを参照してください。
+`/deep/`、 `>>>` および `::ng-deep` は、 *エミュレートされた* ビューカプセル化でのみ使用してください。
+Emulatedは、デフォルトで最もよく使用されるビューカプセル化です。
+詳細については、[ビューのカプセル化の制御](guide/component-styles#view-encapsulation) セクションを参照してください。
 
 </div>
 
 <div class="alert is-important">
 
-シャドウピアスの子孫コンビネーターは、非推奨で、ツールと[主要ブラウザからサポートが除去され始めています](https://www.chromestatus.com/features/6750456638341120) 。
-同じように、Angular (`/deep/`、 `>>>` と `::ng-deep` の三つとも) のサポートも停止する計画です。
+shadow-piercing子孫コンビネータは廃止され、主要なツールや[ブラウザからサポートが削除されています](https://www.chromestatus.com/features/6750456638341120) 。
+そのため、Angular (`/deep/`、 `>>>` および `::ng-deep` の3つすべて) のサポートを落とす予定です。
 それまでは、ツールの幅広い互換性のために、`::ng-deep` を選択すべきです。
 
 </div>
 
 {@a loading-styles}
 
-## 読み込みコンポーネント スタイル
+## コンポーネントスタイルの読み込み
 
 コンポーネントにスタイルを追加する方法は、いくつかあります。
 
@@ -148,11 +148,11 @@ DOM のすべてのそれの子の要素まで、を対象とします。
 
 前に概説した範囲指定のルールは、これらの読み込みパターンのそれぞれに適用されます。 
 
-### コンポーネント メタデータ内のスタイル
+### コンポーネントメタデータ内のスタイル
 
 `styles` 配列プロパティを `@Component` デコレーター に追加できます。
 
-配列のそれぞれの文字は、コンポーネントに対していくつかの CSS を定義します。
+配列の各文字列は、このコンポーネントのCSSを定義します。
 
 <code-example path="component-styles/src/app/hero-app.component.ts" title="src/app/hero-app.component.ts (CSS inline)">
 </code-example>
@@ -160,20 +160,20 @@ DOM のすべてのそれの子の要素まで、を対象とします。
 <div class="alert is-critical">
 
 注意： これらのスタイルは、 _このコンポーネントにのみ_ 適用されます。
-これらのスタイルは、テンプレートでネストされたどんなコンポーネントでも、あるいはコンポーネントに突出されたどんなコンテントでも、 _受継がれません_ 。
+テンプレート内にネストされたコンポーネントやコンポーネントに投影されたコンテンツによって _継承されることはありません_ 。
 
 </div>
 
-CLI は、 `--inline-styles` フラグを使ってコンポーネントを生成すれば、空の `styles` 配列を定義します。
+CLI は、 `--inline-styles` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
 
 <code-example language="sh" class="code-shell">
 ng generate component hero-app --inline-style
 </code-example>
 
-### コンポーネント メタデータ内のスタイル ファイル
+### コンポーネントメタデータ内のスタイルファイル
 
-`styleUrls` プロパティを `@Component` デコレーターのコンポーネントに追加すると、
-スタイルを外部の CSS ファイルから読み込めます。
+コンポーネントの `@Component` デコレータに `styleUrls` プロパティを追加すると、
+外部CSSファイルからスタイルをロードできます。
 
 <code-tabs>
   <code-pane title="src/app/hero-app.component.ts (CSS in file)" path="component-styles/src/app/hero-app.component.1.ts"></code-pane>
@@ -183,13 +183,13 @@ ng generate component hero-app --inline-style
 <div class="alert is-critical">
 
 注意： スタイルファイルのスタイルは、 _このコンポーネントにのみ_ 適用されます。
-これらのスタイルは、テンプレートでネストされたどんなコンポーネントでも、あるいはコンポーネントに突出されたどんなコンテントでも、 _受継がれません_ 。
+テンプレート内にネストされたコンポーネントやコンポーネントに投影されたコンテンツによって _継承されることはありません_ 。
 
 </div>
 
 <div class="l-sub-section">
 
-  ひとつ以上のスタイルファイル、あるいは `style` と `styleUrls` の組み合わせて、定義が可能です。
+  複数のスタイルファイル、または `style` と `styleUrls` の組み合わせを指定することもできます。
 
 </div>
 
@@ -199,53 +199,53 @@ CLI は、デフォルトで空のスタイルファイルを生成し、コン�
 ng generate component hero-app
 </code-example>
 
-### インライン スタイル テンプレート
+### インラインスタイルテンプレート
 
-`<style>` タグで囲めば、HTMLテンプレート内に直に CSS　スタイルを埋め込むことも
-可能です。
+`<style>` タグの中に入れることで、
+CSSスタイルをHTMLテンプレートに直接埋め込むことができます。
 
 <code-example path="component-styles/src/app/hero-controls.component.ts" region="inlinestyles" title="src/app/hero-controls.component.ts">
 </code-example>
 
-### リンク タグ テンプレート
+### リンクタグテンプレート
 
-コンポーネントの HTML テンプレート内に `<link>` タグを記述することも可能です。
+コンポーネントのHTMLテンプレートに `<link>` タグを記述することもできます。
 
 <code-example path="component-styles/src/app/hero-team.component.ts" region="stylelink" title="src/app/hero-team.component.ts">
 </code-example>
 
 <div class="alert is-critical">
 
-リンクタグの `href` URL は、 _**アプリケーションルート**_ からの相対指定でなければならず、
-コンポーネントファイルからの相対指定では無いです。
+リンクタグの `href` URLは、コンポーネントファイルからではなく、
+_**アプリケーションルート**_ からの相対パスでなければなりません。
 
-CLI で生成するときに、[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) に記述されているように、サーバーにコピーされた資産(アセット)の中に、必ずリンクされたスタイルファイルを含めてください。
+CLIを使用して構築する場合は、[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明に従って、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
 
 </div>
 
 ### CSS @imports
 
-標準 CSS `@import` ルールを利用して CSSファイルを CSSファイルの中にインポートすることも可能です。
-詳しくは、[MDN](https://developer.mozilla.org) サイトの
-[`@import`](https://developer.mozilla.org/en/docs/Web/CSS/@import) を参照してください。
+標準のCSS `@import` ルールを使用して CSSファイルを CSSファイルにインポートすることもできます。
+詳細は、[MDN](https://developer.mozilla.org/ja) サイトの
+[`@import`](https://developer.mozilla.org/ja/docs/Web/CSS/@import) を参照してください。
 
 この場合、インポートするファイルの URL は、CSSファイルに対して相対指定です。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="import" title="src/app/hero-details.component.css (excerpt)">
 </code-example>
 
-### 外部とグローバルなスタイルファイル
+### 外部およびグローバルスタイルファイル
 
-CLI で生成する場合、あなたは、 `angular.json` に _全ての外部アセット_ を含め、外部スタイルファイルを含め、定義しなければなりません。
+CLIを使用して構築する場合、外部スタイルファイルを含む _すべての外部アセット_ を含めるように `angular.json` を設定する必要があります。
 
-`styles` セクションで **グローバル** スタイルファイルの登録は、デフォルでは、グローバル `styles.css` と、事前定義してあります。
+デフォルトでグローバルな `styles.css` ファイルを事前設定している `styles` セクションに、 **グローバル** スタイルファイルを登録します。
 
 もっと学びたい場合は、 [CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-global-styles) を参照してください。
 
-### CSSスタイルでは無いファイル
+### CSS以外のスタイルファイル
 
-CLI を使って生成しているならば、
-スタイルファイルを、つぎの例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、  あるいは、[stylus](http://stylus-lang.com/) で書け、 `@Component.styleUrls` メタデータで適切な拡張子 (`.scss`, `.less`, `.styl`) を定義します：
+CLIを使用して構築する場合、
+スタイルファイルを、つぎの例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](http://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) を持つファイルを次のように指定できます：
 
 <code-example>
 @Component({
@@ -256,16 +256,16 @@ CLI を使って生成しているならば、
 ...
 </code-example>
 
-CLI 構築プロセスは、適切な CSS プリプロセッサを実行します。
+CLIビルドプロセスは、適切なCSSプリプロセッサを実行します。
 
-`ng generate component` を使ってコンポーネントを生成すれば、CLI は、デフォルトで空の CSS　スタイルファイル(`.css`)を作ります。
-[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
-"CSS プリプロセッサ統合") 
-に記述してあるように、あなたのお気に入りの CSS プリプロセッサに環境設定できます。
+`ng generate component` を使用してコンポーネントファイルを生成する場合、CLI は、デフォルトで空の CSS　スタイルファイル(`.css`)を生成します。
+[CLIのドキュメンテーション](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
+"CSS Preprocessor integration") 
+で説明されているように、CLIのデフォルトのプリプロセッサを設定することができます。
 
 <div class="alert is-important">
 
-`@Component.styles` 配列に追加されたスタイル文字列は、_CSS に記述されなければならない_ 、なぜならば、CLI は、インラインスタイルのプリプロセッサに適用できないからです。
+CLIはインラインスタイルにプリプロセッサを適用できないため、`@Component.styles` 配列に追加されたスタイル文字列は _CSSで記述する必要があります_ 。
 
 </div>
 
@@ -276,46 +276,46 @@ CLI 構築プロセスは、適切な CSS プリプロセッサを実行しま�
 前に論じた様に、コンポーネント CSS スタイルは、コンポーネントのビューの中に含まれ、
 アプリケーションの残りに影響しません。
 
-*プリコンポーネント* 基礎の上で、どのようにカプセル化が起きるのかを制御し、
-コンポーネント メタデータで *ビューカプセル化モード* を設定できます。
+このカプセル化が *コンポーネントごとに* どのように行われるかを制御するには、
+コンポーネントのメタデータに *ビューのカプセル化モード* を設定します。
 つぎのモードから選択してください：
 
-* `Native` ビューカプセル化は、コンポーネントのホスト要素の Shadow DOM を接続するために
-ブラウザのネイティブ Shadow DOM 実装([MDN](https://developer.mozilla.org) サイト上の
-  [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)
-  参照) を利用し、そして、 Shadow DOM の中のコンポーネントビューに入れます。
-  コンポーネントのスタイルは、Shadow DOM と共に含まれています。
+* `Native` ビューカプセル化では、ブラウザのネイティブShadow DOM実装
+（[MDN](https://developer.mozilla.org/ja/)サイトの
+[Shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)を参照）を使用して、
+Shadow DOMをコンポーネントのホスト要素にアタッチし、
+そのShadow DOM内にコンポーネントビューを配置します。コンポーネントのスタイルは、Shadow DOM内に含まれています。
 
-* `Emulated` ビューのカプセル化(デフォルト) は、コンポーネントのビューの CSS の CSS コードの有効なスコープの前処理(そして名前変更)
-  によって、Shadow DOM の振る舞いをエミュレートします。
-  詳細は、[付録 1](guide/component-styles#inspect-generated-css) を参照してください。
+* `Emulated` ビューカプセル化（デフォルト）は、CSSコードを事前処理（および名前変更）して、
+Shadow DOMの動作をエミュレートし、CSSをコンポーネントのビューに効果的に適用します。
+  詳細は、[付録1](guide/component-styles#inspect-generated-css) を参照してください。
 
-* `None` は、Angular にビューのカプセル化が無いことを意味します。
-  Angular は、グローバルスタイルとして CSS を追加します。
-  前に論じたスコープルール、分離、そして保護は、適用されません。
-  これは、コンポーネントのスタイルを HTML 内に貼り付けることと本質的に同じことです。
+* `None` は、Angularビューカプセル化を行わないことを意味します。
+AngularはCSSをグローバルスタイルに追加します。
+先に説明したスコープのルール、隔離および保護は適用されません。
+これは、コンポーネントのスタイルをHTMLに貼り付けるのと本質的に同じです。
 
-コンポーネントのカプセル化モードを設定するために、コンポーネントメタデータの `encapsulation` プロパティを利用します：
+コンポーネントのカプセル化モードを設定するには、コンポーネントメタデータ内の `encapsulation` プロパティを使用します：
 
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" title="src/app/quest-summary.component.ts" linenums="false">
 </code-example>
 
-`Native` ビューのカプセル化は、Shadow DOM をネイティブサポートしているブラウザ上のみで動きます
+`Native` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
 ( [Can I use](http://caniuse.com) サイトの
-[Shadow DOM v0](http://caniuse.com/#feat=shadowdom) を参照してください)。多くのケースで、
-なぜ `Emulated` ビューのカプセル化が、デフォルトモードとお勧めということ、に関する
-サポートはまだ限定的です。
+[Shadow DOM v0](http://caniuse.com/#feat=shadowdom) を参照)。サポートは未だ限定的です。
+そのため、`Emulated`ビューカプセル化がデフォルトモードであり、
+ほとんどの場合に推奨されます。
 
 {@a inspect-generated-css}
 
-## 検閲により生成された CSS
+## 生成されたCSSの検査
 
-エミュレートされたビューのカプセル化を使う場合、Angular は、
-標準 Shadow CSS のスコープルールを見積もるために、すべてのコンポーネントスタイルを前処理します。
+エミュレートされたビューカプセル化を使用する場合、Angularはすべてのコンポーネントスタイルを前処理して、
+標準的なShadow CSSスコープルールに近似させます。
 
-エミュレートされたビューを伴った Angular アプリケーションが
-稼働している DOM の中でカプセル化は可能になり、それぞれの DOM 要素は、添付された
-いくつかの特別なアトリビュートを持っています：
+エミュレートされたビューカプセル化が有効になっている
+実行中のAngularアプリケーションのDOMでは、
+各DOM要素にはいくつかの特別な属性が付加されています：
 
 <code-example format="">
   &lt;hero-details _nghost-pmm-5>
@@ -327,16 +327,16 @@ CLI 構築プロセスは、適切な CSS プリプロセッサを実行しま�
 
 </code-example>
 
-ここには、二種類の生成されたアトリビュートがあります：
+生成される属性には2種類あります。：
 
-* 先天的なカプセル化内の Shadow DOM ホストのひとつの要素は、
-`_nghost` アトリビュートを生成します。これは、典型的なホスト要素のコンポーネントの事例です。
-* コンポーネントのビューの中の要素は、`_ngcontent` アトリビュートを持っています、これは、
-この要素が属している Shadow DOM がどのホストをエミューレートしているのかを特定します。
+* ネイティブのカプセル化でShadow DOMのホストになる要素には、生成された`_nghost`属性があります。
+これは、一般的にコンポーネントのホスト要素のケースです。
+* コンポーネントのビュー内の要素には、この要素がどのホストのエミュレートされたShadow DOMに
+属するかを識別する`_ngcontent`属性があります。
 
-これらのアトリビュートの正確な値は、重要ではありません。自動的に生成され、
-アプリケーションコード内で決して参照しません。しかし、生成されたコンポーネントスタイルにより
-対象とされ、DOM の `<head>` セクション内に有ります。
+これらの属性の正確な値は重要ではありません。
+それらは自動的に生成され、アプリケーションコードで参照することはありません。
+しかし、生成されたコンポーネントスタイルは、DOMの`<head>`セクションにあります。
 
 <code-example format="">
   [_nghost-pmm-5] {
@@ -350,6 +350,6 @@ CLI 構築プロセスは、適切な CSS プリプロセッサを実行しま�
   }
 </code-example>
 
-これらのスタイルは、それぞれのセレクターは `_nghost` あるいは `_ngcontent`
-アトリビュートセレクターと共に増強するために、前処理されます。
-これらの追加のセレクターは、このページで記述されたスコープルールを可能にします。
+これらのスタイルは後処理され、
+各セレクターに`_nghost`または`_ngcontent`属性セレクターが追加されます。
+これらの追加のセレクタは、このページで説明しているスコープルールを有効にします。

@@ -546,10 +546,10 @@ export abstract class HttpHandler {
 他のサービスと同様に、アプリケーションが使用する前にインターセプタークラスを提供する必要があります。
 
 インターセプターは`HttpClient`サービスの（オプショナルな）依存関係であるため、
-`HttpClient`を提供する同じインジェクタ（またはインジェクタの親）にそれらを指定する必要があります。
+`HttpClient`を提供する同じインジェクター（またはインジェクターの親）にそれらを指定する必要があります。
 DIが`HttpClient`を作成した_後に_提供されるインターセプターは無視されます。
 
-このアプリケーションは、`AppModule`の`HttpClientModule`をインポートする副作用として、アプリケーションのルートインジェクタに`HttpClient`を提供します。
+このアプリケーションは、`AppModule`の`HttpClientModule`をインポートする副作用として、アプリケーションのルートインジェクターに`HttpClient`を提供します。
 同様にインターセプターは`AppModule`の中で提供すべきです。
 
 `@angular/common/http`から`HTTP_INTERCEPTORS`インジェクショントークンをインポートした後、

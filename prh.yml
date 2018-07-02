@@ -50,6 +50,9 @@ rules:
   - expected: デコレーター
     pattern: /デコレータ(?!ー)/
 
+  - expected: インジェクター
+    pattern: /インジェクタ(?!ー)/
+
   - expected: ユーザー
     pattern: /ユーザ(?!ー)/
 
@@ -64,3 +67,6 @@ rules:
 
   - expected: input要素
     pattern: インプット要素
+
+  - expected: 静的メソッド
+    pattern: スタティックメソッド

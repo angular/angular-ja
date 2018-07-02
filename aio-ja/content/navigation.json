@@ -354,8 +354,9 @@
             },
             {
               "url": "guide/providers",
-              "title": "Providers",
-              "tooltip": "Providers and NgModules."
+              "title": "プロバイダー",
+              "tooltip": "プロバイダーとNgModule。",
+              "translated": true
             },
             {
               "url": "guide/singleton-services",

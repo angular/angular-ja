@@ -28,9 +28,9 @@ Angular 6.0から、シングルトンサービスを作成する推奨の方法
 
 ## `forRoot()`
 
-あるモジュールがプロバイダーと宣言(コンポーネント、ディレクティブ、パイプ)の両方を提供していて、たとえばルート(route)などの子インジェクターにロードするとプロバイダーのインスタンスが複製されます。プロバイダーの複製は、おそらくシングルトンであるルート(root)インスタンスを参照するときに問題を引き起こすでしょう。このためAngularは、同一モジュールを`provider`をもつモジュールとしてルート(root)モジュールから、`provider`を持たないモジュールとして子モジュールからインポートできるように、プロバイダーをモジュールから分離する方法を提供します。
+あるモジュールがプロバイダーと宣言(コンポーネント、ディレクティブ、パイプ)の両方を提供していて、たとえばルート(route)などの子インジェクターにロードするとプロバイダーのインスタンスが重複してしまいます。プロバイダーの重複は、おそらくシングルトンであるルート(root)インスタンスを参照するときに問題を引き起こすでしょう。このためAngularは、同一モジュールを`provider`をもつモジュールとしてルート(root)モジュールから、`provider`を持たないモジュールとして子モジュールからインポートできるように、プロバイダーをモジュールから分離する方法を提供します。
 
-1. `forRoot()`(この名前は慣習的なものです)というスタティックメソッドをモジュールに作成します。
+1. `forRoot()`(この名前は慣習的なものです)という静的メソッドをモジュールに作成します。
 2. 次に説明する方法で`forRoot`メソッド内にプロバイダーを配置します。
 
 <!-- MH: show a simple example how to do that without going to deep into it. -->
@@ -87,7 +87,7 @@ Angularは`@NgModule.providers`
 
 アプリケーションはデフォルトの "Sherlock Holmes"のかわりに、"Miss Marple"をユーザーとして表示します。
 
-ファイルの先頭にJavascriptのインポートとして`CoreModule`を_import_することを忘れないでください。別のモジュールとして`@NgModule`の`imports`リストに追加しないようにしてください。
+ファイルの先頭にJavaScriptのインポートとして`CoreModule`を_import_することを忘れないでください。複数の`@NgModule`の`imports`リストに追加してはいけません。
 
 <!-- KW--Does this mean that if we need it elsewhere we only import it at the top? I thought the services would all be available since we were importing it into `AppModule` in `providers`. -->
 

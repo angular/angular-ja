@@ -80,7 +80,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 ### `HeroesComponent` テンプレートを更新する
 
-`HeroDetailComponent` のセレクタは `'app-hero-detail'` です。
+`HeroDetailComponent` のセレクターは `'app-hero-detail'` です。
 
 ヒーローの詳細ビューがかつて存在した `HeroesComponent` テンプレートの下部に `<app-hero-detail>` 要素を追加してください。
 

@@ -31,7 +31,7 @@ CLIは`src/app/heroes/`という新しいフォルダを作成し、
 
 CLIは3つのメタデータプロパティを生成しました:
 
-1. `selector`&mdash; コンポーネントのCSS要素セレクタ
+1. `selector`&mdash; コンポーネントのCSS要素セレクター
 1. `templateUrl`&mdash; コンポーネントのテンプレートファイルの場所
 1. `styleUrls`&mdash; コンポーネントのプライベートCSSスタイルの場所
 

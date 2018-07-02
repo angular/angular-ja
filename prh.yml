@@ -27,6 +27,12 @@ rules:
     options:
       wordBoundary: true
 
+  - expected: 次の
+    pattern: つぎの
+
+  - expected: 注入する
+    pattern: インジェクトする
+
 # カタカナ語
 
   - expected: オブザーバー
@@ -55,6 +61,9 @@ rules:
 
   - expected: ユーザー
     pattern: /ユーザ(?!ー)/
+
+  - expected: セレクター
+    pattern: /セレクタ(?!ー)/
 
   - expected: クオート
     pattern: クォート

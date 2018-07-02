@@ -88,9 +88,9 @@ _ケースの慣習_
 
 Angularでは、[スタイルガイドの「命名」セクション](guide/styleguide#02-01)で説明しているように、さまざまな型の名前を区別するために大文字と小文字を区別します。
 
-- camelCase : シンボル、プロパティ、メソッド、パイプ名、コンポーネントではないディレクティブのセレクタ、定数
+- camelCase : シンボル、プロパティ、メソッド、パイプ名、コンポーネントではないディレクティブのセレクター、定数
 - UpperCamelCase (or PascalCase): コンポーネント、インターフェース、NgModule、ディレクティブ、パイプなどを定義するクラスを含むクラス名
-- dash-case (or "kebab-case"): ファイル名の記述部分、コンポーネントセレクタ
+- dash-case (or "kebab-case"): ファイル名の記述部分、コンポーネントセレクター
 - underscore_case (or "snake_case"): 通常はAngularでは使われません
 - UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE): 伝統的な定数（許容されますが、camelCaseを好みます）
 

@@ -306,7 +306,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 親コンポーネント *クラス* が、そのような種類のアクセスを要求する際、
 子のコンポーネントを 親の *ViewChild* として ***注入します*** 。
 
-つぎの例は、同じ[カウントダウンタイマー](guide/component-interaction#countdown-timer-example) の例
+次の例は、同じ[カウントダウンタイマー](guide/component-interaction#countdown-timer-example) の例
 と共に説明しています。
 どの外見も、どのふるまいも変わりません。
 子の [CountdownTimerComponent](guide/component-interaction#countdown-timer-example) は一緒です。

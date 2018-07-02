@@ -139,7 +139,7 @@ Angularは、ディレクティブが拡張可能なバリデータのコレク�
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" title="shared/forbidden-name.directive.ts (directive)">
 </code-example>
 
-`ForbiddenValidatorDirective`が準備されたら、`appForbiddenName`セレクタを任意の入力要素に追加して、アクティブ化できます。これは一例です:
+`ForbiddenValidatorDirective`が準備されたら、`appForbiddenName`セレクターを任意の入力要素に追加して、アクティブ化できます。これは一例です:
 
 <code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" title="template/hero-form-template.component.html (forbidden-name-input)" linenums="false">
 

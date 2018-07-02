@@ -359,8 +359,9 @@
             },
             {
               "url": "guide/singleton-services",
-              "title": "Singleton Services",
-              "tooltip": "Creating singleton services."
+              "title": "シングルトンサービス",
+              "tooltip": "シングルトンサービスの作成。",
+              "translated": true
             },
             {
               "url": "guide/lazy-loading-ngmodules",

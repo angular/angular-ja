@@ -1,19 +1,20 @@
 # セキュリティ
 
 この章では、クロスサイトスクリプティングやその他一般的なWebアプリケーション脆弱性に対する
-Angularでの対応ついて説明します。認証や認可などアプリケーションレベルのセキュリティは
+Angularでの対応について説明します。認証や認可などアプリケーションレベルのセキュリティは
 ここでは扱いません。
 
-この章で扱う内容に関するより詳細な情報は
-[OWASP Guide Project](https://www.owasp.org/index.php/Category:OWASP_Guide_Project) を
-参照してください。
+この章で扱う内容に関するより詳細な情報は [OWASP Guide Project](https://www.owasp.org/index.php/Category:OWASP_Guide_Project) を参照してください。
 
 この章に付属の <live-example></live-example> はその場で実行できます。
+
 
 
 <h2 id='report-issues'>
   脆弱性の報告
 </h2>
+
+
 
 Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) へ報告をお願いします。
 
@@ -22,9 +23,12 @@ Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) �
 参照してください。
 
 
+
 <h2 id='best-practices'>
   ベストプラクティス
 </h2>
+
+
 
 * **Angularを最新に保つ**
 Angularは定期的にアップデートされており、最新版には以前のバージョンで見つかった
@@ -36,17 +40,20 @@ Angularは定期的にアップデートされており、最新版には以前�
 受けられなくなります。独自のカスタマイズを行うのではなく、その改善点をプルリクエストを通じて
 コミュニティと共有してください。
 
-* **"_Security Risk_."と明記されたAPIの使用を避ける**
+* **"_Security Risk_"と明記されたAPIの使用を避ける**
 この章の [Trusting safe values](guide/security#bypass-security-apis) を参照してください。
+
 
 
 <h2 id='xss'>
   クロスサイトスクリプティング（XSS）
 </h2>
 
+
+
 [クロスサイトスクリプティング](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%88%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0)により
 攻撃者は悪意のあるコードをWebページに注入することができます。
-これらコードはユーザーデータ（特にログインデータ）を盗み出したり
+そのようなコードはユーザーデータ（特にログインデータ）を盗み出したり
 ユーザーに成りすましたアクションを実行します。これはウェブ上でもっとも一般的な攻撃のひとつです。
 
 XSS攻撃を防ぐには悪意のあるコードがDOMに挿入されるのを防ぐ必要があります。たとえば、
@@ -54,7 +61,6 @@ DOMに`<script>`タグを挿入された場合、攻撃者はそのWebサイト�
 攻撃は`<script>`タグだけでなくDOMの多くの要素やプロパティがその対象となります。
 `<img onerror = "...">`や`<a href="javascript:...">`など、
 攻撃者の制御するデータがDOMに注入されることで攻撃が成立します。
-
 
 ### AngularによるXSS対策
 
@@ -65,13 +71,11 @@ XSSへの対策としてAngularはデフォルトですべての入力を信頼�
 _テンプレート文字列は実行可能コードと同じコンテキストです。_
 テンプレート文字列（HTML、属性、およびバインディング式）は安全であると見なされており、
 つまり攻撃者がテンプレートのコードを作成することはアプリケーション側で防止しなければなりません。
-_テンプレートインジェクション_と呼ばれるこれら問題を避けるには
+_テンプレートインジェクション_と呼ばれるこれらの脆弱性を避けるには
 [オフラインテンプレートコンパイラ](guide/security#offline-template-compiler)を使用します。
 
-
-<h3 id='sanitization-and-security-contexts'>
-  サニタイズとコンテキスト
-</h3>
+{@a sanitization-and-security-contexts}
+### サニタイズとコンテキスト
 
 _サニタイズ_とは、信頼できない値を検査しDOMに挿入できるような安全な値に無害化することです。
 多くの場合、サニタイズは値をまったく変更しません。
@@ -88,15 +92,17 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 **リソースURL**は任意のコードが含まれる可能性があるためサニタイズできません。
 開発モードでは、サニタイズで値が変更されるとコンソールに警告が表示されます。
 
-
 ### サニタイズの例
 
-次のテンプレートでは `htmlSnippet` の値を、まずテンプレート補完で要素内に展開し、
-次にinnerHtmlプロパティへバインドしています。
+次のテンプレートでは `htmlSnippet` の値を、まずテンプレート補間で要素内に展開し、
+次に `innerHtml` プロパティへバインドしています。
+
 
 <code-example path="security/src/app/inner-html-binding.component.html" title="src/app/inner-html-binding.component.html">
 
 </code-example>
+
+
 
 テンプレート補間では値は常にエスケープされます。
 タグの開始文字と終了文字はそのまま表示されており、HTMLとしては解釈されていません。
@@ -105,16 +111,21 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 しかし値をそのままバインドするとXSS脆弱性を引き起こす可能性があります。
 攻撃者の制御する値に `<script>` タグが含まれているケース等です。
 
+
 <code-example path="security/src/app/inner-html-binding.component.ts" linenums="false" title="src/app/inner-html-binding.component.ts (class)" region="class">
 
 </code-example>
 
+
+
 こういった場合、Angularはコンテキストに応じ自動的に危険な値のみを認識しサニタイズします。
 上の例では `<script>`タグのみサニタイズされ、その内容や後に続く`<b>`タグは変更されていません。
+
 
 <figure>
   <img src='generated/images/guide/security/binding-inner-html.png' alt='A screenshot showing interpolated and bound HTML values'>
 </figure>
+
 
 
 ### DOM APIの直接使用を避ける
@@ -136,16 +147,14 @@ Webサーバーを設定する必要があります。CSP に関するより詳�
 
 {@a offline-template-compiler}
 
-### オフライン・テンプレート・コンパイラ（AOTコンパイル）
+### オフラインテンプレートコンパイラを使う
 
-オフライン・テンプレート・コンパイラは「テンプレートインジェクション」と呼ばれる脆弱性を確実に防止し
-アプリケーションのパフォーマンスを大幅に向上させます。運用環境ではAOTコンパイルを使ってください。
-Angularはテンプレート文字列を全面的に信頼するため、動的なテンプレート生成は常にXSSの危険性を有します。
-AOTコンパイルを使い動的なテンプレート生成を避けることで、Angularのセキュリティモデルが迂回されることを
-防止することができます。
-
-フォームの動的生成に関しては [Dynamic Forms](guide/dynamic-form) のガイドを参照してください。
-
+オフライン・テンプレート・コンパイラはテンプレートインジェクションと呼ばれる脆弱性を確実に防止し
+アプリケーションのパフォーマンスを大幅に向上させます。プロダクション環境ではオフラインテンプレートコンパイラを使い、
+動的にテンプレートを生成しないようにしましょう。Angularはテンプレートコードを信頼するので、
+テンプレート、特にユーザーデータを含むテンプレートを生成すると、Angularの組み込みの保護が回避されます。
+Angularはテンプレート文字列を全面的に信頼するため、動的なテンプレート生成は常にXSSの危険性を有します。フォームを安全に動的に構築する方法については
+[Dynamic Forms](guide/dynamic-form) のガイドを参照してください。
 
 ### サーバーサイドXSSへの対策
 
@@ -154,20 +163,24 @@ AOTコンパイルを使い動的なテンプレート生成を避けること�
 この場合アプリケーションは攻撃者によって完全に制御されてしまいます。
 サーバーサイドでHTMLを構築する際も値のエスケープは確実に行ってください。
 またサーバーサイドでAngularテンプレートを生成することは避けてください。
-これらの処理はテンプレート注入脆弱性が発生する危険性を高めます。
+これらの処理はテンプレートインジェクションの脆弱性が発生する危険性を高めます。
+
 
 
 <h2 id='bypass-security-apis'>
   安全な値の信頼
 </h2>
 
+
+
 実行可能コードの注入や `<iframe>` による任意のURLの表示、潜在的な危険を伴うのURLの構築、
 アプリケーションによっては、これらの処理が必要になることがあるかもしれません。
 これら処理のためサニタイズを一時的に無効にするには、対象の値が安全である旨をあらかじめAngularに伝える必要があります。
-この処理は慎重に行ってください。悪意のある値を誤って信頼済としてマークしてしまった場合
+ただし *注意してください*。悪意のある値を誤って信頼済としてマークしてしまった場合
 アプリケーションに脆弱性が混入します。必要に応じてセキュリティ専門家のレビューを受けてください。
 
-値を信頼済としてマークするには `DomSanitizer` をDIしコンテキストに応じて次のいずれかのメソッドを実行します。
+値を信頼済としてマークするには `DomSanitizer` を注入してコンテキストに応じ
+次のいずれかのメソッドを実行します。
 
 * `bypassSecurityTrustHtml`
 * `bypassSecurityTrustScript`
@@ -176,51 +189,69 @@ AOTコンパイルを使い動的なテンプレート生成を避けること�
 * `bypassSecurityTrustResourceUrl`
 
 値が安全かどうかはコンテキストによって変わります。意図した値の用途に適したメソッドを使用してください。
-たとえば次のように、`<a href="...">`に` javascript：alert(...)` をバインドするとします。
+たとえば次のように、 URLに` javascript：alert(...)` をバインドするとします。
+
 
 <code-example path="security/src/app/bypass-security.component.html" linenums="false" title="src/app/bypass-security.component.html (URL)" region="URL">
 
 </code-example>
 
-通常であればURLはサニタイズされコードは実行されません。開発モードの場合その旨がコンソールに表示されます。
-URLの値をあらかじめ `bypassSecurityTrustUrl` で信頼済とマークしておくことでこの動作を抑制できます。
+
+
+通常、Angularは自動的にURLをサニタイズし、危険なコードを無効にし、
+開発モードではこのアクションをコンソールに記録します。
+これを防ぐには、`bypassSecurityTrustUrl`を呼び出してURLの値を信頼できるURLとしてマークします。
+
 
 <code-example path="security/src/app/bypass-security.component.ts" linenums="false" title="src/app/bypass-security.component.ts (trust-url)" region="trust-url">
 
 </code-example>
+
+
 
 <figure>
   <img src='generated/images/guide/security/bypass-security-component.png' alt='A screenshot showing an alert box created from a trusted URL'>
 </figure>
 
 
-ユーザーからの入力を信頼済としてマークするにはコントローラー内で上記メソッドを使用します。
-以下はYouTubeの動画IDを入力し対応する動画を`<iframe>`で読み込む例です。
-`<iframe>` に任意のURLがバインドされた場合、そこから危険なファイルをダウンロードしてしまい
-疑いなく実行してしまう等の危険性が考えられます。そのため `<iframe src>` は「リソースURL」コンテキストとして扱われます。
-確実に信頼できるURLを生成しコンテキストに対応する適切なメソッドで信頼済とマークすることではじめて、
-`<iframe src>` で読み込めるようになります。
+
+ユーザー入力を信頼できる値に変換する必要がある場合は、コントローラーメソッドを使用します。
+次のテンプレートでは、ユーザーはYouTubeの動画IDを入力し、対応する動画を`<iframe>`に読み込むことができます。
+信頼できないソースは、たとえば、無防備なユーザーが実行する可能性があるファイルを密かにダウンロードする可能性があるため、
+`<iframe src>`属性はリソースURLのセキュリティコンテキストです。
+したがって、コントローラ上のメソッドを呼び出して信頼できるビデオURLを作成します。
+これにより、Angularは`<iframe src>`へのバインディングを許可します
+
 
 <code-example path="security/src/app/bypass-security.component.html" linenums="false" title="src/app/bypass-security.component.html (iframe)" region="iframe">
 
 </code-example>
 
+
+
 <code-example path="security/src/app/bypass-security.component.ts" linenums="false" title="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url">
 
 </code-example>
+
+
+
 
 <h2 id='http'>
   HTTPプロトコル上での脆弱性
 </h2>
 
+
+
 HTTPプロトコル上の脆弱性のうち代表的な2つ、クロスサイトリクエストフォージェリ（CSRF / XSRF）と
-クロスサイトスクリプトインクリージョン（XSSI）に対してはAngular側での対策がサポートされています。
+クロスサイトスクリプトインクルージョン（XSSI）に対してはAngular側での対策がサポートされています。
 双方ともサーバー側での対策が必要すが、Angularはそれを容易にするようなクライアント側での機能を提供します。
 
 
 <h3 id='xsrf'>
   クロスサイトリクエストフォージェリ
 </h3>
+
+
 
 クロスサイトリクエストフォージェリでは、攻撃者はまず攻撃対象とは別のサイト（`evil.com`とします）へ
 ユーザーを誘導しそこで悪意のあるコードを読み込ませます。次に、そのコードを
@@ -240,54 +271,56 @@ XSRF対策が行われていない場合 `example-bank.com` は送られてき�
 自身によって生成された正当なものなのかそうでないのか確実に区別できなければなりません。
 この対策は、サーバー側、クライアント側、双方が協調し動作することではじめて実現します。
 
-XSRF対策の一般的な方法を紹介します。最初にサーバーはランダムな文字列（トークン）を生成し
-それをクライアントのCookieへ保存します。クライアントはこのCookie上のトークンと同じ値を
-リクエスト時のカスタムヘッダにも付与します。それを受け取ったサーバーはCookieとカスタムヘッダと
-双方に同一のトークンが存在するか検査、異なっていた場合やいずれか存在しなかった場合リクエストを拒否します。
+一般的なXSRF対策では、アプリケーションサーバーは、ランダムに生成された認証トークンをCookieに送信します。
+クライアントコードはCookieを読み取り、その後のすべてのリクエストにトークンを含むカスタムリクエストヘッダを追加します。
+サーバーは、受信したCookieの値をリクエストヘッダの値と比較し、値がないか一致しない場合はリクエストを拒否します。
 
-この手法は、ブラウザの _same origin policy_ によって有効に動作します。
-Cookieの参照はそれがセットされたのと同じサイトからしか行なえません。
-カスタムヘッダの付与はリクエスト先のサイトと同じサイトからしか行なえません。
-つまり、これら処理を行えるのは `example-bank.com` 上の正当なアプリケーションのみで、
-`evil.com` 上では行うことはできません。
+この手法は、すべてのブラウザが_same origin policy_を実装しているため効果的です。
+Cookieが設定されているWebサイトのコードだけが、そのサイトからCookieを読み取り、そのサイトへのリクエストでカスタムヘッダーを設定することができます。
+つまり、アプリケーションだけがこのCookieトークンを読み取り、カスタムヘッダーを設定できます。
+`evil.com`の悪意のあるコードにはできません。
 
-Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。
-詳しくは [HttpClient guide](/guide/http) の章を参照してください。
+Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClient guide](/guide/http) の章を参照してください。
 
-CSRF に関するより詳しい情報はOWASPの
-[Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29)や
-[Cross-Site Request Forgery (CSRF) Prevention Cheat Sheet](https://www.owasp.org/index.php/CSRF_Prevention_Cheat_Sheet)を
-参照してください。スタンフォード大学の論文 [Robust Defenses for Cross-Site Request Forgery](https://seclab.stanford.edu/websec/csrf/csrf.pdf) にも豊富な情報が掲載されています。
+CSRFについてはオープンWebアプリケーションセキュリティプロジェクト（OWASP）の、
+<a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29">Cross-Site Request Forgery (CSRF)</a> および
+<a href="https://www.owasp.org/index.php/CSRF_Prevention_Cheat_Sheet">Cross-Site Request Forgery (CSRF) Prevention Cheat Sheet</a>を参照してください。
+スタンフォード大学の論文
+<a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf">Robust Defenses for Cross-Site Request Forgery</a> にも豊富な情報が掲載されています。
 
-Dave Smith氏による <a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する登壇</a> も解りやすい解説です。
+Dave Smith氏による
+<a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する登壇</a> も解りやすい解説です。
 
 
 <h3 id='xssi'>
-  クロスサイトスクリプトインクリージョン
+  クロスサイトスクリプトインクルージョン
 </h3>
 
-クロスサイトスクリプトインクリージョンは「JSON脆弱性」としても知られています。この攻撃により、
-攻撃者は自身のウェブサイトからアプリケーション上の任意のJSON APIの値を読み取ることができます。
-攻撃は、古いバージョンのブラウザで `Object` クラスのコンストラクタをオーバーライドし、
-その状態でJSON APIを `<script>`タグで読み込むことによって行われます。
 
-この攻撃は、返却されるJSONの値がJavaScriptのコードとして有効である場合に成立します。
-したがって、値がコードとして解釈されないようサーバー側でプレフィックスを付与することで対策が可能です。
-これには、慣例的に `")]}',\n"` という文字列が用いられています。
 
-Angularの `HttpClient` ライブラリはこの対策に対応しています。
-すべてのJSON APIの返却から `")]}',\n"` というプレフィックスを取り除き
-その後、これをパースします。
+JSON脆弱性とも呼ばれるクロスサイトスクリプトインクルージョンにより、攻撃者のWebサイトで
+JSON APIからデータを読み取ることができます。この攻撃は、ネイティブJavaScriptオブジェクトコンストラクタを
+オーバーライドしてから、`<script>`タグを使用してAPI URLを含めることによって、古いブラウザで機能します。
+
+この攻撃は、返されたJSONがJavaScriptとして実行可能な場合にのみ成功します。
+サーバーはすべてのJSONレスポンスを実行不可能にするためにプレフィックスを付けて攻撃を防ぐことができます。
+慣習的には、よく知られている文字列 `")]} ',\n"` を使用します。
+
+Angularの`HttpClient`ライブラリはこの規約を認識し、
+解析前にすべてのレスポンスから文字列 `")]},\n"` を自動的に削除します。
 
 より詳細な情報は[Google web security blog post](https://security.googleblog.com/2011/05/website-security-for-webmasters.html)の
-クロスサイトスクリプトインクリージョンの項を参照してください。
+クロスサイトスクリプトインクルージョンの項を参照してください。
+
 
 
 <h2 id='code-review'>
   Angularアプリケーションのセキュリティ監査
 </h2>
 
-Angularアプリケーションは通常のWebアプリケーションと同等のセキュリティが求められます。
-[_bypassSecurityTrust_](guide/security#bypass-security-apis) 等、利用に際してセキュリティレビューが必要となるAPIは
-ドキュメントにその旨明記されています。
 
+
++Angularアプリケーションは通常のWebアプリケーションと同等のセキュリティが求められます。
+[_bypassSecurityTrust_](guide/security#bypass-security-apis)メソッドなど、セキュリティレビューで
+監査する必要のあるAngular固有のAPIは、
+ドキュメントにセキュリティの影響を受けやすいとマークされています。

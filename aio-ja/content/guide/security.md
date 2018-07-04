@@ -320,7 +320,7 @@ Angularの`HttpClient`ライブラリはこの規約を認識し、
 
 
 
-+Angularアプリケーションは通常のWebアプリケーションと同等のセキュリティが求められます。
+Angularアプリケーションは通常のWebアプリケーションと同等のセキュリティが求められます。
 [_bypassSecurityTrust_](guide/security#bypass-security-apis)メソッドなど、セキュリティレビューで
 監査する必要のあるAngular固有のAPIは、
 ドキュメントにセキュリティの影響を受けやすいとマークされています。

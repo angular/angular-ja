@@ -29,7 +29,7 @@ Observableの通知を受け取るハンドラーは、`Observer` インタフ�
 | `error` | オプションです。エラー通知のハンドラーです。エラーはObservableインスタンスの実行を停止します。|
 | `complete` | オプションです。実行完了通知のハンドラーです。遅延した値は、実行完了後もnextハンドラーに引き続き渡されます。|
 
-オブザーバーオブジェクトは、これらのハンドラーの任意の組み合わせを定義することができます。いずれかの通知タイプのハンドラを指定しなかった場合、オブザーバはそのタイプの通知を無視します。
+オブザーバーオブジェクトは、これらのハンドラーの任意の組み合わせを定義することができます。いずれかの通知タイプのハンドラを指定しなかった場合、オブザーバーはそのタイプの通知を無視します。
 
 ## サブスクライブ
 
@@ -57,13 +57,13 @@ Observableの通知を受け取るハンドラーは、`Observer` インタフ�
 
 いずれの場合も、`next`ハンドラーは必須です。`error`と`complete`ハンドラーはオプションです。
 
-`next()`関数はコンテキストに応じて、例えば、メッセージ文字列、イベントオブジェクト、数値、または構造体を受け取ることができることに注意してください。一般的な用語として、私達はObservableによって公開されたデータを*ストリーム*と呼びます。任意のタイプの値はObservableで表現でき、値はストリームとしてパブリッシュされます。
+`next()`関数はコンテキストに応じて、たとえば、メッセージ文字列、イベントオブジェクト、数値、または構造体を受け取ることができることに注意してください。一般的な用語として、私達はObservableによって公開されたデータを*ストリーム*と呼びます。任意のタイプの値はObservableで表現でき、値はストリームとしてパブリッシュされます。
 
 ## Observableを作成する
 
-`Observable` コンストラクターを使用して任意のタイプのObservableストリームを作成しましょう。コンストラクターは、Observableの`subscribe()`メソッドが実行されたときに実行するサブスクライバー関数を引数としてとります。サブスクライバー関数は`Observer`オブジェクトを受け取り、オブザーバの` next()`メソッドに値を公開することができます。
+`Observable` コンストラクターを使用して任意のタイプのObservableストリームを作成しましょう。コンストラクターは、Observableの`subscribe()`メソッドが実行されたときに実行するサブスクライバー関数を引数としてとります。サブスクライバー関数は`Observer`オブジェクトを受け取り、オブザーバーの` next()`メソッドに値を公開することができます。
 
-例えば、上の`Observable.of(1,2,3)`に相当するObservableを作成するには、次のようにします：
+たとえば、上の`Observable.of(1,2,3)`に相当するObservableを作成するには、次のようにします：
 
 <code-example path="observables/src/creating.ts" region="subscriber" title="Create observable with constructor"></code-example>
 
@@ -77,7 +77,7 @@ Now you can use this function to create an observable that publishes keydown eve
 
 ## マルチキャスト
 
-典型的なObservableは、サブスクライブしたオブザーバーごとに独立した新しい実行を作成します。オブザーバーがサブスクライブすると、Observableはイベントハンドラをつなぎ、そのオブザーバーに値を渡します。2つ目のオブザーバーが加入すると、Observableは新しいイベントハンドラをつなぎ、別の実行でその2つ目のオブザーバに値を渡します。
+典型的なObservableは、サブスクライブしたオブザーバーごとに独立した新しい実行を作成します。オブザーバーがサブスクライブすると、Observableはイベントハンドラをつなぎ、そのオブザーバーに値を渡します。2つ目のオブザーバーが加入すると、Observableは新しいイベントハンドラをつなぎ、別の実行でその2つ目のオブザーバーに値を渡します。
 
 場合によっては、各サブスクライバーに対して独立した実行を開始するのではなく各サブスクリプションが同じ値を取得するようにしたいことがあるでしょう&mdash;値の発行がすでに始まっていたとしても。これは、ドキュメントオブジェクトのクリックを監視するような場合に当てはまります。
 
@@ -93,7 +93,7 @@ Observableを作成するときは、そのObservableをどのように使用す
 
 <code-example path="observables/src/multicasting.ts" region="subscribe_twice" title="Two subscriptions"></code-example>
 
- オブサーバブルをマルチキャストするように書き換えると次のようになります。
+ Observableをマルチキャストするように書き換えると次のようになります。
 
 <code-example path="observables/src/multicasting.ts" region="multicast_sequence" title="Create a multicast subscriber"></code-example>
 
@@ -103,7 +103,7 @@ Observableを作成するときは、そのObservableをどのように使用す
 
 ## Error handling
 
-Observableは値を非同期的に生成するため、try/catchは効果的にエラーを捕捉しません。代わりに、オブザーバに`error`コールバックを指定することでエラーを処理します。 また、エラーを生成すると、Observableはサブスクリプションをクリーンアップし、値の生成を停止します。Observableは値を生成する（次のコールバックを呼び出す）か、あるいは`complete`または`error`コールバックを呼び出して完了することができます。
+Observableは値を非同期的に生成するため、try/catchは効果的にエラーを捕捉しません。代わりに、オブザーバーに`error`コールバックを指定することでエラーを処理します。 また、エラーを生成すると、Observableはサブスクリプションをクリーンアップし、値の生成を停止します。Observableは値を生成する（次のコールバックを呼び出す）か、あるいは`complete`または`error`コールバックを呼び出して完了することができます。
 
 <code-example>
 myObservable.subscribe({

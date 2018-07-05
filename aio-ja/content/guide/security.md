@@ -59,7 +59,7 @@ Angularは定期的にアップデートされており、最新版には以前�
 XSS攻撃を防ぐには悪意のあるコードがDOMに挿入されるのを防ぐ必要があります。たとえば、
 DOMに`<script>`タグを挿入された場合、攻撃者はそのWebサイトで任意のコードを実行できます。
 攻撃は`<script>`タグだけでなくDOMの多くの要素やプロパティがその対象となります。
-`<img onerror = "...">`や`<a href="javascript:...">`など、
+`<img onerror="...">`や`<a href="javascript:...">`など、
 攻撃者の制御するデータがDOMに注入されることで攻撃が成立します。
 
 ### AngularによるXSS対策
@@ -289,7 +289,7 @@ CSRFについてはオープンWebアプリケーションセキュリティプ�
 <a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf">Robust Defenses for Cross-Site Request Forgery</a> にも豊富な情報が掲載されています。
 
 Dave Smith氏による
-<a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する登壇</a> も解りやすい解説です。
+<a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する発表</a> も解りやすい解説です。
 
 
 <h3 id='xssi'>
@@ -304,7 +304,7 @@ JSON APIからデータを読み取ることができます。この攻撃は、
 
 この攻撃は、返されたJSONがJavaScriptとして実行可能な場合にのみ成功します。
 サーバーはすべてのJSONレスポンスを実行不可能にするためにプレフィックスを付けて攻撃を防ぐことができます。
-慣習的には、よく知られている文字列 `")]} ',\n"` を使用します。
+慣習的には、よく知られている文字列 `")]}',\n"` を使用します。
 
 Angularの`HttpClient`ライブラリはこの規約を認識し、
 解析前にすべてのレスポンスから文字列 `")]},\n"` を自動的に削除します。

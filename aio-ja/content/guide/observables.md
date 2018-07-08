@@ -51,7 +51,7 @@ Observableの通知を受け取るハンドラーは、`Observer` インタフ�
   region="observer"
   title="Subscribe using observer"></code-example>
 
-あるいは、`subscribe()`メソッドは、コールバック関数定義を`next`、`error`、`complete`ハンドラーのために、行内で受け入れることができます。例えば、次の`subscribe()`コールは、定義済みのオブザーバーを指定するコールと同じです。
+あるいは、`subscribe()`メソッドは、コールバック関数定義を`next`、`error`、`complete`ハンドラーのために、行内で受け入れることができます。たとえば、次の`subscribe()`コールは、定義済みのオブザーバーを指定するコールと同じです。
 
 <code-example path="observables/src/subscribing.ts" region="sub_fn" title="Subscribe with positional arguments"></code-example>
 

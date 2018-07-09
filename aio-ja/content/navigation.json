@@ -66,12 +66,6 @@
     },
 
     {
-      "url": "guide/webpack",
-      "title": "Webpack: An Introduction",
-      "hidden": true
-    },
-
-    {
       "url": "guide/quickstart",
       "title": "はじめに",
       "tooltip": "Angularへのやさしい導入",
@@ -565,6 +559,11 @@
               "url": "guide/upgrade",
               "title": "Upgrading Instructions",
               "tooltip": "Incrementally upgrade an AngularJS application to Angular."
+            },
+            {
+              "url": "guide/upgrade-performance",
+              "title": "Upgrading for Performance",
+              "tooltip": "Upgrade from AngularJS to Angular in a more flexible way."
             },
             {
               "url": "guide/ajs-quick-reference",

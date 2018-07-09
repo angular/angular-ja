@@ -43,6 +43,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 <div class="l-sub-section">
 
 
+{@a why-check-dirty-and-touched}
 
 #### なぜ、_dirty_と_touched_ をチェックするのでしょうか？
 
@@ -74,7 +75,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 {@a reactive-component-class}
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.ts" region="form-group" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="form-group" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
 
 注意してください:
@@ -120,8 +121,10 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 リアクティブフォームでは、カスタムバリデータは簡単に追加できます。関数を`FormControl`に直接渡すだけです。
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.ts" region="custom-validator" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
+
+{@a adding-to-template-driven-forms}
 
 ### テンプレート駆動型フォームへ追加
 
@@ -170,5 +173,80 @@ Angularは、AngularJSと同様に、多くのコントロールプロパティ�
 
 </code-example>
 
+## クロスフィールドバリデーション
+このセクションでは、クロスフィールドバリデーションを実行する方法を示します。カスタムバリデータの作成に関するいくつかの基本的な知識を前提としています。
+
+<div class="l-sub-section">
+
+カスタムバリデータを作成したことがない場合は、まず[カスタムバリデータセクション](guide/form-validation#custom-validators)を確認してください。
+
+</div>
+ 
+次のセクションでは、ヒーローフォームに記入することで、ヒーローが本当のアイデンティティを明らかにしないようにします。ヒーロー名と別人格が一致しないことを検証することでこれを行います。
+
+### リアクティブフォームへの追加
+
+フォームの構造は次のとおりです
+
+```javascript
+const heroForm = new FormGroup({
+  'name': new FormControl(),
+  'alterEgo': new FormControl(),
+  'power': new FormControl()
+});
+```
+
+名前とalterEgoは兄弟コントロールであることに注意してください。単一のカスタムバリデーターで両方のコントロールを評価するには、共通の祖先コントロールである`FormGroup`でバリデーションを実行する必要があります。こうすることで、値を比較することができる子コントロールの`FormGroup`を照会することができます。
+
+バリデータを`FormGroup`に追加するには、作成時に2番目の引数として新しいバリデータを渡します。
+
+```javascript
+const heroForm = new FormGroup({
+  'name': new FormControl(),
+  'alterEgo': new FormControl(),
+  'power': new FormControl()
+}, { validators: identityRevealedValidator });
+```
+
+バリデータのコードは次のとおりです。
+
+<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-validator" title="shared/identity-revealed.directive.ts" linenums="false">
+</code-example>
+
+アイデンティティのバリデーターは、`ValidatorFn`インターフェースを実装します。 Angularコントロールオブジェクトを引数としてとり、フォームが有効な場合はnullを返し、それ以外の場合は`ValidationErrors`を返します。
+
+最初に、`FormGroup`の[get](api/forms/AbstractControl#get)メソッドを呼び出すことによって子コントロールを取得します。次に、`name`と`alterEgo`コントロールの値を単純に比較します。
+
+値が一致しない場合、ヒーローのアイデンティティは秘密のままであり、安全にnullを返すことができます。それ以外の場合、ヒーローのアイデンティティが明らかになり、エラーオブジェクトを返すことでフォームを無効としてマークする必要があります。
+
+次に、ユーザーエクスペリエンスを向上させるために、フォームが無効な場合に適切なエラーメッセージが表示されます。
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" title="reactive/hero-form-template.component.html" linenums="false">
+</code-example>
+
+次のことを確認します。
+- `FormGroup`は`identityRevealed`バリデータによって返されたクロスバリデーションエラーを持ちますが、
+- ユーザーはまだフォームと[対話](guide/form-validation#why-check-dirty-and-touched)していません。
+
+### テンプレート駆動型フォームへの追加
+まず、バリデータ関数をラップするディレクティブを作成する必要があります。 `NG_VALIDATORS`トークンを使用してバリデータとして提供します。理由がわからない場合や構文を完全に理解していない場合は、前の[セクション](guide/form-validation#adding-to-template-driven-forms)に戻ってください。
+
+<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-directive" title="shared/identity-revealed.directive.ts" linenums="false">
+</code-example>
+
+次に、このディレクティブをHTMLテンプレートに追加する必要があります。バリデーターはフォームの最上位レベルに登録する必要があるため、このディレクティブを`form`タグに置きます。
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-register-validator" title="template/hero-form-template.component.html" linenums="false">
+</code-example>
+
+ユーザーエクスペリエンスを向上させるため、フォームが無効な場合に適切なエラーメッセージが表示されます。
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-error-message" title="template/hero-form-template.component.html" linenums="false">
+</code-example>
+
+次のことを確認します。
+- フォームに`identityRevealed`バリデータによって返されたクロスバリデーションエラーがありますが、
+- ユーザーはまだフォームと[対話](guide/form-validation#why-check-dirty-and-touched)していません。
+
+以上で、クロスバリデーションの例が完成しました。私たちは次のことに成功しました。
+- 2つの兄弟コントロールの値に基づいてフォームを検証し、
+- ユーザーがフォームと対話してバリデーションが失敗した後、説明的なエラーメッセージが表示されます。
 
 **<live-example></live-example> を実行して、リアクティブおよびテンプレート駆動の完全なサンプルコードを見ることができます。**

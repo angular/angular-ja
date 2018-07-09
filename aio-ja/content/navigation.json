@@ -199,8 +199,9 @@
             },
             {
               "url": "guide/component-styles",
-              "title": "Component Styles",
-              "tooltip": "Add CSS styles that are specific to a component."
+              "title": "コンポーネントスタイル",
+              "tooltip": "コンポーネントに固有のCSSスタイルを追加します。",
+              "translated": true
             },
             {
               "url": "guide/elements",
@@ -269,19 +270,21 @@
             },
             {
               "url": "guide/dynamic-form",
-              "title": "Dynamic forms",
-              "tooltip": "Render dynamic forms with FormGroup."
+              "title": "ダイナミックフォーム",
+              "tooltip": "FormGroupを使用して動的なフォームをレンダリングします。",
+              "translated": true
             }
           ]
         },
         {
-          "title": "Observables & RxJS",
-          "tooltip": "Observables & RxJS",
+          "title": "Observable と RxJS",
+          "tooltip": "Observable と RxJS",
           "children": [
             {
               "url": "guide/observables",
-              "title": "Observables",
-              "tooltip": ""
+              "title": "Observable",
+              "tooltip": "",
+              "translated": true
             },
             {
               "url": "guide/rx-library",
@@ -450,8 +453,9 @@
         },
         {
           "url": "guide/security",
-          "title": "Security",
-          "tooltip": "Developing for content security in Angular applications."
+          "title": "セキュリティ",
+          "tooltip": "Angularアプリケーションでのコンテンツセキュリティの開発",
+          "translated": true
         },
         {
           "title": "セットアップ & デプロイ",

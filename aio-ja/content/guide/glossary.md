@@ -116,11 +116,15 @@ _クラスフィールドデコレーター_
 
 そのフィールドの型を宣言するクラス定義内のフィールドの直前の[デコレーター](guide/glossary#decorator)ステートメント。`@Input`や`@Output`が一例です。
 
+{@a cli}
+
 ## CLI
 
 [Angular CLI](https://cli.angular.io/)はプロジェクトの作成やファイルの追加、そしてテスト、バンドル、デプロイなど、さまざまな進行中の開発タスクを実行する `コマンドラインインターフェース`です。
+[Angular CLI](https://cli.angular.io/)は、Angularの開発サイクルを管理するためのコマンドラインツールです。これを使用して、[ワークスペース](guide/glossary#workspace)または[プロジェクト](guide/glossary#project)の初期ファイルシステムのスキャフォールドを作成し、さまざまな要素の初期の汎用的なコードを追加および変更する[schematics](guide/glossary#schematic)を実行します。このツールは、ビルド、テスト、バンドル、およびデプロイを含む開発サイクルのすべての段階をサポートします。
 
-詳しくは[クイックスタート](guide/quickstart) ガイドを参照してください。
+* 新しいプロジェクトにCLIを使用するには、[入門ガイド](guide/quickstart)を参照してください。 
+* CLIの全機能の詳細については、[Angular CLI ドキュメント](https://github.com/angular/angular-cli/wiki)を参照してください。
 
 {@a component}
 
@@ -209,7 +213,8 @@ _依存性の注入_
 
 依存性の注入は、アプリケーションの部品に求められた部品を作って送り届けるためのデザインパターンでありメカニズムです。
 
-Angularでは、依存関係は通常はサービスですが、文字列や関数などの値でもあります。アプリケーションの[インジェクター](guide/glossary#injector)（ブートストラップ時に自動的に作成される）は、サービスまたは値の登録[プロバイダー](guide/glossary#provider)を使用して、必要に応じて依存関係を作成します。異なるプロバイダーは、同じサービスの異なる実装を提供することができます。
+Angularでは、依存関係は通常はサービスですが、文字列や関数などの値でもあります。
+アプリケーションの[インジェクター](guide/glossary#injector)（ブートストラップ中に自動的に作成される）は、必要に応じて、サービスまたは値の設定された[プロバイダー](guide/glossary#provider)を使用して依存関係をインスタンス化します。
 
 詳しく知るには[依存性の注入](guide/dependency-injection)ガイドを参照してください。
 
@@ -286,7 +291,7 @@ Angularは、レンダー固有のネイティブUIエレメントをラップ�
 ## Entry point
 _エントリポイント_
 
-NPMパッケージの一部を他のコードでインポートできるようにするJavaScript ID。
+NPMパッケージの一部を他のコードでインポートできるようにするJavaScriptのシンボル。
 Angularの[スコープ化パッケージ](guide/glossary#scoped-package)にはそれぞれ、`index`という名前の付いたエントリポイントがあります。
 
 Angularでは、[NgModule](guide/glossary#ngmodule)を使用して同じ結果を得ます。
@@ -316,8 +321,18 @@ Angularでは、[NgModule](guide/glossary#ngmodule)を使用して同じ結果�
 _インジェクター_
 
 Angularの[依存性の注入システム](guide/glossary#dependency-injection)におけるオブジェクトで、
-指定された"依存性"をキャッシュから見つけるか、登録された[プロバイダー](guide/glossary#provider)を使用して生成できます。
-インジェクターはブートストラッププロセスの一部として自動的にNgModule用に作成され、コンポーネント階層を継承します。
+指定された"依存性"をキャッシュから見つけるか、
+登録された[プロバイダー](guide/glossary#provider)を使用して生成できます。
+インジェクターはブートストラッププロセスの一部として自動的にNgModule用に作成され、コンポーネント階層を介して継承されます。
+
+* インジェクターは、依存関係のシングルトンインスタンスを提供し、この同じインスタンスを複数のコンポーネントに注入できます。
+
+* NgModuleとコンポーネントレベルのインジェクターの階層は、それぞれのコンポーネントと子コンポーネントに異なる依存関係のインスタンスを提供できます。
+
+* 同じ依存関係の異なる実装を提供できる異なるプロバイダーでインジェクターを設定できます。
+
+[依存性の注入ガイド](guide/hierarchical-dependency-injection)のインジェクター階層の詳細をご覧ください。
+
 
 ## Input
 _インプット_
@@ -376,6 +391,18 @@ _遅延ロード_
 たとえば、ルートモジュールで必要とされる"eager-loaded"モジュールとは対照的に、必要に応じて依存関係を遅延ロードすることができ、起動時にロードされます。
 同様に、[ルーター](guide/glossary#router)は親ビューがアクティブになっているときのみ子ビューをロードでき、必要に応じて角度アプリにロードできるカスタム要素を作成できます。
 
+{@a library}
+
+## Library
+_ライブラリ_
+
+Angularにおいて、他のAngularアプリケーションに含めることができる機能を提供する[プロジェクト](guide/glossary#project)です。ライブラリは完全なAngularアプリではなく、独立して実行することはできません。 
+
+* ライブラリ開発者は[CLI](guide/glossary#cli)を使用して、既存の[ワークスペース](guide/glossary#workspace)内の新しいライブラリのスキャフォールドを `generate` し、ライブラリを `npm` パッケージとして公開することができます。 
+
+* アプリケーション開発者は、[CLI](guide/glossary#cli)を使用して、同じ[ワークスペース](guide/glossary#workspace)内のアプリで使用する公開ライブラリを `add` できます。
+
+
 ## Lifecycle hook
 _ライフサイクルフック_
 
@@ -409,7 +436,7 @@ _モジュール_
 
 JavaScript（ECMAScript）では、各ファイルはモジュールであり、ファイルに定義されているすべてのオブジェクトはそのモジュールに属します。オブジェクトをエクスポートしてパブリックにすることができ、パブリックオブジェクトを他のモジュールで使用するためにインポートすることができます。
 
-AngularはJavaScriptモジュールまたはライブラリのコレクションとして提供されます。Angularの各ライブラリ名は`@angular`接頭辞で始まります。それらをNPMパッケージマネージャーにインストールし、JavaScriptの`import`宣言でそれらの一部をインポートします。
+AngularはJavaScriptモジュールまたはライブラリのコレクションとして提供されます。Angularの各ライブラリ名は`@angular`接頭辞で始まります。それらをnpmパッケージマネージャーにインストールし、JavaScriptの`import`宣言でそれらの一部をインポートします。
 
 Angularの[NgModule](guide/glossary#ngmodule)と比較しましょう。
 
@@ -478,7 +505,14 @@ Angularはさまざまなパイプを定義していて、さらに新しいパ�
 
 ## Polyfill
 
-ブラウザのJavaScriptの実装のギャップを埋める[NPMパッケージ](guide/npm-packages)。特定のプラットフォームで特定の機能をサポートするポリフィルについては、[ブラウザサポートガイド](guide/browser-support) を参照してください。
+ブラウザのJavaScriptの実装のギャップを埋める[npmパッケージ](guide/npm-packages)。特定のプラットフォームで特定の機能をサポートするポリフィルについては、[ブラウザサポートガイド](guide/browser-support) を参照してください。
+
+{@a project}
+
+## Project
+_プロジェクト_
+
+Angularにおいて、1つまたは複数のAngularアプリまたは[ライブラリ](guide/glossary#library)を含む[ワークスペース](guide/glossary#workspace)内のフォルダ。
 
 ## Provider
 _プロバイダー_
@@ -544,10 +578,23 @@ _ルーティングコンポーネント_
 
 {@a S}
 
+{@a schematic}
+
+## Schematic
+
+ファイルやコードを作成、修正、リファクタリング、または移動することによってプログラミングプロジェクトを生成または変換する方法を定義するスキャフォールディングライブラリ。
+
+Angular [CLI](guide/glossary#cli)は、Schematicsを使用して[Angularプロジェクト](guide/glossary#project)およびプロジェクトの一部を生成および変更します。 
+
+* Angularは、CLIで使用するための一連のSchematicsを提供します。詳細については、[Angular CLI documentation](https://github.com/angular/angular-cli/wiki)を参照してください。 
+
+* ライブラリ開発者は、CLIで公開ライブラリを生成するためのSchematicsを作成できます。詳細については、 https://www.npmjs.com/package/@angular-devkit/schematics を参照してください。
+
+
 ## Scoped package
 _スコープ化パッケージ_
 
-関連するNPMパッケージをグループ化する方法。
+関連するnpmパッケージをグループ化する方法。
 NgModuleは、名前がAngularの*スコープ名*`@angular`で始まる*スコープ化パッケージ*内で配信されます。たとえば、`@angular/core`、`@angular/common`、`@angular/http`や`@angular/router`。
 
 通常のパッケージをインポートするのと同じ方法でスコープされたパッケージをインポートします。
@@ -701,6 +748,13 @@ _ビュー階層_
 
 [カスタム要素](guide/glossary#custom-element)を参照してください。
 
+{@a workspace}
+
+## Workspace
+_ワークスペース_
+
+Angularにおいて、[プロジェクト](guide/glossary#project)を含むフォルダです。 
+[CLI](guide/glossary#cli)の `new` コマンドは、アプリケーションとライブラリを含むワークスペースを作成します。そして他のコマンドはワークスペースフォルダ内から実行する必要があります。
 
 {@a X}
 

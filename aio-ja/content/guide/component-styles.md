@@ -39,7 +39,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 このスコープの制限は、 ***スタイルのモジュール性の機能*** です。
 
-* CSSクラス名とセレクタは、各コンポーネントの文脈でもっとも合理的に利用できます。
+* CSSクラス名とセレクターは、各コンポーネントの文脈でもっとも合理的に利用できます。
 
 
 * クラス名とセレクターは、コンポーネント内で局所的で、アプリケーションの他の場所で使われている
@@ -74,13 +74,13 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 </code-example>
 
 `:host` セレクターは、ホスト要素をターゲットにする唯一の方法です。
-コンポーネント自身のテンプレートの一部ではないため、他のセレクタを使用してコンポーネント内
+コンポーネント自身のテンプレートの一部ではないため、他のセレクターを使用してコンポーネント内
 からホスト要素に到達することはできません。ホスト要素は、親コンポーネントのテンプレート内にあります。
 
 *関数形式* を使用して、`:host` の後のカッコ内に別なセレクターを含むことで、
 ホストスタイルを条件付きで適用します。
 
-つぎの例では、ホスト要素を再びターゲットにしていますが、
+次の例では、ホスト要素を再びターゲットにしていますが、
 `active` CSS クラスも持っている場合に限ります。
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" title="src/app/hero-details.component.css" linenums="false">
@@ -92,9 +92,9 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 たとえば、CSSのテーマクラスをドキュメントの `<body>` 要素に適用すると、
 それに基づいてコンポーネントの外観を変更することができます。
 
-`:host()` の関数形式と同じように動作する `:host-context()` 疑似クラスセレクタを使用します。
-`:host-context()` セレクタは、コンポーネントのホスト要素の先祖のうち、ドキュメントルートまでのCSSクラスを探します。
-`:host-context()` セレクタは、別のセレクターと組み合わせたときに便利です。
+`:host()` の関数形式と同じように動作する `:host-context()` 疑似クラスセレクターを使用します。
+`:host-context()` セレクターは、コンポーネントのホスト要素の先祖のうち、ドキュメントルートまでのCSSクラスを探します。
+`:host-context()` セレクターは、別のセレクターと組み合わせたときに便利です。
 
 次の例では、コンポーネント *内* のすべての `<h2>` 要素に `background-color`　のスタイルを適用します。
 ただし、一部の祖先要素にCSSクラス `theme-light` がある場合にのみ適用されます。
@@ -245,7 +245,7 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 ### CSS以外のスタイルファイル
 
 CLIを使用して構築する場合、
-スタイルファイルを、つぎの例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](http://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
+スタイルファイルを、次の例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](http://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
 
 <code-example>
 @Component({
@@ -278,13 +278,15 @@ CLIはインラインスタイルにプリプロセッサを適用できない�
 
 このカプセル化が *コンポーネントごとに* どのように行われるかを制御するには、
 コンポーネントのメタデータに *ビューのカプセル化モード* を設定します。
-つぎのモードから選択してください：
+次のモードから選択してください：
 
-* `Native` ビューカプセル化では、ブラウザのネイティブShadow DOM実装
+* `ShadowDom` ビューカプセル化では、ブラウザのネイティブShadow DOM実装
 （[MDN](https://developer.mozilla.org/ja/)サイトの
 [Shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)を参照）を使用して、
 Shadow DOMをコンポーネントのホスト要素にアタッチし、
 そのShadow DOM内にコンポーネントビューを配置します。コンポーネントのスタイルは、Shadow DOM内に含まれています。
+
+* `Native` ビューカプセル化は、ブラウザのネイティブShadow DOM実装の非推奨バージョンを使用します。 - [この変更について学びましょう](https://hayato.io/2016/shadowdomv1/).
 
 * `Emulated` ビューカプセル化（デフォルト）は、CSSコードを事前処理（および名前変更）して、
 Shadow DOMの動作をエミュレートし、CSSをコンポーネントのビューに効果的に適用します。
@@ -300,9 +302,9 @@ AngularはCSSをグローバルスタイルに追加します。
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" title="src/app/quest-summary.component.ts" linenums="false">
 </code-example>
 
-`Native` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
+`ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
 ( [Can I use](http://caniuse.com) サイトの
-[Shadow DOM v0](http://caniuse.com/#feat=shadowdom) を参照)。サポートは未だ限定的です。
+[Shadow DOM v1](http://caniuse.com/#feat=shadowdomv1) を参照)。サポートは未だ限定的です。
 そのため、`Emulated`ビューカプセル化がデフォルトモードであり、
 ほとんどの場合に推奨されます。
 
@@ -352,4 +354,4 @@ AngularはCSSをグローバルスタイルに追加します。
 
 これらのスタイルは後処理され、
 各セレクターに`_nghost`または`_ngcontent`属性セレクターが追加されます。
-これらの追加のセレクタは、このページで説明しているスコープルールを有効にします。
+これらの追加のセレクターは、このページで説明しているスコープルールを有効にします。

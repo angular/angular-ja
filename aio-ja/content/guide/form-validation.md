@@ -43,6 +43,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 <div class="l-sub-section">
 
 
+{@a why-check-dirty-and-touched}
 
 #### なぜ、_dirty_と_touched_ をチェックするのでしょうか？
 
@@ -122,6 +123,8 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
+
+{@a adding-to-template-driven-forms}
 
 ### テンプレート駆動型フォームへ追加
 

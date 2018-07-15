@@ -5,8 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // #enddocregion import-httpclient
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
 // #docregion import-rxjs-operators
 import { catchError, map, tap } from 'rxjs/operators';
 // #enddocregion import-rxjs-operators
@@ -20,7 +19,7 @@ const httpOptions = {
 };
 // #enddocregion http-options
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HeroService {
 
   // #docregion heroesUrl
@@ -85,7 +84,7 @@ export class HeroService {
       // 検索語がない場合、空のヒーロー配列を返す
       return of([]);
     }
-    return this.http.get<Hero[]>(`api/heroes/?name=${term}`).pipe(
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
       tap(_ => this.log(`found heroes matching "${term}"`)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );

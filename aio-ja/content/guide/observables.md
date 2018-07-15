@@ -1,72 +1,73 @@
-# Observables
+# Observable
 
-Observables provide support for passing messages between publishers and subscribers in your application. Observables offer significant benefits over other techniques for event handling, asynchronous programming, and handling multiple values.
+Observableは、アプリケーションの中でパブリッシャーとサブスクライバー間でメッセージを渡すためのサポートを提供します。Observableは、イベント処理、非同期プログラミング、および複数の値の処理のための他のテクニックよりも大きな利点を提供します。
 
-Observables are declarative&mdash;that is, you define a function for publishing values, but it is not executed until a consumer subscribes to it. The subscribed consumer then receives notifications until the function completes, or until they unsubscribe.
+Observableは宣言的です&mdash;つまり、値を公開するための関数を定義しますが、コンシューマーがそれをサブスクライブするまでは実行されません。サブスクライブするコンシューマーは、機能が完了するまで、またはアンサブスクライブするまで通知を受け取ります。
 
-An observable can deliver multiple values of any type&mdash;literals, messages, or events, depending on the context. The API for receiving values is the same whether the values are delivered synchronously or asynchronously. Because setup and teardown logic are both handled by the observable, your application code only needs to worry about subscribing to consume values, and when done, unsubscribing. Whether the stream was keystrokes, an HTTP response, or an interval timer, the interface for listening to values and stopping listening is the same.
+Observableは、文脈に応じて、任意の型&mdash;リテラル、メッセージ、またはイベントの複数の値を提供できます。受け取るためのAPIは値が同期的・非同期的に提供される場合も同じです。基本的なセットアップとティアダウンはObservableにとって処理されるので、あなたのアプリケーションコードは値を消費するためにサブスクライブを行うことと、それが済んだらアンサブスクライブすることだけを心配する必要があります。ストリームがキー入力、HTTPレスポンス、インターバルタイマーのどれでも、値をリスニングしたり、リスニングを止めるためのインターフェイスは同じです。
 
-Because of these advantages, observables are used extensively within Angular, and are recommended for app development as well.
+これらの利点のために、ObservableはAngular内で広く使用されており、アプリの開発にも推奨されています。
 
-## Basic usage and terms
+## 基本的な使用法と用語
 
-As a publisher, you create an `Observable` instance that defines a *subscriber* function. This is the function that is executed when a consumer calls the `subscribe()` method. The subscriber function defines how to obtain or generate values or messages to be published.
+パブリッシャーとして、*サブスクライバー* 関数を定義する `Observable` インスタンスを作成することができます。これは、コンシューマーが `subscribe（）`メソッドを呼び出したときに実行される関数です。サブスクライバー関数は、どのように値を取得または生成し、メッセージを発行するかを定義します。
 
-To execute the observable you have created and begin receiving notifications, you call its `subscribe()` method, passing an *observer*.  This is a JavaScript object that defines the handlers for the notifications you receive. The `subscribe()` call returns a `Subscription` object that has an `unsubscribe()` method, which you call to stop receiving notifications.
+作成したObservableを実行して値を受信するには、*オブザーバー* を渡す `subscribe()` メソッドを呼ぶ必要があります。これは、受け取った通知のハンドラーを定義するJavaScriptオブジェクトです。`subscribe()` は 通知を受信を止めるための `unsubscribe()` メソッドがある `Subscription` オブジェクトを返します。
 
-Here's an example that demonstrates the basic usage model by showing how an observable could be used to provide geolocation updates.
+ここでは、Observableを使用してジオロケーションの更新を提供する方法を示すことによって、基本的な使用モデルの例を示します。
 
-<code-example path="observables/src/geolocation.ts" title="Observe geolocation updates"></code-example>
+<code-example path="observables/src/geolocation.ts" title="ジオロケーションのアップデートを監視する"></code-example>
 
-## Defining observers
+## オブザーバーを定義する
 
-A handler for receiving observable notifications implements the `Observer` interface. It is an object that defines callback methods to handle the three types of notifications that an observable can send:
 
-| Notification type | Description |
+Observableの通知を受け取るハンドラーは、`Observer` インタフェースを実装します。これは、Observableが送信できる3種類の通知を処理するためのコールバックメソッドを定義するオブジェクトです。
+
+| 通知の種類 | 説明 |
 |:---------|:-------------------------------------------|
-| `next`  | Required. A handler for each delivered value. Called zero or more times after execution starts.|
-| `error` | Optional. A handler for an error notification. An error halts execution of the observable instance.|
-| `complete` | Optional. A handler for the execution-complete notification. Delayed values can continue to be delivered to the next handler after execution is complete.|
+| `next`  | 必須です。それぞれの値が提供されたときのハンドラーです。実行が開始されてから0回以上呼び出されます。|
+| `error` | オプションです。エラー通知のハンドラーです。エラーはObservableインスタンスの実行を停止します。|
+| `complete` | オプションです。実行完了通知のハンドラーです。遅延した値は、実行完了後もnextハンドラーに引き続き渡されます。|
 
-An observer object can define any combination of these handlers. If you don't supply a handler for a notification type, the observer ignores notifications of that type.
+オブザーバーオブジェクトは、これらのハンドラーの任意の組み合わせを定義することができます。いずれかの通知タイプのハンドラを指定しなかった場合、オブザーバーはそのタイプの通知を無視します。
 
-## Subscribing
+## サブスクライブ
 
-An `Observable` instance begins publishing values only when someone subscribes to it. You subscribe by calling the `subscribe()` method of the instance, passing an observer object to receive the notifications.
+`Observable` インスタンスは誰かがサブスクライブすると値をパブリッシュしはじめます。サブスクライブするためにはインスタンスの `subscribe()` メソッドを呼び出し、オブザーバーオブジェクトを渡して通知を受け取ります。
 
 <div class="l-sub-section">
+   サブスクリプションがどのように動作するかを示すために、新しいObservableを作成する必要があります。
+   新しいインスタンスを作成するために使用するコンストラクタがありますが、例として頻繁に使用される形式の単純なObservableを作成する `Observable`クラスでいくつかの静的メソッドを使用できます。
 
-   In order to show how subscribing works, we need to create a new observable. There is a  constructor that you use to create new instances, but for illustration, we can use some static methods on the `Observable` class that create simple observables of frequently used types:
-
-  * `Observable.of(...items)`&mdash;Returns an `Observable` instance that synchronously delivers the values provided as arguments.
-  * `Observable.from(iterable)`&mdash;Converts its argument to an `Observable` instance. This method is commonly used to convert an array to an observable.
+  * `Observable.of(...items)`&mdash;引数として提供された値を同期的に提供する`Observable`インスタンスを返します。
+  * `Observable.from(iterable)`&mdash;引数を`Observable`インスタンスに変換します。このメソッドは、通常、配列をobservableに変換するために使用されます。
 
 </div>
 
-Here's an example of creating and subscribing to a simple observable, with an observer that logs the received message to the console:
+受信したメッセージをコンソールに記録するオブザーバーを使って、シンプルなObservableを作成してサブスクライブする例を次に示します。
 
 <code-example
   path="observables/src/subscribing.ts"
   region="observer"
   title="Subscribe using observer"></code-example>
 
-Alternatively, the `subscribe()` method can accept callback function definitions in line, for `next`, `error`, and `complete` handlers. For example, the following `subscribe()` call is the same as the one that specifies the predefined observer:
+あるいは、`subscribe()`メソッドは、コールバック関数定義を`next`、`error`、`complete`ハンドラーのために、行内で受け入れることができます。たとえば、次の`subscribe()`コールは、定義済みのオブザーバーを指定するコールと同じです。
 
 <code-example path="observables/src/subscribing.ts" region="sub_fn" title="Subscribe with positional arguments"></code-example>
 
-In either case, a `next` handler is required. The `error` and `complete` handlers are optional.
+いずれの場合も、`next`ハンドラーは必須です。`error`と`complete`ハンドラーはオプションです。
 
-Note that a `next()` function could receive, for instance, message strings, or event objects, numeric values, or structures, depending on context. As a general term, we refer to data published by an observable as a *stream*. Any type of value can be represented with an observable, and the values are published as a stream.
+`next()`関数はコンテキストに応じて、たとえば、メッセージ文字列、イベントオブジェクト、数値、または構造体を受け取ることができることに注意してください。一般的な用語として、私達はObservableによって公開されたデータを*ストリーム*と呼びます。任意のタイプの値はObservableで表現でき、値はストリームとしてパブリッシュされます。
 
-## Creating observables
+## Observableを作成する
 
-Use the `Observable` constructor to create an observable stream of any type. The constructor takes as its argument the subscriber function to run when the observable’s `subscribe()` method executes. A subscriber function receives an `Observer` object, and can publish values to the observer's `next()` method.
+`Observable` コンストラクターを使用して任意のタイプのObservableストリームを作成しましょう。コンストラクターは、Observableの`subscribe()`メソッドが実行されたときに実行するサブスクライバー関数を引数としてとります。サブスクライバー関数は`Observer`オブジェクトを受け取り、オブザーバーの` next()`メソッドに値を公開することができます。
 
-For example, to create an observable equivalent to the `Observable.of(1, 2, 3)` above, you could do something like this:
+たとえば、上の`Observable.of(1,2,3)`に相当するObservableを作成するには、次のようにします：
 
 <code-example path="observables/src/creating.ts" region="subscriber" title="Create observable with constructor"></code-example>
 
-To take this example a little further, we can create an observable that publishes events. In this example, the subscriber function is defined inline.
+この例を少しステップアップすると、イベントを公開するObservableを作成できます。この例では、サブスクライバー関数はインラインで定義されています。
 
 <code-example path="observables/src/creating.ts" region="fromevent" title="Create with custom fromEvent function"></code-example>
 
@@ -74,35 +75,35 @@ Now you can use this function to create an observable that publishes keydown eve
 
 <code-example path="observables/src/creating.ts" region="fromevent_use" title="Use custom fromEvent function"></code-example>
 
-## Multicasting
+## マルチキャスト
 
-A typical observable creates a new, independent execution for each subscribed observer. When an observer subscribes, the observable wires up an event handler and delivers values to that observer. When a second observer subscribes, the observable then wires up a new event handler and delivers values to that second observer in a separate execution. 
+典型的なObservableは、サブスクライブしたオブザーバーごとに独立した新しい実行を作成します。オブザーバーがサブスクライブすると、Observableはイベントハンドラをつなぎ、そのオブザーバーに値を渡します。2つ目のオブザーバーが加入すると、Observableは新しいイベントハンドラをつなぎ、別の実行でその2つ目のオブザーバーに値を渡します。
 
-Sometimes, instead of starting an independent execution for each subscriber, you want each subscription to get the same values&mdash;even if values have already started emitting. This might be the case with something like an observable of clicks on the document object.
+場合によっては、各サブスクライバーに対して独立した実行を開始するのではなく各サブスクリプションが同じ値を取得するようにしたいことがあるでしょう&mdash;値の発行がすでに始まっていたとしても。これは、ドキュメントオブジェクトのクリックを監視するような場合に当てはまります。
 
-*Multicasting* is the practice of broadcasting to a list of multiple subscribers in a single execution. With a multicasting observable, you don't register multiple listeners on the document, but instead re-use the first listener and send values out to each subscriber.
+*マルチキャスト* は、1回の実行で複数のサブスクライバーにブロードキャストする方法です。マルチキャストをするObservableの場合、ドキュメントに複数のリスナーを登録するのではなく、最初のリスナーを再利用して値を各サブスクライバーに送信します。
 
-When creating an observable you should determine how you want that observable to be used and whether or not you want to multicast its values. 
+Observableを作成するときは、そのObservableをどのように使用するか、およびその値をマルチキャストするかどうかを決定する必要があります。
 
-Let’s look at an example that counts from 1 to 3, with a one-second delay after each number emitted.
+それぞれの数値が発信されてから1秒遅れて、1から3までカウントする例を見てみましょう。
 
 <code-example path="observables/src/multicasting.ts" region="delay_sequence" title="Create a delayed sequence"></code-example>
 
-Notice that if you subscribe twice, there will be two separate streams, each emitting values every second. It looks something like this:
+2回サブスクライブすると、2つの別々のストリームがあり、それぞれが毎秒値を発信することに注意してください。これは次のようになります。
 
 <code-example path="observables/src/multicasting.ts" region="subscribe_twice" title="Two subscriptions"></code-example>
 
- Changing the observable to be multicasting could look something like this:
+ Observableをマルチキャストするように書き換えると次のようになります。
 
 <code-example path="observables/src/multicasting.ts" region="multicast_sequence" title="Create a multicast subscriber"></code-example>
 
 <div class="l-sub-section">
-   Multicasting observables take a bit more setup, but they can be useful for certain applications. Later we will look at tools that simplify the process of multicasting, allowing you to take any observable and make it multicasting.
+  Observableをマルチキャストするには少しだけ多くのセットアップがかかりますが、特定のアプリケーションで役立ちます。後で、マルチキャスティングのプロセスを簡略化して、どんなObservableでもマルチキャストできるようになるツールを見ていきます。
 </div>
 
 ## Error handling
 
-Because observables produce values asynchronously, try/catch will not effectively catch errors. Instead, you handle errors by specifying an `error` callback on the observer. Producing an error also causes the observable to clean up subscriptions and stop producing values. An observable can  either produce values (calling the `next` callback), or it can complete, calling either the `complete` or `error` callback.
+Observableは値を非同期的に生成するため、try/catchは効果的にエラーを捕捉しません。代わりに、オブザーバーに`error`コールバックを指定することでエラーを処理します。 また、エラーを生成すると、Observableはサブスクリプションをクリーンアップし、値の生成を停止します。Observableは値を生成する（次のコールバックを呼び出す）か、あるいは`complete`または`error`コールバックを呼び出して完了することができます。
 
 <code-example>
 myObservable.subscribe({
@@ -111,4 +112,4 @@ myObservable.subscribe({
 });
 </code-example>
 
-Error handling (and specifically recovering from an error) is covered in more detail in a later section.
+エラー処理（特にエラーからの回復）については後のセクションで詳しく説明します。

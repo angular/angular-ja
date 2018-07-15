@@ -66,6 +66,7 @@ interface AssetGroup {
   updateMode?: 'prefetch' | 'lazy';
   resources: {
     files?: string[];
+    /** @deprecated v6から`versionedFiles`と`files`は同じ挙動になりました。`files`を使ってください。 */
     versionedFiles?: string[];
     urls?: string[];
   };
@@ -98,7 +99,7 @@ interface AssetGroup {
 
 * `files`は、配布ディレクトリ内のファイルと一致するパターンをリストします。これらは、単一のファイルまたは複数のファイルに一致するglobのようなパターンです。
 
-* `versionedFiles`は、`files`と似ていますが、ファイル名にすでにハッシュを含んだビルド成果物のために使用するものです。これは、キャッシュ無効化に使われます。AngularService Workerは、ファイル内容が不変であると想定できる場合、その操作のいくつかの側面を最適化できます。
+* `versionedFiles`は、非推奨になりました。v6では`versionedFiles`と`files`は同じ挙動になります。`files`を使ってください。
 
 * `urls`は、実行時に照合されるURLとURLパターンの両方が含まれます。これらのリソースは直接取得されず、コンテンツハッシュもありませんが、HTTPヘッダーにしたがってキャッシュされます。これは、Google FontsサービスなどのCDNでもっとも便利です。<br>
 _(否定のglobパターンはサポートされません。)_

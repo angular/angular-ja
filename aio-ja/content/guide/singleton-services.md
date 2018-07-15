@@ -1,132 +1,132 @@
-# Singleton services
+# シングルトンサービス
 
-#### Prerequisites:
+#### 前提条件:
 
-* A basic understanding of [Bootstrapping](guide/bootstrapping).
-* Familiarity with [Providers](guide/providers).
+* [ブートストラップ](guide/bootstrapping)の基本的な理解
+* [プロバイダー](guide/providers)について熟知していること
 
-For a sample app using the app-wide singleton service that this page describes, see the
-<live-example name="ngmodules"></live-example> showcasing all the documented features of NgModules.
+この記事で説明されている、アプリ全体でシングルトンなサービスを使用したサンプルアプリケーションについては、
+すべてのドキュメント化されたNgModuleの機能を紹介している<live-example name="ngmodules"></live-example>を参照してください。
 
 <hr />
 
-## Providing a singleton service
+## シングルトンサービスを提供する
 
-There are two ways to make a service a singleton in Angular:
+Angularでシングルトンサービスを作成する方法は2種類あります:
 
-* Declare that the service should be provided in the application root.
-* Include the service in the `AppModule` or in a module that is only imported by the `AppModule`.
+* サービスがアプリケーションルートで提供されるように宣言する。
+* `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
 
-Beginning with Angular 6.0, the preferred way to create a singleton services is to specify on the service that it should be provided in the application root. This is done by setting `providedIn` to `root` on the service's `@Injectable` decorator:
+Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
 
 <code-example path="providers/src/app/user.service.0.ts"  title="src/app/user.service.0.ts" linenums="false"> </code-example>
 
 
-For more detailed information on services, see the [Services](tutorial/toh-pt4) chapter of the
-[Tour of Heroes tutorial](tutorial).
+サービスのさらに詳しい情報については
+[Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
 
 
 ## `forRoot()`
 
-If a module provides both providers and declarations (components, directives, pipes) then loading it in a child injector such as a route, would duplicate the provider instances. The duplication of providers would cause issues as they would shadow the root instances, which are probably meant to be singletons. For this reason Angular provides a way to separate providers out of the module so that same module can be imported into the root module with `providers` and child modules without `providers`.
+あるモジュールがプロバイダーと宣言(コンポーネント、ディレクティブ、パイプ)の両方を提供していて、たとえばルート(route)などの子インジェクターにロードするとプロバイダーのインスタンスが重複してしまいます。プロバイダーの重複は、おそらくシングルトンであるルート(root)インスタンスを参照するときに問題を引き起こすでしょう。このためAngularは、同一モジュールを`provider`をもつモジュールとしてルート(root)モジュールから、`provider`を持たないモジュールとして子モジュールからインポートできるように、プロバイダーをモジュールから分離する方法を提供します。
 
-1. Create a static method `forRoot()` (by convention) on the module.
-2. Place the providers into the `forRoot` method as follows.
+1. `forRoot()`(この名前は慣習的なものです)という静的メソッドをモジュールに作成します。
+2. 次に説明する方法で`forRoot`メソッド内にプロバイダーを配置します。
 
 <!-- MH: show a simple example how to do that without going to deep into it. -->
 
-To make this more concrete, consider the `RouterModule` as an example. `RouterModule` needs to provide the `Router` service, as well as the `RouterOutlet` directive. `RouterModule` has to be imported by the root application module so that the application has a `Router` and the application has at least one `RouterOutlet`. It also must be imported by the individual route components so that they can place `RouterOutlet` directives into their template for sub-routes.
+より具体的にするために、例として`RouterModule`について考えてみましょう。`RouterModule`は`Router`サービスと`RouterOutlet`ディレクティブを提供する必要があります。`RouterModule`はアプリケーションが1つの`Router`を持ち、かつ少なくとも1つの`RouterOutlet`を持てるようにするため、ルート(root)アプリケーションモジュールによってインポートする必要があります。また、`RouterOutlet`ディレクティブをサブルート(sub-route)用のテンプレート内に置けるようにするため、個々のルート(route)コンポーネントでインポートしなければなりません。
 
-If the `RouterModule` didn’t have `forRoot()` then each route component would instantiate a new `Router` instance, which would break the application as there can only be one `Router`. For this reason, the `RouterModule` has the `RouterOutlet` declaration so that it is available everywhere, but the `Router` provider is only in the `forRoot()`. The result is that the root application module imports `RouterModule.forRoot(...)` and gets a `Router`, whereas all route components import `RouterModule` which does not include the `Router`.
+`RouterModule`に`forRoot()`がなければ、それぞれのルート(route)コンポーネントで新しい`Router`インスタンスが作成されるでしょう。`Router`は1つだけしか存在してはいけないため、アプリケーションを破壊するでしょう。この理由から、`RouterModule`は`RouterOutlet`をどこでも利用できるようにするため、その宣言を持っていますが、`Router`プロバイダーは`forRoot()`内にしか存在しません。その結果、ルート(root)アプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得します。対してすべてのルート(route)コンポーネントは`Router`を含まない`RouterModule`をインポートします。
 
-If you have a module which provides both providers and declarations, use this pattern to separate them out.
+もしもあなたがプロバイダーと宣言の両方を提供するモジュールを持っている場合は、このパターンを使用して分割してみましょう。
 
-A module that adds providers to the application can offer a
-facility for configuring those providers as well through the
-`forRoot()` method.
+プロバイダーをアプリケーションに追加するモジュールは、
+`forRoot()`
+メソッドからプロバイダーを設定する機能を提供することができます。
 
-`forRoot()` takes a service configuration object and returns a
-[ModuleWithProviders](api/core/ModuleWithProviders), which is
-a simple object with the following properties:
+`forRoot()`はサービスの設定を行うオブジェクトを受け取り、
+[ModuleWithProviders](api/core/ModuleWithProviders)を返します。
+これは次のようなプロパティをもつシンプルなオブジェクトです:
 
-* `ngModule`: in this example, the `CoreModule` class.
-* `providers`: the configured providers.
+* `ngModule`: この例では`CoreModule`というクラスです。
+* `providers`: 設定するプロバイダー。
 
-In the <live-example name="ngmodules">live example</live-example>
-the root `AppModule` imports the `CoreModule` and adds the
-`providers` to the `AppModule` providers. Specifically,
-Angular accumulates all imported providers
-before appending the items listed in `@NgModule.providers`.
-This sequence ensures that whatever you add explicitly to
-the `AppModule` providers takes precedence over the providers
-of imported modules.
+<live-example name="ngmodules">live example</live-example>では、
+ルート(root)の`AppModule`は`CoreModule`をインポートし、
+`providers`を`AppModule`プロバイダーに追加します。
+具体的には、
+Angularは`@NgModule.providers`
+にリストされている項目を追加する前にすべてのインポートされるプロバイダーを蓄積してゆきます。
+このシーケンスは、
+あなたが明示的に`AppModule`プロバイダーに追加したプロバイダーが、インポートされたプロバイダーよりも優先されることを保証します。
 
-Import `CoreModule` and use its `forRoot()` method one time, in `AppModule`, because it registers services and you only want to register those services one time in your app. If you were to register them more than once, you could end up with multiple instances of the service and a runtime error.
+`CoreModule`をインポートし、その`forRoot()`メソッドを一度だけ`AppModule`で使用してください。なぜなら、それによってサービスを登録し、かつ、それらのサービスをあなたのアプリに一度だけ登録したいからです。それらを複数回登録してしまうと、複数のサービスインスタンスが生成されてランタイムエラーが発生しアプリケーションが終了してしまうでしょう。
 
-You can also add a `forRoot()` method in the `CoreModule` that configures
-the core `UserService`.
+`CoreModule`にコアの`UserService`の設定を行う
+`forRoot()`メソッドを追加することもできます。
 
-In the following example, the optional, injected `UserServiceConfig`
-extends the core `UserService`. If a `UserServiceConfig` exists, the `UserService` sets the user name from that config.
+次の例では、オプショナルで注入された`UserServiceConfig`がコアの`UserService`を拡張しています。
+`UserServiceConfig`が存在する場合、`UserService`はその設定からユーザー名をセットします。
 
 <code-example path="ngmodules/src/app/core/user.service.ts" region="ctor" title="src/app/core/user.service.ts (constructor)" linenums="false">
 
 </code-example>
 
-Here's `forRoot()` that takes a `UserServiceConfig` object:
+ここでの`forRoot()`は`UserServiceConfig`オブジェクトを受け取ります:
 
 <code-example path="ngmodules/src/app/core/core.module.ts" region="for-root" title="src/app/core/core.module.ts (forRoot)" linenums="false">
 
 </code-example>
 
-Lastly, call it within the `imports` list of the `AppModule`.
+最後に`AppModule`の`imports`配列の中で呼び出します。
 
 <code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" title="src/app/app.module.ts (imports)" linenums="false">
 
 </code-example>
 
-The app displays "Miss Marple" as the user instead of the default "Sherlock Holmes".
+アプリケーションはデフォルトの "Sherlock Holmes"のかわりに、"Miss Marple"をユーザーとして表示します。
 
-Remember to _import_ `CoreModule` as a Javascript import at the top of the file; don't add it to more than one `@NgModule` `imports` list.
+ファイルの先頭にJavaScriptのインポートとして`CoreModule`を_import_することを忘れないでください。複数の`@NgModule`の`imports`リストに追加してはいけません。
 
 <!-- KW--Does this mean that if we need it elsewhere we only import it at the top? I thought the services would all be available since we were importing it into `AppModule` in `providers`. -->
 
-## Prevent reimport of the `CoreModule`
+## `CoreModule`の再インポートを防ぐ
 
-Only the root `AppModule` should import the `CoreModule`. If a
-lazy-loaded module imports it too, the app can generate
-[multiple instances](guide/ngmodule-faq#q-why-bad) of a service.
+ルート(root)の`AppModule`だけが`CoreModule`をインポートすべきです。
+もし遅延ロードするモジュールもそれをインポートした場合、
+アプリケーションはサービスの[複数インスタンス](guide/ngmodule-faq#q-why-bad)を生成することになります。
 
-To guard against a lazy-loaded module re-importing `CoreModule`, add the following `CoreModule` constructor.
+遅延ロードするモジュールで`CoreModule`を再インポートすることを防ぎたい場合、次のような`CoreModule`コンストラクタを追加してください。
 
 <code-example path="ngmodules/src/app/core/core.module.ts" region="ctor" title="src/app/core/core.module.ts" linenums="false">
 
 </code-example>
 
-The constructor tells Angular to inject the `CoreModule` into itself.
-The injection would be circular if Angular looked for
-`CoreModule` in the _current_ injector. The `@SkipSelf`
-decorator means "look for `CoreModule` in an ancestor
-injector, above me in the injector hierarchy."
+コンストラクタはAngularにコンストラクタ自身が`CoreModule`を注入するよう指示します。
+もしもAngularが_現在_のインジェクター内の`CoreModule`を参照した場合、
+この注入は循環参照となります。
+`@SkipSelf`デコレーターは"インジェクター階層の上にある先祖のインジェクター内の`CoreModule`を参照する"
+という意味になります。
 
-If the constructor executes as intended in the `AppModule`,
-there would be no ancestor injector that could provide an instance of `CoreModule` and the injector should give up.
+コンストラクタが`AppModule`で意図どおりに実行される場合、
+`CoreModule`のインスタンスを提供できる祖先のインジェクターは存在しないでしょう。そして、インジェクターは中断するはずです。
 
-By default, the injector throws an error when it can't
-find a requested provider.
-The `@Optional` decorator means not finding the service is OK.
-The injector returns `null`, the `parentModule` parameter is null,
-and the constructor concludes uneventfully.
+デフォルトでは、
+インジェクターが要求したプロバイダーを見つけられなかったときはエラーをスローします。
+`@Optional`デコレーターはサービスが見つからなくてもOKという意味になります。
+インジェクターは`null`を返し、`parentModule`パラメーターはnullになり、
+コンストラクタは無事終了します。
 
-It's a different story if you improperly import `CoreModule` into a lazy-loaded module such as `CustomersModule`.
+`CoreModule`を`CustomersModule`のような遅延ロードするモジュールに不適切にインポートするときは違います。
 
-Angular creates a lazy-loaded module with its own injector,
-a _child_ of the root injector.
-`@SkipSelf` causes Angular to look for a `CoreModule` in the parent injector, which this time is the root injector.
-Of course it finds the instance imported by the root `AppModule`.
-Now `parentModule` exists and the constructor throws the error.
+Angularは、遅延ロードするモジュールをルート(root)インジェクターの_子供_である、それ自身のインジェクターを使用して作成します。
+`@SkipSelf`によって、
+Angularは親インジェクター(今回はルートインジェクターになります)の`CoreModule`を参照します。
+もちろん、ルート(root)の`AppModule`によってインポートされたインスタンスを参照します。
+今度は`parentModule`が存在するのでコンストラクタはエラーをスローします。
 
-Here are the two files in their entirety for reference:
+ここでは、参考のために全体のなかの2つのファイルを紹介します:
 
 <code-tabs linenums="false">
  <code-pane
@@ -143,9 +143,9 @@ Here are the two files in their entirety for reference:
 
 <hr>
 
-## More on NgModules
+## NgModuleについてのさらに詳しい情報
 
-You may also be interested in:
-* [Sharing Modules](guide/sharing-ngmodules), which elaborates on the concepts covered on this page.
-* [Lazy Loading Modules](guide/lazy-loading-ngmodules).
-* [NgModule FAQ](guide/ngmodule-faq).
+あなたはこちらにも興味があるかもしれません:
+* [モジュールの共有](guide/sharing-ngmodules)ではこのページで取り上げられている概念を詳しく説明します。
+* [遅延ロードモジュール](guide/lazy-loading-ngmodules)
+* [NgModule FAQ](guide/ngmodule-faq)

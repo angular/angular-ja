@@ -1,92 +1,92 @@
-# Providers
+# プロバイダー
 
-#### Prerequisites:
-* A basic understanding of [Bootstrapping](guide/bootstrapping).
-* Familiarity with [Frequently Used Modules](guide/frequent-ngmodules).
+#### 前提条件:
+* [ブートストラップ](guide/bootstrapping)の基本的な理解
+* [よく使用されるモジュール](guide/frequent-ngmodules)について熟知していること
 
-For the final sample app using the provider that this page describes,
-see the <live-example></live-example>.
+この記事で説明されているプロバイダーを含む最終的なサンプルアプリケーションについては、
+<live-example></live-example>を参照してください。
 
 <hr>
 
-A provider is an instruction to the DI system on how to obtain a value for a dependency. Most of the time, these dependencies are services that you create and provide.
+プロバイダーは依存性がある値を取り出す方法をDIシステムへ指示します。ほとんどの場合、これらの依存性はあなたが作成して提供するサービスによるものです。
 
-## Providing a service
+## サービスを提供する
 
-If you already have a CLI generated app, create a service using the following CLI command in the root project directory. Replace _User_ with the name of your service.
+すでにCLIで生成したアプリケーションがある場合は、 次のコマンドをプロジェクトのルートディレクトリで実行してサービスを生成してください。 _User_はあなたの好きなサービス名に置きかえてかまいません。 
 
 ```sh
 ng generate service User
 ```
 
-This command creates the following `UserService` skeleton:
+このコマンドによって次のような`UserService`スケルトンが作成されます:
 
 <code-example path="providers/src/app/user.service.0.ts"  title="src/app/user.service.0.ts" linenums="false"> </code-example>
 
-You can now inject `UserService` anywhere in your application. 
+あなたはいま、`UserService`をアプリケーションのどこにでも注入することができます。
 
-The service itself is a class that the CLI generated and that's decorated with `@Injectable`. By default, this decorator is configured with a `providedIn` property, which creates a provider for the service. In this case, `providedIn: 'root'` specifies that the service should be provided in the root injector.
+サービス自体はCLIが生成したクラスであり、`@Injectable`デコレーターが付与されます。デフォルトでは、このデコレーターには`provideIn`プロパティが設定されサービスのプロバイダーを作成します。このケースでは、`provideIn： 'root'`はサービスがルートインジェクターに提供されるべきであることを指定しています。
 
 
-## Provider scope
+## プロバイダーのスコープ
 
-When you add a service provider to the root application injector, it’s available throughout the app. Additionally, these providers are also available to all the classes in the app as long they have the lookup token. 
+ルートアプリケーションインジェクターにサービスプロバイダーを追加すると、それはアプリケーション全体で使用することができます。さらに、それらのプロバイダーは、ルックアップトークンを持っている限り、アプリ内のすべてのクラスで利用可能です。
 
-You should always provide your service in the root injector unless there is a case where you want the service to be available only if the consumer imports a particular `@NgModule)`.
+利用者が特定の`@NgModule`をインポートした場合にのみサービスを利用できるようにしたい場合を除いて、ルートインジェクターでサービスを提供すべきです。
 
-## providedIn and NgModules
+## providedIn と NgModule
 
-It's also possible to specify that a service should be provided in a particular `@NgModule`. For example, if you don't want `UserService` to be available to applications unless they import a `UserModule` you've created, you can specify that the service should be provided in the module:
+特定の`@NgModule`内でサービスを提供するように指定することもできます。たとえば、あなたが作成した`UserModule`をインポートしない限り`UserService`をアプリケーションで利用できないようにモジュール内でサービスを提供するように指定できます:
 
 <code-example path="providers/src/app/user.service.1.ts"  title="src/app/user.service.1.ts" linenums="false">  </code-example>
 
-The example above shows the preferred way to provide a service in a module. This method is preferred because it enables tree-shaking of the service if nothing injects it. If it's not possible to specify in the service which module should provide it, you can also declare a provider for the service within the module:
+上記の例では、モジュールにサービスを提供する推奨の方法を示しています。この方法を使用すると、サービスがどこからも注入されないときに、ツリーシェイキングの対象にできるので推奨されます。どのモジュールがサービスを提供すべきかをそのサービス内で指定できない場合は、モジュール内でそのサービスのプロバイダーを宣言することもできます:
 
 <code-example path="providers/src/app/user.module.ts"  title="src/app/user.module.ts" linenums="false">  </code-example>
 
-## Limiting provider scope by lazy loading modules
+## 遅延ロードモジュールでプロバイダーのスコープを制限する
 
-In the basic CLI generated app, modules are eagerly loaded which means that they are all loaded when the app launches. Angular uses an injector system to make things available between modules. In an eagerly loaded app, the root application injector makes all of the providers in all of the modules available throughout the app.
+基本的に、CLIで生成されたアプリケーションでは、モジュールは事前ロードされます(つまり、アプリケーションの起動時にすべてロードされます)。Angularはインジェクターシステムを使用してモジュール間でのやりとりを可能にします。事前ロードされたアプリケーションでは、ルートアプリケーションインジェクターは、すべてのモジュールのすべてのプロバイダーをアプリケーション全体で利用可能にします。
 
-This behavior necessarily changes when you use lazy loading. Lazy loading is when you load modules only when you need them; for example, when routing. They aren’t loaded right away like with eagerly loaded modules. This means that any services listed in their provider arrays aren’t available because the root injector doesn’t know about these modules.
+この動作は、遅延ロードを使用すると必然的に変わってしまいます。遅延ロードとは、モジュールが必要になったときだけロードすることです。たとえば、ルーティングするときなどです。それらは事前ロードされるモジュールのようにすぐにロードされることはありません。つまり、ルートインジェクターはこれら遅延ロードされるモジュールについて認識しないため、そのモジュール内のプロバイダーの配列にリストされているサービスは使用できません。
 
 <!-- KW--Make diagram here -->
 <!-- KW--per Misko: not clear if the lazy modules are siblings or grand-children. They are both depending on router structure. -->
-When the Angular router lazy-loads a module, it creates a new injector. This injector is a child of the root application injector. Imagine a tree of injectors; there is a single root injector and then a child injector for each lazy loaded module. The router adds all of the providers from the root injector to the child injector. When the router creates a component within the lazy-loaded context, Angular prefers service instances created from these providers to the service instances of the application root injector.
+Angularルーターがモジュールを遅延ロードすると、新しいインジェクターが作成されます。このインジェクターは、ルートアプリケーションインジェクターの子供となります。インジェクターのツリーを想像してみてください。単一のルートインジェクターと、それぞれの遅延ロードされるモジュールのための子インジェクターがあります。ルーターはルートインジェクターから子インジェクターにすべてのプロバイダーを追加します。ルーターが遅延ロードされたモジュールのコンテキスト内でコンポーネントを作成するとき、Angularはルートインジェクターのサービスインスタンスよりも、それらのプロバイダーで作成されたサービスインスタンスを優先します。
 
-Any component created within a lazy loaded module’s context, such as by router navigation, gets the local instance of the service, not the instance in the root application injector. Components in external modules continue to receive the instance created for the application root.
+遅延ロードされたモジュールのコンテキスト内で作成されたコンポーネント(ルーターのナビゲーションなど)は、ルートアプリケーションインジェクターのインスタンスではなく、サービスのローカルインスタンスを取得します。外部モジュール内のコンポーネントは、アプリケーションルート用に作成されたインスタンスを受け取り続けます。
 
-Though you can provide services by lazy loading modules, not all services can be lazy loaded. For instance, some modules only work in the root module, such as the Router. The Router works with the global location object in the browser.
+遅延ロードするモジュールでサービスを提供することはできますが、すべてのサービスを遅延ロードすることはできません。たとえば、ルーターなど、ルートモジュールでのみ機能するモジュールもあります。ルーターは、ブラウザ内のグローバルのlocationオブジェクトを使用して動作します。
 
 
-## Limiting provider scope with components
+## コンポーネントでプロバイダーのスコープを制限する
 
-Another way to limit provider scope is by adding the service you want to limit to the component’s
-`providers` array. Component providers and NgModule providers are independent of each other. This
-method is helpful for when you want to eagerly load a module that needs a service all to itself.
-Providing a service in the component limits the service only to that component (other components in
-the same module can’t access it.)
+プロバイダーのスコープを制限するもうひとつの方法は、制限したいコンポーネントの`providers`配列にサービスを追加することです。
+コンポーネントのプロバイダーとNgModuleのプロバイダーは、おたがいに独立しています。
+この方法は、自分自身にサービスを必要とするモジュールを事前ロードしたいときに役立ちます。
+コンポーネントにサービスを提供すると、サービスはそのコンポーネントだけに制限されます
+(同じモジュールにある他のコンポーネントからはアクセスできません)。
 
 <code-example path="providers/src/app/app.component.ts" region="component-providers" title="src/app/app.component.ts" linenums="false">
 </code-example>
 
 
-## Providing services in modules vs. components
+## モジュールとコンポーネントのどちらでサービスを提供するか
 
-Generally, provide services the whole app needs in the root module and scope services by providing them in lazy loaded modules.
+一般的に、アプリケーション全体で必要ならルートモジュール、提供するサービスのスコープを絞りたいなら遅延ロードされるモジュールでサービスを提供してください。
 
-The router works at the root level so if you put providers in a component, even `AppComponent`, lazy loaded modules, which rely on the router, can’t see them.
+ルーターはルートレベルで動作するので、プロバイダーをコンポーネントに配置すると、たとえ`AppComponent`や、ルーターに依存する遅延ロードされるモジュールでもそれらを見ることができません。
 
 <!-- KW--Make a diagram here -->
-Register a provider with a component when you must limit a service instance to a component and its component tree, that is, its child components. For example, a user editing component, `UserEditorComponent`, that needs a private copy of a caching `UserService` should register the `UserService` with the `UserEditorComponent`. Then each new instance of the `UserEditorComponent` gets its own cached service instance.
+サービスのインスタンスをコンポーネントおよびそのコンポーネントツリー、つまりその子コンポーネントに限定する必要がある場合は、プロバイダーをコンポーネントに登録してください。たとえば、`UserService`のキャッシュのプライベートコピーが必要であるユーザー編集コンポーネント `UserEditorComponent`は、`UserEditorComponent`に`UserService`を登録すべきです。そうすることで、それぞれの`UserEditorComponent`の新しいインスタンスごとに、自身のキャッシュされたサービスのインスタンスを得ることができます。
 
 
 <hr>
 
-## More on NgModules
+## NgModuleについてのさらに詳しい情報
 
-You may also be interested in:
-* [Singleton Services](guide/singleton-services), which elaborates on the concepts covered on this page.
-* [Lazy Loading Modules](guide/lazy-loading-ngmodules).
-* [Tree-shakable Providers](guide/dependency-injection#tree-shakable-providers).
-* [NgModule FAQ](guide/ngmodule-faq).
+あなたはこちらにも興味があるかもしれません:
+* [シングルトンサービス](guide/singleton-services)では、このページで取り上げられている概念を詳しく説明しています。
+* [モジュールの遅延ロード](guide/lazy-loading-ngmodules)
+* [Tree-shakable プロバイダー](guide/dependency-injection#tree-shakable-providers)
+* [NgModule FAQ](guide/ngmodule-faq)

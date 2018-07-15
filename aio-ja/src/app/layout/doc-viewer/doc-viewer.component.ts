@@ -119,7 +119,7 @@ export class DocViewerComponent implements OnDestroy {
         }
       }
 
-      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular');
+      this.titleService.setTitle(title ? `Angular 日本語ドキュメンテーション - ${title}` : 'Angular 日本語ドキュメンテーション');
     };
   }
 
@@ -136,7 +136,7 @@ export class DocViewerComponent implements OnDestroy {
         //           and is considered to be safe.
         tap(() => this.nextViewContainer.innerHTML = doc.contents || ''),
         tap(() => addTitleAndToc = this.prepareTitleAndToc(this.nextViewContainer, doc.id)),
-        switchMap(() => this.elementsLoader.loadContainingCustomElements(this.nextViewContainer)),
+        switchMap(() => this.elementsLoader.loadContainedCustomElements(this.nextViewContainer)),
         tap(() => this.docReady.emit()),
         switchMap(() => this.swapViews(addTitleAndToc)),
         tap(() => this.docRendered.emit()),

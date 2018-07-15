@@ -17,12 +17,21 @@ rules:
   - expected: 双方向
     pattern: 二方向
 
+  - expected: 変更検知
+    pattern: 変更検出
+
   - expected: Service Worker
     pattern:
       - ServiceWorker
       - サービスワーカー
     options:
       wordBoundary: true
+
+  - expected: 次の
+    pattern: つぎの
+
+  - expected: 注入する
+    pattern: インジェクトする
 
 # カタカナ語
 
@@ -35,6 +44,9 @@ rules:
   - expected: サーバー
     pattern: /サーバ(?!ー)/
 
+  - expected: ブラウザ
+    pattern: /ブラウザー/
+
   - expected: サブスクライバー
     pattern: /サブスクライバ(?!ー)/
 
@@ -44,8 +56,14 @@ rules:
   - expected: デコレーター
     pattern: /デコレータ(?!ー)/
 
+  - expected: インジェクター
+    pattern: /インジェクタ(?!ー)/
+
   - expected: ユーザー
     pattern: /ユーザ(?!ー)/
+
+  - expected: セレクター
+    pattern: /セレクタ(?!ー)/
 
   - expected: クオート
     pattern: クォート
@@ -58,3 +76,6 @@ rules:
 
   - expected: input要素
     pattern: インプット要素
+
+  - expected: 静的メソッド
+    pattern: スタティックメソッド

@@ -90,7 +90,7 @@ CLIの `ng new` コマンドは、デフォルトの `package.json` を作成し
 RxJSは、JavaScriptの標準仕様を決定している[TC39](http://www.ecma-international.org/memento/TC39.htm)で現在提案されている[Observables仕様](https://github.com/zenparsing/es-observable)が実装されています。
 
 
-**[zone.js](https://github.com/angular/zone.js)**: Angularは、ネイティブJavaScript操作でイベントが発生した場合、Angularの変更検出プロセスを実行するためにzone.jsに依存しています。
+**[zone.js](https://github.com/angular/zone.js)**: Angularは、ネイティブJavaScript操作でイベントが発生した場合、Angularの変更検知プロセスを実行するためにzone.jsに依存しています。
 Zone.jsは、JavaScriptの標準仕様を決定している[TC39](http://www.ecma-international.org/memento/TC39.htm)の[仕様](https://gist.github.com/mhevery/63fdcdf7c65886051d55)の実装です。
 
 

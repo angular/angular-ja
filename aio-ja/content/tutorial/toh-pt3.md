@@ -80,7 +80,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 ### `HeroesComponent` テンプレートを更新する
 
-`HeroDetailComponent` のセレクタは `'app-hero-detail'` です。
+`HeroDetailComponent` のセレクターは `'app-hero-detail'` です。
 
 ヒーローの詳細ビューがかつて存在した `HeroesComponent` テンプレートの下部に `<app-hero-detail>` 要素を追加してください。
 
@@ -136,6 +136,9 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
   </code-pane>
 
   <code-pane title="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html">
+  </code-pane>
+
+  <code-pane title="src/app/app.module.ts" path="toh-pt3/src/app/app.module.ts">
   </code-pane>
 
 </code-tabs>

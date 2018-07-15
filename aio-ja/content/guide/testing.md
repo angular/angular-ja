@@ -1,31 +1,31 @@
 {@a top}
-# テスト
+# Testing
 
-このガイドでは、Angular アプリケーションをテストするためのヒントとテクニックを提供しています。
+This guide offers tips and techniques for unit and integration testing Angular applications.
 
-このガイドでは、[_Tour of Heroes_ tutorial](tutorial) によく似たサンプルアプリケーションのテストを紹介します。
-サンプルアプリケーションとこのガイドのすべてのテストは、検査と実験に使用できます。
+The guide presents tests of a sample CLI application that is much like the [_Tour of Heroes_ tutorial](tutorial).
+The sample application and all tests in this guide are available for inspection and experimentation:
 
 * <live-example embedded-style>Sample app</live-example>
 * <live-example stackblitz="specs">Tests</live-example>
 
 <hr>
 
-## セットアップ
+## Setup
 
-Angular CLI は、[Jasmine test framework](http://jasmine.github.io/2.4/introduction.html)を使用して Angular アプリケーションをテストするために必要なものすべてをダウンロードしてインストールします。
+The Angular CLI downloads and install everything you need to test an Angular application with the [Jasmine test framework](http://jasmine.github.io/2.4/introduction.html).
 
-CLI を使用して作成したプロジェクトは、すぐにテストする準備ができています。
-この1つのCLIコマンドを実行するだけです。
+The project you create with the CLI is immediately ready to test.
+Just run this one CLI command:
 
 <code-example language="sh" class="code-shell">
   ng test
 </code-example>
 
-`ng test` コマンドは _watch mode_ でアプリをビルドし、 [karma test runner](https://karma-runner.github.io/1.0/index.html) を起動します。
+The `ng test` command builds the app in _watch mode_,
+and launches the [karma test runner](https://karma-runner.github.io/1.0/index.html).
 
-
-コンソールの出力はこのように表示されます:
+The console output looks a bit like this:
 
 <code-example language="sh" class="code-shell">
 10% building modules 1/1 modules 0 active
@@ -36,10 +36,10 @@ CLI を使用して作成したプロジェクトは、すぐにテストする�
 Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 </code-example>
 
-ログの最後の行が最も重要です。
-それは Karma がすべて3つのテストを実行したことを示しています。
+The last line of the log is the most important. 
+It shows that Karma ran three tests that all passed.
 
-chrome ブラウザも開き、このように "Jasmine HTML Reporter" にテスト出力を表示します。
+A chrome browser also opens and displays the test output in the "Jasmine HTML Reporter" like this.
 
 <figure>
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
@@ -204,8 +204,7 @@ The test consumes that spy in the same way it did earlier.
 Most test suites in this guide call `beforeEach()` to set the preconditions for each `it()` test
 and rely on the `TestBed` to create classes and inject services.
 
-There's another school of testing that never calls `beforeEach()` and
-and prefers to create classes explicitly rather than use the `TestBed`.
+There's another school of testing that never calls `beforeEach()` and prefers to create classes explicitly rather than use the `TestBed`.
 
 Here's how you might rewrite one of the `MasterService` tests in that style.
 
@@ -347,7 +346,7 @@ It appears within the template of a parent component,
 which binds a _hero_ to the `@Input` property and
 listens for an event raised through the _selected_ `@Output` property.
 
-You can test that the class code works without creating the the `DashboardHeroComponent`
+You can test that the class code works without creating the `DashboardHeroComponent`
 or its parent component.
 
 <code-example 
@@ -399,7 +398,7 @@ But a component is more than just its class.
 A component interacts with the DOM and with other components.
 The _class-only_ tests can tell you about class behavior.
 They cannot tell you if the component is going to render properly,
-respond to user input and gestures, or integrate with its parent and and child components.
+respond to user input and gestures, or integrate with its parent and child components.
 
 None of the _class-only_ tests above can answer key questions about how the
 components actually behave on screen.
@@ -2367,9 +2366,9 @@ The [override metadata object](#metadata-override-object) is a generic defined a
 
 <code-example format="." language="javascript">
   type MetadataOverride<T> = {
-    add?: T;
-    remove?: T;
-    set?: T;
+    add?: Partial<T>;
+    remove?: Partial<T>;
+    set?: Partial<T>;
   };
 </code-example>
 
@@ -2725,9 +2724,9 @@ appropriate to the method, that is, the parameter of an `@NgModule`,
 
 <code-example format="." language="javascript">
   type MetadataOverride<T> = {
-    add?: T;
-    remove?: T;
-    set?: T;
+    add?: Partial<T>;
+    remove?: Partial<T>;
+    set?: Partial<T>;
   };
 </code-example>
 
@@ -3379,11 +3378,11 @@ next to their corresponding helper files.
 {@a q-e2e}
 #### Why not rely on E2E tests of DOM integration?
 
-The component DOM tests describe in this guide often require extensive setup and 
-advanced techniques where as the [class-only test](#component-class-testing)
-were comparatively simple.
+The component DOM tests described in this guide often require extensive setup and 
+advanced techniques whereas the [unit tests](#component-class-testing)
+are comparatively simple.
 
-Why not defer DOM integration tests to end-to-end (E2E) testing?
+#### Why not defer DOM integration tests to end-to-end (E2E) testing?
 
 E2E tests are great for high-level validation of the entire system.
 But they can't give you the comprehensive test coverage that you'd expect from unit tests.

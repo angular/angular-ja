@@ -12,7 +12,8 @@
     "contributors": "githubcontrib --owner angular --repo angular-ja --cols 6 --format md --showlogin true --sortOrder desc | pbcopy",
     "update-origin": "./update-origin.sh",
     "textlint": "textlint 'aio-ja/**/!(*.en.*)'",
-    "textlint:f": "textlint --fix 'aio-ja/**/!(*.en.*)'"
+    "textlint:f": "textlint --fix 'aio-ja/**/!(*.en.*)'",
+    "postinstall": "opencollective postinstall"
   },
   "devDependencies": {
     "firebase-tools": "^3.14.0",
@@ -21,5 +22,12 @@
     "textlint": "^9.1.1",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-prh": "^5.0.1"
+  },
+  "dependencies": {
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/angular-ja"
   }
 }

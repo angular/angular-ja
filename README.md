@@ -1,6 +1,8 @@
 # angular-ja
 
 [![CircleCI](https://circleci.com/gh/angular/angular-ja/tree/master.svg?style=svg)](https://circleci.com/gh/angular/angular-ja/tree/master)
+[![Backers on Open Collective](https://opencollective.com/angular-ja/backers/badge.svg)](#backers)
+ [![Sponsors on Open Collective](https://opencollective.com/angular-ja/sponsors/badge.svg)](#sponsors) 
 
 このリポジトリは[Angular](https://github.com/angular/angular)の公式サイト [angular.io](https://angular.io) を日本語に翻訳するためのものです。
 
@@ -145,3 +147,33 @@ origin/aio/
 ├── src # angular.ioアプリケーションのソースコード
 ...
 ```
+## Credits
+### Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="graphs/contributors"><img src="https://opencollective.com/angular-ja/contributors.svg?width=890&button=false" /></a>
+
+
+### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/angular-ja#backer)]
+
+<a href="https://opencollective.com/angular-ja#backers" target="_blank"><img src="https://opencollective.com/angular-ja/backers.svg?width=890"></a>
+
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/angular-ja#sponsor)]
+
+<a href="https://opencollective.com/angular-ja/sponsor/0/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/1/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/2/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/3/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/4/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/5/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/6/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/7/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/8/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/9/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/9/avatar.svg"></a>
+
+

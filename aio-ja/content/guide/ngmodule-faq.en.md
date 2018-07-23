@@ -1,170 +1,171 @@
 # NgModule FAQs
 
 
-#### 前提条件:
+#### Prerequisites:
 
-次のコンセプトの基本的な理解:
-* [NgModule](guide/ngmodules).
+A basic understanding of the following concepts:
+* [NgModules](guide/ngmodules).
 
 <hr />
 
-NgModuleは機能的にまとまったブロックにアプリケーションを整理するのに役立ちます。
+NgModules help organize an application into cohesive blocks of functionality.
 
-このページではNgModuleのデザインや実装についての多くの開発者の質問に答えてゆきます。
+This page answers the questions many developers ask about NgModule design and implementation.
 
 
-## どのクラスを`declarations`配列に追加すべきですか?
+## What classes should I add to the `declarations` array?
 
-[宣言](guide/bootstrapping#the-declarations-array)(コンポーネント、ディレクティブ、またはパイプ)を`declarations`配列に追加してください。
+Add [declarable](guide/bootstrapping#the-declarations-array) classes&mdash;components, directives, and pipes&mdash;to a `declarations` list.
 
-これらのクラスはアプリケーションの_ちょうど1つ_のモジュールだけで宣言してください。
-特定のモジュールに属している場合にモジュール内で宣言してください。
+Declare these classes in _exactly one_ module of the application.
+Declare them in a module if they belong to that particular module.
 
 <hr/>
 
 {@a q-declarable}
 
-## _宣言_ is 何?
+## What is a _declarable_?
 
-宣言とはモジュールの`declarations`配列に追加することができるクラス
-(コンポーネント、ディレクティブ、パイプ)です。
-宣言だけが、`declarations`に追加することができるクラスです。
-
-<hr/>
-
-## どのクラスを`declarations`に追加すべきでは_ない_ですか?
-
-[宣言](guide/bootstrapping#the-declarations-array)クラスは1つのNgModuleの`declarations`配列にだけ追加してください。
-
-次のような場合は宣言_しない_でください:
-
-* アプリケーションのモジュール、@NgModule、もしくはサードパーティのモジュールであろうとなかろうと、他のモジュールで宣言されているクラス。
-* 他のモジュールからインポートされたディレクティブの配列。
-たとえば、`@angular/forms`の`FORMS_DIRECTIVES`を宣言してはいけません。`FormsModule`ですでに宣言しています。
-
-* モジュールクラス.
-* サービスクラス.
-* Angularと無関係なクラスやオブジェクト。
-たとえば文字列、数値、関数、エンティティーモデル、設定、ビジネスロジック、ヘルパークラスなどです。
+Declarables are the class types&mdash;components, directives, and pipes&mdash;that
+you can add to a module's `declarations` list.
+They're the only classes that you can add to `declarations`.
 
 <hr/>
 
+## What classes should I _not_ add to `declarations`?
 
-## 複数の`NgModule`プロパティに同じコンポーネントが存在するのはなぜですか?
+Add only [declarable](guide/bootstrapping#the-declarations-array) classes to an NgModule's `declarations` list.
 
-`AppComponent`はよく`declarations`と`bootstrap`の両方に追加されています。
-あなたは同じコンポーネントが`declarations`、`exports`や`entryComponents`に追加されているのをみるかもしれません。
+Do *not* declare the following:
 
-冗長にみえるかもしれませんが、それぞれのプロパティは別の機能を持っています。
-1つのリストのメンバーシップは、別のリストのメンバーシップを意味するものではありません。
+* A class that's already declared in another module, whether an app module, @NgModule, or third-party module.
+* An array of directives imported from another module.
+For example, don't declare `FORMS_DIRECTIVES` from `@angular/forms` because the `FormsModule` already declares it.
 
-* `AppComponent`はこのモジュールで宣言できますが、ブートストラップされません。
-* `AppComponent`はこのモジュールでブートストラップできますが、別のフィーチャーモジュール内で宣言されています。
-* コンポーネントは他のモジュールでインポート(宣言はできません)、このモジュールから再エクスポートすることができます。
-* 外部のコンポーネントのテンプレートに含めるためにコンポーネントをエクスポートし、
-ポップアップダイアログに動的にロードすることができます。
+* Module classes.
+* Service classes.
+* Non-Angular classes and objects, such as
+strings, numbers, functions, entity models, configurations, business logic, and helper classes.
 
 <hr/>
 
-## "Can't bind to 'x' since it isn't a known property of 'y'" とはどういう意味ですか?
 
-このエラーの多くはディレクティブ"x"が宣言されていない、
-または"x"が属しているNgModuleがインポートされていないことを意味します。
+## Why list the same component in multiple `NgModule` properties?
+
+`AppComponent` is often listed in both `declarations` and `bootstrap`.
+You might see the same component listed in `declarations`, `exports`, and `entryComponents`.
+
+While that seems redundant, these properties have different functions.
+Membership in one list doesn't imply membership in another list.
+
+* `AppComponent` could be declared in this module but not bootstrapped.
+* `AppComponent` could be bootstrapped in this module but declared in a different feature module.
+* A component could be imported from another app module (so you can't declare it) and re-exported by this module.
+* A component could be exported for inclusion in an external component's template
+as well as dynamically loaded in a pop-up dialog.
+
+<hr/>
+
+## What does "Can't bind to 'x' since it isn't a known property of 'y'" mean?
+
+This error often means that you haven't declared the directive "x"
+or haven't imported the NgModule to which "x" belongs.
 
 <div class="l-sub-section">
 
-アプリケーション内のサブモジュールで"x"を宣言したが、それをエクスポートし忘れている可能性があります。
-"x"クラスは`exports`配列に追加しない限り、他のモジュールからは見えません。
+Perhaps you declared "x" in an application sub-module but forgot to export it.
+The "x" class isn't visible to other modules until you add it to the `exports` list.
 
 </div>
 
 <hr/>
 
-## 何をインポートすべきですか?
+## What should I import?
 
-モジュールのコンポーネントのテンプレートから参照する必要があるときに
-公開(エクスポート)された[宣言クラス](guide/bootstrapping#the-declarations-array)を持つNgModuleをインポートしてください。
+Import NgModules whose public (exported) [declarable classes](guide/bootstrapping#the-declarations-array)
+you need to reference in this module's component templates.
 
-これは`NgIf`や`NgFor`などのAngularのディレクティブにアクセスしたいときは常に
-`@angular/common`から`CommonModule`をインポートすることを意味します。
-直接、またはそれを[再エクスポート](guide/ngmodule-faq#q-reexport)している他のモジュールからインポートすることができます。
+This always means importing `CommonModule` from `@angular/common` for access to
+the Angular directives such as `NgIf` and `NgFor`.
+You can import it directly or from another NgModule that [re-exports](guide/ngmodule-faq#q-reexport) it.
 
-コンポーネントが`[(ngModel)]`両方向バインディング式を持つ場合は
-`@angular/forms`から`FormsModule`をインポートしてください。
+Import `FormsModule` from `@angular/forms`
+if your components have `[(ngModel)]` two-way binding expressions.
 
-このモジュールからのコンポーネントが_共有_、
-_フィーチャー_モジュールのコンポーネント、ディレクティブやパイプを組み込むときにそれをインポートしてください。
+Import _shared_ and _feature_ modules when this module's components incorporate their
+components, directives, and pipes.
 
-[BrowserModule]](guide/ngmodule-faq#q-browser-vs-common-module)はルートの`AppModule`でのみインポートしてください。
+Import only [BrowserModule](guide/ngmodule-faq#q-browser-vs-common-module) in the root `AppModule`.
 
 <hr/>
 
 {@a q-browser-vs-common-module}
 
-## `BrowserModule`と`CommonModule`のどちらをインポートすべきですか?
+## Should I import `BrowserModule` or `CommonModule`?
 
-ほぼすべてのブラウザアプリケーションでは、
-ルートアプリケーションモジュールである`AppModule`で`@angular/platform-browser`から`BrowserModule`をインポートすべきです。
+The root application module, `AppModule`, of almost every browser application
+should import `BrowserModule` from `@angular/platform-browser`.
 
-`BrowserModule`はブラウザアプリケーションの起動と実行に不可欠なサービスを提供します。
+`BrowserModule` provides services that are essential to launch and run a browser app.
 
-`BrowserModule`は`@angular/common`から`CommonModule`を再エクスポートもしています。
-これは`AppModule`内のコンポーネントが`NgIf`や`NgFor`のような、すべてのアプリケーションで必要なAngularディレクティブにアクセスすることができることを意味します。
+`BrowserModule` also re-exports `CommonModule` from `@angular/common`,
+which means that components in the `AppModule` module also have access to
+the Angular directives every app needs, such as `NgIf` and `NgFor`.
 
-`BrowserModule`を他のモジュールからインポートしてはいけません。
-*フィーチャーモジュール*と*遅延ロードするモジュール*では、かわりに`CommonModule`をインポートすべきです。
-それらは共通のディレクティブが必要で、アプリケーション全体のプロバイダーを再インストールするひつようはありません。
+Do not import `BrowserModule` in any other module.
+*Feature modules* and *lazy-loaded modules* should import `CommonModule` instead.
+They need the common directives. They don't need to re-install the app-wide providers.
 
-`CommonModule`をインポートすることはブラウザだけでなく、_どの_対象のプラットフォームでも使用できるようにフィーチャーモジュールを開放します。
+Importing `CommonModule` also frees feature modules for use on _any_ target platform, not just browsers.
 
 <hr/>
 
 {@a q-reimport}
 
-## 同じモジュールを2回インポートするとどうなりますか?
+## What if I import the same module twice?
 
-問題ありません。3つのモジュールがすべてモジュール'A'をインポートすると、
-Angularは最初の一度だけモジュール'A'を評価して、再度評価することはありません。
+That's not a problem. When three modules all import Module 'A',
+Angular evaluates Module 'A' once, the first time it encounters it, and doesn't do so again.
 
-インポートされたモジュール内のどのレベルで `A` が現れても真です。
-モジュール'B'がモジュール'A'をインポートし、モジュール'C'がモジュール'B'をインポートし、そしてモジュール'D'が`[C, B, A]`をインポートしたとき、
-'D'は'C'の評価を発火します。これは'B'の評価を発火し、これは'A'を評価します。
-Angularが'D'内の'B'と'A'を取得したとき、それらはすでにキャッシュされていて準備完了しています。
+That's true at whatever level `A` appears in a hierarchy of imported NgModules.
+When Module 'B' imports Module 'A', Module 'C' imports 'B', and Module 'D' imports `[C, B, A]`,
+then 'D' triggers the evaluation of 'C', which triggers the evaluation of 'B', which evaluates 'A'.
+When Angular gets to the 'B' and 'A' in 'D', they're already cached and ready to go.
 
-Angularは循環参照しているNgModuleが嫌いです。モジュール'A'がモジュール'B'をインポートして、モジュール'B'がモジュール'A'をインポートするようにしないようにしてください。
+Angular doesn't like NgModules with circular references, so don't let Module 'A' import Module 'B', which imports Module 'A'.
 
 <hr/>
 
 {@a q-reexport}
 
-## 何をエクスポートすべきですか?
+## What should I export?
 
-それらのテンプレートを参照している_他_のモジュール内のコンポーネント
-がある場合、[宣言](guide/bootstrapping#the-declarations-array)クラスをエクスポートしてください。
-_非公開_のままにしておきたい場合は、宣言クラスをエクスポートしないでください。このモジュール内で宣言された他のコンポーネントだけで見れる。
+Export [declarable](guide/bootstrapping#the-declarations-array) classes that components in _other_ NgModules
+are able to reference in their templates. These are your _public_ classes.
+If you don't export a declarable class, it stays _private_, visible only to other components
+declared in this NgModule.
 
-任意の宣言クラス(コンポーネント、ディレクティブ、またはパイプ)をエクスポートすることが_できます_。
-このモジュール内、もしくはインポートしたNgModule内で宣言したもの。
+You _can_ export any declarable class&mdash;components, directives, and pipes&mdash;whether
+it's declared in this NgModule or in an imported NgModule.
 
-インポートしたNgModuleすべてを再エクスポートすることが_できます_。これはそれらのエクスポートされているクラスを効果的に再エクスポートします。
-
-NgModuleはインポートしていないモジュールをエクスポートすることもできます。
+You _can_ re-export entire imported NgModules, which effectively re-exports all of their exported classes.
+An NgModule can even export a module that it doesn't import.
 
 <hr/>
 
-## 何をエクスポートすべきでは*ない*ですか?
+## What should I *not* export?
 
-次のようなものはエクスポートしてはいけません:
+Don't export the following:
 
-* このNgModuleで宣言されたコンポーネント内でのみ必要な、非公開のコンポーネント、ディレクティブ、パイプ。
-他のNgModuleに見せたくなければ、エクスポートしてはいけません。
-* 宣言ではないオブジェクト、たとえば、サービス、関数、設定やエンティティーモデルなどです。
-* ルーターから動的にロードされる、またはブートストラップにだけ使用されるコンポーネント。
-そのような[エントリーコンポーネント](guide/ngmodule-faq#q-entry-component-defined)は他のコンポーネントのテンプレートから選択されることはありません。
-エクスポートすることに害はありませんが、利益もありません。
-* 公開(エクスポート)された宣言をもたない純粋なサービスモジュール。
-たとえば、`HttpClientModule`は何もエクスポートしているものがないので再エクスポートする意味はありません。
-その唯一の目的はhttpサービスプロバイダーをアプリケーション全体に追加することです。
+* Private components, directives, and pipes that you need only within components declared in this NgModule.
+If you don't want another NgModule to see it, don't export it.
+* Non-declarable objects such as services, functions, configurations, and entity models.
+* Components that are only loaded dynamically by the router or by bootstrapping.
+Such [entry components](guide/ngmodule-faq#q-entry-component-defined) can never be selected in another component's template.
+While there's no harm in exporting them, there's also no benefit.
+* Pure service modules that don't have public (exported) declarations.
+For example, there's no point in re-exporting `HttpClientModule` because it doesn't export anything.
+Its only purpose is to add http service providers to the application as a whole.
 
 <hr/>
 

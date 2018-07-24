@@ -170,216 +170,214 @@ NgModuleはインポートしていないモジュールをエクスポートす
 
 
 
-## Can I re-export classes and modules?
+## クラスやモジュールを再エクスポートできますか?
 
-Absolutely.
+もちろん。
 
-NgModules are a great way to selectively aggregate classes from other NgModules and
-re-export them in a consolidated, convenience module.
+NgModuleは他のNgModuleから選択的にクラスを集約したり、
+それらを統合した便利なモジュールに再エクスポートする素晴らしい方法です。
 
-An NgModule can re-export entire NgModules, which effectively re-exports all of their exported classes.
-Angular's own `BrowserModule` exports a couple of NgModules like this:
+NgModuleはNgModule全体を再エクスポートすることができます。エクスポートされたクラスのすべてを効果的に再エクスポートします。
+Angular自身の`BrowserModule`は次のような2つのNgModuleをエクスポートします:
 
 ```typescript
   exports: [CommonModule, ApplicationModule]
 ```
 
-An NgModule can export a combination of its own declarations, selected imported classes, and imported NgModules.
+NgModuleは自身の宣言、選択したインポートしたクラス、インポートしたNgModuleの組み合わせをエクスポートできます。
 
-Don't bother re-exporting pure service modules.
-Pure service modules don't export [declarable](guide/bootstrapping#the-declarations-array) classes that another NgModule could use.
-For example, there's no point in re-exporting `HttpClientModule` because it doesn't export anything.
-Its only purpose is to add http service providers to the application as a whole.
-
-
-<hr/>
-
-
-## What is the `forRoot()` method?
-
-The `forRoot()` static method is a convention that makes it easy for developers to configure services and providers that are intended to be singletons. A good example of `forRoot()` is the `RouterModule.forRoot()` method.
-
-Apps pass a `Routes` object to `RouterModule.forRoot()` in order to configure the app-wide `Router` service with routes.
-`RouterModule.forRoot()` returns a [ModuleWithProviders](api/core/ModuleWithProviders).
-You add that result to the `imports` list of the root `AppModule`.
-
-Only call and import a `.forRoot()` result in the root application module, `AppModule`.
-Importing it in any other module, particularly in a lazy-loaded module,
-is contrary to the intent and will likely produce a runtime error.
-For more information, see [Singleton Services](guide/singleton-services).
-
-For a service, instead of using `forRoot()`,  specify `providedIn: 'root'` on the service's `@Injectable()` decorator, which 
-makes the service automatically available to the whole application and thus singleton by default.
-
-`RouterModule` also offers a `forChild` static method for configuring the routes of lazy-loaded modules.
-
-`forRoot()` and `forChild()` are conventional names for methods that
-configure services in root and feature modules respectively.
-
-Angular doesn't recognize these names but Angular developers do.
-Follow this convention when you write similar modules with configurable service providers.
+純粋なサービスモジュールの再エクスポートに悩まないでください。
+純粋なサービスモジュールは他のNgModuleで使用できる[宣言](guide/bootstrapping#the-declarations-array)クラスをエクスポートしません。
+たとえば、`HttpClientModule`は何もエクスポートしないので、再エクスポートする必要はありません。
+その唯一の目的は、httpサービスプロバイダをアプリケーション全体に追加することです。
 
 
 <hr/>
 
 
-## Why is a service provided in a feature module visible everywhere?
+## `forRoot()`メソッドとは何ですか?
 
-Providers listed in the `@NgModule.providers` of a bootstrapped module have application scope.
-Adding a service provider to `@NgModule.providers` effectively publishes the service to the entire application.
+`forRoot()`静的メソッドは、開発者がシングルトンであることを意図したサービスとプロバイダーを簡単に設定できるようにするための規約です。`forRoot()`の良い例は、`RouterModule.forRoot()`メソッドです。
 
-When you import an NgModule,
-Angular adds the module's service providers (the contents of its `providers` list)
-to the application root injector.
+アプリケーションはルート全体でアプリケーション全体の `Router`サービスを設定するために`RouterModule.forRoot()`に`Routes`オブジェクトを渡します。
+`RouterModule.forRoot()`は[ModuleWithProviders](api/core/ModuleWithProviders)を返します。
+ルートの`AppModule`の`imports`配列にその結果を追加します。
 
-This makes the provider visible to every class in the application that knows the provider's lookup token, or name.
+`.forRoot()`の結果はルートアプリケーションモジュールである`AppModule`でだけ実行してインポートしてください。
+他のモジュール、特に遅延ロードされるモジュールでインポートすると、
+意に反しておそらくランタイムエラーが発生するでしょう。
+詳細については[シングルトンサービス](guide/singleton-services)を参照してください。
 
-Extensibility through NgModule imports is a primary goal of the NgModule system.
-Merging NgModule providers into the application injector
-makes it easy for a module library to enrich the entire application with new services.
-By adding the `HttpClientModule` once, every application component can make HTTP requests.
+サービスについては、`forRoot()`を使用するかわりにサービスの`@Injectable()`デコレーターに`providedIn: 'root'`を指定してください。
+これはサービスを自動的にアプリケーション全体で有効にし、この結果としてデフォルトでシングルトンになります。
 
-However, this might feel like an unwelcome surprise if you expect the module's services
-to be visible only to the components declared by that feature module.
-If the `HeroModule` provides the `HeroService` and the root `AppModule` imports `HeroModule`,
-any class that knows the `HeroService` _type_ can inject that service,
-not just the classes declared in the `HeroModule`.
+`RouterModule`は遅延ロードするモジュールのルートを設定するために`forChild`静的メソッドも提供しています。
 
-To limit access to a service, consider lazy loading the NgModule that provides that service. See [How do I restrict service scope to a module?](guide/ngmodule-faq#service-scope) for more information.
+`forRoot()`と`forChild()`はルートとフィーチャーモジュール
+それぞれのサービスの設定を行うメソッドのための慣例的な名前です。
+
+Angularはその名前について認識しませんが、Angular開発者はできます。
+あなたがサービスプロバイダーを設定できる似たようなモジュールを書くときにこの規約にしたがってください。
+
+
+<hr/>
+
+
+## フィーチャーモジュールで提供されるサービスがどこでも見えるのはなぜですか?
+
+プロバイダーはブートストラップするモジュールが持つアプリケーションのスコープの`@NgModule.providers`に追加されます。
+`@NgModule.providers`にサービスプロバイダー追加することはアプリケーション全体に効果的にサービスを公開します。
+
+1つのNgModuleをインポートしたとき、
+Angularはモジュールのサービスプロバイダー(それの`providers`配列の内容)を
+ルートインジェクターに追加します。
+
+
+これにより、プロバイダーのルックアップトークンや、名前をしっているアプリケーション内のすべてのクラスにプロバイダーが見えるようになります。
+
+NgModuleのインポートによる拡張性はNgModuleシステムの第一の目標です。
+アプリケーションインジェクターにNgModuleのプロバイダーをマージすることは、
+新しいサービスでアプリケーションすべてを充実させることがモジュールライブラリにとって簡単になります。
+`HttpClientModule`を1回追加すると、すべてのアプリケーションのコンポーネントはHTTPリクエストできようになります。
+
+しかしながら、フィーチャーモジュールで宣言したコンポーネントだけに見せたい場合は、
+歓迎されない驚きのように感じるでしょう。
+もし`HeroModule`が`HeroService`を提供していて、ルートの`AppModule`が`HeroModule`をインポートする場合、
+`HeroModule`内で宣言したクラスだけでなく、`HeroService`の_型_を知っている任意のクラスでそのサービスを注入することができます。
+
+サービスへのアクセスを制限するには、そのサービスを提供するNgModuleを遅延ロードすることを検討してください。詳細は[How do I restrict service scope to a module?](guide/ngmodule-faq#service-scope)を参照してください。
 
 <hr/>
 
 {@a q-lazy-loaded-module-provider-visibility}
 
-## Why is a service provided in a lazy-loaded module visible only to that module?
+## なぜ遅延ロードしたモジュールで提供されるサービスはそのモジュールだけで見れるのですか?
 
-Unlike providers of the modules loaded at launch,
-providers of lazy-loaded modules are *module-scoped*.
+起動時にロードされるモジュールのプロバイダーとは異なり、
+遅延ロードするモジュールのプロバイダーは*モジュールにスコープされます*。
 
-When the Angular router lazy-loads a module, it creates a new execution context.
-That [context has its own injector](guide/ngmodule-faq#q-why-child-injector "Why Angular creates a child injector"),
-which is a direct child of the application injector.
+Angularルーターがモジュールを遅延ロードするとき、新しい実行コンテキストを作成します。
+その[コンテキストは自身のインジェクターを持ちます](guide/ngmodule-faq#q-why-child-injector "Why Angular creates a child injector")。これはアプリケーションインジェクターの直接の子供になります。
 
-The router adds the lazy module's providers and the providers of its imported NgModules to this child injector.
+ルーターは遅延ロードしたモジュールのプロバイダーとそれがインポートしているNgModuleのプロバイダーをこの子供のインジェクターに追加します。
 
-These providers are insulated from changes to application providers with the same lookup token.
-When the router creates a component within the lazy-loaded context,
-Angular prefers service instances created from these providers to the service instances of the application root injector.
+これらのプロバイダーは同じルックアップトークンを持つアプリケーションプロバイダーへの変更から隔離されます。
+ルーターが遅延ロードしたコンテキスト内でコンポーネントを作成するとき、Angularはアプリケーションのルートインジェクターのサービスインスタンスよりもこれらのプロバイダーが作成したサービスインスタンスを優先します。
 
 <hr/>
 
 
-## What if two modules provide the same service?
+## 2つのモジュールが同じサービスを提供するとどうなりますか?
 
-When two imported modules, loaded at the same time, list a provider with the same token,
-the second module's provider "wins". That's because both providers are added to the same injector.
+2つモジュールをインポートして、同時にロードし、同じトークンでプロバイダーを追加したとき、
+2つ目のモジュールのプロバイダーが"勝ち"ます。両方のプロバイダーが同じインジェクターに追加されるからです。
 
-When Angular looks to inject a service for that token,
-it creates and delivers the instance created by the second provider.
+Angularがそのトークンのサービスを注入するとき、
+2つ目のプロバイダーからインスタンスが作成され、配信します。
 
-_Every_ class that injects this service gets the instance created by the second provider.
-Even classes declared within the first module get the instance created by the second provider.
+このサービスを注入する_すべて_のクラスは2つ目のプロバイダーによって作成されたインスタンスを取得します。
+1つ目のモジュールで宣言されたクラスであっても、2つ目のプロバイダーによって作成されたインスタンスを取得します。
 
-If NgModule A provides a service for token 'X' and imports an NgModule B
-that also provides a service for token 'X', then NgModule A's service definition "wins".
+NgModule Aがトークン'X'のサービスを提供していて、こちらもトークン'X'のサービスを提供しているNgModule Bをインポート場合、
+NgModule Aのサービス定義が"勝ち"ます。
 
-The service provided by the root `AppModule` takes precedence over services provided by imported NgModules.
-The `AppModule` always wins.
+ルートの`AppModule`が提供するサービスはインポートしたNgModuleが提供するサービスよりも優先されます。
+`AppModule`が常に勝ちます。
 
 <hr/>
 
 {@a service-scope}
 
-## How do I restrict service scope to a module?
+## どのようにサービスのスコープをモジュールに制限しますか?
 
-When a module is loaded at application launch,
-its `@NgModule.providers` have *application-wide scope*;
-that is, they are available for injection throughout the application.
+モジュールがアプリケーションの起動時にロードされたとき、
+その`@NgModule.providers`は*アプリケーション全体のスコープ*を持ちます。
+つまり、アプリケーション全体に注入することができます。
 
-Imported providers are easily replaced by providers from another imported NgModule.
-Such replacement might be by design. It could be unintentional and have adverse consequences.
+インポートしたプロバイダーは他のインポートしたNgModuleから簡単にプロバイダーで置き換えられます。
+そのような置き換えはデザインによるものであることでしょう。それは意図的でなく、悪影響を及ぼす可能性があります。
 
-As a general rule, import modules with providers _exactly once_, preferably in the application's _root module_.
-That's also usually the best place to configure, wrap, and override them.
+原則として、プロバイダーをもつモジュールは_1回だけ_インポートしてください。できれば、アプリケーションの_ルートモジュール_内で。
+それは通常、それらを設定、ラップ、オーバーライドするのに最適な場所です。
 
-Suppose a module requires a customized `HttpBackend` that adds a special header for all Http requests.
-If another module elsewhere in the application also customizes `HttpBackend`
-or merely imports the `HttpClientModule`, it could override this module's `HttpBackend` provider,
-losing the special header. The server will reject http requests from this module.
+モジュールがすべてのhttpリクエストに特別なヘッダーを追加する、カスタマイズされた`HttpBackend`が必要であると仮定します。
+アプリケーションの他のモジュールも`HttpBackendをカスタマイズしたり、単純に`HttpClientModule`をインポートした場合、
+このモジュールの`HttpBackend`プロバイダーをオーバーライドして、特別なヘッダーが失われる可能性があります。サーバーはこのモジュールからのhttpリクエストを拒否するでしょう。
 
-To avoid this problem, import the `HttpClientModule` only in the `AppModule`, the application _root module_.
+この問題を回避するためには、アプリケーションの_ルートモジュール_である`AppModule`でのみ`HttpClientModule`をインポートしてください。
 
-If you must guard against this kind of "provider corruption", *don't rely on a launch-time module's `providers`.*
+このような"プロバイダーの破損"を防ぐ必要がある場合は、*起動時のモジュールの`プロバイダー`に依存してはいけません*。
 
-Load the module lazily if you can.
-Angular gives a [lazy-loaded module](guide/ngmodule-faq#q-lazy-loaded-module-provider-visibility) its own child injector.
-The module's providers are visible only within the component tree created with this injector.
+できるならモジュールを遅延ロードしてください。
+Angularは[遅延ロードするモジュール](guide/ngmodule-faq#q-lazy-loaded-module-provider-visibility)に自身の子供のインジェクターを与えます。
+モジュールのプロバイダーはこのインジェクターで作成されたコンポーネントツリー内だけでみることができます。
 
-If you must load the module eagerly, when the application starts,
-*provide the service in a component instead.*
+アプリケーションを開始したときはモジュールを事前にロードする必要があります。
+*かわりにコンポーネント内でサービスを提供してください*。
 
-Continuing with the same example, suppose the components of a module truly require a private, custom `HttpBackend`.
+同じ例で続けます。モジュールのコンポーネントが本当にプライベートなカスタム`HttpBackend`を必要とすると仮定してください。
 
-Create a "top component" that acts as the root for all of the module's components.
-Add the custom `HttpBackend` provider to the top component's `providers` list rather than the module's `providers`.
-Recall that Angular creates a child injector for each component instance and populates the injector
-with the component's own providers.
+すべてのモジュールのコンポーネントのルートとして機能する"トップコンポーネント"を作成します。
+カスタム`HttpBackend`プロバイダーをモジュールの`providers`ではなくコンポーネントの`providers`に追加してください。
 
-When a child of this component asks for the `HttpBackend` service,
-Angular provides the local `HttpBackend` service,
-not the version provided in the application root injector.
-Child components make proper HTTP requests no matter what other modules do to `HttpBackend`.
+Angularはコンポーネントインスタンスごとに子インジェクターを作成し、
+コンポーネント自身のプロバイダーにインジェクターを追加します。
 
-Be sure to create module components as children of this module's top component.
+コンポーネントのの子供が`HttpBackend`サービスを呼び出すとき、
+Angularはローカルの`HttpBackend`サービスを提供します。
+アプリケーションのルートインジェクターに提供されたものではなく。
+他のモジュールが`HttpBackend`に何をしても、子コンポーネントは適切なhttpリクエストを行います。
 
-You can embed the child components in the top component's template.
-Alternatively, make the top component a routing host by giving it a `<router-outlet>`.
-Define child routes and let the router load module components into that outlet.
+モジュールのトップコンポーネントの子としてモジュールコンポーネントを作成しておきなさい。
 
-Though you can limit access to a service by providing it in a lazy loaded module or providing it in a component, providing services in a component can lead to multiple instances of those services. Thus, the lazy loading is preferable.
+子コンポーネントをトップコンポーネントのテンプレートに埋め込むことができます。
+別の方法として、指定した`<router-outlet>`でトップコンポーネントをルーティングホストに作成します。
+子ルートを定義してルーターにモジュールのコンポーネントをアウトレットにロードさせます。
+
+遅延ロードしたモジュールか、コンポーネント内でサービスを提供することでアクセスを制限することができますが、コンポーネント内でサービスを提供することでそれらのサービスのインスタンスが複数作成される可能性があります。したがって、遅延ロードのほうがより好ましいです。
 
 <hr/>
 
 {@a q-root-component-or-module}
 
 
-## Should I add application-wide providers to the root `AppModule` or the root `AppComponent`?
+## ルートの`AppModule`とルートの`AppComponent`のどちらにアプリケーション全体のプロバイダーを追加すべきですか?
 
- Define application-wide providers by specifying `providedIn: 'root'` on its `@Injectable()` decorator (in the case of services) or at `InjectionToken` construction (in the case where tokens are provided). Providers that are created this way automatically are made available to the entire application and don't need to be listed in any module.
+アプリケーション全体のプロバイダーはその`@Injectable()`デコレーター(サービスの場合は)に`providedIn: 'root'`を指定することか、`InjectionToken`構文(トークンが提供された場合)で定義してください。この方法で自動的に作成されたプロバイダーはアプリケーション全体でユコウになり、どのモジュール内にも追加する必要はありません。
 
-If a provider cannot be configured in this way (perhaps because it has no sensible default value), then register application-wide providers in the root `AppModule`, not in the `AppComponent`.
+プロバイダーがこの方法(おそらくは懸命なデフォルト値をもたない)で作成できないばあいは、ルートの`AppModule`内のアプリケーション全体のプロバイダーに登録してください。`AppComponent`ではありません。
 
-Lazy-loaded modules and their components can inject `AppModule` services;
-they can't inject `AppComponent` services.
+遅延ロードするモジュールとそれらのコンポーネントは`AppModule`のサービスを注入できます。
+`AppComponent`のサービスを注入することはできません。
 
-Register a service in `AppComponent` providers _only_ if the service must be hidden
-from components outside the `AppComponent` tree. This is a rare use case.
+サービスが`AppComponent`ツリーの外側のコンポーネントから隠す必要がある場合に_のみ_`AppComponent`にサービスを登録してください。
+これはレアなユースケースです。
 
-More generally, [prefer registering providers in NgModules](guide/ngmodule-faq#q-component-or-module) to registering in components.
+より一般的に、コンポーネントよりも[NgModule内にプロバイダーを登録することをおすすめします](guide/ngmodule-faq#q-component-or-module)。
 
-<h3 class="no-toc">Discussion</h3>
+<h3 class="no-toc">ディスカッション</h3>
 
-Angular registers all startup module providers with the application root injector.
-The services that root injector providers create have application scope, which
-means they are available to the entire application.
+Angularはアプリケーションのルートインジェクターにすべてのスタートアップのモジュールプロバイダーを登録します。
+ルートインジェクタープロバイダーのサービスはアプリケーションのスコープで作られます。
+これは、アプリケーション全体でそれらが有効であることを意味します。
 
-Certain services, such as the `Router`, only work when you register them in the application root injector.
+`Router`などの特定のサービスはそれらをアプリケーションのルートインジェクターに登録するときにのみ機能します。
 
-By contrast, Angular registers `AppComponent` providers with the `AppComponent`'s own injector.
-`AppComponent` services are available only to that component and its component tree.
-They have component scope.
+一方、Angularは`AppComponent`自身のインジェクターで`AppComponent`のプロバイダーを登録します。
+`AppComponent`のサービスはそのコンポーネントとコンポーネントツリーでのみ有効になります。
+それらはコンポーネントスコープをもちます。
 
-The `AppComponent`'s injector is a child of the root injector, one down in the injector hierarchy.
-For applications that don't use the router, that's almost the entire application.
-But in routed applications, routing operates at the root level
-where `AppComponent` services don't exist.
-This means that lazy-loaded modules can't reach them.
+`AppComponent`のインジェクターはインジェクターの階層が一段下であるルートインジェクターの子供です。
+ルーターを使用しないアプリケーションの場合は、ほとんどすべてのアプリケーションに該当します。
+しかし、ルーティングされたアプリケーションではルーティングは
+`AppComponent`サービスが存在しない場所のルートレベルで動作します。
+これは遅延ロードするモジュールがそれらにリーチできないことを意味します。
 
 <hr/>
 
 {@a q-component-or-module}
 
-## Should I add other providers to a module or a component?
+## 他のプロバイダーをモジュールやコンポーネントに追加すべきですか?
 
 Providers should be configured using `@Injectable` syntax. If possible, they should be provided in the application root (`providedIn: 'root'`). Services that are configured this way are lazily loaded if they are only used from a lazily loaded context.
 

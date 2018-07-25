@@ -1,30 +1,49 @@
 # angular-ja
 
 [![CircleCI](https://circleci.com/gh/angular/angular-ja/tree/master.svg?style=svg)](https://circleci.com/gh/angular/angular-ja/tree/master)
+[![Backers on Open Collective](https://opencollective.com/angular-ja/backers/badge.svg)](#backers)
+ [![Sponsors on Open Collective](https://opencollective.com/angular-ja/sponsors/badge.svg)](#sponsors) 
 
 このリポジトリは[Angular](https://github.com/angular/angular)の公式サイト [angular.io](https://angular.io) を日本語に翻訳するためのものです。
 
 現在は https://angular.jp でホストされたサイトを確認できます。
 
-## コントリビューター
+## クレジット
 
-<!---begin contributors -->
-[<img alt="lacolaco" src="https://avatars3.githubusercontent.com/u/1529180?v=4&s=117" width="117">](https://github.com/lacolaco) |[<img alt="mitsuhisaT" src="https://avatars0.githubusercontent.com/u/21700509?v=4&s=117" width="117">](https://github.com/mitsuhisaT) |[<img alt="studioTeaTwo" src="https://avatars3.githubusercontent.com/u/1317305?v=4&s=117" width="117">](https://github.com/studioTeaTwo) |[<img alt="ukyo" src="https://avatars2.githubusercontent.com/u/373554?v=4&s=117" width="117">](https://github.com/ukyo) |[<img alt="arayaryoma" src="https://avatars1.githubusercontent.com/u/5627119?v=4&s=117" width="117">](https://github.com/arayaryoma) |[<img alt="chloe463" src="https://avatars2.githubusercontent.com/u/6651523?v=4&s=117" width="117">](https://github.com/chloe463) |
-:---: |:---: |:---: |:---: |:---: |:---: |
-[lacolaco](https://github.com/lacolaco) |[mitsuhisaT](https://github.com/mitsuhisaT) |[studioTeaTwo](https://github.com/studioTeaTwo) |[ukyo](https://github.com/ukyo) |[arayaryoma](https://github.com/arayaryoma) |[chloe463](https://github.com/chloe463) |
+### コントリビューター
 
-[<img alt="Pittan" src="https://avatars1.githubusercontent.com/u/6269639?v=4&s=117" width="117">](https://github.com/Pittan) |[<img alt="kappy" src="https://avatars3.githubusercontent.com/u/26835913?v=4&s=117" width="117">](https://github.com/kappy) |[<img alt="mixplace" src="https://avatars0.githubusercontent.com/u/6075444?v=4&s=117" width="117">](https://github.com/mixplace) |[<img alt="MasanobuAkiba" src="https://avatars2.githubusercontent.com/u/7288676?v=4&s=117" width="117">](https://github.com/MasanobuAkiba) |[<img alt="briete" src="https://avatars0.githubusercontent.com/u/8341971?v=4&s=117" width="117">](https://github.com/briete) |[<img alt="sayanaka" src="https://avatars1.githubusercontent.com/u/28511464?v=4&s=117" width="117">](https://github.com/sayanaka) |
-:---: |:---: |:---: |:---: |:---: |:---: |
-[Pittan](https://github.com/Pittan) |[kappy](https://github.com/kappy) |[mixplace](https://github.com/mixplace) |[MasanobuAkiba](https://github.com/MasanobuAkiba) |[briete](https://github.com/briete) |[sayanaka](https://github.com/sayanaka) |
+このプロジェクトに貢献してくれているコントリビューターのみなさんです！
 
-[<img alt="shioyang" src="https://avatars0.githubusercontent.com/u/4098243?v=4&s=117" width="117">](https://github.com/shioyang) |[<img alt="03-26" src="https://avatars0.githubusercontent.com/u/37808790?v=4&s=117" width="117">](https://github.com/03-26) |[<img alt="doutori" src="https://avatars0.githubusercontent.com/u/25642027?v=4&s=117" width="117">](https://github.com/doutori) |[<img alt="KentarouTakeda" src="https://avatars2.githubusercontent.com/u/4785040?v=4&s=117" width="117">](https://github.com/KentarouTakeda) |[<img alt="maechabin" src="https://avatars0.githubusercontent.com/u/3264597?v=4&s=117" width="117">](https://github.com/maechabin) |[<img alt="TomohiroAkutsu" src="https://avatars1.githubusercontent.com/u/18062365?v=4&s=117" width="117">](https://github.com/TomohiroAkutsu) |
-:---: |:---: |:---: |:---: |:---: |:---: |
-[shioyang](https://github.com/shioyang) |[03-26](https://github.com/03-26) |[doutori](https://github.com/doutori) |[KentarouTakeda](https://github.com/KentarouTakeda) |[maechabin](https://github.com/maechabin) |[TomohiroAkutsu](https://github.com/TomohiroAkutsu) |
+<a href="graphs/contributors"><img src="https://opencollective.com/angular-ja/contributors.svg?width=890&button=false" /></a>
 
-[<img alt="rider-yi" src="https://avatars1.githubusercontent.com/u/8375652?v=4&s=117" width="117">](https://github.com/rider-yi) |[<img alt="adwd" src="https://avatars2.githubusercontent.com/u/7473222?v=4&s=117" width="117">](https://github.com/adwd) |[<img alt="massa142" src="https://avatars2.githubusercontent.com/u/5918804?v=4&s=117" width="117">](https://github.com/massa142) |[<img alt="t-cool" src="https://avatars0.githubusercontent.com/u/3023976?v=4&s=117" width="117">](https://github.com/t-cool) |
-:---: |:---: |:---: |:---: |
-[rider-yi](https://github.com/rider-yi) |[adwd](https://github.com/adwd) |[massa142](https://github.com/massa142) |[t-cool](https://github.com/t-cool) |
-<!---end contributors -->
+
+### Backers
+
+日本語化プロジェクトを支援してくれるBackerを募集しています！
+
+プロジェクトを支援してくれているBackerのみなさんです！ 🙏 [[Backerになる](https://opencollective.com/angular-ja#backer)]
+
+<a href="https://opencollective.com/angular-ja#backers" target="_blank"><img src="https://opencollective.com/angular-ja/backers.svg?width=890"></a>
+
+
+<!--
+
+### スポンサー
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/angular-ja#sponsor)]
+
+<a href="https://opencollective.com/angular-ja/sponsor/0/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/1/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/2/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/3/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/4/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/5/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/6/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/7/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/8/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/angular-ja/sponsor/9/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/9/avatar.svg"></a>
+
+-->
 
 ## コントリビューション大歓迎！
 

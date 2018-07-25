@@ -26,13 +26,11 @@
 <a href="https://opencollective.com/angular-ja#backers" target="_blank"><img src="https://opencollective.com/angular-ja/backers.svg?width=890"></a>
 
 
+<!--
+
 ### スポンサー
 
-現在スポンサーの受付はおこなっていません。
-
-<!--
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/angular-ja#sponsor)]
--->
 
 <a href="https://opencollective.com/angular-ja/sponsor/0/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/angular-ja/sponsor/1/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/1/avatar.svg"></a>
@@ -44,6 +42,8 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/angular-ja/sponsor/7/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/angular-ja/sponsor/8/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/angular-ja/sponsor/9/website" target="_blank"><img src="https://opencollective.com/angular-ja/sponsor/9/avatar.svg"></a>
+
+-->
 
 ## コントリビューション大歓迎！
 

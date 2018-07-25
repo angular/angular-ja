@@ -14,7 +14,7 @@
 
 このプロジェクトに貢献してくれているコントリビューターのみなさんです！
 
-<a href="graphs/contributors"><img src="https://opencollective.com/angular-ja/contributors.svg?width=890&button=false" /></a>
+<a href="https://github.com/angular/angular-ja/graphs/contributors"><img src="https://opencollective.com/angular-ja/contributors.svg?width=890&button=false" /></a>
 
 
 ### Backers

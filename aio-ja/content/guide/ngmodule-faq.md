@@ -379,52 +379,49 @@ Angularはアプリケーションのルートインジェクターにすべて�
 
 ## 他のプロバイダーをモジュールやコンポーネントに追加すべきですか?
 
-Providers should be configured using `@Injectable` syntax. If possible, they should be provided in the application root (`providedIn: 'root'`). Services that are configured this way are lazily loaded if they are only used from a lazily loaded context.
+プロバイダーは`@Injectable`構文を使用して設定すべきです。もし可能ならば、アプリケーションルート(`providedIn: 'root'`)に提供されるべきです。この方法で設定されたサービスは遅延ロードされたコンテキストでのみ使用される場合に遅延ロードされます。
 
-If it's the consumer's decision whether a provider is available application-wide or not, 
-then register providers in modules (`@NgModule.providers`) instead of registering in components (`@Component.providers`).
+プロバイダーがアプリケーション全体で利用可能かどうか、利用者の判断である場合、
+コンポーネント内(`@Component.providers`)に登録するかわりにモジュール内(`@NgModule.providers`)にプロバイダーを登録してください。
 
-Register a provider with a component when you _must_ limit the scope of a service instance
-to that component and its component tree.
-Apply the same reasoning to registering a provider with a directive.
+対象のコンポーネントとそのコンポーネントツリーのインスタンスにサービスすのスコープを制限する_ひつようがある_とき、
+コンポーネントにプロバイダーを登録してください。
+ディレクティブにプロバイダーを登録するときも同じ理由を適用します。
 
-For example, an editing component that needs a private copy of a caching service should register
-the service with the component.
-Then each new instance of the component gets its own cached service instance.
-The changes that editor makes in its service don't touch the instances elsewhere in the application.
+たとえば、作詞しているコンポーネント、プライベートのコピーが必要、キャッシュしているサービスの、コンポーネントにサービスを登録すべきです。
+それぞれのコンポーネントの新しいインスタンスは各自キャッシュされたサービスのインスタンスを得ます。
+エディタがそのサービスで行う変更は、アプリケーション内の他のインスタンスには触れません。
 
-[Always register _application-wide_ services with the root `AppModule`](guide/ngmodule-faq#q-root-component-or-module),
-not the root `AppComponent`.
+[ いつでもルートの`AppModule`に_アプリケーション全体_ のサービスを登録してください](guide/ngmodule-faq#q-root-component-or-module)、
+`AppComponent`ではありません。
 
 <hr/>
 
 {@a q-why-bad}
 
 
-## Why is it bad if a shared module provides a service to a lazy-loaded module?
+## なぜ共有モジュールが遅延ロードするモジュールにサービスを提供することがわるいことなのですか?
 
-### The eagerly loaded scenario
-When an eagerly loaded module provides a service, for example a `UserService`, that service is available application-wide. If the root module provides `UserService` and
-imports another module that provides the same `UserService`, Angular registers one of
-them in the root app injector (see [What if I import the same module twice?](guide/ngmodule-faq#q-reimport)).
+### 事前ロードでのシナリオ
+事前ロードするモジュールがサービスを提供するとき、たとえば`UserService`、そのサービスはアプリケーション全体で有効になります。
+ルートモジュールが`UserService`提供していて、`UserService`を提供する別のモジュールをインポートしている場合、Angularはそれらのう1つをルートアプリケーションインジェクターにに登録します([2つのモジュールが同じサービスを提供するとどうなりますか?](guide/ngmodule-faq#q-reimport)を参照してください)。
 
-Then, when some component injects `UserService`, Angular finds it in the app root injector,
-and delivers the app-wide singleton service. No problem.
+そのあと、コンポーネントが`UserService`を注入したとき、Angularはルートアプリケーションインジェクター内からそれをみつけて、
+アプリケーション全体でシングルトンなサービスを渡します。問題ありません。
 
-### The lazy loaded scenario
+### 遅延ロードでのシナリオ
 
-Now consider a lazy loaded module that also provides a service called `UserService`.
+次に、`UserService`と呼ばれるサービスを提供する遅延ロードモジュールを考えてみましょう。
 
-When the router lazy loads a module, it creates a child injector and registers the `UserService`
-provider with that child injector. The child injector is _not_ the root injector.
+ルーターがモジュールを遅延ロードするとき、それは子インジェクターを作成して、その子インジェクターに`UserService`プロバイダーを登録します。
+子インジェクターはルートインジェクターでは_ありません_。
 
-When Angular creates a lazy component for that module and injects `UserService`,
-it finds a `UserService` provider in the lazy module's _child injector_
-and creates a _new_ instance of the `UserService`.
-This is an entirely different `UserService` instance
-than the app-wide singleton version that Angular injected in one of the eagerly loaded components.
+Angularがそのモジュールの遅延コンポーネントを作成して`UserService`を注入するとき、
+それは遅延モジュールの_子インジェクター_内の`UserService`をみつけて、
+`UserService`の_新しい_インスタンスを生成します。
+これは完全にAngularが事前ロードしたコンポーネントで注入した、アプリケーション全体でシングルトンなバージョンとは違うインスタンスになります。
 
-This scenario causes your app to create a new instance every time, instead of using the singleton.
+このシナリオでは、シングルトンを使用する代わりに、毎回新しいインスタンスが作成されます。
 <!--KW--What does this cause? I wasn't able to get the suggestion of this to work from
 the current FAQ:
 To demonstrate, run the <live-example name="ngmodule">live example</live-example>.
@@ -437,45 +434,43 @@ I'd like to see the error so I can include it.-->
 
 {@a q-why-child-injector}
 
-## Why does lazy loading create a child injector?
+## なぜ遅延ロードは子インジェクターを作成するのですか?
 
-Angular adds `@NgModule.providers` to the application root injector, unless the NgModule is lazy-loaded.
-For a lazy-loaded NgModule, Angular creates a _child injector_ and adds the module's providers to the child injector.
+Angularは`@NgModule.providers`をアプリケーションのルートインジェクターに追加します。NgModuleが遅延ロードしていない場合。
+遅延ロードするNgModuleでは、Angularは_子インジェクター_を作成して、モジュールのプロバイダーを子インジェクターに追加します。
 
-This means that an NgModule behaves differently depending on whether it's loaded during application start
-or lazy-loaded later. Neglecting that difference can lead to [adverse consequences](guide/ngmodule-faq#q-why-bad).
+NgModuleが起動時にロードされるのか、遅延ロードされるのかによって動作が異なることを意味します。
+その違いを軽視すると、[悪影響](guide/ngmodule-faq#q-why-bad)につながる恐れがあります。
 
-Why doesn't Angular add lazy-loaded providers to the app root injector as it does for eagerly loaded NgModules?
+なぜAngularは事前ロードしたNgModule同様に、遅延ロードしたプロバイダーをアプリケーションのルートインジェクターに追加しないのでしょうか?
 
-The answer is grounded in a fundamental characteristic of the Angular dependency-injection system.
-An injector can add providers _until it's first used_.
-Once an injector starts creating and delivering services, its provider list is frozen; no new providers are allowed.
+その答えは、Angularの依存性の注入システムの基本的な特性にもとづいています。
+インジェクターは_それがはじめて使用するまでに_プロバイダーを追加できます。
+インジェクターがいちどサービスを作成して配送しはじめたら、そのプロバイダーのリストは固定されます。新しいプロバイダーは許容されません。
 
-When an applications starts, Angular first configures the root injector with the providers of all eagerly loaded NgModules
-_before_ creating its first component and injecting any of the provided services.
-Once the application begins, the app root injector is closed to new providers.
+アプリケーションを起動したとき、Angularは最初にすべての最初のコンポーネントを作成して、提供されたサービスを注入する_前_の事前ロードしたNgModuleのプロバイダーでルートインジェクターを設定します。
+いちどアプリケーションが起動したらアプリケーションのルートインジェクターは新しいプロバイダーを受け付けません。
 
-Time passes and application logic triggers lazy loading of an NgModule.
-Angular must add the lazy-loaded module's providers to an injector somewhere.
-It can't add them to the app root injector because that injector is closed to new providers.
-So Angular creates a new child injector for the lazy-loaded module context.
+時間が経過して、アプリケーションのロジックがNgModuleの遅延ロードを発火します。
+Angularは、遅延ロードしたモジュールのプロバイダーをどこかのインジェクターに追加する必要があります。
+アプリケーションルートインジェクターは新しいプロバイダーを受け付けないためそこに追加することはできません。
+したがって、Angularは遅延ロードしたモジュールのコンテキストのための新しい子インジェクターを作成します。
 
 <hr/>
 
 {@a q-is-it-loaded}
 
-## How can I tell if an NgModule or service was previously loaded?
+## NgModuleまたはサービスが以前にロードされたかどうかをどのように確認できますか?
 
-Some NgModules and their services should be loaded only once by the root `AppModule`.
-Importing the module a second time by lazy loading a module could [produce errant behavior](guide/ngmodule-faq#q-why-bad)
-that may be difficult to detect and diagnose.
+いくつかのNgModuleとそれらのサービスはルートの`AppModule`から一度だけロードする必要があります。
+遅延ロードするモジュールから2回目にインポートするモジュールは[誤った行動](guide/ngmodule-faq#q-why-bad)をみつけて診断することが難しいでしょう。
 
-To prevent this issue, write a constructor that attempts to inject the module or service
-from the root app injector. If the injection succeeds, the class has been loaded a second time.
-You can throw an error or take other remedial action.
+この問題を防ぐために、ルートアプリケーションインジェクターからモジュールまたはサービスを注入するコンストラクタを書きましょう。
+注入が成功した場合、クラスは2回目にロードされたということです。
+エラーをスローしたり、他の是正措置を講じることができます。
 
-Certain NgModules, such as `BrowserModule`, implement such a guard.
-Here is a custom constructor for an NgModule called `CoreModule`.
+特定のNgModule、たとえば`BrowserModule`のように、ガードを実装しましょう。
+ここには`CoreModule`と呼ばれるNgModuleのためのカスタムコンストラクタがあります。
 
 <code-example path="ngmodule-faq/src/app/core/core.module.ts" region="ctor" title="src/app/core/core.module.ts (Constructor)" linenums="false">
 </code-example>
@@ -484,64 +479,61 @@ Here is a custom constructor for an NgModule called `CoreModule`.
 
 {@a q-entry-component-defined}
 
-## What is an `entry component`?
+## `entry component`とは何ですか?
 
-An entry component is any component that Angular loads _imperatively_ by type.
+エントリーコンポーネントとはAngularが_命令的に_ロードするタイプの任意のコンポーネントです。
 
-A component loaded _declaratively_ via its selector is _not_ an entry component.
+エントリーコンポーネントで_ない_コンポーネントはセレクター経由で_宣言的に_ロードされます。
 
-Angular loads a component declaratively when
-using the component's selector to locate the element in the template.
-Angular then creates the HTML representation of the component and inserts it into the DOM at the selected element. These aren't entry components.
+コンポーネントのセレクターがテンプレートのエレメントに置かれているときにAngularは宣言的にコンポーネントをロードします。
+AngularはそのあとコンポーネントのHTML表現を作成して、選択した要素のDOMの中に挿入します。
+それらはエントリーコンポーネントではありません。
 
-The bootstrapped root `AppComponent` is an _entry component_.
-True, its selector matches an element tag in `index.html`.
-But `index.html` isn't a component template and the `AppComponent`
-selector doesn't match an element in any component template.
+ブートストラップしたルートの`AppComponent`は_エントリーコンポーネント_です。
+真実、そのセレクターは`index.html`の要素タグにマッチします。
+しかし、`index.html`はコンポーネントのテンプレートではなく、`AppComponent`
+のセレクターはどのコンポーネントテンプレートにもマッチしません。
 
-Components in route definitions are also _entry components_.
-A route definition refers to a component by its _type_.
-The router ignores a routed component's selector, if it even has one, and
-loads the component dynamically into a `RouterOutlet`.
+ルート定義内のコンポーネントも_エントリーコンポーネント_です。
+ルート定義はその_型_からコンポーネントを参照します。
+ルーターはルーテッドコンポーネントのセレクターを無視します(セレクターを持っていても)。
+そして`RouterOutlet`内に動的にコンポーネントをロードします。
 
-For more information, see [Entry Components](guide/entry-components).
-
-<hr/>
-
-## What's the difference between a _bootstrap_ component and an _entry component_?
-
-A bootstrapped component _is_ an [entry component](guide/ngmodule-faq#q-entry-component-defined)
-that Angular loads into the DOM during the bootstrap process (application launch).
-Other entry components are loaded dynamically by other means, such as with the router.
-
-The `@NgModule.bootstrap` property tells the compiler that this is an entry component _and_
-it should generate code to bootstrap the application with this component.
-
-There's no need to list a component in both the `bootstrap` and `entryComponents` lists,
-although doing so is harmless.
-
-For more information, see [Entry Components](guide/entry-components).
+詳細については、[エントリーコンポーネント](guide/entry-components)を参照してください。
 
 <hr/>
 
-## When do I add components to _entryComponents_?
+## _ブートストラップ_したコンポーネントと_エントリーコンポーネント_の違いは何ですか?
 
-Most application developers won't need to add components to the `entryComponents`.
+ブートストラップしたコンポーネントはAngularがブートストラッププロセス(アプリケーションの起動)中にDOMにロードする[エントリーコンポーネント](guide/ngmodule-faq#q-entry-component-defined)
+の1つです。
+他のエントリーコンポーネントは他の理由で動的にロードされます。たとえばルーターから。
 
-Angular adds certain components to _entry components_ automatically.
-Components listed in `@NgModule.bootstrap` are added automatically.
-Components referenced in router configuration are added automatically.
-These two mechanisms account for almost all entry components.
+`@NgModule.bootstrap`プロパティはこれはエントリーコンポーネントでアプリケーションをこのコンポーネントでブートストラップするためコードを生成する必要があると教えます。
 
-If your app happens to bootstrap or dynamically load a component _by type_ in some other manner,
-you must add it to `entryComponents` explicitly.
+コンポーネントを`bootstrap`、`entryComponents`配列両方に追加する必要はありません。そうしても無害ですが。
 
-Although it's harmless to add components to this list,
-it's best to add only the components that are truly _entry components_.
-Don't include components that [are referenced](guide/ngmodule-faq#q-template-reference)
-in the templates of other components.
+詳細については[エントリーコンポーネント](guide/entry-components)を参照してください。
 
-For more information, see [Entry Components](guide/entry-components).
+<hr/>
+
+## いつ_エントリーコンポーネント_を追加しますか?
+
+ほとんどのアプリケーション開発者は`entryComponents`にコンポーネントを追加する必要はありません。
+
+Angularは特定のコンポーネントを自動的に_エントリーコンポーネント_として追加します。
+`@NgModule.bootstrap`に追加したコンポーネントは自動的に追加されます。
+ルーター定義によって参照されるコンポーネントは自動的に追加されます。
+この2つのメカニズムによってほぼすべてのエントリーコンポーネントが占められます。
+
+
+あなたのアプリケーションが他の方法でタイプ別にブートストラップまたは動的にコンポーネントをロードする場合は、それを明示的に `entryComponents`に追加する必要があります。
+
+このリストにコンポーネントを追加することは無害ですが、
+本当に_エントリーコンポーネント_であるものだけを追加するのが最善です。
+ほかのコンポーネントのテンプレートで[参照される](guide/ngmodule-faq#q-template-reference)コンポーネントは含めないでください。
+
+詳細については[エントリーコンポーネント](guide/entry-components)を参照してください。
 
 <hr/>
 

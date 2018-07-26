@@ -538,62 +538,57 @@ Angularは特定のコンポーネントを自動的に_エントリーコンポ
 <hr/>
 
 
-## Why does Angular need _entryComponents_?
+## なぜAngularは_entryComponents_が必要なのですか?
 
-The reason is _tree shaking_. For production apps you want to load the smallest, fastest code possible. The code should contain only the classes that you actually need.
-It should exclude a component that's never used, whether or not that component is declared.
+_ツリーシェイキング_のためです。プロダクションのアプリケーションでは、可能な限り最小、最速のコードをロードしたいです。コードには実際に必要なクラスのみが含まれている必要があります。
+そのコンポーネントが宣言されているかどうかにかかわらず、使用されていないコンポーネントは除外する必要があります。
 
-In fact, many libraries declare and export components you'll never use.
-If you don't reference them, the tree shaker drops these components from the final code package.
+事実、多くのライブラリは使用されないであろうコンポーネントを宣言、エクスポートしています。
+それらを参照してない場合、ツリーシェイカーは最終的なコードパッケージからそれらのコンポーネントを除外します。
 
-If the [Angular compiler](guide/ngmodule-faq#q-angular-compiler) generated code for every declared component, it would defeat the purpose of the tree shaker.
+If the [Angularコンパイラ](guide/ngmodule-faq#q-angular-compiler)がすべての宣言したコンポーネントを生成した場合、ツリーシェイカーの目的を破ってしまうでしょう。
 
-Instead, the compiler adopts a recursive strategy that generates code only for the components you use.
+かわりに、コンパイラは使用するコンポーネントのみのコードを生成する再帰的な戦略を採用しています。
 
-The compiler starts with the entry components,
-then it generates code for the declared components it [finds](guide/ngmodule-faq#q-template-reference) in an entry component's template,
-then for the declared components it discovers in the templates of previously compiled components,
-and so on. At the end of the process, the compiler has generated code for every entry component
-and every component reachable from an entry component.
+コンパイラはエントリーコンポーネントから開始します。
+それから宣言したコンポーネントをエントリーコンポーネントのテンプレートから[探して](guide/ngmodule-faq#q-template-reference)コードを生成し、
 
-If a component isn't an _entry component_ or wasn't found in a template,
-the compiler omits it.
+宣言されたコンポーネントについては、以前にコンパイルされたコンポーネントのテンプレートなどで検出されます。
+プロセスの最後では、コンパイラはすべてのエントリーコンポーネントとエントリーコンポーネントから到達できるすべてのコンポーネントの生成されたコードをもちます。
+
+コンポーネントが_エントリーコンポーネント_でない、もしくはテンプレート内にない場合はコンパイラはそれを切り捨てます。
 
 <hr/>
 
-## What kinds of modules should I have and how should I use them?
+## どのような種類のモジュールが必要ですか、どうすれば使用できますか?
 
-Every app is different. Developers have various levels of experience and comfort with the available choices.
-Some suggestions and guidelines appear to have wide appeal.
+すべてのアプリケーションは違います。開発者は、さまざまなレベルの経験と快適さを利用できる選択肢を持っています。
+いくつかの提案とガイドラインには、幅広い魅力があります。
 
 ### `SharedModule`
-`SharedModule` is a conventional name for an `NgModule` with the components, directives, and pipes that you use
-everywhere in your app. This module should consist entirely of `declarations`,
-most of them exported.
+`SharedModule`は、アプリケーション内のどこでも使用するコンポーネント、ディレクティブ、パイプを持つ`NgModule`の伝統的な名前です。 このモジュールは完全に `declarations`で構成され、そのほとんどはエクスポートされます。
 
-The `SharedModule` may re-export other widget modules, such as `CommonModule`,
-`FormsModule`, and NgModules with the UI controls that you use most widely.
+`SharedModule`は` CommonModule`、 `FormsModule`、NgModulesのような他のウィジェットモジュールを最も広く使用するUIコントロールで再エクスポートすることができます。
 
-The `SharedModule` should not have `providers` for reasons [explained previously](guide/ngmodule-faq#q-why-bad).
-Nor should any of its imported or re-exported modules have `providers`.
+`SharedModule`は、理由のために（前に説明したように）` provider`を持つべきではありません[explained previously](guide/ngmodule-faq#q-why-bad)。
+また、輸入または再輸出されたモジュールのいずれにも「提供者」がない。
 
-Import the `SharedModule` in your _feature_ modules,
-both those loaded when the app starts and those you lazy load later.
+あなたの_feature_モジュールに `SharedModule`をインポートし、
+アプリケーションの起動時に読み込まれたものと、遅れて読み込まれたものの両方です。
 
 ### `CoreModule`
-`CoreModule` is a conventional name for an `NgModule` with `providers` for
-the singleton services you load when the application starts.
+`CoreModule`はアプリケーションの起動時のシングルトンサービスのための`providers`をもつ`NgModule`のための伝統的な名前です。
 
-Import `CoreModule` in the root `AppModule` only.
-Never import `CoreModule` in any other module.
+`CoreModule`はルートの`AppModule`のみにインポートしてください。
+他のモジュール内で`CoreModule`をインポートしないでください。
 
-Consider making `CoreModule` a pure services module
-with no `declarations`.
 
-For more information, see [Sharing NgModules](guide/sharing-ngmodules)
-and [Singleton Services](guide/singleton-services).
+`CoreModule`を宣言のない純粋なサービスモジュールにすることを検討してください。
 
-### Feature Modules
+詳細については、[NgModuleの共有](guide/sharing-ngmodules)と
+[シングルトンサービス](guide/singleton-services)を参照してください。
+
+### フィーチャーモジュール
 
 Feature modules are modules you create around specific application business domains, user workflows, and utility collections. They support your app by containing a particular feature,
 such as routes, services, widgets, etc. To conceptualize what a feature module might be in your

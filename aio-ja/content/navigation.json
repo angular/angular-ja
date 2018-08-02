@@ -363,18 +363,21 @@
             },
             {
               "url": "guide/lazy-loading-ngmodules",
-              "title": "Lazy Loading Feature Modules",
-              "tooltip": "Lazy load modules to speed up your apps."
+              "title": "フィーチャーモジュールの遅延ロード",
+              "tooltip": "遅延ロードモジュールを使用してアプリを高速化します。",
+              "translated": true
             },
             {
               "url": "guide/sharing-ngmodules",
-              "title": "Sharing NgModules",
-              "tooltip": "Share NgModules to streamline your apps."
+              "title": "モジュールの共有",
+              "tooltip": "NgModulesを共有してアプリを合理化しましょう。",
+              "translated": true
             },
             {
               "url": "guide/ngmodule-api",
               "title": "NgModule API",
-              "tooltip": "Understand the details of NgModules."
+              "tooltip": "NgModuleの詳細を理解しましょう。",
+              "translated": true
             },
             {
               "url": "guide/ngmodule-faq",

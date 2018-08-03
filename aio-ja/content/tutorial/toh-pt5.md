@@ -29,7 +29,7 @@ CLIを使って生成することができます。
   ng generate module app-routing --flat --module=app
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 `--flat`は、固有のフォルダの代わりに、`src/app`に生成したファイルを置きます。<br>
 `--module=app`は、`AppModule`の`imports`配列に、生成したモジュールを登録するようCLIに指示します。
@@ -89,7 +89,8 @@ URLが`localhost:4200/heroes`のようであったときに`HeroesComponent`へ�
   region="ngmodule-imports">
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
+
   アプリケーションのルートのレベルでルーターを設定しているので、このメソッドは`forRoot()`と呼ばれています。
   この`forRoot()`メソッドは、ルーティングに必要なサービス・プロバイダーとディレクティブを提供し、
   ブラウザの現在のURLを元に最初の遷移を行います。
@@ -110,7 +111,7 @@ URLが`localhost:4200/heroes`のようであったときに`HeroesComponent`へ�
 
 この`<router-outlet>`は、ルーティングされたビューをどこに表示するかをルーターに教えます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 `RouterModule`をエクスポートした`AppRoutingModule`を`AppModule`がインポートしているので、
 この`RouterOutlet`は、この`AppComponent`で利用できるようになったルーターのディレクティブのひとつです。
@@ -158,7 +159,7 @@ URLが`/`で終わっています。
 
 リンクをクリックしてください。アドレスバーが`/heroes`に更新されて、ヒーローのリストが現れます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 一番下の[最終的なコードレビュー](#appcomponent)に記載されているように、プライベートなCSSのスタイルを`app.component.css`に追加することで、
 このナビゲーションのリンクと今後のナビゲーションのリンクをさらに見栄えのよいものにすることができます。

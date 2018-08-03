@@ -154,7 +154,7 @@ HTTPはリクエスト/レスポンスプロトコルです。
 JSONデータの形はサーバーのデータAPIにより決まります。
 _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 他のAPIでは取得したいデータがオブジェクトの中に埋もれているかもしれません。
 その場合は、RxJSの`map`を使って`Observable`を処理してデータを掘り出します。
@@ -281,7 +281,7 @@ URLは変わりません。
   region="http-options">
 </code-example>
 
-ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存し、"go back"ボタンをクリックしてください。
+ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存しましょう。以前のビューへの移動は、 `HeroDetailComponent` に定義された `save()` メソッドで実装されています。
 リストに変更された名前のヒーローが現れているはずです。
 
 ## 新しいヒーローを追加する
@@ -417,7 +417,7 @@ CLIで`HeroSearchComponent`を作ります。
   ng generate component hero-search
 </code-example>
 
-CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコンポーネントを追加します。
+CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarationsにそのコンポーネントを追加します。
 
 作成された`HeroSearchComponent`のテンプレートを次のようにテキストボックスと、マッチした検索結果一覧を表示するように書き換えます。
 
@@ -504,7 +504,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 * `switchMap()`は`debounce`と`distinctUntilChanged`をとおり抜けた各検索語について検索サービスを呼び出します。
 これはそれまでの検索のobservableをキャンセルし、最新の検索サービスのobservableだけを返します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
   
 
   [switchMap operator](http://www.learnrxjs.io/operators/transformation/switchmap.html)により

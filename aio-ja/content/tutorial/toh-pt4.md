@@ -84,17 +84,10 @@ Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）�
 ルートレベルでサービスを提供すると、Angularは`HeroService`の単一の共有インスタンスを作成し、それを要求する任意のクラスに注入します。
 `@Injectable`メタデータでプロバイダーを登録すると、Angularはサービスが使用されなくなった場合にそれを削除することでアプリケーションを最適化することもできます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
-必要な場合は、`HeroesComponent`、`AppComponent`、`AppModule`の各レベルでプロバイダーを登録できます。
-たとえば、`--module=app`を追加することで、
-モジュールレベルで自動的にサービスを提供するようCLIに指示することができます。
-
-<code-example language="sh" class="code-shell">
-  ng generate service hero --module=app
-</code-example>
-
-プロバイダーとインジェクターの詳細については、[依存性の注入ガイド](guide/dependency-injection)を参照してください。
+プロバイダーについての詳細は、[プロバイダーの章](guide/providers)を参照してください。
+インジェクターについての詳細は、[依存性の注入ガイド](guide/dependency-injection)を参照してください。
 
 </div>
 

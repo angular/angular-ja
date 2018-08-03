@@ -128,12 +128,18 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 
 
 
-### DOM APIの直接使用を避ける
+### DOM APIの直接使用と、明示的なサニタイズ呼び出し
 
 ブラウザの提供する DOM API は脆弱性から自動的にはアプリケーションを保護してくれません。
 `document` オブジェクトや `ElementRef` クラスより参照可能なノード、多くのサードパーティAPIなどには
-潜在的に安全でないメソッドが含まれています。これらを用いてDOMを直接操作するのではなく、
-可能な限り Angular テンプレートを使用してください。
+潜在的に安全でないメソッドが含まれています。同様に、DOMを操作する他のライブラリとやりとりする場合、Angularの補間と同じような自動サニタイズはありません。 DOMと直接対話するのではなく、可能であればAngularテンプレートを使用してください。
+
+避けられない場合は、組み込みのAngularのサニタイズ関数を使用してください。
+Sanitize untrusted values with the [DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)
+method and the appropriate `SecurityContext`. That function also accepts values that were
+marked as trusted using the `bypassSecurityTrust`... functions, and will not sanitize them,
+as [described below](#bypass-security-apis).
+信頼できない値を[DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)メソッドと適切な `SecurityContext`でサニタイズします。この関数は、[後述](#bypass-security-apis)のように、`bypassSecurityTrust` ...関数を使って信頼できるとマークされた値を受け取り、それらをサニタイズしません。
 
 
 ### Content Security Policy

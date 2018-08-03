@@ -91,7 +91,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 ステップバイステップで、それを取ります。最初に、広告を選びます。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 

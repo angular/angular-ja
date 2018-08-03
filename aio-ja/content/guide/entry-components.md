@@ -36,7 +36,7 @@
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

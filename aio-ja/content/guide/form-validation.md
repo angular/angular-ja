@@ -7,7 +7,7 @@
 
 このページでは、UIでのユーザー入力の検証方法と、リアクティブおよびテンプレート駆動フォームの両方を使用した有効な検証メッセージの表示方法を示します。これは、2つのフォームモジュールの基本的な知識を前提としています。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 フォームをはじめてお使いの場合は、[テンプレート駆動フォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)のガイドを確認してください。
 
@@ -40,7 +40,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 * ネストされた各`<div>`は、考えられる検証エラーの1つに対してカスタムメッセージを表示できます。 `required`、`minlength`、および`forbiddenName`のメッセージがあります。
  
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 {@a why-check-dirty-and-touched}
@@ -149,7 +149,7 @@ Angularは、ディレクティブが拡張可能なバリデータのコレク�
 </code-example>
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 カスタム検証ディレクティブは、`useClass`ではなく`useExisting`でインスタンス化されていることに気付かれるかもしれません。登録されたバリデータは、この`ForbiddenValidatorDirective`の _インスタンス_ でなければなりません&mdash;`forbiddenName`プロパティが "bob"にバインドされたフォームのインスタンス。`useExisting`を`useClass`に置き換えた場合は、`forbiddenName`を持たない新しいクラスインスタンスを登録することになります。
 
@@ -176,7 +176,7 @@ Angularは、AngularJSと同様に、多くのコントロールプロパティ�
 ## クロスフィールドバリデーション
 このセクションでは、クロスフィールドバリデーションを実行する方法を示します。カスタムバリデータの作成に関するいくつかの基本的な知識を前提としています。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 カスタムバリデータを作成したことがない場合は、まず[カスタムバリデータセクション](guide/form-validation#custom-validators)を確認してください。
 

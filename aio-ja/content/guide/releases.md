@@ -8,7 +8,7 @@
 
 アプリケーションとライブラリを最新バージョンのAngularに更新する方法については、[プロジェクトの更新](guide/updating "Updating your projects")を参照してください。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 このドキュメントで説明するプラクティスは、Angular 2.0以降に適用されます。現在AngularJSを使用している場合は、[AngularJSからのアップグレード](guide/upgrade "Upgrading from Angular JS")を参照してください。 _AngularJS_はすべてのv1.xバージョンのAngularの名前です。
 
@@ -57,7 +57,7 @@ Angularのバージョン番号には3つの部分があります: `major.minor.
 {@a schedule}
 ## リリーススケジュール
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 免責事項：日付は一般的なガイダンスとして提供され、高品質なプラットフォームの提供を確実にするために必要な場合は調整される場合があります。
 

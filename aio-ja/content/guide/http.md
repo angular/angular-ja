@@ -467,7 +467,7 @@ RxJSの`Subject`として定義されています。これは、`search()`メソ
 
 検索値が新しい値であり、ユーザーが入力を停止した場合にのみ、値がサービスに到達します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 `withRefresh`オプションについては[後述](#cache-refresh)します。
 
@@ -485,7 +485,7 @@ RxJSの`Subject`として定義されています。これは、`search()`メソ
 3. サーバーがそれらを順不同で戻しても、サービスのレスポンスは元のリクエストの順序で戻されます。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 このデバウンスロジックを再利用しようと考えるなら、ユーティリティ関数または`PackageSearchService`自体に移すことを検討してください。
 
@@ -584,7 +584,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 
 新しいインターセプターを作成するとき、それらを`httpInterceptorProviders`配列に追加するだけです。`AppModule`を開く必要はありません。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 完全なサンプルコードには、より多くのインターセプターがあります。
 
@@ -773,7 +773,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 
 _cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー**の存在によってトリガーされます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 `PackageSearchComponent`のチェックボックスは、`PackageSearchService.search()`の引数の1つである`withRefresh`フラグをトグルします。
 その`search()`メソッドは、`HttpClient.get()`を呼び出す前にカスタム`x-refresh`ヘッダを作成し、それをリクエストに追加します。

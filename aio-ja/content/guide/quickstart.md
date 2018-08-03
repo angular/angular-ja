@@ -22,7 +22,7 @@ Angular CLIを使うことで、[スタイルガイド](guide/styleguide) に準
 
 **[Node.js® と npm](https://nodejs.org/en/download/)** がインストールされていなければ、インストールしてください。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 **node `8.x` 以上とnpm `5.x` 以上がインストールされていることを確認してください。**  
@@ -61,7 +61,7 @@ Angular CLIは、必要なnpmパッケージをインストールし、プロジ
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -594,7 +594,7 @@ Angularコンポーネント、テンプレート、スタイル、画像など�
   </tr>
 </table>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 ### 次のステップ
 

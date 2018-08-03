@@ -7,7 +7,7 @@
 [**yarn**](https://yarnpkg.com/en/)は、npmパッケージをインストールするための一般的な方法です。
 Angular CLIは新しいプロジェクトを作成する際、`yarn`を用いてnpmパッケージをインストールしています。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 Node.jsとnpmは、Angularの開発に不可欠です。
 

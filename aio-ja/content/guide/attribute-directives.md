@@ -42,7 +42,7 @@ ng generate directive highlight
 
 CLIは、`src/app/highlight.directive.ts`と対応するテストファイル`.../spec.ts`を作成し、ルートの`AppModule`にディレクティブのクラスを _宣言_ します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 _ディレクティブ_ は、 _コンポーネント_ と同じ方法で[Angularモジュール](guide/ngmodules)で宣言する必要があります。
 
@@ -60,7 +60,7 @@ _ディレクティブ_ は、 _コンポーネント_ と同じ方法で[Angul
 
 _属性セレクタ_ パターンは、この種のディレクティブの名前を説明します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 #### なぜ、highlightではないのか？
 
@@ -116,7 +116,7 @@ ng serve
 
 `@HostListener`デコレーターは、属性ディレクティブをホストする要素（この場合は`<p>`）DOM要素のイベントに登録することができます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 もちろん、標準のJavaScriptを使用してDOMへアクセスし、イベントリスナーを手動でアタッチすることもできます。そのアプローチには少なくとも3つの問題があります。
 

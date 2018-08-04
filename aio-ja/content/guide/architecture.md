@@ -29,7 +29,7 @@ JavaScriptモジュールと同様に、NgModuleは他のNgModuleから機能を
 
 コードを機能モジュールに組織することで、複雑なアプリケーションの開発や再利用性の設計を管理するのに役立ちます。さらに、この技術を使用すると、起動時にロードする必要のあるコードの量を最小限に抑えるために、 _遅延ロード_ 、&mdash;つまり要求に応じてモジュールをロードする&mdash;ことができます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   より詳細な議論については、[モジュールの概要](guide/architecture-modules)を参照してください。
 
@@ -43,7 +43,7 @@ JavaScriptモジュールと同様に、NgModuleは他のNgModuleから機能を
 
 `@Component`デコレーターは、コンポーネントのすぐ下のクラスをコンポーネントとして識別し、テンプレートおよび関連するコンポーネント固有のメタデータを提供します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
    デコレーターは、JavaScriptクラスを変更する関数です。 Angularは、特定の種類のメタデータをクラスに付加するようなデコレーターをいくつか定義しているため、それらのクラスの意味や動作方法を知ることができます。
 
@@ -63,7 +63,7 @@ JavaScriptモジュールと同様に、NgModuleは他のNgModuleから機能を
 
 テンプレートでは、 *パイプ* を使用して値を表示用に変換することで、ユーザーエクスペリエンスを向上させることもできます。たとえば、日付と通貨の値をユーザーのロケールに適した方法で表示するためにパイプを使用します。 Angularは一般的な変換用に事前定義されたパイプを提供し、さらに独自のパイプを定義することもできます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   これらの概念の詳細については、[コンポーネントの概要](guide/architecture-components)を参照してください。
 
@@ -78,7 +78,7 @@ JavaScriptモジュールと同様に、NgModuleは他のNgModuleから機能を
 
 *Dependency Injection*（またはDI）を使用すると、コンポーネントクラスをリーンかつ効率的に保つことができます。コンポーネントがサーバーからデータを取得したり、ユーザーの入力を検証したり、コンソールに直接ログしたりすることはありません。そのようなタスクをサービスに委譲します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   詳細な議論については、[サービスとDIの紹介](guide/architecture-services)を参照してください。
 
@@ -100,7 +100,7 @@ Angularの`Router` NgModuleは、アプリケーションのさまざまなア�
 
 ナビゲーションルールを定義するには、 *ナビゲーションパス* をコンポーネントに関連付けます。パスは、テンプレート構文がプログラムデータとビューを統合するのと同じ方法で、プログラムデータを統合するURLライクな構文を使用します。次に、プログラムロジックを適用して、ユーザーの入力と独自のアクセスルールに応じて、どのビューを表示または非表示にするかを選択できます。
 
- <div class="l-sub-section">
+ <div class="alert is-helpful">
 
    詳細については、[ルーティングとナビゲーション](guide/router)を参照してください。
 
@@ -132,7 +132,7 @@ Angularアプリケーションの主要な構成要素についての基礎を�
   * [パイプ](guide/architecture-components#pipes)
 * [サービスと依存性の注入](guide/architecture-services)
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
    これらのページで参照されているコードは、<live-example></live-example>として利用できます。
 </div>

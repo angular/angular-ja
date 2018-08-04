@@ -89,7 +89,7 @@ Angularは対応するDOMイベントオブジェクトをコンポーネント�
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -167,7 +167,7 @@ Angularの[**テンプレート参照変数**](guide/template-syntax#ref-vars)�
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 

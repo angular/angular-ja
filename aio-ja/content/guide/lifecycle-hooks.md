@@ -300,7 +300,7 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 `OnChanges`, `OnInit`, `DoCheck`&nbsp;(3x), `AfterContentInit`, `AfterContentChecked`&nbsp;(3x),
 `AfterViewInit`, `AfterViewChecked`&nbsp;(3x), と `OnDestroy`。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   コンストラクタは、Angularフック *そのもの* ではありません。
   ログは、入力プロパティ（この場合は `name` プロパティ）が構築時に割り当てられた値を持たないことを確認します。
@@ -323,7 +323,7 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 これは、ディレクティブのための完璧な潜入ジョブです。
 ヒーローたちは彼らが見守られていることを決して知らないでしょう。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   冗談はさておき、ふたつの重要な点に注意を払います：
 
@@ -373,7 +373,7 @@ Angularはすべてのヒーローの `<div>` 要素をDOMから削除し、同�
 
 経験豊富な開発者は、コンポーネントを安価で安全に構築する必要があることに同意します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   Angular チームリーダーであるMisko Heveryが、
   複雑なコンストラクタロジックを避けるべき
@@ -394,7 +394,7 @@ Angularはすべてのヒーローの `<div>` 要素をDOMから削除し、同�
 これは、それらのプロパティに基づいてディレクティブを初期化する必要がある場合には、問題になります。
 これらは `ngOnInit()` の実行時には設定されています。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   `ngOnChanges()` メソッドは、それらのプロパティにアクセスする最初の機会です。
   Angularは `ngOnInit()` の前に `ngOnChanges()` を呼び出し、その後何度も呼び出します。
@@ -460,7 +460,7 @@ Angularは、ヒーロー自身の `name` プロパティが変更されても�
 
 Angularがそれ自身で捕捉しない変更を検出し、それに対応するために `DoCheck` フックを使います。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   Angularが見落とした変更を検出するには、このメソッドを使用します。
 
@@ -549,7 +549,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 *コンテンツ投影* は、コンポーネントの外部からHTMLコンテンツをインポートし、
 そのコンテンツをコンポーネントのテンプレートに指定された場所に挿入する方法です。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   AngularJSの開発者は、この手法を *transclusion* として認識しています。
 
@@ -577,7 +577,7 @@ Angularはそのコンテンツをどこに挿入するかを指示します。
   <img src='generated/images/guide/lifecycle-hooks/projected-child-view.png' alt="Projected Content">
 </figure>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   *コンテンツ投影* の兆候は2つあります：
 

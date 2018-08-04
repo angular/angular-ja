@@ -52,7 +52,7 @@ CLIプロジェクトはAngular Service Workerを使用するように設定さ�
 `http-server`で供給するために、Webファイルが入っているディレクトリに移動し、Webサーバーを起動してください。
 
 ```sh
-cd dist
+cd dist/*project-name*
 http-server -p 8080
 ```
 

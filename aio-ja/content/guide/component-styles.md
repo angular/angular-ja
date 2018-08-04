@@ -164,7 +164,7 @@ shadow-piercing子孫コンビネータは廃止され、主要なツールや[�
 
 </div>
 
-CLI は、 `--inline-styles` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
+CLI は、 `--inline-style` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
 
 <code-example language="sh" class="code-shell">
 ng generate component hero-app --inline-style
@@ -187,9 +187,9 @@ ng generate component hero-app --inline-style
 
 </div>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
-  複数のスタイルファイル、または `style` と `styleUrls` の組み合わせを指定することもできます。
+  複数のスタイルファイル、または `styles` と `styleUrls` の組み合わせを指定することもできます。
 
 </div>
 
@@ -216,10 +216,9 @@ CSSスタイルをHTMLテンプレートに直接埋め込むことができま�
 
 <div class="alert is-critical">
 
-リンクタグの `href` URLは、コンポーネントファイルからではなく、
-_**アプリケーションルート**_ からの相対パスでなければなりません。
-
 CLIを使用して構築する場合は、[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
+
+リンクタグのhref URLがアプリケーションルートまたはコンポーネントファイルのどちらへの相対パスであっても、CLIはスタイルシートを取り込みます。
 
 </div>
 

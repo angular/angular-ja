@@ -8,7 +8,7 @@
 [Angularのバージョニングとリリース](guide/releases "Angular versioning and releases")を参照してください。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 現在AngularJSを使用している場合は、[AngularJSからのアップグレード](guide/upgrade "Upgrading from Angular JS")を参照してください。 _AngularJS_ はすべてのv1.xバージョンのAngularの名前です。
 

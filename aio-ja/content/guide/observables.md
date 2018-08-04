@@ -35,7 +35,7 @@ Observableの通知を受け取るハンドラーは、`Observer` インタフ�
 
 `Observable` インスタンスは誰かがサブスクライブすると値をパブリッシュしはじめます。サブスクライブするためにはインスタンスの `subscribe()` メソッドを呼び出し、オブザーバーオブジェクトを渡して通知を受け取ります。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
    サブスクリプションがどのように動作するかを示すために、新しいObservableを作成する必要があります。
    新しいインスタンスを作成するために使用するコンストラクタがありますが、例として頻繁に使用される形式の単純なObservableを作成する `Observable`クラスでいくつかの静的メソッドを使用できます。
 
@@ -97,7 +97,7 @@ Observableを作成するときは、そのObservableをどのように使用す
 
 <code-example path="observables/src/multicasting.ts" region="multicast_sequence" title="Create a multicast subscriber"></code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
   Observableをマルチキャストするには少しだけ多くのセットアップがかかりますが、特定のアプリケーションで役立ちます。後で、マルチキャスティングのプロセスを簡略化して、どんなObservableでもマルチキャストできるようになるツールを見ていきます。
 </div>
 

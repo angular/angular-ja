@@ -278,7 +278,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 

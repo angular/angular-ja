@@ -19,7 +19,7 @@ Angular 6の時点で、Web Animations APIがブラウザによってネイテ�
 Angular CLIで生成された`polyfills.ts`ファイルから`web-animations-js` polyfillのコメントを外してください。
 </div>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 このページの例は、<live-example></live-example> として利用できます。
 
@@ -166,7 +166,7 @@ Angular のアニメーションは、論理 **状態** および状態間の **
 この場合、スタイルはトランジション定義では直接 void ステートに適用され、別の`ステート（void）`定義には適用されないことに注意してください。
 したがって、変換は出入で異なります。要素は左から入り、右から出ていきます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 これらの2つの一般的なアニメーションには、独自のエイリアスがあります。
 

@@ -164,7 +164,7 @@ They are _not inherited_ by any components nested within the template nor by any
 
 </div>
 
-The CLI defines an empty `styles` array when you create the component with the `--inline-styles` flag.
+The CLI defines an empty `styles` array when you create the component with the `--inline-style` flag.
 
 <code-example language="sh" class="code-shell">
 ng generate component hero-app --inline-style
@@ -187,9 +187,9 @@ They are _not inherited_ by any components nested within the template nor by any
 
 </div>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
-  You can specify more than one styles file or even a combination of `style` and `styleUrls`.
+  You can specify more than one styles file or even a combination of `styles` and `styleUrls`.
 
 </div>
 
@@ -216,10 +216,9 @@ You can also write `<link>` tags into the component's HTML template.
 
 <div class="alert is-critical">
 
-The link tag's `href` URL must be relative to the
-_**application root**_, not relative to the component file.
-
 When building with the CLI, be sure to include the linked style file among the assets to be copied to the server as described in the [CLI documentation](https://github.com/angular/angular-cli/wiki/stories-asset-configuration).
+
+Once included, the CLI will include the stylesheet, whether the link tag's href URL is relative to the application root or the component file.
 
 </div>
 

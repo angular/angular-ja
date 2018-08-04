@@ -48,7 +48,7 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 ## ビルトインのパイプ
 Angularには`DatePipe`、`UpperCasePipe`、`LowerCasePipe`、`CurrencyPipe`や`PercentPipe`というようなパイプが付属しています。
 それらはすべてテンプレートで使用できます。
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -112,7 +112,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -174,7 +174,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 あなたのパイプの名前は`exponentialStrength`です。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -375,7 +375,7 @@ Angularは（複合した）オブジェクト内の変更を無視します。
 できない場合は、不純なパイプを使用することが*可能です*。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 

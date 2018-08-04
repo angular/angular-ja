@@ -512,7 +512,7 @@ Angularはさまざまなパイプを定義していて、さらに新しいパ�
 ## Project
 _プロジェクト_
 
-Angularにおいて、1つまたは複数のAngularアプリまたは[ライブラリ](guide/glossary#library)を含む[ワークスペース](guide/glossary#workspace)内のフォルダ。
+Angularにおいて、1つのAngularアプリまたは[ライブラリ](guide/glossary#library)を含む[ワークスペース](guide/glossary#workspace)内のフォルダ。ワークスペースは複数のプロジェクトを含むことができます。ワークスペースにあるすべてのアプリケーションは同じワークスペースにあるライブラリを使えます。
 
 ## Provider
 _プロバイダー_
@@ -595,7 +595,7 @@ Angular [CLI](guide/glossary#cli)は、Schematicsを使用して[Angularプロ�
 _スコープ化パッケージ_
 
 関連するnpmパッケージをグループ化する方法。
-NgModuleは、名前がAngularの*スコープ名*`@angular`で始まる*スコープ化パッケージ*内で配信されます。たとえば、`@angular/core`、`@angular/common`、`@angular/http`や`@angular/router`。
+NgModuleは、名前がAngularの*スコープ名*`@angular`で始まる*スコープ化パッケージ*内で配信されます。たとえば、`@angular/core`、`@angular/common`、`@angular/forms`や`@angular/router`。
 
 通常のパッケージをインポートするのと同じ方法でスコープされたパッケージをインポートします。
 
@@ -754,7 +754,7 @@ _ビュー階層_
 _ワークスペース_
 
 Angularにおいて、[プロジェクト](guide/glossary#project)を含むフォルダです。 
-[CLI](guide/glossary#cli)の `new` コマンドは、アプリケーションとライブラリを含むワークスペースを作成します。そして他のコマンドはワークスペースフォルダ内から実行する必要があります。
+[CLI](guide/glossary#cli)の `new` コマンドは、プロジェクトを含むワークスペースを作成します。`add` や `generate` のような、アプリケーションやライブラリを作成し、処理するコマンドはワークスペースフォルダ内から実行する必要があります。
 
 {@a X}
 

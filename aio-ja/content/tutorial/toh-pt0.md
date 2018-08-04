@@ -19,7 +19,7 @@
 Angular CLIが、デフォルトのアプリケーションとサポートファイルをもつ新しいプロジェクトを作成しました。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -41,7 +41,7 @@ Angular Materialは、典型的なアプリケーションレイアウトのsche
   ng serve --open
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 `ng serve`コマンドはアプリケーションをビルド、開発用サーバーを起動し、ソースファイルを監視します。
 あなたが監視されているファイルに変更を行ったときには、変更があったファイルに対し再ビルドを行います。

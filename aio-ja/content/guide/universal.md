@@ -10,7 +10,7 @@
 
 このガイドでは、サーバーレンダリングされたページとしてすぐに起動するUniversalアプリケーションのサンプルについて説明します。その過程において、ブラウザは完全なクライアントバージョンをダウンロードし、コードがロードされた後自動でそれに切り替わります。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 [Node.js® express](https://expressjs.com/)サーバーで動作する[サンプルコードの完成形をダウンロード](generated/zips/universal/universal.zip)してください。
 
@@ -211,7 +211,7 @@ UniversalアプリケーションにおいてHTTPのURLは、Universal webサー
 
 サーバーで実行している際は絶対URLで、ブラウザで実行している場合は相対URLをリクエストするように、それらのサービスを変更する必要があります。
 
-解決策の1つは、Angularの[`APP_BASE_REF`トークン](api/common/APP_BASE_HREF)を介してサーバー実行時のオリジンを提供してそれをサービスに注入し、リクエストURLにオリジンを付与することです。
+解決策の1つは、Angularの[`APP_BASE_HREF`トークン](api/common/APP_BASE_HREF)を介してサーバー実行時のオリジンを提供してそれをサービスに注入し、リクエストURLにオリジンを付与することです。
 
 まず、`APP_BASE_HREF`トークンを介してオプションで注入された第2引数である`origin`パラメーターを取得するように、`HeroService`のコンストラクタを変更します。
 
@@ -222,7 +222,7 @@ UniversalアプリケーションにおいてHTTPのURLは、Universal webサー
 
 ブラウザバージョンでは`APP_BASE_HREF`を提供しないので、`heroesUrl`は相対的なままです。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 チュートリアルのサンプルで行うように、`index.html`でルーターのベースアドレスを決定するため`<base href="/">`を指定している場合、ブラウザで`APP_BASE_HREF`を無視することができます。
 
@@ -275,7 +275,7 @@ _Universal_ webサーバーは、[Universalテンプレートエンジン](#univ
 
 _この_ ガイドのサンプルwebサーバーは、一般的な[Express](https://expressjs.com/)フレームワークに基づいています。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 _何らかの_ webサーバー技術はUniversalの`renderModuleFactory`を呼び出せばUniversalアプリケーションを提供することができます。以下で説明する原則と意思決定のポイントは、選択したすべてのwebサーバー技術に当てはまります。
 
@@ -320,7 +320,7 @@ _テンプレートエンジン_ 内では、サーバー処理に適した関�
 そのページで何をするかはエンジン次第です。
 _このエンジンの_ promiseコールバックは、レンダリングされたページを[webサーバー](#web-server)へ返し、HTTPレスポンスとしてクライアントに転送します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 このラッパーは`renderModuleFactory`の複雑さを隠蔽するという点で非常に有用です。この他にも、[Universalリポジトリー](https://github.com/angular/universal)には異なるバックエンド技術のためのラッパーが用意されています。
 
@@ -351,7 +351,7 @@ Expressサーバーは、URLリクエストを順次フィルタリングして�
 <code-example path="universal/server.ts" title="server.ts (data URL)" region="data-request" linenums="false">
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 このサンプルサーバーはデータのリクエストを処理しません。
 

@@ -260,7 +260,7 @@
               "url": "guide/reactive-forms",
               "title": "リアクティブフォーム",
               "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/dynamic-form",

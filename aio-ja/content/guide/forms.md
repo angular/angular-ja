@@ -25,7 +25,7 @@ Stackblitzで<live-example></live-example>を実行し、そこからコード�
 このページで説明されているフォーム固有のディレクティブとテクニックを使用して、
 Angular[テンプレート構文](guide/template-syntax)でテンプレートを記述することにより、フォームを構築できます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   リアクティブ（またはモデル駆動型）アプローチを使用してフォームを構築することもできます。
   ただし、このページでは、テンプレート駆動フォームに焦点を当てています。
@@ -57,7 +57,7 @@ Angularは、あなた自身が苦労している反復的で定型的なタス�
 
 *Submit*ボタンは無効になっており、入力コントロールの左側の"必須"バーが緑色から赤色に変わっていることに注目しましょう。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   標準のCSSを使用して、"必須"バーの色と位置をカスタマイズできます。
 
@@ -146,7 +146,7 @@ Angular CLIを使用して、`HeroForm`という名前の新しいコンポー�
 このコンポーネントを理解するには、前のページで説明したAngularの概念のみが必要です。
 
 * コードはAngularコアライブラリと作成した`Hero`モデルをインポートします。
-* "hero-form"という`@Component`のセレクター値は、このフォームを`<hero-form>`タグによって親テンプレートに配置できることを意味します。
+* "hero-form"という`@Component`のセレクター値は、このフォームを`<app-hero-form>`タグによって親テンプレートに配置できることを意味します。
 * `templateUrl`プロパティは、テンプレートHTMLのための別のファイルを指します。
 * デモにふさわしいダミーデータを`model`と`powers`に定義します。
 
@@ -170,7 +170,7 @@ Angular CLIを使用して、`HeroForm`という名前の新しいコンポー�
 
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   2つの変更点があります。
 
@@ -198,7 +198,7 @@ Angular CLIを使用して、`HeroForm`という名前の新しいコンポー�
 
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   変更は2つだけです。`template`は、単にコンポーネントの`selector`プロパティによって識別される新しい要素タグになります。
   これは、アプリケーションコンポーネントがロードされたときにヒーローフォームを表示します。
@@ -223,7 +223,7 @@ Angular CLIを使用して、`HeroForm`という名前の新しいコンポー�
 
 *Angularはまだ使用していません*。バインディングや追加のディレクティブはなく、レイアウトだけです。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   テンプレート駆動フォームでは、`FormsModule`をインポートした場合は、`FormsModule`の用途で`<form>`タグを使用するために何もする必要はありません。
   それがどのように機能するかを確認してください。
@@ -299,7 +299,7 @@ Running the app right now would be disappointing.
 
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   入力タグの後に診断用の補間を追加して、
   何をしているのかを確認できます。
@@ -319,7 +319,7 @@ Running the app right now would be disappointing.
 
 この変数`heroForm`は`NgForm`というフォーム全体を管理するディレクティブへの参照になりました。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   {@a ngForm}
 
@@ -347,7 +347,7 @@ Running the app right now would be disappointing.
 
 この診断は、値が実際に入力ボックスからモデルに流れて戻ってきたという証拠です
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   これが*双方向データバインディング*です。
   詳細については、[テンプレート構文](guide/template-syntax)ページの[NgModelによる双方向バインディング](guide/template-syntax#ngModel)を参照してください。
@@ -358,7 +358,7 @@ Running the app right now would be disappointing.
 一意の値であればなんでもよいですが、わかりやすい名前を使用すると便利です。
 フォームと組み合わせて`[(ngModel)]`を使用する場合は、`name`属性を定義する必要があります。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   内部的に、Angularは`FormControl`インスタンスを作成し、
   `<form>`タグにアタッチした`NgForm`ディレクティブとあわせてインスタンスを登録します。
@@ -377,7 +377,7 @@ Running the app right now would be disappointing.
 
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   * 各入力要素は`id`プロパティをもちます。これはラベルを入力コントロールに一致させるために`label`要素の`for`属性によって使用されます。
   * 各入力要素は`name`プロパティをもちます。これはAngularフォームがコントロールを登録するために必要です。
@@ -550,7 +550,7 @@ Running the app right now would be disappointing.
 テンプレート内から入力ボックスのAngularコントロールにアクセスするには、テンプレート参照変数が必要です。
 ここでは、`name`という変数を作成し、それに"ngModel"という値を与えました。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   なぜ"ngModel"なのでしょうか?
   ディレクティブの[exportAs](api/core/Directive)プロパティは、参照変数をディレクティブにリンクする方法をAngularに指示します。
@@ -657,7 +657,7 @@ Angularの助けがなかったらボタンの有効/無効状態をフォーム
 
 フォームの送信は現時点ではドラマティックではありません。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   デモに対する当然の意見です。正直に言って、
   それを誇大にしてもフォームについて新しいことは何も学べません。

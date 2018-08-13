@@ -246,7 +246,7 @@ NgModuleのインポートによる拡張性はNgModuleシステムの第一の�
 `HeroModule`内で宣言したクラスだけでなく、
 `HeroService`の_型_を知っている任意のクラスでそのサービスを注入することができます。
 
-サービスへのアクセスを制限するには、そのサービスを提供するNgModuleを遅延ロードすることを検討してください。詳細は[How do I restrict service scope to a module?](guide/ngmodule-faq#service-scope)を参照してください。
+サービスへのアクセスを制限するには、そのサービスを提供するNgModuleを遅延ロードすることを検討してください。詳細は[どのようにサービスのスコープをモジュールに制限しますか?](guide/ngmodule-faq#service-scope)を参照してください。
 
 <hr/>
 

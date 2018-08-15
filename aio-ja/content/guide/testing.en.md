@@ -1,13 +1,13 @@
 {@a top}
-# テスト
+# Testing
 
-このガイドでは、Angularアプリケーションでのユニット、インテグレーションテストのヒントとテクニックについて説明します。
+This guide offers tips and techniques for unit and integration testing Angular applications.
 
-このガイドでは、[_ツアー・オブ・ヒーロー_チュートリアル](tutorial)によく似たサンプルCLIアプリケーションのテストを紹介します。
-このガイド内のサンプルアプリケーションとすべてのテストは検査と実験に使用できます:
+The guide presents tests of a sample CLI application that is much like the [_Tour of Heroes_ tutorial](tutorial).
+The sample application and all tests in this guide are available for inspection and experimentation:
 
-* <live-example embedded-style>サンプルアプリケーション</live-example>
-* <live-example stackblitz="specs">テスト</live-example>
+* <live-example embedded-style>Sample app</live-example>
+* <live-example stackblitz="specs">Tests</live-example>
 
 <hr>
 

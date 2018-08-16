@@ -11,21 +11,21 @@
 
 <hr>
 
-## Setup
+## セットアップ
 
-The Angular CLI downloads and install everything you need to test an Angular application with the [Jasmine test framework](https://jasmine.github.io/).
+Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/)を使用してAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
 
-The project you create with the CLI is immediately ready to test.
-Just run this one CLI command:
+CLIを使用して作成したプロジェクトは、すぐにテストする準備ができています。
+この1つのCLIコマンドを実行するだけです:
 
 <code-example language="sh" class="code-shell">
   ng test
 </code-example>
 
-The `ng test` command builds the app in _watch mode_,
-and launches the [karma test runner](https://karma-runner.github.io/1.0/index.html).
+`ng test`コマンドはアプリケーションを_ウォッチモード_でビルドして、
+[karmaテストランナー](https://karma-runner.github.io/1.0/index.html)を起動します。
 
-The console output looks a bit like this:
+コンソールのアウトプットはこのようになります:
 
 <code-example language="sh" class="code-shell">
 10% building modules 1/1 modules 0 active
@@ -36,34 +36,34 @@ The console output looks a bit like this:
 Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 </code-example>
 
-The last line of the log is the most important. 
-It shows that Karma ran three tests that all passed.
+ログの最後の行が最も重要です。
+これはKarmaが3つのテストすべてをパスしたことを示します。
 
-A chrome browser also opens and displays the test output in the "Jasmine HTML Reporter" like this.
+Chromeブラウザも開き、"Jasmine HTML Reporter"内にこのようにテストのアウトプットを表示します。
 
 <figure>
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
 </figure>
 
-Most people find this browser output easier to read than the console log.
-You can click on a test row to re-run just that test or click on a description to re-run the tests in the selected test group ("test suite").
+ほとんどの人にとって、このブラウザのアウトプットのほうがコンソールのログよりも読みやすいでしょう。
+テスト行をクリックしてそのテストだけを再実行したり、説明をクリックして選択したテストグループ("test suite")を再実行することができます。
 
-Meanwhile, the `ng test` command is watching for changes.
+そのあいだに、`ng test`コマンドは変更を監視しています。
 
-To see this in action, make a small change to `app.component.ts` and save.
-The tests run again, the browser refreshes, and the new test results appear.
+このアクションを確認するために、`app.component.ts`に小さな変更を加えて保存してみましょう。
+テストが再び実行され、ブラウザがリフレッシュされ、新しいテストの結果が表示されます。
 
-#### Configuration
+#### 設定
 
-The CLI takes care of Jasmine and karma configuration for you.
+CLIはあなたのためにJasmineとKarmaの設定を引き受けます。
 
-You can fine-tune many options by editing the `karma.conf.js` and
-the `test.ts` files in the `src/` folder.
+`src/`フォルダ内の`karma.conf.js`と`test.ts`ファイルを編集することで、
+多くのオプションの微調整ができます。
 
-The `karma.conf.js` file is a partial karma configuration file.
-The CLI constructs the full runtime configuration in memory,based on application structure specified in the `angular.json` file, supplemented by `karma.conf.js`.
+`karma.conf.js`はKarmaの設定ファイルの一部です。
+CLIは`karma.conf.js`で補完された`application.json`内で指定されたアプリケーションの構造をもとにメモリ内にすべてのランタイムの設定を構築します。
 
-Search the web for more details about Jasmine and karma configuration.
+JasmineとKarmaの設定の詳細についてはWebで検索してください。
 
 #### Other test frameworks
 

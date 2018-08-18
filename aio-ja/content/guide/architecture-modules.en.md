@@ -1,14 +1,14 @@
-# モジュールのイントロダクション
+# Introduction to modules
 
-<img src="generated/images/guide/architecture/module.png" alt="モジュール" class="left">
+<img src="generated/images/guide/architecture/module.png" alt="Module" class="left">
 
-Angularアプリケーションはモジュール式であり、Angularは _NgModules_ という独自のモジュール方式を備えています。NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。コンポーネント、サービスプロバイダ、およびNgModuleに含めることで定義されたスコープを持つ他のコードファイルを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートすることができます。
+Angular apps are modular and Angular has its own modularity system called _NgModules_. An NgModule is a container for a cohesive block of code dedicated to an application domain, a workflow, or a closely related set of capabilities. It can contain components, service providers, and other code files whose scope is defined by the containing NgModule. It can import functionality that is exported from other NgModules, and export selected functionality for use by other NgModules.
 
-すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[_rootモジュール_](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。 ルートのNgModuleを*ブートストラップする*ことでアプリを起動します。
+Every Angular app has at least one NgModule class, [the _root module_](guide/bootstrapping), which is conventionally named `AppModule` and resides in a file named `app.module.ts`. You launch your app by *bootstrapping* the root NgModule.
 
-小さなアプリケーションには1つのNgModuleしかないかもしれませんが、ほとんどのアプリケーションにはより多くの機能があります。アプリの _root_ NgModuleは、任意の深さの階層に子NgModuleを含めることができるので、その名前が付けられています。
+While a small application might have only one NgModule, most apps have many more _feature modules_. The _root_ NgModule for an app is so named because it can include child NgModules in a hierarchy of any depth.
 
-## NgModule メタデータ
+## NgModule metadata
 
 An NgModule is defined as a class decorated with `@NgModule`. The `@NgModule` decorator is a function that takes a single metadata object, whose properties describe the module. The most important properties are as follows.
 
@@ -32,7 +32,7 @@ Here's a simple root NgModule definition:
 
 </div>
 
-## NgModules とコンポーネント
+## NgModules and components
 
 NgModules provide a _compilation context_ for their components. A root NgModule always has a root component that is created during bootstrap, but any NgModule can include any number of additional components, which can be loaded through the router or created through the template. The components that belong to an NgModule share a compilation context.
 

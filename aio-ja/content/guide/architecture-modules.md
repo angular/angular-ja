@@ -10,25 +10,25 @@ Angularアプリケーションはモジュール式であり、Angularは _NgMo
 
 ## NgModule メタデータ
 
-An NgModule is defined as a class decorated with `@NgModule`. The `@NgModule` decorator is a function that takes a single metadata object, whose properties describe the module. The most important properties are as follows.
+NgModuleは`@NgModule`で装飾されたクラスとして定義されています。`@NgModule`デコレータは、モジュールを記述するプロパティーを持つ単一のメタデータ・オブジェクトを取得する機能です。最も重要なプロパティは次のとおりです。
 
-* `declarations`&mdash;The [components](guide/architecture-components), _directives_, and _pipes_ that belong to this NgModule.
+* `declarations`&mdash;このNgModuleに属する[コンポーネント](guide/architecture-components)、_ディレクティブ_、および _パイプ_
 
-* `exports`&mdash;The subset of declarations that should be visible and usable in the _component templates_ of other NgModules.
+* `exports`&mdash;他のNgModuleの _コンポーネントテンプレート_ で可視で使用可能な宣言のサブセット。
 
-* `imports`&mdash;Other modules whose exported classes are needed by component templates declared in _this_ NgModule.
+* `imports`&mdash;エクスポートされたクラスが _この_ NgModuleで宣言されたコンポーネントテンプレートによって必要とされる他のモジュール。
 
-* `providers`&mdash;Creators of [services](guide/architecture-services) that this NgModule contributes to the global collection of services; they become accessible in all parts of the app. (You can also specify providers at the component level, which is often preferred.)
+* `providers`&mdash;このNgModuleが[サービス](guide/architecture-services)のグローバルなコレクションに貢献するサービスの作成元。それらはアプリのすべての部分でアクセス可能になります。 （コンポーネントレベルでプロバイダを指定することもでき、よく推奨されます）
 
-* `bootstrap`&mdash;The main application view, called the _root component_, which hosts all other app views. Only the _root NgModule_ should set this `bootstrap` property.
+* `bootstrap`&mdash; _ルートコンポーネント_ と呼ばれるメインアプリケーションビューで、他のすべてのアプリケーションビューをホストします。_ルートNgModule_ だけがこの`bootstrap`プロパティを設定する必要があります。
 
-Here's a simple root NgModule definition:
+シンプルなルートNgModuleの定義は次のとおりです。
 
 <code-example path="architecture/src/app/mini-app.ts" region="module" title="src/app/app.module.ts" linenums="false"></code-example>
 
 <div class="alert is-helpful">
 
-  The `export` of `AppComponent` is just to show how to export; it isn't actually necessary in this example. A root NgModule has no reason to _export_ anything because other modules don't need to _import_ the root NgModule.
+  `AppComponent`の`export`はエクスポートする方法を示しています。 この例では実際には必要ありません。 ルートNgModuleは、他のモジュールがルートNgModuleを _インポート_ する必要がないため、何も _エクスポート_ する必要はありません。
 
 </div>
 

@@ -65,102 +65,100 @@ CLIは`karma.conf.js`で補完された`application.json`内で指定された�
 
 JasmineとKarmaの設定の詳細についてはWebで検索してください。
 
-#### Other test frameworks
+#### 他のテストフレームワーク
 
-You can also unit test an Angular app with other testing libraries and test runners.
-Each library and runner has its own distinctive installation procedures, configuration, and syntax.
+他のテスティングライブラリーとテストランナーを使用してAngularアプリケーションのユニットテストを行うこともできます。
+各ライブラリ、ランナーは独自のインストール手順、設定、および構文をもちます。
 
-Search the web to learn more.
+詳細はWebで検索してください。
 
-#### Test file name and location
+#### テストファイルの名前と場所
 
-Look inside the `src/app` folder.
+`src/app`フォルダ内をみてください。
 
-The CLI generated a test file for the `AppComponent` named `app.component.spec.ts`.
+CLIは`AppComponent`のための`app.component.spec.ts`という名前のテストファイルを生成しました。
 
 <div class="alert is-important">
 
-The test file extension **must be `.spec.ts`** so that tooling can identify it as a file with tests (AKA, a _spec_ file).
+ツールがテストに使用するファイル(または、_スペック_ファイル)だと識別できるように、テストファイルの拡張子は**`.spec.ts`でないといけません**。
 
 </div>
 
-The `app.component.ts` and `app.component.spec.ts` files  are siblings in the same folder.
-The root file names (`app.component`) are the same for both files. 
+`app.component.ts`と`app.component.spec.ts`ファイルは同じフォルダ内に置きます。
+ルートファイル名(`app.component`)は両方のファイルで同じにします。
 
-Adopt these two conventions in your own projects for _every kind_ of test file.
+あなた自身のプロジェクトの_すべての種類_のテストファイルにおいてこれら2つの慣習を採用してください。
 
-## Service Tests
+## サービスのテスト
 
-Services are often the easiest files to unit test.
-Here are some synchronous and asynchronous unit tests of the `ValueService`
-written without assistance from Angular testing utilities.
+サービスはユニットテストをするのに最も簡単なファイルなことが多いです。
+ここでは`ValueService`のいくつかの同期、非同期ユニットテストを
+Angularのテスティングユーティリティの補助なしで書いています。
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="ValueService" title="app/demo/demo.spec.ts"></code-example>
 
 {@a services-with-dependencies}
 
-#### Services with dependencies
+#### 依存関係をもつサービス
 
-Services often depend on other services that Angular injects into the constructor.
-In many cases, it easy to create and _inject_ these dependencies by hand while
-calling the service's constructor.
+サービスはAngularがコンストラクタに注入する他のサービスに依存するということがよくあります。
+多くの場合、サービスのコンストラクタ呼び出しのときに手動でそれらの依存関係を作成、
+_注入_することは簡単なことです。
 
-The `MasterService` is a simple example:
+`MasterService`は簡単な例です:
 
 <code-example path="testing/src/app/demo/demo.ts" region="MasterService" title="app/demo/demo.ts" linenums="false"></code-example>
 
-`MasterService` delegates its only method, `getValue`, to the injected `ValueService`.
+`MasterService`は注入した`ValueService`の`getValue`メソッドを委譲するだけです。
 
-Here are several ways to test it.
+これをテストする方法はいくつかあります。
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="MasterService" title="app/demo/demo.spec.ts"></code-example>
 
-The first test creates a `ValueService` with `new` and passes it to the `MasterService` constructor.
+最初のテストでは`new`を使用して`ValueService`を生成して、`MasterService`コンストラクタに渡しています。
 
-However, injecting the real service rarely works well as most dependent services are difficult to create and control.
+しかし、現実のサービスを注入することは、ほとんどの依存するサービスが作成、コントロールすることが難しいのでほとんど機能しません。
 
-Instead you can mock the dependency, use a dummy value, or create a 
-[spy](https://jasmine.github.io/2.0/introduction.html#section-Spies) 
-on the pertinent service method.
+かわりに、
+依存をモックしたり、ダミーの値を使用したり、
+適切なサービスメソッドの[スパイ](https://jasmine.github.io/2.0/introduction.html#section-Spies)を作成することができます。
 
 <div class="alert is-helpful">
 
-Prefer spies as they are usually the easiest way to mock services.
+スパイは通常サービスをモックするのに最も簡単な方法であるため好まれます。
 
 </div>
 
-These standard testing techniques are great for unit testing services in isolation.
+これらの標準的なテスト手法は分離したサービスのユニットテストで素晴らしいです。
 
-However, you almost always inject service into application classes using Angular
-dependency injection and you should have tests that reflect that usage pattern.
-Angular testing utilities make it easy to investigate how injected services behave.
+しかし、ほとんどいつでもAngularの依存性の注入を使用してアプリケーションクラスにサービスを注入していて、
+その使用パターンを反映したテストが必要になります。
+Angularのテスティングユーティリティはどのように注入したサービスの振る舞うか調べることを簡単にします。
 
-#### Testing services with the _TestBed_
+#### _TestBed_を使用してサービスのテストをする
 
-Your app relies on Angular [dependency injection (DI)](guide/dependency-injection) 
-to create services.
-When a service has a dependent service, DI finds or creates that dependent service.
-And if that dependent service has its own dependencies, DI finds-or-creates them as well.
+あなたのアプリケーションはサービスを作成するためにAngularの[依存性の注入(DI)](guide/dependency-injection)
+に頼ります。
+サービスが依存するサービスをもつとき、DIはその依存するサービスを探すか作成します。
+さらにその依存するサービスが自身の依存性をもつ場合、DIは同じように探すか作成します。
 
-As service _consumer_, you don't worry about any of this.
-You don't worry about the order of constructor arguments or how they're created.
+サービスの_利用者_として、これについて心配する必要はありません。
+コンストラクタの引数の順序や、それらがどうやって作成されるのかを心配する必要はありません。
 
-As a service _tester_, you must at least think about the first level of service dependencies
-but you _can_ let Angular DI do the service creation and deal with constructor argument order
-when you use the `TestBed` testing utility to provide and create services.
+サービスの_テスター_として、サービスの依存性のファーストレベルについて少しだけ考える必要があります。
+しかし、サービスの提供と生成のために`TestBed`テスティングユーティリティを使用したとき、AngularのDIにサービスの生成とコンストラクタの引数の順序を決めさせることが_できます_。
 
 {@a testbed}
 
 #### Angular _TestBed_
 
-The `TestBed` is the most important of the  Angular testing utilities.
-The `TestBed` creates a dynamically-constructed Angular _test_ module that emulates
-an Angular [@NgModule](guide/ngmodules).
+`TestBed`はAngularテスティングユーティリティで最も重要なものです。
+`TestBed`はAngularの[@NgModule](guide/ngmodules)をエミュレートした、動的に生成されたAngular_テスト_モジュールを作成します。
 
-The `TestBed.configureTestingModule()` method takes a metadata object that can have most of the properties of an [@NgModule](guide/ngmodules).
+`TestBed.configureTestingModule()`メソッドは[@NgModule](guide/ngmodules)のプロパティのほとんどをもつことができるメタデータオブジェクトを受け取ります。
 
-To test a service, you set the `providers` metadata property with an
-array of the services that you'll test or mock.
+サービスをテストするために、
+テストやモックしたいサービスの配列を`providers`メタデータプロパティにセットします。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
@@ -168,30 +166,30 @@ array of the services that you'll test or mock.
   title="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach">
 </code-example>
 
-Then inject it inside a test by calling `TestBed.get()` with the service class as the argument.
+それからサービスのクラスを引数として`TestBed.get()`を呼び出してテスト内部でそれを注入します。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
   region="value-service-inject-it">
 </code-example>
 
-Or inside the `beforeEach()` if you prefer to inject the service as part of your setup.
+または、もしセットアップの1部分としてサービスの注入することを選ぶならば、`beforeEach()`内部で行ってください。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
   region="value-service-inject-before-each">
 </code-example>
 
-When testing a service with a dependency, provide the mock in the `providers` array.
+依存関係をもつサービスのテストをするときは、`providers`配列内にモックを提供してください。
 
-In the following example, the mock is a spy object.
+次の例では、モックはスパイオブジェクトです。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
   region="master-service-before-each" linenums="false">
 </code-example>
 
-The test consumes that spy in the same way it did earlier.
+このテストではさきほどと同じようにスパイを使用します。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
@@ -199,16 +197,16 @@ The test consumes that spy in the same way it did earlier.
 </code-example>
 
 {@a no-before-each}
-#### Testing without _beforeEach()_
+#### _beforeEach()_を使用せずテストする
 
-Most test suites in this guide call `beforeEach()` to set the preconditions for each `it()` test
-and rely on the `TestBed` to create classes and inject services.
+それぞれの`it()`テストのための前提条件をセットするためにこのガイド内のほとんどのテストで`beforeEach()`を呼び出します。
+そしてクラスの生成とサービスの注入のために`TestBed`に頼ります。
 
-There's another school of testing that never calls `beforeEach()` and prefers to create classes explicitly rather than use the `TestBed`.
+`beforeEach()`を消して呼び出さないテストの他校と`TestBed`を使用するかわりに明示的にクラスを作成します。
 
-Here's how you might rewrite one of the `MasterService` tests in that style.
+このスタイルでの`MasterService`のテストを書き直す方法はこれです。
 
-Begin by putting re-usable, preparatory code in a _setup_ function instead of `beforeEach()`.
+`beforeEach()`のかわりに再利用可能な、_セットアップ_関数内の準備コードから始めてください。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
@@ -216,43 +214,36 @@ Begin by putting re-usable, preparatory code in a _setup_ function instead of `b
   title="app/demo/demo.spec.ts (setup)" linenums="false">
 </code-example>
 
-The `setup()` function returns an object literal 
-with the variables, such as `masterService`, that a test might reference.
-You don't define _semi-global_ variables (e.g., `let masterService: MasterService`) 
-in the body of the `describe()`.
+`setup()`関数は`masterService`のようなテストが参照する変数を含むオブジェクトリテラルを返します。
+`describe()`の本体に_準グローバル_な変数(例えば、`let masterService: MasterService`)を定義しないでください。
 
-Then each test invokes `setup()` in its first line, before continuing
-with steps that manipulate the test subject and assert expectations.
+それから、それぞれのテストの最初の行でテストサブジェクトを操作するステップの前に`setup()`を実行し、
+期待する値をアサートします。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
   region="no-before-each-test" linenums="false">
 </code-example>
 
-Notice how the test uses 
-[_destructuring assignment_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) 
-to extract the setup variables that it needs.
+必要なセットアップ変数を抽出するために
+[_destructuring assignment_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)をテストで使用する方法に注目してください。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
   region="no-before-each-setup-call">
 </code-example>
 
-Many developers feel this approach is cleaner and more explicit than the
-traditional `beforeEach()` style.
+多くの開発者にとってこのアプローチは伝統的な`beforeEach()`スタイルよりも明快でより明確であると感じます。
 
-Although this testing guide follows the tradition style and 
-the default [CLI schematics](https://github.com/angular/devkit) 
-generate test files with `beforeEach()` and `TestBed`,
-feel free to adopt _this alternative approach_ in your own projects.
+このテストガイドでは伝統的なスタイルとデフォルトの[CLI schematics](https://github.com/angular/devkit)
+が生成した`beforeEech()`と`TestBed`を含むテストファイルにしたがいますが、
+_この代替アプローチ_を自身のプロジェクト内で採用することは自由です。
 
-#### Testing HTTP services
+#### HTTPサービスをテストする
 
-Data services that make HTTP calls to remote servers typically inject and delegate 
-to the Angular [`HttpClient`](guide/http) service for XHR calls.
+リモートサーバーにHTTPコールをするデータサービスは、通常、XHRコールのためにAngularの[`HttpClient`](guide/http)サービスを注入して委譲します。
 
-You can test a data service with an injected `HttpClient` spy as you would
-test any service with a dependency.
+依存関係をもつ任意のサービスをテストするために注入された`HttpClient`のスパイを使用してデータサービスのテストができます。
 <code-example 
   path="testing/src/app/model/hero.service.spec.ts" 
   region="test-with-spies"
@@ -261,32 +252,30 @@ test any service with a dependency.
 
 <div class="alert is-important">
 
-The `HeroService` methods return `Observables`. You must
-_subscribe_ to an observable to (a) cause it to execute and (b)
-assert that the method succeeds or fails.
+`HeroService`メソッドは`Observable`を返します。
+あなたは(a)それを実行させるためと、(b)成功、失敗メソッドをアサートするために、オブサーバブルを_購読_する必要があります。
 
-The `subscribe()` method takes a success (`next`) and fail (`error`) callback.
-Make sure you provide _both_ callbacks so that you capture errors. 
-Neglecting to do so produces an asynchronous uncaught observable error that
-the test runner will likely attribute to a completely different test.
+`subscribe()`メソッドは成功(`next`)と失敗(`error`)コールバックを受け取ります。
+エラーをキャプチャーするために_両方の_コールバックを提供することを確認してください。
+これを怠ると、テストランナーが完全に異なるテストに属している可能性が高い、非同期で観察不能なエラーが生成されます。
 
 </div>
 
 #### _HttpClientTestingModule_
 
-Extended interactions between a data service and the `HttpClient` can be complex
-and difficult to mock with spies.
+データサービスと`HttpClient`の間の拡張されたやりとりはスパイでモックするには複雑で難しい場合があります。
 
-The `HttpClientTestingModule` can make these testing scenarios more manageable.
+`HttpClientTestingModule`はそれらのテストシナリオをもっと管理可能にできます。
 
-While the _code sample_ accompanying this guide demonstrates `HttpClientTestingModule`,
-this page defers to the [Http guide](guide/http#testing-http-requests),
-which covers testing with the `HttpClientTestingModule` in detail.
+
+このガイドに付属する_コードサンプル_で`HttpClientTestingModule`のデモをする前に、
+このページは[Httpガイド](guide/http#testing-http-requests)に先送りにします。
+これは`HttpClientTestingModule`を使用したテストの詳細をカバーします。
 
 <div class="alert is-helpful">
 
-This guide's sample code also demonstrates testing of the _legacy_ `HttpModule`
-in `app/model/http-hero.service.spec.ts`.
+このガイドのサンプルコードは`app/model/http-hero.service.spec.ts`での
+_レガシー_な`HttpModule`のテストのデモもしています。
 
 </div>
 

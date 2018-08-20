@@ -165,11 +165,11 @@ Angular の Custom Elements を使用すれば、自動的にインフラスト�
 
 ## Custom Elementsの型指定
 
-`document.createElement()` や `document.querySelector()` のような一般的な DOM API は、指定された引数に適切な要素型を返します。例えば、 `document.createElement('a')` を呼び出すと、 `HTMLAnchorElement` が返されます。これは TypeScript が `href` プロパティを持つと判断するものです。同様に、 `document.createElement('div')` を呼び出すと、 `HTMLDivElement` を返します。これは TypeScript が `href` プロパティを持たないと判断するものです。
+`document.createElement()` や `document.querySelector()` のような一般的な DOM API は、指定された引数に適切な要素型を返します。たとえば、 `document.createElement('a')` を呼び出すと、 `HTMLAnchorElement` が返されます。これは TypeScript が `href` プロパティをもつと判断するものです。同様に、 `document.createElement('div')` を呼び出すと、 `HTMLDivElement` を返します。これは TypeScript が `href` プロパティを持たないと判断するものです。
 
 カスタム要素の名前（この例では `popup-element`）のような未知の要素を呼び出した場合、 TypeScript は返される要素の正しい型を推論できないため、メソッドは `HTMLELement` のようなジェネリック型を返します。
 
-Angular で作成されたカスタム要素は、（`HTMLElement` を拡張した） `NgElement` を拡張します。さらに、このカスタム要素は対応するコンポーネントの各インプットに対してプロパティを持ちます。例えば、 `popup-element` には `string` 型の `message` プロパティがあります。
+Angular で作成されたカスタム要素は、（`HTMLElement` を拡張した） `NgElement` を拡張します。さらに、このカスタム要素は対応するコンポーネントの各インプットに対してプロパティを持ちます。たとえば、 `popup-element` には `string` 型の `message` プロパティがあります。
 
 カスタム要素の正しい型を取得するには、いくつかのオプションがあります。次のコンポーネントに基づいて `my-dialog` のカスタム要素を作成するとします。
 
@@ -180,7 +180,7 @@ class MyDialog {
 }
 ```
 
-正確な型を取得する最も簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。そのためには、 `NgElement` と `WithProperties` 型（どちらも `@angular/elements` からエクスポートされます）を使うことができます：
+正確な型を取得するもっとも簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。そのためには、 `NgElement` と `WithProperties` 型（どちらも `@angular/elements` からエクスポートされます）を使うことができます：
 
 ```ts
 const aDialog = document.createElement('my-dialog') as NgElement & WithProperties<{content: string}>;
@@ -189,7 +189,7 @@ aDialog.content = 123;  // <-- ERROR: TypeScript knows this should be a string.
 aDialog.body = 'News';  // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
 ```
 
-これは型チェックやオートコンプリートサポートのような、カスタム要素のためのTypeScript機能をすぐに使うには良い方法です。しかしいくつかの場所でそれを必要とするならば、面倒になる可能性があります。なぜなら全ての発生時に戻り値の型をキャストする必要があるからです。
+これは型チェックやオートコンプリートサポートのような、カスタム要素のためのTypeScript機能をすぐに使うにはよい方法です。しかしいくつかの場所でそれを必要とするならば、面倒になる可能性があります。なぜならすべての発生時に戻り値の型をキャストする必要があるからです。
 
 各カスタム要素の型を一度だけ定義する、もうひとつの方法は、 `HTMLElementTagNameMap` を拡張することです。これは（`document.createElement()` や `document.querySelector()` 、その他のようなDOMメソッドのために）タグ名に基づいて返される要素の型を TypeScript が推論するために使います。
 

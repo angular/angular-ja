@@ -280,28 +280,29 @@ _レガシー_な`HttpModule`のテストのデモもしています。
 </div>
 
 
-## Component Test Basics
+## コンポーネントテストの基本
 
-A component, unlike all other parts of an Angular application,
-combines an HTML template and a TypeScript class.
-The component truly is the template and the class _working together_.
-and to adequately test a component, you should test that they work together
-as intended.
+コンポーネントは、Angularアプリケーションの他のすべての部分とは違い、
+HTMLテンプレートとTypeScriptクラスを組み合わせています。
+コンポーネントは本当にテンプレートとクラスが_一緒に動作します_。
+そして、
+適切にコンポーネントをテストするためには、
+目的通りにそれらを一緒に動作させるテストをする必要があります。
 
-Such tests require creating the component's host element in the browser DOM,
-as Angular does, and investigating the component class's interaction with
-the DOM as described by its template.
+このようなテストでは、
+AngularがするようにブラウザのDOMにコンポーネントのホスト要素を作成し、
+コンポーネントクラスとテンプレートとして定義されたDOMとのやり取りを調査する必要があります。
 
-The Angular `TestBed` facilitates this kind of testing as you'll see in the sections below.
-But in many cases, _testing the component class alone_, without DOM involvement,
-can validate much of the component's behavior in an easier, more obvious way.
 
-### Component class testing
+Angularの`TestBed`は次のセクションで見るようなこの種類のテストを容易にします。
+しかし、多くの場合、DOMの関与無しで_このクラスだけでテストすること_は
+コンポーネントの振る舞いをより簡単で明白な方法で検証できます。
 
-Test a component class on its own as you would test a service class.
+### コンポーネントクラスのテスト
 
-Consider this `LightswitchComponent` which toggles a light on and off
-(represented by an on-screen message) when the user clicks the button.
+サービスクラスをテストするのと同じように、コンポーネントクラスを独自にテストします。
+
+ユーザーがボタンをクリックしたときにライトをオン/オフ（オンスクリーンメッセージで表される）に切り替えるこの`LightswitchComponent`を考えてみましょう。
 
 <code-example 
   path="testing/src/app/demo/demo.ts" 
@@ -309,13 +310,11 @@ Consider this `LightswitchComponent` which toggles a light on and off
   title="app/demo/demo.ts (LightswitchComp)" linenums="false">
 </code-example>
 
+`click()`メソッドがライトの_オン/オフ_状態を切り替えるだけで、メッセージを適切に設定することをテストすることができます。
 You might decide only to test that the `clicked()` method
 toggles the light's _on/off_ state and sets the message appropriately.
 
-This component class has no dependencies.
-To test a service with no dependencies, you create it with `new`, poke at its API,
-and assert expectations on its public state.
-Do the same with the component class.
+このコンポーネントクラスは依存関係がありません。 依存関係のないサービスをテストするには、`new`でサービスを作成し、そのAPIを突き刺して、公開されている状態の期待する値をアサートします。コンポーネントクラスと同じ操作を行います。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
@@ -323,7 +322,7 @@ Do the same with the component class.
   title="app/demo/demo.spec.ts (Lightswitch tests)" linenums="false">
 </code-example>
 
-Here is the `DashboardHeroComponent` from the _Tour of Heroes_ tutorial.
+ここでは_ツアー・オブ・ヒーロー_チュートリアルから`DashboardHeroComponent`についてみます。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.ts" 
@@ -331,12 +330,9 @@ Here is the `DashboardHeroComponent` from the _Tour of Heroes_ tutorial.
   title="app/dashboard/dashboard-hero.component.ts (component)" linenums="false">
 </code-example>
 
-It appears within the template of a parent component,
-which binds a _hero_ to the `@Input` property and
-listens for an event raised through the _selected_ `@Output` property.
+_ヒーロー_を`@Input`プロパティにバインドし、選択された`@Output`プロパティを使用して生成されたイベントをリッスンする親コンポーネントのテンプレート内に表示されます。
 
-You can test that the class code works without creating the `DashboardHeroComponent`
-or its parent component.
+`DashboardHeroComponent`またはその親コンポーネントを作成せずにクラスコードが動作することをテストできます。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" 
@@ -344,10 +340,9 @@ or its parent component.
   title="app/dashboard/dashboard-hero.component.spec.ts (class tests)" linenums="false">
 </code-example>
 
-When a component has dependencies, you may wish to use the `TestBed` to both
-create the component and its dependencies.
+コンポーネントに依存関係がある場合、`TestBed`を使用してコンポーネントとその依存関係を作成することができます。
 
-The following `WelcomeComponent` depends on the `UserService` to know the name of the user to greet.
+次の`WelcomeComponent`は、`UserService`に依存して、挨拶するユーザーの名前を知っています。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.ts" 
@@ -355,7 +350,7 @@ The following `WelcomeComponent` depends on the `UserService` to know the name o
   title="app/welcome/welcome.component.ts" linenums="false">
 </code-example>
 
-You might start by creating a mock of the `UserService` that meets the minimum needs of this component.
+まず、このコンポーネントの最小限のニーズを満たす`UserService`のモックを作成します。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -363,7 +358,8 @@ You might start by creating a mock of the `UserService` that meets the minimum n
   title="app/welcome/welcome.component.spec.ts (MockUserService)" linenums="false">
 </code-example>
 
-Then provide and inject _both the_ **component** _and the service_ in the `TestBed` configuration.
+次に、**コンポーネント**と_サービス_の_両方_を`TestBed`の設定で提供して注入します。
+
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -371,7 +367,7 @@ Then provide and inject _both the_ **component** _and the service_ in the `TestB
   title="app/welcome/welcome.component.spec.ts (class-only setup)" linenums="false">
 </code-example>
 
-Then exercise the component class, remembering to call the [lifecycle hook methods](guide/lifecycle-hooks) as Angular does when running the app.
+次に、コンポーネントクラスを実行し、[ライフサイクルフックメソッド](guide/lifecycle-hooks)をAngularがアプリケーションの実行時に呼び出すことを覚えておいてください。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -379,51 +375,37 @@ Then exercise the component class, remembering to call the [lifecycle hook metho
   title="app/welcome/welcome.component.spec.ts (class-only tests)" linenums="false">
 </code-example>
 
-### Component DOM testing
+### コンポーネントのDOMのテスト
 
-Testing the component _class_ is as easy as testing a service.
+コンポーネントクラスのテストは、サービスをテストするのと同じくらい簡単です。
 
-But a component is more than just its class.
-A component interacts with the DOM and with other components.
-The _class-only_ tests can tell you about class behavior.
-They cannot tell you if the component is going to render properly,
-respond to user input and gestures, or integrate with its parent and child components.
+しかし、コンポーネントは_クラスだけ_ではありません。 コンポーネントは、DOMや他のコンポーネントと対話します。 クラスのみのテストでは、クラスの動作について教えてくれます。 コンポーネントが適切にレンダリングされ、ユーザーの入力とジェスチャーに応答したり、親コンポーネントと子コンポーネントと統合されたりするかどうかは、ユーザーからはわかりません。
 
-None of the _class-only_ tests above can answer key questions about how the
-components actually behave on screen.
+上記の_クラスのみ_のテストでは、コンポーネントが実際に画面上でどのように動作するかについての重要な質問に答えることはできません。
 
-* Is `Lightswitch.clicked()` bound to anything such that the user can invoke it?
-* Is the `Lightswitch.message` displayed?
-* Can the user actually select the hero displayed by `DashboardHeroComponent`?
-* Is the hero name displayed as expected (i.e, in uppercase)?
-* Is the welcome message displayed by the template of `WelcomeComponent`?
+* `Lightswitch.clicked()`はユーザが呼び出せるようなものにバインドされていますか？
+* `Lightswitch.message`は表示されていますか？
+* ユーザーは実際に`DashboardHeroComponent`で表示されるヒーローを選択できますか？
+* 主人公の名前は、大文字で表示されますか？
+* ウェルカムメッセージは`WelcomeComponent`のテンプレートで表示されますか？
 
-These may not be troubling questions for the simple components illustrated above.
-But many components have complex interactions with the DOM elements
-described in their templates, causing HTML to appear and disappear as
-the component state changes.
+これらは、上に示した単純なコンポーネントの問題ではないかもしれません。 しかし、多くのコンポーネントは、テンプレートに記述されているDOM要素と複雑なやり取りをしているため、コンポーネントの状態が変わるとHTMLが表示され消えます。
 
-To answer these kinds of questions, you have to create the DOM elements associated
-with the components, you must examine the DOM to confirm that component state
-displays properly at the appropriate times, and you must simulate user interaction
-with the screen to determine whether those interactions cause the component to
-behave as expected.
+これらの種類の質問に答えるには、コンポーネントに関連付けられたDOM要素を作成する必要があります。DOMを調べて、コンポーネント状態が適切なタイミングで適切に表示されることを確認し、画面とのユーザー対話をシミュレートして、 コンポーネントが期待どおりに動作するようにします。
 
-To write these kinds of test, you'll use additional features of the `TestBed`
-as well as other testing helpers.
+この種のテストを作成するには、`TestBed`のその他の機能と他のテストヘルパを使用します。
 
-#### CLI-generated tests
+#### CLIが生成したテスト
 
-The CLI creates an initial test file for you by default when you ask it to
-generate a new component.
+CLIは、新しいコンポーネントの生成を要求すると、デフォルトで初期テストファイルを作成します。
 
-For example, the following CLI command generates a `BannerComponent` in the `app/banner` folder (with inline template and styles):
+たとえば、次のCLIコマンドは、`app/banner`フォルダ（インラインのテンプレートとスタイル）に`BannerComponent`を生成ます:
 
 <code-example language="sh" class="code-shell">
 ng generate component banner --inline-template --inline-style --module app
 </code-example>
 
-It also generates an initial test file for the component, `banner-external.component.spec.ts`, that looks like this:
+また、このような外観のコンポーネント`banner-external.component.spec.ts`の初期テストファイルを生成します
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -431,15 +413,13 @@ It also generates an initial test file for the component, `banner-external.compo
   title="app/banner/banner-external.component.spec.ts (initial)" linenums="false">
 </code-example>
 
-#### Reduce the setup
+#### セットアップを減らす
 
-Only the last three lines of this file actually test the component
-and all they do is assert that Angular can create the component.
+このファイルの最後の3行だけが実際にコンポーネントをテストし、Angularがコンポーネントを作成できると主張します。
 
-The rest of the file is boilerplate setup code anticipating more advanced tests that _might_ become necessary if the component evolves into something substantial.
+ファイルの残りの部分は、構成要素が相当なものに発展した場合に必要となるより高度なテストを予期する定型的なセットアップコードです。
 
-You'll learn about these advanced test features below.
-For now, you can radically reduce this test file to a more manageable size:
+以下のこれらの高度なテスト機能について学びます。 現時点では、このテストファイルを大幅に縮小してより管理しやすいサイズにすることができます:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -447,8 +427,7 @@ For now, you can radically reduce this test file to a more manageable size:
   title="app/banner/banner-initial.component.spec.ts (minimal)" linenums="false">
 </code-example>
 
-In this example, the metadata object passed to `TestBed.configureTestingModule` 
-simply declares `BannerComponent`, the component to test.
+この例では、`TestBed.configureTestingModule`に渡されたメタデータオブジェクトは、単にテストするコンポーネント`BannerComponent`を宣言します。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -457,13 +436,9 @@ simply declares `BannerComponent`, the component to test.
 
 <div class="alert is-helpful">
 
-There's no need to declare or import anything else.
-The default test module is pre-configured with 
-something like the `BrowserModule` from `@angular/platform-browser`.
+宣言したり、他のものをインポートする必要はありません。 デフォルトのテストモジュールは、`@angular/platform-browser`の`BrowserModule`のようなものがあらかじめ設定されています。
 
-Later you'll call `TestBed.configureTestingModule()` with
-imports, providers, and more declarations to suit your testing needs.
-Optional `override` methods can further fine-tune aspects of the configuration.
+後で、テストニーズに合わせて、インポート、プロバイダ、およびその他の宣言で`TestBed.configureTestingModule()`を呼び出します。 オプションのオーバーライドメソッドを使用すると、構成の側面をさらに細かく調整できます。
 
 </div>
 
@@ -471,27 +446,24 @@ Optional `override` methods can further fine-tune aspects of the configuration.
 
 #### _createComponent()_
 
-After configuring `TestBed`, you call its `createComponent()` method.
+`TestBed`を設定したら`createComponent()`メソッドをよびだします。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="createComponent">
 </code-example>
 
-`TestBed.createComponent()` creates an instance of the `BannerComponent`, 
-adds a corresponding element to the test-runner DOM,
-and returns a [`ComponentFixture`](#component-fixture).
+`TestBed.createComponent()`は、
+`BannerComponent`のインスタンスを作成し、
+対応する要素をテストランナーDOMに追加し、[`ComponentFixture`](#component-fixture)を返します。
 
 <div class="alert is-important">
 
-Do not re-configure `TestBed` after calling `createComponent`.
+`createComponent`の呼び出し後に`TestBed`を再構成しないでください。
 
-The `createComponent` method freezes the current `TestBed`definition, 
-closing it to further configuration.
+`createComponent`メソッドは現在の`TestBed`定義をフリーズさせ、それを閉じてさらに設定します。
 
-You cannot call any more `TestBed` configuration methods, not `configureTestingModule()`,
-nor `get()`, nor any of the `override...` methods.
-If you try, `TestBed` throws an error.
+`configureTestingModule()`、`get()`、`override...`メソッドのいずれも、`TestBed`設定メソッドを呼び出すことはできません。 試してみると、`TestBed`はエラーを投げます。
 
 </div>
 
@@ -499,9 +471,9 @@ If you try, `TestBed` throws an error.
 
 #### _ComponentFixture_
 
-The [ComponentFixture](api/core/testing/ComponentFixture) is a test harness for interacting with the created component and its corresponding element.
+[ComponentFixture](api/core/testing/ComponentFixture)は、作成されたコンポーネントおよび対応する要素と対話するためのテストハーネスです。
 
-Access the component instance through the fixture and confirm it exists with a Jasmine expectation:
+治具からコンポーネントインスタンスにアクセスし、ジャスミンの期待通りに存在することを確認します:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -510,9 +482,9 @@ Access the component instance through the fixture and confirm it exists with a J
 
 #### _beforeEach()_
 
-You will add more tests as this component evolves.
-Rather than duplicate the `TestBed` configuration for each test,
-you refactor to pull the setup into a Jasmine `beforeEach()` and some supporting variables:
+このコンポーネントが進化するにつれて、
+より多くのテストを追加します。
+各テストで`TestBed`設定を複製するのではなく、リファクタを使用して設定をJasmine `beforeEach()`といくつかのサポート変数にプルします
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -520,8 +492,8 @@ you refactor to pull the setup into a Jasmine `beforeEach()` and some supporting
   linenums="false">
 </code-example>
 
-Now add a test that gets the component's element from `fixture.nativeElement` and 
-looks for the expected text.
+次に、`fixture.nativeElement`からコンポーネントの要素を取得し、
+期待されるテキストを探すテストを追加します。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -532,23 +504,15 @@ looks for the expected text.
 
 #### _nativeElement_
 
-The value of `ComponentFixture.nativeElement` has the `any` type.
-Later you'll encounter the `DebugElement.nativeElement` and it too has the `any` type.
+`ComponentFixture.nativeElement`の値には、任意の型があります。 後で`DebugElement.nativeElement`が出現し、それにも任意の型があります。
 
-Angular can't know at compile time what kind of HTML element the `nativeElement` is or 
-if it even is an HTML element.
-The app might be running on a _non-browser platform_, such as the server or a
-[Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API),
-where the element may have a diminished API or not exist at all.
+Angularは、コンパイル時に`nativeElement`のHTML要素の種類やHTML要素であるかどうかを知ることはできません。 アプリケーションは、サーバーや[Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)などの_非ブラウザプラットフォーム_で実行されている可能性があります。このプラットフォームでは、要素のAPIが減少しているか、まったく存在していない可能性があります。
 
-The tests in this guide are designed to run in a browser so a
-`nativeElement` value will always be an `HTMLElement` or 
-one of its derived classes. 
+このガイドのテストは、ブラウザで実行するように設計されているため、`nativeElement`の値は常に`HTMLElement`またはその派生クラスの1つになります。
 
-Knowing that it is an `HTMLElement` of some sort, you can use
-the standard HTML `querySelector` to dive deeper into the element tree.
+それが何らかの`HTMLElement`であることがわかっている場合は、標準のHTML `querySelector`を使用して要素ツリーに深く入り込むことができます。
 
-Here's another test that calls `HTMLElement.querySelector` to get the paragraph element and look for the banner text:
+段落要素を取得してバナーテキストを探すために`HTMLElement.querySelector`を呼び出す別のテストがあります:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -559,45 +523,42 @@ Here's another test that calls `HTMLElement.querySelector` to get the paragraph 
 
 #### _DebugElement_
 
-The Angular _fixture_ provides the component's element directly through the `fixture.nativeElement`.
+Angularの_fixture_は`fixture.nativeElement`をとおして直接コンポーネントの要素に提供されます。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="nativeElement">
 </code-example>
 
-This is actually a convenience method, implemented as `fixture.debugElement.nativeElement`.
+これは`fixture.debugElement.nativeElement`として実装された、実際に便利なメソッドです
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="debugElement-nativeElement">
 </code-example>
 
-There's a good reason for this circuitous path to the element.
+要素へのこの迂回路には正当な理由があります。
 
-The properties of the `nativeElement` depend upon the runtime environment.
-You could be running these tests on a _non-browser_ platform that doesn't have a DOM or 
-whose DOM-emulation doesn't support the full `HTMLElement` API.
+`nativeElement`のプロパティは、実行時環境によって異なります。
+これらのテストは、
+DOMを持たない、またはDOMエミュレーションが`HTMLElement` API全体をサポートしていない_ブラウザ以外のプラットフォーム_で実行することができます。
 
-Angular relies on the `DebugElement` abstraction to work safely across _all supported platforms_.
-Instead of creating an HTML element tree, Angular creates a `DebugElement` tree that wraps the _native elements_ for the runtime platform.
-The `nativeElement` property unwraps the `DebugElement` and returns the platform-specific element object.
+Angularは、サポートされているすべてのプラットフォームで安全に動作するよう、
+`DebugElement`抽象化に依存しています。
+Angularは、HTML要素ツリーを作成する代わりに、ランタイムプラットフォームの_ネイティブ要素_をラップする`DebugElement`ツリーを作成します。 `nativeElement`プロパティは`DebugElement`を展開し、プラットフォーム固有の要素オブジェクトを返します。
 
-Because the sample tests for this guide are designed to run only in a browser,
-a `nativeElement` in these tests is always an `HTMLElement`
-whose familiar methods and properties you can explore within a test.
+このガイドのサンプルテストはブラウザでのみ実行されるように設計されているため、これらのテストの`nativeElement`は、常にテスト内で探索できる使い慣れたメソッドとプロパティを持つ`HTMLElement`です。
 
-Here's the previous test, re-implemented with `fixture.debugElement.nativeElement`:
+以前のテストは`fixture.debugElement.nativeElement`で再実装されています:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v4-test-4">
 </code-example>
 
-The `DebugElement` has other methods and properties that
-are useful in tests, as you'll see elsewhere in this guide.
+`DebugElement`には、このガイドの他の部分で説明するように、テストに役立つ他のメソッドとプロパティがあります。
 
-You import the `DebugElement` symbol from the Angular core library.
+Angularコアライブラリから`DebugElement`シンボルをインポートします。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -607,17 +568,16 @@ You import the `DebugElement` symbol from the Angular core library.
 {@a by-css}
 #### _By.css()_
 
-Although the tests in this guide all run in the browser,
-some apps might run on a different platform at least some of the time.
+このガイドのテストはすべてブラウザ上で実行されますが、一部のアプリケーションは、
+少なくとも一部のプラットフォームで異なるプラットフォームで動作することがあります。
 
-For example, the component might render first on the server as part of a strategy to make the application launch faster on poorly connected devices. The server-side renderer might not support the full HTML element API.
-If it doesn't support `querySelector`, the previous test could fail.
+たとえば、接続の悪いデバイスでアプリケーションをより早く起動させる戦略の一環として、コンポーネントをサーバー上で最初にレンダリングすることがあります。
+サーバー側のレンダラーは、完全なHTML要素APIをサポートしていない可能性があります。`querySelector`をサポートしていない場合、前のテストは失敗する可能性があります。
 
-The `DebugElement` offers query methods that work for all supported platforms.
-These query methods take  a _predicate_ function that returns `true` when a node in the `DebugElement` tree matches the selection criteria.
+`DebugElement`は、サポートされているすべてのプラットフォームで動作するクエリメソッドを提供します。 これらのクエリメソッドは、`DebugElement`ツリーのノードが選択基準に一致すると`true`を返す_述語_関数を使用します。
 
-You create a _predicate_ with the help of a `By` class imported from a
-library for the runtime platform. Here's the `By` import for the browser platform:
+ランタイムプラットフォームのライブラリからインポートされた`By`クラスの助けを借りて_述語_を作成します。
+ここではブラウザプラットフォームのための`By`をインポートしています:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -632,18 +592,15 @@ The following example re-implements the previous test with
   region="v4-test-5">
 </code-example>
 
-Some noteworthy observations:
+注目すべきいくつかの観察:
 
-* The `By.css()` static method selects `DebugElement` nodes 
-with a [standard CSS selector](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors "CSS selectors").
-* The query returns a `DebugElement` for the paragraph.
-* You must unwrap that result to get the paragraph element.
+* `By.css()`静的メソッドは[標準のCSSセレクター]で(https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors "CSS selectors")`DebugElement`ノードを選択します。 
+* クエリは段落の`DebugElement`を返します。
+* 段落要素を取得するためにはその結果をアンラップする必要があります。
 
-When you're filtering by CSS selector and only testing properties of a browser's _native element_, the `By.css` approach may be overkill.
+CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要素_のプロパティのみをテストする場合、`By.css`の手法は過度のものになる可能性があります。
 
-It's often easier and more clear to filter with a standard `HTMLElement` method 
-such as `querySelector()` or `querySelectorAll()`, 
-as you'll see in the next set of tests.
+次の一連のテストで示すように、`querySelector()`や`querySelectorAll()`などの標準的な`HTMLElement`メソッドを使用してフィルタ処理する方が簡単で、より明確になることがよくあります。
 
 <hr>
 

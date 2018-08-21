@@ -604,17 +604,17 @@ CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要�
 
 <hr>
 
-## Component Test Scenarios
+## Component テストシナリオ
 
-The following sections, comprising most of this guide, explore common
-component testing scenarios
+このガイドのほとんどを構成する以下のセクションでは、
+一般的なコンポーネントのテストシナリオ
 
 ### Component binding
 
-The current `BannerComponent` presents static title text in the HTML template.
+現在の`BannerComponent`は、静的タイトルテキストをHTMLテンプレートに表示します。
 
-After a few changes, the `BannerComponent` presents a dynamic title by binding to
-the component's `title` property like this.
+いくつか変更を加えた後、`BannerComponent`は、
+このようなコンポーネントの`title`プロパティにバインドすることによって、動的なタイトルを表示します。
 
 <code-example 
   path="testing/src/app/banner/banner.component.ts" 
@@ -622,16 +622,16 @@ the component's `title` property like this.
   title="app/banner/banner.component.ts" linenums="false">
 </code-example>
 
-Simple as this is, you decide to add a test to confirm that component 
-actually displays the right content where you think it should.
+これは簡単なので、テストを追加して、
+コンポーネントが実際に正しいと思われる場所にコンテンツが表示されることを確認します。
 
-#### Query for the _&lt;h1&gt;_
+#### _&lt;h1&gt;_のクエリ
 
-You'll write a sequence of tests that inspect the value of the `<h1>` element
-that wraps the _title_ property interpolation binding.
+_タイトル_プロパティ補間バインディングをラップする`<h1>`
+要素の値を検査する一連のテストを記述します。
 
-You update the `beforeEach` to find that element with a standard HTML `querySelector`
-and assign it to the `h1` variable.
+`beforeEach`を更新して、
+その要素を標準HTML `querySelector`で検索し、それを`h1`変数に割り当てます。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -641,29 +641,26 @@ and assign it to the `h1` variable.
 
 {@a detect-changes}
 
-#### _createComponent()_ does not bind data
+#### _createComponent()_はデータをバインドしない
 
-For your first test you'd like to see that the screen displays the default `title`.
-Your instinct is to write a test that immediately inspects the `<h1>` like this:
+最初のテストでは、画面にデフォルトの`title`が表示されていることを確認したいと思います。
+あなたの本能は、このような`<h1>`を直ちに検査するテストを書くことです
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
   region="expect-h1-default-v1">
 </code-example>
 
-_That test fails_ with the message:
+メッセージとともに_そのテストは失敗します:
 ```javascript
 expected '' to contain 'Test Tour of Heroes'.
 ```
 
-Binding happens when Angular performs **change detection**.
+Angularが**変更検出**を実行するとバインディングが発生します。
 
-In production, change detection kicks in automatically
-when Angular creates a component or the user enters a keystroke or
-an asynchronous activity (e.g., AJAX) completes.
+プロダクションでは、Angularがコンポーネントを作成するか、ユーザーがキーストロークを入力するか、非同期アクティビティ（AJAXなど）が完了すると、変更検出が自動的に開始されます。
 
-The `TestBed.createComponent` does _not_ trigger change detection.
-a fact confirmed in the revised test:
+`TestBed.createComponent`は変更の検出をトリガーしません。 改正試験で確認された事実
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes" linenums="false">
@@ -671,20 +668,17 @@ a fact confirmed in the revised test:
 
 #### _detectChanges()_
 
-You must tell the `TestBed` to perform data binding by calling `fixture.detectChanges()`.
-Only then does the `<h1>` have the expected title.
-
+`fixture.detectChanges()`を呼び出すことによって、データバインディングを実行するように`TestBed`に指示する必要があります。 それでは、`<h1>`は予期されたタイトルを持っています。
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
   region="expect-h1-default">
 </code-example>
 
-Delayed change detection is intentional and useful.
-It gives the tester an opportunity to inspect and change the state of
-the component _before Angular initiates data binding and calls [lifecycle hooks](guide/lifecycle-hooks)_.
+遅延変化検出は意図的かつ有用である。
+テスターは、_Angularがデータバインディングを開始して[ライフサイクルフック](guide/lifecycle-hooks)を呼び出す前に_、
+コンポーネントの状態を検査して変更する機会をテスターに与えます。
 
-Here's another test that changes the component's `title` property _before_ calling `fixture.detectChanges()`.
-
+`fixture.detectChanges()`を呼び出す前にコンポーネントの`title`プロパティを変更する別のテストがあります。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -693,37 +687,35 @@ Here's another test that changes the component's `title` property _before_ calli
 
 {@a auto-detect-changes}
 
-#### Automatic change detection
+#### 自動的な変更検知
 
-The `BannerComponent` tests frequently call `detectChanges`.
-Some testers prefer that the Angular test environment run change detection automatically.
+`BannerComponent`は、頻繁に`detectChanges`を呼び出します。
+いくつかのテスターは、Angularテスト環境が自動的に変更検出を実行することを好みます。
 
-That's possible by configuring the `TestBed` with the `ComponentFixtureAutoDetect` provider.
-First import it from the testing utility library:
+これは`ComponentFixtureAutoDetect`プロバイダーで`TestBed`を設定することで可能です。
+まず、テストユーティリティーライブラリからインポートします:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="import-ComponentFixtureAutoDetect" title="app/banner/banner.component.detect-changes.spec.ts (import)" linenums="false"></code-example>
 
-Then add it to the `providers` array of the testing module configuration:
+次に、それをテストモジュール構成の`providers`配列に追加します:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect" title="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)" linenums="false"></code-example>
 
-Here are three tests that illustrate how automatic change detection works.
+自動変更検知がどのように機能するかを示す3つのテストがあります。
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect-tests" title="app/banner/banner.component.detect-changes.spec.ts (AutoDetect Tests)" linenums="false"></code-example>
 
-The first test shows the benefit of automatic change detection.
+最初のテストでは、自動変更検知の利点が示されています。
 
-The second and third test reveal an important limitation.
-The Angular testing environment does _not_ know that the test changed the component's `title`.
-The `ComponentFixtureAutoDetect` service responds to _asynchronous activities_ such as promise resolution, timers, and DOM events.
-But a direct, synchronous update of the component property is invisible.
-The test must call `fixture.detectChanges()` manually to trigger another cycle of change detection.
+2回目と3回目のテストで重要な制限が明らかになりました。
+Angularのテスト環境では、テストでコンポーネントのタイトルが変更されたことが_わかりません_。
+`ComponentFixtureAutoDetect`サービスは、約束の解決、タイマー、DOMイベントなどの非同期アクティビティに応答します。 ただし、コンポーネントプロパティの直接的な同期更新は不可視です。 このテストでは、`fixture.detectChanges()`を手動で呼び出して、変更検出の別のサイクルをトリガする必要があります。
 
 <div class="alert is-helpful">
 
-Rather than wonder when the test fixture will or won't perform change detection,
-the samples in this guide _always call_ `detectChanges()` _explicitly_.
-There is no harm in calling `detectChanges()` more often than is strictly necessary.
+テストフィクスチャが変更検出を実行するかどうかを知るのではなく、
+このガイドのサンプルは_常に_`detectChanges()`を_明示的_に呼び出します。
+`detectChanges()`を厳密に必要以上に頻繁に呼び出しても問題ありません。
 
 </div>
 
@@ -731,30 +723,30 @@ There is no harm in calling `detectChanges()` more often than is strictly necess
 
 {@a dispatch-event}
 
-#### Change an input value with _dispatchEvent()_
+#### _dispatchEvent()_を使用してinputの値を変更する
 
-To simulate user input, you can find the input element and set its `value` property.
+ユーザー入力をシミュレートするには、input要素を見つけて`value`プロパティを設定します。
 
-You will call `fixture.detectChanges()` to trigger Angular's change detection.
-But there is an essential, intermediate step.
+`fixture.detectChanges()`を呼び出してAngularの変更検知をトリガーします。
+しかし、本質的な中間段階があります。
 
-Angular doesn't know that you set the input element's `value` property.
-It won't read that property until you raise the element's `input` event by calling `dispatchEvent()`. 
-_Then_ you call `detectChanges()`.
+Angularは、input要素の`value`プロパティを設定していることを認識していません。
+`dispatchEvent()`を呼び出して要素の`input`イベントを発生させるまで、
+そのプロパティは読み取られません。_次に_、`detectChanges()`を呼び出します。
 
-The following example demonstrates the proper sequence.
+次の例は、正しいシーケンスを示しています。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe" title="app/hero/hero-detail.component.spec.ts (pipe test)"></code-example>
 
 <hr>
 
-### Component with external files
+### 外部ファイルを使用したコンポーネント
 
-The `BannerComponent` above is defined with an _inline template_ and _inline css_, specified in the `@Component.template` and `@Component.styles` properties respectively.
+上記の`BannerComponent`は、`@Component.template`プロパティと`@Component.styles`プロパティでそれぞれ指定された_インラインテンプレート_と_インラインCSS_で定義されています。
 
-Many components specify _external templates_ and _external css_ with the
-`@Component.templateUrl` and `@Component.styleUrls` properties respectively,
-as the following variant of `BannerComponent` does.
+多くのコンポーネントは、`BannerComponent`の以下のバリアントが行うように、
+`@Component.templateUrl`プロパティと`@Component.styleUrls`プロパティでそれぞれ_外部テンプレート_と
+_外部CSS_を指定します。
 
 <code-example 
   path="testing/src/app/banner/banner-external.component.ts"
@@ -762,14 +754,14 @@ as the following variant of `BannerComponent` does.
   title="app/banner/banner-external.component.ts (metadata)" linenums="false">
 </code-example>
 
-This syntax tells the Angular compiler to read the external files during component compilation.
+この構文は、コンポーネントコンパイル時に外部ファイルを読み込むようにAngularコンパイラに指示します。
 
-That's not a problem when you run the CLI `ng test` command because it
-_compiles the app before running the tests_.
+_テストを実行する前にアプリをコンパイルするので_、
+CLIの `ng test`コマンドを実行すると問題はありません。
 
-However, if you run the tests in a **non-CLI environment**,
-tests of this component may fail.
-For example, if you run the `BannerComponent` tests in a web coding environment such as [plunker](http://plnkr.co/), you'll see a message like this one:
+ただし、**非CLI環境**でテストを実行すると、このコンポーネントのテストが失敗することがあります。
+たとえば、[plunker](http://plnkr.co/)などのWebコーディング環境で`BannerComponent`テストを実行すると、
+次のようなメッセージが表示されます:
 
 <code-example language="sh" class="code-shell" hideCopy>
 Error: This test module uses the component BannerComponent 
@@ -777,48 +769,48 @@ which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
 </code-example>
 
-You get this test failure message when the runtime environment 
-compiles the source code _during the tests themselves_.
+_テスト中に_ランタイム環境がソースコードをコンパイルすると、
+このテストエラーメッセージが表示されます。
 
-To correct the problem, call `compileComponents()` as explained [below](#compile-components).
+問題を解決するには、[次](#compile-components)で説明するように`compileComponents()`を呼び出します。
 
 {@a component-with-dependency}
 
-### Component with a dependency
+### 依存関係のあるコンポーネント
 
-Components often have service dependencies.
+コンポーネントにはしばしばサービスの依存関係があります。
 
-The `WelcomeComponent` displays a welcome message to the logged in user.
-It knows who the user is based on a property of the injected `UserService`:
+`WelcomeComponent`は、ログインしたユーザーへのウェルカムメッセージを表示します。
+ユーザーが注入された`UserService`のプロパティに基づいているかどうかを知る:
 
 <code-example path="testing/src/app/welcome/welcome.component.ts" title="app/welcome/welcome.component.ts" linenums="false"></code-example>
 
-The `WelcomeComponent` has decision logic that interacts with the service, logic that makes this component worth testing.
-Here's the testing module configuration for the spec file, `app/welcome/welcome.component.spec.ts`:
+`WelcomeComponent`には、サービスとやり取りする決定ロジックがあり、このコンポーネントをテストに値するロジックにします。
+specファイルのテストモジュールの設定は、`app/welcome/welcome.component.spec.ts`です:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
-This time, in addition to declaring the _component-under-test_,
-the configuration adds a `UserService` provider to the `providers` list.
-But not the real `UserService`.
+今回は、_テスト中のコンポーネント_を宣言することに加えて、
+`providers`リストに`UserService`プロバイダを追加します。
+しかし、実際の`UserService`ではありません。
 
 {@a service-test-doubles}
 
-#### Provide service test doubles
+#### テストダブルのサービスを提供する
 
-A _component-under-test_ doesn't have to be injected with real services.
-In fact, it is usually better if they are test doubles (stubs, fakes, spies, or mocks).
-The purpose of the spec is to test the component, not the service,
-and real services can be trouble.
+_テスト中のコンポーネント_には、実際のサービスを注入する必要はありません。
+実際には、テストの倍数（スタブ、フェイク、スパイ、またはモック）であれば通常はより良いです。
+仕様の目的は、サービスではなくコンポーネントをテストすることであり、
+実際のサービスは問題になる可能性があります。
 
-Injecting the real `UserService` could be a nightmare.
-The real service might ask the user for login credentials and
-attempt to reach an authentication server.
-These behaviors can be hard to intercept.
-It is far easier and safer to create and register a test double in place of the real `UserService`.
+実際の`UserService`を注入することは悪夢になる可能性があります。
+実際のサービスは、ユーザーにログイン資格情報を要求し、
+認証サーバーに到達しようとします。
+これらの動作は傍受するのが難しい場合があります。
+実際の`UserService`の代わりにテストダブルを作成して登録する方がはるかに簡単で安全です。
 
-This particular test suite supplies a minimal mock of the `UserService` that satisfies the needs of the `WelcomeComponent`
-and its tests:
+この特定のテストスイートは、
+`WelcomeComponent`とそのテストのニーズを満たす`UserService`の最小のモックを提供します:
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -828,17 +820,17 @@ and its tests:
 
 {@a get-injected-service}
 
-#### Get injected services
+#### 注入したサービスを取得する
 
-The tests need access to the (stub) `UserService` injected into the `WelcomeComponent`.
+テストでは、`WelcomeComponent`に注入された（スタブ）`UserService`へのアクセスが必要です。
 
-Angular has a hierarchical injection system.
-There can be injectors at multiple levels, from the root injector created by the `TestBed`
-down through the component tree.
+Angularは階層的な注入システムを持っています。
+`TestBed`によって作成されたルートインジェクターからコンポーネントツリーまで、
+複数のレベルのインジェクタがあります。
 
-The safest way to get the injected service, the way that **_always works_**,
-is to **get it from the injector of the _component-under-test_**.
-The component injector is a property of the fixture's `DebugElement`.
+注入されたサービスを取得する最も安全な方法は、
+**常に動作する方法で**、**テスト中のコンポーネントのインジェクタから取得することです**。
+コンポーネントインジェクタは、フィクスチャの`DebugElement`のプロパティです。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts"
@@ -850,12 +842,12 @@ The component injector is a property of the fixture's `DebugElement`.
 
 #### _TestBed.get()_
 
-You _may_ also be able to get the service from the root injector via `TestBed.get()`.
-This is easier to remember and less verbose.
-But it only works when Angular injects the component with the service instance in the test's root injector.
+`TestBed.get()`経由でルートインジェクタからサービスを取得することも_できます_。
+これは覚えやすく、あまり冗長ではありません。
+しかし、Angularがコンポーネントのインスタンスをテストのルートインジェクタに注入する場合にのみ機能します。
 
-In this test suite, the _only_ provider of `UserService` is the root testing module,
-so it is safe to call `TestBed.get()` as follows:
+このテストスイートでは、`UserService`の_唯一_のプロバイダーはルートテストモジュールなので、
+`TestBed.get()`を次のように呼び出すことは安全です:
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -865,58 +857,58 @@ so it is safe to call `TestBed.get()` as follows:
 
 <div class="alert is-helpful">
 
-For a use case in which `TestBed.get()` does not work,
-see the [_Override component providers_](#component-override) section that
-explains when and why you must get the service from the component's injector instead.
+`TestBed.get()`が機能しないユースケースについては、
+コンポーネントのインジェクタからサービスを取得する必要がある時期と理由を説明する
+[_コンポーネントのプロバイダーを上書きする_](#component-override)セクションを参照してください。
 
 </div>
 
 {@a service-from-injector}
 
-#### Always get the service from an injector
+#### 常にインジェクターからサービスを取得する
 
-Do _not_ reference the `userServiceStub` object
-that's provided to the testing module in the body of your test.
-**It does not work!**
-The `userService` instance injected into the component is a completely _different_ object,
-a clone of the provided `userServiceStub`.
+テスト本体にあるテストモジュールに提供されている`userServiceStub`
+オブジェクトを参照_しないでください_。
+**それは動作しません！**
+コンポーネントに注入された`userService`インスタンスは、完全に_異なる_オブジェクトであり、
+提供された`userServiceStub`のクローンです。
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="stub-not-injected" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
 {@a welcome-spec-setup}
 
-#### Final setup and tests
+#### 最後のステップとテスト
 
-Here's the complete `beforeEach()`, using `TestBed.get()`:
+`TestBed.get()`を使用して`beforeEach()`を完了します:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
-And here are some tests:
+そしていくつかのテストがあります:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="tests" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
-The first is a sanity test; it confirms that the stubbed `UserService` is called and working.
+最初は健全性テストです。スタブされた`UserService`が呼び出され、動作していることを確認します。
 
 <div class="alert is-helpful">
 
-The second parameter to the Jasmine matcher (e.g., `'expected name'`) is an optional failure label.
-If the expectation fails, Jasmine displays appends this label to the expectation failure message.
-In a spec with multiple expectations, it can help clarify what went wrong and which expectation failed.
+Jasmineのマッチャーに対する第2のパラメータ（例えば、 `'expected name'`）は、オプションの失敗ラベルである。
+予想が失敗した場合、Jasmineディスプレイはこのラベルを期待失敗メッセージに付加します。
+複数の期待値を持つ仕様では、何が間違っていて、どの期待値が失敗したかを明確にするのに役立ちます。
 
 </div>
 
-The remaining tests confirm the logic of the component when the service returns different values.
-The second test validates the effect of changing the user name.
-The third test checks that the component displays the proper message when there is no logged-in user.
+残りのテストは、サービスが異なる値を返すときにコンポーネントのロジックを確認します。
+2番目のテストでは、ユーザー名の変更の影響を検証します。
+3番目のテストでは、ログインしているユーザーがいない場合、コンポーネントが適切なメッセージを表示していることを確認します。
 
 <hr>
 
 {@a component-with-async-service}
 
-### Component with async service
+### 非同期サービスを使用するコンポーネント
 
-In this sample, the `AboutComponent` template hosts a `TwainComponent`.
-The `TwainComponent` displays Mark Twain quotes.
+このサンプルでは、`AboutComponent`テンプレートは`TwainComponent`をホストします。
+`TwainComponent`はMark Twainの引用符を表示します。
 
 <code-example 
   path="testing/src/app/twain/twain.component.ts" 
@@ -924,11 +916,11 @@ The `TwainComponent` displays Mark Twain quotes.
   title="app/twain/twain.component.ts (template)" linenums="false">
 </code-example>
 
-Note that value of the component's `quote` property passes through an `AsyncPipe`.
-That means the property returns either a `Promise` or an `Observable`.
+コンポーネントの`quote`プロパティの値は、`AsyncPipe`を通過することに注意してください。
+つまり、プロパティは`Promise`または`Observable`のいずれかを返します。
 
-In this example, the `TwainComponent.getQuote()` method tells you that 
-the `quote` property returns an `Observable`.
+この例では、`TwainComponent.getQuote()`メソッドは、
+`quote`プロパティが`Observable`を返すことを示しています。
 
 <code-example 
   path="testing/src/app/twain/twain.component.ts" 
@@ -936,22 +928,22 @@ the `quote` property returns an `Observable`.
   title="app/twain/twain.component.ts (getQuote)" linenums="false">
 </code-example>
 
-The `TwainComponent` gets quotes from an injected `TwainService`.
-The component starts the returned `Observable` with a placeholder value (`'...'`),
-before the service can returns its first quote.
+`TwainComponent`は、注入された`TwainService`から引用符を取得します。
+コンポーネントは、サービスが最初の引用符を返す前に、
+返された`Observable`をプレースホルダー値（`'...'`）で開始します。
 
-The `catchError` intercepts service errors, prepares an error message,
-and returns the placeholder value on the success channel.
-It must wait a tick to set the `errorMessage` 
-in order to avoid updating that message twice in the same change detection cycle.
+`catchError`はサービスエラーを傍受し、エラーメッセージを作成し、成功チャネルのプレースホルダー値を返します。
+同じ変更検出サイクルでそのメッセージを2回更新するのを避けるために、
+`errorMessage`を設定するには、
+チェックを待つ必要があります。
 
-These are all features you'll want to test.
+これらはすべてテストしたい機能です。
 
-#### Testing with a spy
+#### スパイを使用したテスト
 
-When testing a component, only the service's public API should matter.
-In general, tests themselves should not make calls to remote servers.
-They should emulate such calls. The setup in this `app/twain/twain.component.spec.ts` shows one way to do that:
+コンポーネントをテストするときは、サービスのパブリックAPIだけが重要です。
+一般に、テスト自体はリモートサーバーを呼び出すべきではありません。
+彼らはそのような呼び出しをエミュレートする必要があります。この`app/twain/twain.component.spec.ts`の設定は、これを行うための1つの方法を示しています:
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -961,94 +953,142 @@ They should emulate such calls. The setup in this `app/twain/twain.component.spe
 
 {@a service-spy}
 
-Focus on the spy.
+スパイにフォーカスしてください。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="spy">
 </code-example>
 
-The spy is designed such that any call to `getQuote` receives an observable with a test quote.
-Unlike the real `getQuote()` method, this spy bypasses the server
-and returns a synchronous observable whose value is available immediately.
+スパイは、`getQuote`への任意の呼び出しがテスト見積もりで観測値を受け取れるように設計されています。
+実際の`getQuote()`メソッドとは異なり、このスパイはサーバをバイパスし、
+その値がすぐに利用できる同期観測値を返します。
 
-You can write many useful tests with this spy, even though its `Observable` is synchronous.
+`Observable`が同期していても、このスパイで多くの有用なテストを書くことができます。
 
 {@a sync-tests}
 
-#### Synchronous tests
+#### 同期的テスト
 
-A key advantage of a synchronous `Observable` is that 
-you can often turn asynchronous processes into synchronous tests.
+同期`Observable`の主な利点は、
+非同期プロセスを同期テストにすることができることです。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="sync-test">
 </code-example>
 
-Because the spy result returns synchronously, the `getQuote()` method updates
-the message on screen immediately _after_
-the first change detection cycle during which Angular calls `ngOnInit`.
+スパイの結果が同期的に返されるため、
+`getQuote()`メソッドは、
+Angularが`ngOnInit`を呼び出す最初の変更検出サイクルの_直後_に画面上のメッセージを更新します。
 
-You're not so lucky when testing the error path.
-Although the service spy will return an error synchronously,
-the component method calls `setTimeout()`.
-The test must wait at least one full turn of the JavaScript engine before the
-value becomes available. The test must become _asynchronous_.
+エラー・パスをテストするときにあなたはとてもラッキーです。
+サービススパイはエラーを同期的に返しますが、
+コンポーネントメソッドは`setTimeout()`を呼び出します。 
+のテストは、JavaScriptエンジンが少なくとも1回転以上待ってから値を取得できるようにする必要があります。
+テストは_非同期_にする必要があります。
 
 {@a fake-async}
-#### Async test with _fakeAsync()_
+#### _fakeAsync()_を使用した非同期テスト
 
-The following test confirms the expected behavior when the service returns an `ErrorObservable`.
+次のテストは、サービスが`ErrorObservable`を返すときの予想される動作を確認します。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="error-test">
 </code-example>
 
-Note that the `it()` function receives an argument of the following form.
+`it()`関数は次の形式の引数を受け取ることに注意してください。
 ```javascript
 fakeAsync(() => { /* test body */ })`
 ```
 
-The `fakeAsync` function enables a linear coding style by running the test body in a special _fakeAsync test zone_.
-The test body appears to be synchronous.
-There is no nested syntax (like a `Promise.then()`) to disrupt the flow of control.
+`fakeAsync`関数は、特定の_fakeAsyncテストゾーン_でテスト本体を実行することによって、
+線形コーディングスタイルを有効にします。
+テスト本体は同期しているように見えます。
+`Promise.then()`のようなネストされた構文はなく、制御の流れを混乱させることはありません。
 
 {@a tick}
 
-#### The _tick()_ function
+#### _tick()_関数
 
-You do have to call `tick()` to advance the (virtual) clock.
+（仮想）クロックを進めるには、`tick()`を呼び出さなければなりません。
 
-Calling `tick()` simulates the passage of time until all pending asynchronous activities finish.
-In this case, it waits for the error handler's `setTimeout()`;
+`tick()`を呼び出すと、保留中のすべての非同期アクティビティが終了するまでの時間がシミュレートされます。
+この場合、エラーハンドラの`setTimeout()`を待機します。
 
-The `tick` function is one of the Angular testing utilities that you import with `TestBed`.
-It's a companion to `fakeAsync` and you can only call it within a `fakeAsync` body.
+`tick`関数は、`TestBed`でインポートするAngularテストユーティリティの1つです。
+これは`fakeAsync`のコンパニオンであり、`fakeAsync`本体内でのみ呼び出すことができます。
 
-#### Async observables
+#### より多くのmacroTasksをサポートする
 
-You might be satisfied with the test coverage of these tests.
+デフォルトでは`fakeAsync`は次の`macroTask`をサポートします。
 
-But you might be troubled by the fact that the real service doesn't quite behave this way.
-The real service sends requests to a remote server.
-A server takes time to respond and the response certainly won't be available immediately
-as in the previous two tests.
+- setTimeout
+- setInterval
+- requestAnimationFrame
+- webkitRequestAnimationFrame
+- mozRequestAnimationFrame
 
-Your tests will reflect the real world more faithfully if you return an _asynchronous_ observable
-from the `getQuote()` spy like this.
+`HTMLCanvasElement.toBlob()`のような他の`macroTask`を実行したとき、`Unknown macroTask scheduled in fake async test`エラーがスローされます。
+
+<code-tabs>
+  <code-pane
+    path="testing/src/app/shared/canvas.component.spec.ts"
+    title="src/app/shared/canvas.component.spec.ts" linenums="false">
+  </code-pane>
+  <code-pane
+    path="testing/src/app/shared/canvas.component.ts"
+    title="src/app/shared/canvas.component.ts" linenums="false">
+  </code-pane>
+</code-tabs>
+
+このようなケースをサポートしたい場合は、`beforeEach`でサポートしたい`macroTask`を定義する必要があります。例えば:
+
+```javascript
+beforeEach(() => {
+  window['__zone_symbol__FakeAsyncTestMacroTask'] = [
+    {
+      source: 'HTMLCanvasElement.toBlob',
+      callbackArgs: [{ size: 200 }]
+    }
+  ];
+});
+
+it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
+    const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
+    let blob = null;
+    canvas.toBlob(function(b) {
+      blob = b;
+    });
+    tick();
+    expect(blob.size).toBe(200);
+  })
+);
+```
+
+#### 非同期のオブザーバブル
+
+これらのテストのテストカバレッジに満足しているかもしれません。
+
+しかし、あなたは本当のサービスがこのように振る舞わないという事実に悩まされるかもしれません。
+実際のサービスは、要求をリモートサーバーに送信します。
+サーバーは応答するのに時間がかかり、
+前の2つのテストのように応答がすぐに利用できなくなります。
+
+このような`getQuote()`スパイから非同期観測を返すと、
+あなたのテストは実世界をより忠実に反映します。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="async-setup">
 </code-example>
 
-#### Async observable helpers
+#### 非同期オブザーバブルヘルパー
 
-The async observable was produced by an `asyncData` helper
-The `asyncData` helper is a utility function that you'll have to write yourself.
-Or you can copy this one from the sample code.
+非同期のオブザーバブルは、`asyncData`ヘルパーによって生成されました。
+`asyncData`ヘルパーは、自分で作成する必要があるユーティリティ関数です。
+または、サンプルコードからこれをコピーすることもできます。
 
 <code-example 
   path="testing/src/testing/async-observable-helpers.ts" 
@@ -1056,127 +1096,118 @@ Or you can copy this one from the sample code.
   title="testing/async-observable-helpers.ts">
 </code-example>
 
-This helper's observable emits the `data` value in the next turn of the JavaScript engine. 
+このヘルパーの観測結果は、JavaScriptエンジンの次のターンで`data`値を出力します。
 
-The [RxJS `defer()` operator](http://reactivex.io/documentation/operators/defer.html) returns an observable.
-It takes a factory function that returns either a promise or an observable.
-When something subscribes to _defer_'s observable,
-it adds the subscriber to a new observable created with that factory. 
+[RxJSの`defer()`演算子](http://reactivex.io/documentation/operators/defer.html)
+は、観測値を返します。
+Promiseかオブザーバブルのどちらかを返すファクトリ関数を取ります。
+あるものが_defer_のobservableを購読すると、
+そのファクトリで作成された新しいobservableにサブスクライバが追加されます。
 
-The `defer()` operator transforms the `Promise.resolve()` into a new observable that, 
-like `HttpClient`, emits once and completes.
-Subscribers are unsubscribed after they receive the data value.
+`defer()`演算子は、`HttpClient`のように`Promise.resolve()`を新しい観測値に変換して、
+一度放出して完了します。
+購読者は、データ値を受け取った後、購読を解除されます。
 
-There's a similar helper for producing an async error.
+非同期エラーを生成するための同様のヘルパーがあります。
 
 <code-example 
   path="testing/src/testing/async-observable-helpers.ts" 
   region="async-error">
 </code-example>
 
-#### More async tests
+#### さらに非同期テスト
 
-Now that the `getQuote()` spy is returning async observables,
-most of your tests will have to be async as well.
+`getQuote()`スパイが非同期オブザーバブルを返すようになったので、
+ほとんどのテストは非同期でなければなりません。
 
-Here's a `fakeAsync()` test that demonstrates the data flow you'd expect 
-in the real world.
+現実世界で期待されるデータフローを示す
+`fakeAsync()`テストがあります。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="fake-async-test">
 </code-example>
 
-Notice that the quote element displays the placeholder value (`'...'`) after `ngOnInit()`.
-The first quote hasn't arrived yet.
+quote要素は、`ngOnInit()`の後にプレースホルダ値（`'...'`）を表示することに注意してください。
+最初の見積もりはまだ届いていません。
 
-To flush the first quote from the observable, you call `tick()`.
-Then call `detectChanges()` to tell Angular to update the screen.
+最初の見積もりをobservableからフラッシュするには、`tick()`を呼び出します。
+次に、`detectChanges()`を呼び出して、Angularに画面を更新するように指示します。
 
-Then you can assert that the quote element displays the expected text.
+次に、quote要素が予想されるテキストを表示することをアサートすることができます。
 
 {@a async}
 
-#### Async test with _async()_
+#### _async()_を使用した非同期テスト
 
-The `fakeAsync()` utility function has a few limitations.
-In particular, it won't work if the test body makes an `XHR` call.
+`fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
+特に、テスト本体が`XHR`呼び出しを行う場合は動作しません。
 
-`XHR` calls within a test are rare so you can generally stick with `fakeAsync()`.
-But if you ever do need to call `XHR`, you'll want to know about `async()`.
+テスト中の`XHR`呼び出しはまれであるため、一般的に`fakeAsync()`を使うことができます。
+しかし、`XHR`を呼び出す必要がある場合は、`async()`について知りたいでしょう。
 
 <div class="alert is-helpful">
 
-The `TestBed.compileComponents()` method (see [below](#compile-components)) calls `XHR`
-to read external template and css files during "just-in-time" compilation.
-Write tests that call `compileComponents()` with the `async()` utility.
+`TestBed.compileComponents()`メソッド（[下記参照](#compile-components)）は、
+"ジャストインタイム"コンパイル時に外部テンプレートとcssファイルを読み込むために`XHR`を呼び出します。
+`async()`ユーティリティを使用して`compileComponents()`を呼び出すテストを作成します。
 
 </div>
 
-Here's the previous `fakeAsync()` test, re-written with the `async()` utility.
+以前の`fakeAsync()`テストは、`async()`ユーティリティで再記述したものです。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="async-test">
 </code-example>
 
-The `async()` utility hides some asynchronous boilerplate by arranging for the tester's code 
-to run in a special _async test zone_.
-You don't have to pass Jasmine's `done()` into the test and call `done()` 
-in promise or observable callbacks.
+`async()`ユーティリティは、
+テスターのコードを特別な非同期テストゾーンで実行するように設定することによって、非同期ボイラープレートを非表示にします。
+Jasmineの`done()`をテストに渡す必要はなく、
+約束されたコールバックや観測可能なコールバックで`done()`を呼び出す必要はありません。
 
-But the test's asynchronous nature is revealed by the call to `fixture.whenStable()`,
-which breaks the linear flow of control.
+しかし、_テストの非同期性_は`fixture.whenStable()`の呼び出しによって明らかになります。
+これは制御の線形フローを壊します。
 
 {@a when-stable}
 
 #### _whenStable_
 
-The test must wait for the `getQuote()` observable to emit the next quote.
-Instead of calling `tick()`, it calls `fixture.whenStable()`.
+テストは、`getQuote()`observableが次のクォートを発行するのを待つ必要があります。
+`tick()`を呼び出す代わりに、`fixture.whenStable()`を呼び出します。
 
-The `fixture.whenStable()` returns a promise that resolves when the JavaScript engine's
-task queue becomes empty. 
-In this example, the task queue becomes empty when the observable emits the first quote.
+`fixture.whenStable()`は、JavaScriptエンジンのタスクキューが空になったときに解決する約束を返します。
+この例では、オブザーバブルが最初のクォートを発行すると、
+タスクキューは空になります。
 
-The test resumes within the promise callback, which calls `detectChanges()` to 
-update the quote element with the expected text.
+テストは、promiseコールバック内で再開し、
+`detectChanges()`を呼び出してquote要素を期待されるテキストで更新します。
 
 {@a jasmine-done}
 
 #### Jasmine _done()_
 
-While the `async` and `fakeAsync` functions greatly
-simplify Angular asynchronous testing,
-you can still fall back to the traditional technique
-and pass `it` a function that takes a
-[`done` callback](http://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support).
+`async`関数と`fakeAsync`関数はAngular非同期テストを大幅に簡素化しますが、
+従来の技術に戻って、[`done`コールバック](http://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support)関数を渡すことができます。
 
-Now you are responsible for chaining promises, handling errors, and calling `done()` at the appropriate moments.
+これで、promiseを連鎖させ、エラーを処理し、適切な時に`done()`を呼び出す責任があります。
 
-Writing test functions with `done()`, is more cumbersome than `async`and `fakeAsync`.
-But it is occasionally necessary.
-For example, you can't call `async` or `fakeAsync` when testing
-code that involves the `intervalTimer()` or the RxJS `delay()` operator.
+`done()`でテスト関数を書くことは、asyncとfakeAsyncよりも面倒です。しかし時折必要です。たとえば、`intervalTimer()`またはRxJS `delay()`演算子を含むコードをテストするときは、`async`または`fakeAsync`を呼び出すことはできません。
 
-
-Here are two mover versions of the previous test, written with `done()`.
-The first one subscribes to the `Observable` exposed to the template by the component's `quote` property.
+`done()`で書かれた以前のテストの2つのバージョンがあります。最初のコンポーネントは、コンポーネントの`quote`プロパティによってテンプレートに公開された`Observable`にサブスクライブします。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="quote-done-test" linenums="false">
 </code-example>
 
-The RxJS `last()` operator emits the observable's last value before completing, which will be the test quote.
-The `subscribe` callback calls `detectChanges()` to 
-update the quote element with the test quote, in the same manner as the earlier tests.
+RxJS `last()`演算子は、完了する前に観測値の最後の値を出力します。
+これはテスト見積もりになります。
+`subscribe`コールバックは、以前のテストと同じ方法で、クォート要素をテスト引用符で更新するために`detectChanges()`を呼び出します。
 
-In some tests, you're more interested in how an injected service method was called and what values it returned,
-than what appears on screen.
+いくつかのテストでは、注入されたサービスメソッドがどのように呼び出され、返された値が画面に表示されるかに、より関心があります。
 
-A service spy, such as the `qetQuote()` spy of the fake `TwainService`,
-can give you that information and make assertions about the state of the view.
+偽の`TwainService`の`qetQuote()`スパイなどのサービススパイは、その情報を提供し、ビューの状態についてアサーションを行うことができます。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -1188,27 +1219,22 @@ can give you that information and make assertions about the state of the view.
 {@a marble-testing}
 ### Component marble tests
 
-The previous `TwainComponent` tests simulated an asynchronous observable response
-from the `TwainService` with the `asyncData` and `asyncError` utilities.
+以前の`TwainComponent`テストでは、`asyncData`と`asyncError`ユーティリティを使用して、`TwainService`からの非同期観測可能な応答をシミュレートしました。
 
-These are short, simple functions that you can write yourself.
-Unfortunately, they're too simple for many common scenarios.
-An observable often emits multiple times, perhaps after a significant delay.
-A component may coordinate multiple observables
-with overlapping sequences of values and errors.
+これらはあなた自身で書くことができる簡単で簡単な機能です。
+残念ながら、多くの一般的なシナリオでは単純すぎます。
+可観測性はしばしば重大な遅延の後に、複数回出現する。
+コンポーネントは、
+重複している値とエラーのシーケンスで複数のオブザーバブルを調整できます。
 
-**RxJS marble testing** is a great way to test observable scenarios,
-both simple and complex.
-You've likely seen the [marble diagrams](http://rxmarbles.com/)
-that illustrate how observables work.
-Marble testing uses a similar marble language to
-specify the observable streams and expectations in your tests.
+**RxJSマーブルテスティング**は、シンプルかつ複雑な観測可能なシナリオをテストするうえで最適な方法です。
+あなたは、観測可能物がどのように働くかを示す[マーブルダイアグラム](http://rxmarbles.com/)を見たことがあります。
+マーブルテストでは、同様のマーブル言語を使用して、テストで観測可能なストリームと期待値を指定します。
 
-The following examples revisit two of the `TwainComponent` tests
-with marble testing.
+次の例では、マーブルテストを使用した`TwainComponen`tテストの2つを再訪します。
 
-Start by installing the `jasmine-marbles` npm package.
-Then import the symbols you need.
+まず、`jasmine-marbles` npmパッケージをインストールします。
+次に、必要なシンボルをインポートします。
 
 <code-example 
   path="testing/src/app/twain/twain.component.marbles.spec.ts" 

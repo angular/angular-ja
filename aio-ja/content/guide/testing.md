@@ -2193,7 +2193,7 @@ CLIによって生成されたコンポーネントテストファイルは、
 
 ### Setup with module imports
 
-Earlier component tests configured the testing module with a few `declarations` like this:
+これまでのコンポーネントテストでは、このようにいくつかの`declarations`でテストモジュールを構成しました:
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
@@ -2201,23 +2201,24 @@ Earlier component tests configured the testing module with a few `declarations` 
   title="app/dashboard/dashboard-hero.component.spec.ts (configure TestBed)">
 </code-example>
 
-The `DashboardComponent` is simple. It needs no help.
-But more complex components often depend on other components, directives, pipes, and providers
-and these must be added to the testing module too.
+`DashboardComponent`はシンプルです。
+それは助けを必要としない。
+しかし、より複雑なコンポーネントは、多くの場合、他のコンポーネント、ディレクティブ、パイプ、プロバイダに依存し、これらもテストモジュールに追加する必要があります。
 
-Fortunately, the `TestBed.configureTestingModule` parameter parallels
-the metadata passed to the `@NgModule` decorator
-which means you can also specify `providers` and `imports`.
+幸いにも、`TestBed.configureTestingModule`パラメータは、
+`@NgModule`デコレータに渡されるメタデータとパラレルになります。
+つまり、`providers`と`imports`を指定することもできます。
 
-The `HeroDetailComponent` requires a lot of help despite its small size and simple construction.
-In addition to the support it receives from the default testing module `CommonModule`, it needs:
+`HeroDetailComponent`は、サイズが小さく簡単な構成にもかかわらず、多くの助けが必要です。
+デフォルトテストモジュール`CommonModule`から受け取るサポートに加えて:
 
-* `NgModel` and friends in the `FormsModule` to enable two-way data binding.
-* The `TitleCasePipe` from the `shared` folder.
-* Router services (which these tests are stubbing).
-* Hero data access services (also stubbed).
+- `FormsModule`内の`NgModel`とその友達が双方向データバインディングを有効にします。
+- `TitleCasePipe`は、`shared`フォルダから取得します。
+- ルータサービス（これらのテストではスタブしています）。
+- ヒーローデータアクセスサービス（スタブされている）
 
-One approach is to configure the testing module from the individual pieces as in this example:
+1つのアプローチは、
+この例のように個々の部分からテストモジュールを構成することです:
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -2227,21 +2228,21 @@ One approach is to configure the testing module from the individual pieces as in
 
 <div class="alert is-helpful">
 
-Notice that the `beforeEach()` is asynchronous and calls `TestBed.compileComponents`
-because the `HeroDetailComponent` has an external template and css file.
+`beforeEach()`は非同期で、`TestBed.compileComponents`を呼び出します。
+これは、`HeroDetailComponent`に外部テンプレートとCSSファイルがあるためです。
 
-As explained in [_Calling compileComponents()_](#compile-components) above,
-these tests could be run in a non-CLI environment
-where Angular would have to compile them in the browser.
+上記の[_`compileComponents()`の呼び出し_](#compile-components)で説明したように、
+これらのテストは、
+Angularがブラウザでコンパイルしなければならない非CLI環境で実行できます。
 
 </div>
 
-#### Import a shared module
+#### 共有モジュールをインポートする
 
-Because many app components need the `FormsModule` and the `TitleCasePipe`, the developer created
-a `SharedModule` to combine these and other frequently requested parts.
+多くのアプリコンポーネントは`FormsModule`と`TitleCasePipe`を必要とするため、
+開発者は頻繁に要求されるこれらのコンポーネントと他の頻繁に要求されるコンポーネントを組み合わせるために`SharedModule`を作成しました。
 
-The test configuration can use the `SharedModule` too as seen in this alternative setup:
+テスト構成では、この代替セットアップで見られる`SharedModule`も使用できます:
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -2249,29 +2250,31 @@ The test configuration can use the `SharedModule` too as seen in this alternativ
   title="app/hero/hero-detail.component.spec.ts (SharedModule setup)" linenums="false">
 </code-example>
 
-It's a bit tighter and smaller, with fewer import statements (not shown).
+インポートステートメントの数が少なくて済むようになっています（図示せず）。
 
 {@a feature-module-import}
 
-#### Import a feature module
+#### フィーチャーモジュールをインポートする
 
-The `HeroDetailComponent` is part of the `HeroModule` [Feature Module](guide/feature-modules) that aggregates more of the interdependent pieces
-including the `SharedModule`.
-Try a test configuration that imports the `HeroModule` like this one:
+`HeroDetailComponent`は`HeroModule`[フィーチャモジュール](guide/feature-modules)の一部で、
+`SharedModule`を含む相互依存関係の多くを集約します。
+このような`HeroModule`をインポートするテスト構成を試してみてください:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-hero-module" title="app/hero/hero-detail.component.spec.ts (HeroModule setup)" linenums="false"></code-example>
 
-That's _really_ crisp. Only the _test doubles_ in the `providers` remain. Even the `HeroDetailComponent` declaration is gone.
+それは_本当_に鮮明です。`providers`のテストダブルにとどまります。
+`HeroDetailComponent`宣言さえもなくなりました。
 
-In fact, if you try to declare it, Angular will throw an error because
-`HeroDetailComponent` is declared in both the `HeroModule` and the `DynamicTestModule`
-created by the `TestBed`.
+実際に、宣言しようとすると、`HeroDetailComponent`が`TestBed`によって作成された`HeroModule`と`DynamicTestModule`の両方で宣言されるため、Angularはエラーをスローします。
+
+フィーチャモジュールがそうであるように、コンポーネントのフィーチャモジュールをインポートすることは、モジュール内に相互依存関係が多く、モジュールが小さい場合にテストを構成する最も簡単な方法です。
+
 
 <div class="alert is-helpful">
 
-Importing the component's feature module can be the easiest way to configure tests
-when there are many mutual dependencies within the module and 
-the module is small, as feature modules tend to be.
+フィーチャモジュールがそうであるように、
+コンポーネントのフィーチャモジュールをインポートすることは、モジュール内に相互依存関係が多く、
+モジュールが小さい場合にテストを構成する最も簡単な方法です。
 
 </div>
 
@@ -2279,57 +2282,58 @@ the module is small, as feature modules tend to be.
 
 {@a component-override}
 
-### Override component providers
+### コンポーネントのプロバイダーを上書きする
 
-The `HeroDetailComponent` provides its own `HeroDetailService`.
+`HeroDetailComponent`は自身の`HeroDetailService`を提供します。
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="prototype" title="app/hero/hero-detail.component.ts (prototype)" linenums="false"></code-example>
 
-It's not possible to stub the component's `HeroDetailService` in the `providers` of the `TestBed.configureTestingModule`.
-Those are providers for the _testing module_, not the component. They prepare the dependency injector at the _fixture level_.
+`TestBed.configureTestingModule`の`providers`でコンポーネントの`HeroDetailService`をスタブすることはできません。
+それらはコンポーネントではなく、_テストモジュール_のプロバイダです。
+それらは、_フィクスチャレベル_で依存インジェクタを準備します。
 
-Angular creates the component with its _own_ injector, which is a _child_ of the fixture injector.
-It registers the component's providers (the `HeroDetailService` in this case) with the child injector.
+Angularは、フィクスチャインジェクタの_子_である_独自_のインジェクタを使用してコンポーネントを作成します。
+コンポーネントのプロバイダ（この場合は`HeroDetailService`）を子インジェクタに登録します。
 
-A test cannot get to child injector services from the fixture injector.
-And `TestBed.configureTestingModule` can't configure them either.
+テストでは、フィクスチャのインジェクタからのインジェクタサービスを受けることができません。
+また、`TestBed.configureTestingModule`はそれらを構成することもできません。
 
-Angular has been creating new instances of the real `HeroDetailService` all along!
+Angularは本物の`HeroDetailService`の新しいインスタンスを作成しています！
 
 <div class="alert is-helpful">
 
-These tests could fail or timeout if the `HeroDetailService` made its own XHR calls to a remote server.
-There might not be a remote server to call.
+`HeroDetailService`がリモートサーバーへの独自のXHR呼び出しを行った場合、
+これらのテストは失敗するか、タイムアウトになる可能性があります。呼び出すリモートサーバーがない可能性があります。
 
-Fortunately, the `HeroDetailService` delegates responsibility for remote data access to an injected `HeroService`.
+幸いにも、`HeroDetailService`は、注入された`HeroService`へのリモートデータアクセスの責任を委任します。
 
 <code-example path="testing/src/app/hero/hero-detail.service.ts" region="prototype" title="app/hero/hero-detail.service.ts (prototype)" linenums="false"></code-example>
 
-The [previous test configuration](#feature-module-import) replaces the real `HeroService` with a `TestHeroService`
-that intercepts server requests and fakes their responses.
+[以前のテスト構成](#feature-module-import)では、実際の`HeroService`が、
+サーバー要求をインターセプトして応答を偽装する`TestHeroService`に置き換えられました。
 
 </div>
 
-What if you aren't so lucky. What if faking the `HeroService` is hard?
-What if `HeroDetailService` makes its own server requests?
+もしあなたがとても幸運でないなら、どうでしょうか？
+`HeroService`をモックするのが難しい場合はどうすればいいですか？`HeroDetailService`が独自のサーバーリクエストを作成するとどうなりますか？
 
-The `TestBed.overrideComponent` method can replace the component's `providers` with easy-to-manage _test doubles_
-as seen in the following setup variation:
+`TestBed.overrideComponent`メソッドは、コンポーネントの`providers`を、
+以下のセットアップのバリエーションに示すように、管理しやすい_テストダブル_に置き換えることができます:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-override" title="app/hero/hero-detail.component.spec.ts (Override setup)" linenums="false"></code-example>
 
-Notice that `TestBed.configureTestingModule` no longer provides a (fake) `HeroService` because it's [not needed](#spy-stub).
+`TestBed.configureTestingModule`は[不要](#spy-stub)であるため、(偽の）`HeroService`を提供しなくなりました。
 
 {@a override-component-method}
 
-#### The _overrideComponent_ method
+#### _overrideComponent_ メソッド
 
-Focus on the `overrideComponent` method.
+`overrideComponent` メソッドにフォーカスしてください。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-component-method" title="app/hero/hero-detail.component.spec.ts (overrideComponent)" linenums="false"></code-example>
 
-It takes two arguments: the component type to override (`HeroDetailComponent`) and an override metadata object.
-The [override metadata object](#metadata-override-object) is a generic defined as follows:
+オーバーライドするコンポーネントタイプ（`HeroDetailComponent`）とオーバーライドメタデータオブジェクトの2つの引数をとります。
+[オーバーライドメタデータオブジェクト](#metadata-override-object)は、以下のように定義されるジェネリックオブジェクトです:
 
 <code-example format="." language="javascript">
   type MetadataOverride<T> = {
@@ -2339,10 +2343,10 @@ The [override metadata object](#metadata-override-object) is a generic defined a
   };
 </code-example>
 
-A metadata override object can either add-and-remove elements in metadata properties or completely reset those properties.
-This example resets the component's `providers` metadata.
+メタデータオーバーライドオブジェクトは、メタデータプロパティに要素を追加または削除するか、またはこれらのプロパティを完全にリセットすることができます。
+この例では、コンポーネントの`providers`のメタデータをリセットします。
 
-The type parameter, `T`,  is the kind of metadata you'd pass to the `@Component` decorator:
+型パラメータ`T`は`@Component`デコレータに渡すメタデータの種類です
 
 <code-example format="." language="javascript">
   selector?: string;
@@ -2354,27 +2358,27 @@ The type parameter, `T`,  is the kind of metadata you'd pass to the `@Component`
 
 {@a spy-stub}
 
-#### Provide a _spy stub_ (_HeroDetailServiceSpy_)
+#### _スパイスタブ_を提供する (_HeroDetailServiceSpy_)
 
-This example completely replaces the component's `providers` array with a new array containing a `HeroDetailServiceSpy`.
+この例では、コンポーネントの`providers`配列を、`HeroDetailServiceSpy`を含む新しい配列で完全に置き換えています。
 
-The `HeroDetailServiceSpy` is a stubbed version of the real `HeroDetailService`
-that fakes all necessary features of that service.
-It neither injects nor delegates to the lower level `HeroService`
-so there's no need to provide a test double for that.
+`HeroDetailServiceSpy`は、そのサービスのすべての必要な機能を偽装する、
+実際の`HeroDetailService`のスタブ付きバージョンです。
+下位レベルの`HeroService`にインジェクションもデリゲートもしないので、
+そのためのテストダブルを用意する必要はありません。
 
-The related `HeroDetailComponent` tests will assert that methods of the `HeroDetailService`
-were called by spying on the service methods.
-Accordingly, the stub implements its methods as spies:
+関連する`HeroDetailComponent`テストは、
+`HeroDetailService`のメソッドがサービスメソッドをスパイすることによって呼び出されたことを宣言します。
+したがって、スタブはそのメソッドをスパイとして実装します:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="hds-spy" title="app/hero/hero-detail.component.spec.ts (HeroDetailServiceSpy)" linenums="false"></code-example>
 
 {@a override-tests}
 
-#### The override tests
+#### テストを上書きする
 
-Now the tests can control the component's hero directly by manipulating the spy-stub's `testHero`
-and confirm that service methods were called.
+テストでは、スパイスタブの`testHero`を操作してコンポーネントのヒーローを直接制御し、
+サービスメソッドが呼び出されたことを確認できます。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-tests" title="app/hero/hero-detail.component.spec.ts (override tests)" linenums="false"></code-example>
 
@@ -2382,11 +2386,11 @@ and confirm that service methods were called.
 
 #### More overrides
 
-The `TestBed.overrideComponent` method can be called multiple times for the same or different components.
-The `TestBed` offers similar `overrideDirective`, `overrideModule`, and `overridePipe` methods
-for digging into and replacing parts of these other classes.
+`TestBed.overrideComponent`メソッドは、同じコンポーネントまたは異なるコンポーネントに対して複数回呼び出すことができます。
+`TestBed`は、他のクラスの部分を掘り下げて置き換えるための`overrideDirective`、`overrideModule`、
+および`overridePipe`の同様のメソッドを提供します。
 
-Explore the options and combinations on your own.
+あなた自身のオプションと組み合わせを探そう。
 
 <hr>
 

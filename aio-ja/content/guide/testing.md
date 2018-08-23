@@ -2544,8 +2544,8 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      Runs the body of a test (`it`) or setup (`beforeEach`) function within a special _async test zone_.
-      See [discussion above](#async).
+    特別な_非同期テストゾーン_内でテスト（`it`）またはセットアップ（`beforeEach`）関数の本体を実行します。
+    [上記の説明](#async)を参照してください。
 
     </td>
   </tr>
@@ -2557,8 +2557,8 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      Runs the body of a test (`it`) within a special _fakeAsync test zone_, enabling
-      a linear control flow coding style. See [discussion above](#fake-async).
+      特殊な_fakeAsyncテストゾーン_内でテストの本体(`it`)を実行し、リニアコントロールフローのコーディングスタイルを有効にします。
+      [上記の説明](#fake-async)を参照してください。
 
     </td>
   </tr>
@@ -2570,20 +2570,20 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      Simulates the passage of time and the completion of pending asynchronous activities
-      by flushing both _timer_ and _micro-task_ queues within the _fakeAsync test zone_.
+      _fakeAsyncテストゾーン_内の_タイマー_とマ_イクロタスク_キューの両方をフラッシュすることにより、
+      時間の経過と非同期処理の完了をシミュレートします。
 
       <div class="alert is-helpful">
 
-      The curious, dedicated reader might enjoy this lengthy blog post,
-      ["_Tasks, microtasks, queues and schedules_"](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/).
+      好奇心を持った読者は、この長いブログ記事[_「タスク、マイクロタスク、キュー、ス
+      ケジュール」_](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)を楽しむかもしれません。
 
       </div>
 
-      Accepts an optional argument that moves the virtual clock forward
-      by the specified number of milliseconds,
-      clearing asynchronous activities scheduled within that timeframe.
-      See [discussion above](#tick).
+      仮想クロックを指定されたミリ秒数だけ前進させ、
+      その時間枠内でスケジュールされた非同期アクティビティをクリアするオプションの引数を受け入れます。
+      [上記の説明](#tick)
+      を参照してください。
 
     </td>
   </tr>
@@ -2595,9 +2595,9 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      Injects one or more services from the current `TestBed` injector into a test function.
-      It cannot inject a service provided by the component itself.
-      See discussion of the [debugElement.injector](#get-injected-services).
+      現在の`TestBed`インジェクタから1つ以上のサービスをテスト機能に注入します。
+      コンポーネント自体によって提供されるサービスを注入することはできません。
+      [debugElement.injector](#get-injected-services)の説明を参照してください。
 
     </td>
   </tr>
@@ -2609,12 +2609,12 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      When a `fakeAsync` test ends with pending timer event _tasks_ (queued `setTimeOut` and `setInterval` callbacks),
-      the test fails with a clear error message.
+      `fakeAsync`テストが保留中のタイマーイベント_タスク_（キューされた`setTimeOut`および`setInterval`コールバック）で終了すると、
+      テストは失敗し、クリアエラーメッセージが表示されます。
 
-      In general, a test should end with no queued tasks.
-      When pending timer tasks are expected, call `discardPeriodicTasks` to flush the _task_ queue
-      and avoid the error.
+一般に、テストはキューに入れられたタスクなしで終了する必要があります。
+保留中のタイマータスクが必要な場合は、
+`discardPeriodicTasks`を呼び出して_タスク_キューをフラッシュし、エラーを回避します。
 
     </td>
   </tr>
@@ -2626,12 +2626,12 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      When a `fakeAsync` test ends with pending _micro-tasks_ such as unresolved promises,
-      the test fails with a clear error message.
+      `fakeAsync`テストが未解決の約束などの保留中の_マイクロタスク_で終了すると、テストは失敗し、
+      明確なエラーメッセージが表示されます。
 
-      In general, a test should wait for micro-tasks to finish.
-      When pending microtasks are expected, call `flushMicrotasks` to flush the  _micro-task_ queue
-      and avoid the error.
+一般に、テストはマイクロタスクが完了するのを待つべきです。
+保留中のマイクロタスクが予想される場合は、`flushMicrotasks`を呼び出して、
+_マイクロタスク_キューをフラッシュし、エラーを回避します。
 
     </td>
   </tr>
@@ -2643,7 +2643,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      A provider token for a service that turns on [automatic change detection](#automatic-change-detection).
+      [自動変更検知](#automatic-change-detection)を有効にするサービスのプロバイダートークン。
 
     </td>
   </tr>
@@ -2655,10 +2655,9 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      Gets the current instance of the `TestBed`.
-      Usually unnecessary because the static class methods of the `TestBed` class are typically sufficient.
-      The `TestBed` instance exposes a few rarely used members that are not available as
-      static methods.
+      `TestBed`の現在のインスタンスを取得します。
+      通常、`TestBed`クラスの静的クラスメソッドで十分です。
+      `TestBed`インスタンスは、ほとんど使用されない静的メソッドとして使用できるメンバーを公開します。
 
     </td>
   </tr>
@@ -2668,15 +2667,15 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
 {@a testbed-class-summary}
 
-#### _TestBed_ class summary
+#### _TestBed_ クラスサマリー
 
-The `TestBed` class is one of the principal Angular testing utilities.
-Its API is quite large and can be overwhelming until you've explored it,
-a little at a time. Read the early part of this guide first
-to get the basics before trying to absorb the full API.
+`TestBed`クラスは、主要なAngularテストユーティリティの1つです。
+そのAPIは非常に大きく、
+あなたがそれを調べるまで圧倒的である可能性があります。
+完全なAPIを吸収しようとする前に、まずこのガイドの最初の部分を読んで基礎を理解してください。
 
-The module definition passed to `configureTestingModule`
-is a subset of the `@NgModule` metadata properties.
+`configureTestingModule`に渡されるモジュール定義は、
+`@NgModule`メタデータプロパティのサブセットです。
 
 <code-example format="." language="javascript">
   type TestModuleMetadata = {
@@ -2689,9 +2688,9 @@ is a subset of the `@NgModule` metadata properties.
 
 {@a metadata-override-object}
 
-Each override method takes a `MetadataOverride<T>` where `T` is the kind of metadata
-appropriate to the method, that is, the parameter of an `@NgModule`,
-`@Component`, `@Directive`, or `@Pipe`.
+各オーバーライドメソッドは`MetadataOverride<T>`を取ります。
+ここで、`T`はメソッドに適したメタデータの種類、
+つまり`@NgModule`、`@Component`、`@Directive`、または`@Pipe`のパラメータです。
 
 <code-example format="." language="javascript">
   type MetadataOverride<T> = {
@@ -2704,22 +2703,22 @@ appropriate to the method, that is, the parameter of an `@NgModule`,
 {@a testbed-methods}
 {@a testbed-api-summary}
 
-The `TestBed` API consists of static class methods that either update or reference a _global_ instance of the`TestBed`.
+`TestBed` APIは、`TestBed`の_グローバル_インスタンスを更新または参照する静的クラスメソッドで構成されています。
 
-Internally, all static methods cover methods of the current runtime `TestBed` instance,
-which is also returned by the `getTestBed()` function.
+内部的には、すべての静的メソッドは、現在のランタイム`TestBed`インスタンスのメソッドをカバーします。
+このメソッドは、`getTestBed()`関数によって返されます。
 
-Call `TestBed` methods _within_ a `beforeEach()` to ensure a fresh start before each individual test.
+`beforeEach()`_内_の`TestBed`メソッドを呼び出して、個々のテストの前に新しい開始を確実にします。
 
-Here are the most important static methods, in order of likely utility.
+ユーティリティの順に、最も重要な静的メソッドを次に示します。
 
 <table>
   <tr>
     <th>
-      Methods
+      メソッド
     </th>
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -2730,13 +2729,14 @@ Here are the most important static methods, in order of likely utility.
 
     <td>
 
-      The testing shims (`karma-test-shim`, `browser-test-shim`)
-      establish the [initial test environment](guide/testing) and a default testing module.
-      The default testing module is configured with basic declaratives and some Angular service substitutes that every tester needs.
+      テストシム（`karma-test-shim`、`browser-test-shim`）は、
+      [初期テスト環境](guide/testing)とデフォルトテストモジュールを確立します。
+      デフォルトのテストモジュールは、
+      すべてのテスターが必要とする基本的な宣言といくつかのAngularサービスの代替で構成されています。
 
-      Call `configureTestingModule` to refine the testing module configuration for a particular set of tests
-      by adding and removing imports, declarations (of components, directives, and pipes), and providers.
-    
+`configureTestingModule`を呼び出すと、インポート、宣言（コンポーネント、ディレクティブ、パイプ）、
+およびプロバイダを追加および削除して、特定のテストセットのテストモジュール設定を絞り込むことができます。
+
     </td>
   </tr>
 
@@ -2747,12 +2747,12 @@ Here are the most important static methods, in order of likely utility.
 
     <td>
 
-      Compile the testing module asynchronously after you've finished configuring it.
-      You **must** call this method if _any_ of the testing module components have a `templateUrl`
-      or `styleUrls` because fetching component template and style files is necessarily asynchronous.
-      See [above](#compile-components).
+      テストモジュールの設定が完了したら、テストモジュールを非同期でコンパイルします。
+      コンポーネントテンプレートとスタイルファイルの取得は必ず非同期であるため、
+      テストモジュールコンポーネントの_いずれか_に`templateUrl`または`styleUrls`がある場合は、このメソッドを呼び出す**必要があります**。
+      [上記](#compile-components)を参照。
 
-      After calling `compileComponents`, the `TestBed` configuration is frozen for the duration of the current spec.
+      `compileComponents`を呼び出した後、`TestBed`設定は現在のスペックの期間中フリーズされます。
 
     </td>
   </tr>
@@ -2764,8 +2764,8 @@ Here are the most important static methods, in order of likely utility.
 
     <td>
 
-      Create an instance of a component of type `T` based on the current `TestBed` configuration.
-      After calling `compileComponent`, the `TestBed` configuration is frozen for the duration of the current spec.
+      現在の`TestBed`構成に基づいて、タイプ`T`のコンポーネントのインスタンスを作成します。
+      `compileComponent`を呼び出した後、`TestBed`設定は現在のスペックの期間中フリーズされます。
 
     </td>
   </tr>
@@ -2776,9 +2776,8 @@ Here are the most important static methods, in order of likely utility.
     </td>
     <td>
 
-      Replace metadata for the given `NgModule`. Recall that modules can import other modules.
-      The `overrideModule` method can reach deeply into the current testing module to
-      modify one of these inner modules.
+      指定された`NgModule`のメタデータを置き換えます。モジュールは他のモジュールをインポートできることを思い出してください。
+      `overrideModule`メソッドは、これらの内部モジュールの1つを変更するために、現在のテストモジュールに深く到達することができます。
 
     </td>
   </tr>
@@ -2790,8 +2789,8 @@ Here are the most important static methods, in order of likely utility.
 
     <td>
 
-      Replace metadata for the given component class, which could be nested deeply
-      within an inner module.
+      指定されたコンポーネントクラスのメタデータを置き換えます。
+      内側のモジュール内に深くネストすることができます。
 
     </td>
   </tr>
@@ -2803,8 +2802,8 @@ Here are the most important static methods, in order of likely utility.
 
     <td>
 
-      Replace metadata for the given directive class, which could be nested deeply
-      within an inner module.
+      指定されたディレクティブクラスのメタデータを置き換えます。
+      内部モジュールの内部に深くネストすることができます。
 
     </td>
   </tr>
@@ -2815,8 +2814,8 @@ Here are the most important static methods, in order of likely utility.
     </td>
     <td>
 
-      Replace metadata for the given pipe class, which could be nested deeply
-      within an inner module.
+      R指定されたパイプクラスのメタデータを置き換えます。
+      内側のモジュール内に深くネストすることができます。
 
     </td>
   </tr>
@@ -2829,20 +2828,19 @@ Here are the most important static methods, in order of likely utility.
 
     <td>
 
-      Retrieve a service from the current `TestBed` injector.
+      現在の`TestBed`インジェクタからサービスを取得します。
 
-      The `inject` function is often adequate for this purpose.
-      But `inject` throws an error if it can't provide the service.
+`inject`関数は、この目的にはしばしば適切です。
+しかし、`inject`がサービスを提供できない場合は、エラーをスローします。
 
-      What if the service is optional?
+サービスがオプションの場合はどうなりますか？
 
-      The `TestBed.get()` method takes an optional second parameter,
-      the object to return if Angular can't find the provider
-      (`null` in this example):
+`TestBed.get()`メソッドはオプションの第2引数をとります。
+Annularがプロバイダを見つけることができない場合に返すオブジェクト（この例では`null`）:
 
       <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null" title="app/demo/demo.testbed.spec.ts" linenums="false"></code-example>
 
-      After calling `get`, the `TestBed` configuration is frozen for the duration of the current spec.
+      `get`を呼び出した後、`TestBed`設定は現在の仕様の期間中フリーズします。
 
     </td>
   </tr>
@@ -2854,17 +2852,16 @@ Here are the most important static methods, in order of likely utility.
     </td>
     <td>
 
-      Initialize the testing environment for the entire test run.
+      テスト実行全体のテスト環境を初期化します。
 
-      The testing shims (`karma-test-shim`, `browser-test-shim`) call it for you
-      so there is rarely a reason for you to call it yourself.
+      テストシム（`karma-test-shim`, `browser-test-shim`）はそれをあなたのために呼び出すので、
+      あなたがそれを自分で呼び出す理由はめったにありません。
 
-      You may call this method _exactly once_. If you must change
-      this default in the middle of your test run, call `resetTestEnvironment` first.
+      このメソッドを=正確に1回_呼び出すことができます。
+      テストの実行中にこのデフォルトを変更する必要がある場合は、最初に`resetTestEnvironment`を呼び出します。
 
-      Specify the Angular compiler factory, a `PlatformRef`, and a default Angular testing module.
-      Alternatives for non-browser platforms are available in the general form
-      `@angular/platform-<platform_name>/testing/<platform_name>`.
+      Angularコンパイラファクトリ、`PlatformRef`、およびデフォルトのAngularテストモジュールを指定します。
+      ブラウザ以外のプラットフォームの代替手段は、一般的な形式`@angular/platform-<platform_name>/testing/<platform_name>`で利用できます。
 
     </td>
   </tr>
@@ -2875,40 +2872,38 @@ Here are the most important static methods, in order of likely utility.
     </td>
     <td>
 
-      Reset the initial test environment, including the default testing module.
+      デフォルトテストモジュールを含む初期テスト環境をリセットします。
 
     </td>
   </tr>
 </table
 
-
-A few of the `TestBed` instance methods are not covered by static `TestBed` _class_ methods.
-These are rarely needed.
+いくつかの`TestBed`インスタンスメソッドは静的な`TestBed`クラスメソッドの対象外です。
+これらはめったに必要ありません。
 
 {@a component-fixture-api-summary}
 
 #### The _ComponentFixture_
 
-The `TestBed.createComponent<T>`
-creates an instance of the component `T`
-and returns a strongly typed `ComponentFixture` for that component.
+`TestBed.createComponent<T>`は、コンポーネント`T`のインスタンスを作成し、
+そのコンポーネントに対して強く型付けされた`ComponentFixture`を返します。
 
-The `ComponentFixture` properties and methods provide access to the component,
-its DOM representation, and aspects of its Angular environment.
+`ComponentFixture`のプロパティとメソッドは、コンポーネント、そのDOM表現、
+およびAngular環境の側面へのアクセスを提供します。
 
 {@a component-fixture-properties}
 
-#### _ComponentFixture_ properties
+#### _ComponentFixture_ プロパティ
 
-Here are the most important properties for testers, in order of likely utility.
+テスターの最も重要なプロパティをユーティリティの順で紹介します。
 
 <table>
   <tr>
     <th>
-      Properties
+      プロパティ
     </th>
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -2919,7 +2914,7 @@ Here are the most important properties for testers, in order of likely utility.
 
     <td>
 
-      The instance of the component class created by `TestBed.createComponent`.
+      `TestBed.createComponent`によって作成されたコンポーネントクラスのインスタンスです。
 
     </td>
   </tr>
@@ -2931,10 +2926,10 @@ Here are the most important properties for testers, in order of likely utility.
 
     <td>
 
-      The `DebugElement` associated with the root element of the component.
+      コンポーネントのルート要素に関連付けられた`DebugElement`。
 
-      The `debugElement` provides insight into the component and its DOM element during test and debugging.
-      It's a critical property for testers. The most interesting members are covered [below](#debug-element-details).
+      `debugElement`は、テストおよびデバッグ中に、コンポーネントとそのDOM要素を把握します。
+      これはテスターにとって重要な特性です。 最も興味深いのメンバーは[以下](#debug-element-details)でカバーされています。
 
     </td>
   </tr>
@@ -2946,7 +2941,7 @@ Here are the most important properties for testers, in order of likely utility.
 
     <td>
 
-      The native DOM element at the root of the component.
+      コンポーネントのルートにあるネイティブDOM要素。
 
     </td>
   </tr>
@@ -2958,11 +2953,11 @@ Here are the most important properties for testers, in order of likely utility.
 
     <td>
 
-      The `ChangeDetectorRef` for the component.
+      コンポーネントの`ChangeDetectorRef`。
 
-      The `ChangeDetectorRef` is most valuable when testing a
-      component that has the `ChangeDetectionStrategy.OnPush` method
-      or the component's change detection is under your programmatic control.
+      `ChangeDetectionRef`は、
+      `ChangeDetectionStrategy.OnPush`メソッドを持つコンポーネントをテストする場合や、
+      コンポーネントの変更検知がプログラムによって制御されている場合に最も効果的です。
 
     </td>
   </tr>
@@ -2970,20 +2965,20 @@ Here are the most important properties for testers, in order of likely utility.
 
 {@a component-fixture-methods}
 
-#### _ComponentFixture_ methods
+#### _ComponentFixture_ メソッド
 
-The _fixture_ methods cause Angular to perform certain tasks on the component tree.
-Call these method to trigger Angular behavior in response to simulated user action.
+_フィクスチャ_メソッドにより、Angularはコンポーネントツリー上で特定のタスクを実行します。
+これらのメソッドを呼び出して、シミュレートされたユーザーアクションに応答してAngularの動作をトリガーします。
 
-Here are the most useful methods for testers.
+テスターにとって最も有用な方法は次のとおりです。
 
 <table>
   <tr>
     <th>
-      Methods
+      メソッド
     </th>
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -2994,15 +2989,15 @@ Here are the most useful methods for testers.
 
     <td>
 
-      Trigger a change detection cycle for the component.
+      コンポーネントの変更検出サイクルをトリガーします。
 
-      Call it to initialize the component (it calls `ngOnInit`) and after your
-      test code, change the component's data bound property values.
-      Angular can't see that you've changed `personComponent.name` and won't update the `name`
-      binding until you call `detectChanges`.
+      それを呼び出してコンポーネントを初期化し（`ngOnInit`を呼び出します）、
+      テストコードの後にコンポーネントのデータバウンドプロパティ値を変更します。
+      Angularでは、`personComponent.name`を変更したことを認識できません。
+      また、`detectChanges`を呼び出すまで、`name`のバインディングは更新されません。
 
-      Runs `checkNoChanges`afterwards to confirm that there are no circular updates unless
-      called as `detectChanges(false)`;
+      後で`checkNoChanges`を実行して、
+      `detectChanges(false)`と呼ばれない限り循環更新がないことを確認します。
 
     </td>
   </tr>
@@ -3014,16 +3009,15 @@ Here are the most useful methods for testers.
 
     <td>
 
-      Set this to `true` when you want the fixture to detect changes automatically.
+      これを`true`に設定すると、フィクスチャーは自動的に変更を検出します。
 
-      When autodetect is `true`, the test fixture calls `detectChanges` immediately
-      after creating the component. Then it listens for pertinent zone events
-      and calls `detectChanges` accordingly.
-      When your test code modifies component property values directly,
-      you probably still have to call `fixture.detectChanges` to trigger data binding updates.
+      自動検出が`true`の場合、テストフィクスチャはコンポーネントの作成直後に`detectChanges`を呼び出します。
+      次に、関連するゾーンイベントをリッスンし、それに応じて`detectChanges`を呼び出します。
+      テストコードがコンポーネントのプロパティ値を直接変更するときは、
+      おそらく`fixture.detectChanges`を呼び出してデータバインディングの更新をトリガーする必要があります。
 
-      The default is `false`. Testers who prefer fine control over test behavior
-      tend to keep it `false`.
+      デフォルトは`false`です。
+      テストの動作を細かく制御することを好むテスタは、それを`false`のままにする傾向があります。
 
     </td>
   </tr>
@@ -3035,8 +3029,8 @@ Here are the most useful methods for testers.
 
     <td>
 
-      Do a change detection run to make sure there are no pending changes.
-      Throws an exceptions if there are.
+      保留中の変更がないことを確認するために変更検出を実行します。 ある場合は例外をスローします。
+
     </td>
   </tr>
 
@@ -3047,8 +3041,8 @@ Here are the most useful methods for testers.
 
     <td>
 
-      If the fixture is currently _stable_, returns `true`.
-      If there are async tasks that have not completed, returns `false`.
+      フィクスチャーが現在_安定_している場合は`true`を返します。
+      完了していない非同期タスクがある場合は`false`を返します。
 
     </td>
   </tr>
@@ -3060,11 +3054,10 @@ Here are the most useful methods for testers.
 
     <td>
 
-      Returns a promise that resolves when the fixture is stable.
+      フィクスチャーが安定しているときに解決するpromiseを返します。
 
-      To resume testing after completion of asynchronous activity or
-      asynchronous change detection, hook that promise.
-      See [above](#when-stable).
+      非同期アクティビティまたは非同期変更検出が完了した後でテストを再開するには、
+      そのpromiseをフックします。 [上記](#when-stable)を参照。
 
     </td>
   </tr>
@@ -3076,7 +3069,7 @@ Here are the most useful methods for testers.
 
     <td>
 
-      Trigger component destruction.
+      コンポーネントの破棄をトリガーします。
 
     </td>
   </tr>
@@ -3086,12 +3079,12 @@ Here are the most useful methods for testers.
 
 #### _DebugElement_
 
-The `DebugElement` provides crucial insights into the component's DOM representation.
+`DebugElement`は、コンポーネントのDOM表現に重要な洞察を提供します。
 
-From the test root component's `DebugElement` returned by `fixture.debugElement`,
-you can walk (and query) the fixture's entire element and component subtrees.
+`fixture.debugElement`によって返されたテストルートコンポーネントの`DebugElement`から、
+フィクスチャの要素およびコンポーネントのサブツリー全体を歩く（およびクエリする）ことができます。
 
-Here are the most useful `DebugElement` members for testers, in approximate order of utility:
+テスターの最も有用な`DebugElement`メンバーは、ユーティリティのおおよその順番です:
 
 <table>
   <tr>
@@ -3110,7 +3103,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      The corresponding DOM element in the browser (null for WebWorkers).
+      ブラウザの対応するDOM要素（WebWorkersの場合はnull）。
 
     </td>
   </tr>
@@ -3122,8 +3115,8 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      Calling `query(predicate: Predicate<DebugElement>)` returns the first `DebugElement`
-      that matches the [predicate](#query-predicate) at any depth in the subtree.
+      呼び出し`query(predicate: Predicate<DebugElement>)`は、
+      サブツリー内の任意の深さの[predicate](#query-predicate)に一致する最初の`DebugElement`を返します。
 
     </td>
   </tr>
@@ -3135,8 +3128,8 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      Calling `queryAll(predicate: Predicate<DebugElement>)` returns all `DebugElements`
-      that matches the [predicate](#query-predicate) at any depth in subtree.
+      `queryAll(predicate: Predicate<DebugElement>)`を呼び出すと、
+      サブツリー内の任意の深さの[predicate](#query-predicate)に一致するすべてのDebugElementsが返されます。
 
     </td>
   </tr>
@@ -3148,8 +3141,8 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      The host dependency injector.
-      For example, the root element's component instance injector.
+      ホスト依存性インジェクター。
+      たとえば、ルート要素のコンポーネントインスタンスインジェクタなどです。
 
     </td>
   </tr>
@@ -3161,7 +3154,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      The element's own component instance, if it has one.
+      要素自身のコンポーネントインスタンス（存在する場合）。
 
     </td>
   </tr>
@@ -3173,12 +3166,12 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      An object that provides parent context for this element.
-      Often an ancestor component instance that governs this element.
+      この要素の親コンテキストを提供するオブジェクト。
+      この要素を管理する祖先コンポーネントインスタンスです。
 
-      When an element is repeated within `*ngFor`, the context is an `NgForRow` whose `$implicit`
-      property is the value of the row instance value.
-      For example, the `hero` in `*ngFor="let hero of heroes"`.
+      要素が`*ngFor`内で繰り返される場合、
+      コンテキストは`$implicit`プロパティが行インスタンス値の値である`NgForRow`です。
+      例えば、`*ngFor="let hero of heroes"`内の`hero`がそうです。
 
     </td>
   </tr>
@@ -3190,13 +3183,13 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      The immediate `DebugElement` children. Walk the tree by descending through `children`.
+      即時の`DebugElement`の子です。`children`通してツリーをたどってください。
 
       <div class="alert is-helpful">
 
-      `DebugElement` also has `childNodes`, a list of `DebugNode` objects.
-      `DebugElement` derives from `DebugNode` objects and there are often
-      more nodes than elements. Testers can usually ignore plain nodes.
+      `DebugElement`には、`DebugNode`オブジェクトのリストである`childNodes`もあります。
+      `DebugElement`は`DebugNode`オブジェクトから派生し、
+      要素より多くのノードがあります。テスターは通常、プレーンノードを無視できます。
 
       </div>
     </td>
@@ -3208,7 +3201,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
     </td>
     <td>
 
-      The `DebugElement` parent. Null if this is the root element.
+      `DebugElement`の親です。 これがルート要素の場合はnullです。
 
     </td>
   </tr>
@@ -3220,7 +3213,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
     
-      The element tag name, if it is an element.
+      要素タグ名（要素の場合）。
 
     </td>
   </tr>
@@ -3231,13 +3224,13 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
     </td>
     <td>
 
-      Triggers the event by its name if there is a corresponding listener
-      in the element's `listeners` collection.
-      The second parameter is the _event object_ expected by the handler.
-      See [above](#trigger-event-handler).
+      要素のリスナーコレクションに対応する`listeners`がある場合、
+      その名前でイベントをトリガーします。
+      2番目のパラメータは、ハンドラが予期する_イベントオブジェクト_です。
+      [上記](#trigger-event-handler)を参照。
 
-      If the event lacks a listener or there's some other problem,
-      consider calling `nativeElement.dispatchEvent(eventObject)`.
+      イベントにリスナーがない場合やその他の問題がある場合は、
+      `nativeElement.dispatchEvent(eventObject)`を呼び出すことを検討してください。
 
     </td>
   </tr>
@@ -3249,7 +3242,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      The callbacks attached to the component's `@Output` properties and/or the element's event properties.
+      コンポーネントの`@Output`プロパティおよび/または要素のイベントプロパティに関連付けられたコールバック。
 
     </td>
   </tr>
@@ -3261,8 +3254,8 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      This component's injector lookup tokens.
-      Includes the component itself plus the tokens that the component lists in its `providers` metadata.
+      このコンポーネントのインジェクタルックアップトークン。
+      コンポーネント自体と`providers`のメタデータにコンポーネントがリストするトークンが含まれます。
 
     </td>
   </tr>
@@ -3274,7 +3267,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      Where to find this element in the source component template.
+      ソースコンポーネントテンプレートでこの要素を見つける場所。
 
     </td>
   </tr>
@@ -3286,8 +3279,8 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
     <td>
 
-      Dictionary of objects associated with template local variables (e.g. `#foo`),
-      keyed by the local variable name.
+      テンプレート変数（例：`#foo`）に関連付けられたオブジェクトの辞書。
+      ローカル変数名をキーとしています。
 
     </td>
   </tr>
@@ -3295,19 +3288,20 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
 {@a query-predicate}
 
-The `DebugElement.query(predicate)` and `DebugElement.queryAll(predicate)` methods take a
-predicate that filters the source element's subtree for matching `DebugElement`.
+`DebugElement.query(predicate)` および`DebugElement.queryAll(predicate)`メソッドは、
+`DebugElement`と一致するようにソース要素のサブツリーをフィルタする述語を取ります。
 
-The predicate is any method that takes a `DebugElement` and returns a _truthy_ value.
-The following example finds all `DebugElements` with a reference to a template local variable named "content":
+述語は、`DebugElement`をとり、_truthy_な値を返す任意のメソッドです。
+次の例では、"content"という名前のテンプレートローカル変数への参照を含むすべての`DebugElements`
+が検索されます:
 
 <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate" title="app/demo/demo.testbed.spec.ts" linenums="false"></code-example>
 
-The Angular `By` class has three static methods for common predicates:
+Angularの`By`クラスには、共通述語の静的メソッドが3つあります。
 
-* `By.all` - return all elements.
-* `By.css(selector)` - return elements with matching CSS selectors.
-* `By.directive(directive)` - return elements that Angular matched to an instance of the directive class.
+- `By.all` - すべての要素を返します。
+- `By.css(selector)` - 一致するCSSセレクタを持つ要素を返します。
+- `By.directive(directive)` - ディレクティブクラスのインスタンスに一致するAngularの要素を返します。
 
 <code-example path="testing/src/app/hero/hero-list.component.spec.ts" region="by" title="app/hero/hero-list.component.spec.ts" linenums="false"></code-example>
 
@@ -3315,59 +3309,49 @@ The Angular `By` class has three static methods for common predicates:
 
 {@a faq}
 
-## Frequently Asked Questions
+## FAQ
 
 {@a q-spec-file-location}
 
-#### Why put spec file next to the file it tests?
+#### specファイルをテストするファイルの隣に置くのはなぜですか？
 
-It's a good idea to put unit test spec files in the same folder
-as the application source code files that they test:
+単体テスト仕様ファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
 
-* Such tests are easy to find.
-* You see at a glance if a part of your application lacks tests.
-* Nearby tests can reveal how a part works in context.
-* When you move the source (inevitable), you remember to move the test.
-* When you rename the source file (inevitable), you remember to rename the test file.
+- そのようなテストは簡単に見つけることができます。
+- アプリケーションの一部にテストがないかどうかを一目で確認できます。
+- 近くのテストでは、部品がどのようにコンテキストで動作するかを明らかにすることができます。
+- あなたがソースを（必然的に）移動するときは、テストを移動することを忘れないでください。
+- ソースファイル（必然的に）の名前を変更するときは、テストファイルの名前を変更することを忘れないでください。
 
 <hr>
 
 {@a q-specs-in-test-folder}
 
-#### When would I put specs in a test folder?
+#### テストフォルダにスペックを入れるのはいつですか？
 
-Application integration specs can test the interactions of multiple parts
-spread across folders and modules.
-They don't really belong to any part in particular, so they don't have a
-natural home next to any one file.
+アプリケーション統合仕様では、
+フォルダやモジュールに分散された複数のパーツの相互作用をテストできます。
+彼らは本当に特にどの部分にも属していないので、1つのファイルの隣に自然の家がありません。
 
-It's often better to create an appropriate folder for them in the `tests` directory.
+`tests`ディレクトリに適切なフォルダを作成する方がよい場合があります。
 
-Of course specs that test the test helpers belong in the `test` folder,
-next to their corresponding helper files.
+もちろん、テストヘルパーをテストするスペックは、対応するヘルパーファイルの隣の`test`フォルダに属します。
 
 {@a q-e2e}
-#### Why not rely on E2E tests of DOM integration?
+#### なぜDOM統合のE2Eテストに頼らないのでしょうか？
 
-The component DOM tests described in this guide often require extensive setup and 
-advanced techniques whereas the [unit tests](#component-class-testing)
-are comparatively simple.
+このガイドで説明されているコンポーネントのDOMテストでは、
+多くの場合、広範な設定と高度な技術が必要ですが、
+[ユニットテスト](#component-class-testing)は比較的簡単です。
 
-#### Why not defer DOM integration tests to end-to-end (E2E) testing?
+#### なぜDOM統合テストをエンドツーエンド（E2E）テストに延期しないのですか？
 
-E2E tests are great for high-level validation of the entire system.
-But they can't give you the comprehensive test coverage that you'd expect from unit tests.
+E2Eテストは、システム全体の高レベル検証に最適です。 しかし、ユニットテストで期待される包括的なテストカバレッジを与えることはできません。
 
-E2E tests are difficult to write and perform poorly compared to unit tests.
-They break easily, often due to changes or misbehavior far removed from the site of breakage.
+E2Eテストは、単体テストに比べて書き込みや実行が難しいです。 それらは容易に壊れます、頻繁に破損の場所から遠く離れた変化または不正行為のために。
 
-E2E tests can't easily reveal how your components behave when things go wrong,
-such as missing or bad data, lost connectivity, and remote service failures.
+E2Eテストでは、データの欠落や不良、接続の切断、リモートサービスの障害など、問題が発生したときにコンポーネントがどのように動作するかを簡単には明らかにできません。
 
-E2E tests for apps that update a database, 
-send an invoice, or charge a credit card require special tricks and back-doors to prevent
-accidental corruption of remote resources.
-It can even be hard to navigate to the component you want to test.
+データベースを更新したり、請求書を送信したり、クレジットカードに請求したりするアプリのE2Eテストでは、リモートリソースの偶発的な破損を防ぐために特殊なトリックとバックドアが必要です。 テストしたいコンポーネントにナビゲートすることが難しい場合もあります。
 
-Because of these many obstacles, you should test DOM interaction
-with unit testing techniques as much as possible.
+これらの多くの障害のために、DOMテストの相互作用を可能な限りテストする必要があります。

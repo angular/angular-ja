@@ -4,18 +4,18 @@
 このガイドでは、Angularアプリケーションでのユニット、インテグレーションテストのヒントとテクニックについて説明します。
 
 このガイドでは、[_ツアー・オブ・ヒーロー_チュートリアル](tutorial)によく似たサンプルCLIアプリケーションのテストを紹介します。
-このガイド内のサンプルアプリケーションとすべてのテストは検査と実験に使用できます:
+このガイド内のサンプルアプリケーションとすべてのテストは検証と実験に使用できます:
 
-* <live-example embedded-style>サンプルアプリケーション</live-example>
-* <live-example stackblitz="specs">テスト</live-example>
+- <live-example embedded-style>サンプルアプリケーション</live-example>
+- <live-example stackblitz="specs">テスト</live-example>
 
 <hr>
 
 ## セットアップ
 
-Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/)を使用してAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
+Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/)でAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
 
-CLIを使用して作成したプロジェクトは、すぐにテストする準備ができています。
+CLIで作成したプロジェクトは、すぐにテストする準備ができています。
 この1つのCLIコマンドを実行するだけです:
 
 <code-example language="sh" class="code-shell">
@@ -23,7 +23,7 @@ CLIを使用して作成したプロジェクトは、すぐにテストする�
 </code-example>
 
 `ng test`コマンドはアプリケーションを_ウォッチモード_でビルドして、
-[karmaテストランナー](https://karma-runner.github.io/1.0/index.html)を起動します。
+[Karmaテストランナー](https://karma-runner.github.io/1.0/index.html)を起動します。
 
 コンソールのアウトプットはこのようになります:
 
@@ -37,9 +37,9 @@ Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 </code-example>
 
 ログの最後の行が最も重要です。
-これはKarmaが3つのテストすべてをパスしたことを示します。
+これはKarmaが3つのテストを走らせてすべてパスしたことを示します。
 
-Chromeブラウザも開き、"Jasmine HTML Reporter"内にこのようにテストのアウトプットを表示します。
+Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内にこのようにテストのアウトプットを表示します。
 
 <figure>
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
@@ -48,35 +48,35 @@ Chromeブラウザも開き、"Jasmine HTML Reporter"内にこのようにテス
 ほとんどの人にとって、このブラウザのアウトプットのほうがコンソールのログよりも読みやすいでしょう。
 テスト行をクリックしてそのテストだけを再実行したり、説明をクリックして選択したテストグループ("test suite")を再実行することができます。
 
-そのあいだに、`ng test`コマンドは変更を監視しています。
+同時に、`ng test`コマンドは変更を監視しています。
 
 このアクションを確認するために、`app.component.ts`に小さな変更を加えて保存してみましょう。
-テストが再び実行され、ブラウザがリフレッシュされ、新しいテストの結果が表示されます。
+テストが再び実行され、ブラウザがリフレッシュされます。そして新しいテストの結果が表示されます。
 
 #### 設定
 
-CLIはあなたのためにJasmineとKarmaの設定を引き受けます。
+CLIはJasmineとKarmaの設定を引き受けてくれます。
 
-`src/`フォルダ内の`karma.conf.js`と`test.ts`ファイルを編集することで、
+`src/`フォルダ内の`karma.conf.js`と`test.ts`ファイルを編集することで
 多くのオプションの微調整ができます。
 
 `karma.conf.js`はKarmaの設定ファイルの一部です。
-CLIは`karma.conf.js`で補完された`application.json`内で指定されたアプリケーションの構造をもとにメモリ内にすべてのランタイムの設定を構築します。
+CLIは`karma.conf.js`で補完された`angular.json`内で指定されたアプリケーションの構造をもとにメモリ内にすべてのランタイムの設定を構築します。
 
 JasmineとKarmaの設定の詳細についてはWebで検索してください。
 
 #### 他のテストフレームワーク
 
-他のテスティングライブラリーとテストランナーを使用してAngularアプリケーションのユニットテストを行うこともできます。
-各ライブラリ、ランナーは独自のインストール手順、設定、および構文をもちます。
+他のテスティングライブラリーとテストランナーでAngularアプリケーションのユニットテストを行うこともできます。
+各ライブラリとランナーは独自のインストール手順、設定、および構文を持ちます。
 
 詳細はWebで検索してください。
 
 #### テストファイルの名前と場所
 
-`src/app`フォルダ内をみてください。
+`src/app`フォルダ内部をみてください。
 
-CLIは`AppComponent`のための`app.component.spec.ts`という名前のテストファイルを生成しました。
+CLIは`AppComponent`のために`app.component.spec.ts`という名前のテストファイルを生成しています。
 
 <div class="alert is-important">
 
@@ -85,14 +85,14 @@ CLIは`AppComponent`のための`app.component.spec.ts`という名前のテス�
 </div>
 
 `app.component.ts`と`app.component.spec.ts`ファイルは同じフォルダ内に置きます。
-ルートファイル名(`app.component`)は両方のファイルで同じにします。
+ルートのファイル名(`app.component`の部分)は両方のファイルで同じにします。
 
 あなた自身のプロジェクトの_すべての種類_のテストファイルにおいてこれら2つの慣習を採用してください。
 
 ## サービスのテスト
 
 サービスはユニットテストをするのに最も簡単なファイルなことが多いです。
-ここでは`ValueService`のいくつかの同期、非同期ユニットテストを
+次では`ValueService`のいくつかの同期、非同期ユニットテストを
 Angularのテスティングユーティリティの補助なしで書いています。
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="ValueService" title="app/demo/demo.spec.ts"></code-example>
@@ -111,17 +111,17 @@ _注入_することは簡単なことです。
 
 `MasterService`は注入した`ValueService`の`getValue`メソッドを委譲するだけです。
 
-これをテストする方法はいくつかあります。
+次ではこれをテストするいくつかの方法を示します。
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="MasterService" title="app/demo/demo.spec.ts"></code-example>
 
-最初のテストでは`new`を使用して`ValueService`を生成して、`MasterService`コンストラクタに渡しています。
+最初のテストでは`new`を使用して`ValueService`を生成して、それを`MasterService`コンストラクタに渡しています。
 
-しかし、現実のサービスを注入することは、ほとんどの依存するサービスが作成、コントロールすることが難しいのでほとんど機能しません。
+しかし、ほとんどの依存するサービスは作成してコントロールすることが難しいのと同様に、実際のサービスを注入することはほとんど機能しません。
 
 かわりに、
-依存をモックしたり、ダミーの値を使用したり、
-適切なサービスメソッドの[スパイ](https://jasmine.github.io/2.0/introduction.html#section-Spies)を作成することができます。
+依存性をモックしたり、ダミーの値を使用したり、
+適切なサービスのメソッドの[スパイ](https://jasmine.github.io/2.0/introduction.html#section-Spies)を作成することができます。
 
 <div class="alert is-helpful">
 
@@ -129,33 +129,35 @@ _注入_することは簡単なことです。
 
 </div>
 
-これらの標準的なテスト手法は分離したサービスのユニットテストで素晴らしいです。
+これらの標準的なテスト手法は分離したサービスのユニットテストをするための素晴らしい方法です。
 
-しかし、ほとんどいつでもAngularの依存性の注入を使用してアプリケーションクラスにサービスを注入していて、
-その使用パターンを反映したテストが必要になります。
-Angularのテスティングユーティリティはどのように注入したサービスの振る舞うか調べることを簡単にします。
+しかし、Angularの依存性の注入を使用してアプリケーションクラスにサービスを注入していてる場合は、ほとんど
+このパターンを使用して反映したテストが必要になります。
+Angularのテスティングユーティリティーを使用することで注入されたサービスの動作を簡単に調査することができます。
 
 #### _TestBed_を使用してサービスのテストをする
 
 あなたのアプリケーションはサービスを作成するためにAngularの[依存性の注入(DI)](guide/dependency-injection)
-に頼ります。
-サービスが依存するサービスをもつとき、DIはその依存するサービスを探すか作成します。
+に頼っています。
+あるサービスが依存するサービスをもつとき、DIはその依存するサービスを探すか作成します。
 さらにその依存するサービスが自身の依存性をもつ場合、DIは同じように探すか作成します。
 
-サービスの_利用者_として、これについて心配する必要はありません。
+サービスの_利用者_としては、これについて心配する必要はありません。
 コンストラクタの引数の順序や、それらがどうやって作成されるのかを心配する必要はありません。
 
-サービスの_テスター_として、サービスの依存性のファーストレベルについて少しだけ考える必要があります。
-しかし、サービスの提供と生成のために`TestBed`テスティングユーティリティを使用したとき、AngularのDIにサービスの生成とコンストラクタの引数の順序を決めさせることが_できます_。
+サービスの_テスター_としては、サービスの依存性の第一階層について少しだけ考える必要がありますが、
+サービスの提供と作成に`TestBed`テスティングユーティリティーを使用したとき、
+AngularのDIにサービスの作成とコンストラクタ引数の順序を決めさせることが_できます_。
 
 {@a testbed}
 
 #### Angular _TestBed_
 
-`TestBed`はAngularテスティングユーティリティで最も重要なものです。
-`TestBed`はAngularの[@NgModule](guide/ngmodules)をエミュレートした、動的に生成されたAngular_テスト_モジュールを作成します。
+`TestBed`はAngularテスティングユーティリティーで最も重要なものです。
+`TestBed`はAngularの[@NgModule](guide/ngmodules)をエミュレートした、
+動的に生成されたAngular_テスト_モジュールを作成します。
 
-`TestBed.configureTestingModule()`メソッドは[@NgModule](guide/ngmodules)のプロパティのほとんどをもつことができるメタデータオブジェクトを受け取ります。
+`TestBed.configureTestingModule()`メソッドは[@NgModule](guide/ngmodules)のプロパティのほとんどがもつことができるメタデータオブジェクトを受け取ります。 TODO
 
 サービスをテストするために、
 テストやモックしたいサービスの配列を`providers`メタデータプロパティにセットします。
@@ -166,14 +168,14 @@ Angularのテスティングユーティリティはどのように注入した�
   title="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach">
 </code-example>
 
-それからサービスのクラスを引数として`TestBed.get()`を呼び出してテスト内部でそれを注入します。
+それからサービスのクラスを引数として`TestBed.get()`を呼び出してテスト内部でそれを注入してください。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
   region="value-service-inject-it">
 </code-example>
 
-または、もしセットアップの1部分としてサービスの注入することを選ぶならば、`beforeEach()`内部で行ってください。
+もしくは、セットアップ部分でサービスを注入したい場合は、`beforeEach()`内で行ってください。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
@@ -189,7 +191,7 @@ Angularのテスティングユーティリティはどのように注入した�
   region="master-service-before-each" linenums="false">
 </code-example>
 
-このテストではさきほどと同じようにスパイを使用します。
+このテストでは以前したのと同様にスパイを使用します。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
@@ -197,16 +199,16 @@ Angularのテスティングユーティリティはどのように注入した�
 </code-example>
 
 {@a no-before-each}
-#### _beforeEach()_を使用せずテストする
+#### _beforeEach()_を使用せずにテストする
 
-それぞれの`it()`テストのための前提条件をセットするためにこのガイド内のほとんどのテストで`beforeEach()`を呼び出します。
-そしてクラスの生成とサービスの注入のために`TestBed`に頼ります。
+それぞれの`it()`内のテストの前提条件をセットするために、このガイド内のほとんどのテストスイートでは`beforeEach()`を呼び出して、
+クラスの生成とサービスの注入のために`TestBed`に頼っています。
 
-`beforeEach()`を消して呼び出さないテストの他校と`TestBed`を使用するかわりに明示的にクラスを作成します。
+他のテストの流派では`beforeEach()`を呼び出さず、さらに`TestBed`を使用するよりはむしろ明示的にクラスを作成することを好みます。
 
-このスタイルでの`MasterService`のテストを書き直す方法はこれです。
+このスタイルで`MasterService`のテストを書き直す方法は次のようになります。
 
-`beforeEach()`のかわりに再利用可能な、_セットアップ_関数内の準備コードから始めてください。
+`beforeEach()`のかわりに_setup_関数内に再利用可能な準備するためのコードを置くところから始めてください。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
@@ -214,11 +216,13 @@ Angularのテスティングユーティリティはどのように注入した�
   title="app/demo/demo.spec.ts (setup)" linenums="false">
 </code-example>
 
-`setup()`関数は`masterService`のようなテストが参照する変数を含むオブジェクトリテラルを返します。
-`describe()`の本体に_準グローバル_な変数(例えば、`let masterService: MasterService`)を定義しないでください。
+`setup()`関数は`masterService`のような、
+テストが参照する変数を含むオブジェクトリテラルを返します。
+`describe()`の本体に_準グローバル_な変数
+(例えば、`let masterService: MasterService`)を定義しないでください。
 
-それから、それぞれのテストの最初の行でテストサブジェクトを操作するステップの前に`setup()`を実行し、
-期待する値をアサートします。
+それから、それぞれのテストの最初の行、
+続く行でテスト対象の操作と期待値のアサートをするステップの前に`setup()`を実行します。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
@@ -226,16 +230,19 @@ Angularのテスティングユーティリティはどのように注入した�
 </code-example>
 
 必要なセットアップ変数を抽出するために
-[_destructuring assignment_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)をテストで使用する方法に注目してください。
+[_分割代入_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+をテストで使用する方法に注意してください。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
   region="no-before-each-setup-call">
 </code-example>
 
-多くの開発者にとってこのアプローチは伝統的な`beforeEach()`スタイルよりも明快でより明確であると感じます。
+多くの開発者にとってこのアプローチは伝統的な`beforeEach()`
+スタイルよりも明快でより明確であると感じるでしょう。
 
-このテストガイドでは伝統的なスタイルとデフォルトの[CLI schematics](https://github.com/angular/devkit)
+このテストガイドでは伝統的なスタイルとデフォルトの
+[CLI schematics](https://github.com/angular/devkit)
 が生成した`beforeEech()`と`TestBed`を含むテストファイルにしたがいますが、
 _この代替アプローチ_を自身のプロジェクト内で採用することは自由です。
 

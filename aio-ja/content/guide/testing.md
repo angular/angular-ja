@@ -320,9 +320,13 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
   title="app/demo/demo.ts (LightswitchComp)" linenums="false">
 </code-example>
 
-`click()`メソッドがライトの_オン/オフ_状態を切り替えるだけで、メッセージを適切に設定することをテストすることができます。
+`click()`メソッドがライトの_オン/オフ_状態を切り替えて、
+メッセージを適切にセットすることをテストすることだけを決めてください。TODO
 
-このコンポーネントクラスは依存関係がありません。 依存関係のないサービスをテストするには、`new`でサービスを作成し、そのAPIを突き刺して、公開されている状態の期待する値をアサートします。コンポーネントクラスと同じ操作を行います。
+このコンポーネントクラスは依存関係がありません。
+依存関係のないサービスをテストするには、`new`でサービスを作成し、
+そのAPIを叩いて、公開されている状態の期待値をアサートします。
+コンポーネントクラスでも同じことをします。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
@@ -330,7 +334,7 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
   title="app/demo/demo.spec.ts (Lightswitch tests)" linenums="false">
 </code-example>
 
-ここでは_ツアー・オブ・ヒーロー_チュートリアルから`DashboardHeroComponent`についてみます。
+次は_ツアー・オブ・ヒーロー_チュートリアルの`DashboardHeroComponent`です。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.ts" 
@@ -338,9 +342,12 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
   title="app/dashboard/dashboard-hero.component.ts (component)" linenums="false">
 </code-example>
 
-_ヒーロー_を`@Input`プロパティにバインドし、選択された`@Output`プロパティを使用して生成されたイベントをリッスンする親コンポーネントのテンプレート内に表示されます。
+_hero_を`@Input`プロパティにバインドし、
+_selected_`@Output`プロパティを通して発生したイベントをリッスンする
+親コンポーネントのテンプレート内に表示されます。
 
-`DashboardHeroComponent`またはその親コンポーネントを作成せずにクラスコードが動作することをテストできます。
+`DashboardHeroComponent`や、
+その親コンポーネントを作成せずにクラスコードが動作することをテストできます。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" 
@@ -348,9 +355,10 @@ _ヒーロー_を`@Input`プロパティにバインドし、選択された`@Ou
   title="app/dashboard/dashboard-hero.component.spec.ts (class tests)" linenums="false">
 </code-example>
 
-コンポーネントに依存関係がある場合、`TestBed`を使用してコンポーネントとその依存関係を作成することができます。
+コンポーネントに依存関係がある場合、
+`TestBed`を使用してコンポーネントとその依存関係の両方を作成することができます。
 
-次の`WelcomeComponent`は、`UserService`に依存して、挨拶するユーザーの名前を知っています。
+次の`WelcomeComponent`は、挨拶するユーザーの名前を知っている`UserService`に依存します。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.ts" 
@@ -358,7 +366,7 @@ _ヒーロー_を`@Input`プロパティにバインドし、選択された`@Ou
   title="app/welcome/welcome.component.ts" linenums="false">
 </code-example>
 
-まず、このコンポーネントの最小限のニーズを満たす`UserService`のモックを作成します。
+まずは、このコンポーネントの最小限のニーズを満たす`UserService`のモックを作成してください。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
@@ -366,7 +374,7 @@ _ヒーロー_を`@Input`プロパティにバインドし、選択された`@Ou
   title="app/welcome/welcome.component.spec.ts (MockUserService)" linenums="false">
 </code-example>
 
-次に、**コンポーネント**と_サービス_の_両方_を`TestBed`の設定で提供して注入します。
+次に、**コンポーネント**と_サービス_の_両方_を`TestBed`の設定に提供して注入します。
 
 
 <code-example 
@@ -375,7 +383,7 @@ _ヒーロー_を`@Input`プロパティにバインドし、選択された`@Ou
   title="app/welcome/welcome.component.spec.ts (class-only setup)" linenums="false">
 </code-example>
 
-次に、コンポーネントクラスを実行し、[ライフサイクルフックメソッド](guide/lifecycle-hooks)をAngularがアプリケーションの実行時に呼び出すことを覚えておいてください。
+次に、コンポーネントクラスを実行します。Angularがアプリケーションの実行時に[ライフサイクルフックメソッド](guide/lifecycle-hooks)を呼び出すことを覚えておいてください。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 

@@ -376,7 +376,6 @@ _selected_`@Output`プロパティを通して発生したイベントをリッ�
 
 次に、**コンポーネント**と_サービス_の_両方_を`TestBed`の設定に提供して注入します。
 
-
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts" 
   region="class-only-before-each" 
@@ -393,35 +392,49 @@ _selected_`@Output`プロパティを通して発生したイベントをリッ�
 
 ### コンポーネントのDOMのテスト
 
-コンポーネントクラスのテストは、サービスをテストするのと同じくらい簡単です。
+コンポーネント_クラス_のテストは、サービスをテストするのと同じくらい簡単です。
 
-しかし、コンポーネントは_クラスだけ_ではありません。 コンポーネントは、DOMや他のコンポーネントと対話します。 クラスのみのテストでは、クラスの動作について教えてくれます。 コンポーネントが適切にレンダリングされ、ユーザーの入力とジェスチャーに応答したり、親コンポーネントと子コンポーネントと統合されたりするかどうかは、ユーザーからはわかりません。
+しかし、コンポーネントは_クラスだけ_ではありません。
+コンポーネントは、DOMや他のコンポーネントとやりとりします。
+_クラスのみ_のテストは、クラスの振る舞いについては教えてくれます。
+コンポーネントが適切にレンダリングされて、ユーザーの入力やジェスチャーに応答したり、
+親コンポーネントと子コンポーネントと統合されているかどうかをユーザーは確認できません。
 
-上記の_クラスのみ_のテストでは、コンポーネントが実際に画面上でどのように動作するかについての重要な質問に答えることはできません。
+上記の_クラスのみ_のテストでは、
+コンポーネントが実際に画面上でどのように動作するかについての重要な質問に答えることはできません。
 
-* `Lightswitch.clicked()`はユーザが呼び出せるようなものにバインドされていますか？
-* `Lightswitch.message`は表示されていますか？
-* ユーザーは実際に`DashboardHeroComponent`で表示されるヒーローを選択できますか？
-* 主人公の名前は、大文字で表示されますか？
-* ウェルカムメッセージは`WelcomeComponent`のテンプレートで表示されますか？
+- `Lightswitch.clicked()`はユーザが呼び出せるようなものにバインドされているのか？
+- `Lightswitch.message`は表示されているのか？
+- ユーザーは実際に`DashboardHeroComponent`で表示されるヒーローを選択できるのか？
+- 主人公の名前は、期待された形(つまり、大文字)で表示されるのか？
+- ウェルカムメッセージは`WelcomeComponent`のテンプレートで表示されるのか？
 
-これらは、上に示した単純なコンポーネントの問題ではないかもしれません。 しかし、多くのコンポーネントは、テンプレートに記述されているDOM要素と複雑なやり取りをしているため、コンポーネントの状態が変わるとHTMLが表示され消えます。
+これらは、上のような単純なコンポーネントだと問題ではないかもしれません。
+しかし、多くのコンポーネントは、
+テンプレートに記述されているDOM要素と複雑なやりとりをしているため、
+コンポーネントの状態が変わることでHTMLが表示されたり消えたりします。
 
-これらの種類の質問に答えるには、コンポーネントに関連付けられたDOM要素を作成する必要があります。DOMを調べて、コンポーネント状態が適切なタイミングで適切に表示されることを確認し、画面とのユーザー対話をシミュレートして、 コンポーネントが期待どおりに動作するようにします。
+これらの種類の質問に答えるには、
+コンポーネントに関連付けられたDOM要素を作成する必要があります。
+コンポーネントの状態が適切なタイミングで適切に表示されることを確認するためにDOMを検査し、
+画面とユーザーインタラクションによって、
+コンポーネントが期待通りに動作することをシミュレートする必要があります。
 
-この種のテストを作成するには、`TestBed`のその他の機能と他のテストヘルパを使用します。
+この種類のテストを書くために、
+`TestBed`のその他の機能と他のテストヘルパーを使用します。
 
 #### CLIが生成したテスト
 
-CLIは、新しいコンポーネントの生成を要求すると、デフォルトで初期テストファイルを作成します。
+CLIが新しいコンポーネントを生成すると、
+デフォルトで初期テストファイルを作成します。
 
-たとえば、次のCLIコマンドは、`app/banner`フォルダ(インラインのテンプレートとスタイル)に`BannerComponent`を生成ます:
+たとえば、次のCLIコマンドは、`app/banner`フォルダに`BannerComponent`を生成します(インラインのテンプレートとスタイルを含む):
 
 <code-example language="sh" class="code-shell">
 ng generate component banner --inline-template --inline-style --module app
 </code-example>
 
-また、このような外観のコンポーネント`banner-external.component.spec.ts`の初期テストファイルを生成します
+また、コンポーネントのテストファイル、`banner-external.component.spec.ts`の初期テストファイルを生成します。それはこのようになります:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -431,11 +444,13 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### セットアップを減らす
 
-このファイルの最後の3行だけが実際にコンポーネントをテストし、Angularがコンポーネントを作成できると主張します。
+このファイルの最後の3行だけが実際にコンポーネントをテストしている部分で、
+そこでしていることは、Angularがコンポーネントを作成できることのアサートです。
 
-ファイルの残りの部分は、構成要素が相当なものに発展した場合に必要となるより高度なテストを予期する定型的なセットアップコードです。
+ファイルの残りの部分は、より高度なテストを見込んだ定型的なセットアップコードで、構成要素が相当なものに発展した場合に必要と_なるでしょう_。
 
-以下のこれらの高度なテスト機能について学びます。 現時点では、このテストファイルを大幅に縮小してより管理しやすいサイズにすることができます:
+以下では、これらの高度なテスト機能について学びます。
+現時点では、より管理しやすいサイズにするために、このテストファイルを大幅に縮小することができます:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -443,7 +458,8 @@ ng generate component banner --inline-template --inline-style --module app
   title="app/banner/banner-initial.component.spec.ts (minimal)" linenums="false">
 </code-example>
 
-この例では、`TestBed.configureTestingModule`に渡されたメタデータオブジェクトは、単にテストするコンポーネント`BannerComponent`を宣言します。
+この例では、`TestBed.configureTestingModule`に渡されたメタデータオブジェクトは、
+単にテストするコンポーネントである`BannerComponent`を宣言します。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -452,9 +468,13 @@ ng generate component banner --inline-template --inline-style --module app
 
 <div class="alert is-helpful">
 
-宣言したり、他のものをインポートする必要はありません。 デフォルトのテストモジュールは、`@angular/platform-browser`の`BrowserModule`のようなものがあらかじめ設定されています。
+宣言したり、他の何かをインポートする必要はありません。
+デフォルトのテストモジュールは、
+`@angular/platform-browser`の`BrowserModule`のようなものがあらかじめ設定されています。
 
-後で、テストニーズに合わせて、インポート、プロバイダ、およびその他の宣言で`TestBed.configureTestingModule()`を呼び出します。 オプションのオーバーライドメソッドを使用すると、構成の側面をさらに細かく調整できます。
+後で、テストのニーズにあわせて、
+インポート、プロバイダー、および宣言を設定した`TestBed.configureTestingModule()`を呼び出します。
+任意に`override`メソッドを使用して、設定をさらに細かく調整できます。
 
 </div>
 
@@ -462,7 +482,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _createComponent()_
 
-`TestBed`を設定したら`createComponent()`メソッドをよびだします。
+`TestBed`を設定したら`createComponent()`メソッドを呼び出します。。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -471,15 +491,18 @@ ng generate component banner --inline-template --inline-style --module app
 
 `TestBed.createComponent()`は、
 `BannerComponent`のインスタンスを作成し、
-対応する要素をテストランナーDOMに追加し、[`ComponentFixture`](#component-fixture)を返します。
+対応する要素をテストランナーのDOMに追加し、[`ComponentFixture`](#component-fixture)を返します。
 
 <div class="alert is-important">
 
-`createComponent`の呼び出し後に`TestBed`を再構成しないでください。
+`createComponent`の呼び出し後に`TestBed`を再設定しないでください。
 
-`createComponent`メソッドは現在の`TestBed`定義をフリーズさせ、それを閉じてさらに設定します。
+`createComponent`メソッドは現在の`TestBed`の定義をフリーズし、
+さらなる設定をできないようにします。
 
-`configureTestingModule()`、`get()`、`override...`メソッドのいずれも、`TestBed`設定メソッドを呼び出すことはできません。 試してみると、`TestBed`はエラーを投げます。
+どの`TestBed`設定メソッド(`configureTestingModule()`、`get()`、`override...`メソッド)
+も呼び出すことはできません。
+試してみると、`TestBed`はエラーをスローします。
 
 </div>
 
@@ -487,9 +510,9 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _ComponentFixture_
 
-[ComponentFixture](api/core/testing/ComponentFixture)は、作成されたコンポーネントおよび対応する要素と対話するためのテストハーネスです。
+[ComponentFixture](api/core/testing/ComponentFixture)は、作成されたコンポーネントとそれが対応する要素とやりとりするためのテストハーネスです。
 
-治具からコンポーネントインスタンスにアクセスし、ジャスミンの期待通りに存在することを確認します:
+フィクスチャーを通してコンポーネントインスタンスにアクセスし、ジャスミンの`expect()`を使用して存在を確認してください:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -498,9 +521,9 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _beforeEach()_
 
-このコンポーネントが進化するにつれて、
-より多くのテストを追加します。
-各テストで`TestBed`設定を複製するのではなく、リファクタを使用して設定をJasmine `beforeEach()`といくつかのサポート変数にプルします
+このコンポーネントが発展するにつれて、より多くのテストを追加することになるでしょう。
+それぞれのテストで`TestBed`設定を複製するのではなく、
+設定をJasmineの`beforeEach()`で行い、いくつかのサポート変数にプルするようにリファクタリングしましょう。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -520,15 +543,23 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _nativeElement_
 
-`ComponentFixture.nativeElement`の値には、任意の型があります。 後で`DebugElement.nativeElement`が出現し、それにも任意の型があります。
+`ComponentFixture.nativeElement`の値は、`any`型です。
+のちに`DebugElement.nativeElement`もでてきますが、それも`any`型です。
 
-Angularは、コンパイル時に`nativeElement`のHTML要素の種類やHTML要素であるかどうかを知ることはできません。 アプリケーションは、サーバーや[Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)などの_非ブラウザプラットフォーム_で実行されている可能性があります。このプラットフォームでは、要素のAPIが減少しているか、まったく存在していない可能性があります。
+Angularは、コンパイル時に`nativeElement`のHTML要素の種類やHTML要素であるかどうかを知ることはできません。
+アプリケーションは、
+サーバーや[Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)などの_非ブラウザプラットフォーム_で実行されている可能性があります。
+このようなプラットフォームでは、要素のAPIが少なくなっているか、
+まったく存在していない可能性があります。
 
-このガイドのテストは、ブラウザで実行するように設計されているため、`nativeElement`の値は常に`HTMLElement`またはその派生クラスの1つになります。
+このガイド内のテストはブラウザで実行するように設計されているため、
+`nativeElement`の値は常に`HTMLElement`、
+またはその派生クラスの1つになります。
 
-それが何らかの`HTMLElement`であることがわかっている場合は、標準のHTML `querySelector`を使用して要素ツリーに深く入り込むことができます。
+それが何らかの`HTMLElement`であることがわかっている場合は、
+要素のツリーに深く飛び込むために標準のHTMLの`querySelector`を使用できます。
 
-段落要素を取得してバナーテキストを探すために`HTMLElement.querySelector`を呼び出す別のテストがあります:
+次は、パラグラフ要素を取得してバナーテキストを探すために`HTMLElement.querySelector`を呼び出すもうひとつのテストです:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -539,40 +570,43 @@ Angularは、コンパイル時に`nativeElement`のHTML要素の種類やHTML�
 
 #### _DebugElement_
 
-Angularの_fixture_は`fixture.nativeElement`をとおして直接コンポーネントの要素に提供されます。
+Angularの_fixture_は`fixture.nativeElement`を通して直接コンポーネントの要素を提供します。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="nativeElement">
 </code-example>
 
-これは`fixture.debugElement.nativeElement`として実装された、実際に便利なメソッドです
+次は、`fixture.debugElement.nativeElement`として実装された、実際に便利なメソッドです。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="debugElement-nativeElement">
 </code-example>
 
-要素へのこの迂回路には正当な理由があります。
+要素へのこの遠回りには正当な理由があります。
 
-`nativeElement`のプロパティは、実行時環境によって異なります。
-これらのテストは、
-DOMを持たない、またはDOMエミュレーションが`HTMLElement` API全体をサポートしていない_ブラウザ以外のプラットフォーム_で実行することができます。
+`nativeElement`のプロパティは、ランタイム環境に依存します。
+これらのテストは、DOMを持たない、またはDOMエミュレーションが`HTMLElement`
+API全体をサポートしていない_ブラウザ以外のプラットフォーム_で実行することができます。
 
-Angularは、サポートされているすべてのプラットフォームで安全に動作するよう、
-`DebugElement`抽象化に依存しています。
-Angularは、HTML要素ツリーを作成する代わりに、ランタイムプラットフォームの_ネイティブ要素_をラップする`DebugElement`ツリーを作成します。 `nativeElement`プロパティは`DebugElement`を展開し、プラットフォーム固有の要素オブジェクトを返します。
+Angularは、サポートされているすべてのプラットフォームで安全に動作するよう、`DebugElement`の抽象化に頼ります。
+Angularは、HTML要素のツリーを作成する代わりに、ランタイムのプラットフォームの_ネイティブ要素_をラップする`DebugElement`ツリーを作成します。
+`nativeElement`プロパティは`DebugElement`をアンラップし、プラットフォーム固有の要素オブジェクトを返します。
 
-このガイドのサンプルテストはブラウザでのみ実行されるように設計されているため、これらのテストの`nativeElement`は、常にテスト内で探索できる使い慣れたメソッドとプロパティを持つ`HTMLElement`です。
+このガイドのサンプルテストはブラウザでのみ実行されるように設計されているため、
+テスト内の`nativeElement`は、
+常にテスト内で探索できる使い慣れたメソッドとプロパティを持つ`HTMLElement`です。
 
-以前のテストは`fixture.debugElement.nativeElement`で再実装されています:
+次は、以前のテストを`fixture.debugElement.nativeElement`で再実装したものです:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v4-test-4">
 </code-example>
 
-`DebugElement`には、このガイドの他の部分で説明するように、テストに役立つ他のメソッドとプロパティがあります。
+`DebugElement`には、このガイドの他の部分で説明するように、
+テストに役立つ他のメソッドとプロパティがあります。
 
 Angularコアライブラリから`DebugElement`シンボルをインポートします。
 
@@ -584,24 +618,25 @@ Angularコアライブラリから`DebugElement`シンボルをインポート�
 {@a by-css}
 #### _By.css()_
 
-このガイドのテストはすべてブラウザ上で実行されますが、一部のアプリケーションは、
-少なくとも一部のプラットフォームで異なるプラットフォームで動作することがあります。
+このガイド内のテストはすべてブラウザ上で実行されますが、一部のアプリケーションは、
+少なくとも、一部のプラットフォームで動作することがあります。
 
 たとえば、接続の悪いデバイスでアプリケーションをより早く起動させる戦略の一環として、コンポーネントをサーバー上で最初にレンダリングすることがあります。
-サーバー側のレンダラーは、完全なHTML要素APIをサポートしていない可能性があります。`querySelector`をサポートしていない場合、前のテストは失敗する可能性があります。
+サーバー側のレンダラーは、完全なHTML要素のAPIをサポートしていない可能性があります。`querySelector`をサポートしていない場合、前のテストは失敗する可能性があります。
 
-`DebugElement`は、サポートされているすべてのプラットフォームで動作するクエリメソッドを提供します。 これらのクエリメソッドは、`DebugElement`ツリーのノードが選択基準に一致すると`true`を返す_述語_関数を使用します。
+`DebugElement`は、サポートされているすべてのプラットフォームで動作するクエリメソッドを提供します。
+これらのクエリメソッドは、`DebugElement`ツリーのノードが選択基準にマッチすると`true`を返す_述語_関数を使用します。
 
-ランタイムプラットフォームのライブラリからインポートされた`By`クラスの助けを借りて_述語_を作成します。
-ここではブラウザプラットフォームのための`By`をインポートしています:
+ランタイムのプラットフォームのライブラリからインポートされた`By`クラスの助けを借りて_述語_を作成します。
+次は、ブラウザプラットフォームのための`By`をインポートしています:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="import-by">
 </code-example>
 
-The following example re-implements the previous test with
-`DebugElement.query()` and the browser's `By.css` method.
+次の例では`DebugElement.query()`とブラウザの`By.css`メソッドを使用して、
+以前のテストを再実装しています。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -610,26 +645,29 @@ The following example re-implements the previous test with
 
 注目すべきいくつかの観察:
 
-* `By.css()`静的メソッドは[標準のCSSセレクター]で(https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors "CSS selectors")`DebugElement`ノードを選択します。 
-* クエリは段落の`DebugElement`を返します。
-* 段落要素を取得するためにはその結果をアンラップする必要があります。
+- `By.css()`静的メソッドは[標準のCSSセレクター](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors "CSS selectors")を使用して
+  `DebugElement`ノードを選択します。 
+- クエリはパラグラフの`DebugElement`を返します。
+- パラグラフ要素を取得するためにはその結果をアンラップする必要があります。
 
-CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要素_のプロパティのみをテストする場合、`By.css`の手法は過度のものになる可能性があります。
+CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要素_のプロパティのみをテストする場合、`By.css`でのアプローチは過度のものになるかもしれません。
 
-次の一連のテストで示すように、`querySelector()`や`querySelectorAll()`などの標準的な`HTMLElement`メソッドを使用してフィルタ処理する方が簡単で、より明確になることがよくあります。
+次の一連のテストで示すように、
+`querySelector()`や`querySelectorAll()`などの標準的な`HTMLElement`メソッドを使用してフィルタ処理する方が簡単で、
+より明確になることがよくあります。
 
 <hr>
 
-## Component テストシナリオ
+## コンポーネントのテストシナリオ
 
-このガイドのほとんどを構成する以下のセクションでは、
-一般的なコンポーネントのテストシナリオ
+このガイドの殆どを構成する次のセクションでは、
+一般的なコンポーネントのテストシナリオについて探検します。
 
-### Component binding
+### コンポーネントバインディング
 
 現在の`BannerComponent`は、静的タイトルテキストをHTMLテンプレートに表示します。
 
-いくつか変更を加えた後、`BannerComponent`は、
+少しの変更を加えた後、`BannerComponent`は、
 このようなコンポーネントの`title`プロパティにバインドすることによって、動的なタイトルを表示します。
 
 <code-example 
@@ -638,16 +676,16 @@ CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要�
   title="app/banner/banner.component.ts" linenums="false">
 </code-example>
 
-これは簡単なので、テストを追加して、
-コンポーネントが実際に正しいと思われる場所にコンテンツが表示されることを確認します。
+これは簡単なので、
+コンポーネントが実際に正しいと思われる場所にコンテンツが表示されることを確認するためにテストを追加します。
 
 #### _&lt;h1&gt;_のクエリ
 
-_タイトル_プロパティ補間バインディングをラップする`<h1>`
-要素の値を検査する一連のテストを記述します。
+_title_プロパティのインターポレーションバインディングをラップする`<h1>`
+要素の値を検証する一連のテストを書きます。
 
-`beforeEach`を更新して、
-その要素を標準HTML `querySelector`で検索し、それを`h1`変数に割り当てます。
+標準HTMLの`querySelector`を使用して要素を検索し、
+それを`h1`変数に割り当てるために`beforeEach`を更新します。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -660,23 +698,27 @@ _タイトル_プロパティ補間バインディングをラップする`<h1>`
 #### _createComponent()_はデータをバインドしない
 
 最初のテストでは、画面にデフォルトの`title`が表示されていることを確認したいと思います。
-あなたの本能は、このような`<h1>`を直ちに検査するテストを書くことです
+あなたの直感は、このような`<h1>`を直ちに検証するテストを書くことでしょう。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
   region="expect-h1-default-v1">
 </code-example>
 
-メッセージとともに_そのテストは失敗します:
+メッセージとともに_このテストは失敗します_:
+
 ```javascript
 expected '' to contain 'Test Tour of Heroes'.
 ```
 
-Angularが**変更検出**を実行するとバインディングが発生します。
+Angularが**変更検知**を実行したときにバインディングが発生します。
 
-プロダクションでは、Angularがコンポーネントを作成するか、ユーザーがキーストロークを入力するか、非同期アクティビティ(AJAXなど)が完了すると、変更検出が自動的に開始されます。
+プロダクションでは、Angularがコンポーネントを作成するか、
+ユーザーがキーストロークを入力するか、非同期アクティビティー(AJAXなど)が完了すると、
+変更検出が自動的に開始されます。
 
-`TestBed.createComponent`は変更の検出をトリガーしません。 改正試験で確認された事実
+`TestBed.createComponent`は変更検出をトリガー_しません_。
+この事実は改定したテストで確認されます:
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes" linenums="false">
@@ -684,17 +726,19 @@ Angularが**変更検出**を実行するとバインディングが発生しま
 
 #### _detectChanges()_
 
-`fixture.detectChanges()`を呼び出すことによって、データバインディングを実行するように`TestBed`に指示する必要があります。 それでは、`<h1>`は予期されたタイトルを持っています。
+`fixture.detectChanges()`を呼び出すことによって、データバインディングを実行するように`TestBed`に指示する必要があります。
+そうするだけで、`<h1>`は期待されたタイトルになります。
+
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
   region="expect-h1-default">
 </code-example>
 
-遅延変化検出は意図的かつ有用である。
-テスターは、_Angularがデータバインディングを開始して[ライフサイクルフック](guide/lifecycle-hooks)を呼び出す前に_、
-コンポーネントの状態を検査して変更する機会をテスターに与えます。
+遅延した変化検知は意図的かつ便利です。
+_Angularがデータバインディングを開始して[ライフサイクルフック](guide/lifecycle-hooks)を呼び出す前に_、
+コンポーネントの状態を検証して変更する機会をテスターに与えます。
 
-`fixture.detectChanges()`を呼び出す前にコンポーネントの`title`プロパティを変更する別のテストがあります。
+次は、`fixture.detectChanges()`を呼び出す_前_にコンポーネントの`title`プロパティを変更するもうひとつのテストです。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -706,18 +750,18 @@ Angularが**変更検出**を実行するとバインディングが発生しま
 #### 自動的な変更検知
 
 `BannerComponent`は、頻繁に`detectChanges`を呼び出します。
-いくつかのテスターは、Angularテスト環境が自動的に変更検出を実行することを好みます。
+テスターのなかには、Angularテスト環境が自動的に変更検知を実行することを好む人もいます。
 
 これは`ComponentFixtureAutoDetect`プロバイダーで`TestBed`を設定することで可能です。
-まず、テストユーティリティーライブラリからインポートします:
+まず、テスティングユーティリティーライブラリからそれをインポートします:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="import-ComponentFixtureAutoDetect" title="app/banner/banner.component.detect-changes.spec.ts (import)" linenums="false"></code-example>
 
-次に、それをテストモジュール構成の`providers`配列に追加します:
+次に、それをテストモジュール設定の`providers`配列に追加します:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect" title="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)" linenums="false"></code-example>
 
-自動変更検知がどのように機能するかを示す3つのテストがあります。
+次は、自動変更検知がどのように機能するかを示す3つのテストです。
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect-tests" title="app/banner/banner.component.detect-changes.spec.ts (AutoDetect Tests)" linenums="false"></code-example>
 
@@ -725,13 +769,15 @@ Angularが**変更検出**を実行するとバインディングが発生しま
 
 2回目と3回目のテストで重要な制限が明らかになりました。
 Angularのテスト環境では、テストでコンポーネントのタイトルが変更されたことが_わかりません_。
-`ComponentFixtureAutoDetect`サービスは、約束の解決、タイマー、DOMイベントなどの非同期アクティビティに応答します。 ただし、コンポーネントプロパティの直接的な同期更新は不可視です。 このテストでは、`fixture.detectChanges()`を手動で呼び出して、変更検出の別のサイクルをトリガする必要があります。
+`ComponentFixtureAutoDetect`サービスは、Promiseの解決、タイマー、DOMイベントなどの非同期アクティビティーに応答します。
+ただし、コンポーネントプロパティの直接的な同期更新は不可視です。
+このテストでは、変更検出の別のサイクルをトリガーするために`fixture.detectChanges()`を手動で呼び出す必要があります。
 
 <div class="alert is-helpful">
 
-テストフィクスチャが変更検出を実行するかどうかを知るのではなく、
+テストフィクスチャーが変更検知を実行するかどうかに思いを巡らせるのではなく、
 このガイドのサンプルは_常に_`detectChanges()`を_明示的_に呼び出します。
-`detectChanges()`を厳密に必要以上に頻繁に呼び出しても問題ありません。
+`detectChanges()`を厳密に必要な数以上に頻繁に呼び出しても問題はありません。
 
 </div>
 
@@ -741,12 +787,12 @@ Angularのテスト環境では、テストでコンポーネントのタイト�
 
 #### _dispatchEvent()_を使用してinputの値を変更する
 
-ユーザー入力をシミュレートするには、input要素を見つけて`value`プロパティを設定します。
+ユーザー入力をシミュレートするために、input要素を探して`value`プロパティを設定します。
 
-`fixture.detectChanges()`を呼び出してAngularの変更検知をトリガーします。
-しかし、本質的な中間段階があります。
+Angularの変更検知をトリガーするために`fixture.detectChanges()`を呼び出しましょう。
+しかし、本質的で中間的なステップがあります。
 
-Angularは、input要素の`value`プロパティを設定していることを認識していません。
+Angularは、input要素の`value`プロパティが設定されたことを認識していません。
 `dispatchEvent()`を呼び出して要素の`input`イベントを発生させるまで、
 そのプロパティは読み取られません。_次に_、`detectChanges()`を呼び出します。
 
@@ -758,9 +804,9 @@ Angularは、input要素の`value`プロパティを設定していることを�
 
 ### 外部ファイルを使用したコンポーネント
 
-上記の`BannerComponent`は、`@Component.template`プロパティと`@Component.styles`プロパティでそれぞれ指定された_インラインテンプレート_と_インラインCSS_で定義されています。
+上記の`BannerComponent`は、`@Component.template`プロパティと`@Component.styles`プロパティのそれぞれで指定された_インラインテンプレート_と_インラインCSS_で定義されています。
 
-多くのコンポーネントは、`BannerComponent`の以下のバリアントが行うように、
+多くのコンポーネントは、以下のように変更した`BannerComponent`が行うように、
 `@Component.templateUrl`プロパティと`@Component.styleUrls`プロパティでそれぞれ_外部テンプレート_と
 _外部CSS_を指定します。
 
@@ -772,10 +818,10 @@ _外部CSS_を指定します。
 
 この構文は、コンポーネントコンパイル時に外部ファイルを読み込むようにAngularコンパイラに指示します。
 
-_テストを実行する前にアプリをコンパイルするので_、
-CLIの `ng test`コマンドを実行すると問題はありません。
+_テストを実行する前にアプリケーションをコンパイルするので_、
+CLIで `ng test`コマンドを実行するときに問題になりません。
 
-ただし、**非CLI環境**でテストを実行すると、このコンポーネントのテストが失敗することがあります。
+ただし、**非CLI環境**でテストを実行すると、このコンポーネントのテストが失敗するでしょう。
 たとえば、[plunker](http://plnkr.co/)などのWebコーディング環境で`BannerComponent`テストを実行すると、
 次のようなメッセージが表示されます:
 
@@ -797,17 +843,17 @@ _テスト中に_ランタイム環境がソースコードをコンパイルす
 コンポーネントにはしばしばサービスの依存関係があります。
 
 `WelcomeComponent`は、ログインしたユーザーへのウェルカムメッセージを表示します。
-ユーザーが注入された`UserService`のプロパティに基づいているかどうかを知る:
+注入した`UserService`のプロパティからユーザーが誰かを知ります:
 
 <code-example path="testing/src/app/welcome/welcome.component.ts" title="app/welcome/welcome.component.ts" linenums="false"></code-example>
 
-`WelcomeComponent`には、サービスとやり取りする決定ロジックがあり、このコンポーネントをテストに値するロジックにします。
-specファイルのテストモジュールの設定は、`app/welcome/welcome.component.spec.ts`です:
+`WelcomeComponent`には、サービスとやり取りするロジックと、このコンポーネントの値のテストをするロジックの決定権があります。
+次は、スペックファイル`app/welcome/welcome.component.spec.ts`のテスティングモジュールの設定です:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
 今回は、_テスト中のコンポーネント_を宣言することに加えて、
-`providers`リストに`UserService`プロバイダを追加します。
+`providers`配列に`UserService`プロバイダーを追加します。
 しかし、実際の`UserService`ではありません。
 
 {@a service-test-doubles}
@@ -815,14 +861,14 @@ specファイルのテストモジュールの設定は、`app/welcome/welcome.c
 #### テストダブルのサービスを提供する
 
 _テスト中のコンポーネント_には、実際のサービスを注入する必要はありません。
-実際には、テストの倍数(スタブ、フェイク、スパイ、またはモック)であれば通常はより良いです。
-仕様の目的は、サービスではなくコンポーネントをテストすることであり、
-実際のサービスは問題になる可能性があります。
+実際には、通常はテストダブル(スタブ、フェイク、スパイ、またはモック)であればより良いです。
+スペックの目的は、サービスではなくコンポーネントをテストすることであり、
+実際のサービスだと問題になる可能性があります。
 
 実際の`UserService`を注入することは悪夢になる可能性があります。
 実際のサービスは、ユーザーにログイン資格情報を要求し、
 認証サーバーに到達しようとします。
-これらの動作は傍受するのが難しい場合があります。
+このような動作は補足するのが難しい場合があります。
 実際の`UserService`の代わりにテストダブルを作成して登録する方がはるかに簡単で安全です。
 
 この特定のテストスイートは、
@@ -838,15 +884,15 @@ _テスト中のコンポーネント_には、実際のサービスを注入す
 
 #### 注入したサービスを取得する
 
-テストでは、`WelcomeComponent`に注入された(スタブ)`UserService`へのアクセスが必要です。
+テストでは、`WelcomeComponent`に注入された`UserService`(スタブ)へのアクセスが必要です。
 
 Angularは階層的な注入システムを持っています。
 `TestBed`によって作成されたルートインジェクターからコンポーネントツリーまで、
-複数のレベルのインジェクタがあります。
+複数のレベルのインジェクターがあります。
 
 注入されたサービスを取得する最も安全な方法は、
-**常に動作する方法で**、**テスト中のコンポーネントのインジェクタから取得することです**。
-コンポーネントインジェクタは、フィクスチャの`DebugElement`のプロパティです。
+**常に動作する**方法は、**テスト中のコンポーネントのインジェクターから取得することです**。
+コンポーネントインジェクターは、フィクスチャーの`DebugElement`のプロパティです。
 
 <code-example 
   path="testing/src/app/welcome/welcome.component.spec.ts"
@@ -860,9 +906,9 @@ Angularは階層的な注入システムを持っています。
 
 `TestBed.get()`経由でルートインジェクタからサービスを取得することも_できます_。
 これは覚えやすく、あまり冗長ではありません。
-しかし、Angularがコンポーネントのインスタンスをテストのルートインジェクタに注入する場合にのみ機能します。
+しかし、Angularがコンポーネントとサービスのインスタンスをテストのルートインジェクターに注入する場合にのみ機能します。
 
-このテストスイートでは、`UserService`の_唯一_のプロバイダーはルートテストモジュールなので、
+このテストスイートでは、`UserService`の_唯一_のプロバイダーはルートテスティングモジュールなので、
 `TestBed.get()`を次のように呼び出すことは安全です:
 
 <code-example 
@@ -874,7 +920,7 @@ Angularは階層的な注入システムを持っています。
 <div class="alert is-helpful">
 
 `TestBed.get()`が機能しないユースケースについては、
-コンポーネントのインジェクタからサービスを取得する必要がある時期と理由を説明する
+いつどこでコンポーネントのインジェクターからサービスを取得する必要があるかを説明する
 [_コンポーネントのプロバイダーを上書きする_](#component-override)セクションを参照してください。
 
 </div>
@@ -895,21 +941,21 @@ Angularは階層的な注入システムを持っています。
 
 #### 最後のステップとテスト
 
-`TestBed.get()`を使用して`beforeEach()`を完了します:
+次は、`TestBed.get()`を使用して`beforeEach()`を完了します:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
-そしていくつかのテストがあります:
+そしていくつかテストします:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="tests" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
-最初は健全性テストです。スタブされた`UserService`が呼び出され、動作していることを確認します。
+最初のものはサニティーテストです。スタブされた`UserService`が呼び出され、動作していることを確認します。
 
 <div class="alert is-helpful">
 
-Jasmineのマッチャーに対する第2のパラメータ(例えば、 `'expected name'`)は、オプションの失敗ラベルである。
-予想が失敗した場合、Jasmineディスプレイはこのラベルを期待失敗メッセージに付加します。
-複数の期待値を持つ仕様では、何が間違っていて、どの期待値が失敗したかを明確にするのに役立ちます。
+Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)は、オプションの失敗ラベルです。
+エクスペクテーションが失敗した場合、Jasmineは表示にこのラベルをエクスペクテーション失敗メッセージに追加します。
+複数のエクスペクテーションを持つスペックでは、何が間違っていて、どのエクスペクテーションが失敗したかを明確にするのに役立ちます。
 
 </div>
 

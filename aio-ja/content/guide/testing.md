@@ -970,7 +970,7 @@ Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)�
 ### 非同期サービスを使用するコンポーネント
 
 このサンプルでは、`AboutComponent`テンプレートは`TwainComponent`をホストします。
-`TwainComponent`はMark Twainの引用符を表示します。
+`TwainComponent`はMark Twainの引用を表示します。
 
 <code-example 
   path="testing/src/app/twain/twain.component.ts" 
@@ -978,7 +978,7 @@ Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)�
   title="app/twain/twain.component.ts (template)" linenums="false">
 </code-example>
 
-コンポーネントの`quote`プロパティの値は、`AsyncPipe`を通過することに注意してください。
+コンポーネントの`quote`プロパティの値は、`AsyncPipe`を経由することに注意してください。
 つまり、プロパティは`Promise`または`Observable`のいずれかを返します。
 
 この例では、`TwainComponent.getQuote()`メソッドは、
@@ -990,16 +990,16 @@ Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)�
   title="app/twain/twain.component.ts (getQuote)" linenums="false">
 </code-example>
 
-`TwainComponent`は、注入された`TwainService`から引用符を取得します。
-コンポーネントは、サービスが最初の引用符を返す前に、
-返された`Observable`をプレースホルダー値(`'...'`)で開始します。
+`TwainComponent`は、注入された`TwainService`から引用を取得します。
+コンポーネントは、サービスが最初の引用を返せるようになる前にプレースホルダー値(`'...'`)
+を設定した`Observable`を返し始めます。
 
-`catchError`はサービスエラーを傍受し、エラーメッセージを作成し、成功チャネルのプレースホルダー値を返します。
-同じ変更検出サイクルでそのメッセージを2回更新するのを避けるために、
-`errorMessage`を設定するには、
-チェックを待つ必要があります。
+`catchError`はサービスのエラーを補足し、エラーメッセージを作成し、成功チャネルのプレースホルダー値を返します。
+同じ変更検知サイクルでそのメッセージが2回更新されるのを避けるために、
+`errorMessage`を設定するために、
+時間の経過を待つ必要があります。
 
-これらはすべてテストしたい機能です。
+これらがすべてテストするための機能のすべてです。
 
 #### スパイを使用したテスト
 

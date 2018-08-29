@@ -168,7 +168,7 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 リモートサーバーからのデータを受け取るときに、何かうまくいかない場合。
 `HeroService.getHeroes()`メソッドはエラーをキャッチして、適切に対応する必要があります。
 
-エラーをキャッチするには`http.get()`で得られた`observerable`な結果をRxJSの`catchError()`オペレーターに**連結**します。
+エラーをキャッチするには`http.get()`で得られた`observable`な結果をRxJSの`catchError()`オペレーターに**連結**します。
 
 あとで必要になるオペレーターと一緒に、`rxjs/operators`から`catchError`をインポートします。
 

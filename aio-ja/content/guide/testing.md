@@ -999,13 +999,13 @@ Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)�
 `errorMessage`を設定するために、
 時間の経過を待つ必要があります。
 
-これらがすべてテストするための機能のすべてです。
+これらがテストするための機能のすべてです。
 
 #### スパイを使用したテスト
 
-コンポーネントをテストするときは、サービスのパブリックAPIだけが重要です。
-一般に、テスト自体はリモートサーバーを呼び出すべきではありません。
-彼らはそのような呼び出しをエミュレートする必要があります。この`app/twain/twain.component.spec.ts`の設定は、これを行うための1つの方法を示しています:
+コンポーネントをテストするときは、サービスの公開APIだけが重要です。
+一般に、テスト自体はリモートサーバー呼び出しをすべきではありません。
+そのような呼び出しはエミュレートする必要があります。次の`app/twain/twain.component.spec.ts`の設定は、これを行うための1つの方法を示しています:
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -1015,25 +1015,25 @@ Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)�
 
 {@a service-spy}
 
-スパイにフォーカスしてください。
+スパイに注目してください。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="spy">
 </code-example>
 
-スパイは、`getQuote`への任意の呼び出しがテスト見積もりで観測値を受け取れるように設計されています。
+スパイは、`getQuote`への任意の呼び出しがテストの引用のObservableを受け取るように設計されています。
 実際の`getQuote()`メソッドとは異なり、このスパイはサーバをバイパスし、
-その値がすぐに利用できる同期観測値を返します。
+その値がすぐに利用できる同期的なObservableを返します。
 
-`Observable`が同期していても、このスパイで多くの有用なテストを書くことができます。
+`Observable`が同期的であっても、このスパイで多くの有用なテストを書くことができます。
 
 {@a sync-tests}
 
 #### 同期的テスト
 
-同期`Observable`の主な利点は、
-非同期プロセスを同期テストにすることができることです。
+同期的な`Observable`の主な利点は、
+非同期プロセスを同期的テストにすることができる点です。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -1042,18 +1042,19 @@ Jasmineのマッチャーに対する第2引数(例えば、 `'expected name'`)�
 
 スパイの結果が同期的に返されるため、
 `getQuote()`メソッドは、
-Angularが`ngOnInit`を呼び出す最初の変更検出サイクルの_直後_に画面上のメッセージを更新します。
+Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_に画面上のメッセージを更新します。
 
-エラー・パスをテストするときにあなたはとてもラッキーです。
-サービススパイはエラーを同期的に返しますが、
+エラーパスをテストするときにあなたはとてもラッキーではありません。
+サービスのスパイはエラーを同期的に返しますが、
 コンポーネントメソッドは`setTimeout()`を呼び出します。 
-のテストは、JavaScriptエンジンが少なくとも1回転以上待ってから値を取得できるようにする必要があります。
+このテストは、JavaScriptエンジンが少なくとも1回動作しきるのを待ってから値を取得できるようにする必要があります。
 テストは_非同期_にする必要があります。
 
 {@a fake-async}
+
 #### _fakeAsync()_を使用した非同期テスト
 
-次のテストは、サービスが`ErrorObservable`を返すときの予想される動作を確認します。
+次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -1061,13 +1062,13 @@ Angularが`ngOnInit`を呼び出す最初の変更検出サイクルの_直後_�
 </code-example>
 
 `it()`関数は次の形式の引数を受け取ることに注意してください。
+
 ```javascript
 fakeAsync(() => { /* test body */ })`
 ```
 
-`fakeAsync`関数は、特定の_fakeAsyncテストゾーン_でテスト本体を実行することによって、
-線形コーディングスタイルを有効にします。
-テスト本体は同期しているように見えます。
+`fakeAsync`関数は、特定の_fakeAsyncテストゾーン_でテスト本体を実行することによって、線形的なコーディングスタイルをできるようにします。
+テスト本体は同期的に見えます。
 `Promise.then()`のようなネストされた構文はなく、制御の流れを混乱させることはありません。
 
 {@a tick}
@@ -1076,11 +1077,11 @@ fakeAsync(() => { /* test body */ })`
 
 (仮想)クロックを進めるには、`tick()`を呼び出さなければなりません。
 
-`tick()`を呼び出すと、保留中のすべての非同期アクティビティが終了するまでの時間がシミュレートされます。
-この場合、エラーハンドラの`setTimeout()`を待機します。
+`tick()`を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
+このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-`tick`関数は、`TestBed`でインポートするAngularテストユーティリティの1つです。
-これは`fakeAsync`のコンパニオンであり、`fakeAsync`本体内でのみ呼び出すことができます。
+`tick`関数は、`TestBed`とともにインポートするAngularテスティングユーティリティーの1つです。
+これは`fakeAsync`と対になっており、`fakeAsync`本体内でのみ呼び出すことができます。
 
 #### より多くのmacroTasksをサポートする
 
@@ -1105,7 +1106,8 @@ fakeAsync(() => { /* test body */ })`
   </code-pane>
 </code-tabs>
 
-このようなケースをサポートしたい場合は、`beforeEach`でサポートしたい`macroTask`を定義する必要があります。例えば:
+このようなケースをサポートしたい場合は、`beforeEach`でサポートしたい`macroTask`を定義する必要があります。
+例えば次のようになります:
 
 ```javascript
 beforeEach(() => {
@@ -1129,28 +1131,28 @@ it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
 );
 ```
 
-#### 非同期のオブザーバブル
+#### 非同期のObservable
 
-これらのテストのテストカバレッジに満足しているかもしれません。
+あなたはこれらのテストのテストカバレッジに満足しているかもしれません。
 
-しかし、あなたは本当のサービスがこのように振る舞わないという事実に悩まされるかもしれません。
-実際のサービスは、要求をリモートサーバーに送信します。
+しかし、実際のサービスがこのように動作しないという事実に悩まされるかもしれません。
+実際のサービスは、リクエストをリモートサーバーに送信します。
 サーバーは応答するのに時間がかかり、
-前の2つのテストのように応答がすぐに利用できなくなります。
+前の2つのテストのように応答がすぐに利用できなくなるでしょう。
 
-このような`getQuote()`スパイから非同期観測を返すと、
-あなたのテストは実世界をより忠実に反映します。
+次のように`getQuote()`スパイから非同期的なObservableを返すと、
+あなたのテストは実世界をより忠実に反映できるでしょう。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="async-setup">
 </code-example>
 
-#### 非同期オブザーバブルヘルパー
+#### 非同期Observableヘルパー
 
-非同期のオブザーバブルは、`asyncData`ヘルパーによって生成されました。
-`asyncData`ヘルパーは、自分で作成する必要があるユーティリティ関数です。
-または、サンプルコードからこれをコピーすることもできます。
+非同期のObservableは、`asyncData`ヘルパーによって生成されました。
+`asyncData`ヘルパーは、自分で作成する必要があるユーティリティー関数です。
+サンプルコードからこれをコピーすることもできます。
 
 <code-example 
   path="testing/src/testing/async-observable-helpers.ts" 
@@ -1158,16 +1160,15 @@ it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
   title="testing/async-observable-helpers.ts">
 </code-example>
 
-このヘルパーの観測結果は、JavaScriptエンジンの次のターンで`data`値を出力します。
+このヘルパーのObservableは、JavaScriptエンジンの次のターンで`data`の値を出力します。
 
-[RxJSの`defer()`演算子](http://reactivex.io/documentation/operators/defer.html)
-は、観測値を返します。
-Promiseかオブザーバブルのどちらかを返すファクトリ関数を取ります。
-あるものが_defer_のobservableを購読すると、
-そのファクトリで作成された新しいobservableにサブスクライバが追加されます。
+[RxJSの`defer()`演算子](http://reactivex.io/documentation/operators/defer.html)は、Observableを返します。
+PromiseかObservableのどちらかを返すファクトリ関数を受け取ります。
+なにかしらが_defer_のObservableをサブスクライブしたとき、
+そのファクトリで作成された新しいObservableにサブスクライバーが追加されます。
 
-`defer()`演算子は、`HttpClient`のように`Promise.resolve()`を新しい観測値に変換して、
-一度放出して完了します。
+`defer()`演算子は、`HttpClient`のように`Promise.resolve()`を新しいObservableに変換して、
+1回出力して完了します。
 購読者は、データ値を受け取った後、購読を解除されます。
 
 非同期エラーを生成するための同様のヘルパーがあります。
@@ -1179,44 +1180,44 @@ Promiseかオブザーバブルのどちらかを返すファクトリ関数を�
 
 #### さらに非同期テスト
 
-`getQuote()`スパイが非同期オブザーバブルを返すようになったので、
+`getQuote()`スパイが非同期Observableを返すようになったので、
 ほとんどのテストは非同期でなければなりません。
 
-現実世界で期待されるデータフローを示す
-`fakeAsync()`テストがあります。
+次は、現実世界で期待されるデータフローを示す
+`fakeAsync()`テストです。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="fake-async-test">
 </code-example>
 
-quote要素は、`ngOnInit()`の後にプレースホルダ値(`'...'`)を表示することに注意してください。
-最初の見積もりはまだ届いていません。
+`ngOnInit()`の後に、引用にはプレースホルダー値(`'...'`)が表示されることに注意してください。
+最初の引用はまだ届いていません。
 
-最初の見積もりをobservableからフラッシュするには、`tick()`を呼び出します。
+最初の引用をObservableからフラッシュするには、`tick()`を呼び出します。
 次に、`detectChanges()`を呼び出して、Angularに画面を更新するように指示します。
 
-次に、quote要素が予想されるテキストを表示することをアサートすることができます。
+それから、引用の要素に期待されるテキストが表示することをアサートしてみましょう。
 
 {@a async}
 
 #### _async()_を使用した非同期テスト
 
-`fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
+`fakeAsync()`ユーティリティー関数にはいくつかの制限があります。
 特に、テスト本体が`XHR`呼び出しを行う場合は動作しません。
 
-テスト中の`XHR`呼び出しはまれであるため、一般的に`fakeAsync()`を使うことができます。
-しかし、`XHR`を呼び出す必要がある場合は、`async()`について知りたいでしょう。
+テスト中の`XHR`呼び出しはまれであるため、普通は`fakeAsync()`を使うことができます。
+しかし、`XHR`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
 
 <div class="alert is-helpful">
 
 `TestBed.compileComponents()`メソッド([下記参照](#compile-components))は、
-"ジャストインタイム"コンパイル時に外部テンプレートとcssファイルを読み込むために`XHR`を呼び出します。
-`async()`ユーティリティを使用して`compileComponents()`を呼び出すテストを作成します。
+"just-in-time"コンパイル時に外部テンプレートとcssファイルを読み込むために`XHR`を呼び出します。
+`async()`ユーティリティーを使用して`compileComponents()`を呼び出すテストを作成してください。
 
 </div>
 
-以前の`fakeAsync()`テストは、`async()`ユーティリティで再記述したものです。
+次は、以前の`fakeAsync()`テストを`async()`ユーティリティーで書き直したものです。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -1224,52 +1225,61 @@ quote要素は、`ngOnInit()`の後にプレースホルダ値(`'...'`)を表示
 </code-example>
 
 `async()`ユーティリティは、
-テスターのコードを特別な非同期テストゾーンで実行するように設定することによって、非同期ボイラープレートを非表示にします。
+テスターのコードを特別な_非同期テストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。
 Jasmineの`done()`をテストに渡す必要はなく、
-約束されたコールバックや観測可能なコールバックで`done()`を呼び出す必要はありません。
+PromiseやObservableのコールバック内で`done()`を呼び出す必要はありません。
 
-しかし、_テストの非同期性_は`fixture.whenStable()`の呼び出しによって明らかになります。
-これは制御の線形フローを壊します。
+しかし、テストの非同期性は`fixture.whenStable()`の呼び出しによって明示的になります。
+これは制御の線形的なフローを壊します。
 
 {@a when-stable}
 
 #### _whenStable_
 
-テストは、`getQuote()`observableが次のクォートを発行するのを待つ必要があります。
+テストは、`getQuote()` Observableが次の引用を発行するのを待つ必要があります。
 `tick()`を呼び出す代わりに、`fixture.whenStable()`を呼び出します。
 
-`fixture.whenStable()`は、JavaScriptエンジンのタスクキューが空になったときに解決する約束を返します。
-この例では、オブザーバブルが最初のクォートを発行すると、
-タスクキューは空になります。
+`fixture.whenStable()`は、
+JavaScriptエンジンのタスクキューが空になったときに解決するPromiseを返します。
+この例では、Observableが最初の引用を発行すると、タスクキューは空になります。
 
-テストは、promiseコールバック内で再開し、
-`detectChanges()`を呼び出してquote要素を期待されるテキストで更新します。
+テストは、Promiseコールバック内で再開し、
+期待されるテキストで引用を更新するために`detectChanges()`を呼び出します。
 
 {@a jasmine-done}
 
-#### Jasmine _done()_
+#### Jasmineの _done()_
 
-`async`関数と`fakeAsync`関数はAngular非同期テストを大幅に簡素化しますが、
-従来の技術に戻って、[`done`コールバック](http://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support)関数を渡すことができます。
+`async`関数と
+`fakeAsync`関数はAngular非同期テストを大幅に簡素化しますが、
+伝統的なテクニックに立ち戻って、
+[`done`コールバック](http://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support)
+を受け取る関数を`it`に渡すことができます。
 
-これで、promiseを連鎖させ、エラーを処理し、適切な時に`done()`を呼び出す責任があります。
+さて、あなたはPromiseをチェーンさせ、エラーを処理し、適切な時に`done()`を呼び出す責任があります。
 
-`done()`でテスト関数を書くことは、asyncとfakeAsyncよりも面倒です。しかし時折必要です。たとえば、`intervalTimer()`またはRxJS `delay()`演算子を含むコードをテストするときは、`async`または`fakeAsync`を呼び出すことはできません。
+`done()`を使用してテスト関数を書くことは、`async`と`fakeAsync`よりも面倒です。
+しかし時折必要です。
+たとえば、`intervalTimer()`やRxJSの`delay()`演算子を含むコードをテストするときは、
+`async`または`fakeAsync`を呼び出すことはできません。
 
-`done()`で書かれた以前のテストの2つのバージョンがあります。最初のコンポーネントは、コンポーネントの`quote`プロパティによってテンプレートに公開された`Observable`にサブスクライブします。
+次は、以前2つのバージョンのテストを`done()`を使用して書いたものです。
+最初の1つは、コンポーネントの`quote`プロパティによってテンプレートに公開された`Observable`をサブスクライブします。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
   region="quote-done-test" linenums="false">
 </code-example>
 
-RxJS `last()`演算子は、完了する前に観測値の最後の値を出力します。
-これはテスト見積もりになります。
-`subscribe`コールバックは、以前のテストと同じ方法で、クォート要素をテスト引用符で更新するために`detectChanges()`を呼び出します。
+RxJSの`last()`演算子は、完了する前にObservableの最後の値を発行します。
+これはテストの引用になります。
+`subscribe`コールバックは、以前のテストと同じ方法で、引用の要素をテストの引用で更新するために`detectChanges()`を呼び出します。
 
-いくつかのテストでは、注入されたサービスメソッドがどのように呼び出され、返された値が画面に表示されるかに、より関心があります。
+いくつかのテストでは、画面に表示されるものよりも、
+注入されたサービスメソッドがどのように呼び出されるかとどんな値が返されるかに関心があります。
 
-偽の`TwainService`の`qetQuote()`スパイなどのサービススパイは、その情報を提供し、ビューの状態についてアサーションを行うことができます。
+偽の`TwainService`の`qetQuote()`スパイなどのサービススパイは、
+その情報を提供し、ビューの状態についてアサーションを行うことができます。
 
 <code-example 
   path="testing/src/app/twain/twain.component.spec.ts" 
@@ -1279,21 +1289,26 @@ RxJS `last()`演算子は、完了する前に観測値の最後の値を出力�
 <hr>
 
 {@a marble-testing}
-### Component marble tests
+### コンポーネントのマーブルテスト
 
-以前の`TwainComponent`テストでは、`asyncData`と`asyncError`ユーティリティを使用して、`TwainService`からの非同期観測可能な応答をシミュレートしました。
+以前の`TwainComponent`テストでは、`asyncData`と`asyncError`ユーティリティを使用して、
+`TwainService`からの非同期Observableの応答をシミュレートしました。
 
-これらはあなた自身で書くことができる簡単で簡単な機能です。
-残念ながら、多くの一般的なシナリオでは単純すぎます。
-可観測性はしばしば重大な遅延の後に、複数回出現する。
+これらはあなた自身で書くことができる短くて簡単な関数です。
+残念ながら、これらは多くの一般的なシナリオでは単純すぎます。
+Observableは大幅な遅延の後に、複数回発行されることが多いです。
 コンポーネントは、
-重複している値とエラーのシーケンスで複数のオブザーバブルを調整できます。
+重複する値とエラーのシーケンスで複数のObservableを調整するかもしれません。
 
-**RxJSマーブルテスティング**は、シンプルかつ複雑な観測可能なシナリオをテストするうえで最適な方法です。
-あなたは、観測可能物がどのように働くかを示す[マーブルダイアグラム](http://rxmarbles.com/)を見たことがあります。
-マーブルテストでは、同様のマーブル言語を使用して、テストで観測可能なストリームと期待値を指定します。
+**RxJSマーブルテスティング**は、シンプル、複雑の両方の場合に、
+Observableのシナリオをテストするための素晴らしい方法です。
+あなたはおそらく、
+Observableがどのように動作するかを示す[マーブルダイアグラム](http://rxmarbles.com/)を見たことがあるでしょう。
+マーブルテスティングでは、同様のマーブル言語を使用して、
+テストでObservableのストリームとエクスペクテーションを指定します。
 
-次の例では、マーブルテストを使用した`TwainComponen`tテストの2つを再訪します。
+次の例では、
+`TwainComponen`の2つのテストをマーブルテスティングで再訪します。
 
 まず、`jasmine-marbles` npmパッケージをインストールします。
 次に、必要なシンボルをインポートします。
@@ -1304,59 +1319,46 @@ RxJS `last()`演算子は、完了する前に観測値の最後の値を出力�
   title="app/twain/twain.component.marbles.spec.ts (import marbles)" linenums="false">
 </code-example>
 
-見積もりを取得するための完全なテストです:
+次は、引用を取得するための完全なテストです:
 
 <code-example 
   path="testing/src/app/twain/twain.component.marbles.spec.ts" 
   region="get-quote-test" linenums="false">
 </code-example>
 
-ジャスミンテストは同期的であることに注意してください。
+Jasmineのテストが同期的であることに注意してください。
 `fakeAsync()`はありません。
-マーブルテストは、テストスケジューラを使用して、同期テストにおける時間の経過をシミュレートします。
+マーブルテスティングは、テストスケジューラーを使用して、同期的テストにおける時間の経過をシミュレートします。
 
-マーブルテストの美しさは、観測可能なストリームの視覚的定義にあります。
+マーブルテストの美しさは、Obsrevalbeストリームの視覚的定義にあります。
 このテストでは、3つの[フレーム](#marble-frame)(`---`)を待ち、
-値(`x`)を出力し、
-完了(`|`)する[_コールド_オブザーバブル](#cold-observable)を定義します。
-2番目の引数では、値マーカー(`x`)を出力値(`testQuote`)にマップします
+値(`x`)を発行し、
+完了(`|`)する[_コールド_ Observable](#cold-observable)を定義します。
+2番目の引数では、値マーカー(`x`)を発行する値(`testQuote`)にマップします
 
 <code-example 
   path="testing/src/app/twain/twain.component.marbles.spec.ts" 
   region="test-quote-marbles" linenums="false">
 </code-example>
 
-マーブルライブラリは、対応する観測値を構築します。
-この観測値は、`getQuote`スパイの戻り値として設定されます。
+マーブルライブラリは、
+対応するObservable(`getQuote`スパイの戻り値としてテストがセットする)を構築します。
 
-マーブルの観測値をアクティブにする準備ができたら、
-`TestScheduler`にこのような用意されたタスクのキューを_フラッシュ_するように指示します。
+マーブルObservableをアクティブにする準備ができたら、
+次のように`TestScheduler`に用意されたタスクキューを_フラッシュ_するように指示します。
 
 <code-example 
   path="testing/src/app/twain/twain.component.marbles.spec.ts" 
   region="test-scheduler-flush" linenums="false">
 </code-example>
 
-This step serves a purpose analogous to `tick()` and `whenStable()` in the
-earlier `fakeAsync()` and `async()` examples.
-The balance of the test is the same as those examples.
-
-#### Marble error testing
-
-Here's the marble testing version of the `getQuote()` error test.
-
-<code-example 
-  path="testing/src/app/twain/twain.component.marbles.spec.ts" 
-  region="error-test" linenums="false">
-</code-example>
-
 このステップは、
-以前の`fakeAsync()`および`async()`の例の`tick()`および`whenStable()`に似た目的を果たします。
-テストのバランスは、それらの例と同じです。
+以前の`fakeAsync()`と`async()`での例の中での`tick()`と`whenStable()`と似た目的を果たします。
+テストのバランスはそれらの例と同じです。
 
 ### マーブルエラーテスティング
 
-以下は `getQuote()`エラーテストのマーブルテストバージョンです。
+次は、`getQuote()`エラーテストのマーブルテストバージョンです。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
@@ -1364,37 +1366,37 @@ Here's the marble testing version of the `getQuote()` error test.
 </code-example>
 
 コンポーネント自体がエラーを処理するときに`setTimeout()`を呼び出すため、
-`fakeAsync()`と`tick()`を呼び出すことはまだ非同期テストです。
+これはまだ非同期テストです。`fakeAsync()`と`tick()`を呼び出す必要があります。
 
-マーブルの観測可能な定義を見てください。
+マーブルObservableの定義を見てください。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="error-marbles" linenums="false">
 </code-example>
 
-これは、3つのフレームを待ってからエラーを発する_コールド_オブザーバブルです。
+これは、3つのフレームを待ってからエラーを発行する_コールド_Observableです。
 ハッシュ(`#`)は、3番目の引数で指定されたエラーのタイミングを示します。
-オブザーバブルが決して値を出力しないため、2番目の引数はnullです。
+Observableは決して値を発行しないので、2番目の引数は`null`です。
 
 #### マーブルテストについて学ぶ
 
 {@a marble-frame}
-_マーブルフレーム_は、テスト時間の仮想単位です。
-各記号( `-` 、`x`、`|`、`#`)は、1つのフレームの通過をマークします。
+_マーブルフレーム_とは、テスト時間の仮想的な単位です。
+各シンボル( `-` 、`x`、`|`、`#`)は、1つのフレームの通過をマークします。
 
 {@a cold-observable}
-あなたがそれを購読するまで、_コールド_オブザーバブルは値を生成しません。
-あなたのアプリケーションのオブザーバブルのほとんどはコールドです。
-すべての[_HttpClient_](guide/http)メソッドはコールドオブザーバブルを返します。
+_コールド_Observableはサブスライブされるまで値を発行しません。
+アプリケーションのObservableのほとんどはコールドです。
+すべての[_HttpClient_](guide/http)メソッドはコールドObservableを返します。
 
-あなたがそれを購読する_前_にホットオブザーバブルがすでに価値を生み出しています。
-ルーターの活動を報告する[_Router.events_](api/router/Router#events)オブザーバブル、
-これはホットオブザーバブルです。
+ホットオブザーバブルはサブスライブする_前_にすでに値を発行しています。
+ルーターアクティビティーを報告する[_Router.events_](api/router/Router#events)Observable、
+これはホットObservableです。
 
-RxJSマーブルテストは、このガイドの範囲を超えて、豊富なテーマです。
+RxJSマーブルテストは、このガイドの範囲を超えて、豊富な題材をもちます。
 [公式ドキュメント](https://github.com/ReactiveX/rxjs/blob/master/doc/writing-marble-tests.md)から始めて、
-ウェブ上で学んでください。
+ウェブ上で学習してください。
 
 <hr>
 

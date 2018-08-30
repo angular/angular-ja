@@ -1404,18 +1404,18 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 
 ### インプットとアウトプットを使用したコンポーネント
 
-入力と出力を持つコンポーネントは、通常、ホストコンポーネントのビューテンプレート内に表示されます。
-ホストは、プロパティー・バインディングを使用して入力プロパティーを設定し、
-イベント・バインディングを使用して出力プロパティーによって発生したイベントをlistenします。
+インプットとアウトプットを持つコンポーネントは、通常、ホストコンポーネントのビューテンプレート内に配置されます。
+ホストは、プロパティーバインディングを使用してインプットプロパティを設定し、
+イベントバインディングを使用して愛とプットプロパティによって発生したイベントをリッスンします。
 
-テストの目的は、そのようなバインディングが期待どおりに機能することを確認することです。
-テストでは入力値を設定し、出力イベントを待機する必要があります。
+テストの目標は、そのようなバインディングが期待どおりに機能することを確認することです。
+テストではインプット値を設定し、アウトプットイベントをリッスンする必要があります。
 
 `DashboardHeroComponent`は、このロール内のコンポーネントの小さな例です。
 `DashboardComponent`によって提供される個々のヒーローを表示します。
 そのヒーローをクリックすると、ユーザーがヒーローを選択したことを`DashboardComponent`に伝えます。
 
-`DashboardHeroComponent`は、このようにDashboardComponentテンプレートに組み込まれています:
+`DashboardHeroComponent`は、次のような`DashboardComponent`テンプレートに組み込まれています:
 
 <code-example 
   path="testing/src/app/dashboard/dashboard.component.html" 
@@ -1423,8 +1423,8 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
   title="app/dashboard/dashboard.component.html (excerpt)" linenums="false">
 </code-example>
 
-`DashboardHeroComponent`は`*ngFor`リピーターに表示され、
-各コンポーネントの`hero`入力プロパティをループ値に設定し、コンポーネントの`selected`イベントをリッスンします。
+`DashboardHeroComponent`は`*ngFor`リピーター内に配置され、
+各コンポーネントの`hero`インプットプロパティにループ値を設定し、コンポーネントの`selected`イベントをリッスンします。
 
 コンポーネントの完全な定義は次のとおりです:
 
@@ -1436,12 +1436,12 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
   title="app/dashboard/dashboard-hero.component.ts (component)" linenums="false">
 </code-example>
 
-この単純なコンポーネントのテストは本質的な価値はほとんどありませんが、それを知ることは価値があります。
+この単純なコンポーネントのテストに本質的な価値はほとんどありませんが、方法を知ることには価値があります。
 これらのアプローチの1つを使用することができます:
 
-* `DashboardComponent`で使用されているようにテストします。
-* スタンドアロンコンポーネントとしてテストします。
-* `DashboardComponent`の代わりに使用されているようにテストします。
+- `DashboardComponent`で使用されているようにテストします。
+- スタンドアロンコンポーネントとしてテストします。
+- `DashboardComponent`の代わりに使用されているようにテストします。
 
 最初のアプローチとして`DashboardComponent`コンストラクタを簡単に見てみると:
 
@@ -1451,17 +1451,17 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
   title="app/dashboard/dashboard.component.ts (constructor)" linenums="false">
 </code-example>
 
-`DashboardComponent`はAngularルーターと`HeroService`によって異なります。
+`DashboardComponent`はAngularのルーターと`HeroService`に依存します。
 おそらくそれらを両方ともテストダブルと置き換える必要があります。
-これは多くの作業がいります。ルータは特に難しいようです。
+これは多くの作業が必要です。ルーターは特に難しそうです。
 
 <div class="alert is-helpful">
 
-[以下](#routing-component)では、ルータを必要とするコンポーネントのテストについて説明します。
+[以下の議論](#routing-component)では、ルーターを必要とするコンポーネントのテストについて説明します。
 
 </div>
 
-すぐに目標は、`DashboardComponent`ではなく`DashboardHeroComponent`をテストすることです。
+直近の目標は、`DashboardComponent`ではなく`DashboardHeroComponent`をテストすることです。
 したがって、2番目と3番目のオプションを試してみてください。
 
 {@a dashboard-standalone}
@@ -1476,9 +1476,9 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
   title="app/dashboard/dashboard-hero.component.spec.ts (setup)" linenums="false">
 </code-example>
 
-セットアップコードがコンポーネントの`hero`プロパティにテストヒーロー
-(`expectedHero`)を割り当て、
-`DashboardComponent`がリピータのプロパティバインディングを介して設定する方法をエミュレートする方法に注意してください。
+セットアップコードがどのようにコンポーネントの`hero`プロパティにテストヒーロー
+(`expectedHero`)を割り当てるのか、
+`DashboardComponent`が自身のリピーター内でプロパティバインディングを介してそれを設定する方法をエミュレートするかに注意してください。
 
 次のテストでは、ヒーロー名がバインディングを介してテンプレートに伝播することを確認します。
 
@@ -1487,14 +1487,14 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
   region="name-test">
 </code-example>
 
-[テンプレート](#dashboard-hero-component)はヒーロー名をAngularの`UpperCasePipe`で渡すので、
-テストでは要素の値と大文字の名前が一致する必要があります。
+[テンプレート](#dashboard-hero-component)はヒーロー名をAngularの`UpperCasePipe`を通して渡すので、
+テストではアッパーケースの名前を持つ要素の値とマッチする必要があります。
 
 <div class="alert is-helpful">
 
 この小さなテストは、
-Angularテストが[コンポーネントクラスのテスト](#component-class-testing
-)では不可能だったコンポーネントのビジュアル表現を低コストで、
+Angularテストが[コンポーネントクラスのテスト](#component-class-testing)
+では不可能だったコンポーネントのビジュアル表現を低コストで、
 はるかに遅く複雑なエンドツーエンドのテストに頼らずに検証する方法を示しています。
 
 </div>
@@ -1502,7 +1502,7 @@ Angularテストが[コンポーネントクラスのテスト](#component-class
 #### クリックする
 
 ヒーローをクリックすると、ホストコンポーネント(おそらく`DashboardComponent`)
-が聞くことができる`selected`イベントが発生するはずです:
+が受け取ることができる`selected`イベントが発生するはずです:
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
@@ -1510,11 +1510,11 @@ Angularテストが[コンポーネントクラスのテスト](#component-class
 </code-example>
 
 コンポーネントの`selected`プロパティは`EventEmitter`を返します。
-これはコンシューマにはRxJS同期`Observable`のように見えます。
-テストは、ホストコンポーネントが_暗黙的_に行うのと同じように、_明示的_にサブスクライブします。
+これは利用者にはRxJS同期的`Observable`のように見えます。
+テストでは、ホストコンポーネントが_暗黙的_に行うのと同じように、_明示的_にサブスクライブします。
 
 コンポーネントが期待どおりに動作する場合、ヒーローの要素をクリックすると、
-コンポーネントの`selected`プロパティに`hero`オブジェクトを放出するように指示する必要があります。
+コンポーネントの`selected`プロパティに`hero`オブジェクトを発行するように指示するはずです。
 
 テストでは、`selected`へのサブスクリプションを通じてそのイベントが検出されます。
 
@@ -1522,37 +1522,38 @@ Angularテストが[コンポーネントクラスのテスト](#component-class
 
 #### _triggerEventHandler_
 
-前のテストの`heroDe`は、ヒーロー`<div>`を表す`DebugElement`です。
+以前のテストの`heroDe`は、ヒーロー`<div>`を表す`DebugElement`です。
 
-Angularプロパティと、ネイティブ要素との相互作用を抽象化するメソッドがあります。
+Angularのプロパティと、ネイティブ要素とのやりとりを抽象化するメソッドを持ちます。
 このテストでは、 "click"イベント名で`DebugElement.triggerEventHandler`を呼び出します。
 "click"イベントバインディングは、`DashboardHeroComponent.click()`を呼び出して応答します。
 
 Angularの`DebugElement.triggerEventHandler`は、
-_イベント名_で_データバインドされたイベント_を発生させることができます。2番目のパラメータは、ハンドラに渡されるイベントオブジェクトです。
+その_イベント名_で_データバインドされたイベント_を発生させることができます。2番目のパラメータは、ハンドラに渡されるイベントオブジェクトです。
 
-このテストでは、`null`イベントオブジェクトを持つ"click"イベントがトリガされます。
+このテストでは、`null`イベントオブジェクトを持つ"click"イベントがトリガーされます。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="trigger-event-handler">
 </code-example>
 
 このテストでは、
-ランタイムイベントハンドラ(コンポーネントの`click()`メソッド)
-がイベントオブジェクトを気にかけていないことを前提としています
+ランタイムのイベントハンドラ(コンポーネントの`click()`メソッド)
+がイベントオブジェクトを気にかけていないことを前提としています(TODO表現が微妙)
 
 <div class="alert is-helpful">
 
 他のハンドラーはあまり寛容ではありません。
 たとえば、`RouterLink`ディレクティブは、
-クリック中にどのマウスボタン(ある場合)が押されたのかを識別する`button`プロパティを持つオブジェクトを想定しています。 イベントオブジェクトがない場合、`RouterLink`ディレクティブはエラーをスローします。
+クリック中にどのマウスボタン(ある場合)が押されたのかを識別する`button`プロパティを持つオブジェクトを想定しています。
+イベントオブジェクトがない場合、`RouterLink`ディレクティブはエラーをスローします。
 
 </div>
 
 #### 要素をクリックする
 
-次のテストの代替方法では、ネイティブエレメント自身の`click()`メソッドが呼び出されます。
-このメソッドは、_このコンポーネント_にとっては問題ありません。
+次のテストの代替方法では、ネイティブ要素自身の`click()`メソッドが呼び出します。
+これは、_このコンポーネント_にとっては問題ありません。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" 
@@ -1560,12 +1561,13 @@ _イベント名_で_データバインドされたイベント_を発生させ�
 </code-example>
 
 {@a click-helper}
+
 #### _click()_ ヘルパー
 
-ボタン、アンカー、または任意のHTML要素をクリックすることは、一般的なテスト作業です。
+ボタン、アンカー、または任意のHTML要素をクリックすることは、一般的なテストタスクです。
 
-_クリックトリガー_プロセスを以下の`click()`関数などのヘルパーにカプセル化することで、
-一貫性と容易さを実現する:
+_クリックトリガー_プロセスを次のような`click()`関数などのヘルパーにカプセル化することで、
+一貫性と容易さを実現します:
 
 <code-example 
   path="testing/src/testing/index.ts" 
@@ -1575,18 +1577,19 @@ _クリックトリガー_プロセスを以下の`click()`関数などのヘル
 
 最初のパラメータは_クリックする要素_です。
 必要に応じて、カスタムイベントオブジェクトを2番目のパラメータとして渡すことができます。
-デフォルトは、`RouterLink`ディレクティブを含む多くのハンドラで受け入れられる(一部の)<a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button">左ボタンマウスイベントオブジェクト</a>です。
+デフォルトは、`RouterLink`ディレクティブを含む多くのハンドラで受け入れられる(一部の)
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button">左ボタンマウスイベントオブジェクト</a>です。
 
 <div class="alert is-important">
 
 `click()`ヘルパー関数はAngularテストユーティリティの1つでは**ありません**。
 この_ガイドのサンプルコード_で定義されている関数です。
-すべてのサンプルテストで使用されています。
-あなたが好きなら、あなた自身のヘルパーのコレクションに追加してください。
+すべてのサンプルテストでこれを使用しています。
+あなたがこれを好むなら、あなた自身のヘルパーのコレクションに追加してください。
 
 </div>
 
-上のテストを、クリックヘルパーを使って書き直しました。
+次は、以前のテストを、クリックヘルパーを使って書き直したものです。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" 

@@ -1,107 +1,107 @@
-# Introduction to modules
+# モジュールのイントロダクション
 
-<img src="generated/images/guide/architecture/module.png" alt="Module" class="left">
+<img src="generated/images/guide/architecture/module.png" alt="モジュール" class="left">
 
-Angular apps are modular and Angular has its own modularity system called _NgModules_. An NgModule is a container for a cohesive block of code dedicated to an application domain, a workflow, or a closely related set of capabilities. It can contain components, service providers, and other code files whose scope is defined by the containing NgModule. It can import functionality that is exported from other NgModules, and export selected functionality for use by other NgModules.
+Angularアプリケーションはモジュール型のアプリケーションで、 _NgModules_ という独自のモジュール方式を備えています。NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。コンポーネント、サービスプロバイダー、およびNgModuleを含むスコープをもつ他のコードファイルを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートすることができます。
 
-Every Angular app has at least one NgModule class, [the _root module_](guide/bootstrapping), which is conventionally named `AppModule` and resides in a file named `app.module.ts`. You launch your app by *bootstrapping* the root NgModule.
+すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[_ルートモジュール_](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。ルートのNgModuleを*ブートストラップする*ことでアプリを起動します。
 
-While a small application might have only one NgModule, most apps have many more _feature modules_. The _root_ NgModule for an app is so named because it can include child NgModules in a hierarchy of any depth.
+小さなアプリケーションには1つのNgModuleしかないかもしれませんが、ほとんどのアプリケーションにはより多くの機能があります。アプリの _ルート_ NgModuleは、任意の深さの階層に子NgModuleを含めることができるので、その名前が付けられています。
 
-## NgModule metadata
+## NgModule メタデータ
 
-An NgModule is defined as a class decorated with `@NgModule`. The `@NgModule` decorator is a function that takes a single metadata object, whose properties describe the module. The most important properties are as follows.
+NgModuleは`@NgModule`で装飾されたクラスとして定義されています。`@NgModule`デコレーターは、モジュールを記述するプロパティーをもつ単一のメタデータ・オブジェクトを取得する機能です。もっとも重要なプロパティは次のとおりです。
 
-* `declarations`&mdash;The [components](guide/architecture-components), _directives_, and _pipes_ that belong to this NgModule.
+* `declarations`&mdash;このNgModuleに属する[コンポーネント](guide/architecture-components)、_ディレクティブ_、および _パイプ_
 
-* `exports`&mdash;The subset of declarations that should be visible and usable in the _component templates_ of other NgModules.
+* `exports`&mdash;他のNgModuleの _コンポーネントテンプレート_ で可視で使用可能な宣言のサブセット。
 
-* `imports`&mdash;Other modules whose exported classes are needed by component templates declared in _this_ NgModule.
+* `imports`&mdash;エクスポートされたクラスが _この_ NgModuleで宣言されたコンポーネントテンプレートによって必要とされる他のモジュール。
 
-* `providers`&mdash;Creators of [services](guide/architecture-services) that this NgModule contributes to the global collection of services; they become accessible in all parts of the app. (You can also specify providers at the component level, which is often preferred.)
+* `providers`&mdash;このNgModuleが[サービス](guide/architecture-services)のグローバルなコレクションに貢献するサービスの作成元。それらはアプリのすべての部分でアクセス可能になります。 （コンポーネントレベルでプロバイダーを指定することもでき、しばしば好まれます）
 
-* `bootstrap`&mdash;The main application view, called the _root component_, which hosts all other app views. Only the _root NgModule_ should set this `bootstrap` property.
+* `bootstrap`&mdash; _ルートコンポーネント_ と呼ばれるメインアプリケーションビューで、他のすべてのアプリケーションビューをホストします。_ルートNgModule_ だけがこの`bootstrap`プロパティを設定する必要があります。
 
-Here's a simple root NgModule definition:
+単純なルートNgModuleの定義は次のとおりです。
 
 <code-example path="architecture/src/app/mini-app.ts" region="module" title="src/app/app.module.ts" linenums="false"></code-example>
 
 <div class="alert is-helpful">
 
-  The `export` of `AppComponent` is just to show how to export; it isn't actually necessary in this example. A root NgModule has no reason to _export_ anything because other modules don't need to _import_ the root NgModule.
+  `AppComponent`の`export`はエクスポートする方法を示しています。 この例では実際には必要ありません。他のモジュールはルートNgModuleを _インポート_ する必要がないため、ルートNgModuleは何も _エクスポート_ する必要はありません。
 
 </div>
 
-## NgModules and components
+## NgModules とコンポーネント
 
-NgModules provide a _compilation context_ for their components. A root NgModule always has a root component that is created during bootstrap, but any NgModule can include any number of additional components, which can be loaded through the router or created through the template. The components that belong to an NgModule share a compilation context.
+NgModuleは、そのコンポーネントの _コンパイルコンテキスト_ を提供します。ルートNgModuleには常にブートストラップ時に作成されるルートコンポーネントがありますが、任意のNgModuleに追加のコンポーネントをいくつでも含めることができます。これらのコンポーネントは、ルーター経由でロードするか、テンプレートから作成することができます。NgModuleに属するコンポーネントは、コンパイルコンテキストを共有します。
 
 <figure>
 
-<img src="generated/images/guide/architecture/compilation-context.png" alt="Component compilation context" class="left">
+<img src="generated/images/guide/architecture/compilation-context.png" alt="コンポーネントコンパイルコンテキスト" class="left">
 
 </figure>
 
 <br class="clear">
 
-A component and its template together define a _view_. A component can contain a _view hierarchy_, which allows you to define arbitrarily complex areas of the screen that can be created, modified, and destroyed as a unit. A view hierarchy can mix views defined in components that belong to different NgModules. This is often the case, especially for UI libraries.
+コンポーネントとそのテンプレートは一緒に _ビュー_ を定義します。コンポーネントには、_ビュー階層_ を含めることができます。これにより、画面の任意の複雑な領域を定義し、ユニットとして作成、変更、および破棄することができます。ビュー階層は、異なるNgModuleに属するコンポーネントで定義されたビューを混在させることができます。これは多くの場合、特にUIライブラリの場合に当てはまります。
 
 <figure>
 
-<img src="generated/images/guide/architecture/view-hierarchy.png" alt="View hierarchy" class="left">
+<img src="generated/images/guide/architecture/view-hierarchy.png" alt="ビュー階層" class="left">
 
 </figure>
 
 <br class="clear">
 
-When you create a component, it is associated directly with a single view, called the _host view_. The host view can be the root of a view hierarchy, which can contain _embedded views_, which are in turn the host views of other components. Those components can be in the same NgModule, or can be imported from other NgModules. Views in the tree can be nested to any depth.
+コンポーネントを作成すると、そのコンポーネントは _ホストビュー_ という単一のビューに直接関連付けられます。ホストビューは、他のコンポーネントのホストビューである _埋め込みビュー_ を含むことができるビュー階層のルートにすることができます。これらのコンポーネントは、同じNgModuleに存在することも、他のNgModuleからインポートすることもできます。 ツリー内のビューは、任意の深さにネストすることができます。
 
 <div class="alert is-helpful">
-    The hierarchical structure of views is a key factor in the way Angular detects and responds to changes in the DOM and app data. 
+    ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
 </div>
 
-## NgModules and JavaScript modules
+## NgModules と JavaScript モジュール
 
-The NgModule system is different from and unrelated to the JavaScript (ES2015) module system for managing collections of JavaScript objects. These are two different and _complementary_ module systems. You can use them both to write your apps.
+NgModuleシステムは、JavaScriptオブジェクトのコレクションを管理するJavaScript（ES2015）モジュールシステムとは異なり、関連しません。これら2つは、 _相補的な_ モジュールシステムです。両方を使ってアプリを書くことができます。
 
-In JavaScript each _file_ is a module and all objects defined in the file belong to that module.
-The module declares some objects to be public by marking them with the `export` key word.
-Other JavaScript modules use *import statements* to access public objects from other modules.
+JavaScriptでは、各ファイルはモジュールであり、ファイルに定義されているすべてのオブジェクトはそのモジュールに属します。
+モジュールは、いくつかのオブジェクトを`export`キーワードでマークすることによって、それらを公開することを宣言します。
+他のJavaScriptモジュールはimportステートメントを使用して、他のモジュールのパブリックオブジェクトにアクセスします。
 
 <code-example path="architecture/src/app/app.module.ts" region="imports" linenums="false"></code-example>
 
 <code-example path="architecture/src/app/app.module.ts" region="export" linenums="false"></code-example>
 
 <div class="alert is-helpful">
-  <a href="http://exploringjs.com/es6/ch_modules.html">Learn more about the JavaScript module system on the web.</a>
+  <a href="http://exploringjs.com/es6/ch_modules.html">ウェブ上のJavaScriptモジュールシステムの詳細をご覧ください。</a>
 </div>
 
-## Angular libraries
+## Angular ライブラリ
 
-<img src="generated/images/guide/architecture/library-module.png" alt="Component" class="left">
+<img src="generated/images/guide/architecture/library-module.png" alt="コンポーネント" class="left">
 
-Angular ships as a collection of JavaScript modules. You can think of them as library modules. Each Angular library name begins with the `@angular` prefix. Install them with the `npm` package manager and import parts of them with JavaScript `import` statements.
+Angularは、JavaScriptモジュールのコレクションとして提供されます。それらをライブラリモジュールと考えることができるでしょう。Angularライブラリの各名前は、`@angular`プレフィックスで始まります。それらを`npm`パッケージマネージャーでインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
 
 <br class="clear">
 
-For example, import Angular's `Component` decorator from the `@angular/core` library like this:
+たとえば、Angularの`Component`デコレーターを`@angular/core`ライブラリから次のようにインポートします：
 
 <code-example path="architecture/src/app/app.component.ts" region="import" linenums="false"></code-example>
 
-You also import NgModules from Angular _libraries_ using JavaScript import statements. 
-For example, the following code imports the `BrowserModule` NgModule from the `platform-browser` library:
+また、JavaScriptのimportステートメントを使用してAngular _ライブラリ_ からNgModuleをインポートします。
+たとえば、次のコードは `platformModule` NgModuleを ` platform-browser` ライブラリからインポートします：
 
 <code-example path="architecture/src/app/mini-app.ts" region="import-browser-module" linenums="false"></code-example>
 
-In the example of the simple root module above, the application module needs material from within the `BrowserModule`. To access that material, add it to the `@NgModule` metadata `imports` like this.
+上の単純なルートモジュールの例では、アプリケーションモジュールは `BrowserModule`内のものを必要とします。そのものにアクセスするには、このように`@NgModule`メタデータの`imports`に追加します。
 
 <code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports" linenums="false"></code-example>
 
-In this way you're using both the Angular and JavaScript module systems _together_. Although it's easy to confuse the two systems, which share the common vocabulary of "imports" and "exports", you will become familiar with the different contexts in which they are used.
+このように、AngularとJavaScriptの _両方の_ モジュールシステムを使用しています。2つのシステムはいずれも"imports"と"exports"という語彙を共通して持っており混乱しやすいですが、使用するにつれてコンテキストの違いに慣れるでしょう。
 
 <div class="alert is-helpful">
 
-  Learn more from the [NgModules](guide/ngmodules) page.
+  詳細については[NgModules](guide/ngmodules)ページから確認してください。
 
 </div>
 

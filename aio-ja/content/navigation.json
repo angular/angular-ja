@@ -144,8 +144,9 @@
             },
             {
               "url": "guide/architecture-modules",
-              "title": "Intro to Modules",
-              "tooltip": "About NgModules."
+              "title": "モジュールの紹介",
+              "tooltip": "NgModuleについて",
+              "translated": true
             },
             {
               "url": "guide/architecture-components",
@@ -381,8 +382,9 @@
             },
             {
               "url": "guide/ngmodule-faq",
-              "title": "NgModule FAQs",
-              "tooltip": "Answers to frequently asked questions about NgModules."
+              "title": "NgModuleのFAQ",
+              "tooltip": "NgModuleに関するよくある質問への回答。",
+              "translated": true
             }
         ]},
 

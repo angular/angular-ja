@@ -10,7 +10,9 @@ rsync -ar --delete origin/ .tmp/
 rsync -ar aio-ja/ .tmp/aio
 
 # build angular.io
-cd .tmp/aio
+cd .tmp
+yarn install --frozen-lockfile --non-interactive
+cd aio
 yarn build
 
 cd ../../

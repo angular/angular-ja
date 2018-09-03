@@ -88,5 +88,5 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 あなたはこちらにも興味があるかもしれません:
 * [シングルトンサービス](guide/singleton-services)では、このページで取り上げられている概念を詳しく説明しています。
 * [モジュールの遅延ロード](guide/lazy-loading-ngmodules)
-* [Tree-shakable プロバイダー](guide/dependency-injection#tree-shakable-providers)
+* [Tree-shakable プロバイダー](guide/dependency-injection-providers#tree-shakable-providers)
 * [NgModule FAQ](guide/ngmodule-faq)

@@ -17,7 +17,7 @@
 必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリを設定します。
 
 ```sh
-ng add  @angular/pwa --project *project-name* 
+ng add @angular/pwa --project *project-name* 
 ```
 
 上記のコマンドを実行すると、次の操作が完了します。

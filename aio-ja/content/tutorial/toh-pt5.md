@@ -207,7 +207,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 * このコンストラクターは、Angular が`HeroService`をプライベートの`heroService`プロパティに注入することを期待しています。
 * この`ngOnInit()`ライフサイクル・フックは`getHeroes`を呼び出します。
 
-この`getHeroes`は、表示されるヒーローの数を4つ（2番目、3番目、4番目、5番目）に減らします。
+この`getHeroes`は、ヒーローの配列を1番目と5番目でスライスし、トップヒーローの4つだけ（2番目、3番目、4番目、5番目）を返します。
 
 <code-example path="toh-pt5/src/app/dashboard/dashboard.component.ts" region="getHeroes">
 </code-example>

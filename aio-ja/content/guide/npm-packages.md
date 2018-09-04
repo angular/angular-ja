@@ -63,10 +63,10 @@ CLIの `ng new` コマンドは、デフォルトの `package.json` を作成し
 
 **@angular/forms**: [template-driven](guide/forms) と [reactive forms](guide/reactive-forms) のサポート。
 
-**@angular/http**: 廃止予定のHTTPクライアント。
+**@angular/http**: Angularの古い、非推奨のHTTPクライアント。
 
 **@angular/platform-browser**: すべてのDOMとブラウザ、特にDOMへのレンダリングを担う。
-このパッケージには、[AOT](guide/aot-compiler) で事前コンパイルするプロダクションビルド用のアプリケーションをブートストラップするための`bootstrapStatic()`メソッドも含まれています。
+このパッケージには、[AOT](guide/aot-compiler) で事前コンパイルするプロダクションビルド用のアプリケーションをブートストラップするための`bootstrapModuleFactory()`メソッドも含まれています。
 
 **@angular/platform-browser-dynamic**: [JITコンパイラ](guide/aot-compiler) を使用してクライアント上でアプリケーションをコンパイル・実行する [Providers](api/core/Provider) とメソッドを含みます。
 

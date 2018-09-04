@@ -15,8 +15,15 @@
 アプリ内のどこでも`HttpClient`を利用可能にするには
 
 * ルートの`AppModule`を開く
-* `@angular/common/http`から`HttpClientModule`をインポート
-* `@NgModule.imports`の配列に`HttpClientModule`を追加
+* `@angular/common/http`から`HttpClientModule`をインポートする
+
+<code-example
+  path="toh-pt6/src/app/app.module.ts"
+  region="import-http-client"
+  title="src/app/app.module.ts (Http Client import)">
+</code-example>
+
+* `@NgModule.imports`の配列に追加する
 
 ## データサーバーをシミュレートする
 
@@ -278,7 +285,8 @@ URLは変わりません。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
-  region="http-options">
+  region="http-options"
+  title="src/app/hero.service.ts">
 </code-example>
 
 ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存しましょう。以前のビューへの移動は、 `HeroDetailComponent` に定義された `save()` メソッドで実装されています。

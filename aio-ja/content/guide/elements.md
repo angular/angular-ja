@@ -163,15 +163,15 @@ Angular の Custom Elements を使用すれば、自動的にインフラスト�
 この例のコードはすべて<live-example downloadOnly>here</live-example>からダウンロードできます。
 
 
-## Typings for custom elements
+## Custom Elementsの型指定
 
-Generic DOM APIs, such as `document.createElement()` or `document.querySelector()`, return an element type that is appropriate for the specified arguments. For example, calling `document.createElement('a')` will return an `HTMLAnchorElement`, which TypeScript knows has an `href` property. Similarly, `document.createElement('div')` will return an `HTMLDivElement`, which TypeScript knows has no `href` property.
+`document.createElement()` や `document.querySelector()` のような一般的な DOM API は、指定された引数に適切な要素型を返します。たとえば、 `document.createElement('a')` を呼び出すと、 `HTMLAnchorElement` が返されます。これは TypeScript が `href` プロパティをもつと判断するものです。同様に、 `document.createElement('div')` を呼び出すと、 `HTMLDivElement` を返します。これは TypeScript が `href` プロパティを持たないと判断するものです。
 
-When called with unknown elements, such as a custom element name (`popup-element` in our example), the methods will return a generic type, such as `HTMLELement`, since TypeScript can't infer the correct type of the returned element.
+カスタム要素の名前（この例では `popup-element`）のような未知の要素を呼び出した場合、 TypeScript は返される要素の正しい型を推論できないため、メソッドは `HTMLELement` のようなジェネリック型を返します。
 
-Custom elements created with Angular extend `NgElement` (which in turn extends `HTMLElement`). Additionally, these custom elements will have a property for each input of the corresponding component. For example, our `popup-element` will have a `message` property of type `string`.
+Angular で作成されたカスタム要素は、（`HTMLElement` を拡張した） `NgElement` を拡張します。さらに、このカスタム要素は対応するコンポーネントの各インプットに対してプロパティを持ちます。たとえば、 `popup-element` には `string` 型の `message` プロパティがあります。
 
-There are a few options if you want to get correct types for your custom elements. Let's assume you create a `my-dialog` custom element based on the following component:
+カスタム要素の正しい型を取得するには、いくつかのオプションがあります。次のコンポーネントに基づいて `my-dialog` のカスタム要素を作成するとします。
 
 ```ts
 @Component(...)
@@ -180,7 +180,7 @@ class MyDialog {
 }
 ```
 
-The most straight forward way to get accurate typings is to cast the return value of the relevant DOM methods to the correct type. For that, you can use the `NgElement` and `WithProperties` types (both exported from `@angular/elements`):
+正確な型を取得するもっとも簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。そのためには、 `NgElement` と `WithProperties` 型（どちらも `@angular/elements` からエクスポートされます）を使うことができます：
 
 ```ts
 const aDialog = document.createElement('my-dialog') as NgElement & WithProperties<{content: string}>;
@@ -189,9 +189,9 @@ aDialog.content = 123;  // <-- ERROR: TypeScript knows this should be a string.
 aDialog.body = 'News';  // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
 ```
 
-This is a good way to quickly get TypeScript features, such as type checking and autocomplete support, for you custom element. But it can get cumbersome if you need it in several places, because you have to cast the return type on every occurrence.
+これは型チェックやオートコンプリートサポートのような、カスタム要素のためのTypeScript機能をすぐに使うにはよい方法です。しかしいくつかの場所でそれを必要とするならば、面倒になる可能性があります。なぜならすべての発生時に戻り値の型をキャストする必要があるからです。
 
-An alternative way, that only requires defining each custom element's type once, is augmenting the `HTMLELementTagNameMap`, which TypeScript uses to infer the type of a returned element based on its tag name (for DOM methods such as `document.createElement()`, `document.querySelector()`, etc.):
+各カスタム要素の型を一度だけ定義する、もうひとつの方法は、 `HTMLElementTagNameMap` を拡張することです。これは（`document.createElement()` や `document.querySelector()` 、その他のようなDOMメソッドのために）タグ名に基づいて返される要素の型を TypeScript が推論するために使います。
 
 ```ts
 declare global {
@@ -203,7 +203,7 @@ declare global {
 }
 ```
 
-Now, TypeScript can infer the correct type the same way it does for built-in elements:
+これで、TypeScript は組み込み要素と同じように正しい型を推論できます：
 
 ```ts
 document.createElement('div')               //--> HTMLDivElement (built-in element)

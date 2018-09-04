@@ -9,6 +9,9 @@ rsync -ar --delete origin/ .tmp/
 # overrides files from ja directory
 rsync -ar aio-ja/ .tmp/aio
 
+# modify origin files in tmp
+node scripts/build/modify-package-json.js
+
 # build angular.io
 cd .tmp
 yarn install --frozen-lockfile --non-interactive

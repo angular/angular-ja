@@ -1603,18 +1603,18 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
 
 ### テストホスト内部のコンポーネント
 
-以前のテストは、ホスト`DashboardComponent`自身の役割を果たしました。
-しかし、`DashboardHeroComponent`は、ホストコンポーネントに適切にデータバインドされていると正常に動作しますか？
+以前のテストでは、ホストである`DashboardComponent`自身をロールプレイしました。
+しかし、`DashboardHeroComponent`は、ホストコンポーネントに適切にデータバインドされているときに正常に動作するでしょうか?
 
-実際の`DashboardComponent`でテストできます。
-しかし、特に、そのテンプレートが`*ngFor`リピーター、他のコンポーネント、
+実際の`DashboardComponent`でテストできますが、
+特に、そのテンプレートが`*ngFor`リピーター、他のコンポーネント、
 レイアウトHTML、追加のバインディング、
-複数のサービスを注入するコンストラクタを備えていて、
-それらのサービスとすぐにやりとりを開始するときに、
+複数のサービスを注入するコンストラクタを持っていて、
+それらのサービスとすぐにやりとりし始めるとき、
 多くの設定が必要になる可能性があります。
 
-これらの注意散漫を無効にするための努力を想像してみてください。
-ちょうどこのような_テストホスト_でうまくいくことができる点を検証するためです
+これらの気が狂いそうなものを無効にするための努力を想像してみてください。
+ちょうどこのような_テストホスト_でうまくいくことができる点を検証することです。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
@@ -1624,30 +1624,30 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
 </code-example>
 
 このテストホストは、`DashboardComponent`が`DashboardHeroComponent`にバインドしますが、ルータ、
-`HeroService`、または`*ngFor`リピータのノイズはありません。
+`HeroService`、`*ngFor`リピーターなどのノイズはありません。
 
-テストホストは、コンポーネントの`hero`インプットプロパティをテストヒーローに設定します。
+テストホストは、自身のテストヒーローをコンポーネントの`hero`インプットプロパティに設定します。
 コンポーネントの`selected`イベントを`onSelected`ハンドラにバインドします。
-このハンドラは、`selectedHero`プロパティに放出されたヒーローを記録します。
+このハンドラは、発行されたヒーローを`selectedHero`プロパティに記録します。
 
-その後、テストでは`selectedHero`を簡単にチェックして、
-`DashboardHeroComponent.selected`イベントが予想されるヒーローを発行したことを確認できます。
+その後、
+テストでは`DashboardHeroComponent.selected`イベントが期待されるヒーローを発行したことを検証するために`selectedHero`を簡単にチェックすることができます。
 
-_テストホスト_テストの設定は、スタンドアロンテストの設定と似ています:
+_テストホスト_のテストのセットアップは、スタンドアロンテストのセットアップと似ています:
 
 <code-example path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="test-host-setup" title="app/dashboard/dashboard-hero.component.spec.ts (test host setup)" linenums="false"></code-example>
 
 このテストモジュールの構成では、3つの重要な違いがあります:
 
 1. `DashboardHeroComponent`と`TestHostComponent`の両方を_宣言_します。
-1. これは、`DashboardHeroComponent`の代わりに`TestHostComponent`を_作成_します。
+1. `DashboardHeroComponent`の代わりに`TestHostComponent`を_作成_します。
 1. `TestHostComponent`は`DashboardHeroComponent.hero`にバインディングを設定します。
 
-`createComponent`は、`DashboardHeroComponent`のインスタンスの代わりに`TestHostComponent`のインスタンスを保持する`fixture`を返します。
+`createComponent`は、`DashboardHeroComponent`のインスタンスの代わりに`TestHostComponent`のインスタンスを持つ`fixture`を返します。
 
 `TestHostComponent`を作成すると、
 前者のテンプレート内に`DashboardHeroComponent`が表示されるため、
-`DashboardHeroComponent`を作成するという副作用があります。
+それを作成するという副作用があります。
 ヒーロー要素(`heroEl`)のクエリは、以前よりも要素ツリーの深さが深いものの、テストDOMでそれを検出します。
 
 テスト自体はスタンドアロンバージョンとほぼ同じです:
@@ -1659,7 +1659,7 @@ _テストホスト_テストの設定は、スタンドアロンテストの設
 </code-example>
 
 選択したイベントテストのみが異なります。
-これは、選択された`DashboardHeroComponen`tのヒーローが実際にホストコンポーネントへのイベントバインディングを通じてその方法を見つけることを確認します。
+これは、選択された`DashboardHeroComponen`のヒーローが実際にホストコンポーネントへのイベントバインディングを通じて登ってきたことを確認します。
 
 <hr>
 

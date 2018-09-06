@@ -1673,7 +1673,7 @@ _ルーティングコンポーネント_です。
 
 ルーティングはかなり複雑です。
 `DashboardComponent`のテストは、`HeroService`と一緒に注入される`Router`が関係しているため、
-部分的には難しいようでした。
+部分的には厄介にみえます。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard.component.ts" 
@@ -1682,9 +1682,9 @@ _ルーティングコンポーネント_です。
 </code-example>
 
 `HeroService`をスパイでモックするのは[おなじみの話](#component-with-async-service)です。
-しかし、`Router`には複雑なAPIがあり、他のサービスやアプリケーションの前提条件と絡み合っています。モックするのは難しいかもしれませんか？
+しかし、`Router`には複雑なAPIがあり、他のサービスやアプリケーションの前提条件と絡み合っています。モックするのは難しいかもしれないでしょうか?
 
-幸いなことに、このケースでは、`DashboardComponent`が`Router`であまり働いていないためそうでもないです。
+幸いなことに、このケースでは、`DashboardComponent`が`Router`をあまり使用していないのでそうでもないです。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard.component.ts" 
@@ -1692,8 +1692,8 @@ _ルーティングコンポーネント_です。
   title="app/dashboard/dashboard.component.ts (goToDetail)">
 </code-example>
 
-これは_ルーティングコンポーネント_でよく発生します。
-原則として、ルータではなくコンポーネントをテストし、
+これは_ルーティングコンポーネント_でよくあるケースです。
+原則として、ルーターではなくコンポーネントをテストし、
 指定された条件の下でコンポーネントが正しいアドレスでナビゲートする場合にのみ注意してください。
 
 _このコンポーネント_のテストスイートのためのルータースパイを提供することは、
@@ -1718,36 +1718,36 @@ _このコンポーネント_のテストスイートのためのルータース
 
 ### ルーテッドコンポーネント
 
-_ルーテッドコンポーネント_は`Router`ナビゲーションの宛先です。
-特にコンポーネントへのルートに_パラメータが含まれている_場合は、
-テストするのが難しい場合があります。 `HeroDetailComponent`は、そのようなルートの宛先である_ルーテッドコンポーネント_です。
+_ルーテッドコンポーネント_は`Router`ナビゲーションの送り先です。
+特にコンポーネントへのルートに_パラメータが含まれている_場合は、テストするのが難しい場合があります。
+`HeroDetailComponent`は、そのようなルートの送り先である_ルーテッドコンポーネント_です。
 
-ユーザーが_ダッシュボード_のヒーローをクリックすると、
+ユーザーが_ダッシュボード_のヒーローをクリックしたとき、
 `DashboardComponent`はルーターに`heroes/:id`にナビゲートするように指示します。
 `:id`はルートパラメータであり、その値は編集するヒーローの`id`です。
 
-`Router`はそのURLを`HeroDetailComponent`へのルートと照合します。
-ルーティング情報を含む`ActivatedRoute`オブジェクトを作成し、
+`Router`はそのURLを`HeroDetailComponent`へのルートとマッチします。
+`Router`はルーティング情報を含む`ActivatedRoute`オブジェクトを作成し、
 それを`HeroDetailComponent`の新しいインスタンスに挿入します。
 
-次は`HeroDetailComponent`のコンストラクタです:
+`HeroDetailComponent`のコンストラクタは次のようになります:
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="ctor" title="app/hero/hero-detail.component.ts (constructor)" linenums="false"></code-example>
 
-`HeroDetail`コンポーネントは`id`パラメータを必要とするため、
-`HeroDetailService`経由で対応するヒーローを取得できます。
+`HeroDetail`コンポーネントは`HeroDetailService`
+経由で対応するヒーローをフェッチするために`id`パラメータを必要とします。
 コンポーネントは、
 `Observable`である`ActivatedRoute.paramMap`プロパティから`id`を取得する必要があります。
 
 `ActivatedRoute.paramMap`の`id`プロパティを参照するだけでは不十分です。
-コンポーネントは、`ActivatableRoute.paramMap`オブザーバブルに登録し、
+コンポーネントは、`ActivatableRoute.paramMap` Observableを_サブスライブ_し、
 `id`がそのライフタイム内で変更されるように準備する必要があります。
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="ng-on-init" title="app/hero/hero-detail.component.ts (ngOnInit)" linenums="false"></code-example>
 
 <div class="alert is-helpful">
 
-[ルーター](guide/router#route-parameters)ガイドは、`ActivatedRoute.paramMap`について詳しく説明しています。
+[ルーター](guide/router#route-parameters)ガイドでは、`ActivatedRoute.paramMap`について詳しく説明しています。
 
 </div>
 
@@ -1756,13 +1756,14 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 
 あなたは`Router`とデータサービスをスパイする方法を知っています。
 
-あなたは`ActivatedRoute`とは異なるアプローチをとるでしょう。
+あなたは次の理由で`ActivatedRoute`とは異なるアプローチをとるでしょう。
 
-- `paramMap`は、テスト中に複数の値を出力できる`Observable`を返します。
+- `paramMap`は、
+  テスト中に複数の値を出力できる`Observable`を返します。
 - `ParamMap`を作成するには、ルーターヘルパー関数`convertToParamMap()`が必要です。
-- 他の_ルーテッドコンポーネント_テストでは、`ActivatedRoute`のテストダブルが必要です。
+- 他の_ルーテッドコンポーネント_のテストでは、`ActivatedRoute`のテストダブルが必要です。
 
-これらの違いは、再利用可能なスタブ・クラスを主張します。
+これらの違いは、再利用可能なスタブクラスが必要だと言っています。
 
 #### _ActivatedRouteStub_ 
 
@@ -1775,7 +1776,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 </code-example>
 
 このようなヘルパーを`app`フォルダの兄弟の`testing`フォルダに配置することを検討してください。
-このサンプルは`ActivatedRouteStub`を`testing/activated-route-stub.ts`に置きます。
+このサンプルでは`ActivatedRouteStub`を`testing/activated-route-stub.ts`に置きます。
 
 <div class="alert is-helpful">
 
@@ -1788,20 +1789,20 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 
 #### _ActivatedRouteStub_ を使用したテスト
 
-ここでは、観察された`id`が既存のヒーローを参照しているときのコンポーネントの動作を示すテストがあります:
+Observableより取得した`id`が既存のヒーローを参照しているときのコンポーネントの動作を示すテストは次のようになります:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-good-id" title="app/hero/hero-detail.component.spec.ts (existing id)" linenums="false"></code-example>
 
 <div class="alert is-helpful">
 
-`createComponent()`メソッドとページオブジェクトについては[後述](#page-object)します。
+`createComponent()`メソッドと`page`オブジェクトについては[後述](#page-object)します。
 今はあなたの直感に頼ってください。
 
 </div>
 
-`id`が見つからない場合、コンポーネントは`HeroListComponent`にリルートする必要があります。
+`id`が見つからない場合、コンポーネントは`HeroListComponent`にルーティングし直す必要があります。
 
-テストスイートのセットアップは、実際にナビゲートせずにルータをスパイしている[上記](#routing-component)の同じルータスパイを提供しました。
+テストスイートのセットアップは、実際にナビゲートせずにルーターをスパイしている[上記](#routing-component)と同じルータースパイを提供しました。
 
 このテストでは、コンポーネントが`HeroListComponent`にナビゲートしようとします。
 
@@ -1811,7 +1812,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 コンポーネントは、`id`がないときに妥当な何かを行うべきです。
 
 この実装では、コンポーネントは新しいヒーローを作成して表示する必要があります。
-新しいヒーローには`id=0`と空白の`name`があります:
+新しいヒーローは`id=0`と空の`name`を持ちます。このテストではコンポーネントが期待通りに動作することを確認します:
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -1823,11 +1824,11 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 
 ### ネストしたコンポーネントのテスト
 
-コンポーネントテンプレートには、
-多くのコンポーネントが含まれるネストされたコンポーネントが含まれていることがよくあります。
+コンポーネントテンプレートはネストしたコンポーネントを持つことが多いです。
+そのテンプレートにはさらにコンポーネントが含まれるているでしょう。
 
-コンポーネントツリーは非常に深くてもかまいません。
-ほとんどの場合、ネストされたコンポーネントは、ツリーの最上部にあるコンポーネントのテストには何の役割も果たしません。
+コンポーネントツリーはとても深いかもしれませんが、
+ほとんどの場合、ネストしたコンポーネントは、ツリーの最上部にあるコンポーネントのテストには何の役割も果たしません。
 
 たとえば、`AppComponent`は、アンカーとその`RouterLink`ディレクティブを含むナビゲーションバーを表示します。
 
@@ -1838,29 +1839,36 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 
 `AppComponent`_クラス_は空ですが、
 おそらく[以下の理由](#why-stubbed-routerlink-tests)で、
-リンクが`RouterLink`ディレクティブに正しく配線されているかどうかを確認するための単体テストを作成することができます。
+リンクが`RouterLink`ディレクティブに正しく配線されているかどうかを確認するためのユニットテストを書きたいかもしれません。
 
-リンクを検証するには、`Router`をナビゲートする必要はなく、`Router`が_ルーテッドコンポーネント_を挿入する場所を示すために`<router-outlet>`は必要ありません。
+リンクを検証するには、ナビゲートするための`Router`は必要ではありませんし、
+`Router`が_ルーテッドコンポーネント_を挿入する場所をマークするための`<router-outlet>`も必要ありません。
 
-`BannerComponent`と`WelcomeComponen`t(`<app-banner>`と`<app-welcome>`で示される)も無関係です。
+`BannerComponent`と`WelcomeComponent`
+(`<app-banner>`と`<app-welcome>`で示される)も無関係です。
 
-しかし、`AppComponent`をDOMに作成するテストでは、これらの3つのコンポーネントのインスタンスも作成されます。そのような場合は、`TestBed`を構成して作成する必要があります。
+しかし、`AppComponent`をDOMに作成するテストでは、
+これらの3つのコンポーネントのインスタンスも作成されます。
+そのような場合は、それらを作成するために`TestBed`を設定する必要があるでしょう。
 
-宣言を怠ると、Angularコンパイラは`AppComponent`テンプレートの`<app-banner>`、`<app-welcome>`、および`<router-outlet>`タグを認識せず、エラーをスローします。
+それらの宣言を怠ると、
+Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、`<app-welcome>`、および`<router-outlet>`タグを認識せず、
+エラーをスローします。
 
-実際のコンポーネントを宣言する場合は、ネストされたコンポーネントを宣言し、ツリー内の_任意_のコンポーネントに注入された_すべて_のサービスも提供する必要があります。
+実際のコンポーネントを宣言する場合は、_それら_のネストしたコンポーネントを宣言し、
+ツリー内の_あらゆる_コンポーネントに注入された_すべて_のサービスも提供する必要があります。
 
-これは、リンクについての簡単な質問に答えるだけの努力です。
+これはリンクについての簡単な質問に答えるだけに対して過大な労力です。
 
-このセクションでは、セットアップを最小限に抑えるための2つの手法について説明します。
+このセクションでは、セットアップを最小限に抑えるための2つのテクニックについて説明します。
 主要なコンポーネントのテストに集中するために、これらを単独または組み合わせて使用​​してください。
 
 {@a stub-component}
 
 ##### 不必要なコンポーネントをスタブする
 
-最初の手法では、
-テストでほとんど役割を果たさないコンポーネントとディレクティブのスタブ・バージョンを作成して宣言します。
+最初のテクニックでは、
+テストでほとんど役割を果たさないコンポーネントとディレクティブのスタブバージョンを作成して宣言します。
 
 <code-example 
   path="testing/src/app/app.component.spec.ts" 
@@ -1868,11 +1876,11 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
   title="app/app.component.spec.ts (stub declaration)" linenums="false">
 </code-example>
 
-スタブセレクターは、対応する実数成分のセレクタと一致します。
+スタブのセレクターは、対応する実際のコンポーネントのセレクタと一致します。
 しかし、そのテンプレートとクラスは空です。
 
 その後、`TestBed`の設定で、
-実際に必要なコンポーネント、ディレクティブ、パイプの隣に宣言します。
+実際に必要なコンポーネント、ディレクティブ、パイプの次に宣言します。
 
 <code-example 
   path="testing/src/app/app.component.spec.ts" 
@@ -1882,14 +1890,14 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 
 `AppComponent`はテスト対象ですので、もちろん実際のバージョンを宣言してください。
 
-[後述]](#routerlink)する`RouterLinkDirectiveStub`は、
-リンクテストに役立つ実際の`RouterLink`のテストバージョンです。
+[後述](#routerlink)する`RouterLinkDirectiveStub`は、
+リンクのテストに役立つ、実際の`RouterLink`のテストバージョンです。
 
 残りはスタブです。
 
 {@a no-errors-schema}
 
-#### *NO\_ERRORS\_SCHEMA*
+#### _NO_ERRORS_SCHEMA_
 
 2番目の方法では、`NO_ERRORS_SCHEMA`を`TestBed.schemas`メタデータに追加します。
 
@@ -1901,31 +1909,34 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの宛先�
 
 `NO_ERRORS_SCHEMA`は、認識できない要素と属性を無視するようにAngularコンパイラに指示します。
 
-コンパイラは、`TestBed`の設定で対応する`AppComponent`と`RouterLinkDirectiveStub`を宣言したため、`<app-root>`要素と`routerLink`属性を認識します。
+コンパイラは、
+`TestBed`の設定で対応する`AppComponent`と`RouterLinkDirectiveStub`を宣言したため、
+`<app-root>`要素と`routerLink`属性を認識します。
 
-しかし、`<app-banner>`、`<app-welcome>`、または`<router-outlet>`が見つかった場合、
-コンパイラはエラーを投げません。 単に空のタグとしてレンダリングし、ブラウザはそれらを無視します。
+しかし、`<app-banner>`、`<app-welcome>`、または`<router-outlet>`が見つかった場合、コンパイラはエラーを投げません。
+単に空のタグとしてレンダリングし、ブラウザはそれらを無視します。
 
 スタブコンポーネントはもう必要ありません。
 
 #### 両方のテクニックを使用する
 
-これらは、
-コンポーネントの視覚的な表面をテストの対象となるコンポーネントのテンプレート内の要素だけに縮小するため、
-_浅いコンポーネントテスト_の技術です。
+これらのテクニックは、
+コンポーネントの視覚的な外見を、テストの対象となるコンポーネントのテンプレート内の要素だけに縮小するので、
+_浅いコンポーネントテスト_と呼ばれます。
 
-`NO_ERRORS_SCHEMA`のアプローチは2つの方が簡単ですが、それを過度に使用しないでください。
+`NO_ERRORS_SCHEMA`のアプローチは2つの方法を使うよりも簡単ですが、それを過度に使用しないでください。
 
 また、`NO_ERRORS_SCHEMA`は、誤って省略した、
-またはスペルの間違ったコンポーネントや属性についてコンパイラーが知らせないようにします。
+またはスペルの間違ったコンポーネントや属性についてもコンパイラに知らせないようにします。
 コンパイラが瞬時に捉えていたファントムバグを追跡する時間を無駄にすることがあります。
 
-_スタブコンポーネント_アプローチには別の利点があります。
+_スタブコンポーネント_のアプローチには別の利点があります。
 _この_例のスタブは空ですが、
-テストで何らかの方法でテストを行う必要がある場合は、
+テストで何らかの方法でそれとやりとりする必要がある場合は、
 テンプレートとクラスを取り除くことができます。
 
-実際には、この例のように同じ設定で2つの手法を組み合わせます。
+実際には、
+この例のように同じセットアップ内で2つのテクニックを組み合わせます。
 
 <code-example 
   path="testing/src/app/app.component.spec.ts" 
@@ -1943,8 +1954,8 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 ### _RouterLink_を使用したコンポーネント
 
 実際の`RouterLinkDirective`はかなり複雑で、
-`RouterModule`の他のコンポーネントとディレクティブと絡み合っています。
-テストで模擬して使用するには、挑戦的なセットアップが必要です。
+他のコンポーネントや`RouterModule`のディレクティブと絡み合っています。
+テストでモックして使用するには、頑張ったセットアップが必要です。
 
 このサンプルコードの`RouterLinkDirectiveStub`は、
 実際のディレクティブを、
@@ -1958,17 +1969,18 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 
 `[routerLink]`属性にバインドされたURLは、ディレクティブの`linkParams`プロパティに流れます。
 
-ホストメタデータプロパティは、
-ホスト要素のクリックイベント(`AppComponent`の`<a>`アンカー要素)をスタブディレクティブの`onClick`メソッドに結び付けます。
+`host`メタデータプロパティは、
+ホスト要素のクリックイベント(`AppComponent`の`<a>`アンカー要素)をスタブディレクティブの`onClick`メソッドに紐づけます。
 
 アンカーをクリックすると、
-`onClick()`メソッドが起動し、スタブのtelltale navigatedToプロパティが設定されます。
-テストでは、`navigatedTo`を調べて、
-アンカーをクリックすると予想されるルート定義が設定されていることを確認します。
+`onClick()`メソッドをトリガーして、スタブに露出した`navigatedTo`プロパティが設定されます。
+テストでは、
+アンカーをクリックしたときに期待通りのルート定義が設定されていることを確認するために`navigatedTo`を検証します。
 
 <div class="alert is-helpful">
 
-ルータがそのルート定義でナビゲートするように正しく設定されているかどうかは、別々のテストセットで考えることです。
+ルーターがそのルート定義でナビゲートするように正しく設定されているかどうかは、
+別のテストセットで考えることです。
 
 </div>
 
@@ -1992,9 +2004,9 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 1. クエリは、一致する要素のまわりで`DebugElement`ラッパーを返します。
 
 1. 各`DebugElement`は、
-   その要素にアタッチされたディレクティブの特定のインスタンスを持つ依存インジェクタを公開します。
+   その要素にアタッチされたディレクティブの特定のインスタンスを持つ依存性のインジェクターを公開します。
 
-検証のための`AppComponent`リンクは次のとおりです:
+検証のための`AppComponent`のリンクは次のとおりです:
 
 <code-example 
   path="testing/src/app/app.component.html" 
@@ -2004,7 +2016,7 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 
 {@a app-component-tests}
 
-これらのリンクが期待どおりに`routerLink`ディレクティブに配線されていることを確認するテストがいくつかあります:
+これらのリンクが期待どおりに`routerLink`ディレクティブに配線されていることを確認するいくつかのテストは次のようになります:
 
 <code-example path="testing/src/app/app.component.spec.ts" region="tests" title="app/app.component.spec.ts (selected tests)" linenums="false"></code-example>
 
@@ -2015,9 +2027,10 @@ _この例_の"click"テストは誤解を招きます。
 これは、ディレクティブスタブの一般的な失敗です。
 
 このガイドには正当な目的があります。
-ルータの全機能を使用することなく、`RouterLink`要素を見つけてクリックし、結果を検査する方法を示します。
+ルーターの全機能を使用することなく、`RouterLink`要素を見つけてクリックし、結果を検証する方法を示します。
 これは、ユーザーがリンクをクリックしたときに、
-示を変更したり、パラメータを再計算したり、ナビゲーションオプションを並べ替えたりする、
+表示を変更したり、パラメータを再計算したり、
+ナビゲーションオプションを並べ替えたりする、
 より洗練されたコンポーネントをテストするために必要なスキルです。
 
 </div>

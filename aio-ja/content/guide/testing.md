@@ -2039,17 +2039,17 @@ _この例_の"click"テストは誤解を招きます。
 
 #### それらのテストは何がよいのですか?
 
-スタブした `RouterLink`テストでは、リンクとコンセントを持つコンポーネントが正しく設定されていること、
-コンポーネントに必要なリンクがあり、すべてが期待される方向を指していることを確認できます。
-これらのテストは、ユーザーがリンクをクリックしたときにアプリケーションがターゲットコンポーネントにナビゲートするのに成功するかどうかには関係ありません。
+スタブした`RouterLink`テストでは、リンクとアウトレットを持つコンポーネントが適切に設定されていること、
+コンポーネントが必要なリンクを持っていること、そしてそれらすべてが期待される行き先になっていることを確認できます。
+これらのテストは、ユーザーがリンクをクリックしたときにアプリケーションが対象のコンポーネントにナビゲートすることに成功するかどうかには関係ありません。
 
-このような制限されたテストの目的には、`RouterLink`と`RouterOutlet`をスタブすることが最良の選択肢です。
+このような制限されたテストを達成するためには、`RouterLink`と`RouterOutlet`をスタブすることが最良の選択肢です。
 実際のルータに依存すると、それらは脆弱になります。
 コンポーネントと無関係の理由で失敗する可能性があります。
 たとえば、ナビゲーションガードによって、権限のないユーザーが`HeroListComponent`にアクセスするのを防ぐことができます。
-これは`AppComponent`の欠陥ではなく、そのコンポーネントへの変更は失敗したテストを修正することはできません。
+これは`AppComponent`の落ち度ではなく、そのコンポーネントへの変更は失敗したテストを修正することはできません。
 
-テストの_別_のバッテリーは、ユーザーが認証され、許可されているかどうかなど、
+_別_の総合テストでは、ユーザーが認証され、許可されているかどうかなどの、
 ガードに影響する条件が存在する場合にアプリケーションが期待どおりにナビゲートするかどうかを調べることができます。
 
 <div class="alert is-helpful">
@@ -2065,31 +2065,32 @@ _この例_の"click"テストは誤解を招きます。
 
 ### _page_ オブジェクトを使用する
 
-`HeroDetailComponent`は、タイトル、ヒーローフィールド2つ、ボタン2つのシンプルなビューです。
+`HeroDetailComponent`は、タイトル、2個のヒーローフィールド、2個のボタンを持つシンプルなビューです。
 
 <figure>
   <img src='generated/images/guide/testing/hero-detail.component.png' alt="HeroDetailComponent in action">
 </figure>
 
-しかし、この単純な形式でも複雑なテンプレートがたくさんあります。
+しかし、このシンプルな形式でも複雑なテンプレートがたくさんあります。
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.html" title="app/hero/hero-detail.component.html" linenums="false">
 </code-example>
 
-コンポーネントが必要とするテストが必要です...
+コンポーネントを実行するテストに必要なことは...
 
 - 要素がDOMに現れる前にヒーローが到着するまで待つ。
 - タイトルテキストへの参照。
-- それを調べて設定するための名前入力ボックスへの参照。
-- 2つのボタンをクリックすることができるように2つのボタンへの参照。
-- いくつかのコンポーネントとルータの方法をスパイする。
+- 名前を調べてセットするためのインプットボックスへの参照。
+- クリック可能な2つのボタンへの参照。
+- いくつかのコンポーネントとルーターのメソッドをスパイする。
 
-このような小さなフォームであっても、拷問された条件設定とCSS要素の選択が混乱することがあります。
+このような小さなフォームであっても、苦しくて面倒くさい条件設定とCSS要素の選択が必要になるでしょう。
 
-コンポーネントプロパティへのアクセスを処理し、それらを設定するロジックをカプセル化する`Page`クラスを使用して、複雑さを克服してください。
+コンポーネントプロパティへのアクセスを処理し、
+それらを設定するロジックをカプセル化する`Page`クラスを使用して、複雑さを克服してください。
 
-つぎは`hero-detail.component.spec.ts`の`Page`クラスです。
+`hero-detail.component.spec.ts`の`Page`クラスは次のとおりです。
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -2097,7 +2098,7 @@ _この例_の"click"テストは誤解を招きます。
   title="app/hero/hero-detail.component.spec.ts (Page)" linenums="false">
 </code-example>
 
-コンポーネントの操作と検査の重要なフックは、`Page`のインスタンスからきれいに整理され、アクセス可能になりました。
+コンポーネントの操作と検証のための重要なフックは、`Page`のインスタンスからきれいに整理され、アクセス可能になりました。
 
 `createComponent`メソッドは`page`オブジェクトを作成し、`hero`が到着すると空白を埋め込みます。
 
@@ -2107,11 +2108,11 @@ _この例_の"click"テストは誤解を招きます。
   title="app/hero/hero-detail.component.spec.ts (createComponent)" linenums="false">
 </code-example>
 
-以前のセクションの[_HeroDetailComponent_ テスト](#tests-w-test-double)では、
+以前のセクションの[_HeroDetailComponent_のテスト](#tests-w-test-double)では、
 `createComponent`と`page`がテストを短くして_メッセージ_を保持する方法を示しています。
-注意を払う必要はありません。promiseを待つことなく、比較する要素値をDOMから検索する必要はありません。
+注意を払う必要はありません。Promiseを待つことなく、比較する要素値のDOMを検索する必要はありません。
 
-この点を補強する`HeroDetailComponent`テストがいくつかあります。
+次は、この点を補強する`HeroDetailComponent`テストです。
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -2126,8 +2127,8 @@ _この例_の"click"テストは誤解を招きます。
 
 <div class="alert is-helpful">
 
-テストを実行する前にCLIがアプリケーションをコンパイルするので、
-CLI `ng test`コマンドでテストを実行する_だけ_であれば、このセクションは無視できます。
+CLIから`ng test`コマンドを使用してテストを実行する_だけ_な場合、
+CLIがテストを実行する前にアプリケーションをコンパイルするのでこのセクションは無視してもかまいません。
 
 </div>
 
@@ -2157,18 +2158,18 @@ Please call "TestBed.compileComponents" before your test.
   avoid linenums="false">
 </code-example>
 
-アプリがコンパイルされていないことを思い出してください。
+アプリケーションがコンパイルされていないことを思い出してください。
 したがって、`createComponent()`を呼び出すと、`TestBed`は暗黙的にコンパイルされます。
 
-これは、ソースコードがメモリにあるときには問題ありません。
+これは、ソースコードがメモリー上にあるときには問題ありません。
 しかし、`BannerComponent`は、
 コンパイルが本質的に
-_非同期_操作であるファイルシステムから読み取らなければならない外部ファイルを必要とします。
+_非同期_な操作である、ファイルシステムから読み取らなくてはいけない外部ファイルを必要とします。
 
 `TestBed`を続行することが許されていれば、
-テストは実行され、コンパイラが終了する前に不思議に失敗します。
+テストは実行され、コンパイラが終了する前に不思議に失敗するでしょう。
 
-プリエンプティブエラーメッセージは、`compileComponents()`で明示的にコンパイルするよう指示します。
+さきほどのエラーメッセージは、`compileComponents()`で明示的にコンパイルするよう指示しています。
 
 #### _compileComponents()_ は非同期
 
@@ -2176,9 +2177,9 @@ _非同期_操作であるファイルシステムから読み取らなければ
 
 <div class="alert is-critical">
 
-テスト機能を非同期にすることを怠った場合
+テスト関数を非同期にすることを怠った場合
 (たとえば、後述の`async()`の使用を忘れた場合)、
-このエラーメッセージが表示されます
+このようなエラーメッセージが表示されます。
 
 <code-example language="sh" class="code-shell" hideCopy>
 Error: ViewDestroyedError: Attempt to use a destroyed view
@@ -2188,10 +2189,10 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 典型的な方法は、セットアップロジックを2つの別々の`beforeEach()`関数に分割することです。
 
-1. コンポーネントをコンパイルする非同期の`beforeEach()`
-1. 残りのセットアップを実行する同期`beforeEach()`。
+1. コンポーネントをコンパイルする非同期的な`beforeEach()`
+1. 残りのセットアップを実行する同期的な`beforeEach()`
 
-このパターンに従うには、`async()`ヘルパーを他のテストシンボルとともにインポートします。
+このパターンにしたがうには、`async()`ヘルパーを他のテストシンボルとともにインポートします。
 
 <code-example 
   path="testing/src/app/banner/banner-external.component.spec.ts" 
@@ -2200,7 +2201,7 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 #### 非同期な_beforeEach_
 
-このように最初の非同期`beforeEach`を書いてください。
+このように最初の非同期な`beforeEach`を書いてください。
 
 <code-example 
   path="testing/src/app/banner/banner-external.component.spec.ts" 
@@ -2208,13 +2209,13 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
   title="app/banner/banner-external.component.spec.ts (async beforeEach)" linenums="false">
 </code-example>
 
-`async()`ヘルパー関数は、セットアップ本体にパラメータのない関数を取ります。
+`async()`ヘルパー関数は、セットアップを行うパラメーターなしの関数を受け取ります。
 
 `TestBed.configureTestingModule()`メソッドは`TestBed`クラスを返します。
-これにより、`compileComponents()`などの他の`TestBed`静的メソッドに呼び出しをチェーンすることができます。
+これにより、`compileComponents()`などの他の`TestBed`の静的メソッドの呼び出しをチェーンすることができます。
 
-この例では、`BannerComponent`はコンパイルする唯一のコンポーネントです。
-他の例では、テストモジュールを複数のコンポーネントで構成し、
+この例では、`BannerComponent`がコンパイルする唯一のコンポーネントです。
+他の例では、複数のコンポーネントを持つテストモジュールを構成し、
 より多くのコンポーネントを保持するアプリケーションモジュールをインポートできます。
 いずれも外部ファイルを必要とする可能性があります。
 
@@ -2226,17 +2227,17 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 </div>
 
-`compileComponents()`を呼び出すと、現在の`TestBed`インスタンスが閉じられ、さらに設定が行われます。
+`compileComponents()`を呼び出すと、さらなる設定を置こうなうために現在の`TestBed`インスタンスが閉じられます。
 `configureTestingModule()`や`override...`メソッドのいずれも呼び出すことはできません。
 試してみると、`TestBed`はエラーを投げます。
 
 `compileComponents()`を`TestBed.createComponent()`
-を呼び出す前の最後のステップにします。
+を呼び出す前の最後のステップにしてください。
 
 #### 同期的な _beforeEach_
 
-2番目の同期`beforeEach()`には、
-コンポーネントの作成と検査する要素のクエリを含む残りの設定手順が含まれています。
+次の、同期`beforeEach()`には、
+コンポーネントの作成と検証する要素のクエリを含む残りの設定手順が含まれています。
 
 <code-example 
   path="testing/src/app/banner/banner-external.component.spec.ts" 
@@ -2244,15 +2245,15 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
   title="app/banner/banner-external.component.spec.ts (synchronous beforeEach)" linenums="false">
 </code-example>
 
-テストランナーは、最初の非同期`beforeEach`が完了してから2番目を呼び出すのを待つことができます。
+テストランナーは、2番めの`beforeEach`の呼び出し前に、最初の非同期の`beforeEach`の完了を待つことができます。
 
-#### 統合セットアップ
+#### セットアップを統合する
 
-2つの`beforeEach()`関数を1つの非同期の `beforeEach()`に統合することができます。
+2つの`beforeEach()`関数を1つの非同期の`beforeEach()`に統合することができます。
 
-`compileComponents()`メソッドは、
-同期コードを`then(...)`コールバックに移動することによって、
-コンパイル_後_に同期セットアップタスクを実行できるようにpromiseを返します。
+`compileComponents()`メソッドはPromiseを返します。
+なので、同期的コードを`then(...)`コールバックに移動することによって、
+コンパイル_後_に同期セットアップタスクを実行できます。
 
 <code-example 
   path="testing/src/app/banner/banner-external.component.spec.ts" 
@@ -2262,16 +2263,18 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 #### _compileComponents()_ は無害
 
-`compileComponents()`が必要でないときは、それを呼び出すことに害はありません。
+`compileComponents()`が必要でないときにそれを呼び出すことに害はありません。
 
 CLIによって生成されたコンポーネントテストファイルは、
 `ng test`の実行時には必要ではないのに`compileComponents()`を呼び出します。
+
+このガイドのテストでは必要になったときだけ`commpileComponents`を呼び出します。
 
 <hr>
 
 {@a import-module}
 
-### Setup with module imports
+### モジュールインポートを使用してセットアップする
 
 これまでのコンポーネントテストでは、このようにいくつかの`declarations`でテストモジュールを構成しました:
 
@@ -2282,23 +2285,22 @@ CLIによって生成されたコンポーネントテストファイルは、
 </code-example>
 
 `DashboardComponent`はシンプルです。
-それは助けを必要としない。
-しかし、より複雑なコンポーネントは、多くの場合、他のコンポーネント、ディレクティブ、パイプ、プロバイダに依存し、これらもテストモジュールに追加する必要があります。
+補助を必要としません。
+しかし、より複雑なコンポーネントは多くの場合、他のコンポーネント、ディレクティブ、パイプ、プロバイダーに依存し、これらもテストモジュールに追加する必要があります。
 
 幸いにも、`TestBed.configureTestingModule`パラメータは、
-`@NgModule`デコレータに渡されるメタデータとパラレルになります。
+`@NgModule`デコレーターに渡されるメタデータと平行です。
 つまり、`providers`と`imports`を指定することもできます。
 
 `HeroDetailComponent`は、サイズが小さく簡単な構成にもかかわらず、多くの助けが必要です。
-デフォルトテストモジュール`CommonModule`から受け取るサポートに加えて:
+デフォルトのテストモジュールの`CommonModule`から受け取るサポートに加えて、次のものが必要になります:
 
-- `FormsModule`内の`NgModel`とその友達が双方向データバインディングを有効にします。
-- `TitleCasePipe`は、`shared`フォルダから取得します。
-- ルータサービス(これらのテストではスタブしています)。
-- ヒーローデータアクセスサービス(スタブされている)
+- 双方向バインディングを有効にするための`FormsModule`内の`NgModel`とその仲間
+- `shared`フォルダ内の`TitleCasePipe`
+- ルーターサービス(これらのテストではスタブしています)
+- ヒーローデータアクセスサービス(これもスタブされています)
 
-1つのアプローチは、
-この例のように個々の部分からテストモジュールを構成することです:
+1つのアプローチは、この例のように個々の部分からテストモジュールを構成することです:
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -2308,21 +2310,21 @@ CLIによって生成されたコンポーネントテストファイルは、
 
 <div class="alert is-helpful">
 
-`beforeEach()`は非同期で、`TestBed.compileComponents`を呼び出します。
-これは、`HeroDetailComponent`に外部テンプレートとCSSファイルがあるためです。
+`HeroDetailComponent`に外部テンプレートとCSSファイルがあるため、
+`beforeEach()`は非同期的に`TestBed.compileComponents`を呼び出します。
 
-上記の[_`compileComponents()`の呼び出し_](#compile-components)で説明したように、
-これらのテストは、
-Angularがブラウザでコンパイルしなければならない非CLI環境で実行できます。
+上記の[_`compileComponents()`の呼び出し_](#compile-components)
+で説明したように、
+これらのテストはAngularがブラウザ上でコンパイルしなければならない非CLI環境で実行できます。
 
 </div>
 
 #### 共有モジュールをインポートする
 
-多くのアプリコンポーネントは`FormsModule`と`TitleCasePipe`を必要とするため、
-開発者は頻繁に要求されるこれらのコンポーネントと他の頻繁に要求されるコンポーネントを組み合わせるために`SharedModule`を作成しました。
+多くのアプリケーションのコンポーネントは`FormsModule`と`TitleCasePipe`を必要とするため、
+開発者は頻繁に要求されるこれらのコンポーネントを組み合わせるために`SharedModule`を作成しました。
 
-テスト構成では、この代替セットアップで見られる`SharedModule`も使用できます:
+テスト構成では、この代替のセットアップのような`SharedModule`も使用できます:
 
 <code-example 
   path="testing/src/app/hero/hero-detail.component.spec.ts" 
@@ -2330,31 +2332,29 @@ Angularがブラウザでコンパイルしなければならない非CLI環境�
   title="app/hero/hero-detail.component.spec.ts (SharedModule setup)" linenums="false">
 </code-example>
 
-インポートステートメントの数が少なくて済むようになっています(図示せず)。
+インポート文の数が少なくて済むようになります(表示はしません)。
 
 {@a feature-module-import}
 
 #### フィーチャーモジュールをインポートする
 
-`HeroDetailComponent`は`HeroModule`[フィーチャモジュール](guide/feature-modules)の一部で、
+`HeroDetailComponent`は`HeroModule`[フィーチャモジュール](guide/feature-modules)の一部品で、
 `SharedModule`を含む相互依存関係の多くを集約します。
-このような`HeroModule`をインポートするテスト構成を試してみてください:
+次のような`HeroModule`をインポートするテスト構成を試してみてください:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-hero-module" title="app/hero/hero-detail.component.spec.ts (HeroModule setup)" linenums="false"></code-example>
 
-それは_本当_に鮮明です。`providers`のテストダブルにとどまります。
-`HeroDetailComponent`宣言さえもなくなりました。
+これは_本当_に簡潔です。`providers`のテストダブルが残っているだけです。`HeroDetailComponent`の宣言さえもなくなりました。
 
-実際に、宣言しようとすると、`HeroDetailComponent`が`TestBed`によって作成された`HeroModule`と`DynamicTestModule`の両方で宣言されるため、Angularはエラーをスローします。
-
-フィーチャモジュールがそうであるように、コンポーネントのフィーチャモジュールをインポートすることは、モジュール内に相互依存関係が多く、モジュールが小さい場合にテストを構成する最も簡単な方法です。
-
+実際に宣言しようとすると、
+`HeroDetailComponent`が`TestBed`によって作成された`HeroModule`と`DynamicTestModule`の両方で宣言されるため、
+Angularはエラーをスローします。
 
 <div class="alert is-helpful">
 
-フィーチャモジュールがそうであるように、
-コンポーネントのフィーチャモジュールをインポートすることは、モジュール内に相互依存関係が多く、
-モジュールが小さい場合にテストを構成する最も簡単な方法です。
+フィーチャーモジュールがそうであるように、
+コンポーネントのフィーチャーモジュールをインポートすることは、
+モジュール内に相互依存関係が多くてモジュールが小さい場合にテストを構成する最も簡単な方法です。
 
 </div>
 
@@ -2362,58 +2362,57 @@ Angularがブラウザでコンパイルしなければならない非CLI環境�
 
 {@a component-override}
 
-### コンポーネントのプロバイダーを上書きする
+### コンポーネントのプロバイダーをオーバーライドする
 
 `HeroDetailComponent`は自身の`HeroDetailService`を提供します。
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="prototype" title="app/hero/hero-detail.component.ts (prototype)" linenums="false"></code-example>
 
 `TestBed.configureTestingModule`の`providers`でコンポーネントの`HeroDetailService`をスタブすることはできません。
-それらはコンポーネントではなく、_テストモジュール_のプロバイダです。
-それらは、_フィクスチャレベル_で依存インジェクタを準備します。
+それらはコンポーネントではなく、_テストモジュール_のプロバイダーです。_フィクスチャーレベル_で依存性のインジェクターを準備します。
 
-Angularは、フィクスチャインジェクタの_子_である_独自_のインジェクタを使用してコンポーネントを作成します。
+Angularはコンポーネントを、フィクスチャーインジェクターの_子_であるコンポーネント_自身_のインジェクターを使用して作成します。
 コンポーネントのプロバイダ(この場合は`HeroDetailService`)を子インジェクタに登録します。
 
-テストでは、フィクスチャのインジェクタからのインジェクタサービスを受けることができません。
-また、`TestBed.configureTestingModule`はそれらを構成することもできません。
+テストでは、フィクスチャーのインジェクターからのインジェクターサービスを受け取ることができません。
+また、`TestBed.configureTestingModule`ではそれらを構成することもできません。
 
-Angularは本物の`HeroDetailService`の新しいインスタンスを作成しています！
+Angularは最初からずっと本物の`HeroDetailService`のインスタンスを作成していました!
 
 <div class="alert is-helpful">
 
-`HeroDetailService`がリモートサーバーへの独自のXHR呼び出しを行った場合、
-これらのテストは失敗するか、タイムアウトになる可能性があります。呼び出すリモートサーバーがない可能性があります。
+`HeroDetailService`がリモートサーバーへの自身のXHR呼び出しを行った場合、これらのテストは失敗するか、タイムアウトになる可能性があります。
+呼び出すリモートサーバーがない可能性があります。
 
-幸いにも、`HeroDetailService`は、注入された`HeroService`へのリモートデータアクセスの責任を委任します。
+幸いにも、`HeroDetailService`は、注入された`HeroService`へリモートデータアクセスの責任を委任します。
 
 <code-example path="testing/src/app/hero/hero-detail.service.ts" region="prototype" title="app/hero/hero-detail.service.ts (prototype)" linenums="false"></code-example>
 
-[以前のテスト構成](#feature-module-import)では、実際の`HeroService`が、
-サーバー要求をインターセプトして応答を偽装する`TestHeroService`に置き換えられました。
+[以前のテスト構成](#feature-module-import)では、
+実際の`HeroService`をサーバー要求をインターセプトしてレスポンスを偽装する`TestHeroService`に置き換えていました。
 
 </div>
 
-もしあなたがとても幸運でないなら、どうでしょうか？
-`HeroService`をモックするのが難しい場合はどうすればいいですか？`HeroDetailService`が独自のサーバーリクエストを作成するとどうなりますか？
+もしあなたがとても幸運でないなら、どうでしょうか? `HeroService`をモックするのが難しい場合はどうすればいいですか?
+`HeroDetailService`自身がサーバーへリクエストする場合はどうなりますか？
 
 `TestBed.overrideComponent`メソッドは、コンポーネントの`providers`を、
-以下のセットアップのバリエーションに示すように、管理しやすい_テストダブル_に置き換えることができます:
+次のセットアップの変更で示すように、管理しやすい_テストダブル_に置き換えることができます:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-override" title="app/hero/hero-detail.component.spec.ts (Override setup)" linenums="false"></code-example>
 
-`TestBed.configureTestingModule`は[不要](#spy-stub)であるため、(偽の)`HeroService`を提供しなくなりました。
+`TestBed.configureTestingModule`は[不要](#spy-stub)であるため、(偽の)`HeroService`を提供しなくなったことに注目してください。
 
 {@a override-component-method}
 
 #### _overrideComponent_ メソッド
 
-`overrideComponent` メソッドにフォーカスしてください。
+`overrideComponent` メソッドに注目してください。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-component-method" title="app/hero/hero-detail.component.spec.ts (overrideComponent)" linenums="false"></code-example>
 
-オーバーライドするコンポーネントタイプ(`HeroDetailComponent`)とオーバーライドメタデータオブジェクトの2つの引数をとります。
-[オーバーライドメタデータオブジェクト](#metadata-override-object)は、以下のように定義されるジェネリックオブジェクトです:
+これは2つの引数を受け取ります。オーバーライドするコンポーネントタイプ(`HeroDetailComponent`)とオーバーライドメタデータオブジェクトです。
+[オーバーライドメタデータオブジェクト](#metadata-override-object)は、次のように定義されるジェネリック型のオブジェクトです:
 
 <code-example format="." language="javascript">
   type MetadataOverride<T> = {
@@ -2426,7 +2425,7 @@ Angularは本物の`HeroDetailService`の新しいインスタンスを作成し
 メタデータオーバーライドオブジェクトは、メタデータプロパティに要素を追加または削除するか、またはこれらのプロパティを完全にリセットすることができます。
 この例では、コンポーネントの`providers`のメタデータをリセットします。
 
-型パラメータ`T`は`@Component`デコレータに渡すメタデータの種類です
+型パラメータ`T`は`@Component`デコレーターに渡すメタデータの種類です
 
 <code-example format="." language="javascript">
   selector?: string;
@@ -2442,13 +2441,13 @@ Angularは本物の`HeroDetailService`の新しいインスタンスを作成し
 
 この例では、コンポーネントの`providers`配列を、`HeroDetailServiceSpy`を含む新しい配列で完全に置き換えています。
 
-`HeroDetailServiceSpy`は、そのサービスのすべての必要な機能を偽装する、
-実際の`HeroDetailService`のスタブ付きバージョンです。
-下位レベルの`HeroService`にインジェクションもデリゲートもしないので、
+`HeroDetailServiceSpy`は、そのサービスのすべての必要な機能を偽装する
+実際の`HeroDetailService`のスタブバージョンです。
+下位レベルの`HeroService`に注入も委譲もしないので、
 そのためのテストダブルを用意する必要はありません。
 
 関連する`HeroDetailComponent`テストは、
-`HeroDetailService`のメソッドがサービスメソッドをスパイすることによって呼び出されたことを宣言します。
+`HeroDetailService`のメソッドがサービスメソッドをスパイすることによって呼び出されたことをアサートします。
 したがって、スタブはそのメソッドをスパイとして実装します:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="hds-spy" title="app/hero/hero-detail.component.spec.ts (HeroDetailServiceSpy)" linenums="false"></code-example>
@@ -2464,11 +2463,11 @@ Angularは本物の`HeroDetailService`の新しいインスタンスを作成し
 
 {@a more-overrides}
 
-#### More overrides
+#### さらに上書きする
 
 `TestBed.overrideComponent`メソッドは、同じコンポーネントまたは異なるコンポーネントに対して複数回呼び出すことができます。
-`TestBed`は、他のクラスの部分を掘り下げて置き換えるための`overrideDirective`、`overrideModule`、
-および`overridePipe`の同様のメソッドを提供します。
+`TestBed`は同様の、他のクラスの部分を掘り下げて置き換えるための`overrideDirective`、`overrideModule`、
+および`overridePipe`メソッドを提供します。
 
 あなた自身のオプションと組み合わせを探そう。
 
@@ -2483,27 +2482,27 @@ _属性ディレクティブ_は、要素、コンポーネントまたは別の
 
 サンプルアプリケーションの`HighlightDirective`は、
 データバインドされた色またはデフォルトの色(ライトグレー)のいずれかに基づいて要素の背景色を設定します。
-また、要素(`customProperty`)のカスタムプロパティを、
+また、要素のカスタムプロパティ(`customProperty`)を、
 それが可能であることを示す以外の理由なしに`true`に設定します。
 
 <code-example path="testing/src/app/shared/highlight.directive.ts" title="app/shared/highlight.directive.ts" linenums="false"></code-example>
 
-これは、アプリケーション全体で使用されています。おそらく、最も単純に`AboutComponent`にあります:
+これはアプリケーション全体で使用されています。多分、`AboutComponent`内のものが最もシンプルです:
 
 <code-example path="testing/src/app/about/about.component.ts" title="app/about/about.component.ts" linenums="false"></code-example>
 
-`AboutComponent`内の`HighlightDirective`の特定の使用をテストするには、
+`AboutComponent`内の特定の`HighlightDirective`の使用をテストするには、
 上記の手法(特に ["シャローテスト"](#nested-component-tests)アプローチ)のみが必要です。
 
 <code-example path="testing/src/app/about/about.component.spec.ts" region="tests" title="app/about/about.component.spec.ts" linenums="false"></code-example>
 
-しかし、単一のユースケースをテストすることは、ディレクティブの機能の全範囲を探索することはまずありません。
+しかし、単一のユースケースをテストすることは、ディレクティブの機能の全範囲を調査することにはなりません。
 このディレクティブを使用しているすべてのコンポーネントを見つけてテストするのは面倒で脆く、完全にカバーすることはほとんどありません。
 
 _クラスのみ_のテストは役に立ちますが、
 このような属性ディレクティブはDOMを操作する傾向があります。
 隔離された単体テストはDOMに触れることはないので、
-ディレクティブの効力に対する信頼を促すものではありません。
+ディレクティブの効果に対する信頼を促すものではありません。
 
 より良い解決策は、ディレクティブを適用するすべての方法を示す人工的なテストコンポーネントを作成することです。
 
@@ -2515,12 +2514,12 @@ _クラスのみ_のテストは役に立ちますが、
 
 <div class="alert is-helpful">
 
-`<input>`は、`HighlightDirective`を入力ボックスのカラー値の名前にバインドします。
-初期値は入力ボックスの背景色であるべき単語"cyan"である。
+`<input>`は、`HighlightDirective`をインプットボックスのカラー値の名前にバインドします。
+初期値はインプットボックスの背景色であるべき単語の"cyan"です。
 
 </div>
 
-つぎはこのコンポーネントのテストです:
+このコンポーネントのテストは次のとおりです:
 
 <code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="selected-tests" title="app/shared/highlight.directive.spec.ts (selected tests)"></code-example>
 
@@ -2529,15 +2528,15 @@ _クラスのみ_のテストは役に立ちますが、
 - `By.directive`述部は、_要素の型が不明な場合_にこのディレクティブを持つ要素を取得するための優れた方法です。
 
 - `By.css('h2：not([highlight])')`内の<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not">`:not`疑似クラス</a>は、
-ディレクティブを持たない`<h2>`要素を見つけるのに役立ちます。
-`By.css('*：not([highlight])')`は、ディレクティブを持たない要素を検出します。
+  ディレクティブを持たない`<h2>`要素を見つけるのに役立ちます。
+  `By.css('*：not([highlight])')`は、ディレクティブを持たない要素を検出します。
 
-- `DebugElement.styles`は、`DebugElement`抽象化のおかげで、実際のブラウザがなくても要素スタイルにアクセスできます。
-しかし、抽象化よりも簡単で明快な場合は、`nativeElemen`tを悪用しようと自由にしてください。
+- `DebugElement.styles`は、`DebugElement`抽象化のおかげで、実際のブラウザがなくても要素のスタイルにアクセスできます。
+  しかし、抽象化よりも簡単で明快な場合は、`nativeElement`の利用を遠慮しないでください。
 
-- Angularは、それが適用されている要素のインジェクタにディレクティブを追加します。
-デフォルトカラーのテストでは、2番目の`<h2>`のインジェクタを使用して、
-`HighlightDirective`インスタンスと`defaultColor`を取得します。
+- Angularは、それが適用されている要素のインジェクターにディレクティブを追加します。
+  デフォルトカラーのテストでは、
+  `HighlightDirective`インスタンスとぉの`defaultColor`を取得するために2番目の`<h2>`のインジェクターを使用しています。
 
 - `DebugElement.properties`は、ディレクティブによって設定された人工的なカスタムプロパティへのアクセスを提供します。
 
@@ -2550,16 +2549,16 @@ _クラスのみ_のテストは役に立ちますが、
 パイプクラスには、
 入力値を変換された出力値に操作する`transform`というメソッドがあります。
 `transform`の実装は、
-DOMとほとんど対話しません。
-ほとんどのパイプは`@Pipe`メタデータとインタフェース以外のAngularに依存しません。
+DOMとのやりとりがほとんどありません。
+ほとんどのパイプはAngularの`@Pipe`メタデータとそのインタフェース以外に依存しません。
 
 各単語の最初の文字を大文字にする`TitleCasePipe`を考えてみましょう。
-ここでは、正規表現を使った素朴な実装です。
+次は、正規表現を使った素朴な実装です。
 
 <code-example path="testing/src/app/shared/title-case.pipe.ts" title="app/shared/title-case.pipe.ts" linenums="false"></code-example>
 
 正規表現を使用するものはすべて、十分にテストする価値があります。
-シンプルなジャスミンを使用して、予想されるケースとエッジのケースを調べます。
+シンプルにJasmineを使用して、期待ダレるケースとエッジケースを調べます。
 
 <code-example path="testing/src/app/shared/title-case.pipe.spec.ts" region="excerpt" title="app/shared/title-case.pipe.spec.ts"></code-example>
 
@@ -2568,9 +2567,9 @@ DOMとほとんど対話しません。
 #### DOMのテストも書く
 
 これらは、パイプを_単独_でテストします。
-`TitleCasePipe`がアプリケーションコンポーネントに正しく適用されているかどうかはわかりません。
+`TitleCasePipe`がアプリケーションのコンポーネントに正しく適用されているかどうかはわかりません。
 
-このようなコンポーネントテストを追加することを検討してください:
+次のようなコンポーネントテストを追加することを検討してください:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe" title="app/hero/hero-detail.component.spec.ts (pipe test)"></code-example>
 
@@ -2580,13 +2579,13 @@ DOMとほとんど対話しません。
 
 ## テストのデバッグ
 
-アプリケーションをデバッグするのと同じ方法で、ブラウザの仕様をデバッグします。
+アプリケーションをデバッグするのと同じ方法で、ブラウザ内のスペックをデバッグします。
 
 1. カルマのブラウザウィンドウを表示します（前に隠れています）。
-1. **DEBUG**ボタンをクリックします。新しいブラウザタブを開き、テストを再実行します。
+1. **DEBUG**ボタンをクリックします。新しいブラウザタブが開き、テストを再実行します。
 1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、OSXでは`Command-Option-I`）を開きます。
 1. "sources"セクションを選択します。
-1. `1st.spec.ts`テストファイル（Control / Command-Pを開き、ファイル名の入力を開始）を開きます。
+1. `1st.spec.ts`テストファイル（Control/Command-Pを押して、その後にファイル名の入力してください）を開きます。
 1. テストにブレークポイントを設定します。
 1. ブラウザを更新すると、ブレークポイントで停止します。
 
@@ -2598,14 +2597,14 @@ DOMとほとんど対話しません。
 
 {@a atu-apis}
 
-## テスティングユーティリティAPIs
+## テスティングユーティリティAPI
 
-このセクションでは、最も有用なAngularテスト機能のインベントリを取り上げ、その機能を要約します。
+このセクションでは、最も有用なAngularテスト機能の一覧を取り上げ、その機能を要約します。
 
-Angular テスティングユーティリティには、`TestBed`、`ComponentFixture`、
-およびテスト環境を制御するいくつかの関数が含まれています。 [_TestBed_](#testbed-api-summary)クラスと[_ComponentFixture_](#component-fixture-api-summary)クラスは別々に扱います。
+Angular テスティングユーティリティには、`TestBed`、`ComponentFixture`、およびテスト環境を制御するいくつかの関数が含まれています。
+[_TestBed_](#testbed-api-summary)クラスと[_ComponentFixture_](#component-fixture-api-summary)クラスは別々に扱います。
 
-スタンドアローン機能の概要をユーティリティーの順に示します:
+次では、役に立ちそうな順でスタンドアロン関数の概要を説明します:
 
 <table>
   <tr>
@@ -2650,13 +2649,13 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      _fakeAsyncテストゾーン_内の_タイマー_とマ_イクロタスク_キューの両方をフラッシュすることにより、
+      _fakeAsyncテストゾーン_内の_タイマー_と_マイクロタスク_キューの両方をフラッシュすることにより、
       時間の経過と非同期処理の完了をシミュレートします。
 
       <div class="alert is-helpful">
 
-      好奇心を持った読者は、この長いブログ記事[_「タスク、マイクロタスク、キュー、ス
-      ケジュール」_](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)を楽しむかもしれません。
+      好奇心を持った読者は、
+      この長いブログ記事["_Tasks, microtasks, queues and schedules_"](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)を楽しめるかもしれません。
 
       </div>
 
@@ -2675,7 +2674,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      現在の`TestBed`インジェクタから1つ以上のサービスをテスト機能に注入します。
+      現在の`TestBed`インジェクターから1つ以上のサービスをテスト関数に注入します。
       コンポーネント自体によって提供されるサービスを注入することはできません。
       [debugElement.injector](#get-injected-services)の説明を参照してください。
 
@@ -2689,12 +2688,12 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      `fakeAsync`テストが保留中のタイマーイベント_タスク_（キューされた`setTimeOut`および`setInterval`コールバック）で終了すると、
-      テストは失敗し、クリアエラーメッセージが表示されます。
+      `fakeAsync`テストが保留中のタイマーイベント_タスク_（キューされた`setTimeOut`および`setInterval`コールバック）を持ったまま終了すると、
+      テストは失敗し、明確なエラーメッセージが表示されます。
 
-一般に、テストはキューに入れられたタスクなしで終了する必要があります。
-保留中のタイマータスクが必要な場合は、
-`discardPeriodicTasks`を呼び出して_タスク_キューをフラッシュし、エラーを回避します。
+      一般に、テストはキューにタスクが入っていない状態で終了する必要があります。
+      保留中のタイマータスクが予測される場合は、
+      _タスク_キューをフラッシュするために`discardPeriodicTasks`を呼び出してエラーを回避してください。
 
     </td>
   </tr>
@@ -2706,12 +2705,12 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      `fakeAsync`テストが未解決の約束などの保留中の_マイクロタスク_で終了すると、テストは失敗し、
-      明確なエラーメッセージが表示されます。
+      `fakeAsync`テストが未解決のPromiseなどの保留中の_マイクロタスク_を持ったまま終了すると、
+      テストは失敗し、明確なエラーメッセージが表示されます。
 
-一般に、テストはマイクロタスクが完了するのを待つべきです。
-保留中のマイクロタスクが予想される場合は、`flushMicrotasks`を呼び出して、
-_マイクロタスク_キューをフラッシュし、エラーを回避します。
+      一般に、テストはマイクロタスクが完了するのを待つべきです。
+      保留中のマイクロタスクが予想される場合は、
+      _マイクロタスク_キューをフラッシュするために`flushMicrotasks`を呼び出してエラーを回避してください。
 
     </td>
   </tr>
@@ -2737,7 +2736,8 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
 
       `TestBed`の現在のインスタンスを取得します。
       通常、`TestBed`クラスの静的クラスメソッドで十分です。
-      `TestBed`インスタンスは、ほとんど使用されない静的メソッドとして使用できるメンバーを公開します。
+      `TestBed`インスタンスは、
+      ほとんど使用されない静的メソッドとして使用できないメンバーを公開します。
 
     </td>
   </tr>
@@ -2747,11 +2747,11 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
 
 {@a testbed-class-summary}
 
-#### _TestBed_ クラスサマリー
+#### _TestBed_ クラスの概要
 
 `TestBed`クラスは、主要なAngularテストユーティリティの1つです。
-そのAPIは非常に大きく、
-あなたがそれを調べるまで圧倒的である可能性があります。
+そのAPIは巨大で、
+あなたがそれを調べるまで少しの時間で圧倒されるかもしれません。
 完全なAPIを吸収しようとする前に、まずこのガイドの最初の部分を読んで基礎を理解してください。
 
 `configureTestingModule`に渡されるモジュール定義は、
@@ -2768,7 +2768,7 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
 
 {@a metadata-override-object}
 
-各オーバーライドメソッドは`MetadataOverride<T>`を取ります。
+各オーバーライドメソッドは`MetadataOverride<T>`を受け取ります。
 ここで、`T`はメソッドに適したメタデータの種類、
 つまり`@NgModule`、`@Component`、`@Directive`、または`@Pipe`のパラメータです。
 
@@ -2785,12 +2785,12 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
 
 `TestBed` APIは、`TestBed`の_グローバル_インスタンスを更新または参照する静的クラスメソッドで構成されています。
 
-内部的には、すべての静的メソッドは、現在のランタイム`TestBed`インスタンスのメソッドをカバーします。
-このメソッドは、`getTestBed()`関数によって返されます。
+内部的には、すべての静的メソッドは、現在のランタイムの`TestBed`インスタンスのメソッドをカバーします。
+これは、`getTestBed()`関数によって返されます。
 
-`beforeEach()`_内_の`TestBed`メソッドを呼び出して、個々のテストの前に新しい開始を確実にします。
+`beforeEach()`_内_の`TestBed`メソッドを呼び出して、個々のテストの初期化を確実にしてください。
 
-ユーティリティの順に、最も重要な静的メソッドを次に示します。
+役に立ちそうな順に、最も重要な静的メソッドを説明します。
 
 <table>
   <tr>
@@ -2810,12 +2810,11 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
     <td>
 
       テストシム（`karma-test-shim`、`browser-test-shim`）は、
-      [初期テスト環境](guide/testing)とデフォルトテストモジュールを確立します。
-      デフォルトのテストモジュールは、
-      すべてのテスターが必要とする基本的な宣言といくつかのAngularサービスの代替で構成されています。
+      [初期テスト環境](guide/testing)とデフォルトテストモジュールを構築します。
+      デフォルトのテストモジュールは、すべてのテスターが必要とする基本的な宣言といくつかのAngularサービスの代替で構成されています。
 
-`configureTestingModule`を呼び出すと、インポート、宣言（コンポーネント、ディレクティブ、パイプ）、
-およびプロバイダを追加および削除して、特定のテストセットのテストモジュール設定を絞り込むことができます。
+      `configureTestingModule`を呼び出すと、インポート、宣言（コンポーネント、ディレクティブ、パイプ）、
+      およびプロバイダーの追加と削除を行い、特定のテストセットにテストモジュールの構成を絞り込むことができます。
 
     </td>
   </tr>
@@ -2830,16 +2829,16 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
       テストモジュールの設定が完了したら、テストモジュールを非同期でコンパイルします。
       コンポーネントテンプレートとスタイルファイルの取得は必ず非同期であるため、
       テストモジュールコンポーネントの_いずれか_に`templateUrl`または`styleUrls`がある場合は、このメソッドを呼び出す**必要があります**。
-      [上記](#compile-components)を参照。
+      [上記](#compile-components)を参照してください。
 
-      `compileComponents`を呼び出した後、`TestBed`設定は現在のスペックの期間中フリーズされます。
+      `compileComponents`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズされます。
 
     </td>
   </tr>
 
   <tr>
     <td style="vertical-align: top">
-      <code>createComponent<T></code>
+      <code>createComponent&lt;T&gt;</code>
     </td>
 
     <td>
@@ -2857,7 +2856,8 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
     <td>
 
       指定された`NgModule`のメタデータを置き換えます。モジュールは他のモジュールをインポートできることを思い出してください。
-      `overrideModule`メソッドは、これらの内部モジュールの1つを変更するために、現在のテストモジュールに深く到達することができます。
+      `overrideModule`メソッドは、これらの内部モジュールの1つを変更するために、
+      現在のテストモジュールに深く到達することができます。
 
     </td>
   </tr>
@@ -2870,7 +2870,7 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
     <td>
 
       指定されたコンポーネントクラスのメタデータを置き換えます。
-      内側のモジュール内に深くネストすることができます。
+      内部モジュールの深くネストしたコンポーネントでも可能です。
 
     </td>
   </tr>
@@ -2883,7 +2883,7 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
     <td>
 
       指定されたディレクティブクラスのメタデータを置き換えます。
-      内部モジュールの内部に深くネストすることができます。
+      内部モジュールの深くネストしたディレクティブでも可能です。
 
     </td>
   </tr>
@@ -2894,8 +2894,8 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
     </td>
     <td>
 
-      R指定されたパイプクラスのメタデータを置き換えます。
-      内側のモジュール内に深くネストすることができます。
+      指定されたパイプクラスのメタデータを置き換えます。
+      内部モジュールの深くネストしたパイプでも可能です。
 
     </td>
   </tr>
@@ -2908,19 +2908,20 @@ _マイクロタスク_キューをフラッシュし、エラーを回避しま
 
     <td>
 
-      現在の`TestBed`インジェクタからサービスを取得します。
+      現在の`TestBed`インジェクターからサービスを取得します。
 
-`inject`関数は、この目的にはしばしば適切です。
-しかし、`inject`がサービスを提供できない場合は、エラーをスローします。
+      `inject`関数は、この用途で使用するとき、多くの場合で適切です。
+      しかし、`inject`がサービスを提供できない場合は、エラーをスローします。
 
-サービスがオプションの場合はどうなりますか？
+      サービスがオプショナルな場合はどうなるでしょうか?
 
-`TestBed.get()`メソッドはオプションの第2引数をとります。
-Annularがプロバイダを見つけることができない場合に返すオブジェクト（この例では`null`）:
+      `TestBed.get()`メソッドはオプショナルな第2引数を受け取ります。
+      これはAngularがプロバイダーを見つけることができない場合に返すオブジェクトです
+      （この例では`null`）:
 
       <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null" title="app/demo/demo.testbed.spec.ts" linenums="false"></code-example>
 
-      `get`を呼び出した後、`TestBed`設定は現在の仕様の期間中フリーズします。
+      `get`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズします。
 
     </td>
   </tr>
@@ -2934,14 +2935,15 @@ Annularがプロバイダを見つけることができない場合に返すオ�
 
       テスト実行全体のテスト環境を初期化します。
 
-      テストシム（`karma-test-shim`, `browser-test-shim`）はそれをあなたのために呼び出すので、
-      あなたがそれを自分で呼び出す理由はめったにありません。
+      テストシム（`karma-test-shim`, `browser-test-shim`）がそれを呼び出してくれるので、
+      それを自分で呼び出す理由はめったにありません。
 
-      このメソッドを=正確に1回_呼び出すことができます。
-      テストの実行中にこのデフォルトを変更する必要がある場合は、最初に`resetTestEnvironment`を呼び出します。
+      このメソッドを_1回だけ_呼び出すことができます。
+      テストの実行中にこのデフォルトを変更する必要がある場合は、最初に`resetTestEnvironment`を呼び出してください。
 
-      Angularコンパイラファクトリ、`PlatformRef`、およびデフォルトのAngularテストモジュールを指定します。
-      ブラウザ以外のプラットフォームの代替手段は、一般的な形式`@angular/platform-<platform_name>/testing/<platform_name>`で利用できます。
+      Angularコンパイラファクトリー、`PlatformRef`、およびデフォルトのAngularテストモジュールを指定します。
+      非ブラウザプラットフォームの代替手段は、
+      一般的な形式`@angular/platform-<platform_name>/testing/<platform_name>`で利用できます。
 
     </td>
   </tr>
@@ -2952,20 +2954,21 @@ Annularがプロバイダを見つけることができない場合に返すオ�
     </td>
     <td>
 
-      デフォルトテストモジュールを含む初期テスト環境をリセットします。
+      デフォルトテストモジュールを含む初期のテスト環境をリセットします。
 
     </td>
   </tr>
 </table
 
-いくつかの`TestBed`インスタンスメソッドは静的な`TestBed`クラスメソッドの対象外です。
+いくつかの`TestBed`インスタンスメソッドは静的な`TestBed`クラスメソッドがカバーしていないものです。
 これらはめったに必要ありません。
 
 {@a component-fixture-api-summary}
 
-#### The _ComponentFixture_
+#### _ComponentFixture_
 
-`TestBed.createComponent<T>`は、コンポーネント`T`のインスタンスを作成し、
+`TestBed.createComponent<T>`は、
+コンポーネント`T`のインスタンスを作成し、
 そのコンポーネントに対して強く型付けされた`ComponentFixture`を返します。
 
 `ComponentFixture`のプロパティとメソッドは、コンポーネント、そのDOM表現、
@@ -2975,7 +2978,7 @@ Annularがプロバイダを見つけることができない場合に返すオ�
 
 #### _ComponentFixture_ プロパティ
 
-テスターの最も重要なプロパティをユーティリティの順で紹介します。
+テスターの最も重要なプロパティを役に立ちそうな順で紹介します。
 
 <table>
   <tr>
@@ -3008,8 +3011,8 @@ Annularがプロバイダを見つけることができない場合に返すオ�
 
       コンポーネントのルート要素に関連付けられた`DebugElement`。
 
-      `debugElement`は、テストおよびデバッグ中に、コンポーネントとそのDOM要素を把握します。
-      これはテスターにとって重要な特性です。 最も興味深いのメンバーは[以下](#debug-element-details)でカバーされています。
+      `debugElement`は、テストおよびデバッグ中に、コンポーネントとそのDOM要素を把握する手がかりになります。
+      これはテスターにとって重要な特性です。 最も興味深いメンバーは[以下](#debug-element-details)でカバーされています。
 
     </td>
   </tr>
@@ -3021,7 +3024,7 @@ Annularがプロバイダを見つけることができない場合に返すオ�
 
     <td>
 
-      コンポーネントのルートにあるネイティブDOM要素。
+      コンポーネントのルートにあるネイティブなDOM要素。
 
     </td>
   </tr>
@@ -3047,10 +3050,10 @@ Annularがプロバイダを見つけることができない場合に返すオ�
 
 #### _ComponentFixture_ メソッド
 
-_フィクスチャ_メソッドにより、Angularはコンポーネントツリー上で特定のタスクを実行します。
-これらのメソッドを呼び出して、シミュレートされたユーザーアクションに応答してAngularの動作をトリガーします。
+_フィクスチャー_のメソッドにより、Angularはコンポーネントツリー上で特定のタスクを実行します。
+シミュレートされたユーザーアクションに応答してAngularの動作をトリガーするためにこれらのメソッドを呼び出してください。
 
-テスターにとって最も有用な方法は次のとおりです。
+テスターにとって最も有用なメソッドは次のとおりです。
 
 <table>
   <tr>
@@ -3069,15 +3072,15 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      コンポーネントの変更検出サイクルをトリガーします。
+      コンポーネントの変更検知サイクルをトリガーします。
 
-      それを呼び出してコンポーネントを初期化し（`ngOnInit`を呼び出します）、
-      テストコードの後にコンポーネントのデータバウンドプロパティ値を変更します。
-      Angularでは、`personComponent.name`を変更したことを認識できません。
+      コンポーネントを初期化するため（`ngOnInit`を呼び出します）、
+      またはテストコードでコンポーネントのデータバウンドプロパティ値を変更したあとに呼び出してください。
+      Angularは、`personComponent.name`を変更したことを認識できません。
       また、`detectChanges`を呼び出すまで、`name`のバインディングは更新されません。
 
-      後で`checkNoChanges`を実行して、
-      `detectChanges(false)`と呼ばれない限り循環更新がないことを確認します。
+      `detectChanges(false)`として呼び出さない場合、
+      循環更新を確認するためにあとで`checkNoChanges`を実行してください。
 
     </td>
   </tr>
@@ -3089,15 +3092,16 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      これを`true`に設定すると、フィクスチャーは自動的に変更を検出します。
+      これを`true`に設定すると、フィクスチャーは自動的に変更を検知します。
 
-      自動検出が`true`の場合、テストフィクスチャはコンポーネントの作成直後に`detectChanges`を呼び出します。
-      次に、関連するゾーンイベントをリッスンし、それに応じて`detectChanges`を呼び出します。
+      自動検知が`true`の場合、
+      テストフィクスチャーはコンポーネントの作成直後に暗黙的に`detectChanges`を呼び出します。
+      そのあと、関連するゾーンイベントをリッスンし、それに応じて`detectChanges`を呼び出します。
       テストコードがコンポーネントのプロパティ値を直接変更するときは、
       おそらく`fixture.detectChanges`を呼び出してデータバインディングの更新をトリガーする必要があります。
 
       デフォルトは`false`です。
-      テストの動作を細かく制御することを好むテスタは、それを`false`のままにする傾向があります。
+      テストの動作を細かく制御することを好むテスターは、`false`のままにする傾向があります。
 
     </td>
   </tr>
@@ -3109,7 +3113,7 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      保留中の変更がないことを確認するために変更検出を実行します。 ある場合は例外をスローします。
+      保留中の変更がないことを確認するために変更検知を実行します。 ある場合は例外をスローします。
 
     </td>
   </tr>
@@ -3134,10 +3138,11 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      フィクスチャーが安定しているときに解決するpromiseを返します。
+      フィクスチャーが安定しているときに解決するPromiseを返します。
 
-      非同期アクティビティまたは非同期変更検出が完了した後でテストを再開するには、
-      そのpromiseをフックします。 [上記](#when-stable)を参照。
+      非同期アクティビティまたは非同期変更検知が完了した後でテストを再開するには、
+      そのPromiseをフックしてください。
+      [上記](#when-stable)を参照してください。
 
     </td>
   </tr>
@@ -3159,12 +3164,12 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
 #### _DebugElement_
 
-`DebugElement`は、コンポーネントのDOM表現に重要な洞察を提供します。
+`DebugElement`は、コンポーネントのDOM表現を把握する重要な手がかりになります。
 
 `fixture.debugElement`によって返されたテストルートコンポーネントの`DebugElement`から、
-フィクスチャの要素およびコンポーネントのサブツリー全体を歩く（およびクエリする）ことができます。
+フィクスチャーの要素およびコンポーネントのサブツリー全体を走査（およびクエリ）することができます。
 
-テスターの最も有用な`DebugElement`メンバーは、ユーティリティのおおよその順番です:
+次は、テスターにとって最も有用な`DebugElement`メンバーです。おおよそ役に立つ順番です:
 
 <table>
   <tr>
@@ -3195,8 +3200,8 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      呼び出し`query(predicate: Predicate<DebugElement>)`は、
-      サブツリー内の任意の深さの[predicate](#query-predicate)に一致する最初の`DebugElement`を返します。
+      `query(predicate: Predicate<DebugElement>)`を呼び出すと、
+      サブツリー内の任意の深さの[predicate](#query-predicate)にマッチする最初の`DebugElement`を返します。
 
     </td>
   </tr>
@@ -3209,7 +3214,7 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
     <td>
 
       `queryAll(predicate: Predicate<DebugElement>)`を呼び出すと、
-      サブツリー内の任意の深さの[predicate](#query-predicate)に一致するすべてのDebugElementsが返されます。
+      サブツリー内の任意の深さの[predicate](#query-predicate)にマッチするすべての`DebugElement`が返されます。
 
     </td>
   </tr>
@@ -3221,8 +3226,8 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      ホスト依存性インジェクター。
-      たとえば、ルート要素のコンポーネントインスタンスインジェクタなどです。
+      ホストの依存性のインジェクター。
+      たとえば、ルート要素のコンポーネントインスタンスインジェクターなどです。
 
     </td>
   </tr>
@@ -3247,10 +3252,10 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
     <td>
 
       この要素の親コンテキストを提供するオブジェクト。
-      この要素を管理する祖先コンポーネントインスタンスです。
+      この要素を管理する祖先コンポーネントインスタンスであることが多いです。
 
-      要素が`*ngFor`内で繰り返される場合、
-      コンテキストは`$implicit`プロパティが行インスタンス値の値である`NgForRow`です。
+      要素が`*ngFor`内で繰り返されている場合、
+      コンテキストは`$implicit`プロパティが行のインスタンス値の値である`NgForRow`です。
       例えば、`*ngFor="let hero of heroes"`内の`hero`がそうです。
 
     </td>
@@ -3263,13 +3268,13 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      即時の`DebugElement`の子です。`children`通してツリーをたどってください。
+      直接の`DebugElement`の子です。`children`を通してツリーをたどってください。
 
       <div class="alert is-helpful">
 
       `DebugElement`には、`DebugNode`オブジェクトのリストである`childNodes`もあります。
       `DebugElement`は`DebugNode`オブジェクトから派生し、
-      要素より多くのノードがあります。テスターは通常、プレーンノードを無視できます。
+      要素より多くのノードを持ちます。テスターは通常、プレーンなノードを無視できます。
 
       </div>
     </td>
@@ -3281,7 +3286,7 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
     </td>
     <td>
 
-      `DebugElement`の親です。 これがルート要素の場合はnullです。
+      `DebugElement`の親です。これがルート要素の場合はnullです。
 
     </td>
   </tr>
@@ -3304,10 +3309,10 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
     </td>
     <td>
 
-      要素のリスナーコレクションに対応する`listeners`がある場合、
+      指定した名前に対応するリスナーが、要素の`listeners`コレクション内にある場合、
       その名前でイベントをトリガーします。
-      2番目のパラメータは、ハンドラが予期する_イベントオブジェクト_です。
-      [上記](#trigger-event-handler)を参照。
+      2番目のパラメータは、ハンドラーが期待する_イベントオブジェクト_です。
+      [上記](#trigger-event-handler)を参照してください。
 
       イベントにリスナーがない場合やその他の問題がある場合は、
       `nativeElement.dispatchEvent(eventObject)`を呼び出すことを検討してください。
@@ -3334,8 +3339,8 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      このコンポーネントのインジェクタルックアップトークン。
-      コンポーネント自体と`providers`のメタデータにコンポーネントがリストするトークンが含まれます。
+      このコンポーネントのインジェクタールックアップトークン。
+      コンポーネント自体とコンポーネントが持つ`providers`メタデータ内のトークンが含まれます。
 
     </td>
   </tr>
@@ -3359,7 +3364,7 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 
     <td>
 
-      テンプレート変数（例：`#foo`）に関連付けられたオブジェクトの辞書。
+      テンプレートローカル変数（例：`#foo`）に関連付けられたオブジェクトの辞書。
       ローカル変数名をキーとしています。
 
     </td>
@@ -3369,10 +3374,10 @@ _フィクスチャ_メソッドにより、Angularはコンポーネントツ�
 {@a query-predicate}
 
 `DebugElement.query(predicate)` および`DebugElement.queryAll(predicate)`メソッドは、
-`DebugElement`と一致するようにソース要素のサブツリーをフィルタする述語を取ります。
+`DebugElement`とマッチするようにソース要素のサブツリーをフィルタする述語を受け取ります。
 
-述語は、`DebugElement`をとり、_truthy_な値を返す任意のメソッドです。
-次の例では、"content"という名前のテンプレートローカル変数への参照を含むすべての`DebugElements`
+述語は、`DebugElement`を受け取り、_truthy_な値を返す任意のメソッドです。
+次の例では、"content"という名前のテンプレートローカル変数への参照を含むすべての`DebugElement`
 が検索されます:
 
 <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate" title="app/demo/demo.testbed.spec.ts" linenums="false"></code-example>
@@ -3393,15 +3398,15 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 
 {@a q-spec-file-location}
 
-#### specファイルをテストするファイルの隣に置くのはなぜですか？
+#### スペックファイルをテストするファイルの隣に置くのはなぜですか？
 
-単体テスト仕様ファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
+単体テストのスペックファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
 
 - そのようなテストは簡単に見つけることができます。
 - アプリケーションの一部にテストがないかどうかを一目で確認できます。
-- 近くのテストでは、部品がどのようにコンテキストで動作するかを明らかにすることができます。
-- あなたがソースを（必然的に）移動するときは、テストを移動することを忘れないでください。
-- ソースファイル（必然的に）の名前を変更するときは、テストファイルの名前を変更することを忘れないでください。
+- 近くのテストは、部品がコンテキスト内でどのように動作するかを明らかにすることができます。
+- あなたがソースを移動するときは、（必然的に）テストを移動することを忘れません。
+- ソースファイルの名前を変更するときは、（必然的に）テストファイルの名前を変更することを忘れません。
 
 <hr>
 
@@ -3409,29 +3414,39 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 
 #### テストフォルダにスペックを入れるのはいつですか？
 
-アプリケーション統合仕様では、
+アプリケーションの統合的なスペックでは、
 フォルダやモジュールに分散された複数のパーツの相互作用をテストできます。
-彼らは本当に特にどの部分にも属していないので、1つのファイルの隣に自然の家がありません。
+それらは本当に特にどの部分にも属していないので、
+1つのファイルの隣のような自然な置き場所がありません。
 
 `tests`ディレクトリに適切なフォルダを作成する方がよい場合があります。
 
-もちろん、テストヘルパーをテストするスペックは、対応するヘルパーファイルの隣の`test`フォルダに属します。
+もちろん、テストヘルパーをテストするスペックは、
+`test`フォルダ内の対応するヘルパーファイルの隣に置くほうが良いでしょう。
 
 {@a q-e2e}
+
 #### なぜDOM統合のE2Eテストに頼らないのでしょうか？
 
 このガイドで説明されているコンポーネントのDOMテストでは、
 多くの場合、広範な設定と高度な技術が必要ですが、
 [ユニットテスト](#component-class-testing)は比較的簡単です。
 
-#### なぜDOM統合テストをエンドツーエンド（E2E）テストに延期しないのですか？
+#### なぜDOMの統合テストをエンドツーエンド（E2E）テストに任せないのですか？
 
-E2Eテストは、システム全体の高レベル検証に最適です。 しかし、ユニットテストで期待される包括的なテストカバレッジを与えることはできません。
+E2Eテストは、システム全体の高レベルな検証に最適です。
+しかし、ユニットテストで期待されるような包括的なテストカバレッジを与えることはできません。
 
-E2Eテストは、単体テストに比べて書き込みや実行が難しいです。 それらは容易に壊れます、頻繁に破損の場所から遠く離れた変化または不正行為のために。
+E2Eテストは、単体テストに比べて書き込みや実行が難しいです。
+頻繁に破損した場所から遠く離れた変化また不作法のせいで容易に壊れます、
 
-E2Eテストでは、データの欠落や不良、接続の切断、リモートサービスの障害など、問題が発生したときにコンポーネントがどのように動作するかを簡単には明らかにできません。
+E2Eテストでは、データの欠落や不良、接続の切断、リモートサービスの障害など、
+問題が発生したときにコンポーネントがどのように動作するかを簡単には明らかにできません。
 
-データベースを更新したり、請求書を送信したり、クレジットカードに請求したりするアプリのE2Eテストでは、リモートリソースの偶発的な破損を防ぐために特殊なトリックとバックドアが必要です。 テストしたいコンポーネントにナビゲートすることが難しい場合もあります。
+データベースを更新したり、請求書を送信したり、
+クレジットカードに請求したりするアプリのE2Eテストでは、
+リモートリソースの偶発的な破損を防ぐために特殊なトリックとバックドアが必要です。
+テストしたいコンポーネントにナビゲートすることが難しい場合もあります。
 
-これらの多くの障害のために、DOMテストの相互作用を可能な限りテストする必要があります。
+これらの多くの障害のために、
+DOMテストの相互作用を可能な限りユニットテストで行う必要があります。

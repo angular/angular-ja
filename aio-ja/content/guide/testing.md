@@ -293,19 +293,19 @@ _レガシー_な`HttpModule`のテストのデモもしています。
 
 ## コンポーネントテストの基本
 
-コンポーネントは、Angularアプリケーションの他のすべての部分とは違い、
+コンポーネントは、Angularアプリケーションの他のすべての部品とは違い、
 HTMLテンプレートとTypeScriptクラスを組み合わせています。
 コンポーネントは本当にテンプレートとクラスが_一緒に動作します_。
 そして、適切にコンポーネントをテストするためには、
 目的通りにそれらを一緒に動作させるテストを行う必要があります。
 
 このようなテストでは、
-AngularがするようにブラウザのDOMにコンポーネントのホスト要素を作成し、
-コンポーネントクラスとテンプレートとして定義されたDOMとの相互作用を調査する必要があります。
+Angularが行っているようにブラウザのDOMにコンポーネントのホスト要素を作成し、
+コンポーネントクラスとテンプレートとして定義されたDOMとのやりとりを調査する必要があります。
 
 Angularの`TestBed`は次のセクションで見るような、この種類のテストを容易にします。
 しかし、多くの場合、DOMの関与無しで_このクラスだけでテストすること_は
-コンポーネントの振る舞いをより簡単で明白な方法で検証できます。
+コンポーネントの動作をより簡単で明白な方法で検証できます。
 
 ### コンポーネントクラスのテスト
 
@@ -320,12 +320,12 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
   title="app/demo/demo.ts (LightswitchComp)" linenums="false">
 </code-example>
 
-`click()`メソッドがライトの_オン/オフ_状態を切り替えて、
-メッセージを適切にセットすることをテストすることだけを決めてください。TODO
+きっと、あなたは`click()`メソッドがライトの_オン/オフ_状態を切り替えて、
+メッセージを適切にセットすることをテストしたいだけだと思います。
 
-このコンポーネントクラスは依存関係がありません。
+このコンポーネントクラスには依存関係はありません。
 依存関係のないサービスをテストするには、`new`でサービスを作成し、
-そのAPIを叩いて、公開されている状態の期待値をアサートします。
+そのAPIを叩いて、公開されている状態のエクスペクテーションをアサートします。
 コンポーネントクラスでも同じことをします。
 
 <code-example 
@@ -334,7 +334,7 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
   title="app/demo/demo.spec.ts (Lightswitch tests)" linenums="false">
 </code-example>
 
-次は_ツアー・オブ・ヒーロー_チュートリアルの`DashboardHeroComponent`です。
+次は、_ツアー・オブ・ヒーロー_チュートリアルの`DashboardHeroComponent`です。
 
 <code-example 
   path="testing/src/app/dashboard/dashboard-hero.component.ts" 
@@ -343,7 +343,7 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
 </code-example>
 
 _hero_を`@Input`プロパティにバインドし、
-_selected_`@Output`プロパティを通して発生したイベントをリッスンする
+_selected_ `@Output`プロパティを通して発生したイベントをリッスンする
 親コンポーネントのテンプレート内に表示されます。
 
 `DashboardHeroComponent`や、
@@ -394,30 +394,30 @@ _selected_`@Output`プロパティを通して発生したイベントをリッ�
 
 コンポーネント_クラス_のテストは、サービスをテストするのと同じくらい簡単です。
 
-しかし、コンポーネントは_クラスだけ_ではありません。
+しかし、コンポーネントはクラスだけではありません。
 コンポーネントは、DOMや他のコンポーネントとやりとりします。
-_クラスのみ_のテストは、クラスの振る舞いについては教えてくれます。
+_クラスのみ_のテストは、クラスの動作については教えてくれます。
 コンポーネントが適切にレンダリングされて、ユーザーの入力やジェスチャーに応答したり、
-親コンポーネントと子コンポーネントと統合されているかどうかをユーザーは確認できません。
+親コンポーネントや子コンポーネントと統合されているかどうかは確認できません。
 
 上記の_クラスのみ_のテストでは、
-コンポーネントが実際に画面上でどのように動作するかについての重要な質問に答えることはできません。
+コンポーネントが実際に画面上でどのように動作するかについて重要な質問に答えることはできません。
 
 - `Lightswitch.clicked()`はユーザが呼び出せるようなものにバインドされているのか？
 - `Lightswitch.message`は表示されているのか？
 - ユーザーは実際に`DashboardHeroComponent`で表示されるヒーローを選択できるのか？
-- 主人公の名前は、期待された形(つまり、大文字)で表示されるのか？
+- 主人公の名前は、期待された形式(つまり、大文字)で表示されるのか？
 - ウェルカムメッセージは`WelcomeComponent`のテンプレートで表示されるのか？
 
-これらは、上のような単純なコンポーネントだと問題ではないかもしれません。
+これは、上のような単純なコンポーネントだと問題ではないかもしれません。
 しかし、多くのコンポーネントは、
 テンプレートに記述されているDOM要素と複雑なやりとりをしているため、
 コンポーネントの状態が変わることでHTMLが表示されたり消えたりします。
 
-これらの種類の質問に答えるには、
+この種類の質問に答えるには、
 コンポーネントに関連付けられたDOM要素を作成する必要があります。
 コンポーネントの状態が適切なタイミングで適切に表示されることを確認するためにDOMを検査し、
-画面とユーザーインタラクションによって、
+画面上でのユーザーインタラクションによって、
 コンポーネントが期待通りに動作することをシミュレートする必要があります。
 
 この種類のテストを書くために、
@@ -450,7 +450,7 @@ ng generate component banner --inline-template --inline-style --module app
 ファイルの残りの部分は、より高度なテストを見込んだ定型的なセットアップコードで、構成要素が相当なものに発展した場合に必要と_なるでしょう_。
 
 以下では、これらの高度なテスト機能について学びます。
-現時点では、より管理しやすいサイズにするために、このテストファイルを大幅に縮小することができます:
+現時点では、より管理しやすいサイズにするために、このテストファイルを大幅に減らすことができます:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -468,13 +468,13 @@ ng generate component banner --inline-template --inline-style --module app
 
 <div class="alert is-helpful">
 
-宣言したり、他の何かをインポートする必要はありません。
+他の何かを宣言したりインポートする必要はありません。
 デフォルトのテストモジュールは、
 `@angular/platform-browser`の`BrowserModule`のようなものがあらかじめ設定されています。
 
-後で、テストのニーズにあわせて、
-インポート、プロバイダー、および宣言を設定した`TestBed.configureTestingModule()`を呼び出します。
-任意に`override`メソッドを使用して、設定をさらに細かく調整できます。
+後でテストのニーズにあわせて、
+インポート、プロバイダー、宣言の一式で`TestBed.configureTestingModule()`を呼び出します。
+オプショナルな`override`メソッドを使用して、構成をさらに細かく調整できます。
 
 </div>
 
@@ -482,7 +482,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _createComponent()_
 
-`TestBed`を設定したら`createComponent()`メソッドを呼び出します。。
+`TestBed`を構成したら`createComponent()`メソッドを呼び出します。。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -495,12 +495,12 @@ ng generate component banner --inline-template --inline-style --module app
 
 <div class="alert is-important">
 
-`createComponent`の呼び出し後に`TestBed`を再設定しないでください。
+`createComponent`の呼び出し後に`TestBed`を再構成しないでください。
 
 `createComponent`メソッドは現在の`TestBed`の定義をフリーズし、
 さらなる設定をできないようにします。
 
-どの`TestBed`設定メソッド(`configureTestingModule()`、`get()`、`override...`メソッド)
+どの`TestBed`を構成するメソッド(`configureTestingModule()`、`get()`、`override...`メソッド)
 も呼び出すことはできません。
 試してみると、`TestBed`はエラーをスローします。
 
@@ -512,7 +512,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 [ComponentFixture](api/core/testing/ComponentFixture)は、作成されたコンポーネントとそれが対応する要素とやりとりするためのテストハーネスです。
 
-フィクスチャーを通してコンポーネントインスタンスにアクセスし、ジャスミンの`expect()`を使用して存在を確認してください:
+フィクスチャーを通してコンポーネントインスタンスにアクセスし、Jasmineのエクスペクテーションを使用して存在を確認してください:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -522,8 +522,8 @@ ng generate component banner --inline-template --inline-style --module app
 #### _beforeEach()_
 
 このコンポーネントが発展するにつれて、より多くのテストを追加することになるでしょう。
-それぞれのテストで`TestBed`設定を複製するのではなく、
-設定をJasmineの`beforeEach()`で行い、いくつかのサポート変数にプルするようにリファクタリングしましょう。
+それぞれのテストで`TestBed`の構成を複製するのではなく、
+セットアップをJasmineの`beforeEach()`で行い、いくつかのサポート変数にプルするようにリファクタリングしましょう。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -598,7 +598,7 @@ Angularは、HTML要素のツリーを作成する代わりに、ランタイム
 テスト内の`nativeElement`は、
 常にテスト内で探索できる使い慣れたメソッドとプロパティを持つ`HTMLElement`です。
 
-次は、以前のテストを`fixture.debugElement.nativeElement`で再実装したものです:
+次は、さきほどのテストを`fixture.debugElement.nativeElement`で再実装したものです:
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -619,7 +619,7 @@ Angularコアライブラリから`DebugElement`シンボルをインポート�
 #### _By.css()_
 
 このガイド内のテストはすべてブラウザ上で実行されますが、一部のアプリケーションは、
-少なくとも、一部のプラットフォームで動作することがあります。
+少なくとも、別のプラットフォームで動作することがあります。
 
 たとえば、接続の悪いデバイスでアプリケーションをより早く起動させる戦略の一環として、コンポーネントをサーバー上で最初にレンダリングすることがあります。
 サーバー側のレンダラーは、完全なHTML要素のAPIをサポートしていない可能性があります。`querySelector`をサポートしていない場合、前のテストは失敗する可能性があります。
@@ -636,7 +636,7 @@ Angularコアライブラリから`DebugElement`シンボルをインポート�
 </code-example>
 
 次の例では`DebugElement.query()`とブラウザの`By.css`メソッドを使用して、
-以前のテストを再実装しています。
+さきほどのテストを再実装しています。
 
 <code-example 
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -660,7 +660,7 @@ CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要�
 
 ## コンポーネントのテストシナリオ
 
-このガイドの殆どを構成する次のセクションでは、
+このガイドのほとんどを構成する次のセクションでは、
 一般的なコンポーネントのテストシナリオについて探検します。
 
 ### コンポーネントバインディング

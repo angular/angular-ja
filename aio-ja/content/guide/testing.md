@@ -1,9 +1,9 @@
 {@a top}
 # テスト
 
-このガイドでは、Angularアプリケーションでのユニット、インテグレーションテストのヒントとテクニックについて説明します。
+このガイドでは、Angularアプリケーションでのユニットテスト、インテグレーションテストのヒントとテクニックについて説明します。
 
-このガイドでは、[_ツアー・オブ・ヒーロー_チュートリアル](tutorial)によく似たサンプルCLIアプリケーションのテストを紹介します。
+このガイドでは、[_ツアー・オブ・ヒーロー_チュートリアル](tutorial)によく似たサンプルのCLIアプリケーションのテストを紹介します。
 このガイド内のサンプルアプリケーションとすべてのテストは検証と実験に使用できます:
 
 - <live-example embedded-style>サンプルアプリケーション</live-example>
@@ -13,7 +13,7 @@
 
 ## セットアップ
 
-Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/)でAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
+Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/) を使用してAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
 
 CLIで作成したプロジェクトは、すぐにテストする準備ができています。
 この1つのCLIコマンドを実行するだけです:
@@ -22,10 +22,10 @@ CLIで作成したプロジェクトは、すぐにテストする準備がで�
   ng test
 </code-example>
 
-`ng test`コマンドはアプリケーションを_ウォッチモード_でビルドして、
+`ng test`コマンドはアプリケーションを_ウォッチモード_でビルドし、
 [Karmaテストランナー](https://karma-runner.github.io/1.0/index.html)を起動します。
 
-コンソールのアウトプットはこのようになります:
+コンソールのアウトプットは次のようになります:
 
 <code-example language="sh" class="code-shell">
 10% building modules 1/1 modules 0 active
@@ -39,7 +39,7 @@ Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 ログの最後の行が最も重要です。
 これはKarmaが3つのテストを走らせてすべてパスしたことを示します。
 
-Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内にこのようにテストのアウトプットを表示します。
+Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内に次のようにテストのアウトプットを表示します。
 
 <figure>
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
@@ -50,8 +50,8 @@ Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内にこの
 
 同時に、`ng test`コマンドは変更を監視しています。
 
-このアクションを確認するために、`app.component.ts`に小さな変更を加えて保存してみましょう。
-テストが再び実行され、ブラウザがリフレッシュされます。そして新しいテストの結果が表示されます。
+このアクションを確認するために`app.component.ts`に小さな変更を加えて保存してみましょう。
+テストが再び実行され、ブラウザが更新されます。そして新しいテストの結果が表示されます。
 
 #### 設定
 
@@ -60,23 +60,23 @@ CLIはJasmineとKarmaの設定を引き受けてくれます。
 `src/`フォルダ内の`karma.conf.js`と`test.ts`ファイルを編集することで
 多くのオプションの微調整ができます。
 
-`karma.conf.js`はKarmaの設定ファイルの一部です。
-CLIは`karma.conf.js`で補完された`angular.json`内で指定されたアプリケーションの構造をもとにメモリ内にすべてのランタイムの設定を構築します。
+`karma.conf.js`は部分的なKarma設定ファイルです。
+CLIは`angular.json`内で指定されたアプリケーション構造をベースとして、`karma.conf.js`で補完をして、メモリ内にすべてのランタイムの設定を構築します。
 
 JasmineとKarmaの設定の詳細についてはWebで検索してください。
 
 #### 他のテストフレームワーク
 
 他のテスティングライブラリーとテストランナーでAngularアプリケーションのユニットテストを行うこともできます。
-各ライブラリとランナーは独自のインストール手順、設定、および構文を持ちます。
+各ライブラリとランナーはそれぞれ独自のインストール手順、設定、および構文を持ちます。
 
-詳細はWebで検索してください。
+詳細についてはWebで検索してください。
 
 #### テストファイルの名前と場所
 
 `src/app`フォルダ内部をみてください。
 
-CLIは`AppComponent`のために`app.component.spec.ts`という名前のテストファイルを生成しています。
+CLIは`AppComponent`のテストとして`app.component.spec.ts`という名前のテストファイルを生成しました。
 
 <div class="alert is-important">
 
@@ -85,14 +85,14 @@ CLIは`AppComponent`のために`app.component.spec.ts`という名前のテス�
 </div>
 
 `app.component.ts`と`app.component.spec.ts`ファイルは同じフォルダ内に置きます。
-ルートのファイル名(`app.component`の部分)は両方のファイルで同じにします。
+ルートのファイル名(`app.component`の部分)は双方のファイルで同じにします。
 
 あなた自身のプロジェクトの_すべての種類_のテストファイルにおいてこれら2つの慣習を採用してください。
 
 ## サービスのテスト
 
-サービスはユニットテストをするのに最も簡単なファイルなことが多いです。
-次では`ValueService`のいくつかの同期、非同期ユニットテストを
+サービスはユニットテストをするファイルとしては最も簡単なことが多いです。
+次では、`ValueService`のいくつかの同期、非同期ユニットテストを
 Angularのテスティングユーティリティの補助なしで書いています。
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="ValueService" title="app/demo/demo.spec.ts"></code-example>
@@ -111,11 +111,11 @@ _注入_することは簡単なことです。
 
 `MasterService`は注入した`ValueService`の`getValue`メソッドを委譲するだけです。
 
-次ではこれをテストするいくつかの方法を示します。
+次では、これをテストするいくつかの方法を紹介します。
 
 <code-example path="testing/src/app/demo/demo.spec.ts" region="MasterService" title="app/demo/demo.spec.ts"></code-example>
 
-最初のテストでは`new`を使用して`ValueService`を生成して、それを`MasterService`コンストラクタに渡しています。
+最初のテストでは`new`を使用して`ValueService`を作成して、それを`MasterService`コンストラクタに渡しています。
 
 しかし、ほとんどの依存するサービスは作成してコントロールすることが難しいのと同様に、実際のサービスを注入することはほとんど機能しません。
 
@@ -125,39 +125,39 @@ _注入_することは簡単なことです。
 
 <div class="alert is-helpful">
 
-スパイは通常サービスをモックするのに最も簡単な方法であるため好まれます。
+スパイは通常、サービスをモックするのに最も簡単な方法であるため好まれます。
 
 </div>
 
-これらの標準的なテスト手法は分離したサービスのユニットテストをするための素晴らしい方法です。
+これらの標準的なテストテクニックはサービスのユニットテストを隔離して行うための素晴らしい方法です。
 
-しかし、Angularの依存性の注入を使用してアプリケーションクラスにサービスを注入していてる場合は、ほとんど
-このパターンを使用して反映したテストが必要になります。
-Angularのテスティングユーティリティーを使用することで注入されたサービスの動作を簡単に調査することができます。
+しかし、Angularの依存性の注入を使用してアプリケーションクラスにサービスを注入していてる場合は、
+ほとんどこのパターンを使用して反映したテストが必要になります。
+Angularのテスティングユーティリティを使用することで注入されたサービスの動作を簡単に調査することができます。
 
 #### _TestBed_を使用してサービスのテストをする
 
 あなたのアプリケーションはサービスを作成するためにAngularの[依存性の注入(DI)](guide/dependency-injection)
 に頼っています。
 あるサービスが依存するサービスをもつとき、DIはその依存するサービスを探すか作成します。
-さらにその依存するサービスが自身の依存性をもつ場合、DIは同じように探すか作成します。
+さらにその依存するサービス自身が依存性をもつ場合、DIは同じように探すか作成します。
 
 サービスの_利用者_としては、これについて心配する必要はありません。
 コンストラクタの引数の順序や、それらがどうやって作成されるのかを心配する必要はありません。
 
 サービスの_テスター_としては、サービスの依存性の第一階層について少しだけ考える必要がありますが、
-サービスの提供と作成に`TestBed`テスティングユーティリティーを使用したとき、
+サービスの提供と作成に`TestBed`テスティングユーティリティーを使用すれば、
 AngularのDIにサービスの作成とコンストラクタ引数の順序を決めさせることが_できます_。
 
 {@a testbed}
 
 #### Angular _TestBed_
 
-`TestBed`はAngularテスティングユーティリティーで最も重要なものです。
+`TestBed`はAngularのテスティングユーティリティで最も重要です。
 `TestBed`はAngularの[@NgModule](guide/ngmodules)をエミュレートした、
 動的に生成されたAngular_テスト_モジュールを作成します。
 
-`TestBed.configureTestingModule()`メソッドは[@NgModule](guide/ngmodules)のプロパティのほとんどがもつことができるメタデータオブジェクトを受け取ります。 TODO
+`TestBed.configureTestingModule()`メソッドは[@NgModule](guide/ngmodules)で渡すことが出来るプロパティとほぼ同じプロパティを持つメタデータオブジェクトを受け取ります。
 
 サービスをテストするために、
 テストやモックしたいサービスの配列を`providers`メタデータプロパティにセットします。
@@ -168,7 +168,7 @@ AngularのDIにサービスの作成とコンストラクタ引数の順序を�
   title="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach">
 </code-example>
 
-それからサービスのクラスを引数として`TestBed.get()`を呼び出してテスト内部でそれを注入してください。
+それからサービスのクラスを引数として`TestBed.get()`を呼び出して、テスト内部でそれを注入してください。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
@@ -191,7 +191,7 @@ AngularのDIにサービスの作成とコンストラクタ引数の順序を�
   region="master-service-before-each" linenums="false">
 </code-example>
 
-このテストでは以前したのと同様にスパイを使用します。
+このテストではさきほどと同様にスパイを使用します。
 
 <code-example 
   path="testing/src/app/demo/demo.testbed.spec.ts" 
@@ -201,8 +201,8 @@ AngularのDIにサービスの作成とコンストラクタ引数の順序を�
 {@a no-before-each}
 #### _beforeEach()_を使用せずにテストする
 
-それぞれの`it()`内のテストの前提条件をセットするために、このガイド内のほとんどのテストスイートでは`beforeEach()`を呼び出して、
-クラスの生成とサービスの注入のために`TestBed`に頼っています。
+各`it()`内のテストの前提条件をセットするために、このガイド内のほとんどのテストスイートでは`beforeEach()`を呼び出して、
+クラスの作成とサービスの注入のために`TestBed`に頼っています。
 
 他のテストの流派では`beforeEach()`を呼び出さず、さらに`TestBed`を使用するよりはむしろ明示的にクラスを作成することを好みます。
 
@@ -222,7 +222,7 @@ AngularのDIにサービスの作成とコンストラクタ引数の順序を�
 (例えば、`let masterService: MasterService`)を定義しないでください。
 
 それから、それぞれのテストの最初の行、
-続く行でテスト対象の操作と期待値のアサートをするステップの前に`setup()`を実行します。
+続く行でテスト対象の操作とエクスペクテーションのアサートをするステップの前に`setup()`を実行します。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
@@ -230,15 +230,15 @@ AngularのDIにサービスの作成とコンストラクタ引数の順序を�
 </code-example>
 
 必要なセットアップ変数を抽出するために
-[_分割代入_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-をテストで使用する方法に注意してください。
+どのように[_分割代入_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+をテストで使用するかに注目してみてください。
 
 <code-example 
   path="testing/src/app/demo/demo.spec.ts" 
   region="no-before-each-setup-call">
 </code-example>
 
-多くの開発者にとってこのアプローチは伝統的な`beforeEach()`
+多くの開発者にとって、このアプローチは伝統的な`beforeEach()`
 スタイルよりも明快でより明確であると感じるでしょう。
 
 このテストガイドでは伝統的なスタイルとデフォルトの
@@ -248,7 +248,7 @@ _この代替アプローチ_を自身のプロジェクト内で採用するこ
 
 #### HTTPサービスをテストする
 
-リモートサーバーにHTTP呼び出しをするデータサービスは、通常、
+リモートサーバーに対してHTTP呼び出しをするデータサービスは、通常、
 XHR呼び出しのためのAngularの[`HttpClient`](guide/http)サービスを注入して委譲します。
 
 依存関係をもつ任意のサービスをテストするために注入された`HttpClient`のスパイを使用して
@@ -268,16 +268,16 @@ Observableを_サブスクライブ_する必要があります。
 `subscribe()`メソッドは成功(`next`)と失敗(`error`)のコールバックを受け取ります。
 エラーをキャプチャーするために_両方の_コールバックを提供していることを確認してください。
 これを怠ると、テストランナーはまったく別のテストが原因かもしれない、
-非同期で補足不可能なエラーが生成されます。
+非同期で補足不可能なエラーが生成するでしょう。
 
 </div>
 
 #### _HttpClientTestingModule_
 
-データサービスと`HttpClient`の間の拡張相互作用は、
+データサービスと`HttpClient`間の拡張相互作用は、
 スパイを使用してモックするには複雑で難しい場合があります。
 
-`HttpClientTestingModule`はそれらのテストシナリオをさらに管理可能なものにします。
+`HttpClientTestingModule`はそれらのテストシナリオをさらに管理しやすくします。
 
 このガイドに付属する_コードサンプル_では`HttpClientTestingModule`のデモをしますが、
 このページでは`HttpClientTestingModule`を使用したテストの詳細をカバーをしている
@@ -285,7 +285,7 @@ Observableを_サブスクライブ_する必要があります。
 
 <div class="alert is-helpful">
 
-このガイドのサンプルコードは`app/model/http-hero.service.spec.ts`での
+このガイドのサンプルコードでは`app/model/http-hero.service.spec.ts`での
 _レガシー_な`HttpModule`のテストのデモもしています。
 
 </div>

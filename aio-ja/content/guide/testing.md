@@ -665,10 +665,10 @@ CSSセレクタでフィルタリングし、ブラウザの_ネイティブ要�
 
 ### コンポーネントバインディング
 
-現在の`BannerComponent`は、静的タイトルテキストをHTMLテンプレートに表示します。
+現在の`BannerComponent`は、静的なタイトルテキストをHTMLテンプレートに表示します。
 
-少しの変更を加えた後、`BannerComponent`は、
-このようなコンポーネントの`title`プロパティにバインドすることによって、動的なタイトルを表示します。
+少しの変更を加えた後、
+次のようなコンポーネントの`title`プロパティにバインドすることによって、`BannerComponent`は動的なタイトルを表示します。
 
 <code-example 
   path="testing/src/app/banner/banner.component.ts" 
@@ -685,7 +685,7 @@ _title_プロパティのインターポレーションバインディングを�
 要素の値を検証する一連のテストを書きます。
 
 標準HTMLの`querySelector`を使用して要素を検索し、
-それを`h1`変数に割り当てるために`beforeEach`を更新します。
+それを`h1`という変数に割り当てるために`beforeEach`を更新します。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -698,7 +698,7 @@ _title_プロパティのインターポレーションバインディングを�
 #### _createComponent()_はデータをバインドしない
 
 最初のテストでは、画面にデフォルトの`title`が表示されていることを確認したいと思います。
-あなたの直感は、このような`<h1>`を直ちに検証するテストを書くことでしょう。
+あなたの直感は、次のような`<h1>`を直ちに検証するテストを書くことでしょう。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -714,10 +714,10 @@ expected '' to contain 'Test Tour of Heroes'.
 Angularが**変更検知**を実行したときにバインディングが発生します。
 
 プロダクションでは、Angularがコンポーネントを作成するか、
-ユーザーがキーストロークを入力するか、非同期アクティビティー(AJAXなど)が完了すると、
-変更検出が自動的に開始されます。
+ユーザーがキーストロークを入力するか、非同期アクティビティー(AJAXなど)が完了したときに
+変更検知が自動的に起動します。
 
-`TestBed.createComponent`は変更検出をトリガー_しません_。
+`TestBed.createComponent`は変更検知をトリガー_しません_。
 この事実は改定したテストで確認されます:
 
 <code-example 
@@ -726,8 +726,8 @@ Angularが**変更検知**を実行したときにバインディングが発生
 
 #### _detectChanges()_
 
-`fixture.detectChanges()`を呼び出すことによって、データバインディングを実行するように`TestBed`に指示する必要があります。
-そうするだけで、`<h1>`は期待されたタイトルになります。
+あなたは`fixture.detectChanges()`を呼び出すことで、データバインディングを実行するように`TestBed`に指示する必要があります。
+そうするだけで、`<h1>`は期待されたタイトルを持つようになります。
 
 <code-example 
   path="testing/src/app/banner/banner.component.spec.ts" 
@@ -750,14 +750,14 @@ _Angularがデータバインディングを開始して[ライフサイクル�
 #### 自動的な変更検知
 
 `BannerComponent`は、頻繁に`detectChanges`を呼び出します。
-テスターのなかには、Angularテスト環境が自動的に変更検知を実行することを好む人もいます。
+テスターの中には、Angularテスト環境が自動的に変更検知を実行することを好む人もいます。
 
-これは`ComponentFixtureAutoDetect`プロバイダーで`TestBed`を設定することで可能です。
-まず、テスティングユーティリティーライブラリからそれをインポートします:
+これは`ComponentFixtureAutoDetect`プロバイダーで`TestBed`を構成することで可能です。
+まず、テスティングユーティリティーライブラリからインポートします:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="import-ComponentFixtureAutoDetect" title="app/banner/banner.component.detect-changes.spec.ts (import)" linenums="false"></code-example>
 
-次に、それをテストモジュール設定の`providers`配列に追加します:
+それから、それをテストモジュール構成の`providers`配列に追加します:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect" title="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)" linenums="false"></code-example>
 
@@ -768,10 +768,10 @@ _Angularがデータバインディングを開始して[ライフサイクル�
 最初のテストでは、自動変更検知の利点が示されています。
 
 2回目と3回目のテストで重要な制限が明らかになりました。
-Angularのテスト環境では、テストでコンポーネントのタイトルが変更されたことが_わかりません_。
+Angularのテスト環境では、テストがコンポーネントのタイトルを変更したことが_わかりません_。
 `ComponentFixtureAutoDetect`サービスは、Promiseの解決、タイマー、DOMイベントなどの非同期アクティビティーに応答します。
-ただし、コンポーネントプロパティの直接的な同期更新は不可視です。
-このテストでは、変更検出の別のサイクルをトリガーするために`fixture.detectChanges()`を手動で呼び出す必要があります。
+ただし、コンポーネントプロパティの直接で同期的な更新は不可視です。
+テストは変更検知の別のサイクルをトリガーするために`fixture.detectChanges()`を手動で呼び出す必要があります。
 
 <div class="alert is-helpful">
 
@@ -787,16 +787,16 @@ Angularのテスト環境では、テストでコンポーネントのタイト�
 
 #### _dispatchEvent()_を使用してinputの値を変更する
 
-ユーザー入力をシミュレートするために、input要素を探して`value`プロパティを設定します。
+ユーザーインプットをシミュレートするために、input要素を探して`value`プロパティをセットします。
 
 Angularの変更検知をトリガーするために`fixture.detectChanges()`を呼び出しましょう。
 しかし、本質的で中間的なステップがあります。
 
-Angularは、input要素の`value`プロパティが設定されたことを認識していません。
+Angularは、input要素の`value`プロパティがセットされたことを認識していません。
 `dispatchEvent()`を呼び出して要素の`input`イベントを発生させるまで、
-そのプロパティは読み取られません。_次に_、`detectChanges()`を呼び出します。
+そのプロパティは読み取られません。_そのあとに_ `detectChanges()`を呼び出します。
 
-次の例は、正しいシーケンスを示しています。
+次の例では、正しいシーケンスを示しています。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe" title="app/hero/hero-detail.component.spec.ts (pipe test)"></code-example>
 
@@ -804,9 +804,9 @@ Angularは、input要素の`value`プロパティが設定されたことを認�
 
 ### 外部ファイルを使用したコンポーネント
 
-上記の`BannerComponent`は、`@Component.template`プロパティと`@Component.styles`プロパティのそれぞれで指定された_インラインテンプレート_と_インラインCSS_で定義されています。
+さきほどの`BannerComponent`は、`@Component.template`プロパティと`@Component.styles`プロパティのそれぞれで指定された_インラインテンプレート_と_インラインCSS_で定義されています。
 
-多くのコンポーネントは、以下のように変更した`BannerComponent`が行うように、
+多くのコンポーネントは、次のように変更した`BannerComponent`がするように、
 `@Component.templateUrl`プロパティと`@Component.styleUrls`プロパティでそれぞれ_外部テンプレート_と
 _外部CSS_を指定します。
 
@@ -821,7 +821,7 @@ _外部CSS_を指定します。
 _テストを実行する前にアプリケーションをコンパイルするので_、
 CLIで `ng test`コマンドを実行するときに問題になりません。
 
-ただし、**非CLI環境**でテストを実行すると、このコンポーネントのテストが失敗するでしょう。
+ただし、**非CLI環境**でテストを実行すると、このコンポーネントのテストは失敗するでしょう。
 たとえば、[plunker](http://plnkr.co/)などのWebコーディング環境で`BannerComponent`テストを実行すると、
 次のようなメッセージが表示されます:
 
@@ -834,21 +834,21 @@ Please call "TestBed.compileComponents" before your test.
 _テスト中に_ランタイム環境がソースコードをコンパイルすると、
 このテストエラーメッセージが表示されます。
 
-問題を解決するには、[次](#compile-components)で説明するように`compileComponents()`を呼び出します。
+問題を解決するには、[以下](#compile-components)で説明するように`compileComponents()`を呼び出します。
 
 {@a component-with-dependency}
 
 ### 依存関係のあるコンポーネント
 
-コンポーネントにはしばしばサービスの依存関係があります。
+コンポーネントの多くはサービスの依存関係を持ちます。
 
 `WelcomeComponent`は、ログインしたユーザーへのウェルカムメッセージを表示します。
-注入した`UserService`のプロパティからユーザーが誰かを知ります:
+それは注入した`UserService`のプロパティからユーザーが誰かを知ります:
 
 <code-example path="testing/src/app/welcome/welcome.component.ts" title="app/welcome/welcome.component.ts" linenums="false"></code-example>
 
 `WelcomeComponent`には、サービスとやり取りするロジックと、このコンポーネントの値のテストをするロジックの決定権があります。
-次は、スペックファイル`app/welcome/welcome.component.spec.ts`のテスティングモジュールの設定です:
+次は、スペックファイル`app/welcome/welcome.component.spec.ts`のテスティングモジュールの構成です:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" title="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
 
@@ -860,8 +860,8 @@ _テスト中に_ランタイム環境がソースコードをコンパイルす
 
 #### テストダブルのサービスを提供する
 
-_テスト中のコンポーネント_には、実際のサービスを注入する必要はありません。
-実際には、通常はテストダブル(スタブ、フェイク、スパイ、またはモック)であればより良いです。
+_テスト中のコンポーネント_に実際のサービスを注入する必要はありません。
+事実、通常はテストダブル(スタブ、フェイク、スパイ、またはモック)であればより良いです。
 スペックの目的は、サービスではなくコンポーネントをテストすることであり、
 実際のサービスだと問題になる可能性があります。
 
@@ -886,7 +886,7 @@ _テスト中のコンポーネント_には、実際のサービスを注入す
 
 テストでは、`WelcomeComponent`に注入された`UserService`(スタブ)へのアクセスが必要です。
 
-Angularは階層的な注入システムを持っています。
+Angularは階層的な注入システムを持ちます。
 `TestBed`によって作成されたルートインジェクターからコンポーネントツリーまで、
 複数のレベルのインジェクターがあります。
 

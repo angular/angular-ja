@@ -1,20 +1,25 @@
 # コンポーネントのイントロダクション
 
-*コンポーネント*は、ビューと呼ばれる画面のパッチを制御します。 たとえば、個々のコンポーネントは[チュートリアル](tutorial)の次のビューを定義して制御します。
+*コンポーネント*は、ビューと呼ばれる画面のパッチを制御します。
+たとえば、個々のコンポーネントは[チュートリアル](tutorial)の次のビューを定義して制御します。
 
 * ナビゲーションリンクをもつアプリのルート
 * ヒーローのリスト
 * ヒーローエディタ
 
-クラス内のビューをサポートするためにコンポーネントのアプリケーションロジックを定義します。 クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
+コンポーネントの—ビューをサポートするための—アプリケーションロジックをクラス内に定義します。
+クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
 
-たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。コンポーネントはサービスからヒーローを取得します。これはコンストラクタのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。サービスは、依存性の注入システムを介してコンポーネントに提供されます。
+たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
+コンポーネントはサービスからヒーローを取得します。これはコンストラクタのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
+サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
 <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (class)" region="class"></code-example>
 
 Angularは、ユーザーがアプリケーションを移動するときにコンポーネントを作成、更新、および破棄します。アプリは、ライフサイクルの各段階で、`ngOnInit()`などの[ライフサイクルフック](guide/lifecycle-hooks)を使用してアクションを実行できます。
 
-## コンポーネントのメタデータ
+{@a component-metadata}
+## コンポーネントメタデータ
 
 <img src="generated/images/guide/architecture/metadata.png" alt="メタデータ" class="left">
 
@@ -36,7 +41,7 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 * `providers`: コンポーネントが必要とするサービスの[プロバイダ](guide/glossary#provider)の配列。この例では、コンポーネントのコンストラクタがヒーローのリストを表示するために使用する`HeroService`インスタンスを提供する方法をAngularに通知します。
 
-
+{@a templates-and-views}
 ## テンプレートとビュー
 
 <img src="generated/images/guide/architecture/template.png" alt="テンプレート" class="left">
@@ -55,16 +60,17 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 テンプレートは通常のHTMLと似ていますが、アプリのロジックとアプリとDOMデータの状態に基づいてHTMLを変更するAngular[テンプレート構文](guide/template-syntax)も含まれています。テンプレートは*データバインディング*を使用してアプリケーションとDOMデータを調整し、表示する前に*パイプ*でデータを変換し、*ディレクティブ*を使用して表示されるものにアプリケーションロジックを適用することができます。
 
-たとえば、チュートリアルの`HeroListComponent`のテンプレートを次のようになります。
+たとえば、チュートリアルの`HeroListComponent`のテンプレートは次のようになります。
 
 <code-example path="architecture/src/app/hero-list.component.html" title="src/app/hero-list.component.html"></code-example>
 
-このテンプレートは `<h2>`や `<p>`のような典型的なHTML要素を使い、Angularテンプレート構文要素、`*ngFor`、`{{hero.name}}`、`(click)`、`[hero]`、`<app-hero-detail>`です。テンプレート構文要素は、プログラムロジックとデータを使用してHTMLをスクリーンにレンダリングする方法をAngularに伝えます。
+このテンプレートは `<h2>`や `<p>`のような典型的なHTML要素を使い、Angularテンプレート構文要素、`*ngFor`、`{{hero.name}}`、`(click)`、`[hero]`、`<app-hero-detail>`なども含みます。テンプレート構文要素は、プログラムロジックとデータを使用してHTMLをスクリーンにレンダリングする方法をAngularに伝えます。
 
 * `*ngFor`ディレクティブはAngularにリストの繰り返しを指示します。
-* `{{hero.name}}`、`(click)`、`[hero]` はユーザー入力に応答してDOMとの間でプログラムデータをバインドします。次の[データバインディング](#data-binding)の詳細を参照してください。
+* `{{hero.name}}`、`(click)`、`[hero]` はユーザー入力に応答してDOMとの間でプログラムデータをバインドします。次の[データバインディング](#データバインディング)の詳細を参照してください。
 * この例の `<app-hero-detail>` タグは新しいコンポーネント `HeroDetailComponent` を表す要素です。`HeroDetailComponent`（コードは表示されません）は `HeroListComponent` のhero-detailの子ビューを定義します。このようなカスタムコンポーネントがどのように同じレイアウトのネイティブHTMLとシームレスに混在しているかに注目してください。
 
+{@a data-binding}
 ### データバインディング
 
 フレームワークがなければ、自分でデータの値をHTMLコントロールにプッシュし、ユーザーの応答をアクションと値の更新に変える責任があります。そのようなプッシュアンドプルロジックを手作業で書くことは、経験豊富なjQueryプログラマが証明できるように面倒で、エラーが起こりやすく、悪夢のように読みづらいです。
@@ -81,7 +87,7 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
-* `{{hero.name}}`[*インターポレーション*](guide/displaying-data#interpolation)は
+* `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
 * `[hero]`[*プロパティバインディング*](guide/template-syntax#property-binding)は、`HeroListComponent`から`HeroDetailComponent`子の `hero`プロパティに`selectedHero`を返します。
@@ -107,13 +113,12 @@ Angular は、JavaScriptイベントサイクルごとに*すべての*データ
   <img src="generated/images/guide/architecture/parent-child-binding.png" alt="親子間バインディング" class="left">
 </figure>
 
+{@a pipes}
 ### パイプ
 
 Angular のパイプを使用すると、テンプレートHTMLの表示値変換を宣言できます。`@Pipe` デコレーターをもつクラスは、入力値を出力値に変換してビューに表示する関数を定義します。
 
 Angular は、[date](https://angular.io/api/common/DatePipe)パイプや[currency](https://angular.io/api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](https://angular.io/api?type=pipe)を参照してください。新しいパイプを定義することもできます。
-
-To specify a value transformation in an HTML template, use the [pipe operator (|)](https://angular.io/guide/template-syntax#pipe).
 
 HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](https://angular.io/guide/template-syntax#pipe)を使用します。
 
@@ -122,16 +127,17 @@ HTMLテンプレートで値の変換を指定するには、[パイプ演算子
 パイプを連鎖させ、あるパイプ関数の出力を別のパイプ関数で変換することができます。パイプは、変換の実行方法を制御する引数を取ることもできます。たとえば、`date` パイプに目的のフォーマットを渡すことができます。
 
 ```html
-<!-- Default format: output 'Jun 15, 2015'-->
-<p>Today is {{today | date}}</p>
+  <!-- Default format: output 'Jun 15, 2015'-->
+  <p>Today is {{today | date}}</p>
 
-<!-- fullDate format: output 'Monday, June 15, 2015'-->
-<p>The date is {{today | date:'fullDate'}}</p>
+ <!-- fullDate format: output 'Monday, June 15, 2015'-->
+ <p>The date is {{today | date:'fullDate'}}</p>
 
-<!-- shortTime format: output '9:43 AM'-->
-<p>The time is {{today | date:'shortTime'}}</p>
+  <!-- shortTime format: output '9:43 AM'-->
+  <p>The time is {{today | date:'shortTime'}}</p>
 ```
 
+{@a directives}
 ### ディレクティブ
 
 <img src="generated/images/guide/architecture/directive.png" alt="ディレクティブ" class="left">
@@ -142,29 +148,32 @@ Angular テンプレートは*ダイナミック*です。Angular がレンダ�
 
 コンポーネントに加えて、他に*構造*と*属性*の2つの種類のディレクティブがあります。Angularは両方の種類のディレクティブを定義し、`@Directive()` デコレーターを使用して独自のものを定義することができます。
 
-コンポーネントの場合と同様に、ディレクティブのメタデータは装飾されたクラスをHTMLに挿入するために使用する `selector` 要素と関連付けます。テンプレートでは通常、ディレクティブは要素タグ内にそれぞれの name 属性として、または割り当てやバインディングのターゲットとして表示されます。
+コンポーネントの場合と同様に、ディレクティブのメタデータは装飾されたクラスをHTMLに挿入するために使用する `selector` 要素と関連付けます。ディレクティブは通常は属性として、要素タグ内に名前として、または割り当てやバインディングのターゲットとして表示されます。
 
-#### 構造型ディレクティブ
+#### 構造ディレクティブ
 
-*構造型ディレクティブ*は、DOMの要素を追加、削除、置換することによってレイアウトを変更します。サンプルテンプレートでは、2つの組み込み構造型ディレクティブを使用して、ビューのレンダリング方法にアプリケーションロジックを追加しています。
+*構造ディレクティブ*は、DOMの要素を追加、削除、置換することによってレイアウトを変更します。サンプルテンプレートでは、2つの組み込み構造ディレクティブを使用して、ビューのレンダリング方法にアプリケーションロジックを追加しています。
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
 * [`*ngFor`](guide/displaying-data#ngFor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
 * [`*ngIf`](guide/displaying-data#ngIf) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
 
-#### 属性型ディレクティブ
+#### 属性ディレクティブ
 
-*属性型ディレクティブ*は、既存の要素の外観や動作を変更します。テンプレートでは通常のHTML属性、つまり名前のように見えます。
+*属性ディレクティブ*は、既存の要素の外観や動作を変更します。テンプレートでは通常のHTML属性、つまり名前のように見えます。
 
-双方向データバインディングを実装する `ngModel` ディレクティブは、属性型ディレクティブの例です。`ngModel` はディスプレイに value プロパティを設定し、change イベントに反応することによって、既存の要素（通常`<input>`）の動作を変更します。
+双方向データバインディングを実装する `ngModel` ディレクティブは、属性ディレクティブの例です。`ngModel`は、その表示値プロパティを設定し、変更イベントに応答することによって、既存の要素の動作（通常は` <input> `）を変更します。
 
 <code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
-Angular には、レイアウト構造 ([ngSwitch](guide/template-syntax#ngSwitch) など) を変更するか、DOM 要素やコンポーネントの要素 ([ngStyle](guide/template-syntax#ngStyle) や [ngClass](guide/template-syntax#ngClass) など) を変更するための事前定義済みディレクティブが用意されています。
+Angularには、レイアウト構造を変更する
+（たとえば、[ngSwitch](guide/template-syntax#ngSwitch)）  
+、あるいはDOM要素とコンポーネントのよう相を変更する  
+（たとえば、[ngStyle](guide/template-syntax#ngStyle) や [ngClass](guide/template-syntax#ngClass)）ディレクティブがあらかじめ定義されています。brew unlink yarn && brew link yarn
 
 <div class="alert is-helpful">
 
-[属性型ディレクティブ](guide/attribute-directives)と[構造型ディレクティブ](guide/structural-directives)のガイドの詳細をご覧ください。
+[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)のガイドの詳細をご覧ください。
 
 </div>

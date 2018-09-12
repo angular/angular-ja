@@ -132,15 +132,15 @@ Angularアプリケーションの主要な構成要素についての基礎を�
 
 * [コンポーネントの紹介](guide/architecture-components)
 
-  * [テンプレートとビュー](guide/architecture-components#テンプレートとビュー)
+  * [テンプレートとビュー](guide/architecture-components#templates-and-views)
 
-  * [コンポーネントメタデータ](guide/architecture-components#コンポーネントメタデータ)
+  * [コンポーネントメタデータ](guide/architecture-components#component-metadata)
 
-  * [データバインディング](guide/architecture-components#データバインディング)
+  * [データバインディング](guide/architecture-components#data-binding)
 
-  * [ディレクティブ](guide/architecture-components#ディレクティブ)
+  * [ディレクティブ](guide/architecture-components#directives)
 
-  * [パイプ](guide/architecture-components#パイプ)
+  * [パイプ](guide/architecture-components#pipes)
 
 * [サービスと依存性の注入の紹介](guide/architecture-services)
 

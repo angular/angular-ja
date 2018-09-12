@@ -1,9 +1,9 @@
 # TypeScriptの設定
 
 TypeScriptは、Angularアプリケーション開発の主要言語です。
-これはJavaScriptのスーパーセットで、型安全性とツーリングのための設計時サポートを備えています。
+これはJavaScriptのスーパーセットで、型安全性とツールのための設計時サポートを備えています。
 
-ブラウザはTypeScriptを直接実行できません。Typescriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する必要があります。
+ブラウザはTypeScriptを直接実行できません。TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する必要があります。
 そのためにはいくつか設定が必要です。
 
 このページでは、Angular開発者にとって重要なTypeScriptの構成と環境について、
@@ -71,7 +71,7 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 
 
-ドキュメントのセットアップでは、このフラグも`true`に設定されます。
+ドキュメンテーションのセットアップでは、このフラグも`true`に設定されます。
 
 
 {@a typings}
@@ -99,11 +99,11 @@ Angularアプリケーションの `node_modules/@angular/core/`フォルダに�
 
 TypeScriptには、 `lib.d.ts`という特別な型定義ファイルが含まれています。このファイルには、JavaScriptのランタイムとDOMに存在するさまざまな一般的なJavaScript構文のアンビエント宣言が含まれています。
 
-TypeScriptは、`--target`の値に基づいて、必要なアンビエント宣言を追加します。
-（たとえばターゲットが`es6`なら、`Promise`が追加されます。）
+TypeScriptは`--target`の値に基づいて、ターゲットが`es6`なら`Promise`のような
+_追加の_アンビエント宣言を追加します。
 
-QuickStartプロジェクトは次のように`es5`を対象としているので、
-含まれる宣言ファイルリストを上書きすることができます。
+QuickStartプロジェクトは`es5`を対象としているので、
+含まれる宣言ファイルリストを次のように上書きすることができます。
 
 
 <code-example format=".">
@@ -113,16 +113,16 @@ QuickStartプロジェクトは次のように`es5`を対象としているの�
 
 
 
-これにより、`es5`をターゲットとしていても、`es6`でコーディングすることが可能です。
+これにより、`es5`をターゲットとしていても、`es6`の型定義を手に入れられます。
 
 ### 型定義ファイルのインストール
 多くのライブラリ（jQuery、Jasmine、Lodashなど）は、npmパッケージに`d.ts`ファイルが *含まれていません。*
-しかし幸いにも、著者やコミュニティの貢献者がこれらのライブラリ用の`d.ts`ファイルを作成し、
+しかし幸いにも、著者やコミュニティのコントリビューターがこれらのライブラリ用の`d.ts`ファイルを作成し、
 公開しています。
 
 これらの型定義ファイルは、
-[`@types/*` スコープのパッケージ](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)を使って`npm`でインストールすることができ、
-Typescript 2.0以降では自動認識されます。
+[`@types/*` スコープ化パッケージ](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)を使って`npm`でインストールすることができ、
+TypeScript 2.0以降では自動認識されます。
 
 たとえば`jasmine`の型定義ファイルをインストールするには、`npm install @types/jasmine --save-dev`を実行します。
 
@@ -140,7 +140,7 @@ QuickStartプロジェクトはこれらの型定義ファイルを必要とし�
 {@a target}
 
 
-### *ターゲット指定*
+### *target*
 
 デフォルトのターゲットは`es5`ですが、es6互換ブラウザにのみアプリケーションをデプロイする場合は、ターゲットを`es6`に設定することができます。
 しかしこの場合、`IE`などの古いブラウザでは`Syntax Error`がスローされることに留意してください。

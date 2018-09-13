@@ -41,7 +41,7 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 {@a noImplicitAny}
 
-<!-- TODO:ここのくだり、セクションごとあとで見直す。今はひとまず直訳っぽく。-->
+
 ### *noImplicitAny* と *suppressImplicitAnyIndexErrors*
 
 TypeScriptの開発者は、`noImplicitAny`フラグを`true`または`false`にするかどうかについては同意しません。
@@ -134,7 +134,7 @@ QuickStartプロジェクトには、次の２つの*型定義ファイル*が�
 * [node](https://www.npmjs.com/package/@types/node) *Node.js®*環境内のオブジェクトを参照するコード
 
 
-QuickStartプロジェクトはこれらの型定義ファイルを必要としませんが、サンプルの多くは必要とします。
+QuickStartプロジェクトはこれらの型定義ファイルを必要としませんが、多くのサンプルで必要とされます。
 
 
 {@a target}

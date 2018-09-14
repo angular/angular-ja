@@ -150,8 +150,9 @@
             },
             {
               "url": "guide/architecture-components",
-              "title": "Intro to Components",
-              "tooltip": "About Components, Templates, and Views."
+              "title": "Componentの紹介",
+              "tooltip": "コンポーネント、テンプレート、およびビューについて。",
+              "translated": true
             },
             {
               "url": "guide/architecture-services",
@@ -495,8 +496,9 @@
 
             {
               "url": "guide/typescript-configuration",
-              "title": "TypeScript Configuration",
-              "tooltip": "TypeScript configuration for Angular developers."
+              "title": "TypeScript設定",
+              "tooltip": "Angular開発者のためのTypeScript設定。",
+              "translated": true
             },
             {
               "url": "guide/aot-compiler",

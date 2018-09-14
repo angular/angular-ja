@@ -1,138 +1,132 @@
-# Introduction to components
+# コンポーネントのイントロダクション
 
-A *component* controls a patch of screen called a *view*.
-For example, individual components define and control each of the following views from the [Tutorial](tutorial):
+*コンポーネント*は、ビューと呼ばれる画面のパッチを制御します。
+たとえば、個々のコンポーネントは[チュートリアル](tutorial)の次のビューを定義して制御します。
 
-* The app root with the navigation links.
-* The list of heroes.
-* The hero editor.
+* ナビゲーションリンクをもつアプリのルート
+* ヒーローのリスト
+* ヒーローエディタ
 
-You define a component's application logic&mdash;what it does to support the view&mdash;inside a class.
-The class interacts with the view through an API of properties and methods.
+コンポーネントの—ビューをサポートするための—アプリケーションロジックをクラス内に定義します。
+クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
 
-For example, `HeroListComponent` has a `heroes` property that holds an array of heroes. 
-Its `selectHero()` method sets a `selectedHero` property when the user clicks to choose a hero from that list. 
-The component acquires the heroes from a service, which is a TypeScript [parameter property](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties) on the constructor. 
-The service is provided to the component through the dependency injection system.
+たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
+コンポーネントはサービスからヒーローを取得します。これはコンストラクタのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
+サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
 <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (class)" region="class"></code-example>
 
-Angular creates, updates, and destroys components as the user moves through the application. Your app can take action at each moment in this lifecycle through optional [lifecycle hooks](guide/lifecycle-hooks), like `ngOnInit()`.
+Angularは、ユーザーがアプリケーションを移動するときにコンポーネントを作成、更新、および破棄します。アプリは、ライフサイクルの各段階で、`ngOnInit()`などの[ライフサイクルフック](guide/lifecycle-hooks)を使用してアクションを実行できます。
 
-## Component metadata
+{@a component-metadata}
+## コンポーネントメタデータ
 
-<img src="generated/images/guide/architecture/metadata.png" alt="Metadata" class="left">
+<img src="generated/images/guide/architecture/metadata.png" alt="メタデータ" class="left">
 
-The `@Component` decorator identifies the class immediately below it as a component class, and specifies its metadata. In the example code below, you can see that `HeroListComponent` is just a class, with no special Angular notation or syntax at all. It's not a component until you mark it as one with the `@Component` decorator.
+`@Component` デコレーターはそのすぐ下のクラスをコンポーネントクラスとして識別し、そのメタデータを指定します。下のサンプルコードでは `HeroListComponent` がクラスであり、特殊な Angular の表記や構文がまったくないことがわかります。あなたが `@Component` デコレーターをもつものとしてマークするまでは、コンポーネントではありません。
 
-The metadata for a component tells Angular where to get the major building blocks that it needs to create and present the component and its view. In particular, it associates a *template* with the component, either directly with inline code, or by reference. Together, the component and its template describe a *view*.
+コンポーネントのメタデータは、コンポーネントとそのビューを作成し表示するために必要な主要なビルディングブロックを取得する場所をAngularに通知します。特に、インラインコードを直接使用して、または参照によってテンプレートをコンポーネントに関連付けます。同時に、コンポーネントとそのテンプレートが*ビュー*を記述します。
 
-In addition to containing or pointing to the template, the `@Component` metadata configures, for example, how the component can be referenced in HTML and what services it requires.
+`@Component`メタデータは、テンプレートを格納することやテンプレートを指すことに加えて、HTMLでコンポーネントを参照する方法や必要なサービスなどを設定します。
 
-Here's an example of basic metadata for `HeroListComponent`.
+`HeroListComponent`の基本メタデータの例を次に示します。
 
 <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (metadata)" region="metadata"></code-example>
 
-This example shows some of the most useful `@Component` configuration options:
+この例は、もっとも役立つ `@Component` の設定オプションの一部です：
 
-* `selector`: A CSS selector that tells Angular to create and insert an instance of this component wherever it finds the corresponding tag in template HTML. For example, if an app's  HTML contains `<app-hero-list></app-hero-list>`, then
-Angular inserts an instance of the `HeroListComponent` view between those tags.
+* `selector`: テンプレートHTML内の対応するタグを見つけるたびに、このコンポーネントのインスタンスを作成して挿入するようにAngularに指示するCSSセレクター。たとえば、アプリケーションのHTMLに`<app-hero-list></app-hero-list>`が含まれている場合、Angularはこれらのタグ間に`HeroListComponent`ビューのインスタンスを挿入します。
 
-* `templateUrl`: The module-relative address of this component's HTML template. Alternatively, you can provide the HTML template inline, as the value of the `template` property. This template defines the component's *host view*.
+* `templateUrl`: このコンポーネントのHTMLテンプレートのモジュール相対アドレス。または、HTMLテンプレートを`template`プロパティの値としてインラインで提供することもできます。このテンプレートは、コンポーネントのホストビューを定義します。
 
-* `providers`: An array of [providers](guide/glossary#provider) for services that the component requires. In the example, this tells Angular how to provide the `HeroService` instance that the component's constructor uses to get the list of heroes to display.  
+* `providers`: コンポーネントが必要とするサービスの[プロバイダ](guide/glossary#provider)の配列。この例では、コンポーネントのコンストラクタがヒーローのリストを表示するために使用する`HeroService`インスタンスを提供する方法をAngularに通知します。
 
+{@a templates-and-views}
+## テンプレートとビュー
 
-## Templates and views
+<img src="generated/images/guide/architecture/template.png" alt="テンプレート" class="left">
 
-<img src="generated/images/guide/architecture/template.png" alt="Template" class="left">
+コンパニオンテンプレートを使用してコンポーネントのビューを定義します。テンプレートは、コンポーネントのレンダリング方法をAngularに伝えるHTMLの形式の１つです。
 
-You define a component's view with its companion template. A template is a form of HTML that tells Angular how to render the component.
-
-Views are typically arranged hierarchically, allowing you to modify or show and hide entire UI sections or pages as a unit. The template immediately associated with a component defines that component's *host view*. The component can also define a *view hierarchy*, which contains *embedded views*, hosted by other components.
+ビューは通常、階層的に配置されており、UIセクションまたはページ全体を1つの単位として変更したり表示したり非表示にしたりできます。コンポーネントに直ちに関連付けられたテンプレートは、そのコンポーネントの*ホストビュー*を定義します。コンポーネントは、他のコンポーネントによってホストされる、*埋め込みビュー*を含むビュー階層を定義することもできます。
 
 <figure>
-<img src="generated/images/guide/architecture/component-tree.png" alt="Component tree" class="left">
+<img src="generated/images/guide/architecture/component-tree.png" alt="コンポーネントツリー" class="left">
 </figure>
 
-A view hierarchy can include views from components in the same NgModule, but it also can (and often does) include views from components that are defined in different NgModules.
+ビュー階層には、同じNgModule内のコンポーネントからのビューを含めることができますが、異なるNgModuleで定義されたコンポーネントからのビューも含めることができます（しばしば含みます）。
 
-## Template syntax
+## テンプレート構文
 
-A template looks like regular HTML, except that it also contains Angular [template syntax](guide/template-syntax), which alters the HTML based on your app's logic and the state of app and DOM data. Your template can use *data binding* to coordinate the app and DOM data, *pipes* to transform data before it is displayed, and *directives* to apply app logic to what gets displayed.
+テンプレートは通常のHTMLと似ていますが、アプリのロジックとアプリとDOMデータの状態に基づいてHTMLを変更するAngular[テンプレート構文](guide/template-syntax)も含まれています。テンプレートは*データバインディング*を使用してアプリケーションとDOMデータを調整し、表示する前に*パイプ*でデータを変換し、*ディレクティブ*を使用して表示されるものにアプリケーションロジックを適用することができます。
 
-For example, here is a template for the Tutorial's `HeroListComponent`.
+たとえば、チュートリアルの`HeroListComponent`のテンプレートは次のようになります。
 
 <code-example path="architecture/src/app/hero-list.component.html" title="src/app/hero-list.component.html"></code-example>
 
-This template uses typical HTML elements like `<h2>` and  `<p>`, and also includes Angular template-syntax elements,  `*ngFor`, `{{hero.name}}`, `(click)`, `[hero]`, and `<app-hero-detail>`. The template-syntax elements tell Angular how to render the HTML to the screen, using program logic and data.
+このテンプレートは `<h2>`や `<p>`のような典型的なHTML要素を使い、Angularテンプレート構文要素、`*ngFor`、`{{hero.name}}`、`(click)`、`[hero]`、`<app-hero-detail>`なども含みます。テンプレート構文要素は、プログラムロジックとデータを使用してHTMLをスクリーンにレンダリングする方法をAngularに伝えます。
 
-* The `*ngFor` directive tells Angular to iterate over a list.
-* `{{hero.name}}`, `(click)`, and `[hero]` bind program data to and from the DOM, responding to user input. See more about [data binding](#data-binding) below.
-* The `<app-hero-detail>` tag in the example is an element that represents a new component, `HeroDetailComponent`.  
-`HeroDetailComponent` (code not shown) defines the hero-detail child view of `HeroListComponent`.
-Notice how custom components like this mix seamlessly with native HTML in the same layouts.
+* `*ngFor`ディレクティブはAngularにリストの繰り返しを指示します。
+* `{{hero.name}}`、`(click)`、`[hero]` はユーザー入力に応答してDOMとの間でプログラムデータをバインドします。次の[データバインディング](#データバインディング)の詳細を参照してください。
+* この例の `<app-hero-detail>` タグは新しいコンポーネント `HeroDetailComponent` を表す要素です。`HeroDetailComponent`（コードは表示されません）は `HeroListComponent` のhero-detailの子ビューを定義します。このようなカスタムコンポーネントがどのように同じレイアウトのネイティブHTMLとシームレスに混在しているかに注目してください。
 
-### Data binding
+{@a data-binding}
+### データバインディング
 
-Without a framework, you would be responsible for pushing data values into the HTML controls and turning user responses into actions and value updates. Writing such push and pull logic by hand is tedious, error-prone, and a nightmare to read, as any experienced jQuery programmer can attest.
+フレームワークがなければ、自分でデータの値をHTMLコントロールにプッシュし、ユーザーの応答をアクションと値の更新に変える責任があります。そのようなプッシュアンドプルロジックを手作業で書くことは、経験豊富なjQueryプログラマが証明できるように面倒で、エラーが起こりやすく、悪夢のように読みづらいです。
 
-Angular supports *two-way data binding*, a mechanism for coordinating the parts of a template with the parts of a component. Add binding markup to the template HTML to tell Angular how to connect both sides.
+Angular は、テンプレートの部分をコンポーネントの各部分に合わせるためのメカニズムである*双方向データバインディング*をサポートしています。テンプレートHTMLにバインディングマークアップを追加して、Angularに両側の接続方法を伝えます。
 
-The following diagram shows the four forms of data binding markup. Each form has a direction: to the DOM, from the DOM, or both.
+次の図は、データバインディングマークアップの4つの形式を示しています。各フォームには、DOMへ、DOMから、またはその両方の方向があります。
 
 <figure>
-<img src="generated/images/guide/architecture/databinding.png" alt="Data Binding" class="left">
+<img src="generated/images/guide/architecture/databinding.png" alt="データバインディング" class="left">
 </figure>
 
-This example from the `HeroListComponent` template uses three of these forms.
+`HeroListComponent`テンプレートのこの例は、これらの3つのフォームを使用しています。
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
-* The `{{hero.name}}` [*interpolation*](guide/displaying-data#interpolation)
-displays the component's `hero.name` property value within the `<li>` element.
+* `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
+`<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
-* The `[hero]` [*property binding*](guide/template-syntax#property-binding) passes the value of
-`selectedHero` from the parent `HeroListComponent` to the `hero` property of the child `HeroDetailComponent`.
+* `[hero]`[*プロパティバインディング*](guide/template-syntax#property-binding)は、`HeroListComponent`から`HeroDetailComponent`子の `hero`プロパティに`selectedHero`を返します。
 
-* The `(click)` [*event binding*](guide/user-input#binding-to-user-input-events) calls the component's `selectHero` method when the user clicks a hero's name.
+* `(click)` [*イベントバインディング*](guide/user-input#binding-to-user-input-events)は、ユーザーがヒーローの名前をクリックすると、コンポーネントの `selectHero` メソッドを呼び出します。
 
-Two-way data binding (used mainly in [template-driven forms](guide/forms)) 
-combines property and event binding in a single notation. 
-Here's an example from the `HeroDetailComponent` template that uses two-way data binding with the `ngModel` directive.
+双方向データバインディング（主に[テンプレート駆動フォーム](guide/forms)で使用される）は、単一の表記法でプロパティとイベントのバインディングを結合します。`HeroDetailComponent` テンプレートの例は、`ngModel` ディレクティブとの双方向データバインディングを使用しています。
 
 <code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
-In two-way binding, a data property value flows to the input box from the component as with property binding.
-The user's changes also flow back to the component, resetting the property to the latest value,
-as with event binding.
+双方向バインディングでは、データプロパティ値が、プロパティバインディングと同様にコンポーネントから入力ボックスに流れます。
+ユーザーの変更もコンポーネントに戻り、イベントバインディングの場合と同様にプロパティを最新の値にリセットします。
 
-Angular processes *all* data bindings once for each JavaScript event cycle,
-from the root of the application component tree through all child components.
+Angular は、JavaScriptイベントサイクルごとに*すべての*データバインディングを1回処理しますが、それはアプリケーションコンポーネントツリーのルートからすべての子コンポーネントを経由します。
 
 <figure>
-  <img src="generated/images/guide/architecture/component-databinding.png" alt="Data Binding" class="left">
+  <img src="generated/images/guide/architecture/component-databinding.png" alt="データバインディング" class="left">
 </figure>
 
-Data binding plays an important role in communication between a template and its component, and is also important for communication between parent and child components.
+データバインディングはテンプレートとそのコンポーネント間の通信で重要な役割を果たし、親コンポーネントと子コンポーネント間の通信においても重要です。
 
 <figure>
-  <img src="generated/images/guide/architecture/parent-child-binding.png" alt="Parent/Child binding" class="left">
+  <img src="generated/images/guide/architecture/parent-child-binding.png" alt="親子間バインディング" class="left">
 </figure>
 
-### Pipes
+{@a pipes}
+### パイプ
 
-Angular pipes let you declare display-value transformations in your template HTML. A class with the `@Pipe` decorator defines a function that transforms input values to output values for display in a view.
+Angular のパイプを使用すると、テンプレートHTMLの表示値変換を宣言できます。`@Pipe` デコレーターをもつクラスは、入力値を出力値に変換してビューに表示する関数を定義します。
 
-Angular defines various pipes, such as the [date](https://angular.io/api/common/DatePipe) pipe and [currency](https://angular.io/api/common/CurrencyPipe) pipe; for a complete list, see the [Pipes API list](https://angular.io/api?type=pipe). You can also define new pipes.
+Angular は、[date](https://angular.io/api/common/DatePipe)パイプや[currency](https://angular.io/api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](https://angular.io/api?type=pipe)を参照してください。新しいパイプを定義することもできます。
 
-To specify a value transformation in an HTML template, use the [pipe operator (|)](https://angular.io/guide/template-syntax#pipe).
+HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](https://angular.io/guide/template-syntax#pipe)を使用します。
 
 `{{interpolated_value | pipe_name}}`
 
-You can chain pipes, sending the output of one pipe function to be transformed by another pipe function. A pipe can also take arguments that control how it performs its transformation. For example, you can pass the desired format to the `date` pipe.
+パイプを連鎖させ、あるパイプ関数の出力を別のパイプ関数で変換することができます。パイプは、変換の実行方法を制御する引数を取ることもできます。たとえば、`date` パイプに目的のフォーマットを渡すことができます。
 
-```
+```html
   <!-- Default format: output 'Jun 15, 2015'-->
   <p>Today is {{today | date}}</p>
 
@@ -143,48 +137,43 @@ You can chain pipes, sending the output of one pipe function to be transformed b
   <p>The time is {{today | date:'shortTime'}}</p>
 ```
 
-### Directives
+{@a directives}
+### ディレクティブ
 
-<img src="generated/images/guide/architecture/directive.png" alt="Directives" class="left">
+<img src="generated/images/guide/architecture/directive.png" alt="ディレクティブ" class="left">
 
-Angular templates are *dynamic*. When Angular renders them, it transforms the DOM according to the instructions given by *directives*. A directive is a class with a `@Directive()` decorator.
+Angular テンプレートは*ダイナミック*です。Angular がレンダリングすると、*ディレクティブ*の指示にしたがってDOMが変換されます。ディレクティブは `@Directive()` デコレーターをもつクラスです。
 
-A component is technically a directive.
-However, components are so distinctive and central to Angular applications that Angular
-defines the `@Component()` decorator, which extends the `@Directive()` decorator with 
-template-oriented features.
+コンポーネントは技術的にはディレクティブです。しかし、コンポーネントは Angular アプリケーションにとって非常に特徴的であり、Angularは `@Component()` デコレーターを定義しています。これはテンプレート指向の機能をもつ `@Directive()` デコレーターを拡張します。
 
-In addition to components, there are two other kinds of directives:  *structural* and *attribute*. 
-Angular defines a number of directives of both kinds, and you can define your own using the  `@Directive()` decorator.
+コンポーネントに加えて、他に*構造*と*属性*の2つの種類のディレクティブがあります。Angularは両方の種類のディレクティブを定義し、`@Directive()` デコレーターを使用して独自のものを定義することができます。
 
-Just as for components, the metadata for a directive associates the decorated class with a `selector` element that you use to insert it into HTML. In templates, directives typically appear within an element tag as attributes, either by name or as the target of an assignment or a binding.
+コンポーネントの場合と同様に、ディレクティブのメタデータは装飾されたクラスをHTMLに挿入するために使用する `selector` 要素と関連付けます。ディレクティブは通常は属性として、要素タグ内に名前として、または割り当てやバインディングのターゲットとして表示されます。
 
-#### Structural directives
+#### 構造ディレクティブ
 
-*Structural directives* alter layout by adding, removing, and replacing elements in the DOM. 
-The example template uses two built-in structural directives to add application logic to how the view is rendered.
+*構造ディレクティブ*は、DOMの要素を追加、削除、置換することによってレイアウトを変更します。サンプルテンプレートでは、2つの組み込み構造ディレクティブを使用して、ビューのレンダリング方法にアプリケーションロジックを追加しています。
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
-* [`*ngFor`](guide/displaying-data#ngFor) is an iterative; it tells Angular to stamp out one `<li>` per hero in the `heroes` list.
-* [`*ngIf`](guide/displaying-data#ngIf) is a conditional; it includes the `HeroDetail` component only if a selected hero exists.
+* [`*ngFor`](guide/displaying-data#ngFor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
+* [`*ngIf`](guide/displaying-data#ngIf) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
 
-#### Attribute directives
+#### 属性ディレクティブ
 
-*Attribute directives* alter the appearance or behavior of an existing element.
-In templates they look like regular HTML attributes, hence the name.
+*属性ディレクティブ*は、既存の要素の外観や動作を変更します。テンプレートでは通常のHTML属性、つまり名前のように見えます。
 
-The `ngModel` directive, which implements two-way data binding, is an example of an attribute directive. `ngModel` modifies the behavior of an existing element (typically `<input>`) by setting its display value property and responding to change events.
+双方向データバインディングを実装する `ngModel` ディレクティブは、属性ディレクティブの例です。`ngModel`は、その表示値プロパティを設定し、変更イベントに応答することによって、既存の要素の動作（通常は` <input> `）を変更します。
 
 <code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
-Angular has more pre-defined directives that either alter the layout structure
-(for example, [ngSwitch](guide/template-syntax#ngSwitch))
-or modify aspects of DOM elements and components
-(for example, [ngStyle](guide/template-syntax#ngStyle) and [ngClass](guide/template-syntax#ngClass)).
+Angularには、レイアウト構造を変更する
+（たとえば、[ngSwitch](guide/template-syntax#ngSwitch)）  
+、あるいはDOM要素とコンポーネントのよう相を変更する  
+（たとえば、[ngStyle](guide/template-syntax#ngStyle) や [ngClass](guide/template-syntax#ngClass)）ディレクティブがあらかじめ定義されています。brew unlink yarn && brew link yarn
 
 <div class="alert is-helpful">
 
-Learn more in the [Attribute Directives](guide/attribute-directives) and [Structural Directives](guide/structural-directives) guides.
+[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)のガイドの詳細をご覧ください。
 
 </div>

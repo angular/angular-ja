@@ -170,7 +170,7 @@ Angular テンプレートは*ダイナミック*です。Angular がレンダ�
 Angularには、レイアウト構造を変更する
 （たとえば、[ngSwitch](guide/template-syntax#ngSwitch)）  
 、あるいはDOM要素とコンポーネントのよう相を変更する  
-（たとえば、[ngStyle](guide/template-syntax#ngStyle) や [ngClass](guide/template-syntax#ngClass)）ディレクティブがあらかじめ定義されています。brew unlink yarn && brew link yarn
+（たとえば、[ngStyle](guide/template-syntax#ngStyle) や [ngClass](guide/template-syntax#ngClass)）ディレクティブがあらかじめ定義されています。
 
 <div class="alert is-helpful">
 

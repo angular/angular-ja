@@ -144,13 +144,15 @@
             },
             {
               "url": "guide/architecture-modules",
-              "title": "Intro to Modules",
-              "tooltip": "About NgModules."
+              "title": "モジュールの紹介",
+              "tooltip": "NgModuleについて",
+              "translated": true
             },
             {
               "url": "guide/architecture-components",
-              "title": "Intro to Components",
-              "tooltip": "About Components, Templates, and Views."
+              "title": "Componentの紹介",
+              "tooltip": "コンポーネント、テンプレート、およびビューについて。",
+              "translated": true
             },
             {
               "url": "guide/architecture-services",
@@ -381,8 +383,9 @@
             },
             {
               "url": "guide/ngmodule-faq",
-              "title": "NgModule FAQs",
-              "tooltip": "Answers to frequently asked questions about NgModules."
+              "title": "NgModuleのFAQ",
+              "tooltip": "NgModuleに関するよくある質問への回答。",
+              "translated": true
             }
         ]},
 
@@ -398,12 +401,22 @@
             {
               "url": "guide/hierarchical-dependency-injection",
               "title": "Hierarchical Injectors",
-              "tooltip": "Angular's hierarchical dependency injection system supports nested injectors in parallel with the component tree."
+              "tooltip": "An injector tree parallels the component tree and supports nested dependencies."
+            },
+            {
+              "url": "guide/dependency-injection-providers",
+              "title": "DI Providers",
+              "tooltip": "More about the different kinds of providers."
             },
             {
               "url": "guide/dependency-injection-in-action",
               "title": "DI in Action",
-              "tooltip": "Techniques for Dependency Injection."
+              "tooltip": "Techniques for dependency injection."
+            },
+            {
+              "url": "guide/dependency-injection-navtree",
+              "title": "Navigate the Component Tree",
+              "tooltip": "Use the injection tree to find parent components."
             }
           ]
         },
@@ -483,8 +496,9 @@
 
             {
               "url": "guide/typescript-configuration",
-              "title": "TypeScript Configuration",
-              "tooltip": "TypeScript configuration for Angular developers."
+              "title": "TypeScript設定",
+              "tooltip": "Angular開発者のためのTypeScript設定。",
+              "translated": true
             },
             {
               "url": "guide/aot-compiler",

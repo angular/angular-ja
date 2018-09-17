@@ -330,6 +330,8 @@ An address is a good example of information that can be grouped together. Form g
 
 </code-tabs>
 
+{@a simple-form-validation}
+
 ## シンプルフォームバリデーション
 
 _フォームバリデーション_ は、ユーザー入力を検証し、入力が完了して正しいことを確認するために使います。このセクションでは、フォームコントロールにシングルバリデーターを追加し、フォーム全体の状態を表示を行います。[Form Validation](guide/form-validation)ガイドにて、より詳細なフォームバリデーションについて説明されています。

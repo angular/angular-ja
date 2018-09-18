@@ -8,7 +8,7 @@ Angular はサービスとコンポーネントを区別してモジュール性
 コンポーネントのビュー関連の機能を他の種類の処理と分離することで、
 コンポーネントクラスをリーンで効率的にすることができます。
 
-理想的なのは、コンポーネントの仕事がユーザーエクスペリエンスとそれ以上のものを可能にするものであることです。
+コンポーネントの仕事はユーザーエクスペリエンスを可能にして、それ以上のことをしないことです。
 コンポーネントは、(テンプレートによってレンダリングされた)ビューと
 (しばしばモデルの概念を含む)アプリケーションロジックを仲介するために、
 データバインディングのプロパティとメソッドを提示する必要があります。
@@ -21,7 +21,7 @@ Angular はサービスとコンポーネントを区別してモジュール性
 アプリの適応性を高めることもできます。
 
 Angularはこれらの原則を*強制*しません。Angularはアプリケーションロジックをサービスに組み込むことを容易にし、
-*依存性注入*でコンポーネントからこれらのサービスを利用できるようにすることで、
+*依存性の注入*でコンポーネントからこれらのサービスを利用できるようにすることで、
 これらの原則に*倣う*のに役立ちます。
 
 ## サービスの例
@@ -30,7 +30,7 @@ Angularはこれらの原則を*強制*しません。Angularはアプリケー�
 
 <code-example path="architecture/src/app/logger.service.ts" linenums="false" title="src/app/logger.service.ts (class)" region="class"></code-example>
 
-サービスは他のサービスに依存することがあります。たとえば、 `Logger` サービスに依存する `HeroService` と、 `BackendService` を使ってヒーローを取得します。そのサービスは、サーバーからヒーローを非同期的に取り出すための  `HttpClient` サービスに依存するかもしれません。
+サービスは他のサービスに依存することがあります。たとえば、`HeroService` は `Logger` サービスに依存し、`BackendService` を使ってヒーローを取得します。そのサービスは、サーバーからヒーローを非同期的に取り出すための `HttpClient` サービスに依存するかもしれません。
 
 <code-example path="architecture/src/app/hero.service.ts" linenums="false" title="src/app/hero.service.ts (class)" region="class"></code-example>
 
@@ -113,4 +113,4 @@ Angular はコンポーネントがサービスに依存していることを検
 
    <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (component providers)" region="providers"></code-example>
 
-詳細は、[依存性注入](guide/dependency-injection)セクションを参照してください.
+詳細は、[依存性の注入](guide/dependency-injection)セクションを参照してください.

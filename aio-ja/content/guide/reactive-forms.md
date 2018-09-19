@@ -5,19 +5,19 @@
 
 {@a toc}
 
-<live-example title="Reactive Forms in Stackblitz">リアクティブフォーム ライブサンプル</live-example>をお試しください。
+<live-example title="Reactive Forms in Stackblitz">リアクティブフォームのライブサンプル</live-example>をお試しください。
 
 {@a intro}
 
 ## リアクティブフォームの紹介
 
-リアクティブフォームは明示的でイミュータブルなアプローチを用い、特定の時点におけるフォームの状態を管理します。フォームの状態への変更の度に、変更間でのモデルの整合性を維持する新しい状態を返します。リアクティブフォームはObservableストリームを中心に構築されており、フォーム入力や値は入力値のストリームとして提供され、同期的にアクアセスができます。
+リアクティブフォームは明示的でイミュータブルなアプローチを用い、特定の時点におけるフォームの状態を管理します。フォームの状態への変更の度に、変更間でのモデルの整合性を維持する新しい状態を返します。リアクティブフォームはObservableストリームを中心に構築されており、フォーム入力や値は入力値のストリームとして提供され、同期的にアクセスができます。
 
 またリアクティブフォームでは、リクエストのデータには一貫性があり予測性が保証されているので、テストが簡単に行えます。すべてのストリームの利用者は、データに安全にアクセスし操作することができます。
 
 リアクティブフォームはテンプレート駆動フォームとは明確に異なる点があります。リアクティブフォームは、データモデルへの同期アクセス、Observableオペレータによる不変性、Observableストリームを通した変更監視により、多くの予測性を提供します。もしテンプレートのデータに直接アクセスして変更する場合、テンプレート駆動フォームはテンプレート内に埋め込まれたディレクティブに依存し、可変データを非同期に変更追跡するためあまり明示的ではありません。ふたつのパラダイムの詳細な比較については、[付録](#appendix)を参照してください。
 
-## 開始
+## はじめる
 
 このセクションでは、単一のフォームコントロールを追加する手順を説明します。この例では、ユーザーが入力欄に名前を入力し、その入力値を取り込み、フォームコントロール要素の現在の値を表示します。
 
@@ -88,7 +88,7 @@
 * テンプレートの`AsyncPipe`またはコンポーネントクラスの`subscribe()`メソッドを使い、`valueChanges`を介してフォームの値の変更を監視することができます。
 * `value`プロパティから現在の値のスナップショットを表示します。
 
-次の例では、テンプレートの保管を使ってどのように現在の値を表示するのかを示します。
+次の例では、テンプレートの補間を使ってどのように現在の値を表示するのかを示します。
 
 <code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="display-value" linenums="false" title="src/app/name-editor/name-editor.component.html (コントロール値)">
 
@@ -110,7 +110,7 @@
 
 </code-example>
 
-テンプレートを更新して、名前の更新のシミュレートするボタンをつけます。**Update Name** ボタンをクリックすると、フォームコントロール要素に入力されている値が現在の値として反映されます。
+テンプレートを更新して、名前の更新をシミュレートするボタンをつけます。**Update Name** ボタンをクリックすると、フォームコントロール要素に入力されている値が現在の値として反映されます。
 
 <code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="update-value" linenums="false" title="src/app/name-editor/name-editor.component.html (値の更新)">
 
@@ -148,7 +148,7 @@
 
 コンポーネントクラス内に`profileForm`という名前でプロパティを作成し、新しいフォームグループのインスタンスを設定します。フォームグループを初期化するには、名前付けされたキーとコントロールがマップされたオブジェクトをコンストラクターに渡します。
 
-profileFormには、`firstName` と `lastName`という名前のふたつのフォームコントロールのインスタンスを追加します。
+プロフィールのフォームには、`firstName` と `lastName`という名前のふたつのフォームコントロールのインスタンスを追加します。
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup" title="src/app/profile-editor/profile-editor.component.ts (フォームグループ)">
 
@@ -182,7 +182,7 @@ profileFormには、`firstName` と `lastName`という名前のふたつのフ�
 
 </code-example>
 
-`submit`イベントはネイティブDOMイベントを使って`form`タグから発行されます。`submit`タイプのボタンをクリックすつることでイベントを発火します。**Enter** キーを押して入力完了したフォームを送信することもできます。
+`submit`イベントはネイティブDOMイベントを使って`form`タグから発行されます。`submit`タイプのボタンをクリックすることでイベントを発火します。**Enter** キーを押して入力完了したフォームを送信することもできます。
 
 `button`要素を使って、フォームの下にボタンを追加してフォーム送信を発火します。
 
@@ -198,7 +198,7 @@ profileFormには、`firstName` と `lastName`という名前のふたつのフ�
 
 #### コンポーネントの表示
 
-フォームを含む`ProfileEditor`コンポーネントを表示するために、コンポーネントをコンポーネントテンプレートへ追加します。
+フォームを含む`ProfileEditor`コンポーネントを表示するために、コンポーネントテンプレートへ追加します。
 
 <code-example path="reactive-forms/src/app/app.component.1.html" region="app-profile-editor" linenums="false" title="src/app/app.component.html (profile editor)">
 
@@ -222,7 +222,7 @@ profileFormには、`firstName` と `lastName`という名前のふたつのフ�
 
 </code-example>
 
-この例では、`address group`に既存の`firstName`と`lastName`のコントロールに、新しく`street`、`city`、 `state`、`zip`のコントロールを追加しています。フォームグループ内の`address`要素はフォームグループ内の`profileForm` 要素の子であっても、値や状態変更に同じルールが適用されます。ネストしたグループからの状態や値の変更は親のフォームグループに伝播し、モデル全体の一貫性を維持します。
+この例では、`address group`は、既存の`firstName`と`lastName`のコントロールを、新しく`street`、`city`、 `state`、`zip`のコントロールと組み合わせます。フォームグループ内の`address`要素はフォームグループ内の`profileForm` 要素の子であっても、値や状態変更に同じルールが適用されます。ネストしたグループからの状態や値の変更は親のフォームグループに伝播し、モデル全体の一貫性を維持します。
 
 ### ステップ 2: テンプレート内のネストしたフォームのグループ化
 
@@ -272,11 +272,11 @@ profileFormには、`firstName` と `lastName`という名前のふたつのフ�
 
 </code-example>
 
-ユーザーがボタンをクリックすると、`profileForm`モデルは新しい`firstName` と `street`に更新されます。`street`は`address`プロパティ内のオブジェクトとして提供されていることに注意してください。`patchValue()`メソッドはモデル構造に沿って更新が適用されるので必要なためです。`PatchValue()`はフォームモデルに定義されたプロパティのみを更新します。
+ユーザーがボタンをクリックすると、`profileForm`モデルは新しい`firstName` と `street`に更新されます。`street`は`address`プロパティ内のオブジェクトとして提供されていることに注意してください。`patchValue()`メソッドはモデル構造に沿って更新が適用されるので、これが必要です。`patchValue()`はフォームモデルに定義されたプロパティのみを更新します。
 
 ## FormBuilderを使ったフォームコントロールの作成
 
-フォームコントロールインスタンスを手動で作成するのは、複数のフォームを扱う時は反復的になることがあります。`FormBuilder`サービスはコントロールの作成するのに便利なメソッドを提供します。
+フォームコントロールインスタンスを手動で作成するのは、複数のフォームを扱う時は反復的になることがあります。`FormBuilder`サービスはコントロールを作成するのに便利なメソッドを提供します。
 
 次のセクションでは、 フォームビルダーサービスを使ってフォームコントロールとフォームグループのインスタンスを作るように`ProfileEditor`コンポーネントをリファクタします。
 
@@ -298,7 +298,7 @@ profileFormには、`firstName` と `lastName`という名前のふたつのフ�
 
 ### スタップ 3: フォームコントロールの作成
 
-`FormBuilder`は三つのメソッドを提供します: `control()`、`group()`、 `array()`
+`FormBuilder`は三つのメソッドを提供します: `control()`、`group()`、 `array()`。
 これらは、フォームコントロール、フォームグループ、フォーム配列を含むコンポーネントクラスにインスタンスを作成するファクトリメソッドです。
 
 `group`メソッドを使い、`profileForm`コントロールを作成します。
@@ -371,7 +371,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 必須フィールドをフォームコントロールに追加すると、初期ステータスはinvalidになります。invalidステータスは親のフォームグループ要素に伝播し、ステータスがinvalidになります。現在のフォームグループインスタンスのステータスは、`status`プロパティからアクセスします。
 
-補完を使用して現在の`profileForm`のステータスを表示させます。
+補間を使用して現在の`profileForm`のステータスを表示させます。
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="display-status" linenums="false" title="src/app/profile-editor/profile-editor.component.html (ステータスの表示)">
 
@@ -383,7 +383,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 `profileForm`が`firstName`フォームコントロールの必須によってinvalidになっているため、**Submit** ボタンは非活性になっています。`firstName`を入力すると、フォームはvalidになり　**Submit** ボタンは活性になります。
 
-フォームバリデーションについて詳細は、[Form Validation](guide/form-validation)ガイドを参照してください。
+フォームバリデーションについて詳細は、[フォームバリデーション](guide/form-validation)ガイドを参照してください。
 
 ## 配列を使った動的コントロール
 
@@ -443,7 +443,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 </code-example>
 
-`*ngFor`ディレクティブはエイリアスフォーム配列インスタンス内の各コントロールインスタンスをイテレートします。フォーム配列要素は名前がついていない為、`i`変数にインデックスを割り当て、各コントロールに渡して`formControlName`にバインドします。
+`*ngFor`ディレクティブはエイリアスフォーム配列インスタンス内の各コントロールインスタンスを反復します。フォーム配列要素は名前がついていない為、`i`変数にインデックスを割り当て、各コントロールに渡して`formControlName`にバインドします。
 
 <figure>
   <img src="generated/images/guide/reactive-forms/profile-editor-4.png" alt="Profile Editor Aliases">

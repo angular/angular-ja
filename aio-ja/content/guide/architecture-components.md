@@ -11,7 +11,7 @@
 クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
 
 たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
-コンポーネントはサービスからヒーローを取得します。これはコンストラクタのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
+コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
 <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (class)" region="class"></code-example>
@@ -39,7 +39,7 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 * `templateUrl`: このコンポーネントのHTMLテンプレートのモジュール相対アドレス。または、HTMLテンプレートを`template`プロパティの値としてインラインで提供することもできます。このテンプレートは、コンポーネントのホストビューを定義します。
 
-* `providers`: コンポーネントが必要とするサービスの[プロバイダ](guide/glossary#provider)の配列。この例では、コンポーネントのコンストラクタがヒーローのリストを表示するために使用する`HeroService`インスタンスを提供する方法をAngularに通知します。
+* `providers`: コンポーネントが必要とするサービスの[プロバイダ](guide/glossary#provider)の配列。この例では、コンポーネントのコンストラクターがヒーローのリストを表示するために使用する`HeroService`インスタンスを提供する方法をAngularに通知します。
 
 {@a templates-and-views}
 ## テンプレートとビュー

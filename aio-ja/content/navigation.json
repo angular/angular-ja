@@ -156,13 +156,15 @@
             },
             {
               "url": "guide/architecture-services",
-              "title": "Intro to Services and DI",
-              "tooltip": "About services and dependency injection."
+              "title": "サービスとDIの紹介",
+              "tooltip": "サービスと依存性の注入について。",
+              "translated": true
             },
             {
               "url": "guide/architecture-next-steps",
-              "title": "Next Steps",
-              "tooltip": "Beyond the basics."
+              "title": "次のステップ",
+              "tooltip": "基本のその先へ。",
+              "translated": true
             }
           ]
         },
@@ -262,7 +264,7 @@
               "url": "guide/reactive-forms",
               "title": "リアクティブフォーム",
               "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/dynamic-form",

@@ -15,10 +15,10 @@
     "textlint:f": "textlint --fix 'aio-ja/**/!(*.en.*)'"
   },
   "devDependencies": {
-    "firebase-tools": "^3.14.0",
+    "firebase-tools": "^4.2.1",
     "github-contributors-list": "^1.2.2",
     "glob": "^7.1.2",
-    "textlint": "^9.1.1",
+    "textlint": "^11.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-prh": "^5.0.1"
   }

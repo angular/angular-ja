@@ -94,7 +94,7 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
   title="src/app/hero.service.ts (HTTPシンボルをインポート)">
 </code-example>
 
-`HttpClient`をプライベートプロパティ`http`にコンストラクタで注入します。
+`HttpClient`をプライベートプロパティ`http`にコンストラクターで注入します。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 

@@ -25,7 +25,7 @@ Observableの通知を受け取るハンドラーは、`Observer` インタフ�
 
 | 通知の種類 | 説明 |
 |:---------|:-------------------------------------------|
-| `next`  | 必須です。それぞれの値が提供されたときのハンドラーです。実行が開始されてから0回以上呼び出されます。|
+| `next`  | 必須です。個々の値が提供されたときのハンドラーです。実行が開始されてから0回以上呼び出されます。|
 | `error` | オプションです。エラー通知のハンドラーです。エラーはObservableインスタンスの実行を停止します。|
 | `complete` | オプションです。実行完了通知のハンドラーです。遅延した値は、実行完了後もnextハンドラーに引き続き渡されます。|
 
@@ -85,7 +85,7 @@ Now you can use this function to create an observable that publishes keydown eve
 
 Observableを作成するときは、そのObservableをどのように使用するか、およびその値をマルチキャストするかどうかを決定する必要があります。
 
-それぞれの数値が発信されてから1秒遅れて、1から3までカウントする例を見てみましょう。
+個々の数値が発信されてから1秒遅れて、1から3までカウントする例を見てみましょう。
 
 <code-example path="observables/src/multicasting.ts" region="delay_sequence" title="Create a delayed sequence"></code-example>
 

@@ -38,7 +38,7 @@
 
 `HeroParentComponent` は子の `HeroChildComponent` を `*ngFor` リピーターの中にネストし、
 その `master` 文字列プロパティを子の `master` エイリアスにバインドし、
-それぞれの繰り返しの `hero` インスタンスを子の `hero` プロパティに渡します。
+個々の繰り返しの `hero` インスタンスを子の `hero` プロパティに渡します。
 
 
 <code-example path="component-interaction/src/app/hero-parent.component.ts" title="component-interaction/src/app/hero-parent.component.ts">
@@ -381,7 +381,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 `MissionControlComponent` は、子と共有するサービスのインスタンスを(`providers` のメタデータ配列を介して)提供し、
-そのインスタンスをそのコンストラクタを通じて自身に注入します。
+そのインスタンスをそのコンストラクターを通じて自身に注入します。
 
 
 <code-example path="component-interaction/src/app/missioncontrol.component.ts" title="component-interaction/src/app/missioncontrol.component.ts">
@@ -390,8 +390,8 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 
 
-また、`AstronautComponent` はコンストラクタにサービスを挿入します。
-それぞれの `AstronautComponent` は `MissionControlComponent` の子であるため、親のサービスインスタンスを受け取ります：
+また、`AstronautComponent` はコンストラクターにサービスを挿入します。
+個々の `AstronautComponent` は `MissionControlComponent` の子であるため、親のサービスインスタンスを受け取ります：
 
 
 <code-example path="component-interaction/src/app/astronaut.component.ts" title="component-interaction/src/app/astronaut.component.ts">

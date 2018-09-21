@@ -213,12 +213,12 @@ UniversalアプリケーションにおいてHTTPのURLは、Universal webサー
 
 解決策の1つは、Angularの[`APP_BASE_HREF`トークン](api/common/APP_BASE_HREF)を介してサーバー実行時のオリジンを提供してそれをサービスに注入し、リクエストURLにオリジンを付与することです。
 
-まず、`APP_BASE_HREF`トークンを介してオプションで注入された第2引数である`origin`パラメーターを取得するように、`HeroService`のコンストラクタを変更します。
+まず、`APP_BASE_HREF`トークンを介してオプションで注入された第2引数である`origin`パラメーターを取得するように、`HeroService`のコンストラクターを変更します。
 
 <code-example path="universal/src/app/hero.service.ts" region="ctor" title="src/app/hero.service.ts (constructor with optional origin)">
 </code-example>
 
-コンストラクタが`heroesUrl`に対して、（もし存在すれば）オリジンをどのように付与するかに注目してください。
+コンストラクターが`heroesUrl`に対して、（もし存在すれば）オリジンをどのように付与するかに注目してください。
 
 ブラウザバージョンでは`APP_BASE_HREF`を提供しないので、`heroesUrl`は相対的なままです。
 
@@ -368,7 +368,7 @@ Expressサーバーは、URLリクエストを順次フィルタリングして�
 ブラウザがHTTPリクエストを行う際、サーバーはCookie、XSRFヘッダーなどが付与されていることを前提としています。
 
 たとえば、ブラウザは現在のユーザー認証Cookieを自動的に送信します。
-Angular Universalはこれらの認証情報を別のデータサーバーに転送することはできません。サーバーがHTTPリクエストを処理する際、それぞれのセキュリティーに対する処理を追加する必要があります。
+Angular Universalはこれらの認証情報を別のデータサーバーに転送することはできません。サーバーがHTTPリクエストを処理する際、個々のセキュリティーに対する処理を追加する必要があります。
 
 </div>
 

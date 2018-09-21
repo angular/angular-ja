@@ -37,7 +37,7 @@ Angular 6.0から、シングルトンサービスを作成する推奨の方法
 
 より具体的にするために、例として`RouterModule`について考えてみましょう。`RouterModule`は`Router`サービスと`RouterOutlet`ディレクティブを提供する必要があります。`RouterModule`はアプリケーションが1つの`Router`を持ち、かつ少なくとも1つの`RouterOutlet`を持てるようにするため、ルート(root)アプリケーションモジュールによってインポートする必要があります。また、`RouterOutlet`ディレクティブをサブルート(sub-route)用のテンプレート内に置けるようにするため、個々のルート(route)コンポーネントでインポートしなければなりません。
 
-`RouterModule`に`forRoot()`がなければ、それぞれのルート(route)コンポーネントで新しい`Router`インスタンスが作成されるでしょう。`Router`は1つだけしか存在してはいけないため、アプリケーションを破壊するでしょう。この理由から、`RouterModule`は`RouterOutlet`をどこでも利用できるようにするため、その宣言を持っていますが、`Router`プロバイダーは`forRoot()`内にしか存在しません。その結果、ルート(root)アプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得します。対してすべてのルート(route)コンポーネントは`Router`を含まない`RouterModule`をインポートします。
+`RouterModule`に`forRoot()`がなければ、個々のルート(route)コンポーネントで新しい`Router`インスタンスが作成されるでしょう。`Router`は1つだけしか存在してはいけないため、アプリケーションを破壊するでしょう。この理由から、`RouterModule`は`RouterOutlet`をどこでも利用できるようにするため、その宣言を持っていますが、`Router`プロバイダーは`forRoot()`内にしか存在しません。その結果、ルート(root)アプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得します。対してすべてのルート(route)コンポーネントは`Router`を含まない`RouterModule`をインポートします。
 
 もしもあなたがプロバイダーと宣言の両方を提供するモジュールを持っている場合は、このパターンを使用して分割してみましょう。
 
@@ -97,26 +97,26 @@ Angularは`@NgModule.providers`
 もし遅延ロードするモジュールもそれをインポートした場合、
 アプリケーションはサービスの[複数インスタンス](guide/ngmodule-faq#q-why-bad)を生成することになります。
 
-遅延ロードするモジュールで`CoreModule`を再インポートすることを防ぎたい場合、次のような`CoreModule`コンストラクタを追加してください。
+遅延ロードするモジュールで`CoreModule`を再インポートすることを防ぎたい場合、次のような`CoreModule`コンストラクターを追加してください。
 
 <code-example path="ngmodules/src/app/core/core.module.ts" region="ctor" title="src/app/core/core.module.ts" linenums="false">
 
 </code-example>
 
-コンストラクタはAngularにコンストラクタ自身が`CoreModule`を注入するよう指示します。
+コンストラクターはAngularにコンストラクター自身が`CoreModule`を注入するよう指示します。
 もしもAngularが_現在_のインジェクター内の`CoreModule`を参照した場合、
 この注入は循環参照となります。
 `@SkipSelf`デコレーターは"インジェクター階層の上にある先祖のインジェクター内の`CoreModule`を参照する"
 という意味になります。
 
-コンストラクタが`AppModule`で意図どおりに実行される場合、
+コンストラクターが`AppModule`で意図どおりに実行される場合、
 `CoreModule`のインスタンスを提供できる祖先のインジェクターは存在しないでしょう。そして、インジェクターは中断するはずです。
 
 デフォルトでは、
 インジェクターが要求したプロバイダーを見つけられなかったときはエラーをスローします。
 `@Optional`デコレーターはサービスが見つからなくてもOKという意味になります。
 インジェクターは`null`を返し、`parentModule`パラメーターはnullになり、
-コンストラクタは無事終了します。
+コンストラクターは無事終了します。
 
 `CoreModule`を`CustomersModule`のような遅延ロードするモジュールに不適切にインポートするときは違います。
 
@@ -124,7 +124,7 @@ Angularは、遅延ロードするモジュールをルート(root)インジェ�
 `@SkipSelf`によって、
 Angularは親インジェクター(今回はルートインジェクターになります)の`CoreModule`を参照します。
 もちろん、ルート(root)の`AppModule`によってインポートされたインスタンスを参照します。
-今度は`parentModule`が存在するのでコンストラクタはエラーをスローします。
+今度は`parentModule`が存在するのでコンストラクターはエラーをスローします。
 
 ここでは、参考のために全体のなかの2つのファイルを紹介します:
 

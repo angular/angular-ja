@@ -78,7 +78,7 @@ _属性セレクタ_ パターンは、この種のディレクティブの名�
 
 `import`ステートメントは、Angularの`core`ライブラリから追加の`ElementRef`シンボルを指定します。
 
-ディレクティブのコンストラクタ内で`ElementRef`を使用して、`appHighlight`を適用したDOM要素への参照を[注入](guide/dependency-injection)します。
+ディレクティブのコンストラクター内で`ElementRef`を使用して、`appHighlight`を適用したDOM要素への参照を[注入](guide/dependency-injection)します。
 
 `ElementRef`は、`nativeElement`プロパティを使用して、ホストDOM要素へ直接アクセスすることができます。
 
@@ -98,7 +98,7 @@ _属性セレクタ_ パターンは、この種のディレクティブの名�
 ng serve
 </code-example>
 
-要約すると、Angularは**ホスト**`<p>`要素の`appHighlight`属性を見つけました。`HighlightDirective`クラスのインスタンスを作成し、`<p>`要素の背景スタイルを黄色に設定するディレクティブのコンストラクタに`<p>`要素への参照を注入しました。
+要約すると、Angularは**ホスト**`<p>`要素の`appHighlight`属性を見つけました。`HighlightDirective`クラスのインスタンスを作成し、`<p>`要素の背景スタイルを黄色に設定するディレクティブのコンストラクターに`<p>`要素への参照を注入しました。
 
 {@a respond-to-user}
 
@@ -110,7 +110,7 @@ ng serve
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (imports)" region="imports"></code-example>
 
-次に、マウスの出入りに応答する2つのイベントハンドラを追加します。それぞれのイベントハンドラは、`HostListener`デコレーターによって装飾されます。
+次に、マウスの出入りに応答する2つのイベントハンドラを追加します。個々のイベントハンドラは、`HostListener`デコレーターによって装飾されます。
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (mouse-methods)" region="mouse-methods"></code-example>
 
@@ -128,8 +128,8 @@ ng serve
 
 ハンドラは、ホストのDOM要素である`el`の色を設定するヘルパーメソッドに委譲します。
 
-ヘルパーメソッドである`highlight`がコンストラクタから抽出されました。
-改訂されたコンストラクタは、単に注入された`el: ElementRef`を宣言します。
+ヘルパーメソッドである`highlight`がコンストラクターから抽出されました。
+改訂されたコンストラクターは、単に注入された`el: ElementRef`を宣言します。
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (constructor)" region="ctor"></code-example>
 

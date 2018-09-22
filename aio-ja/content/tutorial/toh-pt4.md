@@ -12,7 +12,7 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 コンポーネントはデータの受け渡しに集中し、その他の処理はサービスクラスへ委譲するべきです。
 
 このチュートリアルでは、アプリケーション全体でヒーローを取得できる `HeroService` を作成します。
-そのサービスは `new` で生成するのではなく、Angular による [*依存性の注入*](guide/dependency-injection) で、 `HeroesComponent` コンストラクタに注入します。
+そのサービスは `new` で生成するのではなく、Angular による [*依存性の注入*](guide/dependency-injection) で、 `HeroesComponent` コンストラクターに注入します。
 
 サービスは、_お互いを知らない_ クラスの間で情報を共有する最適な方法です。
 このチュートリアル後半でも `MessageService` を作成し、次の2クラスに注入します。
@@ -126,7 +126,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 
 ### `HeroService` の注入
 
-`HeroService` 型のプライベートプロパティである `heroService` をコンストラクタに追加しましょう。
+`HeroService` 型のプライベートプロパティである `heroService` をコンストラクターに追加しましょう。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" region="ctor">
 </code-example>
@@ -146,12 +146,12 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 ### `ngOnInit` での呼び出し
 
-`getHeroes()` はコンストラクタでも呼び出すことはできますが、これは最適な方法ではありません。
+`getHeroes()` はコンストラクターでも呼び出すことはできますが、これは最適な方法ではありません。
 
-コンストラクタではプロパティ定義などの簡単な初期化のみを行い、それ以外は _何もするべきではありません_ 。
+コンストラクターではプロパティ定義などの簡単な初期化のみを行い、それ以外は _何もするべきではありません_ 。
 もちろん、_実際の_ データ取得サービスが行うであろう、サーバーへのHTTPリクエストを行う関数は呼び出すべきではありません。
 
-`getHeroes()` はコンストラクタではなく、 [*ngOnInit ライフサイクルフック*](guide/lifecycle-hooks) 内で呼び出しましょう。
+`getHeroes()` はコンストラクターではなく、 [*ngOnInit ライフサイクルフック*](guide/lifecycle-hooks) 内で呼び出しましょう。
 この `ngOnInit` は、 Angular が `HeroesComponent` インスタンスを生成した後、適切なタイミングで呼び出されます。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" region="ng-on-init">
@@ -301,7 +301,7 @@ Angular CLI を使い、`src/app` 配下に `MessageService` を作成します�
   path="toh-pt4/src/app/hero.service.ts" region="import-message-service">
 </code-example>
 
-プライベートな `messageService` プロパティを宣言するパラメータを使用してコンストラクタを変更します。
+プライベートな `messageService` プロパティを宣言するパラメータを使用してコンストラクターを変更します。
 Angular は `HeroService` を生成する際、そのプロパティへシングルトンな `MessageService` を注入します。
 
 <code-example
@@ -333,7 +333,7 @@ Angular は `HeroService` を生成する際、そのプロパティへシング
   path="toh-pt4/src/app/messages/messages.component.ts" region="import-message-service">
 </code-example>
 
-コンストラクタに **パブリック** な `messageService` プロパティを宣言しましょう。
+コンストラクターに **パブリック** な `messageService` プロパティを宣言しましょう。
 Angular は `MessagesComponent` を作成する際、シングルトンな `MessageService` インスタンスをそのプロパティへ注入します。
 
 <code-example
@@ -424,6 +424,6 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 * `HeroService` の _データ取得_ メソッドを非同期化しました
 * `Observable` および、それを扱うために利用する RxJS ライブラリについて学びました
 * モックヒーローを Observable (`Observable<Hero[]>`) 型で返すために、RxJS の `of()` を使用しました
-* コンポーネントのコンストラクタ内ではなく、`ngOnInit` ライフサイクルフックで `HeroService` メソッドを呼び出しました
+* コンポーネントのコンストラクター内ではなく、`ngOnInit` ライフサイクルフックで `HeroService` メソッドを呼び出しました
 * クラス間で疎結合な情報伝達を行うため、 `MessageService` を作成しました
 * コンポーネントに注入された `HeroService` は、もうひとつのサービスである `MessageService` とともに作成されます

@@ -150,18 +150,21 @@
             },
             {
               "url": "guide/architecture-components",
-              "title": "Intro to Components",
-              "tooltip": "About Components, Templates, and Views."
+              "title": "Componentの紹介",
+              "tooltip": "コンポーネント、テンプレート、およびビューについて。",
+              "translated": true
             },
             {
               "url": "guide/architecture-services",
-              "title": "Intro to Services and DI",
-              "tooltip": "About services and dependency injection."
+              "title": "サービスとDIの紹介",
+              "tooltip": "サービスと依存性の注入について。",
+              "translated": true
             },
             {
               "url": "guide/architecture-next-steps",
-              "title": "Next Steps",
-              "tooltip": "Beyond the basics."
+              "title": "次のステップ",
+              "tooltip": "基本のその先へ。",
+              "translated": true
             }
           ]
         },
@@ -261,7 +264,7 @@
               "url": "guide/reactive-forms",
               "title": "リアクティブフォーム",
               "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/dynamic-form",
@@ -283,8 +286,9 @@
             },
             {
               "url": "guide/rx-library",
-              "title": "The RxJS Library",
-              "tooltip": ""
+              "title": "RxJSライブラリ",
+              "tooltip": "",
+              "translated": true
             },
             {
               "url": "guide/observables-in-angular",
@@ -495,8 +499,9 @@
 
             {
               "url": "guide/typescript-configuration",
-              "title": "TypeScript Configuration",
-              "tooltip": "TypeScript configuration for Angular developers."
+              "title": "TypeScript設定",
+              "tooltip": "Angular開発者のためのTypeScript設定。",
+              "translated": true
             },
             {
               "url": "guide/aot-compiler",

@@ -219,7 +219,7 @@ const heroForm = new FormGroup({
 
 値が一致しない場合、ヒーローのアイデンティティは秘密のままであり、安全にnullを返すことができます。それ以外の場合、ヒーローのアイデンティティが明らかになり、エラーオブジェクトを返すことでフォームを無効としてマークする必要があります。
 
-次に、ユーザーエクスペリエンスを向上させるために、フォームが無効な場合に適切なエラーメッセージが表示されます。
+次に、ユーザー体験を向上させるために、フォームが無効な場合に適切なエラーメッセージが表示されます。
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" title="reactive/hero-form-template.component.html" linenums="false">
 </code-example>
 
@@ -237,7 +237,7 @@ const heroForm = new FormGroup({
 <code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-register-validator" title="template/hero-form-template.component.html" linenums="false">
 </code-example>
 
-ユーザーエクスペリエンスを向上させるため、フォームが無効な場合に適切なエラーメッセージが表示されます。
+ユーザー体験を向上させるため、フォームが無効な場合に適切なエラーメッセージが表示されます。
 <code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-error-message" title="template/hero-form-template.component.html" linenums="false">
 </code-example>
 

@@ -16,21 +16,21 @@ RxJS には新しい observables を作成するために使用できるいく�
 
 <code-example path="rx-library/src/simple-creation.ts" region="promise" title="promise から observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="interval" title="counter から observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="interval" title="カウンターから observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="event" title="event から observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="event" title="イベントから observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="ajax" title="AJAX request から observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="ajax" title="AJAX リクエストから observable を作成する"></code-example>
 
 ## オペレーター
 
-演算子は、コレクションの高度な操作を可能にするために、observables 基盤上に構築される関数です。たとえば RxJS は `map()`、`filter()`、`concat()`、`flatMap()` のようなオペレーターを定義します。
+オペレーターは、コレクションの高度な操作を可能にするために、observables 基盤上に構築される関数です。たとえば RxJS は `map()`、`filter()`、`concat()`、`flatMap()` のようなオペレーターを定義します。
 
-オペレーターは設定オプションをとり、observableソースの関数を返します。この返された関数を実行するとき、オペレーターはobservableの放出値を観測、変換し、変換された値の新しいobservableを返します。ここに簡単な例があります：
+オペレーターは設定オプションをとり、ソースとなる observable を受け取る関数を返します。この返された関数を実行するとき、オペレーターは observable が出力する値を観測、変換し、変換された値の新しい observable を返します。ここに簡単な例があります：
 
 <code-example path="rx-library/src/operators.ts" title="Map operator"></code-example>
 
-*pipes* を使用するとオペレーターをリンクすることができます。パイプを使用すると、複数の機能を1つの機能にまとめることができます。`pipe()` 関数は、結合する関数を引数としてとり、実行時に順次関数を実行する新しい関数を返します。
+_パイプ_を使用するとオペレーターをリンクすることができます。パイプを使用すると、複数の機能を1つの機能にまとめることができます。`pipe()` 関数は、結合する関数を引数としてとり、実行時に順次関数を実行する新しい関数を返します。
 
 observable に適用されるオペレーターのセットは、レシピ、つまり関心のある値を生成するための一連の命令です。それだけではレシピは何もしません。レシピを通して結果を出すには  `subscribe()` を呼び出す必要があります。
 
@@ -71,7 +71,7 @@ RxJS は、サブスクリプションで提供する `error()` ハンドラに�
 
 ### 失敗した observable の再実行
 
-`catchError` オペレーターがシンプルなリカバリパスを提供する場合、`retry` 演算子は失敗したリクエストを再試行させます。
+`catchError` オペレーターがシンプルなリカバリパスを提供する場合、`retry` オペレーターは失敗したリクエストを再試行させます。
 
 `catchError` オペレーターの前に `retry` オペレーターを使用します。これは元のソース observable に再びサブスクライブし、エラーの原因となった一連のアクションを再実行できます。これに HTTP リクエストが含まれる場合、その HTTP リクエストを再試行します。
 
@@ -87,9 +87,9 @@ RxJS は、サブスクリプションで提供する `error()` ハンドラに�
 
 ## observables の命名規則
 
-Angular アプリケーションは主に TypeScript で記述されるため、変数がいつ observable であるかを知ることができます。Angular フレームワークは observables の命名規則を強制しませんが、後に "$" という名前の observables が表示されることがよくあります。
+Angular アプリケーションは主に TypeScript で記述されるため、変数がいつ observable であるかを知ることができます。Angular フレームワークは observables の命名規則を強制しませんが、末尾に "$" 記号が付いた名前の observables をよく見かけるでしょう。
 
-これはコードをスキャンして観察可能な値を探す場合に便利です。また、プロパティに observable からの最新の値を格納する場合は、単に "$" の有無にかかわらず同じ名前を使用すると便利です。
+これはコードをスキャンして observable の値を探す場合に便利です。また、プロパティに observable からの最新の値を格納する場合は、"$" の有無にかかわらず同じ名前を使用すると便利です。
 
 たとえば:
 

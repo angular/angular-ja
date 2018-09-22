@@ -99,6 +99,9 @@ rules:
   - expected: オペレーター
     pattern: /オペレータ(?!ー)/
 
+  - expected: リカバリー
+    pattern: /リカバリ(?!ー)/
+
   - expected: クオート
     pattern: クォート
 

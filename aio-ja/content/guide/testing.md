@@ -2109,7 +2109,7 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 </code-example>
 
 上のセクションの[_HeroDetailComponent_のテスト](#tests-w-test-double)では、
-`createComponent`と`page`がテストを短く保ち、_オンメッセージ_にする方法を示しています。
+`createComponent`と`page`がテストの短さと_方針_を保つ方法を示しています。
 注意を払う必要はありません。Promiseを待つことはなく、比較する要素値のDOMを検索する必要もありません。
 
 次は、この点を補強する`HeroDetailComponent`テストです。

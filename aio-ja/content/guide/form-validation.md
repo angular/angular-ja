@@ -249,38 +249,39 @@ const heroForm = new FormGroup({
 - 2つの兄弟コントロールの値に基づいてフォームを検証し、
 - ユーザーがフォームと対話してバリデーションが失敗した後、説明的なエラーメッセージが表示されます。
 
-## Async Validation
-This section shows how to create asynchronous validators. It assumes some basic knowledge of creating [custom validators](guide/form-validation#custom-validators).
+## 非同期バリデーション
+このセクションでは、非同期バリデータを作成する方法を示します。[カスタムバリデータ](guide/form-validation#custom-validators)の作成に関するいくつかの基本的な知識を前提としています。
 
-### The Basics
-Just like synchronous validators have the `ValidatorFn` and `Validator` interfaces, asynchronous validators have their own counterparts: `AsyncValidatorFn` and `AsyncValidator`.
+### 基礎
+同期バリデータに `ValidatorFn` と `Validator` のインターフェースがあるように、非同期バリデータにも `AsyncValidatorFn` と `AsyncValidator` という独自の対があります。
 
-They are very similar with the only difference being:
+これらは非常によく似ています。唯一の違いは:
 
-* They must return a Promise or an Observable,
-* The observable returned must be finite, meaning it must complete at some point. To convert an infinite observable into a finite one, pipe the observable through a filtering operator such as `first`, `last`, `take`, or `takeUntil`.
+* これらはPromiseまたはObservableを返さなければいけません。
+* Observableから返されるのは有限でなければなりません、つまりある時点で完了しなければならないということです。無限のObservableから有限のObservableに変換するには、Observableを`first`、`last`、`take`、`takeUntil`などのフィルタオペレーターでパイプ処理を行います。
 
-It is important to note that the asynchronous validation happens after the synchronous validation, and is performed only if the synchronous validation is successful. This check allows forms to avoid potentially expensive async validation processes such as an HTTP request if more basic validation methods fail.
+非同期バリデーションは同期バリデーションのあとに行われ、同期バリデーションが成功した場合にのみ実行されることに注意することが重要です。このチェックでは、より基本的な検証が失敗した場合にフォームがHTTP要求などの高価な非同期バリデーションプロセスを回避することができます。
 
-After asynchronous validation begins, the form control enters a `pending` state. You can inspect the control's `pending` property and use it to give visual feedback about the ongoing validation.
+非同期バリデーションが開始されると、フォームコントロールは`pending`状態になります。コントロールの`pending`中のプロパティを検査し、それを使用して進行中の検証に関する視覚的なフィードバックを与えることができます。
 
-A common UI pattern is to show a spinner while the async validation is being performed. The following example presents how to achieve this with template-driven forms:
+一般的なUIパターンは、非同期バリデーションが実行されている間にスピナーを表示することです。
+次の例は、テンプレート駆動フォームでこれを実現する方法を示しています:
 
 ```html
 <input [(ngModel)}="name" #model="ngModel" appSomeAsyncValidator>
 <app-spinner *ngIf="model.pending"></app-spinner>
 ```
 
-### Implementing Custom Async Validator
-In the following section, validation is performed asynchronously to ensure that our heroes pick an alter ego that is not already taken. New heroes are constantly enlisting and old heroes are leaving the service. That means that we do not have the list of available alter egos ahead of time.
+### カスタム非同期バリデータの実装
+次のセクションでは、検証が非同期的に実行されて、ヒーローがまだ取られていない別人格を確実に選択するようにしています。新しいヒーローたちは絶えず入隊しており、古いヒーローたちはこのサービスを離れることになっています。これは、事前に利用可能な別人格の一覧を持っていないことを意味します。
 
-To validate the potential alter ego, we need to consult a central database of all currently enlisted heroes. The process is asynchronous, so we need a special validator for that.
+Observableな別人格を検証するためには、現在入隊しているすべてのヒーローの中央データベースを調べる必要があります。その処理は非同期なので、特別なバリデーターが必要です。
 
-Let's start by creating the validator class.
+まずバリデータクラスを作成しましょう。
 
 <code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator" linenums="false"></code-example>
 
-As you can see, the `UniqueAlterEgoValidator` class implements the `AsyncValidator` interface. In the constructor, we inject the `HeroesService` that has the following interface:
+ご覧のとおり、`UniqueAlterEgoValidator`クラスは`AsyncValidator`インターフェイスを実装しています。コンストラクタでは、次のインターフェイスをもつ`HeroesService`を注入します。
 
 ```typescript
 interface HeroesService {
@@ -288,29 +289,29 @@ interface HeroesService {
 }
 ```
 
-In a real world application, the `HeroesService` is responsible for making an HTTP request to the hero database to check if the alter ego is available. From the validator's point of view, the actual implementation of the service is not important, so we can just code against the `HeroesService` interface.
+現実のアプリケーションでは、`HeroesService`はヒーローデータベースへのHTTP要求を行い、別人格が利用可能かどうかをチェックします。バリデーターの観点から見ると、実際のサービスの実装は重要ではないので、`HeroesService`インターフェースに対してコードを記述することができます。
 
-As the validation begins, the `UniqueAlterEgoValidator` delegates to the `HeroesService` `isAlterEgoTaken()` method with the current control value. At this point the control is marked as `pending` and remains in this state until the observable chain returned from the `validate()` method completes.
+検証が開始されると、 `UniqueAlterEgoValidator` は `HeroesService` の `isAlterEgoTaken()` メソッドに現在のコントロール値を委譲します。この時点で、コントロールは`pending`としてマークされ、`validate()`メソッドから返されたObservableチェーンが完了するまでこの状態にとどまります。
 
-The `isAlterEgoTaken()` method dispatches an HTTP request that checks if the alter ego is available, and returns `Observable<boolean>` as the result. We pipe the response through the `map` operator and transform it into a validation result. As always, we return `null` if the form is valid, and `ValidationErrors` if it is not. We make sure to handle any potential errors with the `catchError` operator.
+`isAlterEgoTaken()`メソッドは、別人格が利用可能かどうかをチェックするHTTP要求を送出し、結果として`Observable<boolean>`を返します。`map`オペレーターを通して応答をパイプし、検証結果に変換します。常に、フォームが有効な場合は`null`を返し、そうでない場合は`ValidationErrors`を返します。`catchError`オペレーターを使用して、潜在的なエラーを確実に処理します。
 
-Here we decided that `isAlterEgoTaken()` error is treated as a successful validation, because failure to make a validation request does not necessarily mean that the alter ego is invalid. You could handle the error differently and return the `ValidationError` object instead.
+ここで、`isAlterEgoTaken()` のエラーは、検証が成功したものとして扱われることにしました。なぜなら、検証リクエストの失敗が必ずしも別人格が無効であることを意味するとは限らないからです。エラーを別の方法で処理し、代わりに`ValidationError`オブジェクトを返すことができます。
 
-After some time passes, the observable chain completes and the async validation is done. The `pending` flag is set to `false`, and the form validity is updated.
+しばらくすると、Observableチェーンが完了し、非同期バリデーションが実行されます。`pending`フラグは`false`に設定され、フォームの有効性が更新されます。
 
-### Note on performance
+### パフォーマンスに関する注意
 
-By default, all validators are run after every form value change. With synchronous validators, this will not likely have a noticeable impact on application performance. However, it's common for async validators to perform some kind of HTTP request to validate the control. Dispatching an HTTP request after every keystroke could put a strain on the backend API, and should be avoided if possible.
+デフォルトでは、フォームの値が変更されるたびに、すべてのバリデーターが実行されます。同期バリデータを使用すると、アプリケーションのパフォーマンスに大きな影響を与えることはありません。しかし、非同期バリデータでは、何らかの種類のHTTPリクエストを実行してコントロールを検証するのが一般的です。すべてのキーストロークのあとででHTTPリクエストを送信すると、バックエンドAPIに負担がかかり、可能であれば避けるべきです。
 
-We can delay updating the form validity by changing the `updateOn` property from `change` (default) to `submit` or `blur`.
+`updateOn`プロパティを`change`（デフォルト）から`submit`または`blur`に変更することでフォームの有効性の更新を遅らせることができます。
 
-With template-driven forms:
+テンプレート駆動フォームの場合:
 
 ```html
 <input [(ngModel)]="name" [ngModelOptions]="{updateOn: 'blur'}">
 ```
 
-With reactive forms:
+リアクティブフォームの場合:
 
 ```typescript
 new FormControl('', {updateOn: 'blur'});

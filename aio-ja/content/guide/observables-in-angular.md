@@ -1,12 +1,12 @@
 # Angular での Observable
 
-AAngular はさまざまな一般的な非同期操作を処理するためのインタフェースとして Observable を使用します。たとえば：
+Angular はさまざまな一般的な非同期操作を処理するためのインターフェースとして Observable を使用します。たとえば：
 
 * `EventEmitter` クラスは `Observable` を拡張しています。
 * HTTP モジュールは Observable を使用して AJAX リクエストとレスポンスを処理します。
 * Router と Form モジュールは、ユーザー入力イベントを待ち受けてレスポンスするために Observable を使用します。
 
-## イベントエミッタ
+## イベントエミッター
 
 Angularは コンポーネントから値を `@Output()` デコレーターを通してパブリッシュするときに使用される `EventEmitter` クラスを提供します。`EventEmitter` は `Observable` を拡張し、任意の値を送ることができるように `emit()` メソッドを追加します。`emit()` を呼び出すと、サブスクライブされたオブザーバーの `next()` メソッドに送出された値が渡されます。
 
@@ -28,9 +28,9 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 ## 非同期パイプ
 
-[AsyncPipe](https://angular.io/api/common/AsyncPipe) は Observable または Promise にサブスクライブし、送出した最新の値を返します。新しい値が発行されると、パイプはコンポーネントの変更をチェックします。
+[AsyncPipe](https://angular.io/api/common/AsyncPipe) は Observable または Promise をサブスクライブし、送出した最新の値を返します。新しい値が発行されると、パイプはコンポーネントの変更をチェックします。
 
-次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在のとき刻でビューを継続的に更新します。
+次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在の時刻でビューを継続的に更新します。
 
 <code-example path="observables-in-angular/src/main.ts" title="非同期パイプの使用" region="pipe"></code-example>
 
@@ -40,12 +40,12 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 <code-example path="observables-in-angular/src/main.ts" title="ルーターイベント" region="router"></code-example>
 
-[ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する注入型ルーターサービスです。たとえば、 `ActivateRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
+[ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivateRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
 
 <code-example path="observables-in-angular/src/main.ts" title="ActivatedRoute" region="activated_route"></code-example>
 
 ## リアクティブフォーム
 
-リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティをサブスクライブすることは、コンポーネントクラス内でアプリケーションロジックをトリガする方法です。たとえば：
+リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティをサブスクライブすることは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
 
 <code-example path="observables-in-angular/src/main.ts" title="リアクティブフォーム" region="forms"></code-example>

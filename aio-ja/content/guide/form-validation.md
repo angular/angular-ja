@@ -281,7 +281,7 @@ Observableな別人格を検証するためには、現在入隊しているす�
 
 <code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator" linenums="false"></code-example>
 
-ご覧のとおり、`UniqueAlterEgoValidator`クラスは`AsyncValidator`インターフェイスを実装しています。コンストラクタでは、次のインターフェイスをもつ`HeroesService`を注入します。
+ご覧のとおり、`UniqueAlterEgoValidator`クラスは`AsyncValidator`インターフェイスを実装しています。コンストラクターでは、次のインターフェイスをもつ`HeroesService`を注入します。
 
 ```typescript
 interface HeroesService {

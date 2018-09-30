@@ -30,7 +30,7 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 [AsyncPipe](https://angular.io/api/common/AsyncPipe) は Observable または Promise をサブスクライブし、送出した最新の値を返します。新しい値が発行されると、パイプはコンポーネントの変更をチェックします。
 
-次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在の時刻でビューを継続的に更新します。
+次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在のとき刻でビューを継続的に更新します。
 
 <code-example path="observables-in-angular/src/main.ts" title="非同期パイプの使用" region="pipe"></code-example>
 

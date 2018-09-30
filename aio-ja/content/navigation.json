@@ -286,8 +286,9 @@
             },
             {
               "url": "guide/rx-library",
-              "title": "The RxJS Library",
-              "tooltip": ""
+              "title": "RxJSライブラリ",
+              "tooltip": "",
+              "translated": true
             },
             {
               "url": "guide/observables-in-angular",

@@ -12,7 +12,7 @@ Observableは、事前サジェスチョンの実装を簡素化できます。�
 * 値が同じままであれば、リクエストを送信しない (たとえば、文字を急に打ち、次にバックスペースなど)。
 * 更新された結果によって元の結果が無効になる場合、進行中の AJAX リクエストをキャンセルする。
 
-これら全てを JavaScript で書くとかなり複雑になる可能性があります。Observableでは、簡単な一連の RxJS 演算子を使用できます。
+これらすべてを JavaScript で書くとかなり複雑になる可能性があります。Observableでは、簡単な一連の RxJS 演算子を使用できます。
 
 <code-example path="practical-observable-usage/src/typeahead.ts" title="事前サジェスチョン"></code-example>
 

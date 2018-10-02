@@ -1,51 +1,51 @@
-# Observables in Angular
+# Angular での Observable
 
-Angular makes use of observables as an interface to handle a variety of common asynchronous operations. For example:
+Angular はさまざまな一般的な非同期操作を処理するためのインターフェースとして Observable を使用します。たとえば：
 
-* The `EventEmitter` class extends `Observable`.
-* The HTTP module uses observables to handle AJAX requests and responses.
-* The Router and Forms modules use observables to listen for and respond to user-input events.
+* `EventEmitter` クラスは `Observable` を拡張しています。
+* HTTP モジュールは Observable を使用して AJAX リクエストとレスポンスを処理します。
+* Router と Form モジュールは、ユーザー入力イベントを待ち受けてレスポンスするために Observable を使用します。
 
-## Event emitter
+## イベントエミッター
 
-Angular provides an `EventEmitter` class that is used when publishing values from a component through the `@Output()` decorator. `EventEmitter` extends `Observable`, adding an `emit()` method so it can send arbitrary values. When you call `emit()`, it passes the emitted value to the `next()` method of any subscribed observer.
+Angularは コンポーネントから値を `@Output()` デコレーターを通してパブリッシュするときに使用される `EventEmitter` クラスを提供します。`EventEmitter` は `Observable` を拡張し、任意の値を送ることができるように `emit()` メソッドを追加します。`emit()` を呼び出すと、サブスクライブされたオブザーバーの `next()` メソッドに送出された値が渡されます。
 
-A good example of usage can be found on the [EventEmitter](https://angular.io/api/core/EventEmitter) documentation. Here is the example component that listens for open and close events:
+[EventEmitter](https://angular.io/api/core/EventEmitter) のドキュメントに、使い方の良い例があります。オープンイベントとクローズイベントを待ち受けるサンプルコンポーネントを次に示します。
 
 `<zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>`
 
-Here is the component definition:
+コンポーネントの定義は次のとおりです。
 
 <code-example path="observables-in-angular/src/main.ts" title="EventEmitter" region="eventemitter"></code-example>
 
 ## HTTP
-Angular’s `HttpClient` returns observables from HTTP method calls. For instance, `http.get(‘/api’)` returns an observable. This provides several advantages over promise-based HTTP APIs:
+Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable を返します。たとえば、`http.get(‘/api’)` は Observable オブジェクトを返します。これは、Promise ベースの HTTP API に勝るいくつかの利点を提供します。
 
-* Observables do not mutate the server response (as can occur through chained `.then()` calls on promises). Instead, you can use a series of operators to transform values as needed.
-* HTTP requests are cancellable through the `unsubscribe()` method.
-* Requests can be configured to get progress event updates.
-* Failed requests can be retried easily.
+* Observables はサーバーのレスポンスを変更しません(Promise で `.then()` の呼び出しによって発生する可能性があります)。代わりに、必要に応じて一連のオペレーターを使用して値を変換することができます。
+* HTTP リクエストは `unsubscribe()` メソッドで取り消すことができます。
+* イベントの更新の進行状況を取得するようにリクエストを構成できます。
+* 失敗したリクエストは簡単に再試行できます。
 
-## Async pipe
+## 非同期パイプ
 
-The [AsyncPipe](https://angular.io/api/common/AsyncPipe) subscribes to an observable or promise and returns the latest value it has emitted. When a new value is emitted, the pipe marks the component to be checked for changes.
+[AsyncPipe](https://angular.io/api/common/AsyncPipe) は Observable または Promise をサブスクライブし、送出した最新の値を返します。新しい値が発行されると、パイプはコンポーネントの変更をチェックします。
 
-The following example binds the `time` observable to the component's view. The observable continuously updates the view with the current time.
+次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在時刻でビューを継続的に更新します。
 
-<code-example path="observables-in-angular/src/main.ts" title="Using async pipe" region="pipe"></code-example>
+<code-example path="observables-in-angular/src/main.ts" title="非同期パイプの使用" region="pipe"></code-example>
 
-## Router
+## ルーター
 
-[`Router.events`](https://angular.io/api/router/Router#events) provides events as observables. You can use the `filter()` operator from RxJS to look for events of interest, and subscribe to them in order to make decisions based on the sequence of events in the navigation process. Here's an example:
+[`Router.events`](https://angular.io/api/router/Router#events) は Observable としてイベントを提供します。RxJS の `filter()` オペレーターを使用して目的のイベントを検索し、それらのイベントをサブスクライブして、ナビゲーションプロセスの一連のイベントに基づいて決定することができます。ここに例があります：
 
-<code-example path="observables-in-angular/src/main.ts" title="Router events" region="router"></code-example>
+<code-example path="observables-in-angular/src/main.ts" title="ルーターイベント" region="router"></code-example>
 
-The [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) is an injected router service that makes use of observables to get information about a route path and parameters. For example, `ActivateRoute.url` contains an observable that reports the route path or paths. Here's an example:
+[ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivateRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
 
 <code-example path="observables-in-angular/src/main.ts" title="ActivatedRoute" region="activated_route"></code-example>
 
-## Reactive forms
+## リアクティブフォーム
 
-Reactive forms have properties that use observables to monitor form control values. The [`FormControl`](https://angular.io/api/forms/FormControl) properties `valueChanges` and `statusChanges` contain observables that raise change events. Subscribing to an observable form-control property is a way of triggering application logic within the component class. For example:
+リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティをサブスクライブすることは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
 
-<code-example path="observables-in-angular/src/main.ts" title="Reactive forms" region="forms"></code-example>
+<code-example path="observables-in-angular/src/main.ts" title="リアクティブフォーム" region="forms"></code-example>

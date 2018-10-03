@@ -292,8 +292,9 @@
             },
             {
               "url": "guide/observables-in-angular",
-              "title": "Observables in Angular",
-              "tooltip": ""
+              "title": "AngularでのObservable",
+              "tooltip": "",
+              "translated": true
             },
             {
               "url": "guide/practical-observable-usage",

@@ -4,7 +4,7 @@
 モダンブラウザは、HTTPリクエストを行うための2つのAPIをサポートしています。`XMLHttpRequest`インターフェースと`fetch()`APIです。
 
 `@angular/common/http`の`HttpClient`は、Angularアプリケーション用のシンプルなクライアントHTTP APIを提供します。
-これはブラウザによって公開される`XMLHttpRequest`インタフェースに依存します。
+これはブラウザによって公開される`XMLHttpRequest`インターフェースに依存します。
 さらに`HttpClient`の利点としては、テスト機能、リクエストとレスポンスオブジェクトの型付け、リクエストとレスポンスのインターセプト、`Observable`のAPI、そして合理化されたエラー処理が含まれます。
 
 このガイドに付属の<live-example></live-example>はその場で実行できます。
@@ -504,7 +504,7 @@ _HTTP Interception_は`@angular/common/http`の主要な機能です。
 
 #### インターセプターを書く
 
-インターセプターを実装するには、`HttpInterceptor`インタフェースの`intercept()`メソッドを実装するクラスを宣言します。
+インターセプターを実装するには、`HttpInterceptor`インターフェースの`intercept()`メソッドを実装するクラスを宣言します。
 
 ここに、何も触れずにリクエストを単に渡すだけの_noop_インターセプターがあります。
 <code-example 
@@ -516,7 +516,7 @@ _HTTP Interception_は`@angular/common/http`の主要な機能です。
 `intercept`メソッドは、リクエストを最終的にHTTPレスポンスを含む`Observable`に変換します。
 この意味で、各インターセプターは完全に単独でリクエストを処理することができます。
 
-ほとんどのインターセプターは、リクエストを検査し、[`HttpHandler`](api/common/http/HttpHandler)インタフェースを実装している`next`オブジェクトの`handle()`メソッドへ（おそらく変更された）リクエストを転送します。
+ほとんどのインターセプターは、リクエストを検査し、[`HttpHandler`](api/common/http/HttpHandler)インターフェースを実装している`next`オブジェクトの`handle()`メソッドへ（おそらく変更された）リクエストを転送します。
 
 ```javascript
 export abstract class HttpHandler {
@@ -804,7 +804,7 @@ _cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー*
 
 <div class="alert is-important">
 
-すべてのプログレスイベントはchange detectionをトリガします。
+すべてのプログレスイベントはchange detectionをトリガーします。
 したがって、UIで進捗状況を本当に報告するつもりの場合にのみ、それらを有効にしてください。
 
 </div>

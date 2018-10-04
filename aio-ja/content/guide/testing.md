@@ -418,7 +418,7 @@ _クラスのみ_のテストは、クラスの動作については教えてく
 コンポーネントに関連付けられたDOM要素を作成する必要があります。
 コンポーネントの状態が適切なタイミングで適切に表示されることを確認するためにDOMを検査し、
 画面上でのユーザーインタラクションによって、
-コンポーネントが期待とおりに動作することをシミュレートする必要があります。
+コンポーネントが期待どおりに動作することをシミュレートする必要があります。
 
 この種類のテストを書くために、
 `TestBed`のその他の機能と他のテストヘルパーを使用します。
@@ -1386,11 +1386,11 @@ _マーブルフレーム_とは、テスト時間の仮想的な単位です。
 各シンボル( `-` 、`x`、`|`、`#`)は、1つのフレームの通過をマークします。
 
 {@a cold-observable}
-_コールド_ Observableはサブスライブされるまで値を発行しません。
+_コールド_ Observableはサブスクライブされるまで値を発行しません。
 アプリケーションのObservableのほとんどはコールドです。
 すべての[_HttpClient_](guide/http)メソッドはコールドObservableを返します。
 
-_ホット_ Observableはサブスライブする_前_にすでに値を発行しています。
+_ホット_ Observableはサブスクライブする_前_にすでに値を発行しています。
 ルーターアクティビティを報告する[_Router.events_](api/router/Router#events)Observable、
 これは _ホット_ Observableです。
 
@@ -1740,7 +1740,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 `Observable`である`ActivatedRoute.paramMap`プロパティから`id`を取得する必要があります。
 
 `ActivatedRoute.paramMap`の`id`プロパティを参照するだけでは不十分です。
-コンポーネントは、`ActivatableRoute.paramMap` Observableを_サブスライブ_し、
+コンポーネントは、`ActivatableRoute.paramMap` Observableを_サブスクライブ_し、
 `id`がそのライフタイム内で変更されるように準備する必要があります。
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="ng-on-init" title="app/hero/hero-detail.component.ts (ngOnInit)" linenums="false"></code-example>
@@ -1812,7 +1812,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 コンポーネントは、`id`がないときに妥当な何かを行うべきです。
 
 この実装では、コンポーネントは新しいヒーローを作成して表示する必要があります。
-新しいヒーローは`id=0`と空の`name`を持ちます。次のテストではコンポーネントが期待とおりに動作することを確認します:
+新しいヒーローは`id=0`と空の`name`を持ちます。次のテストではコンポーネントが期待どおりに動作することを確認します:
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
@@ -1975,7 +1975,7 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 アンカーをクリックすると、
 `onClick()`メソッドをトリガーして、スタブに露出した`navigatedTo`プロパティが設定されます。
 テストでは、
-アンカーをクリックしたときに期待とおりのルート定義が設定されていることを確認するために`navigatedTo`を検証します。
+アンカーをクリックしたときに期待どおりのルート定義が設定されていることを確認するために`navigatedTo`を検証します。
 
 <div class="alert is-helpful">
 

@@ -137,7 +137,7 @@ Angularは、ディレクティブが拡張可能なバリデータのコレク�
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" title="shared/forbidden-name.directive.ts (providers)" linenums="false">
 </code-example>
 
-ディレクティブクラスは、`Validator`インターフェイスを実装しているため、Angularフォームと簡単に統合できます。 これはどのようにそれらをまとめるかを理解するための、ディレクティブの残りの部分です:
+ディレクティブクラスは、`Validator`インターフェースを実装しているため、Angularフォームと簡単に統合できます。 これはどのようにそれらをまとめるかを理解するための、ディレクティブの残りの部分です:
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" title="shared/forbidden-name.directive.ts (directive)">
 </code-example>
@@ -281,7 +281,7 @@ Observableな別人格を検証するためには、現在入隊しているす�
 
 <code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator" linenums="false"></code-example>
 
-ご覧のとおり、`UniqueAlterEgoValidator`クラスは`AsyncValidator`インターフェイスを実装しています。コンストラクターでは、次のインターフェイスをもつ`HeroesService`を注入します。
+ご覧のとおり、`UniqueAlterEgoValidator`クラスは`AsyncValidator`インターフェースを実装しています。コンストラクターでは、次のインターフェースをもつ`HeroesService`を注入します。
 
 ```typescript
 interface HeroesService {

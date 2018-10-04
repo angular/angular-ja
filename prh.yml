@@ -102,8 +102,20 @@ rules:
   - expected: リカバリー
     pattern: /リカバリ(?!ー)/
 
+  - expected: エミッター
+    pattern: /エミッタ(?!ー)/
+
+  - expected: トリガー
+    pattern: /トリガ(?!ー)/
+
   - expected: クオート
     pattern: クォート
+
+  - expected: インターフェース
+    pattern:
+      - インタフェース
+      - インターフェイス
+      - インタフェイス
 
   - expected: Promise
     pattern: プロミス

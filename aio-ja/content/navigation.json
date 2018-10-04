@@ -292,8 +292,9 @@
             },
             {
               "url": "guide/observables-in-angular",
-              "title": "Observables in Angular",
-              "tooltip": ""
+              "title": "AngularでのObservable",
+              "tooltip": "",
+              "translated": true
             },
             {
               "url": "guide/practical-observable-usage",
@@ -437,8 +438,9 @@
         },
         {
           "url": "guide/testing",
-          "title": "Testing",
-          "tooltip": "Techniques and practices for testing an Angular app."
+          "title": "テスト",
+          "tooltip": "Angularアプリをテストするためのテクニックと実践。",
+          "translated": true
         },
         {
           "url": "guide/cheatsheet",

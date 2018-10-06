@@ -1,6 +1,6 @@
 # Observable と 他の技術の比較
 
-プロビジョニングの代わりに Observable を使用して、値を非同期に配信することができます。 同様に、Observable はイベントハンドラと置き換えることができます。最後に、Observable は複数の値を提供するため、配列でビルドして操作する可能性のある場所で使用することができます。
+Promise の代わりに Observable を使用して、値を非同期に配信することができます。 同様に、Observable はイベントハンドラと置き換えることができます。最後に、Observable は複数の値を提供するため、配列でビルドして操作する可能性のある場所で使用することができます。
 
 Observable は、これらの状況の個々の代替技術とは多少異なる動作をしますが、いくつか重要な利点があります。違いの詳細な比較を次に示します。
 
@@ -8,9 +8,9 @@ Observable は、これらの状況の個々の代替技術とは多少異なる
 
 Observable はしばしば Promise と比較されます。主な違いは次のとおりです。
 
-* Observable は宣言型です。サブスクリプションまで処理が開始されません。Promise は作成時に直ちに実行されます。これにより、結果が必要なときにいつでも実行できるレシピを定義するために、オブザーバービリティが役立ちます。
+* Observable は宣言型です。購読するまで処理が開始されません。Promise は作成時に直ちに実行されます。これにより、結果が必要なときにいつでも実行できるレシピを定義するために、Observable が役立ちます。
 
-* Observable には多くの値があります。Promise は1つです。これは、時間の経過とともに複数の値を取得するのには Observable が有効だということです。
+* Observable は多くの値を提供します。Promise は1つです。これは、時間の経過とともに複数の値を取得するのには Observable が有効だということです。
 
 * Observable は、連鎖とサブスクリプションを区別します。Promise は `.then()` 句しかありません。これにより、作業を実行させることなく、システムの他の部分で使用される複雑な変換レシピを作成するのに便利です。
 
@@ -19,7 +19,7 @@ Observable はしばしば Promise と比較されます。主な違いは次の
 
 ### 作成とサブスクリプション
 
-* Observable は、消費者がサブクエリするまで実行されません。`subscribe()` は定義された振る舞いを一度実行し、再び呼び出すことができます。各サブスクリプションには独自の計算機能があります。再サブスクリプションによって値の再計算が行われます。
+* Observable は、消費者が購読するまで実行されません。`subscribe()` は定義された振る舞いを一度実行し、再び呼び出すことができます。各サブスクリプションには独自の計算機能があります。再購読によって値の再計算が行われます。
 
 <code-example hideCopy>
 // declare a publishing operation
@@ -30,7 +30,7 @@ observable.subscribe(() => {
     });
 </code-example>
 
-* Promise はすぐに、一度だけ実行されます。結果の計算は Promise が作成されたときに開始されます。作業を再開する方法はありません。 すべての `then` 節 (サブスクリプション) は同じ計算を共有します。
+* Promise はすぐに、一度だけ実行されます。結果の計算は Promise が作成されたときに開始されます。作業を再開する方法はありません。 すべての `then` 句 (サブスクリプション) は同じ計算を共有します。
 
 <code-example hideCopy>
 // initiate execution
@@ -66,7 +66,7 @@ sub.unsubscribe();
 
 ### エラーハンドリング
 
-* Observable の実行エラーはサブスクライバーのエラーハンドラに渡され、サブスクライバーは Observable から自動的にサブスクライブを解除します。
+* Observable の実行エラーはサブスクライバーのエラーハンドラーに渡され、サブスクライバーは Observable から自動的にサブスクライブを解除します。
 
 <code-example hideCopy>
 obs.subscribe(() => {
@@ -136,11 +136,11 @@ promise.then(() => {
 
 ## events API と Observable の比較
 
-Observable は events API を使用するイベントハンドラと非常によく似ています。どちらの手法も通知ハンドラを定義し、それらを使用して複数の値を処理します。Observable を登録することは、イベントリスナーを追加することと同じです。重要な違いの1つは、イベントをハンドラに渡す前に、イベントを変換する Observable を構成できることです。
+Observable は events API を使用するイベントハンドラーと非常によく似ています。どちらの手法も通知ハンドラを定義し、それらを使用して複数の値を処理します。Observable を登録することは、イベントリスナーを追加することと同じです。重要な違いの1つは、イベントをハンドラに渡す前に、イベントを変換する Observable を構成できることです。
 
 Observable を使用してイベントや非同期操作を処理すると、HTTP リクエストなどのコンテキストの一貫性が向上するという利点があります。
 
-bservable と events API を使用して同じ種類の操作を定義する方法を示すコードサンプルをいくつか示します。
+Observable と events API を使用して同じ種類の操作を定義する方法を示すコードサンプルをいくつか示します。
 
 <table>
   <tr>
@@ -185,7 +185,7 @@ button.removeEventListener(‘click’, handler);
     </td>
   </tr>
   <tr>
-    <td>構成</td>
+    <td>設定</td>
     <td>Listen for keystrokes, but provide a stream representing the value in the input.
 <pre>fromEvent(inputEl, 'keydown').pipe(
   map(e => e.target.value)
@@ -203,7 +203,7 @@ button.removeEventListener(‘click’, handler);
 
 ## Observable と 配列の比較
 
-Observable は時間とともに値を生成します。配列は静的な値のセットとして作成されます。ある意味では、Observable は配列が同期しているところでは非同期です。次の例では、➞非同期の値の配信を意味します。
+Observable は時間とともに値を生成します。配列は静的な値のセットとして作成されます。ある意味では、配列が同期であるところで Observable は非同期です。次の例では、➞ は非同期の値の配信を意味します。
 
 <table>
   <tr>

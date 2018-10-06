@@ -2,9 +2,9 @@
 
 observable が特に便利な分野の例をいくつか紹介します。
 
-## サジェスト
+## 事前サジェスト
 
-Observableは、サジェストの実装を簡素化できます。一般的に、事前入力は一連の別々のタスクを実行する必要があります。
+Observableは、事前サジェストの実装を簡素化できます。一般的に、事前入力は一連の別々のタスクを実行する必要があります。
 
 * 入力からデータを待ち受ける。
 * 値をトリム (空白を削除) し、最短であることを確認する。
@@ -14,7 +14,7 @@ Observableは、サジェストの実装を簡素化できます。一般的に�
 
 これらすべてを JavaScript で書くとかなり複雑になる可能性があります。Observableでは、簡単な一連の RxJS 演算子を使用できます。
 
-<code-example path="practical-observable-usage/src/typeahead.ts" title="サジェスト"></code-example>
+<code-example path="practical-observable-usage/src/typeahead.ts" title="事前サジェスト"></code-example>
 
 ## 指数関数的バックオフ
 

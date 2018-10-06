@@ -1,23 +1,23 @@
-# Practical observable usage
+# 実用的な observable の使用法
 
-Here are some examples of domains in which observables are particularly useful.
+observable が特に便利な分野の例をいくつか紹介します。
 
-## Type-ahead suggestions
+## 事前サジェスト
 
-Observables can simplify the implementation of type-ahead suggestions. Typically, a type-ahead has to do a series of separate tasks:
+Observableは、事前サジェストの実装を簡素化できます。一般的に、事前入力は一連の別々のタスクを実行する必要があります。
 
-* Listen for data from an input.
-* Trim the value (remove whitespace) and make sure it’s a minimum length.
-* Debounce (so as not to send off API requests for every keystroke, but instead wait for a break in keystrokes).
-* Don’t send a request if the value stays the same (rapidly hit a character, then backspace, for instance).
-* Cancel ongoing AJAX requests if their results will be invalidated by the updated results.
+* 入力からデータを待ち受ける。
+* 値をトリム (空白を削除) し、最短であることを確認する。
+* デバウンス (すべてのキーストロークに対して API リクエストを送信しないようにする代わりに、キーストロークの中断を待つ)。
+* 値が同じままであれば、リクエストを送信しない (たとえば、文字を急に打ち、次にバックスペースなど)。
+* 更新された結果によって元の結果が無効になる場合、進行中の AJAX リクエストをキャンセルする。
 
-Writing this in full JavaScript can be quite involved. With observables, you can use a simple series of RxJS operators:
+これらすべてを JavaScript で書くとかなり複雑になる可能性があります。Observableでは、簡単な一連の RxJS 演算子を使用できます。
 
-<code-example path="practical-observable-usage/src/typeahead.ts" title="Typeahead"></code-example>
+<code-example path="practical-observable-usage/src/typeahead.ts" title="事前サジェスト"></code-example>
 
-## Exponential backoff
+## 指数関数的バックオフ
 
-Exponential backoff is a technique in which you retry an API after failure, making the time in between retries longer after each consecutive failure, with a maximum number of retries after which the request is considered to have failed. This can be quite complex to implement with promises and other methods of tracking AJAX calls. With observables, it is very easy:
+指数関数的バックオフは失敗後に API をリトライし、連続した各失敗の後のリトライの間隔を長くし、リクエストが失敗したと見なされる最大回数でリトライする方法です。これは Promise や AJAX 呼び出しを追跡する他の方法で実装するのは非常に複雑なことがあります。Observable では、非常に簡単です：
 
-<code-example path="practical-observable-usage/src/backoff.ts" title="Exponential backoff"></code-example>
+<code-example path="practical-observable-usage/src/backoff.ts" title="指数関数的バックオフ"></code-example>

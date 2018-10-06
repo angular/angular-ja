@@ -298,8 +298,9 @@
             },
             {
               "url": "guide/practical-observable-usage",
-              "title": "Practical Usage",
-              "tooltip": ""
+              "title": "実用的な使用法",
+              "tooltip": "",
+              "translated": true
             },
             {
               "url": "guide/comparing-observables",

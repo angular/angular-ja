@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: angular/ngcontainer:0.4.0
+      - image: angular/ngcontainer:latest
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images

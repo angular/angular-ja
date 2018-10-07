@@ -304,8 +304,9 @@
             },
             {
               "url": "guide/comparing-observables",
-              "title": "Compare to Other Techniques",
-              "tooltip": ""
+              "title": "他の技術との比較",
+              "tooltip": "",
+              "translated": true
             }
           ]
         },

@@ -19,6 +19,19 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 </code-example>
 
 このコマンドは `HeroDetailComponent` ファイルの雛形を生成して、`AppModule` でこのコンポーネントを宣言します。
+このコマンドは次の雛形を生成します:
+
+* `src/app/hero-detail` ディレクトリの作成
+
+このディレクトリの中に4つのファイルを生成します:
+
+* コンポーネントスタイルのためのCSSファイル
+* AコンポーネントテンプレートのためのHTMLファイル
+* `HeroDetailComponent` と名付けられたコンポーネントクラスのTypeScriptファイル
+* `HeroDetailComponent` クラスのテストファイル
+
+また、このコマンドは `src/app/app.module.ts` ファイルの `@NgModule` デコレーター中に。 `declarations` として `HeroDetailComponent` を追加します。
+
 
 ### template を記述する
 

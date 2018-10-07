@@ -164,6 +164,11 @@
               "tooltip": "Learn how to write templates that display data and consume user events with the help of data binding."
             },
             {
+              "url": "guide/user-input",
+              "title": "User Input",
+              "tooltip": "User input triggers DOM events. Angular listens to those events with event bindings that funnel updated values back into your app's components and models."
+            },
+            {
               "url": "guide/lifecycle-hooks",
               "title": "Lifecycle Hooks",
               "tooltip": "Angular calls lifecycle hook methods on directives and components as it creates, changes, and destroys them."
@@ -202,32 +207,18 @@
               "url": "guide/pipes",
               "title": "Pipes",
               "tooltip": "Pipes transform displayed values within a template."
-            },
-            {
-              "url": "guide/animations",
-              "title": "Animations",
-              "tooltip": "A guide to Angular's animation system."
             }
           ]
         },
+
         {
           "title": "Forms",
           "tooltip": "Angular Forms",
           "children": [
             {
-              "url": "guide/user-input",
-              "title": "User Input",
-              "tooltip": "User input triggers DOM events. We listen to those events with event bindings that funnel updated values back into our components and models."
-            },
-            {
-              "url": "guide/forms",
-              "title": "Template-driven Forms",
+              "url": "guide/forms-overview",
+              "title": "Forms Overview",
               "tooltip": "A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors."
-            },
-            {
-              "url": "guide/form-validation",
-              "title": "Form Validation",
-              "tooltip": "Validate user's form entries."
             },
             {
               "url": "guide/reactive-forms",
@@ -235,8 +226,18 @@
               "tooltip": "Create a reactive form using FormBuilder, groups, and arrays."
             },
             {
+              "url": "guide/forms",
+              "title": "Template-driven Forms",
+              "tooltip": "Create a template-driven form using directives and Angular template syntax."
+            },
+            {
+              "url": "guide/form-validation",
+              "title": "Form Validation",
+              "tooltip": "Validate user's form entries."
+            },
+            {
               "url": "guide/dynamic-form",
-              "title": "Dynamic forms",
+              "title": "Dynamic Forms",
               "tooltip": "Render dynamic forms with FormGroup."
             }
           ]
@@ -387,6 +388,38 @@
           "title": "Routing & Navigation",
           "tooltip": "Discover the basics of screen navigation with the Angular Router."
         },
+        {
+          "title": "Animations",
+          "tooltip": "A guide to Angular's animation system.",
+          "children": [
+            {
+              "url": "guide/animations",
+              "title": "Introduction",
+              "tooltip": "Basic techniques in Angular animations."
+            },
+            {
+              "url": "guide/transition-and-triggers",
+              "title": "Transition and Triggers",
+              "tooltip": "Advanced techniques in transition and triggers."
+            },
+            {
+              "url": "guide/complex-animation-sequences",
+              "title": "Complex Sequences",
+              "tooltip": "Complex Angular animation sequences."
+            },
+            {
+              "url": "guide/reusable-animations",
+              "title": "Reusable Animations",
+              "tooltip": "Creating reusable animations."
+            },
+            {
+              "url": "guide/route-animations",
+              "title": "Route Transition Animations",
+              "tooltip": "Animate route transitions."
+            }
+          ]
+        },
+
         {
           "url": "guide/testing",
           "title": "Testing",

@@ -46,6 +46,6 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 ## リアクティブフォーム
 
-リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティをサブスクライブすることは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
+リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティを購読することは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
 
 <code-example path="observables-in-angular/src/main.ts" title="リアクティブフォーム" region="forms"></code-example>

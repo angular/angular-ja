@@ -110,7 +110,7 @@ ng serve
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (imports)" region="imports"></code-example>
 
-次に、マウスの出入りに応答する2つのイベントハンドラを追加します。個々のイベントハンドラは、`HostListener`デコレーターによって装飾されます。
+次に、マウスの出入りに応答する2つのイベントハンドラーを追加します。個々のイベントハンドラーは、`HostListener`デコレーターによって装飾されます。
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" linenums="false" title="src/app/highlight.directive.ts (mouse-methods)" region="mouse-methods"></code-example>
 
@@ -126,7 +126,7 @@ ng serve
 
 </div>
 
-ハンドラは、ホストのDOM要素である`el`の色を設定するヘルパーメソッドに委譲します。
+ハンドラーは、ホストのDOM要素である`el`の色を設定するヘルパーメソッドに委譲します。
 
 ヘルパーメソッドである`highlight`がコンストラクターから抽出されました。
 改訂されたコンストラクターは、単に注入された`el: ElementRef`を宣言します。

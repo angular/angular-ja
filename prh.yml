@@ -53,6 +53,9 @@ rules:
 
   - expected: 静的な
     pattern: staticな
+
+  - expected: 購読する
+    pattern: サブスクライブする
   
   - expected: ため
     pattern: /(行|作)?為(?!替)/
@@ -107,6 +110,12 @@ rules:
 
   - expected: トリガー
     pattern: /トリガ(?!ー)/
+  
+  - expected: ハンドラー
+    pattern: /ハンドラ(?!ー)/
+
+  - expected: リスナー
+    pattern: /リスナ(?!ー)/
 
   - expected: クオート
     pattern: クォート

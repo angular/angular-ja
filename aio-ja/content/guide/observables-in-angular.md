@@ -34,6 +34,8 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 <code-example path="observables-in-angular/src/main.ts" title="非同期パイプの使用" region="pipe"></code-example>
 
+{@a router}
+
 ## ルーター
 
 [`Router.events`](https://angular.io/api/router/Router#events) は Observable としてイベントを提供します。RxJS の `filter()` オペレーターを使用して目的のイベントを検索し、それらのイベントをサブスクライブして、ナビゲーションプロセスの一連のイベントに基づいて決定することができます。ここに例があります：

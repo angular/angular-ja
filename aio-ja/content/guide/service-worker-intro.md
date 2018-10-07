@@ -1,6 +1,6 @@
 # Angular Service Worker イントロダクション
 
-Service Workerは、従来のWebデプロイメントモデルを強化し、ネイティブにインストールされたコードと同等の信頼性とパフォーマンスでユーザー体験できるようにアプリケーションを補強します。
+Service Workerは、従来のWebデプロイメントモデルを強化し、ネイティブにインストールされたコードと同等の信頼性とパフォーマンスでユーザー体験できるようにアプリケーションを補強します。AngularアプリケーションへのService Workerの追加は、アプリケーションを [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) (PWAとしても知られます) に変えるためのステップのひとつです。
 
 簡潔にいうと、Service Workerは、Webブラウザで実行され、アプリケーションのキャッシュを管理するスクリプトのことです。
 

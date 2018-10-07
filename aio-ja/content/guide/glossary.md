@@ -77,7 +77,7 @@ A way to initialize and launch an app or system.
 
 In Angular, an app's root NgModule (`AppModule`) has a `bootstrap` property that identifies the app's top-level [components](guide/glossary#component). 
 During the bootstrap process, Angular creates and inserts these components into the `index.html` host web page.
-You can bootstrap multiple apps in the same `index.html`. Each app ccontains its own components.
+You can bootstrap multiple apps in the same `index.html`. Each app contains its own components.
 
 Learn more in [Bootstrapping](guide/bootstrapping).
 
@@ -132,7 +132,7 @@ A [decorator](guide/glossary#decorator) statement immediately before a field in 
 
 The [Angular CLI](https://cli.angular.io/) is a command-line tool for managing the Angular development cycle. Use it to create the initial filesystem scaffolding for a [workspace](guide/glossary#workspace) or [project](guide/glossary#project), and to run [schematics](guide/glossary#schematic) that add and modify code for initial generic versions of various elements. The CLI supports all stages of the development cycle, including building, testing, bundling, and deployment.
 
-* To begin using the CLI for a new project, see [QuickStart](guide/quickstart).
+* To begin using the CLI for a new project, see [Getting Started](guide/quickstart).
 * To learn more about the full capabilities of the CLI, see the [Angular CLI documentation](https://github.com/angular/angular-cli/wiki).
 
 {@a component}

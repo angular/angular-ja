@@ -1,4 +1,4 @@
-# クイックスタート
+# 入門
 
 よいツールは、あなたが手作業ですべてをやるよりも
 アプリケーションの開発を素早く、そして保守を簡単にします。
@@ -125,7 +125,7 @@ CLIがあなたのためにひとつ目のコンポーネントを作成して�
 
 
 <figure>
-  <img src='generated/images/guide/cli-quickstart/my-first-app.png' alt="クイックスタートアプリの表示結果">
+  <img src='generated/images/guide/cli-quickstart/my-first-app.png' alt="入門アプリの表示結果">
 </figure>
 
 見た目がよくなりましたね！

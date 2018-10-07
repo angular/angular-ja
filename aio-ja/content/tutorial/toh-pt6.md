@@ -63,7 +63,7 @@ _npm_から*インメモリWeb API*をインストールします。
 </code-example>
 
 `HttpClientInMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
-&mdash;_`HttpClient`をインポートしたあとに_&mdash;
+&mdash;_`HttpClientModule`をインポートしたあとに_&mdash;
 さらにそれを`InMemoryDataService`で設定します。
 
 <code-example   
@@ -109,7 +109,9 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
   region="log" >
 </code-example>
 
-`heroesUrl`をサーバー上のヒーローリソースのアドレスで定義します。
+サーバー上のヒーローリソースのアドレスで`:base/:collectionName`の形式の `heroesUrl` を定義します。
+ここで `base` はリクエストが行われるリソースであり、
+`collectionName` は `in-memory-data-service.ts`のヒーローデータオブジェクトです。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
@@ -231,7 +233,9 @@ _error handler_関数を`catchError`に返します。
 
 ### IDでヒーローを取得する
 
-ほとんどのWeb APIは `api/hero/:id` (`api/hero/11`のような) 形式のリクエストで_IDにより取得する_ことをサポートしています。
+ほとんどのWeb APIは、 `：baseURL/:id`の形式で_idによる取得する_リクエストをサポートしています。
+
+ここで_base URL_は[Heroes and HTTP](http://localhost:4800/tutorial/toh-pt6＃heroes-and-http)セクションで定義された `heroesURL` （`api/heroes`）であり、 _id_ は取得したいヒーローの番号です。たとえば、 `api/heroes/11` のようになります。
 
 `HeroService.getHero()`メソッドを追加して、そのようなリクエストができるようにしましょう:
 
@@ -594,6 +598,16 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
   <code-pane 
     title="hero-detail/hero-detail.component.ts" 
     path="toh-pt6/src/app/hero-detail/hero-detail.component.ts">
+  </code-pane>
+</code-tabs>
+
+{@a dashboardcomponent}
+#### _DashboardComponent_
+
+<code-tabs>
+  <code-pane 
+    title="src/app/dashboard/dashboard.component.html"
+    path="toh-pt6/src/app/dashboard/dashboard.component.html">
   </code-pane>
 </code-tabs>
 

@@ -184,6 +184,12 @@
               "tooltip": "Learn how to write templates that display data and consume user events with the help of data binding."
             },
             {
+              "url": "guide/user-input",
+              "title": "ユーザー入力",
+              "tooltip": "ユーザー入力はDOMイベントを発火します。イベントバインディングを使用してこれらのイベントをリッスンし、更新された値をコンポーネントとモデルに戻します。",
+              "translated": true
+            },
+            {
               "url": "guide/lifecycle-hooks",
               "title": "ライフサイクル・フック",
               "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
@@ -229,41 +235,35 @@
               "title": "パイプ",
               "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
               "translated": true
-            },
-            {
-              "url": "guide/animations",
-              "title": "アニメーション",
-              "tooltip": "Angularのアニメーションシステムについて",
-              "translated": true
             }
           ]
         },
+
         {
           "title": "フォーム",
           "tooltip": "Angularのフォーム",
           "children": [
             {
-              "url": "guide/user-input",
-              "title": "ユーザー入力",
-              "tooltip": "ユーザー入力はDOMイベントを発火します。イベントバインディングを使用してこれらのイベントをリッスンし、更新された値をコンポーネントとモデルに戻します。",
+              "url": "guide/forms-overview",
+              "title": "Forms Overview",
+              "tooltip": "A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors."
+            },
+            {
+              "url": "guide/reactive-forms",
+              "title": "リアクティブフォーム",
+              "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
               "translated": true
             },
             {
               "url": "guide/forms",
               "title": "テンプレート駆動フォーム",
-              "tooltip": "フォームは、密接で効果的で説得力のあるデータ入力体験を作り出します。 Angularフォームは、データバインドされたユーザーコントロールのセットを調整し、変更を追跡し、入力を検証し、エラーを表示します。",
+              "tooltip": "ディレクティブとAngularテンプレート構文を使用して、テンプレート駆動フォームを作成しましょう",
               "translated": true
             },
             {
               "url": "guide/form-validation",
               "title": "フォームバリデーション",
               "tooltip": "ユーザーのフォーム入力を検証しましょう。",
-              "translated": true
-            },
-            {
-              "url": "guide/reactive-forms",
-              "title": "リアクティブフォーム",
-              "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
               "translated": true
             },
             {
@@ -437,6 +437,38 @@
           "url": "guide/router",
           "title": "Routing & Navigation",
           "tooltip": "Discover the basics of screen navigation with the Angular Router."
+        },
+        {
+          "title": "アニメーション",
+          "tooltip": "Angularのアニメーションシステムのガイド",
+          "children": [
+            {
+              "url": "guide/animations",
+              "title": "イントロダクション",
+              "tooltip": "Angularアニメーションの基本的なテクニック",
+              "translated": false
+            },
+            {
+              "url": "guide/transition-and-triggers",
+              "title": "Transition and Triggers",
+              "tooltip": "Advanced techniques in transition and triggers."
+            },
+            {
+              "url": "guide/complex-animation-sequences",
+              "title": "Complex Sequences",
+              "tooltip": "Complex Angular animation sequences."
+            },
+            {
+              "url": "guide/reusable-animations",
+              "title": "Reusable Animations",
+              "tooltip": "Creating reusable animations."
+            },
+            {
+              "url": "guide/route-animations",
+              "title": "Route Transition Animations",
+              "tooltip": "Animate route transitions."
+            }
+          ]
         },
         {
           "url": "guide/testing",

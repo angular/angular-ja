@@ -324,7 +324,7 @@ _npm_ パッケージマネージャーは、それ自身が _Node.js_ アプリ
 ほぼすべてのドキュメントページ上のリンクが完成されたサンプルをブラウザに表示します。
 サンプルコードで遊ぶこともできますし、改修したものを友達とシェアできますし、ダウンロードしてマシン上で実行することもできます。
 
-[クイックスタート](guide/quickstart "Angularクイックスタートプレイグラウンド")は`AppComponent`ファイルしか示しません。
+[入門](guide/quickstart "Angularクイックスタートプレイグラウンド")は`AppComponent`ファイルしか示しません。
 それは_プレイグラウンドだけのために_`app.module.ts`と`main.ts`に等しいものを作ります。
 なので、読み手は注意散漫にならずにAngularについて知ることができます。
 他のサンプルはクイックスタートのシードにもとづいています。
@@ -354,3 +354,26 @@ windowsではデフォルトではアプリケーションは6つの接続しか
 なので、IEが手動または`ng serve`によって自動的にリフレッシュされると、たまに、websocketが適切に切断されず、
 websocketの接続が限度を超えると、`SecurityError`が投げられます。このエラーはAngularアプリケーションに影響しません。
 このエラーをクリアするためにはIEを再起動するか、またはwindowsのレジストリを書き換えて限度数を更新します。
+
+{@a appendix-test-using-fakeasyncasync}
+
+## 付録: `fakeAsync()/async()` を使ったテスト
+
+もしユニットテストを実行するために `fakeAsync()/async()` ヘルパー関数を使う場合 （詳細は[テスティングガイド](guide/testing#async-test-with-fakeasync)を参照してください。) は、`zone.js/dist/zone-testing` をテストのセットアップファイルでインポートしなければなりません。
+
+<div class="alert is-important">
+もし Angular CLIを使ってプロジェクトを作っていれば、すでに `src/text.ts` の中でインポートされています。
+</div>
+
+そしてAngularの古いバージョンでは、次のファイルがインポートされるか、HTMLファイルに追加されていました。
+
+```
+import 'zone.js/dist/long-stack-trace-zone';
+import 'zone.js/dist/proxy';
+import 'zone.js/dist/sync-test';
+import 'zone.js/dist/jasmine-patch';
+import 'zone.js/dist/async-test';
+import 'zone.js/dist/fake-async-test';
+```
+
+これらを個別に読み込むこともまだできますが、しかしその順序が重要であり、 `proxy` は `sync-test`や`async-test`、`fake-async-test`、`jasmine-patch`の前に読み込まなければなりません。そしてまた　`sync-test` は `jasmine-patch`の前にインポートする必要があります。なので、個別に読み込むよりも `zone-testing` だけを読み込むことを推奨します。

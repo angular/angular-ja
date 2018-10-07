@@ -104,7 +104,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 </tr>
 <tr>
   <td>Firefox</td>
-  <td><code>dom.webcomponents.enabled</code> と <code>dom.webcomponents.customelements.enabled</code> の設定項目を true に設定してください。バージョン 60/61 にてデフォルトで使えるようになる予定です。</td>
+  <td><code>dom.webcomponents.enabled</code> と <code>dom.webcomponents.customelements.enabled</code> の設定項目を true に設定してください。バージョン 63 にてデフォルトで使えるようになる予定です。</td>
 </tr>
 <tr>
   <td>Edge</td>

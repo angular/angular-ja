@@ -1051,8 +1051,11 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 テストは_非同期_に行う必要があります。
 
 {@a fake-async}
+{@a async-test-with-fakeasync}
 
 #### _fakeAsync()_を使用した非同期テスト
+
+`fakeAsync()`機能を使うためには、 `zone-testing`をインポートする必要があります。詳細は[セットアップガイド](guide/setup#appendix-test-using-fakeasyncasync)を参照してください。
 
 次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
 
@@ -1080,12 +1083,55 @@ fakeAsync(() => { /* test body */ })`
 `tick()`を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
 このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
+`tick()` 関数はパラメーターとしてミリ秒を受け取ります（指定されていない場合はデフォルトで0になります）。このパラメーターは、仮想クロックの進捗状況を表します。たとえば、 `fakeAsync()` テスト中に `setTimeout(fn, 100)` がある場合は、 tick(100) を使用してfnコールバックをトリガーする必要があります。
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-tick">
+</code-example>
+
 `tick`関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
-これは`fakeAsync`と対になっており、`fakeAsync`本体内でのみ呼び出すことができます。
+これは`fakeAsync()`と対になっており、`fakeAsync()`の内部でのみ呼び出すことができます。
+
+#### fakeAsync() 内部での日時の比較
+
+`fakeAsync()` は、 `fakeAsync()`の中の日付の差を計算できるようにするため、時間の流れをシミュレートします。
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-date">
+</code-example>
+
+#### jasmine.clock と fakeAsync()
+
+Jasmineも日付をシミュレートするための `clock` 機能を提供しています。`jasmine.clock().install()` が呼び出されてから`jasmine.clock().uninstall()`が呼び出されるまで、Angularは自動的に`fakeAsync()` の中でテストを実行します。
+`fakeAsync()`は必要なく、ネストされていればエラーを投げます。
+
+デフォルトではこの機能は無効化されています。有効にするには、 `zone-testing` をインポートするまえにグローバグフラグをセットしてください。
+
+Angular CLIを使う場合は、 `src/test.ts` の中でこのフラグを設定してください。
+
+```
+(window as any)['__zone_symbol__fakeAsyncPatchLock'] = true;
+import 'zone.js/dist/zone-testing';
+```
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-clock">
+</code-example>
+
+#### fakeAsync() の中でのRxJSスケジューラーの使用
+
+`setTimeout()` や `setInterval()` を使うのと同じように `fakeAsync()` の中でRxJSスケジューラを使うこともできますが、RxJSスケジューラにパッチを当てるには `zone.js/dist/zone-patch-rxjs-fake-async` をインポートする必要があります。
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-rxjs">
+</code-example>
 
 #### より多くのmacroTasksをサポートする
 
-デフォルトでは`fakeAsync`は次の`macroTask`をサポートします。
+デフォルトでは`fakeAsync()`は次の`macroTask`をサポートします。
 
 - setTimeout
 - setInterval
@@ -1203,6 +1249,8 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 #### _async()_を使用した非同期テスト
 
+`async()`機能を使うためには、 `zone-testing`をインポートする必要があります。詳細は[セットアップガイド](guide/setup#appendix-test-using-fakeasyncasync)を参照してください。
+
 `fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
 特に、テスト本体が`XHR`呼び出しを行う場合は動作しません。
 
@@ -1226,11 +1274,13 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 `async()`ユーティリティは、
 テスターのコードを特別な_asyncテストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。
-Jasmineの`done()`をテストに渡す必要はなく、
+Jasmineの`done()`は `undefined` なのでテストに渡す必要はなく、
 PromiseやObservableのコールバック内で`done()`を呼び出す必要はありません。
 
 しかし、テストの非同期性は`fixture.whenStable()`の呼び出しによって明示的になります。
 これは制御の線形的なフローを壊します。
+
+`async()` の中で `setInterval()` などの `intervalTimer()` を使用する場合は、テスト後に `clearInterval()` を使用してタイマーをキャンセルする必要があります。それ以外の場合は、 `async()` は終了しません。
 
 {@a when-stable}
 
@@ -1250,18 +1300,18 @@ JavaScriptエンジンのタスクキューが空になったときに解決す�
 
 #### Jasmineの _done()_
 
-`async`関数と
-`fakeAsync`関数はAngular非同期テストを大幅に簡素化しますが、
+`async()`関数と
+`fakeAsync()`関数はAngular非同期テストを大幅に簡素化しますが、
 伝統的なテクニックに立ち戻って、
 [`done`コールバック](http://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support)
 を受け取る関数を`it`に渡すことができます。
 
+`done パラメーター` が `undefined` なので、 `async()` や `fakeAsync()` の中で `done()` を呼び出すことはできません。
+
 さて、あなたはPromiseをチェーンさせ、エラーを処理し、適切な時に`done()`を呼び出す責任があります。
 
-`done()`を使用してテスト関数を書くことは、`async`と`fakeAsync`よりも面倒です。
-しかし時折必要です。
-たとえば、`intervalTimer()`やRxJSの`delay()`演算子を含むコードをテストするときは、
-`async`または`fakeAsync`を呼び出すことはできません。
+`done()`を使用してテスト関数を書くことは、`async()`と`fakeAsync()`よりも面倒です。
+しかしコードが `intervalTimer()` や `setInterval` を含むときには時折必要です。
 
 次は、さきほどの2つのバージョンのテストを`done()`を使用して書いたものです。
 最初の1つは、コンポーネントの`quote`プロパティによってテンプレートに公開された`Observable`をサブスクライブします。
@@ -2124,7 +2174,6 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 
 {@a compile-components}
 ### _compileComponents()_ を呼び出す
-
 <div class="alert is-helpful">
 
 CLIから`ng test`コマンドを使用してテストを実行する_だけ_な場合、
@@ -2688,7 +2737,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      `fakeAsync`テストが保留中のタイマーイベント_タスク_（キューされた`setTimeOut`および`setInterval`コールバック）を持ったまま終了すると、
+      `fakeAsync()`テストが保留中のタイマーイベント_タスク_（キューされた`setTimeOut`および`setInterval`コールバック）を持ったまま終了すると、
       テストは失敗し、明確なエラーメッセージが表示されます。
 
       一般に、テストはキューにタスクが入っていない状態で終了する必要があります。
@@ -2705,7 +2754,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      `fakeAsync`テストが未解決のPromiseなどの保留中の_マイクロタスク_を持ったまま終了すると、
+      `fakeAsync()`テストが未解決のPromiseなどの保留中の_マイクロタスク_を持ったまま終了すると、
       テストは失敗し、明確なエラーメッセージが表示されます。
 
       一般に、テストはマイクロタスクが完了するのを待つべきです。

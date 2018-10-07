@@ -47,13 +47,12 @@ CLIプロジェクトはAngular Service Workerを使用するように設定さ�
 
 ### `http-server`を供給する
 
-`ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らすために、専用ポートでテストしてください。
+`ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らし、古いコンテンツを配信することを避けるために、専用ポートでテストし、キャッシュを無効化してください。
 
-`http-server`で供給するために、Webファイルが入っているディレクトリに移動し、Webサーバーを起動してください。
+`http-server`でwebファイルを含むディレクトリを配信するために、次のコマンドを実行してください。
 
 ```sh
-cd dist/*project-name*
-http-server -p 8080
+http-server -p 8080 -c-1 dist/<project-name>
 ```
 
 ### 最初の読み込み
@@ -121,8 +120,7 @@ Service Workerがアプリケーションをキャッシュする方法を見て
 
 ```sh
 ng build --prod
-cd dist
-http-server -p 8080
+http-server -p 8080 -c-1 dist/<project-name>
 ```
 
 ### ブラウザでアプリケーションを更新する

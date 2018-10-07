@@ -27,9 +27,9 @@ title="src/app/mock-heroes.ts">
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes" title="src/app/heroes/heroes.component.ts (import HEROES)">
 </code-example>
 
-これらのヒーローをバインディングするために、ヒーローを公開するクラスに `heroes` プロパティを追加してください。
+同じファイル（`HeroesComponent`クラス）で、`heroes`という名前のコンポーネントプロパティを定義して、バインディングのために `HEROES` 配列を公開してください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="heroes">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="component">
 </code-example>
 
 ### _*ngFor_ でヒーローを一覧表示する

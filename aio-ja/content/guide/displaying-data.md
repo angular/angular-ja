@@ -29,7 +29,7 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 補間によってプロパティ名をバインドすることです。
 補間では、プロパティ名をビューテンプレートに入れ、二重中括弧で囲みます： `{{myHero}}`
 
-[クイックスタート](guide/quickstart)の説明のとおりに、<code>displaying-data</code>
+[入門](guide/quickstart)の説明のとおりに、<code>displaying-data</code>
 という名前の新しいプロジェクトを作成します。
 
 <code>app.component.html</code>ファイルを削除します。この例では必要ありません。

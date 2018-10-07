@@ -1051,6 +1051,7 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 テストは_非同期_に行う必要があります。
 
 {@a fake-async}
+{@a async-test-with-fakeasync}
 
 #### _fakeAsync()_を使用した非同期テスト
 

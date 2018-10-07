@@ -365,7 +365,7 @@ websocketの接続が限度を超えると、`SecurityError`が投げられま�
 もし Angular CLIを使ってプロジェクトを作っていれば、すでに `src/text.ts` の中でインポートされています。
 </div>
 
-そしてAngularの古いバージョンでは、以下のファイルがインポートされるか、HTMLファイルに追加されていました。
+そしてAngularの古いバージョンでは、次のファイルがインポートされるか、HTMLファイルに追加されていました。
 
 ```
 import 'zone.js/dist/long-stack-trace-zone';

@@ -49,7 +49,7 @@ CLIプロジェクトはAngular Service Workerを使用するように設定さ�
 
 `ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らし、古いコンテンツを配信することを避けるために、専用ポートでテストし、キャッシュを無効化してください。
 
-`http-server`でwebファイルを含むディレクトリを配信するために、以下のコマンドを実行してください。
+`http-server`でwebファイルを含むディレクトリを配信するために、次のコマンドを実行してください。
 
 ```sh
 http-server -p 8080 -c-1 dist/<project-name>

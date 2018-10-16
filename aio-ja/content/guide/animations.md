@@ -330,5 +330,5 @@ Angularアニメーションの高度な機能については、アニメーシ�
 
 <div class="alert is-helpful">
 
-完全なアニメーションの[デモ](http://animationsftw.in/#/)と[プレゼンテーション](https://www.youtube.com/watch?v=JhNo3Wvj6UQ&feature=youtu.be&t=2h47m53s)を参照してください。これは2017年11月のAngularConnect会議で発表されたものです。
+完全なアニメーションの[デモ](http://animationsftw.in/#/)と[プレゼンテーション](https://www.youtube.com/watch?v=JhNo3Wvj6UQ&feature=youtu.be&t=2h47m53s)を参照してください。これは2017年11月のAngularConnectカンファレンスで発表されたものです。
 </div>

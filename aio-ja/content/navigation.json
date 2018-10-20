@@ -446,7 +446,7 @@
               "url": "guide/animations",
               "title": "イントロダクション",
               "tooltip": "Angularアニメーションの基本的なテクニック",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/transition-and-triggers",

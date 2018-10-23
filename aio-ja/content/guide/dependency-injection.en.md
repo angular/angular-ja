@@ -1,22 +1,22 @@
-# Angular の依存性の注入
+# Dependency Injection in Angular 
 
-依存性の注入 (DI) は、重要なアプリケーションデザインパターンです。
-Angular には独自の DI フレームワークがあります。これは通常、
-Angular アプリケーションの設計で効率性とモジュール性を向上させるために使用されます。
+Dependency injection (DI), is an important application design pattern.
+Angular has its own DI framework, which is typically 
+used in the design of Angular applications to increase their efficiency and modularity.
 
-依存関係はクラスがその機能を実行するために必要なサービスまたはオブジェクトです。
-DI はクラスがそれ自身を作成するのではなく、外部ソースから依存関係を要求するコーディングパターンです。
+Dependencies are services or objects that a class needs to perform its function.
+DI is a coding pattern in which a class asks for dependencies from external sources rather than creating them itself. 
 
-Angular では、DI フレームワークはそのクラスがインスタンス化されるときに宣言された依存関係をクラスに提供します。このガイドでは DI が Angular でどのように機能するのか、また、DI を使用してアプリケーションを柔軟性、効率性、堅牢性、テスト可能で保守性に優れたものにする方法について説明します。
+In Angular, the DI framework provides declared dependencies to a class when that class is instantiated. This guide explains how DI works in Angular, and how you use it to make your apps flexible, efficient, and robust, as well as testable and maintainable.
 
 <div class="alert-is-helpful">
 
- このガイドに付属のサンプルアプリケーションの <live-example></live-example> を実行できます。
+ You can run the <live-example></live-example> of the sample app that accompanies this guide.
 
 </div>
 
-[The Tour of Heroes](tutorial/) から
-この簡単なバージョンの _heroes_ 機能を確認してください。この単純なバージョンでは DI は使用しません。私たちはそれを変換するために進めていく予定です。
+Start by reviewing this simplified version of the _heroes_ feature
+from the [The Tour of Heroes](tutorial/). This simple version doesn't use DI; we'll walk through converting it to do so.
 
 <code-tabs>
   <code-pane title="src/app/heroes/heroes.component.ts" path="dependency-injection/src/app/heroes/heroes.component.1.ts" region="v1">
@@ -33,40 +33,40 @@ Angular では、DI フレームワークはそのクラスがインスタンス
 
 </code-tabs>
 
-`HeroesComponent` は最上位のヒーローコンポーネントです。
-その唯一の目的は `HeroListComponent`を表示することで、ヒーローの名前のリストを表示します。
+`HeroesComponent` is the top-level heroes component.
+Its only purpose is to display `HeroListComponent`, which displays a list of hero names.
 
-このバージョンの `HeroListComponent` はヒーローを `HEROES` 配列から取得しており、別の `mock-heroes` ファイルで定義されている
-インメモリのコレクションです。
+This version of the `HeroListComponent` gets heroes from the `HEROES` array, an in-memory collection
+defined in a separate `mock-heroes` file.
 
 <code-example title="src/app/heroes/hero-list.component.ts (class)" path="dependency-injection/src/app/heroes/hero-list.component.1.ts" region="class">
 </code-example>
 
-このアプローチはプロトタイプ作成には有効ですが、堅牢ではなく、メンテナンス性もよくありません。
-このコンポーネントをテストしたり、リモートサーバーからヒーローを取得しようとする場合はすぐに、
-あなたは `HeroesListComponent` の実装を変更し、
-`HEROES` モックデータのすべての使用箇所を置き換えなければなりません。
+This approach works for prototyping, but is not robust or maintainable.
+As soon as you try to test this component or get heroes from a remote server,
+you have to change the implementation of `HeroesListComponent` and
+replace every use of the `HEROES` mock data.
 
 
-## 注入可能なサービスの作成と登録
+## Create and register an injectable service
 
-DI フレームワークを使用すると、独自のファイルで定義された注入可能な _サービス_ クラスからコンポーネントにデータを供給できます。 デモンストレーションでは、ヒーローのリストを提供する注入可能なサービスクラスを作成し、そのクラスをそのサービスのプロバイダーとして登録します。
+The DI framework lets you supply data to a component from an injectable _service_ class, defined in its own file. To demonstrate, we'll create an injectable service class that provides a list of heroes, and register that class as a provider of that service.
 
 <div class="alert-is-helpful">
 
-同じファイルに複数のクラスがあると混乱することがあります。通常はコンポーネントとサービスを別々のファイルで定義することをお勧めします。
+Having multiple classes in the same file can be confusing. We generally recommend that you define components and services in separate files.
 
-コンポーネントとサービスを同じファイルでまとめる場合は、
-まずサービスを定義してからコンポーネントを定義することが重要です。サービスの前にコンポーネントを定義すると、実行時に null 参照エラーが発生します。
+If you do combine a component and service in the same file,
+it is important to define the service first, and then the component. If you define the component before the service, you get a run-time null reference error. 
 
-この [ブログ記事](http://blog.thoughtram.io/angular/2015/09/03/forward-references-in-angular-2.html) で説明されているように、`forwardRef()` メソッドを利用して最初にコンポーネントを定義することができます。
+It is possible to define the component first with the help of the `forwardRef()` method as explained in this [blog post](http://blog.thoughtram.io/angular/2015/09/03/forward-references-in-angular-2.html).
 
-前方参照を使用して循環依存関係を解除することもできます。
-[DI Cookbook](guide/dependency-injection-in-action#forwardref) の例を参照してください。
+You can also use forward references to break circular dependencies.
+See an example in the [DI Cookbook](guide/dependency-injection-in-action#forwardref).
 
 </div>
 
-### 注入可能な service クラスの作成
+### Create an injectable service class
 
 The [**Angular CLI**](https://cli.angular.io/) can generate a new `HeroService` class in the `src/app/heroes` folder with this command.
 
@@ -88,7 +88,7 @@ The `@Injectable()` is an essential ingredient in every Angular service definiti
 {@a injector-config}
 {@a bootstrap}
 
-### サービスプロバイダーでインジェクターを設定する
+### Configure an injector with a service provider
 
 The class we have created provides a service. The `@Injectable()` decorator marks it as a service
 that can be injected, but Angular can't actually inject it anywhere until you configure
@@ -141,7 +141,7 @@ Learn more about [where to configure providers](guide/hierarchical-dependency-in
 {@a injector-config} 
 {@a bootstrap}
 
-## サービスの注入
+## Injecting services
 
 In order for `HeroListComponent` to get heroes from `HeroService`, it needs to ask for `HeroService` to be injected, rather than creating it's own `HeroService` instance with `new`.
 
@@ -168,7 +168,7 @@ If you decided to provide `HeroService` in `AppModule`, `HeroListComponent` woul
 {@a singleton-services}
 {@a component-child-injectors}
 
-### インジェクター階層とサービスインスタンス
+### Injector hierarchy and service instances
 
 Services are singletons _within the scope of an injector_. That is, there is at most one instance of a service in a given injector. 
 
@@ -189,7 +189,7 @@ For example, Angular can inject `HeroListComponent` with both the `HeroService` 
 
 {@a testing-the-component}
 
-## 依存関係のあるコンポーネントのテスト
+## Testing components with dependencies
 
 Designing a class with dependency injection makes the class easier to test.
 Listing dependencies as constructor parameters may be all you need to test application parts effectively.
@@ -208,7 +208,7 @@ Learn more in the [Testing](guide/testing) guide.
 
 {@a service-needs-service}
 
-## 他のサービスを必要とするサービス
+## Services that need other services 
 
 Service can have their own dependencies. `HeroService` is very simple and doesn't have any dependencies of its own. Suppose, however, that you want it to report its activities through a logging service. You can apply the same *constructor injection* pattern,
 adding a constructor that takes a `Logger` parameter.
@@ -250,7 +250,7 @@ The `@Injectable()` decorator is the standard decorator for service classes.
 
 {@a injection-token}
 
-### 依存性の注入トークン
+### Dependency injection tokens
 
 When you configure an injector with a provider, you associate that provider with a [DI token](guide/glossary#di-token).
 The injector maintains an internal *token-provider* map that it references when
@@ -276,7 +276,7 @@ Many dependency values are provided by classes, but not all. The expanded *provi
 
 {@a optional}
 
-### オプションの依存関係
+### Optional dependencies
 
 `HeroService` *requires* a logger, but what if it could get by without
 one?
@@ -303,7 +303,7 @@ Learn more about parameter decorators in [Hierarchical Dependency Injectors](gui
 
 </div>
 
-## まとめ
+## Summary
 
 You learned the basics of Angular dependency injection in this page.
 You can register various kinds of providers,

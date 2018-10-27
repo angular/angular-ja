@@ -396,13 +396,14 @@
         ]},
 
         {
-          "title": "Dependency Injection",
-          "tooltip": "Dependency Injection: creating and injecting services",
+          "title": "依存性の注入",
+          "tooltip": "依存性の注入：サービスの作成と注入",
           "children": [
             {
               "url": "guide/dependency-injection",
-              "title": "Dependency Injection",
-              "tooltip": "Angular's dependency injection system creates and delivers dependent services \"just-in-time\"."
+              "title": "依存性の注入",
+              "tooltip": "Angularの依存性の注入システムは、依存するサービスを \"ジャストインタイム\"で作成し、配信します。",
+              "translated": true
             },
             {
               "url": "guide/hierarchical-dependency-injection",

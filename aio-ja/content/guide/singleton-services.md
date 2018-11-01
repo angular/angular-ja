@@ -19,7 +19,7 @@ Angularでシングルトンサービスを作成する方法は2種類ありま
 
 Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
 
-<code-example path="providers/src/app/user.service.0.ts"  title="src/app/user.service.0.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.0.ts" linenums="false"> </code-example>
 
 
 サービスのさらに詳しい情報については
@@ -69,19 +69,19 @@ Angularは`@NgModule.providers`
 次の例では、オプショナルで注入された`UserServiceConfig`がコアの`UserService`を拡張しています。
 `UserServiceConfig`が存在する場合、`UserService`はその設定からユーザー名をセットします。
 
-<code-example path="ngmodules/src/app/core/user.service.ts" region="ctor" title="src/app/core/user.service.ts (constructor)" linenums="false">
+<code-example path="ngmodules/src/app/core/user.service.ts" region="ctor" header="src/app/core/user.service.ts (constructor)" linenums="false">
 
 </code-example>
 
 ここでの`forRoot()`は`UserServiceConfig`オブジェクトを受け取ります:
 
-<code-example path="ngmodules/src/app/core/core.module.ts" region="for-root" title="src/app/core/core.module.ts (forRoot)" linenums="false">
+<code-example path="ngmodules/src/app/core/core.module.ts" region="for-root" header="src/app/core/core.module.ts (forRoot)" linenums="false">
 
 </code-example>
 
 最後に`AppModule`の`imports`配列の中で呼び出します。
 
-<code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" title="src/app/app.module.ts (imports)" linenums="false">
+<code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" header="src/app/app.module.ts (imports)" linenums="false">
 
 </code-example>
 
@@ -99,7 +99,7 @@ Angularは`@NgModule.providers`
 
 遅延ロードするモジュールで`CoreModule`を再インポートすることを防ぎたい場合、次のような`CoreModule`コンストラクターを追加してください。
 
-<code-example path="ngmodules/src/app/core/core.module.ts" region="ctor" title="src/app/core/core.module.ts" linenums="false">
+<code-example path="ngmodules/src/app/core/core.module.ts" region="ctor" header="src/app/core/core.module.ts" linenums="false">
 
 </code-example>
 
@@ -130,11 +130,11 @@ Angularは親インジェクター(今回はルートインジェクターにな
 
 <code-tabs linenums="false">
  <code-pane
-   title="app.module.ts"
+   header="app.module.ts"
    path="ngmodules/src/app/app.module.ts">
  </code-pane>
  <code-pane
-   title="core.module.ts"
+   header="core.module.ts"
    region="whole-core-module"
    path="ngmodules/src/app/core/core.module.ts">
  </code-pane>

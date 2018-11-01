@@ -72,7 +72,7 @@ Angularアプリケーションにはルートモジュールとして機能す�
 これらのAngularモジュールを使用するときは、
 必要に応じて`AppModule`かフィーチャーモジュールにインポートし、
 `@NgModule`の`imports`配列に追加します。
-たとえば、CLIによって生成された基本的なアプリケーションでは、
+たとえば、[Angular CLI](cli)によって生成された基本的なアプリケーションでは、
 `BrowserModule`は`app.module.ts`の`AppModule`のトップに最初のインポートとして登録されています。
 
 

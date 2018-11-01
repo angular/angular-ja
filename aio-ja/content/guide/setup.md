@@ -122,7 +122,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 **クイックスタートシード**にはクイックスタートプレイグラウンドと同じアプリケーションが入っています。
 しかし、このプロジェクトの真の目的は_ローカル_開発環境の確かな基盤を提供することです。
 結果として、マシン上のプロジェクトフォルダには_もっと数多くの_ファイルがあり、
-それらのほとんどは[あとで学ぶ](guide/setup-systemjs-anatomy "セットアップの解剖学")ことができます。
+それらのほとんどは[あとで学ぶ](guide/file-structure)ことができます。
 
 
 
@@ -168,15 +168,15 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 
 <code-tabs>
 
-  <code-pane title="src/app/app.component.ts" path="setup/src/app/app.component.ts">
+  <code-pane header="src/app/app.component.ts" path="setup/src/app/app.component.ts">
 
   </code-pane>
 
-  <code-pane title="src/app/app.module.ts" path="setup/src/app/app.module.ts">
+  <code-pane header="src/app/app.module.ts" path="setup/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="src/main.ts" path="setup/src/main.ts">
+  <code-pane header="src/main.ts" path="setup/src/main.ts">
 
   </code-pane>
 

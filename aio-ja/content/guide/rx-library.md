@@ -14,13 +14,13 @@ RxJS は `Observable` 型の実装を提供します。Observable 型は、型�
 
 RxJS には新しい observables を作成するために使用できるいくつかの関数が用意されています。これらの関数はイベント、タイマー、promise などから observables を作成するプロセスを簡素化できます。たとえば：
 
-<code-example path="rx-library/src/simple-creation.ts" region="promise" title="promise から observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="promise" header="promise から observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="interval" title="カウンターから observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="interval" header="カウンターから observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="event" title="イベントから observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="event" header="イベントから observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="ajax" title="AJAX リクエストから observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.ts" region="ajax" header="AJAX リクエストから observable を作成する"></code-example>
 
 ## オペレーター
 
@@ -28,7 +28,7 @@ RxJS には新しい observables を作成するために使用できるいく�
 
 オペレーターは設定オプションをとり、ソースとなる observable を受け取る関数を返します。この返された関数を実行するとき、オペレーターは observable が出力する値を観測、変換し、変換された値の新しい observable を返します。ここに簡単な例があります：
 
-<code-example path="rx-library/src/operators.ts" title="Map operator"></code-example>
+<code-example path="rx-library/src/operators.ts" header="Map operator"></code-example>
 
 _パイプ_を使用するとオペレーターをリンクすることができます。パイプを使用すると、複数の機能を1つの機能にまとめることができます。`pipe()` 関数は、結合する関数を引数としてとり、実行時に順次関数を実行する新しい関数を返します。
 
@@ -36,11 +36,11 @@ observable に適用されるオペレーターのセットは、レシピ、�
 
 これはその例です:
 
-<code-example path="rx-library/src/operators.1.ts" title="Standalone pipe function"></code-example>
+<code-example path="rx-library/src/operators.1.ts" header="Standalone pipe function"></code-example>
 
 `pipe()` 関数は　RxJS `Observable` のメソッドでもあるので、この短い形式を使って同じ操作を定義します：
 
-<code-example path="rx-library/src/operators.2.ts" title="Observable.pipe function"></code-example>
+<code-example path="rx-library/src/operators.2.ts" header="Observable.pipe function"></code-example>
 
 ### 共通のオペレーター
 
@@ -67,7 +67,7 @@ RxJS は、サブスクリプションで提供する `error()` ハンドラー�
 
 以下は `catchError` オペレーターを使ってこれを行う例です：
 
-<code-example path="rx-library/src/error-handling.ts" title="catchError オペレーター"></code-example>
+<code-example path="rx-library/src/error-handling.ts" header="catchError オペレーター"></code-example>
 
 ### 失敗した observable の再実行
 
@@ -77,7 +77,7 @@ RxJS は、サブスクリプションで提供する `error()` ハンドラー�
 
 次の例はエラーをキャッチする前にリクエストを再試行するために、前の例を変換します。
 
-<code-example path="rx-library/src/retry-on-error.ts" title="retry operator"></code-example>
+<code-example path="rx-library/src/retry-on-error.ts" header="retry operator"></code-example>
 
 <div class="alert is-helpful">
 
@@ -93,4 +93,4 @@ Angular アプリケーションは主に TypeScript で記述されるため、
 
 たとえば:
 
-<code-example path="rx-library/src/naming-convention.ts" title="Naming observables"></code-example>
+<code-example path="rx-library/src/naming-convention.ts" header="Naming observables"></code-example>

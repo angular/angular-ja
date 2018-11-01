@@ -39,11 +39,11 @@
 
 <code-tabs>
 
-  <code-pane title="app.module.ts" path="dynamic-form/src/app/app.module.ts">
+  <code-pane header="app.module.ts" path="dynamic-form/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="main.ts" path="dynamic-form/src/main.ts">
+  <code-pane header="main.ts" path="dynamic-form/src/main.ts">
 
   </code-pane>
 
@@ -61,7 +61,7 @@
 次の`QuestionBase`は基本的な質問のクラスです。
 
 
-<code-example path="dynamic-form/src/app/question-base.ts" title="src/app/question-base.ts">
+<code-example path="dynamic-form/src/app/question-base.ts" header="src/app/question-base.ts">
 
 </code-example>
 
@@ -74,7 +74,7 @@
 `TextboxQuestion`は、`type`プロパティを介してtext、email、urlといった複数のHTML5タイプをサポートしています。
 
 
-<code-example path="dynamic-form/src/app/question-textbox.ts" title="src/app/question-textbox.ts" linenums="false">
+<code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts" linenums="false">
 
 </code-example>
 
@@ -83,7 +83,7 @@
 `DropdownQuestion`は、セレクトボックスに選択肢のリストを表示します。
 
 
-<code-example path="dynamic-form/src/app/question-dropdown.ts" title="src/app/question-dropdown.ts" linenums="false">
+<code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts" linenums="false">
 
 </code-example>
 
@@ -94,7 +94,7 @@
 一言でいえば、フォームグループは質問モデルのメタデータを用いて、デフォルト値とバリデーションルールをセットすることができます。
 
 
-<code-example path="dynamic-form/src/app/question-control.service.ts" title="src/app/question-control.service.ts" linenums="false">
+<code-example path="dynamic-form/src/app/question-control.service.ts" header="src/app/question-control.service.ts" linenums="false">
 
 </code-example>
 
@@ -109,11 +109,11 @@
 
 <code-tabs>
 
-  <code-pane title="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
+  <code-pane header="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
 
   </code-pane>
 
-  <code-pane title="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
+  <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
 
   </code-pane>
 
@@ -128,11 +128,11 @@ DynamicFormQuestionComponentにマッチします。
 
 <code-tabs>
 
-  <code-pane title="dynamic-form-question.component.html" path="dynamic-form/src/app/dynamic-form-question.component.html">
+  <code-pane header="dynamic-form-question.component.html" path="dynamic-form/src/app/dynamic-form-question.component.html">
 
   </code-pane>
 
-  <code-pane title="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts">
+  <code-pane header="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts">
 
   </code-pane>
 
@@ -164,7 +164,7 @@ DynamicFormQuestionComponentにマッチします。
  オブジェクトを追加、更新、削除するというシンプルな作業で済みます。
 
 
-<code-example path="dynamic-form/src/app/question.service.ts" title="src/app/question.service.ts">
+<code-example path="dynamic-form/src/app/question.service.ts" header="src/app/question.service.ts">
 
 </code-example>
 
@@ -173,7 +173,7 @@ DynamicFormQuestionComponentにマッチします。
 最後に、`AppComponent`シェルにフォームのインスタンスを表示します。
 
 
-<code-example path="dynamic-form/src/app/app.component.ts" title="app.component.ts">
+<code-example path="dynamic-form/src/app/app.component.ts" header="app.component.ts">
 
 </code-example>
 

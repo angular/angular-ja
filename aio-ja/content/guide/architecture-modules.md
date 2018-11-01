@@ -23,7 +23,7 @@ NgModuleは`@NgModule`で装飾されたクラスとして定義されていま�
 
 単純なルートNgModuleの定義は次のとおりです。
 
-<code-example path="architecture/src/app/mini-app.ts" region="module" title="src/app/app.module.ts" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="module" header="src/app/app.module.ts" linenums="false"></code-example>
 
 <div class="alert is-helpful">
 

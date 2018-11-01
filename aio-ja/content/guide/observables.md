@@ -16,7 +16,7 @@ Observableは、文脈に応じて、任意の型&mdash;リテラル、メッセ
 
 ここでは、Observableを使用してジオロケーションの更新を提供する方法を示すことによって、基本的な使用モデルの例を示します。
 
-<code-example path="observables/src/geolocation.ts" title="ジオロケーションのアップデートを監視する"></code-example>
+<code-example path="observables/src/geolocation.ts" header="ジオロケーションのアップデートを監視する"></code-example>
 
 ## オブザーバーを定義する
 
@@ -37,10 +37,10 @@ Observableの通知を受け取るハンドラーは、`Observer` インター�
 
 <div class="alert is-helpful">
    サブスクリプションがどのように動作するかを示すために、新しいObservableを作成する必要があります。
-   新しいインスタンスを作成するために使用するコンストラクタがありますが、例として頻繁に使用される形式の単純なObservableを作成する `Observable`クラスでいくつかの静的メソッドを使用できます。
+   新しいインスタンスを作成するために使用するコンストラクタがありますが、例として頻繁に使用される形式の単純なObservableを作成するRxJSライブラリのいくつかのメソッドを使用できます。
 
-  * `Observable.of(...items)`&mdash;引数として提供された値を同期的に提供する`Observable`インスタンスを返します。
-  * `Observable.from(iterable)`&mdash;引数を`Observable`インスタンスに変換します。このメソッドは、通常、配列をobservableに変換するために使用されます。
+  * `of(...items)`&mdash;引数として提供された値を同期的に提供する`Observable`インスタンスを返します。
+  * `from(iterable)`&mdash;引数を`Observable`インスタンスに変換します。このメソッドは、通常、配列をobservableに変換するために使用されます。
 
 </div>
 
@@ -49,11 +49,11 @@ Observableの通知を受け取るハンドラーは、`Observer` インター�
 <code-example
   path="observables/src/subscribing.ts"
   region="observer"
-  title="Subscribe using observer"></code-example>
+  header="Subscribe using observer"></code-example>
 
 あるいは、`subscribe()`メソッドは、コールバック関数定義を`next`、`error`、`complete`ハンドラーのために、行内で受け入れることができます。たとえば、次の`subscribe()`コールは、定義済みのオブザーバーを指定するコールと同じです。
 
-<code-example path="observables/src/subscribing.ts" region="sub_fn" title="Subscribe with positional arguments"></code-example>
+<code-example path="observables/src/subscribing.ts" region="sub_fn" header="Subscribe with positional arguments"></code-example>
 
 いずれの場合も、`next`ハンドラーは必須です。`error`と`complete`ハンドラーはオプションです。
 
@@ -65,15 +65,15 @@ Observableの通知を受け取るハンドラーは、`Observer` インター�
 
 たとえば、上の`Observable.of(1,2,3)`に相当するObservableを作成するには、次のようにします：
 
-<code-example path="observables/src/creating.ts" region="subscriber" title="Create observable with constructor"></code-example>
+<code-example path="observables/src/creating.ts" region="subscriber" header="Create observable with constructor"></code-example>
 
 この例を少しステップアップすると、イベントを公開するObservableを作成できます。この例では、サブスクライバー関数はインラインで定義されています。
 
-<code-example path="observables/src/creating.ts" region="fromevent" title="Create with custom fromEvent function"></code-example>
+<code-example path="observables/src/creating.ts" region="fromevent" header="Create with custom fromEvent function"></code-example>
 
 Now you can use this function to create an observable that publishes keydown events:
 
-<code-example path="observables/src/creating.ts" region="fromevent_use" title="Use custom fromEvent function"></code-example>
+<code-example path="observables/src/creating.ts" region="fromevent_use" header="Use custom fromEvent function"></code-example>
 
 ## マルチキャスト
 
@@ -87,15 +87,15 @@ Observableを作成するときは、そのObservableをどのように使用す
 
 個々の数値が発信されてから1秒遅れて、1から3までカウントする例を見てみましょう。
 
-<code-example path="observables/src/multicasting.ts" region="delay_sequence" title="Create a delayed sequence"></code-example>
+<code-example path="observables/src/multicasting.ts" region="delay_sequence" header="Create a delayed sequence"></code-example>
 
 2回購読すると、2つの別々のストリームがあり、それぞれが毎秒値を発信することに注意してください。これは次のようになります。
 
-<code-example path="observables/src/multicasting.ts" region="subscribe_twice" title="Two subscriptions"></code-example>
+<code-example path="observables/src/multicasting.ts" region="subscribe_twice" header="Two subscriptions"></code-example>
 
  Observableをマルチキャストするように書き換えると次のようになります。
 
-<code-example path="observables/src/multicasting.ts" region="multicast_sequence" title="Create a multicast subscriber"></code-example>
+<code-example path="observables/src/multicasting.ts" region="multicast_sequence" header="Create a multicast subscriber"></code-example>
 
 <div class="alert is-helpful">
   Observableをマルチキャストするには少しだけ多くのセットアップがかかりますが、特定のアプリケーションで役立ちます。後で、マルチキャスティングのプロセスを簡略化して、どんなObservableでもマルチキャストできるようになるツールを見ていきます。

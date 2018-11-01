@@ -38,7 +38,7 @@ CLIを使って生成することができます。
 生成されたファイルはこのようになります：
 
 <code-example path="toh-pt5/src/app/app-routing.module.0.ts" 
-  title="src/app/app-routing.module.ts (generated)">
+  header="src/app/app-routing.module.ts (generated)">
 </code-example>
 
 通常、ルーティングモジュールでコンポーネントの宣言はしないので、`@NgModule.declarations`配列と`CommonModule`への参照は削除できます。
@@ -54,7 +54,7 @@ CLIを使って生成することができます。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" 
   region="v1"
-  title="src/app/app-routing.module.ts (v1)">
+  header="src/app/app-routing.module.ts (v1)">
 </code-example>
 
 ### ルートを追加する
@@ -103,7 +103,7 @@ URLが`localhost:4200/heroes`のようであったときに`HeroesComponent`へ�
 
 <code-example path="toh-pt5/src/app/app.component.html" 
   region="outlet"
-  title="src/app/app.component.html (router-outlet)">
+  header="src/app/app.component.html (router-outlet)">
 </code-example>
 
 ユーザーが`HeroesComponent`に来たときに`HeroesComponent`だけを表示したいので、
@@ -148,7 +148,7 @@ URLが`/`で終わっています。
 <code-example 
   path="toh-pt5/src/app/app.component.html" 
   region="heroes"
-  title="src/app/app.component.html (heroes RouterLink)">
+  header="src/app/app.component.html (heroes RouterLink)">
 </code-example>
 
 [`routerLink`属性](#routerlink)は、ルーターが`HeroesComponent`へのルートとして一致する文字列である`"/heroes"`に設定されます。
@@ -184,15 +184,15 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 <code-tabs>
   <code-pane 
-    title="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.1.html">
+    header="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.1.html">
   </code-pane>
 
   <code-pane 
-    title="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts">
+    header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts">
   </code-pane>
 
   <code-pane 
-    title="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css">
+    header="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css">
   </code-pane>
 </code-tabs>
 
@@ -221,7 +221,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
   region="import-dashboard" 
-  title="src/app/app-routing.module.ts (import DashboardComponent)">
+  header="src/app/app-routing.module.ts (import DashboardComponent)">
 </code-example>
 
 `AppRoutingModule.routes`配列に、` DashboardComponent`へのパスにマッチするルートを追加します。
@@ -255,7 +255,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 *Heroes*リンクのすぐ上、`AppComponent`シェルテンプレートにダッシュボードのナビゲーションリンクを追加します。。
 
-<code-example path="toh-pt5/src/app/app.component.html" title="src/app/app.component.html">
+<code-example path="toh-pt5/src/app/app.component.html" header="src/app/app.component.html">
 </code-example>
 
 ブラウザが更新されたら、リンクをクリックすることでふたつのビューの間を自由に遷移できるようになります。
@@ -297,7 +297,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
   region="import-herodetail" 
-  title="src/app/app-routing.module.ts (import HeroDetailComponent)">
+  header="src/app/app-routing.module.ts (import HeroDetailComponent)">
 </code-example>
 
 次に、_ヒーロー詳細_ビューへのパスのパターンと一致する_パラメータ付き_ルートを`AppRoutingModule.routes`配列に追加します。
@@ -314,7 +314,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/app-routing.module.ts" 
   region="routes" 
-  title="src/app/app-routing.module.ts (all routes)">
+  header="src/app/app-routing.module.ts (all routes)">
 </code-example>
 
 ### `DashboardComponent`ヒーローのリンク
@@ -327,7 +327,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/dashboard/dashboard.component.html" 
   region="click" 
-  title="src/app/dashboard/dashboard.component.html (hero links)">
+  header="src/app/dashboard/dashboard.component.html (hero links)">
 </code-example>
 
 `*ngFor`リピーター内でAngularの[補間バインディング](guide/template-syntax#interpolation)を使用していて、
@@ -342,7 +342,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt4/src/app/heroes/heroes.component.html" 
   region="list" 
-  title="src/app/heroes/heroes.component.html (list with onSelect)">
+  header="src/app/heroes/heroes.component.html (list with onSelect)">
 </code-example>
 
 この`<li>`を`*ngFor`だけをもつように戻し、
@@ -352,7 +352,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/heroes/heroes.component.html" 
   region="list" 
-  title="src/app/heroes/heroes.component.html (list with links)">
+  header="src/app/heroes/heroes.component.html (list with links)">
 </code-example>
 
 プライベートなスタイルシート (`heroes.component.css`) を修正して
@@ -370,7 +370,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/heroes/heroes.component.ts"
   region="class" 
-  title="src/app/heroes/heroes.component.ts (cleaned up)" linenums="false">
+  header="src/app/heroes/heroes.component.ts (cleaned up)" linenums="false">
 </code-example>
 
 ## ルーティング可能な *HeroDetailComponent*
@@ -392,7 +392,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" 
   region="added-imports" 
-  title="src/app/hero-detail/hero-detail.component.ts">
+  header="src/app/hero-detail/hero-detail.component.ts">
 </code-example>
 
 {@a hero-detail-ctor}
@@ -442,7 +442,7 @@ JavaScript (+) 演算子は文字列を数値に変換します。これがヒ�
 <code-example 
   path="toh-pt5/src/app/hero.service.ts" 
   region="getHero" 
-  title="src/app/hero.service.ts (getHero)">
+  header="src/app/hero.service.ts (getHero)">
 </code-example>
 
 <div class="alert is-important">
@@ -484,13 +484,13 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 <code-example 
   path="toh-pt5/src/app/hero-detail/hero-detail.component.html" 
   region="back-button"
-  title="src/app/hero-detail/hero-detail.component.html (back button)">
+  header="src/app/hero-detail/hero-detail.component.html (back button)">
 </code-example>
 
 [先ほど注入した](#hero-detail-ctor)`Location`サービスを使用して、
 ブラウザの履歴のひとつ前にナビゲートする`goBack()`メソッドをコンポーネントのクラスに追加します。
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="goBack" title="src/app/hero-detail/hero-detail.component.ts (goBack)">
+<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="goBack" header="src/app/hero-detail/hero-detail.component.ts (goBack)">
 
 </code-example>
 
@@ -513,15 +513,15 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 <code-tabs>
   <code-pane 
-    title="src/app/app-routing.module.ts" 
+    header="src/app/app-routing.module.ts" 
     path="toh-pt5/src/app/app-routing.module.ts">
   </code-pane>
   <code-pane 
-    title="src/app/app.module.ts" 
+    header="src/app/app.module.ts" 
     path="toh-pt5/src/app/app.module.ts">
   </code-pane>
   <code-pane 
-    title="src/app/hero.service.ts" 
+    header="src/app/hero.service.ts" 
     path="toh-pt5/src/app/hero.service.ts">
   </code-pane>
 </code-tabs>
@@ -531,12 +531,12 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 <code-tabs>
   <code-pane 
-    title="src/app/app.component.html"
+    header="src/app/app.component.html"
     path="toh-pt5/src/app/app.component.html">
   </code-pane>
 
   <code-pane 
-    title="src/app/app.component.css"
+    header="src/app/app.component.css"
     path="toh-pt5/src/app/app.component.css">
   </code-pane>
 </code-tabs>
@@ -546,15 +546,15 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 <code-tabs>
   <code-pane 
-    title="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.html">
+    header="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.html">
   </code-pane>
 
   <code-pane 
-    title="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts">
+    header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts">
   </code-pane>
 
   <code-pane 
-    title="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css">
+    header="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css">
   </code-pane>
 </code-tabs>
 
@@ -563,16 +563,16 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 <code-tabs>
   <code-pane 
-    title="src/app/heroes/heroes.component.html" path="toh-pt5/src/app/heroes/heroes.component.html">
+    header="src/app/heroes/heroes.component.html" path="toh-pt5/src/app/heroes/heroes.component.html">
   </code-pane>
 
   <code-pane 
-    title="src/app/heroes/heroes.component.ts" 
+    header="src/app/heroes/heroes.component.ts" 
     path="toh-pt5/src/app/heroes/heroes.component.ts">
   </code-pane>
 
   <code-pane 
-    title="src/app/heroes/heroes.component.css" 
+    header="src/app/heroes/heroes.component.css" 
     path="toh-pt5/src/app/heroes/heroes.component.css">
   </code-pane>
 </code-tabs>
@@ -582,15 +582,15 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 <code-tabs>
   <code-pane 
-    title="src/app/hero-detail/hero-detail.component.html" path="toh-pt5/src/app/hero-detail/hero-detail.component.html">
+    header="src/app/hero-detail/hero-detail.component.html" path="toh-pt5/src/app/hero-detail/hero-detail.component.html">
   </code-pane>
 
   <code-pane 
-    title="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts">
+    header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts">
   </code-pane>
 
   <code-pane 
-    title="src/app/hero-detail/hero-detail.component.css" path="toh-pt5/src/app/hero-detail/hero-detail.component.css">
+    header="src/app/hero-detail/hero-detail.component.css" path="toh-pt5/src/app/hero-detail/hero-detail.component.css">
   </code-pane>
 </code-tabs>
 

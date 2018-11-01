@@ -21,7 +21,7 @@ CLIは`src/app/heroes/`という新しいフォルダを作成し、
 
 <code-example 
   path="toh-pt1/src/app/heroes/heroes.component.ts" region="v1" 
-  title="app/heroes/heroes.component.ts (初期バージョン)" linenums="false">
+  header="app/heroes/heroes.component.ts (初期バージョン)" linenums="false">
 </code-example>
 
 常にAngularコアライブラリから`Component`シンボルをインポートし、
@@ -51,7 +51,7 @@ Angularは、コンポーネントの作成直後に`ngOnInit`を呼び出しま
 
 "Windstorm"という名前のヒーローのために、`HeroesComponent`に`hero`プロパティを追加します。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" region="add-hero" title="heroes.component.ts (hero プロパティ)" linenums="false">
+<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" region="add-hero" header="heroes.component.ts (hero プロパティ)" linenums="false">
 </code-example>
 
 {@a show-the-hero}
@@ -61,7 +61,7 @@ Angularは、コンポーネントの作成直後に`ngOnInit`を呼び出しま
 Angular CLIで生成されたデフォルトのテキストを削除し、
 それを新しい`hero`プロパティへのデータバインディングに置き換えてください。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" title="heroes.component.html" region="show-hero-1" linenums="false">
+<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" header="heroes.component.html" region="show-hero-1" linenums="false">
 </code-example>
 
 {@a show-the-heroescomponent-view}
@@ -72,7 +72,7 @@ Angular CLIで生成されたデフォルトのテキストを削除し、
 `app-heroes`は`HeroesComponent`の[要素セレクタ](#selector)であることを思い出してください。
 なので、`AppComponent`のテンプレートファイルで、タイトルの直下に`<app-heroes>`要素を追加してください。
 
-<code-example path="toh-pt1/src/app/app.component.html" title="src/app/app.component.html" linenums="false">
+<code-example path="toh-pt1/src/app/app.component.html" header="src/app/app.component.html" linenums="false">
 </code-example>
 
 CLIの`ng serve`コマンドがまだ実行中であれば、
@@ -86,7 +86,7 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 `src/app`フォルダ内の独自のファイルに、`Hero`クラスを作成します。
 それに`id`プロパティと`name`プロパティを与えます。
 
-<code-example path="toh-pt1/src/app/hero.ts"  title="src/app/hero.ts" linenums="false">
+<code-example path="toh-pt1/src/app/hero.ts"  header="src/app/hero.ts" linenums="false">
 </code-example>
 
 
@@ -98,7 +98,7 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 改訂された`HeroesComponent`のクラスファイルは、次のようになります。
 
 <code-example path="toh-pt1/src/app/heroes/heroes.component.ts" linenums="false"
-  title= "src/app/heroes/heroes.component.ts">
+  header= "src/app/heroes/heroes.component.ts">
 </code-example>
 
 ヒーローを文字列からオブジェクトに変更したため、ページが正しく表示されなくなりました。
@@ -112,7 +112,7 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 <code-example 
   path="toh-pt1/src/app/heroes/heroes.component.1.html"
   region="show-hero-2" 
-  title="heroes.component.html (HeroesComponent のテンプレート)" linenums="false">
+  header="heroes.component.html (HeroesComponent のテンプレート)" linenums="false">
 </code-example>
 
 ブラウザが更新され、ヒーローの情報が表示されます。
@@ -151,7 +151,7 @@ Angularは複数のビルトインパイプを備えており、あなた自身�
 
 `HeroesComponent`テンプレートの詳細エリアをリファクタリングすると、次のようになります。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" region="name-input" title="src/app/heroes/heroes.component.html (HeroesComponent のテンプレート)" linenums="false">
+<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" region="name-input" header="src/app/heroes/heroes.component.html (HeroesComponent のテンプレート)" linenums="false">
 
 </code-example>
 
@@ -196,14 +196,14 @@ Angular CLI は、プロジェクトを作成するときに`src/app/app.module.
 
 `AppModule` (`app.module.ts`) を開き、`@angular/forms`ライブラリから`FormsModule`シンボルをインポートします。
 
-<code-example path="toh-pt1/src/app/app.module.ts" title="app.module.ts (FormsModule シンボルのインポート)"
+<code-example path="toh-pt1/src/app/app.module.ts" header="app.module.ts (FormsModule シンボルのインポート)"
  region="formsmodule-js-import">
 </code-example>
 
 それから、`FormsModule`を`@NgModule`メタデータの`imports`配列に追加します。
 この配列には、アプリケーションに必要な外部モジュールのリストが含まれています。
 
-<code-example path="toh-pt1/src/app/app.module.ts" title="app.module.ts ( @NgModule imports)"
+<code-example path="toh-pt1/src/app/app.module.ts" header="app.module.ts ( @NgModule imports)"
 region="ng-imports">
 </code-example>
 
@@ -237,23 +237,23 @@ region="ng-imports">
 
 <code-tabs>
 
-  <code-pane title="src/app/heroes/heroes.component.ts" path="toh-pt1/src/app/heroes/heroes.component.ts">
+  <code-pane header="src/app/heroes/heroes.component.ts" path="toh-pt1/src/app/heroes/heroes.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/heroes/heroes.component.html" path="toh-pt1/src/app/heroes/heroes.component.html">
+  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt1/src/app/heroes/heroes.component.html">
   </code-pane>
 
-  <code-pane title="src/app/app.module.ts" 
+  <code-pane header="src/app/app.module.ts" 
   path="toh-pt1/src/app/app.module.ts">
   </code-pane>
 
-  <code-pane title="src/app/app.component.ts" path="toh-pt1/src/app/app.component.ts">
+  <code-pane header="src/app/app.component.ts" path="toh-pt1/src/app/app.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/app.component.html" path="toh-pt1/src/app/app.component.html">
+  <code-pane header="src/app/app.component.html" path="toh-pt1/src/app/app.component.html">
   </code-pane>
 
-  <code-pane title="src/app/hero.ts" 
+  <code-pane header="src/app/hero.ts" 
   path="toh-pt1/src/app/hero.ts">
   </code-pane>
 

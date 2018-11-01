@@ -43,7 +43,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 
 完了したら、 `HeroDetailComponent` テンプレートは次のようになります。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.html" title="src/app/hero-detail/hero-detail.component.html" linenums="false">
+<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.html" header="src/app/hero-detail/hero-detail.component.html" linenums="false">
 
 </code-example>
 
@@ -54,7 +54,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 `HeroDetailComponent` クラスのファイルを開いて、` Hero` シンボルをインポートします。
 
 <code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" 
-region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import Hero)">
+region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (import Hero)">
 </code-example>
 
 `hero` プロパティは `@Input()` デコレーターで注釈された[ _Input_ プロパティでなければなりません](guide/template-syntax#inputs-outputs "Input and Output properties")。
@@ -65,7 +65,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 `Input` シンボルを含めるために、 `@angular/core` のimport文を修正してください。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" title="src/app/hero-detail/hero-detail.component.ts (import Input)" linenums="false">
+<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" header="src/app/hero-detail/hero-detail.component.ts (import Input)" linenums="false">
 </code-example>
 
 `@Input()` デコレーターが前に付いた `hero` プロパティを追加します。
@@ -99,7 +99,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 次のように `HeroesComponent.selectedHero` を、この要素の `hero` プロパティにバインドさせます。
 
-<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding" title="heroes.component.html (HeroDetail binding)">
+<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding" header="heroes.component.html (HeroDetail binding)">
 
 </code-example>
 
@@ -115,7 +115,7 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 修正された `HeroesComponent` テンプレートはこのようになります：
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html"
-  title="heroes.component.html" linenums="false">
+  header="heroes.component.html" linenums="false">
 </code-example>
 
 ブラウザがリフレッシュされると、以前と同じようにアプリケーションが再び動き始めます。
@@ -142,16 +142,16 @@ region="import-hero" title="src/app/hero-detail/hero-detail.component.ts (import
 
 <code-tabs>
 
-  <code-pane title="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts">
+  <code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html">
+  <code-pane header="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html">
   </code-pane>
 
-  <code-pane title="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html">
+  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html">
   </code-pane>
 
-  <code-pane title="src/app/app.module.ts" path="toh-pt3/src/app/app.module.ts">
+  <code-pane header="src/app/app.module.ts" path="toh-pt3/src/app/app.module.ts">
   </code-pane>
 
 </code-tabs>

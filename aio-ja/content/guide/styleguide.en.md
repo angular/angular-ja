@@ -1,29 +1,28 @@
 # Style Guide
 
-Angular構文、表記法、およびアプリケーション構造に関する有益なガイドをお探しですか？
-心配いりません！
-このスタイルガイドで、好ましい規則を提示し、その重要な理由を説明します。
+Looking for an opinionated guide to Angular syntax, conventions, and application structure?
+Step right in!
+This style guide presents preferred conventions and, as importantly, explains why.
 
 
 
 {@a toc}
 
-{@a style-vocabulary}
-## スタイルのボキャブラリー
+## Style vocabulary
 
-個々のガイドラインはよいプラクティスか悪いプラクティスのどちらかを示しており、それらのすべてが一貫した表現を持っています。
+Each guideline describes either a good or bad practice, and all have a consistent presentation.
 
-個々のガイドラインの表現は、その推奨がどれほど強いかを示しています。
+The wording of each guideline indicates how strong the recommendation is.
 
 
 <div class="s-rule do">
 
 
 
-**Do** は常に従うべきものです。
-_常に_ は少し言葉が強いかもしれません。
-常に従うべきガイドラインが出てくることは非常に稀です。
-しかし、 *Do* ガイドラインを破るには異例なケースが必要となります。
+**Do** is one that should always be followed.
+_Always_ might be a bit too strong of a word.
+Guidelines that literally should always be followed are extremely rare.
+On the other hand, you need a really unusual case for breaking a *Do* guideline.
 
 
 </div>
@@ -34,9 +33,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Consider** は一般的に守るべきものです。
-このガイドラインの意図を理解した上で、逸脱する理由があるなら守る必要はありません。
-一貫することを心がけてください。
+**Consider** guidelines should generally be followed.
+If you fully understand the meaning behind the guideline and have a good reason to deviate, then do so. Please strive to be consistent.
 
 
 </div>
@@ -47,8 +45,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Avoid** は決してしてはいけないものです。
-赤色のヘッダが付いているコードブロックは *Avoid* コード例になります。
+**Avoid** indicates something you should almost never do. Code examples to *avoid* have an unmistakable red header.
 
 
 </div>
@@ -59,7 +56,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** は推奨事項である理由が書かれます。
+**Why?** gives reasons for following the previous recommendations.
 
 
 </div>
@@ -67,27 +64,24 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-{@a file-structure-conventions}
-## ファイル構造の規約
+## File structure conventions
 
-いくつかのコード例は、同様の名前を持った関連したファイルが1つ以上あります。
-たとえば、`hero.component.ts` と `hero.component.html` です。
+Some code examples display a file that has one or more similarly named companion files.
+For example, `hero.component.ts` and `hero.component.html`.
 
-このガイドラインでは、これらのファイルを表すために `hero.component.ts|html|css|spec` であるとします。
-省略することでこのガイドラインが簡潔になりファイル構造が読み易くなるためです。
+The guideline uses the shortcut `hero.component.ts|html|css|spec` to represent those various files. Using this shortcut makes this guide's file structures easier to read and more terse.
 
 
 
 {@a single-responsibility}
 
 
-{@a single-responsibility}
-## 単一責任
+## Single responsibility
 
-すべてのコンポーネント、サービス、およびその他のシンボルに
-<a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>単一責任の原則</i> (SRP)</a>
-を適用させます。
-これは、アプリをよりきれいにし、読みやすく、維持しやすくし、テストをしやすくするのに役立ちます。
+Apply the
+<a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>single responsibility principle</i> (SRP)</a>
+to all components, services, and other symbols.
+This helps make the app cleaner, easier to read and maintain, and more testable.
 
 {@a 01-01}
 
@@ -100,7 +94,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** サービスやコンポーネントなどは1ファイルにつき1つだけの定義としてください。
+**Do** define one thing, such as a service or component, per file.
 
 
 </div>
@@ -111,7 +105,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Consider** ファイルを400行のコードに制限します。
+**Consider** limiting files to 400 lines of code.
 
 
 </div>
@@ -122,8 +116,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 1ファイルにつき1コンポーネントとすることで、読み取り、保守、および
-チーム内でソース管理をする際に衝突の回避がはるかに容易になります。
+**Why?** One component per file makes it far easier to read, maintain, and avoid
+collisions with teams in source control.
 
 
 </div>
@@ -134,7 +128,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 1ファイルにつき1コンポーネントとすることで、変数が共有されたり、不要なクロージャが作成されたりといった、ファイル内のコンポーネント結合をする時によく発生する、依存関係との望ましくない結合による隠れたバグを回避できます。
+**Why?** One component per file avoids hidden bugs that often arise when combining components in a file where they may share variables, create unwanted closures, or unwanted coupling with dependencies.
 
 
 </div>
@@ -145,16 +139,17 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 単一のコンポーネントにするとファイルを、ルーターでの遅延ロードを容易にさせるデフォルトエクスポートにすることができるためです。
+**Why?** A single component can be the default export for its file which facilitates lazy loading with the router.
 
 </div>
 
 
 
-重要なことは、コードを再利用しやすく読みやすいものにして、間違いやすさを減らすことです。
+The key is to make the code more reusable, easier to read, and less mistake prone.
 
-次の *negative* な例は、 `AppComponent` を定義し、アプリを自動起動し、 `Hero` モデルオブジェクトを定義し、サーバーからHeroを全件取得することが同じファイルで読み込まれます。
-*これはしないでください*。
+The following *negative* example defines the `AppComponent`, bootstraps the app,
+defines the `Hero` model object, and loads heroes from the server all in the same file.
+*Don't do this*.
 
 
 <code-example path="styleguide/src/01-01/app/heroes/hero.component.avoid.ts" title="app/heroes/hero.component.ts">
@@ -163,7 +158,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-コンポーネントやそれをサポートしているクラスを専用のファイルに分割することはよい方針です。
+It is a better practice to redistribute the component and its
+supporting classes into their own, dedicated files.
 
 
 <code-tabs>
@@ -200,8 +196,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-アプリが成長するにつれて、このルールはさらに重要になります。
-<a href="#toc">トップに戻る</a>
+As the app grows, this rule becomes even more important.
+<a href="#toc">Back to top</a>
 
 
 {@a 01-02}
@@ -215,7 +211,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** 小さい関数を定義してください。
+**Do** define small functions
 
 
 </div>
@@ -226,7 +222,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Consider** 最大行数を75行に制限する。
+**Consider** limiting to no more than 75 lines.
 
 
 </div>
@@ -237,7 +233,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 小さい関数はテストを容易にします。その関数が1つのことを行い、1つの目的を果たす場合は特にです。
+**Why?** Small functions are easier to test, especially when they do one thing and serve one purpose.
 
 
 </div>
@@ -248,7 +244,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 小さい関数は再利用を促進します。
+**Why?** Small functions promote reuse.
 
 
 </div>
@@ -259,7 +255,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 小さい関数は読み易くなります。
+**Why?** Small functions are easier to read.
 
 
 </div>
@@ -270,7 +266,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 小さい関数はメンテナンスが容易です。
+**Why?** Small functions are easier to maintain.
 
 
 </div>
@@ -281,18 +277,17 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 小さい関数は、外部スコープと変数を共有し、不要なクロージャを作成したり、依存関係との望ましくない結合を引き起こす大きな関数に伴う隠れたバグを回避します。
+**Why?** Small functions help avoid hidden bugs that come with large functions that share variables with external scope, create unwanted closures, or unwanted coupling with dependencies.
 
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
-{@a naming}
-## 命名規則
+## Naming
 
-命名規則は、保守性と可読性にとって非常に重要です。このガイドでは、ファイル名とシンボル名の命名規則を推奨しています。
+Naming conventions are hugely important to maintainability and readability. This guide recommends naming conventions for the file name and the symbol name.
 
 
 
@@ -307,7 +302,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** すべてのシンボルに一貫した名前を使用してください。
+**Do** use consistent names for all symbols.
 
 
 </div>
@@ -318,7 +313,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** シンボルの特徴を記述し、そのタイプを記述するパターンにしたがってください。推奨されるパターンは `feature.type.ts` です。
+**Do** follow a pattern that describes the symbol's feature then its type. The recommended pattern is `feature.type.ts`.
 
 
 </div>
@@ -329,7 +324,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 命名規則はコンテンツを一目で見つける一貫した方法を提供します。プロジェクト内の一貫性は非常に重要です。チームとの一貫性は重要です。企業全体の一貫性は非常に効率的です。
+**Why?** Naming conventions help provide a consistent way to find content at a glance. Consistency within the project is vital. Consistency with a team is important. Consistency across a company provides tremendous efficiency.
 
 
 </div>
@@ -340,7 +335,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 命名規則は、目的のコードをより早く見つけ出し、理解しやすくさせるのに役たちます。
+**Why?** The naming conventions should simply help find desired code faster and make it easier to understand.
 
 
 </div>
@@ -351,12 +346,12 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** フォルダとファイルの名前は、その意図を明確に伝える必要があります。たとえば、 `app/heroes/hero-list.component.ts` にはヒーローのリストを管理するコンポーネントが含まれています。
+**Why?** Names of folders and files should clearly convey their intent. For example, `app/heroes/hero-list.component.ts` may contain a component that manages a list of heroes.
 
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-02}
@@ -370,7 +365,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** 説明的な名前の単語を区切るにはダッシュを使用してください。
+**Do** use dashes to separate words in the descriptive name.
 
 
 </div>
@@ -381,7 +376,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** ドットを使用して、説明的な名前とタイプを区切ってください。
+**Do** use dots to separate the descriptive name from the type.
 
 
 </div>
@@ -392,7 +387,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** コンポーネントの機能、そのタイプを記述するパターンに続くすべてのコンポーネントに対して、一貫した型名を使用してください。推奨されるパターンは `feature.type.ts` です。
+**Do** use consistent type names for all components following a pattern that describes the component's feature then its type. A recommended pattern is `feature.type.ts`.
 
 
 </div>
@@ -403,8 +398,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** `.service`、` .component`、 `.pipe`、` .module`、 `.directive` を含む慣習的な型名を使ってください。
-あまりにも多くを作成しないように注意しなければならない場合は、追加の型名を作成してください。
+**Do** use conventional type names including `.service`, `.component`, `.pipe`, `.module`, and `.directive`.
+Invent additional type names if you must but take care not to create too many.
 
 
 </div>
@@ -415,7 +410,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 型名は、ファイル内の内容をすばやく識別する一貫した方法を提供してください。
+**Why?** Type names provide a consistent way to quickly identify what is in the file.
 
 
 </div>
@@ -426,7 +421,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 型名は、エディタやIDEのあいまい検索技術を使用して、特定のファイルタイプを簡単に見つけることができます。
+**Why?** Type names make it easy to find a specific file type using an editor or IDE's fuzzy search techniques.
 
 
 </div>
@@ -437,8 +432,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** `.service` のような省略されていない型名は説明的であり、明白です。
-`.srv`、` .svc`、 `.serv` などの略語は混乱することがあります。
+**Why?** Unabbreviated type names such as `.service` are descriptive and unambiguous.
+Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 </div>
@@ -449,12 +444,12 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 型名は、自動化されたタスクでパターンマッチングする際に使われるためです。
+**Why?** Type names provide pattern matching for any automated tasks.
 
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-03}
@@ -468,7 +463,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** すべてのファイル群はそれらを表す名前の後に一貫性のある名前を使用してください。
+**Do** use consistent names for all assets named after what they represent.
 
 
 </div>
@@ -479,7 +474,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** クラス名はUpperCamelCaseを使用してください。
+**Do** use upper camel case for class names.
 
 
 </div>
@@ -490,7 +485,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** シンボル名とファイル名は一致させてください。
+**Do** match the name of the symbol to the name of the file.
 
 
 </div>
@@ -501,8 +496,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** 慣例的な接尾辞付きのシンボル名（たとえば、 `Component`、
-`Directive`、` Module`、 `Pipe`、` Service`など）を指定してください。
+**Do** append the symbol name with the conventional suffix (such as `Component`,
+`Directive`, `Module`, `Pipe`, or `Service`) for a thing of that type.
 
 
 </div>
@@ -513,8 +508,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** ファイル名に慣例的な接尾辞（たとえば、 `.component.ts`、` .directive.ts`、
-`.module.ts`、` .pipe.ts`、または `.service.ts`）を指定してください。
+**Do** give the filename the conventional suffix (such as `.component.ts`, `.directive.ts`,
+`.module.ts`, `.pipe.ts`, or `.service.ts`) for a file of that type.
 
 </div>
 
@@ -524,8 +519,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** 一貫した規則により、異なるタイプのファイル群から迅速に識別して
-参照することが容易になります。
+**Why?** Consistent conventions make it easy to quickly identify
+and reference assets of different types.
 
 
 </div>
@@ -710,7 +705,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-04}
@@ -723,7 +718,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** すべてのサービスは機能名の後に一貫した名前を付けてください。
+**Do** use consistent names for all services named after their feature.
 
 
 </div>
@@ -734,26 +729,15 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** サービスクラスは接尾辞に`Service`を付けてください。
-たとえば、データやヒーローを取得するものは
-`DataService`または`HeroService`と呼ばれるべきです。
+**Do** suffix a service class name with `Service`.
+For example, something that gets data or heroes
+should be called a `DataService` or a `HeroService`.
 
-短い用語は明白にサービスです。それらは基本的に
-「-er」で終わらせることで代理的に示されます。
-メッセージをログするサービスは`LoggerService`よりも`Logger`の方がよいでしょう。
-この例外がプロジェクトで合意できるかどうかを決定します。
-いつものように、一貫性のために努力してください。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** サービスを迅速に識別して参照する一貫した方法を提供します。
+A few terms are unambiguously services. They typically
+indicate agency by ending in "-er". You may prefer to name
+a service that logs messages `Logger` rather than `LoggerService`.
+Decide if this exception is agreeable in your project.
+As always, strive for consistency.
 
 
 </div>
@@ -764,7 +748,18 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** `Logger`のような明確なサービス名は接尾辞を必要としません。
+**Why?** Provides a consistent way to quickly identify and reference services.
+
+
+</div>
+
+
+
+<div class="s-why">
+
+
+
+**Why?** Clear service names such as `Logger` do not require a suffix.
 
 
 </div>
@@ -775,7 +770,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** `Credit` などのサービス名は名詞であり、接尾辞を必要とするため、サービスであれ他のものであれ、明示的でない場合は接尾辞を付ける必要があります。
+**Why?** Service names such as `Credit` are nouns and require a suffix and should be named with a suffix when it is not obvious if it is a service or something else.
 
 
 </div>
@@ -865,7 +860,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-05}
@@ -936,7 +931,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-02}
 
@@ -989,7 +984,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 02-07}
 
@@ -1096,7 +1091,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 02-06}
 
@@ -1136,7 +1131,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 02-08}
 
@@ -1202,7 +1197,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-09}
@@ -1297,7 +1292,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-10}
@@ -1436,7 +1431,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 02-11}
@@ -1526,7 +1521,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 02-12}
 
@@ -1755,7 +1750,7 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Coding conventions
@@ -1818,7 +1813,7 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 03-02}
@@ -1927,7 +1922,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 03-03}
@@ -2039,7 +2034,7 @@ discourage the `I` prefix.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 03-04}
 
@@ -2117,7 +2112,7 @@ discourage the `I` prefix.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 03-06}
 
@@ -2195,7 +2190,7 @@ discourage the `I` prefix.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Application structure and NgModules
@@ -2209,7 +2204,7 @@ All content is one asset per file. Each component, service, and pipe is in its o
 All third party vendor scripts are stored in another folder and not in the `src` folder.
 You didn't write them and you don't want them cluttering `src`.
 Use the naming conventions for files in this guide.
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-01}
 
@@ -2254,7 +2249,7 @@ _can I quickly open and start work in all of the related files for this feature_
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-02}
 
@@ -2286,7 +2281,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-03}
 
@@ -2351,7 +2346,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 04-04}
@@ -2411,7 +2406,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 04-05}
@@ -2455,7 +2450,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 04-06}
@@ -2776,7 +2771,7 @@ Whatever you choose, be consistent.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-07}
 
@@ -2943,7 +2938,7 @@ for example, in `/src/app`.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 04-09}
@@ -3065,7 +3060,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-10}
 
@@ -3317,7 +3312,7 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-11}
 
@@ -3644,7 +3639,7 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-12}
 
@@ -3702,7 +3697,7 @@ Only the root `AppModule` should import the `CoreModule`.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-13}
 
@@ -3734,7 +3729,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 04-14}
 
@@ -3763,7 +3758,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Components
@@ -3841,7 +3836,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-04}
 
@@ -3967,7 +3962,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-12}
 
@@ -4059,7 +4054,7 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 {@a 05-13}
@@ -4137,7 +4132,7 @@ and the directive name doesn't describe the property.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-14}
 
@@ -4194,7 +4189,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-15}
 
@@ -4283,7 +4278,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-16}
 
@@ -4366,7 +4361,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 05-17}
 
@@ -4422,7 +4417,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Directives
@@ -4481,7 +4476,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 06-03}
 
@@ -4553,7 +4548,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Services
@@ -4604,7 +4599,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 07-02}
 
@@ -4655,7 +4650,7 @@ Compare with the less preferred `host` metadata alternative.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 07-03}
 
@@ -4722,7 +4717,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 07-04}
 
@@ -4779,7 +4774,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Data Services
@@ -4850,14 +4845,14 @@ easier to test the consumers with mock service implementations.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Lifecycle hooks
 
 Use Lifecycle hooks to tap into important events exposed by Angular.
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a 09-01}
 
@@ -4903,14 +4898,14 @@ signatures. use those signatures to flag spelling and syntax mistakes.
 
 
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 
 ## Appendix
 
 Useful tools and tips for Angular.
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a A-01}
 
@@ -4939,7 +4934,7 @@ Useful tools and tips for Angular.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>
 
 {@a A-02}
 
@@ -4978,4 +4973,4 @@ Useful tools and tips for Angular.
 
 </div>
 
-<a href="#toc">トップに戻る</a>
+<a href="#toc">Back to top</a>

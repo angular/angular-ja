@@ -103,7 +103,7 @@ Angular CLIコマンド [`ng generate class`](cli/generate) を使用して、`H
 
 中身を記述します。
 
-<code-example path="forms/src/app/hero.ts" title="src/app/hero.ts">
+<code-example path="forms/src/app/hero.ts" header="src/app/hero.ts">
 
 </code-example>
 
@@ -136,7 +136,7 @@ Angular CLIコマンド [`ng generate component`](cli/generate) を使用して�
 
 中身を記述します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" title="src/app/hero-form/hero-form.component.ts (v1)" region="v1">
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" header="src/app/hero-form/hero-form.component.ts (v1)" region="v1">
 
 </code-example>
 
@@ -166,7 +166,7 @@ Angular CLIコマンド [`ng generate component`](cli/generate) を使用して�
 
 次のように更新してください。
 
-<code-example path="forms/src/app/app.module.ts" title="src/app/app.module.ts">
+<code-example path="forms/src/app/app.module.ts" header="src/app/app.module.ts">
 
 </code-example>
 
@@ -194,7 +194,7 @@ Angular CLIコマンド [`ng generate component`](cli/generate) を使用して�
 
 テンプレートの内容を次のものに置き換えます。
 
-<code-example path="forms/src/app/app.component.html" title="src/app/app.component.html">
+<code-example path="forms/src/app/app.component.html" header="src/app/app.component.html">
 
 </code-example>
 
@@ -210,7 +210,7 @@ Angular CLIコマンド [`ng generate component`](cli/generate) を使用して�
 
 テンプレートファイルを次の内容で更新します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="start" title="src/app/hero-form/hero-form.component.html">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" region="start" header="src/app/hero-form/hero-form.component.html">
 
 </code-example>
 
@@ -247,7 +247,7 @@ Angular CLIコマンド [`ng generate component`](cli/generate) を使用して�
 To add the stylesheet, open `styles.css` and add the following import line at the top:
 スタイルシートを追加するには`styles.css`を開き、上部に次のインポート行を追加します。
 
-<code-example path="forms/src/styles.1.css" linenums="false" title="src/styles.css">
+<code-example path="forms/src/styles.1.css" linenums="false" header="src/styles.css">
 
 </code-example>
 
@@ -261,7 +261,7 @@ To add the stylesheet, open `styles.css` and add the following import line at th
 
 次のHTMLを*Alter Ego*グループの*直下*に追加します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (powers)" region="powers">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (powers)" region="powers">
 
 </code-example>
 
@@ -295,7 +295,7 @@ Running the app right now would be disappointing.
 
 *Name*の`<input>`タグを見つけて、次のように更新します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-1">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-1">
 
 </code-example>
 
@@ -313,7 +313,7 @@ Running the app right now would be disappointing.
 フォームのテンプレート変数を宣言します。
 次のように`<form>`タグを`#heroForm="ngForm"`を使って更新します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="template-variable">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="template-variable">
 
 </code-example>
 
@@ -373,7 +373,7 @@ Running the app right now would be disappointing.
 
 改訂後、フォームのコアは次のようになります。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModel-2">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModel-2">
 
 </code-example>
 
@@ -474,7 +474,7 @@ Running the app right now would be disappointing.
 一時的に`spy`という名前の[テンプレート参照変数](guide/template-syntax#ref-vars)を_Name_の`<input>`に追加し、
 それを使用して入力のCSSクラスを表示します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-2">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-2">
 
 </code-example>
 
@@ -514,13 +514,13 @@ Running the app right now would be disappointing.
 
 この効果は、プロジェクトの`index.html`の隣に追加する新しい`forms.css`ファイルに定義したこれらのクラス定義によって得られます。
 
-<code-example path="forms/src/assets/forms.css" title="src/assets/forms.css">
+<code-example path="forms/src/assets/forms.css" header="src/assets/forms.css">
 
 </code-example>
 
 `index.html`の`<head>`を更新してこのスタイルシートを読み込みます。
 
-<code-example path="forms/src/index.html" linenums="false" title="src/index.html (styles)" region="styles">
+<code-example path="forms/src/index.html" linenums="false" header="src/index.html (styles)" region="styles">
 
 </code-example>
 
@@ -543,7 +543,7 @@ Running the app right now would be disappointing.
 
 次に、_Name_入力ボックスに追加されたエラーメッセージの例を示します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="name-with-error-msg">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="name-with-error-msg">
 
 </code-example>
 
@@ -561,7 +561,7 @@ Running the app right now would be disappointing.
 `name `コントロールのプロパティをメッセージ`<div>`要素の`hidden`プロパティにバインドすることにより、
 名前のエラーメッセージの表示を制御します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (hidden-error-msg)" region="hidden-error-msg">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (hidden-error-msg)" region="hidden-error-msg">
 
 </code-example>
 
@@ -585,11 +585,11 @@ Running the app right now would be disappointing.
 新しいヒーローをこのフォームに追加しましょう。
 *New Hero*ボタンをフォームの下部に置き、そのクリックイベントを`newHero`コンポーネントメソッドにバインドします。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-no-reset" title="src/app/hero-form/hero-form.component.html (New Hero button)">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-no-reset" header="src/app/hero-form/hero-form.component.html (New Hero button)">
 
 </code-example>
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="new-hero" title="src/app/hero-form/hero-form.component.ts (New Hero method)" linenums="false">
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="new-hero" header="src/app/hero-form/hero-form.component.ts (New Hero method)" linenums="false">
 
 </code-example>
 
@@ -610,7 +610,7 @@ Running the app right now would be disappointing.
 あなたはすべてのフラグを命令的にクリアする必要があります。
 `newHero()`メソッドを呼び出した後にフォームの`reset()`メソッドを呼び出すことで実行できます。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-form-reset" title="src/app/hero-form/hero-form.component.html (Reset the form)">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-form-reset" header="src/app/hero-form/hero-form.component.html (Reset the form)">
 
 </code-example>
 
@@ -625,7 +625,7 @@ Running the app right now would be disappointing.
 これを便利にするには、フォームの`ngSubmit`イベントプロパティを
 ヒーローフォームコンポーネントの`onSubmit()`メソッドにバインドします。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (ngSubmit)" region="ngSubmit">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (ngSubmit)" region="ngSubmit">
 
 </code-example>
 
@@ -636,7 +636,7 @@ Running the app right now would be disappointing.
 イベントバインディングを使用し、フォームの全体的な有効性を`heroForm`変数を介して
 ボタンの`disabled`プロパティにバインドします。コードは次のとおりです：
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (submit-button)" region="submit-button">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (submit-button)" region="submit-button">
 
 </code-example>
 
@@ -671,14 +671,14 @@ Angularの助けがなかったらボタンの有効/無効状態をフォーム
 
 フォームを`div`にラップし、その`hidden`プロパティを`HeroFormComponent.submitted`プロパティにバインドします。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="edit-div">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="edit-div">
 
 </code-example>
 
 メインのフォームは最初に表示されます。この`HeroFormComponent`の断片が示すとおり、
 フォームを送信するまで`submitted`プロパティがfalseであるためです。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" title="src/app/hero-form/hero-form.component.ts (submitted)" region="submitted">
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" header="src/app/hero-form/hero-form.component.ts (submitted)" region="submitted">
 
 </code-example>
 
@@ -687,7 +687,7 @@ Angularの助けがなかったらボタンの有効/無効状態をフォーム
 フォームが送信された状態になっている間、アプリは別のものを表示する必要があります。
 先ほど記述した`<div>`ラッパーの下に次のHTMLを追加します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" title="src/app/hero-form/hero-form.component.html (excerpt)" region="submitted">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="submitted">
 
 </code-example>
 
@@ -717,35 +717,35 @@ HTMLには、`submitted`フラグをクリアする式にクリックイベン�
 
 <code-tabs>
 
-  <code-pane title="hero-form/hero-form.component.ts" path="forms/src/app/hero-form/hero-form.component.ts" region="final">
+  <code-pane header="hero-form/hero-form.component.ts" path="forms/src/app/hero-form/hero-form.component.ts" region="final">
 
   </code-pane>
 
-  <code-pane title="hero-form/hero-form.component.html" path="forms/src/app/hero-form/hero-form.component.html" region="final">
+  <code-pane header="hero-form/hero-form.component.html" path="forms/src/app/hero-form/hero-form.component.html" region="final">
 
   </code-pane>
 
-  <code-pane title="hero.ts" path="forms/src/app/hero.ts">
+  <code-pane header="hero.ts" path="forms/src/app/hero.ts">
 
   </code-pane>
 
-  <code-pane title="app.module.ts" path="forms/src/app/app.module.ts">
+  <code-pane header="app.module.ts" path="forms/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="app.component.html" path="forms/src/app/app.component.html">
+  <code-pane header="app.component.html" path="forms/src/app/app.component.html">
 
   </code-pane>
 
-  <code-pane title="app.component.ts" path="forms/src/app/app.component.ts">
+  <code-pane header="app.component.ts" path="forms/src/app/app.component.ts">
 
   </code-pane>
 
-  <code-pane title="main.ts" path="forms/src/main.ts">
+  <code-pane header="main.ts" path="forms/src/main.ts">
 
   </code-pane>
 
-  <code-pane title="forms.css" path="forms/src/assets/forms.css">
+  <code-pane header="forms.css" path="forms/src/assets/forms.css">
 
   </code-pane>
 

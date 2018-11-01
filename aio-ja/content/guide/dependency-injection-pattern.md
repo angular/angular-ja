@@ -18,7 +18,7 @@ the [Angular Dependency Injection](guide/dependency-injection) guide to see how 
 To understand why dependency injection is so important, consider an example without it.
 Imagine writing the following code:
 
-<code-example path="dependency-injection/src/app/car/car-no-di.ts" region="car" title="src/app/car/car.ts (without DI)">
+<code-example path="dependency-injection/src/app/car/car-no-di.ts" region="car" header="src/app/car/car.ts (without DI)">
 </code-example>
 
 The `Car` class creates everything it needs inside its constructor.
@@ -68,10 +68,10 @@ That's super easy. Change the `Car` constructor to a version with DI:
 
 <code-tabs>
 
-  <code-pane title="src/app/car/car.ts (excerpt with DI)" path="dependency-injection/src/app/car/car.ts" region="car-ctor">
+  <code-pane header="src/app/car/car.ts (excerpt with DI)" path="dependency-injection/src/app/car/car.ts" region="car-ctor">
   </code-pane>
 
-  <code-pane title="src/app/car/car.ts (excerpt without DI)" path="dependency-injection/src/app/car/car-no-di.ts" region="car-ctor">
+  <code-pane header="src/app/car/car.ts (excerpt without DI)" path="dependency-injection/src/app/car/car-no-di.ts" region="car-ctor">
   </code-pane>
 
 </code-tabs>
@@ -136,7 +136,7 @@ You need something that takes care of assembling these parts.
 
 You _could_ write a giant class to do that:
 
-<code-example path="dependency-injection/src/app/car/car-factory.ts" title="src/app/car/car-factory.ts">
+<code-example path="dependency-injection/src/app/car/car-factory.ts" header="src/app/car/car-factory.ts">
 </code-example>
 
 It's not so bad now with only three creation methods.
@@ -153,7 +153,7 @@ You register some classes with this injector, and it figures out how to create t
 
 When you need a `Car`, you simply ask the injector to get it for you and you're good to go.
 
-<code-example path="dependency-injection/src/app/car/car-injector.ts" region="injector-call" title="src/app/car/car-injector.ts" linenums="false">
+<code-example path="dependency-injection/src/app/car/car-injector.ts" region="injector-call" header="src/app/car/car-injector.ts" linenums="false">
 </code-example>
 
 Everyone wins. The `Car` knows nothing about creating an `Engine` or `Tires`.

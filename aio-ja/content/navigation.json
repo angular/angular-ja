@@ -530,7 +530,7 @@
           "url": "guide/universal",
           "title": "サーバーサイドレンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-          "translated": true
+          "translated": false
         },
         {
           "title": "Upgrading from AngularJS",

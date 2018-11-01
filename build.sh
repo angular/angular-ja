@@ -13,7 +13,7 @@ rsync -ar aio-ja/ .tmp/aio
 cd .tmp
 yarn install --frozen-lockfile --non-interactive
 cd aio
-yarn build-local
+yarn build
 
 cd ../../
 

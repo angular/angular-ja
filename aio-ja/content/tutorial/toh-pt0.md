@@ -27,7 +27,7 @@ Angularワークスペースのコンテキストでアプリケーションを�
 新しいワークスペースと初期のアプリケーションプロジェクトを作成するには：
 
  1. Angularワークスペースフォルダにないことを確認します。たとえば、Getting Startedワークスペースを以前に作成した場合は、そのフォルダの親フォルダに変更します。
- 2. CLIコマンド `ng new` を実行し、以下に示すように、`angular-tour-of-heroes` という名前を指定します。
+ 2. CLIコマンド `ng new` を実行し、次に示すように、`angular-tour-of-heroes` という名前を指定します。
 
   <code-example language="sh" class="code-shell">
     ng new angular-tour-of-heroes

@@ -12,9 +12,8 @@ rsync -ar aio-ja/ .tmp/aio
 # build angular.io
 cd .tmp
 yarn install --frozen-lockfile --non-interactive
-./scripts/build-packages-dist.sh
 cd aio
-yarn build-local
+yarn build
 
 cd ../../
 

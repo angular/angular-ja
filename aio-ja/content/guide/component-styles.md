@@ -21,7 +21,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 `styles` プロパティは、CSSコードを含む文字列の配列を使います。
 通常は、次の例のようにひとつの文字列を与えます：
 
-<code-example path="component-styles/src/app/hero-app.component.ts" title="src/app/hero-app.component.ts" linenums="false">
+<code-example path="component-styles/src/app/hero-app.component.ts" header="src/app/hero-app.component.ts" linenums="false">
 </code-example>
 
 ## スタイルのスコープ
@@ -70,7 +70,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 `:host` 擬似クラスセレクターを使用して、(コンポーネントのテンプレートの *内部の* ターゲティング要素とは対象的に)
 コンポーネントを *ホスト* する要素のスタイルをターゲットにします。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="host" title="src/app/hero-details.component.css" linenums="false">
+<code-example path="component-styles/src/app/hero-details.component.css" region="host" header="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 `:host` セレクターは、ホスト要素をターゲットにする唯一の方法です。
@@ -83,7 +83,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 次の例では、ホスト要素を再びターゲットにしていますが、
 `active` CSS クラスも持っている場合に限ります。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" title="src/app/hero-details.component.css" linenums="false">
+<code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 ### :host-context
@@ -99,7 +99,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 次の例では、コンポーネント *内* のすべての `<h2>` 要素に `background-color`　のスタイルを適用します。
 ただし、一部の祖先要素にCSSクラス `theme-light` がある場合にのみ適用されます。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" title="src/app/hero-details.component.css" linenums="false">
+<code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" header="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
 ### (非推奨) `/deep/` 、 `>>>` と `::ng-deep`
@@ -114,7 +114,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 次の例では、ホスト要素からこのコンポーネントを経由してDOM内のすべての子要素に至るまで、
 すべての `<h3>` 要素を対象としています。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="deep" title="src/app/hero-details.component.css" linenums="false">
+<code-example path="component-styles/src/app/hero-details.component.css" region="deep" header="src/app/hero-details.component.css" linenums="false">
 
 </code-example>
 
@@ -154,7 +154,7 @@ shadow-piercing子孫コンビネータは廃止され、主要なツールや[�
 
 配列の各文字列は、このコンポーネントのCSSを定義します。
 
-<code-example path="component-styles/src/app/hero-app.component.ts" title="src/app/hero-app.component.ts (CSS inline)">
+<code-example path="component-styles/src/app/hero-app.component.ts" header="src/app/hero-app.component.ts (CSS inline)">
 </code-example>
 
 <div class="alert is-critical">
@@ -164,7 +164,7 @@ shadow-piercing子孫コンビネータは廃止され、主要なツールや[�
 
 </div>
 
-CLI は、 `--inline-style` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
+Angular CLIコマンド [`ng generate component`](cli/generate) は、 `--inline-style` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
 
 <code-example language="sh" class="code-shell">
 ng generate component hero-app --inline-style
@@ -176,8 +176,8 @@ ng generate component hero-app --inline-style
 外部CSSファイルからスタイルをロードできます。
 
 <code-tabs>
-  <code-pane title="src/app/hero-app.component.ts (CSS in file)" path="component-styles/src/app/hero-app.component.1.ts"></code-pane>
-  <code-pane title="src/app/hero-app.component.css" path="component-styles/src/app/hero-app.component.css"></code-pane>
+  <code-pane header="src/app/hero-app.component.ts (CSS in file)" path="component-styles/src/app/hero-app.component.1.ts"></code-pane>
+  <code-pane header="src/app/hero-app.component.css" path="component-styles/src/app/hero-app.component.css"></code-pane>
 </code-tabs>
 
 <div class="alert is-critical">
@@ -193,7 +193,7 @@ ng generate component hero-app --inline-style
 
 </div>
 
-CLI は、デフォルトで空のスタイルファイルを生成し、コンポーネントの生成された `styleUrls` で参照します。
+Angular CLIコマンド [`ng generate component`](cli/generate) を `--inline-style` フラグなしで使用すると、空のスタイルファイルを生成し、コンポーネントの生成された `styleUrls` で参照します。
 
 <code-example language="sh" class="code-shell">
 ng generate component hero-app
@@ -204,19 +204,20 @@ ng generate component hero-app
 `<style>` タグの中に入れることで、
 CSSスタイルをHTMLテンプレートに直接埋め込むことができます。
 
-<code-example path="component-styles/src/app/hero-controls.component.ts" region="inlinestyles" title="src/app/hero-controls.component.ts">
+<code-example path="component-styles/src/app/hero-controls.component.ts" region="inlinestyles" header="src/app/hero-controls.component.ts">
 </code-example>
 
 ### リンクタグテンプレート
 
 コンポーネントのHTMLテンプレートに `<link>` タグを記述することもできます。
 
-<code-example path="component-styles/src/app/hero-team.component.ts" region="stylelink" title="src/app/hero-team.component.ts">
+<code-example path="component-styles/src/app/hero-team.component.ts" region="stylelink" header="src/app/hero-team.component.ts">
 </code-example>
 
 <div class="alert is-critical">
 
-CLIを使用して構築する場合は、[CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
+CLIを使用して構築する場合は、[CLI wiki](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
+<!-- 2018-10-16: The link above is still the best source for this information. -->
 
 リンクタグのhref URLがアプリケーションルートまたはコンポーネントファイルのどちらへの相対パスであっても、CLIはスタイルシートを取り込みます。
 
@@ -230,7 +231,7 @@ CLIを使用して構築する場合は、[CLI ドキュメント](https://githu
 
 この場合、インポートするファイルの URL は、CSSファイルに対して相対指定です。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="import" title="src/app/hero-details.component.css (excerpt)">
+<code-example path="component-styles/src/app/hero-details.component.css" region="import" header="src/app/hero-details.component.css (excerpt)">
 </code-example>
 
 ### 外部およびグローバルスタイルファイル
@@ -239,7 +240,8 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 
 デフォルトでグローバルな `styles.css` ファイルを事前設定している `styles` セクションに、 **グローバル** スタイルファイルを登録します。
 
-もっと学びたい場合は、 [CLI ドキュメント](https://github.com/angular/angular-cli/wiki/stories-global-styles) を参照してください。
+もっと学びたい場合は、 [CLI wiki](https://github.com/angular/angular-cli/wiki/stories-global-styles) を参照してください。
+<!-- 2018-10-16: The link above is still the best source for this information. -->
 
 ### CSS以外のスタイルファイル
 
@@ -258,9 +260,10 @@ CLIを使用して構築する場合、
 CLIビルドプロセスは、適切なCSSプリプロセッサを実行します。
 
 `ng generate component` を使用してコンポーネントファイルを生成する場合、CLI は、デフォルトで空の CSS　スタイルファイル(`.css`)を生成します。
-[CLIのドキュメンテーション](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
+[CLI wiki](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
 "CSS Preprocessor integration") 
 で説明されているように、CLIのデフォルトのプリプロセッサを設定することができます。
+<!-- 2018-10-16: The link above is still the best source for this information. -->
 
 <div class="alert is-important">
 
@@ -298,7 +301,7 @@ AngularはCSSをグローバルスタイルに追加します。
 
 コンポーネントのカプセル化モードを設定するには、コンポーネントメタデータ内の `encapsulation` プロパティを使用します：
 
-<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" title="src/app/quest-summary.component.ts" linenums="false">
+<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" header="src/app/quest-summary.component.ts" linenums="false">
 </code-example>
 
 `ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します

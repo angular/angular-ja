@@ -1,40 +1,56 @@
 # アプリケーションシェル
 
-## Angular CLI をインストール
+まず、Angular CLIを使用して初期アプリケーションを作成します。このチュートリアルでは、スターターアプリケーションを修正して拡張し、Tour of Heroesアプリを作成します。
 
-まだ[Angular CLI](https://github.com/angular/angular-cli)をインストールしていない場合は、インストールしてください。
+チュートリアルのこの部分では、次のことを行います。
 
-<code-example language="sh" class="code-shell">
-  npm install -g @angular/cli
-</code-example>  
+1. 環境を設定します。
+2. 新しいワークスペースと初期アプリケーションプロジェクトを作成します。
+3. アプリケーションをサーブします。
+4. アプリケーションを変更します。
 
-## 新しいアプリケーションを作成
 
-次のCLIコマンドで`angular-tour-of-heroes`という名前の新しいプロジェクトを作成します。
+## 環境を設定する
 
-<code-example language="sh" class="code-shell">
-  ng new angular-tour-of-heroes
-</code-example>
+開発環境を設定するには、[入門](guide/quickstart)の次の手順に従います。
 
-Angular CLIが、デフォルトのアプリケーションとサポートファイルをもつ新しいプロジェクトを作成しました。
-
+* [前提条件](guide/quickstart#prerequisites)
+* [Angular CLIのインストール](guide/quickstart#install-cli)
 
 <div class="alert is-helpful">
 
-
-
-`ng add`コマンドを使用すると、パッケージ化された機能を新しいプロジェクトに追加できます。 
-`ng add`コマンドは、指定されたパッケージにschematicsを適用してプロジェクトを変換します。詳細については、[Angular CLIのドキュメンテーション](https://github.com/angular/angular-cli/wiki/add "Angular CLI documentation")を参照してください。
-
-Angular Materialは、典型的なアプリケーションレイアウトのschematicsを提供します。
-詳細については、[Angular Materialのドキュメンテーション](https://material.angular.io/guides "Angular Material documentation")を参照してください。
-
+**Note:**: 入門の全体を完了する必要はありません。 入門の上の2つのセクションを完了すると、環境がセットアップされます。引き続きTour of Heroesのワークスペースの作成と最初のアプリプロジェクトを作成します。
 </div>
 
+## 新しいワークスペースと初期アプリケーションリンクを作成する
+
+Angularワークスペースのコンテキストでアプリケーションを開発します。[ワークスペース](guide/glossary#workspace)には、1つ以上の[プロジェクト](guide/glossary#project)のファイルが含まれます。プロジェクトとは、アプリケーション、ライブラリ、またはエンドツーエンド（e2e）のテストを構成する一連のファイルです。このチュートリアルでは、新しいワークスペースを作成します。
+
+新しいワークスペースと初期のアプリケーションプロジェクトを作成するには：
+
+ 1. Angularワークスペースフォルダにないことを確認します。たとえば、Getting Startedワークスペースを以前に作成した場合は、そのフォルダの親フォルダに変更します。
+ 2. CLIコマンド `ng new` を実行し、次に示すように、`angular-tour-of-heroes` という名前を指定します。
+
+  <code-example language="sh" class="code-shell">
+    ng new angular-tour-of-heroes
+  </code-example>
+
+  3. `ng new` コマンドを実行すると、最初のアプリプロジェクトに含める機能に関する情報が表示されます。 EnterキーまたはReturnキーを押してデフォルト値を受け入れます。
+
+Angular CLIは、必要なAngular npmパッケージおよびその他の依存関係をインストールします。これには数分かかることがあります。
+
+また、次のワークスペースとスタータープロジェクトファイルも作成されます。
+
+  * `angular-tour-of-heroes`という名前のルートフォルダがある新しいワークスペース。 
+  * 同じく`angular-tour-of-heroes`と呼ばれる初期スケルトンアプリケーションプロジェクト。（`src`サブフォルダ内） 
+  * エンドツーエンドのテストプロジェクト。（`e2e`サブフォルダ内）
+  * 関連する設定ファイル。
+
+最初のアプリプロジェクトには、すぐに実行できる簡単なウェルカムアプリが含まれています。
 
 ## アプリケーションをサーブする
 
-プロジェクトディレクトリに移動し、アプリケーションを起動します。
+ワークスペースディレクトリに移動し、アプリケーションを起動します。
 
 <code-example language="sh" class="code-shell">
   cd angular-tour-of-heroes
@@ -60,9 +76,9 @@ Angular Materialは、典型的なアプリケーションレイアウトのsche
 _コンポーネント_ はAngularアプリケーションの基礎的な構成要素です。
 コンポーネントはスクリーン上にデータを表示し、ユーザーの入力を待ち受け、その入力に対しアクションを取ります。
 
-## アプリケーションのタイトルを変更する
+## アプリケーションを変更する
 
-好きなテキストエディタまたはIDEでプロジェクトを開き、`src/app`に移動してください。
+スターターアプリをいくつか変更するために、好きなテキストエディタまたはIDEでプロジェクトを開き、`src/app`に移動してください。
 
 次の3つのファイルに分割された、`AppComponent`シェルの実装が見つかります。
 
@@ -70,10 +86,11 @@ _コンポーネント_ はAngularアプリケーションの基礎的な構成�
 1. `app.component.html`&mdash; HTMLで書かれたコンポーネントのテンプレートです。
 1. `app.component.css`&mdash; このコンポーネント専用のCSSです。
 
+### アプリケーションのタイトルを変更する
 
 コンポーネントクラスファイル(`app.component.ts`)を開き、`title`プロパティの値を`Tour of Heroes`に変更してください。
 
-<code-example path="toh-pt0/src/app/app.component.ts" region="set-title" title="app.component.ts (class title property)" linenums="false">
+<code-example path="toh-pt0/src/app/app.component.ts" region="set-title" header="app.component.ts (class title property)" linenums="false">
 </code-example>
 
 コンポーネントのテンプレートファイル(`app.component.html`)を開き、
@@ -81,7 +98,7 @@ Angular CLIにより生成されたデフォルトのテンプレートを削除
 代わりに次のHTMLを配置してください。
 
 <code-example path="toh-pt0/src/app/app.component.html"
-  title="app.component.html (template)" linenums="false">
+  header="app.component.html (template)" linenums="false">
 </code-example>
 
 二重の波括弧はAngularの*補間バインディング*の構文です。
@@ -91,7 +108,7 @@ Angular CLIにより生成されたデフォルトのテンプレートを削除
 
 {@a app-wide-styles}
 
-## アプリケーションのスタイルを追加する
+### アプリケーションのスタイルを追加する
 
 ほとんどのアプリケーションは、アプリケーション全体で一貫した見た目を目指しています。
 CLIはこの目的のために、空の`styles.css`を生成しました。
@@ -99,7 +116,7 @@ CLIはこの目的のために、空の`styles.css`を生成しました。
 
 以下は、_Tour of Heroes_ サンプルアプリケーションの`style.css`の抜粋です。
 
-<code-example path="toh-pt0/src/styles.1.css" title="src/styles.css (excerpt)">
+<code-example path="toh-pt0/src/styles.1.css" header="src/styles.css (excerpt)">
 </code-example>
 
 ## 最終的なコードのおさらい
@@ -111,14 +128,14 @@ CLIはこの目的のために、空の`styles.css`を生成しました。
 
 <code-tabs>
 
-  <code-pane title="src/app/app.component.ts" path="toh-pt0/src/app/app.component.ts">
+  <code-pane header="src/app/app.component.ts" path="toh-pt0/src/app/app.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/app.component.html" path="toh-pt0/src/app/app.component.html">
+  <code-pane header="src/app/app.component.html" path="toh-pt0/src/app/app.component.html">
   </code-pane>
 
   <code-pane
-    title="src/styles.css (excerpt)"
+    header="src/styles.css (excerpt)"
     path="toh-pt0/src/styles.1.css">
   </code-pane>
 </code-tabs>

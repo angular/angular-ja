@@ -5,7 +5,7 @@
 
 {@a toc}
 
-<live-example title="Reactive Forms in Stackblitz">リアクティブフォームのライブサンプル</live-example>をお試しください。
+<live-example header="Reactive Forms in Stackblitz">リアクティブフォームのライブサンプル</live-example>をお試しください。
 
 {@a intro}
 
@@ -25,7 +25,7 @@
 
 リアクティブフォームを使うには、 `ReactiveFormsModule` を `@angular/forms` パッケージからインポートし、 NgModuleの `imports` 配列に追加します。
 
-<code-example path="reactive-forms/src/app/app.module.ts" region="imports" title="src/app/app.module.ts (抜粋)">
+<code-example path="reactive-forms/src/app/app.module.ts" region="imports" header="src/app/app.module.ts (抜粋)">
 
 </code-example>
 
@@ -41,7 +41,7 @@
 
 `FormControl`クラスはリアクティブフォームを使う上でもっとも基本的な構成要素です。単一のフォームコントロールを登録するには、`FormControl`クラスをコンポーネントにインポートし、クラスプロパティとして保存するフォームコントロールの新しいインスタンスを作成します。
 
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="create-control" title="src/app/name-editor/name-editor.component.ts">
+<code-example path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="create-control" header="src/app/name-editor/name-editor.component.ts">
 
 </code-example>
 
@@ -51,7 +51,7 @@
 
 コンポーネントクラスにコントロールを作成した後は、テンプレート内のフォームコントロール要素へ紐付ける必要があります。 `ReactiveFormsModule`内の`FormControlDirective`が提供する`formControl`バインディングを使い、フォームコントロールとともにテンプレートを更新します。
 
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="control-binding" linenums="false" title="src/app/name-editor/name-editor.component.html">
+<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="control-binding" linenums="false" header="src/app/name-editor/name-editor.component.html">
 
 </code-example>
 
@@ -67,7 +67,7 @@
 
 `name`が割り当てられたフォームコントロールは、コンポーネントがテンプレートに追加すると表示されます。
 
-<code-example path="reactive-forms/src/app/app.component.1.html" region="app-name-editor" linenums="false" title="src/app/app.component.html (name エディター)">
+<code-example path="reactive-forms/src/app/app.component.1.html" region="app-name-editor" linenums="false" header="src/app/app.component.html (name エディター)">
 
 </code-example>
 
@@ -90,7 +90,7 @@
 
 次の例では、テンプレートの補間を使ってどのように現在の値を表示するのかを示します。
 
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="display-value" linenums="false" title="src/app/name-editor/name-editor.component.html (コントロール値)">
+<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="display-value" linenums="false" header="src/app/name-editor/name-editor.component.html (コントロール値)">
 
 </code-example>
 
@@ -106,13 +106,13 @@
 
 次の例では、コンポーネントクラスにメソッドを追加し、`setValue()`メソッドを使ってコントロールの値を*Nancy*へ更新します。
 
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="update-value" title="src/app/name-editor/name-editor.component.ts (値の更新)">
+<code-example path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="update-value" header="src/app/name-editor/name-editor.component.ts (値の更新)">
 
 </code-example>
 
 テンプレートを更新して、名前の更新をシミュレートするボタンをつけます。**Update Name** ボタンをクリックすると、フォームコントロール要素に入力されている値が現在の値として反映されます。
 
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="update-value" linenums="false" title="src/app/name-editor/name-editor.component.html (値の更新)">
+<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="update-value" linenums="false" header="src/app/name-editor/name-editor.component.html (値の更新)">
 
 </code-example>
 
@@ -140,7 +140,7 @@
 
 </code-example>
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="imports" title="src/app/profile-editor/profile-editor.component.ts (imports)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="imports" header="src/app/profile-editor/profile-editor.component.ts (imports)">
 
 </code-example>
 
@@ -150,7 +150,7 @@
 
 プロフィールのフォームには、`firstName` と `lastName`という名前のふたつのフォームコントロールのインスタンスを追加します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup" title="src/app/profile-editor/profile-editor.component.ts (フォームグループ)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup" header="src/app/profile-editor/profile-editor.component.ts (フォームグループ)">
 
 </code-example>
 
@@ -160,7 +160,7 @@
 
 フォームグループは個々のコントロールの状態と変更を監視しているので、ひとつのコントロールに変更があれば、親のコントロールも新しい状態や値変更を発行します。グループのモデルはメンバーによって維持されています。モデルを定義した後、モデルをビューに反映させるようにテンプレートを更新する必要があります。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroup" linenums="false" title="src/app/profile-editor/profile-editor.component.html (フォームグループテンプレート)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroup" linenums="false" header="src/app/profile-editor/profile-editor.component.html (フォームグループテンプレート)">
 
 </code-example>
 
@@ -172,13 +172,13 @@
 
 `form`タグに`ngSubmit`イベントリスナーを`onSubmit()`コールバックメソッドとあわせて追加します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="ng-submit" linenums="false" title="src/app/profile-editor/profile-editor.component.html (送信イベント)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="ng-submit" linenums="false" header="src/app/profile-editor/profile-editor.component.html (送信イベント)">
 
 </code-example>
 
 `ProfileEditor`コンポーネント内の`onSubmit()`メソッドは、現在の`profileForm`の値を取得します。フォームをカプセル化したままコンポーネントの外へフォームの値を提供するには、`EventEmitter`を使用します。次の例では`console.warn`を使い、ブラウザのコンソールにメッソージを記録します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="on-submit" title="src/app/profile-editor/profile-editor.component.ts (送信メソッド)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="on-submit" header="src/app/profile-editor/profile-editor.component.ts (送信メソッド)">
 
 </code-example>
 
@@ -186,7 +186,7 @@
 
 `button`要素を使って、フォームの下にボタンを追加してフォーム送信を発火します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="submit-button" linenums="false" title="src/app/profile-editor/profile-editor.component.html (送信ボタン)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="submit-button" linenums="false" header="src/app/profile-editor/profile-editor.component.html (送信ボタン)">
 
 </code-example>
 
@@ -200,7 +200,7 @@
 
 フォームを含む`ProfileEditor`コンポーネントを表示するために、コンポーネントテンプレートへ追加します。
 
-<code-example path="reactive-forms/src/app/app.component.1.html" region="app-profile-editor" linenums="false" title="src/app/app.component.html (profile editor)">
+<code-example path="reactive-forms/src/app/app.component.1.html" region="app-profile-editor" linenums="false" header="src/app/app.component.html (profile editor)">
 
 </code-example>
 
@@ -218,7 +218,7 @@
 
 住所はグループ化する情報として適した例です。フォームグループは、フォームコントロールとフォームグループの両方のインスタンスを子としてもつことができます。これにより複雑なフォームモデルを構築しやすく、論理的なグループにできます。`profileForm`にネストしたグループを作るには、フォームグループインスタンスにネストした`address`要素を追加します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="nested-formgroup" linenums="false" title="src/app/profile-editor/profile-editor.component.ts (ネストしたフォームグループ)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="nested-formgroup" linenums="false" header="src/app/profile-editor/profile-editor.component.ts (ネストしたフォームグループ)">
 
 </code-example>
 
@@ -230,7 +230,7 @@
 
 `firstName` と `lastName`フィールドを含む`address`フォームグループを`ProfileEditor`テンプレートに追加します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroupname" linenums="false" title="src/app/profile-editor/profile-editor.component.html (ネストしたフォームグループテンプレート)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroupname" linenums="false" header="src/app/profile-editor/profile-editor.component.html (ネストしたフォームグループテンプレート)">
 
 </code-example>
 
@@ -262,13 +262,13 @@
 
 `ProfileEditorComponent`では、下の例にある`updateProfile`メソッドを使いfirst nameとstreet addressを更新します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="patch-value" title="src/app/profile-editor/profile-editor.component.ts (値のパッチ)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="patch-value" header="src/app/profile-editor/profile-editor.component.ts (値のパッチ)">
 
 </code-example>
 
 ユーザープロフィールをオンデマンドで更新するためにテンプレートにボタンを追加して、更新をシミュレートします。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="patch-value" linenums="false" title="src/app/profile-editor/profile-editor.component.html (値の更新)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="patch-value" linenums="false" header="src/app/profile-editor/profile-editor.component.html (値の更新)">
 
 </code-example>
 
@@ -284,7 +284,7 @@
 
 `@angular/forms`パッケージから`FormBuilder`クラスをインポートします。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder-imports" title="src/app/profile-editor/profile-editor.component.ts (インポート)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder-imports" header="src/app/profile-editor/profile-editor.component.ts (インポート)">
 
 </code-example>
 
@@ -292,7 +292,7 @@
 
 `FormBuilder`サービスは、リアクティブフォームモジュールが提供する注入できるプロバイダーです。コンポーネントのコンスタラクターに追加することで依存性を注入します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="inject-form-builder" title="src/app/profile-editor/profile-editor.component.ts (コンストラクター)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="inject-form-builder" header="src/app/profile-editor/profile-editor.component.ts (コンストラクター)">
 
 </code-example>
 
@@ -303,7 +303,7 @@
 
 `group`メソッドを使い、`profileForm`コントロールを作成します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder" title="src/app/profile-editor/profile-editor.component.ts (フォームビルダー)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder" header="src/app/profile-editor/profile-editor.component.ts (フォームビルダー)">
 
 </code-example>
 
@@ -319,11 +319,11 @@
 
 <code-tabs>
 
-  <code-pane path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup-compare" title="src/app/profile-editor/profile-editor.component.ts (インスタンス)">
+  <code-pane path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup-compare" header="src/app/profile-editor/profile-editor.component.ts (インスタンス)">
 
   </code-pane>
 
-  <code-pane path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="formgroup-compare" title="src/app/profile-editor/profile-editor.component.ts (フォームビルダー)">
+  <code-pane path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="formgroup-compare" header="src/app/profile-editor/profile-editor.component.ts (フォームビルダー)">
 
   </code-pane>
 
@@ -341,7 +341,7 @@ _フォームバリデーション_ は、ユーザー入力を検証し、入�
 
 `@angular/forms`パッケージから`Validators`クラスをインポートします。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="validator-imports" title="src/app/profile-editor/profile-editor.component.ts (インポート)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="validator-imports" header="src/app/profile-editor/profile-editor.component.ts (インポート)">
 
 </code-example>
 
@@ -351,13 +351,13 @@ _フォームバリデーション_ は、ユーザー入力を検証し、入�
 
 `ProfileEditor`コンポーネント内で、静的な`Validators.required`メソッドを`firstName`コントロールの配列の2つ目の項目に追加します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="required-validator" title="src/app/profile-editor/profile-editor.component.ts (必須バリデーター)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="required-validator" header="src/app/profile-editor/profile-editor.component.ts (必須バリデーター)">
 
 </code-example>
 
 HTML5には、`required`、`minlength`、`maxlength`などのネイティブバリデーションとして使用できるビルトイン属性があります。これらのオプション属性はフォーム入力要素で使用できます。`required`属性を`firstName`入力要素に追加します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="required-attribute" linenums="false" title="src/app/profile-editor/profile-editor.component.html (必須属性)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="required-attribute" linenums="false" header="src/app/profile-editor/profile-editor.component.html (必須属性)">
 
 </code-example>
 
@@ -373,7 +373,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 補間を使用して現在の`profileForm`のステータスを表示させます。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="display-status" linenums="false" title="src/app/profile-editor/profile-editor.component.html (ステータスの表示)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="display-status" linenums="false" header="src/app/profile-editor/profile-editor.component.html (ステータスの表示)">
 
 </code-example>
 
@@ -393,7 +393,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 `@angular/forms`から`FormArray`クラスをインポートして、型情報として使用します。`FormBuilder`から`FormArray`インスタンスを作成することもできます。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-array-imports" title="src/app/profile-editor/profile-editor.component.ts (インポート)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-array-imports" header="src/app/profile-editor/profile-editor.component.ts (インポート)">
 
 </code-example>
 
@@ -403,7 +403,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 `FormBuilder.array()`メソッドを使い配列を定義し、`FormBuilder.control()`メソッドで配列に初期コントロールを設定します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="aliases" title="src/app/profile-editor/profile-editor.component.ts (エイリアスフォーム配列)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="aliases" header="src/app/profile-editor/profile-editor.component.ts (エイリアスフォーム配列)">
 
 </code-example>
 
@@ -415,7 +415,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 ゲッター構文を使用して、親のフォームグループからエイリアスのフォーム配列コントロールを取得する`aliases`クラスプロパティを作ります。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="aliases-getter" title="src/app/profile-editor/profile-editor.component.ts (エイリアス ゲッター)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="aliases-getter" header="src/app/profile-editor/profile-editor.component.ts (エイリアス ゲッター)">
 
 </code-example>
 
@@ -427,7 +427,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 動的にエイリアスコントロールをエイリアスのフォーム配列へ追加するメソッドを定義します。`FormArray.push()`メソッドは、配列へコントロールを新しいアイテムとして挿入します。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="add-alias" title="src/app/profile-editor/profile-editor.component.ts (エイリアスの追加)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="add-alias" header="src/app/profile-editor/profile-editor.component.ts (エイリアスの追加)">
 
 </code-example>
 
@@ -439,7 +439,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 下のテンプレートHTMLを`formGroupName`要素の`<div>`閉じタグの後に追加してください。
 
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="formarrayname" linenums="false" title="src/app/profile-editor/profile-editor.component.html (エイリアスフォーム配列テンプレート)">
+<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="formarrayname" linenums="false" header="src/app/profile-editor/profile-editor.component.html (エイリアスフォーム配列テンプレート)">
 
 </code-example>
 

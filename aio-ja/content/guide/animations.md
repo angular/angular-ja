@@ -37,7 +37,7 @@ Angularアニメーションをプロジェクトに追加するには、標準�
 
 `BrowserAnimationsModule`をインポートしてください。これによってアニメーション機能をAngularのルートアプリケーションモジュールに取り込みます。
 
-<code-example path="animations/src/app/app.module.1.ts" title="src/app/app.module.ts" language="typescript" linenums="false">
+<code-example path="animations/src/app/app.module.1.ts" header="src/app/app.module.ts" language="typescript" linenums="false">
 </code-example>
 
 <div class="alert is-helpful">
@@ -49,7 +49,7 @@ Angularアニメーションをプロジェクトに追加するには、標準�
 
 コンポーネントファイルで特定のアニメーション関数を使用する場合は、それらの関数を`@angular/animations`からインポートしてください。
 
-<code-example path="animations/src/app/app.component.ts" title="src/app/app.component.ts" region="imports" language="typescript">
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="imports" language="typescript">
 </code-example>
 
 <div class="alert is-helpful">
@@ -61,7 +61,7 @@ Angularアニメーションをプロジェクトに追加するには、標準�
 
 コンポーネントファイル内の`@Component()`デコレーター内に`animations:`というメタデータプロパティを追加してください。アニメーションを定義したトリガーを`animations`メタデータプロパティ内に配置します。
 
-<code-example path="animations/src/app/app.component.ts" title="src/app/app.component.ts" region="decorator" language="typescript">
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="decorator" language="typescript">
 </code-example>
 
 ## シンプルな遷移アニメーション
@@ -82,12 +82,12 @@ HTMLでは、これらの属性は色や不透明度などの通常のCSSスタ�
 
 Angularの`state()`関数がCSSスタイル属性を設定する`style⁣()`関数とどのように機能するかを見てみましょう。次のコードスニペットでは、複数のスタイル属性が状態に対して同時に設定されています。`open`状態では、ボタンの高さは200ピクセル、不透明度は1、背景色は黄色になります。
 
-<code-example path="animations/src/app/open-close.component.ts" title="src/app/open-close.component.ts" region="state1" language="typescript">
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state1" language="typescript">
 </code-example>
 
 次の`closed`状態では、ボタンの高さは100ピクセル、不透明度は0.5、背景色は緑になります。
 
-<code-example path="animations/src/app/open-close.component.ts" title="src/app/open-close.component.ts" region="state2" language="typescript">
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state2" language="typescript">
 </code-example>
 
 ### 遷移とタイミング
@@ -134,7 +134,7 @@ Angularでは、アニメーションなしで複数のスタイルを設定で�
 
 次の例では、状態間の1秒の遷移で、`open`から`closed`への状態遷移を提供しています。
 
-<code-example path="animations/src/app/open-close.component.ts" title="src/app/open-close.component.ts" language="typescript"
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
 region="transition1">
 </code-example>
 
@@ -142,7 +142,7 @@ region="transition1">
 
 次の例では、0.5秒の遷移アニメーションの運動曲線を使用して、`closed`状態から`open`状態への状態遷移を追加します。
 
-<code-example path="animations/src/app/open-close.component.ts" title="src/app/open-close.component.ts" language="typescript"
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
 region="transition2">
 </code-example>
 
@@ -180,7 +180,7 @@ region="transition2">
 
 アニメーションは、アニメーション化されるHTML要素を制御するコンポーネントのメタデータで定義されます。アニメーションを定義するコードを`@Component()`デコレーター内の`animations:`プロパティ下に配置します。
 
-<code-example path="animations/src/app/open-close.component.ts" title="src/app/open-close.component.ts" language="typescript"
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
 region="component" linenums="false">
 </code-example>
 
@@ -194,7 +194,7 @@ region="component" linenums="false">
 
 次のコードスニペットでは、トリガーを`isOpen`プロパティの値にバインドします。
 
-<code-example path="animations/src/app/open-close.component.1.html" title="src/app/open-close.component.html"
+<code-example path="animations/src/app/open-close.component.1.html" header="src/app/open-close.component.html"
 region="compare">
 </code-example>
 
@@ -216,15 +216,15 @@ HTMLテンプレートファイル内では、定義されたアニメーショ�
 
 <code-tabs>
 
-<code-pane title="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" language="typescript"
+<code-pane header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" language="typescript"
 region="component">
 </code-pane>
 
-<code-pane title="src/app/open-close.component.html" path="animations/src/app/open-close.component.1.html"
+<code-pane header="src/app/open-close.component.html" path="animations/src/app/open-close.component.1.html"
 region="trigger">
 </code-pane>
 
-<code-pane title="src/app/open-close.component.css" path="animations/src/app/open-close.component.css">
+<code-pane header="src/app/open-close.component.css" path="animations/src/app/open-close.component.css">
 </code-pane>
 
 </code-tabs>

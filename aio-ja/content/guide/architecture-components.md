@@ -14,7 +14,7 @@
 コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (class)" region="class"></code-example>
+<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" header="src/app/hero-list.component.ts (class)" region="class"></code-example>
 
 Angularは、ユーザーがアプリケーションを移動するときにコンポーネントを作成、更新、および破棄します。アプリは、ライフサイクルの各段階で、`ngOnInit()`などの[ライフサイクルフック](guide/lifecycle-hooks)を使用してアクションを実行できます。
 
@@ -31,7 +31,7 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 `HeroListComponent`の基本メタデータの例を次に示します。
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (metadata)" region="metadata"></code-example>
+<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" header="src/app/hero-list.component.ts (metadata)" region="metadata"></code-example>
 
 この例は、もっとも役立つ `@Component` の設定オプションの一部です：
 
@@ -62,7 +62,7 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 たとえば、チュートリアルの`HeroListComponent`のテンプレートは次のようになります。
 
-<code-example path="architecture/src/app/hero-list.component.html" title="src/app/hero-list.component.html"></code-example>
+<code-example path="architecture/src/app/hero-list.component.html" header="src/app/hero-list.component.html"></code-example>
 
 このテンプレートは `<h2>`や `<p>`のような典型的なHTML要素を使い、Angularテンプレート構文要素、`*ngFor`、`{{hero.name}}`、`(click)`、`[hero]`、`<app-hero-detail>`なども含みます。テンプレート構文要素は、プログラムロジックとデータを使用してHTMLをスクリーンにレンダリングする方法をAngularに伝えます。
 
@@ -85,7 +85,7 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 
 `HeroListComponent`テンプレートのこの例は、これらの3つのフォームを使用しています。
 
-<code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (binding)" region="binding"></code-example>
+<code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" header="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
 * `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
@@ -96,7 +96,7 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 
 双方向データバインディング（主に[テンプレート駆動フォーム](guide/forms)で使用される）は、単一の表記法でプロパティとイベントのバインディングを結合します。`HeroDetailComponent` テンプレートの例は、`ngModel` ディレクティブとの双方向データバインディングを使用しています。
 
-<code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
+<code-example path="architecture/src/app/hero-detail.component.html" linenums="false" header="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
 双方向バインディングでは、データプロパティ値が、プロパティバインディングと同様にコンポーネントから入力ボックスに流れます。
 ユーザーの変更もコンポーネントに戻り、イベントバインディングの場合と同様にプロパティを最新の値にリセットします。
@@ -154,7 +154,7 @@ Angular テンプレートは*ダイナミック*です。Angular がレンダ�
 
 *構造ディレクティブ*は、DOMの要素を追加、削除、置換することによってレイアウトを変更します。サンプルテンプレートでは、2つの組み込み構造ディレクティブを使用して、ビューのレンダリング方法にアプリケーションロジックを追加しています。
 
-<code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" title="src/app/hero-list.component.html (structural)" region="structural"></code-example>
+<code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" header="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
 * [`*ngFor`](guide/displaying-data#ngFor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
 * [`*ngIf`](guide/displaying-data#ngIf) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
@@ -165,7 +165,7 @@ Angular テンプレートは*ダイナミック*です。Angular がレンダ�
 
 双方向データバインディングを実装する `ngModel` ディレクティブは、属性ディレクティブの例です。`ngModel`は、その表示値プロパティを設定し、変更イベントに応答することによって、既存の要素の動作（通常は` <input> `）を変更します。
 
-<code-example path="architecture/src/app/hero-detail.component.html" linenums="false" title="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
+<code-example path="architecture/src/app/hero-detail.component.html" linenums="false" header="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
 Angularには、レイアウト構造を変更する
 （たとえば、[ngSwitch](guide/template-syntax#ngSwitch)）  

@@ -31,7 +31,7 @@ AngularにおけるService Workerのインストールは、`NgModule`に含め�
 
 ## 前提条件
 
-アプリケーションは、Service WorkerをサポートするWebブラウザで実行する必要があります。現在、ChromeとFirefoxの最新バージョンでサポートされています。他のブラウザについては、[Can I Use](http://caniuse.com/#feat=serviceworkers)ページを参照してください。
+アプリケーションは、Service WorkerをサポートするWebブラウザで実行する必要があります。現在、Service WorkerはChromeやFirefox、Edge、Safari、Opera、UC Browser (Android版)、Samsung Internetの最新バージョンでサポートされています。IEやOpera Miniのようなブラウザはサポートしていません。他のブラウザについては、[Can I Use](http://caniuse.com/#feat=serviceworkers)ページを参照してください。
 
 ## 関連資料
 

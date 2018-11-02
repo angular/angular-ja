@@ -25,7 +25,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 `ngModel`をローカルテンプレートの変数にエクスポートすることで、コントロールの状態を調べることができます。
 次の例では、`NgModel`を`name`という名前の変数にエクスポートします:
 
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-with-error-msg" title="template/hero-form-template.component.html (name)" linenums="false">
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-with-error-msg" header="template/hero-form-template.component.html (name)" linenums="false">
 
 </code-example>
 
@@ -78,7 +78,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 {@a reactive-component-class}
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="form-group" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="form-group" header="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
 
 注意してください:
@@ -91,7 +91,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 再度入力したnameテンプレートを見ると、テンプレート駆動型の例とかなり似ています。
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="name-with-error-msg" title="reactive/hero-form-reactive.component.html (name with error msg)" linenums="false">
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="name-with-error-msg" header="reactive/hero-form-reactive.component.html (name with error msg)" linenums="false">
 </code-example>
 
 重要なポイント:
@@ -106,7 +106,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 このガイドの前の[例](guide/form-validation#reactive-component-class)の`forbiddenNameValidator`関数について考えてみましょう。その関数の定義は次のようになります:
 
-<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="custom-validator" title="shared/forbidden-name.directive.ts (forbiddenNameValidator)" linenums="false">
+<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="custom-validator" header="shared/forbidden-name.directive.ts (forbiddenNameValidator)" linenums="false">
 </code-example>
 
 この関数は実際には、_特定_ の禁止された名前を検出するために正規表現を取り、バリデータ関数を返すファクトリです。
@@ -124,7 +124,7 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 リアクティブフォームでは、カスタムバリデータは簡単に追加できます。関数を`FormControl`に直接渡すだけです。
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" title="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" header="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
 </code-example>
 
 {@a adding-to-template-driven-forms}
@@ -137,17 +137,17 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 Angularは、ディレクティブが拡張可能なバリデータのコレクションをもつプロバイダーである`NG_VALIDATORS`プロバイダーに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。
 
-<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" title="shared/forbidden-name.directive.ts (providers)" linenums="false">
+<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" header="shared/forbidden-name.directive.ts (providers)" linenums="false">
 </code-example>
 
 ディレクティブクラスは、`Validator`インターフェースを実装しているため、Angularフォームと簡単に統合できます。 これはどのようにそれらをまとめるかを理解するための、ディレクティブの残りの部分です:
 
-<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" title="shared/forbidden-name.directive.ts (directive)">
+<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" header="shared/forbidden-name.directive.ts (directive)">
 </code-example>
 
 `ForbiddenValidatorDirective`が準備されたら、`appForbiddenName`セレクターを任意の入力要素に追加して、アクティブ化できます。これは一例です:
 
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" title="template/hero-form-template.component.html (forbidden-name-input)" linenums="false">
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" header="template/hero-form-template.component.html (forbidden-name-input)" linenums="false">
 
 </code-example>
 
@@ -172,7 +172,7 @@ Angularは、AngularJSと同様に、多くのコントロールプロパティ�
 
 ヒーローフォームでは、`.ng-valid`クラスと`.ng-invalid`クラスを使用して、各フォームコントロールの境界線の色を設定します。
 
-<code-example path="form-validation/src/assets/forms.css" title="forms.css (status classes)">
+<code-example path="form-validation/src/assets/forms.css" header="forms.css (status classes)">
 
 </code-example>
 
@@ -213,7 +213,7 @@ const heroForm = new FormGroup({
 
 バリデータのコードは次のとおりです。
 
-<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-validator" title="shared/identity-revealed.directive.ts" linenums="false">
+<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-validator" header="shared/identity-revealed.directive.ts" linenums="false">
 </code-example>
 
 アイデンティティのバリデーターは、`ValidatorFn`インターフェースを実装します。 Angularコントロールオブジェクトを引数としてとり、フォームが有効な場合はnullを返し、それ以外の場合は`ValidationErrors`を返します。
@@ -223,7 +223,7 @@ const heroForm = new FormGroup({
 値が一致しない場合、ヒーローのアイデンティティは秘密のままであり、安全にnullを返すことができます。それ以外の場合、ヒーローのアイデンティティが明らかになり、エラーオブジェクトを返すことでフォームを無効としてマークする必要があります。
 
 次に、ユーザー体験を向上させるために、フォームが無効な場合に適切なエラーメッセージが表示されます。
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" title="reactive/hero-form-template.component.html" linenums="false">
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" header="reactive/hero-form-template.component.html" linenums="false">
 </code-example>
 
 次のことを確認します。
@@ -233,15 +233,15 @@ const heroForm = new FormGroup({
 ### テンプレート駆動型フォームへの追加
 まず、バリデータ関数をラップするディレクティブを作成する必要があります。 `NG_VALIDATORS`トークンを使用してバリデータとして提供します。理由がわからない場合や構文を完全に理解していない場合は、前の[セクション](guide/form-validation#adding-to-template-driven-forms)に戻ってください。
 
-<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-directive" title="shared/identity-revealed.directive.ts" linenums="false">
+<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-directive" header="shared/identity-revealed.directive.ts" linenums="false">
 </code-example>
 
 次に、このディレクティブをHTMLテンプレートに追加する必要があります。バリデーターはフォームの最上位レベルに登録する必要があるため、このディレクティブを`form`タグに置きます。
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-register-validator" title="template/hero-form-template.component.html" linenums="false">
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-register-validator" header="template/hero-form-template.component.html" linenums="false">
 </code-example>
 
 ユーザー体験を向上させるため、フォームが無効な場合に適切なエラーメッセージが表示されます。
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-error-message" title="template/hero-form-template.component.html" linenums="false">
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-error-message" header="template/hero-form-template.component.html" linenums="false">
 </code-example>
 
 次のことを確認します。

@@ -98,7 +98,7 @@ ng generate component orders/order-list
 ブラウザ内でモジュールに簡単にナビゲートすることができるようにしてみましょう:
 
 
-<code-example path="lazy-loading-ngmodules/src/app/app.component.html" region="app-component-template" title="src/app/app.component.html" linenums="false">
+<code-example path="lazy-loading-ngmodules/src/app/app.component.html" region="app-component-template" header="src/app/app.component.html" linenums="false">
 
 </code-example>
 
@@ -138,19 +138,19 @@ ng serve
 `AppRoutingModule`内の`routes`配列を次のように更新してください:
 
 
-<code-example path="lazy-loading-ngmodules/src/app/app-routing.module.ts" region="const-routes" title="src/app/app-routing.module.ts" linenums="false">
+<code-example path="lazy-loading-ngmodules/src/app/app-routing.module.ts" region="const-routes" header="src/app/app-routing.module.ts" linenums="false">
 
 </code-example>
 
 
-インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に文字列を指定することに注意してください。モジュールへのパス、ハッシュマークまたは`#`、さらにモジュールのクラス名を指定します。
+インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に文字列を指定することに注意してください。モジュールへの相対パス、ハッシュマークまたは`#`、さらにモジュールのクラス名を指定します。
 
 ### フィーチャーモジュールの内部
 
 次に、`customers.module.ts`を見てください。もしあなたがCLIを使用していて、このページに記載されている手順にしたがっている場合は、ここで何もする必要はありません。フィーチャーモジュールは、`AppRoutingModule`とフィーチャールーティングモジュール間のコネクターのようなものになります。`AppRoutingModule`が`CustomersModule`をインポートして、順に`CustomersModule`が`CustomersRoutingModule`をインポートします。
 
 
-<code-example path="lazy-loading-ngmodules/src/app/customers/customers.module.ts" region="customers-module" title="src/app/customers/customers.module.ts" linenums="false">
+<code-example path="lazy-loading-ngmodules/src/app/customers/customers.module.ts" region="customers-module" header="src/app/customers/customers.module.ts" linenums="false">
 
 </code-example>
 
@@ -163,7 +163,7 @@ ng serve
 
 次のステップでは`customers-routing.module.ts`を更新します。まず、JavaScriptのインポート文を使用して、ファイルの先頭にコンポーネントをインポートしてください。そのあとに、`CustomerListComponent`へのルート(route)を追加してください。
 
-<code-example path="lazy-loading-ngmodules/src/app/customers/customers-routing.module.ts" region="customers-routing-module" title="src/app/customers/customers-routing.module.ts" linenums="false">
+<code-example path="lazy-loading-ngmodules/src/app/customers/customers-routing.module.ts" region="customers-routing-module" header="src/app/customers/customers-routing.module.ts" linenums="false">
 
 </code-example>
 
@@ -172,7 +172,7 @@ ng serve
 
 `orders-routing.module.ts`でも`OrdersListComponent`をインポートし、Routes配列を設定するこの最終ステップを繰り返してください:
 
-<code-example path="lazy-loading-ngmodules/src/app/orders/orders-routing.module.ts" region="orders-routing-module-detail" title="src/app/orders/orders-routing.module.ts (excerpt)" linenums="false">
+<code-example path="lazy-loading-ngmodules/src/app/orders/orders-routing.module.ts" region="orders-routing-module-detail" header="src/app/orders/orders-routing.module.ts (excerpt)" linenums="false">
 
 </code-example>
 

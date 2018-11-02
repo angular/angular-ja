@@ -31,7 +31,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 広告バナーは、テンプレート内の有効な挿入ポイントをマークするために、`AdDirective` と呼ばれるヘルパー・ディレクティブを使用します。
 
 
-<code-example path="dynamic-component-loader/src/app/ad.directive.ts" title="src/app/ad.directive.ts" linenums="false">
+<code-example path="dynamic-component-loader/src/app/ad.directive.ts" header="src/app/ad.directive.ts" linenums="false">
 
 </code-example>
 
@@ -56,7 +56,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 これで、Angularはコンポーネントを動的にロードする場所を認識しています。
 
 
-<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" title="src/app/ad-banner.component.ts (template)" linenums="false">
+<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" header="src/app/ad-banner.component.ts (template)" linenums="false">
 
 </code-example>
 
@@ -81,7 +81,7 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 `AdBannerComponent` は `getAds()` メソッドを使って、 `AdItems` の配列を循環し、 `loadComponent()` を呼び出すことで3秒ごとに新しいコンポーネントを読み込みます。
 
 
-<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="class" title="src/app/ad-banner.component.ts (excerpt)" linenums="false">
+<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="class" header="src/app/ad-banner.component.ts (excerpt)" linenums="false">
 
 </code-example>
 
@@ -136,7 +136,7 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 
 コンパイラが引き続きファクトリを生成するようにするには、動的にロードされるコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
 
-<code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" title="src/app/app.module.ts (entry components)" linenums="false">
+<code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" header="src/app/app.module.ts (entry components)" linenums="false">
 
 </code-example>
 
@@ -154,15 +154,15 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 
 <code-tabs>
 
-  <code-pane title="hero-job-ad.component.ts" path="dynamic-component-loader/src/app/hero-job-ad.component.ts">
+  <code-pane header="hero-job-ad.component.ts" path="dynamic-component-loader/src/app/hero-job-ad.component.ts">
 
   </code-pane>
 
-  <code-pane title="hero-profile.component.ts" path="dynamic-component-loader/src/app/hero-profile.component.ts">
+  <code-pane header="hero-profile.component.ts" path="dynamic-component-loader/src/app/hero-profile.component.ts">
 
   </code-pane>
 
-  <code-pane title="ad.component.ts" path="dynamic-component-loader/src/app/ad.component.ts">
+  <code-pane header="ad.component.ts" path="dynamic-component-loader/src/app/ad.component.ts">
 
   </code-pane>
 

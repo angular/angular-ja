@@ -14,10 +14,10 @@ Observableは、事前サジェストの実装を簡素化できます。一般�
 
 これらすべてを JavaScript で書くとかなり複雑になる可能性があります。Observableでは、簡単な一連の RxJS 演算子を使用できます。
 
-<code-example path="practical-observable-usage/src/typeahead.ts" title="事前サジェスト"></code-example>
+<code-example path="practical-observable-usage/src/typeahead.ts" header="事前サジェスト"></code-example>
 
 ## 指数関数的バックオフ
 
 指数関数的バックオフは失敗後に API をリトライし、連続した各失敗の後のリトライの間隔を長くし、リクエストが失敗したと見なされる最大回数でリトライする方法です。これは Promise や AJAX 呼び出しを追跡する他の方法で実装するのは非常に複雑なことがあります。Observable では、非常に簡単です：
 
-<code-example path="practical-observable-usage/src/backoff.ts" title="指数関数的バックオフ"></code-example>
+<code-example path="practical-observable-usage/src/backoff.ts" header="指数関数的バックオフ"></code-example>

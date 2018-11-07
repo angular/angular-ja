@@ -72,7 +72,7 @@ HTMLテンプレートには、`filterAnimation`というトリガーが含ま�
 
 <code-example path="animations/src/app/hero-list-page.component.html" header="src/app/hero-list-page.component.html" region="filter-animations"></code-example>
 
-コンポーネントファイルには3つの`transition`が含まれています。
+コンポーネントファイルには3つの遷移が含まれています。
 
 <code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="filter-animations" language="typescript" linenums="false"></code-example>
 
@@ -82,7 +82,7 @@ HTMLテンプレートには、`filterAnimation`というトリガーが含ま�
 
 * フィルターマッチを実行します。
 
-個々のマッチごとについて:
+各マッチについて:
 
 * opacityとwidthを0に設定することで、透明にして幅を持たせないようにし、要素を非表示にします。
 
@@ -90,7 +90,7 @@ HTMLテンプレートには、`filterAnimation`というトリガーが含ま�
 
 * 一致する要素が複数ある場合は、ページの先頭から各要素にずれがあり、各要素間に50ミリ秒の遅延があります。
 
-## アニメーションシーケンスの要約
+## まとめ
 
 複数要素をアニメーションするためのAngular関数は、内部要素を見つけるために`query()`で始まります。 たとえば、`<div>'内のすべての画像を収集します。 残りの関数`stagger()`、`group()`、`sequence()`はカスケードを適用したり、複数のアニメーションステップを適用する方法を制御することができます。
 

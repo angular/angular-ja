@@ -108,7 +108,7 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 ビューに入ろうとする要素はDOM内にまだ存在しないため、ターゲットにすることは難しくなります。
 したがって、ビューに挿入、削除されるHTML要素をターゲットにするには、エイリアス`:enter`と`:leave`を使用します。
 
-### \*ngIf と \*ngFor で :enter and :leave を使用する
+### \*ngIf と \*ngFor で :enter と :leave を使用する
 
 `*ngIf`または`*ngFor`のビューがページに置かれたときに`:enter`の遷移が実行され、それらのビューがページから削除されたときに`:leave`が実行されます。
 

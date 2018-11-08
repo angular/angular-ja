@@ -1,104 +1,104 @@
-# Complex animation sequences
+# 複雑なアニメーションシーケンス
 
-#### Prerequisites
+#### 前提
 
-A basic understanding of the  following concepts:
+次の概念への基本的な理解:
 
-* [Introduction to Angular animations](guide/animations)
-* [Transition and triggers](guide/transition-and-triggers)
+* [Angularアニメーション・イントロダクション](guide/animations)
+* [アニメーションの遷移とトリガー](guide/transition-and-triggers)
 
 <hr>
 
-So far, we've learned simple animations of single HTML elements. Angular also lets you animate coordinated sequences, such as an entire grid or list of elements as they enter and leave a page. You can choose to run multiple animations in parallel, or run discrete animations sequentially, one following another.
+これまでは、単一のHTML要素の単純なアニメーションを学んできました。 Angularを使用すると、グリッド全体や要素リストなどの、シーケンスをもつ要素がページに出入りするときにアニメーションできます。 複数のアニメーションを並列に実行するか、個別にアニメーションを順次実行するかを選択できます。
 
-Functions that control complex animation sequences are as follows:
+複雑なアニメーションシーケンスを制御する関数は次のとおりです。
 
-* `query()` finds one or more inner HTML elements.
-* `stagger()` applies a cascading delay to animations for multiple elements.
-* `group()` runs multiple animation steps in parallel.
-* `sequence()` runs animation steps one after another.
+* `query()` 1つまたは複数の内部HTML要素を検索します。
+* `stagger()` 複数要素のアニメーションにカスケーディングディレイを適用します。
+* `group()` 複数のアニメーションステップを並列に実行します。 
+* `sequence()` アニメーションステップを順次実行します。
 
 {@a complex-sequence}
 
-## Animate multiple elements using query() and stagger() functions
+## query()関数とstagger()関数を使用して複数要素をアニメーションする
 
-The `query()` function allows you to find inner elements within the element that is being animated. This function targets specific HTML elements within a parent component and applies animations to each element individually. Angular intelligently handles setup, teardown, and cleanup as it coordinates the elements across the page.
+`query()`関数は、アニメーション化された要素内の要素を見つけることができます。 この関数は、親コンポーネント内の特定のHTML要素を対象とし、アニメーションを各要素に個別に適用します。 Angularは、ページ全体の要素を調整する際に、セットアップ、ティアダウン、クリーンアップをインテリジェントに処理します。
 
-The `stagger()` function allows you to define a timing gap between each queried item that is animated and thus animates elements with a delay between them.
+`stagger()`関数は、クエリーされた各項目の間にタイミングギャップを定義することができ、要素のアニメーション間を遅延させます。
 
-The Filter/Stagger tab in the live example shows a list of heroes with an introductory sequence. The entire list of heroes cascades in, with a slight delay from top to bottom.
+ライブサンプルの「Filter/Stagger」タブには、初歩的なシーケンスであるヒーローのリストが表示されます。 ヒーローのリスト全体は、上から下へわずかに遅れてカスケードします。
 
-The following example demonstrates how to use `query()` and `stagger()` functions on the entry of an animated element.
+次の例は、アニメーション要素の出現に`query()`関数と`stagger()`関数を使用する方法を示しています。
 
-* Use `query()` to look for any element entering or leaving the page. The query specifies elements meeting certain CSS class criteria.
+* `query()`は、ページに出入りする要素を見つけるために使います。 クエリーに指定できるのは、CSSクラス基準仕様を満たす要素です。
 
-* For each of these elements, use `style()` to set the same initial style for the element. Make it invisible and use `transform` to move it out of position so that it can slide into place.
+* `style()`を利用することで、同一の初期スタイルを要素のそれぞれに対して設定します。 透過させ、見えないようにし、`transform`で所定の位置にスライドできるようにします。
 
-* Use `stagger()` to delay each animation by 30 milliseconds.
+* `stagger()`を使用し、個々のアニメーションを30ミリ秒遅延させます。
 
-* Animate each element on screen for 0.5 seconds using a custom-defined easing curve, simultaneously fading it in and un-transforming it.
+* 独自定義のイージングカーブを使用してスクリーン上の各要素を0.5秒間アニメーションし、同時にフェードインさせtransformを解除します。
 
 <code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="page-animations" language="typescript" linenums="false"></code-example>
 
-## Parallel animation using group() function
+## group()関数を使用した並列アニメーション
 
-You've seen how to add a delay between each successive animation. But you may also want to configure animations that happen in parallel. For example, you may want to animate two CSS properties of the same element but use a different `easing` function for each one. For this, you can use the animation `group()` function.
+連続する各アニメーションの間に遅延を追加する方法を書きました。 しかし他にも、並列に起こるアニメーションについても設定することもできます。 たとえば、同じ要素の2つのCSSプロパティをアニメーションし、それぞれに異なる`easing`関数を使用することができます。 このアニメーションは、`group()`関数を使用することで実現できます。
 
 <div class="alert is-helpful">
 
-**Note:** The `group()` function is used to group animation *steps*, rather than animated elements.
+**注意:** `group()`関数はアニメーション要素ではなく、アニメーションの*ステップ*をグループ化するために使用されます。
 </div>
 
-In the following example, using groups on both `:enter` and `:leave` allow for two different timing configurations. They're applied to the same element in parallel, but run independently.
+次の例では、 `:enter`と`:leave`それぞれがグループを使用することで、2つの異なるタイミングの構成が可能になります。 それらはパラレルに同じ要素へ適用されますが、独立して実行されます。
 
 <code-example path="animations/src/app/hero-list-groups.component.ts" region="animationdef" header="src/app/hero-list-groups.component.ts (excerpt)" language="typescript" linenums="false"></code-example>
 
-## Sequential vs. parallel animations
+## シーケンシャル vs. 並列アニメーション
 
-Complex animations can have many things happening at once. But what if you want to create an animation involving several animations happening one after the other? Earlier we used `group()` to run multiple animations all at the same time, in parallel.
+複雑なアニメーションでは、一度に多くのことが起こる可能性があります。 それでも、複数のアニメーションが連続したアニメーションを作成したい場合はどうすればよいでしょうか？ 以前は`group()`を使うことで、同時に複数アニメーションを並列に実行していました。
 
-A second function called `sequence()` lets you run those same animations one after the other. Within `sequence()`, the animation steps consist of either `style()` or `animate()` function calls.
+`sequence()`と呼ばれる第2の関数は、前述のように、同じアニメーションを次々に実行することを可能とします。 `sequence()`の中において、アニメーションのステップは`style()`または `animate()`のいずれかの関数呼び出しで構成されます。
 
-* Use `style()` to apply the provided styling data immediately.
-* Use `animate()` to apply styling data over a given time interval.
+* `style()`を使用すると、指定されたスタイルデータを直ちに適用できます。
+* `animate()`を使用すると、一定の時間間隔でスタイリングデータを適用します。
 
-## Filter animation example
+## フィルターアニメーション例
 
-Let's take a look at another animation on the live example page. Under the Filter/Stagger tab, enter some text into the **Search Heroes** text box, such as `Magnet` or `tornado`.
+ライブサンプルページの別のアニメーションを見てみましょう。 「Filter/Stagger」ページを開き、**Search Heroes**テキストボックスに`Magnet`や`tornado`などのテキストを入力します。
 
-The filter works in real time as you type. Elements leave the page as you type each new letter and the filter gets progressively stricter. The heroes list gradually re-enters the page as you delete each letter in the filter box.
+入力時にフィルターがリアルタイムで機能します。 新しい文字を入力すると要素がページから離れ、フィルターが徐々に狭められていきます。 フィルターボックスの各文字を削除すると、ヒーローのリストが徐々にページに再挿入されます。
 
-The HTML template contains a trigger called `filterAnimation`.
+HTMLテンプレートには、`filterAnimation`というトリガーが含まれています。
 
 <code-example path="animations/src/app/hero-list-page.component.html" header="src/app/hero-list-page.component.html" region="filter-animations"></code-example>
 
-The component file contains three transitions.
+コンポーネントファイルには3つの遷移が含まれています。
 
 <code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="filter-animations" language="typescript" linenums="false"></code-example>
 
-The animation does the following:
+このアニメーションは次を実行します:
 
-* Ignores any animations that are performed when the user first opens or navigates to this page. The filter narrows what is already there, so it assumes that any HTML elements to be animated already exist in the DOM.
+* ユーザーがこのページを最初に開いたり移動したりしたときに実行されるアニメーションは無視されます。 フィルターはすでに存在するものを絞り込みます。したがって、アニメーション化されるHTML要素はすべてDOMにすでに存在するとみなされます。
 
-* Performs a filter match for matches.
+* フィルターマッチを実行します。
 
-For each match:
+各マッチについて:
 
-* Hides the element by making it completely transparent and infinitely narrow, by setting its opacity and width to 0.
+* opacityとwidthを0に設定することで、透明にして幅を持たせないようにし、要素を非表示にします。
 
-* Animates in the element over 300 milliseconds. During the animation, the element assumes its default width and opacity.
+* 要素のアニメーションは300ミリ秒を超えます。 アニメーション中、要素はデフォルトの幅と不透明度を想定します。
 
-* If there are multiple matching elements, staggers in each element starting at the top of the page, with a 50-millisecond delay between each element.
+* 一致する要素が複数ある場合は、ページの先頭から各要素にずれがあり、各要素間に50ミリ秒の遅延があります。
 
-## Animation sequence summary
+## まとめ
 
-Angular functions for animating multiple elements start with `query()` to find inner elements, for example gathering all images within a `<div>`. The remaining functions, `stagger()`, `group()`, and `sequence()`, apply cascades or allow you to control how multiple animation steps are applied.
+複数要素をアニメーションするためのAngular関数は、内部要素を見つけるために`query()`で始まります。 たとえば、`<div>'内のすべての画像を収集します。 残りの関数`stagger()`、`group()`、`sequence()`はカスケードを適用したり、複数のアニメーションステップを適用する方法を制御することができます。
 
-## More on Angular animations
+## Angularアニメーションの詳細
 
-You may also be interested in the following:
+あなたは次に興味があるかもしれません:
 
-* [Introduction to Angular animations](guide/animations)
-* [Transition and triggers](guide/transition-and-triggers)
-* [Reusable animations](guide/reusable-animations)
-* [Route transition animations](guide/route-animations)
+* [Angularアニメーション・イントロダクション](guide/animations)
+* [アニメーションの遷移とトリガー](guide/transition-and-triggers)
+* [再利用可能なアニメーション](guide/reusable-animations)
+* [ルーティング遷移のアニメーション](guide/route-animations)

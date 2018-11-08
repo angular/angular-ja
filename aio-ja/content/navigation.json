@@ -450,19 +450,19 @@
             },
             {
               "url": "guide/transition-and-triggers",
-              "title": "トランジションとトリガー",
+              "title": "遷移とトリガー",
               "tooltip": "トランジションとトリガーの高度なテクニック",
               "translated": true
             },
             {
               "url": "guide/complex-animation-sequences",
-              "title": "複雑なシーケンス",
+              "title": "複雑なアニメーションシーケンス",
               "tooltip": "複雑なAngularアニメーションシーケンス",
               "translated": true
             },
             {
               "url": "guide/reusable-animations",
-              "title": "再利用できるアニメーション",
+              "title": "再利用可能なアニメーション",
               "tooltip": "再利用可能なアニメーションの作成",
               "translated": true
             },

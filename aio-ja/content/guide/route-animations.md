@@ -1,27 +1,27 @@
-# Route transition animations
+# ルーティング遷移のアニメーション
 
-#### Prerequisites
+#### 前提
 
-A basic understanding of the following concepts:
+次の概念への基本的な理解:
 
-* [Introduction to Angular animations](guide/animations)
-* [Transition and triggers](guide/transition-and-triggers)
-* [Reusable animations](guide/reusable-animations)
+* [Angularアニメーション・イントロダクション](guide/animations)
+* [アニメーションの遷移とトリガー](guide/transition-and-triggers)
+* [再利用可能なアニメーション](guide/reusable-animations)
 
 <hr>
 
-Routing enables users to navigate between different routes in an application. When a user navigates from one route to another, the Angular router maps the URL path to a relevant component and displays its view. Animating this route transition can greatly enhance the user experience.
+ルーティングを有効にすると、アプリケーション内のさまざまなルーティング間を移動できます。 ユーザーがあるルーティングから別のルーティングにナビゲーションすると、AngularルーターはURLパスを関連するコンポーネントにマップし、そのビューを表示します。 このルーティングの遷移をアニメーション化することで、ユーザー体験を大幅に向上できます。
 
-The Angular router comes with high-level animation functions that let you animate the transitions between views when a route changes. To produce an animation sequence when switching between routes, you need to define nested animation sequences. Start with the top-level component that hosts the view, and nest additional animations in the components that host the embedded views.
+Angularルーターには、ルーティングが変更されたときにビュー間の遷移をアニメーションできる、高水準なアニメーション機能が付属しています。 ルーティングを切り替えるときにアニメーションシーケンスを生成するには、ネストされたアニメーションシーケンスを定義する必要があります。 ビューをホストする最上位のコンポーネントから始め、埋め込みビューをホストするコンポーネントに追加のアニメーションをネストします。
 
-To enable routing transition animation, do the following:
+ルーティング遷移アニメーションを有効にするには、次の手順を実行します:
 
-1. Import the routing module into the application and create a routing configuration that defines the possible routes.
-2. Add a router outlet to tell the Angular router where to place the activated components in the DOM.
-3. Define the animation.
+1.  アプリケーションにルーティングモジュールをインポートし、ルーティング設定を有効にします。
+2.  ルーターアウトレットを追加して、アクティブ化されたコンポーネントをDOMのどこに配置するのか、Angularルーターに指示します。
+3.  アニメーションを定義します。
 
 
-Let's illustrate a router transition animation by navigating between two routes, *Home* and *About* associated with the `HomeComponent` and `AboutComponent` views respectively. Both of these component views are children of the top-most view, hosted by `AppComponent`. We'll implement a router transition animation that slides in the new view to the right and slides out the old view when the user navigates between the two routes.
+`HomeComponent`ビューと`AboutComponent`ビューにそれぞれ関連付けられた2つのルーティング、*Home*と*About*をナビゲーションして、ルーティング遷移アニメーションを説明しましょう。 これらのコンポーネントビューは両方とも`AppComponent`によってホストされる一番上の子です。 ユーザーが2つのルーティングを移動するときに新しいビューを左からスライドインさせ、古いビューを右へスライドアウトさせるルーティング遷移アニメーションを実装します。
 
 </br>
 
@@ -29,111 +29,111 @@ Let's illustrate a router transition animation by navigating between two routes,
 <img src="generated/images/guide/animations/route-animation.gif" alt="Animations in action" width="440">
 </figure>
 
-## Route configuration
+## ルーティング設定
 
-To begin, configure a set of routes using methods available in the `RouterModule` class. This route configuration tells the router how to navigate.
+まず、`RouterModule`クラスのメソッドを使用してルーティングを設定します。 このルーティング設定は、ルーターにナビゲーションする方法を指示します。
 
-Use the `RouterModule.forRoot` method to define a set of routes. Also, import this `RouterModule` to the `imports` array of the main module, `AppModule`.
+`RouterModule.forRoot`メソッドを使用してルーティングを定義します。 また、この`RouterModule`をメインモジュールである`AppModule`の`imports`配列にインポートします。
 
 <div class="alert is-helpful">
 
-**Note:** Use the `RouterModule.forRoot` method in the root module, `AppModule`, to register top-level application routes and providers. For feature modules, call the `RouterModule.forChild` method to register additional routes.
+**Note:** ルートモジュールである`AppModule`の`RouterModule.forRoot`メソッドを使用して、トップレベルのアプリケーションルーティングとプロバイダーを登録します。 その他の細分化された機能ごとのモジュールについては、`RouterModule.forChild`メソッドを呼び出して追加のルーティング登録を行います。
 
 </div>
 
-The following configuration defines the possible routes for the application.
+次の設定では、アプリケーションのルーティングを定義します。
 
 <code-example path="animations/src/app/app.module.ts" linenums="false" header="src/app/app.module.ts" region="route-animation-data" language="typescript">
 </code-example>
 
-The `home` and `about` paths are associated with the `HomeComponent` and `AboutComponent` views. The route configuration tells the Angular router to instantiate the `HomeComponent` and `AboutComponent` views when the navigation matches the corresponding path.
+`home`および`about`パスは、`HomeComponent`および`AboutComponent`ビューに関連付けられます。 ルーティング設定は、ナビゲーションが対応するパスと一致したときに、`HomeComponent`ビューと`AboutComponent`ビューをインスタンス化するようにAngularルーターに指示します。
 
-In addition to `path` and `component`, the `data` property of each route defines the key animation-specific configuration associated with a route. The `data` property value is passed into `AppComponent` when the route changes. You can also pass additional data in route config that is consumed within the animation. The data property value has to match the transitions defined in the `routeAnimation` trigger, which we'll define later.
+`path`と`component`に加えて、各ルーティングの`data`プロパティに、ルーティングと関連付けられたキーのアニメーション固有の設定を定義します。 ルーティングが変更されると、`data`プロパティの値が`AppComponent`に渡されます。 また、アニメーション内で消費される追加のデータをルーティングコンフィグレーションへ渡すこともできます。 dataプロパティの値は`routeAnimation`トリガーで定義された遷移と一致する必要がありますが、これについては後で定義します。
 
 <div class="alert is-helpful">
 
-**Note:** The `data` property names that you use can be arbitrary. For example, the name *animation* used in the example above is an arbitrary choice.
+**Note:** 使用する `data`プロパティの名前は任意です。 たとえば、前の例で使用されている名前*animation*は任意の選択肢です。
 
 </div>
 
-## Router outlet
+## ルーターアウトレット
 
-After configuring the routes, tell the Angular router where to render the views when matched with a route. You can set a router outlet by inserting a `<router-outlet>` container inside the root `AppComponent` template.
+ルーティングを設定した後、Angularルーターに、ルーティングと一致するビューをレンダリングする場所を伝えます。 ルートの`AppComponent`テンプレートの中に`<router-outlet>`コンテナを挿入して、ルーターアウトレットを設定することができます。
 
-The `<router-outlet>` container has an attribute directive that contains data about active routes and their states, based on the `data` property that we set in the route configuration.
+`<router-outlet>`コンテナには、ルーティング設定で設定した`data`プロパティに基づいて、アクティブなルーティングとその状態に関するデータを含む属性ディレクティブがあります。
 
 <code-example path="animations/src/app/app.component.html" header="src/app/app.component.html" region="route-animations-outlet">
 </code-example>
 
-`AppComponent` defines a method that can detect when a view changes. The method assigns an animation state value to the animation trigger (`@routeAnimation`) based on the route configuration `data` property value.  Here's an example of an `AppComponent` method that detects when a route change happens.
+`AppComponent`は、ビューがいつ変化するかを検出できるメソッドを定義します。 このメソッドでは、ルーティング設定の`data`プロパティ値に基づいて、アニメーショントリガー(`@routeAnimation`)にアニメーション状態の値を割り当てます。 次に、ルーティング変更が発生したことを検出する`AppComponent`のメソッド例を示します。
 
 <code-example path="animations/src/app/app.component.ts" linenums="false" header="src/app/app.component.ts" region="prepare-router-outlet" language="typescript">
 </code-example>
 
-Here, the `prepareRoute()` method takes the value of the output directive (established through `#outlet="outlet"`) and returns a string value representing the state of the animation based on the custom data of the current active route. You can use this data to control which transition to execute for each route.
+ここで、`prepareRoute()`メソッドは出力ディレクティブ(`#outlet="outlet"`によって確立されます)の値をとり、アクティブなルーティングのカスタムデータに基づいて、アニメーションの状態を表す文字列値を返します。 このデータを使用して、各ルーティングに対して実行する遷移を制御できます。
 
-## Animation definition
+## アニメーション定義
 
-Animations can be defined directly inside your components. For this example we are defining the animations in a separate file, which allows us to re-use the animations.
+アニメーションは、コンポーネント内で直接定義することができます。 この例では、別々のファイルでアニメーションを定義しているため、アニメーションを再利用できます。
 
-The following code snippet defines a reusable animation named `slideInAnimation`.
+次のコードスニペットは、`slideInAnimation`という名前の付いた再利用可能なアニメーション定義しています。
 
 
 <code-example path="animations/src/app/animations.ts" linenums="false" header="src/app/animations.ts" region="route-animations" language="typescript">
 </code-example>
 
-The animation definition does several things:
+アニメーション定義にはいくつかのことを行います:
 
-* Defines two transitions. A single trigger can define multiple states and transitions.
-* Adjusts the styles of the host and child views to control their relative positions during the transition.
-* Uses `query()` to determine which child view is entering and which is leaving the host view.
+* 2つの遷移を定義します。 1つのトリガーで複数の状態と遷移を定義できます。
+* 遷移中の相対位置を制御するために、ホストビューと子ビューのスタイルを調整します。
+* `query()`を使用して、入力された子ビューとホストビューから離れる子ビューを判別します。
 
-A route change activates the animation trigger, and a transition matching the state change is applied.
+ルーティング変更によりアニメーショントリガーが起動され、状態変化に応じた遷移が適用されます。
 
 <div class="alert is-helpful">
 
-**Note:** The transition states must match the `data` property value defined in the route configuration.
+**Note:** 遷移状態は、ルーティング構成で定義された`data`プロパティの値と一致する必要があります。
 </div>
 
-Make the animation definition available in your application by adding the reusable animation (`slideInAnimation`) to the `animations` metadata of the `AppComponent`.
+再利用可能なアニメーション(`slideInAnimation`)を`AppComponent`の`animations`メタデータに追加して、アプリケーションでアニメーション定義を利用可能にします。
 
 <code-example path="animations/src/app/app.component.ts" linenums="false" header="src/app/app.component.ts" region="define" language="typescript">
 </code-example>
 
-### Styling the host and child components
+### ホストコンポーネントと子コンポーネントのスタイル設定
 
-During a transition, a new view is inserted directly after the old one and both elements appear on screen at the same time. To prevent this, apply additional styling to the host view, and to the removed and inserted child views. The host view must use relative positioning, and the child views must use absolute positioning. Adding styling to the views animates the containers in place, without the DOM moving things around.
+遷移中、古いビューの直後に新しいビューが挿入され、同時に両方の要素が画面に表示されます。 これを防ぐには、追加のスタイリングをホストビューに適用し、削除して挿入した子ビューに適用します。 ホストビューは相対位置を使用する必要があり、子ビューは絶対位置を使用する必要があります。 スタイルをビューに追加することで、DOMを動かすことなく、コンテナの位置をアニメーション化できます。
 
 <code-example path="animations/src/app/animations.ts" linenums="false" header="src/app/animations.ts" region="style-view" language="typescript">
 </code-example>
 
-### Querying the view containers
+### ビューコンテナのクエリ
 
-Use the `query()` method to find and animate elements within the current host component. The `query(":enter")` statement returns the view that is being inserted, and `query(":leave")` returns the view that is being removed.
+`query()`メソッドを使用して、現在のホストコンポーネント内の要素を見つけてアニメートします。 `query(":enter")`ステートメントは挿入されているビューを返し、`query(":leave")`は削除されているビューを返します。
 
-Let's assume that we are routing from the *Home => About*.
+*Home => About*へ遷移しているとしましょう。
 
 <code-example path="animations/src/app/animations.ts" linenums="false" header="src/app/animations.ts" region="query" language="typescript" linenums="false">
 </code-example>
 
-The animation code does the following after styling the views:
+このアニメーションコードは、ビューをスタイリングした後、次の処理を行います:
 
-* `query(':enter style({ left: '-100%'})` matches the view that is added and hides the newly added view by positioning it to the far left.
-* Calls `animateChild()` on the view that is leaving, to run its child animations.
-* Uses `group()` function to make the inner animations run in parallel.
-* Within the `group()` function:
-    * Queries the view that is removed and animates it to slide far to the right.
-    * Slides in the new view by animating the view with an easing function and duration. </br>
-    This animation results in the `about` view sliding from the left to right.
-* Calls the `animateChild()` method on the new view to run its child animations after the main animation completes.
+* `query(':enter', [style({ left: '-100％' })])`は、新たに追加されたビューと一致し、これを一番左に配置することで隠します。
+* アニメーションを実行するため、離れるビューで`animateChild()`を呼び出します。
+* `group()`関数を使用して、内部アニメーションを並列に実行します。
+* `group()`関数の中で:
+    * 削除されたビューをクエリーし、右にスライドするようにアニメーションします。
+    * イージング関数と継続時間でビューをアニメーション化することにより、新しいビューにスライドします。 </br>
+    このアニメーションの結果、左から右に向かって`about`ビューがスライドします。
+* 新しいアニメーションの`animateChild()`メソッドを呼び出して、メインアニメーションが完了した後にその子アニメーションを実行します。
 
-You now have a basic routable animation that animates routing from one view to another.
+これで、ビューから別のビューへの遷移をアニメーション化させる、基本的なルーティング遷移のアニメーションが完成しました。
 
-## More on Angular animations
+## Angularアニメーションの詳細
 
-You may also be interested in the following:
+あなたは次に興味があるかもしれません:
 
-* [Introduction to Angular animations](guide/animations)
-* [Transition and triggers](guide/transition-and-triggers)
-* [Complex animation sequences](guide/complex-animation-sequences)
-* [Reusable animations](guide/reusable-animations)
+* [Angularアニメーション・イントロダクション](guide/animations)
+* [アニメーションの遷移とトリガー](guide/transition-and-triggers)
+* [複雑なアニメーションシーケンス](guide/complex-animation-sequences)
+* [再利用可能なアニメーション](guide/reusable-animations)

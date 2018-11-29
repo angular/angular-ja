@@ -259,7 +259,7 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 あなたのチームがユニットテストされている最低限の量を決定する場合、Angular CLIを使用して、この最小値を適用することができます。
 
 たとえば、コードベースに最低80％のコードカバレッジを設定するとします。
-これを有効にするには、[Karma](https://karma-runner.github.io)テストプラットフォーム設定ファイル、`karma.conf.js`を開いて、`coverageIstanbulReporter:`キー以下に次のような内容を追加します。
+これを有効にするには、[Karma](https://karma-runner.github.io)テストプラットフォーム設定ファイル、`karma.conf.js`を開いて、`coverageIstanbulReporter:`に次のような内容を追加します。
 
 ```
 coverageIstanbulReporter: {

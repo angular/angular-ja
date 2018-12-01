@@ -177,7 +177,7 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
  最終的な広告バナーは次のようになります。
 
 <figure>
-  <img src="generated/images/guide/dynamic-component-loader/ads.gif" alt="Ads">
+  <img src="generated/images/guide/dynamic-component-loader/ads-example.gif" alt="Ads">
 </figure>
 
 

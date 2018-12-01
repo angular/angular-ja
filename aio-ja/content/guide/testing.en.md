@@ -190,7 +190,7 @@ which  you must adjust to start Chrome without sandboxing.
 
 We'll be using [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) in these examples.
 
-* In the Karma configuration file, `karma.conf.js`, add a custom launcher called ChromeNoSandbox below browsers:
+* In the Karma configuration file, `karma.conf.js`, add a custom launcher called ChromeHeadlessCI below browsers:
 ```
 browsers: ['Chrome'],
 customLaunchers: {
@@ -684,7 +684,7 @@ and returns a [`ComponentFixture`](#component-fixture).
 
 Do not re-configure `TestBed` after calling `createComponent`.
 
-The `createComponent` method freezes the current `TestBed`definition,
+The `createComponent` method freezes the current `TestBed` definition,
 closing it to further configuration.
 
 You cannot call any more `TestBed` configuration methods, not `configureTestingModule()`,

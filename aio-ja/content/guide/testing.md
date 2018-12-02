@@ -151,7 +151,7 @@ sudo: false
 language: node_js
 node_js:
   - "8"
-  
+
 addons:
   apt:
     sources:
@@ -184,13 +184,13 @@ TravisではChromeが付属していなため、代わりにChromiumを使用し
 
 一般的にCLIコマンドの`ng test`と`ng e2e`があなたの環境でCIテストを実行しているとき、Chromeブラウザでのテストを実行するために設定を調整する必要があります。
 
-[Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html) 
+[Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)
 と[Protractor](https://www.protractortest.org/#/api-overview)エンドツーエンドテスティングツールeの2つの設定ファイルについて、
 サンドボックスを使用せずにChromeを起動するように調整する必要があります。
 
 この例では[ヘッドレスChrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) を使用します。
 
-* Karma設定ファイル、`karma.conf.js`のbrowsersの下にChromeNoSandboxというカスタムランチャーを追加します:
+* In the Karma configuration file, `karma.conf.js`, add a custom launcher called ChromeHeadlessCI below browsers:
 ```
 browsers: ['Chrome'],
 customLaunchers: {

@@ -73,7 +73,13 @@ _npm_から*インメモリWeb API*をインストールします。
 
 `forRoot()`メソッドはインメモリデータベースを用意する`InMemoryDataService`クラスを引数に取ります。
 
-_Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-data.service.ts`を作ります。
+`src/app/in-memory-data.service.ts` ファイルは次のコマンドで生成されます:
+
+<code-example language="sh" class="code-shell">
+  ng generate service InMemoryData
+</code-example>
+
+このクラスは次のような内容です:
 
 <code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" header="src/app/in-memory-data.service.ts" linenums="false"></code-example>
 
@@ -437,7 +443,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 
 下にある[final code review](#herosearchcomponent)にあるようにプライベートCSSスタイルを`hero-search.component.css`を追加します。
 
-ユーザーが検索ボックス内でタイプすると、*keyup*イベントのバインディングが
+ユーザーが検索ボックス内でタイプすると、*input*イベントのバインディングが
 コンポーネントの`search()`メソッドを呼び出して、検索ボックス内の新しい値を渡します。
 
 {@a asyncpipe}
@@ -483,7 +489,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 
 また、`search()`メソッドで実行している様に、`next(value)`メソッドを呼ぶことで、`Observable`に値をpushすることができます。
 
-`search()`メソッドはテキストボックスの`keystroke`のイベントバインディングにより呼び出されます。
+`search()`メソッドはテキストボックスの`input`のイベントバインディングにより呼び出されます。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" region="input"></code-example>
 

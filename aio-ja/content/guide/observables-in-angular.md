@@ -16,7 +16,7 @@ Angularは コンポーネントから値を `@Output()` デコレーターを�
 
 コンポーネントの定義は次のとおりです。
 
-<code-example path="observables-in-angular/src/main.ts" title="EventEmitter" region="eventemitter"></code-example>
+<code-example path="observables-in-angular/src/main.ts" header="EventEmitter" region="eventemitter"></code-example>
 
 ## HTTP
 Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable を返します。たとえば、`http.get(‘/api’)` は Observable オブジェクトを返します。これは、Promise ベースの HTTP API に勝るいくつかの利点を提供します。
@@ -32,7 +32,7 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在時刻でビューを継続的に更新します。
 
-<code-example path="observables-in-angular/src/main.ts" title="非同期パイプの使用" region="pipe"></code-example>
+<code-example path="observables-in-angular/src/main.ts" header="非同期パイプの使用" region="pipe"></code-example>
 
 {@a router}
 
@@ -40,14 +40,14 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 [`Router.events`](https://angular.io/api/router/Router#events) は Observable としてイベントを提供します。RxJS の `filter()` オペレーターを使用して目的のイベントを検索し、それらのイベントをサブスクライブして、ナビゲーションプロセスの一連のイベントに基づいて決定することができます。ここに例があります：
 
-<code-example path="observables-in-angular/src/main.ts" title="ルーターイベント" region="router"></code-example>
+<code-example path="observables-in-angular/src/main.ts" header="ルーターイベント" region="router"></code-example>
 
 [ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivateRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
 
-<code-example path="observables-in-angular/src/main.ts" title="ActivatedRoute" region="activated_route"></code-example>
+<code-example path="observables-in-angular/src/main.ts" header="ActivatedRoute" region="activated_route"></code-example>
 
 ## リアクティブフォーム
 
 リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティを購読することは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
 
-<code-example path="observables-in-angular/src/main.ts" title="リアクティブフォーム" region="forms"></code-example>
+<code-example path="observables-in-angular/src/main.ts" header="リアクティブフォーム" region="forms"></code-example>

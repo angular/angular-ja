@@ -116,7 +116,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 
 Custom Elements をサポートしているブラウザにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザで利用可能であるとは限らないので、古いブラウザや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
 
-自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](https://cli.angular.io/) をお使いください。
+自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](cli) をお使いください。
 - ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を参照してください。
 
 - Angular のブラウザサポート状況についての詳細は、[Browser Support](guide/browser-support) を参照してください。
@@ -139,19 +139,19 @@ Angular の Custom Elements を使用すれば、自動的にインフラスト�
 
 <code-tabs>
 
-  <code-pane title="popup.component.ts" path="elements/src/app/popup.component.ts">
+  <code-pane header="popup.component.ts" path="elements/src/app/popup.component.ts">
 
   </code-pane>
 
-  <code-pane title="popup.service.ts" path="elements/src/app/popup.service.ts">
+  <code-pane header="popup.service.ts" path="elements/src/app/popup.service.ts">
 
   </code-pane>
 
-  <code-pane title="app.module.ts" path="elements/src/app/app.module.ts">
+  <code-pane header="app.module.ts" path="elements/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="app.component.ts" path="elements/src/app/app.component.ts">
+  <code-pane header="app.component.ts" path="elements/src/app/app.component.ts">
 
   </code-pane>
 </code-tabs>

@@ -480,7 +480,7 @@ Angularは、遅延ロードしたモジュールのプロバイダーをどこ�
 特定の NgModule、たとえば`BrowserModule`のように、ガードを実装しましょう。
 ここには`CoreModule`と呼ばれるNgModuleのためのカスタムコンストラクターがあります。
 
-<code-example path="ngmodule-faq/src/app/core/core.module.ts" region="ctor" title="src/app/core/core.module.ts (Constructor)" linenums="false">
+<code-example path="ngmodule-faq/src/app/core/core.module.ts" region="ctor" header="src/app/core/core.module.ts (Constructor)" linenums="false">
 </code-example>
 
 <hr/>

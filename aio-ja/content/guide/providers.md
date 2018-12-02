@@ -13,7 +13,7 @@
 
 ## サービスを提供する
 
-すでにCLIで生成したアプリケーションがある場合は、 次のコマンドをプロジェクトのルートディレクトリで実行してサービスを生成してください。 _User_はあなたの好きなサービス名に置きかえてかまいません。 
+すでに[Angular CLI](cli)で生成したアプリケーションがある場合は、 [`ng generate`](cli/generate) CLIコマンドをプロジェクトのルートディレクトリで実行してサービスを生成できます。 _User_はあなたの好きなサービス名に置きかえてかまいません。 
 
 ```sh
 ng generate service User
@@ -21,7 +21,7 @@ ng generate service User
 
 このコマンドによって次のような`UserService`スケルトンが作成されます:
 
-<code-example path="providers/src/app/user.service.0.ts"  title="src/app/user.service.0.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.0.ts" linenums="false"> </code-example>
 
 あなたはいま、`UserService`をアプリケーションのどこにでも注入することができます。
 
@@ -38,11 +38,11 @@ ng generate service User
 
 特定の`@NgModule`内でサービスを提供するように指定することもできます。たとえば、あなたが作成した`UserModule`をインポートしない限り`UserService`をアプリケーションで利用できないようにモジュール内でサービスを提供するように指定できます:
 
-<code-example path="providers/src/app/user.service.1.ts"  title="src/app/user.service.1.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.1.ts" linenums="false">  </code-example>
 
 上記の例では、モジュールにサービスを提供する推奨の方法を示しています。この方法を使用すると、サービスがどこからも注入されないときに、ツリーシェイキングの対象にできるので推奨されます。どのモジュールがサービスを提供すべきかをそのサービス内で指定できない場合は、モジュール内でそのサービスのプロバイダーを宣言することもできます:
 
-<code-example path="providers/src/app/user.module.ts"  title="src/app/user.module.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts" linenums="false">  </code-example>
 
 ## 遅延ロードモジュールでプロバイダーのスコープを制限する
 
@@ -67,7 +67,7 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 コンポーネントにサービスを提供すると、サービスはそのコンポーネントだけに制限されます
 (同じモジュールにある他のコンポーネントからはアクセスできません)。
 
-<code-example path="providers/src/app/app.component.ts" region="component-providers" title="src/app/app.component.ts" linenums="false">
+<code-example path="providers/src/app/app.component.ts" region="component-providers" header="src/app/app.component.ts" linenums="false">
 </code-example>
 
 

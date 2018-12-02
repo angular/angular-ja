@@ -39,7 +39,7 @@
 
 直近のリリースされたAngularの安定バージョンが、[Angularドキュメンテーション](https://angular.io/docs "Angular documentation")の左側のナビゲーションの下部に表示されます。たとえば、`stable (v5.2.9)`。
 
-[CLIコマンドの`ng update`](https://github.com/angular/angular-cli/wiki/update "Angular CLI update documentation")を使用してAngularの最新バージョンを見つけることもできます。デフォルトでは`ng update`（追加の引数なしで）利用可能な更新が一覧表示されます。
+CLIコマンドの[`ng update`](cli/update)を使用してAngularの最新バージョンを見つけることもできます。デフォルトでは`ng update`（追加の引数なしで）利用可能な更新が一覧表示されます。
 
 
 {@a updating}
@@ -49,7 +49,7 @@
 
 Angularアップデートガイドでは、指定した現在のバージョンと目標のバージョンに基づいて、カスタマイズされた更新手順が提供されます。アプリケーションの複雑さに合わせて、基本および高度な更新パスが含まれています。また、新しいリリースを最大限に活用するためのトラブルシューティング情報や推奨されるマニュアルの変更も含まれています。
 
-簡単な更新のためには、[CLIコマンドの`ng update`](https://github.com/angular/angular-cli/wiki/update "Angular CLI update documentation")で十分です。追加の引数を与えなければ、`ng update`は利用可能な更新を一覧表示し、アプリケーションを最新のバージョンに更新するための推奨手順が示されます。
+簡単な更新のためには、CLIコマンドの[`ng update`](cli/update)で十分です。追加の引数を与えなければ、`ng update`は利用可能な更新を一覧表示し、アプリケーションを最新のバージョンに更新するための推奨手順が示されます。
 
 {@a resources}
 ## リソースのまとめ
@@ -62,7 +62,7 @@ Angularアップデートガイドでは、指定した現在のバージョン�
 
 * アップデート手順: [Angularアップデートガイド](https://update.angular.io/ "Angular Update Guide")
 
-* アップデートコマンドについて: [Angular CLI update documentation](https://github.com/angular/angular-cli/wiki/update "Angular CLI update documentation")
+* アップデートコマンドについて: [Angular CLI `ng update` コマンドリファレンス](cli/update)
 
 * バージョニング、リリース、サポートと廃止のプラクティス: [Angularのバージョニングとリリース](guide/releases "Angular versioning and releases")
 

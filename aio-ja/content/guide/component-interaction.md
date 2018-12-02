@@ -28,7 +28,7 @@
 一般的に [@Input デコレーション](guide/template-syntax#inputs-outputs) で装飾しています。
 
 
-<code-example path="component-interaction/src/app/hero-child.component.ts" title="component-interaction/src/app/hero-child.component.ts">
+<code-example path="component-interaction/src/app/hero-child.component.ts" header="component-interaction/src/app/hero-child.component.ts">
 
 </code-example>
 
@@ -41,7 +41,7 @@
 個々の繰り返しの `hero` インスタンスを子の `hero` プロパティに渡します。
 
 
-<code-example path="component-interaction/src/app/hero-parent.component.ts" title="component-interaction/src/app/hero-parent.component.ts">
+<code-example path="component-interaction/src/app/hero-parent.component.ts" header="component-interaction/src/app/hero-parent.component.ts">
 
 </code-example>
 
@@ -61,7 +61,7 @@
 E2E は、予想とおりに、すべての子をインスタンス化と表示されることをテストします：
 
 
-<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child" title="component-interaction/e2e/src/app.e2e-spec.ts">
+<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child" header="component-interaction/e2e/src/app.e2e-spec.ts">
 
 </code-example>
 
@@ -79,7 +79,7 @@ E2E は、予想とおりに、すべての子をインスタンス化と表示�
 名前から空白を削除し、空の値をデフォルトのテキストに置き換えます。
 
 
-<code-example path="component-interaction/src/app/name-child.component.ts" title="component-interaction/src/app/name-child.component.ts">
+<code-example path="component-interaction/src/app/name-child.component.ts" header="component-interaction/src/app/name-child.component.ts">
 
 </code-example>
 
@@ -88,7 +88,7 @@ E2E は、予想とおりに、すべての子をインスタンス化と表示�
 これは `NameParentComponent`があらゆる空白を含む名前のバリエーションのデモンストレーションです：
 
 
-<code-example path="component-interaction/src/app/name-parent.component.ts" title="component-interaction/src/app/name-parent.component.ts">
+<code-example path="component-interaction/src/app/name-parent.component.ts" header="component-interaction/src/app/name-parent.component.ts">
 
 </code-example>
 
@@ -105,7 +105,7 @@ E2E は、予想とおりに、すべての子をインスタンス化と表示�
 E2E は、空と空では無い名前を含む入力プロパティのセッターをテストします：
 
 
-<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-setter" title="component-interaction/e2e/src/app.e2e-spec.ts">
+<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-setter" header="component-interaction/e2e/src/app.e2e-spec.ts">
 
 </code-example>
 
@@ -134,7 +134,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 この `VersionChildComponent` は、`major` と `minor` 入力プロパティの変化を検出し、これらの変化を報告するログメッセージを構成します：
 
 
-<code-example path="component-interaction/src/app/version-child.component.ts" title="component-interaction/src/app/version-child.component.ts">
+<code-example path="component-interaction/src/app/version-child.component.ts" header="component-interaction/src/app/version-child.component.ts">
 
 </code-example>
 
@@ -143,7 +143,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 `VersionParentComponent` は `minor` と `major` の値を提供し、ボタンをそれらを変更するメソッドに結び付けます。
 
 
-<code-example path="component-interaction/src/app/version-parent.component.ts" title="component-interaction/src/app/version-parent.component.ts">
+<code-example path="component-interaction/src/app/version-parent.component.ts" header="component-interaction/src/app/version-parent.component.ts">
 
 </code-example>
 
@@ -164,7 +164,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 ボタンのクリックが期待された `ngOnChanges` の呼び出しと値を引き起こすことをテストします。：
 
 
-<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-onchanges" title="component-interaction/e2e/src/app.e2e-spec.ts">
+<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="parent-to-child-onchanges" header="component-interaction/e2e/src/app.e2e-spec.ts">
 
 </code-example>
 
@@ -184,7 +184,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
   [@Output デコレーション](guide/template-syntax#inputs-outputs) で装飾されます：
 
 
-<code-example path="component-interaction/src/app/voter.component.ts" title="component-interaction/src/app/voter.component.ts">
+<code-example path="component-interaction/src/app/voter.component.ts" header="component-interaction/src/app/voter.component.ts">
 
 </code-example>
 
@@ -196,7 +196,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 `onVoted()` イベントハンドラーをバインドします。
 
 
-<code-example path="component-interaction/src/app/votetaker.component.ts" title="component-interaction/src/app/votetaker.component.ts">
+<code-example path="component-interaction/src/app/votetaker.component.ts" header="component-interaction/src/app/votetaker.component.ts">
 
 </code-example>
 
@@ -217,7 +217,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 *Agree* と *Disagree* ボタンをクリックすることで適切にカウンターが更新されることをテストしましょう：
 
 
-<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="child-to-parent" title="component-interaction/e2e/src/app.e2e-spec.ts">
+<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="child-to-parent" header="component-interaction/e2e/src/app.e2e-spec.ts">
 
 </code-example>
 
@@ -240,7 +240,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 時計を制御しカウントダウンの状況のメッセージをテンプレート内に表示する
 `start` と `stop` メソッドを持ちます。
 
-<code-example path="component-interaction/src/app/countdown-timer.component.ts" title="component-interaction/src/app/countdown-timer.component.ts">
+<code-example path="component-interaction/src/app/countdown-timer.component.ts" header="component-interaction/src/app/countdown-timer.component.ts">
 
 </code-example>
 
@@ -249,7 +249,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 タイマーコンポーネントを提供する `CountdownLocalVarParentComponent` はこちらです：
 
 
-<code-example path="component-interaction/src/app/countdown-parent.component.ts" region="lv" title="component-interaction/src/app/countdown-parent.component.ts">
+<code-example path="component-interaction/src/app/countdown-parent.component.ts" region="lv" header="component-interaction/src/app/countdown-parent.component.ts">
 
 </code-example>
 
@@ -284,7 +284,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 カウントダウンタイマーが *Stop* ボタンのクリックによって一時停止することをテストしましょう：
 
 
-<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="countdown-timer-tests" title="component-interaction/e2e/src/app.e2e-spec.ts">
+<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="countdown-timer-tests" header="component-interaction/e2e/src/app.e2e-spec.ts">
 
 </code-example>
 
@@ -324,7 +324,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 ここに親の `CountdownViewChildParentComponent` があります：
 
-<code-example path="component-interaction/src/app/countdown-parent.component.ts" region="vc" title="component-interaction/src/app/countdown-parent.component.ts">
+<code-example path="component-interaction/src/app/countdown-parent.component.ts" region="vc" header="component-interaction/src/app/countdown-parent.component.ts">
 
 </code-example>
 
@@ -374,7 +374,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 この `MissionService` は、 `MissionControlComponent` を複数の子の `AstronautComponent` に接続します。
 
 
-<code-example path="component-interaction/src/app/mission.service.ts" title="component-interaction/src/app/mission.service.ts">
+<code-example path="component-interaction/src/app/mission.service.ts" header="component-interaction/src/app/mission.service.ts">
 
 </code-example>
 
@@ -384,7 +384,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 そのインスタンスをそのコンストラクターを通じて自身に注入します。
 
 
-<code-example path="component-interaction/src/app/missioncontrol.component.ts" title="component-interaction/src/app/missioncontrol.component.ts">
+<code-example path="component-interaction/src/app/missioncontrol.component.ts" header="component-interaction/src/app/missioncontrol.component.ts">
 
 </code-example>
 
@@ -394,7 +394,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 個々の `AstronautComponent` は `MissionControlComponent` の子であるため、親のサービスインスタンスを受け取ります：
 
 
-<code-example path="component-interaction/src/app/astronaut.component.ts" title="component-interaction/src/app/astronaut.component.ts">
+<code-example path="component-interaction/src/app/astronaut.component.ts" header="component-interaction/src/app/astronaut.component.ts">
 
 </code-example>
 
@@ -433,7 +433,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 履歴が期待とおりのものであることを確認します。
 
 
-<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="bidirectional-service" title="component-interaction/e2e/src/app.e2e-spec.ts">
+<code-example path="component-interaction/e2e/src/app.e2e-spec.ts" region="bidirectional-service" header="component-interaction/e2e/src/app.e2e-spec.ts">
 
 </code-example>
 

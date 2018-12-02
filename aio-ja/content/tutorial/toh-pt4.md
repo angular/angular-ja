@@ -31,7 +31,7 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 このコマンドは `HeroService` のスケルトンファイルを `src/app/hero.service.ts` に生成します。`HeroService` クラスは次のようになっているはずです。
 
 <code-example path="toh-pt4/src/app/hero.service.1.ts" region="new"
- title="src/app/hero.service.ts (new service)" linenums="false">
+ header="src/app/hero.service.ts (new service)" linenums="false">
 </code-example>
 
 ### _@Injectable()_ サービス
@@ -114,7 +114,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 もう必要ないので、`HEROES`のインポートを削除してください。
 代わりに`HeroService`をインポートしましょう。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" title="src/app/heroes/heroes.component.ts (import HeroService)" region="hero-service-import">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts (import HeroService)" region="hero-service-import">
 </code-example>
 
 `heroes` プロパティの定義を、単純な宣言に置き換えます。
@@ -195,7 +195,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 `HeroService` を開き、`Observable` および `of` を `RxJS` からインポートします。
 
 <code-example path="toh-pt4/src/app/hero.service.ts"
-title="src/app/hero.service.ts (Observable imports)" region="import-observable">
+header="src/app/hero.service.ts (Observable imports)" region="import-observable">
 </code-example>
 
 `getHeroes` メソッドを `Observable` 形式で書き直しましょう。
@@ -222,11 +222,11 @@ title="src/app/hero.service.ts (Observable imports)" region="import-observable">
 
 <code-tabs>
 
-  <code-pane title="heroes.component.ts (Observable)" 
+  <code-pane header="heroes.component.ts (Observable)" 
     path="toh-pt4/src/app/heroes/heroes.component.ts" region="getHeroes">
   </code-pane>
 
-  <code-pane title="heroes.component.ts (Original)" 
+  <code-pane header="heroes.component.ts (Original)" 
     path="toh-pt4/src/app/heroes/heroes.component.1.ts" region="getHeroes">
   </code-pane>
 
@@ -267,7 +267,7 @@ Angular CLI は `src/app/messages` 配下にコンポーネントファイル群
 作成した `MessagesComponent` を表示するために、`AppComponent` のテンプレートを修正しましょう。
 
 <code-example
-  title = "/src/app/app.component.html"
+  header = "/src/app/app.component.html"
   path="toh-pt4/src/app/app.component.html">
 </code-example>
 
@@ -284,7 +284,7 @@ Angular CLI を使い、`src/app` 配下に `MessageService` を作成します�
 `MessageService` を開き、次のコードへ修正してください。
 
 <code-example
-  title = "/src/app/message.service.ts"
+  header = "/src/app/message.service.ts"
   path="toh-pt4/src/app/message.service.ts">
 </code-example>
 
@@ -297,7 +297,7 @@ Angular CLI を使い、`src/app` 配下に `MessageService` を作成します�
 再び `HeroService` を開き、`MessageService` をインポートしましょう。
 
 <code-example
-  title = "/src/app/hero.service.ts (import MessageService)"
+  header = "/src/app/hero.service.ts (import MessageService)"
   path="toh-pt4/src/app/hero.service.ts" region="import-message-service">
 </code-example>
 
@@ -329,7 +329,7 @@ Angular は `HeroService` を生成する際、そのプロパティへシング
 `MessagesComponent` を開き、`MessageService` をインポートしてください。
 
 <code-example
-  title = "/src/app/messages/messages.component.ts (import MessageService)"
+  header = "/src/app/messages/messages.component.ts (import MessageService)"
   path="toh-pt4/src/app/messages/messages.component.ts" region="import-message-service">
 </code-example>
 
@@ -354,7 +354,7 @@ Angular はコンポーネント内の _パブリック_ なプロパティの�
 Angular CLI によって生成された `MessagesComponent` のテンプレートを下記コードへ置き換えましょう。
 
 <code-example
-  title = "src/app/messages/messages.component.html"
+  header = "src/app/messages/messages.component.html"
   path="toh-pt4/src/app/messages/messages.component.html">
 </code-example>
 
@@ -382,35 +382,35 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 <code-tabs>
 
-  <code-pane title="src/app/hero.service.ts" 
+  <code-pane header="src/app/hero.service.ts" 
   path="toh-pt4/src/app/hero.service.ts">
   </code-pane>
 
-  <code-pane title="src/app/message.service.ts" 
+  <code-pane header="src/app/message.service.ts" 
   path="toh-pt4/src/app/message.service.ts">
   </code-pane>
 
-  <code-pane title="src/app/heroes/heroes.component.ts"
+  <code-pane header="src/app/heroes/heroes.component.ts"
   path="toh-pt4/src/app/heroes/heroes.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/messages/messages.component.ts"
+  <code-pane header="src/app/messages/messages.component.ts"
   path="toh-pt4/src/app/messages/messages.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/messages/messages.component.html"
+  <code-pane header="src/app/messages/messages.component.html"
   path="toh-pt4/src/app/messages/messages.component.html">
   </code-pane>
 
-  <code-pane title="src/app/messages/messages.component.css"
+  <code-pane header="src/app/messages/messages.component.css"
   path="toh-pt4/src/app/messages/messages.component.css">
   </code-pane>
 
-  <code-pane title="src/app/app.module.ts"
+  <code-pane header="src/app/app.module.ts"
   path="toh-pt4/src/app/app.module.ts">
   </code-pane>
 
-  <code-pane title="src/app/app.component.html"
+  <code-pane header="src/app/app.component.html"
   path="toh-pt4/src/app/app.component.html">
   </code-pane>
 

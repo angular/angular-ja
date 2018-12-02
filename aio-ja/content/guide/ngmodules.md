@@ -57,9 +57,9 @@ NgModule のメタデータでは次のようなことを行います:
 
 ## 基本の NgModule
 
-CLI で新しいアプリケーションを作成したとき、次のようなモジュールが生成されます。
+[Angular CLI](cli) で新しいアプリケーションを作成したとき、次のようなモジュールが生成されます。
 
-<code-example path="bootstrapping/src/app/app.module.ts" region="whole-ngmodule" title="src/app/app.module.ts" linenums="false">
+<code-example path="bootstrapping/src/app/app.module.ts" region="whole-ngmodule" header="src/app/app.module.ts" linenums="false">
 </code-example>
 
 まずはインポート文から始まります。次にどのようなコンポーネントとディレクティブが属するか(`declarations`)、使用する他のモジュール(`imports`)を記述することで`@NgModule`の設定を行います。このページは NgModule の構造の詳細についてカバーしている[ブートストラップ](guide/bootstrapping)でビルドします。もし、`@NgModule` の構造のより詳細な情報について知りたい場合は [ブートストラップ](guide/bootstrapping) を参照してください。

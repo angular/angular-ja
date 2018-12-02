@@ -1,15 +1,12 @@
 # Service Workerを始める
 
 
-このドキュメントでは、CLIプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを示し、ロードと基本的なキャッシングを実演します。
+このドキュメントでは、[Angular CLI](cli)で作られたプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを示し、ロードと基本的なキャッシングを実演します。
 
 #### 前提条件
 
-次の基本的理解があること
-* [Angular Service Worker イントロダクション](guide/service-worker-intro)
-* Angular CLI v6を含むAngular v6
+[Angular Service Worker イントロダクション](guide/service-worker-intro)への基本的な理解があること
 
-<hr />
 
 ## アプリケーションにService Workerを追加する
 

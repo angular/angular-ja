@@ -29,7 +29,7 @@ JavaScriptモジュールは名前空間や、グローバル変数名が競合�
 <!-- KW-- perMisko: let's discuss. This does not answer the question why it is different. Also, last sentence is confusing.-->
 NgModuleは`@NgModule`デコレーターで装飾されたクラスです。`@NgModule`デコレーターの`imports`配列はAngularに現在のモジュールが他のどのようなモジュールが必要かを教えてくれます。`imports`配列内のモジュールは通常のJavaScriptモジュールではなくNgModuleです。`@NgModule`デコレーターをもつクラスは慣例によりそれを定義したファイルが持っていますが、そのクラスを`NgModule`にしているのはJavaScriptモジュールのようなファイルではなく、`@NgModule`とそのメタデータによるものです。
 
-Angular CLIに生成された`AppModule`では両方のモジュールが使用されていることを確認できます:
+[Angular CLI](cli)に生成された`AppModule`では両方のモジュールが使用されていることを確認できます:
 
 ```typescript
 /* これはJavaScriptのインポート文です。Angularはこれについては何も知りません。 */

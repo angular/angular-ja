@@ -53,6 +53,12 @@ rules:
 
   - expected: 静的な
     pattern: staticな
+  
+  - expected: しやすく
+    pattern: し易く
+
+  - expected: しやすい
+    pattern: し易い
 
   - expected: 購読する
     pattern: サブスクライブする

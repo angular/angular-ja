@@ -28,11 +28,11 @@ Angularはこれらの原則を*強制*しません。Angularはアプリケー�
 
 次に、ブラウザコンソールにログを記録するサービスクラスの例を示します。
 
-<code-example path="architecture/src/app/logger.service.ts" linenums="false" title="src/app/logger.service.ts (class)" region="class"></code-example>
+<code-example path="architecture/src/app/logger.service.ts" linenums="false" header="src/app/logger.service.ts (class)" region="class"></code-example>
 
 サービスは他のサービスに依存することがあります。たとえば、`HeroService` は `Logger` サービスに依存し、`BackendService` を使ってヒーローを取得します。そのサービスは、サーバーからヒーローを非同期的に取り出すための `HttpClient` サービスに依存するかもしれません。
 
-<code-example path="architecture/src/app/hero.service.ts" linenums="false" title="src/app/hero.service.ts (class)" region="class"></code-example>
+<code-example path="architecture/src/app/hero.service.ts" linenums="false" header="src/app/hero.service.ts (class)" region="class"></code-example>
 
 ## 依存性の注入 (DI)
 
@@ -62,7 +62,7 @@ DI は Angular フレームワークとつながり、必要なサービスや�
 
 Angular は、コンポーネントクラスの新しいインスタンスを作成すると、コンストラクターのパラメータタイプを調べることによってコンポーネントが必要とするサービスやその他の依存関係を判断します。たとえば、`HeroListComponent` のコンストラクターには　`HeroService` が必要です。
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (constructor)" region="ctor"></code-example>
+<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" header="src/app/hero-list.component.ts (constructor)" region="ctor"></code-example>
 
 Angular はコンポーネントがサービスに依存していることを検出すると、インジェクターにそのサービスの既存のインスタンスがあるかどうかをまずチェックします。要求されたサービスインスタンスがまだ存在しない場合、インジェクターは登録されたプロバイダーを使用してインジェクターを作成し、サービスを Angular に返す前にインジェクターに追加します。
 
@@ -82,7 +82,7 @@ Angular はコンポーネントがサービスに依存していることを検
 プロバイダーはサービスのメタデータ(`@Injectable()` デコレーター内) または
 `@NgModule()` や `@Component()` メタデータにプロバイダーを登録します
 
-* デフォルトでは Angular CLI コマンド `ng generate service` はプロバイダーのメタデータを `@Injectable()` デコレーターに含めることによってプロバイダーをルートインジェクターに登録します。このチュートリアルでは、このメソッドを使用して HeroService クラス定義のプロバイダーを登録します。
+* デフォルトでは Angular CLI コマンド [ng generate service](cli/generate) はプロバイダーのメタデータを `@Injectable()` デコレーターに含めることによってプロバイダーをルートインジェクターに登録します。このチュートリアルでは、このメソッドを使用して HeroService クラス定義のプロバイダーを登録します。
 
    ``` js
    @Injectable({
@@ -111,6 +111,6 @@ Angular はコンポーネントがサービスに依存していることを検
 新しいサービスインスタンスが取得されます。
 コンポーネントレベルで `@Component()` メタデータの `providers` プロパティにサービスプロバイダーを登録します。
 
-   <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (component providers)" region="providers"></code-example>
+   <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" header="src/app/hero-list.component.ts (component providers)" region="providers"></code-example>
 
 詳細は、[依存性の注入](guide/dependency-injection)セクションを参照してください.

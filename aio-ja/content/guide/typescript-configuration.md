@@ -34,7 +34,7 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 [セットアップガイド](guide/setup)では、次の`tsconfig.json`が使用されています。
 
-<code-example path="quickstart/src/tsconfig.1.json" title="tsconfig.json" linenums="false"></code-example>
+<code-example path="quickstart/src/tsconfig.1.json" header="tsconfig.json" linenums="false"></code-example>
 
 このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
 

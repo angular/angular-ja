@@ -15,7 +15,7 @@
 ファイルは次のようになるでしょう。
 
 <code-example path="toh-pt2/src/app/mock-heroes.ts" linenums="false"
-title="src/app/mock-heroes.ts">
+header="src/app/mock-heroes.ts">
 </code-example>
 
 ## ヒーローを表示する
@@ -24,7 +24,7 @@ title="src/app/mock-heroes.ts">
 
 `HeroesComponent` クラスのファイルを開いて `HEROES` モックをインポートしてください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes" title="src/app/heroes/heroes.component.ts (import HEROES)">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes" header="src/app/heroes/heroes.component.ts (import HEROES)">
 </code-example>
 
 同じファイル（`HeroesComponent`クラス）で、`heroes`という名前のコンポーネントプロパティを定義して、バインディングのために `HEROES` 配列を公開してください。
@@ -43,7 +43,7 @@ title="src/app/mock-heroes.ts">
 
 このようになります：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" title="heroes.component.html (heroes template)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" header="heroes.component.html (heroes template)" linenums="false">
 </code-example>
 
 これから `<li>` をこのように変更していきます：
@@ -89,7 +89,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 `@Component.styleUrls` はこのように指し示されます。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="metadata"
- title="src/app/heroes/heroes.component.ts (@Component)">
+ header="src/app/heroes/heroes.component.ts (@Component)">
 </code-example>
 
 `heroes.component.css` を開いて、 `HeroesComponent` のためのプライベートなスタイルを貼り付けます。
@@ -112,7 +112,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 クリックイベントのバインディングを `<li>` にこのように追加してください：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" title="heroes.component.html (template excerpt)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" header="heroes.component.html (template excerpt)" linenums="false">
 </code-example>
 
 これはAngularの [イベントバインディング](guide/template-syntax#event-binding) シンタックスにおける1つの例です。
@@ -130,7 +130,7 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 
 次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" title="src/app/heroes/heroes.component.ts (onSelect)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" header="src/app/heroes/heroes.component.ts (onSelect)" linenums="false">
 </code-example>
 
 ### 詳細のテンプレートを更新する
@@ -138,7 +138,7 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 テンプレートはもう存在していないコンポーネントの古い `hero` プロパティをまだ参照しています。
 `hero` を `selectedHero` にリネームしてください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" title="heroes.component.html (selected hero details)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" header="heroes.component.html (selected hero details)" linenums="false">
 </code-example>
 
 ### _*ngIf_ を使って空のdetailsを非表示にする
@@ -174,7 +174,7 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 </div>
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if" title="src/app/heroes/heroes.component.html (*ngIf)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if" header="src/app/heroes/heroes.component.html (*ngIf)" linenums="false">
 </code-example>
 
 ブラウザを更新すると、名前の一覧が再度表示されます。
@@ -207,14 +207,14 @@ Angularの [クラスバインディング](guide/template-syntax#class-binding)
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" title="heroes.component.html (toggle the 'selected' CSS class)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" header="heroes.component.html (toggle the 'selected' CSS class)" linenums="false">
 </code-example>
 
 現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはクラスを削除します。
 
 完成した `<li>` はこのようになります：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="li" title="heroes.component.html (list item hero)" linenums="false">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="li" header="heroes.component.html (list item hero)" linenums="false">
 
 </code-example>
 
@@ -227,13 +227,13 @@ Angularの [クラスバインディング](guide/template-syntax#class-binding)
 こちらが `HeroesComponent` のスタイルを含んだ、このページで解説したコードファイルです。
 
 <code-tabs>
-  <code-pane title="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts">
+  <code-pane header="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts">
   </code-pane>
 
-  <code-pane title="src/app/heroes/heroes.component.html" path="toh-pt2/src/app/heroes/heroes.component.html">
+  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt2/src/app/heroes/heroes.component.html">
   </code-pane>
 
-  <code-pane title="src/app/heroes/heroes.component.css" path="toh-pt2/src/app/heroes/heroes.component.css">
+  <code-pane header="src/app/heroes/heroes.component.css" path="toh-pt2/src/app/heroes/heroes.component.css">
   </code-pane>
 </code-tabs>
 

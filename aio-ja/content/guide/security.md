@@ -98,7 +98,7 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 次に `innerHtml` プロパティへバインドしています。
 
 
-<code-example path="security/src/app/inner-html-binding.component.html" title="src/app/inner-html-binding.component.html">
+<code-example path="security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html">
 
 </code-example>
 
@@ -112,14 +112,14 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 攻撃者の制御する値に `<script>` タグが含まれているケース等です。
 
 
-<code-example path="security/src/app/inner-html-binding.component.ts" linenums="false" title="src/app/inner-html-binding.component.ts (class)" region="class">
+<code-example path="security/src/app/inner-html-binding.component.ts" linenums="false" header="src/app/inner-html-binding.component.ts (class)" region="class">
 
 </code-example>
 
 
 
 こういった場合、Angularはコンテキストに応じ自動的に危険な値のみを認識しサニタイズします。
-上の例では `<script>`タグのみサニタイズされ、その内容や後に続く`<b>`タグは変更されていません。
+上の例では `<script>`タグのみサニタイズされ、`<b>`タグのような安全なコンテンツは変更されていません。
 
 
 <figure>
@@ -198,7 +198,7 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 たとえば次のように、 URLに` javascript：alert(...)` をバインドするとします。
 
 
-<code-example path="security/src/app/bypass-security.component.html" linenums="false" title="src/app/bypass-security.component.html (URL)" region="URL">
+<code-example path="security/src/app/bypass-security.component.html" linenums="false" header="src/app/bypass-security.component.html (URL)" region="URL">
 
 </code-example>
 
@@ -209,7 +209,7 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 これを防ぐには、`bypassSecurityTrustUrl`を呼び出してURLの値を信頼できるURLとしてマークします。
 
 
-<code-example path="security/src/app/bypass-security.component.ts" linenums="false" title="src/app/bypass-security.component.ts (trust-url)" region="trust-url">
+<code-example path="security/src/app/bypass-security.component.ts" linenums="false" header="src/app/bypass-security.component.ts (trust-url)" region="trust-url">
 
 </code-example>
 
@@ -229,13 +229,13 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 これにより、Angularは`<iframe src>`へのバインディングを許可します
 
 
-<code-example path="security/src/app/bypass-security.component.html" linenums="false" title="src/app/bypass-security.component.html (iframe)" region="iframe">
+<code-example path="security/src/app/bypass-security.component.html" linenums="false" header="src/app/bypass-security.component.html (iframe)" region="iframe">
 
 </code-example>
 
 
 
-<code-example path="security/src/app/bypass-security.component.ts" linenums="false" title="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url">
+<code-example path="security/src/app/bypass-security.component.ts" linenums="false" header="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url">
 
 </code-example>
 
@@ -295,7 +295,7 @@ CSRFについてはオープンWebアプリケーションセキュリティプ�
 <a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf">Robust Defenses for Cross-Site Request Forgery</a> にも豊富な情報が掲載されています。
 
 Dave Smith氏による
-<a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する発表</a> も解りやすい解説です。
+<a href="https://www.youtube.com/watch?v=9inczw6qtpY" header="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する発表</a> も解りやすい解説です。
 
 
 <h3 id='xssi'>

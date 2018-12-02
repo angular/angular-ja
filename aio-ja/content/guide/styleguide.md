@@ -1,28 +1,29 @@
 # Style Guide
 
-Looking for an opinionated guide to Angular syntax, conventions, and application structure?
-Step right in!
-This style guide presents preferred conventions and, as importantly, explains why.
+Angular構文、表記法、およびアプリケーション構造に関する有益なガイドをお探しですか？
+心配いりません！
+このスタイルガイドで、好ましい規則を提示し、その重要な理由を説明します。
 
 
 
 {@a toc}
 
-## Style vocabulary
+{@a style-vocabulary}
+## スタイルのボキャブラリー
 
-Each guideline describes either a good or bad practice, and all have a consistent presentation.
+個々のガイドラインはよいプラクティスか悪いプラクティスのどちらかを示しており、それらのすべてが一貫した表現を持っています。
 
-The wording of each guideline indicates how strong the recommendation is.
+個々のガイドラインの表現は、その推奨がどれほど強いかを示しています。
 
 
 <div class="s-rule do">
 
 
 
-**Do** is one that should always be followed.
-_Always_ might be a bit too strong of a word.
-Guidelines that literally should always be followed are extremely rare.
-On the other hand, you need a really unusual case for breaking a *Do* guideline.
+**Do** は常に従うべきものです。
+_常に_ は少し言葉が強いかもしれません。
+常に従うべきガイドラインが出てくることは非常に稀です。
+しかし、 *Do* ガイドラインを破るには異例なケースが必要となります。
 
 
 </div>
@@ -33,8 +34,9 @@ On the other hand, you need a really unusual case for breaking a *Do* guideline.
 
 
 
-**Consider** guidelines should generally be followed.
-If you fully understand the meaning behind the guideline and have a good reason to deviate, then do so. Please strive to be consistent.
+**Consider** は一般的に守るべきものです。
+このガイドラインの意図を理解した上で、逸脱する理由があるなら守る必要はありません。
+一貫することを心がけてください。
 
 
 </div>
@@ -45,7 +47,8 @@ If you fully understand the meaning behind the guideline and have a good reason 
 
 
 
-**Avoid** indicates something you should almost never do. Code examples to *avoid* have an unmistakable red header.
+**Avoid** は決してしてはいけないものです。
+赤色のヘッダが付いているコードブロックは *Avoid* コード例になります。
 
 
 </div>
@@ -56,7 +59,7 @@ If you fully understand the meaning behind the guideline and have a good reason 
 
 
 
-**Why?** gives reasons for following the previous recommendations.
+**Why?** は推奨事項である理由が書かれます。
 
 
 </div>
@@ -64,24 +67,27 @@ If you fully understand the meaning behind the guideline and have a good reason 
 
 
 
-## File structure conventions
+{@a file-structure-conventions}
+## ファイル構造の規約
 
-Some code examples display a file that has one or more similarly named companion files.
-For example, `hero.component.ts` and `hero.component.html`.
+いくつかのコード例は、同様の名前を持った関連したファイルが1つ以上あります。
+たとえば、`hero.component.ts` と `hero.component.html` です。
 
-The guideline uses the shortcut `hero.component.ts|html|css|spec` to represent those various files. Using this shortcut makes this guide's file structures easier to read and more terse.
+このガイドラインでは、これらのファイルを表すために `hero.component.ts|html|css|spec` であるとします。
+省略することでこのガイドラインが簡潔になりファイル構造が読み易くなるためです。
 
 
 
 {@a single-responsibility}
 
 
-## Single responsibility
+{@a single-responsibility}
+## 単一責任
 
-Apply the
-<a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>single responsibility principle</i> (SRP)</a>
-to all components, services, and other symbols.
-This helps make the app cleaner, easier to read and maintain, and more testable.
+すべてのコンポーネント、サービス、およびその他のシンボルに
+<a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>単一責任の原則</i> (SRP)</a>
+を適用させます。
+これは、アプリをよりきれいにし、読みやすく、維持しやすくし、テストをしやすくするのに役立ちます。
 
 {@a 01-01}
 
@@ -94,7 +100,7 @@ This helps make the app cleaner, easier to read and maintain, and more testable.
 
 
 
-**Do** define one thing, such as a service or component, per file.
+**Do** サービスやコンポーネントなどは1ファイルにつき1つだけの定義としてください。
 
 
 </div>
@@ -105,7 +111,7 @@ This helps make the app cleaner, easier to read and maintain, and more testable.
 
 
 
-**Consider** limiting files to 400 lines of code.
+**Consider** ファイルを400行のコードに制限します。
 
 
 </div>
@@ -116,8 +122,8 @@ This helps make the app cleaner, easier to read and maintain, and more testable.
 
 
 
-**Why?** One component per file makes it far easier to read, maintain, and avoid
-collisions with teams in source control.
+**Why?** 1ファイルにつき1コンポーネントとすることで、読み取り、保守、および
+チーム内でソース管理をする際に衝突の回避がはるかに容易になります。
 
 
 </div>
@@ -128,7 +134,7 @@ collisions with teams in source control.
 
 
 
-**Why?** One component per file avoids hidden bugs that often arise when combining components in a file where they may share variables, create unwanted closures, or unwanted coupling with dependencies.
+**Why?** 1ファイルにつき1コンポーネントとすることで、変数が共有されたり、不要なクロージャが作成されたりといった、ファイル内のコンポーネント結合をする時によく発生する、依存関係との望ましくない結合による隠れたバグを回避できます。
 
 
 </div>
@@ -139,56 +145,54 @@ collisions with teams in source control.
 
 
 
-**Why?** A single component can be the default export for its file which facilitates lazy loading with the router.
+**Why?** 単一のコンポーネントにするとファイルを、ルーターでの遅延ロードを容易にさせるデフォルトエクスポートにすることができるためです。
 
 </div>
 
 
 
-The key is to make the code more reusable, easier to read, and less mistake prone.
+重要なことは、コードを再利用しやすく読みやすいものにして、間違いやすさを減らすことです。
 
-The following *negative* example defines the `AppComponent`, bootstraps the app,
-defines the `Hero` model object, and loads heroes from the server all in the same file.
-*Don't do this*.
+次の *negative* な例は、 `AppComponent` を定義し、アプリを自動起動し、 `Hero` モデルオブジェクトを定義し、サーバーからHeroを全件取得することが同じファイルで読み込まれます。
+*これはしないでください*。
 
 
-<code-example path="styleguide/src/01-01/app/heroes/hero.component.avoid.ts" title="app/heroes/hero.component.ts">
+<code-example path="styleguide/src/01-01/app/heroes/hero.component.avoid.ts" header="app/heroes/hero.component.ts">
 
 </code-example>
 
 
 
-It is a better practice to redistribute the component and its
-supporting classes into their own, dedicated files.
+コンポーネントやそれをサポートしているクラスを専用のファイルに分割することはよい方針です。
 
 
 <code-tabs>
 
-  <code-pane title="main.ts" path="styleguide/src/01-01/main.ts">
+  <code-pane header="main.ts" path="styleguide/src/01-01/main.ts">
 
   </code-pane>
 
-  <code-pane title="app/app.module.ts" path="styleguide/src/01-01/app/app.module.ts">
+  <code-pane header="app/app.module.ts" path="styleguide/src/01-01/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="app/app.component.ts" path="styleguide/src/01-01/app/app.component.ts">
+  <code-pane header="app/app.component.ts" path="styleguide/src/01-01/app/app.component.ts">
 
   </code-pane>
 
-  <code-pane title="app/heroes/heroes.component.ts" path="styleguide/src/01-01/app/heroes/heroes.component.ts">
+  <code-pane header="app/heroes/heroes.component.ts" path="styleguide/src/01-01/app/heroes/heroes.component.ts">
 
   </code-pane>
 
-  <code-pane title="app/heroes/shared/hero.service.ts" path="styleguide/src/01-01/app/heroes/shared/hero.service.ts">
+  <code-pane header="app/heroes/shared/hero.service.ts" path="styleguide/src/01-01/app/heroes/shared/hero.service.ts">
 
   </code-pane>
 
-  <code-pane title="app/heroes/shared/hero.model.ts" path="styleguide/src/01-01/app/heroes/shared/hero.model.ts">
+  <code-pane header="app/heroes/shared/hero.model.ts" path="styleguide/src/01-01/app/heroes/shared/hero.model.ts">
 
   </code-pane>
 
-  <code-pane title="app/heroes/shared/mock-heroes.ts" path="styleguide/src/01-01/app/heroes/shared/mock-heroes.ts">
+  <code-pane header="app/heroes/shared/mock-heroes.ts" path="styleguide/src/01-01/app/heroes/shared/mock-heroes.ts">
 
   </code-pane>
 
@@ -196,8 +200,8 @@ supporting classes into their own, dedicated files.
 
 
 
-As the app grows, this rule becomes even more important.
-<a href="#toc">Back to top</a>
+アプリが成長するにつれて、このルールはさらに重要になります。
+<a href="#toc">トップに戻る</a>
 
 
 {@a 01-02}
@@ -211,7 +215,7 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Do** define small functions
+**Do** 小さい関数を定義してください。
 
 
 </div>
@@ -222,7 +226,7 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Consider** limiting to no more than 75 lines.
+**Consider** 最大行数を75行に制限する。
 
 
 </div>
@@ -233,7 +237,7 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Why?** Small functions are easier to test, especially when they do one thing and serve one purpose.
+**Why?** 小さい関数はテストを容易にします。その関数が1つのことを行い、1つの目的を果たす場合は特にです。
 
 
 </div>
@@ -244,7 +248,7 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Why?** Small functions promote reuse.
+**Why?** 小さい関数は再利用を促進します。
 
 
 </div>
@@ -255,7 +259,7 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Why?** Small functions are easier to read.
+**Why?** 小さい関数は読み易くなります。
 
 
 </div>
@@ -266,7 +270,7 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Why?** Small functions are easier to maintain.
+**Why?** 小さい関数はメンテナンスが容易です。
 
 
 </div>
@@ -277,17 +281,18 @@ As the app grows, this rule becomes even more important.
 
 
 
-**Why?** Small functions help avoid hidden bugs that come with large functions that share variables with external scope, create unwanted closures, or unwanted coupling with dependencies.
+**Why?** 小さい関数は、外部スコープと変数を共有し、不要なクロージャを作成したり、依存関係との望ましくない結合を引き起こす大きな関数に伴う隠れたバグを回避します。
 
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
-## Naming
+{@a naming}
+## 命名規則
 
-Naming conventions are hugely important to maintainability and readability. This guide recommends naming conventions for the file name and the symbol name.
+命名規則は、保守性と可読性にとって非常に重要です。このガイドでは、ファイル名とシンボル名の命名規則を推奨しています。
 
 
 
@@ -302,7 +307,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Do** use consistent names for all symbols.
+**Do** すべてのシンボルに一貫した名前を使用してください。
 
 
 </div>
@@ -313,7 +318,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Do** follow a pattern that describes the symbol's feature then its type. The recommended pattern is `feature.type.ts`.
+**Do** シンボルの特徴を記述し、そのタイプを記述するパターンにしたがってください。推奨されるパターンは `feature.type.ts` です。
 
 
 </div>
@@ -324,7 +329,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Why?** Naming conventions help provide a consistent way to find content at a glance. Consistency within the project is vital. Consistency with a team is important. Consistency across a company provides tremendous efficiency.
+**Why?** 命名規則はコンテンツを一目で見つける一貫した方法を提供します。プロジェクト内の一貫性は非常に重要です。チームとの一貫性は重要です。企業全体の一貫性は非常に効率的です。
 
 
 </div>
@@ -335,7 +340,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Why?** The naming conventions should simply help find desired code faster and make it easier to understand.
+**Why?** 命名規則は、目的のコードをより早く見つけ出し、理解しやすくさせるのに役たちます。
 
 
 </div>
@@ -346,12 +351,12 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Why?** Names of folders and files should clearly convey their intent. For example, `app/heroes/hero-list.component.ts` may contain a component that manages a list of heroes.
+**Why?** フォルダとファイルの名前は、その意図を明確に伝える必要があります。たとえば、 `app/heroes/hero-list.component.ts` にはヒーローのリストを管理するコンポーネントが含まれています。
 
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-02}
@@ -365,7 +370,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Do** use dashes to separate words in the descriptive name.
+**Do** 説明的な名前の単語を区切るにはダッシュを使用してください。
 
 
 </div>
@@ -376,7 +381,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Do** use dots to separate the descriptive name from the type.
+**Do** ドットを使用して、説明的な名前とタイプを区切ってください。
 
 
 </div>
@@ -387,7 +392,7 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Do** use consistent type names for all components following a pattern that describes the component's feature then its type. A recommended pattern is `feature.type.ts`.
+**Do** コンポーネントの機能、そのタイプを記述するパターンに続くすべてのコンポーネントに対して、一貫した型名を使用してください。推奨されるパターンは `feature.type.ts` です。
 
 
 </div>
@@ -398,8 +403,8 @@ Naming conventions are hugely important to maintainability and readability. This
 
 
 
-**Do** use conventional type names including `.service`, `.component`, `.pipe`, `.module`, and `.directive`.
-Invent additional type names if you must but take care not to create too many.
+**Do** `.service`、` .component`、 `.pipe`、` .module`、 `.directive` を含む慣習的な型名を使ってください。
+あまりにも多くを作成しないように注意しなければならない場合は、追加の型名を作成してください。
 
 
 </div>
@@ -410,7 +415,7 @@ Invent additional type names if you must but take care not to create too many.
 
 
 
-**Why?** Type names provide a consistent way to quickly identify what is in the file.
+**Why?** 型名は、ファイル内の内容をすばやく識別する一貫した方法を提供してください。
 
 
 </div>
@@ -421,7 +426,7 @@ Invent additional type names if you must but take care not to create too many.
 
 
 
-**Why?** Type names make it easy to find a specific file type using an editor or IDE's fuzzy search techniques.
+**Why?** 型名は、エディタやIDEのあいまい検索技術を使用して、特定のファイルタイプを簡単に見つけることができます。
 
 
 </div>
@@ -432,8 +437,8 @@ Invent additional type names if you must but take care not to create too many.
 
 
 
-**Why?** Unabbreviated type names such as `.service` are descriptive and unambiguous.
-Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
+**Why?** `.service` のような省略されていない型名は説明的であり、明白です。
+`.srv`、` .svc`、 `.serv` などの略語は混乱することがあります。
 
 
 </div>
@@ -444,12 +449,12 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Why?** Type names provide pattern matching for any automated tasks.
+**Why?** 型名は、自動化されたタスクでパターンマッチングする際に使われるためです。
 
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-03}
@@ -463,7 +468,7 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Do** use consistent names for all assets named after what they represent.
+**Do** すべてのファイル群はそれらを表す名前の後に一貫性のある名前を使用してください。
 
 
 </div>
@@ -474,7 +479,7 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Do** use upper camel case for class names.
+**Do** クラス名はUpperCamelCaseを使用してください。
 
 
 </div>
@@ -485,7 +490,7 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Do** match the name of the symbol to the name of the file.
+**Do** シンボル名とファイル名は一致させてください。
 
 
 </div>
@@ -496,8 +501,8 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Do** append the symbol name with the conventional suffix (such as `Component`,
-`Directive`, `Module`, `Pipe`, or `Service`) for a thing of that type.
+**Do** 慣例的な接尾辞付きのシンボル名（たとえば、 `Component`、
+`Directive`、` Module`、 `Pipe`、` Service`など）を指定してください。
 
 
 </div>
@@ -508,8 +513,8 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Do** give the filename the conventional suffix (such as `.component.ts`, `.directive.ts`,
-`.module.ts`, `.pipe.ts`, or `.service.ts`) for a file of that type.
+**Do** ファイル名に慣例的な接尾辞（たとえば、 `.component.ts`、` .directive.ts`、
+`.module.ts`、` .pipe.ts`、または `.service.ts`）を指定してください。
 
 </div>
 
@@ -519,8 +524,8 @@ Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
 
 
 
-**Why?** Consistent conventions make it easy to quickly identify
-and reference assets of different types.
+**Why?** 一貫した規則により、異なるタイプのファイル群から迅速に識別して
+参照することが容易になります。
 
 
 </div>
@@ -705,7 +710,7 @@ and reference assets of different types.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-04}
@@ -718,7 +723,7 @@ and reference assets of different types.
 
 
 
-**Do** use consistent names for all services named after their feature.
+**Do** すべてのサービスは機能名の後に一貫した名前を付けてください。
 
 
 </div>
@@ -729,26 +734,15 @@ and reference assets of different types.
 
 
 
-**Do** suffix a service class name with `Service`.
-For example, something that gets data or heroes
-should be called a `DataService` or a `HeroService`.
+**Do** サービスクラスは接尾辞に`Service`を付けてください。
+たとえば、データやヒーローを取得するものは
+`DataService`または`HeroService`と呼ばれるべきです。
 
-A few terms are unambiguously services. They typically
-indicate agency by ending in "-er". You may prefer to name
-a service that logs messages `Logger` rather than `LoggerService`.
-Decide if this exception is agreeable in your project.
-As always, strive for consistency.
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** Provides a consistent way to quickly identify and reference services.
+短い用語は明白にサービスです。それらは基本的に
+「-er」で終わらせることで代理的に示されます。
+メッセージをログするサービスは`LoggerService`よりも`Logger`の方がよいでしょう。
+この例外がプロジェクトで合意できるかどうかを決定します。
+いつものように、一貫性のために努力してください。
 
 
 </div>
@@ -759,7 +753,18 @@ As always, strive for consistency.
 
 
 
-**Why?** Clear service names such as `Logger` do not require a suffix.
+**Why?** サービスを迅速に識別して参照する一貫した方法を提供します。
+
+
+</div>
+
+
+
+<div class="s-why">
+
+
+
+**Why?** `Logger`のような明確なサービス名は接尾辞を必要としません。
 
 
 </div>
@@ -770,7 +775,7 @@ As always, strive for consistency.
 
 
 
-**Why?** Service names such as `Credit` are nouns and require a suffix and should be named with a suffix when it is not obvious if it is a service or something else.
+**Why?** `Credit` などのサービス名は名詞であり、接尾辞を必要とするため、サービスであれ他のものであれ、明示的でない場合は接尾辞を付ける必要があります。
 
 
 </div>
@@ -860,7 +865,7 @@ As always, strive for consistency.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-05}
@@ -925,13 +930,13 @@ As always, strive for consistency.
 
 
 
-<code-example path="styleguide/src/02-05/main.ts" title="main.ts">
+<code-example path="styleguide/src/02-05/main.ts" header="main.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-02}
 
@@ -962,7 +967,7 @@ As always, strive for consistency.
 
 
 
-<code-example path="styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" title="app/heroes/shared/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
 
@@ -972,11 +977,11 @@ As always, strive for consistency.
 
 <code-tabs>
 
-  <code-pane title="app/heroes/shared/hero-button/hero-button.component.ts" path="styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.ts" region="example">
+  <code-pane header="app/heroes/shared/hero-button/hero-button.component.ts" path="styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.ts" region="example">
 
   </code-pane>
 
-  <code-pane title="app/app.component.html" path="styleguide/src/05-02/app/app.component.html">
+  <code-pane header="app/app.component.html" path="styleguide/src/05-02/app/app.component.html">
 
   </code-pane>
 
@@ -984,7 +989,7 @@ As always, strive for consistency.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 02-07}
 
@@ -1061,7 +1066,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<code-example path="styleguide/src/02-07/app/heroes/hero.component.avoid.ts" region="example" title="app/heroes/hero.component.ts">
+<code-example path="styleguide/src/02-07/app/heroes/hero.component.avoid.ts" region="example" header="app/heroes/hero.component.ts">
 
 </code-example>
 
@@ -1069,7 +1074,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<code-example path="styleguide/src/02-07/app/users/users.component.avoid.ts" region="example" title="app/users/users.component.ts">
+<code-example path="styleguide/src/02-07/app/users/users.component.avoid.ts" region="example" header="app/users/users.component.ts">
 
 </code-example>
 
@@ -1077,7 +1082,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<code-example path="styleguide/src/02-07/app/heroes/hero.component.ts" region="example" title="app/heroes/hero.component.ts">
+<code-example path="styleguide/src/02-07/app/heroes/hero.component.ts" region="example" header="app/heroes/hero.component.ts">
 
 </code-example>
 
@@ -1085,13 +1090,13 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<code-example path="styleguide/src/02-07/app/users/users.component.ts" region="example" title="app/users/users.component.ts">
+<code-example path="styleguide/src/02-07/app/users/users.component.ts" region="example" header="app/users/users.component.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 02-06}
 
@@ -1131,7 +1136,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 02-08}
 
@@ -1183,7 +1188,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<code-example path="styleguide/src/02-08/app/shared/validate.directive.avoid.ts" region="example" title="app/shared/validate.directive.ts">
+<code-example path="styleguide/src/02-08/app/shared/validate.directive.avoid.ts" region="example" header="app/shared/validate.directive.ts">
 
 </code-example>
 
@@ -1191,13 +1196,13 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<code-example path="styleguide/src/02-08/app/shared/validate.directive.ts" region="example" title="app/shared/validate.directive.ts">
+<code-example path="styleguide/src/02-08/app/shared/validate.directive.ts" region="example" header="app/shared/validate.directive.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-09}
@@ -1292,7 +1297,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-10}
@@ -1431,7 +1436,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 02-11}
@@ -1521,7 +1526,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 02-12}
 
@@ -1750,7 +1755,7 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Coding conventions
@@ -1799,7 +1804,7 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-<code-example path="styleguide/src/03-01/app/core/exception.service.avoid.ts" region="example" title="app/shared/exception.service.ts">
+<code-example path="styleguide/src/03-01/app/core/exception.service.avoid.ts" region="example" header="app/shared/exception.service.ts">
 
 </code-example>
 
@@ -1807,13 +1812,13 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-<code-example path="styleguide/src/03-01/app/core/exception.service.ts" region="example" title="app/shared/exception.service.ts">
+<code-example path="styleguide/src/03-01/app/core/exception.service.ts" region="example" header="app/shared/exception.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 03-02}
@@ -1916,13 +1921,13 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-<code-example path="styleguide/src/03-02/app/core/data.service.ts" title="app/shared/data.service.ts">
+<code-example path="styleguide/src/03-02/app/core/data.service.ts" header="app/shared/data.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 03-03}
@@ -2020,7 +2025,7 @@ discourage the `I` prefix.
 
 
 
-<code-example path="styleguide/src/03-03/app/core/hero-collector.service.avoid.ts" region="example" title="app/shared/hero-collector.service.ts">
+<code-example path="styleguide/src/03-03/app/core/hero-collector.service.avoid.ts" region="example" header="app/shared/hero-collector.service.ts">
 
 </code-example>
 
@@ -2028,13 +2033,13 @@ discourage the `I` prefix.
 
 
 
-<code-example path="styleguide/src/03-03/app/core/hero-collector.service.ts" region="example" title="app/shared/hero-collector.service.ts">
+<code-example path="styleguide/src/03-03/app/core/hero-collector.service.ts" region="example" header="app/shared/hero-collector.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 03-04}
 
@@ -2098,7 +2103,7 @@ discourage the `I` prefix.
 
 
 
-<code-example path="styleguide/src/03-04/app/core/toast.service.avoid.ts" region="example" title="app/shared/toast.service.ts">
+<code-example path="styleguide/src/03-04/app/core/toast.service.avoid.ts" region="example" header="app/shared/toast.service.ts">
 
 </code-example>
 
@@ -2106,13 +2111,13 @@ discourage the `I` prefix.
 
 
 
-<code-example path="styleguide/src/03-04/app/core/toast.service.ts" region="example" title="app/shared/toast.service.ts">
+<code-example path="styleguide/src/03-04/app/core/toast.service.ts" region="example" header="app/shared/toast.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 03-06}
 
@@ -2176,7 +2181,7 @@ discourage the `I` prefix.
 
 
 
-<code-example path="styleguide/src/03-06/app/heroes/shared/hero.service.avoid.ts" region="example" title="app/heroes/shared/hero.service.ts">
+<code-example path="styleguide/src/03-06/app/heroes/shared/hero.service.avoid.ts" region="example" header="app/heroes/shared/hero.service.ts">
 
 </code-example>
 
@@ -2184,13 +2189,13 @@ discourage the `I` prefix.
 
 
 
-<code-example path="styleguide/src/03-06/app/heroes/shared/hero.service.ts" region="example" title="app/heroes/shared/hero.service.ts">
+<code-example path="styleguide/src/03-06/app/heroes/shared/hero.service.ts" region="example" header="app/heroes/shared/hero.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Application structure and NgModules
@@ -2204,7 +2209,7 @@ All content is one asset per file. Each component, service, and pipe is in its o
 All third party vendor scripts are stored in another folder and not in the `src` folder.
 You didn't write them and you don't want them cluttering `src`.
 Use the naming conventions for files in this guide.
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-01}
 
@@ -2249,7 +2254,7 @@ _can I quickly open and start work in all of the related files for this feature_
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-02}
 
@@ -2281,7 +2286,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-03}
 
@@ -2346,7 +2351,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 04-04}
@@ -2406,7 +2411,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 04-05}
@@ -2450,7 +2455,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 04-06}
@@ -2771,7 +2776,7 @@ Whatever you choose, be consistent.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-07}
 
@@ -2932,13 +2937,13 @@ for example, in `/src/app`.
 
 
 
-<code-example path="styleguide/src/04-08/app/app.module.ts" region="example" title="app/app.module.ts">
+<code-example path="styleguide/src/04-08/app/app.module.ts" region="example" header="app/app.module.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 04-09}
@@ -3060,7 +3065,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-10}
 
@@ -3284,27 +3289,27 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 <code-tabs>
 
-  <code-pane title="app/shared/shared.module.ts" path="styleguide/src/04-10/app/shared/shared.module.ts">
+  <code-pane header="app/shared/shared.module.ts" path="styleguide/src/04-10/app/shared/shared.module.ts">
 
   </code-pane>
 
-  <code-pane title="app/shared/init-caps.pipe.ts" path="styleguide/src/04-10/app/shared/init-caps.pipe.ts">
+  <code-pane header="app/shared/init-caps.pipe.ts" path="styleguide/src/04-10/app/shared/init-caps.pipe.ts">
 
   </code-pane>
 
-  <code-pane title="app/shared/filter-text/filter-text.component.ts" path="styleguide/src/04-10/app/shared/filter-text/filter-text.component.ts">
+  <code-pane header="app/shared/filter-text/filter-text.component.ts" path="styleguide/src/04-10/app/shared/filter-text/filter-text.component.ts">
 
   </code-pane>
 
-  <code-pane title="app/shared/filter-text/filter-text.service.ts" path="styleguide/src/04-10/app/shared/filter-text/filter-text.service.ts">
+  <code-pane header="app/shared/filter-text/filter-text.service.ts" path="styleguide/src/04-10/app/shared/filter-text/filter-text.service.ts">
 
   </code-pane>
 
-  <code-pane title="app/heroes/heroes.component.ts" path="styleguide/src/04-10/app/heroes/heroes.component.ts">
+  <code-pane header="app/heroes/heroes.component.ts" path="styleguide/src/04-10/app/heroes/heroes.component.ts">
 
   </code-pane>
 
-  <code-pane title="app/heroes/heroes.component.html" path="styleguide/src/04-10/app/heroes/heroes.component.html">
+  <code-pane header="app/heroes/heroes.component.html" path="styleguide/src/04-10/app/heroes/heroes.component.html">
 
   </code-pane>
 
@@ -3312,7 +3317,7 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-11}
 
@@ -3589,35 +3594,35 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 <code-tabs>
 
-  <code-pane title="app/app.module.ts" path="styleguide/src/04-11/app/app.module.ts" region="example">
+  <code-pane header="app/app.module.ts" path="styleguide/src/04-11/app/app.module.ts" region="example">
 
   </code-pane>
 
-  <code-pane title="app/core/core.module.ts" path="styleguide/src/04-11/app/core/core.module.ts">
+  <code-pane header="app/core/core.module.ts" path="styleguide/src/04-11/app/core/core.module.ts">
 
   </code-pane>
 
-  <code-pane title="app/core/logger.service.ts" path="styleguide/src/04-11/app/core/logger.service.ts">
+  <code-pane header="app/core/logger.service.ts" path="styleguide/src/04-11/app/core/logger.service.ts">
 
   </code-pane>
 
-  <code-pane title="app/core/nav/nav.component.ts" path="styleguide/src/04-11/app/core/nav/nav.component.ts">
+  <code-pane header="app/core/nav/nav.component.ts" path="styleguide/src/04-11/app/core/nav/nav.component.ts">
 
   </code-pane>
 
-  <code-pane title="app/core/nav/nav.component.html" path="styleguide/src/04-11/app/core/nav/nav.component.html">
+  <code-pane header="app/core/nav/nav.component.html" path="styleguide/src/04-11/app/core/nav/nav.component.html">
 
   </code-pane>
 
-  <code-pane title="app/core/spinner/spinner.component.ts" path="styleguide/src/04-11/app/core/spinner/spinner.component.ts">
+  <code-pane header="app/core/spinner/spinner.component.ts" path="styleguide/src/04-11/app/core/spinner/spinner.component.ts">
 
   </code-pane>
 
-  <code-pane title="app/core/spinner/spinner.component.html" path="styleguide/src/04-11/app/core/spinner/spinner.component.html">
+  <code-pane header="app/core/spinner/spinner.component.html" path="styleguide/src/04-11/app/core/spinner/spinner.component.html">
 
   </code-pane>
 
-  <code-pane title="app/core/spinner/spinner.service.ts" path="styleguide/src/04-11/app/core/spinner/spinner.service.ts">
+  <code-pane header="app/core/spinner/spinner.service.ts" path="styleguide/src/04-11/app/core/spinner/spinner.service.ts">
 
   </code-pane>
 
@@ -3639,7 +3644,7 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-12}
 
@@ -3685,11 +3690,11 @@ Only the root `AppModule` should import the `CoreModule`.
 
 <code-tabs>
 
-  <code-pane title="app/core/module-import-guard.ts" path="styleguide/src/04-12/app/core/module-import-guard.ts">
+  <code-pane header="app/core/module-import-guard.ts" path="styleguide/src/04-12/app/core/module-import-guard.ts">
 
   </code-pane>
 
-  <code-pane title="app/core/core.module.ts" path="styleguide/src/04-12/app/core/core.module.ts">
+  <code-pane header="app/core/core.module.ts" path="styleguide/src/04-12/app/core/core.module.ts">
 
   </code-pane>
 
@@ -3697,7 +3702,7 @@ Only the root `AppModule` should import the `CoreModule`.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-13}
 
@@ -3729,7 +3734,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 04-14}
 
@@ -3758,7 +3763,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Components
@@ -3808,7 +3813,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 </div>
 
-<code-example path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" title="app/heroes/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/hero-button/hero-button.component.ts">
 
 </code-example>
 
@@ -3816,7 +3821,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-<code-example path="styleguide/src/05-03/app/app.component.avoid.html" title="app/app.component.html">
+<code-example path="styleguide/src/05-03/app/app.component.avoid.html" header="app/app.component.html">
 
 </code-example>
 
@@ -3824,11 +3829,11 @@ There are a few cases where you give a component an attribute, such as when you 
 
 <code-tabs>
 
-  <code-pane title="app/heroes/shared/hero-button/hero-button.component.ts" path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.ts" region="example">
+  <code-pane header="app/heroes/shared/hero-button/hero-button.component.ts" path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.ts" region="example">
 
   </code-pane>
 
-  <code-pane title="app/app.component.html" path="styleguide/src/05-03/app/app.component.html">
+  <code-pane header="app/app.component.html" path="styleguide/src/05-03/app/app.component.html">
 
   </code-pane>
 
@@ -3836,7 +3841,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-04}
 
@@ -3936,7 +3941,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-<code-example path="styleguide/src/05-04/app/heroes/heroes.component.avoid.ts" region="example" title="app/heroes/heroes.component.ts">
+<code-example path="styleguide/src/05-04/app/heroes/heroes.component.avoid.ts" region="example" header="app/heroes/heroes.component.ts">
 
 </code-example>
 
@@ -3946,15 +3951,15 @@ in those editors that support it; it won't help with CSS styles.
 
 <code-tabs>
 
-  <code-pane title="app/heroes/heroes.component.ts" path="styleguide/src/05-04/app/heroes/heroes.component.ts" region="example">
+  <code-pane header="app/heroes/heroes.component.ts" path="styleguide/src/05-04/app/heroes/heroes.component.ts" region="example">
 
   </code-pane>
 
-  <code-pane title="app/heroes/heroes.component.html" path="styleguide/src/05-04/app/heroes/heroes.component.html">
+  <code-pane header="app/heroes/heroes.component.html" path="styleguide/src/05-04/app/heroes/heroes.component.html">
 
   </code-pane>
 
-  <code-pane title="app/heroes/heroes.component.css" path="styleguide/src/05-04/app/heroes/heroes.component.css">
+  <code-pane header="app/heroes/heroes.component.css" path="styleguide/src/05-04/app/heroes/heroes.component.css">
 
   </code-pane>
 
@@ -3962,7 +3967,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-12}
 
@@ -4040,7 +4045,7 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-<code-example path="styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" title="app/heroes/shared/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
 
@@ -4048,13 +4053,13 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-<code-example path="styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.ts" region="example" title="app/heroes/shared/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 {@a 05-13}
@@ -4098,7 +4103,7 @@ and the directive name doesn't describe the property.
 
 
 
-<code-example path="styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" title="app/heroes/shared/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
 
@@ -4106,7 +4111,7 @@ and the directive name doesn't describe the property.
 
 
 
-<code-example path="styleguide/src/05-13/app/app.component.avoid.html" title="app/app.component.html">
+<code-example path="styleguide/src/05-13/app/app.component.avoid.html" header="app/app.component.html">
 
 </code-example>
 
@@ -4116,15 +4121,15 @@ and the directive name doesn't describe the property.
 
 <code-tabs>
 
-  <code-pane title="app/heroes/shared/hero-button/hero-button.component.ts" path="styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.ts" region="example">
+  <code-pane header="app/heroes/shared/hero-button/hero-button.component.ts" path="styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.ts" region="example">
 
   </code-pane>
 
-  <code-pane title="app/heroes/shared/hero-button/hero-highlight.directive.ts" path="styleguide/src/05-13/app/heroes/shared/hero-highlight.directive.ts">
+  <code-pane header="app/heroes/shared/hero-button/hero-highlight.directive.ts" path="styleguide/src/05-13/app/heroes/shared/hero-highlight.directive.ts">
 
   </code-pane>
 
-  <code-pane title="app/app.component.html" path="styleguide/src/05-13/app/app.component.html">
+  <code-pane header="app/app.component.html" path="styleguide/src/05-13/app/app.component.html">
 
   </code-pane>
 
@@ -4132,7 +4137,7 @@ and the directive name doesn't describe the property.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-14}
 
@@ -4175,7 +4180,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-14/app/shared/toast/toast.component.avoid.ts" region="example" title="app/shared/toast/toast.component.ts">
+<code-example path="styleguide/src/05-14/app/shared/toast/toast.component.avoid.ts" region="example" header="app/shared/toast/toast.component.ts">
 
 </code-example>
 
@@ -4183,13 +4188,13 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-14/app/shared/toast/toast.component.ts" region="example" title="app/shared/toast/toast.component.ts">
+<code-example path="styleguide/src/05-14/app/shared/toast/toast.component.ts" region="example" header="app/shared/toast/toast.component.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-15}
 
@@ -4264,7 +4269,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-15/app/heroes/hero-list/hero-list.component.avoid.ts" title="app/heroes/hero-list/hero-list.component.ts">
+<code-example path="styleguide/src/05-15/app/heroes/hero-list/hero-list.component.avoid.ts" header="app/heroes/hero-list/hero-list.component.ts">
 
 </code-example>
 
@@ -4272,13 +4277,13 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-15/app/heroes/hero-list/hero-list.component.ts" region="example" title="app/heroes/hero-list/hero-list.component.ts">
+<code-example path="styleguide/src/05-15/app/heroes/hero-list/hero-list.component.ts" region="example" header="app/heroes/hero-list/hero-list.component.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-16}
 
@@ -4331,7 +4336,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-16/app/heroes/hero.component.avoid.ts" region="example" title="app/heroes/hero.component.ts">
+<code-example path="styleguide/src/05-16/app/heroes/hero.component.avoid.ts" region="example" header="app/heroes/hero.component.ts">
 
 </code-example>
 
@@ -4339,7 +4344,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-16/app/app.component.avoid.html" title="app/app.component.html">
+<code-example path="styleguide/src/05-16/app/app.component.avoid.html" header="app/app.component.html">
 
 </code-example>
 
@@ -4349,11 +4354,11 @@ helps instantly identify which members of the component serve which purpose.
 
 <code-tabs>
 
-  <code-pane title="app/heroes/hero.component.ts" path="styleguide/src/05-16/app/heroes/hero.component.ts" region="example">
+  <code-pane header="app/heroes/hero.component.ts" path="styleguide/src/05-16/app/heroes/hero.component.ts" region="example">
 
   </code-pane>
 
-  <code-pane title="app/app.component.html" path="styleguide/src/05-16/app/app.component.html">
+  <code-pane header="app/app.component.html" path="styleguide/src/05-16/app/app.component.html">
 
   </code-pane>
 
@@ -4361,7 +4366,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 05-17}
 
@@ -4403,7 +4408,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-17/app/heroes/hero-list/hero-list.component.avoid.ts" region="example" title="app/heroes/hero-list/hero-list.component.ts">
+<code-example path="styleguide/src/05-17/app/heroes/hero-list/hero-list.component.avoid.ts" region="example" header="app/heroes/hero-list/hero-list.component.ts">
 
 </code-example>
 
@@ -4411,13 +4416,13 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/05-17/app/heroes/hero-list/hero-list.component.ts" region="example" title="app/heroes/hero-list/hero-list.component.ts">
+<code-example path="styleguide/src/05-17/app/heroes/hero-list/hero-list.component.ts" region="example" header="app/heroes/hero-list/hero-list.component.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Directives
@@ -4462,7 +4467,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/06-01/app/shared/highlight.directive.ts" region="example" title="app/shared/highlight.directive.ts">
+<code-example path="styleguide/src/06-01/app/shared/highlight.directive.ts" region="example" header="app/shared/highlight.directive.ts">
 
 </code-example>
 
@@ -4470,13 +4475,13 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-<code-example path="styleguide/src/06-01/app/app.component.html" title="app/app.component.html">
+<code-example path="styleguide/src/06-01/app/app.component.html" header="app/app.component.html">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 06-03}
 
@@ -4522,7 +4527,7 @@ directive's class and the metadata in the decorator associated with the directiv
 
 
 
-<code-example path="styleguide/src/06-03/app/shared/validator.directive.ts" title="app/shared/validator.directive.ts">
+<code-example path="styleguide/src/06-03/app/shared/validator.directive.ts" header="app/shared/validator.directive.ts">
 
 </code-example>
 
@@ -4542,13 +4547,13 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-<code-example path="styleguide/src/06-03/app/shared/validator2.directive.ts" title="app/shared/validator2.directive.ts">
+<code-example path="styleguide/src/06-03/app/shared/validator2.directive.ts" header="app/shared/validator2.directive.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Services
@@ -4593,13 +4598,13 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-<code-example path="styleguide/src/07-01/app/heroes/shared/hero.service.ts" region="example" title="app/heroes/shared/hero.service.ts">
+<code-example path="styleguide/src/07-01/app/heroes/shared/hero.service.ts" region="example" header="app/heroes/shared/hero.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 07-02}
 
@@ -4650,7 +4655,7 @@ Compare with the less preferred `host` metadata alternative.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 07-03}
 
@@ -4712,12 +4717,12 @@ Compare with the less preferred `host` metadata alternative.
 
 </div>
 
-<code-example path="dependency-injection/src/app/tree-shaking/service.ts" title="src/app/treeshaking/service.ts" linenums="false"> </code-example> 
+<code-example path="dependency-injection/src/app/tree-shaking/service.ts" header="src/app/treeshaking/service.ts" linenums="false"> </code-example> 
 
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 07-04}
 
@@ -4760,7 +4765,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-<code-example path="styleguide/src/07-04/app/heroes/shared/hero-arena.service.avoid.ts" region="example" title="app/heroes/shared/hero-arena.service.ts">
+<code-example path="styleguide/src/07-04/app/heroes/shared/hero-arena.service.avoid.ts" region="example" header="app/heroes/shared/hero-arena.service.ts">
 
 </code-example>
 
@@ -4768,13 +4773,13 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-<code-example path="styleguide/src/07-04/app/heroes/shared/hero-arena.service.ts" region="example" title="app/heroes/shared/hero-arena.service.ts">
+<code-example path="styleguide/src/07-04/app/heroes/shared/hero-arena.service.ts" region="example" header="app/heroes/shared/hero-arena.service.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Data Services
@@ -4845,14 +4850,14 @@ easier to test the consumers with mock service implementations.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Lifecycle hooks
 
 Use Lifecycle hooks to tap into important events exposed by Angular.
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a 09-01}
 
@@ -4884,7 +4889,7 @@ signatures. use those signatures to flag spelling and syntax mistakes.
 
 
 
-<code-example path="styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" title="app/heroes/shared/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
 
@@ -4892,20 +4897,20 @@ signatures. use those signatures to flag spelling and syntax mistakes.
 
 
 
-<code-example path="styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.ts" region="example" title="app/heroes/shared/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
 
 
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 
 ## Appendix
 
 Useful tools and tips for Angular.
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a A-01}
 
@@ -4934,7 +4939,7 @@ Useful tools and tips for Angular.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>
 
 {@a A-02}
 
@@ -4973,4 +4978,4 @@ Useful tools and tips for Angular.
 
 </div>
 
-<a href="#toc">Back to top</a>
+<a href="#toc">トップに戻る</a>

@@ -171,7 +171,7 @@ script:
   - npm run e2e -- --no-progress --config=protractor-ci.conf.js
 ```
 
-TravisではChromeが付属していなため、代わりにChromiumを使用していることを覗いて、Circl CIの設定と同じものです。
+TravisではChromeが付属していないため、代わりにChromiumを使用していることを除いて、Circle CIの設定と同じものです。
 
 ステップ 2: 変更をコミットし、リポジトリにプッシュします。
 
@@ -185,12 +185,12 @@ TravisではChromeが付属していなため、代わりにChromiumを使用し
 一般的にCLIコマンドの`ng test`と`ng e2e`があなたの環境でCIテストを実行しているとき、Chromeブラウザでのテストを実行するために設定を調整する必要があります。
 
 [Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)
-と[Protractor](https://www.protractortest.org/#/api-overview)エンドツーエンドテスティングツールeの2つの設定ファイルについて、
+と[Protractor](https://www.protractortest.org/#/api-overview) E2Eテスティングツールの2つの設定ファイルについて、
 サンドボックスを使用せずにChromeを起動するように調整する必要があります。
 
 この例では[ヘッドレスChrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) を使用します。
 
-* In the Karma configuration file, `karma.conf.js`, add a custom launcher called ChromeHeadlessCI below browsers:
+* Karma設定ファイル、`karma.conf.js`のbrowsersの下にChromeHeadlessCIというカスタムランチャーを追加します:
 ```
 browsers: ['Chrome'],
 customLaunchers: {

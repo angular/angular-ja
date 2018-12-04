@@ -91,24 +91,24 @@ CLIは`AppComponent`のテストとして`app.component.spec.ts`という名前�
 
 {@a ci}
 
-## Set up continuous integration
+## 継続的インテグレーションのセットアップ
 
-One of the best ways to keep your project bug free is through a test suite, but it's easy to forget to run tests all the time. 
-Continuous integration (CI) servers let you set up your project repository so that your tests run on every commit and pull request.
+プロジェクトのバグをなくす最善の方法の1つはテストスイートを通すことですが、いつもテストを実行するというのは簡単に忘れます。
+継続的インテグレーション(CI)サーバーを使用すると、プロジェクトのリポジトリーでコミットおよびプルリクエストをするたびにテストを実行できるように設定できます。
 
-There are paid CI services like Circle CI and Travis CI, and you can also host your own for free using Jenkins and others. 
-Although Circle CI and Travis CI are paid services, they are provided free for open source projects. 
-You can create a public project on GitHub and add these services without paying. 
-Contributions to the Angular repo are automatically run through a whole suite of Circle CI and Travis CI tests.
+Circle CIやTravis CIのような有料のCIサービスを使用したり、Jenkinsなどを使って無料でホストすることもできます。
+Circle CIやTravis CIは有料のサービスですが、オープンソースプロジェクトには無料で提供されています。
+GitHubでパブリックなプロジェクトを作成し、無料でこれらのサービスを追加することができます。
+Angularのレポジトリへの貢献度はCircle CIとTravis CIの一連のテストを通じて自動的に実行されます。
 
-This article explains how to configure your project to run Circle CI and Travis CI, and also update your test configuration to be able to run tests in the Chrome browser in either environment.
+この記事では、Circle CIとTravis CIを実行するようにプロジェクトを設定する方法と、どちらの環境でもChromeブラウザでテストを実行できるようにテスト設定を更新する方法について説明します。
 
 
-### Configure project for Circle CI
+### Circle CIでプロジェクトを設定する
 
-Step 1: Create a folder called `.circleci` at the project root.
+ステップ 1: プロジェクト直下に`.circleci`というフォルダを作成します。
 
-Step 2: In the new folder, create a file called `config.yml` with the following content:
+ステップ 2: その新しいファルダ内に次のような内容の`config.yml`というファイルを作成します:
 
 ```
 version: 2
@@ -130,19 +130,19 @@ jobs:
       - run: npm run e2e -- --no-progress --config=protractor-ci.conf.js
 ```
 
-This configuration caches `node_modules/` and uses [`npm run`](https://docs.npmjs.com/cli/run-script) to run CLI commands, because `@angular/cli` is not installed globally. 
-The double dash (`--`) is needed to pass arguments into the `npm` script.
+この設定は`node_modules/`をキャッシュして、CLIコマンドを実行するために[`npm run`](https://docs.npmjs.com/cli/run-script)を使用します(`@angular/cli`がグローバルにインストールされていないため)。
+2重ダッシュ(`--`)は`npm`スクリプトに引数を渡すのに必要です。
 
-Step 3: Commit your changes and push them to your repository.
+ステップ 3: 変更をコミットし、リポジトリにプッシュします。
 
-Step 4: [Sign up for Circle CI](https://circleci.com/docs/2.0/first-steps/) and [add your project](https://circleci.com/add-projects). 
-Your project should start building.
+Step 4: [Circle CIにサインアップ](https://circleci.com/docs/2.0/first-steps/)して、[あなたのプロジェクトを追加](https://circleci.com/add-projects)します。
+プロジェクトのビルドが開始するはずです。
 
-* Learn more about Circle CI from [Circle CI documentation](https://circleci.com/docs/2.0/).
+* Circle CIの詳細については、[Circle CI documentation](https://circleci.com/docs/2.0/)を参照してください。
 
-### Configure project for Travis CI
+### Travis CIでプロジェクトを設定する
 
-Step 1: Create a file called `.travis.yml` at the project root, with the following content:
+ステップ 1: プロジェクト直下に次のような内容の`.travis.yml`を作成します:
 
 ```
 dist: trusty
@@ -151,7 +151,7 @@ sudo: false
 language: node_js
 node_js:
   - "8"
-  
+
 addons:
   apt:
     sources:
@@ -171,26 +171,26 @@ script:
   - npm run e2e -- --no-progress --config=protractor-ci.conf.js
 ```
 
-This does the same things as the Circle CI configuration, except that Travis doesn't come with Chrome, so we use Chromium instead.
+TravisではChromeが付属していないため、代わりにChromiumを使用していることを除いて、Circle CIの設定と同じものです。
 
-Step 2: Commit your changes and push them to your repository.
+ステップ 2: 変更をコミットし、リポジトリにプッシュします。
 
-Step 3: [Sign up for Travis CI](https://travis-ci.org/auth) and [add your project](https://travis-ci.org/profile). 
-You'll need to push a new commit to trigger a build.
+ステップ 3: [Travis CIにサインアップ](https://travis-ci.org/auth)して、[あなたのプロジェクトを追加](https://travis-ci.org/profile)します。
+ビルドをトリガーするために新しいコミットをプッシュする必要があるでしょう。
 
-* Learn more about Travis CI testing from [Travis CI documentation](https://docs.travis-ci.com/).
+* Travis CIでのテストの詳細については[Travis CI documentation](https://docs.travis-ci.com/)を参照してください。
 
-### Configure CLI for CI testing in Chrome
+### ChromeでのCIテスト用にCLIを設定する
 
-When the CLI commands `ng test` and `ng e2e` are generally running the CI tests in your environment, you might still need to adjust your configuration to run the Chrome browser tests.
+一般的にCLIコマンドの`ng test`と`ng e2e`があなたの環境でCIテストを実行しているとき、Chromeブラウザでのテストを実行するために設定を調整する必要があります。
 
-There are configuration files for both the [Karma JavaScript test runner](https://karma-runner.github.io/latest/config/configuration-file.html) 
-and [Protractor](https://www.protractortest.org/#/api-overview) end-to-end testing tool, 
-which  you must adjust to start Chrome without sandboxing.
+[Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)
+と[Protractor](https://www.protractortest.org/#/api-overview) E2Eテスティングツールの2つの設定ファイルについて、
+サンドボックスを使用せずにChromeを起動するように調整する必要があります。
 
-We'll be using [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) in these examples.
+この例では[ヘッドレスChrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) を使用します。
 
-* In the Karma configuration file, `karma.conf.js`, add a custom launcher called ChromeHeadlessCI below browsers:
+* Karma設定ファイル、`karma.conf.js`のbrowsersの下にChromeHeadlessCIというカスタムランチャーを追加します:
 ```
 browsers: ['Chrome'],
 customLaunchers: {
@@ -201,7 +201,7 @@ customLaunchers: {
 },
 ```
 
-* Create a new file, `protractor-ci.conf.js`, in the root folder of your project, which extends the original `protractor.conf.js`:
+* オリジナルの`protractor.conf.js`を拡張した、`protractor-ci.conf.js`という新しいファイルをプロジェクトのフォルダ直下に作成します:
 ```
 const config = require('./protractor.conf').config;
 
@@ -215,7 +215,7 @@ config.capabilities = {
 exports.config = config;
 ```
 
-Now you can run the following commands to use the `--no-sandbox` flag:
+これで、`--no-sandbox`フラグを使用するために次のコマンドを実行できます:
 
 <code-example language="sh" class="code-shell">
   ng test --single-run --no-progress --browser=ChromeHeadlessCI
@@ -224,26 +224,26 @@ Now you can run the following commands to use the `--no-sandbox` flag:
 
 <div class="alert is-helpful">
 
-   **Note:** Right now, you'll also want to include the `--disable-gpu` flag if you're running on Windows. See [crbug.com/737678](https://crbug.com/737678).
+   **Note:** 現時点では、Windows上で実行する場合は`--disable-gpu`フラグを含める必要があるでしょう。[crbug.com/737678](https://crbug.com/737678)を参照してください。
 
 </div>
 
 {@a code-coverage}
 
-## Enable code coverage reports
+## カバレッジレポートを有効にする
 
-The CLI can run unit tests and create code coverage reports. 
-Code coverage reports show you  any parts of our code base that may not be properly tested by your unit tests.
+CLIでユニットテストを実行し、コードカバレッジレポートを作成することができます。
+コードカバレッジレポートは、ユニットテストで正しくテストされていないコードベースの部分を表示します。
 
-To generate a coverage report run the following command in the root of your project.
+カバレッジレポートを生成するには、プロジェクト直下で次のコマンドを実行します。
 
 <code-example language="sh" class="code-shell">
   ng test --watch=false --code-coverage
 </code-example>
 
-When  the tests are complete, the command creates a new `/coverage` folder in the project. Open the `index.html` file to see a report with your source code and code coverage values.
+テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。
 
-If you want to create code-coverage reports every time you test, you can set the following option in the CLI configuration file, `angular.json`:
+テストするたびにコードカバレッジレポートを作成したい場合は、CLIの設定ファイル、`angular.json`で次のようなオプションを設定します:
 
 ```
   "test": {
@@ -253,13 +253,13 @@ If you want to create code-coverage reports every time you test, you can set the
   }
 ```
 
-### Code coverage enforcement
+### コードカバレッジの適用
 
-The code coverage percentages let you estimate how much of your code is tested.  
-If your team decides on a set minimum amount to be unit tested, you can enforce this minimum with the Angular CLI. 
+コードカバレッジ率から、テストされたコードの量を見積もることができます。
+あなたのチームがユニットテストされている最低限の量を決定する場合、Angular CLIを使用して、この最小値を適用することができます。
 
-For example, suppose you want the code base to have a minimum of 80% code coverage. 
-To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the following in the `coverageIstanbulReporter:` key.
+たとえば、コードベースに最低80％のコードカバレッジを設定するとします。
+これを有効にするには、[Karma](https://karma-runner.github.io)テストプラットフォーム設定ファイル、`karma.conf.js`を開いて、`coverageIstanbulReporter:`に次のような内容を追加します。
 
 ```
 coverageIstanbulReporter: {
@@ -274,7 +274,7 @@ coverageIstanbulReporter: {
 }
 ```
 
-The `thresholds` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
+`thresholds`プロパティは、ユニットテストがプロジェクトで実行されたときに、ツールが最低80％のコードカバレッジを強制するようにします。
 
 ## サービスのテスト
 
@@ -2737,7 +2737,7 @@ _属性ディレクティブ_は、要素、コンポーネントまたは別の
 
 _クラスのみ_のテストは役に立ちますが、
 このような属性ディレクティブはDOMを操作する傾向があります。
-隔離された単体テストはDOMに触れることはないので、
+隔離されたユニットテストはDOMに触れることはないので、
 ディレクティブの効果に対する信頼を促すものではありません。
 
 よりよい解決策は、ディレクティブを適用するすべての方法を示す人工的なテストコンポーネントを作成することです。
@@ -3636,7 +3636,7 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 
 #### スペックファイルをテストするファイルの隣に置くのはなぜですか？
 
-単体テストのスペックファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
+ユニットテストのスペックファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
 
 - そのようなテストは簡単に見つけることができます。
 - アプリケーションの一部にテストがないかどうかを一目で確認できます。
@@ -3673,7 +3673,7 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 E2Eテストは、システム全体の高レベルな検証に最適です。
 しかし、ユニットテストで期待されるような包括的なテストカバレッジを与えることはできません。
 
-E2Eテストは、単体テストに比べて書き込みや実行が難しいです。
+E2Eテストは、ユニットテストに比べて書き込みや実行が難しいです。
 頻繁に、破損した場所から遠く離れた変化また不作法のせいで容易に壊れます、
 
 E2Eテストでは、データの欠落や不良、接続の切断、リモートサービスの障害など、

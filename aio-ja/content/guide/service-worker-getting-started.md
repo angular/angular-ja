@@ -95,6 +95,17 @@ networkタブを見ると、Service Workerがアクティブであることを�
 * `favicon.ico`
 * ビルド成果物（JSおよびCSSバンドル）
 * `assets`の下にあるもの
+* 設定された`outputPath`（デフォルトでは`./dist/<project-name>/`）または `resourcesOutputPath` の直下にある画像やフォント。これらのオプションの詳細については[`ng build`](cli/build)を参照してください。
+
+
+<div class="alert is-helpful">
+2つのポイントに注意してください。
+
+1. 生成された `ngsw-config.json`はキャッシュ可能なフォントと画像の拡張子の限られたリストを含みます。場合によっては、ニーズに合わせてglobパターンを変更するでしょう。
+
+1. 設定ファイルの生成後に `resourcesOutputPath`または` assets`パスが変更された場合は、 `ngsw-config.json` の中のパスを手動で変更する必要があります。
+</div>
+
 
 ### アプリケーションを変更する
 

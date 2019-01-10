@@ -126,8 +126,8 @@ jobs:
           key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
-      - run: npm run test -- --single-run --no-progress --browser=ChromeHeadlessCI
-      - run: npm run e2e -- --no-progress --config=protractor-ci.conf.js
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 ```
 
 この設定は`node_modules/`をキャッシュして、CLIコマンドを実行するために[`npm run`](https://docs.npmjs.com/cli/run-script)を使用します(`@angular/cli`がグローバルにインストールされていないため)。
@@ -167,8 +167,8 @@ install:
   - npm install
 
 script:
-  - npm run test -- --single-run --no-progress --browser=ChromeHeadlessCI
-  - npm run e2e -- --no-progress --config=protractor-ci.conf.js
+  - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 ```
 
 TravisではChromeが付属していないため、代わりにChromiumを使用していることを除いて、Circle CIの設定と同じものです。
@@ -201,7 +201,7 @@ customLaunchers: {
 },
 ```
 
-* オリジナルの`protractor.conf.js`を拡張した、`protractor-ci.conf.js`という新しいファイルをプロジェクトのフォルダ直下に作成します:
+* オリジナルの`protractor.conf.js`を拡張した、`protractor-ci.conf.js`という新しいファイルをE2Eテストプロジェクトのフォルダ直下に作成します:
 ```
 const config = require('./protractor.conf').config;
 
@@ -218,8 +218,8 @@ exports.config = config;
 これで、`--no-sandbox`フラグを使用するために次のコマンドを実行できます:
 
 <code-example language="sh" class="code-shell">
-  ng test --single-run --no-progress --browser=ChromeHeadlessCI
-  ng e2e --no-progress --config=protractor-ci.conf.js
+  ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  ng e2e -- --protractor-config=e2e/protractor-ci.conf.js
 </code-example>
 
 <div class="alert is-helpful">
@@ -238,7 +238,7 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 カバレッジレポートを生成するには、プロジェクト直下で次のコマンドを実行します。
 
 <code-example language="sh" class="code-shell">
-  ng test --watch=false --code-coverage
+  ng test --no-watch --code-coverage
 </code-example>
 
 テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。

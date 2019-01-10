@@ -241,7 +241,7 @@ _error handler_関数を`catchError`に返します。
 
 ほとんどのWeb APIは、 `：baseURL/:id`の形式で_idによる取得する_リクエストをサポートしています。
 
-ここで_base URL_は[Heroes and HTTP](http://localhost:4800/tutorial/toh-pt6＃heroes-and-http)セクションで定義された `heroesURL` （`api/heroes`）であり、 _id_ は取得したいヒーローの番号です。たとえば、 `api/heroes/11` のようになります。
+ここで_base URL_は[Heroes and HTTP](tutorial/toh-pt6＃heroes-and-http)セクションで定義された `heroesURL` （`api/heroes`）であり、 _id_ は取得したいヒーローの番号です。たとえば、 `api/heroes/11` のようになります。
 
 `HeroService.getHero()`メソッドを追加して、そのようなリクエストができるようにしましょう:
 

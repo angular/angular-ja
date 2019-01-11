@@ -273,7 +273,7 @@ const heroForm = new FormGroup({
 次の例は、テンプレート駆動フォームでこれを実現する方法を示しています:
 
 ```html
-<input [(ngModel)}="name" #model="ngModel" appSomeAsyncValidator>
+<input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator>
 <app-spinner *ngIf="model.pending"></app-spinner>
 ```
 

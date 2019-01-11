@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: angular/ngcontainer:latest
-      
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - run: sudo apt install rsync
-      - run: sudo npm i -g yarn@^1.12
+      - run: sudo npm i -g yarn@~1.12
 
       - checkout
       - run: git submodule sync
@@ -43,7 +43,7 @@ jobs:
             - node_modules
             - .tmp
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
       # Deployment
       - deploy:
           command: |

@@ -244,8 +244,9 @@
           "children": [
             {
               "url": "guide/forms-overview",
-              "title": "導入",
-              "tooltip": "A form creates a cohesive, effective, and compelling data entry experience. An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors."
+              "title": "イントロダクション",
+              "tooltip": "フォームは、まとまりがあり効果的で説得力のあるデータ入力エクスペリエンスを生み出します。 Angularフォームは、データにバインドされた一連のユーザーコントロールの調整、変更の追跡、入力の検証、およびエラーの表示を行います。",
+              "translated": true
             },
             {
               "url": "guide/reactive-forms",

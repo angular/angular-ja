@@ -681,7 +681,7 @@
       ]
     },
     {
-      "title": "CLIコマンド",
+      "title": "CLI Commands",
       "tooltip": "Angular CLIコマンドのリファレンス",
       "children": [
         {

@@ -143,16 +143,16 @@ Angular インジェクターを自分で作成することはめったにあり
 
 ## サービスの注入
 
-In order for `HeroListComponent` to get heroes from `HeroService`, it needs to ask for `HeroService` to be injected, rather than creating it's own `HeroService` instance with `new`.
+`HeroListComponent` が `HeroService` からヒーローを取得するためには、`new` で独自の `HeroService` インスタンスを作成するのではなく、`HeroService` のインジェクションをリクエストする必要があります。
 
-You can tell Angular to inject a dependency in a component's constructor by specifying a **constructor parameter with the dependency type**. Here's the `HeroListComponent` constructor, asking for the `HeroService` to be injected.
+**依存タイプをもつコンストラクターパラメータ**を指定することで、Angular にコンポーネントのコンストラクターに依存関係を注入するように指示できます。これが `HeroListComponent` コンストラクターで、`HeroService` を注入するようにリクエストします。
 
 <code-example header="src/app/heroes/hero-list.component (constructor signature)" path="dependency-injection/src/app/heroes/hero-list.component.ts"
 region="ctor-signature">
 </code-example>
 
-Of course, `HeroListComponent` should do something with the injected `HeroService`.
-Here's the revised component, making use of the injected service, side-by-side with the previous version for comparison.
+もちろん、`HeroListComponent` は注入された `HeroService` を使って何かをするべきです。
+これが修正されたコンポーネントで、注入されたサービスを利用しています。比較のために以前のバージョンと並べて表示します。
 
 <code-tabs>
   <code-pane header="hero-list.component (with DI)" path="dependency-injection/src/app/heroes/hero-list.component.2.ts">
@@ -162,47 +162,47 @@ Here's the revised component, making use of the injected service, side-by-side w
   </code-pane>
 </code-tabs>
 
-`HeroService` must provided in some parent injector. The code in `HeroListComponent` doesn't depend on where `HeroService` comes from.
-If you decided to provide `HeroService` in `AppModule`, `HeroListComponent` wouldn't change.
+`HeroService` は何らかの親インジェクターで提供されなければなりません。`HeroListComponent` のコードは、`HeroService` の提供元には依存しません。
+`AppModule` に `HeroService` を提供することにした場合、`HeroListComponent` は変わりません。
 
 {@a singleton-services}
 {@a component-child-injectors}
 
 ### インジェクター階層とサービスインスタンス
 
-Services are singletons _within the scope of an injector_. That is, there is at most one instance of a service in a given injector. 
+サービスは _インジェクタの範囲内の_ シングルトンです。つまり、特定のインジェクターにサービスのインスタンスがあったとしても1つです。
 
-There is only one root injector for an app. Providing `UserService` at the `root` or `AppModule` level means it is registered with the root injector. There is just one `UserService` instance in the entire app and every class that injects `UserService` gets this service instance _unless_ you configure another provider with a _child injector_.
+アプリにはルートインジェクターが1つだけあります。`root` レベルまたは `AppModule` レベルで `UserService` を提供することは、ルートインジェクターに登録されていることを意味します。*子インジェクタ*を使用して別のプロバイダーを設定*しない限り*、アプリケーション全体には1つの `UserService` インスタンスしかなく、`UserService` を注入するすべてのクラスがこのサービスインスタンスを取得します。
 
-Angular DI has a [hierarchical injection system](guide/hierarchical-dependency-injection), which means that nested injectors can create their own service instances. 
-Angular regularly creates nested injectors. Whenever Angular creates a new instance of a component that has `providers` specified in `@Component()`, it also creates a new _child injector_ for that instance.
-Similarly, when a new NgModule is lazy-loaded at run time, Angular can create an injector for it with its own providers. 
+Angular DI には[階層型注入システム](guide/hierarchical-dependency-injection)があります。つまり、入れ子になったインジェクターは独自のサービスインスタンスを作成できます。
+Angular は定期的に入れ子になったインジェクターを作ります。Angular が `@Component()` で指定された `providers` をもつコンポーネントの新しいインスタンスを作成するたびに、そのインスタンスの新しい*子インジェクタ*も作成します。
+同様に、実行時に新しい NgModule が遅延ロードされると、Angular は独自のプロバイダーを使用してそのためのインジェクターを作成できます。
 
-Child modules and component injectors are independent of each other, and create their own separate instances of the provided services. When Angular destroys an NgModule or component instance, it also destroys that injector and that injector's service instances. 
+子モジュールとコンポーネントインジェクターは互いに独立しており、提供されるサービスの独自のインスタンスを個別に作成します。Angular が NgModule またはコンポーネントインスタンスを破棄すると、そのインジェクターとそのインジェクターのサービスインスタンスも破棄します。
 
-Thanks to [injector inheritance](guide/hierarchical-dependency-injection),
-you can still inject application-wide services into these components.
-A component's injector is a child of its parent component's injector,
-and a descendent of its parent's parent's injector, and so on all the way back to the application's _root_ injector. Angular can inject a service provided by any injector in that lineage.
+[インジェクタ継承](guide/hierarchical-dependency-injection)のおかげで、
+それでもこれらのコンポーネントにアプリケーション全体のサービスを注入することができます。
+コンポーネントのインジェクターは、その親コンポーネントのインジェクターの子であり、
+その親の親のインジェクターの子孫であり、その後もアプリケーションのルートインジェクターに戻ります。Angular はその系統内の任意のインジェクターによって提供されるサービスを注入することができます。
 
-For example, Angular can inject `HeroListComponent` with both the `HeroService` provided in `HeroComponent` and the `UserService` provided in `AppModule`.
+たとえば、Angular は `HeroListComponent` で提供されている `HeroService` と `AppModule` で提供されている `UserService` の両方を使用して `HeroListComponent` をインジェクトできます。
 
 {@a testing-the-component}
 
 ## 依存関係のあるコンポーネントのテスト
 
-Designing a class with dependency injection makes the class easier to test.
-Listing dependencies as constructor parameters may be all you need to test application parts effectively.
+依存性の注入を使用してクラスを設計すると、クラスのテストが容易になります。
+依存関係をコンストラクターのパラメータとしてリストするだけで、アプリケーション部分を効果的にテストすることができます。
 
-For example, you can create a new `HeroListComponent` with a mock service that you can manipulate
-under test.
+たとえば、テスト用に操作できるモックサービスを使用して新しい `HeroListComponent` 
+を作成できます。
 
 <code-example path="dependency-injection/src/app/test.component.ts" region="spec" header="src/app/test.component.ts" linenums="false">
 </code-example>
 
 <div class="alert is-helpful">
 
-Learn more in the [Testing](guide/testing) guide.
+[テスト](guide/testing)ガイドでもっと学びましょう。
 
 </div>
 
@@ -210,10 +210,10 @@ Learn more in the [Testing](guide/testing) guide.
 
 ## 他のサービスを必要とするサービス
 
-Service can have their own dependencies. `HeroService` is very simple and doesn't have any dependencies of its own. Suppose, however, that you want it to report its activities through a logging service. You can apply the same *constructor injection* pattern,
-adding a constructor that takes a `Logger` parameter.
+サービスは独自の依存関係をもつことができます。 `HeroService` は非常にシンプルで、独自の依存関係はありません。ただし、ロギングサービスを介してそのアクティビティをレポートしたいとします。`Logger` パラメーターをとるコンストラクターを追加して、
+同じコンストラクター注入パターンを適用できます。
 
-Here is the revised `HeroService` that injects `Logger`, side by side with the previous service for comparison.
+これが `Logger` を注入する改訂 `HeroService` で、比較のために以前のサービスと並べて表示しています。
 
 <code-tabs>
 
@@ -229,20 +229,20 @@ Here is the revised `HeroService` that injects `Logger`, side by side with the p
 
 </code-tabs>
 
-The constructor asks for an injected instance of `Logger` and stores it in a private field called `logger`. The `getHeroes()` method logs a message when asked to fetch heroes.
+コンストラクターは注入された `Logger` のインスタンスを要求し、それを `logger` というプライベートフィールドに格納します。`getHeroes()` メソッドは、ヒーローの取得をリクエストされたときにメッセージを記録します。
 
-Notice that the `Logger` service also has the `@Injectable()` decorator, even though it might not need its own dependencies. In fact, the `@Injectable()` decorator is **required  for all services**.
+`Logger` サービスには `@Injectable()` デコレーターもあります。ただし、独自の依存関係は必要ないかもしれません。 実際、`@Injectable()` デコレーターは**すべてのサービスに必要**です。
 
-When Angular creates a class whose constructor has parameters, it looks for type and injection metadata about those parameters so that it can inject the correct service.
-If Angular can't find that parameter information, it throws an error. 
-Angular can only find the parameter information _if the class has a decorator of some kind_.
-The `@Injectable()` decorator is the standard decorator for service classes.
+Angular は、コンストラクターにパラメータがあるクラスを作成するときに、正しいサービスを挿入できるように、それらのパラメータについて型と注入のメタデータを探します。
+Angular がそのパラメータ情報を見つけられない場合は、エラーが発生します。
+Angular は、*クラスに何らかのデコレータがある場合にのみ*パラメータ情報を見つけることができます。
+`@Injectable()` デコレーターはサービスクラスの標準デコレーターです。
 
 <div class="alert is-helpful">
 
- The decorator requirement is imposed by TypeScript. TypeScript normally discards parameter type information when it [transpiles]((guide/glossary#transpile) the code to JavaScript. TypeScript preserves this information if the class has a decorator and the `emitDecoratorMetadata` compiler option is set `true` in TypeScript's `tsconfig.json` configuration file. The CLI configures `tsconfig.json` with `emitDecoratorMetadata: true`.
+ デコレーターの要件は TypeScript によって課されます。 TypeScript は通常、コードを JavaScript に[トランスパイル](guide/glossary#transpile)するときにパラメータタイプ情報を破棄します。クラスにデコレーターがあり、`emitDecoratorMetadata` コンパイラオプションが TypeScript の `tsconfig.json` 設定ファイルで `true` に設定されている場合、TypeScript はこの情報を保持します。CLI は `emitDecoratorMetadata: true` を使用して `tsconfig.json` を構成します。
  
- This means you're responsible for putting `@Injectable()` on your service classes.
+ これはあなたのサービスクラスに `@Injectable()` を置く責任があることを意味します。
 
 </div>
 
@@ -252,38 +252,38 @@ The `@Injectable()` decorator is the standard decorator for service classes.
 
 ### 依存性の注入トークン
 
-When you configure an injector with a provider, you associate that provider with a [DI token](guide/glossary#di-token).
-The injector maintains an internal *token-provider* map that it references when
-asked for a dependency. The token is the key to the map.
+プロバイダーを使用してインジェクターを設定するときは、そのプロバイダーを [DI トークン](guide/glossary#di-token)と関連付けます。
+インジェクターは、依存関係を要求されたときに参照する内部*トークンプロバイダ*マップを維持します。
+トークンはマップへのキーです。
 
-In simple examples, the dependency value is an *instance*, and
-the class *type* serves as its own lookup key.
-Here you get a `HeroService` directly from the injector by supplying the `HeroService` type as the token:
+簡単な例では、依存値は*インスタンス*であり、
+クラス*型*はそれ自身の検索キーとして機能します。
+ここではトークンとして `HeroService` 型を指定することで、インジェクターから直接 `HeroService` を取得します。
 
 <code-example path="dependency-injection/src/app/injector.component.ts" region="get-hero-service" header="src/app/injector.component.ts" linenums="false">
 </code-example>
 
-The behavior is similar when you write a constructor that requires an injected class-based dependency.
-When you define a constructor parameter with the `HeroService` class type,
-Angular knows to inject the service associated with that `HeroService` class token:
+注入されたクラスベースの依存関係を必要とするコンストラクターを書くときの動作は似ています。
+`HeroService` クラス型でコンストラクターパラメータを定義すると、
+Angular はその `HeroService` クラストークンに関連付けられたサービスを注入することを認識しています。
 
 <code-example path="dependency-injection/src/app/heroes/hero-list.component.ts" region="ctor-signature" header="src/app/heroes/hero-list.component.ts">
 </code-example>
 
-Many dependency values are provided by classes, but not all. The expanded *provide* object lets you associate different kinds of providers with a DI token. 
+多くの依存する値はクラスによって提供されますが、すべてではありません。拡張*提供*オブジェクトを使用すると、さまざまな種類のプロバイダーを DI トークンと関連付けることができます。
 
-* Learn more about [different kinds of providers](guide/dependency-injection-providers).
+* [さまざまな種類のプロバイダ](guide/dependency-injection-providers)についてもっと学びましょう
 
 {@a optional}
 
 ### オプションの依存関係
 
-`HeroService` *requires* a logger, but what if it could get by without
-one?
+`HeroService` には logger が*必要*ですが、それがなくても取得できる場合は
+どうなりますか？
 
-When a component or service declares a dependency, the class constructor takes that dependency as a parameter. 
-You can tell Angular that the dependency is optional by annotating the
-constructor parameter with `@Optional()`.
+コンポーネントまたはサービスが依存関係を宣言すると、クラスコンストラクターはその依存関係をパラメータとして受け取ります。
+`@Optional()` でコンストラクターパラメータに注釈を付けることで、依存関係がオプションであることを 
+Angular に伝えることができます。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="import-optional">
 </code-example>
@@ -291,32 +291,30 @@ constructor parameter with `@Optional()`.
 <code-example path="dependency-injection/src/app/providers.component.ts" region="provider-10-ctor" linenums="false">
 </code-example>
 
-When using `@Optional()`, your code must be prepared for a null value. If you
-don't register a logger provider anywhere, the injector sets the
-value of `logger` to null.
+`@Optional()` を使用する場合、コードは null 値に対応している必要があります。
+logger プロバイダーをどこにも登録していない場合、インジェクターは `logger` の値を 
+null に設定します。
 
 <div class="alert is-helpful">
 
-`@Inject()` and `@Optional()` are _parameter decorators_.  They alter the way the DI framework provides a dependency, by annotating the dependency parameter on the constructor of the class that requires the dependency.
+`@Inject()` と `@Optional()` は*パラメータデコレータ*です。それらは、依存関係を必要とするクラスのコンストラクターに依存関係パラメータを注釈することによって、DI フレームワークが依存関係を提供する方法を変更します。
 
-Learn more about parameter decorators in [Hierarchical Dependency Injectors](guide/hierarchical-dependency-injection).
+パラメータデコレーターの詳細については、[階層依存性インジェクタ](guide/hierarchical-dependency-injection)をご覧ください。
 
 </div>
 
 ## まとめ
 
-You learned the basics of Angular dependency injection in this page.
-You can register various kinds of providers,
-and you know how to ask for an injected object (such as a service) by
-adding a parameter to a constructor.
+このページで Angular の依存性の注入の基本を学びました。
+さまざまな種類のプロバイダーを登録できます。
+また、コンストラクターにパラメータを追加することで、注入されたオブジェクト(サービスなど)を
+要求する方法を知っています。
 
-Dive deeper into the capabilities and advanced feature of the Angular DI system in the following pages:
+次のページで、Angular の DI システムの機能と高度な機能について詳しく説明します。
 
-* Learn more about nested injectors in
-[Hierarchical Dependency Injection](guide/hierarchical-dependency-injection).
+* 入れ子になったインジェクターについて詳しくは、[階層依存性注入](guide/hierarchical-dependency-injection)を参照してください
 
-* Learn more about [DI tokens and providers](guide/dependency-injection-providers).
+* [DI トークンとプロバイダー](guide/dependency-injection-providers)についてもっと学びましょう
 
-* [Dependency Injection in Action](guide/dependency-injection-in-action) is a cookbook for some of the interesting things you can do with DI.
-
+* [Dependency Injection in Action](guide/dependency-injection-in-action) は、DI を使ってできることのいくつかについてのクックブックです
 

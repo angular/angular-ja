@@ -68,18 +68,18 @@ DI フレームワークを使用すると、独自のファイルで定義さ�
 
 ### 注入可能な service クラスの作成
 
-The [Angular CLI](cli) can generate a new `HeroService` class in the `src/app/heroes` folder with this command.
+[Angular CLI](cli) は、このコマンドを使用して `src/app/heroes` フォルダに新しい `HeroService` クラスを生成できます。
 
 <code-example language="sh" class="code-shell">
 ng generate service heroes/hero
 </code-example>
 
-The command creates the following `HeroService` skeleton.
+このコマンドは次の `HeroService` スケルトンを作成します。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.0.ts" header="src/app/heroes/hero.service.ts (CLI-generated)">
 </code-example>
 
-The `@Injectable()` is an essential ingredient in every Angular service definition. The rest of the class has been written to expose a `getHeroes` method that returns the same mock data as before. (A real app would probably get its data asynchronously from a remote server, but we'll ignore that to focus on the mechanics of injecting the service.)
+`@Injectable()` は、すべての Angular サービス定義に不可欠な要素です。クラスの残りの部分は、以前と同じモックデータを返す `getHeroes` メソッドを公開するように書かれています。(実際のアプリはおそらくリモートサーバーからデータを非同期的に取得しますが、ここではサービスを注入する仕組みに焦点を当てるため無視します。)
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.3.ts" header="src/app/heroes/hero.service.ts">
 </code-example>
@@ -90,51 +90,43 @@ The `@Injectable()` is an essential ingredient in every Angular service definiti
 
 ### サービスプロバイダーでインジェクターを設定する
 
-The class we have created provides a service. The `@Injectable()` decorator marks it as a service
-that can be injected, but Angular can't actually inject it anywhere until you configure
-an Angular [dependency injector](guide/glossary#injector) with a [provider](guide/glossary#provider) of that service. 
+作成したクラスがサービスを提供します。`@Injectable()` デコレーターはそれを注入可能なサービスとしてマークしますが、そのサービスの[プロバイダ](guide/glossary#provider) で Angular の[依存関係インジェクタ](guide/glossary#injector)を設定するまで Angular は実際にはそれをどこにも注入できません。
 
-The injector is responsible for creating service instances and injecting them into classes like `HeroListComponent`.  
-You rarely create an Angular injector yourself. Angular creates injectors for you as it executes the app, starting with the _root injector_ that it creates during the [bootstrap process](guide/bootstrapping).
+インジェクターはサービスインスタンスを作成し、それらを `HeroListComponent` のようなクラスにインジェクトします。
+Angular インジェクターを自分で作成することはめったにありません。Angular は、[ブートストラッププロセス](guide/bootstrapping)中に作成されたルートインジェクターから始めて、アプリの実行時にインジェクターを作成します。
 
-A provider tells an injector _how to create the service_. 
-You must configure an injector with a provider before that injector can create a service (or provide any other kind of dependency). 
+プロバイダーはインジェクターにサービスの作成方法を伝えます。 インジェクターがサービスを作成する(または他の種類の依存関係を提供する)前に、プロバイダーでインジェクターを設定する必要があります。
 
-A provider can be the service class itself, so that the injector can use `new` to create an instance.
-You might also define more than one class to provide the same service in different ways, 
-and configure different injectors with different providers.
+プロバイダーはサービスクラスそのものになることができるため、インジェクターは `new` を使用してインスタンスを作成できます。また、同じサービスをさまざまな方法で提供するために複数のクラスを定義し、さまざまなプロバイダーでさまざまなインジェクターを構成することもできます。
 
 <div class="alert is-helpful">
 
-Injectors are inherited, which means that if a given injector can't resolve a dependency,
-it asks the parent injector to resolve it.  
-A component can get services from its own injector, 
-from the injectors of its component ancestors, 
-from the injector of its parent NgModule, or from the `root` injector. 
+インジェクターは継承されます。つまり、あるインジェクターが依存関係を解決できない場合は、親インジェクターに解決を依頼します。
+コンポーネントはそれ自身のインジェクター、そのコンポーネントの先祖のインジェクター、その親の NgModule のインジェクター、または `root` インジェクターからサービスを受け取ることができます。
 
-* Learn more about the [different kinds of providers](guide/dependency-injection-providers).
+* [さまざまな種類のプロバイダ](guide/dependency-injection-providers)についてもっと学びましょう
 
-* Learn more about  how the [injector hierarchy](guide/hierarchical-dependency-injection) works.
+* [インジェクタ階層](guide/hierarchical-dependency-injection) が機能する仕組みについてもっと学びましょう
 
 </div>
 
-You can configure injectors with providers at different levels of your app, by setting a metadata value in one of three places:
+次の3つの場所のいずれかにメタデータ値を設定することで、アプリのさまざまなレベルでプロバイダーを使用してインジェクターを設定できます。
 
-* In the `@Injectable()` decorator for the service itself.
+* サービス自体の `@Injectable()` デコレーターの中
 
-* In the `@NgModule()` decorator for an NgModule.
+* NgModule の `@NgModule()` デコレーターの中
 
-* In the `@Component()` decorator for a component. 
+* コンポーネントの `@Component()` デコレーターの中
 
-The `@Injectable()` decorator has the `providedIn` metadata option, where you can specify the provider of the decorated service class with the `root` injector, or with the injector for a specific NgModule.
+`@Injectable()` デコレーターには `providedIn` メタデータオプションがあります。このオプションでは、`root` インジェクターまたは特定の NgModule のインジェクターを使用して、装飾されたサービスクラスのプロバイダーを指定できます。
 
-The `@NgModule()` and `@Component()` decorators have the `providers` metadata option, where you can configure providers for NgModule-level or component-level injectors.
+`@NgModule()` および `@Component()` デコレーターには、`providers` メタデータオプションがあり、NgModule レベルまたはコンポーネントレベルのインジェクター用にプロバイダーを設定できます。
 
 <div class="alert is-helpful">
 
-Components are directives, and the `providers` option is inherited from `@Directive()`. You can also configure providers for directives and pipes at the same level as the component.
+コンポーネントはディレクティブであり、`providers` オプションは `@Directive()` から継承されます。コンポーネントと同じレベルでディレクティブとパイプのプロバイダーを設定することもできます。
 
-Learn more about [where to configure providers](guide/hierarchical-dependency-injection#where-to-register).
+[プロバイダを設定する場所](guide/hierarchical-dependency-injection#where-to-register)の詳細を学んでください。
 
 </div>
 

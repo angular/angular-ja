@@ -83,7 +83,7 @@ _npm_から*インメモリWeb API*をインストールします。
 
 <code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" header="src/app/in-memory-data.service.ts" linenums="false"></code-example>
 
-このファイルは`mock-heros.ts`の置き換えなので、`mock-heros.ts`は削除してしまっても問題ありません。
+このファイルは`mock-heroes.ts`の置き換えなので、`mock-heroes.ts`は削除してしまっても問題ありません。
 
 サーバーが準備されたら、*インメモリWeb API*を外せば、アプリのリクエストはサーバーに送信されます。
 

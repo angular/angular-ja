@@ -43,7 +43,7 @@ Angular では、DI フレームワークはそのクラスがインスタンス
 </code-example>
 
 このアプローチはプロトタイプ作成には有効ですが、堅牢ではなく、メンテナンス性もよくありません。
-このコンポーネントをテストしたり、リモートサーバーからヒーローを取得しようとする場合はすぐに、
+このコンポーネントをテストしたり、リモートサーバーからヒーローを取得しようとする場合はすぐに、
 あなたは `HeroesListComponent` の実装を変更し、
 `HEROES` モックデータのすべての使用箇所を置き換えなければなりません。
 
@@ -79,7 +79,7 @@ ng generate service heroes/hero
 <code-example path="dependency-injection/src/app/heroes/hero.service.0.ts" header="src/app/heroes/hero.service.ts (CLI-generated)">
 </code-example>
 
-`@Injectable()` は、すべての Angular サービス定義に不可欠な要素です。クラスの残りの部分は、以前と同じモックデータを返す `getHeroes` メソッドを公開するように書かれています。(実際のアプリはおそらくリモートサーバーからデータを非同期的に取得しますが、ここではサービスを注入する仕組みに焦点を当てるため無視します。)
+`@Injectable()` は、すべての Angular サービス定義に不可欠な要素です。クラスの残りの部分は、以前と同じモックデータを返す `getHeroes` メソッドを公開するように書かれています。(実際のアプリはおそらくリモートサーバーからデータを非同期的に取得しますが、ここではサービスを注入する仕組みに焦点を当てるため無視します。)
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.3.ts" header="src/app/heroes/hero.service.ts">
 </code-example>
@@ -91,18 +91,18 @@ ng generate service heroes/hero
 ### サービスプロバイダーでインジェクターを設定する
 
 作成したクラスがサービスを提供します。`@Injectable()` デコレーターはそれを注入可能なサービスとしてマークしますが、
-そのサービスの[プロバイダ](guide/glossary#provider)で Angular の[依存関係インジェクタ](guide/glossary#injector)を設定するまで 
+そのサービスの[プロバイダー](guide/glossary#provider)で Angular の[依存関係インジェクター](guide/glossary#injector)を設定するまで 
 Angular は実際にはそれをどこにも注入できません。
 
 インジェクターはサービスインスタンスを作成し、それらを `HeroListComponent` のようなクラスにインジェクトします。
 Angular インジェクターを自分で作成することはめったにありません。Angular は、[ブートストラッププロセス](guide/bootstrapping)中に作成されたルートインジェクターから始めて、アプリの実行時にインジェクターを作成します。
 
 プロバイダーはインジェクターにサービスの作成方法を伝えます。
-インジェクターがサービスを作成する(または他の種類の依存関係を提供する)前に、プロバイダーでインジェクターを設定する必要があります。
+インジェクターがサービスを作成する(または他の種類の依存関係を提供する)前に、プロバイダーによってインジェクターを設定する必要があります。
 
-プロバイダーはサービスクラスそのものになることができるため、インジェクターは `new` を使用してインスタンスを作成できます。
-また、同じサービスをさまざまな方法で提供するために複数のクラスを定義し、
-さまざまなプロバイダーでさまざまなインジェクターを構成することもできます。
+プロバイダーはサービスクラスそのものであるなら、インジェクターは `new` を使用してインスタンスを作成できます。
+また、同じサービスを異なる方法で提供するために複数のクラスを定義し、
+異なるプロバイダーによって異なるインジェクターを構成できます。
 
 <div class="alert is-helpful">
 
@@ -112,9 +112,9 @@ Angular インジェクターを自分で作成することはめったにあり
 そのコンポーネントの先祖のインジェクター、
 その親の NgModule のインジェクター、または `root` インジェクターからサービスを受け取ることができます。
 
-* [さまざまな種類のプロバイダ](guide/dependency-injection-providers)についてもっと学びましょう
+* [さまざまな種類のプロバイダー](guide/dependency-injection-providers)についてもっと学びましょう
 
-* [インジェクタ階層](guide/hierarchical-dependency-injection) が機能する仕組みについてもっと学びましょう
+* [インジェクターの階層](guide/hierarchical-dependency-injection)が機能する仕組みについてもっと学びましょう
 
 </div>
 
@@ -132,9 +132,9 @@ Angular インジェクターを自分で作成することはめったにあり
 
 <div class="alert is-helpful">
 
-コンポーネントはディレクティブであり、`providers` オプションは `@Directive()` から継承されます。コンポーネントと同じレベルでディレクティブとパイプのプロバイダーを設定することもできます。
+コンポーネントはディレクティブであり、`providers` オプションは `@Directive()` から継承されます。コンポーネントと同じレベルでディレクティブとパイプのためのプロバイダーを設定することもできます。
 
-[プロバイダを設定する場所](guide/hierarchical-dependency-injection#where-to-register)の詳細を学んでください。
+[プロバイダーを設定する場所](guide/hierarchical-dependency-injection#where-to-register)の詳細を学んでください。
 
 </div>
 
@@ -145,7 +145,7 @@ Angular インジェクターを自分で作成することはめったにあり
 
 `HeroListComponent` が `HeroService` からヒーローを取得するためには、`new` で独自の `HeroService` インスタンスを作成するのではなく、`HeroService` のインジェクションをリクエストする必要があります。
 
-**依存タイプをもつコンストラクターパラメータ**を指定することで、Angular にコンポーネントのコンストラクターに依存関係を注入するように指示できます。これが `HeroListComponent` コンストラクターで、`HeroService` を注入するようにリクエストします。
+**依存型をもつコンストラクターパラメーター**を指定することで、Angular にコンポーネントのコンストラクターに依存関係を注入するように指示できます。この `HeroListComponent` コンストラクターでは、`HeroService` を注入するようにリクエストしています。
 
 <code-example header="src/app/heroes/hero-list.component (constructor signature)" path="dependency-injection/src/app/heroes/hero-list.component.ts"
 region="ctor-signature">
@@ -170,17 +170,17 @@ region="ctor-signature">
 
 ### インジェクター階層とサービスインスタンス
 
-サービスは _インジェクタの範囲内の_ シングルトンです。つまり、特定のインジェクターにサービスのインスタンスがあったとしても1つです。
+サービスは _インジェクターの範囲内の_ シングルトンです。つまり、特定のインジェクターにサービスのインスタンスがあったとしても1つです。
 
-アプリにはルートインジェクターが1つだけあります。`root` レベルまたは `AppModule` レベルで `UserService` を提供することは、ルートインジェクターに登録されていることを意味します。*子インジェクタ*を使用して別のプロバイダーを設定*しない限り*、アプリケーション全体には1つの `UserService` インスタンスしかなく、`UserService` を注入するすべてのクラスがこのサービスインスタンスを取得します。
+アプリにはルートインジェクターが1つだけあります。`root` レベルまたは `AppModule` レベルで `UserService` を提供することは、ルートインジェクターに登録されていることを意味します。*子インジェクター*を使用して別のプロバイダーを設定*しない限り*、アプリケーション全体には1つの `UserService` インスタンスしかなく、`UserService` を注入するすべてのクラスがこのサービスインスタンスを取得します。
 
 Angular DI には[階層型注入システム](guide/hierarchical-dependency-injection)があります。つまり、入れ子になったインジェクターは独自のサービスインスタンスを作成できます。
-Angular は定期的に入れ子になったインジェクターを作ります。Angular が `@Component()` で指定された `providers` をもつコンポーネントの新しいインスタンスを作成するたびに、そのインスタンスの新しい*子インジェクタ*も作成します。
+Angular は定期的に入れ子になったインジェクターを作ります。Angular が `@Component()` で指定された `providers` をもつコンポーネントの新しいインスタンスを作成するたびに、そのインスタンスの新しい*子インジェクター*も作成します。
 同様に、実行時に新しい NgModule が遅延ロードされると、Angular は独自のプロバイダーを使用してそのためのインジェクターを作成できます。
 
 子モジュールとコンポーネントインジェクターは互いに独立しており、提供されるサービスの独自のインスタンスを個別に作成します。Angular が NgModule またはコンポーネントインスタンスを破棄すると、そのインジェクターとそのインジェクターのサービスインスタンスも破棄します。
 
-[インジェクタ継承](guide/hierarchical-dependency-injection)のおかげで、
+[インジェクター継承](guide/hierarchical-dependency-injection)のおかげで、
 それでもこれらのコンポーネントにアプリケーション全体のサービスを注入することができます。
 コンポーネントのインジェクターは、その親コンポーネントのインジェクターの子であり、
 その親の親のインジェクターの子孫であり、その後もアプリケーションのルートインジェクターに戻ります。Angular はその系統内の任意のインジェクターによって提供されるサービスを注入することができます。
@@ -213,7 +213,7 @@ Angular は定期的に入れ子になったインジェクターを作ります
 サービスは独自の依存関係をもつことができます。 `HeroService` は非常にシンプルで、独自の依存関係はありません。ただし、ロギングサービスを介してそのアクティビティをレポートしたいとします。`Logger` パラメーターをとるコンストラクターを追加して、
 同じコンストラクター注入パターンを適用できます。
 
-これが `Logger` を注入する改訂 `HeroService` で、比較のために以前のサービスと並べて表示しています。
+これが `Logger` を注入する新しい `HeroService` で、比較のために以前のサービスと並べて表示しています。
 
 <code-tabs>
 
@@ -235,12 +235,12 @@ Angular は定期的に入れ子になったインジェクターを作ります
 
 Angular は、コンストラクターにパラメータがあるクラスを作成するときに、正しいサービスを挿入できるように、それらのパラメータについて型と注入のメタデータを探します。
 Angular がそのパラメータ情報を見つけられない場合は、エラーが発生します。
-Angular は、*クラスに何らかのデコレータがある場合にのみ*パラメータ情報を見つけることができます。
+Angular は、*クラスに何らかのデコレーターがある場合にのみ*パラメータ情報を見つけることができます。
 `@Injectable()` デコレーターはサービスクラスの標準デコレーターです。
 
 <div class="alert is-helpful">
 
- デコレーターの要件は TypeScript によって課されます。 TypeScript は通常、コードを JavaScript に[トランスパイル](guide/glossary#transpile)するときにパラメータタイプ情報を破棄します。クラスにデコレーターがあり、`emitDecoratorMetadata` コンパイラオプションが TypeScript の `tsconfig.json` 設定ファイルで `true` に設定されている場合、TypeScript はこの情報を保持します。CLI は `emitDecoratorMetadata: true` を使用して `tsconfig.json` を構成します。
+ デコレーターの要件は TypeScript によって課されます。 TypeScript は通常、コードを JavaScript に[トランスパイル](guide/glossary#transpile)するときにパラメータの型情報を破棄します。クラスにデコレーターがあり、`emitDecoratorMetadata` コンパイラオプションが TypeScript の `tsconfig.json` 設定ファイルで `true` に設定されている場合、TypeScript はこの情報を保持します。CLI は `emitDecoratorMetadata: true` を使用して `tsconfig.json` を構成します。
  
  これはあなたのサービスクラスに `@Injectable()` を置く責任があることを意味します。
 
@@ -253,7 +253,7 @@ Angular は、*クラスに何らかのデコレータがある場合にのみ*�
 ### 依存性の注入トークン
 
 プロバイダーを使用してインジェクターを設定するときは、そのプロバイダーを [DI トークン](guide/glossary#di-token)と関連付けます。
-インジェクターは、依存関係を要求されたときに参照する内部*トークンプロバイダ*マップを維持します。
+インジェクターは、依存関係を要求されたときに参照する内部*トークンプロバイダー*マップを維持します。
 トークンはマップへのキーです。
 
 簡単な例では、依存値は*インスタンス*であり、
@@ -272,7 +272,7 @@ Angular はその `HeroService` クラストークンに関連付けられたサ
 
 多くの依存する値はクラスによって提供されますが、すべてではありません。拡張*提供*オブジェクトを使用すると、さまざまな種類のプロバイダーを DI トークンと関連付けることができます。
 
-* [さまざまな種類のプロバイダ](guide/dependency-injection-providers)についてもっと学びましょう
+* [さまざまな種類のプロバイダー](guide/dependency-injection-providers)についてもっと学びましょう
 
 {@a optional}
 
@@ -297,9 +297,9 @@ null に設定します。
 
 <div class="alert is-helpful">
 
-`@Inject()` と `@Optional()` は*パラメータデコレータ*です。それらは、依存関係を必要とするクラスのコンストラクターに依存関係パラメータを注釈することによって、DI フレームワークが依存関係を提供する方法を変更します。
+`@Inject()` と `@Optional()` は*パラメータデコレーター*です。それらは、依存関係を必要とするクラスのコンストラクターに依存関係パラメータを注釈することによって、DI フレームワークが依存関係を提供する方法を変更します。
 
-パラメータデコレーターの詳細については、[階層依存性インジェクタ](guide/hierarchical-dependency-injection)をご覧ください。
+パラメータデコレーターの詳細については、[階層依存性インジェクター](guide/hierarchical-dependency-injection)をご覧ください。
 
 </div>
 
@@ -312,7 +312,7 @@ null に設定します。
 
 次のページで、Angular の DI システムの機能と高度な機能について詳しく説明します。
 
-* 入れ子になったインジェクターについて詳しくは、[階層依存性注入](guide/hierarchical-dependency-injection)を参照してください
+* 入れ子になったインジェクターについて詳しくは、[階層的な依存性の注入](guide/hierarchical-dependency-injection)を参照してください
 
 * [DI トークンとプロバイダー](guide/dependency-injection-providers)についてもっと学びましょう
 

@@ -1,12 +1,12 @@
-# コンポーネントツリーを DI でナビゲートする
+# Navigate the component tree with DI
 
-アプリケーションのコンポーネントはしばしば情報を共有する必要があります。
-データバインディングやサービスの共有など、
-情報を共有するために疎結合技法を使用することがよくありますが、
-あるコンポーネントが別のコンポーネントを直接参照することが理にかなっていることもあります。 
-たとえば、そのコンポーネントの値にアクセスしたりメソッドを呼び出したりするためには、直接参照が必要です。
+Application components often need to share information.
+You can often use loosely coupled techniques for sharing information,
+such as data binding and service sharing, 
+but sometimes it makes sense for one component to have a direct reference to another component. 
+You need a direct reference, for instance, to access values or call methods on that component.
 
-コンポーネントの参照を取得することは、Angular の場合少し注意が必要です。
+Obtaining a component reference is a bit tricky in Angular.
 Angular components themselves do not have a tree that you can 
 inspect or navigate programmatically. The parent-child relationship is indirect,
 established through the components' [view objects](guide/glossary#view).

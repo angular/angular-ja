@@ -7,35 +7,34 @@
 たとえば、そのコンポーネントの値にアクセスしたりメソッドを呼び出したりするためには、直接参照が必要です。
 
 コンポーネントの参照を取得することは、Angular の場合少し注意が必要です。
-Angular components themselves do not have a tree that you can 
-inspect or navigate programmatically. The parent-child relationship is indirect,
-established through the components' [view objects](guide/glossary#view).
+Angular コンポーネント自体には、プログラムで調べたりナビゲートしたりできる
+ツリーはありません。親子関係は間接的で、
+コンポーネントの[ビューオブジェクト](guide/glossary#view)を通して確立されます。
 
-Each component has a *host view*, and can have additional *embedded views*. 
-An embedded view in component A is the
-host view of component B, which can in turn have embedded view.
-This means that there is a [view hierarchy](guide/glossary#view-hierarchy) for each component,
-of which that component's host view is the root.
+各コンポーネントはホストビューを持ち、追加の*埋め込みビュー*を持つことができます。
+コンポーネント A の埋め込みビューはコンポーネント B のホストビューであり、コンポーネント B は埋め込みビューを持つことができます。
+つまり、コンポーネントごとに[ビュー階層](guide/glossary#view-hierarchy)があり、
+そのコンポーネントのホストビューがルートになります。
 
-There is an API for navigating *down* the view hierarchy.
-Check out `Query`, `QueryList`, `ViewChildren`, and `ContentChildren`
-in the [API Reference](api/).
+ビュー階層を*下に*移動するための API があります。
+[API リファレンス](api/)の `Query`、`QueryList`、`ViewChildren` 
+および `ContentChildren` を確認してください。
 
-There is no public API for acquiring a parent reference.
-However, because every component instance is added to an injector's container,
-you can use Angular dependency injection to reach a parent component.
+親の参照を取得するための公開 API はありません。
+ただし、すべてのコンポーネントインスタンスはインジェクターのコンテナに追加されるため、
+Angular の依存性注入を使用して親のコンポーネントに到達することができます。
 
-This section describes some techniques for doing that.
+このセクションでは、そのためのいくつかの手法について説明します。
 
 {@a find-parent}
 {@a known-parent}
 
 
-### Find a parent component of known type
+### 既知の型の親コンポーネントを見つける
 
-You use standard class injection to acquire a parent component whose type you know.
+標準のクラスインジェクションを使用して、型がわかっている親コンポーネントを取得します。
 
-In the following example, the parent `AlexComponent` has several children including a `CathyComponent`:
+次の例では、親の `AlexComponent` に `CathyComponent` を含むいくつかの子があります。
 
 {@a alex}
 
@@ -46,8 +45,7 @@ In the following example, the parent `AlexComponent` has several children includ
 
 
 
-*Cathy* reports whether or not she has access to *Alex*
-after injecting an `AlexComponent` into her constructor:
+*Cathy* は、`AlexComponent` をコンストラクターに注入した後で、彼女が *Alex* にアクセスできるかどうかを伝えます。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="cathy" header="parent-finder.component.ts (CathyComponent)" linenums="false">
 
@@ -55,10 +53,7 @@ after injecting an `AlexComponent` into her constructor:
 
 
 
-Notice that even though the [@Optional](guide/dependency-injection-in-action#optional) qualifier
-is there for safety,
-the <live-example name="dependency-injection-in-action"></live-example>
-confirms that the `alex` parameter is set.
+安全のために [@Optional](guide/dependency-injection-in-action#optional) 修飾子があるとしても、<live-example name="dependency-injection-in-action"></live-example> では、`alex` パラメータが設定されていることを確認しています。
 
 
 {@a base-parent}

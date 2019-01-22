@@ -46,7 +46,8 @@ Angular の依存性注入を使用して親のコンポーネントに到達す
 
 
 
-*Cathy* は、`AlexComponent` をコンストラクターに注入した後で、彼女が *Alex* にアクセスできるかどうかを伝えます。
+*Cathy* は、`AlexComponent` をコンストラクターに注入した後で、
+彼女が *Alex* にアクセスできるかどうかを伝えます。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="cathy" header="parent-finder.component.ts (CathyComponent)" linenums="false">
 
@@ -54,7 +55,10 @@ Angular の依存性注入を使用して親のコンポーネントに到達す
 
 
 
-安全のために [@Optional](guide/dependency-injection-in-action#optional) 修飾子があるとしても、<live-example name="dependency-injection-in-action"></live-example> では、`alex` パラメータが設定されていることを確認しています。
+安全のために [@Optional](guide/dependency-injection-in-action#optional) 修飾子があるとしても、
+<live-example name="dependency-injection-in-action"></live-example> では、
+`alex` パラメータが設定されている
+ことを確認しています。
 
 
 {@a base-parent}

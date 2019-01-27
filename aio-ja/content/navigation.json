@@ -25,7 +25,6 @@
       "title": "翻訳に協力する"
     }
   ],
-
   "TopBarNarrow": [
     {
       "title": "Angularについて",
@@ -49,7 +48,6 @@
       ]
     }
   ],
-
   "SideNav": [
     {
       "url": "docs",
@@ -57,21 +55,18 @@
       "tooltip": "Angular Documentation",
       "hidden": true
     },
-
     {
       "url": "guide/docs-style-guide",
       "title": "Doc authors style guide",
       "tooltip": "Style guide for documentation authors",
       "hidden": true
     },
-
     {
       "url": "guide/quickstart",
       "title": "はじめに",
       "tooltip": "Angular とAngular CLIの基本について簡単に紹介します。",
       "translated": true
     },
-
     {
       "url": "tutorial",
       "title": "チュートリアル",
@@ -127,7 +122,6 @@
         }
       ]
     },
-
     {
       "title": "基礎ガイド",
       "tooltip": "Angularの基礎",
@@ -317,7 +311,6 @@
           "translated": true
         },
         {
-
           "title": "NgModules",
           "tooltip": "NgModules.",
           "children": [
@@ -325,7 +318,7 @@
               "url": "guide/ngmodules",
               "title": "NgModuleイントロダクション",
               "tooltip": "アプリケーションを効率的にするためにNgModuleを使用しましょう。",
-              "translated": true  
+              "translated": true
             },
             {
               "url": "guide/ngmodule-vs-jsmodule",
@@ -393,8 +386,8 @@
               "tooltip": "NgModuleに関するよくある質問への回答。",
               "translated": true
             }
-        ]},
-
+          ]
+        },
         {
           "title": "依存性の注入",
           "tooltip": "依存性の注入：サービスの作成と注入",
@@ -427,7 +420,6 @@
             }
           ]
         },
-
         {
           "url": "guide/http",
           "title": "HttpClient",
@@ -477,12 +469,10 @@
         }
       ]
     },
-
     {
       "title": "テクニック",
       "tooltip": "環境に合わせたAngularの活用テクニック",
       "children": [
-
         {
           "url": "guide/security",
           "title": "セキュリティ",
@@ -494,7 +484,6 @@
           "title": "Internationalization (i18n)",
           "tooltip": "Translate the app's template text into multiple languages."
         },
-
         {
           "title": "Service WorkerとPWA",
           "tooltip": "Angular Service Worker: アプリケーションリソースのキャッシュをコントロールします",
@@ -560,7 +549,6 @@
         }
       ]
     },
-
     {
       "title": "セットアップ & デプロイ",
       "tooltip": "セットアップ、ビルド、テスト、デプロイ環境とツールの情報",
@@ -573,8 +561,9 @@
         },
         {
           "url": "guide/file-structure",
-          "title": "Project File Structure",
-          "tooltip": "How your Angular workspace looks on your filesystem."
+          "title": "プロジェクトのファイル構造",
+          "tooltip": "ファイルシステムから見たときにAngularワークスペースがどのような構成をしているか説明します。",
+          "translated": true
         },
         {
           "url": "guide/workspace-config",
@@ -598,7 +587,7 @@
           "title": "Ahead-of-Time Compilation",
           "tooltip": "Learn why and how to use the Ahead-of-Time (AOT) compiler."
         },
-        {          
+        {
           "url": "guide/build",
           "title": "Building & Serving",
           "tooltip": "Building and serving Angular apps."
@@ -638,7 +627,6 @@
         }
       ]
     },
-        
     {
       "title": "リリース情報",
       "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
@@ -703,7 +691,6 @@
       "hidden": true
     }
   ],
-
   "Footer": [
     {
       "title": "資料集",
@@ -803,11 +790,22 @@
       ]
     }
   ],
-
   "docVersions": [
-    { "title": "v6", "url": "https://v6.angular.io" },
-    { "title": "v5", "url": "https://v5.angular.io" },
-    { "title": "v4", "url": "https://v4.angular.io" },
-    { "title": "v2", "url": "https://v2.angular.io" }
+    {
+      "title": "v6",
+      "url": "https://v6.angular.io"
+    },
+    {
+      "title": "v5",
+      "url": "https://v5.angular.io"
+    },
+    {
+      "title": "v4",
+      "url": "https://v4.angular.io"
+    },
+    {
+      "title": "v2",
+      "url": "https://v2.angular.io"
+    }
   ]
 }

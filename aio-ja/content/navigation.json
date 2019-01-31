@@ -407,8 +407,9 @@
             },
             {
               "url": "guide/hierarchical-dependency-injection",
-              "title": "Hierarchical Injectors",
-              "tooltip": "An injector tree parallels the component tree and supports nested dependencies."
+              "title": "階層的インジェクター",
+              "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-providers",

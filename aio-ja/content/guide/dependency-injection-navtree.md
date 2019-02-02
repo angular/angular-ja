@@ -64,39 +64,38 @@ Angular の依存性の注入を使用して親のコンポーネントに到達
 {@a base-parent}
 
 
-### Unable to find a parent by its base class
+### 基本クラスで親を見つけることができません
 
-What if you *don't* know the concrete parent component class?
+具体的な親コンポーネントクラスが*分からない*場合はどうしますか？
 
-A re-usable component might be a child of multiple components.
-Imagine a component for rendering breaking news about a financial instrument.
-For business reasons, this news component makes frequent calls
-directly into its parent instrument as changing market data streams by.
+再利用可能なコンポーネントは、複数のコンポーネントの子になることがあります。
+金融商品に関する最新ニュースを表示するためのコンポーネントを想像してください。
+ビジネス上の理由から、このニュースコンポーネントは市場データの流れが
+変わることで頻繁に親の商品を直接呼び出します。
 
-The app probably defines more than a dozen financial instrument components.
-If you're lucky, they all implement the same base class
-whose API your `NewsComponent` understands.
+このアプリはおそらく1ダース以上の金融商品コンポーネントを定義しています。
+運がよければ、それらはすべて `NewsComponent` が理解できる API をもつ同じ基本クラスを実装しています。
 
 
 <div class="alert is-helpful">
 
 
 
-Looking for components that implement an interface would be better.
-That's not possible because TypeScript interfaces disappear
-from the transpiled JavaScript, which doesn't support interfaces.
-There's no artifact to look for.
+インターフェースを実装しているコンポーネントを探すのがよいでしょう。
+TypeScript インターフェースは、インターフェースをサポートしていない
+変換された JavaScript から消えるため、これは不可能です。
+探すべきアーティファクトはありません。
 
 </div>
 
 
 
-This isn't necessarily good design.
-This example is examining *whether a component can
-inject its parent via the parent's base class*.
+これは必ずしもよいデザインではありません。
+この例では、*コンポーネントが親の基本クラスを介して
+その親を注入できるかどうか*を調べています。
 
-The sample's `CraigComponent` explores this question. [Looking back](#alex),
-you see that the `Alex` component *extends* (*inherits*) from a class named `Base`.
+サンプルの `CraigComponent` はこの問題を探ります。[振り返ってみると](#alex)、
+`Alex` コンポーネントは `Base` という名前のクラスから*拡張*(*継承*)されています。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (Alex class signature)" linenums="false">
 
@@ -104,7 +103,7 @@ you see that the `Alex` component *extends* (*inherits*) from a class named `Bas
 
 
 
-The `CraigComponent` tries to inject `Base` into its `alex` constructor parameter and reports if it succeeded.
+`CraigComponent` は、その `alex` コンストラクターパラメータに `Base` の注入を試み、成功したかどうかを報告します。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="craig" header="parent-finder.component.ts (CraigComponent)" linenums="false">
 
@@ -112,10 +111,10 @@ The `CraigComponent` tries to inject `Base` into its `alex` constructor paramete
 
 
 
-Unfortunately, this doesn't work.
-The <live-example name="dependency-injection-in-action"></live-example>
-confirms that the `alex` parameter is null.
-*You cannot inject a parent by its base class.*
+残念ながら、これはうまくいきません。
+<live-example name="dependency-injection-in-action"></live-example>は 
+`alex` パラメータが null であることを確認します。
+*基本クラスで親を注入することはできません*。
 
 
 

@@ -574,8 +574,9 @@
         },
         {
           "url": "guide/file-structure",
-          "title": "Project File Structure",
-          "tooltip": "How your Angular workspace looks on your filesystem."
+          "title": "プロジェクトのファイル構造",
+          "tooltip":"ファイルシステムから見たときにAngularワークスペースがどのような構成をしているか説明します。",
+          "translated": true
         },
         {
           "url": "guide/workspace-config",

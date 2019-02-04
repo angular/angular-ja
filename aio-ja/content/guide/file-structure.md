@@ -1,6 +1,6 @@
 # ワークスペースとプロジェクトのファイル構造
 
-アプリケーションはAngular[ワークスペース](guide/glossary#workspace)のコンテクストで開発されます。 ワークスペースには1つ、または複数の[プロジェクト](guide/glossary#project)のファイルが含まれています。プロジェクトとは、スタンドアロンのアプリケーション、ライブラリやエンドツーエンド(e2e)テストセットを含むファイル群のことを指します。
+アプリケーションはAngular[ワークスペース](guide/glossary#workspace)のコンテキストで開発されます。 ワークスペースには1つ、または複数の[プロジェクト](guide/glossary#project)のファイルが含まれています。プロジェクトとは、スタンドアロンのアプリケーション、ライブラリやエンドツーエンド(e2e)テストセットを含むファイル群のことを指します。
 
 Angular CLIの`ng new <project_name>`コマンドで開発を始めることができます。このコマンドを走らせると、CLIは必要なAngularのnpmパッケージとその他の依存関係を新しいワークスペースにインストールします。このとき、ルートフォルダの名前は*project_name*になります。
 同時に次のワークスペースとスタータープロジェクトのファイルも作成します。
@@ -23,7 +23,7 @@ Angular CLIの`ng new <project_name>`コマンドで開発を始めることが�
 | `node_modules`         | [npm packages](guide/npm-packages)をワークスペース全体に提供します。 |
 | `package.json`         | ワークスペース内の全プロジェクトが利用可能な[npm package dependencies](guide/npm-packages) の設定をします。具体的なフォーマットやファイルの中身については[npm documentation](https://docs.npmjs.com/files/package.json) を参照してください。|
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
-| `tsconfig.json`        | ワークスペース内のアプリケーションが利用する[TypeScript](https://www.typescriptlang.org/) のデフォルト設定です。この中にはTypeScriptとAngularテンプレートのコンパイラーオプションが含まレます。[TypeScript Configuration](guide/typescript-configuration)を参照してください。 |
+| `tsconfig.json`        | ワークスペース内のアプリケーションが利用する[TypeScript](https://www.typescriptlang.org/) のデフォルト設定です。この中にはTypeScriptとAngularテンプレートのコンパイラオプションが含まれます。[TypeScript Configuration](guide/typescript-configuration)を参照してください。 |
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 | `README.md`            | 紹介用のドキュメントです。|
 
@@ -33,14 +33,14 @@ Angular CLIの`ng new <project_name>`コマンドで開発を始めることが�
 ### デフォルトのアプリケーションプロジェクトファイル
 
 CLIの`ng new my-app`コマンドは"my-app"という名前のワークスペースフォルダを作成して、新しいアプリケーションスケルトンを生成します。
-この初期アプリケーションは(追加でアプリケーションを作成してデフォルトを変更しない限り)CLIコマンドの*default app*になります。
+この初期アプリケーションは(追加でアプリケーションを作成してデフォルトを変更しない限り)CLIコマンドの*デフォルトアプリケーション*になります。
 
 新しく生成されたアプリケーションはルートモジュールのソースファイルを持っています。これには、ルートコンポーネントとテンプレートが含まれます。
 ワークスペースのファイル構造が正しく整えられている場合は、`ng generate`コマンドを使い、コマンドラインから機能やデータを初期アプリケーションに追加することができます。
 
 <div class="alert is-helpful">
 
-   CLIをコマンドラインで使う意外に、[Angular Console](https://angularconsole.com/) のようなインタラクティブな開発環境を利用することもできます。また、アプリケーションのソースフォルダのファイルや設定ファイルを直接操作することも可能です。
+   CLIをコマンドラインで使う以外に、[Angular Console](https://angularconsole.com/) のようなインタラクティブな開発環境を利用することもできます。また、アプリケーションのソースフォルダのファイルや設定ファイルを直接操作することも可能です。
 
 </div>
 
@@ -77,7 +77,7 @@ my-app/
 
 ### 追加のアプリケーション、ライブラリ向けのプロジェクトフォルダ
 
-ワークスペースに新たなプロジェクトを作成した時、CLIは新たな*workspace*`/projects`フォルダを作成し、そこに生成されたファイルを追加します。
+ワークスペースに新たなプロジェクトを作成した時、CLIは新たな*ワークスペース*の`/projects`フォルダを作成し、そこに生成されたファイルを追加します。
 
 アプリケーションを作成する(`ng generate application my-other-app`)と、CLIは`projects/`内にアプリケーション、及びそのアプリケーションのe2eテストのためのフォルダを追加します。新たに生成されたライブラリも`projects/`内に入ります。
 
@@ -103,8 +103,8 @@ my-app/
 | アプリケーションソースファイル | 目的 |
 | :-------------------------- | :------------------------------------------|
 | `app/app.component.ts`      | アプリケーションのルートコンポーネントである`AppComponent`のロジックを定義します。コンポーネントやサービスをアプリケーションに追加する時に、このルートコンポーネントに紐づいているビューは[view hierarchy](guide/glossary#view-hierarchy)のルートになリます。|
-| `app/app.component.html`    | ルートである`AppComponent`のHTMLテンプレートを定義するもの。|
-| `app/app.component.css`     | ルートである`AppComponent`のCSSスタイルシートを定義するもの。|
-| `app/app.component.spec.ts` | ルートである`AppComponent`の単体テストを定義するもの。|
+| `app/app.component.html`    | ルートである`AppComponent`のHTMLテンプレートを定義します。|
+| `app/app.component.css`     | ルートである`AppComponent`のCSSスタイルシートを定義します。|
+| `app/app.component.spec.ts` | ルートである`AppComponent`の単体テストを定義します。|
 | `app/app.module.ts`         | Angularにアプリケーションを組み立てる方法を伝えるルートモジュールである`AppModule`を定義します。最初の状態ではただ`AppComponent`を宣言しているだけです。 アプリケーションにコンポーネントを足す時は、ここに宣言をする必要があります。 |
-| `assets/*`                  | アプリケーションがbuildされる際にそのままコピーされるべき画像及びその他のファイルを持ちます。 |
+| `assets/*`                  | アプリケーションがビルドされる際にそのままコピーされるべき画像及びその他のファイルを持ちます。 |

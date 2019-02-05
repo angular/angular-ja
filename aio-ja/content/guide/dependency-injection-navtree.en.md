@@ -1,41 +1,41 @@
-# コンポーネントツリーを DI でナビゲートする
+# Navigate the component tree with DI
 
-アプリケーションのコンポーネントはしばしば情報を共有する必要があります。
-データバインディングやサービスの共有など、
-情報を共有するために疎結合のテクニックを使用することがよくありますが、
-あるコンポーネントが別のコンポーネントを直接参照することが理にかなっていることもあります。 
-たとえば、そのコンポーネントの値にアクセスしたりメソッドを呼び出したりするためには、直接参照が必要です。
+Application components often need to share information.
+You can often use loosely coupled techniques for sharing information,
+such as data binding and service sharing, 
+but sometimes it makes sense for one component to have a direct reference to another component. 
+You need a direct reference, for instance, to access values or call methods on that component.
 
-コンポーネントの参照を取得することは、Angular の場合少し注意が必要です。
-Angular コンポーネント自体には、プログラムで調べたりナビゲートしたりできる
-ツリーはありません。親子関係は間接的で、
-コンポーネントの[ビューオブジェクト](guide/glossary#view)を通して確立されます。
+Obtaining a component reference is a bit tricky in Angular.
+Angular components themselves do not have a tree that you can 
+inspect or navigate programmatically. The parent-child relationship is indirect,
+established through the components' [view objects](guide/glossary#view).
 
-各コンポーネントはホストビューを持ち、追加の*埋め込みビュー*をもつことができます。
-コンポーネント A の埋め込みビューはコンポーネント B のホストビューであり、
-コンポーネント B は埋め込みビューをもつことができます。
-つまり、コンポーネントごとに[ビュー階層](guide/glossary#view-hierarchy)があり、
-そのコンポーネントのホストビューがルートになります。
+Each component has a *host view*, and can have additional *embedded views*. 
+An embedded view in component A is the
+host view of component B, which can in turn have embedded view.
+This means that there is a [view hierarchy](guide/glossary#view-hierarchy) for each component,
+of which that component's host view is the root.
 
-ビュー階層を*下に*移動するための API があります。
-[API リファレンス](api/)の `Query`、`QueryList`、`ViewChildren` 
-および `ContentChildren` を確認してください。
+There is an API for navigating *down* the view hierarchy.
+Check out `Query`, `QueryList`, `ViewChildren`, and `ContentChildren`
+in the [API Reference](api/).
 
-親の参照を取得するための公開 API はありません。
-ただし、すべてのコンポーネントインスタンスはインジェクターのコンテナに追加されるため、
-Angular の依存性の注入を使用して親のコンポーネントに到達することができます。
+There is no public API for acquiring a parent reference.
+However, because every component instance is added to an injector's container,
+you can use Angular dependency injection to reach a parent component.
 
-このセクションでは、そのためのいくつかの手法について説明します。
+This section describes some techniques for doing that.
 
 {@a find-parent}
 {@a known-parent}
 
 
-### 既知の型の親コンポーネントを見つける
+### Find a parent component of known type
 
-標準のクラスインジェクションを使用して、型がわかっている親コンポーネントを取得します。
+You use standard class injection to acquire a parent component whose type you know.
 
-次の例では、親の `AlexComponent` に `CathyComponent` を含むいくつかの子があります。
+In the following example, the parent `AlexComponent` has several children including a `CathyComponent`:
 
 {@a alex}
 
@@ -46,8 +46,8 @@ Angular の依存性の注入を使用して親のコンポーネントに到達
 
 
 
-*Cathy* は、`AlexComponent` をコンストラクターに注入したあとで、
-彼女が *Alex* にアクセスできるかどうかを伝えます。
+*Cathy* reports whether or not she has access to *Alex*
+after injecting an `AlexComponent` into her constructor:
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="cathy" header="parent-finder.component.ts (CathyComponent)" linenums="false">
 
@@ -55,48 +55,48 @@ Angular の依存性の注入を使用して親のコンポーネントに到達
 
 
 
-安全のために [@Optional](guide/dependency-injection-in-action#optional) 修飾子があるとしても、
-<live-example name="dependency-injection-in-action"></live-example> では、
-`alex` パラメータが設定されている
-ことを確認しています。
+Notice that even though the [@Optional](guide/dependency-injection-in-action#optional) qualifier
+is there for safety,
+the <live-example name="dependency-injection-in-action"></live-example>
+confirms that the `alex` parameter is set.
 
 
 {@a base-parent}
 
 
-### 基本クラスで親を見つけることができません
+### Unable to find a parent by its base class
 
-具体的な親コンポーネントクラスが*分からない*場合はどうしますか？
+What if you *don't* know the concrete parent component class?
 
-再利用可能なコンポーネントは、複数のコンポーネントの子になることがあります。
-金融商品に関する最新ニュースを表示するためのコンポーネントを想像してください。
-ビジネス上の理由から、このニュースコンポーネントは市場データの流れが
-変わることで頻繁に親の商品を直接呼び出します。
+A re-usable component might be a child of multiple components.
+Imagine a component for rendering breaking news about a financial instrument.
+For business reasons, this news component makes frequent calls
+directly into its parent instrument as changing market data streams by.
 
-このアプリはおそらくたくさんの金融商品コンポーネントを定義しています。
-運がよければ、それらはすべて `NewsComponent` が理解できる API を
-もつ同じ基本クラスを実装しています。
+The app probably defines more than a dozen financial instrument components.
+If you're lucky, they all implement the same base class
+whose API your `NewsComponent` understands.
 
 
 <div class="alert is-helpful">
 
 
 
-インターフェースを実装しているコンポーネントを探すことができればよかったでしょう。
-TypeScript のインターフェースは、インターフェースをサポートしていない
-変換後の JavaScript からは消えてしまうため、これは不可能です。
-探すべきアーティファクトはありません。
+Looking for components that implement an interface would be better.
+That's not possible because TypeScript interfaces disappear
+from the transpiled JavaScript, which doesn't support interfaces.
+There's no artifact to look for.
 
 </div>
 
 
 
-これは必ずしもよいデザインではありません。
-この例では、*コンポーネントが親の基本クラスを介して
-その親を注入できるかどうか*を調べています。
+This isn't necessarily good design.
+This example is examining *whether a component can
+inject its parent via the parent's base class*.
 
-サンプルの `CraigComponent` はこの問題を探ります。[振り返ってみると](#alex)、
-`Alex` コンポーネントは `Base` という名前のクラスから*拡張*(*継承*)されています。
+The sample's `CraigComponent` explores this question. [Looking back](#alex),
+you see that the `Alex` component *extends* (*inherits*) from a class named `Base`.
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (Alex class signature)" linenums="false">
 
@@ -104,7 +104,7 @@ TypeScript のインターフェースは、インターフェースをサポー
 
 
 
-`CraigComponent` は、その `alex` コンストラクターパラメータに `Base` の注入を試み、成功したかどうかを報告します。
+The `CraigComponent` tries to inject `Base` into its `alex` constructor parameter and reports if it succeeded.
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="craig" header="parent-finder.component.ts (CraigComponent)" linenums="false">
 
@@ -112,10 +112,10 @@ TypeScript のインターフェースは、インターフェースをサポー
 
 
 
-残念ながら、これはうまくいきません。
-<live-example name="dependency-injection-in-action"></live-example>は 
-`alex` パラメータが null であることを確認します。
-*基本クラスで親を注入することはできません*。
+Unfortunately, this doesn't work.
+The <live-example name="dependency-injection-in-action"></live-example>
+confirms that the `alex` parameter is null.
+*You cannot inject a parent by its base class.*
 
 
 

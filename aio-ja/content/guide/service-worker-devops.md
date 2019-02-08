@@ -194,7 +194,7 @@ Chromeなどのブラウザは、Service Workerとやり取りするための開
 * Cache Storageビューアを見ると、キャッシュは頻繁に古くなっています。Cache Storageタイトルを右クリックし、キャッシュをリフレッシュしてください。
 
 Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
-d
+
 ## Service Workerの安全性
 
 あらゆる複雑なシステムと同様に、バグや壊れた設定によって、

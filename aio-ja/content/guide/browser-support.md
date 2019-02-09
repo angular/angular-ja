@@ -1,6 +1,6 @@
 # ブラウザサポート
 
-Angularは最新のブラウザをサポートしています。サポートしているブラウザは下表の通りです。
+Angularは最新のブラウザをサポートしています。サポートしているブラウザは下表のとおりです。
 
 <table>
 
@@ -129,7 +129,7 @@ AngularはWEBプラットフォームの最新標準に基づいて構築され�
 プロジェクトを作成し、対応する`import`文が用意ができると、_必須_ポリフィル(`zone.js`のような)のためのnpmパッケージは自動的にインストールされます。おそらくそれらを変更する必要はないでしょう。
 
 しかし、任意のポリフィルが必要な場合、そのnpmパッケージをインストールする必要があります。
-例えば、[WEBアニメーションのポリフィルが必要な場合](http://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
+たとえば、[WEBアニメーションのポリフィルが必要な場合](http://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
 
 <code-example language="sh" class="code-shell">
   # note that the web-animations-js polyfill is only here as an example
@@ -137,7 +137,7 @@ AngularはWEBプラットフォームの最新標準に基づいて構築され�
   npm install --save web-animations-js
 </code-example>
 
-次に`polifills.ts`を開き、以下の通りに該当するインポート文のコメントを外します。
+次に`polifills.ts`を開き、次のとおりに該当するインポート文のコメントを外します。
 
 <code-example header="src/polyfills.ts">
   /**
@@ -147,7 +147,7 @@ AngularはWEBプラットフォームの最新標準に基づいて構築され�
   import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 </code-example>
 
-もし`polifills.ts`に求めるポリフィルがなければ、自身で追加し、以下のパターンに従ってください。
+もし`polifills.ts`に求めるポリフィルがなければ、自身で追加し、次のパターンにしたがってください。
 
 1. npmパッケージをインストールする
 1. `polyfills.ts`で`import`する
@@ -226,10 +226,10 @@ CLIを使用していない場合は、[後述の通り](#non-cli)に行って�
 
 Angularのいくらかの機能では追加のポリフィルが必要になるかもしれません。
 
-例えば、アニメーションライブラリは標準のWEBアニメーションAPIに依存しています。しかし、現状では標準のWEBアニメーションAPIはChromeとFirefoxでしか利用できません。
+たとえば、アニメーションライブラリは標準のWEBアニメーションAPIに依存しています。しかし、現状では標準のWEBアニメーションAPIはChromeとFirefoxでしか利用できません。
 (Angularにおけるweb-animations-jsへの依存は、`AnimationBuilder`を利用する場合にのみ生じます)
 
-追加のポリフィルを必要とする可能性がある機能は以下の通りです。
+追加のポリフィルを必要とする可能性がある機能は次のとおりです。
 
 
 <table>
@@ -375,7 +375,7 @@ Angularのいくらかの機能では追加のポリフィルが必要になる�
 
 
 ### 推奨ポリフィル
-以下にフレームワーク自体のテストのために使用されるポリフィルを示します。
+次にフレームワーク自体のテストのために使用されるポリフィルを示します。
 これらはアプリケーションのためのよいスタート地点です。
 
 

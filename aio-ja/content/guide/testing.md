@@ -669,7 +669,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _createComponent()_
 
-`TestBed`を構成したら`createComponent()`メソッドを呼び出します。。
+`TestBed`を構成したら`createComponent()`メソッドを呼び出します。
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"

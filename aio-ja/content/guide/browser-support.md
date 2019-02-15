@@ -7,11 +7,11 @@ Angularは最新のブラウザをサポートしています。サポートし�
   <tr>
 
 <th>
-      Browser
+      ブラウザ
 </th>
 
 <th>
-      Supported versions
+      サポートバージョン
 </th>
 
   </tr>
@@ -168,11 +168,11 @@ CLIを使用していない場合は、[後述のとおり](#non-cli)に行っ�
   <tr style="vertical-align: top">
 
     <th>
-      Browsers (Desktop & Mobile)
+      ブラウザ
     </th>
 
     <th>
-      Polyfills Required
+      必要なポリフィル
     </th>
 
   </tr>
@@ -237,15 +237,15 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
   <tr style="vertical-align: top">
 
     <th>
-      Feature
+      機能
     </th>
 
     <th>
-      Polyfill
+      ポリフィル
     </th>
 
     <th style="width: 50%">
-       Browsers (Desktop & Mobile)
+       ブラウザ
     </th>
 
   </tr>
@@ -383,15 +383,15 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
   <tr>
 
     <th>
-      Polyfill
+      ポリフィル
     </th>
 
     <th>
-      License
+      ライセンス
     </th>
 
     <th>
-      Size*
+      サイズ*
     </th>
 
   </tr>

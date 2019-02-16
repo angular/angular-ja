@@ -618,8 +618,9 @@
         },
         {
           "url": "guide/browser-support",
-          "title": "Browser Support",
-          "tooltip": "Browser support and polyfills guide."
+          "title": "ブラウザサポート",
+          "tooltip": "ブラウザサポートとポリフィルのガイド",
+          "translated": true
         },
         {
           "title": "Dev Tool Integration",

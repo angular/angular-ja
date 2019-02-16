@@ -1,17 +1,17 @@
-# ブラウザサポート
+# Browser support
 
-Angularは最新のブラウザをサポートしています。サポートしているブラウザは次の表のとおりです。
+Angular supports most recent browsers. This includes the following specific versions:
 
 <table>
 
   <tr>
 
 <th>
-      ブラウザ
+      Browser
 </th>
 
 <th>
-      サポートバージョン
+      Supported versions
 </th>
 
   </tr>
@@ -48,7 +48,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
       2 most recent major versions
     </td>
   </tr>
-  <tr>
+  <tr> 
     <td>
       IE
     </td>
@@ -57,7 +57,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
     </td>
   </tr>
  <tr>
-   <tr>
+   <tr> 
     <td>
       IE Mobile
     </td>
@@ -82,7 +82,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
     <td>
       2 most recent major versions
     </td>
-  </tr>
+  </tr> 
   <tr>
     <td>
       Android
@@ -91,45 +91,46 @@ Angularは最新のブラウザをサポートしています。サポートし�
     <td>
       Nougat (7.0)<br>Marshmallow (6.0)<br>Lollipop (5.0, 5.1)<br>KitKat (4.4)
     </td>
-  </tr>
+  </tr> 
 
 </table>
 
 <div class="alert is-helpful">
 
-Angularの開発プロセスでは、各プルリクエストに対して、すべてのサポート対象ブラウザ上でユニットテストを実行しています。
-ユニットテスト実行には<a href="https://saucelabs.com/">SauceLabs</a>と
-<a href="https://www.browserstack.com">Browserstack</a>を使用しています。
+Angular's continuous integration process runs unit tests of the framework on all of these browsers for every pull request,
+using <a href="https://saucelabs.com/">SauceLabs</a> and
+<a href="https://www.browserstack.com">Browserstack</a>.
 
 </div>
 
 
-## ポリフィル
+## Polyfills
 
-AngularはWEBプラットフォームの最新標準に基づいて構築されています。
-先述したような広範囲のブラウザをターゲットにすることは困難です。なぜならそれらがモダンブラウザの機能すべてをサポートしているわけではないからです。
+Angular is built on the latest standards of the web platform.
+Targeting such a wide range of browsers is challenging because they do not support all features of modern browsers.
 
-サポート必須なブラウザのために、ポリフィルを適用して補うことができます。
-[後述の表](#polyfill-libs)に必要になる可能性があるポリフィルのほとんどを記載しています。
+You compensate by loading polyfill scripts ("polyfills") for the browsers that you must support.
+The [table below](#polyfill-libs) identifies most of the polyfills you might need.
 
 <div class="alert is-important">
 
-推奨されるポリフィルはAngularアプリケーションを完全に動作させるためのものです。
-リストにない機能をサポートするために追加のポリフィルが必要になるかもしれません。
-ポリフィルでは、古く遅いブラウザを最新の早いブラウザに魔法のように変換できないことに注意しましょう。
+The suggested polyfills are the ones that run full Angular applications.
+You may need additional polyfills to support features not covered by this list.
+Note that polyfills cannot magically transform an old, slow browser into a modern, fast one.
 
 </div>
 
-## ポリフィルを有効化する
+## Enabling polyfills
 
-[Angular CLI](cli) を使用している場合は、プロジェクトと共に自動生成された`src/polyfills.ts`を利用してポリフィルを有効化します。
+[Angular CLI](cli) users enable polyfills through the `src/polyfills.ts` file that
+the CLI created with your project.
 
-このファイルには必須なポリフィルと多くのオプショナルなポリフィルがJavaScriptの`import`文で盛り込まれています。
+This file incorporates the mandatory and many of the optional polyfills as JavaScript `import` statements.
 
-必須なポリフィルのnpmパッケージは、プロジェクトを作成したときに自動的にインストールされていて、対応する`import`文が用意されています。あなたがそれに触ることはないでしょう。
+The npm packages for the _mandatory_ polyfills (such as `zone.js`) were installed automatically for you when you created your project and their corresponding `import` statements are ready to go. You probably won't touch these.
 
-しかし、オプショナルなポリフィルが必要な場合、そのnpmパッケージをインストールする必要があります。
-たとえば、[WEBアニメーションのポリフィルが必要な場合](http://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
+But if you need an optional polyfill, you'll have to install its npm package.
+For example, [if you need the web animations polyfill](http://caniuse.com/#feat=web-animation), you could install it with `npm`, using the following command (or the `yarn` equivalent):
 
 <code-example language="sh" class="code-shell">
   # note that the web-animations-js polyfill is only here as an example
@@ -137,7 +138,7 @@ AngularはWEBプラットフォームの最新標準に基づいて構築され�
   npm install --save web-animations-js
 </code-example>
 
-それから`polyfills.ts`を開き、次のように該当するインポート文のコメントを外します。
+Then open the `polyfills.ts` file and un-comment the corresponding `import` statement as in the following example:
 
 <code-example header="src/polyfills.ts">
   /**
@@ -147,20 +148,21 @@ AngularはWEBプラットフォームの最新標準に基づいて構築され�
   import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 </code-example>
 
-もし`polyfills.ts`に求めるポリフィルがなければ、自身で追加し、次のパターンにしたがってください。
+If you can't find the polyfill you want in `polyfills.ts`,
+add it yourself, following the same pattern:
 
-1. npmパッケージをインストールする
-1. `polyfills.ts`で`import`する
+1. install the npm package
+1. `import` the file in `polyfills.ts`
 
 <div class="alert is-helpful">
 
-CLIを使用していない場合は、[後述のとおり](#non-cli)に行ってください。
+Non-CLI users should follow the instructions [below](#non-cli).
 </div>
 
 {@a polyfill-libs}
 
-### 必須ポリフィル
-サポートするブラウザ上でAngularアプリケーションを動作するためには、これらのポリフィルが必要です。
+### Mandatory polyfills
+These are the polyfills required to run an Angular application on each supported browser:
 
 
 <table>
@@ -168,11 +170,11 @@ CLIを使用していない場合は、[後述のとおり](#non-cli)に行っ�
   <tr style="vertical-align: top">
 
     <th>
-      ブラウザ
+      Browsers (Desktop & Mobile)
     </th>
 
     <th>
-      必要なポリフィル
+      Polyfills Required
     </th>
 
   </tr>
@@ -222,14 +224,14 @@ CLIを使用していない場合は、[後述のとおり](#non-cli)に行っ�
 </table>
 
 
-### ポリフィルが必要なオプショナルのブラウザ機能
+### Optional browser features to polyfill
 
-Angularのいくつかの機能では追加のポリフィルが必要になるかもしれません。
+Some features of Angular may require additional polyfills.
 
-たとえば、アニメーションライブラリは標準のWeb Animation APIに依存しています。しかし、現状では標準のWeb Animation APIはChromeとFirefoxでしか利用できません。
-(Angularにおけるweb-animations-jsへの依存は、`AnimationBuilder`を利用する場合にのみ生じます)
+For example, the animations library relies on the standard web animation API, which is only available in Chrome and Firefox today.
+(note that the dependency of web-animations-js in Angular is only necessary if `AnimationBuilder` is used.)
 
-追加のポリフィルを必要とする可能性がある機能は次のとおりです。
+Here are the features which may require additional polyfills:
 
 
 <table>
@@ -237,15 +239,15 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
   <tr style="vertical-align: top">
 
     <th>
-      機能
+      Feature
     </th>
 
     <th>
-      ポリフィル
+      Polyfill
     </th>
 
     <th style="width: 50%">
-       ブラウザ
+       Browsers (Desktop & Mobile)
     </th>
 
   </tr>
@@ -374,8 +376,8 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
 
 
-### 推奨ポリフィル ##
-次に示すのはフレームワークそのものをテストするために使われているポリフィルです。これらはアプリケーションのためのよいスタート地点です。
+### Suggested polyfills ##
+Below are the polyfills which are used to test the framework itself. They are a good starting point for an application.
 
 
 <table>
@@ -383,15 +385,15 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
   <tr>
 
     <th>
-      ポリフィル
+      Polyfill
     </th>
 
     <th>
-      ライセンス
+      License
     </th>
 
     <th>
-      サイズ*
+      Size*
     </th>
 
   </tr>
@@ -543,12 +545,13 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 </table>
 
 
-\* 数値は縮小し、gzip圧縮されたコードを<a href="http://closure-compiler.appspot.com/home">closure compiler</a>で計算したものです。
+\* Figures are for minified and gzipped code,
+computed with the <a href="http://closure-compiler.appspot.com/home">closure compiler</a>.
 
 {@a non-cli}
-## CLI未使用の場合のポリフィル設定
+## Polyfills for non-CLI users
 
-もしCLIを使用していない場合、自身で必要なポリフィルを直接WEBページ(`index.html`)に追加してください。おそらくこのようになります。
+If you are not using the CLI, you should add your polyfill scripts directly to the host web page (`index.html`), perhaps like this.
 
 <code-example header="src/index.html">
   &lt;!-- pre-zone polyfills -->

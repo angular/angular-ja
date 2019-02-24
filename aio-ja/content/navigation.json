@@ -558,6 +558,27 @@
               "tooltip": "Learn how AngularJS concepts and techniques map to Angular."
             }
           ]
+        },
+        {
+          "title": "Angular Libraries",
+          "tooltip": "Extending Angular with shared libraries.",
+          "children": [
+            {
+              "url": "guide/libraries",
+              "title": "Libraries Overview",
+              "tooltip": "Understand how and when to use or create libraries."
+            },
+            {
+              "url": "guide/using-libraries",
+              "title": "Using Published Libraries",
+              "tooltip": "Integrate published libraries into an app."
+            },
+            {
+              "url": "guide/creating-libraries",
+              "title": "Creating Libraries",
+              "tooltip": "Extend Angular by creating, publishing, and using your own libraries."
+            }
+          ]
         }
       ]
     },
@@ -618,8 +639,9 @@
         },
         {
           "url": "guide/browser-support",
-          "title": "Browser Support",
-          "tooltip": "Browser support and polyfills guide."
+          "title": "ブラウザサポート",
+          "tooltip": "ブラウザサポートとポリフィルのガイド",
+          "translated": true
         },
         {
           "title": "Dev Tool Integration",
@@ -801,6 +823,10 @@
         {
           "title": "日本語版",
           "url": "https://angular.jp/"
+        },
+        {
+          "title": "한국어",
+          "url": "https://angular.kr/"
         }
       ]
     }

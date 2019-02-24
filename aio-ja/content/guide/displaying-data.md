@@ -146,7 +146,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 コンストラクターを使用してプロパティを宣言して初期化することもできます。
 
 
-<code-example path="displaying-data/src/app/app-ctor.component.ts" linenums="false" region="class">
+<code-example path="displaying-data/src/app/app-ctor.component.1.ts" linenums="false" region="class">
 
 </code-example>
 

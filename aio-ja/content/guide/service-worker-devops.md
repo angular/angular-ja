@@ -205,11 +205,9 @@ AngularService Workerにはフェールセーフメカニズムが組み込ま�
 
 ### フェールセーフ
 
-Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。
+Service Workerを非アクティブにするには、 `ngsw.json`ファイルを削除するか名前を変更します。
 Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、
 自身を登録解除し、自己破棄します。
-Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。
-Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、自身を登録解除し、自己破棄します。
 
 ### Safety Worker
 

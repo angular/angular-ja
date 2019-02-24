@@ -2,10 +2,9 @@
 
 echo "Checking aio changes in origin..."
 
-ngVersion="7.2.x"
-aioHash="7227b4a"
+aioHash="4bc0084"
 
-git -C origin fetch origin ${ngVersion}
+git -C origin fetch --all
 git -C origin reset ${aioHash} --hard
 
 node scripts/sync-origin.js

@@ -34,7 +34,21 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 [セットアップガイド](guide/setup)では、次の`tsconfig.json`が使用されています。
 
-<code-example path="quickstart/src/tsconfig.1.json" header="tsconfig.json" linenums="false"></code-example>
+<code-example lang="json" header="tsconfig.json" linenums="false">
+  {
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "lib": [ "es2015", "dom" ],
+      "noImplicitAny": true,
+      "suppressImplicitAnyIndexErrors": true
+    }
+  }
+</code-example>
 
 このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
 

@@ -370,6 +370,27 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
   </tr>
 
+  <tr style="vertical-align: top">
+
+    <td>
+
+      [Router](guide/router) 
+      
+      when using [hash-based routing](guide/router#appendix-locationstrategy-and-browser-url-styles)
+    </td>
+
+    <td>
+
+      [ES7/array](guide/browser-support#core-es7-array)
+
+    </td>
+
+    <td>
+      IE 11
+    </td>
+
+  </tr>
+
 </table>
 
 
@@ -400,7 +421,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-      <a id='core-es7-reflect' href="https://github.com/zloirock/core-js/blob/master/es7/reflect.js">ES7/reflect</a>
+      <a id='core-es7-reflect' href="https://github.com/zloirock/core-js/tree/v2/fn/reflect">ES7/reflect</a>
 
     </td>
 
@@ -410,6 +431,24 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
       0.5KB
+    </td>
+
+  </tr>
+
+  <tr>
+
+    <td>
+
+      <a id='core-es7-array' href="https://github.com/zloirock/core-js/tree/v2/fn/array">ES7/array</a>
+
+    </td>
+
+    <td>
+      MIT
+    </td>
+
+    <td>
+      0.1KB
     </td>
 
   </tr>

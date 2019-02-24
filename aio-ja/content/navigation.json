@@ -580,8 +580,8 @@
         },
         {
           "url": "guide/workspace-config",
-          "title": "Angular Workspace の設定",
-          "tooltip": "\"angular.json\" ファイルには Angular CLI コマンドのワークスペースとプロジェクト設定のデフォルトが含まれています。",
+          "title": "Angularワークスペースの設定",
+          "tooltip": "\"angular.json\" ファイルにはAngular CLIコマンドによるワークスペースとプロジェクト設定のデフォルトが含まれています。",
           "translated": true
         },
         {

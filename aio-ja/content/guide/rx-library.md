@@ -52,7 +52,7 @@ RxJS には多くのオペレーターが用意されていますが、頻繁に
 
 | エリア | オペレーター |
 | :------------| :----------|
-| Creation |  `from`, `fromPromise`,`fromEvent`, `of` |
+| Creation |  `from`, `fromEvent`, `of` |
 | Combination | `combineLatest`, `concat`, `merge`, `startWith` , `withLatestFrom`, `zip` |
 | Filtering | `debounceTime`, `distinctUntilChanged`, `filter`, `take`, `takeUntil` |
 | Transformation | `bufferTime`, `concatMap`, `map`, `mergeMap`, `scan`, `switchMap` |

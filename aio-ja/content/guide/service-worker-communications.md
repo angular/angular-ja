@@ -35,10 +35,20 @@ Service Workerに、サーバーにデプロイされたアップデートがあ
 
 `checkForUpdate()`メソッドで行います。
 
-<code-example path="service-worker-getting-started/src/app/check-for-update.service.ts" linenums="false" header="check-for-update.service.ts" region="sw-check-update"> </code-example>
+<code-example path="service-worker-getting-started/src/app/check-for-update.service.ts" linenums="false" header="check-for-update.service.ts"> </code-example>
 
 
 このメソッドは、更新チェックが正常に完了したことを示すPromiseを返しますが、チェックの結果アップデートが検出されたかどうかは示しません。アップデートが見つかったとしても、Service Workerは変更されたファイルを正常にダウンロードする必要があり、まだ失敗する可能性があるからです。成功した場合、availableイベントが、新しいバージョンのアプリケーションが使用可能になったことを示します。
+
+<div class="alert is-important">
+
+初期レンダリングに悪影響を与えないようにするために、 `ServiceWorkerModule`はデフォルトでService Workerスクリプトを登録する前にアプリが安定するのを待ちます。たとえば`interval()`を使った継続的なアップデートのポーリングは、アプリが安定するのを妨げ、Service Workerスクリプトがブラウザに登録されなくなります。
+
+アップデートのポーリングを開始する前に、まずアプリが安定するのを待つことでこれを回避できます。（上記の例に示すように）
+
+これはあなたのアプリケーションによって行われるどんな種類のポーリングにもあてはまることに注意してください。詳しくは{@link ApplicationRef#isStable isStable}のドキュメントを確認してください。
+
+</div>
 
 ### アップデートのアクティブ化を強制する
 

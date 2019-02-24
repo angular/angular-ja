@@ -491,6 +491,8 @@ RxJSの`Subject`として定義されています。これは、`search()`メソ
 
 </div>
 
+{@a intercepting-requests-and-responses}
+
 ### リクエストとレスポンスのインターセプト
 
 _HTTP Interception_は`@angular/common/http`の主要な機能です。

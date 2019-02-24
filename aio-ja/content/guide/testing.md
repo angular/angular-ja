@@ -669,7 +669,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 #### _createComponent()_
 
-`TestBed`を構成したら`createComponent()`メソッドを呼び出します。。
+`TestBed`を構成したら`createComponent()`メソッドを呼び出します。
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
@@ -2206,7 +2206,7 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 
 `[routerLink]`属性にバインドされたURLは、ディレクティブの`linkParams`プロパティに流れます。
 
-`host`メタデータプロパティは、
+`HostListener`メタデータプロパティは、
 ホスト要素のクリックイベント(`AppComponent`の`<a>`アンカー要素)をスタブディレクティブの`onClick`メソッドに紐づけます。
 
 アンカーをクリックすると、
@@ -2817,7 +2817,7 @@ DOMとのやりとりがほとんどありません。
 
 アプリケーションをデバッグするのと同じ方法で、ブラウザ内のスペックをデバッグします。
 
-1. カルマのブラウザウィンドウを表示します（前に隠れています）。
+1. Karmaのブラウザウィンドウを表示します（前に隠れています）。
 1. **DEBUG**ボタンをクリックします。新しいブラウザタブが開き、テストを再実行します。
 1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、OSXでは`Command-Option-I`）を開きます。
 1. "sources"セクションを選択します。

@@ -23,7 +23,7 @@ Just run the [`ng test`](cli/test) CLI command:
 </code-example>
 
 The `ng test` command builds the app in _watch mode_,
-and launches the [karma test runner](https://karma-runner.github.io).
+and launches the [Karma test runner](https://karma-runner.github.io).
 
 The console output looks a bit like this:
 
@@ -55,15 +55,15 @@ The tests run again, the browser refreshes, and the new test results appear.
 
 #### Configuration
 
-The CLI takes care of Jasmine and karma configuration for you.
+The CLI takes care of Jasmine and Karma configuration for you.
 
 You can fine-tune many options by editing the `karma.conf.js` and
 the `test.ts` files in the `src/` folder.
 
-The `karma.conf.js` file is a partial karma configuration file.
-The CLI constructs the full runtime configuration in memory,based on application structure specified in the `angular.json` file, supplemented by `karma.conf.js`.
+The `karma.conf.js` file is a partial Karma configuration file.
+The CLI constructs the full runtime configuration in memory, based on application structure specified in the `angular.json` file, supplemented by `karma.conf.js`.
 
-Search the web for more details about Jasmine and karma configuration.
+Search the web for more details about Jasmine and Karma configuration.
 
 #### Other test frameworks
 
@@ -99,7 +99,7 @@ Continuous integration (CI) servers let you set up your project repository so th
 There are paid CI services like Circle CI and Travis CI, and you can also host your own for free using Jenkins and others. 
 Although Circle CI and Travis CI are paid services, they are provided free for open source projects. 
 You can create a public project on GitHub and add these services without paying. 
-Contributions to the Angular repo are automatically run through a whole suite of Circle CI and Travis CI tests.
+Contributions to the Angular repo are automatically run through a whole suite of Circle CI tests.
 
 This article explains how to configure your project to run Circle CI and Travis CI, and also update your test configuration to be able to run tests in the Chrome browser in either environment.
 
@@ -2205,7 +2205,7 @@ seen in the `AppComponent` template.
 
 The URL bound to the `[routerLink]` attribute flows in to the directive's `linkParams` property.
 
-The `host` metadata property wires the click event of the host element
+The `HostListener` wires the click event of the host element
 (the `<a>` anchor elements in `AppComponent`) to the stub directive's `onClick` method.
 
 Clicking the anchor should trigger the `onClick()` method,
@@ -2650,10 +2650,10 @@ It takes two arguments: the component type to override (`HeroDetailComponent`) a
 The [override metadata object](#metadata-override-object) is a generic defined as follows:
 
 <code-example format="." language="javascript">
-  type MetadataOverride<T> = {
-    add?: Partial<T>;
-    remove?: Partial<T>;
-    set?: Partial<T>;
+  type MetadataOverride&lt;T&gt; = {
+    add?: Partial&lt;T&gt;;
+    remove?: Partial&lt;T&gt;;
+    set?: Partial&lt;T&gt;;
   };
 </code-example>
 
@@ -2816,7 +2816,7 @@ Consider adding component tests such as this one:
 
 Debug specs in the browser in the same way that you debug an application.
 
-1. Reveal the karma browser window (hidden earlier).
+1. Reveal the Karma browser window (hidden earlier).
 1. Click the **DEBUG** button; it opens a new browser tab and re-runs the tests.
 1. Open the browser's “Developer Tools” (`Ctrl-Shift-I` on windows; `Command-Option-I` in OSX).
 1. Pick the "sources" section.
@@ -3008,10 +3008,10 @@ appropriate to the method, that is, the parameter of an `@NgModule`,
 `@Component`, `@Directive`, or `@Pipe`.
 
 <code-example format="." language="javascript">
-  type MetadataOverride<T> = {
-    add?: Partial<T>;
-    remove?: Partial<T>;
-    set?: Partial<T>;
+  type MetadataOverride&lt;T&gt; = {
+    add?: Partial&lt;T&gt;;
+    remove?: Partial&lt;T&gt;;
+    set?: Partial&lt;T&gt;;
   };
 </code-example>
 

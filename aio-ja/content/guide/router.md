@@ -896,11 +896,11 @@ Replace the contents of each component with the sample HTML below.
 
 <code-tabs>
 
-  <code-pane header="src/app/crisis-list/crisis-list.component.html" path="router/src/app/crisis-list/crisis-list.component.html">
+  <code-pane header="src/app/crisis-list/crisis-list.component.html" path="router/src/app/crisis-list/crisis-list.component.1.html">
 
   </code-pane>
 
-  <code-pane header="src/app/hero-list/hero-list.component.html" path="router/src/app/hero-list/hero-list.component.html" region="template">
+  <code-pane header="src/app/hero-list/hero-list.component.html" path="router/src/app/hero-list/hero-list.component.1.html" region="template">
 
   </code-pane>
 
@@ -972,7 +972,7 @@ Be sure it is the _last_ route in the configuration.
 
 To test this feature, add a button with a `RouterLink` to the `HeroListComponent` template and set the link to `"/sidekicks"`.
 
-<code-example path="router/src/app/hero-list/hero-list.component.html" linenums="false" header="src/app/hero-list/hero-list.component.html (excerpt)">
+<code-example path="router/src/app/hero-list/hero-list.component.1.html" linenums="false" header="src/app/hero-list/hero-list.component.html (excerpt)">
 
 </code-example>
 
@@ -1239,11 +1239,11 @@ Here are the files discussed in this milestone.
 
   </code-pane>
 
-  <code-pane header="hero-list/hero-list.component.html" path="router/src/app/hero-list/hero-list.component.html">
+  <code-pane header="hero-list/hero-list.component.html" path="router/src/app/hero-list/hero-list.component.1.html">
 
   </code-pane>
 
-  <code-pane header="crisis-list/crisis-list.component.html" path="router/src/app/crisis-list/crisis-list.component.html">
+  <code-pane header="crisis-list/crisis-list.component.html" path="router/src/app/crisis-list/crisis-list.component.1.html">
 
   </code-pane>
 
@@ -1304,7 +1304,7 @@ Create an `AppRouting` module in the `/app` folder to contain the routing config
   ng generate module app-routing --module app --flat
 </code-example>
 
-Import the `CrisisListComponent`, `HeroListComponent`, and `PageNotFoundCompponent` symbols
+Import the `CrisisListComponent`, `HeroListComponent`, and `PageNotFoundComponent` symbols
 just like you did in the `app.module.ts`. Then move the `Router` imports
 and routing configuration, including `RouterModule.forRoot`, into this routing module.
 
@@ -2242,10 +2242,10 @@ This file does the following:
 
 You could also create more transitions for other routes. This trigger is sufficient for the current milestone.
 
-Back in the `AppComponent`, import the `RouterOutlet` token from the `@angular/router` package and the `slideInDownAnimation` from 
+Back in the `AppComponent`, import the `RouterOutlet` token from the `@angular/router` package and the `slideInAnimation` from 
 `'./animations.ts`.
 
-Add an `animations` array to the `@Component` metadata's that contains the `slideInDownAnimation`.
+Add an `animations` array to the `@Component` metadata's that contains the `slideInAnimation`.
 
 <code-example path="router/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (animations)" region="animation-imports">
 
@@ -3392,10 +3392,10 @@ The admin feature is now protected by the guard, albeit protected poorly.
 
 Make the `AuthGuard` at least pretend to authenticate.
 
-The `AuthGuard` should call an application service that can login a user and retain information about the current user. Generate a new `AuthService` in the `admin` folder:
+The `AuthGuard` should call an application service that can login a user and retain information about the current user. Generate a new `AuthService` in the `auth` folder:
 
 <code-example language="none" class="code-shell">
-  ng generate service admin/auth
+  ng generate service auth/auth
 </code-example>
 
 Update the `AuthService` to log in the user:
@@ -3796,7 +3796,7 @@ The relevant *Crisis Center* code for this milestone follows.
 
   </code-pane>
 
-  <code-pane header="crisis-detail.component.html" path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.html">
+  <code-pane header="crisis-detail.component.ts" path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.ts">
 
   </code-pane>
 

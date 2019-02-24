@@ -194,7 +194,7 @@ Chromeなどのブラウザは、Service Workerとやり取りするための開
 * Cache Storageビューアを見ると、キャッシュは頻繁に古くなっています。Cache Storageタイトルを右クリックし、キャッシュをリフレッシュしてください。
 
 Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
-d
+
 ## Service Workerの安全性
 
 あらゆる複雑なシステムと同様に、バグや壊れた設定によって、
@@ -205,11 +205,9 @@ AngularService Workerにはフェールセーフメカニズムが組み込ま�
 
 ### フェールセーフ
 
-Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。
+Service Workerを非アクティブにするには、 `ngsw.json`ファイルを削除するか名前を変更します。
 Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、
 自身を登録解除し、自己破棄します。
-Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。
-Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、自身を登録解除し、自己破棄します。
 
 ### Safety Worker
 

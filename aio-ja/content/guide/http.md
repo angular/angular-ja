@@ -450,7 +450,7 @@ termが「foo」の場合、GETリクエストURLは`api/heroes/?name=foo`にな
 <code-example 
   path="http/src/app/package-search/package-search.component.ts"
   region="debounce" 
-  header="app/package-search/package-search.component.ts (excerpt))">
+  header="app/package-search/package-search.component.ts (excerpt)">
 </code-example>
 
 `searchText$`は、ユーザーからの検索ボックス値のシーケンスです。
@@ -490,6 +490,8 @@ RxJSの`Subject`として定義されています。これは、`search()`メソ
 このデバウンスロジックを再利用しようと考えるなら、ユーティリティ関数または`PackageSearchService`自体に移すことを検討してください。
 
 </div>
+
+{@a intercepting-requests-and-responses}
 
 ### リクエストとレスポンスのインターセプト
 
@@ -804,8 +806,10 @@ _cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー*
 
 <div class="alert is-important">
 
-すべてのプログレスイベントはchange detectionをトリガーします。
-したがって、UIで進捗状況を本当に報告するつもりの場合にのみ、それらを有効にしてください。
+すべてのプログレスイベントはchange detectionをトリガーします。したがって、UIで進捗状況を本当に報告するつもりの場合にのみ、それらを有効にしてください。
+
+[`HttpClient#request()`](api/common/http/HttpClient#request)でHTTPメソッドを使うときには、configure with
+[`observe: 'events'`](api/common/http/HttpClient#request)で転送のプログレスを含むすべてのイベントを見るように設定してください。
 
 </div>
 

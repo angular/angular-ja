@@ -1,10 +1,9 @@
-# Routing & Navigation
+# ルーティングと画面遷移
 
-The Angular **`Router`** enables navigation from one [view](guide/glossary#view) to the next
-as users perform application tasks.
+ユーザーがタスクを実行すると、Angularの **`Router`** は [view](guide/glossary#view) を次のviewへと遷移させることができます.
 
-This guide covers the router's primary features, illustrating them through the evolution
-of a small application that you can <live-example>run live in the browser</live-example>.
+このガイドはルーターの重要な機能をカバーしており、
+<live-example>ブラウザで実行可能な</live-example>小さなアプリケーションを進化させながら、それを説明していきます。
 
 <!-- style for all tables on this page -->
 <style>
@@ -12,33 +11,31 @@ of a small application that you can <live-example>run live in the browser</live-
 </style>
 
 
-## Overview
+## 概要
 
-The browser is a familiar model of application navigation:
+アプリケーションの画面遷移はブラウザと似たような構造をしています。
 
-* Enter a URL in the address bar and the browser navigates to a corresponding page.
-* Click links on the page and the browser navigates to a new page.
-* Click the browser's back and forward buttons and the browser navigates
-  backward and forward through the history of pages you've seen.
+* アドレスバーにURLを入力すると、ブラウザはそれに対応するページへと遷移させます。
+* ページのリンクをクリックすると、新しいページに遷移します。
+* ブラウザの進む/戻るボタンをクリックすると、ユーザーの閲覧履歴を使って進んだり戻ったりします。
 
-The Angular `Router` ("the router") borrows from this model.
-It can interpret a browser URL as an instruction to navigate to a client-generated view.
-It can pass optional parameters along to the supporting view component that help it decide what specific content to present.
-You can bind the router to links on a page and it will navigate to
-the appropriate application view when the user clicks a link.
-You can navigate imperatively when the user clicks a button, selects from a drop box,
-or in response to some other stimulus from any source. And the router logs activity
-in the browser's history journal so the back and forward buttons work as well.
+Angular `Router` (いわゆるルーター) は、これらの構造を取り入れています。
+ブラウザのURLを検知して、クライアント側で生成されたページへと遷移させることができます。
+任意のパラメータをviewに伝えることで、それに応じた特別なコンテンツを表示させることができます。
+ページのリンクにルーターをバインドさせて、クリック時に適切なviewへ遷移させることもできます。
+ボタンのクリックやセレクトボックスの選択、その他あらゆる要素から発生するさまざまなイベントに応じて、画面遷移を強行することもできます。
+そしてルーターの行動はブラウザ閲覧履歴に残され、進む/戻るボタンが正常に動作するようになります。
+
 
 {@a basics}
 
 
-## The Basics
+## 基礎
 
-This guide proceeds in phases, marked by milestones, starting from a simple two-pager
-and building toward a modular, multi-view design with child routes.
+このガイドはマイルストーンが置かれたフェーズの中で始まります。
+まずはシンプルな2ページをモジュラーに組み立て、子ルートをもつmulti-viewデザインにします。
 
-An introduction to a few core router concepts will help orient you to the details that follow.
+ルーターの少しコアな前書きが、この先の詳細を理解する上で助けになるでしょう。
 
 
 {@a basics-base-href}
@@ -46,11 +43,11 @@ An introduction to a few core router concepts will help orient you to the detail
 
 ### *&lt;base href>*
 
-Most routing applications should add a `<base>` element to the `index.html` as the first child in the  `<head>` tag
-to tell the router how to compose navigation URLs.
+ほとんどのルーティング可能なアプリケションは、`index.html`の`<head>`の最初の子要素として`<base>`要素を追加すべきです。
+ルーターに対し、遷移先URLをどのように構成するかを教えるためです。
 
-If the `app` folder is the application root, as it is for the sample application,
-set the `href` value *exactly* as shown here.
+サンプルアプリケーションと同様に、`app`フォルダがアプリケーションルートなのであれば、
+ここに示す`href`の値を *確実に* セットしてください。
 
 
 <code-example path="router/src/index.html" linenums="false" header="src/index.html (base-href)" region="base-href">
@@ -62,11 +59,11 @@ set the `href` value *exactly* as shown here.
 {@a basics-router-imports}
 
 
-### Router imports
+### ルーターのimport
 
-The Angular Router is an optional service that presents a particular component view for a given URL.
-It is not part of the Angular core. It is in its own library package, `@angular/router`.
-Import what you need from it as you would from any other Angular package.
+Angular Routerは、与えられたURLに対して一風変わったコンポーネントを提供するための付属サービスであり、
+Angularのコア機能ではありません。ルーターは`@angular/router`という独自ライブラリに入っています。
+他のAngularパッケージ同様、使用の際にはライブラリのインポートが必要です。
 
 
 <code-example path="router/src/app/app.module.1.ts" linenums="false" header="src/app/app.module.ts (import)" region="import-router">
@@ -79,7 +76,7 @@ Import what you need from it as you would from any other Angular package.
 
 
 
-You'll learn about more options in the [details below](#browser-url-styles).
+さらに多くのオプションを知りたいときは [次の章](#browser-url-styles) を参照してください。
 
 
 </div>
@@ -89,15 +86,14 @@ You'll learn about more options in the [details below](#browser-url-styles).
 {@a basics-config}
 
 
-### Configuration
 
-A routed Angular application has one singleton instance of the *`Router`* service.
-When the browser's URL changes, that router looks for a corresponding `Route`
-from which it can determine the component to display.
+### 設定
 
-A router has no routes until you configure it.
-The following example creates five route definitions, configures the router via the `RouterModule.forRoot` method,
-and adds the result to the `AppModule`'s `imports` array.
+ルーターを使ったAngularアプリケーションは *`Router`* サービスをシングルトンインスタンスとして保持します。
+ブラウザのURLが変わるとrouterは該当する `Route` を探し出し、表示するコンポーネントを特定することができます。
+
+ルーターはルートの設定がないと動きません。
+次の例では5つのルートを定義し、 `Module.forRoot` メソッドでルーターを構成し、それを `AppModule` の `imports` 配列へ追加しています。
 
 
 <code-example path="router/src/app/app.module.0.ts" linenums="false" header="src/app/app.module.ts (excerpt)">
@@ -108,49 +104,52 @@ and adds the result to the `AppModule`'s `imports` array.
 
 {@a example-config}
 
+*ルート* の配列である `appRoutes` で遷移方法を表現し、
+それを `RouterModule.forRoot` メソッドに渡してモジュールの `imports` に含めることでルーターを構成しています。
 
-The `appRoutes` array of *routes* describes how to navigate.
-Pass it to the `RouterModule.forRoot` method in the module `imports` to configure the router.
+個々の `Route` は `path` をコンポーネントにマッピングします。
+_path_ に _先頭のスラッシュ_ は入力しません。
+ルーターはパースされた完全なURLを提供します。
+アプリケーションのview間で遷移する場合は相対パスも絶対パスも利用可能です。
 
-Each `Route` maps a URL `path` to a component.
-There are _no leading slashes_ in the _path_.
-The router parses and builds the final URL for you,
-allowing you to use both relative and absolute paths when navigating between application views.
+2つ目のルートに現れる `:id` は、ルートパラメーターとして使われます。
+`/hero/42` のようなURLの場合、 `id` パラメータが"42"になります。
+それにより、対応する `HeroDetailComponent` は`id` が42のヒーローを探して提供することができます。
+さらにルートパラメーターについて知りたい場合、このガイドの後半をお読みください。
 
-The `:id` in the second route is a token for a route parameter. In a URL such as `/hero/42`, "42"
-is the value of the `id` parameter. The corresponding `HeroDetailComponent`
-will use that value to find and present the hero whose `id` is 42.
-You'll learn more about route parameters later in this guide.
+3つ目のルートに現れる `data` プロパティは、任意のデータを保持し、それを特定のルートに紐付けるために使われます。
+dataプロパティは起動されたルート内でアクセス可能であり、
+タイトルやパンくずリスト、その他リードオンリーな _静的_ データを利用するためのものです。
+_動的_ データをルートで受け取りたい場合、ガイドの後半で説明する [ガードの解消](#resolve-guard)  を使ってください。
 
-The `data` property in the third route is a place to store arbitrary data associated with
-this specific route. The data property is accessible within each activated route. Use it to store
-items such as page titles, breadcrumb text, and other read-only, _static_ data.
-You'll use the [resolve guard](#resolve-guard) to retrieve _dynamic_ data later in the guide.
+4つ目のルートに現れる **空のパス** はアプリケーションのデフォルトパスを表現しています。
+URL内のパスが空の場合に通るルートであり、通常はここがアプリケーションの起点となります。
+このデフォルトルートは `/heroes` というURLに該当するルートへリダイレクトしており、結果的に、このルートでは `HeroesListComponent` が表示されます。
 
-The **empty path** in the fourth route represents the default path for the application,
-the place to go when the path in the URL is empty, as it typically is at the start.
-This default route redirects to the route for the `/heroes` URL and, therefore, will display the `HeroesListComponent`.
+最後のルートに現れる `**` というパスは **ワイルドカード** です。
+ルーターがこのルートに繋ぐのは、ルート構成で定義されたパスに該当しないURLがリクエストされたときです。
+これは "404 - Not Found" ページを表示したり、別のルートにリダイレクトさせるときに役立ちます。
 
-The `**` path in the last route is a **wildcard**. The router will select this route
-if the requested URL doesn't match any paths for routes defined earlier in the configuration.
-This is useful for displaying a "404 - Not Found" page or redirecting to another route.
+ここでの **ルートの定義順** は意図的なものです。ルーターは **先勝ち** でルート選択を行うため、
+より優先度の高いルートは、優先度の低いルートより上に配置する必要があります。
+前に示したルート構成では、静的なパスをもつルートを先に配置し、次にデフォルトルートに繋ぐための空のパスをもつルートを配置しています。
+ワイルドカードのルートは _全てのURL_ にマッチするため、最後に配置します。
+もしこれより上に他のルート定義がなければ、_必ず_ このルートを通るようになってしまいます。
 
-**The order of the routes in the configuration matters** and this is by design. The router uses a **first-match wins**
-strategy when matching routes, so more specific routes should be placed above less specific routes.
-In the configuration above, routes with a static path are listed first, followed by an empty path route,
-that matches the default route.
-The wildcard route comes last because it matches _every URL_ and should be selected _only_ if no other routes are matched first.
-
-If you need to see what events are happening during the navigation lifecycle, there is the **enableTracing** option as part of the router's default configuration. This outputs each router event that took place during each navigation lifecycle to the browser console. This should only be used for _debugging_ purposes. You set the `enableTracing: true` option in the object passed as the second argument to the `RouterModule.forRoot()` method.
+画面遷移のライフサイクルの間でどのようにイベントが発火しているかを確認したい場合は、
+ルーターのデフォルト定義の1つである **enableTracing** オプションが有効です。
+これによって画面遷移ライフサイクルの間で起こるルーターの各イベントをブラウザコンソールに出力することができます。
+これは _デバッグ_ の目的でのみ使用してください。
+`enableTracing: true` オプションは `RouterModule.forRoot()` メソッドの第二引数にオブジェクトとして設定します。
 
 {@a basics-router-outlet}
 
 
-### Router outlet
+### ルーター差込
 
-The `RouterOutlet` is a directive from the router library that is used like a component. 
-It acts as a placeholder that marks the spot in the template where the router should 
-display the components for that outlet.
+`RouterOutlet` はルーターライブラリに含まれている、コンポーネントのように使えるディレクティブです。
+テンプレートの一部分に対するプレイスホルダーのように作用し、
+そのテンプレートはルーター経由で表示され、差込口のあるコンポーネントに定義されている必要があります。
 
 
 <code-example language="html">
@@ -159,9 +158,9 @@ display the components for that outlet.
 
 </code-example>
 
-Given the configuration above, when the browser URL for this application becomes `/heroes`,
-the router matches that URL to the route path `/heroes` and displays the `HeroListComponent`
-as a sibling element to the `RouterOutlet` that you've placed in the host component's template.
+前述した構成では、このアプリケーションに対してブラウザのURLが `/heroes` になったとき、
+`/heroes` パスを持ったルートにマッチングして `HeroListComponent` を表示します。
+`HeroListComponent` は元のコンポーネントのテンプレートに配置した `RouterOutlet` の兄弟要素となります。
 
 {@a basics-router-links}
 {@a router-link}

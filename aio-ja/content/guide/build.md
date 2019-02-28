@@ -6,11 +6,11 @@
 
 ## アプリケーション環境の設定
 
-*stage*や*production*など、様々なデフォルト設定を持った様々な名前付きビルド設定をプロジェクトに定義することができます。
+*stage*や*production*など、さまざまなデフォルト設定を持ったさまざまな名前付きビルド設定をプロジェクトに定義することができます。
 
-それぞれの名前付きビルド設定は、`build`、`serve`や`test`など、様々なビルドターゲットに適用されるオプション全てについてデフォルト設定を持つことができます。[Angular CLI](cli)の`build`、`serve`、そして`test`コマンドは、ファイルを目的のターゲット環境に適したバージョンに置き換えることができます。
+個々の名前付きビルド設定は、`build`、`serve`や`test`など、さまざまなビルドターゲットに適用されるオプションすべてについてデフォルト設定をもつことができます。[Angular CLI](cli)の`build`、`serve`、そして`test`コマンドは、ファイルを目的のターゲット環境に適したバージョンに置き換えることができます。
 
-以下の図はプロジェクトが複数のビルドターゲットを持つ様子を示しています。これらのビルドターゲットは、定義した名前付き設定を使って実行することができます。
+次の図はプロジェクトが複数のビルドターゲットをもつ様子を示しています。これらのビルドターゲットは、定義した名前付き設定を使って実行することができます。
 
 <figure>
   <img src="generated/images/guide/build/build-config-targets.gif" alt="build configurations and targets">
@@ -40,7 +40,7 @@ export const environment = {
 
 環境が指定されない場合、`build`コマンドはこれをビルドターゲットとして使用します。
 環境オブジェクトの追加プロパティとして、あるいは個別のオブジェクトとして、さらに変数を追加することができます。
-例えば、以下はデフォルト環境に変数のデフォルト値を追加しています:
+たとえば、次はデフォルト環境に変数のデフォルト値を追加しています:
 
 ```
 export const environment = {
@@ -50,7 +50,7 @@ export const environment = {
 ```
 
 `environment.prod.ts`のようなターゲット固有の設定ファイルを追加することができます。
-以下の内容は本番ビルドターゲットのデフォルト値を設定しています:
+次の内容は本番ビルドターゲットのデフォルト値を設定しています:
 
 ```
 export const environment = {
@@ -61,7 +61,7 @@ export const environment = {
 
 ### アプリで環境固有の変数の使用
 
-以下のアプリケーション構造は本番環境およびステージング環境用のビルドターゲットを設定しています:
+次のアプリケーション構造は本番環境およびステージング環境用のビルドターゲットを設定しています:
 
 ```
 └── src
@@ -82,7 +82,7 @@ import { environment } from './../environments/environment';
 
 これによりbuildコマンドとserveコマンドが特定のビルドターゲット用の設定を見つけることができるようになります。
 
-以下のコンポーネントファイル(`app.component.ts`)の中のコードは設定ファイルで定義された環境変数を使用しています。
+次のコンポーネントファイル(`app.component.ts`)の中のコードは設定ファイルで定義された環境変数を使用しています。
 
 ```
 import { Component } from '@angular/core';
@@ -144,7 +144,7 @@ export class AppComponent {
 このターゲット環境にもさらに設定オプションを追加することができます。
 ビルドでサポートされているオプションはすべてビルドターゲット設定でオーバーライドすることができます。
 
-ステージング設定を使ってビルドするには、以下のコマンドを実行してください:
+ステージング設定を使ってビルドするには、次のコマンドを実行してください:
 
 <code-example language="sh" class="code-shell">
  ng build --configuration=staging
@@ -192,7 +192,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
 アプリケーション全体、および特定の部分に対して、サイズ予算を指定することができます。
 各予算エントリは、特定の種類の予算を設定します。
-以下の形式でサイズ値を指定してください:
+次の形式でサイズ値を指定してください:
 
 * 123 or 123b: バイト単位のサイズ
 
@@ -204,7 +204,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
 予算を設定した場合、アプリの特定の部分が設定した境界サイズに達するか超えた際に、ビルドシステムによって警告または報告が行われ、エラーが発生します。
 
-各予算エントリは、以下のプロパティを持つJSONオブジェクトです:
+各予算エントリは、次のプロパティをもつJSONオブジェクトです:
 
 <table>
   <tr>
@@ -214,7 +214,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
   <tr>
     <td>type</td>
-    <td>予算の種類。以下のうちどれか:
+    <td>予算の種類。次のうちどれか:
 
         * bundle - 特定のバンドルのサイズ。
         * initial - アプリの初期サイズ。
@@ -296,7 +296,7 @@ AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定
 <div class="alert is-helpful">
 下位互換性
 
-もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)のプレフィックスを削除するために、以下のbrowserslistエントリを`package.json`に追加してください:
+もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)のプレフィックスを削除するために、次のbrowserslistエントリを`package.json`に追加してください:
 
 ```
 "browserslist": [
@@ -313,11 +313,11 @@ AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定
 ## バックエンドサーバーへのプロキシ
 
 `--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
-例えば、`http://localhost:4200/api`に対する全ての要求を`http://localhost:3000/api`で実行しているサーバーに転送するには、以下の手順を実行してください。
+たとえば、`http://localhost:4200/api`に対するすべての要求を`http://localhost:3000/api`で実行しているサーバーに転送するには、次の手順を実行してください。
 
 1. プロジェクトの`src/`フォルダーの中に`proxy.conf.json`ファイルを作成します。
 
-2. 以下のコンテンツを新しいプロキシファイルに追加します:
+2. 次のコンテンツを新しいプロキシファイルに追加します:
     ```
     {
       "/api": {
@@ -342,7 +342,7 @@ AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定
 
 4. このプロキシ設定で開発サーバーを起動するには、`ng serve`を実行します。
 
-プロキシ設定ファイルを編集して設定オプションを追加することができます。以下にいくつか例を示します。
+プロキシ設定ファイルを編集して設定オプションを追加することができます。次にいくつか例を示します。
 すべてのオプションの説明については、[webpack DevServer ドキュメンテーション](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を参照してください。
 
 プロキシ設定ファイルを編集した場合、変更を有効にするために`ng serve`プロセスを再起動する必要があることに注意してください。
@@ -350,7 +350,7 @@ AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定
 ### URLパスの書き換え
 
 `pathRewrite`プロキシ設定オプションを使って実行時にURLパスを書き換えることができます。 
-例えば、以下の`pathRewrite`値をプロキシ設定に指定してパスの末尾から"api"を削除することができます。
+たとえば、次の`pathRewrite`値をプロキシ設定に指定してパスの末尾から"api"を削除することができます。
 
 ```
 {
@@ -400,7 +400,7 @@ AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定
 
 JavaScriptで設定を定義することで、同じターゲットに対して複数のエントリをプロキシすることができます。
 
-（`proxy.conf.json`の代わりに）`proxy.conf.js`にプロキシ設定を用意し、以下の例のように設定ファイルを指定してください。
+（`proxy.conf.json`の代わりに）`proxy.conf.js`にプロキシ設定を用意し、次の例のように設定ファイルを指定してください。
 
 ```
 const PROXY_CONFIG = [
@@ -469,7 +469,7 @@ npm install --save-dev https-proxy-agent
 
 環境変数`http_proxy`または`HTTP_PROXY`を定義した場合、`npm start`を実行した際にエージェントが自動的に追加されコーポレートプロキシを介して要求を渡します。
 
-JavaScript設定ファイルで以下の内容を使用してください。
+JavaScript設定ファイルで次の内容を使用してください。
 
 ```
 var HttpsProxyAgent = require('https-proxy-agent');

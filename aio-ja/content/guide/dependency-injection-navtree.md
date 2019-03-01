@@ -122,18 +122,18 @@ TypeScript のインターフェースは、インターフェースをサポー
 {@a class-interface-parent}
 
 
-### Find a parent by its class interface
+### クラスインターフェースで親を探す
 
-You can find a parent component with a [class interface](guide/dependency-injection-in-action#class-interface).
+あなたは、[クラスインターフェイス](guide/dependency-injection-in-action#class-interface)をもつ親コンポーネントを見つけることができます。
 
-The parent must cooperate by providing an *alias* to itself in the name of a class interface token.
+親はクラスインターフェーストークンの名前で*エイリアス*を自身に提供することで協力しなければなりません。
 
-Recall that Angular always adds a component instance to its own injector;
-that's why you could inject *Alex* into *Cathy* [earlier](#known-parent).
+Angular は常にコンポーネントインスタンスを独自のインジェクターに追加します。
+だからあなたは[すぐに](#known-parent)*Cathy*に*Alex*を注入することができたのです。
 
-Write an [*alias provider*](guide/dependency-injection-in-action#useexisting)&mdash;a `provide` object literal with a `useExisting`
-definition&mdash;that creates an *alternative* way to inject the same component instance
-and add that provider to the `providers` array of the `@Component()` metadata for the `AlexComponent`.
+[*エイリアスプロバイダー*](guide/dependency-injection-in-action#useexisting) (`useExisting` 定義をもつ `provide` オブジェクトリテラル)を作成します。
+これは、同じコンポーネントインスタンスを注入し、そのプロバイダーを 
+`AlexComponent` の `@Component()` メタデータの `providers` 配列に追加する*代わりの*方法を作成します。
 
 {@a alex-providers}
 
@@ -143,11 +143,11 @@ and add that provider to the `providers` array of the `@Component()` metadata fo
 </code-example>
 
 
-[Parent](#parent-token) is the provider's class interface token.
-The [*forwardRef*](guide/dependency-injection-in-action#forwardref) breaks the circular reference you just created by having the `AlexComponent` refer to itself.
+[親](#parent-token) はプロバイダーのクラスインターフェーストークンです。
+[*forwardRef*](guide/dependency-injection-in-action#forwardref) は、作成したばかりの循環参照を、`AlexComponent` に自身を参照させることによって壊します。
 
-*Carol*, the third of *Alex*'s child components, injects the parent into its `parent` parameter,
-the same way you've done it before.
+*Alex* の3番目の子コンポーネントである *Carol* は、これまでと同じ方法で、
+親をその `parent` パラメータに挿入します。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="carol-class" header="parent-finder.component.ts (CarolComponent class)" linenums="false">
 
@@ -155,10 +155,10 @@ the same way you've done it before.
 
 
 
-Here's *Alex* and family in action.
+これが *Alex* と家族のアクションです。
 
 <figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex in action">
+  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex インアクション">
 </figure>
 
 

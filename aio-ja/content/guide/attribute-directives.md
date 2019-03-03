@@ -32,6 +32,10 @@ Angularには、3つのディレクティブがあります。
 
 {@a write-directive}
 
+ディレクティブは名前空間をサポートしないことに注意してください。
+
+<code-example path="attribute-directives/src/app/app.component.avoid.html" linenums="false" header="src/app/app.component.avoid.html (unsupported)" region="unsupported"></code-example>
+
 ### ディレクティブのコードを書く
 
 CLIコマンド [`ng generate directive`](cli/generate) をターミナル画面に入力して、ディレクティブクラスを作成します。

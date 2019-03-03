@@ -124,7 +124,7 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
 
       Angularがコンポーネントのビューと子のビュー、あるいはディレクティブが存在するビューをチェックした後に応答します。
 
-      `ngAfterViewInit` とその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
+      `ngAfterViewInit()` とその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
 
     </td>
   </tr>

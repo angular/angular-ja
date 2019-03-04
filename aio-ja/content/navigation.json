@@ -418,8 +418,9 @@
             },
             {
               "url": "guide/dependency-injection-in-action",
-              "title": "DI in Action",
-              "tooltip": "Techniques for dependency injection."
+              "title": "DIイン・アクション",
+              "tooltip": "依存性の注入のためのテクニック",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-navtree",

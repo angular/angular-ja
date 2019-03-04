@@ -1207,7 +1207,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-09}
 
-### Pipe names
+### パイプ名
 
 #### Style 02-09
 
@@ -1215,7 +1215,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** use consistent names for all pipes, named after their feature.
+**Do** 機能にちなんで名付けられた、すべてのパイプで一貫性のある名前を使ってください。
 
 
 </div>
@@ -1226,7 +1226,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides a consistent way to quickly identify and reference pipes.
+**Why?** 一貫した規則により、パイプをすばやく識別して参照することが容易になります。
 
 
 </div>
@@ -1246,11 +1246,11 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
   <tr>
 
     <th>
-      Symbol Name
+      シンボル名
     </th>
 
     <th>
-      File Name
+      ファイル名
     </th>
 
   </tr>

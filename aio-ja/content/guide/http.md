@@ -576,7 +576,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
   header="app/http-interceptors/index.ts" linenums="false">
 </code-example>
 
-次に、それをインポートして`AppModule`_providers配列_に追加します。
+次に、それをインポートして`AppModule`の _providers配列_ に追加します。
 
 <code-example 
   path="http/src/app/app.module.ts"

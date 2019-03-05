@@ -1310,7 +1310,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** テスト記述ファイルには、テストするコンポーネントと同じ名前をつけます。
+**Do** テスト仕様ファイルには、テストするコンポーネントと同じ名前をつけます。
 
 
 </div>
@@ -1321,7 +1321,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** テスト記述ファイルには、`.spec` というサフィックスをつけます。
+**Do** テスト仕様ファイルには、`.spec` というサフィックスをつけます。
 
 
 </div>

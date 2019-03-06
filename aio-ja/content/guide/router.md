@@ -166,43 +166,45 @@ URL内のパスが空の場合に通るルートであり、通常はここが�
 {@a router-link}
 
 
-### Router links
+### ルーターリンク
 
-Now you have routes configured and a place to render them, but
-how do you navigate? The URL could arrive directly from the browser address bar.
-But most of the time you navigate as a result of some user action such as the click of
-an anchor tag.
+これでルート設定とその設置が終わったわけですが、画面遷移はどうでしょうか？
+URLがブラウザのアドレスバーから直接渡されることもあるでしょう。
+しかしほとんどの場合、アンカータグをクリックするようなユーザーアクションを伴って画面遷移します。
 
-Consider the following template:
+後述のテンプレートについて考えてみましょう。
 
 
 <code-example path="router/src/app/app.component.1.html" linenums="false" header="src/app/app.component.html">
 
 </code-example>
 
-The `RouterLink` directives on the anchor tags give the router control over those elements.
-The navigation paths are fixed, so you can assign a string to the `routerLink` (a "one-time" binding).
+アンカータグに記述した `RouterLink` ディレクティブは、これらの要素からルーター操作を可能にします。
+遷移先のパスは固定であれば、`routerLink` に文字列を割り当てることができます。 (ワンタイムバインディングとなります)
 
-Had the navigation path been more dynamic, you could have bound to a template expression that
-returned an array of route link parameters (the _link parameters array_).
-The router resolves that array into a complete URL.
+遷移先のパスがもっと動的なものだったら、ルーターリンクパラメーターの配列 (_リンクパラメーター配列_) を返すような
+テンプレート表現をバインドすることができます。ルーターはその配列を解決して完全なURLにします。
 
 
 {@a router-link-active}
 
 
-### Active router links
+### 動的ルーターリンク
 
-The `RouterLinkActive` directive toggles css classes for active `RouterLink` bindings based on the current `RouterState`.
+`RouterLinkActive` ディレクティブはCSSクラスを切り替え、現在の `RouterState` に基づいて `RouterLink` を紐付けます。
 
-On each anchor tag, you see a [property binding](guide/template-syntax#property-binding) to the `RouterLinkActive` directive that look like `routerLinkActive="..."`.
+`RouterLinkActive` は `routerLinkActive="..."` のように表しますが、アンカータグにおける使い方の詳細は
+[プロパティーバインディング](guide/template-syntax#property-binding)を参照してください。
 
-The template expression to the right of the equals (=) contains a space-delimited string of CSS classes
-that the Router will add when this link is active (and remove when the link is inactive). You set the `RouterLinkActive` 
-directive to a string of classes such as `[routerLinkActive]="'active fluffy'"` or bind it to a component 
-property that returns such a string. 
+イコール (=) の右側にはスペース区切りのCSSクラスが含まれており、それによってルーターはいつこのリンクをアクティブにするか
+(そしていつリンクを非アクティブにするか) を決定します。
+`RouterLinkActive` ディレクトリブは `[routerLinkActive]="'active fluffy'"` のようなクラスに設定することもできるし、
+そういった文字列を返すようなコンポーネントプロパティに紐付けることもできます。
 
-Active route links cascade down through each level of the route tree, so parent and child router links can be active at the same time. To override this behavior, you can bind to the `[routerLinkActiveOptions]` input binding with the `{ exact: true }` expression. By using `{ exact: true }`, a given `RouterLink` will only be active if its URL is an exact match to the current URL.
+アクティブなルートリンクは、ルート木の個々のレベルに浸透していきます。そのため親子のルーターリンクは
+同時にアクティブになります。この振る舞いを無効にしたい場合は、 `[routerLinkActiveOptions]` 入力に対して
+`{ exact: true }` という表現を指定してください。`{ exact: true }` を使うことで、
+指定のURLと現在のURLが完全にマッチしたときだけ `RouterLink` をアクティブにすることができます。
 
 
 {@a basics-router-state}

@@ -438,7 +438,7 @@
         {
           "url": "guide/router",
           "title": "ルーティングと画面遷移",
-          "tooltip": "Angular Routerによる画面遷移の基本を理解しましょう"
+          "tooltip": "Angularルーターによる画面遷移の基本を理解しましょう"
         },
         {
           "title": "アニメーション",

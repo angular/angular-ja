@@ -1302,7 +1302,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-10}
 
-### Unit test file names
+### ユニットテストのファイル名
 
 #### Style 02-10
 
@@ -1310,7 +1310,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** name test specification files the same as the component they test.
+**Do** テスト仕様ファイルには、テストするコンポーネントと同じ名前をつけます。
 
 
 </div>
@@ -1321,7 +1321,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** name test specification files with a suffix of `.spec`.
+**Do** テスト仕様ファイルには、`.spec` というサフィックスをつけます。
 
 
 </div>
@@ -1332,8 +1332,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides a consistent way to quickly identify tests.
-
+**Why?** 一貫した規則によりテストをすばやく認識することが容易になります。
 
 </div>
 
@@ -1343,7 +1342,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides pattern matching for [karma](http://karma-runner.github.io/) or other test runners.
+**Why?** [karma](http://karma-runner.github.io/) や他のテストランナーでパターンマッチできるようになります。
 
 
 </div>
@@ -1365,11 +1364,11 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
   <tr>
 
     <th>
-      Test Type
+      テストタイプ
     </th>
 
     <th>
-      File Names
+      ファイル名
     </th>
 
   </tr>
@@ -1379,7 +1378,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
     <td>
 
 
-      Components
+      コンポーネント
     </td>
 
     <td>
@@ -1399,7 +1398,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
     <td>
 
 
-      Services
+      サービス
     </td>
 
     <td>
@@ -1419,7 +1418,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
     <td>
 
 
-      Pipes
+      パイプ
     </td>
 
     <td>

@@ -1100,7 +1100,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-06}
 
-### ディレクティブのセレクタ
+### ディレクティブのセレクター
 
 #### Style 02-06
 
@@ -1109,7 +1109,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** ディレクティブのセレクタ名にはlowerCamelCaseを使用してください。
+**Do** ディレクティブのセレクター名にはlowerCamelCaseを使用してください。
 
 
 </div>
@@ -1148,7 +1148,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** ディレクティブのセレクタにはカスタムプレフィクスを付与してください（例： `toh` というプレフィクスは **T**our **o**f **H**eroes に由来します）。
+**Do** ディレクティブのセレクターにはカスタムプレフィクスを付与してください（例： `toh` というプレフィクスは **T**our **o**f **H**eroes に由来します）。
 
 
 </div>
@@ -1159,7 +1159,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** ネイティブのHTML属性にマッチさせることを意図しない限り、非要素のセレクタはlowerCamelCaseで命名してください。
+**Do** ネイティブのHTML属性にマッチさせることを意図しない限り、非要素のセレクターはlowerCamelCaseで命名してください。
 
 
 </div>

@@ -133,7 +133,7 @@ URL内のパスが空の場合に通るルートであり、通常はここが�
 ここでの **ルートの定義順** は意図的なものです。ルーターは **先勝ち** でルート選択を行うため、
 より優先度の高いルートは、優先度の低いルートより上に配置する必要があります。
 前に示したルート構成では、静的なパスをもつルートを先に配置し、次にデフォルトルートに繋ぐための空のパスをもつルートを配置しています。
-ワイルドカードのルートは _全てのURL_ にマッチするため、最後に配置します。
+ワイルドカードのルートは _すべてのURL_ にマッチするため、最後に配置します。
 もしこれより上に他のルート定義がなければ、_必ず_ このルートを通るようになってしまいます。
 
 画面遷移のライフサイクルの間でどのようにイベントが発火しているかを確認したい場合は、
@@ -189,7 +189,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 {@a router-link-active}
 
 
-### アクティブなルーターリンク
+### ルーターリンクのアクティブ化
 
 `RouterLinkActive` ディレクティブはCSSクラスを切り替え、現在の `RouterState` に基づいて `RouterLink` を紐付けます。
 
@@ -210,32 +210,32 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 {@a basics-router-state}
 
 
-### Router state
+### ルーターステート
 
-After the end of each successful navigation lifecycle, the router builds a tree of `ActivatedRoute` objects
-that make up the current state of the router. You can access the current `RouterState` from anywhere in the
-application using the `Router` service and the `routerState` property.
+画面遷移のライフサイクルが完成すると、ルーターは現在のステートを作り出す `ActivatedRoute` オブジェクトのツリーを組み立てます。
+`Router` サービスと `routerState` プロパティを使っていれば、
+アプリケーションのどこからでも現在の `RouterState` にアクセス可能です。
 
-Each `ActivatedRoute` in the `RouterState` provides methods to traverse up and down the route tree
-to get information from parent, child and sibling routes.
+`RouterState` に含まれる個々の `ActivatedRoute` は、
+ルートツリーの上下関係を飛び越えて、親ルートや子ルート、兄弟ルートの情報を取得可能なメソッドを提供します。
 
 {@a activated-route}
 
 
-### Activated route
+### アクティブ化されたルート
 
-The route path and parameters are available through an injected router service called the
-[ActivatedRoute](api/router/ActivatedRoute).
-It has a great deal of useful information including:
+インジェクトされた [ActivatedRoute](api/router/ActivatedRoute) という名のルーターサービスを通して、
+ルートパスやパラメータを利用可能です。
+そこには次のようにたくさんの役立つ情報が含まれています。
 
 <table>
   <tr>
     <th>
-      Property
+      プロパティ
     </th>
 
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -245,7 +245,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` of the route path(s), represented as an array of strings for each part of the route path.
+    ルートパスの個々のパーツである文字列配列を含む `Observable` です。
 
     </td>
   </tr>
@@ -256,7 +256,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` that contains the `data` object provided for the route. Also contains any resolved values from the [resolve guard](#resolve-guard).
+    ルートから提供される `data` オブジェクトを含む `Observable` です。
+    また、[解決ガード](#resolve-guard) によって解決された値もすべて含みます。
 
     </td>
   </tr>
@@ -267,7 +268,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` that contains a [map](api/router/ParamMap) of the required and [optional parameters](#optional-route-parameters) specific to the route. The map supports retrieving single and multiple values from the same parameter.
+    ルーターに必須または [任意のパラメーター](#optional-route-parameters) の詳細をもつ、[マップ](api/router/ParamMap) を含む `Observable` です。
+    マップは同じパラメーターから単一または複数の値を取り出す機能をサポートしています。
 
     </td>
   </tr>
@@ -278,8 +280,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` that contains a [map](api/router/ParamMap) of the [query parameters](#query-parameters) available to all routes.
-    The map supports retrieving single and multiple values from the query parameter.
+    すべてのルートで利用可能な [クエリパラメーター](#query-parameters) の [マップ](api/router/ParamMap) を含む `Observable` です。
+    マップは同じパラメーターから単一または複数の値を取り出す機能をサポートしています。
 
     </td>
   </tr>
@@ -290,7 +292,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` of the URL [fragment](#fragment) available to all routes.
+    すべてのルートで利用可能なURLの [フラグメント](#fragment) を含む `Observable` です。
 
     </td>
   </tr>
@@ -301,7 +303,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    The name of the `RouterOutlet` used to render the route. For an unnamed outlet, the outlet name is _primary_.
+    ルートの描写に有効な `RouterOutlet` です。無名のアウトレットは _primary_ という名前になります。
 
     </td>
   </tr>
@@ -312,7 +314,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    The route configuration used for the route that contains the origin path.
+    オリジンパスを含むルートに使われている設定です。
 
     </td>
   </tr>
@@ -323,7 +325,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    The route's parent `ActivatedRoute` when this route is a [child route](#child-routing-component).
+    このルートが [子ルート](#child-routing-component) の場合、親となる `ActivatedRoute`。
 
     </td>
   </tr>
@@ -334,7 +336,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    Contains the first `ActivatedRoute` in the list of this route's child routes.
+    このルートの子ルートの中で最初の `ActivatedRoute`。
 
     </td>
   </tr>
@@ -345,7 +347,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    Contains all the [child routes](#child-routing-component) activated under the current route.
+    現在のルートの配下にある、すべてのアクティブな [子ルート](#child-routing-component)。
 
     </td>
   </tr>
@@ -353,27 +355,29 @@ It has a great deal of useful information including:
 
 <div class="alert is-helpful">
 
-Two older properties are still available. They are less capable than their replacements, discouraged, and may be deprecated in a future Angular version.
+まだ利用可能な古いプロパティが2つありますが、代替品より役に立たず、がっかりするものです。
+また、Angularの将来のバージョンにおいて廃止される可能性があります。
 
-**`params`**&mdash;An `Observable` that contains the required and [optional parameters](#optional-route-parameters) specific to the route. Use `paramMap` instead.
+**`params`**&mdash;ルーターに必須または [任意のパラメーター](#optional-route-parameters) の詳細をもつ、 [マップ](api/router/ParamMap) を含む `Observable` です。代わりに `paramMap` を使ってください。
 
-**`queryParams`**&mdash;An `Observable` that contains the [query parameters](#query-parameters) available to all routes.
-Use `queryParamMap` instead.
+**`queryParams`**&mdash;すべてのルートで利用可能な [クエリパラメーター](#query-parameters) の [マップ](api/router/ParamMap) を含む `Observable` です。代わりに `queryParamMap` を使ってください。
 
 </div>
 
-### Router events
+### ルーターイベント
 
-During each navigation, the `Router` emits navigation events through the `Router.events` property. These events range from when the navigation starts and ends to many points in between. The full list of navigation events is displayed in the table below.
+個々の画面遷移間で、`Router` は `Router.events` プロパティを通じて画面遷移イベントを発火させます。
+遷移の開始、終了、そしてその間の多くのポイントが、このイベントの範囲となります。
+画面遷移イベントの完全なリストは、次のテーブルで説明します。
 
 <table>
   <tr>
     <th>
-      Router Event
+      ルーターイベント
     </th>
 
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -383,7 +387,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/NavigationStart) triggered when navigation starts.
+      画面遷移が開始したときに発火する [イベント](api/router/NavigationStart) です。
 
     </td>
   </tr>
@@ -394,8 +398,8 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/RouteConfigLoadStart) triggered before the `Router`
-      [lazy loads](#asynchronous-routing) a route configuration.
+      `Router` がルート設定を [遅延ロード](#asynchronous-routing) する前に発火する
+      [イベント](api/router/RouteConfigLoadStart) です。
 
     </td>
   </tr>
@@ -406,7 +410,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/RouteConfigLoadEnd) triggered after a route has been lazy loaded.
+      ルートの遅延ロードが完了した後に発火する [イベント](api/router/RouteConfigLoadEnd) です。
 
     </td>
   </tr>
@@ -417,7 +421,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/RoutesRecognized) triggered when the Router parses the URL and the routes are recognized.
+      ルーターがURLをパースして認識したときに発火する [イベント](api/router/RoutesRecognized) です。
 
     </td>
   </tr>
@@ -428,7 +432,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/GuardsCheckStart) triggered when the Router begins the Guards phase of routing.
+      ルーターがルーティングにおけるガードフェーズを開始したときに [イベント](api/router/GuardsCheckStart) です。
 
     </td>
   </tr>
@@ -439,7 +443,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/ChildActivationStart) triggered when the Router begins activating a route's children.
+      ルーターが子ルートをアクティブにする前に発火する [イベント](api/router/ChildActivationStart) です。
 
     </td>
   </tr>
@@ -450,7 +454,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/ActivationStart) triggered when the Router begins activating a route.
+      ルーターがルートをアクティブにしたときに発火する [イベント](api/router/ActivationStart) です。
 
     </td>
   </tr>
@@ -461,7 +465,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/GuardsCheckEnd) triggered when the Router finishes the Guards phase of routing successfully.
+      ルーターがルーティングにおけるガードフェーズを正常に完了させた後に発火する [イベント](api/router/GuardsCheckEnd) です。
 
     </td>
   </tr>
@@ -472,7 +476,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/ResolveStart) triggered when the Router begins the Resolve phase of routing.
+      ルーターがルーティングの解決フェーズを開始したときに発火する [イベント](api/router/ResolveStart) です。
 
     </td>
   </tr>
@@ -483,7 +487,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/ResolveEnd) triggered when the Router finishes the Resolve phase of routing successfuly.
+      ルーターがルーティングの解決フェーズを正常に完了させたときに発火する　[イベント](api/router/ResolveEnd) です。
 
     </td>
   </tr>
@@ -494,7 +498,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/ChildActivationEnd) triggered when the Router finishes activating a route's children.
+      ルーターが子ルートをアクティブにした後に発火する [イベント](api/router/ChildActivationEnd) です。
 
     </td>
   </tr>
@@ -505,7 +509,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/ActivationStart) triggered when the Router finishes activating a route.
+      ルーターがルートをアクティブにした後に発火する [イベント](api/router/ActivationStart) です。
 
     </td>
   </tr>
@@ -516,7 +520,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/NavigationEnd) triggered when navigation ends successfully.
+      画面遷移が正常に完了したときに発火する [イベント](api/router/NavigationEnd) です。
 
     </td>
   </tr>
@@ -527,8 +531,8 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/NavigationCancel) triggered when navigation is canceled.
-      This is due to a [Route Guard](#guards) returning false during navigation.
+      画面遷移がキャンセルされたときに発火する [イベント](api/router/NavigationCancel) です。
+      画面遷移中に [解決ガード](#guards) が false を返したときに発生します。
 
     </td>
   </tr>
@@ -539,7 +543,7 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/NavigationError) triggered when navigation fails due to an unexpected error.
+      画面遷移が予期せぬエラーで失敗したときに発火する [イベント](api/router/NavigationError) です。
 
     </td>
   </tr>
@@ -550,35 +554,36 @@ During each navigation, the `Router` emits navigation events through the `Router
     </td>
     <td>
 
-      An [event](api/router/Scroll) that represents a scrolling event.
+      スクロールイベントが発生したときに発火する [イベント](api/router/Scroll) です。
 
     </td>
   </tr>
 </table>
 
-These events are logged to the console when the `enableTracing` option is enabled also. For an example of filtering router navigation events, visit the [router section](guide/observables-in-angular#router) of the [Observables in Angular](guide/observables-in-angular) guide.
+これらのイベントは `enableTracing` オプションを有効にすることでコンソールログに残すことができます。
+フィルタリングされたルーターによる画面遷移の例が、[AngularのObservables](guide/observables-in-angular) ガイドにある [ルーターセクション](guide/observables-in-angular#router) に記載されています。
 
 {@a basics-summary}
 
 
-### Summary
+### まとめ
 
-The application has a configured router.
-The shell component has a `RouterOutlet` where it can display views produced by the router.
-It has `RouterLink`s that users can click to navigate via the router.
+アプリケーションは設定済みのルーターを持っています。
+ルーターによって構築されたビューを表示している場合、シェルコンポーネントは `RouterOutlet` を持っています。
+また、クリックによってルーターを介した画面遷移を行っている場合は、`RouterLink` を持っています。
 
-Here are the key `Router` terms and their meanings:
+ここにあるのが、主な `Router` の用語とその意味です。
 
 <table>
 
   <tr>
 
     <th>
-      Router Part
+      ルーター部品
     </th>
 
     <th>
-      Meaning
+      意味
     </th>
 
   </tr>
@@ -586,12 +591,12 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <code>Router</code>
+      <code>Router<br>(ルーター)</code>
     </td>
 
     <td>
-      Displays the application component for the active URL.
-      Manages navigation from one component to the next.
+      アクティブなURLに対してアプリケーションコンポーネントを表示するものです。
+      また、コンポーネントを次のコンポーネントへと画面遷移させられるように管理するものです。
     </td>
 
   </tr>
@@ -603,8 +608,8 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      A separate NgModule that provides the necessary service providers
-      and directives for navigating through application views.
+      独立したNgModuleで、必要なサービスプロバイダーや、
+      アプリケーションのビュー間で画面遷移を行うためのディレクティブを提供するものです。
     </td>
 
   </tr>
@@ -616,7 +621,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      Defines an array of Routes, each mapping a URL path to a component.
+      ルートの配列であり、各々がURLパスをコンポーネントに紐付けています。
     </td>
 
   </tr>
@@ -624,24 +629,12 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <code>Route</code>
+      <code>Route<br>(ルート)</code>
     </td>
 
     <td>
-      Defines how the router should navigate to a component based on a URL pattern.
-      Most routes consist of a path and a component type.
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterOutlet</code>
-    </td>
-
-    <td>
-      The directive (<code>&lt;router-outlet></code>) that marks where the router displays a view.
+      URLパターンに基づいたコンポーネントに対し、ルーターがどうやって画面遷移を行うかを定義するものです。
+      ほとんどのルートは1つのパスと1つのコンポーネントタイプから構成されます。
     </td>
 
   </tr>
@@ -649,26 +642,11 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <code>RouterLink</code>
+      <code>RouterOutlet<br>(ルーターアウトレット)</code>
     </td>
 
     <td>
-      The directive for binding a clickable HTML element to
-      a route. Clicking an element with a <code>routerLink</code> directive
-      that is bound to a <i>string</i> or a <i>link parameters array</i> triggers a navigation.
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterLinkActive</code>
-    </td>
-
-    <td>
-      The directive for adding/removing classes from an HTML element when an associated
-      <code>routerLink</code> contained on or inside the element becomes active/inactive.
+      ルーターがどこにビューを表示するかの目印となるディレクティブ (<code>&lt;router-outlet></code>) です。
     </td>
 
   </tr>
@@ -676,25 +654,13 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <code>ActivatedRoute</code>
+      <code>RouterLink<br>(ルーターリンク)</code>
     </td>
 
     <td>
-      A service that is provided to each route component that contains route specific
-      information such as route parameters, static data, resolve data, global query params, and the global fragment.
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterState</code>
-    </td>
-
-    <td>
-      The current state of the router including a tree of the currently activated
-      routes together with convenience methods for traversing the route tree.
+      クリック可能なHTML要素をルートに紐付けるためのディレクティブです。
+      <i>文字列</i>や<i>リンクパラメーター配列</i>をもつ<code>routerLink</code>ディレクティブが
+      紐付いている要素をクリックすることで、画面遷移を行います。
     </td>
 
   </tr>
@@ -702,13 +668,52 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <b><i>Link parameters array</i></b>
+      <code>RouterLinkActive<br>(ルーターリンクのアクティブ化)</code>
     </td>
 
     <td>
-      An array that the router interprets as a routing instruction.
-      You can bind that array to a <code>RouterLink</code> or pass the array as an argument to
-      the <code>Router.navigate</code> method.
+      HTML要素のクラスを追加または削除するディレクティブです。
+      関連する<code>routerLink</code>がアクティブまたは非アクティブになる要素を内包または接している場合に利用します。
+    </td>
+
+  </tr>
+
+  <tr>
+
+    <td>
+      <code>ActivatedRoute<br>(アクティブ化されたルート)</code>
+    </td>
+
+    <td>
+      個々のルートコンポーネントに提供されるサービスです。
+      それによってルートコンポーネントは特定の情報 (たとえばルートパラメーターや静的データ、解決データ、グローバルパラメーター、グローバルフラグメント) を保持することになります。
+    </td>
+
+  </tr>
+
+  <tr>
+
+    <td>
+      <code>RouterState<br>(ルーターステート)</code>
+    </td>
+
+    <td>
+      アクティブなルートツリーも含んだルーターの現在のステートです。
+      ルートツリーをまたぐことのできる便利なメソッドを持っています。
+    </td>
+
+  </tr>
+
+  <tr>
+
+    <td>
+      <b><i>Link parameters array<br>(リンクパラメーター配列)</i></b>
+    </td>
+
+    <td>
+      ルーティングを指示するためのルーター解釈の配列です。
+      この配列は<code>RouterLink</code>に紐付けることもできるし、
+      <code>Router.navigate</code>メソッドの引数に指定することもできます。
     </td>
 
   </tr>
@@ -720,7 +725,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      An Angular component with a <code>RouterOutlet</code> that displays views based on router navigations.
+      ルーターによる画面遷移によって表示を行う<code>RouterOutlet</code>を使ったAngularコンポーネントのことです。
     </td>
 
   </tr>

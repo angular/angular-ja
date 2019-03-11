@@ -1,4 +1,4 @@
-# Angular アプリケーションのビルドと提供
+# Angularアプリのビルドとサーブ
 
 このページではAngularプロジェクトのビルド固有の設定オプションを取り上げます。
 
@@ -170,6 +170,7 @@ export class AppComponent {
 ```
 
 {@a size-budgets}
+{@a configure-size-budgets}
 
 ## サイズ予算の設定
 
@@ -220,8 +221,8 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
         * initial - アプリの初期サイズ。
         * allScript - 全スクリプトのサイズ。
         * all - アプリ全体のサイズ。
-        * anyScript - 任意の1つのスクリプトのサイズ。
-        * any - 任意のファイルのサイズ。
+        * anyScript - いずれか1つのスクリプトのサイズ。
+        * any - いずれかのファイルのサイズ。
 
     </td>
   </tr>
@@ -273,8 +274,8 @@ CLIは[Autoprefixer](https://github.com/postcss/autoprefixer)を使ってさま�
 特定のブラウザをターゲットにしたり、特定のブラウザバージョンをビルドから除外したりする必要が出てくるかもしれません。
 
 内部的には、Autoprefixerは[Browserslist](https://github.com/browserslist/browserslist)というライブラリに頼り、どのブラウザをプレフィックス付きでサポートするかを判断しています。
-Browserlistはパッケージ設定ファイルの`browserlist`プロパティ、または`.browserslistrc`という名前の設定ファイルから設定オプションを探します。
-AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定を探します。
+Browserlistはパッケージ設定ファイルの`browserslist`プロパティ、または`.browserslistrc`という名前の設定ファイルから設定オプションを探します。
+AutoprefixerはCSSにプレフィックスをつける際に`browserslist`の設定を探します。
 
 * パッケージ設定ファイル`package.json`にbrowserslistプロパティを追加することで、どのブラウザをターゲットにするかをAutoprefixerに伝えることができます:
 ```
@@ -294,7 +295,7 @@ AutoprefixerはCSSにプレフィックスをつける際にBrowserlistの設定
 特定のブラウザとバージョンをターゲットにする方法の例については[browserslistのリポジトリ](https://github.com/browserslist/browserslist)を参照してください。
 
 <div class="alert is-helpful">
-下位互換性
+後方互換性
 
 もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)のプレフィックスを削除するために、次のbrowserslistエントリを`package.json`に追加してください:
 

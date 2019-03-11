@@ -1100,7 +1100,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-06}
 
-### Directive selectors
+### ディレクティブのセレクター
 
 #### Style 02-06
 
@@ -1109,7 +1109,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** Use lower camel case for naming the selectors of directives.
+**Do** ディレクティブのセレクター名にはlowerCamelCaseを使用してください。
 
 
 </div>
@@ -1120,7 +1120,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Keeps the names of the properties defined in the directives that are bound to the view consistent with the attribute names.
+**Why?** ビューにバインドされているディレクティブに定義されたプロパティ名を、ビューの属性名と一致させるためです。
 
 
 </div>
@@ -1131,7 +1131,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** The Angular HTML parser is case sensitive and recognizes lower camel case.
+**Why?** AngularのHTMLパーサーは大文字・小文字を区別し、また、lowerCamelCaseを認識します。
 
 
 </div>
@@ -1140,7 +1140,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-08}
 
-### Directive custom prefix
+### ディレクティブのカスタムプレフィックス
 
 #### Style 02-08
 
@@ -1148,7 +1148,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** use a custom prefix for the selector of directives (e.g, the prefix `toh` from **T**our **o**f **H**eroes).
+**Do** ディレクティブのセレクターにはカスタムプレフィクスを付与してください（例： `toh` というプレフィクスは **T**our **o**f **H**eroes に由来します）。
 
 
 </div>
@@ -1159,7 +1159,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** spell non-element selectors in lower camel case unless the selector is meant to match a native HTML attribute.
+**Do** ネイティブのHTML属性にマッチさせることを意図しない限り、非要素のセレクターはlowerCamelCaseで命名してください。
 
 
 </div>
@@ -1170,7 +1170,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Prevents name collisions.
+**Why?** 名前の衝突を防ぐためです。
 
 
 </div>
@@ -1181,7 +1181,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Directives are easily identified.
+**Why?** ディレクティブを容易に識別できます。
 
 
 </div>

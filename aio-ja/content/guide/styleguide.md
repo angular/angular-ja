@@ -3765,11 +3765,11 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 <a href="#toc">トップに戻る</a>
 
 
-## Components
+## コンポーネント
 
 {@a 05-03}
 
-### Components as elements
+### 要素としてのコンポーネント
 
 #### Style 05-03
 
@@ -3777,7 +3777,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 <div class="s-rule do">
 
 
-**Consider** giving components an _element_ selector, as opposed to _attribute_ or _class_ selectors.
+**Consider** _属性_または_クラス_セレクターではなく、コンポーネントに_要素_セレクターを与えます。
 
 
 </div>
@@ -3788,9 +3788,9 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Why?** components have templates containing HTML and optional Angular template syntax.
-They display content.
-Developers place components on the page as they would native HTML elements and web components.
+**Why?** コンポーネントには、HTMLとオプショナルのAngularテンプレート構文を含んだテンプレートがあります。
+これはコンテンツを表示します。
+開発者は、ネイティブのHTML要素やWebコンポーネントと同じように、コンポーネントをページに配置します。
 
 
 </div>
@@ -3801,14 +3801,14 @@ Developers place components on the page as they would native HTML elements and w
 
 
 
-**Why?** It is easier to recognize that a symbol is a component by looking at the template's html.
+**Why?** テンプレートのHTMLを見て、シンボルがコンポーネントであることを認識しやすくなります
 
 
 </div>
 
 <div class="alert is-helpful">
 
-There are a few cases where you give a component an attribute, such as when you want to augment a built-in element. For example, [Material Design](https://material.angular.io/components/button/overview) uses this technique with `<button mat-button>`. However, you wouldn't use this technique on a custom element.
+ビルトイン要素を拡張したい場合など、コンポーネントに属性を指定するケースがいくつかあります。たとえば、[Material Design](https://material.angular.io/components/button/overview)は `<button mat-button>` でこの手法を使用しています。ただし、この方法はカスタム要素には使用しません。
 
 </div>
 
@@ -3844,7 +3844,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 {@a 05-04}
 
-### Extract templates and styles to their own files
+### テンプレートとスタイルをファイルから分離しましょう
 
 #### Style 05-04
 
@@ -3853,7 +3853,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** extract templates and styles into a separate file, when more than 3 lines.
+**Do** 3行を超える場合は、テンプレートとスタイルを別々のファイルに取り出します。
 
 
 </div>
@@ -3864,7 +3864,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** name the template file `[component-name].component.html`, where [component-name] is the component name.
+**Do** テンプレートファイルの名前を`[component-name].component.html`にします。ここで、[component-name]はコンポーネント名です。
 
 
 </div>
@@ -3875,7 +3875,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** name the style file `[component-name].component.css`, where [component-name] is the component name.
+**Do** スタイルファイルの名前を`[component-name].component.css`にします。ここで、[component-name]はコンポーネント名です。
 
 
 </div>
@@ -3886,7 +3886,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** specify _component-relative_ URLs, prefixed with `./`.
+**Do** 接頭辞 `./` を付けて、_コンポーネント相対_URLを指定します。
 
 
 </div>
@@ -3897,7 +3897,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Why?** Large, inline templates and styles obscure the component's purpose and implementation, reducing readability and maintainability.
+**Why?** 大きなインラインテンプレートとスタイルは、コンポーネントの目的と実装を不明瞭にし、読みやすさと保守性を低下させます。
 
 
 </div>
@@ -3908,9 +3908,9 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Why?** In most editors, syntax hints and code snippets aren't available when developing inline templates and styles.
-The Angular TypeScript Language Service (forthcoming) promises to overcome this deficiency for HTML templates
-in those editors that support it; it won't help with CSS styles.
+**Why?** ほとんどのエディタでは、インラインテンプレートとインラインスタイルを開発するときに構文のヒントやコードスニペットは使用できません。
+AngularのTypeScript Language Serviceは、HTMLテンプレートをサポートしているエディターで
+このHTMLテンプレートの欠点を克服します。 ただしCSSスタイルには役立ちません。
 
 
 </div>
@@ -3921,7 +3921,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** A _component relative_ URL requires no change when you move the component files, as long as the files stay together.
+**Why?** _コンポーネント相対_URLは、ファイルがまとめられている限り、コンポーネントファイルを移動しても変更する必要はありません。
 
 
 </div>
@@ -3932,7 +3932,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** The `./` prefix is standard syntax for relative URLs; don't depend on Angular's current ability to do without that prefix.
+**Why?** `./`接頭辞は相対URLの標準的な構文です。その接頭辞なしでのAngularの機能に依存しないでください。
 
 
 
@@ -3970,7 +3970,7 @@ in those editors that support it; it won't help with CSS styles.
 
 {@a 05-12}
 
-### Decorate _input_ and _output_ properties
+### _インプット_と_アウトプット_のプロパティを修飾しましょう
 
 #### Style 05-12
 
@@ -3979,8 +3979,8 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Do** use the `@Input()` and `@Output()` class decorators instead of the `inputs` and `outputs` properties of the
-`@Directive` and `@Component` metadata:
+**Do** `@Directive`および`@Component`メタデータの `inputs` および `outputs` プロパティではなく、
+`@Input()` および `@Output()` プロパティデコレーターを使用します。
 
 
 </div>
@@ -3991,7 +3991,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Consider** placing `@Input()` or `@Output()` on the same line as the property it decorates.
+**Consider** 修飾するプロパティと同じ行に `@Input()` または `@Output()` を配置します。
 
 
 </div>
@@ -4002,7 +4002,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** It is easier and more readable to identify which properties in a class are inputs or outputs.
+**Why?** クラス内のどのプロパティがインプットまたはアウトプットであるかを識別するのが簡単で読みやすくなります。
 
 
 </div>
@@ -4013,8 +4013,8 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** If you ever need to rename the property or event name associated with
-`@Input` or `@Output`, you can modify it in a single place.
+**Why?** `@Input`または`@Output`に関連付けられているプロパティまたはイベント名を変更する必要がある場合は、
+それを一か所で変更できます。
 
 
 </div>
@@ -4025,7 +4025,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** The metadata declaration attached to the directive is shorter and thus more readable.
+**Why?** ディレクティブに付与されているメタデータ宣言は短く、読みやすくなります。
 
 
 </div>
@@ -4036,8 +4036,8 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** Placing the decorator on the same line _usually_ makes for shorter code and still easily identifies the property as an input or output.
-Put it on the line above when doing so is clearly more readable.
+**Why?** デコレーターを同じ行に配置すると、_通常は_コードが短くなり、プロパティをインプットまたはアウトプットとして簡単に識別できます。
+はっきりと読みやすくする場合は、デコレーターを上の行に置きます。
 
 
 </div>
@@ -4063,7 +4063,7 @@ Put it on the line above when doing so is clearly more readable.
 
 {@a 05-13}
 
-### Avoid aliasing _inputs_ and _outputs_
+### _インプット_ と _アウトプット_のエイリアスを避けましょう
 
 #### Style 05-13
 
@@ -4072,7 +4072,7 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-**Avoid** _input_ and _output_ aliases except when it serves an important purpose.
+**Avoid** 重要な目的がある場合を除いて、_インプット_および_アウトプット_に別名をつけることを避けます。
 
 
 </div>
@@ -4083,7 +4083,7 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-**Why?** Two names for the same property (one private, one public) is inherently confusing.
+**Why?** 同じプロパティに2つの名前（ひとつはプライベート、もうひとつはパブリック）を付けると、本質的に混乱します。
 
 
 </div>
@@ -4094,8 +4094,8 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-**Why?** You should use an alias when the directive name is also an _input_ property,
-and the directive name doesn't describe the property.
+**Why?** ディレクティブ名が _インプット_プロパティでもあり、ディレクティブ名がそのプロパティを表していない場合は、
+エイリアスを使用する必要があります。
 
 
 </div>
@@ -4140,7 +4140,7 @@ and the directive name doesn't describe the property.
 
 {@a 05-14}
 
-### Member sequence
+### メンバーの順序
 
 #### Style 05-14
 
@@ -4149,7 +4149,7 @@ and the directive name doesn't describe the property.
 
 
 
-**Do** place properties up top followed by methods.
+**Do** プロパティを上に配置して次にメソッドを配置します。
 
 
 </div>
@@ -4160,7 +4160,7 @@ and the directive name doesn't describe the property.
 
 
 
-**Do** place private members after public members, alphabetized.
+**Do** パブリックメンバーの後にプライベートメンバーを、アルファベット順に配置します。
 
 
 </div>
@@ -4171,8 +4171,8 @@ and the directive name doesn't describe the property.
 
 
 
-**Why?** Placing members in a consistent sequence makes it easy to read and
-helps instantly identify which members of the component serve which purpose.
+**Why?** メンバーを一貫した順序で配置すると、読みやすくなり、
+コンポーネントのどのメンバーがどの目的に役立つかを即座に識別できます。
 
 
 </div>
@@ -4197,7 +4197,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 05-15}
 
-### Delegate complex component logic to services
+### 複雑なコンポーネントロジックをサービスに委譲しましょう
 
 #### Style 05-15
 
@@ -4206,7 +4206,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** limit logic in a component to only that required for the view. All other logic should be delegated to services.
+**Do** コンポーネント内のロジックはビューに必要なロジックだけに制限します。他のすべてのロジックはサービスに委譲する必要があります。
 
 
 </div>
@@ -4217,7 +4217,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** move reusable logic to services and keep components simple and focused on their intended purpose.
+**Do** 再利用可能なロジックをサービスに移し、コンポーネントをシンプルに保ち、意図した目的に集中します。
 
 
 </div>
@@ -4228,7 +4228,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Logic may be reused by multiple components when placed within a service and exposed via a function.
+**Why?** ロジックをサービス内に配置し、関数を介して公開すれば、複数のコンポーネントによって再利用できます。
 
 
 </div>
@@ -4239,7 +4239,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Logic in a service can more easily be isolated in a unit test, while the calling logic in the component can be easily mocked.
+**Why?** コンポーネント内でのロジックの呼び出しを簡単にモックしながら、単体テストでサービス内のロジックをより簡単に分離できます。
 
 
 </div>
@@ -4250,7 +4250,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Removes dependencies and hides implementation details from the component.
+**Why?** 依存関係を取り除き、コンポーネントから実装の詳細を隠します。
 
 
 </div>
@@ -4261,7 +4261,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Keeps the component slim, trim, and focused.
+**Why?** コンポーネントをスリムで、整然として、フォーカスされた状態に保ちます。
 
 
 </div>
@@ -4286,7 +4286,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 05-16}
 
-### Don't prefix _output_ properties
+### _アウトプット_ プロパティに接頭辞をつけてはいけません
 
 #### Style 05-16
 
@@ -4295,7 +4295,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** name events without the prefix `on`.
+**Do** イベントには `on` 接頭辞なしの名前を付けます。
 
 
 </div>
@@ -4306,7 +4306,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** name event handler methods with the prefix `on` followed by the event name.
+**Do** イベントハンドラーメソッドには `on` 接頭辞にイベント名を続けて名前を付けます。
 
 
 </div>
@@ -4317,7 +4317,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** This is consistent with built-in events such as button clicks.
+**Why?** これは、ボタンクリックなどの組み込みイベントと一致しています。
 
 
 </div>
@@ -4328,7 +4328,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Angular allows for an [alternative syntax](guide/template-syntax#binding-syntax) `on-*`. If the event itself was prefixed with `on` this would result in an `on-onEvent` binding expression.
+**Why?** Angularでは、`on-*` という[代替構文](guide/template-syntax#binding-syntax)が使えます。イベント自体に`on`接頭辞が付いていると、`on-onEvent`バインディング式になってしまいます。
 
 
 </div>
@@ -4369,7 +4369,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 05-17}
 
-### Put presentation logic in the component class
+### コンポーネントクラスにプレゼンテーションロジックを置きましょう
 
 #### Style 05-17
 
@@ -4378,7 +4378,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** put presentation logic in the component class, and not in the template.
+**Do** プレゼンテーションロジックはテンプレートの中ではなくコンポーネントクラスの中に配置します。
 
 
 </div>
@@ -4389,7 +4389,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Logic will be contained in one place (the component class) instead of being spread in two places.
+**Why?** ロジックが二か所に広がらず、一か所（コンポーネントクラス）に含まれます。
 
 
 </div>
@@ -4400,7 +4400,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Keeping the component's presentation logic in the class instead of the template improves testability, maintainability, and reusability.
+**Why?** コンポーネントのプレゼンテーションロジックをテンプレートではなくクラスに残すことで、テスタビリティ、メンテナンス性、および再利用性が向上します。
 
 
 </div>
@@ -4424,11 +4424,11 @@ helps instantly identify which members of the component serve which purpose.
 <a href="#toc">トップに戻る</a>
 
 
-## Directives
+## ディレクティブ
 
 {@a 06-01}
 
-### Use directives to enhance an element
+### 要素を拡張するためにディレクティブを使いましょう
 
 #### Style 06-01
 
@@ -4437,7 +4437,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** use attribute directives when you have presentation logic without a template.
+**Do** テンプレートのないプレゼンテーションロジックがある場合は、属性ディレクティブを使用します。
 
 
 </div>
@@ -4448,7 +4448,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Attribute directives don't have an associated template.
+**Why?** 属性ディレクティブにはテンプレートが関連付けられていません。
 
 
 </div>
@@ -4459,7 +4459,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** An element may have more than one attribute directive applied.
+**Why?** 要素には複数の属性ディレクティブを適用できます。
 
 
 </div>
@@ -4484,7 +4484,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 06-03}
 
-### _HostListener_/_HostBinding_ decorators versus _host_ metadata
+### _HostListener_/_HostBinding_ デコレーター と _host_ メタデータ
 
 #### Style 06-03
 
@@ -4493,8 +4493,8 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Consider** preferring the `@HostListener` and `@HostBinding` to the
-`host` property of the `@Directive` and `@Component` decorators.
+**Consider** `@Directive` および `@Component` デコレーターの `host` プロパティよりも、
+`@HostListener` および `@HostBinding`を推奨します。
 
 
 </div>
@@ -4505,7 +4505,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** be consistent in your choice.
+**Do** 一貫した選択をおこないます。
 
 
 </div>
@@ -4516,10 +4516,10 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** The property associated with `@HostBinding` or the method associated with `@HostListener`
-can be modified only in a single place&mdash;in the directive's class.
-If you use the `host` metadata property, you must modify both the property/method declaration in the 
-directive's class and the metadata in the decorator associated with the directive.
+**Why?** `@HostBinding`に関連付けられたプロパティ、または`@HostListener`に関連付けられたメソッドは、
+ディレクティブのクラス内の1か所だけで変更できます。
+`host`メタデータプロパティを使用する場合は、ディレクティブのクラス内のプロパティ/メソッド宣言と、
+そのディレクティブに関連付けられているデコレーター内のメタデータの両方を変更する必要があります。
 
 
 </div>
@@ -4532,14 +4532,14 @@ directive's class and the metadata in the decorator associated with the directiv
 
 
 
-Compare with the less preferred `host` metadata alternative.
+あまり推奨されない`host`メタデータでの置き換えと比較してください。
 
 
 <div class="s-why-last">
 
 
 
-**Why?** The `host` metadata is only one term to remember and doesn't require extra ES imports.
+**Why?** ただひとつの`host`メタデータだけを覚えておけば、追加のESインポートを必要としません。
 
 
 </div>

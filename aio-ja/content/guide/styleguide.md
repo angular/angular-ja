@@ -3979,7 +3979,8 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 
 
-**Do** `@Directive`および`@Component`メタデータの `inputs` および `outputs` プロパティではなく、`@Input()` および `@Output()` プロパティデコレーターを使用します。
+**Do** `@Directive`および`@Component`メタデータの `inputs` および `outputs` プロパティではなく、
+`@Input()` および `@Output()` プロパティデコレーターを使用します。
 
 
 </div>
@@ -4012,7 +4013,8 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 
 
-**Why?** `@Input`または`@Output`に関連付けられているプロパティまたはイベント名を変更する必要がある場合は、それを一か所で変更できます。
+**Why?** `@Input`または`@Output`に関連付けられているプロパティまたはイベント名を変更する必要がある場合は、
+それを一か所で変更できます。
 
 
 </div>
@@ -4317,6 +4319,7 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 **Why?** これは、ボタンクリックなどの組み込みイベントと一致しています。
 
+
 </div>
 
 
@@ -4490,7 +4493,8 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 
 
-**Consider** `@Directive` および `@Component` デコレーターの `host` プロパティよりも、`@HostListener` および `@HostBinding`を推奨します。
+**Consider** `@Directive` および `@Component` デコレーターの `host` プロパティよりも、
+`@HostListener` および `@HostBinding`を推奨します。
 
 
 </div>

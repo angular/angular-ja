@@ -870,7 +870,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-05}
 
-### Bootstrapping
+### ブートストラッピング
 
 #### Style 02-05
 
@@ -879,7 +879,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** put bootstrapping and platform logic for the app in a file named `main.ts`.
+**Do** アプリのブートストラップとプラットフォームのロジックを`main.ts`というファイルに配置します。
 
 
 </div>
@@ -890,7 +890,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** include error handling in the bootstrapping logic.
+**Do** ブートストラップロジックにエラー処理を含めます。
 
 
 </div>
@@ -901,7 +901,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Avoid** putting app logic in `main.ts`. Instead, consider placing it in a component or service.
+**Avoid** アプリのロジックを`main.ts`に入れることは避けましょう。代わりに、コンポーネントまたはサービスに配置することを検討してください。
 
 
 </div>
@@ -912,7 +912,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Follows a consistent convention for the startup logic of an app.
+**Why?** アプリの起動ロジックに関する一貫した規約に従います。
 
 
 </div>
@@ -923,7 +923,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Follows a familiar convention from other technology platforms.
+**Why?** 他のテクノロジープラットフォームからの慣例的な規約に従います。
 
 
 </div>
@@ -940,7 +940,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 05-02}
 
-### Component selectors
+### コンポーネントセレクター
 
 #### Style 05-02
 
@@ -949,7 +949,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use _dashed-case_ or _kebab-case_ for naming the element selectors of components.
+**Do** コンポーネントの要素セレクターに名前をつけるには、_dashed-case_または_kebab-case_を使います。
 
 
 </div>
@@ -960,7 +960,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
+**Why?** [Custom Elements](https://www.w3.org/TR/custom-elements/)の仕様と要素名を一致させます。
 
 
 </div>
@@ -993,7 +993,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-07}
 
-### Component custom prefix
+### コンポーネントのカスタム接頭辞
 
 #### Style 02-07
 
@@ -1002,7 +1002,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use a hyphenated, lowercase element selector value (e.g. `admin-users`).
+**Do** ハイフンで区切られた小文字の要素セレクター値を使用します（たとえば`admin-users`）。
 
 
 
@@ -1014,8 +1014,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use a custom prefix for a component selector.
-For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the prefix `admin` represents an admin feature area.
+**Do** コンポーネントセレクターにカスタム接頭辞を使用します。
+たとえば、`toh`という接頭辞は**T**our **o**f **H**eroesを表していて、`admin`という接頭辞は管理者用の機能領域を表します。
 
 
 </div>
@@ -1026,7 +1026,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** use a prefix that identifies the feature area or the app itself.
+**Do** 機能領域またはアプリ自体を識別する接頭辞を使用します。
 
 
 </div>
@@ -1037,7 +1037,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Prevents element name collisions with components in other apps and with native HTML elements.
+**Why?** 要素名が他のアプリケーションのコンポーネントおよびネイティブのHTML要素と競合しないようにします。
 
 
 </div>
@@ -1048,7 +1048,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Makes it easier to promote and share the component in other apps.
+**Why?** コンポーネントを宣伝したり他のアプリと共有したりするのが簡単になります。
 
 
 </div>
@@ -1059,7 +1059,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Components are easy to identify in the DOM.
+**Why?** DOMの中でコンポーネントを簡単に識別できます。
 
 
 </div>

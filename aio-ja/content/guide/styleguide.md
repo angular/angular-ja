@@ -1851,7 +1851,8 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-**Why?** TypeScriptは、即座の初期化を要求し、その後の再割り当てを防ぐことによって、その意図を強制するのに役立ちます。
+**Why?** TypeScriptは、即座の初期化を要求し、その後の再割り当てを防ぐことによって、
+その意図を強制するのに役立ちます。
 
 
 </div>
@@ -1873,7 +1874,8 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-**Why?** lowerCamelCaseの変数名（`heroRoutes`）は、伝統的なUPPER_SNAKE_CASEの変数名（`HERO_ROUTES`）よりも読みやすく理解しやすいです。
+**Why?** lowerCamelCaseの変数名（`heroRoutes`）は、
+伝統的なUPPER_SNAKE_CASEの変数名（`HERO_ROUTES`）よりも読みやすく理解しやすいです。
 
 
 </div>
@@ -1884,7 +1886,9 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-**Why?** UPPER_SNAKE_CASEにおける定数の命名の伝統は、`const`宣言をすぐに明らかにする現代のIDEより前の時代を反映しています。TypeScriptは再割り当てのこと故を防いでくれます。
+**Why?** UPPER_SNAKE_CASEにおける定数の命名の伝統は、
+`const`宣言をすぐに明らかにする現代のIDEより前の時代を反映しています。
+TypeScriptは不測の再代入を防いでくれます。
 
 
 </div>
@@ -1906,7 +1910,9 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-**Why?** UPPER_SNAKE_CASEの伝統は、特にサードパーティーのモジュールで広く普及しています。既存のコードやドキュメンテーションを壊す危険性があるため、それらを変更する努力をする価値はほとんどありません。
+**Why?** UPPER_SNAKE_CASEの伝統は、特にサードパーティーのモジュールで広く普及しています。
+既存のコードやドキュメンテーションを壊す危険性があるため、
+それらを変更する努力をする価値はほとんどありません。
 
 
 </div>
@@ -1976,7 +1982,8 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-**Why?** <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">TypeScriptのガイドライン</a>では、`I`接頭辞は推奨されていません。
+**Why?** <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">TypeScriptのガイドライン</a>では、
+`I`接頭辞は推奨されていません。
 
 
 </div>

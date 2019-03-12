@@ -1440,7 +1440,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-11}
 
-### _End-to-End_ (E2E) test file names
+### _End-to-End_ (E2E) テストのファイル名
 
 #### Style 02-11
 
@@ -1448,7 +1448,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** name end-to-end test specification files after the feature they test with a suffix of `.e2e-spec`.
+**Do** E2Eのテスト仕様ファイルは、機能の後に`.e2e-spec`という接尾辞を付けます。
 
 
 </div>
@@ -1459,7 +1459,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Provides a consistent way to quickly identify end-to-end tests.
+**Why?** E2Eのテストを迅速に識別するための一貫した方法を提供します。
 
 
 </div>
@@ -1470,7 +1470,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Provides pattern matching for test runners and build automation.
+**Why?** テストランナーとビルドオートメーションのためのパターンマッチングを提供します。
 
 
 </div>
@@ -1529,7 +1529,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-12}
 
-### Angular _NgModule_ names
+### Angularの_NgModule_の名前
 
 #### Style 02-12
 
@@ -1538,7 +1538,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** append the symbol name with the suffix `Module`.
+**Do** シンボル名に`Module`接尾辞を追加します。
 
 
 </div>
@@ -1549,7 +1549,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** give the file name the `.module.ts` extension.
+**Do** ファイル名に`.module.ts`拡張子を付けます。
 
 
 </div>
@@ -1560,7 +1560,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** name the module after the feature and folder it resides in.
+**Do** 中に存在する機能とフォルダに基づいてモジュールに名前を付けます。
 
 
 </div>
@@ -1571,7 +1571,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Provides a consistent way to quickly identify and reference modules.
+**Why?** モジュールを迅速に識別して参照するための一貫した方法を提供します。
 
 
 </div>
@@ -1582,7 +1582,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Upper camel case is conventional for identifying objects that can be instantiated using a constructor.
+**Why?** UpperCamelCaseは、コンストラクターを使用してインスタンス化できるオブジェクトを識別するため慣例的なものです。
 
 
 </div>
@@ -1593,7 +1593,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Easily identifies the module as the root of the same named feature.
+**Why?** 同じ名前の機能のルートとしてモジュールを簡単に識別します。
 
 
 </div>
@@ -1604,7 +1604,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** suffix a _RoutingModule_ class name with `RoutingModule`.
+**Do** _RoutingModule_クラス名に`RoutingModule`接尾辞を付けます。
 
 
 </div>
@@ -1615,7 +1615,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** end the filename of a _RoutingModule_ with `-routing.module.ts`.
+**Do** _RoutingModule_のファイル名の最後を`-routing.module.ts`にします。
 
 
 </div>
@@ -1626,8 +1626,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** A `RoutingModule` is a module dedicated exclusively to configuring the Angular router.
-A consistent class and file name convention make these modules easy to spot and verify.
+**Why?** `RoutingModule`はAngularルーターの設定専用のモジュールです。
+一貫したクラスとファイル名の規則により、これらのモジュールを簡単に見つけて検証できます。
 
 </div>
 

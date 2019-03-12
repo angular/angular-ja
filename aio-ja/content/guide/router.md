@@ -210,9 +210,9 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 {@a basics-router-state}
 
 
-### ルーターステート
+### ルーターの状態
 
-画面遷移のライフサイクルが完成すると、ルーターは現在のステートを作り出す `ActivatedRoute` オブジェクトのツリーを組み立てます。
+画面遷移のライフサイクルが完成すると、ルーターは現在の状態を作り上げている `ActivatedRoute` オブジェクトのツリーを組み立てます。
 `Router` サービスと `routerState` プロパティを使っていれば、
 アプリケーションのどこからでも現在の `RouterState` にアクセス可能です。
 
@@ -224,8 +224,8 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 
 ### アクティブ化されたルート
 
-インジェクトされた [ActivatedRoute](api/router/ActivatedRoute) という名のルーターサービスを通して、
-ルートパスやパラメータを利用可能です。
+ルートパスやパラメータは、インジェクトされた [ActivatedRoute](api/router/ActivatedRoute) という名の
+ルーターサービスを通して利用できます。
 そこには次のようにたくさんの役立つ情報が含まれています。
 
 <table>
@@ -245,7 +245,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
     </td>
     <td>
 
-    ルートパスの個々のパーツである文字列配列を含む `Observable` です。
+    ルートパスの `Observable` です。ルートパスの各パーツの文字列の配列として表されます。
 
     </td>
   </tr>
@@ -268,7 +268,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
     </td>
     <td>
 
-    ルーターに必須または [任意のパラメーター](#optional-route-parameters) の詳細をもつ、[マップ](api/router/ParamMap) を含む `Observable` です。
+    そのルートに固有の、必須または [オプショナルのパラメーター](#optional-route-parameters) の [マップ](api/router/ParamMap) を含む `Observable` です。
     マップは同じパラメーターから単一または複数の値を取り出す機能をサポートしています。
 
     </td>
@@ -303,7 +303,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
     </td>
     <td>
 
-    ルートの描写に有効な `RouterOutlet` です。無名のアウトレットは _primary_ という名前になります。
+    ルートを描画するのに使われる `RouterOutlet` の名前です。無名のアウトレットは _primary_ という名前になります。
 
     </td>
   </tr>
@@ -358,7 +358,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 まだ利用可能な古いプロパティが2つありますが、代替品より役に立たず、がっかりするものです。
 また、Angularの将来のバージョンにおいて廃止される可能性があります。
 
-**`params`**&mdash;ルーターに必須または [任意のパラメーター](#optional-route-parameters) の詳細をもつ、 [マップ](api/router/ParamMap) を含む `Observable` です。代わりに `paramMap` を使ってください。
+**`params`**&mdash;ルート固有の、必須または [オプショナルのパラメーター](#optional-route-parameters) の [マップ](api/router/ParamMap) を含む `Observable` です。代わりに `paramMap` を使ってください。
 
 **`queryParams`**&mdash;すべてのルートで利用可能な [クエリパラメーター](#query-parameters) の [マップ](api/router/ParamMap) を含む `Observable` です。代わりに `queryParamMap` を使ってください。
 
@@ -532,7 +532,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
     <td>
 
       画面遷移がキャンセルされたときに発火する [イベント](api/router/NavigationCancel) です。
-      画面遷移中に [解決ガード](#guards) が false を返したときに発生します。
+      画面遷移中に [ルートのガード](#guards) が false を返したときに発生します。
 
     </td>
   </tr>
@@ -579,7 +579,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <th>
-      ルーター部品
+      ルーターの部品
     </th>
 
     <th>
@@ -591,7 +591,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>Router<br>(ルーター)</code>
+      <code>Router</code>
     </td>
 
     <td>
@@ -629,7 +629,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>Route<br>(ルート)</code>
+      <code>Route</code>
     </td>
 
     <td>
@@ -642,7 +642,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>RouterOutlet<br>(ルーターアウトレット)</code>
+      <code>RouterOutlet</code>
     </td>
 
     <td>
@@ -654,7 +654,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>RouterLink<br>(ルーターリンク)</code>
+      <code>RouterLink</code>
     </td>
 
     <td>
@@ -668,12 +668,12 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>RouterLinkActive<br>(ルーターリンクのアクティブ化)</code>
+      <code>RouterLinkActive</code>
     </td>
 
     <td>
-      HTML要素のクラスを追加または削除するディレクティブです。
-      関連する<code>routerLink</code>がアクティブまたは非アクティブになる要素を内包または接している場合に利用します。
+      HTML要素上あるいは要素内に関連付けられた<code>routerLink</code>がアクティブ/非アクティブになったときに、
+      HTML要素にクラスを追加/削除するためのディレクティブです。
     </td>
 
   </tr>
@@ -681,12 +681,12 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>ActivatedRoute<br>(アクティブ化されたルート)</code>
+      <code>ActivatedRoute</code>
     </td>
 
     <td>
       個々のルートコンポーネントに提供されるサービスです。
-      それによってルートコンポーネントは特定の情報 (たとえばルートパラメーターや静的データ、解決データ、グローバルパラメーター、グローバルフラグメント) を保持することになります。
+      それによってルートコンポーネントは特定の情報 (たとえばルートパラメーターや静的データ、解決データ、グローバルクエリパラメーター、グローバルフラグメント) を保持することになります。
     </td>
 
   </tr>
@@ -694,12 +694,12 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <code>RouterState<br>(ルーターステート)</code>
+      <code>RouterState</code>
     </td>
 
     <td>
-      アクティブなルートツリーも含んだルーターの現在のステートです。
-      ルートツリーをまたぐことのできる便利なメソッドを持っています。
+      ルートツリーをたどるための便利なメソッドと一緒に、
+      現在アクティブになっているツリーを含んでいるルーターの現在の状態です。
     </td>
 
   </tr>
@@ -707,7 +707,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
   <tr>
 
     <td>
-      <b><i>Link parameters array<br>(リンクパラメーター配列)</i></b>
+      <b><i>Link parameters array</i></b>
     </td>
 
     <td>
@@ -725,7 +725,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
     </td>
 
     <td>
-      ルーターによる画面遷移によって表示を行う<code>RouterOutlet</code>を使ったAngularコンポーネントのことです。
+      ルーターによる画面遷移によって表示を行う<code>RouterOutlet</code>を備えたAngularコンポーネントのことです。
     </td>
 
   </tr>

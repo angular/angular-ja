@@ -625,8 +625,9 @@
         },
         {          
           "url": "guide/build",
-          "title": "Building & Serving",
-          "tooltip": "Building and serving Angular apps."
+          "title": "ビルドとサーブ",
+          "tooltip": "Angularアプリのビルドとサーブ",
+          "translated": true
         },
         {
           "url": "guide/testing",

@@ -1795,7 +1795,8 @@ A consistent class and file name convention make these modules easy to spot and 
 
 
 
-**Why?** クラスはインスタンス化可能、そしてインスタンスを構築するものです。慣例的に、UpperCamelCaseはインスタンス化可能なものを示します。
+**Why?** クラスはインスタンス化可能、そしてインスタンスを構築するものです。
+慣例的に、UpperCamelCaseはインスタンス化可能なものを示します。
 
 
 </div>

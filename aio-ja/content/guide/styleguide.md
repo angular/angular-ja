@@ -4555,11 +4555,11 @@ Compare with the less preferred `host` metadata alternative.
 <a href="#toc">トップに戻る</a>
 
 
-## Services
+## サービス
 
 {@a 07-01}
 
-### Services are singletons
+### サービスはシングルトン
 
 #### Style 07-01
 
@@ -4568,7 +4568,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** use services as singletons within the same injector. Use them for sharing data and functionality.
+**Do** 同じインジェクター内でシングルトンとしてサービスを使用します。データや機能を共有するためにそれらを使用します。
 
 
 </div>
@@ -4579,7 +4579,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** Services are ideal for sharing methods across a feature area or an app.
+**Why?** サービスは、機能領域やアプリ間でメソッドを共有するのに理想的です。
 
 
 </div>
@@ -4590,7 +4590,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** Services are ideal for sharing stateful in-memory data.
+**Why?** サービスは、ステートフルなメモリ上のデータを共有するのに理想的です。
 
 
 </div>
@@ -4607,7 +4607,7 @@ Compare with the less preferred `host` metadata alternative.
 
 {@a 07-02}
 
-### Single responsibility
+### 単一責任
 
 #### Style 07-02
 
@@ -4616,7 +4616,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** create services with a single responsibility that is encapsulated by its context.
+**Do** コンテキストによってカプセル化された単一の責任をもったサービスを作成します。
 
 
 </div>
@@ -4627,7 +4627,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** create a new service once the service begins to exceed that singular purpose.
+**Do** サービスがその単一の目的を超え始めたら、新しいサービスを作成します。
 
 
 </div>
@@ -4638,7 +4638,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When a service has multiple responsibilities, it becomes difficult to test.
+**Why?** サービスに複数の責任があると、テストが困難になります。
 
 
 </div>
@@ -4649,7 +4649,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When a service has multiple responsibilities, every component or service that injects it now carries the weight of them all.
+**Why?** サービスに複数の責任があると、それを注入するすべてのコンポーネントまたはサービスは、それらすべての重みを負うことになります。
 
 
 </div>
@@ -4658,7 +4658,7 @@ Compare with the less preferred `host` metadata alternative.
 
 {@a 07-03}
 
-### Providing a service
+### サービスの提供
 
 #### Style 07-03
 
@@ -4667,7 +4667,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** provide a service with the app root injector in the `@Injectable` decorator of the service.
+**Do** サービスの `@Injectable` デコレーターでアプリルートインジェクターを使用してサービスを提供します。
 
 
 </div>
@@ -4678,7 +4678,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** The Angular injector is hierarchical.
+**Why?** Angularのインジェクターは階層的です。
 
 
 </div>
@@ -4689,7 +4689,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When you provide the service to a root injector, that instance of the service is shared and available in every class that needs the service. This is ideal when a service is sharing methods or state.
+**Why?** サービスをルートインジェクターに提供すると、そのサービスのインスタンスはサービスを必要とするすべてのクラスで共有され、使用可能になります。これは、サービスがメソッドや状態を共有している場合に理想的です。
 
 
 
@@ -4701,7 +4701,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When you register a service in the `@Injectable` decorator of the service, optimization tools such as those used by the CLI's production builds can perform tree shaking and remove services that aren't used by your app.
+**Why?** `@Injectable` デコレーターの中でサービスを登録すると、CLIのプロダクションビルドで使用されるような最適化ツールは、Tree Shakingを実行してアプリケーションで使用されていないサービスを削除したりできます。
 
 </div>
 
@@ -4711,7 +4711,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** This is not ideal when two different components need different instances of a service. In this scenario it would be better to provide the service at the component level that needs the new and separate instance.
+**Why?** 2つの異なるコンポーネントが異なるサービスインスタンスを必要とする場合、これは理想的ではありません。この場合は、新しい個別のインスタンスを必要とするコンポーネントレベルでサービスを提供することをお勧めします。
 
 
 </div>
@@ -4725,7 +4725,7 @@ Compare with the less preferred `host` metadata alternative.
 
 {@a 07-04}
 
-### Use the @Injectable() class decorator
+### @Injectable()クラスデコレーターを使いましょう
 
 #### Style 07-04
 
@@ -4734,7 +4734,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** use the `@Injectable()` class decorator instead of the `@Inject` parameter decorator when using types as tokens for the dependencies of a service.
+**Do** 型をサービスの依存関係のトークンとして使用する場合は、`@Inject`パラメーターデコレーターではなく `@Injectable()` クラスデコレーターを使用します。
 
 
 </div>
@@ -4745,8 +4745,8 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** The Angular Dependency Injection (DI) mechanism resolves a service's own
-dependencies based on the declared types of that service's constructor parameters.
+**Why?** Angularの依存性の注入（DI）メカニズムは、宣言されたサービスのコンストラクターパラメーターの型に基づいて、
+サービス自身の依存関係を解決します。
 
 
 </div>
@@ -4757,7 +4757,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** When a service accepts only dependencies associated with type tokens, the `@Injectable()` syntax is much less verbose compared to using `@Inject()` on each individual constructor parameter.
+**Why?** サービスが型トークンに関連付けられた依存関係のみを受け付ける場合、`@Injectable()`構文は、個々のコンストラクターパラメーターで `@Inject()` を使用する場合と比較して、はるかに冗長度が低くなります。
 
 
 </div>
@@ -4781,11 +4781,11 @@ dependencies based on the declared types of that service's constructor parameter
 <a href="#toc">トップに戻る</a>
 
 
-## Data Services
+## データサービス
 
 {@a 08-01}
 
-### Talk to the server through a service
+### サービスを通してサーバーと対話しましょう
 
 #### Style 08-01
 
@@ -4794,7 +4794,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Do** refactor logic for making data operations and interacting with data to a service.
+**Do** データ操作とインタラクションをサービスとやり取りするようにロジックをリファクタリングします。
 
 
 </div>
@@ -4805,7 +4805,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Do** make data services responsible for XHR calls, local storage, stashing in memory, or any other data operations.
+**Do** XHR呼び出し、ローカルストレージ、メモリへの保存、その他のデータ操作に対して責任をもつデータサービスを作ります。
 
 
 </div>
@@ -4816,7 +4816,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** The component's responsibility is for the presentation and gathering of information for the view. It should not care how it gets the data, just that it knows who to ask for it. Separating the data services moves the logic on how to get it to the data service, and lets the component be simpler and more focused on the view.
+**Why?** コンポーネントの責任は、ビューに対する情報の表示と収集にあります。どのようにしてデータを取得するかに関心をもつべきではありません。だれがそれを取得するのかを知っているだけです。データサービスを分離することで、取得方法に関するロジックがデータサービスへ移動し、コンポーネントをシンプルにしてビューに集中させることができます。
 
 
 </div>
@@ -4827,7 +4827,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** This makes it easier to test (mock or real) the data calls when testing a component that uses a data service.
+**Why?** これにより、データサービスを使用するコンポーネントをテストするときに、データ呼び出しのテスト（モックまたは実際のテスト）が簡単になります。
 
 
 </div>
@@ -4838,13 +4838,13 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** The details of data management, such as headers, HTTP methods,
-caching, error handling, and retry logic, are irrelevant to components
-and other data consumers.
+**Why?** ヘッダー、HTTPメソッド、キャッシング、
+エラー処理、再試行ロジックなど、データ管理の詳細は、
+コンポーネントやその他のデータ利用者には関係ありません。
 
-A data service encapsulates these details. It's easier to evolve these
-details inside the service without affecting its consumers. And it's
-easier to test the consumers with mock service implementations.
+データサービスはこれらの詳細をカプセル化します。
+利用者に影響を与えることなく、サービス内でこれらの詳細を進化させる方が簡単です。
+そして、モックサービスの実装を使って利用者をテストする方が簡単です。
 
 
 </div>
@@ -4852,15 +4852,15 @@ easier to test the consumers with mock service implementations.
 <a href="#toc">トップに戻る</a>
 
 
-## Lifecycle hooks
+## ライフサイクルフック
 
-Use Lifecycle hooks to tap into important events exposed by Angular.
+ライフサイクルフックを使用して、Angularによって公開される重要なイベントを利用します。
 
 <a href="#toc">トップに戻る</a>
 
 {@a 09-01}
 
-### Implement lifecycle hook interfaces
+### ライフサイクルフックインターフェースを実装しましょう
 
 #### Style 09-01
 
@@ -4869,7 +4869,7 @@ Use Lifecycle hooks to tap into important events exposed by Angular.
 
 
 
-**Do** implement the lifecycle hook interfaces.
+**Do** ライフサイクルフックインターフェースを実装します。
 
 
 </div>
@@ -4880,8 +4880,8 @@ Use Lifecycle hooks to tap into important events exposed by Angular.
 
 
 
-**Why?** Lifecycle interfaces prescribe typed method
-signatures. use those signatures to flag spelling and syntax mistakes.
+**Why?** ライフサイクルインターフェースは型付きのメソッドシグネチャーを規定します。
+これらのシグネチャーを使用して、スペルミスや構文の誤りを知らせます。
 
 
 </div>
@@ -4905,9 +4905,9 @@ signatures. use those signatures to flag spelling and syntax mistakes.
 <a href="#toc">トップに戻る</a>
 
 
-## Appendix
+## 付録
 
-Useful tools and tips for Angular.
+Angular用の便利なツールとヒント。
 
 <a href="#toc">トップに戻る</a>
 
@@ -4922,7 +4922,7 @@ Useful tools and tips for Angular.
 
 
 
-**Do** use [codelyzer](https://www.npmjs.com/package/codelyzer) to follow this guide.
+**Do** [codelyzer](https://www.npmjs.com/package/codelyzer)を使ってこのスタイルガイドに従います。
 
 
 </div>
@@ -4933,7 +4933,7 @@ Useful tools and tips for Angular.
 
 
 
-**Consider** adjusting the rules in codelyzer to suit your needs.
+**Consider** あなたのニーズに合うようにcodelyzerのルールを調整します。
 
 
 </div>
@@ -4942,7 +4942,7 @@ Useful tools and tips for Angular.
 
 {@a A-02}
 
-### File templates and snippets
+### ファイルテンプレートとスニペット
 
 #### Style A-02
 
@@ -4951,7 +4951,7 @@ Useful tools and tips for Angular.
 
 
 
-**Do** use file templates or snippets to help follow consistent styles and patterns. Here are templates and/or snippets for some of the web development editors and IDEs.
+**Do** ファイルテンプレートまたはスニペットを使用して、一貫したスタイルとパターンに従うようにします。ここにいくつかのWeb開発エディタとIDEのためのテンプレートやスニペットを挙げます。
 
 
 </div>
@@ -4962,17 +4962,17 @@ Useful tools and tips for Angular.
 
 
 
-**Consider** using [snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2) for [Visual Studio Code](https://code.visualstudio.com/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Visual Studio Code](https://code.visualstudio.com/)用の[スニペット](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)を使います。
 
 <a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2">
   <img src="generated/images/guide/styleguide/use-extension.gif" alt="Use Extension">
 </a>
 
-**Consider** using [snippets](https://atom.io/packages/angular-2-typescript-snippets) for [Atom](https://atom.io/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Atom](https://atom.io/)用の[スニペット](https://atom.io/packages/angular-2-typescript-snippets) を使います。
 
-**Consider** using [snippets](https://github.com/orizens/sublime-angular2-snippets) for [Sublime Text](http://www.sublimetext.com/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Sublime Text](http://www.sublimetext.com/)用の[スニペット](https://github.com/orizens/sublime-angular2-snippets)を使います。
 
-**Consider** using [snippets](https://github.com/mhartington/vim-angular2-snippets) for [Vim](http://www.vim.org/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Vim](http://www.vim.org/)用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使います。
 
 
 </div>

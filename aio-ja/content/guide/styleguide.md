@@ -870,7 +870,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-05}
 
-### Bootstrapping
+### ブートストラッピング
 
 #### Style 02-05
 
@@ -879,7 +879,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** put bootstrapping and platform logic for the app in a file named `main.ts`.
+**Do** アプリのブートストラップとプラットフォームのロジックを`main.ts`というファイルに配置します。
 
 
 </div>
@@ -890,7 +890,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** include error handling in the bootstrapping logic.
+**Do** ブートストラップロジックにエラー処理を含めます。
 
 
 </div>
@@ -901,7 +901,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Avoid** putting app logic in `main.ts`. Instead, consider placing it in a component or service.
+**Avoid** アプリのロジックを`main.ts`に入れることは避けましょう。代わりに、コンポーネントまたはサービスに配置することを検討してください。
 
 
 </div>
@@ -912,7 +912,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Follows a consistent convention for the startup logic of an app.
+**Why?** アプリの起動ロジックに関する一貫した規約に従います。
 
 
 </div>
@@ -923,7 +923,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Follows a familiar convention from other technology platforms.
+**Why?** 他のテクノロジープラットフォームからの慣例的な規約に従います。
 
 
 </div>
@@ -940,7 +940,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 05-02}
 
-### Component selectors
+### コンポーネントセレクター
 
 #### Style 05-02
 
@@ -949,7 +949,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use _dashed-case_ or _kebab-case_ for naming the element selectors of components.
+**Do** コンポーネントの要素セレクターに名前をつけるには、_dashed-case_または_kebab-case_を使います。
 
 
 </div>
@@ -960,7 +960,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
+**Why?** [Custom Elements](https://www.w3.org/TR/custom-elements/)の仕様と要素名を一致させます。
 
 
 </div>
@@ -993,7 +993,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-07}
 
-### Component custom prefix
+### コンポーネントのカスタム接頭辞
 
 #### Style 02-07
 
@@ -1002,7 +1002,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use a hyphenated, lowercase element selector value (e.g. `admin-users`).
+**Do** ハイフンで区切られた小文字の要素セレクター値を使用します（たとえば`admin-users`）。
 
 
 
@@ -1014,8 +1014,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use a custom prefix for a component selector.
-For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the prefix `admin` represents an admin feature area.
+**Do** コンポーネントセレクターにカスタム接頭辞を使用します。
+たとえば、`toh`という接頭辞は**T**our **o**f **H**eroesを表していて、`admin`という接頭辞は管理者用の機能領域を表します。
 
 
 </div>
@@ -1026,7 +1026,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** use a prefix that identifies the feature area or the app itself.
+**Do** 機能領域またはアプリ自体を識別する接頭辞を使用します。
 
 
 </div>
@@ -1037,7 +1037,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Prevents element name collisions with components in other apps and with native HTML elements.
+**Why?** 要素名が他のアプリケーションのコンポーネントおよびネイティブのHTML要素と競合しないようにします。
 
 
 </div>
@@ -1048,7 +1048,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Makes it easier to promote and share the component in other apps.
+**Why?** コンポーネントを宣伝したり他のアプリと共有したりするのが簡単になります。
 
 
 </div>
@@ -1059,7 +1059,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Components are easy to identify in the DOM.
+**Why?** DOMの中でコンポーネントを簡単に識別できます。
 
 
 </div>
@@ -1440,7 +1440,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-11}
 
-### _End-to-End_ (E2E) test file names
+### _End-to-End_ (E2E) テストのファイル名
 
 #### Style 02-11
 
@@ -1448,7 +1448,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** name end-to-end test specification files after the feature they test with a suffix of `.e2e-spec`.
+**Do** E2Eのテスト仕様ファイルは、機能の後に`.e2e-spec`という接尾辞を付けます。
 
 
 </div>
@@ -1459,7 +1459,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides a consistent way to quickly identify end-to-end tests.
+**Why?** E2Eのテストを迅速に識別するための一貫した方法を提供します。
 
 
 </div>
@@ -1470,7 +1470,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides pattern matching for test runners and build automation.
+**Why?** テストランナーとビルドオートメーションのためのパターンマッチングを提供します。
 
 
 </div>
@@ -1529,7 +1529,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-12}
 
-### Angular _NgModule_ names
+### Angularの_NgModule_の名前
 
 #### Style 02-12
 
@@ -1538,7 +1538,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** append the symbol name with the suffix `Module`.
+**Do** シンボル名に`Module`接尾辞を追加します。
 
 
 </div>
@@ -1549,7 +1549,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** give the file name the `.module.ts` extension.
+**Do** ファイル名に`.module.ts`拡張子を付けます。
 
 
 </div>
@@ -1560,7 +1560,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** name the module after the feature and folder it resides in.
+**Do** 中に存在する機能とフォルダに基づいてモジュールに名前を付けます。
 
 
 </div>
@@ -1571,7 +1571,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides a consistent way to quickly identify and reference modules.
+**Why?** モジュールを迅速に識別して参照するための一貫した方法を提供します。
 
 
 </div>
@@ -1582,7 +1582,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Upper camel case is conventional for identifying objects that can be instantiated using a constructor.
+**Why?** UpperCamelCaseは、コンストラクターを使用してインスタンス化できるオブジェクトを識別するため慣例的なものです。
 
 
 </div>
@@ -1593,7 +1593,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Easily identifies the module as the root of the same named feature.
+**Why?** 同じ名前の機能のルートとしてモジュールを簡単に識別します。
 
 
 </div>
@@ -1604,7 +1604,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** suffix a _RoutingModule_ class name with `RoutingModule`.
+**Do** _RoutingModule_クラス名に`RoutingModule`接尾辞を付けます。
 
 
 </div>
@@ -1615,7 +1615,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** end the filename of a _RoutingModule_ with `-routing.module.ts`.
+**Do** _RoutingModule_のファイル名の最後を`-routing.module.ts`にします。
 
 
 </div>
@@ -1626,8 +1626,8 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** A `RoutingModule` is a module dedicated exclusively to configuring the Angular router.
-A consistent class and file name convention make these modules easy to spot and verify.
+**Why?** `RoutingModule`はAngularルーターの設定専用のモジュールです。
+一貫したクラスとファイル名の規則により、これらのモジュールを簡単に見つけて検証できます。
 
 </div>
 

@@ -696,8 +696,9 @@
         },
         {
           "url": "guide/styleguide",
-          "title": "Style Guide",
-          "tooltip": "Write Angular with style."
+          "title": "スタイルガイド",
+          "tooltip": "スタイルに沿ってAngularを書きます。",
+          "translated": true
         },
         {
           "url": "guide/glossary",

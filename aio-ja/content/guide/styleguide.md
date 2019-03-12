@@ -1757,15 +1757,15 @@ A consistent class and file name convention make these modules easy to spot and 
 <a href="#toc">トップに戻る</a>
 
 
-## Coding conventions
+## コーディング規約
 
-Have a consistent set of coding, naming, and whitespace conventions.
+コーディング、命名、およびスペースについて、一貫した規則のセットを持ちましょう。
 
 
 
 {@a 03-01}
 
-### Classes
+### クラス
 
 #### Style 03-01
 
@@ -1773,7 +1773,7 @@ Have a consistent set of coding, naming, and whitespace conventions.
 
 
 
-**Do** use upper camel case when naming classes.
+**Do** クラス名にはUpperCamelCaseを使用します。
 
 
 </div>
@@ -1784,7 +1784,7 @@ Have a consistent set of coding, naming, and whitespace conventions.
 
 
 
-**Why?** Follows conventional thinking for class names.
+**Why?** クラス名の慣例的な考え方に従います。
 
 
 </div>
@@ -1795,8 +1795,8 @@ Have a consistent set of coding, naming, and whitespace conventions.
 
 
 
-**Why?** Classes can be instantiated and construct an instance.
-By convention, upper camel case indicates a constructable asset.
+**Why?** クラスはインスタンス化可能、そしてインスタンスを構築するものです。
+慣例的に、UpperCamelCaseはインスタンス化可能なものを示します。
 
 
 </div>
@@ -1822,7 +1822,7 @@ By convention, upper camel case indicates a constructable asset.
 
 {@a 03-02}
 
-### Constants
+### 定数
 
 #### Style 03-02
 
@@ -1830,7 +1830,7 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-**Do** declare variables with `const` if their values should not change during the application lifetime.
+**Do** アプリケーションの実行中に値が変更されないようにするには、変数を `const` で宣言します。
 
 
 </div>
@@ -1841,7 +1841,7 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-**Why?** Conveys to readers that the value is invariant.
+**Why?** 値が不変であることを読み手に伝えます。
 
 
 </div>
@@ -1852,8 +1852,8 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-**Why?** TypeScript helps enforce that intent by requiring immediate initialization and by
-preventing subsequent re-assignment.
+**Why?** TypeScriptは、即座の初期化を要求し、その後の再割り当てを防ぐことによって、
+その意図を強制するのに役立ちます。
 
 
 </div>
@@ -1864,7 +1864,7 @@ preventing subsequent re-assignment.
 
 
 
-**Consider** spelling `const` variables in lower camel case.
+**Consider** `const` 変数名にはlowerCamelCaseを使用します。
 
 
 </div>
@@ -1875,8 +1875,8 @@ preventing subsequent re-assignment.
 
 
 
-**Why?** Lower camel case variable names (`heroRoutes`) are easier to read and understand
-than the traditional UPPER_SNAKE_CASE names (`HERO_ROUTES`).
+**Why?** lowerCamelCaseの変数名（`heroRoutes`）は、
+伝統的なUPPER_SNAKE_CASEの変数名（`HERO_ROUTES`）よりも読みやすく理解しやすいです。
 
 
 </div>
@@ -1887,9 +1887,9 @@ than the traditional UPPER_SNAKE_CASE names (`HERO_ROUTES`).
 
 
 
-**Why?** The tradition of naming constants in UPPER_SNAKE_CASE reflects
-an era before the modern IDEs that quickly reveal the `const` declaration.
-TypeScript prevents accidental reassignment.
+**Why?** UPPER_SNAKE_CASEにおける定数の命名の伝統は、
+`const`宣言をすぐに明らかにする現代のIDEより前の時代を反映しています。
+TypeScriptは不測の再代入を防いでくれます。
 
 
 </div>
@@ -1900,7 +1900,7 @@ TypeScript prevents accidental reassignment.
 
 
 
-**Do** tolerate _existing_ `const` variables that are spelled in UPPER_SNAKE_CASE.
+**Do** UPPER_SNAKE_CASEで書かれている既存の`const`変数を許容します。
 
 
 </div>
@@ -1911,9 +1911,9 @@ TypeScript prevents accidental reassignment.
 
 
 
-**Why?** The tradition of UPPER_SNAKE_CASE remains popular and pervasive,
-especially in third party modules.
-It is rarely worth the effort to change them at the risk of breaking existing code and documentation.
+**Why?** UPPER_SNAKE_CASEの伝統は、特にサードパーティーのモジュールで広く普及しています。
+既存のコードやドキュメンテーションを壊す危険性があるため、
+それらを変更する努力をする価値はほとんどありません。
 
 
 </div>
@@ -1931,7 +1931,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 {@a 03-03}
 
-### Interfaces
+### インターフェース
 
 #### Style 03-03
 
@@ -1939,7 +1939,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Do** name an interface using upper camel case.
+**Do** インターフェース名にはUpperCamelCaseを使用します。
 
 
 </div>
@@ -1950,7 +1950,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Consider** naming an interface without an `I` prefix.
+**Consider** `I` 接頭辞を付けずにインターフェースに名前を付けます。
 
 
 </div>
@@ -1961,7 +1961,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Consider** using a class instead of an interface for services and declarables (components, directives, and pipes).
+**Consider** サービスとDeclarables（コンポーネント、ディレクティブ、およびパイプ）にはインターフェースではなくクラスを使用します。
 
 
 </div>
@@ -1972,7 +1972,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Consider** using an interface for data models.
+**Consider** データモデルにインターフェースを使用します。
 
 
 </div>
@@ -1983,8 +1983,8 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Why?** <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">TypeScript guidelines</a>
-discourage the `I` prefix.
+**Why?** <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">TypeScriptのガイドライン</a>では、
+`I`接頭辞は推奨されていません。
 
 
 </div>
@@ -1995,7 +1995,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** A class alone is less code than a _class-plus-interface_.
+**Why?** クラス単独のほうが、_クラス＋インターフェース_よりもコードが少なくなります。
 
 
 </div>
@@ -2006,7 +2006,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** A class can act as an interface (use `implements` instead of `extends`).
+**Why?** クラスはインターフェースとして機能することができます（`extends`の代わりに`implements`を使用します）。
 
 
 </div>
@@ -2017,7 +2017,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** An interface-class can be a provider lookup token in Angular dependency injection.
+**Why?** Angularの依存性の注入では、インターフェースクラスをプロバイダーの検索トークンにすることができます。
 
 
 </div>
@@ -2042,7 +2042,7 @@ discourage the `I` prefix.
 
 {@a 03-04}
 
-### Properties and methods
+### プロパティとメソッド
 
 #### Style 03-04
 
@@ -2051,7 +2051,7 @@ discourage the `I` prefix.
 
 
 
-**Do** use lower camel case to name properties and methods.
+**Do** プロパティとメソッドの名前にはlowerCamelCaseを使用します。
 
 
 </div>
@@ -2062,7 +2062,7 @@ discourage the `I` prefix.
 
 
 
-**Avoid** prefixing private properties and methods with an underscore.
+**Avoid** プライベートプロパティとメソッドの前にアンダースコアを付けません。
 
 
 </div>
@@ -2073,7 +2073,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** Follows conventional thinking for properties and methods.
+**Why?** プロパティとメソッドについての慣例的な考え方に従います。
 
 
 </div>
@@ -2084,7 +2084,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** JavaScript lacks a true private property or method.
+**Why?** JavaScriptには、真にプライベートなプロパティまたはメソッドはありません。
 
 
 </div>
@@ -2095,7 +2095,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** TypeScript tooling makes it easy to identify private vs. public properties and methods.
+**Why?** TypeScriptツールを使用すると、プロパティやメソッドがプライベートかパブリックかを簡単に識別できます。
 
 
 </div>
@@ -2120,7 +2120,7 @@ discourage the `I` prefix.
 
 {@a 03-06}
 
-### Import line spacing
+### インポート行の空白
 
 #### Style 03-06
 
@@ -2129,7 +2129,7 @@ discourage the `I` prefix.
 
 
 
-**Consider** leaving one empty line between third party imports and application imports.
+**Consider** サードパーティのインポートとアプリケーションのインポートの間に1行の空白行を置きます。
 
 
 </div>
@@ -2140,7 +2140,7 @@ discourage the `I` prefix.
 
 
 
-**Consider** listing import lines alphabetized by the module.
+**Consider** インポート行をモジュールごとにアルファベット順にリストします。
 
 
 </div>
@@ -2151,7 +2151,7 @@ discourage the `I` prefix.
 
 
 
-**Consider** listing destructured imported symbols alphabetically.
+**Consider** 分割されたインポートシンボルをアルファベット順にリストします。
 
 
 </div>
@@ -2162,7 +2162,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** The empty line separates _your_ stuff from _their_ stuff.
+**Why?** 空行が_あなたの_ものと_彼らの_ものを分離します。
 
 
 </div>
@@ -2173,7 +2173,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** Alphabetizing makes it easier to read and locate symbols.
+**Why?** アルファベット順にすることで、シンボルを読みやすくし、見つけやすくなります。
 
 
 </div>

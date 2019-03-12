@@ -2197,17 +2197,17 @@ TypeScriptは不測の再代入を防いでくれます。
 <a href="#toc">トップに戻る</a>
 
 
-## Application structure and NgModules
+## アプリケーション構造とNgModule
 
-Have a near-term view of implementation and a long-term vision. Start small but keep in mind where the app is heading down the road.
+短期的な実装の視点と長期的なビジョンを持ってください。小さく始めますが、アプリがどこへ向かっているのかを意識しておきましょう。
 
-All of the app's code goes in a folder named `src`.
-All feature areas are in their own folder, with their own NgModule.
+アプリのコードはすべて`src`という名前のフォルダーに入っています。
+すべての機能領域は、独自のNgModuleとともに、独自のフォルダにあります。
 
-All content is one asset per file. Each component, service, and pipe is in its own file.
-All third party vendor scripts are stored in another folder and not in the `src` folder.
-You didn't write them and you don't want them cluttering `src`.
-Use the naming conventions for files in this guide.
+すべてのコンテンツはファイルごとの1つのアセットです。各コンポーネント、サービス、およびパイプはそれぞれ独自のファイルにあります。
+すべてのサードパーティベンダーのスクリプトは、`src`フォルダではなく別のフォルダに格納されています。
+あなたはそれらを書いていませんし、`src`を散らかしてほしくもありません。
+このガイドにあるファイルの命名規則を使用してください。
 <a href="#toc">トップに戻る</a>
 
 {@a 04-01}
@@ -2221,10 +2221,10 @@ Use the naming conventions for files in this guide.
 
 
 
-**Do** structure the app such that you can **L**ocate code quickly,
-**I**dentify the code at a glance,
-keep the **F**lattest structure you can, and
-**T**ry to be DRY.
+**Do** すぐにコードを見つけられるように（**L**ocate）、
+一目でコードを識別できるように（**I**dentify）、
+できる限りフラットな（**F**lattest）構造を維持し、
+そしてDRYを目指して（**T**ry）アプリを構築してください。
 
 
 </div>
@@ -2235,7 +2235,7 @@ keep the **F**lattest structure you can, and
 
 
 
-**Do** define the structure to follow these four basic guidelines, listed in order of importance.
+**Do** 重要な順にリストされているこれら4つの基本的なガイドラインに従うように構造を定義して下さい。
 
 
 </div>
@@ -2246,9 +2246,9 @@ keep the **F**lattest structure you can, and
 
 
 
-**Why?** LIFT Provides a consistent structure that scales well, is modular, and makes it easier to increase developer efficiency by finding code quickly.
-To confirm your intuition about a particular structure, ask:
-_can I quickly open and start work in all of the related files for this feature_?
+**Why?** LIFTは、拡張性に優れ、モジュール化され、コードがすばやく見つかることで開発者の効率が上がりやすい、一貫した構造を提供します。
+特定の構造についてあなたの直感を確認するために質問してみましょう：
+_すぐにこの機能のためのすべての関連ファイルを開いて仕事を始められますか？_
 
 
 </div>
@@ -2257,7 +2257,7 @@ _can I quickly open and start work in all of the related files for this feature_
 
 {@a 04-02}
 
-### Locate
+### 見つけやすさ（Locate）
 
 #### Style 04-02
 
@@ -2266,7 +2266,7 @@ _can I quickly open and start work in all of the related files for this feature_
 
 
 
-**Do** make locating code intuitive, simple and fast.
+**Do** コードを直感的に、シンプルに、そして素早く見つけられるようにします。
 
 
 </div>
@@ -2277,10 +2277,10 @@ _can I quickly open and start work in all of the related files for this feature_
 
 
 
-**Why?** To work efficiently you must be able to find files quickly,
-especially when you do not know (or do not remember) the file _names_.
-Keeping related files near each other in an intuitive location saves time.
-A descriptive folder structure makes a world of difference to you and the people who come after you.
+**Why?** 効率的に作業するには、特にファイル名がわからない（または覚えていない）場合に、
+ファイルを素早く見つけることができなければなりません。
+関連ファイルを直感的な場所で近くに置いておくと時間を節約できます。
+説明的なフォルダ構造は、あなたとあなたの後に来る人の間で、違う世界を作ってしまいます。
 
 
 </div>
@@ -2289,7 +2289,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 {@a 04-03}
 
-### Identify
+### 識別しやすさ（Identify）
 
 #### Style 04-03
 
@@ -2298,7 +2298,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Do** name the file such that you instantly know what it contains and represents.
+**Do** ファイルに何が含まれていて何を表しているのかすぐに分かるような名前を付けます。
 
 
 </div>
@@ -2309,7 +2309,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Do** be descriptive with file names and keep the contents of the file to exactly one component.
+**Do** ファイル名を説明にして、ファイルの内容を確実に1つのコンポーネントにします。
 
 
 </div>
@@ -2320,7 +2320,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Avoid** files with multiple components, multiple services, or a mixture.
+**Avoid** 複数のコンポーネント、複数のサービス、またはそれらが混在するファイルを避けます。
 
 
 </div>
@@ -2331,8 +2331,8 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Why?** Spend less time hunting and pecking for code, and become more efficient.
-Longer file names are far better than _short-but-obscure_ abbreviated names.
+**Why?** コードを探す時間を短縮し、効率的になります。
+より長いファイル名は、_短くて曖昧な_短縮名よりはるかに優れています。
 
 
 </div>
@@ -2343,9 +2343,9 @@ Longer file names are far better than _short-but-obscure_ abbreviated names.
 
 
 
-It may be advantageous to deviate from the _one-thing-per-file_ rule when
-you have a set of small, closely-related features that are better discovered and understood
-in a single file than as multiple files. Be wary of this loophole.
+複数のファイルよりも1つのファイルとして検出され理解されやすい、
+小さくて密接に関連する一連の機能がある場合は、
+_1ファイルに1つ_のルールから逸脱することが有利な場合があります。この抜け穴に注意してください。
 
 
 </div>
@@ -2355,7 +2355,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 {@a 04-04}
 
-### Flat
+### フラット（Flat）
 
 #### Style 04-04
 
@@ -2363,7 +2363,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Do** keep a flat folder structure as long as possible.
+**Do** フラットなフォルダー構造をできるだけ維持します。
 
 
 </div>
@@ -2374,7 +2374,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Consider** creating sub-folders when a folder reaches seven or more files.
+**Consider** フォルダのファイルが7つ以上に達したときにサブフォルダを作成します。
 
 
 </div>
@@ -2385,7 +2385,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Consider** configuring the IDE to hide distracting, irrelevant files such as generated `.js` and `.js.map` files.
+**Consider** 生成された`.js`ファイルや`.js.map`ファイルなど、邪魔になる無関係なファイルを隠すようにIDEを設定します。
 
 
 </div>
@@ -2396,16 +2396,16 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Why?** No one wants to search for a file through seven levels of folders.
-A flat structure is easy to scan.
+**Why?** 7つもの階層のフォルダーを通してファイルを検索したいという人はいません。
+フラットな構造はスキャンが簡単です。
 
-On the other hand,
-<a href="https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two">psychologists believe</a>
-that humans start to struggle when the number of adjacent interesting things exceeds nine.
-So when a folder has ten or more files, it may be time to create subfolders.
+一方で、<a href="https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two">心理学者の考え</a>では、
+隣接する関心ことの数が9を超えると人間はもがき始めるといいます。
+そのため、フォルダに10個以上のファイルがある場合は、
+サブフォルダを作成する必要があるでしょう。
 
-Base your decision on your comfort level.
-Use a flatter structure until there is an obvious value to creating a new folder.
+あなたの快適さのレベルに基づいて決定を下しましょう。
+新しいフォルダを作成することに明らかな価値が生まれるまでは、フラットな構造を使用してください。
 
 
 </div>
@@ -2415,7 +2415,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 {@a 04-05}
 
-### _T-DRY_ (Try to be _DRY_)
+### _T-DRY_ (_DRY_を目指す)
 
 #### Style 04-05
 
@@ -2423,7 +2423,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 
 
-**Do** be DRY (Don't Repeat Yourself).
+**Do** DRY（Don't Repeat Yourself）にします。
 
 
 </div>
@@ -2434,7 +2434,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 
 
-**Avoid** being so DRY that you sacrifice readability.
+**Avoid** 読みやすさを犠牲にしてDRYにすることは避けましょう。
 
 
 </div>
@@ -2445,11 +2445,11 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 
 
-**Why?** Being DRY is important, but not crucial if it sacrifices the other elements of LIFT.
-That's why it's called _T-DRY_.
-For example, it's redundant to name a template `hero-view.component.html` because
-with the `.html` extension, it is obviously a view.
-But if something is not obvious or departs from a convention, then spell it out.
+**Why?** DRYであることは重要ですが、LIFTの他の要素を犠牲にするのであれば重要ではありません。
+それが _T-DRY_ と呼ばれる理由です。
+たとえば、テンプレートに `hero-view.component.html` という名前を付けることは、
+拡張子が `.html` の場合は明らかにビューであるため冗長です。
+しかし、何かがはっきりしていない、あるいは慣習から逸脱している場合は、それを詳しく書きましょう。
 
 
 </div>
@@ -2459,7 +2459,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 {@a 04-06}
 
-### Overall structural guidelines
+### 全体構造のガイドライン
 
 #### Style 04-06
 
@@ -2467,7 +2467,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Do** start small but keep in mind where the app is heading down the road.
+**Do** 小さく始めますが、アプリがどこに向かっているのかは意識しておきます。
 
 
 </div>
@@ -2478,7 +2478,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Do** have a near term view of implementation and a long term vision.
+**Do** 短期的な実装の視点と長期的なビジョンを持ちます。
 
 
 </div>
@@ -2489,7 +2489,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Do** put all of the app's code in a folder named `src`.
+**Do** アプリのすべてのコードを `src` という名前のフォルダーに入れます。
 
 
 </div>
@@ -2500,7 +2500,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Consider** creating a folder for a component when it has multiple accompanying files (`.ts`, `.html`, `.css` and `.spec`).
+**Consider** 複数の関連するファイル（`.ts`、`.html`、`.css`、および`.spec`）がある場合は、コンポーネント用のフォルダーを作成します。
 
 
 </div>
@@ -2511,7 +2511,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Why?** Helps keep the app structure small and easy to maintain in the early stages, while being easy to evolve as the app grows.
+**Why?** アプリの構造を小さくし、初期段階で保守しやすくする一方で、アプリが大きくなっても進化しやすくなります。
 
 
 </div>
@@ -2522,7 +2522,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Why?** Components often have four files (e.g. `*.html`, `*.css`, `*.ts`, and `*.spec.ts`) and can clutter a folder quickly.
+**Why?** 多くの場合、コンポーネントには4つのファイル（例：`*.html`、`*.css`、`*.ts`、および`*.spec.ts`）があり、フォルダをすばやく整理することができます。
 
 
 </div>
@@ -2532,7 +2532,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 {@a file-tree}
 
 
-Here is a compliant folder and file structure:
+これは、ガイドを守ったフォルダとファイル構造です。
 
 
 <div class='filetree'>
@@ -2767,10 +2767,10 @@ Here is a compliant folder and file structure:
 
 
 
-While components in dedicated folders are widely preferred,
-another option for small apps is to keep components flat (not in a dedicated folder).
-This adds up to four files to the existing folder, but also reduces the folder nesting.
-Whatever you choose, be consistent.
+コンポーネントを専用のフォルダ内に配置することが広く好まれていますが、
+小さなアプリのための別の選択肢はコンポーネントをフラットに保つことです（専用のフォルダ内ではありません）。
+これにより、既存のフォルダに最大4つのファイルが追加されますが、フォルダのネストも減少します。
+どの方法を選んだとしても、一貫性を保ってください。
 
 
 </div>
@@ -2779,7 +2779,7 @@ Whatever you choose, be consistent.
 
 {@a 04-07}
 
-### _Folders-by-feature_ structure
+### _機能別フォルダー_ 構造
 
 #### Style 04-07
 
@@ -2788,7 +2788,7 @@ Whatever you choose, be consistent.
 
 
 
-**Do** create folders named for the feature area they represent.
+**Do** それが表す機能領域ごとに名付けられたフォルダを作成します。
 
 
 </div>
@@ -2799,8 +2799,8 @@ Whatever you choose, be consistent.
 
 
 
-**Why?** A developer can locate the code and identify what each file represents
-at a glance. The structure is as flat as it can be and there are no repetitive or redundant names.
+**Why?** 開発者は一目でコードを見つけ、各ファイルが何を表しているのか識別できます。
+構造は可能な限りフラットで、繰り返しや重複する名前はありません。
 
 
 </div>
@@ -2811,7 +2811,7 @@ at a glance. The structure is as flat as it can be and there are no repetitive o
 
 
 
-**Why?** The LIFT guidelines are all covered.
+**Why?** LIFTのガイドラインはすべて網羅されています。
 
 
 </div>
@@ -2822,8 +2822,8 @@ at a glance. The structure is as flat as it can be and there are no repetitive o
 
 
 
-**Why?** Helps reduce the app from becoming cluttered through organizing the
-content and keeping them aligned with the LIFT guidelines.
+**Why?** 中身を整理してLIFTのガイドラインに沿った状態に保つことで、
+アプリが雑然とするのを防ぐのに役立ちます。
 
 
 </div>
@@ -2834,9 +2834,9 @@ content and keeping them aligned with the LIFT guidelines.
 
 
 
-**Why?** When there are a lot of files, for example 10+,
-locating them is easier with a consistent folder structure
-and more difficult in a flat structure.
+**Why?** たとえば10個以上、ファイルが多数ある場合は、
+一貫したフォルダ構造を使用するとそれらを見つけやすくなり、
+フラット構造の場合は難しくなります。
 
 
 </div>
@@ -2847,7 +2847,7 @@ and more difficult in a flat structure.
 
 
 
-**Do** create an NgModule for each feature area.
+**Do** 各機能領域にNgModuleを作成します。
 
 
 </div>
@@ -2858,7 +2858,7 @@ and more difficult in a flat structure.
 
 
 
-**Why?** NgModules make it easy to lazy load routable features.
+**Why?** NgModuleはルーティング可能な機能を遅延ロードすることを容易にします。
 
 
 </div>
@@ -2869,7 +2869,7 @@ and more difficult in a flat structure.
 
 
 
-**Why?** NgModules make it easier to isolate, test, and reuse features.
+**Why?** NgModuleは機能の分離、テスト、そして再利用をより簡単にします。
 
 
 </div>
@@ -2877,7 +2877,7 @@ and more difficult in a flat structure.
 
 
 <div class='file-tree-reference'>
-  <a href="#file-tree">Refer to this _folder and file structure_ example.</a>
+  <a href="#file-tree">この_フォルダーとファイル構造_の例を参照してください。</a>
 </div>
 
 <a href="#toc">Back to top
@@ -2887,7 +2887,7 @@ and more difficult in a flat structure.
 
 {@a 04-08}
 
-### App _root module_
+### アプリの _ルートモジュール
 
 #### Style 04-08
 
@@ -2895,8 +2895,8 @@ and more difficult in a flat structure.
 
 
 
-**Do** create an NgModule in the app's root folder,
-for example, in `/src/app`.
+**Do** アプリのルートフォルダ、
+たとえば `/src/app` にNgModuleを作成します。
 
 
 </div>
@@ -2907,7 +2907,7 @@ for example, in `/src/app`.
 
 
 
-**Why?** Every app requires at least one root NgModule.
+**Why?** すべてのアプリには少なくとも1つのルートNgModuleが必要です。
 
 
 </div>
@@ -2918,7 +2918,7 @@ for example, in `/src/app`.
 
 
 
-**Consider** naming the root module `app.module.ts`.
+**Consider** ルートモジュールの名前は `app.module.ts` にします。
 
 
 </div>
@@ -2929,7 +2929,7 @@ for example, in `/src/app`.
 
 
 
-**Why?** Makes it easier to locate and identify the root module.
+**Why?** ルートモジュールを見つけやすくし、識別しやすくします。
 
 
 </div>
@@ -2947,7 +2947,7 @@ for example, in `/src/app`.
 
 {@a 04-09}
 
-### Feature modules
+### 機能モジュール
 
 #### Style 04-09
 
@@ -2956,8 +2956,8 @@ for example, in `/src/app`.
 
 
 
-**Do** create an NgModule for all distinct features in an application;
-for example, a `Heroes` feature.
+**Do** アプリケーション内のすべての異なる機能に対してNgModuleを作成します。
+たとえば、`Heroes`の機能です。
 
 
 </div>
@@ -2968,8 +2968,8 @@ for example, a `Heroes` feature.
 
 
 
-**Do** place the feature module in the same named folder as the feature area;
-for example, in `app/heroes`.
+**Do** 機能領域と同じ名前のフォルダに機能モジュールを配置します。
+たとえば、`app/heroes` です。
 
 
 </div>
@@ -2980,8 +2980,8 @@ for example, in `app/heroes`.
 
 
 
-**Do** name the feature module file reflecting the name of the feature area
-and folder; for example, `app/heroes/heroes.module.ts`.
+**Do** 機能モジュールファイルに機能領域およびフォルダの名前を反映した名前を付けます。
+たとえば、`app/heroes/heroes.module.ts`です。
 
 
 </div>
@@ -2992,8 +2992,8 @@ and folder; for example, `app/heroes/heroes.module.ts`.
 
 
 
-**Do** name the feature module symbol reflecting the name of the feature
-area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `HeroesModule`.
+**Do** 機能モジュールシンボルに機能領域、フォルダ、およびファイルの名前を反映した名前を付けます。
+たとえば、`app/heroes/heroes.module.ts` は `HeroesModule` を定義します。
 
 
 </div>
@@ -3004,7 +3004,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module can expose or hide its implementation from other modules.
+**Why?** 機能モジュールは、その実装を他のモジュールに公開または隠すことができます。
 
 
 </div>
@@ -3015,7 +3015,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module identifies distinct sets of related components that comprise the feature area.
+**Why?** 機能モジュールは、機能領域に関連するコンポーネントのセットを識別します。
 
 
 </div>
@@ -3026,7 +3026,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module can easily be routed to both eagerly and lazily.
+**Why?** 機能モジュールは、即座でも遅延でも簡単にルーティングできます。
 
 
 </div>
@@ -3037,7 +3037,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module defines clear boundaries between specific functionality and other application features.
+**Why?** 機能モジュールは、特定の機能と他のアプリケーション機能との間の明確な境界を定義します。
 
 
 </div>
@@ -3048,7 +3048,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module helps clarify and make it easier to assign development responsibilities to different teams.
+**Why?** 機能モジュールを使用すると、開発の責任を明確にし、異なるチームに簡単に割り当てることができます。
 
 
 </div>
@@ -3059,7 +3059,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module can easily be isolated for testing.
+**Why?** 機能モジュールはテスト用に簡単に分離できます。
 
 
 </div>
@@ -3068,7 +3068,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 {@a 04-10}
 
-### Shared feature module
+### 共有機能モジュール
 
 #### Style 04-10
 
@@ -3077,8 +3077,8 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Do** create a feature module named `SharedModule` in a `shared` folder;
-for example, `app/shared/shared.module.ts` defines `SharedModule`.
+**Do** `shared` フォルダに `SharedModule` という名前の機能モジュールを作成します。
+たとえば、`app/shared/shared.module.ts`は`SharedModule`を定義します。
 
 
 </div>
@@ -3089,8 +3089,8 @@ for example, `app/shared/shared.module.ts` defines `SharedModule`.
 
 
 
-**Do** declare components, directives, and pipes in a shared module when those
-items will be re-used and referenced by the components declared in other feature modules.
+**Do** コンポーネント、ディレクティブ、およびパイプが再利用され、他の機能モジュールで宣言されたコンポーネントによって参照される場合は、
+共有モジュールの中で宣言します。
 
 
 </div>
@@ -3101,8 +3101,8 @@ items will be re-used and referenced by the components declared in other feature
 
 
 
-**Consider** using the name SharedModule when the contents of a shared
-module are referenced across the entire application.
+**Consider** 共有モジュールの内容がアプリケーション全体で参照されている場合は、
+`SharedModule`という名前を使用します。
 
 
 </div>
@@ -3113,9 +3113,9 @@ module are referenced across the entire application.
 
 
 
-**Consider** _not_ providing services in shared modules. Services are usually
-singletons that are provided once for the entire application or
-in a particular feature module. There are exceptions, however. For example, in the sample code that follows, notice that the `SharedModule` provides `FilterTextService`. This is acceptable here because the service is stateless;that is, the consumers of the service aren't impacted by new instances.
+**Consider** 共有モジュールではサービスを提供_しません_。
+サービスは通常、アプリケーション全体に対して、または特定の機能モジュールに対して1回提供されるシングルトンです。
+ただし、例外があります。たとえば、次のサンプルコードでは、`SharedModule`が`FilterTextService`を提供しています。これは、サービスがステートレスであるため、つまりサービスの利用者が新しいインスタンスの影響を受けないため、ここでは受け入れられます。
 
 
 </div>
@@ -3126,8 +3126,8 @@ in a particular feature module. There are exceptions, however. For example, in t
 
 
 
-**Do** import all modules required by the assets in the `SharedModule`;
-for example, `CommonModule` and `FormsModule`.
+**Do** `SharedModule`のアセットに必要なすべてのモジュールをインポートします。
+たとえば、`CommonModule`や`FormsModule`などです。
 
 
 </div>
@@ -3138,9 +3138,9 @@ for example, `CommonModule` and `FormsModule`.
 
 
 
-**Why?** `SharedModule` will contain components, directives and pipes
-that may need features from another common module; for example,
-`ngFor` in `CommonModule`.
+**Why?** `SharedModule`は他の共通モジュールの機能を必要とする
+コンポーネント、ディレクティブとパイプを含むことがあります。
+たとえば、`CommonModule`の`ngFor`です。
 
 
 </div>
@@ -3151,7 +3151,7 @@ that may need features from another common module; for example,
 
 
 
-**Do** declare all components, directives, and pipes in the `SharedModule`.
+**Do** `SharedModule`内ですべてのコンポーネント、ディレクティブ、およびパイプを宣言します。
 
 
 </div>
@@ -3162,7 +3162,7 @@ that may need features from another common module; for example,
 
 
 
-**Do** export all symbols from the `SharedModule` that other feature modules need to use.
+**Do** 他の機能モジュールが使用する必要があるすべてのシンボルを`SharedModule`からエクスポートします。
 
 
 </div>
@@ -3173,7 +3173,7 @@ that may need features from another common module; for example,
 
 
 
-**Why?** `SharedModule` exists to make commonly used components, directives and pipes available for use in the templates of components in many other modules.
+**Why?** `SharedModule`は、よく使われるコンポーネント、ディレクティブ、およびパイプを他の多くのモジュールのコンポーネントのテンプレートで使用できるようにするために存在します。
 
 
 </div>
@@ -3184,7 +3184,7 @@ that may need features from another common module; for example,
 
 
 
-**Avoid** specifying app-wide singleton providers in a `SharedModule`. Intentional singletons are OK. Take care.
+**Avoid** `SharedModule`でアプリ全体のシングルトンプロバイダーを指定することは避けましょう。意図的なものは問題ありません。注意しましょう。
 
 
 </div>
@@ -3195,7 +3195,7 @@ that may need features from another common module; for example,
 
 
 
-**Why?** A lazy loaded feature module that imports that shared module will make its own copy of the service and likely have undesirable results.
+**Why?** その共有モジュールをインポートする遅延ロードされた機能モジュールは、サービスのコピーを作成し、望ましくない結果をもたらす可能性があります。
 
 
 </div>
@@ -3206,8 +3206,8 @@ that may need features from another common module; for example,
 
 
 
-**Why?** You don't want each module to have its own separate instance of singleton services.
-Yet there is a real danger of that happening if the `SharedModule` provides a service.
+**Why?** 各モジュールに独自のシングルトンサービスの個別のインスタンスを持たせたくはありません。
+`SharedModule`がサービスを提供していると、実際にそのような危険が発生します。
 
 
 </div>
@@ -3320,7 +3320,7 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 {@a 04-11}
 
-### Core feature module
+### コア機能モジュール
 
 #### Style 04-11
 
@@ -3329,8 +3329,8 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 
 
-**Consider** collecting numerous, auxiliary, single-use classes inside a core module
-to simplify the apparent structure of a feature module.
+**Consider** 一度だけ使う補助的な多数のクラスをコアモジュール内に集めて、
+機能モジュールの見かけの構造をシンプルにします。
 
 
 </div>
@@ -3341,9 +3341,9 @@ to simplify the apparent structure of a feature module.
 
 
 
-**Consider** calling the application-wide core module, `CoreModule`.
-Importing `CoreModule` into the root `AppModule` reduces its complexity
-and emphasizes its role as orchestrator of the application as a whole.
+**Consider** アプリケーション全体のコアモジュールを `CoreModule` と呼びます。
+`CoreModule`をルートの`AppModule`にインポートすると、その複雑さが軽減され、
+アプリケーション全体の調整者としての役割が強調されます。
 
 
 </div>
@@ -3354,7 +3354,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** create a feature module named `CoreModule` in a `core` folder (e.g. `app/core/core.module.ts` defines `CoreModule`).
+**Do** `core` フォルダーに`CoreModule`という名前の機能モジュールを作成します（たとえば、`app/core/core.module.ts`は`CoreModule`を定義します）。
 
 
 </div>
@@ -3365,7 +3365,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** put a singleton service whose instance will be shared throughout the application in the `CoreModule` (e.g. `ExceptionService` and `LoggerService`).
+**Do** そのインスタンスがアプリケーション全体で共有されるシングルトンサービス（たとえば`ExceptionService`や`LoggerService`）を`CoreModule`に配置します。
 
 
 </div>
@@ -3376,7 +3376,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** import all modules required by the assets in the `CoreModule` (e.g. `CommonModule` and `FormsModule`).
+**Do** `CoreModule`内のアセットに必要なすべてのモジュールをインポートします（たとえば`CommonModule`や`FormsModule`）。
 
 
 </div>
@@ -3387,7 +3387,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Why?** `CoreModule` provides one or more singleton services. Angular registers the providers with the app root injector, making a singleton instance of each service available to any component that needs them, whether that component is eagerly or lazily loaded.
+**Why?** `CoreModule`は1つ以上のシングルトンサービスを提供します。 Angularはプロバイダーをアプリのルートインジェクターに登録し、各サービスのシングルトンインスタンスを、それらが必要なコンポーネントが即座または遅延的にロードされているかにかかわらず利用できるようにします。
 
 
 </div>
@@ -3398,7 +3398,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Why?** `CoreModule` will contain singleton services. When a lazy loaded module imports these, it will get a new instance and not the intended app-wide singleton.
+**Why?** `CoreModule`はシングルトンサービスを含みます。遅延ロードされたモジュールがこれらをインポートすると、意図されたアプリケーション全体のシングルトンではなく、新しいインスタンスを取得します。
 
 
 </div>
@@ -3409,8 +3409,8 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** gather application-wide, single use components in the `CoreModule`.
-Import it once (in the `AppModule`) when the app starts and never import it anywhere else. (e.g. `NavComponent` and `SpinnerComponent`).
+**Do** アプリケーション全体の一度しか使わないコンポーネントを`CoreModule`に集めます。
+アプリの起動時に（`AppModule`で）一度インポートし、他の場所にはインポートしないでください（たとえば`NavComponent`や`SpinnerComponent`など）。
 
 
 </div>
@@ -3421,9 +3421,9 @@ Import it once (in the `AppModule`) when the app starts and never import it anyw
 
 
 
-**Why?** Real world apps can have several single-use components (e.g., spinners, message toasts, and modal dialogs) that appear only in the `AppComponent` template.
-They are not imported elsewhere so they're not shared in that sense.
-Yet they're too big and messy to leave loose in the root folder.
+**Why?** 現実世界のアプリケーションは、`AppComponent`テンプレートにのみ表示されるいくつかの使い捨てコンポーネント（スピナー、メッセージトースト、モーダルダイアログなど）を持ちます。
+それらは他の場所にはインポートされないので、実質的には共有されません。
+それでも、それらはとても大きく、ルートフォルダに入れたままにすると汚くなります。
 
 
 </div>
@@ -3434,7 +3434,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Avoid** importing the `CoreModule` anywhere except in the `AppModule`.
+**Avoid** `AppModule`以外の場所で`CoreModule`をインポートすることは避けましょう。
 
 
 </div>
@@ -3445,7 +3445,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Why?** A lazily loaded feature module that directly imports the `CoreModule` will make its own copy of services and likely have undesirable results.
+**Why?** `CoreModule`を直接インポートする遅延ロードされた機能モジュールは、サービスのコピーを作成し、望ましくない結果を招く可能性があります。
 
 
 </div>
@@ -3456,7 +3456,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Why?** An eagerly loaded feature module already has access to the `AppModule`'s injector, and thus the `CoreModule`'s services.
+**Why?** 即座にロードされた機能モジュールは、すでに`AppModule`のインジェクター、つまり`CoreModule`のサービスにアクセスできます。
 
 
 </div>
@@ -3467,7 +3467,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Do** export all symbols from the `CoreModule` that the `AppModule` will import and make available for other feature modules to use.
+**Do** `AppModule`がインポートする`CoreModule`からすべてのシンボルをエクスポートし、他の機能モジュールが使用できるようにします。
 
 
 </div>
@@ -3489,9 +3489,9 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Why?** You want the entire app to use the one, singleton instance.
-You don't want each module to have its own separate instance of singleton services.
-Yet there is a real danger of that happening accidentally if the `CoreModule` provides a service.
+**Why?** アプリ全体で1つのシングルトンインスタンスを使用する必要があります。
+各モジュールに独自のシングルトンサービスの個別のインスタンスを持たせたくはありません。
+それでも、`CoreModule`がサービスを提供していると、偶然に起こる危険性が実際にあります。
 
 
 
@@ -3635,10 +3635,10 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 
 
-`AppModule` is a little smaller because many app/root classes have moved to other modules.
-`AppModule` is stable because you will add future components and providers to other modules, not this one.
-`AppModule` delegates to imported modules rather than doing work.
-`AppModule` is focused on its main task, orchestrating the app as a whole.
+多くの app/root のクラスが他のモジュールに移動したため、`AppModule`は少し小さくなります。 
+将来のコンポーネントとプロバイダーは他のモジュールに追加するので、`AppModule`には追加されず安定します。 
+`AppModule`は作業をおこなわず、インポートされたモジュールに委譲します。 
+`AppModule`はアプリ全体を調整するという本来のタスクに集中します。
 
 
 </div>
@@ -3647,18 +3647,18 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 {@a 04-12}
 
-### Prevent re-import of the core module
+### コアモジュールの再インポートを防ぎましょう
 
 #### Style 04-12
 
-Only the root `AppModule` should import the `CoreModule`.
+ルートの`AppModule`だけが`CoreModule`をインポートすべきです。
 
 
 <div class="s-rule do">
 
 
 
-**Do** guard against reimporting of `CoreModule` and fail fast by adding guard logic.
+**Do** `CoreModule`の再インポートを防止し、保護ロジックを追加して速やかに失敗します。
 
 
 </div>
@@ -3669,7 +3669,7 @@ Only the root `AppModule` should import the `CoreModule`.
 
 
 
-**Why?** Guards against reimporting of the `CoreModule`.
+**Why?** `CoreModule`の再インポートを防ぎます。
 
 
 </div>
@@ -3680,7 +3680,7 @@ Only the root `AppModule` should import the `CoreModule`.
 
 
 
-**Why?** Guards against creating multiple instances of assets intended to be singletons.
+**Why?** シングルトンになることを目的としたもののインスタンスを複数作成しないようにします。
 
 
 </div>
@@ -3705,19 +3705,19 @@ Only the root `AppModule` should import the `CoreModule`.
 
 {@a 04-13}
 
-### Lazy Loaded folders
+### 遅延ロードフォルダ
 
 #### Style 04-13
 
-A distinct application feature or workflow may be *lazy loaded* or *loaded on demand* rather than when the application starts.
+個別のアプリケーション機能やワークフローを、アプリケーションの起動時ではなく、*遅延ロード*したり、*オンデマンドでロード*したりできます。
 
 
 <div class="s-rule do">
 
 
 
-**Do** put the contents of lazy loaded features in a *lazy loaded folder*.
-A typical *lazy loaded folder* contains a *routing component*, its child components, and their related assets and modules.
+**Do** 遅延ロードされる機能の内容を*遅延ロードフォルダ*に入れます。
+典型的な*遅延ロードフォルダ*は、*ルーティングコンポーネント*とその子コンポーネント、およびそれらに関連するものとモジュールを含みます。
 
 
 </div>
@@ -3728,7 +3728,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Why?** The folder makes it easy to identify and isolate the feature content.
+**Why?** フォルダを使用すると、機能の内容を簡単に識別して特定できます。
 
 
 </div>
@@ -3737,7 +3737,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 {@a 04-14}
 
-### Never directly import lazy loaded folders
+### 遅延ロードフォルダを直接インポートしてはいけません
 
 #### Style 04-14
 
@@ -3746,7 +3746,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Avoid** allowing modules in sibling and parent folders to directly import a module in a *lazy loaded feature*.
+**Avoid** 兄弟および親フォルダ内のモジュールが*遅延ロード機能*内のモジュールを直接インポートすることを避けましょう。
 
 
 </div>
@@ -3757,7 +3757,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Why?** Directly importing and using a module will load it immediately when the intention is to load it on demand.
+**Why?** モジュールを直接インポートして使用すると、そのモジュールがオンデマンドでロードされることが意図されていても即座にロードされます。
 
 
 </div>

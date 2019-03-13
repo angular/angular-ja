@@ -3,7 +3,7 @@
 ユーザーがタスクを実行すると、Angularの **`Router`** は [view](guide/glossary#view) を次のviewへと遷移させることができます.
 
 このガイドはルーターの重要な機能をカバーしており、
-<live-example>ブラウザで実行可能な</live-example>小さなアプリケーションを進化させながら、それを説明していきます。
+<live-example>ブラウザで実行可能な</live-example> 小さなアプリケーションを進化させながら、それを説明していきます。
 
 <!-- style for all tables on this page -->
 <style>

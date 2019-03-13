@@ -79,7 +79,7 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 
 <img src="generated/images/guide/architecture/library-module.png" alt="コンポーネント" class="left">
 
-Angularは、JavaScriptモジュールのコレクションを読み込みます。それらをライブラリモジュールと考えることができるでしょう。Angularライブラリの各名前は、`@angular`プレフィックスで始まります。それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
+Angularは、JavaScriptモジュールのコレクションを読み込みます。それらをライブラリモジュールと考えることができるでしょう。Angularライブラリの各名前は、`@angular`接頭辞で始まります。それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
 
 <br class="clear">
 

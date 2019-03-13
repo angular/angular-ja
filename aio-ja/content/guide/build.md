@@ -273,9 +273,9 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 CLIは[Autoprefixer](https://github.com/postcss/autoprefixer)を使ってさまざまなブラウザやブラウザバージョンとの互換性を保証しています。
 特定のブラウザをターゲットにしたり、特定のブラウザバージョンをビルドから除外したりする必要が出てくるかもしれません。
 
-内部的には、Autoprefixerは[Browserslist](https://github.com/browserslist/browserslist)というライブラリに頼り、どのブラウザをプレフィックス付きでサポートするかを判断しています。
+内部的には、Autoprefixerは[Browserslist](https://github.com/browserslist/browserslist)というライブラリに頼り、どのブラウザを接頭辞付きでサポートするかを判断しています。
 Browserlistはパッケージ設定ファイルの`browserslist`プロパティ、または`.browserslistrc`という名前の設定ファイルから設定オプションを探します。
-AutoprefixerはCSSにプレフィックスをつける際に`browserslist`の設定を探します。
+AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探します。
 
 * パッケージ設定ファイル`package.json`にbrowserslistプロパティを追加することで、どのブラウザをターゲットにするかをAutoprefixerに伝えることができます:
 ```
@@ -297,7 +297,7 @@ AutoprefixerはCSSにプレフィックスをつける際に`browserslist`の設
 <div class="alert is-helpful">
 後方互換性
 
-もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)のプレフィックスを削除するために、次のbrowserslistエントリを`package.json`に追加してください:
+もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次のbrowserslistエントリを`package.json`に追加してください:
 
 ```
 "browserslist": [

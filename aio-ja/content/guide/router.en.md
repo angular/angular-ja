@@ -1055,7 +1055,7 @@ The default route should redirect to the `HeroListComponent` _only_ when the _en
 Remember to restore the redirect to `pathMatch = 'full'`.
 
 Learn more in Victor Savkin's
-[post on redirects](http://victorsavkin.com/post/146722301646/angular-router-empty-paths-componentless-routes).
+[post on redirects](http://vsavkin.tumblr.com/post/146722301646/angular-router-empty-paths-componentless-routes).
 
 
 </div>
@@ -1280,8 +1280,9 @@ The **Routing Module** has several characteristics:
 ### Integrate routing with your app
 
 The sample routing application does not include routing by default.
-When you use the [Angular CLI](cli) to create a project that will use routing, set the `--routing` option for the project or app, and for each NgModule. 
-When you create or initialize a new project (using the CLI [`ng new`](cli/new) command) or a new app (using the [`ng generate app`](cli/generate) command), specify the `--routing` option.  This tells the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
+When you create a new workspace and initial application, the [Angular CLI](cli) [`ng new`](cli/new) command prompts you to add "Angular routing". Enter `Y`.
+When you generate a new application using the [`ng generate app`](cli/generate) command, specify the `--routing` option.  These options tell the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
+
 You can then use routing in any NgModule that you add to the project or app.
 
 For example, the following command generates an NgModule that can use routing.
@@ -3849,7 +3850,7 @@ Update the `AuthGuard` to provide a `session_id` query that will remain after na
 
 Add an `anchor` element so you can jump to a certain point on the page.
 
-Add the `NavigationExtras` object to the `router.navigate` method that navigates you to the `/login` route.
+Add the `NavigationExtras` object to the `router.navigate()` method that navigates you to the `/login` route.
 
 
 <code-example path="router/src/app/auth/auth.guard.4.ts" linenums="false" header="src/app/auth/auth.guard.ts (v3)">
@@ -3860,7 +3861,7 @@ Add the `NavigationExtras` object to the `router.navigate` method that navigates
 
 You can also preserve query parameters and fragments across navigations without having to provide them
 again when navigating. In the `LoginComponent`, you'll add an *object* as the
-second argument in the `router.navigate` function
+second argument in the `router.navigateUrl()` function
 and provide the `queryParamsHandling` and `preserveFragment` to pass along the current query parameters
 and fragment to the next route.
 

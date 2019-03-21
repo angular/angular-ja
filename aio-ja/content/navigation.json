@@ -438,8 +438,9 @@
         },
         {
           "url": "guide/router",
-          "title": "Routing & Navigation",
-          "tooltip": "Discover the basics of screen navigation with the Angular Router."
+          "title": "ルーティングと画面遷移",
+          "tooltip": "Angularルーターによる画面遷移の基本を理解しましょう",
+          "translated": true
         },
         {
           "title": "アニメーション",
@@ -625,8 +626,9 @@
         },
         {          
           "url": "guide/build",
-          "title": "Building & Serving",
-          "tooltip": "Building and serving Angular apps."
+          "title": "ビルドとサーブ",
+          "tooltip": "Angularアプリのビルドとサーブ",
+          "translated": true
         },
         {
           "url": "guide/testing",
@@ -695,8 +697,9 @@
         },
         {
           "url": "guide/styleguide",
-          "title": "Style Guide",
-          "tooltip": "Write Angular with style."
+          "title": "スタイルガイド",
+          "tooltip": "スタイルに沿ってAngularを書きます。",
+          "translated": true
         },
         {
           "url": "guide/glossary",

@@ -27,7 +27,7 @@ NgModuleは`@NgModule`で装飾されたクラスとして定義されていま�
 
 <div class="alert is-helpful">
 
-  `AppComponent`の`export`プロパティはここでは説明のために含まれています。。 この例では実際には必要ありません。他のモジュールはルートNgModuleを *インポート* する必要がないため、ルートNgModuleは何も *エクスポート* する必要はありません。
+  ここでは説明のために`AppComponent`が`exports`プロパティに含まれています。しかしこの例では実際には必要ありません。他のモジュールはルートNgModuleを *インポート* する必要がないため、ルートNgModuleは何も *エクスポート* する必要はありません。
 
 </div>
 
@@ -79,7 +79,7 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 
 <img src="generated/images/guide/architecture/library-module.png" alt="コンポーネント" class="left">
 
-Angularは、JavaScriptモジュールのコレクションを読み込みます。それらをライブラリモジュールと考えることができるでしょう。Angularライブラリの各名前は、`@angular`プレフィックスで始まります。それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
+Angularは、JavaScriptモジュールのコレクションを読み込みます。それらをライブラリモジュールと考えることができるでしょう。Angularライブラリの各名前は、`@angular`接頭辞で始まります。それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
 
 <br class="clear">
 

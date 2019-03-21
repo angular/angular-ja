@@ -1,4 +1,4 @@
-# Style Guide
+# スタイルガイド
 
 Angular構文、表記法、およびアプリケーション構造に関する有益なガイドをお探しですか？
 心配いりません！
@@ -870,7 +870,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-05}
 
-### Bootstrapping
+### ブートストラッピング
 
 #### Style 02-05
 
@@ -879,7 +879,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** put bootstrapping and platform logic for the app in a file named `main.ts`.
+**Do** アプリのブートストラップとプラットフォームのロジックを`main.ts`というファイルに配置します。
 
 
 </div>
@@ -890,7 +890,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** include error handling in the bootstrapping logic.
+**Do** ブートストラップロジックにエラー処理を含めます。
 
 
 </div>
@@ -901,7 +901,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Avoid** putting app logic in `main.ts`. Instead, consider placing it in a component or service.
+**Avoid** アプリのロジックを`main.ts`に入れることは避けましょう。代わりに、コンポーネントまたはサービスに配置することを検討してください。
 
 
 </div>
@@ -912,7 +912,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Follows a consistent convention for the startup logic of an app.
+**Why?** アプリの起動ロジックに関する一貫した規約に従います。
 
 
 </div>
@@ -923,7 +923,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Follows a familiar convention from other technology platforms.
+**Why?** 他のテクノロジープラットフォームからの慣例的な規約に従います。
 
 
 </div>
@@ -940,7 +940,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 05-02}
 
-### Component selectors
+### コンポーネントセレクター
 
 #### Style 05-02
 
@@ -949,7 +949,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use _dashed-case_ or _kebab-case_ for naming the element selectors of components.
+**Do** コンポーネントの要素セレクターに名前をつけるには、_dashed-case_または_kebab-case_を使います。
 
 
 </div>
@@ -960,7 +960,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Why?** Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
+**Why?** [Custom Elements](https://www.w3.org/TR/custom-elements/)の仕様と要素名を一致させます。
 
 
 </div>
@@ -993,7 +993,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 02-07}
 
-### Component custom prefix
+### コンポーネントのカスタム接頭辞
 
 #### Style 02-07
 
@@ -1002,7 +1002,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use a hyphenated, lowercase element selector value (e.g. `admin-users`).
+**Do** ハイフンで区切られた小文字の要素セレクター値を使用します（たとえば`admin-users`）。
 
 
 
@@ -1014,8 +1014,8 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-**Do** use a custom prefix for a component selector.
-For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the prefix `admin` represents an admin feature area.
+**Do** コンポーネントセレクターにカスタム接頭辞を使用します。
+たとえば、`toh`という接頭辞は**T**our **o**f **H**eroesを表していて、`admin`という接頭辞は管理者用の機能領域を表します。
 
 
 </div>
@@ -1026,7 +1026,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** use a prefix that identifies the feature area or the app itself.
+**Do** 機能領域またはアプリ自体を識別する接頭辞を使用します。
 
 
 </div>
@@ -1037,7 +1037,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Prevents element name collisions with components in other apps and with native HTML elements.
+**Why?** 要素名が他のアプリケーションのコンポーネントおよびネイティブのHTML要素と競合しないようにします。
 
 
 </div>
@@ -1048,7 +1048,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Makes it easier to promote and share the component in other apps.
+**Why?** コンポーネントを宣伝したり他のアプリと共有したりするのが簡単になります。
 
 
 </div>
@@ -1059,7 +1059,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Components are easy to identify in the DOM.
+**Why?** DOMの中でコンポーネントを簡単に識別できます。
 
 
 </div>
@@ -1100,7 +1100,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-06}
 
-### Directive selectors
+### ディレクティブのセレクター
 
 #### Style 02-06
 
@@ -1109,7 +1109,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** Use lower camel case for naming the selectors of directives.
+**Do** ディレクティブのセレクター名にはlowerCamelCaseを使用してください。
 
 
 </div>
@@ -1120,7 +1120,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Keeps the names of the properties defined in the directives that are bound to the view consistent with the attribute names.
+**Why?** ビューにバインドされているディレクティブに定義されたプロパティ名を、ビューの属性名と一致させるためです。
 
 
 </div>
@@ -1131,7 +1131,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** The Angular HTML parser is case sensitive and recognizes lower camel case.
+**Why?** AngularのHTMLパーサーは大文字・小文字を区別し、また、lowerCamelCaseを認識します。
 
 
 </div>
@@ -1140,7 +1140,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-08}
 
-### Directive custom prefix
+### ディレクティブのカスタム接頭辞
 
 #### Style 02-08
 
@@ -1148,7 +1148,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** use a custom prefix for the selector of directives (e.g, the prefix `toh` from **T**our **o**f **H**eroes).
+**Do** ディレクティブのセレクターにはカスタムプレフィクスを付与してください（例： `toh` というプレフィクスは **T**our **o**f **H**eroes に由来します）。
 
 
 </div>
@@ -1159,7 +1159,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** spell non-element selectors in lower camel case unless the selector is meant to match a native HTML attribute.
+**Do** ネイティブのHTML属性にマッチさせることを意図しない限り、非要素のセレクターはlowerCamelCaseで命名してください。
 
 
 </div>
@@ -1170,7 +1170,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Prevents name collisions.
+**Why?** 名前の衝突を防ぐためです。
 
 
 </div>
@@ -1181,7 +1181,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Directives are easily identified.
+**Why?** ディレクティブを容易に識別できます。
 
 
 </div>
@@ -1321,7 +1321,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** テスト仕様ファイルには、`.spec` というサフィックスをつけます。
+**Do** テスト仕様ファイルには、`.spec` という接尾辞をつけます。
 
 
 </div>
@@ -1440,7 +1440,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-11}
 
-### _End-to-End_ (E2E) test file names
+### _End-to-End_ (E2E) テストのファイル名
 
 #### Style 02-11
 
@@ -1448,7 +1448,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** name end-to-end test specification files after the feature they test with a suffix of `.e2e-spec`.
+**Do** E2Eのテスト仕様ファイルは、機能の後に`.e2e-spec`という接尾辞を付けます。
 
 
 </div>
@@ -1459,7 +1459,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides a consistent way to quickly identify end-to-end tests.
+**Why?** E2Eのテストを迅速に識別するための一貫した方法を提供します。
 
 
 </div>
@@ -1470,7 +1470,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides pattern matching for test runners and build automation.
+**Why?** テストランナーとビルドオートメーションのためのパターンマッチングを提供します。
 
 
 </div>
@@ -1529,7 +1529,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 {@a 02-12}
 
-### Angular _NgModule_ names
+### Angularの_NgModule_の名前
 
 #### Style 02-12
 
@@ -1538,7 +1538,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** append the symbol name with the suffix `Module`.
+**Do** シンボル名に`Module`接尾辞を追加します。
 
 
 </div>
@@ -1549,7 +1549,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** give the file name the `.module.ts` extension.
+**Do** ファイル名に`.module.ts`拡張子を付けます。
 
 
 </div>
@@ -1560,7 +1560,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** name the module after the feature and folder it resides in.
+**Do** 中に存在する機能とフォルダに基づいてモジュールに名前を付けます。
 
 
 </div>
@@ -1571,7 +1571,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Provides a consistent way to quickly identify and reference modules.
+**Why?** モジュールを迅速に識別して参照するための一貫した方法を提供します。
 
 
 </div>
@@ -1582,7 +1582,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Upper camel case is conventional for identifying objects that can be instantiated using a constructor.
+**Why?** UpperCamelCaseは、コンストラクターを使用してインスタンス化できるオブジェクトを識別するため慣例的なものです。
 
 
 </div>
@@ -1593,7 +1593,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** Easily identifies the module as the root of the same named feature.
+**Why?** 同じ名前の機能のルートとしてモジュールを簡単に識別します。
 
 
 </div>
@@ -1604,7 +1604,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** suffix a _RoutingModule_ class name with `RoutingModule`.
+**Do** _RoutingModule_クラス名に`RoutingModule`接尾辞を付けます。
 
 
 </div>
@@ -1615,7 +1615,7 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Do** end the filename of a _RoutingModule_ with `-routing.module.ts`.
+**Do** _RoutingModule_のファイル名の最後を`-routing.module.ts`にします。
 
 
 </div>
@@ -1626,8 +1626,8 @@ For example, the prefix `toh` represents from **T**our **o**f **H**eroes and the
 
 
 
-**Why?** A `RoutingModule` is a module dedicated exclusively to configuring the Angular router.
-A consistent class and file name convention make these modules easy to spot and verify.
+**Why?** `RoutingModule`はAngularルーターの設定専用のモジュールです。
+一貫したクラスとファイル名の規則により、これらのモジュールを簡単に見つけて検証できます。
 
 </div>
 
@@ -1757,15 +1757,15 @@ A consistent class and file name convention make these modules easy to spot and 
 <a href="#toc">トップに戻る</a>
 
 
-## Coding conventions
+## コーディング規約
 
-Have a consistent set of coding, naming, and whitespace conventions.
+コーディング、命名、およびスペースについて、一貫した規則のセットを持ちましょう。
 
 
 
 {@a 03-01}
 
-### Classes
+### クラス
 
 #### Style 03-01
 
@@ -1773,7 +1773,7 @@ Have a consistent set of coding, naming, and whitespace conventions.
 
 
 
-**Do** use upper camel case when naming classes.
+**Do** クラス名にはUpperCamelCaseを使用します。
 
 
 </div>
@@ -1784,7 +1784,7 @@ Have a consistent set of coding, naming, and whitespace conventions.
 
 
 
-**Why?** Follows conventional thinking for class names.
+**Why?** クラス名の慣例的な考え方に従います。
 
 
 </div>
@@ -1795,8 +1795,8 @@ Have a consistent set of coding, naming, and whitespace conventions.
 
 
 
-**Why?** Classes can be instantiated and construct an instance.
-By convention, upper camel case indicates a constructable asset.
+**Why?** クラスはインスタンス化可能、そしてインスタンスを構築するものです。
+慣例的に、UpperCamelCaseはインスタンス化可能なものを示します。
 
 
 </div>
@@ -1822,7 +1822,7 @@ By convention, upper camel case indicates a constructable asset.
 
 {@a 03-02}
 
-### Constants
+### 定数
 
 #### Style 03-02
 
@@ -1830,7 +1830,7 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-**Do** declare variables with `const` if their values should not change during the application lifetime.
+**Do** アプリケーションの実行中に値が変更されないようにするには、変数を `const` で宣言します。
 
 
 </div>
@@ -1841,7 +1841,7 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-**Why?** Conveys to readers that the value is invariant.
+**Why?** 値が不変であることを読み手に伝えます。
 
 
 </div>
@@ -1852,8 +1852,8 @@ By convention, upper camel case indicates a constructable asset.
 
 
 
-**Why?** TypeScript helps enforce that intent by requiring immediate initialization and by
-preventing subsequent re-assignment.
+**Why?** TypeScriptは、即座の初期化を要求し、その後の再割り当てを防ぐことによって、
+その意図を強制するのに役立ちます。
 
 
 </div>
@@ -1864,7 +1864,7 @@ preventing subsequent re-assignment.
 
 
 
-**Consider** spelling `const` variables in lower camel case.
+**Consider** `const` 変数名にはlowerCamelCaseを使用します。
 
 
 </div>
@@ -1875,8 +1875,8 @@ preventing subsequent re-assignment.
 
 
 
-**Why?** Lower camel case variable names (`heroRoutes`) are easier to read and understand
-than the traditional UPPER_SNAKE_CASE names (`HERO_ROUTES`).
+**Why?** lowerCamelCaseの変数名（`heroRoutes`）は、
+伝統的なUPPER_SNAKE_CASEの変数名（`HERO_ROUTES`）よりも読みやすく理解しやすいです。
 
 
 </div>
@@ -1887,9 +1887,9 @@ than the traditional UPPER_SNAKE_CASE names (`HERO_ROUTES`).
 
 
 
-**Why?** The tradition of naming constants in UPPER_SNAKE_CASE reflects
-an era before the modern IDEs that quickly reveal the `const` declaration.
-TypeScript prevents accidental reassignment.
+**Why?** UPPER_SNAKE_CASEにおける定数の命名の伝統は、
+`const`宣言をすぐに明らかにする現代のIDEより前の時代を反映しています。
+TypeScriptは不測の再代入を防いでくれます。
 
 
 </div>
@@ -1900,7 +1900,7 @@ TypeScript prevents accidental reassignment.
 
 
 
-**Do** tolerate _existing_ `const` variables that are spelled in UPPER_SNAKE_CASE.
+**Do** UPPER_SNAKE_CASEで書かれている既存の`const`変数を許容します。
 
 
 </div>
@@ -1911,9 +1911,9 @@ TypeScript prevents accidental reassignment.
 
 
 
-**Why?** The tradition of UPPER_SNAKE_CASE remains popular and pervasive,
-especially in third party modules.
-It is rarely worth the effort to change them at the risk of breaking existing code and documentation.
+**Why?** UPPER_SNAKE_CASEの伝統は、特にサードパーティーのモジュールで広く普及しています。
+既存のコードやドキュメンテーションを壊す危険性があるため、
+それらを変更する努力をする価値はほとんどありません。
 
 
 </div>
@@ -1931,7 +1931,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 {@a 03-03}
 
-### Interfaces
+### インターフェース
 
 #### Style 03-03
 
@@ -1939,7 +1939,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Do** name an interface using upper camel case.
+**Do** インターフェース名にはUpperCamelCaseを使用します。
 
 
 </div>
@@ -1950,7 +1950,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Consider** naming an interface without an `I` prefix.
+**Consider** `I` 接頭辞を付けずにインターフェースに名前を付けます。
 
 
 </div>
@@ -1961,7 +1961,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Consider** using a class instead of an interface for services and declarables (components, directives, and pipes).
+**Consider** サービスとDeclarables（コンポーネント、ディレクティブ、およびパイプ）にはインターフェースではなくクラスを使用します。
 
 
 </div>
@@ -1972,7 +1972,7 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Consider** using an interface for data models.
+**Consider** データモデルにインターフェースを使用します。
 
 
 </div>
@@ -1983,8 +1983,8 @@ It is rarely worth the effort to change them at the risk of breaking existing co
 
 
 
-**Why?** <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">TypeScript guidelines</a>
-discourage the `I` prefix.
+**Why?** <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">TypeScriptのガイドライン</a>では、
+`I`接頭辞は推奨されていません。
 
 
 </div>
@@ -1995,7 +1995,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** A class alone is less code than a _class-plus-interface_.
+**Why?** クラス単独のほうが、_クラス＋インターフェース_よりもコードが少なくなります。
 
 
 </div>
@@ -2006,7 +2006,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** A class can act as an interface (use `implements` instead of `extends`).
+**Why?** クラスはインターフェースとして機能することができます（`extends`の代わりに`implements`を使用します）。
 
 
 </div>
@@ -2017,7 +2017,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** An interface-class can be a provider lookup token in Angular dependency injection.
+**Why?** Angularの依存性の注入では、インターフェースクラスをプロバイダーの検索トークンにすることができます。
 
 
 </div>
@@ -2042,7 +2042,7 @@ discourage the `I` prefix.
 
 {@a 03-04}
 
-### Properties and methods
+### プロパティとメソッド
 
 #### Style 03-04
 
@@ -2051,7 +2051,7 @@ discourage the `I` prefix.
 
 
 
-**Do** use lower camel case to name properties and methods.
+**Do** プロパティとメソッドの名前にはlowerCamelCaseを使用します。
 
 
 </div>
@@ -2062,7 +2062,7 @@ discourage the `I` prefix.
 
 
 
-**Avoid** prefixing private properties and methods with an underscore.
+**Avoid** プライベートプロパティとメソッドの前にアンダースコアを付けません。
 
 
 </div>
@@ -2073,7 +2073,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** Follows conventional thinking for properties and methods.
+**Why?** プロパティとメソッドについての慣例的な考え方に従います。
 
 
 </div>
@@ -2084,7 +2084,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** JavaScript lacks a true private property or method.
+**Why?** JavaScriptには、真にプライベートなプロパティまたはメソッドはありません。
 
 
 </div>
@@ -2095,7 +2095,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** TypeScript tooling makes it easy to identify private vs. public properties and methods.
+**Why?** TypeScriptツールを使用すると、プロパティやメソッドがプライベートかパブリックかを簡単に識別できます。
 
 
 </div>
@@ -2120,7 +2120,7 @@ discourage the `I` prefix.
 
 {@a 03-06}
 
-### Import line spacing
+### インポート行の空白
 
 #### Style 03-06
 
@@ -2129,7 +2129,7 @@ discourage the `I` prefix.
 
 
 
-**Consider** leaving one empty line between third party imports and application imports.
+**Consider** サードパーティのインポートとアプリケーションのインポートの間に1行の空白行を置きます。
 
 
 </div>
@@ -2140,7 +2140,7 @@ discourage the `I` prefix.
 
 
 
-**Consider** listing import lines alphabetized by the module.
+**Consider** インポート行をモジュールごとにアルファベット順にリストします。
 
 
 </div>
@@ -2151,7 +2151,7 @@ discourage the `I` prefix.
 
 
 
-**Consider** listing destructured imported symbols alphabetically.
+**Consider** 分割されたインポートシンボルをアルファベット順にリストします。
 
 
 </div>
@@ -2162,7 +2162,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** The empty line separates _your_ stuff from _their_ stuff.
+**Why?** 空行が_あなたの_ものと_彼らの_ものを分離します。
 
 
 </div>
@@ -2173,7 +2173,7 @@ discourage the `I` prefix.
 
 
 
-**Why?** Alphabetizing makes it easier to read and locate symbols.
+**Why?** アルファベット順にすることで、シンボルを読みやすくし、見つけやすくなります。
 
 
 </div>
@@ -2197,17 +2197,17 @@ discourage the `I` prefix.
 <a href="#toc">トップに戻る</a>
 
 
-## Application structure and NgModules
+## アプリケーション構造とNgModule
 
-Have a near-term view of implementation and a long-term vision. Start small but keep in mind where the app is heading down the road.
+短期的な実装の視点と長期的なビジョンを持ってください。小さく始めますが、アプリがどこへ向かっているのかを意識しておきましょう。
 
-All of the app's code goes in a folder named `src`.
-All feature areas are in their own folder, with their own NgModule.
+アプリのコードはすべて`src`という名前のフォルダーに入っています。
+すべての機能領域は、独自のNgModuleとともに、独自のフォルダにあります。
 
-All content is one asset per file. Each component, service, and pipe is in its own file.
-All third party vendor scripts are stored in another folder and not in the `src` folder.
-You didn't write them and you don't want them cluttering `src`.
-Use the naming conventions for files in this guide.
+すべてのコンテンツはファイルごとの1つのアセットです。各コンポーネント、サービス、およびパイプはそれぞれ独自のファイルにあります。
+すべてのサードパーティベンダーのスクリプトは、`src`フォルダではなく別のフォルダに格納されています。
+あなたはそれらを書いていませんし、`src`を散らかしてほしくもありません。
+このガイドにあるファイルの命名規則を使用してください。
 <a href="#toc">トップに戻る</a>
 
 {@a 04-01}
@@ -2221,10 +2221,10 @@ Use the naming conventions for files in this guide.
 
 
 
-**Do** structure the app such that you can **L**ocate code quickly,
-**I**dentify the code at a glance,
-keep the **F**lattest structure you can, and
-**T**ry to be DRY.
+**Do** すぐにコードを見つけられるように（**L**ocate）、
+一目でコードを識別できるように（**I**dentify）、
+できる限りフラットな（**F**lattest）構造を維持し、
+そしてDRYを目指して（**T**ry）アプリを構築してください。
 
 
 </div>
@@ -2235,7 +2235,7 @@ keep the **F**lattest structure you can, and
 
 
 
-**Do** define the structure to follow these four basic guidelines, listed in order of importance.
+**Do** 重要な順にリストされているこれら4つの基本的なガイドラインに従うように構造を定義して下さい。
 
 
 </div>
@@ -2246,9 +2246,9 @@ keep the **F**lattest structure you can, and
 
 
 
-**Why?** LIFT Provides a consistent structure that scales well, is modular, and makes it easier to increase developer efficiency by finding code quickly.
-To confirm your intuition about a particular structure, ask:
-_can I quickly open and start work in all of the related files for this feature_?
+**Why?** LIFTは、拡張性に優れ、モジュール化され、コードがすばやく見つかることで開発者の効率が上がりやすい、一貫した構造を提供します。
+特定の構造についてあなたの直感を確認するために質問してみましょう：
+_すぐにこの機能のためのすべての関連ファイルを開いて仕事を始められますか？_
 
 
 </div>
@@ -2257,7 +2257,7 @@ _can I quickly open and start work in all of the related files for this feature_
 
 {@a 04-02}
 
-### Locate
+### 見つけやすさ（Locate）
 
 #### Style 04-02
 
@@ -2266,7 +2266,7 @@ _can I quickly open and start work in all of the related files for this feature_
 
 
 
-**Do** make locating code intuitive, simple and fast.
+**Do** コードを直感的に、シンプルに、そして素早く見つけられるようにします。
 
 
 </div>
@@ -2277,10 +2277,10 @@ _can I quickly open and start work in all of the related files for this feature_
 
 
 
-**Why?** To work efficiently you must be able to find files quickly,
-especially when you do not know (or do not remember) the file _names_.
-Keeping related files near each other in an intuitive location saves time.
-A descriptive folder structure makes a world of difference to you and the people who come after you.
+**Why?** 効率的に作業するには、特にファイル名がわからない（または覚えていない）場合に、
+ファイルを素早く見つけることができなければなりません。
+関連ファイルを直感的な場所で近くに置いておくと時間を節約できます。
+説明的なフォルダ構造は、あなたとあなたの後に来る人の間で、違う世界を作ってしまいます。
 
 
 </div>
@@ -2289,7 +2289,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 {@a 04-03}
 
-### Identify
+### 識別しやすさ（Identify）
 
 #### Style 04-03
 
@@ -2298,7 +2298,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Do** name the file such that you instantly know what it contains and represents.
+**Do** ファイルに何が含まれていて何を表しているのかすぐに分かるような名前を付けます。
 
 
 </div>
@@ -2309,7 +2309,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Do** be descriptive with file names and keep the contents of the file to exactly one component.
+**Do** ファイル名を説明にして、ファイルの内容を確実に1つのコンポーネントにします。
 
 
 </div>
@@ -2320,7 +2320,7 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Avoid** files with multiple components, multiple services, or a mixture.
+**Avoid** 複数のコンポーネント、複数のサービス、またはそれらが混在するファイルを避けます。
 
 
 </div>
@@ -2331,8 +2331,8 @@ A descriptive folder structure makes a world of difference to you and the people
 
 
 
-**Why?** Spend less time hunting and pecking for code, and become more efficient.
-Longer file names are far better than _short-but-obscure_ abbreviated names.
+**Why?** コードを探す時間を短縮し、効率的になります。
+より長いファイル名は、_短くて曖昧な_短縮名よりはるかに優れています。
 
 
 </div>
@@ -2343,9 +2343,9 @@ Longer file names are far better than _short-but-obscure_ abbreviated names.
 
 
 
-It may be advantageous to deviate from the _one-thing-per-file_ rule when
-you have a set of small, closely-related features that are better discovered and understood
-in a single file than as multiple files. Be wary of this loophole.
+複数のファイルよりも1つのファイルとして検出され理解されやすい、
+小さくて密接に関連する一連の機能がある場合は、
+_1ファイルに1つ_のルールから逸脱することが有利な場合があります。この抜け穴に注意してください。
 
 
 </div>
@@ -2355,7 +2355,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 {@a 04-04}
 
-### Flat
+### フラット（Flat）
 
 #### Style 04-04
 
@@ -2363,7 +2363,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Do** keep a flat folder structure as long as possible.
+**Do** フラットなフォルダー構造をできるだけ維持します。
 
 
 </div>
@@ -2374,7 +2374,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Consider** creating sub-folders when a folder reaches seven or more files.
+**Consider** フォルダのファイルが7つ以上に達したときにサブフォルダを作成します。
 
 
 </div>
@@ -2385,7 +2385,7 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Consider** configuring the IDE to hide distracting, irrelevant files such as generated `.js` and `.js.map` files.
+**Consider** 生成された`.js`ファイルや`.js.map`ファイルなど、邪魔になる無関係なファイルを隠すようにIDEを設定します。
 
 
 </div>
@@ -2396,16 +2396,16 @@ in a single file than as multiple files. Be wary of this loophole.
 
 
 
-**Why?** No one wants to search for a file through seven levels of folders.
-A flat structure is easy to scan.
+**Why?** 7つもの階層のフォルダーを通してファイルを検索したいという人はいません。
+フラットな構造はスキャンが簡単です。
 
-On the other hand,
-<a href="https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two">psychologists believe</a>
-that humans start to struggle when the number of adjacent interesting things exceeds nine.
-So when a folder has ten or more files, it may be time to create subfolders.
+一方で、<a href="https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two">心理学者の考え</a>では、
+隣接する関心ことの数が9を超えると人間はもがき始めるといいます。
+そのため、フォルダに10個以上のファイルがある場合は、
+サブフォルダを作成する必要があるでしょう。
 
-Base your decision on your comfort level.
-Use a flatter structure until there is an obvious value to creating a new folder.
+あなたの快適さのレベルに基づいて決定を下しましょう。
+新しいフォルダを作成することに明らかな価値が生まれるまでは、フラットな構造を使用してください。
 
 
 </div>
@@ -2415,7 +2415,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 {@a 04-05}
 
-### _T-DRY_ (Try to be _DRY_)
+### _T-DRY_ (_DRY_を目指す)
 
 #### Style 04-05
 
@@ -2423,7 +2423,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 
 
-**Do** be DRY (Don't Repeat Yourself).
+**Do** DRY（Don't Repeat Yourself）にします。
 
 
 </div>
@@ -2434,7 +2434,7 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 
 
-**Avoid** being so DRY that you sacrifice readability.
+**Avoid** 読みやすさを犠牲にしてDRYにすることは避けましょう。
 
 
 </div>
@@ -2445,11 +2445,11 @@ Use a flatter structure until there is an obvious value to creating a new folder
 
 
 
-**Why?** Being DRY is important, but not crucial if it sacrifices the other elements of LIFT.
-That's why it's called _T-DRY_.
-For example, it's redundant to name a template `hero-view.component.html` because
-with the `.html` extension, it is obviously a view.
-But if something is not obvious or departs from a convention, then spell it out.
+**Why?** DRYであることは重要ですが、LIFTの他の要素を犠牲にするのであれば重要ではありません。
+それが _T-DRY_ と呼ばれる理由です。
+たとえば、テンプレートに `hero-view.component.html` という名前を付けることは、
+拡張子が `.html` の場合は明らかにビューであるため冗長です。
+しかし、何かがはっきりしていない、あるいは慣習から逸脱している場合は、それを詳しく書きましょう。
 
 
 </div>
@@ -2459,7 +2459,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 {@a 04-06}
 
-### Overall structural guidelines
+### 全体構造のガイドライン
 
 #### Style 04-06
 
@@ -2467,7 +2467,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Do** start small but keep in mind where the app is heading down the road.
+**Do** 小さく始めますが、アプリがどこに向かっているのかは意識しておきます。
 
 
 </div>
@@ -2478,7 +2478,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Do** have a near term view of implementation and a long term vision.
+**Do** 短期的な実装の視点と長期的なビジョンを持ちます。
 
 
 </div>
@@ -2489,7 +2489,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Do** put all of the app's code in a folder named `src`.
+**Do** アプリのすべてのコードを `src` という名前のフォルダーに入れます。
 
 
 </div>
@@ -2500,7 +2500,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Consider** creating a folder for a component when it has multiple accompanying files (`.ts`, `.html`, `.css` and `.spec`).
+**Consider** 複数の関連するファイル（`.ts`、`.html`、`.css`、および`.spec`）がある場合は、コンポーネント用のフォルダーを作成します。
 
 
 </div>
@@ -2511,7 +2511,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Why?** Helps keep the app structure small and easy to maintain in the early stages, while being easy to evolve as the app grows.
+**Why?** アプリの構造を小さくし、初期段階で保守しやすくする一方で、アプリが大きくなっても進化しやすくなります。
 
 
 </div>
@@ -2522,7 +2522,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 
 
 
-**Why?** Components often have four files (e.g. `*.html`, `*.css`, `*.ts`, and `*.spec.ts`) and can clutter a folder quickly.
+**Why?** 多くの場合、コンポーネントには4つのファイル（例：`*.html`、`*.css`、`*.ts`、および`*.spec.ts`）があり、フォルダをすばやく整理することができます。
 
 
 </div>
@@ -2532,7 +2532,7 @@ But if something is not obvious or departs from a convention, then spell it out.
 {@a file-tree}
 
 
-Here is a compliant folder and file structure:
+これは、ガイドを守ったフォルダとファイル構造です。
 
 
 <div class='filetree'>
@@ -2767,10 +2767,10 @@ Here is a compliant folder and file structure:
 
 
 
-While components in dedicated folders are widely preferred,
-another option for small apps is to keep components flat (not in a dedicated folder).
-This adds up to four files to the existing folder, but also reduces the folder nesting.
-Whatever you choose, be consistent.
+コンポーネントを専用のフォルダ内に配置することが広く好まれていますが、
+小さなアプリのための別の選択肢はコンポーネントをフラットに保つことです（専用のフォルダ内ではありません）。
+これにより、既存のフォルダに最大4つのファイルが追加されますが、フォルダのネストも減少します。
+どの方法を選んだとしても、一貫性を保ってください。
 
 
 </div>
@@ -2779,7 +2779,7 @@ Whatever you choose, be consistent.
 
 {@a 04-07}
 
-### _Folders-by-feature_ structure
+### _機能別フォルダー_ 構造
 
 #### Style 04-07
 
@@ -2788,7 +2788,7 @@ Whatever you choose, be consistent.
 
 
 
-**Do** create folders named for the feature area they represent.
+**Do** それが表す機能領域ごとに名付けられたフォルダを作成します。
 
 
 </div>
@@ -2799,8 +2799,8 @@ Whatever you choose, be consistent.
 
 
 
-**Why?** A developer can locate the code and identify what each file represents
-at a glance. The structure is as flat as it can be and there are no repetitive or redundant names.
+**Why?** 開発者は一目でコードを見つけ、各ファイルが何を表しているのか識別できます。
+構造は可能な限りフラットで、繰り返しや重複する名前はありません。
 
 
 </div>
@@ -2811,7 +2811,7 @@ at a glance. The structure is as flat as it can be and there are no repetitive o
 
 
 
-**Why?** The LIFT guidelines are all covered.
+**Why?** LIFTのガイドラインはすべて網羅されています。
 
 
 </div>
@@ -2822,8 +2822,8 @@ at a glance. The structure is as flat as it can be and there are no repetitive o
 
 
 
-**Why?** Helps reduce the app from becoming cluttered through organizing the
-content and keeping them aligned with the LIFT guidelines.
+**Why?** 中身を整理してLIFTのガイドラインに沿った状態に保つことで、
+アプリが雑然とするのを防ぐのに役立ちます。
 
 
 </div>
@@ -2834,9 +2834,9 @@ content and keeping them aligned with the LIFT guidelines.
 
 
 
-**Why?** When there are a lot of files, for example 10+,
-locating them is easier with a consistent folder structure
-and more difficult in a flat structure.
+**Why?** たとえば10個以上、ファイルが多数ある場合は、
+一貫したフォルダ構造を使用するとそれらを見つけやすくなり、
+フラット構造の場合は難しくなります。
 
 
 </div>
@@ -2847,7 +2847,7 @@ and more difficult in a flat structure.
 
 
 
-**Do** create an NgModule for each feature area.
+**Do** 各機能領域にNgModuleを作成します。
 
 
 </div>
@@ -2858,7 +2858,7 @@ and more difficult in a flat structure.
 
 
 
-**Why?** NgModules make it easy to lazy load routable features.
+**Why?** NgModuleはルーティング可能な機能を遅延ロードすることを容易にします。
 
 
 </div>
@@ -2869,7 +2869,7 @@ and more difficult in a flat structure.
 
 
 
-**Why?** NgModules make it easier to isolate, test, and reuse features.
+**Why?** NgModuleは機能の分離、テスト、そして再利用をより簡単にします。
 
 
 </div>
@@ -2877,7 +2877,7 @@ and more difficult in a flat structure.
 
 
 <div class='file-tree-reference'>
-  <a href="#file-tree">Refer to this _folder and file structure_ example.</a>
+  <a href="#file-tree">この _フォルダーとファイル構造_ の例を参照してください。</a>
 </div>
 
 <a href="#toc">Back to top
@@ -2887,7 +2887,7 @@ and more difficult in a flat structure.
 
 {@a 04-08}
 
-### App _root module_
+### アプリの _ルートモジュール_
 
 #### Style 04-08
 
@@ -2895,8 +2895,8 @@ and more difficult in a flat structure.
 
 
 
-**Do** create an NgModule in the app's root folder,
-for example, in `/src/app`.
+**Do** アプリのルートフォルダ、
+たとえば `/src/app` にNgModuleを作成します。
 
 
 </div>
@@ -2907,7 +2907,7 @@ for example, in `/src/app`.
 
 
 
-**Why?** Every app requires at least one root NgModule.
+**Why?** すべてのアプリには少なくとも1つのルートNgModuleが必要です。
 
 
 </div>
@@ -2918,7 +2918,7 @@ for example, in `/src/app`.
 
 
 
-**Consider** naming the root module `app.module.ts`.
+**Consider** ルートモジュールの名前は `app.module.ts` にします。
 
 
 </div>
@@ -2929,7 +2929,7 @@ for example, in `/src/app`.
 
 
 
-**Why?** Makes it easier to locate and identify the root module.
+**Why?** ルートモジュールを見つけやすくし、識別しやすくします。
 
 
 </div>
@@ -2947,7 +2947,7 @@ for example, in `/src/app`.
 
 {@a 04-09}
 
-### Feature modules
+### 機能モジュール
 
 #### Style 04-09
 
@@ -2956,8 +2956,8 @@ for example, in `/src/app`.
 
 
 
-**Do** create an NgModule for all distinct features in an application;
-for example, a `Heroes` feature.
+**Do** アプリケーション内のすべての異なる機能に対してNgModuleを作成します。
+たとえば、`Heroes`の機能です。
 
 
 </div>
@@ -2968,8 +2968,8 @@ for example, a `Heroes` feature.
 
 
 
-**Do** place the feature module in the same named folder as the feature area;
-for example, in `app/heroes`.
+**Do** 機能領域と同じ名前のフォルダに機能モジュールを配置します。
+たとえば、`app/heroes` です。
 
 
 </div>
@@ -2980,8 +2980,8 @@ for example, in `app/heroes`.
 
 
 
-**Do** name the feature module file reflecting the name of the feature area
-and folder; for example, `app/heroes/heroes.module.ts`.
+**Do** 機能モジュールファイルに機能領域およびフォルダの名前を反映した名前を付けます。
+たとえば、`app/heroes/heroes.module.ts`です。
 
 
 </div>
@@ -2992,8 +2992,8 @@ and folder; for example, `app/heroes/heroes.module.ts`.
 
 
 
-**Do** name the feature module symbol reflecting the name of the feature
-area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `HeroesModule`.
+**Do** 機能モジュールシンボルに機能領域、フォルダ、およびファイルの名前を反映した名前を付けます。
+たとえば、`app/heroes/heroes.module.ts` は `HeroesModule` を定義します。
 
 
 </div>
@@ -3004,7 +3004,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module can expose or hide its implementation from other modules.
+**Why?** 機能モジュールは、その実装を他のモジュールに公開または隠すことができます。
 
 
 </div>
@@ -3015,7 +3015,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module identifies distinct sets of related components that comprise the feature area.
+**Why?** 機能モジュールは、機能領域に関連するコンポーネントのセットを識別します。
 
 
 </div>
@@ -3026,7 +3026,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module can easily be routed to both eagerly and lazily.
+**Why?** 機能モジュールは、即座でも遅延でも簡単にルーティングできます。
 
 
 </div>
@@ -3037,7 +3037,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module defines clear boundaries between specific functionality and other application features.
+**Why?** 機能モジュールは、特定の機能と他のアプリケーション機能との間の明確な境界を定義します。
 
 
 </div>
@@ -3048,7 +3048,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module helps clarify and make it easier to assign development responsibilities to different teams.
+**Why?** 機能モジュールを使用すると、開発の責任を明確にし、異なるチームに簡単に割り当てることができます。
 
 
 </div>
@@ -3059,7 +3059,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Why?** A feature module can easily be isolated for testing.
+**Why?** 機能モジュールはテスト用に簡単に分離できます。
 
 
 </div>
@@ -3068,7 +3068,7 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 {@a 04-10}
 
-### Shared feature module
+### 共有機能モジュール
 
 #### Style 04-10
 
@@ -3077,8 +3077,8 @@ area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `Hero
 
 
 
-**Do** create a feature module named `SharedModule` in a `shared` folder;
-for example, `app/shared/shared.module.ts` defines `SharedModule`.
+**Do** `shared` フォルダに `SharedModule` という名前の機能モジュールを作成します。
+たとえば、`app/shared/shared.module.ts`は`SharedModule`を定義します。
 
 
 </div>
@@ -3089,8 +3089,8 @@ for example, `app/shared/shared.module.ts` defines `SharedModule`.
 
 
 
-**Do** declare components, directives, and pipes in a shared module when those
-items will be re-used and referenced by the components declared in other feature modules.
+**Do** コンポーネント、ディレクティブ、およびパイプが再利用され、他の機能モジュールで宣言されたコンポーネントによって参照される場合は、
+共有モジュールの中で宣言します。
 
 
 </div>
@@ -3101,8 +3101,8 @@ items will be re-used and referenced by the components declared in other feature
 
 
 
-**Consider** using the name SharedModule when the contents of a shared
-module are referenced across the entire application.
+**Consider** 共有モジュールの内容がアプリケーション全体で参照されている場合は、
+`SharedModule`という名前を使用します。
 
 
 </div>
@@ -3113,9 +3113,9 @@ module are referenced across the entire application.
 
 
 
-**Consider** _not_ providing services in shared modules. Services are usually
-singletons that are provided once for the entire application or
-in a particular feature module. There are exceptions, however. For example, in the sample code that follows, notice that the `SharedModule` provides `FilterTextService`. This is acceptable here because the service is stateless;that is, the consumers of the service aren't impacted by new instances.
+**Consider** 共有モジュールではサービスを提供_しません_。
+サービスは通常、アプリケーション全体に対して、または特定の機能モジュールに対して1回提供されるシングルトンです。
+ただし、例外があります。たとえば、次のサンプルコードでは、`SharedModule`が`FilterTextService`を提供しています。これは、サービスがステートレスであるため、つまりサービスの利用者が新しいインスタンスの影響を受けないため、ここでは受け入れられます。
 
 
 </div>
@@ -3126,8 +3126,8 @@ in a particular feature module. There are exceptions, however. For example, in t
 
 
 
-**Do** import all modules required by the assets in the `SharedModule`;
-for example, `CommonModule` and `FormsModule`.
+**Do** `SharedModule`のアセットに必要なすべてのモジュールをインポートします。
+たとえば、`CommonModule`や`FormsModule`などです。
 
 
 </div>
@@ -3138,9 +3138,9 @@ for example, `CommonModule` and `FormsModule`.
 
 
 
-**Why?** `SharedModule` will contain components, directives and pipes
-that may need features from another common module; for example,
-`ngFor` in `CommonModule`.
+**Why?** `SharedModule`は他の共通モジュールの機能を必要とする
+コンポーネント、ディレクティブとパイプを含むことがあります。
+たとえば、`CommonModule`の`ngFor`です。
 
 
 </div>
@@ -3151,7 +3151,7 @@ that may need features from another common module; for example,
 
 
 
-**Do** declare all components, directives, and pipes in the `SharedModule`.
+**Do** `SharedModule`内ですべてのコンポーネント、ディレクティブ、およびパイプを宣言します。
 
 
 </div>
@@ -3162,7 +3162,7 @@ that may need features from another common module; for example,
 
 
 
-**Do** export all symbols from the `SharedModule` that other feature modules need to use.
+**Do** 他の機能モジュールが使用する必要があるすべてのシンボルを`SharedModule`からエクスポートします。
 
 
 </div>
@@ -3173,7 +3173,7 @@ that may need features from another common module; for example,
 
 
 
-**Why?** `SharedModule` exists to make commonly used components, directives and pipes available for use in the templates of components in many other modules.
+**Why?** `SharedModule`は、よく使われるコンポーネント、ディレクティブ、およびパイプを他の多くのモジュールのコンポーネントのテンプレートで使用できるようにするために存在します。
 
 
 </div>
@@ -3184,7 +3184,7 @@ that may need features from another common module; for example,
 
 
 
-**Avoid** specifying app-wide singleton providers in a `SharedModule`. Intentional singletons are OK. Take care.
+**Avoid** `SharedModule`でアプリ全体のシングルトンプロバイダーを指定することは避けましょう。意図的なものは問題ありません。注意しましょう。
 
 
 </div>
@@ -3195,7 +3195,7 @@ that may need features from another common module; for example,
 
 
 
-**Why?** A lazy loaded feature module that imports that shared module will make its own copy of the service and likely have undesirable results.
+**Why?** その共有モジュールをインポートする遅延ロードされた機能モジュールは、サービスのコピーを作成し、望ましくない結果をもたらす可能性があります。
 
 
 </div>
@@ -3206,8 +3206,8 @@ that may need features from another common module; for example,
 
 
 
-**Why?** You don't want each module to have its own separate instance of singleton services.
-Yet there is a real danger of that happening if the `SharedModule` provides a service.
+**Why?** 各モジュールに独自のシングルトンサービスの個別のインスタンスを持たせたくはありません。
+`SharedModule`がサービスを提供していると、実際にそのような危険が発生します。
 
 
 </div>
@@ -3320,7 +3320,7 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 {@a 04-11}
 
-### Core feature module
+### コア機能モジュール
 
 #### Style 04-11
 
@@ -3329,8 +3329,8 @@ Yet there is a real danger of that happening if the `SharedModule` provides a se
 
 
 
-**Consider** collecting numerous, auxiliary, single-use classes inside a core module
-to simplify the apparent structure of a feature module.
+**Consider** 一度だけ使う補助的な多数のクラスをコアモジュール内に集めて、
+機能モジュールの見かけの構造をシンプルにします。
 
 
 </div>
@@ -3341,9 +3341,9 @@ to simplify the apparent structure of a feature module.
 
 
 
-**Consider** calling the application-wide core module, `CoreModule`.
-Importing `CoreModule` into the root `AppModule` reduces its complexity
-and emphasizes its role as orchestrator of the application as a whole.
+**Consider** アプリケーション全体のコアモジュールを `CoreModule` と呼びます。
+`CoreModule`をルートの`AppModule`にインポートすると、その複雑さが軽減され、
+アプリケーション全体の調整者としての役割が強調されます。
 
 
 </div>
@@ -3354,7 +3354,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** create a feature module named `CoreModule` in a `core` folder (e.g. `app/core/core.module.ts` defines `CoreModule`).
+**Do** `core` フォルダーに`CoreModule`という名前の機能モジュールを作成します（たとえば、`app/core/core.module.ts`は`CoreModule`を定義します）。
 
 
 </div>
@@ -3365,7 +3365,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** put a singleton service whose instance will be shared throughout the application in the `CoreModule` (e.g. `ExceptionService` and `LoggerService`).
+**Do** そのインスタンスがアプリケーション全体で共有されるシングルトンサービス（たとえば`ExceptionService`や`LoggerService`）を`CoreModule`に配置します。
 
 
 </div>
@@ -3376,7 +3376,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** import all modules required by the assets in the `CoreModule` (e.g. `CommonModule` and `FormsModule`).
+**Do** `CoreModule`内のアセットに必要なすべてのモジュールをインポートします（たとえば`CommonModule`や`FormsModule`）。
 
 
 </div>
@@ -3387,7 +3387,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Why?** `CoreModule` provides one or more singleton services. Angular registers the providers with the app root injector, making a singleton instance of each service available to any component that needs them, whether that component is eagerly or lazily loaded.
+**Why?** `CoreModule`は1つ以上のシングルトンサービスを提供します。 Angularはプロバイダーをアプリのルートインジェクターに登録し、各サービスのシングルトンインスタンスを、それらが必要なコンポーネントが即座または遅延的にロードされているかにかかわらず利用できるようにします。
 
 
 </div>
@@ -3398,7 +3398,7 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Why?** `CoreModule` will contain singleton services. When a lazy loaded module imports these, it will get a new instance and not the intended app-wide singleton.
+**Why?** `CoreModule`はシングルトンサービスを含みます。遅延ロードされたモジュールがこれらをインポートすると、意図されたアプリケーション全体のシングルトンではなく、新しいインスタンスを取得します。
 
 
 </div>
@@ -3409,8 +3409,8 @@ and emphasizes its role as orchestrator of the application as a whole.
 
 
 
-**Do** gather application-wide, single use components in the `CoreModule`.
-Import it once (in the `AppModule`) when the app starts and never import it anywhere else. (e.g. `NavComponent` and `SpinnerComponent`).
+**Do** アプリケーション全体の一度しか使わないコンポーネントを`CoreModule`に集めます。
+アプリの起動時に（`AppModule`で）一度インポートし、他の場所にはインポートしないでください（たとえば`NavComponent`や`SpinnerComponent`など）。
 
 
 </div>
@@ -3421,9 +3421,9 @@ Import it once (in the `AppModule`) when the app starts and never import it anyw
 
 
 
-**Why?** Real world apps can have several single-use components (e.g., spinners, message toasts, and modal dialogs) that appear only in the `AppComponent` template.
-They are not imported elsewhere so they're not shared in that sense.
-Yet they're too big and messy to leave loose in the root folder.
+**Why?** 現実世界のアプリケーションは、`AppComponent`テンプレートにのみ表示されるいくつかの使い捨てコンポーネント（スピナー、メッセージトースト、モーダルダイアログなど）を持ちます。
+それらは他の場所にはインポートされないので、実質的には共有されません。
+それでも、それらはとても大きく、ルートフォルダに入れたままにすると汚くなります。
 
 
 </div>
@@ -3434,7 +3434,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Avoid** importing the `CoreModule` anywhere except in the `AppModule`.
+**Avoid** `AppModule`以外の場所で`CoreModule`をインポートすることは避けましょう。
 
 
 </div>
@@ -3445,7 +3445,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Why?** A lazily loaded feature module that directly imports the `CoreModule` will make its own copy of services and likely have undesirable results.
+**Why?** `CoreModule`を直接インポートする遅延ロードされた機能モジュールは、サービスのコピーを作成し、望ましくない結果を招く可能性があります。
 
 
 </div>
@@ -3456,7 +3456,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Why?** An eagerly loaded feature module already has access to the `AppModule`'s injector, and thus the `CoreModule`'s services.
+**Why?** 即座にロードされた機能モジュールは、すでに`AppModule`のインジェクター、つまり`CoreModule`のサービスにアクセスできます。
 
 
 </div>
@@ -3467,7 +3467,7 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Do** export all symbols from the `CoreModule` that the `AppModule` will import and make available for other feature modules to use.
+**Do** `AppModule`がインポートする`CoreModule`からすべてのシンボルをエクスポートし、他の機能モジュールが使用できるようにします。
 
 
 </div>
@@ -3477,8 +3477,7 @@ Yet they're too big and messy to leave loose in the root folder.
 <div class="s-why">
 
 
-
-**Why?** `CoreModule` exists to make commonly used singleton services available for use in the many other modules.
+**Why?** `CoreModule`は、よく使われるシングルトンサービスを他の多くのサービスで使用できるようにするために存在します。
 
 
 </div>
@@ -3489,9 +3488,9 @@ Yet they're too big and messy to leave loose in the root folder.
 
 
 
-**Why?** You want the entire app to use the one, singleton instance.
-You don't want each module to have its own separate instance of singleton services.
-Yet there is a real danger of that happening accidentally if the `CoreModule` provides a service.
+**Why?** アプリ全体で1つのシングルトンインスタンスを使用する必要があります。
+各モジュールに独自のシングルトンサービスの個別のインスタンスを持たせたくはありません。
+それでも、`CoreModule`がサービスを提供していると、偶然に起こる危険性が実際にあります。
 
 
 
@@ -3635,10 +3634,10 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 
 
-`AppModule` is a little smaller because many app/root classes have moved to other modules.
-`AppModule` is stable because you will add future components and providers to other modules, not this one.
-`AppModule` delegates to imported modules rather than doing work.
-`AppModule` is focused on its main task, orchestrating the app as a whole.
+多くの app/root のクラスが他のモジュールに移動したため、`AppModule`は少し小さくなります。 
+将来のコンポーネントとプロバイダーは他のモジュールに追加するので、`AppModule`には追加されず安定します。 
+`AppModule`は作業をおこなわず、インポートされたモジュールに委譲します。 
+`AppModule`はアプリ全体を調整するという本来のタスクに集中します。
 
 
 </div>
@@ -3647,18 +3646,18 @@ Yet there is a real danger of that happening accidentally if the `CoreModule` pr
 
 {@a 04-12}
 
-### Prevent re-import of the core module
+### コアモジュールの再インポートを防ぎましょう
 
 #### Style 04-12
 
-Only the root `AppModule` should import the `CoreModule`.
+ルートの`AppModule`だけが`CoreModule`をインポートすべきです。
 
 
 <div class="s-rule do">
 
 
 
-**Do** guard against reimporting of `CoreModule` and fail fast by adding guard logic.
+**Do** `CoreModule`の再インポートを防止し、保護ロジックを追加して速やかに失敗します。
 
 
 </div>
@@ -3669,7 +3668,7 @@ Only the root `AppModule` should import the `CoreModule`.
 
 
 
-**Why?** Guards against reimporting of the `CoreModule`.
+**Why?** `CoreModule`の再インポートを防ぎます。
 
 
 </div>
@@ -3680,7 +3679,7 @@ Only the root `AppModule` should import the `CoreModule`.
 
 
 
-**Why?** Guards against creating multiple instances of assets intended to be singletons.
+**Why?** シングルトンになることを目的としたもののインスタンスを複数作成しないようにします。
 
 
 </div>
@@ -3705,19 +3704,19 @@ Only the root `AppModule` should import the `CoreModule`.
 
 {@a 04-13}
 
-### Lazy Loaded folders
+### 遅延ロードフォルダ
 
 #### Style 04-13
 
-A distinct application feature or workflow may be *lazy loaded* or *loaded on demand* rather than when the application starts.
+個別のアプリケーション機能やワークフローを、アプリケーションの起動時ではなく、*遅延ロード*したり、*オンデマンドでロード*したりできます。
 
 
 <div class="s-rule do">
 
 
 
-**Do** put the contents of lazy loaded features in a *lazy loaded folder*.
-A typical *lazy loaded folder* contains a *routing component*, its child components, and their related assets and modules.
+**Do** 遅延ロードされる機能の内容を*遅延ロードフォルダ*に入れます。
+典型的な*遅延ロードフォルダ*は、*ルーティングコンポーネント*とその子コンポーネント、およびそれらに関連するものとモジュールを含みます。
 
 
 </div>
@@ -3728,7 +3727,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Why?** The folder makes it easy to identify and isolate the feature content.
+**Why?** フォルダを使用すると、機能の内容を簡単に識別して特定できます。
 
 
 </div>
@@ -3737,7 +3736,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 {@a 04-14}
 
-### Never directly import lazy loaded folders
+### 遅延ロードフォルダを直接インポートしてはいけません
 
 #### Style 04-14
 
@@ -3746,7 +3745,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Avoid** allowing modules in sibling and parent folders to directly import a module in a *lazy loaded feature*.
+**Avoid** 兄弟および親フォルダ内のモジュールが*遅延ロード機能*内のモジュールを直接インポートすることを避けましょう。
 
 
 </div>
@@ -3757,7 +3756,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Why?** Directly importing and using a module will load it immediately when the intention is to load it on demand.
+**Why?** モジュールを直接インポートして使用すると、そのモジュールがオンデマンドでロードされることが意図されていても即座にロードされます。
 
 
 </div>
@@ -3765,11 +3764,11 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 <a href="#toc">トップに戻る</a>
 
 
-## Components
+## コンポーネント
 
 {@a 05-03}
 
-### Components as elements
+### 要素としてのコンポーネント
 
 #### Style 05-03
 
@@ -3777,7 +3776,7 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 <div class="s-rule do">
 
 
-**Consider** giving components an _element_ selector, as opposed to _attribute_ or _class_ selectors.
+**Consider** _属性_または_クラス_セレクターではなく、コンポーネントに_要素_セレクターを与えます。
 
 
 </div>
@@ -3788,9 +3787,9 @@ A typical *lazy loaded folder* contains a *routing component*, its child compone
 
 
 
-**Why?** components have templates containing HTML and optional Angular template syntax.
-They display content.
-Developers place components on the page as they would native HTML elements and web components.
+**Why?** コンポーネントには、HTMLとオプショナルのAngularテンプレート構文を含んだテンプレートがあります。
+これはコンテンツを表示します。
+開発者は、ネイティブのHTML要素やWebコンポーネントと同じように、コンポーネントをページに配置します。
 
 
 </div>
@@ -3801,14 +3800,14 @@ Developers place components on the page as they would native HTML elements and w
 
 
 
-**Why?** It is easier to recognize that a symbol is a component by looking at the template's html.
+**Why?** テンプレートのHTMLを見て、シンボルがコンポーネントであることを認識しやすくなります
 
 
 </div>
 
 <div class="alert is-helpful">
 
-There are a few cases where you give a component an attribute, such as when you want to augment a built-in element. For example, [Material Design](https://material.angular.io/components/button/overview) uses this technique with `<button mat-button>`. However, you wouldn't use this technique on a custom element.
+ビルトイン要素を拡張したい場合など、コンポーネントに属性を指定するケースがいくつかあります。たとえば、[Material Design](https://material.angular.io/components/button/overview)は `<button mat-button>` でこの手法を使用しています。ただし、この方法はカスタム要素には使用しません。
 
 </div>
 
@@ -3844,7 +3843,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 {@a 05-04}
 
-### Extract templates and styles to their own files
+### テンプレートとスタイルをファイルから分離しましょう
 
 #### Style 05-04
 
@@ -3853,7 +3852,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** extract templates and styles into a separate file, when more than 3 lines.
+**Do** 3行を超える場合は、テンプレートとスタイルを別々のファイルに取り出します。
 
 
 </div>
@@ -3864,7 +3863,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** name the template file `[component-name].component.html`, where [component-name] is the component name.
+**Do** テンプレートファイルの名前を`[component-name].component.html`にします。ここで、[component-name]はコンポーネント名です。
 
 
 </div>
@@ -3875,7 +3874,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** name the style file `[component-name].component.css`, where [component-name] is the component name.
+**Do** スタイルファイルの名前を`[component-name].component.css`にします。ここで、[component-name]はコンポーネント名です。
 
 
 </div>
@@ -3886,7 +3885,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Do** specify _component-relative_ URLs, prefixed with `./`.
+**Do** 接頭辞 `./` を付けて、_コンポーネント相対_ URLを指定します。
 
 
 </div>
@@ -3897,7 +3896,7 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Why?** Large, inline templates and styles obscure the component's purpose and implementation, reducing readability and maintainability.
+**Why?** 大きなインラインテンプレートとスタイルは、コンポーネントの目的と実装を不明瞭にし、読みやすさと保守性を低下させます。
 
 
 </div>
@@ -3908,9 +3907,9 @@ There are a few cases where you give a component an attribute, such as when you 
 
 
 
-**Why?** In most editors, syntax hints and code snippets aren't available when developing inline templates and styles.
-The Angular TypeScript Language Service (forthcoming) promises to overcome this deficiency for HTML templates
-in those editors that support it; it won't help with CSS styles.
+**Why?** ほとんどのエディタでは、インラインテンプレートとインラインスタイルを開発するときに構文のヒントやコードスニペットは使用できません。
+AngularのTypeScript Language Serviceは、HTMLテンプレートをサポートしているエディターで
+このHTMLテンプレートの欠点を克服します。 ただしCSSスタイルには役立ちません。
 
 
 </div>
@@ -3921,7 +3920,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** A _component relative_ URL requires no change when you move the component files, as long as the files stay together.
+**Why?** _コンポーネント相対_ URLは、ファイルがまとめられている限り、コンポーネントファイルを移動しても変更する必要はありません。
 
 
 </div>
@@ -3932,7 +3931,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** The `./` prefix is standard syntax for relative URLs; don't depend on Angular's current ability to do without that prefix.
+**Why?** `./`接頭辞は相対URLの標準的な構文です。その接頭辞なしでのAngularの機能に依存しないでください。
 
 
 
@@ -3970,7 +3969,7 @@ in those editors that support it; it won't help with CSS styles.
 
 {@a 05-12}
 
-### Decorate _input_ and _output_ properties
+### _インプット_と_アウトプット_のプロパティを修飾しましょう
 
 #### Style 05-12
 
@@ -3979,8 +3978,8 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Do** use the `@Input()` and `@Output()` class decorators instead of the `inputs` and `outputs` properties of the
-`@Directive` and `@Component` metadata:
+**Do** `@Directive`および`@Component`メタデータの `inputs` および `outputs` プロパティではなく、
+`@Input()` および `@Output()` プロパティデコレーターを使用します。
 
 
 </div>
@@ -3991,7 +3990,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Consider** placing `@Input()` or `@Output()` on the same line as the property it decorates.
+**Consider** 修飾するプロパティと同じ行に `@Input()` または `@Output()` を配置します。
 
 
 </div>
@@ -4002,7 +4001,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** It is easier and more readable to identify which properties in a class are inputs or outputs.
+**Why?** クラス内のどのプロパティがインプットまたはアウトプットであるかを識別するのが簡単で読みやすくなります。
 
 
 </div>
@@ -4013,8 +4012,8 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** If you ever need to rename the property or event name associated with
-`@Input` or `@Output`, you can modify it in a single place.
+**Why?** `@Input`または`@Output`に関連付けられているプロパティまたはイベント名を変更する必要がある場合は、
+それを一か所で変更できます。
 
 
 </div>
@@ -4025,7 +4024,7 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** The metadata declaration attached to the directive is shorter and thus more readable.
+**Why?** ディレクティブに付与されているメタデータ宣言は短く、読みやすくなります。
 
 
 </div>
@@ -4036,8 +4035,8 @@ in those editors that support it; it won't help with CSS styles.
 
 
 
-**Why?** Placing the decorator on the same line _usually_ makes for shorter code and still easily identifies the property as an input or output.
-Put it on the line above when doing so is clearly more readable.
+**Why?** デコレーターを同じ行に配置すると、_通常は_コードが短くなり、プロパティをインプットまたはアウトプットとして簡単に識別できます。
+はっきりと読みやすくする場合は、デコレーターを上の行に置きます。
 
 
 </div>
@@ -4063,7 +4062,7 @@ Put it on the line above when doing so is clearly more readable.
 
 {@a 05-13}
 
-### Avoid aliasing _inputs_ and _outputs_
+### _インプット_ と _アウトプット_のエイリアスを避けましょう
 
 #### Style 05-13
 
@@ -4072,7 +4071,7 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-**Avoid** _input_ and _output_ aliases except when it serves an important purpose.
+**Avoid** 重要な目的がある場合を除いて、_インプット_および_アウトプット_に別名をつけることを避けます。
 
 
 </div>
@@ -4083,7 +4082,7 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-**Why?** Two names for the same property (one private, one public) is inherently confusing.
+**Why?** 同じプロパティに2つの名前（ひとつはプライベート、もうひとつはパブリック）を付けると、本質的に混乱します。
 
 
 </div>
@@ -4094,8 +4093,8 @@ Put it on the line above when doing so is clearly more readable.
 
 
 
-**Why?** You should use an alias when the directive name is also an _input_ property,
-and the directive name doesn't describe the property.
+**Why?** ディレクティブ名が _インプット_プロパティでもあり、ディレクティブ名がそのプロパティを表していない場合は、
+エイリアスを使用する必要があります。
 
 
 </div>
@@ -4140,7 +4139,7 @@ and the directive name doesn't describe the property.
 
 {@a 05-14}
 
-### Member sequence
+### メンバーの順序
 
 #### Style 05-14
 
@@ -4149,7 +4148,7 @@ and the directive name doesn't describe the property.
 
 
 
-**Do** place properties up top followed by methods.
+**Do** プロパティを上に配置して次にメソッドを配置します。
 
 
 </div>
@@ -4160,7 +4159,7 @@ and the directive name doesn't describe the property.
 
 
 
-**Do** place private members after public members, alphabetized.
+**Do** パブリックメンバーの後にプライベートメンバーを、アルファベット順に配置します。
 
 
 </div>
@@ -4171,8 +4170,8 @@ and the directive name doesn't describe the property.
 
 
 
-**Why?** Placing members in a consistent sequence makes it easy to read and
-helps instantly identify which members of the component serve which purpose.
+**Why?** メンバーを一貫した順序で配置すると、読みやすくなり、
+コンポーネントのどのメンバーがどの目的に役立つかを即座に識別できます。
 
 
 </div>
@@ -4197,7 +4196,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 05-15}
 
-### Delegate complex component logic to services
+### 複雑なコンポーネントロジックをサービスに委譲しましょう
 
 #### Style 05-15
 
@@ -4206,7 +4205,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** limit logic in a component to only that required for the view. All other logic should be delegated to services.
+**Do** コンポーネント内のロジックはビューに必要なロジックだけに制限します。他のすべてのロジックはサービスに委譲する必要があります。
 
 
 </div>
@@ -4217,7 +4216,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** move reusable logic to services and keep components simple and focused on their intended purpose.
+**Do** 再利用可能なロジックをサービスに移し、コンポーネントをシンプルに保ち、意図した目的に集中します。
 
 
 </div>
@@ -4228,7 +4227,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Logic may be reused by multiple components when placed within a service and exposed via a function.
+**Why?** ロジックをサービス内に配置し、関数を介して公開すれば、複数のコンポーネントによって再利用できます。
 
 
 </div>
@@ -4239,7 +4238,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Logic in a service can more easily be isolated in a unit test, while the calling logic in the component can be easily mocked.
+**Why?** コンポーネント内でのロジックの呼び出しを簡単にモックしながら、単体テストでサービス内のロジックをより簡単に分離できます。
 
 
 </div>
@@ -4250,7 +4249,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Removes dependencies and hides implementation details from the component.
+**Why?** 依存関係を取り除き、コンポーネントから実装の詳細を隠します。
 
 
 </div>
@@ -4261,7 +4260,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Keeps the component slim, trim, and focused.
+**Why?** コンポーネントをスリムで、整然として、フォーカスされた状態に保ちます。
 
 
 </div>
@@ -4286,7 +4285,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 05-16}
 
-### Don't prefix _output_ properties
+### _アウトプット_ プロパティに接頭辞をつけてはいけません
 
 #### Style 05-16
 
@@ -4295,7 +4294,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** name events without the prefix `on`.
+**Do** イベントには `on` 接頭辞なしの名前を付けます。
 
 
 </div>
@@ -4306,7 +4305,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** name event handler methods with the prefix `on` followed by the event name.
+**Do** イベントハンドラーメソッドには `on` 接頭辞にイベント名を続けて名前を付けます。
 
 
 </div>
@@ -4317,7 +4316,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** This is consistent with built-in events such as button clicks.
+**Why?** これは、ボタンクリックなどの組み込みイベントと一致しています。
 
 
 </div>
@@ -4328,7 +4327,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Angular allows for an [alternative syntax](guide/template-syntax#binding-syntax) `on-*`. If the event itself was prefixed with `on` this would result in an `on-onEvent` binding expression.
+**Why?** Angularでは、`on-*` という[代替構文](guide/template-syntax#binding-syntax)が使えます。イベント自体に`on`接頭辞が付いていると、`on-onEvent`バインディング式になってしまいます。
 
 
 </div>
@@ -4369,7 +4368,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 05-17}
 
-### Put presentation logic in the component class
+### コンポーネントクラスにプレゼンテーションロジックを置きましょう
 
 #### Style 05-17
 
@@ -4378,7 +4377,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** put presentation logic in the component class, and not in the template.
+**Do** プレゼンテーションロジックはテンプレートの中ではなくコンポーネントクラスの中に配置します。
 
 
 </div>
@@ -4389,7 +4388,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Logic will be contained in one place (the component class) instead of being spread in two places.
+**Why?** ロジックが二か所に広がらず、一か所（コンポーネントクラス）に含まれます。
 
 
 </div>
@@ -4400,7 +4399,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Keeping the component's presentation logic in the class instead of the template improves testability, maintainability, and reusability.
+**Why?** コンポーネントのプレゼンテーションロジックをテンプレートではなくクラスに残すことで、テスタビリティ、メンテナンス性、および再利用性が向上します。
 
 
 </div>
@@ -4424,11 +4423,11 @@ helps instantly identify which members of the component serve which purpose.
 <a href="#toc">トップに戻る</a>
 
 
-## Directives
+## ディレクティブ
 
 {@a 06-01}
 
-### Use directives to enhance an element
+### 要素を拡張するためにディレクティブを使いましょう
 
 #### Style 06-01
 
@@ -4437,7 +4436,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** use attribute directives when you have presentation logic without a template.
+**Do** テンプレートのないプレゼンテーションロジックがある場合は、属性ディレクティブを使用します。
 
 
 </div>
@@ -4448,7 +4447,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** Attribute directives don't have an associated template.
+**Why?** 属性ディレクティブにはテンプレートが関連付けられていません。
 
 
 </div>
@@ -4459,7 +4458,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** An element may have more than one attribute directive applied.
+**Why?** 要素には複数の属性ディレクティブを適用できます。
 
 
 </div>
@@ -4484,7 +4483,7 @@ helps instantly identify which members of the component serve which purpose.
 
 {@a 06-03}
 
-### _HostListener_/_HostBinding_ decorators versus _host_ metadata
+### _HostListener_/_HostBinding_ デコレーター と _host_ メタデータ
 
 #### Style 06-03
 
@@ -4493,8 +4492,8 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Consider** preferring the `@HostListener` and `@HostBinding` to the
-`host` property of the `@Directive` and `@Component` decorators.
+**Consider** `@Directive` および `@Component` デコレーターの `host` プロパティよりも、
+`@HostListener` および `@HostBinding`を推奨します。
 
 
 </div>
@@ -4505,7 +4504,7 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Do** be consistent in your choice.
+**Do** 一貫した選択をおこないます。
 
 
 </div>
@@ -4516,10 +4515,10 @@ helps instantly identify which members of the component serve which purpose.
 
 
 
-**Why?** The property associated with `@HostBinding` or the method associated with `@HostListener`
-can be modified only in a single place&mdash;in the directive's class.
-If you use the `host` metadata property, you must modify both the property/method declaration in the 
-directive's class and the metadata in the decorator associated with the directive.
+**Why?** `@HostBinding`に関連付けられたプロパティ、または`@HostListener`に関連付けられたメソッドは、
+ディレクティブのクラス内の1か所だけで変更できます。
+`host`メタデータプロパティを使用する場合は、ディレクティブのクラス内のプロパティ/メソッド宣言と、
+そのディレクティブに関連付けられているデコレーター内のメタデータの両方を変更する必要があります。
 
 
 </div>
@@ -4532,14 +4531,14 @@ directive's class and the metadata in the decorator associated with the directiv
 
 
 
-Compare with the less preferred `host` metadata alternative.
+あまり推奨されない`host`メタデータでの置き換えと比較してください。
 
 
 <div class="s-why-last">
 
 
 
-**Why?** The `host` metadata is only one term to remember and doesn't require extra ES imports.
+**Why?** ただひとつの`host`メタデータだけを覚えておけば、追加のESインポートを必要としません。
 
 
 </div>
@@ -4555,11 +4554,11 @@ Compare with the less preferred `host` metadata alternative.
 <a href="#toc">トップに戻る</a>
 
 
-## Services
+## サービス
 
 {@a 07-01}
 
-### Services are singletons
+### サービスはシングルトン
 
 #### Style 07-01
 
@@ -4568,7 +4567,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** use services as singletons within the same injector. Use them for sharing data and functionality.
+**Do** 同じインジェクター内でシングルトンとしてサービスを使用します。データや機能を共有するためにそれらを使用します。
 
 
 </div>
@@ -4579,7 +4578,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** Services are ideal for sharing methods across a feature area or an app.
+**Why?** サービスは、機能領域やアプリ間でメソッドを共有するのに理想的です。
 
 
 </div>
@@ -4590,7 +4589,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** Services are ideal for sharing stateful in-memory data.
+**Why?** サービスは、ステートフルなメモリ上のデータを共有するのに理想的です。
 
 
 </div>
@@ -4607,7 +4606,7 @@ Compare with the less preferred `host` metadata alternative.
 
 {@a 07-02}
 
-### Single responsibility
+### 単一責任
 
 #### Style 07-02
 
@@ -4616,7 +4615,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** create services with a single responsibility that is encapsulated by its context.
+**Do** コンテキストによってカプセル化された単一の責任をもったサービスを作成します。
 
 
 </div>
@@ -4627,7 +4626,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** create a new service once the service begins to exceed that singular purpose.
+**Do** サービスがその単一の目的を超え始めたら、新しいサービスを作成します。
 
 
 </div>
@@ -4638,7 +4637,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When a service has multiple responsibilities, it becomes difficult to test.
+**Why?** サービスに複数の責任があると、テストが困難になります。
 
 
 </div>
@@ -4649,7 +4648,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When a service has multiple responsibilities, every component or service that injects it now carries the weight of them all.
+**Why?** サービスに複数の責任があると、それを注入するすべてのコンポーネントまたはサービスは、それらすべての重みを負うことになります。
 
 
 </div>
@@ -4658,7 +4657,7 @@ Compare with the less preferred `host` metadata alternative.
 
 {@a 07-03}
 
-### Providing a service
+### サービスの提供
 
 #### Style 07-03
 
@@ -4667,7 +4666,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** provide a service with the app root injector in the `@Injectable` decorator of the service.
+**Do** サービスの `@Injectable` デコレーターでアプリルートインジェクターを使用してサービスを提供します。
 
 
 </div>
@@ -4678,7 +4677,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** The Angular injector is hierarchical.
+**Why?** Angularのインジェクターは階層的です。
 
 
 </div>
@@ -4689,7 +4688,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When you provide the service to a root injector, that instance of the service is shared and available in every class that needs the service. This is ideal when a service is sharing methods or state.
+**Why?** サービスをルートインジェクターに提供すると、そのサービスのインスタンスはサービスを必要とするすべてのクラスで共有され、使用可能になります。これは、サービスがメソッドや状態を共有している場合に理想的です。
 
 
 
@@ -4701,7 +4700,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** When you register a service in the `@Injectable` decorator of the service, optimization tools such as those used by the CLI's production builds can perform tree shaking and remove services that aren't used by your app.
+**Why?** `@Injectable` デコレーターの中でサービスを登録すると、CLIのプロダクションビルドで使用されるような最適化ツールは、Tree Shakingを実行してアプリケーションで使用されていないサービスを削除したりできます。
 
 </div>
 
@@ -4711,7 +4710,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** This is not ideal when two different components need different instances of a service. In this scenario it would be better to provide the service at the component level that needs the new and separate instance.
+**Why?** 2つの異なるコンポーネントが異なるサービスインスタンスを必要とする場合、これは理想的ではありません。この場合は、新しい個別のインスタンスを必要とするコンポーネントレベルでサービスを提供することをお勧めします。
 
 
 </div>
@@ -4725,7 +4724,7 @@ Compare with the less preferred `host` metadata alternative.
 
 {@a 07-04}
 
-### Use the @Injectable() class decorator
+### @Injectable()クラスデコレーターを使いましょう
 
 #### Style 07-04
 
@@ -4734,7 +4733,7 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Do** use the `@Injectable()` class decorator instead of the `@Inject` parameter decorator when using types as tokens for the dependencies of a service.
+**Do** 型をサービスの依存関係のトークンとして使用する場合は、`@Inject`パラメーターデコレーターではなく `@Injectable()` クラスデコレーターを使用します。
 
 
 </div>
@@ -4745,8 +4744,8 @@ Compare with the less preferred `host` metadata alternative.
 
 
 
-**Why?** The Angular Dependency Injection (DI) mechanism resolves a service's own
-dependencies based on the declared types of that service's constructor parameters.
+**Why?** Angularの依存性の注入（DI）メカニズムは、宣言されたサービスのコンストラクターパラメーターの型に基づいて、
+サービス自身の依存関係を解決します。
 
 
 </div>
@@ -4757,7 +4756,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** When a service accepts only dependencies associated with type tokens, the `@Injectable()` syntax is much less verbose compared to using `@Inject()` on each individual constructor parameter.
+**Why?** サービスが型トークンに関連付けられた依存関係のみを受け付ける場合、`@Injectable()`構文は、個々のコンストラクターパラメーターで `@Inject()` を使用する場合と比較して、はるかに冗長度が低くなります。
 
 
 </div>
@@ -4781,11 +4780,11 @@ dependencies based on the declared types of that service's constructor parameter
 <a href="#toc">トップに戻る</a>
 
 
-## Data Services
+## データサービス
 
 {@a 08-01}
 
-### Talk to the server through a service
+### サービスを通してサーバーと対話しましょう
 
 #### Style 08-01
 
@@ -4794,7 +4793,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Do** refactor logic for making data operations and interacting with data to a service.
+**Do** データ操作とインタラクションをサービスとやり取りするようにロジックをリファクタリングします。
 
 
 </div>
@@ -4805,7 +4804,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Do** make data services responsible for XHR calls, local storage, stashing in memory, or any other data operations.
+**Do** XHR呼び出し、ローカルストレージ、メモリへの保存、その他のデータ操作に対して責任をもつデータサービスを作ります。
 
 
 </div>
@@ -4816,7 +4815,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** The component's responsibility is for the presentation and gathering of information for the view. It should not care how it gets the data, just that it knows who to ask for it. Separating the data services moves the logic on how to get it to the data service, and lets the component be simpler and more focused on the view.
+**Why?** コンポーネントの責任は、ビューに対する情報の表示と収集にあります。どのようにしてデータを取得するかに関心をもつべきではありません。だれがそれを取得するのかを知っているだけです。データサービスを分離することで、取得方法に関するロジックがデータサービスへ移動し、コンポーネントをシンプルにしてビューに集中させることができます。
 
 
 </div>
@@ -4827,7 +4826,7 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** This makes it easier to test (mock or real) the data calls when testing a component that uses a data service.
+**Why?** これにより、データサービスを使用するコンポーネントをテストするときに、データ呼び出しのテスト（モックまたは実際のテスト）が簡単になります。
 
 
 </div>
@@ -4838,13 +4837,13 @@ dependencies based on the declared types of that service's constructor parameter
 
 
 
-**Why?** The details of data management, such as headers, HTTP methods,
-caching, error handling, and retry logic, are irrelevant to components
-and other data consumers.
+**Why?** ヘッダー、HTTPメソッド、キャッシング、
+エラー処理、再試行ロジックなど、データ管理の詳細は、
+コンポーネントやその他のデータ利用者には関係ありません。
 
-A data service encapsulates these details. It's easier to evolve these
-details inside the service without affecting its consumers. And it's
-easier to test the consumers with mock service implementations.
+データサービスはこれらの詳細をカプセル化します。
+利用者に影響を与えることなく、サービス内でこれらの詳細を進化させる方が簡単です。
+そして、モックサービスの実装を使って利用者をテストする方が簡単です。
 
 
 </div>
@@ -4852,15 +4851,15 @@ easier to test the consumers with mock service implementations.
 <a href="#toc">トップに戻る</a>
 
 
-## Lifecycle hooks
+## ライフサイクルフック
 
-Use Lifecycle hooks to tap into important events exposed by Angular.
+ライフサイクルフックを使用して、Angularによって公開される重要なイベントを利用します。
 
 <a href="#toc">トップに戻る</a>
 
 {@a 09-01}
 
-### Implement lifecycle hook interfaces
+### ライフサイクルフックインターフェースを実装しましょう
 
 #### Style 09-01
 
@@ -4869,7 +4868,7 @@ Use Lifecycle hooks to tap into important events exposed by Angular.
 
 
 
-**Do** implement the lifecycle hook interfaces.
+**Do** ライフサイクルフックインターフェースを実装します。
 
 
 </div>
@@ -4880,8 +4879,8 @@ Use Lifecycle hooks to tap into important events exposed by Angular.
 
 
 
-**Why?** Lifecycle interfaces prescribe typed method
-signatures. use those signatures to flag spelling and syntax mistakes.
+**Why?** ライフサイクルインターフェースは型付きのメソッドシグネチャーを規定します。
+これらのシグネチャーを使用して、スペルミスや構文の誤りを知らせます。
 
 
 </div>
@@ -4905,9 +4904,9 @@ signatures. use those signatures to flag spelling and syntax mistakes.
 <a href="#toc">トップに戻る</a>
 
 
-## Appendix
+## 付録
 
-Useful tools and tips for Angular.
+Angular用の便利なツールとヒント。
 
 <a href="#toc">トップに戻る</a>
 
@@ -4922,7 +4921,7 @@ Useful tools and tips for Angular.
 
 
 
-**Do** use [codelyzer](https://www.npmjs.com/package/codelyzer) to follow this guide.
+**Do** [codelyzer](https://www.npmjs.com/package/codelyzer)を使ってこのスタイルガイドに従います。
 
 
 </div>
@@ -4933,7 +4932,7 @@ Useful tools and tips for Angular.
 
 
 
-**Consider** adjusting the rules in codelyzer to suit your needs.
+**Consider** あなたのニーズに合うようにcodelyzerのルールを調整します。
 
 
 </div>
@@ -4942,7 +4941,7 @@ Useful tools and tips for Angular.
 
 {@a A-02}
 
-### File templates and snippets
+### ファイルテンプレートとスニペット
 
 #### Style A-02
 
@@ -4951,7 +4950,7 @@ Useful tools and tips for Angular.
 
 
 
-**Do** use file templates or snippets to help follow consistent styles and patterns. Here are templates and/or snippets for some of the web development editors and IDEs.
+**Do** ファイルテンプレートまたはスニペットを使用して、一貫したスタイルとパターンに従うようにします。ここにいくつかのWeb開発エディタとIDEのためのテンプレートやスニペットを挙げます。
 
 
 </div>
@@ -4962,17 +4961,17 @@ Useful tools and tips for Angular.
 
 
 
-**Consider** using [snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2) for [Visual Studio Code](https://code.visualstudio.com/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Visual Studio Code](https://code.visualstudio.com/)用の[スニペット](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)を使います。
 
 <a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2">
   <img src="generated/images/guide/styleguide/use-extension.gif" alt="Use Extension">
 </a>
 
-**Consider** using [snippets](https://atom.io/packages/angular-2-typescript-snippets) for [Atom](https://atom.io/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Atom](https://atom.io/)用の[スニペット](https://atom.io/packages/angular-2-typescript-snippets) を使います。
 
-**Consider** using [snippets](https://github.com/orizens/sublime-angular2-snippets) for [Sublime Text](http://www.sublimetext.com/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Sublime Text](http://www.sublimetext.com/)用の[スニペット](https://github.com/orizens/sublime-angular2-snippets)を使います。
 
-**Consider** using [snippets](https://github.com/mhartington/vim-angular2-snippets) for [Vim](http://www.vim.org/) that follow these styles and guidelines.
+**Consider** スタイルガイドに従った[Vim](http://www.vim.org/)用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使います。
 
 
 </div>

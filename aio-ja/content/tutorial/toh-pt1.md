@@ -15,7 +15,7 @@ Angular CLIを使用して､`heroes`という名前の新しいコンポーネ�
 </code-example>
 
 CLIは`src/app/heroes/`という新しいフォルダを作成し、
-`HeroesComponent`に関する3つのファイルを生成します。
+`HeroesComponent`に関する4つのファイルを生成します。
 
 `HeroesComponent`のクラスファイルは次のとおりです。
 

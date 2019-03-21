@@ -27,7 +27,7 @@ NgModuleは`@NgModule`で装飾されたクラスとして定義されていま�
 
 <div class="alert is-helpful">
 
-  `AppComponent`の`export`プロパティはここでは説明のために含まれています。。 この例では実際には必要ありません。他のモジュールはルートNgModuleを *インポート* する必要がないため、ルートNgModuleは何も *エクスポート* する必要はありません。
+  ここでは説明のために`AppComponent`が`exports`プロパティに含まれています。しかしこの例では実際には必要ありません。他のモジュールはルートNgModuleを *インポート* する必要がないため、ルートNgModuleは何も *エクスポート* する必要はありません。
 
 </div>
 

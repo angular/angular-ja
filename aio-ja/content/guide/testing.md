@@ -1294,7 +1294,7 @@ fakeAsync(() => { /* test body */ })`
 Jasmineも日付をシミュレートするための `clock` 機能を提供しています。`jasmine.clock().install()` が呼び出されてから`jasmine.clock().uninstall()`が呼び出されるまで、Angularは自動的に`fakeAsync()` の中でテストを実行します。
 `fakeAsync()`は必要なく、ネストされていればエラーを投げます。
 
-デフォルトではこの機能は無効化されています。有効にするには、 `zone-testing` をインポートするまえにグローバグフラグをセットしてください。
+デフォルトではこの機能は無効化されています。有効にするには、 `zone-testing` をインポートするまえにグローバルフラグをセットしてください。
 
 Angular CLIを使う場合は、 `src/test.ts` の中でこのフラグを設定してください。
 

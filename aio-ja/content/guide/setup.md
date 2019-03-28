@@ -362,7 +362,7 @@ websocketの接続が限度を超えると、`SecurityError`が投げられま�
 もしユニットテストを実行するために `fakeAsync()/async()` ヘルパー関数を使う場合 （詳細は[テスティングガイド](guide/testing#async-test-with-fakeasync)を参照してください。) は、`zone.js/dist/zone-testing` をテストのセットアップファイルでインポートしなければなりません。
 
 <div class="alert is-important">
-もし Angular CLIを使ってプロジェクトを作っていれば、すでに `src/text.ts` の中でインポートされています。
+もし Angular CLIを使ってプロジェクトを作っていれば、すでに `src/test.ts` の中でインポートされています。
 </div>
 
 そしてAngularの古いバージョンでは、次のファイルがインポートされるか、HTMLファイルに追加されていました。

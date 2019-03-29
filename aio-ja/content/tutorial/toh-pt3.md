@@ -26,11 +26,11 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 このディレクトリの中に4つのファイルを生成します:
 
 * コンポーネントスタイルのためのCSSファイル
-* AコンポーネントテンプレートのためのHTMLファイル
+* コンポーネントテンプレートのためのHTMLファイル
 * `HeroDetailComponent` と名付けられたコンポーネントクラスのTypeScriptファイル
 * `HeroDetailComponent` クラスのテストファイル
 
-また、このコマンドは `src/app/app.module.ts` ファイルの `@NgModule` デコレーター中に。 `declarations` として `HeroDetailComponent` を追加します。
+また、このコマンドは `src/app/app.module.ts` ファイルの `@NgModule` デコレーター中に `declarations` として `HeroDetailComponent` を追加します。
 
 
 ### template を記述する

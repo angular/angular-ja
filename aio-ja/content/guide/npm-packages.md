@@ -2,9 +2,7 @@
 
 Angularフレームワーク、 Angular CLI、 Angularアプリケーションを使用したコンポーネントは[npmパッケージ](https://docs.npmjs.com/getting-started/what-is-npm "What is npm?")としてパッケージ化され、 [npmレジストリ](https://docs.npmjs.com/)を通して提供されます。
 
-これらのnpmパッケージをダウンロードしインストールするには[npmクライアント](https://docs.npmjs.com/cli/install)を使用します。
-npmクライアントは[Node.js®](https://nodejs.org "Nodejs.org")アプリケーションとしてインストールされ実行されます。
-デフォルトではAngular CLIはnpmを使用します。
+これらのnpmパッケージをダウンロードしインストールするには[npm CLIクライアント](https://docs.npmjs.com/cli/install)を使用します。npm CLIクライアントは[Node.js®](https://nodejs.org "Nodejs.org")アプリケーションとしてインストールされ実行されます。デフォルトではAngular CLIはnpmを使用します。
 
 または、npmパッケージをダウンロードしインストールするために[yarnクライアント](https://yarnpkg.com/)も使用できます。
 
@@ -20,13 +18,12 @@ Node.jsとnpmの必要なバージョンとインストール方法について�
 
 ## `package.json`
 
-`npm` と `yarn` は共に[`package.json`](https://docs.npmjs.com/files/package.json)ファイル内の特定されたパッケージをインストールします。
+`npm` と `yarn` は共に[`package.json`](https://docs.npmjs.com/files/package.json)ファイルで特定されたパッケージをインストールします。
 
 CLIコマンドの `ng new` は新しいワークスペースを作成するときに `package.json` ファイルを作成します。
 この `package.json` はCLIがワークスペースを作成するときに作成される最初のアプリプロジェクトを含む、ワークスペース内のすべてのプロジェクトから使用されます。
 
-はじめは、この `package.json` は_パッケージのスターターセット_を含んでいます。
-そのパッケージの一部はAngularが必要としているものや一般的なアプリケーションシナリオをサポートするものです。
+はじめは、この `package.json` は_パッケージのスターターセット_を含んでいます。そのパッケージの一部はAngularが必要としているものや一般的なアプリケーションシナリオをサポートするものです。
 アプリケーションが成長するにつれて `package.json` にパッケージを追加します。
 パッケージを削除することもできます。
 
@@ -37,8 +34,7 @@ CLIコマンドの `ng new` は新しいワークスペースを作成すると�
 
 <div class="alert is-helpful">
 
-**ライブラリ開発者へ**: デフォルトでは、CLIコマンドの [`ng generate library`](cli/generate) は新しいライブラリのための `package.json` を生成します。
-この `package.json` はnpmにライブラリを公開するときに利用されます。
+**ライブラリ開発者へ**: デフォルトでは、CLIコマンドの [`ng generate library`](cli/generate) は新しいライブラリのための `package.json` を生成します。この `package.json` はnpmにライブラリを公開するときに利用されます。
 詳細については、CLIの [Library Support](https://github.com/angular/angular-cli/wiki/stories-create-library)のWikiページを見てください。
 </div>
 
@@ -66,7 +62,7 @@ Angularのパッケージの完全な一覧は、[API reference](http://angular.
 
 
 パッケージ名                                                                            | 説明
-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------   | --------------------------------------------------
 [**@angular/animations**](api/animations)                                               | Angularのアニメーションライブラリを使用すると、ページやリストのトランジションといったアニメーション効果を簡単に定義して適用できます。詳しくは [Animations guide](guide/animations) を見てください。.
 [**@angular/common**](api/common)                                                       | 一般的に必要なサービスやパイプ、ディレクティブがAngularチームによって提供されています。 [`HttpClientModule`](api/common/http/HttpClientModule) もここの [`@angular/common/http`](api/common/http) というサブフォルダにあります。詳しくは [HttpClient guide](guide/http) を見てください。
 **@angular/compiler**                                                                   | Angularのテンプレートのコンパイラです。テンプレートを解釈し、アプリケーションが実行・表示可能なコードに変換します。 通常はコンパイラに直接触れないでください。そうではなくブラウザ上でJITコンパイルするときに `platform-browser-dynamic` を通して間接的に使用します。詳しくは [Ahead-of-time Compilation guide](guide/aot-compiler)を見てください。
@@ -85,9 +81,9 @@ Angularのパッケージの完全な一覧は、[API reference](http://angular.
 
 
 Package name                                      | Description
---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-[**rxjs**](https://github.com/ReactiveX/rxjs)     | 多くのAngularのAPIは[_observables_](guide/glossary#observable)を返します。RxJSはJavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)専門委員会に現在提案されている[Observables仕様](https://github.com/tc39/proposal-observable)を実装したものです。
-[**zone.js**](https://github.com/angular/zone.js) | Angularはzone.jsに依存しています。これはネイティブのJavaScriptの作用でイベントが発生した時にAngularの変更検知プロセスを実行するためのものです。Zone.jsは JavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)専門委員会に現在提案されている[仕様](https://gist.github.com/mhevery/63fdcdf7c65886051d55)を実装したものです。
+----------------------------------------   | --------------------------------------------------
+[**rxjs**](https://github.com/ReactiveX/rxjs)     | 多くのAngularのAPIは[_Observable_](guide/glossary#observable)を返します。RxJSはJavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)委員会に現在提案されている[Observables仕様](https://github.com/tc39/proposal-observable)を実装したものです。
+[**zone.js**](https://github.com/angular/zone.js) | Angularはzone.jsに依存しています。これはネイティブのJavaScriptの作用でイベントが発生した時にAngularの変更検知プロセスを実行するためのものです。Zone.jsは JavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)委員会に現在提案されている[仕様](https://gist.github.com/mhevery/63fdcdf7c65886051d55)を実装したものです。
 
 
 {@a polyfills}
@@ -95,9 +91,11 @@ Package name                                      | Description
 
 多くのブラウザはAngularが必要とする最新のHTML標準の一部の機能をネイティブでサポートしていません。
 [_Polyfills_](https://en.wikipedia.org/wiki/Polyfill)は不足している機能をエミュレートできます。
-[ブラウザサポート](guide/browser-support)はどのブラウザがポリフィルを必要としていてポリフィルの追加方法が説明されています。
+[ブラウザサポート](guide/browser-support)はどのブラウザがポリフィルを必要としていて
+ポリフィルの追加方法が説明されています。
 
-新しいAngularワークスペース用の `package.json` は[core-js](https://github.com/zloirock/core-js)パッケージをインストールします。これはいくつかの一般向けのブラウザに不足している機能のポリフィルです。
+新しいAngularワークスペース用の `package.json` は[core-js](https://github.com/zloirock/core-js)パッケージをインストールします。
+これはいくつかの一般向けのブラウザに不足している機能のポリフィルです。
 
 
 {@a dev-dependencies}
@@ -120,7 +118,7 @@ Package name                                      | Description
 
 
 パッケージ名                                                                                  | 説明
------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------   | -----------------------------------
 [**@angular&#8209;devkit/<br />build&#8209;angular**](https://github.com/angular/angular-cli/) | Angularのビルドツール
 [**@angular/cli**](https://github.com/angular/angular-cli/)                                    | Angularのコマンドラインツール
 **@angular/<br />compiler&#8209;cli**                                                          | Angular CLIの `ng build` と `ng serve` コマンドから呼び出されるAngularのコンパイラ

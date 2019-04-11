@@ -1,110 +1,110 @@
-# Workspace npm dependencies
+# npmパッケージ
 
-The Angular Framework, Angular CLI, and components used by Angular applications are packaged as [npm packages](https://docs.npmjs.com/getting-started/what-is-npm "What is npm?") and distributed via the [npm registry](https://docs.npmjs.com/).
+Angularフレームワーク、 Angular CLI、 Angularアプリケーションを使用したコンポーネントは[npmパッケージ](https://docs.npmjs.com/getting-started/what-is-npm "What is npm?")としてパッケージ化され、 [npmレジストリ](https://docs.npmjs.com/)を通して提供されます。
 
-You can download and install these npm packages by using the [npm CLI client](https://docs.npmjs.com/cli/install), which is installed with and runs as a [Node.js®](https://nodejs.org "Nodejs.org") application. By default, the Angular CLI uses the npm client.
+これらのnpmパッケージをダウンロードしインストールするには[npm CLIクライアント](https://docs.npmjs.com/cli/install)を使用します。npm CLIクライアントは[Node.js®](https://nodejs.org "Nodejs.org")アプリケーションとしてインストールされ実行されます。デフォルトではAngular CLIはnpmを使用します。
 
-Alternatively, you can use the [yarn client](https://yarnpkg.com/) for downloading and installing npm packages. 
+または、npmパッケージをダウンロードしインストールするために[yarnクライアント](https://yarnpkg.com/)も使用できます。
 
 
 <div class="alert is-helpful">
 
-See [Getting Started](guide/quickstart#prerequisites) for information about the required versions and installation of Node.js and npm.
+Node.jsとnpmの必要なバージョンとインストール方法については[入門ページ](guide/quickstart#prerequisites)を見てください。
 
-If you already have projects running on your machine that use other versions of Node.js and npm, consider using [nvm](https://github.com/creationix/nvm) to manage the multiple versions of Node.js and npm. 
+もしすでに他のバージョンのNode.jsとnpmを使用したプロジェクトがマシン上にある場合、[nvm](https://github.com/creationix/nvm)を使って複数のバージョンのNode.jsとnpmを管理することを検討してください。
 
 </div>
 
 
 ## `package.json`
 
-Both `npm` and `yarn` install the packages that are identified in a [`package.json`](https://docs.npmjs.com/files/package.json) file.
+`npm` と `yarn` は共に[`package.json`](https://docs.npmjs.com/files/package.json)ファイルで特定されたパッケージをインストールします。
 
-The CLI command `ng new` creates a `package.json` file when it creates the new workspace. 
-This `package.json` is used by all projects in the workspace, including the initial app project that is  created by the CLI when it creates the workspace.   
+CLIコマンドの `ng new` は新しいワークスペースを作成するときに `package.json` ファイルを作成します。
+この `package.json` はCLIがワークスペースを作成するときに作成される最初のアプリプロジェクトを含む、ワークスペース内のすべてのプロジェクトから使用されます。
 
-Initially, this `package.json` includes _a starter set of packages_, some of which are required by Angular and others that support common application scenarios.
-You add packages to `package.json` as your application evolves. 
-You may even remove some. 
+はじめは、この `package.json` は_パッケージのスターターセット_を含んでいます。そのパッケージの一部はAngularが必要としているものや一般的なアプリケーションシナリオをサポートするものです。
+アプリケーションが成長するにつれて `package.json` にパッケージを追加します。
+パッケージを削除することもできます。
 
-The `package.json` is organized into two groups of packages:
+`package.json` は2つのグループのパッケージで構成されています。
 
-* [Dependencies](guide/npm-packages#dependencies) are essential to *running* applications.
-* [DevDependencies](guide/npm-packages#dev-dependencies) are only necessary to *develop* applications.
+* [Dependencies](guide/npm-packages#dependencies) はアプリケーションを*実行するため*に不可欠です。
+* [DevDependencies](guide/npm-packages#dev-dependencies) はアプリケーションを*開発するため* だけに必要です。
 
 <div class="alert is-helpful">
 
-**Library developers:** By default, the CLI command [`ng generate library`](cli/generate) creates a `package.json` for the new library. That `package.json` is used when publishing the library to npm.
-For more information, see the CLI wiki page [Library Support](https://github.com/angular/angular-cli/wiki/stories-create-library). 
+**ライブラリ開発者へ**: デフォルトでは、CLIコマンドの [`ng generate library`](cli/generate) は新しいライブラリのための `package.json` を生成します。この `package.json` はnpmにライブラリを公開するときに利用されます。
+詳細については、CLIの [Library Support](https://github.com/angular/angular-cli/wiki/stories-create-library)のWikiページを見てください。
 </div>
 
 
 {@a dependencies}
-## Dependencies
+## dependencies
 
-The packages listed in the `dependencies` section of `package.json` are essential to *running* applications. 
+`package.json` の `dependencies` 部分に列挙されたパッケージはアプリケーションを*実行するため*に不可欠なものです。
 
-The `dependencies` section of `package.json` contains:
+`package.json` の `dependencies` 部分は次のものを含んでいます。
 
-* [**Angular packages**](#angular-packages): Angular core and optional modules; their package names begin `@angular/`.
+* [**Angularパッケージ**](#angular-packages): Angularのコアとオプションのモジュールです。これらのパッケージ名は `@angular/` で始まります。
 
-* [**Support packages**](#support-packages): 3rd party libraries that must be present for Angular apps to run.
+* [**サポートパッケージ**](#support-packages): Angularアプリケーションを実行するために無くてはならないサードパーティのライブラリです。
 
-* [**Polyfill packages**](#polyfills): Polyfills plug gaps in a browser's JavaScript implementation.
+* [**ポリフィルパッケージ**](#polyfills): ポリフィルはブラウザのJavaScript実装のギャップを埋めます。
 
-To add a new dependency, use the [`ng add`](cli/add) command.
+新しい依存関係を追加するためには、 [`ng add`](cli/add) コマンドを使ってください。
 
 {@a angular-packages}
-### Angular packages
+### Angularパッケージ
 
-The following Angular packages are included as dependencies in the default `package.json` file for a new Angular workspace.
-For a complete list of Angular packages, see the [API reference](http://angular.io/api?type=package). 
+次のAngularのパッケージは新しいAngularワークスペース用のデフォルトの `package.json` ファイルの依存関係として含まれています。
+Angularのパッケージの完全な一覧は、[API reference](http://angular.jp/api?type=package) を見てください。
 
-Package name                               | Description
+
+パッケージ名                                                                            | 説明
 ----------------------------------------   | --------------------------------------------------
-[**@angular/animations**](api/animations) | Angular's animations library makes it easy to define and apply animation effects such as page and list transitions. For more information, see the [Animations guide](guide/animations).
-[**@angular/common**](api/common) | The commonly-needed services, pipes, and directives provided by the Angular team. The [`HttpClientModule`](api/common/http/HttpClientModule) is also here, in the [`@angular/common/http`](api/common/http) subfolder. For more information, see the [HttpClient guide](guide/http).
-**@angular/compiler** | Angular's template compiler. It understands templates and can convert them to code that makes the application run and render. Typically you don’t interact with the compiler directly; rather, you use it indirectly via `platform-browser-dynamic` when JIT compiling in the browser. For more information, see the [Ahead-of-time Compilation guide](guide/aot-compiler).
-[**@angular/core**](api/core) | Critical runtime parts of the framework that are needed by every application. Includes all metadata decorators, `Component`, `Directive`,  dependency injection, and the component lifecycle hooks.
-[**@angular/forms**](api/forms) | Support for both [template-driven](guide/forms) and [reactive forms](guide/reactive-forms). For information about choosing the best forms approach for your app, see [Introduction to forms](guide/forms-overview).
-[**@angular/http**](api/http) | Angular's legacy HTTP client, which was deprecated in version 5.0 in favor of [@angular/common/http](api/common/http).
-[**@angular/<br />platform&#8209;browser**](api/platform-browser) | Everything DOM and browser related, especially the pieces that help render into the DOM. This package also includes the `bootstrapModuleFactory()` method for bootstrapping applications for production builds that pre-compile with [AOT](guide/aot-compiler).
-[**@angular/<br />platform&#8209;browser&#8209;dynamic**](api/platform-browser-dynamic) | Includes [providers](api/core/Provider) and methods to compile and run the app on the client using the [JIT compiler](guide/aot-compiler).
-[**@angular/router**](api/router) | The router module navigates among your app pages when the browser URL changes. For more information, see [Routing and Navigation](guide/router).
+[**@angular/animations**](api/animations)                                               | Angularのアニメーションライブラリを使用すると、ページやリストのトランジションといったアニメーション効果を簡単に定義して適用できます。詳しくは [Animations guide](guide/animations) を見てください。.
+[**@angular/common**](api/common)                                                       | 一般的に必要なサービスやパイプ、ディレクティブがAngularチームによって提供されています。 [`HttpClientModule`](api/common/http/HttpClientModule) もここの [`@angular/common/http`](api/common/http) というサブフォルダにあります。詳しくは [HttpClient guide](guide/http) を見てください。
+**@angular/compiler**                                                                   | Angularのテンプレートのコンパイラです。テンプレートを解釈し、アプリケーションが実行・表示可能なコードに変換します。 通常はコンパイラに直接触れないでください。そうではなくブラウザ上でJITコンパイルするときに `platform-browser-dynamic` を通して間接的に使用します。詳しくは [Ahead-of-time Compilation guide](guide/aot-compiler)を見てください。
+[**@angular/core**](api/core)                                                           | すべてのアプリケーションに必要とされるフレームワークの重要なランタイム部分です。すべてのメタデータデコレーター、`Component` 、 `Directive `、依存性の注入、コンポーネントのライフサイクルフックを含みます。
+[**@angular/forms**](api/forms)                                                         | [テンプレート駆動のフォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)の両方をサポートします。アプリケーションに最適なフォームアプローチの選択についての情報は [Introduction to forms](guide/forms-overview) を見てください。
+[**@angular/http**](api/http)                                                           | AngularのレガシーHTTP clientです。これはバージョン5.0から非推奨となり、[@angular/common/http](api/common/http) が推奨されています。
+[**@angular/<br />platform&#8209;browser**](api/platform-browser)                       | DOMとブラウザに関連したすべて、特にDOMへのレンダリングを手助けする部分です。このパッケージは[AOT](guide/aot-compiler)で事前コンパイルしたプロダクションビルド用のアプリケーションをブートストラップするための `bootstrapModuleFactory()` メソッドも含んでいます。
+[**@angular/<br />platform&#8209;browser&#8209;dynamic**](api/platform-browser-dynamic) | [JITコンパイラ](guide/aot-compiler)を使用してクライアント上でアプリケーションをコンパイル、実行するための[providers](api/core/Provider)とメソッドを含んでいます。
+[**@angular/router**](api/router)                                                       | ルーターモジュールはブラウザのURLの変化に合わせてアプリケーション間を遷移します。詳しくは[Routing and Navigation](guide/router)を見てください。
 
 
 {@a support-packages}
-### Support packages
+### サポートパッケージ
 
-The following support packages are included as dependencies in the default `package.json` file for a new Angular workspace. 
+次のサポートパッケージは新しいAngularワークスペース用のデフォルトの `package.json` ファイルに依存関係として含まれています。
 
 
-Package name                               | Description
+Package name                                      | Description
 ----------------------------------------   | --------------------------------------------------
-[**rxjs**](https://github.com/ReactiveX/rxjs) | Many Angular APIs return [_observables_](guide/glossary#observable). RxJS is an implementation of the proposed [Observables specification](https://github.com/tc39/proposal-observable) currently before the [TC39](https://www.ecma-international.org/memento/tc39-m.htm) committee, which determines standards for the JavaScript language.
-[**zone.js**](https://github.com/angular/zone.js) | Angular relies on zone.js to run Angular's change detection processes when native JavaScript operations raise events.  Zone.js is an implementation of a [specification](https://gist.github.com/mhevery/63fdcdf7c65886051d55) currently before the [TC39](http://www.ecma-international.org/memento/TC39.htm) committee that determines standards for the JavaScript language.
+[**rxjs**](https://github.com/ReactiveX/rxjs)     | 多くのAngularのAPIは[_Observable_](guide/glossary#observable)を返します。RxJSはJavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)委員会に現在提案されている[Observables仕様](https://github.com/tc39/proposal-observable)を実装したものです。
+[**zone.js**](https://github.com/angular/zone.js) | Angularはzone.jsに依存しています。これはネイティブのJavaScriptの作用でイベントが発生した時にAngularの変更検知プロセスを実行するためのものです。Zone.jsは JavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)委員会に現在提案されている[仕様](https://gist.github.com/mhevery/63fdcdf7c65886051d55)を実装したものです。
 
 
 {@a polyfills}
-### Polyfill packages
+### ポリフィルパッケージ
 
-Many browsers lack native support for some features in the latest HTML standards,
-features that Angular requires.
-[_Polyfills_](https://en.wikipedia.org/wiki/Polyfill) can emulate the missing features.
-The [Browser Support](guide/browser-support) guide explains which browsers need polyfills and 
-how you can add them.
+多くのブラウザはAngularが必要とする最新のHTML標準の一部の機能をネイティブでサポートしていません。
+[_Polyfills_](https://en.wikipedia.org/wiki/Polyfill)は不足している機能をエミュレートできます。
+[ブラウザサポート](guide/browser-support)はどのブラウザがポリフィルを必要としていて
+ポリフィルの追加方法が説明されています。
 
-The `package.json` for a new Angular workspace installs the [core-js](https://github.com/zloirock/core-js) package, 
-which polyfills missing features for several popular browser.
+新しいAngularワークスペース用の `package.json` は[core-js](https://github.com/zloirock/core-js)パッケージをインストールします。
+これはいくつかの一般向けのブラウザに不足している機能のポリフィルです。
 
 
 {@a dev-dependencies}
 
 ## DevDependencies
 
-The packages listed in the `devDependencies` section of `package.json` help you develop the application on your local machine. You don't deploy them with the production application.
+`package.json` の `devDependencies` 部分に列挙されたパッケージはローカルマシン上でアプリケーションを開発するのを手助けするものです。本番向けアプリケーションと一緒にこれらのパッケージをデプロイしないでください。
 
-To add a new `devDependency`, use either one of the following commands:
+新しく `devDependency` に追加するには、次のいずれかのコマンドを利用してください。
 
 <code-example language="sh" class="code-shell">
   npm install --dev &lt;package-name&gt;
@@ -114,28 +114,28 @@ To add a new `devDependency`, use either one of the following commands:
   yarn add --dev &lt;package-name&gt;
 </code-example>
 
-The following `devDependencies` are provided in the default `package.json` file for a new Angular workspace. 
+次の`devDependencies`は新しいAngularワークスペース用のデフォルトの`package.json`ファイルで提供されています。
 
 
-Package name                               | Description
+パッケージ名                                                                                  | 説明
 ----------------------------------------   | -----------------------------------
-[**@angular&#8209;devkit/<br />build&#8209;angular**](https://github.com/angular/angular-cli/) | The Angular build tools.
-[**@angular/cli**](https://github.com/angular/angular-cli/) | The Angular CLI tools.
-**@angular/<br />compiler&#8209;cli** | The Angular compiler, which is invoked by the Angular CLI's `ng build` and `ng serve` commands.
-**@angular/<br />language&#8209;service** | The [Angular language service](guide/language-service) analyzes component templates and provides type and error information that TypeScript-aware editors can use to improve the developer's experience. For example, see the [Angular language service extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template).
-**@types/... ** | TypeScript definition files for 3rd party libraries such as Jasmine and Node.js.
-[**codelyzer**](https://www.npmjs.com/package/codelyzer) | A linter for Angular apps whose rules conform to the Angular [style guide](guide/styleguide).
-**jasmine/... ** | Packages to support the [Jasmine](https://jasmine.github.io/) test library.
-**karma/... ** | Packages to support the [karma](https://www.npmjs.com/package/karma) test runner.
-[**protractor**](https://www.npmjs.com/package/protractor) | An end-to-end (e2e) framework for Angular apps. Built on top of [WebDriverJS](https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs).
-[**ts-node**](https://www.npmjs.com/package/ts-node) | TypeScript execution environment and REPL for Node.js.
-[**tslint**](https://www.npmjs.com/package/tslint) | A static analysis tool that checks TypeScript code for readability, maintainability, and functionality errors.
-[**typescript**](https://www.npmjs.com/package/typescript) | The TypeScript language server, including the *tsc* TypeScript compiler.
+[**@angular&#8209;devkit/<br />build&#8209;angular**](https://github.com/angular/angular-cli/) | Angularのビルドツール
+[**@angular/cli**](https://github.com/angular/angular-cli/)                                    | Angularのコマンドラインツール
+**@angular/<br />compiler&#8209;cli**                                                          | Angular CLIの `ng build` と `ng serve` コマンドから呼び出されるAngularのコンパイラ
+**@angular/<br />language&#8209;service**                                                      | [Angular language service](guide/language-service)はコンポーネントのテンプレートを分析し、TypeScriptに対応したエディタを使用することで開発体験を向上させられる型とエラー情報を提供します。たとえば[Angular language service extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)を見てください。
+**@types/... **                                                                                | JasmineやNode.jsといったサードパーティライブラリのTypeScriptの型定義ファイルです。
+[**codelyzer**](https://www.npmjs.com/package/codelyzer)                                       | Angularの[スタイルガイド](guide/styleguide)に準拠したAngularアプリケーションのためのLinterのルールです。
+**jasmine/... **                                                                               | [Jasmine](https://jasmine.github.io/)テストライブラリをサポートするパッケージです。
+**karma/... **                                                                                 | [karma](https://www.npmjs.com/package/karma)テストランナーをサポートするパッケージです。
+[**protractor**](https://www.npmjs.com/package/protractor)                                     | AngularアプリケーションのためのE2Eフレームワークです。[WebDriverJS](https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs)上に構築されています。
+[**ts-node**](https://www.npmjs.com/package/ts-node)                                           | Node.jsのためのTypeScript実行環境とREPL
+[**tslint**](https://www.npmjs.com/package/tslint)                                             | 可読性、保守性、機能性のエラーについてTypeScriptのコードをチェックする静的解析ツールです。
+[**typescript**](https://www.npmjs.com/package/typescript)                                     | *tsc*(TypeScript Compiler)を含むTypeScriptのランゲージサーバー
 
 
-## Related information
+## 関連情報
 
- For information about how the Angular CLI handles packages see the following guides: 
+ Angular CLIがパッケージをどう扱うかについての情報は次のガイドを見てください。
  
- * [Building and serving](guide/build) describes how packages come together to create a development build.
- * [Deployment](guide/deployment) describes how packages come together to create a production build.
+ * [ビルドとサーブ](guide/build)ではパッケージを組み合わせて開発ビルドを作成する方法を説明します。
+ * [デプロイ](guide/deployment)ではパッケージを組み合わせて本番ビルドを作成する方法を説明します。

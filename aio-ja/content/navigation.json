@@ -611,7 +611,7 @@
           "url": "guide/npm-packages",
           "title": "npmパッケージ",
           "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
-          "translated": false
+          "translated": true
         },
         {
           "url": "guide/typescript-configuration",

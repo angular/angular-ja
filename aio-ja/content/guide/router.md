@@ -741,7 +741,7 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 ## サンプルアプリケーション
 
 このガイドでは、ルーティングを使ったマルチページのサンプルアプリケーションの開発方法を解説する。
-内容として、ルーターの設計上の決定事やキーとなる機能など以下のとおりである。
+内容として、ルーターの設計上の決定事やキーとなる機能など以下のとおりである:
 
 
 * アプリケーションの機能をモジュールに統合する
@@ -756,26 +756,24 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 * `CanLoad`でのガード (機能モジュール読み込み前のチェック)
 
 ガイドではアプリケーションを構築するために必要なマイルストーンを順番にならべてある。
-ただしこれはチュートリアルではない。Angularアプリケーション構築の詳細をまとめているが、その内容は、同時にほかの場所でもっと詳細に書かれている。
+ただしこれはチュートリアルではない。Angularアプリケーション構築の方法をまとめているが、その内容は、ほかの場所でもっと詳細に書かれている。
 
 このアプリケーションの最終版の全ソースは <live-example></live-example> からダウンロードできる。
 
 
-### The sample application in action
+### 作ろうとしているアプリケーション
 
-Imagine an application that helps the _Hero Employment Agency_ run its business.
-Heroes need work and the agency finds crises for them to solve.
+_ヒーローを雇用する会社_の運用を手助けするアプリケーションを想像してみる。ヒーローたちは働く必要があり、会社はヒーローたちの助けを必要とする危機をどこからか探さなければならない。
 
-The application has three main feature areas:
+アプリケーションには主として三つの機能領域が必要となる:
 
-1. A *Crisis Center* for maintaining the list of crises for assignment to heroes.
-1. A *Heroes* area for maintaining the list of heroes employed by the agency.
-1. An *Admin* area to manage the list of crises and heroes.
+1. 危機のリストでヒーローをアサインして管理していく*Crisis Center*
+1. 会社に雇われているヒーローのリストであるエリア*Heroes*
+1. 危機やヒーローのリストを管理するエリア*Admin*
 
-Try it by clicking on this <live-example title="Hero Employment Agency Live Example">live example link</live-example>.
+この <live-example title="Hero Employment Agency Live Example">サンプルリンク</live-example>を試しにクリックしてみてほしい。
 
-Once the app warms up, you'll see a row of navigation buttons
-and the *Heroes* view with its list of heroes.
+アプリケーションが動き始めると、ナビゲーションボタンの列と、*Heroes*がリストで見られるビューがあるだろう。
 
 
 <figure>
@@ -785,6 +783,7 @@ and the *Heroes* view with its list of heroes.
 
 
 Select one hero and the app takes you to a hero editing screen.
+ヒーローを一つ選択すると、アプリケーションはヒーローの編集画面へ移動する。
 
 <figure>
   <img src='generated/images/guide/router/hero-detail.png' alt="Crisis Center Detail">
@@ -792,15 +791,15 @@ Select one hero and the app takes you to a hero editing screen.
 
 
 
-Alter the name.
-Click the "Back" button and the app returns to the heroes list which displays the changed hero name.
-Notice that the name change took effect immediately.
+名前を変えてみよう。
+"Back"をクリックすると、画面はヒーローリストに戻るが、ヒーローの名前は変更されている。
+名前の変更がすぐに行われたことがわかる。
 
-Had you clicked the browser's back button instead of the "Back" button,
-the app would have returned you to the heroes list as well.
-Angular app navigation updates the browser history as normal web navigation does.
+ブラウザの戻るボタンの代わりに"Back"ボタンを押し、さっきのヒーローリストがまた表示された、
+Angularアプリケーションの遷移では通常のウェブのナビゲーションと同様に、ブラウザ履歴の更新が行われる。
 
 Now click the *Crisis Center* link for a list of ongoing crises.
+リンク*Crisis Center*をクリックし、現在起こっている危機の一覧を見てみよう。
 
 
 <figure>
@@ -809,12 +808,12 @@ Now click the *Crisis Center* link for a list of ongoing crises.
 
 
 
-Select a crisis and the application takes you to a crisis editing screen.
-The _Crisis Detail_ appears in a child component on the same page, beneath the list.
+どれか危機を選択すると、その編集画面に遷移する。_Crisis Detail_がページ内に子コンポーネントとして現れる。
 
 Alter the name of a crisis.
+危機の名前を変えてみよう。
 Notice that the corresponding name in the crisis list does _not_ change.
-
+リストにある危機の名前が_変わっていない_ことに気づくだろう。
 
 <figure>
   <img src='generated/images/guide/router/crisis-center-detail.png' alt="Crisis Center Detail">
@@ -822,14 +821,13 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 
 
-Unlike *Hero Detail*, which updates as you type,
-*Crisis Detail* changes are temporary until you either save or discard them by pressing the "Save" or "Cancel" buttons.
-Both buttons navigate back to the *Crisis Center* and its list of crises.
+あなたの入力どおりに更新された*Hero Detail*と違い、*Crisis Detail*はSave"か"Cancel"のボタンを押して保存か破棄をしない限り変更されない。
+どちらのボタンも*Crisis Center*へ戻り、危機のリストが表示されるようになっている。
 
-***Do not click either button yet***.
-Click the browser back button or the "Heroes" link instead.
+***まだどちらのボタンを押してもいけない***.
+ブラウザの戻るボタンかリンク"Heroes"をクリックする。
 
-Up pops a dialog box.
+ダイアログボックスが出てくる。
 
 
 <figure>
@@ -838,15 +836,16 @@ Up pops a dialog box.
 
 
 
-You can say "OK" and lose your changes or click "Cancel" and continue editing.
+"OK"を押して変更を破棄するか、"Cancel"をクリックして編集を続行できる。
 
-Behind this behavior is the router's `CanDeactivate` guard.
-The guard gives you a chance to clean-up or ask the user's permission before navigating away from the current view.
+これらの動作はルーターの`CanDeactivate`ガードの機能によるものだ。
+このガードは現在のビューから移動する前に、一掃したりユーザに許可を求める機会を与えてくれる。
 
-The `Admin` and `Login` buttons illustrate other router capabilities to be covered later in the guide.
-This short introduction will do for now.
+`Admin`と`Login`のそれぞれのボタンはこのあとで、他のルーター機能を説明するために使います。
+その紹介を手短にここで行います。
 
-Proceed to the first application milestone.
+
+アプリケーションの最初のマイルストーンに進みましょう。
 
 {@a getting-started}
 

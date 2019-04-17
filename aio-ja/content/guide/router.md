@@ -738,27 +738,27 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 {@a sample-app-intro}
 
 
-## The sample application
+## サンプルアプリケーション
 
-This guide describes development of a multi-page routed sample application.
-Along the way, it highlights design decisions and describes key features of the router such as:
+このガイドでは、ルーティングを使ったマルチページのサンプルアプリケーションの開発方法を解説する。
+内容として、ルーターの設計上の決定事やキーとなる機能など以下のとおりである。
 
-* Organizing the application features into modules.
-* Navigating to a component (*Heroes* link to "Heroes List").
-* Including a route parameter (passing the Hero `id` while routing to the "Hero Detail").
-* Child routes (the *Crisis Center* has its own routes).
-* The `CanActivate` guard (checking route access).
-* The `CanActivateChild` guard (checking child route access).
-* The `CanDeactivate` guard (ask permission to discard unsaved changes).
-* The `Resolve` guard (pre-fetching route data).
-* Lazy loading feature modules.
-* The `CanLoad` guard (check before loading feature module assets).
 
-The guide proceeds as a sequence of milestones as if you were building the app step-by-step.
-But, it is not a tutorial and it glosses over details of Angular application construction
-that are more thoroughly covered elsewhere in the documentation.
+* アプリケーションの機能をモジュールに統合する
+* コンポーネントの解説 (*Heroes*を"Heroes List"にリンクする)
+* ルーティング時のパラメータ (ヒーローの`id`を"Hero Detail"に渡す)
+* 子ルート (*Crisis Center*自身のもつルートについて)
+* `CanActivate`でのガード (ルートへのアクセスのチェック)
+* `CanActivateChild`でのガード (子ルートへのアクセスのチェック)
+* `CanDeactivate`でのガード (未保存の変更破棄の承認)
+* `Resolve`でのガード (ルートデータの事前読み込み)
+* 機能モジュール群の遅延読み込み
+* `CanLoad`でのガード (機能モジュール読み込み前のチェック)
 
-The full source for the final version of the app can be seen and downloaded from the <live-example></live-example>.
+ガイドではアプリケーションを構築するために必要なマイルストーンを順番にならべてある。
+ただしこれはチュートリアルではない。Angularアプリケーション構築の詳細をまとめているが、その内容は、同時にほかの場所でもっと詳細に書かれている。
+
+このアプリケーションの最終版の全ソースは <live-example></live-example> からダウンロードできる。
 
 
 ### The sample application in action

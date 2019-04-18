@@ -1,4 +1,4 @@
-# テンプレート構文
+# Template Syntax
 
 <style>
   h4 {font-size: 17px !important; text-transform: none !important;}
@@ -6,145 +6,145 @@
   h4 .syntax { font-size: 100%; }
 </style>
 
-Angular アプリケーションは、ユーザーが表示して実行できる機能を管理し、
-これをコンポーネントクラスインスタンス(*コンポーネント*)と、そのユーザー向けテンプレートとのやりとりを通して実現します。
+The Angular application manages what the user sees and can do, achieving this through the interaction of a
+component class instance (the *component*) and its user-facing template.
 
-あなたは、モデル・ビュー・コントローラー(MVC)やモデル・ビュー・ビューモデル(MVVM)の経験から、コンポーネント/テンプレートの相対性に精通しているかもしれません。
-Angular では、コンポーネントはコントローラー/ビューモデルの一部として機能し、テンプレートはビューを表現します。
+You may be familiar with the component/template duality from your experience with model-view-controller (MVC) or model-view-viewmodel (MVVM).
+In Angular, the component plays the part of the controller/viewmodel, and the template represents the view.
 
-このページは、Angular のテンプレート言語に関する総合的な技術文書です。
-テンプレート言語の基本的な原則を解説し、あなたがどこかで出くわすかもしれない構文の多くについて、このドキュメント内で説明します。
+This page is a comprehensive technical reference to the Angular template language.
+It explains basic principles of the template language and describes most of the syntax that you'll encounter elsewhere in the documentation.
 
-多くのコードスニペットでポイントとコンセプトを説明しており、
-それらはすべて<live-example title="テンプレート構文のライブコード"></live-example>で確認できます。
+Many code snippets illustrate the points and concepts, all of them available
+in the <live-example title="Template Syntax Live Code"></live-example>.
 
 
 {@a html}
-## テンプレート内のHTML
+## HTML in templates
 
-HTML は Angular のテンプレート言語です。
-ほとんどすべての HTML 構文は有効なテンプレート構文です。
-`<script>` 要素は注目すべき例外です。
-スクリプトインジェクション攻撃の危険性を排除するために禁止されています。
-実際には、`<script>` は無視され、ブラウザコンソールに警告が表示されます。
-詳細は [セキュリティ](guide/security) のページを参照してください。
+HTML is the language of the Angular template.
+Almost all HTML syntax is valid template syntax.
+The `<script>` element is a notable exception;
+it is forbidden, eliminating the risk of script injection attacks.
+In practice, `<script>` is ignored and a warning appears in the browser console.
+See the [Security](guide/security) page for details.
 
-妥当なHTMLの中には、テンプレート内ではあまり意味がないものがあります。
-`<html>`、`<body>`、および `<base>` 要素には有用な役割はありません。
-他のほとんどすべては有用です。
+Some legal HTML doesn't make much sense in a template.
+The `<html>`, `<body>`, and `<base>` elements have no useful role.
+Pretty much everything else is fair game.
 
-テンプレートの HTML ボキャブラリーを、新しい要素や属性として表示されるコンポーネントやディレクティブで拡張することができます。
-次のセクションでは、データバインディングを通じて動的に DOM(Document Object Model)の値を取得および設定する方法を学びます。
+You can extend the HTML vocabulary of your templates with components and directives that appear as new elements and attributes.
+In the following sections, you'll learn how to get and set DOM (Document Object Model) values dynamically through data binding.
 
-データバインディングの最初の形式&mdash;補間&mdash;から始めて、テンプレート HTML でできることの豊富さを確認しましょう。
+Begin with the first form of data binding&mdash;interpolation&mdash;to see how much richer template HTML can be.
 
 <hr/>
 
 {@a interpolation}
 
-## 補間とテンプレート式
+## Interpolation and Template Expressions
 
-補間を使用すると、計算された文字列を HTML 要素タグ間および属性割り当て内のテキストに組み込むことができます。
-テンプレート式は、
-これらの文字列を計算するために使用するものです。
+Interpolation allows you to incorporate calculated strings into the text
+between HTML element tags and within attribute assignments. Template
+expressions are what you use to calculate those strings.
 
-補間の <live-example></live-example> では、
-このセクションで説明されているすべての構文とコードスニペットを示しています。
+The interpolation <live-example></live-example> demonstrates all of
+the syntax and code snippets described in this section.
 
-### `{{...}}` による補間
+### Interpolation `{{...}}`
 
-補間では、マークアップされたテキストに埋め込まれた式を参照します。
-デフォルトでは、補間は二重中括弧 `{{` と `}}` を区切り文字として使います。
+Interpolation refers to embedding expressions into marked up text.
+By default, interpolation uses as its delimiter the double curly braces, `{{` and `}}`.
 
-次のスニペットでは、`{{ currentCustomer }}` が補間の例です。
+In the following snippet, `{{ currentCustomer }}` is an example of interpolation.
 
 <code-example path="interpolation/src/app/app.component.html" region="interpolation-example1" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-中括弧間のテキストは多くの場合、
-コンポーネントのプロパティ名です。
-Angular は、その名前を対応するコンポーネントプロパティの文字列値に置き換えます。
+The text between the braces is often the name of a component
+property. Angular replaces that name with the
+string value of the corresponding component property.
 
 <code-example path="interpolation/src/app/app.component.html" region="component-property" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-上記の例では、Angular は `title` プロパティと `itemImageUrl`
-プロパティを評価して空白を埋めます。最初にタイトルテキストを表示し、次に画像を表示します。
+In the example above, Angular evaluates the `title` and `itemImageUrl` properties
+and fills in the blanks, first displaying some title text and then an image.
 
-より一般的には、中括弧間のテキストは、
-Angular が最初に **評価** してから **文字列に変換** する **テンプレート式** です。
-次の補間の例では、2つの数を加算していることがポイントです:
+More generally, the text between the braces is a **template expression**
+that Angular first **evaluates** and then **converts to a string**.
+The following interpolation illustrates the point by adding two numbers:
 
 <code-example path="interpolation/src/app/app.component.html" region="convert-string" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-式では次の例のように `getVal()`
-などのホストコンポーネントのメソッドを呼び出すことができます:
+The expression can invoke methods of the host component such as `getVal()` in
+the following example:
 
 <code-example path="interpolation/src/app/app.component.html" region="invoke-method" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-Angular は、二重中括弧内のすべての式を評価し、式の結果を文字列に変換して、
-それらを隣接するリテラル文字列とリンクします。
-最後に、この合成補間の結果を **要素またはディレクティブのプロパティ** に割り当てます。
+Angular evaluates all expressions in double curly braces,
+converts the expression results to strings, and links them with neighboring literal strings. Finally,
+it assigns this composite interpolated result to an **element or directive property**.
 
-要素タグ間にその結果を挿入したり、属性に割り当てるように表示します。
+You appear to be inserting the result between element tags and assigning it to attributes.
 
 <div class="alert is-helpful">
 
-ただし、
-補間は Angular がプロパティバインディングに変換する特別な構文です。
+However, interpolation is a special syntax that Angular converts into a
+property binding.
 
-`{{` および `}}` 以外のものを使用する場合は、
-`Component` メタデータの
+If you'd like to use something other than `{{` and `}}`, you can
+configure the interpolation delimiter via the
 [interpolation](api/core/Component#interpolation)
-オプションを使用して補間の区切り文字を設定できます。
+option in the `Component` metadata.
 
 </div>
 
-### テンプレート式 {@a template-expressions}
+### Template expressions
 
-テンプレート **式** は値を生成し、二重中括弧
-`{{ }}` 内に表示します。
-Angularは 式を実行し、それをバインディングターゲットのプロパティに割り当てます。
-ターゲットは HTML 要素、コンポーネント、またはディレクティブです。
+A template **expression** produces a value and appears within the double
+curly braces, `{{ }}`.
+Angular executes the expression and assigns it to a property of a binding target;
+the target could be an HTML element, a component, or a directive.
 
-`{{1 + 1}}` 内の補間中括弧はテンプレート式 `1 + 1` を囲みます。
-プロパティバインディングでは、`[property]="expression"`
-のように、テンプレート式は `=` 記号の右側の引用符で囲まれます。
+The interpolation braces in `{{1 + 1}}` surround the template expression `1 + 1`.
+In the property binding,
+a template expression appears in quotes to the right of the&nbsp;`=` symbol as in `[property]="expression"`.
 
-構文に関しては、テンプレート式は JavaScript に似ています。
-いくつかの例外を除き、多くの JavaScript 式は妥当なテンプレート式です。
+In terms of syntax, template expressions are similar to JavaScript.
+Many JavaScript expressions are legal template expressions, with a few exceptions.
 
-次のような、副作用をもつ、
-または促進する JavaScript 式は使用できません:
+You can't use JavaScript expressions that have or promote side effects,
+including:
 
-* 代入（`=`、`+=`、`-=`、`...`）
-* `new`、`typeof`、`instanceof` などの演算子
-* <code>;</code> や <code>,</code> で式をつなげる
-* `++` や `--` などのインクリメントおよびデクリメント演算子 
-* いくつかの ES2015+ オペレーター
+* Assignments (`=`, `+=`, `-=`, `...`)
+* Operators such as `new`, `typeof`, `instanceof`, etc.
+* Chaining expressions with <code>;</code> or <code>,</code>
+* The increment and decrement operators `++` and `--`
+* Some of the ES2015+ operators
 
-その他の JavaScript 構文との注目すべき違いは次のとおりです。
+Other notable differences from JavaScript syntax include:
 
-* `|` や `&` などのビット演算子はサポートされていません
-* `|`、`?.` や `!` などの新しいテンプレート式演算子を持ちます
+* No support for the bitwise operators such as `|` and `&`
+* New template expression operators, such as `|`, `?.` and `!`
 <!-- link to: guide/template-syntax#expression-operators -->
 
-### 式のコンテキスト
+### Expression context
 
-*式のコンテキスト* は通常、 _コンポーネント_ インスタンスです。
-次のスニペットでは、二重中括弧内の `recommended` と、引用符内の `itemImageUrl2`
-は `AppComponent` のプロパティを参照しています。
+The *expression context* is typically the _component_ instance.
+In the following snippets, the `recommended` within double curly braces and the
+`itemImageUrl2` in quotes refer to properties of the `AppComponent`.
 
 <code-example path="interpolation/src/app/app.component.html" region="component-context" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-式は
-テンプレート入力変数 `let customer` <!-- link to built-in-directives#template-input-variables -->
-やテンプレート参照変数 `#customerInput` <!-- link to guide/template-ref-variables -->
-などの _テンプレートが持つ_
-コンテキストのプロパティも参照できます。
+An expression may also refer to properties of the _template's_ context
+such as a template input variable,
+<!-- link to built-in-directives#template-input-variables -->
+`let customer`, or a template reference variable, `#customerInput`.
+<!-- link to guide/template-ref-variables -->
 
 <code-example path="interpolation/src/app/app.component.html" region="template-input-variable" header="src/app/app.component.html (template input variable)" linenums="false">
 </code-example>
@@ -152,81 +152,81 @@ Angularは 式を実行し、それをバインディングターゲットのプ
 <code-example path="interpolation/src/app/app.component.html" region="template-reference-variable" header="src/app/app.component.html (template reference variable)" linenums="false">
 </code-example>
 
-式の中にある項のコンテキストは、_テンプレート変数_、ディレクティブの
-_コンテキスト_ オブジェクト(ある場合)、およびコンポーネントの _メンバー_ の組み合わせです。
-これらの名前空間に複数存在する名前を参照する場合は、テンプレート変数名が優先され、
-その後にディレクティブの _コンテキスト_ 内の名前、
-最後にコンポーネントのメンバー名が参照されます。
+The context for terms in an expression is a blend of the _template variables_,
+the directive's _context_ object (if it has one), and the component's _members_.
+If you reference a name that belongs to more than one of these namespaces,
+the template variable name takes precedence, followed by a name in the directive's _context_,
+and, lastly, the component's member names.
 
-前の例はそのような名前の衝突を示しています。
-コンポーネントは `customer` プロパティを持ち、`*ngFor` では `customer` テンプレート変数を定義しています。
-
-<div class="alert is-helpful">
-
-`{{customer.name}}` 内の `customer` は、コンポーネントのプロパティではなく、
-テンプレート入力変数を参照しています。
-
-テンプレート式は、`undefined`
-以外のグローバル名前空間内のものを参照できません。
-`window` や `document` を参照することはできません。
-また、`console.log()` や `Math.max()` を呼び出すことはできず、
-式のコンテキストのメンバーを参照することに制限されています。
-
-</div>
-
-### 式のガイドライン
-
-テンプレート式を使う場合は、次のガイドラインにしたがってください:
-
-* [副作用を起こさない](guide/template-syntax#no-visible-side-effects)
-* [素早い実行](guide/template-syntax#quick-execution)
-* [シンプルさ](guide/template-syntax#simplicity)
-
-{@a no-visible-side-effects}
-### 副作用を起こさない
-
-テンプレート式は、
-対象のプロパティの値以外のアプリケーションの状態を変更すべきではありません。
-
-このルールは Angular の「単方向データフロー」ポリシーに不可欠です。
-コンポーネントの値を読み込むことで、他の表示された値を変えるかもしれないと決して心配すべきではありません。
-ビューは1回のレンダリングパスを通して安定しているべきです。
-
-[冪等](https://en.wikipedia.org/wiki/Idempotence)な式は、副作用がなく、
-Angular の変更検知の性能を向上させるので理想的です。
-
-Angular の項の中で冪等な式は、
-その依存する値の1つが変わるまで、
-*常にまったく同じもの* を返します。
-
-依存する値は、イベントループが1回転する間に変化すべきではありません。
-冪等な式が文字列または数値を返す場合、2回続けて呼び出されると同じ文字列または数値を返します。式が `array` を含むオブジェクトを返す場合、2回続けて呼び出されると同じオブジェクト *参照* を返します。
+The previous example presents such a name collision. The component has a `customer`
+property and the `*ngFor` defines a `customer` template variable.
 
 <div class="alert is-helpful">
 
-`*ngFor` に適用される振る舞いについて1つ例外があります。`*ngFor` には、繰り返しをまたいだときに、参照の違うオブジェクトを処理できる `trackBy` 機能があります。
+The `customer` in `{{customer.name}}`
+refers to the template input variable, not the component's property.
 
-詳しくは、このガイドの [`trackBy` を使用した *ngFor](guide/template-syntax#ngfor-with-trackby) セクションを参照してください。
+Template expressions cannot refer to anything in
+the global namespace, except `undefined`. They can't refer to
+`window` or `document`. Additionally, they
+can't call `console.log()` or `Math.max()` and they are restricted to referencing
+members of the expression context.
 
 </div>
 
-### 素早い実行 {@a quick-execution}
+### Expression guidelines
 
-Angular はすべての変更検知サイクルの後にテンプレート式を実行します。
-変更検知サイクルは、Promise の解決、HTTP の結果、タイマーイベント、
-キープレス、マウスの移動などの多くの非同期アクティビティによって引き起こされます。
+When using template expressions follow these guidelines:
 
-特に遅いデバイスでは、式が早く終了しなければユーザー体験が低下する可能性があります。
-計算コストが高い場合、値をキャッシュすることを検討してください。
+* [No visible side effects](guide/template-syntax#no-visible-side-effects)
+* [Quick execution](guide/template-syntax#quick-execution)
+* [Simplicity](guide/template-syntax#simplicity)
 
-### シンプルさ {@a simplicity}
 
-複雑なテンプレート式を書くことは可能ですが、
-避けることをお勧めします。
+### No visible side effects
 
-プロパティ名、またはメソッド呼び出しは標準的であるべきです、しかし、必要なときには真偽値の否定 `!` はよいでしょう。
-それ以外の場合、アプリケーションとビジネスロジックをコンポーネントに限定してください。
-そうすることで、コンポーネントの開発とテストが容易になります。
+A template expression should not change any application state other than the value of the
+target property.
+
+This rule is essential to Angular's "unidirectional data flow" policy.
+You should never worry that reading a component value might change some other displayed value.
+The view should be stable throughout a single rendering pass.
+
+An [idempotent](https://en.wikipedia.org/wiki/Idempotence) expression is ideal because
+it is free of side effects and improves Angular's change detection performance.
+
+In Angular terms, an idempotent expression always returns
+*exactly the same thing* until
+one of its dependent values changes.
+
+Dependent values should not change during a single turn of the event loop.
+If an idempotent expression returns a string or a number, it returns the same string or number when called twice in a row. If the expression returns an object, including an `array`, it returns the same object *reference* when called twice in a row.
+
+<div class="alert is-helpful">
+
+There is one exception to this behavior that applies to `*ngFor`. `*ngFor` has `trackBy` functionality that can deal with referential inequality of objects that when iterating over them.
+
+For more information, see the [*ngFor with `trackBy`](guide/template-syntax#ngfor-with-trackby) section of this guide.
+
+</div>
+
+### Quick execution
+
+Angular executes template expressions after every change detection cycle.
+Change detection cycles are triggered by many asynchronous activities such as
+promise resolutions, HTTP results, timer events, key presses and mouse moves.
+
+Expressions should finish quickly or the user experience may drag, especially on slower devices.
+Consider caching values when their computation is expensive.
+
+### Simplicity
+
+Although it's possible to write complex template expressions, it's a better
+practice to avoid them.
+
+A property name or method call should be the norm, but an occasional Boolean negation, `!`, is OK.
+Otherwise, confine application and business logic to the component,
+where it is easier to develop and test.
 
 <!-- end of Interpolation doc -->
 
@@ -234,89 +234,89 @@ Angular はすべての変更検知サイクルの後にテンプレート式を
 
 {@a template-statements}
 
-## テンプレート文
+## Template statements
 
-テンプレート **文**
-は、要素、コンポーネント、ディレクティブなどのバインディングターゲットによって発生した **イベント** に応答します。
-テンプレート文は [イベントバインディング](guide/template-syntax#event-binding) セクションでも触れますが、
-`(event)="statement"` のように `=` 記号の右側に引用符で囲まれた形で現れます。
+A template **statement** responds to an **event** raised by a binding target
+such as an element, component, or directive.
+You'll see template statements in the [event binding](guide/template-syntax#event-binding) section,
+appearing in quotes to the right of the `=`&nbsp;symbol as in `(event)="statement"`.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-テンプレート文には *副作用があります*。
-それがイベントのポイントです。
-これは、ユーザーの操作からアプリケーションの状態を更新する方法です。
+A template statement *has a side effect*.
+That's the whole point of an event.
+It's how you update application state from user action.
 
-イベントへの対応は、Angular の「単方向データフロー」の反対側です。
-あなたは、このイベントループのターンの間に、何でも、どこでも自由に変更できます。
+Responding to events is the other side of Angular's "unidirectional data flow".
+You're free to change anything, anywhere, during this turn of the event loop.
 
-テンプレート式と同様に、テンプレート *文*
-は JavaScript のような言語を使用します。
-テンプレート文パーサーはテンプレート式パーサーとは異なり、
-特に基本的な代入(`=`)と連鎖式（<code>;</code> または <code>,</code>）の両方をサポートします。
+Like template expressions, template *statements* use a language that looks like JavaScript.
+The template statement parser differs from the template expression parser and
+specifically supports both basic assignment (`=`) and chaining expressions
+(with <code>;</code> or <code>,</code>).
 
-ただし、特定の JavaScript 構文は許可されていません:
+However, certain JavaScript syntax is not allowed:
 
 * <code>new</code>
-* `++` や `--` などの、インクリメント、デクリメント演算子
-* `+=` and `-=` などの代入演算子
-* ビット演算子 `|` や `&`
-* [テンプレート式演算子](guide/template-syntax#expression-operators)
+* increment and decrement operators, `++` and `--`
+* operator assignment, such as `+=` and `-=`
+* the bitwise operators `|` and `&`
+* the [template expression operators](guide/template-syntax#expression-operators)
 
-### 文のコンテキスト
+### Statement context
 
-式と同様に、文はコンポーネントインスタンスのイベント処理メソッドなど、
-文のコンテキスト内にあるものだけを参照できます。
+As with expressions, statements can refer only to what's in the statement context
+such as an event handling method of the component instance.
 
-*文* のコンテキストは通常、コンポーネントインスタンスです。
-`(click)="deleteHero()"` 内の *deleteHero* は、データがバインドされたコンポーネントのメソッドです。
+The *statement context* is typically the component instance.
+The *deleteHero* in `(click)="deleteHero()"` is a method of the data-bound component.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-文のコンテキストはテンプレート自身のコンテキストのプロパティも参照します。
-次の例では、テンプレートの `$event` オブジェクト、
-[テンプレート入力変数](guide/template-syntax#template-input-variable) (`let hero`)、
-および [テンプレート参照変数](guide/template-syntax#ref-vars) (`#heroForm`)
-がコンポーネントのイベント処理メソッドに渡されています。
+The statement context may also refer to properties of the template's own context.
+In the following examples, the template `$event` object,
+a [template input variable](guide/template-syntax#template-input-variable) (`let hero`),
+and a [template reference variable](guide/template-syntax#ref-vars) (`#heroForm`)
+are passed to an event handling method of the component.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-var-statement" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-テンプレートコンテキストの名前はコンポーネントコンテキストの名前よりも優先されます。
-上記の `deleteHero(hero)` では、
-`hero` はテンプレート入力変数であり、コンポーネントの `hero` プロパティではありません。
+Template context names take precedence over component context names.
+In `deleteHero(hero)` above, the `hero` is the template input variable,
+not the component's `hero` property.
 
-テンプレート文は、グローバル名前空間内のものを参照できません。
-`window` や `document` を参照することはできません。
-`console.log` や `Math.max` を呼び出すことはできません。
+Template statements cannot refer to anything in the global namespace. They
+can't refer to `window` or `document`.
+They can't call `console.log` or `Math.max`.
 
-### 文のガイドライン
+### Statement guidelines
 
-式と同様に、複雑なテンプレート文を書かないでください。
-メソッド呼び出しまたは単純なプロパティ割り当てが一般的です。
+As with expressions, avoid writing complex template statements.
+A method call or simple property assignment should be the norm.
 
-さて、テンプレートの式と文を理解したので、
-補間以外のさまざまなデータバインディング構文について学習する準備が整いました。
+Now that you have a feel for template expressions and statements,
+you're ready to learn about the varieties of data binding syntax beyond interpolation.
 
 
 <hr/>
 
 {@a binding-syntax}
 
-## バインディング構文: 概要
+## Binding syntax: An overview
 
-データバインディングは、アプリケーションのデータ値を使用して、ユーザーに表示される内容を調整するための仕組みです。
-HTML から値をプッシュしたり、プルしたりすることはできますが、
-これらの雑用をバインディングフレームワークに任せることで、アプリケーションの作成、読み取り、保守が簡単になります。
-バインディングソースとターゲット HTML 要素の間のバインディングを宣言して、フレームワークに任せるだけです。
+Data binding is a mechanism for coordinating what users see, with application data values.
+While you could push values to and pull values from HTML,
+the application is easier to write, read, and maintain if you turn these chores over to a binding framework.
+You simply declare bindings between binding sources and target HTML elements and let the framework do the work.
 
-Angular はさまざまな種類のデータバインディングを提供します。
-このガイドでは、Angular のデータバインディングとその構文の概要を見たあとに、それらのほとんどについて説明します。
+Angular provides many kinds of data binding.
+This guide covers most of them, after a high-level view of Angular data binding and its syntax.
 
-バインディングタイプは、データフローの方向によって3つのカテゴリーに分類できます。
-_source-to-view_、_view-to-source_、そして双方向シーケンスの_view-to-source-to-view_です：
+Binding types can be grouped into three categories distinguished by the direction of data flow:
+from the _source-to-view_, from _view-to-source_, and in the two-way sequence: _view-to-source-to-view_:
 
 <style>
   td, th {vertical-align: top}
@@ -331,19 +331,19 @@ _source-to-view_、_view-to-source_、そして双方向シーケンスの_view-
   </col>
   <tr>
     <th>
-      データの方向
+      Data direction
     </th>
     <th>
-      構文
+      Syntax
     </th>
     <th>
-      タイプ
+      Type
     </th>
 
   </tr>
   <tr>
     <td>
-      データソースから<br>対象のビューへの<br>単方向
+      One-way<br>from data source<br>to view target
     </td>
     <td>
 
@@ -355,15 +355,15 @@ _source-to-view_、_view-to-source_、そして双方向シーケンスの_view-
 
     </td>
     <td>
-      補間<br>
-      プロパティ<br>
-      属性<br>
-      クラス<br>
-      スタイル
+      Interpolation<br>
+      Property<br>
+      Attribute<br>
+      Class<br>
+      Style
     </td>
     <tr>
       <td>
-        対象のビューから<br>データソースへの<br>単方向
+        One-way<br>from view target<br>to data source
       </td>
       <td>
         <code-example>
@@ -372,12 +372,12 @@ _source-to-view_、_view-to-source_、そして双方向シーケンスの_view-
         </code-example>
       </td>
       <td>
-        イベント
+        Event
       </td>
     </tr>
     <tr>
       <td>
-        双方向
+        Two-way
       </td>
       <td>
         <code-example>
@@ -386,125 +386,125 @@ _source-to-view_、_view-to-source_、そして双方向シーケンスの_view-
         </code-example>
       </td>
       <td>
-        双方向
+        Two-way
       </td>
     </tr>
   </tr>
 </table>
 
-補間以外のバインディングタイプは、等号の左側に **ターゲット名** があり、区切り(`[]`、`()`)で囲まれているか、
-または接頭辞が前に付いています(`bind-`、`on-`、`bindon-`)。
+Binding types other than interpolation have a **target name** to the left of the equal sign,
+either surrounded by punctuation (`[]`, `()`) or preceded by a prefix (`bind-`, `on-`, `bindon-`).
 
-ターゲット名は _プロパティ_ 名です。それは _属性_ 名のように見えるかもしれませんが、そうではありません。
-違いを理解するには、テンプレート HTML についての新しい考え方を発展させる必要があります。
+The target name is the name of a _property_. It may look like the name of an _attribute_ but it never is.
+To appreciate the difference, you must develop a new way to think about template HTML.
 
-### 新しいメンタルモデル
+### A new mental model
 
-テンプレート HTML は、データバインディングの力とカスタムマークアップを使用して HTML のボキャブラリーを拡張する機能すべてを備えているので、
-*HTML Plus* と見なしたくなります。
+With all the power of data binding and the ability to extend the HTML vocabulary
+with custom markup, it is tempting to think of template HTML as *HTML Plus*.
 
-それ*は*本当に HTML Plus です。
-しかし、あなたが慣れ親しんできた HTML とはかなり違います。
-新しいメンタルモデルを必要とします。
+It really *is* HTML Plus.
+But it's also significantly different than the HTML you're used to.
+It requires a new mental model.
 
-通常の HTML 開発では、HTML 要素を使用してビジュアル構造を作成し、
-文字列定数を使用して要素の属性を設定することによってそれらの要素を変更します。
+In the normal course of HTML development, you create a visual structure with HTML elements, and
+you modify those elements by setting element attributes with string constants.
 
 <code-example path="template-syntax/src/app/app.component.html" region="img+button" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-ここではまだ Angular テンプレート内で通常の方法を使用して構造を作成し、属性の値を初期化しているだけです。
+You still create a structure and initialize attribute values this way in Angular templates.
 
-それから、HTML をカプセル化するコンポーネントを使用して新しい要素を作成し、
-ネイティブの HTML 要素であるかのようにそれらをテンプレートに配置する方法を学びます。
+Then you learn to create new elements with components that encapsulate HTML
+and drop them into templates as if they were native HTML elements.
 
 <code-example path="template-syntax/src/app/app.component.html" region="hero-detail-1" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-まさに HTML Plus です。
+That's HTML Plus.
 
-それから、データバインディングについて学びます。最初に遭遇するバインディングは次のようになります:
+Then you learn about data binding. The first binding you meet might look like this:
 
 <code-example path="template-syntax/src/app/app.component.html" region="disabled-button-1" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-あなたはすぐにその独特の括弧表記にたどり着くでしょう。
-思い描いてください。あなたの直感では、ボタンの `disabled` 属性にバインドして、
-そしてコンポーネントの `isUnchanged` プロパティの現在の値にそれを設定します。
+You'll get to that peculiar bracket notation in a moment. Looking beyond it,
+your intuition suggests that you're binding to the button's `disabled` attribute and setting
+it to the current value of the component's `isUnchanged` property.
 
-あなたの直感は正しくありません!
-あなたの日々の HTML メンタルモデルは誤解を招きます。実際、いったんデータバインディングを開始すると、もうHTML *属性* を使用していないことになります。属性を設定していません。
-DOM要素、コンポーネント、およびディレクティブの *プロパティ* を設定しています。
+Your intuition is incorrect! Your everyday HTML mental model is misleading.
+In fact, once you start data binding, you are no longer working with HTML *attributes*. You aren't setting attributes.
+You are setting the *properties* of DOM elements, components, and directives.
 
 <div class="alert is-helpful">
 
-### HTML 属性 vs. DOM プロパティ
+### HTML attribute vs. DOM property
 
-HTML 属性と DOM プロパティの違いは、Angular バインディングがどのように機能するかを理解する上で非常に重要です。
+The distinction between an HTML attribute and a DOM property is crucial to understanding how Angular binding works.
 
-**属性は HTML によって定義されています。プロパティは DOM(Document Object Model)によって定義されています。**
+**Attributes are defined by HTML. Properties are defined by the DOM (Document Object Model).**
 
-* いくつかの HTML 属性は、プロパティへの1対1のマッピングを持っています。`id` はその一例です。
+* A few HTML attributes have 1:1 mapping to properties. `id` is one example.
 
-* 一部の HTML 属性には対応するプロパティがありません。`colspan` はその一例です。
+* Some HTML attributes don't have corresponding properties. `colspan` is one example.
 
-* 一部の DOM プロパティには対応する属性がありません。`textContent` はその一例です。
+* Some DOM properties don't have corresponding attributes. `textContent` is one example.
 
-* 多くの HTML 属性はプロパティにマッピングされているように見えますが...あなたが考えるような方法ではありません!
+* Many HTML attributes appear to map to properties ... but not in the way you might think!
 
-この最後のカテゴリーは、この一般的なルールを理解するまでは混乱します。
+That last category is confusing until you grasp this general rule:
 
-**属性は DOM プロパティを初期化してから実行されます。プロパティ値は変えることができます。
-属性値はできません。**
+**Attributes *initialize* DOM properties and then they are done.
+Property values can change; attribute values can't.**
 
-たとえば、ブラウザが `<input type="text" value="Bob">` をレンダリングすると、
-`value` プロパティが `"Bob"` に初期化された、対応する DOM ノードが作成されます。
+For example, when the browser renders `<input type="text" value="Bob">`, it creates a
+corresponding DOM node with a `value` property *initialized* to "Bob".
 
-ユーザーが入力ボックスに「Sally」と入力すると、DOM要素の `value`*プロパティ* は「Sally」になります。
-しかし、HTML の `value` *属性* は、input 要素を確認して分かるように、
-その属性は変更されていません(`input.getAttribute('value')` は "Bob" を返します)。
+When the user enters "Sally" into the input box, the DOM element `value` *property* becomes "Sally".
+But the HTML `value` *attribute* remains unchanged as you discover if you ask the input element
+about that attribute: `input.getAttribute('value')` returns "Bob".
 
-HTML 属性の `value` は *初期値* を指定します。DOM の `value` プロパティは *現在* の値です。
+The HTML attribute `value` specifies the *initial* value; the DOM `value` property is the *current* value.
 
-`disabled` 属性は別の独特な例です。
-ボタンの `disabled` *プロパティ* はデフォルトでは `false` であるため、ボタンは有効になっています。
-`disabled` *属性* を追加すると、その存在だけでボタンの `disabled` *プロパティ* が `true`
-に初期化されるため、ボタンは無効になります。
+The `disabled` attribute is another peculiar example. A button's `disabled` *property* is
+`false` by default so the button is enabled.
+When you add the `disabled` *attribute*, its presence alone initializes the  button's `disabled` *property* to `true`
+so the button is disabled.
 
-`disabled` *属性* の追加と削除で、ボタンの無効、有効が切り換わります。
-属性の値とは無関係です。そのため、`<button disabled="false">Still Disabled</button>` と書いてボタンを有効にすることはできません。
+Adding and removing the `disabled` *attribute* disables and enables the button. The value of the *attribute* is irrelevant,
+which is why you cannot enable a button by writing `<button disabled="false">Still Disabled</button>`.
 
-ボタンの `disabled` *プロパティ* を(Angular バインディングなどで)設定すると、ボタンが無効または有効になります。
-*プロパティ* の値は重要です。
+Setting the button's `disabled` *property*  (say, with an Angular binding) disables or enables the button.
+The value of the *property* matters.
 
-**HTML 属性と DOM プロパティは、同じ名前であっても同じものではありません。**
+**The HTML attribute and the DOM property are not the same thing, even when they have the same name.**
 
 </div>
 
-繰り返すと、
-**テンプレートバインディングは、*属性* ではなく *プロパティ* と *イベント* で機能します。**
+This fact bears repeating:
+**Template binding works with *properties* and *events*, not *attributes*.**
 
 <div class="callout is-helpful">
 
 <header>
-  属性のない世界
+  A world without attributes
 </header>
 
-Angular の世界では、属性の唯一の役割は要素とディレクティブの状態を初期化することです。
-データバインディングを作成するときは、ターゲットオブジェクトのプロパティとイベントだけを扱っています。
-HTML 属性は事実上消えます。
+In the world of Angular, the only role of attributes is to initialize element and directive state.
+When you write a data binding, you're dealing exclusively with properties and events of the target object.
+HTML attributes effectively disappear.
 
 </div>
 
-このモデルをしっかりと念頭に置いて、バインディングターゲットについて学びましょう。
+With this model firmly in mind, read on to learn about binding targets.
 
-### バインディングターゲット
+### Binding targets
 
-**データバインディングのターゲット** は DOM 内のものです。
-バインディングタイプに応じて、ターゲットは
-(要素 | コンポーネント | ディレクティブ)プロパティ、
-(要素 | コンポーネント | ディレクティブ)イベント、または(まれに)属性名になります。
-次の表はその概要です:
+The **target of a data binding** is something in the DOM.
+Depending on the binding type, the target can be an
+(element | component | directive) property, an
+(element | component | directive) event, or (rarely) an attribute name.
+The following table summarizes:
 
 <style>
   td, th {vertical-align: top}
@@ -519,23 +519,23 @@ HTML 属性は事実上消えます。
   </col>
   <tr>
     <th>
-      タイプ
+      Type
     </th>
     <th>
-      ターゲット
+      Target
     </th>
     <th>
-      例
+      Examples
     </th>
   </tr>
   <tr>
     <td>
-      プロパティ
+      Property
     </td>
     <td>
-      要素&nbsp;プロパティ<br>
-      コメント&nbsp;プロパティ<br>
-      ディレクティブ&nbsp;プロパティ
+      Element&nbsp;property<br>
+      Component&nbsp;property<br>
+      Directive&nbsp;property
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="property-binding-syntax-1" header="src/app/app.component.html" linenums="false">
@@ -544,12 +544,12 @@ HTML 属性は事実上消えます。
   </tr>
   <tr>
     <td>
-      イベント
+      Event
     </td>
     <td>
-      エレメント&nbsp;イベント<br>
-      コンポーネント&nbsp;イベント<br>
-      ディレクティブ&nbsp;イベント
+      Element&nbsp;event<br>
+      Component&nbsp;event<br>
+      Directive&nbsp;event
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="event-binding-syntax-1" header="src/app/app.component.html" linenums="false">
@@ -558,10 +558,10 @@ HTML 属性は事実上消えます。
   </tr>
   <tr>
     <td>
-      双方向
+      Two-way
     </td>
     <td>
-      イベントとプロパティ
+      Event and property
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="2-way-binding-syntax-1" header="src/app/app.component.html" linenums="false">
@@ -570,11 +570,11 @@ HTML 属性は事実上消えます。
   </tr>
   <tr>
     <td>
-      属性
+      Attribute
     </td>
     <td>
-      属性
-      (例外)
+      Attribute
+      (the&nbsp;exception)
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="attribute-binding-syntax-1" header="src/app/app.component.html" linenums="false">
@@ -583,10 +583,10 @@ HTML 属性は事実上消えます。
   </tr>
   <tr>
     <td>
-      クラス
+      Class
     </td>
     <td>
-      <code>class</code> プロパティ
+      <code>class</code> property
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="class-binding-syntax-1" header="src/app/app.component.html" linenums="false">
@@ -595,10 +595,10 @@ HTML 属性は事実上消えます。
   </tr>
   <tr>
     <td>
-      スタイル
+      Style
     </td>
     <td>
-      <code>style</code> プロパティ
+      <code>style</code> property
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="style-binding-syntax-1" header="src/app/app.component.html" linenums="false">
@@ -607,7 +607,7 @@ HTML 属性は事実上消えます。
   </tr>
 </table>
 
-この広い見方を念頭に置いて、バインディングタイプを詳細に見る準備が整いました。
+With this broad view in mind, you're ready to look at binding types in detail.
 
 <hr/>
 

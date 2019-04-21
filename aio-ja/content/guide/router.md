@@ -826,9 +826,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 ***まだどちらのボタンを押してもいけない***.
 ブラウザの戻るボタンかリンク"Heroes"をクリックする。
-
 ダイアログボックスが出てくる。
-
 
 <figure>
   <img src='generated/images/guide/router/confirm-dialog.png' alt="Confirm Dialog">
@@ -849,10 +847,9 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 {@a getting-started}
 
-## Milestone 1: Getting started
+## マイルストーン1: はじめ
 
-Begin with a simple version of the app that navigates between two empty views.
-
+シンプルな、二つの空のビューのあいだでの移動から始める。
 
 <figure>
   <img src='generated/images/guide/router/router-1-anim.gif' alt="App in action">
@@ -860,34 +857,28 @@ Begin with a simple version of the app that navigates between two empty views.
 
 {@a import}
 
-Generate a sample application to follow the walkthrough.
+サンプルアプリケーションを以下のウォークスルーで作る。
 
 <code-example language="none" class="code-shell">
   ng new angular-router-sample
 </code-example>
 
-### Define Routes
+### ルートの定義
 
-A router must be configured with a list of route definitions.
+ルーターはルート定義のリストとして構成される。
 
-Each definition translates to a [Route](api/router/Route) object which has two things: a
-`path`, the URL path segment for this route; and a
-`component`, the component associated with this route.
+それぞれの定義は二つのものを持つオブジェクト[Route](api/router/Route)へと変換される。このルートへのパスを持つ`path`と、そのルートに関連付けられる`component`である。
 
-The router draws upon its registry of definitions when the browser URL changes
-or when application code tells the router to navigate along a route path.
+ブラウザのURLが変更されるか、アプリケーションコードがルータにルートパスに沿って移動するように指示した場合、ルータは定義のレジストリを利用する。
 
-In simpler terms, you might say this of the first route:
 
-* When the browser's location URL changes to match the path segment `/crisis-center`, then
-the router activates an instance of the `CrisisListComponent` and displays its view.
+最初のルートのことを簡単に言えば、
 
-* When the application requests navigation to the path `/crisis-center`, the router
-activates an instance of `CrisisListComponent`, displays its view, and updates the
-browser's address location and history with the URL for that path.
+* ブラウザのURLがパス`/crisis-center`に一致する形で変更されると、ルーターは`CrisisListComponent`のインスタンスを有効化し、そのビューを表示する。
 
-The first configuration defines an array of two routes with simple paths leading to the
-`CrisisListComponent` and `HeroListComponent`. Generate the `CrisisList` and `HeroList` components.
+* アプリケーションがパス`/crisis-center`に移動するように要求すると、ルーターは`CrisisListComponent`のインスタンスを有効化し、そのビューを表示する。さらにブラウザのアドレスと履歴を更新する。
+
+最初の構成では`CrisisListComponent`と`HeroListComponent`へ移動するための二つのルートを定義する。`CrisisList`と`HeroList`が作成される。
 
 <code-example language="none" class="code-shell">
   ng generate component crisis-list
@@ -897,7 +888,7 @@ The first configuration defines an array of two routes with simple paths leading
   ng generate component hero-list
 </code-example>
 
-Replace the contents of each component with the sample HTML below.
+内容を下記のサンプルHTMLにそれぞれ変更する。
 
 <code-tabs>
 

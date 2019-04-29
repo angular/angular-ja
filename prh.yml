@@ -146,3 +146,11 @@ rules:
 
   - expected: ユーザー体験
     pattern: ユーザーエクスペリエンス
+
+  - expected: 接頭辞
+    pattern: プレフィックス
+
+  - expected: 接尾辞
+    pattern: 
+      - サフィックス
+      - ポストフィックス

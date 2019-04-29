@@ -2,7 +2,7 @@
 
 You can create and publish new libraries to extend Angular functionality. If you find that you need to solve the same problem in more than one app (or want to share your solution with other developers), you have a candidate for a library.
 
-An simple example might be a button that sends users to your company website, that would be included in all apps that your company builds.
+A simple example might be a button that sends users to your company website, that would be included in all apps that your company builds.
 
 ## Getting started
 
@@ -42,7 +42,7 @@ This builder, among other things, ensures that the library is always built with 
 
 To make library code reusable you must define a public API for it. This "user layer" defines what is available to consumers of your library. A user of your library should be able to access public functionality (such as NgModules, service providers and general utility functions) through a single import path.
 
-The public API for your library is maintained in the `index.ts` file of your library folder.
+The public API for your library is maintained in the `public-api.ts` file in your library folder.
 Anything exported from this file is made public when your library is imported into an application.
 Use an NgModule to expose services and components.
 

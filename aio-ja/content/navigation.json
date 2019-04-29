@@ -418,8 +418,9 @@
             },
             {
               "url": "guide/dependency-injection-in-action",
-              "title": "DI in Action",
-              "tooltip": "Techniques for dependency injection."
+              "title": "DIイン・アクション",
+              "tooltip": "依存性の注入のためのテクニック",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-navtree",
@@ -437,8 +438,9 @@
         },
         {
           "url": "guide/router",
-          "title": "Routing & Navigation",
-          "tooltip": "Discover the basics of screen navigation with the Angular Router."
+          "title": "ルーティングと画面遷移",
+          "tooltip": "Angularルーターによる画面遷移の基本を理解しましょう",
+          "translated": true
         },
         {
           "title": "アニメーション",
@@ -601,14 +603,15 @@
         },
         {
           "url": "guide/workspace-config",
-          "title": "Workspace Configuration",
-          "tooltip": "The \"angular.json\" file contains workspace and project configuration defaults for Angular CLI commands."
+          "title": "ワークスペースの設定",
+          "tooltip": "\"angular.json\" ファイルにはAngular CLIコマンドによるワークスペースとプロジェクトのデフォルト設定が含まれています。",
+          "translated": true
         },
         {
           "url": "guide/npm-packages",
           "title": "npmパッケージ",
           "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
-          "translated": false
+          "translated": true
         },
         {
           "url": "guide/typescript-configuration",
@@ -623,8 +626,9 @@
         },
         {          
           "url": "guide/build",
-          "title": "Building & Serving",
-          "tooltip": "Building and serving Angular apps."
+          "title": "ビルドとサーブ",
+          "tooltip": "Angularアプリのビルドとサーブ",
+          "translated": true
         },
         {
           "url": "guide/testing",
@@ -682,7 +686,7 @@
       ]
     },
     {
-      "title": "Quick Reference",
+      "title": "クイックリファレンス",
       "tooltip": "Angular構文、コーディング、および用語の要約。",
       "children": [
         {
@@ -693,8 +697,9 @@
         },
         {
           "url": "guide/styleguide",
-          "title": "Style Guide",
-          "tooltip": "Write Angular with style."
+          "title": "スタイルガイド",
+          "tooltip": "スタイルに沿ってAngularを書きます。",
+          "translated": true
         },
         {
           "url": "guide/glossary",

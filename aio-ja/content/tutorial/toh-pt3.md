@@ -26,11 +26,11 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 このディレクトリの中に4つのファイルを生成します:
 
 * コンポーネントスタイルのためのCSSファイル
-* AコンポーネントテンプレートのためのHTMLファイル
+* コンポーネントテンプレートのためのHTMLファイル
 * `HeroDetailComponent` と名付けられたコンポーネントクラスのTypeScriptファイル
 * `HeroDetailComponent` クラスのテストファイル
 
-また、このコマンドは `src/app/app.module.ts` ファイルの `@NgModule` デコレーター中に。 `declarations` として `HeroDetailComponent` を追加します。
+また、このコマンドは `src/app/app.module.ts` ファイルの `@NgModule` デコレーター中に `declarations` として `HeroDetailComponent` を追加します。
 
 
 ### template を記述する
@@ -126,15 +126,15 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 ヒーローのリストの下にヒーローの詳細が表示されていました。
 今では `HeroDetailComponent` が `HeroesComponent` の代わりにそれらの詳細を表示しています。
 
-元の `HeroesComponent` を2つのコンポーネントにリファクタリングすることで、現在も未来も利益が得られます。
+元の `HeroesComponent` を2つのコンポーネントにリファクタリングすることで、現在も将来も利益が得られます。
 
 1. `HeroesComponent` をその責任を減らすことによって単純化しました。
 
-1. 親の `HeroesComponent` を触れずに、`HeroDetailComponent` をリッチなヒーローエディタに進化させることができます。
+1. 親の `HeroesComponent` に触れることなく、`HeroDetailComponent` をリッチなヒーローエディタに進化させることができます。
 
-1. ヒーローの詳細ビューを触れずに、 `HeroesComponent` を進化させることができます。
+1. ヒーローの詳細ビューに触れることなく、 `HeroesComponent` を進化させることができます。
 
-1. 未来のコンポーネントのテンプレートで `HeroDetailComponent` を再利用することができます。
+1. 将来のコンポーネントのテンプレートで `HeroDetailComponent` を再利用することができます。
 
 ## 最終的なコードレビュー
 
@@ -158,7 +158,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 ## まとめ
 
-* 別の再利用可能な `HeroDetailComponent` を作成しました。
+* 独立し、再利用可能な `HeroDetailComponent` を作成しました。
 
 
 * 親の `HeroesComponent` が子の`HeroDetailComponent` を制御できるように、[プロパティバインディング](guide/template-syntax#property-binding)を使用しました。

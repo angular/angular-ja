@@ -428,7 +428,7 @@ to extract the setup variables that it needs.
 Many developers feel this approach is cleaner and more explicit than the
 traditional `beforeEach()` style.
 
-Although this testing guide follows the tradition style and
+Although this testing guide follows the traditional style and
 the default [CLI schematics](https://github.com/angular/angular-cli)
 generate test files with `beforeEach()` and `TestBed`,
 feel free to adopt _this alternative approach_ in your own projects.
@@ -2398,7 +2398,7 @@ So when you call `createComponent()`, the `TestBed` compiles implicitly.
 
 That's not a problem when the source code is in memory.
 But the `BannerComponent` requires external files
-that the compile must read from the file system,
+that the compiler must read from the file system,
 an inherently _asynchronous_ operation.
 
 If the `TestBed` were allowed to continue, the tests would run and fail mysteriously

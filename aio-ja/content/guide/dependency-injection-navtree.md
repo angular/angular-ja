@@ -124,14 +124,13 @@ TypeScript のインターフェースは、インターフェースをサポー
 
 ### クラスインターフェースで親を探す
 
-あなたは、[クラスインターフェイス](guide/dependency-injection-in-action#class-interface)をもつ親コンポーネントを見つけることができます。
+[クラスインターフェース](guide/dependency-injection-in-action#class-interface)を使って親コンポーネントを見つけることができます。
 
 親はクラスインターフェーストークンの名前で*エイリアス*を自身に提供することで協力しなければなりません。
 
 Angular は常にコンポーネントインスタンスを独自のインジェクターに追加します。
-だからあなたは[すぐに](#known-parent)*Cathy*に*Alex*を注入することができたのです。
+だからあなたは[先ほど](#known-parent) *Cathy* に *Alex* を注入できたのです。
 
-[*エイリアスプロバイダー*](guide/dependency-injection-in-action#useexisting) (`useExisting` 定義をもつ `provide` オブジェクトリテラル)を作成します。
 これは、同じコンポーネントインスタンスを注入し、そのプロバイダーを 
 `AlexComponent` の `@Component()` メタデータの `providers` 配列に追加する*代わりの*方法を作成します。
 
@@ -143,8 +142,9 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 </code-example>
 
 
-[親](#parent-token) はプロバイダーのクラスインターフェーストークンです。
-[*forwardRef*](guide/dependency-injection-in-action#forwardref) は、作成したばかりの循環参照を、`AlexComponent` に自身を参照させることによって壊します。
+[Parent](#parent-token) はプロバイダーのクラスインターフェーストークンです。
+[*forwardRef*](guide/dependency-injection-in-action#forwardref) は、
+`AlexComponent` が自身を参照することによって作られた循環参照を解消します。
 
 *Alex* の3番目の子コンポーネントである *Carol* は、これまでと同じ方法で、
 親をその `parent` パラメータに挿入します。
@@ -155,10 +155,10 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 
 
-これが *Alex* と家族のアクションです。
+これが動作中の *Alex* と家族です。
 
 <figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex インアクション">
+  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex イン・アクション">
 </figure>
 
 

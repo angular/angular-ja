@@ -994,62 +994,62 @@ _ワイルドカード_のルートは、二つのアスタリスクを使った
 
 {@a redirect}
 
-### Set up redirects
+### リダイレクトの設定
 
-When the application launches, the initial URL in the browser bar is something like:
+アプリケーションを立ち上げたとき、ブラウザのアドレスバーに入っている初期URLは下記のようなものだとする:
 
 <code-example>
   localhost:4200
 </code-example>
 
-That doesn't match any of the concrete configured routes which means
-the router falls through to the wildcard route and displays the `PageNotFoundComponent`.
+これは設定済みのルートにマッチしない。
+つまりルーターはワイルドカードルートにたどり着き、`PageNotFoundComponent`を表示する。
 
-The application needs a **default route** to a valid page.
-The default page for this app is the list of heroes.
-The app should navigate there as if the user clicked the "Heroes" link or pasted `localhost:4200/heroes` into the address bar.
+アプリケーションには、正規のページのために**default route**が必要となる。
+このアプリのデフォルトのページはヒーローのリストとする。
+リンク"Heroes"がクリックされるかアドレスバーに`localhost:4200/heroes`が入力されると、アプリはそこへ移動するものとする。
 
-The preferred solution is to add a `redirect` route that translates the initial relative URL (`''`)
-to the desired default path (`/heroes`). The browser address bar shows `.../heroes` as if you'd navigated there directly.
+推奨される解決策は、最初の相対パス(`''`)へのアクセスをルート`redirect`で希望のデフォルトパス（`/heroes`）に移動することだ。
+ブラウザのアドレスバーには`.../heroes`が、直接移動したかのように表示される。
 
-Add the default route somewhere _above_ the wildcard route.
-It's just above the wildcard route in the following excerpt showing the complete `appRoutes` for this milestone.
-
+ワイルドカードの_前_にデフォルトのルートを加える。
+ワイルドカードルートのすぐ前に、このマイルストーンでの最終的な形となる`appRoutes`で以下のように書く。
 
 <code-example path="router/src/app/app-routing.module.1.ts" linenums="false" header="src/app/app-routing.module.ts (appRoutes)" region="appRoutes">
 </code-example>
 
 
-A redirect route requires a `pathMatch` property to tell the router how to match a URL to the path of a route.
-The router throws an error if you don't.
-In this app, the router should select the route to the `HeroListComponent` only when the *entire URL* matches `''`,
-so set the `pathMatch` value to `'full'`.
+リダイレクトルートには、ルーターにURLをパスにマッチさせるためのプロパティ`pathMatch`が必要である。
+それがなければルーターはエラーを出す。
+このアプリでは、`HeroListComponent`へのルートが有効になるのは、*entire URL*が`''`に一致した場合のみである。
+だから`pathMatch`の値に`'full'`を設定する。
 
 
 <div class="alert is-helpful">
 
 
-Technically, `pathMatch = 'full'` results in a route hit when the *remaining*, unmatched segments of the URL match `''`.
-In this example, the redirect is in a top level route so the *remaining* URL and the *entire* URL are the same thing.
+技術的には、`pathMatch = 'full'`はURLの*残り*の一致しない部分が`''`にマッチしたときにルートヒットになります。
+この例では、リダイレクトは最上位ルートにあるため、*残りの* URLと*全体の*URLは同じものです。
 
 The other possible `pathMatch` value is `'prefix'` which tells the router
 to match the redirect route when the *remaining* URL ***begins*** with the redirect route's _prefix_ path.
 
-Don't do that here.
-If the `pathMatch` value were `'prefix'`, _every_ URL would match `''`.
+もう1つの`pathMatch`の値として可能なものは``prefix'`で、これは*残りの*URLがリダイレクトルートの_prefix_パスで***始まるとき***に、ルーターにリダイレクトルートの一致を伝える。
 
-Try setting it to `'prefix'` then click the `Go to sidekicks` button.
-Remember that's a bad URL and you should see the "Page not found" page.
-Instead, you're still on the "Heroes" page.
-Enter a bad URL in the browser address bar.
-You're instantly re-routed to `/heroes`.
-_Every_ URL, good or bad, that falls through to _this_ route definition
-will be a match.
+ここに書くようなことはしてはならない。
+もし`pathMatch`の値が`'prefix'`なら、_すべての_URLが`''`にマッチすることになるだろう。
 
-The default route should redirect to the `HeroListComponent` _only_ when the _entire_ url is  `''`.
-Remember to restore the redirect to `pathMatch = 'full'`.
+`'prefix'`に設定してから、ボタン`Go to sidekicks`をクリックしてみる。
+これは間違ったURLで、"Page not found"が表示されるはずだ。
+でもあなたはまだページ"Heroes"にいます。
+ブラウザのアドレスバーに間違ったURLを入力する。
+あなたは即座に `/heroes`に転送される。
+_すべての_URLは正しいか不正にかかわらず、_この_ルート定義をとおしてマッチされる。
 
-Learn more in Victor Savkin's
+デフォルトのルートはURL全体が`''`にマッチするとき_だけ_`HeroListComponent`にリダイレクトされるべきだ。
+リダイレクトを`pathMatch = 'full'`に戻すことを忘れずに。
+
+もっと詳しく知りたければVictor Savkinを参考にしたい。
 [post on redirects](http://vsavkin.tumblr.com/post/146722301646/angular-router-empty-paths-componentless-routes).
 
 

@@ -1342,25 +1342,24 @@ ng generate module my-module --routing
 {@a why-routing-module}
 
 
-### Do you need a _Routing Module_?
+### _ルーティングモジュール_が必要かい?
 
-The _Routing Module_ *replaces* the routing configuration in the root or feature module.
-_Either_ configure routes in the Routing Module _or_ within the module itself but not in both.
+_ルーティングモジュール_はrootや機能モジュールでのルーティング設定を*置き換える*。
+ルーティングモジュールでルートを設定する_か_、モジュール内でルートを設定します。両方では設定しない。
 
-The Routing Module is a design choice whose value is most obvious when the configuration is complex
-and includes specialized guard and resolver services.
-It can seem like overkill when the actual configuration is dead simple.
+ルーティングモジュールは、構成が複雑でガードやリゾルバが含まれるような場合に最も価値がある設計上の選択である。
+実際の設定が単純な場合は、やり過ぎに見えるかもしれない。
 
-Some developers skip the Routing Module (for example, `AppRoutingModule`) when the configuration is simple and
 merge the routing configuration directly into the companion module (for example, `AppModule`).
+設定が単純である場合、開発者の中にはルーティングモジュール（例えば `AppRoutingModule`）をスキップし、ルーティング設定を直接コンパニオンモジュールにマージする人もいる（例えば `AppModule`）。
 
-Choose one pattern or the other and follow that pattern consistently.
+どちらかを選択して、そのパターンに一貫して従うこと。
 
-Most developers should always implement a Routing Module for the sake of consistency.
-It keeps the code clean when configuration becomes complex.
-It makes testing the feature module easier.
-Its existence calls attention to the fact that a module is routed.
-It is where developers expect to find and expand routing configuration.
+ほとんどの開発者は一貫性のために常にルーティングモジュールを実装するべきである。
+設定が複雑になってもコードをクリーンに保つ。
+機能モジュールのテストが容易になる。
+その存在は、モジュールがルーティングされるという事実に注意を促す。
+開発者がルーティング設定を見つけて拡張することが期待できる。
 
 {@a heroes-feature}
 

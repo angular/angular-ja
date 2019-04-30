@@ -1297,29 +1297,27 @@ ng generate module my-module --routing
 {@a routing-refactor}
 
 
-### Refactor the routing configuration into a _routing module_
+### ルーティング設定を_ルーティングモジュール_へリファクタリングする
 
-Create an `AppRouting` module in the `/app` folder to contain the routing configuration.
+ルーティング設定を入れるため、モジュール`AppRouting`をフォルダ`/app`に作る。
 
 <code-example language="none" class="code-shell">
   ng generate module app-routing --module app --flat
 </code-example>
 
-Import the `CrisisListComponent`, `HeroListComponent`, and `PageNotFoundComponent` symbols
-just like you did in the `app.module.ts`. Then move the `Router` imports
-and routing configuration, including `RouterModule.forRoot`, into this routing module.
+`CrisisListComponent`、`HeroListComponent`と`PageNotFoundComponent`を`app.module.ts`でやったようにインポートする。
+それから`Router`のインポートと`RouterModule.forRoot`を含むルーティング設定をこのルーティングモジュールに移す。
 
-Re-export the Angular `RouterModule` by adding it to the module `exports` array.
-By re-exporting the `RouterModule` here the components declared in `AppModule` will have access to router directives such as `RouterLink` and `RouterOutlet`.
+再び、`RouterModule`を配列`exports`に加えることでエクスポートする。
+再び`RouterModule`をエクスポートすることで、`AppModule`で宣言されたコンポーネントは`RouterLink`や`RouterOutlet`のようなルーターディレクティブにアクセスできるようになる。
 
-After these steps, the file should look like this.
+これらステップののち、ファイルは以下のようになる。
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts">
 
 </code-example>
 
-Next, update the `app.module.ts` file, removing `RouterModule.forRoot` in 
-the `imports` array.
+次は`app.module.ts`を更新し、配列`imports`にある`RouterModule.forRoot`を削除する。
 
 <code-example path="router/src/app/app.module.2.ts" header="src/app/app.module.ts">
 
@@ -1331,16 +1329,14 @@ the `imports` array.
 
 
 
-Later in this guide you will create [multiple routing modules](#heroes-functionality) and discover that
-you must import those routing modules [in the correct order](#routing-module-order).
+このガイドのあとで、[複数のルーティングモジュール](#heroes-functionality)を作り、ルーティングモジュールを[正しい順番で](#routing-module-order)でインポートしなければならないことを学ぶ。
 
 
 </div>
 
 
 
-The application continues to work just the same, and you can use `AppRoutingModule` as
-the central place to maintain future routing configuration.
+アプリケーションの動作は変わらず、`AppRoutingModule`をルーティング設定の中心として使える。
 
 
 {@a why-routing-module}

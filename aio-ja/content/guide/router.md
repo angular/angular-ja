@@ -1578,18 +1578,18 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 {@a remove-duplicate-hero-routes}
 
 
-#### Remove duplicate hero routes
+#### 重複するヒーローのルートを削除する
 
-The hero routes are currently defined in _two_ places: in the `HeroesRoutingModule`,
-by way of the `HeroesModule`, and in the `AppRoutingModule`.
+主人公のルートは現在2つの場所で定義されている： `HeroesRoutingModule`では、
+`HeroesModule`で、そして` AppRoutingModule`で。
 
-Routes provided by feature modules are combined together into their imported module's routes by the router.
-This allows you to continue defining the feature module routes without modifying the main route configuration.
+機能モジュールによって提供されたルートは、ルータによってそれらのインポートされたモジュールのルートにまとめられる。
+これにより、メインルート設定を変更せずに、機能モジュールルートの定義を続けることができる。
 
-Remove the `HeroListComponent` import and the `/heroes` route from the `app-routing.module.ts`.
+`app-routing.module.ts`から`HeroListComponent`のインポートとルート`/heroes`を削除する。
 
-**Leave the default and the wildcard routes!**
-These are concerns at the top level of the application itself.
+**デフォルトとワイルドカードのルートは残す!**
+これらはアプリケーションのトップレベルでの重要事である。
 
 
 <code-example path="router/src/app/app-routing.module.2.ts" linenums="false" header="src/app/app-routing.module.ts (v2)">

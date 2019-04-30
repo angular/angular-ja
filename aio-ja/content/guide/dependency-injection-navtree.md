@@ -131,6 +131,7 @@ TypeScript のインターフェースは、インターフェースをサポー
 Angular は常にコンポーネントインスタンスを独自のインジェクターに追加します。
 だからあなたは[先ほど](#known-parent) *Cathy* に *Alex* を注入できたのです。
 
+[*エイリアスプロバイダー*](guide/dependency-injection-in-action#useexisting) (`useExisting` 定義をもつ `provide` オブジェクトリテラル)を作成します。
 これは、同じコンポーネントインスタンスを注入し、そのプロバイダーを 
 `AlexComponent` の `@Component()` メタデータの `providers` 配列に追加する*代わりの*方法を作成します。
 

@@ -1056,22 +1056,23 @@ _すべての_URLは正しいか不正にかかわらず、_この_ルート定�
 </div>
 
 
-### Basics wrap up
+### 基本のまとめ
 
-You've got a very basic navigating app, one that can switch between two views
-when the user clicks a link.
+アプリのとても基本的な移動をやった。リンクをクリックすることで二つのビューを切り替えるものだ。
 
 You've learned how to do the following:
+ここで以下のことをどうやるか学んだ:
 
-* Load the router library.
+* ルーターのライブラリを読み込む
 * Add a nav bar to the shell template with anchor tags, `routerLink`  and `routerLinkActive` directives.
-* Add a `router-outlet` to the shell template where views will be displayed.
-* Configure the router module with `RouterModule.forRoot`.
-* Set the router to compose HTML5 browser URLs.
-* handle invalid routes with a `wildcard` route.
-* navigate to the default route when the app launches with an empty path.
+テンプレートにアンカータグでナビゲーションバーを追加し、ディレクティブ`routerLink`と`routerLinkActive`を置いた。
+* `router-outlet`をビューが表示されるテンプレートに追加した。
+* ルーターモジュールを`RouterModule.forRoot`で設定した。
+* HTML5ブラウザのURLを構成するルーターを設定した。
+* `ワイルドカード`ルートで不正なルートを処理した。
+* アプリ立ち上げ時の空のパスを、デフォルトルートへ移動するようにした。
 
-The starter app's structure looks like this:
+ここでのアプリの構成は以下のようになる:
 
 <div class='filetree'>
 
@@ -1176,7 +1177,7 @@ The starter app's structure looks like this:
         </div>
 
         <div class='file'>
-          app.component.html
+          app.comファイルについてはml
         </div>
 
         <div class='file'>
@@ -1221,8 +1222,7 @@ The starter app's structure looks like this:
 
 
 
-Here are the files discussed in this milestone.
-
+これらのファイルについてはこのマイルストーンで取り上げる。
 
 <code-tabs>
 

@@ -927,20 +927,20 @@ Notice that the corresponding name in the crisis list does _not_ change.
 {@a shell}
 
 
-### Add the Router Outlet
+### ルーターアウトレットを加える
 
-The root `AppComponent` is the application shell. It has a title, a navigation bar with two links, and a router outlet where the router swaps components on and off the page. Here's what you get:
-
+ルートの`AppComponent`はアプリケーションの骨組みとなる。タイトル、二つのリンクが含まれるナビゲーションバー、それとルーターがページの内外でコンポーネントを切り替えるルーターアウトレットがそこに入っている。ここで得られるのは:
 
 <figure>
   <img src='generated/images/guide/router/shell-and-outlet.png' alt="Shell">
 </figure>
 
-The router outlet serves as a placeholder when the routed components will be rendered below it.
+ルーティングされたコンポーネントがその下にレンダリングされるとき、ルーターのアウトレットはプレースホルダーとして機能する。
 
 {@a shell-template}
 
-The corresponding component template looks like this:
+対応するコンポーネントテンプレートは以下のようになる:
+
 
 <code-example path="router/src/app/app.component.1.html" linenums="false" header="src/app/app.component.html">
 

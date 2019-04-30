@@ -902,13 +902,13 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 </code-tabs>
 
-### Register Router and Routes
+### ルーターとルートの登録
 
-In order to use the Router, you must first register the `RouterModule` from the `@angular/router` package. Define an array of routes, `appRoutes`, and pass them to the `RouterModule.forRoot()` method. It returns a module, containing the configured `Router` service provider, plus other providers that the routing library requires. Once the application is bootstrapped, the `Router` performs the initial navigation based on the current browser URL.
+ルーターを使うにはまず、パッケージ`@angular/router`から`Routermodule`を使えるようにしておかなければいけない。`appRoutes`としてルートの配列を定義し、それを`RouterModule.forRoot()`に渡す。サービス`Router`やルーティングライブラリに必要なプロバイダが返ってくる。一度アプリケーションが立ち上がると、`Router`はそのときのブラウザのURLに従って最初の移動を行う。
 
 <div class="alert is-important">
 
-  **Note:** The `RouterModule.forRoot` method is a pattern used to register application-wide providers. Read more about application-wide providers in the [Singleton services](guide/singleton-services#forroot) guide.
+  **Note:** メソッド`RouterModule.forRoot`はアプリケーション全体のプロバイダ登録に使われるパターンである。アプリケーション全体のプロバイダについてはガイド[Singleton services](guide/singleton-services#forroot)を読んでください。
 
 </div>
 
@@ -918,11 +918,11 @@ In order to use the Router, you must first register the `RouterModule` from the 
 
 <div class="alert is-helpful">
 
-Adding the configured `RouterModule` to the `AppModule` is sufficient for simple route configurations. As the application grows, you'll want to [refactor the routing configuration](#refactor-the-routing-configuration-into-a-routing-module) into a separate file and create a **[Routing Module](#routing-module)**, a special type of `Service Module` dedicated to the purpose of routing in feature modules.
+設定の済んだ`RouterModule`を`AppModule`に加えれば、簡単なルート設定ができる。アプリケーションが大きくなる場合は、ファイルを分けて**[Routing Module](#routing-module)**を作り[ルート設定のリファクタリング](#refactor-the-routing-configuration-into-a-routing-module)ができる。**[Routing Module](#routing-module)**は機能モジュールのルーティングを目的とした特別なタイプの`Service Module`である。
 
 </div>
 
-Registering the `RouterModule.forRoot()` in the `AppModule` imports makes the `Router` service available everywhere in the application.
+`AppModule`に` RouterModule.forRoot（） `のインポートを入れると、アプリケーションのどこでもサービス` Router`が利用できるようになります。
 
 {@a shell}
 

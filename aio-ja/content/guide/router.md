@@ -1363,21 +1363,25 @@ merge the routing configuration directly into the companion module (for example,
 
 {@a heroes-feature}
 
-## Milestone 3: Heroes feature
+## マイルストーン 3: ヒーローの機能
 
 You've seen how to navigate using the `RouterLink` directive.
 Now you'll learn the following:
+ディレクティブ`RouterLink`を使ってナビゲートする方法を見た。
+これで、次のことがわかる:
 
-* Organize the app and routes into *feature areas* using modules.
-* Navigate imperatively from one component to another.
-* Pass required and optional information in route parameters.
+* モジュールを使用して*機能領域*にアプリとルートを整理する。
+* あるコンポーネントから別のコンポーネントへと命令的に移動する。
+* ルートパラメータで必須およびオプションの情報を渡す。
 
 This example recreates the heroes feature in the "Services" episode of the
 [Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services"),
 and you'll be copying much of the code
 from the <live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>.
+この例では、[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services")の "Services"エピソードのヒーロー機能を再作成する。
+そしてコードの大部分を<live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>からコピーすることになる。
 
-Here's how the user will experience this version of the app:
+ユーザーがこのバージョンのアプリで体験するのは次のとおりです:
 
 
 <figure>
@@ -1386,15 +1390,17 @@ Here's how the user will experience this version of the app:
 
 
 
-A typical application has multiple *feature areas*,
-each dedicated to a particular business purpose.
+典型的なアプリケーションは複数の*機能領域*を持っており、
+それぞれが特定の事業目的に捧げられている。
 
-While you could continue to add files to the `src/app/` folder,
-that is unrealistic and ultimately not maintainable.
-Most developers prefer to put each feature area in its own folder.
+ファイルをフォルダ`src/app/`に追加し続けることはできるが、
+これは非現実的で、最終的には保守できなくなる。
+ほとんどの開発者は、各機能領域をそれぞれ独自のフォルダに置くことを好む。
 
 You are about to break up the app into different *feature modules*, each with its own concerns.
 Then you'll import into the main module and navigate among them.
+あなたは、それぞれ独自の懸念を持って、異なる*機能モジュール*にアプリを分割しようとしている。
+それからメインモジュールにインポートし、それらの間を移動する。
 
 
 {@a heroes-functionality}

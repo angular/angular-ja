@@ -1255,20 +1255,25 @@ You've learned how to do the following:
 
 {@a routing-module}
 
-## Milestone 2: *Routing module*
+## マイルストーン2: *ルーティングモジュール*
 
 In the initial route configuration, you provided a simple setup with two routes used
 to configure the application for routing. This is perfectly fine for simple routing.
 As the application grows and you make use of more `Router` features, such as guards,
 resolvers, and child routing, you'll naturally want to refactor the routing configuration into its own file.
 We recommend moving the routing information into a special-purpose module called a *Routing Module*.
+最初のルート設定では、2つのルートを使用した簡単な設定を行い、アプリケーションでのルーティングを設定した。
+これは単純なルーティングにはまったく問題ない。
+アプリケーションが成長して、ガード、リゾルバや子ルーティングなどのもっと多くの`Router`機能を利用するようになると、当然ルーティング設定をファイルに分けてリファクタリングしたくなる。
+ルーティング情報を*ルーティングモジュール*という特別な目的のモジュールに移動することをお勧めする。
 
-The **Routing Module** has several characteristics:
 
-* Separates routing concerns from other application concerns.
-* Provides a module to replace or remove when testing the application.
-* Provides a well-known location for routing service providers including guards and resolvers.
-* Does **not** declare components.
+**ルーティングモジュール**には下記のような特性がある:
+
+* ルーティングの問題を、アプリケーションのほかの問題から切り離す。
+* アプリケーションのテスト時に変換や削除を行うモジュールを提供する。
+* ガードやリゾルバを含むルーティングサービスプロバイダのためのよく知られた場所を提供する。
+* コンポーネントの宣言は行わない。
 
 {@a integrate-routing}
 

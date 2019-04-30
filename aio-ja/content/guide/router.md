@@ -948,39 +948,38 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 {@a wildcard}
 
-### Define a Wildcard route
+### ワイルドカードルートの定義
 
-You've created two routes in the app so far, one to `/crisis-center` and the other to `/heroes`. Any other URL causes the router to throw an error and crash the app.
+アプリケーションですでに二つのルートを作っている。一つは`/crisis-center`で、もう一つは`/heroes`へのものだ。ほかのURLへのアクセスは、ルーターにエラーを引き起こさせ、アプリをクラッシュさせる。
 
-Add a **wildcard** route to intercept invalid URLs and handle them gracefully.
-A _wildcard_ route has a path consisting of two asterisks. It matches _every_ URL.
-The router will select _this_ route if it can't match a route earlier in the configuration.
-A wildcard route can navigate to a custom "404 Not Found" component or [redirect](#redirect) to an existing route.
-
+**wildcard**のルートを不正なURLへのアクセスをまとめて扱うために追加する。
+_ワイルドカード_のルートは、二つのアスタリスクを使ったパスから成る。それは_すべての_URLにマッチする。
+ルーターはどのルートにもマッチしない場合_この_ルートを選ぶ。
+ワイルドカードルートはカスタムの"404 Not Found"のコンポーネントや、存在するページへの[リダイレクト](#redirect)への移動を提供する。
 
 <div class="alert is-helpful">
 
-The router selects the route with a [_first match wins_](#example-config) strategy.
-Wildcard routes are the least specific routes in the route configuration.
-Be sure it is the _last_ route in the configuration.
+ルーターによるルートセレクトは、[_最初に一致した条件_](#example-config)が採用される。
+ワイルドカードルートはルートの中で最も特定性が低いルートである。
+ルート設定の_最後_に置かれていることを確認しなければならない。
 
 </div>
 
-To test this feature, add a button with a `RouterLink` to the `HeroListComponent` template and set the link to `"/sidekicks"`.
+この機能をテストするには、`HeroListComponent`のテンプレートに` RouterLink`付きのボタンを追加して、リンクを `"/sidekicks"`に設定する。
 
 <code-example path="router/src/app/hero-list/hero-list.component.1.html" linenums="false" header="src/app/hero-list/hero-list.component.html (excerpt)">
 
 </code-example>
 
-The application will fail if the user clicks that button because you haven't defined a `"/sidekicks"` route yet.
+追加したボタンをクリックすれば、アプリケーションは例外を出すだろう。まだ`"/sidekicks"`のルートを設定していない。
 
-Instead of adding the `"/sidekicks"` route, define a `wildcard` route instead and have it navigate to a simple `PageNotFoundComponent`.
+ルート`"/sidekicks"追加する代わりに、`wildcard`ルートを定義してそれを単純な` PageNotFoundComponent`に移動させる。
 
 <code-example path="router/src/app/app.module.1.ts" linenums="false" header="src/app/app.module.ts (wildcard)" region="wildcard">
 
 </code-example>
 
-Create the `PageNotFoundComponent` to display when users visit invalid URLs.
+ユーザに不正なURLを訪れたことを示すため、`PageNotFoundComponent`を作る。
 
 <code-example language="none" class="code-shell">
   ng generate component page-not-found
@@ -990,8 +989,8 @@ Create the `PageNotFoundComponent` to display when users visit invalid URLs.
 
 </code-example>
 
-Now when the user visits `/sidekicks`, or any other invalid URL, the browser displays "Page not found".
-The browser address bar continues to point to the invalid URL.
+さあ、`/sidekicks`に、あるいはほかの不正なURLにアクセスしてみれば、ブラウザには"Page not found"が表示される。
+ブラウザのアドレスバーは不正なURLが表示されたままだ。
 
 {@a redirect}
 

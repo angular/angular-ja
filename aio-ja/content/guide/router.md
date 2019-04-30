@@ -1350,7 +1350,6 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 ルーティングモジュールは、構成が複雑でガードやリゾルバが含まれるような場合に最も価値がある設計上の選択である。
 実際の設定が単純な場合は、やり過ぎに見えるかもしれない。
 
-merge the routing configuration directly into the companion module (for example, `AppModule`).
 設定が単純である場合、開発者の中にはルーティングモジュール（例えば `AppRoutingModule`）をスキップし、ルーティング設定を直接コンパニオンモジュールにマージする人もいる（例えば `AppModule`）。
 
 どちらかを選択して、そのパターンに一貫して従うこと。

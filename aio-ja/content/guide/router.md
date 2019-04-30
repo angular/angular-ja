@@ -1365,8 +1365,6 @@ merge the routing configuration directly into the companion module (for example,
 
 ## マイルストーン 3: ヒーローの機能
 
-You've seen how to navigate using the `RouterLink` directive.
-Now you'll learn the following:
 ディレクティブ`RouterLink`を使ってナビゲートする方法を見た。
 これで、次のことがわかる:
 
@@ -1374,10 +1372,6 @@ Now you'll learn the following:
 * あるコンポーネントから別のコンポーネントへと命令的に移動する。
 * ルートパラメータで必須およびオプションの情報を渡す。
 
-This example recreates the heroes feature in the "Services" episode of the
-[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services"),
-and you'll be copying much of the code
-from the <live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>.
 この例では、[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services")の "Services"エピソードのヒーロー機能を再作成する。
 そしてコードの大部分を<live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>からコピーすることになる。
 
@@ -1397,8 +1391,6 @@ from the <live-example name="toh-pt4" title="Tour of Heroes: Services example co
 これは非現実的で、最終的には保守できなくなる。
 ほとんどの開発者は、各機能領域をそれぞれ独自のフォルダに置くことを好む。
 
-You are about to break up the app into different *feature modules*, each with its own concerns.
-Then you'll import into the main module and navigate among them.
 あなたは、それぞれ独自の懸念を持って、異なる*機能モジュール*にアプリを分割しようとしている。
 それからメインモジュールにインポートし、それらの間を移動する。
 

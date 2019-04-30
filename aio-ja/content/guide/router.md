@@ -1524,39 +1524,38 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 {@a hero-routing-requirements}
 
 
-#### *Hero* feature routing requirements
+#### ルーティングに必要な*ヒーロー*機能
 
-The heroes feature has two interacting components, the hero list and the hero detail.
-The list view is self-sufficient; you navigate to it, it gets a list of heroes and displays them.
+ヒーロー機能には、ヒーローリストとヒーローの詳細という2つの相互作用するコンポーネントがある。
+リストビューは自給自足です。移動すると、ヒーローの一覧が表示される。
 
-The detail view is different. It displays a particular hero. It can't know which hero to show on its own.
-That information must come from outside.
+詳細表示は異なる。特定の英雄を表示する。どのヒーローを見せるべきかを自分自身で決めることはできない。
+その情報は外部から来なければならない。
 
-When the user selects a hero from the list, the app should navigate to the detail view
-and show that hero.
-You tell the detail view which hero to display by including the selected hero's id in the route URL.
+ユーザーがリストから主人公を選択すると、アプリは詳細ビューに移動し、そのヒーローを見せる。
+ルートのURLに選択したヒーローのIDを含めることで、どのヒーローを表示するかを詳細ビューに指示する。
 
-Import the hero components from their new locations in the `src/app/heroes/` folder, define the two hero routes.
 
-Now that you have routes for the `Heroes` module, register them with the `Router` via the
-`RouterModule` _almost_ as you did in the `AppRoutingModule`.
+`src/app/heroes/`フォルダの新しい場所からヒーローコンポーネントをインポートし、2つのヒーロールートを定義する。
 
-There is a small but critical difference.
-In the `AppRoutingModule`, you used the static **`RouterModule.forRoot`** method to register the routes and application level service providers.
-In a feature module you use the static **`forChild`** method.
+これで`Heroes`モジュールへのルートができたので、`Router`を使って`AppRoutingModule`で行った_ような_形で`RouterModule`の設定をする。
+
+小さいながらも重大な違いがある。
+`AppRoutingModule`では、スタティックメソッド**`RouterModule.forRoot`**を使ってルートとアプリケーションレベルのサービスプロバイダを登録した。
+機能モジュールでは、スタティックメソッド**`forChild`**を使用する。
 
 
 <div class="alert is-helpful">
 
 
 
-Only call `RouterModule.forRoot` in the root `AppRoutingModule`
-(or the `AppModule` if that's where you register top level application routes).
-In any other module, you must call the **`RouterModule.forChild`** method to register additional routes.
+rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
+（あるいは、もしあなたがトップレベルのアプリケーションルートを登録する場所であれば `AppModule`）。
+他のモジュールでは、追加のルートを登録するためにメソッド**`RouterModule.forChild`**を呼び出す必要がある。
 
 </div>
 
-The updated `HeroesRoutingModule` looks like this:
+更新された`HeroesRoutingModule`は以下のようになる:
 
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts">
@@ -1568,9 +1567,9 @@ The updated `HeroesRoutingModule` looks like this:
 <div class="alert is-helpful">
 
 
-Consider giving each feature module its own route configuration file.
-It may seem like overkill early when the feature routes are simple.
-But routes have a tendency to grow more complex and consistency in patterns pays off over time.
+各機能モジュールに独自のルート設定ファイルを指定することを検討する。
+フィーチャルートが単純な場合は、早すぎるとやり過ぎに見えるかもしれなり。
+しかし、ルートはより複雑になり、パターンの一貫性が徐々に向上していく。
 
 
 </div>

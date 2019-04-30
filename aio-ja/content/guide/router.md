@@ -1277,21 +1277,22 @@ We recommend moving the routing information into a special-purpose module called
 
 {@a integrate-routing}
 
-### Integrate routing with your app
+### アプリにルーティングを統合する
 
-The sample routing application does not include routing by default.
-When you use the [Angular CLI](cli) to create a project that will use routing, set the `--routing` option for the project or app, and for each NgModule. 
-When you create or initialize a new project (using the CLI [`ng new`](cli/new) command) or a new app (using the [`ng generate app`](cli/generate) command), specify the `--routing` option.  This tells the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
 You can then use routing in any NgModule that you add to the project or app.
+ルーティングサンプルのアプリケーションは、デフォルトではルーティングを含んでいない。
+[Angular CLI](cli)を使ってルーティングを使うプロジェクトを作り、オプション`--routing`をプロジェクトかアプリ、あるいはそれぞれのNgModuleにセットする。
+新しいプロジェクトを作る(CLIでコマンド[`ng new`](cli/new)を使って)か、新しいアプリを作る(コマンド[`ng generate app`](cli/generate)を使って)ときにオプション`--routing`を加える。これはCLIにnpmパッケージ`@angular/router`を加えさせ、さらにファイル`app-routing.module.ts`も作らせる。
+これでプロジェクトやアプリに追加したあらゆるNgModuleでルーティングを使える。
 
-For example, the following command generates an NgModule that can use routing.
+例として、下記のコマンドでルーティングを使えるNgModuleを作れる。
 
 ```sh
 ng generate module my-module --routing
 ```
 
-This creates a separate file named `my-module-routing.module.ts` to store the NgModule's routes.
-The file includes an empty `Routes` object that you can fill with routes to different components and NgModules.
+これで`my-module-routing.module.ts`というNgModuleのルートを入れておくファイルを作れる。
+ファイルには空のオブジェクト`Routes`が含まれており、ことなるコンポーネントやNgModuleへのルートで埋めることができる。
 
 {@a routing-refactor}
 

@@ -1397,42 +1397,41 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 {@a heroes-functionality}
 
 
-### Add heroes functionality
+### ヒーロー機能の追加
 
-Follow these steps:
+以下の手順を行う:
 
-* Create a `HeroesModule` with routing in the heroes folder and register it with the root `AppModule`. This is where you'll be implementing the *hero management*.
+* フォルダheroesにルーティングを行う`HeroesModule`を作成し、それをルートの`AppModule`に登録する。これが、あなたが*ヒーロー管理*を実装する場所である。
 
 <code-example language="none" class="code-shell">
   ng generate module heroes/heroes --module app --flat --routing
 </code-example>
 
-* Move the placeholder `hero-list` folder that's in the `app` into the `heroes` folder.
-* Copy the contents of the `heroes/heroes.component.html` from
-  the <live-example name="toh-pt4" title="Tour of Heroes: Services example code">"Services" tutorial</live-example> into the `hero-list.component.html` template.
+* `app`にあるプレースホルダのフォルダ`hero-list`をフォルダ`heroes`に移動する。
+* <live-example name="toh-pt4" title="Tour of Heroes: Services example code">"Services" tutorial</live-example>にある`heroes/heroes.component.html`の内容をテンプレート`hero-list.component.html`にコピーする。
 
-  * Relabel the `<h2>` to `<h2>HEROES</h2>`.
-  * Delete the `<app-hero-detail>` component at the bottom of the template.
+  * `<h2>`を`<h2>HEROES</h2>`に変更する。
+  * コンポーネント`<app-hero-detail>`を削除する。
 
-* Copy the contents of the `heroes/heroes.component.css` from the live example into the `hero-list.component.css` file.
-* Copy the contents of the `heroes/heroes.component.ts` from the live example into the `hero-list.component.ts` file.
+* live exampleにある`heroes/heroes.component.css`の内容を`hero-list.component.css`にコピーする。
+* live exampleにある`heroes/heroes.component.ts`の内容を`hero-list.component.ts`にコピーする。
 
-  * Change the component class name to `HeroListComponent`.
-  * Change the `selector` to `app-hero-list`.
+  * コンポーネントのクラス名を`HeroListComponent`に変更する。
+  * `selector`を`app-hero-list`に変更する。
   
 <div class="alert is-helpful">
 
-   Selectors are **not required** for _routed components_ due to the components are dynamically inserted when the page is rendered, but are useful for identifying and targeting them in your HTML element tree.
+   ページがレンダリングされるときにコンポーネントが動的に挿入されるため、_routed components_にはセレクタは**必須**ではないが、HTML要素ツリーでそれらを識別してターゲットにするのに役立つ。
 
 </div>
 
-* Copy the `hero-detail` folder, the `hero.ts`, `hero.service.ts`,  and `mock-heroes.ts` files into the `heroes` subfolder.
-* Copy the `message.service.ts` into the `src/app` folder.
-* Update the relative path import to the `message.service` in the `hero.service.ts` file.
+* フォルダ`hero-detail`と`hero.ts`、`hero.service.ts`、`mock-heroes.ts`をサブフォルダ`heroes`にコピーする。
+* フォルダ`src/app`に`message.service.ts`をコピーする。
+* ファイル`hero.service.ts`内の`message.service`への相対パスのインポートを更新する。
 
-Next, you'll update the `HeroesModule` metadata.
+次は`HeroesModule`のメタデータを更新する。
 
-  * Import and add the `HeroDetailComponent` and `HeroListComponent` to the `declarations` array in the `HeroesModule`.
+  * `HeroDetailComponent`と`HeroListComponent`を`HeroesModule`の配列`declarations`にインポートして加する。
 
 <code-example path="router/src/app/heroes/heroes.module.ts" header="src/app/heroes/heroes.module.ts">
 
@@ -1440,7 +1439,7 @@ Next, you'll update the `HeroesModule` metadata.
 
 
 
-When you're done, you'll have these *hero management* files:
+ひととおり終わると、*ヒーロー管理*のファイルは以下のようになる:
 
 
 <div class='filetree'>

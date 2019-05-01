@@ -424,8 +424,9 @@
             },
             {
               "url": "guide/dependency-injection-navtree",
-              "title": "Navigate the Component Tree",
-              "tooltip": "Use the injection tree to find parent components."
+              "title": "コンポーネントツリーのナビゲート",
+              "tooltip": "インジェクションツリーを使って親コンポーネントを見つけます。",
+              "translated": true
             }
           ]
         },

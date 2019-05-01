@@ -1616,10 +1616,9 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 {@a routing-module-order}
 
 
-### Module import order matters
-
-Look at the module `imports` array. Notice that the `AppRoutingModule` is _last_.
-Most importantly, it comes _after_ the `HeroesModule`.
+### モジュールのインポート順について
+ヒーローモジュールの配列`imports`を見る。`AppRoutingModule`が_最後_にある。
+最も重要なことに、それは `HeroesModule`の_後に_来る。
 
 <code-example path="router/src/app/app.module.3.ts" region="module-imports" header="src/app/app.module.ts (module-imports)" linenums="false">
 
@@ -1627,32 +1626,38 @@ Most importantly, it comes _after_ the `HeroesModule`.
 
 
 
-The order of route configuration matters.
-The router accepts the first route that matches a navigation request path.
+ルート設定の順序は重要です。
+ルーターは、ナビゲーション要求パスと一致する最初のルートを受け入れる。
 
 When all routes were in one `AppRoutingModule`,
 you put the default and [wildcard](#wildcard) routes last, after the `/heroes` route,
 so that the router had a chance to match a URL to the `/heroes` route _before_
 hitting the wildcard route and navigating to "Page not found".
+すべてのルートが`AppRoutingModule`に入っていたとき、
+ルート`/heroes`の後に、デフォルトのルートと[ワイルドカード]（＃wildcard）ルートを最後に置き、
+ルーターがURLを `/heroes`ルートにマッチさせる機会を得た。
+ワイルドカードルートにヒットして、"Page not found"に移動する_前に_。
 
 The routes are no longer in one file.
 They are distributed across two modules, `AppRoutingModule` and `HeroesRoutingModule`.
+ルートはもう一つ以上のファイルに書かれている。
+二つのモジュール`AppRoutingModule`と`HeroesRoutingModule`によって使える。
 
 Each routing module augments the route configuration _in the order of import_.
 If you list `AppRoutingModule` first, the wildcard route will be registered
 _before_ the hero routes.
 The wildcard route&mdash;which matches _every_ URL&mdash;will intercept the attempt to navigate to a hero route.
+それぞれのルーティングモジュールは、_インポートの順序で_ルート設定を拡張します。
+最初に `AppRoutingModule`をリストした場合、ワイルドカードルートがヒーロールートの_前に_登録される。
+_すべての_URLに一致するワイルドカードルートは、ヒーロールートへの移動を阻止する。
 
 
 <div class="alert is-helpful">
 
 
 
-Reverse the routing modules and see for yourself that
-a click of the heroes link results in "Page not found".
-Learn about inspecting the runtime router configuration
-[below](#inspect-config "Inspect the router config").
-
+ルーティングモジュールの順番を逆にして、ヒーローのリンクをクリックすると"Page not found"という結果になることを確認する。
+ランタイムルーターの設定を調べるには、[以下](#inspect-config "Inspect the router config")を参照する。
 
 </div>
 

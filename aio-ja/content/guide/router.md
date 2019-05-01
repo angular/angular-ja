@@ -1860,40 +1860,41 @@ Rxjsのオペレータ`map`を使うと思うかもしれないが、`HeroServic
 
 {@a reuse}
 
-#### Observable <i>paramMap</i> and component reuse
+#### オブザーバブルな<i>paramMap</i>とコンポーネントの再利用
 
-In this example, you retrieve the route parameter map from an `Observable`.
-That implies that the route parameter map can change during the lifetime of this component.
+この例では、 `Observable`からルートパラメータマップを取得する。
+これは、ルートパラメータマップがこのコンポーネントの有効期間中に変更される可能性があることを意味する。
 
-They might. By default, the router re-uses a component instance when it re-navigates to the same component type
-without visiting a different component first. The route parameters could change each time.
+デフォルトでは、ルーターは同じコンポーネントタイプに再ナビゲートするときに、別のコンポーネントにアクセスすることなコンポーネントインスタンスを再利用する。
+ルートパラメータは毎回変わる可能性がある。
 
-Suppose a parent component navigation bar had "forward" and "back" buttons
-that scrolled through the list of heroes.
-Each click navigated imperatively to the `HeroDetailComponent` with the next or previous `id`.
+親コンポーネントのナビゲーションバーに、「進む」ボタンと「戻る」ボタンがあり、ヒーローのリストをスクロールできるとする。
+それぞれのクリックは、次のまたは前の `id`を持つ` HeroDetailComponent`に命令的にナビゲートされる。
 
-You don't want the router to remove the current `HeroDetailComponent` instance from the DOM only to re-create it for the next `id`.
-That could be visibly jarring.
-Better to simply re-use the same component instance and update the parameter.
+次の`id`から新しくコンテンツを作り直すためだけに、DOMから現在の` HeroDetailComponent`のインスタンスを削除したくないだろう。
+それは目に見えて不快になるかもしれない。
+単に同じコンポーネントインスタンスを再利用してパラメータを更新するほうがよい。
 
-Unfortunately, `ngOnInit` is only called once per component instantiation.
-You need a way to detect when the route parameters change from _within the same instance_.
-The observable `paramMap` property handles that beautifully.
-
+残念ながら、 `ngOnInit`はコンポーネントのインスタンス化ごとに一度だけ呼び出される。
+同じインスタンス内で、ルートパラメータが_同じインスタンス_からいつ変更されたかを検出する方法が必要である。
+オブザーバブルな`paramMap`プロパティはそれを合理的に処理する。
 
 <div class="alert is-helpful">
 
 
 
-When subscribing to an observable in a component, you almost always arrange to unsubscribe when the component is destroyed.
+コンポーネント内のオブザーバブルを購読するときは、ほとんどの場合、コンポーネントが破棄されたときに購読を中止するように手配する。
 
 There are a few exceptional observables where this is not necessary.
 The `ActivatedRoute` observables are among the exceptions.
+これが必要ではないいくつかの例外的なオブザーバブルがあります。
+オブザーバブル`ActivatedRoute`は例外である。
 
-The `ActivatedRoute` and its observables are insulated from the `Router` itself.
-The `Router` destroys a routed component when it is no longer needed and the injected `ActivatedRoute` dies with it.
+`ActivatedRoute`とそのオブザーバブルは`Router`自身から隔離されている。
+`Router`は、ルーティングされたコンポーネントが必要なくなったときにそれを破棄し、注入された` ActivatedRoute`はそれと共に消えます。
 
-Feel free to unsubscribe anyway. It is harmless and never a bad practice.
+
+とにかく購読を中止すること。それは無害であり、決して悪い習慣ではない。
 
 
 </div>

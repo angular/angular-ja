@@ -1661,7 +1661,7 @@ _すべての_URLに一致するワイルドカードルートは、ヒーロー
 
 </div>
 
-### Route Parameters
+### ルートパラメータ
 
 {@a route-def-with-parameter}
 

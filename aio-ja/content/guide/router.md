@@ -1601,12 +1601,11 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 {@a merge-hero-routes}
 
 
-#### Remove heroes declarations
+#### ヒーローの宣言を削除する
 
-Remove the `HeroListComponent` from the `AppModule`'s `declarations` because it's now provided by the `HeroesModule`. You can evolve the hero feature with more components and different routes. That's a key benefit of creating a separate module for each feature area.
+`HeroesModule`によって現在提供されているので、`AppModule`の `declarations`から`HeroListComponent`を削除する。あなたはより多くのコンポーネントと異なるルートでヒーロー機能を進化させることができる。これは、機能領域ごとに別々のモジュールを作成することの大きな利点である。
 
-After these steps, the `AppModule` should look like this:
-
+これらステップののち、`AppModule`は以下のようになる:
 
 <code-example path="router/src/app/app.module.3.ts" header="src/app/app.module.ts">
 

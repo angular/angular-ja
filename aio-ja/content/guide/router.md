@@ -1666,11 +1666,10 @@ _すべての_URLに一致するワイルドカードルートは、ヒーロー
 {@a route-def-with-parameter}
 
 
-#### Route definition with a parameter
+#### パラメータでのルート定義
 
-Return to the `HeroesRoutingModule` and look at the route definitions again.
-The route to `HeroDetailComponent` has a twist.
-
+`HeroesRoutingModule`にもどり、ルート定義をもう一度見る。
+`HeroDetailComponent`へのルートはひねりがある。
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" linenums="false" header="src/app/heroes/heroes-routing.module.ts (excerpt)" region="hero-detail-route">
 
@@ -1678,11 +1677,11 @@ The route to `HeroDetailComponent` has a twist.
 
 
 
-Notice the `:id` token in the path. That creates a slot in the path for a **Route Parameter**.
-In this case, the router will insert the `id` of a hero into that slot.
+パスの中に`:id`というトークンがあることに気づく。これはパスに**ルートパラメータ**を入れるために使われる。
+このケースではヒーローの`id`が挿入される。
 
-If you tell the router to navigate to the detail component and display "Magneta",
-you expect a hero id to appear in the browser URL like this:
+ルーターに詳細コンポーネントへ移動し"Magneta"を表示するように指定する。
+URLにはヒーローのIDが以下のように入ってくる:
 
 
 <code-example format="nocode">
@@ -1692,8 +1691,7 @@ you expect a hero id to appear in the browser URL like this:
 
 
 
-If a user enters that URL into the browser address bar, the router should recognize the
-pattern and go to the same "Magneta" detail view.
+もしユーザがブラウザのアドレスバーにURLを入れると、ルーターはパターンを認識し、"Magneta"の詳細ビューへ移動する。
 
 
 <div class="callout is-helpful">
@@ -1701,16 +1699,13 @@ pattern and go to the same "Magneta" detail view.
 
 
 <header>
-  Route parameter: Required or optional?
+  ルーターパラメータ: 必須かオプションか?
 </header>
 
 
 
-Embedding the route parameter token, `:id`,
-in the route definition path is a good choice for this scenario
-because the `id` is *required* by the `HeroDetailComponent` and because
-the value `15` in the path clearly distinguishes the route to "Magneta" from
-a route for some other hero.
+ルートパラメータとしてトークン`:id`をルート定義パスに埋め込むのは、いい選択である。
+`id`は`HeroDetailComponent`に*必須*で、値を`15`にすれば"Magneta"へのルートがほかのヒーローへのルートと区別できる。
 
 
 </div>

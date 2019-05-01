@@ -170,7 +170,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 ### _@SkipSelf()_ を使ってツリー内の親を探す
 
 コンポーネント階層の1つのブランチ、たとえば *Alice* -> *Barry* -> *Carol* といったものを想像してみてください。
-*Alice* と *Barry* はどちらも `Parent' クラスインタフェースを実装しています。
+*Alice* と *Barry* はどちらも `Parent' クラスインターフェースを実装しています。
 
 *Barry* が問題です。彼は自分の親である *Alice* と連絡を取り、また *Carol* の親である必要があります。
 つまり、*Alice* を取得するために `Parent` クラスのインターフェースを*注入*し、
@@ -187,7 +187,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 *Barry* の `providers` 配列は、[Alex の配列](#alex-providers)とまったく同じです。
 このような[エイリアスプロバイダ](guide/dependency-injection-in-action#useexisting)を書き続けるのであれば、[ヘルパー関数](#provideparent)を作成するべきです。
 
-今は、*Barry* のコンストラクタに焦点を当てます。
+今は、*Barry* のコンストラクターに焦点を当てます。
 
 <code-tabs>
 
@@ -202,14 +202,14 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 </code-tabs>
 
 
-追加の `@SkipSelf` デコレータを除いて、*Carol* のコンストラクタと同じです。
+追加の `@SkipSelf` デコレーターを除いて、*Carol* のコンストラクターと同じです。
 
 `@SkipSelf` が欠かせないものである理由が2つあります。
 
-1. それはインジェクタにそれ自身の上のコンポーネントで`Parent` 依存関係の検索を開始するように指示します。
+1. それはインジェクターにそれ自身の上のコンポーネントで`Parent` 依存関係の検索を開始するように指示します。
 これは parent が意味するもの*です*。
 
-2. `@SkipSelf` デコレータを省略した場合、Angular は循環依存エラーを送出します。
+2. `@SkipSelf` デコレーターを省略した場合、Angular は循環依存エラーを送出します。
 
   `循環依存関係をインスタンス化できません! (BethComponent -> Parent -> BethComponent)`
 
@@ -288,7 +288,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 </code-example>
 
-今、コンポーネントに、より単純で意味のある Parent プロバイダを追加することができます。
+今、コンポーネントに、より単純で意味のある Parent プロバイダーを追加することができます。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
 

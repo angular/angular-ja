@@ -1714,13 +1714,13 @@ URLにはヒーローのIDが以下のように入ってくる:
 {@a route-parameters}
 
 
-#### Setting the route parameters in the list view
+#### 一覧のビューにルートパラメータを設定する
 
-After navigating to the `HeroDetailComponent`, you expect to see the details of the selected hero.
-You need *two* pieces of information: the routing path to the component and the hero's `id`.
+`HeroDetailComponent`への移動を設定したら、次には選択されたヒーローの詳細を見たい。
+ここでは二つの情報が必要になる。コンポーネントへのルーティングパスとヒーローの`id`だ。
 
-Accordingly, the _link parameters array_ has *two* items:  the routing _path_ and a _route parameter_ that specifies the
-`id` of the selected hero.
+_リンクパラメータの配列_は*二つ*のアイテムを持つ:  ルーティング_パス_と選択したヒーローの`id`を示す_ルートパラメータ_だ。
+
 
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.ts" linenums="false" header="src/app/heroes/hero-list/hero-list.component.ts (link-parameters-array)" region="link-parameters-array">
@@ -1729,7 +1729,7 @@ Accordingly, the _link parameters array_ has *two* items:  the routing _path_ an
 
 
 
-The router composes the destination URL from the array like this:
+ルーターは次のように配列から宛先URLを作成する。
 `localhost:4200/hero/15`.
 
 
@@ -1738,11 +1738,11 @@ The router composes the destination URL from the array like this:
 
 
 
-How does the target `HeroDetailComponent` learn about that `id`?
-Don't analyze the URL. Let the router do it.
+`HeroDetailComponent`はどうやって`id`を知ることができるか。
+URLを解析する必要はない。ルーターにそれをやらせよう。
 
-The router extracts the route parameter (`id:15`) from the URL and supplies it to
-the `HeroDetailComponent` via the `ActivatedRoute` service.
+ルーターはURLからルートパラメータ(`id:15`)を引き出し、`HeroDetailComponent`にサービス`ActivatedRoute`を使って渡す。
+
 
 
 </div>

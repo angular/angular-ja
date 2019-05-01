@@ -1797,10 +1797,10 @@ Rxjsのオペレータ`map`を使うと思うかもしれないが、`HeroServic
 
 追跡可能な `Subscription`は` AsyncPipe`によって処理され、コンポーネントの `hero`プロパティは取得されたヒーローで（再）設定される。
 
-#### _ParamMap_ API
+#### _ParamMap_のAPI
 
-The `ParamMap` API is inspired by the [URLSearchParams interface](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams). It provides methods
-to handle parameter access for both route parameters (`paramMap`) and query parameters (`queryParamMap`).
+`ParamMap`のAPIは[URLSearchParams interface](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)に着想を得ている。
+ルートパラメータ(`paramMap`)とクエリパラメータ(`queryParamMap`)のそれぞれがパラメータを扱う方法として提供されている。
 
 <table>
   <tr>

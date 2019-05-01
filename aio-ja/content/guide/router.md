@@ -1749,9 +1749,9 @@ URLを解析する必要はない。ルーターにそれをやらせよう。
 
 {@a activated-route}
 
-### _Activated Route_ in action
+### _有効化されたルート_について
 
-Import the `Router`, `ActivatedRoute`, and `ParamMap` tokens from the router package.
+ルーターパッケージから`Router`、`ActivatedRoute`と`ParamMap`をインポートする。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.1.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (activated route)" region="imports">
@@ -1760,7 +1760,7 @@ Import the `Router`, `ActivatedRoute`, and `ParamMap` tokens from the router pac
 
 
 
-Import the `switchMap` operator because you need it later to process the `Observable` route parameters.
+オペレータ`switchMap`を、あとで`Observable`ルートパラメータを扱うためにインポートする。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (switchMap operator import)" region="rxjs-operator-import">
@@ -1772,35 +1772,30 @@ Import the `switchMap` operator because you need it later to process the `Observ
 {@a hero-detail-ctor}
 
 
-As usual, you write a constructor that asks Angular to inject services
-that the component requires and reference them as private variables.
+例によって、コンポーネントに必要なサービスを入れるため、コンストラクタにプライベートな値で参照を書いていく。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (constructor)" region="ctor">
 
 </code-example>
 
-Later, in the `ngOnInit` method, you use the `ActivatedRoute` service to retrieve the parameters for the route,
-pull the hero `id` from the parameters and retrieve the hero to display.
+そのあと、メソッド`ngOnInit`でサービス`ActivatedRoute`を使い、ルートパラメータを引き出せるようにし、ヒーローの`id`をパラメータから引き出してヒーローを表示する。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (ngOnInit)" region="ngOnInit">
 
 </code-example>
 
-The `paramMap` processing is a bit tricky. When the map changes, you `get()`
-the `id` parameter from the changed parameters.
+`paramMap`の処理は少しトリッキーだ。マップが変わったとき、パラメータ`id`を`変更されたパラメータからget()`する。
 
-Then you tell the `HeroService` to fetch the hero with that `id` and return the result of the `HeroService` request.
+ヒーローの情報を得るため`id`を使って`HeroService`に問い合わせ、リクエスト結果を得る。
 
-You might think to use the RxJS `map` operator.
-But the `HeroService` returns an `Observable<Hero>`.
-So you flatten the `Observable` with the `switchMap` operator instead.
+Rxjsのオペレータ`map`を使うと思うかもしれないが、`HeroService`は`Observable<Hero>`を返す。
+そして代わりに、`switchMap`演算子を使って`Observable`を平坦化する。
 
-The `switchMap` operator also cancels previous in-flight requests. If the user re-navigates to this route
-with a new `id` while the `HeroService` is still retrieving the old `id`, `switchMap` discards that old request and returns the hero for the new `id`.
+オペレータ`switchMap`は以前の実行中のリクエストもキャンセルする。ユーザーがこのルートに再ナビゲートした場合、`HeroService`がまだ古い`id`を検索している間に新しい `id`を使うと、`switchMap`はその古いリクエストを破棄して新しい `id`のヒーローを返す。
 
-The observable `Subscription` will be handled by the `AsyncPipe` and the component's `hero` property will be (re)set with the retrieved hero.
+追跡可能な `Subscription`は` AsyncPipe`によって処理され、コンポーネントの `hero`プロパティは取得されたヒーローで（再）設定される。
 
 #### _ParamMap_ API
 

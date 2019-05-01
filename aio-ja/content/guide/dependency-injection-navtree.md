@@ -170,7 +170,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 ### _@SkipSelf()_ を使ってツリー内の親を探す
 
 コンポーネント階層の1つのブランチ、たとえば *Alice* -> *Barry* -> *Carol* といったものを想像してみてください。
-*Alice* と *Barry* はどちらも `Parent' クラスインターフェースを実装しています。
+*Alice* と *Barry* はどちらも `Parent` クラスインターフェースを実装しています。
 
 *Barry* が問題です。彼は自分の親である *Alice* と連絡を取り、また *Carol* の親である必要があります。
 つまり、*Alice* を取得するために `Parent` クラスのインターフェースを*注入*し、
@@ -207,11 +207,11 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 `@SkipSelf` が欠かせないものである理由が2つあります。
 
 1. それはインジェクターにそれ自身の上のコンポーネントで`Parent` 依存関係の検索を開始するように指示します。
-これは parent が意味するもの*です*。
+これは parent が意味するものです。
 
 2. `@SkipSelf` デコレーターを省略した場合、Angular は循環依存エラーを送出します。
 
-  `循環依存関係をインスタンス化できません! (BethComponent -> Parent -> BethComponent)`
+  `Cannot instantiate cyclic dependency! (BethComponent -> Parent -> BethComponent)`
 
 これが *Alice*、*Barry*、そして家族の動きです。
 

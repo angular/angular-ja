@@ -1891,7 +1891,7 @@ The `ActivatedRoute` observables are among the exceptions.
 オブザーバブル`ActivatedRoute`は例外である。
 
 `ActivatedRoute`とそのオブザーバブルは`Router`自身から隔離されている。
-`Router`は、ルーティングされたコンポーネントが必要なくなったときにそれを破棄し、注入された` ActivatedRoute`はそれと共に消えます。
+`Router`は、ルーティングされたコンポーネントが必要なくなったときにそれを破棄し、注入された` ActivatedRoute`はそれと共に消える。
 
 
 とにかく購読を中止すること。それは無害であり、決して悪い習慣ではない。
@@ -1904,15 +1904,13 @@ The `ActivatedRoute` observables are among the exceptions.
 {@a snapshot}
 
 
-#### _Snapshot_: the _no-observable_ alternative
+#### _スナップショット_: _オブザーバブルではない_代替
 _This_ application won't re-use the `HeroDetailComponent`.
 The user always returns to the hero list to select another hero to view.
-There's no way to navigate from one hero detail to another hero detail
-without visiting the list component in between.
+There's no way to navigate from one hero detail to another hero detail without visiting the list component in between.
 Therefore, the router creates a new `HeroDetailComponent` instance every time.
 
-When you know for certain that a `HeroDetailComponent` instance will *never, never, ever*
-be re-used, you can simplify the code with the *snapshot*.
+When you know for certain that a `HeroDetailComponent` instance will *never, never, ever* be re-used, you can simplify the code with the *snapshot*.
 
 The `route.snapshot` provides the initial value of the route parameter map.
 You can access the parameters directly without subscribing or adding observable operators.

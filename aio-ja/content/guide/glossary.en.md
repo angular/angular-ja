@@ -1,10 +1,12 @@
-# 用語集
+# Glossary
 
-Angularには独自の用語があります。
-ほとんどのAngularの用語は、
-Angularシステムの中で特別な意味をもつ常用英単語です。
+Angular has its own vocabulary.
+Most Angular terms are common English words or computing terms
+that have a specific meaning within the Angular system.
 
-ここには主要な用語といくつかのあまり馴染みのない用語を集めています。
+This glossary lists the most prominent terms
+and a few less familiar ones with unusual or
+unexpected definitions.
 
 [A](guide/glossary#A) [B](guide/glossary#B) [C](guide/glossary#C) [D](guide/glossary#D) [E](guide/glossary#E) [F](guide/glossary#F) [G](guide/glossary#G) [H](guide/glossary#H) [I](guide/glossary#I)
 [J](guide/glossary#J) [K](guide/glossary#K) [L](guide/glossary#L) [M](guide/glossary#M) [N](guide/glossary#N) [O](guide/glossary#O) [P](guide/glossary#P) [Q](guide/glossary#Q) [R](guide/glossary#R)
@@ -16,29 +18,27 @@ Angularシステムの中で特別な意味をもつ常用英単語です。
 
 
 ## ahead-of-time (AOT) compilation
-_事前コンパイル_
 
-Angular ahead-of-time（AOT）コンパイラは、ブラウザがコードをダウンロードして実行する前に、
-Angular HTMLとTypeScriptコードをビルド段階で効率的なJavaScriptコードに変換します。
-これは、運用環境での最適なコンパイルモードであり、
- [just-in-time (JIT) コンパイル](guide/glossary#jit)と比較してロード時間の短縮とパフォーマンスの向上を実現します。
+The Angular ahead-of-time (AOT) compiler converts Angular HTML and TypeScript code
+into efficient JavaScript code during the build phase, before the browser downloads
+and runs that code.
+This is the best compilation mode for production environments, with decreased load time and increased performance compared to [just-in-time (JIT) compilation](guide/glossary#jit).
 
-`ngc`コマンドラインツールを使用してアプリケーションをコンパイルすると、モジュールファクトリに直接ブートストラップすることができます。つまり、JavaScriptバンドルにAngularコンパイラを含める必要はありません。
+By compiling your application using the `ngc` command-line tool, you can bootstrap directly to a module factory, so you don't need to include the Angular compiler in your JavaScript bundle.
 
 {@a angular-element}
 
 ## Angular element
 
-[Custom Elements](guide/glossary#custom-element)としてパッケージされたAngularの[コンポーネント](guide/glossary#component)。
+An Angular [component](guide/glossary#component) packaged as a [custom element](guide/glossary#custom-element).
 
-[Angular Elements 概要](guide/elements)を参照してください。
+Learn more in [Angular Elements Overview](guide/elements).
 
 {@a annotation}
 
 ## annotation
-_アノテーション_
 
-クラスのメタデータを提供する構造体。[デコレーター](guide/glossary#decorator)を参照してください。
+A structure that provides metadata for a class. See [decorator](guide/glossary#decorator).
 
 
 {@a attribute-directive}
@@ -48,11 +48,12 @@ _アノテーション_
 
 
 ## attribute directives
-_属性ディレクティブ_
 
-[ディレクティブ](guide/glossary#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。その名前のとおり、通常これらはHTML属性として現れます。
+A category of [directive](guide/glossary#directive) that can listen to and modify the behavior of
+other HTML elements, attributes, properties, and components. They are usually represented
+as HTML attributes, hence the name.
 
-[_属性ディレクティブ_](guide/attribute-directives)ガイドで詳しく学びましょう。
+Learn more in [Attribute Directives](guide/attribute-directives).
 
 
 {@a B}
@@ -60,27 +61,25 @@ _属性ディレクティブ_
 {@a binding}
 
 ## binding
-_バインディング_
 
-一般に、変数またはプロパティをデータ値に設定する方法です。
-Angular内では、通常、DOMオブジェクトのプロパティと
-データオブジェクトのプロパティを調整する[データバインディング](guide/glossary#data-binding)を指します。
+Generally, the practice of setting a variable or property to a data value.
+Within Angular, typically refers to [data binding](guide/glossary#data-binding),
+which coordinates DOM object properties with data object properties.
 
-また、"トークン"または"キー" と依存性の[プロバイダー](guide/glossary#provider)との間を結びつける、[依存性の注入](guide/glossary#dependency-injection)を指すこともあります。
-
+Sometimes refers to a [dependency-injection](guide/glossary#dependency-injection) binding
+between a [token](guide/glossary#token) and a dependency [provider](guide/glossary#provider).
 
 {@a bootstrap}
 
 ## bootstrap
-_ブートストラップ_
 
-アプリやシステムを初期化して起動する方法です。
+A way to initialize and launch an app or system.
 
-Angularでは、アプリケーションのルートNgModule（`AppModule`）には、アプリケーションのトップレベル[コンポーネント](guide/glossary#component)を識別する`bootstrap`プロパティがあります。
-ブートストラッププロセス中、Angularはこれらのコンポーネントを作成して`index.html`ホストWebページに挿入します。
-複数のアプリケーションを同じ`index.html`で起動することができます。各アプリケーションには独自のコンポーネントが含まれています。
+In Angular, an app's root NgModule (`AppModule`) has a `bootstrap` property that identifies the app's top-level [components](guide/glossary#component).
+During the bootstrap process, Angular creates and inserts these components into the `index.html` host web page.
+You can bootstrap multiple apps in the same `index.html`. Each app contains its own components.
 
-詳しくは、[_ブートストラップ_](guide/bootstrapping)ガイドを参照してください。
+Learn more in [Bootstrapping](guide/bootstrapping).
 
 {@a C}
 
@@ -90,24 +89,30 @@ Angularでは、アプリケーションのルートNgModule（`AppModule`）に
 {@a kebab-case}
 
 ## case types
-_ケースの慣習_
 
-Angularでは、大文字と小文字の区別があります。これについては、[命名のガイドラインセクション]の(ガイド/スタイルガイド#02-01)を参照してください。ケースタイプの概要を次に示します。
+Angular uses capitalization conventions to distinguish the names of various types, as described in the [naming guidelines section](guide/styleguide#02-01) of the Style Guide. Here's a summary of the case types:
 
-* camelCase : シンボル、プロパティ、メソッド、パイプ名、コンポーネントではないディレクティブのセレクター、定数
-* UpperCamelCase (or PascalCase): コンポーネント、インタフェース、NgModule、ディレクティブおよびパイプを定義するクラスを含むクラス名
-* dash-case (or "kebab-case"): ファイル名の記述部分、コンポーネントセレクタ
-* underscore_case (or "snake_case"): 通常はAngularでは使用されません。
-* UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE): 伝統的な定数（許容されますが、camelCaseを好みます）
+* camelCase : Symbols, properties, methods, pipe names, non-component directive selectors, constants.
+Standard or lower camel case uses lowercase on the first letter of the item. For example, "selectedHero".
+
+* UpperCamelCase (or PascalCase): Class names, including classes that define components, interfaces, NgModules, directives, and pipes,
+Upper camel case uses uppercase on the first letter of the item. For example, "HeroListComponent".
+
+* dash-case (or "kebab-case"): Descriptive part of file names, component selectors. For example, "app-hero-list".
+
+* underscore_case (or "snake_case"): Not typically used in Angular. Snake case uses words connected with underscores.
+For example, "convert_link_mode".
+
+* UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE, or SCREAMING_SNAKE_CASE): Traditional for constants (acceptable, but prefer camelCase).
+Upper snake case uses words in all capital letters connected with underscores. For example, "FIX_ME".
 
 {@a class-decorator}
 
 ## class decorator
-_クラスデコレーター_
 
-クラス定義の直前に表示される[デコレーター](guide/glossary#decorator)です。クラスが特定の型であることを宣言し、その型に適したメタデータを提供します。
+A [decorator](guide/glossary#decorator) that appears immediately before a class definition, which declares the class to be of the given type, and provides metadata suitable to the type.
 
-次のクラスタイプを宣言できます。
+The following decorators can declare Angular class types:
 * `@Component()`
 * `@Directive()`
 * `@Pipe()`
@@ -118,54 +123,49 @@ _クラスデコレーター_
 {@a class-field-decorator}
 
 ## class field decorator
-_クラスフィールドデコレーター_
 
-クラス定義のフィールドの直前に、そのフィールドの型を宣言する[デコレータ](guide/glossary#decorator)ステートメントを記述します。`@Input`や`@Output`などです。
+A [decorator](guide/glossary#decorator) statement immediately before a field in a class definition that declares the type of that field. Some examples are `@Input` and `@Output`.
 
 {@a collection}
 
 ## collection
-_コレクション_
 
-Angularで、[npmパッケージ](guide/npm-packages)に集められた関連する[セマンティクス](guide/glossary#schematic)の集合。
+In Angular, a set of related [schematics](#schematic) collected in an [npm package](#npm-package).
 
 {@a cli}
 
 ## command-line interface (CLI)
-_コマンドラインインターフェース（CLI）_
 
-[Angular CLI](cli)はAngular開発サイクルを管理するためのコマンドラインツールです。
-これを使うことによって、[ワークスペース](guide/glossary#workspace)や[プロジェクト](guide/glossary#project)のための初期ファイルシステムの足がかりを作成したり、さまざまな要素の初期汎用バージョンのコードを追加したり変更したりする[セマンティクス](guide/glossary#schematic)を実行したりします。
+The [Angular CLI](cli) is a command-line tool for managing the Angular development cycle. Use it to create the initial filesystem scaffolding for a [workspace](guide/glossary#workspace) or [project](guide/glossary#project), and to run [schematics](guide/glossary#schematic) that add and modify code for initial generic versions of various elements. The CLI supports all stages of the development cycle, including building, testing, bundling, and deployment.
 
-* 新しいプロジェクトでCLIの使用を開始するには、[スタートアップガイド](guide/quickstart)を参照してください。
-* CLIの全機能の詳細については、[CLIコマンドリファレンス](CLI)を参照してください。
+* To begin using the CLI for a new project, see [Getting Started](guide/quickstart).
+* To learn more about the full capabilities of the CLI, see the [CLI command reference](cli).
 
-[セマンティクスのCLI](#schematics-cli)も参照してください。
+See also [Schematics CLI](#schematics-cli).
 
 {@a component}
 
 ## component
-_コンポーネント_
 
-`@Component()`[デコレータ](guide/glossary#decorator)を持つクラスで、対応する[テンプレート](guide/glossary#template)と関連付けられます。コンポーネントとテンプレートによって、[ビュー](guide/glossary#view)が定義されます。
-コンポーネントは、特殊なタイプの[ディレクティブ](guide/glossary#directive)です。
+A class with the `@Component()` [decorator](guide/glossary#decorator) that associates it with a companion [template](guide/glossary#template). Together, the component and template define a [view](guide/glossary#view).
+A component is a special type of [directive](guide/glossary#directive).
+The `@Component()` decorator extends the `@Directive()` decorator with template-oriented features.
 
-Angularコンポーネントクラスは、[データバインディング](guide/glossary#data-binding)を通じて、データを公開し、ビューの表示とユーザーインタラクションロジックの大部分を処理します。
+An Angular component class is responsible for exposing data and handling most of the view's display and user-interaction logic through [data binding](guide/glossary#data-binding).
 
-コンポーネント、テンプレート、およびビューの詳細については、[アーキテクチャの概要](guide/architecture)を参照してください。
+Read more about components, templates, and views in [Architecture Overview](guide/architecture).
 
 {@a custom-element}
 
 ## custom element
-_カスタムエレメント_
 
-Webプラットフォームの機能で、現在ほとんどのブラウザでサポートされており、未対応のブラウザでもpolyfillを使用して利用できます。（[ブラウザサポート](guide/browser-support)を参照）
+A web platform feature, currently supported by most browsers and available in other browsers through polyfills (see [Browser support](guide/browser-support)).
 
-カスタムエレメント機能はHTMLを拡張し、JavaScriptコードによってコンテンツが作成および制御されるタグを定義できるようにします。カスタムエレメント(*webコンポーネント*とも呼ばれます。)については、[CustomElementRegistry] (https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)を参照してください。
+The custom element feature extends HTML by allowing you to define a tag whose content is created and controlled by JavaScript code. A custom element (also called a *web component*) is recognized by a browser when it's added to the [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry).
 
-APIを使用してAngularコンポーネントの変換を行い、ブラウザに登録してAngularアプリ内のDOMに直接追加したHTMLで使用できるようにすることができます。カスタムエレメントタグは、変更検出およびデータバインディング機能を持つコンポーネントのビューを、Angular処理なしで表示されるコンテンツに挿入します。
+You can use the API to transform an Angular component so that it can be registered with the browser and used in any HTML that you add directly to the DOM within an Angular app. The custom element tag inserts the component's view, with change-detection and data-binding functionality, into content that would otherwise be displayed without Angular processing.
 
-[動的コンポーネント読み込み](guide/glossary#dynamic-components)も参照してください。
+See also [dynamic component loading](guide/glossary#dynamic-components).
 
 
 {@a D}
@@ -173,37 +173,39 @@ APIを使用してAngularコンポーネントの変換を行い、ブラウザ�
 {@a data-binding}
 
 ## data binding
-_データバインディング_
 
-アプリケーションがユーザーに対してデータ値を表示し、ユーザーのアクション(クリック、タッチ、キーストロークなど)に応答できるようにするプロセスのことです。
+A process that allows apps to display data values to a user and respond to user
+actions (such as clicks, touches, and keystrokes).
 
-データ・バインディングでは、HTMLウィジェットとアプリケーションデータソースの間の関係を定義することで、フレームワークが詳細を処理します。
-データバインディングは、アプリケーションデータ値をHTMLに手動でプッシュしたり、イベントリスナーをアタッチしたり、変更された値を画面から取得したり、アプリケーションデータ値を更新する代わりに使用できます。
+In data binding, you declare the relationship between an HTML widget and a data source
+and let the framework handle the details.
+Data binding is an alternative to manually pushing application data values into HTML, attaching
+event listeners, pulling changed values from the screen, and
+updating application data values.
 
-データバインディングについて詳しく知るには[テンプレート構文](guide/template-syntax)の章を参照してください。
+Read about the following forms of binding in [Template Syntax](guide/template-syntax):
 
- * [補間](guide/template-syntax#interpolation).
- * [プロパティバインディング](guide/template-syntax#property-binding).
- * [イベントバインディング](guide/template-syntax#event-binding).
- * [属性バインディング](guide/template-syntax#attribute-binding).
- * [クラスバインディング](guide/template-syntax#class-binding).
- * [スタイルバインディング](guide/template-syntax#style-binding).
- * [ngModelによる双方向バインディング](guide/template-syntax#ngModel).
+ * [Interpolation](guide/template-syntax#interpolation)
+ * [Property binding](guide/template-syntax#property-binding)
+ * [Event binding](guide/template-syntax#event-binding)
+ * [Attribute binding](guide/template-syntax#attribute-binding)
+ * [Class binding](guide/template-syntax#class-binding)
+ * [Style binding](guide/template-syntax#style-binding)
+ * [Two-way data binding with ngModel](guide/template-syntax#ngModel)
 
 {@a declarable}
 
 ## declarable
 
-[NgModule](guide/glossary#ngmodule)の`declarations`リストに追加できるクラス型です。
+A class type that you can add to the `declarations` list of an [NgModule](guide/glossary#ngmodule).
+You can declare [components](guide/glossary#component), [directives](guide/glossary#directive), and [pipes](guide/glossary#pipe).
 
-[コンポーネント](guide/glossary#component)、[ディレクティブ](guide/glossary#directive)、および[パイプ](guide/glossary#pipe)を宣言できます。
-
-次のものを宣言しないでください。
- * 別のNgModuleですでに宣言されているクラス。
- * 別のパッケージからインポートされたディレクティブの配列。たとえば、`@angular/forms`の`FORMS_DIRECTIVES`を宣言しないでください。
- * NgModuleクラス。
- * サービスクラス。
- * 文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなどAngularと関係のないクラスとオブジェクト。
+Don't declare the following:
+* A class that's already declared in another NgModule
+* An array of directives imported from another package. For example, don't declare `FORMS_DIRECTIVES` from `@angular/forms`
+* NgModule classes
+* Service classes
+* Non-Angular classes and objects, such as strings, numbers, functions, entity models, configurations, business logic, and helper classes
 
 
 {@a decorator}
@@ -211,16 +213,14 @@ _データバインディング_
 {@a decoration}
 
 ## decorator | decoration
-_デコレーター | デコレーション_
 
-直後のクラスまたはプロパティの定義を変更する関数。
-デコレーター（アノテーションとも呼ばれる）は、実験的な（ステージ2の）JavaScript言語[機能](https://github.com/wycats/javascript-decorators)です。
-TypeScriptはデコレーターのサポートを追加します。
+A function that modifies a class or property definition. Decorators (also called *annotations*) are an experimental (stage 2) [JavaScript language feature](https://github.com/wycats/javascript-decorators).
+TypeScript adds support for decorators.
 
-Angularは、メタデータをクラスやプロパティに付与して、そのクラスやプロパティの意味や動作の仕方を知るデコレーターを定義します。
+Angular defines decorators that attach metadata to classes or properties
+so that it knows what those classes or properties mean and how they should work.
 
-[クラスデコレータ](guide/glossary#class-decorator)、[クラスフィールドデコレーター](guide/glossary#class-field-decorator)を参照してください。
-
+See [class decorator](guide/glossary#class-decorator), [class field decorator](guide/glossary#class-field-decorator).
 
 {@a di}
 

@@ -1,30 +1,30 @@
-# Overview of Angular Libraries
+# Angular ライブラリの概要
 
-Many applications need to solve the same general problems, such as presenting a unified user interface, presenting data, and allowing data entry.
-Developers can create general solutions for particular domains that can be adapted for re-use in different apps.
-Such a solution can be built as Angular *libraries* and these libraries can be published and shared as *npm packages*.
+多くのアプリケーションは、統一されたユーザーインターフェースの提示、データの提示、データ入力の許可など、同じ一般的な問題を解決する必要があります。
+開発者は、さまざまなアプリケーションでの再利用が可能な特定のドメイン用の一般的なソリューションを作成できます。
+このようなソリューションは Angular *ライブラリ*として構築でき、これらのライブラリは *npm パッケージ*として公開および共有できます。
 
-An Angular library is an Angular [project](guide/glossary#project) that differs from an app in that it cannot run on its own.
-A library must be imported and used in an app.
+Angular ライブラリは、単独では実行できないという点でアプリとは異なる Angular [プロジェクト](guide/glossary#project)です。
+ライブラリをインポートしてアプリで使用する必要があります。
 
-Libraries extend Angular's base functionality. For example, to add [reactive forms](guide/reactive-forms) to an app, add the library package using `ng add @angular/forms`, then import the `ReactiveFormsModule` from the `@angular/forms` library in your application code.
-Similarly, adding the [service worker](guide/service-worker-intro) library to an Angular application is one of the steps for turning an application into a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) (PWA).
-[Angular Material](https://material.angular.io/) is an example of a large, general-purpose library that provides sophisticated, reusable, and adaptable UI components.
+ライブラリは Angular の基本機能を拡張します。たとえば、[リアクティブフォーム](guide/reactive-forms)をアプリに追加するには、`ng add @angular/forms` を使用してライブラリパッケージを追加し、アプリケーションコードの `@angular/forms` ライブラリから `ReactiveFormsModule` をインポートします。
+同様に、[service worker](guide/service-worker-intro) ライブラリを Angular アプリケーションに追加することは、アプリケーションを[プログレッシブ Web アプリケーション](https://developers.google.com/web/progressive-web-apps/) (PWA) に変えるためのステップの1つです。
+[Angular Material](https://material.angular.io/) は、洗練された、再利用可能な、そして適応可能な UI コンポーネントを提供する大規模な汎用ライブラリの一例です。
 
-Any app developer can use these and other libraries that have been published as npm packages by the Angular team or by third parties. See [Using Published Libraries](guide/using-libraries).
+すべてのアプリ開発者は、Angular チームまたはサードパーティによって npm パッケージとして公開されているこれらおよびその他のライブラリを使用できます。[公開ライブラリの使用](guide/using-libraries)を参照してください。
 
-## Creating libraries
+## ライブラリを作成する
 
-If you have developed functionality that is suitable for reuse, you can create your own libraries.
-These libraries can be used locally in your workspace, or you can publish them as [npm packages](guide/npm-packages) to share with other projects or other Angular developers.
-These packages can be published to the npm registry, a private npm Enterprise registry, or a private package management system that supports npm packages.
-See [Creating Libraries](guide/creating-libraries).
+再利用に適した機能を開発した場合は、独自のライブラリを作成できます。
+これらのライブラリは、ワークスペース内でローカルに使用することも、他のプロジェクトや他の Angular 開発者と共有するために [npm パッケージ](guide/npm-packages)として公開することもできます。
+これらのパッケージは、npm レジストリ、プライベートの npm エンタープライズレジストリ、または npm パッケージをサポートするプライベートのパッケージ管理システムに公開できます。
+[ライブラリの作成](guide/creating-libraries)を参照してください。
 
-Whether you decide to package functionality as a library is an architectural decision, similar to deciding whether a piece of functionality is a component or a service, or deciding on the scope of a component.
+機能の一部をコンポーネントにするかサービスにするかを決めることやコンポーネントのスコープを決めることと同様に、機能をライブラリとしてパッケージ化するかどうかはアーキテクチャとしての判断になります。
 
-Packaging functionality as a library forces the artifacts in the library to be decoupled from the application's business logic.
-This can help to avoid various bad practices or architecture mistakes that can make it difficult to decouple and reuse code in the future.
+ライブラリとして機能をパッケージ化すると、ライブラリ内のアーティファクトはアプリケーションのビジネスロジックから切り離されます。
+これは、将来コードを分離して再利用することを困難にする可能性があるさまざまな悪いプラクティスやアーキテクチャの誤りを回避するのに役立ちます。
 
-Putting code into a separate library is more complex than simply putting everything in one app.
-It requires more of an investment in time and thought for managing, maintaining, and updating the library.
-This complexity can pay off, however, when the library is being used in multiple apps.
+コードを別のライブラリに入れるのは、すべてを1つのアプリに入れるよりも複雑です。
+ライブラリの管理、保守、および更新には、時間と思考をかける必要があります。
+ただし、この複雑さは、ライブラリが複数のアプリケーションで使用されている場合には効果があります。

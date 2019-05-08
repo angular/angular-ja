@@ -568,8 +568,9 @@
           "children": [
             {
               "url": "guide/libraries",
-              "title": "Libraries Overview",
-              "tooltip": "Understand how and when to use or create libraries."
+              "title": "ライブラリの概要",
+              "tooltip": "ライブラリを使用または作成する方法と時期を理解します。",
+              "translated": true
             },
             {
               "url": "guide/using-libraries",

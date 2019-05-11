@@ -227,55 +227,58 @@ Angularは、メタデータをクラスやプロパティに付与して、そ�
 {@a dependency-injection}
 
 ## dependency injection (DI)
+_依存性の注入_
 
-A design pattern and mechanism for creating and delivering some parts of an application (dependencies) to other parts of an application that require them.
+アプリケーションの一部(依存関係)を作成し、他のアプリケーションに配布するためのデザインパターンとメカニズムです。
 
-In Angular, dependencies are typically services, but they also can be values, such as strings or functions.
-An [injector](guide/glossary#injector) for an app (created automatically during bootstrap) instantiates dependencies when needed, using a configured [provider](guide/glossary#provider) of the service or value.
+Angularでは、依存関係は通常はサービスですが、文字列や関数などの値でも構いません。
+アプリケーションの[インジェクター](guide/glossary#injector)（ブートストラップ中に自動的に作成される）は、必要に応じて、設定されたサービスまたは値の[プロバイダ](guide/glossary#provider)を使用して依存関係をインスタンス化します。
 
-Learn more in [Dependency Injection in Angular](guide/dependency-injection).
+詳しく知るには[依存性の注入](guide/dependency-injection)ガイドを参照してください。
 
 {@a di-token}
 
 ## DI token
+_DIトークン_
 
-A lookup token associated with a dependency [provider](guide/glossary#provider), for use with the [dependency injection](guide/glossary#di) system.
+[依存性注入](guide/glossary#di)システムで使用する、依存関係[プロバイダ](guide/glossary#provider)に関連付けられた検索トークン。
 
 
 {@a directive}
 {@a directives}
 
 ## directive
+_ディレクティブ_
 
-A class that can modify the structure of the DOM or modify attributes in the DOM and component data model. A directive class definition is immediately preceded by a `@Directive()` [decorator](guide/glossary#decorator) that supplies metadata.
+DOMの構造を変更したり、DOMやコンポーネントのデータモデルの属性を変更したりできるクラスです。ディレクティブクラス定義の直前には、メタデータを提供する`@Directive()`[デコレータ](guide/glossary#decorator)が記述されます。
 
-A directive class is usually associated with an HTML element or attribute, and that element or attribute is often referred to as the directive itself. When Angular finds a directive in an HTML [template](guide/glossary#template), it creates the matching directive class instance and gives the instance control over that portion of the browser DOM.
+ディレクティブクラスは通常、HTMLの要素または属性に関連付けられ、その要素または属性はディレクティブそのものとして参照されます。
+AngularはHTMLの[テンプレート](guide/glossary#template)ディレクティブを検出すると、それに一致するディレクティブクラスインスタンスを作成し、ブラウザDOMのその部分にインスタンスコントロールが与えられます。
 
-There are three categories of directive:
-* [Components](guide/glossary#component) use `@Component()` (an extension of `@Directive()`) to associate a template with a class.
+ディレクティブには次の3つのカテゴリがあります。
+- [コンポーネント](guide/glossary#component)では、`@Component()`(`@ディレクティブ()`の拡張)を使用してテンプレートをクラスに関連付けます。
+- [属性ディレクティブ](guide/glossary#attribute-directive)は、ページ要素の動作と外観を変更します。
+- [構造ディレクティブ](guide/glossary#structural-directive)は、DOMの構造を変更します。
 
-* [Attribute directives](guide/glossary#attribute-directive) modify behavior and appearance of page elements.
-
-* [Structural directives](guide/glossary#structural-directive) modify the structure of the DOM.
-
-Angular supplies a number of built-in directives that begin with the `ng` prefix.
-You can also create new directives to implement your own functionality.
-You associate a *selector* (an HTML tag such as `<my-directive>`) with a custom directive, thereby extending the [template syntax](guide/template-syntax) that you can use in your apps.
+Angularは`ng`接頭辞で始まるいくつかの組込みディレクティブを提供します。新しいディレクティブを作成して、独自の機能を実装することもできます。
+_セレクタ_（たとえば`<my-directive>`のようなHTMLタグ）をカスタムディレクティブに関連付けて、アプリケーションで使用できる[テンプレート構文](guide/template-syntax)を拡張します。
 
 {@a dom}
 
 ## domain-specific language (DSL)
+_ドメイン固有言語_
 
-A special-purpose library or API; see [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language).
-Angular extends TypeScript with domain-specific languages for a number of domains relevant to Angular apps, defined in NgModules such as [animations](guide/animations), [forms](guide/forms), and [routing and navigation](guide/router).
+専用ライブラリまたはAPI;[ドメイン固有言語]を参照 (https://en.wikipedia.org/wiki/Domain-specific_language).
+Angularは[アニメーション](guide/animations),[フォーム](guide/forms),[ルーティングとナビゲーション](guide/router)などのNgModulesで定義されたAngularアプリに関連する多くのドメインで,ドメイン固有の言語を使ってTypeScriptを拡張しています。
 
 {@a dynamic-components}
 
 ## dynamic component loading
+_動的コンポーネント読み込み_
 
-A technique for adding a component to the DOM at run time. Requires that you exclude the component from compilation and then connect it to Angular's change-detection and event-handling framework when you add it to the DOM.
+実行時にDOMにコンポーネントを追加する手法です。コンパイルからコンポーネントを除外し、DOMに追加するときにAngularの変更検出とイベント処理フレームワークに接続する必要があります。
 
-See also [custom element](guide/glossary#custom-element), which provides an easier path with the same result.
+[カスタム要素](guide/glossary#custom-element)も参照してください。これにより、同じ結果を簡単に得ることができます。
 
 
 {@a E}
@@ -283,45 +286,42 @@ See also [custom element](guide/glossary#custom-element), which provides an easi
 {@a eager-loading}
 
 ## eager loading
+_一括読み込み_
 
-NgModules or components that are loaded on launch are called eager-loaded, to distinguish them from those
-that are loaded at run time (lazy-loaded).
-See [lazy loading](guide/glossary#lazy-load).
-
+起動時にロードされるNgModuleまたはコンポーネントは、Eager-loaded（一括読み込み）と呼ばれ、実行時にロードされるものと区別します(遅延ローディング)。
+[遅延ローディング](guide/glossary#lazy-load)参照
 
 {@a ecma}
 
 ## ECMAScript
 
-The [official JavaScript language specification](https://en.wikipedia.org/wiki/ECMAScript).
+[正式なJavaScript言語仕様] (https://en.wikipedia.org/wiki/ECMAScript).
 
-Not all browsers support the latest ECMAScript standard, but you can use a [transpiler](guide/glossary#transpile) (like [TypeScript](guide/glossary#typescript)) to write code using the latest features, which will then be transpiled to code that runs on versions that are supported by browsers.
+すべてのブラウザが最新のECMAScript標準をサポートしているわけではありませんが、[トランスパイラ](guide/glossary#transpile)(例えば[TypeScript型スクリプト](guide/glossary#typescript))を使用すると、最新の機能を使用してコードを記述でき、その機能はブラウザがサポートするバージョンで実行されるコードに変換されます。
 
-To learn more, see [Browser Support](guide/browser-support).
-
+詳細については、[ブラウザのサポート](ガイド/ブラウザサポート)を参照してください。
 
 {@a element}
 
 ## element
+_要素_
 
-Angular defines an `ElementRef` class to wrap render-specific native UI elements.
-In most cases, this allows you to use Angular templates and  data binding to access DOM elements
-without reference to the native element.
+Angularは、レンダリング固有のネイティブUI要素をラップする `ElementRef` クラスを定義します。
+ほとんどの場合、Angularテンプレートとデータバインディングを使って、ネイティブ要素を参照せずにDOM要素にアクセスすることができます。
 
-The documentation generally refers to *elements* (`ElementRef` instances), as distinct from  *DOM elements*
-(which can be accessed directly if necessary).
+このドキュメンテーションは、一般的に要素（`ElementRef`インスタンス）またはDOM要素（必要に応じて直接アクセスできる）のいずれかを参照します。
 
-Compare to [custom element](guide/glossary#custom-element).
+[カスタム要素](guide/glossary#custom-element)とも比較してください。
 
 {@a entry-point}
 
 ## entry point
+_エントリポイント_
 
-A JavaScript symbol that makes parts of an [npm package](guide/npm-packages) available for import by other code.
-The Angular [scoped packages](guide/glossary#scoped-package) each have an entry point named `index`.
+[npmパッケージ](guide/npm-packages)の一部を他のコードで読み込むことができるようにするJavaScriptシンボルです。
+Angularの[スコープ付きパッケージ](guide/glossary#scoped-package)にはそれぞれ`index`という名前のエントリポイントがあります。
 
-Within Angular, use [NgModules](guide/glossary#ngmodule) to make public parts available for import by other NgModules.
-
+Angularでは、[NgModule](guide/glossary#ngmodule)を使用して同じ結果を得ます。
 
 {@a F}
 

@@ -640,7 +640,7 @@ HTML 属性は事実上消えます。
 <code-example path="template-syntax/src/app/app.component.html" region="property-binding-4" header="src/app/app.component.html" linenums="false">
 </code-example>
 
-### 単方向 *in*
+### 単方向の *入口*
 
 コンポーネントのデータプロパティからターゲット要素のプロパティに向かって単方向に値が流れるため、
 プロパティバインディングは *単方向データバインディング* と呼ばれることが多いです。
@@ -782,7 +782,7 @@ _補間_ は、多くの場合、_プロパティバインディング_ に代�
 幸いなことに、Angular のデータバインディングは危険な HTML に対して警戒しています。
 表示する前に値を [*サニタイズ*](guide/security#sanitization-and-security-contexts) します。
 補間でもプロパティバインディングでも、
-script タグ付きの HTML がブラウザに漏れることは許ない **でしょう**。
+script タグ付きの HTML がブラウザに漏れることは許さない **でしょう**。
 
 <code-example path="template-syntax/src/app/app.component.html" region="property-binding-vs-interpolation-sanitization" header="src/app/app.component.html" linenums="false">
 </code-example>
@@ -873,7 +873,7 @@ Angular が属性バインディングを提供するのはなぜでしょうか
 ### クラスバインディング {@a class-binding}
 
 **クラスバインディング** を使用して、
-要素の `クラス` 属性に CSS のクラス名を追加、削除できます。
+要素の `class` 属性に CSS のクラス名を追加、削除できます。
 
 クラスバインディングの構文はプロパティバインディングに似ています。
 角括弧間の要素のプロパティの代わりに、接頭辞 `class`
@@ -986,8 +986,8 @@ Angular のイベントバインディングの構文は、
 イベントバインディング内で、Angular はターゲットイベントのイベントハンドラーを設定します。
 
 イベントが発生すると、ハンドラーはテンプレート文を実行します。
-テンプレート文は通常、受信者が関与します。
-受信者は、HTML のコントロールからモデルに値を格納するなど、
+テンプレート文は通常、レシーバーが関与します。
+レシーバーは、HTML のコントロールからモデルに値を格納するなど、
 イベントに応じてアクションを実行します。
 
 バインディングはイベントに関する情報を伝えます。この情報には、イベントのオブジェクト、文字列、または数値などのデータ値を `$event` という名前で含めることができます。
@@ -1324,7 +1324,7 @@ Angular は、`[(ngModel)]` 構文を使用して、コンポーネントのデ�
 `[(ngModel)]` 構文はデータが連結されたプロパティのみを _設定_ できます。
 もっと何か、あるいは違うことをする必要があるなら、展開された形式で書くことができます。
 
-次の人ため的な例は、入力値を大文字にします:
+次のわざとらしい例は、入力値を大文字にします:
 
 <code-example path="template-syntax/src/app/app.component.html" region="NgModel-4" header="src/app/app.component.html" linenums="false">
 </code-example>

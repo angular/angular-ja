@@ -52,7 +52,7 @@ header="src/app/mock-heroes.ts">
 </code-example>
 
 [`*ngFor`](guide/template-syntax#ngFor) はAngularの _繰り返し_ ディレクティブです。
-これは、リスト内の各要素のために、ホスト要素を繰り返します。
+これは、リスト内の各要素に対して、ホスト要素を繰り返します。
 
 この例では
 

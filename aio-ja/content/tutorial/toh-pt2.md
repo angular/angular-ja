@@ -39,7 +39,7 @@ header="src/app/mock-heroes.ts">
 * `<h2>` を先頭に追加してください
 * その下にHTMLの順不同リスト (`<ul>`) を追加してください
 * `<li>` を `hero` プロパティを表示する `<ul>` の内側に挿入してください
-* スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは簡潔に記述してください）
+* スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは間もなく追加します）
 
 このようになります：
 
@@ -52,7 +52,7 @@ header="src/app/mock-heroes.ts">
 </code-example>
 
 [`*ngFor`](guide/template-syntax#ngFor) はAngularの _繰り返し_ ディレクティブです。
-これは、リスト内の各要素のホスト要素を繰り返します。
+これは、リスト内の各要素に対して、ホスト要素を繰り返します。
 
 この例では
 
@@ -77,13 +77,13 @@ header="src/app/mock-heroes.ts">
 [最初のチュートリアル](tutorial/toh-pt0#app-wide-styles) では、アプリケーション全体の基本的なスタイルを `styles.css` に設定しました。
 このスタイルシートにはヒーローのリストのためのスタイルは含めていませんでした。
 
-`styles.css` にさらにスタイルを追加し、コンポーネントを追加するようにスタイルシートを増やし続けることができます。
+`styles.css` にさらにスタイルを追加し、コンポーネントを追加するときにそのスタイルシートを拡大し続けることができます
 
 あなたは特定のコンポーネントのためにプライベートなスタイルを定義し、コンポーネントが必要とするすべて &mdash; コードや、HTML、CSS&mdash; を1箇所にまとめて管理することを好むかもしれません。
 
 このアプローチは他の場所でコンポーネントを再利用することを容易にし、グローバルに適用されたスタイルが異なる場合であってもコンポーネントが意図した外観を提供します。
 
-プライベートなスタイルは `@Component.styles` 内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 配列の中で識別されるスタイルシートファイルとして定義します。
+プライベートなスタイルは `@Component.styles` 配列内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 配列の中で識別されるスタイルシートファイルとして定義します。
 
 CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
 `@Component.styleUrls` はこのように指し示されます。
@@ -125,8 +125,8 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 
 ### クリックイベントのハンドラーを追加する
 
-コンポーネントである `hero` プロパティを `selectedHero` にリネームしますが、まだ割り当てません。
-これはアプリケーション起動時の _選択されたヒーロー_ ではありません。
+コンポーネントの `hero` プロパティを `selectedHero` にリネームしますが、まだ割り当てません。
+アプリケーション起動時に _選択されたヒーロー_ はありません。
 
 次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
@@ -183,7 +183,7 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 ### なぜこれが動くのか
 
-`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。これらは心配する `selectedHero` へのバインディングは存在しません。
+`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。心配する `selectedHero` へのバインディングは存在しません。
 
 ユーザーがヒーローを選択すると `selectedHero` は値を持ち `ngIf` はヒーローの詳細をDOMの中に挿入します。
 
@@ -203,14 +203,14 @@ _選択されたヒーロー_ の着色は [あなたが先ほど追加したス
 あなたはただ、ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するだけです。
 
 Angularの [クラスバインディング](guide/template-syntax#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
-ただ `[class.some-css-class]="some-condition"` をあなたが装飾させたい要素に追加するだけです。
+装飾したい要素に `[class.some-css-class]="some-condition"` を追加するだけです。
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" header="heroes.component.html (toggle the 'selected' CSS class)" linenums="false">
 </code-example>
 
-現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはクラスを削除します。
+現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはそのクラスを削除します。
 
 完成した `<li>` はこのようになります：
 
@@ -242,5 +242,5 @@ Angularの [クラスバインディング](guide/template-syntax#class-binding)
 * 「Tour of Heroes」アプリはMaster/Detail画面にヒーローのリストを表示します
 * ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
 * リストを表示するために `*ngFor` を使いました
-* HTMLのブロックに条件を付けて表示・非表示を切り替えるために `*ngIf` を使いました
-* CSSスタイルのclassを `class` バインディングで切り替えることができます
+* HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました
+* CSSスタイルのclassを `クラス` バインディングで切り替えることができます

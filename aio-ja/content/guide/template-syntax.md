@@ -1513,7 +1513,7 @@ _テンプレート入力変数_ については
 
 </div>
 
-{@a trackBy} {@a ngfor-with-trackby}
+{@a ngfor-with-trackby}
 
 #### *ngFor で _trackBy_ を使用する
 

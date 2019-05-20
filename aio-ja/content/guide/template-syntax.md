@@ -1352,9 +1352,9 @@ DOM の _構造_ を構築、または再構築します。
 * [_ディレクティブ名の接頭辞にアスタリスク_ (\*) をつける](guide/structural-directives#asterisk "The * in *ngIf")
 理由。
 * ディレクティブに適したホスト要素がないときに要素をグループ化するために
-[`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>") を使う。
+[`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>") を使うこと。
 * あなた自身の構造ディレクティブを書く方法。
-* 1つの要素には [1つの構造ディレクティブ](guide/structural-directives#one-per-element "one per host element") のみ適用できる。
+* 1つの要素には [1つの構造ディレクティブ](guide/structural-directives#one-per-element "one per host element") のみ適用できること。
 
 _この_ セクションでは、一般的な構造ディレクティブについて紹介します。
 
@@ -1385,7 +1385,7 @@ DOM にその要素を追加、または削除できます。
 式が falsy な場合、`NgIf` は DOM から `HeroDetailComponent`
 を削除し、そのコンポーネントとそのすべてのサブコンポーネントを破棄します。
 
-#### 表示/非表示とは同じではありません
+#### 表示/非表示とは別物です
 
 [クラス](guide/template-syntax#class-binding) または [スタイル](guide/template-syntax#style-binding)
 バインディングを使用して要素の可視性を制御できます:
@@ -1527,7 +1527,7 @@ _テンプレート入力変数_ については
 しかし Angular は、新しいオブジェクト参照の新しいリストしか見ていません。
 古い DOM 要素を破棄してすべての新しい DOM 要素を挿入する以外に選択肢はありません。
 
-Angular は `trackBy` でこの撹拌を避けることができます。
+Angular は `trackBy` でこの激しい動きを避けることができます。
 `NgForOf` が追跡 _すべき_ 値を返すメソッドをコンポーネントに追加します。
 この場合、その値はヒーローの `id` です。
 
@@ -1576,7 +1576,7 @@ Angular は *選択された* 要素だけを DOM に入れます。
 
 **`[ngSwitch]` にバインドしてください**。
 `NgSwitch` は *構造* ディレクティブではなく *属性* ディレクティブであるため、`*ngSwitch` を設定しようとするとエラーが発生します。
-それは対のディレクティブの動作を変更します。
+それは対となるディレクティブの動作を変更します。
 DOM には直接触れません。
 
 **`*ngSwitchCase` と `*ngSwitchDefault` にバインドしてください**。
@@ -1795,7 +1795,7 @@ _入力_ と _出力_ という用語は、ターゲットディレクティブ�
 データがテンプレートバインディング式からそのプロパティに *流れ込む* ためです。
 
 `HeroDetailComponent.deleteRequest` は、`HeroDetailComponent` から見た **出力** プロパティです。
-イベントがそのプロパティからテンプレートバインディング文のハンドラーに向かって *ストリームされる* ためです。
+イベントがそのプロパティからテンプレートバインディング文のハンドラーに向かって *流れ出る* ためです。
 
 <h3 id='aliasing-io'>
   入力/出力プロパティのエイリアシング

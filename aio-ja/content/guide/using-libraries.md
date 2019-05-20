@@ -1,38 +1,38 @@
-# Using Published Libraries
+# 公開ライブラリの使用
 
-When building Angular applications you can take advantage of sophisticated first-party libraries, such as [Angular Material](https://material.angular.io/), as well as rich ecosystem of third-party libraries.
-See the [Angular Resources](https://angular.io/resources) page for links to the most popular ones.
+Angular アプリケーションを構築する際には、高度な自社製ライブラリや、[Angular Material](https://material.angular.io/) などの他社製ライブラリの豊富なエコシステムを活用できます。
+もっとも人気のあるものへのリンクについては、[Angular Resources](https://angular.io/resources) のページを参照してください。
 
-## Installing libraries
+## ライブラリのインストール
 
-Libraries are published as [npm packages](guide/npm-packages), usually together with schematics that integrate them with the Angular CLI.
-To integrate reusable library code into an application, you need to install the package and import the provided functionality where you will use it. For most published Angular libraries, you can use the Angular CLI `ng add <lib_name>` command.
+ライブラリは、通常それらを Angular CLI と統合するスキーマとともに、[npm パッケージ](guide/npm-packages)として公開されます。
+再利用可能なライブラリコードをアプリケーションに統合するには、パッケージをインストールし、提供されている機能を使用する場所にインポートする必要があります。公開されているほとんどのAngularライブラリでは、Angular CLI の `ng add <lib_name>` コマンドを使用できます。
 
-The `ng add` command uses the npm package manager or [yarn](https://yarnpkg.com/) to install the library package, and invokes schematics that are included in the package to other scaffolding within the project code, such as adding import statements, fonts, themes, and so on.
+`ng add` コマンドは、npm パッケージマネージャまたは [yarn](https://yarnpkg.com/) を使用してライブラリパッケージをインストールし、パッケージに含まれている schematics を呼び出してプロジェクトコードの中に import ステートメント、フォント、テーマなどの追加をして雛形を作成します。
 
-A published library typically provides a README or other documentation on how to add that lib to your app.
-For an example, see [Angular Material](https://material.angular.io/) docs.
+公開ライブラリは通常、そのライブラリをアプリに追加する方法についての README またはその他のドキュメントを提供します。
+例については、[Angular Material](https://material.angular.io/) のドキュメントを参照してください。
 
-### Library typings
+### ライブラリの型定義
 
-Library packages often include typings in `.d.ts` files; see examples in `node_modules/@angular/material`. If your library's package does not include typings and your IDE complains, you may need to install the library's associated `@types/<lib_name>` package.
+ライブラリパッケージは多くの場合、`.d.ts` ファイルに型定義を含みます。`node_modules/@angular/material` の例を参照してください。ライブラリのパッケージに型定義が含まれておらず、IDE が指摘をだす場合は、ライブラリに関連付けられている `@types/<lib_name>` パッケージをインストールする必要があります。
 
-For example, suppose you have a library named `d3`:
+たとえば、`d3` という名前のライブラリがあるとします。
 
 <code-example format="." language="bash">
 npm install d3 --save
 npm install @types/d3 --save-dev
 </code-example>
 
-Types defined in a `@types/` package for a library installed into the workspace are automatically added to the TypeScript configuration for the project that uses that library.
-TypeScript looks for types in the `node_modules/@types` folder by default, so you don't have to add each type package individually.
+ワークスペースにインストールされたライブラリの `@types/` パッケージで定義された型は、そのライブラリを使用するプロジェクトの TypeScript 構成に自動的に追加されます。
+TypeScript はデフォルトで `node_modules/@types` フォルダで型を探すので、各型パッケージを個別に追加する必要はありません。
 
-If a library doesn't have typings available at `@types/`, you can still use it by manually adding typings for it.
-To do this:
+ライブラリの `@types/` で利用可能な型定義がない場合でも、手動で型定義を追加して使用できます。
+このようにします：
 
-1. Create a `typings.d.ts` file in your `src/` folder. This file is automatically included as global type definition.
+1. `src/` フォルダーに `typings.d.ts` ファイルを作成してください。このファイルは自動的にグローバル型定義として含まれます。
 
-2. Add the following code in `src/typings.d.ts`.
+2. 次のコードを `src/typings.d.ts` に追加してください。
 
 ```
 declare module 'host' {
@@ -45,7 +45,7 @@ declare module 'host' {
 }
 ```
 
-3. In the component or file that uses the library, add the following code.
+3. ライブラリを使用するコンポーネントまたはファイルに、次のコードを追加します。
 
 ```
 import * as host from 'host';
@@ -53,24 +53,24 @@ const parsedUrl = host.parse('https://angular.io');
 console.log(parsedUrl.hostname);
 ```
 
-You can define more typings as needed.
+必要に応じてもっと型定義を定義できます。
 
-## Updating libraries
+## ライブラリを更新する
 
-Libraries can be updated by their publishers, and also have their own dependencies which need to be kept current.
-To check for updates to your installed libraries, use the [`ng update` command](cli/update).
+ライブラリは、公開者が更新することができ、そしてまた最新に保つ必要がある自身の依存関係を持っています。
+インストールされているライブラリのアップデートを確認するには、[`ng update` コマンド](cli/update)を使用します。
 
-Use `ng update <lib_name>` to update individual library versions. The Angular CLI checks the latest published release of the library, and if the latest version is newer than your installed version, downloads it and updates your `package.json` to match the latest version.
+個々のライブラリのバージョンを更新するには、`ng update <lib_name>` を使用します。Angular CLI はライブラリの最新リリースをチェックし、最新バージョンがインストール済みバージョンより新しい場合はそれをダウンロードし、最新バージョンに一致するように `package.json` を更新します。
 
-When you update Angular to a new version, you need to make sure that any libraries you are using are current. If libraries have interdependencies, you might have to update them in a particular order.
-See the [Angular Update Guide](https://update.angular.io/) for help.
+Angular を新しいバージョンにアップデートするときは、使用しているライブラリが最新のものであることを確認する必要があります。ライブラリに相互依存関係がある場合は、それらを特定の順序で更新する必要があります。
+[Angular 更新ガイド](https://update.angular.io/) を参照してください。
 
-## Adding a library to the runtime global scope
+## 実行時グローバルスコープへのライブラリの追加
 
-Legacy JavaScript libraries that are not imported into an app can be added to the runtime global scope and loaded as if they were in a script tag.
-Configure the CLI to do this at build time using the "scripts" and "styles" options of the build target in the [CLI configuration file](guide/workspace-config), `angular.json`.
+アプリにインポートされていない従来の JavaScript ライブラリは、ランタイムグローバルスコープに追加して、あたかも script タグの中にあるかのように読み込むことができます。
+[CLI 構成ファイル](guide/workspace-config)の `angular.json` 内のビルドターゲットの "scripts" および "styles" オプションを使用して、ビルド時にこれを実行するように CLI を構成します。
 
-For example, to use the [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) library, first install the library and its dependencies using the npm package manager:
+たとえば、 [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) ライブラリを使用するには、まず npm パッケージマネージャを使用してライブラリとその依存関係をインストールします。
 
 <code-example format="." language="bash">
 npm install jquery --save
@@ -78,7 +78,7 @@ npm install popper.js --save
 npm install bootstrap --save
 </code-example>
 
-In the `angular.json` configuration file, add the associated script files to the "scripts" array:
+`angular.json` 構成ファイルで、関連するスクリプトファイルを "scripts" 配列に追加します。
 
 ```
 "scripts": [
@@ -88,7 +88,7 @@ In the `angular.json` configuration file, add the associated script files to the
 ],
 ```
 
-Add the Bootstrap CSS file to the "styles" array:
+Bootstrap CSS ファイルを "styles" 配列に追加します。
 
 ```
 "styles": [
@@ -97,31 +97,31 @@ Add the Bootstrap CSS file to the "styles" array:
 ],
 ```
 
-Run or restart `ng serve` to see Bootstrap 4 working in your app.
+`ng serve` を実行または再起動して、Bootstrap 4 がアプリケーションで機能していることを確認します。
 
-### Using runtime-global libraries inside your app
+### アプリ内で実行時グローバルライブラリを使用する
 
-Once you import a library using the "scripts" array, you should **not** import it using an import statement in your TypeScript code (such as `import * as $ from 'jquery';`).
-If you do, you'll end up with two different copies of the library: one imported as a global library, and one imported as a module.
-This is especially bad for libraries with plugins, like JQuery, because each copy will have different plugins.
+"scripts" 配列を使用してライブラリをインポートした後は、TypeScript コード内の import 文 (`import * as $ from 'jquery';` など) を使用してインポート**しないでください**。
+その場合、ライブラリの2つの異なるコピーが作成されます。1つはグローバルライブラリとしてインポートされ、もう1つはモジュールとしてインポートされます。
+これは JQuery のようなプラグインをもつライブラリにとっては特に悪いです。なぜなら、個々のコピーは異なるプラグインをもつからです。
 
-Instead, download typings for your library (`npm install @types/jquery`) and follow the library installation steps. This gives you access to the global variables exposed by that library.
+代わりに、ライブラリの型定義をダウンロードし (`npm install @types/jquery`)、ライブラリのインストール手順にしたがってください。これにより、そのライブラリによって公開されているグローバル変数にアクセスできます。
 
-### Defining typings for runtime-global libraries
+### 実行時グローバルライブラリの型定義の定義
 
-If the global library you need to use does not have global typings, you can declare them manually as `any` in `src/typings.d.ts`. For example:
+使う必要があるグローバルライブラリがグローバル型定義を持っていないなら、手動で `src/typings.d.ts`の中で `any` として宣言することができます。たとえば：
 
 ```
 declare var libraryName: any;
 ```
 
-Some scripts extend other libraries; for instance with JQuery plugins:
+他のライブラリを拡張するスクリプトもあります。たとえば JQuery プラグインを使うと：
 
 ```
 $('.test').myPlugin();
 ```
 
-In this case, the installed `@types/jquery` doesn't include `myPlugin`, so you need to add an interface  in `src/typings.d.ts`. For example:
+この場合、インストールされている `@types/jquery` には `myPlugin` が含まれていないため、`src/typings.d.ts` にインターフェースを追加する必要があります。たとえば：
 
 ```
 interface JQuery {
@@ -129,7 +129,7 @@ interface JQuery {
 }
 ```
 
-If don't add the interface for the script-defined extension, your IDE shows an error:
+スクリプト定義の拡張機能用のインターフェースを追加しないと、IDE にエラーが表示されます。
 
 ```
 [TS][Error] Property 'myPlugin' does not exist on type 'JQuery'

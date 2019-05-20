@@ -574,8 +574,9 @@
             },
             {
               "url": "guide/using-libraries",
-              "title": "Using Published Libraries",
-              "tooltip": "Integrate published libraries into an app."
+              "title": "公開ライブラリの使用",
+              "tooltip": "公開ライブラリをアプリに統合します。",
+              "translated": true
             },
             {
               "url": "guide/creating-libraries",

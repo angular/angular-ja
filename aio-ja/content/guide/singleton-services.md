@@ -47,7 +47,7 @@ throughout the app. Though you may see it coded this way, using the `providedIn`
 
 {@a forRoot}
 
-## `forRoot()` パターン {@a the-fortoot-pattern}
+## `forRoot()` パターン {@a the-forroot-pattern}
 
 Generally, you'll only need `providedIn` for providing services and `forRoot()`/`forChild()` for routing. However, understanding how `forRoot()` works to make sure a service is a singleton will inform your development at a deeper level.
 

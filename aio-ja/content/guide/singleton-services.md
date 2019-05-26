@@ -127,7 +127,7 @@ Angularは`@NgModule.providers`
 
 ここでの`forRoot()`は`UserServiceConfig`オブジェクトを受け取ります:
 
-<code-example path="ngmodules/src/app/core/core.module.ts" region="for-root" header="src/app/core/core.module.ts (forRoot)" linenums="false">
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts (forRoot)" linenums="false">
 
 </code-example>
 

@@ -180,7 +180,7 @@ Now, if you view the app in the browser, the three buttons take you to each modu
 
 ## Confirm it’s working
 
-You can check to see that a module is indeed being lazy loaded with the Chrome developer tools. In Chrome, open the dev tools by pressing `Cmd+Option+i` on a Mac or `Ctrl+Alt+i` on a PC and go to the Network Tab.
+You can check to see that a module is indeed being lazy loaded with the Chrome developer tools. In Chrome, open the dev tools by pressing `Cmd+Option+i` on a Mac or `Ctrl+Shift+j` on a PC and go to the Network Tab.
 
 <figure>
  <img src="generated/images/guide/lazy-loading-ngmodules/network-tab.png" width="600" alt="lazy loaded modules diagram">
@@ -217,6 +217,7 @@ knows that the route list is only responsible for providing additional routes an
 
 `forRoot()` contains injector configuration which is global; such as configuring the Router. `forChild()` has no injector configuration, only directives such as `RouterOutlet` and `RouterLink`.
 
+For more information, see the [`forRoot()` deep dive](guide/singleton-services#forRoot) section of the [Singleton Services](guide/singleton-services) guide.
 
 <hr>
 

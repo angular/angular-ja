@@ -44,7 +44,7 @@ CLIコマンド [`ng generate directive`](cli/generate) をターミナル画面
 ng generate directive highlight
 </code-example>
 
-CLIは、`src/app/highlight.directive.ts`と対応するテストファイル`.../spec.ts`を作成し、ルートの`AppModule`にディレクティブのクラスを _宣言_ します。
+CLIは、`src/app/highlight.directive.ts`と対応するテストファイル `src/app/highlight.directive.spec.ts` を作成し、ルートの`AppModule`にディレクティブのクラスを _宣言_ します。
 
 <div class="alert is-helpful">
 

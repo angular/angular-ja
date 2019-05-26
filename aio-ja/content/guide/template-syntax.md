@@ -1027,7 +1027,7 @@ Angular のイベントバインディングの構文は、
 `ItemDetailComponent` からの抜粋は次のようになります:
 
 
-<code-example path="event-binding/src/app/item-detail/item-detail.component.html" linenums="false" header="src/app/item-detail/item-detail.component.ts (template)" region="line-through">
+<code-example path="event-binding/src/app/item-detail/item-detail.component.html" linenums="false" header="src/app/item-detail/item-detail.component.html (template)" region="line-through">
 </code-example>
 
 <code-example path="event-binding/src/app/item-detail/item-detail.component.ts" linenums="false" header="src/app/item-detail/item-detail.component.ts (deleteRequest)" region="deleteRequest">

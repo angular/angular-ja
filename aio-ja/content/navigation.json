@@ -517,6 +517,11 @@
               "translated": true
             },
             {
+              "url": "guide/app-shell",
+              "title": "App Shell",
+              "tooltip": "Enabling the App Shell in a CLI project."
+            },
+            {
               "url": "guide/service-worker-communications",
               "title": "Service Workerとの通信",
               "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
@@ -583,6 +588,27 @@
               "url": "guide/creating-libraries",
               "title": "Creating Libraries",
               "tooltip": "Extend Angular by creating, publishing, and using your own libraries."
+            }
+          ]
+        },
+        {
+          "title": "Schematics",
+          "tooltip": "Understanding schematics.",
+          "children": [
+            {
+              "url": "guide/schematics",
+              "title": "Schematics Overview",
+              "tooltip": "Understand how schematics are used in Angular."
+            },
+            {
+              "url": "guide/schematics-authoring",
+              "title": "Authoring Schematics",
+              "tooltip": "Understand the structure of a schematic."
+            },
+            {
+              "url": "guide/schematics-for-libraries",
+              "title": "Schematics for Libraries",
+              "tooltip": "Use schematics to integrate your library with the Angular CLI."
             }
           ]
         }
@@ -728,12 +754,6 @@
       "title": "API",
       "tooltip": "Angularパッケージ、クラス、インターフェース、およびその他のタイプの詳細。",
       "url": "api"
-    },
-    {
-      "url": "guide/change-log",
-      "title": "Change Log",
-      "tooltip": "Angular Documentation Change Log",
-      "hidden": true
     }
   ],
 

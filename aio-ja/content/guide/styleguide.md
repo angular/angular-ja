@@ -4,84 +4,52 @@ Angular構文、表記法、およびアプリケーション構造に関する�
 心配いりません！
 このスタイルガイドで、好ましい規則を提示し、その重要な理由を説明します。
 
-
-
 {@a toc}
 
-{@a style-vocabulary}
-## スタイルのボキャブラリー
+## スタイルのボキャブラリー {@a style-vocabulary}
 
 個々のガイドラインはよいプラクティスか悪いプラクティスのどちらかを示しており、それらのすべてが一貫した表現を持っています。
 
 個々のガイドラインの表現は、その推奨がどれほど強いかを示しています。
 
-
 <div class="s-rule do">
-
-
 
 **Do** は常に従うべきものです。
 _常に_ は少し言葉が強いかもしれません。
 常に従うべきガイドラインが出てくることは非常に稀です。
 しかし、 *Do* ガイドラインを破るには異例なケースが必要となります。
 
-
 </div>
-
-
 
 <div class="s-rule consider">
 
-
-
 **Consider** は一般的に守るべきものです。
-このガイドラインの意図を理解した上で、逸脱する理由があるなら守る必要はありません。
-一貫することを心がけてください。
-
+このガイドラインの意図を理解した上で、逸脱する理由があるなら守る必要はありません。一貫することを心がけてください。
 
 </div>
-
-
 
 <div class="s-rule avoid">
 
-
-
-**Avoid** は決してしてはいけないものです。
-赤色のヘッダが付いているコードブロックは *Avoid* コード例になります。
-
+**Avoid** は決してしてはいけないものです。赤色のヘッダが付いているコードブロックは *Avoid* コード例になります。
 
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** は推奨事項である理由が書かれます。
-
 
 </div>
 
-
-
-
-{@a file-structure-conventions}
-## ファイル構造の規約
+## ファイル構造の規約 {@a file-structure-conventions}
 
 いくつかのコード例は、同様の名前を持った関連したファイルが1つ以上あります。
 たとえば、`hero.component.ts` と `hero.component.html` です。
 
-このガイドラインでは、これらのファイルを表すために `hero.component.ts|html|css|spec` であるとします。
-省略することでこのガイドラインが簡潔になりファイル構造が読み易くなるためです。
-
-
-
-{@a single-responsibility}
+このガイドラインでは、これらのファイルを表すために `hero.component.ts|html|css|spec` であるとします。省略することでこのガイドラインが簡潔になりファイル構造が読み易くなるためです。
 
 
 {@a single-responsibility}
+
 ## 単一責任
 
 すべてのコンポーネント、サービス、およびその他のシンボルに
@@ -863,10 +831,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 </table>
 
-
-
 <a href="#toc">トップに戻る</a>
-
 
 {@a 02-05}
 
@@ -877,64 +842,38 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule do">
 
-
-
 **Do** アプリのブートストラップとプラットフォームのロジックを`main.ts`というファイルに配置します。
 
-
 </div>
-
-
 
 <div class="s-rule do">
 
-
-
 **Do** ブートストラップロジックにエラー処理を含めます。
 
-
 </div>
-
-
 
 <div class="s-rule avoid">
 
-
-
 **Avoid** アプリのロジックを`main.ts`に入れることは避けましょう。代わりに、コンポーネントまたはサービスに配置することを検討してください。
 
-
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** アプリの起動ロジックに関する一貫した規約に従います。
 
-
 </div>
-
-
 
 <div class="s-why-last">
 
-
-
 **Why?** 他のテクノロジープラットフォームからの慣例的な規約に従います。
 
-
 </div>
-
 
 
 <code-example path="styleguide/src/02-05/main.ts" header="main.ts">
 
 </code-example>
-
-
 
 <a href="#toc">トップに戻る</a>
 
@@ -944,36 +883,21 @@ _常に_ は少し言葉が強いかもしれません。
 
 #### Style 05-02
 
-
 <div class="s-rule do">
-
-
 
 **Do** コンポーネントの要素セレクターに名前をつけるには、_dashed-case_または_kebab-case_を使います。
 
-
 </div>
-
-
 
 <div class="s-why-last">
 
-
-
 **Why?** [Custom Elements](https://www.w3.org/TR/custom-elements/)の仕様と要素名を一致させます。
 
-
 </div>
-
-
 
 <code-example path="styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/shared/hero-button/hero-button.component.ts">
 
 </code-example>
-
-
-
-
 
 <code-tabs>
 
@@ -987,8 +911,6 @@ _常に_ は少し言葉が強いかもしれません。
 
 </code-tabs>
 
-
-
 <a href="#toc">トップに戻る</a>
 
 {@a 02-07}
@@ -1000,101 +922,56 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule do">
 
-
-
 **Do** ハイフンで区切られた小文字の要素セレクター値を使用します（たとえば`admin-users`）。
-
-
 
 </div>
 
-
-
 <div class="s-rule do">
-
-
 
 **Do** コンポーネントセレクターにカスタム接頭辞を使用します。
 たとえば、`toh`という接頭辞は**T**our **o**f **H**eroesを表していて、`admin`という接頭辞は管理者用の機能領域を表します。
 
-
 </div>
-
-
 
 <div class="s-rule do">
 
-
-
 **Do** 機能領域またはアプリ自体を識別する接頭辞を使用します。
-
 
 </div>
 
-
-
 <div class="s-why">
-
-
 
 **Why?** 要素名が他のアプリケーションのコンポーネントおよびネイティブのHTML要素と競合しないようにします。
 
-
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** コンポーネントを宣伝したり他のアプリと共有したりするのが簡単になります。
 
-
 </div>
-
-
 
 <div class="s-why-last">
 
-
-
 **Why?** DOMの中でコンポーネントを簡単に識別できます。
 
-
 </div>
-
-
 
 <code-example path="styleguide/src/02-07/app/heroes/hero.component.avoid.ts" region="example" header="app/heroes/hero.component.ts">
 
 </code-example>
 
-
-
-
-
 <code-example path="styleguide/src/02-07/app/users/users.component.avoid.ts" region="example" header="app/users/users.component.ts">
 
 </code-example>
-
-
-
-
 
 <code-example path="styleguide/src/02-07/app/heroes/hero.component.ts" region="example" header="app/heroes/hero.component.ts">
 
 </code-example>
 
-
-
-
-
 <code-example path="styleguide/src/02-07/app/users/users.component.ts" region="example" header="app/users/users.component.ts">
 
 </code-example>
-
-
 
 <a href="#toc">トップに戻る</a>
 
@@ -1104,37 +981,24 @@ _常に_ は少し言葉が強いかもしれません。
 
 #### Style 02-06
 
-
 <div class="s-rule do">
-
-
 
 **Do** ディレクティブのセレクター名にはlowerCamelCaseを使用してください。
 
-
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** ビューにバインドされているディレクティブに定義されたプロパティ名を、ビューの属性名と一致させるためです。
 
-
 </div>
-
-
 
 <div class="s-why-last">
 
-
-
 **Why?** AngularのHTMLパーサーは大文字・小文字を区別し、また、lowerCamelCaseを認識します。
 
-
 </div>
+
 
 <a href="#toc">トップに戻る</a>
 
@@ -1761,8 +1625,6 @@ _常に_ は少し言葉が強いかもしれません。
 
 コーディング、命名、およびスペースについて、一貫した規則のセットを持ちましょう。
 
-
-
 {@a 03-01}
 
 ### クラス
@@ -1771,51 +1633,30 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule do">
 
-
-
 **Do** クラス名にはUpperCamelCaseを使用します。
 
-
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** クラス名の慣例的な考え方に従います。
-
 
 </div>
 
-
-
 <div class="s-why-last">
-
-
 
 **Why?** クラスはインスタンス化可能、そしてインスタンスを構築するものです。
 慣例的に、UpperCamelCaseはインスタンス化可能なものを示します。
 
-
 </div>
-
-
 
 <code-example path="styleguide/src/03-01/app/core/exception.service.avoid.ts" region="example" header="app/shared/exception.service.ts">
 
 </code-example>
 
-
-
-
-
 <code-example path="styleguide/src/03-01/app/core/exception.service.ts" region="example" header="app/shared/exception.service.ts">
 
 </code-example>
-
-
 
 <a href="#toc">トップに戻る</a>
 
@@ -1828,97 +1669,57 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule do">
 
-
-
 **Do** アプリケーションの実行中に値が変更されないようにするには、変数を `const` で宣言します。
 
-
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** 値が不変であることを読み手に伝えます。
-
 
 </div>
 
-
-
 <div class="s-why-last">
-
-
 
 **Why?** TypeScriptは、即座の初期化を要求し、その後の再割り当てを防ぐことによって、
 その意図を強制するのに役立ちます。
 
-
 </div>
-
-
 
 <div class="s-rule consider">
 
-
-
 **Consider** `const` 変数名にはlowerCamelCaseを使用します。
-
 
 </div>
 
-
-
 <div class="s-why">
-
-
 
 **Why?** lowerCamelCaseの変数名（`heroRoutes`）は、
 伝統的なUPPER_SNAKE_CASEの変数名（`HERO_ROUTES`）よりも読みやすく理解しやすいです。
 
-
 </div>
 
-
-
 <div class="s-why-last">
-
-
 
 **Why?** UPPER_SNAKE_CASEにおける定数の命名の伝統は、
 `const`宣言をすぐに明らかにする現代のIDEより前の時代を反映しています。
 TypeScriptは不測の再代入を防いでくれます。
 
-
 </div>
-
-
 
 <div class="s-rule do">
 
-
-
 **Do** UPPER_SNAKE_CASEで書かれている既存の`const`変数を許容します。
-
 
 </div>
 
-
-
 <div class="s-why-last">
-
-
 
 **Why?** UPPER_SNAKE_CASEの伝統は、特にサードパーティーのモジュールで広く普及しています。
 既存のコードやドキュメンテーションを壊す危険性があるため、
 それらを変更する努力をする価値はほとんどありません。
 
-
 </div>
-
-
 
 <code-example path="styleguide/src/03-02/app/core/data.service.ts" header="app/shared/data.service.ts">
 
@@ -2786,98 +2587,60 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 <div class="s-rule do">
 
-
-
 **Do** それが表す機能領域ごとに名付けられたフォルダを作成します。
-
 
 </div>
 
-
-
 <div class="s-why">
-
-
 
 **Why?** 開発者は一目でコードを見つけ、各ファイルが何を表しているのか識別できます。
 構造は可能な限りフラットで、繰り返しや重複する名前はありません。
 
-
 </div>
 
-
-
 <div class="s-why">
-
-
 
 **Why?** LIFTのガイドラインはすべて網羅されています。
 
-
 </div>
 
-
-
 <div class="s-why">
-
-
 
 **Why?** 中身を整理してLIFTのガイドラインに沿った状態に保つことで、
 アプリが雑然とするのを防ぐのに役立ちます。
 
-
 </div>
 
-
-
 <div class="s-why">
-
-
 
 **Why?** たとえば10個以上、ファイルが多数ある場合は、
 一貫したフォルダ構造を使用するとそれらを見つけやすくなり、
 フラット構造の場合は難しくなります。
 
-
 </div>
-
-
 
 <div class="s-rule do">
 
-
-
 **Do** 各機能領域にNgModuleを作成します。
 
-
 </div>
-
-
 
 <div class="s-why">
 
-
-
 **Why?** NgModuleはルーティング可能な機能を遅延ロードすることを容易にします。
 
-
 </div>
-
-
 
 <div class="s-why-last">
 
-
-
 **Why?** NgModuleは機能の分離、テスト、そして再利用をより簡単にします。
-
 
 </div>
 
+<div>
 
+  詳細は、<a href="#file-tree"> _フォルダーとファイル構造_ の例</a> を参照してください。
 
-<div class='file-tree-reference'>
-  <a href="#file-tree">この _フォルダーとファイル構造_ の例を参照してください。</a>
 </div>
 
 <a href="#toc">Back to top
@@ -3316,329 +3079,28 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
+
 <a href="#toc">トップに戻る</a>
 
 {@a 04-11}
 
-### コア機能モジュール
+### 遅延ロードフォルダ
 
 #### Style 04-11
 
-
-<div class="s-rule consider">
-
-
-
-**Consider** 一度だけ使う補助的な多数のクラスをコアモジュール内に集めて、
-機能モジュールの見かけの構造をシンプルにします。
-
-
-</div>
-
-
-
-<div class="s-rule consider">
-
-
-
-**Consider** アプリケーション全体のコアモジュールを `CoreModule` と呼びます。
-`CoreModule`をルートの`AppModule`にインポートすると、その複雑さが軽減され、
-アプリケーション全体の調整者としての役割が強調されます。
-
-
-</div>
-
+個別のアプリケーション機能やワークフローを、アプリケーションの起動時ではなく、*遅延ロード*したり、*オンデマンドでロード*したりできます。
 
 
 <div class="s-rule do">
 
-
-
-**Do** `core` フォルダーに`CoreModule`という名前の機能モジュールを作成します（たとえば、`app/core/core.module.ts`は`CoreModule`を定義します）。
-
+**Do** 遅延ロードされる機能の内容を*遅延ロードフォルダ*に入れます。
+典型的な*遅延ロードフォルダ*は、*ルーティングコンポーネント*とその子コンポーネント、およびそれらに関連するものとモジュールを含みます。
 
 </div>
-
-
-
-<div class="s-rule do">
-
-
-
-**Do** そのインスタンスがアプリケーション全体で共有されるシングルトンサービス（たとえば`ExceptionService`や`LoggerService`）を`CoreModule`に配置します。
-
-
-</div>
-
-
-
-<div class="s-rule do">
-
-
-
-**Do** `CoreModule`内のアセットに必要なすべてのモジュールをインポートします（たとえば`CommonModule`や`FormsModule`）。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** `CoreModule`は1つ以上のシングルトンサービスを提供します。 Angularはプロバイダーをアプリのルートインジェクターに登録し、各サービスのシングルトンインスタンスを、それらが必要なコンポーネントが即座または遅延的にロードされているかにかかわらず利用できるようにします。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** `CoreModule`はシングルトンサービスを含みます。遅延ロードされたモジュールがこれらをインポートすると、意図されたアプリケーション全体のシングルトンではなく、新しいインスタンスを取得します。
-
-
-</div>
-
-
-
-<div class="s-rule do">
-
-
-
-**Do** アプリケーション全体の一度しか使わないコンポーネントを`CoreModule`に集めます。
-アプリの起動時に（`AppModule`で）一度インポートし、他の場所にはインポートしないでください（たとえば`NavComponent`や`SpinnerComponent`など）。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** 現実世界のアプリケーションは、`AppComponent`テンプレートにのみ表示されるいくつかの使い捨てコンポーネント（スピナー、メッセージトースト、モーダルダイアログなど）を持ちます。
-それらは他の場所にはインポートされないので、実質的には共有されません。
-それでも、それらはとても大きく、ルートフォルダに入れたままにすると汚くなります。
-
-
-</div>
-
-
-
-<div class="s-rule avoid">
-
-
-
-**Avoid** `AppModule`以外の場所で`CoreModule`をインポートすることは避けましょう。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** `CoreModule`を直接インポートする遅延ロードされた機能モジュールは、サービスのコピーを作成し、望ましくない結果を招く可能性があります。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** 即座にロードされた機能モジュールは、すでに`AppModule`のインジェクター、つまり`CoreModule`のサービスにアクセスできます。
-
-
-</div>
-
-
-
-<div class="s-rule do">
-
-
-
-**Do** `AppModule`がインポートする`CoreModule`からすべてのシンボルをエクスポートし、他の機能モジュールが使用できるようにします。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-**Why?** `CoreModule`は、よく使われるシングルトンサービスを他の多くのサービスで使用できるようにするために存在します。
-
-
-</div>
-
-
 
 <div class="s-why-last">
 
-
-
-**Why?** アプリ全体で1つのシングルトンインスタンスを使用する必要があります。
-各モジュールに独自のシングルトンサービスの個別のインスタンスを持たせたくはありません。
-それでも、`CoreModule`がサービスを提供していると、偶然に起こる危険性が実際にあります。
-
-
-
-</div>
-
-
-
-<div class='filetree'>
-
-  <div class='file'>
-    src
-  </div>
-
-  <div class='children'>
-
-    <div class='file'>
-      app
-    </div>
-
-    <div class='children'>
-
-      <div class='file'>
-        core
-      </div>
-
-      <div class='children'>
-
-        <div class='file'>
-          core.module.ts
-        </div>
-
-        <div class='file'>
-          logger.service.ts|spec.ts
-        </div>
-
-        <div class='file'>
-          nav
-        </div>
-
-        <div class='children'>
-
-          <div class='file'>
-            nav.component.ts|html|css|spec.ts
-          </div>
-
-        </div>
-
-        <div class='file'>
-          spinner
-        </div>
-
-        <div class='children'>
-
-          <div class='file'>
-            spinner.component.ts|html|css|spec.ts
-          </div>
-
-          <div class='file'>
-            spinner.service.ts|spec.ts
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class='file'>
-        app.component.ts|html|css|spec.ts
-      </div>
-
-      <div class='file'>
-        app.module.ts
-      </div>
-
-      <div class='file'>
-        app-routing.module.ts
-      </div>
-
-    </div>
-
-    <div class='file'>
-      main.ts
-    </div>
-
-    <div class='file'>
-      index.html
-    </div>
-
-  </div>
-
-  <div class='file'>
-    ...
-  </div>
-
-</div>
-
-
-
-
-
-<code-tabs>
-
-  <code-pane header="app/app.module.ts" path="styleguide/src/04-11/app/app.module.ts" region="example">
-
-  </code-pane>
-
-  <code-pane header="app/core/core.module.ts" path="styleguide/src/04-11/app/core/core.module.ts">
-
-  </code-pane>
-
-  <code-pane header="app/core/logger.service.ts" path="styleguide/src/04-11/app/core/logger.service.ts">
-
-  </code-pane>
-
-  <code-pane header="app/core/nav/nav.component.ts" path="styleguide/src/04-11/app/core/nav/nav.component.ts">
-
-  </code-pane>
-
-  <code-pane header="app/core/nav/nav.component.html" path="styleguide/src/04-11/app/core/nav/nav.component.html">
-
-  </code-pane>
-
-  <code-pane header="app/core/spinner/spinner.component.ts" path="styleguide/src/04-11/app/core/spinner/spinner.component.ts">
-
-  </code-pane>
-
-  <code-pane header="app/core/spinner/spinner.component.html" path="styleguide/src/04-11/app/core/spinner/spinner.component.html">
-
-  </code-pane>
-
-  <code-pane header="app/core/spinner/spinner.service.ts" path="styleguide/src/04-11/app/core/spinner/spinner.service.ts">
-
-  </code-pane>
-
-</code-tabs>
-
-
-
-
-
-<div class="alert is-helpful">
-
-
-
-多くの app/root のクラスが他のモジュールに移動したため、`AppModule`は少し小さくなります。 
-将来のコンポーネントとプロバイダーは他のモジュールに追加するので、`AppModule`には追加されず安定します。 
-`AppModule`は作業をおこなわず、インポートされたモジュールに委譲します。 
-`AppModule`はアプリ全体を調整するという本来のタスクに集中します。
-
+**Why?** フォルダを使用すると、機能の内容を簡単に識別して特定できます。
 
 </div>
 
@@ -3646,123 +3108,24 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 {@a 04-12}
 
-### コアモジュールの再インポートを防ぎましょう
-
-#### Style 04-12
-
-ルートの`AppModule`だけが`CoreModule`をインポートすべきです。
-
-
-<div class="s-rule do">
-
-
-
-**Do** `CoreModule`の再インポートを防止し、保護ロジックを追加して速やかに失敗します。
-
-
-</div>
-
-
-
-<div class="s-why">
-
-
-
-**Why?** `CoreModule`の再インポートを防ぎます。
-
-
-</div>
-
-
-
-<div class="s-why-last">
-
-
-
-**Why?** シングルトンになることを目的としたもののインスタンスを複数作成しないようにします。
-
-
-</div>
-
-
-
-<code-tabs>
-
-  <code-pane header="app/core/module-import-guard.ts" path="styleguide/src/04-12/app/core/module-import-guard.ts">
-
-  </code-pane>
-
-  <code-pane header="app/core/core.module.ts" path="styleguide/src/04-12/app/core/core.module.ts">
-
-  </code-pane>
-
-</code-tabs>
-
-
-
-<a href="#toc">トップに戻る</a>
-
-{@a 04-13}
-
-### 遅延ロードフォルダ
-
-#### Style 04-13
-
-個別のアプリケーション機能やワークフローを、アプリケーションの起動時ではなく、*遅延ロード*したり、*オンデマンドでロード*したりできます。
-
-
-<div class="s-rule do">
-
-
-
-**Do** 遅延ロードされる機能の内容を*遅延ロードフォルダ*に入れます。
-典型的な*遅延ロードフォルダ*は、*ルーティングコンポーネント*とその子コンポーネント、およびそれらに関連するものとモジュールを含みます。
-
-
-</div>
-
-
-
-<div class="s-why-last">
-
-
-
-**Why?** フォルダを使用すると、機能の内容を簡単に識別して特定できます。
-
-
-</div>
-
-<a href="#toc">トップに戻る</a>
-
-{@a 04-14}
-
 ### 遅延ロードフォルダを直接インポートしてはいけません
 
-#### Style 04-14
+#### Style 04-12
 
 
 <div class="s-rule avoid">
 
-
-
 **Avoid** 兄弟および親フォルダ内のモジュールが*遅延ロード機能*内のモジュールを直接インポートすることを避けましょう。
-
 
 </div>
 
-
-
 <div class="s-why-last">
 
-
-
 **Why?** モジュールを直接インポートして使用すると、そのモジュールがオンデマンドでロードされることが意図されていても即座にロードされます。
-
 
 </div>
 
 <a href="#toc">トップに戻る</a>
-
 
 ## コンポーネント
 
@@ -3772,16 +3135,11 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 #### Style 05-03
 
-
 <div class="s-rule do">
-
 
 **Consider** _属性_または_クラス_セレクターではなく、コンポーネントに_要素_セレクターを与えます。
 
-
 </div>
-
-
 
 <div class="s-why">
 
@@ -4958,8 +4316,6 @@ Angular用の便利なツールとヒント。
 
 
 <div class="s-rule consider">
-
-
 
 **Consider** スタイルガイドに従った[Visual Studio Code](https://code.visualstudio.com/)用の[スニペット](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)を使います。
 

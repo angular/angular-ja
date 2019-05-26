@@ -93,7 +93,7 @@ A library can include [schematics](guide/glossary#schematic) that allow it to in
 
 * Include an update schematic so that `ng update` can update your library’s dependencies and provide migrations for breaking changes in new releases.
 
-To learn more, see [Schematics — An Introduction](https://blog.angular.io/schematics-an-introduction-dc1dfbc2a2b2).
+To learn more, see [Schematics Overview](guide/schematics) and [Schematics for Libraries](guide/schematics-for-libraries).
 
 ## Publishing your library
 
@@ -119,7 +119,7 @@ For example, `main` should point at a JavaScript file, not a TypeScript file.
 ## Use TypeScript path mapping for peer dependencies
 
 Angular libraries should list all `@angular/*` dependencies as peer dependencies.
-This insures that when modules ask for Angular, they all get the exact same module.
+This ensures that when modules ask for Angular, they all get the exact same module.
 If a library lists `@angular/core` in `dependencies` instead of `peerDependencies`, it might get a different Angular module instead, which would cause your application to break.
 
 While developing a library, you must install all peer dependencies through `devDependencies` to ensure that the library compiles properly.
@@ -127,7 +127,7 @@ A linked library will then have its own set of Angular libraries that it uses fo
 However, this can cause problems while building or running your application.
 
 To get around this problem you can use TypeScript path mapping to tell TypeScript that it should load some modules from a specific location.
-List all the peer dependencies that your library uses in the TypeScript configuration file `./tsconfig.json`, and point them at the local copy in the app's `node_modules` folder.
+List all the peer dependencies that your library uses in the workspace TypeScript configuration file `./tsconfig.json`, and point them at the local copy in the app's `node_modules` folder.
 
 ```
 {
@@ -136,7 +136,7 @@ List all the peer dependencies that your library uses in the TypeScript configur
     // paths are relative to `baseUrl` path.
     "paths": {
       "@angular/*": [
-        "../node_modules/@angular/*"
+        "./node_modules/@angular/*"
       ]
     }
   }
@@ -158,7 +158,7 @@ To use your own library in an app:
 
 * In your apps, import from the library by name:
  ```
- import { my-export } from 'my-lib';
+ import { myExport } from 'my-lib';
  ```
 
 ### Building and rebuilding your library

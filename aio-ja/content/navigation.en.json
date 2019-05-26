@@ -453,6 +453,11 @@
               "tooltip": "Enabling the service worker in a CLI project and observing behavior in the browser."
             },
             {
+              "url": "guide/app-shell",
+              "title": "App Shell",
+              "tooltip": "Enabling the App Shell in a CLI project."
+            },
+            {
               "url": "guide/service-worker-communications",
               "title": "Service Worker Communication",
               "tooltip": "Services that enable you to interact with an Angular service worker."
@@ -513,6 +518,27 @@
               "url": "guide/creating-libraries",
               "title": "Creating Libraries",
               "tooltip": "Extend Angular by creating, publishing, and using your own libraries."
+            }
+          ]
+        },
+        {
+          "title": "Schematics",
+          "tooltip": "Understanding schematics.",
+          "children": [
+            {
+              "url": "guide/schematics",
+              "title": "Schematics Overview",
+              "tooltip": "Understand how schematics are used in Angular."
+            },
+            {
+              "url": "guide/schematics-authoring",
+              "title": "Authoring Schematics",
+              "tooltip": "Understand the structure of a schematic."
+            },
+            {
+              "url": "guide/schematics-for-libraries",
+              "title": "Schematics for Libraries",
+              "tooltip": "Use schematics to integrate your library with the Angular CLI."
             }
           ]
         }
@@ -653,12 +679,6 @@
       "title": "API",
       "tooltip": "Details of the Angular packages, classes, interfaces, and other types.",
       "url": "api"
-    },
-    {
-      "url": "guide/change-log",
-      "title": "Change Log",
-      "tooltip": "Angular Documentation Change Log",
-      "hidden": true
     }
   ],
 

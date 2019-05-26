@@ -105,7 +105,7 @@ Angularのコア機能ではありません。ルーターは`@angular/router`�
 {@a example-config}
 
 *ルート* の配列である `appRoutes` で遷移方法を表現し、
-それを `RouterModule.forRoot` メソッドに渡してモジュールの `imports` に含めることでルーターを構成しています。
+それを `RouterModule.forRoot()` メソッドに渡してモジュールの `imports` に含めることでルーターを構成しています。
 
 個々の `Route` は `path` をコンポーネントにマッピングします。
 _path_ に _先頭のスラッシュ_ は入力しません。
@@ -918,7 +918,7 @@ In order to use the Router, you must first register the `RouterModule` from the 
 
 <div class="alert is-important">
 
-  **Note:** The `RouterModule.forRoot` method is a pattern used to register application-wide providers. Read more about application-wide providers in the [Singleton services](guide/singleton-services#forroot) guide.
+  **Note:** The `RouterModule.forRoot` method is a pattern used to register application-wide providers. Read more about application-wide providers in the [Singleton services](guide/singleton-services#forRoot-router) guide.
 
 </div>
 
@@ -1077,7 +1077,7 @@ You've learned how to do the following:
 * Load the router library.
 * Add a nav bar to the shell template with anchor tags, `routerLink`  and `routerLinkActive` directives.
 * Add a `router-outlet` to the shell template where views will be displayed.
-* Configure the router module with `RouterModule.forRoot`.
+* Configure the router module with `RouterModule.forRoot()`.
 * Set the router to compose HTML5 browser URLs.
 * handle invalid routes with a `wildcard` route.
 * navigate to the default route when the app launches with an empty path.
@@ -1286,7 +1286,7 @@ The **Routing Module** has several characteristics:
 ### Integrate routing with your app
 
 The sample routing application does not include routing by default.
-When you use the [Angular CLI](cli) to create a project that will use routing, set the `--routing` option for the project or app, and for each NgModule. 
+When you use the [Angular CLI](cli) to create a project that will use routing, set the `--routing` option for the project or app, and for each NgModule.
 When you create or initialize a new project (using the CLI [`ng new`](cli/new) command) or a new app (using the [`ng generate app`](cli/generate) command), specify the `--routing` option.  This tells the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
 You can then use routing in any NgModule that you add to the project or app.
 
@@ -1556,7 +1556,7 @@ Now that you have routes for the `Heroes` module, register them with the `Router
 `RouterModule` _almost_ as you did in the `AppRoutingModule`.
 
 There is a small but critical difference.
-In the `AppRoutingModule`, you used the static **`RouterModule.forRoot`** method to register the routes and application level service providers.
+In the `AppRoutingModule`, you used the static **`RouterModule.forRoot()`** method to register the routes and application level service providers.
 In a feature module you use the static **`forChild`** method.
 
 
@@ -1564,7 +1564,7 @@ In a feature module you use the static **`forChild`** method.
 
 
 
-Only call `RouterModule.forRoot` in the root `AppRoutingModule`
+Only call `RouterModule.forRoot()` in the root `AppRoutingModule`
 (or the `AppModule` if that's where you register top level application routes).
 In any other module, you must call the **`RouterModule.forChild`** method to register additional routes.
 
@@ -1739,7 +1739,7 @@ Accordingly, the _link parameters array_ has *two* items:  the routing _path_ an
 `id` of the selected hero.
 
 
-<code-example path="router/src/app/heroes/hero-list/hero-list.component.1.ts" linenums="false" header="src/app/heroes/hero-list/hero-list.component.ts (link-parameters-array)" region="link-parameters-array">
+<code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" linenums="false" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array">
 
 </code-example>
 
@@ -2034,7 +2034,7 @@ When navigating to the `HeroDetailComponent` you specified the _required_ `id` o
 *route parameter* and made it the second item of the [_link parameters array_](#link-parameters-array).
 
 
-<code-example path="router/src/app/heroes/hero-list/hero-list.component.1.ts" linenums="false" header="src/app/heroes/hero-list/hero-list.component.ts (link-parameters-array)" region="link-parameters-array">
+<code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" linenums="false" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array">
 
 </code-example>
 
@@ -4136,9 +4136,9 @@ You could try this now and confirm that the  `CrisisCenterModule` loads after yo
 
 To enable preloading of all lazy loaded modules, import the `PreloadAllModules` token from the Angular router package.
 
-The second argument in the `RouterModule.forRoot` method takes an object for additional configuration options.
+The second argument in the `RouterModule.forRoot()` method takes an object for additional configuration options.
 The `preloadingStrategy` is one of those options.
-Add the `PreloadAllModules` token to the `forRoot` call:
+Add the `PreloadAllModules` token to the `forRoot()` call:
 
 <code-example path="router/src/app/app-routing.module.6.ts" linenums="false" header="src/app/app-routing.module.ts (preload all)" region="forRoot">
 
@@ -4225,7 +4225,7 @@ Shortly, you'll extend the `AdminDashboardComponent` to inject this service and 
 But first, make a few changes to the `AppRoutingModule`.
 
 1. Import `SelectivePreloadingStrategyService` into `AppRoutingModule`.
-1. Replace the `PreloadAllModules` strategy in the call to `forRoot` with this `SelectivePreloadingStrategyService`.
+1. Replace the `PreloadAllModules` strategy in the call to `forRoot()` with this `SelectivePreloadingStrategyService`.
 1. Add the `SelectivePreloadingStrategyService` strategy to the `AppRoutingModule` providers array so it can be injected
 elsewhere in the app.
 
@@ -4482,7 +4482,7 @@ The router supports both styles with two `LocationStrategy` providers:
 1. `PathLocationStrategy`&mdash;the default "HTML5 pushState" style.
 1. `HashLocationStrategy`&mdash;the "hash URL" style.
 
-The `RouterModule.forRoot` function sets the `LocationStrategy` to the `PathLocationStrategy`,
+The `RouterModule.forRoot()` function sets the `LocationStrategy` to the `PathLocationStrategy`,
 making it the default strategy.
 You can switch to the `HashLocationStrategy` with an override during the bootstrapping process if you prefer it.
 
@@ -4597,7 +4597,7 @@ Those developers may still use HTML5 URLs by taking two remedial steps:
 #### *HashLocationStrategy*
 
 You can go old-school with the `HashLocationStrategy` by
-providing the `useHash: true` in an object as the second argument of the `RouterModule.forRoot`
+providing the `useHash: true` in an object as the second argument of the `RouterModule.forRoot()`
 in the `AppModule`.
 
 

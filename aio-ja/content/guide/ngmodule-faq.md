@@ -204,15 +204,14 @@ NgModuleは自身がもつ宣言、選択したインポートしたクラス、
 `RouterModule.forRoot()`は[ModuleWithProviders](api/core/ModuleWithProviders)を返します。
 ルートの`AppModule`の`imports`配列にその結果を追加します。
 
-`.forRoot()`の結果はルートアプリケーションモジュールである`AppModule`でだけ実行してインポートしてください。
-他のモジュール、特に遅延ロードされるモジュールでインポートすると、
-意に反しておそらくランタイムエラーが発生するでしょう。
-詳細については[シングルトンサービス](guide/singleton-services)を参照してください。
+`forRoot()`の結果はルートアプリケーションモジュールである`AppModule`でだけ実行してインポートしてください。
+他のモジュール、特に遅延ロードされるモジュールでインポートしないでください。
+詳細については[シングルトンサービス](guide/singleton-services) の [`forRoot()` パターン](guide/singleton-services#the-forroot-pattern) セクションを参照してください。
 
 サービスについては、`forRoot()`を使用するかわりにサービスの`@Injectable()`デコレーターに`providedIn: 'root'`を指定してください。
 これはサービスを自動的にアプリケーション全体で有効にし、この結果としてデフォルトでシングルトンになります。
 
-`RouterModule`は遅延ロードするモジュールのルーティングを設定するために`forChild`静的メソッドも提供しています。
+`RouterModule`は遅延ロードするモジュールのルーティングを設定するために `forChild()` 静的メソッドも提供しています。
 
 `forRoot()`と`forChild()`はルートとフィーチャーモジュール
 個々のサービスの設定を行うメソッドのための慣例的な名前です。
@@ -478,9 +477,9 @@ Angularは、遅延ロードしたモジュールのプロバイダーをどこ�
 エラーをスローしたり、他の是正措置を講じることができます。
 
 特定の NgModule、たとえば`BrowserModule`のように、ガードを実装しましょう。
-ここには`CoreModule`と呼ばれるNgModuleのためのカスタムコンストラクターがあります。
+ここには`GreetingModule`と呼ばれるNgModuleのためのカスタムコンストラクターがあります。
 
-<code-example path="ngmodule-faq/src/app/core/core.module.ts" region="ctor" header="src/app/core/core.module.ts (Constructor)" linenums="false">
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="ctor" header="src/app/greeting/greeting.module.ts (Constructor)" linenums="false">
 </code-example>
 
 <hr/>
@@ -590,19 +589,6 @@ _ツリーシェイキング_のためです。プロダクションのアプリ
 
 アプリケーションの起動時にロードする、
 あとで遅延ロードでする_フィーチャー_モジュールのどちらにも`SharedModule`をインポートしてください。
-
-### `CoreModule`
-`CoreModule`はアプリケーションの起動時のシングルトンサービスのための`providers`をもつ
-`NgModule`のための慣習的な名前です。
-
-`CoreModule`はルートの`AppModule`のみにインポートしてください。
-他のモジュール内で`CoreModule`をインポートしないでください。
-
-`CoreModule`を
-宣言のない純粋なサービスモジュールにすることを検討してください。
-
-詳細については、[NgModuleの共有](guide/sharing-ngmodules)と
-[シングルトンサービス](guide/singleton-services)を参照してください。
 
 ### フィーチャーモジュール
 

@@ -10,7 +10,7 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 * `version`: 設定ファイルのバージョン
 * `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
 * `defaultProject`: 引数として与えられていない場合にコマンドで使われる、デフォルトのプロジェクト名。新しいワークスペースに新しいアプリケーションを `ng new` で作成したとき、ここの値が変更されるまで、そのアプリはワークスペースのデフォルトプロジェクトになります
-* `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。下記の[Generation schematics](#schematics) を参照してください。
+* `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。
 * `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリ、e2eテストアプリ）のサブセクションと、プロジェクトごとの構成オプションが含まれます
 
 `ng new app_name` で作成した最初のアプリは "projects" の配下に、対応するエンドツーエンドのテストアプリとともに一覧で表示されます。
@@ -57,7 +57,7 @@ projects
 | `sourceRoot`    | このプロジェクトのソースファイルのルートフォルダです。 |
 | `projectType`   | "application" または "library" のいずれかです。applicationはブラウザ内で独立して実行できますが、libraryでは実行できません。アプリとそのアプリのe2eテストアプリはどちらもapplicationタイプです。 |
 | `prefix`        | Angularによって生成されたセレクターの先頭に追加される文字列です。アプリや機能単位でのカスタマイズができます。 |
-| `schematics`    | このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。下記の[Generation schematics](#schematics) を参照してください。 |
+| `schematics`    | このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。 |
 | `architect`     | このプロジェクトでArchitectが使用するビルダーのターゲットのためのデフォルト設定です。 |
 
 {@a schematics}

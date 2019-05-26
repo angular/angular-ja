@@ -280,30 +280,30 @@ export function serverFactory() {
 バージョン 5 以降、コンパイラは `.js` ファイルを出力しながらこの書き換えを自動的に実行します。
 
 {@a function-calls}
-### Limited function calls
+### 限定的関数呼び出し
 
-The _collector_ can represent a function call or object creation with `new` as long as the syntax is valid. The _collector_ only cares about proper syntax.
+_collector_ は、構文が有効である限り、`new` を使って関数呼び出しやオブジェクトの作成を表すことができます。 _collector_ は適切な構文だけを扱います。
 
-But beware. The compiler may later refuse to generate a call to a _particular_ function or creation of a _particular_ object.
-The compiler only supports calls to a small set of functions and will use `new` for only a few designated classes. These functions and classes are in a table of [below](#supported-functions).
+しかし注意してください。コンパイラは後で、_特定の_ 関数の呼び出しや _特定の_ オブジェクトの作成を拒否することがあります。
+コンパイラは少数の関数への呼び出しのみをサポートし、少数の指定クラスに対してのみ `new` を使用します。これらの関数とクラスは[下](#supported-functions)の表にあります。
 
 
-### Folding
+### フォールディング
 {@a exported-symbols}
-The compiler can only resolve references to **_exported_** symbols.
-Fortunately, the _collector_ enables limited use of non-exported symbols through _folding_.
+コンパイラは **_exported_** シンボルへの参照しか解決できません。
+幸い、_collector_ は _folding_ を介してエクスポートされていないシンボルの限定的な使用を可能にします。
 
-The _collector_ may be able to evaluate an expression during collection and record the result in the `.metadata.json` instead of the original expression.
+_collector_ はコレクション中に式を評価し、その結果を元の式の代わりに `.metadata.json` に記録することができます。
 
-For example, the _collector_ can evaluate the expression `1 + 2 + 3 + 4` and replace it with the result, `10`.
+たとえば、_collector_ は式 `1 + 2 + 3 + 4` を評価し、それを結果 `10` で置き換えることができます。
 
-This process is called _folding_. An expression that can be reduced in this manner is _foldable_.
+このプロセスは _フォールディング_ と呼ばれます。この方法で縮小できる式は _foldable_ です。
 
 {@a var-declaration}
-The collector can evaluate references to
-module-local `const` declarations and initialized `var` and `let` declarations, effectively removing them from the `.metadata.json` file.
+コレクターはモジュールローカルな `const` 宣言と初期化された `var` と `let` 宣言への参照を評価することができ、
+事実上 `.metadata.json` ファイルからそれらを削除します。
 
-Consider the following component definition:
+次のコンポーネント定義を考えてみてください。
 
 ```typescript
 const template = '<div>{{hero.name}}</div>';
@@ -317,10 +317,10 @@ export class HeroComponent {
 }
 ```
 
-The compiler could not refer to the `template` constant because it isn't exported.
+エクスポートされていないので、コンパイラは `template` 定数を参照できませんでした。
 
-But the _collector_ can _fold_ the `template` constant into the metadata definition by inlining its contents.
-The effect is the same as if you had written:
+しかし _collector_ はその内容をインライン化することで `template` 定数をメタデータ定義に _折り畳む_ ことができます。
+効果はあなたが書いた場合と同じです。
 
 ```typescript
 @Component({
@@ -332,9 +332,9 @@ export class HeroComponent {
 }
 ```
 
-There is no longer a reference to `template` and, therefore, nothing to trouble the compiler when it later interprets the _collector's_ output in `.metadata.json`.
+`template` への参照がなくなり、コンパイラが後で `.metadata.json` の _collector's_ の出力を解釈したときにコンパイラを煩わせることはなくなりました。
 
-You can take this example a step further by including the `template` constant in another expression:
+別の式に `template` 定数を含めることでこの例をさらに一歩進めることができます。
 
 ```typescript
 const template = '<div>{{hero.name}}</div>';
@@ -348,13 +348,13 @@ export class HeroComponent {
 }
 ```
 
-The _collector_ reduces this expression to its equivalent _folded_ string:
+_collector_ はこの式をそれに相当する _folded_ 文字列に変換します。
 
 `'<div>{{hero.name}}</div><div>{{hero.title}}</div>'`.
 
-#### Foldable syntax
+#### 折りたたみ可能なシンタックス
 
-The following table describes which expressions the _collector_ can and cannot fold:
+次の表は、_collector_ がどの式を折りたたむことができるかどうかを示しています。
 
 <style>
   td, th {vertical-align: top}
@@ -362,85 +362,85 @@ The following table describes which expressions the _collector_ can and cannot f
 
 <table>
   <tr>
-    <th>Syntax</th>
-    <th>Foldable</th>
+    <th>シンタックス</th>
+    <th>折りたたみ可能</th>
   </tr>
   <tr>
-    <td>Literal object </td>
-    <td>Yes</td>
+    <td>オブジェクトリテラル</td>
+    <td>可能</td>
   </tr>
   <tr>
-    <td>Literal array  </td>
-    <td>Yes</td>
+    <td>配列リテラル</td>
+    <td>可能</td>
   </tr>
   <tr>
-    <td>Spread in literal array</td>
-    <td>no</td>
+    <td>拡張配列リテラル</td>
+    <td>不可</td>
   </tr>
    <tr>
-    <td>Calls</td>
-    <td>no</td>
+    <td>コール</td>
+    <td>不可</td>
   </tr>
    <tr>
     <td>New</td>
-    <td>no</td>
+    <td>不可</td>
   </tr>
    <tr>
-    <td>Property access</td>
-    <td>yes, if target is foldable</td>
+    <td>プロパティアクセス</td>
+    <td>可能、ターゲットが折りたたみ式の場合</td>
   </tr>
    <tr>
-    <td>Array index</td>
-    <td> yes, if target and index are foldable</td>
+    <td>配列のインデックス</td>
+    <td>可能、ターゲットとインデックスが折りたたみ式の場合</td>
   </tr>
    <tr>
-    <td>Identity reference</td>
-    <td>yes, if it is a reference to a local</td>
+    <td>ID 参照</td>
+    <td>可能、それがローカルへの参照であれば</td>
   </tr>
    <tr>
-    <td>A template with no substitutions</td>
-    <td>yes</td>
+    <td>置換のないテンプレート</td>
+    <td>可能</td>
   </tr>
    <tr>
-    <td>A template with substitutions</td>
-    <td>yes, if the substitutions are foldable</td>
+    <td>置換を含むテンプレート</td>
+    <td>可能、代入が折りたたみ式の場合</td>
   </tr>
    <tr>
-    <td>Literal string</td>
-    <td>yes</td>
+    <td>文字列リテラル</td>
+    <td>可能</td>
   </tr>
    <tr>
-    <td>Literal number</td>
-    <td>yes</td>
+    <td>数値リテラル</td>
+    <td>可能</td>
   </tr>
    <tr>
-    <td>Literal boolean</td>
-    <td>yes</td>
+    <td>真偽値リテラル</td>
+    <td>可能</td>
   </tr>
    <tr>
-    <td>Literal null</td>
-    <td>yes</td>
+    <td>null リテラル</td>
+    <td>可能</td>
   </tr>
    <tr>
-    <td>Supported prefix operator </td>
-    <td>yes, if operand is foldable</td>
+    <td>サポートされている接頭演算子</td>
+    <td>オペランドが折りたたみ可能ならば可能</td>
   </tr>
    <tr>
-    <td>Supported binary operator </td>
-    <td>yes, if both left and right are foldable</td>
+    <td>サポートされている二項演算子</td>
+    <td>可能、左右両方が折りたたみ式の場合</td>
   </tr>
    <tr>
-    <td>Conditional operator</td>
-    <td>yes, if condition is foldable </td>
+    <td>条件演算子</td>
+    <td>可能、条件が折りたたみ式の場合</td>
   </tr>
    <tr>
-    <td>Parentheses</td>
-    <td>yes, if the expression is foldable</td>
+    <td>括弧</td>
+    <td>可能、式が折りたたみ式の場合</td>
   </tr>
 </table>
 
 
-If an expression is not foldable, the collector writes it to `.metadata.json` as an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for the compiler to resolve.
+式が折りたたみ式ではない場合、コレクタはそれをコンパイラが解決するための [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として `.metadata.json` に書き込みます。
 
 
 ## Phase 2: code generation

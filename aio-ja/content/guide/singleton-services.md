@@ -79,11 +79,11 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 {@a forRoot-router}
 
-### `forRoot()` and the `Router`
+### `forRoot()`と`Router`
 
-`RouterModule` provides the `Router` service, as well as router directives, such as `RouterOutlet` and `routerLink`. The root application module imports `RouterModule` so that the application has a `Router` and the root application components can access the router directives. Any feature modules must also import `RouterModule` so that their components can place router directives into their templates.
+`RouterModule`は`Router`サービスを提供し、`RouterOutlet`や`routerLink`などのルーターディレクティブも提供します。ルートアプリケーションモジュールは`RouterModule`をインポートするので、アプリケーションは`Router`を持ち、ルートアプリケーションコンポーネントはルータディレクティブにアクセスできます。すべての機能モジュールは、そのコンポーネントがテンプレートにルータディレクティブを配置できるように、`RouterModule`もインポートする必要があります。
 
-If the `RouterModule` didn’t have `forRoot()` then each feature module would instantiate a new `Router` instance, which would break the application as there can only be one `Router`. By using the `forRoot()` method, the root application module imports `RouterModule.forRoot(...)` and gets a `Router`, and all feature modules import `RouterModule.forChild(...)` which does not instantiate another `Router`.
+`RouterModule`に`forRoot()`がない場合、それぞれのフィーチャーモジュールは新しい`Router`インスタンスを生成します。`Router`は１つしか存在できないため、アプリケーションは停止します。`forRoot()`メソッドを使用すると、ルートアプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得し、すべてのフィーチャモジュールは別の`Router`をインスタンス化しない`RouterModule.forChild(...)`をインポートします。
 
 <div class="alert is-helpful">
 

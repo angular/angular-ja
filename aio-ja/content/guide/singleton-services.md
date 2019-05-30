@@ -87,15 +87,15 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 <div class="alert is-helpful">
 
-**Note:** If you have a module which has both providers and declarations,
-you _can_ use this
-technique to separate them out and you may see this pattern in legacy apps.
-However, since Angular 6.0, the best practice for providing services is with the
-`@Injectable()` `providedIn` property.
+**注:** providersとdeclarationsの両方を持つモジュールがある場合、
+それらを分離するテクニックとして
+これを使うことが _可能_ で、レガシーアプリケーションでこのパターンが見られるかもしれません。
+しかしAngular 6.0以降では,サービス提供のベストプラクティスは
+`@Injectable()` `providedIn` プロパティです。
 
 </div>
 
-### How `forRoot()` works
+### `forRoot()`の仕組み
 
 `forRoot()`はサービスの設定を行うオブジェクトを受け取り、
 [ModuleWithProviders](api/core/ModuleWithProviders)を返します。
@@ -131,8 +131,8 @@ Angularは`@NgModule.providers`
 
 </code-example>
 
-最後に`AppModule`の`imports`配列の中で呼び出します。In the following
-snippet, other parts of the file are left out. For the complete file, see the <live-example name="ngmodules"></live-example>, or continue to the next section of this document.
+最後に`AppModule`の`imports`配列の中で呼び出します。次のスニペットでは、
+ファイルの他の部分は省略されています。完全なファイルについては、<live-example name="ngmodules"></live-example>を参照するか、このドキュメントの次のセクションに進んでください。
 
 <code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" header="src/app/app.module.ts (imports)" linenums="false">
 

@@ -29,7 +29,7 @@
 
 これらのドキュメントは、あなたがすでにHTML、CSS、 [JavaScript](https://developer.mozilla.org/ja/docs/Web/JavaScript/A_re-introduction_to_JavaScript "Learn JavaScript") 、
 そして [クラス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes "ES2015 Classes") や [モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import "ES2015 Modules") のような [最新の標準](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources "Latest JavaScript standards") からのツールのいくつかに慣れていることを前提としています。
-コードサンプルは [TypeScript](https://www.typescriptlang.org/ "TypeScript") を使って書かれています。ほとんどのAngularコードは、依存性の注入に [型](https://www.typescriptlang.org/docs/handbook/classes.html "TypeScript Types") を使用し、メタデータに [デコレータ](https://www.typescriptlang.org/docs/handbook/decorators.html "Decorators") を使用して、
+コードサンプルは [TypeScript](https://www.typescriptlang.org/ "TypeScript") を使って書かれています。ほとんどのAngularコードは、依存性の注入に [型](https://www.typescriptlang.org/docs/handbook/classes.html "TypeScript Types") を使用し、メタデータに [デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html "Decorators") を使用して、
 最新のJavaScriptだけで記述できます。
 
 ## フィードバック

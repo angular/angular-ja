@@ -79,7 +79,7 @@ You can update your workspace schema file to set a different default for a sub-c
 
 {@a architect}
 
-## プロジェクトツールの設定オプション
+## プロジェクトツールの設定オプション {@a project-tool-configuration-options}
 
 Architectは、提供されている設定にしたがって、コンパイルやテスト実行などの複雑なタスクを実行するためにCLIが使用するツールです。
 `architect` セクションには、一連のArchitect *targets* が含まれています。

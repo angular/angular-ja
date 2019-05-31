@@ -1605,7 +1605,7 @@ DOM に対して要素を追加または削除するため、_構造_ ディレ�
 
 {@a ref-var}
 
-## テンプレート参照変数 ( <span class="syntax">#var</span> )
+## テンプレート参照変数 ( <span class="syntax">#var</span> ) {@a template-reference-variables--var-}
 
 **テンプレート参照変数** は多くの場合、テンプレート内の DOM 要素への参照です。
 Angular コンポーネント、ディレクティブ、または

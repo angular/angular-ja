@@ -5,22 +5,25 @@ Path values given in the configuration are relative to the root workspace folder
 
 ## Overall JSON structure
 
-At the top level of `angular.json`, a few properties configure the workspace, and a `projects` section contains the remaining per-project configuration options.
+At the top level of `angular.json`, a few properties configure the workspace, and a `projects` section contains the remaining per-project configuration options. CLI defaults set at the workspace level can be overridden by defaults set at the project level, and defaults set at the project level can be overridden on the command line.
+
+The following properties, at the top level of the file, configure the workspace.
 
 * `version`: The configuration-file version.
 * `newProjectRoot`: Path where new projects are created. Absolute or relative to the workspace folder.
 * `defaultProject`: Default project name to use in commands, where not provided as an argument. When you use `ng new` to create a new app in a new workspace, that app is the default project for the workspace until you change it here.
 * `schematics` : A set of [schematics](guide/glossary#schematic) that customize the `ng generate` sub-command option defaults for this workspace. See [Generation schematics](#schematics) below.
-* `projects` : Contains a subsection for each project (library, app, e2e test app) in the workspace, with the per-project configuration options.
+* `projects` : Contains a subsection for each project (library or application) in the workspace, with the per-project configuration options.
 
-The initial app that you create with `ng new app_name` is listed under "projects", along with its corresponding end-to-end test app:
+The initial app that you create with `ng new app_name` is listed under "projects":
 
-<code-example format="." language="none" linenums="false">
-projects
-  app_name
+<code-example format="." language="json" linenums="false">
+"projects": {
+  "app_name": {
     ...
-  app_name-e2e
-    ...
+  }
+  ...
+}
 </code-example>
 
 Each additional app that you create with `ng generate application` has a corresponding end-to-end test project, with its own configuration section.
@@ -29,8 +32,8 @@ When you create a library project with `ng generate library`, the library projec
 <div class="alert is-helpful">
 
   Note that the `projects` section of the configuration file does not correspond exactly to the workspace file structure.
-  * The initial app created by `ng new` is at the top level of the workspace file structure, along with its e2e app.
-  * Additional apps, e2e apps, and libraries go into a `projects` folder in the workspace.
+  * The initial app created by `ng new` is at the top level of the workspace file structure.
+  * Additional applications and libraries go into a `projects` folder in the workspace.
 
   For more information, see [Workspace and project file structure](guide/file-structure).
 
@@ -41,7 +44,7 @@ When you create a library project with `ng generate library`, the library projec
 The following top-level configuration properties are available for each project, under `projects:<project_name>`.
 
 <code-example format="." language="json" linenums="false">
-    "my-v7-app": {
+    "my-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -55,7 +58,7 @@ The following top-level configuration properties are available for each project,
 | :-------------- | :---------------------------- |
 | `root`          | The root folder for this project's files, relative to the workspace folder. Empty for the initial app, which resides at the top level of the workspace. |
 | `sourceRoot`    | The root folder for this project's source files. |
-| `projectType`   | One of "application" or "library". An application can run independently in a browser, while a library cannot. Both an app and its e2e test app are of type "application".|
+| `projectType`   | One of "application" or "library". An application can run independently in a browser, while a library cannot.|
 | `prefix`        | A string that Angular prepends to generated selectors. Can be customized to identify an app or feature area. |
 | `schematics`    | A set of schematics that customize the `ng generate` sub-command option defaults for this project. See [Generation schematics](#schematics) below.  |
 | `architect`     | Configuration defaults for Architect builder targets for this project. |
@@ -83,7 +86,9 @@ The `architect` section of `angular.json` contains a set of Architect *targets*.
 Many of the targets correspond to the CLI commands that run them.
 Some additional predefined targets can be run using the `ng run` command, and you can define your own targets.
 
-Each target object specifies the `builder` for that target, which is the npm package for the tool that Architect runs. In addition, each target has an `options` section that configure default options for the target, and a `configurations` section that names and specifies alternative configurations for the target. See the example in [Build target](#build-target) below.
+Each target object specifies the `builder` for that target, which is the npm package for the tool that Architect runs.
+In addition, each target has an `options` section that configures default options for the target, and a `configurations` section that names and specifies alternative configurations for the target.
+See the example in [Build target](#build-target) below.
 
 <code-example format="." language="json" linenums="false">
       "architect": {
@@ -175,7 +180,7 @@ Some additional options (listed below) can only be set through the configuration
 
 ## Project asset configuration
 
-Each `build` target configuration can include as `assets` array that lists files or folders you want to copy as-is when building your project.
+Each `build` target configuration can include an `assets` array that lists files or folders you want to copy as-is when building your project.
 By default, the `src/assets/` folder and `src/favicon.ico` are copied over.
 
 <code-example format="." language="json" linenums="false">

@@ -218,8 +218,8 @@ exports.config = config;
 Now you can run the following commands to use the `--no-sandbox` flag:
 
 <code-example language="sh" class="code-shell">
-  ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-  ng e2e -- --protractor-config=e2e/protractor-ci.conf.js
+  ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
+  ng e2e --protractor-config=e2e/protractor-ci.conf.js
 </code-example>
 
 <div class="alert is-helpful">
@@ -469,13 +469,6 @@ The `HttpClientTestingModule` can make these testing scenarios more manageable.
 While the _code sample_ accompanying this guide demonstrates `HttpClientTestingModule`,
 this page defers to the [Http guide](guide/http#testing-http-requests),
 which covers testing with the `HttpClientTestingModule` in detail.
-
-<div class="alert is-helpful">
-
-This guide's sample code also demonstrates testing of the _legacy_ `HttpModule`
-in `app/model/http-hero.service.spec.ts`.
-
-</div>
 
 
 ## Component Test Basics

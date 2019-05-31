@@ -83,6 +83,15 @@ Angular Service Workerは、アプリケーションが最初に開かれたと�
 
 Angular Service Workerの最新情報は、アプリケーションにはわかりません。古いキャッシュは引き続き有効で、コンテンツは引き続き配信されます。ただし、Angular Service Workerのバグフィックスや機能では、古いキャッシュが無効になることがあります。この場合、アプリケーションはネットワークから透過的にリフレッシュされます。
 
+### Bypassing the service worker
+
+In some cases, you may want to bypass the service worker entirely and let the browser handle the
+request instead. An example is when you rely on a feature that is currently not supported in service
+workers (e.g.
+[reporting progress on uploaded files](https://github.com/w3c/ServiceWorker/issues/1141)).
+
+To bypass the service worker you can set `ngsw-bypass` as a request header, or as a query parameter.
+(The value of the header or query parameter is ignored and can be empty or omitted.)
 
 ## Angular Service Workerのデバッグ
 

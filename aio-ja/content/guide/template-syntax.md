@@ -956,7 +956,7 @@ Angular のイベントバインディングの構文は、
 クリックが発生するたびにコンポーネントの `onSave()` メソッドを呼び出します:
 
 <figure>
-  <img src='generated/images/guide/event-binding/syntax-diagram.svg' alt="Syntax diagram">
+  <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </figure>
 
 ### ターゲットイベント

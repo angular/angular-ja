@@ -2261,7 +2261,7 @@ For the `@routeAnimation` transitions to key off states, you'll need to provide 
 
 </code-example>
 
-The `@routeAnimation` property is bound to the `getAnimationData` with the provided `routerOutlet` reference, so you'll need to define that function in the `AppComponent`. The `getAnimationData` function returns the animation property from the `data` provided through the `ActivatedRoute`. The `animation` property matches the `transition` names you used in the `slideDownAnimation` defined in `animations.ts`.
+The `@routeAnimation` property is bound to the `getAnimationData` with the provided `routerOutlet` reference, so you'll need to define that function in the `AppComponent`. The `getAnimationData` function returns the animation property from the `data` provided through the `ActivatedRoute`. The `animation` property matches the `transition` names you used in the `slideInAnimation` defined in `animations.ts`.
 
 <code-example path="router/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (router outlet)" region="function-binding">
 
@@ -2677,7 +2677,7 @@ display the `Crisis Center Home` and `Crisis Detail` route components.
 
 The `Crisis Detail` route is a child of the `Crisis List`. The router [reuses components](#reuse)
 by default, so the `Crisis Detail` component will be re-used as you select different crises.
-In contrast, back in the `Hero Detail` route, the component was recreated each time you selected a different hero.
+In contrast, back in the `Hero Detail` route, [the component was recreated](#snapshot-the-no-observable-alternative) each time you selected a different hero from the list of heroes.
 
 At the top level, paths that begin with `/` refer to the root of the application.
 But child routes *extend* the path of the parent route.
@@ -3954,10 +3954,10 @@ Users will still visit `/admin` and the `AdminComponent` still serves as the *Ro
 
 Open the `AppRoutingModule` and add a new `admin` route to its `appRoutes` array.
 
-Give it a `loadChildren` property instead of a `children` property, set to the address of the `AdminModule`.
-The address is the `AdminModule` file location (relative to the app root),
-followed by a `#` separator, followed by the name of the exported module class, `AdminModule`.
-
+Give it a `loadChildren` property instead of a `children` property.
+The `loadChildren` property takes a function that returns a promise using the browser's built-in syntax for lazy loading code using dynamic imports `import('...')`.
+The path is the location of the `AdminModule` (relative to the app root).
+After the code is requested and loaded, the `Promise` resolves an object that contains the `NgModule`, in this case the `AdminModule`.
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin-1" header="app-routing.module.ts (load children)">
 

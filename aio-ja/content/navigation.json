@@ -55,9 +55,10 @@
   "SideNav": [
     {
       "url": "docs",
-      "title": "Introduction",
-      "tooltip": "Introduction to the Angular documentation",
-      "hidden": false
+      "title": "イントロダクション",
+      "tooltip": "Angularドキュメントの紹介",
+      "hidden": false,
+      "translated": true
     },
     {
       "url": "guide/docs-style-guide",
@@ -98,7 +99,7 @@
     },
     {
       "url": "guide/setup-local",
-      "title": "Setup",
+      "title": "セットアップ",
       "tooltip": "Setting up for local development with the Angular CLI."
     },
     {

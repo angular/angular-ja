@@ -141,8 +141,6 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 <code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" header="heroes.component.html (selected hero details)" linenums="false">
 </code-example>
 
-### _*ngIf_ を使って空のdetailsを非表示にする
-
 ブラウザを更新すると、アプリケーションは壊れてしまっています。
 
 ブラウザの開発者ツールを開いて、コンソールの中のこのようなエラーメッセージを探してください：
@@ -151,22 +149,19 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
   HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
 </code-example>
 
-リストのアイテムを1つクリックしてみましょう。
-アプリは再び機能し始めたように見えるでしょう。
-リストにヒーローが表示され、クリックされたヒーローがページの下部に表示されます。
-
 ### なにが起きたのか？
 
 アプリを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
 
 `selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
 
-### 修正しましょう
+### 修正しましょう - _*ngIf_ を使って空のdetailsを非表示にする
 
 コンポーネントは `selectedHero` が存在する場合のみ、選択されたヒーローの詳細を表示する必要があります。
 
 ヒーローの詳細をHTMLの `<div>` で囲ってください。
 Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHero` に設定してください。
+
 
 <div class="alert is-important">
 
@@ -179,7 +174,9 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 ブラウザを更新すると、名前の一覧が再度表示されます。
 詳細のエリアは空白になっています。
-ヒーローをクリックするとヒーローの詳細が表示されます。
+ヒーローのリストの中からヒーローをクリックし、詳細を表示しましょう。
+アプリケーションは再び動き出しました。
+ヒーローたちはリストの中に表示され、クリックされたヒーローの詳細はページの下部に表示されます。
 
 ### なぜこれが動くのか
 

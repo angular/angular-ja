@@ -228,7 +228,7 @@
 
 コンポーネントクラス内のモデルを更新した後、フォームグループインスタンスと入力要素をつなげるためにテンプレートを更新します。
 
-`firstName` と `lastName`フィールドを含む`address`フォームグループを`ProfileEditor`テンプレートに追加します。
+`street` 、 `city` 、`state` 、 `zip` フィールドを含む`address`フォームグループを`ProfileEditor`テンプレートに追加します。
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroupname" linenums="false" header="src/app/profile-editor/profile-editor.component.html (ネストしたフォームグループテンプレート)">
 

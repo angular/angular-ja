@@ -4,8 +4,10 @@ const glob = require('glob');
 const { promisify } = require('util');
 
 const copyTargets = [
+    'content/cli/**/*.md',
     'content/guide/**/*.md',
     'content/marketing/**/*',
+    'content/start/**/*.md',
     'content/tutorial/**/*.md',
     'content/navigation.json',
     'src/index.html',

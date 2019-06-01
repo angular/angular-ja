@@ -9,7 +9,7 @@ Angularフレームワーク、 Angular CLI、 Angularアプリケーション�
 
 <div class="alert is-helpful">
 
-Node.jsとnpmの必要なバージョンとインストール方法については[入門ページ](guide/quickstart#prerequisites)を見てください。
+Node.jsとnpmの必要なバージョンとインストール方法については [ローカル環境の構築](guide/setup-local "Setting up for Local Development") を参照してください。
 
 もしすでに他のバージョンのNode.jsとnpmを使用したプロジェクトがマシン上にある場合、[nvm](https://github.com/creationix/nvm)を使って複数のバージョンのNode.jsとnpmを管理することを検討してください。
 
@@ -68,7 +68,6 @@ Angularのパッケージの完全な一覧は、[API reference](http://angular.
 **@angular/compiler**                                                                   | Angularのテンプレートのコンパイラです。テンプレートを解釈し、アプリケーションが実行・表示可能なコードに変換します。 通常はコンパイラに直接触れないでください。そうではなくブラウザ上でJITコンパイルするときに `platform-browser-dynamic` を通して間接的に使用します。詳しくは [Ahead-of-time Compilation guide](guide/aot-compiler)を見てください。
 [**@angular/core**](api/core)                                                           | すべてのアプリケーションに必要とされるフレームワークの重要なランタイム部分です。すべてのメタデータデコレーター、`Component` 、 `Directive `、依存性の注入、コンポーネントのライフサイクルフックを含みます。
 [**@angular/forms**](api/forms)                                                         | [テンプレート駆動のフォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)の両方をサポートします。アプリケーションに最適なフォームアプローチの選択についての情報は [Introduction to forms](guide/forms-overview) を見てください。
-[**@angular/http**](api/http)                                                           | AngularのレガシーHTTP clientです。これはバージョン5.0から非推奨となり、[@angular/common/http](api/common/http) が推奨されています。
 [**@angular/<br />platform&#8209;browser**](api/platform-browser)                       | DOMとブラウザに関連したすべて、特にDOMへのレンダリングを手助けする部分です。このパッケージは[AOT](guide/aot-compiler)で事前コンパイルしたプロダクションビルド用のアプリケーションをブートストラップするための `bootstrapModuleFactory()` メソッドも含んでいます。
 [**@angular/<br />platform&#8209;browser&#8209;dynamic**](api/platform-browser-dynamic) | [JITコンパイラ](guide/aot-compiler)を使用してクライアント上でアプリケーションをコンパイル、実行するための[providers](api/core/Provider)とメソッドを含んでいます。
 [**@angular/router**](api/router)                                                       | ルーターモジュールはブラウザのURLの変化に合わせてアプリケーション間を遷移します。詳しくは[Routing and Navigation](guide/router)を見てください。
@@ -90,7 +89,7 @@ Package name                                      | Description
 ### ポリフィルパッケージ
 
 多くのブラウザはAngularが必要とする最新のHTML標準の一部の機能をネイティブでサポートしていません。
-[_Polyfills_](https://en.wikipedia.org/wiki/Polyfill)は不足している機能をエミュレートできます。
+[_Polyfills_](https://en.wikipedia.org/wiki/Polyfill_(programming))は不足している機能をエミュレートできます。
 [ブラウザサポート](guide/browser-support)はどのブラウザがポリフィルを必要としていて
 ポリフィルの追加方法が説明されています。
 

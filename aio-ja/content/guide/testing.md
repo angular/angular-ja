@@ -218,8 +218,8 @@ exports.config = config;
 これで、`--no-sandbox`フラグを使用するために次のコマンドを実行できます:
 
 <code-example language="sh" class="code-shell">
-  ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-  ng e2e -- --protractor-config=e2e/protractor-ci.conf.js
+  ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
+  ng e2e --protractor-config=e2e/protractor-ci.conf.js
 </code-example>
 
 <div class="alert is-helpful">
@@ -469,13 +469,6 @@ Observableを_サブスクライブ_する必要があります。
 このガイドに付属する_コードサンプル_では`HttpClientTestingModule`のデモをしますが、
 このページでは`HttpClientTestingModule`を使用したテストの詳細をカバーをしている
 [Httpガイド](guide/http#testing-http-requests)に先送りします。
-
-<div class="alert is-helpful">
-
-このガイドのサンプルコードでは`app/model/http-hero.service.spec.ts`での
-_レガシー_な`HttpModule`のテストのデモもしています。
-
-</div>
 
 
 ## コンポーネントテストの基本

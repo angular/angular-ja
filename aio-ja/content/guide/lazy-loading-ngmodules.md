@@ -15,6 +15,9 @@
 
 ## 大まかな概要
 
+デフォルトでは、NgModuleは積極的にロードされます。つまり、アプリがロードされるとすぐに、すぐに必要であるかどうかにかかわらず、すべてのNgModuleがロードされます。多数のルートをもつ大規模なアプリケーションの場合は、遅延ロード（必要に応じてNgModuleをロードする設計パターン）を検討してください。
+遅延ロードは、初期バンドルサイズを小さくするのに役立ちます。これにより、ロード時間が短縮されます。
+
 遅延ロードするフィーチャーモジュールをセットアップするための主なステップが3つあります:
 
 1. フィーチャーモジュールを作成する
@@ -65,10 +68,6 @@ ng generate component customers/customer-list
 ```
 
 これにより、`customers`フォルダ内に、コンポーネントを構成する4つのファイルをもつ`customer-list`という名前のフォルダが作成されます。
-
-
-<!-- For more information
-about components, see [Components](). -->
 
 ルーティングモジュールと同様に、
 CLIは`CustomersListComponent`を`CustomersModule`にインポートします。
@@ -143,7 +142,7 @@ ng serve
 </code-example>
 
 
-インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に文字列を指定することに注意してください。モジュールへの相対パス、ハッシュマークまたは`#`、さらにモジュールのクラス名を指定します。
+インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に続けてブラウザの組み込みの `import('...')` 構文を使った関数を指定することに注意してください。インポートパスはそのモジュールへの相対パスです。
 
 ### フィーチャーモジュールの内部
 
@@ -217,6 +216,7 @@ CLIは、フィーチャールーティングモジュールにも`RouterModule.
 
 `forRoot()`にはグローバルなインジェクター設定が含まれています。たとえば、Routerの設定などを行います。`forChild()`はインジェクター設定を持たず、`RouterOutlet`や`RouterLink`のようなディレクティブを持ちます。
 
+詳しくは、 [シングルトンサービス](guide/singleton-services) ガイドの中の [`forRoot()` パターン](guide/singleton-services#forRoot) セクションを参照してください。
 
 <hr>
 

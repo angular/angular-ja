@@ -201,6 +201,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 * 組み込みパイプと同じ方法でカスタムパイプを使用します。
 * パイプを`AppModule`の`declarations`配列に含める必要があります。
+* パイプをクラスに注入することを選択した場合、それをあなたの `NgModule` の ` provider` 配列に提供しなければなりません。
 
 <div class="callout is-helpful">
 

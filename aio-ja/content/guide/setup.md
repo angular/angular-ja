@@ -1,18 +1,32 @@
-# ローカル開発環境のセットアップ
+# Setup for Upgrading from AngularJS
 
-{@a develop-locally}
+<!-- 
+Question: Can we remove this file and instead direct readers to https://github.com/angular/quickstart/blob/master/README.md
+-->
 
-<live-example name=quickstart>クイックスタートライブコーディング</live-example> の例はAngularの_遊び場_です。
-これは実際のアプリケーションを開発する場ではありません。
-あなたは自分のマシン上で[ローカルに開発をするべきです](guide/setup#why-locally "なぜローカルで開発するのか")...そして私たちはそうやってAngularを学ぶべきだと考えています。
+<div class="alert is-critical">
 
-あなたのマシン上に新しいプロジェクトをセットアップするのは、[github](https://github.com/angular/quickstart "github上のクイックスタートリポジトリをインストール")で管理されている**クイックスタートシード**を使って素早く、簡単にできます。
+**Audience:** Use this guide **only** in the context of  [Upgrading from AngularJS](guide/upgrade "Upgrading from AngularJS to Angular") or [Upgrading for Performance](guide/upgrade-performance "Upgrading for Performance"). 
+Those Upgrade guides refer to this Setup guide for information about using the [deprecated QuickStart GitHub repository](https://github.com/angular/quickstart "Deprecated Angular QuickStart GitHub repository"), which was created prior to the current Angular [CLI](cli "CLI Overview"). 
 
-[Node.js®とnpm](guide/setup#install-prerequisites "Node.jsとnpmがない場合は?")がインストールされていることが必要です。
+**For all other scenarios,** see the current instructions in [Local Environment Setup](guide/setup-local "Setting up for Local Development").
+
+
+</div>
+
+<!--
+The <live-example name=quickstart>QuickStart live-coding</live-example> example is an Angular _playground_.
+There are also some differences from a local app, to simplify that live-coding experience.
+In particular, the QuickStart live-coding example shows just the AppComponent file; it creates the equivalent of app.module.ts and main.ts internally for the playground only.
+-->
+
+This guide describes how to develop locally on your own machine.
+Setting up a new project on your machine is quick and easy with the [QuickStart seed on github](https://github.com/angular/quickstart "Install the github QuickStart repo").
+
+**Prerequisite:** Make sure you have [Node.js® and npm installed](guide/setup-local#prerequisites "Angular prerequisites").
+
 
 {@a clone}
-
-
 ## クローン
 
 次のコマンドを使って、_クローンから起動まで_を実行します。
@@ -119,10 +133,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 
 
 
-**クイックスタートシード**にはクイックスタートプレイグラウンドと同じアプリケーションが入っています。
-しかし、このプロジェクトの真の目的は_ローカル_開発環境の確かな基盤を提供することです。
-結果として、マシン上のプロジェクトフォルダには_もっと数多くの_ファイルがあり、
-それらのほとんどは[あとで学ぶ](guide/file-structure)ことができます。
+**クイックスタートシード** は、基本的なクイックスタートプレイグラウンドのアプリケーションと、ローカル開発に必要なその他のファイルを提供します。そのため、あなたのマシンのプロジェクトフォルダにはたくさんのファイルがあり、それらのほとんどは　[あとで学ぶ](guide/file-structure)　ことができます。
 
 
 
@@ -313,51 +324,17 @@ _npm_ パッケージマネージャーは、それ自身が _Node.js_ アプリ
 もしあなたのマシン上で古いバージョンのNode.jsとnpmで動作するプロジェクトがある場合には[nvm](https://github.com/creationix/nvm)が必要になるでしょう。
 
 
-{@a why-locally}
-
-
-
-## 付録: なぜローカルで開発するのか
-
-ブラウザ上での<live-example title="QuickStart Seed in Stackblitz">ライブコーディング</live-example>はAngularを探るのにとてもよいです。
-
-ほぼすべてのドキュメントページ上のリンクが完成されたサンプルをブラウザに表示します。
-サンプルコードで遊ぶこともできますし、改修したものを友達とシェアできますし、ダウンロードしてマシン上で実行することもできます。
-
-[入門](guide/quickstart "Angularクイックスタートプレイグラウンド")は`AppComponent`ファイルしか示しません。
-それは_プレイグラウンドだけのために_`app.module.ts`と`main.ts`に等しいものを作ります。
-なので、読み手は注意散漫にならずにAngularについて知ることができます。
-他のサンプルはクイックスタートのシードにもとづいています。
-
-これほど楽しいですが...
-
-* アプリケーションをStackblitzにはデプロイできません
-* コードを書くとき常にオンラインとは限りません
-* TypeScriptをブラウザでトランスパイルするのは遅いです
-* 型サポート、リファクタリング、コード補完はローカルのIDEでのみ機能します
-
-<live-example title="QuickStart Seed in Stackblitz">ライブコーディング</live-example>環境は遊び場として使ってください。
-ドキュメントのサンプルを試したり、あなた自身で実験するために使ってください。
-また
-<a href="https://github.com/angular/angular/issues/new" title="ドキュメントのイシューを報告">ドキュメントに関してのイシューを報告</a> したり
-<a href="https://github.com/angular/angular/issues/new" title="Angularのイシューを報告">Angular自体のイシューを報告</a>
-したりするときのバグの再現環境として最適です。
-
-実際の開発では、[ローカル開発](guide/setup#develop-locally)を強く推奨します。
 
 ## 付録: IEを使ったローカル開発
 
-`ng serve`を使ってローカルでAngular開発をする際、自動的にブラウザとローカル開発サーバーとの間で`websocket`接続がセットアップされるためコードが変更されると、ブラウザは自動的にリフレッシュします。
+`ng serve` を使ってローカルでAngular開発をする際、自動的にブラウザとローカル開発サーバーとの間で`websocket` 接続がセットアップされるためコードが変更されると、ブラウザは自動的にリフレッシュします。
 
-windowsではデフォルトではアプリケーションは6つの接続しかできません。
+Windowsではデフォルトではアプリケーションは6つの接続しかできません。
 <a href="https://msdn.microsoft.com/library/ee330736%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396#websocket_maxconn" title="MSDN WebSocket settings">MSDN WebSocket Settings</a>.
-なので、IEが手動または`ng serve`によって自動的にリフレッシュされると、たまに、websocketが適切に切断されず、
-websocketの接続が限度を超えると、`SecurityError`が投げられます。このエラーはAngularアプリケーションに影響しません。
-このエラーをクリアするためにはIEを再起動するか、またはwindowsのレジストリを書き換えて限度数を更新します。
+なので、IEが手動または`ng serve`によって自動的にリフレッシュされると、たまに、websocketが適切に切断されず、websocketの接続が限度を超えると、`SecurityError`が投げられます。このエラーはAngularアプリケーションに影響しません。このエラーをクリアするためにはIEを再起動するか、またはwindowsのレジストリを書き換えて限度数を更新します。
 
-{@a appendix-test-using-fakeasyncasync}
 
-## 付録: `fakeAsync()/async()` を使ったテスト
+## 付録: `fakeAsync()/async()` を使ったテスト　{@a appendix-test-using-fakeasyncasync}
 
 もしユニットテストを実行するために `fakeAsync()/async()` ヘルパー関数を使う場合 （詳細は[テスティングガイド](guide/testing#async-test-with-fakeasync)を参照してください。) は、`zone.js/dist/zone-testing` をテストのセットアップファイルでインポートしなければなりません。
 

@@ -120,7 +120,7 @@ export class DocViewerComponent implements OnDestroy {
         }
       }
 
-      this.titleService.setTitle(title ? `Angular 日本語ドキュメンテーション - ${title}` : 'Angular 日本語ドキュメンテーション');
+      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular');
     };
   }
 
@@ -206,7 +206,7 @@ export class DocViewerComponent implements OnDestroy {
                     // setting each style.
                     switchMap(() => raf$), tap(() => elem.style[prop] = from),
                     switchMap(() => raf$), tap(() => elem.style.transition = `all ${duration}ms ease-in-out`),
-                    switchMap(() => raf$), tap(() => (elem.style as any)[prop] = to),
+                    switchMap(() => raf$), tap(() => elem.style[prop] = to),
                     switchMap(() => timer(getActualDuration(elem))), switchMap(() => this.void$),
                 );
         };

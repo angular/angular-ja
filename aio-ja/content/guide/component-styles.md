@@ -102,7 +102,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" header="src/app/hero-details.component.css" linenums="false">
 </code-example>
 
-### (非推奨) `/deep/` 、 `>>>` と `::ng-deep`
+### (非推奨) `/deep/` 、 `>>>` と `::ng-deep` {@a deprecated-deep--and-ng-deep}
 
 コンポーネントスタイルは通常、コンポーネント自身のテンプレートのHTMLにのみ適用されます。
 

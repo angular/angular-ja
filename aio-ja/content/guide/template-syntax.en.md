@@ -956,7 +956,7 @@ The following event binding listens for the button's click events, calling
 the component's `onSave()` method whenever a click occurs:
 
 <figure>
-  <img src='generated/images/guide/event-binding/syntax-diagram.svg' alt="Syntax diagram">
+  <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </figure>
 
 ### Target event
@@ -1027,7 +1027,7 @@ Although the `ItemDetailComponent` has a delete button, it doesn't know how to d
 Here are the pertinent excerpts from that `ItemDetailComponent`:
 
 
-<code-example path="event-binding/src/app/item-detail/item-detail.component.html" linenums="false" header="src/app/item-detail/item-detail.component.ts (template)" region="line-through">
+<code-example path="event-binding/src/app/item-detail/item-detail.component.html" linenums="false" header="src/app/item-detail/item-detail.component.html (template)" region="line-through">
 </code-example>
 
 <code-example path="event-binding/src/app/item-detail/item-detail.component.ts" linenums="false" header="src/app/item-detail/item-detail.component.ts (deleteRequest)" region="deleteRequest">

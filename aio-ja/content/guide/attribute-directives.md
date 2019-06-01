@@ -15,7 +15,7 @@ Angularには、3つのディレクティブがあります。
 1. 属性ディレクティブ(Attribute directives)&mdash;要素やコンポーネント、別のディレクティブの見た目や動作を変更するディレクティブ
 
 *コンポーネント*は、3つのディレクティブのうち、もっとも一般的なものです。
-[入門](guide/quickstart)でコンポーネントをはじめて見たはずです。
+[入門](start "Getting Started with Angular") チュートリアルでコンポーネントをはじめて見たはずです。
 
 *構造ディレクティブ*は、ビューの構造を変更します。
 2つの例としては、[NgFor](guide/template-syntax#ngFor)と[NgIf](guide/template-syntax#ngIf)です。それらについては[構造ディレクティブ](guide/structural-directives)ガイドで学んでください。

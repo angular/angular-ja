@@ -4,6 +4,10 @@ You can create and publish new libraries to extend Angular functionality. If you
 
 A simple example might be a button that sends users to your company website, that would be included in all apps that your company builds.
 
+<div class="alert is-helpful">
+     <p>For more details on how a library project is structured you can refer the <a href="guide/file-structure#library-project-files">Library Project Files</a></p>
+</div>
+
 ## Getting started
 
 Use the Angular CLI to generate a new library skeleton with the following command:
@@ -82,6 +86,8 @@ Suppose you want to read a configuration file and then generate a form based on 
 If that form will need additional customization by the user, it might work best as a schematic.
 However, if the forms will always be the same and not need much customization by developers, then you could create a dynamic component that takes the configuration and generates the form.
 In general, the more complex the customization, the more useful the schematic approach.
+
+{@a integrating-with-the-cli}
 
 ## Integrating with the CLI
 

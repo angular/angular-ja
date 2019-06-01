@@ -5,22 +5,25 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 ## 全体的なJSONの構成
 
-`angular.json` のトップ階層では、いくつかのプロパティからワークスペースを設定し、`projects` セクションにはプロジェクトごとのオプションを設定します。
+`angular.json` のトップ階層では、いくつかのプロパティからワークスペースを設定し、`projects` セクションにはプロジェクトごとのオプションを設定します。CLI defaults set at the workspace level can be overridden by defaults set at the project level, and defaults set at the project level can be overridden on the command line.
+
+The following properties, at the top level of the file, configure the workspace.
 
 * `version`: 設定ファイルのバージョン
 * `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
 * `defaultProject`: 引数として与えられていない場合にコマンドで使われる、デフォルトのプロジェクト名。新しいワークスペースに新しいアプリケーションを `ng new` で作成したとき、ここの値が変更されるまで、そのアプリはワークスペースのデフォルトプロジェクトになります
 * `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。
-* `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリ、e2eテストアプリ）のサブセクションと、プロジェクトごとの構成オプションが含まれます
+* `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリ）のサブセクションと、プロジェクトごとの構成オプションが含まれます
 
-`ng new app_name` で作成した最初のアプリは "projects" の配下に、対応するエンドツーエンドのテストアプリとともに一覧で表示されます。
+`ng new app_name` で作成した最初のアプリは "projects" の配下にあります。
 
-<code-example format="." language="none" linenums="false">
-projects
-  app_name
+<code-example format="." language="json" linenums="false">
+"projects": {
+  "app_name": {
     ...
-  app_name-e2e
-    ...
+  }
+  ...
+}
 </code-example>
 
 `ng generate application` を使用して作成された追加の各アプリには、対応するエンドツーエンドのテストプロジェクトがあり、それぞれに独自の設定セクションがあります。
@@ -29,8 +32,8 @@ projects
 <div class="alert is-helpful">
 
   設定ファイルの `projects` セクションは、ワークスペースの構成ファイルとは正確には対応していないことに注意してください。
-  * `ng new` によって作成された最初のアプリは、e2eアプリとともにワークスペースのファイル構造のトップレベルにあります。
-  * 追加されたアプリ、e2eアプリ、そしてライブラリはワークスペース内の `projects` フォルダに入ります。
+  * `ng new` によって作成された最初のアプリは、ワークスペースのファイル構造のトップレベルにあります。
+  * 追加されたアプリ、そしてライブラリはワークスペース内の `projects` フォルダに入ります。
 
   さらに詳しい情報は、[ワークスペースとプロジェクトのファイル構造](guide/file-structure) をご覧ください。
 
@@ -55,7 +58,7 @@ projects
 | :-------------- | :---------------------------- |
 | `root`          | ワークスペースフォルダを基準とした、このプロジェクトのルートフォルダです。ワークスペースのトップ階層にある初期アプリでは空です。 |
 | `sourceRoot`    | このプロジェクトのソースファイルのルートフォルダです。 |
-| `projectType`   | "application" または "library" のいずれかです。applicationはブラウザ内で独立して実行できますが、libraryでは実行できません。アプリとそのアプリのe2eテストアプリはどちらもapplicationタイプです。 |
+| `projectType`   | "application" または "library" のいずれかです。applicationはブラウザ内で独立して実行できますが、libraryでは実行できません。 |
 | `prefix`        | Angularによって生成されたセレクターの先頭に追加される文字列です。アプリや機能単位でのカスタマイズができます。 |
 | `schematics`    | このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。 |
 | `architect`     | このプロジェクトでArchitectが使用するビルダーのターゲットのためのデフォルト設定です。 |
@@ -76,14 +79,16 @@ You can update your workspace schema file to set a different default for a sub-c
 
 {@a architect}
 
-## プロジェクトツールの設定オプション
+## プロジェクトツールの設定オプション {@a project-tool-configuration-options}
 
 Architectは、提供されている設定にしたがって、コンパイルやテスト実行などの複雑なタスクを実行するためにCLIが使用するツールです。
 `architect` セクションには、一連のArchitect *targets* が含まれています。
 ターゲットの多くはそれらを実行するCLIコマンドに対応しています。
 `ng run` コマンドを使用することでいくつかの追加の定義済みターゲットを実行できますし、あなた自身のターゲットを定義することもできます。
 
-個々のターゲットのオブジェクトは、そのターゲットの `builder` を指定します。これは、Architectが実行するツールのnpmパッケージです。さらに各ターゲットには、ターゲットのデフォルトオプションを設定する `options` セクションと、ターゲットの代替設定に名前をつけて指定する `configurations` セクションがあります。次の [ビルドのターゲット](#build-target) の例を参考にしてください。
+個々のターゲットのオブジェクトは、そのターゲットの `builder` を指定します。これは、Architectが実行するツールのnpmパッケージです。
+さらに各ターゲットには、ターゲットのデフォルトオプションを設定する `options` セクションと、ターゲットの代替設定に名前をつけて指定する `configurations` セクションがあります。
+次の [ビルドのターゲット](#build-target) の例を参考にしてください。
 
 <code-example format="." language="json" linenums="false">
       "architect": {
@@ -174,7 +179,7 @@ The JSON schemas that the define the options and defaults for each of these defa
 
 ## Project asset configuration
 
-Each `build` target configuration can include as `assets` array that lists files or folders you want to copy as-is when building your project.
+Each `build` target configuration can include an `assets` array that lists files or folders you want to copy as-is when building your project.
 By default, the `src/assets/` folder and `src/favicon.ico` are copied over.
 
 <code-example format="." language="json" linenums="false">

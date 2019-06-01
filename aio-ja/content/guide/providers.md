@@ -21,7 +21,7 @@ ng generate service User
 
 このコマンドによって次のような`UserService`スケルトンが作成されます:
 
-<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.0.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts" linenums="false"> </code-example>
 
 あなたはいま、`UserService`をアプリケーションのどこにでも注入することができます。
 
@@ -38,7 +38,7 @@ ng generate service User
 
 特定の`@NgModule`内でサービスを提供するように指定することもできます。たとえば、あなたが作成した`UserModule`をインポートしない限り`UserService`をアプリケーションで利用できないようにモジュール内でサービスを提供するように指定できます:
 
-<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.1.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.ts" linenums="false">  </code-example>
 
 上記の例では、モジュールにサービスを提供する推奨の方法を示しています。この方法を使用すると、サービスがどこからも注入されないときに、ツリーシェイキングの対象にできるので推奨されます。どのモジュールがサービスを提供すべきかをそのサービス内で指定できない場合は、モジュール内でそのサービスのプロバイダーを宣言することもできます:
 

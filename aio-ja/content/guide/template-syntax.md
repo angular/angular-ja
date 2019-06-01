@@ -956,7 +956,7 @@ Angular のイベントバインディングの構文は、
 クリックが発生するたびにコンポーネントの `onSave()` メソッドを呼び出します:
 
 <figure>
-  <img src='generated/images/guide/event-binding/syntax-diagram.svg' alt="Syntax diagram">
+  <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </figure>
 
 ### ターゲットイベント
@@ -1605,7 +1605,7 @@ DOM に対して要素を追加または削除するため、_構造_ ディレ�
 
 {@a ref-var}
 
-## テンプレート参照変数 ( <span class="syntax">#var</span> )
+## テンプレート参照変数 ( <span class="syntax">#var</span> ) {@a template-reference-variables--var-}
 
 **テンプレート参照変数** は多くの場合、テンプレート内の DOM 要素への参照です。
 Angular コンポーネント、ディレクティブ、または

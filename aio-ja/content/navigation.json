@@ -67,13 +67,14 @@
       "hidden": true
     },
     {
-      "title": "はじめに",
+      "title": "入門",
       "tooltip": "Learn the basics by building your first Angular application.",
       "children": [
         {
           "url": "start",
-          "title": "Your First App",
-          "tooltip": "Introduction to Angular's component model, template syntax, and component communication."
+          "title": "はじめてのアプリ",
+          "tooltip": "Angularのコンポーネントモデル、テンプレートの構文、およびコンポーネントのコミュニケーションについて紹介します。",
+          "translated": true
         },
         {
           "url": "start/routing",
@@ -657,7 +658,7 @@
       ]
     },
     {
-      "title": "Dev Workflow",
+      "title": "開発ワークフロー",
       "tooltip": "Build, testing, and deployment information.",
       "children": [
         {
@@ -713,7 +714,7 @@
       ]
     },
     {
-      "title": "Configuration",
+      "title": "設定",
       "tooltip": "Workspace and project structure, configuration files.",
       "children": [
         {
@@ -797,7 +798,7 @@
       ]
     },
     {
-      "title": "CLI Commands",
+      "title": "CLIコマンド",
       "tooltip": "Angular CLIコマンドのリファレンス",
       "children": [
         {

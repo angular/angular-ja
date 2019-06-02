@@ -14,7 +14,7 @@
   </a>
   <a href="guide/setup-local" class="docs-card"
     title="Angular Local Environment Setup">
-      <section>働き始める</section>
+      <section>仕事をはじめる</section>
       <p>Angular CLIを使ってローカル環境を設定しましょう</p>
       <p class="card-footer">ローカルセットアップ</p>
   </a>

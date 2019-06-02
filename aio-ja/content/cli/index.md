@@ -1,31 +1,31 @@
-# CLI Overview and Command Reference
+# CLIの概要とコマンドリファレンス
 
-The Angular CLI is a command-line interface tool that you use to initialize, develop, scaffold, and maintain Angular applications. You can use the tool directly in a command shell, or indirectly through an interactive UI such as [Angular Console](https://angularconsole.com).
+Angular CLIは、Angularアプリケーションの初期化、開発、スキャフォールド、およびメンテナンスに使用するコマンドラインインターフェースツールです。このツールは、コマンドシェルで直接使用することも、 [Angularコンソール](https://angularconsole.com) などの対話型UIを通じて間接的に使用することもできます。
 
-## Installing Angular CLI
+## Angular CLIのインストール
 
-Major versions of Angular CLI follow the supported major version of Angular, but minor versions can be released separately.
+Angular CLIのメジャーバージョンは、サポートされているAngularのメジャーバージョンに従いますが、マイナーバージョンは個別にリリースできます。
 
-Install the CLI using the `npm` package manager:
+`npm` パッケージマネージャを使用してCLIをインストールします:
 <code-example format="." language="bash">
 npm install -g @angular/cli
 </code-example>
 
-For details about changes between versions, and information about updating from previous releases,
-see the Releases tab on GitHub: https://github.com/angular/angular-cli/releases
+バージョン間の変更、および以前のリリースからのアップデートに関する詳細については、
+GitHubのリリースタブを参照してください: https://github.com/angular/angular-cli/releases
 
-## Basic workflow
+## 基本的なワークフロー
 
-Invoke the tool on the command line through the `ng` executable.
-Online help is available on the command line.
-Enter the following to list commands or options for a given command (such as [generate](cli/generate)) with a short description.
+コマンドラインから実行可能な `ng` を介してツールを起動します。
+オンラインヘルプはコマンドラインで利用できます。
+特定のコマンド（ [generate](cli/generate) など）またはオプションを簡単な説明付きでリストするには、次のように入力します。
 
 <code-example format="." language="bash">
 ng help
 ng generate --help
 </code-example>
 
-To create, build, and serve a new, basic Angular project on a development server, go to the parent directory of your new workspace use the following commands:
+開発サーバーで新しい基本的なAngularプロジェクトを作成、構築、および提供するには、新しいワークスペースの親ディレクトリに移動し、次のコマンドを使用します:
 
 <code-example format="." language="bash">
 ng new my-first-project
@@ -33,77 +33,76 @@ cd my-first-project
 ng serve
 </code-example>
 
-In your browser, open http://localhost:4200/ to see the new app run.
-When you use the [ng serve](cli/serve) command to build an app and serve it locally, the server automatically rebuilds the app and reloads the page when you change any of the source files.
+ブラウザで http://localhost:4200/ を開き、新しいアプリが実行されるのを確認します。
+[ng serve](cli/serve) コマンドを使用してアプリを構築し、それをローカルに配信すると、ソースファイルのいずれかを変更すると、サーバーによって自動的にアプリが再構築され、ページがリロードされます。
 
-## Workspaces and project files
+## ワークスペースとプロジェクトファイル
 
-The [ng new](cli/new) command creates an *Angular workspace* folder and generates a new app skeleton.
-A workspace can contain multiple apps and libraries.
-The initial app created by the [ng new](cli/new) command is at the top level of the workspace.
-When you generate an additional app or library in a workspace, it goes into a `projects/` subfolder.
+[ng new](cli/new) コマンドは *Angular workspace* フォルダを作成し、新たなアプリケーションのスケルトンを生成します。
+ワークスペースには複数のアプリとライブラリを含めることができます。
+[ng new](cli/new) コマンドによって作成された最初のアプリは、ワークスペースの最上位にあります。
+ワークスペースで追加のアプリまたはライブラリを生成すると、それらは `projects/` サブフォルダに入ります。
 
-A newly generated app contains the source files for a root module, with a root component and template.
-Each app has a `src` folder that contains the logic, data, and assets.
+新しく生成されたアプリには、ルートコンポーネントとテンプレートを含むルートモジュールのソースファイルが含まれています。
+各アプリにはロジック、データ、およびアセットを含む `src` フォルダがあります。
 
-You can edit the generated files directly, or add to and modify them using CLI commands.
-Use the [ng generate](cli/generate) command to add new files for additional components and services, and code for new pipes, directives, and so on.
-Commands such as [add](cli/add) and [generate](cli/generate), which create or operate on apps and libraries, must be executed from within a workspace or project folder.
+生成されたファイルを直接編集することも、CLIコマンドを使用して追加して変更することもできます。
+[ng generate](cli/generate) コマンドを使用して、追加のコンポーネントやサービス用の新しいファイルを追加したり、新しいパイプやディレクティブなどのコードを追加したりします。
+アプリやライブラリを作成または操作する [add](cli/add) や [generate](cli/generate) などのコマンドは、ワークスペースまたはプロジェクトフォルダー内から実行する必要があります。
 
-* See more about the [Workspace file structure](guide/file-structure).
+* [ワークスペースとプロジェクトのファイル構造](guide/file-structure) についての詳細を参照してください。
 
-### Workspace and project configuration
+### ワークスペースとプロジェクト構成
 
-A single workspace configuration file, `angular.json`, is created at the top level of the workspace.
-This is where you can set per-project defaults for CLI command options, and specify configurations to use when the CLI builds a project for different targets.
+ひとつのワークスペース設定ファイル `angular.json` が、ワークスペースの最上位に作成されます。
+ここで、CLIコマンドオプションにプロジェクトごとのデフォルトを設定し、CLIがさまざまなターゲット用にプロジェクトをビルドするときに使用する構成を指定できます。
 
-The [ng config](cli/config) command lets you set and retrieve configuration values from the command line, or you can edit the `angular.json` file directly.
-Note that option names in the configuration file must use [camelCase](guide/glossary#case-types), while option names supplied to commands can use either camelCase or dash-case.
+[ng config](cli/config) コマンドを使用すると、コマンドラインから設定値を設定および取得できます。または、 `angular.json` ファイルを直接編集できます。
+設定ファイルのオプション名には [camelCase](guide/glossary#case-types) を使用する必要がありますが、コマンドに指定するオプション名にはcamelCaseまたはダッシュケースを使用できます。
 
-* See more about [Workspace Configuration](guide/workspace-config).
-* See the [complete schema](https://github.com/angular/angular-cli/wiki/angular-workspace) for `angular.json`.
+* [ワークスペースの設定](guide/workspace-config) ワークスペース設定についての詳細を参照してください。
+* `angular.json`の [完全なスキーマ](https://github.com/angular/angular-cli/wiki/angular-workspace) を参照してください。
 
-## CLI command-language syntax
+## CLIコマンド言語構文
 
-Command syntax is shown as follows:
+コマンド構文は次のとおりです:
 
 `ng` *commandNameOrAlias* *requiredArg* [*optionalArg*] `[options]`
 
-* Most commands, and some options, have aliases. Aliases are shown in the syntax statement for each command.
+* ほとんどのコマンドと一部のオプションにはエイリアスがあります。別名は、各コマンドの構文ステートメントに示されています。
 
-* Option names are prefixed with a double dash (--).
-    Option aliases are prefixed with a single dash (-).
-    Arguments are not prefixed.
-    For example: 
+* オプション名の前には二重ダッシュ（--）が付きます。
+    オプションエイリアスの先頭には単一ダッシュ（ - ）が付きます。
+    引数は前に付けられません。
+    たとえば: 
     <code-example format="." language="bash">
         ng build my-app -c production
     </code-example>
 
-* Typically, the name of a generated artifact can be given as an argument to the command or specified with the --name option.
+* 通常、生成された成果物の名前は、コマンドの引数として指定することも、--nameオプションで指定することもできます。
 
-* Argument and option names can be given in either
-[camelCase or dash-case](guide/glossary#case-types).
-`--myOptionName` is equivalent to `--my-option-name`.
+* 引数とオプションの名前は
+[camelCaseかdash-case](guide/glossary#case-types)で指定できます。
+`--myOptionName` は `--my-option-name` と同じです。
 
-### Boolean and enumerated options
+### ブール値および列挙型オプション
 
-Boolean options have two forms: `--thisOption` sets the flag, `--noThisOption` clears it.
-If neither option is supplied, the flag remains in its default state, as listed in the reference documentation.
+ブール値オプションには2つの形式があります: `--thisOption` はフラグを設定し、 `--noThisOption` はフラグをクリアします。
+どちらのオプションも指定されていない場合、フラグはリファレンスドキュメントに記載されているデフォルトのままになります。
 
-Allowed values are given with each enumerated option description, with the default value in **bold**.
+許容値は、列挙型オプションの説明ごとに示されており、デフォルト値は **太字** で示されています。
 
-### Relative paths
+### 相対パス
 
-Options that specify files can be given as absolute paths, or as paths relative to the current working directory, which is generally either the workspace or project root.
+ファイルを指定するオプションは、絶対パスとして、または現在の作業ディレクトリ（通常はワークスペースまたはプロジェクトルートのどちらか）に対する相対パスとして指定できます。
 
 ### Schematics
 
-The [ng generate](cli/generate) and  [ng add](cli/add) commands take as an argument the artifact or library to be generated or added to the current project.
-In addition to any general options, each artifact or library defines its own options in a *schematic*.
-Schematic options are supplied to the command in the same format as immediate command options.
+[ng generate](cli/generate) と [ng add](cli/add) コマンドは、アーティファクトやライブラリが生成されるか、現在のプロジェクトに追加する引数として取ります
+一般的なオプションに加えて、各アーティファクトまたはライブラリは、 *schematics* で独自のオプションを定義します。
+Schematicオプションは、即時コマンドオプションと同じ形式でコマンドに提供されます。
 
 
-### Building with Bazel
+### Bazelを使ったビルド
 
-Optionally, you can configure the Angular CLI to use [Bazel](https://docs.bazel.build) as the build tool. For more information, see [Building with Bazel](guide/bazel). 
-
+オプションで [Bazel](https://docs.bazel.build) をビルドツールとして使用するようにAngular CLIを設定できます。詳しくは [Building with Bazel](guide/bazel) を参照してください。

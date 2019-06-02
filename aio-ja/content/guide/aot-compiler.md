@@ -245,7 +245,7 @@ Angular ライブラリはすべての Angular の `.metadata.json` ファイル
 
 {@a function-expression}
 {@a arrow-functions}
-### アロー関数なし
+### アロー関数は使えません
 
 AOTコンパイラは[関数式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/function)および
 _ラムダ_ 関数とも呼ばれる[アロー関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions)をサポートしていません。

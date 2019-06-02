@@ -113,8 +113,6 @@ angular/angular-jaをフォークしたリポジトリに変更をプッシュ�
 
 日本語への翻訳は、以下のガイドラインに従ってください。
 
-- [スタイルガイド](https://github.com/angular/angular-ja/wiki/StyleGuide)
-
 ### 原文を `.en.md` ファイルとして保存する
 
 originを更新したあとの原文自体のdiffを管理するために、翻訳した時点の原文を `xxx.en.md` ファイルとして保存します。

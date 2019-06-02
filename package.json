@@ -9,14 +9,12 @@
   "scripts": {
     "test": "npm run textlint",
     "deploy": "firebase deploy --token \"$FIREBASE_TOKEN\"",
-    "contributors": "githubcontrib --owner angular --repo angular-ja --cols 6 --format md --showlogin true --sortOrder desc | pbcopy",
     "update-origin": "./update-origin.sh",
     "textlint": "textlint 'aio-ja/**/!(*.en.*)'",
     "textlint:f": "textlint --fix 'aio-ja/**/!(*.en.*)'"
   },
   "devDependencies": {
-    "firebase-tools": "^4.2.1",
-    "github-contributors-list": "^1.2.2",
+    "firebase-tools": "^6.10.0",
     "glob": "^7.1.2",
     "textlint": "^11.0.0",
     "textlint-filter-rule-comments": "^1.2.2",

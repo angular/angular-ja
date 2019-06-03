@@ -49,7 +49,7 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 ## `forRoot()` パターン {@a the-forroot-pattern}
 
-通常、`providedIn`はサービスを提供するために、`forRoot()`/`forChild()`はルーティングのためにのみ使用されます。しかしながら、サービスがシングルトンであるために`forRoot()`がどのように動作するかを理解することは、技術に対する理解を深めることに繋がります。
+通常、サービスを提供するために必要なのは `providedIn` だけで、`forRoot()`/`forChild()`はルーティングのためにのみ使用されます。しかしながら、サービスがシングルトンであるために`forRoot()`がどのように動作するかを理解することは、技術に対する理解を深めることに繋がります。
 
 モジュールがprovidersとdeclarations（components、directives、pipes）を定義している場合、
 モジュールを複数のフィーチャーモジュールにロードすると、サービスの登録が重複します。その結果、複数のサービスのインスタンスが生成される可能性があり、サービスはシングルトンとして動作しなくなります。
@@ -62,7 +62,7 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 <div class="alert is-helpful">
 
-**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example oDownload>NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。凡例は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
+**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example oDownload>NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
 
 </div>
 

@@ -1,6 +1,8 @@
 version: 1
 imports:
-  - path: test/techbooster.yml
+  - path: ./node_modules/prh-rules/files/markdown.yml
+  - path: ./node_modules/prh-rules/media/techbooster.yml
+    disableImports: true
     ignoreRules:
       # 日本語以外のファイルでは半角カッコを使うため
       - expected: （$1）

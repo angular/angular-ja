@@ -1,12 +1,10 @@
 {
   "filters": {
-      "comments": true
+    "comments": true
   },
   "rules": {
     "prh": {
-      "rulePaths" :[
-        "prh.yml"
-      ]
+      "rulePaths": ["prh.yml"]
     }
   }
 }

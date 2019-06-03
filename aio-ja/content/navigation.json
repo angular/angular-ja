@@ -524,8 +524,9 @@
         },
         {
           "url": "guide/i18n",
-          "title": "Internationalization (i18n)",
-          "tooltip": "Translate the app's template text into multiple languages."
+          "title": "国際化 (i18n)",
+          "tooltip": "アプリのテンプレートテキストを複数の言語に翻訳します",
+          "translated": true
         },
 
         {
@@ -669,8 +670,9 @@
         },
         {
           "url": "guide/aot-compiler",
-          "title": "Ahead-of-Time Compilation",
-          "tooltip": "Learn why and how to use the Ahead-of-Time (AOT) compiler."
+          "title": "事前コンパイル",
+          "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+          "translated": true
         },
         {
           "url": "guide/build",
@@ -802,9 +804,10 @@
       "tooltip": "Angular CLIコマンドのリファレンス",
       "children": [
         {
-          "title": "Overview",
-          "tooltip": "An introduction to the CLI tool, commands, and syntax.",
-          "url": "cli"
+          "title": "概要",
+          "tooltip": "CLIツール、コマンド、および構文の紹介",
+          "url": "cli",
+          "translated": true
         },
         {
           "title": "Usage Analytics",

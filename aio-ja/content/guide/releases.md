@@ -32,32 +32,32 @@ Angularのバージョン番号には3つの部分があります: `major.minor.
 
 
 {@a updating}
-### Supported update paths
+### サポートされているアップデートパス
 
-In alignment with the versioning scheme described above, we commit to support the following update paths:
+上記のバージョン管理体系に沿って、次のアップデートパスをサポートすることを約束します。
 
 * **同じメジャーバージョン** 内で更新する場合は、中間バージョンをスキップしてターゲットバージョンに直接更新することができます。たとえば、7.0.0から7.2.11に更新する場合は、直接更新できます。7.2.11にアップデートする前に7.0.0から7.1.0に更新する必要はありません。
 
 * **メジャーバージョンを別のメジャーバージョンに** 更新する場合は、 **メジャーバージョンをスキップしない** ことをお勧めします。手順にしたがって、次のメジャーバージョンに段階的に更新し、各ステップでテストし、検証します。たとえば、バージョン6.x.xからバージョン8.x.xに更新する場合は、まず最新の7.x.xリリースに更新することをお勧めします。7.x.xに正常に更新した後には、8.x.xに更新できます
 
 
-See [Keeping Up-to-Date](guide/updating "Updating your projects") for more information about updating your Angular projects to the most recent version. 
+Angularプロジェクトを最新バージョンにアップデートする方法の詳細については、[最新に保つ](guide/updating "Updating your projects")を参照してください。
 
 
 {@a previews}
-### Preview releases
+### プレビューリリース
 
-We let you preview what's coming by providing Beta releases and Release Candidates (`rc`) for each major and minor release: 
+個々のメジャーリリースとマイナーリリースごとに、ベータリリースとリリース候補版（`rc`）を提供することで、今後の展開を先取りできるようにしています。
 
 <!-- 
 * **Next:** The release that is under active development. The next release is indicated by a release tag appended with the  `next` identifier, such as  `8.1.0-next.0`. For the next version of the documentation, see [next.angular.io](https://next.angular.io). 
 -->
 
-* **Beta:** A release that is under active development and testing. A Beta release is indicated by a release tag appended with the  `beta` identifier, such as  `8.0.0-beta.0`. 
+* **ベータ:** 活発な開発とテストの下にあるリリース。ベータリリースは、`8.0.0-beta.0` のように `beta` 識別子を付加したリリースタグで示されます。
 
-* **Release candidate:** A release that is feature complete and in final testing. A release candidate is indicated by a release tag appended with the `rc` identifier, such as version `8.1.0-rc`.
+* **リリース候補:** 機能が完成し最終テストが行​​われているリリース。リリース候補版は、バージョン `8.1.0-rc` のように、`rc` 識別子が付加されたリリースタグで示されます。
 
-The next version of the documentation is available at [next.angular.io](https://next.angular.io). This includes any documentation for Beta or Release Candidate features and APIs. 
+次期バージョンのドキュメントは [next.angular.io](https://next.angular.io) から入手できます。これには、ベータ版またはリリース候補の機能およびAPIに関するすべての資料が含まれます。
 
 
 {@a frequency}
@@ -133,14 +133,13 @@ Angularバージョン^ 4.0.0と^ 5.0.0はサポートされなくなりまし�
 
 更新に十分な時間と明確なパスがあることを確認するための、非推奨化のポリシーはこちらです。
 
-* **Announcement:** We announce deprecated APIs and features in the [change log](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log"). Deprecated APIs appear in the [documentation](api?status=deprecated) with ~~strikethrough.~~ When we announce a deprecation, we also announce a recommended update path. For convenience,  [Deprecations](guide/deprecations) contains a summary of deprecated APIs and features. 
+* **告知:** [チェンジログ](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log") に廃止予定のAPIおよび機能をお知らせします。廃止予定のAPIは、 [ドキュメンテーション](api?status=deprecated) に取り消し線付きで記載されています。廃止予定を発表した場合は、推奨されるアップデートパスも発表します。便利になるように、 [非推奨リスト](guide/deprecations) には廃止予定のAPIと機能の要約が含まれています。
 
 
-* **Deprecation period:** When an API or a feature is deprecated, it will still be present in the [next two major releases](#schedule). After that, deprecated APIs and features will be candidates for removal. A deprecation can be announced in any release, but the removal of a deprecated API or feature will happen only in major release. Until a deprecated API or feature is removed, it will be maintained according to the LTS support policy, meaning that only critical and security issues will be fixed. 
+* **非推奨期間:** APIまたは機能が非推奨になっても、それは [次の2つのメジャーリリース](#schedule) には引き続き存在します。その後、廃止予定のAPIおよび機能は削除の候補になります。廃止予定はどのリリースでも発表できますが、廃止予定のAPIまたは機能の削除はメジャーリリースでのみ発生します。廃止予定のAPIまたは機能が削除されるまで、LTSサポートポリシーにしたがって維持されます。つまり、重大な問題とセキュリティの問題のみが修正されます。
 
 
-* **npm dependencies:** We only make npm dependency updates that require changes to your apps in a major release. 
-In minor releases, we update peer dependencies by expanding the supported versions, but we do not require projects to update these dependencies until a future major version. This means that during minor Angular releases, npm dependency updates within Angular applications and libraries are optional.
+* **npm依存関係:** アプリの変更を必要とするnpm依存関係の更新は、メジャーリリースでのみ行います。マイナーリリースでは、サポートされているバージョンを拡張してピアの依存関係を更新しますが、これらの依存関係を更新するようにプロジェクトに要求することは将来のメジャーバージョンまでありません。つまり、Angularのマイナーリリースでは、Angularアプリケーションおよびライブラリ内のnpm依存関係の更新はオプションです。
 
 
 

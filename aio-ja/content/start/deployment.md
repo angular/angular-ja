@@ -1,12 +1,12 @@
-# 展開
+# デプロイ
 
 
-アプリケーションをデプロイするには、それをコンパイルしてから、JavaScript、CSS、およびHTMLをWebサーバー上でホストする必要があります。 構築されたAngularアプリケーションは非常に移植性が高く、あらゆる環境で動作したり、Node、Java、.NET、PHP、その他多くのテクノロジによって提供されます。
+アプリケーションをデプロイするには、それをコンパイルしてから、JavaScript、CSS、およびHTMLをWebサーバー上でホストする必要があります。 ビルドされたAngularアプリケーションは非常に移植性が高く、あらゆる環境で動作したり、Node、Java、.NET、PHP、その他多くのテクノロジーによって提供されます。
 
 <div class="alert is-helpful">
 
 
-あなたがあなたの [はじめてのアプリ](start "Getting Started: Your First App") から直接来たのか、 [ルーティング](start/routing "Getting Started: Routing") 、 [データ管理](start/data "Getting Started: Managing Data") 、そして [フォーム](start/forms "Getting Started: Forms") セクションを通してオンラインストアアプリケーション全体を完成させたのかにかかわらず、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションを持っています。
+あなたが [はじめてのアプリ](start "Getting Started: Your First App") から直接来たのか、 [ルーティング](start/routing "Getting Started: Routing") 、 [データ管理](start/data "Getting Started: Managing Data") 、そして [フォーム](start/forms "Getting Started: Forms") セクションを通してオンラインストアアプリケーション全体を完成させたのかにかかわらず、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションを持っています。
 
 
 </div>
@@ -22,9 +22,9 @@ StackBlitzプロジェクトはデフォルトで公開されているため、�
 1. このURLを友人や同僚と共有してください。
 1. あなたのURLにアクセスしたユーザーは開発サーバーが起動し、その後あなたのアプリケーションがロードされるのを見るでしょう。
 
-## ローカルで構築する
+## ローカルでビルドする
 
-アプリケーションをローカルまたは本番用に構築するには、StackBlitzプロジェクトからソースコードをダウンロードする必要があります。 ファイルをダウンロードするには、プロジェクトの横にある左メニューの `Download Project` アイコンをクリックします。
+アプリケーションをローカルまたは本番用にビルドするには、StackBlitzプロジェクトからソースコードをダウンロードする必要があります。 ファイルをダウンロードするには、プロジェクトの横にある左メニューの `Download Project` アイコンをクリックします。
 
 ソースコードをダウンロードして解凍したら、 [Angularコンソール](https://angularconsole.com "Angular Console web site") を使用してアプリケーションを実行するか、NodeをインストールしてAngular CLIをインストールします。
 
@@ -70,11 +70,11 @@ ng build --prod
 
 Angularアプリを別のWebホストでホストするには、ファイルをアップロードするかホストに送信する必要があります。
 シングルページアプリケーションを構築しているため、無効なURLを `index.html` ファイルにリダイレクトする必要があります。
-アプリケーションの開発と配布の詳細については、 [ビルドとサーブ](guide/build "Building and Serving Angular Apps") と [展開](guide/deployment "Deployment guide") のガイドを参照してください。
+アプリケーションの開発と配布の詳細については、 [ビルドとサーブ](guide/build "Building and Serving Angular Apps") と [デプロイ](guide/deployment "Deployment guide") のガイドを参照してください。
 
 ## 私たちのコミュニティに参加する
 
-あなたはもうAngularの開発者です！ [この瞬間を共有](https://twitter.com/intent/tweet?url=https://angular.io/start&text=I%20just%20finished%20the%20Angular%20Getting%20Started%20Tutorial "Angular on Twitter") し、この入門についての考えをお聞かせください。 または、 [今後のエディションについての提案](https://github.com/angular/angular/issues/new/choose "Angular GitHub repository new issue form")を送信してください。
+あなたはもうAngularの開発者です！ [この瞬間を共有](https://twitter.com/intent/tweet?url=https://angular.jp/start&text=Angularの入門チュートリアルを終了しました！ "Angular on Twitter") し、この入門についての考えをお聞かせください。 または、 [今後のエディションについての提案](https://github.com/angular/angular/issues/new/choose "Angular GitHub repository new issue form")を送信してください。
 
 Angularはさらに多くの機能を提供します。 そして、あなたは今、アプリケーションを構築し、それらの他の機能を探求することを可能にする基盤を持っています:
 

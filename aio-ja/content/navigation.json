@@ -78,8 +78,9 @@
         },
         {
           "url": "start/routing",
-          "title": "Routing",
-          "tooltip": "Introduction to routing between components using the browser's URL."
+          "title": "ルーティング",
+          "tooltip": "ブラウザのURLを使用したコンポーネント間のルーティングの概要",
+          "translated": true
         },
         {
           "url": "start/data",
@@ -88,8 +89,9 @@
         },
         {
           "url": "start/forms",
-          "title": "Forms",
-          "tooltip": "Learn about fetching and managing data from users with forms."
+          "title": "フォーム",
+          "tooltip": "フォームを使用してユーザーからデータを取得および管理する方法について説明します。",
+          "translated": true
         },
         {
           "url": "start/deployment",

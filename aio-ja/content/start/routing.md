@@ -6,9 +6,9 @@ URLは1つあり、そのURLには常に"My Store"ページが製品のリスト
 
 本セクションでは、製品の詳細を個別のページに、独自のURLで表示するようにアプリを拡張します。
 
-これを行うには、Angular *router*を使用します。
-Angular [router](guide/glossary#router "router definition")を使うと、ユーザーがアプリケーション内のどこにいるかに基づいて、さまざまなコンポーネントやデータをユーザーに表示することができます。
-ユーザーがアプリケーションのタスクを実行するとき、ルーターはあるviewから次のviewへのナビゲーションを可能にします。
+これを行うには、Angular*ルーター*を使用します。
+Angular[ルーター](guide/glossary#router "router definition")を使うと、ユーザーがアプリケーション内のどこにいるかに基づいて、さまざまなコンポーネントやデータをユーザーに表示することができます。
+ユーザーがアプリケーションのタスクを実行するとき、ルーターはあるビューから次のビューへのナビゲーションを可能にします。
 
 * アドレスバーにURLを入力すると、ブラウザは対応するページに移動します。
 * ページ上のリンクをクリックすると、ブラウザは新しいページに移動します。
@@ -62,7 +62,7 @@ Angular [router](guide/glossary#router "router definition")を使うと、ユー
 
 ## ルーティング情報を使う
 
-商品詳細コンポーネントは、各商品の表示を処理します。 Angular Routerは、ブラウザのURLと定義済みのルーティングに基づいてコンポーネントを表示します。 Angular Routerを使い`products`データとルーティング情報を組み合わせて各製品の特定の詳細を表示します。
+商品詳細コンポーネントは、各商品の表示を処理します。 Angularルーターは、ブラウザのURLと定義済みのルーティングに基づいてコンポーネントを表示します。 Angularルーターを使い`products`データとルーティング情報を組み合わせて各製品の特定の詳細を表示します。
 
 1. `product-details.component.ts`を開きます
 
@@ -73,19 +73,19 @@ Angular [router](guide/glossary#router "router definition")を使うと、ユー
         <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="imports">
         </code-example>
 
-    1. `product`プロパティを定義して`ActivatedRoute`をconstructorに注入します。
+    1. `product`プロパティを定義して`ActivatedRoute`をコンストラクターに注入します。
 
         <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="props-methods">
         </code-example>
 
-        `ActivatedRoute`はAngular Routerによってロードされた各ルーティングコンポーネントに固有のものです。
+        `ActivatedRoute`はAngularルーターによってロードされた各ルーティングコンポーネントに固有のものです。
         ルーティング、そのパラメータ、およびそのルーティングに関連する追加データに関する情報が含まれています。
 
         <!-- 
         To do: This is the first time we inject anything into a component. Should we mention it here? There's also a comment about maybe explaining it a bit in the services section (in data.md).
         -->
 
-1. `ngOnInit()`メソッドで、ルーティングパラメータを_subscribe_し、`productId`に基づいて製品を取得します。
+1. `ngOnInit()`メソッドで、ルーティングパラメータを_サブスクライブ_し、`productId`に基づいて製品を取得します。
 
     <code-example path="getting-started/src/app/product-details/product-details.component.1.ts" region="get-product">
     </code-example>
@@ -98,7 +98,7 @@ Angular [router](guide/glossary#router "router definition")を使うと、ユー
     <code-example header="src/app/product-details/product-details.component.html" path="getting-started/src/app/product-details/product-details.component.html" region="details">
     </code-example>
 
-これで、ユーザーが製品リストの名前をクリックすると、ルーターは製品の個別のURLにナビゲートし、製品詳細コンポーネントの製品リストコンポーネントをスワップアウトして製品詳細を表示するようになりました。
+商品リストコンポーネントを商品詳細コンポーネントと入れ替えて、商品詳細を表示するようになりました。
 
   <figure>
     <img src="generated/images/guide/start/product-details-routed.png" alt="Product details page with updated URL and full details displayed">
@@ -118,7 +118,7 @@ Angular [router](guide/glossary#router "router definition")を使うと、ユー
 おめでとうございます！ あなたはオンラインストアにルーティングを統合しました。
 
 * 商品は商品一覧ページから個々の商品にリンクされています
-* ユーザーはリストから製品名をクリックして、別のURL（ルーティング）を使用して新しいviewに詳細を表示できます。
+* ユーザーはリストから製品名をクリックして、別のURL（ルーティング）を使用して新しいビューに詳細を表示できます。
 
 Angularの探索を続けるには、次のいずれかのオプションを選択してください。
 * ["データの管理"セクションに進む](start/data "入門： データの管理")ことで、ショッピングデータ機能を追加します。 サービスを使用してカートデータを管理し、HTTPを使用して出荷価格の外部データを取得します。

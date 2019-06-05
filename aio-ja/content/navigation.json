@@ -95,8 +95,9 @@
         },
         {
           "url": "start/deployment",
-          "title": "Deployment",
-          "tooltip": "Move to local development, or deploy your application to Firebase or your own server."
+          "title": "デプロイ",
+          "tooltip": "ローカル開発に移行し、アプリケーションをFirebaseまたは独自のサーバーにデプロイしましょう",
+          "translated": true
         }
       ]
     },

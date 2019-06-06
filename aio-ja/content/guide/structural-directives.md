@@ -459,7 +459,7 @@ Angular は中央の "Hip!" を消去し、歓声と熱狂をやや抑えます�
 
 
 
-[自身の構造ディレクティブを書く](guide/structural-directives#unless) ときに見てわかるように、
+[自身の構造ディレクティブを書く](guide/structural-directives#unless) ときに見て分かるように、
 構造ディレクティブは `<ng-template>` に働かせます。
 
 

@@ -459,8 +459,8 @@ Angular は中央の "Hip!" を消去し、歓声と熱狂をやや抑えます�
 
 
 
-構造ディレクティブは
-[自身の構造ディレクティブを書く](guide/structural-directives#unless) ときにあなたが見られるように働くように `<ng-template>` を置きます。 TODO
+[自身の構造ディレクティブを書く](guide/structural-directives#unless) ときに見てわかるように、
+構造ディレクティブは `<ng-template>` に働かせます。
 
 
 {@a ngcontainer}

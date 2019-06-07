@@ -127,7 +127,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 
 
 
-`ngIf` ディレクティブは CSS で要素を隠すのではなく、DOM に物理的に追加、削除します。
+`ngIf` ディレクティブは CSS で要素を非表示にするのではなく、DOM に物理的に追加、削除します。
 ブラウザの開発者ツールを使用して DOM を調査し、その事実を確認してください。
 
 
@@ -145,9 +145,9 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 コンポーネントを Angular の変更検知からデタッチし、そして破棄します。
 コンポーネントと DOM ノードはガベージコレクトされ、メモリを解放することができます。
 
-### *隠す* のではなく *削除する* のはなぜですか？
+### *非表示* にするのではなく *削除する* のはなぜですか？
 
-ディレクティブは、`display` スタイルを `none` に設定することによって、不要なパラグラフを隠すことができます。
+ディレクティブは、`display` スタイルを `none` に設定することによって、不要なパラグラフを非表示にすることができます。
 
 
 <code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (display-none)" region="display-none">
@@ -165,7 +165,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 
 
 
-隠すことと削除の違いは、単純なパラグラフでは問題になりません。
+非表示と削除の違いは、単純なパラグラフでは問題になりません。
 ホスト要素がリソースを集中的に使用するコンポーネントにアタッチされている場合が問題です。
 そのようなコンポーネントの動作は、隠れていても継続します。
 コンポーネントはその DOM 要素にアタッチされたままです。それはイベントをリッスンし続けます。
@@ -304,7 +304,7 @@ Angular は、現在のイテレーションで `NgFor`
 * [API ガイド](api/common/NgForOf "API: NgFor")
 では、追加の `NgFor` ディレクティブプロパティとコンテキストプロパティについて説明しています。
 
-* `NgFor` は `NgForOf` ディレクティブによって実装されます。追加の `NgForOf` ディレクティブプロパティとコンテキストプロパティ [NgForOf APIリファレンス](api/common/NgForOf) を参照してください。。
+* `NgFor` は `NgForOf` ディレクティブによって実装されます。追加の `NgForOf` ディレクティブプロパティとコンテキストプロパティ [NgForOf APIリファレンス](api/common/NgForOf) を参照してください。
 
 
 これらのマイクロシンタックスのメカニズムは、あなたがあなた自身の構造ディレクティブを書くときに利用可能です。
@@ -349,7 +349,7 @@ _参照_ 変数は、それにアタッチされた要素、コンポーネン�
 ### ホスト要素ごとに1つの構造ディレクティブ {@a one-structural-directive-per-host-element}
 
 あるとき、あなたは指定した条件が true なものだけで HTML ブロックを繰り返したいと思います。
-あなたは同じホスト要素に `*ngFor` と `*ngIf` の両方を配置 _しよう_ するでしょう。
+あなたは同じホスト要素に `*ngFor` と `*ngIf` の両方を配置 _しよう_ とするでしょう。
 Angular はそれを許しません。1つの要素に適用できる構造ディレクティブは1つだけです。
 
 その理由は単純です。構造ディレクティブは、ホスト要素とその子孫を使って複雑なことを行えます。
@@ -424,7 +424,7 @@ Angular の _NgSwitch_ は、実際には `NgSwitch`、`NgSwitchCase`、およ�
 ディレクティブをホストする要素が1つもない場合は、
 [&lt;ng-container&gt;](guide/structural-directives#ng-container) を使用してください。
 
-構造ディレクティブをテンプレート内の _属性_ または _要素_ 形式で適用することには、
+構造ディレクティブをテンプレート内の _属性_ または _要素_ 形式で適用することには
 それほどよい理由はありませんが、Angular が `<ng-template>` を作成し、
 それがどのように機能するかを理解することは重要です。あなたがあなた自身の構造ディレクティブを書くとき、`<ng-template>` を参照するでしょう。
 
@@ -525,7 +525,7 @@ CSS スタイルは新しいレイアウトを想定も対応もしないので�
 
 
 
-他の場所での使用を意図した `p span` のスタイルは、ここでは誤って適用されました。
+他の場所での使用を意図した `p span` のスタイルが、ここでは誤って適用されました。
 
 もうひとつの問題: いくつかの HTML 要素はすべての直系の子が特定の型であることを要求します。
 たとえば、`<select>` 要素には `<option>` の子が必要です。
@@ -592,7 +592,7 @@ Angular は _それを DOM 内に配置しません_。
 
 <div class="alert is-helpful">
 
-**Note:** Remember that ngModel directive is defined as a part of Angular FormsModule and you need to include FormsModule in the imports: [...] section of the Angular module metadata, in which you want to use it.
+**Note:**  ngModdel ディレクティブは Angular の FormsModule の一部として宣言されていて、それを使用したい場合は Angular のモジュールメタデータの imports: [...] セクション内に FormsModule を追加する必要があります。
 
 </div>
 
@@ -613,8 +613,8 @@ JavaScript の `if` ブロックの中括弧のようなものです:
 
 
 
-これらの中括弧がなければ、JavaScript は、それらすべてを単一ブロックとして条件付きで実行しようとする場合にのみ、
-最初のステートメントを実行します。
+中括弧がなければ、JavaScript は、あなたがそれらすべてを単一ブロックとして条件付きで実行する意図があっても、
+最初の文のみを実行するでしょう。
 `<ng-container>` は Angular テンプレート内での同様のニーズを満たします。
 
 
@@ -735,7 +735,7 @@ Angular は、条件の値が変わるたびに `appUnless` プロパティを�
 
 このディレクティブを `AppModule` の `declarations` 配列に追加します。
 
-それからそれを試すためにいくつかの HTML を作成します。
+それから、それを試すためにいくつかの HTML を作成します。
 
 
 <code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (appUnless)" region="appUnless">

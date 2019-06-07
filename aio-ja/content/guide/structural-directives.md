@@ -592,7 +592,7 @@ Angular は _それを DOM 内に配置しません_。
 
 <div class="alert is-helpful">
 
-**Note:** Remember that ngModel directive is defined as a part of Angular FormsModule and you need to include FormsModule in the imports: [...] section of the Angular module metadata, in which you want to use it.
+**Note:**  ngModdel ディレクティブは Angular の FormsModule の一部として宣言されていて、それを使用したい場合は Angular のモジュールメタデータの imports: [...] セクション内に FormsModule を追加する必要があります。
 
 </div>
 

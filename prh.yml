@@ -123,6 +123,12 @@ rules:
   - expected: リスナー
     pattern: /リスナ(?!ー)/
 
+  - expected: テクノロジー
+    pattern: /テクノロジ(?!ー)/
+
+  - expected: テクノロジー
+    pattern: /テクノロジ(?!ー)/
+
   - expected: クオート
     pattern: クォート
 

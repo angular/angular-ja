@@ -104,7 +104,8 @@
     {
       "url": "guide/setup-local",
       "title": "セットアップ",
-      "tooltip": "Setting up for local development with the Angular CLI."
+      "tooltip": "Angular CLIを使用してローカル開発用にセットアップします。",
+      "translated": true
     },
     {
       "title": "基礎ガイド",

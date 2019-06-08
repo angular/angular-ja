@@ -123,6 +123,12 @@ rules:
   - expected: リスナー
     pattern: /リスナ(?!ー)/
 
+  - expected: テクノロジー
+    pattern: /テクノロジ(?!ー)/
+
+  - expected: マネージャー
+    pattern: /マネージャ(?!ー)/
+
   - expected: クオート
     pattern: クォート
 

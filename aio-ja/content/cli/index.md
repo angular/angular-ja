@@ -6,7 +6,7 @@ Angular CLIは、Angularアプリケーションの初期化、開発、スキ�
 
 Angular CLIのメジャーバージョンは、サポートされているAngularのメジャーバージョンに従いますが、マイナーバージョンは個別にリリースできます。
 
-`npm` パッケージマネージャを使用してCLIをインストールします:
+`npm` パッケージマネージャーを使用してCLIをインストールします:
 <code-example format="." language="bash">
 npm install -g @angular/cli
 </code-example>

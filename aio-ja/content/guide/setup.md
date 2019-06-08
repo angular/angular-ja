@@ -309,7 +309,7 @@ Creator's Update (2017年4月) よりも前のバージョンの _Bash for Windo
 ## 付録: Node.jsとnpm
 
 
-[Node.js](https://nodejs.org/ja/)と[npm](https://www.npmjs.com/)パッケージマネージャはAngularと他のプラットフォームを使ってモダンなWeb開発をするにあたり不可欠なものです。
+[Node.js](https://nodejs.org/ja/)と[npm](https://www.npmjs.com/)パッケージマネージャーはAngularと他のプラットフォームを使ってモダンなWeb開発をするにあたり不可欠なものです。
 Node.jsはクライアント開発とビルドツールを供給します。
 _npm_ パッケージマネージャーは、それ自身が _Node.js_ アプリケーションであり、JavaScriptのライブラリをインストールします。
 

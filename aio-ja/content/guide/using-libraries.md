@@ -8,7 +8,7 @@ Angular アプリケーションを構築する際には、高度な自社製ラ
 ライブラリは、通常それらを Angular CLI と統合するスキーマとともに、[npm パッケージ](guide/npm-packages)として公開されます。
 再利用可能なライブラリコードをアプリケーションに統合するには、パッケージをインストールし、提供されている機能を使用する場所にインポートする必要があります。公開されているほとんどのAngularライブラリでは、Angular CLI の `ng add <lib_name>` コマンドを使用できます。
 
-`ng add` コマンドは、npm パッケージマネージャまたは [yarn](https://yarnpkg.com/) を使用してライブラリパッケージをインストールし、パッケージに含まれている schematics を呼び出してプロジェクトコードの中に import ステートメント、フォント、テーマなどの追加をして雛形を作成します。
+`ng add` コマンドは、npm パッケージマネージャーまたは [yarn](https://yarnpkg.com/) を使用してライブラリパッケージをインストールし、パッケージに含まれている schematics を呼び出してプロジェクトコードの中に import ステートメント、フォント、テーマなどの追加をして雛形を作成します。
 
 公開ライブラリは通常、そのライブラリをアプリに追加する方法についての README またはその他のドキュメントを提供します。
 例については、[Angular Material](https://material.angular.io/) のドキュメントを参照してください。
@@ -70,7 +70,7 @@ Angular を新しいバージョンにアップデートするときは、使用
 アプリにインポートされていない従来の JavaScript ライブラリは、ランタイムグローバルスコープに追加して、あたかも script タグの中にあるかのように読み込むことができます。
 [CLI 構成ファイル](guide/workspace-config)の `angular.json` 内のビルドターゲットの "scripts" および "styles" オプションを使用して、ビルド時にこれを実行するように CLI を構成します。
 
-たとえば、 [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) ライブラリを使用するには、まず npm パッケージマネージャを使用してライブラリとその依存関係をインストールします。
+たとえば、 [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) ライブラリを使用するには、まず npm パッケージマネージャーを使用してライブラリとその依存関係をインストールします。
 
 <code-example format="." language="bash">
 npm install jquery --save

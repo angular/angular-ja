@@ -84,8 +84,9 @@
         },
         {
           "url": "start/data",
-          "title": "Managing Data",
-          "tooltip": "Introduction to services and accessing external data via HTTP."
+          "title": "データ管理",
+          "tooltip": "サービスの紹介とHTTPを介した外部データへのアクセス",
+          "translated": true
         },
         {
           "url": "start/forms",

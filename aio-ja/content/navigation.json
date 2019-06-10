@@ -621,8 +621,9 @@
             },
             {
               "url": "guide/creating-libraries",
-              "title": "Creating Libraries",
-              "tooltip": "Extend Angular by creating, publishing, and using your own libraries."
+              "title": "ライブラリの作成",
+              "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
+              "translated": true
             }
           ]
         },
@@ -816,9 +817,10 @@
           "translated": true
         },
         {
-          "title": "Usage Analytics",
-          "tooltip": "For administrators, guide to gathering usage analytics from your users.",
-          "url": "cli/usage-analytics-gathering"
+          "title": "利用状況の解析",
+          "tooltip": "管理者向けに、ユーザーから利用状況分析を収集するためのガイド。",
+          "url": "cli/usage-analytics-gathering",
+          "translated": true
         }
       ]
     },

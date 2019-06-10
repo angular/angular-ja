@@ -11,7 +11,7 @@
 {@a services}
 ## サービス
 
-サービスはAngularアプリケーションの不可欠な部分です。 Angularでは、サービスはAngularの [依存性注入システム](guide/glossary#dependency-injection-di "dependency injection definition") を使用してアプリケーションの任意の部分で使用可能にできるクラスのインスタンスです。
+サービスはAngularアプリケーションの不可欠な部分です。 Angularでは、サービスはAngularの [依存性の注入システム](guide/glossary#dependency-injection-di "dependency injection definition") を使用してアプリケーションの任意の部分で使用可能にできるクラスのインスタンスです。
 
 サービスは、アプリケーションの各部分の間でデータを共有する場所です。 オンラインストアの場合、カートサービスはカートデータとメソッドを保存する場所です。
 

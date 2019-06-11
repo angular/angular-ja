@@ -1,47 +1,47 @@
-# Gathering and Viewing Usage Analytics
+# 使用状況分析の収集と表示
 
-Users can opt in to share their Angular CLI usage data with [Google Analytics](https://support.google.com/analytics/answer/1008015?hl=en), using the [`ng analytics` CLI command](analytics).
-The data is also shared with the Angular team, and used to improve the CLI.
+ユーザーは [`ng analytics` CLIコマンド](analytics) を使用して、Angular CLIの使用状況データを [Google Analytics](https://support.google.com/analytics/answer/1008015?hl=en) と共有することを選択できます。
+データはAngularチームと共有され、CLIを改善するために使用されます。
 
-The gathering of CLI analytics data is disabled by default, and must be enabled at the project level by individual users.
-It cannot be enabled at the project level for all users.
+CLI分析データの収集はデフォルトでは無効になっており、個々のユーザーがプロジェクトレベルで有効にする必要があります。
+すべてのユーザーに対してプロジェクトレベルで有効にすることはできません。
 
-Data gathered in this way can be viewed on the Google Analytics site, but is not automatically visible on your own organization's Analytics site.
-As an administrator for an Angular development group, you can configure your instance of Angular CLI to be able to see analytics data for your own team's usage of the Angular CLI.
-This configuration option is separate from and in addition to other usage analytics that your users may be sharing with Google.
+このようにして収集されたデータはGoogle Analyticsサイトで表示できますが、自分の組織のAnalyticsサイトに自動的に表示されるわけではありません。
+Angular開発グループの管理者として、Angular CLIのインスタンスを自分のチームによるAngular CLIの使用状況についての分析データを表示できるように設定できます。
+この設定オプションは、ユーザーがGoogleと共有している可能性がある他の利用状況分析とは別に、それに加えて行われます。
 
-## Enable access to CLI usage data
+## CLI使用状況データへのアクセスを有効にする
 
-To configure access to your own users' CLI usage data, use the `ng config` command to add a key to your global [`angular.json` workspace configuration file](guide/workspace-config).
-The key goes under `cli.analyticsSharing` at the top level of the file, outside the `projects` sections.
-The value of the key is your organization's tracking ID, as assigned by Google Analytics.
-This ID is a string that looks like `UA-123456-12`.
+自分のユーザーのCLI使用状況データへのアクセスを構成するには、ng configコマンドを使用して、グローバル [`angular.json` ワークスペース構成ファイル](guide/workspace-config) にキーを追加します。
+キーは、 `projects` セクション以外の、ファイルの最上位レベルの `cli.analyticsSharing` の下にあります。
+キーの値は、Google Analyticsによって割り当てられた組織の追跡IDです。
+このIDは、 `UA-123456-12` のような文字列です。
 
-You can choose to use a descriptive string as the key value, or be assigned a random key when you run the CLI command.
-For example, the following command adds a configuration key named "tracking".
+説明的な文字列をキー値として使用することも、CLIコマンドを実行するときにランダムキーを割り当てることもできます。
+たとえば、次のコマンドは "tracking" という名前の設定キーを追加します。
 
 <code-example language="sh" class="code-shell">
 ng config --global cli.analyticsSharing.tracking UA-123456-12
 </code-example>
 
-To turn off this feature, run the following command:
+この機能を無効にするには、次のコマンドを実行します:
 
 <code-example language="sh" class="code-shell">
 ng config --global --remove cli.analyticsSharing
 </code-example>
 
 
-## Per user tracking
+## ユーザーごとのトラッキング
 
-You can add a custom user ID to the global configuration, in order to identify unique usage of commands and flags.
-If that user enables CLI analytics for their own project, your analytics display tracks and labels their individual usage.
+コマンドとフラグの固有の使用法を識別するために、グローバル構成にカスタムユーザーIDを追加できます。
+そのユーザーが自分のプロジェクトに対してCLI分析を有効にした場合、分析表示には個々の使用状況が追跡およびラベル付けされます。
 
 
 <code-example language="sh" class="code-shell">
 ng config --global cli.analyticsSharing.user SOME_USER_NAME
 </code-example>
 
-To generate a new random user ID, run the following command:
+新しいランダムユーザーIDを生成するには、次のコマンドを実行します:
 
 <code-example language="sh" class="code-shell">
 ng config --global cli.analyticsSharing.user ""

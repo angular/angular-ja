@@ -14,12 +14,12 @@
 
 Angularでシングルトンサービスを作成する方法は2種類あります:
 
-* Declare `root` for the value of the `@Injectable()` `providedIn` property
+* `@Injectable()`の`providedIn`プロパティに対して`root`を宣言する。
 * `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
 
 {@a providedIn}
 
-### Using `providedIn`
+### `providedIn` を使う
 
 Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
 
@@ -29,9 +29,9 @@ Angular 6.0から、シングルトンサービスを作成する推奨の方法
 サービスのさらに詳しい情報については
 [Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
 
-### NgModule `providers` array
+### NgModule の `providers` 配列
 
-In apps built with Angular versions prior to 6.0, services are registered NgModule `providers` arrays as follows:
+Angularのバージョン6.0未満で作成されたアプリケーションでは、サービスは次のようにNgModuleの`provider`配列に登録されます。
 
 ```ts
 @NgModule({
@@ -42,60 +42,60 @@ In apps built with Angular versions prior to 6.0, services are registered NgModu
 
 ```
 
-If this NgModule were the root `AppModule`, the `UserService` would be a singleton and available
-throughout the app. Though you may see it coded this way, using the `providedIn` property of the `@Injectable()` decorator on the service itself is preferable as of Angular 6.0 as it makes your services tree-shakable.
+このNgModuleがルート(root)の`AppModule`だった場合、`UserService`はシングルトンになり、アプリケーション全体から利用可能です。
+上記のようなコードを見ることがあるかもしれませんが、Angular 6.0以降ではサービスがツリーシェイク可能になるため、サービス自身に`@Injectable()`デコレーターの`providedIn`プロパティを使用することが望ましいです。
 
 {@a forRoot}
 
 ## `forRoot()` パターン {@a the-forroot-pattern}
 
-Generally, you'll only need `providedIn` for providing services and `forRoot()`/`forChild()` for routing. However, understanding how `forRoot()` works to make sure a service is a singleton will inform your development at a deeper level.
+通常、サービスを提供するために必要なのは `providedIn` だけで、`forRoot()`/`forChild()`はルーティングのためにのみ使用されます。しかしながら、サービスがシングルトンであるために`forRoot()`がどのように動作するかを理解することは、技術に対する理解を深めることに繋がります。
 
-If a module defines both providers and declarations (components, directives, pipes),
-then loading the module in multiple feature modules would duplicate the registration of the service. This could result in multiple service instances and the service would no longer behave as a singleton.
+モジュールがprovidersとdeclarations（components、directives、pipes）を定義している場合、
+モジュールを複数のフィーチャーモジュールにロードすると、サービスの登録が重複します。その結果、複数のサービスのインスタンスが生成される可能性があり、サービスはシングルトンとして動作しなくなります。
 
-There are multiple ways to prevent this:
+これを防ぐ方法は複数あります：
 
-* Use the [`providedIn` syntax](guide/singleton-services#providedIn) instead of registering the service in the module.
-* Separate your services into their own module.
-* Define `forRoot()` and `forChild()` methods in the module.
+* サービスをモジュールで定義するかわりに、[`providedIn`構文](guide/singleton-services#providedIn)を使用する。
+* サービスを独自のモジュールに分割する。
+* モジュール内で`forRoot()`と`forChild()`メソッドを定義する。
 
 <div class="alert is-helpful">
 
-**Note:** There are two example apps where you can see this scenario; the more advanced <live-example noDownload>NgModules live example</live-example>, which contains `forRoot()` and `forChild()` in the routing modules and the `GreetingModule`, and the simpler <live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>. For an introductory explanation see the [Lazy Loading Feature Modules](guide/lazy-loading-ngmodules) guide.
+**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example oDownload>NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
 
 </div>
 
 
-Use `forRoot()` to
-separate providers from a module so you can import that module into the root module
-with `providers` and child modules without `providers`.
+モジュールからプロバイダーを分離するには、`forRoot()`を利用します。
+これにより、`providers`をもつルートモジュールと、
+`providers`をもたない子モジュールにそのモジュールをインポートできます。
 
-1. Create a static method `forRoot()` on the module.
-2. Place the providers into the `forRoot()` method.
+1. モジュール上に静的メソッド`forRoot()`を作成します。
+2. `forRoot()`メソッド内にprovidersを配置します。
 
 <code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts" linenums="false"> </code-example>
 
 
 {@a forRoot-router}
 
-### `forRoot()` and the `Router`
+### `forRoot()`と`Router`
 
-`RouterModule` provides the `Router` service, as well as router directives, such as `RouterOutlet` and `routerLink`. The root application module imports `RouterModule` so that the application has a `Router` and the root application components can access the router directives. Any feature modules must also import `RouterModule` so that their components can place router directives into their templates.
+`RouterModule`は`Router`サービスを提供し、`RouterOutlet`や`routerLink`などのルーターディレクティブも提供します。ルートアプリケーションモジュールは`RouterModule`をインポートするので、アプリケーションは`Router`を持ち、ルートアプリケーションコンポーネントはルーターディレクティブにアクセスできます。すべての機能モジュールは、そのコンポーネントがテンプレートにルーターディレクティブを配置できるように、`RouterModule`もインポートする必要があります。
 
-If the `RouterModule` didn’t have `forRoot()` then each feature module would instantiate a new `Router` instance, which would break the application as there can only be one `Router`. By using the `forRoot()` method, the root application module imports `RouterModule.forRoot(...)` and gets a `Router`, and all feature modules import `RouterModule.forChild(...)` which does not instantiate another `Router`.
+`RouterModule`に`forRoot()`がない場合、個々のフィーチャーモジュールは新しい`Router`インスタンスを生成します。`Router`は１つしか存在できないため、アプリケーションは停止します。`forRoot()`メソッドを使用すると、ルートアプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得し、すべてのフィーチャモジュールは別の`Router`をインスタンス化しない`RouterModule.forChild(...)`をインポートします。
 
 <div class="alert is-helpful">
 
-**Note:** If you have a module which has both providers and declarations,
-you _can_ use this
-technique to separate them out and you may see this pattern in legacy apps.
-However, since Angular 6.0, the best practice for providing services is with the
-`@Injectable()` `providedIn` property.
+**注:** providersとdeclarationsの両方をもつモジュールがある場合、
+それらを分離するテクニックとして
+これを使うことが _可能_ で、レガシーアプリケーションでこのパターンが見られるかもしれません。
+しかしAngular 6.0以降では,サービス提供のベストプラクティスは
+`@Injectable()` `providedIn` プロパティです。
 
 </div>
 
-### How `forRoot()` works
+### `forRoot()`の仕組み
 
 `forRoot()`はサービスの設定を行うオブジェクトを受け取り、
 [ModuleWithProviders](api/core/ModuleWithProviders)を返します。
@@ -131,8 +131,8 @@ Angularは`@NgModule.providers`
 
 </code-example>
 
-最後に`AppModule`の`imports`配列の中で呼び出します。In the following
-snippet, other parts of the file are left out. For the complete file, see the <live-example name="ngmodules"></live-example>, or continue to the next section of this document.
+最後に`AppModule`の`imports`配列の中で呼び出します。次のスニペットでは、
+ファイルの他の部分は省略されています。完全なファイルについては、<live-example name="ngmodules"></live-example>を参照するか、このドキュメントの次のセクションに進んでください。
 
 <code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" header="src/app/app.module.ts (imports)" linenums="false">
 

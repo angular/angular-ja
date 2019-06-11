@@ -1,55 +1,55 @@
-# Setting up the Local Environment and Workspace
+# ローカル環境とワークスペースのセットアップ
 
 
-This guide explains how to set up your environment for Angular development using the [Angular CLI tool](cli "CLI command reference"). 
-It includes information about prerequisites, installing the CLI, creating an initial workspace and starter app, and running that app locally to verify your setup. 
+このガイドでは、[Angular CLI ツール](cli 'CLI command reference')を使用して Angular 開発用に環境を設定する方法について説明します。
+前提条件、CLI のインストール、初期ワークスペースとスターターアプリの作成、セットアップを確認するためのそのアプリのローカルでの実行に関する情報が含まれています。
 
 
 <div class="callout is-helpful">
-<header>Learning Angular</header>
+<header>Angularの学習</header>
 
-If you are new to Angular, see [Getting Started](start). Getting Started helps you quickly learn the essentials of Angular, in the context of building a basic online store app. It leverages the [StackBlitz](https://stackblitz.com/) online development environment, so you don't need to set up your local environment until you're ready. 
+Angular をはじめて使用する場合は、[入門](start)を参照してください。 入門では基本的なオンラインストアアプリを構築するなかで、Angularの基本事項をすぐに習得できます。 [StackBlitz](https://stackblitz.com/)オンライン開発環境を活用しているので、準備が整うまでローカル環境をセットアップする必要はありません。
 
 
-</div> 
+</div>
 
 
 {@a devenv}
 {@a prerequisites}
-## Prerequisites 
+## 前提条件
 
-Before you begin, make sure your development environment includes `Node.js®` and an npm package manager. 
+はじめに、開発環境に`Node.js®`と npm パッケージマネージャーが含まれていることを確認してください。
 
 {@a nodejs}
 ### Node.js
 
-Angular requires `Node.js` version 10.9.0 or later.
+Angular は `Node.js` バージョン 10.9.0 以降を必要とします。
 
-* To check your version, run `node -v` in a terminal/console window.
+- バージョンを確認するには、端末 ¥¥ ターミナル/コンソールウィンドウで`node -v`を実行してください。
 
-* To get `Node.js`, go to [nodejs.org](https://nodejs.org "Nodejs.org").
+- `Node.js`を取得するには、[nodejs.org](https://nodejs.org 'Nodejs.org')にアクセスしてください。
 
 {@a npm}
-### npm package manager
+### npm パッケージマネージャー
 
-Angular, the Angular CLI, and Angular apps depend on features and functionality provided by libraries that are available as [npm packages](https://docs.npmjs.com/getting-started/what-is-npm). To download and install npm packages, you must have an npm package manager. 
+Angular、Angular CLI、および Angular アプリは、[npm パッケージ](https://docs.npmjs.com/getting-started/what-is-npm)として利用可能なライブラリによって提供される機能に依存します。 npm パッケージをダウンロードしてインストールするには、npm パッケージマネージャーが必要です。
 
-This setup guide uses the [npm client](https://docs.npmjs.com/cli/install) command line interface, which is installed with `Node.js` by default. 
+このセットアップガイドでは、デフォルトで `Node.js` と共にインストールされる[npmクライアント](https://docs.npmjs.com/cli/install)のコマンドラインインターフェースを使用しています。
 
-To check that you have the npm client installed, run `npm -v` in a terminal/console window.
+npmクライアントがインストールされていることを確認するには、ターミナル/コンソールウィンドウで`npm -v`を実行します。
 
 
 {@a install-cli}
 
-## Step 1: Install the Angular CLI
+## ステップ1: Angular CLIをインストールする
 
-You use the Angular CLI 
-to create projects, generate application and library code, and perform a variety of ongoing development tasks such as testing, bundling, and deployment.
+Angular CLIを使用して、
+プロジェクトの作成、アプリケーションおよびライブラリコードの生成、そしてテスト、バンドル、デプロイなどのさまざまな進行中の開発タスクを実行します。
 
-Install the Angular CLI globally. 
+Angular CLIをグローバルにインストールします。
 
 To install the CLI using `npm`, open a terminal/console window and enter the following command:
-
+`npm` を使用してCLIをインストールするには、ターミナル/コンソールウィンドウを開き、次のコマンドを入力します。
 
 <code-example language="sh" class="code-shell">
   npm install -g @angular/cli
@@ -60,48 +60,48 @@ To install the CLI using `npm`, open a terminal/console window and enter the fol
 
 {@a create-proj}
 
-## Step 2: Create a workspace and initial application
+## ステップ2: ワークスペースと初期アプリケーションを作成する
 
-You develop apps in the context of an Angular [**workspace**](guide/glossary#workspace). 
+Angular [**ワークスペース**](guide/glossary#workspace)のコンテキストでアプリを開発します。
 
-To create a new workspace and initial starter app: 
+新しいワークスペースと初期スターターアプリを作成するには:
 
-1. Run the CLI command `ng new` and provide the name `my-app`, as shown here: 
+1. 次に示すように、CLIコマンド `ng new` を実行し、`my-app` という名前を付けます。
 
     <code-example language="sh" class="code-shell">
       ng new my-app
 
     </code-example>
 
-2. The `ng new` command prompts you for information about features to include in the initial app. Accept the defaults by pressing the Enter or Return key. 
+2. `ng new` コマンドを使用すると、最初のアプリに含める機能に関する情報を入力するよう求められます。 EnterキーまたはReturnキーを押してデフォルトを受け入れます。
 
-The Angular CLI installs the necessary Angular npm packages and other dependencies. This can take a few minutes. 
+Angular CLIは、必要なAngular npmパッケージとその他の依存関係をインストールします。これには数分かかることがあります。 
 
-The CLI creates a new workspace and a simple Welcome app, ready to run. 
+CLIによって、新しいワークスペースと簡単なWelcomeアプリケーションが作成され、すぐに実行できます。
 
 
 {@a serve}
 
-## Step 3: Run the application
+## ステップ3: アプリケーションを実行する
 
-The Angular CLI includes a server, so that you can easily build and serve your app locally.
+Angular CLIにはサーバーが含まれているため、アプリをローカルで簡単にビルドしてサーブできます。
 
-1. Go to the workspace folder (`my-app`).
+1. ワークスペースフォルダ（`my-app`）に行きます。 
 
-1. Launch the server by using the CLI command `ng serve`, with the `--open` option.
+1. CLIコマンド `ng serve` を `--open` オプション付きで使用して、サーバーを起動します。
 
 <code-example language="sh" class="code-shell">
   cd my-app
   ng serve --open
 </code-example>
 
-The `ng serve` command launches the server, watches your files,
-and rebuilds the app as you make changes to those files.
+`ng serve` コマンドは、サーバーを起動し、ファイルを監視し、
+それらのファイルを変更したときにアプリを再ビルドします。
 
-The `--open` (or just `-o`) option automatically opens your browser
-to `http://localhost:4200/`.
-
-Your app greets you with a message:
+ `--open`（または単に `-o`）オプションは、ブラウザを自動的に
+`http://localhost:4200/` に開きます。 
+ 
+ あなたのアプリはメッセージであなたを迎えます：
 
 
 <figure>
@@ -109,21 +109,21 @@ Your app greets you with a message:
 </figure>
 
 
-## Next steps
+## 次のステップ
 
 
-* If you are new to Angular, see the [Getting Started](start) tutorial. Getting Started helps you quickly learn the essentials of Angular, in the context of building a basic online store app. 
+- Angularに慣れていない場合は、[入門](start)チュートリアルを参照してください。 入門では基本的なオンラインストアアプリを構築するなかで、Angularの基本事項をすぐに習得できます。
 
   <div class="alert is-helpful">
-  
-  Getting Started assumes the [StackBlitz](https://stackblitz.com/) online development environment. 
-  To learn how to export an app from StackBlitz to your local environment, skip ahead to the [Deployment](start/deployment "Getting Started: Deployment") section. 
+
+  入門は[StackBlitz](https://stackblitz.com/)のオンライン開発環境を想定しています。
+   StackBlitzからローカル環境にアプリをエクスポートする方法については、[デプロイ](start/deployment 'Getting Started: Deployment')のセクションに進んでください。
 
   </div>
 
 
-* To learn more about using the Angular CLI, see the [CLI Overview](cli "CLI Overview"). In addition to creating the initial workspace and app scaffolding, you can use the CLI to generate Angular code such as components and services. The CLI supports the full development cycle, including building, testing, bundling, and deployment. 
+* Angular CLIの使用方法の詳細については、[CLIの概要](cli 'CLI Overview')を参照してください。初期ワークスペースとアプリの雛形を作成するだけでなく、CLIを使用してコンポーネントやサービスなどのAngularコードを生成できます。 CLIは、ビルド、テスト、バンドリング、およびデプロイを含む開発サイクル全体をサポートします。
 
 
-* For more information about the Angular files generated by `ng new`, see [Workspace and Project File Structure](guide/file-structure).
+- `ng new` によって生成されたAngularファイルの詳細については、[ワークスペースとプロジェクトのファイル構造](guide/file-structure)を参照してください。
 

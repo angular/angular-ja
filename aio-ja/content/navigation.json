@@ -67,40 +67,46 @@
       "hidden": true
     },
     {
-      "title": "はじめに",
+      "title": "入門",
       "tooltip": "Learn the basics by building your first Angular application.",
       "children": [
         {
           "url": "start",
-          "title": "Your First App",
-          "tooltip": "Introduction to Angular's component model, template syntax, and component communication."
+          "title": "はじめてのアプリ",
+          "tooltip": "Angularのコンポーネントモデル、テンプレートの構文、およびコンポーネントのコミュニケーションについて紹介します。",
+          "translated": true
         },
         {
           "url": "start/routing",
-          "title": "Routing",
-          "tooltip": "Introduction to routing between components using the browser's URL."
+          "title": "ルーティング",
+          "tooltip": "ブラウザのURLを使用したコンポーネント間のルーティングの概要",
+          "translated": true
         },
         {
           "url": "start/data",
-          "title": "Managing Data",
-          "tooltip": "Introduction to services and accessing external data via HTTP."
+          "title": "データ管理",
+          "tooltip": "サービスの紹介とHTTPを介した外部データへのアクセス",
+          "translated": true
         },
         {
           "url": "start/forms",
-          "title": "Forms",
-          "tooltip": "Learn about fetching and managing data from users with forms."
+          "title": "フォーム",
+          "tooltip": "フォームを使用してユーザーからデータを取得および管理する方法について説明します。",
+          "translated": true
         },
         {
           "url": "start/deployment",
-          "title": "Deployment",
-          "tooltip": "Move to local development, or deploy your application to Firebase or your own server."
+          "title": "デプロイ",
+          "tooltip": "ローカル開発に移行し、アプリケーションをFirebaseまたは独自のサーバーにデプロイしましょう",
+          "translated": true
         }
       ]
     },
     {
       "url": "guide/setup-local",
       "title": "セットアップ",
-      "tooltip": "Setting up for local development with the Angular CLI."
+      "tooltip": "Angular CLIを使用してローカル開発用にセットアップします。",
+      "translated": true
     },
     {
       "title": "基礎ガイド",
@@ -256,8 +262,9 @@
             },
             {
               "url": "guide/structural-directives",
-              "title": "Structural Directives",
-              "tooltip": "Structural directives manipulate the layout of the page."
+              "title": "構造ディレクティブ",
+              "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
+              "translated": true
             },
             {
               "url": "guide/pipes",
@@ -523,8 +530,9 @@
         },
         {
           "url": "guide/i18n",
-          "title": "Internationalization (i18n)",
-          "tooltip": "Translate the app's template text into multiple languages."
+          "title": "国際化 (i18n)",
+          "tooltip": "アプリのテンプレートテキストを複数の言語に翻訳します",
+          "translated": true
         },
 
         {
@@ -613,8 +621,9 @@
             },
             {
               "url": "guide/creating-libraries",
-              "title": "Creating Libraries",
-              "tooltip": "Extend Angular by creating, publishing, and using your own libraries."
+              "title": "ライブラリの作成",
+              "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
+              "translated": true
             }
           ]
         },
@@ -657,7 +666,7 @@
       ]
     },
     {
-      "title": "Dev Workflow",
+      "title": "開発ワークフロー",
       "tooltip": "Build, testing, and deployment information.",
       "children": [
         {
@@ -668,8 +677,9 @@
         },
         {
           "url": "guide/aot-compiler",
-          "title": "Ahead-of-Time Compilation",
-          "tooltip": "Learn why and how to use the Ahead-of-Time (AOT) compiler."
+          "title": "事前コンパイル",
+          "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+          "translated": true
         },
         {
           "url": "guide/build",
@@ -713,7 +723,7 @@
       ]
     },
     {
-      "title": "Configuration",
+      "title": "設定",
       "tooltip": "Workspace and project structure, configuration files.",
       "children": [
         {
@@ -797,18 +807,20 @@
       ]
     },
     {
-      "title": "CLI Commands",
+      "title": "CLIコマンド",
       "tooltip": "Angular CLIコマンドのリファレンス",
       "children": [
         {
-          "title": "Overview",
-          "tooltip": "An introduction to the CLI tool, commands, and syntax.",
-          "url": "cli"
+          "title": "概要",
+          "tooltip": "CLIツール、コマンド、および構文の紹介",
+          "url": "cli",
+          "translated": true
         },
         {
-          "title": "Usage Analytics",
-          "tooltip": "For administrators, guide to gathering usage analytics from your users.",
-          "url": "cli/usage-analytics-gathering"
+          "title": "利用状況の解析",
+          "tooltip": "管理者向けに、ユーザーから利用状況分析を収集するためのガイド。",
+          "url": "cli/usage-analytics-gathering",
+          "translated": true
         }
       ]
     },

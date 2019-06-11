@@ -12,7 +12,7 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
   <img src="generated/images/guide/displaying-data/final.png" alt="Final UI">
 </figure>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -29,8 +29,7 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 補間によってプロパティ名をバインドすることです。
 補間では、プロパティ名をビューテンプレートに入れ、二重中括弧で囲みます： `{{myHero}}`
 
-[クイックスタート](guide/quickstart)の説明のとおりに、<code>displaying-data</code>
-という名前の新しいプロジェクトを作成します。
+`displaying-data` という名前のワークスペースとアプリケーションを作成するために、CLIコマンド [`ng new displaying-data`](cli/new) を実行します。
 
 <code>app.component.html</code>ファイルを削除します。この例では必要ありません。
 
@@ -39,7 +38,7 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 完了したら、このようになります。
 
 
-<code-example path="displaying-data/src/app/app.component.1.ts" title="src/app/app.component.ts">
+<code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts">
 
 </code-example>
 
@@ -50,13 +49,13 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 テンプレートは、二重中括弧補間を使用して2つのコンポーネントプロパティを表示します：
 
 
-<code-example path="displaying-data/src/app/app.component.1.ts" linenums="false" title="src/app/app.component.ts (template)" region="template">
+<code-example path="displaying-data/src/app/app.component.1.ts" linenums="false" header="src/app/app.component.ts (template)" region="template">
 
 </code-example>
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -74,7 +73,7 @@ Angularは自動的にコンポーネントから `title` と `myHero` プロパ
 Angularは、これらのプロパティが変更されると、表示を更新します。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -93,7 +92,7 @@ Angularがインスタンスを作成しています。どのように？
 その要素は `index.html` ファイルの本文のプレースホルダです：
 
 
-<code-example path="displaying-data/src/index.html" linenums="false" title="src/index.html (body)" region="body">
+<code-example path="displaying-data/src/index.html" linenums="false" header="src/index.html (body)" region="body">
 
 </code-example>
 
@@ -130,7 +129,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 <div class="alert is-helpful">
 
-  デフォルトでは、Angular CLIはテンプレートファイルを使用してコンポーネントを生成します。
+  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを使用してコンポーネントを生成します。
   あなたはそれを次のようにオーバーライドできます：
 
   <code-example hideCopy language="sh" class="code-shell">
@@ -140,13 +139,13 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 </div>
 
 
-## コンストラクタまたは変数の初期化？
+## コンストラクターまたは変数の初期化？
 
 この例では、変数の割り当てを使用してコンポーネントを初期化していますが、
-コンストラクタを使用してプロパティを宣言して初期化することもできます。
+コンストラクターを使用してプロパティを宣言して初期化することもできます。
 
 
-<code-example path="displaying-data/src/app/app-ctor.component.ts" linenums="false" region="class">
+<code-example path="displaying-data/src/app/app-ctor.component.1.ts" linenums="false" region="class">
 
 </code-example>
 
@@ -162,7 +161,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 配列の最初の名前になるように `myHero` を再定義します。
 
 
-<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" title="src/app/app.component.ts (class)" region="class">
+<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (class)" region="class">
 
 </code-example>
 
@@ -172,7 +171,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 各項目を `heroes` リストに表示します。
 
 
-<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" title="src/app/app.component.ts (template)" region="template">
+<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (template)" region="template">
 
 </code-example>
 
@@ -183,7 +182,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 これは `<li>`要素（とその子要素）を「リピータテンプレート」としてマークします：
 
 
-<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" title="src/app/app.component.ts (li)" region="li">
+<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (li)" region="li">
 
 </code-example>
 
@@ -203,14 +202,14 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 `ngFor` 二重引用符命令の `hero` に注目してください。
 これはテンプレート入力変数の例です。
-さらに詳しいテンプレート入力変数につては、[テンプレート構文](guide/template-syntax) ページの
+さらに詳しいテンプレート入力変数については、[テンプレート構文](guide/template-syntax) ページの
 [ミクロ構文](guide/template-syntax#microsyntax) セクションを読んでください。
 
-Angularはリスト内の各項目の `<li>` を複製し、 `hero`　変数を現在の反復の項目（ヒーロー）に設定します。
+Angularはリスト内の各項目の `<li>` を複製し、 `hero` 変数を現在の反復の項目（ヒーロー）に設定します。
 Angularはその変数を二重中括弧内の補間のコンテキストとして使用します。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -250,21 +249,21 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 次のコードを使用します。
 
 
-<code-example path="displaying-data/src/app/hero.ts" linenums="false" title="src/app/hero.ts">
+<code-example path="displaying-data/src/app/hero.ts" linenums="false" header="src/app/hero.ts">
 
 </code-example>
 
 
 
-コンストラクタと2つのプロパティ、 `id` と `name` をもつクラスを定義しました。
+コンストラクターと2つのプロパティ、 `id` と `name` をもつクラスを定義しました。
 
 クラスにプロパティがあるように見えないかもしれませんが、それはあります。
-コンストラクタパラメータの宣言は、TypeScriptのショートカットを利用します。
+コンストラクターパラメータの宣言は、TypeScriptのショートカットを利用します。
 
 最初のパラメータを考えてみましょう：
 
 
-<code-example path="displaying-data/src/app/hero.ts" linenums="false" title="src/app/hero.ts (id)" region="id">
+<code-example path="displaying-data/src/app/hero.ts" linenums="false" header="src/app/hero.ts (id)" region="id">
 
 </code-example>
 
@@ -272,7 +271,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 
 簡単な構文で多くのことをしています。：
 
-* コンストラクタパラメータとその型を宣言します。
+* コンストラクターパラメータとその型を宣言します。
 * 同じ名前のパブリックプロパティを宣言します。
 * クラスのインスタンスを作成するときに、対応する引数でそのプロパティを初期化します。
 
@@ -284,7 +283,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 の _型付きの_ 配列を返すことができます：
 
 
-<code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" title="src/app/app.component.ts (heroes)" region="heroes">
+<code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" header="src/app/app.component.ts (heroes)" region="heroes">
 
 </code-example>
 
@@ -295,7 +294,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 ヒーローの `name` プロパティだけを表示するように修正しました。
 
 
-<code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" title="src/app/app.component.ts (template)" region="template">
+<code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" header="src/app/app.component.ts (template)" region="template">
 
 </code-example>
 
@@ -315,7 +314,7 @@ Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要�
 実際の動作を確認するには、テンプレートの一番下に次の段落を追加します。
 
 
-<code-example path="displaying-data/src/app/app.component.ts" linenums="false" title="src/app/app.component.ts (message)" region="message">
+<code-example path="displaying-data/src/app/app.component.ts" linenums="false" header="src/app/app.component.ts (message)" region="message">
 
 </code-example>
 
@@ -334,7 +333,7 @@ Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要�
 
 
 
-`*ngIf ="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、TypeScriptとよく似ています。
+`*ngIf="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、TypeScriptとよく似ています。
 コンポーネントのヒーローのリストに3つより多いアイテムがある場合、Angularは段落をDOMに追加し、
 メッセージが表示されます。 3つあるいはいくつかのアイテムがある場合、 Angularは段落を省略するので、
 メッセージは表示されません。 詳細については、
@@ -373,19 +372,19 @@ Angularはメッセージを表示したり隠したりしていません。DOM�
 
 <code-tabs>
 
-  <code-pane title="src/app/app.component.ts" path="displaying-data/src/app/app.component.ts" region="final">
+  <code-pane header="src/app/app.component.ts" path="displaying-data/src/app/app.component.ts" region="final">
 
   </code-pane>
 
-  <code-pane title="src/app/hero.ts" path="displaying-data/src/app/hero.ts">
+  <code-pane header="src/app/hero.ts" path="displaying-data/src/app/hero.ts">
 
   </code-pane>
 
-  <code-pane title="src/app/app.module.ts" path="displaying-data/src/app/app.module.ts">
+  <code-pane header="src/app/app.module.ts" path="displaying-data/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="main.ts" path="displaying-data/src/main.ts">
+  <code-pane header="main.ts" path="displaying-data/src/main.ts">
 
   </code-pane>
 

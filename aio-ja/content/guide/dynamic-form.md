@@ -9,10 +9,10 @@
 ビジネス・オブジェクト・モデルを記述するメタデータに基づいて、
 フォームを動的に作成する方がより経済的かもしれません。
 
-このクックブックでは、`formGroup` 使って異なるコントロールタイプとバリデーションをもつ簡単なフォームを、
+このクックブックでは、`formGroup` を使って異なるコントロールタイプとバリデーションをもつ簡単なフォームを、
 動的にレンダリングする方法を解説していきます。
 ここで解説するのは原始的なスタート部分です。
-はるかにバラエティに富んだフォーム項目、よりよいレンダリング、優れたユーザーエクスペリエンスをサポートするように進化するかもしれません。
+はるかにバラエティに富んだフォーム項目、よりよいレンダリング、優れたユーザー体験をサポートするように進化するかもしれません。
 そのような偉大なフォームも、すべて始まりは質素なものです。
 
 このクックブックにおける例題は、仕事を求めるヒーローのための
@@ -39,11 +39,11 @@
 
 <code-tabs>
 
-  <code-pane title="app.module.ts" path="dynamic-form/src/app/app.module.ts">
+  <code-pane header="app.module.ts" path="dynamic-form/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="main.ts" path="dynamic-form/src/main.ts">
+  <code-pane header="main.ts" path="dynamic-form/src/main.ts">
 
   </code-pane>
 
@@ -61,7 +61,7 @@
 次の`QuestionBase`は基本的な質問のクラスです。
 
 
-<code-example path="dynamic-form/src/app/question-base.ts" title="src/app/question-base.ts">
+<code-example path="dynamic-form/src/app/question-base.ts" header="src/app/question-base.ts">
 
 </code-example>
 
@@ -74,7 +74,7 @@
 `TextboxQuestion`は、`type`プロパティを介してtext、email、urlといった複数のHTML5タイプをサポートしています。
 
 
-<code-example path="dynamic-form/src/app/question-textbox.ts" title="src/app/question-textbox.ts" linenums="false">
+<code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts" linenums="false">
 
 </code-example>
 
@@ -83,7 +83,7 @@
 `DropdownQuestion`は、セレクトボックスに選択肢のリストを表示します。
 
 
-<code-example path="dynamic-form/src/app/question-dropdown.ts" title="src/app/question-dropdown.ts" linenums="false">
+<code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts" linenums="false">
 
 </code-example>
 
@@ -94,7 +94,7 @@
 一言でいえば、フォームグループは質問モデルのメタデータを用いて、デフォルト値とバリデーションルールをセットすることができます。
 
 
-<code-example path="dynamic-form/src/app/question-control.service.ts" title="src/app/question-control.service.ts" linenums="false">
+<code-example path="dynamic-form/src/app/question-control.service.ts" header="src/app/question-control.service.ts" linenums="false">
 
 </code-example>
 
@@ -109,11 +109,11 @@
 
 <code-tabs>
 
-  <code-pane title="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
+  <code-pane header="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
 
   </code-pane>
 
-  <code-pane title="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
+  <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
 
   </code-pane>
 
@@ -128,11 +128,11 @@ DynamicFormQuestionComponentにマッチします。
 
 <code-tabs>
 
-  <code-pane title="dynamic-form-question.component.html" path="dynamic-form/src/app/dynamic-form-question.component.html">
+  <code-pane header="dynamic-form-question.component.html" path="dynamic-form/src/app/dynamic-form-question.component.html">
 
   </code-pane>
 
-  <code-pane title="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts">
+  <code-pane header="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts">
 
   </code-pane>
 
@@ -164,7 +164,7 @@ DynamicFormQuestionComponentにマッチします。
  オブジェクトを追加、更新、削除するというシンプルな作業で済みます。
 
 
-<code-example path="dynamic-form/src/app/question.service.ts" title="src/app/question.service.ts">
+<code-example path="dynamic-form/src/app/question.service.ts" header="src/app/question.service.ts">
 
 </code-example>
 
@@ -173,7 +173,7 @@ DynamicFormQuestionComponentにマッチします。
 最後に、`AppComponent`シェルにフォームのインスタンスを表示します。
 
 
-<code-example path="dynamic-form/src/app/app.component.ts" title="app.component.ts">
+<code-example path="dynamic-form/src/app/app.component.ts" header="app.component.ts">
 
 </code-example>
 
@@ -190,7 +190,7 @@ DynamicFormQuestionComponentにマッチします。
 フォームをレンダリングするために使用されるメタデータの動的データバインディングです。
 コントロールのメタデータに加えて、動的なバリデーションを追加します。
 
-*保存* ボタンは、フォームがバリデーションがパスされた状態になるまで無効となります。
+*保存* ボタンは、フォームのバリデーションがパスされた状態になるまで無効となります。
 フォームのバリデーションをパスした場合、*保存* をクリックすることで、アプリケーションは現在のフォームの値をJSONとしてレンダリングします。
 これは、任意のユーザー入力がデータモデルにバインドされていることを証明します。
 データの保存と取り込み処理については、別の機会に学習しましょう。

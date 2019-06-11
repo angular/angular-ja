@@ -1,320 +1,334 @@
-# アニメーション
+# Angularアニメーション・イントロダクション
 
-モーションは、モダンなWebアプリケーションの設計において重要な側面を担っています。  
-適切なユーザーインターフェースは、必要な箇所で注意を促す魅力的なアニメーションの状態をスムーズにトランジションさせます。
-うまく設計されたアニメーションは、UIをより楽しくするだけでなく使いやすくすることができます。
+アニメーションは動きの錯覚を提供します(時間の経過と共にHTML要素のスタイルが変化します)。うまく設計されたアニメーションはアプリケーションをより楽しく使いやすくすることができます。しかし、ただの飾りではありません。アニメーションは、さまざまな方法でアプリ・ユーザー体験を向上させることができます:
 
-## 概要
+* アニメーションがなければ、Webページの遷移は突然で不快感を与えるかもしれません。
 
-Angularのアニメーションシステムでは、純粋なCSSアニメーションと同じ類いのネイティブパフォーマンスで動作するアニメーションを作成することができます。  
-アニメーションロジックを他のアプリケーションコードと緊密に統合して、制御を容易にすることもできます。
+* モーションはユーザー体験を大幅に向上させます。アニメーションはユーザーの操作に対するアプリケーションの応答を検出する機会を与えます。
 
-<div class="alert is-helpful">
+* よいアニメーションは直感的にユーザーの注意を必要な場所に呼びよせます。
 
-Angularのアニメーションは、標準の[Web Animations API](https://w3c.github.io/web-animations/)の上に構築され、それを[サポートするブラウザ](http://caniuse.com/#feat=web-animation)でネイティブに実行されます。
+通常、アニメーションは時間の経過と共に複数のスタイルの*変形*を引き起こします。HTML要素は、ページの移動、色の変更、拡大または縮小、フェード、またはスライドさせることができます。これらの変形は同時、または逐次的に行うことができます。あなたは各変形のタイミングを制御することができます。
 
-Angular 6の時点で、Web Animations APIがブラウザによってネイティブにサポートされていない場合、代わりにAngularは自動的にCSSキーフレームをフォールバックとして使用します。
-つまり、[AnimationBuilder](/api/animations/AnimationBuilder)を使用するコードがない限り、ポリフィルは不要になります。
-コードでAnimationBuilderを使用している場合は、
-Angular CLIで生成された`polyfills.ts`ファイルから`web-animations-js` polyfillのコメントを外してください。
-</div>
+AngularのアニメーションシステムはCSSの機能に基づいて構築されています。つまり、ブラウザがアニメーション化可能であるあらゆるプロパティをアニメーション化できます。これには、位置、サイズ、変形、色、ボーダーなどが含まれます。W3Cは[CSS Transitions](https://www.w3.org/TR/css-transitions-1/)のページでアニメーション可能なプロパティのリストを管理しています。
 
-<div class="l-sub-section">
 
-このページの例は、<live-example></live-example> として利用できます。
+## このガイドについて
 
-</div>
+このガイドでは、Angularアニメーションをプロジェクトに追加して使い始めるために、Angularアニメーションの基本的な機能について説明します。
 
-## 設定
+このガイドで説明されている機能(と、関連するAngularアニメーションガイドで説明されている高度な機能)は、<live-example></live-example>のサンプルアプリケーションでデモを確認することができます。
 
-アプリケーションにアニメーションを追加する前に、
-いくつかのアニメーション固有のモジュールと関数をルートアプリケーションモジュールにインポートします。
+#### 前提条件
 
-<code-example path="animations/src/app/app.module.ts" region="animations-module" title="app.module.ts (animation module import excerpt)" linenums="false"></code-example>
+このガイドでは、次のセクションで説明されているような基本的なAngularアプリの作成に精通していることを前提としています:
 
-#### 基本例
+* [チュートリアル](tutorial)
+* [アーキテクチャオーバービュー](guide/architecture)
 
-このガイドのアニメーションの例では、ヒーローのリストをアニメーションさせています。
 
-`Hero` クラスには、 `name` プロパティ、ヒーローがアクティブかどうかを示す `state` プロパティ、および状態を切り替える `toggleState（）` メソッドがあります。
+## はじめよう
 
-<code-example path="animations/src/app/hero.service.ts" region="hero" title="hero.service.ts (Hero class)" linenums="false"></code-example>
+アニメーションのための主なAngularモジュールは、`@angular/animations`と`@angular/platform-browser`です。CLIを使用して新しいプロジェクトを作成すると、これらの依存関係がプロジェクトに自動的に追加されます。
 
-画面上部 (`app.hero-team-builder.component.ts`) には、(`HeroService` を介して) ヒーローを追加または削除する一連のボタンがあります。
-そのボタンは、すべてのサンプルコンポーネントが同時に参照するリストに変更をトリガーをします。
+Angularアニメーションをプロジェクトに追加するには、標準のAngularの機能と一緒にアニメーション固有のモジュールをインポートしてください。
 
-{@a example-transitioning-between-states}
+### ステップ1: アニメーションモジュールを有効にする
 
-## 2つの状態間の推移
+`BrowserAnimationsModule`をインポートしてください。これによってアニメーション機能をAngularのルートアプリケーションモジュールに取り込みます。
 
-<img src="generated/images/guide/animations/animation_basic_click.gif" alt="A simple transition animation" class="right">
-
-モデル属性を利用することによって、2つの状態の間で要素を推移させるシンプルなアニメーションを構築できます。
-
-
-アニメーションは `@Component` のメタデータ内で定義できます。
-
-<code-example path="animations/src/app/hero-list-basic.component.ts" region="imports" title="hero-list-basic.component.ts" linenums="false"></code-example>
-
-これらを使用して、コンポーネントメタデータに `heroState` という *アニメーショントリガー* を定義できます。
-アニメーションを使用して、`active` 状態と `inactive` 状態の2つの状態の間で推移します。
-ヒーローがアクティブになると、要素はやや大きなサイズと明るい色で表示されます。
-
-<code-example path="animations/src/app/hero-list-basic.component.ts" region="animationdef" title="hero-list-basic.component.ts (@Component excerpt)" linenums="false"></code-example>
-
-<div class="alert is-helpful">
-
-この例では、アニメーションメタデータでアニメーションスタイル（colorとtransform）をインラインで定義しています。
-
-</div>
-
-次に、`[@triggerName]` 構文を利用して、定義したアニメーションをコンポーネントのテンプレートに含まれている1つ以上の要素にアタッチします。
-
-<code-example path="animations/src/app/hero-list-basic.component.ts" region="template" title="hero-list-basic.component.ts (excerpt)" linenums="false"></code-example>
-
-ここで、アニメーショントリガーは、 `ngFor` で繰り返されるすべての要素に適用されます。
-繰り返し要素のそれぞれは、独立してアニメーション化されます。
-属性の値は、式 `hero.state` にバインドされ、常に `active` または `inactive` のいずれかになります。
-
-この設定では、ヒーローオブジェクトが状態を変えるたびにアニメーションのトランジションが表示されます。
-完全なコンポーネントの実装は次のとおりになります:
-
-<code-example path="animations/src/app/hero-list-basic.component.ts" title="hero-list-basic.component.ts"></code-example>
-
-## 状態とトランジション
-
-Angular のアニメーションは、論理 **状態** および状態間の **推移** として定義されます。
-
-アニメーションの状態は、アプリケーションコードで定義された文字列です。
-上記の例では、 `'active'` と `'inactive'` の状態は、ヒーローオブジェクトの論理状態に基づいています。
-その状態のソースは、この場合と同様に単純なオブジェクト属性でも、メソッド内で計算された値でもかまいません。
-重要なことは、それをコンポーネントのテンプレートに読み込むことができるということです。
-
-各アニメーション状態の *スタイル* を定義することができます:
-
-<code-example path="animations/src/app/hero-list-basic.component.ts" region="states" title="src/app/hero-list-basic.component.ts" linenums="false"></code-example>
-
-これらの `状態` の定義は、各状態の *終了スタイル* を指定します。
-それらは、その状態に移行した後に要素に適用され、*その状態のままである限り*、その要素に適用されます。
-実際には、要素が異なる状態にあるスタイルを定義しています。
-
-状態を定義した後、状態間の*トランジション*を定義することができます。
-各トランジションは、1組のスタイルと次のスタイルの切り替えタイミングを制御します:
-
-<code-example path="animations/src/app/hero-list-basic.component.ts" region="transitions" title="src/app/hero-list-basic.component.ts" linenums="false"></code-example>
-
-<figure>
-  <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active.png" alt="In Angular animations you define states and transitions between states" width="400">
-</figure>
-
-複数のトランジションが同じタイミング構成をもつ場合、それらを同じ `transition` の定義に組み合わせることができます:
-
-<code-example path="animations/src/app/hero-list-combined-transitions.component.ts" region="transitions" title="src/app/hero-list-combined-transitions.component.ts" linenums="false"></code-example>
-
-トランジションの両方向が同じタイミングをもつ場合、前の例のように、簡略構文 `<=>` を利用できます。
-
-<code-example path="animations/src/app/hero-list-twoway.component.ts" region="transitions" title="src/app/hero-list-twoway.component.ts" linenums="false"></code-example>
-
-また、アニメーションの途中でスタイルを適用することもできますが、アニメーションが終了した後にスタイルを維持することはできません。
-このようなスタイルは、`transition` でインラインで定義することができます。
-この例では、その要素はすぐに1組のスタイルを受け取り、次のスタイルにアニメーションされます。
-トランジションが終了すると、これらのスタイルは `state` で定義されていないため保持されません。
-
-<code-example path="animations/src/app/hero-list-inline-styles.component.ts" region="transitions" title="src/app/hero-list-inline-styles.component.ts" linenums="false"></code-example>
-
-### ワイルドカードステート `*`
-
-`*` ("ワイルドカード") ステートは *どの* アニメーション状態にもマッチします。
-これは、アニメーションがどの状態にあるかにかかわらず適用されるスタイルとトランジションを定義するのに便利です。  
-例：
-
-* `active => *` トランジションは、要素の状態が `active` から他の何かに変化したときに適用されます。
-* `* => *` トランジションは、2つの状態の間の *変化が起こる* ときに適用されます。
-
-<figure>
-  <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active_wildcards.png" alt="The wildcard state can be used to match many different transitions at once" width="400">
-</figure>
-
-### `void` ステート
-
-`void` と呼ばれる特別な状態は、どのアニメーションにも適用できます。
-これは、要素がビューにアタッチされて *いない* 場合に適用されます。
-これは、要素がまだ追加されていないか、または除去されたためです。
-`void` ステートは、アニメーションの入場と退場を定義するのに便利です。
-
-たとえば、`* => void`トランジションは、要素に残していた状態にかかわらず、要素がビューから離れるときに適用されます。
-
-<figure>
-  <img src="generated/images/guide/animations/ng_animate_transitions_void_in.png" alt="The void state can be used for enter and leave transitions" width="400">
-</figure>
-
-ワイルドカードステート`*`は`void`にも適用されます。
-
-## 例：entering と leaving
-
-<img src="generated/images/guide/animations/animation_enter_leave.gif" alt="Enter and leave animations" class="right" width="250">
-
-`void` と `*` ステートを利用することで、要素の出入りのアニメーションをさせるトランジション定義することができます。
-
-* enter: `void => *`
-* leave: `* => void`
-
-たとえば、次のアニメーション配列には、`void => *`および`* => void`構文を使用してビューの内外に要素をアニメーションさせる2つのトランジションがあります。
-
-<code-example path="animations/src/app/hero-list-enter-leave.component.ts" region="animationdef" title="hero-list-enter-leave.component.ts (excerpt)" linenums="false"></code-example>
-
-この場合、スタイルはトランジション定義では直接 void ステートに適用され、別の`ステート（void）`定義には適用されないことに注意してください。
-したがって、変換は出入で異なります。要素は左から入り、右から出ていきます。
-
-<div class="l-sub-section">
-
-これらの2つの一般的なアニメーションには、独自のエイリアスがあります。
-
-<code-example language="typescript">
-  transition(':enter', [ ... ]); // void => *
-  transition(':leave', [ ... ]); // * => void
+<code-example path="animations/src/app/app.module.1.ts" header="src/app/app.module.ts" language="typescript" linenums="false">
 </code-example>
 
+<div class="alert is-helpful">
+
+**Note:** CLIを使用してアプリケーションを作成しているときは、ルートアプリケーションモジュールである`app.module.ts`は`src/app`フォルダ内に配置されます。
 </div>
 
-## 例：異なる状態からの入場と退場
+### ステップ2: コンポーネントファイル内にアニメーション関数をインポートする
 
-<img src="generated/images/guide/animations/animation_enter_leave_states.gif" alt="Enter and leave animations combined with state animations" class="right" width="200">
+コンポーネントファイルで特定のアニメーション関数を使用する場合は、それらの関数を`@angular/animations`からインポートしてください。
 
-ヒーローの状態をアニメーションの状態として利用することで、このアニメーションと以前のステートトランジションのアニメーションを組み合わせることもできます。
-ヒーローの状態に基づいて、出入りのさまざまなトランジションを設定できます。
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="imports" language="typescript">
+</code-example>
 
-* 非アクティブなヒーローが入る: `void => inactive`
-* アクティブなヒーローが入る: `void => active`
-* 非アクティブなヒーローが出る: `inactive => void`
-* アクティブなヒーローが出る: `active => void`
+<div class="alert is-helpful">
 
-これにより、各トランジションの細かな制御が可能になります。
+**Note:** このページの最後にある[利用可能なアニメーション関数の概要](guide/animations#animation-api-summary)を参照してください。
+</div>
+
+### ステップ3: アニメーションメタデータプロパティを追加する
+
+コンポーネントファイル内の`@Component()`デコレーター内に`animations:`というメタデータプロパティを追加してください。アニメーションを定義したトリガーを`animations`メタデータプロパティ内に配置します。
+
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="decorator" language="typescript">
+</code-example>
+
+## シンプルな遷移アニメーション
+
+単一のHTML要素をある状態から別の状態に変更するシンプルな遷移をアニメーション化しましょう。たとえば、ユーザーの最後の操作から、ボタンが**Open**または**Closed**のいずれかを表示するように指定できます。ボタンが`open`状態では表示され黄色になり、`closed`状態になると透明で緑色になります。
+
+HTMLでは、これらの属性は色や不透明度などの通常のCSSスタイルを使用して設定されます。Angularでは、`style()`関数を使用して、アニメーションで使用する一連のCSSスタイルを指定します。アニメーションの状態に対して一連のスタイルをまとめて、その状態に対して`open`や`closed`などの名前を付けることができます。
 
 <figure>
-  <img src="generated/images/guide/animations/ng_animate_transitions_inactive_active_void.png" alt="This example transitions between active, inactive, and void states" width="400">
+<img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
 </figure>
 
-<code-example path="animations/src/app/hero-list-enter-leave-states.component.ts" region="animationdef" title="hero-list-enter-leave.component.ts (excerpt)" linenums="false"></code-example>
+### アニメーションの状態とスタイル
 
-## アニメーション可能なプロパティと単位
+各遷移の終了時に呼び出す個別の状態を定義するためには、Angularの`state()`関数を使用します。この関数は、`open`や`closed`のようなユニークな名前と`style()`関数の2つの引数をとります。
 
-Angular のアニメーションサポートは Web アニメーションの上に構築されているため、ブラウザが*サポートしている*すべてのプロパティをアニメーションさせることができます。
-これには、位置、サイズ、変形、色、枠線、その他多くのものが含まれます。
-W3Cの、[CSS Transitions ページ](https://www.w3.org/TR/css3-transitions)に[アニメーション可能なプロパティのリスト](https://www.w3.org/TR/css3-transitions/#animatable-properties)が記載されています。
+`style()`関数を使って、与えられた状態名に関連付けるスタイルのセットを定義します。スタイル属性は[*キャメルケース(camelCase)*](guide/glossary#case-conventions)でなければならないことに注意してください。
 
-数値をもつ定位置プロパティの場合、適切な接尾辞をつ文字列として値を指定して単位を定義できます。
+Angularの`state()`関数がCSSスタイル属性を設定する`style⁣()`関数とどのように機能するかを見てみましょう。次のコードスニペットでは、複数のスタイル属性が状態に対して同時に設定されています。`open`状態では、ボタンの高さは200ピクセル、不透明度は1、背景色は黄色になります。
 
-* `'50px'`
-* `'3em'`
-* `'100%'`
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state1" language="typescript">
+</code-example>
 
-プロパティの値の指定をするときに単位を設定しないと、Angular での初期値は `px` になります。
+次の`closed`状態では、ボタンの高さは100ピクセル、不透明度は0.5、背景色は緑になります。
 
-* `50` は `'50px'` と同じ意味になります。
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state2" language="typescript">
+</code-example>
 
-## 自動的なプロパティの計算
+### 遷移とタイミング
 
-<img src="generated/images/guide/animations/animation_auto.gif" alt="Animation with automated height calculation" class="right" width="220">
+Angularでは、アニメーションなしで複数のスタイルを設定できます。しかし、このままでは、ボタンはフェード、収縮やその他の変化が起きたことを視認できるなにかがなく瞬時に変形されます。
 
-次元的なスタイルプロパティは、実行時まで値がわからないことがあります。
-たとえば、要素の内容や画面サイズによって幅と高さが異なることがよくあります。
-これらのプロパティは、CSSでアニメーション化するのが難しい場合がよくあります。
+突然の変形をなくすためには、アニメーションの*遷移*を定義して一定の期間にわたってある状態と別の状態の間で発生する変更を指定する必要があります。`transition()`関数は2つの引数を受け取ります。最初の引数は2つの遷移状態間の方向を定義する式を受け取り、2つ目の引数は `animate()`関数を受け取ります。
 
-これらの場合、特殊な `*` プロパティ値を使用することでプロパティの値が実行時に計算され、その後アニメーションにプラグインされるようにすることができます。
 
-この例では、退場アニメーションは、要素が離れる前の任意の高さをとり、その高さから0までアニメーションします。
+デュレーション、ディレイ、イージングを定義したり、遷移の実行中にスタイルを定義するスタイル関数を指定するには、`animate()`関数を使用します。`animate()`関数を使用して複数ステップアニメーションの`keyframes()`関数を定義することもできます。これらの定義は`animate()`関数の第2引数に置かれます。
 
-<code-example path="animations/src/app/hero-list-auto.component.ts" region="animationdef" title="src/app/hero-list-auto.component.ts" linenums="false"></code-example>
+#### アニメーションメタデータ: デュレーション、ディレイ、イージング
 
-## アニメーションのタイミング
+`animate()`関数(遷移関数の第2引数)では`timings`と`styles`の入力パラメータを受け取ります。
 
-アニメーション化されたトランジションには、デュレーション、ディレイ、およびイージング関数の3つのタイミングプロパティがあります。
-それらはすべて1つの遷移の *タイミング文字列* として結合されています。
+`timings`パラメータは3つのパーツで定義された文字列をとります。
 
-### デュレーション
+>`animate ('duration delay easing')`
 
-デュレーションは、アニメーションの開始から終了までの時間を制御します。次の3つの方法で期間を定義できます:
+最初の部分、`duration`は必須です。デュレーションは、クオートのない純粋な数値で表現されたミリ秒、またはクオートと時間指定子を含む秒単位で表現することができます。たとえば、10分の1秒のデュレーションは、次のように表現することができます:
 
-* 純粋な値（ミリ秒単位）: `100`
-* 文字列（ミリ秒単位）: `'100ms'`
-* 文字列（秒単位）: `'0.1s'`
+* 純粋な数値(ミリ秒単位): `100`
 
-### ディレイ
+* 文字列(ミリ秒単位): `'100ms'`
 
-ディレイは、アニメーショントリガーとトランジションの開始の間の時間の長さを制御します。
-デュレーションの後に同じ文字列に追加することで定義することができます。
-また、期間と同じ書式オプションがあります:
+* 文字列(秒単位): `'0.1s'`
+
+2つ目の引数、`delay`は`duration`と同じような構文を持ちます。たとえば:
 
 * 100ms待機してから200msかけて実行する: `'0.2s 100ms'`
 
-### イージング
+3番目の引数、`easing`は実行時にアニメーションの[加速と減速](http://easings.net/)を制御します。たとえば、`ease-in`は、アニメーションをゆっくりと開始させ、進行とともに速度を上げます。
 
-[イージング関数](http://easings.net/)は、実行時にアニメーションがどのように加速および減速するかを制御します。
-たとえば、`ease-in` 関数を使用すると、アニメーションは比較的ゆっくりと開始されますが、進行するにつれて速度が上がります。
-デュレーションとディレイの後の文字列の`3番目`の値（またはディレイがない場合の`2番目`の値）を追加することでイージングを制御することができます:
+* 100ms待機してから200msかけて実行する。減速曲線を使用して速く始動し、ゆっくりと休止点に向かって減速する: `'0.2s 100ms ease-out'`
 
-* 100ms待機してから、  イージングとともに200msかけて実行する: `'0.2s 100ms ease-out'`
-* イージングとともに200msかけて実行する: `'0.2s ease-in-out'`
+* ディレイなしで200msかけて実行する。標準曲線を使用してゆっくりと開始し、途中で加速し、最後にゆっくり減速する: `'0.2s ease-in-out'`
 
-<img src="generated/images/guide/animations/animation_timings.gif" alt="Animations with specific timings" class="right" width="220">
+* ただちに開始し、200msかけて実行する。加速カーブを使用して低速で始まり、完全な速度で終了する: `'0.2s ease-in'`
 
-### 例
+<div class="alert is-helpful">
 
-ここでは実際のタイミングをいくつか紹介します。
-どちらも200ミリ秒、すなわち`0.2秒`で最後に出入りするが、イージングが異なります。
-`'0.2s 0.1s ease-out'` で指定されているように、100ミリ秒のわずかな遅延の後にアニメーションが開始されます:
+**Note:** イージングカーブの一般的な情報については、Angularマテリアルデザインのウェブサイトの[Natural easing curves](https://material.io/design/motion/speed.html#easing)を参照してください。
+</div>
 
-<code-example path="animations/src/app/hero-list-timings.component.ts" region="animationdef" title="hero-list-timings.component.ts (excerpt)" linenums="false"></code-example>
+次の例では、状態間の1秒の遷移で、`open`から`closed`への状態遷移を提供しています。
 
-## キーフレーム付きの複数のステップアニメーション
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
+region="transition1">
+</code-example>
 
-<img src="generated/images/guide/animations/animation_multistep.gif" alt="Animations with some bounce implemented with keyframes" class="right" width="220">
+上のコードスニペットでは、`=>`演算子は単方向の遷移、 `<=>`は双方向の遷移を表します。遷移内では、`animate()`は遷移にかかる時間を指定します。この場合、`open`から`closed`への状態変化は1秒であり、ここでは`1s`と表現されます。
 
-アニメーションの*キーフレーム*は、2つのスタイルセット間を遷移するときに1つ以上の中間スタイルを経由し、単純な遷移を超えてより複雑なアニメーションになります。
+次の例では、0.5秒の遷移アニメーションの運動曲線を使用して、`closed`状態から`open`状態への状態遷移を追加します。
 
-各キーフレームに対して、アニメーション内でキーフレームが適用されるポイントを定義する*オフセット*を指定します。
-オフセットは、アニメーションの開始を示す0から終了を示す1の間の数値です。
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
+region="transition2">
+</code-example>
 
-次の例では、入力に "bounce" を追加し、アニメーションにキーフレームを適用します:
+<div class="alert is-helpful">
 
-<code-example path="animations/src/app/hero-list-multistep.component.ts" region="animationdef" title="hero-list-multistep.component.ts (excerpt)" linenums="false"></code-example>
+**Note:** `state`関数と`transition`関数の中でスタイルを使用する際にいくつか追加の注意点があります。
 
-オフセットは絶対時間で定義されて*いない*ことに注意してください。
-それらはゼロから1への相対的な尺度です。
-アニメーションの最終的なタイムラインは、キーフレームのオフセット、デュレーション、ディレイ、およびイージングの組み合わせに基づいています。
+* 各遷移の最後に適用されるスタイルを定義するには、`state()`を使用します。これはアニメーションが完了した後も持続します。
 
-キーフレームのオフセットの定義はオプションです。
-それらを省略すると、均等間隔のオフセットが自動的に割り当てられます。
-たとえば、あらかじめ定義されたオフセットのない3つのキーフレームは、オフセット`0`、`0.5`、および`1`を受け取ります。
+* 中間のスタイルを定義するには、`transition()`を使います。これは、アニメーション中に動きの錯覚を作り出します。
 
-## 並列アニメーショングループ
+* アニメーションが無効になったとき、`transition()`のスタイルはスキップできますが、`state()`のスタイルはスキップできません。
 
-<img src="generated/images/guide/animations/animation_groups.gif" alt="Parallel animations with different timings, implemented with groups" class="right" width="220px">
+* 同じ`transition()`引数に複数の状態のペアを含めることができます:<br/> `transition( 'on => off, off => void' )`。
+</div>
 
-同時に複数のスタイルプロパティをアニメーション化する方法を見てきました。
-すべてのスタイルプロパティを同じ`style（）`定義に入れるだけです。
+### アニメーションをトリガーする
 
-しかし、並行して発生するアニメーションのさまざまな*タイミング*を設定することもできます。
-たとえば、2つのCSSプロパティをアニメーションさせるときに、それぞれに異なるイージング関数を使用することができます。
+アニメーションがいつ開始するか検知するために、Angularは*トリガー*を必要とします。HTMLテンプレートのトリガーする要素にアタッチできるようにするために、`trigger()`関数は状態と遷移をまとめて、アニメーションに名前を付けます。
 
-このために、アニメーション*グループ*を使用できます。
-次の例では、enterとleaveの両方でグループを使用することで、2つの異なるタイミング構成が可能にしています。
-両方とも同じ要素に並列に適用されますが、互いに独立して実行されます:
+`trigger()`関数は、変更を監視するためにプロパティ名を記述します。変更が発生すると、トリガーはその定義に含まれるアクションを開始します。これらのアクションは、あとで説明するような、遷移関数やその他の関数にすることができます。
 
-<code-example path="animations/src/app/hero-list-groups.component.ts" region="animationdef" title="hero-list-groups.component.ts (excerpt)" linenums="false"></code-example>
+この例では、トリガーに`openClose`という名前をつけて、`button`要素にアタッチします。トリガーには、`open`状態と`close`状態、および2つの遷移のタイミングを記述します。
 
-1つのグループは要素の変換と幅をアニメートします。
-もう一方のグループは不透明度をアニメートします。
+<figure>
+<img src="generated/images/guide/animations/triggering-the-animation.png" alt="triggering the animation">
+</figure>
 
-## アニメーションのコールバック
+<div class="alert is-helpful">
 
-コールバックは、アニメーションが開始されたときおよび終了したときに発火します。
+**Note:** 各`trigger()`関数呼び出しの中では、1つの要素はある時点で1つの状態にしかなれません。ただし、一度に複数のトリガーをアクティブにすることは可能です。
+</div>
 
-キーフレームの例では、`@flyInOut`という`トリガー`があります。このようなコールバックをフックすることができます:
+### アニメーションを定義してHTMLテンプレートに適用する
 
-<code-example path="animations/src/app/hero-list-multistep.component.ts" region="template" title="hero-list-multistep.component.ts (excerpt)" linenums="false"></code-example>
+アニメーションは、アニメーション化されるHTML要素を制御するコンポーネントのメタデータで定義されます。アニメーションを定義するコードを`@Component()`デコレーター内の`animations:`プロパティ下に配置します。
 
-そのコールバックは、`fromState`、`toState`、`totalTime`などの有用なプロパティを含む`AnimationEvent`を受け取ります。
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
+region="component" linenums="false">
+</code-example>
 
-これらのコールバックは、アニメーションが取得されたかどうかにかかわらず発火します。
+コンポーネントのアニメーショントリガーを定義したら、トリガー名を角括弧で囲み、その前に`@`記号を付けてそのコンポーネントのテンプレート内の要素にアタッチすることができます。それから、次に示すように標準のAngularプロパティバインディング構文を使用して、トリガーをテンプレート式にバインドできます。ここで、`triggerName`はトリガーの名前で、`expression`は定義されたアニメーションの状態として評価されます。
+
+```
+<div [@triggerName]="expression">...</div>;
+```
+
+式の値が新しい状態に変わると、アニメーションが実行またはトリガーされます。
+
+次のコードスニペットでは、トリガーを`isOpen`プロパティの値にバインドします。
+
+<code-example path="animations/src/app/open-close.component.1.html" header="src/app/open-close.component.html"
+region="compare">
+</code-example>
+
+この例では、`isOpen`式が`open`または`closed`の定義された状態として評価されたとき、状態変更のトリガー`openClose`を通知します。それから、状態変更をハンドルし、状態変更アニメーションを開始するのは、`openClose`のコードにゆだねます。
+
+ページに出入りする要素(DOMに挿入または削除される要素)では、アニメーションを条件付きにすることができます。たとえば、HTMLテンプレートのアニメーショントリガーで`*ngIf`を使用する場合などです。
+
+<div class="alert is-helpful">
+
+**Note:** コンポーネントファイル内で、アニメーションを定義するトリガーを`@Component()`デコレーターの`animations`プロパティの値に設定してください。
+
+HTMLテンプレートファイル内では、定義されたアニメーションをアニメーション化されるHTML要素にアタッチするためにトリガー名を使用してください。
+
+</div>
+
+### コードレビュー
+
+遷移の例で説明したコードファイルは次のとおりです。
+
+<code-tabs>
+
+<code-pane header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" language="typescript"
+region="component">
+</code-pane>
+
+<code-pane header="src/app/open-close.component.html" path="animations/src/app/open-close.component.1.html"
+region="trigger">
+</code-pane>
+
+<code-pane header="src/app/open-close.component.css" path="animations/src/app/open-close.component.css">
+</code-pane>
+
+</code-tabs>
+
+### まとめ
+
+あなたは、`style()`と`state()`と`animate()`を使って2つの状態間の単純な遷移にアニメーションを追加する方法を学びました。
+
+Angularアニメーションの高度な機能については、アニメーションセクションの[遷移とトリガー](guide/transition-and-triggers)の高度なテクニックから開始して学ぶことができます。
+
+{@a animation-api-summary}
+## アニメーションAPIの概要
+
+`@angular/animations`モジュールによって提供される関数的APIはAngularアプリケーションのアニメーションを作成して制御するためのドメイン固有言語(DSL)を提供します。コア関数と関連するデータ構造の完全なリストと構文の詳細については、[APIリファレンス](api/animations)を参照してください。
+
+<table>
+
+<tr>
+<th style="vertical-align: top">
+関数名
+</th>
+
+<th style="vertical-align: top">
+説明
+</th>
+</tr>
+
+<tr>
+<td><code>trigger()</code></td>
+<td>アニメーションを開始し、他のすべてのアニメーションの関数コールのコンテナとして機能します。HTMLテンプレートは<code>triggerName</code>にバインドされます。ユニークなトリガー名を宣言するために、最初の引数を使用します。配列構文を使用します。</td>
+</tr>
+
+<tr>
+<td><code>style()</code></td>
+<td>アニメーションで使用する1つまたは複数のCSSスタイルを定義します。アニメーション中のHTML要素の外観を制御します。オブジェクト構文を使用します。</td>
+</tr>
+
+<tr>
+<td><code>state()</code></td>
+<td>指定された状態への遷移が成功した場合に適用されるCSSスタイルの名前付きセットを作成します。状態は、他のアニメーション関数内で名前で参照することができます。</td>
+</tr>
+
+<tr>
+<td><code>animate()</code></td>
+<td>遷移のタイミング情報を指定します。<code>delay</code>と<code>easing</code>はオプショナルな値です。<code>style()</code>の呼び出し時に紐付けられます。</td>
+</tr>
+
+<tr>
+<td><code>transition()</code></td>
+<td>2つの名前付きの状態間のアニメーションの順序を定義します。配列構文を使用します。</td>
+</tr>
+
+<tr>
+<td><code>keyframes()</code></td>
+<td>スタイル間の指定した期間での逐次的な変更を許可します。<code>animate()</code>内で使用します。各<code>keyframe()</code>内に複数の<code>style()</code>を含めることができます。配列構文を使用します。</td>
+</tr>
+
+<tr>
+<td><code>group()</code></td>
+<td>並行して実行されるアニメーションステップ(内部アニメーション)のグループを指定します。アニメーションは、すべての内部アニメーションステップが完了した後にのみ継続されます。<code>sequence()</code>または<code>transition()</code>内で使用されます。</td>
+</tr>
+
+<tr>
+<td><code>query()</code></td>
+<td>現在の要素内で1つまたは複数の内部HTML要素を見つけるために使用します。</td>
+</tr>
+
+<tr>
+<td><code>sequence()</code></td>
+<td>逐次的に実行されるアニメーションステップのリストを指定します。</td>
+</tr>
+
+<tr>
+<td><code>stagger()</code></td>
+<td>複数の要素のアニメーションの開始時間をずらします。</td>
+</tr>
+
+<tr>
+<td><code>animation()</code></td>
+<td>他の場所から呼び出すことができる再利用可能なアニメーションを作成します。<code>useAnimation()</code>と一緒に使用されます。</td>
+</tr>
+
+<tr>
+<td><code>useAnimation()</code></td>
+<td>再利用可能なアニメーションを有効にします。<code>animation()</code>と一緒に使用されます。</td>
+</tr>
+
+<tr>
+<td><code>animateChild()</code></td>
+<td>子コンポーネントのアニメーションを親と同じ時間枠内で実行できるようにします。</td>
+</tr>
+
+</table>
+
+## Angularアニメーションの詳細
+
+あなたは次に興味があるかもしれません:
+
+* [遷移とトリガー](guide/transition-and-triggers)
+* [複雑なアニメーションシーケンス](guide/complex-animation-sequences)
+* [再利用可能なアニメーション](guide/reusable-animations)
+* [ルート遷移アニメーション](guide/route-animations)
+
+<div class="alert is-helpful">
+
+完全なアニメーションの[デモ](http://animationsftw.in/#/)と[プレゼンテーション](https://www.youtube.com/watch?v=JhNo3Wvj6UQ&feature=youtu.be&t=2h47m53s)を参照してください。これは2017年11月のAngularConnectカンファレンスで発表されたものです。
+</div>

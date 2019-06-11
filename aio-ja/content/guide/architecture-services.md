@@ -1,76 +1,116 @@
-# Introduction to services and dependency injection
+# サービスと依存性の注入のイントロダクション
 
-<img src="generated/images/guide/architecture/service.png" alt="Service" class="left">
+*サービス*は、アプリが必要とするあらゆる値、関数、機能を含む幅広いカテゴリーです。
+サービスは通常、目的が明確な小規模のクラスです。
+特定の作業を行い、適切に処理するべきです。
 
-_Service_ is a broad category encompassing any value, function, or feature that an app needs. A service is typically a class with a narrow, well-defined purpose. It should do something specific and do it well.
-<br class="clear">
+Angular はサービスとコンポーネントを区別してモジュール性と再利用性を高めます。
+コンポーネントのビュー関連の機能を他の種類の処理と分離することで、
+コンポーネントクラスをリーンで効率的にすることができます。
 
-Angular distinguishes components from services in order to increase modularity and reusability.
+コンポーネントの仕事はユーザー体験を可能にして、それ以上のことをしないことです。
+コンポーネントは、(テンプレートによってレンダリングされた)ビューと
+(しばしばモデルの概念を含む)アプリケーションロジックを仲介するために、
+データバインディングのプロパティとメソッドを提示する必要があります。
 
-* By separating a component's view-related functionality from other kinds of processing, you can make your component classes lean and efficient. Ideally, a component's job is to enable the user experience and nothing more.  It should present properties and methods for data binding, in order to mediate between the view (rendered by the template) and the application logic (which often includes some notion of a _model_).
+コンポーネントはサーバーからデータを取得したり、ユーザーの入力を検証したり、
+コンソールに直接ログするなど、特定のタスクをサービスに委任することができます。
+このような処理のタスクを*注入可能なサービスクラス*で定義することにより、これらのタスクを任意のコンポーネントで
+使用できるようにします。
+さまざまな状況に応じて同じ種類のサービスの異なるプロバイダーを注入することで、
+アプリの適応性を高めることもできます。
 
-* A component should not need to define things like how to fetch data from the server, validate user input, or log directly to the console. Instead, it can delegate such tasks to services. By defining that kind of processing task in an injectable service class, you make it available to any component. You can also make your app more adaptable by injecting different providers of the same kind of service, as appropriate in different circumstances.
+Angularはこれらの原則を*強制*しません。Angularはアプリケーションロジックをサービスに組み込むことを容易にし、
+*依存性の注入*でコンポーネントからこれらのサービスを利用できるようにすることで、
+これらの原則に*倣う*のに役立ちます。
 
-Angular doesn't *enforce* these principles. Angular does help you *follow* these principles by making it easy to factor your
-application logic into services and make those services available to components through *dependency injection*.
+## サービスの例
 
-## Service examples
+次に、ブラウザコンソールにログを記録するサービスクラスの例を示します。
 
-Here's an example of a service class that logs to the browser console:
+<code-example path="architecture/src/app/logger.service.ts" linenums="false" header="src/app/logger.service.ts (class)" region="class"></code-example>
 
-<code-example path="architecture/src/app/logger.service.ts" linenums="false" title="src/app/logger.service.ts (class)" region="class"></code-example>
+サービスは他のサービスに依存することがあります。たとえば、`HeroService` は `Logger` サービスに依存し、`BackendService` を使ってヒーローを取得します。そのサービスは、サーバーからヒーローを非同期的に取り出すための `HttpClient` サービスに依存するかもしれません。
 
-Services can depend on other services. For example, here's a `HeroService` that depends on the `Logger` service, and also uses `BackendService` to get heroes. That service in turn might depend on the `HttpClient` service to fetch heroes asynchronously from a server.
+<code-example path="architecture/src/app/hero.service.ts" linenums="false" header="src/app/hero.service.ts (class)" region="class"></code-example>
 
-<code-example path="architecture/src/app/hero.service.ts" linenums="false" title="src/app/hero.service.ts (class)" region="class"></code-example>
+## 依存性の注入 (DI)
 
-<hr/>
+<img src="generated/images/guide/architecture/dependency-injection.png" alt="サービス" class="left">
 
-## Dependency injection
+DI は Angular フレームワークとつながり、必要なサービスやその他のものを新しいコンポーネントに提供するためにあらゆる場所で使用されます。
+コンポーネントはサービスを消費します。つまり、サービスをコンポーネントに*注入*して、コンポーネントにそのサービスクラスへのアクセスを与えることができます。
 
-<img src="generated/images/guide/architecture/dependency-injection.png" alt="Service" class="left">
+クラスをサービスとして Angular で定義するには、  `@Injectable()` デコレーターを使用して Angular が*依存関係*としてコンポーネントにそれを挿入できるようにするメタデータを提供します。
+同様に、コンポーネントや他のクラス(別のサービス、パイプ、NgModuleなど)が依存関係を*持っている*ことを示すには、 `@Injectable()` デコレーターを使用します。
 
-Components consume services; that is, you can *inject* a service into a component, giving the component access to that service class. 
+* *インジェクタ* は主なメカニズムです。Angular はブートストラップ処理中にアプリケーション全体のインジェクターを作成し、必要に応じて追加のインジェクターを作成します。インジェクターを作成する必要はありません。
 
-To define a class as a service in Angular, use the `@Injectable` decorator to provide the metadata that allows Angular to inject it into a component as a *dependency*.  
+* インジェクターは依存関係を作成し、可能であれば再利用する依存関係インスタンスの*コンテナ*を保持します。
 
-Similarly, use the `@Injectable` decorator to indicate that a component or other class (such as another service, a pipe, or an NgModule) _has_ a dependency. A dependency doesn't have to be a service&mdash;it could be a function, for example, or a value. 
+* *プロバイダ* は、インジェクターに依存性を取得または作成する方法を伝えるオブジェクトです。
 
-*Dependency injection* (often called DI) is wired into the Angular framework and used everywhere to provide new components with the services or other things they need.
+あなたのアプリで必要な依存関係がある場合は、アプリのインジェクターにプロバイダーを登録し、
+インジェクターはプロバイダーを使用して新しいインスタンスを作成できます。
+サービスの場合、プロバイダーは通常、サービスクラスそのものです。
 
-* The *injector* is the main mechanism. You don't have to create an Angular injector. Angular creates an application-wide injector for you during the bootstrap process.
+<div class="alert is-helpful">
 
-* The injector maintains a *container* of dependency instances that it has already created, and reuses them if possible.
+依存関係はサービスである必要はありません。たとえば、関数や値などです。
 
-* A *provider* is a recipe for creating a dependency. For a service, this is typically the service class itself. For any dependency you need in your app, you must register a provider with the app's injector, so that the injector can use it to create new instances.
+</div>
 
-When Angular creates a new instance of a component class, it determines which services or other dependencies that component needs by looking at the types of its constructor parameters. For example, the constructor of `HeroListComponent` needs a `HeroService`:
+Angular は、コンポーネントクラスの新しいインスタンスを作成すると、コンストラクターのパラメータタイプを調べることによってコンポーネントが必要とするサービスやその他の依存関係を判断します。たとえば、`HeroListComponent` のコンストラクターには　`HeroService` が必要です。
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (constructor)" region="ctor"></code-example>
+<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" header="src/app/hero-list.component.ts (constructor)" region="ctor"></code-example>
 
-When Angular discovers that a component depends on a service, it first checks if the injector already has any existing instances of that service. If a requested service instance does not yet exist, the injector makes one using the registered provider, and adds it to the injector before returning the service to Angular.
+Angular はコンポーネントがサービスに依存していることを検出すると、インジェクターにそのサービスの既存のインスタンスがあるかどうかをまずチェックします。要求されたサービスインスタンスがまだ存在しない場合、インジェクターは登録されたプロバイダーを使用してインジェクターを作成し、サービスを Angular に返す前にインジェクターに追加します。
 
-When all requested services have been resolved and returned, Angular can call the component's constructor with those services as arguments.
+要求されたサービスがすべて解決されて返されると、Angular はそれらのサービスを引数としてコンポーネントのコンストラクターを呼び出すことができます。
 
-The process of `HeroService` injection looks something like this:
+`HeroService`注入のプロセスは、このようになります。
 
 <figure>
-  <img src="generated/images/guide/architecture/injector-injects.png" alt="Service" class="left">
+  <img src="generated/images/guide/architecture/injector-injects.png" alt="サービス" class="left">
 </figure>
 
-### Providing services
+### サービスの提供
 
-You must register at least one *provider* of any service you are going to use. You can register providers in modules or in components.
+あなたは、使用しようとしているサービスの*プロバイダ*を少なくとも1つ登録する必要があります。
+プロバイダーは、サービス自体のメタデータの一部となり、そのサービスをどこからでも利用できるようにするか、
+プロバイダーを特定のモジュールまたはコンポーネントに登録することができます。
+プロバイダーはサービスのメタデータ(`@Injectable()` デコレーター内) または
+`@NgModule()` や `@Component()` メタデータにプロバイダーを登録します
 
-* When you add providers to the [root module](guide/architecture-modules), the same instance of a service is available to all components in your app.
+* デフォルトでは Angular CLI コマンド [ng generate service](cli/generate) はプロバイダーのメタデータを `@Injectable()` デコレーターに含めることによってプロバイダーをルートインジェクターに登録します。このチュートリアルでは、このメソッドを使用して HeroService クラス定義のプロバイダーを登録します。
 
-<code-example path="architecture/src/app/app.module.ts" linenums="false" title="src/app/app.module.ts (module providers)" region="providers"></code-example>
+   ``` js
+   @Injectable({
+    providedIn: 'root',
+   })
+   ``` 
 
-* When you register a provider at the component level, you get a new instance of the
-service with each new instance of that component. At the component level, register a service provider in the `providers` property of the `@Component` metadata:
+   ルートレベルでサービスを提供すると、Angularは `HeroService` の共有インスタンスを1つ作成し、
+   それを求めるクラスに注入します。
+   `@Injectable()` メタデータにプロバイダーを登録することで、Angular はアプリを最適化することもできます。
+   コンパイルされたアプリケーションが使用されていない場合は、そのサービスをコンパイル済みのアプリケーションから削除します。
 
-<code-example path="architecture/src/app/hero-list.component.ts" linenums="false" title="src/app/hero-list.component.ts (component providers)" region="providers"></code-example>
+* プロバイダーを[特定の NgModule](guide/architecture-modules) に登録すると、そのNgModule内のすべてのコンポーネントで同じサービスのインスタンスを使用できます。このレベルで登録するには、`@NgModule()` デコレーターの `providers` プロパティを使用します。
 
-For more detailed information, see the [Dependency Injection](guide/dependency-injection) section.
+   ```js
+   @NgModule({
+     providers: [
+     BackendService,
+     Logger
+    ],
+    ...
+   })
+   ``` 
 
-<hr/>
+* コンポーネントレベルでプロバイダーを登録すると、そのコンポーネントの新しいインスタンスごとに
+新しいサービスインスタンスが取得されます。
+コンポーネントレベルで `@Component()` メタデータの `providers` プロパティにサービスプロバイダーを登録します。
+
+   <code-example path="architecture/src/app/hero-list.component.ts" linenums="false" header="src/app/hero-list.component.ts (component providers)" region="providers"></code-example>
+
+詳細は、[依存性の注入](guide/dependency-injection)セクションを参照してください.

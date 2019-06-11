@@ -1,6 +1,6 @@
 # Angular Service Worker イントロダクション
 
-Service Workerは、従来のWebデプロイメントモデルを強化し、ネイティブにインストールされたコードと同等の信頼性とパフォーマンスでユーザー体験できるようにアプリケーションを補強します。
+Service Workerは、従来のWebデプロイメントモデルを強化し、ネイティブにインストールされたコードと同等の信頼性とパフォーマンスでユーザー体験できるようにアプリケーションを補強します。AngularアプリケーションへのService Workerの追加は、アプリケーションを [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) (PWAとしても知られます) に変えるためのステップのひとつです。
 
 簡潔にいうと、Service Workerは、Webブラウザで実行され、アプリケーションのキャッシュを管理するスクリプトのことです。
 
@@ -31,7 +31,7 @@ AngularにおけるService Workerのインストールは、`NgModule`に含め�
 
 ## 前提条件
 
-アプリケーションは、Service WorkerをサポートするWebブラウザで実行する必要があります。現在、ChromeとFirefoxの最新バージョンでサポートされています。他のブラウザについては、[Can I Use](http://caniuse.com/#feat=serviceworkers)ページを参照してください。
+アプリケーションは、Service WorkerをサポートするWebブラウザで実行する必要があります。現在、Service WorkerはChromeやFirefox、Edge、Safari、Opera、UC Browser (Android版)、Samsung Internetの最新バージョンでサポートされています。IEやOpera Miniのようなブラウザはサポートしていません。他のブラウザについては、[Can I Use](http://caniuse.com/#feat=serviceworkers)ページを参照してください。
 
 ## 関連資料
 

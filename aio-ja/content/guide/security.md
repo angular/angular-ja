@@ -98,7 +98,7 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 次に `innerHtml` プロパティへバインドしています。
 
 
-<code-example path="security/src/app/inner-html-binding.component.html" title="src/app/inner-html-binding.component.html">
+<code-example path="security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html">
 
 </code-example>
 
@@ -112,14 +112,14 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 攻撃者の制御する値に `<script>` タグが含まれているケース等です。
 
 
-<code-example path="security/src/app/inner-html-binding.component.ts" linenums="false" title="src/app/inner-html-binding.component.ts (class)" region="class">
+<code-example path="security/src/app/inner-html-binding.component.ts" linenums="false" header="src/app/inner-html-binding.component.ts (class)" region="class">
 
 </code-example>
 
 
 
 こういった場合、Angularはコンテキストに応じ自動的に危険な値のみを認識しサニタイズします。
-上の例では `<script>`タグのみサニタイズされ、その内容や後に続く`<b>`タグは変更されていません。
+上の例では `<script>`タグのみサニタイズされ、`<b>`タグのような安全なコンテンツは変更されていません。
 
 
 <figure>
@@ -128,12 +128,18 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 
 
 
-### DOM APIの直接使用を避ける
+### DOM APIの直接使用と、明示的なサニタイズ呼び出し
 
 ブラウザの提供する DOM API は脆弱性から自動的にはアプリケーションを保護してくれません。
 `document` オブジェクトや `ElementRef` クラスより参照可能なノード、多くのサードパーティAPIなどには
-潜在的に安全でないメソッドが含まれています。これらを用いてDOMを直接操作するのではなく、
-可能な限り Angular テンプレートを使用してください。
+潜在的に安全でないメソッドが含まれています。同様に、DOMを操作する他のライブラリとやりとりする場合、Angularの補間と同じような自動サニタイズはありません。 DOMと直接対話するのではなく、可能であればAngularテンプレートを使用してください。
+
+避けられない場合は、組み込みのAngularのサニタイズ関数を使用してください。
+Sanitize untrusted values with the [DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)
+method and the appropriate `SecurityContext`. That function also accepts values that were
+marked as trusted using the `bypassSecurityTrust`... functions, and will not sanitize them,
+as [described below](#bypass-security-apis).
+信頼できない値を[DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)メソッドと適切な `SecurityContext`でサニタイズします。この関数は、[後述](#bypass-security-apis)のように、`bypassSecurityTrust` ...関数を使って信頼できるとマークされた値を受け取り、それらをサニタイズしません。
 
 
 ### Content Security Policy
@@ -192,7 +198,7 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 たとえば次のように、 URLに` javascript：alert(...)` をバインドするとします。
 
 
-<code-example path="security/src/app/bypass-security.component.html" linenums="false" title="src/app/bypass-security.component.html (URL)" region="URL">
+<code-example path="security/src/app/bypass-security.component.html" linenums="false" header="src/app/bypass-security.component.html (URL)" region="URL">
 
 </code-example>
 
@@ -203,7 +209,7 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 これを防ぐには、`bypassSecurityTrustUrl`を呼び出してURLの値を信頼できるURLとしてマークします。
 
 
-<code-example path="security/src/app/bypass-security.component.ts" linenums="false" title="src/app/bypass-security.component.ts (trust-url)" region="trust-url">
+<code-example path="security/src/app/bypass-security.component.ts" linenums="false" header="src/app/bypass-security.component.ts (trust-url)" region="trust-url">
 
 </code-example>
 
@@ -223,13 +229,13 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 これにより、Angularは`<iframe src>`へのバインディングを許可します
 
 
-<code-example path="security/src/app/bypass-security.component.html" linenums="false" title="src/app/bypass-security.component.html (iframe)" region="iframe">
+<code-example path="security/src/app/bypass-security.component.html" linenums="false" header="src/app/bypass-security.component.html (iframe)" region="iframe">
 
 </code-example>
 
 
 
-<code-example path="security/src/app/bypass-security.component.ts" linenums="false" title="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url">
+<code-example path="security/src/app/bypass-security.component.ts" linenums="false" header="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url">
 
 </code-example>
 
@@ -289,7 +295,7 @@ CSRFについてはオープンWebアプリケーションセキュリティプ�
 <a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf">Robust Defenses for Cross-Site Request Forgery</a> にも豊富な情報が掲載されています。
 
 Dave Smith氏による
-<a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する発表</a> も解りやすい解説です。
+<a href="https://www.youtube.com/watch?v=9inczw6qtpY" header="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する発表</a> も解りやすい解説です。
 
 
 <h3 id='xssi'>
@@ -299,11 +305,11 @@ Dave Smith氏による
 
 
 JSON脆弱性とも呼ばれるクロスサイトスクリプトインクルージョンにより、攻撃者のWebサイトで
-JSON APIからデータを読み取ることができます。この攻撃は、ネイティブJavaScriptオブジェクトコンストラクタを
+JSON APIからデータを読み取ることができます。この攻撃は、ネイティブJavaScriptオブジェクトコンストラクターを
 オーバーライドしてから、`<script>`タグを使用してAPI URLを含めることによって、古いブラウザで機能します。
 
 この攻撃は、返されたJSONがJavaScriptとして実行可能な場合にのみ成功します。
-サーバーはすべてのJSONレスポンスを実行不可能にするためにプレフィックスを付けて攻撃を防ぐことができます。
+サーバーはすべてのJSONレスポンスを実行不可能にするために接頭辞を付けて攻撃を防ぐことができます。
 慣習的には、よく知られている文字列 `")]}',\n"` を使用します。
 
 Angularの`HttpClient`ライブラリはこの規約を認識し、

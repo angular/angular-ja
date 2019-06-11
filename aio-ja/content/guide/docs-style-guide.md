@@ -1,19 +1,60 @@
-# Authors Style Guide
+# Angular Documentation Style Guide
+<!-- formerly Authors Style Guide -->
 
-This page presents design and layout guidelines for Angular documentation pages.  These guidelines should be followed by all guide page authors. Deviations must be approved by the documentation editor.
+This Style Guide is for anyone who contributes to the Angular documentation (this site). 
+These guidelines should be followed by all authors. 
+Deviations must be approved by a documentation editor.
 
-Most guide pages should have [accompanying sample code](#from-code-samples) with
-[special markup](#source-code-markup) for the code snippets on the page.
-Code samples should adhere to the
-[style guide for Angular applications](guide/styleguide "Application Code Style Guide")
-because readers expect consistency.
+The guidelines described here serve two purposes: 
 
-For clarity and precision, every guideline on _this_ page is illustrated with a working example,
-followed by the page markup for that example ... as shown here.
+* To ensure a high-quality, consistent experience for Angular documentation users. 
 
-```html
-  followed by the page markup for that example ... as shown here.
-```
+* To simplify the writing process for contributing authors. 
+This guide helps you make decisions about tone, voice, and style. 
+It also helps you find the right markup quickly. 
+
+
+<div class="alert is-helpful">
+
+This guide is a *living document*; it changes over time. 
+We strive for consistency to the extent feasible, but you may find parts of our documentation that don't match this style guide. 
+When in doubt, **follow this guide rather than imitating existing documents.**
+
+</div>
+
+## Scope of these guidelines
+
+We ask all contributing authors to adhere to three aspects of style: 
+
+
+* **Writing style:** Word usage, grammar, capitalization, and punctuation. 
+Adherence to Angular's writing guidelines ensures a consistent "voice", helps ensure accuracy of the information, and facilitates use world-wide, by audiences with different backgrounds. 
+
+
+* **Markup style:** How to include images, tables, alert boxes, and code snippets. 
+Angular docs are written in Markdown, with custom extensions for this site. Correct markup ensures a consistent look-and-feel, and is essential for the doc to build and function correctly. 
+
+
+* **Angular coding style:** Coding style for example apps and code snippets. 
+Code examples are encouraged for demonstrating how to apply the concepts and features discussed. 
+Angular has a custom framework that enables authors to include code snippets directly from example apps  that are automatically tested as part of doc builds. 
+To contribute example code, you must understand Angular itself and the custom framework for Angular doc examples. 
+
+For each aspect of style, the following table explains where to find the primary guidelines and what this Angular Documentation Style Guide offers. 
+
+
+Style                    | Guidelines
+------------------------ | -------------------------------
+**Writing style**        | Primary: [Google Developer Documentation Style Guide](https://developers.google.com/style/)<br />This guide: Specifies any special considerations for Angular docs.  
+**Markup style**         | Primary: This guide<br />This guide: Specifies guidelines for markup of guides and tutorials, which are written primarily in Markdown. 
+**Angular coding style** | Primary: [Angular Style Guide](guide/styleguide "Angular Application Code Style Guide").<br />This guide: How to create, store, and include code examples in guides and tutorials. 
+
+<div class="alert is-helpful">
+
+Note: Angular API and CLI reference docs are generated from source code and/or related source files, which may have other markup styles and other ways of including code examples.
+
+</div>
+
 
 ## Doc generation and tooling
 
@@ -47,7 +88,7 @@ The reader requests a page by its Page URL. The doc viewer fetches the correspon
 Page URLs mirror the `content` file structure. The URL for the page of a guide is in the form `guide/{page-name}`. The page for _this_ "Authors Style Guide" is located at `content/guide/docs-style-guide.md` and its URL is `guide/docs-style-guide`.
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 _Tutorial_ pages are exactly like guide pages. The only difference is that they reside in `content/tutorial` instead of `content/guide` and have URLs like `tutorial/{page-name}`.
 
@@ -84,7 +125,7 @@ Standard markdown processors don't allow you to put markdown _within_ HTML tags.
 </div>
 ```
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   It is customary but not required to _precede_ the _closing HTML_ tag with a blank line as well.
 
@@ -161,34 +202,6 @@ Try to minimize the heading depth, preferably only two. But more headings, such 
 
   Try to minimize ...
 ```
-
-## Subsections
-
-Subsections typically present extra detail and references to other pages.
-
-Use subsections for commentary that _enriches_ the reader's understanding of the text that precedes it.
-
-A subsection _must not_ contain anything _essential_ to that understanding. Don't put a critical instruction or a tutorial step in a subsection.
-
-A subsection is content within a `<div>` that has the `l-sub-section` CSS class. You should write the subsection content in markdown.
-
-Here is an example of a subsection `<div>` surrounding the subsection content written in markdown.
-
-<div class="l-sub-section">
-
-  You'll learn about styles for live examples in the [section below](guide/docs-style-guide#live-examples "Live examples").
-
-</div>
-
-```html
-<div class="l-sub-section">
-
-You'll learn about styles for live examples in the [section below](guide/docs-style-guide#live-examples "Live examples").
-
-</div>
-```
-
-Note that at least one blank line must follow the opening `<div>`. A blank line before the closing `</div>` is customary but not required.
 
 ## Table of contents
 
@@ -322,7 +335,7 @@ The author must also write end-to-end tests for the sample.
 
 Code samples are located in sub-folders of the `content/examples` directory of the `angular/angular` repository. An example folder name should be the same as the guide page it supports.
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 A guide page might not have its own sample code. It might refer instead to a sample belonging to another page.
 
@@ -338,24 +351,24 @@ _This_ "Authors Doc Style Guide" has its own sample application, located in the 
 
 The following _code-example_ displays the sample's `app.module.ts`.
 
-<code-example path="docs-style-guide/src/app/app.module.ts" title="src/app/app.module.ts"></code-example>
+<code-example path="docs-style-guide/src/app/app.module.ts" header="src/app/app.module.ts"></code-example>
 
 Here's the brief markup that produced that lengthy snippet:
 
 ```html
 <code-example
   path="docs-style-guide/src/app/app.module.ts"
-  title="src/app/app.module.ts">
+  header="src/app/app.module.ts">
 </code-example>
 ```
 
 You identified the snippet's source file by setting the `path` attribute to sample folder's location _within_ `content/examples`.
 In this example, that path is  `docs-style-guide/src/app/app.module.ts`.
 
-You added a header to tell the reader where to find the file by setting the `title` attribute.
-Following convention, you set the `title` attribute to the file's location within the sample's root folder.
+You added a header to tell the reader where to find the file by setting the `header` attribute.
+Following convention, you set the `header` attribute to the file's location within the sample's root folder.
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 Unless otherwise noted, all code snippets in this page are derived from sample source code
 located in the `content/examples/docs-style-guide` directory.
@@ -371,7 +384,7 @@ If you want to include an ignored code file in your project and display it in a 
 
 The preferred way to un-ignore a file is to update the `content/examples/.gitignore` like this:
 
-<code-example title="content/examples/.gitignore">
+<code-example header="content/examples/.gitignore">
   # my-guide
   !my-guide/src/something.js
   !my-guide/more-javascript*.js
@@ -385,7 +398,7 @@ You control the _code-example_ output by setting one or more of its attributes:
 
 * `path`- the path to the file in the `content/examples` folder.
 
-* `title`- the header of the code listing.
+* `header`- the header of the code listing.
 
 * `region`- displays the source file fragment with that region name; regions are identified by _docregion_ markup in the source file, as explained [below](#region "Displaying a code fragment").
 
@@ -423,7 +436,7 @@ A couple of observations:
 
 1. The `region` value, `"class"`, is the name of the `#docregion` in the source file. Confirm that by looking at `content/examples/docs-style-guide/src/app/app.module.ts`
 
-1. Omitting the `title` is fine when the source of the fragment is obvious. We just said that this is a fragment of the `app.module.ts` file which was displayed immediately above, in full, with a header.
+1. Omitting the `header` is fine when the source of the fragment is obvious. We just said that this is a fragment of the `app.module.ts` file which was displayed immediately above, in full, with a header.
 There's no need to repeat the header.
 
 1. The line numbers disappeared. By default, the doc viewer omits line numbers when there are fewer than 10 lines of code; it adds line numbers after that. You can turn line numbers on or off explicitly by setting the `linenums` attribute.
@@ -443,11 +456,11 @@ Here's the markup for an "avoid" example in the
 <code-example
   path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts"
   region="example"
-  title="app/heroes/hero-button/hero-button.component.ts">
+  header="app/heroes/hero-button/hero-button.component.ts">
 </code-example>
 ```
 
-<code-example path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" title="app/heroes/hero-button/hero-button.component.ts">
+<code-example path="styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts" region="example" header="app/heroes/hero-button/hero-button.component.ts">
 </code-example>
 
 {@a code-tabs}
@@ -462,29 +475,29 @@ Code tabs display code much like _code examples_ do.  The added advantage is tha
 #### Code-pane attributes
 
 * `path` - a file in the content/examples folder
-* `title` - seen in the header of a tab
+* `header` - seen in the header of a tab
 * `linenums` - overrides the `linenums` property at the `code-tabs` level for this particular pane. The value can be `true`, `false` or a number indicating the starting line number. If not specified, line numbers are enabled only when the number of lines of code are greater than 10.
 
-The next example displays multiple code tabs, each with its own title.
+The next example displays multiple code tabs, each with its own header.
 It demonstrates control over display of line numbers at both the `<code-tabs>` and `<code-pane>` levels.
 
 <code-tabs linenums="false">
   <code-pane
-    title="app.component.html"
+    header="app.component.html"
     path="docs-style-guide/src/app/app.component.html">
   </code-pane>
   <code-pane
-    title="app.component.ts"
+    header="app.component.ts"
     path="docs-style-guide/src/app/app.component.ts"
     linenums="true">
   </code-pane>
   <code-pane
-    title="app.component.css (heroes)"
+    header="app.component.css (heroes)"
     path="docs-style-guide/src/app/app.component.css"
     region="heroes">
   </code-pane>
   <code-pane
-    title="package.json (scripts)"
+    header="package.json (scripts)"
     path="docs-style-guide/package.1.json">
   </code-pane>
 </code-tabs>
@@ -497,21 +510,21 @@ The `linenums` attribute in the second pane restores line numbering for _itself 
 ```html
 <code-tabs linenums="false">
   <code-pane
-    title="app.component.html"
+    header="app.component.html"
     path="docs-style-guide/src/app/app.component.html">
   </code-pane>
   <code-pane
-    title="app.component.ts"
+    header="app.component.ts"
     path="docs-style-guide/src/app/app.component.ts"
     linenums="true">
   </code-pane>
   <code-pane
-    title="app.component.css (heroes)"
+    header="app.component.css (heroes)"
     path="docs-style-guide/src/app/app.component.css"
     region="heroes">
   </code-pane>
   <code-pane
-    title="package.json (scripts)"
+    header="package.json (scripts)"
     path="docs-style-guide/package.1.json">
   </code-pane>
 </code-tabs>
@@ -523,7 +536,7 @@ The `linenums` attribute in the second pane restores line numbering for _itself 
 
 You must add special code snippet markup to sample source code files before they can be displayed by `<code-example>` and `<code-tabs>` components.
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 The sample source code for this page, located in `context/examples/docs-style-guide`, contains examples of every code snippet markup described in this section.
 
@@ -570,13 +583,13 @@ The `<code-example>` and `<code-tabs>` components won't display a source code fi
 The _#docregion_ comment begins a code snippet region.
 Every line of code _after_ that comment belongs in the region _until_ the code fragment processor encounters the end of the file or a closing _#enddocregion_.
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 The `src/main.ts` is a simple example of a file with a single _#docregion_ at the top of the file.
 
 <code-example
   path="docs-style-guide/src/main.ts"
-  title="src/main.ts"></code-example>
+  header="src/main.ts"></code-example>
 
 </div>
 
@@ -613,7 +626,7 @@ You can nest _#docregions_ within _#docregions_
 ... yet more code ...
 /// #enddocregion
 ```
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 The `src/app/app.module.ts` file has a good example of a nested region.
 
@@ -650,12 +663,12 @@ Here's are the two corresponding code snippets displayed side-by-side.
 
 <code-tabs>
   <code-pane
-    title="app.component.ts (class)"
+    header="app.component.ts (class)"
     path="docs-style-guide/src/app/app.component.ts"
     region="class">
   </code-pane>
   <code-pane
-    title="app.component.ts (class-skeleton)"
+    header="app.component.ts (class-skeleton)"
     path="docs-style-guide/src/app/app.component.ts"
     region="class-skeleton">
   </code-pane>
@@ -688,12 +701,12 @@ Here's an example that excerpts certain scripts from `package.json` into a parti
 
 <code-example
   path="docs-style-guide/package.1.json"
-  title="package.json (selected scripts)"></code-example>
+  header="package.json (selected scripts)"></code-example>
 
 ```html
 <code-example
   path="docs-style-guide/package.1.json"
-  title="package.json (selected scripts)"></code-example>
+  header="package.json (selected scripts)"></code-example>
 ```
 
 #### Partial file naming
@@ -717,7 +730,7 @@ Remember to exclude these files from stackblitz by listing them in the `stackbli
 
 <code-example
   path="docs-style-guide/stackblitz.json"
-  title="stackblitz.json"></code-example>
+  header="stackblitz.json"></code-example>
 
 {@a live-examples}
 ## Live examples
@@ -726,7 +739,7 @@ By adding `<live-example>` to the page you generate links that run sample code i
 
 Live examples (AKA "stackblitz") are defined by one or more `stackblitz.json` files in the root of a code sample folder. Each sample folder usually has a single unnamed definition file, the default `stackblitz.json`.
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 You can create additional, named definition files in the form `name.stackblitz.json`. See `content/examples/testing` for examples.
 
@@ -826,14 +839,14 @@ Here's an embedded live example for this guide.
 
 Every section header tag is also an anchor point. Another guide page could add a link to this section by writing:
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 See the ["Anchors"](guide/docs-style-guide#anchors "Style Guide - Anchors") section for details.
 
 </div>
 
 ```html
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 See the ["Anchors"](guide/docs-style-guide#anchors "Style Guide - Anchors") section for details.
 
@@ -875,7 +888,7 @@ Now [link to that custom anchor name](#ugly-anchors) as you did before.
 Now [link to that custom anchor name](#ugly-anchors) as you did before.
 ```
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 Alternatively, you can use the HTML `<a>` tag.
 
@@ -889,44 +902,81 @@ If you do, be sure to set the `id` attribute - not the `name` attribute! The doc
 
 </div>
 
-## Alerts
+## Alerts and Calllouts
 
-Alerts draw attention to important points. Alerts should not be used for multi-line content (use callouts insteads) or stacked on top of each other.  Note that the content of an alert is indented to the right by two spaces.
+Alerts and callouts present warnings, extra detail or references to other pages. They can also be used to provide commentary that _enriches_ the reader's understanding of the content being presented.
+
+An alert or callout _must not_ contain anything _essential_ to that understanding. Don't put a critical instruction or a tutorial step in a subsection.
+
+### Alerts
+
+Alerts draw attention to short important points. Alerts should not be used for multi-line content (use [callouts](#callouts "callouts") instead).
+
+<div class="alert is-helpful">
+
+  You'll learn about styles for live examples in the [section below](guide/docs-style-guide#live-examples "Live examples").
+
+</div>
+
+  Note that at least one blank line must follow both the opening and closing `<div>` tags. A blank line before the closing `</div>` is customary but not required.
+
+```html
+<div class="alert is-helpful">
+
+You'll learn about styles for live examples in the [section below](guide/docs-style-guide#live-examples "Live examples").
+
+</div>
+```
+
+There are three different _urgency levels_ used to style the alerts based on the severity or importance of the content.
 
 <div class="alert is-critical">
+
 A critical alert.
+
 </div>
 
 <div class="alert is-important">
+
 An important alert.
+
 </div>
 
 <div class="alert is-helpful">
+
 A helpful, informational alert.
+
 </div>
 
 
 Here is the markup for these alerts.
 ```html
 <div class="alert is-critical">
+
 A critical alert.
+
 </div>
 
 <div class="alert is-important">
+
 An important alert.
+
 </div>
 
 <div class="alert is-helpful">
+
 A helpful, informational alert.
+
 </div>
 ```
 
-Alerts are meant to grab the user's attention and should be used sparingly.
-They are not for casual asides or commentary. Use [subsections](#subsections "subsections") for commentary.
+### Callouts
 
-## Callouts
+Callouts, like alerts, are meant to draw attention to important points. Use a callout when you want a riveting header and multi-line content.
 
-Callouts (like alerts) are meant to draw attention to important points. Use a callout when you want a riveting header and multi-line content.
+If you have more than two paragraphs, consider creating a new page or making it part of the main content.
+
+Callouts use the same _urgency levels_ that alerts do.
 
 <div class="callout is-critical">
 <header>A critical point</header>
@@ -943,7 +993,7 @@ Callouts (like alerts) are meant to draw attention to important points. Use a ca
 </div>
 
 <div class="callout is-helpful">
-<header>A helpful point</header>
+<header>A helpful or informational point</header>
 
 **Pitchfork hoodie semiotics**, roof party pop-up _paleo_ messenger bag cred Carles tousled Truffaut yr. Semiotics viral freegan VHS, Shoreditch disrupt McSweeney's. Intelligentsia kale chips Vice four dollar toast, Schlitz crucifix
 
@@ -959,10 +1009,10 @@ Here is the markup for the first of these callouts.
 </div>
 ```
 
-Notice that
-* the callout header text is forced to all upper case.
-* the callout body can be written in markdown.
-* a blank line separates the `</header>` tag from the markdown content.
+Notice that:
+* the callout header text is forced to all upper case
+* the callout body can be written in markdown
+* a blank line separates the `</header>` tag from the markdown content
 
 Callouts are meant to grab the user's attention. They are not for casual asides. Please use them sparingly.
 
@@ -1254,7 +1304,7 @@ Note that you generally don't wrap a floating image in a `<figure>` element.
 
 If you have a floating image inside an alert, callout, or a subsection, it is a good idea to apply the `clear-fix` class to the `div` to ensure that the image doesn't overflow its container. For example:
 
-<div class="l-sub-section clear-fix">
+<div class="alert is-helpful clear-fix">
 
   <img src="generated/images/guide/docs-style-guide/flying-hero.png"
     alt="flying Angular hero"
@@ -1266,7 +1316,7 @@ If you have a floating image inside an alert, callout, or a subsection, it is a 
 </div>
 
 ```html
-<div class="l-sub-section clear-fix">
+<div class="alert is-helpful clear-fix">
 
   <img src="generated/images/guide/docs-style-guide/flying-hero.png"
     alt="flying Angular hero"

@@ -1,349 +1,235 @@
-# Dependency Injection
+# DI イン・アクション
 
-
-Dependency Injection is a powerful pattern for managing code dependencies.
-This cookbook explores many of the features of Dependency Injection (DI) in Angular.
+このセクションでは、Angularの依存性の注入(DI)機能の多くについて説明します。
 {@a toc}
 
-See the <live-example name="dependency-injection-in-action"></live-example>
-of the code in this cookbook.
-
-{@a app-wide-dependencies}
-
-## Application-wide dependencies
-Register providers for dependencies used throughout the application 
-in the `@Injectable()` decorator of the service itself. 
-
-<code-example path="dependency-injection/src/app/heroes/hero.service.3.ts" title="src/app/heroes/hero.service.3.ts" linenums="false">
-</code-example>
-
-`providedIn` here tells Angular that the root injector is responsible for creating an instance of the `HeroService`.
-Services that are provided this way are automatically made available to the entire 
-application and don't need to be listed in any module.
-
-
-Service classes can act as their own providers which is why defining them in the `@Injectable` decorator
-is all the registration you need.
-
-<div class="l-sub-section">
-
-
-
-A *provider* is something that can create or deliver a service.
-Angular creates a service instance from a class provider by using `new`.
-Read more about providers in the [Dependency Injection](guide/dependency-injection#register-providers-ngmodule)
-guide.
-
-</div>
-
-
-Now that you've registered these services,
-Angular can inject them into the constructor of *any* component or service, *anywhere* in the application.
-
-
-{@a external-module-configuration}
-
-
-## External module configuration
-If a provider cannot be configured in the `@Injectable` decorator of the service, then register application-wide providers in the root `AppModule`, not in the `AppComponent`. Generally, register providers in the `NgModule` rather than in the root application component.
-
-Do this when users should explicitly opt-in to use a service, or the service should be 
-provided in a lazily-loaded context, 
-or when you are configuring another application global service _before the application starts_.
-
-Here is an example of the case where the component router configuration includes a non-default
-[location strategy](guide/router#location-strategy) by listing its provider
-in the `providers` list of the `AppModule`.
-
-
-<code-example path="dependency-injection-in-action/src/app/app.module.ts" region="providers" title="src/app/app.module.ts (providers)" linenums="false">
-
-</code-example>
-
-
-
-{@a injectable}
-
+このクックブックのコードは<live-example name="dependency-injection-in-action"></live-example>
+を参照してください。
 
 {@a nested-dependencies}
 
+## ネストしたサービスの依存関係
 
+注入されたサービスの _利用者_ は、そのサービスを作成する方法を知る必要はありません。
+依存関係の作成とキャッシュはDIフレームワークの仕事です。
+利用者は、DIフレームワークにどの依存関係が必要かを知らせるだけです。
 
-## _@Injectable()_ and nested service dependencies
-The consumer of an injected service does not know how to create that service.
-It shouldn't care.
-It's the dependency injection's job to create and cache that service.
+サービスが他のサービスに依存していることはありますし、それがさらに他のサービスに依存しているかもしれません。
+DIフレームワークは、これらのネストした依存関係を正しい順序で解決します。
+各ステップで、
+依存関係の利用者はコンストラクターで必要なものを宣言し、それをフレームワークに提供させます。
 
-Sometimes a service depends on other services, which may depend on yet other services.
-Resolving these nested dependencies in the correct order is also the framework's job.
-At each step, the consumer of dependencies simply declares what it requires in its
-constructor and the framework takes over.
+次の例では、 `AppComponent` が `LoggerService` と `UserContext` への依存を宣言します。
 
-The following example shows injecting both the `LoggerService` and the `UserContext` in the `AppComponent`.
-
-<code-example path="dependency-injection-in-action/src/app/app.component.ts" region="ctor" title="src/app/app.component.ts" linenums="false">
-
-</code-example>
-
-
-
-The `UserContext` in turn has its own dependencies on both the `LoggerService` and
-a `UserService` that gathers information about a particular user.
-
-
-<code-example path="dependency-injection-in-action/src/app/user-context.service.ts" region="injectables" title="user-context.service.ts (injection)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/app.component.ts" region="ctor" header="src/app/app.component.ts" linenums="false">
 
 </code-example>
 
 
+`UserContext` は `LoggerService` と、特定のユーザーに関する情報を収集するサービスである
+`UserService` の両方に依存します。
 
-When Angular creates the `AppComponent`, the dependency injection framework creates an instance of the `LoggerService` and
-starts to create the `UserContextService`.
-The `UserContextService` needs the `LoggerService`, which the framework already has, and the `UserService`, which it has yet to create.
-The `UserService` has no dependencies so the dependency injection framework can just
-use `new` to instantiate one.
 
-The beauty of dependency injection is that `AppComponent` doesn't care about any of this.
-You simply declare what is needed in the constructor (`LoggerService` and `UserContextService`)
-and the framework does the rest.
+<code-example path="dependency-injection-in-action/src/app/user-context.service.ts" region="injectables" header="user-context.service.ts (injection)" linenums="false">
 
-Once all the dependencies are in place, the `AppComponent` displays the user information:
+</code-example>
 
+Angularが `AppComponent` を作成するとき、DIフレームワークは `LoggerService` のインスタンスを作成し、 `UserContextService` の作成を開始します。
+`UserContextService` も `LoggerService` が必要としますが、フレームワークはすでにそのインスタンスを持っているので、同じインスタンスを提供できます。
+`UserContextService` には、フレームワークがまだ作成していない `UserService` も必要です。 `UserService` にはそれ以上の依存関係はないため、フレームワークは単純に `new` を使用してクラスをインスタンス化し、そのインスタンスを `UserContextService` コンストラクターに渡すことができます。
+
+親の `AppComponent` は、依存先の依存関係について知る必要はありません。
+コンストラクター(この場合は `LoggerService` と `UserContextService`)で必要なものを宣言すると、
+フレームワークはネストした依存関係を解決します。
+
+すべての依存関係が準備できたとき、 `AppComponent` はユーザー情報を表示します。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/logged-in-user.png" alt="Logged In User">
 </figure>
 
-
-
-{@a injectable-1}
-
-
-### *@Injectable()*
-Notice the `@Injectable()`decorator on the `UserContextService` class.
-
-<code-example path="dependency-injection-in-action/src/app/user-context.service.ts" region="injectable" title="user-context.service.ts (@Injectable)" linenums="false">
-
-</code-example>
-
-
-The `@Injectable` decorator indicates that the Angular DI system is used to create one or more instances of `UserContextService`.
-
 {@a service-scope}
 
+## コンポーネントサブツリーにサービスのスコープを制限する
 
-## Limit service scope to a component subtree
+Angularアプリケーションは、コンポーネントツリーと並列したツリー階層に配置された複数のインジェクターを持ちます。
+各インジェクターは依存関係のためのシングルトンのインスタンスを作成します。
+そのインジェクターがそのサービスを提供する場所すべてにその同一インスタンスが注入されます。
+特定のサービスをインジェクター階層の任意のレベルで提供および作成できます。
+これはつまり、サービスが複数のインジェクターによって提供される場合、サービスインスタンスは複数存在する可能性があることを意味します。
 
-All injected service dependencies are singletons meaning that,
-for a given dependency injector, there is only one instance of service.
+ルートインジェクターによって提供される依存関係は、アプリケーション内の *任意の場所* にある *任意* のコンポーネントに注入できます。
+場合によっては、サービスの使用可能範囲をアプリケーションの特定の領域に制限したいことがあるかもしれません。
+たとえば、ルートインジェクターに自動的にサービスを提供させるのではなく、
+ユーザーにサービスの使用を明示的に選択させることができます。
 
-But an Angular application has multiple dependency injectors, arranged in a tree hierarchy that parallels the component tree.
-So a particular service can be *provided* and created at any component level and multiple times
-if provided in multiple components.
+アプリケーション階層の *特定のブランチのサブルートコンポーネント* でサービスを提供することで、
+注入されるサービスのスコープをその *ブランチ* に制限することができます。
+次の例では、 `HeroesBaseComponent` サブコンポーネントの `@Component()` デコレーターの `providers` 配列に
+`HeroService` を追加することで、 `HeroesBaseComponent` ごとに `HeroService` インスタンスを作成する方法を説明します。
 
-By default, a service dependency provided in one component is visible to all of its child components and
-Angular injects the same service instance into all child components that ask for that service.
-
-Accordingly, dependencies provided in the root `AppComponent` can be injected into *any* component *anywhere* in the application.
-
-That isn't always desirable.
-Sometimes you want to restrict service availability to a particular region of the application.
-
-You can limit the scope of an injected service to a *branch* of the application hierarchy
-by providing that service *at the sub-root component for that branch*.
-This example shows how similar providing a service to a sub-root component is
-to providing a service in the root `AppComponent`. The syntax is the same.
-Here, the `HeroService` is available to the `HeroesBaseComponent` because it is in the `providers` array:
-
-<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="injection" title="src/app/sorted-heroes.component.ts (HeroesBaseComponent excerpt)">
+<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="injection" header="src/app/sorted-heroes.component.ts (HeroesBaseComponent excerpt)">
 
 </code-example>
 
+Angularが `HeroesBaseComponent` を作成すると、
+そのコンポーネントとその子にだけ参照できる `HeroService` の新しいインスタンスも作成されます。
 
-
-When Angular creates the `HeroesBaseComponent`, it also creates a new instance of `HeroService`
-that is visible only to the component and its children, if any.
-
-You could also provide the `HeroService` to a *different* component elsewhere in the application.
-That would result in a *different* instance of the service, living in a *different* injector.
-
-<div class="l-sub-section">
-
-
-
-Examples of such scoped `HeroService` singletons appear throughout the accompanying sample code,
-including the `HeroBiosComponent`, `HeroOfTheMonthComponent`, and `HeroesBaseComponent`.
-Each of these components has its own `HeroService` instance managing its own independent collection of heroes.
-
-
-</div>
-
-
-
+アプリケーション内の別の場所にある別のコンポーネントに `HeroService` を提供することもできます。
+その結果、別のサービスインスタンスが別のインジェクターに存在することになります。
 
 <div class="alert is-helpful">
 
-
-
-### Take a break!
-This much Dependency Injection knowledge may be all that many Angular developers
-ever need to build their applications. It doesn't always have to be more complicated.
-
+このようなスコープされた `HeroService` シングルトンの例は、
+`HeroBiosComponent` 、 `HeroOfTheMonthComponent` 、および `HeroesBaseComponent` を含む添付のサンプルコードのあらゆる場所でみることができます。
+これらの各コンポーネントは、自身のヒーローのコレクションを管理する自身の `HeroService` インスタンスを持ちます。
 
 </div>
+
 
 {@a multiple-service-instances}
 
 
-## Multiple service instances (sandboxing)
+## 複数のサービスインスタンス (サンドボックス化)
 
-Sometimes you want multiple instances of a service at *the same level of the component hierarchy*.
+コンポーネント階層の *同じレベル* で、複数のサービスインスタンスが必要な場合があります。
 
-A good example is a service that holds state for its companion component instance.
-You need a separate instance of the service for each component.
-Each service has its own work-state, isolated from the service-and-state of a different component.
-This is called *sandboxing* because each service and component instance has its own sandbox to play in.
+良い例は、連続したコンポーネントインスタンスの状態を保持するサービスです。
+コンポーネントごとに個別のサービスインスタンスが必要です。
+各コンポーネントのサービスおよび状態は隔離され、各サービスごとに作業状態を持ちます。
+これは、各サービス、コンポーネントインスタンスごとに動作するサンドボックスをもつため、*サンドボックス化* と呼ばれています。
 
 {@a hero-bios-component}
-Imagine a `HeroBiosComponent` that presents three instances of the `HeroBioComponent`.
 
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="simple" title="ap/hero-bios.component.ts">
+次の例では、 `HeroBiosComponent` は3つの `HeroBioComponent` インスタンスを持ちます。
 
-</code-example>
-
-
-
-Each `HeroBioComponent` can edit a single hero's biography.
-A `HeroBioComponent` relies on a `HeroCacheService` to fetch, cache, and perform other persistence operations on that hero.
-
-<code-example path="dependency-injection-in-action/src/app/hero-cache.service.ts" region="service" title="src/app/hero-cache.service.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="simple" header="ap/hero-bios.component.ts">
 
 </code-example>
 
 
+各 `HeroBioComponent` は、単一のヒーローの経歴を編集できます。
+`HeroBioComponent` は、そのヒーローをフェッチ、キャッシュおよび他の永続化操作を行うための `HeroCacheService` に依存しています。
 
-Clearly the three instances of the `HeroBioComponent` can't share the same `HeroCacheService`.
-They'd be competing with each other to determine which hero to cache.
-
-Each `HeroBioComponent` gets its *own* `HeroCacheService` instance
-by listing the `HeroCacheService` in its metadata `providers` array.
-
-<code-example path="dependency-injection-in-action/src/app/hero-bio.component.ts" region="component" title="src/app/hero-bio.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-cache.service.ts" region="service" header="src/app/hero-cache.service.ts">
 
 </code-example>
 
 
+3つの `HeroBioComponent` インスタンスは、キャッシュするヒーローが互いに競合してしまうため、
+同一の `HeroCacheService` インスタンスを共有することはできません。
 
-The parent `HeroBiosComponent` binds a value to the `heroId`.
-The `ngOnInit` passes that `id` to the service, which fetches and caches the hero.
-The getter for the `hero` property pulls the cached hero from the service.
-And the template displays this data-bound property.
+代わりに、各 `HeroBioComponent` は、そのメタデータの `providers` 配列に `HeroCacheService` を追加することで、
+*自身* の `HeroCacheService` インスタンスを取得します。
 
-Find this example in <live-example name="dependency-injection-in-action">live code</live-example>
-and confirm that the three `HeroBioComponent` instances have their own cached hero data.
+<code-example path="dependency-injection-in-action/src/app/hero-bio.component.ts" region="component" header="src/app/hero-bio.component.ts">
+
+</code-example>
+
+
+親の `HeroBiosComponent` は値を `heroId` にバインドします。
+`ngOnInit` で、そのIDをヒーローをフェッチしてキャッシュするサービスに渡します。
+`hero` ゲッタープロパティは、キャッシュされているヒーローをサービスから引き出します。
+テンプレートでは、このデータがバインドされたプロパティを表示します。
+
+<live-example name="dependency-injection-in-action">live code</live-example>でこの例を見つけ、
+3つの `HeroBioComponent` インスタンスごとにキャッシュされたヒーローデータが存在することを確認してください。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/hero-bios.png" alt="Bios">
 </figure>
 
+{@a qualify-dependency-lookup}
 
+## パラメータデコレーターを使って依存関係の検索を限定する
+
+クラスが依存関係を必要とする場合、その依存関係はパラメータとしてコンストラクターに追加されます。
+Angularがクラスをインスタンス化する必要があるとき、DIフレームワークに依存関係を提供するように要求します。
+デフォルトでは、DIフレームワークはコンポーネントのローカルインジェクターから開始し、
+必要ならルートインジェクターに到達するまでインジェクターツリーをバブリングしながら
+インジェクター階層内のプロバイダーを検索します。
+
+* プロバイダーを使用して設定された最初のインジェクターは、依存関係(サービスインスタンスまたは値)をコンストラクターに提供します。
+
+* ルートインジェクターにプロバイダーが見つからない場合、DIフレームワークはエラーを投げます。
+
+クラスコンストラクターのサービス値パラメータに _パラメータデコレーター_ を設定することで、
+デフォルトの検索の振る舞いを変更することができます。
 
 {@a optional}
 
+### 依存関係を `@Optional` として `@Host` で検索を制限する
 
-{@a qualify-dependency-lookup}
+依存関係は、コンポーネント階層のどのレベルでも登録できます。
+コンポーネントが依存関係を要求すると、Angularはそのコンポーネントのインジェクターから開始し、
+最初の適切なプロバイダーが見つかるまでインジェクターツリーを検索します。
+検索中に依存関係が見つからない場合、Angularはエラーを投げます。
 
+場合によっては、検索を制限するか、欠落している依存関係に対応する必要があります。
+コンポーネントコンストラクターのサービス値パラメータで `@Host` および `@Optional`
+制限デコレーターを使用してAngularの検索の振る舞いを変更できます。
 
+* `@Optional` プロパティデコレーターは、依存関係が見つからない場合にnullを返すようにAngularに指示します。
 
-## Qualify dependency lookup with _@Optional()_ and `@Host()`
-As you now know, dependencies can be registered at any level in the component hierarchy.
+* `@Host` プロパティデコレーターは、上方向への検索を *ホストコンポーネント* で停止します。
+ホストコンポーネントは通常、依存関係を要求するコンポーネントです。
+ただし、このコンポーネントが *親* コンポーネントの中に投影されると、その親コン​​ポーネントがホストになります。
+次の例は、この2番目のケースを扱います。
 
-When a component requests a dependency, Angular starts with that component's injector and walks up the injector tree
-until it finds the first suitable provider.  Angular throws an error if it can't find the dependency during that walk.
+例のように、これらのデコレーターは個別に使用することも、一緒に使用することもできます。
+この `HeroBiosAndContactsComponent` は、[上](guide/dependency-injection-in-action#hero-bios-component)で見た `HeroBiosComponent` の改訂版です。
 
-You *want* this behavior most of the time.
-But sometimes you need to limit the search and/or accommodate a missing dependency.
-You can modify Angular's search behavior with the `@Host` and `@Optional` qualifying decorators,
-used individually or together.
-
-The `@Optional` decorator tells Angular to continue when it can't find the dependency.
-Angular sets the injection parameter to `null` instead.
-
-The `@Host` decorator stops the upward search at the *host component*.
-
-The host component is typically the component requesting the dependency.
-But when this component is projected into a *parent* component, that parent component becomes the host.
-The next example covers this second case.
-
-
-{@a demonstration}
-
-
-### Demonstration
-The `HeroBiosAndContactsComponent` is a revision of the `HeroBiosComponent` that you looked at [above](guide/dependency-injection-in-action#hero-bios-component).
-
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="hero-bios-and-contacts" title="src/app/hero-bios.component.ts (HeroBiosAndContactsComponent)">
+<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="hero-bios-and-contacts" header="src/app/hero-bios.component.ts (HeroBiosAndContactsComponent)">
 
 </code-example>
 
+テンプレートに注目してください:
 
-
-Focus on the template:
-
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="template" title="dependency-injection-in-action/src/app/hero-bios.component.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="template" header="dependency-injection-in-action/src/app/hero-bios.component.ts" linenums="false">
 
 </code-example>
 
+`<hero-bio>` タグの間に新しい `<hero-contact>` 要素が追加されました。
+Angularは、`HeroBioComponent` ビュー内に対応する `HeroContactComponent` を *投影* または *トランスクルード* して、
+`HeroBioComponent` テンプレートの `<ng-content>` スロットに配置します。
 
-
-Now there is a new `<hero-contact>` element between the `<hero-bio>` tags.
-Angular *projects*, or *transcludes*, the corresponding `HeroContactComponent` into the `HeroBioComponent` view,
-placing it in the `<ng-content>` slot of the `HeroBioComponent` template:
-
-<code-example path="dependency-injection-in-action/src/app/hero-bio.component.ts" region="template" title="src/app/hero-bio.component.ts (template)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-bio.component.ts" region="template" header="src/app/hero-bio.component.ts (template)" linenums="false">
 
 </code-example>
 
-
-
-It looks like this, with the hero's telephone number from `HeroContactComponent` projected above the hero description:
+結果は次のように、 `HeroContactComponent` にあるヒーローの電話番号が、ヒーローの説明の上に投影された状態で表示されます。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/hero-bio-and-content.png" alt="bio and contact">
 </figure>
 
 
+デコレーターを制限するデモンストレーションを行う `HeroContactComponent` は次のようになります。
 
-Here's the `HeroContactComponent` which demonstrates the qualifying decorators:
-
-<code-example path="dependency-injection-in-action/src/app/hero-contact.component.ts" region="component" title="src/app/hero-contact.component.ts">
-
-</code-example>
-
-
-
-Focus on the constructor parameters:
-
-<code-example path="dependency-injection-in-action/src/app/hero-contact.component.ts" region="ctor-params" title="src/app/hero-contact.component.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-contact.component.ts" region="component" header="src/app/hero-contact.component.ts">
 
 </code-example>
 
+コンストラクターのパラメータに注目してください。
+
+<code-example path="dependency-injection-in-action/src/app/hero-contact.component.ts" region="ctor-params" header="src/app/hero-contact.component.ts" linenums="false">
+
+</code-example>
+
+`heroCache` コンストラクタープロパティを装飾する `@Host()` 関数を使用すると、
+親の `HeroBioComponent` からキャッシュサービスへの参照を取得できます。
+たとえそのサービスがコンポーネントツリーの上位のコンポーネントに含まれていても、
+親になければAngularはエラーを投げます。
+
+2番目の `@Host()` 関数は、 `loggerService` コンストラクタープロパティを装飾します。
+アプリ内唯一の `LoggerService` インスタンスは、 `AppComponent` レベルで提供されます。
+ホストの `HeroBioComponent` は、自身の `LoggerService` プロバイダーを持ちません。
+
+`@Optional()` でプロパティを装飾していない場合、Angularはエラーを投げます。
+プロパティがオプショナルとしてマークされている場合、Angularは `loggerService` をnullに設定し、コンポーネントの残りの部分は適応します。
 
 
-The `@Host()` function decorating the  `heroCache` property ensures that
-you get a reference to the cache service from the parent `HeroBioComponent`.
-Angular throws an error if the parent lacks that service, even if a component higher
-in the component tree happens to have it.
-
-A second `@Host()` function decorates the `loggerService` property.
-The only `LoggerService` instance in the app is provided at the `AppComponent` level.
-The host `HeroBioComponent` doesn't have its own `LoggerService` provider.
-
-Angular would throw an error if you hadn't also decorated the property with the `@Optional()` function.
-Thanks to `@Optional()`, Angular sets the `loggerService` to null and the rest of the component adapts.
-
-
-Here's the `HeroBiosAndContactsComponent` in action.
+`HeroBiosAndContactsComponent` の動作は次のようになります。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/hero-bios-and-contacts.png" alt="Bios with contact into">
@@ -351,54 +237,74 @@ Here's the `HeroBiosAndContactsComponent` in action.
 
 
 
-If you comment out the `@Host()` decorator, Angular now walks up the injector ancestor tree
-until it finds the logger at the `AppComponent` level. The logger logic kicks in and the hero display updates
-with the gratuitous "!!!", indicating that the logger was found.
+`@Host()` デコレーターをコメントアウトすると、
+Angularは `AppComponent` レベルでロガーを見つけるまでインジェクターの祖先ツリーを検索します。
+ロガーロジックが起動し、ヒーローの表示がロガーが見つかったことを示すマーカー
+"!!!" で更新されます。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/hero-bio-contact-no-host.png" alt="Without @Host">
 </figure>
 
 
+`@Host()` デコレーターを戻して `@Optional()` をコメントアウトすると、
+ホストコンポーネントレベルで必要なロガーが見つからないので、アプリケーションは例外をスローします。
 
-On the other hand, if you restore the `@Host()` decorator and comment out `@Optional`,
-the application fails for lack of the required logger at the host component level.
-<br>
 `EXCEPTION: No provider for LoggerService! (HeroContactComponent -> LoggerService)`
+
+### `@Inject` を使用してカスタムプロバイダーを設定する
+
+カスタムプロバイダーを使用すると、組み込みのブラウザAPIなど、暗黙的な依存関係に対する具体的な実装を提供できます。次の例では、 `InjectionToken` を使用して、[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) ブラウザAPIを `BrowserStorageService`　内で依存関係として提供します。
+
+<code-example path="dependency-injection-in-action/src/app/storage.service.ts" header="src/app/storage.service.ts">
+
+</code-example>
+
+`factory` 関数はブラウザの window オブジェクトの `localStorage` プロパティを返します。 `Inject` デコレーターは、依存関係のカスタムプロバイダーを指定するために使用されるコンストラクターパラメータです。このカスタムプロバイダーは今、実際のブラウザAPIと対話することなく `localStorage` のモックAPIを使用してテスト中にオーバーライドできるようになりました。
+
+{@a skip}
+
+### プロバイダーの検索を `@Self` と `@SkipSelf` で変更する
+
+プロバイダーは、コンストラクターパラメータデコレーターを介して、インジェクターによってスコープ指定することもできます。次の例では、 `sessionStorage` ブラウザAPIを使用して、 `Component` クラスの `providers` 内の `BROWSER_STORAGE` トークンをオーバーライドしています。コンストラクターでは同じ `BrowserStorageService` が2回注入され、どのインジェクターがプロバイダーの依存関係を処理するかを定義するために `@Self` と `@SkipSelf` で装飾されています。
+
+<code-example path="dependency-injection-in-action/src/app/storage.component.ts" header="src/app/storage.component.ts">
+
+</code-example>
+
+`@Self` デコレーターを使用すると、インジェクターはコンポーネントインジェクターのプロバイダーだけを参照します。 `@SkipSelf` デコレーターを使用すると、ローカルインジェクターをスキップして階層内を検索し、この依存関係を満たすプロバイダーを見つけることができます。 `sessionStorageService` インスタンスは `sessionStorage` ブラウザAPIを使用して `BrowserStorageService` と対話しますが、 `localStorageService` はローカルインジェクターをスキップし、 `localStorage` ブラウザAPIを使用するルートの `BrowserStorageService` を使用します。
+
 {@a component-element}
 
-## Inject the component's DOM element
+## コンポーネントの DOM 要素を注入する
 
-On occasion you might need to access a component's corresponding DOM element.
-Although developers strive to avoid it, many visual effects and 3rd party tools, such as jQuery,
-require DOM access.
+開発者はそれを避けようと努力しますが、
+多くの視覚効果やjQueryなどのサードパーティ製ツールはDOMアクセスを必要とします。
+その結果、あなたはコンポーネントのDOM要素にアクセスする必要があるかもしれません。
 
-To illustrate, here's a simplified version of the `HighlightDirective` from
-the [Attribute Directives](guide/attribute-directives) page.
+説明のために、[属性ディレクティブ](guide/attribute-directives)ページから
+`HighlightDirective` の簡易版を表示します。
 
-<code-example path="dependency-injection-in-action/src/app/highlight.directive.ts" title="src/app/highlight.directive.ts">
+<code-example path="dependency-injection-in-action/src/app/highlight.directive.ts" header="src/app/highlight.directive.ts">
+
+</code-example>
+
+ユーザーがディレクティブが適用されているDOM要素の上にマウスを置くと、
+ディレクティブは背景をハイライト色に設定します。
+
+Angularは、コンストラクターの `el` パラメータに注入された `ElementRef` を設定します
+(`ElementRef` はDOM要素のラッパーで、
+`nativeElement` プロパティは、操作するディレクティブのDOM要素を公開します)。
+
+サンプルコードでは、ディレクティブの `myHighlight` 属性を2つの `<div>` タグに適用します。
+最初は値なし(デフォルト色)、次にカラー値が割り当てられます。
+
+<code-example path="dependency-injection-in-action/src/app/app.component.html" region="highlight" header="src/app/app.component.html (highlight)" linenums="false">
 
 </code-example>
 
 
-
-The directive sets the background to a highlight color when the user mouses over the
-DOM element to which it is applied.
-
-Angular sets the constructor's `el` parameter to the injected `ElementRef`, which is
-a wrapper around that DOM element.
-Its `nativeElement` property exposes the DOM element for the directive to manipulate.
-
-The sample code applies the directive's `myHighlight` attribute to two `<div>` tags,
-first without a value (yielding the default color) and then with an assigned color value.
-
-<code-example path="dependency-injection-in-action/src/app/app.component.html" region="highlight" title="src/app/app.component.html (highlight)" linenums="false">
-
-</code-example>
-
-
-
-The following image shows the effect of mousing over the `<hero-bios-and-contacts>` tag.
+次の画像は `<hero-bios-and-contacts>` タグ上でマウスオーバーしたときのエフェクトを示しています。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/highlight.png" alt="Highlighted bios">
@@ -407,854 +313,476 @@ The following image shows the effect of mousing over the `<hero-bios-and-contact
 {@a providers}
 
 
-## Define dependencies with providers
+## プロバイダーを使用して依存関係を定義する
 
-This section demonstrates how to write providers that deliver dependent services.
+このセクションでは、依存サービスを提供するプロバイダーの書き方を説明します。
 
-Get a service from a dependency injector by giving it a ***token***.
+依存性のインジェクターからサービスを受け取るには、[トークン](guide/glossary#token)を渡す必要があります。
+Angularは通常、コンストラクターパラメータとその型を指定することによってこの処理を行います。
+パラメータとその型はインジェクターを検索するトークンとして機能します。
+Angularはこのトークンをインジェクターに渡し、結果をパラメータに割り当てます。
 
-You usually let Angular handle this transaction by specifying a constructor parameter and its type.
-The parameter type serves as the injector lookup *token*.
-Angular passes this token to the injector and assigns the result to the parameter.
-Here's a typical example:
+次はその典型的な例です。
 
 
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="ctor" title="src/app/hero-bios.component.ts (component constructor injection)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="ctor" header="src/app/hero-bios.component.ts (component constructor injection)" linenums="false">
 
 </code-example>
 
 
+Angularは、 `LoggerService` に関連付けられているサービスをインジェクターに要求し、
+返された値を `logger` パラメータに割り当てます。
 
-Angular asks the injector for the service associated with the `LoggerService`
-and assigns the returned value to the `logger` parameter.
+インジェクターがトークンに関連付けられているサービスインスタンスをすでにキャッシュしている場合は、
+そのインスタンスを提供します。
+そうでない場合は、トークンに関連付けられているプロバイダーを使用して作成する必要があります。
 
-Where did the injector get that value?
-It may already have that value in its internal container.
-If it doesn't, it may be able to make one with the help of a ***provider***.
-A *provider* is a recipe for delivering a service associated with a *token*.
+<div class="alert is-helpful">
 
-<div class="l-sub-section">
-
-
-
-If the injector doesn't have a provider for the requested *token*, it delegates the request
-to its parent injector, where the process repeats until there are no more injectors.
-If the search is futile, the injector throws an error&mdash;unless the request was [optional](guide/dependency-injection-in-action#optional).
+要求されたトークンのプロバイダーがインジェクターにない場合は、その要求をその親インジェクターに委譲し、
+インジェクターがなくなるまでプロセスが繰り返されます。
+検索が失敗すると、要求が[オプショナル](guide/dependency-injection-in-action#optional)でない限り、インジェクターはエラーを投げます。
 
 
 </div>
 
-
-
-A new injector has no providers.
-Angular initializes the injectors it creates with some providers it cares about.
-You have to register your _own_ application providers manually,
-usually in the `@Injectable` decorator of the service, `providers` array of the `NgModule` or `Directive` metadata:
-
-<code-example path="dependency-injection-in-action/src/app/app.component.ts" region="providers" title="src/app/app.component.ts (providers)">
-
-</code-example>
-
+新しいインジェクターにはプロバイダーを持っていません。
+Angularは、作成したインジェクターを優先的なプロバイダーのセットで初期化します。
+あなたは自身のアプリ特有の依存関係のためにプロバイダーを設定する必要があります。
 
 
 {@a defining-providers}
 
 
-### Defining providers
+### プロバイダーを定義する
 
-The simple way of defining providers in the `@Injectable` decorator of the class is recommended.
-
-<code-example path="dependency-injection/src/app/heroes/hero.service.0.ts" title="src/app/heroes/hero.service.0.ts" linenums="false">
-</code-example>
-
-Another alternative is to mention the class in the providers array of the `@NgModule` and you're done.
-
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="class-provider" title="src/app/hero-bios.component.ts (class provider)" linenums="false">
-
-</code-example>
-
-
-It's that simple because the most common injected service is an instance of a class.
-But not every dependency can be satisfied by creating a new instance of a class.
-You need other ways to deliver dependency values and that means you need other ways to specify a provider.
-
-The `HeroOfTheMonthComponent` example demonstrates many of the alternatives and why you need them.
-It's visually simple: a few properties and the logs produced by a logger.
+依存関係は、常にデフォルトのクラスをインスタンス化する方法で作成されるとは限りません。
+あなたは[依存性のプロバイダー](guide/dependency-injection-providers)で他のいくつかの方法について学びました。
+次の `HeroOfTheMonthComponent` の例は、多くの選択肢とその必要性を示します。
+見た目はシンプルで、いくつかのプロパティと、ロガーによって生成されたログが表示されます。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/hero-of-month.png" alt="Hero of the month">
 </figure>
 
+その背後にあるコードでは、DIフレームワークが依存関係を提供する方法と場所をカスタマイズします。
+このユースケースでは、[*provide* オブジェクトリテラル](guide/dependency-injection-providers#provide)を使用して定義オブジェクトをDIトークンに関連付けるためのさまざまな方法を説明します。
 
-
-The code behind it gives you plenty to think about.
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="hero-of-the-month" title="hero-of-the-month.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="hero-of-the-month" header="hero-of-the-month.component.ts">
 
 </code-example>
 
-
-
-
-{@a provide}
-
-
-#### The *provide* object literal
-
-The `provide` object literal takes a *token* and a *definition object*.
-The *token* is usually a class but [it doesn't have to be](guide/dependency-injection-in-action#tokens).
-
-The *definition* object has a required property that specifies how to create the singleton instance of the service. In this case, the property.
-
-
+`providers` 配列では、さまざまなプロバイダー定義のキー
+(`useValue` 、 `useClass` 、 `useExisting` 、または `useFactory`)を使用する方法を示します。
 
 {@a usevalue}
 
 
-#### useValue&mdash;the *value provider*
+#### 値プロバイダー: `useValue`
 
-Set the `useValue` property to a ***fixed value*** that the provider can return as the service instance (AKA, the "dependency object").
+`useValue` キーを使用すると、固定値をDIトークンに関連付けることができます。
+Webサイトのベースアドレスや機能のフラグなどの *実行時設定定数* を提供するためにこのテクニックを使用してください。
+プロダクションのデータサービスの代わりに、単体テスト内で値プロバイダーを使用してモックデータを提供することもできます。
 
-Use this technique to provide *runtime configuration constants* such as website base addresses and feature flags.
-You can use a *value provider* in a unit test to replace a production service with a fake or mock.
+次の `HeroOfTheMonthComponent` の例は、2つの値プロバイダーを持ちます。
 
-The `HeroOfTheMonthComponent` example has two *value providers*.
-The first provides an instance of the `Hero` class;
-the second specifies a literal string resource:
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-value" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-value" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
 
 </code-example>
 
+* 1つ目は、 `new` を使用して新しく `Hero` クラスのインスタンスを作成したり、自身のキャッシュされたインスタンスを使用するのではなく、
+`Hero` トークンで使用するための既存の `Hero` クラスのインスタンスを提供します。
+ここでは、トークンはクラスそのものです。
 
+* 2つ目は、 `TITLE` トークンで使用するための文字列リテラルのリソースを指定します。
+`TITLE` プロバイダートークンはクラスでは *ありません* が、
+代わりに `InjectionToken`
+インスタンスとして表現される[インジェクショントークン](guide/dependency-injection-in-action#injection-token)と呼ばれる特別な種類のプロバイダー検索のキーを使用します。
 
-The `Hero` provider token is a class which makes sense because the value is a `Hero`
-and the consumer of the injected hero would want the type information.
+インジェクショントークンはどんな種類のプロバイダーにも使用できますが、
+依存関係が文字列、数値、関数などの単純な値である場合に特に役立ちます。
 
-The `TITLE` provider token is *not a class*.
-It's a special kind of provider lookup key called an [InjectionToken](guide/dependency-injection-in-action#injection-token).
-You can use an `InjectionToken` for any kind of provider but it's particular
-helpful when the dependency is a simple value like a string, a number, or a function.
+*値プロバイダー* の値はここで値を指定する前に定義する必要があります。
+タイトルの文字列リテラルは直接利用できます。
+この例の `someHero` 変数は、次のようにファイルの前の方で設定されています。
+後の方で定義される変数は使用できません。
 
-The value of a *value provider* must be defined *now*. You can't create the value later.
-Obviously the title string literal is immediately available.
-The `someHero` variable in this example was set earlier in the file:
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="some-hero" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="some-hero" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
-
-
-The other providers create their values *lazily* when they're needed for injection.
-
-
+他の種類のプロバイダーは、値を *遅延して* (つまり、インジェクションが必要になったとき)作成できます。
 
 {@a useclass}
 
 
-#### useClass&mdash;the *class provider*
+#### クラスプロバイダー: `useClass`
 
-The `useClass` provider creates and returns new instance of the specified class.
+`useClass` プロバイダーキーを使用すると、指定したクラスの新しいインスタンスを作成して返すことができます。
 
-Use this technique to ***substitute an alternative implementation*** for a common or default class.
-The alternative could implement a different strategy, extend the default class,
-or fake the behavior of the real class in a test case.
+このプロバイダーの形式を使用することで、
+共通またはデフォルトクラスを *代替実装* で置き換えることができます。
+代替実装では、たとえば、異なる戦略で実装したり、デフォルトクラスを拡張したり、
+テストケースで実際のクラスの動作をエミュレートしたりできます。
 
-Here are two examples in the `HeroOfTheMonthComponent`:
+次のコードで、 `HeroOfTheMonthComponent` の2つの例を説明します。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-class" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-class" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
 
 </code-example>
 
+1つ目のプロバイダーは、
+もっとも一般的なケースであるDIトークンで作成されるクラス(`HeroService`)を展開した形式、つまり *デシュガー* したものです。
+一般的には短い形式が好ましいのですが、この長い形式は詳細を明確にします。
 
+2つ目のプロバイダーは、 `LoggerService` を `DateLoggerService` に置き換えます。
+`LoggerService` はすでに `AppComponent` レベルで登録されています。
+この子コンポーネントが `LoggerService` を要求するとき、代わりに `DateLoggerService` インスタンスを受け取ります。
 
-The first provider is the *de-sugared*, expanded form of the most typical case in which the
-class to be created (`HeroService`) is also the provider's dependency injection token.
-It's in this long form to de-mystify the preferred short form.
+<div class="alert is-helpful">
 
-The second provider substitutes the `DateLoggerService` for the `LoggerService`.
-The `LoggerService` is already registered at the `AppComponent` level.
-When _this component_ requests the `LoggerService`, it receives the `DateLoggerService` instead.
-
-<div class="l-sub-section">
-
-
-
-This component and its tree of child components receive the `DateLoggerService` instance.
-Components outside the tree continue to receive the original `LoggerService` instance.
+このコンポーネントとその子コンポーネントツリーは、 `DateLoggerService` インスタンスを受け取ります。
+ツリーの外側のコンポーネントは、引き続き元の `LoggerService` インスタンスを受け取ります。
 
 </div>
 
+`DateLoggerService` は `LoggerService` を継承し、各メッセージに現在の日時を追加します:
 
-
-The `DateLoggerService` inherits from `LoggerService`; it appends the current date/time to each message:
-
-<code-example path="dependency-injection-in-action/src/app/date-logger.service.ts" region="date-logger-service" title="src/app/date-logger.service.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/date-logger.service.ts" region="date-logger-service" header="src/app/date-logger.service.ts" linenums="false">
 
 </code-example>
-
-
-
 
 {@a useexisting}
 
+#### エイリアスプロバイダー: `useExisting`
 
-#### _useExisting_&mdash;the *alias provider*
+`useExisting` プロバイダーキーを使用すると、あるトークンを別のトークンにマッピングできます。
+実際には、1つ目のトークンは2つ目のトークンに関連付けられているサービスの
+*エイリアス* であり、同じサービスオブジェクトにアクセスする2つの方法を作成していることになります。
 
-The `useExisting` provider maps one token to another.
-In effect, the first token is an ***alias*** for the service associated with the second token,
-creating ***two ways to access the same service object***.
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
-
-</code-example>
-
-
-
-Narrowing an API through an aliasing interface is _one_ important use case for this technique.
-The following example shows aliasing for that purpose.
-
-Imagine that the `LoggerService` had a large API, much larger than the actual three methods and a property.
-You might want to shrink that API surface to just the members you actually need.
-Here the `MinimalLogger` [*class-interface*](guide/dependency-injection-in-action#class-interface) reduces the API to two members:
-
-
-<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" title="src/app/minimal-logger.service.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
+このテクニックを使用して、エイリアスインターフェースを介してAPIを絞り込むことができます。
+次の例は、その目的で導入されたエイリアスについて説明します。
+
+`LoggerService` が、実際の3つのメソッドと1つのプロパティよりもはるかに大きい大規模なAPIを持っていると想像してください。
+あなたはAPIとして表出させる部分を実際に必要なメンバーだけに絞り込みたいかもしれません。
+次の例の `MinimalLogger` [クラスインターフェース](#class-interface)ではAPIを2つのメンバーに減らします。
 
 
-Now put it to use in a simplified version of the `HeroOfTheMonthComponent`.
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.1.ts" title="src/app/hero-of-the-month.component.ts (minimal version)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" header="src/app/minimal-logger.service.ts" linenums="false">
 
 </code-example>
 
+次の例では、 `MinimalLogger` を `HeroOfTheMonthComponent` の簡易バージョンで使用するように設定します。
 
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.1.ts" header="src/app/hero-of-the-month.component.ts (minimal version)" linenums="false">
 
-The `HeroOfTheMonthComponent` constructor's `logger` parameter is typed as `MinimalLogger` so only the `logs` and `logInfo` members are visible in a TypeScript-aware editor:
+</code-example>
+
+`HeroOfTheMonthComponent` コンストラクターの `logger` パラメータは `MinimalLogger` として型指定されているため、TypeScriptに対応するエディタでは `logs` および `logInfo` メンバーのみが表示されます。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/minimal-logger-intellisense.png" alt="MinimalLogger restricted API">
 </figure>
 
 
-
-Behind the scenes, Angular actually sets the `logger` parameter to the full service registered under the `LoggingService` token which happens to be the `DateLoggerService` that was [provided above](guide/dependency-injection-in-action#useclass).
-
-
-<div class="l-sub-section">
+裏でAngularは `logger` パラメータに `LoggingService` トークンに登録された完全なサービスを設定します。これは、[上](guide/dependency-injection-in-action#useclass)で提供された `DateLoggerService` インスタンスです。
 
 
+<div class="alert is-helpful">
 
-The following image, which displays the logging date, confirms the point:
+これは次の図のように日付のログを表示します。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/date-logger-entry.png" alt="DateLoggerService entry">
 </figure>
 
-
-
 </div>
-
-
-
 
 {@a usefactory}
 
+#### ファクトリープロバイダー: `useFactory`
 
-#### _useFactory_&mdash;the *factory provider*
+次の例のように、 `useFactory`
+プロバイダーキーを使用すると、ファクトリー関数を呼び出して依存オブジェクトを作成できます。
 
-The `useFactory` provider creates a dependency object by calling a factory function
-as in this example.
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-factory" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
-
-</code-example>
-
-
-
-Use this technique to ***create a dependency object***
-with a factory function whose inputs are some ***combination of injected services and local state***.
-
-The *dependency object* doesn't have to be a class instance. It could be anything.
-In this example, the *dependency object* is a string of the names of the runners-up
-to the "Hero of the Month" contest.
-
-The local state is the number `2`, the number of runners-up this component should show.
-It executes `runnersUpFactory` immediately with `2`.
-
-The `runnersUpFactory` itself isn't the provider factory function.
-The true provider factory function is the function that `runnersUpFactory` returns.
-
-
-<code-example path="dependency-injection-in-action/src/app/runners-up.ts" region="factory-synopsis" title="runners-up.ts (excerpt)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-factory" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
+インジェクターは、 `useFactory`
+キーの値として指定したファクトリー関数を呼び出すことによって依存する値を提供します。
+この形式のプロバイダーは
+`useFactory` 関数の依存関係を指定する3番目のキー `deps` を持ちます。
+
+このテクニックを使用して、入力が *注入されたサービス* と *ローカル状態*
+の組み合わせであるファクトリー関数を使用して依存オブジェクトを作成します。
+
+依存オブジェクト(ファクトリー関数によって返される)は通常クラスインスタンスですが、
+他のものもありえます。
+この例での依存オブジェクトは、
+"Hero of the Month" コンテストで次点のヒーロー達の名前の文字列です。
+
+この例において、ローカル状態は数字の `2` です。これはコンポーネントが表示すべきの次点のヒーローの人数です。
+状態値は、 `runnersUpFactory()` への引数として渡されます。
+`runnersUpFactory()` は、渡された状態値と注入されたサービス
+`Hero` および `HeroService` の両方を使用できる *プロバイダーファクトリー関数* を返します。
 
 
-That returned function takes a winning `Hero` and a `HeroService` as arguments.
+<code-example path="dependency-injection-in-action/src/app/runners-up.ts" region="factory-synopsis" header="runners-up.ts (excerpt)" linenums="false">
 
-Angular supplies these arguments from injected values identified by
-the two *tokens* in the `deps` array.
-The two `deps` values are *tokens* that the injector uses
-to provide these factory function dependencies.
+</code-example>
 
-After some undisclosed work, the function returns the string of names
-and Angular injects it into the `runnersUp` parameter of the `HeroOfTheMonthComponent`.
+プロバイダーファクトリー関数(`runnersUpFactory()` によって返される)は、
+実際の依存オブジェクト(名前の文字列)を返します。
 
+* この関数は、勝利した `Hero` と `HeroService` を引数として取ります。
+Angularは、
+`deps` 配列の2つの *トークン* によって識別される注入値からこれらの引数を提供します。
 
-<div class="l-sub-section">
+* この関数は、Angularが `HeroOfTheMonthComponent` の `runnersUp`
+パラメータに挿入する名前の文字列を返します。
 
+<div class="alert is-helpful">
 
-
-The function retrieves candidate heroes from the `HeroService`,
-takes `2` of them to be the runners-up, and returns their concatenated names.
-Look at the <live-example name="dependency-injection-in-action"></live-example>
-for the full source code.
-
+この関数は、 `HeroService` から候補のヒーロー達を取得し、そのうちの
+`2` 人を次点とし、彼らの名前を連結したものを返します。
+完全なソースコードについては、<live-example name="dependency-injection-in-action"></live-example>
+を参照してください。
 
 </div>
-
-
 
 {@a tokens}
 
+## プロバイダートークンの代替: クラスインターフェースと 'InjectionToken'
 
+プロバイダートークンが、返される依存オブジェクト、またはサービスと同じ型のクラスである場合は、
+Angularの依存性の注入を使用するのがもっとも簡単です。
 
-## Provider token alternatives: the *class-interface* and *InjectionToken*
-
-Angular dependency injection is easiest when the provider *token* is a class
-that is also the type of the returned dependency object, or what you usually call the *service*.
-
-But the token doesn't have to be a class and even when it is a class,
-it doesn't have to be the same type as the returned object.
-That's the subject of the next section.
+ただし、トークンはクラスである必要はなく、たとえそれがクラスであっても、
+返されるオブジェクトと同じ型である必要はありません。
+それが次のセクションの主題です。
 {@a class-interface}
 
-### class-interface
-The previous *Hero of the Month* example used the `MinimalLogger` class
-as the token for a provider of a `LoggerService`.
+### クラスインターフェース
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
+前の *Hero of the Month* の例では、 `MinimalLogger` クラスを `LoggerService`
+のプロバイダートークンとして使用していました。
 
-</code-example>
-
-
-
-The `MinimalLogger` is an abstract class.
-
-<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" title="dependency-injection-in-action/src/app/minimal-logger.service.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
+`MinimalLogger` は抽象クラスです。
 
-
-You usually inherit from an abstract class.
-But *no class* in this application inherits from `MinimalLogger`.
-
-The `LoggerService` and the `DateLoggerService` _could_ have inherited from `MinimalLogger`.
-They could have _implemented_ it instead in the manner of an interface.
-But they did neither.
-The `MinimalLogger` is used exclusively as a dependency injection token.
-
-When you use a class this way, it's called a ***class-interface***.
-The key benefit of a *class-interface* is that you can get the strong-typing of an interface
-and you can ***use it as a provider token*** in the way you would a normal class.
-
-A ***class-interface*** should define *only* the members that its consumers are allowed to call.
-Such a narrowing interface helps decouple the concrete class from its consumers.
-
-
-<div class="l-sub-section">
-
-
-
-#### Why *MinimalLogger* is a class and not a TypeScript interface
-You can't use an interface as a provider token because
-interfaces are not JavaScript objects.
-They exist only in the TypeScript design space.
-They disappear after the code is transpiled to JavaScript.
-
-A provider token must be a real JavaScript object of some kind:
-such as a function, an object, a string, or a class.
-
-Using a class as an interface gives you the characteristics of an interface in a real JavaScript object.
-
-Of course a real object occupies memory. To minimize memory cost, the class should have *no implementation*.
-The `MinimalLogger` transpiles to this unoptimized, pre-minified JavaScript for a constructor function:
-
-<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" region="minimal-logger-transpiled" title="dependency-injection-in-action/src/app/minimal-logger.service.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" header="dependency-injection-in-action/src/app/minimal-logger.service.ts" linenums="false">
 
 </code-example>
 
+抽象クラスは通常、拡張できるベースクラスです。
+しかし、このアプリでは、 `MinimalLogger` を継承するクラスはありません。
+`LoggerService` と `DateLoggerService` は、
+`MinimalLogger` を継承、
+または代わりにインターフェースを実装することができましたが、
+どちらもしませんでした。 `MinimalLogger` はDIトークンとしてのみ使用されます。
+
+このようにクラスを使用する場合、それは *クラスインターフェース* と呼ばれます。
+
+[DIプロバイダー](guide/dependency-injection-providers#interface-not-valid-token)で説明されているように、
+インターフェースは実行時には存在しないTypeScriptアーティファクトであるため、有効なDIトークンではありません。
+この抽象クラスインターフェースを使用することで、インターフェースの厳密な型を取得し、
+かつ通常のクラスと同じ方法でプロバイダートークンとしても使用できます。
+
+クラスインターフェースには、その利用者が呼び出すことを許可されているメンバー *だけ* を定義する必要があります。
+そのような制限されたインターフェースは、具体的なクラスを利用者から切り離すのに役立ちます。
 
 
-Notice that it doesn't have a single member. It never grows no matter how many members you add to the class *as long as those members are typed but not implemented*. Look again at the TypeScript `MinimalLogger` class to confirm that it has no implementation.
+<div class="alert is-helpful">
 
+インターフェースとしてクラスを使用すると、実際のJavaScriptオブジェクトにおけるインターフェースの特性がわかります。
+ただし、メモリコストを最小限に抑えるために、このクラスは　*実装を持つべきではありません* 。
+`MinimalLogger` は次のような、最適化されていない、事前にミニファイされたコンストラクター関数のJavaScriptに変換されます。
+
+<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" region="minimal-logger-transpiled" header="dependency-injection-in-action/src/app/minimal-logger.service.ts" linenums="false">
+
+</code-example>
+
+クラスにメンバーがないことに注目してください。
+追加したメンバーの数に関係なく、それらが実装されていない限りクラスが肥大することはありません。
+
+TypeScriptの `MinimalLogger` クラスをもう一度見て、実装がないことを確認しましょう。
 
 </div>
-
 
 
 {@a injection-token}
 
 
-### _InjectionToken_
+### 'InjectionToken' オブジェクト
 
-Dependency objects can be simple values like dates, numbers and strings, or
-shapeless objects like arrays and functions.
+依存オブジェクトは、日付、数値、文字列などの単純な値、
+または配列や関数などの定形のないオブジェクトをとれます。
 
-Such objects don't have application interfaces and therefore aren't well represented by a class.
-They're better represented by a token that is both unique and symbolic,
-a JavaScript object that has a friendly name but won't conflict with
-another token that happens to have the same name.
+そのようなオブジェクトはアプリケーションインターフェースを持っていないので、
+クラスではうまく表現できません。
+それらはユニークかつシンボリックで、わかりやすい名前を持ちながらも、
+同じ名前の別のトークンと衝突しないJavaScriptオブジェクトでうまく表現されます。
 
-The `InjectionToken` has these characteristics.
-You encountered them twice in the *Hero of the Month* example,
-in the *title* value provider and in the *runnersUp* factory provider.
+`InjectionToken` はこれらの特性を持ちます。
+*Hero of the Month* の例、*title* の値プロバイダー、および
+*runnersUp* ファクトリープロバイダーで2回それらに遭遇しました。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="provide-injection-token" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
-
-</code-example>
-
-
-
-You created the `TITLE` token like this:
-
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="injection-token" title="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="provide-injection-token" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
 
 </code-example>
 
+`TITLE` トークンは次のように作られました:
 
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="injection-token" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" linenums="false">
 
-The type parameter, while optional, conveys the dependency's type to developers and tooling.
-The token description is another developer aid.
+</code-example>
+
+型パラメータはオプショナルですが、依存する型を開発者やツールに伝えます。
+トークンの説明はもう1つの開発者向けの補助です。
 
 
 {@a di-inheritance}
 
+## 派生クラスに注入する
 
+他のコンポーネントを継承するコンポーネントを書くときは注意してください。
+ベースコンポーネントが注入された依存関係をもつ場合は、
+派生クラスにそれらを再提供、再注入し、
+コンストラクターを介してベースクラスに渡す必要があります。
 
-## Inject into a derived class
-Take care when writing a component that inherits from another component.
-If the base component has injected dependencies,
-you must re-provide and re-inject them in the derived class
-and then pass them down to the base class through the constructor.
-
-In this contrived example, `SortedHeroesComponent` inherits from `HeroesBaseComponent`
-to display a *sorted* list of heroes.
-
+次の例は、`SortedHeroesComponent` は `HeroesBaseComponent`
+を継承して、*ソートされた* ヒーローのリストを表示します。
 
 <figure>
   <img src="generated/images/guide/dependency-injection-in-action/sorted-heroes.png" alt="Sorted Heroes">
 </figure>
 
+`HeroesBaseComponent` は独立しています。
+それはヒーロー達を取得し、データベースから到着した順に彼らを表示するために
+それ自身の `HeroService` インスタンスを要求します。
 
-
-The `HeroesBaseComponent` could stand on its own.
-It demands its own instance of the `HeroService` to get heroes
-and displays them in the order they arrive from the database.
-
-
-<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="heroes-base" title="src/app/sorted-heroes.component.ts (HeroesBaseComponent)">
+<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="heroes-base" header="src/app/sorted-heroes.component.ts (HeroesBaseComponent)">
 
 </code-example>
 
 
+<div class="alert is-helpful">
 
-<div class="l-sub-section">
+### コンストラクターをシンプルに保ちましょう
 
-
-
-***Keep constructors simple.*** They should do little more than initialize variables.
-This rule makes the component safe to construct under test without fear that it will do something dramatic like talk to the server.
-That's why you call the `HeroService` from within the `ngOnInit` rather than the constructor.
-
+コンストラクターは変数を初期化すること以上のことをしてはいけません。
+このルールにより、コンポーネントがサーバーと通信するような劇的なことをすることを恐れずに、テスト中にコンポーネントを安全に構築できます。
+それが、コンストラクターではなく `ngOnInit` 内から `HeroService` を呼び出す理由です。
 
 </div>
 
 
+ユーザーはヒーローをアルファベット順に見たいとします。
+元のコンポーネントを変更するのではなく、それをサブクラス化して、表示する前にヒーローをソートする
+`SortedHeroesComponent` を作成します。
+`SortedHeroesComponent` を使用すると、ベースクラスでヒーローを取得できます。
 
-Users want to see the heroes in alphabetical order.
-Rather than modify the original component, sub-class it and create a
-`SortedHeroesComponent` that sorts the heroes before presenting them.
-The `SortedHeroesComponent` lets the base class fetch the heroes.
-
-Unfortunately, Angular cannot inject the `HeroService` directly into the base class.
-You must provide the `HeroService` again for *this* component,
-then pass it down to the base class inside the constructor.
-
-
-<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="sorted-heroes" title="src/app/sorted-heroes.component.ts (SortedHeroesComponent)">
-
-</code-example>
+残念ながら、Angularは `HeroService` をベースクラスに直接注入することはできません。
+*この* コンポーネントに `HeroService` を再び提供して、
+それからコンストラクター内のベースクラスに渡す必要があります。
 
 
-
-Now take note of the `afterGetHeroes()` method.
-Your first instinct might have been to create an `ngOnInit` method in `SortedHeroesComponent` and do the sorting there.
-But Angular calls the *derived* class's `ngOnInit` *before* calling the base class's `ngOnInit`
-so you'd be sorting the heroes array *before they arrived*. That produces a nasty error.
-
-Overriding the base class's `afterGetHeroes()` method solves the problem.
-
-These complications argue for *avoiding component inheritance*.
-
-
-{@a find-parent}
-
-
-
-## Find a parent component by injection
-
-Application components often need to share information.
-More loosely coupled techniques such as data binding and service sharing
-are preferable. But sometimes it makes sense for one component
-to have a direct reference to another component
-perhaps to access values or call methods on that component.
-
-Obtaining a component reference is a bit tricky in Angular.
-Although an Angular application is a tree of components,
-there is no public API for inspecting and traversing that tree.
-
-There is an API for acquiring a child reference.
-Check out `Query`, `QueryList`, `ViewChildren`, and `ContentChildren`
-in the [API Reference](api/).
-
-There is no public API for acquiring a parent reference.
-But because every component instance is added to an injector's container,
-you can use Angular dependency injection to reach a parent component.
-
-This section describes some techniques for doing that.
-
-
-{@a known-parent}
-
-
-### Find a parent component of known type
-
-You use standard class injection to acquire a parent component whose type you know.
-
-In the following example, the parent `AlexComponent` has several children including a `CathyComponent`:
-
-{@a alex}
-
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-1" title="parent-finder.component.ts (AlexComponent v.1)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="sorted-heroes" header="src/app/sorted-heroes.component.ts (SortedHeroesComponent)">
 
 </code-example>
 
 
+今度は `afterGetHeroes()` メソッドに注目してください。
+最初の直感では、 `SortedHeroesComponent` で `ngOnInit` メソッドを作成し、そこでソートをすると思うでしょう。
+しかし、Angularはベースクラスの `ngOnInit` を呼び出す前に派生クラスの `ngOnInit` を呼び出すので、ヒーロー達が到着する前に配列をソートすることになります。
+それは厄介なエラーを引き起こします。
 
-*Cathy* reports whether or not she has access to *Alex*
-after injecting an `AlexComponent` into her constructor:
+ベースクラスの `afterGetHeroes()` メソッドをオーバーライドすることで問題が解決します。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="cathy" title="parent-finder.component.ts (CathyComponent)" linenums="false">
-
-</code-example>
-
-
-
-Notice that even though the [@Optional](guide/dependency-injection-in-action#optional) qualifier
-is there for safety,
-the <live-example name="dependency-injection-in-action"></live-example>
-confirms that the `alex` parameter is set.
-
-
-{@a base-parent}
-
-
-### Cannot find a parent by its base class
-
-What if you *don't* know the concrete parent component class?
-
-A re-usable component might be a child of multiple components.
-Imagine a component for rendering breaking news about a financial instrument.
-For business reasons, this news component makes frequent calls
-directly into its parent instrument as changing market data streams by.
-
-The app probably defines more than a dozen financial instrument components.
-If you're lucky, they all implement the same base class
-whose API your `NewsComponent` understands.
-
-
-<div class="l-sub-section">
-
-
-
-Looking for components that implement an interface would be better.
-That's not possible because TypeScript interfaces disappear
-from the transpiled JavaScript, which doesn't support interfaces.
-There's no artifact to look for.
-
-</div>
-
-
-
-This isn't necessarily good design.
-This example is examining *whether a component can
-inject its parent via the parent's base class*.
-
-The sample's `CraigComponent` explores this question. [Looking back](guide/dependency-injection-in-action#alex),
-you see that the `Alex` component *extends* (*inherits*) from a class named `Base`.
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" title="parent-finder.component.ts (Alex class signature)" linenums="false">
-
-</code-example>
-
-
-
-The `CraigComponent` tries to inject `Base` into its `alex` constructor parameter and reports if it succeeded.
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="craig" title="parent-finder.component.ts (CraigComponent)" linenums="false">
-
-</code-example>
-
-
-
-Unfortunately, this does not work.
-The <live-example name="dependency-injection-in-action"></live-example>
-confirms that the `alex` parameter is null.
-*You cannot inject a parent by its base class.*
-
-
-
-{@a class-interface-parent}
-
-
-### Find a parent by its class-interface
-
-You can find a parent component with a [class-interface](guide/dependency-injection-in-action#class-interface).
-
-The parent must cooperate by providing an *alias* to itself in the name of a *class-interface* token.
-
-Recall that Angular always adds a component instance to its own injector;
-that's why you could inject *Alex* into *Cathy* [earlier](guide/dependency-injection-in-action#known-parent).
-
-Write an [*alias provider*](guide/dependency-injection-in-action#useexisting)&mdash;a `provide` object literal with a `useExisting`
-definition&mdash;that creates an *alternative* way to inject the same component instance
-and add that provider to the `providers` array of the `@Component` metadata for the `AlexComponent`:
-
-{@a alex-providers}
-
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" title="parent-finder.component.ts (AlexComponent providers)" linenums="false">
-
-</code-example>
-
-
-
-[Parent](guide/dependency-injection-in-action#parent-token) is the provider's *class-interface* token.
-The [*forwardRef*](guide/dependency-injection-in-action#forwardref) breaks the circular reference you just created by having the `AlexComponent` refer to itself.
-
-*Carol*, the third of *Alex*'s child components, injects the parent into its `parent` parameter,
-the same way you've done it before:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="carol-class" title="parent-finder.component.ts (CarolComponent class)" linenums="false">
-
-</code-example>
-
-
-
-Here's *Alex* and family in action:
-
-<figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex in action">
-</figure>
-
-
-
-{@a parent-tree}
-
-
-### Find the parent in a tree of parents with _@SkipSelf()_
-
-Imagine one branch of a component hierarchy: *Alice* -> *Barry* -> *Carol*.
-Both *Alice* and *Barry* implement the `Parent` *class-interface*.
-
-*Barry* is the problem. He needs to reach his parent, *Alice*, and also be a parent to *Carol*.
-That means he must both *inject* the `Parent` *class-interface* to get *Alice* and
-*provide* a `Parent` to satisfy *Carol*.
-
-Here's *Barry*:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="barry" title="parent-finder.component.ts (BarryComponent)" linenums="false">
-
-</code-example>
-
-
-
-*Barry*'s `providers` array looks just like [*Alex*'s](guide/dependency-injection-in-action#alex-providers).
-If you're going to keep writing [*alias providers*](guide/dependency-injection-in-action#useexisting) like this you should create a [helper function](guide/dependency-injection-in-action#provideparent).
-
-For now, focus on *Barry*'s constructor:
-
-<code-tabs>
-
-  <code-pane title="Barry's constructor" path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="barry-ctor">
-
-  </code-pane>
-
-  <code-pane title="Carol's constructor" path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="carol-ctor">
-
-  </code-pane>
-
-</code-tabs>
-
-
-
-
-
-It's identical to *Carol*'s constructor except for the additional `@SkipSelf` decorator.
-
-`@SkipSelf` is essential for two reasons:
-
-1. It tells the injector to start its search for a `Parent` dependency in a component *above* itself,
-which *is* what parent means.
-
-2. Angular throws a cyclic dependency error if you omit the `@SkipSelf` decorator.
-
-  `Cannot instantiate cyclic dependency! (BethComponent -> Parent -> BethComponent)`
-
-Here's *Alice*, *Barry* and family in action:
-
-
-<figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alice.png" alt="Alice in action">
-</figure>
-
-
-
-{@a parent-token}
-
-
-### The *Parent* class-interface
-You [learned earlier](guide/dependency-injection-in-action#class-interface) that a *class-interface* is an abstract class used as an interface rather than as a base class.
-
-The example defines a `Parent` *class-interface*.
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="parent" title="parent-finder.component.ts (Parent class-interface)" linenums="false">
-
-</code-example>
-
-
-
-The `Parent` *class-interface* defines a `name` property with a type declaration but *no implementation*.
-The `name` property is the only member of a parent component that a child component can call.
-Such a narrow interface helps decouple the child component class from its parent components.
-
-A component that could serve as a parent *should* implement the *class-interface* as the `AliceComponent` does:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-class-signature" title="parent-finder.component.ts (AliceComponent class signature)" linenums="false">
-
-</code-example>
-
-
-
-Doing so adds clarity to the code.  But it's not technically necessary.
-Although the `AlexComponent` has a `name` property, as required by its `Base` class,
-its class signature doesn't mention `Parent`:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" title="parent-finder.component.ts (AlexComponent class signature)" linenums="false">
-
-</code-example>
-
-
-
-<div class="l-sub-section">
-
-
-
-The `AlexComponent` *should* implement `Parent` as a matter of proper style.
-It doesn't in this example *only* to demonstrate that the code will compile and run without the interface
-
-
-</div>
-
-
-
-{@a provideparent}
-
-
-### A _provideParent()_ helper function
-
-Writing variations of the same parent *alias provider* gets old quickly,
-especially this awful mouthful with a [*forwardRef*](guide/dependency-injection-in-action#forwardref):
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" title="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
-
-
-
-You can extract that logic into a helper function like this:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-the-parent" title="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
-
-
-
-Now you can add a simpler, more meaningful parent provider to your components:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-providers" title="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
-
-
-
-You can do better. The current version of the helper function can only alias the `Parent` *class-interface*.
-The application might have a variety of parent types, each with its own *class-interface* token.
-
-Here's a revised version that defaults to `parent` but also accepts an optional second parameter for a different parent *class-interface*.
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-parent" title="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
-
-
-
-And here's how you could use it with a different parent type:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" title="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
-
+これらの複雑さは、 *コンポーネントの継承を回避すること* を主張します。
 
 
 {@a forwardref}
 
+## 前方へのクラス参照を使用して循環参照を解消する (*forwardRef*)
 
+TypeScriptではクラス宣言の順序が重要です。
+クラスが定義されるまで、そのクラスを直接参照することはできません。
 
-## Break circularities with a forward class reference (*forwardRef*)
+これは、特に *1ファイルにつき1クラス* の推奨されるルールを厳密に守っている場合は、通常問題にはなりません。
+しかし、循環参照を避けられないこともあります。
+クラス 'A' がクラス 'B' を参照し、 'B' が 'A' を参照している場合は厄介です。
+そのうちの1つを最初に定義する必要があります。
 
-The order of class declaration matters in TypeScript.
-You can't refer directly to a class until it's been defined.
+Angularの `forwardRef()` 関数は、Angularが遅延して解決できる *間接参照* を作成します。
 
-This isn't usually a problem, especially if you adhere to the recommended *one class per file* rule.
-But sometimes circular references are unavoidable.
-You're in a bind when class 'A' refers to class 'B' and 'B' refers to 'A'.
-One of them has to be defined first.
+*Parent Finder* のサンプルには、崩すことが不可能な循環クラス参照がたくさんあります。
 
-The Angular `forwardRef()` function creates an *indirect* reference that Angular can resolve later.
+`providers` 配列中の `AlexComponent` がそうであるように、
+クラスが *それ自身への参照* を作るとき、あなたはこのジレンマに直面します。
+`providers` 配列は `@Component()`
+デコレーター関数のプロパティで、クラス定義よりも *上* に現れなければなりません。
 
-The *Parent Finder* sample is full of circular class references that are impossible to break.
+`forwardRef` で循環参照を解消しましょう。
 
-
-You face this dilemma when a class makes *a reference to itself*
-as does the `AlexComponent` in its `providers` array.
-The `providers` array is a property of the `@Component` decorator function which must
-appear *above* the class definition.
-
-Break the circularity with `forwardRef`:
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" title="parent-finder.component.ts (AlexComponent providers)" linenums="false">
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="parent-finder.component.ts (AlexComponent providers)" linenums="false">
 
 </code-example>
 
 
+<!--- Waiting for good examples
 
+{@a directive-level-providers}
+
+{@a element-level-providers}
+
+## Element-level providers
+
+A component is a specialization of directive, and the `@Component()` decorator inherits the `providers` property from `@Directive`. The injector is at the element level, so a provider configured with any element-level injector is available to any component, directive, or pipe attached to the same element.
+
+Here's a live example that implements a custom form control, taking advantage of an injector that is shared by a component and a directive on the same element.
+
+https://stackblitz.com/edit/basic-form-control
+
+The component, `custom-control`, configures a provider for the DI token `NG_VALUE_ACCESSOR`.
+In the template, the `FormControlName` directive is instantiated along with the custom component.
+It can inject the `NG_VALUE_ACCESSOR` dependency because they share the same injector.
+(Notice that this example also makes use of `forwardRef()` to resolve a circularity in the definitions.)
+
+### Sharing a service among components
+
+__NEED TO TURN THIS INTO FULL EXTERNAL EXAMPLE__
+
+Suppose you want to share the same `HeroCacheService` among multiple components. One way to do this is to create a directive.
+
+```
+<ng-container heroCache>
+  <hero-overview></hero-overview>
+  <hero-details></hero-details>
+</ng-container>
+```
+
+Use the `@Directive()` decorator to configure the provider for the service:
+
+```
+@Directive(providers:[HeroCacheService])
+
+class heroCache{...}
+```
+
+Because the injectors for both the overview and details components are children of the injector created from the `heroCache` directive, they can inject things it provides.
+If the `heroCache` directive provides the `HeroCacheService`, the two components end up sharing them.
+
+If you want to show only one of them, use the directive to make sure __??of what??__.
+
+`<hero-overview heroCache></hero-overview>`
+
+ --->

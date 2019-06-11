@@ -2,7 +2,7 @@
 
 _Angular Elements_ は、 _Custom Elements_ としてパッケージ化される Angular コンポーネントです。Custom Elements は、フレームワークに依存しない形で新たな HTML 要素を定義するウェブ標準技術です。
 
-[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Opera、Safari でサポートされている機能で、それ以外のブラウザでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
+[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Firefox、Opera、Safari でサポートされている機能で、それ以外のブラウザでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
 Custom Elements は、独自にタグを定義することによって HTML を拡張します。定義したタグの中のコンテンツは、JavaScript のコードで作成し、制御します。
 ブラウザは、定義された Custom Elements（ Web Components とも呼ばれます）の `CustomElementRegistry` を管理します。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
 
@@ -11,7 +11,7 @@ Custom Elements は、独自にタグを定義することによって HTML を�
 コンポーネントを Custom Elements に変換すると、必要なすべての Angular のインフラストラクチャ（基盤）がブラウザで利用できるようになります。
 Custom Elements は簡単に作成することができ、Angular の機能を対応するネイティブ HTML にマッピングする際に、変更検知とデータバインディングを自動的にビューとして定義したコンポーネントに結びつけます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
     他のフレームワークで作られているウェブアプリでも Custom Elements が使用できるように、われわれは開発を進めています。
     Angular フレームワークの最小限の自己完結型バージョンが、コンポーネントの変更検出およびデータバインディング機能をサポートするサービスとしてインジェクトされます。
@@ -58,10 +58,10 @@ Angular は、Angular コンポーネントとその依存関係をカスタム�
 変更を検出して対応するために必要なAngular機能を収集します。
 
 変換処理では、`NgElementConstructor` インターフェースが実装され、
-コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタクラスを作成されます。
+コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタークラスを作成されます。
 
-設定されたコンストラクタとその関連した Custom Elements タグをブラウザの `CustomElementRegistry` に登録するには、JavaScript の関数 `customElements.define()` を使ってください。
-ブラウザは、登録された要素のタグに遭遇した際に、Custom Elements のインスタンスを生成するためにコンストラクタを使用します。
+設定されたコンストラクターとその関連した Custom Elements タグをブラウザの `CustomElementRegistry` に登録するには、JavaScript の関数 `customElements.define()` を使ってください。
+ブラウザは、登録された要素のタグに遭遇した際に、Custom Elements のインスタンスを生成するためにコンストラクターを使用します。
 
 <figure>
 
@@ -104,7 +104,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 </tr>
 <tr>
   <td>Firefox</td>
-  <td><code>dom.webcomponents.enabled</code> と <code>dom.webcomponents.customelements.enabled</code> の設定項目を true に設定してください。バージョン 60/61 にてデフォルトで使えるようになる予定です。</td>
+  <td><code>dom.webcomponents.enabled</code> と <code>dom.webcomponents.customelements.enabled</code> の設定項目を true に設定してください。バージョン 63 にてデフォルトで使えるようになる予定です。</td>
 </tr>
 <tr>
   <td>Edge</td>
@@ -116,7 +116,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 
 Custom Elements をサポートしているブラウザにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザで利用可能であるとは限らないので、古いブラウザや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
 
-自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](https://cli.angular.io/) をお使いください。
+自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](cli) をお使いください。
 - ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を参照してください。
 
 - Angular のブラウザサポート状況についての詳細は、[Browser Support](guide/browser-support) を参照してください。
@@ -128,30 +128,86 @@ Custom Elements をサポートしているブラウザにおいて、Custom Ele
 
 Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。&mdash; つまり、必要なイベントハンドリングを定義するだけでよくなります（アプリケーションで使用しない場合は、コンポーネントをコンパイルから除外する必要があります）。
 
-サンプルアプリのポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
+サンプルアプリ（下記）のポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
 
 - `popup.component.ts` は、シンプルな pop-up 要素をアニメーションとスタイルとともに定義しています。
-- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として PopupComponent を実行する2つの異なる方法を提供するインジェクト可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
+- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として PopupComponent を実行する2つの異なる方法を提供する注入可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
 - `app.module.ts` は、PopupComponent をモジュールの `entryComponents` のリストに追加します。そうすることで、PopupComponent をコンパイルから除外し、スタートアップ時の警告やエラーを防ぐようにしています。
-- `app.component.ts` は、アプリのルートコンポーネントを定義しています。このコンポーネントは、PopupService を使用して、実行時に pop-up を DOM に追加します。アプリが起動すると、ルートコンポーネントのコンストラクタは PopupComponent を Custom Elements に変換します。
+- `app.component.ts` は、アプリのルートコンポーネントを定義しています。このコンポーネントは、PopupService を使用して、実行時に pop-up を DOM に追加します。アプリが起動すると、ルートコンポーネントのコンストラクターは PopupComponent を Custom Elements に変換します。
 
 比較のため、デモでは、両方の手法を使っています。ひとつは動的読み込みの手法を使ってポップアップを追加するボタンです。もうひとつは Custom Elements を使って popup を追加するボタンです。準備の方法が異なるだけで、結果は同じだということが分かるでしょう。
 
 <code-tabs>
 
-  <code-pane title="popup.component.ts" path="elements/src/app/popup.component.ts">
+  <code-pane header="popup.component.ts" path="elements/src/app/popup.component.ts">
 
   </code-pane>
 
-  <code-pane title="popup.service.ts" path="elements/src/app/popup.service.ts">
+  <code-pane header="popup.service.ts" path="elements/src/app/popup.service.ts">
 
   </code-pane>
 
-  <code-pane title="app.module.ts" path="elements/src/app/app.module.ts">
+  <code-pane header="app.module.ts" path="elements/src/app/app.module.ts">
 
   </code-pane>
 
-  <code-pane title="app.component.ts" path="elements/src/app/app.component.ts">
+  <code-pane header="app.component.ts" path="elements/src/app/app.component.ts">
 
   </code-pane>
 </code-tabs>
+
+<!--
+  StackBlitz transpiles code to ES5. The live example will not work without a polyfill.
+  Only offer a `.zip` to download for now.
+-->
+この例のコードはすべて<live-example downloadOnly>here</live-example>からダウンロードできます。
+
+
+## Custom Elementsの型指定
+
+`document.createElement()` や `document.querySelector()` のような一般的な DOM API は、指定された引数に適切な要素型を返します。たとえば、 `document.createElement('a')` を呼び出すと、 `HTMLAnchorElement` が返されます。これは TypeScript が `href` プロパティをもつと判断するものです。同様に、 `document.createElement('div')` を呼び出すと、 `HTMLDivElement` を返します。これは TypeScript が `href` プロパティを持たないと判断するものです。
+
+カスタム要素の名前（この例では `popup-element`）のような未知の要素を呼び出した場合、 TypeScript は返される要素の正しい型を推論できないため、メソッドは `HTMLELement` のようなジェネリック型を返します。
+
+Angular で作成されたカスタム要素は、（`HTMLElement` を拡張した） `NgElement` を拡張します。さらに、このカスタム要素は対応するコンポーネントの各インプットに対してプロパティを持ちます。たとえば、 `popup-element` には `string` 型の `message` プロパティがあります。
+
+カスタム要素の正しい型を取得するには、いくつかのオプションがあります。次のコンポーネントに基づいて `my-dialog` のカスタム要素を作成するとします。
+
+```ts
+@Component(...)
+class MyDialog {
+  @Input() content: string;
+}
+```
+
+正確な型を取得するもっとも簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。そのためには、 `NgElement` と `WithProperties` 型（どちらも `@angular/elements` からエクスポートされます）を使うことができます：
+
+```ts
+const aDialog = document.createElement('my-dialog') as NgElement & WithProperties<{content: string}>;
+aDialog.content = 'Hello, world!';
+aDialog.content = 123;  // <-- ERROR: TypeScript knows this should be a string.
+aDialog.body = 'News';  // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
+```
+
+これは型チェックやオートコンプリートサポートのような、カスタム要素のためのTypeScript機能をすぐに使うにはよい方法です。しかしいくつかの場所でそれを必要とするならば、面倒になる可能性があります。なぜならすべての発生時に戻り値の型をキャストする必要があるからです。
+
+各カスタム要素の型を一度だけ定義する、もうひとつの方法は、 `HTMLElementTagNameMap` を拡張することです。これは（`document.createElement()` や `document.querySelector()` 、その他のようなDOMメソッドのために）タグ名に基づいて返される要素の型を TypeScript が推論するために使います。
+
+```ts
+declare global {
+  interface HTMLElementTagNameMap {
+    'my-dialog': NgElement & WithProperties<{content: string}>;
+    'my-other-element': NgElement & WithProperties<{foo: 'bar'}>;
+    ...
+  }
+}
+```
+
+これで、TypeScript は組み込み要素と同じように正しい型を推論できます：
+
+```ts
+document.createElement('div')               //--> HTMLDivElement (built-in element)
+document.querySelector('foo')               //--> Element        (unknown element)
+document.createElement('my-dialog')         //--> NgElement & WithProperties<{content: string}> (custom element)
+document.querySelector('my-other-element')  //--> NgElement & WithProperties<{foo: 'bar'}>      (custom element)
+```

@@ -1,43 +1,71 @@
-# Angular用語集
+# Glossary
 
-Angularには独自の用語があります。
-ほとんどのAngularの用語は、
-Angularシステムの中で特別な意味をもつ常用英単語です。
+Angular has its own vocabulary.
+Most Angular terms are common English words or computing terms
+that have a specific meaning within the Angular system.
 
-ここには主要な用語といくつかのあまり馴染みのない用語を集めています。
+This glossary lists the most prominent terms
+and a few less familiar ones with unusual or
+unexpected definitions.
 
-[A](guide/glossary#A) [B](guide/glossary#B) [C](guide/glossary#C) [D](guide/glossary#D) [E](guide/glossary#E) [F](guide/glossary#F) [G](guide/glossary#G) [H](guide/glossary#H) [I](guide/glossary#I)
-[J](guide/glossary#J) [K](guide/glossary#K) [L](guide/glossary#L) [M](guide/glossary#M) [N](guide/glossary#N) [O](guide/glossary#O) [P](guide/glossary#P) [Q](guide/glossary#Q) [R](guide/glossary#R)
-[S](guide/glossary#S) [T](guide/glossary#T) [U](guide/glossary#U) [V](guide/glossary#V) [W](guide/glossary#W) [X](guide/glossary#X) [Y](guide/glossary#Y) [Z](guide/glossary#Z)
+[A](#A) [B](#B) [C](#C) [D](#D) [E](#E) [F](#F) [G](#G) [H](#H) [I](#I)
+[J](#J) [K](#K) [L](#L) [M](#M) [N](#N) [O](#O) [P](#P) [Q](#Q) [R](#R)
+[S](#S) [T](#T) [U](#U) [V](#V) [W](#W) [X](#X) [Y](#Y) [Z](#Z)
 
 
 {@a A}
 {@a aot}
 
 
-## Ahead-of-time (AOT) compilation
-_事前コンパイル_
+## ahead-of-time (AOT) compilation
 
-Angular ahead-of-time（AOT）コンパイラは、ブラウザがコードをダウンロードして実行する前に、
-Angular HTMLとTypeScriptコードをビルド段階で効率的なJavaScriptコードに変換します。
-これは、運用環境での最適なコンパイルモードであり、
-ロード時間の短縮とパフォーマンスの向上を実現します。
+The Angular ahead-of-time (AOT) compiler converts Angular HTML and TypeScript code
+into efficient JavaScript code during the build phase, before the browser downloads
+and runs that code.
+This is the best compilation mode for production environments, with decreased load time and increased performance compared to [just-in-time (JIT) compilation](#jit).
 
-`ngc`コマンドラインツールを使用してアプリケーションをコンパイルすると、モジュールファクトリに直接ブートストラップすることができます。つまり、JavaScriptバンドルにAngularコンパイラを含める必要はありません。
+By compiling your application using the `ngc` command-line tool, you can bootstrap directly to a module factory, so you don't need to include the Angular compiler in your JavaScript bundle.
 
-[just-in-time (JIT) コンパイル](guide/glossary#jit)と比較してください。
+{@a angular-element}
 
 ## Angular element
 
-[Custom Elements](guide/glossary#custom-element)としてパッケージされたAngularの[コンポーネント](guide/glossary#component)。
+An Angular [component](#component) packaged as a [custom element](#custom-element).
 
-[_Angular Elements_](guide/elements)ガイドを参照してください。
+Learn more in [Angular Elements Overview](guide/elements).
 
-## Annotation
-_アノテーション_
+{@a annotation}
 
-クラスのメタデータを提供する構造体。[デコレーター](guide/glossary#decorator)を参照してください。
+## annotation
 
+A structure that provides metadata for a class. See [decorator](#decorator).
+
+{@a app-shell}
+
+## app-shell
+
+App shell is a way to render a portion of your application via a route at build time.
+This gives users a meaningful first paint of your application that appears quickly because the browser can render static HTML and CSS without the need to initialize JavaScript.
+
+Learn more in [The App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell).
+
+You can use the Angular CLI to [generate](cli/generate#appshell) an app shell.
+This can improve the user experience by quickly launching a static rendered page (a skeleton common to all pages) while the browser downloads the full client version and switches to it automatically after the code loads.
+
+See also [Service Worker and PWA](guide/service-worker-intro).
+{@a architect}
+
+## Architect
+
+The tool that the CLI uses to perform complex tasks such as compilation and test running, according to a provided configuration.
+Architect is a shell that runs a [builder](#builder) (defined in an [npm package](#npm-package)) with a given [target configuration](#target).
+
+In the [workspace configuration file](guide/workspace-config#project-tool-configuration-options), an "architect" section provides configuration options for Architect builders.
+
+For example, a built-in builder for linting is defined in the package `@angular-devkit/build_angular:tslint`, which uses the [TSLint](https://palantir.github.io/tslint/) tool to perform linting, with a configuration specified in a `tslint.json` file.
+
+Use the [CLI command `ng run`](cli/run) to invoke a builder by specifying a [target configuration](#target) associated with that builder.
+Integrators can add builders to enable tools and workflows to run through the Angular CLI. For example, a custom builder can replace the third-party tools used by the built-in implementations for CLI commands such as `ng build` or `ng test`.
 
 {@a attribute-directive}
 
@@ -45,36 +73,51 @@ _アノテーション_
 {@a attribute-directives}
 
 
-## Attribute directives
-_属性ディレクティブ_
+## attribute directives
 
-[ディレクティブ](guide/glossary#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。その名前のとおり、通常これらはHTML属性として現れます。
+A category of [directive](#directive) that can listen to and modify the behavior of
+other HTML elements, attributes, properties, and components. They are usually represented
+as HTML attributes, hence the name.
 
-[_属性ディレクティブ_](guide/attribute-directives)ガイドで詳しく学びましょう。
+Learn more in [Attribute Directives](guide/attribute-directives).
 
 
 {@a B}
 
+{@a binding}
 
-## Binding
-_バインディング_
+## binding
 
-一般に、変数またはプロパティをデータ値に設定する方法です。
-Angular内では、通常、DOMオブジェクトのプロパティと
-データオブジェクトのプロパティを調整する[データバインディング](guide/glossary#data-binding)を指します。
+Generally, the practice of setting a variable or property to a data value.
+Within Angular, typically refers to [data binding](#data-binding),
+which coordinates DOM object properties with data object properties.
 
-また、"トークン"または"キー" と依存性の[プロバイダー](guide/glossary#provider)との間を結びつける、[依存性の注入](guide/glossary#dependency-injection)を指すこともあります。
+Sometimes refers to a [dependency-injection](#dependency-injection) binding
+between a [token](#token) and a dependency [provider](#provider).
 
-## Bootstrap
-_ブートストラップ_
+{@a bootstrap}
 
-アプリやシステムを初期化して起動する方法です。
+## bootstrap
 
-Angularでは、アプリケーションのルートNgModule（`AppModule`）には、アプリケーションのトップレベル[コンポーネント](guide/glossary#component)を識別する`bootstrap`プロパティがあります。
-ブートストラッププロセス中、Angularはこれらのコンポーネントを作成して`index.html`ホストWebページに挿入します。
-同じ`index.html`に複数のアプリケーションをブートストラップすることができます。各アプリケーションには独自のコンポーネントがあります。
+A way to initialize and launch an app or system.
 
-詳しくは、[_ブートストラップ_](guide/bootstrapping)ガイドを参照してください。
+In Angular, an app's root NgModule (`AppModule`) has a `bootstrap` property that identifies the app's top-level [components](#component).
+During the bootstrap process, Angular creates and inserts these components into the `index.html` host web page.
+You can bootstrap multiple apps in the same `index.html`. Each app contains its own components.
+
+Learn more in [Bootstrapping](guide/bootstrapping).
+
+{@a builder}
+
+## builder
+
+A function that uses the [Architect](#architect) API to perform a complex process such as "build" or "test".
+The builder code is defined in an [npm package](#npm-package).
+
+For example, [BrowserBuilder](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/browser) runs a [webpack](https://webpack.js.org/) build for a browser target and [KarmaBuilder](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/karma) starts the Karma server and runs a webpack build for unit tests.
+
+The [CLI command `ng run`](cli/run) invokes a builder with a specific [target configuration](#target).
+The [workspace configuration](guide/workspace-config) file, `angular.json`, contains default configurations for built-in builders.
 
 {@a C}
 
@@ -83,222 +126,274 @@ Angularでは、アプリケーションのルートNgModule（`AppModule`）に
 {@a camelcase}
 {@a kebab-case}
 
-## Case conventions
-_ケースの慣習_
+## case types
 
-Angularでは、[スタイルガイドの「命名」セクション](guide/styleguide#02-01)で説明しているように、さまざまな型の名前を区別するために大文字と小文字を区別します。
+Angular uses capitalization conventions to distinguish the names of various types, as described in the [naming guidelines section](guide/styleguide#02-01) of the Style Guide. Here's a summary of the case types:
 
-- camelCase : シンボル、プロパティ、メソッド、パイプ名、コンポーネントではないディレクティブのセレクター、定数
-- UpperCamelCase (or PascalCase): コンポーネント、インターフェース、NgModule、ディレクティブ、パイプなどを定義するクラスを含むクラス名
-- dash-case (or "kebab-case"): ファイル名の記述部分、コンポーネントセレクター
-- underscore_case (or "snake_case"): 通常はAngularでは使われません
-- UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE): 伝統的な定数（許容されますが、camelCaseを好みます）
+* camelCase : Symbols, properties, methods, pipe names, non-component directive selectors, constants.
+Standard or lower camel case uses lowercase on the first letter of the item. For example, "selectedHero".
+
+* UpperCamelCase (or PascalCase): Class names, including classes that define components, interfaces, NgModules, directives, and pipes,
+Upper camel case uses uppercase on the first letter of the item. For example, "HeroListComponent".
+
+* dash-case (or "kebab-case"): Descriptive part of file names, component selectors. For example, "app-hero-list".
+
+* underscore_case (or "snake_case"): Not typically used in Angular. Snake case uses words connected with underscores.
+For example, "convert_link_mode".
+
+* UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE, or SCREAMING_SNAKE_CASE): Traditional for constants (acceptable, but prefer camelCase).
+Upper snake case uses words in all capital letters connected with underscores. For example, "FIX_ME".
 
 {@a class-decorator}
 
-## Class decorator
-_クラスデコレーター_
+## class decorator
 
-指定された型のクラスを宣言し、その型に適したメタデータを提供するクラス定義の直前の[デコレーター](guide/glossary#decorator)ステートメント。
+A [decorator](#decorator) that appears immediately before a class definition, which declares the class to be of the given type, and provides metadata suitable to the type.
 
-次のクラスタイプを宣言できます。
-- `@Component`
-- `@Directive`
-- `@Pipe`
-- `@Injectable`
-- `@NgModule`
+The following decorators can declare Angular class types:
+* `@Component()`
+* `@Directive()`
+* `@Pipe()`
+* `@Injectable()`
+* `@NgModule()`
 
 
 {@a class-field-decorator}
 
-## Class field decorator
-_クラスフィールドデコレーター_
+## class field decorator
 
-そのフィールドの型を宣言するクラス定義内のフィールドの直前の[デコレーター](guide/glossary#decorator)ステートメント。`@Input`や`@Output`が一例です。
+A [decorator](#decorator) statement immediately before a field in a class definition that declares the type of that field. Some examples are `@Input` and `@Output`.
+
+{@a collection}
+
+## collection
+
+In Angular, a set of related [schematics](#schematic) collected in an [npm package](#npm-package).
 
 {@a cli}
 
-## CLI
+## command-line interface (CLI)
 
-[Angular CLI](https://cli.angular.io/)はプロジェクトの作成やファイルの追加、そしてテスト、バンドル、デプロイなど、さまざまな進行中の開発タスクを実行する `コマンドラインインターフェース`です。
-[Angular CLI](https://cli.angular.io/)は、Angularの開発サイクルを管理するためのコマンドラインツールです。これを使用して、[ワークスペース](guide/glossary#workspace)または[プロジェクト](guide/glossary#project)の初期ファイルシステムのスキャフォールドを作成し、さまざまな要素の初期の汎用的なコードを追加および変更する[schematics](guide/glossary#schematic)を実行します。このツールは、ビルド、テスト、バンドル、およびデプロイを含む開発サイクルのすべての段階をサポートします。
+The [Angular CLI](cli) is a command-line tool for managing the Angular development cycle. Use it to create the initial filesystem scaffolding for a [workspace](#workspace) or [project](#project), and to run [schematics](#schematic) that add and modify code for initial generic versions of various elements. The CLI supports all stages of the development cycle, including building, testing, bundling, and deployment.
 
-* 新しいプロジェクトにCLIを使用するには、[入門ガイド](guide/quickstart)を参照してください。 
-* CLIの全機能の詳細については、[Angular CLI ドキュメント](https://github.com/angular/angular-cli/wiki)を参照してください。
+* To begin using the CLI for a new project, see [Local Environment Setup](guide/setup-local "Setting up for Local Development").
+* To learn more about the full capabilities of the CLI, see the [CLI command reference](cli).
+
+See also [Schematics CLI](#schematics-cli).
 
 {@a component}
 
-## Component
-_コンポーネント_
+## component
 
-`@Component`[デコレーター](guide/glossary#decorator)をもつクラスで、これを対応する[テンプレート](guide/glossary#template)に関連付けます。 
+A class with the `@Component()` [decorator](#decorator) that associates it with a companion [template](#template). Together, the component and template define a [view](#view).
+A component is a special type of [directive](#directive).
+The `@Component()` decorator extends the `@Directive()` decorator with template-oriented features.
 
-コンポーネントは[ビュー](guide/glossary#view)を表す特別な型の[ディレクティブ](guide/glossary#directive)です。`@Component`デコレーターは`@Directive`デコレーターをテンプレート指向の機能で拡張します。
+An Angular component class is responsible for exposing data and handling most of the view's display and user-interaction logic through [data binding](#data-binding).
 
-Angularコンポーネントクラスは、データを公開し、[データバインディング](guide/glossary#data-binding)を通じてビューの表示とユーザー対話ロジックの大半を処理します。
+Read more about components, templates, and views in [Architecture Overview](guide/architecture).
 
-コンポーネント、テンプレート、およびビューの詳細については、[アーキテクチャ](guide/architecture)ガイドを参照してください。
+## configuration
+
+See  [workspace configuration](#cli-config)
+
 
 {@a custom-element}
 
-## Custom element
-_カスタム要素_
+## custom element
 
-現在、ほとんどのブラウザでサポートされており、他のブラウザでもpolyfillによって使用可能なWebプラットフォーム機能です（[ブラウザサポート](guide/browser-support)を参照）
+A web platform feature, currently supported by most browsers and available in other browsers through polyfills (see [Browser support](guide/browser-support)).
 
-カスタム要素機能は、JavaScriptコードによってコンテンツが作成および制御されるタグを定義できるようにすることで、HTMLを拡張します。カスタム要素（*Webコンポーネント*とも呼ばれます）は、[CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)に追加されるときにブラウザによって認識されます。
+The custom element feature extends HTML by allowing you to define a tag whose content is created and controlled by JavaScript code. A custom element (also called a *web component*) is recognized by a browser when it's added to the [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry).
 
-APIを使用してAngularコンポーネントを変換し、ブラウザに登録し、Angularアプリ内のDOMに直接追加するHTMLで使用できるようにすることができます。カスタム要素タグは、変更検知およびデータバインディング機能を備えたコンポーネントのビューを、Angular処理なしで表示されるコンテンツに挿入します。
+You can use the API to transform an Angular component so that it can be registered with the browser and used in any HTML that you add directly to the DOM within an Angular app. The custom element tag inserts the component's view, with change-detection and data-binding functionality, into content that would otherwise be displayed without Angular processing.
 
-[動的コンポーネント](guide/glossary#dynamic-components)も参照してください。
+See [Angular element](#angular-element).
+
+See also [dynamic component loading](#dynamic-components).
 
 
 {@a D}
 
-## Data binding
-_データバインディング_
+{@a data-binding}
 
-データバインディングは、アプリケーションがデータの値をユーザーに表示し、ユーザーからのアクション(クリック、タッチ、キーストローク)に反応できるようにします。
+## data binding
 
-データバインディングにおいて、HTMLウィジェットとアプリケーションデータソースの間の関係を定義することで、フレームワークが詳細を処理します。
-データバインディングは、アプリケーションデータ値をHTMLに手動でプッシュしたり、イベントリスナーをアタッチしたり、変更された値を画面から取得したり、アプリケーションデータ値を更新する代わりに使用できます。
+A process that allows apps to display data values to a user and respond to user
+actions (such as clicks, touches, and keystrokes).
 
-データバインディングについて詳しく知るには[テンプレート構文](guide/template-syntax)の章を参照してください。
+In data binding, you declare the relationship between an HTML widget and a data source
+and let the framework handle the details.
+Data binding is an alternative to manually pushing application data values into HTML, attaching
+event listeners, pulling changed values from the screen, and
+updating application data values.
 
- * [補間](guide/template-syntax#interpolation).
- * [プロパティバインディング](guide/template-syntax#property-binding).
- * [イベントバインディング](guide/template-syntax#event-binding).
- * [属性バインディング](guide/template-syntax#attribute-binding).
- * [クラスバインディング](guide/template-syntax#class-binding).
- * [スタイルバインディング](guide/template-syntax#style-binding).
- * [ngModelによる双方向バインディング](guide/template-syntax#ngModel).
+Read about the following forms of binding in [Template Syntax](guide/template-syntax):
+
+ * [Interpolation](guide/template-syntax#interpolation)
+ * [Property binding](guide/template-syntax#property-binding)
+ * [Event binding](guide/template-syntax#event-binding)
+ * [Attribute binding](guide/template-syntax#attribute-binding)
+ * [Class binding](guide/template-syntax#class-binding)
+ * [Style binding](guide/template-syntax#style-binding)
+ * [Two-way data binding with ngModel](guide/template-syntax#ngModel)
 
 {@a declarable}
 
-## Declarable
+## declarable
 
-[NgModule](guide/glossary#ngmodule)の`declarations`リストに追加できるクラス型です。
+A class type that you can add to the `declarations` list of an [NgModule](#ngmodule).
+You can declare [components](#component), [directives](#directive), and [pipes](#pipe).
 
-[コンポーネント](guide/glossary#component)、[ディレクティブ](guide/glossary#directive)、および[パイプ](guide/glossary#pipe)を宣言できます。
-
-次のものを宣言しないでください
-- 別のNgModuleですでに宣言されているクラス。
-- 別のパッケージからインポートされたディレクティブの配列。たとえば、`@angular/forms`の`FORMS_DIRECTIVES`を宣言しないでください。
-- NgModuleクラス。
-- サービスクラス。
-- 文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなどAngularと関係のないクラスとオブジェクト
+Don't declare the following:
+* A class that's already declared in another NgModule
+* An array of directives imported from another package. For example, don't declare `FORMS_DIRECTIVES` from `@angular/forms`
+* NgModule classes
+* Service classes
+* Non-Angular classes and objects, such as strings, numbers, functions, entity models, configurations, business logic, and helper classes
 
 
 {@a decorator}
 
 {@a decoration}
 
+## decorator | decoration
 
-## Decorator | decoration
-_デコレーター | デコレーション_
+A function that modifies a class or property definition. Decorators (also called *annotations*) are an experimental (stage 2) [JavaScript language feature](https://github.com/wycats/javascript-decorators).
+TypeScript adds support for decorators.
 
-直後のクラスまたはプロパティの定義を変更する関数。
-デコレーター（アノテーションとも呼ばれる）は、実験的な（ステージ2の）JavaScript言語[機能](https://github.com/wycats/javascript-decorators)です。
-TypeScriptはデコレーターのサポートを追加します。
+Angular defines decorators that attach metadata to classes or properties
+so that it knows what those classes or properties mean and how they should work.
 
-Angularは、メタデータをクラスやプロパティに付与して、そのクラスやプロパティの意味や動作の仕方を知るデコレーターを定義します。
-
-[クラスデコレータ](guide/glossary#class-decorator)、[クラスフィールドデコレーター](guide/glossary#class-field-decorator)を参照してください。
+See [class decorator](#class-decorator), [class field decorator](#class-field-decorator).
 
 {@a di}
 
+{@a dependency-injection}
 
-## Dependency injection
-_依存性の注入_
+## dependency injection (DI)
 
-依存性の注入は、アプリケーションの部品に求められた部品を作って送り届けるためのデザインパターンでありメカニズムです。
+A design pattern and mechanism for creating and delivering some parts of an application (dependencies) to other parts of an application that require them.
 
-Angularでは、依存関係は通常はサービスですが、文字列や関数などの値でもあります。
-アプリケーションの[インジェクター](guide/glossary#injector)（ブートストラップ中に自動的に作成される）は、必要に応じて、サービスまたは値の設定された[プロバイダー](guide/glossary#provider)を使用して依存関係をインスタンス化します。
+In Angular, dependencies are typically services, but they also can be values, such as strings or functions.
+An [injector](#injector) for an app (created automatically during bootstrap) instantiates dependencies when needed, using a configured [provider](#provider) of the service or value.
 
-詳しく知るには[依存性の注入](guide/dependency-injection)ガイドを参照してください。
+Learn more in [Dependency Injection in Angular](guide/dependency-injection).
 
 {@a di-token}
 
 ## DI token
-_DIトークン_
 
-[依存性の注入](guide/glossary#di) システムで使用する依存関係[プロバイダ](guide/glossary#provider)に関連付けられたルックアップ用のトークン。
+A lookup token associated with a dependency [provider](#provider), for use with the [dependency injection](#di) system.
 
 
 {@a directive}
-
-
 {@a directives}
 
+## directive
 
-## Directive
-_ディレクティブ_
+A class that can modify the structure of the DOM or modify attributes in the DOM and component data model. A directive class definition is immediately preceded by a `@Directive()` [decorator](#decorator) that supplies metadata.
 
-DOMの構造を変更したり、DOMやコンポーネントのデータモデルの属性を変更したりすることができる`@Directive`[デコレータ](guide/glossary#decorator)をもつクラスです。
+A directive class is usually associated with an HTML element or attribute, and that element or attribute is often referred to as the directive itself. When Angular finds a directive in an HTML [template](#template), it creates the matching directive class instance and gives the instance control over that portion of the browser DOM.
 
-ディレクティブクラスは通常、HTML要素または属性に関連付けられ、その要素または属性はしばしばディレクティブそのものとして参照されます。
-AngularがHTML[テンプレート](guide/glossary#template)でディレクティブを検出すると、対応するディレクティブクラスインスタンスが作成され、ブラウザDOMのその部分にインスタンスコントロールが与えられます。
+There are three categories of directive:
+* [Components](#component) use `@Component()` (an extension of `@Directive()`) to associate a template with a class.
 
-ディレクティブには次の3つのカテゴリがあります。
-- [コンポーネント](guide/glossary#component)は、テンプレートをクラスに関連付けるために`@Component`（`@Directive`の拡張）を使用します。
-- [属性ディレクティブ](guide/glossary#attribute-directive)は、ページ要素の動作と外観を変更します。
-- [構造ディレクティブ](guide/glossary#structural-directive)は、DOMの構造を変更します。
+* [Attribute directives](#attribute-directive) modify behavior and appearance of page elements.
 
-Angularは`ng`接頭辞で始まるいくつかの組込みディレクティブを提供します。新しいディレクティブを作成して、独自の機能を実装することもできます。
-_セレクタ_（たとえば`<my-directive>`のようなHTMLタグ）をカスタムディレクティブに関連付けて、アプリケーションで使用できる[テンプレート構文](guide/template-syntax)を拡張します。
+* [Structural directives](#structural-directive) modify the structure of the DOM.
 
+Angular supplies a number of built-in directives that begin with the `ng` prefix.
+You can also create new directives to implement your own functionality.
+You associate a *selector* (an HTML tag such as `<my-directive>`) with a custom directive, thereby extending the [template syntax](guide/template-syntax) that you can use in your apps.
 
-## Domain-specific language (DSL)
-_ドメイン固有言語_
+{@a dom}
 
-特別な目的のライブラリまたはAPI。[ドメイン固有言語](https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E5%9B%BA%E6%9C%89%E8%A8%80%E8%AA%9E)を参照してください。
+## domain-specific language (DSL)
 
-Angularは、[アニメーション](guide/animations)、[フォーム](guide/forms)、[ルーティング、ナビゲーション](guide/router).などのngModuleで定義されたAngularアプリケーションに関連するいくつかのドメインに対して、ドメイン固有の言語でTypeScriptを拡張します。
+A special-purpose library or API; see [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language).
+Angular extends TypeScript with domain-specific languages for a number of domains relevant to Angular apps, defined in NgModules such as [animations](guide/animations), [forms](guide/forms), and [routing and navigation](guide/router).
 
 {@a dynamic-components}
 
-## Dynamic component loading
-_動的コンポーネント読み込み_
+## dynamic component loading
 
-コンポーネントをコンパイルから除外し、DOMに追加するときにAngularの変更検知およびイベント処理フレームワークに接続する必要があるコンポーネントを実行時にDOMに追加する手法。
+A technique for adding a component to the DOM at run time. Requires that you exclude the component from compilation and then connect it to Angular's change-detection and event-handling framework when you add it to the DOM.
 
-同じ結果でより簡単なパスを提供する[カスタム要素](guide/glossary#custom-element)も参照してください。
+See also [custom element](#custom-element), which provides an easier path with the same result.
+
 
 {@a E}
+
+{@a eager-loading}
+
+## eager loading
+
+NgModules or components that are loaded on launch are called eager-loaded, to distinguish them from those
+that are loaded at run time (lazy-loaded).
+See [lazy loading](#lazy-load).
+
 
 {@a ecma}
 
 ## ECMAScript
 
-[公式のJavaScriptの言語仕様](https://ja.wikipedia.org/wiki/ECMAScript)です。
+The [official JavaScript language specification](https://en.wikipedia.org/wiki/ECMAScript).
 
-すべてのブラウザが最新のECMAScript標準をサポートしているわけではありませんが、[TypeScript](guide/glossary#typescript)のような[トランスパイラ](guide/glossary#transpile)を使用して最新の機能を使用してコードを書くことができ、ブラウザでサポートされているバージョンで動作するコードに変換されます。
+Not all browsers support the latest ECMAScript standard, but you can use a [transpiler](#transpile) (like [TypeScript](#typescript)) to write code using the latest features, which will then be transpiled to code that runs on versions that are supported by browsers.
 
-詳細については、[ブラウザサポート](guide/browser-support)のページを参照してください。
+To learn more, see [Browser Support](guide/browser-support).
+
 
 {@a element}
 
-## Element
-_要素_
+## element
 
-Angularは、レンダー固有のネイティブUIエレメントをラップする`ElementRef`クラスを定義します。これにより、Angularテンプレートとデータバインディングを使用して、ほとんどの場合、ネイティブ要素を参照せずにDOM要素にアクセスできます。
+Angular defines an `ElementRef` class to wrap render-specific native UI elements.
+In most cases, this allows you to use Angular templates and  data binding to access DOM elements
+without reference to the native element.
 
-このドキュメンテーションは、一般的に要素（`ElementRef`インスタンス）またはDOM要素（必要に応じて直接アクセスできる）のいずれかを参照します。
+The documentation generally refers to *elements* (`ElementRef` instances), as distinct from  *DOM elements*
+(which can be accessed directly if necessary).
 
-[カスタム要素](guide/glossary#custom-element)と比較しましょう。
+Compare to [custom element](#custom-element).
 
-## Entry point
-_エントリポイント_
+{@a entry-point}
 
-NPMパッケージの一部を他のコードでインポートできるようにするJavaScriptのシンボル。
-Angularの[スコープ化パッケージ](guide/glossary#scoped-package)にはそれぞれ、`index`という名前の付いたエントリポイントがあります。
+## entry point
 
-Angularでは、[NgModule](guide/glossary#ngmodule)を使用して同じ結果を得ます。
+A JavaScript symbol that makes parts of an [npm package](guide/npm-packages) available for import by other code.
+The Angular [scoped packages](#scoped-package) each have an entry point named `index`.
+
+Within Angular, use [NgModules](#ngmodule) to make public parts available for import by other NgModules.
 
 
 {@a F}
 
+{@a form-control}
+
+## form control
+
+A instance of `FormControl`, which is a fundamental building block for Angular forms. Together with `FormGroup` and `FormArray`, tracks the value, validation, and status of a form input element.
+
+Read more forms in the [Introduction to forms in Angular](guide/forms-overview).
+
+{@a form-model}
+
+## form model
+
+The "source of truth" for the value and validation status of a form input element at a given point in time. When using [reactive forms](#reactive-forms), the form model is created explicitly in the component class. When using [template-driven forms](#template-driven-forms), the form model is implicitly created by directives.
+
+Learn more about reactive and template-driven forms in the [Introduction to forms in Angular](guide/forms-overview).
+
+{@a form-validation}
+
+## form validation
+
+A check that runs when form values change and reports whether the given values are correct and complete, according to the defined constraints. Reactive forms apply [validator functions](guide/form-validation#adding-to-reactive-forms). Template-driven forms use [validator directives](guide/form-validation#adding-to-template-driven-forms).
+
+
+To learn more, see [Form Validation](guide/form-validation).
 
 {@a G}
 
@@ -307,49 +402,56 @@ Angularでは、[NgModule](guide/glossary#ngmodule)を使用して同じ結果�
 
 {@a I}
 
+
+{@a immutability}
+
+## immutability
+
+The ability to alter the state of a value after its creation. [Reactive forms](#reactive-forms) perform immutable changes in that
+each change to the data model produces a new data model rather than modifying the existing one. [Template-driven forms](#template-driven-forms) perform mutable changes with `NgModel` and [two-way data binding](#data-binding) to modify the existing data model in place.
+
 {@a injectable}
 
-## Injectable
+## injectable
 
-[依存性の注入](guide/glossary#di)メカニズムを使用して依存性を提供するAngularクラスまたはその他の定義。注入可能なクラスは`@Injectable`[デコレータ](guide/glossary#decorator)によってマークされます。
-
-[サービス](guide/glossary#service)とそのサービスに依存する[コンポーネント](guide/glossary#component)の両方をinjectableとしてマークする必要があります。定数値などの他の項目もinjectableになります。
+An Angular class or other definition that provides a dependency using the [dependency injection](#di) mechanism. An injectable [service](#service) class must be marked by the `@Injectable()` [decorator](#decorator). Other items, such as constant values, can also be injectable.
 
 {@a injector}
 
-## Injector
-_インジェクター_
+## injector
 
-Angularの[依存性の注入システム](guide/glossary#dependency-injection)におけるオブジェクトで、
-指定された"依存性"をキャッシュから見つけるか、
-登録された[プロバイダー](guide/glossary#provider)を使用して生成できます。
-インジェクターはブートストラッププロセスの一部として自動的にNgModule用に作成され、コンポーネント階層を介して継承されます。
+An object in the Angular [dependency-injection](#dependency-injection) system
+that can find a named dependency in its cache or create a dependency
+using a configured [provider](#provider).
+Injectors are created for NgModules automatically as part of the bootstrap process
+and are inherited through the component hierarchy.
 
-* インジェクターは、依存関係のシングルトンインスタンスを提供し、この同じインスタンスを複数のコンポーネントに注入できます。
+* An injector provides a singleton instance of a dependency, and can inject this same instance in multiple components.
 
-* NgModuleとコンポーネントレベルのインジェクターの階層は、それぞれのコンポーネントと子コンポーネントに異なる依存関係のインスタンスを提供できます。
+* A hierarchy of injectors at the NgModule and component level can provide different instances of a dependency to their own components and child components.
 
-* 同じ依存関係の異なる実装を提供できる異なるプロバイダーでインジェクターを設定できます。
+* You can configure injectors with different providers that can provide different implementations of the same dependency.
 
-[依存性の注入ガイド](guide/hierarchical-dependency-injection)のインジェクター階層の詳細をご覧ください。
+Learn more about the injector hierarchy in [Hierarchical Dependency Injectors](guide/hierarchical-dependency-injection).
 
+{@a input}
 
-## Input
-_インプット_
+## input
 
-[ディレクティブ](guide/glossary#directive)を定義するとき、ディレクティブプロパティ上の`@Input`デコレーターは、
-そのプロパティを[プロパティバインディング](guide/template-syntax#property-binding)の*ターゲット*として使用できるようにします。
-データ値は、[テンプレート式](guide/glossary#template-expression)で識別されたデータソースから
-入力プロパティに等号の右側に流れます。
+When defining a [directive](#directive), the `@Input()` decorator on a directive property
+makes that property available as a *target* of a [property binding](guide/template-syntax#property-binding).
+Data values flow into an input property from the data source identified
+in the [template expression](#template-expression) to the right of the equal sign.
 
-詳細は、[インプット・アウトプットプロパティ](guide/template-syntax#inputs-outputs)を参照してください。
+To learn more, see [input and output properties](guide/template-syntax#inputs-outputs).
 
+{@a interpolation}
 
-## Interpolation
-_補間_
+## interpolation
 
-[プロパティデータバインディング](guide/glossary#data-binding)の一形態で、その二重波括弧の間の[テンプレート式](guide/glossary#template-expression)の結果を、テキストとしてレンダリングします。
-そのテキストは、要素のプロパティに割り当てられるか、この例のように要素のタグの間で表示される前に、隣接したテキストに連結できます。
+A form of property [data binding](#data-binding) in which a [template expression](#template-expression) between double-curly braces renders as text.
+That text can be concatenated with neighboring text before it is assigned to an element property
+or displayed between element tags, as in this example.
 
 <code-example language="html" escape="html">
   <label>My current hero is {{hero.name}}</label>
@@ -357,25 +459,32 @@ _補間_
 </code-example>
 
 
-補間についての詳細は[テンプレート構文](guide/template-syntax) ページの[補間](guide/template-syntax#interpolation)のセクションを参照してください。
+Read more about [interpolation](guide/template-syntax#interpolation) in [Template Syntax](guide/template-syntax).
+
 
 {@a J}
 
+{@a javascript}
+
 ## JavaScript
 
-[ECMAScript](guide/glossary#ecma)、[TypeScript](guide/glossary#typescript)を参照してください。
+See [ECMAScript](#ecma), [TypeScript](#typescript).
 
 
 {@a jit}
 
 
-## Just-in-time (JIT) compilation
-_実行時コンパイラ_
+## just-in-time (JIT) compilation
 
-Angular Just-In-Time（JIT）コンパイラは、起動時にAngular HTMLとTypeScriptコードを実行時に効率的なJavaScriptコードに変換します。
-Angularの`ng build`と`ng serve`CLIコマンドを実行するときのJITコンパイルはデフォルトであり、開発中には適切な選択です。JITモードは、ブートストラップのパフォーマンスを妨げる大規模なアプリケーションペイロードが発生するため、本番用として使用することは強く反対します。
+The Angular just-in-time (JIT) compiler converts your Angular HTML and TypeScript code into
+efficient JavaScript code at run time, as part of bootstrapping.
 
-[AoTコンパイル](guide/glossary#aot)と比較しましょう。
+JIT compilation is the default (as opposed to AOT compilation) when you run Angular's `ng build` and `ng serve` CLI commands, and is a good choice during development.
+JIT mode is strongly discouraged for production use
+because it results in large application payloads that hinder the bootstrap performance.
+
+Compare to [ahead-of-time (AOT) compilation](#aot).
+
 
 {@a K}
 
@@ -384,61 +493,64 @@ Angularの`ng build`と`ng serve`CLIコマンドを実行するときのJITコ�
 
 {@a lazy-load}
 
-## Lazy loading
-_遅延ロード_
+## lazy loading
 
-遅延ロードは、アプリケーションを複数のバンドルに分割し、必要に応じてロードすることで、アプリケーションのロード時間を短縮します。
-たとえば、ルートモジュールで必要とされる"eager-loaded"モジュールとは対照的に、必要に応じて依存関係を遅延ロードすることができ、起動時にロードされます。
-同様に、[ルーター](guide/glossary#router)は親ビューがアクティブになっているときのみ子ビューをロードでき、必要に応じて角度アプリにロードできるカスタム要素を作成できます。
+A process that speeds up application load time by splitting the application into multiple bundles and loading them on demand.
+For example, dependencies can be lazy loaded as needed&mdash;as opposed to [eager-loaded](#eager-loading) modules that are required by the root module and are thus loaded on launch.
+
+The [router](#router) makes use of lazy loading to load child views only when the parent view is activated.
+Similarly, you can build custom elements that can be loaded into an Angular app when needed.
 
 {@a library}
 
-## Library
-_ライブラリ_
+## library
 
-Angularにおいて、他のAngularアプリケーションに含めることができる機能を提供する[プロジェクト](guide/glossary#project)です。ライブラリは完全なAngularアプリではなく、独立して実行することはできません。 
+In Angular, a [project](#project) that provides functionality that can be included in other Angular apps.
+A library isn't a complete Angular app and can't run independently.
+(To add re-usable Angular functionality to non-Angular web apps, you can use Angular [custom elements](#angular-element).)
 
-* ライブラリ開発者は[CLI](guide/glossary#cli)を使用して、既存の[ワークスペース](guide/glossary#workspace)内の新しいライブラリのスキャフォールドを `generate` し、ライブラリを `npm` パッケージとして公開することができます。 
+* Library developers can use the [Angular CLI](#cli) to `generate` scaffolding for a new library in an existing [workspace](#workspace), and can publish a library as an `npm` package.
 
-* アプリケーション開発者は、[CLI](guide/glossary#cli)を使用して、同じ[ワークスペース](guide/glossary#workspace)内のアプリで使用する公開ライブラリを `add` できます。
+* Application developers can use the [Angular CLI](#cli) to `add` a published library for use with an application in the same [workspace](#workspace).
 
+See also [schematic](#schematic).
 
-## Lifecycle hook
-_ライフサイクルフック_
+{@a lifecycle-hook}
 
-[ディレクティブ](guide/glossary#directive)と[コンポーネント](guide/glossary#component)が作成、更新、および破棄されるときに、ディレクティブとコンポーネントのライフサイクルに入ることを可能にするインターフェイス。
+## lifecycle hook
 
-開発者は、ひとつかそれ以上の ライフサイクルフックインターフェイスを実装することで、そのライフサイクル中の重要な瞬間に介入することができます。
+An interface that allows you to tap into the lifecycle of [directives](#directive) and [components](#component) as they are created, updated, and destroyed.
 
-それぞれのインターフェイスは、 `ng`という接頭語でインターフェースを名前付けされた、ひとつのフックメソッドを持っています。
-たとえば、`OnInit`インターフェースは`ngOnInit`という名前のフックメソッドを持っています。
+Each interface has a single hook method whose name is the interface name prefixed with `ng`.
+For example, the `OnInit` interface has a hook method named `ngOnInit`.
 
-Angularはこれらのフック関数を次の順序で呼び出します。
+Angular calls these hook methods in the following order:
 
-* `ngOnChanges`: [インプット](guide/glossary#input)/[アウトプット](guide/glossary#output)に紐付いている値が変わった時
-* `ngOnInit`: 最初の`ngOnChanges`の後
-* `ngDoCheck`: 開発者による任意の変更検知
-* `ngAfterContentInit`: コンポーネントのコンテンツの初期化後
-* `ngAfterContentChecked`: コンポーネントのコンテンツのチェック後、毎回
-* `ngAfterViewInit`: コンポーネントのビュー初期化後
-* `ngAfterViewChecked`: コンポーネントのビューをチェック後、毎回
-* `ngOnDestroy`: ディレクティブが破棄される直前
+* `ngOnChanges`: When an [input](#input)/[output](#output) binding value changes.
+* `ngOnInit`: After the first `ngOnChanges`.
+* `ngDoCheck`: Developer's custom change detection.
+* `ngAfterContentInit`: After component content initialized.
+* `ngAfterContentChecked`: After every check of component content.
+* `ngAfterViewInit`: After a component's views are initialized.
+* `ngAfterViewChecked`: After every check of a component's views.
+* `ngOnDestroy`: Just before the directive is destroyed.
 
-詳細は[ライフサイクルフック](guide/lifecycle-hooks)のページを参照してください。
+To learn more, see [Lifecycle Hooks](guide/lifecycle-hooks).
 
 
 {@a M}
 
-## Module
-_モジュール_
+{@a module}
 
-一般に、モジュールは単一の目的専用のコードブロックを収集します。Angularは標準のJavaScriptモジュールを使用し、Angularモジュール、つまり`NgModule`も定義します。
+## module
 
-JavaScript（ECMAScript）では、各ファイルはモジュールであり、ファイルに定義されているすべてのオブジェクトはそのモジュールに属します。オブジェクトをエクスポートしてパブリックにすることができ、パブリックオブジェクトを他のモジュールで使用するためにインポートすることができます。
+In general, a module collects a block of code dedicated to a single purpose. Angular uses standard JavaScript modules and also defines an Angular module, `NgModule`.
 
-AngularはJavaScriptモジュールまたはライブラリのコレクションとして提供されます。Angularの各ライブラリ名は`@angular`接頭辞で始まります。それらをnpmパッケージマネージャーにインストールし、JavaScriptの`import`宣言でそれらの一部をインポートします。
+In JavaScript (ECMAScript), each file is a module and all objects defined in the file belong to that module. Objects can exported, making them public, and public objects can be imported for use by other modules.
 
-Angularの[NgModule](guide/glossary#ngmodule)と比較しましょう。
+Angular ships as a collection of JavaScript modules (also called libraries). Each Angular library name begins with the `@angular` prefix. Install Angular libraries with the [npm package manager](https://docs.npmjs.com/getting-started/what-is-npm) and import parts of them with JavaScript `import` declarations.
+
+Compare to [NgModule](#ngmodule).
 
 
 {@a N}
@@ -447,314 +559,409 @@ Angularの[NgModule](guide/glossary#ngmodule)と比較しましょう。
 
 ## NgModule
 
-`@NgModule`[デコレータ](guide/glossary#decorator)をもつクラス定義。アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能専用のコードブロックのマニフェストとして宣言され、機能します。
+A class definition preceded by the `@NgModule()` [decorator](#decorator), which declares and serves as a manifest for a block of code dedicated to an application domain, a workflow, or a closely related set of capabilities.
 
-[JavaScriptモジュール](guide/glossary#module)と同様に、NgModuleは他のNgModuleで使用するための機能をエクスポートし、他のNgModuleからパブリック機能をインポートできます。
+Like a [JavaScript module](#module), an NgModule can export functionality for use by other NgModules and import public functionality from other NgModules.
+The metadata for an NgModule class collects components, directives, and pipes that the application uses along with the list of imports and exports. See also [declarable](#declarable).
 
-NgModuleクラスのメタデータは、アプリケーションが使用するコンポーネント、ディレクティブ、およびパイプをインポートおよびエクスポートのリストとともに収集します。[Declarable](guide/glossary#declarable)も参照してください。
+NgModules are typically named after the file in which the exported thing is defined. For example, the Angular [DatePipe](api/common/DatePipe) class belongs to a feature module named `date_pipe` in the file `date_pipe.ts`. You import them from an Angular [scoped package](#scoped-package) such as `@angular/core`.
 
-NgModuleは、通常、エクスポートされたものが定義されているファイルの名前が付けられます。たとえば、Angularの[DatePipe](api/common/DatePipe)クラスは`date_pipe.ts`ファイル内で指定された`date_pipe`フィーチャモジュールに属します。あなたは`@angular/core`などのAngularの[スコープ化パッケージ](guide/glossary#scoped-package)からそれらをインポートします。
+Every Angular application has a root module. By convention, the class is called `AppModule` and resides in a file named `app.module.ts`.
 
-すべてのAngularアプリケーションにはルートモジュールがあります。慣例により、そのクラスは`AppModule`と呼ばれ、`app.module.ts`.と名づけられる名前付きのファイルに属します。
+To learn more, see [NgModules](guide/ngmodules).
 
-詳細は[NgModules](guide/ngmodules)ガイドを参照してください。
+{@a npm-package}
 
+## npm package
+
+The [npm package manager](https://docs.npmjs.com/getting-started/what-is-npm) is used to distribute and load Angular modules and libraries.
+
+Learn more about how Angular uses [Npm Packages](guide/npm-packages).
 
 {@a O}
 
 {@a observable}
 
-## Observable
+## observable
 
-複数の値を作成し、[サブスクライバ](guide/glossary#subscriber)にプッシュします。Angularの非同期イベント処理に使用されます。`subscribe()`メソッドでサブスクライブし、新しい値、エラー、または完了の通知のためのコールバックを渡して、Observableを実行します。
+A producer of multiple values, which it pushes to [subscribers](#subscriber). Used for asynchronous event handling throughout Angular. You execute an observable by subscribing to it with its `subscribe()` method, passing callbacks for notifications of new values, errors, or completion.
 
-Observableは、任意の型の単一または複数の値を同期的に（関数が呼び出し元に値を渡すとき）、またはスケジュールにしたがって、サブスクライバーに配信できます。サブスクライバーは、新しい値が生成されたとき、およびエラーまたは正常終了の通知を受け取ります。
+Observables can deliver single or multiple values of any type to subscribers, either synchronously (as a function delivers a value to its caller) or on a schedule. A subscriber receives notification of new values as they are produced and notification of either normal completion or error completion.
 
-Angularは、[Reactive Extensions (RxJS)](http://reactivex.io/rxjs/)というサードパーティのライブラリを使用します。 
+Angular uses a third-party library called [Reactive Extensions (RxJS)](http://reactivex.io/rxjs/).
 
-詳細は[Observables](guide/observables)ガイドを参照してください。
+To learn more, see [Observables](guide/observables).
 
 
 {@a observer}
 
-## Observer
-_オブザーバー_
+## observer
 
-[サブスクライバ](guide/glossary#subscriber)のコールバックを定義する[Observable](guide/glossary#observable)の`subscribe()`メソッドに渡されるオブジェクト。
+An object passed to the `subscribe()` method for an [observable](#observable). The object defines the callbacks for the [subscriber](#subscriber).
 
-## Output
-_アウトプット_
+{@a output}
 
-[ディレクティブ](guide/glossary#directive)を定義するとき、ディレクティブプロパティ上の`@Output`デコレーターは、そのプロパティを[イベントバインディング](guide/template-syntax#event-binding)の*ターゲット*として使用できるようにします。
+## output
 
-イベントストリームは、このプロパティから、
-等号の右側の[テンプレート式](guide/glossary#template-expression)で識別される受信者に*発信*されます。
+When defining a [directive](#directive), the `@Output{}` decorator on a directive property
+makes that property available as a *target* of [event binding](guide/template-syntax#event-binding).
+Events stream *out* of this property to the receiver identified
+in the [template expression](#template-expression) to the right of the equal sign.
 
-詳細は[インプット・アウトプットプロパティ](guide/template-syntax#inputs-outputs)を参照してください。
+To learn more, see [Input and Output Properties](guide/template-syntax#inputs-outputs).
+
 
 {@a P}
 
-## Pipe
-_パイプ_
+{@a pipe}
 
-[ビュー](guide/glossary#view)に表示するために入力値を出力値に変換する関数を定義する`@Pipe`デコレーターをもつクラスです。
+## pipe
 
-Angularはさまざまなパイプを定義していて、さらに新しいパイプを定義できます。
+A class which is preceded by the `@Pipe{}` decorator and which defines a function that transforms input values to output values for display in a [view](#view). Angular defines various pipes, and you can define new pipes.
 
-詳細は[パイプ](guide/pipes)のページを参照してください。
+To learn more, see [Pipes](guide/pipes).
 
-## Polyfill
+{@a polyfill}
 
-ブラウザのJavaScriptの実装のギャップを埋める[npmパッケージ](guide/npm-packages)。特定のプラットフォームで特定の機能をサポートするポリフィルについては、[ブラウザサポートガイド](guide/browser-support) を参照してください。
+## polyfill
+
+An [npm package](guide/npm-packages) that plugs gaps in a browser's JavaScript implementation.
+See [Browser Support](guide/browser-support) for polyfills that support particular functionality for particular platforms.
 
 {@a project}
 
-## Project
-_プロジェクト_
+## project
 
-Angularにおいて、1つまたは複数のAngularアプリまたは[ライブラリ](guide/glossary#library)を含む[ワークスペース](guide/glossary#workspace)内のフォルダ。
+In the Angular CLI, a standalone application or [library](#library) that can be created or modified by a CLI command.
 
-## Provider
-_プロバイダー_
+A project, as generated by the [`ng new`](cli/new), contains the set of source files, resources, and configuration files that you need to develop and test the application using the CLI. Projects can also be created with the `ng generate application` and `ng generate library` commands.
 
-注入可能なサービスのプロバイダー&mdash;具体的には、[DIトークン](guide/glossary#token)に関連付けられたコードレシピ。[インジェクタ](guide/glossary#injector)は、それを必要とするクラスの依存関係の新しいインスタンスを作成するために使用します。
+For more information, see [Project File Structure](guide/file-structure).
 
-Angularは、Angularが定義するサービスのために、すべてのインジェクターに独自のプロバイダーを登録します。あなたのアプリが必要とするサービスのためにあなた自身のプロバイダーを登録することができます。
+The [`angular.json`](guide/workspace-config) file configures all projects in a [workspace](#workspace).
 
-[サービス](guide/glossary#service)、[依存性の注入](guide/glossary#di)も参照してください。
+{@a provider}
+
+## provider
+
+An object that implements one of the [`Provider`](api/core/Provider) interfaces. A provider object defines how to obtain an injectable dependency associated with a [DI token](#token).
+An [injector](#injector) uses the provider to create a new instance of a dependency
+for a class that requires it.
+
+Angular registers its own providers with every injector, for services that Angular defines.
+You can register your own providers for services that your app needs.
+
+See also [service](#service), [dependency injection](#di).
+
+Learn more in [Dependency Injection](guide/dependency-injection).
 
 
 {@a Q}
 
 {@a R}
 
-## Reactive forms
-_リアクティブフォーム_
+{@a reactive-forms}
 
-Angularのフォームをコンポーネントのコードを通じて組み立てる技法です。
-別の技法としては[テンプレート駆動フォーム](guide/glossary#template-driven-forms)があります。
+## reactive forms
 
-リアクティブフォームを組み立てる際、
+A framework for building Angular forms through code in a component.
+The alternative is a [template-driven form](#template-driven-forms).
 
-* その"真実の情報源"はコンポーネントです。バリデーションはそのコンポーネントのコードを使用して定義されます。
-* それぞれのコントロールはそのコンポーネントのクラスにおいて、`new FormControl()`もしくは`FormBuilder`を使って明示的に生成されます。
-* そのテンプレートのinput要素は`ngModel`を使用*しません*。
-* 関連するAngularディレクティブにはすべて`Form`接頭辞が付けられています。たとえば、`FormGroup`、 `FormControl`、 そして`FormControlName`などです。
+When using reactive forms:
 
-リアクティブフォームは強力で柔軟なので、より複雑なデータ入力をするフォームの場合には最適です。
-たとえば、動的にフォームのコントロールを生成するような場合などです。
+* The "source of truth", the form model, is defined in the component class.
+* Validation is set up through validation functions rather than valdation directives.
+* Each control is explicitly created in the component class by creating a `FormControl` instance manually or with `FormBuilder`.
+* The template input elements do *not* use `ngModel`.
+* The associated Angular directives are prefixed with `form`, such as `formControl`, `formGroup`, and `formControlName`.
 
+The alternative is a template-driven form. For an introduction and comparison of both forms approaches, see [Introduction to Angular Forms](guide/forms-overview).
 
-## Router
-_ルーター_
+{@a router}
+{@a router-module}
 
-Angularアプリ内の状態と[ビュー](guide/glossary#view)間のナビゲーションを設定および実装するツール。
+## router
 
-ルーターモジュールは、アプリケーションビューをナビゲートするために必要なサービスプロバイダーとディレクティブを提供する[NgModule](guide/glossary#ngmodule)です。[ルーティングコンポーネント](guide/glossary#routing-component)は、ルーターモジュールをインポートし、ルーターによって生成されるビューを表示することができる`RouterOutlet`要素をそのテンプレートに含みます。
- 
-ルーターはページ間のナビゲーションではなく、単一のページ上のビュー間のナビゲーションを定義します。URLのようなリンクを解釈して、どのビューを作成または破棄し、どのコンポーネントをロードまたはアンロードするかを決定します。これはあなたのAngularアプリで[遅延ロード](guide/glossary#lazy-load)を利用できるようにします。
+A tool that configures and implements navigation among states and [views](#view) within an Angular app.
 
-詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
+The `Router` module is an [NgModule](#ngmodule) that provides the necessary service providers and directives for navigating through application views. A [routing component](#routing-component) is one that imports the `Router` module and whose template contains a `RouterOutlet` element where it can display views produced by the router.
 
-## Router module
-_ルーターモジュール_
+The router defines navigation among views on a single page, as opposed to navigation among pages. It interprets URL-like links to determine which views to create or destroy, and which components to load or unload. It allows you to take advantage of [lazy loading](#lazy-load) in your Angular apps.
 
-アプリケーションのビューの間を移動するのに必要なサービスプロバイダーおよびディレクティブを提供する、独立した[Angularモジュール](guide/glossary#ngmodule)です。
+To learn more, see [Routing and Navigation](guide/router).
 
-詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
+{@a router-outlet}
 
-## Router outlet
-_ルーターアウトレット_
+## router outlet
 
-ルーティングコンポーネントのテンプレートのプレースホルダとして機能するディレクティブで、Angularはそれを現在のルーターの状態に基づいて動的に設定します。
+A [directive](#directive) that acts as a placeholder in a routing component's template. Angular dynamically renders the template based on the current router state.
 
-## Routing component
-_ルーティングコンポーネント_
+{@a router-component}
 
-ルーターのナビゲーションに基づきビューを表示する`RouterOutlet`を備えたAngular [コンポーネント](guide/glossary#component)です。
+## routing component
 
-詳細は、[ルーティングとナビゲーション](guide/router)のページを参照してください。
+An Angular [component](#component) with a `RouterOutlet` directive in its template that displays views based on router navigations.
 
+For more information, see [Routing and Navigation](guide/router).
+
+{@a rule}
+
+## rule
+
+In [schematics](#schematic), a function that operates on a [file tree](#file-tree) to create, delete, or modify files in a specific manner.
 
 {@a S}
 
 {@a schematic}
 
-## Schematic
+## schematic
 
-ファイルやコードを作成、修正、リファクタリング、または移動することによってプログラミングプロジェクトを生成または変換する方法を定義するスキャフォールディングライブラリ。
+A scaffolding library that defines how to generate or transform a programming project by creating, modifying, refactoring, or moving files and code.
+A schematic defines [rules](#rule) that operate on a virtual file system called a [tree](#file-tree).
 
-Angular [CLI](guide/glossary#cli)は、Schematicsを使用して[Angularプロジェクト](guide/glossary#project)およびプロジェクトの一部を生成および変更します。 
+The [Angular CLI](#cli) uses schematics to generate and modify [Angular projects](#project) and parts of projects.
 
-* Angularは、CLIで使用するための一連のSchematicsを提供します。詳細については、[Angular CLI documentation](https://github.com/angular/angular-cli/wiki)を参照してください。 
+* Angular provides a set of schematics for use with the CLI. See the [Angular CLI command reference](cli). The [`ng add`](cli/add) command runs schematics as part of adding a library to your project. The [`ng generate`](cli/generate) command runs schematics to create apps, libraries, and Angular code constructs.
 
-* ライブラリ開発者は、CLIで公開ライブラリを生成するためのSchematicsを作成できます。詳細については、 https://www.npmjs.com/package/@angular-devkit/schematics を参照してください。
+* [Library](#library) developers can create schematics that enable the Angular CLI to add and update their published libraries, and to generate artifacts the library defines.
+Add these schematics to the npm package that you use to publish and share your library.
 
+For more information, see [Schematics](guide/schematics) and [Integrating Libraries with the CLI](guide/creating-libraries#integrating-with-the-cli).
 
-## Scoped package
-_スコープ化パッケージ_
+{@a schematics-cli}
 
-関連するnpmパッケージをグループ化する方法。
-NgModuleは、名前がAngularの*スコープ名*`@angular`で始まる*スコープ化パッケージ*内で配信されます。たとえば、`@angular/core`、`@angular/common`、`@angular/http`や`@angular/router`。
+## Schematics CLI
 
-通常のパッケージをインポートするのと同じ方法でスコープされたパッケージをインポートします。
+Schematics come with their own command-line tool.
+Using Node 6.9 or above, install the Schematics CLI globally:
 
-<code-example path="architecture/src/app/app.component.ts" linenums="false" title="architecture/src/app/app.component.ts (import)" region="import">
+<code-example format="." language="bash">
+npm install -g @angular-devkit/schematics-cli
+</code-example>
+
+This installs the `schematics` executable, which you can use to create a new schematics [collection](#collection) with an initial named schematic. The collection folder is a workspace for schematics. You can also use the `schematics` command to add a new schematic to an existing collection, or extend an existing schematic.
+
+{@a scoped-package}
+
+## scoped package
+
+A way to group related [npm packages](guide/npm-packages).
+NgModules are delivered within scoped packages whose names begin with the Angular *scope name* `@angular`. For example, `@angular/core`, `@angular/common`, `@angular/forms`, and `@angular/router`.
+
+Import a scoped package in the same way that you import a normal package.
+
+<code-example path="architecture/src/app/app.component.ts" linenums="false" header="architecture/src/app/app.component.ts (import)" region="import">
 
 </code-example>
 
+{@a server-side-rendering}
 
-## Service
-_サービス_
+## server-side rendering
 
-Angularでは、サービスは、アプリケーション全体で再利用できる非UIロジックとコードをカプセル化する[@Injectable](guide/glossary#injectable)デコレーターをもつクラスです。
-Angularは、モジュール性と再利用性を高めるためにコンポーネントをサービスと区別します。
+A technique that generates static application pages on the server, and can generate and serve those pages in response to requests from browsers.
+It can also pre-generate pages as HTML files that you serve later.
 
-`@Injectable`メタデータは、[依存性の注入](guide/glossary#di)メカニズムによってサービスクラスを使えるようにします。injectableクラスは[プロバイダ](guide/glossary#provider)によってインスタンス化され、モジュールは、コンポーネントまたはそれを必要とするその他のサービスの必要に応じて、特定のタイプのサービスを提供できるプロバイダーのリストを保持します。
+This technique can improve performance on mobile and low-powered devices and improve the user experience by showing a static first page quickly while the client-side app is loading.
+The static version can also make your app more visible to web crawlers.
 
-詳細は[サービスの概要](guide/architecture-services)を参照してください。
+You can easily prepare an app for server-side rendering by using the [CLI](#cli) to run the [Angular Universal](#universal) tool, using the `@nguniversal/express-engine` [schematic](#schematic).
+
+
+{@a service}
+
+## service
+
+In Angular, a class with the [@Injectable()](#injectable) decorator that encapsulates non-UI logic and code that can be reused across an application.
+Angular distinguishes components from services to increase modularity and reusability.
+
+The `@Injectable()` metadata allows the service class to be used with the [dependency injection](#di) mechanism.
+The injectable class is instantiated by a [provider](#provider).
+[Injectors](#injector) maintain lists of providers and use them to provide service instances when they are required by components or other services.
+
+To learn more, see [Introduction to Services and Dependency Injection](guide/architecture-services).
 
 {@a structural-directive}
-
-
 {@a structural-directives}
 
+## structural directives
 
-## Structural directives
-_構造ディレクティブ_
+A category of [directive](#directive) that is responsible for shaping HTML layout by modifying the DOM&mdashthat is, adding, removing, or manipulating elements and their children.
 
-DOMを変更する（要素とその子を追加、削除、または操作する）ことによって、HTMLレイアウトの形成と再形成を担当する[ディレクティブ](guide/glossary#directive)の一種。
-
-詳細は[構造ディレクティブ](guide/structural-directives)を参照してください。
+To learn more, see [Structural Directives](guide/structural-directives).
 
 {@a subscriber}
 
-## Subscriber
-_サブスクライバー_
+## subscriber
 
-発行する値やメッセージを取得または生成する方法を定義する関数。この関数は、消費者が[Observable](guide/glossary#observable)の`subscribe()`メソッドを呼び出すときに実行されます。
+A function that defines how to obtain or generate values or messages to be published. This function is executed when a consumer calls the `subscribe()` method of an [observable](#observable).
 
-Observableをサブスクライブすると、その実行がトリガされ、コールバックが関連付けられ、サブスクライブを解除できる`Subscription`オブジェクトが作成されます。
+The act of subscribing to an observable triggers its execution, associates callbacks with it, and creates a `Subscription` object that lets you unsubscribe.
 
-この`subscribe()`メソッドは、observableが提供できる通知の種類ごとに1つずつ、最大3つのコールバックをもつJavaScriptオブジェクト（「オブザーバー」と呼ばれる）を取ります。
+The `subscribe()` method takes a JavaScript object (called an [observer](#observer)) with up to three callbacks, one for each type of notification that an observable can deliver:
 
-- `next`通知は数値や文字列、オブジェクトのような値を送信します。
-- `error`通知は JavaScriptエラーや例外を送信します。
-- `complete`通知は値を送信しませんが、呼び出しが完了したときにハンドラが呼び出されます。コールが完了すると、スケジュールされた値が引き続き返されます。
+* The `next` notification sends a value such as a number, a string, or an object.
+* The `error` notification sends a JavaScript Error or exception.
+* The `complete` notification doesn't send a value, but the handler is called when the call completes. Scheduled values can continue to be returned after the call completes.
 
 {@a T}
 
-## Template
-_テンプレート_
+{@a target}
 
-テンプレートはHTMLでコンポーネントの[ビュー](guide/glossary#view)をレンダリングする方法を定義します
+## target
 
-テンプレートは、HTMLとAngularの[データバインディング構文](guide/glossary#data-binding)、[ディレクティブ](guide/glossary#directive)、および[テンプレート式](guide/glossary#template-expression)（論理構造）を直接結合します。Angularの要素は、ページが表示される前にHTML要素を変更する値を挿入または計算します。
- 
-テンプレートは `@Component`[デコレータ](guide/glossary#decorator).を介して[コンポーネント](guide/glossary#component)クラスに関連付けられます。HTMLは、`template`プロパティの値としてインラインで、または`templateUrl`プロパティを介してリンクされた別のHTMLファイルで提供できます。
+A buildable or runnable subset of a [project](#project), configured as an object in the [workspace configuration file](guide/workspace-config#project-tool-configuration-options), and executed by an [Architect](#architect) [builder](#builder).
 
-`TemplateRef`オブジェクトで表される追加のテンプレートは、複数のコンポーネントから参照できる代替ビューまたは _埋め込み_ ビューを定義できます。
+In the `angular.json` file, each project has an "architect" section that contains targets which configure builders. Some of these targets correspond to [CLI commands](#cli), such as `build`, `serve`, `test`, and `lint`.
 
-## Template-driven forms
-_テンプレート駆動フォーム_
+For example, the Architect builder invoked by the `ng build` command to compile a project uses a particular build tool, and has a default configuration whose values can be overridden on the command line. The `build` target also defines an alternate configuration for a "production" build, that can be invoked with the `--prod` flag on the `build` command.
 
+The Architect tool provides a set of builders. The [`ng new` command](cli/new) provides a set of targets for the initial application project. The [`ng generate application`](cli/generate#application) and [`ng generate library`](cli/generate#library) commands provide a set of targets for each new [project](#project). These targets, their options and configurations, can be customized to meet the needs of your project. For example, you may want to add a "staging" or "testing" configuration to a project's "build" target.
 
-ビューにおいてHTMLのフォームとinput要素を使用してAngularのフォームを組み立てる技法です。
-別の技法としては[リアクティブフォーム](guide/glossary#reactive-forms)があります。
+You can also define a custom builder, and add a target to the project configuration that uses your custom builder. You can then run the target using the [`ng run`](cli/run) CLI command.
 
-テンプレート駆動フォームを組み立てる際、
+{@a template}
 
-* "真実の情報源"はテンプレートです。バリデーションは個々のinput要素の属性を使用して定義されます。
-* `ngModel`を用いた[双方向バインディング](guide/glossary#data-binding)が、コンポーネントのモデルとユーザーによるinput要素への入力との同期を維持します。
-* 舞台裏では、Angularは`name`属性および双方向バインディングの設定をもつ各input要素のために、新しいコントロールを生成します。
-* 関連するAngularディレクティブにはすべて`ng`接頭辞が付けられています。たとえば、`ngForm`、`ngModel`、そして`ngModelGroup`などです。
+## template
 
-テンプレート駆動フォームは便利で短時間で作成でき、そして単純なので、多数の基本的なデータ入力をするフォームの場合にはよい選択です。
+Code associated with a component that defines how to render the component's [view](#view).
 
-テンプレート駆動フォームを組み立てる方法の詳細は、[フォーム](guide/forms)のページを参照してください。
+A template combines straight HTML with Angular [data-binding](#data-binding) syntax, [directives](#directive),
+and [template expressions](#template-expression) (logical constructs).
+The Angular elements insert or calculate values that modify the HTML elements before the page is displayed.
+
+A template is associated with a [component](#component) class through the `@Component()` [decorator](#decorator). The HTML can be provided inline, as the value of the `template` property, or in a separate HTML file linked through the `templateUrl` property.
+
+Additional templates, represented by `TemplateRef` objects, can define alternative or *embedded* views, which can be referenced from multiple components.
+
+{@a template-driven-forms}
+
+## template-driven forms
+
+A format for building Angular forms using HTML forms and input elements in the view.
+The alternative format uses the [reactive forms](#reactive-forms) framework.
+
+When using template-driven forms:
+
+* The "source of truth" is the template. The validation is defined using attributes on the individual input elements.
+* [Two-way binding](#data-binding) with `ngModel` keeps the component model synchronized with the user's entry into the input elements.
+* Behind the scenes, Angular creates a new control for each input element, provided you have set up a `name` attribute and two-way binding for each input.
+* The associated Angular directives are prefixed with `ng` such as `ngForm`, `ngModel`, and `ngModelGroup`.
+
+The alternative is a reactive form. For an introduction and comparison of both forms approaches, see [Introduction to Angular Forms](guide/forms-overview).
 
 {@a template-expression}
 
+## template expression
 
-## Template expression
-_テンプレート式_
+A TypeScript-like syntax that Angular evaluates within a [data binding](#data-binding).
 
-A TypeScript-like syntax that Angular evaluates within
-a [data binding](guide/glossary#data-binding).
-
-テンプレート式は、Angularが[データバインディング][data binding](guide/glossary#data-binding)の内部で評価する、TypeScriptに似た構文です。
-
-テンプレート式を記述する方法の詳細は、[テンプレート構文](guide/template-syntax)ページの[テンプレート式](guide/template-syntax#template-expressions)の項を参照してください。
+Read about how to write template expressions in  [Template expressions](guide/template-syntax#template-expressions).
 
 {@a token}
 
-## Token
-_トークン_
+## token
 
-効率的なテーブル参照に使用される不透明な識別子。Angularでは、[DIトークン](guide/glossary#di-token)を使用して[依存性の注入](guide/glossary#di)システムの中で依存関係の[プロバイダ](guide/glossary#provider)を検索します。
+An opaque identifier used for efficient table lookup. In Angular, a [DI token](#di-token) is used to find [providers](#provider) of dependencies in the [dependency injection](#di) system.
 
 {@a transpile}
 
-## Transpile
-_トランスパイル_
+## transpile
 
-あるバージョンのJavaScriptを別のバージョンに変換する変換プロセス。たとえば、ES2015を古いES5バージョンにダウンレベリングします。
+The translation process that transforms one version of JavaScript to another version; for example, down-leveling ES2015 to the older ES5 version.
 
+{@a file-tree}
+
+## tree
+
+In [schematics](#schematic), a virtual file system represented by the `Tree` class.
+Schematic [rules](#rule) take a tree object as input, operate on them, and return a new tree object.
 
 {@a typescript}
 
 ## TypeScript
 
-TypeScriptはコンパイル時の型チェックと
-強力なツールサポート（コード補完、リファクタリング、インラインドキュメンテーション、インテリジェントな検索など）を提供する、
-オプションのタイピングシステムに特筆すべきプログラミング言語です。
-多くのコードエディタとIDEは、ネイティブまたはプラグインでTypeScriptをサポートしています。
+A programming language based on JavaScript that is notable for its optional typing system.
+TypeScript provides compile-time type checking and strong tooling support (such as
+code completion, refactoring, inline documentation, and intelligent search).
+Many code editors and IDEs support TypeScript either natively or with plug-ins.
 
-TypeScriptは、Angular開発のための推奨言語です。TypeScriptについての詳細は、[typescriptlang.org](http://www.typescriptlang.org/).を参照してください。
+TypeScript is the preferred language for Angular development.
+Read more about TypeScript at [typescriptlang.org](http://www.typescriptlang.org/).
 
 
 {@a U}
 
+{@a universal}
+
+## Universal
+
+A tool for implementing [server-side rendering](#server-side-rendering) of an Angular application.
+When integrated with an app, Universal generates and serves static pages on the server in response to requests from browsers.
+The initial static page serves as a fast-loading placeholder while the full application is being prepared for normal execution in the browser.
+
+To learn more, see [Angular Universal: server-side rendering](guide/universal).
+
 {@a V}
 
-## View
-_ビュー_
+{@a view}
 
-ビューは、一緒に作成および破棄できる表示要素の最小グループです。
+## view
 
-Angularは、1つ以上の[ディレクティブ](guide/glossary#directive)、
-特に [コンポーネント](guide/glossary#component)ディレクティブとその[テンプレート](guide/glossary#template)の制御下にあるビューをレンダリングします。
+The smallest grouping of display elements that can be created and destroyed together.
+Angular renders a view under the control of one or more [directives](#directive),
+especially [component](#component) directives and their companion [templates](#template).
 
-ビューは、コンポーネントに関連付けられた`ViewRef`インスタンスによって具体的に表されます。
-コンポーネントに属するビューは_ホストビュー_と呼ばれます。
-ビューは、通常、[ビュー階層](guide/glossary#view-tree)に収集されます。
+A view is specifically represented by a `ViewRef` instance associated with the component.
+A view that belongs to a component is called a *host view*.
+Views are typically collected into [view hierarchies](#view-tree).
 
-ビュー内の要素のプロパティは、ユーザーの操作に応じて動的に変更できます。ビュー内の要素の構造（番号と順序）はできません。ビューコンテナ内にネストされたビューを挿入、移動、または削除することによって、要素の構造を変更できます。
+Properties of elements in a view can change dynamically, in response to user actions;
+the structure (number and order) of elements in a view can't.
+You can change the structure of elements by inserting, moving, or removing nested views within their view containers.
 
-ビューの階層は、ユーザーがアプリケーションを通してナビゲートする際に、通常は[ルーター](guide/glossary#router)の制御下で、動的にロードおよびアンロードすることができます。
+View hierarchies can be loaded and unloaded dynamically as the user navigates through the application, typically under the control of a [router](#router).
 
 {@a view-tree}
 
-## View hierarchy
-_ビュー階層_
+## view hierarchy
 
-1つの単位として実行できる関連ビューのツリー。ルートビューはコンポーネントの_ホストビュー_です。ホストビューは、ホストコンポーネントのアンカー要素に添付された_ビューコンテナ_（`ViewContainerRef`）に集められた、_埋め込みビュー_のツリーのルートにすることができます。ビュー階層は、Angularの変更検知の重要な部分です。
+A tree of related views that can be acted on as a unit. The root view is a component's *host view*.  A host view can be the root of a tree of *embedded views*, collected in a *view container* (`ViewContainerRef`) attached to an anchor element in the hosting component. The view hierarchy is a key part of Angular change detection.
 
-ビュー階層は、コンポーネント階層を意味するものではありません。特定の階層のコンテキストに埋め込まれたビューは、他のコンポーネントのホストビューにすることができます。これらのコンポーネントは、ホスティングコンポーネントと同じNgModule内にあることも、他のNgModuleに属することもできます。
+The view hierarchy doesn't imply a component hierarchy. Views that are embedded in the context of a particular hierarchy can be host views of other components. Those components can be in the same NgModule as the hosting component, or belong to other NgModules.
 
 {@a W}
+{@a web-component}
 
-## Web component
+## web component
 
-[カスタム要素](guide/glossary#custom-element)を参照してください。
+See [custom element](#custom-element).
 
 {@a workspace}
 
-## Workspace
-_ワークスペース_
+## workspace
 
-Angularにおいて、[プロジェクト](guide/glossary#project)を含むフォルダです。 
-[CLI](guide/glossary#cli)の `new` コマンドは、アプリケーションとライブラリを含むワークスペースを作成します。そして他のコマンドはワークスペースフォルダ内から実行する必要があります。
+A collection of Angular [projects](#project) (that is, applications and libraries) powered by the [Angular CLI] (#cli) that are typically co-located in a single source-control repository (such as [git](https://git-scm.com/)).
+
+The [CLI](#cli) [`ng new` command](cli/new) creates a file system directory (the "workspace root").
+In the workspace root, it also creates the workspace [configuration file](#configuration) (`angular.json`) and, by default, an initial application project with the same name.
+
+Commands that create or operate on apps and libraries (such as `add` and `generate`) must be executed from within a workspace folder.
+
+For more information, see [Workspace Configuration](guide/workspace-config).
+
+{@a cli-config}
+
+{@a config}
+
+## workspace configuration
+
+A file named `angular.json` at the root level of an Angular [workspace](#workspace) provides workspace-wide and project-specific configuration defaults for build and development tools that are provided by or integrated with the [Angular CLI](#cli).
+
+For more information, see [Workspace Configuration](guide/workspace-config).
+
+Additional project-specific configuration files are used by tools, such as `package.json` for the [npm package manager](#npm-package), `tsconfig.json` for [TypeScript transpilation](#transpile), and `tslint.json` for [TSLint](https://palantir.github.io/tslint/).
+
+For more information, see [Workspace and Project File Structure](guide/file-structure).
 
 {@a X}
 
@@ -763,14 +970,15 @@ Angularにおいて、[プロジェクト](guide/glossary#project)を含むフ�
 
 
 {@a Z}
+{@a zone}
 
-## Zone
+## zone
 
-非同期タスクのセットの実行コンテキスト。イベント処理、Promise、リモートサーバーへの呼び出しなどの非同期操作を含むアプリケーションのデバッグ、プロファイリング、テストに役立ちます。
+An execution context for a set of asynchronous tasks. Useful for debugging, profiling, and testing apps that include asynchronous operations such as event processing, promises, and calls to remote servers.
 
-Angularアプリは、データの変更をチェックし、[データバインディング](guide/glossary#data-binding)を解決して表示される情報を更新するために、非同期イベントに応答できるZone内で実行されます。
+An Angular app runs in a zone where it can respond to asynchronous events by checking for data changes and updating the information it displays by resolving [data bindings](#data-binding).
 
-Zoneのクライアントは、非同期操作が完了する前後にアクションを実行できます。
+A zone client can take action before and after an async operation completes.
 
-Zoneについての詳細は、この
-[Brian Fordのビデオ](https://www.youtube.com/watch?v=3IqtmUscE_U)を参照してください。
+Learn more about zones in this
+[Brian Ford video](https://www.youtube.com/watch?v=3IqtmUscE_U).

@@ -1,6 +1,8 @@
 version: 1
 imports:
-  - path: test/techbooster.yml
+  - path: ./node_modules/prh-rules/files/markdown.yml
+  - path: ./node_modules/prh-rules/media/techbooster.yml
+    disableImports: true
     ignoreRules:
       # 日本語以外のファイルでは半角カッコを使うため
       - expected: （$1）
@@ -10,6 +12,9 @@ rules:
 
   - expected: 依存性の注入
     pattern: 依存性注入
+
+  - expected: 依存性を注入し
+    pattern: 依存注入し
 
   - expected: 単方向
     pattern: 一方向
@@ -32,6 +37,37 @@ rules:
 
   - expected: 注入する
     pattern: インジェクトする
+
+  - expected: 注入可能
+    pattern: インジェクト可能
+
+  - expected: 参照してください
+    pattern: ご参照ください
+
+  - expected: 伝播する
+    pattern: 伝わる
+
+  - expected: 伝播し
+    pattern: 伝わり
+
+  - expected: 個々の
+    pattern: それぞれの
+
+  - expected: 静的な
+    pattern: staticな
+  
+  - expected: しやすく
+    pattern: し易く
+
+  - expected: しやすい
+    pattern: し易い
+
+  - expected: 購読する
+    pattern: サブスクライブする
+  
+  - expected: ため
+    pattern: /(行|作)?為(?!替)/
+    regexpMustEmpty: $1
 
 # カタカナ語
 
@@ -65,8 +101,44 @@ rules:
   - expected: セレクター
     pattern: /セレクタ(?!ー)/
 
+  - expected: カテゴリー
+    pattern: /カテゴリ(?!ー)/
+
+  - expected: コンストラクター
+    pattern: /コンストラクタ(?!ー)/
+
+  - expected: オペレーター
+    pattern: /オペレータ(?!ー)/
+
+  - expected: リカバリー
+    pattern: /リカバリ(?!ー)/
+
+  - expected: エミッター
+    pattern: /エミッタ(?!ー)/
+
+  - expected: トリガー
+    pattern: /トリガ(?!ー)/
+  
+  - expected: ハンドラー
+    pattern: /ハンドラ(?!ー)/
+
+  - expected: リスナー
+    pattern: /リスナ(?!ー)/
+
+  - expected: テクノロジー
+    pattern: /テクノロジ(?!ー)/
+
+  - expected: マネージャー
+    pattern: /マネージャ(?!ー)/
+
   - expected: クオート
     pattern: クォート
+
+  - expected: インターフェース
+    pattern:
+      - インタフェース
+      - インターフェイス
+      - インタフェイス
 
   - expected: Promise
     pattern: プロミス
@@ -79,3 +151,14 @@ rules:
 
   - expected: 静的メソッド
     pattern: スタティックメソッド
+
+  - expected: ユーザー体験
+    pattern: ユーザーエクスペリエンス
+
+  - expected: 接頭辞
+    pattern: プレフィックス
+
+  - expected: 接尾辞
+    pattern: 
+      - サフィックス
+      - ポストフィックス

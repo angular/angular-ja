@@ -13,7 +13,7 @@
 
 ## サービスを提供する
 
-すでにCLIで生成したアプリケーションがある場合は、 次のコマンドをプロジェクトのルートディレクトリで実行してサービスを生成してください。 _User_はあなたの好きなサービス名に置きかえてかまいません。 
+すでに[Angular CLI](cli)で生成したアプリケーションがある場合は、 [`ng generate`](cli/generate) CLIコマンドをプロジェクトのルートディレクトリで実行してサービスを生成できます。 _User_はあなたの好きなサービス名に置きかえてかまいません。 
 
 ```sh
 ng generate service User
@@ -21,11 +21,11 @@ ng generate service User
 
 このコマンドによって次のような`UserService`スケルトンが作成されます:
 
-<code-example path="providers/src/app/user.service.0.ts"  title="src/app/user.service.0.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts" linenums="false"> </code-example>
 
 あなたはいま、`UserService`をアプリケーションのどこにでも注入することができます。
 
-サービス自体はCLIが生成したクラスであり、`@Injectable`デコレーターが付与されます。デフォルトでは、このデコレーターには`provideIn`プロパティが設定されサービスのプロバイダーを作成します。このケースでは、`provideIn： 'root'`はサービスがルートインジェクターに提供されるべきであることを指定しています。
+サービス自体はCLIが生成したクラスであり、`@Injectable()` デコレーターが付与されます。デフォルトでは、このデコレーターには`provideIn`プロパティが設定されサービスのプロバイダーを作成します。このケースでは、`provideIn： 'root'`は Angularがサービスをルートインジェクターに提供すべきであることを指定しています。
 
 
 ## プロバイダーのスコープ
@@ -34,15 +34,15 @@ ng generate service User
 
 利用者が特定の`@NgModule`をインポートした場合にのみサービスを利用できるようにしたい場合を除いて、ルートインジェクターでサービスを提供すべきです。
 
-## providedIn と NgModule
+## `providedIn` と NgModule
 
 特定の`@NgModule`内でサービスを提供するように指定することもできます。たとえば、あなたが作成した`UserModule`をインポートしない限り`UserService`をアプリケーションで利用できないようにモジュール内でサービスを提供するように指定できます:
 
-<code-example path="providers/src/app/user.service.1.ts"  title="src/app/user.service.1.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.ts" linenums="false">  </code-example>
 
 上記の例では、モジュールにサービスを提供する推奨の方法を示しています。この方法を使用すると、サービスがどこからも注入されないときに、ツリーシェイキングの対象にできるので推奨されます。どのモジュールがサービスを提供すべきかをそのサービス内で指定できない場合は、モジュール内でそのサービスのプロバイダーを宣言することもできます:
 
-<code-example path="providers/src/app/user.module.ts"  title="src/app/user.module.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts" linenums="false">  </code-example>
 
 ## 遅延ロードモジュールでプロバイダーのスコープを制限する
 
@@ -52,7 +52,7 @@ ng generate service User
 
 <!-- KW--Make diagram here -->
 <!-- KW--per Misko: not clear if the lazy modules are siblings or grand-children. They are both depending on router structure. -->
-Angularルーターがモジュールを遅延ロードすると、新しいインジェクターが作成されます。このインジェクターは、ルートアプリケーションインジェクターの子供となります。インジェクターのツリーを想像してみてください。単一のルートインジェクターと、それぞれの遅延ロードされるモジュールのための子インジェクターがあります。ルーターはルートインジェクターから子インジェクターにすべてのプロバイダーを追加します。ルーターが遅延ロードされたモジュールのコンテキスト内でコンポーネントを作成するとき、Angularはルートインジェクターのサービスインスタンスよりも、それらのプロバイダーで作成されたサービスインスタンスを優先します。
+Angularルーターがモジュールを遅延ロードすると、新しいインジェクターが作成されます。このインジェクターは、ルートアプリケーションインジェクターの子供となります。インジェクターのツリーを想像してみてください。単一のルートインジェクターと、個々の遅延ロードされるモジュールのための子インジェクターがあります。ルーターはルートインジェクターから子インジェクターにすべてのプロバイダーを追加します。ルーターが遅延ロードされたモジュールのコンテキスト内でコンポーネントを作成するとき、Angularはルートインジェクターのサービスインスタンスよりも、それらのプロバイダーで作成されたサービスインスタンスを優先します。
 
 遅延ロードされたモジュールのコンテキスト内で作成されたコンポーネント(ルーターのナビゲーションなど)は、ルートアプリケーションインジェクターのインスタンスではなく、サービスのローカルインスタンスを取得します。外部モジュール内のコンポーネントは、アプリケーションルート用に作成されたインスタンスを受け取り続けます。
 
@@ -67,7 +67,7 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 コンポーネントにサービスを提供すると、サービスはそのコンポーネントだけに制限されます
 (同じモジュールにある他のコンポーネントからはアクセスできません)。
 
-<code-example path="providers/src/app/app.component.ts" region="component-providers" title="src/app/app.component.ts" linenums="false">
+<code-example path="providers/src/app/app.component.ts" region="component-providers" header="src/app/app.component.ts" linenums="false">
 </code-example>
 
 
@@ -78,7 +78,7 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 ルーターはルートレベルで動作するので、プロバイダーをコンポーネントに配置すると、たとえ`AppComponent`や、ルーターに依存する遅延ロードされるモジュールでもそれらを見ることができません。
 
 <!-- KW--Make a diagram here -->
-サービスのインスタンスをコンポーネントおよびそのコンポーネントツリー、つまりその子コンポーネントに限定する必要がある場合は、プロバイダーをコンポーネントに登録してください。たとえば、`UserService`のキャッシュのプライベートコピーが必要であるユーザー編集コンポーネント `UserEditorComponent`は、`UserEditorComponent`に`UserService`を登録すべきです。そうすることで、それぞれの`UserEditorComponent`の新しいインスタンスごとに、自身のキャッシュされたサービスのインスタンスを得ることができます。
+サービスのインスタンスをコンポーネントおよびそのコンポーネントツリー、つまりその子コンポーネントに限定する必要がある場合は、プロバイダーをコンポーネントに登録してください。たとえば、`UserService`のキャッシュのプライベートコピーが必要であるユーザー編集コンポーネント `UserEditorComponent`は、`UserEditorComponent`に`UserService`を登録すべきです。そうすることで、個々の`UserEditorComponent`の新しいインスタンスごとに、自身のキャッシュされたサービスのインスタンスを得ることができます。
 
 
 <hr>
@@ -88,5 +88,5 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 あなたはこちらにも興味があるかもしれません:
 * [シングルトンサービス](guide/singleton-services)では、このページで取り上げられている概念を詳しく説明しています。
 * [モジュールの遅延ロード](guide/lazy-loading-ngmodules)
-* [Tree-shakable プロバイダー](guide/dependency-injection#tree-shakable-providers)
+* [Tree-shakable プロバイダー](guide/dependency-injection-providers#tree-shakable-providers)
 * [NgModule FAQ](guide/ngmodule-faq)

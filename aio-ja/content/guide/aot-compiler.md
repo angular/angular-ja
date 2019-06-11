@@ -1,29 +1,27 @@
-# The Ahead-of-Time (AOT) Compiler
+# Ahead-of-Time (AOT) コンパイラ
 
-The Angular Ahead-of-Time (AOT) compiler converts your Angular HTML and TypeScript code into efficient JavaScript code during the build phase _before_ the browser downloads and runs that code.
+Angular アプリケーションは、主にコンポーネントとその HTML テンプレートで構成されています。Angular が提供するコンポーネントとテンプレートはブラウザで直接理解できないため、Angular アプリケーションをブラウザで実行するにはコンパイルプロセスが必要です。
 
-This guide explains how to build with the AOT compiler using different compiler options and how to write Angular metadata that AOT can compile.
+Angular の Ahead-of-Time (AOT) コンパイラは、ブラウザがそのコードをダウンロードして実行する _前_ に、Angular HTML コードと TypeScript コードを効率的な JavaScript コードに変換します。ビルドプロセス中にアプリケーションをコンパイルすると、ブラウザでのレンダリングが速くなります。
 
-<div class="l-sub-section">
+このガイドでは、AOT コンパイラを使用してアプリケーションを効率的にコンパイルするためのメタデータの指定方法と利用可能なコンパイラオプションの適用方法について説明します。
 
-  <a href="https://www.youtube.com/watch?v=kW9cJsvcsGo">Watch compiler author Tobias Bosch explain the Angular Compiler</a> at AngularConnect 2016.
+<div class="alert is-helpful"
+
+  AngularConnect 2016で、<a href="https://www.youtube.com/watch?v=kW9cJsvcsGo">コンパイラの作者 Tobias Bosch が Angular コンパイラについて説明しています</a>。
 
 </div>
 
 {@a overview}
 
-## Angular compilation
+## Angular コンパイル
 
-An Angular application consists largely of components and their HTML templates.
-Before the browser can render the application,
-the components and templates must be converted to executable JavaScript by an _Angular compiler_.
+Angular には、アプリケーションをコンパイルする2つの方法があります。
 
-Angular offers two ways to compile your application:
+1. **_Just-in-Time_ (JIT)** は実行時にブラウザ内でアプリケーションをコンパイルします
+1. **_Ahead-of-Time_ (AOT)** はビルド時にアプリをコンパイルします
 
-1. **_Just-in-Time_ (JIT)**, which compiles your app in the browser at runtime
-1. **_Ahead-of-Time_ (AOT)**, which compiles your app at build time.
-
-JIT compilation is the default when you run the _build-only_ or the _build-and-serve-locally_ CLI commands:
+JIT コンパイルは [`ng build`](cli/build) (ビルドのみ) あるいは [`ng serve`](cli/serve) (ローカルでビルドしてサーブする) CLI コマンドを実行したときのデフォルトです。
 
 <code-example language="sh" class="code-shell">
   ng build
@@ -32,233 +30,71 @@ JIT compilation is the default when you run the _build-only_ or the _build-and-s
 
 {@a compile}
 
-For AOT compilation, append the `--aot` flags to the _build-only_ or the _build-and-serve-locally_ CLI commands:
+AOT コンパイルをするには、`ng build` または `ng serve` コマンドに `--aot` オプションを含めます。
 
 <code-example language="sh" class="code-shell">
   ng build --aot
   ng serve --aot
 </code-example>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
-The `--prod` meta-flag compiles with AOT by default.
+`--prod` メタフラグを付けた `ng build` コマンド (`ng build --prod`) はデフォルトで AOT でコンパイルします。
 
-See the [CLI documentation](https://github.com/angular/angular-cli/wiki) for details, especially the [`build` topic](https://github.com/angular/angular-cli/wiki/build).
+詳細については、[CLI コマンドリファレンス](cli) および [Angular アプリの構築と提供](guide/build)を参照してください。
 
 </div>
 
 {@a why-aot}
 
-## Why compile with AOT?
+## なぜ AOT でコンパイルするのですか？
 
-*Faster rendering*
+*より速いレンダリング*
 
-With AOT, the browser downloads a pre-compiled version of the application.
-The browser loads executable code so it can render the application immediately, without waiting to compile the app first.
+AOT では、ブラウザはコンパイル済みのアプリケーションをダウンロードします。
+ブラウザは実行可能コードをロードするので、最初にアプリケーションをコンパイルするのを待たずにアプリケーションをすぐにレンダリングできます。
 
-*Fewer asynchronous requests*
+*より少ない非同期リクエスト*
 
-The compiler _inlines_ external HTML templates and CSS style sheets within the application JavaScript,
-eliminating separate ajax requests for those source files.
+コンパイラは外部の HTML テンプレートと CSS スタイルシートをアプリケーションの JavaScript 内に組み込み、
+それらのソースファイルに対する別々の ajax リクエストを排除します。
 
-*Smaller Angular framework download size*
+*より小さい Angular フレームワークのダウンロードサイズ*
 
-There's no need to download the Angular compiler if the app is already compiled.
-The compiler is roughly half of Angular itself, so omitting it dramatically reduces the application payload.
+アプリがすでにコンパイルされている場合は、Angular コンパイラをダウンロードする必要はありません。
+コンパイラは Angular 自体の約半分なので、これを省略するとアプリケーションのペイロードが大幅に減少します。
 
-*Detect template errors earlier*
+*テンプレートエラーを早期に検出する*
 
-The AOT compiler detects and reports template binding errors during the build step
-before users can see them.
+AOT コンパイラは、ビルドステップ中にユーザーが表示される前にテンプレートバインディングエラーを検出して
+報告します。
 
-*Better security*
+*より良いセキュリティ*
 
-AOT compiles HTML templates and components into JavaScript files long before they are served to the client.
-With no templates to read and no risky client-side HTML or JavaScript evaluation,
-there are fewer opportunities for injection attacks.
+AOT は、HTML テンプレートとコンポーネントがクライアントに提供されるずっと前から JavaScript ファイルにコンパイルします。
+読み取るテンプレートがなく、危険なクライアントサイドの HTML または JavaScript の評価もないため、
+インジェクション攻撃の機会が少なくなります。
 
-{@a compiler-options}
+## アプリのコンパイルを制御する
 
-## Angular Compiler Options
+Angular の AOT コンパイラを使用すると、次の 2 つの方法でアプリのコンパイルを制御できます。
 
-You can control your app compilation by providing template compiler options in the `tsconfig.json` file along with the options supplied to the TypeScript compiler. The template compiler options are specified as members of
-`"angularCompilerOptions"` object as shown below:
+* `tsconfig.json` ファイルでテンプレートコンパイラオプションを提供する
 
-```json
-{
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    ...
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "preserveWhitespaces": true,
-    ...
-  }
-}
-```
-### *enableResourceInlining*
-This options tell the compiler to replace the `templateUrl` and `styleUrls` property in all `@Component` decorators with inlined contents in `template` and `styles` properties.
-When enabled, the `.js` output of ngc will have no lazy-loaded `templateUrl` or `styleUrls`.
+      詳細は、[Angular テンプレートコンパイラのオプション](#compiler-options)を参照してください。
 
-### *skipMetadataEmit*
+* [Angular メタデータを指定する](#metadata-aot)
 
-This option tells the compiler not to produce `.metadata.json` files.
-The option is `false` by default.
 
-`.metadata.json` files contain information needed by the template compiler from a `.ts`
-file that is not included in the `.d.ts` file produced by the TypeScript compiler. This information contains,
-for example, the content of annotations (such as a component's template) which TypeScript
-emits to the `.js` file but not to the `.d.ts` file.
+{@a metadata-aot}
+## Angular メタデータを指定する
 
-This option should be set to `true` if using TypeScript's `--outFile` option, as the metadata files
-are not valid for this style of TypeScript output. It is not recommeded to use `--outFile` with
-Angular. Use a bundler, such as [webpack](https://webpack.js.org/), instead.
+Angular メタデータは、Angular にアプリケーションクラスのインスタンスを構築し、実行時にそれらと対話する方法を指示します。
+Angular **AOT コンパイラは** Angular が管理することになっているアプリケーションの部分を解釈するために**メタデータ**を抽出します。
 
-This option can also be set to `true` when using factory summaries as the factory summaries
-include a copy of the information that is in the `.metadata.json` file.
+メタデータは `@Component()` や `@Input()` のような**デコレーター**で指定することも、これらの装飾クラスのコンストラクター宣言で暗黙的に指定することもできます。
 
-### *strictMetadataEmit*
-
-This option tells the template compiler to report an error to the `.metadata.json`
-file if `"skipMetadataEmit"` is `false` . This option is `false` by default. This should only be used when `"skipMetadataEmit"` is `false` and `"skipTemplateCodegen"` is `true`.
-
-It is intended to validate the `.metadata.json` files emitted for bundling with an `npm` package. The validation is overly strict and can emit errors for metadata that would never produce an error when used by the template compiler. You can choose to suppress the error emitted by this option for an exported symbol by including `@dynamic` in the comment documenting the symbol.
-
-It is valid for `.metadata.json` files to contain errors. The template compiler reports these errors
-if the metadata is used to determine the contents of an annotation. The metadata
-collector cannot predict the symbols that are designed to use in an annotation, so it will preemptively
-include error nodes in the metadata for the exported symbols. The template compiler can then use the error
-nodes to report an error if these symbols are used. If the client of a library intends to use a symbol in an annotation, the template compiler will not normally report
-this until the client uses the symbol. This option allows detecting these errors during the build phase of
-the library and is used, for example, in producing Angular libraries themselves.
-
-### *skipTemplateCodegen*
-
-This option tells the compiler to suppress emitting `.ngfactory.js` and `.ngstyle.js` files. When set,
-this turns off most of the template compiler and disables reporting template diagnostics.
-This option can be used to instruct the
-template compiler to produce `.metadata.json` files for distribution with an `npm` package while
-avoiding the production of `.ngfactory.js` and `.ngstyle.js` files that cannot be distributed to
-`npm`.
-
-### *strictInjectionParameters*
-
-When set to `true`, this options tells the compiler to report an error for a parameter supplied
-whose injection type cannot be determined. When this value option is not provided or is `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved will
-produce a warning.
-
-*Note*: It is recommended to change this option explicitly to `true` as this option will default to `true` in the future.
-
-### *flatModuleOutFile*
-
-When set to `true`, this option tells the template compiler to generate a flat module
-index of the given file name and the corresponding flat module metadata. Use this option when creating
-flat modules that are packaged similarly to `@angular/core` and `@angular/common`. When this option
-is used, the `package.json` for the library should refer
-to the generated flat module index instead of the library index file. With this
-option only one `.metadata.json` file is produced that contains all the metadata necessary
-for symbols exported from the library index. In the generated `.ngfactory.js` files, the flat
-module index is used to import symbols that includes both the public API from the library index
-as well as shrowded internal symbols.
-
-By default the `.ts` file supplied in the `files` field is assumed to be library index.
-If more than one `.ts` file is specified, `libraryIndex` is used to select the file to use.
-If more than one `.ts` file is supplied without a `libraryIndex`, an error is produced. A flat module
-index `.d.ts` and `.js` will be created with the given `flatModuleOutFile` name in the same
-location as the library index `.d.ts` file. For example, if a library uses
-`public_api.ts` file as the library index of the module, the `tsconfig.json` `files` field
-would be `["public_api.ts"]`. The `flatModuleOutFile` options could then be set to, for
-example `"index.js"`, which produces `index.d.ts` and  `index.metadata.json` files. The
-library's `package.json`'s `module` field would be `"index.js"` and the `typings` field
-would be `"index.d.ts"`.
-
-### *flatModuleId*
-
-This option specifies the preferred module id to use for importing a flat module.
-References generated by the template compiler will use this module name when importing symbols
-from the flat module.
-This is only meaningful when `flatModuleOutFile` is also supplied. Otherwise the compiler ignores
-this option.
-
-### *generateCodeForLibraries*
-
-This option tells the template compiler to generate factory files (`.ngfactory.js` and `.ngstyle.js`)
-for `.d.ts` files with a corresponding `.metadata.json` file. This option defaults to
-`true`. When this option is `false`, factory files are generated only for `.ts` files.
-
-This option should be set to `false` when using factory summaries.
-
-### *fullTemplateTypeCheck*
-
-This option tells the compiler to enable the [binding expression validation](#binding-expression-validation)
-phase of the template compiler which uses TypeScript to validate binding expressions.
-
-This option is `false` by default.
-
-*Note*: It is recommended to set this to `true` as this option will default to `true` in the future.
-
-### *annotateForClosureCompiler*
-
-This option tells the compiler to use [Tsickle](https://github.com/angular/tsickle) to annotate the emitted
-JavaScript with [JsDoc](http://usejsdoc.org/) comments needed by the
-[Closure Compiler](https://github.com/google/closure-compiler). This option defaults to `false`.
-
-### *annotationsAs*
-
-Use this option to modify how the Angular specific annotations are emitted to improve tree-shaking. Non-Angular
-annotations and decorators are unaffected. Default is `static fields`.
-
-value           | description
-----------------|-------------------------------------------------------------
-`decorators`    | Leave the Decorators in-place. This makes compilation faster. TypeScript will emit calls to the __decorate helper.  Use `--emitDecoratorMetadata` for runtime reflection.  However, the resulting code will not properly tree-shake.
-`static fields` | Replace decorators with a static field in the class. Allows advanced tree-shakers like [Closure Compiler](https://github.com/google/closure-compiler) to remove unused classes.
-
-### *trace*
-
-This tells the compiler to print extra information while compiling templates.
-
-### *disableExpressionLowering*
-
-The Angular template compiler transforms code that is used, or could be used, in an annotation
-to allow it to be imported from template factory modules. See
-[metadata rewriting](#metadata-rewriting) for more information.
-
-Setting this option to `false` disables this rewriting, requiring the rewriting to be
-done manually.
-
-### *preserveWhitespaces*
-
-This option tells the compiler whether to remove blank text nodes from compiled templates.
-As of v6, this option is `false` by default, which results in smaller emitted template factory modules.
-
-### *allowEmptyCodegenFiles*
-
-Tells the compiler to generate all the possible generated files even if they are empty. This option is
-`false` by default. This is an option used by `bazel` build rules and is needed to simplify
-how `bazel` rules track file dependencies. It is not recommended to use this option outside of the `bazel`
-rules.
-
-### *enableIvy*
-
-Tells the compiler to generate definitions using the Render3 style code generation. This option defaults to `false`.
-
-Not all features are supported with this option enabled. It is only supported
-for experimentation and testing of Render3 style code generation.
-
-*Note*: Is it not recommended to use this option as it is not yet feature complete with the Render2 code generation.
-
-
-## Angular Metadata and AOT
-
-The Angular **AOT compiler** extracts and interprets **metadata** about the parts of the application that Angular is supposed to manage.
-
-Angular metadata tells Angular how to construct instances of your application classes and interact with them at runtime.
-
-You specify the metadata with **decorators** such as `@Component()` and `@Input()`.
-You also specify metadata implicitly in the constructor declarations of these decorated classes.
-
-In the following example, the `@Component()` metadata object and the class constructor tell Angular how to create and display an instance of `TypicalComponent`.
+次の例では、`@Component()` メタデータオブジェクトとクラスコンストラクターは Angular に `TypicalComponent` のインスタンスを作成し表示する方法を伝えます。
 
 ```typescript
 @Component({
@@ -271,71 +107,130 @@ export class TypicalComponent {
 }
 ```
 
-The Angular compiler extracts the metadata _once_ and generates a _factory_ for `TypicalComponent`.
-When it needs to create a `TypicalComponent` instance, Angular calls the factory, which produces a new visual element, bound to a new instance of the component class with its injected dependency.
+Angular コンパイラはメタデータ _once_ を抽出し、 `TypicalComponent` に対して _factory_ を生成します。
+`TypicalComponent` インスタンスを作成する必要があるとき、Angular はファクトリを呼び出します。ファクトリは注入された依存関係をもつコンポーネントクラスの新しいインスタンスにバインドされた新しいビジュアル要素を生成します。
 
-## Metadata restrictions
+## メタデータの制限
 
-You write metadata in a _subset_ of TypeScript that must conform to the following general constraints:
+TypeScript の _subset_ にメタデータを記述します。これは、次の一般的な制約に従う必要があります。
 
-1. Limit [expression syntax](#expression-syntax) to the supported subset of JavaScript.
-2. Only reference exported symbols after [code folding](#folding).
-3. Only call [functions supported](#supported-functions) by the compiler.
-4. Decorated and data-bound class members must be public.
+1. [式の構文](#expression-syntax) をサポートされている JavaScript のサブセットに制限します
+2. [コード折りたたみ](#folding) の後にエクスポートされたシンボルだけを参照します
+3. コンパイラによって[サポートされている機能](#supported-functions)だけを呼び出します
+4. 装飾されデータバインドされたクラスメンバーはパブリックでなければなりません
 
-The next sections elaborate on these points.
+次のセクションではこれらの点について詳しく説明します。
 
-## How AOT works
+## AOT の仕組み
 
-It helps to think of the AOT compiler as having two phases: a code analysis phase in which it simply records a representation of the source; and a code generation phase in which the compiler's `StaticReflector` handles the interpretation as well as places restrictions on what it interprets.
+2 つのフェーズにすると AOT コンパイラについて考えるのに役立ちます。コード分析フェーズで、ソースの表現を単純に記録します。そして、コード生成フェーズでは、コンパイラの `StaticReflector` が解釈を処理し、それが解釈するものに制限を置きます。
 
-## Phase 1: analysis
+## フェーズ 1: 分析
 
-The TypeScript compiler does some of the analytic work of the first phase. It emits the `.d.ts` _type definition files_ with type information that the AOT compiler needs to generate application code.
+TypeScript コンパイラは、最初のフェーズの分析作業の一部を行います。AOT コンパイラがアプリケーションコードを生成するために必要な型情報をもつ `.d.ts` _型定義ファイル_ を発行します。
 
-At the same time, the AOT **_collector_** analyzes the metadata recorded in the Angular decorators and outputs metadata information in **`.metadata.json`** files, one per `.d.ts` file.
+同時に、AOT **_collector_** は Angular デコレーターに記録されたメタデータを分析し、メタデータ情報を **`.metadata.json`** ファイルに出力します。
 
-You can think of `.metadata.json` as a diagram of the overall structure of a decorator's metadata, represented as an [abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
+`.metadata.json` は、[抽象構文木 (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として表されるデコレーターのメタデータの全体的な構造の図と考えることができます。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
-Angular's [schema.ts](https://github.com/angular/angular/blob/master/packages/compiler-cli/src/metadata/schema.ts)
-describes the JSON format as a collection of TypeScript interfaces.
+Angular の [schema.ts](https://github.com/angular/angular/blob/master/packages/compiler-cli/src/metadata/schema.ts)
+には、TypeScript インターフェースの集まりとして JSON 形式が記述されています。
 
 </div>
 
 {@a expression-syntax}
-### Expression syntax
+### 式の構文
 
-The _collector_ only understands a subset of JavaScript.
-Define metadata objects with the following limited syntax:
+_collector_ は JavaScript のサブセットしか理解できません。
+次の限られた構文でメタデータオブジェクトを定義します。
 
-Syntax                             | Example
------------------------------------|-----------------------------------
-Literal object                     | `{cherry: true, apple: true, mincemeat: false}`
-Literal array                      | `['cherries', 'flour', 'sugar']`
-Spread in literal array            | `['apples', 'flour', ...the_rest]`
-Calls                              | `bake(ingredients)`
-New                                | `new Oven()`
-Property access                    | `pie.slice`
-Array index                        | `ingredients[0]`
-Identifier reference               | `Component`
-A template string                  | <code>&#96;pie is ${multiplier} times better than cake&#96;</code>
-Literal string                     | `'pi'`
-Literal number                     | `3.14153265`
-Literal boolean                    | `true`
-Literal null                       | `null`
-Supported prefix operator          | `!cake`
-Supported Binary operator          | `a + b`
-Conditional operator               | `a ? b : c`
-Parentheses                        | `(a + b)`
+<style>
+  td, th {vertical-align: top}
+</style>
 
-If an expression uses unsupported syntax, the _collector_ writes an error node to the `.metadata.json` file. The compiler later reports the error if it needs that
-piece of metadata to generate the application code.
+<table>
+  <tr>
+    <th>構文</th>
+    <th>例</th>
+  </tr>
+  <tr>
+    <td>オブジェクトリテラル</td>
+    <td><code>{cherry: true, apple: true, mincemeat: false}</code></td>
+  </tr>
+  <tr>
+    <td>配列リテラル</td>
+    <td><code>['cherries', 'flour', 'sugar']</code></td>
+  </tr>
+  <tr>
+    <td>拡張配列リテラル</td>
+    <td><code>['apples', 'flour', ...the_rest]</code></td>
+  </tr>
+   <tr>
+    <td>コール</td>
+    <td><code>bake(ingredients)</code></td>
+  </tr>
+   <tr>
+    <td>New</td>
+    <td><code>new Oven()</code></td>
+  </tr>
+   <tr>
+    <td>プロパティアクセス</td>
+    <td><code>pie.slice</code></td>
+  </tr>
+   <tr>
+    <td>配列のインデックス</td>
+    <td><code>ingredients[0]</code></td>
+  </tr>
+   <tr>
+    <td>ID 参照</td>
+    <td><code>Component</code></td>
+  </tr>
+   <tr>
+    <td>テンプレート文字列</td>
+    <td><code>`pie is ${multiplier} times better than cake`</code></td>
+   <tr>
+    <td>文字列リテラル</td>
+    <td><code>pi</code></td>
+  </tr>
+   <tr>
+    <td>数値リテラル</td>
+    <td><code>3.14153265</code></td>
+  </tr>
+   <tr>
+    <td>真偽値リテラル</td>
+    <td><code>true</code></td>
+  </tr>
+   <tr>
+    <td>null リテラル</td>
+    <td><code>null</code></td>
+  </tr>
+   <tr>
+    <td>サポートされている接頭演算子</td>
+    <td><code>!cake</code></td>
+  </tr>
+   <tr>
+    <td>サポートされている二項演算子</td>
+    <td><code>a+b</code></td>
+  </tr>
+   <tr>
+    <td>条件演算子</td>
+    <td><code>a ? b : c</code></td>
+  </tr>
+   <tr>
+    <td>括弧</td>
+    <td><code>(a+b)</code></td>
+  </tr>
+</table>
 
-<div class="l-sub-section">
 
- If you want `ngc` to report syntax errors immediately rather than produce a `.metadata.json` file with errors, set the `strictMetadataEmit` option in `tsconfig`.
+式がサポートされていない構文を使う場合、_collector_ はエラーノードを `.metadata.json` ファイルに書き込みます。アプリケーションコードを生成するためにその部分のメタデータが必要な場合、
+コンパイラは後でエラーを報告します。
+
+<div class="alert is-helpful">
+
+ エラーを伴う `.metadata.json` ファイルを生成せずに `ngc` に構文エラーを即座に報告させたい場合は、`tsconfig` の `strictMetadataEmit` オプションを設定してください。
 
 ```
   "angularCompilerOptions": {
@@ -344,18 +239,18 @@ piece of metadata to generate the application code.
  }
  ```
 
-Angular libraries have this option to ensure that all Angular `.metadata.json` files are clean and it is a best practice to do the same when building your own libraries.
+Angular ライブラリはすべての Angular の `.metadata.json` ファイルがクリーンであることを保証するためにこのオプションを持っています、そして自身のライブラリを構築するとき同じことをするのはベストプラクティスです。
 
 </div>
 
 {@a function-expression}
 {@a arrow-functions}
-### No arrow functions
+### アロー関数は使えません
 
-The AOT compiler does not support [function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)
-and [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), also called _lambda_ functions.
+AOTコンパイラは[関数式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/function)および
+_ラムダ_ 関数とも呼ばれる[アロー関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions)をサポートしていません。
 
-Consider the following component decorator:
+次のコンポーネントデコレーターを考えてみましょう。
 
 ```typescript
 @Component({
@@ -364,12 +259,12 @@ Consider the following component decorator:
 })
 ```
 
-The AOT _collector_ does not support the arrow function, `() => new Server()`, in a metadata expression.
-It generates an error node in place of the function.
+AOT _collector_ はメタデータ式ではアロー関数 `() => new Server()` をサポートしません。
+関数の代わりにエラーノードを生成します。
 
-When the compiler later interprets this node, it reports an error that invites you to turn the arrow function into an _exported function_.
+コンパイラが後でこのノードを解釈すると、アロー関数を _exported 関数_ に変換するように促すエラーが報告されます。
 
-You can fix the error by converting to this:
+これを変換することでエラーを修正できます。
 
 ```typescript
 export function serverFactory() {
@@ -382,33 +277,33 @@ export function serverFactory() {
 })
 ```
 
-Beginning in version 5, the compiler automatically performs this rewriting while emitting the `.js` file.
+バージョン 5 以降、コンパイラは `.js` ファイルを出力しながらこの書き換えを自動的に実行します。
 
 {@a function-calls}
-### Limited function calls
+### 限定的関数呼び出し
 
-The _collector_ can represent a function call or object creation with `new` as long as the syntax is valid. The _collector_ only cares about proper syntax.
+_collector_ は、構文が有効である限り、`new` を使って関数呼び出しやオブジェクトの作成を表すことができます。 _collector_ は適切な構文だけを扱います。
 
-But beware. The compiler may later refuse to generate a call to a _particular_ function or creation of a _particular_ object.
-The compiler only supports calls to a small set of functions and will use `new` for only a few designated classes. These functions and classes are in a table of [below](#supported-functions).
+しかし注意してください。コンパイラは後で、_特定の_ 関数の呼び出しや _特定の_ オブジェクトの作成を拒否することがあります。
+コンパイラは少数の関数への呼び出しのみをサポートし、少数の指定クラスに対してのみ `new` を使用します。これらの関数とクラスは[下](#supported-functions)の表にあります。
 
-
-### Folding
+{@a folding}
+### フォールディング
 {@a exported-symbols}
-The compiler can only resolve references to **_exported_** symbols.
-Fortunately, the _collector_ enables limited use of non-exported symbols through _folding_.
+コンパイラは **_exported_** シンボルへの参照しか解決できません。
+幸い、_collector_ は _folding_ を介してエクスポートされていないシンボルの限定的な使用を可能にします。
 
-The _collector_ may be able to evaluate an expression during collection and record the result in the `.metadata.json` instead of the original expression.
+_collector_ はコレクション中に式を評価し、その結果を元の式の代わりに `.metadata.json` に記録することができます。
 
-For example, the _collector_ can evaluate the expression `1 + 2 + 3 + 4` and replace it with the result, `10`.
+たとえば、_collector_ は式 `1 + 2 + 3 + 4` を評価し、それを結果 `10` で置き換えることができます。
 
-This process is called _folding_. An expression that can be reduced in this manner is _foldable_.
+このプロセスは _フォールディング_ と呼ばれます。この方法で縮小できる式は _foldable_ です。
 
 {@a var-declaration}
-The collector can evaluate references to
-module-local `const` declarations and initialized `var` and `let` declarations, effectively removing them from the `.metadata.json` file.
+コレクターはモジュールローカルな `const` 宣言と初期化された `var` と `let` 宣言への参照を評価することができ、
+事実上 `.metadata.json` ファイルからそれらを削除します。
 
-Consider the following component definition:
+次のコンポーネント定義を考えてみてください。
 
 ```typescript
 const template = '<div>{{hero.name}}</div>';
@@ -422,10 +317,10 @@ export class HeroComponent {
 }
 ```
 
-The compiler could not refer to the `template` constant because it isn't exported.
+エクスポートされていないので、コンパイラは `template` 定数を参照できませんでした。
 
-But the _collector_ can _fold_ the `template` constant into the metadata definition by inlining its contents.
-The effect is the same as if you had written:
+しかし _collector_ はその内容をインライン化することで `template` 定数をメタデータ定義に _折り畳む_ ことができます。
+効果はあなたが書いた場合と同じです。
 
 ```typescript
 @Component({
@@ -437,9 +332,9 @@ export class HeroComponent {
 }
 ```
 
-There is no longer a reference to `template` and, therefore, nothing to trouble the compiler when it later interprets the _collector's_ output in `.metadata.json`.
+`template` への参照がなくなり、コンパイラが後で `.metadata.json` の _collector's_ の出力を解釈したときにコンパイラを煩わせることはなくなりました。
 
-You can take this example a step further by including the `template` constant in another expression:
+別の式に `template` 定数を含めることでこの例をさらに一歩進めることができます。
 
 ```typescript
 const template = '<div>{{hero.name}}</div>';
@@ -453,36 +348,99 @@ export class HeroComponent {
 }
 ```
 
-The _collector_ reduces this expression to its equivalent _folded_ string:
+_collector_ はこの式をそれに相当する _folded_ 文字列に変換します。
 
 `'<div>{{hero.name}}</div><div>{{hero.title}}</div>'`.
 
-#### Foldable syntax
+#### 折りたたみ可能なシンタックス
 
-The following table describes which expressions the _collector_ can and cannot fold:
+次の表は、_collector_ がどの式を折りたたむことができるかどうかを示しています。
 
-Syntax                             | Foldable
------------------------------------|-----------------------------------
-Literal object                     | yes
-Literal array                      | yes
-Spread in literal array            | no
-Calls                              | no
-New                                | no
-Property access                    | yes, if target is foldable
-Array index                        | yes, if target and index are foldable
-Identifier reference               | yes, if it is a reference to a local
-A template with no substitutions   | yes
-A template with substitutions      | yes, if the substitutions are foldable
-Literal string                     | yes
-Literal number                     | yes
-Literal boolean                    | yes
-Literal null                       | yes
-Supported prefix operator          | yes, if operand is foldable
-Supported binary operator          | yes, if both left and right are foldable
-Conditional operator               | yes, if condition is foldable
-Parentheses                        | yes, if the expression is foldable
+<style>
+  td, th {vertical-align: top}
+</style>
 
-If an expression is not foldable, the collector writes it to `.metadata.json` as an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for the compiler to resolve.
+<table>
+  <tr>
+    <th>シンタックス</th>
+    <th>折りたたみ可能</th>
+  </tr>
+  <tr>
+    <td>オブジェクトリテラル</td>
+    <td>可能</td>
+  </tr>
+  <tr>
+    <td>配列リテラル</td>
+    <td>可能</td>
+  </tr>
+  <tr>
+    <td>拡張配列リテラル</td>
+    <td>不可</td>
+  </tr>
+   <tr>
+    <td>コール</td>
+    <td>不可</td>
+  </tr>
+   <tr>
+    <td>New</td>
+    <td>不可</td>
+  </tr>
+   <tr>
+    <td>プロパティアクセス</td>
+    <td>可能、ターゲットが折りたたみ式の場合</td>
+  </tr>
+   <tr>
+    <td>配列のインデックス</td>
+    <td>可能、ターゲットとインデックスが折りたたみ式の場合</td>
+  </tr>
+   <tr>
+    <td>ID 参照</td>
+    <td>可能、それがローカルへの参照であれば</td>
+  </tr>
+   <tr>
+    <td>置換のないテンプレート</td>
+    <td>可能</td>
+  </tr>
+   <tr>
+    <td>置換を含むテンプレート</td>
+    <td>可能、代入が折りたたみ式の場合</td>
+  </tr>
+   <tr>
+    <td>文字列リテラル</td>
+    <td>可能</td>
+  </tr>
+   <tr>
+    <td>数値リテラル</td>
+    <td>可能</td>
+  </tr>
+   <tr>
+    <td>真偽値リテラル</td>
+    <td>可能</td>
+  </tr>
+   <tr>
+    <td>null リテラル</td>
+    <td>可能</td>
+  </tr>
+   <tr>
+    <td>サポートされている接頭演算子</td>
+    <td>オペランドが折りたたみ可能ならば可能</td>
+  </tr>
+   <tr>
+    <td>サポートされている二項演算子</td>
+    <td>可能、左右両方が折りたたみ式の場合</td>
+  </tr>
+   <tr>
+    <td>条件演算子</td>
+    <td>可能、条件が折りたたみ式の場合</td>
+  </tr>
+   <tr>
+    <td>括弧</td>
+    <td>可能、式が折りたたみ式の場合</td>
+  </tr>
+</table>
+
+
+式が折りたたみ式ではない場合、コレクタはそれをコンパイラが解決するための [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として `.metadata.json` に書き込みます。
 
 
 ## Phase 2: code generation
@@ -495,7 +453,7 @@ The compiler understands all syntax forms that the _collector_ supports, but it 
 
 The compiler can only reference _exported symbols_.
 
-Decorated component class members must be public. You cannot make an `@Input()` property private or internal.
+Decorated component class members must be public. You cannot make an `@Input()` property private or protected.
 
 Data bound properties must also be public.
 
@@ -522,26 +480,90 @@ The compiler only allows metadata that create instances of the class `InjectionT
 
 The compiler only supports metadata for these Angular decorators.
 
-Decorator         | Module
-------------------|--------------
-`Attribute`       | `@angular/core`
-`Component`       | `@angular/core`
-`ContentChild`    | `@angular/core`
-`ContentChildren` | `@angular/core`
-`Directive`       | `@angular/core`
-`Host`            | `@angular/core`
-`HostBinding`     | `@angular/core`
-`HostListener`    | `@angular/core`
-`Inject`          | `@angular/core`
-`Injectable`      | `@angular/core`
-`Input`           | `@angular/core`
-`NgModule`        | `@angular/core`
-`Optional`        | `@angular/core`
-`Output`          | `@angular/core`
-`Pipe`            | `@angular/core`
-`Self`            | `@angular/core`
-`SkipSelf`        | `@angular/core`
-`ViewChild`       | `@angular/core`
+<style>
+  td, th {vertical-align: top}
+</style>
+
+<table>
+  <tr>
+    <th>Decorator</th>
+    <th>Module</th>
+  </tr>
+    <tr>
+    <td><code>Attribute</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Component</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>ContentChild</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>ContentChildren</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Directive</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Host</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>HostBinding</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>HostListner</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Inject</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Injectable</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Input</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>NgModule</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Optional</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Output</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Pipe</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>Self</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>SkipSelf</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+  <tr>
+    <td><code>ViewChild</code></td>
+    <td><code>@angular/core</code></td>
+  </tr>
+
+  </table>
+
 
 
 ### Macro-functions and macro-static methods
@@ -629,7 +651,7 @@ factory without having to know what the value of `ɵ0` contains.
 The compiler does the rewriting during the emit of the `.js` file. This doesn't rewrite the `.d.ts` file, however, so TypeScript doesn't recognize it as being an export. Thus, it does not pollute the ES module's exported API.
 
 
-## Metadata Errors
+## Metadata errors
 
 The following are metadata errors you may encounter, with explanations and suggested corrections.
 
@@ -1136,8 +1158,8 @@ This error can occur if you use an expression in the `extends` clause of a class
 Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](https://github.com/angular/angular/pull/17712#discussion_r132025495).
 
 -->
-{@a binding-expression-validation}
 
+{@a binding-expression-validation}
   ## Phase 3: binding expression validation
 
   In the validation phase, the Angular template compiler uses the TypeScript compiler to validate the
@@ -1219,7 +1241,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   ### Non-null type assertion operator
 
   Use the [non-null type assertion operator](guide/template-syntax#non-null-assertion-operator)
-  to suppress the `Object is possibly 'undefined'` error when it is incovienent to use
+  to suppress the `Object is possibly 'undefined'` error when it is inconvenient to use
   `*ngIf` or when some constraint in the component ensures that the expression is always
   non-null when the binding expression is interpolated.
 
@@ -1285,12 +1307,220 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
     person?: Person;
   }
   ```
-## Summary
 
-* What the AOT compiler does and why it is important.
-* Why metadata must be written in a subset of JavaScript.
-* What that subset is.
-* Other restrictions on metadata definition.
-* Macro-functions and macro-static methods.
-* Compiler errors related to metadata.
-* Validation of binding expressions
+{@a tsconfig-extends}
+## Configuration inheritance with extends
+Similar to TypeScript Compiler, Angular Compiler also supports `extends` in the `tsconfig.json` on `angularCompilerOptions`. A tsconfig file can inherit configurations from another file using the `extends` property.
+ The `extends` is a top level property parallel to `compilerOptions` and `angularCompilerOptions`. 
+ The configuration from the base file are loaded first, then overridden by those in the inheriting config file.
+ Example:
+```json
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    ...
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": true,
+    ...
+  }
+}
+```
+ More information about tsconfig extends can be found in the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+
+{@a compiler-options}
+## Angular template compiler options
+
+The template compiler options are specified as members of the `"angularCompilerOptions"` object in the `tsconfig.json` file. Specify template compiler options along with the options supplied to the TypeScript compiler as shown here:
+
+    ```json
+    {
+      "compilerOptions": {
+        "experimentalDecorators": true,
+                  ...
+      },
+      "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "preserveWhitespaces": true,
+                  ...
+      }
+  }
+  ```
+
+The following section describes the Angular's template compiler options.
+
+### *enableResourceInlining*
+This option instructs the compiler to replace the `templateUrl` and `styleUrls` property in all `@Component` decorators with inlined contents in `template` and `styles` properties.
+When enabled, the `.js` output of `ngc` will have no lazy-loaded `templateUrl` or `styleUrls`.
+
+### *skipMetadataEmit*
+
+This option tells the compiler not to produce `.metadata.json` files.
+The option is `false` by default.
+
+`.metadata.json` files contain information needed by the template compiler from a `.ts`
+file that is not included in the `.d.ts` file produced by the TypeScript compiler. This information contains,
+for example, the content of annotations (such as a component's template), which TypeScript
+emits to the `.js` file but not to the `.d.ts` file.
+
+This option should be set to `true` if you are using TypeScript's `--outFile` option, because the metadata files
+are not valid for this style of TypeScript output. It is not recommended to use `--outFile` with
+Angular. Use a bundler, such as [webpack](https://webpack.js.org/), instead.
+
+This option can also be set to `true` when using factory summaries because the factory summaries
+include a copy of the information that is in the `.metadata.json` file.
+
+### *strictMetadataEmit*
+
+This option tells the template compiler to report an error to the `.metadata.json`
+file if `"skipMetadataEmit"` is `false`. This option is `false` by default. This should only be used when `"skipMetadataEmit"` is `false` and `"skipTemplateCodeGen"` is `true`.
+
+This option is intended to validate the `.metadata.json` files emitted for bundling with an `npm` package. The validation is strict and can emit errors for metadata that would never produce an error when used by the template compiler. You can choose to suppress the error emitted by this option for an exported symbol by including `@dynamic` in the comment documenting the symbol.
+
+It is valid for `.metadata.json` files to contain errors. The template compiler reports these errors
+if the metadata is used to determine the contents of an annotation. The metadata
+collector cannot predict the symbols that are designed for use in an annotation, so it will preemptively
+include error nodes in the metadata for the exported symbols. The template compiler can then use the error
+nodes to report an error if these symbols are used. If the client of a library intends to use a symbol in an annotation, the template compiler will not normally report
+this until the client uses the symbol. This option allows detecting these errors during the build phase of
+the library and is used, for example, in producing Angular libraries themselves.
+
+### *skipTemplateCodegen*
+
+This option tells the compiler to suppress emitting `.ngfactory.js` and `.ngstyle.js` files. When set,
+this turns off most of the template compiler and disables reporting template diagnostics.
+This option can be used to instruct the
+template compiler to produce `.metadata.json` files for distribution with an `npm` package while
+avoiding the production of `.ngfactory.js` and `.ngstyle.js` files that cannot be distributed to
+`npm`.
+
+### *strictInjectionParameters*
+
+When set to `true`, this options tells the compiler to report an error for a parameter supplied
+whose injection type cannot be determined. When this option is not provided or is `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved will
+produce a warning.
+
+*Note*: It is recommended to change this option explicitly to `true` as this option will default to `true` in the future.
+
+### *flatModuleOutFile*
+
+When set to `true`, this option tells the template compiler to generate a flat module
+index of the given file name and the corresponding flat module metadata. Use this option when creating
+flat modules that are packaged similarly to `@angular/core` and `@angular/common`. When this option
+is used, the `package.json` for the library should refer
+to the generated flat module index instead of the library index file. With this
+option only one `.metadata.json` file is produced, which contains all the metadata necessary
+for symbols exported from the library index. In the generated `.ngfactory.js` files, the flat
+module index is used to import symbols that includes both the public API from the library index
+as well as shrowded internal symbols.
+
+By default the `.ts` file supplied in the `files` field is assumed to be the library index.
+If more than one `.ts` file is specified, `libraryIndex` is used to select the file to use.
+If more than one `.ts` file is supplied without a `libraryIndex`, an error is produced. A flat module
+index `.d.ts` and `.js` will be created with the given `flatModuleOutFile` name in the same
+location as the library index `.d.ts` file. For example, if a library uses the
+`public_api.ts` file as the library index of the module, the `tsconfig.json` `files` field
+would be `["public_api.ts"]`. The `flatModuleOutFile` options could then be set to, for
+example `"index.js"`, which produces `index.d.ts` and  `index.metadata.json` files. The
+library's `package.json`'s `module` field would be `"index.js"` and the `typings` field
+would be `"index.d.ts"`.
+
+### *flatModuleId*
+
+This option specifies the preferred module id to use for importing a flat module.
+References generated by the template compiler will use this module name when importing symbols
+from the flat module.
+This is only meaningful when `flatModuleOutFile` is also supplied. Otherwise the compiler ignores
+this option.
+
+### *generateCodeForLibraries*
+
+This option tells the template compiler to generate factory files (`.ngfactory.js` and `.ngstyle.js`)
+for `.d.ts` files with a corresponding `.metadata.json` file. This option defaults to
+`true`. When this option is `false`, factory files are generated only for `.ts` files.
+
+This option should be set to `false` when using factory summaries.
+
+### *fullTemplateTypeCheck*
+
+This option tells the compiler to enable the [binding expression validation](#binding-expression-validation)
+phase of the template compiler which uses TypeScript to validate binding expressions.
+
+This option is `false` by default.
+
+*Note*: It is recommended to set this to `true` because this option will default to `true` in the future.
+
+### *annotateForClosureCompiler*
+
+This option tells the compiler to use [Tsickle](https://github.com/angular/tsickle) to annotate the emitted
+JavaScript with [JSDoc](http://usejsdoc.org/) comments needed by the
+[Closure Compiler](https://github.com/google/closure-compiler). This option defaults to `false`.
+
+### *annotationsAs*
+
+Use this option to modify how the Angular specific annotations are emitted to improve tree-shaking. Non-Angular
+annotations and decorators are unaffected. Default is `static fields`.
+
+<style>
+  td, th {vertical-align: top}
+</style>
+
+<table>
+  <tr>
+    <th>Value</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>decorators</code></td>
+    <td>Leave the decorators in place. This makes compilation faster. TypeScript will emit calls to the __decorate helper.  Use <code>--emitDecoratorMetadata</code> for runtime reflection.  However, the resulting code will not properly tree-shake.</td>
+  </tr>
+  <tr>
+    <td><code>static fields</code></td>
+    <td>Replace decorators with a static field in the class. Allows advanced tree-shakers like
+    <a href="https://github.com/google/closure-compiler">Closure compiler</a> to remove unused classes.</td>
+  </tr>
+  </table>
+
+
+### *trace*
+
+This tells the compiler to print extra information while compiling templates.
+
+### *enableLegacyTemplate*
+
+Use of  the `<template>` element was deprecated starting in Angular 4.0 in favor of using
+`<ng-template>` to avoid colliding with the DOM's element of the same name. Setting this option to
+`true` enables the use of the deprecated `<template>` element. This option
+is `false` by default. This option might be required by some third-party Angular libraries.
+
+### *disableExpressionLowering*
+
+The Angular template compiler transforms code that is used, or could be used, in an annotation
+to allow it to be imported from template factory modules. See
+[metadata rewriting](#metadata-rewriting) for more information.
+
+Setting this option to `false` disables this rewriting, requiring the rewriting to be
+done manually.
+
+### *disableTypeScriptVersionCheck*
+
+When `true`, this option tells the compiler not to check the TypeScript version.
+The compiler will skip checking and will not error out when an unsupported version of TypeScript is used.
+Setting this option to `true` is not recommended because unsupported versions of TypeScript might have undefined behavior.
+
+This option is `false` by default.
+
+### *preserveWhitespaces*
+
+This option tells the compiler whether to remove blank text nodes from compiled templates.
+As of v6, this option is `false` by default, which results in smaller emitted template factory modules.
+
+### *allowEmptyCodegenFiles*
+
+Tells the compiler to generate all the possible generated files even if they are empty. This option is
+`false` by default. This is an option used by the Bazel build rules and is needed to simplify
+how Bazel rules track file dependencies. It is not recommended to use this option outside of the Bazel
+rules.
+

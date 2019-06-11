@@ -50,7 +50,7 @@ Angular Language Serviceは現在、[Visual Studio Code](https://code.visualstud
 
 Visual Studio Codeでは、左側のメニューペインの下のアイコンからアクセスできるストアから
 Angular Language Serviceをインストールします。
-また、VS Quick Open（⌘+P）を使用して拡張子を検索することもできます。
+また、VS Quick Open (⌘+P on Mac, CTRL+P on Windows) を使用して拡張子を検索することもできます。
 それを開いたら、次のコマンドを入力してください: 
 
 ```sh

@@ -15,8 +15,15 @@
 アプリ内のどこでも`HttpClient`を利用可能にするには
 
 * ルートの`AppModule`を開く
-* `@angular/common/http`から`HttpClientModule`をインポート
-* `@NgModule.imports`の配列に`HttpClientModule`を追加
+* `@angular/common/http`から`HttpClientModule`をインポートする
+
+<code-example
+  path="toh-pt6/src/app/app.module.ts"
+  region="import-http-client"
+  header="src/app/app.module.ts (Http Client import)">
+</code-example>
+
+* `@NgModule.imports`の配列に追加する
 
 ## データサーバーをシミュレートする
 
@@ -52,11 +59,11 @@ _npm_から*インメモリWeb API*をインストールします。
 <code-example 
   path="toh-pt6/src/app/app.module.ts" 
   region="import-in-mem-stuff" 
-  title="src/app/app.module.ts (インメモリ Web API をインポート)">
+  header="src/app/app.module.ts (インメモリ Web API をインポート)">
 </code-example>
 
 `HttpClientInMemoryWebApiModule`を`@NgModule.imports`の配列に追加します。
-&mdash;_`HttpClient`をインポートしたあとに_&mdash;
+&mdash;_`HttpClientModule`をインポートしたあとに_&mdash;
 さらにそれを`InMemoryDataService`で設定します。
 
 <code-example   
@@ -66,17 +73,24 @@ _npm_から*インメモリWeb API*をインストールします。
 
 `forRoot()`メソッドはインメモリデータベースを用意する`InMemoryDataService`クラスを引数に取ります。
 
-_Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-data.service.ts`を作ります。
+`src/app/in-memory-data.service.ts` ファイルは次のコマンドで生成されます:
 
-<code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" title="src/app/in-memory-data.service.ts" linenums="false"></code-example>
+<code-example language="sh" class="code-shell">
+  ng generate service InMemoryData
+</code-example>
 
-このファイルは`mock-heros.ts`の置き換えなので、`mock-heros.ts`は削除してしまっても問題ありません。
+このクラスは次のような内容です:
+
+<code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" header="src/app/in-memory-data.service.ts" linenums="false"></code-example>
+
+このファイルは`mock-heroes.ts`の置き換えなので、`mock-heroes.ts`は削除してしまっても問題ありません。
 
 サーバーが準備されたら、*インメモリWeb API*を外せば、アプリのリクエストはサーバーに送信されます。
 
 それでは`HttpClient`の話に戻りましょう。
 
 {@a import-heroes}
+{@a heroes-and-http}
 ## ヒーローとHTTP
 
 必要なHTTPシンボルをいくつかインポートします。
@@ -84,10 +98,10 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
 <code-example
   path="toh-pt6/src/app/hero.service.ts" 
   region="import-httpclient" 
-  title="src/app/hero.service.ts (HTTPシンボルをインポート)">
+  header="src/app/hero.service.ts (HTTPシンボルをインポート)">
 </code-example>
 
-`HttpClient`をプライベートプロパティ`http`にコンストラクタで注入します。
+`HttpClient`をプライベートプロパティ`http`にコンストラクターで注入します。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
@@ -102,7 +116,9 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
   region="log" >
 </code-example>
 
-`heroesUrl`をサーバー上のヒーローリソースのアドレスで定義します。
+サーバー上のヒーローリソースのアドレスで`:base/:collectionName`の形式の `heroesUrl` を定義します。
+ここで `base` はリクエストが行われるリソースであり、
+`collectionName` は `in-memory-data-service.ts`のヒーローデータオブジェクトです。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
@@ -116,7 +132,7 @@ _Tour of Heroes_サンプルでは次のような内容の`src/app/in-memory-dat
 <code-example 
   path="toh-pt4/src/app/hero.service.ts" 
   region="getHeroes-1" 
-  title="src/app/hero.service.ts (RxJSの'of()'を使ったgetHeroes)">
+  header="src/app/hero.service.ts (RxJSの'of()'を使ったgetHeroes)">
 </code-example>
 
 このメソッドを`HttpClient`を使うように改修します。
@@ -154,7 +170,7 @@ HTTPはリクエスト/レスポンスプロトコルです。
 JSONデータの形はサーバーのデータAPIにより決まります。
 _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 他のAPIでは取得したいデータがオブジェクトの中に埋もれているかもしれません。
 その場合は、RxJSの`map`を使って`Observable`を処理してデータを掘り出します。
@@ -191,7 +207,7 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
 #### _handleError_
 
-次の`errorHandler()`は数々の`HeroService`メソッドで共有されるので、さまざまな要件を満たすために一般化されています。
+次の`handleError()`は数々の`HeroService`メソッドで共有されるので、さまざまな要件を満たすために一般化されています。
 
 エラーを直接ハンドリングするかわりに、処理に失敗した処理の名前と、安全な返却値の両方で構成された
 _error handler_関数を`catchError`に返します。
@@ -205,7 +221,7 @@ _error handler_関数を`catchError`に返します。
 動作し続けるための安全な値を返却します。
 
 サービスの各メソッドはそれぞれ違う種類の`Observable`な結果を返すため、
-`errorHandler()`は型パラメーターを取り、アプリが期待する型の値を返却できます。
+`handleError()`は型パラメーターを取り、アプリが期待する型の値を返却できます。
 
 ### _Observable_に侵入
 
@@ -224,11 +240,13 @@ _error handler_関数を`catchError`に返します。
 
 ### IDでヒーローを取得する
 
-ほとんどのWeb APIは `api/hero/:id` (`api/hero/11`のような) 形式のリクエストで_IDにより取得する_ことをサポートしています。
+ほとんどのWeb APIは、 `：baseURL/:id`の形式で_idによる取得する_リクエストをサポートしています。
+
+ここで_base URL_は[Heroes and HTTP](tutorial/toh-pt6#heroes-and-http)セクションで定義された `heroesURL` （`api/heroes`）であり、 _id_ は取得したいヒーローの番号です。たとえば、 `api/heroes/11` のようになります。
 
 `HeroService.getHero()`メソッドを追加して、そのようなリクエストができるようにしましょう:
 
-<code-example path="toh-pt6/src/app/hero.service.ts" region="getHero" title="src/app/hero.service.ts"></code-example>
+<code-example path="toh-pt6/src/app/hero.service.ts" region="getHero" header="src/app/hero.service.ts"></code-example>
 
 `getHeroes()`とくらべて3つ重要な違いがあります。
 
@@ -247,11 +265,11 @@ _ヒーロー詳細_画面で、ヒーローの名前を編集します。
 
 ヒーロー詳細ページのテンプレートの終わりに、新しい`save()`というメソッドを呼び出す保存ボタンを追加します。
 
-<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.html" region="save" title="src/app/hero-detail/hero-detail.component.html (保存)"></code-example>
+<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.html" region="save" header="src/app/hero-detail/hero-detail.component.html (保存)"></code-example>
 
 hero serviceの`updateHero()`を呼び出して名前の変更を永続化したのち、前のビューに戻る`save()`メソッドを追加しましょう。
 
-<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.ts" region="save" title="src/app/hero-detail/hero-detail.component.ts (保存)"></code-example>
+<code-example path="toh-pt6/src/app/hero-detail/hero-detail.component.ts" region="save" header="src/app/hero-detail/hero-detail.component.ts (保存)"></code-example>
 
 #### _HeroService.updateHero()_の追加
 
@@ -261,7 +279,7 @@ hero serviceの`updateHero()`を呼び出して名前の変更を永続化した
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="updateHero" 
-  title="src/app/hero.service.ts (更新)">
+  header="src/app/hero.service.ts (更新)">
 </code-example>
 
 `HttpClient.put()`メソッドは3つのパラメーターを取ります。
@@ -278,10 +296,11 @@ URLは変わりません。
 
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
-  region="http-options">
+  region="http-options"
+  header="src/app/hero.service.ts">
 </code-example>
 
-ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存し、"go back"ボタンをクリックしてください。
+ブラウザをリフレッシュして、ヒーローの名前を変更して、変更を保存しましょう。以前のビューへの移動は、 `HeroDetailComponent` に定義された `save()` メソッドで実装されています。
 リストに変更された名前のヒーローが現れているはずです。
 
 ## 新しいヒーローを追加する
@@ -291,11 +310,11 @@ URLは変わりません。
 
 下記を`HeroesComponent`のテンプレートの先頭に挿入します。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="add" title="src/app/heroes/heroes.component.html (追加)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="add" header="src/app/heroes/heroes.component.html (追加)"></code-example>
 
 クリックイベントに反応し、コンポーネントのクリックハンドラーが呼び出され、そのあと次の名前の入力を可能にするためにinputフィールドをクリアします。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="add" title="src/app/heroes/heroes.component.ts (追加)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="add" header="src/app/heroes/heroes.component.ts (追加)"></code-example>
 
 与えられた名前が空文字でない場合、ハンドラーは名前から(`id`だけが抜けた)`Hero`-ライクなオブジェクトを作成し、
 サービスの`addHero()`メソッドに渡します。
@@ -308,7 +327,7 @@ URLは変わりません。
 
 `HeroService`クラスに次のメソッド`addHero()`を追加します。
 
-<code-example path="toh-pt6/src/app/hero.service.ts" region="addHero" title="src/app/hero.service.ts (addHero)"></code-example>
+<code-example path="toh-pt6/src/app/hero.service.ts" region="addHero" header="src/app/hero.service.ts (addHero)"></code-example>
 
 `HeroService.addHero()`は`updateHero`と2つ違う点があります。
 
@@ -328,14 +347,14 @@ URLは変わりません。
 
 ヒーローたちのリストのHTMLは次のようになるはずです。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="list" title="src/app/heroes/heroes.component.html (ヒーローのリスト)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.html" region="list" header="src/app/heroes/heroes.component.html (ヒーローのリスト)"></code-example>
 
 削除ボタンをヒーロー項目の右寄りに配置するためには、`heroes.component.css`にCSSを追加します。
 どのようなCSSになるのかは、下部の[最終的なコードレビュー](#heroescomponent)で見ることができます。
 
 `delete()`ハンドラーをコンポーネントに追加しましょう。
 
-<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="delete" title="src/app/heroes/heroes.component.ts (削除)"></code-example>
+<code-example path="toh-pt6/src/app/heroes/heroes.component.ts" region="delete" header="src/app/heroes/heroes.component.ts (削除)"></code-example>
 
 削除処理は`HeroService`に任されますが、コンポーネントでもそれ自身がもつヒーローリストの更新処理は必要です。
 コンポーネント側の`delete()`メソッドは`HeroService`がサーバーとの処理を成功するものと予測して、
@@ -359,7 +378,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 次のように`HeroService`にメソッド`deleteHero()`を追加しましょう。
 
-<code-example path="toh-pt6/src/app/hero.service.ts" region="deleteHero" title="src/app/hero.service.ts (削除)"></code-example>
+<code-example path="toh-pt6/src/app/hero.service.ts" region="deleteHero" header="src/app/hero.service.ts (削除)"></code-example>
 
 次に注目しましょう
 
@@ -387,7 +406,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 <code-example 
   path="toh-pt6/src/app/hero.service.ts" 
   region="searchHeroes"
-  title="src/app/hero.service.ts">
+  header="src/app/hero.service.ts">
 </code-example>
 
 検索ワードがない場合、このメソッドはただちに空の配列を返します。
@@ -399,7 +418,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 `DashboardComponent`のテンプレートを開いて、ヒーロー検索のエレメント、`<app-hero-search>`をテンプレートの下部に追加します。
 
 <code-example 
-  path="toh-pt6/src/app/dashboard/dashboard.component.html" title="src/app/dashboard/dashboard.component.html" linenums="false">
+  path="toh-pt6/src/app/dashboard/dashboard.component.html" header="src/app/dashboard/dashboard.component.html" linenums="false">
 </code-example>
 
 このテンプレートは`HeroesComponent`のテンプレートの`*ngFor`にとても似ています。
@@ -417,15 +436,15 @@ CLIで`HeroSearchComponent`を作ります。
   ng generate component hero-search
 </code-example>
 
-CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコンポーネントを追加します。
+CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarationsにそのコンポーネントを追加します。
 
 作成された`HeroSearchComponent`のテンプレートを次のようにテキストボックスと、マッチした検索結果一覧を表示するように書き換えます。
 
-<code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" title="src/app/hero-search/hero-search.component.html"></code-example>
+<code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" header="src/app/hero-search/hero-search.component.html"></code-example>
 
 下にある[final code review](#herosearchcomponent)にあるようにプライベートCSSスタイルを`hero-search.component.css`を追加します。
 
-ユーザーが検索ボックス内でタイプすると、*keyup*イベントのバインディングが
+ユーザーが検索ボックス内でタイプすると、*input*イベントのバインディングが
 コンポーネントの`search()`メソッドを呼び出して、検索ボックス内の新しい値を渡します。
 
 {@a asyncpipe}
@@ -449,7 +468,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 生成された`HeroSearchComponent`クラスとメタデータを次のように置き換えます。
 
-<code-example path="toh-pt6/src/app/hero-search/hero-search.component.ts" title="src/app/hero-search/hero-search.component.ts"></code-example>
+<code-example path="toh-pt6/src/app/hero-search/hero-search.component.ts" header="src/app/hero-search/hero-search.component.ts"></code-example>
 
 `heroes$`の宣言が`Observable`であることに注意しましょう。
 <code-example 
@@ -471,7 +490,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 また、`search()`メソッドで実行している様に、`next(value)`メソッドを呼ぶことで、`Observable`に値をpushすることができます。
 
-`search()`メソッドはテキストボックスの`keystroke`のイベントバインディングにより呼び出されます。
+`search()`メソッドはテキストボックスの`input`のイベントバインディングにより呼び出されます。
 
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" region="input"></code-example>
 
@@ -504,7 +523,7 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 * `switchMap()`は`debounce`と`distinctUntilChanged`をとおり抜けた各検索語について検索サービスを呼び出します。
 これはそれまでの検索のobservableをキャンセルし、最新の検索サービスのobservableだけを返します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
   
 
   [switchMap operator](http://www.learnrxjs.io/operators/transformation/switchmap.html)により
@@ -544,15 +563,15 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 <code-tabs>
   <code-pane 
-    title="hero.service.ts" 
+    header="hero.service.ts" 
     path="toh-pt6/src/app/hero.service.ts">
   </code-pane>
   <code-pane 
-    title="in-memory-data.service.ts"
+    header="in-memory-data.service.ts"
     path="toh-pt6/src/app/in-memory-data.service.ts">
   </code-pane>
   <code-pane 
-    title="app.module.ts" 
+    header="app.module.ts" 
     path="toh-pt6/src/app/app.module.ts">
   </code-pane>
 </code-tabs>
@@ -562,15 +581,15 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 <code-tabs>
   <code-pane 
-    title="heroes/heroes.component.html" 
+    header="heroes/heroes.component.html" 
     path="toh-pt6/src/app/heroes/heroes.component.html">
   </code-pane>
   <code-pane 
-    title="heroes/heroes.component.ts" 
+    header="heroes/heroes.component.ts" 
     path="toh-pt6/src/app/heroes/heroes.component.ts">
   </code-pane>
   <code-pane 
-    title="heroes/heroes.component.css" 
+    header="heroes/heroes.component.css" 
     path="toh-pt6/src/app/heroes/heroes.component.css">
   </code-pane>
 </code-tabs>
@@ -580,12 +599,22 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 <code-tabs>
   <code-pane 
-    title="hero-detail/hero-detail.component.html"
+    header="hero-detail/hero-detail.component.html"
     path="toh-pt6/src/app/hero-detail/hero-detail.component.html">
   </code-pane>
   <code-pane 
-    title="hero-detail/hero-detail.component.ts" 
+    header="hero-detail/hero-detail.component.ts" 
     path="toh-pt6/src/app/hero-detail/hero-detail.component.ts">
+  </code-pane>
+</code-tabs>
+
+{@a dashboardcomponent}
+#### _DashboardComponent_
+
+<code-tabs>
+  <code-pane 
+    header="src/app/dashboard/dashboard.component.html"
+    path="toh-pt6/src/app/dashboard/dashboard.component.html">
   </code-pane>
 </code-tabs>
 
@@ -594,15 +623,15 @@ CLIは`HeroSearchComponent`を作成し、`AppModule`のdeclarationsにそのコ
 
 <code-tabs>
   <code-pane 
-    title="hero-search/hero-search.component.html"
+    header="hero-search/hero-search.component.html"
     path="toh-pt6/src/app/hero-search/hero-search.component.html">
   </code-pane>
   <code-pane 
-    title="hero-search/hero-search.component.ts"
+    header="hero-search/hero-search.component.ts"
     path="toh-pt6/src/app/hero-search/hero-search.component.ts">
   </code-pane>
   <code-pane 
-    title="hero-search/hero-search.component.css"
+    header="hero-search/hero-search.component.css"
     path="toh-pt6/src/app/hero-search/hero-search.component.css">
   </code-pane>
 </code-tabs>

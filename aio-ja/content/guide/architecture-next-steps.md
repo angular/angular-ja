@@ -1,48 +1,54 @@
-# Next steps: tools and techniques
+# 次のステップ: ツールとテクニック
 
-Once you have understood the basic building blocks, you can begin to learn more about the features and tools that are available to help you develop and deliver Angular applications.  Angular provides a lot more features and services that are covered in this documentation.
+基本的なAngularの構成ブロックを理解したあと、
+Angularアプリケーションの開発と提供に役立つ機能とツールの詳細を学ぶことができます。
+ここにいくつかの重要な機能があります。
 
-#### Responsive programming tools
+## レスポンシブプログラミング
 
-   * [Lifecycle hooks](guide/lifecycle-hooks): Tap into key moments in the lifetime of a component, from its creation to its destruction, by implementing the lifecycle hook interfaces.
+* [ライフサイクル・フック](guide/lifecycle-hooks): ライフサイクル・フックインターフェースを実装することで、コンポーネントの作成から破棄まで、コンポーネントの存続期間中の重要な瞬間に触れることができます。
 
-   * [Observables and event processing](guide/observables): How to use observables with components and services to publish and subscribe to messages of any type, such as user-interaction events and asynchronous operation results.
+* [Observable とイベント処理](guide/observables): コンポーネントやサービスで observable を使用して、ユーザーインタラクションイベントや非同期操作結果など、あらゆるタイプのメッセージをパブリッシュして購読する方法です。
 
-#### Client-server interaction tools
+## クライアントとサーバーのインタラクション
 
-  * [HTTP](guide/http): Communicate with a server to get data, save data, and invoke server-side actions with an HTTP client.
+* [HTTP](guide/http): HTTP クライアントを使用してサーバーと通信してデータを取得、保存し、サーバー側のアクションを呼び出します。
 
-  * [Server-side Rendering](guide/universal): Angular Universal generates static application pages on the server through server-side rendering (SSR). This allows you to run your Angular app on the server in order to improve performance and show the first page quickly on mobile and low-powered devices, and also facilitate web crawlers.
+* [Server-side Rendering](guide/universal): Angular Universal は、サーバーサイドレンダリング(SSR)によってサーバー上に静的アプリケーションページを生成します。これにより、パフォーマンスを向上させ、モバイルデバイスや低パワーのデバイスで最初のページをすばやく表示し、Webクローラを手助けするために、Angular アプリケーションをサーバー上で実行できます。
 
-  * [Service Workers](guide/service-worker-intro): A service worker is a script that runs in the web browser and manages caching for an application. Service workers function as a network proxy. They intercept outgoing HTTP requests and can, for example, deliver a cached response if one is available. You can significantly improve the user experience by using a service worker to reduce dependency on the network.
+* [Service Workers](guide/service-worker-intro): service worker を使用してネットワークへの依存を減らし
+ユーザー体験を大幅に改善します。
 
-#### Domain-specific libraries
+## ドメイン固有のライブラリ
 
-   * [Animations](guide/animations): Animate component behavior
-without deep knowledge of animation techniques or CSS with Angular's animation library.
+* [アニメーション](guide/animations): Angularのアニメーションライブラリを使用して、アニメーションテクニックやCSSの詳細な知識なしに
+コンポーネントの動作をアニメートできます。
 
-   * [Forms](guide/forms): Support complex data entry scenarios with HTML-based validation and dirty checking.
+* [フォーム](guide/forms): HTML ベースの検証とダーティーチェックを使用して、複雑なデータ入力シナリオをサポートします。
 
-#### Support for the development cycle
+## 開発サイクルのサポート
 
-   * [Testing Platform](guide/testing): Run unit tests on your application parts as they interact with the Angular framework.
+* [コンパイル](guide/aot-compiler): Angularは、開発環境用のジャストインタイム（JIT）コンパイルと、本番環境用の事前（AOT）コンパイルを提供します。
 
-   * [Internationalization](guide/i18n):  Angular's internationalization (i18n) tools can help you make your app available in multiple languages.
+* [テスティングプラットフォーム](guide/testing): Angular フレームワークとやり取りするアプリケーションの部品において、ユニットテストを実行します。
 
-   * [Compilation](guide/aot-compiler): Angular provides just-in-time (JIT) compilation for the development environment, and ahead-of-time (AOT) compilation for the production environment.
+* [国際化](guide/i18n):  Angular の国際化(i18n)ツールを使用して、アプリを複数の言語で利用できるようにします。
 
-   * [Security guidelines](guide/security): Learn about Angular's built-in protections against common web-app vulnerabilities and attacks such as cross-site scripting attacks.
+* [セキュリティガイドライン](guide/security): 一般的な Web アプリケーションの脆弱性やクロスサイトスクリプティングなどの攻撃に対する Angular の組み込みの保護機能について説明します。
 
-#### Setup and deployment tools
+## セットアップ、ビルドとデプロイの設定
 
-   * [Setup for local development](guide/setup): Learn how to set up a new project for development with QuickStart.
+* [CLIコマンドリファレンス](cli): Angular CLIは、プロジェクトの作成、アプリケーションおよびライブラリコードの生成、およびテスト、バンドル、デプロイなどのさまざまな進行中の開発タスクの実行に使用するコマンドラインツールです。
 
-   * [Installation](guide/npm-packages): The [Angular CLI](https://cli.angular.io/), Angular applications, and Angular itself depend on features and functionality provided by libraries that are available as [npm](https://docs.npmjs.com/) packages.
+* [ワークスペースとファイル構成](guide/file-structure): Angularワークスペースとプロジェクトフォルダの構造を理解する。
 
-   * [Typescript Configuration](guide/typescript-configuration): TypeScript is the primary language for Angular application development.
+* [npmパッケージ](guide/npm-packages): Angular フレームワーク、Angular CLI、Angularアプリケーションで使用されるコンポーネントは、[npm](https://docs.npmjs.com/)パッケージとしてパッケージ化され、npmレジストリを介して配布されます。 Angular CLIはデフォルトの `package.json`ファイルを作成します。このファイルは、うまく機能し、多くの一般的なアプリケーションシナリオを共同でサポートするパッケージのスターターセットを指定します。
 
-   * [Browser support](guide/browser-support): Learn how to make your apps compatible across a wide range of browsers.
+* [TypeScript の設定](guide/typescript-configuration): TypeScript は Angular アプリケーション開発における主要な言語です。
 
-   * [Deployment](guide/deployment): Learn techniques for deploying your Angular application to a remote server.
+* [ブラウザのサポート](guide/browser-support): アプリを幅広いブラウザに対応させます。
 
-<hr/>
+* [ビルドとサーブ](guide/build): 開発時、ステージング、およびプロダクションなど、プロジェクトのさまざまなビルドおよびプロキシサーバー構成を定義する方法を学びます。
+
+* [デプロイメント](guide/deployment): Angular アプリケーションをリモートサーバーにデプロイする方法を学びます。
+

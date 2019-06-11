@@ -36,7 +36,7 @@ Angular Service Workerのバージョン管理動作により、アプリケー�
 
 長いキャッシングの潜在的な副作用の1つは、無効なリソースを誤ってキャッシュすることです。通常のHTTPキャッシュでは、ハードリフレッシュまたはキャッシュの有効期限が、無効なファイルをキャッシュしてしまうという負の影響を制限します。Service Workerはこのような制約を無視し、アプリケーション全体をキャッシュします。したがって、Service Workerが正しいコンテンツを入手することが不可欠です。
 
-リソースの整合性を保証するために、Angular Service Workerは、ハッシュを持っているリソースならすべてのハッシュを検証します。通常、CLIアプリケーションの場合、これはユーザーの`src/ngsw-config.json`で設定されている`dist`ディレクトリのすべてが対象になります。
+リソースの整合性を保証するために、Angular Service Workerは、ハッシュを持っているリソースならすべてのハッシュを検証します。通常、[Angular CLI](cli)で作られたアプリケーションの場合、これはユーザーの`src/ngsw-config.json`で設定されている`dist`ディレクトリのすべてが対象になります。
 
 特定のファイルが検証に失敗した場合、Angular Service Workerは、ブラウザまたは中間キャッシングの影響を排除するために、URLパラメーター"cache-busting"を使用してコンテンツを再取得しようとします。そのコンテンツも検証に失敗すると、Service Workerはアプリケーション全体のバージョンが無効であるとみなし、アプリケーションの配信を止めます。必要に応じて、Service Workerは、無効な、破損した、または古くなったコンテンツを配信するリスクが高い場合に、キャッシュを使用しないように、リクエストの処理をネットワークに戻すセーフモードに入ります。
 
@@ -83,6 +83,15 @@ Angular Service Workerは、アプリケーションが最初に開かれたと�
 
 Angular Service Workerの最新情報は、アプリケーションにはわかりません。古いキャッシュは引き続き有効で、コンテンツは引き続き配信されます。ただし、Angular Service Workerのバグフィックスや機能では、古いキャッシュが無効になることがあります。この場合、アプリケーションはネットワークから透過的にリフレッシュされます。
 
+### Bypassing the service worker
+
+In some cases, you may want to bypass the service worker entirely and let the browser handle the
+request instead. An example is when you rely on a feature that is currently not supported in service
+workers (e.g.
+[reporting progress on uploaded files](https://github.com/w3c/ServiceWorker/issues/1141)).
+
+To bypass the service worker you can set `ngsw-bypass` as a request header, or as a query parameter.
+(The value of the header or query parameter is ignored and can be empty or omitted.)
 
 ## Angular Service Workerのデバッグ
 
@@ -194,7 +203,7 @@ Chromeなどのブラウザは、Service Workerとやり取りするための開
 * Cache Storageビューアを見ると、キャッシュは頻繁に古くなっています。Cache Storageタイトルを右クリックし、キャッシュをリフレッシュしてください。
 
 Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
-d
+
 ## Service Workerの安全性
 
 あらゆる複雑なシステムと同様に、バグや壊れた設定によって、
@@ -205,11 +214,9 @@ AngularService Workerにはフェールセーフメカニズムが組み込ま�
 
 ### フェールセーフ
 
-Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。
+Service Workerを非アクティブにするには、 `ngsw.json`ファイルを削除するか名前を変更します。
 Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、
 自身を登録解除し、自己破棄します。
-Service Workerを非アクティブにするには、 `ngsw-config.json`ファイルを削除するか名前を変更します。
-Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、自身を登録解除し、自己破棄します。
 
 ### Safety Worker
 

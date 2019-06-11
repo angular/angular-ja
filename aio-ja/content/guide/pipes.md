@@ -1,17 +1,17 @@
 # パイプ
 
 すべてのアプリケーションは、単純なタスクのようなところから始めます。つまり、データを取得し、変換し、ユーザーに表示します。
-データの取得は、ローカル変数の作成のように単純になったり、あるいはWebSocketを介したデータのストリーミングのように複雑になったりします。
+データの取得は、ローカル変数の作成のように単純だったり、あるいはWebSocketを介したデータのストリーミングのように複雑だったりします。
 
 データが届いたあと、生の`toString`の値を直接ビューに挿入できますが、
 これがよいユーザー体験になることはめったにありません。
 たとえば、ほとんどのユースケースでは、ユーザーは<samp>Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)</samp>のような生の文字列ではなく、
 <samp>1988年4月15日</samp>のような簡単な形式で日付を表示することを好みます。 
 
-明らかに、一部の値には編集による恩恵があります。同じ変換の多くが、
-多くのアプリケーションの中、そしてアプリケーションを超えて繰り返し必要であることに気付くでしょう。
+明らかに、いくつかの値は少しの編集によって恩恵を受けます。多くのアプリケーションの内外で
+何度も同じ変換を適用したいという願望に、あなたは気付くかもしれません。
 あなたはほとんどそれらをスタイルとして考えることができます。
-実際には、スタイルをおこなうように、HTMLテンプレート中で適用したいと思うかもしれません。
+実際、その変換はスタイルと同じようにHTMLテンプレート中で適用できるのです。
 
 ここではHTMLで宣言できる表示値の変換方法であるAngularパイプを紹介します。
 
@@ -24,7 +24,7 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 このページでは、パイプを使用してコンポーネントの誕生日プロパティを人に優しい日付に変換します。
 
 
-<code-example path="pipes/src/app/hero-birthday1.component.ts" title="src/app/hero-birthday1.component.ts" linenums="false">
+<code-example path="pipes/src/app/hero-birthday1.component.ts" header="src/app/hero-birthday1.component.ts" linenums="false">
 
 </code-example>
 
@@ -33,7 +33,7 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 コンポーネントのテンプレートに注目します。
 
 
-<code-example path="pipes/src/app/app.component.html" region="hero-birthday-template" title="src/app/app.component.html" linenums="false">
+<code-example path="pipes/src/app/app.component.html" region="hero-birthday-template" header="src/app/app.component.html" linenums="false">
 
 </code-example>
 
@@ -48,7 +48,7 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 ## ビルトインのパイプ
 Angularには`DatePipe`、`UpperCasePipe`、`LowerCasePipe`、`CurrencyPipe`や`PercentPipe`というようなパイプが付属しています。
 それらはすべてテンプレートで使用できます。
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -73,7 +73,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 ヒーローの4月15日の誕生日をフォーマットした後、出力結果は**<samp>04/15/88</samp>**のようになります。
 
 
-<code-example path="pipes/src/app/app.component.html" region="format-birthday" title="src/app/app.component.html" linenums="false">
+<code-example path="pipes/src/app/app.component.html" region="format-birthday" header="src/app/app.component.html" linenums="false">
 
 </code-example>
 
@@ -87,7 +87,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 そのコンポーネントのテンプレートは次のとおりです。
 
 
-<code-example path="pipes/src/app/hero-birthday2.component.ts" region="template" title="src/app/hero-birthday2.component.ts (template)" linenums="false">
+<code-example path="pipes/src/app/hero-birthday2.component.ts" region="template" header="src/app/hero-birthday2.component.ts (template)" linenums="false">
 
 </code-example>
 
@@ -97,7 +97,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 このメソッドは、コンポーネントの`format`プロパティを短い書式（`'shortDate'`）と長い書式（`'fullDate'`）の間で切り替えます。
 
 
-<code-example path="pipes/src/app/hero-birthday2.component.ts" region="class" title="src/app/hero-birthday2.component.ts (class)" linenums="false">
+<code-example path="pipes/src/app/hero-birthday2.component.ts" region="class" header="src/app/hero-birthday2.component.ts (class)" linenums="false">
 
 </code-example>
 
@@ -112,7 +112,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -131,17 +131,17 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 誕生日は**<samp>APR 15, 1988</samp>**のように表示されます。.
 
 
-<code-example path="pipes/src/app/app.component.html" region="chained-birthday" title="src/app/app.component.html" linenums="false">
+<code-example path="pipes/src/app/app.component.html" region="chained-birthday" header="src/app/app.component.html" linenums="false">
 
 </code-example>
 
 
 
-この例&mdash;**<samp>FRIDAY, APRIL 15, 1988</samp>を表示しています**&mdash;では
-先ほどと同じパイプを繋いで、しかし`date`にパラメーターを渡してます。
+この例 (**<samp>FRIDAY, APRIL 15, 1988</samp>が表示されます**) では
+先ほどと同様のパイプを繋いでいますが、`date`にもパラメーターが上手く渡っています。
 
 
-<code-example path="pipes/src/app/app.component.html" region="chained-parameter-birthday" title="src/app/app.component.html" linenums="false">
+<code-example path="pipes/src/app/app.component.html" region="chained-parameter-birthday" header="src/app/app.component.html" linenums="false">
 
 </code-example>
 
@@ -154,7 +154,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 この`ExponentialStrengthPipe`という名前のパイプはヒーローの力を高めることができます。
 
 
-<code-example path="pipes/src/app/exponential-strength.pipe.ts" title="src/app/exponential-strength.pipe.ts" linenums="false">
+<code-example path="pipes/src/app/exponential-strength.pipe.ts" header="src/app/exponential-strength.pipe.ts" linenums="false">
 
 </code-example>
 
@@ -164,8 +164,8 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 
 * パイプはパイプメタデータで装飾されたクラスです。
 * パイプクラスは、入力値の後にオプションのパラメータを受け入れ、
-変換された値を返す`PipeTransform`インターフェイスの`transform`メソッドを実装します
-* パイプに渡されたそれぞれのパラメータについて、`transform`メソッドには引数が追加されます。
+変換された値を返す`PipeTransform`インターフェースの`transform`メソッドを実装します
+* パイプに渡された個々のパラメータについて、`transform`メソッドには引数が追加されます。
 このパイプはそのような`exponent`パラメーターをもちます。
 * これがパイプであることをAngularに伝えるには、
 Angularコアライブラリからインポートする`@Pipe`デコレーターを適用します。
@@ -174,7 +174,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 あなたのパイプの名前は`exponentialStrength`です。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -188,7 +188,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 パイプをデモンストレーションするコンポーネントが必要です。
 
-<code-example path="pipes/src/app/power-booster.component.ts" title="src/app/power-booster.component.ts" linenums="false">
+<code-example path="pipes/src/app/power-booster.component.ts" header="src/app/power-booster.component.ts" linenums="false">
 </code-example>
 
 <figure>
@@ -201,6 +201,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 * 組み込みパイプと同じ方法でカスタムパイプを使用します。
 * パイプを`AppModule`の`declarations`配列に含める必要があります。
+* パイプをクラスに注入することを選択した場合、それをあなたの `NgModule` の ` provider` 配列に提供しなければなりません。
 
 <div class="callout is-helpful">
 
@@ -211,7 +212,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 カスタムパイプは登録する必要があります。
 そうしなければ、Angularはエラーを報告します。
-Angular CLIのジェネレータはパイプを自動的に登録します。
+[Angular CLI](cli)のジェネレータはパイプを自動的に登録します。
 
 
 </div>
@@ -227,7 +228,7 @@ Angular CLIのジェネレータはパイプを自動的に登録します。
 "Power Boost Calculator"にアップグレードしましょう。
 
 
-<code-example path="pipes/src/app/power-boost-calculator.component.ts" title="src/app/power-boost-calculator.component.ts">
+<code-example path="pipes/src/app/power-boost-calculator.component.ts" header="src/app/power-boost-calculator.component.ts">
 
 </code-example>
 
@@ -257,7 +258,7 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 `heroes`配列内のすべてのヒーローの表示を監視および更新します。テンプレートは次のとおりです。
 
 
-<code-example path="pipes/src/app/flying-heroes.component.html" region="template-1" title="src/app/flying-heroes.component.html (v1)" linenums="false">
+<code-example path="pipes/src/app/flying-heroes.component.html" region="template-1" header="src/app/flying-heroes.component.html (v1)" linenums="false">
 
 </code-example>
 
@@ -265,7 +266,7 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 
 対となるコンポーネントクラスはヒーローを提供し、ヒーローを配列に追加し、配列をリセットすることができます。
 
-<code-example path="pipes/src/app/flying-heroes.component.ts" region="v1" title="src/app/flying-heroes.component.ts (v1)" linenums="false">
+<code-example path="pipes/src/app/flying-heroes.component.ts" region="v1" header="src/app/flying-heroes.component.ts (v1)" linenums="false">
 
 </code-example>
 
@@ -279,7 +280,7 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 
 飛行可能なヒーローだけをフィルタリングする`FlyingHeroesPipe`を`*ngFor`リピーターに追加します。
 
-<code-example path="pipes/src/app/flying-heroes.component.html" region="template-flying-heroes" title="src/app/flying-heroes.component.html (flyers)" linenums="false">
+<code-example path="pipes/src/app/flying-heroes.component.html" region="template-flying-heroes" header="src/app/flying-heroes.component.html (flyers)" linenums="false">
 
 </code-example>
 
@@ -287,7 +288,7 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 
 これは`FlyingHeroesPipe`の実装です。先に説明したカスタムパイプのパターンにしたがっています。
 
-<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pure" title="src/app/flying-heroes.pipe.ts" linenums="false">
+<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pure" header="src/app/flying-heroes.pipe.ts" linenums="false">
 
 </code-example>
 
@@ -301,7 +302,7 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 
 ヒーローがどのように追加されたかを確認しましょう。
 
-<code-example path="pipes/src/app/flying-heroes.component.ts" region="push" title="src/app/flying-heroes.component.ts" linenums="false">
+<code-example path="pipes/src/app/flying-heroes.component.ts" region="push" header="src/app/flying-heroes.component.ts" linenums="false">
 
 </code-example>
 
@@ -350,7 +351,7 @@ Flying Heroesアプリケーションは、
 このように`FlyingHeroesPipe`を不純にできます。
 
 
-<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pipe-decorator" title="src/app/flying-heroes.pipe.ts" linenums="false">
+<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pipe-decorator" header="src/app/flying-heroes.pipe.ts" linenums="false">
 
 </code-example>
 
@@ -375,7 +376,7 @@ Angularは（複合した）オブジェクト内の変更を無視します。
 できない場合は、不純なパイプを使用することが*可能です*。
 
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
 
 
@@ -394,7 +395,7 @@ Angularは、 コンポーネントの変更検知サイクルごとに*不純�
 不純なパイプは、すべてのキーストロークやマウス移動のように、頻繁に呼び出されます。
 
 それを念頭に置いて、細心の注意を払って不純なパイプを実装してください。
-ハイコストで長時間実行するパイプは、ユーザーエクスペリエンスを破壊する可能性があります。
+ハイコストで長時間実行するパイプは、ユーザー体験を破壊する可能性があります。
 
 
 {@a impure-flying-heroes}
@@ -407,11 +408,11 @@ Angularは、 コンポーネントの変更検知サイクルごとに*不純�
 
 <code-tabs>
 
-  <code-pane title="FlyingHeroesImpurePipe" path="pipes/src/app/flying-heroes.pipe.ts" region="impure">
+  <code-pane header="FlyingHeroesImpurePipe" path="pipes/src/app/flying-heroes.pipe.ts" region="impure">
 
   </code-pane>
 
-  <code-pane title="FlyingHeroesPipe" path="pipes/src/app/flying-heroes.pipe.ts" region="pure">
+  <code-pane header="FlyingHeroesPipe" path="pipes/src/app/flying-heroes.pipe.ts" region="pure">
 
   </code-pane>
 
@@ -425,7 +426,7 @@ Angularは、 コンポーネントの変更検知サイクルごとに*不純�
 この`transform`関数は簡単で速いため、不純なパイプにしてもよいでしょう。
 
 
-<code-example path="pipes/src/app/flying-heroes.pipe.ts" linenums="false" title="src/app/flying-heroes.pipe.ts (filter)" region="filter">
+<code-example path="pipes/src/app/flying-heroes.pipe.ts" linenums="false" header="src/app/flying-heroes.pipe.ts (filter)" region="filter">
 
 </code-example>
 
@@ -434,7 +435,7 @@ Angularは、 コンポーネントの変更検知サイクルごとに*不純�
 `FlyingHeroesComponent`から`FlyingHeroesImpureComponent`を派生させることができます。
 
 
-<code-example path="pipes/src/app/flying-heroes-impure.component.html" linenums="false" title="src/app/flying-heroes-impure.component.html (excerpt)" region="template-flying-heroes">
+<code-example path="pipes/src/app/flying-heroes-impure.component.html" linenums="false" header="src/app/flying-heroes-impure.component.html (excerpt)" region="template-flying-heroes">
 
 </code-example>
 
@@ -461,14 +462,14 @@ Angularの`AsyncPipe`は不純なパイプの興味深い例です。
 `async`パイプを使ってビューにバインドします。
 
 
-<code-example path="pipes/src/app/hero-async-message.component.ts" title="src/app/hero-async-message.component.ts">
+<code-example path="pipes/src/app/hero-async-message.component.ts" header="src/app/hero-async-message.component.ts">
 
 </code-example>
 
 
 
 Asyncパイプは、コンポーネントコードから定型文を削減します。
-コンポーネントは、非同期データソースをサブスクライブする必要はなく、
+コンポーネントは、非同期データソースを購読する必要はなく、
 解決された値を抽出してバインドするために公開する必要はなく、
 破棄されたときに購読を解除する必要もありません（メモリリークの強力な原因）。
 
@@ -483,7 +484,7 @@ Asyncパイプは、コンポーネントコードから定型文を削減しま
 このコードでは、[Angular http](guide/http)クライアントを使用してデータを取得しています。
 
 
-<code-example path="pipes/src/app/fetch-json.pipe.ts" title="src/app/fetch-json.pipe.ts">
+<code-example path="pipes/src/app/fetch-json.pipe.ts" header="src/app/fetch-json.pipe.ts">
 
 </code-example>
 
@@ -493,7 +494,7 @@ Asyncパイプは、コンポーネントコードから定型文を削減しま
 `heroes.json`ファイルからヒーローを要求してみましょう。
 
 
-<code-example path="pipes/src/app/hero-list.component.ts" title="src/app/hero-list.component.ts">
+<code-example path="pipes/src/app/hero-list.component.ts" header="src/app/hero-list.component.ts">
 
 </code-example>
 
@@ -510,8 +511,8 @@ Asyncパイプは、コンポーネントコードから定型文を削減しま
 
 パイプのデータ要求のブレークポイントは、次のことを示します。
 
-* 各バインディングは、それぞれのパイプインスタンスを取得します。
-* 各パイプインスタンスは、それぞれのURLとデータをキャッシュします。
+* 各バインディングは、個々のパイプインスタンスを取得します。
+* 各パイプインスタンスは、個々のURLとデータをキャッシュします。
 * 各パイプ・インスタンスはサーバーを1回だけ呼び出します。
 
 <h3 class="no-toc"><i>JsonPipe</i></h3>
@@ -584,7 +585,7 @@ Angularに同じものはありません。
 Angularはほぼすべての変更検知サイクルで不純なパイプを呼び出すことを学びました。
 
 フィルタリング、特にソートは高価な操作です。
-Angularがこれらのパイプメソッドを毎秒何度も呼び出すと、ユーザーエクスペリエンスは中程度のサイズのリストでもひどく低下します。
+Angularがこれらのパイプメソッドを毎秒何度も呼び出すと、ユーザー体験は中程度のサイズのリストでもひどく低下します。
 `filter`そして`orderBy`はAngularJSアプリの中でよく濫用され、Angular自体が遅いという苦情につながります。
 そもそも`filter`と`orderBy`を提供することでAngularJSがパフォーマンスの罠を用意しているという間接的な意味では、それは正しいです。
 

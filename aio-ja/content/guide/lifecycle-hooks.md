@@ -17,13 +17,13 @@ Angularはそれらの重要な生存の瞬間を可視化し、発生時に行�
 ディレクティブとコンポーネントのインスタンスは、Angularがライフサイクルを作成、
 更新、および破棄するにつれてライフサイクルを持ちます。
 開発者は、ライフサイクルの中の重要な瞬間を、Angular `core` ライブラリの
-*ライフサイクル・フック*　インタフェースの1つあるいは複数実装することで傍受できます。
+*ライフサイクル・フック*　インターフェースの1つあるいは複数実装することで傍受できます。
 
 各インターフェースは、名前が `ng` で始まるインターフェース名である単一のフックメソッドを持っています。
-たとえば、 `OnInit` インタフェースは　`ngOnInit()` という名前のフックメソッドを持っています。
+たとえば、 `OnInit` インターフェースは　`ngOnInit()` という名前のフックメソッドを持っています。
 Angularはコンポーネントの作成直後に呼び出します。
 
-<code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" title="peek-a-boo.component.ts (excerpt)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" header="peek-a-boo.component.ts (excerpt)" linenums="false"></code-example>
 
 ディレクティブやコンポーネントはライフサイクルフックすべてを実装しないでしょう。
 Angularは、ディレクティブ/コンポーネント・フック・メソッド *が定義されている場合* にのみ呼び出します。
@@ -32,7 +32,7 @@ Angularは、ディレクティブ/コンポーネント・フック・メソッ
 
 ## ライフサイクル・シーケンス
 
-コンストラクタの呼び出しによってコンポーネント/ディレクティブを作成した *後に* 、
+コンストラクターの呼び出しによってコンポーネント/ディレクティブを作成した *後に* 、
 Angularはライフサイクル・フックメソッドを特定の瞬間に次の順序で呼び出します。
 
 <table width="100%">
@@ -124,7 +124,7 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
 
       Angularがコンポーネントのビューと子のビュー、あるいはディレクティブが存在するビューをチェックした後に応答します。
 
-      `ngAfterViewInit` とその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
+      `ngAfterViewInit()` とその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
 
     </td>
   </tr>
@@ -145,14 +145,14 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
 
 {@a interface-optional}
 
-## インタフェースはオプションです(技術的に)
+## インターフェースはオプションです(技術的に)
 
-純粋に技術的な観点から、JavaScript と Typescript の開発者はインターフェイスを省略することができます。
-JavaScript言語にはインタフェースがありません。
-変換されたJavaScriptからは消えてしまうため、Angularは実行時にTypeScriptのインターフェイスを見ることはできません。
+純粋に技術的な観点から、JavaScript と Typescript の開発者はインターフェースを省略することができます。
+JavaScript言語にはインターフェースがありません。
+変換されたJavaScriptからは消えてしまうため、Angularは実行時にTypeScriptのインターフェースを見ることはできません。
 
 幸いにも、それらは必要ではありません。
-フックそのものの恩恵を受けるために、ディレクティブやコンポーネントにライフサイクル・フックのインターフェイスを追加する必要はありません。
+フックそのものの恩恵を受けるために、ディレクティブやコンポーネントにライフサイクル・フックのインターフェースを追加する必要はありません。
 
 Angularはディレクティブとコンポーネントのクラスを調べ、フックメソッドが _定義されていたら_ それらを呼び出します。
 Angularはインターフェースの有無にかかわらず、`ngOnInit()`のようなメソッドを探して呼び出します。
@@ -300,9 +300,9 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 `OnChanges`, `OnInit`, `DoCheck`&nbsp;(3x), `AfterContentInit`, `AfterContentChecked`&nbsp;(3x),
 `AfterViewInit`, `AfterViewChecked`&nbsp;(3x), と `OnDestroy`。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
-  コンストラクタは、Angularフック *そのもの* ではありません。
+  コンストラクターは、Angularフック *そのもの* ではありません。
   ログは、入力プロパティ（この場合は `name` プロパティ）が構築時に割り当てられた値を持たないことを確認します。
 
 </div>
@@ -323,7 +323,7 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 これは、ディレクティブのための完璧な潜入ジョブです。
 ヒーローたちは彼らが見守られていることを決して知らないでしょう。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   冗談はさておき、ふたつの重要な点に注意を払います：
 
@@ -339,15 +339,15 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 こそこそしたスパイ・ディレクティブはシンプルで、注入された `LoggerService` を介して親にメッセージを記録する
 `ngOnInit()` と `ngOnDestroy()` フックでほぼ全体を構成しています。
 
-<code-example path="lifecycle-hooks/src/app/spy.directive.ts" region="spy-directive" title="src/app/spy.directive.ts" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/spy.directive.ts" region="spy-directive" header="src/app/spy.directive.ts" linenums="false"></code-example>
 
 スパイをネイティブ要素またはコンポーネント要素に適用すると、その要素と同時に初期化され、
 破棄されます。
 これは、繰り返しのヒーローの `<div>` に付け加えられています：
 
-<code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" title="src/app/spy.component.html" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html" linenums="false"></code-example>
 
-それぞれのスパイの誕生と死は、付属のヒーロー `<div>` の出生と死を、つぎに示すように
+個々のスパイの誕生と死は、付属のヒーロー `<div>` の出生と死を、つぎに示すように
  *フック・ログ* に記入して記録します。
 
 <figure>
@@ -373,15 +373,15 @@ Angularはすべてのヒーローの `<div>` 要素をDOMから削除し、同�
 
 経験豊富な開発者は、コンポーネントを安価で安全に構築する必要があることに同意します。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   Angular チームリーダーであるMisko Heveryが、
-  複雑なコンストラクタロジックを避けるべき
+  複雑なコンストラクターロジックを避けるべき
   [理由を説明します](http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/)
 
 </div>
 
-コンポーネントコンストラクタでデータをフェッチしないでください。
+コンポーネントコンストラクターでデータをフェッチしないでください。
 新しいコンポーネントが、テスト中に作成されたとき、または表示する前に、
 リモートサーバーに接続しようとすることを心配すべきではありません。
 コンストラクターは、初期のローカル変数を単純な値に設定すること以外は、やるべきではありません。
@@ -394,7 +394,7 @@ Angularはすべてのヒーローの `<div>` 要素をDOMから削除し、同�
 これは、それらのプロパティに基づいてディレクティブを初期化する必要がある場合には、問題になります。
 これらは `ngOnInit()` の実行時には設定されています。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   `ngOnChanges()` メソッドは、それらのプロパティにアクセスする最初の機会です。
   Angularは `ngOnInit()` の前に `ngOnChanges()` を呼び出し、その後何度も呼び出します。
@@ -425,7 +425,7 @@ ObservableとDOMイベントの購読を解除しましょう。インターバ�
 Angularは、コンポーネント(またはディレクティブ)の ***入力プロパティ***　への変更を検出するたびに、その `ngOnChanges()` メソッドを呼び出します。
 この例は `OnChanges` フックを監視します。
 
-<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="ng-on-changes" title="on-changes.component.ts (excerpt)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="ng-on-changes" header="on-changes.component.ts (excerpt)" linenums="false"></code-example>
 
 `ngOnChanges()` メソッドは、変更された各プロパティの名前と、現在および前のプロパティ値を保持する
 [SimpleChange](api/core/SimpleChange) オブジェクトをマップするオブジェクトを受け取ります。
@@ -433,11 +433,11 @@ Angularは、コンポーネント(またはディレクティブ)の ***入力�
 
 サンプルのコンポーネントである `OnChangesComponent` は、` hero` と `power` の2つの入力プロパティを持っています。
 
-<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="inputs" title="src/app/on-changes.component.ts" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="inputs" header="src/app/on-changes.component.ts" linenums="false"></code-example>
 
 ホストの `OnChangesParentComponent` は次のようにそれらにバインドします：
 
-<code-example path="lifecycle-hooks/src/app/on-changes-parent.component.html" region="on-changes" title="src/app/on-changes-parent.component.html"></code-example>
+<code-example path="lifecycle-hooks/src/app/on-changes-parent.component.html" region="on-changes" header="src/app/on-changes-parent.component.html"></code-example>
 
 ここでは、ユーザーが変更を加えたときの実際のサンプルを示します。
 
@@ -460,7 +460,7 @@ Angularは、ヒーロー自身の `name` プロパティが変更されても�
 
 Angularがそれ自身で捕捉しない変更を検出し、それに対応するために `DoCheck` フックを使います。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   Angularが見落とした変更を検出するには、このメソッドを使用します。
 
@@ -468,7 +468,7 @@ Angularがそれ自身で捕捉しない変更を検出し、それに対応す�
 
 *DoCheck* サンプルは *OnChanges* サンプルを次の `ngDoCheck()` フックで拡張します：
 
-<code-example path="lifecycle-hooks/src/app/do-check.component.ts" region="ng-do-check" title="DoCheckComponent (ngDoCheck)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/do-check.component.ts" region="ng-do-check" header="DoCheckComponent (ngDoCheck)" linenums="false"></code-example>
 
 このコードは、特定の _関心のある値_ を検査し、現在の状態を以前の値とキャプチャして比較します。
 `hero` や `power` に実質的な変更がないときに特別なメッセージをログに書き込むので、 `DoCheck` が呼び出される
@@ -496,25 +496,25 @@ Angularがそれ自身で捕捉しない変更を検出し、それに対応す�
 
 ここでは、 `<input>` にヒーローの名前を表示する子ビューがあります：
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" title="ChildComponent" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" header="ChildComponent" linenums="false"></code-example>
 
 `AfterViewComponent` は、この子ビューを *テンプレート内* に表示します：
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="template" title="AfterViewComponent (template)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="template" header="AfterViewComponent (template)" linenums="false"></code-example>
 
 次のフックは、子ビュー *内の値の変更* に基づいてアクションを実行します。
 [@ViewChild](api/core/ViewChild) で
 装飾されたプロパティを使用して子ビューを照会することによってのみ到達できます。
 
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="hooks" title="AfterViewComponent (class excerpts)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="hooks" header="AfterViewComponent (class excerpts)" linenums="false"></code-example>
 
 {@a wait-a-tick}
 
 ### 単方向データフローのルールに従う
 ヒーロー名が10文字を超えると、 `doSomething()` メソッドは画面を更新します。
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="do-something" title="AfterViewComponent (doSomething)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="do-something" header="AfterViewComponent (doSomething)" linenums="false"></code-example>
 
 なぜ `doSomething()` メソッドは `comment` を更新する前にティックを待つのでしょうか？
 
@@ -549,7 +549,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 *コンテンツ投影* は、コンポーネントの外部からHTMLコンテンツをインポートし、
 そのコンテンツをコンポーネントのテンプレートに指定された場所に挿入する方法です。
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   AngularJSの開発者は、この手法を *transclusion* として認識しています。
 
@@ -559,7 +559,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 今回は、テンプレート内に子ビューを含めるのではなく、 `AfterContentComponent` の親からコンテンツをインポートします。
 親のテンプレートは次のとおりです：
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" title="AfterContentParentComponent (template excerpt)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)" linenums="false"></code-example>
 
 `<app-child>` タグは `<after-content>` タグの間に挟まれています。
 そのコンテンツをコンポーネントに投影するつもりでない限り、コンポーネントの要素タグ
@@ -567,7 +567,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 
 コンポーネントのテンプレートを見てみましょう：
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="template" title="AfterContentComponent (template)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="template" header="AfterContentComponent (template)" linenums="false"></code-example>
 
 `<ng-content>` タグは、外部コンテンツの *プレースホルダー* です。
 Angularはそのコンテンツをどこに挿入するかを指示します。
@@ -577,7 +577,7 @@ Angularはそのコンテンツをどこに挿入するかを指示します。
   <img src='generated/images/guide/lifecycle-hooks/projected-child-view.png' alt="Projected Content">
 </figure>
 
-<div class="l-sub-section">
+<div class="alert is-helpful">
 
   *コンテンツ投影* の兆候は2つあります：
 
@@ -603,7 +603,7 @@ Angularはそのコンテンツをどこに挿入するかを指示します。
 プロパティを介してそれらを照会することによってのみ達することができる
 *子コンテント* の値を変更することに基づいてアクションを実行します。
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="hooks" title="AfterContentComponent (class excerpts)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="hooks" header="AfterContentComponent (class excerpts)" linenums="false"></code-example>
 
 {@a no-unidirectional-flow-worries}
 

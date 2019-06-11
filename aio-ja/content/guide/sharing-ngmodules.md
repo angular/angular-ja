@@ -1,23 +1,23 @@
-# Sharing Modules
+# モジュールの共有
 
-#### Prerequisites
-A basic understanding of the following:
-* [Feature Modules](guide/feature-modules).
-* [JavaScript Modules vs. NgModules](guide/ngmodule-vs-jsmodule).
-* [Frequently Used Modules](guide/frequent-ngmodules).
-* [Routing and Navigation](guide/router).
-* [Lazy loading modules](guide/lazy-loading-ngmodules).
+#### 前提条件
+次の基本的な理解:
+* [フィーチャーモジュール](guide/feature-modules)
+* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
+* [よく使用されるモジュール](guide/frequent-ngmodules)
+* [ルーティングとナビゲーション](guide/router)
+* [モジュールの遅延ロード](guide/lazy-loading-ngmodules)
 
 
 <!--* Components (#TBD) We don’t have a page just on the concept of components, but I think one would be helpful for beginners.-->
 
 <hr>
 
-Creating shared modules allows you to organize and streamline your code. You can put commonly
-used directives, pipes, and components into one module and then import just that module wherever
-you need it in other parts of your app.
+共有モジュールを作成すると、コードを整理し簡素化することができます。
+共通で使用されるディレクティブ、パイプ、コンポーネントを1つのモジュールに配置し、
+必要に応じてそのモジュールをアプリケーションの他の部分でインポートすることができます。
 
-Consider the following module from an imaginary app:
+想像上のアプリケーションから次のようなモジュールを考えてみましょう:
 
 
 ```typescript
@@ -37,39 +37,39 @@ import { OrdersPipe } from './orders.pipe';
 export class SharedModule { }
 ```
 
-Note the following:
+次の点に注目してください:
 
-* It imports the `CommonModule` because the module's component needs common directives.
-* It declares and exports the utility pipe, directive, and component classes.
-* It re-exports the `CommonModule` and `FormsModule`.
+* モジュールのコンポーネントはAngularが共通部品として提供しているディレクティブを必要とするため、`CommonModule`をインポートしています。
+* 便利なパイプ、ディレクティブ、コンポーネントのクラスを宣言し、エクスポートしています。
+* `CommonModule`と`FormsModule`を再エクスポートしています。
 
-By re-exporting `CommonModule` and `FormsModule`, any other module that imports this
-`SharedModule`, gets access to directives like `NgIf` and `NgFor` from `CommonModule`
-and can bind to component properties with `[(ngModel)]`, a directive in the `FormsModule`.
+`CommonModule`と`FormsModule`を再エクスポートすることによって、
+この`SharedModule`をインポートする他のモジュールは、`CommonModule`から`NgIf`や`NgFor`のようなディレクティブにアクセスしたり、
+`FormsModule`のディレクティブである`[(ngModel)]`をコンポーネントのプロパティにバインドしたりできます。
 
-Even though the components declared by `SharedModule` might not bind
-with `[(ngModel)]` and there may be no need for `SharedModule`
-to import `FormsModule`, `SharedModule` can still export
-`FormsModule` without listing it among its `imports`. This
-way, you can give other modules access to `FormsModule` without
-having to import it directly into the `@NgModule` decorator.
+`SharedModule`で宣言されたコンポーネントは`[(ngModel)]`をバインドしていないかもしれず、
+`SharedModule`は`FormsModule`をインポートする必要はないかもしれません。
+それでも、`SharedModule`の`imports`配列に追加することなく`FormsModule`をエクスポートすることができます。
+このようにすることで、
+`@NgModule`デコレーターに直接インポートすることなく、
+他のモジュールが`FormsModule`へアクセスできるようになります。
 
-### Using components vs services from other modules.
+### 他のモジュールからコンポーネントまたはサービスを使用する
 
-There is an important distinction between using another module's component and
-using a service from another module. Import modules when you want to use
-directives, pipes, and components. Importing a module with services means that you will have a new instance of that service, which typically is not what you need (typically one wants to reuse an existing service). Use module imports to control service instantiation.
+別のモジュールのコンポーネントを使用することと、別のモジュールのサービスを使用することの間には、重大な違いがあります。
+ディレクティブ、パイプ、およびコンポーネントを使用したい場合はモジュールをインポートしてください。
+サービスを含むモジュールをインポートするということは、そのサービスの新しいインスタンスを必要とすることです(通常はすでにあるサービスを再利用したい)。サービスのインスタンス化をコントロールする目的のためにモジュールのインポートを使用してください。
 
-The most common way to get a hold of shared services is through Angular
-[dependency injection](guide/dependency-injection), rather than through the module system (importing a module will result in a new service instance, which is not a typical usage).
+共有のサービスを保持するもっとも一般的な方法は、モジュールシステムではなく(モジュールをインポートすると新しいサービスのインスタンスが生成されますが、これは一般的な用途ではありません)、
+Angularの[依存性の注入](guide/dependency-injection)を使用することです。
 
-To read about sharing services, see [Providers](guide/providers).
+サービスの共有については[プロバイダー](guide/providers)を参照してください。
 
 
 <hr />
 
-## More on NgModules
+## NgModuleのさらに詳しい情報
 
-You may also be interested in the following:
-* [Providers](guide/providers).
-* [Types of Feature Modules](guide/module-types).
+あなたはこちらにも興味があるかもしれません:
+* [プロバイダー](guide/providers)
+* [フィーチャーモジュールの種類](guide/module-types)

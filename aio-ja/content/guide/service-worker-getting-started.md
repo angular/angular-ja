@@ -1,15 +1,12 @@
 # Service Workerを始める
 
 
-このドキュメントでは、CLIプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを示し、ロードと基本的なキャッシングを実演します。
+このドキュメントでは、[Angular CLI](cli)で作られたプロジェクトでAngular Service Workerのサポートを有効にする方法について説明します。次に、単純な例を使用して、Service Workerが実際に動作していることを示し、ロードと基本的なキャッシングを実演します。
 
 #### 前提条件
 
-次の基本的理解があること
-* [Angular Service Worker イントロダクション](guide/service-worker-intro)
-* Angular CLI v6を含むAngular v6
+[Angular Service Worker イントロダクション](guide/service-worker-intro)への基本的な理解があること
 
-<hr />
 
 ## アプリケーションにService Workerを追加する
 
@@ -17,7 +14,7 @@
 必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリを設定します。
 
 ```sh
-ng add  @angular/pwa --project *project-name* 
+ng add @angular/pwa --project *project-name* 
 ```
 
 上記のコマンドを実行すると、次の操作が完了します。
@@ -47,13 +44,12 @@ CLIプロジェクトはAngular Service Workerを使用するように設定さ�
 
 ### `http-server`を供給する
 
-`ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らすために、専用ポートでテストしてください。
+`ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らし、古いコンテンツを配信することを避けるために、専用ポートでテストし、キャッシュを無効化してください。
 
-`http-server`で供給するために、Webファイルが入っているディレクトリに移動し、Webサーバーを起動してください。
+`http-server`でwebファイルを含むディレクトリを配信するために、次のコマンドを実行してください。
 
 ```sh
-cd dist
-http-server -p 8080
+http-server -p 8080 -c-1 dist/<project-name>
 ```
 
 ### 最初の読み込み
@@ -99,6 +95,17 @@ networkタブを見ると、Service Workerがアクティブであることを�
 * `favicon.ico`
 * ビルド成果物（JSおよびCSSバンドル）
 * `assets`の下にあるもの
+* 設定された`outputPath`（デフォルトでは`./dist/<project-name>/`）または `resourcesOutputPath` の直下にある画像やフォント。これらのオプションの詳細については[`ng build`](cli/build)を参照してください。
+
+
+<div class="alert is-helpful">
+2つのポイントに注意してください。
+
+1. 生成された `ngsw-config.json`はキャッシュ可能なフォントと画像の拡張子の限られたリストを含みます。場合によっては、ニーズに合わせてglobパターンを変更するでしょう。
+
+1. 設定ファイルの生成後に `resourcesOutputPath`または` assets`パスが変更された場合は、 `ngsw-config.json` の中のパスを手動で変更する必要があります。
+</div>
+
 
 ### アプリケーションを変更する
 
@@ -121,8 +128,7 @@ Service Workerがアプリケーションをキャッシュする方法を見て
 
 ```sh
 ng build --prod
-cd dist
-http-server -p 8080
+http-server -p 8080 -c-1 dist/<project-name>
 ```
 
 ### ブラウザでアプリケーションを更新する

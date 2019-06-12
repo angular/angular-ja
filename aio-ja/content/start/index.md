@@ -163,9 +163,9 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
 1. `@Component`デコレーターに注目してください。 これにより、テンプレート、スタイル、セレクターなど、コンポーネントに関するメタデータが提供されます。
 
-    * `selector`はコンポーネントを識別するために使われます。 セレクターは、ページ上にHTML要素としてレンダリングされるときにAngularコンポーネントに付ける名前です。 慣例により、Angularコンポーネントセレクターは `app-`のような接頭辞で始まり、その後にコンポーネント名が続きます。
+    * `selector`はコンポーネントを識別するために使われます。 セレクターは、ページ上にHTML要素としてレンダリングされるときにAngularコンポーネントに付ける名前です。 慣例により、Angularコンポーネントセレクターは `app-`のような接頭辞で始まり、その後にコンポーネント名が続きます。
 
-    *テンプレートとスタイルのファイル名もここにあります。 慣例により、コンポーネントの各部分は別々のファイルにあり、すべて同じディレクトリにあり、同じプレフィックスが付いています。
+    *テンプレートとスタイルのファイル名もここにあります。 慣例により、コンポーネントの各部分は別々のファイルにあり、すべて同じディレクトリにあり、同じプレフィックスが付いています。
 
 1. コンポーネント定義には、コンポーネントの機能を処理するエクスポートクラスも含まれています。 ここが商品リストデータと `Share()`メソッドが定義されている場所です。
 
@@ -186,6 +186,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 次のセクションでは、商品アラート用の新しいコンポーネントを追加してアプリの機能を拡張します。 商品リストコンポーネントの子として追加します。
 
+
 <div class="alert is-helpful">
 
 詳細： コンポーネントとそれらがテンプレートとどのように相互作用するかについての詳細は[コンポーネントのイントロダクション](guide/architecture-components "コンポーネントのイントロダクション")を参照してください。
@@ -199,7 +200,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 現在、製品リストには各製品の名前と説明が表示されています。
 お気づきかもしれませんが、商品リストコンポーネントは各商品のインポートデータを含む `products`プロパティも定義しています。 （`products.ts`の`products`配列を見てください。）
 
-新しいアラート機能を作成します。 アラート機能は製品を入力として受け取り、それから製品の価格をチェックします。 そして、価格が700ドル以上であるならば、製品を売りに行くとき、ユーザーが通知にサインアップすることを可能にする"Notify Me"ボタンを表示します。
+新しいアラート機能を作成します。 アラート機能は製品を入力として受け取り、それから製品の価格をチェックします。 そして、価格が700ドル以上であるならば、製品が発売されたとき、ユーザーが通知にサインアップすることを可能にする "Notify Me" ボタンを表示します。
 
 1. 新しい商品アラートコンポーネントを作成します。
 
@@ -209,7 +210,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
           <img src="generated/images/guide/start/generate-component.png" alt="StackBlitz command to generate component">
         </figure>
 
-        ジェネレータは、コンポーネントの3つの部分すべてに対してスターターファイルを作成します。
+        ジェネレータは、コンポーネントの3つの部分すべてに対してスターターファイルを作成します:
         * `product-alerts.component.ts`
         * `product-alerts.component.html`
         * `product-alerts.component.css`
@@ -220,35 +221,35 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
     1. `@Component`デコレーターに注目してください。 これは、次のクラスがコンポーネントであることを示しています。 テンプレート、スタイル、セレクターなど、コンポーネントに関するメタデータを提供します。
 
-        * `selector`はコンポーネントを識別するために使われます。 セレクターは、ページ上にHTML要素としてレンダリングされるときにAngularコンポーネントに付ける名前です。 慣例により、Angularコンポーネントセレクターは接頭辞 `app-`で始まり、その後にコンポーネント名が続きます。
+        * `selector`はコンポーネントを識別するために使われます。 セレクターは、ページ上にHTML要素としてレンダリングされるときにAngularコンポーネントに付ける名前です。 慣例により、Angularコンポーネントセレクターは接頭辞 `app-`で始まり、その後にコンポーネント名が続きます。
 
-        * テンプレートとスタイルのファイル名は、生成された他の2つのファイルを参照します。
+        * テンプレートとスタイルのファイル名は、生成された他の2つのファイルを参照します。
 
-    1.コンポーネント定義にはエクスポートされたクラス（`ProductAlertsComponent`）も含まれています。 これはコンポーネントの機能を処理します。
+    1. コンポーネント定義にはエクスポートされたクラス（`ProductAlertsComponent`）も含まれています。 これはコンポーネントの機能を処理します。
 
 1. 入力として製品を受け取るように新しい製品アラートコンポーネントを設定します。
 
-    1. `@angular/core`から`Input`をインポートしてください。
+    1. `@angular/core`から`Input`をインポートしてください。
 
         <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="imports"></code-example>
 
-    1. `ProductAlertsComponent`クラス定義で、`@Input`デコレーターを使って`product`という名前のプロパティを定義します。 `@Input`デコレーターはプロパティ値がコンポーネントの親（この場合は商品リストコンポーネント）から渡されることを示します。
+    1. `ProductAlertsComponent`クラス定義で、`@Input`デコレーターを使って`product`という名前のプロパティを定義します。 `@Input`デコレーターはプロパティ値がコンポーネントの親（この場合は商品リストコンポーネント）から渡されることを示します。
 
         <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="input-decorator"></code-example>
 
 1. 新しい製品警告コンポーネントのビューを定義します。
 
-    `product-alerts.component.html`テンプレートを開き、商品価格が700ドル以上の場合に表示される"Notify Me"ボタンでプレースホルダーの段落を置き換えます。
+    `product-alerts.component.html`テンプレートを開き、商品価格が700ドル以上の場合に表示される"Notify Me"ボタンでプレースホルダーの段落を置き換えます。
 
     <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
 1. 製品リスト（の子）の一部として新しい製品アラートコンポーネントを表示します。
 
-    1. `product-list.component.html`を開きます。
+    1. `product-list.component.html`を開きます。
     
-    1. 新しいコンポーネントを含めるには、HTML要素と同じようにセレクター（`app-product-alert`）を使います。
+    1. 新しいコンポーネントを含めるには、HTML要素と同じようにセレクター（`app-product-alert`）を使います。
     
-    1. プロパティバインディングを使用して、現在の商品を入力としてコンポーネントに渡します。
+    1. プロパティバインディングを使用して、現在の商品を入力としてコンポーネントに渡します。
 
         <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.5.html" region="app-product-alerts"></code-example>
 
@@ -291,7 +292,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 1. 最後に、製品アラートコンポーネントからの出力を受け取るように製品リストコンポーネントを更新します。
 
-    `product-list.component.html`で、` app-product-alerts`コンポーネント（これは"Notify Me"ボタンを表示するものです）を商品リストコンポーネントの `onNotify()`メソッドにバインドします。
+    `product-list.component.html`で、` app-product-alerts`コンポーネント（これは"Notify Me"ボタンを表示するものです）を商品リストコンポーネントの `onNotify()`メソッドにバインドします。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.6.html" region="on-notify"></code-example>
 
@@ -319,7 +320,5 @@ Angularの基礎、つまりコンポーネントとテンプレートの構文�
 また、コンポーネントクラスとテンプレートがどのように相互作用するのか、およびコンポーネントが相互に通信する方法も学びました。
 
 Angularの探索を続けるには、次のいずれかのオプションを選択してください。
-
 * ["ルーティング"セクションに進む](start/routing "入門： ルーティング")ことで、製品名をクリックしてアクセスでき、独自のURLパターンをもつ製品詳細ページを作成します。
 * [先に"デプロイ"セクションに進む](start/deployment "入門： デプロイ")ことで、ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーにデプロイします。
-

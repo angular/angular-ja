@@ -15,8 +15,13 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     steps:
+      # clear apt-get cache
+      - run: sudo apt-get clean
+      - run: rm -rf /var/lib/apt/lists/*
       - run: sudo apt-get clean
       - run: sudo apt-get update
+      - run: apt-get upgrade
+      # install deps
       - run: sudo apt install rsync
       - run: sudo npm i -g yarn@~1.12
 

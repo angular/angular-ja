@@ -146,7 +146,7 @@ ng generate application my-first-app
 
 最初に明示的に生成されたアプリケーションは、ワークスペース内の他のすべてのプロジェクトと共に `projects/` フォルダーに入ります。
 新しく生成されたライブラリも `projects/` の下に追加されています。
-この方法でプロジェクトを作成すると、ワークスペースのファイル構造は、 [ワークスペース構成ファイル](guide/workspace-config) 、 `angle.json` の構造と完全に一致します。
+この方法でプロジェクトを作成すると、ワークスペースのファイル構造は、 [ワークスペース構成ファイル](guide/workspace-config) 、 `angular.json` の構造と完全に一致します。
 
 <code-example language="none" linenums="false">
 my-workspace/
@@ -175,7 +175,7 @@ CLIを使用して（ `ng generate library my-lib` などのコマンドを使�
 | :------------------- | :----------------------------------------------------------------------------|
 | `src/lib`            | ライブラリプロジェクトのロジックとデータが含まれています。 アプリケーションプロジェクトと同様に、ライブラリプロジェクトには、コンポーネント、サービス、モジュール、ディレクティブ、およびパイプを含めることができます。 |
 | `src/test.ts`        | 単体テストの主な入り口で、ライブラリ固有の設定がいくつかあります。通常このファイルを編集する必要はありません。 |
-| `src/public-api.ts`  | ライブラリーからエクスポートされたすべてのファイルを指定します。 |
+| `src/public-api.ts`  | ライブラリからエクスポートされたすべてのファイルを指定します。 |
 | `karma.conf.js`      | ライブラリ固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定 |
 | `ng-package.json`    | ライブラリを構築するために [ng-packagr](https://github.com/ng-packagr/ng-packagr) によって使用される設定ファイル。 |
 | `package.json`       | このライブラリに必要な [npmパッケージの依存関係](guide/npm-packages) を設定します。 |

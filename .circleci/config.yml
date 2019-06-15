@@ -15,7 +15,7 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     steps:
-      - run: sudo apt install rsync --fix-missing
+      - run: sudo apt install rsync
       - run: sudo npm i -g yarn@~1.12
 
       - checkout

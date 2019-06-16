@@ -1182,7 +1182,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  これにより以下のエラーが発生します:
+  これにより次のエラーが発生します:
 
   ```
   my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on type 'Person'. Did you mean 'address'?
@@ -1226,7 +1226,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
 
   `*ngIf` のように動作するディレクティブは、`*ngIf` のように扱うためのテンプレートコンパイラへのシグナルである静的メンバーマーカーを含めることで、
   同じ扱いが必要であることを宣言できます。
-  `*ngIf` のこの静的メンバは以下のとおりです。
+  `*ngIf` のこの静的メンバは次のとおりです。
 
   ```typescript
     public static ngIfUseIfTypeGuard: void;
@@ -1268,7 +1268,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   コンポーネントのリファクタリングはこの制約を破る可能性があるため、
   null 以外のアサーション演算子は控えめに使用してください。
 
-  この例では、以下に示すように
+  この例では、次に示すように
   `*ngIf` に `address` のチェックを含めることをお勧めします:
 
   ```typescript

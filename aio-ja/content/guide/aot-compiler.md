@@ -1237,17 +1237,17 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   テンプレートがインスタンス化されることを意味します。
 
 
-  ### Non-null type assertion operator
+  ### null 以外の型アサーション演算子
 
-  Use the [non-null type assertion operator](guide/template-syntax#non-null-assertion-operator)
-  to suppress the `Object is possibly 'undefined'` error when it is inconvenient to use
-  `*ngIf` or when some constraint in the component ensures that the expression is always
-  non-null when the binding expression is interpolated.
+  `*ngIf` を使用するのが不便な場合、
+  またはバインディング式の補間時にコンポーネント内の制約によって式が常に NULL 以外になることが保証されている場合は、
+  [null 以外の型アサーション演算子](guide/template-syntax#non-null-assertion-operator)を使用して
+  `Object is possibly 'undefined'` エラーを抑制します。
 
-  In the following example, the `person` and `address` properties are always set together,
-  implying that `address` is always non-null if `person` is non-null. There is no convenient
-  way to describe this constraint to TypeScript and the template compiler, but the error
-  is suppressed in the example by using `address!.street`.
+  次の例では、`person` プロパティと `address` プロパティは常に一緒に設定されているため、
+  `person` が null 以外の場合、`address` は常に null 以外の値になります。
+  TypeScript やテンプレートコンパイラにこの制約を記述するのに便利な方法はありませんが、
+  この例では `address!.street` を使用してエラーを抑制しています。
 
   ```typescript
   @Component({
@@ -1265,11 +1265,11 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  The non-null assertion operator should be used sparingly as refactoring of the component
-  might break this constraint.
+  コンポーネントのリファクタリングはこの制約を破る可能性があるため、
+  null 以外のアサーション演算子は控えめに使用してください。
 
-  In this example it is recommended to include the checking of `address`
-  in the `*ngIf`as shown below:
+  この例では、以下に示すように
+  `*ngIf` に `address` のチェックを含めることをお勧めします:
 
   ```typescript
   @Component({
@@ -1287,15 +1287,15 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  ### Disabling type checking using `$any()`
+  ### `$any()` を使って型チェックを無効にする
 
-  Disable checking of a binding expression by surrounding the expression
-  in a call to the [`$any()` cast pseudo-function](guide/template-syntax).
-  The compiler treats it as a cast to the `any` type just like in TypeScript when a `<any>`
-  or `as any` cast is used.
+  [`$any()` キャスト疑似関数](guide/template-syntax)の呼び出しで式を囲むことによって、
+  バインディング式のチェックを無効にします。
+  `<any>` が使用されている場合、または `as any` キャストが使用されている場合は、
+  TypeScript の場合と同様に、コンパイラはこれを `any` 型へのキャストとして扱います。
 
-  In the following example, the error `Property addresss does not exist` is suppressed
-  by casting `person` to the `any` type.
+  次の例では、`Property addresss does not exist` というエラーは、
+  `person` を `any` 型にキャストすることによって抑制されます。
 
   ```typescript
   @Component({
@@ -1308,11 +1308,11 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   ```
 
 {@a tsconfig-extends}
-## Configuration inheritance with extends
-Similar to TypeScript Compiler, Angular Compiler also supports `extends` in the `tsconfig.json` on `angularCompilerOptions`. A tsconfig file can inherit configurations from another file using the `extends` property.
- The `extends` is a top level property parallel to `compilerOptions` and `angularCompilerOptions`. 
- The configuration from the base file are loaded first, then overridden by those in the inheriting config file.
- Example:
+## extends による設定の継承
+TypeScript コンパイラと同様に、Angular コンパイラは `tsconfig.json` の `angularCompilerOptions` の `extends` もサポートしています。
+tsconfig ファイルは、`extends` プロパティを使用して別のファイルから構成を継承できます。
+`extends` は、`compilerOptions` および `angularCompilerOptions` と並行するトップレベルのプロパティです。ベースファイルの設定が最初にロードされ、次に継承設定ファイルの設定によって上書きされます。 
+例:
 ```json
 {
   "extends": "../tsconfig.base.json",
@@ -1327,7 +1327,7 @@ Similar to TypeScript Compiler, Angular Compiler also supports `extends` in the 
   }
 }
 ```
- More information about tsconfig extends can be found in the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+ tsconfig の extends についての詳細は [TypeScript ハンドブック](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)にあります。
 
 {@a compiler-options}
 ## Angular template compiler options

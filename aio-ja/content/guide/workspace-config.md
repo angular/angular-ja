@@ -64,9 +64,9 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 | `architect`     | このプロジェクトでArchitectが使用するビルダーのターゲットのためのデフォルト設定です。 |
 
 {@a schematics}
-## Generation schematics
+## 生成 schematics
 
-Angularの generation [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
+Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
 デフォルトのAngular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@angular` にまとめられています。
 サブコマンドのschematicの名称を、 `schematic-package:schematic-name` の形式で指定します;
 たとえば、コンポーネントを生成するためのschematicは `@angular:component` です。
@@ -195,10 +195,10 @@ Angularは、Architectツールと `ng run` コマンドで使用するデフォ
 ワークスペースのルートを基準にした単純なパスとしてではなく、アセットをオブジェクトとして指定することで、アセットをコピーするように構成できます。
 アセットを指定したオブジェクトは、次のフィールドをもつことができます。
 
-* `glob`:  `input` をベースディレクトリとして使用する A [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) 。
+* `glob`: `input` をベースディレクトリとして使用する [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) 。
 * `input`: ワークスペースのルートからの相対パス。
 * `output`: `outDir` からの相対パス（デフォルトは`dist/`*project-name*）。 セキュリティへの影響のため、CLIはプロジェクトの出力パスの外側にファイルを書き込むことはありません。
-* `ignore`: ignore：除外するglobsのリスト。
+* `ignore`: 除外するglobsのリスト。
 
 たとえば、デフォルトのアセットのパスは、次のオブジェクトを使用してより詳細に表すことができます。
 

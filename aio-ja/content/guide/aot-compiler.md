@@ -698,7 +698,7 @@ Angular メタデータを作成するときはコンパイラの[制限され�
 <hr>
 
 {@a reference-to-a-local-symbol}
-<h3 class="no-toc">(エクスポートされていない) ローカルシンボルの参照</h3>
+<h3 class="no-toc">Reference to a local (non-exported) symbol</h3>
 
 <div class="alert is-helpful">
 
@@ -723,15 +723,15 @@ let foo: number; // neither exported nor initialized
 })
 export class MyComponent {}
 ```
-The compiler generates the component factory, which includes the `useValue` provider code, in a separate module. _That_ factory module can't reach back to _this_ source module to access the local (non-exported) `foo` variable.
+コンパイラはコンポーネントファクトリを生成します。これは `useValue` プロバイダーコードを含み、別のモジュールで生成されます。 _That_ ファクトリモジュールはローカルの (エクスポートされていない) 変数 `foo` にアクセスするためにこのソースモジュールに戻ることはできません。
 
-You could fix the problem by initializing `foo`.
+`foo` を初期化することで問題を解決することができます。
 
 ```
 let foo = 42; // initialized
 ```
 
-The compiler will [fold](#folding) the expression into the provider as if you had written this.
+あなたがこれを書いたかのように、コンパイラは式をプロバイダーに [折りたたむ](#folding) でしょう。
 
 ```
   providers: [
@@ -739,7 +739,7 @@ The compiler will [fold](#folding) the expression into the provider as if you ha
   ]
 ```
 
-Alternatively, you can fix it by exporting `foo` with the expectation that `foo` will be assigned at runtime when you actually know its value.
+あるいは、実際に値がわかっているときに実行時に `foo` が代入されることを期待して `foo` をエクスポートすることで修正できます。
 
 ```
 // CORRECTED
@@ -755,11 +755,11 @@ export let foo: number; // exported
 export class MyComponent {}
 ```
 
-Adding `export` often works for variables referenced in metadata such as `providers` and `animations` because the compiler can generate _references_ to the exported variables in these expressions. It doesn't need the _values_ of those variables.
+`export` を追加することは、`providers` や `animations` のようなメタデータで参照されている変数に対してよく機能します。なぜなら、コンパイラはこれらの式でエクスポートされた変数に対して _参照_ を生成できるからです。それらの変数の _値_ は必要ありません。
 
-Adding `export` doesn't work when the compiler needs the _actual value_
-in order to generate code.
-For example, it doesn't work for the `template` property.
+コードを生成するためにコンパイラが _実際の値_ を必要とする場合、
+`export` の追加は機能しません。
+たとえば、`template` プロパティには機能しません。
 
 ```
 // ERROR
@@ -772,9 +772,9 @@ export let someTemplate: string; // exported but not initialized
 export class MyComponent {}
 ```
 
-The compiler needs the value of the `template` property _right now_ to generate the component factory.
-The variable reference alone is insufficient.
-Prefixing the declaration with `export` merely produces a new error, "[`Only initialized variables and constants can be referenced`](#only-initialized-variables)".
+コンポーネントファクトリを生成するために、コンパイラは _すぐに_ `template` プロパティの値を必要とします。
+変数参照だけでは不十分です。
+宣言の先頭に `export` を付けると、単に "[`Only initialized variables and constants can be referenced`](#only-initialized-variables)" という新しいエラーが発生します。
 
 <hr>
 
@@ -783,15 +783,15 @@ Prefixing the declaration with `export` merely produces a new error, "[`Only ini
 
 <div class="alert is-helpful">
 
-_Only initialized variables and constants can be referenced because the value of this variable is needed by the template compiler._
+_この変数の値はテンプレートコンパイラで必要とされるため、初期化された変数と定数のみを参照できます。_
 
 </div>
 
-The compiler found a reference to an exported variable or static field that wasn't initialized.
-It needs the value of that variable to generate code.
+初期化されていないエクスポートされた変数またはスタティックフィールドへの参照をコンパイラが見つけました。
+コードを生成するにはその変数の値が必要です。
 
-The following example tries to set the component's `template` property to the value of
-the exported `someTemplate` variable which is declared but _unassigned_.
+次の例では、コンポーネントの `template` プロパティを、
+宣言されているが _割り当てられていない_ エクスポートされた `someTemplate` 変数の値に設定しようとします。
 
 ```
 // ERROR
@@ -804,7 +804,7 @@ export let someTemplate: string;
 export class MyComponent {}
 ```
 
-You'd also get this error if you imported `someTemplate` from some other module and neglected to initialize it there.
+他のモジュールから `someTemplate` をインポートしてそこで初期化するのを怠った場合にもこのエラーが発生します。
 
 ```
 // ERROR - not initialized there either
@@ -817,12 +817,12 @@ import { someTemplate } from './config';
 export class MyComponent {}
 ```
 
-The compiler cannot wait until runtime to get the template information.
-It must statically derive the value of the `someTemplate` variable from the source code
-so that it can generate the component factory, which includes
-instructions for building the element based on the template.
+コンパイラは実行時までテンプレート情報を取得するのを待つことができません。
+テンプレートに基づいて要素を構築するための命令を含む
+コンポーネントファクトリを生成できるように、
+ソースコードから `someTemplate` 変数の値を静的に導出する必要があります。
 
-To correct this error, provide the initial value of the variable in an initializer clause _on the same line_.
+このエラーを修正するには、 _同じ行の_ initializer 句に変数の初期値を指定します。
 
 ```
 // CORRECTED
@@ -841,14 +841,14 @@ export class MyComponent {}
 
 <div class="alert is-helpful">
 
-_Reference to a non-exported class <class name>. Consider exporting the class._
+_エクスポートされていないクラス <クラス名> への参照。クラスのエクスポートを検討してください。_
 
 </div>
 
-Metadata referenced a class that wasn't exported.
+メタデータはエクスポートされなかったクラスを参照しました。
 
-For example, you may have defined a class and used it as an injection token in a providers array
-but neglected to export that class.
+たとえば、あるクラスを定義し、それをprovider配列の中でインジェクショントークンとして使用したが、
+そのクラスをエクスポートしていなかったとします。
 
 ```
 // ERROR
@@ -861,9 +861,9 @@ abstract class MyStrategy { }
   ...
 ```
 
-Angular generates a class factory in a separate module and that
-factory [can only access exported classes](#exported-symbols).
-To correct this error, export the referenced class.
+Angular は別のモジュールでクラスファクトリを生成し、そのファクトリは
+[エクスポートされたクラスにのみアクセスできます](#exported-symbols)。
+このエラーを修正するには、参照先クラスをエクスポートしてください。
 
 ```
 // CORRECTED

@@ -879,9 +879,9 @@ export abstract class MyStrategy { }
 
 <h3 class="no-toc">Reference to a non-exported function</h3>
 
-Metadata referenced a function that wasn't exported.
+メタデータはエクスポートされなかった関数を参照しました。
 
-For example, you may have set a providers `useFactory` property to a locally defined function that you neglected to export.
+たとえば、プロバイダーの `useFactory` プロパティを、エクスポートされなかったローカルに定義された関数に設定したかもしれません。
 
 ```
 // ERROR
@@ -894,9 +894,9 @@ function myStrategy() { ... }
   ...
 ```
 
-Angular generates a class factory in a separate module and that
-factory [can only access exported functions](#exported-symbols).
-To correct this error, export the function.
+Angular は別のモジュールでクラスファクトリを生成し、そのファクトリは
+[エクスポートされた関数にのみアクセスできます](#exported-symbols)。
+このエラーを修正するには、関数をエクスポートしてください。
 
 ```
 // CORRECTED
@@ -915,12 +915,12 @@ export function myStrategy() { ... }
 
 <div class="alert is-helpful">
 
-_Function calls are not supported. Consider replacing the function or lambda with a reference to an exported function._
+_関数呼び出しはサポートされていません。関数またはラムダをエクスポートされた関数への参照に置き換えることを検討してください。_
 
 </div>
 
-The compiler does not currently support [function expressions or lambda functions](#function-expression).
-For example, you cannot set a provider's `useFactory` to an anonymous function or arrow function like this.
+コンパイラは現在、[関数式やラムダ関数](#function-expression) をサポートしていません。
+たとえば、プロバイダーの `useFactory` を、このような無名関数やアロー関数に設定することはできません。
 
 ```
 // ERROR
@@ -931,7 +931,7 @@ For example, you cannot set a provider's `useFactory` to an anonymous function o
   ]
   ...
 ```
-You also get this error if you call a function or method in a provider's `useValue`.
+プロバイダーの `useValue` で関数やメソッドを呼び出した場合にもこのエラーが発生します。
 ```
 // ERROR
 import { calculateValue } from './utilities';
@@ -943,7 +943,7 @@ import { calculateValue } from './utilities';
   ...
 ```
 
-To correct this error, export a function from the module and refer to the function in a `useFactory` provider instead.
+このエラーを修正するには、モジュールから関数をエクスポートし、代わりに `useFactory` プロバイダーの関数を参照してください。
 
 <code-example linenums="false">
 // CORRECTED
@@ -970,13 +970,13 @@ export function someValueFactory() {
 
 <div class="alert is-helpful">
 
-_Referencing an exported destructured variable or constant is not supported by the template compiler. Consider simplifying this to avoid destructuring._
+_エクスポートされた非構造化変数または定数の参照は、テンプレートコンパイラではサポートされていません。デストラクチャリングを避けるためにこれを単純化することを検討してください。_
 
 </div>
 
-The compiler does not support references to variables assigned by [destructuring](https://www.typescriptlang.org/docs/handbook/variable-declarations.html#destructuring).
+コンパイラは [デストラクチャリング](https://www.typescriptlang.org/docs/handbook/variable-declarations.html#destructuring) によって割り当てられた変数への参照をサポートしません。
 
-For example, you cannot write something like this:
+たとえば、次のようなものを書くことはできません:
 
 <code-example linenums="false">
 // ERROR
@@ -992,7 +992,7 @@ const {foo, bar} = configuration;
   ...
 </code-example>
 
-To correct this error, refer to non-destructured values.
+このエラーを修正するには、非構造化された値を参照してください。
 
 <code-example linenums="false">
 // CORRECTED
@@ -1009,13 +1009,13 @@ import { configuration } from './configuration';
 
 <h3 class="no-toc">Could not resolve type</h3>
 
-The compiler encountered a type and can't determine which module exports that type.
+コンパイラが型を検出しましたが、どのモジュールがその型をエクスポートしているのか判断できません。
 
-This can happen if you refer to an ambient type.
-For example, the `Window` type is an ambient type declared in the global `.d.ts` file.
+これは、アンビエントタイプを参照した場合に起こります。
+たとえば、`Window` 型はグローバルな `.d.ts` ファイルで宣言されているアンビエント型です。
 
-You'll get an error if you reference it in the component constructor,
-which the compiler must statically analyze.
+コンポーネントコンストラクターで参照するとエラーが発生しますが、
+これをコンパイラが静的に分析する必要があります。
 
 ```
 // ERROR
@@ -1024,22 +1024,22 @@ export class MyComponent {
   constructor (private win: Window) { ... }
 }
 ```
-TypeScript understands ambient types so you don't import them.
-The Angular compiler does not understand a type that you neglect to export or import.
+TypeScript はアンビエントタイプを理解するため、インポートしません。
+Angular コンパイラは、エクスポートまたはインポートを無視した型を理解しません。
 
-In this case, the compiler doesn't understand how to inject something with the `Window` token.
+この場合、コンパイラは `Window` トークンで何かを注入する方法を理解していません。
 
-Do not refer to ambient types in metadata expressions.
+メタデータ式でアンビエントタイプを参照しないでください。
 
-If you must inject an instance of an ambient type,
-you can finesse the problem in four steps:
+アンビエントタイプのインスタンスを注入する必要がある場合は、
+4つのステップで問題を解決できます:
 
-1. Create an injection token for an instance of the ambient type.
-1. Create a factory function that returns that instance.
-1. Add a `useFactory` provider with that factory function.
-1. Use `@Inject` to inject the instance.
+1. アンビエントタイプのインスタンスのインジェクショントークンを作成します
+1. そのインスタンスを返すファクトリ関数を作成します
+1. そのファクトリ関数で `useFactory` プロバイダーを追加します
+1. インスタンスを注入するには `@Inject` を使います
 
-Here's an illustrative example.
+これが実例です。
 
 <code-example linenums="false">
 // CORRECTED
@@ -1059,10 +1059,10 @@ export class MyComponent {
 }
 </code-example>
 
-The `Window` type in the constructor is no longer a problem for the compiler because it
-uses the `@Inject(WINDOW)` to generate the injection code.
+コンストラクター内の `Window` 型は、`@Inject(WINDOW)` を使用してインジェクションコードを生成するため、
+コンパイラにとってもはや問題ではありません。
 
-Angular does something similar with the `DOCUMENT` token so you can inject the browser's `document` object (or an abstraction of it, depending upon the platform in which the application runs).
+Angular は `DOCUMENT` トークンと似たようなことをするので、ブラウザの `document` オブジェクト (あるいはアプリケーションが実行されているプラットフォームによってはその抽象オブジェクト) を挿入することができます。
 
 <code-example linenums="false">
 import { Inject }   from '@angular/core';

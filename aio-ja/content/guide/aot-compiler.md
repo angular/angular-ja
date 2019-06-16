@@ -1077,15 +1077,15 @@ export class MyComponent {
 
 <h3 class="no-toc">Name expected</h3>
 
-The compiler expected a name in an expression it was evaluating.
-This can happen if you use a number as a property name as in the following example.
+コンパイラは評価中の式に名前が必要です。
+次の例のように、プロパティ名として番号を使用すると、これが発生する可能性があります。
 
 ```
 // ERROR
 provider: [{ provide: Foo, useValue: { 0: 'test' } }]
 ```
 
-Change the name of the property to something non-numeric.
+プロパティの名前を数値以外のものに変更します。
 
 ```
 // CORRECTED
@@ -1096,10 +1096,9 @@ provider: [{ provide: Foo, useValue: { '0': 'test' } }]
 
 <h3 class="no-toc">Unsupported enum member name</h3>
 
-Angular couldn't determine the value of the [enum member](https://www.typescriptlang.org/docs/handbook/enums.html)
-that you referenced in metadata.
+Angular は、メタデータで参照した [列挙型メンバー](https://www.typescriptlang.org/docs/handbook/enums.html) の値を特定できませんでした。
 
-The compiler can understand simple enum values but not complex values such as those derived from computed properties.
+コンパイラは単純な enum 値を理解できますが、計算プロパティから派生したものなどの複雑な値は理解できません。
 
 <code-example linenums="false">
 // ERROR
@@ -1118,7 +1117,7 @@ enum Colors {
   ...
 </code-example>
 
-Avoid referring to enums with complicated initializers or computed properties.
+複雑なイニシャライザや計算プロパティで列挙型を参照しないでください。
 
 <hr>
 
@@ -1127,11 +1126,11 @@ Avoid referring to enums with complicated initializers or computed properties.
 
 <div class="alert is-helpful">
 
-_Tagged template expressions are not supported in metadata._
+_タグ付きテンプレート式は、メタデータではサポートされていません。_
 
 </div>
 
-The compiler encountered a JavaScript ES2015 [tagged template expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals) such as,
+コンパイラが次のような JavaScript ES2015 [タグ付きテンプレート式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals)を検出しました。
 ```
 // ERROR
 const expression = 'funky';
@@ -1140,18 +1139,18 @@ const raw = String.raw`A tagged template ${expression} string`;
  template: '<div>' + raw + '</div>'
  ...
 ```
-[`String.raw()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/raw)
-is a _tag function_ native to JavaScript ES2015.
+[`String.raw()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/raw) は、JavaScript ES2015 ネイティブの
+_タグ付き関数_ です。
 
-The AOT compiler does not support tagged template expressions; avoid them in metadata expressions.
+AOT コンパイラはタグ付きテンプレート式をサポートしません。メタデータ式でそれらを避けてください。
 
 <hr>
 
 <h3 class="no-toc">Symbol reference expected</h3>
 
-The compiler expected a reference to a symbol at the location specified in the error message.
+コンパイラは、エラーメッセージで指定された場所にあるシンボルへの参照を予期していました。
 
-This error can occur if you use an expression in the `extends` clause of a class.
+このエラーは、クラスの `extends` 節で式を使用した場合に起こります。
 
 <!--
 

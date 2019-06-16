@@ -443,19 +443,19 @@ _collector_ はこの式をそれに相当する _folded_ 文字列に変換し�
 式が折りたたみ式ではない場合、コレクタはそれをコンパイラが解決するための [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として `.metadata.json` に書き込みます。
 
 
-## Phase 2: code generation
+## フェーズ 2: コードの生成
 
-The _collector_ makes no attempt to understand the metadata that it collects and outputs to `.metadata.json`. It represents the metadata as best it can and records errors when it detects a metadata syntax violation.
+_collector_ は、収集して `.metadata.json` に出力するメタデータを理解しようとはしません。可能な限りメタデータを表し、メタデータ構文の違反を検出したときにエラーを記録します。
 
-It's the compiler's job to interpret the `.metadata.json` in the code generation phase.
+コード生成フェーズで `.metadata.json` を解釈するのはコンパイラの仕事です。
 
-The compiler understands all syntax forms that the _collector_ supports, but it may reject _syntactically_ correct metadata if the _semantics_ violate compiler rules.
+コンパイラは _コレクター_ がサポートするすべての構文形式を理解しますが、_セマンティックス_ がコンパイラの規則に違反している場合は、正しいメタデータを構文的に拒否することがあります。
 
-The compiler can only reference _exported symbols_.
+コンパイラは _エクスポートされたシンボル_ しか参照できません。
 
-Decorated component class members must be public. You cannot make an `@Input()` property private or protected.
+デコレートされたコンポーネントクラスメンバは公開されている必要があります。`@Input()` プロパティを非公開にしたり、保護することはできません。
 
-Data bound properties must also be public.
+データバインドプロパティもパブリックにする必要があります。
 
 ```typescript
 // BAD CODE - title is private
@@ -469,16 +469,16 @@ export class AppComponent {
 ```
 
 {@a supported-functions}
-Most importantly, the compiler only generates code to create instances of certain classes, support certain decorators, and call certain functions from the following lists.
+最も重要なことは、コンパイラは特定のクラスのインスタンスを作成し、特定のデコレータをサポートし、そして以下のリストから特定の関数を呼び出すためのコードを生成するだけです。
 
 
-### New instances
+### 新しいインスタンス
 
-The compiler only allows metadata that create instances of the class `InjectionToken` from `@angular/core`.
+コンパイラは `@angular/core` からクラス `InjectionToken` のインスタンスを作成するメタデータのみを許可します。
 
-### Annotations/Decorators
+### アノテーション/デコレーター
 
-The compiler only supports metadata for these Angular decorators.
+コンパイラはこれらの Angular デコレーターのメタデータのみをサポートします。
 
 <style>
   td, th {vertical-align: top}
@@ -486,8 +486,8 @@ The compiler only supports metadata for these Angular decorators.
 
 <table>
   <tr>
-    <th>Decorator</th>
-    <th>Module</th>
+    <th>デコレーター</th>
+    <th>モジュール</th>
   </tr>
     <tr>
     <td><code>Attribute</code></td>
@@ -566,12 +566,12 @@ The compiler only supports metadata for these Angular decorators.
 
 
 
-### Macro-functions and macro-static methods
+### マクロ関数とマクロ静的メソッド
 
-The compiler also supports _macros_ in the form of functions or static
-methods that return an expression.
+コンパイラーは、関数または静的の形式で
+ _マクロ_ もサポートします。
 
-For example, consider the following function:
+たとえば、次の関数を考えてください:
 
 ```typescript
 export function wrapInArray<T>(value: T): T[] {
@@ -579,9 +579,9 @@ export function wrapInArray<T>(value: T): T[] {
 }
 ```
 
-You can call the `wrapInArray` in a metadata definition because it returns the value of an expression that conforms to the compiler's restrictive JavaScript subset.
+メタデータ定義の中で `wrapInArray` を呼び出すことができます。それはコンパイラの制限的な JavaScript サブセットに準拠する式の値を返すからです。
 
-You might use  `wrapInArray()` like this:
+このように `wrapInArray()` を使うかもしれません:
 
 ```typescript
 @NgModule({
@@ -590,7 +590,7 @@ You might use  `wrapInArray()` like this:
 export class TypicalModule {}
 ```
 
-The compiler treats this usage as if you had written:
+コンパイラはこの使用法を、あなたが書いたかのように扱います:
 
 ```typescript
 @NgModule({
@@ -599,23 +599,23 @@ The compiler treats this usage as if you had written:
 export class TypicalModule {}
 ```
 
-The collector is simplistic in its determination of what qualifies as a macro
-function; it can only contain a single `return` statement.
+コレクターは、マクロ関数と見なされるものを決定する際に単純化されています。
+単一の `return` ステートメントしか含めることができません。
 
-The Angular [`RouterModule`](api/router/RouterModule) exports two macro static methods, `forRoot` and `forChild`, to help declare root and child routes.
-Review the [source code](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")
-for these methods to see how macros can simplify configuration of complex [NgModules](guide/ngmodules).
+Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ルートを宣言するのに役立つように、2つのマクロ静的メソッド `forRoot` と `forChild` をエクスポートします。
+これらのメソッドの[ソースコード](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")を調べて、
+複雑な [NgModules](guide/ngmodules) の構成をマクロで簡単にする方法を確認してください。
 
 {@a metadata-rewriting}
 
-### Metadata rewriting
+### メタデータ書き換え
 
-The compiler treats object literals containing the fields `useClass`, `useValue`, `useFactory`, and `data` specially. The compiler converts the expression initializing one of these fields into an exported variable, which replaces the expression. This process of rewriting these expressions removes all the restrictions on what can be in them because
-the compiler doesn't need to know the expression's value&mdash;it just needs to be able to generate a reference to the value.
+コンパイラは `useClass`、`useValue`、`useFactory`、および `data` の各フィールドを含むオブジェクトリテラルを特別に扱います。コンパイラは、これらのフィールドの1つを初期化する式をエクスポートされた変数に変換します。この変数が式を置き換えます。
+これらの式を書き換えるこのプロセスは、式の値を知る必要がなく、単に値への参照を生成できる必要があるため、式に含まれる可能性があるものに対するすべての制限を取り除きます。
 
 
 
-You might write something like:
+あなたはこんな風に書くかもしれません:
 
 ```typescript
 class TypicalServer {
@@ -645,15 +645,15 @@ export const ɵ0 = () => new TypicalServer();
 export class TypicalModule {}
 ```
 
-This allows the compiler to generate a reference to `ɵ0` in the
-factory without having to know what the value of `ɵ0` contains.
+これにより、コンパイラは、`ɵ0` の値に何が含まれているのかを知らなくても、
+ファクトリー内で `ɵ0` への参照を生成できます。
 
-The compiler does the rewriting during the emit of the `.js` file. This doesn't rewrite the `.d.ts` file, however, so TypeScript doesn't recognize it as being an export. Thus, it does not pollute the ES module's exported API.
+コンパイラは `.js` ファイルの発行中に書き換えを行います。ただし、これは `.d.ts` ファイルを書き換えないため、TypeScript はそれをエクスポートとして認識しません。したがって、それは ES モジュールのエクスポートされた API を汚染しません。
 
 
-## Metadata errors
+## メタデータエラー
 
-The following are metadata errors you may encounter, with explanations and suggested corrections.
+以下は、発生する可能性があるメタデータエラーとその説明および推奨される修正です。
 
 [Expression form not supported](#expression-form-not-supported)<br>
 [Reference to a local (non-exported) symbol](#reference-to-a-local-symbol)<br>
@@ -672,10 +672,10 @@ The following are metadata errors you may encounter, with explanations and sugge
 
 <h3 class="no-toc">Expression form not supported</h3>
 
-The compiler encountered an expression it didn't understand while evaluating Angular metadata.
+Angularメタデータの評価中にコンパイラが理解できない式に遭遇しました。
 
-Language features outside of the compiler's [restricted expression syntax](#expression-syntax)
-can produce this error, as seen in the following example:
+次の例に示すように、コンパイラの[制限された式の構文](#expression-syntax)以外の言語機能で
+このエラーが発生する可能性があります。
 
 ```
 // ERROR
@@ -688,27 +688,27 @@ const prop = typeof Fooish; // typeof is not valid in metadata
   ...
 ```
 
-You can use `typeof` and bracket notation in normal application code.
-You just can't use those features within expressions that define Angular metadata.
+通常のアプリケーションコードでは `typeof` と括弧表記を使うことができます。
+Angular メタデータを定義する式の中でこれらの機能を使用することはできません。
 
-Avoid this error by sticking to the compiler's [restricted expression syntax](#expression-syntax)
-when writing Angular metadata
-and be wary of new or unusual TypeScript features.
+Angular メタデータを作成するときはコンパイラの[制限された式の構文](#expression-syntax)に用心してこのエラーを回避し、
+新しいまたは珍しい TypeScript の機能がある場合には
+注意してください。
 
 <hr>
 
 {@a reference-to-a-local-symbol}
-<h3 class="no-toc">Reference to a local (non-exported) symbol</h3>
+<h3 class="no-toc">(エクスポートされていない) ローカルシンボルの参照</h3>
 
 <div class="alert is-helpful">
 
-_Reference to a local (non-exported) symbol 'symbol name'. Consider exporting the symbol._
+_(エクスポートされていない) ローカルシンボル 'シンボル名'への参照。シンボルのエクスポートを検討してください。_
 
 </div>
 
-The compiler encountered a referenced to a locally defined symbol that either wasn't exported or wasn't initialized.
+コンパイラが、エクスポートされていないか初期化されていないローカルに定義されたシンボルへの参照を検出しました。
 
-Here's a `provider` example of the problem.
+これが問題の `provider` の例です。
 
 ```
 // ERROR

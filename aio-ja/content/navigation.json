@@ -554,7 +554,8 @@
             {
               "url": "guide/app-shell",
               "title": "App Shell",
-              "tooltip": "Enabling the App Shell in a CLI project."
+              "tooltip": "CLIプロジェクトでApp Shellを有効にする",
+              "translated": true
             },
             {
               "url": "guide/service-worker-communications",

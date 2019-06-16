@@ -740,8 +740,8 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 
 ## サンプルアプリケーション
 
-このガイドでは、ルーティングを使ったマルチページのサンプルアプリケーションの開発方法を解説する。
-内容として、ルーターの設計上の決定事やキーとなる機能など以下のとおりである:
+このガイドでは、ルーティングを使ったマルチページのサンプルアプリケーションの開発方法を解説します。
+内容として、ルーターの設計上の決定事やキーとなる機能など以下のとおりです:
 
 
 * アプリケーションの機能をモジュールに統合する
@@ -755,25 +755,25 @@ URLがブラウザのアドレスバーから直接渡されることもある�
 * 機能モジュール群の遅延読み込み
 * `CanLoad`でのガード (機能モジュール読み込み前のチェック)
 
-ガイドではアプリケーションを構築するために必要なマイルストーンを順番にならべてある。
-ただしこれはチュートリアルではない。Angularアプリケーション構築の方法をまとめているが、その内容は、ほかの場所でもっと詳細に書かれている。
+ガイドではアプリケーションを構築するために必要なマイルストーンを順番にならべてあります。
+ただしこれはチュートリアルではありません。Angularアプリケーション構築の方法をまとめていますが、その内容は、ほかの場所でもっと詳細に書かれています。
 
-このアプリケーションの最終版の全ソースは <live-example></live-example> からダウンロードできる。
+このアプリケーションの最終版の全ソースは <live-example></live-example> からダウンロードできます。
 
 
 ### 作ろうとしているアプリケーション
 
-_ヒーローを雇用する会社_の運用を手助けするアプリケーションを想像してみる。ヒーローたちは働く必要があり、会社はヒーローたちの助けを必要とする危機をどこからか探さなければならない。
+_ヒーローを雇用する会社_の運用を手助けするアプリケーションを想像してみます。ヒーローたちは働く必要があり、会社はヒーローたちの助けを必要とする危機をどこからか探さなければなりません。
 
-アプリケーションには主として三つの機能領域が必要となる:
+アプリケーションには主として三つの機能領域が必要となります:
 
 1. 危機のリストでヒーローをアサインして管理していく*Crisis Center*
 1. 会社に雇われているヒーローのリストであるエリア*Heroes*
 1. 危機やヒーローのリストを管理するエリア*Admin*
 
-この <live-example title="Hero Employment Agency Live Example">サンプルリンク</live-example>を試しにクリックしてみてほしい。
+この <live-example title="Hero Employment Agency Live Example">サンプルリンク</live-example>を試しにクリックしてみます。
 
-アプリケーションが動き始めると、ナビゲーションボタンの列と、*Heroes*がリストで見られるビューがあるだろう。
+アプリケーションが動き始めると、ナビゲーションボタンの列と、*Heroes*がリストで見られるビューがあります。
 
 
 <figure>
@@ -783,7 +783,7 @@ _ヒーローを雇用する会社_の運用を手助けするアプリケーシ
 
 
 Select one hero and the app takes you to a hero editing screen.
-ヒーローを一つ選択すると、アプリケーションはヒーローの編集画面へ移動する。
+ヒーローを一つ選択すると、アプリケーションはヒーローの編集画面へ移動します。
 
 <figure>
   <img src='generated/images/guide/router/hero-detail.png' alt="Crisis Center Detail">
@@ -793,13 +793,13 @@ Select one hero and the app takes you to a hero editing screen.
 
 名前を変えてみよう。
 "Back"をクリックすると、画面はヒーローリストに戻るが、ヒーローの名前は変更されている。
-名前の変更がすぐに行われたことがわかる。
+名前の変更がすぐに行われたことがわかります。
 
 ブラウザの戻るボタンの代わりに"Back"ボタンを押し、さっきのヒーローリストがまた表示された、
-Angularアプリケーションの遷移では通常のウェブのナビゲーションと同様に、ブラウザ履歴の更新が行われる。
+Angularアプリケーションの遷移では通常のウェブのナビゲーションと同様に、ブラウザ履歴の更新が行われます。
 
 Now click the *Crisis Center* link for a list of ongoing crises.
-リンク*Crisis Center*をクリックし、現在起こっている危機の一覧を見てみよう。
+リンク*Crisis Center*をクリックし、現在起こっている危機の一覧を見てみます。
 
 
 <figure>
@@ -808,12 +808,12 @@ Now click the *Crisis Center* link for a list of ongoing crises.
 
 
 
-どれか危機を選択すると、その編集画面に遷移する。_Crisis Detail_がページ内に子コンポーネントとして現れる。
+どれか危機を選択すると、その編集画面に遷移します。_Crisis Detail_がページ内に子コンポーネントとして現れます。
 
 Alter the name of a crisis.
-危機の名前を変えてみよう。
+危機の名前を変えてみます。
 Notice that the corresponding name in the crisis list does _not_ change.
-リストにある危機の名前が_変わっていない_ことに気づくだろう。
+リストにある危機の名前が_変わっていない_ことに気づくでしょう。
 
 <figure>
   <img src='generated/images/guide/router/crisis-center-detail.png' alt="Crisis Center Detail">
@@ -821,12 +821,11 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 
 
-あなたの入力どおりに更新された*Hero Detail*と違い、*Crisis Detail*はSave"か"Cancel"のボタンを押して保存か破棄をしない限り変更されない。
-どちらのボタンも*Crisis Center*へ戻り、危機のリストが表示されるようになっている。
+あなたの入力どおりに更新された*Hero Detail*と違い、*Crisis Detail*はSave"か"Cancel"のボタンを押して保存か破棄をしない限り変更されません。
+どちらのボタンも*Crisis Center*へ戻り、危機のリストが表示されるようになっています。
 
 ***まだどちらのボタンを押してもいけない***.
-ブラウザの戻るボタンかリンク"Heroes"をクリックする。
-ダイアログボックスが出てくる。
+ブラウザの戻るボタンかリンク"Heroes"をクリックすると、ダイアログボックスが出てきます。
 
 <figure>
   <img src='generated/images/guide/router/confirm-dialog.png' alt="Confirm Dialog">
@@ -834,10 +833,10 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 
 
-"OK"を押して変更を破棄するか、"Cancel"をクリックして編集を続行できる。
+"OK"を押して変更を破棄するか、"Cancel"をクリックして編集を続行できます。
 
-これらの動作はルーターの`CanDeactivate`ガードの機能によるものだ。
-このガードは現在のビューから移動する前に、一掃したりユーザに許可を求める機会を与えてくれる。
+これらの動作はルーターの`CanDeactivate`ガードの機能によるものです。
+このガードは現在のビューから移動する前に、一掃したりユーザに許可を求める機会を与えてくれます。
 
 `Admin`と`Login`のそれぞれのボタンはこのあとで、他のルーター機能を説明するために使います。
 その紹介を手短にここで行います。
@@ -849,7 +848,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 ## マイルストーン1: はじめ
 
-シンプルな、二つの空のビューのあいだでの移動から始める。
+シンプルな、二つの空のビューのあいだでの移動から始めます。
 
 <figure>
   <img src='generated/images/guide/router/router-1-anim.gif' alt="App in action">
@@ -857,7 +856,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 {@a import}
 
-サンプルアプリケーションを以下のウォークスルーで作る。
+サンプルアプリケーションを以下のウォークスルーで作ります。
 
 <code-example language="none" class="code-shell">
   ng new angular-router-sample
@@ -865,11 +864,11 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 ### ルートの定義
 
-ルーターはルート定義のリストとして構成される。
+ルーターはルート定義のリストとして構成されます。
 
-それぞれの定義は二つのものを持つオブジェクト[Route](api/router/Route)へと変換される。このルートへのパスを持つ`path`と、そのルートに関連付けられる`component`である。
+それぞれの定義は二つのものを持つオブジェクト[Route](api/router/Route)へと変換されます。このルートへのパスを持つ`path`と、そのルートに関連付けられる`component`です。
 
-ブラウザのURLが変更されるか、アプリケーションコードがルータにルートパスに沿って移動するように指示した場合、ルータは定義のレジストリを利用する。
+ブラウザのURLが変更されるか、アプリケーションコードがルータにルートパスに沿って移動するように指示した場合、ルータは定義のレジストリを利用します。
 
 
 最初のルートのことを簡単に言えば、
@@ -878,7 +877,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 * アプリケーションがパス`/crisis-center`に移動するように要求すると、ルーターは`CrisisListComponent`のインスタンスを有効化し、そのビューを表示する。さらにブラウザのアドレスと履歴を更新する。
 
-最初の構成では`CrisisListComponent`と`HeroListComponent`へ移動するための二つのルートを定義する。`CrisisList`と`HeroList`が作成される。
+最初の構成では`CrisisListComponent`と`HeroListComponent`へ移動するための二つのルートを定義します。`CrisisList`と`HeroList`が作成されます。
 
 <code-example language="none" class="code-shell">
   ng generate component crisis-list
@@ -888,7 +887,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
   ng generate component hero-list
 </code-example>
 
-内容を下記のサンプルHTMLにそれぞれ変更する。
+内容を下記のサンプルHTMLにそれぞれ変更します。
 
 <code-tabs>
 
@@ -904,7 +903,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 ### ルーターとルートの登録
 
-ルーターを使うにはまず、パッケージ`@angular/router`から`Routermodule`を使えるようにしておかなければいけない。`appRoutes`としてルートの配列を定義し、それを`RouterModule.forRoot()`に渡す。サービス`Router`やルーティングライブラリに必要なプロバイダが返ってくる。一度アプリケーションが立ち上がると、`Router`はそのときのブラウザのURLに従って最初の移動を行う。
+ルーターを使うにはまず、パッケージ`@angular/router`から`Routermodule`を使えるようにしておかなければいけません。`appRoutes`としてルートの配列を定義し、それを`RouterModule.forRoot()`に渡す。サービス`Router`やルーティングライブラリに必要なプロバイダが返ってきます。一度アプリケーションが立ち上がると、`Router`はそのときのブラウザのURLに従って最初の移動を行います。
 
 <div class="alert is-important">
 
@@ -918,7 +917,7 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 <div class="alert is-helpful">
 
-設定の済んだ`RouterModule`を`AppModule`に加えれば、簡単なルート設定ができる。アプリケーションが大きくなる場合は、ファイルを分けて**[Routing Module](#routing-module)**を作り[ルート設定のリファクタリング](#refactor-the-routing-configuration-into-a-routing-module)ができる。**[Routing Module](#routing-module)**は機能モジュールのルーティングを目的とした特別なタイプの`Service Module`である。
+設定の済んだ`RouterModule`を`AppModule`に加えれば、簡単なルート設定ができます。アプリケーションが大きくなる場合は、ファイルを分けて**[Routing Module](#routing-module)**を作り[ルート設定のリファクタリング](#refactor-the-routing-configuration-into-a-routing-module)ができる。**[Routing Module](#routing-module)**は機能モジュールのルーティングを目的とした特別なタイプの`Service Module`です。
 
 </div>
 
@@ -929,17 +928,17 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 ### ルーターアウトレットを加える
 
-ルートの`AppComponent`はアプリケーションの骨組みとなる。タイトル、二つのリンクが含まれるナビゲーションバー、それとルーターがページの内外でコンポーネントを切り替えるルーターアウトレットがそこに入っている。ここで得られるのは:
+ルートの`AppComponent`はアプリケーションの骨組みとなる。タイトル、二つのリンクが含まれるナビゲーションバー、それとルーターがページの内外でコンポーネントを切り替えるルーターアウトレットがそこに入っています。ここで得られるのは:
 
 <figure>
   <img src='generated/images/guide/router/shell-and-outlet.png' alt="Shell">
 </figure>
 
-ルーティングされたコンポーネントがその下にレンダリングされるとき、ルーターのアウトレットはプレースホルダーとして機能する。
+ルーティングされたコンポーネントがその下にレンダリングされるとき、ルーターのアウトレットはプレースホルダーとして機能りません
 
 {@a shell-template}
 
-対応するコンポーネントテンプレートは以下のようになる:
+対応するコンポーネントテンプレートは以下のようになります:
 
 
 <code-example path="router/src/app/app.component.1.html" linenums="false" header="src/app/app.component.html">
@@ -950,36 +949,36 @@ Notice that the corresponding name in the crisis list does _not_ change.
 
 ### ワイルドカードルートの定義
 
-アプリケーションですでに二つのルートを作っている。一つは`/crisis-center`で、もう一つは`/heroes`へのものだ。ほかのURLへのアクセスは、ルーターにエラーを引き起こさせ、アプリをクラッシュさせる。
+アプリケーションですでに二つのルートを作っている。一つは`/crisis-center`で、もう一つは`/heroes`へのものです。ほかのURLへのアクセスは、ルーターにエラーを引き起こさせ、アプリをクラッシュさせます。
 
-**wildcard**のルートを不正なURLへのアクセスをまとめて扱うために追加する。
-_ワイルドカード_のルートは、二つのアスタリスクを使ったパスから成る。それは_すべての_URLにマッチする。
-ルーターはどのルートにもマッチしない場合_この_ルートを選ぶ。
-ワイルドカードルートはカスタムの"404 Not Found"のコンポーネントや、存在するページへの[リダイレクト](#redirect)への移動を提供する。
+**wildcard**のルートを不正なURLへのアクセスをまとめて扱うために追加します。
+_ワイルドカード_のルートは、二つのアスタリスクを使ったパスから成る。それは_すべての_URLにマッチします。
+ルーターはどのルートにもマッチしない場合_この_ルートを選びます。
+ワイルドカードルートはカスタムの"404 Not Found"のコンポーネントや、存在するページへの[リダイレクト](#redirect)への移動を提供します。
 
 <div class="alert is-helpful">
 
-ルーターによるルートセレクトは、[_最初に一致した条件_](#example-config)が採用される。
-ワイルドカードルートはルートの中で最も特定性が低いルートである。
-ルート設定の_最後_に置かれていることを確認しなければならない。
+ルーターによるルートセレクトは、[_最初に一致した条件_](#example-config)が採用されます。
+ワイルドカードルートはルートの中で最も特定性が低いルートです。
+ルート設定の_最後_に置かれていることを確認しなければなりません。
 
 </div>
 
-この機能をテストするには、`HeroListComponent`のテンプレートに` RouterLink`付きのボタンを追加して、リンクを `"/sidekicks"`に設定する。
+この機能をテストするには、`HeroListComponent`のテンプレートに` RouterLink`付きのボタンを追加して、リンクを `"/sidekicks"`に設定します。
 
 <code-example path="router/src/app/hero-list/hero-list.component.1.html" linenums="false" header="src/app/hero-list/hero-list.component.html (excerpt)">
 
 </code-example>
 
-追加したボタンをクリックすれば、アプリケーションは例外を出すだろう。まだ`"/sidekicks"`のルートを設定していない。
+追加したボタンをクリックすれば、アプリケーションは例外を出すだろう。まだ`"/sidekicks"`のルートを設定していません。
 
-ルート`"/sidekicks"追加する代わりに、`wildcard`ルートを定義してそれを単純な` PageNotFoundComponent`に移動させる。
+ルート`"/sidekicks"追加する代わりに、`wildcard`ルートを定義してそれを単純な` PageNotFoundComponent`に移動させます。
 
 <code-example path="router/src/app/app.module.1.ts" linenums="false" header="src/app/app.module.ts (wildcard)" region="wildcard">
 
 </code-example>
 
-ユーザに不正なURLを訪れたことを示すため、`PageNotFoundComponent`を作る。
+ユーザに不正なURLを訪れたことを示すため、`PageNotFoundComponent`を作ります。
 
 <code-example language="none" class="code-shell">
   ng generate component page-not-found
@@ -989,40 +988,40 @@ _ワイルドカード_のルートは、二つのアスタリスクを使った
 
 </code-example>
 
-さあ、`/sidekicks`に、あるいはほかの不正なURLにアクセスしてみれば、ブラウザには"Page not found"が表示される。
-ブラウザのアドレスバーは不正なURLが表示されたままだ。
+さあ、`/sidekicks`に、あるいはほかの不正なURLにアクセスしてみれば、ブラウザには"Page not found"が表示されます。
+ブラウザのアドレスバーは不正なURLが表示されたままです。
 
 {@a redirect}
 
 ### リダイレクトの設定
 
-アプリケーションを立ち上げたとき、ブラウザのアドレスバーに入っている初期URLは下記のようなものだとする:
+アプリケーションを立ち上げたとき、ブラウザのアドレスバーに入っている初期URLは下記のようなものだとします:
 
 <code-example>
   localhost:4200
 </code-example>
 
-これは設定済みのルートにマッチしない。
-つまりルーターはワイルドカードルートにたどり着き、`PageNotFoundComponent`を表示する。
+これは設定済みのルートにマッチしません。
+つまりルーターはワイルドカードルートにたどり着き、`PageNotFoundComponent`を表示します。
 
-アプリケーションには、正規のページのために**default route**が必要となる。
-このアプリのデフォルトのページはヒーローのリストとする。
-リンク"Heroes"がクリックされるかアドレスバーに`localhost:4200/heroes`が入力されると、アプリはそこへ移動するものとする。
+アプリケーションには、正規のページのために**default route**が必要となります。
+このアプリのデフォルトのページはヒーローのリストとします。
+リンク"Heroes"がクリックされるかアドレスバーに`localhost:4200/heroes`が入力されると、アプリはそこへ移動するものとします。
 
-推奨される解決策は、最初の相対パス(`''`)へのアクセスをルート`redirect`で希望のデフォルトパス（`/heroes`）に移動することだ。
-ブラウザのアドレスバーには`.../heroes`が、直接移動したかのように表示される。
+推奨される解決策は、最初の相対パス(`''`)へのアクセスをルート`redirect`で希望のデフォルトパス（`/heroes`）に移動することです。
+ブラウザのアドレスバーには`.../heroes`が、直接移動したかのように表示されます。
 
-ワイルドカードの_前_にデフォルトのルートを加える。
-ワイルドカードルートのすぐ前に、このマイルストーンでの最終的な形となる`appRoutes`で以下のように書く。
+ワイルドカードの_前_にデフォルトのルートを加えます。
+ワイルドカードルートのすぐ前に、このマイルストーンでの最終的な形となる`appRoutes`で以下のように書きます。
 
 <code-example path="router/src/app/app-routing.module.1.ts" linenums="false" header="src/app/app-routing.module.ts (appRoutes)" region="appRoutes">
 </code-example>
 
 
-リダイレクトルートには、ルーターにURLをパスにマッチさせるためのプロパティ`pathMatch`が必要である。
-それがなければルーターはエラーを出す。
-このアプリでは、`HeroListComponent`へのルートが有効になるのは、*entire URL*が`''`に一致した場合のみである。
-だから`pathMatch`の値に`'full'`を設定する。
+リダイレクトルートには、ルーターにURLをパスにマッチさせるためのプロパティ`pathMatch`が必要です。
+それがなければルーターはエラーを出します。
+このアプリでは、`HeroListComponent`へのルートが有効になるのは、*entire URL*が`''`に一致した場合のみです。
+だから`pathMatch`の値に`'full'`を設定します。
 
 
 <div class="alert is-helpful">
@@ -1034,19 +1033,19 @@ _ワイルドカード_のルートは、二つのアスタリスクを使った
 The other possible `pathMatch` value is `'prefix'` which tells the router
 to match the redirect route when the *remaining* URL ***begins*** with the redirect route's _prefix_ path.
 
-もう1つの`pathMatch`の値として可能なものは``prefix'`で、これは*残りの*URLがリダイレクトルートの_prefix_パスで***始まるとき***に、ルーターにリダイレクトルートの一致を伝える。
+もう1つの`pathMatch`の値として可能なものは``prefix'`で、これは*残りの*URLがリダイレクトルートの_prefix_パスで***始まるとき***に、ルーターにリダイレクトルートの一致を伝えます。
 
-ここに書くようなことはしてはならない。
-もし`pathMatch`の値が`'prefix'`なら、_すべての_URLが`''`にマッチすることになるだろう。
+ここに書くようなことはしてはなりません。
+もし`pathMatch`の値が`'prefix'`なら、_すべての_URLが`''`にマッチすることになるでしょう。
 
-`'prefix'`に設定してから、ボタン`Go to sidekicks`をクリックしてみる。
-これは間違ったURLで、"Page not found"が表示されるはずだ。
+`'prefix'`に設定してから、ボタン`Go to sidekicks`をクリックしてみます。
+これは間違ったURLで、"Page not found"が表示されるはずです。
 でもあなたはまだページ"Heroes"にいます。
-ブラウザのアドレスバーに間違ったURLを入力する。
-あなたは即座に `/heroes`に転送される。
-_すべての_URLは正しいか不正にかかわらず、_この_ルート定義をとおしてマッチされる。
+ブラウザのアドレスバーに間違ったURLを入力します。
+あなたは即座に `/heroes`に転送されます。
+_すべての_URLは正しいか不正にかかわらず、_この_ルート定義をとおしてマッチされます。
 
-デフォルトのルートはURL全体が`''`にマッチするとき_だけ_`HeroListComponent`にリダイレクトされるべきだ。
+デフォルトのルートはURL全体が`''`にマッチするとき_だけ_`HeroListComponent`にリダイレクトされるべきです。
 リダイレクトを`pathMatch = 'full'`に戻すことを忘れずに。
 
 もっと詳しく知りたければVictor Savkinを参考にしたい。
@@ -1058,10 +1057,10 @@ _すべての_URLは正しいか不正にかかわらず、_この_ルート定�
 
 ### 基本のまとめ
 
-アプリのとても基本的な移動をやった。リンクをクリックすることで二つのビューを切り替えるものだ。
+アプリのとても基本的な移動を学びました。リンクをクリックすることで二つのビューを切り替えるものです。
 
 You've learned how to do the following:
-ここで以下のことをどうやるか学んだ:
+ここで以下のことをどうやるか学びました:
 
 * ルーターのライブラリを読み込む
 * Add a nav bar to the shell template with anchor tags, `routerLink`  and `routerLinkActive` directives.
@@ -1072,7 +1071,7 @@ You've learned how to do the following:
 * `ワイルドカード`ルートで不正なルートを処理した。
 * アプリ立ち上げ時の空のパスを、デフォルトルートへ移動するようにした。
 
-ここでのアプリの構成は以下のようになる:
+ここでのアプリの構成は以下のようになります:
 
 <div class='filetree'>
 
@@ -1222,7 +1221,7 @@ You've learned how to do the following:
 
 
 
-これらのファイルについてはこのマイルストーンで取り上げる。
+これらのファイルについてはこのマイルストーンで取り上げます。
 
 <code-tabs>
 
@@ -1262,13 +1261,13 @@ to configure the application for routing. This is perfectly fine for simple rout
 As the application grows and you make use of more `Router` features, such as guards,
 resolvers, and child routing, you'll naturally want to refactor the routing configuration into its own file.
 We recommend moving the routing information into a special-purpose module called a *Routing Module*.
-最初のルート設定では、2つのルートを使用した簡単な設定を行い、アプリケーションでのルーティングを設定した。
-これは単純なルーティングにはまったく問題ない。
-アプリケーションが成長して、ガード、リゾルバや子ルーティングなどのもっと多くの`Router`機能を利用するようになると、当然ルーティング設定をファイルに分けてリファクタリングしたくなる。
-ルーティング情報を*ルーティングモジュール*という特別な目的のモジュールに移動することをお勧めする。
+最初のルート設定では、2つのルートを使用した簡単な設定を行い、アプリケーションでのルーティングを設定しました。
+これは単純なルーティングにはまったく問題ありません。
+アプリケーションが成長して、ガード、リゾルバや子ルーティングなどのもっと多くの`Router`機能を利用するようになると、当然ルーティング設定をファイルに分けてリファクタリングしたくなります。
+ルーティング情報を*ルーティングモジュール*という特別な目的のモジュールに移動することをお勧めします。
 
 
-**ルーティングモジュール**には下記のような特性がある:
+**ルーティングモジュール**には下記のような特性があります:
 
 * ルーティングの問題を、アプリケーションのほかの問題から切り離す。
 * アプリケーションのテスト時に変換や削除を行うモジュールを提供する。
@@ -1280,44 +1279,44 @@ We recommend moving the routing information into a special-purpose module called
 ### アプリにルーティングを統合する
 
 You can then use routing in any NgModule that you add to the project or app.
-ルーティングサンプルのアプリケーションは、デフォルトではルーティングを含んでいない。
-[Angular CLI](cli)を使ってルーティングを使うプロジェクトを作り、オプション`--routing`をプロジェクトかアプリ、あるいはそれぞれのNgModuleにセットする。
-新しいプロジェクトを作る(CLIでコマンド[`ng new`](cli/new)を使って)か、新しいアプリを作る(コマンド[`ng generate app`](cli/generate)を使って)ときにオプション`--routing`を加える。これはCLIにnpmパッケージ`@angular/router`を加えさせ、さらにファイル`app-routing.module.ts`も作らせる。
-これでプロジェクトやアプリに追加したあらゆるNgModuleでルーティングを使える。
+ルーティングサンプルのアプリケーションは、デフォルトではルーティングを含んでいません。
+[Angular CLI](cli)を使ってルーティングを使うプロジェクトを作り、オプション`--routing`をプロジェクトかアプリ、あるいはそれぞれのNgModuleにセットします。
+新しいプロジェクトを作る(CLIでコマンド[`ng new`](cli/new)を使って)か、新しいアプリを作る(コマンド[`ng generate app`](cli/generate)を使って)ときにオプション`--routing`を加える。これはCLIにnpmパッケージ`@angular/router`を加えさせ、さらにファイル`app-routing.module.ts`も作らせます。
+これでプロジェクトやアプリに追加したあらゆるNgModuleでルーティングを使えます。
 
-例として、下記のコマンドでルーティングを使えるNgModuleを作れる。
+例として、下記のコマンドでルーティングを使えるNgMりますleを作れます。
 
 ```sh
 ng generate module my-module --routing
 ```
 
-これで`my-module-routing.module.ts`というNgModuleのルートを入れておくファイルを作れる。
-ファイルには空のオブジェクト`Routes`が含まれており、ことなるコンポーネントやNgModuleへのルートで埋めることができる。
+これで`my-module-routing.module.ts`というNgModuleのルートを入れておくファイルを作れます。
+ファイルには空のオブジェクト`Routes`が含まれており、ことなるコンポーネントやNgModuleへのルートで埋めることができます。
 
 {@a routing-refactor}
 
 
 ### ルーティング設定を_ルーティングモジュール_へリファクタリングする
 
-ルーティング設定を入れるため、モジュール`AppRouting`をフォルダ`/app`に作る。
+ルーティング設定を入れるため、モジュール`AppRouting`をフォルダ`/app`に作ります。
 
 <code-example language="none" class="code-shell">
   ng generate module app-routing --module app --flat
 </code-example>
 
-`CrisisListComponent`、`HeroListComponent`と`PageNotFoundComponent`を`app.module.ts`でやったようにインポートする。
-それから`Router`のインポートと`RouterModule.forRoot`を含むルーティング設定をこのルーティングモジュールに移す。
+`CrisisListComponent`、`HeroListComponent`と`PageNotFoundComponent`を`app.module.ts`でやったようにインポートします。
+それから`Router`のインポートと`RouterModule.forRoot`を含むルーティング設定をこのルーティングモジュールに移します。
 
-再び、`RouterModule`を配列`exports`に加えることでエクスポートする。
-再び`RouterModule`をエクスポートすることで、`AppModule`で宣言されたコンポーネントは`RouterLink`や`RouterOutlet`のようなルーターディレクティブにアクセスできるようになる。
+再び、`RouterModule`を配列`exports`に加えることでエクスポートします。
+再び`RouterModule`をエクスポートすることで、`AppModule`で宣言されたコンポーネントは`RouterLink`や`RouterOutlet`のようなルーターディレクティブにアクセスできるようになりまます
 
-これらステップののち、ファイルは以下のようになる。
+これらステップののち、ファイルは以下のようになります。
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts">
 
 </code-example>
 
-次は`app.module.ts`を更新し、配列`imports`にある`RouterModule.forRoot`を削除する。
+次は`app.module.ts`を更新し、配列`imports`にある`RouterModule.forRoot`を削除します。
 
 <code-example path="router/src/app/app.module.2.ts" header="src/app/app.module.ts">
 
@@ -1329,14 +1328,14 @@ ng generate module my-module --routing
 
 
 
-このガイドのあとで、[複数のルーティングモジュール](#heroes-functionality)を作り、ルーティングモジュールを[正しい順番で](#routing-module-order)でインポートしなければならないことを学ぶ。
+このガイドのあとで、[複数のルーティングモジュール](#heroes-functionality)を作り、ルーティングモジュールを[正しい順番で](#routing-module-order)でインポートしなければならないことを学びます。
 
 
 </div>
 
 
 
-アプリケーションの動作は変わらず、`AppRoutingModule`をルーティング設定の中心として使える。
+アプリケーションの動作は変わらず、`AppRoutingModule`をルーティング設定の中心として使えます。
 
 
 {@a why-routing-module}
@@ -1345,34 +1344,34 @@ ng generate module my-module --routing
 ### _ルーティングモジュール_が必要かい?
 
 _ルーティングモジュール_はrootや機能モジュールでのルーティング設定を*置き換える*。
-ルーティングモジュールでルートを設定する_か_、モジュール内でルートを設定します。両方では設定しない。
+ルーティングモジュールでルートを設定する_か_、モジュール内でルートを設定します。両方では設定しません。
 
-ルーティングモジュールは、構成が複雑でガードやリゾルバが含まれるような場合に最も価値がある設計上の選択である。
-実際の設定が単純な場合は、やり過ぎに見えるかもしれない。
+ルーティングモジュールは、構成が複雑でガードやリゾルバが含まれるような場合に最も価値がある設計上の選択です。
+実際の設定が単純な場合は、やり過ぎに見えるかもしれません。
 
-設定が単純である場合、開発者の中にはルーティングモジュール（例えば `AppRoutingModule`）をスキップし、ルーティング設定を直接コンパニオンモジュールにマージする人もいる（例えば `AppModule`）。
+設定が単純である場合、開発者の中にはルーティングモジュール（例えば `AppRoutingModule`）をスキップし、ルーティング設定を直接コンパニオンモジュールにマージする人もいます（例えば `AppModule`）。
 
-どちらかを選択して、そのパターンに一貫して従うこと。
+どちらかを選択して、そのパターンに一貫して従うことです。
 
-ほとんどの開発者は一貫性のために常にルーティングモジュールを実装するべきである。
-設定が複雑になってもコードをクリーンに保つ。
-機能モジュールのテストが容易になる。
-その存在は、モジュールがルーティングされるという事実に注意を促す。
-開発者がルーティング設定を見つけて拡張することが期待できる。
+ほとんどの開発者は一貫性のために常にルーティングモジュールを実装するべきです。
+設定が複雑になってもコードをクリーンに保てます。
+機能モジュールのテストが容易になります。
+その存在は、モジュールがルーティングされるという事実に注意を促します。
+開発者がルーティング設定を見つけて拡張することが期待できます。
 
 {@a heroes-feature}
 
 ## マイルストーン 3: ヒーローの機能
 
-ディレクティブ`RouterLink`を使ってナビゲートする方法を見た。
-これで、次のことがわかる:
+ディレクティブ`RouterLink`を使ってナビゲートする方法を見ました。
+これで、次のことがわかります:
 
 * モジュールを使用して*機能領域*にアプリとルートを整理する。
 * あるコンポーネントから別のコンポーネントへと命令的に移動する。
 * ルートパラメータで必須およびオプションの情報を渡す。
 
-この例では、[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services")の "Services"エピソードのヒーロー機能を再作成する。
-そしてコードの大部分を<live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>からコピーすることになる。
+この例では、[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services")の "Services"エピソードのヒーロー機能を再作成します。
+そしてコードの大部分を<live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>からコピーすることになります。
 
 ユーザーがこのバージョンのアプリで体験するのは次のとおりです:
 
@@ -1384,14 +1383,14 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 
 
 典型的なアプリケーションは複数の*機能領域*を持っており、
-それぞれが特定の事業目的に捧げられている。
+それぞれが特定の事業目的に捧げられています。
 
 ファイルをフォルダ`src/app/`に追加し続けることはできるが、
-これは非現実的で、最終的には保守できなくなる。
-ほとんどの開発者は、各機能領域をそれぞれ独自のフォルダに置くことを好む。
+これは非現実的で、最終的には保守できなくなります。
+ほとんどの開発者は、各機能領域をそれぞれ独自のフォルダに置くことを好みます。
 
-あなたは、それぞれ独自の懸念を持って、異なる*機能モジュール*にアプリを分割しようとしている。
-それからメインモジュールにインポートし、それらの間を移動する。
+あなたは、それぞれ独自の懸念を持って、異なる*機能モジュール*にアプリを分割しようとしています。
+それからメインモジュールにインポートし、それらの間を移動します。
 
 
 {@a heroes-functionality}
@@ -1399,16 +1398,16 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 
 ### ヒーロー機能の追加
 
-以下の手順を行う:
+以下の手順を行います:
 
-* フォルダheroesにルーティングを行う`HeroesModule`を作成し、それをルートの`AppModule`に登録する。これが、あなたが*ヒーロー管理*を実装する場所である。
+* フォルダheroesにルーティングを行う`HeroesModule`を作成し、それをルートの`AppModule`に登録します。これが、あなたが*ヒーロー管理*を実装する場所です。
 
 <code-example language="none" class="code-shell">
   ng generate module heroes/heroes --module app --flat --routing
 </code-example>
 
-* `app`にあるプレースホルダのフォルダ`hero-list`をフォルダ`heroes`に移動する。
-* <live-example name="toh-pt4" title="Tour of Heroes: Services example code">"Services" tutorial</live-example>にある`heroes/heroes.component.html`の内容をテンプレート`hero-list.component.html`にコピーする。
+* `app`にあるプレースホルダのフォルダ`hero-list`をフォルダ`heroes`に移動します。
+* <live-example name="toh-pt4" title="Tour of Heroes: Services example code">"Services" tutorial</live-example>にある`heroes/heroes.component.html`の内容をテンプレート`hero-list.component.html`にコピーします。
 
   * `<h2>`を`<h2>HEROES</h2>`に変更する。
   * コンポーネント`<app-hero-detail>`を削除する。
@@ -1421,7 +1420,7 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
   
 <div class="alert is-helpful">
 
-   ページがレンダリングされるときにコンポーネントが動的に挿入されるため、_routed components_にはセレクタは**必須**ではないが、HTML要素ツリーでそれらを識別してターゲットにするのに役立つ。
+   ページがレンダリングされるときにコンポーネントが動的に挿入されるため、_routed components_にはセレクタは**必須**ではないが、HTML要素ツリーでそれらを識別してターゲットにするのに役立ちます。
 
 </div>
 
@@ -1429,7 +1428,7 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 * フォルダ`src/app`に`message.service.ts`をコピーする。
 * ファイル`hero.service.ts`内の`message.service`への相対パスのインポートを更新する。
 
-次は`HeroesModule`のメタデータを更新する。
+次は`HeroesModule`のメタデータを更新します。
 
   * `HeroDetailComponent`と`HeroListComponent`を`HeroesModule`の配列`declarations`にインポートして加する。
 
@@ -1439,7 +1438,7 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 
 
 
-ひととおり終わると、*ヒーロー管理*のファイルは以下のようになる:
+ひととおり終わると、*ヒーロー管理*のファイルは以下のようになります:
 
 
 <div class='filetree'>
@@ -1526,50 +1525,50 @@ _ルーティングモジュール_はrootや機能モジュールでのルー�
 
 #### ルーティングに必要な*ヒーロー*機能
 
-ヒーロー機能には、ヒーローリストとヒーローの詳細という2つの相互作用するコンポーネントがある。
-リストビューは自給自足です。移動すると、ヒーローの一覧が表示される。
+ヒーロー機能には、ヒーローリストとヒーローの詳細という2つの相互作用するコンポーネントがあります。
+リストビューは自給自足です。移動すると、ヒーローの一覧が表示されます。
 
-詳細表示は異なる。特定の英雄を表示する。どのヒーローを見せるべきかを自分自身で決めることはできない。
-その情報は外部から来なければならない。
+詳細表示は異なる。特定の英雄を表示する。どのヒーローを見せるべきかを自分自身で決めることはできません。
+その情報は外部から来なければなりません。
 
-ユーザーがリストから主人公を選択すると、アプリは詳細ビューに移動し、そのヒーローを見せる。
-ルートのURLに選択したヒーローのIDを含めることで、どのヒーローを表示するかを詳細ビューに指示する。
+ユーザーがリストから主人公を選択すると、アプリは詳細ビューに移動し、そのヒーローを見せます。
+ルートのURLに選択したヒーローのIDを含めることで、どのヒーローを表示するかを詳細ビューに指示します。
 
 
-`src/app/heroes/`フォルダの新しい場所からヒーローコンポーネントをインポートし、2つのヒーロールートを定義する。
+`src/app/heroes/`フォルダの新しい場所からヒーローコンポーネントをインポートし、2つのヒーロールートを定義します。
 
-これで`Heroes`モジュールへのルートができたので、`Router`を使って`AppRoutingModule`で行った_ような_形で`RouterModule`の設定をする。
+これで`Heroes`モジュールへのルートができたので、`Router`を使って`AppRoutingModule`で行った_ような_形で`RouterModule`の設定をします。
 
-小さいながらも重大な違いがある。
-`AppRoutingModule`では、スタティックメソッド**`RouterModule.forRoot`**を使ってルートとアプリケーションレベルのサービスプロバイダを登録した。
-機能モジュールでは、スタティックメソッド**`forChild`**を使用する。
+小さいながらも重大な違いがあります。
+`AppRoutingModule`では、スタティックメソッド**`RouterModule.forRoot`**を使ってルートとアプリケーションレベルのサービスプロバイダを登録しました。
+機能モジュールでは、スタティックメソッド**`forChild`**を使用します。
 
 
 <div class="alert is-helpful">
 
 
 
-rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
+rootのAppRoutingModuleでRouterModule.forRootのみを呼び出します
 （あるいは、もしあなたがトップレベルのアプリケーションルートを登録する場所であれば `AppModule`）。
-他のモジュールでは、追加のルートを登録するためにメソッド**`RouterModule.forChild`**を呼び出す必要がある。
+他のモジュールでは、追加のルートを登録するためにメソッド**`RouterModule.forChild`**を呼び出す必要があります。
 
 </div>
 
-更新された`HeroesRoutingModule`は以下のようになる:
+更新された`HeroesRoutingModule`は以下のようになります:
 
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts">
 
-</code-example>
+</code-exampleす
 
 
 
 <div class="alert is-helpful">
 
 
-各機能モジュールに独自のルート設定ファイルを指定することを検討する。
-フィーチャルートが単純な場合は、早すぎるとやり過ぎに見えるかもしれなり。
-しかし、ルートはより複雑になり、パターンの一貫性が徐々に向上していく。
+各機能モジュールに独自のルート設定ファイルを指定することを検討します。
+フィーチャルートが単純な場合は、早すぎるとやり過ぎに見えるかもしれません。
+しかし、ルートはより複雑になり、パターンの一貫性が徐々に向上していきます。
 
 
 </div>
@@ -1580,16 +1579,16 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 
 #### 重複するヒーローのルートを削除する
 
-主人公のルートは現在2つの場所で定義されている： `HeroesRoutingModule`では、
+主人公のルートは現在2つの場所で定義されています： `HeroesRoutingModule`では、
 `HeroesModule`で、そして` AppRoutingModule`で。
 
-機能モジュールによって提供されたルートは、ルータによってそれらのインポートされたモジュールのルートにまとめられる。
-これにより、メインルート設定を変更せずに、機能モジュールルートの定義を続けることができる。
+機能モジュールによって提供されたルートは、ルータによってそれらのインポートされたモジュールのルートにまとめられます。
+これにより、メインルート設定を変更せずに、機能モジュールルートの定義を続けることができます。
 
-`app-routing.module.ts`から`HeroListComponent`のインポートとルート`/heroes`を削除する。
+`app-routing.module.ts`から`HeroListComponent`のインポートとルート`/heroes`を削除します。
 
 **デフォルトとワイルドカードのルートは残す!**
-これらはアプリケーションのトップレベルでの重要事である。
+これらはアプリケーションのトップレベルでの重要事です。
 
 
 <code-example path="router/src/app/app-routing.module.2.ts" linenums="false" header="src/app/app-routing.module.ts (v2)">
@@ -1603,9 +1602,9 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 
 #### ヒーローの宣言を削除する
 
-`HeroesModule`によって現在提供されているので、`AppModule`の `declarations`から`HeroListComponent`を削除する。あなたはより多くのコンポーネントと異なるルートでヒーロー機能を進化させることができる。これは、機能領域ごとに別々のモジュールを作成することの大きな利点である。
+`HeroesModule`によって現在提供されているので、`AppModule`の `declarations`から`HeroListComponent`を削除します。あなたはより多くのコンポーネントと異なるルートでヒーロー機能を進化させることができます。これは、機能領域ごとに別々のモジュールを作成することの大きな利点でです。
 
-これらステップののち、`AppModule`は以下のようになる:
+これらステップののち、`AppModule`は以下のようになります:
 
 <code-example path="router/src/app/app.module.3.ts" header="src/app/app.module.ts">
 
@@ -1617,8 +1616,8 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 
 
 ### モジュールのインポート順について
-ヒーローモジュールの配列`imports`を見る。`AppRoutingModule`が_最後_にある。
-最も重要なことに、それは `HeroesModule`の_後に_来る。
+ヒーローモジュールの配列`imports`を見ます。`AppRoutingModule`が_最後_にあります。
+最も重要なこととして、それは `HeroesModule`の_後に_来ます。
 
 <code-example path="router/src/app/app.module.3.ts" region="module-imports" header="src/app/app.module.ts (module-imports)" linenums="false">
 
@@ -1627,7 +1626,7 @@ rootのAppRoutingModuleでRouterModule.forRootのみを呼び出す
 
 
 ルート設定の順序は重要です。
-ルーターは、ナビゲーション要求パスと一致する最初のルートを受け入れる。
+ルーターは、ナビゲーション要求パスと一致する最初のルートを受け入れます。
 
 When all routes were in one `AppRoutingModule`,
 you put the default and [wildcard](#wildcard) routes last, after the `/heroes` route,
@@ -1635,29 +1634,29 @@ so that the router had a chance to match a URL to the `/heroes` route _before_
 hitting the wildcard route and navigating to "Page not found".
 すべてのルートが`AppRoutingModule`に入っていたとき、
 ルート`/heroes`の後に、デフォルトのルートと[ワイルドカード]（＃wildcard）ルートを最後に置き、
-ルーターがURLを `/heroes`ルートにマッチさせる機会を得た。
+ルーターがURLを `/heroes`ルートにマッチさせる機会を得ました。
 ワイルドカードルートにヒットして、"Page not found"に移動する_前に_。
 
 The routes are no longer in one file.
 They are distributed across two modules, `AppRoutingModule` and `HeroesRoutingModule`.
-ルートはもう一つ以上のファイルに書かれている。
-二つのモジュール`AppRoutingModule`と`HeroesRoutingModule`によって使える。
+ルートはもう一つ以上のファイルに書かれています。
+二つのモジュール`AppRoutingModule`と`HeroesRoutingModule`によって使えます。
 
 Each routing module augments the route configuration _in the order of import_.
 If you list `AppRoutingModule` first, the wildcard route will be registered
 _before_ the hero routes.
 The wildcard route&mdash;which matches _every_ URL&mdash;will intercept the attempt to navigate to a hero route.
 それぞれのルーティングモジュールは、_インポートの順序で_ルート設定を拡張します。
-最初に `AppRoutingModule`をリストした場合、ワイルドカードルートがヒーロールートの_前に_登録される。
-_すべての_URLに一致するワイルドカードルートは、ヒーロールートへの移動を阻止する。
+最初に `AppRoutingModule`をリストした場合、ワイルドカードルートがヒーロールートの_前に_登録されます。
+_すべての_URLに一致するワイルドカードルートは、ヒーロールートへの移動を阻止します。
 
 
 <div class="alert is-helpful">
 
 
 
-ルーティングモジュールの順番を逆にして、ヒーローのリンクをクリックすると"Page not found"という結果になることを確認する。
-ランタイムルーターの設定を調べるには、[以下](#inspect-config "Inspect the router config")を参照する。
+ルーティングモジュールの順番を逆にして、ヒーローのリンクをクリックすると"Page not found"という結果になることを確認します。
+ランタイムルーターの設定を調べるには、[以下](#inspect-config "Inspect the router config")を参照します。
 
 </div>
 
@@ -1668,8 +1667,8 @@ _すべての_URLに一致するワイルドカードルートは、ヒーロー
 
 #### パラメータでのルート定義
 
-`HeroesRoutingModule`にもどり、ルート定義をもう一度見る。
-`HeroDetailComponent`へのルートはひねりがある。
+`HeroesRoutingModule`にもどり、ルート定義をもう一度見ます。
+`HeroDetailComponent`へのルートはひねりがあります。
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" linenums="false" header="src/app/heroes/heroes-routing.module.ts (excerpt)" region="hero-detail-route">
 
@@ -1677,11 +1676,11 @@ _すべての_URLに一致するワイルドカードルートは、ヒーロー
 
 
 
-パスの中に`:id`というトークンがあることに気づく。これはパスに**ルートパラメータ**を入れるために使われる。
-このケースではヒーローの`id`が挿入される。
+パスの中に`:id`というトークンがあることに気づく。これはパスに**ルートパラメータ**を入れるために使われます。
+このケースではヒーローの`id`が挿入されます。
 
-ルーターに詳細コンポーネントへ移動し"Magneta"を表示するように指定する。
-URLにはヒーローのIDが以下のように入ってくる:
+ルーターに詳細コンポーネントへ移動し"Magneta"を表示するように指定します。
+URLにはヒーローのIDが以下のように入ってきます:
 
 
 <code-example format="nocode">
@@ -1691,7 +1690,7 @@ URLにはヒーローのIDが以下のように入ってくる:
 
 
 
-もしユーザがブラウザのアドレスバーにURLを入れると、ルーターはパターンを認識し、"Magneta"の詳細ビューへ移動する。
+もしユーザがブラウザのアドレスバーにURLを入れると、ルーターはパターンを認識し、"Magneta"の詳細ビューへ移動します。
 
 
 <div class="callout is-helpful">
@@ -1704,8 +1703,8 @@ URLにはヒーローのIDが以下のように入ってくる:
 
 
 
-ルートパラメータとしてトークン`:id`をルート定義パスに埋め込むのは、いい選択である。
-`id`は`HeroDetailComponent`に*必須*で、値を`15`にすれば"Magneta"へのルートがほかのヒーローへのルートと区別できる。
+ルートパラメータとしてトークン`:id`をルート定義パスに埋め込むのは、いい選択です。
+`id`は`HeroDetailComponent`に*必須*で、値を`15`にすれば"Magneta"へのルートがほかのヒーローへのルートと区別できます。
 
 
 </div>
@@ -1717,9 +1716,9 @@ URLにはヒーローのIDが以下のように入ってくる:
 #### 一覧のビューにルートパラメータを設定する
 
 `HeroDetailComponent`への移動を設定したら、次には選択されたヒーローの詳細を見たい。
-ここでは二つの情報が必要になる。コンポーネントへのルーティングパスとヒーローの`id`だ。
+ここでは二つの情報が必要になります。コンポーネントへのルーティングパスとヒーローの`id`です。
 
-_リンクパラメータの配列_は*二つ*のアイテムを持つ:  ルーティング_パス_と選択したヒーローの`id`を示す_ルートパラメータ_だ。
+_リンクパラメータの配列_は*二つ*のアイテムを持ちます:  ルーティング_パス_と選択したヒーローの`id`を示す_ルートパラメータ_です。
 
 
 
@@ -1729,7 +1728,7 @@ _リンクパラメータの配列_は*二つ*のアイテムを持つ:  ルー�
 
 
 
-ルーターは次のように配列から宛先URLを作成する。
+ルーターは次のように配列から宛先URLを作成します。
 `localhost:4200/hero/15`.
 
 
@@ -1738,10 +1737,10 @@ _リンクパラメータの配列_は*二つ*のアイテムを持つ:  ルー�
 
 
 
-`HeroDetailComponent`はどうやって`id`を知ることができるか。
-URLを解析する必要はない。ルーターにそれをやらせよう。
+`HeroDetailComponent`はどうやって`id`を知ることができるでしょうか。
+URLを解析する必要はありません。ルーターにそれをやらせます。
 
-ルーターはURLからルートパラメータ(`id:15`)を引き出し、`HeroDetailComponent`にサービス`ActivatedRoute`を使って渡す。
+ルーターはURLからルートパラメータ(`id:15`)を引き出し、`HeroDetailComponent`にサービス`ActivatedRoute`を使って渡します。
 
 
 
@@ -1751,7 +1750,7 @@ URLを解析する必要はない。ルーターにそれをやらせよう。
 
 ### _有効化されたルート_について
 
-ルーターパッケージから`Router`、`ActivatedRoute`と`ParamMap`をインポートする。
+ルーターパッケージから`Router`、`ActivatedRoute`と`ParamMap`をインポートします。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.1.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (activated route)" region="imports">
@@ -1760,7 +1759,7 @@ URLを解析する必要はない。ルーターにそれをやらせよう。
 
 
 
-オペレータ`switchMap`を、あとで`Observable`ルートパラメータを扱うためにインポートする。
+オペレータ`switchMap`を、あとで`Observable`ルートパラメータを扱うためにインポートします。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (switchMap operator import)" region="rxjs-operator-import">
@@ -1772,35 +1771,35 @@ URLを解析する必要はない。ルーターにそれをやらせよう。
 {@a hero-detail-ctor}
 
 
-例によって、コンポーネントに必要なサービスを入れるため、コンストラクタにプライベートな値で参照を書いていく。
+例によって、コンポーネントに必要なサービスを入れるため、コンストラクタにプライベートな値で参照を書いていきます。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (constructor)" region="ctor">
 
 </code-example>
 
-そのあと、メソッド`ngOnInit`でサービス`ActivatedRoute`を使い、ルートパラメータを引き出せるようにし、ヒーローの`id`をパラメータから引き出してヒーローを表示する。
+そのあと、メソッド`ngOnInit`でサービス`ActivatedRoute`を使い、ルートパラメータを引き出せるようにし、ヒーローの`id`をパラメータから引き出してヒーローを表示します。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" linenums="false" header="src/app/heroes/hero-detail/hero-detail.component.ts (ngOnInit)" region="ngOnInit">
 
 </code-example>
 
-`paramMap`の処理は少しトリッキーだ。マップが変わったとき、パラメータ`id`を`変更されたパラメータからget()`する。
+`paramMap`の処理は少しトリッキーだ。マップが変わったとき、パラメータ`id`を`変更されたパラメータからget()`します。
 
-ヒーローの情報を得るため`id`を使って`HeroService`に問い合わせ、リクエスト結果を得る。
+ヒーローの情報を得るため`id`を使って`HeroService`に問い合わせ、リクエスト結果を得ます。
 
-Rxjsのオペレータ`map`を使うと思うかもしれないが、`HeroService`は`Observable<Hero>`を返す。
-そして代わりに、`switchMap`演算子を使って`Observable`を平坦化する。
+Rxjsのオペレータ`map`を使うと思うかもしれませんが、`HeroService`は`Observable<Hero>`を返します。
+そして代わりに、`switchMap`演算子を使って`Observable`を平坦化します。
 
-オペレータ`switchMap`は以前の実行中のリクエストもキャンセルする。ユーザーがこのルートに再ナビゲートした場合、`HeroService`がまだ古い`id`を検索している間に新しい `id`を使うと、`switchMap`はその古いリクエストを破棄して新しい `id`のヒーローを返す。
+オペレータ`switchMap`は以前の実行中のリクエストもキャンセルします。ユーザーがこのルートに再ナビゲートした場合、`HeroService`がまだ古い`id`を検索している間に新しい `id`を使うと、`switchMap`はその古いリクエストを破棄して新しい `id`のヒーローを返します。
 
-追跡可能な `Subscription`は` AsyncPipe`によって処理され、コンポーネントの `hero`プロパティは取得されたヒーローで（再）設定される。
+追跡可能な `Subscription`は` AsyncPipe`によって処理され、コンポーネントの `hero`プロパティは取得されたヒーローで（再）設定されます。
 
 #### _ParamMap_のAPI
 
-`ParamMap`のAPIは[URLSearchParams interface](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)に着想を得ている。
-ルートパラメータ(`paramMap`)とクエリパラメータ(`queryParamMap`)のそれぞれがパラメータを扱う方法として提供されている。
+`ParamMap`のAPIは[URLSearchParams interface](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)に着想を得ています。
+ルートパラメータ(`paramMap`)とクエリパラメータ(`queryParamMap`)のそれぞれがパラメータを扱う方法として提供されています。
 
 <table>
   <tr>
@@ -1862,39 +1861,39 @@ Rxjsのオペレータ`map`を使うと思うかもしれないが、`HeroServic
 
 #### オブザーバブルな<i>paramMap</i>とコンポーネントの再利用
 
-この例では、 `Observable`からルートパラメータマップを取得する。
-これは、ルートパラメータマップがこのコンポーネントの有効期間中に変更される可能性があることを意味する。
+この例では、 `Observable`からルートパラメータマップを取得します。
+これは、ルートパラメータマップがこのコンポーネントの有効期間中に変更される可能性があることを意味します。
 
-デフォルトでは、ルーターは同じコンポーネントタイプに再ナビゲートするときに、別のコンポーネントにアクセスすることなコンポーネントインスタンスを再利用する。
-ルートパラメータは毎回変わる可能性がある。
+デフォルトでは、ルーターは同じコンポーネントタイプに再ナビゲートするときに、別のコンポーネントにアクセスすることなコンポーネントインスタンスを再利用します。
+ルートパラメータは毎回変わる可能性があります。
 
-親コンポーネントのナビゲーションバーに、「進む」ボタンと「戻る」ボタンがあり、ヒーローのリストをスクロールできるとする。
-それぞれのクリックは、次のまたは前の `id`を持つ` HeroDetailComponent`に命令的にナビゲートされる。
+親コンポーネントのナビゲーションバーに、「進む」ボタンと「戻る」ボタンがあり、ヒーローのリストをスクロールできるとします。
+それぞれのクリックは、次のまたは前の `id`を持つ` HeroDetailComponent`に命令的にナビゲートされます。
 
-次の`id`から新しくコンテンツを作り直すためだけに、DOMから現在の` HeroDetailComponent`のインスタンスを削除したくないだろう。
-それは目に見えて不快になるかもしれない。
-単に同じコンポーネントインスタンスを再利用してパラメータを更新するほうがよい。
+次の`id`から新しくコンテンツを作り直すためだけに、DOMから現在の` HeroDetailComponent`のインスタンスを削除したくないでしょう。
+それは目に見えて不快になるかもしれません。
+単に同じコンポーネントインスタンスを再利用してパラメータを更新するほうがよいでしょう。
 
-残念ながら、 `ngOnInit`はコンポーネントのインスタンス化ごとに一度だけ呼び出される。
-同じインスタンス内で、ルートパラメータが_同じインスタンス_からいつ変更されたかを検出する方法が必要である。
-オブザーバブルな`paramMap`プロパティはそれを合理的に処理する。
+残念ながら、 `ngOnInit`はコンポーネントのインスタンス化ごとに一度だけ呼び出されます。
+同じインスタンス内で、ルートパラメータが_同じインスタンス_からいつ変更されたかを検出する方法が必要です。
+オブザーバブルな`paramMap`プロパティはそれを合理的に処理します。
 
 <div class="alert is-helpful">
 
 
 
-コンポーネント内のオブザーバブルを購読するときは、ほとんどの場合、コンポーネントが破棄されたときに購読を中止するように手配する。
+コンポーネント内のオブザーバブルを購読するときは、ほとんどの場合、コンポーネントが破棄されたときに購読を中止するように手配します。
 
 There are a few exceptional observables where this is not necessary.
 The `ActivatedRoute` observables are among the exceptions.
 これが必要ではないいくつかの例外的なオブザーバブルがあります。
-オブザーバブル`ActivatedRoute`は例外である。
+オブザーバブル`ActivatedRoute`は例外です。
 
-`ActivatedRoute`とそのオブザーバブルは`Router`自身から隔離されている。
-`Router`は、ルーティングされたコンポーネントが必要なくなったときにそれを破棄し、注入された` ActivatedRoute`はそれと共に消える。
+`ActivatedRoute`とそのオブザーバブルは`Router`自身から隔離されています。
+`Router`は、ルーティングされたコンポーネントが必要なくなったときにそれを破棄し、注入された` ActivatedRoute`はそれと共に消えます。
 
 
-とにかく購読を中止すること。それは無害であり、決して悪い習慣ではない。
+とにかく購読を中止すること。それは無害であり、決して悪い習慣ではありません。
 
 
 </div>

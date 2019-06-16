@@ -2,55 +2,55 @@
 
 アプリケーションはAngular[ワークスペース](guide/glossary#workspace)のコンテキストで開発されます。 ワークスペースには1つ、または複数の[プロジェクト](guide/glossary#project)のファイルが含まれています。プロジェクトとは、スタンドアロンのアプリケーション、共有ライブラリを含むファイル群のことを指します。
 
-The Angular CLI `ng new` command creates a workspace.
+Angular CLIの `ng new` コマンドはワークスペースを作成します。
 
 <code-example language="bash" linenums="false">
 ng new &lt;my-project&gt;
 </code-example>
 
-When you run this command, the CLI installs the necessary Angular npm packages and other dependencies in a new workspace, with a root-level application named *my-project*.
-The workspace root folder contains various support and configuration files, and a README file with generated descriptive text that you can customize.
+このコマンドを実行すると、CLIは必要なAngular npmパッケージとその他の依存関係を新しいワークスペースに *my-project* という名前のルートレベルのアプリケーションと共にインストールします。
+ワークスペースのルートフォルダには、さまざまなサポートファイルと設定ファイル、およびカスタマイズ可能な生成された説明テキストを含むREADMEファイルが含まれています。
 
-By default, `ng new` creates an initial skeleton application at the root level of the workspace, along with its end-to-end tests.
-The skeleton is for a simple Welcome application that is ready to run and easy to modify.
-The root-level application has the same name as the workspace, and the source files reside in the `src/` subfolder of the workspace.
+デフォルトで `ng new` は、ワークスペースのルートレベルに初期スケルトンアプリケーションをそのエンドツーエンドテストと共に作成します。
+スケルトンは、実行する準備ができていて変更が簡単な、シンプルなWelcomeアプリケーション用です。
+ルートレベルのアプリケーションはワークスペースと同じ名前を持ち、ソースファイルはワークスペースの `src/` サブフォルダーにあります。
 
-This default behavior is suitable for a typical "multi-repo" development style where each application resides in its own workspace.
-Beginners and intermediate users are encouraged to use `ng new` to create a separate workspace for each application.
+このデフォルトの動作は、各アプリケーションが独自のワークスペースに存在する典型的な「マルチリポジトリ」開発スタイルに適しています。
+初心者および中級者は、アプリケーションごとに別々のワークスペースを作成するために `ng new` を使用することをお勧めします。
 
-Angular also supports workspaces with [multiple projects](#multiple-projects).
-This type of development environment is suitable for advanced users who are developing [shareable libraries](guide/glossary#library),
-and for enterprises that use a "monorepo" development style, with a single repository and global configuration for all Angular projects.
+Angularは [複数のプロジェクト](#multiple-projects) をもつワークスペースもサポートします。
+このタイプの開発環境は、 [共有可能なライブラリ](guide/glossary#library) を開発している上級ユーザー、
+および単一リポジトリとすべてのAngularプロジェクトのグローバル構成を備えた "monorepo" 開発スタイルを使用する企業に適しています。
 
-To set up a monorepo workspace, you should skip the creating the root application.
-See [Setting up for a multi-project workspace](#multiple-projects) below.
+monorepoワークスペースをセットアップするには、ルートアプリケーションの作成をスキップする必要があります。
+次の [マルチプロジェクトワークスペースの設定](#multiple-projects) を参照してください。
 
 ## ワークスペースの設定ファイル
 
-All projects within a workspace share a [CLI configuration context](guide/workspace-config).
-The top level of the workspace contains workspace-wide configuration files, configuration files for the root-level application, and subfolders for the root-level application source and test files.
+ワークスペース内のすべてのプロジェクトは [CLI構成コンテキスト](guide/workspace-config) を共有します。
+ワークスペースの最上位には、ワークスペース全体の設定ファイル、ルートレベルのアプリケーション用の設定ファイル、およびルートレベルのアプリケーションのソースファイルとテストファイル用のサブフォルダがあります。
 
-| ワークスペースの設定ファイル    | 　目的 |
+| ワークスペースの設定ファイル | 目的 |
 | :--------------------- | :------------------------------------------|
 | `.editorconfig`        | コードエディタ向けの設定です。 [EditorConfig](https://editorconfig.org/)を参照してください。 |
 | `.gitignore`           | [Git](https://git-scm.com/)に無視してほしい、意図的な未追跡ファイルの指定をします。 |
 | `README.md`            | 紹介用のドキュメントです。|
-| `angular.json`         | ワークスペース内のすべてのプロジェクトを対象としたCLIのデフォルト設定をします。CLIの使うビルド、サーブ、テストツールの設定オプションを規定します。たとえば、[TSLint](https://palantir.github.io/tslint/)、[Karma](https://karma-runner.github.io/)や[Protractor](http://www.protractortest.org/)などです。詳しくは [Angular Workspace Configuration](guide/workspace-config)を参照してください。 |
-| `package.json`         | ワークスペース内の全プロジェクトが利用可能な[npm package dependencies](guide/npm-packages) の設定をします。具体的なフォーマットやファイルの中身については[npm documentation](https://docs.npmjs.com/files/package.json) を参照してください。|
+| `angular.json`         | ワークスペース内のすべてのプロジェクトを対象としたCLIのデフォルト設定をします。CLIの使うビルド、サーブ、テストツールの設定オプションを規定します。たとえば、[TSLint](https://palantir.github.io/tslint/)、[Karma](https://karma-runner.github.io/)や[Protractor](http://www.protractortest.org/)などです。詳しくは [Angularワークスペースの設定](guide/workspace-config)を参照してください。 |
+| `package.json`         | ワークスペース内の全プロジェクトが利用可能な[npmパッケージの依存関係](guide/npm-packages) の設定をします。具体的なフォーマットやファイルの中身については[npm documentation](https://docs.npmjs.com/files/package.json) を参照してください。|
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
-| `src/`                  | Source files for the root-level application project. |
-| `node_modules`         | [npm packages](guide/npm-packages)をワークスペース全体に提供します。 |
+| `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |
+| `node_modules`         | [npmパッケージ](guide/npm-packages)をワークスペース全体に提供します。 |
 | `tsconfig.json`        | ワークスペース内のアプリケーションが利用する[TypeScript](https://www.typescriptlang.org/) のデフォルト設定です。この中にはTypeScriptとAngularテンプレートのコンパイラオプションが含まれます。[TypeScript Configuration](guide/typescript-configuration)を参照してください。 |
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 
 
 ### アプリケーションプロジェクトファイル
 
-By default, the CLI command `ng new my-app` creates a workspace folder named "my-app" and generates a new application skeleton in a `src/` folder at the top level of the workspace.
-A newly generated application contains source files for a root module, with a root component and template.
+デフォルトでは、CLIコマンド `ng new my-app` は "my-app" という名前のワークスペースフォルダを作成し、ワークスペースの最上位の `src/` フォルダに新しいアプリケーションスケルトンを生成します。
+新しく生成されたアプリケーションには、ルートコンポーネントとテンプレートを含むルートモジュールのソースファイルが含まれています。
 
-When the workspace file structure is in place, you can use the `ng generate` command on the command line to add functionality and data to the application.
-This initial root-level application is the *default app* for CLI commands (unless you change the default after creating [additional apps](#multiple-projects)).
+ワークスペースのファイル構造が整ったら、コマンドラインで `ng generate` コマンドを使用して機能とデータをアプリケーションに追加できます。
+この初期ルートレベルアプリケーションは、CLIコマンドの *デフォルトアプリケーション* です（ [追加のアプリケーション](#multiple-projects) を作成したあとでデフォルトを変更しない限り）。
 
 <div class="alert is-helpful">
 
@@ -58,58 +58,58 @@ This initial root-level application is the *default app* for CLI commands (unles
 
 </div>
 
-For a single-application workspace, the `src/` subfolder of the workspace contains the source files (application logic, data, and assets) for the root  application.
-For a multi-project workspace, additional projects in the `projects/` folder contain a `project-name/src/` subfolder with the same structure.
+単一アプリケーションワークスペースの場合、ワークスペースの `src/` サブフォルダーには、ルートアプリケーションのソースファイル（アプリケーションロジック、データ、およびアセット）が含まれています。
+マルチプロジェクトワークスペースの場合、 `projects/` フォルダ内の追加のプロジェクトには、同じ構造の `project-name/src/` サブフォルダが含まれています。
 
-### Application source files
+### アプリケーションソースファイル
 
-Files at the top level of `src/` support testing and running your  application. Subfolders contain the application source and  application-specific configuration.
+`src/` の最上位レベルにあるファイルで、アプリケーションのテストと実行のサポートを行います。 サブフォルダには、アプリケーションソースとアプリケーション固有の設定が含まれています。
 
-| APPソース & 設定ファイル    | 目的 |
+| APPソース & 設定ファイル  | 目的 |
 | :--------------------- | :------------------------------------------|
 | `app/`                 | アプリケーションのロジックやデータが定義されているコンポーネントファイルが含まれています。詳しくは[後述](#app-src)を参照してください。|
 | `assets/`              | 画像ファイルやその他のアセットファイルなどアプリケーションをビルドした時にそのままコピーされるべきものが格納されます。 | 
 | `environments/`        | 特定のターゲット環境向けのビルド設定を持ちます。デフォルトでは名前のない標準開発環境と本番("prod")環境が用意されています。追加でターゲット環境設定を定義することができます。 |
 | `favicon.ico`          | ブックマークバーで利用されるアプリケーションのアイコンです。|
 | `index.html`           | 誰かがサイトを訪れた際に表示されるメインのHTMLページです。アプリケーションをビルドする時にCLIは自動的にすべてのJavaScriptとCSSファイルを追加するため、基本的には`<script>`や`<link>`タグを手で足す必要はありません。 |
-| `main.ts`              | アプリケーションのメインエントリーポイントです。アプリケーションを[JIT compiler](https://angular.io/guide/glossary#jit)でコンパイルし、アプリケーションのルートモジュール(AppModule)をブートストラップしてブラウザで走らせます。[AOT compiler](https://angular.io/guide/aot-compiler)を使うこともできます。コードを変える必要はなく、CLIの`build`と`serve`コマンドに`--aot`フラグをつけるだけで利用できます。 |
+| `main.ts`              | アプリケーションのメインエントリーポイントです。アプリケーションを[JIT compiler](guide/glossary#jit)でコンパイルし、アプリケーションのルートモジュール(AppModule)をブートストラップしてブラウザで走らせます。[AOT compiler](guide/aot-compiler)を使うこともできます。コードを変える必要はなく、CLIの`build`と`serve`コマンドに`--aot`フラグをつけるだけで利用できます。 |
 | `polyfills.ts`         | ブラウザサポートのためのpolyfillスクリプトを提供します。|
 | `styles.sass`          | プロジェクトに適用するスタイルをもつCSSファイルを記載します。拡張子はプロジェクトに設定したスタイルプロセッサーを反映します。|
 | `test.ts`              | Angular特有の設定をもつ単体テストのメインエントリーポイントです。基本的にこのファイルを編集する必要はありません。|
 
 {@a app-src}
 
-Inside the `src/` folder, the `app/` folder contains your project's logic and data.
-Angular components, templates, and styles go here.
+`src/` フォルダ内の `app/` フォルダには、プロジェクトのロジックとデータが含まれています。
+Angularコンポーネント、テンプレート、スタイルはここにあります。
 
-| `src/app/` FILES | PURPOSE |
+| `src/app/` ファイル          | 目的 |
 | :-------------------------- | :------------------------------------------|
-| `app/app.component.ts`      | Defines the logic for the app's root component, named `AppComponent`. The view associated with this root component becomes the root of the [view hierarchy](guide/glossary#view-hierarchy) as you add components and services to your  application. |
-| `app/app.component.html`    | Defines the HTML template associated with the root `AppComponent`. |
-| `app/app.component.css`     | Defines the base CSS stylesheet for the root `AppComponent`. |
-| `app/app.component.spec.ts` | Defines a unit test for the root `AppComponent`. |
-| `app/app.module.ts`         | Defines the root module, named `AppModule`, that tells Angular how to assemble the application. Initially declares only the `AppComponent`. As you add more components to the app, they must be declared here. |
+| `app/app.component.ts`      | `AppComponent` という名前のアプリのルートコンポーネントのロジックを定義します。 このルートコンポーネントに関連付けられたビューは、コンポーネントやサービスをアプリケーションに追加したときに [ビュー階層](guide/glossary#view-hierarchy) のルートになります。 |
+| `app/app.component.html`    | ルート `AppComponent` に関連付けられているHTMLテンプレートを定義します。 |
+| `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
+| `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
+| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
 
-### Application configuration files
+### アプリケーション設定ファイル {@a application-configuration-files}
 
-The application-specific configuration files for the root application reside at the workspace root level.
-For a multi-project workspace, project-specific configuration files are in the project root, under `projects/project-name/`.
+ルートアプリケーション用のアプリケーション固有の設定ファイルは、ワークスペースのルートレベルにあります。
+マルチプロジェクトワークスペースの場合、プロジェクト固有の設定ファイルはプロジェクトルートの `projects/project-name/` にあります。
 
-Project-specific [TypeScript](https://www.typescriptlang.org/) configuration files inherit from the workspace-wide `tsconfig.json`, and project-specific [TSLint](https://palantir.github.io/tslint/) configuration files inherit from the workspace-wide `tslint.json`.
+プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
 
-| APPLICATION-SPECIFIC CONFIG FILES    | PURPOSE |
+| アプリケーション固有の設定ファイル    | 目的 |
 | :--------------------- | :------------------------------------------|
-| `browserslist`         | ターゲットブラウザとさまざまなフロントエンドツールのNode.jsのバージョンの共有設定をします。詳しくは[Browserslist on GitHub](https://github.com/browserslist/browserslist)を参照してください。 |
-| `karma.conf.js`      | Application-specific [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) configuration. |
-| `tsconfig.app.json`    | Application-specific [TypeScript](https://www.typescriptlang.org/) configuration, including TypeScript and Angular template compiler options. See [TypeScript Configuration](guide/typescript-configuration). |
-| `tsconfig.spec.json`   | [TypeScript](https://www.typescriptlang.org/) configuration for the application tests. See [TypeScript Configuration](guide/typescript-configuration). |
-| `tslint.json`          | Application-specific [TSLint](https://palantir.github.io/tslint/) configuration. |
+| `browserslist`         | ターゲットブラウザとさまざまなフロントエンドツールのNode.jsのバージョンの共有設定をします。詳しくは[Browserslist on GitHub](https://github.com/browserslist/browserslist) を参照してください。 |
+| `karma.conf.js`      | アプリケーション固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定。 |
+| `tsconfig.app.json`    | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、アプリケーション固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tsconfig.spec.json`   | アプリケーションテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tslint.json`          | アプリケーション固有の [TSLint](https://palantir.github.io/tslint/) の設定。 |
 
-### End-to-end test files
+### エンドツーエンドテストのファイル
 
 `e2e/` フォルダはルートレベルのアプリケーションに対応したエンドツーエンドテストの設定とソースファイルを持ちます。
 
-For a multi-project workspace, application-specific end-to-end tests are in the project root, under `projects/project-name/e2e/`.
+マルチプロジェクトワークスペースの場合、アプリケーション固有のエンドツーエンドテストはプロジェクトルートの下 `projects/project-name/e2e/` にあります。
 
 <code-example language="none" linenums="false">
   e2e/
@@ -122,63 +122,63 @@ For a multi-project workspace, application-specific end-to-end tests are in the 
 
 {@a multiple-projects}
 
-## Multiple projects
+## マルチプロジェクト
 
-A multi-project workspace is suitable for an enterprise that uses a single repository and global configuration for all Angular projects (the "monorepo" model). A multi-project workspace also supports library development.
+マルチプロジェクトワークスペースは、すべてのAngularプロジェクトに対して単一のリポジトリとグローバル構成を使用する企業に適しています（ "monorepo" モデル）。 マルチプロジェクトワークスペースもライブラリ開発をサポートします。
 
-### Setting up for a multi-project workspace
+### マルチプロジェクトワークスペースの設定
 
-If you intend to have multiple projects in a workspace, you can skip the initial application generation when you create the workspace, and give the workspace a unique name.
-The following command creates a workspace with all of the workspace-wide configuration files, but no root-level application.
+ワークスペースに複数のプロジェクトを含める場合は、ワークスペースを作成するときに最初のアプリケーション生成をスキップして、ワークスペースにユニークな名前を付けることができます。
+次のコマンドは、すべてのワークスペース全体の構成ファイルを使用してワークスペースを作成しますが、ルートレベルのアプリケーションは作成しません。
 
 <code-example language="bash" linenums="false">
 ng new my-workspace --createApplication="false"
 </code-example>
 
-You can then generate apps and libraries with names that are unique within the workspace.
+その後、ワークスペース内でユニークな名前でアプリやライブラリを生成できます。
 
 <code-example language="bash" linenums="false">
 cd my-workspace
 ng generate application my-first-app
 </code-example>
 
-### Multiple project file structure
+### マルチプロジェクトのファイル構造
 
-The first explicitly generated application goes into the `projects/` folder along with all other projects in the workspace.
-Newly generated libraries are also added under `projects/`.
-When you create projects this way, the file structure of the workspace is entirely consistent with the structure of the [workspace configuration file](guide/workspace-config), `angular.json`.
+最初に明示的に生成されたアプリケーションは、ワークスペース内の他のすべてのプロジェクトと共に `projects/` フォルダーに入ります。
+新しく生成されたライブラリも `projects/` の下に追加されています。
+この方法でプロジェクトを作成すると、ワークスペースのファイル構造は、 [ワークスペース構成ファイル](guide/workspace-config) 、 `angular.json` の構造と完全に一致します。
 
 <code-example language="none" linenums="false">
 my-workspace/
-  ...             (workspace-wide config files)
-  projects/       (generated applications and libraries)
-    my-first-app/ --(an explicitly generated application)
-      ...         --(application-specific config)
-      e2e/        ----(corresponding e2e tests)
-         src/     ----(e2e tests source)
-         ...      ----(e2e-specific config)
-      src/        --(source and support files for application)
-    my-lib/       --(a generated library)
-      ...         --(library-specific config)
-      src/        --source and support files for library)
+  ...             (ワークスペース全体の設定ファイル)
+  projects/       (生成されたアプリケーションとライブラリ)
+    my-first-app/ --(明示的に生成されたアプリケーション)
+      ...         --(アプリケーション固有の設定)
+      e2e/        ----(対応するe2eテスト)
+         src/     ----(e2eテストソース)
+         ...      ----(e2e固有の設定)
+      src/        --(アプリケーションのソースファイルとサポートファイル)
+    my-lib/       --(生成されたライブラリ)
+      ...         --(ライブラリ固有の設定)
+      src/        --(ライブラリのソースファイルとサポートファイル)
 </code-example>
 
-## Library project files
+## ライブラリプロジェクトファイル {@a library-project-files}
 
-When you generate a library using the CLI (with a command such as `ng generate library my-lib`), the generated files go into the projects/ folder of the workspace. For more information about creating your own libraries, see  [Creating Libraries](https://angular.io/guide/creating-libraries).
+CLIを使用して（ `ng generate library my-lib` などのコマンドを使用して）ライブラリを生成すると、生成されたファイルはワークスペースのprojects/フォルダに入ります。 独自のライブラリを作成する方法の詳細については、 [ライブラリの作成](guide/creating-libraries) を参照してください。
 
-Libraries (unlike applications and their associated e2e projects) have their own `package.json` configuration files.
+ライブラリは（アプリケーションや関連するe2eプロジェクトとは異なり）独自の `package.json` 設定ファイルを持っています。
 
-Under the `projects/` folder, the `my-lib` folder contains your library code.
+`projects/` フォルダの下の `my-lib` フォルダには、ライブラリコードが含まれています。
 
-| LIBRARY SOURCE FILES | PURPOSE                                                                      |
+| ライブラリソースファイル | 目的 |
 | :------------------- | :----------------------------------------------------------------------------|
-| `src/lib`           |  Contains your library project's logic and data. Like an application project, a library project can contain components, services, modules, directives, and pipes.                                                            |
-| `src/test.ts`       | The main entry point for your unit tests, with some library-specific configuration. You don't typically need to edit this file.                                                                                            |
-| `src/public-api.ts`  | Specifies all files that are exported from your library.                                                                                                                                                                     |
-| `karma.conf.js`      | Library-specific [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) configuration.                                                                                                                   |
-| `ng-package.json`    | Configuration file used by [ng-packagr](https://github.com/ng-packagr/ng-packagr) for building your library.                                                                                                                 |
-| `package.json`       | Configures [npm package dependencies](guide/npm-packages) that are required for this library.                                                                                                                                |
-| `tsconfig.lib.json`  | Library-specific [TypeScript](https://www.typescriptlang.org/) configuration, including TypeScript and Angular template compiler options. See [TypeScript Configuration](guide/typescript-configuration).            |
-| `tsconfig.spec.json` | [TypeScript](https://www.typescriptlang.org/) configuration for the library tests. See [TypeScript Configuration](guide/typescript-configuration).                                                                     |
-| `tslint.json`        | Library-specific [TSLint](https://palantir.github.io/tslint/) configuration. |
+| `src/lib`            | ライブラリプロジェクトのロジックとデータが含まれています。 アプリケーションプロジェクトと同様に、ライブラリプロジェクトには、コンポーネント、サービス、モジュール、ディレクティブ、およびパイプを含めることができます。 |
+| `src/test.ts`        | 単体テストの主な入り口で、ライブラリ固有の設定がいくつかあります。通常このファイルを編集する必要はありません。 |
+| `src/public-api.ts`  | ライブラリからエクスポートされたすべてのファイルを指定します。 |
+| `karma.conf.js`      | ライブラリ固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定 |
+| `ng-package.json`    | ライブラリを構築するために [ng-packagr](https://github.com/ng-packagr/ng-packagr) によって使用される設定ファイル。 |
+| `package.json`       | このライブラリに必要な [npmパッケージの依存関係](guide/npm-packages) を設定します。 |
+| `tsconfig.lib.json`  | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、ライブラリ固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tsconfig.spec.json` | ライブラリテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tslint.json`        | ライブラリ固有の [TSLint](https://palantir.github.io/tslint/) の設定 |

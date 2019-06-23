@@ -461,7 +461,7 @@ module.exports = PROXY_CONFIG;
 
 ### コーポレートプロキシの使用
 
-もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求は直接プロキシできません。
+もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求はバックエンドが直接プロキシできません。
 この場合、エージェントを使用してコーポレートプロキシを介して要求をリダイレクトするようにバックエンドプロキシを設定することができます:
 
 <code-example language="none" class="code-shell">
@@ -494,4 +494,3 @@ function setupForCorporateProxy(proxyConfig) {
 
 module.exports = setupForCorporateProxy(proxyConfig);
 ```
-

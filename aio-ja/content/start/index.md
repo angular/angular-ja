@@ -11,7 +11,7 @@ Welcome to Angular!
 <header>Web開発は初めてですか？</header>
 
 
-Angularのドキュメントを補完するための多くのリソースがあります。 MozillaのMDNドキュメントには[HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML "Learning HTML: Guides and tutorials")と[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")の両方の紹介が含まれています。 [TypeScriptのドキュメント](https://www.typescriptlang.org/docs/home.html "TypeScript documentation")には5分間のチュートリアルが含まれています。 [Udemy](http://www.udemy.com "Udemy online courses")や[Codeacademy](https://www.codecademy.com/ "Codeacademy online courses")などのさまざまなオンラインコースプラットフォームもWeb開発の基本をカバーしています。
+Angularのドキュメントを補完するための多くのリソースがあります。 MozillaのMDNドキュメントには[HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML "Learning HTML: Guides and tutorials")と[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")の両方の紹介が含まれています。 [TypeScriptのドキュメント](https://www.typescriptlang.org/docs/home.html "TypeScript documentation")には5分間のチュートリアルが含まれています。 [Udemy](http://www.udemy.com "Udemy online courses")や[Codecademy](https://www.codecademy.com/ "Codeacademy online courses")などのさまざまなオンラインコースプラットフォームもWeb開発の基本をカバーしています。
 
 
 </div> 
@@ -69,7 +69,9 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
       `*ngFor` によってリスト内の各製品ごとに`<div>`が繰り返されます。
 
       <div class="alert is-helpful">
+
       `*ngFor`は"構造ディレクティブ"です。 構造ディレクティブは、通常、それらが関連付けられている要素を追加、削除、および操作することによって、DOMの構造を整形または再構成します。 * の付いたディレクティブはすべて構造ディレクティブです。
+
       </div>
 
     1. 製品の名前を表示するには、補間構文 {{ }} を使用します。 補間は、プロパティの値をテキストとしてレンダリングします。 `<div>`の中に、製品のnameプロパティを補間し表示するための`<h3>`見出しを追加します。
@@ -131,9 +133,9 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 その過程で、Angularのテンプレート構文の5つの一般的な機能を使用する方法を学びました。
 * `*ngFor`
 * `*ngIf`
-* 補間 {{ }}
-* プロパティバインディング [ ]
-* イベントバインディング ( ) 
+* 補間 `{{ }}`
+* プロパティバインディング `[ ]`
+* イベントバインディング `( )`
 
 
 <div class="alert is-helpful">

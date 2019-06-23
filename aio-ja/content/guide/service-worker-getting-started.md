@@ -58,6 +58,13 @@ http-server -p 8080 -c-1 dist/<project-name>
 
 **Tip:** Angular Service Workerをテストするときは、ブラウザでシークレットウィンドウまたはプライベートウィンドウを使うことをお勧めします。以前の状態が残存していると、Service Workerが読み取ったときに予期しない動作を引き起こし終了する可能性があるからです。
 
+<div class="alert is-helpful">
+
+**Note:**
+If you are not using HTTPS, the service worker will only be registered when accessing the app on `localhost`.
+
+</div>
+
 ### ネットワークの問題をシミュレートする
 
 ネットワークの問題をシミュレートするには、アプリケーションのネットワーク操作を無効にします。Chromeの場合は次になります。

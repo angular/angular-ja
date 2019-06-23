@@ -62,7 +62,7 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 <div class="alert is-helpful">
 
-**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example oDownload>NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
+**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example noDownload  name="ngmodules">NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
 
 </div>
 

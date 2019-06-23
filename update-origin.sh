@@ -2,7 +2,7 @@
 
 echo "Checking aio changes in origin..."
 
-aioHash="f8fa2f2"
+aioHash="7fe95b188"
 
 git -C origin fetch --all
 git -C origin reset ${aioHash} --hard

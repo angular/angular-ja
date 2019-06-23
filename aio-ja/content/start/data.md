@@ -6,7 +6,7 @@
 このセクションでは、ショッピングカートを作成します。 あなたは:
 * 商品の詳細ページに "Buy" ボタンを追加します。 これにより、現在の商品がカートサービスで管理されている商品のリストに追加されます。
 * カートに追加した商品を表示するカートコンポーネントを追加します。
-* AngularのHttpClientを使用して `.json` ファイルから配送データを取得することで、カート内の商品の配送料金を取得するshippingコンポーネントを追加します。
+* Angularの`HttpClient`を使用して `.json` ファイルから配送データを取得することで、カート内の商品の配送料金を取得するshippingコンポーネントを追加します。
 
 {@a services}
 ## サービス
@@ -34,7 +34,7 @@
 
 1. カートサービスを生成します。
 
-    1. `app` フォルダを右クリックして `Angular Generator` を選択し、 `**Service**` を選択します。 新しいサービスに `cart` と名前をつけます。
+    1. `app` フォルダを右クリックして `Angular Generator` を選択し、 `Service` を選択します。 新しいサービスに `cart` と名前をつけます。
 
         <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.1.ts"></code-example>
 
@@ -238,7 +238,7 @@ Angular HTTP client（ `HttpClient` ）は、外部APIからデータを取得�
 
 ### 定義済み配送データ
 
-この入門のために、配送データを `assets/shipping.json` に用意しました。
+この入門ガイドのために、配送データを `assets/shipping.json` に用意しました。
 このデータを使用して、カート内の商品の配送料金を追加します。
 
 <code-example header="src/assets/shipping.json" path="getting-started/src/assets/shipping.json">
@@ -306,7 +306,7 @@ To do: Should ReactiveFormsModule already be here?
 
 <div class="alert is-helpful">
 
-詳細情報: AngularのHttpClientの詳細については、 [HttpClientガイド](guide/http "HttpClient guide") を参照してください。
+詳細情報: Angularの`HttpClient`の詳細については、 [HttpClientガイド](guide/http "HttpClient guide") を参照してください。
 
 </div>
 

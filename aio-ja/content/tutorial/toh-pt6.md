@@ -54,7 +54,21 @@ _npm_から*インメモリWeb API*をインストールします。
   npm install angular-in-memory-web-api --save
 </code-example>
 
-`HttpClientInMemoryWebApiModule`とこれからすぐ作成する`InMemoryDataService`クラスをインポートします。
+`src/app/in-memory-data.service.ts` ファイルは次のコマンドで生成されます:
+
+<code-example language="sh" class="code-shell">
+  ng generate service InMemoryData
+</code-example>
+
+このクラスは次のような内容です:
+
+<code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" header="src/app/in-memory-data.service.ts" linenums="false"></code-example>
+
+このファイルは`mock-heroes.ts`の置き換えなので、`mock-heroes.ts`は削除してしまっても問題ありません。
+
+サーバーが準備されたら、*インメモリWeb API*を外せば、アプリのリクエストはサーバーに送信されます。
+
+それでは`HttpClient`の話に戻りましょう。
 
 <code-example 
   path="toh-pt6/src/app/app.module.ts" 
@@ -73,25 +87,8 @@ _npm_から*インメモリWeb API*をインストールします。
 
 `forRoot()`メソッドはインメモリデータベースを用意する`InMemoryDataService`クラスを引数に取ります。
 
-`src/app/in-memory-data.service.ts` ファイルは次のコマンドで生成されます:
-
-<code-example language="sh" class="code-shell">
-  ng generate service InMemoryData
-</code-example>
-
-このクラスは次のような内容です:
-
-<code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" header="src/app/in-memory-data.service.ts" linenums="false"></code-example>
-
-このファイルは`mock-heroes.ts`の置き換えなので、`mock-heroes.ts`は削除してしまっても問題ありません。
-
-サーバーが準備されたら、*インメモリWeb API*を外せば、アプリのリクエストはサーバーに送信されます。
-
-それでは`HttpClient`の話に戻りましょう。
-
 {@a import-heroes}
-{@a heroes-and-http}
-## ヒーローとHTTP
+## ヒーローとHTTP {@a heroes-and-http}
 
 必要なHTTPシンボルをいくつかインポートします。
 

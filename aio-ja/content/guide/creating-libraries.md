@@ -5,6 +5,10 @@ Angular の機能を拡張するために新しいライブラリを作成して
 簡単な例としては、会社の Web サイトにユーザーを送信するボタンがあります。これは、会社が構築するすべてのアプリに含まれています。
 
 <div class="alert is-helpful">
+     <p>For more details on how a library project is structured you can refer the <a href="guide/file-structure#library-project-files">Library Project Files</a></p>
+</div>
+
+<div class="alert is-helpful">
      <p>ライブラリプロジェクトの構造の詳細については、<a href="guide/file-structure#library-project-files">ライブラリプロジェクトファイル</a>を参照してください。</p>
 </div>
 

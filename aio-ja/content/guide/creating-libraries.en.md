@@ -4,6 +4,10 @@ You can create and publish new libraries to extend Angular functionality. If you
 
 A simple example might be a button that sends users to your company website, that would be included in all apps that your company builds.
 
+<div class="alert is-helpful">
+     <p>For more details on how a library project is structured you can refer the <a href="guide/file-structure#library-project-files">Library Project Files</a></p>
+</div>
+
 ## Getting started
 
 Use the Angular CLI to generate a new library skeleton with the following command:
@@ -83,6 +87,8 @@ If that form will need additional customization by the user, it might work best 
 However, if the forms will always be the same and not need much customization by developers, then you could create a dynamic component that takes the configuration and generates the form.
 In general, the more complex the customization, the more useful the schematic approach.
 
+{@a integrating-with-the-cli}
+
 ## Integrating with the CLI
 
 A library can include [schematics](guide/glossary#schematic) that allow it to integrate with the Angular CLI.
@@ -93,7 +99,7 @@ A library can include [schematics](guide/glossary#schematic) that allow it to in
 
 * Include an update schematic so that `ng update` can update your library’s dependencies and provide migrations for breaking changes in new releases.
 
-To learn more, see [Schematics — An Introduction](https://blog.angular.io/schematics-an-introduction-dc1dfbc2a2b2).
+To learn more, see [Schematics Overview](guide/schematics) and [Schematics for Libraries](guide/schematics-for-libraries).
 
 ## Publishing your library
 
@@ -119,7 +125,7 @@ For example, `main` should point at a JavaScript file, not a TypeScript file.
 ## Use TypeScript path mapping for peer dependencies
 
 Angular libraries should list all `@angular/*` dependencies as peer dependencies.
-This insures that when modules ask for Angular, they all get the exact same module.
+This ensures that when modules ask for Angular, they all get the exact same module.
 If a library lists `@angular/core` in `dependencies` instead of `peerDependencies`, it might get a different Angular module instead, which would cause your application to break.
 
 While developing a library, you must install all peer dependencies through `devDependencies` to ensure that the library compiles properly.
@@ -127,7 +133,7 @@ A linked library will then have its own set of Angular libraries that it uses fo
 However, this can cause problems while building or running your application.
 
 To get around this problem you can use TypeScript path mapping to tell TypeScript that it should load some modules from a specific location.
-List all the peer dependencies that your library uses in the TypeScript configuration file `./tsconfig.json`, and point them at the local copy in the app's `node_modules` folder.
+List all the peer dependencies that your library uses in the workspace TypeScript configuration file `./tsconfig.json`, and point them at the local copy in the app's `node_modules` folder.
 
 ```
 {
@@ -136,7 +142,7 @@ List all the peer dependencies that your library uses in the TypeScript configur
     // paths are relative to `baseUrl` path.
     "paths": {
       "@angular/*": [
-        "../node_modules/@angular/*"
+        "./node_modules/@angular/*"
       ]
     }
   }
@@ -158,7 +164,7 @@ To use your own library in an app:
 
 * In your apps, import from the library by name:
  ```
- import { my-export } from 'my-lib';
+ import { myExport } from 'my-lib';
  ```
 
 ### Building and rebuilding your library

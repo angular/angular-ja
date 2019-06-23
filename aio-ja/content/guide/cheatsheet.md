@@ -370,24 +370,24 @@
 <td><p><code>routerLink</code>が現在のアクティブなルートになると、指定されたクラスが要素に追加されます。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanActivate</b>Guard implements <b>CanActivate</b> {<br>    canActivate(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean&gt;|Promise&lt;boolean&gt;|boolean { ... }<br>}<br><br>{ path: ..., canActivate: [<b>CanActivate</b>Guard] }</code></td>
-<td><p>このコンポーネントをアクティブにすべきかを判断するためにルータが最初に呼び出すクラスを定義するためのインタフェース。 boolean、もしくはObservable&lt;boolean&gt;およびPromise&lt;boolean&gt;を返す必要があります。</p>
+<td><code>class <b>CanActivate</b>Guard implements <b>CanActivate</b> {<br>    canActivate(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canActivate: [<b>CanActivate</b>Guard] }</code></td>
+<td><p>このコンポーネントをアクティブにすべきかを判断するためにルータが最初に呼び出すクラスを定義するためのインタフェース。 boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanDeactivate</b>Guard implements <b>CanDeactivate</b>&lt;T&gt; {<br>    canDeactivate(<br>      component: T,<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean&gt;|Promise&lt;boolean&gt;|boolean { ... }<br>}<br><br>{ path: ..., canDeactivate: [<b>CanDeactivate</b>Guard] }</code></td>
-<td><p>ナビゲーション後にルータがこのコンポーネントを非アクティブ化すべきかを判断するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。 boolean、もしくはObservable&lt;boolean&gt;およびPromise&lt;boolean&gt;を返す必要があります。</p>
+<td><code>class <b>CanDeactivate</b>Guard implements <b>CanDeactivate</b>&lt;T&gt; {<br>    canDeactivate(<br>      component: T,<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canDeactivate: [<b>CanDeactivate</b>Guard] }</code></td>
+<td><p>ナビゲーション後にルータがこのコンポーネントを非アクティブ化すべきかを判断するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。 boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanActivateChild</b>Guard implements <b>CanActivateChild</b> {<br>    canActivateChild(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean&gt;|Promise&lt;boolean&gt;|boolean { ... }<br>}<br><br>{ path: ..., canActivateChild: [CanActivateGuard],<br>    children: ... }</code></td>
-<td><p>子ルートをアクティブにすべかを判断するためにルータが最初に呼び出すクラスを定義するためのインタフェース。boolean、もしくはObservable&lt;boolean&gt;およびPromise&lt;boolean&gt;を返す必要があります。</p>
+<td><code>class <b>CanActivateChild</b>Guard implements <b>CanActivateChild</b> {<br>    canActivateChild(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canActivateChild: [CanActivateGuard],<br>    children: ... }</code></td>
+<td><p>子ルートをアクティブにすべかを判断するためにルータが最初に呼び出すクラスを定義するためのインタフェース。boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
 <td><code>class <b>Resolve</b>Guard implements <b>Resolve</b>&lt;T&gt; {<br>    resolve(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;any&gt;|Promise&lt;any&gt;|any { ... }<br>}<br><br>{ path: ..., resolve: [<b>Resolve</b>Guard] }</code></td>
 <td><p>ルートをレンダリングする前にルートデータを解決するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。 値か、その値を解決するObservableおよびPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanLoad</b>Guard implements <b>CanLoad</b> {<br>    canLoad(<br>      route: Route<br>    ): Observable&lt;boolean&gt;|Promise&lt;boolean&gt;|boolean { ... }<br>}<br><br>{ path: ..., canLoad: [<b>CanLoad</b>Guard], loadChildren: ... }</code></td>
-<td><p>遅延ロードされたモジュールがロードされるべきかを判断するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。boolean、もしくはObservable&lt;boolean&gt;およびPromise&lt;boolean&gt;を返す必要があります。</p>
+<td><code>class <b>CanLoad</b>Guard implements <b>CanLoad</b> {<br>    canLoad(<br>      route: Route<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canLoad: [<b>CanLoad</b>Guard], loadChildren: ... }</code></td>
+<td><p>遅延ロードされたモジュールがロードされるべきかを判断するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr>
 </tbody></table>

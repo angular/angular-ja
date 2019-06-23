@@ -2942,7 +2942,7 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 {@a 05-12}
 
-### _インプット_と_アウトプット_のプロパティを修飾しましょう
+### _インプット_と_アウトプット_のプロパティを修飾しましょう {@a decorate-input-and-output-properties}
 
 #### Style 05-12
 

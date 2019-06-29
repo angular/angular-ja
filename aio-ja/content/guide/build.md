@@ -316,7 +316,7 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 `--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
 たとえば、`http://localhost:4200/api`に対するすべての要求を`http://localhost:3000/api`で実行しているサーバーに転送するには、次の手順を実行してください。
 
-1. プロジェクトの`src/`フォルダーの中に`proxy.conf.json`ファイルを作成します。
+1. `proxy.conf.json` ファイルを、 `package.json` と同じディレクトリにある `src/` フォルダの中に作成します。
 
 2. 次のコンテンツを新しいプロキシファイルに追加します:
     ```
@@ -461,7 +461,7 @@ module.exports = PROXY_CONFIG;
 
 ### コーポレートプロキシの使用
 
-もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求は直接プロキシできません。
+もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求はバックエンドが直接プロキシできません。
 この場合、エージェントを使用してコーポレートプロキシを介して要求をリダイレクトするようにバックエンドプロキシを設定することができます:
 
 <code-example language="none" class="code-shell">
@@ -494,4 +494,3 @@ function setupForCorporateProxy(proxyConfig) {
 
 module.exports = setupForCorporateProxy(proxyConfig);
 ```
-

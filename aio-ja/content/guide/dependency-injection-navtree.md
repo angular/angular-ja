@@ -122,18 +122,18 @@ TypeScript のインターフェースは、インターフェースをサポー
 {@a class-interface-parent}
 
 
-### Find a parent by its class interface
+### クラスインターフェースで親を探す
 
-You can find a parent component with a [class interface](guide/dependency-injection-in-action#class-interface).
+[クラスインターフェース](guide/dependency-injection-in-action#class-interface)を使って親コンポーネントを見つけることができます。
 
-The parent must cooperate by providing an *alias* to itself in the name of a class interface token.
+親はクラスインターフェーストークンの名前で*エイリアス*を自身に提供することで協力しなければなりません。
 
-Recall that Angular always adds a component instance to its own injector;
-that's why you could inject *Alex* into *Cathy* [earlier](#known-parent).
+Angular は常にコンポーネントインスタンスを独自のインジェクターに追加します。
+だからあなたは[先ほど](#known-parent) *Cathy* に *Alex* を注入できたのです。
 
-Write an [*alias provider*](guide/dependency-injection-in-action#useexisting)&mdash;a `provide` object literal with a `useExisting`
-definition&mdash;that creates an *alternative* way to inject the same component instance
-and add that provider to the `providers` array of the `@Component()` metadata for the `AlexComponent`.
+[*エイリアスプロバイダー*](guide/dependency-injection-in-action#useexisting) (`useExisting` 定義をもつ `provide` オブジェクトリテラル)を作成します。
+これは、同じコンポーネントインスタンスを注入し、そのプロバイダーを 
+`AlexComponent` の `@Component()` メタデータの `providers` 配列に追加する*代わりの*方法を作成します。
 
 {@a alex-providers}
 
@@ -143,11 +143,12 @@ and add that provider to the `providers` array of the `@Component()` metadata fo
 </code-example>
 
 
-[Parent](#parent-token) is the provider's class interface token.
-The [*forwardRef*](guide/dependency-injection-in-action#forwardref) breaks the circular reference you just created by having the `AlexComponent` refer to itself.
+[Parent](#parent-token) はプロバイダーのクラスインターフェーストークンです。
+[*forwardRef*](guide/dependency-injection-in-action#forwardref) は、
+`AlexComponent` が自身を参照することによって作られた循環参照を解消します。
 
-*Carol*, the third of *Alex*'s child components, injects the parent into its `parent` parameter,
-the same way you've done it before.
+*Alex* の3番目の子コンポーネントである *Carol* は、これまでと同じ方法で、
+親をその `parent` パラメータに挿入します。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="carol-class" header="parent-finder.component.ts (CarolComponent class)" linenums="false">
 
@@ -155,10 +156,10 @@ the same way you've done it before.
 
 
 
-Here's *Alex* and family in action.
+これが動作中の *Alex* と家族です。
 
 <figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex in action">
+  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex イン・アクション">
 </figure>
 
 
@@ -166,16 +167,16 @@ Here's *Alex* and family in action.
 {@a parent-tree}
 
 
-### Find a parent in a tree with _@SkipSelf()_
+### _@SkipSelf()_ を使ってツリー内の親を探す
 
-Imagine one branch of a component hierarchy: *Alice* -> *Barry* -> *Carol*.
-Both *Alice* and *Barry* implement the `Parent' class interface.
+コンポーネント階層の1つのブランチ、たとえば *Alice* -> *Barry* -> *Carol* といったものを想像してみてください。
+*Alice* と *Barry* はどちらも `Parent` クラスインターフェースを実装しています。
 
-*Barry* is the problem. He needs to reach his parent, *Alice*, and also be a parent to *Carol*.
-That means he must both *inject* the `Parent` class interface to get *Alice* and
-*provide* a `Parent` to satisfy *Carol*.
+*Barry* が問題です。彼は自分の親である *Alice* と連絡を取り、また *Carol* の親である必要があります。
+つまり、*Alice* を取得するために `Parent` クラスのインターフェースを*注入*し、
+*Carol* の親の条件を満たすために `Parent` を*提供*する必要があります。
 
-Here's *Barry*.
+*Barry* はこのようになります。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="barry" header="parent-finder.component.ts (BarryComponent)" linenums="false">
 
@@ -183,10 +184,10 @@ Here's *Barry*.
 
 
 
-*Barry*'s `providers` array looks just like [*Alex*'s](#alex-providers).
-If you're going to keep writing [*alias providers*](guide/dependency-injection-in-action#useexisting) like this you should create a [helper function](#provideparent).
+*Barry* の `providers` 配列は、[Alex の配列](#alex-providers)とまったく同じです。
+このような[エイリアスプロバイダ](guide/dependency-injection-in-action#useexisting)を書き続けるのであれば、[ヘルパー関数](#provideparent)を作成するべきです。
 
-For now, focus on *Barry*'s constructor.
+今は、*Barry* のコンストラクターに焦点を当てます。
 
 <code-tabs>
 
@@ -201,22 +202,22 @@ For now, focus on *Barry*'s constructor.
 </code-tabs>
 
 
-It's identical to *Carol*'s constructor except for the additional `@SkipSelf` decorator.
+追加の `@SkipSelf` デコレーターを除いて、*Carol* のコンストラクターと同じです。
 
-`@SkipSelf` is essential for two reasons:
+`@SkipSelf` が欠かせないものである理由が2つあります。
 
-1. It tells the injector to start its search for a `Parent` dependency in a component *above* itself,
-which *is* what parent means.
+1. それはインジェクターにそれ自身の上のコンポーネントで`Parent` 依存関係の検索を開始するように指示します。
+これは parent が意味するものです。
 
-2. Angular throws a cyclic dependency error if you omit the `@SkipSelf` decorator.
+2. `@SkipSelf` デコレーターを省略した場合、Angular は循環依存エラーを送出します。
 
   `Cannot instantiate cyclic dependency! (BethComponent -> Parent -> BethComponent)`
 
-Here's *Alice*, *Barry*, and family in action.
+これが *Alice*、*Barry*、そして家族の動きです。
 
 
 <figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alice.png" alt="Alice in action">
+  <img src="generated/images/guide/dependency-injection-in-action/alice.png" alt="Alice イン・アクション">
 </figure>
 
 
@@ -224,10 +225,10 @@ Here's *Alice*, *Barry*, and family in action.
 {@a parent-token}
 
 
-###  Parent class interface
-You [learned earlier](guide/dependency-injection-in-action#class-interface) that a class interface is an abstract class used as an interface rather than as a base class.
+###  親クラスのインターフェース
+クラスインターフェースは基本クラスとしてではなくインターフェースとして使用される抽象クラスであることを[以前に学びました](guide/dependency-injection-in-action#class-interface)。
 
-The example defines a `Parent` class interface.
+例では `Parent` クラスのインターフェースを定義しています。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="parent" header="parent-finder.component.ts (Parent class-interface)" linenums="false">
 
@@ -235,11 +236,11 @@ The example defines a `Parent` class interface.
 
 
 
-The `Parent` class interface defines a `name` property with a type declaration but *no implementation*.
-The `name` property is the only member of a parent component that a child component can call.
-Such a narrow interface helps decouple the child component class from its parent components.
+`Parent` クラスインターフェースは、型宣言を使用して `name` プロパティを定義しますが、*実装はしません*。
+`name` プロパティは、子コンポーネントが呼び出すことができる親コンポーネントの唯一のメンバーです。
+そのような小さなインターフェースは、子コンポーネントクラスをその親コンポーネントから切り離すのに役立ちます。
 
-A component that could serve as a parent *should* implement the class interface as the `AliceComponent` does.
+親として機能できるコンポーネントは、`AliceComponent` と同様にクラスインターフェースを実装する必要があります。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-class-signature" header="parent-finder.component.ts (AliceComponent class signature)" linenums="false">
 
@@ -247,9 +248,9 @@ A component that could serve as a parent *should* implement the class interface 
 
 
 
-Doing so adds clarity to the code.  But it's not technically necessary.
-Although `AlexComponent` has a `name` property, as required by its `Base` class,
-its class signature doesn't mention `Parent`.
+そうすることで、コードが分かりやすくなります。しかし技術的に必要というわけではありません。
+その `Base` クラスで要求されるため、`AlexComponent` は `name` プロパティを持ちますが、
+そのクラスシグネチャは `Parent` を呼び出しません。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (AlexComponent class signature)" linenums="false">
 
@@ -261,8 +262,8 @@ its class signature doesn't mention `Parent`.
 
 
 
-`AlexComponent` *should* implement `Parent` as a matter of proper style.
-It doesn't in this example *only* to demonstrate that the code will compile and run without the interface.
+`AlexComponent` は、適切なスタイルの事項として `Parent` を実装する*必要があります*。
+この例は、コードがインターフェースなしでコンパイルおよび実行されることを示すため*だけ*のものではありません。
 
 
 </div>
@@ -272,39 +273,39 @@ It doesn't in this example *only* to demonstrate that the code will compile and 
 {@a provideparent}
 
 
-### `provideParent()` helper function
+### `provideParent()` ヘルパー関数
 
-Writing variations of the same parent *alias provider* gets old quickly,
-especially this awful mouthful with a [*forwardRef*](guide/dependency-injection-in-action#forwardref).
+同じ親*エイリアスプロバイダ*のバリエーションを書くとすぐに古くなります。
+[*forwardRef*](guide/dependency-injection-in-action#forwardref) を使うと、これは特にひどいものです。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
 
 </code-example>
 
-You can extract that logic into a helper function like the following.
+次のように、そのロジックをヘルパー関数に抽出できます。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-the-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
 
 </code-example>
 
-Now you can add a simpler, more meaningful parent provider to your components.
+今、コンポーネントに、より単純で意味のある Parent プロバイダーを追加することができます。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
 
 </code-example>
 
 
-You can do better. The current version of the helper function can only alias the `Parent` class interface.
-The application might have a variety of parent types, each with its own class interface token.
+あなたはもっとうまくやれます。現在のバージョンのヘルパー関数は、`Parent`クラスのインターフェースのみを別名で設定できます。
+アプリケーションにはさまざまな親の型があり、それぞれに独自のクラスインターフェーストークンがあります。
 
-Here's a revised version that defaults to `parent` but also accepts an optional second parameter for a different parent class interface.
+これは `parent` をデフォルトとしていますが、別の親クラスのインターフェースのためのオプションの2番目のパラメータも受け付ける改訂版です。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
 
 </code-example>
 
 
-And here's how you could use it with a different parent type.
+そして、これが別の親のタイプでそれを使用する方法です。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
 

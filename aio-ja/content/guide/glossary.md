@@ -6,9 +6,9 @@ Angularシステムの中で特別な意味をもつ常用英単語です。
 
 ここには主要な用語といくつかのあまり馴染みのない用語を集めています。
 
-[A](guide/glossary#A) [B](guide/glossary#B) [C](guide/glossary#C) [D](guide/glossary#D) [E](guide/glossary#E) [F](guide/glossary#F) [G](guide/glossary#G) [H](guide/glossary#H) [I](guide/glossary#I)
-[J](guide/glossary#J) [K](guide/glossary#K) [L](guide/glossary#L) [M](guide/glossary#M) [N](guide/glossary#N) [O](guide/glossary#O) [P](guide/glossary#P) [Q](guide/glossary#Q) [R](guide/glossary#R)
-[S](guide/glossary#S) [T](guide/glossary#T) [U](guide/glossary#U) [V](guide/glossary#V) [W](guide/glossary#W) [X](guide/glossary#X) [Y](guide/glossary#Y) [Z](guide/glossary#Z)
+[A](#A) [B](#B) [C](#C) [D](#D) [E](#E) [F](#F) [G](#G) [H](#H) [I](#I)
+[J](#J) [K](#K) [L](#L) [M](#M) [N](#N) [O](#O) [P](#P) [Q](#Q) [R](#R)
+[S](#S) [T](#T) [U](#U) [V](#V) [W](#W) [X](#X) [Y](#Y) [Z](#Z)
 
 
 {@a A}
@@ -28,7 +28,7 @@ Angular ahead-of-time（AOT）コンパイラは、ブラウザがコードを�
 
 ## Angular element
 
-[Custom Elements](guide/glossary#custom-element)としてパッケージされたAngularの[コンポーネント](guide/glossary#component)。
+[Custom Elements](guide/glossary#custom-element)としてパッケージされたAngularの[コンポーネント](guide/glossary#component)です。
 
 [Angular Elements 概要](guide/elements)を参照してください。
 
@@ -39,6 +39,33 @@ _アノテーション_
 
 クラスのメタデータを提供する構造体。[デコレーター](guide/glossary#decorator)を参照してください。
 
+{@a app-shell}
+
+## app-shell
+
+App shellは、ビルド時にルートを介してアプリケーションの一部をレンダリングする方法です。
+これにより、ブラウザーはJavaScriptを初期化しなくても静的なHTMLとCSSをレンダリングできるため、ユーザーはアプリケーションをわかりやすく最初にペイントして素早く表示することができます。
+
+詳細については、[アプリケーション・シェル・モデル] (https://developers.google.com/web/fundamentals/architecture/app-shell).を参照してください。
+
+Angular CLIを使って、アプリケーションシェルを[生成](cli/generate#appshell)することができる。
+これにより、静的にレンダリングされたページ(すべてのページに共通の骨組み)を素早く起動しながら、ブラウザーが完全なクライアントバージョンをダウンロードし、コードのロード後に自動的に切り替えることで、ユーザーエクスペリエンスを向上させることができます。
+
+[サービス・ワーカーとPWA](guide/service-worker-intro)も参照してください。
+
+{@a architect}
+
+## Architect
+
+CLIが、指定された設定に従って、コンパイルやテスト実行などの複雑なタスクを実行するために使用するツールです。
+Architectは、指定された[ターゲット構成](#target)で[ビルダー](#builder)([npmパッケージ]で定義されている)を実行するシェルです。
+
+[ワークスペース設定ファイル](guide/workspace-config#project-tool-configuration-options)の「ビルダー」セクションには、Architectビルダー用の構成オプションがあります。
+
+例えば、リンティング用のビルトインビルダーは、`@angular-devkit/build_angular:tslint`というパッケージに定義されています。このパッケージは、[TSLint] (https://palantir.github.io/tslint/)ツールを使用してリンティングを行います。json`ファイルを指定します。
+
+[CLIコマンド 「ng run」](cli/run)を使用して、そのビルダーに関連付けられた[ターゲット構成](#target)を指定することによって、ビルダーを呼び出します。
+インテグレーターはビルダーを追加して、ツールやワークフローをAngular CLI経由で実行できるようにすることができます。例えば、カスタムビルダーは、 「ng build」 や 「ng test」 などのCLIコマンドの組み込み実装で使用されるサードパーティ製ツールを置き換えることができます。
 
 {@a attribute-directive}
 
@@ -67,7 +94,6 @@ Angular内では、通常、DOMオブジェクトのプロパティと
 
 また、"トークン"または"キー" と依存性の[プロバイダー](guide/glossary#provider)との間を結びつける、[依存性の注入](guide/glossary#dependency-injection)を指すこともあります。
 
-
 {@a bootstrap}
 
 ## bootstrap
@@ -80,6 +106,20 @@ Angularでは、アプリケーションのルートNgModule（`AppModule`）に
 複数のアプリケーションを同じ`index.html`で起動することができます。各アプリケーションには独自のコンポーネントが含まれています。
 
 詳しくは、[_ブートストラップ_](guide/bootstrapping)ガイドを参照してください。
+
+{@a builder}
+
+## builder
+_ビルダー_
+
+[Architect](#architect) APIを使用して、「構築する」や「試験」などの複雑なプロセスを実行する関数です。
+ビルダー・コードは、[npmパッケージ](#npm-package)で定義されます。
+
+たとえば、[ブラウザビルダ] (https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/browser)はブラウザターゲット用に[webpack] (https://webpack.js.org/)ビルドを実行し、[KarmaBuilder] (https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/karma)はKarmaサーバを起動し、単体テスト用にwebpackビルドを実行します。
+
+[CLIコマンド 「ng run」](cli/run)は、特定の[ターゲット構成](#target)でビルダーを呼び出します。
+[ワークスペース設定](guide/workspace-config)ファイルは、`angular.。組み込みビルダー用のデフォルト設定が含まれています。
+
 
 {@a C}
 
@@ -153,6 +193,11 @@ Angularコンポーネントクラスは、[データバインディング](guid
 
 コンポーネント、テンプレート、およびビューの詳細については、[アーキテクチャの概要](guide/architecture)を参照してください。
 
+## configuration
+
+See  [workspace configuration](#cli-config)
+
+
 {@a custom-element}
 
 ## custom element
@@ -164,7 +209,10 @@ Webプラットフォームの機能で、現在ほとんどのブラウザで�
 
 APIを使用してAngularコンポーネントの変換を行い、ブラウザに登録してAngularアプリ内のDOMに直接追加したHTMLで使用できるようにすることができます。カスタムエレメントタグは、変更検出およびデータバインディング機能を持つコンポーネントのビューを、Angular処理なしで表示されるコンテンツに挿入します。
 
+[Angular element](#angular-element)を参照してください。
+
 [動的コンポーネント読み込み](guide/glossary#dynamic-components)も参照してください。
+
 
 
 {@a D}
@@ -219,7 +267,6 @@ TypeScriptはデコレーターのサポートを追加します。
 Angularは、メタデータをクラスやプロパティに付与して、そのクラスやプロパティの意味や動作の仕方を知るデコレーターを定義します。
 
 [クラスデコレータ](guide/glossary#class-decorator)、[クラスフィールドデコレーター](guide/glossary#class-field-decorator)を参照してください。
-
 
 {@a di}
 
@@ -317,10 +364,10 @@ Angularは、レンダリング固有のネイティブUI要素をラップす�
 ## entry point
 _エントリポイント_
 
-[npmパッケージ](guide/npm-packages)の一部を他のコードで読み込むことができるようにするJavaScriptシンボルです。
-Angularの[スコープ付きパッケージ](guide/glossary#scoped-package)にはそれぞれ`index`という名前のエントリポイントがあります。
-
-Angularでは、[NgModule](guide/glossary#ngmodule)を使用して同じ結果を得ます。
+[JavaScriptモジュール](#module)のユーザーがインポートすることを目的とした[npm package](guide/npm-packages)です。
+通常、エントリポイントモジュールは、他の内部モジュールからシンボルを再度エクスポートします。
+パッケージには複数のエントリポイントを含めることができます。
+たとえば、`@angular/core`パッケージには2つのエントリポイントモジュールがあり、モジュール名`@angular/core`と`@angular/core/testing`を使用してインポートできます。
 
 {@a F}
 
@@ -405,7 +452,6 @@ Angular[依存性注入](guide/glossary#dependency-injection)システムのオ�
 プロパティ[データバインディング](guide/glossary#data-binding)の形式で、二重中括弧の間の[テンプレート式](guide/glossary#template-expression)はテキストとして描画されます。
 この例のように、このテキストを隣接するテキストと連結してから要素プロパティに割り当てるか、要素タグ間に表示することができます。
 
-
 <code-example language="html" escape="html">
   <label>My current hero is {{hero.name}}</label>
 </code-example>
@@ -484,7 +530,7 @@ Angularはこれらのフックメソッドを次の順序で呼び出します�
 * `ngAfterContentChecked`:コンポーネントの内容をチェックするたびに実行されます。
 * `ngAfterViewInit`:コンポーネントのビューが初期化された後。
 * `ngAfterViewChecked`:コンポーネントのビューをチェックするたびに実行されます。
-* `ngOnDestroy` :指示が破棄される直前。
+* `ngOnDestroy` :ディレクティブが破棄される直前。
 
 詳細については、[ライフサイクルフック](guide/lifecycle-hooks)を参照してください。
 
@@ -574,6 +620,22 @@ _パイプ_
 
 詳細については、[パイプ](guide/pipes)を参照してください。
 
+{@a platform}
+
+## platform
+_プラットフォーム_
+
+Angularの用語では、プラットフォームとはAngularアプリケーションが実行されるコンテキストのことです。
+Angularアプリケーションの最も一般的なプラットフォームはWebブラウザですが、モバイルデバイス用のオペレーティングシステムやWebサーバでも実行させることができます。
+
+様々なAngularランタイムプラットフォームのサポートは`@angular/platform-*` パッケージで提供されています。
+これらのパッケージは、ユーザ入力を収集し、所定のプラットフォームのUIをレンダリングする実装を提供することによって、`@angular/core`と`@angular/common`を利用するアプリケーションが異なる環境で実行できるようにします。
+プラットフォーム固有の機能を分離することで、開発者はフレームワークの残りの部分をプラットフォームに依存せずに使用できます。
+
+* Webブラウザで実行している場合、[`BrowserModule`](api/platform-browser/BrowserModule)は、`platform-browser` パッケージからインポートされ、セキュリティおよびイベント処理を簡素化するサービスをサポートし、アプリケーションがキーボード入力の解釈や表示中のドキュメントのタイトルの制御などのブラウザ固有の機能にアクセスできるようにします。ブラウザで実行されているすべてのアプリケーションは、同じプラットフォームサービスを使用します。
+
+* [サーバサイドレンダリング](#server-side-rendering)(SSR)を使用すると、[プラットフォームサーバ](api/platform-server)パッケージは、ブラウザに依存しないDOM、XMLHttpRequest、およびその他の低レベル機能のWebサーバ実装を提供します。
+
 {@a polyfill}
 
 ## polyfill
@@ -585,9 +647,14 @@ _パイプ_
 ## project
 _プロジェクト_
 
-Angularでは、Angularアプリまたは[ライブラリ](guide/glossary#library)を含む[ワークスペース](guide/glossary#workspace)内のフォルダ。
-ワークスペースには、複数のプロジェクトを含めることができます。
-ワークスペース内のすべてのアプリケーションは、同じワークスペース内のライブラリを使用できます。
+Angular CLIでは、CLIコマンドスタンドアロンアプリケーションまたは[library](#library)を作成または変更できます。
+
+[`ng new`](cli/new)によって生成されるプロジェクトには、CLIを使用してアプリケーションを開発およびテストするために必要なソースファイル、リソース、および構成ファイルのセットが含まれます。
+プロジェクトは、`ng generate application`および`ng generate library`コマンドを使用して作成することもできます。
+
+詳細については、[プロジェクトファイル構造](guide/file-structure)を参照してください。
+
+[`angular.json`](guide/file-structure)ファイルでは、すべてのプロジェクトが[workspace](#workspace)に設定されます。
 
 {@a provider}
 
@@ -666,23 +733,22 @@ _ルーターアウトレット_
 {@a schematic}
 
 ## schematic
+_セマンティック_
 
 ファイルとコードを作成、変更、リファクタリング、または移動することによって、プログラミングプロジェクトを生成または変換する方法を定義するスキャフォールドライブラリです。
-回路図は、[rules](#rule)と呼ばれる仮想ファイルシステム上で動作する[ファイルツリー](#file-tree)を定義します。
-[Angular　CLI](guide/glossary#cli)では、スケマティック表現を使用して、[Angular projects](ガイド/用語集#project)およびプロジェクトの一部を生成および修正します。
+セマンティックは、[rules](#rule)と呼ばれる仮想ファイルシステム上で動作する[ファイルツリー](#file-tree)を定義します。
+[Angular　CLI](guide/glossary#cli)では、セマンティックを使用して、[Angular projects](ガイド/用語集#project)およびプロジェクトの一部を生成および修正します。
 
-* AngularはCLIで使用するための一連の回路図を提供しています。[角度CLIコマンドリファレンス](cli)を参照してください。[`ng add`](cli/add)コマンドは、プロジェクトにライブラリを追加する一部として回路図を実行します。[「ng generate」 と入力します。](cli/generate)コマンドは、スケマティック表現を実行して、アプリケーション、ライブラリ、およびAngularコード構成を作成します。
+* AngularはCLIで使用するための一連のセマンティックを提供しています。[Angular　CLIコマンドリファレンス](cli)を参照してください。[`ng add`](cli/add)コマンドは、プロジェクトにライブラリを追加する一部としてセマンティックを実行します。[「ng generate」 と入力します。](cli/generate)コマンドは、スケマティック表現を実行して、アプリケーション、ライブラリ、およびAngularコード構成を作成します。
 
-* [ライブラリ](#library)の開発者は、[Schematics　CLI](#schematics-cli)を使用して、Angular CLIでパブリッシングされたライブラリを追加および更新できるようにする回路図を作成したり、ライブラリで定義されているアーティファクトを生成したりできます。
+* [ライブラリ](#library)開発者は、Angular CLIでパブリッシュされたライブラリを追加および更新したり、ライブラリで定義されているアーティファクトを生成したりするためのセマンティックを作成できます。
+これらのセマンティックを、ライブラリの公開と共有に使用するnpmパッケージに追加します。
 
-詳細については、[devkitドキュメント] (https://www.npmjs.com/package/@angular-devkit/schematics)を参照してください。
+詳細については、[セマンティック](guide/schematics)および[CLIとライブラリの統合](guide/creating-libraries#integrating-with-the-cli)を参照してください。
 
 {@a schematics-cli}
 
 ## Schematics CLI
-
-Schematics come with their own command-line tool.
-Using Node 6.9 or above, install the Schematics CLI globally:
 
 Schematicsには、独自のコマンド・ライン・ツールが付属しています。
 ノード6.9以上を使用して、Schematics CLIをグローバルにインストールします。
@@ -705,10 +771,23 @@ NgModulesは、名前がAngular*scope name*`@angular`で始まるスコープ付
 <code-example path="architecture/src/app/app.component.ts" linenums="false" header="architecture/src/app/app.component.ts (import)" region="import">
 </code-example>
 
+{@a server-side-rendering}
+
+## server-side rendering
+_サーバーサイドレンダリング_
+
+サーバー上に静的なアプリケーションページを生成し、ブラウザからの要求に応じてそれらのページを生成して提供できる技術です。
+また、後で使用するHTMLファイルとしてページを事前に生成することもできます。
+
+このテクニックは、クライアント側のアプリがロードされている間に静的な最初のページを素早く表示することによって、モバイルや低電力デバイスのパフォーマンスを改善し、ユーザーエクスペリエンスを改善することができます。
+静的バージョンでは、ウェブクローラーがアプリを見やすくすることもできます。
+
+サーバーサイドレンダリングのアプリを簡単に準備するには、[CLI](#cli)を使って[Angular Universal](#universal)ツールを実行し、`@nguniversal/express-engine`(#universal)を使用することで簡単に準備できます。。
+
+
 {@a service}
 
 ## service
-
 
 Angularでは、非UIロジックとアプリケーション全体で再利用可能なコードをカプセル化する[@Injectable()](guide/glossary#injectable)デコレータを持つクラスです。
 Angularはモジュール性と再利用性を向上させるためにコンポーネントとサービスを区別しています。
@@ -732,32 +811,50 @@ Angularはモジュール性と再利用性を向上させるためにコンポ�
 
 ## subscriber
 
-パブリッシュされる値またはメッセージを取得または生成する方法を定義する関数。この関数は、消費者が[observable](guide/glossary#observable)の`subscribe()'メソッドを呼び出したときに実行されます。
+パブリッシュされる値またはメッセージを取得または生成する方法を定義する関数。この関数は、消費者が[observable](guide/glossary#observable)の `subscribe()`メソッドを呼び出したときに実行されます。
 
 observableにサブスクライブすると、observableの実行がトリガーされ、コールバックが関連付けられ、サブスクリプションを解除できる `Subscription`オブジェクトが作成されます。
 
-`subscribe()`メソッドは、observableが配信できる通知のタイプごとにひとつずつ、最大三つのコールバックを持つJavaScriptオブジェクト((ガイド/用語集#observer)[観察者]と呼ばれています)を受け取ります。
+`subscribe()`メソッドは、observableが配信できる通知のタイプごとにひとつずつ、最大三つのコールバックを持つJavaScriptオブジェクト([observer](guide/glossary#observer)と呼ばれています)を受け取ります。
 
 * 「next」 通知は、数値、文字列、オブジェクトなどの値を送信します。
 * 「error」 通知は、JavaScriptエラーまたは例外を送信します。
 * 「complete」 通知は値を送信しませんが、呼び出しが完了するとハンドラが呼び出されます。コールが完了した後も、スケジュールされた値を引き続き返すことができます。
 
 {@a T}
+
+{@a target}
+
+## target
+
+[プロジェクト](#project)の構築可能または実行可能なサブセットです。
+[ワークスペース設定ファイル](guide/workspace-config#project-tool-configuration-options)でオブジェクトとして設定され、[Architect](#architect)[builder](#builder)によって実行されます。
+
+`angular.json` ファイル内で各プロジェクトには、ビルダーを構成するターゲットを含む"architect" セクションがあります。
+これらのターゲットの中には、[CLIコマンド](#cli)に対応するものもあります。 `build`、`serve`、`test`や `lint`がそれにあたります。
+
+たとえば、プロジェクトをコンパイルするために`ng build`コマンドによって呼び出されたArchitectビルダーは、特定の構築ツールを使用し、コマンド行で値を上書きできるデフォルト構成を持っています。
+また、buildターゲットは、`build`コマンドに`build`フラグを付けて呼び出すことができる「生産」ビルド用の代替設定も定義します
+
+Architectツールは一連のビルダーを提供します。[`ng new`コマンド](cli/new)には、初期アプリケーション・プロジェクトのターゲット・セットが用意されています。[`ngライブラリを生成`](cli/generate#library)および[プロジェクト](#project)コマンドは、新しい[`ng generate library`](cli/generate#library)ごとに一連のターゲットを提供します。
+これらのターゲット、そのオプションおよび構成は、プロジェクトのニーズに合わせてカスタマイズできます。たとえば、プロジェクトの　"build" ターゲットに　"ステージング" または　"テスト" 構成を追加できます。
+
+カスタム・ビルダーを定義し、カスタム・ビルダーを使用するプロジェクト構成にターゲットを追加することもできます。その後、[`ng run`](cli/run) CLIコマンドを使用してターゲットを実行できます。
+
 {@a template}
 
 ## template
 
-コンポーネントの[view]の描画方法を定義するコンポーネントに関連付けられたコード(guide/glossary#view)。
+コンポーネントの[view](#view)の描画方法を定義するコンポーネントに関連付けられたコードです。
 
-テンプレートは、単純なHTMLとAngular[データバインディング](guide/glossary#data-binding)構文、[ディレクティブ](guide/glossary#directive)、
-[テンプレート式](guide/glossary#template-expression)(論理構造)などです。
+テンプレートは、単純なHTMLとAngular[データバインディング](guide/glossary#data-binding)構文、[ディレクティブ](guide/glossary#directive)、および[テンプレート式](guide/glossary#template-expression)(論理構造)などです。
 Angular要素は、ページが表示される前にHTML要素を変更する値を挿入または計算します。
 
-テンプレートは、`@Component`()[デコレーター](ガイド/用語集#decorator)を介して[構成部品](ガイド/用語集#コンポーネント)クラスに関連付けられます。HTMLは、 「template」 プロパティーの値としてインラインで提供することも、 「templateUrl」 プロパティーを介してリンクされた別のHTMLファイルで提供することもできます。
+テンプレートは、`@Component`()[デコレーター](ガイド/用語集#decorator)を介して[構成部品](ガイド/用語集#コンポーネント)クラスに関連付けられます。HTMLは、"template" プロパティーの値としてインラインで提供することも、"templateUrl"プロパティーを介してリンクされた別のHTMLファイルで提供することもできます。
 
 `TemplateRef`オブジェクトによって表される追加のテンプレートは、複数のコンポーネントから参照できる代替ビューまたは*埋め込み*ビューを定義できます。
 
-{@a template-drive-forms}
+{@a template-driven-forms}
 
 ## template-driven forms
 
@@ -770,7 +867,6 @@ Angular要素は、ページが表示される前にHTML要素を変更する値
 * [双方向バインド](guide/glossary#data-binding)と`ngModel`は、コンポーネントモデルをユーザの入力エレメントへのエントリと同期化します。
 * Angularは舞台裏で`name`属性および双方向バインディングの設定をもつ各input要素のために、新しいコントロールを生成します。
 * 関連するAngularディレクティブにはすべて`ng`接頭辞が付けられています。たとえば、`ngForm`、`ngModel`、そして`ngModelGroup`などです。
-
 代替手段はリアクティブフォームです。両方の形式のアプローチの紹介と比較については、[Angularのフォームのイントロダクション](guide/forms-overview)を参照。
 
 {@a template-expression}
@@ -805,15 +901,24 @@ Schematic[rules](#rule)は、入力としてTreeオブジェクトを取り、�
 ## TypeScript
 
 JavaScriptをベースにしたプログラミング言語で、オプションの型指定システムで知られている。
-TypeScriptはコンパイル時の型チェックと強力なツールサポートを提供します (
-コード補完、リファクタリング、インラインドキュメント、インテリジェント検索など)。
+TypeScriptはコンパイル時の型チェックと強力なツールサポートを提供します (コード補完、リファクタリング、インラインドキュメント、インテリジェント検索など)。
 多くのコードエディタとIDEは、TypeScriptをネイティブまたはプラグインでサポートしています。
 
 Angular開発においてTypeScriptは推奨される言語です。
 TypeScriptの詳細については、[typescriptlang.org] (http://www.typescriptlang.org/)を参照してください。
 
-
 {@a U}
+
+{@a universal}
+
+## Universal
+
+Angularアプリケーションの[サーバサイドレンダリング](#server-side-rendering)を実装するためのツールです。
+アプリケーションと統合すると、Universalはブラウザからのリクエストに応じてサーバ上に静的なページを生成して提供します。
+
+最初の静的ページは、ブラウザーでの通常の実行に備えて完全なアプリケーションが準備されている間、高速ローディング・プレースホルダーとして機能します。
+
+詳細については、[Angular Universal:サーバサイドレンダリング](guide/universal)を参照してください。
 
 {@a V}
 
@@ -838,7 +943,7 @@ Angularは一つ以上の[ディレクティブ](guide/glossary#directive)、特
 
 ## view hierarchy
 
-1つの単位として機能する関連ビューのツリー。ルートビューは、コンポーネントの*ホストビュー*です。ホストビューは、ホストコンポーネントのアンカー要素にアタッチされた*ビューコンテナ*(`ViewContainerRef')に収集された*埋め込みビュー*のツリーのルートにすることができます。ビュー階層は、角度変化検出の重要な部分です。
+1つの単位として機能する関連ビューのツリー。ルートビューは、コンポーネントの*ホストビュー*です。ホストビューは、ホストコンポーネントのアンカー要素にアタッチされた*ビューコンテナ*(`ViewContainerRef')に収集された*埋め込みビュー*のツリーのルートにすることができます。ビュー階層は、Angularの変化検出の重要な部分です。
 
 ビュー階層は、コンポーネント階層を示すものではありません。特定の階層のコンテキストに埋め込まれたビューは、他のコンポーネントのホストビューにすることができます。これらのコンポーネントは、ホストコンポーネントと同じNgModule内にあっても、他のNgModuleに属していてもかまいません。
 
@@ -853,9 +958,28 @@ Angularは一つ以上の[ディレクティブ](guide/glossary#directive)、特
 
 ## workspace
 
-Angularで、[プロジェクト](guide/glossary#project)(つまり、アプリケーションとライブラリ)を含むフォルダ。
-[CLI](guide/glossary#cli)`ng new`コマンドは、プロジェクトを含むワークスペースを作成します。
-アプリケーションおよびライブラリ(`add`や`generate`など)を作成または操作するコマンドは、作業領域フォルダ内から実行する必要があります。
+Angular[projects](#project) (つまり、アプリケーションとライブラリ)のコレクションで、通常は単一のソースコントロールリポジトリに配置される[Angular CLI](#cli)を利用する(例:[git] (https://git-scm.com/)。
+
+[CLI](#cli)の[`ng new` コマンド](cli/new)は、ファイル・システム・ディレクトリ(CLI/新規)を作成します(「ワークスペースルート」)。
+また、ワークスペースのルートには、ワークスペース[構成ファイル](#configuration)(`angular.json`)が作成され、デフォルトでは、同じ名前の初期アプリケーションプロジェクトが作成されます。
+
+アプリケーションやライブラリを作成または操作するコマンド(例えば`add`や`generate`)は、ワークスペースフォルダ内から実行する必要があります。
+
+詳細については、[ワークスペースの設定](guide/workspace-config)を参照してください。
+
+{@a cli-config}
+
+{@a config}
+
+## workspace configuration
+
+`angular.json`という名前のファイル。Angular[ワークスペース](#workspace)のルートレベルにあるjsonは、[Angular CLI](#cli)によって提供される、あるいはAngular CLIに統合されたビルドツールや開発ツールに対して、ワークスペース全体とプロジェクト固有のデフォルト設定を提供します。
+
+詳細については、[ワークスペースの設定](guide/workspace-config)を参照してください。
+
+その他のプロジェクト固有の設定ファイルは、 [npmパッケージマネージャ](#npm-package)は`package.json`、[TypeScript transpilation]は`tsconfig.json`、[TSLint](https://palantir.github.io/tslint/) は`tslint.json` で使用されます。.
+
+詳細については、[ワークスペースとプロジェクトファイルの構造](guide/file-structure)を参照してください。
 
 {@a X}
 

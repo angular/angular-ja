@@ -1,57 +1,56 @@
 {@a top}
 
-# Set the Document Title
+# ドキュメントのタイトルの設定
 
-Your app should be able to make the browser title bar say whatever you want it to say.
-This cookbook explains how to do it.
+あなたのアプリケーションは、あなたが望むようにブラウザのタイトルバーを設定できますす。
+このクックブックではその方法を説明します。
 
-See the <live-example name="set-document-title"></live-example>.
+参照 <live-example name="set-document-title"></live-example> 。
 
-## The problem with *&lt;title&gt;*
+## *&lt;title&gt;* での問題
 
-The obvious approach is to bind a property of the component to the HTML `<title>` like this:
+わかりやすい方法は、次のようにHTMLの`<title>`コンポーネントのプロパティをバインドする方法です。
 
 <code-example format=''>
   &lt;title&gt;{{This_Does_Not_Work}}&lt;/title&gt;
 </code-example>
 
-Sorry but that won't work.
-The root component of the application is an element contained within the `<body>` tag.
-The HTML `<title>` is in the document `<head>`, outside the body, making it inaccessible to Angular data binding.
+すみません、これは動作しません。
+アプリケーションのルートコンポーネントは `<body>`タグ内に含まれる要素です。
+HTMLの `<title>`は、ドキュメントの`<head>`の中にあり、ボディの外側にあるため、Angularのデータバインディングにはアクセスできません。
 
-You could grab the browser `document` object and set the title manually.
-That's dirty and undermines your chances of running the app outside of a browser someday.
+ブラウザの `document`オブジェクトを使ってタイトルを手動で設定できます。
+その実装は汚く、いつかブラウザの外でアプリケーションを実行する可能性をいつの間にか害します。
 
 <div class="alert is-helpful">
 
-  Running your app outside a browser means that you can take advantage of server-side
-  pre-rendering for near-instant first app render times and for SEO.  It means you could run from
-  inside a Web Worker to improve your app's responsiveness by using multiple threads.  And it
-  means that you could run your app inside Electron.js or Windows Universal to deliver it to the desktop.
+  ブラウザの外でアプリケーションを実行すると、ほぼ瞬時に表示される初回のアプリケーションレンダリング時間と検索エンジン最適化のために、
+  サーバーサイドの事前レンダリングを利用できます。
+  つまり、Webワーカー内から実行して、マルチスレッドによってアプリケーションの応答性を向上させることができることを意味します。
+  また、デスクトップに届けるために、Electron.jsやWindows Universalの中でアプリケーションを実行できることを意味します。
 
 </div>
 
-## Use the `Title` service
+## `Title`サービスの使用
 
-Fortunately, Angular bridges the gap by providing a `Title` service as part of the *Browser platform*.
-The [Title](api/platform-browser/Title) service is a simple class that provides an API
-for getting and setting the current HTML document title:
+幸いなことに、Angularは *ブラウザプラットフォーム* の一部として `Title`サービスを提供することで隔たりを埋めます。
+その[Title](api/platform-browser/Title)サービスは、現在のHTMLドキュメントのタイトルを取得および設定するためのAPIを提供する単純なクラスです。
 
-* `getTitle() : string`&mdash;Gets the title of the current HTML document.
-* `setTitle( newTitle : string )`&mdash;Sets the title of the current HTML document.
+* `getTitle() : string`&mdash;現在のHTMLドキュメントのタイトルを取得します。
+* `setTitle( newTitle : string )`&mdash;現在のHTMLドキュメントのタイトルを設定します。
 
-You can inject the `Title` service into the root `AppComponent` and expose a bindable `setTitle` method that calls it:
+`Title`サービスをルートの`AppComponent`に入れ、それを呼び出すバインド可能な`setTitle`関数を公開することができます。
 
 
 <code-example path="set-document-title/src/app/app.component.ts" region="class" header="src/app/app.component.ts (class)" linenums="false"></code-example>
 
-Bind that method to three anchor tags and voilà!
+この関数を3つのアンカータグにバインドしてください、すると、ほら！
 
 <figure>
   <img src="generated/images/guide/set-document-title/set-title-anim.gif" alt="Set title">
 </figure>
 
-Here's the complete solution:
+これが完璧な解決策です。
 
 <code-tabs>
   <code-pane header="src/main.ts" path="set-document-title/src/main.ts"></code-pane>
@@ -59,17 +58,13 @@ Here's the complete solution:
   <code-pane header="src/app/app.component.ts" path="set-document-title/src/app/app.component.ts"></code-pane>
 </code-tabs>
 
-## Why provide the `Title` service in `bootstrap`
+## `bootstrap`に`Title`サービスを提供する理由
 
-Generally you want to provide application-wide services in the root application component, `AppComponent`.
+一般的には、アプリケーション全体のサービスをルートアプリケーションコンポーネントの`AppComponent`で提供したいと思います。
 
-This cookbook recommends registering the title service during bootstrapping,
-a location you reserve for configuring the runtime Angular environment.
+このクックブックでは、ランタイムのAngular環境を設定するために予約できる場所であるブートストラップの間に`Title`サービスを登録することを勧めます。
 
-That's exactly what you're doing.
-The `Title` service is part of the Angular *browser platform*.
-If you bootstrap your application into a different platform,
-you'll have to provide a different `Title` service that understands
-the concept of a "document title" for that specific platform.
-Ideally, the application itself neither knows nor cares about the runtime environment.
-
+それはまさにあなたがしていることです。
+`Title`サービスはAngular *ブラウザプラットフォーム* の一部です。
+もし別のプラットフォームでアプリケーションを起動するのであれば、そのプラットフォーム用の「ドキュメントタイトル」の概念を理解している別の`Title`サービスを提供するべきでしょう。
+理想的には、アプリケーション自体はランタイム環境を知りませんし、気にしません。

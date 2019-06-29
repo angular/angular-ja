@@ -447,9 +447,9 @@ JavaScript (+) 演算子は文字列を数値に変換します。これがヒ�
 
 <div class="alert is-important">
 
-Note the backticks ( &#96; ) that 
-define a JavaScript 
-[_template literal_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) for embedding the `id`.
+`id` を埋め込むためのJavaScript
+[_テンプレートリテラル_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/template_strings)
+を定義するバッククオート ( &#96; ) に注意してください。
 </div>
 
 [`getHeroes()`](tutorial/toh-pt4#observable-heroservice)と同様に、
@@ -466,7 +466,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 そのヒーローの詳細ビューに移動することができます。
 
 `localhost:4200/detail/11`をブラウザのアドレスバーに貼り付けると、
-ルーターは、`id:11`つまり "Mr. Nice" というヒーローの詳細ビューに遷移します。
+ルーターは、`id:11`つまり "Dr. Nice" というヒーローの詳細ビューに遷移します。
 
 {@a goback}
 

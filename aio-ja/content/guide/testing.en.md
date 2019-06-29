@@ -150,7 +150,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "8"
+  - "10"
   
 addons:
   apt:
@@ -218,8 +218,8 @@ exports.config = config;
 Now you can run the following commands to use the `--no-sandbox` flag:
 
 <code-example language="sh" class="code-shell">
-  ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-  ng e2e -- --protractor-config=e2e/protractor-ci.conf.js
+  ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
+  ng e2e --protractor-config=e2e/protractor-ci.conf.js
 </code-example>
 
 <div class="alert is-helpful">
@@ -289,7 +289,7 @@ written without assistance from Angular testing utilities.
 #### Services with dependencies
 
 Services often depend on other services that Angular injects into the constructor.
-In many cases, it easy to create and _inject_ these dependencies by hand while
+In many cases, it's easy to create and _inject_ these dependencies by hand while
 calling the service's constructor.
 
 The `MasterService` is a simple example:
@@ -318,7 +318,7 @@ Prefer spies as they are usually the easiest way to mock services.
 
 These standard testing techniques are great for unit testing services in isolation.
 
-However, you almost always inject service into application classes using Angular
+However, you almost always inject services into application classes using Angular
 dependency injection and you should have tests that reflect that usage pattern.
 Angular testing utilities make it easy to investigate how injected services behave.
 
@@ -469,13 +469,6 @@ The `HttpClientTestingModule` can make these testing scenarios more manageable.
 While the _code sample_ accompanying this guide demonstrates `HttpClientTestingModule`,
 this page defers to the [Http guide](guide/http#testing-http-requests),
 which covers testing with the `HttpClientTestingModule` in detail.
-
-<div class="alert is-helpful">
-
-This guide's sample code also demonstrates testing of the _legacy_ `HttpModule`
-in `app/model/http-hero.service.spec.ts`.
-
-</div>
 
 
 ## Component Test Basics

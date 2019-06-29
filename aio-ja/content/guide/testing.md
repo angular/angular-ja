@@ -150,7 +150,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "8"
+  - "10"
 
 addons:
   apt:
@@ -218,8 +218,8 @@ exports.config = config;
 これで、`--no-sandbox`フラグを使用するために次のコマンドを実行できます:
 
 <code-example language="sh" class="code-shell">
-  ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-  ng e2e -- --protractor-config=e2e/protractor-ci.conf.js
+  ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
+  ng e2e --protractor-config=e2e/protractor-ci.conf.js
 </code-example>
 
 <div class="alert is-helpful">
@@ -469,13 +469,6 @@ Observableを_サブスクライブ_する必要があります。
 このガイドに付属する_コードサンプル_では`HttpClientTestingModule`のデモをしますが、
 このページでは`HttpClientTestingModule`を使用したテストの詳細をカバーをしている
 [Httpガイド](guide/http#testing-http-requests)に先送りします。
-
-<div class="alert is-helpful">
-
-このガイドのサンプルコードでは`app/model/http-hero.service.spec.ts`での
-_レガシー_な`HttpModule`のテストのデモもしています。
-
-</div>
 
 
 ## コンポーネントテストの基本
@@ -1294,7 +1287,7 @@ fakeAsync(() => { /* test body */ })`
 Jasmineも日付をシミュレートするための `clock` 機能を提供しています。`jasmine.clock().install()` が呼び出されてから`jasmine.clock().uninstall()`が呼び出されるまで、Angularは自動的に`fakeAsync()` の中でテストを実行します。
 `fakeAsync()`は必要なく、ネストされていればエラーを投げます。
 
-デフォルトではこの機能は無効化されています。有効にするには、 `zone-testing` をインポートするまえにグローバグフラグをセットしてください。
+デフォルトではこの機能は無効化されています。有効にするには、 `zone-testing` をインポートするまえにグローバルフラグをセットしてください。
 
 Angular CLIを使う場合は、 `src/test.ts` の中でこのフラグを設定してください。
 
@@ -2059,6 +2052,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 
 <hr>
 {@a nested-component-tests}
+
 ### ネストしたコンポーネントのテスト
 
 コンポーネントテンプレートはネストしたコンポーネントをもつことが多いです。

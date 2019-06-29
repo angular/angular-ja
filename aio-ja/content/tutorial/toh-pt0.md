@@ -12,15 +12,8 @@
 
 ## 環境を設定する
 
-開発環境を設定するには、[入門](guide/quickstart)の次の手順に従います。
+開発環境をセットアップするには、[ローカル環境の構築](guide/setup-local "Setting up for Local Development") のインストラクションに従いましょう。
 
-* [前提条件](guide/quickstart#prerequisites)
-* [Angular CLIのインストール](guide/quickstart#install-cli)
-
-<div class="alert is-helpful">
-
-**Note:** 入門の全体を完了する必要はありません。 入門の上の2つのセクションを完了すると、環境がセットアップされます。引き続きTour of Heroesのワークスペースの作成と最初のアプリプロジェクトを作成します。
-</div>
 
 ## 新しいワークスペースと初期アプリケーションリンクを作成する
 

@@ -14,46 +14,98 @@
 
 Angularでシングルトンサービスを作成する方法は2種類あります:
 
-* サービスがアプリケーションルートで提供されるように宣言する。
+* `@Injectable()`の`providedIn`プロパティに対して`root`を宣言する。
 * `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
+
+{@a providedIn}
+
+### `providedIn` を使う
 
 Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
 
-<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.0.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts" linenums="false"> </code-example>
 
 
 サービスのさらに詳しい情報については
 [Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
 
+### NgModule の `providers` 配列
 
-## `forRoot()`
+Angularのバージョン6.0未満で作成されたアプリケーションでは、サービスは次のようにNgModuleの`provider`配列に登録されます。
 
-あるモジュールがプロバイダーと宣言(コンポーネント、ディレクティブ、パイプ)の両方を提供していて、たとえばルート(route)などの子インジェクターにロードするとプロバイダーのインスタンスが重複してしまいます。プロバイダーの重複は、おそらくシングルトンであるルート(root)インスタンスを参照するときに問題を引き起こすでしょう。このためAngularは、同一モジュールを`provider`をもつモジュールとしてルート(root)モジュールから、`provider`を持たないモジュールとして子モジュールからインポートできるように、プロバイダーをモジュールから分離する方法を提供します。
+```ts
+@NgModule({
+  ...
+  providers: [UserService],
+  ...
+})
 
-1. `forRoot()`(この名前は慣習的なものです)という静的メソッドをモジュールに作成します。
-2. 次に説明する方法で`forRoot`メソッド内にプロバイダーを配置します。
+```
 
-<!-- MH: show a simple example how to do that without going to deep into it. -->
+このNgModuleがルート(root)の`AppModule`だった場合、`UserService`はシングルトンになり、アプリケーション全体から利用可能です。
+上記のようなコードを見ることがあるかもしれませんが、Angular 6.0以降ではサービスがツリーシェイク可能になるため、サービス自身に`@Injectable()`デコレーターの`providedIn`プロパティを使用することが望ましいです。
 
-より具体的にするために、例として`RouterModule`について考えてみましょう。`RouterModule`は`Router`サービスと`RouterOutlet`ディレクティブを提供する必要があります。`RouterModule`はアプリケーションが1つの`Router`を持ち、かつ少なくとも1つの`RouterOutlet`を持てるようにするため、ルート(root)アプリケーションモジュールによってインポートする必要があります。また、`RouterOutlet`ディレクティブをサブルート(sub-route)用のテンプレート内に置けるようにするため、個々のルート(route)コンポーネントでインポートしなければなりません。
+{@a forRoot}
 
-`RouterModule`に`forRoot()`がなければ、個々のルート(route)コンポーネントで新しい`Router`インスタンスが作成されるでしょう。`Router`は1つだけしか存在してはいけないため、アプリケーションを破壊するでしょう。この理由から、`RouterModule`は`RouterOutlet`をどこでも利用できるようにするため、その宣言を持っていますが、`Router`プロバイダーは`forRoot()`内にしか存在しません。その結果、ルート(root)アプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得します。対してすべてのルート(route)コンポーネントは`Router`を含まない`RouterModule`をインポートします。
+## `forRoot()` パターン {@a the-forroot-pattern}
 
-もしもあなたがプロバイダーと宣言の両方を提供するモジュールを持っている場合は、このパターンを使用して分割してみましょう。
+通常、サービスを提供するために必要なのは `providedIn` だけで、`forRoot()`/`forChild()`はルーティングのためにのみ使用されます。しかしながら、サービスがシングルトンであるために`forRoot()`がどのように動作するかを理解することは、技術に対する理解を深めることに繋がります。
 
-プロバイダーをアプリケーションに追加するモジュールは、
-`forRoot()`
-メソッドからプロバイダーを設定する機能を提供することができます。
+モジュールがprovidersとdeclarations（components、directives、pipes）を定義している場合、
+モジュールを複数のフィーチャーモジュールにロードすると、サービスの登録が重複します。その結果、複数のサービスのインスタンスが生成される可能性があり、サービスはシングルトンとして動作しなくなります。
+
+これを防ぐ方法は複数あります：
+
+* サービスをモジュールで定義するかわりに、[`providedIn`構文](guide/singleton-services#providedIn)を使用する。
+* サービスを独自のモジュールに分割する。
+* モジュール内で`forRoot()`と`forChild()`メソッドを定義する。
+
+<div class="alert is-helpful">
+
+**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example noDownload  name="ngmodules">NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
+
+</div>
+
+
+モジュールからプロバイダーを分離するには、`forRoot()`を利用します。
+これにより、`providers`をもつルートモジュールと、
+`providers`をもたない子モジュールにそのモジュールをインポートできます。
+
+1. モジュール上に静的メソッド`forRoot()`を作成します。
+2. `forRoot()`メソッド内にprovidersを配置します。
+
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts" linenums="false"> </code-example>
+
+
+{@a forRoot-router}
+
+### `forRoot()`と`Router`
+
+`RouterModule`は`Router`サービスを提供し、`RouterOutlet`や`routerLink`などのルーターディレクティブも提供します。ルートアプリケーションモジュールは`RouterModule`をインポートするので、アプリケーションは`Router`を持ち、ルートアプリケーションコンポーネントはルーターディレクティブにアクセスできます。すべての機能モジュールは、そのコンポーネントがテンプレートにルーターディレクティブを配置できるように、`RouterModule`もインポートする必要があります。
+
+`RouterModule`に`forRoot()`がない場合、個々のフィーチャーモジュールは新しい`Router`インスタンスを生成します。`Router`は１つしか存在できないため、アプリケーションは停止します。`forRoot()`メソッドを使用すると、ルートアプリケーションモジュールは`RouterModule.forRoot(...)`をインポートして`Router`を取得し、すべてのフィーチャモジュールは別の`Router`をインスタンス化しない`RouterModule.forChild(...)`をインポートします。
+
+<div class="alert is-helpful">
+
+**注:** providersとdeclarationsの両方をもつモジュールがある場合、
+それらを分離するテクニックとして
+これを使うことが _可能_ で、レガシーアプリケーションでこのパターンが見られるかもしれません。
+しかしAngular 6.0以降では,サービス提供のベストプラクティスは
+`@Injectable()` `providedIn` プロパティです。
+
+</div>
+
+### `forRoot()`の仕組み
 
 `forRoot()`はサービスの設定を行うオブジェクトを受け取り、
 [ModuleWithProviders](api/core/ModuleWithProviders)を返します。
 これは次のようなプロパティをもつシンプルなオブジェクトです:
 
-* `ngModule`: この例では`CoreModule`というクラスです。
+* `ngModule`: この例では `GreetingModule` というクラスです。
 * `providers`: 設定するプロバイダー。
 
 <live-example name="ngmodules">live example</live-example>では、
-ルート(root)の`AppModule`は`CoreModule`をインポートし、
+ルート(root)の`AppModule`は `GreetingModule` をインポートし、
 `providers`を`AppModule`プロバイダーに追加します。
 具体的には、
 Angularは`@NgModule.providers`
@@ -61,25 +113,26 @@ Angularは`@NgModule.providers`
 このシーケンスは、
 あなたが明示的に`AppModule`プロバイダーに追加したプロバイダーが、インポートされたプロバイダーよりも優先されることを保証します。
 
-`CoreModule`をインポートし、その`forRoot()`メソッドを一度だけ`AppModule`で使用してください。なぜなら、それによってサービスを登録し、かつ、それらのサービスをあなたのアプリに一度だけ登録したいからです。それらを複数回登録してしまうと、複数のサービスインスタンスが生成されてランタイムエラーが発生しアプリケーションが終了してしまうでしょう。
+サンプルアプリでは `GreetingModule` をインポートし、その`forRoot()`メソッドを一度だけ`AppModule`で使用しています。複数のインスタンスを避けるためにこのように登録します。
 
-`CoreModule`にコアの`UserService`の設定を行う
+`GreetingModule` に greeting の`UserService`の設定を行う
 `forRoot()`メソッドを追加することもできます。
 
-次の例では、オプショナルで注入された`UserServiceConfig`がコアの`UserService`を拡張しています。
+次の例では、オプショナルで注入された`UserServiceConfig`が greeting の`UserService`を拡張しています。
 `UserServiceConfig`が存在する場合、`UserService`はその設定からユーザー名をセットします。
 
-<code-example path="ngmodules/src/app/core/user.service.ts" region="ctor" header="src/app/core/user.service.ts (constructor)" linenums="false">
+<code-example path="ngmodules/src/app/greeting/user.service.ts" region="ctor" header="src/app/greeting/user.service.ts (constructor)" linenums="false">
 
 </code-example>
 
 ここでの`forRoot()`は`UserServiceConfig`オブジェクトを受け取ります:
 
-<code-example path="ngmodules/src/app/core/core.module.ts" region="for-root" header="src/app/core/core.module.ts (forRoot)" linenums="false">
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts (forRoot)" linenums="false">
 
 </code-example>
 
-最後に`AppModule`の`imports`配列の中で呼び出します。
+最後に`AppModule`の`imports`配列の中で呼び出します。次のスニペットでは、
+ファイルの他の部分は省略されています。完全なファイルについては、<live-example name="ngmodules"></live-example>を参照するか、このドキュメントの次のセクションに進んでください。
 
 <code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" header="src/app/app.module.ts (imports)" linenums="false">
 
@@ -91,57 +144,52 @@ Angularは`@NgModule.providers`
 
 <!-- KW--Does this mean that if we need it elsewhere we only import it at the top? I thought the services would all be available since we were importing it into `AppModule` in `providers`. -->
 
-## `CoreModule`の再インポートを防ぐ
+## `GreetingModule` の再インポートを防ぐ
 
-ルート(root)の`AppModule`だけが`CoreModule`をインポートすべきです。
+ルート(root)の`AppModule`だけが`GreetingModule`をインポートすべきです。
 もし遅延ロードするモジュールもそれをインポートした場合、
 アプリケーションはサービスの[複数インスタンス](guide/ngmodule-faq#q-why-bad)を生成することになります。
 
-遅延ロードするモジュールで`CoreModule`を再インポートすることを防ぎたい場合、次のような`CoreModule`コンストラクターを追加してください。
+遅延ロードするモジュールで`GreetingModule`を再インポートすることを防ぎたい場合、次のような`GreetingModule`コンストラクターを追加してください。
 
-<code-example path="ngmodules/src/app/core/core.module.ts" region="ctor" header="src/app/core/core.module.ts" linenums="false">
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="ctor" header="src/app/greeting/greeting.module.ts" linenums="false">
 
 </code-example>
 
-コンストラクターはAngularにコンストラクター自身が`CoreModule`を注入するよう指示します。
-もしもAngularが_現在_のインジェクター内の`CoreModule`を参照した場合、
+コンストラクターはAngularにコンストラクター自身が`GreetingModule`を注入するよう指示します。
+もしもAngularが_現在_のインジェクター内の`GreetingModule`を参照した場合、
 この注入は循環参照となります。
-`@SkipSelf`デコレーターは"インジェクター階層の上にある先祖のインジェクター内の`CoreModule`を参照する"
+`@SkipSelf()`デコレーターは"インジェクター階層の上にある先祖のインジェクター内の`GreetingModule`を参照する"
 という意味になります。
 
 コンストラクターが`AppModule`で意図どおりに実行される場合、
-`CoreModule`のインスタンスを提供できる祖先のインジェクターは存在しないでしょう。そして、インジェクターは中断するはずです。
+`GreetingModule`のインスタンスを提供できる祖先のインジェクターは存在しないでしょう。そして、インジェクターは中断するはずです。
 
 デフォルトでは、
 インジェクターが要求したプロバイダーを見つけられなかったときはエラーをスローします。
-`@Optional`デコレーターはサービスが見つからなくてもOKという意味になります。
+`@Optional()`デコレーターはサービスが見つからなくてもOKという意味になります。
 インジェクターは`null`を返し、`parentModule`パラメーターはnullになり、
 コンストラクターは無事終了します。
 
-`CoreModule`を`CustomersModule`のような遅延ロードするモジュールに不適切にインポートするときは違います。
+`GreetingModule`を`CustomersModule`のような遅延ロードするモジュールに不適切にインポートするときは違います。
 
 Angularは、遅延ロードするモジュールをルート(root)インジェクターの_子供_である、それ自身のインジェクターを使用して作成します。
-`@SkipSelf`によって、
-Angularは親インジェクター(今回はルートインジェクターになります)の`CoreModule`を参照します。
+`@SkipSelf()`によって、
+Angularは親インジェクター(今回はルートインジェクターになります)の`GreetingModule`を参照します。
 もちろん、ルート(root)の`AppModule`によってインポートされたインスタンスを参照します。
 今度は`parentModule`が存在するのでコンストラクターはエラーをスローします。
 
 ここでは、参考のために全体のなかの2つのファイルを紹介します:
 
 <code-tabs linenums="false">
- <code-pane
-   header="app.module.ts"
-   path="ngmodules/src/app/app.module.ts">
+ <code-pane header="app.module.ts" path="ngmodules/src/app/app.module.ts">
  </code-pane>
- <code-pane
-   header="core.module.ts"
-   region="whole-core-module"
-   path="ngmodules/src/app/core/core.module.ts">
+ <code-pane header="greeting.module.ts" region="whole-greeting-module" path="ngmodules/src/app/greeting/greeting.module.ts">
  </code-pane>
 </code-tabs>
 
 
-<hr>
+<hr />
 
 ## NgModuleについてのさらに詳しい情報
 

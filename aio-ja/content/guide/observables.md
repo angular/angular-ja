@@ -67,11 +67,11 @@ Observableの通知を受け取るハンドラーは、`Observer` インター�
 
 <code-example path="observables/src/creating.ts" region="subscriber" header="Create observable with constructor"></code-example>
 
-この例を少しステップアップすると、イベントを公開するObservableを作成できます。この例では、サブスクライバー関数はインラインで定義されています。
+この例を少しステップアップすると、イベントをパブリッシュするObservableを作成できます。この例では、サブスクライバー関数はインラインで定義されています。
 
 <code-example path="observables/src/creating.ts" region="fromevent" header="Create with custom fromEvent function"></code-example>
 
-Now you can use this function to create an observable that publishes keydown events:
+この関数を利用して、イベント`keydown`をパブリッシュするObservableを作成できます。:
 
 <code-example path="observables/src/creating.ts" region="fromevent_use" header="Use custom fromEvent function"></code-example>
 

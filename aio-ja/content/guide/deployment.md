@@ -1,19 +1,68 @@
 # Deployment
 
-When you are ready to deploy your Angular application to a remote server, you have various options for
-deployment.
+When you are ready to deploy your Angular application to a remote server, you have various options for deployment.
 
 {@a dev-deploy}
 {@a copy-files}
 
-## Simplest deployment possible
+
+## Simple deployment options
+
+Before fully deploying your application, you can test the process, build configuration, and deployed behavior by using one of these interim techniques
+
+### Building and serving from disk
+
+During development, you typically use the `ng serve` command to build, watch, and serve the application from local memory, using [webpack-dev-server](https://webpack.js.org/guides/development/#webpack-dev-server).
+When you are ready to deploy, however, you must use the `ng build` command to build the app and deploy the build artifacts elsewhere.
+
+Both `ng build` and `ng serve` clear the output folder before they build the project, but only the `ng build` command writes the generated build artifacts to the output folder.
+
+<div class="alert is-helpful">
+
+The output folder is  `dist/project-name/` by default.
+To output to a different folder, change the `outputPath` in `angular.json`.
+
+</div>
+
+As you near the end of the development process, serving the contents of your output folder from a local web server can give you a better idea of how your application will behave when it is deployed to a remote server.
+You will need two terminals to get the live-reload experience.
+
+* On the first terminal, run the [`ng build` command](cli/build) in *watch* mode to compile the application to the `dist` folder.
+
+  <code-example language="none" class="code-shell">
+
+   ng build --watch
+
+  </code-example>
+
+  Like the `ng serve` command, this regenerates output files when source files change.
+
+* On the second terminal, install a web server (such as [lite-server](https://github.com/johnpapa/lite-server)), and run it against the output folder. For example:
+
+  <code-example language="none" class="code-shell">
+
+   lite-server --baseDir="dist"
+
+  </code-example>
+
+   The server will automatically reload your browser when new files are output.
+
+<div class="alert is-critical">
+
+This method is for development and testing only, and is not a supported or secure way of deploying an application.
+
+</div>
+
+### Basic deployment to a remote server
 
 For the simplest deployment, create a production build and copy the output directory to a web server.
 
 1. Start with the production build:
 
   <code-example language="none" class="code-shell">
+
     ng build --prod
+
   </code-example>
 
 
@@ -26,7 +75,7 @@ This is the simplest production-ready deployment of your application.
 
 {@a deploy-to-github}
 
-## Deploy to GitHub pages
+### Deploy to GitHub pages
 
 Another simple way to deploy your Angular app is to use [GitHub Pages](https://help.github.com/articles/what-is-github-pages/).
 
@@ -35,8 +84,10 @@ Make a note of the user name and project name in GitHub.
 
 1. Build your project using Github project name, with the Angular CLI command [`ng build`](cli/build) and the options shown here:
    <code-example language="none" class="code-shell">
-     ng build --prod --output-path docs --base-href /<project_name>/
-    </code-example>
+
+     ng build --prod --output-path docs --base-href /&lt;project_name&gt;/
+
+   </code-example>
 
 1. When the build is complete, make a copy of `docs/index.html` and name it `docs/404.html`.
 
@@ -101,6 +152,7 @@ The list is by no means exhaustive, but should provide you with a good starting 
   (https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
 
   <code-example format=".">
+
     RewriteEngine On
     &#35 If an existing asset or directory is requested go to it as it is
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
@@ -109,6 +161,7 @@ The list is by no means exhaustive, but should provide you with a good starting 
 
     &#35 If the requested resource doesn't exist, use index.html
     RewriteRule ^ /index.html
+
   </code-example>
 
 
@@ -117,14 +170,17 @@ The list is by no means exhaustive, but should provide you with a good starting 
 modified to serve `index.html`:
 
   <code-example format=".">
+
     try_files $uri $uri/ /index.html;
+
   </code-example>
 
 
 * [IIS](https://www.iis.net/): add a rewrite rule to `web.config`, similar to the one shown
 [here](http://stackoverflow.com/a/26152011/2116927):
 
-  <code-example format='.'>
+  <code-example format='.' linenums="false">
+
     &lt;system.webServer&gt;
       &lt;rewrite&gt;
         &lt;rules&gt;
@@ -158,6 +214,7 @@ and to
 [rewrite rule](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites).
 
   <code-example format=".">
+
     "rewrites": [ {
       "source": "**",
       "destination": "/index.html"
@@ -205,7 +262,9 @@ See [`ng build`](cli/build) for more about CLI build options and what they do.
 In addition to build optimizations, Angular also has a runtime production mode. Angular apps run in development mode by default, as you can see by the following message on the browser console:
 
 <code-example format="nocode">
+
   Angular is running in the development mode. Call enableProdMode() to enable the production mode.
+
 </code-example>
 
 Switching to _production mode_ makes it run faster by disabling development specific checks such as the dual change detection cycles.
@@ -224,9 +283,9 @@ Configure the Angular Router to defer loading of all other modules (and their as
 or by [_lazy loading_](guide/router#asynchronous-routing "Lazy loading")
 them on demand.
 
-<div class="alert is-helpful>
+<div class="callout is-helpful>
 
-#### Don't eagerly import something from a lazy-loaded module
+<header>Don't eagerly import something from a lazy-loaded module</header>
 
 If you mean to lazy-load a module, be careful not import it
 in a file that's eagerly loaded when the app starts (such as the root `AppModule`).
@@ -270,35 +329,43 @@ tool is a great way to inspect the generated JavaScript bundles after a producti
 Install `source-map-explorer`:
 
 <code-example language="none" class="code-shell">
+
   npm install source-map-explorer --save-dev
+
 </code-example>
 
 Build your app for production _including the source maps_
 
 <code-example language="none" class="code-shell">
+
   ng build --prod --source-map
+
 </code-example>
 
 List the generated bundles in the `dist/` folder.
 
 <code-example language="none" class="code-shell">
+
   ls dist/*.bundle.js
+
 </code-example>
 
 Run the explorer to generate a graphical representation of one of the bundles.
 The following example displays the graph for the _main_ bundle.
 
 <code-example language="none" class="code-shell">
+
   node_modules/.bin/source-map-explorer dist/main.*.bundle.js
+
 </code-example>
 
 The `source-map-explorer` analyzes the source map generated with the bundle and draws a map of all dependencies,
 showing exactly which classes are included in the bundle.
 
-Here's the output for the _main_ bundle of the QuickStart.
+Here's the output for the _main_ bundle of an example app called `cli-quickstart`.
 
 <figure>
-  <img src="generated/images/guide/cli-quickstart/quickstart-sourcemap-explorer.png" alt="quickstart sourcemap explorer">
+  <img src="generated/images/guide/deployment/quickstart-sourcemap-explorer.png" alt="quickstart sourcemap explorer">
 </figure>
 
 {@a base-tag}
@@ -327,27 +394,296 @@ the subfolder is `my/app/` and you should add `<base href="/my/app/">` to the se
 When the `base` tag is mis-configured, the app fails to load and the browser console displays `404 - Not Found` errors
 for the missing files. Look at where it _tried_ to find those files and adjust the base tag appropriately.
 
-## Building and serving for deployment
+{@a differential-loading}
 
-When you are designing and developing applications, you typically use `ng serve` to build your app for fast, local, iterative development.
-When you are ready to deploy, however, you must use the `ng build` command to build the app and deploy the build artifacts elsewhere.
+## Differential Loading
 
-Both `ng build` and `ng serve` clear the output folder before they build the project, but only the `ng build` command writes the generated build artifacts to the output folder.
+When building web applications, making sure your application is compatible with the majority of browsers is a goal.
+Even as JavaScript continues to evolve, with new features being introduced, not all browsers are updated with support for these new features at the same pace.
+
+The code you write in development using TypeScript is compiled and bundled into ES2015, the JavaScript syntax that is compatible with most browsers.
+All modern browsers support ES2015 and beyond, but in most cases, you still have to account for users accessing your application from a browser that doesn't.
+When targeting older browsers, [polyfills](guide/browser-support#polyfills) can bridge the gap by providing functionality that  doesn't exist in the older versions of JavaScript supported by those browsers.
+
+To maximize compatibility, you could ship a single bundle that includes all your compiled code, plus any polyfills that may be needed.
+Users with modern browsers, however, shouldn't have to pay the price of increased bundle size that comes with polyfills they don't need.
+Differential loading, which is supported by default in Angular CLI version 8 and higher, solves this problem.
+
+Differential loading is a strategy where the CLI builds two separate bundles as part of your deployed application.
+
+* The first bundle contains modern ES1015 syntax, takes advantage of built-in support in modern browsers, ships less polyfills, and results in a smaller bundle size.
+
+* The second bundle contains code in the old ES5 syntax, along with all necessary polyfills. This results in a larger bundle size, but supports older browsers.
+
+This strategy allows you to continue to build your web application to support multiple browsers, but only load the necessary code that the browser needs.
+
+### Differential builds
+
+The Angular CLI handles differential loading for you as part of the _build_ process for deployment.
+The `ng build` command produces the necessary bundles used for differential loading, based on your browser support requirements and compilation target.
+
+The Angular CLI uses two configurations for differential loading:
+
+* Browsers list
+   The `browserslist` configuration file is included in your application [project structure](guide/file-structure#application-configuration-files) and provides the minimum browsers your application supports. See the [Browserslist spec](https://github.com/browserslist/browserslist) for complete configuration options.
+
+* TypeScript configuration
+   In the TypeScript configuration file, `tsconfig.json`, the `target` in the `compilerOptions` section determines the ECMAScript target version that the code is compiled to.
+   Modern browsers support ES2015 natively, while ES5 is more commonly used to support legacy browsers.
 
 <div class="alert is-helpful">
 
-The output folder is  `dist/` by default.
-To output to a different folder, change the `outputPath` in `angular.json`.
+   Differential loading is currently only supported when using `es2015` as a compilation `target`. When used with targets higher than `es2015`, a warning is emitted during build time.
 
 </div>
 
-The `ng serve` command builds, watches, and serves the application from local memory, using a local development server.
-When you have deployed your app to another server, however, you might still want to serve the app so that you can continue to see changes that you make in it.
-You can do this by adding the `--watch` option to the `ng build` command.
+The CLI queries the Browserslist configuration, and checks the `target` to determine if support for legacy browsers is required.
+The combination of these two configurations determines whether multiple bundles are produced when you create a _build_.
+When you create a development build using [`ng build`](cli/build) and differential loading is enabled, the output produced is simpler and easier to debug, allowing you to rely less on sourcemaps of compiled code.
+When you create a production build using [`ng build --prod`](cli/build), the CLI uses the defined configurations above to determine the bundles to build for deployment of your application.
+
+The `index.html` file is also modified during the build process to include script tags that enable differential loading. See the sample output below from the `index.html` file produced during a build using `ng build`.
+
+<code-example language="html" format="." linenums="false">
+
+<!-- ... -->
+<body>
+  <app-root></app-root>
+  <script src="runtime-es2015.js" type="module"></script>
+  <script src="runtime-es5.js" nomodule></script>
+  <script src="polyfills-es2015.js" type="module"></script>
+  <script src="polyfills-es5.js" nomodule></script>
+  <script src="styles-es2015.js" type="module"></script>
+  <script src="styles-es5.js" nomodule></script>
+  <script src="vendor-es2015.js" type="module"></script>
+  <script src="vendor-es5.js" nomodule></script>
+  <script src="main-es2015.js" type="module"></script>
+  <script src="main-es5.js" nomodule></script>
+</body>
+<!-- ... -->
+
+</code-example>
+
+Each script tag has a `type="module"` or `nomodule` attribute. Browsers with native support for ES modules only load the scripts with the `module` type attribute and ignore scripts with the `nomodule` attribute. Legacy browsers only load the scripts with the `nomodule` attribute, and ignore the script tags with the `module` type that load ES modules.
+
+<div class="alert is-helpful">
+
+   Some legacy browsers still download both bundles, but only execute the appropriate scripts based on the attributes mentioned above. You can read more on the issue [here](https://github.com/philipwalton/webpack-esnext-boilerplate/issues/1).
+
+</div>
+
+See the [configuration table](#configuration-table) below for the configurations for enabling differential loading.
+
+### Configuring differential loading
+
+Differential loading is supported by default with version 8 and later of the Angular CLI.
+For each application project in your workspace, you can configure how builds are produced based on the `browserslist` and `tsconfig.json` files in your application project.
+
+For a newly created Angular application, the default `browserslist` looks like this:
 
 ```
-ng build --watch
+> 0.5%
+last 2 versions
+Firefox ESR
+not dead
+not IE 9-11 # For IE 9-11 support, remove 'not'.
 ```
-Like the `ng serve` command, this regenerates output files when source files change.
 
-For complete details of the CLI commands, see the [CLI command reference](cli).
+The `tsconfig.json` looks like this:
+
+<code-example language="json" format="." linenums="false">
+
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
+}
+
+</code-example>
+
+By default, legacy browsers such as IE 9-11 are ignored, and the compilation target is ES2015. As a result, this produces two builds, and differential loading is enabled. If you ignore browsers without ES2015 support, a single build is produced. To see the build result for differential loading based on different configurations, refer to the table below.
+
+<div class="alert is-important">
+
+   To see which browsers are supported with the above configuration, see which settings meet to your browser support requirements, see the [Browserslist compatibility page](https://browserl.ist/?q=%3E+0.5%25%2C+last+2+versions%2C+Firefox+ESR%2C+Chrome+41%2C+not+dead%2C+not+IE+9-11).
+
+</div>
+
+{@a configuration-table }
+
+| ES5 Browserslist Result | ES Target | Build Result |
+| -------- | -------- | -------- |
+| disabled | es5     | Single build |
+| enabled  | es5     | Single build w/Conditional Polyfills |
+| disabled | es2015  | Single build |
+| enabled  | es2015  | Differential Loading (Two builds w/Conditional Polyfills |
+
+When the ES5 Browserslist result is `disabled`, then ES5 browser support is not required. Otherwise, ES5 browser support is required.
+
+### Opting out of differential loading
+
+Differential loading can be explicitly disabled if it causes unexpected issues or you need to target ES5 specifically for legacy browser support.
+
+To explicitly disable differential loading:
+
+- Enable the `dead` or `IE` browsers in the `browserslist` config file by removing the `not` keyword in front of them.
+- Set the `target` in the `compilerOptions` to `es5`.
+
+{@a test-and-serve}
+
+## Local development in older browsers
+
+In Angular CLI version 8 and higher, differential loading is enabled by default for the `ng build` command.
+The `ng serve`, `ng test`, and `ng e2e` commands, however, generate a single ES2015 build which cannot run in older browsers that don't support the modules, such as IE 11.
+
+If you want to run ES5 code during development, you could disable differential loading completely.
+To maintain the benefits of differential loading, however, a better option is to define multiple configurations for `ng serve`, `ng e2e`, and `ng test`.
+
+{@a differential-serve}
+
+### Configuring serve for ES5
+
+To do this for `ng serve`, create a new file, `tsconfig-es5.app.json` next to `tsconfig.app.json` with the following content.
+
+<code-example language="json" format="." linenums="false">
+
+{
+ "extends": "./tsconfig.app.json",
+ "compilerOptions": {
+     "target": "es5"
+  }
+}
+
+</code-example>
+
+In `angular.json` add two new configuration sections under the `build` and `serve` targets to point to the new TypeScript configuration.
+
+<code-example language="json" format="." linenums="false">
+
+"build": {
+  "builder": "@angular-devkit/build-angular:browser",
+  "options": {
+      ...
+  },
+  "configurations": {
+    "production": {
+        ...
+    },
+    "es5": {
+      "tsConfig": "./tsconfig-es5.app.json"
+    }
+  }
+},
+"serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+      ...
+  },
+  "configurations": {
+    "production": {
+     ...
+    },
+    "es5": {
+      "browserTarget": "app:build:es5"
+    }
+  }
+},
+
+</code-example>
+
+You can then run the serve with this configuration.
+
+<code-example language="none" class="code-shell">
+
+ng serve --configuration es5
+
+</code-example>
+
+{@a differential-test}
+
+### Configuring the test command
+
+Create a new file, `tsconfig-es5.spec.json` next to `tsconfig.spec.json` with the following content.
+
+<code-example language="json" format="." linenums="false">
+
+{
+ "extends": "./tsconfig.spec.json",
+ "compilerOptions": {
+     "target": "es5"
+  }
+}
+
+</code-example>
+
+<code-example language="json" format="." linenums="false">
+
+"test": {
+  "builder": "@angular-devkit/build-angular:karma",
+  "options": {
+      ...
+  },
+  "configurations": {
+    "es5": {
+      "tsConfig": "./tsconfig-es5.spec.json"
+    }
+  }
+},
+
+</code-example>
+
+You can then run the tests with this configuration
+
+<code-example language="none" class="code-shell">
+
+ng test --configuration es5
+
+</code-example>
+
+### Configuring the e2e command
+
+Create an ES5 serve configuration as explained above (link to the above serve section), and configuration an ES5 configuration for the E2E target.
+
+<code-example language="json" format="." linenums="false">
+
+"test": {
+  "builder": "@angular-devkit/build-angular:protractor",
+  "options": {
+      ...
+  },
+  "configurations": {
+	"production": {
+		...
+	},
+    "es5": {
+      "devServerTarget": "app:serve:es5"
+    }
+  }
+},
+
+</code-example>
+
+You can then run the e2e's with this configuration
+
+<code-example language="none" class="code-shell">
+
+ng e2e --configuration es5
+
+</code-example>

@@ -16,11 +16,12 @@ Angularシステムの中で特別な意味をもつ常用英単語です。
 
 
 ## ahead-of-time (AOT) compilation
+
 _事前コンパイル_
 
 Angular ahead-of-time（AOT）コンパイラは、ブラウザがコードをダウンロードして実行する前に、Angular HTMLとTypeScriptコードをビルド段階で効率的なJavaScriptコードに変換します。
 これは、運用環境での最適なコンパイルモードであり、
- [just-in-time (JIT) コンパイル](guide/glossary#jit)と比較してロード時間の短縮とパフォーマンスの向上を実現します。
+ [just-in-time (JIT) コンパイル](#jit)と比較してロード時間の短縮とパフォーマンスの向上を実現します。
 
 `ngc`コマンドラインツールを使用してアプリケーションをコンパイルすると、モジュールファクトリに直接ブートストラップすることができます。つまり、JavaScriptバンドルにAngularコンパイラを含める必要はありません。
 
@@ -28,7 +29,7 @@ Angular ahead-of-time（AOT）コンパイラは、ブラウザがコードを�
 
 ## Angular element
 
-[Custom Elements](guide/glossary#custom-element)としてパッケージされたAngularの[コンポーネント](guide/glossary#component)です。
+[Custom Elements](#custom-element)としてパッケージされたAngularの[コンポーネント](#component)です。
 
 [Angular Elements 概要](guide/elements)を参照してください。
 
@@ -37,7 +38,7 @@ Angular ahead-of-time（AOT）コンパイラは、ブラウザがコードを�
 ## annotation
 _アノテーション_
 
-クラスのメタデータを提供する構造体。[デコレーター](guide/glossary#decorator)を参照してください。
+クラスのメタデータを提供する構造体。[デコレーター](#decorator)を参照してください。
 
 {@a app-shell}
 
@@ -46,7 +47,7 @@ _アノテーション_
 App shellは、ビルド時にルートを介してアプリケーションの一部をレンダリングする方法です。
 これにより、ブラウザーはJavaScriptを初期化しなくても静的なHTMLとCSSをレンダリングできるため、ユーザーはアプリケーションをわかりやすく最初にペイントして素早く表示することができます。
 
-詳細については、[アプリケーション・シェル・モデル] (https://developers.google.com/web/fundamentals/architecture/app-shell).を参照してください。
+詳細については、[App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell)を参照してください。
 
 Angular CLIを使って、アプリケーションシェルを[生成](cli/generate#appshell)することができる。
 これにより、静的にレンダリングされたページ(すべてのページに共通の骨組み)を素早く起動しながら、ブラウザーが完全なクライアントバージョンをダウンロードし、コードのロード後に自動的に切り替えることで、ユーザーエクスペリエンスを向上させることができます。
@@ -58,11 +59,11 @@ Angular CLIを使って、アプリケーションシェルを[生成](cli/gener
 ## Architect
 
 CLIが、指定された設定に従って、コンパイルやテスト実行などの複雑なタスクを実行するために使用するツールです。
-Architectは、指定された[ターゲット構成](#target)で[ビルダー](#builder)([npmパッケージ]で定義されている)を実行するシェルです。
+Architectは、指定された[ターゲット構成](#target)で[ビルダー](#builder)([npmパッケージ](#npm-package)で定義されている)を実行するシェルです。
 
 [ワークスペース設定ファイル](guide/workspace-config#project-tool-configuration-options)の「ビルダー」セクションには、Architectビルダー用の構成オプションがあります。
 
-例えば、リンティング用のビルトインビルダーは、`@angular-devkit/build_angular:tslint`というパッケージに定義されています。このパッケージは、[TSLint] (https://palantir.github.io/tslint/)ツールを使用してリンティングを行います。json`ファイルを指定します。
+例えば、リンティング用のビルトインビルダーは、`@angular-devkit/build_angular:tslint`というパッケージに定義されています。このパッケージは、[TSLint](https://palantir.github.io/tslint/)ツールを使用してリンティングを行います。json`ファイルを指定します。
 
 [CLIコマンド 「ng run」](cli/run)を使用して、そのビルダーに関連付けられた[ターゲット構成](#target)を指定することによって、ビルダーを呼び出します。
 インテグレーターはビルダーを追加して、ツールやワークフローをAngular CLI経由で実行できるようにすることができます。例えば、カスタムビルダーは、 「ng build」 や 「ng test」 などのCLIコマンドの組み込み実装で使用されるサードパーティ製ツールを置き換えることができます。
@@ -76,10 +77,9 @@ Architectは、指定された[ターゲット構成](#target)で[ビルダー](
 ## attribute directives
 _属性ディレクティブ_
 
-[ディレクティブ](guide/glossary#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。その名前のとおり、通常これらはHTML属性として現れます。
+[ディレクティブ](#directive)の一種で、他のHTML要素、属性、プロパティやコンポーネントの振る舞いを監視し、変更することができます。その名前のとおり、通常これらはHTML属性として現れます。
 
 [_属性ディレクティブ_](guide/attribute-directives)ガイドで詳しく学びましょう。
-
 
 {@a B}
 
@@ -90,9 +90,9 @@ _バインディング_
 
 一般に、変数またはプロパティをデータ値に設定する方法です。
 Angular内では、通常、DOMオブジェクトのプロパティと
-データオブジェクトのプロパティを調整する[データバインディング](guide/glossary#data-binding)を指します。
+データオブジェクトのプロパティを調整する[データバインディング](#data-binding)を指します。
 
-また、"トークン"または"キー" と依存性の[プロバイダー](guide/glossary#provider)との間を結びつける、[依存性の注入](guide/glossary#dependency-injection)を指すこともあります。
+また、[トークン](#token)と依存性の[プロバイダー](#provider)との間を結びつける、[依存性の注入](#dependency-injection)を指すこともあります。
 
 {@a bootstrap}
 
@@ -101,7 +101,7 @@ _ブートストラップ_
 
 アプリやシステムを初期化して起動する方法です。
 
-Angularでは、アプリケーションのルートNgModule（`AppModule`）には、アプリケーションのトップレベル[コンポーネント](guide/glossary#component)を識別する`bootstrap`プロパティがあります。
+Angularでは、アプリケーションのルートNgModule（`AppModule`）には、アプリケーションのトップレベル[コンポーネント](#component)を識別する`bootstrap`プロパティがあります。
 ブートストラッププロセス中、Angularはこれらのコンポーネントを作成して`index.html`ホストWebページに挿入します。
 複数のアプリケーションを同じ`index.html`で起動することができます。各アプリケーションには独自のコンポーネントが含まれています。
 
@@ -115,11 +115,10 @@ _ビルダー_
 [Architect](#architect) APIを使用して、「構築する」や「試験」などの複雑なプロセスを実行する関数です。
 ビルダー・コードは、[npmパッケージ](#npm-package)で定義されます。
 
-たとえば、[ブラウザビルダ] (https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/browser)はブラウザターゲット用に[webpack] (https://webpack.js.org/)ビルドを実行し、[KarmaBuilder] (https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/karma)はKarmaサーバを起動し、単体テスト用にwebpackビルドを実行します。
+たとえば、[ブラウザビルダ](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/browser)はブラウザターゲット用に[webpack](https://webpack.js.org/)ビルドを実行し、[KarmaBuilder](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/karma)はKarmaサーバを起動し、単体テスト用にwebpackビルドを実行します。
 
 [CLIコマンド 「ng run」](cli/run)は、特定の[ターゲット構成](#target)でビルダーを呼び出します。
-[ワークスペース設定](guide/workspace-config)ファイルは、`angular.。組み込みビルダー用のデフォルト設定が含まれています。
-
+[ワークスペース設定](guide/workspace-config)ファイルの`angular.json`には、組み込みビルダー用のデフォルト設定が含まれています。
 
 {@a C}
 
@@ -131,20 +130,27 @@ _ビルダー_
 ## case types
 _ケースの慣習_
 
-Angularでは、大文字と小文字の区別があります。これについては、[命名のガイドラインセクション]の(ガイド/スタイルガイド#02-01)を参照してください。ケースタイプの概要を次に示します。
+Angularでは、大文字と小文字の区別があります。これについては、[命名のガイドラインセクション](guide/styleguide#style-02-01)を参照してください。ケースタイプの概要を次に示します。
 
-* camelCase : シンボル、プロパティ、メソッド、パイプ名、コンポーネントではないディレクティブのセレクター、定数
-* UpperCamelCase (or PascalCase): コンポーネント、インタフェース、NgModule、ディレクティブおよびパイプを定義するクラスを含むクラス名
-* dash-case (or "kebab-case"): ファイル名の記述部分、コンポーネントセレクタ
-* underscore_case (or "snake_case"): 通常はAngularでは使用されません。
-* UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE): 伝統的な定数（許容されますが、camelCaseを好みます）
+* camelCase:シンボル、プロパティ、メソッド、パイプ名、非コンポーネントディレクティブセレクタ、定数。
+標準または小文字のキャメルケースは、アイテムの最初の文字に小文字を使用します。たとえば、"selectedHero"のようになります。
 
+* UpperCamelCase(またはPascalCase):コンポーネント、インタフェース、NgModules、ディレクティブおよびパイプを定義するクラスを含むクラス名
+大文字のキャメルケースは、項目の最初の文字に大文字を使用します。たとえば、"HeroListComponent"のようになります。
+
+* dash-case(または「ケバブケース」):ファイル名の記述部分、コンポーネントセレクタ。たとえば、"app-hero-list"のようになります。
+
+* underscore_case(または「スネークケース」):通常、Angularでは使用されません。ヘビの場合はアンダースコアでつなげた言葉を使います。
+たとえば、"convert_link_mode"のようになります。
+
+* UPPER_UNDERSCORE_CASE(またはUPPER_SNAKE_CASE、またはSCREAMING_SNAKE_CASE):定数の場合は従来型です(許容できるが、camelCaseを好む)。
+ヘビの大文字は、すべて大文字の単語にアンダースコアを付けて使用します。たとえば、"FIX_ME"のようになります。
 {@a class-decorator}
 
 ## class decorator
 _クラスデコレーター_
 
-クラス定義の直前に表示される[デコレーター](guide/glossary#decorator)です。クラスが特定の型であることを宣言し、その型に適したメタデータを提供します。
+クラス定義の直前に表示される[デコレーター](#decorator)です。クラスが特定の型であることを宣言し、その型に適したメタデータを提供します。
 
 次のクラスタイプを宣言できます。
 * `@Component()`
@@ -159,25 +165,25 @@ _クラスデコレーター_
 ## class field decorator
 _クラスフィールドデコレーター_
 
-クラス定義のフィールドの直前に、そのフィールドの型を宣言する[デコレータ](guide/glossary#decorator)ステートメントを記述します。`@Input`や`@Output`などです。
+クラス定義のフィールドの直前に、そのフィールドの型を宣言する[デコレータ](#decorator)ステートメントを記述します。`@Input`や`@Output`などです。
 
 {@a collection}
 
 ## collection
 _コレクション_
 
-Angularで、[npmパッケージ](guide/npm-packages)に集められた関連する[セマンティクス](guide/glossary#schematic)の集合。
+Angularで、[npmパッケージ](guide/npm-packages)に集められた関連する[セマンティクス](#schematic)の集合。
 
 {@a cli}
 
 ## command-line interface (CLI)
-_コマンドラインインターフェース（CLI）_
+_コマンドラインインターフェース(CLI)_
 
 [Angular CLI](cli)はAngular開発サイクルを管理するためのコマンドラインツールです。
-これを使うことによって、[ワークスペース](guide/glossary#workspace)や[プロジェクト](guide/glossary#project)のための初期ファイルシステムの足がかりを作成したり、さまざまな要素の初期汎用バージョンのコードを追加したり変更したりする[セマンティクス](guide/glossary#schematic)を実行したりします。
+これを使うことによって、[ワークスペース](#workspace)や[プロジェクト](#project)のための初期ファイルシステムの足がかりを作成したり、さまざまな要素の初期汎用バージョンのコードを追加したり変更したりする[セマンティクス](#schematic)を実行したりします。
 
-* 新しいプロジェクトでCLIの使用を開始するには、[スタートアップガイド](guide/quickstart)を参照してください。
-* CLIの全機能の詳細については、[CLIコマンドリファレンス](CLI)を参照してください。
+* 新しいプロジェクトでCLIの使用を開始するには、[ローカル環境とワークスペースのセットアップ](guide/setup-local)を参照してください。
+* CLIの全機能の詳細については、[CLIコマンドリファレンス](cli)を参照してください。
 
 [セマンティクスのCLI](#schematics-cli)も参照してください。
 
@@ -186,16 +192,16 @@ _コマンドラインインターフェース（CLI）_
 ## component
 _コンポーネント_
 
-`@Component()`[デコレータ](guide/glossary#decorator)を持つクラスで、対応する[テンプレート](guide/glossary#template)と関連付けられます。コンポーネントとテンプレートによって、[ビュー](guide/glossary#view)が定義されます。
-コンポーネントは、特殊なタイプの[ディレクティブ](guide/glossary#directive)です。
+`@Component()`[デコレータ](#decorator)を持つクラスで、対応する[テンプレート](#template)と関連付けられます。コンポーネントとテンプレートによって、[ビュー](#view)が定義されます。
+コンポーネントは、特殊なタイプの[ディレクティブ](#directive)です。
 
-Angularコンポーネントクラスは、[データバインディング](guide/glossary#data-binding)を通じて、データを公開し、ビューの表示とユーザーインタラクションロジックの大部分を処理します。
+Angularコンポーネントクラスは、[データバインディング](#data-binding)を通じて、データを公開し、ビューの表示とユーザーインタラクションロジックの大部分を処理します。
 
 コンポーネント、テンプレート、およびビューの詳細については、[アーキテクチャの概要](guide/architecture)を参照してください。
 
 ## configuration
 
-See  [workspace configuration](#cli-config)
+[Angularワークスペースの設定](guide/workspace-config)を参照してください。
 
 
 {@a custom-element}
@@ -205,15 +211,13 @@ _カスタムエレメント_
 
 Webプラットフォームの機能で、現在ほとんどのブラウザでサポートされており、未対応のブラウザでもpolyfillを使用して利用できます。（[ブラウザサポート](guide/browser-support)を参照）
 
-カスタムエレメント機能はHTMLを拡張し、JavaScriptコードによってコンテンツが作成および制御されるタグを定義できるようにします。カスタムエレメント(*webコンポーネント*とも呼ばれます。)については、[CustomElementRegistry] (https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)を参照してください。
+カスタムエレメント機能はHTMLを拡張し、JavaScriptコードによってコンテンツが作成および制御されるタグを定義できるようにします。カスタムエレメント(*webコンポーネント*とも呼ばれます。)については、[CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)を参照してください。
 
 APIを使用してAngularコンポーネントの変換を行い、ブラウザに登録してAngularアプリ内のDOMに直接追加したHTMLで使用できるようにすることができます。カスタムエレメントタグは、変更検出およびデータバインディング機能を持つコンポーネントのビューを、Angular処理なしで表示されるコンテンツに挿入します。
 
 [Angular element](#angular-element)を参照してください。
 
-[動的コンポーネント読み込み](guide/glossary#dynamic-components)も参照してください。
-
-
+[動的コンポーネント読み込み](#dynamic-components)も参照してください。
 
 {@a D}
 
@@ -229,28 +233,27 @@ _データバインディング_
 
 データバインディングについて詳しく知るには[テンプレート構文](guide/template-syntax)の章を参照してください。
 
- * [補間](guide/template-syntax#interpolation).
- * [プロパティバインディング](guide/template-syntax#property-binding).
- * [イベントバインディング](guide/template-syntax#event-binding).
- * [属性バインディング](guide/template-syntax#attribute-binding).
- * [クラスバインディング](guide/template-syntax#class-binding).
- * [スタイルバインディング](guide/template-syntax#style-binding).
- * [ngModelによる双方向バインディング](guide/template-syntax#ngModel).
+ * [補間](guide/template-syntax#interpolation)
+ * [プロパティバインディング](guide/template-syntax#property-binding)
+ * [イベントバインディング](guide/template-syntax#event-binding)
+ * [属性バインディング](guide/template-syntax#attribute-binding)
+ * [クラスバインディング](guide/template-syntax#class-binding)
+ * [スタイルバインディング](guide/template-syntax#style-binding)
+ * [ngModelによる双方向バインディング](guide/template-syntax#ngModel)
 
 {@a declarable}
 
 ## declarable
 
-[NgModule](guide/glossary#ngmodule)の`declarations`リストに追加できるクラス型です。
-
-[コンポーネント](guide/glossary#component)、[ディレクティブ](guide/glossary#directive)、および[パイプ](guide/glossary#pipe)を宣言できます。
+[NgModule](#ngmodule)の`declarations`リストに追加できるクラス型です。
+[コンポーネント](#component)、[ディレクティブ](#directive)、および[パイプ](#pipe)を宣言できます。
 
 次のものを宣言しないでください。
- * 別のNgModuleですでに宣言されているクラス。
+ * 別のNgModuleですでに宣言されているクラス
  * 別のパッケージからインポートされたディレクティブの配列。たとえば、`@angular/forms`の`FORMS_DIRECTIVES`を宣言しないでください。
- * NgModuleクラス。
- * サービスクラス。
- * 文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなどAngularと関係のないクラスとオブジェクト。
+ * NgModuleクラス
+ * サービスクラス
+ * 文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなどAngularと関係のないクラスとオブジェクト
 
 
 {@a decorator}
@@ -260,13 +263,13 @@ _データバインディング_
 ## decorator | decoration
 _デコレーター | デコレーション_
 
-直後のクラスまたはプロパティの定義を変更する関数。
+直後のクラスまたはプロパティの定義を変更する関数です。
 デコレーター（アノテーションとも呼ばれる）は、実験的な（ステージ2の）JavaScript言語[機能](https://github.com/wycats/javascript-decorators)です。
 TypeScriptはデコレーターのサポートを追加します。
 
 Angularは、メタデータをクラスやプロパティに付与して、そのクラスやプロパティの意味や動作の仕方を知るデコレーターを定義します。
 
-[クラスデコレータ](guide/glossary#class-decorator)、[クラスフィールドデコレーター](guide/glossary#class-field-decorator)を参照してください。
+[クラスデコレータ](#class-decorator)、[クラスフィールドデコレーター](#class-field-decorator)を参照してください。
 
 {@a di}
 
@@ -278,7 +281,7 @@ _依存性の注入_
 アプリケーションの一部(依存関係)を作成し、他のアプリケーションに配布するためのデザインパターンとメカニズムです。
 
 Angularでは、依存関係は通常はサービスですが、文字列や関数などの値でも構いません。
-アプリケーションの[インジェクター](guide/glossary#injector)（ブートストラップ中に自動的に作成される）は、必要に応じて、設定されたサービスまたは値の[プロバイダ](guide/glossary#provider)を使用して依存関係をインスタンス化します。
+アプリケーションの[インジェクター](#injector)（ブートストラップ中に自動的に作成される）は、必要に応じて、設定されたサービスまたは値の[プロバイダ](#provider)を使用して依存関係をインスタンス化します。
 
 詳しく知るには[依存性の注入](guide/dependency-injection)ガイドを参照してください。
 
@@ -287,7 +290,7 @@ Angularでは、依存関係は通常はサービスですが、文字列や関�
 ## DI token
 _DIトークン_
 
-[依存性注入](guide/glossary#di)システムで使用する、依存関係[プロバイダ](guide/glossary#provider)に関連付けられた検索トークン。
+[依存性注入](#di)システムで使用する、依存関係[プロバイダ](#provider)に関連付けられた検索トークン。
 
 
 {@a directive}
@@ -296,25 +299,24 @@ _DIトークン_
 ## directive
 _ディレクティブ_
 
-DOMの構造を変更したり、DOMやコンポーネントのデータモデルの属性を変更したりできるクラスです。ディレクティブクラス定義の直前には、メタデータを提供する`@Directive()`[デコレータ](guide/glossary#decorator)が記述されます。
+DOMの構造を変更したり、DOMやコンポーネントのデータモデルの属性を変更したりできるクラスです。ディレクティブクラス定義の直前には、メタデータを提供する`@Directive()`[デコレータ](#decorator)が記述されます。
 
 ディレクティブクラスは通常、HTMLの要素または属性に関連付けられ、その要素または属性はディレクティブそのものとして参照されます。
-AngularはHTMLの[テンプレート](guide/glossary#template)ディレクティブを検出すると、それに一致するディレクティブクラスインスタンスを作成し、ブラウザDOMのその部分にインスタンスコントロールが与えられます。
+AngularはHTMLの[テンプレート](#template)ディレクティブを検出すると、それに一致するディレクティブクラスインスタンスを作成し、ブラウザDOMのその部分にインスタンスコントロールが与えられます。
 
 ディレクティブには次の3つのカテゴリがあります。
-- [コンポーネント](guide/glossary#component)では、`@Component()`(`@ディレクティブ()`の拡張)を使用してテンプレートをクラスに関連付けます。
-- [属性ディレクティブ](guide/glossary#attribute-directive)は、ページ要素の動作と外観を変更します。
-- [構造ディレクティブ](guide/glossary#structural-directive)は、DOMの構造を変更します。
+- [コンポーネント](#component)では、`@Component()`(`@ディレクティブ()`の拡張)を使用してテンプレートをクラスに関連付けます。
+- [属性ディレクティブ](#attribute-directive)は、ページ要素の動作と外観を変更します。
+- [構造ディレクティブ](#structural-directive)は、DOMの構造を変更します。
 
 Angularは`ng`接頭辞で始まるいくつかの組込みディレクティブを提供します。新しいディレクティブを作成して、独自の機能を実装することもできます。
 _セレクタ_（たとえば`<my-directive>`のようなHTMLタグ）をカスタムディレクティブに関連付けて、アプリケーションで使用できる[テンプレート構文](guide/template-syntax)を拡張します。
-
 {@a dom}
 
 ## domain-specific language (DSL)
 _ドメイン固有言語_
 
-専用ライブラリまたはAPI;[ドメイン固有言語]を参照 (https://en.wikipedia.org/wiki/Domain-specific_language).
+専用ライブラリまたはAPI;[ドメイン固有言語](https://en.wikipedia.org/wiki/Domain-specific_language)を参照.
 Angularは[アニメーション](guide/animations),[フォーム](guide/forms),[ルーティングとナビゲーション](guide/router)などのNgModulesで定義されたAngularアプリに関連する多くのドメインで,ドメイン固有の言語を使ってTypeScriptを拡張しています。
 
 {@a dynamic-components}
@@ -324,7 +326,7 @@ _動的コンポーネント読み込み_
 
 実行時にDOMにコンポーネントを追加する手法です。コンパイルからコンポーネントを除外し、DOMに追加するときにAngularの変更検出とイベント処理フレームワークに接続する必要があります。
 
-[カスタム要素](guide/glossary#custom-element)も参照してください。これにより、同じ結果を簡単に得ることができます。
+[カスタム要素](#custom-element)も参照してください。これにより、同じ結果を簡単に得ることができます。
 
 
 {@a E}
@@ -335,17 +337,19 @@ _動的コンポーネント読み込み_
 _一括読み込み_
 
 起動時にロードされるNgModuleまたはコンポーネントは、Eager-loaded（一括読み込み）と呼ばれ、実行時にロードされるものと区別します(遅延ローディング)。
-[遅延ローディング](guide/glossary#lazy-load)参照
+[遅延ローディング](#lazy-load)参照
+
 
 {@a ecma}
 
 ## ECMAScript
 
-[正式なJavaScript言語仕様] (https://en.wikipedia.org/wiki/ECMAScript).
+[正式なJavaScript言語仕様](https://en.wikipedia.org/wiki/ECMAScript).
 
-すべてのブラウザが最新のECMAScript標準をサポートしているわけではありませんが、[トランスパイラ](guide/glossary#transpile)(例えば[TypeScript](guide/glossary#typescript))を使用すると、最新の機能を使用してコードを記述でき、その機能はブラウザがサポートするバージョンで実行されるコードに変換されます。
+すべてのブラウザが最新のECMAScript標準をサポートしているわけではありませんが、[トランスパイラ](#transpile)(例えば[TypeScript](#typescript))を使用すると、最新の機能を使用してコードを記述でき、その機能はブラウザがサポートするバージョンで実行されるコードに変換されます。
 
-詳細については、[ブラウザのサポート](ガイド/ブラウザサポート)を参照してください。
+詳細については、[ブラウザのサポート](guide/browser-support)を参照してください。
+
 
 {@a element}
 
@@ -357,7 +361,7 @@ Angularは、レンダリング固有のネイティブUI要素をラップす�
 
 このドキュメンテーションは、一般的に要素（`ElementRef`インスタンス）またはDOM要素（必要に応じて直接アクセスできる）のいずれかを参照します。
 
-[カスタム要素](guide/glossary#custom-element)とも比較してください。
+[カスタム要素](#custom-element)とも比較してください。
 
 {@a entry-point}
 
@@ -385,7 +389,7 @@ Angularフォームの基本的な構成要素である`FormControl`のインス
 ## form model
 _フォームモデル_
 
-特定の時点におけるフォーム入力要素の値および検証ステータスの「真実を語る資料」です。[リアクティブフォームs](guide/glossary#reactive-forms)を使用する場合、フォームモデルはコンポーネントクラスで明示的に作成されます。[テンプレート駆動型フォーム](guide/glossary#template-driven-forms)を使用する場合、フォームモデルはディレクティブによって暗黙的に作成されます。
+特定の時点におけるフォーム入力要素の値および検証ステータスの「真実を語る資料」です。[リアクティブフォーム](#reactive-forms)を使用する場合、フォームモデルはコンポーネントクラスで明示的に作成されます。[テンプレート駆動型フォーム](#template-driven-forms)を使用する場合、フォームモデルはディレクティブによって暗黙的に作成されます。
 
 リアクティブなフォームとテンプレート駆動のフォームについては、[Angularのフォームのイントロダクション](guide/forms-overview)を参照してください。
 
@@ -394,10 +398,9 @@ _フォームモデル_
 ## form validation
 _フォームバリデーション_
 
-フォームの値が変更されたときに実行され、指定された値が定義された制約に従って正しく完全であるかどうかを報告するチェック。リアクティブフォームは[バリデータ関数]を適用します(guide/form-validation#adding-to-reactive-forms)。テンプレート駆動型フォームでは、[テンプレート駆動型フォームへ追加](gguide/form-validation#adding-to-template-driven-forms)が使用されます。
+フォームの値が変更されたときに実行され、指定された値が定義された制約に従って正しく完全であるかどうかを報告するチェック。リアクティブフォームは[バリデータ関数](guide/form-validation#adding-to-reactive-forms)を適用します。テンプレート駆動型フォームでは、[テンプレート駆動型フォームへ追加](guide/form-validation#adding-to-template-driven-forms)が使用されます。
 
 詳細については、[フォームバリデーション](guide/form-validation)を参照してください。
-
 {@a G}
 
 
@@ -410,24 +413,21 @@ _フォームバリデーション_
 
 ## immutability
 
-値の作成後に値の状態を変更する機能。[リアクティブフォーム](guide/glossary#reactive-forms)は、データ・モデルを変更するたびに、既存のデータ・モデルを変更するのではなく、新しいデータ・モデルを生成するという不変の変更を行います。[テンプレート駆動型フォーム](guide/glossary#template-driven-forms)は、`NgModel`と[双方向データバインディング](guide/glossary#data-binding)を使用して可変の変更を実行し、既存のデータモデルを適切に変更します。
+値の作成後に値の状態を変更する機能。[リアクティブフォーム](#reactive-forms)は、データ・モデルを変更するたびに、既存のデータ・モデルを変更するのではなく、新しいデータ・モデルを生成するという不変の変更を行います。[テンプレート駆動型フォーム](#template-driven-forms)は、`NgModel`と[双方向データバインディング](#data-binding)を使用して可変の変更を実行し、既存のデータモデルを適切に変更します。
 
 {@a injectable}
 
 ## injectable
 
-[依存性注入](guide/glossary#di)メカニズムを使用して依存関係を提供するAngularクラスまたはその他の定義。
-注入可能な[サービス](guide/glossary#service)クラスは、`@Injectable()`(guide/glossary#decorator)[デコレーター]で示されなければなりません。定数値のような他のアイテムも注入可能であり得る。
+[依存性注入](#di)メカニズムを使用して依存関係を提供するAngularクラスまたはその他の定義。
+注入可能な[サービス](#service)クラスは、`@Injectable()`[デコレーター](#decorator)で示されなければなりません。定数値のような他のアイテムも注入可能であり得る。
 
 {@a injector}
 
 ## injector
 
-Angular[依存性注入](guide/glossary#dependency-injection)システムのオブジェクト
-キャッシュ内で名前付き依存関係を検索するか、または依存関係を作成する
-構成済みの[プロバイダ](guide/glossary#provider)を使用します。
-ブートストラップ・プロセスの一部として、NgModules用のインジェクタが自動的に作成される
-コンポーネント階層を通じて継承されます。
+Angular[依存性注入](#dependency-injection)システムのオブジェクトで、キャッシュ内で名前付き依存関係を検出したり、設定済みの[プロバイダ](#provider)を使用して依存関係を作成したりできます。
+NgModules用のインジェクタはブートストラッププロセスの一部として自動的に作成され、コンポーネント階層を通じて継承されます。
 
 * インジェクターは依存関係のシングルトン・インスタンスを提供し、この同じインスタンスを複数のコンポーネントに注入することができます。
 
@@ -441,7 +441,7 @@ Angular[依存性注入](guide/glossary#dependency-injection)システムのオ�
 
 ## input
 
-[ディレクティブ](guide/glossary#template-expression)を定義する場合、ディレクティブ・プロパティの`@Input()`デコレータによって、そのプロパティを[プロパティバインディング](guide/template-syntax#property-binding)の*target*として使用できるようになります。
+[ディレクティブ](#template-expression)を定義する場合、ディレクティブ・プロパティの`@Input()`デコレータによって、そのプロパティを[プロパティバインディング](guide/template-syntax#property-binding)の*target*として使用できるようになります。
 
 データ値は、等号の右側にある[テンプレート式](guide/template-syntax#inputs-outputs)で識別されるデータ・ソースから入力プロパティに渡されます。
 
@@ -449,23 +449,22 @@ Angular[依存性注入](guide/glossary#dependency-injection)システムのオ�
 
 ## interpolation
 
-プロパティ[データバインディング](guide/glossary#data-binding)の形式で、二重中括弧の間の[テンプレート式](guide/glossary#template-expression)はテキストとして描画されます。
+プロパティ[データバインディング](#data-binding)の形式で、二重中括弧の間の[テンプレート式](#template-expression)はテキストとして描画されます。
 この例のように、このテキストを隣接するテキストと連結してから要素プロパティに割り当てるか、要素タグ間に表示することができます。
 
 <code-example language="html" escape="html">
   <label>My current hero is {{hero.name}}</label>
+
 </code-example>
 
 [テンプレート構文](/guide/template-syntax)の[補間とテンプレート式](guide/template-syntax#interpolation)を読んでください。
-
-
 {@a J}
 
 {@a javascript}
 
 ## JavaScript
 
-[ECMAScript](guide/glossary#ecma)と[TypeScript](guide/glossary#typescript)を読んでください。
+[ECMAScript](#ecma)と[TypeScript](#typescript)を読んでください。
 
 
 {@a jit}
@@ -479,7 +478,7 @@ Angular just-in-time(JIT)コンパイラは,ブートストラップの一環と
 JITコンパイルはAngularの`ng build`や`ng service`CLIコマンドを実行する際のデフォルト(AOTコンパイルとは対照的に)であり、開発時には良い選択です。
 JITモードは、ブートストラップのパフォーマンスを妨げる大きなアプリケーション・ペイロードを引き起こすため、本番環境での使用は強くお勧めしません。
 
-[事前コンパイル](guide/glossary#aot)と比較してください。
+[事前コンパイル](#aot)と比較してください。
 
 
 {@a K}
@@ -493,22 +492,22 @@ JITモードは、ブートストラップのパフォーマンスを妨げる�
 _遅延ロード_
 
 アプリケーションを複数のバンドルに分割し、必要に応じてロードすることで、アプリケーションのロード時間を短縮するプロセス。
-たとえば、必要に応じて依存関係を遅延読み込みできます。&mdash;これは、ルートモジュールが必要とし、起動時にロードされる [一括読み込み](guide/glossary#eager-loading)モジュールとは対照的です。
+たとえば、必要に応じて依存関係を遅延読み込みできます。&mdash;これは、ルートモジュールが必要とし、起動時にロードされる [一括読み込み](#eager-loading)モジュールとは対照的です。
 
-[ルーター](guide/glossary#router)では、親ビューがアクティブになっている場合にのみ子ビューの読み込みに遅延読み込みが使用されます。
+[ルーター](#router)では、親ビューがアクティブになっている場合にのみ子ビューの読み込みに遅延読み込みが使用されます。
 同様に、必要に応じてAngularアプリにロードできるカスタム要素を作成することもできる。
 
 {@a library}
 
 ## library
 
-Angularでは、他のAngularアプリに含めることができる機能を提供する[プロジェクト](guide/glossary#project)。
+Angularでは、他のAngularアプリに含めることができる機能を提供する[プロジェクト](#project)。
 
 ライブラリは完全なAngularアプリではなく,独立して実行することはできない。
 
-* ライブラリ開発者は、[Angular CLI](guide/glossary#cli)を使用して、既存の[ワークスペース](guide/glossary#workspace)内の新しいライブラリのための基盤を`generate`することができ、ライブラリを 「npm」 パッケージとして公開することができる。
+* ライブラリ開発者は、[Angular CLI](#cli)を使用して、既存の[ワークスペース](#workspace)内の新しいライブラリのための基盤を`generate`することができ、ライブラリを 「npm」 パッケージとして公開することができる。
 
-* アプリケーション開発者は、[Angular CLI](guide/glossary#cli)を使用して、同じ[ワークスペース](guide/glossary#workspace)内のアプリケーションで使用するために公開されたライブラリを追加できます。
+* アプリケーション開発者は、[Angular CLI](#cli)を使用して、同じ[ワークスペース](#workspace)内のアプリケーションで使用するために公開されたライブラリを追加できます。
 
 [schematic](#schematic)も参照してください。
 
@@ -516,14 +515,14 @@ Angularでは、他のAngularアプリに含めることができる機能を提
 
 ## lifecycle hook
 
-[ディレクティブ](guide/glossary#directive)および[コンポーネント](guide/glossary#component)の作成、更新、および破棄のライフサイクルを利用できるインタフェース。
+[ディレクティブ](#directive)および[コンポーネント](#component)の作成、更新、および破棄のライフサイクルを利用できるインタフェース。
 
 各インタフェースには単一のフックメソッドがあり、その名前はインタフェース名の先頭に 「ng」 が付きます。
 たとえば、 「OnInit」 インタフェースには、 「ngOnInit」 という名前のフックメソッドがあります。
 
 Angularはこれらのフックメソッドを次の順序で呼び出します。
 
-* `ngOnChanges`:[input](guide/glossary#input)/[output](guide/glossary#output)バインド値が変更されたとき。
+* `ngOnChanges`:[input](#input)/[output](#output)バインド値が変更されたとき。
 * `ngOnInit`:最初の`ngOnChanges`.。
 * `ngDoCheck`:開発者のカスタム変更検出。
 * `ngAfterContentInit`:コンポーネントの内容を初期化した後。
@@ -545,9 +544,9 @@ Angularはこれらのフックメソッドを次の順序で呼び出します�
 
 JavaScript(ECMAScript)では、各ファイルはモジュールであり、ファイル内で定義されたすべてのオブジェクトはそのモジュールに属します。オブジェクトをエクスポートしてパブリックにしたり、パブリック・オブジェクトをインポートして他のモジュールで使用したりできます。
 
-AngularはJavaScriptモジュール(ライブラリとも呼ばれます。)のコレクションとして出荷されている。各Angularライブラリ名は`@angular`で始まります。Angularライブラリを [npm package manager] (https://docs.npmjs.com/getting-started/what-is-npm)でインストールし、その一部をJavaScriptの`import`宣言でインポートします。
+AngularはJavaScriptモジュール(ライブラリとも呼ばれます。)のコレクションとして出荷されている。各Angularライブラリ名は`@angular`で始まります。Angularライブラリを [npm package manager](https://docs.npmjs.com/about-npm/index.html)でインストールし、その一部をJavaScriptの`import`宣言でインポートします。
 
-[NgModule](guide/glossary#ngmodule)と比較してください。
+[NgModule](#ngmodule)と比較してください。
 
 
 {@a N}
@@ -556,12 +555,12 @@ AngularはJavaScriptモジュール(ライブラリとも呼ばれます。)の�
 
 ## NgModule
 
-`@NgModule()`[デコレーター](guide/glossary#decorator)で始まるクラス定義。アプリケーションドメイン、ワークフロー、または密接に関連する機能セット専用のコードブロックを宣言し、そのマニフェストとして機能します。
+`@NgModule()`[デコレーター](#decorator)で始まるクラス定義。アプリケーションドメイン、ワークフロー、または密接に関連する機能セット専用のコードブロックを宣言し、そのマニフェストとして機能します。
 
-[JavaScriptモジュール](guide/glossary#module)と同様に、NgModuleは他のNgModulesで使用する機能をエクスポートしたり、他のNgModulesからパブリック機能をインポートしたりできます。
-NgModuleクラスのメタデータは、アプリケーションが使用するコンポーネント、ディレクティブ、およびパイプを、インポートとエクスポートの一覧と共に収集します。[declarable](guide/glossary#declarable)も参照してください。
+[JavaScriptモジュール](#module)と同様に、NgModuleは他のNgModulesで使用する機能をエクスポートしたり、他のNgModulesからパブリック機能をインポートしたりできます。
+NgModuleクラスのメタデータは、アプリケーションが使用するコンポーネント、ディレクティブ、およびパイプを、インポートとエクスポートの一覧と共に収集します。[declarable](#declarable)も参照してください。
 
-通常、NgModulesには、エクスポートされたものが定義されているファイルの名前が付けられます。たとえば、Angular[日付パイプ](api/common/DatePipe)クラスは `date_pipe.ts`ファイルの中の`date_pipe`という名前のフィーチャモジュールに属しています。これらは、`@angular/core`などのAngular[スコープ付きパッケージ](guide/glossary#scoped-package)からインポートします。
+通常、NgModulesには、エクスポートされたものが定義されているファイルの名前が付けられます。たとえば、Angular[日付パイプ](api/common/DatePipe)クラスは `date_pipe.ts`ファイルの中の`date_pipe`という名前のフィーチャモジュールに属しています。これらは、`@angular/core`などのAngular[スコープ付きパッケージ](#scoped-package)からインポートします。
 
 すべてのAngularアプリケーションにはルートモジュールがあります。慣例により、このクラスは `AppModule` と呼ばれ、 `app.module.ts` という名前のファイルに格納されます。
 
@@ -571,7 +570,7 @@ NgModuleクラスのメタデータは、アプリケーションが使用する
 
 ## npm package
 
-[npmパッケージマネージャー] (https://docs.npmjs.com/getting-started/what-is-npm)はAngularモジュールとライブラリの配布とロードに使用されます。
+[npmパッケージマネージャー](https://docs.npmjs.com/getting-started/what-is-npm)はAngularモジュールとライブラリの配布とロードに使用されます。
 
 Angularがどのように[npmパッケージ](guide/npm-packages)を使っているかを学んでください。
 
@@ -581,7 +580,7 @@ Angularがどのように[npmパッケージ](guide/npm-packages)を使ってい
 
 ## observable
 
-複数の値を生成し、[subscriber](guide/glossary#subscriber)にプッシュします。
+複数の値を生成し、[subscriber](#subscriber)にプッシュします。
 Angular全体の非同期イベント処理に使用されます。
 observableを実行するには、`subscribe()`メソッドを使ってobservableにsubscribingし、新しい値、エラー、完了の通知のためのコールバックを渡します。
 
@@ -596,15 +595,15 @@ Angularは[Reactive Extensions(RxJS)]というサードパーティのライブ�
 
 ## observer
 
-[observable](guide/glossary#observable)のために`subscribe()`メソッドに渡されるオブジェクト。
-このオブジェクトは、[subscriber](guide/glossary#subscriber)のコールバックを定義します。
+[observable](#observable)のために`subscribe()`メソッドに渡されるオブジェクト。
+このオブジェクトは、[subscriber](#subscriber)のコールバックを定義します。
 
 {@a output}
 
 ## output
 
-[ディレクティブ](guide/glossary#directive)を定義する場合、ディレクティブのプロパティに`@Output{}`デコレータを使用すると、そのプロパティを[イベントバインディング](guide/template-syntax#event-binding)の*target*として使用できます。
-等号の右側の[テンプレート式](guide/glossary#template-expression)で識別される受信側に対して、このプロパティの*out*イベント・ストリームが送信されます。
+[ディレクティブ](#directive)を定義する場合、ディレクティブのプロパティに`@Output{}`デコレータを使用すると、そのプロパティを[イベントバインディング](guide/template-syntax#event-binding)の*target*として使用できます。
+等号の右側の[テンプレート式](#template-expression)で識別される受信側に対して、このプロパティの*out*イベント・ストリームが送信されます。
 
 詳細については、[入力プロパティと出力プロパティ](guide/template-syntax#inputs-outputs)を参照してください。
 
@@ -616,7 +615,7 @@ Angularは[Reactive Extensions(RxJS)]というサードパーティのライブ�
 ## pipe
 _パイプ_
 
-`@Pipe{}`デコレータが先行し、入力値を出力値に変換して[ビュー](guide/glossary#view)に表示する関数を定義するクラス。Angularはさまざまなパイプを定義し、新しいパイプを定義できます。
+`@Pipe{}`デコレータが先行し、入力値を出力値に変換して[ビュー](#view)に表示する関数を定義するクラス。Angularはさまざまなパイプを定義し、新しいパイプを定義できます。
 
 詳細については、[パイプ](guide/pipes)を参照してください。
 
@@ -660,13 +659,13 @@ Angular CLIでは、CLIコマンドスタンドアロンアプリケーション
 
 ## provider
 
-[`Provider`](api/core/Provider)インタフェースのいずれかを実装するオブジェクト。プロバイダ・オブジェクトは、[DIトークン](guide/glossary#token)に関連付けられた注入可能な依存関係を取得する方法を定義します。
-[injector](guide/glossary#injector)は、それを必要とするクラスのためにプロバイダを使用して依存関係の新しいインスタンスを作成します。
+[`Provider`](api/core/Provider)インタフェースのいずれかを実装するオブジェクト。プロバイダ・オブジェクトは、[DIトークン](#token)に関連付けられた注入可能な依存関係を取得する方法を定義します。
+[injector](#injector)は、それを必要とするクラスのためにプロバイダを使用して依存関係の新しいインスタンスを作成します。
 
 Angularは,Angularが定義するサービスに対して,すべてのインジェクタに自身のプロバイダを登録します。
 アプリケーションが必要とするサービスについて、独自のプロバイダを登録できます。
 
-[サービス](guide/glossary#service)、[依存性注入](guide/glossary#di)も参照してください。
+[サービス](#service)、[依存性注入](#di)も参照してください。
 
 詳細については、[依存性注入](guide/dependency-injection)を参照してください。
 
@@ -681,7 +680,7 @@ Angularは,Angularが定義するサービスに対して,すべてのインジ�
 _リアクティブフォーム_
 
 コンポーネント内のコードを通じてAngularフォームを構築するためのフレームワーク。
-代替案は、 [テンプレート駆動型フォーム](guide/glossary#template-driven-forms)です。
+代替案は、 [テンプレート駆動型フォーム](#template-driven-forms)です。
 
 リアクティブフォームを使用する場合:
 
@@ -699,11 +698,11 @@ _リアクティブフォーム_
 ## router
 _ルーター_
 
-Angularアプリ内で状態間のナビゲーションと[ビュー](guide/glossary#view)を設定し実装するツール。
+Angularアプリ内で状態間のナビゲーションと[ビュー](#view)を設定し実装するツール。
 
-「ルーター」 モジュールは、アプリケーションビューをナビゲートするために必要なサービスプロバイダと指示を提供する[NgModule](guide/glossary#ngmodule)です。[routing component](guide/glossary#routing-component)は、 「ルータ」 モジュールをインポートするものであり、そのテンプレートは、ルータによって生成されたビューを表示することができる `RouterOutlet` 要素を含む。
+「ルーター」 モジュールは、アプリケーションビューをナビゲートするために必要なサービスプロバイダと指示を提供する[NgModule](#ngmodule)です。[routing component](#routing-component)は、 「ルータ」 モジュールをインポートするものであり、そのテンプレートは、ルータによって生成されたビューを表示することができる `RouterOutlet` 要素を含む。
 
-ルーターは、ページ間のナビゲーションではなく、単一のページ上のビュー間のナビゲーションを定義します。URLに似たリンクを解釈して、作成または破棄するビュー、ロードまたはアンロードするコンポーネントを決定します。Angularアプリで[遅延ローディング](guide/glossary#lazy-load)を利用することができる。
+ルーターは、ページ間のナビゲーションではなく、単一のページ上のビュー間のナビゲーションを定義します。URLに似たリンクを解釈して、作成または破棄するビュー、ロードまたはアンロードするコンポーネントを決定します。Angularアプリで[遅延ローディング](#lazy-load)を利用することができる。
 
 詳細については、[ルーティングと画面遷移](guide/router)を参照してください。
 
@@ -712,13 +711,13 @@ Angularアプリ内で状態間のナビゲーションと[ビュー](guide/glos
 ## router outlet
 _ルーターアウトレット_
 
-ルーティングコンポーネントのテンプレートでプレースホルダとして機能する[directive](guide/glossary#directive)です。Angularは、現在のルータの状態に基づいてテンプレートを動的にレンダリングします。
+ルーティングコンポーネントのテンプレートでプレースホルダとして機能する[directive](#directive)です。Angularは、現在のルータの状態に基づいてテンプレートを動的にレンダリングします。
 
 {@a router-component}
 
 ## routing component
 
-テンプレートに `RouterOutlet` ディレクティブを持つAngular[コンポーネント](guide/glossary#component)です。ルータナビゲーションに基づいたビューを表示します。
+テンプレートに `RouterOutlet` ディレクティブを持つAngular[コンポーネント](#component)です。ルータナビゲーションに基づいたビューを表示します。
 
 詳細については、[ルーティングと画面遷移](guide/router)を参照してください。
 
@@ -737,7 +736,7 @@ _セマンティック_
 
 ファイルとコードを作成、変更、リファクタリング、または移動することによって、プログラミングプロジェクトを生成または変換する方法を定義するスキャフォールドライブラリです。
 セマンティックは、[rules](#rule)と呼ばれる仮想ファイルシステム上で動作する[ファイルツリー](#file-tree)を定義します。
-[Angular　CLI](guide/glossary#cli)では、セマンティックを使用して、[Angular projects](ガイド/用語集#project)およびプロジェクトの一部を生成および修正します。
+[Angular　CLI](#cli)では、セマンティックを使用して、[Angular projects](#project)およびプロジェクトの一部を生成および修正します。
 
 * AngularはCLIで使用するための一連のセマンティックを提供しています。[Angular　CLIコマンドリファレンス](cli)を参照してください。[`ng add`](cli/add)コマンドは、プロジェクトにライブラリを追加する一部としてセマンティックを実行します。[「ng generate」 と入力します。](cli/generate)コマンドは、スケマティック表現を実行して、アプリケーション、ライブラリ、およびAngularコード構成を作成します。
 
@@ -769,6 +768,7 @@ NgModulesは、名前がAngular*scope name*`@angular`で始まるスコープ付
 通常のパッケージをインポートする場合と同じ方法で、スコープ指定されたパッケージをインポートします。
 
 <code-example path="architecture/src/app/app.component.ts" linenums="false" header="architecture/src/app/app.component.ts (import)" region="import">
+
 </code-example>
 
 {@a server-side-rendering}
@@ -784,17 +784,16 @@ _サーバーサイドレンダリング_
 
 サーバーサイドレンダリングのアプリを簡単に準備するには、[CLI](#cli)を使って[Angular Universal](#universal)ツールを実行し、`@nguniversal/express-engine`(#universal)を使用することで簡単に準備できます。。
 
-
 {@a service}
 
 ## service
 
-Angularでは、非UIロジックとアプリケーション全体で再利用可能なコードをカプセル化する[@Injectable()](guide/glossary#injectable)デコレータを持つクラスです。
+Angularでは、非UIロジックとアプリケーション全体で再利用可能なコードをカプセル化する[@Injectable()](#injectable)デコレータを持つクラスです。
 Angularはモジュール性と再利用性を向上させるためにコンポーネントとサービスを区別しています。
 
-`@Injectable()` メタデータを使用すると、サービス・クラスを[依存性注入](guide/glossary#di)メカニズムで使用することができます。
-注入可能なクラスは、[プロバイダ](guide/glossary#provider)によってインスタンス化されます。
-[インジェクター](guide/glossary#injector)はプロバイダのリストを保持し、コンポーネントやその他のサービスで必要なサービスインスタンスを提供するために使用します。
+`@Injectable()` メタデータを使用すると、サービス・クラスを[依存性注入](#di)メカニズムで使用することができます。
+注入可能なクラスは、[プロバイダ](#provider)によってインスタンス化されます。
+[インジェクター](#injector)はプロバイダのリストを保持し、コンポーネントやその他のサービスで必要なサービスインスタンスを提供するために使用します。
 
 詳細については、[サービスと依存性の注入のイントロダクション](guide/architecture-services)を参照してください。
 
@@ -803,7 +802,7 @@ Angularはモジュール性と再利用性を向上させるためにコンポ�
 
 ## structural directives
 
-[directive](guide/glossary#directive)のカテゴリ。DOMおよびmdashを変更して、要素とその子を追加、削除、または操作することで、HTMLレイアウトを形成します。
+[directive](#directive)のカテゴリ。DOMおよびmdashを変更して、要素とその子を追加、削除、または操作することで、HTMLレイアウトを形成します。
 
 詳細については、[構造ディレクティブ](guide/structural-directives)を参照してください。
 
@@ -811,11 +810,11 @@ Angularはモジュール性と再利用性を向上させるためにコンポ�
 
 ## subscriber
 
-パブリッシュされる値またはメッセージを取得または生成する方法を定義する関数。この関数は、消費者が[observable](guide/glossary#observable)の `subscribe()`メソッドを呼び出したときに実行されます。
+パブリッシュされる値またはメッセージを取得または生成する方法を定義する関数。この関数は、消費者が[observable](#observable)の `subscribe()`メソッドを呼び出したときに実行されます。
 
 observableにサブスクライブすると、observableの実行がトリガーされ、コールバックが関連付けられ、サブスクリプションを解除できる `Subscription`オブジェクトが作成されます。
 
-`subscribe()`メソッドは、observableが配信できる通知のタイプごとにひとつずつ、最大三つのコールバックを持つJavaScriptオブジェクト([observer](guide/glossary#observer)と呼ばれています)を受け取ります。
+`subscribe()`メソッドは、observableが配信できる通知のタイプごとにひとつずつ、最大三つのコールバックを持つJavaScriptオブジェクト([observer](#observer)と呼ばれています)を受け取ります。
 
 * 「next」 通知は、数値、文字列、オブジェクトなどの値を送信します。
 * 「error」 通知は、JavaScriptエラーまたは例外を送信します。
@@ -847,10 +846,10 @@ Architectツールは一連のビルダーを提供します。[`ng new`コマ�
 
 コンポーネントの[view](#view)の描画方法を定義するコンポーネントに関連付けられたコードです。
 
-テンプレートは、単純なHTMLとAngular[データバインディング](guide/glossary#data-binding)構文、[ディレクティブ](guide/glossary#directive)、および[テンプレート式](guide/glossary#template-expression)(論理構造)などです。
+テンプレートは、単純なHTMLとAngular[データバインディング](#data-binding)構文、[ディレクティブ](#directive)、および[テンプレート式](#template-expression)(論理構造)などです。
 Angular要素は、ページが表示される前にHTML要素を変更する値を挿入または計算します。
 
-テンプレートは、`@Component`()[デコレーター](ガイド/用語集#decorator)を介して[構成部品](ガイド/用語集#コンポーネント)クラスに関連付けられます。HTMLは、"template" プロパティーの値としてインラインで提供することも、"templateUrl"プロパティーを介してリンクされた別のHTMLファイルで提供することもできます。
+テンプレートは、`@Component`()[デコレーター](#decorator)を介して[構成部品](#component)クラスに関連付けられます。HTMLは、"template" プロパティーの値としてインラインで提供することも、"templateUrl"プロパティーを介してリンクされた別のHTMLファイルで提供することもできます。
 
 `TemplateRef`オブジェクトによって表される追加のテンプレートは、複数のコンポーネントから参照できる代替ビューまたは*埋め込み*ビューを定義できます。
 
@@ -859,12 +858,12 @@ Angular要素は、ページが表示される前にHTML要素を変更する値
 ## template-driven forms
 
 ビュー内のHTMLフォームと入力要素を使用してAngularフォームを構築するためのフォーマットです。
-代替フォーマットは、[リアクティブフォーム](guide/glossary#data-binding)フレームワークを使用します。
+代替フォーマットは、[リアクティブフォーム](#data-binding)フレームワークを使用します。
 
 テンプレート駆動フォームを使用する場合:
 
 * 「真実の情報源」がテンプレートです。検証は、個々の入力要素の属性を使用して定義されます。
-* [双方向バインド](guide/glossary#data-binding)と`ngModel`は、コンポーネントモデルをユーザの入力エレメントへのエントリと同期化します。
+* [双方向バインド](#data-binding)と`ngModel`は、コンポーネントモデルをユーザの入力エレメントへのエントリと同期化します。
 * Angularは舞台裏で`name`属性および双方向バインディングの設定をもつ各input要素のために、新しいコントロールを生成します。
 * 関連するAngularディレクティブにはすべて`ng`接頭辞が付けられています。たとえば、`ngForm`、`ngModel`、そして`ngModelGroup`などです。
 代替手段はリアクティブフォームです。両方の形式のアプローチの紹介と比較については、[Angularのフォームのイントロダクション](guide/forms-overview)を参照。
@@ -873,7 +872,7 @@ Angular要素は、ページが表示される前にHTML要素を変更する値
 
 ## template expression
 
-Angularが[データバインディング](guide/glossary#data-binding)内で評価するTypeScriptのような構文です。
+Angularが[データバインディング](#data-binding)内で評価するTypeScriptのような構文です。
 
 テンプレート式の記述方法については、[式のコンテキスト](guide/template-syntax#式のコンテキスト)を参照してください。
 
@@ -881,7 +880,7 @@ Angularが[データバインディング](guide/glossary#data-binding)内で評
 
 ## token
 
-効率的なテーブル検索に使用される不透明な識別子。Angularでは、[DIトークン](guide/glossary#di-token)を使用して[依存性注入](guide/glossary#di)システム内の依存関係の[プロバイダ](guide/glossary#provider)を検索します。
+効率的なテーブル検索に使用される不透明な識別子。Angularでは、[DIトークン](#di-token)を使用して[依存性注入](#di)システム内の依存関係の[プロバイダ](#provider)を検索します。
 
 {@a transpile}
 
@@ -905,7 +904,8 @@ TypeScriptはコンパイル時の型チェックと強力なツールサポー�
 多くのコードエディタとIDEは、TypeScriptをネイティブまたはプラグインでサポートしています。
 
 Angular開発においてTypeScriptは推奨される言語です。
-TypeScriptの詳細については、[typescriptlang.org] (http://www.typescriptlang.org/)を参照してください。
+TypeScriptの詳細については、[typescriptlang.org](http://www.typescriptlang.org/)を参照してください。
+
 
 {@a U}
 
@@ -927,23 +927,23 @@ Angularアプリケーションの[サーバサイドレンダリング](#server
 ## view
 
 一緒に作成および破棄できる表示要素の最小グループです。
-Angularは一つ以上の[ディレクティブ](guide/glossary#directive)、特に[component](guide/glossary#component)ディレクティブとそれに付随する[テンプレート](guide/glossary#template)の制御下でビューをレンダリングします。
+Angularは一つ以上の[ディレクティブ](#directive)、特に[component](#component)ディレクティブとそれに付随する[テンプレート](#template)の制御下でビューをレンダリングします。
 
 ビューは、特にコンポーネントに関連付けられた `ViewRef` インスタンスによって表されます。
 コンポーネントに属するビューは、*ホストビュー* と呼ばれます。
-ビューは通常、[ビュー階層](guide/glossary#view-tree)に収集されます。
+ビューは通常、[ビュー階層](#view-tree)に収集されます。
 
 ビュー内の要素のプロパティは、ユーザのアクションに応じて動的に変更できます。
 ビュー内の要素の構造(番号順)はできません。
 要素の構造を変更するには、ビューコンテナ内でネストされたビューを挿入、移動、削除します。
 
-ビュー階層は、ユーザーがアプリケーション内をナビゲートするときに動的にロードおよびアンロードでき、通常は[ルーター](guide/glossary#router)の制御下にあります。
+ビュー階層は、ユーザーがアプリケーション内をナビゲートするときに動的にロードおよびアンロードでき、通常は[ルーター](#router)の制御下にあります。
 
 {@a view-tree}
 
 ## view hierarchy
 
-1つの単位として機能する関連ビューのツリー。ルートビューは、コンポーネントの*ホストビュー*です。ホストビューは、ホストコンポーネントのアンカー要素にアタッチされた*ビューコンテナ*(`ViewContainerRef')に収集された*埋め込みビュー*のツリーのルートにすることができます。ビュー階層は、Angularの変化検出の重要な部分です。
+1つの単位として機能する関連ビューのツリーです。ルートビューは、コンポーネントの*ホストビュー*です。ホストビューは、ホストコンポーネントのアンカー要素にアタッチされた*ビューコンテナ*(`ViewContainerRef')に収集された*埋め込みビュー*のツリーのルートにすることができます。ビュー階層は、Angularの変化検出の重要な部分です。
 
 ビュー階層は、コンポーネント階層を示すものではありません。特定の階層のコンテキストに埋め込まれたビューは、他のコンポーネントのホストビューにすることができます。これらのコンポーネントは、ホストコンポーネントと同じNgModule内にあっても、他のNgModuleに属していてもかまいません。
 
@@ -952,13 +952,13 @@ Angularは一つ以上の[ディレクティブ](guide/glossary#directive)、特
 
 ## web component
 
-[カスタムエレメント](guide/glossary#custom-element)を参照してください。
+[カスタムエレメント](#custom-element)を参照してください。
 
 {@a workspace}
 
 ## workspace
 
-Angular[projects](#project) (つまり、アプリケーションとライブラリ)のコレクションで、通常は単一のソースコントロールリポジトリに配置される[Angular CLI](#cli)を利用する(例:[git] (https://git-scm.com/)。
+Angular[projects](#project) (つまり、アプリケーションとライブラリ)のコレクションで、通常は単一のソースコントロールリポジトリに配置される[Angular CLI](#cli)を利用する(例:[git](https://git-scm.com/)。
 
 [CLI](#cli)の[`ng new` コマンド](cli/new)は、ファイル・システム・ディレクトリ(CLI/新規)を作成します(「ワークスペースルート」)。
 また、ワークスペースのルートには、ワークスペース[構成ファイル](#configuration)(`angular.json`)が作成され、デフォルトでは、同じ名前の初期アプリケーションプロジェクトが作成されます。
@@ -994,9 +994,10 @@ Angular[projects](#project) (つまり、アプリケーションとライブラ
 
 一連の非同期タスクの実行コンテキスト。イベント処理、promise、リモートサーバーへの呼び出しなどの非同期操作を含むアプリケーションのデバッグ、プロファイリング、およびテストに役立ちます。
 
-AngularアプリはZone内で動作し、データの変更をチェックし、[データバインディング](guide/glossary#data-binding)を解決することで表示される情報を更新することで非同期イベントに応答できます。
+AngularアプリはZone内で動作し、データの変更をチェックし、[データバインディング](#data-binding)を解決することで表示される情報を更新することで非同期イベントに応答できます。
 
 Zoneクライアントは、非同期操作の前後にアクションを実行できます。
 
-Zoneの詳細については、ここを参照してください。
-[Brian Fordのビデオ] (https://www.youtube.com/watch?v=3IqtmUscE_U)
+Zoneの詳細については、以下を参照してください。
+
+[Brian Fordのビデオ](https://www.youtube.com/watch?v=3IqtmUscE_U)

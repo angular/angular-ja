@@ -1,33 +1,33 @@
 # App shell
 
-App shell is a way to render a portion of your application via a route at build time.
-It can improve the user experience by quickly launching a static rendered page (a skeleton common to all pages) while the browser downloads the full client version and switches to it automatically after the code loads.
+App shell は、ビルド時にひとつの経路を介してアプリケーションの一部をレンダリングする方法です。
+ブラウザが完全なクライアントバージョンをダウンロードしてそのコードをロードした後に自動的に切り替えるまでの間、静的にレンダリングされたページ (すべてのページに共通のスケルトン) をすばやく起動することで、ユーザー体験を向上させることができます。
 
-This gives users a meaningful first paint of your application that appears quickly because the browser can simply render the HTML and CSS without the need to initialize any JavaScript.
+これにより、JavaScript を初期化しなくてもブラウザで HTML と CSS を簡単にレンダリングできるため、ユーザーはアプリケーションの意味のある最初の描画をすばやく表示できます。
 
-Learn more in [The App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell).
+[App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell) でもっと学びましょう。
 
-## Step 1: Prepare the application
+## ステップ 1: アプリケーションを準備する
 
-You can do this with the following CLI command:
+これを行うには、次の CLI コマンドを使用します。
 <code-example format="." language="bash" linenums="false">
 ng new my-app --routing
 </code-example>
 
-For an existing application, you have to manually add the `RouterModule` and defining a `<router-outlet>` within your application.
+既存のアプリケーションでは、手動で `RouterModule` を追加して、アプリケーション内で `<router-outlet>` を定義する必要があります。
 
-## Step 2: Create the app shell
+## ステップ 2: App shell を作成する
 
-Use the CLI to automatically create the app shell.
+CLI を使用して App shell を自動的に作成します。
 
 <code-example format="." language="bash" linenums="false">
 ng generate app-shell --client-project my-app --universal-project server-app
 </code-example>
 
-* `my-app` takes the name of your client application.
-* `server-app` takes the name of the Universal (or server) application.
+* `my-app` はクライアントアプリケーションの名前を取ります。
+* `server-app` はユニバーサル (またはサーバー) アプリケーションの名前を取ります。
 
-After running this command you will notice that the `angular.json` configuration file has been updated to add two new targets, with a few other changes.
+このコマンドを実行した後、`angular.json` 設定ファイルが更新されて、他にいくつかの変更が加わり2つの新しいターゲットが追加されていることに気付くでしょう。
 
 <code-example format="." language="none" linenums="false">
 "server": {
@@ -48,12 +48,12 @@ After running this command you will notice that the `angular.json` configuration
 }
 </code-example>
 
-## Step 3: Verify the app is built with the shell content
+## ステップ 3: アプリがシェルコンテンツで構築されていることを確認します
 
-Use the CLI to build the `app-shell` target.
+CLI を使って `app-shell` ターゲットを構築します。
 
 <code-example format="." language="bash" linenums="false">
 ng run my-app:app-shell
 </code-example>
 
-To verify the build output, open `dist/my-app/index.html`. Look for default text `app-shell works!` to show that the app shell route was rendered as part of the output.
+ビルド出力を確認するには、`dist/my-app/index.html` を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。

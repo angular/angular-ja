@@ -26,7 +26,7 @@ StackBlitzプロジェクトはデフォルトで公開されているため、�
 
 アプリケーションをローカルまたは本番用にビルドするには、StackBlitzプロジェクトからソースコードをダウンロードする必要があります。 ファイルをダウンロードするには、プロジェクトの横にある左メニューの `Download Project` アイコンをクリックします。
 
-ソースコードをダウンロードして解凍したら、 [Angularコンソール](https://angularconsole.com "Angular Console web site") を使用してアプリケーションを実行するか、NodeをインストールしてAngular CLIをインストールします。
+ソースコードをダウンロードして解凍したら、 [Angularコンソール](https://angularconsole.com "Angular Console web site") を使用してアプリケーションを実行するか、`Node.js`をインストールしてAngular CLIをインストールします。
 
 ターミナルから、Angular CLIをグローバルにインストールします:
 
@@ -52,7 +52,7 @@ ng build --prod
 
 #### ビルドしたプロジェクトをホストする
 
-`dist/my-project-name` フォルダ内のファイルは静的であり、ファイルを提供できる任意のWebサーバー（node、Java、.NET）または任意のバックエンド（Firebase、Google Cloud、App Engine、その他）でホストできます。
+`dist/my-project-name` フォルダ内のファイルは静的であり、ファイルを提供できる任意のWebサーバー（`Node.js`、Java、.NET）または任意のバックエンド（Firebase、Google Cloud、App Engine、その他）でホストできます。
 
 ### FirebaseでAngularアプリをホストする
 

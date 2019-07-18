@@ -5,9 +5,9 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 ## 全体的なJSONの構成
 
-`angular.json` のトップ階層では、いくつかのプロパティからワークスペースを設定し、`projects` セクションにはプロジェクトごとのオプションを設定します。CLI defaults set at the workspace level can be overridden by defaults set at the project level, and defaults set at the project level can be overridden on the command line.
+`angular.json` のトップ階層では、いくつかのプロパティからワークスペースを設定し、`projects` セクションにはプロジェクトごとのオプションを設定します。 ワークスペースレベルで設定されたCLIのデフォルトは、プロジェクトレベルで設定されたデフォルトによって上書きされ、プロジェクトレベルで設定されたデフォルトはコマンドラインで上書きされます。
 
-The following properties, at the top level of the file, configure the workspace.
+ファイルの最上位にある次のプロパティは、ワークスペースを設定します。
 
 * `version`: 設定ファイルのバージョン
 * `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
@@ -64,18 +64,18 @@ The following properties, at the top level of the file, configure the workspace.
 | `architect`     | このプロジェクトでArchitectが使用するビルダーのターゲットのためのデフォルト設定です。 |
 
 {@a schematics}
-## Generation schematics
+## 生成 schematics
 
-Angular generation [schematics](guide/glossary#schematic) are instructions for modifying a project by adding files or modifying existing files.
-Individual schematics for the default Angular CLI `ng generate` sub-commands are collected in the package `@angular`.
-Specify the schematic name for a subcommand in the format `schematic-package:schematic-name`;
-for example, the schematic for generating a component is `@angular:component`.
+Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
+デフォルトのAngular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@angular` にまとめられています。
+サブコマンドのschematicの名称を、 `schematic-package:schematic-name` の形式で指定します;
+たとえば、コンポーネントを生成するためのschematicは `@angular:component` です。
 
-The JSON schemas for the default schematics used by the CLI to generate projects and parts of projects are collected in the package [`@schematics/angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/schematics/angular/application/schema.json).
-The schema describes the options available to the CLI for each of the `ng generate` sub-commands, as shown in the `--help` output.
+プロジェクトおよびプロジェクトの一部を生成するためにCLIによって使用されるデフォルトのschematicsのJSONスキーマは、 [`@schematics/angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/schematics/angular/application/schema.json) パッケージに集められています。
+スキーマは、 `--help` の出力に示されているように、各 `ng generate` サブコマンドに対してCLIで使用可能なオプションを記述したものです。
 
-The fields given in the schema correspond to the allowed argument values and defaults for the CLI sub-command options.
-You can update your workspace schema file to set a different default for a sub-command option.
+スキーマに示されているフィールドは、CLIサブコマンドオプションの許容される引数の値、およびデフォルトに対応しています。
+ワークスペーススキーマファイルを更新して、サブコマンドオプションに別のデフォルトを設定できます。
 
 {@a architect}
 
@@ -120,7 +120,8 @@ Architectは、提供されている設定にしたがって、コンパイル�
 
 * `architect/app-shell` セクションでは `ng run <project>:app-shell` コマンドを使用してprogressive web app (PWA)のためのApp Shellを作成する際のデフォルトを設定します。
 
-一般的に、デフォルトが設定できるアプションは、各コマンドの [CLIリファレンス](cli) にリストされているコマンドオプションに対応しています。設定ファイル内のすべてのオプションは、ダッシュケースではなく [キャメルケース](guide/glossary#case-conventions) を使用しなければならないことに注意してください。
+一般的に、デフォルトが設定できるアプションは、各コマンドの [CLIリファレンス](cli) にリストされているコマンドオプションに対応しています。
+設定ファイル内のすべてのオプションは、ダッシュケースではなく [キャメルケース](guide/glossary#case-conventions) を使用しなければならないことに注意してください。
 
 {@a build-target}
 
@@ -136,12 +137,12 @@ Architectは、提供されている設定にしたがって、コンパイル�
 
 {@a default-build-targets}
 
-### Default build targets
+### デフォルトのビルドターゲット
 
-Angular defines default builders for use with the Architect tool and `ng run` command.
-The default builders provide implementations that use a particular tool to perform a complex operation.
+Angularは、Architectツールと `ng run` コマンドで使用するデフォルトビルダーを定義します。
+デフォルトビルダーは、複雑な操作を実行するために特定のツールを使用する実装を提供します。
 
-The JSON schemas that the define the options and defaults for each of these default builders are collected in the [`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/angular/cli/lib/config/schema.json) package. The schemas configure options for the following Architect build targets:
+これらの各デフォルトビルダーのオプションとデフォルトを定義するJSONスキーマは、 [`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/angular/cli/lib/config/schema.json) パッケージに集められています。 スキーマは、次のArchitectビルドターゲットのオプションを構成します。
 
 * app-shell
 * browser
@@ -177,10 +178,10 @@ The JSON schemas that the define the options and defaults for each of these defa
 | `scripts`                  | プロジェクトのグローバルコンテキストに追加する、JavaScriptのスクリプトファイルを含むオブジェクトです。スクリプトはあたかもそれらが、 `index.html` の中の `<script>` タグに記述されたかのように正確にロードします。 |
 | `budgets`                  | 出力が閾値のサイズに達っしたり越えたりしたときに、警告やエラーを報告するようにビルダーを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください（ `test` セクションにはありません）。 |
 
-## Project asset configuration
+## プロジェクトのアセットの設定
 
-Each `build` target configuration can include an `assets` array that lists files or folders you want to copy as-is when building your project.
-By default, the `src/assets/` folder and `src/favicon.ico` are copied over.
+各 `build` ターゲット設定には、プロジェクトをビルドするときにそのままコピーするファイルまたはフォルダを一覧表示する `assets` 配列を含めることができます。
+デフォルトでは、 `src/assets/` フォルダーと `src/favicon.ico` がコピーされます。
 
 <code-example format="." language="json" linenums="false">
 "assets": [
@@ -189,17 +190,17 @@ By default, the `src/assets/` folder and `src/favicon.ico` are copied over.
 ]
 </code-example>
 
-To exclude an asset, you can remove it from the assets configuration.
+アセットを除外するには、アセットの設定からそれを削除します。
 
-You can further configure assets to be copied by specifying assets as objects, rather than as simple paths relative to the workspace root.
-A asset specification object can have the following fields.
+ワークスペースのルートを基準にした単純なパスとしてではなく、アセットをオブジェクトとして指定することで、アセットをコピーするように構成できます。
+アセットを指定したオブジェクトは、次のフィールドをもつことができます。
 
-* `glob`:  A [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) using `input` as base directory.
-* `input`: A path relative to the workspace root.
-* `output`: A path relative to `outDir` (default is `dist/`*project-name*). Because of the security implications, the CLI never writes files outside of the project output path.
-* `ignore`: A list of globs to exclude.
+* `glob`: `input` をベースディレクトリとして使用する [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) 。
+* `input`: ワークスペースのルートからの相対パス。
+* `output`: `outDir` からの相対パス（デフォルトは`dist/`*project-name*）。 セキュリティへの影響のため、CLIはプロジェクトの出力パスの外側にファイルを書き込むことはありません。
+* `ignore`: 除外するglobsのリスト。
 
-For example, the default asset paths can be represented in more detail using the following objects.
+たとえば、デフォルトのアセットのパスは、次のオブジェクトを使用してより詳細に表すことができます。
 
 <code-example format="." language="json" linenums="false">
 "assets": [
@@ -208,8 +209,8 @@ For example, the default asset paths can be represented in more detail using the
 ]
 </code-example>
 
-You can use this extended configuration to copy assets from outside your project.
-For example, the following configuration copies assets from a node package:
+この拡張構成を使用して、プロジェクトの外部からアセットをコピーすることができます。
+たとえば、次の設定はnode packageからアセットをコピーします:
 
 <code-example format="." language="json" linenums="false">
 "assets": [
@@ -217,9 +218,9 @@ For example, the following configuration copies assets from a node package:
 ]
 </code-example>
 
-The contents of `node_modules/some-package/images/` will be available in `dist/some-package/`.
+`node_modules/some-package/images/` の内容は `dist/some-package/` にあります。
 
-The following example uses the `ignore` field to exclude certain files in the assets folder from being copied into the build:
+次の例では、 `ignore` フィールドを使用して、アセットフォルダー内の特定のファイルをビルドへのコピーから除外します:
 
 <code-example format="." language="json" linenums="false">
 "assets": [

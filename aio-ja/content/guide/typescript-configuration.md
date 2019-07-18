@@ -23,31 +23,14 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 <div class="alert is-helpful">
 
-
-
 `tsconfig.json`の詳細については、公式の
 [TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
 
 </div>
 
-
-
 [セットアップガイド](guide/setup)では、次の`tsconfig.json`が使用されています。
 
-<code-example lang="json" header="tsconfig.json" linenums="false">
-  {
-    "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "lib": [ "es2015", "dom" ],
-      "noImplicitAny": true,
-      "suppressImplicitAnyIndexErrors": true
-    }
-  }
+<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json" linenums="false">
 </code-example>
 
 このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
@@ -66,7 +49,6 @@ TypeScriptの開発者は、`noImplicitAny`フラグを`true`または`false`に
 コンパイラが変数の型を自動推論できなかった場合は、
 型を`any`にデフォルト設定します。それは*暗黙の`any`*とみなされます。
 
-ドキュメンテーションのセットアップでは、`noImplicitAny`フラグが`true`に設定されます。
 `noImplicitAny`フラグが`true`で、TypeScriptコンパイラが型を推論できない場合でも、
 JavaScriptファイルは生成されますが、**エラーも出力されます**。
 これはより厳格な型チェックとなりますが、コンパイル時に型チェックが意図していないエラーをキャッチできるので、
@@ -79,20 +61,15 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 次の追加フラグを使用してそれらを制御することができます：
 
 <code-example format=".">
-  "suppressImplicitAnyIndexErrors":true
+
+  "suppressImplicitAnyIndexErrors": true
 
 </code-example>
 
-
-
-ドキュメンテーションのセットアップでは、このフラグも`true`に設定されます。
-
-
 {@a typings}
 
-
-
 ## TypeScriptの型定義
+
 jQuery・Jasmineテストライブラリ・Angularなどの多くのJavaScriptライブラリは、
 TypeScriptコンパイラが認識できない機能と構文を用いて
 JavaScript環境を拡張しています。
@@ -116,20 +93,13 @@ TypeScriptには、 `lib.d.ts`という特別な型定義ファイルが含ま�
 TypeScriptは`--target`の値に基づいて、ターゲットが`es6`なら`Promise`のような
 _追加の_アンビエント宣言を追加します。
 
-QuickStartプロジェクトは`es5`を対象としているので、
-含まれる宣言ファイルリストを次のように上書きすることができます。
+デフォルトのターゲットは`es2015`です。もし`es5`をターゲットにしていれば、新しい型定義を宣言ファイルリストに含める必要があります。
 
-
-<code-example format=".">
-  "lib": ["es2015", "dom"]
-
+<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json (lib excerpt)" linenums="false" region="lib">
 </code-example>
 
-
-
-これにより、`es5`をターゲットとしていても、`es6`の型定義を手に入れられます。
-
 ### 型定義ファイルのインストール
+
 多くのライブラリ（jQuery、Jasmine、Lodashなど）は、npmパッケージに`d.ts`ファイルが *含まれていません。*
 しかし幸いにも、著者やコミュニティのコントリビューターがこれらのライブラリ用の`d.ts`ファイルを作成し、
 公開しています。
@@ -141,20 +111,9 @@ TypeScript 2.0以降では自動認識されます。
 たとえば`jasmine`の型定義ファイルをインストールするには、`npm install @types/jasmine --save-dev`を実行します。
 
 
-QuickStartプロジェクトには、次の２つの*型定義ファイル*が含まれています。
-
-* [jasmine](http://jasmine.github.io/) Jasmineテストフレームワークの型定義
-
-* [node](https://www.npmjs.com/package/@types/node) *Node.js®*環境内のオブジェクトを参照するコード
-
-
-QuickStartプロジェクトはこれらの型定義ファイルを必要としませんが、多くのサンプルで必要とされます。
-
-
 {@a target}
 
 
 ### *target*
 
-デフォルトのターゲットは`es5`ですが、es6互換ブラウザにのみアプリケーションをデプロイする場合は、ターゲットを`es6`に設定することができます。
-しかしこの場合、`IE`などの古いブラウザでは`Syntax Error`がスローされることに留意してください。
+デフォルトでは、ターゲットは`es2015`です。これはモダンブラウザでのみサポートされています。特別にレガシーブラウザをサポートするためにターゲットを`es5`に設定することができます。 [Differential loading](guide/deployment#differential-loading)もAngular CLIによって提供され、分離されたバンドルによって最新とレガシー、両方のブラウザをサポートします。

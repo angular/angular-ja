@@ -691,7 +691,8 @@
         {
           "url": "guide/bazel",
           "title": "Bazel を使ったビルド",
-          "tooltip": "Bazelでビルドしてテストするための環境設定方法"
+          "tooltip": "Bazelでビルドしてテストするための環境設定方法",
+          "translated": true
         },
         {
           "url": "guide/testing",

@@ -15,7 +15,7 @@ Angular Labsの一部であり、安定版ではなく、サポートされて�
 
 `@angular/bazel` パッケージは Angular CLI で Bazel がビルドツールとして使用することを可能にするビルダーを提供します。
 
-既存のアプリケーションで選択するには、次のコマンドを実行します。
+既存のアプリケーションで利用するには、次のコマンドを実行します。
 
 ```sh
 ng add @angular/bazel
@@ -40,10 +40,9 @@ Bazelからの出力は `dist/bin` フォルダに現れます。
 > コマンドライン出力には、 Bazel からの追加のログが含まれています。
 > 将来的にはこれを減らす予定です。
 
-
 ### Bazel の削除
 
-Bazel の使用を中止する必要がある場合は、バックアップファイルから復元できます。
+Bazel の使用をやめる必要がある場合は、バックアップファイルから復元できます。
 
 - `/angular.json.bak` から `/angular.json` に置き換えます。
 
@@ -118,7 +117,6 @@ $ bazel query --output=graph ... | dot -Tpng > graph.png
 
 ルールは `BUILD.bazel` ファイルで使われています。これはあなたのワークスペース内のパッケージのメーカーです。 それぞれの `BUILD.bazel` ファイルは Bazel への別々のパッケージを宣言しますが、あなたが（例えば `npm` に）公開するパッケージを多くの Bazel パッケージで構成することができるようにもっと粒度の細かいディストリビューションを持つことができます。
 
-In the `BUILD.bazel` file, each rule must first be imported, using the `load` statement. Then the rule is called with some attributes, and the result of calling the rule is that you've declared to Bazel how it can derive some outputs given some inputs and dependencies. Then later, when you run a `bazel` command line, Bazel loads all the rules you've declared to determine an absolute ordering of what needs to be run. Note that only the rules needed to produce the requested output will actually be executed.
 `BUILD.bazel` ファイルでは、最初に `load` ステートメントを使って各ルールをインポートしなければなりません。 それからルールはいくつかの属性で呼び出され、そして、ルールを呼び出す結果はいくつかの入力と依存関係を与えられたいくつかの出力を引き出すことができる方法を Bazel に宣言します。 その後、後で `bazel`コマンドラインを実行すると、Bazelは実行する必要があるものの絶対的な順序を決定するために宣言したすべてのルールをロードします。 要求された出力を生成するために必要な規則だけが実際に実行されることに注意してください。
 
 フロントエンド開発の一般的な規則の一覧は、 https://github.com/bazelbuild/rules_nodejs/ にあるREADMEに記載されています。

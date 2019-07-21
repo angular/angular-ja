@@ -690,7 +690,7 @@
         },
         {
           "url": "guide/bazel",
-          "title": "Building with Bazel",
+          "title": "Bazel を使ったビルド",
           "tooltip": "How to set up your environment to build and test with Bazel."
         },
         {

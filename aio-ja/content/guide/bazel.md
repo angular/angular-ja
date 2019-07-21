@@ -40,6 +40,7 @@ Bazelからの出力は `dist/bin` フォルダに現れます。
 > コマンドライン出力には、 Bazel からの追加のログが含まれています。
 > 将来的にはこれを減らす予定です。
 
+
 ### Bazel の削除
 
 Bazel の使用を中止する必要がある場合は、バックアップファイルから復元できます。
@@ -113,10 +114,11 @@ $ bazel query --output=graph ... | dot -Tpng > graph.png
 
 ## `BUILD.bazel` ファイルのカスタマイズ
 
-"Rules" are like plugins for Bazel. Many rule sets are available. This guide documents the ones maintained by the Angular team at Google.
+"ルール" は Bazel のプラグインのようなものです。 多くのルールセットが利用可能です。 このガイドは、Google のAngular チームによって維持されているものを文書化しています。
 
-Rules are used in `BUILD.bazel` files, which are markers for the packages in your workspace. Each `BUILD.bazel` file declares a separate package to Bazel, though you can have more coarse-grained distributions so that the packages you publish (for example, to `npm`) can be made up of many Bazel packages.
+ルールは `BUILD.bazel` ファイルで使われています。これはあなたのワークスペース内のパッケージのメーカーです。 それぞれの `BUILD.bazel` ファイルは Bazel への別々のパッケージを宣言しますが、あなたが（例えば `npm` に）公開するパッケージを多くの Bazel パッケージで構成することができるようにもっと粒度の細かいディストリビューションを持つことができます。
 
 In the `BUILD.bazel` file, each rule must first be imported, using the `load` statement. Then the rule is called with some attributes, and the result of calling the rule is that you've declared to Bazel how it can derive some outputs given some inputs and dependencies. Then later, when you run a `bazel` command line, Bazel loads all the rules you've declared to determine an absolute ordering of what needs to be run. Note that only the rules needed to produce the requested output will actually be executed.
+`BUILD.bazel` ファイルでは、最初に `load` ステートメントを使って各ルールをインポートしなければなりません。 それからルールはいくつかの属性で呼び出され、そして、ルールを呼び出す結果はいくつかの入力と依存関係を与えられたいくつかの出力を引き出すことができる方法を Bazel に宣言します。 その後、後で `bazel`コマンドラインを実行すると、Bazelは実行する必要があるものの絶対的な順序を決定するために宣言したすべてのルールをロードします。 要求された出力を生成するために必要な規則だけが実際に実行されることに注意してください。
 
-A list of common rules for frontend development is documented in the README at https://github.com/bazelbuild/rules_nodejs/.
+フロントエンド開発の一般的な規則の一覧は、 https://github.com/bazelbuild/rules_nodejs/ にあるREADMEに記載されています。

@@ -670,7 +670,7 @@ export class TypicalModule {}
 
 <hr>
 
-<h3 class="no-toc">Expression form not supported</h3>
+<h3 class="no-toc">式の形式はサポートされていません</h3>
 
 Angularメタデータの評価中にコンパイラが理解できない式に遭遇しました。
 
@@ -779,7 +779,7 @@ export class MyComponent {}
 <hr>
 
 {@a only-initialized-variables}
-<h3 class="no-toc">Only initialized variables and constants</h3>
+<h3 class="no-toc">初期化された変数と定数のみ</h3>
 
 <div class="alert is-helpful">
 
@@ -845,9 +845,9 @@ _エクスポートされていないクラス <クラス名> への参照。ク
 
 </div>
 
-メタデータはエクスポートされなかったクラスを参照しました。
+メタデータはエクスポートされていないクラスを参照しました。
 
-たとえば、あるクラスを定義し、それをprovider配列の中でインジェクショントークンとして使用したが、
+たとえば、あるクラスを定義し、それを providers 配列の中でインジェクショントークンとして使用したが、
 そのクラスをエクスポートしていなかったとします。
 
 ```
@@ -877,11 +877,11 @@ export abstract class MyStrategy { }
 ```
 <hr>
 
-<h3 class="no-toc">Reference to a non-exported function</h3>
+<h3 class="no-toc">エクスポートされていない関数への参照</h3>
 
-メタデータはエクスポートされなかった関数を参照しました。
+メタデータはエクスポートされていない関数を参照しました。
 
-たとえば、プロバイダーの `useFactory` プロパティを、エクスポートされなかったローカルに定義された関数に設定したかもしれません。
+たとえば、プロバイダーの `useFactory` プロパティに、エクスポートされなかったローカルに定義された関数を設定したかもしれません。
 
 ```
 // ERROR
@@ -911,7 +911,7 @@ export function myStrategy() { ... }
 <hr>
 
 {@a function-calls-not-supported}
-<h3 class="no-toc">Function calls are not supported</h3>
+<h3 class="no-toc">関数呼び出しはサポートされていません。</h3>
 
 <div class="alert is-helpful">
 
@@ -920,7 +920,7 @@ _関数呼び出しはサポートされていません。関数またはラム�
 </div>
 
 コンパイラは現在、[関数式やラムダ関数](#function-expression) をサポートしていません。
-たとえば、プロバイダーの `useFactory` を、このような無名関数やアロー関数に設定することはできません。
+たとえば、プロバイダーの `useFactory` に、このような無名関数やアロー関数を設定することはできません。
 
 ```
 // ERROR
@@ -966,7 +966,7 @@ export function someValueFactory() {
 <hr>
 
 {@a destructured-variable-not-supported}
-<h3 class="no-toc">Destructured variable or constant not supported</h3>
+<h3 class="no-toc">非構造化変数または定数はサポートされていません。</h3>
 
 <div class="alert is-helpful">
 
@@ -1007,7 +1007,7 @@ import { configuration } from './configuration';
 
 <hr>
 
-<h3 class="no-toc">Could not resolve type</h3>
+<h3 class="no-toc">型を解決できませんでした</h3>
 
 コンパイラが型を検出しましたが、どのモジュールがその型をエクスポートしているのか判断できません。
 
@@ -1024,8 +1024,8 @@ export class MyComponent {
   constructor (private win: Window) { ... }
 }
 ```
-TypeScript はアンビエントタイプを理解するため、インポートしません。
-Angular コンパイラは、エクスポートまたはインポートを無視した型を理解しません。
+TypeScript はアンビエントタイプを理解するため、あなたはそれをインポートしていません。
+Angular コンパイラは、エクスポートまたはインポートを怠った型を理解しません。
 
 この場合、コンパイラは `Window` トークンで何かを注入する方法を理解していません。
 
@@ -1075,10 +1075,10 @@ export class MyComponent {
 </code-example>
 <hr>
 
-<h3 class="no-toc">Name expected</h3>
+<h3 class="no-toc">名前が期待されています</h3>
 
 コンパイラは評価中の式に名前が必要です。
-次の例のように、プロパティ名として番号を使用すると、これが発生する可能性があります。
+次の例のように、プロパティ名として番号を使用してしまうと、これが発生する可能性があります。
 
 ```
 // ERROR
@@ -1094,7 +1094,7 @@ provider: [{ provide: Foo, useValue: { '0': 'test' } }]
 
 <hr>
 
-<h3 class="no-toc">Unsupported enum member name</h3>
+<h3 class="no-toc">サポートされていない列挙型メンバー名</h3>
 
 Angular は、メタデータで参照した [列挙型メンバー](https://www.typescriptlang.org/docs/handbook/enums.html) の値を特定できませんでした。
 
@@ -1122,7 +1122,7 @@ enum Colors {
 <hr>
 
 {@a tagged-template-expressions-not-supported}
-<h3 class="no-toc">Tagged template expressions are not supported</h3>
+<h3 class="no-toc">タグ付きテンプレート式はサポートされていません</h3>
 
 <div class="alert is-helpful">
 
@@ -1142,11 +1142,11 @@ const raw = String.raw`A tagged template ${expression} string`;
 [`String.raw()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/raw) は、JavaScript ES2015 ネイティブの
 _タグ付き関数_ です。
 
-AOT コンパイラはタグ付きテンプレート式をサポートしません。メタデータ式でそれらを避けてください。
+AOT コンパイラはタグ付きテンプレート式をサポートしません。メタデータ式の中ではそれらを避けてください。
 
 <hr>
 
-<h3 class="no-toc">Symbol reference expected</h3>
+<h3 class="no-toc">シンボル参照が必要です</h3>
 
 コンパイラは、エラーメッセージで指定された場所にあるシンボルへの参照を予期していました。
 

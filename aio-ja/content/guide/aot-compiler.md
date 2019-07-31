@@ -670,7 +670,7 @@ export class TypicalModule {}
 
 <hr>
 
-<h3 class="no-toc">式の形式はサポートされていません</h3>
+<h3 class="no-toc">式の形式はサポートされていません</h3>{@a expression-form-not-supported}
 
 Angularメタデータの評価中にコンパイラが理解できない式に遭遇しました。
 
@@ -698,7 +698,7 @@ Angular メタデータを作成するときはコンパイラの[制限され�
 <hr>
 
 {@a reference-to-a-local-symbol}
-<h3 class="no-toc">Reference to a local (non-exported) symbol</h3>
+<h3 class="no-toc">ローカルの (エクスポートされていない) シンボルへの参照</h3>
 
 <div class="alert is-helpful">
 
@@ -837,7 +837,7 @@ export class MyComponent {}
 
 <hr>
 
-<h3 class="no-toc">Reference to a non-exported class</h3>
+<h3 class="no-toc">エクスポートされていないクラスへの参照</h3>{@a reference-to-a-non-exported-class}
 
 <div class="alert is-helpful">
 
@@ -877,7 +877,7 @@ export abstract class MyStrategy { }
 ```
 <hr>
 
-<h3 class="no-toc">エクスポートされていない関数への参照</h3>
+<h3 class="no-toc">エクスポートされていない関数への参照</h3>{@a reference-to-a-non-exported-function}
 
 メタデータはエクスポートされていない関数を参照しました。
 
@@ -1007,7 +1007,7 @@ import { configuration } from './configuration';
 
 <hr>
 
-<h3 class="no-toc">型を解決できませんでした</h3>
+<h3 class="no-toc">型を解決できませんでした</h3>{@a could-not-resolve-type}
 
 コンパイラが型を検出しましたが、どのモジュールがその型をエクスポートしているのか判断できません。
 
@@ -1075,7 +1075,7 @@ export class MyComponent {
 </code-example>
 <hr>
 
-<h3 class="no-toc">名前が期待されています</h3>
+<h3 class="no-toc">名前が期待されています</h3>{@a name-expected}
 
 コンパイラは評価中の式に名前が必要です。
 次の例のように、プロパティ名として番号を使用してしまうと、これが発生する可能性があります。
@@ -1094,9 +1094,10 @@ provider: [{ provide: Foo, useValue: { '0': 'test' } }]
 
 <hr>
 
-<h3 class="no-toc">サポートされていない列挙型メンバー名</h3>
+<h3 class="no-toc">サポートされていない列挙型メンバー名</h3>{@a unsupported-enum-member-name}
 
-Angular は、メタデータで参照した [列挙型メンバー](https://www.typescriptlang.org/docs/handbook/enums.html) の値を特定できませんでした。
+Angular は、メタデータで参照した [列挙型メンバー](https://www.typescriptlang.org/docs/handbook/enums.html) の値を
+特定できませんでした。
 
 コンパイラは単純な enum 値を理解できますが、計算プロパティから派生したものなどの複雑な値は理解できません。
 
@@ -1146,7 +1147,7 @@ AOT コンパイラはタグ付きテンプレート式をサポートしませ�
 
 <hr>
 
-<h3 class="no-toc">シンボル参照が必要です</h3>
+<h3 class="no-toc">シンボル参照が必要です</h3>{@a symbol-reference-expected}
 
 コンパイラは、エラーメッセージで指定された場所にあるシンボルへの参照を予期していました。
 

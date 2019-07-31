@@ -57,7 +57,7 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 
 ## `declarations`配列
 
-モジュールの`declarations`配列は、そのモジュールに属するコンポーネントをAngularを示します。
+モジュールの`declarations`配列は、そのモジュールに属するコンポーネントをAngularに示します。
 追加のコンポーネントを作成したら、それらを`declarations`に追加します。
 
 すべてのコンポーネントを厳密に1つの`NgModule`クラスに宣言する必要があります。

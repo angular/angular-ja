@@ -224,6 +224,10 @@ Angularの [クラスバインディング](guide/template-syntax#class-binding)
 こちらが `HeroesComponent` のスタイルを含んだ、このページで解説したコードファイルです。
 
 <code-tabs>
+
+  <code-pane header="src/app/mock-heroes.ts" path="toh-pt2/src/app/mock-heroes.ts">
+  </code-pane>
+  
   <code-pane header="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts">
   </code-pane>
 

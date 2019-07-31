@@ -143,7 +143,7 @@ Angular インジェクターを自分で作成することはめったにあり
 
 ## サービスの注入
 
-`HeroListComponent` が `HeroService` からヒーローを取得するためには、`new` で独自の `HeroService` インスタンスを作成するのではなく、`HeroService` のインジェクションをリクエストする必要があります。
+`HeroListComponent` が `HeroService` からヒーローを取得するためには、`new` で独自の `HeroService` インスタンスを作成するのではなく、注入される `HeroService` を要求する必要があります。
 
 **依存型をもつコンストラクターパラメーター**を指定することで、Angular にコンポーネントのコンストラクターに依存関係を注入するように指示できます。この `HeroListComponent` コンストラクターでは、`HeroService` を注入するようにリクエストしています。
 
@@ -175,16 +175,16 @@ region="ctor-signature">
 アプリにはルートインジェクターが1つだけあります。`root` レベルまたは `AppModule` レベルで `UserService` を提供することは、ルートインジェクターに登録されていることを意味します。*子インジェクター*を使用して別のプロバイダーを設定*しない限り*、アプリケーション全体には1つの `UserService` インスタンスしかなく、`UserService` を注入するすべてのクラスがこのサービスインスタンスを取得します。
 
 Angular DI には[階層型注入システム](guide/hierarchical-dependency-injection)があります。つまり、入れ子になったインジェクターは独自のサービスインスタンスを作成できます。
-Angular は定期的に入れ子になったインジェクターを作ります。Angular が `@Component()` で指定された `providers` をもつコンポーネントの新しいインスタンスを作成するたびに、そのインスタンスの新しい*子インジェクター*も作成します。
+Angular は定期的に入れ子になったインジェクターを作ります。Angular が `@Component()` で指定された `providers` をもつコンポーネントの新しいインスタンスを作成するたびに、そのインスタンスのための新しい*子インジェクター*も作成します。
 同様に、実行時に新しい NgModule が遅延ロードされると、Angular は独自のプロバイダーを使用してそのためのインジェクターを作成できます。
 
 子モジュールとコンポーネントインジェクターは互いに独立しており、提供されるサービスの独自のインスタンスを個別に作成します。Angular が NgModule またはコンポーネントインスタンスを破棄すると、そのインジェクターとそのインジェクターのサービスインスタンスも破棄します。
 
 [インジェクター継承](guide/hierarchical-dependency-injection)のおかげで、
 それでもこれらのコンポーネントにアプリケーション全体のサービスを注入することができます。
-コンポーネントのインジェクターは、その親コン​​ポーネントのインジェクターの子であり、アプリケーションの _ルート_ のインジェクターに至るまで、すべての先祖インジェクターを継承します。 Angularはその中にあるいずれかのインジェクターによって提供されるサービスを注入できます。
+コンポーネントのインジェクターは、その親コンポーネントのインジェクターの子であり、アプリケーションの _ルート_ のインジェクターに至るまで、すべての先祖インジェクターを継承します。 Angularはその中にあるいずれかのインジェクターによって提供されるサービスを注入できます。
 
-たとえば、Angular は `HeroListComponent` で提供されている `HeroService` と `AppModule` で提供されている `UserService` の両方を使用して `HeroListComponent` をインジェクトできます。
+たとえば、Angular は `HeroComponent` で提供されている `HeroService` と `AppModule` で提供されている `UserService` の両方を `HeroListComponent` に注入できます。
 
 {@a testing-the-component}
 
@@ -228,7 +228,7 @@ Angular は定期的に入れ子になったインジェクターを作ります
 
 </code-tabs>
 
-コンストラクターは注入された `Logger` のインスタンスを要求し、それを `logger` というプライベートフィールドに格納します。`getHeroes()` メソッドは、ヒーローの取得をリクエストされたときにメッセージを記録します。
+コンストラクターは注入される `Logger` のインスタンスを要求し、それを `logger` というプライベートフィールドに格納します。`getHeroes()` メソッドは、ヒーローの取得を要求されたときにメッセージを記録します。
 
 `Logger` サービスには `@Injectable()` デコレーターもあります。ただし、独自の依存関係は必要ないかもしれません。 実際、`@Injectable()` デコレーターは**すべてのサービスに必要**です。
 
@@ -239,7 +239,7 @@ Angular は、*クラスに何らかのデコレーターがある場合にの�
 
 <div class="alert is-helpful">
 
- デコレーターの要件は TypeScript によって課されます。 TypeScript は通常、コードを JavaScript に[トランスパイル](guide/glossary#transpile)するときにパラメータの型情報を破棄します。クラスにデコレーターがあり、`emitDecoratorMetadata` コンパイラオプションが TypeScript の `tsconfig.json` 設定ファイルで `true` に設定されている場合、TypeScript はこの情報を保持します。CLI は `emitDecoratorMetadata: true` を使用して `tsconfig.json` を構成します。
+ デコレーターの要件は TypeScript によって課されます。 TypeScript は通常、コードを JavaScript に[トランスパイル](guide/glossary#transpile)するときにパラメータの型情報を破棄します。クラスにデコレーターがあり、`emitDecoratorMetadata` コンパイラオプションが TypeScript の `tsconfig.json` 設定ファイルで `true` に設定されている場合、TypeScript はこの情報を保持します。CLI は `tsconfig.json` に `emitDecoratorMetadata: true` を設定します。
  
  これはあなたのサービスクラスに `@Injectable()` を置く責任があることを意味します。
 
@@ -262,14 +262,14 @@ Angular は、*クラスに何らかのデコレーターがある場合にの�
 <code-example path="dependency-injection/src/app/injector.component.ts" region="get-hero-service" header="src/app/injector.component.ts" linenums="false">
 </code-example>
 
-注入されたクラスベースの依存関係を必要とするコンストラクターを書くときの動作は似ています。
+注入されるクラスベースの依存関係を必要とするコンストラクターを書くときの動作は似ています。
 `HeroService` クラス型でコンストラクターパラメータを定義すると、
 Angular はその `HeroService` クラストークンに関連付けられたサービスを注入することを認識しています。
 
 <code-example path="dependency-injection/src/app/heroes/hero-list.component.ts" region="ctor-signature" header="src/app/heroes/hero-list.component.ts">
 </code-example>
 
-多くの依存する値はクラスによって提供されますが、すべてではありません。拡張*提供*オブジェクトを使用すると、さまざまな種類のプロバイダーを DI トークンと関連付けることができます。
+多くの依存する値はクラスによって提供されますが、すべてではありません。拡張された*provide*オブジェクトを使用すると、さまざまな種類のプロバイダーを DI トークンと関連付けることができます。
 
 * [さまざまな種類のプロバイダー](guide/dependency-injection-providers)についてもっと学びましょう
 
@@ -306,14 +306,14 @@ null に設定します。
 
 このページで Angular の依存性の注入の基本を学びました。
 さまざまな種類のプロバイダーを登録できます。
-また、コンストラクターにパラメータを追加することで、注入されたオブジェクト(サービスなど)を
+また、コンストラクターにパラメータを追加することで、注入されるオブジェクト(サービスなど)を
 要求する方法を知っています。
 
-次のページで、Angular の DI システムの機能と高度な機能について詳しく説明します。
+次のページで、Angular の DI システムの機能と高度な特徴について詳しく説明します。
 
 * 入れ子になったインジェクターについて詳しくは、[階層的な依存性の注入](guide/hierarchical-dependency-injection)を参照してください
 
 * [DI トークンとプロバイダー](guide/dependency-injection-providers)についてもっと学びましょう
 
-* [Dependency Injection in Action](guide/dependency-injection-in-action) は、DI を使ってできることのいくつかについてのクックブックです
+* [DI イン・アクション](guide/dependency-injection-in-action) は、DI を使ってできることのいくつかについてのクックブックです
 

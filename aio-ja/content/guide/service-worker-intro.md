@@ -33,6 +33,10 @@ AngularにおけるService Workerのインストールは、`NgModule`に含め�
 
 アプリケーションは、Service WorkerをサポートするWebブラウザで実行する必要があります。現在、Service WorkerはChromeやFirefox、Edge、Safari、Opera、UC Browser (Android版)、Samsung Internetの最新バージョンでサポートされています。IEやOpera Miniのようなブラウザはサポートしていません。他のブラウザについては、[Can I Use](http://caniuse.com/#feat=serviceworkers)ページを参照してください。
 
+In addition, in order for service workers to be registered, the app must be accessed over HTTPS, not HTTP. Browsers will ignore service workers on pages that are served over an insecure connection. The reason is that service workers are quite powerful, so extra care needs to be taken to ensure the service worker script has not been tampered with.
+
+There is one exception to this rule: To make local development easier, browsers do _not_ require a secure connection when accessing an app on `localhost`.
+
 ## 関連資料
 
 Service Workerの一般的な情報については、[Service Workerの紹介](https://developers.google.com/web/fundamentals/primers/service-workers/)を参照してください。

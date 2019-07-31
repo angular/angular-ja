@@ -788,7 +788,7 @@
         {
           "url": "events",
           "title": "Events",
-          "tooltip": "Post issues and suggestions on github."
+          "tooltip": "Angular events around the world."
         },
         {
           "url": "http://www.meetup.com/topics/angularjs/",
@@ -816,8 +816,12 @@
       "title": "Languages",
       "children": [
         {
-          "title": "中文版",
+          "title": "简体中文版",
           "url": "https://angular.cn/"
+        },
+        {
+          "title": "正體中文版",
+          "url": "https://angular.tw/"
         },
         {
           "title": "日本語版",
@@ -832,20 +836,24 @@
   ],
   "docVersions": [
     {
+      "title": "v7",
+      "url": "https://v7.angular.io/"
+    },
+    {
       "title": "v6",
-      "url": "https://v6.angular.io"
+      "url": "https://v6.angular.io/"
     },
     {
       "title": "v5",
-      "url": "https://v5.angular.io"
+      "url": "https://v5.angular.io/"
     },
     {
       "title": "v4",
-      "url": "https://v4.angular.io"
+      "url": "https://v4.angular.io/"
     },
     {
       "title": "v2",
-      "url": "https://v2.angular.io"
+      "url": "https://v2.angular.io/"
     }
   ]
 }

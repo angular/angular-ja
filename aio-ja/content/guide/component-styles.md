@@ -106,10 +106,11 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 コンポーネントスタイルは通常、コンポーネント自身のテンプレートのHTMLにのみ適用されます。
 
-`/deep/` shadow-piercing子孫コンビネータを使用して、子のコンポーネントツリーを介して
-すべての子のコンポーネントビューにスタイルを強制的に適用します。
-`/deep/` コンビネータは、ネストされたコンポーネントのあらゆる深さに作用し、
-コンポーネントの子コンポーネントとコンテンツコンポーネントの両方に適用されます。
+Applying the `::ng-deep` pseudo-class to any CSS rule completely disables view-encapsulation for
+that rule. Any style with `::ng-deep` applied becomes a global style. In order to scope the specified style
+to the current component and all its descendants, be sure to include the `:host` selector before
+`::ng-deep`. If the `::ng-deep` combinator is used without the `:host` pseudo-class selector, the style
+can bleed into other components.
 
 次の例では、ホスト要素からこのコンポーネントを経由してDOM内のすべての子要素に至るまで、
 すべての `<h3>` 要素を対象としています。

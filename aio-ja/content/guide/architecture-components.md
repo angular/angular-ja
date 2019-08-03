@@ -47,7 +47,7 @@ Angularはこれらのタグ間に`HeroListComponent`ビューのインスタン
 
 <img src="generated/images/guide/architecture/template.png" alt="テンプレート" class="left">
 
-コンパニオンテンプレートを使用してコンポーネントのビューを定義します。テンプレートは、コンポーネントのレンダリング方法をAngularに伝えるHTMLの形式の１つです。
+コンポーネントのビューをその対となるテンプレートを使用して定義します。テンプレートは、コンポーネントのレンダリング方法をAngularに伝えるHTMLの形式の１つです。
 
 ビューは通常、階層的に配置されており、UIセクションまたはページ全体を1つの単位として変更したり表示したり非表示にしたりできます。コンポーネントに直ちに関連付けられたテンプレートは、そのコンポーネントの*ホストビュー*を定義します。コンポーネントは、他のコンポーネントによってホストされる、*埋め込みビュー*を含むビュー階層を定義することもできます。
 
@@ -79,13 +79,13 @@ Angularはこれらのタグ間に`HeroListComponent`ビューのインスタン
 
 Angular は、テンプレートの部分をコンポーネントの各部分に合わせるためのメカニズムである*双方向データバインディング*をサポートしています。テンプレートHTMLにバインディングマークアップを追加して、Angularに両側の接続方法を伝えます。
 
-次の図は、データバインディングマークアップの4つの形式を示しています。各フォームには、DOMへ、DOMから、またはその両方の方向があります。
+次の図は、データバインディングマークアップの4つの形式を示しています。各形式には、DOMへ、DOMから、またはその両方の方向があります。
 
 <figure>
 <img src="generated/images/guide/architecture/databinding.png" alt="データバインディング" class="left">
 </figure>
 
-`HeroListComponent`テンプレートのこの例は、これらの3つのフォームを使用しています。
+`HeroListComponent`テンプレートのこの例は、これらの3つの形式を使用しています。
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" header="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
@@ -93,13 +93,13 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
 * `[hero]`[*プロパティバインディング*](guide/template-syntax#property-binding)は、
-`HeroListComponent`から`HeroDetailComponent`子の `hero`プロパティに`selectedHero`を返します。
+親である`HeroListComponent`から子の`HeroDetailComponent`の`hero`プロパティに`selectedHero`の値を渡します。
 
 * `(click)` [*イベントバインディング*](guide/user-input#binding-to-user-input-events)は、ユーザーがヒーローの名前をクリックすると、コンポーネントの `selectHero` メソッドを呼び出します。
 
 双方向データバインディング（主に[テンプレート駆動フォーム](guide/forms)で使用される）は、
 単一の表記法でプロパティとイベントのバインディングを結合します。
-`HeroDetailComponent` テンプレートの例は、`ngModel` ディレクティブとの双方向データバインディングを使用しています。
+`HeroDetailComponent` テンプレートの例は、`ngModel` ディレクティブを用いて双方向データバインディングを使用しています。
 
 <code-example path="architecture/src/app/hero-detail.component.html" linenums="false" header="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 

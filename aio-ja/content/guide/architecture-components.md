@@ -10,7 +10,8 @@
 コンポーネントの—ビューをサポートするための—アプリケーションロジックをクラス内に定義します。
 クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
 
-たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
+たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。
+その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
 コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
@@ -18,8 +19,7 @@
 
 Angularは、ユーザーがアプリケーションを移動するときにコンポーネントを作成、更新、および破棄します。アプリは、ライフサイクルの各段階で、`ngOnInit()`などの[ライフサイクルフック](guide/lifecycle-hooks)を使用してアクションを実行できます。
 
-{@a component-metadata}
-## コンポーネントメタデータ
+## コンポーネントメタデータ {@a component-metadata}
 
 <img src="generated/images/guide/architecture/metadata.png" alt="メタデータ" class="left">
 
@@ -35,7 +35,8 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 この例は、もっとも役立つ `@Component` の設定オプションの一部です：
 
-* `selector`: テンプレートHTML内の対応するタグを見つけるたびに、このコンポーネントのインスタンスを作成して挿入するようにAngularに指示するCSSセレクター。たとえば、アプリケーションのHTMLに`<app-hero-list></app-hero-list>`が含まれている場合、Angularはこれらのタグ間に`HeroListComponent`ビューのインスタンスを挿入します。
+* `selector`: テンプレートHTML内の対応するタグを見つけるたびに、このコンポーネントのインスタンスを作成して挿入するようにAngularに指示するCSSセレクター。たとえば、アプリケーションのHTMLに`<app-hero-list></app-hero-list>`が含まれている場合、
+Angularはこれらのタグ間に`HeroListComponent`ビューのインスタンスを挿入します。
 
 * `templateUrl`: このコンポーネントのHTMLテンプレートのモジュール相対アドレス。または、HTMLテンプレートを`template`プロパティの値としてインラインで提供することもできます。このテンプレートは、コンポーネントのホストビューを定義します。
 
@@ -46,7 +47,7 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 <img src="generated/images/guide/architecture/template.png" alt="テンプレート" class="left">
 
-コンパニオンテンプレートを使用してコンポーネントのビューを定義します。テンプレートは、コンポーネントのレンダリング方法をAngularに伝えるHTMLの形式の１つです。
+コンポーネントのビューをその対となるテンプレートを使用して定義します。テンプレートは、コンポーネントのレンダリング方法をAngularに伝えるHTMLの形式の１つです。
 
 ビューは通常、階層的に配置されており、UIセクションまたはページ全体を1つの単位として変更したり表示したり非表示にしたりできます。コンポーネントに直ちに関連付けられたテンプレートは、そのコンポーネントの*ホストビュー*を定義します。コンポーネントは、他のコンポーネントによってホストされる、*埋め込みビュー*を含むビュー階層を定義することもできます。
 
@@ -68,40 +69,46 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 * `*ngFor`ディレクティブはAngularにリストの繰り返しを指示します。
 * `{{hero.name}}`、`(click)`、`[hero]` はユーザー入力に応答してDOMとの間でプログラムデータをバインドします。次の[データバインディング](#データバインディング)の詳細を参照してください。
-* この例の `<app-hero-detail>` タグは新しいコンポーネント `HeroDetailComponent` を表す要素です。`HeroDetailComponent`（コードは表示されません）は `HeroListComponent` のhero-detailの子ビューを定義します。このようなカスタムコンポーネントがどのように同じレイアウトのネイティブHTMLとシームレスに混在しているかに注目してください。
+* この例の `<app-hero-detail>` タグは新しいコンポーネント `HeroDetailComponent` を表す要素です。
+`HeroDetailComponent`（コードは表示されません）は `HeroListComponent` のhero-detailの子ビューを定義します。
+このようなカスタムコンポーネントがどのように同じレイアウトのネイティブHTMLとシームレスに混在しているかに注目してください。
 
-{@a data-binding}
-### データバインディング
+### データバインディング {@a data-binding}
 
 フレームワークがなければ、自分でデータの値をHTMLコントロールにプッシュし、ユーザーの応答をアクションと値の更新に変える責任があります。そのようなプッシュアンドプルロジックを手作業で書くことは、経験豊富なフロントエンドJavaScriptプログラマが証明できるように面倒で、エラーが起こりやすく、悪夢のように読みづらいです。
 
 Angular は、テンプレートの部分をコンポーネントの各部分に合わせるためのメカニズムである*双方向データバインディング*をサポートしています。テンプレートHTMLにバインディングマークアップを追加して、Angularに両側の接続方法を伝えます。
 
-次の図は、データバインディングマークアップの4つの形式を示しています。各フォームには、DOMへ、DOMから、またはその両方の方向があります。
+次の図は、データバインディングマークアップの4つの形式を示しています。各形式には、DOMへ、DOMから、またはその両方の方向があります。
 
 <figure>
 <img src="generated/images/guide/architecture/databinding.png" alt="データバインディング" class="left">
 </figure>
 
-`HeroListComponent`テンプレートのこの例は、これらの3つのフォームを使用しています。
+`HeroListComponent`テンプレートのこの例は、これらの3つの形式を使用しています。
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" header="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
 * `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
-* `[hero]`[*プロパティバインディング*](guide/template-syntax#property-binding)は、`HeroListComponent`から`HeroDetailComponent`子の `hero`プロパティに`selectedHero`を返します。
+* `[hero]`[*プロパティバインディング*](guide/template-syntax#property-binding)は、
+親である`HeroListComponent`から子の`HeroDetailComponent`の`hero`プロパティに`selectedHero`の値を渡します。
 
 * `(click)` [*イベントバインディング*](guide/user-input#binding-to-user-input-events)は、ユーザーがヒーローの名前をクリックすると、コンポーネントの `selectHero` メソッドを呼び出します。
 
-双方向データバインディング（主に[テンプレート駆動フォーム](guide/forms)で使用される）は、単一の表記法でプロパティとイベントのバインディングを結合します。`HeroDetailComponent` テンプレートの例は、`ngModel` ディレクティブとの双方向データバインディングを使用しています。
+双方向データバインディング（主に[テンプレート駆動フォーム](guide/forms)で使用される）は、
+単一の表記法でプロパティとイベントのバインディングを結合します。
+`HeroDetailComponent` テンプレートの例は、`ngModel` ディレクティブを用いて双方向データバインディングを使用しています。
 
 <code-example path="architecture/src/app/hero-detail.component.html" linenums="false" header="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
 双方向バインディングでは、データプロパティ値が、プロパティバインディングと同様にコンポーネントから入力ボックスに流れます。
-ユーザーの変更もコンポーネントに戻り、イベントバインディングの場合と同様にプロパティを最新の値にリセットします。
+ユーザーの変更もコンポーネントに戻り、
+イベントバインディングの場合と同様にプロパティを最新の値にリセットします。
 
-Angular は、JavaScriptイベントサイクルごとに*すべての*データバインディングを1回処理しますが、それはアプリケーションコンポーネントツリーのルートからすべての子コンポーネントを経由します。
+Angular は、JavaScriptイベントサイクルごとに*すべての*データバインディングを1回処理しますが、
+それはアプリケーションコンポーネントツリーのルートからすべての子コンポーネントを経由します。
 
 <figure>
   <img src="generated/images/guide/architecture/component-databinding.png" alt="データバインディング" class="left">
@@ -113,8 +120,7 @@ Angular は、JavaScriptイベントサイクルごとに*すべての*データ
   <img src="generated/images/guide/architecture/parent-child-binding.png" alt="親子間バインディング" class="left">
 </figure>
 
-{@a pipes}
-### パイプ
+### パイプ {@a pipes}
 
 Angular のパイプを使用すると、テンプレートHTMLの表示値変換を宣言できます。`@Pipe` デコレーターをもつクラスは、入力値を出力値に変換してビューに表示する関数を定義します。
 
@@ -137,22 +143,26 @@ HTMLテンプレートで値の変換を指定するには、[パイプ演算子
   <p>The time is {{today | date:'shortTime'}}</p>
 ```
 
-{@a directives}
-### ディレクティブ
+### ディレクティブ {@a directives}
 
 <img src="generated/images/guide/architecture/directive.png" alt="ディレクティブ" class="left">
 
 Angular テンプレートは*ダイナミック*です。Angular がレンダリングすると、*ディレクティブ*の指示にしたがってDOMが変換されます。ディレクティブは `@Directive()` デコレーターをもつクラスです。
 
-コンポーネントは技術的にはディレクティブです。しかし、コンポーネントは Angular アプリケーションにとって非常に特徴的であり、Angularは `@Component()` デコレーターを定義しています。これはテンプレート指向の機能をもつ `@Directive()` デコレーターを拡張します。
+コンポーネントは技術的にはディレクティブです。
+しかし、コンポーネントは Angular アプリケーションにとって非常に特徴的であり、
+Angularは `@Component()` デコレーターを定義しています。
+これはテンプレート指向の機能をもつ `@Directive()` デコレーターを拡張します。
 
-コンポーネントに加えて、他に*構造*と*属性*の2つの種類のディレクティブがあります。Angularは両方の種類のディレクティブを定義し、`@Directive()` デコレーターを使用して独自のものを定義することができます。
+コンポーネントに加えて、他に*構造*と*属性*の2つの種類のディレクティブがあります。
+Angularは両方の種類のディレクティブを定義し、`@Directive()` デコレーターを使用して独自のものを定義することができます。
 
 コンポーネントの場合と同様に、ディレクティブのメタデータは装飾されたクラスをHTMLに挿入するために使用する `selector` 要素と関連付けます。ディレクティブは通常は属性として、要素タグ内に名前として、または割り当てやバインディングのターゲットとして表示されます。
 
 #### 構造ディレクティブ
 
-*構造ディレクティブ*は、DOMの要素を追加、削除、置換することによってレイアウトを変更します。サンプルテンプレートでは、2つの組み込み構造ディレクティブを使用して、ビューのレンダリング方法にアプリケーションロジックを追加しています。
+*構造ディレクティブ*は、DOMの要素を追加、削除、置換することによってレイアウトを変更します。
+サンプルテンプレートでは、2つの組み込み構造ディレクティブを使用して、ビューのレンダリング方法にアプリケーションロジックを追加しています。
 
 <code-example path="architecture/src/app/hero-list.component.1.html" linenums="false" header="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
@@ -161,7 +171,8 @@ Angular テンプレートは*ダイナミック*です。Angular がレンダ�
 
 #### 属性ディレクティブ
 
-*属性ディレクティブ*は、既存の要素の外観や動作を変更します。テンプレートでは通常のHTML属性、つまり名前のように見えます。
+*属性ディレクティブ*は、既存の要素の外観や動作を変更します。
+テンプレートでは通常のHTML属性、つまり名前のように見えます。
 
 双方向データバインディングを実装する `ngModel` ディレクティブは、属性ディレクティブの例です。`ngModel`は、その表示値プロパティを設定し、変更イベントに応答することによって、既存の要素の動作（通常は` <input> `）を変更します。
 

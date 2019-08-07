@@ -1189,7 +1189,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on type 'Person'. Did you mean 'address'?
   ```
 
-  エラーメッセージ `my.component.ts.MyComponent.html` で報告されたファイル名は、
+  エラーメッセージで報告されたファイル名、つまり `my.component.ts.MyComponent.html` は、
   `MyComponent` クラステンプレートの内容を保持するテンプレートコンパイラによって生成された合成ファイルです。
   コンパイラはこのファイルをディスクに書き込みません。
   行番号と列番号は、クラスの `@Component` アノテーションのテンプレート文字列 (この場合は `MyComponent`) を基準にしています。
@@ -1205,7 +1205,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
 
   ### タイプナローイング
 
-  `ngIf` ディレクティブで使用されている式は、Angular テンプレートコンパイラで型ユニオンを絞り込むために使用されます。
+  `ngIf` ディレクティブで使用されている式は、Angular テンプレートコンパイラで型候補を絞り込むために使用されます。
   これは、TypeScript で `if` 式が行うのと同じ方法です。
   たとえば、上のテンプレートで `Object is possibly 'undefined'` エラーになるのを避けるために、
   `person` の値が次のように初期化されている場合にのみ補間を実行するようにオブジェクトを修正します。
@@ -1223,7 +1223,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   `*ngIf` を使用すると、
   TypeScript コンパイラは、バインディング式で使用されている `person` が `undefined` になることはないと推測できます。
 
-  #### カスタムの `ngIf` ライクディレクティブ
+  #### カスタムの `ngIf` に似たディレクティブ
 
   `*ngIf` のように動作するディレクティブは、`*ngIf` のように扱うためのテンプレートコンパイラへのシグナルである静的メンバーマーカーを含めることで、
   同じ扱いが必要であることを宣言できます。
@@ -1242,7 +1242,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
 
   `*ngIf` を使用するのが不便な場合、
   またはバインディング式の補間時にコンポーネント内の制約によって式が常に NULL 以外になることが保証されている場合は、
-  [null 以外の型アサーション演算子](guide/template-syntax#non-null-assertion-operator)を使用して
+  [非 null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)を使用して
   `Object is possibly 'undefined'` エラーを抑制します。
 
   次の例では、`person` プロパティと `address` プロパティは常に一緒に設定されているため、
@@ -1267,7 +1267,7 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   ```
 
   コンポーネントのリファクタリングはこの制約を破る可能性があるため、
-  null 以外のアサーション演算子は控えめに使用してください。
+  非 null アサーション演算子は控えめに使用してください。
 
   この例では、次に示すように
   `*ngIf` に `address` のチェックを含めることをお勧めします:
@@ -1460,7 +1460,7 @@ TypeScript の `--outFile` オプションを使用している場合は、こ�
 
 ### *annotationsAs*
 
-このオプションを使用して、Angular 固有のアノテーションをどのように発行してツリーの揺れを改善するかを変更します。
+このオプションを使用して、Angular 固有のアノテーションをどのように発行してツリーシェイキングを改善するかを変更します。
 Angular 以外のアノテーションとデコレーターは影響を受けません。デフォルトは `static fields` です。
 
 <style>

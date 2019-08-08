@@ -1,7 +1,7 @@
 # モジュールのイントロダクション
 
 Angularアプリケーションはモジュール型のアプリケーションで、 *NgModules* という独自のモジュール方式を備えています。
-NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。コンポーネント、サービスプロバイダー、およびNgModuleを含むスコープをもつ他のコードファイルを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
+NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。それは、コンポーネントと、サービスプロバイダーと、および、包含するNgModuleによってスコープが規定された他のコードファイルとを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
 
 すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[*ルートモジュール*](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。ルートのNgModuleを*ブートストラップする*ことでアプリを起動します。
 
@@ -56,10 +56,12 @@ NgModuleは、そのコンポーネントの *コンパイルコンテキスト*
 コンポーネントを作成すると、そのコンポーネントは *ホストビュー* という単一のビューに直接関連付けられます。ホストビューは、他のコンポーネントのホストビューである *埋め込みビュー* を含むことができるビュー階層のルートにすることができます。これらのコンポーネントは、同じNgModuleに存在することも、他のNgModuleからインポートすることもできます。 ツリー内のビューは、任意の深さにネストすることができます。
 
 <div class="alert is-helpful">
-    **注意:** ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
+
+**注意:** ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
+
 </div>
 
-## NgModules と JavaScript モジュール
+## NgModules と JavaScript モジュール
 
 NgModuleシステムは、JavaScriptオブジェクトのコレクションを管理するJavaScript（ES2015）モジュールシステムとは異なり、関連しません。これら2つは、 *相補的な* モジュールシステムです。両方を使ってアプリを書くことができます。
 
@@ -88,7 +90,7 @@ Angularは、JavaScriptモジュールのコレクションを読み込みます
 <code-example path="architecture/src/app/app.component.ts" region="import" linenums="false"></code-example>
 
 また、JavaScriptのimportステートメントを使用してAngular *ライブラリ* からNgModuleをインポートします。
-たとえば、次のコードは `platformModule` NgModuleを ` platform-browser` ライブラリからインポートします。
+たとえば、次のコードは `BrowserModule` NgModuleを ` platform-browser` ライブラリからインポートします。
 
 <code-example path="architecture/src/app/mini-app.ts" region="import-browser-module" linenums="false"></code-example>
 

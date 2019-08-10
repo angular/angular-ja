@@ -25,37 +25,37 @@ Angularアプリケーションにはルートモジュールとして機能す�
  <tr>
    <td><code>BrowserModule</code></td>
    <td><code>@angular/platform-browser</code></td>
-   <td>アプリケーションをブラウザで実行するため</td>
+   <td>アプリケーションをブラウザで実行したいとき</td>
  </tr>
 
  <tr>
    <td><code>CommonModule</code></td>
    <td><code>@angular/common</code></td>
-   <td><code>NgIf</code>、 <code>NgFor</code>を使用するため</td>
+   <td><code>NgIf</code>、 <code>NgFor</code>を使用したいとき</td>
  </tr>
 
  <tr>
    <td><code>FormsModule</code></td>
    <td><code>@angular/forms</code></td>
-   <td>テンプレート駆動のフォームを作成するため (<code>NgModel</code>を含みます)</td>
+   <td>テンプレート駆動のフォームを作成したいとき (<code>NgModel</code>を含みます)</td>
  </tr>
 
  <tr>
    <td><code>ReactiveFormsModule</code></td>
    <td><code>@angular/forms</code></td>
-   <td>リアクティブフォームを作成するため</td>
+   <td>リアクティブフォームを作成したいとき</td>
  </tr>
 
  <tr>
    <td><code>RouterModule</code></td>
    <td><code>@angular/router</code></td>
-   <td>ルーティングと<code>RouterLink</code>,<code>.forRoot()</code>, and <code>.forChild()</code>を使用するため</td>
+   <td><code>RouterLink</code>,<code>.forRoot()</code>, and <code>.forChild()</code>を使用したいとき</td>
  </tr>
 
  <tr>
    <td><code>HttpClientModule</code></td>
    <td><code>@angular/common/http</code></td>
-   <td>サーバーと通信するため</td>
+   <td>サーバーと通信したいとき</td>
  </tr>
 
 </table>

@@ -12,7 +12,7 @@
 特定の機能に関連するコードを管理したり、
 他のコードから機能を分離することができます。
 アプリケーションの領域を線引きすることは、開発者やチーム間でのコラボレーション、
-ディレクティブの分離やルートモジュールの調整を行うときの助けになるでしょう。
+ディレクティブの分離やルートモジュールのサイズ調整を行うときの助けになるでしょう。
 
 
 ## フィーチャーモジュールとルートモジュール
@@ -89,7 +89,7 @@ CLIがフィーチャーモジュールのために`CustomerDashboardComponent`�
 <code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html" region="feature-template" header="src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html"></code-example>
 
 
-`AppComponent`でこのHTMLを見るためには、まず`CustomerDashboardModule`内の`CustomerDashboardComponent`をエクスポートしなければなりません。 `customer-dashboard.module.ts`の`declarations`配列の直下に、 `CustomerDashboardModule`を含む`exports`配列を追加しましょう:
+`AppComponent`でこのHTMLを見るためには、まず`CustomerDashboardModule`内の`CustomerDashboardComponent`をエクスポートしなければなりません。 `customer-dashboard.module.ts`の`declarations`配列の直下に、 `CustomerDashboardComponent`を含む`exports`配列を追加しましょう:
 
 <code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard.module.ts" region="component-exports" header="src/app/customer-dashboard/customer-dashboard.module.ts"></code-example>
 

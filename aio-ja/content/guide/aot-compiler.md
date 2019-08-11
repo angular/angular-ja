@@ -474,7 +474,7 @@ export class AppComponent {
 
 ### 新しいインスタンス
 
-コンパイラは `@angular/core` からクラス `InjectionToken` のインスタンスを作成するメタデータのみを許可します。
+コンパイラは `@angular/core` から `InjectionToken` クラスのインスタンスを作成するメタデータのみを許可します。
 
 ### アノテーション/デコレーター
 
@@ -566,7 +566,7 @@ export class AppComponent {
 
 
 
-### マクロ関数とマクロ静的メソッド
+### マクロ関数メソッドとマクロ静的メソッド
 
 コンパイラーは、関数または静的の形式で
  _マクロ_ もサポートします。
@@ -600,7 +600,7 @@ export class TypicalModule {}
 ```
 
 コレクターは、マクロ関数と見なされるものを決定する際に単純化されています。
-単一の `return` ステートメントしか含めることができません。
+つまり、単一の `return` ステートメントしか含めることができません。
 
 Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ルートを宣言するのに役立つように、2つのマクロ静的メソッド `forRoot` と `forChild` をエクスポートします。
 これらのメソッドの[ソースコード](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")を調べて、
@@ -608,10 +608,10 @@ Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ル�
 
 {@a metadata-rewriting}
 
-### メタデータ書き換え
+### メタデータの書き換え
 
 コンパイラは `useClass`、`useValue`、`useFactory`、および `data` の各フィールドを含むオブジェクトリテラルを特別に扱います。コンパイラは、これらのフィールドの1つを初期化する式をエクスポートされた変数に変換します。この変数が式を置き換えます。
-これらの式を書き換えるこのプロセスは、式の値を知る必要がなく、単に値への参照を生成できる必要があるため、式に含まれる可能性があるものに対するすべての制限を取り除きます。
+これらの式を書き換えるこのプロセスは、式に含まれる可能性があるものに対するすべての制限を取り除きます。なぜならば、コンパイラは式の値を知る必要がなく、つまり値への参照だけを生成できればよいからです。
 
 
 

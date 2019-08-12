@@ -57,7 +57,8 @@ CLIは、ファイルの先頭にJavaScriptのインポート文を追加し、
 ng generate component customers/customer-list
 ```
 
-これにより、`customers`フォルダ内に、コンポーネントを構成する4つのファイルをもつ`customer-list`という名前のフォルダが作成されます。
+これにより、`customers`フォルダ内に、
+コンポーネントを構成する4つのファイルをもつ`customer-list`という名前のフォルダが作成されます。
 
 ルーティングモジュールと同様に、
 CLIは`CustomersListComponent`を`CustomersModule`にインポートします。

@@ -12,14 +12,15 @@ Angularでシングルトンサービスを作成する方法は2種類ありま
 * `@Injectable()`の`providedIn`プロパティに対して`root`を宣言する。
 * `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
 
+
 {@a providedIn}
 
 ### `providedIn` を使う
 
-Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
+Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 
+これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
 
 <code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts"></code-example>
-
 
 サービスのさらに詳しい情報については
 [Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
@@ -131,8 +132,6 @@ Angularは`@NgModule.providers`
 
 ファイルの先頭にJavaScriptのインポートとして`CoreModule`を_import_することを忘れないでください。複数の`@NgModule`の`imports`リストに追加してはいけません。
 
-<!-- KW--Does this mean that if we need it elsewhere we only import it at the top? I thought the services would all be available since we were importing it into `AppModule` in `providers`. -->
-
 ## `GreetingModule` の再インポートを防ぐ
 
 ルート(root)の`AppModule`だけが`GreetingModule`をインポートすべきです。
@@ -150,10 +149,7 @@ Angularは`@NgModule.providers`
 この注入は循環参照となります。
 `@SkipSelf()`デコレーターは"インジェクター階層の上にある先祖のインジェクター内の`GreetingModule`を参照する"
 という意味になります。
-
-コンストラクターが`AppModule`で意図どおりに実行される場合、
-`GreetingModule`のインスタンスを提供できる祖先のインジェクターは存在しないでしょう。そして、インジェクターは中断するはずです。
-
+コンストラクターが`AppModule`で意図どおりに実行される場合、`GreetingModule`のインスタンスを提供できる祖先のインジェクターは存在しないでしょう。そして、インジェクターは中断するはずです。
 デフォルトでは、
 インジェクターが要求したプロバイダーを見つけられなかったときはエラーをスローします。
 `@Optional()`デコレーターはサービスが見つからなくてもOKという意味になります。
@@ -162,9 +158,9 @@ Angularは`@NgModule.providers`
 
 `GreetingModule`を`CustomersModule`のような遅延ロードするモジュールに不適切にインポートするときは違います。
 
-Angularは、遅延ロードするモジュールをルート(root)インジェクターの_子供_である、それ自身のインジェクターを使用して作成します。
-`@SkipSelf()`によって、
-Angularは親インジェクター(今回はルートインジェクターになります)の`GreetingModule`を参照します。
+Angularは、
+遅延ロードするモジュールをルート(root)インジェクターの_子供_である、それ自身のインジェクターを使用して作成します。
+`@SkipSelf()`によって、Angularは親インジェクター(今回はルートインジェクターになります)の`GreetingModule`を参照します。
 もちろん、ルート(root)の`AppModule`によってインポートされたインスタンスを参照します。
 今度は`parentModule`が存在するのでコンストラクターはエラーをスローします。
 
@@ -176,7 +172,6 @@ Angularは親インジェクター(今回はルートインジェクターにな
  <code-pane header="greeting.module.ts" region="whole-greeting-module" path="ngmodules/src/app/greeting/greeting.module.ts">
  </code-pane>
 </code-tabs>
-
 
 <hr />
 

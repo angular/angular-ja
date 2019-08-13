@@ -129,7 +129,7 @@ TypeScript の _subset_ にメタデータを記述します。これは、次�
 
 TypeScript コンパイラは、最初のフェーズの分析作業の一部を行います。AOT コンパイラがアプリケーションコードを生成するために必要な型情報をもつ `.d.ts` _型定義ファイル_ を発行します。
 
-同時に、AOT **_collector_** は Angular デコレーターに記録されたメタデータを分析し、メタデータ情報を **`.metadata.json`** ファイルに出力します。
+同時に、AOT **_コレクター_** は Angular デコレーターに記録されたメタデータを分析し、メタデータ情報を **`.metadata.json`** ファイルに出力します。
 
 `.metadata.json` は、[抽象構文木 (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として表されるデコレーターのメタデータの全体的な構造の図と考えることができます。
 
@@ -143,7 +143,7 @@ Angular の [schema.ts](https://github.com/angular/angular/blob/master/packages/
 {@a expression-syntax}
 ### 式の構文
 
-_collector_ は JavaScript のサブセットしか理解できません。
+_コレクター_ は JavaScript のサブセットしか理解できません。
 次の限られた構文でメタデータオブジェクトを定義します。
 
 <style>
@@ -225,7 +225,7 @@ _collector_ は JavaScript のサブセットしか理解できません。
 </table>
 
 
-式がサポートされていない構文を使う場合、_collector_ はエラーノードを `.metadata.json` ファイルに書き込みます。アプリケーションコードを生成するためにその部分のメタデータが必要な場合、
+式がサポートされていない構文を使う場合、_コレクター_ はエラーノードを `.metadata.json` ファイルに書き込みます。アプリケーションコードを生成するためにその部分のメタデータが必要な場合、
 コンパイラは後でエラーを報告します。
 
 <div class="alert is-helpful">
@@ -259,7 +259,7 @@ _ラムダ_ 関数とも呼ばれる[アロー関数](https://developer.mozilla.
 })
 ```
 
-AOT _collector_ はメタデータ式ではアロー関数 `() => new Server()` をサポートしません。
+AOT _コレクター_ はメタデータ式ではアロー関数 `() => new Server()` をサポートしません。
 関数の代わりにエラーノードを生成します。
 
 コンパイラが後でこのノードを解釈すると、アロー関数を _exported 関数_ に変換するように促すエラーが報告されます。
@@ -282,7 +282,7 @@ export function serverFactory() {
 {@a function-calls}
 ### 限定的関数呼び出し
 
-_collector_ は、構文が有効である限り、`new` を使って関数呼び出しやオブジェクトの作成を表すことができます。 _collector_ は適切な構文だけを扱います。
+_コレクター_ は、構文が有効である限り、`new` を使って関数呼び出しやオブジェクトの作成を表すことができます。 _コレクター_ は適切な構文だけを扱います。
 
 しかし注意してください。コンパイラは後で、_特定の_ 関数の呼び出しや _特定の_ オブジェクトの作成を拒否することがあります。
 コンパイラは少数の関数への呼び出しのみをサポートし、少数の指定クラスに対してのみ `new` を使用します。これらの関数とクラスは[下](#supported-functions)の表にあります。
@@ -291,11 +291,11 @@ _collector_ は、構文が有効である限り、`new` を使って関数呼�
 ### フォールディング
 {@a exported-symbols}
 コンパイラは **_exported_** シンボルへの参照しか解決できません。
-幸い、_collector_ は _folding_ を介してエクスポートされていないシンボルの限定的な使用を可能にします。
+幸い、_コレクター_ は _folding_ を介してエクスポートされていないシンボルの限定的な使用を可能にします。
 
-_collector_ はコレクション中に式を評価し、その結果を元の式の代わりに `.metadata.json` に記録することができます。
+_コレクター_ はコレクション中に式を評価し、その結果を元の式の代わりに `.metadata.json` に記録することができます。
 
-たとえば、_collector_ は式 `1 + 2 + 3 + 4` を評価し、それを結果 `10` で置き換えることができます。
+たとえば、_コレクター_ は式 `1 + 2 + 3 + 4` を評価し、それを結果 `10` で置き換えることができます。
 
 このプロセスは _フォールディング_ と呼ばれます。この方法で縮小できる式は _foldable_ です。
 
@@ -319,7 +319,7 @@ export class HeroComponent {
 
 エクスポートされていないので、コンパイラは `template` 定数を参照できませんでした。
 
-しかし _collector_ はその内容をインライン化することで `template` 定数をメタデータ定義に _折り畳む_ ことができます。
+しかし _コレクター_ はその内容をインライン化することで `template` 定数をメタデータ定義に _折り畳む_ ことができます。
 効果はあなたが書いた場合と同じです。
 
 ```typescript
@@ -332,7 +332,7 @@ export class HeroComponent {
 }
 ```
 
-`template` への参照がなくなり、コンパイラが後で `.metadata.json` の _collector's_ の出力を解釈したときにコンパイラを煩わせることはなくなりました。
+`template` への参照がなくなり、コンパイラが後で `.metadata.json` の _コレクター's_ の出力を解釈したときにコンパイラを煩わせることはなくなりました。
 
 別の式に `template` 定数を含めることでこの例をさらに一歩進めることができます。
 
@@ -348,13 +348,13 @@ export class HeroComponent {
 }
 ```
 
-_collector_ はこの式をそれに相当する _folded_ 文字列に変換します。
+_コレクター_ はこの式をそれに相当する _folded_ 文字列に変換します。
 
 `'<div>{{hero.name}}</div><div>{{hero.title}}</div>'`.
 
 #### 折りたたみ可能なシンタックス
 
-次の表は、_collector_ がどの式を折りたたむことができるかどうかを示しています。
+次の表は、_コレクター_ がどの式を折りたたむことができるかどうかを示しています。
 
 <style>
   td, th {vertical-align: top}
@@ -440,22 +440,22 @@ _collector_ はこの式をそれに相当する _folded_ 文字列に変換し�
 </table>
 
 
-式が折りたたみ式ではない場合、コレクタはそれをコンパイラが解決するための [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として `.metadata.json` に書き込みます。
+式が折りたたみ式ではない場合、コレクターはそれをコンパイラが解決するための [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として `.metadata.json` に書き込みます。
 
 
-## Phase 2: code generation
+## フェーズ 2: コードの生成
 
-The _collector_ makes no attempt to understand the metadata that it collects and outputs to `.metadata.json`. It represents the metadata as best it can and records errors when it detects a metadata syntax violation.
+_コレクター_ は、メタデータを収集して `.metadata.json` に出力しますが、そのメタデータを理解しようとはしません。可能な限りメタデータとして表現し、メタデータ構文の違反を検出したときにエラーを記録します。
 
-It's the compiler's job to interpret the `.metadata.json` in the code generation phase.
+コード生成フェーズで `.metadata.json` を解釈するのはコンパイラの仕事です。
 
-The compiler understands all syntax forms that the _collector_ supports, but it may reject _syntactically_ correct metadata if the _semantics_ violate compiler rules.
+コンパイラは _コレクター_ がサポートするすべての構文形式を理解しますが、_セマンティックス_ がコンパイラの規則に違反している場合は、_構文として_ 正しいメタデータを拒否することがあります。
 
-The compiler can only reference _exported symbols_.
+コンパイラは _エクスポートされたシンボル_ しか参照できません。
 
-Decorated component class members must be public. You cannot make an `@Input()` property private or protected.
+デコレートされたコンポーネントクラスメンバは公開されている必要があります。`@Input()` プロパティを非公開にしたり、保護することはできません。
 
-Data bound properties must also be public.
+データバインドプロパティも公開されている必要があります。
 
 ```typescript
 // BAD CODE - title is private
@@ -469,16 +469,16 @@ export class AppComponent {
 ```
 
 {@a supported-functions}
-Most importantly, the compiler only generates code to create instances of certain classes, support certain decorators, and call certain functions from the following lists.
+もっとも重要なことは、コンパイラは特定のクラスのインスタンスを作成し、特定のデコレーターをサポートし、そして次のリストから特定の関数を呼び出すためのコードを生成するだけです。
 
 
-### New instances
+### 新しいインスタンス
 
-The compiler only allows metadata that create instances of the class `InjectionToken` from `@angular/core`.
+コンパイラは `@angular/core` から `InjectionToken` クラスのインスタンスを作成するメタデータのみを許可します。
 
-### Annotations/Decorators
+### アノテーション/デコレーター
 
-The compiler only supports metadata for these Angular decorators.
+コンパイラはこれらの Angular デコレーターのメタデータのみをサポートします。
 
 <style>
   td, th {vertical-align: top}
@@ -486,8 +486,8 @@ The compiler only supports metadata for these Angular decorators.
 
 <table>
   <tr>
-    <th>Decorator</th>
-    <th>Module</th>
+    <th>デコレーター</th>
+    <th>モジュール</th>
   </tr>
     <tr>
     <td><code>Attribute</code></td>
@@ -566,12 +566,12 @@ The compiler only supports metadata for these Angular decorators.
 
 
 
-### Macro-functions and macro-static methods
+### マクロ関数メソッドとマクロ静的メソッド
 
-The compiler also supports _macros_ in the form of functions or static
-methods that return an expression.
+コンパイラーは、関数または静的の形式で
+ _マクロ_ もサポートします。
 
-For example, consider the following function:
+たとえば、次の関数を考えてください:
 
 ```typescript
 export function wrapInArray<T>(value: T): T[] {
@@ -579,9 +579,9 @@ export function wrapInArray<T>(value: T): T[] {
 }
 ```
 
-You can call the `wrapInArray` in a metadata definition because it returns the value of an expression that conforms to the compiler's restrictive JavaScript subset.
+メタデータ定義の中で `wrapInArray` を呼び出すことができます。それはコンパイラの制限的な JavaScript サブセットに準拠する式の値を返すからです。
 
-You might use  `wrapInArray()` like this:
+このように `wrapInArray()` を使うかもしれません:
 
 ```typescript
 @NgModule({
@@ -590,7 +590,7 @@ You might use  `wrapInArray()` like this:
 export class TypicalModule {}
 ```
 
-The compiler treats this usage as if you had written:
+コンパイラはこの使用法を、あなたが書いたかのように扱います:
 
 ```typescript
 @NgModule({
@@ -599,23 +599,23 @@ The compiler treats this usage as if you had written:
 export class TypicalModule {}
 ```
 
-The collector is simplistic in its determination of what qualifies as a macro
-function; it can only contain a single `return` statement.
+コレクターは、マクロ関数と見なされるものを決定する際に単純化されています。
+つまり、単一の `return` ステートメントしか含めることができません。
 
-The Angular [`RouterModule`](api/router/RouterModule) exports two macro static methods, `forRoot` and `forChild`, to help declare root and child routes.
-Review the [source code](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")
-for these methods to see how macros can simplify configuration of complex [NgModules](guide/ngmodules).
+Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ルートを宣言するのに役立つように、2つのマクロ静的メソッド `forRoot` と `forChild` をエクスポートします。
+これらのメソッドの[ソースコード](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")を調べて、
+複雑な [NgModules](guide/ngmodules) の構成をマクロで簡単にする方法を確認してください。
 
 {@a metadata-rewriting}
 
-### Metadata rewriting
+### メタデータの書き換え
 
-The compiler treats object literals containing the fields `useClass`, `useValue`, `useFactory`, and `data` specially. The compiler converts the expression initializing one of these fields into an exported variable, which replaces the expression. This process of rewriting these expressions removes all the restrictions on what can be in them because
-the compiler doesn't need to know the expression's value&mdash;it just needs to be able to generate a reference to the value.
+コンパイラは `useClass`、`useValue`、`useFactory`、および `data` の各フィールドを含むオブジェクトリテラルを特別に扱います。コンパイラは、これらのフィールドの1つを初期化する式をエクスポートされた変数に変換します。この変数が式を置き換えます。
+これらの式を書き換えるこのプロセスは、式に含まれる可能性があるものに対するすべての制限を取り除きます。なぜならば、コンパイラは式の値を知る必要がなく、つまり値への参照だけを生成できればよいからです。
 
 
 
-You might write something like:
+あなたはこんな風に書くかもしれません:
 
 ```typescript
 class TypicalServer {
@@ -645,15 +645,15 @@ export const ɵ0 = () => new TypicalServer();
 export class TypicalModule {}
 ```
 
-This allows the compiler to generate a reference to `ɵ0` in the
-factory without having to know what the value of `ɵ0` contains.
+これにより、コンパイラは、`ɵ0` の値に何が含まれているのかを知らなくても、
+ファクトリー内で `ɵ0` への参照を生成できます。
 
-The compiler does the rewriting during the emit of the `.js` file. This doesn't rewrite the `.d.ts` file, however, so TypeScript doesn't recognize it as being an export. Thus, it does not pollute the ES module's exported API.
+コンパイラは `.js` ファイルの発行中に書き換えを行います。ただし、これは `.d.ts` ファイルを書き換えないため、TypeScript はそれをエクスポートとして認識しません。したがって、それは ES モジュールのエクスポートされた API を汚染しません。
 
 
-## Metadata errors
+## メタデータのエラー
 
-The following are metadata errors you may encounter, with explanations and suggested corrections.
+以下は、発生する可能性があるメタデータのエラーとその説明および推奨される修正です。
 
 [Expression form not supported](#expression-form-not-supported)<br>
 [Reference to a local (non-exported) symbol](#reference-to-a-local-symbol)<br>
@@ -670,12 +670,12 @@ The following are metadata errors you may encounter, with explanations and sugge
 
 <hr>
 
-<h3 class="no-toc">Expression form not supported</h3>
+<h3 class="no-toc">式の形式はサポートされていません</h3>{@a expression-form-not-supported}
 
-The compiler encountered an expression it didn't understand while evaluating Angular metadata.
+Angularメタデータの評価中にコンパイラが理解できない式に遭遇しました。
 
-Language features outside of the compiler's [restricted expression syntax](#expression-syntax)
-can produce this error, as seen in the following example:
+次の例に示すように、コンパイラの[制限された式の構文](#expression-syntax)以外の言語機能で
+このエラーが発生する可能性があります。
 
 ```
 // ERROR
@@ -688,27 +688,27 @@ const prop = typeof Fooish; // typeof is not valid in metadata
   ...
 ```
 
-You can use `typeof` and bracket notation in normal application code.
-You just can't use those features within expressions that define Angular metadata.
+通常のアプリケーションコードでは `typeof` と括弧表記を使うことができます。
+Angular メタデータを定義する式の中でこれらの機能を使用することはできません。
 
-Avoid this error by sticking to the compiler's [restricted expression syntax](#expression-syntax)
-when writing Angular metadata
-and be wary of new or unusual TypeScript features.
+Angular メタデータを作成するときはコンパイラの[制限された式の構文](#expression-syntax)に用心してこのエラーを回避し、
+新しいまたは珍しい TypeScript の機能がある場合には
+注意してください。
 
 <hr>
 
 {@a reference-to-a-local-symbol}
-<h3 class="no-toc">Reference to a local (non-exported) symbol</h3>
+<h3 class="no-toc">ローカルの (エクスポートされていない) シンボルへの参照</h3>
 
 <div class="alert is-helpful">
 
-_Reference to a local (non-exported) symbol 'symbol name'. Consider exporting the symbol._
+_ローカルの (エクスポートされていない) シンボル 'シンボル名'への参照。シンボルのエクスポートを検討してください。_
 
 </div>
 
-The compiler encountered a referenced to a locally defined symbol that either wasn't exported or wasn't initialized.
+コンパイラが、エクスポートされていないか初期化されていないローカルに定義されたシンボルへの参照を検出しました。
 
-Here's a `provider` example of the problem.
+これが問題の `provider` の例です。
 
 ```
 // ERROR
@@ -723,15 +723,15 @@ let foo: number; // neither exported nor initialized
 })
 export class MyComponent {}
 ```
-The compiler generates the component factory, which includes the `useValue` provider code, in a separate module. _That_ factory module can't reach back to _this_ source module to access the local (non-exported) `foo` variable.
+コンパイラはコンポーネントファクトリを生成します。これは `useValue` プロバイダーコードを含み、別のモジュールで生成されます。_この_ ファクトリモジュールはローカルの (エクスポートされていない) 変数 `foo` にアクセスするためにこのソースモジュールに戻ることはできません。
 
-You could fix the problem by initializing `foo`.
+`foo` を初期化することで問題を解決することができます。
 
 ```
 let foo = 42; // initialized
 ```
 
-The compiler will [fold](#folding) the expression into the provider as if you had written this.
+あなたがこれを書いたかのように、コンパイラは式をプロバイダーに [折りたたむ](#folding) でしょう。
 
 ```
   providers: [
@@ -739,7 +739,7 @@ The compiler will [fold](#folding) the expression into the provider as if you ha
   ]
 ```
 
-Alternatively, you can fix it by exporting `foo` with the expectation that `foo` will be assigned at runtime when you actually know its value.
+あるいは、`foo` が実行時に代入されるはずでその値が実際にわかっているのであれば、`foo` をエクスポートすることで修正できます。
 
 ```
 // CORRECTED
@@ -755,11 +755,11 @@ export let foo: number; // exported
 export class MyComponent {}
 ```
 
-Adding `export` often works for variables referenced in metadata such as `providers` and `animations` because the compiler can generate _references_ to the exported variables in these expressions. It doesn't need the _values_ of those variables.
+`export` を追加することは、`providers` や `animations` のようなメタデータで参照されている変数に対してよく機能します。なぜなら、コンパイラはこれらの式でエクスポートされた変数に対して _参照_ を生成できるからです。それらの変数の _値_ は必要ありません。
 
-Adding `export` doesn't work when the compiler needs the _actual value_
-in order to generate code.
-For example, it doesn't work for the `template` property.
+コードを生成するためにコンパイラが _実際の値_ を必要とする場合、
+`export` の追加は機能しません。
+たとえば、`template` プロパティには機能しません。
 
 ```
 // ERROR
@@ -772,26 +772,26 @@ export let someTemplate: string; // exported but not initialized
 export class MyComponent {}
 ```
 
-The compiler needs the value of the `template` property _right now_ to generate the component factory.
-The variable reference alone is insufficient.
-Prefixing the declaration with `export` merely produces a new error, "[`Only initialized variables and constants can be referenced`](#only-initialized-variables)".
+コンポーネントファクトリを生成するために、コンパイラは _すぐに_ `template` プロパティの値を必要とします。
+変数参照だけでは不十分です。
+宣言の先頭に `export` を付けると、単に "[`Only initialized variables and constants can be referenced`](#only-initialized-variables)" という新しいエラーが発生します。
 
 <hr>
 
 {@a only-initialized-variables}
-<h3 class="no-toc">Only initialized variables and constants</h3>
+<h3 class="no-toc">初期化された変数と定数のみ</h3>
 
 <div class="alert is-helpful">
 
-_Only initialized variables and constants can be referenced because the value of this variable is needed by the template compiler._
+_この変数の値はテンプレートコンパイラで必要とされるため、初期化された変数と定数のみを参照できます。_
 
 </div>
 
-The compiler found a reference to an exported variable or static field that wasn't initialized.
-It needs the value of that variable to generate code.
+初期化されていないエクスポートされた変数またはスタティックフィールドへの参照をコンパイラが見つけました。
+コードを生成するにはその変数の値が必要です。
 
-The following example tries to set the component's `template` property to the value of
-the exported `someTemplate` variable which is declared but _unassigned_.
+次の例では、コンポーネントの `template` プロパティを、
+宣言されているが _割り当てられていない_ エクスポートされた `someTemplate` 変数の値に設定しようとします。
 
 ```
 // ERROR
@@ -804,7 +804,7 @@ export let someTemplate: string;
 export class MyComponent {}
 ```
 
-You'd also get this error if you imported `someTemplate` from some other module and neglected to initialize it there.
+他のモジュールから `someTemplate` をインポートしてそこで初期化するのを怠った場合にもこのエラーが発生します。
 
 ```
 // ERROR - not initialized there either
@@ -817,12 +817,12 @@ import { someTemplate } from './config';
 export class MyComponent {}
 ```
 
-The compiler cannot wait until runtime to get the template information.
-It must statically derive the value of the `someTemplate` variable from the source code
-so that it can generate the component factory, which includes
-instructions for building the element based on the template.
+コンパイラは実行時までテンプレート情報を取得するのを待つことができません。
+テンプレートに基づいて要素を構築するための命令を含む
+コンポーネントファクトリを生成できるように、
+ソースコードから `someTemplate` 変数の値を静的に導出する必要があります。
 
-To correct this error, provide the initial value of the variable in an initializer clause _on the same line_.
+このエラーを修正するには、 _同じ行の_ initializer 句に変数の初期値を指定します。
 
 ```
 // CORRECTED
@@ -837,18 +837,18 @@ export class MyComponent {}
 
 <hr>
 
-<h3 class="no-toc">Reference to a non-exported class</h3>
+<h3 class="no-toc">エクスポートされていないクラスへの参照</h3>{@a reference-to-a-non-exported-class}
 
 <div class="alert is-helpful">
 
-_Reference to a non-exported class <class name>. Consider exporting the class._
+_エクスポートされていないクラス <クラス名> への参照。クラスのエクスポートを検討してください。_
 
 </div>
 
-Metadata referenced a class that wasn't exported.
+メタデータはエクスポートされていないクラスを参照しました。
 
-For example, you may have defined a class and used it as an injection token in a providers array
-but neglected to export that class.
+たとえば、あるクラスを定義し、それを providers 配列の中でインジェクショントークンとして使用したが、
+そのクラスをエクスポートしていなかったとします。
 
 ```
 // ERROR
@@ -861,9 +861,9 @@ abstract class MyStrategy { }
   ...
 ```
 
-Angular generates a class factory in a separate module and that
-factory [can only access exported classes](#exported-symbols).
-To correct this error, export the referenced class.
+Angular は別のモジュールでクラスファクトリを生成し、そのファクトリは
+[エクスポートされたクラスにのみアクセスできます](#exported-symbols)。
+このエラーを修正するには、参照先クラスをエクスポートしてください。
 
 ```
 // CORRECTED
@@ -877,11 +877,11 @@ export abstract class MyStrategy { }
 ```
 <hr>
 
-<h3 class="no-toc">Reference to a non-exported function</h3>
+<h3 class="no-toc">エクスポートされていない関数への参照</h3>{@a reference-to-a-non-exported-function}
 
-Metadata referenced a function that wasn't exported.
+メタデータはエクスポートされていない関数を参照しました。
 
-For example, you may have set a providers `useFactory` property to a locally defined function that you neglected to export.
+たとえば、プロバイダーの `useFactory` プロパティに、エクスポートされなかったローカルに定義された関数を設定したかもしれません。
 
 ```
 // ERROR
@@ -894,9 +894,9 @@ function myStrategy() { ... }
   ...
 ```
 
-Angular generates a class factory in a separate module and that
-factory [can only access exported functions](#exported-symbols).
-To correct this error, export the function.
+Angular は別のモジュールでクラスファクトリを生成し、そのファクトリは
+[エクスポートされた関数にのみアクセスできます](#exported-symbols)。
+このエラーを修正するには、関数をエクスポートしてください。
 
 ```
 // CORRECTED
@@ -911,16 +911,16 @@ export function myStrategy() { ... }
 <hr>
 
 {@a function-calls-not-supported}
-<h3 class="no-toc">Function calls are not supported</h3>
+<h3 class="no-toc">関数呼び出しはサポートされていません。</h3>
 
 <div class="alert is-helpful">
 
-_Function calls are not supported. Consider replacing the function or lambda with a reference to an exported function._
+_関数呼び出しはサポートされていません。関数またはラムダをエクスポートされた関数への参照に置き換えることを検討してください。_
 
 </div>
 
-The compiler does not currently support [function expressions or lambda functions](#function-expression).
-For example, you cannot set a provider's `useFactory` to an anonymous function or arrow function like this.
+コンパイラは現在、[関数式やラムダ関数](#function-expression) をサポートしていません。
+たとえば、プロバイダーの `useFactory` に、このような無名関数やアロー関数を設定することはできません。
 
 ```
 // ERROR
@@ -931,7 +931,7 @@ For example, you cannot set a provider's `useFactory` to an anonymous function o
   ]
   ...
 ```
-You also get this error if you call a function or method in a provider's `useValue`.
+プロバイダーの `useValue` で関数やメソッドを呼び出した場合にもこのエラーが発生します。
 ```
 // ERROR
 import { calculateValue } from './utilities';
@@ -943,7 +943,7 @@ import { calculateValue } from './utilities';
   ...
 ```
 
-To correct this error, export a function from the module and refer to the function in a `useFactory` provider instead.
+このエラーを修正するには、モジュールから関数をエクスポートし、代わりに `useFactory` プロバイダーの関数を参照してください。
 
 <code-example linenums="false">
 // CORRECTED
@@ -966,17 +966,17 @@ export function someValueFactory() {
 <hr>
 
 {@a destructured-variable-not-supported}
-<h3 class="no-toc">Destructured variable or constant not supported</h3>
+<h3 class="no-toc">非構造化変数または定数はサポートされていません。</h3>
 
 <div class="alert is-helpful">
 
-_Referencing an exported destructured variable or constant is not supported by the template compiler. Consider simplifying this to avoid destructuring._
+_エクスポートされた非構造化変数または定数の参照は、テンプレートコンパイラではサポートされていません。デストラクチャリングを避けるためにこれを単純化することを検討してください。_
 
 </div>
 
-The compiler does not support references to variables assigned by [destructuring](https://www.typescriptlang.org/docs/handbook/variable-declarations.html#destructuring).
+コンパイラは [デストラクチャリング](https://www.typescriptlang.org/docs/handbook/variable-declarations.html#destructuring) によって割り当てられた変数への参照をサポートしません。
 
-For example, you cannot write something like this:
+たとえば、次のようなものを書くことはできません:
 
 <code-example linenums="false">
 // ERROR
@@ -992,7 +992,7 @@ const {foo, bar} = configuration;
   ...
 </code-example>
 
-To correct this error, refer to non-destructured values.
+このエラーを修正するには、非構造化された値を参照してください。
 
 <code-example linenums="false">
 // CORRECTED
@@ -1007,15 +1007,15 @@ import { configuration } from './configuration';
 
 <hr>
 
-<h3 class="no-toc">Could not resolve type</h3>
+<h3 class="no-toc">型を解決できませんでした</h3>{@a could-not-resolve-type}
 
-The compiler encountered a type and can't determine which module exports that type.
+コンパイラが型を検出しましたが、どのモジュールがその型をエクスポートしているのか判断できません。
 
-This can happen if you refer to an ambient type.
-For example, the `Window` type is an ambient type declared in the global `.d.ts` file.
+これは、アンビエントタイプを参照した場合に起こります。
+たとえば、`Window` 型はグローバルな `.d.ts` ファイルで宣言されているアンビエント型です。
 
-You'll get an error if you reference it in the component constructor,
-which the compiler must statically analyze.
+コンポーネントコンストラクターで参照するとエラーが発生しますが、
+これをコンパイラが静的に分析する必要があります。
 
 ```
 // ERROR
@@ -1024,22 +1024,22 @@ export class MyComponent {
   constructor (private win: Window) { ... }
 }
 ```
-TypeScript understands ambient types so you don't import them.
-The Angular compiler does not understand a type that you neglect to export or import.
+TypeScript はアンビエントタイプを理解するため、あなたはそれをインポートしていません。
+Angular コンパイラは、エクスポートまたはインポートを怠った型を理解しません。
 
-In this case, the compiler doesn't understand how to inject something with the `Window` token.
+この場合、コンパイラは `Window` トークンで何かを注入する方法を理解していません。
 
-Do not refer to ambient types in metadata expressions.
+メタデータ式でアンビエントタイプを参照しないでください。
 
-If you must inject an instance of an ambient type,
-you can finesse the problem in four steps:
+アンビエントタイプのインスタンスを注入する必要がある場合は、
+4つのステップで問題を解決できます:
 
-1. Create an injection token for an instance of the ambient type.
-1. Create a factory function that returns that instance.
-1. Add a `useFactory` provider with that factory function.
-1. Use `@Inject` to inject the instance.
+1. アンビエントタイプのインスタンスのインジェクショントークンを作成します
+1. そのインスタンスを返すファクトリ関数を作成します
+1. そのファクトリ関数で `useFactory` プロバイダーを追加します
+1. インスタンスを注入するには `@Inject` を使います
 
-Here's an illustrative example.
+これが実例です。
 
 <code-example linenums="false">
 // CORRECTED
@@ -1059,10 +1059,10 @@ export class MyComponent {
 }
 </code-example>
 
-The `Window` type in the constructor is no longer a problem for the compiler because it
-uses the `@Inject(WINDOW)` to generate the injection code.
+コンストラクター内の `Window` 型は、`@Inject(WINDOW)` を使用してインジェクションコードを生成するため、
+コンパイラにとってもはや問題ではありません。
 
-Angular does something similar with the `DOCUMENT` token so you can inject the browser's `document` object (or an abstraction of it, depending upon the platform in which the application runs).
+Angular は `DOCUMENT` トークンと似たようなことをするので、ブラウザの `document` オブジェクト (あるいはアプリケーションが実行されているプラットフォームによってはその抽象オブジェクト) を挿入することができます。
 
 <code-example linenums="false">
 import { Inject }   from '@angular/core';
@@ -1075,17 +1075,17 @@ export class MyComponent {
 </code-example>
 <hr>
 
-<h3 class="no-toc">Name expected</h3>
+<h3 class="no-toc">名前が期待されています</h3>{@a name-expected}
 
-The compiler expected a name in an expression it was evaluating.
-This can happen if you use a number as a property name as in the following example.
+コンパイラは評価中の式に名前が必要です。
+次の例のように、プロパティ名として番号を使用してしまうと、これが発生する可能性があります。
 
 ```
 // ERROR
 provider: [{ provide: Foo, useValue: { 0: 'test' } }]
 ```
 
-Change the name of the property to something non-numeric.
+プロパティの名前を数値以外のものに変更します。
 
 ```
 // CORRECTED
@@ -1094,12 +1094,12 @@ provider: [{ provide: Foo, useValue: { '0': 'test' } }]
 
 <hr>
 
-<h3 class="no-toc">Unsupported enum member name</h3>
+<h3 class="no-toc">サポートされていない列挙型メンバー名</h3>{@a unsupported-enum-member-name}
 
-Angular couldn't determine the value of the [enum member](https://www.typescriptlang.org/docs/handbook/enums.html)
-that you referenced in metadata.
+Angular は、メタデータで参照した [列挙型メンバー](https://www.typescriptlang.org/docs/handbook/enums.html) の値を
+特定できませんでした。
 
-The compiler can understand simple enum values but not complex values such as those derived from computed properties.
+コンパイラは単純な enum 値を理解できますが、計算プロパティから派生したものなどの複雑な値は理解できません。
 
 <code-example linenums="false">
 // ERROR
@@ -1118,20 +1118,20 @@ enum Colors {
   ...
 </code-example>
 
-Avoid referring to enums with complicated initializers or computed properties.
+複雑なイニシャライザや計算プロパティで列挙型を参照しないでください。
 
 <hr>
 
 {@a tagged-template-expressions-not-supported}
-<h3 class="no-toc">Tagged template expressions are not supported</h3>
+<h3 class="no-toc">タグ付きテンプレート式はサポートされていません</h3>
 
 <div class="alert is-helpful">
 
-_Tagged template expressions are not supported in metadata._
+_タグ付きテンプレート式は、メタデータではサポートされていません。_
 
 </div>
 
-The compiler encountered a JavaScript ES2015 [tagged template expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals) such as,
+コンパイラが次のような JavaScript ES2015 [タグ付きテンプレート式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals)を検出しました。
 ```
 // ERROR
 const expression = 'funky';
@@ -1140,18 +1140,18 @@ const raw = String.raw`A tagged template ${expression} string`;
  template: '<div>' + raw + '</div>'
  ...
 ```
-[`String.raw()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/raw)
-is a _tag function_ native to JavaScript ES2015.
+[`String.raw()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/raw) は、JavaScript ES2015 ネイティブの
+_タグ付き関数_ です。
 
-The AOT compiler does not support tagged template expressions; avoid them in metadata expressions.
+AOT コンパイラはタグ付きテンプレート式をサポートしません。メタデータ式の中ではそれらを避けてください。
 
 <hr>
 
-<h3 class="no-toc">Symbol reference expected</h3>
+<h3 class="no-toc">シンボル参照が必要です</h3>{@a symbol-reference-expected}
 
-The compiler expected a reference to a symbol at the location specified in the error message.
+コンパイラは、エラーメッセージで指定された場所にあるシンボルへの参照を予期していました。
 
-This error can occur if you use an expression in the `extends` clause of a class.
+このエラーは、クラスの `extends` 節で式を使用した場合に起こります。
 
 <!--
 
@@ -1160,18 +1160,18 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
 -->
 
 {@a binding-expression-validation}
-  ## Phase 3: binding expression validation
+  ## フェーズ 3: バインディング式の検証
 
-  In the validation phase, the Angular template compiler uses the TypeScript compiler to validate the
-  binding expressions in templates. Enable this phase explicitly by adding the compiler
-  option `"fullTemplateTypeCheck"` in the `"angularCompilerOptions"` of the project's `tsconfig.json` (see
-  [Angular Compiler Options](#compiler-options)).
+  検証段階では、Angular テンプレートコンパイラは TypeScript コンパイラを使用してテンプレート内のバインディング式を検証します。
+  プロジェクトの `tsconfig.json` の `"angularCompilerOptions"` にコンパイラオプション `"fullTemplateTypeCheck"`を追加して、
+  このフェーズを明示的に有効にします
+  ([Angular コンパイラオプション](#compiler-options)を参照)。
 
-  Template validation produces error messages when a type error is detected in a template binding
-  expression, similar to how type errors are reported by the TypeScript compiler against code in a `.ts`
-  file.
+  テンプレート検証では、
+  `.ts` ファイル内のコードに対して TypeScript コンパイラによって型エラーが報告されるのと同様に、
+  テンプレートバインディング式で型エラーが検出されるとエラーメッセージが表示されます。
 
-  For example, consider the following component:
+  たとえば、次のコンポーネントを考えてみましょう:
 
   ```typescript
   @Component({
@@ -1183,32 +1183,32 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  This will produce the following error:
+  これにより次のエラーが発生します:
 
   ```
   my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on type 'Person'. Did you mean 'address'?
   ```
 
-  The file name reported in the error message, `my.component.ts.MyComponent.html`, is a synthetic file
-  generated by the template compiler that holds contents of the `MyComponent` class template.
-  Compiler never writes this file to disk. The line and column numbers are relative to the template string
-  in the `@Component` annotation of the class, `MyComponent` in this case. If a component uses
-  `templateUrl` instead of `template`, the errors are reported in the HTML file referenced by the
-  `templateUrl` instead of a synthetic file.
+  エラーメッセージで報告されたファイル名、つまり `my.component.ts.MyComponent.html` は、
+  `MyComponent` クラステンプレートの内容を保持するテンプレートコンパイラによって生成された合成ファイルです。
+  コンパイラはこのファイルをディスクに書き込みません。
+  行番号と列番号は、クラスの `@Component` アノテーションのテンプレート文字列 (この場合は `MyComponent`) を基準にしています。
+  コンポーネントが`template`の代わりに `templateUrl` を使用する場合、
+  エラーは合成ファイルの代わりに `templateUrl` によって参照される HTML ファイルで報告されます。
 
-  The error location is the beginning of the text node that contains the interpolation expression with
-  the error. If the error is in an attribute binding such as `[value]="person.address.street"`, the error
-  location is the location of the attribute that contains the error.
+  エラー位置は、エラーのある補間式を含むテキストノードの始まりです。
+  エラーが `[value]="person.address.street"`のような属性バインディングにある場合、
+  エラーの場所はエラーを含む属性の場所です。
 
-  The validation uses the TypeScript type checker and the options supplied to the TypeScript compiler to control
-  how detailed the type validation is. For example, if the `strictTypeChecks` is specified, the error  ```my.component.ts.MyComponent.html(1,1): : Object is possibly 'undefined'``` is reported as well as the above error message.
+  検証では、TypeScript 型チェッカーと TypeScript コンパイラに提供されるオプションを使用して、型検証の詳細度を制御します。
+  たとえば、`strictTypeChecks` が指定されている場合、上記のエラーメッセージと同様に、エラー  ```my.component.ts.MyComponent.html(1,1): : Object is possibly 'undefined'``` が報告されます。
 
-  ### Type narrowing
+  ### タイプナローイング
 
-  The expression used in an `ngIf` directive is used to narrow type unions in the Angular
-  template compiler, the same way the `if` expression does in TypeScript. For example, to avoid
-  `Object is possibly 'undefined'` error in the template above, modify it to only emit the
-  interpolation if the value of `person` is initialized as shown below:
+  `ngIf` ディレクティブで使用されている式は、Angular テンプレートコンパイラで型候補を絞り込むために使用されます。
+  これは、TypeScript で `if` 式が行うのと同じ方法です。
+  たとえば、上のテンプレートで `Object is possibly 'undefined'` エラーになるのを避けるために、
+  `person` の値が次のように初期化されている場合にのみ補間を実行するようにオブジェクトを修正します。
 
   ```typescript
   @Component({
@@ -1220,35 +1220,35 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  Using `*ngIf` allows the TypeScript compiler to infer that the `person` used in the
-  binding expression will never be `undefined`.
+  `*ngIf` を使用すると、
+  TypeScript コンパイラは、バインディング式で使用されている `person` が `undefined` になることはないと推測できます。
 
-  #### Custom `ngIf` like directives
+  #### カスタムの `ngIf` に似たディレクティブ
 
-  Directives that behave like `*ngIf` can declare that they want the same treatment by including
-  a static member marker that is a signal to the template compiler to treat them
-  like `*ngIf`. This static member for `*ngIf` is:
+  `*ngIf` のように動作するディレクティブは、`*ngIf` のように扱うためのテンプレートコンパイラへのシグナルである静的メンバーマーカーを含めることで、
+  同じ扱いが必要であることを宣言できます。
+  `*ngIf` のこの静的メンバは次のとおりです。
 
   ```typescript
     public static ngIfUseIfTypeGuard: void;
   ```
 
-  This declares that the input property `ngIf` of the `NgIf` directive should be treated as a
-  guard to the use of its template, implying that the template will only be instantiated if
-  the `ngIf` input property is true.
+  これは、`NgIf` ディレクティブの入力プロパティ `ngIf` がそのテンプレートの使用に対する保護として扱われるべきであることを宣言します。
+  つまり、`ngIf` 入力プロパティが true の場合にのみ
+  テンプレートがインスタンス化されることを意味します。
 
 
-  ### Non-null type assertion operator
+  ### null 以外の型アサーション演算子
 
-  Use the [non-null type assertion operator](guide/template-syntax#non-null-assertion-operator)
-  to suppress the `Object is possibly 'undefined'` error when it is inconvenient to use
-  `*ngIf` or when some constraint in the component ensures that the expression is always
-  non-null when the binding expression is interpolated.
+  `*ngIf` を使用するのが不便な場合、
+  またはバインディング式の補間時にコンポーネント内の制約によって式が常に NULL 以外になることが保証されている場合は、
+  [非 null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)を使用して
+  `Object is possibly 'undefined'` エラーを抑制します。
 
-  In the following example, the `person` and `address` properties are always set together,
-  implying that `address` is always non-null if `person` is non-null. There is no convenient
-  way to describe this constraint to TypeScript and the template compiler, but the error
-  is suppressed in the example by using `address!.street`.
+  次の例では、`person` プロパティと `address` プロパティは常に一緒に設定されているため、
+  `person` が null 以外の場合、`address` は常に null 以外の値になります。
+  TypeScript やテンプレートコンパイラにこの制約を記述するのに便利な方法はありませんが、
+  この例では `address!.street` を使用してエラーを抑制しています。
 
   ```typescript
   @Component({
@@ -1266,11 +1266,11 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  The non-null assertion operator should be used sparingly as refactoring of the component
-  might break this constraint.
+  コンポーネントのリファクタリングはこの制約を破る可能性があるため、
+  非 null アサーション演算子は控えめに使用してください。
 
-  In this example it is recommended to include the checking of `address`
-  in the `*ngIf`as shown below:
+  この例では、次に示すように
+  `*ngIf` に `address` のチェックを含めることをお勧めします:
 
   ```typescript
   @Component({
@@ -1288,15 +1288,15 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   }
   ```
 
-  ### Disabling type checking using `$any()`
+  ### `$any()` を使って型チェックを無効にする
 
-  Disable checking of a binding expression by surrounding the expression
-  in a call to the [`$any()` cast pseudo-function](guide/template-syntax).
-  The compiler treats it as a cast to the `any` type just like in TypeScript when a `<any>`
-  or `as any` cast is used.
+  [`$any()` キャスト疑似関数](guide/template-syntax)の呼び出しで式を囲むことによって、
+  バインディング式のチェックを無効にします。
+  `<any>` が使用されている場合、または `as any` キャストが使用されている場合は、
+  TypeScript の場合と同様に、コンパイラはこれを `any` 型へのキャストとして扱います。
 
-  In the following example, the error `Property addresss does not exist` is suppressed
-  by casting `person` to the `any` type.
+  次の例では、`Property addresss does not exist` というエラーは、
+  `person` を `any` 型にキャストすることによって抑制されます。
 
   ```typescript
   @Component({
@@ -1309,11 +1309,11 @@ Chuck: After reviewing your PR comment I'm still at a loss. See [comment there](
   ```
 
 {@a tsconfig-extends}
-## Configuration inheritance with extends
-Similar to TypeScript Compiler, Angular Compiler also supports `extends` in the `tsconfig.json` on `angularCompilerOptions`. A tsconfig file can inherit configurations from another file using the `extends` property.
- The `extends` is a top level property parallel to `compilerOptions` and `angularCompilerOptions`. 
- The configuration from the base file are loaded first, then overridden by those in the inheriting config file.
- Example:
+## extends による設定の継承
+TypeScript コンパイラと同様に、Angular コンパイラは `tsconfig.json` の `angularCompilerOptions` の `extends` もサポートしています。
+tsconfig ファイルは、`extends` プロパティを使用して別のファイルから構成を継承できます。
+`extends` は、`compilerOptions` および `angularCompilerOptions` と並行するトップレベルのプロパティです。ベースファイルの設定が最初にロードされ、次に継承設定ファイルの設定によって上書きされます。 
+例:
 ```json
 {
   "extends": "../tsconfig.base.json",
@@ -1328,14 +1328,14 @@ Similar to TypeScript Compiler, Angular Compiler also supports `extends` in the 
   }
 }
 ```
- More information about tsconfig extends can be found in the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+ tsconfig の extends についての詳細は [TypeScript ハンドブック](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)にあります。
 
 {@a compiler-options}
-## Angular template compiler options
+## Angular テンプレートコンパイラオプション
 
-The template compiler options are specified as members of the `"angularCompilerOptions"` object in the `tsconfig.json` file. Specify template compiler options along with the options supplied to the TypeScript compiler as shown here:
+テンプレートコンパイラオプションは、`tsconfig.json` ファイルの `"angularCompilerOptions"` オブジェクトのメンバとして指定されています。次に示すように、TypeScript コンパイラに提供されるオプションとともにテンプレートコンパイラオプションを指定します。
 
-    ```json
+  ```json
     {
       "compilerOptions": {
         "experimentalDecorators": true,
@@ -1346,122 +1346,122 @@ The template compiler options are specified as members of the `"angularCompilerO
         "preserveWhitespaces": true,
                   ...
       }
-  }
+    }
   ```
 
-The following section describes the Angular's template compiler options.
+次のセクションでは、Angular のテンプレートコンパイラオプションについて説明します。
 
 ### *enableResourceInlining*
-This option instructs the compiler to replace the `templateUrl` and `styleUrls` property in all `@Component` decorators with inlined contents in `template` and `styles` properties.
-When enabled, the `.js` output of `ngc` will have no lazy-loaded `templateUrl` or `styleUrls`.
+このオプションは、すべての `@Component` デコレーターの `templateUrl` および `styleUrls` プロパティを `template` および `styles` プロパティのインライン化された内容に置き換えるようにコンパイラに指示します。
+有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
 ### *skipMetadataEmit*
 
-This option tells the compiler not to produce `.metadata.json` files.
-The option is `false` by default.
+このオプションは、`.metadata.json` ファイルを生成しないようにコンパイラーに指示します。
+このオプションはデフォルトでは `false` です。
 
-`.metadata.json` files contain information needed by the template compiler from a `.ts`
-file that is not included in the `.d.ts` file produced by the TypeScript compiler. This information contains,
-for example, the content of annotations (such as a component's template), which TypeScript
-emits to the `.js` file but not to the `.d.ts` file.
+`.metadata.json` ファイルには、TypeScript コンパイラによって生成された `.d.ts` ファイルに含まれていない `.ts` ファイルから、
+テンプレートコンパイラによって必要とされる情報が含まれています。
+たとえば、この情報には、TypeScript が `.js` ファイルに発行するが `.d.ts` ファイルには発行しない注釈の内容
+(コンポーネントのテンプレートなど) が含まれています。
 
-This option should be set to `true` if you are using TypeScript's `--outFile` option, because the metadata files
-are not valid for this style of TypeScript output. It is not recommended to use `--outFile` with
-Angular. Use a bundler, such as [webpack](https://webpack.js.org/), instead.
+TypeScript の `--outFile` オプションを使用している場合は、このオプションを `true` に設定してください。
+メタデータファイルはこのスタイルの TypeScript 出力には無効です。Angular で `--outFile` を使用することはお勧めできません。
+代わりに、[webpack](https://webpack.js.org/) などのバンドラーを使用してください。
 
-This option can also be set to `true` when using factory summaries because the factory summaries
-include a copy of the information that is in the `.metadata.json` file.
+ファクトリーサマリーには `.metadata.json` ファイルにある情報のコピーが含まれているため、
+ファクトリーサマリーを使用するときにもこのオプションを `true` に設定できます。
 
 ### *strictMetadataEmit*
 
-This option tells the template compiler to report an error to the `.metadata.json`
-file if `"skipMetadataEmit"` is `false`. This option is `false` by default. This should only be used when `"skipMetadataEmit"` is `false` and `"skipTemplateCodeGen"` is `true`.
+このオプションは、`"skipMetadataEmit"` が `false` の場合、`.metadata.json` ファイルにエラーを報告するようにテンプレートコンパイラに指示します。
+このオプションはデフォルトでは `false` です。これは、`"skipMetadataEmit"` が `false` で `"skipTemplateCodeGen"` が `true` の場合にのみ使用されるべきです。
 
-This option is intended to validate the `.metadata.json` files emitted for bundling with an `npm` package. The validation is strict and can emit errors for metadata that would never produce an error when used by the template compiler. You can choose to suppress the error emitted by this option for an exported symbol by including `@dynamic` in the comment documenting the symbol.
+このオプションは、`npm` パッケージとのバンドル用に発行された `.metadata.json` ファイルを検証するためのものです。検証は厳密であり、テンプレートコンパイラで使用されたときにエラーが発生しないようなメタデータに対してエラーを発生させる可能性があります。シンボルを説明するコメントに `@dynamic` を含めることで、エクスポートされたシンボルに対してこのオプションによって発生するエラーを抑制することを選択できます。
 
-It is valid for `.metadata.json` files to contain errors. The template compiler reports these errors
-if the metadata is used to determine the contents of an annotation. The metadata
-collector cannot predict the symbols that are designed for use in an annotation, so it will preemptively
-include error nodes in the metadata for the exported symbols. The template compiler can then use the error
-nodes to report an error if these symbols are used. If the client of a library intends to use a symbol in an annotation, the template compiler will not normally report
-this until the client uses the symbol. This option allows detecting these errors during the build phase of
-the library and is used, for example, in producing Angular libraries themselves.
+`.metadata.json` ファイルにエラーが含まれていることは有効です。
+メタデータを使用して注釈の内容を判断すると、テンプレートコンパイラはこれらのエラーを報告します。
+メタデータコレクターは、アノテーションで使用するために設計されたシンボルを予測できないため、
+エクスポートされたシンボルのメタデータにエラーノードを優先的に含めます。
+これらのシンボルが使用されている場合、テンプレートコンパイラはエラーノードを使用してエラーを報告できます。
+ライブラリのクライアントが注釈でシンボルを使うつもりなら、テンプレートコンパイラは通常クライアントがシンボルを使うまでこれを報告しません。
+このオプションはライブラリのビルド段階でこれらのエラーを検出することを可能にし、たとえば Angular ライブラリ自身を作成する際に使用されます。
 
 ### *skipTemplateCodegen*
 
-This option tells the compiler to suppress emitting `.ngfactory.js` and `.ngstyle.js` files. When set,
-this turns off most of the template compiler and disables reporting template diagnostics.
-This option can be used to instruct the
-template compiler to produce `.metadata.json` files for distribution with an `npm` package while
-avoiding the production of `.ngfactory.js` and `.ngstyle.js` files that cannot be distributed to
-`npm`.
+このオプションは、`.ngfactory.js` ファイルと `.ngstyle.js` ファイルの出力を抑制するようにコンパイラーに指示します。
+設定されると、これはテンプレートコンパイラの大部分をオフにし、
+テンプレート診断の報告を無効にします。
+このオプションは、`npm` に配布できない `.ngfactory.js` および `.ngstyle.js` ファイルの作成を避けながら、
+`npm` パッケージで配布するための `.metadata.json` ファイルを作成するように
+テンプレートコンパイラに指示するために使用できます。
 
 ### *strictInjectionParameters*
 
-When set to `true`, this options tells the compiler to report an error for a parameter supplied
-whose injection type cannot be determined. When this option is not provided or is `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved will
-produce a warning.
+`true` に設定した場合、このオプションは、インジェクションタイプを判別できない指定されたパラメーターについてエラーを報告するようコンパイラーに指示します。
+このオプションが提供されていないか `false` の場合、
+型を解決できない `@Injectable` でマークされたクラスのコンストラクターパラメータは警告を生成します。
 
-*Note*: It is recommended to change this option explicitly to `true` as this option will default to `true` in the future.
+*注*: 将来このオプションはデフォルトで `true` になるので、このオプションを明示的に `true` に変更することをお勧めします。
 
 ### *flatModuleOutFile*
 
-When set to `true`, this option tells the template compiler to generate a flat module
-index of the given file name and the corresponding flat module metadata. Use this option when creating
-flat modules that are packaged similarly to `@angular/core` and `@angular/common`. When this option
-is used, the `package.json` for the library should refer
-to the generated flat module index instead of the library index file. With this
-option only one `.metadata.json` file is produced, which contains all the metadata necessary
-for symbols exported from the library index. In the generated `.ngfactory.js` files, the flat
-module index is used to import symbols that includes both the public API from the library index
-as well as shrowded internal symbols.
+`true` に設定すると、このオプションは、指定されたファイル名と対応するフラットモジュールメタデータのフラットモジュールインデックスを生成するようにテンプレートコンパイラに指示します。
+`@angular/core` および `@angular/common` と同様に
+パッケージ化されているフラットモジュールを作成するときにこのオプションを使用します。
+このオプションを使用すると、ライブラリの `package.json` は、ライブラリインデックスファイルではなく、
+生成されたフラットモジュールインデックスを参照するようになります。
+このオプションを使用すると、ライブラリインデックスからエクスポートされたシンボルに必要なすべてのメタデータを含む
+1 つの `.metadata.json` ファイルのみが生成されます。
+生成された `.ngfactory.js` ファイルでは、フラットモジュールインデックスを使用して、
+ライブラリインデックスからのパブリック API と、内部の短いシンボルの両方を含むシンボルをインポートします。
 
-By default the `.ts` file supplied in the `files` field is assumed to be the library index.
-If more than one `.ts` file is specified, `libraryIndex` is used to select the file to use.
-If more than one `.ts` file is supplied without a `libraryIndex`, an error is produced. A flat module
-index `.d.ts` and `.js` will be created with the given `flatModuleOutFile` name in the same
-location as the library index `.d.ts` file. For example, if a library uses the
-`public_api.ts` file as the library index of the module, the `tsconfig.json` `files` field
-would be `["public_api.ts"]`. The `flatModuleOutFile` options could then be set to, for
-example `"index.js"`, which produces `index.d.ts` and  `index.metadata.json` files. The
-library's `package.json`'s `module` field would be `"index.js"` and the `typings` field
-would be `"index.d.ts"`.
+デフォルトでは、`files` フィールドに指定された `.ts` ファイルがライブラリインデックスと見なされます。
+複数の `.ts` ファイルが指定されている場合は、`libraryIndex` を使用して使用するファイルを選択します。
+`libraryIndex` なしで複数の `.ts` ファイルが指定された場合、エラーが発生します。
+フラットモジュールインデックス `.d.ts` および `.js` は、
+ライブラリインデックス `.d.ts` ファイルと同じ場所に、指定された `flatModuleOutFile` 名で作成されます。
+たとえば、ライブラリがモジュールのライブラリインデックスとして `public_api.ts` ファイルを使用する場合、
+`tsconfig.json` `files` フィールドは `["public_api.ts"]` になります。
+その後、`flatModuleOutFile` オプションを `"index.js"` に設定すると、`index.d.ts` ファイルと `index.metadata.json` ファイルが生成されます。
+ライブラリの `package.json` の `module` フィールドは `"index.js"` になり、
+`typings` フィールドは `"index.d.ts"` になります。
 
 ### *flatModuleId*
 
-This option specifies the preferred module id to use for importing a flat module.
-References generated by the template compiler will use this module name when importing symbols
-from the flat module.
-This is only meaningful when `flatModuleOutFile` is also supplied. Otherwise the compiler ignores
-this option.
+このオプションは、フラットモジュールのインポートに使用する優先モジュール ID を指定します。
+テンプレートコンパイラによって生成された参照は、
+フラットモジュールからシンボルをインポートするときにこのモジュール名を使用します。
+これは、`flatModuleOutFile` も指定されている場合にのみ意味があります。
+それ以外の場合、コンパイラはこのオプションを無視します。
 
 ### *generateCodeForLibraries*
 
-This option tells the template compiler to generate factory files (`.ngfactory.js` and `.ngstyle.js`)
-for `.d.ts` files with a corresponding `.metadata.json` file. This option defaults to
-`true`. When this option is `false`, factory files are generated only for `.ts` files.
+このオプションは、対応する `.metadata.json` ファイルとともに `.d.ts` ファイル用のファクトリファイル (`.ngfactory.js` および `.ngstyle.js`) を生成するようにテンプレートコンパイラに指示します。
+このオプションのデフォルトは `true` です。
+このオプションが `false` の場合、ファクトリファイルは `.ts` ファイルに対してのみ生成されます。
 
-This option should be set to `false` when using factory summaries.
+ファクトリーサマリーを使用する場合、このオプションは `false` に設定するべきです。
 
 ### *fullTemplateTypeCheck*
 
-This option tells the compiler to enable the [binding expression validation](#binding-expression-validation)
-phase of the template compiler which uses TypeScript to validate binding expressions.
+このオプションは、TypeScript を使用してバインディング式を検証するテンプレートコンパイラの[バインディング式の検証](#binding-expression-validation)フェーズを
+有効にするようにコンパイラに指示します。
 
-This option is `false` by default.
+このオプションはデフォルトでは `false` です。
 
-*Note*: It is recommended to set this to `true` because this option will default to `true` in the future.
+*注*: 将来このオプションがデフォルトで `true` になるため、これを `true` に設定することをお勧めします。
 
 ### *annotateForClosureCompiler*
 
-This option tells the compiler to use [Tsickle](https://github.com/angular/tsickle) to annotate the emitted
-JavaScript with [JSDoc](http://usejsdoc.org/) comments needed by the
-[Closure Compiler](https://github.com/google/closure-compiler). This option defaults to `false`.
+このオプションは、[クロージャコンパイラ](https://github.com/google/closure-compiler)が必要とする [JSDoc](http://usejsdoc.org/) コメントで、
+発行された JavaScript に注釈を付けるために [Tsickle](https://github.com/angular/tsickle) を使用するようにコンパイラに指示します。
+このオプションのデフォルトは `false` です。
 
 ### *annotationsAs*
 
-Use this option to modify how the Angular specific annotations are emitted to improve tree-shaking. Non-Angular
-annotations and decorators are unaffected. Default is `static fields`.
+このオプションを使用して、Angular 固有のアノテーションをどのように発行してツリーシェイキングを改善するかを変更します。
+Angular 以外のアノテーションとデコレーターは影響を受けません。デフォルトは `static fields` です。
 
 <style>
   td, th {vertical-align: top}
@@ -1469,58 +1469,57 @@ annotations and decorators are unaffected. Default is `static fields`.
 
 <table>
   <tr>
-    <th>Value</th>
-    <th>Description</th>
+    <th>値</th>
+    <th>説明</th>
   </tr>
   <tr>
     <td><code>decorators</code></td>
-    <td>Leave the decorators in place. This makes compilation faster. TypeScript will emit calls to the __decorate helper.  Use <code>--emitDecoratorMetadata</code> for runtime reflection.  However, the resulting code will not properly tree-shake.</td>
+    <td>デコレータをそのままにしておきます。これによりコンパイルが速くなります。TypeScript は __decorate ヘルパーへの呼び出しを発行します。ランタイムリフレクションには <code>--emitDecoratorMetadata</code> を使用してください。ただし、結果のコードは適切にツリーシェイクされません。</td>
   </tr>
   <tr>
     <td><code>static fields</code></td>
-    <td>Replace decorators with a static field in the class. Allows advanced tree-shakers like
-    <a href="https://github.com/google/closure-compiler">Closure compiler</a> to remove unused classes.</td>
+    <td>クラス内のデコレータをスタティックフィールドに置き換えます。<a href="https://github.com/google/closure-compiler">クロージャコンパイラ</a>のような高度なツリーシェイカーが未使用のクラスを削除することを許可します。</td>
   </tr>
   </table>
 
 
 ### *trace*
 
-This tells the compiler to print extra information while compiling templates.
+これは、テンプレートのコンパイル中に追加の情報を出力するようコンパイラーに指示します。
 
 ### *enableLegacyTemplate*
 
-Use of  the `<template>` element was deprecated starting in Angular 4.0 in favor of using
-`<ng-template>` to avoid colliding with the DOM's element of the same name. Setting this option to
-`true` enables the use of the deprecated `<template>` element. This option
-is `false` by default. This option might be required by some third-party Angular libraries.
+同じ名前の DOM の要素と衝突しないように `<ng-template>` を使用するため、Angular 4.0 から `<template>` 要素の使用は廃止されました。
+このオプションを `true` に設定すると、廃止予定の `<template>` 要素を使用できるようになります。
+このオプションはデフォルトでは `false` です。
+このオプションは、一部のサードパーティ Angular ライブラリで必要となる場合があります。
 
 ### *disableExpressionLowering*
 
-The Angular template compiler transforms code that is used, or could be used, in an annotation
-to allow it to be imported from template factory modules. See
-[metadata rewriting](#metadata-rewriting) for more information.
+Angular テンプレートコンパイラは、アノテーションで使用されている、または使用される可能性があるコードを変換して、
+テンプレートファクトリモジュールからインポートできるようにします。
+詳細については、[メタデータの書き換え](#metadata-rewriting)を参照してください。
 
-Setting this option to `false` disables this rewriting, requiring the rewriting to be
-done manually.
+このオプションを `false` に設定すると、この書き換えが無効になり、
+書き換えを手動で行う必要があります。
 
 ### *disableTypeScriptVersionCheck*
 
-When `true`, this option tells the compiler not to check the TypeScript version.
-The compiler will skip checking and will not error out when an unsupported version of TypeScript is used.
-Setting this option to `true` is not recommended because unsupported versions of TypeScript might have undefined behavior.
+`true` の場合、このオプションはコンパイラに TypeScript のバージョンをチェックしないように指示します。
+TypeScript のサポートされていないバージョンが使用されている場合、コンパイラはチェックをスキップし、エラーにはなりません。
+このオプションを `true` に設定することは TypeScript のサポートされていないバージョンが未定義の動作をするかもしれないのでお勧めできません。
 
-This option is `false` by default.
+このオプションはデフォルトでは `false` です。
 
 ### *preserveWhitespaces*
 
-This option tells the compiler whether to remove blank text nodes from compiled templates.
-As of v6, this option is `false` by default, which results in smaller emitted template factory modules.
+このオプションは、コンパイル済みのテンプレートから空白のテキストノードを削除するかどうかをコンパイラに指示します。
+v6 以降、このオプションはデフォルトでは `false` になっているため、発行されるテンプレートファクトリモジュールは小さくなります。
 
 ### *allowEmptyCodegenFiles*
 
-Tells the compiler to generate all the possible generated files even if they are empty. This option is
-`false` by default. This is an option used by the Bazel build rules and is needed to simplify
-how Bazel rules track file dependencies. It is not recommended to use this option outside of the Bazel
-rules.
+空の場合でも、生成される可能性のあるすべてのファイルを生成するようにコンパイラーに指示します。
+このオプションはデフォルトでは `false` です。
+これは Bazel ビルドルールで使用されるオプションで、Bazel ルールがファイルの依存関係を追跡する方法を単純化するために必要です。
+Bazel の規則の範囲外でこのオプションを使用することはお勧めできません。
 

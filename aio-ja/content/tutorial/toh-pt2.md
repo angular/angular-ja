@@ -1,6 +1,7 @@
 # ヒーローのリストを表示する
 
-このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
+このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、
+ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
 
 ## ヒーローのモックを作成する
@@ -14,13 +15,9 @@
 `HEROES` 定数を10人のヒーローの配列として定義し、エクスポートしてください。
 ファイルは次のようになるでしょう。
 
-<code-example path="toh-pt2/src/app/mock-heroes.ts" linenums="false"
-header="src/app/mock-heroes.ts">
-</code-example>
+<code-example path="toh-pt2/src/app/mock-heroes.ts" header="src/app/mock-heroes.ts"></code-example>
 
 ## ヒーローを表示する
-
-あなたは `HeroesComponent` の1番上にヒーローのリストを表示しようとしています。
 
 `HeroesComponent` クラスのファイルを開いて `HEROES` モックをインポートしてください。
 
@@ -29,10 +26,10 @@ header="src/app/mock-heroes.ts">
 
 同じファイル（`HeroesComponent`クラス）で、`heroes`という名前のコンポーネントプロパティを定義して、バインディングのために `HEROES` 配列を公開してください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="component">
+<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="component">
 </code-example>
 
-### _*ngFor_ でヒーローを一覧表示する
+### `*ngFor` でヒーローを一覧表示する
 
 `HeroesComponent` テンプレートを開き、次のように変更してください：
 
@@ -43,10 +40,10 @@ header="src/app/mock-heroes.ts">
 
 このようになります：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" header="heroes.component.html (heroes template)" linenums="false">
-</code-example>
+<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" header="heroes.component.html (heroes template)"></code-example>
 
-これから `<li>` をこのように変更していきます：
+That shows one hero. To list them all, add an `*ngFor` to the `<li>` to iterate through the list of heroes:
+これは一人のヒーローを示しています。それらをすべてリストするには、ヒーローのリストを反復処理するために、 `*ngFor*` を `<li>` に追加します。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
@@ -54,10 +51,10 @@ header="src/app/mock-heroes.ts">
 [`*ngFor`](guide/template-syntax#ngFor) はAngularの _繰り返し_ ディレクティブです。
 これは、リスト内の各要素に対して、ホスト要素を繰り返します。
 
-この例では
+この例の構文は次のとおりです。
 
 * `<li>` はホスト要素です
-* `heroes` は `HeroesComponent` クラスのリストです
+* `heroes` は モックのヒーローリストを保持する`HeroesComponent` クラスのリストです
 * `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持します
 
 <div class="alert is-important">
@@ -112,16 +109,16 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 クリックイベントのバインディングを `<li>` にこのように追加してください：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" header="heroes.component.html (template excerpt)" linenums="false">
-</code-example>
+<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" header="heroes.component.html (template excerpt)"></code-example>
 
 これはAngularの [イベントバインディング](guide/template-syntax#event-binding) シンタックスにおける1つの例です。
 
 `click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
 ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
 
-`onSelect()` は、これから書こうとしている `HeroesComponent` のメソッドです。
-Angularはこのメソッドをクリックされた `<li>` 内に表示された `hero` オブジェクトと共に呼び出します。すなわち、先ほどの `*ngFor` 式の中で定義された同じ `hero` です。
+
+次のセクションでは、 `HeroesComponent`で`onSelect()`メソッドを定義して、`*ngFor`式で定義されたヒーローを表示します。
+
 
 ### クリックイベントのハンドラーを追加する
 
@@ -130,16 +127,15 @@ Angularはこのメソッドをクリックされた `<li>` 内に表示され�
 
 次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" header="src/app/heroes/heroes.component.ts (onSelect)" linenums="false">
-</code-example>
+<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" header="src/app/heroes/heroes.component.ts (onSelect)"></code-example>
 
-### 詳細のテンプレートを更新する
+### 詳細セクションを追加する
 
-テンプレートはもう存在していないコンポーネントの古い `hero` プロパティをまだ参照しています。
-`hero` を `selectedHero` にリネームしてください。
+現在、コンポーネントテンプレートにはリストがあります。
+リストのヒーローをクリックして、そのヒーローの詳細を表示するには、それをテンプレートでレンダリングするための詳細セクションが必要です。
+`heroes.component.html`のリストセクションの下に以下を追加します。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" header="heroes.component.html (selected hero details)" linenums="false">
-</code-example>
+<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" header="heroes.component.html (selected hero details)"></code-example>
 
 ブラウザを更新すると、アプリケーションは壊れてしまっています。
 
@@ -169,8 +165,7 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 </div>
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if" header="src/app/heroes/heroes.component.html (*ngIf)" linenums="false">
-</code-example>
+<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if" header="src/app/heroes/heroes.component.html (*ngIf)"></code-example>
 
 ブラウザを更新すると、名前の一覧が再度表示されます。
 詳細のエリアは空白になっています。
@@ -204,17 +199,13 @@ Angularの [クラスバインディング](guide/template-syntax#class-binding)
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" header="heroes.component.html (toggle the 'selected' CSS class)" linenums="false">
-</code-example>
+<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" header="heroes.component.html (toggle the 'selected' CSS class)"></code-example>
 
 現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはそのクラスを削除します。
 
 完成した `<li>` はこのようになります：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="li" header="heroes.component.html (list item hero)" linenums="false">
-
-</code-example>
-
+<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="li" header="heroes.component.html (list item hero)"></code-example>
 {@a final-code-review}
 
 ## 最終的なコードレビュー

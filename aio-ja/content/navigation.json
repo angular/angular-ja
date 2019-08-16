@@ -243,15 +243,15 @@
               "translated": true
             },
             {
-              "url": "guide/elements",
-              "title": "Angular Elements",
-              "tooltip": "コンポーネントをCustom Elementsに変換しましょう。",
-              "translated": true
-            },
-            {
               "url": "guide/dynamic-component-loader",
               "title": "動的コンポーネント",
               "tooltip": "コンポーネントを動的に読み込みます。",
+              "translated": true
+            },
+            {
+              "url": "guide/elements",
+              "title": "Angular Elements",
+              "tooltip": "コンポーネントをCustom Elementsに変換しましょう。",
               "translated": true
             },
             {
@@ -534,7 +534,11 @@
           "tooltip": "アプリのテンプレートテキストを複数の言語に翻訳します",
           "translated": true
         },
-
+        {
+          "url": "guide/accessibility",
+          "title": "Accessibility",
+          "tooltip": "Design apps to be accessible to all users."
+        },
         {
           "title": "Service WorkerとPWA",
           "tooltip": "Angular Service Worker: アプリケーションリソースのキャッシュをコントロールします",
@@ -681,6 +685,11 @@
           "title": "事前コンパイル",
           "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
           "translated": true
+        },
+        {
+          "url": "guide/angular-compiler-options",
+          "title": "Compiler Options",
+          "tooltip": "Configuration options for the AOT compiler."
         },
         {
           "url": "guide/build",

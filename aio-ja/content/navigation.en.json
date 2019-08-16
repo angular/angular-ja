@@ -209,14 +209,14 @@
               "tooltip": "Add CSS styles that are specific to a component."
             },
             {
-              "url": "guide/elements",
-              "title": "Angular Elements",
-              "tooltip": "Convert components to Custom Elements."
-            },
-            {
               "url": "guide/dynamic-component-loader",
               "title": "Dynamic Components",
               "tooltip": "Load components dynamically."
+            },
+            {
+              "url": "guide/elements",
+              "title": "Angular Elements",
+              "tooltip": "Convert components to Custom Elements."
             },
             {
               "url": "guide/attribute-directives",
@@ -457,6 +457,11 @@
           "tooltip": "Translate the app's template text into multiple languages."
         },
         {
+          "url": "guide/accessibility",
+          "title": "Accessibility",
+          "tooltip": "Design apps to be accessible to all users."
+        },
+        {
           "title": "Service Workers & PWA",
           "tooltip": "Angular service workers: Controlling caching of application resources.",
           "children": [
@@ -591,6 +596,11 @@
           "url": "guide/aot-compiler",
           "title": "Ahead-of-Time Compilation",
           "tooltip": "Learn why and how to use the Ahead-of-Time (AOT) compiler."
+        },
+        {
+          "url": "guide/angular-compiler-options",
+          "title": "Compiler Options",
+          "tooltip": "Configuration options for the AOT compiler."
         },
         {
           "url": "guide/build",

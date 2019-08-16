@@ -1,14 +1,9 @@
 # シングルトンサービス
 
-#### 前提条件:
-
-* [ブートストラップ](guide/bootstrapping)の基本的な理解
-* [プロバイダー](guide/providers)について熟知していること
+A singleton service is a service for which only once instance exists in an app.
 
 この記事で説明されている、アプリ全体でシングルトンなサービスを使用したサンプルアプリケーションについては、
 すべてのドキュメント化されたNgModuleの機能を紹介している<live-example name="ngmodules"></live-example>を参照してください。
-
-<hr />
 
 ## シングルトンサービスを提供する
 
@@ -23,7 +18,7 @@ Angularでシングルトンサービスを作成する方法は2種類ありま
 
 Angular 6.0から、シングルトンサービスを作成する推奨の方法は、サービスがアプリケーションルートに提供されるように指定することです。 これは、サービスの`@Injectable`デコレーターの`providedIn`に`root`を設定することで行います:
 
-<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts"></code-example>
 
 
 サービスのさらに詳しい情報については
@@ -74,7 +69,7 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 1. モジュール上に静的メソッド`forRoot()`を作成します。
 2. `forRoot()`メソッド内にprovidersを配置します。
 
-<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts" linenums="false"> </code-example>
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts"></code-example>
 
 
 {@a forRoot-router}
@@ -121,22 +116,16 @@ Angularは`@NgModule.providers`
 次の例では、オプショナルで注入された`UserServiceConfig`が greeting の`UserService`を拡張しています。
 `UserServiceConfig`が存在する場合、`UserService`はその設定からユーザー名をセットします。
 
-<code-example path="ngmodules/src/app/greeting/user.service.ts" region="ctor" header="src/app/greeting/user.service.ts (constructor)" linenums="false">
-
-</code-example>
+<code-example path="ngmodules/src/app/greeting/user.service.ts" region="ctor" header="src/app/greeting/user.service.ts (constructor)"></code-example>
 
 ここでの`forRoot()`は`UserServiceConfig`オブジェクトを受け取ります:
 
-<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts (forRoot)" linenums="false">
-
-</code-example>
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts (forRoot)"></code-example>
 
 最後に`AppModule`の`imports`配列の中で呼び出します。次のスニペットでは、
 ファイルの他の部分は省略されています。完全なファイルについては、<live-example name="ngmodules"></live-example>を参照するか、このドキュメントの次のセクションに進んでください。
 
-<code-example path="ngmodules/src/app/app.module.ts" region="import-for-root" header="src/app/app.module.ts (imports)" linenums="false">
-
-</code-example>
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="ctor" header="src/app/greeting/greeting.module.ts"></code-example>
 
 アプリケーションはデフォルトの "Sherlock Holmes"のかわりに、"Miss Marple"をユーザーとして表示します。
 
@@ -181,7 +170,7 @@ Angularは親インジェクター(今回はルートインジェクターにな
 
 ここでは、参考のために全体のなかの2つのファイルを紹介します:
 
-<code-tabs linenums="false">
+<code-tabs>
  <code-pane header="app.module.ts" path="ngmodules/src/app/app.module.ts">
  </code-pane>
  <code-pane header="greeting.module.ts" region="whole-greeting-module" path="ngmodules/src/app/greeting/greeting.module.ts">

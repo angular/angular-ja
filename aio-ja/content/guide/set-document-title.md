@@ -42,7 +42,7 @@ HTMLの `<title>`は、ドキュメントの`<head>`の中にあり、ボディ�
 `Title`サービスをルートの`AppComponent`に入れ、それを呼び出すバインド可能な`setTitle`関数を公開することができます。
 
 
-<code-example path="set-document-title/src/app/app.component.ts" region="class" header="src/app/app.component.ts (class)" linenums="false"></code-example>
+<code-example path="set-document-title/src/app/app.component.ts" region="class" header="src/app/app.component.ts (class)"></code-example>
 
 この関数を3つのアンカータグにバインドしてください、すると、ほら！
 

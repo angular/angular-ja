@@ -6,6 +6,11 @@ This tutorial introduces you to the essentials of Angular.
 It leverages what you already know about HTML and JavaScript&mdash;plus some useful Angular features&mdash;to build a simple online store application, with a catalog, shopping cart, and check-out form. 
 You don't need to install anything: you'll build the app using the [StackBlitz](https://stackblitz.com/ "StackBlitz web site") online development environment.
 
+<div class="alert is-helpful">
+
+We are using the StackBlitz Generator to show you a ready-made, simple application that you can examine and play with interactively. In actual development you will typically use the [Angular CLI](guide/glossary#command-line-interface-cli), a powerful command-line tool that lets you generate and modify applications. For more information, see the [CLI Overview](cli).
+
+</div>
 
 <div class="callout is-helpful">
 <header>New to web development?</header>
@@ -37,7 +42,7 @@ We've seeded this particular app with a top bar&mdash;containing the store name 
 <div class="callout is-helpful">
 <header>StackBlitz tips</header>
 
-* Log into StackBlitz, so you can save and resume your work. If you have a GitHub account, you can log into StackBlitz with that account. 
+* Log into StackBlitz, so you can save and resume your work. If you have a GitHub account, you can log into StackBlitz with that account. In order to save your progress, first fork the project using the Fork button at the top left, then you'll be able to save your work to your own StackBlitz account by clicking the Save button.
 * To copy a code example from this tutorial, click the icon at the top right of the code example box, and then paste the code snippet from the clipboard into StackBlitz. 
 * If the StackBlitz preview pane isn't showing what you expect, save and then click the refresh button. 
 * StackBlitz is continually improving, so there may be slight differences in generated code, but the app's behavior will be the same.

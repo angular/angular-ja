@@ -83,16 +83,14 @@ _コンポーネント_ はAngularアプリケーションの基礎的な構成�
 
 コンポーネントクラスファイル(`app.component.ts`)を開き、`title`プロパティの値を`Tour of Heroes`に変更してください。
 
-<code-example path="toh-pt0/src/app/app.component.ts" region="set-title" header="app.component.ts (class title property)" linenums="false">
-</code-example>
+<code-example path="toh-pt0/src/app/app.component.ts" region="set-title" header="app.component.ts (class title property)"></code-example>
 
 コンポーネントのテンプレートファイル(`app.component.html`)を開き、
 Angular CLIにより生成されたデフォルトのテンプレートを削除してください。
 代わりに次のHTMLを配置してください。
 
 <code-example path="toh-pt0/src/app/app.component.html"
-  header="app.component.html (template)" linenums="false">
-</code-example>
+  header="app.component.html (template)"></code-example>
 
 二重の波括弧はAngularの*補間バインディング*の構文です。
 この補間バインディングはコンポーネントの`title`プロパティの値を、HTMLのheaderタグの中に渡します。

@@ -23,7 +23,7 @@ Angularはそれらの重要な生存の瞬間を可視化し、発生時に行�
 たとえば、 `OnInit` インターフェースは　`ngOnInit()` という名前のフックメソッドを持っています。
 Angularはコンポーネントの作成直後に呼び出します。
 
-<code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" header="peek-a-boo.component.ts (excerpt)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" header="peek-a-boo.component.ts (excerpt)"></code-example>
 
 ディレクティブやコンポーネントはライフサイクルフックすべてを実装しないでしょう。
 Angularは、ディレクティブ/コンポーネント・フック・メソッド *が定義されている場合* にのみ呼び出します。
@@ -339,13 +339,13 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 こそこそしたスパイ・ディレクティブはシンプルで、注入された `LoggerService` を介して親にメッセージを記録する
 `ngOnInit()` と `ngOnDestroy()` フックでほぼ全体を構成しています。
 
-<code-example path="lifecycle-hooks/src/app/spy.directive.ts" region="spy-directive" header="src/app/spy.directive.ts" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/spy.directive.ts" region="spy-directive" header="src/app/spy.directive.ts"></code-example>
 
 スパイをネイティブ要素またはコンポーネント要素に適用すると、その要素と同時に初期化され、
 破棄されます。
 これは、繰り返しのヒーローの `<div>` に付け加えられています：
 
-<code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html"></code-example>
 
 個々のスパイの誕生と死は、付属のヒーロー `<div>` の出生と死を、つぎに示すように
  *フック・ログ* に記入して記録します。
@@ -425,7 +425,7 @@ ObservableとDOMイベントの購読を解除しましょう。インターバ�
 Angularは、コンポーネント(またはディレクティブ)の ***入力プロパティ***　への変更を検出するたびに、その `ngOnChanges()` メソッドを呼び出します。
 この例は `OnChanges` フックを監視します。
 
-<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="ng-on-changes" header="on-changes.component.ts (excerpt)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="ng-on-changes" header="on-changes.component.ts (excerpt)"></code-example>
 
 `ngOnChanges()` メソッドは、変更された各プロパティの名前と、現在および前のプロパティ値を保持する
 [SimpleChange](api/core/SimpleChange) オブジェクトをマップするオブジェクトを受け取ります。
@@ -433,7 +433,7 @@ Angularは、コンポーネント(またはディレクティブ)の ***入力�
 
 サンプルのコンポーネントである `OnChangesComponent` は、` hero` と `power` の2つの入力プロパティを持っています。
 
-<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="inputs" header="src/app/on-changes.component.ts" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="inputs" header="src/app/on-changes.component.ts"></code-example>
 
 ホストの `OnChangesParentComponent` は次のようにそれらにバインドします：
 
@@ -468,7 +468,7 @@ Angularがそれ自身で捕捉しない変更を検出し、それに対応す�
 
 *DoCheck* サンプルは *OnChanges* サンプルを次の `ngDoCheck()` フックで拡張します：
 
-<code-example path="lifecycle-hooks/src/app/do-check.component.ts" region="ng-do-check" header="DoCheckComponent (ngDoCheck)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/do-check.component.ts" region="ng-do-check" header="DoCheckComponent (ngDoCheck)"></code-example>
 
 このコードは、特定の _関心のある値_ を検査し、現在の状態を以前の値とキャプチャして比較します。
 `hero` や `power` に実質的な変更がないときに特別なメッセージをログに書き込むので、 `DoCheck` が呼び出される
@@ -496,25 +496,25 @@ Angularがそれ自身で捕捉しない変更を検出し、それに対応す�
 
 ここでは、 `<input>` にヒーローの名前を表示する子ビューがあります：
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" header="ChildComponent" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" header="ChildComponent"></code-example>
 
 `AfterViewComponent` は、この子ビューを *テンプレート内* に表示します：
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="template" header="AfterViewComponent (template)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="template" header="AfterViewComponent (template)"></code-example>
 
 次のフックは、子ビュー *内の値の変更* に基づいてアクションを実行します。
 [@ViewChild](api/core/ViewChild) で
 装飾されたプロパティを使用して子ビューを照会することによってのみ到達できます。
 
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="hooks" header="AfterViewComponent (class excerpts)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="hooks" header="AfterViewComponent (class excerpts)"></code-example>
 
 {@a wait-a-tick}
 
 ### 単方向データフローのルールに従う
 ヒーロー名が10文字を超えると、 `doSomething()` メソッドは画面を更新します。
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="do-something" header="AfterViewComponent (doSomething)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="do-something" header="AfterViewComponent (doSomething)"></code-example>
 
 なぜ `doSomething()` メソッドは `comment` を更新する前にティックを待つのでしょうか？
 
@@ -559,7 +559,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 今回は、テンプレート内に子ビューを含めるのではなく、 `AfterContentComponent` の親からコンテンツをインポートします。
 親のテンプレートは次のとおりです：
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)"></code-example>
 
 `<app-child>` タグは `<after-content>` タグの間に挟まれています。
 そのコンテンツをコンポーネントに投影するつもりでない限り、コンポーネントの要素タグ
@@ -567,7 +567,7 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 
 コンポーネントのテンプレートを見てみましょう：
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="template" header="AfterContentComponent (template)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="template" header="AfterContentComponent (template)"></code-example>
 
 `<ng-content>` タグは、外部コンテンツの *プレースホルダー* です。
 Angularはそのコンテンツをどこに挿入するかを指示します。
@@ -603,7 +603,7 @@ Angularはそのコンテンツをどこに挿入するかを指示します。
 プロパティを介してそれらを照会することによってのみ達することができる
 *子コンテント* の値を変更することに基づいてアクションを実行します。
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="hooks" header="AfterContentComponent (class excerpts)" linenums="false"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="hooks" header="AfterContentComponent (class excerpts)"></code-example>
 
 {@a no-unidirectional-flow-worries}
 

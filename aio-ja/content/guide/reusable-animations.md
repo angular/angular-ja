@@ -15,8 +15,7 @@ Angularアニメーションの[AnimationOptions](https://angular.io/api/animati
 
 再利用可能なアニメーションを作成するには、[`animation()`](https://angular.io/api/animations/animation)メソッドを使用してアニメーションを別の`.ts`ファイルに定義し、このアニメーション定義を`const`のexport変数として宣言します。 このアニメーションは、[`useAnimation()`](https://angular.io/api/animations/useAnimation)APIを使用して任意のコンポーネントでimportすると再利用できます。
 
-<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="reusable" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="reusable" language="typescript"></code-example>
 
 上記のコードスニペットでは、`transAnimation`がexport変数として宣言されているので再利用可能です。
 
@@ -27,8 +26,7 @@ Angularアニメーションの[AnimationOptions](https://angular.io/api/animati
 
 `transAnimation`変数をコンポーネントクラスにインポートすると、次に示された`useAnimation()`を用いる方法で再利用することができます。
 
-<code-example path="animations/src/app/open-close.component.3.ts" header="src/app/open-close.component.ts" region="reusable" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/open-close.component.3.ts" header="src/app/open-close.component.ts" region="reusable" language="typescript"></code-example>
 
 ## Angularアニメーションの詳細
 

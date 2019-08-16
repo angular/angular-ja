@@ -1,13 +1,5 @@
 # NgModuleのFAQ
 
-
-#### 前提条件:
-
-次のコンセプトの基本的な理解:
-* [NgModule](guide/ngmodules)
-
-<hr />
-
 NgModuleは機能の密なブロックにアプリケーションを整理するのに役立ちます。
 
 このページでは NgModule のデザインや実装についての多くの開発者の質問に回答します。
@@ -479,8 +471,7 @@ Angularは、遅延ロードしたモジュールのプロバイダーをどこ�
 特定の NgModule、たとえば`BrowserModule`のように、ガードを実装しましょう。
 ここには`GreetingModule`と呼ばれるNgModuleのためのカスタムコンストラクターがあります。
 
-<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="ctor" header="src/app/greeting/greeting.module.ts (Constructor)" linenums="false">
-</code-example>
+<code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="ctor" header="src/app/greeting/greeting.module.ts (Constructor)"></code-example>
 
 <hr/>
 

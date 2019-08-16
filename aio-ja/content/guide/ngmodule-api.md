@@ -1,15 +1,5 @@
 # NgModule API
 
-#### 前提条件
-
-次の基本的な理解:
-* [ブートストラップ](guide/bootstrapping)
-* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
-
-<hr />
-
-## `@NgModule`の目的
-
 大まかにいうと、
 NgModuleはAngularアプリケーションを整理する方法で、
 `@NgModule`デコレーター内のメタデータを通して実現します。

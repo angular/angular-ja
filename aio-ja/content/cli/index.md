@@ -7,7 +7,7 @@ Angular CLIは、Angularアプリケーションの初期化、開発、スキ�
 Angular CLIのメジャーバージョンは、サポートされているAngularのメジャーバージョンに従いますが、マイナーバージョンは個別にリリースできます。
 
 `npm` パッケージマネージャーを使用してCLIをインストールします:
-<code-example format="." language="bash">
+<code-example language="bash">
 npm install -g @angular/cli
 </code-example>
 
@@ -20,14 +20,14 @@ GitHubのリリースタブを参照してください: https://github.com/angul
 オンラインヘルプはコマンドラインで利用できます。
 特定のコマンド（ [generate](cli/generate) など）またはオプションを簡単な説明付きでリストするには、次のように入力します。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 ng help
 ng generate --help
 </code-example>
 
 開発サーバーで新しい基本的なAngularプロジェクトを作成、構築、および提供するには、新しいワークスペースの親ディレクトリに移動し、次のコマンドを使用します:
 
-<code-example format="." language="bash">
+<code-example language="bash">
 ng new my-first-project
 cd my-first-project
 ng serve
@@ -35,6 +35,14 @@ ng serve
 
 ブラウザで http://localhost:4200/ を開き、新しいアプリが実行されるのを確認します。
 [ng serve](cli/serve) コマンドを使用してアプリを構築し、それをローカルに配信すると、ソースファイルのいずれかを変更すると、サーバーによって自動的にアプリが再構築され、ページがリロードされます。
+
+<div class="alert is-helpful">
+
+   When you run `ng new my-first-project` a new folder, named `my-first-project`, will be created in the current working directory. Since you want to be able to create files inside that folder, make sure you have sufficient rights in the current working directory before running the command.
+
+   If the current working directory is not the right place for your project, you can change to a more appropriate directory by running `cd <path-to-other-directory>` first.
+
+</div>
 
 ## ワークスペースとプロジェクトファイル
 
@@ -75,7 +83,7 @@ ng serve
     オプションエイリアスの先頭には単一ダッシュ（ - ）が付きます。
     引数は前に付けられません。
     たとえば: 
-    <code-example format="." language="bash">
+    <code-example language="bash">
         ng build my-app -c production
     </code-example>
 

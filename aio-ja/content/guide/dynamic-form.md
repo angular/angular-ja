@@ -32,7 +32,8 @@
 このクックブックでは、[reactive forms](guide/reactive-forms)を用いてフォームを作成していきます。
 
 リアクティブフォームは、`ReactiveFormsModule`と呼ばれる別の`NgModule`に属します。
-したがって、リアクティブフォームのディレクティブにアクセスするためには、`ReactiveFormsModule`を`@angular/forms`ライブラリからインポートする必要があります。
+したがって、リアクティブフォームのディレクティブにアクセスするためには、
+`ReactiveFormsModule`を`@angular/forms`ライブラリからインポートする必要があります。
 
 そして、`main.ts`で`AppModule`をブートストラップします。
 
@@ -67,25 +68,23 @@
 
 
 
-この基底クラスから`TextboxQuestion`と`DropdownQuestion`という、2つの新しいクラスを派生させることができます。
+この基底クラスから`TextboxQuestion`と`DropdownQuestion`という、
+2つの新しいクラスを派生させることができます。
 これは、テキストボックスとドロップダウン質問を表します。
 考え方としては、フォームが特定の質問タイプにバインドされ、適切なコントロールを動的にレンダリングするということです。
 
-`TextboxQuestion`は、`type`プロパティを介してtext、email、urlといった複数のHTML5タイプをサポートしています。
+`TextboxQuestion`は、`type`プロパティを介してtext、email、urlといった
+複数のHTML5タイプをサポートしています。
 
 
-<code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts" linenums="false">
-
-</code-example>
+<code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts"></code-example>
 
 
 
 `DropdownQuestion`は、セレクトボックスに選択肢のリストを表示します。
 
 
-<code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts" linenums="false">
-
-</code-example>
+<code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts"></code-example>
 
 
 
@@ -94,9 +93,7 @@
 一言でいえば、フォームグループは質問モデルのメタデータを用いて、デフォルト値とバリデーションルールをセットすることができます。
 
 
-<code-example path="dynamic-form/src/app/question-control.service.ts" header="src/app/question-control.service.ts" linenums="false">
-
-</code-example>
+<code-example path="dynamic-form/src/app/question-control.service.ts" header="src/app/question-control.service.ts"></code-example>
 
 {@a form-component}
 

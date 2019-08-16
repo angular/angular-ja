@@ -2,12 +2,6 @@
 
 フィーチャーモジュールはコードを整理する目的で用いられるNgModuleです。
 
-#### 前提条件
-次の基本的な理解:
-* [ブートストラップ](guide/bootstrapping)
-* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
-* [よく使われるモジュール](guide/frequent-ngmodules)
-
 この記事で説明されているフィーチャーモジュールを含む最終的なサンプルアプリケーションについては、
 <live-example></live-example>を参照してください。
 
@@ -72,8 +66,7 @@ ng generate component customer-dashboard/CustomerDashboard
 これにより、custom-dashboardフォルダ内に新しいコンポーネントのためのフォルダが生成され、`CustomerDashboardComponent`の情報でフィーチャーモジュールが更新されます:
 
 
-<code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard.module.ts" region="customer-dashboard-component" header="src/app/customer-dashboard/customer-dashboard.module.ts" linenums="false">
-</code-example>
+<code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard.module.ts" region="customer-dashboard-component" header="src/app/customer-dashboard/customer-dashboard.module.ts"></code-example>
 
 
 
@@ -83,8 +76,7 @@ ng generate component customer-dashboard/CustomerDashboard
 
 フィーチャーモジュールをアプリケーションに組み込むためには、ルートモジュールである`app.module.ts`にそのモジュールについて知ってもらう必要があります。 `customer-dashboard.module.ts`の最後で`CustomerDashboardModule`がエクスポートされていることに注目してください。これにより他のモジュールがアクセスできるようになります。`AppModule`にインポートするために、`app.module.ts`の`imports`配列に追加してみましょう:
 
-<code-example path="feature-modules/src/app/app.module.ts" region="app-module" header="src/app/app.module.ts" linenums="false">
-</code-example>
+<code-example path="feature-modules/src/app/app.module.ts" region="app-module" header="src/app/app.module.ts"></code-example>
 
 
 これで`AppModule`はフィーチャーモジュールについて知っている状態になりました。フィーチャーモジュールにサービスプロバイダーを追加した場合、他のフィーチャーモジュールと同様に`AppModule`もそれについて知っている状態になります。ただし、NgModuleは自身のコンポーネントを公開しません。
@@ -94,21 +86,18 @@ ng generate component customer-dashboard/CustomerDashboard
 
 CLIがフィーチャーモジュールのために`CustomerDashboardComponent`を生成したとき、それは次のようなマークアップの`customer-dashboard.component.html`テンプレートを含んでいました:
 
-<code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html" region="feature-template" header="src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html" linenums="false">
-</code-example>
+<code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html" region="feature-template" header="src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html"></code-example>
 
 
 `AppComponent`でこのHTMLを見るためには、まず`CustomerDashboardModule`内の`CustomerDashboardComponent`をエクスポートしなければなりません。 `customer-dashboard.module.ts`の`declarations`配列の直下に、 `CustomerDashboardModule`を含む`exports`配列を追加しましょう:
 
-<code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard.module.ts" region="component-exports" header="src/app/customer-dashboard/customer-dashboard.module.ts" linenums="false">
-</code-example>
+<code-example path="feature-modules/src/app/customer-dashboard/customer-dashboard.module.ts" region="component-exports" header="src/app/customer-dashboard/customer-dashboard.module.ts"></code-example>
 
 
 
 次に、`AppComponent`、`app.component.html`に`<app-customer-dashboard>`タグを追加します:
 
-<code-example path="feature-modules/src/app/app.component.html" region="app-component-template" header="src/app/app.component.html" linenums="false">
-</code-example>
+<code-example path="feature-modules/src/app/app.component.html" region="app-component-template" header="src/app/app.component.html"></code-example>
 
 
 そして、デフォルトでレンダリングされるタイトルに加えて、 `CustomerDashboardComponent`テンプレートもレンダリングされます:

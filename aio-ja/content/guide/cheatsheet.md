@@ -184,8 +184,7 @@
 </td>
 </tr><tr>
 <td><code><b>@Injectable()</b><br>class MyService() {}</code></td>
-<td><p>依存性のインジェクターがこのクラスをインスタンスを作成しているときに、コンストラクタに依存性を注入する必要があるクラスにあることを宣言します。
-</p>
+<td><p>Declares that a class can be provided and injected by other classes. Without this decorator, the compiler won't generate enough metadata to allow the class to be created properly when it's injected somewhere.</p>
 </td>
 </tr>
 </tbody></table>

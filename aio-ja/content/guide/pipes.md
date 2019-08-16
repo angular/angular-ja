@@ -24,18 +24,14 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 このページでは、パイプを使用してコンポーネントの誕生日プロパティを人に優しい日付に変換します。
 
 
-<code-example path="pipes/src/app/hero-birthday1.component.ts" header="src/app/hero-birthday1.component.ts" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/hero-birthday1.component.ts" header="src/app/hero-birthday1.component.ts"></code-example>
 
 
 
 コンポーネントのテンプレートに注目します。
 
 
-<code-example path="pipes/src/app/app.component.html" region="hero-birthday-template" header="src/app/app.component.html" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/app.component.html" region="hero-birthday-template" header="src/app/app.component.html"></code-example>
 
 
 
@@ -73,9 +69,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 ヒーローの4月15日の誕生日をフォーマットした後、出力結果は**<samp>04/15/88</samp>**のようになります。
 
 
-<code-example path="pipes/src/app/app.component.html" region="format-birthday" header="src/app/app.component.html" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/app.component.html" region="format-birthday" header="src/app/app.component.html"></code-example>
 
 
 
@@ -87,9 +81,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 そのコンポーネントのテンプレートは次のとおりです。
 
 
-<code-example path="pipes/src/app/hero-birthday2.component.ts" region="template" header="src/app/hero-birthday2.component.ts (template)" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/hero-birthday2.component.ts" region="template" header="src/app/hero-birthday2.component.ts (template)"></code-example>
 
 
 
@@ -97,9 +89,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 このメソッドは、コンポーネントの`format`プロパティを短い書式（`'shortDate'`）と長い書式（`'fullDate'`）の間で切り替えます。
 
 
-<code-example path="pipes/src/app/hero-birthday2.component.ts" region="class" header="src/app/hero-birthday2.component.ts (class)" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/hero-birthday2.component.ts" region="class" header="src/app/hero-birthday2.component.ts (class)"></code-example>
 
 
 
@@ -131,19 +121,14 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 誕生日は**<samp>APR 15, 1988</samp>**のように表示されます。.
 
 
-<code-example path="pipes/src/app/app.component.html" region="chained-birthday" header="src/app/app.component.html" linenums="false">
-
-</code-example>
-
+<code-example path="pipes/src/app/app.component.html" region="chained-birthday" header="src/app/app.component.html"></code-example>
 
 
 この例 (**<samp>FRIDAY, APRIL 15, 1988</samp>が表示されます**) では
 先ほどと同様のパイプを繋いでいますが、`date`にもパラメーターが上手く渡っています。
 
 
-<code-example path="pipes/src/app/app.component.html" region="chained-parameter-birthday" header="src/app/app.component.html" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/app.component.html" region="chained-parameter-birthday" header="src/app/app.component.html"></code-example>
 
 
 
@@ -154,9 +139,7 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 この`ExponentialStrengthPipe`という名前のパイプはヒーローの力を高めることができます。
 
 
-<code-example path="pipes/src/app/exponential-strength.pipe.ts" header="src/app/exponential-strength.pipe.ts" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/exponential-strength.pipe.ts" header="src/app/exponential-strength.pipe.ts"></code-example>
 
 
 
@@ -188,8 +171,7 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 パイプをデモンストレーションするコンポーネントが必要です。
 
-<code-example path="pipes/src/app/power-booster.component.ts" header="src/app/power-booster.component.ts" linenums="false">
-</code-example>
+<code-example path="pipes/src/app/power-booster.component.ts" header="src/app/power-booster.component.ts"></code-example>
 
 <figure>
   <img src='generated/images/guide/pipes/power-booster.png' alt="Power Booster">
@@ -258,17 +240,13 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 `heroes`配列内のすべてのヒーローの表示を監視および更新します。テンプレートは次のとおりです。
 
 
-<code-example path="pipes/src/app/flying-heroes.component.html" region="template-1" header="src/app/flying-heroes.component.html (v1)" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.component.html" region="template-1" header="src/app/flying-heroes.component.html (v1)"></code-example>
 
 
 
 対となるコンポーネントクラスはヒーローを提供し、ヒーローを配列に追加し、配列をリセットすることができます。
 
-<code-example path="pipes/src/app/flying-heroes.component.ts" region="v1" header="src/app/flying-heroes.component.ts (v1)" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.component.ts" region="v1" header="src/app/flying-heroes.component.ts (v1)"></code-example>
 
 
 
@@ -280,17 +258,13 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 
 飛行可能なヒーローだけをフィルタリングする`FlyingHeroesPipe`を`*ngFor`リピーターに追加します。
 
-<code-example path="pipes/src/app/flying-heroes.component.html" region="template-flying-heroes" header="src/app/flying-heroes.component.html (flyers)" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.component.html" region="template-flying-heroes" header="src/app/flying-heroes.component.html (flyers)"></code-example>
 
 
 
 これは`FlyingHeroesPipe`の実装です。先に説明したカスタムパイプのパターンにしたがっています。
 
-<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pure" header="src/app/flying-heroes.pipe.ts" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pure" header="src/app/flying-heroes.pipe.ts"></code-example>
 
 
 
@@ -302,9 +276,7 @@ Angularは可能な限り適切なコストを下げるよう努力していま�
 
 ヒーローがどのように追加されたかを確認しましょう。
 
-<code-example path="pipes/src/app/flying-heroes.component.ts" region="push" header="src/app/flying-heroes.component.ts" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.component.ts" region="push" header="src/app/flying-heroes.component.ts"></code-example>
 
 
 
@@ -351,9 +323,7 @@ Flying Heroesアプリケーションは、
 このように`FlyingHeroesPipe`を不純にできます。
 
 
-<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pipe-decorator" header="src/app/flying-heroes.pipe.ts" linenums="false">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.pipe.ts" region="pipe-decorator" header="src/app/flying-heroes.pipe.ts"></code-example>
 
 
 
@@ -426,18 +396,14 @@ Angularは、 コンポーネントの変更検知サイクルごとに*不純�
 この`transform`関数は簡単で速いため、不純なパイプにしてもよいでしょう。
 
 
-<code-example path="pipes/src/app/flying-heroes.pipe.ts" linenums="false" header="src/app/flying-heroes.pipe.ts (filter)" region="filter">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes.pipe.ts" header="src/app/flying-heroes.pipe.ts (filter)" region="filter"></code-example>
 
 
 
 `FlyingHeroesComponent`から`FlyingHeroesImpureComponent`を派生させることができます。
 
 
-<code-example path="pipes/src/app/flying-heroes-impure.component.html" linenums="false" header="src/app/flying-heroes-impure.component.html (excerpt)" region="template-flying-heroes">
-
-</code-example>
+<code-example path="pipes/src/app/flying-heroes-impure.component.html" header="src/app/flying-heroes-impure.component.html (excerpt)" region="template-flying-heroes"></code-example>
 
 
 

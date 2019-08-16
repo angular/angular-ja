@@ -30,8 +30,7 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 [セットアップガイド](guide/setup)では、次の`tsconfig.json`が使用されています。
 
-<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json" linenums="false">
-</code-example>
+<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json"></code-example>
 
 このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
 
@@ -60,7 +59,7 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 ほとんどの開発者は、*この特定のエラー*が役立つよりも迷惑であると感じています。
 次の追加フラグを使用してそれらを制御することができます：
 
-<code-example format=".">
+<code-example>
 
   "suppressImplicitAnyIndexErrors": true
 
@@ -95,8 +94,7 @@ _追加の_アンビエント宣言を追加します。
 
 デフォルトのターゲットは`es2015`です。もし`es5`をターゲットにしていれば、新しい型定義を宣言ファイルリストに含める必要があります。
 
-<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json (lib excerpt)" linenums="false" region="lib">
-</code-example>
+<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json (lib excerpt)" region="lib"></code-example>
 
 ### 型定義ファイルのインストール
 

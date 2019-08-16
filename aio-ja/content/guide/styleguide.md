@@ -1080,6 +1080,10 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 **Do** 機能にちなんで名付けられた、すべてのパイプで一貫性のある名前を使ってください。
+The pipe class name should use [UpperCamelCase](guide/glossary#case-types)
+(the general convention for class names),
+and the corresponding `name` string should use *lowerCamelCase*.
+The `name` string cannot use hyphens ("dash-case" or "kebab-case").
 
 
 </div>
@@ -3688,7 +3692,7 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 </div>
 
-<code-example path="dependency-injection/src/app/tree-shaking/service.ts" header="src/app/treeshaking/service.ts" linenums="false"> </code-example> 
+<code-example path="dependency-injection/src/app/tree-shaking/service.ts" header="src/app/treeshaking/service.ts"></code-example>
 
 
 

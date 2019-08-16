@@ -3,7 +3,8 @@
 HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることで、データを表示できます。
 
 このページでは、ヒーローのリストを含むコンポーネントを作成します。
-あなたはヒーロー名のリストを表示し、条件付きでリストの下にメッセージを表示します。
+あなたはヒーロー名のリストを表示し、
+条件付きでリストの下にメッセージを表示します。
 
 最終的なUIは次のようになります：
 
@@ -16,7 +17,8 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 
 
-<live-example></live-example> は、このページで説明しているすべての構文とコードスニペットを示しています。
+<live-example></live-example> は、このページで説明している
+すべての構文とコードスニペットを示しています。
 
 
 </div>
@@ -33,25 +35,23 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 <code>app.component.html</code>ファイルを削除します。この例では必要ありません。
 
-次に、テンプレートとコンポーネントの本体を変更して<code>app.component.ts</code>ファイルを変更します。
+次に、テンプレートとコンポーネントの本体を変更して
+<code>app.component.ts</code>ファイルを変更します。
 
 完了したら、このようになります。
 
 
-<code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts"></code-example>
 
 
 
 空のコンポーネントには、`title` と　`myHero` の2つのプロパティを追加しました。
 
-テンプレートは、二重中括弧補間を使用して2つのコンポーネントプロパティを表示します：
+テンプレートは、二重中括弧補間を使用して
+2つのコンポーネントプロパティを表示します：
 
 
-<code-example path="displaying-data/src/app/app.component.1.ts" linenums="false" header="src/app/app.component.ts (template)" region="template">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
 
 
 
@@ -61,7 +61,8 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 テンプレートは、ECMAScript 2015バッククオート(<code>\`</code>)内の複数行の文字列です。
 一重引用符(`'`)と同じ文字ではないバッククオート(<code>\`</code>)&mdash;は複数行にわたって
-文字列を構成することができ、HTMLをより読みやすくします 。
+文字列を構成することができ、
+HTMLをより読みやすくします 。
 
 
 </div>
@@ -92,9 +93,7 @@ Angularがインスタンスを作成しています。どのように？
 その要素は `index.html` ファイルの本文のプレースホルダです：
 
 
-<code-example path="displaying-data/src/index.html" linenums="false" header="src/index.html (body)" region="body">
-
-</code-example>
+<code-example path="displaying-data/src/index.html" header="src/index.html (body)" region="body"></code-example>
 
 
 
@@ -129,8 +128,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 <div class="alert is-helpful">
 
-  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを使用してコンポーネントを生成します。
-  あなたはそれを次のようにオーバーライドできます：
+  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを使用してコンポーネントを生成します。あなたはそれを次のようにオーバーライドできます：
 
   <code-example hideCopy language="sh" class="code-shell">
     ng generate component hero -it
@@ -141,13 +139,10 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 ## コンストラクターまたは変数の初期化？
 
-この例では、変数の割り当てを使用してコンポーネントを初期化していますが、
-コンストラクターを使用してプロパティを宣言して初期化することもできます。
+この例では、変数の割り当てを使用してコンポーネントを初期化していますが、コンストラクターを使用してプロパティを宣言して初期化することもできます。
 
 
-<code-example path="displaying-data/src/app/app-ctor.component.1.ts" linenums="false" region="class">
-
-</code-example>
+<code-example path="displaying-data/src/app/app-ctor.component.1.ts" region="class"></code-example>
 
 
 
@@ -157,13 +152,10 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 ## ** *ngFor ** の配列プロパティを表示する
 
-ヒーローのリストを表示するには、ヒーロー名の配列をコンポーネントに追加し、
-配列の最初の名前になるように `myHero` を再定義します。
+ヒーローのリストを表示するには、ヒーロー名の配列をコンポーネントに追加し、配列の最初の名前になるように `myHero` を再定義します。
 
 
-<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (class)" region="class">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (class)" region="class"></code-example>
 
 
 
@@ -171,9 +163,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 各項目を `heroes` リストに表示します。
 
 
-<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (template)" region="template">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
 
 
 
@@ -182,9 +172,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 これは `<li>`要素（とその子要素）を「リピータテンプレート」としてマークします：
 
 
-<code-example path="displaying-data/src/app/app.component.2.ts" linenums="false" header="src/app/app.component.ts (li)" region="li">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (li)" region="li"></code-example>
 
 
 
@@ -249,9 +237,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 次のコードを使用します。
 
 
-<code-example path="displaying-data/src/app/hero.ts" linenums="false" header="src/app/hero.ts">
-
-</code-example>
+<code-example path="displaying-data/src/app/hero.ts" header="src/app/hero.ts"></code-example>
 
 
 
@@ -263,9 +249,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 最初のパラメータを考えてみましょう：
 
 
-<code-example path="displaying-data/src/app/hero.ts" linenums="false" header="src/app/hero.ts (id)" region="id">
-
-</code-example>
+<code-example path="displaying-data/src/app/hero.ts" header="src/app/hero.ts (id)" region="id"></code-example>
 
 
 
@@ -283,9 +267,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 の _型付きの_ 配列を返すことができます：
 
 
-<code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" header="src/app/app.component.ts (heroes)" region="heroes">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.3.ts" header="src/app/app.component.ts (heroes)" region="heroes"></code-example>
 
 
 
@@ -294,9 +276,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 ヒーローの `name` プロパティだけを表示するように修正しました。
 
 
-<code-example path="displaying-data/src/app/app.component.3.ts" linenums="false" header="src/app/app.component.ts (template)" region="template">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.3.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
 
 
 
@@ -314,9 +294,7 @@ Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要�
 実際の動作を確認するには、テンプレートの一番下に次の段落を追加します。
 
 
-<code-example path="displaying-data/src/app/app.component.ts" linenums="false" header="src/app/app.component.ts (message)" region="message">
-
-</code-example>
+<code-example path="displaying-data/src/app/app.component.ts" header="src/app/app.component.ts (message)" region="message"></code-example>
 
 
 

@@ -19,7 +19,7 @@ Angular アプリケーションを構築する際には、高度な自社製ラ
 
 たとえば、`d3` という名前のライブラリがあるとします。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 npm install d3 --save
 npm install @types/d3 --save-dev
 </code-example>
@@ -72,7 +72,7 @@ Angular を新しいバージョンにアップデートするときは、使用
 
 たとえば、 [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) ライブラリを使用するには、まず npm パッケージマネージャーを使用してライブラリとその依存関係をインストールします。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 npm install jquery --save
 npm install popper.js --save
 npm install bootstrap --save

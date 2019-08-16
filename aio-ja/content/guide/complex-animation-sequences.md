@@ -30,7 +30,7 @@
 
 次の例は、アニメーション要素の出現に`query()`関数と`stagger()`関数を使用する方法を示しています。
 
-* `query()`は、ページに出入りする要素を見つけるために使います。 クエリーに指定できるのは、CSSクラス基準仕様を満たす要素です。
+* `query()`を使用し、ページに入ってくる特定の条件を満たす要素を探します。
 
 * `style()`を利用することで、同一の初期スタイルを要素のそれぞれに対して設定します。 透過させ、見えないようにし、`transform`で所定の位置にスライドできるようにします。
 
@@ -38,7 +38,7 @@
 
 * 独自定義のイージングカーブを使用してスクリーン上の各要素を0.5秒間アニメーションし、同時にフェードインさせtransformを解除します。
 
-<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="page-animations" language="typescript" linenums="false"></code-example>
+<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="page-animations" language="typescript"></code-example>
 
 ## group()関数を使用した並列アニメーション
 
@@ -51,7 +51,7 @@
 
 次の例では、 `:enter`と`:leave`それぞれがグループを使用することで、2つの異なるタイミングの構成が可能になります。 それらはパラレルに同じ要素へ適用されますが、独立して実行されます。
 
-<code-example path="animations/src/app/hero-list-groups.component.ts" region="animationdef" header="src/app/hero-list-groups.component.ts (excerpt)" language="typescript" linenums="false"></code-example>
+<code-example path="animations/src/app/hero-list-groups.component.ts" region="animationdef" header="src/app/hero-list-groups.component.ts (excerpt)" language="typescript"></code-example>
 
 ## シーケンシャル vs. 並列アニメーション
 
@@ -74,7 +74,7 @@ HTMLテンプレートには、`filterAnimation`というトリガーが含ま�
 
 コンポーネントファイルには3つの遷移が含まれています。
 
-<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="filter-animations" language="typescript" linenums="false"></code-example>
+<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="filter-animations" language="typescript"></code-example>
 
 このアニメーションは次を実行します:
 

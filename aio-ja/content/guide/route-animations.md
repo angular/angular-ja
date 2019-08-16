@@ -43,8 +43,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 次の設定では、アプリケーションのルーティングを定義します。
 
-<code-example path="animations/src/app/app.module.ts" linenums="false" header="src/app/app.module.ts" region="route-animation-data" language="typescript">
-</code-example>
+<code-example path="animations/src/app/app.module.ts" header="src/app/app.module.ts" region="route-animation-data" language="typescript"></code-example>
 
 `home`および`about`パスは、`HomeComponent`および`AboutComponent`ビューに関連付けられます。 ルーティング設定は、ナビゲーションが対応するパスと一致したときに、`HomeComponent`ビューと`AboutComponent`ビューをインスタンス化するようにAngularルーターに指示します。
 
@@ -62,13 +61,11 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 `<router-outlet>`コンテナには、ルーティング設定で設定した`data`プロパティに基づいて、アクティブなルーティングとその状態に関するデータを含む属性ディレクティブがあります。
 
-<code-example path="animations/src/app/app.component.html" header="src/app/app.component.html" region="route-animations-outlet">
-</code-example>
+<code-example path="animations/src/app/app.component.html" header="src/app/app.component.html" region="route-animations-outlet"></code-example>
 
 `AppComponent`は、ビューがいつ変化するかを検出できるメソッドを定義します。 このメソッドでは、ルーティング設定の`data`プロパティ値に基づいて、アニメーショントリガー(`@routeAnimation`)にアニメーション状態の値を割り当てます。 次に、ルーティング変更が発生したことを検出する`AppComponent`のメソッド例を示します。
 
-<code-example path="animations/src/app/app.component.ts" linenums="false" header="src/app/app.component.ts" region="prepare-router-outlet" language="typescript">
-</code-example>
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="prepare-router-outlet" language="typescript"></code-example>
 
 ここで、`prepareRoute()`メソッドは出力ディレクティブ(`#outlet="outlet"`によって確立されます)の値をとり、アクティブなルーティングのカスタムデータに基づいて、アニメーションの状態を表す文字列値を返します。 このデータを使用して、各ルーティングに対して実行する遷移を制御できます。
 
@@ -79,8 +76,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 次のコードスニペットは、`slideInAnimation`という名前の付いた再利用可能なアニメーション定義しています。
 
 
-<code-example path="animations/src/app/animations.ts" linenums="false" header="src/app/animations.ts" region="route-animations" language="typescript">
-</code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="route-animations" language="typescript"></code-example>
 
 アニメーション定義にはいくつかのことを行います:
 
@@ -97,15 +93,13 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 再利用可能なアニメーション(`slideInAnimation`)を`AppComponent`の`animations`メタデータに追加して、アプリケーションでアニメーション定義を利用可能にします。
 
-<code-example path="animations/src/app/app.component.ts" linenums="false" header="src/app/app.component.ts" region="define" language="typescript">
-</code-example>
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="define" language="typescript"></code-example>
 
 ### ホストコンポーネントと子コンポーネントのスタイル設定
 
 遷移中、古いビューの直後に新しいビューが挿入され、同時に両方の要素が画面に表示されます。 これを防ぐには、追加のスタイリングをホストビューに適用し、削除して挿入した子ビューに適用します。 ホストビューは相対位置を使用する必要があり、子ビューは絶対位置を使用する必要があります。 スタイルをビューに追加することで、DOMを動かすことなく、コンテナの位置をアニメーション化できます。
 
-<code-example path="animations/src/app/animations.ts" linenums="false" header="src/app/animations.ts" region="style-view" language="typescript">
-</code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="style-view" language="typescript"></code-example>
 
 ### ビューコンテナのクエリ
 
@@ -113,8 +107,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 *Home => About*へ遷移しているとしましょう。
 
-<code-example path="animations/src/app/animations.ts" linenums="false" header="src/app/animations.ts" region="query" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="query" language="typescript"></code-example>
 
 このアニメーションコードは、ビューをスタイリングした後、次の処理を行います:
 

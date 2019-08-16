@@ -294,7 +294,7 @@ _注入_することは簡単なことです。
 
 `MasterService`は簡単な例です:
 
-<code-example path="testing/src/app/demo/demo.ts" region="MasterService" header="app/demo/demo.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/demo/demo.ts" region="MasterService" header="app/demo/demo.ts"></code-example>
 
 `MasterService`は注入した`ValueService`の`getValue`メソッドを委譲するだけです。
 
@@ -352,22 +352,19 @@ AngularのDIにサービスの作成とコンストラクター引数の順序�
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
   region="value-service-before-each"
-  header="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach">
-</code-example>
+  header="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach"></code-example>
 
 それからサービスのクラスを引数として`TestBed.get()`を呼び出して、テスト内部でそれを注入してください。
 
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
-  region="value-service-inject-it">
-</code-example>
+  region="value-service-inject-it"></code-example>
 
 もしくは、セットアップ部分でサービスを注入したい場合は、`beforeEach()`内で行ってください。
 
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
-  region="value-service-inject-before-each">
-</code-example>
+  region="value-service-inject-before-each"></code-example>
 
 依存関係をもつサービスのテストをするときは、`providers`配列内にモックを提供してください。
 
@@ -375,15 +372,13 @@ AngularのDIにサービスの作成とコンストラクター引数の順序�
 
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
-  region="master-service-before-each" linenums="false">
-</code-example>
+  region="master-service-before-each"></code-example>
 
 このテストではさきほどと同様にスパイを使用します。
 
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
-  region="master-service-it">
-</code-example>
+  region="master-service-it"></code-example>
 
 {@a no-before-each}
 #### _beforeEach()_を使用せずにテストする
@@ -400,8 +395,7 @@ AngularのDIにサービスの作成とコンストラクター引数の順序�
 <code-example
   path="testing/src/app/demo/demo.spec.ts"
   region="no-before-each-setup"
-  header="app/demo/demo.spec.ts (setup)" linenums="false">
-</code-example>
+  header="app/demo/demo.spec.ts (setup)"></code-example>
 
 `setup()`関数は`masterService`のような、
 テストが参照する変数を含むオブジェクトリテラルを返します。
@@ -413,8 +407,7 @@ AngularのDIにサービスの作成とコンストラクター引数の順序�
 
 <code-example
   path="testing/src/app/demo/demo.spec.ts"
-  region="no-before-each-test" linenums="false">
-</code-example>
+  region="no-before-each-test"></code-example>
 
 必要なセットアップ変数を抽出するために
 どのように[_分割代入_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
@@ -422,8 +415,7 @@ AngularのDIにサービスの作成とコンストラクター引数の順序�
 
 <code-example
   path="testing/src/app/demo/demo.spec.ts"
-  region="no-before-each-setup-call">
-</code-example>
+  region="no-before-each-setup-call"></code-example>
 
 多くの開発者にとって、このアプローチは伝統的な`beforeEach()`
 スタイルよりも明快でより明確であると感じるでしょう。
@@ -443,8 +435,7 @@ XHR呼び出しのためのAngularの[`HttpClient`](guide/http)サービスを�
 <code-example
   path="testing/src/app/model/hero.service.spec.ts"
   region="test-with-spies"
-  header="app/model/hero.service.spec.ts (tests with spies)">
-</code-example>
+  header="app/model/hero.service.spec.ts (tests with spies)"></code-example>
 
 <div class="alert is-important">
 
@@ -497,8 +488,7 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
 <code-example
   path="testing/src/app/demo/demo.ts"
   region="LightswitchComp"
-  header="app/demo/demo.ts (LightswitchComp)" linenums="false">
-</code-example>
+  header="app/demo/demo.ts (LightswitchComp)"></code-example>
 
 きっと、あなたは`click()`メソッドがライトの_オン/オフ_状態を切り替えて、
 メッセージを適切にセットすることをテストしたいだけだと思います。
@@ -511,16 +501,14 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
 <code-example
   path="testing/src/app/demo/demo.spec.ts"
   region="Lightswitch"
-  header="app/demo/demo.spec.ts (Lightswitch tests)" linenums="false">
-</code-example>
+  header="app/demo/demo.spec.ts (Lightswitch tests)"></code-example>
 
 次は、_ツアー・オブ・ヒーロー_チュートリアルの`DashboardHeroComponent`です。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.ts"
   region="class"
-  header="app/dashboard/dashboard-hero.component.ts (component)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.ts (component)"></code-example>
 
 _hero_を`@Input`プロパティにバインドし、
 _selected_ `@Output`プロパティを通して発生したイベントをリッスンする
@@ -532,8 +520,7 @@ _selected_ `@Output`プロパティを通して発生したイベントをリッ
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="class-only"
-  header="app/dashboard/dashboard-hero.component.spec.ts (class tests)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (class tests)"></code-example>
 
 コンポーネントに依存関係がある場合、
 `TestBed`を使用してコンポーネントとその依存関係の両方を作成することができます。
@@ -543,32 +530,28 @@ _selected_ `@Output`プロパティを通して発生したイベントをリッ
 <code-example
   path="testing/src/app/welcome/welcome.component.ts"
   region="class"
-  header="app/welcome/welcome.component.ts" linenums="false">
-</code-example>
+  header="app/welcome/welcome.component.ts"></code-example>
 
 まずは、このコンポーネントの最小限のニーズを満たす`UserService`のモックを作成してください。
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="mock-user-service"
-  header="app/welcome/welcome.component.spec.ts (MockUserService)" linenums="false">
-</code-example>
+  header="app/welcome/welcome.component.spec.ts (MockUserService)"></code-example>
 
 次に、**コンポーネント**と_サービス_の_両方_を`TestBed`の設定に提供して注入します。
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="class-only-before-each"
-  header="app/welcome/welcome.component.spec.ts (class-only setup)" linenums="false">
-</code-example>
+  header="app/welcome/welcome.component.spec.ts (class-only setup)"></code-example>
 
 次に、コンポーネントクラスを実行します。Angularがアプリケーションの実行時に[ライフサイクルフックメソッド](guide/lifecycle-hooks)を呼び出すことを覚えておいてください。
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="class-only-tests"
-  header="app/welcome/welcome.component.spec.ts (class-only tests)" linenums="false">
-</code-example>
+  header="app/welcome/welcome.component.spec.ts (class-only tests)"></code-example>
 
 ### コンポーネントのDOMのテスト
 
@@ -619,8 +602,7 @@ ng generate component banner --inline-template --inline-style --module app
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v1"
-  header="app/banner/banner-external.component.spec.ts (initial)" linenums="false">
-</code-example>
+  header="app/banner/banner-external.component.spec.ts (initial)"></code-example>
 
 #### セットアップを減らす
 
@@ -635,16 +617,14 @@ ng generate component banner --inline-template --inline-style --module app
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v2"
-  header="app/banner/banner-initial.component.spec.ts (minimal)" linenums="false">
-</code-example>
+  header="app/banner/banner-initial.component.spec.ts (minimal)"></code-example>
 
 この例では、`TestBed.configureTestingModule`に渡されたメタデータオブジェクトは、
 単にテストするコンポーネントである`BannerComponent`を宣言します。
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="configureTestingModule">
-</code-example>
+  region="configureTestingModule"></code-example>
 
 <div class="alert is-helpful">
 
@@ -666,8 +646,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="createComponent">
-</code-example>
+  region="createComponent"></code-example>
 
 `TestBed.createComponent()`は、
 `BannerComponent`のインスタンスを作成し、
@@ -696,8 +675,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="componentInstance">
-</code-example>
+  region="componentInstance"></code-example>
 
 #### _beforeEach()_
 
@@ -708,16 +686,14 @@ ng generate component banner --inline-template --inline-style --module app
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v3"
-  linenums="false">
-</code-example>
+ ></code-example>
 
 次に、`fixture.nativeElement`からコンポーネントの要素を取得し、
 期待されるテキストを探すテストを追加します。
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="v4-test-2">
-</code-example>
+  region="v4-test-2"></code-example>
 
 {@a native-element}
 
@@ -743,8 +719,7 @@ Angularは、コンパイル時に`nativeElement`のHTML要素の種類やHTML�
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="v4-test-3">
-</code-example>
+  region="v4-test-3"></code-example>
 
 {@a debug-element}
 
@@ -754,15 +729,13 @@ Angularの_fixture_は`fixture.nativeElement`を通して直接コンポーネ�
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="nativeElement">
-</code-example>
+  region="nativeElement"></code-example>
 
 次は、`fixture.debugElement.nativeElement`として実装された、実際に便利なメソッドです。
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="debugElement-nativeElement">
-</code-example>
+  region="debugElement-nativeElement"></code-example>
 
 要素へのこの遠回りには正当な理由があります。
 
@@ -782,8 +755,7 @@ Angularは、HTML要素のツリーを作成する代わりに、ランタイム
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="v4-test-4">
-</code-example>
+  region="v4-test-4"></code-example>
 
 `DebugElement`には、このガイドの他の部分で説明するように、
 テストに役立つ他のメソッドとプロパティがあります。
@@ -792,8 +764,7 @@ Angularコアライブラリから`DebugElement`シンボルをインポート�
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="import-debug-element">
-</code-example>
+  region="import-debug-element"></code-example>
 
 {@a by-css}
 #### _By.css()_
@@ -812,16 +783,14 @@ Angularコアライブラリから`DebugElement`シンボルをインポート�
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="import-by">
-</code-example>
+  region="import-by"></code-example>
 
 次の例では`DebugElement.query()`とブラウザの`By.css`メソッドを使用して、
 さきほどのテストを再実装しています。
 
 <code-example
   path="testing/src/app/banner/banner-initial.component.spec.ts"
-  region="v4-test-5">
-</code-example>
+  region="v4-test-5"></code-example>
 
 いくつか注目すべきことがあります:
 
@@ -853,8 +822,7 @@ CSSセレクターでフィルタリングし、ブラウザの_ネイティブ�
 <code-example
   path="testing/src/app/banner/banner.component.ts"
   region="component"
-  header="app/banner/banner.component.ts" linenums="false">
-</code-example>
+  header="app/banner/banner.component.ts"></code-example>
 
 これは簡単なので、
 コンポーネントが実際に正しいと思われる場所にコンテンツが表示されることを確認するためにテストを追加します。
@@ -870,8 +838,7 @@ _title_プロパティのインターポレーションバインディングを�
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
   region="setup"
-  header="app/banner/banner.component.spec.ts (setup)" linenums="false">
-</code-example>
+  header="app/banner/banner.component.spec.ts (setup)"></code-example>
 
 {@a detect-changes}
 
@@ -882,8 +849,7 @@ _title_プロパティのインターポレーションバインディングを�
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
-  region="expect-h1-default-v1">
-</code-example>
+  region="expect-h1-default-v1"></code-example>
 
 メッセージとともに_このテストは失敗します_:
 
@@ -901,8 +867,7 @@ Angularが**変更検知**を実行したときにバインディングが発生
 この事実は改定したテストで確認されます:
 
 <code-example
-  path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes" linenums="false">
-</code-example>
+  path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes"></code-example>
 
 #### _detectChanges()_
 
@@ -911,8 +876,7 @@ Angularが**変更検知**を実行したときにバインディングが発生
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
-  region="expect-h1-default">
-</code-example>
+  region="expect-h1-default"></code-example>
 
 遅延した変化検知は意図的かつ便利です。
 _Angularがデータバインディングを開始して[ライフサイクルフック](guide/lifecycle-hooks)を呼び出す前に_、
@@ -922,8 +886,7 @@ _Angularがデータバインディングを開始して[ライフサイクル�
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
-  region="after-change">
-</code-example>
+  region="after-change"></code-example>
 
 {@a automatic-change-detection}
 
@@ -935,15 +898,15 @@ _Angularがデータバインディングを開始して[ライフサイクル�
 これは`ComponentFixtureAutoDetect`プロバイダーで`TestBed`を構成することで可能です。
 まず、テスティングユーティリティライブラリからインポートします:
 
-<code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="import-ComponentFixtureAutoDetect" header="app/banner/banner.component.detect-changes.spec.ts (import)" linenums="false"></code-example>
+<code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="import-ComponentFixtureAutoDetect" header="app/banner/banner.component.detect-changes.spec.ts (import)"></code-example>
 
 それから、それをテストモジュール構成の`providers`配列に追加します:
 
-<code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect" header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)" linenums="false"></code-example>
+<code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect" header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)"></code-example>
 
 次は、自動変更検知がどのように機能するかを示す3つのテストです。
 
-<code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect-tests" header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect Tests)" linenums="false"></code-example>
+<code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect-tests" header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect Tests)"></code-example>
 
 最初のテストでは、自動変更検知の利点が示されています。
 
@@ -993,8 +956,7 @@ _外部CSS_を指定します。
 <code-example
   path="testing/src/app/banner/banner-external.component.ts"
   region="metadata"
-  header="app/banner/banner-external.component.ts (metadata)" linenums="false">
-</code-example>
+  header="app/banner/banner-external.component.ts (metadata)"></code-example>
 
 この構文は、コンポーネントコンパイル時に外部ファイルを読み込むようにAngularコンパイラに指示します。
 
@@ -1025,12 +987,12 @@ _テスト中に_ランタイム環境がソースコードをコンパイルす
 `WelcomeComponent`は、ログインしたユーザーへのウェルカムメッセージを表示します。
 それは注入した`UserService`のプロパティからユーザーが誰かを知ります:
 
-<code-example path="testing/src/app/welcome/welcome.component.ts" header="app/welcome/welcome.component.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/welcome/welcome.component.ts" header="app/welcome/welcome.component.ts"></code-example>
 
 `WelcomeComponent`には、サービスとやりとりするロジックと、このコンポーネントの値のテストをするロジックの決定権があります。
 次は、スペックファイル`app/welcome/welcome.component.spec.ts`のテスティングモジュールの構成です:
 
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" header="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" header="app/welcome/welcome.component.spec.ts"></code-example>
 
 今回は、_テスト中のコンポーネント_を宣言することに加えて、
 `providers`配列に`UserService`プロバイダーを追加します。
@@ -1057,8 +1019,7 @@ _テスト中のコンポーネント_に実際のサービスを注入する必
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="user-service-stub"
-  header="app/welcome/welcome.component.spec.ts" linenums="false">
-</code-example>
+  header="app/welcome/welcome.component.spec.ts"></code-example>
 
 {@a get-injected-services}
 
@@ -1077,8 +1038,7 @@ Angularは階層的な注入システムを持ちます。
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="injected-service"
-  header="WelcomeComponent's injector">
-</code-example>
+  header="WelcomeComponent's injector"></code-example>
 
 {@a testbed-get}
 
@@ -1094,8 +1054,7 @@ Angularは階層的な注入システムを持ちます。
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="inject-from-testbed"
-  header="TestBed injector">
-</code-example>
+  header="TestBed injector"></code-example>
 
 <div class="alert is-helpful">
 
@@ -1115,7 +1074,7 @@ Angularは階層的な注入システムを持ちます。
 コンポーネントに注入された`userService`インスタンスは、完全に_異なる_オブジェクトであり、
 提供された`userServiceStub`のクローンです。
 
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="stub-not-injected" header="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="stub-not-injected" header="app/welcome/welcome.component.spec.ts"></code-example>
 
 {@a welcome-spec-setup}
 
@@ -1123,11 +1082,11 @@ Angularは階層的な注入システムを持ちます。
 
 次では、`TestBed.get()`を使用して`beforeEach()`を完了しています:
 
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" header="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" header="app/welcome/welcome.component.spec.ts"></code-example>
 
 そして何個かのテストを書きます:
 
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="tests" header="app/welcome/welcome.component.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="tests" header="app/welcome/welcome.component.spec.ts"></code-example>
 
 最初のものはサニティーテストです。これはスタブされた`UserService`が呼び出され、動作していることを確認します。
 
@@ -1155,8 +1114,7 @@ Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、�
 <code-example
   path="testing/src/app/twain/twain.component.ts"
   region="template"
-  header="app/twain/twain.component.ts (template)" linenums="false">
-</code-example>
+  header="app/twain/twain.component.ts (template)"></code-example>
 
 コンポーネントの`quote`プロパティの値は、`AsyncPipe`を経由することに注意してください。
 つまり、プロパティは`Promise`または`Observable`のいずれかを返します。
@@ -1167,8 +1125,7 @@ Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、�
 <code-example
   path="testing/src/app/twain/twain.component.ts"
   region="get-quote"
-  header="app/twain/twain.component.ts (getQuote)" linenums="false">
-</code-example>
+  header="app/twain/twain.component.ts (getQuote)"></code-example>
 
 `TwainComponent`は、注入された`TwainService`から引用を取得します。
 コンポーネントは、サービスが最初の引用を返せるようになる前にプレースホルダー値(`'...'`)
@@ -1190,8 +1147,7 @@ Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、�
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
   region="setup"
-  header="app/twain/twain.component.spec.ts (setup)" linenums="false">
-</code-example>
+  header="app/twain/twain.component.spec.ts (setup)"></code-example>
 
 {@a service-spy}
 
@@ -1199,8 +1155,7 @@ Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、�
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="spy">
-</code-example>
+  region="spy"></code-example>
 
 スパイは、`getQuote`への任意の呼び出しがテストの引用のObservableを受け取るように設計されています。
 実際の`getQuote()`メソッドとは異なり、このスパイはサーバーをバイパスし、
@@ -1217,8 +1172,7 @@ Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、�
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="sync-test">
-</code-example>
+  region="sync-test"></code-example>
 
 スパイの結果が同期的に返されるため、
 `getQuote()`メソッドは、
@@ -1241,8 +1195,7 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="error-test">
-</code-example>
+  region="error-test"></code-example>
 
 `it()`関数が次の形式の引数を受け取ることに注目してください。
 
@@ -1267,8 +1220,7 @@ fakeAsync(() => { /* test body */ })`
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-tick">
-</code-example>
+  region="fake-async-test-tick"></code-example>
 
 `tick`関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
 これは`fakeAsync()`と対になっており、`fakeAsync()`の内部でのみ呼び出すことができます。
@@ -1279,8 +1231,7 @@ fakeAsync(() => { /* test body */ })`
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-date">
-</code-example>
+  region="fake-async-test-date"></code-example>
 
 #### jasmine.clock と fakeAsync()
 
@@ -1298,16 +1249,14 @@ import 'zone.js/dist/zone-testing';
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-clock">
-</code-example>
+  region="fake-async-test-clock"></code-example>
 
 #### fakeAsync() の中でのRxJSスケジューラーの使用
 
 `setTimeout()` や `setInterval()` を使うのと同じように `fakeAsync()` の中でRxJSスケジューラを使うこともできますが、RxJSスケジューラにパッチを当てるには `zone.js/dist/zone-patch-rxjs-fake-async` をインポートする必要があります。
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-rxjs">
-</code-example>
+  region="fake-async-test-rxjs"></code-example>
 
 #### より多くのmacroTasksをサポートする
 
@@ -1324,11 +1273,11 @@ import 'zone.js/dist/zone-testing';
 <code-tabs>
   <code-pane
     path="testing/src/app/shared/canvas.component.spec.ts"
-    header="src/app/shared/canvas.component.spec.ts" linenums="false">
+    header="src/app/shared/canvas.component.spec.ts">
   </code-pane>
   <code-pane
     path="testing/src/app/shared/canvas.component.ts"
-    header="src/app/shared/canvas.component.ts" linenums="false">
+    header="src/app/shared/canvas.component.ts">
   </code-pane>
 </code-tabs>
 
@@ -1371,8 +1320,7 @@ it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-setup">
-</code-example>
+  region="async-setup"></code-example>
 
 #### 非同期Observableヘルパー
 
@@ -1383,8 +1331,7 @@ it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
 <code-example
   path="testing/src/testing/async-observable-helpers.ts"
   region="async-data"
-  header="testing/async-observable-helpers.ts">
-</code-example>
+  header="testing/async-observable-helpers.ts"></code-example>
 
 このヘルパーのObservableは、JavaScriptエンジンの次のターンで`data`の値を発行します。
 
@@ -1401,8 +1348,7 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 <code-example
   path="testing/src/testing/async-observable-helpers.ts"
-  region="async-error">
-</code-example>
+  region="async-error"></code-example>
 
 #### さらに非同期テスト
 
@@ -1414,8 +1360,7 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="fake-async-test">
-</code-example>
+  region="fake-async-test"></code-example>
 
 `ngOnInit()`の後に、引用にはプレースホルダー値(`'...'`)が表示されることに注意してください。
 最初の引用はまだ届いていません。
@@ -1449,8 +1394,7 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-test">
-</code-example>
+  region="async-test"></code-example>
 
 `async()`ユーティリティは、
 テスターのコードを特別な_asyncテストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。
@@ -1498,8 +1442,7 @@ JavaScriptエンジンのタスクキューが空になったときに解決す�
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="quote-done-test" linenums="false">
-</code-example>
+  region="quote-done-test"></code-example>
 
 RxJSの`last()`演算子は、完了する前のObservableの最後の値を発行します。
 これはテストの引用になります。
@@ -1513,8 +1456,7 @@ RxJSの`last()`演算子は、完了する前のObservableの最後の値を発�
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="spy-done-test" linenums="false">
-</code-example>
+  region="spy-done-test"></code-example>
 
 <hr>
 
@@ -1546,15 +1488,13 @@ Observableがどのように動作するかを示す[マーブルダイアグラ
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="import-marbles"
-  header="app/twain/twain.component.marbles.spec.ts (import marbles)" linenums="false">
-</code-example>
+  header="app/twain/twain.component.marbles.spec.ts (import marbles)"></code-example>
 
 引用を取得するための完全なテストは次のようになります:
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
-  region="get-quote-test" linenums="false">
-</code-example>
+  region="get-quote-test"></code-example>
 
 Jasmineのテストが同期的であることに注意してください。
 `fakeAsync()`はありません。
@@ -1568,8 +1508,7 @@ Jasmineのテストが同期的であることに注意してください。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
-  region="test-quote-marbles" linenums="false">
-</code-example>
+  region="test-quote-marbles"></code-example>
 
 マーブルライブラリは、
 テストが`getQuote`スパイの戻り値としてセットする対応するObservableを構築します。
@@ -1579,8 +1518,7 @@ Jasmineのテストが同期的であることに注意してください。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
-  region="test-scheduler-flush" linenums="false">
-</code-example>
+  region="test-scheduler-flush"></code-example>
 
 このステップは、
 以前の`fakeAsync()`と`async()`での例の中での`tick()`と`whenStable()`と似た目的を果たします。
@@ -1592,8 +1530,7 @@ Jasmineのテストが同期的であることに注意してください。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
-  region="error-test" linenums="false">
-</code-example>
+  region="error-test"></code-example>
 
 コンポーネント自体がエラーを処理するときに`setTimeout()`を呼び出すため、
 これはまだ非同期テストです。`fakeAsync()`と`tick()`を呼び出す必要があります。
@@ -1602,8 +1539,7 @@ Jasmineのテストが同期的であることに注意してください。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
-  region="error-marbles" linenums="false">
-</code-example>
+  region="error-marbles"></code-example>
 
 これは、3つのフレームを待ってからエラーを発行する _コールド_ Observableです。
 ハッシュ(`#`)は、3番目の引数で指定されたエラーのタイミングを示します。
@@ -1650,8 +1586,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 <code-example
   path="testing/src/app/dashboard/dashboard.component.html"
   region="dashboard-hero"
-  header="app/dashboard/dashboard.component.html (excerpt)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard.component.html (excerpt)"></code-example>
 
 `DashboardHeroComponent`は`*ngFor`リピーター内に配置され、
 各コンポーネントの`hero`インプットプロパティにループ値を設定し、コンポーネントの`selected`イベントをリッスンします。
@@ -1663,8 +1598,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.ts"
   region="component"
-  header="app/dashboard/dashboard-hero.component.ts (component)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.ts (component)"></code-example>
 
 この単純なコンポーネントのテストに本質的な価値はほとんどありませんが、方法を知ることには価値があります。
 あなたは次のアプローチの1つを使用することができます:
@@ -1678,8 +1612,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="ctor"
-  header="app/dashboard/dashboard.component.ts (constructor)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard.component.ts (constructor)"></code-example>
 
 `DashboardComponent`はAngularのルーターと`HeroService`に依存します。
 おそらくそれらを両方ともテストダブルと置き換える必要があります。
@@ -1703,8 +1636,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="setup"
-  header="app/dashboard/dashboard-hero.component.spec.ts (setup)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (setup)"></code-example>
 
 セットアップコードがどのようにコンポーネントの`hero`プロパティにテストヒーロー
 (`expectedHero`)を割り当てるのか、
@@ -1714,8 +1646,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
-  region="name-test">
-</code-example>
+  region="name-test"></code-example>
 
 [テンプレート](#dashboard-hero-component)ではヒーロー名をAngularの`UpperCasePipe`を通して渡すので、
 テストではアッパーケースの名前をもつ要素の値とマッチする必要があります。
@@ -1736,8 +1667,7 @@ Angularテストが[コンポーネントクラスのテスト](#component-class
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
-  region="click-test">
-</code-example>
+  region="click-test"></code-example>
 
 コンポーネントの`selected`プロパティは`EventEmitter`を返します。
 これは利用者にはRxJS同期的`Observable`のように見えます。
@@ -1764,8 +1694,7 @@ Angularの`DebugElement.triggerEventHandler`は、
 このテストでは、`null`イベントオブジェクトをもつ"click"イベントがトリガーされます。
 
 <code-example
-  path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="trigger-event-handler">
-</code-example>
+  path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="trigger-event-handler"></code-example>
 
 テストで
 ランタイムのイベントハンドラー(コンポーネントの`click()`メソッド)
@@ -1787,8 +1716,7 @@ Angularの`DebugElement.triggerEventHandler`は、
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
-  region="click-test-2">
-</code-example>
+  region="click-test-2"></code-example>
 
 {@a click-helper}
 
@@ -1802,8 +1730,7 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
 <code-example
   path="testing/src/testing/index.ts"
   region="click-event"
-  header="testing/index.ts (click helper)" linenums="false">
-</code-example>
+  header="testing/index.ts (click helper)"></code-example>
 
 最初のパラメータは_クリックする要素_です。
 必要に応じて、カスタムイベントオブジェクトを2番目のパラメータとして渡すことができます。
@@ -1824,8 +1751,7 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="click-test-3"
-  header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)"></code-example>
 
 <hr>
 
@@ -1850,8 +1776,7 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="test-host"
   header="app/dashboard/dashboard-hero.component.spec.ts (test host)"
-  linenums="false">
-</code-example>
+ ></code-example>
 
 このテストホストは、`DashboardComponent`のように`DashboardHeroComponent`にバインドしますが、ルーター、
 `HeroService`、`*ngFor`リピーターなどのノイズはありません。
@@ -1865,7 +1790,7 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
 
 _テストホスト_のテストのセットアップは、スタンドアロンテストのセットアップと似ています:
 
-<code-example path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="test-host-setup" header="app/dashboard/dashboard-hero.component.spec.ts (test host setup)" linenums="false"></code-example>
+<code-example path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="test-host-setup" header="app/dashboard/dashboard-hero.component.spec.ts (test host setup)"></code-example>
 
 このテストモジュールの構成では、3つの重要な違いがあります:
 
@@ -1885,8 +1810,7 @@ _テストホスト_のテストのセットアップは、スタンドアロン
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="test-host-tests"
-  header="app/dashboard/dashboard-hero.component.spec.ts (test-host)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (test-host)"></code-example>
 
 選択したイベントテストのみが異なります。
 これは、選択された`DashboardHeroComponen`のヒーローが実際にホストコンポーネントへのイベントバインディングを通じて登ってきたことを確認します。
@@ -1908,8 +1832,7 @@ _ルーティングコンポーネント_です。
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="ctor"
-  header="app/dashboard/dashboard.component.ts (constructor)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard.component.ts (constructor)"></code-example>
 
 `HeroService`をスパイでモックするのは[おなじみの話](#component-with-async-service)です。
 しかし、`Router`には複雑なAPIがあり、他のサービスやアプリケーションの前提条件と絡み合っています。モックするのは難しいかもしれないでしょうか?
@@ -1919,8 +1842,7 @@ _ルーティングコンポーネント_です。
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="goto-detail"
-  header="app/dashboard/dashboard.component.ts (goToDetail)">
-</code-example>
+  header="app/dashboard/dashboard.component.ts (goToDetail)"></code-example>
 
 これは_ルーティングコンポーネント_でよくあるケースです。
 原則として、ルーターではなくコンポーネントをテストし、
@@ -1932,8 +1854,7 @@ _このコンポーネント_のテストスイートのためのルータース
 <code-example
   path="testing/src/app/dashboard/dashboard.component.spec.ts"
   region="router-spy"
-  header="app/dashboard/dashboard.component.spec.ts (spies)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard.component.spec.ts (spies)"></code-example>
 
 次のテストでは、表示されたヒーローをクリックし、
 `Router.navigateByUrl`が期待されるURLで呼び出されたことを確認します。
@@ -1941,8 +1862,7 @@ _このコンポーネント_のテストスイートのためのルータース
 <code-example
   path="testing/src/app/dashboard/dashboard.component.spec.ts"
   region="navigate-test"
-  header="app/dashboard/dashboard.component.spec.ts (navigate test)" linenums="false">
-</code-example>
+  header="app/dashboard/dashboard.component.spec.ts (navigate test)"></code-example>
 
 {@a routed-component-w-param}
 
@@ -1962,7 +1882,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 
 `HeroDetailComponent`のコンストラクターは次のようになります:
 
-<code-example path="testing/src/app/hero/hero-detail.component.ts" region="ctor" header="app/hero/hero-detail.component.ts (constructor)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.ts" region="ctor" header="app/hero/hero-detail.component.ts (constructor)"></code-example>
 
 `HeroDetail`コンポーネントは`HeroDetailService`
 経由で対応するヒーローをフェッチするために`id`パラメータを必要とします。
@@ -1973,7 +1893,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 コンポーネントは、`ActivatableRoute.paramMap` Observableを_サブスクライブ_し、
 `id`がそのライフタイム内で変更されるように準備する必要があります。
 
-<code-example path="testing/src/app/hero/hero-detail.component.ts" region="ng-on-init" header="app/hero/hero-detail.component.ts (ngOnInit)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.ts" region="ng-on-init" header="app/hero/hero-detail.component.ts (ngOnInit)"></code-example>
 
 <div class="alert is-helpful">
 
@@ -2002,8 +1922,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 <code-example
   path="testing/src/testing/activated-route-stub.ts"
   region="activated-route-stub"
-  header="testing/activated-route-stub.ts (ActivatedRouteStub)" linenums="false">
-</code-example>
+  header="testing/activated-route-stub.ts (ActivatedRouteStub)"></code-example>
 
 このようなヘルパーを`app`フォルダと同一階層の`testing`フォルダに配置することを検討してください。
 このサンプルでは`ActivatedRouteStub`を`testing/activated-route-stub.ts`に置きます。
@@ -2021,7 +1940,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 
 Observableより取得した`id`が既存のヒーローを参照しているときのコンポーネントの動作を示すテストは次のようになります:
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-good-id" header="app/hero/hero-detail.component.spec.ts (existing id)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-good-id" header="app/hero/hero-detail.component.spec.ts (existing id)"></code-example>
 
 <div class="alert is-helpful">
 
@@ -2036,7 +1955,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 
 次のテストでは、コンポーネントが`HeroListComponent`にナビゲートしようとします。
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-bad-id" header="app/hero/hero-detail.component.spec.ts (bad id)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-bad-id" header="app/hero/hero-detail.component.spec.ts (bad id)"></code-example>
 
 このアプリは`id`パラメータを省略した`HeroDetailComponent`へのルーティングを持っていませんが、いつかそのようなルーティングを追加するかもしれません。
 コンポーネントは、`id`がないときに妥当な何かを行うべきです。
@@ -2047,8 +1966,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="route-no-id"
-  header="app/hero/hero-detail.component.spec.ts (no id)" linenums="false">
-</code-example>
+  header="app/hero/hero-detail.component.spec.ts (no id)"></code-example>
 
 <hr>
 {@a nested-component-tests}
@@ -2065,8 +1983,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 
 <code-example
   path="testing/src/app/app.component.html"
-  header="app/app.component.html" linenums="false">
-</code-example>
+  header="app/app.component.html"></code-example>
 
 `AppComponent`_クラス_は空ですが、
 おそらく[以下の理由](#why-stubbed-routerlink-tests)で、
@@ -2104,8 +2021,7 @@ Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="component-stubs"
-  header="app/app.component.spec.ts (stub declaration)" linenums="false">
-</code-example>
+  header="app/app.component.spec.ts (stub declaration)"></code-example>
 
 スタブのセレクターは、対応する実際のコンポーネントのセレクターと一致します。
 しかし、そのテンプレートとクラスは空です。
@@ -2116,8 +2032,7 @@ Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="testbed-stubs"
-  header="app/app.component.spec.ts (TestBed stubs)" linenums="false">
-</code-example>
+  header="app/app.component.spec.ts (TestBed stubs)"></code-example>
 
 `AppComponent`はテスト対象ですので、もちろん実際のバージョンを宣言してください。
 
@@ -2135,8 +2050,7 @@ Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="no-errors-schema"
-  header="app/app.component.spec.ts (NO_ERRORS_SCHEMA)" linenums="false">
-</code-example>
+  header="app/app.component.spec.ts (NO_ERRORS_SCHEMA)"></code-example>
 
 `NO_ERRORS_SCHEMA`は、認識できない要素と属性を無視するようにAngularコンパイラに指示します。
 
@@ -2172,8 +2086,7 @@ _この_例のスタブは空ですが、
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="mixed-setup"
-  header="app/app.component.spec.ts (mixed setup)" linenums="false">
-</code-example>
+  header="app/app.component.spec.ts (mixed setup)"></code-example>
 
 Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作成し、
 `routerLink`属性をもつアンカーに`RouterLinkStubDirective`を適用しますが、
@@ -2195,8 +2108,7 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 <code-example
   path="testing/src/testing/router-link-directive-stub.ts"
   region="router-link"
-  header="testing/router-link-directive-stub.ts (RouterLinkDirectiveStub)" linenums="false">
-</code-example>
+  header="testing/router-link-directive-stub.ts (RouterLinkDirectiveStub)"></code-example>
 
 `[routerLink]`属性にバインドされたURLは、ディレクティブの`linkParams`プロパティに流れます。
 
@@ -2225,8 +2137,7 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="test-setup"
-  header="app/app.component.spec.ts (test setup)" linenums="false">
-</code-example>
+  header="app/app.component.spec.ts (test setup)"></code-example>
 
 特に興味のあるポイントは3つあります:
 
@@ -2242,14 +2153,13 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 <code-example
   path="testing/src/app/app.component.html"
   region="links"
-  header="app/app.component.html (navigation links)" linenums="false">
-</code-example>
+  header="app/app.component.html (navigation links)"></code-example>
 
 {@a app-component-tests}
 
 これらのリンクが期待どおりに`routerLink`ディレクティブに配線されていることを確認するテストは次のようになります:
 
-<code-example path="testing/src/app/app.component.spec.ts" region="tests" header="app/app.component.spec.ts (selected tests)" linenums="false"></code-example>
+<code-example path="testing/src/app/app.component.spec.ts" region="tests" header="app/app.component.spec.ts (selected tests)"></code-example>
 
 <div class="alert is-helpful">
 
@@ -2305,8 +2215,7 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 しかし、このシンプルなフォームでも多くの複雑なテンプレートを持ちます。
 
 <code-example
-  path="testing/src/app/hero/hero-detail.component.html" header="app/hero/hero-detail.component.html" linenums="false">
-</code-example>
+  path="testing/src/app/hero/hero-detail.component.html" header="app/hero/hero-detail.component.html"></code-example>
 
 コンポーネントを実行するテストに必要なことは...
 
@@ -2326,8 +2235,7 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="page"
-  header="app/hero/hero-detail.component.spec.ts (Page)" linenums="false">
-</code-example>
+  header="app/hero/hero-detail.component.spec.ts (Page)"></code-example>
 
 コンポーネントの操作と検証のための重要なフックは、`Page`のインスタンスからきれいに整理され、アクセス可能になりました。
 
@@ -2336,8 +2244,7 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="create-component"
-  header="app/hero/hero-detail.component.spec.ts (createComponent)" linenums="false">
-</code-example>
+  header="app/hero/hero-detail.component.spec.ts (createComponent)"></code-example>
 
 上のセクションの[_HeroDetailComponent_のテスト](#tests-w-test-double)では、
 `createComponent`と`page`がテストの短さと_方針_を保つ方法を示しています。
@@ -2348,8 +2255,7 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="selected-tests"
-  header="app/hero/hero-detail.component.spec.ts (selected tests)" linenums="false">
-</code-example>
+  header="app/hero/hero-detail.component.spec.ts (selected tests)"></code-example>
 
 <hr>
 
@@ -2376,8 +2282,7 @@ Please call "TestBed.compileComponents" before your test.
 
 <code-example
   path="testing/src/app/banner/banner-external.component.ts"
-  header="app/banner/banner-external.component.ts (external template & css)" linenums="false">
-</code-example>
+  header="app/banner/banner-external.component.ts (external template & css)"></code-example>
 
 `TestBed`がコンポーネントを作成しようとすると、テストは失敗します。
 
@@ -2385,8 +2290,7 @@ Please call "TestBed.compileComponents" before your test.
   path="testing/src/app/banner/banner.component.spec.ts"
   region="configure-and-create"
   header="app/banner/banner.component.spec.ts (setup that fails)"
-  avoid linenums="false">
-</code-example>
+  avoid></code-example>
 
 アプリケーションがコンパイルされていないことを思い出してください。
 したがって、`createComponent()`を呼び出すと、`TestBed`は暗黙的にコンパイルされます。
@@ -2426,8 +2330,7 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
-  region="import-async">
-</code-example>
+  region="import-async"></code-example>
 
 #### 非同期な_beforeEach_
 
@@ -2436,8 +2339,7 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="async-before-each"
-  header="app/banner/banner-external.component.spec.ts (async beforeEach)" linenums="false">
-</code-example>
+  header="app/banner/banner-external.component.spec.ts (async beforeEach)"></code-example>
 
 `async()`ヘルパー関数は、セットアップを行うパラメーターなしの関数を受け取ります。
 
@@ -2472,8 +2374,7 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="sync-before-each"
-  header="app/banner/banner-external.component.spec.ts (synchronous beforeEach)" linenums="false">
-</code-example>
+  header="app/banner/banner-external.component.spec.ts (synchronous beforeEach)"></code-example>
 
 テストランナーは、2番めの`beforeEach`の呼び出し前に、最初の非同期の`beforeEach`の完了を待つことができます。
 
@@ -2488,8 +2389,7 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="one-before-each"
-  header="app/banner/banner-external.component.spec.ts (one beforeEach)" linenums="false">
-</code-example>
+  header="app/banner/banner-external.component.spec.ts (one beforeEach)"></code-example>
 
 #### _compileComponents()_ は無害
 
@@ -2511,8 +2411,7 @@ CLIによって生成されたコンポーネントテストファイルは、
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="config-testbed"
-  header="app/dashboard/dashboard-hero.component.spec.ts (configure TestBed)">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (configure TestBed)"></code-example>
 
 `DashboardComponent`はシンプルです。
 補助を必要としません。
@@ -2535,8 +2434,7 @@ CLIによって生成されたコンポーネントテストファイルは、
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="setup-forms-module"
-  header="app/hero/hero-detail.component.spec.ts (FormsModule setup)" linenums="false">
-</code-example>
+  header="app/hero/hero-detail.component.spec.ts (FormsModule setup)"></code-example>
 
 <div class="alert is-helpful">
 
@@ -2559,8 +2457,7 @@ CLIによって生成されたコンポーネントテストファイルは、
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="setup-shared-module"
-  header="app/hero/hero-detail.component.spec.ts (SharedModule setup)" linenums="false">
-</code-example>
+  header="app/hero/hero-detail.component.spec.ts (SharedModule setup)"></code-example>
 
 インポート文の数が少なくて済むようになります(表示はしません)。
 
@@ -2572,7 +2469,7 @@ CLIによって生成されたコンポーネントテストファイルは、
 `SharedModule`を含む相互依存関係の多くを集約します。
 次のような`HeroModule`をインポートするテスト構成を試してみてください:
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-hero-module" header="app/hero/hero-detail.component.spec.ts (HeroModule setup)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-hero-module" header="app/hero/hero-detail.component.spec.ts (HeroModule setup)"></code-example>
 
 これは_本当_に簡潔です。`providers`のテストダブルが残っているだけです。`HeroDetailComponent`の宣言さえもなくなりました。
 
@@ -2596,7 +2493,7 @@ Angularはエラーをスローします。
 
 `HeroDetailComponent`は自分自身の`HeroDetailService`を提供します。
 
-<code-example path="testing/src/app/hero/hero-detail.component.ts" region="prototype" header="app/hero/hero-detail.component.ts (prototype)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.ts" region="prototype" header="app/hero/hero-detail.component.ts (prototype)"></code-example>
 
 `TestBed.configureTestingModule`の`providers`でコンポーネントの`HeroDetailService`をスタブすることはできません。
 それらはコンポーネントではなく、_テストモジュール_のプロバイダーです。_フィクスチャーレベル_で依存性のインジェクターを準備します。
@@ -2616,7 +2513,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 
 幸いにも、`HeroDetailService`は、注入された`HeroService`へリモートデータアクセスの責任を委譲します。
 
-<code-example path="testing/src/app/hero/hero-detail.service.ts" region="prototype" header="app/hero/hero-detail.service.ts (prototype)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.service.ts" region="prototype" header="app/hero/hero-detail.service.ts (prototype)"></code-example>
 
 [以前のテスト構成](#feature-module-import)では、
 実際の`HeroService`をサーバー要求をインターセプトしてレスポンスを偽装する`TestHeroService`に置き換えていました。
@@ -2629,7 +2526,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 `TestBed.overrideComponent`メソッドは、コンポーネントの`providers`を、
 次のセットアップの変更で示すように、管理しやすい_テストダブル_に置き換えることができます:
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-override" header="app/hero/hero-detail.component.spec.ts (Override setup)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-override" header="app/hero/hero-detail.component.spec.ts (Override setup)"></code-example>
 
 `TestBed.configureTestingModule`が(偽の)`HeroService`を提供しなくなったことに([不要](#spy-stub)であるため)注目してください。
 
@@ -2639,12 +2536,12 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 
 `overrideComponent` メソッドに注目してください。
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-component-method" header="app/hero/hero-detail.component.spec.ts (overrideComponent)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-component-method" header="app/hero/hero-detail.component.spec.ts (overrideComponent)"></code-example>
 
 これは2つの引数を受け取ります。オーバーライドするコンポーネントタイプ(`HeroDetailComponent`)とオーバーライドメタデータオブジェクトです。
 [オーバーライドメタデータオブジェクト](#metadata-override-object)は、次のように定義されるジェネリック型のオブジェクトです:
 
-<code-example format="." language="javascript">
+<code-example language="javascript">
   type MetadataOverride&lt;T&gt; = {
     add?: Partial&lt;T&gt;;
     remove?: Partial&lt;T&gt;;
@@ -2657,7 +2554,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 
 型パラメータ`T`は`@Component`デコレーターに渡すメタデータの種類です
 
-<code-example format="." language="javascript">
+<code-example language="javascript">
   selector?: string;
   template?: string;
   templateUrl?: string;
@@ -2680,7 +2577,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 `HeroDetailService`のメソッドがサービスメソッドをスパイすることによって呼び出されたことをアサートします。
 したがって、スタブはそのメソッドをスパイとして実装します:
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="hds-spy" header="app/hero/hero-detail.component.spec.ts (HeroDetailServiceSpy)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="hds-spy" header="app/hero/hero-detail.component.spec.ts (HeroDetailServiceSpy)"></code-example>
 
 {@a override-tests}
 
@@ -2689,7 +2586,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 テストでは、スパイスタブの`testHero`を操作してコンポーネントのヒーローを直接制御し、
 サービスメソッドが呼び出されたことを確認できます。
 
-<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-tests" header="app/hero/hero-detail.component.spec.ts (override tests)" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-tests" header="app/hero/hero-detail.component.spec.ts (override tests)"></code-example>
 
 {@a more-overrides}
 
@@ -2715,16 +2612,16 @@ _属性ディレクティブ_は、要素、コンポーネントまたは別の
 また、要素のカスタムプロパティ(`customProperty`)を、
 それが可能であることを示す以外の理由なしに`true`に設定します。
 
-<code-example path="testing/src/app/shared/highlight.directive.ts" header="app/shared/highlight.directive.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/shared/highlight.directive.ts" header="app/shared/highlight.directive.ts"></code-example>
 
 これはアプリケーション全体で使用されています。多分、`AboutComponent`内のものがもっともシンプルです:
 
-<code-example path="testing/src/app/about/about.component.ts" header="app/about/about.component.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/about/about.component.ts" header="app/about/about.component.ts"></code-example>
 
 `AboutComponent`内の特定の`HighlightDirective`の使用をテストするには、
 さきほど説明した手法(特に ["シャローテスト"](#nested-component-tests)アプローチ)のみが必要です。
 
-<code-example path="testing/src/app/about/about.component.spec.ts" region="tests" header="app/about/about.component.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/about/about.component.spec.ts" region="tests" header="app/about/about.component.spec.ts"></code-example>
 
 しかし、単一のユースケースをテストすることは、ディレクティブの機能の全範囲を調査することにはなりません。
 このディレクティブを使用しているすべてのコンポーネントを見つけてテストするのは面倒で脆く、完全にカバーすることはほとんどありません。
@@ -2736,7 +2633,7 @@ _クラスのみ_のテストは役に立ちますが、
 
 よりよい解決策は、ディレクティブを適用するすべての方法を示す人工的なテストコンポーネントを作成することです。
 
-<code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="test-component" header="app/shared/highlight.directive.spec.ts (TestComponent)" linenums="false"></code-example>
+<code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="test-component" header="app/shared/highlight.directive.spec.ts (TestComponent)"></code-example>
 
 <figure>
   <img src='generated/images/guide/testing/highlight-directive-spec.png' alt="HighlightDirective spec in action">
@@ -2785,7 +2682,7 @@ DOMとのやりとりがほとんどありません。
 各単語の最初の文字を大文字にする`TitleCasePipe`を考えてみましょう。
 次は、正規表現を使った素朴な実装です。
 
-<code-example path="testing/src/app/shared/title-case.pipe.ts" header="app/shared/title-case.pipe.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/shared/title-case.pipe.ts" header="app/shared/title-case.pipe.ts"></code-example>
 
 正規表現を使用するものはすべて、十分にテストする価値があります。
 シンプルにJasmineを使用して、期待されるケースとエッジケースを調べます。
@@ -2987,7 +2884,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 `configureTestingModule`に渡されるモジュール定義は、
 `@NgModule`メタデータプロパティのサブセットです。
 
-<code-example format="." language="javascript">
+<code-example language="javascript">
   type TestModuleMetadata = {
     providers?: any[];
     declarations?: any[];
@@ -3002,7 +2899,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 ここで、`T`はメソッドに適したメタデータの種類、
 つまり`@NgModule`、`@Component`、`@Directive`、または`@Pipe`のパラメータです。
 
-<code-example format="." language="javascript">
+<code-example language="javascript">
   type MetadataOverride&lt;T&gt; = {
     add?: Partial&lt;T&gt;;
     remove?: Partial&lt;T&gt;;
@@ -3149,7 +3046,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       これはAngularがプロバイダーを見つけることができない場合に返すオブジェクトです
       （この例では`null`）:
 
-      <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null" header="app/demo/demo.testbed.spec.ts" linenums="false"></code-example>
+      <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null" header="app/demo/demo.testbed.spec.ts"></code-example>
 
       `get`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズします。
 
@@ -3610,7 +3507,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
 次の例では、"content"という名前のテンプレートローカル変数への参照を含むすべての`DebugElement`
 が検索されます:
 
-<code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate" header="app/demo/demo.testbed.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate" header="app/demo/demo.testbed.spec.ts"></code-example>
 
 Angularの`By`クラスには、共通述語の静的メソッドが3つあります。
 
@@ -3618,7 +3515,7 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 - `By.css(selector)` - マッチするCSSセレクターをもつ要素を返します。
 - `By.directive(directive)` - ディレクティブクラスのインスタンスにマッチするAngularの要素を返します。
 
-<code-example path="testing/src/app/hero/hero-list.component.spec.ts" region="by" header="app/hero/hero-list.component.spec.ts" linenums="false"></code-example>
+<code-example path="testing/src/app/hero/hero-list.component.spec.ts" region="by" header="app/hero/hero-list.component.spec.ts"></code-example>
 
 <hr>
 

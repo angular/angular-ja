@@ -1,18 +1,5 @@
 # モジュールの共有
 
-#### 前提条件
-次の基本的な理解:
-* [フィーチャーモジュール](guide/feature-modules)
-* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
-* [よく使用されるモジュール](guide/frequent-ngmodules)
-* [ルーティングとナビゲーション](guide/router)
-* [モジュールの遅延ロード](guide/lazy-loading-ngmodules)
-
-
-<!--* Components (#TBD) We don’t have a page just on the concept of components, but I think one would be helpful for beginners.-->
-
-<hr>
-
 共有モジュールを作成すると、コードを整理し簡素化することができます。
 共通で使用されるディレクティブ、パイプ、コンポーネントを1つのモジュールに配置し、
 必要に応じてそのモジュールをアプリケーションの他の部分でインポートすることができます。

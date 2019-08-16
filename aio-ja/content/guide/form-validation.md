@@ -5,58 +5,69 @@
 
 ユーザー入力を検証することにより、正確さと完全性のために全体的なデータ品質を改善します。
 
-このページでは、UIでのユーザー入力の検証方法と、リアクティブおよびテンプレート駆動フォームの両方を使用した有効な検証メッセージの表示方法を示します。これは、2つのフォームモジュールの基本的な知識を前提としています。
+このページでは、UIでのユーザー入力の検証方法と、
+リアクティブおよびテンプレート駆動フォームの両方を使用した有効な検証メッセージの表示方法を示します。
+これは、2つのフォームモジュールの基本的な知識を前提としています。
 
 <div class="alert is-helpful">
 
-フォームをはじめてお使いの場合は、[テンプレート駆動フォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)のガイドを確認してください。
+フォームをはじめてお使いの場合は、[テンプレート駆動フォーム](guide/forms)と
+[リアクティブフォーム](guide/reactive-forms)のガイドを確認してください。
 
 </div>
 
-{@a template-driven-validation}
 
-## テンプレート駆動バリデーション
+## テンプレート駆動バリデーション {@a template-driven-validation}
 
-テンプレート駆動フォームにバリデーションを追加するには、[ネイティブHTMLフォーム](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)の検証と同じ検証属性を追加します。
+テンプレート駆動フォームにバリデーションを追加するには、
+[ネイティブHTMLフォーム](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)の検証と同じ検証属性を追加します。
 Angularは、これらの属性をフレームワーク内のバリデータ関数と照合するディレクティブを使用します。
 
-フォームコントロールの値が変更されるたびに、Angularは検証を実行し、INVALIDステータスに起因する検証エラーのリスト、あるいはVALIDステータスに起因するnullを返します。
+フォームコントロールの値が変更されるたびに、Angularは検証を実行し、
+INVALIDステータスに起因する検証エラーのリスト、あるいはVALIDステータスに起因するnullを返します。
 
 `ngModel` をローカルテンプレートの変数にエクスポートすることで、コントロールの状態を調べることができます。
 次の例では、 `NgModel` を `name` という名前の変数にエクスポートします:
 
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-with-error-msg" header="template/hero-form-template.component.html (name)" linenums="false">
-
-</code-example>
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-with-error-msg" header="template/hero-form-template.component.html (name)"></code-example>
 
 
 次の点に注意してください:
 
-* `<input>` 要素は、HTML検証属性、 `required` および `minlength` を保持します。 また、カスタムバリデータディレクティブの `forbiddenName` も持ちます。 詳細については、[カスタムバリデータ](guide/form-validation#custom-validators)のセクションを参照してください。
+* `<input>` 要素は、HTML検証属性、 `required` および `minlength` を保持します。 
+また、カスタムバリデータディレクティブの `forbiddenName` も持ちます。 
+詳細については、[カスタムバリデータ](guide/form-validation#custom-validators)のセクションを参照してください。
 
-* `#name="ngModel"` は、 `NgModel` を `name` というローカル変数にエクスポートします。 `NgModel` は、基本となる `FormControl` インスタンスの多くのプロパティを反映しているため、テンプレート内でこれを使用して、 `valid` や `dirty` のようなコントロールの状態をチェックできます。コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
+* `#name="ngModel"` は、 `NgModel` を `name` というローカル変数にエクスポートします。 
+`NgModel` は、基本となる `FormControl` インスタンスの多くのプロパティを反映しているため、テンプレート内でこれを使用して、 `valid` や `dirty` のようなコントロールの状態をチェックできます。
+コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
 
-* `<div>` 要素の `*ngIf` はネストされたメッセージ `divs` のセットを表示しますが、 `name` が `dirty` か `touched` の場合にのみ表示されます。
+* `<div>` 要素の `*ngIf` はネストされたメッセージ `divs` のセットを表示しますが、 
+`name` が `dirty` か `touched` の場合にのみ表示されます。
 
-* ネストされた各 `<div>` は、考えられる検証エラーの1つに対してカスタムメッセージを表示できます。 `required` 、 `minlength`、 および `forbiddenName` のメッセージがあります。
+* ネストされた各 `<div>` は、考えられる検証エラーの1つに対してカスタムメッセージを表示できます。
+`required` 、 `minlength`、 および `forbiddenName` のメッセージがあります。
  
 
 <div class="alert is-helpful">
 
 
-{@a why-check-dirty-and-touched}
 
-#### なぜ、 _dirty_ と _touched_ をチェックするのでしょうか？
+#### なぜ、 _dirty_ と _touched_ をチェックするのでしょうか？ {@a why-check-dirty-and-touched}
 
-ユーザーがフォームを編集する前に、アプリケーションでエラーを表示したくない場合があります。 `dirty` と `touched` のチェックはユーザーが次の2つのうちのいずれかを実行するまで、エラーが表示されることを防ぎます: 値を変更し、コントロールをdirtyに変更します; フォームコントロール要素をblurするか、コントロールをtouthedするように設定します。
+ユーザーがフォームを編集する前に、アプリケーションでエラーを表示したくない場合があります。
+`dirty` と `touched` のチェックはユーザーが次の2つのうちのいずれかを実行するまで、エラーが表示されることを防ぎます: 
+値を変更し、コントロールをdirtyに変更します; 
+フォームコントロール要素をblurするか、コントロールをtouthedするように設定します。
 
 </div>
 
-{@a reactive-form-validation}
+## リアクティブフォームバリデーション {@a reactive-form-validation}
 
-## リアクティブフォームバリデーション
-
-リアクティブフォームでは, 情報源はコンポーネントクラスです。テンプレートの属性を介してバリデータを追加する代わりに、バリデータ関数をコンポーネントクラスのフォームコントロールモデルに直接追加します。Angularは、コントロールの値が変更されるたびにこれらの関数を呼び出します。
+リアクティブフォームでは, 情報源はコンポーネントクラスです。
+テンプレートの属性を介してバリデータを追加する代わりに、
+バリデータ関数をコンポーネントクラスのフォームコントロールモデルに直接追加します。
+Angularは、コントロールの値が変更されるたびにこれらの関数を呼び出します。
 
 ### バリデータ関数
 
@@ -74,40 +85,43 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 `required` や `minlength` など、テンプレート駆動型フォームの属性として使用できる同じ組み込みバリデータは、すべて `Validators` クラスの関数として使用できます。組み込みバリデータの完全なリストについては、[Validators](api/forms/Validators) APIリファレンスを参照してください。
 
-ヒーローフォームをリアクティブフォームに更新するには、今回は同じ組み込みバリデーターを関数形式で使用することができます。次のコードを見てください:
+ヒーローフォームをリアクティブフォームに更新するには、
+今回は同じ組み込みバリデーターを関数形式で使用することができます。次のコードを見てください:
 
 {@a reactive-component-class}
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="form-group" header="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="form-group" header="reactive/hero-form-reactive.component.ts (validator functions)"></code-example>
 
 注意してください:
 
 * nameコントロールは、2つの組み込みバリデータ&mdash; `Validators.required` と `Validators.minLength(4)` &mdash;と1つのカスタムバリデータ `forbiddenNameValidator` を設定します。詳細については、このガイドの[カスタムバリデータ](guide/form-validation#custom-validators)セクションを参照してください。
 * これらのバリデータはすべて同期バリデータであるため、2番目の引数として渡します。
 * 複数のバリデータをサポートするには、関数を配列として渡します。
-* この例では、いくつかのgetterメソッドを追加しています。リアクティブフォームでは、親グループの `get` メソッドを通じて常にフォームコントロールにアクセスできますが、getterをテンプレートの省略名として定義すると便利なことがあります。
+* この例では、いくつかのgetterメソッドを追加しています。リアクティブフォームでは、親グループの `get` メソッドを通じて常にフォームコントロールにアクセスできますが、
+getterをテンプレートの省略名として定義すると便利なことがあります。
 
 
 再度入力したnameテンプレートを見ると、テンプレート駆動型の例とかなり似ています。
 
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="name-with-error-msg" header="reactive/hero-form-reactive.component.html (name with error msg)" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="name-with-error-msg" header="reactive/hero-form-reactive.component.html (name with error msg)"></code-example>
 
 重要なポイント:
  
- * このフォームはディレクティブをエクスポートしなくなり、代わりにコンポーネントクラスで定義された `name` getterを使用します。
- * `required` 属性は引き続き存在します。検証の目的では必要ではありませんが、CSSのスタイリングやアクセシビリティ上の理由から、テンプレートにそのスタイルを保持したい場合があります。
+ * このフォームはディレクティブをエクスポートしなくなり、
+ 代わりにコンポーネントクラスで定義された `name` getterを使用します。
+ * `required` 属性は引き続き存在します。検証の目的では必要ではありませんが、
+ CSSのスタイリングやアクセシビリティ上の理由から、テンプレートにそのスタイルを保持したい場合があります。
 
-{@a custom-validators}
-## カスタムバリデータ
+
+## カスタムバリデータ {@a custom-validators}
 
 組み込みバリデータは、アプリケーションのユースケースとは必ずしも一致しないので、場合によってはカスタムバリデータを作成することがあります。
 
-このガイドの前の[例](guide/form-validation#reactive-component-class)の `forbiddenNameValidator` 関数について考えてみましょう。その関数の定義は次のようになります:
+このガイドの前の[例](guide/form-validation#reactive-component-class)の 
+`forbiddenNameValidator` 関数について考えてみましょう。
+その関数の定義は次のようになります:
 
-<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="custom-validator" header="shared/forbidden-name.directive.ts (forbiddenNameValidator)" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="custom-validator" header="shared/forbidden-name.directive.ts (forbiddenNameValidator)"></code-example>
 
 この関数は実際には、 _特定_ の禁止された名前を検出するために正規表現を取り、バリデータ関数を返すファクトリです。
 
@@ -115,19 +129,21 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 それ以外の場所では、 "alice" または正規表現で名前を拒否することができます。
 
 `forbiddenNameValidator` ファクトリは、設定されたバリデータ関数を返します。
-この関数はAngularコントロールオブジェクトをとり、コントロール値が有効な場合はnull _または_ 検証エラーオブジェクトを返します。
-検証エラーオブジェクトには、通常、nameが検証キーであるプロパティ `'forbiddenName'` と、エラーメッセージ `{name}` に挿入できる値の順不同な辞書です。
+この関数はAngularコントロールオブジェクトをとり、コントロール値が有効な場合はnull _または_ 
+検証エラーオブジェクトを返します。
+検証エラーオブジェクトには、通常、nameが検証キーであるプロパティ `'forbiddenName'` と、
+エラーメッセージ `{name}` に挿入できる値の順不同な辞書です。
 
-カスタム非同期バリデータは同期バリデータと似ていますが、あとでnullまたは検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。Observableの場合は、Observableを完了しなければなりません。この時点で、フォームは検証のために発行された最後の値を使用します。
+カスタム非同期バリデータは同期バリデータと似ていますが、あとでnullまたは検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。
+Observableの場合は、Observableを完了しなければなりません。
+この時点で、フォームは検証のために発行された最後の値を使用します。
 
-{@a adding-to-reactive-forms}
+### リアクティブフォームへ追加 {@a adding-to-reactive-forms}
 
-### リアクティブフォームへ追加
+リアクティブフォームでは、カスタムバリデータは簡単に追加できます。
+関数を `FormControl` に直接渡すだけです。
 
-リアクティブフォームでは、カスタムバリデータは簡単に追加できます。関数を `FormControl` に直接渡すだけです。
-
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" header="reactive/hero-form-reactive.component.ts (validator functions)" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" header="reactive/hero-form-reactive.component.ts (validator functions)"></code-example>
 
 {@a adding-to-template-driven-forms}
 
@@ -139,19 +155,18 @@ Angularは、これらの属性をフレームワーク内のバリデータ関�
 
 Angularは、ディレクティブが拡張可能なバリデータのコレクションをもつプロバイダーである `NG_VALIDATORS` プロバイダーに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。
 
-<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" header="shared/forbidden-name.directive.ts (providers)" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" header="shared/forbidden-name.directive.ts (providers)"></code-example>
 
-ディレクティブクラスは、 `Validator` インターフェースを実装しているため、Angularフォームと簡単に統合できます。これはどのようにそれらをまとめるかを理解するための、ディレクティブの残りの部分です:
+ディレクティブクラスは、 `Validator` インターフェースを実装しているため、
+Angularフォームと簡単に統合できます。これはどのようにそれらをまとめるかを理解するための、
+ディレクティブの残りの部分です:
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive" header="shared/forbidden-name.directive.ts (directive)">
 </code-example>
 
 `ForbiddenValidatorDirective` が準備されたら、 `appForbiddenName` セレクターを任意の入力要素に追加して、アクティブ化できます。これは一例です:
 
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" header="template/hero-form-template.component.html (forbidden-name-input)" linenums="false">
-
-</code-example>
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="name-input" header="template/hero-form-template.component.html (forbidden-name-input)"></code-example>
 
 
 <div class="alert is-helpful">
@@ -215,8 +230,7 @@ const heroForm = new FormGroup({
 
 バリデータのコードは次のとおりです。
 
-<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-validator" header="shared/identity-revealed.directive.ts" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-validator" header="shared/identity-revealed.directive.ts"></code-example>
 
 アイデンティティのバリデーターは、 `ValidatorFn` インターフェースを実装します。Angularコントロールオブジェクトを引数としてとり、フォームが有効な場合はnullを返し、それ以外の場合は `ValidationErrors` を返します。
 
@@ -225,8 +239,7 @@ const heroForm = new FormGroup({
 値が一致しない場合、ヒーローのアイデンティティは秘密のままであり、安全にnullを返すことができます。それ以外の場合、ヒーローのアイデンティティが明らかになり、エラーオブジェクトを返すことでフォームを無効としてマークする必要があります。
 
 次に、ユーザー体験を向上させるために、フォームが無効な場合に適切なエラーメッセージが表示されます。
-<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" header="reactive/hero-form-template.component.html" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" header="reactive/hero-form-template.component.html"></code-example>
 
 次のことを確認します。
 - `FormGroup` は `identityRevealed` バリデータによって返されたクロスバリデーションエラーを持ちますが、
@@ -235,17 +248,13 @@ const heroForm = new FormGroup({
 ### テンプレート駆動型フォームへの追加
 まず、バリデータ関数をラップするディレクティブを作成する必要があります。 `NG_VALIDATORS` トークンを使用してバリデータとして提供します。理由がわからない場合や構文を完全に理解していない場合は、前の[セクション](guide/form-validation#adding-to-template-driven-forms)に戻ってください。
 
-<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-directive" header="shared/identity-revealed.directive.ts" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/shared/identity-revealed.directive.ts" region="cross-validation-directive" header="shared/identity-revealed.directive.ts"></code-example>
 
 次に、このディレクティブをHTMLテンプレートに追加する必要があります。バリデーターはフォームの最上位レベルに登録する必要があるため、このディレクティブを `form` タグに置きます。
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-register-validator" header="template/hero-form-template.component.html" linenums="false">
-</code-example>
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-register-validator" header="template/hero-form-template.component.html"></code-example>
 
 ユーザー体験を向上させるため、フォームが無効な場合に適切なエラーメッセージが表示されます。
-<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-error-message" header="template/hero-form-template.component.html" linenums="false">
-</code-example>
-
+<code-example path="form-validation/src/app/template/hero-form-template.component.html" region="cross-validation-error-message" header="template/hero-form-template.component.html"></code-example>
 次のことを確認します。
 - フォームに `identityRevealed` バリデータによって返されたクロスバリデーションエラーがありますが、
 - ユーザーはまだフォームと[対話](guide/form-validation#why-check-dirty-and-touched)していません。
@@ -284,7 +293,7 @@ Observableな別人格を検証するためには、現在入隊しているす�
 
 まずバリデータクラスを作成しましょう。
 
-<code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator" linenums="false"></code-example>
+<code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator"></code-example>
 
 ご覧のとおり、 `UniqueAlterEgoValidator` クラスは `AsyncValidator` インターフェースを実装しています。コンストラクターでは、次のインターフェースをもつ `HeroesService` を注入します。
 

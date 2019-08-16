@@ -1,15 +1,9 @@
 # プロバイダー
 
-#### 前提条件:
-* [ブートストラップ](guide/bootstrapping)の基本的な理解
-* [よく使用されるモジュール](guide/frequent-ngmodules)について熟知していること
+プロバイダーは依存性がある値を取り出す方法をDIシステムへ指示します。ほとんどの場合、これらの依存性はあなたが作成して提供するサービスによるものです。
 
 この記事で説明されているプロバイダーを含む最終的なサンプルアプリケーションについては、
 <live-example></live-example>を参照してください。
-
-<hr>
-
-プロバイダーは依存性がある値を取り出す方法をDIシステムへ指示します。ほとんどの場合、これらの依存性はあなたが作成して提供するサービスによるものです。
 
 ## サービスを提供する
 
@@ -21,7 +15,7 @@ ng generate service User
 
 このコマンドによって次のような`UserService`スケルトンが作成されます:
 
-<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts" linenums="false"> </code-example>
+<code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts"></code-example>
 
 あなたはいま、`UserService`をアプリケーションのどこにでも注入することができます。
 
@@ -38,11 +32,11 @@ ng generate service User
 
 特定の`@NgModule`内でサービスを提供するように指定することもできます。たとえば、あなたが作成した`UserModule`をインポートしない限り`UserService`をアプリケーションで利用できないようにモジュール内でサービスを提供するように指定できます:
 
-<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.ts"></code-example>
 
 上記の例では、モジュールにサービスを提供する推奨の方法を示しています。この方法を使用すると、サービスがどこからも注入されないときに、ツリーシェイキングの対象にできるので推奨されます。どのモジュールがサービスを提供すべきかをそのサービス内で指定できない場合は、モジュール内でそのサービスのプロバイダーを宣言することもできます:
 
-<code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts" linenums="false">  </code-example>
+<code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts"></code-example>
 
 ## 遅延ロードモジュールでプロバイダーのスコープを制限する
 
@@ -67,8 +61,7 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 コンポーネントにサービスを提供すると、サービスはそのコンポーネントだけに制限されます
 (同じモジュールにある他のコンポーネントからはアクセスできません)。
 
-<code-example path="providers/src/app/app.component.ts" region="component-providers" header="src/app/app.component.ts" linenums="false">
-</code-example>
+<code-example path="providers/src/app/app.component.ts" region="component-providers" header="src/app/app.component.ts"></code-example>
 
 
 ## モジュールとコンポーネントのどちらでサービスを提供するか

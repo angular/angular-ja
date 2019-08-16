@@ -46,7 +46,7 @@
 
 1. カートへの商品の追加、商品リストの取得、商品リストのクリアを行う各メソッドを定義します:
 
-    <code-example path="getting-started/src/app/cart.service.ts" region="methods" linenums="false"></code-example>
+    <code-example path="getting-started/src/app/cart.service.ts" region="methods"></code-example>
 
     <!--
     To check: StackBlitz includes the constructor. If it's important (and not obvious) that the methods be below the constructor, then we should show it or say something. 

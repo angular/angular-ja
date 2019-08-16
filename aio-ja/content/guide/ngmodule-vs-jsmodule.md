@@ -1,12 +1,8 @@
 # JavaScriptモジュールとNgModule
 
-#### 前提条件
-[JavaScript/ECMAScript modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)の基本的な理解
-
-<hr>
-
 JavaScriptとAngularにはコードを整理するためのモジュールという仕組みがあります。
 両者は別々の方法でモジュールを管理しますが、Angularアプリケーションは両方に依存しています。
+
 
 ## JavaScriptモジュール
 
@@ -23,6 +19,8 @@ import { AppComponent } from './app.component';
 ```
 
 JavaScriptモジュールは名前空間や、グローバル変数名が競合することを防ぐのに役立ちます。
+
+For more information on JavaScript modules, see [JavaScript/ECMAScript modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/).
 
 ## NgModule
 

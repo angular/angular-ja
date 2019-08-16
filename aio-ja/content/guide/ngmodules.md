@@ -1,13 +1,5 @@
 # NgModule
 
-#### 前提条件
-
-次の基本的な理解
-* [ブートストラップ](guide/bootstrapping)
-* [JavaScript モジュールと NgModule](guide/ngmodule-vs-jsmodule)
-
-<hr>
-
 **NgModule**はインジェクターとコンパイラを設定し関連するものをまとめます。
 
 NgModule とは`@NgModule`デコレーターが付与されたクラスのことです。
@@ -19,7 +11,6 @@ NgModule とは`@NgModule`デコレーターが付与されたクラスのこと
 NgModule に関連するページをカバーしているすべてのテクニックを見ることができるサンプルアプリケーションについては<live-example></live-example>を参照してください。
 個別のテクニックについての解説は、
 NgModule セクションの関連ページを参照してください。
-
 
 ## Angular のモジュール性
 
@@ -57,12 +48,13 @@ NgModule のメタデータでは次のようなことを行います:
 
 ## 基本の NgModule
 
-[Angular CLI](cli) で新しいアプリケーションを作成したとき、次のようなモジュールが生成されます。
+[Angular CLI](cli) で新しいアプリケーションを作成したとき、次のような基本の `AppModule` が生成されます。
 
-<code-example path="bootstrapping/src/app/app.module.ts" region="whole-ngmodule" header="src/app/app.module.ts" linenums="false">
+<code-example path="ngmodules/src/app/app.module.1.ts" header="src/app/app.module.ts (default AppModule)">
+// @NgModule decorator with its metadata
 </code-example>
 
-まずはインポート文から始まります。次にどのようなコンポーネントとディレクティブが属するか(`declarations`)、使用する他のモジュール(`imports`)を記述することで`@NgModule`の設定を行います。このページは NgModule の構造の詳細についてカバーしている[ブートストラップ](guide/bootstrapping)でビルドします。もし、`@NgModule` の構造のより詳細な情報について知りたい場合は [ブートストラップ](guide/bootstrapping) を参照してください。
+まずはインポート文から始まります。次にどのようなコンポーネントとディレクティブが属するか(`declarations`)、使用する他のモジュール(`imports`)を記述することで`@NgModule`の設定を行います。もし、`@NgModule` の構造のより詳細な情報について知りたい場合は [ブートストラップ](guide/bootstrapping) を参照してください。
 
 <hr />
 

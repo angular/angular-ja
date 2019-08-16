@@ -1,15 +1,4 @@
-
-
 # フィーチャーモジュールの種類
-
-#### 前提条件
-
-次の基本的な理解:
-* [フィーチャーモジュール](guide/feature-modules)
-* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
-* [よく使用されるモジュール](guide/frequent-ngmodules)
-
-<hr>
 
 フィーチャーモジュールは、
 大きく分けて次のような5つのカテゴリーに分類される傾向があります:

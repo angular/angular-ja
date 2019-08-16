@@ -1,28 +1,28 @@
-# 依存関係プロバイダー
+# Dependency Providers
 
-依存関係[プロバイダー](guide/glossary#provider)は、[DI トークン](guide/glossary#di-token)を使用してインジェクターを構成します。
-DI トークンは、依存関係の値の
-具体的なランタイムバージョンを提供するために使用します。
-インジェクターはプロバイダーの構成に依存して、
-コンポーネント、ディレクティブ、パイプ、およびその他のサービスに注入する依存関係のインスタンスを作成します。
+A dependency [provider](guide/glossary#provider) configures an injector
+with a [DI token](guide/glossary#di-token),
+which that injector uses to provide the concrete, runtime version of a dependency value.
+The injector relies on the provider configuration to create instances of the dependencies
+that it injects into components, directives, pipes, and other services.
 
-プロバイダーではインジェクターを設定する必要があります。そうしないと、依存関係を作成する方法がわかりません。
-インジェクターがサービスクラスのインスタンスを作成するもっとも明白な方法は、クラス自体を使用することです。
-サービスクラス自体をプロバイダートークンとして指定した場合、デフォルトの動作では、インジェクターはそのクラスを `new` でインスタンス化します。
+You must configure an injector with a provider, or it won't know how to create the dependency.
+The most obvious way for an injector to create an instance of a service class is with the class itself.
+If you specify the service class itself as the provider token, the default behavior is for the injector to instantiate that class with `new`.
 
-次の典型的な例では、`Logger` クラス自体が `Logger`インスタンスを提供します。
+In the following typical example, the `Logger` class itself provides a `Logger` instance.
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-logger">
 </code-example>
 
-ただし、必要なロギング機能を提供する他のオブジェクトを配信するために、
-代替プロバイダーでインジェクターを構成できます。
-たとえば:
-* 代替クラスを提供できます
+You can, however, configure an injector with an alternative provider,
+in order to deliver some other object that provides the needed logging functionality.
+For instance:
+* You can provide a substitute class.
 
-* ロガーのようなオブジェクトを提供できます
+* You can provide a logger-like object.
 
-* プロバイダーは、ロガーファクトリ関数を呼び出すことができます
+* Your provider can call a logger factory function.
 
 {@a provide}
 

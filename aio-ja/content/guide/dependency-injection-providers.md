@@ -26,11 +26,11 @@ DI トークンは、依存関係の値の
 
 {@a provide}
 
-## The `Provider` object literal
+## `Provider` オブジェクトリテラル
 
-The class-provider syntax is a shorthand expression that expands
-into a provider configuration, defined by the [`Provider` interface](api/core/Provider).
-The following code snippets shows how a class that is given as the `providers` value is expanded into a full provider object.
+クラスプロバイダーの構文は、[`Provider` インターフェイス](api/core/Provider)によって定義されたプロバイダー構成に展開される省略表現です。
+次のコードスニペットは、`providers` 値として指定されたクラスが
+完全なプロバイダーオブジェクトに展開される方法を示しています。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-logger">
 </code-example>
@@ -38,15 +38,15 @@ The following code snippets shows how a class that is given as the `providers` v
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-3" >
 </code-example>
 
-The expanded provider configuration is an object literal with two properties.
+拡張されたプロバイダー構成は、2つのプロパティをもつオブジェクトリテラルです。
 
-* The `provide` property holds the [token](guide/dependency-injection#token)
-that serves as the key for both locating a dependency value and configuring the injector.
+* `provide` プロパティは、依存関係値の検索と
+インジェクターの構成の両方のキーとして機能する[トークン](guide/dependency-injection#token)を保持します。
 
-* The second property is a provider definition object, which tells the injector how to create the dependency value.
-The provider-definition key can be `useClass`, as in the example.
-It can also be `useExisting`, `useValue`, or `useFactory`.
-Each of these keys provides a different type of dependency, as discussed below.
+* 2番目のプロパティはプロバイダー定義オブジェクトで、インジェクターに依存関係値の作成方法を指示します。
+プロバイダー定義キーは、例のように `useClass` にすることができます。
+`useExisting`、`useValue`、または `useFactory` にすることもできます。
+次に説明するように、これらの各キーは異なるタイプの依存関係を提供します。
 
 
 {@a class-provider}

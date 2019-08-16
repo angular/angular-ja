@@ -72,7 +72,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 
 ### `RouterModule.forRoot()`
 
-`@NgModule`メタデータはルーターを初期化し、ブラウザーのロケーションの変更を待機します。
+`@NgModule`メタデータはルーターを初期化し、ブラウザのロケーションの変更を待機します。
 
 次の行は、 `RouterModule` を `AppRoutingModule` の `imports` 配列に追加し、
 `RouterModule.forRoot()`を呼び出すことにより、
@@ -351,7 +351,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 今は、ルーターが `~/detail/11`のような URL に応答して`HeroDetailComponent`を作成します。
 
 `HeroDetailComponent`は表示するヒーローを得るための新しい方法が必要です。
-このセクションでは、以下について説明します。
+このセクションでは、次について説明します。
 
 * それを作成したルートを取得し
 * ルートから`id`を抽出し

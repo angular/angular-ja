@@ -97,11 +97,11 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 
 ブラウザが更新され、ヒーローの情報が表示されます。
 
-{@a format-with-the-uppercasepipe}
-## _UppercasePipe_ で書式設定する
+## _UppercasePipe_ で書式設定する {@a format-with-the-uppercasepipe}
 
 `hero.name`のバインディングをこのように修正してください。
 <code-example path="toh-pt1/src/app/heroes/heroes.component.html" header="src/app/heroes/heroes.component.html" region="pipe">
+</code-example>
 
 ブラウザが更新され、ヒーローの名前が大文字で表示されるようになります。
 

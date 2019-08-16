@@ -51,48 +51,48 @@ DI トークンは、依存関係の値の
 
 {@a class-provider}
 
-## Alternative class providers
+## 代替クラスプロバイダー
 
-Different classes can provide the same service.
-For example, the following code tells the injector
-to return a `BetterLogger` instance when the component asks for a logger
-using the `Logger` token.
+異なるクラスが同じサービスを提供できます。
+たとえば、次のコードは、コンポーネントが `Logger` トークンを使用してロガーを要求したときに、
+`BetterLogger` インスタンスを返すよう
+インジェクターに指示します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-4" >
 </code-example>
 
 {@a class-provider-dependencies}
 
-### Class providers with dependencies
+### 依存関係をもつクラスプロバイダー
 
-Another class, `EvenBetterLogger`, might display the user name in the log message.
-This logger gets the user from an injected `UserService` instance.
+別のクラス `EvenBetterLogger` は、ログメッセージにユーザー名を表示する場合があります。
+このロガーは、注入された `UserService` インスタンスからユーザーを取得します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="EvenBetterLogger"></code-example>
 
-The injector needs providers for both this new logging service and its dependent `UserService`. Configure this alternative logger with the `useClass` provider-definition key, like `BetterLogger`. The following array specifies both providers in the `providers` metadata option of the parent module or component.
+インジェクターには、この新しいロギングサービスとその依存する `UserService` の両方のプロバイダーが必要です。  `BetterLogger` などの `useClass` プロバイダー定義キーを使用して、この代替ロガーを構成します。次の配列は、親モジュールまたはコンポーネントの `providers` メタデータオプションで両方のプロバイダーを指定します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-5"></code-example>
 
 {@a aliased-class-providers}
 
-### Aliased class providers
+### エイリアスクラスプロバイダー
 
-Suppose an old component depends upon the `OldLogger` class.
-`OldLogger` has the same interface as `NewLogger`, but for some reason
-you can't update the old component to use it.
+古いコンポーネントが `OldLogger` クラスに依存しているとします。
+`OldLogger` のインターフェースは `NewLogger` と同じですが、
+何らかの理由で古いコンポーネントを更新して使用することはできません。
 
-When the old component logs a message with `OldLogger`,
-you want the singleton instance of `NewLogger` to handle it instead.
-In this case, the dependency injector should inject that singleton instance
-when a component asks for either the new or the old logger.
-`OldLogger` should be an *alias* for `NewLogger`.
+古いコンポーネントが `OldLogger` でメッセージをログに記録するとき、
+代わりに `NewLogger` のシングルトンインスタンスで処理する必要があります。
+この場合、コンポーネントが新しいロガーまたは古いロガーのいずれかを要求したときに、
+依存性インジェクターはそのシングルトンインスタンスを注入する必要があります。
+`OldLogger` は、`NewLogger` のエイリアスである必要があります。
 
-If you try to alias `OldLogger` to `NewLogger` with `useClass`, you end up with two different `NewLogger` instances in your app.
+`useClass` で `OldLogger` を `NewLogger` にエイリアスしようとすると、アプリ内で 2 つの異なる `NewLogger` インスタンスが作成されます。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-6a"></code-example>
 
-To make sure there is only one instance of `NewLogger`, alias `OldLogger` with the `useExisting` option.
+`NewLogger` のインスタンスが 1 つだけであることを確認するには、`useExisting` オプションで `OldLogger` のエイリアスを作成します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-6b"></code-example>
 

@@ -6,6 +6,11 @@ Welcome to Angular!
 すでに知っているHTMLやJavaScriptに加え、いくつかの便利なAngularの機能を活用し、カタログ、ショッピングカート、およびチェックアウトフォームよって単純なオンラインストアアプリケーションを構築します。
 何もインストールする必要はありません。[StackBlitz](https://stackblitz.com/ "StackBlitz web site")オンライン開発環境を使用してアプリを構築します。
 
+<div class="alert is-helpful">
+
+インタラクティブに調べたり操作したりできる既製のシンプルなアプリケーションを紹介するためにStackBlitzジェネレーターを使用しています。実際の開発では、[Angular CLI](guide/glossary#command-line-interface-cli)を使用するのが一般的です。これは、アプリケーションを生成および変更できる強力なコマンドラインツールです。詳細については、[CLI Overview](cli)を参照してください。
+
+</div>
 
 <div class="callout is-helpful">
 <header>Web開発は初めてですか？</header>
@@ -37,7 +42,7 @@ StackBlitzでスターターAngularアプリを作成します。
 <div class="callout is-helpful">
 <header>StackBlitz tips</header>
 
-* StackBlitzにログインすると、作業を保存して再開できます。 GitHubアカウントをお持ちの場合は、そのアカウントでStackBlitzにログインできます。
+* StackBlitzにログインすると、作業を保存して再開できます。 GitHubアカウントをお持ちの場合は、そのアカウントでStackBlitzにログインできます。進行状況を保存するには、左上のForkボタンを使用してプロジェクトをフォークし、Saveボタンをクリックして自分のStackBlitzアカウントに作業を保存できます。
 * このチュートリアルからコード例をコピーするには、コード例ボックスの右上にあるアイコンをクリックしてから、クリップボードのコードスニペットをStackBlitzに貼り付けます。
 * StackBlitzのプレビューペインに期待したものが表示されない場合は、保存してから更新ボタンをクリックします。
 * StackBlitzは継続的に改善されているので、生成されたコードにわずかな違いがあるかもしれませんが、アプリの動作は同じになります。

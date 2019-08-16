@@ -7,12 +7,13 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 
 ## なぜサービスが必要なのか？
 
-コンポーネント内では直接データの取得や保存を行うべきではありません。
-もちろん、故意に仮のデータを渡してもいけません。
+コンポーネント内では直接データの取得や保存を行うべきではありません。もちろん、故意に仮のデータを渡してもいけません。
 コンポーネントはデータの受け渡しに集中し、その他の処理はサービスクラスへ委譲するべきです。
 
 このチュートリアルでは、アプリケーション全体でヒーローを取得できる `HeroService` を作成します。
-そのサービスは `new` で生成するのではなく、Angular による [*依存性の注入*](guide/dependency-injection) で、 `HeroesComponent` コンストラクターに注入します。
+そのサービスは `new` で生成するのではなく、
+Angular による [*依存性の注入*](guide/dependency-injection) で、 
+`HeroesComponent` コンストラクターに注入します。
 
 サービスは、_お互いを知らない_ クラスの間で情報を共有する最適な方法です。
 このチュートリアル後半でも `MessageService` を作成し、次の2クラスに注入します。
@@ -20,7 +21,8 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 1. `HeroService`: メッセージを送信するため
 2. `MessagesComponent`: そのメッセージを表示するため
 
-## _HeroService_ の作成
+
+## `HeroService` の作成
 
 Angular CLI を使用して `HeroService` を作成しましょう。
 
@@ -28,13 +30,13 @@ Angular CLI を使用して `HeroService` を作成しましょう。
   ng generate service hero
 </code-example>
 
-このコマンドは `HeroService` のスケルトンファイルを `src/app/hero.service.ts` に生成します。`HeroService` クラスは次のようになっているはずです。
+このコマンドは `HeroService` のスケルトンファイルを `src/app/hero.service.ts` に次のように生成します。
 
 <code-example path="toh-pt4/src/app/hero.service.1.ts" region="new"
- header="src/app/hero.service.ts (new service)" linenums="false">
-</code-example>
+ header="src/app/hero.service.ts (new service)"></code-example>
 
-### _@Injectable()_ サービス
+
+### `@Injectable()` サービス
 
 生成されたファイル内で Angular の Injectable シンボルがインポートされ、`@Injectable()` デコレーターとしてクラスを注釈していることに注目してください。
 これは、クラスを _依存関係注入システム_ に参加するものとしてマークします。 `HeroService`クラスは、注入可能なサービスを提供する予定であり、それ自身が依存関係をもつこともできます。
@@ -53,27 +55,25 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 
 `Hero` および `HEROES` をインポートします。
 
-<code-example path="toh-pt4/src/app/hero.service.ts" region="import-heroes">
+<code-example path="toh-pt4/src/app/hero.service.ts" header="src/app/hero.service.ts" region="import-heroes">
 </code-example>
 
 `getHeroes` メソッドを追加し、_モックヒーロー_ を返します。
 
-<code-example path="toh-pt4/src/app/hero.service.1.ts" region="getHeroes">
+<code-example path="toh-pt4/src/app/hero.service.1.ts" header="src/app/hero.service.ts" region="getHeroes">
 </code-example>
 
 {@a provide}
 ## `HeroService` の提供
 
 Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）よりも前に、
-`HeroService`が依存性の注入システムで利用できるようにする必要があります。
-これは _プロバイダ_ を登録することで行います。プロバイダーとは、サービスを作成または提供できるものです。この場合、`HeroService`クラスをインスタンス化してサービスを提供します。
+_プロバイダ_ を登録することで`HeroService`が依存性の注入システムで利用できるようにする必要があります。プロバイダーとは、サービスを作成または提供できるものです。この場合、`HeroService`クラスをインスタンス化してサービスを提供します。
 
-ここで、`HeroService`がこのサービスのプロバイダーとして登録されていることを確認する必要があります。
-あなたは _インジェクタ_ にこれを登録しています。インジェクターは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
+`HeroService`がこのサービスのプロバイダーとして登録されていることを確認するために、
+あなたは _インジェクター_ にこれを登録しています。
+インジェクターは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
 
-デフォルトで、Angular CLIコマンド`ng generate service`は、プロバイダーのメタデータを`@Injectable`デコレーターに含めることによって、サービスの _ルートインジェクタ_ でプロバイダーを登録します。
-
-`HeroService`クラス定義の直前で`@Injectable()`の文を見ると、`providedIn`メタデータの値が 'root'であることがわかります。
+デフォルトでは、Angular CLIコマンド `ng generate service`は、プロバイダーのメタデータ、つまり` providedIn: 'root'`を `@Injectable()` デコレーターに含めることで、プロバイダーをサービスの _ルートインジェクター_ に登録します。
 
 ```
 @Injectable({
@@ -119,7 +119,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 
 `heroes` プロパティの定義を、単純な宣言に置き換えます。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" region="heroes">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="heroes">
 </code-example>
 
 {@a inject}
@@ -128,23 +128,23 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 
 `HeroService` 型のプライベートプロパティである `heroService` をコンストラクターに追加しましょう。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" region="ctor">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
 </code-example>
 
 このパラメータはプライベートな `heroService` プロパティとして定義されると同時に、 `HeroService` を注入すべき場所として認識されます。
 
 Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/dependency-injection) システムは `heroService` パラメータを `HeroService` のシングルトンインスタンスとして設定します。
 
-### _getHeroes()_ の追加
+### `getHeroes()` の追加
 
 サービスからヒーローデータを取得するための関数を作成しましょう。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" region="getHeroes">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="getHeroes">
 </code-example>
 
 {@a oninit}
 
-### `ngOnInit` での呼び出し
+### `ngOnInit()` での呼び出し
 
 `getHeroes()` はコンストラクターでも呼び出すことはできますが、これは最適な方法ではありません。
 
@@ -152,9 +152,9 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 もちろん、_実際の_ データ取得サービスが行うであろう、サーバーへのHTTPリクエストを行う関数は呼び出すべきではありません。
 
 `getHeroes()` はコンストラクターではなく、 [*ngOnInit ライフサイクルフック*](guide/lifecycle-hooks) 内で呼び出しましょう。
-この `ngOnInit` は、 Angular が `HeroesComponent` インスタンスを生成した後、適切なタイミングで呼び出されます。
+この `ngOnInit()` は、 Angular が `HeroesComponent` インスタンスを生成した後、適切なタイミングで呼び出されます。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" region="ng-on-init">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="ng-on-init">
 </code-example>
 
 ### 実行の確認
@@ -168,7 +168,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 また `HeroesComponent` は、`getHeroes()` の返り値がまるで同期的に取得できるかのように扱っています。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" region="get-heroes">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="get-heroes">
 </code-example>
 
 しかしこれは、実際のアプリケーションでは機能しません。
@@ -180,12 +180,10 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 `HeroService.getHeroes()` は何らかの非同期処理を実装する必要があります。
 
-それには、コールバック関数、`Promise`、または `Observable` を使用することができるでしょう。
-
 この章では、`HeroService.getHeroes()` は `Observable` を返します。
 なぜなら、後にヒーローデータの取得で利用する Angular の [`HttpClient.get()`](guide/http) メソッドが `Observable` を返すからです。
 
-### Observable _HeroService_
+### Observable `HeroService`
 
 `Observable` は [RxJS ライブラリ](http://reactivex.io/rxjs/) で重要なクラスのひとつです。
 
@@ -194,13 +192,12 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 `HeroService` を開き、`Observable` および `of` を `RxJS` からインポートします。
 
-<code-example path="toh-pt4/src/app/hero.service.ts"
-header="src/app/hero.service.ts (Observable imports)" region="import-observable">
+<code-example path="toh-pt4/src/app/hero.service.ts" header="src/app/hero.service.ts (Observable imports)" region="import-observable">
 </code-example>
 
-`getHeroes` メソッドを `Observable` 形式で書き直しましょう。
+`getHeroes()` メソッドを 次のように書き直しましょう。
 
-<code-example path="toh-pt4/src/app/hero.service.ts" region="getHeroes-1"></code-example>
+<code-example path="toh-pt4/src/app/hero.service.ts" header="src/app/hero.service.ts" region="getHeroes-1"></code-example>
 
 `of(HEROES)` は _ひとつの値_、すなわちモックヒーローの配列を出力する `Observable<Hero[]>` を返します。
 
@@ -210,7 +207,7 @@ header="src/app/hero.service.ts (Observable imports)" region="import-observable"
 
 </div>
 
-### _HeroesComponent_ での Subscribe
+### `HeroesComponent` での Subscribe
 
 `HeroService.getHeroes` メソッドは `Hero[]` を返していましたが、
 現在の返り値は `Observable<Hero[]>` です。
@@ -241,20 +238,20 @@ header="src/app/hero.service.ts (Observable imports)" region="import-observable"
 
 新しいバージョンでは、`Observable` がヒーローの配列を出力するのを待っています。&mdash; 
 これは現在あるいは数分後に起こる可能性があります。
-そのとき、subscribeは、出力された配列をコールバックに渡し、コンポーネントの `heroes` プロパティを設定します。
+そのとき、 `subscribe()`メソッド は、出力された配列をコールバックに渡し、コンポーネントの `heroes` プロパティを設定します。
 
 この非同期的手法は、`HeroService` がサーバーからヒーローを取得する際、正常に動作します。
 
 ## メッセージの表示
 
-この節では次のことを行います。
+このセクションでは、次について説明します。
 
 * メッセージを表示するための `MessagesComponent` を画面下部に追加する
 * 表示するメッセージを送信するために、アプリケーション全体で注入可能な `MessageService` を作成する
 * `HeroService` に `MessageService` を注入する
 * `HeroService` のデータ取得成功時にメッセージを表示する
 
-### _MessagesComponent_ の作成
+### `MessagesComponent` の作成
 
 Angular CLI を使い `MessagesComponent` を作成しましょう。
 
@@ -267,13 +264,13 @@ Angular CLI は `src/app/messages` 配下にコンポーネントファイル群
 作成した `MessagesComponent` を表示するために、`AppComponent` のテンプレートを修正しましょう。
 
 <code-example
-  header = "/src/app/app.component.html"
+  header = "src/app/app.component.html"
   path="toh-pt4/src/app/app.component.html">
 </code-example>
 
 `MessagesComponent` のデフォルトテキストが、ページ最下部に配置されていることを確認してください。
 
-### _MessageService_ の作成
+### `MessageService` の作成
 
 Angular CLI を使い、`src/app` 配下に `MessageService` を作成します。
 
@@ -283,9 +280,7 @@ Angular CLI を使い、`src/app` 配下に `MessageService` を作成します�
 
 `MessageService` を開き、次のコードへ修正してください。
 
-<code-example
-  header = "/src/app/message.service.ts"
-  path="toh-pt4/src/app/message.service.ts">
+<code-example header = "src/app/message.service.ts" path="toh-pt4/src/app/message.service.ts">
 </code-example>
 
 このサービスは `messages` および `add()`、`clear()` メソッドを他のクラスから利用できるように公開しています。
@@ -294,10 +289,10 @@ Angular CLI を使い、`src/app` 配下に `MessageService` を作成します�
 {@a inject-message-service}
 ### `HeroService` への注入
 
-再び `HeroService` を開き、`MessageService` をインポートしましょう。
+`HeroService`で`MessageService` をインポートしましょう。
 
 <code-example
-  header = "/src/app/hero.service.ts (import MessageService)"
+  header = "src/app/hero.service.ts (import MessageService)"
   path="toh-pt4/src/app/hero.service.ts" region="import-message-service">
 </code-example>
 
@@ -305,7 +300,7 @@ Angular CLI を使い、`src/app` 配下に `MessageService` を作成します�
 Angular は `HeroService` を生成する際、そのプロパティへシングルトンな `MessageService` を注入します。
 
 <code-example
-  path="toh-pt4/src/app/hero.service.ts" region="ctor">
+  path="toh-pt4/src/app/hero.service.ts" header="src/app/hero.service.ts" region="ctor">
 </code-example>
 
 <div class="l-sub-section">
@@ -317,9 +312,9 @@ Angular は `HeroService` を生成する際、そのプロパティへシング
 
 ### `HeroService` からメッセージを送る
 
-ヒーローが取得されたときにメッセージを送信するように `getHeroes` メソッドを変更します。
+ヒーローが取得されたときにメッセージを送信するように `getHeroes()` メソッドを変更します。
 
-<code-example path="toh-pt4/src/app/hero.service.ts" region="getHeroes">
+<code-example path="toh-pt4/src/app/hero.service.ts" header="src/app/hero.service.ts" region="getHeroes">
 </code-example>
 
 ### `HeroService` からのメッセージを表示する
@@ -328,19 +323,16 @@ Angular は `HeroService` を生成する際、そのプロパティへシング
 
 `MessagesComponent` を開き、`MessageService` をインポートしてください。
 
-<code-example
-  header = "/src/app/messages/messages.component.ts (import MessageService)"
-  path="toh-pt4/src/app/messages/messages.component.ts" region="import-message-service">
+<code-example header="src/app/messages/messages.component.ts (import MessageService)" path="toh-pt4/src/app/messages/messages.component.ts" region="import-message-service">
 </code-example>
 
 コンストラクターに **パブリック** な `messageService` プロパティを宣言しましょう。
 Angular は `MessagesComponent` を作成する際、シングルトンな `MessageService` インスタンスをそのプロパティへ注入します。
 
-<code-example
-  path="toh-pt4/src/app/messages/messages.component.ts" region="ctor">
+<code-example path="toh-pt4/src/app/messages/messages.component.ts" header="src/app/messages/messages.component.ts" region="ctor">
 </code-example>
 
-今回、`messageService` はテンプレート内でバインドして使用します。
+今回、`messageService` はテンプレート内でバインドして使用するつもりです。
 そのため、`messageService` は **パブリックである必要があります**。
 
 <div class="alert is-important">
@@ -349,7 +341,7 @@ Angular はコンポーネント内の _パブリック_ なプロパティの�
 
 </div>
 
-### _MessageService_ へバインドする
+### `MessageService` へバインドする
 
 Angular CLI によって生成された `MessagesComponent` のテンプレートを下記コードへ置き換えましょう。
 

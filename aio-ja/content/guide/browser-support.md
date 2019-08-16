@@ -53,7 +53,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
       IE
     </td>
     <td>
-      11<br>10<br>9
+      11, 10, 9 ("compatibility view" mode not supported)
     </td>
   </tr>
  <tr>
@@ -89,7 +89,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
     </td>
 
     <td>
-      Nougat (7.0)<br>Marshmallow (6.0)<br>Lollipop (5.0, 5.1)<br>KitKat (4.4)
+      Nougat (7.0), Marshmallow (6.0), Lollipop (5.0, 5.1), KitKat (4.4)
     </td>
   </tr>
 
@@ -127,24 +127,27 @@ In Angular CLI version 8 and higher, applications are built using *differential 
 This strategy allows you to continue to build your web application to support multiple browsers, but only load the necessary code that the browser needs.
 For more information about how this works, see [Differential Loading](guide/deployment#differential-loading) in the [Deployment guide](guide/deployment).
 
-## ポリフィルを有効化する
+## Enabling polyfills with CLI projects
 
-[Angular CLI](cli) を使用している場合は、プロジェクトと共に自動生成された`src/polyfills.ts`を利用してポリフィルを有効化します。
+The [Angular CLI](cli) provides support for polyfills.
+If you are not using the CLI to create your projects, see [Polyfill instructions for non-CLI users](#non-cli).
 
+When you create a project with the `ng new` command, a `src/polyfills.ts` configuration file is created as part of your project folder.
 このファイルには必須なポリフィルと多くのオプショナルなポリフィルがJavaScriptの`import`文で盛り込まれています。
 
-必須なポリフィルのnpmパッケージは、プロジェクトを作成したときに自動的にインストールされていて、対応する`import`文が用意されています。あなたがそれに触ることはないでしょう。
+* The npm packages for the [_mandatory_ polyfills](#polyfill-libs) (such as `zone.js`) are installed automatically for you when you create your project with `ng new`, and their corresponding `import` statements are already enabled in the `src/polyfills.ts` configuration file.
 
-しかし、オプショナルなポリフィルが必要な場合、そのnpmパッケージをインストールする必要があります。
+* If you need an _optional_ polyfill, you must install its npm package, then uncomment or create the corresponding import statement in the `src/polyfills.ts` configuration file.
+
 たとえば、[WEBアニメーションのポリフィルが必要な場合](http://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
 
 <code-example language="sh" class="code-shell">
-  # note that the web-animations-js polyfill is only here as an example
-  # it isn't a strict requirement of Angular anymore (more below)
+  # install the optional web animations polyfill
   npm install --save web-animations-js
 </code-example>
 
-それから`polyfills.ts`を開き、次のように該当するインポート文のコメントを外します。
+You can then add the import statement in the `src/polyfills.ts` file.
+For many polyfills, you can simply un-comment the corresponding `import` statement in the file, as in the following example.
 
 <code-example header="src/polyfills.ts">
   /**
@@ -154,21 +157,13 @@ For more information about how this works, see [Differential Loading](guide/depl
   import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 </code-example>
 
-もし`polyfills.ts`に求めるポリフィルがなければ、自身で追加し、次のパターンにしたがってください。
+If the polyfill you want is not already in `polyfills.ts` file, add the `import` statement by hand.
 
-1. npmパッケージをインストールする
-1. `polyfills.ts`で`import`する
-
-<div class="alert is-helpful">
-
-CLIを使用していない場合は、[後述のとおり](#non-cli)に行ってください。
-</div>
 
 {@a polyfill-libs}
 
 ### 必須ポリフィル
 サポートするブラウザ上でAngularアプリケーションを動作するためには、これらのポリフィルが必要です。
-
 
 <table>
 
@@ -187,26 +182,13 @@ CLIを使用していない場合は、[後述のとおり](#non-cli)に行っ�
   <tr style="vertical-align: top">
 
     <td>
-      Chrome, Firefox, Edge, Safari 9+
+      Chrome, Firefox, Edge, <br>
+      Safari, Android, IE 10+
     </td>
 
     <td>
 
-      [ES7/reflect](guide/browser-support#core-es7-reflect) (JIT only)
-
-    </td>
-
-  </tr>
-
-  <tr style="vertical-align: top">
-
-    <td>
-      Safari 7 & 8, IE10 & 11, Android 4.1+
-    </td>
-
-    <td>
-
-      [ES6](guide/browser-support#core-es6)
+      [ES2015](guide/browser-support#core-es6)
 
     </td>
 
@@ -215,12 +197,12 @@ CLIを使用していない場合は、[後述のとおり](#non-cli)に行っ�
   <tr style="vertical-align: top">
 
     <td>
-      IE9
+      IE 9
     </td>
 
     <td>
 
-      [ES6<br>classList](guide/browser-support#classlist)
+      ES2015<br>[classList](guide/browser-support#classlist)
 
     </td>
 
@@ -232,12 +214,6 @@ CLIを使用していない場合は、[後述のとおり](#non-cli)に行っ�
 ### ポリフィルが必要なオプショナルのブラウザ機能
 
 Angularのいくつかの機能では追加のポリフィルが必要になるかもしれません。
-
-たとえば、アニメーションライブラリは標準のWeb Animation APIに依存しています。しかし、現状では標準のWeb Animation APIはChromeとFirefoxでしか利用できません。
-(Angularにおけるweb-animations-jsへの依存は、`AnimationBuilder`を利用する場合にのみ生じます)
-
-追加のポリフィルを必要とする可能性がある機能は次のとおりです。
-
 
 <table>
 
@@ -261,31 +237,8 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-      [JIT compilation](guide/aot-compiler).
-
-      Required to reflect for metadata.
-    </td>
-
-    <td>
-
-      [ES7/reflect](guide/browser-support#core-es7-reflect)
-
-    </td>
-
-    <td>
-      All current browsers. Enabled by default.
-      Can remove if you always use AOT and only use Angular decorators.
-    </td>
-
-  </tr>
-
-  <tr style="vertical-align: top">
-
-    <td>
-
-      [Animations](guide/animations)
-      <br>Only if `Animation Builder` is used within the application--standard
-      animation support in Angular doesn't require any polyfills (as of NG6).
+      [AnimationBuilder](api/animations/AnimationBuilder).
+      (Standard animation support does not require polyfills.)
 
     </td>
 
@@ -296,8 +249,9 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     </td>
 
     <td>
-      <p>If AnimationBuilder is used then the polyfill will enable scrubbing
-      support for IE/Edge and Safari (Chrome and Firefox support this natively).</p>
+      <p>If AnimationBuilder is used, enables scrubbing
+      support for IE/Edge and Safari.
+      (Chrome and Firefox support this natively).</p>
     </td>
 
   </tr>
@@ -307,14 +261,9 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     <td>
 
     If you use the following deprecated i18n pipes:
-    
-
      [date](api/common/DeprecatedDatePipe), 
-     
      [currency](api/common/DeprecatedCurrencyPipe),
-     
      [decimal](api/common/DeprecatedDecimalPipe), 
-     
      [percent](api/common/DeprecatedPercentPipe)
 
     </td>
@@ -326,7 +275,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     </td>
 
     <td>
-      All but Chrome, Firefox, Edge, IE11 and Safari 10
+      All but Chrome, Firefox, Edge, IE 11 and Safari 10
     </td>
 
   </tr>
@@ -335,9 +284,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-       [NgClass](api/common/NgClass) 
-       
-       on SVG elements
+       [NgClass](api/common/NgClass) on SVG elements
     </td>
 
     <td>
@@ -347,7 +294,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     </td>
 
     <td>
-      IE10, IE11
+      IE 10, IE 11
     </td>
 
   </tr>
@@ -356,9 +303,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-      [Http](guide/http) 
-      
-      when sending and receiving binary data
+      [Http](guide/http) when sending and receiving binary data
     </td>
 
     <td>
@@ -381,9 +326,8 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-      [Router](guide/router) 
-      
-      when using [hash-based routing](guide/router#appendix-locationstrategy-and-browser-url-styles)
+      [Router](guide/router) when using
+      [hash-based routing](guide/router#appendix-locationstrategy-and-browser-url-styles)
     </td>
 
     <td>
@@ -402,8 +346,9 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
 
 
-### 推奨ポリフィル ##
-次に示すのはフレームワークそのものをテストするために使われているポリフィルです。これらはアプリケーションのためのよいスタート地点です。
+### 推奨ポリフィル
+
+次のポリフィルはフレームワークそのものをテストするために使われています。これらはアプリケーションのためのよいスタート地点です。
 
 
 <table>
@@ -421,24 +366,6 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     <th>
       サイズ*
     </th>
-
-  </tr>
-
-  <tr>
-
-    <td>
-
-      <a id='core-es7-reflect' href="https://github.com/zloirock/core-js/tree/v2/fn/reflect">ES7/reflect</a>
-
-    </td>
-
-    <td>
-      MIT
-    </td>
-
-    <td>
-      0.5KB
-    </td>
 
   </tr>
 
@@ -464,7 +391,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-      <a id='core-es6' href="https://github.com/zloirock/core-js">ES6</a>
+      <a id='core-es6' href="https://github.com/zloirock/core-js">ES2015</a>
 
     </td>
 
@@ -589,14 +516,18 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 </table>
 
 
-\* 数値は縮小し、gzip圧縮されたコードを<a href="http://closure-compiler.appspot.com/home">closure compiler</a>で計算したものです。
+\* 数値は縮小し、gzip圧縮されたコードを
+<a href="http://closure-compiler.appspot.com/home">closure compiler</a>で計算したものです。
 
 {@a non-cli}
+
 ## CLI未使用の場合のポリフィル設定
 
-もしCLIを使用していない場合、自身で必要なポリフィルを直接WEBページ(`index.html`)に追加してください。おそらくこのようになります。
+もしCLIを使用していない場合、自身で必要なポリフィルを直接WEBページ(`index.html`)に追加してください。
 
-<code-example header="src/index.html">
+例:
+
+<code-example header="src/index.html" language="html">
   &lt;!-- pre-zone polyfills -->
   &lt;script src="node_modules/core-js/client/shim.min.js">&lt;/script>
   &lt;script src="node_modules/web-animations-js/web-animations.min.js">&lt;/script>

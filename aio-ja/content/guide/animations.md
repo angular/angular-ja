@@ -37,8 +37,7 @@ Angularアニメーションをプロジェクトに追加するには、標準�
 
 `BrowserAnimationsModule`をインポートしてください。これによってアニメーション機能をAngularのルートアプリケーションモジュールに取り込みます。
 
-<code-example path="animations/src/app/app.module.1.ts" header="src/app/app.module.ts" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/app.module.1.ts" header="src/app/app.module.ts" language="typescript"></code-example>
 
 <div class="alert is-helpful">
 
@@ -129,7 +128,7 @@ Angularでは、アニメーションなしで複数のスタイルを設定で�
 
 <div class="alert is-helpful">
 
-**Note:** イージングカーブの一般的な情報については、Angularマテリアルデザインのウェブサイトの[Natural easing curves](https://material.io/design/motion/speed.html#easing)を参照してください。
+**Note:** イージングカーブの一般的な情報については、マテリアルデザインのウェブサイトの[Natural easing curves](https://material.io/design/motion/speed.html#easing)を参照してください。
 </div>
 
 次の例では、状態間の1秒の遷移で、`open`から`closed`への状態遷移を提供しています。
@@ -180,9 +179,7 @@ region="transition2">
 
 アニメーションは、アニメーション化されるHTML要素を制御するコンポーネントのメタデータで定義されます。アニメーションを定義するコードを`@Component()`デコレーター内の`animations:`プロパティ下に配置します。
 
-<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript"
-region="component" linenums="false">
-</code-example>
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" language="typescript" region="component"></code-example>
 
 コンポーネントのアニメーショントリガーを定義したら、トリガー名を角括弧で囲み、その前に`@`記号を付けてそのコンポーネントのテンプレート内の要素にアタッチすることができます。それから、次に示すように標準のAngularプロパティバインディング構文を使用して、トリガーをテンプレート式にバインドできます。ここで、`triggerName`はトリガーの名前で、`expression`は定義されたアニメーションの状態として評価されます。
 

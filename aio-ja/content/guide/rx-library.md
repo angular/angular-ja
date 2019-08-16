@@ -1,6 +1,6 @@
 # RxJS ライブラリ
 
-リアクティブプログラミングは、データストリームと変更の伝播 ([Wikipedia](https://en.wikipedia.org/wiki/Reactive_programming)) に関する非同期プログラミングのパラダイムです。RxJS (Reactive Extensions for JavaScript) は、非同期またはコールバックベースのコード ([RxJS Docs](http://reactivex.io/rxjs/)) の作成を容易にする observables を使用したリアクティブプログラミング用のライブラリです。
+リアクティブプログラミングは、データストリームと変更の伝播 ([Wikipedia](https://en.wikipedia.org/wiki/Reactive_programming)) に関する非同期プログラミングのパラダイムです。RxJS (Reactive Extensions for JavaScript) は、非同期またはコールバックベースのコード ([RxJS Docs](https://rxjs.dev/guide/overview)) の作成を容易にする observables を使用したリアクティブプログラミング用のライブラリです。
 
 RxJS は `Observable` 型の実装を提供します。Observable 型は、型が言語の一部となるまで、そしてブラウザがそれをサポートするまで必要です。ライブラリはまたobservablesを作成して作業するためのユーティリティ関数を提供します。これらのユーティリティ関数は、次の用途に使用できます。
 
@@ -44,7 +44,7 @@ observable に適用されるオペレーターのセットは、レシピ、�
 
 ### 共通のオペレーター
 
-RxJS には多くのオペレーターが用意されていますが、頻繁に使用されるのは一握りです。オペレーターと使用例のリストについては、[RxJS API Documentation](https://rxjs-dev.firebaseapp.com/api) を参照してください。
+RxJS には多くのオペレーターが用意されていますが、頻繁に使用されるのは一握りです。オペレーターと使用例のリストについては、[RxJS API Documentation](https://rxjs.dev/api) を参照してください。
 
 <div class="alert is-helpful">
   Angular アプリでは、チェーンを使用するのではなく、パイプとオペレーターを組み合わせることをお勧めします。チェーンは多くの RxJS の例で使用されています。

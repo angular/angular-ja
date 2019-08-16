@@ -40,18 +40,14 @@ Angular の依存性の注入を使用して親のコンポーネントに到達
 {@a alex}
 
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-1" header="parent-finder.component.ts (AlexComponent v.1)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-1" header="parent-finder.component.ts (AlexComponent v.1)"></code-example>
 
 
 
 *Cathy* は、`AlexComponent` をコンストラクターに注入したあとで、
 彼女が *Alex* にアクセスできるかどうかを伝えます。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="cathy" header="parent-finder.component.ts (CathyComponent)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="cathy" header="parent-finder.component.ts (CathyComponent)"></code-example>
 
 
 
@@ -98,17 +94,13 @@ TypeScript のインターフェースは、インターフェースをサポー
 サンプルの `CraigComponent` はこの問題を探ります。[振り返ってみると](#alex)、
 `Alex` コンポーネントは `Base` という名前のクラスから*拡張*(*継承*)されています。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (Alex class signature)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (Alex class signature)"></code-example>
 
 
 
 `CraigComponent` は、その `alex` コンストラクターパラメータに `Base` の注入を試み、成功したかどうかを報告します。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="craig" header="parent-finder.component.ts (CraigComponent)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="craig" header="parent-finder.component.ts (CraigComponent)"></code-example>
 
 
 
@@ -138,21 +130,16 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 {@a alex-providers}
 
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="parent-finder.component.ts (AlexComponent providers)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="parent-finder.component.ts (AlexComponent providers)"></code-example>
 
 
 [Parent](#parent-token) はプロバイダーのクラスインターフェーストークンです。
-[*forwardRef*](guide/dependency-injection-in-action#forwardref) は、
-`AlexComponent` が自身を参照することによって作られた循環参照を解消します。
+[*forwardRef*](guide/dependency-injection-in-action#forwardref) は、`AlexComponent` が自身を参照することによって作られた循環参照を解消します。
 
 *Alex* の3番目の子コンポーネントである *Carol* は、これまでと同じ方法で、
 親をその `parent` パラメータに挿入します。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="carol-class" header="parent-finder.component.ts (CarolComponent class)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="carol-class" header="parent-finder.component.ts (CarolComponent class)"></code-example>
 
 
 
@@ -178,9 +165,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 *Barry* はこのようになります。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="barry" header="parent-finder.component.ts (BarryComponent)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="barry" header="parent-finder.component.ts (BarryComponent)"></code-example>
 
 
 
@@ -230,9 +215,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 例では `Parent` クラスのインターフェースを定義しています。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="parent" header="parent-finder.component.ts (Parent class-interface)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="parent" header="parent-finder.component.ts (Parent class-interface)"></code-example>
 
 
 
@@ -242,9 +225,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 親として機能できるコンポーネントは、`AliceComponent` と同様にクラスインターフェースを実装する必要があります。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-class-signature" header="parent-finder.component.ts (AliceComponent class signature)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-class-signature" header="parent-finder.component.ts (AliceComponent class signature)"></code-example>
 
 
 
@@ -252,9 +233,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 その `Base` クラスで要求されるため、`AlexComponent` は `name` プロパティを持ちますが、
 そのクラスシグネチャは `Parent` を呼び出しません。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (AlexComponent class signature)" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-class-signature" header="parent-finder.component.ts (AlexComponent class signature)"></code-example>
 
 
 
@@ -278,21 +257,15 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 同じ親*エイリアスプロバイダ*のバリエーションを書くとすぐに古くなります。
 [*forwardRef*](guide/dependency-injection-in-action#forwardref) を使うと、これは特にひどいものです。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
 
 次のように、そのロジックをヘルパー関数に抽出できます。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-the-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-the-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
 
 今、コンポーネントに、より単純で意味のある Parent プロバイダーを追加することができます。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
 
 
 あなたはもっとうまくやれます。現在のバージョンのヘルパー関数は、`Parent`クラスのインターフェースのみを別名で設定できます。
@@ -300,14 +273,10 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 これは `parent` をデフォルトとしていますが、別の親クラスのインターフェースのためのオプションの2番目のパラメータも受け付ける改訂版です。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
 
 
 そして、これが別の親のタイプでそれを使用する方法です。
 
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts" linenums="false">
-
-</code-example>
+<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
 

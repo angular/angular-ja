@@ -43,9 +43,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 
 完了したら、 `HeroDetailComponent` テンプレートは次のようになります。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.html" header="src/app/hero-detail/hero-detail.component.html" linenums="false">
-
-</code-example>
+<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.html" header="src/app/hero-detail/hero-detail.component.html"></code-example>
 
 ### `@Input()` heroプロパティを追加する
 
@@ -65,13 +63,11 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 `Input` シンボルを含めるために、 `@angular/core` のimport文を修正してください。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" header="src/app/hero-detail/hero-detail.component.ts (import Input)" linenums="false">
-</code-example>
+<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" header="src/app/hero-detail/hero-detail.component.ts (import Input)"></code-example>
 
 `@Input()` デコレーターが前に付いた `hero` プロパティを追加します。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="input-hero"  linenums="false">
-</code-example>
+<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" header="src/app/hero-detail/hero-detail.component.ts" region="input-hero"></code-example>
 
 これが `HeroDetailComponent` クラスに行うべき唯一の変更です。
 これ以上のプロパティも、表示のためのロジックも必要ありません。
@@ -115,8 +111,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 修正された `HeroesComponent` テンプレートはこのようになります：
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html"
-  header="heroes.component.html" linenums="false">
-</code-example>
+  header="heroes.component.html"></code-example>
 
 ブラウザがリフレッシュされると、以前と同じようにアプリケーションが再び動き始めます。
 

@@ -1,12 +1,10 @@
-{@a the-hero-editor}
-# ヒーローエディター
+# ヒーローエディター {@a the-hero-editor}
 
 アプリケーションに基本的なタイトルが追加されました。
 次に、ヒーロー情報を表示するための新しいコンポーネントを作成し、
 そのコンポーネントをアプリケーションシェルに配置します。
 
-{@a create-the-heroes-component}
-## heroes コンポーネントを作成する
+## heroes コンポーネントを作成する {@a create-the-heroes-component}
 
 Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
 
@@ -15,14 +13,11 @@ Angular CLIを使用して､`heroes`という名前の新しいコンポーネ�
 </code-example>
 
 CLIは`src/app/heroes/`という新しいフォルダを作成し、
-`HeroesComponent`に関する4つのファイルを生成します。
+`HeroesComponent`に関する3つのファイルをテストファイルと一緒に生成します。
 
 `HeroesComponent`のクラスファイルは次のとおりです。
 
-<code-example 
-  path="toh-pt1/src/app/heroes/heroes.component.ts" region="v1" 
-  header="app/heroes/heroes.component.ts (初期バージョン)" linenums="false">
-</code-example>
+<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" region="v1" header="app/heroes/heroes.component.ts (initial version)"></code-example>
 
 常にAngularコアライブラリから`Component`シンボルをインポートし、
 コンポーネントクラスに`@Component`で注釈を付けます。
@@ -40,54 +35,46 @@ CLIは3つのメタデータプロパティを生成しました:
 [CSS要素セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors)である
 `'app-heroes'`は、親コンポーネントのテンプレート内でこのコンポーネントを識別するHTML要素の名前と一致します。
 
-`ngOnInit`は[ライフサイクルフック](guide/lifecycle-hooks#oninit)です。
-Angularは、コンポーネントの作成直後に`ngOnInit`を呼び出します。
+`ngOnInit()`は[ライフサイクルフック](guide/lifecycle-hooks#oninit)です。
+Angularは、コンポーネントの作成直後に`ngOnInit()`を呼び出します。
 初期化ロジックを置くのに適しています。
 
 常にコンポーネントクラスを`export`するので、`AppModule`のようにいつでも他の場所に`import`できます。
 
-{@a add-a-hero-property}
-### _hero_ プロパティを追加する
+### `hero` プロパティを追加する {@a add-a-hero-property}
 
 "Windstorm"という名前のヒーローのために、`HeroesComponent`に`hero`プロパティを追加します。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" region="add-hero" header="heroes.component.ts (hero プロパティ)" linenums="false">
-</code-example>
+<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" region="add-hero" header="heroes.component.ts (hero property)"></code-example>
 
-{@a show-the-hero}
-### ヒーローを表示する
+### ヒーローを表示する {@a show-the-hero}
 
 `heroes.component.html`テンプレートファイルを開きます。
 Angular CLIで生成されたデフォルトのテキストを削除し、
 それを新しい`hero`プロパティへのデータバインディングに置き換えてください。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" header="heroes.component.html" region="show-hero-1" linenums="false">
-</code-example>
+<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" header="heroes.component.html" region="show-hero-1"></code-example>
 
-{@a show-the-heroescomponent-view}
-## _HeroesComponent_ ビューを表示する
+## `HeroesComponent` ビューを表示する {@a show-the-heroescomponent-view}
 
 `HeroesComponent`を表示するには、それをアプリケーションシェルの`AppComponent`のテンプレートに追加する必要があります。
 
 `app-heroes`は`HeroesComponent`の[要素セレクタ](#selector)であることを思い出してください。
 なので、`AppComponent`のテンプレートファイルで、タイトルの直下に`<app-heroes>`要素を追加してください。
 
-<code-example path="toh-pt1/src/app/app.component.html" header="src/app/app.component.html" linenums="false">
-</code-example>
+<code-example path="toh-pt1/src/app/app.component.html" header="src/app/app.component.html"></code-example>
 
 CLIの`ng serve`コマンドがまだ実行中であれば、
 ブラウザが更新され、アプリケーションのタイトルとヒーローの名前が表示されます。
 
-{@a create-a-hero-class}
-## Hero クラスを作成する
+## Hero クラスを作成する {@a create-a-hero-class}
 
 本当のヒーローは名前だけではありません。
 
 `src/app`フォルダ内の独自のファイルに、`Hero`クラスを作成します。
 それに`id`プロパティと`name`プロパティを与えます。
 
-<code-example path="toh-pt1/src/app/hero.ts"  header="src/app/hero.ts" linenums="false">
-</code-example>
+<code-example path="toh-pt1/src/app/hero.ts"  header="src/app/hero.ts"></code-example>
 
 
 `HeroesComponent`クラスに戻り、`Hero`クラスをインポートします。
@@ -97,33 +84,23 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 
 改訂された`HeroesComponent`のクラスファイルは、次のようになります。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" linenums="false"
-  header= "src/app/heroes/heroes.component.ts">
-</code-example>
+<code-example path="toh-pt1/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts"></code-example>
 
 ヒーローを文字列からオブジェクトに変更したため、ページが正しく表示されなくなりました。
 
-{@a show-the-hero-object}
-## ヒーローオブジェクトを表示する
+## ヒーローオブジェクトを表示する {@a show-the-hero-object}
 
 ヒーローの名前を知らせるためにテンプレートのバインディングを更新し、
 次のような詳細レイアウトで`id`と`name`の両方を表示します。
 
-<code-example 
-  path="toh-pt1/src/app/heroes/heroes.component.1.html"
-  region="show-hero-2" 
-  header="heroes.component.html (HeroesComponent のテンプレート)" linenums="false">
-</code-example>
+<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" region="show-hero-2" header="heroes.component.html (HeroesComponent's template)"></code-example>
 
 ブラウザが更新され、ヒーローの情報が表示されます。
 
-{@a format-with-the-uppercasepipe}
-## _UppercasePipe_ で書式設定する
+## _UppercasePipe_ で書式設定する {@a format-with-the-uppercasepipe}
 
 `hero.name`のバインディングをこのように修正してください。
-<code-example
-  path="toh-pt1/src/app/heroes/heroes.component.html"
-  region="pipe">
+<code-example path="toh-pt1/src/app/heroes/heroes.component.html" header="src/app/heroes/heroes.component.html" region="pipe">
 </code-example>
 
 ブラウザが更新され、ヒーローの名前が大文字で表示されるようになります。
@@ -146,22 +123,18 @@ Angularは複数のビルトインパイプを備えており、あなた自身�
 
 そのデータフローを自動化するには、`<input>`フォーム要素と`hero.name`プロパティとの間に双方向データバインディングを設定します。
 
-{@a two-way-binding}
-### 双方向データバインディング
+### 双方向データバインディング {@a two-way-binding}
 
 `HeroesComponent`テンプレートの詳細エリアをリファクタリングすると、次のようになります。
 
-<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" region="name-input" header="src/app/heroes/heroes.component.html (HeroesComponent のテンプレート)" linenums="false">
-
-</code-example>
+<code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" region="name-input" header="src/app/heroes/heroes.component.html (HeroesComponent's template)"></code-example>
 
 **[(ngModel)]** は、Angularの双方向データバインディング構文です。
 
 これで`hero.name`プロパティをHTMLのテキストボックスにバインドするので、
 `hero.name`プロパティからテキストボックスへ、テキストボックスから`hero.name`プロパティへ、 _双方向に_ データを流すことができます。
 
-{@a the-missing-formsmodule}
-### 見つからない _FormsModule_
+### 見つからない _FormsModule_ {@a the-missing-formsmodule}
 
 `[(ngModel)]`を追加したときにアプリケーションが動かなくなったことに注目してください。
 
@@ -191,12 +164,11 @@ Angularでは、アプリケーションの部品がどのように合わさる�
 Angular CLI は、プロジェクトを作成するときに`src/app/app.module.ts`に`AppModule`クラスを作成しました。
 ここで`FormsModule`をオプトインします。
 
-{@a import-formsmodule}
-### _FormsModule_ をインポートする
+### _FormsModule_ をインポートする {@a import-formsmodule}
 
 `AppModule` (`app.module.ts`) を開き、`@angular/forms`ライブラリから`FormsModule`シンボルをインポートします。
 
-<code-example path="toh-pt1/src/app/app.module.ts" header="app.module.ts (FormsModule シンボルのインポート)"
+<code-example path="toh-pt1/src/app/app.module.ts" header="app.module.ts (@NgModule imports)"
  region="formsmodule-js-import">
 </code-example>
 
@@ -209,8 +181,7 @@ region="ng-imports">
 
 ブラウザが更新されると、アプリケーションは再び動作するはずです。ヒーローの名前を編集し、テキストボックスの上にある`<h2>`に即座に変更が反映されていることを確認できます。
 
-{@a declare-heroescomponent}
-### _HeroesComponent_ を宣言する
+### `HeroesComponent` を宣言する {@a declare-heroescomponent}
 
 すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodules)で宣言されなければなりません。
 
@@ -220,11 +191,11 @@ region="ng-imports">
 アプリケーションが動作したのは、Angular CLI が`HeroesComponent`を生成したときに、`AppModule`でそのコンポーネントの宣言を行っていたからです。
 
 `src/app/app.module.ts`を開き、先頭付近で`HeroesComponent`がインポートされているのを見つけてください。
-<code-example path="toh-pt1/src/app/app.module.ts" region="heroes-import" >
+<code-example path="toh-pt1/src/app/app.module.ts" header="src/app/app.module.ts" region="heroes-import" >
 </code-example>
 
 `HeroesComponent`は、`@NgModule.declarations`配列で宣言されています。
-<code-example path="toh-pt1/src/app/app.module.ts" region="declarations">
+<code-example path="toh-pt1/src/app/app.module.ts" header="src/app/app.module.ts" region="declarations">
 </code-example>
 
 `AppModule`は`AppComponent`と`HeroesComponent`の両方のアプリケーションコンポーネントを宣言しています。

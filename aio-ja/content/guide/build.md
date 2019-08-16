@@ -102,7 +102,7 @@ export class AppComponent {
 ```
 {@a file-replacement}
 
-## ターゲット固有ファイルの置換の設定
+## ターゲット固有ファイルの置換の設定 {@a configure-target-specific-file-replacements}
 
 メインのCLI設定ファイル`angular.json`には、各ビルドターゲットの設定に`fileReplacements`セクションが含まれており、これにより任意のファイルをターゲット固有バージョンのものに置き換えることができます。
 これは本番やステージングなどの固有の環境をターゲットとするビルドにおいて、ターゲット固有のコードや変数を含めるのに便利です。
@@ -215,14 +215,17 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
   <tr>
     <td>type</td>
-    <td>予算の種類。次のうちどれか:
+    <td>
+    
+    予算の種類。次のうちどれか:
 
-        * bundle - 特定のバンドルのサイズ。
-        * initial - アプリの初期サイズ。
-        * allScript - 全スクリプトのサイズ。
-        * all - アプリ全体のサイズ。
-        * anyScript - いずれか1つのスクリプトのサイズ。
-        * any - いずれかのファイルのサイズ。
+* `bundle` - 特定のバンドルのサイズ。
+* `initial` - アプリの初期サイズ。
+* `allScript` - 全スクリプトのサイズ。
+* `all` - アプリ全体のサイズ。
+* `anyComponentStyle` - いずれか1つのコンポーネントのスタイルシートのサイズ。
+* `anyScript` - いずれか1つのスクリプトのサイズ。
+* `any` - いずれかのファイルのサイズ。
 
     </td>
   </tr>

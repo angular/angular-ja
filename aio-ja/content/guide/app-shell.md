@@ -10,7 +10,7 @@ App shell は、ビルド時にひとつの経路を介してアプリケーシ�
 ## ステップ 1: アプリケーションを準備する
 
 これを行うには、次の CLI コマンドを使用します。
-<code-example format="." language="bash" linenums="false">
+<code-example language="bash">
 ng new my-app --routing
 </code-example>
 
@@ -20,7 +20,7 @@ ng new my-app --routing
 
 CLI を使用して App shell を自動的に作成します。
 
-<code-example format="." language="bash" linenums="false">
+<code-example language="bash">
 ng generate app-shell --client-project my-app --universal-project server-app
 </code-example>
 
@@ -29,7 +29,7 @@ ng generate app-shell --client-project my-app --universal-project server-app
 
 このコマンドを実行した後、`angular.json` 設定ファイルが更新されて、他にいくつかの変更が加わり2つの新しいターゲットが追加されていることに気付くでしょう。
 
-<code-example format="." language="none" linenums="false">
+<code-example language="json">
 "server": {
   "builder": "@angular-devkit/build-angular:server",
   "options": {
@@ -52,7 +52,7 @@ ng generate app-shell --client-project my-app --universal-project server-app
 
 CLI を使って `app-shell` ターゲットを構築します。
 
-<code-example format="." language="bash" linenums="false">
+<code-example language="bash">
 ng run my-app:app-shell
 </code-example>
 

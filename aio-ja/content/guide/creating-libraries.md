@@ -5,10 +5,6 @@ Angular の機能を拡張するために新しいライブラリを作成して
 簡単な例としては、会社の Web サイトにユーザーを送信するボタンがあります。これは、会社が構築するすべてのアプリに含まれています。
 
 <div class="alert is-helpful">
-     <p>For more details on how a library project is structured you can refer the <a href="guide/file-structure#library-project-files">Library Project Files</a></p>
-</div>
-
-<div class="alert is-helpful">
      <p>ライブラリプロジェクトの構造の詳細については、<a href="guide/file-structure#library-project-files">ライブラリプロジェクトファイル</a>を参照してください。</p>
 </div>
 
@@ -16,7 +12,7 @@ Angular の機能を拡張するために新しいライブラリを作成して
 
 Angular CLI を使用して次のコマンドで新しいライブラリスケルトンを生成します。
 
-<code-example format="." language="bash">
+<code-example language="bash">
  ng generate library my-lib
 </code-example>
 
@@ -39,7 +35,7 @@ Angular CLI を使用して次のコマンドで新しいライブラリスケ�
 
 CLI コマンドを使用してプロジェクトをビルド、テスト、およびチェックすることができます:
 
-<code-example format="." language="bash">
+<code-example language="bash">
  ng build my-lib
  ng test my-lib
  ng lint my-lib
@@ -110,7 +106,7 @@ NgModule を使用してサービスとコンポーネントを公開します�
 Angular CLI と npm パッケージマネージャーを使用して、ライブラリを npm パッケージとしてビルドおよび公開します。
 ライブラリはデフォルトで [AoT モード](guide/aot-compiler) でビルドされているので、公開用にビルドするときに `-prod` フラグを指定する必要はありません。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 ng build my-lib
 cd dist/my-lib
 npm publish
@@ -162,7 +158,7 @@ Angular ライブラリはすべての `@angular/*` 依存関係をピア依存�
 アプリで独自のライブラリを使用するには：
 
 * ライブラリをビルドします。 ライブラリをビルドする前に使用することはできません。
- <code-example format="." language="bash">
+ <code-example language="bash">
  ng build my-lib
  </code-example>
 
@@ -194,6 +190,6 @@ Angular CLI は `tsconfig` パスを使用してビルドシステムにライ�
 
 開発環境では、インクリメンタルビルドをバックグラウンドプロセスとして実行することができます。この機能を利用するには、build コマンドに `--watch` フラグを追加してください。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 ng build my-lib --watch
 </code-example>

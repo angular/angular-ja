@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.12-browsers
+      - image: circleci/node:10.16-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - run: sudo apt install rsync
-      - run: sudo npm i -g yarn@~1.12
+      - run: sudo npm i -g yarn@~1.16
 
       - checkout
       - run: git submodule sync

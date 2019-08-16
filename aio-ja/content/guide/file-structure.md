@@ -4,7 +4,7 @@
 
 Angular CLIの `ng new` コマンドはワークスペースを作成します。
 
-<code-example language="bash" linenums="false">
+<code-example language="bash">
 ng new &lt;my-project&gt;
 </code-example>
 
@@ -111,7 +111,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 
 マルチプロジェクトワークスペースの場合、アプリケーション固有のエンドツーエンドテストはプロジェクトルートの下 `projects/project-name/e2e/` にあります。
 
-<code-example language="none" linenums="false">
+<code-example language="none">
   e2e/
      src/                 (end-to-end tests for my-app)
         app.e2e-spec.ts
@@ -131,13 +131,13 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 ワークスペースに複数のプロジェクトを含める場合は、ワークスペースを作成するときに最初のアプリケーション生成をスキップして、ワークスペースにユニークな名前を付けることができます。
 次のコマンドは、すべてのワークスペース全体の構成ファイルを使用してワークスペースを作成しますが、ルートレベルのアプリケーションは作成しません。
 
-<code-example language="bash" linenums="false">
+<code-example language="bash">
 ng new my-workspace --createApplication="false"
 </code-example>
 
 その後、ワークスペース内でユニークな名前でアプリやライブラリを生成できます。
 
-<code-example language="bash" linenums="false">
+<code-example language="bash">
 cd my-workspace
 ng generate application my-first-app
 </code-example>
@@ -148,7 +148,7 @@ ng generate application my-first-app
 新しく生成されたライブラリも `projects/` の下に追加されています。
 この方法でプロジェクトを作成すると、ワークスペースのファイル構造は、 [ワークスペース構成ファイル](guide/workspace-config) 、 `angular.json` の構造と完全に一致します。
 
-<code-example language="none" linenums="false">
+<code-example language="none">
 my-workspace/
   ...             (ワークスペース全体の設定ファイル)
   projects/       (生成されたアプリケーションとライブラリ)

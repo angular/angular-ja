@@ -22,13 +22,11 @@ Angularでは、遷移の状態は`state()`関数を介して明示的に定義�
 
 これにより、各状態に別々の遷移を含めずに新しい状態を追加することができます。
 
-<code-example header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" region="trigger-wildcard1" language="typescript" linenums="false">
-</code-example>
+<code-example header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" region="trigger-wildcard1" language="typescript"></code-example>
 
 両方向の状態遷移を指定するには、二重矢印構文を使用します。
 
-<code-example header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" region="trigger-wildcard2" language="typescript" linenums="false">
-</code-example>
+<code-example header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" region="trigger-wildcard2" language="typescript"></code-example>
 
 ### 複数の遷移状態でワイルドカード状態を使用する
 
@@ -39,9 +37,7 @@ Angularでは、遷移の状態は`state()`関数を介して明示的に定義�
 </figure>
 
 
-<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" linenums="false"
-region="trigger-transition" language="typescript">
-</code-example>
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="trigger-transition" language="typescript"></code-example>
 
 
 `* => *`の遷移は任意の2状態間の変更時に適用されます。
@@ -54,9 +50,7 @@ region="trigger-transition" language="typescript">
 
 現在のスタイルの値がどんなものでも使用して、それとともにアニメーション化するように指示するためには、スタイルにワイルドカードを使用します。ワイルドカードはアニメーション中の状態がトリガー内で宣言されていない場合に使用されるフォールバック値です。
 
-<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" linenums="false"
-region="transition4" language="typescript">
-</code-example>
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="transition4" language="typescript"></code-example>
 
 ### void状態
 
@@ -88,8 +82,7 @@ region="transition4" language="typescript">
 * ヒーローをリストに追加すると、左側からページに飛んでいるように振る舞います。
 * ヒーローをリストから削除すると、右側に飛んでいくように振る舞います。
 
-<code-example path="animations/src/app/hero-list-enter-leave.component.ts" header="src/app/hero-list-enter-leave.component.ts" region="animationdef" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/hero-list-enter-leave.component.ts" header="src/app/hero-list-enter-leave.component.ts" region="animationdef" language="typescript"></code-example>
 
 上記のコードでは、HTML要素がビューにアタッチされていないときに`void`状態が適用されます。
 
@@ -134,7 +127,7 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 
 </div>
 
-<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="increment" language="typescript" linenums="false"></code-example>
+<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="increment" language="typescript"></code-example>
 
 ## 真偽値での遷移
 
@@ -188,8 +181,7 @@ HTMLテンプレート内の要素が`@.disabled`ホストバインディング�
 
 Angularアプリケーションのすべてのアニメーションを無効にするには、最上位のAngularコンポーネントに`@.disabled`ホストバインディングを置きます。
 
-<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="toggle-app-animations" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="toggle-app-animations" language="typescript"></code-example>
 
 <div class="alert is-helpful">
 
@@ -200,8 +192,7 @@ Angularアプリケーションのすべてのアニメーションを無効に�
 
 `trigger()`関数は、アニメーションの開始時と終了時に*コールバック*を発行します。次の例は、`openClose`トリガーを含むコンポーネントです。
 
-<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events1" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events1" language="typescript"></code-example>
 
 HTMLテンプレートでは、`@trigger.start`と`@trigger.done`から`$event`を介してアニメーションイベントが渡されます。ここで`trigger`は使用されているトリガーの名前です。この例では、トリガーの`openClose`は次のように登場します。
 
@@ -216,8 +207,7 @@ HTMLテンプレートでは、`@trigger.start`と`@trigger.done`から`$event`�
 
 コールバックはデバッグツールとして役立ちます。たとえば、`console.warn()`と組み合わせて、ブラウザの開発者JavaScriptコンソールでアプリケーションの進行状況を表示することができます。次のコードスニペットは、元の例(`open`と`closed`の2つの状態をもつボタン)のコンソールログ出力を作成します。
 
-<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events" language="typescript"></code-example>
 
 {@a keyframes}
 
@@ -233,8 +223,7 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 
 この色の変化をコードにすると次のようになります。
 
-<code-example path="animations/src/app/status-slider.component.ts" header="src/app/status-slider.component.ts" region="keyframes" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/status-slider.component.ts" header="src/app/status-slider.component.ts" region="keyframes" language="typescript"></code-example>
 
 ### オフセット
 
@@ -269,8 +258,7 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 
 このアニメーションのコードスニペットは次のようになります。
 
-<code-example path="animations/src/app/open-close.component.1.ts" header="src/app/open-close.component.ts" region="trigger" language="typescript" linenums="false">
-</code-example>
+<code-example path="animations/src/app/open-close.component.1.ts" header="src/app/open-close.component.ts" region="trigger" language="typescript"></code-example>
 
 ### アニメーション可能なプロパティと単位
 
@@ -292,7 +280,7 @@ Angularのアニメーションサポートは、Webアニメーション上に�
 
 この例では、`shrinkOut`というトリガーがあります。このトリガーは、HTML要素がページを離れるときに使用されます。アニメーションは、要素が離れる前の任意の高さを取り、その高さからゼロまでアニメーションします。
 
-<code-example path="animations/src/app/hero-list-auto.component.ts" header="src/app/hero-list-auto.component.ts" region="auto-calc" language="typescript" linenums="false"></code-example>
+<code-example path="animations/src/app/hero-list-auto.component.ts" header="src/app/hero-list-auto.component.ts" region="auto-calc" language="typescript"></code-example>
 
 ### キーフレームのまとめ
 

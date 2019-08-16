@@ -15,9 +15,11 @@
 
 ヒーローエージェンシーは、いくつかの異なる広告がバナーを循環する広告キャンペーンを計画しています。
 新しい広告コンポーネントは、いくつかの異なるチームによって頻繁に追加されます。
-このため、静的なコンポーネント構造をもつテンプレートを使用することは現実的ではありません。
+このため、静的なコンポーネント構造をもつテンプレートを使用することは
+現実的ではありません。
 
-代わりに、広告バナーのテンプレート内のコンポーネントへの固定参照なしに新しいコンポーネントを読み込む方法が必要です。
+代わりに、広告バナーのテンプレート内のコンポーネントへの固定参照なしに
+新しいコンポーネントを読み込む方法が必要です。
 
 Angularにはコンポーネントを動的にロードする独自のAPIが付属しています。
 
@@ -26,18 +28,19 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 ## アンカーディレクティブ
 
-コンポーネントを追加する前に、アンカーポイントを定義して、Angularにコンポーネントを挿入する場所を指定する必要があります。
+コンポーネントを追加する前に、アンカーポイントを定義して、
+Angularにコンポーネントを挿入する場所を指定する必要があります。
 
-広告バナーは、テンプレート内の有効な挿入ポイントをマークするために、`AdDirective` と呼ばれるヘルパー・ディレクティブを使用します。
-
-
-<code-example path="dynamic-component-loader/src/app/ad.directive.ts" header="src/app/ad.directive.ts" linenums="false">
-
-</code-example>
+広告バナーは、テンプレート内の有効な挿入ポイントをマークするために、
+`AdDirective` と呼ばれるヘルパー・ディレクティブを使用します。
 
 
+<code-example path="dynamic-component-loader/src/app/ad.directive.ts" header="src/app/ad.directive.ts"></code-example>
 
-`AdDirective` は動的に追加されたコンポーネントをホストする要素のビューコンテナへのアクセスを得るために `ViewContainerRef` を挿入します。
+
+
+`AdDirective` は動的に追加されたコンポーネントをホストする要素の
+ビューコンテナへのアクセスを得るために `ViewContainerRef` を挿入します。
 
 `@Directive` デコレーターでは、セレクター名 `ad-host` に注目してください；
 これは、要素にディレクティブを適用するために使用します。
@@ -48,7 +51,8 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 ## コンポーネントのロード
 
 広告バナーの実装のほとんどは `ad-banner.component.ts` です。
-この例では、HTMLを `@Component` デコレーターの `template` プロパティにテンプレート文字列として入れています。
+この例では、HTMLを `@Component` デコレーターの `template` プロパティに
+テンプレート文字列として入れています。
 
 `<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
 `AdDirective` を適用するには、セレクターを `ad.directive.ts` 、 `ad-host` から呼び出します。
@@ -56,13 +60,12 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 これで、Angularはコンポーネントを動的にロードする場所を認識しています。
 
 
-<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" header="src/app/ad-banner.component.ts (template)" linenums="false">
-
-</code-example>
+<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" header="src/app/ad-banner.component.ts (template)"></code-example>
 
 
 
-`<ng-template>` 要素は、追加の出力を表示しないため、動的コンポーネントに適しています。
+`<ng-template>` 要素は、追加の出力を表示しないため、
+動的コンポーネントに適しています。
 
 
 {@a resolving-components}
@@ -72,18 +75,19 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 
 `ad-banner.component.ts` のメソッドを詳しく見てみましょう。
 
-`AdBannerComponent` は `AdItem` オブジェクトの配列を入力として受け取ります。これは最終的に `AdService` から来ます。
+`AdBannerComponent` は `AdItem` オブジェクトの配列を入力として受け取ります。
+これは最終的に `AdService` から来ます。
 `AdItem` オブジェクトは、ロードするコンポーネントのタイプと、そのコンポーネントにバインドするデータを指定します。
 `AdService` は、広告キャンペーンを構成する実際の広告を返します。
 
-コンポーネントの配列を `AdBannerComponent` に渡すことで、テンプレート内の静的要素のない広告の動的リストが可能になります。
+コンポーネントの配列を `AdBannerComponent` に渡すことで、
+テンプレート内の静的要素のない広告の動的リストが可能になります。
 
-`AdBannerComponent` は `getAds()` メソッドを使って、 `AdItems` の配列を循環し、 `loadComponent()` を呼び出すことで3秒ごとに新しいコンポーネントを読み込みます。
+`AdBannerComponent` は `getAds()` メソッドを使って、 
+`AdItems` の配列を循環し、 `loadComponent()` を呼び出すことで3秒ごとに新しいコンポーネントを読み込みます。
 
 
-<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="class" header="src/app/ad-banner.component.ts (excerpt)" linenums="false">
-
-</code-example>
+<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="class" header="src/app/ad-banner.component.ts (excerpt)"></code-example>
 
 
 
@@ -100,7 +104,8 @@ Angularにはコンポーネントを動的にロードする独自のAPIが付�
 `loadComponent()` メソッドは、数式を使って広告を選択します。
 
 まず、 `currentAdIndex` を設定します。これは、現在の値+1をプラスし、
-それを `AdItem` 配列の長さで割って、新しい `currentAdIndex` 値として _remainder_　を使います。
+それを `AdItem` 配列の長さで割って、
+新しい `currentAdIndex` 値として _remainder_　を使います。
 次に、その値を使用して配列から `adItem` を選択します。
 
 
@@ -131,14 +136,15 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 
 #### セレクター参照
 
-一般に、Angularコンパイラは、テンプレートで参照されているコンポーネントのために `ComponentFactory` を生成します。
-ただし、動的にロードされるコンポーネントのテンプレートには、実行時にロードされるため、セレクター参照はありません。
+一般に、Angularコンパイラは、テンプレートで参照されているコンポーネントのために 
+`ComponentFactory` を生成します。
+ただし、動的にロードされるコンポーネントのテンプレートには、
+実行時にロードされるため、セレクター参照はありません。
 
-コンパイラが引き続きファクトリを生成するようにするには、動的にロードされるコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
+コンパイラが引き続きファクトリを生成するようにするには、
+動的にロードされるコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
 
-<code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" header="src/app/app.module.ts (entry components)" linenums="false">
-
-</code-example>
+<code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" header="src/app/app.module.ts (entry components)"></code-example>
 
 
 

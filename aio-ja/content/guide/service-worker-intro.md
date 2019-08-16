@@ -31,11 +31,33 @@ AngularにおけるService Workerのインストールは、`NgModule`に含め�
 
 ## 前提条件
 
-アプリケーションは、Service WorkerをサポートするWebブラウザで実行する必要があります。現在、Service WorkerはChromeやFirefox、Edge、Safari、Opera、UC Browser (Android版)、Samsung Internetの最新バージョンでサポートされています。IEやOpera Miniのようなブラウザはサポートしていません。他のブラウザについては、[Can I Use](http://caniuse.com/#feat=serviceworkers)ページを参照してください。
+To make use of all the features of Angular service worker, use the latest versions of Angular and the Angular CLI.
 
-In addition, in order for service workers to be registered, the app must be accessed over HTTPS, not HTTP. Browsers will ignore service workers on pages that are served over an insecure connection. The reason is that service workers are quite powerful, so extra care needs to be taken to ensure the service worker script has not been tampered with.
+In order for service workers to be registered, the app must be accessed over HTTPS, not HTTP.
+Browsers ignore service workers on pages that are served over an insecure connection.
+The reason is that service workers are quite powerful, so extra care needs to be taken to ensure the service worker script has not been tampered with.
 
-There is one exception to this rule: To make local development easier, browsers do _not_ require a secure connection when accessing an app on `localhost`.
+There is one exception to this rule: to make local development easier, browsers do _not_ require a secure connection when accessing an app on `localhost`.
+
+### Browser support
+
+To benefit from the Angular service worker, your app must run in a web browser that supports service workers in general.
+Currently, service workers are supported in the latest versions of Chrome, Firefox, Edge, Safari, Opera, UC Browser (Android version) and Samsung Internet.
+Browsers like IE and Opera Mini do not support service workers.
+
+If the user is accessing your app via a browser that does not support service workers, the service worker is not registered and related behavior such as offline cache management and push notifications does not happen.
+More specifically:
+
+* The browser does not download the service worker script and `ngsw.json` manifest file.
+* Active attempts to interact with the service worker, such as calling `SwUpdate.checkForUpdate()`, return rejected promises.
+* The observable events of related services, such as `SwUpdate.available`, are not triggered.
+
+It is highly recommended that you ensure that your app works even without service worker support in the browser.
+Although an unsupported browser ignores service worker caching, it will still report errors if the app attempts to interact with the service worker.
+For example, calling `SwUpdate.checkForUpdate()` will return rejected promises.
+To avoid such an error, you can check whether the Angular service worker is enabled using `SwUpdate.isEnabled()`.
+
+To learn more about other browsers that are service worker ready, see the [Can I Use](https://caniuse.com/#feat=serviceworkers) page and [MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
 ## 関連資料
 
@@ -45,7 +67,6 @@ Service Workerの一般的な情報については、[Service Workerの紹介](h
 
 このドキュメンテーションの続きでは、Service WorkerをAngularに実装することに取り組みます。
 
-## もっとAngular Service Workerを知りたい
+## 次のステップへ
 
-次の記事がお勧めです。
-* [Service Workerを始める](guide/service-worker-getting-started)
+To begin using Angular service workers, see [Getting Started with service workers](guide/service-worker-getting-started).

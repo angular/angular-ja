@@ -191,7 +191,7 @@ For our example builder, we expect the `options` value to be a `JsonObject` with
 
 We can provide the following schema for type validation of these values.
 
-<code-example format="." language="json" linenums="false">
+<code-example language="json">
 
 {
   "$schema": "http://json-schema.org/schema",
@@ -222,7 +222,7 @@ To link our builder implementation with its schema and name, we need to create a
 
 Create a file named `builders.json` file that looks like this.
 
-<code-example format="." language="json" linenums="false">
+<code-example language="json">
 
 {
   "builders": {
@@ -238,7 +238,7 @@ Create a file named `builders.json` file that looks like this.
 
 In the `package.json` file, add a `builders` key that tells the Architect tool where to find our builder definition file.
 
-<code-example format="." language="json" linenums="false">
+<code-example language="json">
 
 {
   "name": "@example/command-runner",
@@ -253,11 +253,11 @@ In the `package.json` file, add a `builders` key that tells the Architect tool w
 </code-example>
 
 The official name of our builder is now ` @example/command-runner:command`.
-The first part  of this is the package name (resolved using node resolution), and the second part is the builder name (resolved using the `builder.json` file).
+The first part  of this is the package name (resolved using node resolution), and the second part is the builder name (resolved using the `builders.json` file).
 
 Using one of our `options` is very straightforward, we did this in the previous section when we accessed `options.command`.
 
-<code-example format="." language="typescript" linenums="false">
+<code-example language="typescript">
     context.reportStatus(`Executing "${options.command}"...`);
     const child = childProcess.spawn(options.command, options.args, { stdio: 'pipe' });
 
@@ -274,33 +274,33 @@ The Architect tool uses the target definition to resolve input options for a giv
 The  `angular.json` file has a section for each project, and the "architect" section of each project configures targets for builders used by CLI commands such as 'build', 'test', and 'lint'.
 By default, for example, the `build` command runs the builder  `@angular-devkit/build-angular:browser` to perform the build task, and passes in default option values as specified for the `build` target in `angular.json`.
 
-<code-example format="." language="json" linenums="false">
+<code-example language="json">
 {
   "myApp": {
     ...
     "architect": {
-        "build": {
-             "builder": "@angular-devkit/build-angular:browser",
-             "options": {
-            "outputPath": "dist/myApp",
-            "index": "src/index.html",
-        ...
-   },
-          "configurations": {
-            "production": {
-                 "fileReplacements": [
-                    {
-                         "replace": "src/environments/environment.ts",
-                         "with": "src/environments/environment.prod.ts"
-                    }
-                 ],
-               "optimization": true,
-               "outputHashing": "all",
-      ...
-            }
-             }
+      "build": {
+        "builder": "@angular-devkit/build-angular:browser",
+        "options": {
+          "outputPath": "dist/myApp",
+          "index": "src/index.html",
+          ...
         },
-       ...
+        "configurations": {
+          "production": {
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            ...
+          }
+        }
+      },
+      ...
 
 </code-example>
 
@@ -361,7 +361,7 @@ npm install @example/command-runner
 
 If we create a new project with `ng new builder-test`, the generated `angular.json` file looks something like this, with only default builder configurations.
 
-<code-example format="." language="json" linenums="false">
+<code-example language="json">
 
 {
   // ...
@@ -413,21 +413,19 @@ We need to update the `angular.json` file to add a target for this builder to th
 
 * The configurations key is optional, we'll leave it out for now.
 
-<code-example format="." language="json" linenums="false">
+<code-example language="json">
 
 {
   "projects": {
     "builder-test": {
       "architect": {
-        "builder-test": {
-          "touch": {
-            "builder": "@example/command-runner:command",
-            "options": {
-              "command": "touch",
-              "args": [
-                "src/main.ts"
-              ]
-            }
+        "touch": {
+          "builder": "@example/command-runner:command",
+          "options": {
+            "command": "touch",
+            "args": [
+              "src/main.ts"
+            ]
           }
         },
         "build": {
@@ -495,16 +493,16 @@ Use integration testing for your builder, so that you can use the Architect sche
 Here’s an example of a test that runs the command builder.
 The test uses the builder to run the `ls` command, then validates that it ran successfully and listed the proper files.
 
-<code-example format="." language="typescript" linenums="false">
+<code-example language="typescript">
 
-import { Architect, ArchitectHost } from '@angular-devkit/architect';
+import { Architect } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 // Our builder forwards the STDOUT of the command to the logger.
 import { logging, schema } from '@angular-devkit/core';
 
 describe('Command Runner Builder', () => {
   let architect: Architect;
-  let architectHost: ArchitectHost;
+  let architectHost: TestingArchitectHost;
 
   beforeEach(async () => {
     const registry = new schema.CoreSchemaRegistry();

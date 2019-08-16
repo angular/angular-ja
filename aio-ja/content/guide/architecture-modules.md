@@ -23,7 +23,7 @@ NgModuleは`@NgModule`で装飾されたクラスとして定義されていま�
 
 単純なルートNgModuleの定義は次のとおりです。
 
-<code-example path="architecture/src/app/mini-app.ts" region="module" header="src/app/app.module.ts" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="module" header="src/app/app.module.ts"></code-example>
 
 <div class="alert is-helpful">
 
@@ -69,9 +69,9 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 モジュールは、いくつかのオブジェクトを`export`キーワードでマークすることによって、それらを公開することを宣言します。
 他のJavaScriptモジュールはimportステートメントを使用して、他のモジュールのパブリックオブジェクトにアクセスします。
 
-<code-example path="architecture/src/app/app.module.ts" region="imports" linenums="false"></code-example>
+<code-example path="architecture/src/app/app.module.ts" region="imports"></code-example>
 
-<code-example path="architecture/src/app/app.module.ts" region="export" linenums="false"></code-example>
+<code-example path="architecture/src/app/app.module.ts" region="export"></code-example>
 
 <div class="alert is-helpful">
   <a href="http://exploringjs.com/es6/ch_modules.html">ウェブ上のJavaScriptモジュールシステムの詳細をご覧ください。</a>
@@ -87,17 +87,17 @@ Angularは、JavaScriptモジュールのコレクションを読み込みます
 
 たとえば、Angularの`Component`デコレーターを`@angular/core`ライブラリから次のようにインポートします。
 
-<code-example path="architecture/src/app/app.component.ts" region="import" linenums="false"></code-example>
+<code-example path="architecture/src/app/app.component.ts" region="import"></code-example>
 
 また、JavaScriptのimportステートメントを使用してAngular *ライブラリ* からNgModuleをインポートします。
 たとえば、次のコードは `BrowserModule` NgModuleを ` platform-browser` ライブラリからインポートします。
 
-<code-example path="architecture/src/app/mini-app.ts" region="import-browser-module" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="import-browser-module"></code-example>
 
 上の単純なルートモジュールの例では、アプリケーションモジュールは `BrowserModule`内のものを必要とします。
 そのものにアクセスするには、このように`@NgModule`メタデータの`imports`に追加します。
 
-<code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports"></code-example>
 
 このように、AngularとJavaScriptのモジュールシステムを *共に* 使用しています。2つのシステムはいずれも"imports"と"exports"という語彙を共通して持っており混乱しやすいですが、使用するにつれてコンテキストの違いに慣れるでしょう。
 

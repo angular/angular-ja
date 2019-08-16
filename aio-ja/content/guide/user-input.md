@@ -18,9 +18,7 @@ DOMイベントにバインドするには、DOMイベント名をカッコで�
 
 次の例は、クリックハンドラーを実装するイベントバインディングを示しています。
 
-<code-example path="user-input/src/app/click-me.component.ts" region="click-me-button" header="src/app/click-me.component.ts" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/click-me.component.ts" region="click-me-button" header="src/app/click-me.component.ts"></code-example>
 
 {@a click}
 
@@ -33,9 +31,7 @@ DOMイベントにバインドするには、DOMイベント名をカッコで�
 それは通常、テンプレートを制御するAngularコンポーネントです。 
 上の例はHTMLの1行を示していますが、HTMLはより大きなコンポーネントに属しています。
 
-<code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts"></code-example>
 
 
 
@@ -48,18 +44,14 @@ DOMイベントは、コンポーネントにとって有益な情報のペイ�
 
 次のコードは、`keyup`イベントをリッスンし、イベントペイロード（`$event`）全体をコンポーネントイベントハンドラーに渡します。
 
-<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-template" header="src/app/keyup.components.ts (template v.1)" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-template" header="src/app/keyup.components.ts (template v.1)"></code-example>
 
 
 
 ユーザーがキーを押して離すと、`keyup`イベントが発生し、
 Angularは対応するDOMイベントオブジェクトをコンポーネントの`onKey()`メソッドに渡される`$event`変数に提供します。
 
-<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class-no-type" header="src/app/keyup.components.ts (class v.1)" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class-no-type" header="src/app/keyup.components.ts (class v.1)"></code-example>
 
 
 
@@ -118,9 +110,7 @@ Angularは対応するDOMイベントオブジェクトをコンポーネント�
 
 次の例では、メソッドを型を使って書き換えます。
 
-<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class" header="src/app/keyup.components.ts (class v.1 - typed )" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class" header="src/app/keyup.components.ts (class v.1 - typed )"></code-example>
 
 
 
@@ -145,9 +135,7 @@ Angularの[**テンプレート参照変数**](guide/template-syntax#ref-vars)�
 
 次の例では、テンプレート参照変数を使用して、単純なテンプレートにキーストロークループバックを実装しています。
 
-<code-example path="user-input/src/app/loop-back.component.ts" region="loop-back-component" header="src/app/loop-back.component.ts" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/loop-back.component.ts" region="loop-back-component" header="src/app/loop-back.component.ts"></code-example>
 
 
 
@@ -185,9 +173,7 @@ Angularは、アプリケーションがキーストロークなどの非同期�
 `$event`オブジェクトを調べるよりも、テンプレート参照変数を使って入力ボックスに行く方が簡単です。
 テンプレート参照変数を使用してユーザーの入力を取得する、以前の`keyup`の例を書き直しました。
 
-<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-2" header="src/app/keyup.components.ts (v2)" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-2" header="src/app/keyup.components.ts (v2)"></code-example>
 
 
 
@@ -204,9 +190,7 @@ Angularは、アプリケーションがキーストロークなどの非同期�
 もっと簡単な方法は、Angularの`keyup.enter`疑似イベントにバインドすることです。 
 Angularは、ユーザーが_Enter_キーを押したときにのみイベントハンドラーを呼び出します。
 
-<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-3" header="src/app/keyup.components.ts (v3)" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-3" header="src/app/keyup.components.ts (v3)"></code-example>
 
 
 
@@ -226,9 +210,7 @@ Angularは、ユーザーが_Enter_キーを押したときにのみイベント
 
 この問題を解決するには、_Enter_キーと_blur_イベントの両方をリッスンします。
 
-<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-4" header="src/app/keyup.components.ts (v4)" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-4" header="src/app/keyup.components.ts (v4)"></code-example>
 
 
 
@@ -250,9 +232,7 @@ Angularは、ユーザーが_Enter_キーを押したときにのみイベント
 以下は「Little Tour of Heroes」のコンポーネントです。
 
 
-<code-example path="user-input/src/app/little-tour.component.ts" region="little-tour" header="src/app/little-tour.component.ts" linenums="false">
-
-</code-example>
+<code-example path="user-input/src/app/little-tour.component.ts" region="little-tour" header="src/app/little-tour.component.ts"></code-example>
 
 
 

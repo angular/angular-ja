@@ -134,7 +134,7 @@ Angular インジェクターを自分で作成することはめったにあり
 
 コンポーネントはディレクティブであり、`providers` オプションは `@Directive()` から継承されます。コンポーネントと同じレベルでディレクティブとパイプのためのプロバイダーを設定することもできます。
 
-[プロバイダーを設定する場所](guide/hierarchical-dependency-injection#where-to-register)の詳細を学んでください。
+[プロバイダーを設定する場所](guide/hierarchical-dependency-injection)の詳細を学んでください。
 
 </div>
 
@@ -196,8 +196,7 @@ Angular は定期的に入れ子になったインジェクターを作ります
 たとえば、テスト用に操作できるモックサービスを使用して新しい `HeroListComponent` 
 を作成できます。
 
-<code-example path="dependency-injection/src/app/test.component.ts" region="spec" header="src/app/test.component.ts" linenums="false">
-</code-example>
+<code-example path="dependency-injection/src/app/test.component.ts" region="spec" header="src/app/test.component.ts"></code-example>
 
 <div class="alert is-helpful">
 
@@ -259,8 +258,7 @@ Angular は、*クラスに何らかのデコレーターがある場合にの�
 クラス*型*はそれ自身の検索キーとして機能します。
 ここではトークンとして `HeroService` 型を指定することで、インジェクターから直接 `HeroService` を取得します。
 
-<code-example path="dependency-injection/src/app/injector.component.ts" region="get-hero-service" header="src/app/injector.component.ts" linenums="false">
-</code-example>
+<code-example path="dependency-injection/src/app/injector.component.ts" region="get-hero-service" header="src/app/injector.component.ts"></code-example>
 
 注入されるクラスベースの依存関係を必要とするコンストラクターを書くときの動作は似ています。
 `HeroService` クラス型でコンストラクターパラメータを定義すると、
@@ -287,8 +285,7 @@ Angular に伝えることができます。
 <code-example path="dependency-injection/src/app/providers.component.ts" region="import-optional">
 </code-example>
 
-<code-example path="dependency-injection/src/app/providers.component.ts" region="provider-10-ctor" linenums="false">
-</code-example>
+<code-example path="dependency-injection/src/app/providers.component.ts" region="provider-10-ctor"></code-example>
 
 `@Optional()` を使用する場合、コードは null 値に対応している必要があります。
 logger プロバイダーをどこにも登録していない場合、インジェクターは `logger` の値を 

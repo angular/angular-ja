@@ -35,8 +35,7 @@ Angularのフォームは、HTMLベースのフォームの標準機能を利用
 
 1. チェックアウト中に、アプリはユーザーに名前と住所の入力を求めます。後でその情報を収集できるように、 `FormBuilder#group()` メソッドを使用して、 `name` フィールドと `address` フィールドを含むフォームモデルで `checkoutForm` プロパティを設定します。
 
-    <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts" region="checkout-form-group" linenums="false">
-    </code-example>
+    <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts" region="checkout-form-group"></code-example>
 
 1. チェックアウト処理では、ユーザーはフォームデータ（自分の名前と住所）を送信できる必要があります。 注文が送信されると、フォームはリセットされ、カートはクリアされます。
 

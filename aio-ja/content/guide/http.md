@@ -26,7 +26,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/app.module.ts"
   region="sketch"
-  header="app/app.module.ts (excerpt)" linenums="false">
+  header="app/app.module.ts (excerpt)">
 </code-example>
 
 `HttpClientModule`を`AppModule`にインポートしたら、次の`ConfigService`の例に示すように`HttpClient`をアプリケーションクラスに注入できるようになります。
@@ -34,7 +34,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="proto"
-  header="app/config/config.service.ts (excerpt)" linenums="false">
+  header="app/config/config.service.ts (excerpt)">
 </code-example>
 
 ## JSONデータを取得する
@@ -44,7 +44,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 
 <code-example 
   path="http/src/assets/config.json"
-  header="assets/config.json" linenums="false">
+  header="assets/config.json">
 </code-example>
 
 `ConfigService`はこのファイルを`HttpClient`の`get()`メソッドでフェッチします。
@@ -52,7 +52,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="getConfig_1"
-  header="app/config/config.service.ts (getConfig v.1)" linenums="false">
+  header="app/config/config.service.ts (getConfig v.1)">
 </code-example>
 
 `ConfigComponent`というコンポーネントは、`ConfigService`を注入し`getConfig`サービスメソッドを呼び出します。
@@ -60,7 +60,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.component.ts"
   region="v1"
-  header="app/config/config.component.ts (showConfig v.1)" linenums="false">
+  header="app/config/config.component.ts (showConfig v.1)">
 </code-example>
 
 サービスメソッドは構成データの`Observable`を返すので、コンポーネントはメソッドの戻り値を**購読**します。
@@ -85,7 +85,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 
 <code-example 
   path="http/src/app/config/config.component.ts"
-  region="v1_callback" linenums="false">
+  region="v1_callback">
 </code-example>
 
 `data.heroesUrl`と書くことはできません。TypeScriptは、サービスの`data`オブジェクトに`heroesUrl`プロパティがないと正しく警告するからです。
@@ -98,7 +98,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 
 <code-example 
   path="http/src/app/config/config.service.ts"
-  region="config-interface" linenums="false">
+  region="config-interface">
 </code-example>
 
 次に、そのインターフェースをサービスの`HttpClient.get()`呼び出しの型パラメーターとして指定します。
@@ -106,7 +106,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="getConfig_2" 
-  header="app/config/config.service.ts (getConfig v.2)" linenums="false">
+  header="app/config/config.service.ts (getConfig v.2)">
 </code-example>
 
 更新されたコンポーネントメソッドのコールバックは、より簡単で安全な型指定されたデータオブジェクトを受け取ります。
@@ -114,7 +114,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.component.ts"
   region="v2"
-  header="app/config/config.component.ts (showConfig v.2)" linenums="false">
+  header="app/config/config.component.ts (showConfig v.2)">
 </code-example>
 
 ### レスポンス全体を読む
@@ -126,7 +126,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 
 <code-example 
   path="http/src/app/config/config.service.ts"
-  region="getConfigResponse" linenums="false">
+  region="getConfigResponse">
 </code-example>
 
 今度は`HttpClient.get()`は、JSONデータだけではなく、型付けされた`HttpResponse`の`Observable`を返します。
@@ -137,7 +137,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
   path="http/src/app/config/config.component.ts"
   region="showConfigResponse" 
   header="app/config/config.component.ts (showConfigResponse)"
-  linenums="false">
+ >
 </code-example>
 
 ご覧のように、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
@@ -153,7 +153,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
   path="http/src/app/config/config.component.ts"
   region="v3" 
   header="app/config/config.component.ts (showConfig v.3 with error handling)"
-  linenums="false">
+ >
 </code-example>
 
 データアクセスが失敗したときにユーザーに何らかのフィードバックを与えることは、確かによい考えです。
@@ -179,7 +179,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="handleError" 
-  header="app/config/config.service.ts (handleError)" linenums="false">
+  header="app/config/config.service.ts (handleError)">
 </code-example>
 
 このハンドラーは、RxJSの[`ErrorObservable`](#rxjs)を使いやすいエラーメッセージとともに返します。
@@ -190,7 +190,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="getConfig_3" 
-  header="app/config/config.service.ts (getConfig v.3 with error handler)" linenums="false">
+  header="app/config/config.service.ts (getConfig v.3 with error handler)">
 </code-example>
 
 ### `retry()`
@@ -207,7 +207,7 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="getConfig" 
-  header="app/config/config.service.ts (getConfig with retry)" linenums="false">
+  header="app/config/config.service.ts (getConfig with retry)">
 </code-example>
 
 {@a rxjs}
@@ -228,7 +228,7 @@ RxJS自体はこのガイドの範囲外です。 あなたはウェブ上で多
 <code-example 
   path="http/src/app/config/config.service.ts"
   region="rxjs-imports" 
-  header="app/config/config.service.ts (RxJS imports)" linenums="false">
+  header="app/config/config.service.ts (RxJS imports)">
 </code-example>
 
 ## JSON以外のデータをリクエストする
@@ -239,7 +239,7 @@ RxJS自体はこのガイドの範囲外です。 あなたはウェブ上で多
 <code-example 
   path="http/src/app/downloader/downloader.service.ts"
   region="getTextFile" 
-  header="app/downloader/downloader.service.ts (getTextFile)" linenums="false">
+  header="app/downloader/downloader.service.ts (getTextFile)">
 </code-example>
 
 `HttpClient.get()`は`responseType`オプションのためにデフォルトのJSONではなく文字列を返します。
@@ -251,7 +251,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 <code-example 
   path="http/src/app/downloader/downloader.component.ts"
   region="download" 
-  header="app/downloader/downloader.component.ts (download)" linenums="false">
+  header="app/downloader/downloader.component.ts (download)">
 </code-example>
 
 ## サーバーにデータを送る
@@ -274,7 +274,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
   region="http-options" 
-  header="app/heroes/heroes.service.ts (httpOptions)" linenums="false">
+  header="app/heroes/heroes.service.ts (httpOptions)">
 </code-example>
 
 ### POSTリクエストを行う
@@ -285,7 +285,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
   region="addHero" 
-  header="app/heroes/heroes.service.ts (addHero)" linenums="false">
+  header="app/heroes/heroes.service.ts (addHero)">
 </code-example>
 
 `HttpClient.post()`メソッドは、型パラメーター（サーバーが新しいヒーローを返すことを期待しています）を持っていてリソースURLを必要とする点で`get()`と似ています。
@@ -303,7 +303,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
   region="add-hero-subscribe" 
-  header="app/heroes/heroes.component.ts (addHero)" linenums="false">
+  header="app/heroes/heroes.component.ts (addHero)">
 </code-example>
 
 サーバーが新しくヒーローを追加することに成功してレスポンスすると、コンポーネントはそのヒーローを表示中の`heroes`リストに追加します。
@@ -315,7 +315,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
   region="deleteHero" 
-  header="app/heroes/heroes.service.ts (deleteHero)" linenums="false">
+  header="app/heroes/heroes.service.ts (deleteHero)">
 </code-example>
 
 `HeroesComponent`は、このサービスメソッドによって返された`Observable`を購読することによって、実際のDELETEオペレーションを開始します。
@@ -323,7 +323,7 @@ RxJSの（「盗聴」のような）`tap`オペレーターは、Obervableを�
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
   region="delete-hero-subscribe" 
-  header="app/heroes/heroes.component.ts (deleteHero)" linenums="false">
+  header="app/heroes/heroes.component.ts (deleteHero)">
 </code-example>
 
 コンポーネントは削除操作の結果を期待していないため、コールバックなしで購読します。結果を使用していなくても、依然として購読する必要があります。 `subscribe()`メソッドを呼び出すと、observableが _実行_ されます。これは、DELETEリクエストを開始するものです。
@@ -337,7 +337,7 @@ _subscribe()_ を呼ばなければ何も起こりません。 `HeroesService.de
 
 <code-example 
   path="http/src/app/heroes/heroes.component.ts"
-  region="delete-hero-no-subscribe" linenums="false">
+  region="delete-hero-no-subscribe">
 </code-example>
 
 {@a always-subscribe}
@@ -382,7 +382,7 @@ req.subscribe();
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
   region="updateHero" 
-  header="app/heroes/heroes.service.ts (updateHero)" linenums="false">
+  header="app/heroes/heroes.service.ts (updateHero)">
 </code-example>
 
 [上記で説明](#always-subscribe)した理由で、呼び出し元（この場合は`HeroesComponent.update()`）は、リクエストを開始するために`HttpClient.put()`から返されたObservableを`subscribe()`する必要があります。
@@ -409,7 +409,7 @@ req.subscribe();
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
-  region="update-headers" linenums="false">
+  region="update-headers">
 </code-example>
 
 #### URLパラメータ
@@ -419,7 +419,7 @@ URL検索パラメータを追加する方法も同様です。
 
 <code-example 
   path="http/src/app/heroes/heroes.service.ts"
-  region="searchHeroes" linenums="false">
+  region="searchHeroes">
 </code-example>
 
 検索語であるtermがある場合、コードは、HTML URLエンコードされた検索パラメータを使用してオプションオブジェクトを作成します。
@@ -512,7 +512,7 @@ _HTTP Interception_は`@angular/common/http`の主要な機能です。
 <code-example 
   path="http/src/app/http-interceptors/noop-interceptor.ts"
   header="app/http-interceptors/noop-interceptor.ts"
-  linenums="false">
+ >
 </code-example>
 
 `intercept`メソッドは、リクエストを最終的にHTTPレスポンスを含む`Observable`に変換します。
@@ -559,7 +559,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 
 <code-example 
   path="http/src/app/http-interceptors/index.ts"
-  region="noop-provider" linenums="false">
+  region="noop-provider">
 </code-example>
 
 `multi：true`オプションに注意してください。
@@ -573,7 +573,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 <code-example 
   path="http/src/app/http-interceptors/index.ts"
   region="interceptor-providers"
-  header="app/http-interceptors/index.ts" linenums="false">
+  header="app/http-interceptors/index.ts">
 </code-example>
 
 次に、それをインポートして`AppModule`の _providers配列_ に追加します。
@@ -581,7 +581,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 <code-example 
   path="http/src/app/app.module.ts"
   region="interceptor-providers"
-  header="app/app.module.ts (interceptor providers)" linenums="false">
+  header="app/app.module.ts (interceptor providers)">
 </code-example>
 
 新しいインターセプターを作成するとき、それらを`httpInterceptorProviders`配列に追加するだけです。`AppModule`を開く必要はありません。
@@ -637,7 +637,7 @@ TypeScriptは、`HttpRequest`の読み取り専用プロパティにセットで
 <code-example 
   path="http/src/app/http-interceptors/ensure-https-interceptor.ts"
   region="excerpt" 
-  header="app/http-interceptors/ensure-https-interceptor.ts (excerpt)" linenums="false">
+  header="app/http-interceptors/ensure-https-interceptor.ts (excerpt)">
 </code-example>
 
 `clone()`メソッドのハッシュ引数は、他のものをコピーしながらリクエストの特定のプロパティを変更することを可能にします。
@@ -656,7 +656,7 @@ TypeScriptは、`HttpRequest`の読み取り専用プロパティにセットで
 <code-example 
   path="http/src/app/http-interceptors/trim-name-interceptor.ts"
   region="excerpt" 
-  header="app/http-interceptors/trim-name-interceptor.ts (excerpt)" linenums="false">
+  header="app/http-interceptors/trim-name-interceptor.ts (excerpt)">
 </code-example>
 
 ##### リクエストボディを消去する
@@ -728,7 +728,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 <code-example 
   path="http/src/app/http-interceptors/caching-interceptor.ts"
   region="v1" 
-  header="app/http-interceptors/caching-interceptor.ts)" linenums="false">
+  header="app/http-interceptors/caching-interceptor.ts)">
 </code-example>
 
 `isCachable()`関数はリクエストがキャッシュ可能かどうかを決定します。
@@ -819,7 +819,7 @@ _cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー*
 <code-example 
   path="http/src/app/uploader/uploader.service.ts"
   region="upload-body" 
-  header="app/uploader/uploader.service.ts (upload body)" linenums="false">
+  header="app/uploader/uploader.service.ts (upload body)">
 </code-example>
 
 `getEventMessage`メソッドは、イベントストリーム中の各タイプの`HttpEvent`を解釈します。
@@ -827,7 +827,7 @@ _cache-then-refresh_オプションは、**カスタム `x-refresh`ヘッダー*
 <code-example 
   path="http/src/app/uploader/uploader.service.ts"
   region="getEventMessage" 
-  header="app/uploader/uploader.service.ts (getEventMessage)" linenums="false">
+  header="app/uploader/uploader.service.ts (getEventMessage)">
 </code-example>
 
 <div class="alert is-helpful">
@@ -867,7 +867,7 @@ HTTPリクエストを実行するとき、インターセプターはデフォ�
 <code-example 
   path="http/src/app/app.module.ts"
   region="xsrf" 
-  linenums="false">
+ >
 </code-example>
 
 {@a testing-http-requests}
@@ -901,7 +901,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="imports" 
-  header="app/testing/http-client.spec.ts (imports)" linenums="false">
+  header="app/testing/http-client.spec.ts (imports)">
 </code-example>
 
 次に`HttpClientTestingModule`を`TestBed`に追加し_テスト環境のサービス_の設定を続けます。
@@ -909,7 +909,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="setup" 
-  header="app/testing/http-client.spec.ts(setup)" linenums="false">
+  header="app/testing/http-client.spec.ts(setup)">
 </code-example>
 
 テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットするでしょう。
@@ -923,7 +923,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="get-test" 
-  header="app/testing/http-client.spec.ts(httpClient.get)" linenums="false">
+  header="app/testing/http-client.spec.ts(httpClient.get)">
 </code-example>
 
 最後のステップは、まだ未解決のリクエストが残ってないことを確認することです。これは、`afterEach()`ステップに移動して行うことが一般的です。
@@ -931,7 +931,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="afterEach" 
-  linenums="false">
+ >
 </code-example>
 
 #### カスタムリクエストの待ち受け
@@ -942,7 +942,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="predicate" 
-  linenums="false">
+ >
 </code-example>
 
 以前の`expectOne()`と同様に、0または2以上のリクエストがこの条件を満たしていれば、テストは失敗します。
@@ -956,7 +956,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="multi-request" 
-  linenums="false">
+ >
 </code-example>
 
 ### エラーのテスト
@@ -968,7 +968,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 <code-example 
   path="http/src/testing/http-client.spec.ts"
   region="404" 
-  linenums="false">
+ >
 </code-example>
 
 あるいは、`ErrorEvent`と共に`request.error()`を呼び出すこともできます。
@@ -976,5 +976,5 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 <code-example
   path="http/src/testing/http-client.spec.ts"
   region="network-error"
-  linenums="false">
+ >
 </code-example>

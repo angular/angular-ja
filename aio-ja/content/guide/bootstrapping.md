@@ -102,19 +102,16 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 これらの3つのステップは次のようになります。ディレクティブを作成するファイルで、ディレクティブをエクスポートします。
 `ItemDirective`という名前の次の例は、CLIが生成する`item.directive.ts`ファイルに生成するデフォルトのディレクティブ構造です。
 
-<code-example path="bootstrapping/src/app/item.directive.ts" region="directive" header="src/app/item.directive.ts" linenums="false">
-</code-example>
+<code-example path="bootstrapping/src/app/item.directive.ts" region="directive" header="src/app/item.directive.ts"></code-example>
 
 重要な点は、別の場所にインポートできるようにエクスポートする必要があることです。
 次に、JavaScriptのimport文を使用してNgModule、この例では`app.module.ts`にインポートします。
 
-<code-example path="bootstrapping/src/app/app.module.ts" region="directive-import" header="src/app/app.module.ts" linenums="false">
-</code-example>
+<code-example path="bootstrapping/src/app/app.module.ts" region="directive-import" header="src/app/app.module.ts"></code-example>
 
 そして、同じファイルで`@NgModule`の`declarations`配列に追加します。
 
-<code-example path="bootstrapping/src/app/app.module.ts" region="declarations" header="src/app/app.module.ts" linenums="false">
-</code-example>
+<code-example path="bootstrapping/src/app/app.module.ts" region="declarations" header="src/app/app.module.ts"></code-example>
 
 これで`ItemDirective`をコンポーネントで使えるようになりました。この例では`AppModule`を使いましたが、フィーチャーモジュールでも同じようにできます。ディレクティブの詳細については、[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)を参照してください。また、[パイプ](guide/pipes)やコンポーネントにも同じテクニックを使用します。
 

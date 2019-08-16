@@ -1,22 +1,12 @@
 # フィーチャーモジュールの遅延ロード
 
-#### 前提条件
-次の基本的な理解:
-* [フィーチャーモジュール](guide/feature-modules)
-* [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
-* [よく使用されるモジュール](guide/frequent-ngmodules)
-* [フィーチャーモジュールの種類](guide/module-types)
-* [ルーティングとナビゲーション](guide/router)
-
-このページで説明している、2つの遅延ロードされたモジュールの最終的なサンプルについては
-<live-example></live-example>を参照してください。
-
-<hr>
-
 ## 大まかな概要
 
 デフォルトでは、NgModuleは積極的にロードされます。つまり、アプリがロードされるとすぐに、すぐに必要であるかどうかにかかわらず、すべてのNgModuleがロードされます。多数のルートをもつ大規模なアプリケーションの場合は、遅延ロード（必要に応じてNgModuleをロードする設計パターン）を検討してください。
 遅延ロードは、初期バンドルサイズを小さくするのに役立ちます。これにより、ロード時間が短縮されます。
+
+このページで説明している、2つの遅延ロードされたモジュールの最終的なサンプルについては
+<live-example></live-example>を参照してください。
 
 遅延ロードするフィーチャーモジュールをセットアップするための主なステップが3つあります:
 
@@ -97,9 +87,7 @@ ng generate component orders/order-list
 ブラウザ内でモジュールに簡単にナビゲートすることができるようにしてみましょう:
 
 
-<code-example path="lazy-loading-ngmodules/src/app/app.component.html" region="app-component-template" header="src/app/app.component.html" linenums="false">
-
-</code-example>
+<code-example path="lazy-loading-ngmodules/src/app/app.component.html" region="app-component-template" header="src/app/app.component.html"></code-example>
 
 
 
@@ -137,9 +125,7 @@ ng serve
 `AppRoutingModule`内の`routes`配列を次のように更新してください:
 
 
-<code-example path="lazy-loading-ngmodules/src/app/app-routing.module.ts" region="const-routes" header="src/app/app-routing.module.ts" linenums="false">
-
-</code-example>
+<code-example path="lazy-loading-ngmodules/src/app/app-routing.module.ts" region="const-routes" header="src/app/app-routing.module.ts"></code-example>
 
 
 インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に続けてブラウザの組み込みの `import('...')` 構文を使った関数を指定することに注意してください。インポートパスはそのモジュールへの相対パスです。
@@ -149,9 +135,7 @@ ng serve
 次に、`customers.module.ts`を見てください。もしあなたがCLIを使用していて、このページに記載されている手順にしたがっている場合は、ここで何もする必要はありません。フィーチャーモジュールは、`AppRoutingModule`とフィーチャールーティングモジュール間のコネクターのようなものになります。`AppRoutingModule`が`CustomersModule`をインポートして、順に`CustomersModule`が`CustomersRoutingModule`をインポートします。
 
 
-<code-example path="lazy-loading-ngmodules/src/app/customers/customers.module.ts" region="customers-module" header="src/app/customers/customers.module.ts" linenums="false">
-
-</code-example>
+<code-example path="lazy-loading-ngmodules/src/app/customers/customers.module.ts" region="customers-module" header="src/app/customers/customers.module.ts"></code-example>
 
 
 
@@ -162,18 +146,14 @@ ng serve
 
 次のステップでは`customers-routing.module.ts`を更新します。まず、JavaScriptのインポート文を使用して、ファイルの先頭にコンポーネントをインポートしてください。そのあとに、`CustomerListComponent`へのルート(route)を追加してください。
 
-<code-example path="lazy-loading-ngmodules/src/app/customers/customers-routing.module.ts" region="customers-routing-module" header="src/app/customers/customers-routing.module.ts" linenums="false">
-
-</code-example>
+<code-example path="lazy-loading-ngmodules/src/app/customers/customers-routing.module.ts" region="customers-routing-module" header="src/app/customers/customers-routing.module.ts"></code-example>
 
 
 `path`に空文字列が設定されていることに注意してください。これは、`AppRoutingModule`内のパスがすでに`customers`に設定されているからです。つまり、この`CustomersRoutingModule`内のルート(route)はすでに`customers`コンテキスト内にあります。このルーティングモジュール内のすべてのルート(route)は、子ルートとなります。
 
 `orders-routing.module.ts`でも`OrdersListComponent`をインポートし、Routes配列を設定するこの最終ステップを繰り返してください:
 
-<code-example path="lazy-loading-ngmodules/src/app/orders/orders-routing.module.ts" region="orders-routing-module-detail" header="src/app/orders/orders-routing.module.ts (excerpt)" linenums="false">
-
-</code-example>
+<code-example path="lazy-loading-ngmodules/src/app/orders/orders-routing.module.ts" region="orders-routing-module-detail" header="src/app/orders/orders-routing.module.ts (excerpt)"></code-example>
 
 さて、ブラウザでアプリケーションを表示すると、3つのボタンがあなたを個々のモジュールに連れて行ってくれます。
 
@@ -226,3 +206,5 @@ CLIは、フィーチャールーティングモジュールにも`RouterModule.
 * [ルーティングとナビゲーション](guide/router)
 * [プロバイダー](guide/providers)
 * [フィーチャーモジュールの種類](guide/module-types)
+* [Route-level code-splitting in Angular](https://web.dev/route-level-code-splitting-in-angular/)
+* [Route preloading strategies in Angular](https://web.dev/route-preloading-in-angular/)

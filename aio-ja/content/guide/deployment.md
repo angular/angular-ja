@@ -83,11 +83,12 @@ Another simple way to deploy your Angular app is to use [GitHub Pages](https://h
 Make a note of the user name and project name in GitHub.
 
 1. Build your project using Github project name, with the Angular CLI command [`ng build`](cli/build) and the options shown here:
-   <code-example language="none" class="code-shell">
 
-     ng build --prod --output-path docs --base-href /&lt;project_name&gt;/
+  <code-example language="none" class="code-shell">
 
-   </code-example>
+    ng build --prod --output-path docs --base-href /&lt;project_name&gt;/
+
+  </code-example>
 
 1. When the build is complete, make a copy of `docs/index.html` and name it `docs/404.html`.
 
@@ -151,17 +152,14 @@ The list is by no means exhaustive, but should provide you with a good starting 
 [rewrite rule](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) to the `.htaccess` file as shown
   (https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
 
-  <code-example format=".">
-
+  <code-example>
     RewriteEngine On
     &#35 If an existing asset or directory is requested go to it as it is
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
-    RewriteRule ^ - [L]
-
+    RewriteRule ^ - [L]<br>
     &#35 If the requested resource doesn't exist, use index.html
     RewriteRule ^ /index.html
-
   </code-example>
 
 
@@ -169,18 +167,15 @@ The list is by no means exhaustive, but should provide you with a good starting 
 [Front Controller Pattern Web Apps](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps),
 modified to serve `index.html`:
 
-  <code-example format=".">
-
-    try_files $uri $uri/ /index.html;
-
-  </code-example>
+  ```
+  try_files $uri $uri/ /index.html;
+  ```
 
 
 * [IIS](https://www.iis.net/): add a rewrite rule to `web.config`, similar to the one shown
 [here](http://stackoverflow.com/a/26152011/2116927):
 
-  <code-example format='.' linenums="false">
-
+  <code-example format='.' language="xml">
     &lt;system.webServer&gt;
       &lt;rewrite&gt;
         &lt;rules&gt;
@@ -195,7 +190,6 @@ modified to serve `index.html`:
         &lt;/rules&gt;
       &lt;/rewrite&gt;
     &lt;/system.webServer&gt;
-
   </code-example>
 
 
@@ -213,13 +207,11 @@ and to
 * [Firebase hosting](https://firebase.google.com/docs/hosting/): add a
 [rewrite rule](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites).
 
-  <code-example format=".">
-
+  <code-example language="json">
     "rewrites": [ {
       "source": "**",
       "destination": "/index.html"
     } ]
-
   </code-example>
 
 {@a cors}
@@ -411,7 +403,7 @@ Differential loading, which is supported by default in Angular CLI version 8 and
 
 Differential loading is a strategy where the CLI builds two separate bundles as part of your deployed application.
 
-* The first bundle contains modern ES1015 syntax, takes advantage of built-in support in modern browsers, ships less polyfills, and results in a smaller bundle size.
+* The first bundle contains modern ES2015 syntax, takes advantage of built-in support in modern browsers, ships less polyfills, and results in a smaller bundle size.
 
 * The second bundle contains code in the old ES5 syntax, along with all necessary polyfills. This results in a larger bundle size, but supports older browsers.
 
@@ -444,24 +436,20 @@ When you create a production build using [`ng build --prod`](cli/build), the CLI
 
 The `index.html` file is also modified during the build process to include script tags that enable differential loading. See the sample output below from the `index.html` file produced during a build using `ng build`.
 
-<code-example language="html" format="." linenums="false">
-
-<!-- ... -->
-<body>
-  <app-root></app-root>
-  <script src="runtime-es2015.js" type="module"></script>
-  <script src="runtime-es5.js" nomodule></script>
-  <script src="polyfills-es2015.js" type="module"></script>
-  <script src="polyfills-es5.js" nomodule></script>
-  <script src="styles-es2015.js" type="module"></script>
-  <script src="styles-es5.js" nomodule></script>
-  <script src="vendor-es2015.js" type="module"></script>
-  <script src="vendor-es5.js" nomodule></script>
-  <script src="main-es2015.js" type="module"></script>
-  <script src="main-es5.js" nomodule></script>
-</body>
-<!-- ... -->
-
+<code-example language="html">
+&lt;body>
+  &lt;app-root>&lt;/app-root>
+  &lt;script src="runtime-es2015.js" type="module">&lt;/script>
+  &lt;script src="runtime-es5.js" nomodule>&lt;/script>
+  &lt;script src="polyfills-es2015.js" type="module">&lt;/script>
+  &lt;script src="polyfills-es5.js" nomodule>&lt;/script>
+  &lt;script src="styles-es2015.js" type="module">&lt;/script>
+  &lt;script src="styles-es5.js" nomodule>&lt;/script>
+  &lt;script src="vendor-es2015.js" type="module">&lt;/script>
+  &lt;script src="vendor-es5.js" nomodule>&lt;/script>
+  &lt;script src="main-es2015.js" type="module">&lt;/script>
+  &lt;script src="main-es5.js" nomodule>&lt;/script>
+&lt;/body>
 </code-example>
 
 Each script tag has a `type="module"` or `nomodule` attribute. Browsers with native support for ES modules only load the scripts with the `module` type attribute and ignore scripts with the `nomodule` attribute. Legacy browsers only load the scripts with the `nomodule` attribute, and ignore the script tags with the `module` type that load ES modules.
@@ -491,7 +479,7 @@ not IE 9-11 # For IE 9-11 support, remove 'not'.
 
 The `tsconfig.json` looks like this:
 
-<code-example language="json" format="." linenums="false">
+<code-example language="json">
 
 {
   "compileOnSave": false,
@@ -522,7 +510,7 @@ By default, legacy browsers such as IE 9-11 are ignored, and the compilation tar
 
 <div class="alert is-important">
 
-   To see which browsers are supported with the above configuration, see which settings meet to your browser support requirements, see the [Browserslist compatibility page](https://browserl.ist/?q=%3E+0.5%25%2C+last+2+versions%2C+Firefox+ESR%2C+Chrome+41%2C+not+dead%2C+not+IE+9-11).
+   To see which browsers are supported with the above configuration, see which settings meet to your browser support requirements, see the [Browserslist compatibility page](https://browserl.ist/?q=%3E+0.5%25%2C+last+2+versions%2C+Firefox+ESR%2C+not+dead%2C+not+IE+9-11).
 
 </div>
 
@@ -562,7 +550,7 @@ To maintain the benefits of differential loading, however, a better option is to
 
 To do this for `ng serve`, create a new file, `tsconfig-es5.app.json` next to `tsconfig.app.json` with the following content.
 
-<code-example language="json" format="." linenums="false">
+<code-example language="json">
 
 {
  "extends": "./tsconfig.app.json",
@@ -575,7 +563,7 @@ To do this for `ng serve`, create a new file, `tsconfig-es5.app.json` next to `t
 
 In `angular.json` add two new configuration sections under the `build` and `serve` targets to point to the new TypeScript configuration.
 
-<code-example language="json" format="." linenums="false">
+<code-example language="json">
 
 "build": {
   "builder": "@angular-devkit/build-angular:browser",
@@ -622,7 +610,7 @@ ng serve --configuration es5
 
 Create a new file, `tsconfig-es5.spec.json` next to `tsconfig.spec.json` with the following content.
 
-<code-example language="json" format="." linenums="false">
+<code-example language="json">
 
 {
  "extends": "./tsconfig.spec.json",
@@ -633,7 +621,7 @@ Create a new file, `tsconfig-es5.spec.json` next to `tsconfig.spec.json` with th
 
 </code-example>
 
-<code-example language="json" format="." linenums="false">
+<code-example language="json">
 
 "test": {
   "builder": "@angular-devkit/build-angular:karma",
@@ -659,9 +647,9 @@ ng test --configuration es5
 
 ### Configuring the e2e command
 
-Create an ES5 serve configuration as explained above (link to the above serve section), and configuration an ES5 configuration for the E2E target.
+Create an [ES5 serve configuration](guide/deployment#configuring-serve-for-es5) as explained above, and configuration an ES5 configuration for the E2E target.
 
-<code-example language="json" format="." linenums="false">
+<code-example language="json">
 
 "test": {
   "builder": "@angular-devkit/build-angular:protractor",

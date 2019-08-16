@@ -31,9 +31,7 @@ DOM の _構造_ を構築または再構成します。
 次の例のように、アスタリスク (*) がディレクティブ属性名の前に付きます。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngif)" region="ngif">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif)" region="ngif"></code-example>
 
 
 
@@ -52,9 +50,7 @@ Angular はこの表記法を、`<ng-template>`
 Angular のドキュメント全体のサンプルで見られます。テンプレートの例は次のようになります:
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (built-in)" region="built-in">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (built-in)" region="built-in"></code-example>
 
 
 
@@ -121,9 +117,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 真偽値を返す式を受け取り、DOM のチャンク全体を追加、削除します。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngif-true)" region="ngif-true">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-true)" region="ngif-true"></code-example>
 
 
 
@@ -150,9 +144,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 ディレクティブは、`display` スタイルを `none` に設定することによって、不要なパラグラフを非表示にすることができます。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (display-none)" region="display-none">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (display-none)" region="display-none"></code-example>
 
 
 
@@ -201,9 +193,7 @@ Angular はデータバインディングに影響を与える可能性のある
 次では、`hero` が存在する場合、`*ngIf` はヒーローの名前を表示します。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (asterisk)" region="asterisk">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (asterisk)" region="asterisk"></code-example>
 
 
 
@@ -211,9 +201,7 @@ Angular はデータバインディングに影響を与える可能性のある
 内部的には、Angular は次のように `*ngIf` _属性_ を含んだ `<ng-template>` _要素_ に変換し、ホスト要素を囲みます。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngif-template)" region="ngif-template">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-template)" region="ngif-template"></code-example>
 
 
 
@@ -246,9 +234,7 @@ Angular は、同じ方法で `*ngFor` をアスタリスク (*) 構文から `<
 両方の方法で書かれた `NgFor` のフル機能のアプリケーションは次のようになります:
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (inside-ngfor)" region="inside-ngfor">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (inside-ngfor)" region="inside-ngfor"></code-example>
 
 
 
@@ -275,7 +261,7 @@ Angular は、同じ方法で `*ngFor` をアスタリスク (*) 構文から `<
 {@a microsyntax}
 
 
-### マイクロシンタックス
+## マイクロシンタックス
 
 Angular のマイクロシンタックスを使用すると、コンパクトでわかりやすい文字列でディレクティブを設定できます。
 マイクロシンタックスパーサーはその文字列を `<ng-template>` の属性に変換します。
@@ -285,13 +271,14 @@ Angular のマイクロシンタックスを使用すると、コンパクトで
 パーサーは、`let hero`、`let i`、`let odd` を、
 `let-hero`、`let-i`、`let-odd` という名前の変数に変換します。
 
-* マイクロシンタックスパーサーは、`of` と `trackBy` を受け取り、それらをタイトルケース (`of` -> `Of`、`trackBy` -> `TrackBy`) にし、
-ディレクティブの属性名 (`ngFor`) を前に付けて、`ngForOf` と `ngForTrackBy` という名前を付けます。
-これらは2つの `NgFor` の _入力プロパティ_ 名です。
+* マイクロシンタックスパーサーは、すべてのディレクティブをタイトルケースにして、`ngFor`などのディレクティブの属性名の接頭辞を付けます。
+たとえば、`ngFor`入力プロパティでは、
+`of`と`trackBy`は、それぞれ`ngForOf`と`ngForTrackBy`になります。
 このようにして、ディレクティブはリストが `heros` で、トラックごとに呼ばれる関数が `trackById` であることを認識します。
 
 * `NgFor` ディレクティブはリストをループしながら、自身の _コンテキスト_ オブジェクトのプロパティを設定およびリセットします。
-これらのプロパティには、`index` と `odd`、および `$implicit` という名前の特別なプロパティが含まれます。
+これらのプロパティには、`index`、`odd`、および`$implicit`という名前の特別なプロパティを含めることができますが、
+これらに限定されません。
 
 * `let-i` 変数と `let-odd` 変数は、`let i=index`、`let odd=odd` と定義されました。
 Angular は、コンテキストの `index`、`odd` プロパティにの現在の値を設定します。
@@ -301,18 +288,143 @@ Angular は、コンテキストの `index`、`odd` プロパティにの現在�
 Angular は、現在のイテレーションで `NgFor`
 がヒーローで初期化したコンテキストの `$implicit` プロパティの値を `let-hero` に設定します。
 
-* [API ガイド](api/common/NgForOf "API: NgFor")
+* [`NgFor`のAPI ガイド](api/common/NgForOf "API: NgFor")
 では、追加の `NgFor` ディレクティブプロパティとコンテキストプロパティについて説明しています。
 
-* `NgFor` は `NgForOf` ディレクティブによって実装されます。追加の `NgForOf` ディレクティブプロパティとコンテキストプロパティ [NgForOf APIリファレンス](api/common/NgForOf) を参照してください。
+* `NgForOf`ディレクティブが`NgFor`を実装しています。追加の `NgForOf` ディレクティブプロパティとコンテキストプロパティ [NgForOf APIリファレンス](api/common/NgForOf) を参照してください。
+
+### Writing your own structural directives
+
+These microsyntax mechanisms are also available to you when you write your own structural directives.
+For example, microsyntax in Angular allows you to write `<div *ngFor="let item of items">{{item}}</div>`
+instead of `<ng-template ngFor [ngForOf]="items"><div>{{item}}</div></ng-template`.
+The following sections provide detailed information on constraints, grammar,
+and translation of microsyntax.
+
+### Constraints
+
+Microsyntax must meet the following requirements:
+
+- It must be known ahead of time so that IDEs can parse it without knowing the underlying semantics of the directive or what directives are present.
+- It must translate to key-value attributes in the DOM.
+
+### Grammar
+
+When you write your own structural directives, use the following grammar:
+
+```
+*:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )*"
+```
+
+The following tables describe each portion of the microsyntax grammar.
+
+<!-- What should I put in the table headers? -->
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><code>prefix</code></td>
+    <td>HTML attribute key</td>
+  </tr>
+  <tr>
+    <td><code>key</code></td>
+    <td>HTML attribute key</td>
+  </tr>
+  <tr>
+    <td><code>local</code></td>
+    <td>local variable name used in the template</td>
+  </tr>
+  <tr>
+    <td><code>export</code></td>
+    <td>value exported by the directive under a given name</td>
+  </tr>
+  <tr>
+    <td><code>expression</code></td>
+    <td>standard Angular expression</td>
+  </tr>
+</table>
+
+<!-- The items in this table seem different. Is there another name for how we should describe them? -->
+<table>
+  <tr>
+    <th></th>
+  </tr>
+  <tr>
+    <td colspan="3"><code>keyExp = :key ":"? :expression ("as" :local)? ";"? </code></td>
+  </tr>
+  <tr>
+    <td colspan="3"><code>let = "let" :local "=" :export ";"?</code></td>
+  </tr>
+  <tr>
+    <td colspan="3"><code>as = :export "as" :local ";"?</code></td>
+  </tr>
+</table>
 
 
-これらのマイクロシンタックスのメカニズムは、あなたがあなた自身の構造ディレクティブを書くときに利用可能です。
+### Translation
+
+A microsyntax is translated to the normal binding syntax as follows:
+
+<!-- What to put in the table headers below? Are these correct?-->
+<table>
+  <tr>
+    <th>Microsyntax</th>
+    <th>Translation</th>
+  </tr>
+  <tr>
+    <td><code>prefix</code> and naked <code>expression</code></td>
+    <td><code>[prefix]="expression"</code></td>
+  </tr>
+  <tr>
+    <td><code>keyExp</code></td>
+    <td><code>[prefixKey] "expression"
+    (let-prefixKey="export")</code>
+    <br />
+    Notice that the <code>prefix</code>
+    is added to the <code>key</code>
+    </td>
+  </tr>
+  <tr>
+    <td><code>let</code></td>
+    <td><code>let-local="export"</code></td>
+  </tr>
+</table>
+
+### Microsyntax examples
+
+The following table demonstrates how Angular desugars microsyntax.
+
+<table>
+  <tr>
+    <th>Microsyntax</th>
+    <th>Desugared</th>
+  </tr>
+  <tr>
+    <td><code>*ngFor="let item of [1,2,3]"</code></td>
+    <td><code>&lt;ng-template ngFor let-item [ngForOf]="[1,2,3]"&gt;</code></td>
+  </tr>
+  <tr>
+    <td><code>*ngFor="let item of [1,2,3] as items; trackBy: myTrack; index as i"</code></td>
+    <td><code>&lt;ng-template ngFor let-item [ngForOf]="[1,2,3]" let-items="ngForOf" [ngForTrackBy]="myTrack" let-i="index"&gt;</code>
+    </td>
+  </tr>
+  <tr>
+    <td><code>*ngIf="exp"</code></td>
+    <td><code>&lt;ng-template [ngIf]="exp"&gt;</code></td>
+  </tr>
+  <tr>
+    <td><code>*ngIf="exp as value"</code></td>
+    <td><code>&lt;ng-template [ngIf]="exp" let-value="ngIf"&gt;</code></td>
+  </tr>
+</table>
+
 [`NgIf` のソースコード](https://github.com/angular/angular/blob/master/packages/common/src/directives/ng_if.ts "Source: NgIf")
 と
 [`NgForOf`](https://github.com/angular/angular/blob/master/packages/common/src/directives/ng_for_of.ts "Source: NgForOf")
 を勉強することはさらなる学習のためのよい方法です。
-
 
 
 {@a template-input-variable}
@@ -321,7 +433,7 @@ Angular は、現在のイテレーションで `NgFor`
 {@a template-input-variables}
 
 
-### テンプレート入力変数
+## テンプレート入力変数
 
 _テンプレート入力変数_ は、テンプレートの単一インスタンス _内_ で参照できる変数です。この例には、`hero`、`i`、および `odd`
 のようないくつかの変数が含まれます。
@@ -346,7 +458,7 @@ _参照_ 変数は、それにアタッチされた要素、コンポーネン�
 {@a one-per-element}
 
 
-### ホスト要素ごとに1つの構造ディレクティブ {@a one-structural-directive-per-host-element}
+## ホスト要素ごとに1つの構造ディレクティブ {@a one-structural-directive-per-host-element}
 
 あるとき、あなたは指定した条件が true なものだけで HTML ブロックを繰り返したいと思います。
 あなたは同じホスト要素に `*ngFor` と `*ngIf` の両方を配置 _しよう_ とするでしょう。
@@ -373,9 +485,7 @@ Angular の _NgSwitch_ は、実際には `NgSwitch`、`NgSwitchCase`、およ�
 例は次のようになります。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngswitch)" region="ngswitch">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngswitch)" region="ngswitch"></code-example>
 
 
 
@@ -409,9 +519,7 @@ Angular の _NgSwitch_ は、実際には `NgSwitch`、`NgSwitchCase`、およ�
 `<ng-template>` 要素形式にデシュガーすることができます。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngswitch-template)" region="ngswitch-template">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngswitch-template)" region="ngswitch-template"></code-example>
 
 
 
@@ -444,9 +552,7 @@ Angular の _NgSwitch_ は、実際には `NgSwitch`、`NgSwitchCase`、およ�
 次は、"Hip! Hip! Hooray!" というフレーズ内の中央の "Hip!" の結末です。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (template-tag)" region="template-tag">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (template-tag)" region="template-tag"></code-example>
 
 
 
@@ -476,9 +582,7 @@ Angular は中央の "Hip!" を消去し、歓声と熱狂をやや抑えます�
 リスト要素 (`<li>`) は `NgFor` リピーターの典型的なホスト要素です。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngfor-li)" region="ngfor-li">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngfor-li)" region="ngfor-li"></code-example>
 
 
 
@@ -486,9 +590,7 @@ Angular は中央の "Hip!" を消去し、歓声と熱狂をやや抑えます�
 そのラッパーにディレクティブをアタッチできます。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngif)" region="ngif">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif)" region="ngif"></code-example>
 
 
 
@@ -501,18 +603,14 @@ CSS スタイルは新しいレイアウトを想定も対応もしないので�
 たとえば、次のようなパラグラフのレイアウトがあるとします。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngif-span)" region="ngif-span">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-span)" region="ngif-span"></code-example>
 
 
 
 また、`<p>` 内の `<span>` に適用される CSS スタイルルールもあります。
 
 
-<code-example path="structural-directives/src/app/app.component.css" linenums="false" header="src/app/app.component.css (p-span)" region="p-span">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.css" header="src/app/app.component.css (p-span)" region="p-span"></code-example>
 
 
 
@@ -534,9 +632,7 @@ _options_ を条件付きの `<div>` または `<span>` で囲むことはでき
 これを試すと、
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (select-span)" region="select-span">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (select-span)" region="select-span"></code-example>
 
 
 
@@ -559,9 +655,7 @@ Angular は _それを DOM 内に配置しません_。
 次もまた条件付きのパラグラフです。今回は `<ng-container>` を使用します。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (ngif-ngcontainer)" region="ngif-ngcontainer">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-ngcontainer)" region="ngif-ngcontainer"></code-example>
 
 
 
@@ -577,9 +671,7 @@ Angular は _それを DOM 内に配置しません_。
 `<ng-container>` で _選択した_ `<option>` を条件付きで除外します。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (select-ngcontainer)" region="select-ngcontainer">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (select-ngcontainer)" region="select-ngcontainer"></code-example>
 
 
 
@@ -630,9 +722,7 @@ JavaScript の `if` ブロックの中括弧のようなものです:
 `UnlessDirective` は、条件が ***false*** のときに内容を表示します。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (appUnless-1)" region="appUnless-1">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless-1)" region="appUnless-1"></code-example>
 
 
 
@@ -649,9 +739,7 @@ JavaScript の `if` ブロックの中括弧のようなものです:
 次は、始めの部分です:
 
 
-<code-example path="structural-directives/src/app/unless.directive.ts" linenums="false" header="src/app/unless.directive.ts (skeleton)" region="skeleton">
-
-</code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (skeleton)" region="skeleton"></code-example>
 
 
 
@@ -684,9 +772,7 @@ Angular が生成した
 両方をディレクティブのコンストラクターにクラスのプライベート変数として注入します。
 
 
-<code-example path="structural-directives/src/app/unless.directive.ts" linenums="false" header="src/app/unless.directive.ts (ctor)" region="ctor">
-
-</code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (ctor)" region="ctor"></code-example>
 
 
 
@@ -707,9 +793,7 @@ Angular が生成した
 
 
 
-<code-example path="structural-directives/src/app/unless.directive.ts" linenums="false" header="src/app/unless.directive.ts (set)" region="set">
-
-</code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (set)" region="set"></code-example>
 
 
 
@@ -727,9 +811,7 @@ Angular は、条件の値が変わるたびに `appUnless` プロパティを�
 完成したディレクティブのコードは次のようになります:
 
 
-<code-example path="structural-directives/src/app/unless.directive.ts" linenums="false" header="src/app/unless.directive.ts (excerpt)" region="no-docs">
-
-</code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (excerpt)" region="no-docs"></code-example>
 
 
 
@@ -738,9 +820,7 @@ Angular は、条件の値が変わるたびに `appUnless` プロパティを�
 それから、それを試すためにいくつかの HTML を作成します。
 
 
-<code-example path="structural-directives/src/app/app.component.html" linenums="false" header="src/app/app.component.html (appUnless)" region="appUnless">
-
-</code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless)" region="appUnless"></code-example>
 
 
 

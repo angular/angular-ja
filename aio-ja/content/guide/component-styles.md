@@ -21,8 +21,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 `styles` プロパティは、CSSコードを含む文字列の配列を使います。
 通常は、次の例のようにひとつの文字列を与えます：
 
-<code-example path="component-styles/src/app/hero-app.component.ts" header="src/app/hero-app.component.ts" linenums="false">
-</code-example>
+<code-example path="component-styles/src/app/hero-app.component.ts" header="src/app/hero-app.component.ts"></code-example>
 
 ## スタイルのスコープ
 
@@ -70,8 +69,8 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 `:host` 擬似クラスセレクターを使用して、(コンポーネントのテンプレートの *内部の* ターゲティング要素とは対象的に)
 コンポーネントを *ホスト* する要素のスタイルをターゲットにします。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="host" header="src/app/hero-details.component.css" linenums="false">
-</code-example>
+
+<code-example path="component-styles/src/app/hero-details.component.css" region="host" header="src/app/hero-details.component.css"></code-example>
 
 `:host` セレクターは、ホスト要素をターゲットにする唯一の方法です。
 コンポーネント自身のテンプレートの一部ではないため、他のセレクターを使用してコンポーネント内
@@ -80,11 +79,9 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 *関数形式* を使用して、`:host` の後のカッコ内に別なセレクターを含むことで、
 ホストスタイルを条件付きで適用します。
 
-次の例では、ホスト要素を再びターゲットにしていますが、
-`active` CSS クラスも持っている場合に限ります。
+次の例では、ホスト要素を再びターゲットにしていますが、`active` CSS クラスも持っている場合に限ります。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css" linenums="false">
-</code-example>
+<code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css"></code-example>
 
 ### :host-context
 
@@ -99,8 +96,7 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 次の例では、コンポーネント *内* のすべての `<h2>` 要素に `background-color`　のスタイルを適用します。
 ただし、一部の祖先要素にCSSクラス `theme-light` がある場合にのみ適用されます。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" header="src/app/hero-details.component.css" linenums="false">
-</code-example>
+<code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" header="src/app/hero-details.component.css"></code-example>
 
 ### (非推奨) `/deep/` 、 `>>>` と `::ng-deep` {@a deprecated-deep--and-ng-deep}
 
@@ -115,9 +111,7 @@ can bleed into other components.
 次の例では、ホスト要素からこのコンポーネントを経由してDOM内のすべての子要素に至るまで、
 すべての `<h3>` 要素を対象としています。
 
-<code-example path="component-styles/src/app/hero-details.component.css" region="deep" header="src/app/hero-details.component.css" linenums="false">
-
-</code-example>
+<code-example path="component-styles/src/app/hero-details.component.css" region="deep" header="src/app/hero-details.component.css"></code-example>
 
 `/deep/` コンビネーターには、別名 `>>>`　と `::ng-deep` があります。
 
@@ -302,8 +296,7 @@ AngularはCSSをグローバルスタイルに追加します。
 
 コンポーネントのカプセル化モードを設定するには、コンポーネントメタデータ内の `encapsulation` プロパティを使用します：
 
-<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" header="src/app/quest-summary.component.ts" linenums="false">
-</code-example>
+<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" header="src/app/quest-summary.component.ts"></code-example>
 
 `ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
 ( [Can I use](http://caniuse.com) サイトの

@@ -98,9 +98,7 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 次に `innerHtml` プロパティへバインドしています。
 
 
-<code-example path="security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html">
-
-</code-example>
+<code-example path="security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html"></code-example>
 
 
 
@@ -112,9 +110,7 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 攻撃者の制御する値に `<script>` タグが含まれているケース等です。
 
 
-<code-example path="security/src/app/inner-html-binding.component.ts" linenums="false" header="src/app/inner-html-binding.component.ts (class)" region="class">
-
-</code-example>
+<code-example path="security/src/app/inner-html-binding.component.ts" header="src/app/inner-html-binding.component.ts (class)" region="class"></code-example>
 
 
 
@@ -183,7 +179,8 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 アプリケーションによっては、これらの処理が必要になることがあるかもしれません。
 これら処理のためサニタイズを一時的に無効にするには、対象の値が安全である旨をあらかじめAngularに伝える必要があります。
 ただし *注意してください*。悪意のある値を誤って信頼済としてマークしてしまった場合
-アプリケーションに脆弱性が混入します。必要に応じてセキュリティ専門家のレビューを受けてください。
+アプリケーションに脆弱性が混入します。
+必要に応じてセキュリティ専門家のレビューを受けてください。
 
 値を信頼済としてマークするには `DomSanitizer` を注入してコンテキストに応じ
 次のいずれかのメソッドを実行します。
@@ -195,12 +192,11 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 * `bypassSecurityTrustResourceUrl`
 
 値が安全かどうかはコンテキストによって変わります。意図した値の用途に適したメソッドを使用してください。
-たとえば次のように、 URLに` javascript：alert(...)` をバインドするとします。
+たとえば次のように、 
+URLに` javascript：alert(...)` をバインドするとします。
 
 
-<code-example path="security/src/app/bypass-security.component.html" linenums="false" header="src/app/bypass-security.component.html (URL)" region="URL">
-
-</code-example>
+<code-example path="security/src/app/bypass-security.component.html" header="src/app/bypass-security.component.html (URL)" region="URL"></code-example>
 
 
 
@@ -209,9 +205,7 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 これを防ぐには、`bypassSecurityTrustUrl`を呼び出してURLの値を信頼できるURLとしてマークします。
 
 
-<code-example path="security/src/app/bypass-security.component.ts" linenums="false" header="src/app/bypass-security.component.ts (trust-url)" region="trust-url">
-
-</code-example>
+<code-example path="security/src/app/bypass-security.component.ts" header="src/app/bypass-security.component.ts (trust-url)" region="trust-url"></code-example>
 
 
 
@@ -229,15 +223,11 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 これにより、Angularは`<iframe src>`へのバインディングを許可します
 
 
-<code-example path="security/src/app/bypass-security.component.html" linenums="false" header="src/app/bypass-security.component.html (iframe)" region="iframe">
-
-</code-example>
+<code-example path="security/src/app/bypass-security.component.html" header="src/app/bypass-security.component.html (iframe)" region="iframe"></code-example>
 
 
 
-<code-example path="security/src/app/bypass-security.component.ts" linenums="false" header="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url">
-
-</code-example>
+<code-example path="security/src/app/bypass-security.component.ts" header="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url"></code-example>
 
 
 

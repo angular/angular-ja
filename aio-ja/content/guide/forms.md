@@ -104,9 +104,7 @@ Angular CLIコマンド [ `ng generate class` ](cli/generate) を使用して、
 
 中身を記述します。
 
-<code-example path="forms/src/app/hero.ts" header="src/app/hero.ts">
-
-</code-example>
+<code-example path="forms/src/app/hero.ts" header="src/app/hero.ts"></code-example>
 
 これは要件が少なく振る舞いもない貧弱なモデルです。このデモには最適です。
 
@@ -117,9 +115,7 @@ TypeScriptコンパイラは、 `public` コンストラクターパラメータ
 
 このように新しいヒーローを作成することができます。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" region="SkyDog">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="SkyDog"></code-example>
 
 ## フォームコンポーネントを作成する
 
@@ -137,9 +133,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 中身を記述します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" header="src/app/hero-form/hero-form.component.ts (v1)" region="v1">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" header="src/app/hero-form/hero-form.component.ts (v1)" region="v1"></code-example>
 
 このコンポーネントには何も特別なものはありません。フォーム固有のものはありません。
 前に書いたコンポーネントと区別するものはありません。
@@ -167,9 +161,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 次のように更新してください。
 
-<code-example path="forms/src/app/app.module.ts" header="src/app/app.module.ts">
-
-</code-example>
+<code-example path="forms/src/app/app.module.ts" header="src/app/app.module.ts"></code-example>
 
 <div class="alert is-helpful">
 
@@ -195,9 +187,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 テンプレートの内容を次のものに置き換えます。
 
-<code-example path="forms/src/app/app.component.html" header="src/app/app.component.html">
-
-</code-example>
+<code-example path="forms/src/app/app.component.html" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
@@ -211,9 +201,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 テンプレートファイルを次の内容で更新します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="start" header="src/app/hero-form/hero-form.component.html">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" region="start" header="src/app/hero-form/hero-form.component.html"></code-example>
 
 言語は単なるHTML5です。 `Hero` のフィールド、 `name` と `alterEgo` を表示しており、ユーザー入力のためにそれらを入力ボックスに公開しています。
 
@@ -247,9 +235,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 スタイルシートを追加するには `styles.css` を開き、上部に次のインポート行を追加します。
 
-<code-example path="forms/src/styles.1.css" linenums="false" header="src/styles.css">
-
-</code-example>
+<code-example path="forms/src/styles.1.css" header="src/styles.css"></code-example>
 
 ## _*ngFor_ を使って能力を追加する
 
@@ -261,9 +247,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 次のHTMLを *Alter Ego* グループの *直下* に追加します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (powers)" region="powers">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (powers)" region="powers"></code-example>
 
 このコードは、能力のリストの個々の能力ごとに `<option>` タグを繰り返します。
 テンプレート入力変数 `pow` は、各繰り返しにおいて異なる能力です。
@@ -294,9 +278,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 *Name* の `<input>` タグを見つけて、次のように更新します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-1">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-1"></code-example>
 
 <div class="alert is-helpful">
 
@@ -312,9 +294,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 フォームのテンプレート変数を宣言します。
 次のように `<form>` タグを `#heroForm="ngForm"` を使って更新します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="template-variable">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="template-variable"></code-example>
 
 この変数 `heroForm` は `NgForm` というフォーム全体を管理するディレクティブへの参照になりました。
 
@@ -372,9 +352,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 改訂後、フォームのコアは次のようになります。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModel-2">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModel-2"></code-example>
 
 <div class="alert is-helpful">
 
@@ -473,9 +451,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 一時的に `spy` という名前の[テンプレート参照変数](guide/template-syntax#ref-vars)を _Name_ の `<input>` に追加し、
 それを使用して入力のCSSクラスを表示します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-2">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-2"></code-example>
 
 アプリケーションを実行し、 _Name_ 入力ボックスを見てください。
 次の手順を *正確に* 実行してください。
@@ -513,15 +489,11 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 この効果は、プロジェクトの `index.html` の隣に追加する新しい `forms.css` ファイルに定義したこれらのクラス定義によって得られます。
 
-<code-example path="forms/src/assets/forms.css" header="src/assets/forms.css">
-
-</code-example>
+<code-example path="forms/src/assets/forms.css" header="src/assets/forms.css"></code-example>
 
 `index.html` の `<head>` を更新してこのスタイルシートを読み込みます。
 
-<code-example path="forms/src/index.html" linenums="false" header="src/index.html (styles)" region="styles">
-
-</code-example>
+<code-example path="forms/src/index.html" header="src/index.html (styles)" region="styles"></code-example>
 
 ## 検証エラーメッセージの表示と非表示
 
@@ -542,9 +514,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 次に、 _Name_ 入力ボックスに追加されたエラーメッセージの例を示します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="name-with-error-msg">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="name-with-error-msg"></code-example>
 
 テンプレート内から入力ボックスのAngularコントロールにアクセスするには、テンプレート参照変数が必要です。
 ここでは、 `name` という変数を作成し、それに"ngModel"という値を与えました。
@@ -560,9 +530,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 `name` コントロールのプロパティをメッセージ `<div>` 要素の `hidden` プロパティにバインドすることにより、
 名前のエラーメッセージの表示を制御します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (hidden-error-msg)" region="hidden-error-msg">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (hidden-error-msg)" region="hidden-error-msg"></code-example>
 
 この例では、コントロールが有効またはpristineの状態のときにメッセージを非表示にします。
 "pristine"とは、ユーザーがこのフォームで表示されて以来、値を変更していないことを意味します。
@@ -584,13 +552,9 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 新しいヒーローをこのフォームに追加しましょう。
 *New Hero* ボタンをフォームの下部に置き、そのクリックイベントを `newHero` コンポーネントメソッドにバインドします。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-no-reset" header="src/app/hero-form/hero-form.component.html (New Hero button)">
+<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-no-reset" header="src/app/hero-form/hero-form.component.html (New Hero button)"></code-example>
 
-</code-example>
-
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="new-hero" header="src/app/hero-form/hero-form.component.ts (New Hero method)" linenums="false">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="new-hero" header="src/app/hero-form/hero-form.component.ts (New Hero method)"></code-example>
 
 アプリケーションを再度実行し、 *New Hero* ボタンをクリックすると、フォームがクリアされます。
 入力ボックスの左の *required* バーが赤くなり、 `name` と `power` プロパティが無効であることを示します。
@@ -609,9 +573,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 あなたはすべてのフラグを命令的にクリアする必要があります。
 `newHero()` メソッドを呼び出した後にフォームの `reset()` メソッドを呼び出すことで実行できます。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-form-reset" header="src/app/hero-form/hero-form.component.html (Reset the form)">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-form-reset" header="src/app/hero-form/hero-form.component.html (Reset the form)"></code-example>
 
 *New Hero* をクリックすると、フォームとそのコントロールフラグがリセットされます。
 
@@ -624,9 +586,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 これを便利にするには、フォームの `ngSubmit` イベントプロパティを
 ヒーローフォームコンポーネントの `onSubmit()` メソッドにバインドします。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (ngSubmit)" region="ngSubmit">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (ngSubmit)" region="ngSubmit"></code-example>
 
 すでにテンプレート参照変数 `#heroForm` を定義し、それを値"ngForm"で初期化しています。
 さて、この変数を使用して、Submitボタンでフォームにアクセスします。
@@ -635,9 +595,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 イベントバインディングを使用し、フォームの全体的な有効性を `heroForm` 変数を介して
 ボタンの `disabled` プロパティにバインドします。コードは次のとおりです：
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (submit-button)" region="submit-button">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (submit-button)" region="submit-button"></code-example>
 
 アプリケーションを実行すると、ボタンが有効になっていることがわかります&mdash;が、まだ便利な機能はありません。
 
@@ -670,25 +628,19 @@ Angularの助けがなかったらボタンの有効/無効状態をフォーム
 
 フォームを `div` にラップし、その `hidden` プロパティを `HeroFormComponent.submitted` プロパティにバインドします。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="edit-div">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="edit-div"></code-example>
 
 メインのフォームは最初に表示されます。この `HeroFormComponent` の断片が示すとおり、
 フォームを送信するまで `submitted` プロパティがfalseであるためです。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" linenums="false" header="src/app/hero-form/hero-form.component.ts (submitted)" region="submitted">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.ts" header="src/app/hero-form/hero-form.component.ts (submitted)" region="submitted"></code-example>
 
 *Submit* ボタンをクリックすると、 `submitted` フラグがtrueになり、計画どおりにフォームが消えます。
 
 フォームが送信された状態になっている間、アプリは別のものを表示する必要があります。
 先ほど記述した `<div>` ラッパーの下に次のHTMLを追加します。
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" linenums="false" header="src/app/hero-form/hero-form.component.html (excerpt)" region="submitted">
-
-</code-example>
+<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="submitted"></code-example>
 
 ヒーローが再び現れ、補間バインディングで読み取り専用で表示されます。
 この `<div>` は、コンポーネントが送信された状態のときにのみ表示されます。

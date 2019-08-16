@@ -19,7 +19,7 @@ Angular アプリケーションを構築する際には、高度な自社製ラ
 
 たとえば、`d3` という名前のライブラリがあるとします。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 npm install d3 --save
 npm install @types/d3 --save-dev
 </code-example>
@@ -72,7 +72,7 @@ Angular を新しいバージョンにアップデートするときは、使用
 
 たとえば、 [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) ライブラリを使用するには、まず npm パッケージマネージャーを使用してライブラリとその依存関係をインストールします。
 
-<code-example format="." language="bash">
+<code-example language="bash">
 npm install jquery --save
 npm install popper.js --save
 npm install bootstrap --save
@@ -99,7 +99,7 @@ Bootstrap CSS ファイルを "styles" 配列に追加します。
 
 `ng serve` を実行または再起動して、Bootstrap 4 がアプリケーションで機能していることを確認します。
 
-### アプリ内で実行時グローバルライブラリを使用する
+### アプリ内で実行時グローバルライブラリを使用する {@a using-runtime-global-libraries-inside-your-app}
 
 "scripts" 配列を使用してライブラリをインポートした後は、TypeScript コード内の import 文 (`import * as $ from 'jquery';` など) を使用してインポート**しないでください**。
 その場合、ライブラリの2つの異なるコピーが作成されます。1つはグローバルライブラリとしてインポートされ、もう1つはモジュールとしてインポートされます。

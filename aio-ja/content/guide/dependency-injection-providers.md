@@ -319,20 +319,20 @@ Angular のツリーシェーカブルではないプロバイダーの次の例
 
 Angular は、コードの別のチャンク (サービスクラス) が使用されているかどうかに基づいてコードの1つのチャンク (モジュールファクトリ内のサービスのプロバイダー定義) を除外することを決定できないため、ここではツリーシェーキングは機能しません。サービスをツリーシェーカブルにするには、サービスのインスタンス (プロバイダー定義) の構築方法に関する情報がサービスクラス自体の一部である必要があります。
 
-### Creating tree-shakable providers
+### ツリーシェーカブルプロバイダーの作成
 
-You can make a provider tree-shakable by specifying it in the `@Injectable()` decorator on the service itself, rather than in the metadata for the NgModule or component that depends on the service.
+サービスに依存する NgModule またはコンポーネントのメタデータではなく、サービス自体の `@Injectable()` デコレーターで指定することで、プロバイダーをツリーシェーカブルにできます。
 
-The following example shows the tree-shakable equivalent to the `ServiceModule` example above.
+次の例は、上記の `ServiceModule` の例に相当するツリーシェーカブルを示しています。
 
 <code-example path="dependency-injection/src/app/tree-shaking/service.ts"  header="src/app/tree-shaking/service.ts"></code-example>
 
-The service can be instantiated by configuring a factory function, as in the following example.
+次の例のように、ファクトリー関数を構成することにより、サービスをインスタンス化できます。
 
 <code-example path="dependency-injection/src/app/tree-shaking/service.0.ts"  header="src/app/tree-shaking/service.0.ts"></code-example>
 
 <div class="alert is-helpful">
 
-To override a tree-shakable provider, configure the injector of a specific NgModule or component with another provider, using the `providers: []` array syntax of the `@NgModule()` or `@Component()` decorator.
+ツリーシェーカブルプロバイダーをオーバーライドするには、特定の NgModule またはコンポーネントのインジェクターを別のプロバイダーで設定し、`@NgModule()` または `@Component()` デコレーターの `providers: []`配列構文を使用します。
 
 </div>

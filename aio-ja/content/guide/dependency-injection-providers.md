@@ -179,57 +179,57 @@ type パラメーターはオプションですが、依存関係の型を開発
 {@a factory-provider}
 {@a factory-providers}
 
-## Factory providers
+## ファクトリープロバイダー
 
-Sometimes you need to create a dependent value dynamically,
-based on information you won't have until run time.
-For example, you might need information that changes repeatedly in the course of the browser session.
-Also, your injectable service might not have independent access to the source of the information.
+実行時までは得られない情報に基づいて、
+依存する値を動的に作成する必要がある場合があります。
+たとえば、ブラウザセッション中に繰り返し変化する情報が必要になる場合があります。
+また、注入可能なサービスは、情報のソースに独立してアクセスできない場合があります。
 
-In cases like this you can use a *factory provider*.
-Factory providers can also be useful when creating an instance of a dependency from
-a third-party library that wasn't designed to work with DI.
+このような場合、*ファクトリープロバイダー*を使用できます。
+ファクトリープロバイダーは、DI で動作するように設計されていないサードパーティライブラリから
+依存関係のインスタンスを作成する場合にも役立ちます。
 
-For example, suppose `HeroService` must hide *secret* heroes from normal users.
-Only authorized users should see secret heroes.
+たとえば、`HeroService` が通常のユーザーから*秘密*のヒーローを隠す必要があるとします。
+許可されたユーザーのみが秘密のヒーローを見ることができます。
 
-Like  `EvenBetterLogger`, `HeroService` needs to know if the user is authorized to see secret heroes.
-That authorization can change during the course of a single application session,
-as when you log in a different user.
+`EvenBetterLogger` と同様に、`HeroService` は、ユーザーが秘密のヒーローを見ることが許可されているかどうかを知る必要があります。
+この許可は、別のユーザーでログインするときのように、
+単一のアプリケーションセッションの過程で変更される可能性があります。
 
-Let's say you don't want to inject `UserService` directly into `HeroService`, because you don't want to complicate that service with security-sensitive information.
-`HeroService` won't have direct access to the user information to decide
-who is authorized and who isn't.
+`UserService` を `HeroService` に直接注入したくないとしましょう。セキュリティに敏感な情報でそのサービスを複雑にしたくないからです。
+`HeroService` は、ユーザー情報に直接アクセスして、誰が許可され、
+誰が許可されないかを判断することはできません。
 
-To resolve this, we give the `HeroService` constructor a boolean flag to control display of secret heroes.
+これを解決するために、`HeroService` コンストラクターに真偽値フラグを与えて、秘密のヒーローの表示を制御します。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.ts" region="internals" header="src/app/heroes/hero.service.ts (excerpt)"></code-example>
 
-You can inject `Logger`, but you can't inject the  `isAuthorized` flag. Instead, you can use a factory provider to create a new logger instance for `HeroService`.
+`Logger` を挿入できますが、`isAuthorized` フラグを挿入することはできません。代わりに、ファクトリープロバイダーを使用して、`HeroService` の新しいロガーインスタンスを作成できます。
 
-A factory provider needs a factory function.
+ファクトリープロバイダーにはファクトリー関数が必要です。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.provider.ts" region="factory" header="src/app/heroes/hero.service.provider.ts (excerpt)"></code-example>
 
-Although `HeroService` has no access to `UserService`, the factory function does.
-You inject both `Logger` and `UserService` into the factory provider
-and let the injector pass them along to the factory function.
+`HeroService` は `UserService` にアクセスできませんが、ファクトリ関数はアクセスできます。
+`Logger` と `UserService` の両方をファクトリープロバイダーに注入し、
+インジェクターがそれらをファクトリー関数に渡すようにします。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.provider.ts" region="provider" header="src/app/heroes/hero.service.provider.ts (excerpt)"></code-example>
 
-* The `useFactory` field tells Angular that the provider is a factory function whose implementation is `heroServiceFactory`.
+* `useFactory` フィールドは、プロバイダーが `heroServiceFactory` を実装したファクトリ関数であることを Angular に伝えます。
 
-* The `deps` property is an array of [provider tokens](guide/dependency-injection#token).
-The `Logger` and `UserService` classes serve as tokens for their own class providers.
-The injector resolves these tokens and injects the corresponding services into the matching factory function parameters.
+* `deps` プロパティは、[プロバイダートークン](guide/dependency-injection#token)の配列です。
+`Logger` クラスと `UserService` クラスは、独自のクラスプロバイダーのトークンとして機能します。
+インジェクターはこれらのトークンを解決し、対応するサービスを一致するファクトリー関数パラメーターに注入します。
 
-Notice that you captured the factory provider in an exported variable, `heroServiceProvider`.
-This extra step makes the factory provider reusable.
-You can configure a provider of `HeroService` with this variable wherever you need it.
-In this sample, you need it only in `HeroesComponent`,
-where `heroServiceProvider` replaces `HeroService` in the metadata `providers` array.
+エクスポートされた変数 `heroServiceProvider` でファクトリープロバイダーをキャプチャしたことに注意してください。
+この追加手順により、ファクトリープロバイダーが再利用可能になります。
+この変数を使用して、必要な場所で `HeroService` のプロバイダーを構成できます。
+このサンプルでは、メタデータ `providers` 配列内の`HeroService` を
+`heroServiceProvider` に置き換える `HeroesComponent` でのみ必要です。
 
-The following shows the new and the old implementations side-by-side.
+次に、新しい実装と古い実装を並べて示します。
 
 <code-tabs>
 

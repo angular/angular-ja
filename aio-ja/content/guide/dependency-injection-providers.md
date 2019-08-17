@@ -98,17 +98,17 @@ DI トークンは、依存関係の値の
 
 {@a value-provider}
 
-## Value providers
+## バリュープロバイダー
 
-Sometimes it's easier to provide a ready-made object rather than ask the injector to create it from a class.
-To inject an object you have already created,
-configure the injector with the `useValue` option
+インジェクターにクラスから作成するようにするよりも、既存のオブジェクトを提供する方が簡単な場合があります。
+すでに作成したオブジェクトを注入するには、
+`useValue` オプションでインジェクターを設定します
 
-The following code defines a variable that creates such an object to play the logger role.
+次のコードは、ロガーの役割を果たすオブジェクトを作成する変数を定義しています。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="silent-logger"></code-example>
 
-The following provider object uses the `useValue` key to associate the variable with the `Logger` token.
+次のプロバイダーオブジェクトは、`useValue` キーを使用して変数を `Logger` トークンに関連付けます。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-7"></code-example>
 

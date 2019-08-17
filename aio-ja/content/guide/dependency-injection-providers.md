@@ -241,24 +241,24 @@ type パラメーターはオプションですが、依存関係の型を開発
 
 </code-tabs>
 
-## Predefined tokens and multiple providers
+## 事前定義されたトークンと複数のプロバイダー
 
-Angular provides a number of built-in injection-token constants that you can use to customize the behavior of
-various systems.
+Angular は、さまざまなシステムの動作をカスタマイズするために使用できる多数の
+組み込みインジェクショントークン定数を提供します。
 
-For example, you can use the following built-in tokens as hooks into the framework’s bootstrapping and initialization process.
-A provider object can associate any of these injection tokens with one or more callback functions that take app-specific initialization actions.
+たとえば、次の組み込みトークンをフレームワークのブートストラップおよび初期化プロセスへのフックとして使用できます。
+プロバイダーオブジェクトは、これらのインジェクショントークンを、アプリ固有の初期化アクションを実行する1つ以上のコールバック関数に関連付けることができます。
 
-* [PLATFORM_INITIALIZER](api/core/PLATFORM_INITIALIZER): Callback is invoked when a platform is initialized.
+* [PLATFORM_INITIALIZER](api/core/PLATFORM_INITIALIZER): プラットフォームが初期化されると、コールバックが呼び出されます。
 
-* [APP_BOOTSTRAP_LISTENER](api/core/APP_BOOTSTRAP_LISTENER): Callback is invoked for each component that is bootstrapped. The handler function receives the ComponentRef instance of the bootstrapped component.
+* [APP_BOOTSTRAP_LISTENER](api/core/APP_BOOTSTRAP_LISTENER): ブートストラップされる各コンポーネントに対してコールバックが呼び出されます。 ハンドラー関数は、ブートストラップされたコンポーネントの ComponentRef インスタンスを受け取ります。
 
-* [APP_INITIALIZER](api/core/APP_INITIALIZER): Callback is invoked before an app is initialized. All registered initializers can optionally return a Promise. All initializer functions that return Promises must be resolved before the application is bootstrapped. If one of the initializers fails to resolves, the application is not bootstrapped.
+* [APP_INITIALIZER](api/core/APP_INITIALIZER): コールバックは、アプリが初期化される前に呼び出されます。 登録されているすべてのイニシャライザは、オプションで Promise を返すことができます。Promise を返すすべてのイニシャライザ関数は、アプリケーションがブートストラップされる前に解決する必要があります。イニシャライザの1つが解決に失敗した場合、アプリケーションはブートストラップされません。
 
-The provider object can have a third option, `multi: true`, which you can use with `APP_INITIALIZER`
-to register multiple handlers for the provide event.
+プロバイダーオブジェクトには、3番目の `multi: true` オプションを指定できます。
+これは、`APP_INITIALIZER` とともに使用して、提供イベントの複数のハンドラーを登録できます。
 
-For example, when bootstrapping an application, you can register many initializers using the same token.
+たとえば、アプリケーションをブートストラップするとき、同じトークンを使用して多くのイニシャライザを登録できます。
 
 ```
 export const APP_TOKENS = [
@@ -268,19 +268,19 @@ export const APP_TOKENS = [
 ];
 ```
 
-Multiple providers can be associated with a single token in other areas as well.
-For example, you can register a custom form validator using the built-in [NG_VALIDATORS](api/forms/NG_VALIDATORS) token,
-and provide multiple instances of a given validator provider by using the `multi: true` property in the provider object.
-Angular adds your custom validators to the existing collection.
+他の領域でも、複数のプロバイダーを単一のトークンに関連付けることができます。
+たとえば、組み込みの [NG_VALIDATORS](api/forms/NG_VALIDATORS) トークンを使用してカスタムフォームバリデーターを登録し、
+プロバイダーオブジェクトの `multi: true` プロパティを使用して、特定のバリデータープロバイダーの複数のインスタンスを提供できます。
+Angular は、既存のコレクションにカスタムバリデーターを追加します。
 
-The Router also makes use of multiple providers associated with a single token.
-When you provide multiple sets of routes using [RouterModule.forRoot](api/router/RouterModule#forroot)
-and [RouterModule.forChild](api/router/RouterModule#forchild) in a single module,
-the [ROUTES](api/router/ROUTES) token combines all the different provided sets of routes into a single value.
+ルーターは、単一のトークンに関連付けられた複数のプロバイダーも利用します。
+1 つのモジュールで [RouterModule.forRoot](api/router/RouterModule#forroot)
+および [RouterModule.forChild](api/router/RouterModule#forchild) を使用して複数のルートセットを提供する場合、
+[ROUTES](api/router/ROUTES) トークンは、提供されたすべての異なるルートセットを単一の値に結合します。
 
 <div class="alert is-helpful>
 
-Search for [Constants in API documentation](api?type=const) to find more built-in tokens.
+[API ドキュメントの定数](api?type=const) を検索して、組み込みトークンを見つけます。
 
 </div>
 

@@ -287,37 +287,37 @@ Angular は、既存のコレクションにカスタムバリデーターを追
 {@a tree-shakable-provider}
 {@a tree-shakable-providers}
 
-## Tree-shakable providers
+## ツリーシェーカブルプロバイダー
 
-Tree shaking refers to a compiler option that removes code from the final bundle if the app doesn't reference that code.
-When providers are tree-shakable, the Angular compiler removes the associated
-services from the final output when it determines that your application doesn't use those services.
-This significantly reduces the size of your bundles.
+ツリーシェーキングとは、アプリがそのコードを参照しない場合に最終バンドルからコードを削除するコンパイラオプションのことです。
+プロバイダーがツリーシェーカブルである場合、Angular コンパイラーは、アプリケーションがそれらのサービスを
+使用していないと判断すると、関連するサービスを最終出力から削除します。
+これにより、バンドルのサイズが大幅に削減されます。
 
 <div class="alert is-helpful">
 
-Ideally, if an application isn't injecting a service, Angular shouldn't include it in the final output.
-However, Angular has to be able to identify at build time whether the app will require the service or not.
-Because it's always possible to inject a service directly using `injector.get(Service)`,
-Angular can't identify all of the places in your code where this injection could happen,
-so it has no choice but to include the service in the injector.
-Thus, services in the NgModule `providers` array or at component level are not tree-shakable.
+理想的には、アプリケーションがサービスを注入しない場合、Angular はそれを最終出力に含めるべきではありません。
+ただし、Angular は、ビルド時にアプリがサービスを必要とするかどうかを識別できる必要があります。
+`injector.get(Service)` を使用してサービスを直接注入することは常に可能であるため、
+Angular はこのインジェクションが発生する可能性のあるコード内のすべての場所を特定できず、
+インジェクターにサービスを含める以外に選択肢はありません。
+したがって、NgModule の `providers` 配列またはコンポーネントレベルのサービスはツリーシェーカブルではありません。
 
 </div>
 
-The following example of non-tree-shakable providers in Angular configures a service provider for the injector of an NgModule.
+Angular のツリーシェーカブルではないプロバイダーの次の例は、NgModule のインジェクターのサービスプロバイダーを構成します。
 
 <code-example path="dependency-injection/src/app/tree-shaking/service-and-module.ts"  header="src/app/tree-shaking/service-and-modules.ts"></code-example>
 
-You can then import this module into your application module
-to make the service available for injection in your app,
-as in the following example.
+次の例のように、
+このモジュールをアプリケーションモジュールにインポートして、
+アプリでサービスを注入できるようにします。
 
 <code-example path="dependency-injection/src/app/tree-shaking/app.module.ts"  header="src/app/tree-shaking/app.modules.ts"></code-example>
 
-When `ngc` runs, it compiles `AppModule` into a module factory, which contains definitions for all the providers declared in all the modules it includes. At runtime, this factory becomes an injector that instantiates these services.
+`ngc` が実行されると、`AppModule` がモジュールファクトリーにコンパイルされます。モジュールファクトリーには、含まれるすべてのモジュールで宣言されたすべてのプロバイダーの定義が含まれます。実行時に、このファクトリーはこれらのサービスをインスタンス化するインジェクターになります。
 
-Tree-shaking doesn't work here because Angular can't decide to exclude one chunk of code (the provider definition for the service within the module factory) based on whether another chunk of code (the service class) is used. To make services tree-shakable, the information about how to construct an instance of the service (the provider definition) needs to be a part of the service class itself.
+Angular は、コードの別のチャンク (サービスクラス) が使用されているかどうかに基づいてコードの1つのチャンク (モジュールファクトリ内のサービスのプロバイダー定義) を除外することを決定できないため、ここではツリーシェーキングは機能しません。サービスをツリーシェーカブルにするには、サービスのインスタンス (プロバイダー定義) の構築方法に関する情報がサービスクラス自体の一部である必要があります。
 
 ### Creating tree-shakable providers
 

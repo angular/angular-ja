@@ -1,8 +1,8 @@
-# Angular コンパイラオプション
+# Angular compiler options
 
-[事前コンパイル](guide/aot-compiler) を使用する場合、`tsconfig.json` [TypeScript 設定ファイル](guide/typescript-configuration)で *template* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
+When you use [AOT compilation](guide/aot-compiler), you can control how your application is compiled by specifying *template* compiler options in the `tsconfig.json` [TypeScript configuration file](guide/typescript-configuration).
 
-テンプレートオプションオブジェクトの `angularCompilerOptions` は、TypeScript コンパイラに標準オプションを提供する `compilerOptions` オブジェクトに近いものです。
+The template options object, `angularCompilerOptions`, is a sibling to the `compilerOptions` object that supplies standard options to the TypeScript compiler.
 
 ```json
     {
@@ -17,7 +17,7 @@
       }
   }
   ```
-このページでは、利用可能なAngularテンプレートコンパイラオプションについて説明します。
+This page describes the available Angular template compiler options.
 
 ### `allowEmptyCodegenFiles`
 

@@ -21,36 +21,35 @@
 
 ### `allowEmptyCodegenFiles`
 
-When true, generate all possible files even if they are empty. Default is false. Used by the Bazel build rules to simplify how Bazel rules track file dependencies. Do not use this option outside of the Bazel rules.
+true の場合、空であってもすべての可能なファイルを生成します。デフォルトは false です。 Bazel ルールがファイルの依存関係を追跡する方法を単純化するために、Bazel ビルドルールで使用されます。このオプションは、Bazel ルール以外では使用しないでください。
 
 ### `annotationsAs`
 
-Modifies how Angular-specific annotations are emitted to improve tree-shaking. Non-Angular annotations are not affected. One of `static fields` (the default) or `decorators`.
+ツリーシェーキングを改善するために、Angular 固有のアノテーションの発行方法を変更します。Angular 以外のアノテーションは影響を受けません。`static fields` （デフォルト）または `decorators` のいずれかです。
 
-* By default, the compiler replaces decorators with a static field in the class, which allows advanced tree-shakers like [Closure compiler](https://github.com/google/closure-compiler) to remove unused classes.
+* デフォルトでは、コンパイラーはデコレーターをクラスの静的フィールドに置き換えます。これにより、[Closure compiler](https://github.com/google/closure-compiler) などの高度なツリーシェーカーが未使用のクラスを削除できます。
 
-* The `decorators` value leaves the decorators in place, which makes compilation faster. TypeScript emits calls to the` __decorate` helper. Use `--emitDecoratorMetadata` for runtime reflection (but note taht the resulting code will not properly tree-shake.
+* `decorators` の値はデコレーターをそのままにしておくため、コンパイルが高速になります。TypeScript は、`__decorate` ヘルパーへの呼び出しを発行します。実行時のリフレクションに `--emitDecoratorMetadata` を使用します（ただし、結果のコードが適切にツリーシェークされないことに注意してください）。
 
 ### `annotateForClosureCompiler`
 
-When true, use [Tsickle](https://github.com/angular/tsickle) to annotate the emitted JavaScript with [JSDoc](http://usejsdoc.org/) comments needed by the
-[Closure Compiler](https://github.com/google/closure-compiler). Default is false.
+true の場合、[Tsickle](https://github.com/angular/tsickle) を使用して、[Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](http://usejsdoc.org/) コメントを使用して、発行された JavaScript に注釈を付けます。デフォルトは false です。
 
 ### `disableExpressionLowering`
 
-When true (the default), transforms code that is or could be used in an annotation, to allow it to be imported from template factory modules. See [metadata rewriting](guide/aot-compiler#metadata-rewriting) for more information.
+true の場合（デフォルト）、Angular テンプレートコンパイラは、アノテーションで使用されている、または使用される可能性があるコードを変換して、テンプレートファクトリモジュールからインポートできるようにします。詳細については、[メタデータの書き換え](guide/aot-compiler#metadata-rewriting) を参照してください。
 
-When `false`, disables this rewriting, requiring the rewriting to be done manually.
+このオプションを `false` に設定すると、この書き換えが無効になり、書き換えを手動で行う必要があります。
 
 ### `disableTypeScriptVersionCheck`
 
-When `true`, the compiler does not check the TypeScript version and does not report an error when an unsupported version of TypeScript is used. Not recommended, as unsupported versions of TypeScript might have undefined behavior. Default is false.
+`true` の場合、このオプションはコンパイラに TypeScript のバージョンをチェックしないように指示します。TypeScript のサポートされていないバージョンが使用されている場合、コンパイラはチェックをスキップし、エラーにはなりません。このオプションを `true` に設定することは TypeScript のサポートされていないバージョンが未定義の動作をするかもしれないのでお勧めできません。このオプションはデフォルトでは false です。
 
 ### `enableResourceInlining`
 
-When true, replaces the `templateUrl` and `styleUrls` property in all `@Component` decorators with inlined contents in `template` and `styles` properties.
+このオプションは、すべての `@Component` デコレーターの `templateUrl` および `styleUrls` プロパティを `template` および `styles` プロパティのインライン化された内容に置き換えるようにコンパイラに指示します。
 
-When enabled, the `.js` output of `ngc` does not include any lazy-loaded template or style URLs.
+有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
 
 {@a enablelegacytemplate}

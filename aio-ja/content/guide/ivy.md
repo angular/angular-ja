@@ -1,28 +1,28 @@
-# Opting into Angular Ivy
+# Angular Ivy へのオプトイン
 
-Ivy is the code name for Angular's [next-generation compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7). Starting with Angular version 8, you can choose to opt in to start using a preview version of Ivy and help in its continuing development and tuning.
+Ivy は、Angular の [次世代コンパイルおよびレンダリングパイプライン](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7) のコードネームです。Angular バージョン 8 以降、Ivy のプレビューバージョンの使用を開始することを選択でき、継続的な開発とチューニングを支援できます。
 
 <div class="alert is-helpful">
 
-   To preview Ivy, use `@angular/core@next` version of Angular (8.1.x), rather than `@angular/core@latest` (8.0.x), as it contains all the latest bug fixes and improvements.
+   Ivy をプレビューするには、最新のバグ修正と改善がすべて含まれているため、`@angular/core@latest` (8.0.x)ではなく、`@angular/core@next` バージョンの Angular (8.1.x) を使用します。
 
 </div>
 
 
-## Using Ivy in a new project
+## 新しいプロジェクトで Ivy を使用する
 
-To start a new project with Ivy enabled, use the `--enable-ivy` flag with the [`ng new`](cli/new) command:
+Ivyを有効にして新しいプロジェクトを開始するには、[`ng new`](cli/new) コマンドで `--enable-ivy` フラグを使用します:
 
 ```sh
 ng new shiny-ivy-app --enable-ivy
 ```
 
-The new project is automatically configured for Ivy. Specifically, the enableIvy option is set to `true` in the project's `tsconfig.app.json` file.
+新しいプロジェクトは、Ivy 用に自動的に構成されます。具体的には、プロジェクトの `tsconfig.app.json` ファイルで enableIvy オプションが `true` に設定されています。
 
 
-## Using Ivy in an existing project
+## 既存のプロジェクトで Ivy を使用する
 
-To update an existing project to use Ivy, set the `enableIvy` option in the `angularCompilerOptions` in your project's `tsconfig.app.json`.
+Ivy を使用するよう既存のプロジェクトを更新するには、プロジェクトの `tsconfig.app.json` の `angularCompilerOptions` で `enableIvy` オプションを設定します。
 ```json
 {
   "compilerOptions": { ... },
@@ -32,7 +32,7 @@ To update an existing project to use Ivy, set the `enableIvy` option in the `ang
 }
 ```
 
-AOT compilation with Ivy is faster and should be used by default. In the `angular.json` workspace configuration file, set the default build options for your project to always use AOT compilation.
+Ivy を使用した AOT コンパイルは高速で、デフォルトで使用する必要があります。`angular.json` ワークスペース設定ファイルで、常に AOT コンパイルを使用するようにプロジェクトのデフォルトのビルドオプションを設定します。
 
 ```json
 {
@@ -51,5 +51,5 @@ AOT compilation with Ivy is faster and should be used by default. In the `angula
 }
 ```
 
-To stop using the Ivy compiler, set `enableIvy` to `false` in `tsconfig.app.json`, or remove it completely. Also remove `"aot": true` from your default build options if you didn't have it there before.
+Ivy コンパイラの使用を停止するには、`tsconfig.app.json` で `enableIvy` を `false` に設定するか、完全に削除します。以前に持っていなかった場合は、デフォルトのビルドオプションから `"aot": true` も削除します。
  

@@ -114,25 +114,25 @@ DI トークンは、依存関係の値の
 
 {@a non-class-dependencies}
 
-### Non-class dependencies
+### クラス以外の依存関係
 
-Not all dependencies are classes.
-Sometimes you want to inject a string, function, or object.
+依存関係はクラスだけではありません。
+文字列、関数、またはオブジェクトを挿入したい場合があります。
 
-Apps often define configuration objects with lots of small facts,
-like the title of the application or the address of a web API endpoint.
-These configuration objects aren't always instances of a class.
-They can be object literals, as shown in the following example.
+アプリは、多くの場合、アプリケーションのタイトルや Web API エンドポイントのアドレスなど、
+多くの小さな事実をもつ構成オブジェクトを定義します。
+これらの構成オブジェクトは、常にクラスのインスタンスとは限りません。
+次の例に示すように、オブジェクトリテラルにすることができます。
 
 <code-example path="dependency-injection/src/app/app.config.ts" region="config" header="src/app/app.config.ts (excerpt)"></code-example>
 
 {@a interface-not-valid-token}
 
-**TypeScript interfaces are not valid tokens**
+**TypeScript インターフェースは有効なトークンではありません**
 
-The `HERO_DI_CONFIG` constant conforms to the `AppConfig` interface.
-Unfortunately, you cannot use a TypeScript interface as a token.
-In TypeScript, an interface is a design-time artifact, and doesn't have a runtime representation (token) that the DI framework can use.
+`HERO_DI_CONFIG` 定数は、AppConfig インターフェースに準拠しています。
+残念ながら、TypeScript インターフェースをトークンとして使用することはできません。
+TypeScript では、インターフェースはデザイン時のアーティファクトであり、DI フレームワークが使用できるランタイム表現 (トークン) を持ちません。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-9-interface"></code-example>
 
@@ -140,38 +140,38 @@ In TypeScript, an interface is a design-time artifact, and doesn't have a runtim
 
 <div class="alert is-helpful">
 
-This might seem strange if you're used to dependency injection in strongly typed languages where an interface is the preferred dependency lookup key.
-However, JavaScript, doesn't have interfaces, so when TypeScript is transpiled to JavaScript, the interface disappears.
-There is no interface type information left for Angular to find at runtime.
+これは、インターフェースが優先される依存関係参照キーである、厳密に型指定された言語で依存関係の注入に慣れている場合、奇妙に思えるかもしれません。
+ただし、JavaScript にはインターフェースがないため、TypeScript を JavaScript に変換すると、インターフェースが消えます。
+実行時に Angular が見つけるためのインターフェース型の情報は残っていません。
 
 </div>
 
-One alternative is to provide and inject the configuration object in an NgModule like `AppModule`.
+1 つの代替方法は、`AppModule` のような NgModule で構成オブジェクトを提供および注入することです。
 
 <code-example path="dependency-injection/src/app/app.module.ts" region="providers" header="src/app/app.module.ts (providers)"></code-example>
 
-Another solution to choosing a provider token for non-class dependencies is
-to define and use an `InjectionToken` object.
-The following example shows how to define such a token.
+クラス以外の依存関係のプロバイダートークンを選択する別のソリューションは、
+`InjectionToken` オブジェクトを定義して使用することです。
+次の例は、そのようなトークンを定義する方法を示しています。
 
 <code-example path="dependency-injection/src/app/app.config.ts" region="token" header="src/app/app.config.ts"></code-example>
 
-The type parameter, while optional, conveys the dependency's type to developers and tooling.
-The token description is another developer aid.
+type パラメーターはオプションですが、依存関係の型を開発者とツールに伝えます。
+トークンの説明は、別の開発者支援です。
 
-Register the dependency provider using the `InjectionToken` object:
+`InjectionToken` オブジェクトを使用して依存関係プロバイダーを登録します:
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-9"></code-example>
 
-Now you can inject the configuration object into any constructor that needs it, with
-the help of an `@Inject()` parameter decorator.
+これで、`@Inject()` パラメーターデコレーターの助けを借りて、
+構成オブジェクトをそれを必要とする任意のコンストラクターに注入できます。
 
 <code-example path="dependency-injection/src/app/app.component.2.ts" region="ctor" header="src/app/app.component.ts"></code-example>
 
 <div class="alert is-helpful">
 
-Although the `AppConfig` interface plays no role in dependency injection,
-it supports typing of the configuration object within the class.
+`AppConfig` インターフェースは、依存性の注入では何の役割も果たしませんが、
+クラス内の構成オブジェクトの入力をサポートします。
 
 </div>
 

@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 
 JavaScriptモジュールは名前空間や、グローバル変数名が競合することを防ぐのに役立ちます。
 
-For more information on JavaScript modules, see [JavaScript/ECMAScript modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/).
+JavaScriptモジュールについてのさらに詳しい情報は、[JavaScript/ECMAScript モジュール](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)を参照してください。
 
 ## NgModule
 

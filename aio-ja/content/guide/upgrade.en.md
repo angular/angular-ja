@@ -1,164 +1,219 @@
 # Upgrading from AngularJS to Angular
 
-_Angular_ は今日そして未来の Angular の名前です。<br />
-_AngularJS_ はすべてのバージョン 1.x の Angular の名前です。
+_Angular_ is the name for the Angular of today and tomorrow.<br />
+_AngularJS_ is the name for all 1.x versions of Angular.
 
-AngularJS のアプリケーションはすばらしいです。
-Angular へ移行する前に必ずビジネス要件を考慮してください。
-その際に重要なことはそこへ至るまでの時間と努力です。
-このガイドでは AngularJS のプロジェクトを効率的に Angular のプラットフォームへ一歩ずつ移行するための組み込みツールについて説明します。
+AngularJS apps are great.
+Always consider the business case before moving to Angular.
+An important part of that case is the time and effort to get there.
+This guide describes the built-in tools for efficiently migrating AngularJS projects over to the
+Angular platform, a piece at a time.
 
-いくつかのアプリケーションでは他のものよりも移行しやすいかもしれません。また、移行しやすくするための方法もたくさんあります。 移行作業を始める前に、AngularJS のアプリケーションを Angular に合わせ、準備することもできるでしょう。これらの準備作業ではソースコードを切り離し、メンテナンス性を向上し、モダンな開発ツールに合わせていくことになります。このことは移行作業を楽にするだけでなく、既存の AngularJS アプリケーションを改善することを意味します。
+Some applications will be easier to upgrade than others, and there are
+many ways to make it easier for yourself. It is possible to
+prepare and align AngularJS applications with Angular even before beginning
+the upgrade process. These preparation steps are all about making the code
+more decoupled, more maintainable, and better aligned with modern development
+tools. That means in addition to making the upgrade easier,
+you will also improve the existing AngularJS applications.
 
-移行成功の鍵は2つのフレームワークを同じアプリケーション上で動かし、 AngularJS のコンポーネントを Angular にひとつずつ移行し、順次すすめていくことです。これにより、大きく複雑なアプリケーションであってもビジネスを妨げることなく移行することができるでしょう。なぜなら移行作業を共同で長い時間をかけて行うことができるようになるからです。 Angular の `upgrade` モジュールはシームレスに順次アップグレードすることができるように設計されています。
+One of the keys to a successful upgrade is to do it incrementally,
+by running the two frameworks side by side in the same application, and
+porting AngularJS components to Angular one by one. This makes it possible
+to upgrade even large and complex applications without disrupting other
+business, because the work can be done collaboratively and spread over
+a period of time. The `upgrade` module in Angular has been designed to
+make incremental upgrading seamless.
 
 ## Preparation
 
-AngularJS アプリケーションを構築する方法はたくさんあります。これらのアプリケーションを Angular にアップグレードすることを始める際、いくつかのものは他のものよりも作業が簡単なことが明らかになるでしょう。移行を始める前からであっても、アプリケーションが将来性のあるものにするために使うことのできるいくつかの鍵となる技術やパターンがあります。
+There are many ways to structure AngularJS applications. When you begin
+to upgrade these applications to Angular, some will turn out to be
+much more easy to work with than others. There are a few key techniques
+and patterns that you can apply to future proof apps even before you
+begin the migration.
 
 {@a follow-the-angular-styleguide}
 
 ### Follow the AngularJS Style Guide
 
-[AngularJS スタイルガイド](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md)には AngularJS アプリケーションのメンテナンス性を向上させ、見通しをよくすることが証明されているパターンとプラクティスが集められています。そこには、どのように AngularJS のソースコードを書き、構成するかについてと -同じように重要な- どのように AngularJS のソースコードを書き、構成 **してはいけない** かについて豊富な情報が含まれています。
+The [AngularJS Style Guide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md)
+collects patterns and practices that have been proven to result in
+cleaner and more maintainable AngularJS applications. It contains a wealth
+of information about how to write and organize AngularJS code - and equally
+importantly - how **not** to write and organize AngularJS code.
 
-Angular は AngularJS の一番よい部分を再考したバージョンです。その意味で、ゴールは AngularJS スタイルガイドと同じです。 AngularJS のよい部分はそのままに、悪い部分は避けるということです。もちろんそれ以外にも Angular には色々なものがありますが、 *スタイルガイドに従うことで AngularJS のアプリケーションを Angular により近づけることができます*。
+Angular is a reimagined version of the best parts of AngularJS. In that
+sense, its goals are the same as the AngularJS Style Guide's: To preserve
+the good parts of AngularJS, and to avoid the bad parts. There's a lot
+more to Angular than just that of course, but this does mean that
+*following the style guide helps make your AngularJS app more closely
+aligned with Angular*.
 
-特に、Angular の `upgrade/static` モジュールを使って *順次移行* を簡単にするためのいくつかのルールがあります。
-* [Rule of 1](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#single-responsibility)
-  にはひとつのコンポーネントにつきひとつのファイルがあるべきだと述べられています。これはコンポーネントを指し示したり見つけたりしやすくするだけでなく、
-  プログラミング言語やフレームワーク間の移行をひとつづつ行えることを可能にします。このサンプルアプリケーションでは
-  各コントローラーやコンポーネント、サービス、フィルターが個々のソースファイルに書かれています。
+There are a few rules in particular that will make it much easier to do
+*an incremental upgrade* using the Angular `upgrade/static` module:
 
-* [Folders-by-Feature Structure](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#folders-by-feature-structure) と [Modularity](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#modularity) ではより抽象的なレベルで似たような原則が定義されています。アプリケーションの中で異なる部分は別のディレクトリや NgModule に配置するべきです。
+* The [Rule of 1](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#single-responsibility)
+  states that there should be one component per file. This not only makes
+  components easy to navigate and find, but will also allow us to migrate
+  them between languages and frameworks one at a time. In this example application,
+  each controller, component, service, and filter is in its own source file.
 
-アプリケーションがこの方法で機能ごとにレイアウトされている場合は、機能をひとつずつ移行することが可能です。
-もしアプリケーションがこのようになっていなければ、準備作業として AngularJS スタイルガイドのルールを適用することを推奨します。
-これはアップグレードのためだけでなく、一般的に有効なアドバイスです！
+* The [Folders-by-Feature Structure](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#folders-by-feature-structure)
+  and [Modularity](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#modularity)
+  rules define similar principles on a higher level of abstraction: Different parts of the
+  application should reside in different directories and NgModules.
+
+When an application is laid out feature per feature in this way, it can also be
+migrated one feature at a time. For applications that don't already look like
+this, applying the rules in the AngularJS style guide is a highly recommended
+preparation step. And this is not just for the sake of the upgrade - it is just
+solid advice in general!
 
 ### Using a Module Loader
 
-アプリケーションのソースコードを分解しコンポーネントをひとつずつファイルに分けていくと、
-プロジェクトが大量の比較的小さいファイルによって構成されることになるかもしれません。これは
-少数の大きなファイルによって構成するよりもきれいな方法です。しかし、 &lt;script&gt;　タグで
-すべてのファイルを HTML ページで読み込む場合は難しくなります。それらのタグを正しい順番で
-メンテナンスしなければいけない場合は特にそうです。そのために *モジュールローダー* があります。
+When you break application code down into one component per file, you often end
+up with a project structure with a large number of relatively small files. This is
+a much neater way to organize things than a small number of large files, but it
+doesn't work that well if you have to load all those files to the HTML page with
+&lt;script&gt; tags. Especially when you also have to maintain those tags in the correct
+order. That's why it's a good idea to start using a *module loader*.
 
-[SystemJS](https://github.com/systemjs/systemjs) や、[Webpack](http://webpack.github.io/) 、
-[Browserify](http://browserify.org/) のようなモジュールローダーを使うことで TypeScript や ES2015 の
-組み込みモジュール機構を使うことができます。
-アプリケーションの別々の部分でどのソースコードが共有されるべきかを指定するために
- `import` と `export` 機能を使うことができます。ES5 のアプリケーションの場合は CommonJS の
- `require` と `module.exports` を使うことができます。両方の場合で、モジュールローダーは
- アプリケーションのソースコードが正しい順番でロードされるように制御します。
+Using a module loader such as [SystemJS](https://github.com/systemjs/systemjs),
+[Webpack](http://webpack.github.io/), or [Browserify](http://browserify.org/)
+allows us to use the built-in module systems of TypeScript or ES2015.
+You can use the `import` and `export` features that explicitly specify what code can
+and will be shared between different parts of the application. For ES5 applications
+you can use CommonJS style `require` and `module.exports` features. In both cases,
+the module loader will then take care of loading all the code the application needs
+in the correct order.
 
-アプリケーションを本番環境に出す場合、モジュールローダーは本番環境用に標準ライブラリのみ含んだバンドル
-を作成するのに役立ちます。
+When moving applications into production, module loaders also make it easier
+to package them all up into production bundles with batteries included.
 
 ### Migrating to TypeScript
 
-Angular へのアップグレード計画に TypeScript への移行も含まれる場合、アップグレードを開始する前に
-TypeScript のコンパイラを導入するとよいでしょう。
-これにより、実際にアップグレードする時に学び、考慮しなければいけないことがひとつ減ります。
-同時に、 AngularJS のソースコードで TypeScript の機能を使い始めることもできます。
+If part of the Angular upgrade plan is to also take TypeScript into use, it makes
+sense to bring in the TypeScript compiler even before the upgrade itself begins.
+This means there's one less thing to learn and think about during the actual upgrade.
+It also means you can start using TypeScript features in your AngularJS code.
 
-TypeScript は ECMAScript 5 のスーパーセットの 次世代の ECMAScript 2015 のスーパーセットであるため、
-TypeScript に"切り替える"にあたり、TypeScript コンパイラをインストールしてファイル名を
-`*.js` から `*.ts` に変える以外は必要ありません。しかしそれをすることは便利で刺激的であるだけではもちろんありません。
-次のような追加手順によってさらなる価値を生み出します。
+Since TypeScript is a superset of ECMAScript 2015, which in turn is a superset
+of ECMAScript 5, "switching" to TypeScript doesn't necessarily require anything
+more than installing the TypeScript compiler and renaming files from
+`*.js` to `*.ts`. But just doing that is not hugely useful or exciting, of course.
+Additional steps like the following can give us much more bang for the buck:
 
-* モジュールローダーを使うアプリケーションでは TypeScript のインポートとエクスポート（実態は ECMAScript 2015 のインポートとエクスポートです）
-  はソースコードをモジュール単位で構成するために使うことができます。
+* For applications that use a module loader, TypeScript imports and exports
+  (which are really ECMAScript 2015 imports and exports) can be used to organize
+  code into modules.
 
-* 型注釈は既存の関数や変数のそれらの型を定義するために順次適用することができ、
-  ビルド時のエラー検出や自動補完、インラインのドキュメントなどの恩恵を得ることができます。
+* Type annotations can be gradually added to existing functions and variables
+  to pin down their types and get benefits like build-time error checking,
+  great autocompletion support and inline documentation.
 
-* アロー関数や `let`、 `const` 関数のデフォルトパラメーター、分割代入などのような
-  ES2015 で追加される JavaScript の機能を順次追加し、ソースコードをより表現豊かにできます。
+* JavaScript features new to ES2015, like arrow functions, `let`s and `const`s,
+  default function parameters, and destructuring assignments can also be gradually
+  added to make the code more expressive.
 
-* サービスとコントローラーを *クラス* にすることができます。それにより、Angular での
-  サービスとコンポーネントのクラスにより近くすることができ、アップグレード後の人生がよりよいものとなります。
+* Services and controllers can be turned into *classes*. That way they'll be a step
+  closer to becoming Angular service and component classes, which will make
+  life easier after the upgrade.
 
 ### Using Component Directives
 
-Angular において、コンポーネントはユーザーインターフェースを構築する上で中心の原始的要素です。
-UI の別々の部分をコンポーネントで定義し、全体のユーザー体験として構成します。
+In Angular, components are the main primitive from which user interfaces
+are built. You define the different portions of the UI as components and
+compose them into a full user experience.
 
-*コンポーネントディレクティブ* を使うことで、AngularJS でもこれを行うことができます。これらのディレクティブは
-自身のテンプレートやコントローラー、入力/出力のバインディングのような Angular のコンポーネントが定義するものと
-同じものを定義することができます。コンポーネントディレクティブによって構築されたアプリケーションは
-`ng-controller` や `ng-include` 、スコープの継承などの低レベルの機能によって構築されたアプリケーションよりも
-Angular に移行しやすいです。
+You can also do this in AngularJS, using *component directives*. These are
+directives that define their own templates, controllers, and input/output bindings -
+the same things that Angular components define. Applications built with
+component directives are much easier to migrate to Angular than applications
+built with lower-level features like `ng-controller`,  `ng-include`, and scope
+inheritance.
 
-Angular 互換にするために、 AngularJS のコンポーネントディレクティブは次のような属性を
-設定する必要があります。
+To be Angular compatible, an AngularJS component directive should configure
+these attributes:
 
-* `restrict: 'E'`。 コンポーネントは通常、エレメントとして使われます。
-* `scope: {}` - 分離されたスコープです。Angular ではコンポーネントは常に周りと分離されているため、AngularJS でも同様にすべきです。
-* `bindToController: {}`。 コンポーネントへ入力と出力は `$scope` の代わりにコントローラーと繋げるべきです。
-* `controller` もしくは `controllerAs`。 コンポーネントは自身のコントローラーを持ちます。
-* `template` もしくは `templateUrl`。 コンポーネントは自身のテンプレートを持ちます。
+* `restrict: 'E'`. Components are usually used as elements.
+* `scope: {}` - an isolate scope. In Angular, components are always isolated
+  from their surroundings, and you should do this in AngularJS too.
+* `bindToController: {}`. Component inputs and outputs should be bound
+  to the controller instead of using the `$scope`.
+* `controller` and `controllerAs`. Components have their own controllers.
+* `template` or `templateUrl`. Components have their own templates.
 
-コンポーネントディレクティブは次の要素を使うこともできます。
+Component directives may also use the following attributes:
 
-* `transclude: true/{}` は、コンポーネントが他の場所からコンテンツをトランスクルードする場合に使います。
-* `require` は、コンポーネントが親コンポーネントのコントローラーとやりとりするために使います。
+* `transclude: true/{}`, if the component needs to transclude content from elsewhere.
+* `require`, if the component needs to communicate with some parent component's
+  controller.
 
-コンポーネントディレクティブでは次のような属性は使っては **いけません** 。
+Component directives **should not** use the following attributes:
 
-* `compile`。 Angular ではこの属性はサポートされません。
-* `replace: true`。 Angular はコンポーネントのエレメントをコンポーネントのテンプレートと置換しません。AngularJS でもこの属性は廃止されました。
-* `priority` と `terminal`。 AngularJS のコンポーネントでは使うことができますが、 Angular では使うことはできないのでそれらの属性に依存したコードは書かない方がよいでしょう。
+* `compile`. This will not be supported in Angular.
+* `replace: true`. Angular never replaces a component element with the
+  component template. This attribute is also deprecated in AngularJS.
+* `priority` and `terminal`. While AngularJS components may use these,
+  they are not used in Angular and it is better not to write code
+  that relies on them.
 
-Angular のアーキテクチャに合わせた、AngularJS のコンポーネントディレクティブは
-次のようになります。
+An AngularJS component directive that is fully aligned with the Angular
+architecture may look something like this:
 
 <code-example path="upgrade-module/src/app/hero-detail.directive.ts" header="hero-detail.directive.ts">
 </code-example>
 
-AngularJS 1.5 では これらのようなコンポーネントディレクティブを定義しやすくするために、[コンポーネント API](https://docs.angularjs.org/api/ng/type/angular.Module#component) が導入されました。コンポーネントディレクティブこの API を使うことには次のような利点があります。
+AngularJS 1.5 introduces the [component API](https://docs.angularjs.org/api/ng/type/angular.Module#component)
+that makes it easier to define component directives like these. It is a good idea to use
+this API for component directives for several reasons:
 
-* ボイラープレートのソースコードを減らせる。
-* `controllerAs` のようなベストプラクティスをコンポーネントで使うように強制できる。
-* `scope` and `restrict` のようなディレクティブの属性に適切なデフォルトの値が入る。
+* It requires less boilerplate code.
+* It enforces the use of component best practices like `controllerAs`.
+* It has good default values for directive attributes like `scope` and `restrict`.
 
-上記のようなコンポーネントディレクティブの例はコンポーネントを使って表現すると
-次のようになります。
+The component directive example from above looks like this when expressed
+using the component API:
 
 <code-example path="upgrade-module/src/app/upgrade-io/hero-detail.component.ts" region="hero-detail-io" header="hero-detail.component.ts">
 </code-example>
 
-`$onInit()`　や `$onDestroy()`、`$onChanges()`のようにコントローラーのライフサイクルをフックするメソッド
-は AngularJS 1.5 で導入された便利な機能です。それらはほぼ [Angular において同様のもの](guide/lifecycle-hooks) 
-があるため、コンポーネントのライフサイクルのロジックをそれらを使って構成することで、 Angular へのアップグレード
-作業を簡単にすることができます。
+Controller lifecycle hook methods `$onInit()`, `$onDestroy()`, and `$onChanges()`
+are another convenient feature that AngularJS 1.5 introduces. They all have nearly
+exact [equivalents in Angular](guide/lifecycle-hooks), so organizing component lifecycle
+logic around them will ease the eventual Angular upgrade process.
 
 ## Upgrading with ngUpgrade
 
-Angular の ngUpgrade ライブラリは本当に小さいアプリケーションが対象でない限り、
-アップグレードにとても便利なツールです。それを使うことで、 AngularJS と Angular の
-コンポーネントを同じアプリケーションに混ぜたり、合わせたりすることができ、シームレスな
-相互運用が可能になります。それにより、移行期間中に2つのフレームワークが自然に共存
-することができるため、アップグレード作業を一度にする必要がなくなります。
+The ngUpgrade library in Angular is a very useful tool for upgrading
+anything but the smallest of applications. With it you can mix and match
+AngularJS and Angular components in the same application and have them interoperate
+seamlessly. That means you don't have to do the upgrade work all at once,
+since there's a natural coexistence between the two frameworks during the
+transition period.
 
 ### How ngUpgrade Works
 
-ngUpgrade が提供する主なツールのひとつが `UpgradeModule` です。
-このモジュールには Angular と AngularJS のコードの両方をサポートするハイブリッドアプリケーションを
-ブートストラップしたり、管理するための便利ツールが含まれています。
+One of the primary tools provided by ngUpgrade is called the `UpgradeModule`.
+This is a module that contains utilities for bootstrapping and managing hybrid
+applications that support both Angular and AngularJS code.
 
-ngUpgrade は *AngularJS と Angular を同時に動かす* ことが本当にやりたい場合に使います。
-すべての Angular のコードは Angular フレームワークの中で動き、AngularJS のコードは AngularJS
-フレームワークの中で動きます。これらは両方とも実際に、フレームワークの完全な機能です。エミュレーションでは
-ないため、両方のフレームワークがもつすべての機能と自然な挙動を期待できます。
+When you use ngUpgrade, what you're really doing is *running both AngularJS and
+Angular at the same time*. All Angular code is running in the Angular
+framework, and AngularJS code in the AngularJS framework. Both of these are the
+actual, fully featured versions of the frameworks. There is no emulation going on,
+so you can expect to have all the features and natural behavior of both frameworks.
 
-これにより、ひとつのフレームワークで管理されるコンポーネントとサービスがもう一方のフレームワークの
-ものと相互運用することができます。これは3つの主要な領域で発生します。依存性の注入と DOM、変更検知です。 
+What happens on top of this is that components and services managed by one
+framework can interoperate with those from the other framework. This happens
+in three main areas: Dependency injection, the DOM, and change detection.
 
 #### Dependency Injection
 
-依存性の注入は AngularJS と Angular 両方の目玉ですが、実際の動作には
-2つのフレームワークの間でいくつかの重要な違いがあります。
+Dependency injection is front and center in both AngularJS and
+Angular, but there are some key differences between the two
+frameworks in how it actually works.
 
 <table>
   <tr>
@@ -171,43 +226,45 @@ ngUpgrade は *AngularJS と Angular を同時に動かす* ことが本当に�
   </tr>
   <tr>
     <td>
-      依存性の注入のトークンは常に文字列
+      Dependency injection tokens are always strings
     </td>
     <td>
 
-      トークンは[別々の型をもつことができる](guide/dependency-injection)。
-      多くの場合はクラスだが、文字列の場合もある。
+      Tokens [can have different types](guide/dependency-injection).
+      They are often classes. They may also be strings.
 
     </td>
   </tr>
   <tr>
     <td>
 
-      インジェクタは必ず一つ。複数のモジュールのアプリケーションであっても、
-      全て一つの大きな名前空間に流し込まれる。
+      There is exactly one injector. Even in multi-module applications,
+      everything is poured into one big namespace.
 
     </td>
     <td>
-      
-      各コンポーネントに対して、ルートのインジェクタと追加のインジェクタから構成される、
-      [インジェクタのツリー構造](guide/hierarchical-dependency-injection)がある。
+
+      There is a [tree hierarchy of injectors](guide/hierarchical-dependency-injection),
+      with a root injector and an additional injector for each component.
 
     </td>
   </tr>
 </table>
 
-これらの違いがあるものの、依存性の注入を相互運用することはできます。
-`upgrade/static`　によって違いを解消し、すべてをシームレスに動作させられます。
+Even accounting for these differences you can still have dependency injection
+interoperability. `upgrade/static` resolves the differences and makes
+everything work seamlessly:
 
-* AngularJS のサービスを *アップグレード* することにより、Angular のコードでつかえるようになります。
-  個々のサービスの同じシングルトンインスタンスがフレームワーク間で共有されます。
-  Angular ではこれらのサービスは常に *ルートのインジェクター* として扱われ、すべての
-  コンポーネントから利用できます。
+* You can make AngularJS services available for injection to Angular code
+  by *upgrading* them. The same singleton instance of each service is shared
+  between the frameworks. In Angular these services will always be in the
+  *root injector* and available to all components.
 
-* Angular サービスを *ダウングレード* することにより、AngularJS のコードで使えるようになります。。
-  Angular のルートのインジェクターからのサービスのみダウングレードできます。同じシングルトンインスタンスが
-  フレームワーク間で共有されます。ダウングレードされたサービスを登録する際は、AngularJS で使うための
-  *文字列のトークン* を指定しなければなりません。
+* You can also make Angular services available for injection to AngularJS code
+  by *downgrading* them. Only services from the Angular root injector can
+  be downgraded. Again, the same singleton instances are shared between the frameworks.
+  When you register a downgraded service, you must explicitly specify a *string token* that you want to
+  use in AngularJS.
 
 <figure>
   <img src="generated/images/guide/upgrade/injectors.png" alt="The two injectors in a hybrid application">
@@ -215,109 +272,118 @@ ngUpgrade は *AngularJS と Angular を同時に動かす* ことが本当に�
 
 #### Components and the DOM
 
-ハイブリッドの ngUpgrade の DOM の中ではアプリケーションは AngularJS と Angular 
-のコンポーネントやディレクティブの集まりです。これらのコンポーネントは
-ngUpgrade によって共存する各フレームワークの入力と出力のバインディングを使ってお互いにやりとりします。
-上記に記載したように、それらは注入された依存性を通してやりとりする場合もあります。
+In the DOM of a hybrid ngUpgrade application are components and
+directives from both AngularJS and Angular. These components
+communicate with each other by using the input and output bindings
+of their respective frameworks, which ngUpgrade bridges together. They may also
+communicate through shared injected dependencies, as described above.
 
-ハイブリッドのアプリケーションを理解する上で重要なことは DOM の中のすべての要素が必ず2つのフレームワークの
-どちらかによって管理されていることです。もう一方のフレームワークでは無視されます。もしある要素が AngularJS に
-よって管理される場合、 Angular はその要素が存在しないものとして扱います。逆も同様です。
+The key thing to understand about a hybrid application is that every element in the DOM is owned by exactly one of the two frameworks.
+The other framework ignores it. If an element is
+owned by AngularJS, Angular treats it as if it didn't exist,
+and vice versa.
 
-通常、ハイブリッドのアプリケーションは AngularJS のアプリケーションとして動作を開始し、
-AngularJS が index.html のようなルートのテンプレートを処理します。AngularJS の
-テンプレートのどこかで Angular のコンポーネントが使われた時に Angular が出てきます。
-そのコンポーネントのテンプレートは Angular によって管理されることになり、Angular の
-コンポーネントやディレクティブを何個でも含めることができます。
+So normally a hybrid application begins life as an AngularJS application,
+and it is AngularJS that processes the root template, e.g. the index.html.
+Angular then steps into the picture when an Angular component is used somewhere
+in an AngularJS template. That component's template will then be managed
+by Angular, and it may contain any number of Angular components and
+directives.
 
-さらに、2つのフレームワークをインターリーブすることができます。
-次の2つの方法のうち、どちらかを使うことで2つのフレームワークを
-行き来することができます。
+Beyond that, you may interleave the two frameworks.
+You always cross the boundary between the two frameworks by one of two
+ways:
 
-1. もう一方のフレームワークからコンポーネント使う方法。AngularJS のテンプレートで
-   Angular のコンポーネントを使うか、Angular のテンプレートで AngularJS の
-   テンプレートを使う。
+1. By using a component from the other framework: An AngularJS template
+   using an Angular component, or an Angular template using an
+   AngularJS component.
 
-2. もう一方のフレームワークからトランスクルードかコンテンツ投影を行う方法。ngUpgrade は
-   AngularJS のトランスクルードと Angular のコンテンツ投影という関連した概念を橋渡しします。
+2. By transcluding or projecting content from the other framework. ngUpgrade
+    bridges the related concepts of AngularJS transclusion and Angular content
+    projection together.
 
 <figure>
   <img src="generated/images/guide/upgrade/dom.png" alt="DOM element ownership in a hybrid application">
 </figure>
 
-もう一方のフレームワークのコンポーネントを使う際は常にフレームワーク間の行き来が発生します。
-しかし、その行き来はコンポーネントのテンプレートの要素にのみ発生します。次のように、Angular の
-コンポーネントを AngularJS から使う場合を考えてみます。
+Whenever you use a component that belongs to the other framework, a
+switch between framework boundaries occurs. However, that switch only
+happens to the elements in the template of that component. Consider a situation
+where you use an Angular component from AngularJS like this:
 
 <code-example language="html" escape="html">
   &lt;a-component&gt;&lt;/a-component&gt;
 </code-example>
 
-DOM 要素の `<a-component>` は AngularJS の要素として管理されます。なぜなら、
-AngularJS のテンプレートの中で定義されているからです。そのため、そこには AngularJS
-のディレクティブのみ追加することができますが Angular のディレクティブは *できません* 。
-`<a-component>` のテンプレートの中でのみ Angular が利用できます。同じことが
-Angular から AngularJS のコンポーネントを使う場合にもいえます。
+The DOM element `<a-component>` will remain to be an AngularJS managed
+element, because it's defined in an AngularJS template. That also
+means you can apply additional AngularJS directives to it, but *not*
+Angular directives. It is only in the template of the `<a-component>`
+where Angular steps in. This same rule also applies when you
+use AngularJS component directives from Angular.
 
 #### Change Detection
 
-AngularJS では `scope.$apply()` を使ってデータバインディングの変更や更新を検知できます。
-イベントが発生するごとに `scope.$apply()` が呼び出されます。これは手動ではなく、
-フレームワークによって自動的に行われます。
+The `scope.$apply()` is how AngularJS detects changes and updates data bindings.
+After every event that occurs, `scope.$apply()` gets called. This is done either
+automatically by the framework, or manually by you.
 
-Angular では状況が異なります。イベントごとに変更検知が発生しますが、
-`scope.$apply()` を呼び出す必要がありません。なぜなら Angular のコードは
-[Angular ゾーン](api/core/NgZone)と呼ばれるものの中で実行されるからです。
-Angular は常にコードの終了を検知するため、変更も検知できるのです。コード自体では
-`scope.$apply()` のようなものを呼び出す必要はありません。
+In Angular things are different. While change detection still
+occurs after every event, no one needs to call `scope.$apply()` for
+that to happen. This is because all Angular code runs inside something
+called the [Angular zone](api/core/NgZone). Angular always
+knows when the code finishes, so it also knows when it should kick off
+change detection. The code itself doesn't have to call `scope.$apply()`
+or anything like it.
 
-ハイブリッドのアプリケーションでは、`UpgradeModule` が AngularJS と
-Angular のやり方を橋渡しします。次のようなことが起こります。
+In the case of hybrid applications, the `UpgradeModule` bridges the
+AngularJS and Angular approaches. Here's what happens:
 
-* アプリケーションで発生するすべてのことは Angular ゾーンの内部で実行されます。
-  このことはイベントが発生した場所が AngularJS もしくは Angular のコードかに
-  かかわらずいえることです。Angular ゾーンはイベントごとに Angular の変更検知
-  を動作させます。
+* Everything that happens in the application runs inside the Angular zone.
+  This is true whether the event originated in AngularJS or Angular code.
+  The zone triggers Angular change detection after every event.
 
-* `UpgradeModule` は Angular ゾーンのターンごとに AngularJS の 
-  `$rootScope.$apply()` を実行します。これにより、AngularJS の変更検知が
-  イベントごとに発生することになります。
+* The `UpgradeModule` will invoke the AngularJS `$rootScope.$apply()` after
+  every turn of the Angular zone. This also triggers AngularJS change
+  detection after every event.
 
 <figure>
   <img src="generated/images/guide/upgrade/change_detection.png" alt="Change detection in a hybrid application">
 </figure>
 
-実用上は、AngularJS か Angular であるかにかかわらず、
-`$apply()` を呼び出す必要はありません。`UpgradeModule` が
-代わりにやってくれるからです。`$apply()` を呼び出すことも *できる* ため、
-既存のコードから該当の箇所を削除する必要はありません。それらの呼び出しは
-ハイブリッドアプリケーションの AngularJS の変更検知を追加で実行するだけです。
+In practice, you do not need to call `$apply()`,
+regardless of whether it is in AngularJS on Angular. The
+`UpgradeModule` does it for us. You *can* still call `$apply()` so there
+is no need to remove such calls from existing code. Those calls just trigger
+additional AngularJS change detection checks in a hybrid application.
 
-Angular のコンポーネントをダウングレードし、AngularJS から使う場合はコンポーネントの
-入力は AngularJS の変更検知によって監視されます。それらの入力に変更があれば、
-コンポーネントの中の対応するプロパティが設定されます。コンポーネントの [OnChanges](api/core/OnChanges)
-インターフェースを実装することでダウングレードしてないかのように変更をフックすることもできます。
+When you downgrade an Angular component and then use it from AngularJS,
+the component's inputs will be watched using AngularJS change detection.
+When those inputs change, the corresponding properties in the component
+are set. You can also hook into the changes by implementing the
+[OnChanges](api/core/OnChanges) interface in the component,
+just like you could if it hadn't been downgraded.
 
-対応して、AngularJS のコンポーネントをアップグレードして Angular から使う場合、
-コンポーネントディレクティブの `scope` （もしくは `bindToController` ）を使った
-バインディングはすべて Anglar の変更検知でフックされます。それらは通常の Angular の入力
-として扱われます。それらの値は変更が会った時に、アップグレードされたコンポーネントの
-スコープ（もしくはコントローラー）に書き込まれます。
+Correspondingly, when you upgrade an AngularJS component and use it from Angular,
+all the bindings defined for the component directive's `scope` (or `bindToController`)
+will be hooked into Angular change detection. They will be treated
+as regular Angular inputs. Their values will be written to the upgraded component's
+scope (or controller) when they change.
 
 ### Using UpgradeModule with Angular _NgModules_
 
-アプリケーションを機能ごとにまとまったブロックとして構成するために、
-AngualrJS と Angular は両方とも自身のモジュールの概念を持ってみます。
+Both AngularJS and Angular have their own concept of modules
+to help organize an application into cohesive blocks of functionality.
 
-それらの詳細はアーキテクチャと実装においてまったく異なります。
-AngularJS では Angular のアセットを `angular.module` プロパティに追加します。
-Angular ではひとつ以上の `NgModule` で修飾されたクラスを使って
-Angular のアセットをメタデータに記述することができます。2つの違いはそこで花開きます。
+Their details are quite different in architecture and implementation.
+In AngularJS, you add Angular assets to the `angular.module` property.
+In Angular, you create one or more classes adorned with an `NgModule` decorator
+that describes Angular assets in metadata. The differences blossom from there.
 
-ハイブリッドのアプリケーションでは両方のバージョンの Angular を一度に動かします。
-そのため、AngularJS と Angular 両方から最低でもひとつのモジュールが必要となります。
-NgModule の内部で `UpgradeModule` をインポートし、 AngularJS のモジュールを
-ブートストラップすることができます。
+In a hybrid application you run both versions of Angular at the same time.
+That means that you need at least one module each from both AngularJS and Angular.
+You will import `UpgradeModule` inside the NgModule, and then use it for
+bootstrapping the AngularJS module.
 
 <div class="alert is-helpful">
 
@@ -327,136 +393,140 @@ For more information, see [NgModules](guide/ngmodules).
 
 ### Bootstrapping hybrid applications
 
-ハイブリッドのアプリケーションをブートストラップするためには、アプリケーションの
-Angular と AngularJS の部分をそれぞれブートストラップしなければいけません。
-Angular の部分を先にブートストラップし、次に `UpgradeModule` を使って AngularJS 
-の部分をブートストラップします。
+To bootstrap a hybrid application, you must bootstrap each of the Angular and
+AngularJS parts of the application. You must bootstrap the Angular bits first and
+then ask the `UpgradeModule` to bootstrap the AngularJS bits next.
 
-AngularJS のアプリケーションでは AngularJS のアプリケーションを
-ブートストラップするためのルートの AngularJS モジュールが存在します。
+In an AngularJS application you have a root AngularJS module, which will also
+be used to bootstrap the AngularJS application.
 
 <code-example path="upgrade-module/src/app/ajs-bootstrap/app.module.ts" region="ng1module" header="app.module.ts">
 </code-example>
 
-純粋な AngularJS のアプリケーションは HTML 中の `ng-app` ディレクティブを使って自動的に
-ブートストラップされます。しかしハイブリッドのアプリケーションでは `UpgradeModule` を通して
-手動でブートストラップします。そのため、ハイブリッド方式に切り替える前の予備準備として
-AngularJS のアプリケーションで手動で JavaScript の [`angular.bootstrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) 方式を使うことがよいでしょう。
+Pure AngularJS applications can be automatically bootstrapped by using an `ng-app`
+directive somewhere on the HTML page. But for hybrid applications, you manually bootstrap via the
+`UpgradeModule`. Therefore, it is a good preliminary step to switch AngularJS applications to use the
+manual JavaScript [`angular.bootstrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap)
+method even before switching them to hybrid mode.
 
-たとえば、次のような `ng-app` によるブートストラップがあるとします。
+Say you have an `ng-app` driven bootstrap such as this one:
 
 <code-example path="upgrade-module/src/index-ng-app.html">
 </code-example>
 
-HTML から `ng-app` と `ng-strict-di` ディレクティブを削除し、代わりに JavaScript
-から `angular.bootstrap` を呼ぶことで同じことができます。
+You can remove the `ng-app` and `ng-strict-di` directives from the HTML
+and instead switch to calling `angular.bootstrap` from JavaScript, which
+will result in the same thing:
 
 <code-example path="upgrade-module/src/app/ajs-bootstrap/app.module.ts" region="bootstrap" header="app.module.ts">
 </code-example>
 
-AngularJS のアプリケーションをハイブリッドに置き換え始めるために、 Angular フレームワークを
-ロードする必要があります。これを SystemJS を使って行う方法については [QuickStart github repository](https://github.com/angular/quickstart) からの抜粋が [セットアップ](guide/setup) に記載されています。
+To begin converting your AngularJS application to a hybrid, you need to load the Angular framework.
+You can see how this can be done with SystemJS by following the instructions in [Setup](guide/setup),
+selectively copying code from the [QuickStart github repository](https://github.com/angular/quickstart).
 
-
-`npm install @angular/upgrade --save` で `@angular/upgrade` パッケージをインストールし、
-`@angular/upgrade/static` パッケージへのマッピングを追加することも必要です。
+You also need to install the `@angular/upgrade` package via `npm install @angular/upgrade --save`
+and add a mapping for the `@angular/upgrade/static` package:
 
 <code-example path="upgrade-module/src/systemjs.config.1.js" region="upgrade-static-umd" header="systemjs.config.js (map)">
 </code-example>
 
-次に、`app.module.ts` ファイルを作成し、`NgModule` クラスを追加します。
+Next, create an `app.module.ts` file and add the following `NgModule` class:
 
 <code-example path="upgrade-module/src/app/ajs-a-hybrid-bootstrap/app.module.ts" region="ngmodule" header="app.module.ts">
 </code-example>
 
-この素の最小構成の `NgModule` はすべてのブラウザ上で動く Angular アプリケーションにとって必須である `BrowserModule`
-をインポートします。また、サービスやコンポーネントをアップグレードしたりダウングレードするためのプロバイダーをエクスポートを
-する `UpgradeModule` も `@angular/upgrade/static` からインポートします。
+This bare minimum `NgModule` imports `BrowserModule`, the module every Angular browser-based app must have.
+It also imports `UpgradeModule` from `@angular/upgrade/static`, which exports providers that will be used
+for upgrading and downgrading services and components.
 
-`AppModule` のコンストラクターでは `UpgradeModule` のインスタンスを得るために依存性の注入が行われ、
-`AppModule.ngDoBootstrap` メソッドが AngularJS アプリケーションをブートストラップするために使われます。
-`upgrade.bootstrap` メソッドは [angular.bootstrap](https://docs.angularjs.org/api/ng/function/angular.bootstrap) と完全に同じ引数をとります。
+In the constructor of the `AppModule`, use dependency injection to get a hold of the `UpgradeModule` instance,
+and use it to bootstrap the AngularJS app in the `AppModule.ngDoBootstrap` method.
+The `upgrade.bootstrap` method takes the exact same arguments as [angular.bootstrap](https://docs.angularjs.org/api/ng/function/angular.bootstrap):
 
 <div class="alert is-helpful">
 
-AngularJS はアプリケーションのルートのテンプレートを管理するため、
-`@NgModule` デコレーターに `bootstrap` の宣言を追加しないことに注意してください。
+Note that you do not add a `bootstrap` declaration to the `@NgModule` decorator, since
+AngularJS will own the root template of the application.
 
 </div>
 
-`platformBrowserDynamic.bootstrapModule` メソッドを使って `AppModule` をブートストラップできます。
+Now you can bootstrap `AppModule` using the `platformBrowserDynamic.bootstrapModule` method.
 
 <code-example path="upgrade-module/src/app/ajs-a-hybrid-bootstrap/app.module.ts" region="bootstrap" header="app.module.ts'">
 </code-example>
 
-おめでとうございます！ハイブリッドのアプリケーションが動き始めました！
-既存の AngularJS のコードは以前と同じように動作します。_そして_ Angular コードを追加する準備ができました。
+Congratulations! You're running a hybrid application! The
+existing AngularJS code works as before _and_ you're ready to start adding Angular code.
 
 ### Using Angular Components from AngularJS Code
 
 <img src="generated/images/guide/upgrade/ajs-to-a.png" alt="Using an Angular component from AngularJS code" class="left">
 
-ハイブリッドのアプリケーションを動かし始めたなら、コードの漸進的なアップグレード作業を始めることができます。
-そのための典型的な方法のひとつは AngularJS の文脈の中で Angular のコンポーネントを使うことです。
-これは完全に新しいコンポーネントか AngularJS にあったものを Angular 向けに書き直したものの場合があります。
+Once you're running a hybrid app, you can start the gradual process of upgrading
+code. One of the more common patterns for doing that is to use an Angular component
+in an AngularJS context. This could be a completely new component or one that was
+previously AngularJS but has been rewritten for Angular.
 
-たとえば、ヒーローに関する情報を表示する、簡単な Angular コンポーネントがあるとします。
+Say you have a simple Angular component that shows information about a hero:
 
 <code-example path="upgrade-module/src/app/downgrade-static/hero-detail.component.ts" header="hero-detail.component.ts">
 </code-example>
 
-このコンポーネントを AngularJS から使いたいならば、 `downgradeComponent()` メソッドを使って
-*ダウングレード* する必要があります。その結果、AngularJS の *ディレクティブ* として、
-AngularJS のモジュールの中に登録できます。
+If you want to use this component from AngularJS, you need to *downgrade* it
+using the `downgradeComponent()` method. The result is an AngularJS
+*directive*, which you can then register in the AngularJS module:
 
 <code-example path="upgrade-module/src/app/downgrade-static/app.module.ts" region="downgradecomponent" header="app.module.ts">
 </code-example>
 
-`HeroDetailComponent` は Angular のコンポーネントであるため、 `AppModule` の中で宣言
-する必要があります。
+Because `HeroDetailComponent` is an Angular component, you must also add it to the
+`declarations` in the `AppModule`.
 
-そしてこのコンポーネントは AngularJS のモジュールから使われれ、Angular のアプリケーションの開始地点に
-なるため、NgModule の `entryComponents` に追加しなければなりません。
+And because this component is being used from the AngularJS module, and is an entry point into
+the Angular application, you must add it to the `entryComponents` for the
+NgModule.
 
 <code-example path="upgrade-module/src/app/downgrade-static/app.module.ts" region="ngmodule" header="app.module.ts">
 </code-example>
 
 <div class="alert is-helpful">
 
-すべての Angular のコンポーネントやディレクティブ、パイプは NgModule で宣言されなければなりません。
+All Angular components, directives and pipes must be declared in an NgModule.
 
 </div>
 
-最終的に、`heroDetail` という名前で、AngularJS AngularJS のテンプレートの
-中にある他のディレクティブと同じように使うことができるようになります。
+The net result is an AngularJS directive called `heroDetail`, that you can
+use like any other directive in AngularJS templates.
 
 <code-example path="upgrade-module/src/index-downgrade-static.html" region="usecomponent">
 </code-example>
 
 <div class="alert is-helpful">
 
-この AngularJS のコードは `heroDetail` という名前のディレクティブ要素 (`restrict: 'E'`)
-だということに注意してください。AngularJS のディレクティブ要素は _名前_ に基づいてマッチします。
-*ダウングレードされた Angular のコンポーネントの `selector` メタデータは無視されます。*
+Note that this AngularJS is an element directive (`restrict: 'E'`) called `heroDetail`.
+An AngularJS element directive is matched based on its _name_.
+*The `selector` metadata of the downgraded Angular component is ignored.*
 
 </div>
 
-もちろん、ほとんどのコンポーネントはこれほど単純ではありません。多くは
-*入力* と *出力* を持ち、外の世界とつながっています。ヒーローの情報を紹介する
-Angular のコンポーネントに入力と出力が加わると次のようになります。
+Most components are not quite this simple, of course. Many of them
+have *inputs and outputs* that connect them to the outside world. An
+Angular hero detail component with inputs and outputs might look
+like this:
 
 <code-example path="upgrade-module/src/app/downgrade-io/hero-detail.component.ts" header="hero-detail.component.ts">
 </code-example>
 
-これらの入力と出力は AngularJS のテンプレートから与えることができ、`downgradeComponent()`
-がそれらを紐づけてくれます。
+These inputs and outputs can be supplied from the AngularJS template, and the
+`downgradeComponent()` method takes care of wiring them up:
 
 <code-example path="upgrade-module/src/index-downgrade-io.html" region="usecomponent">
 </code-example>
 
-AngularJS のテンプレートの中であっても、 **Angular の属性記法を使って入力と出力をバインドしている* ことに
-注意してください。これはコンポーネントをダウングレードするための要件です。それ自体の式は通常 AngularJS の
-式のままです。
+Note that even though you are in an AngularJS template, **you're using Angular
+attribute syntax to bind the inputs and outputs**. This is a requirement for downgraded
+components. The expressions themselves are still regular AngularJS expressions.
 
 <div class="callout is-important">
 
@@ -464,15 +534,15 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
   Use kebab-case for downgraded component attributes
 </header>
 
-ダウングレードされたコンポーネントに Angular の属性記法を使うためのルールで特記すべき例外があります。
-入力または出力の名前が複数の単語から構成される場合に発生します。Angular ではこのような属性は
-キャメルケースを使います。
+There's one notable exception to the rule of using Angular attribute syntax
+for downgraded components. It has to do with input or output names that consist
+of multiple words. In Angular, you would bind these attributes using camelCase:
 
 <code-example format="">
   [myHero]="hero"
 </code-example>
 
-しかしAngularJS のテンプレートから使う場合、ケバブケースを使わなければなりません。
+But when using them from AngularJS templates, you must use kebab-case:
 
 <code-example format="">
   [my-hero]="hero"
@@ -480,13 +550,13 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
 
 </div>
 
-吐かれたオブジェクトにアクセスするために、`$event` 変数を出力で使うことができます。
-この場合は `Hero` オブジェクトが該当します。なぜならそれは `this.deleted.emit()`
-へ渡されたオブジェクトだからです。
+The `$event` variable can be used in outputs to gain access to the
+object that was emitted. In this case it will be the `Hero` object, because
+that is what was passed to `this.deleted.emit()`.
 
-これは AngularJS のテンプレートであるため、Angular でバインディングされた属性であっても、
-そのエレメントにある他の AngularJS のディレクティブを引き続き使うことができます。
-たとえば、`ng-repeat` を使ってそのコンポーネントのコピーをいくつも簡単に作ることができます。
+Since this is an AngularJS template, you can still use other AngularJS
+directives on the element, even though it has Angular binding attributes on it.
+For example, you can easily make multiple copies of the component using `ng-repeat`:
 
 <code-example path="upgrade-module/src/index-downgrade-io.html" region="userepeatedcomponent">
 </code-example>
@@ -495,28 +565,31 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
 
 <img src="generated/images/guide/upgrade/a-to-ajs.png" alt="Using an AngularJS component from Angular code" class="left">
 
-このように、Angular のコンポーネントとして書き、AngularJS のコードからそれを使うことが
-できます。これは低レベルのコンポーネントから移行を始める時に役立ちます。しかしいくつかの
-場合では逆の順番（高レベルのコンポーネントから始める方法）で行う方が便利なときがあります。
-これは `upgrade/static` を使って行うことができます。AngularJS のコンポーネントディレクティブ
-を *アップグレード* して Angular から使うことができます。
+So, you can write an Angular component and then use it from AngularJS
+code. This is useful when you start to migrate from lower-level
+components and work your way up. But in some cases it is more convenient
+to do things in the opposite order: To start with higher-level components
+and work your way down. This too can be done using the `upgrade/static`.
+You can *upgrade* AngularJS component directives and then use them from
+Angular.
 
-すべての種類の AngularJS のディレクティブがアップグレードできるわけではありません。
-[上記の準備ガイドに記載された](guide/upgrade#using-component-directives) 形式の
-*コンポーネントディレクティブ* である必要があります。互換性を保つ安全な方法は
-AngularJS 1.5 で導入された [コンポーネント API](https://docs.angularjs.org/api/ng/type/angular.Module)
-を使うことです。
+Not all kinds of AngularJS directives can be upgraded. The directive
+really has to be a *component directive*, with the characteristics
+[described in the preparation guide above](guide/upgrade#using-component-directives).
+The safest bet for ensuring compatibility is using the
+[component API](https://docs.angularjs.org/api/ng/type/angular.Module)
+introduced in AngularJS 1.5.
 
-アップグレード可能なコンポーネントの簡単な例として、テンプレートとコントローラーのみ
-もつコンポーネントがあります。
+A simple example of an upgradable component is one that just has a template
+and a controller:
 
 <code-example path="upgrade-module/src/app/upgrade-static/hero-detail.component.ts" region="hero-detail" header="hero-detail.component.ts">
 </code-example>
 
-`UpgradeComponent` クラスを使うことでこのコンポーネントを Angular に *アップグレード* できます。
-`UpgradeComponent` を拡張して Angular の **ディレクティブ** を新しく作り、 `super` をコンストラクターの中で
-呼び出すことで、AngularJS のコンポーネントをアップグレードして Angular の中で使うことができます。
-あとは、`AppModule` の `declarations` 配列に追加するだけです。
+You can *upgrade* this component to Angular using the `UpgradeComponent` class.
+By creating a new Angular **directive** that extends `UpgradeComponent` and doing a `super` call
+inside its constructor, you have a fully upgraded AngularJS component to be used inside Angular.
+All that is left is to add it to `AppModule`'s `declarations` array.
 
 <code-example path="upgrade-module/src/app/upgrade-static/hero-detail.component.ts" region="hero-detail-upgrade" header="hero-detail.component.ts">
 </code-example>
@@ -526,31 +599,33 @@ AngularJS 1.5 で導入された [コンポーネント API](https://docs.angula
 
 <div class="alert is-helpful">
 
-アップグレードされたコンポーネントは Angular の **コンポーネント** ではなく、 **ディレクティブ** です。
-なぜなら Angular は AngularJS がその下に要素を作ることを認識しないからです。Angular ではアップグレード
-されたコンポーネントはディレクティブ（ただのタグ）として認識され、Angular はその子要素に関しては気にしません。
+Upgraded components are Angular **directives**, instead of **components**, because Angular
+is unaware that AngularJS will create elements under it. As far as Angular knows, the upgraded
+component is just a directive - a tag - and Angular doesn't have to concern itself with
+its children.
 
 </div>
 
-アップグレードされたコンポーネントはもともとの AngularJS のコンポーネントディレクティブの
-スコープ/コントローラーのバインディングで定義された入力と出力をもつことができます。
-そのコンポーネントを Angular のテンプレートから使う時は **Angular のテンプレート記法** を
-使い、次のルールにしたがって入力と出力を提供してください。
+An upgraded component may also have inputs and outputs, as defined by
+the scope/controller bindings of the original AngularJS component
+directive. When you use the component from an Angular template,
+provide the inputs and outputs using **Angular template syntax**,
+observing the following rules:
 
 <table>
   <tr>
     <th>
     </th>
     <th>
-      バインディングの定義
+      Binding definition
     </th>
     <th>
-      テンプレート記法
+      Template syntax
     </th>
   </tr>
   <tr>
     <th>
-      属性のバインディング
+      Attribute binding
     </th>
     <td>
 
@@ -566,7 +641,7 @@ AngularJS 1.5 で導入された [コンポーネント API](https://docs.angula
   </tr>
   <tr>
     <th>
-      式のバインディング
+      Expression binding
     </th>
     <td>
 
@@ -581,7 +656,7 @@ AngularJS 1.5 で導入された [コンポーネント API](https://docs.angula
   </tr>
   <tr>
     <th>
-      単方向バインディング
+      One-way binding
     </th>
     <td>
 
@@ -596,7 +671,7 @@ AngularJS 1.5 で導入された [コンポーネント API](https://docs.angula
   </tr>
   <tr>
     <th>
-      双方向バインディング
+      Two-way binding
     </th>
     <td>
 
@@ -605,22 +680,22 @@ AngularJS 1.5 で導入された [コンポーネント API](https://docs.angula
     </td>
     <td>
 
-      双方向バインディングとして、`<my-component [(myValue)]="anExpression">` になります。
-      ほとんどの AngularJS の双方向バインディングに関して、実用上は単方向バインディングしか必要ありません。
-      `<my-component [myValue]="anExpression">` で十分です。
+      As a two-way binding: `<my-component [(myValue)]="anExpression">`.
+      Since most AngularJS two-way bindings actually only need a one-way binding
+      in practice, `<my-component [myValue]="anExpression">` is often enough.
 
     </td>
   </tr>
 </table>
 
-たとえば、ヒーローの情報を表示する AngularJS のコンポーネントディレクティブに
-ひとつの入力とひとつの出力があるとします。
+For example, imagine a hero detail AngularJS component directive
+with one input and one output:
 
 <code-example path="upgrade-module/src/app/upgrade-io/hero-detail.component.ts" region="hero-detail-io" header="hero-detail.component.ts">
 </code-example>
 
-Angular のテンプレート記法を使うことで、このコンポーネントを Angular にアップグレードし、入力と出力を
-アップグレードされたディレクティブに記述し、入力と出力を提供することができます。
+You can upgrade this component to Angular, annotate inputs and outputs in the upgrade directive,
+and then provide the input and output using Angular template syntax:
 
 <code-example path="upgrade-module/src/app/upgrade-io/hero-detail.component.ts" region="hero-detail-io-upgrade" header="hero-detail.component.ts">
 </code-example>
@@ -632,29 +707,29 @@ Angular のテンプレート記法を使うことで、このコンポーネン
 
 <img src="generated/images/guide/upgrade/ajs-to-a-with-projection.png" alt="Projecting AngularJS content into Angular" class="left">
 
-ダウングレードされた Angular のコンポーネントを AngularJS のテンプレートから
-使う時、いくつかのコンテンツを *トランスクルード* する必要が出てくるかもしれません。
-これをすることは可能です。Angular にトランスクルードにあたるものはないものの、
-似た概念として *コンテンツ投影* があります。`upgrade/static` を使うことで、
-これらの２つの機能を相互運用することができます。
+When you are using a downgraded Angular component from an AngularJS
+template, the need may arise to *transclude* some content into it. This
+is also possible. While there is no such thing as transclusion in Angular,
+there is a very similar concept called *content projection*. `upgrade/static`
+is able to make these two features interoperate.
 
-Angular のコンポーネントは `<ng-content>` タグをそれらの中で使うためにコンテンツ投影
-をサポートしています。そのようなコンポーネントの例がこちらです。
+Angular components that support content projection make use of an `<ng-content>`
+tag within them. Here's an example of such a component:
 
 <code-example path="upgrade-module/src/app/ajs-to-a-projection/hero-detail.component.ts" header="hero-detail.component.ts">
 </code-example>
 
-このコンポーネントを AngularJS で使う際、それにコンテンツを与えることができます。ちょうど
-AngularJS でトランスクルードされた場合のように、Angular の `<ng-content>` タグの位置に
-投影されます。
+When using the component from AngularJS, you can supply contents for it. Just
+like they would be transcluded in AngularJS, they get projected to the location
+of the `<ng-content>` tag in Angular:
 
 <code-example path="upgrade-module/src/index-ajs-to-a-projection.html" region="usecomponent">
 </code-example>
 
 <div class="alert is-helpful">
 
-Angular コンポーネントの中で AngularJS のコンテンツが投影された時、それは依然として
-"AngularJS の国" にいて、AngularJS フレームワークによって管理されています。
+When AngularJS content gets projected inside an Angular component, it still
+remains in "AngularJS land" and is managed by the AngularJS framework.
 
 </div>
 
@@ -662,228 +737,199 @@ Angular コンポーネントの中で AngularJS のコンテンツが投影さ�
 
 <img src="generated/images/guide/upgrade/a-to-ajs-with-transclusion.png" alt="Projecting Angular content into AngularJS" class="left">
 
-ちょうど AngularJS のコンテンツを Angular のコンポーネントに投影したように、
-アップグレードさればバージョンを使うことで Angular のコンテンツを AngularJS の
-コンポーネントに *トランスクルードする* ことができます。
+Just as you can project AngularJS content into Angular components,
+you can *transclude* Angular content into AngularJS components, whenever
+you are using upgraded versions from them.
 
-AngularJS のコンポーネントディレクティブがトランスクルードをサポートする時、
-トランスクルードを行う地点を示すために `ng-transclude` ディレクティブをテンプレートの
-中で使うことができます。
+When an AngularJS component directive supports transclusion, it may use
+the `ng-transclude` directive in its template to mark the transclusion
+point:
 
 <code-example path="upgrade-module/src/app/a-to-ajs-transclusion/hero-detail.component.ts" header="hero-detail.component.ts">
 </code-example>
 
-もしこのコンポーネントをアップグレードして Angular から使う場合はそのコンポーネントのタグを
-コンテンツと一緒に配置し、トランスクルードさせることができます。
+If you upgrade this component and use it from Angular, you can populate
+the component tag with contents that will then get transcluded:
 
 <code-example path="upgrade-module/src/app/a-to-ajs-transclusion/container.component.ts" header="container.component.ts">
 </code-example>
 
 ### Making AngularJS Dependencies Injectable to Angular
 
-ハイブリッドのアプリケーションを動かす時、AngularJS の依存関係を Angular のコードに注入したい
-状況に遭遇するかもしれません。もしかしたらビジネスロジックが AngularJS のサービスに残っているかもしれません。
-もしかしたら `$location` や `$timeout` のような AngularJS の組み込みのサービスを使いたいかもしれません。
+When running a hybrid app, you may encounter situations where you need to inject
+some AngularJS dependencies into your Angular code.
+Maybe you have some business logic still in AngularJS services.
+Maybe you want access to AngularJS's built-in services like `$location` or `$timeout`.
 
-このような状況では、AngularJS のプロバイダーを Angular に *アップグレード* することが可能です。
-これにより、Angular のコードでそれらを使うことができます。たとえば、AngularJS で `HeroesService`
-というサービスがあったとします。
+In these situations, it is possible to *upgrade* an AngularJS provider to
+Angular. This makes it possible to then inject it somewhere in Angular
+code. For example, you might have a service called `HeroesService` in AngularJS:
 
 <code-example path="upgrade-module/src/app/ajs-to-a-providers/heroes.service.ts" header="heroes.service.ts">
 </code-example>
 
-Angular の [ファクトリプロバイダー](guide/dependency-injection-providers#factory-providers) を使って
-サービスをアップグレードすることができます。それは AngularJS の `$injector` からサービスを呼び出します。
+You can upgrade the service using a Angular [factory provider](guide/dependency-injection-providers#factory-providers)
+that requests the service from the AngularJS `$injector`.
 
-ファクトリプロバイダーは別の `ajs-upgraded-providers.ts` ファイルで宣言することで共存させ、
-参照したり新しいものを作ったり、アップグレードの完了後に削除しやすくするやり方の方がよいでしょう。
+Many developers prefer to declare the factory provider in a separate `ajs-upgraded-providers.ts` file
+so that they are all together, making it easier to reference them, create new ones and
+delete them once the upgrade is over.
 
-`heroesServiceFactory` をエクスポートして AOT コンパイラに処理させることもお勧めです。
+It's also recommended to export the `heroesServiceFactory` function so that Ahead-of-Time
+compilation can pick it up.
 
 <div class="alert is-helpful">
 
-**備考** ファクトリの中の 'heroes' という文字列は AngularJS の `HeroesService` を参照します。
-AnugularJS のアプリケーションではサービス名を、たとえば "heroes" のように、トークンとして使ったり、
-クラス名を作る時に "Service" 接尾辞をつけることは典型的です。
+**Note:** The 'heroes' string inside the factory refers to the AngularJS `HeroesService`.
+It is common in AngularJS apps to choose a service name for the token, for example "heroes",
+and append the "Service" suffix to create the class name.
 
 </div>
 
 <code-example path="upgrade-module/src/app/ajs-to-a-providers/ajs-upgraded-providers.ts" header="ajs-upgraded-providers.ts">
 </code-example>
 
-`@NgModule` を追加してサービスを Angular に提供することができます。
+You can then provide the service to Angular by adding it to the `@NgModule`:
 
 <code-example path="upgrade-module/src/app/ajs-to-a-providers/app.module.ts" region="register" header="app.module.ts">
 </code-example>
 
-クラスを型注釈として使い、そのサービスをコンポーネントのコンストラクターの中で注入して使ってみましょう。
+Then use the service inside your component by injecting it in the component constructor using its class as a type annotation:
 
 <code-example path="upgrade-module/src/app/ajs-to-a-providers/hero-detail.component.ts" header="hero-detail.component.ts">
 </code-example>
 
 <div class="alert is-helpful">
 
-この例ではサービスクラスをアップグレードしました。
-TypeScript の型注釈を依存性の注入をする時に使うことができます。依存関係の
-扱いに影響はあたえずに、静的な型チェックの恩恵を得ることができます。
-これは必須ではありませんが、どの AngularJS のサービス、ファクトリー、
-プロバイダーであってもアップグレードできます。
+In this example you upgraded a service class.
+You can use a TypeScript type annotation when you inject it. While it doesn't
+affect how the dependency is handled, it enables the benefits of static type
+checking. This is not required though, and any AngularJS service, factory, or
+provider can be upgraded.
 
 </div>
 
 ### Making Angular Dependencies Injectable to AngularJS
 
-AngularJS の依存関係をアップグレードすることに加え、Angular の依存関係を
-*ダウングレード* し、 AngularJS から使うこともできます。これはサービスを
-Angular に移行し始めた時や、AngularJS で書かれたコンポーネントを維持しつつ
-Angular で新しいサービスを作ったりする時に便利です。
+In addition to upgrading AngularJS dependencies, you can also *downgrade*
+Angular dependencies, so that you can use them from AngularJS. This can be
+useful when you start migrating services to Angular or creating new services
+in Angular while retaining components written in AngularJS.
 
-たとえば、`Heroes` という Angular のサービスがあるとします。
+For example, you might have an Angular service called `Heroes`:
 
 <code-example path="upgrade-module/src/app/a-to-ajs-providers/heroes.ts" header="heroes.ts">
 </code-example>
 
-Angular のコンポーネントではモジュールの `providers` のリストに追加することで `NgModule` にプロバイダーを登録できます。
+Again, as with Angular components, register the provider with the `NgModule` by adding it to the module's `providers` list.
 
 <code-example path="upgrade-module/src/app/a-to-ajs-providers/app.module.ts" region="ngmodule" header="app.module.ts">
 </code-example>
 
-`downgradeInjectable()` を使って *AngularJS のファクトリ関数* に Angular `Heroes` を入れ、
-ファクトリを AngularJS のモジュールにつなぎましょう。
-AngularJS での依存関係の名前は任意です。
+Now wrap the Angular `Heroes` in an *AngularJS factory function* using `downgradeInjectable()`
+and plug the factory into an AngularJS module.
+The name of the AngularJS dependency is up to you:
 
 <code-example path="upgrade-module/src/app/a-to-ajs-providers/app.module.ts" region="register" header="app.module.ts">
 </code-example>
 
-これにより、サービスが AngularJS のコードで使えるようになりました。
+After this, the service is injectable anywhere in AngularJS code:
 
 <code-example path="upgrade-module/src/app/a-to-ajs-providers/hero-detail.component.ts" header="hero-detail.component.ts">
 </code-example>
 
 ## Lazy Loading AngularJS
 
-アプリケーションを構築する時、必要なリソースが必要な時に読み込まれて欲しいことかと思います。アセットやコードにかかわらず、
-必要な時まで読み込みを待つことはアプリケーションを効率的にするために必要なことです。
-このことは異なるフレームワークをひとつのアプリケーションで動かしている場合に特にいえることです。
+When building applications, you want to ensure that only the required resources are loaded when necessary. Whether that be loading of assets or code, making sure everything that can be deferred until needed keeps your application running efficiently. This is especially true when running different frameworks in the same application.
 
-[遅延読み込み](guide/glossary#lazy-loading)はアセットやコードのようなリソースを必要になるまで読み込みを遅らせるテクニックです。
-これは特に異なるフレームワークをひとつのアプリケーションで動かしているような場合に、起動時間を減らし、効率性をあげることができます。
+[Lazy loading](guide/glossary#lazy-loading) is a technique that defers the loading of required assets and code resources until they are actually used. This reduces startup time and increases efficiency, especially when running different frameworks in the same application.
 
-ハイブリッド方式で大きなアプリケーションを AngularJS から Angular へ移行する場合、一番共通して使われている機能から先に移行し、
-あまり共通して使われていない機能は必要な場合にのみ使いたいかと思います。そのようにすることで、アプリケーションが移行中であっても
-シームレスなユーザー体験を提供することに役立つでしょう。
+When migrating large applications from AngularJS to Angular using a hybrid approach, you want to migrate some of the most commonly used features first, and only use the less commonly used features if needed. Doing so helps you ensure that the application is still providing a seamless experience for your users while you are migrating.
 
-アプリケーションをレンダリングするために Angular と AngularJS の両方を使用する環境では、クライアントに送られたバンドルの
-中で両方のフレームワークが読み込まれます。これによりバンドルのサイズの増加とパフォーマンスの低下が起こります。
+In most environments where both Angular and AngularJS are used to render the application, both frameworks are loaded in the initial bundle being sent to the client. This results in both increased bundle size and possible reduced performance.
 
-全体のアプリケーションのパフォーマンスは Angular によってレンダリングされるページをユーザーがみている場合に影響します。
-なぜなら AngularJS のフレームワークとアプリケーションはアクセスされていなくても読み込まれ、実行されているからです。
+Overall application performance is affected in cases where the user stays on Angular-rendered pages because the AngularJS framework and application are still loaded and running, even if they are never accessed.
 
-バンドルのサイズとパフォーマンスの問題を段階的に減らすことができます。
-AngularJS を別のバンドルに分離させることで [遅延読み込み](guide/glossary#lazy-loading)を使い、
-読み込みやブートストラップ、AngularJS のレンダリングを必要な時にだけ行うことができます。この戦略では最初に読み込まれるバンドルのサイズを減らし、
-両方のフレームワークの読み込みが与える影響を減らすことができ、アプリケーションを可能な限り効率的に動かすことができます。
+You can take steps to mitigate both bundle size and performance issues. By isolating your AngularJS app to a separate bundle, you can take advantage of [lazy loading](guide/glossary#lazy-loading) to load, bootstrap, and render the AngularJS application only when needed. This strategy reduces your initial bundle size, defers any potential impact from loading both frameworks until absolutely necessary, and keeps your application running as efficiently as possible.
 
-次のステップにより行うことができます。
+The steps below show you how to do the following:
 
-* AngularJS のバンドルにコールバック関数を設定します。
-* AngularJS のアプリケーションをブートラップし、遅延読み込みをするためのサービスを作成します。
-* AngularJS のコンテンツをルーティングするためのコンポーネントを作成します。
-* AngularJS 独自の URL 向けにカスタムの `matcher` 関数を作成し、Angular の `Router` に設定します。
+* Setup a callback function for your AngularJS bundle.
+* Create a service that lazy loads and bootstraps your AngularJS app.
+* Create a routable component for AngularJS content
+* Create a custom `matcher` function for AngularJS-specific URLs and configure the Angular `Router` with the custom matcher for AngularJS routes.
 
 ### Create a service to lazy load AngularJS
 
-Angular バージョン 8 で、遅延読み込みは動的なインポート記法 `import('...')` を使って簡単に行うことができます。
-AngularJS を遅延読み込みするために動的なインポートを使う新しいサービスを作ります。
+As of Angular version 8, lazy loading code can be accomplished simply by using the dynamic import syntax `import('...')`. In your application, you create a new service that uses dynamic imports to lazy load AngularJS.
 
 <code-example path="upgrade-lazy-load-ajs/src/app/lazy-loader.service.ts" header="src/app/lazy-loader.service.ts">
 </code-example>
 
-このサービスはバンドル化された AngularJS のアプリケーションを遅延読み込みするために、`import()` メソッドを使います。
-これにより、ユーザーがまだ必要としない部分に関しては読み込みを行わないことで、最初に読み込まれるバンドルのサイズを減らすことができます。
-読み込みが行われたあと、アプリケーションを手動で _ブートストラップ_ する方法を提供する必要もあります。
-AngularJS では [angular.bootstrap()](https://docs.angularjs.org/api/ng/function/angular.bootstrap) メソッドをHTML 要素と一緒に使うことでアプリケーションを
-手動でブートストラップできます。AngularJS のアプリケーションではブートストラップするために `bootstrap` メソッドを公開しておくことも必要です。
+The service uses the `import()` method to load your bundled AngularJS application lazily. This decreases the initial bundle size of your application as you're not loading code your user doesn't need yet. You also need to provide a way to _bootstrap_ the application manually after it has been loaded. AngularJS provides a way to manually bootstrap an application using the [angular.bootstrap()](https://docs.angularjs.org/api/ng/function/angular.bootstrap) method with a provided HTML element. Your AngularJS app should also expose a `bootstrap` method that bootstraps the AngularJS app.
 
-AngularJS でグローバルのリスナーの削除などが必要に応じて実行されるために、`$rootScope.destroy()` メソッドを
-呼び出すメソッドを実装します。
+To ensure any necessary teardown is triggered in the AngularJS app, such as removal of global listeners, you also implement a method to call the `$rootScope.destroy()` method.
 
 <code-example path="upgrade-lazy-load-ajs/src/app/angularjs-app/index.ts" header="angularjs-app">
 </code-example>
 
-AngularJS のアプリケーションにはコンテンツをレンダリングする必要があるルートのみが設定されました。アプリケーションの残りのルートは
-Angular のルーターによって制御されます。AngularJS のアプリケーションをブートラップするための `bootstrap` メソッドが
-バンドルが読み込まれたあとに、Angular アプリケーションで呼ばれます。
+Your AngularJS application is configured with only the routes it needs to render content. The remaining routes in your application are handled by the Angular Router. The exposed `bootstrap` method is called in your Angular app to bootstrap the AngularJS application after the bundle is loaded.
 
 <div class="alert is-important">
 
-**備考** AngularJS が読み込まれ、ブートストラップされたあとも、ルートの設定を紐づけるリスナーはルートの変更を監視し続けます。
-AngularJS が表示されていない時はリスナーが停止するように、 [$routeProvider](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider) で
-空のテンプレートをレンダリングする `otherwise` オプションを設定します。これにより、他のすべてのルートは Angular によって制御されます。
+**Note:** After AngularJS is loaded and bootstrapped, listeners such as those wired up in your route configuration will continue to listen for route changes. To ensure listeners are shut down when AngularJS isn't being displayed, configure an `otherwise` option with the [$routeProvider](https://docs.angularjs.org/api/ngRoute/provider/$routeProvider) that renders an empty template. This assumes all other routes will be handled by Angular.
 
 </div>
 
 ### Create a component to render AngularJS content
 
-Angular のアプリケーションでは、AngularJS のコンテンツのプレースホルダーとしてコンポーネントが必要になります。
-このコンポーネントは AngularJS のアプリケーションを読み込み、ブートストラップするために作成したサービスを、コンポーネントが初期化された後に使います。
+In your Angular application, you need a component as a placeholder for your AngularJS content. This component uses the service you create to load and bootstrap your AngularJS app after the component is initialized.
 
 <code-example path="upgrade-lazy-load-ajs/src/app/angular-js/angular-js.component.ts" header="src/app/angular-js/angular-js.component.ts">
 </code-example>
 
-Angular のルーターが AngularJS のルートにマッチした場合、`AngularJSComponent` がレンダリングされ、コンテンツが AngularJS の
-[`ng-view`](https://docs.angularjs.org/api/ngRoute/directive/ngView) ディレクティブの中でレンダリングされます。
-ユーザーがルートの外に遷移した時は AngularJS の `$rootScope` が削除されます。
+When the Angular Router matches a route that uses AngularJS, the `AngularJSComponent` is rendered, and the content is rendered within the AngularJS [`ng-view`](https://docs.angularjs.org/api/ngRoute/directive/ngView) directive. When the user navigates away from the route, the `$rootScope` is destroyed on the AngularJS application.
 
 ### Configure a custom route matcher for AngularJS routes
 
-Angular のルーターを設定するために、AngularJS の URL のためのルートを定義しなければいけません。それらの URL にマッチさせるために、`matcher` プロパティを
-使ってルートの設定をします。`matcher` によって URL のパスへカスタムのパターンマッチングを使うことができます。Angular のルーターは静的で可変なルートを最初に
-マッチしようとします。マッチするものが見つからなかった場合はルートの設定で定義されたカスタムマッチャーを参照します。カスタムマッチャーでもマッチしなかった場合は
-404 などのようなページに行きます。
+To configure the Angular Router, you must define a route for AngularJS URLs. To match those URLs, you add a route configuration that uses the `matcher` property. The `matcher` allows you to use custom pattern matching for URL paths. The Angular Router tries to match on more specific routes such as static and variable routes first. When it doesn't find a match, it then looks at custom matchers defined in your route configuration. If the custom matchers don't match a route, it then goes to catch-all routes, such as a 404 page.
 
-次の例では AngularJS のルートのためにカスタムマッチャーの関数を定義します。
+The following example defines a custom matcher function for AngularJS routes.
 
 <code-example path="upgrade-lazy-load-ajs/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="matcher">
 </code-example>
 
-次のコードでは `matcher` プロパティとカスタムマッチャー、 `component` プロパティを
-`AngularJSComponent` で使い、ルートの設定にルートのオブジェクトを追加しています。
+The following code adds a route object to your routing configuration using the `matcher` property and custom matcher, and the `component` property with `AngularJSComponent`.
 
 <code-example path="upgrade-lazy-load-ajs/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts">
 </code-example>
 
-アプリケーションが AngularJS を必要とするルートにマッチした場合は、AngularJS のアプリケーションは読み込まれ、ブートストラップされ、AngularJS のルートが
-コンテンツのレンダリングに必要な URL にマッチし、AngularJS と Angular フレームワークでアプリケーションが動きます。
+When your application matches a route that needs AngularJS, the AngularJS app is loaded and bootstrapped, the AngularJS routes match the necessary URL to render their content, and your application continues to run with both AngularJS and Angular frameworks.
 
 ## Using the Unified Angular Location Service
 
-AngularJS では [$location service](https://docs.angularjs.org/api/ng/service/$location) がすべてのルーティングの設定とページ遷移、URL のエンコードとデコード、
-リダイレクト、ブラウザ API とのやりとりを制御します。Angular はこれらの処理を `Location` サービスが担当します。
+In AngularJS, the [$location service](https://docs.angularjs.org/api/ng/service/$location) handles all routing configuration and navigation, encoding and decoding of URLS, redirects, and interactions with browser APIs. Angular uses its own underlying `Location` service for all of these tasks.
 
-AngularJS から Angular に移行する時、新しい API を使えるように、そのような責務はできるだけ Angular に移したいことでしょう。
-そのような移行のために、Angular は `LocationUpgradeModule` を提供しています。このモジュールは AngularJS の `$location` サービスと
-Angular の `Location` サービスの責務を _統合した_ location サービスを実現します。
+When you migrate from AngularJS to Angular you will want to move as much responsibility as possible to Angular, so that you can take advantage of new APIs. To help with the transition, Angular provides the `LocationUpgradeModule`. This module enables a _unified_ location service that shifts responsibilities from the AngularJS `$location` service to the Angular `Location` service.
 
-`LocationUpgradeModule` を使うために、`@angular/common/upgrade` をインポートして、静的な `LocationUpgradeModule.config()` メソッドを
-使い、`AppModule` のインポートに追加します。
+To use the `LocationUpgradeModule`, import the symbol from `@angular/common/upgrade` and add it to your `AppModule` imports using the static `LocationUpgradeModule.config()` method.
 
 ```ts
-// 他のインポート。。。
+// Other imports ...
 import { LocationUpgradeModule } from '@angular/common/upgrade';
 
 @NgModule({
   imports: [
-    // 他の NgModule のインポート。。。
+    // Other NgModule imports...
     LocationUpgradeModule.config()
   ]
 })
 export class AppModule {}
 ```
 
-`LocationUpgradeModule.config()` メソッドに `useHash` プロパティ をもつ `LocationStrategy` や `hashPrefix` プロパティをもつ URL 接頭辞を含む、設定のオブジェクトを渡すことができます。
+The `LocationUpgradeModule.config()` method accepts a configuration object that allows you to configure options including the `LocationStrategy` with the `useHash` property, and the URL prefix with the `hashPrefix` property.
 
-`useHash` プロパティの初期値は `false` で、 `hashPrefix` の初期値は空の `string` です。上書きするには設定オブジェクトを渡してください。
+The `useHash` property defaults to `false`, and the `hashPrefix` defaults to an empty `string`. Pass the configuration object to override the defaults.
 
 ```ts
 LocationUpgradeModule.config({
@@ -894,16 +940,16 @@ LocationUpgradeModule.config({
 
 <div class="alert is-important">
 
-**備考** `LocationUpgradeModule.config()` メソッドで使える設定オプションの詳細は `LocationUpgradeConfig` を参照してください。
+**Note:** See the `LocationUpgradeConfig` for more configuration options available to the `LocationUpgradeModule.config()` method.
 
 </div>
 
-これは　AngularJS の`$location` プロバイダーの代わりを登録します。登録されたあとは、すべての遷移とメッセージのブロードキャストのルーティング、 遷移時に AngularJS で実行されるダイジェストのサイクルは Angular によって制御されます。これによりハイブリッドのアプリケーションの両方で整合性を保ったままひとつの方法で遷移をすることができます。
+This registers a drop-in replacement for the `$location` provider in AngularJS. Once registered, all navigation, routing broadcast messages, and any necessary digest cycles in AngularJS triggered during navigation are handled by Angular. This gives you a single way to navigate within both sides of your hybrid application consistently.
 
-AngularJS における  `$location` サービスのプロバイダーとしての使うために、ファクトリプロバイダーを使って `$locationShim` をダウングレードする必要があります。
+For usage of the `$location` service as a provider in AngularJS, you need to downgrade the `$locationShim` using a factory provider.
 
 ```ts
-// 他のインポート。。。
+// Other imports ...
 import { $locationShim } from '@angular/common/upgrade';
 import { downgradeInjectable } from '@angular/upgrade/static';
 
@@ -911,27 +957,27 @@ angular.module('myHybridApp', [...])
   .factory('$location', downgradeInjectable($locationShim));
 ```
 
-Angular のルーターを導入したならば、Angular のルーターは統合された location サービスでの遷移を実行し、
-AngularJS と Angular での遷移は単一のソースで提供されます。
+Once you introduce the Angular Router, using the Angular Router triggers navigations through the unified location service, still providing a single source for navigating with AngularJS and Angular.
 
 ## Using Ahead-of-time compilation with hybrid apps
 
-他の Angular のアプリケーションと同様に、ハイブリッドのアプリケーションでも
-Ahead-of-time (AOT) コンパイラを使うことができます。
-ハイブリッドのアプリケーションでの設定は [Ahead-of-time コンパイルについて](guide/aot-compiler)
-で記載されていることとほぼ同じですが、 `index.html` と `main-aot.ts` は異なります。
+You can take advantage of Ahead-of-time (AOT) compilation on hybrid apps just like on any other
+Angular application.
+The setup for an hybrid app is mostly the same as described in
+[the Ahead-of-time Compilation chapter](guide/aot-compiler)
+save for differences in `index.html` and `main-aot.ts`
 
-`index.html` は script タグで AngularJS のファイルを読み込むように、AOT のためにも
-`index.html` はそれらのファイルを読み込む必要があります。
-これらを簡単にコピーするには `copy-dist-files.js` ファイルに追加する方法があります。
+The `index.html` will likely have script tags loading AngularJS files, so the `index.html`
+for AOT must also load those files.
+An easy way to copy them is by adding each to the `copy-dist-files.js` file.
 
-ハイブリッドのアプリケーションをブートストラップするにはもともとの `AppModule` ではなく、
-生成された `AppModuleFactory` を使う必要があります。
+You'll need to use the generated `AppModuleFactory`, instead of the original `AppModule` to
+bootstrap the hybrid app:
 
 <code-example path="upgrade-phonecat-2-hybrid/app/main-aot.ts" header="app/main-aot.ts">
 </code-example>
 
-これだけで、Angular のアプリケーションで AOT のすべての恩恵を得ることができます！
+And that's all you need do to get the full benefit of AOT for Angular apps!
 
 ## PhoneCat Upgrade Tutorial
 

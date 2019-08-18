@@ -105,7 +105,7 @@ export class TypicalComponent {
 }
 ```
 
-Angular コンパイラはメタデータ _once_ を抽出し、 `TypicalComponent` に対して _factory_ を生成します。
+Angular コンパイラはメタデータを _1回_ 抽出し、 `TypicalComponent` に対して _factory_ を生成します。
 `TypicalComponent` インスタンスを作成する必要があるとき、Angular はファクトリを呼び出します。ファクトリは注入された依存関係をもつコンポーネントクラスの新しいインスタンスにバインドされた新しいビジュアル要素を生成します。
 
 ## メタデータの制限

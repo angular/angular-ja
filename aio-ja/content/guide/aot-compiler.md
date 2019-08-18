@@ -79,9 +79,9 @@ AOT は、HTML テンプレートとコンポーネントがクライアント�
 
 Angular の AOT コンパイラを使用すると、次の2つの方法でアプリのコンパイルを制御できます。
 
-* [Angularメタデータを指定](#metadata-aot)する方法。以下で説明します。
+* [Angular メタデータを指定](#metadata-aot)する方法。以下で説明します。
 
-* `tsconfig.json` [TypeScript設定ファイル](guide/typescript-configuration)でオプションを提供する方法。[Angular compiler options](guide/angular-compiler-options)を参照してください。
+* `tsconfig.json` [TypeScript 設定ファイル](guide/typescript-configuration)でオプションを提供する方法。[Angular compiler options](guide/angular-compiler-options)を参照してください。
 
 
 {@a metadata-aot}
@@ -105,23 +105,23 @@ export class TypicalComponent {
 }
 ```
 
-Angular コンパイラはメタデータ _once_ を抽出し、 `TypicalComponent` に対して _factory_ を生成します。
+Angular コンパイラはメタデータを _1回_ 抽出し、 `TypicalComponent` に対して _ファクトリ_ を生成します。
 `TypicalComponent` インスタンスを作成する必要があるとき、Angular はファクトリを呼び出します。ファクトリは注入された依存関係をもつコンポーネントクラスの新しいインスタンスにバインドされた新しいビジュアル要素を生成します。
 
 ## メタデータの制限
 
-TypeScript の _subset_ にメタデータを記述します。これは、次の一般的な制約に従う必要があります。
+TypeScript の _サブセット_ にメタデータを記述します。これは、次の一般的な制約に従う必要があります。
 
 1. [式の構文](#expression-syntax) をサポートされている JavaScript のサブセットに制限します
 2. [コード折りたたみ](#folding) の後にエクスポートされたシンボルだけを参照します
-3. コンパイラによって[サポートされている機能](#supported-functions)だけを呼び出します
+3. コンパイラによって[サポートされている関数](#supported-functions)だけを呼び出します
 4. 装飾されデータバインドされたクラスメンバーはパブリックでなければなりません
 
 次のセクションではこれらの点について詳しく説明します。
 
 ## AOT の仕組み
 
-2 つのフェーズにすると AOT コンパイラについて考えるのに役立ちます。コード分析フェーズで、ソースの表現を単純に記録します。そして、コード生成フェーズでは、コンパイラの `StaticReflector` が解釈を処理し、それが解釈するものに制限を置きます。
+AOT コンパイラには2つのフェーズがあると考えるとわかりやすくなります。コード分析フェーズで、ソースの表現を単純に記録します。そして、コード生成フェーズでは、コンパイラの `StaticReflector` が解釈を処理し、それが解釈するものに制限を置きます。
 
 ## フェーズ 1: 分析
 

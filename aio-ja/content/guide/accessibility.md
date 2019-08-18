@@ -1,117 +1,117 @@
-# Accessibility in Angular
+# Angular におけるアクセシビリティ
 
-The web is used by a wide variety of people, including those who have visual or motor impairments.
-A variety of assistive technologies are available that make it much easier for these groups to
-interact with web-based software applications.
-In addition, designing an application to be more accessible generally improves the user experience for all users.
+Web は視覚・運動障害をもつ方を含む、さまざまな方によって利用されています。
+そのような方が Web 上のアプリケーションを利用しやすくなるための、さまざまな支援技術が存在します。
+さらに、アプリケーションがよりよいアクセシビリティをもつように設計することで
+すべてのユーザーのユーザー体験が向上することでしょう。
 
-For an in-depth introduction to issues and techniques for designing accessible applications, see the [Accessibility](https://developers.google.com/web/fundamentals/accessibility/#what_is_accessibility) section of the Google's [Web Fundamentals](https://developers.google.com/web/fundamentals/).
+アクセシビリティをもつアプリケーションを設計する上での課題や技術に関するより詳細な内容は、Google の [Web Fundamentals](https://developers.google.com/web/fundamentals/) の[アクセシビリティ](https://developers.google.com/web/fundamentals/accessibility/#what_is_accessibility) 章を参照してください。
 
-This page discusses best practices for designing Angular applications that
-work well for all users, including those who rely on assistive technologies.
+このページには、支援技術を必要とする方を含むすべてのユーザーにとって使いやすい
+Angular アプリケーションを設計するためのベストプラクティスが記述されています。
 
-## Accessibility attributes
+## アクセシビリティのための属性
 
-Building accessible web experience often involves setting [ARIA attributes](https://developers.google.com/web/fundamentals/accessibility/semantics-aria)
-to provide semantic meaning where it might otherwise be missing.
-Use [attribute binding](guide/template-syntax#attribute-binding) template syntax to control the values of accessibility-related attributes.
+Web 上でのアクセシビリティを構築するためには、セマンティックな意味情報が欠落しないように
+[ARIA 属性](https://developers.google.com/web/fundamentals/accessibility/semantics-aria)を設定します。
+アクセシビリティ関連の属性の値を制御するためには [属性バインディング](guide/template-syntax#attribute-binding)テンプレート記法を使います。
 
-When binding to ARIA attributes in Angular, you must use the `attr.` prefix, as the ARIA
-specification depends specifically on HTML attributes rather than properties on DOM elements.
+ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依存しています。
+Angular 内で ARIA 属性をバインドするためには接頭辞として `attr.` を使用してください。
 
 ```html
-<!-- Use attr. when binding to an ARIA attribute -->
+<!-- ARIA 属性をバインドするには attr. を使います -->
 <button [attr.aria-label]="myActionLabel">...</button>
 ```
 
-Note that this syntax is only necessary for attribute _bindings_.
-Static ARIA attributes require no extra syntax.
+この記法は属性を _バインドする_ 場合にだけ必要です。
+静的な ARIA 属性には特別な記法は必要ありません。
 
 ```html
-<!-- Static ARIA attributes require no extra syntax -->
+<!-- 静的な ARIA 属性には特別な記法は必要ありません -->
 <button aria-label="Save document">...</button>
 ```
 
-NOTE:
+備考:
 
 <div class="alert is-helpful">
 
-   By convention, HTML attributes use lowercase names (`tabindex`), while properties use camelCase names (`tabIndex`).
+   規約により、HTML の属性の名前には小文字が使われます(`tabindex`)。一方でプロパティにはキャメルケースを使われます(`tabIndex`)。
 
-   See the [Template Syntax](https://angular.io/guide/template-syntax#html-attribute-vs-dom-property) guide for more background on the difference between attributes and properties.
+   属性とプロパティの違いについて詳しい背景は [テンプレート記法](https://angular.io/guide/template-syntax#html-attribute-vs-dom-property)ガイドを参照してください。
 
 </div>
 
 
-## Angular UI components
+## Angular UI コンポーネント
 
-The [Angular Material](https://material.angular.io/) library, which is maintained by the Angular team, is a suite of reusable UI components that aims to be fully accessible.
-The [Component Development Kit (CDK)](https://material.angular.io/cdk/categories) includes the `a11y` package that provides tools to support various areas of accessibility.
-For example:
+Angular チームによってメンテナンスされている [Angular Material](https://material.angular.io/) ライブラリはアクセシビリティをもつように作られた、再利用可能な UI コンポーネントの集まりです。
+[Component Development Kit (CDK)](https://material.angular.io/cdk/categories) には、さまざまな分野のアクセシビリティをサポートするためのツールを提供する `a11y` パッケージが含まれています。
+たとえば、
 
-* `LiveAnnouncer` is used to announce messages for screen-reader users using an `aria-live` region. See the W3C documentation for more information on [aria-live regions](https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-live).
+* `LiveAnnouncer` は `aria-live` 領域を使用する、スクリーンリーダー利用者へメッセージを伝えるために使います。詳しい情報は W3C の文書の [aria-live 領域](https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-live) を参照してください。
 
-* The `cdkTrapFocus` directive traps Tab-key focus within an element. Use it to create accessible experience for components like modal dialogs, where focus must be constrained.
+* `cdkTrapFocus` ディレクティブは要素中のタブキーによるフォーカスを検知します。アクセシビリティの提供や、モーダルダイアログのようにフォーカスを強制させるコンポーネントを作成する際に使います。
 
-For full details of these and other tools, see the [Angular CDK accessibility overview](https://material.angular.io/cdk/a11y/overview).
+上記のものや他のツールについての詳細は [Angular CDK アクセシビリティの概要](https://material.angular.io/cdk/a11y/overview) を参照してください。
 
 
-### Augmenting native elements
+### ネイティブ要素を補強する
 
-Native HTML elements capture a number of standard interaction patterns that are important to accessibility.
-When authoring Angular components, you should re-use these native elements directly when possible, rather than re-implementing well-supported behaviors.
+HTML のネイティブ要素はアクセシビリティにとって重要な、多くの標準的な動作パターンを捕捉します。
+Angular コンポーネントを作成する際は、すでにサポートされている挙動を再実装するのではなく、これらのネイティブ要素をできるだけ直接再利用してください。
 
-For example, instead of creating a custom element for a new variety of button, you can create a component that uses an attribute selector with a native `<button>` element.
-This most commonly applies to `<button>` and `<a>`, but can be used with many other types of element.
+たとえば、新しく色々なボタンのためにカスタム要素を作成するのではなく、属性のセレクターにネイティブの `<button>` 要素を使用したコンポーネントを作成することができます。
+これは `<button>` と `<a>` に典型的に適用できますが、他の多くのタイプの要素にも使うことができるでしょう。
 
-You can see examples of this pattern in Angular Material: [`MatButton`](https://github.com/angular/components/blob/master/src/material/button/button.ts#L66-L68), [`MatTabNav`](https://github.com/angular/components/blob/master/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L67), [`MatTable`](https://github.com/angular/components/blob/master/src/material/table/table.ts#L17).
+Angular Material において上記のパターンのサンプルは [`MatButton`](https://github.com/angular/components/blob/master/src/material/button/button.ts#L66-L68) や [`MatTabNav`](https://github.com/angular/components/blob/master/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L67) 、[`MatTable`](https://github.com/angular/components/blob/master/src/material/table/table.ts#L17) などがあります。
 
-### Using containers for native elements
+### ネイティブ要素にコンテナを使う
 
-Sometimes using the appropriate native element requires a container element.
-For example, the native `<input>` element cannot have children, so any custom text entry components need
-to wrap an `<input>` with additional elements.
-While you might just include the `<input>` in your custom component's template,
-this makes it impossible for users of the component to set arbitrary properties and attributes to the input element.
-Instead, you can create a container component that uses content projection to include the native control in the
-component's API.
+適切なネイティブ要素を使うためにコンテナ要素が必要になる場合があります。
+たとえば、ネイティブの `<input>` 要素は子要素をもつことができません。
+そのため、テキスト入力のカスタムコンポーネントは`<input>` を追加の要素で囲む必要があります。
+カスタムコンポーネントのテンプレートの中に `<input>` をそのまま追加した場合は、
+コンポーネントを使う際に任意のプロパティや属性を input 要素に設定することができなくなります。
+代わりに、コンテンツ投影を使ったコンテナコンポーネントを作成することで
+コンポーネントの API でネイティブ制御ができます。
 
-You can see [`MatFormField`](https://material.angular.io/components/form-field/overview) as an example of this pattern.
+このパターンのサンプルとして、[`MatFormField`](https://material.angular.io/components/form-field/overview) があります。
 
-## Case study: Building a custom progress bar
+## ケーススタディ: 独自のプログレスバーを実装する
 
-The following example shows how to make a simple progress bar accessible by using host binding to control accessibility-related attributes.
+次のサンプルではアクセシビリティ関連の属性を制御するために、ホストバインディングを使った簡易的なプログレスバーを作る方法を説明します。
 
-* The component defines an accessibility-enabled element with both the standard HTML attribute `role`, and ARIA attributes. The ARIA attribute `aria-valuenow` is bound to the user's input.
+* このコンポーネントは標準の HTML 属性の `role` と ARIA 属性の両方をもつ、アクセシビリティが有効の要素を定義します。ARIA 属性の `aria-valuenow` はユーザーの入力にひもづきます。
 
    ```ts
   import { Component, Input } from '@angular/core';
    /**
-    * Example progressbar component.
+    * プログレスバーのコンポーネントのサンプル
     */
    @Component({
      selector: 'example-progressbar',
      template: `<div class="bar" [style.width.%]="value"></div>`,
      styleUrls: ['./progress-bar.css'],
      host: {
-       // Sets the role for this component to "progressbar"
+       // このコンポーネントの role の値を "progressbar" に設定します。
        role: 'progressbar',
 
-      // Sets the minimum and maximum values for the progressbar role.
+      // プログレスバーの role の最小と最大の値を設定します。
        'aria-valuemin': '0',
        'aria-valuemax': '0',
 
-       // Binding that updates the current value of the progressbar.
+       // プログレスバーの現在の値を更新するバインディング。
        '[attr.aria-valuenow]': 'value',
      }
    })
    export class ExampleProgressbar  {
-     /** Current value of the progressbar. */
+     /** プログレスバーの現在の値 */
      @Input() value: number = 0;
    }
    ```
 
-* In the template, the `aria-label` attribute ensures that the control is accessible to screen readers.
+* このテンプレートでは、 `aria-label` 属性によってスクリーンリーダーからの制御を可能にしています。
 
    ```html
    <label>
@@ -120,23 +120,23 @@ The following example shows how to make a simple progress bar accessible by usin
          [value]="progress" (input)="progress = $event.target.value">
    </label>
 
-   <!-- The user of the progressbar sets an aria-label to communicate what the progress means. -->
+   <!-- プログレスバーを使う場合は aria-label を設定することでプログレスバーの意味を伝えることができます。 -->
    <example-progressbar [value]="progress" aria-label="Example of a progress bar">
    </example-progressbar>
    ```
 
-[See the full example in StackBlitz](https://stackblitz.com/edit/angular-kn5jdi?file=src%2Fapp%2Fapp.component.html).
+[StackBlitz で完全なサンプルを見ることができます](https://stackblitz.com/edit/angular-kn5jdi?file=src%2Fapp%2Fapp.component.html)。
 
-## Routing and focus management
+## ルーティングとフォーカスの制御
 
-Tracking and controlling [focus](https://developers.google.com/web/fundamentals/accessibility/focus/) in a UI is an important consideration in designing for accessibility.
-When using Angular routing, you should decide where page focus goes upon navigation.
+UI の中で[フォーカス](https://developers.google.com/web/fundamentals/accessibility/focus/)を追跡し、制御することはアクセシビリティを設計する上で重要な検討事項です。
+Angular のルーティングを使う際は画面遷移時にページのフォーカスがどこに当たるかを決めておくべきです。
 
-To avoid relying solely on visual cues, you need to make sure your routing code updates focus after page navigation.
-Use the `NavigationEnd` event from the `Router` service to know when to update
-focus.
+視覚的な合図のみに頼ることを避けるために、ページ遷移後にルーティングのコードがフォーカスを更新するようにしてください。
+フォーカスを更新するタイミングを知るためには、
+`Router` サービスの `NavigationEnd` イベントを使います。
 
-The following example shows how to find and focus the main content header in the DOM after navigation.
+次のサンプルでは画面遷移後に DOM 中のメインのコンテンツヘッダーを見つけ、フォーカスを当てる方法を紹介します。
 
 ```ts
 
@@ -148,13 +148,13 @@ router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
 });
 
 ```
-In a real application, the element that receives focus will depend on your specific
-application structure and layout.
-The focused element should put users in a position to immediately move into the main content that has just been routed into view.
-You should avoid situations where focus returns to the `body` element after a route change.
+実際のアプリケーションでは、フォーカスが当たる要素はアプリケーションの構造やレイアウトに依存します。
+フォーカスが当たった要素はビューにルーティングされたメインの
+コンテンツへ移ることのできる場所へユーザーを配置するべきです。
+ルートが変わった後にフォーカスが `body` 要素へ戻る状況は避けた方がよいでしょう。
 
 
-## Additional resources
+## 参考資料
 
 * [Accessibility - Google Web Fundamentals](https://developers.google.com/web/fundamentals/accessibility)
 
@@ -172,15 +172,15 @@ You should avoid situations where focus returns to the `body` element after a ro
 
 * [Rob Dodson A11ycasts](https://www.youtube.com/watch?v=HtTyRajRuyY)
 
-* [Codelyzer](http://codelyzer.com/rules/) provides linting rules that can help you make sure your code meets accessibility standards.
+* [Codelyzer](http://codelyzer.com/rules/) ではアクセシビリティ標準に適合しているかを確認するための助けとなる Lint のルールが提供されています。
 
-Books
+書籍
 
 * "A Web for Everyone: Designing Accessible User Experiences", Sarah Horton and Whitney Quesenbery
 
 * "Inclusive Design Patterns", Heydon Pickering
 
-## More on accessibility
+## さらなるアクセシビリティについて
 
-You may also be interested in the following:
-* [Audit your Angular app's accessibility with codelyzer](https://web.dev/accessible-angular-with-codelyzer/).
+以下が参考になるかもしれません。
+* [codelyzer を使って Angulr アプリケーションのアクセシビリティをチェックする](https://web.dev/accessible-angular-with-codelyzer/)。

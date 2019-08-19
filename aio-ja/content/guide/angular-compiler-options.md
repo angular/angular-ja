@@ -1,8 +1,8 @@
-# Angular compiler options
+# Angular コンパイラオプション
 
-When you use [AOT compilation](guide/aot-compiler), you can control how your application is compiled by specifying *template* compiler options in the `tsconfig.json` [TypeScript configuration file](guide/typescript-configuration).
+[事前コンパイル](guide/aot-compiler) を使用する場合、`tsconfig.json` [TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
 
-The template options object, `angularCompilerOptions`, is a sibling to the `compilerOptions` object that supplies standard options to the TypeScript compiler.
+テンプレートオプションオブジェクトの `angularCompilerOptions` は、TypeScript コンパイラに標準オプションを提供する `compilerOptions` オブジェクトに近いものです。
 
 ```json
     {
@@ -17,132 +17,134 @@ The template options object, `angularCompilerOptions`, is a sibling to the `comp
       }
   }
   ```
-This page describes the available Angular template compiler options.
+このページでは、利用可能なAngularテンプレートコンパイラオプションについて説明します。
 
 ### `allowEmptyCodegenFiles`
 
-When true, generate all possible files even if they are empty. Default is false. Used by the Bazel build rules to simplify how Bazel rules track file dependencies. Do not use this option outside of the Bazel rules.
+true の場合、空であってもすべての可能なファイルを生成します。デフォルトは false です。 Bazel ルールがファイルの依存関係を追跡する方法を単純化するために、Bazel ビルドルールで使用されます。このオプションは、Bazel ルール以外では使用しないでください。
 
 ### `annotationsAs`
 
-Modifies how Angular-specific annotations are emitted to improve tree-shaking. Non-Angular annotations are not affected. One of `static fields` (the default) or `decorators`.
+ツリーシェーキングを改善するために、Angular 固有のアノテーションの出力方法を変更します。Angular 以外のアノテーションは影響を受けません。`static fields` (デフォルト) または `decorators` のいずれかです。
 
-* By default, the compiler replaces decorators with a static field in the class, which allows advanced tree-shakers like [Closure compiler](https://github.com/google/closure-compiler) to remove unused classes.
+* デフォルトでは、コンパイラーはデコレーターをクラスの静的フィールドに置き換えます。これにより、[Closure compiler](https://github.com/google/closure-compiler) などの高度なツリーシェーカーが未使用のクラスを削除できます。
 
-* The `decorators` value leaves the decorators in place, which makes compilation faster. TypeScript emits calls to the` __decorate` helper. Use `--emitDecoratorMetadata` for runtime reflection (but note taht the resulting code will not properly tree-shake.
+* `decorators` の値はデコレーターをそのままにしておくため、コンパイルが高速になります。TypeScript は、`__decorate` ヘルパーへの呼び出しを出力します。実行時のリフレクションに `--emitDecoratorMetadata` を使用します (ただし、結果のコードが適切にツリーシェークされないことに注意してください)。
 
 ### `annotateForClosureCompiler`
 
-When true, use [Tsickle](https://github.com/angular/tsickle) to annotate the emitted JavaScript with [JSDoc](http://usejsdoc.org/) comments needed by the
-[Closure Compiler](https://github.com/google/closure-compiler). Default is false.
+true の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](http://usejsdoc.org/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
+デフォルトは false です。
 
 ### `disableExpressionLowering`
 
-When true (the default), transforms code that is or could be used in an annotation, to allow it to be imported from template factory modules. See [metadata rewriting](guide/aot-compiler#metadata-rewriting) for more information.
+true の場合（デフォルト）、Angular テンプレートコンパイラは、アノテーションで使用されている、または使用される可能性があるコードを変換して、テンプレートファクトリモジュールからインポートできるようにします。詳細については、[メタデータの書き換え](guide/aot-compiler#metadata-rewriting) を参照してください。
 
-When `false`, disables this rewriting, requiring the rewriting to be done manually.
+このオプションを `false` に設定すると、この書き換えが無効になり、書き換えを手動で行う必要があります。
 
 ### `disableTypeScriptVersionCheck`
 
-When `true`, the compiler does not check the TypeScript version and does not report an error when an unsupported version of TypeScript is used. Not recommended, as unsupported versions of TypeScript might have undefined behavior. Default is false.
+`true` の場合、このオプションはコンパイラに TypeScript のバージョンをチェックしないように指示します。TypeScript のサポートされていないバージョンが使用されている場合、コンパイラはチェックをスキップし、エラーにはなりません。このオプションを `true` に設定することは TypeScript のサポートされていないバージョンが未定義の動作をするかもしれないのでお勧めできません。このオプションはデフォルトでは false です。
 
 ### `enableResourceInlining`
 
-When true, replaces the `templateUrl` and `styleUrls` property in all `@Component` decorators with inlined contents in `template` and `styles` properties.
+このオプションは、すべての `@Component` デコレーターの `templateUrl` および `styleUrls` プロパティを `template` および `styles` プロパティのインライン化された内容に置き換えるようにコンパイラに指示します。
 
-When enabled, the `.js` output of `ngc` does not include any lazy-loaded template or style URLs.
+有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
 
 {@a enablelegacytemplate}
 
 ### `enableLegacyTemplate`
 
-When true, enables use of the `<template>` element, which was deprecated in Angular 4.0, in favor of `<ng-template>` (to avoid colliding with the DOM's element of the same name). Default is false. Might be required by some third-party Angular libraries. |
+trueの場合 `<template>` 要素を有効にします。これは同じ名前の DOM の要素との衝突を避ける `<ng-template>` を優先するため、Angular 4.0 から 非推奨になりました。デフォルトでは false です。このオプションは、一部のサードパーティ Angular ライブラリで必要となる場合があります。
 
 ### `flatModuleId`
 
-The module ID to use for importing a flat module (when `flatModuleOutFile` is true). References generated by the template compiler use this module name when importing symbols
-from the flat module. Ignored if `flatModuleOutFile` is false.
+フラットモジュールのインポートに使用するモジュール ID (`flatModuleOutFile` が true の場合) です。テンプレートコンパイラによって生成された参照は、フラットモジュールからシンボルをインポートするときにこのモジュール名を使用します。
+`flatModuleOutFile` が false の場合は無視されます。
 
 ### `flatModuleOutFile`
 
-When true, generates a flat module index of the given file name and the corresponding flat module metadata. Use to create flat modules that are packaged similarly to `@angular/core` and `@angular/common`. When this option is used, the `package.json` for the library should refer
-to the generated flat module index instead of the library index file.
+true の場合、このオプションは、指定されたファイル名と対応するフラットモジュールメタデータのフラットモジュールインデックスを生成するようにテンプレートコンパイラに指示します。`@angular/core` および `@angular/common` と同様にパッケージ化されたフラットモジュールを作成するために使用します。このオプションを使用する場合、ライブラリの`package.json` は、ライブラリインデックスファイルではなく、
+生成されたフラットモジュールインデックスを参照するようになります。
 
-Produces only one `.metadata.json` file, which contains all the metadata necessary
-for symbols exported from the library index. In the generated `.ngfactory.js` files, the flat
-module index is used to import symbols that includes both the public API from the library index
-as well as shrowded internal symbols.
+このオプションを使用すると、ライブラリインデックスからエクスポートされたシンボルに必要なすべてのメタデータを含む
+1つの `.metadata.json` ファイルのみが生成されます。
+生成された `.ngfactory.js` ファイルでは、フラットモジュールインデックスを使用して、
+ライブラリインデックスからのパブリック API と覆い隠されたシンボルの両方を含むシンボルをインポートします。
 
-By default the `.ts` file supplied in the `files` field is assumed to be the library index.
-If more than one `.ts` file is specified, `libraryIndex` is used to select the file to use.
-If more than one `.ts` file is supplied without a `libraryIndex`, an error is produced.
+デフォルトでは、`files` フィールドに指定された `.ts` ファイルがライブラリインデックスと見なされます。
+複数の `.ts` ファイルが指定されている場合は、`libraryIndex` を使用して使用するファイルを選択します。
+`libraryIndex` なしで複数の `.ts` ファイルが指定された場合、エラーが発生します。
 
-A flat module index `.d.ts` and `.js` is created with the given `flatModuleOutFile` name in the same location as the library index `.d.ts` file.
+フラットモジュールインデックス `.d.ts` および `.js` は、ライブラリインデックス `.d.ts` ファイルと同じ場所に、指定された `flatModuleOutFile` 名で作成されます。
 
-For example, if a library uses the `public_api.ts` file as the library index of the module, the `tsconfig.json` `files` field would be `["public_api.ts"]`.
-The `flatModuleOutFile` options could then be set to (for example) `"index.js"`, which produces `index.d.ts` and  `index.metadata.json` files.
-The `module` field of the library's `package.json` would be `"index.js"` and the `typings` field
-would be `"index.d.ts"`.
+たとえば、ライブラリがモジュールのライブラリインデックスとして `public_api.ts` ファイルを使用する場合、`tsconfig.json` `files` フィールドは `["public_api.ts"]` になります。
+その後、`flatModuleOutFile` オプションを `"index.js"` に設定すると、`index.d.ts` ファイルと `index.metadata.json` ファイルが生成されます。
+ライブラリの `package.json` の `module` フィールドは `"index.js"` になり、
+`typings` フィールドは `"index.d.ts"` になります。
 
 ### `fullTemplateTypeCheck`
 
-When true (recommended), enables the [binding expression validation](guide/aot-compiler#binding-expression-validation) phase of the template compiler, which uses TypeScript to validate binding expressions.
+true (推奨) の場合、TypeScript を使用してバインディング式を検証するテンプレートコンパイラの[バインディング式の検証](guide/aot-compiler#binding-expression-validation)フェーズを有効にするようにコンパイラに指示します。
 
-Default is currently false.
+現在は、このオプションはデフォルトでは false です。
 
 ### `generateCodeForLibraries`
 
-When true (the default), generates factory files (`.ngfactory.js` and `.ngstyle.js`)
-for `.d.ts` files with a corresponding `.metadata.json` file.
+true (デフォルト) の場合、対応する `.metadata.json` ファイルとともに `.d.ts` ファイル用のファクトリファイル (`.ngfactory.js` および `.ngstyle.js`) を
+生成するようにテンプレートコンパイラに指示します。
 
-When false, factory files are generated only for `.ts` files. Do this when using factory summaries.
+このオプションが false の場合、ファクトリーファイルは `.ts` ファイルに対してのみ生成されます。ファクトリーサマリーを使用する場合、このオプションは false に設定するべきです。
 
 
 ### `preserveWhitespaces`
 
-When false (the default), removes blank text nodes from compiled templates, which results in smaller emitted template factory modules. Set to true to preserve blank text nodes.
+false (デフォルト) の場合、コンパイルされたテンプレートから空白のテキストノードを削除するようにコンパイラに指示します。これにより、出力されるテンプレートファクトリモジュールが小さくなります。空白のテキストノードを保持するには、true に設定します。
 
 ### `skipMetadataEmit`
 
-When true, does not to produce `.metadata.json` files. Default is `false`.
+このオプションが true の場合、`.metadata.json` ファイルを生成しないようにコンパイラーに指示します。デフォルトでは `false` です。
 
-The `.metadata.json` files contain information needed by the template compiler from a `.ts`
-file that is not included in the `.d.ts` file produced by the TypeScript compiler.
-This information includes, for example, the content of annotations  (such as a component's template), which TypeScript emits to the `.js` file but not to the `.d.ts` file.
+`.metadata.json` ファイルには、TypeScript コンパイラによって生成された `.d.ts` ファイルに含まれていない `.ts` ファイルから、
+テンプレートコンパイラによって必要とされる情報が含まれています。
+たとえば、この情報には、TypeScript が `.js` ファイルに出力するが `.d.ts` ファイルには出力しない注釈の内容
+(コンポーネントのテンプレートなど) が含まれています。
 
-You can set to `true` when using factory summaries, because the factory summaries
-include a copy of the information that is in the `.metadata.json` file.
+ファクトリーサマリーには `.metadata.json` ファイルにある情報のコピーが含まれているため、
+ファクトリーサマリーを使用するときにもこのオプションを `true` に設定できます。
 
-Set to `true` if you are using TypeScript's `--outFile` option, because the metadata files
-are not valid for this style of TypeScript output. However, we do not recommend using `--outFile` with Angular. Use a bundler, such as [webpack](https://webpack.js.org/), instead.
+TypeScript の `--outFile` オプションを使用している場合は、このオプションを `true` に設定してください。
+メタデータファイルはこのスタイルの TypeScript 出力には無効です。Angular で `--outFile` を使用することはお勧めできません。
+代わりに、[webpack](https://webpack.js.org/) などのバンドラーを使用してください。
 
 ### `skipTemplateCodegen`
 
-When true, does not emit `.ngfactory.js` and `.ngstyle.js` files. This turns off most of the template compiler and disables the reporting of template diagnostics.
+このオプションが true の場合、`.ngfactory.js` ファイルと `.ngstyle.js` ファイルの出力を抑制するようにコンパイラーに指示します。設定されると、これはテンプレートコンパイラの大部分をオフにし、テンプレート診断の報告を無効にします。
 
-Can be used to instruct the template compiler to produce `.metadata.json` files for distribution with an `npm` package while avoiding the production of `.ngfactory.js` and `.ngstyle.js` files that cannot be distributed to `npm`.
+このオプションは、`npm` に配布できない `.ngfactory.js` および `.ngstyle.js` ファイルの作成を避けながら、`npm` パッケージで配布するための `.metadata.json` ファイルを作成するようにテンプレートコンパイラに指示するために使用できます。
 
 ### `strictMetadataEmit`
 
-When true, reports an error to the `.metadata.json` file if `"skipMetadataEmit"` is `false`.
-Default is false. Use only when `"skipMetadataEmit"` is false and `"skipTemplateCodeGen"` is true.
+このオプションは、`"skipMetadataEmit"` が `false` の場合、`.metadata.json` ファイルにエラーを報告するようにテンプレートコンパイラに指示します。
+このオプションはデフォルトでは `false` です。これは、`"skipMetadataEmit"` が false で `"skipTemplateCodeGen"` が true の場合にのみ使用されるべきです。
 
-This option is intended to validate the `.metadata.json` files emitted for bundling with an `npm` package. The validation is strict and can emit errors for metadata that would never produce an error when used by the template compiler. You can choose to suppress the error emitted by this option for an exported symbol by including `@dynamic` in the comment documenting the symbol.
+このオプションは、`npm` パッケージとのバンドル用に発行された `.metadata.json` ファイルを検証するためのものです。検証は厳密であり、テンプレートコンパイラで使用されたときにエラーが発生しないようなメタデータに対してエラーを発生させる可能性があります。シンボルを説明するコメントに `@dynamic` を含めることで、エクスポートされたシンボルに対してこのオプションによって発生するエラーを抑制することを選択できます。
 
-It is valid for `.metadata.json` files to contain errors.
-The template compiler reports these errors if the metadata is used to determine the contents of an annotation.
-The metadata collector cannot predict the symbols that are designed for use in an annotation, so it preemptively includes error nodes in the metadata for the exported symbols.
-The template compiler can then use the error nodes to report an error if these symbols are used.
+`.metadata.json` ファイルにエラーが含まれていることは有効です。
+メタデータを使用してアノテーションの内容を判断すると、テンプレートコンパイラはこれらのエラーを報告します。
+メタデータコレクターは、アノテーションで使用するために設計されたシンボルを予測できないため、エクスポートされたシンボルのメタデータにエラーノードを優先的に含めます。
+これらのシンボルが使用されている場合、テンプレートコンパイラはエラーノードを使用してエラーを報告できます。
 
-If the client of a library intends to use a symbol in an annotation, the template compiler does not normally report this until the client uses the symbol.
-This option allows detection of these errors during the build phase of
-the library and is used, for example, in producing Angular libraries themselves.
+ライブラリのクライアントがアノテーションでシンボルを使おうとする場合、テンプレートコンパイラは通常クライアントがシンボルを使うまでこれを報告しません。
+このオプションはライブラリのビルド段階でこれらのエラーを検出することを可能にし、
+たとえば Angular ライブラリ自身を作成する際に使用されます。
 
 ### `strictInjectionParameters`
 
-When true (recommended), reports an error for a supplied parameter whose injection type cannot be determined. When false (currently the default), constructor parameters of classes marked with `@Injectable` whose type cannot be resolved produce a warning.
+true (推奨) に設定した場合、このオプションは、インジェクションタイプを判別できない指定されたパラメーターについてエラーを報告するようコンパイラーに指示します。このオプションが提供されていないか false (現在はデフォルト) の場合、型を解決できない `@Injectable` でマークされたクラスのコンストラクターパラメータは警告を生成します。
 
 ### `trace`
 
-When true, prints extra information while compiling templates. Default is false.
+true の場合、テンプレートのコンパイル中に追加情報を出力します。デフォルトは false です。

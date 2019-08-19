@@ -690,9 +690,10 @@
         },
         {
           "url": "guide/angular-compiler-options",
-          "title": "Compiler Options",
-          "tooltip": "Configuration options for the AOT compiler."
-        },
+          "title": "Angularコンパイラオプション",
+          "tooltip": "AOTコンパイラの構成オプション。",
+          "translated": true
+        },  
         {
           "url": "guide/build",
           "title": "ビルドとサーブ",

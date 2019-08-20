@@ -449,8 +449,9 @@
             },
             {
               "url": "guide/dependency-injection-providers",
-              "title": "DI Providers",
-              "tooltip": "More about the different kinds of providers."
+              "title": "依存関係プロバイダー",
+              "tooltip": "More about the different kinds of providers.",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-in-action",

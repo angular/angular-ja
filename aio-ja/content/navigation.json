@@ -537,8 +537,9 @@
         },
         {
           "url": "guide/accessibility",
-          "title": "Accessibility",
-          "tooltip": "Design apps to be accessible to all users."
+          "title": "アクセシビリティ",
+          "tooltip": "Design apps to be accessible to all users.",
+          "translated": true
         },
         {
           "title": "Service WorkerとPWA",

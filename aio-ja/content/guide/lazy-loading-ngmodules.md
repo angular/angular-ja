@@ -57,7 +57,8 @@ CLIは、ファイルの先頭にJavaScriptのインポート文を追加し、
 ng generate component customers/customer-list
 ```
 
-これにより、`customers`フォルダ内に、コンポーネントを構成する4つのファイルをもつ`customer-list`という名前のフォルダが作成されます。
+これにより、`customers`フォルダ内に、
+コンポーネントを構成する4つのファイルをもつ`customer-list`という名前のフォルダが作成されます。
 
 ルーティングモジュールと同様に、
 CLIは`CustomersListComponent`を`CustomersModule`にインポートします。
@@ -128,11 +129,11 @@ ng serve
 <code-example path="lazy-loading-ngmodules/src/app/app-routing.module.ts" region="const-routes" header="src/app/app-routing.module.ts"></code-example>
 
 
-インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に続けてブラウザの組み込みの `import('...')` 構文を使った関数を指定することに注意してください。インポートパスはそのモジュールへの相対パスです。
+インポート文は同じままです。最初の2つのパスでそれぞれ`CustomersModule`と`OrdersModule`へのルート(route)を指定しています。遅延ロードの構文では`loadChildren`に続けて、動的インポートのためにブラウザ組み込みの `import('...')` 構文を使った関数を指定することに注意してください。インポートパスはそのモジュールへの相対パスです。
 
 ### フィーチャーモジュールの内部
 
-次に、`customers.module.ts`を見てください。もしあなたがCLIを使用していて、このページに記載されている手順にしたがっている場合は、ここで何もする必要はありません。フィーチャーモジュールは、`AppRoutingModule`とフィーチャールーティングモジュール間のコネクターのようなものになります。`AppRoutingModule`が`CustomersModule`をインポートして、順に`CustomersModule`が`CustomersRoutingModule`をインポートします。
+次に、`customers.module.ts`を見てください。もしあなたがCLIを使用していて、このページに記載されている手順にしたがっている場合は、ここで何もする必要はありません。フィーチャーモジュールは、`AppRoutingModule`とフィーチャールーティングモジュール間のコネクターのようなものになります。`AppRoutingModule`がフィーチャーモジュールの`CustomersModule`をインポートして、今度は`CustomersModule`が`CustomersRoutingModule`をインポートします。
 
 
 <code-example path="lazy-loading-ngmodules/src/app/customers/customers.module.ts" region="customers-module" header="src/app/customers/customers.module.ts"></code-example>
@@ -159,7 +160,7 @@ ng serve
 
 ## 動作の確認をする
 
-モジュールが実際に遅延ロードされていることをChromeの開発者ツールで確認することができます。Macの場合は`Cmd+Option+i`、PCの場合は`Ctrl+Alt+i`を押して開発者ツールを開き、ネットワークタブに移動してください。
+モジュールが実際に遅延ロードされていることをChromeの開発者ツールで確認することができます。Macの場合は`Cmd+Option+i`、PCの場合は`Ctrl+Shift+j`を押して開発者ツールを開き、ネットワークタブに移動してください。
 
 <figure>
  <img src="generated/images/guide/lazy-loading-ngmodules/network-tab.png" width="600" alt="lazy loaded modules diagram">
@@ -186,13 +187,13 @@ OrdersまたはCustomersボタンをクリックしてください。もしチ�
 ## `forRoot()`と`forChild()`
 
 あなたはCLIが`RouterModule.forRoot(routes)`を`app-routing.module.ts`の`imports`配列に追加したことに気づいたかもしれません。
-これは、Angularにこのモジュールが`AppRoutingModule`はルーティングモジュールであること、
+これはAngularに、このモジュール(`AppRoutingModule`)がルーティングモジュールであることと、
 `forRoot()`によってこれがルート(root)のルーティングモジュールであることを知らせます。これは渡したすべてのルート(route)を設定します。
 ルーターディレクティブへアクセスできるようにしたり、`RouterService`を登録します。
 `forRoot()`は`AppRoutingModule`、つまりアプリケーション内のルート(root)レベルで1回だけ使用してください。
 
 CLIは、フィーチャールーティングモジュールにも`RouterModule.forChild(routes)`を追加します。
-これにより、Angularはルート(route)リストが提供された追加のルート(route)をのみに責任をもつことと、フィーチャーモジュールを対象としていることを知ります。`forChild()`は複数のモジュールで使用することができます。
+これにより、Angularはそのルート(route)リストが追加のルート(route)の提供のみに責任をもつことと、フィーチャーモジュールを対象としていることを知ります。`forChild()`は複数のモジュールで使用することができます。
 
 `forRoot()`にはグローバルなインジェクター設定が含まれています。たとえば、Routerの設定などを行います。`forChild()`はインジェクター設定を持たず、`RouterOutlet`や`RouterLink`のようなディレクティブを持ちます。
 
@@ -208,3 +209,4 @@ CLIは、フィーチャールーティングモジュールにも`RouterModule.
 * [フィーチャーモジュールの種類](guide/module-types)
 * [Route-level code-splitting in Angular](https://web.dev/route-level-code-splitting-in-angular/)
 * [Route preloading strategies in Angular](https://web.dev/route-preloading-in-angular/)
+

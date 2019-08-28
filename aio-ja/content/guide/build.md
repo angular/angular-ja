@@ -233,7 +233,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
     <td>name</td>
     <td>
     
-    バンドルの名前（type=bundle`の場合）。
+    バンドルの名前（`type=bundle`の場合）。
     
     </td>
   </tr>

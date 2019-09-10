@@ -60,18 +60,18 @@ Angularは、コンポーネントのコンテンツ表示制御を可能にす�
 Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 このセクションでは、"Products"エリアを実装することによってテンプレート構文について学びます。
 
-（テンプレートの構文に焦点を絞ることができるように、次の手順では事前に定義済みの製品データと`product-list.component.ts`ファイルのメソッドを使用します。）
+（テンプレートの構文に焦点を絞ることができるように、次の手順では事前に定義済みの商品データと`product-list.component.ts`ファイルのメソッドを使用します。）
 
 1.  `product-list`フォルダーで、テンプレートファイル`product-list.component.html`を開きます。
 
-1. 製品リストのテンプレートを変更して製品名のリストを表示します。
+1. 商品リストのテンプレートを変更して商品名のリストを表示します。
 
-    1. リスト内の各商品を同じように、ページ上に順番に表示するようにします。 定義済みの製品リストを反復するには、`*ngFor`ディレクティブを使用します。次に示すように、`*ngFor`ディレクティブを`<div>`に配置します。
+    1. リスト内の各商品を同じように、ページ上に順番に表示するようにします。 定義済みの商品リストを反復するには、`*ngFor`ディレクティブを使用します。次に示すように、`*ngFor`ディレクティブを`<div>`に配置します。
 
       <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.2.html" region="ngfor">
       </code-example>
 
-      `*ngFor` によってリスト内の各製品ごとに`<div>`が繰り返されます。
+      `*ngFor` によってリスト内の各商品ごとに`<div>`が繰り返されます。
 
       <div class="alert is-helpful">
 
@@ -79,18 +79,18 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
       </div>
 
-    1. 製品の名前を表示するには、補間構文 {{ }} を使用します。 補間は、プロパティの値をテキストとしてレンダリングします。 `<div>`の中に、製品のnameプロパティを補間し表示するための`<h3>`見出しを追加します。
+    1. 商品の名前を表示するには、補間構文 {{ }} を使用します。 補間は、プロパティの値をテキストとしてレンダリングします。 `<div>`の中に、商品のnameプロパティを補間し表示するための`<h3>`見出しを追加します。
 
       <code-example path="getting-started/src/app/product-list/product-list.component.2.html" region="interpolation">
       </code-example>
 
-      プレビューペインがすぐに更新されて、リスト内の各製品の名前が表示されます。
+      プレビューペインがすぐに更新されて、リスト内の各商品の名前が表示されます。
 
       <figure>
         <img src="generated/images/guide/start/template-syntax-product-names.png" alt="Product names added to list">
       </figure>
 
-1. 最終的なアプリでは、各製品名が製品詳細へのリンクになります。 次にアンカーを追加し、次に示すように、プロパティバインディング [ ] 構文を使用してアンカーのタイトルを製品の名前に設定します。
+1. 最終的なアプリでは、各商品名が商品詳細へのリンクになります。 次にアンカーを追加し、次に示すように、プロパティバインディング [ ] 構文を使用してアンカーのタイトルを商品の名前に設定します。
 
     <code-example path="getting-started/src/app/product-list/product-list.component.2.html">
     </code-example>
@@ -99,19 +99,19 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
     To do: Description and code don't match exactly. Do we want to just use product name as the anchor hover text to show a simple property or append "details" to show an expression? Also affects screen shot. 
     -->
 
-    プレビューペインで、表示されている製品名の上にカーソルを置くと、バインドされたnameプロパティの値が表示されます。 補間 {{ }} を使用すると、プロパティ値をテキストとしてレンダリングできます。 プロパティバインディング [ ] を使用すると、テンプレート式でプロパティ値を使用できます。
+    プレビューペインで、表示されている商品名の上にカーソルを置くと、バインドされたnameプロパティの値が表示されます。 補間 {{ }} を使用すると、プロパティ値をテキストとしてレンダリングできます。 プロパティバインディング [ ] を使用すると、テンプレート式でプロパティ値を使用できます。
 
     <figure>
       <img src="generated/images/guide/start/template-syntax-product-anchor.png" alt="Product name anchor text is product name property">
     </figure>
 
   
-1. 製品の説明を追加してください。 pタグで`*ngIf`ディレクティブを使用して、現在の製品に説明がある場合にのみp要素が作成されるようにします。
+1. 商品の説明を追加してください。 pタグで`*ngIf`ディレクティブを使用して、現在の商品に説明がある場合にのみp要素が作成されるようにします。
 
     <code-example path="getting-started/src/app/product-list/product-list.component.3.html">
     </code-example>
 
-    次のように、アプリはリストに各製品の名前と説明を表示します。 最後の製品には説明文がまったくないことに注意してください。 商品のdescriptionプロパティが空なので、 "Description"という単語を含むp要素は作成されません。
+    次のように、アプリはリストに各商品の名前と説明を表示します。 最後の商品には説明文がまったくないことに注意してください。 商品のdescriptionプロパティが空なので、 "Description"という単語を含むp要素は作成されません。
 
     <figure>
       <img src="generated/images/guide/start/template-syntax-product-description.png" alt="Product descriptions added to list">
@@ -122,7 +122,7 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
     <code-example path="getting-started/src/app/product-list/product-list.component.4.html">
     </code-example>
 
-    各製品には"Share"ボタンがあります。
+    各商品には"Share"ボタンがあります。
 
     <figure>
       <img src="generated/images/guide/start/template-syntax-product-share-button.png" alt="Share button added for each product">
@@ -134,7 +134,7 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
       <img src="generated/images/guide/start/template-syntax-product-share-alert.png" alt="Alert box indicating product has been shared">
     </figure>
 
-アプリは現在、製品リストと共有機能を持っています。
+アプリは現在、商品リストと共有機能を持っています。
 その過程で、Angularのテンプレート構文の5つの一般的な機能を使用する方法を学びました。
 * `*ngFor`
 * `*ngIf`
@@ -154,17 +154,17 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 ## コンポーネント
 
 *コンポーネント*は、これらの一連のUI機能を再利用できるようにするための、UI内の責任領域を定義します。
-あなたはすでに製品リストコンポーネントを使ってこれを構築しました。
+あなたはすでに商品リストコンポーネントを使ってこれを構築しました。
 
 コンポーネントは3つの要素で構成されています。
-* **コンポーネントクラス** では、データと機能を処理します。前のセクションでは、製品データと`share()`メソッドはコンポーネントクラスで定義されていました。
+* **コンポーネントクラス** では、データと機能を処理します。前のセクションでは、商品データと`share()`メソッドはコンポーネントクラスで定義されていました。
 * **HTMLテンプレート** では、ユーザーに表示される内容を決定します。 前のセクションでは、商品リストのHTMLテンプレートを変更して、各商品の名前、説明、および"Share"ボタンを表示しました。
 * **コンポーネント固有スタイル** では、ルック・アンド・フィールを定義します。 商品リストにはスタイルは定義されていません。
 
 <!-- 
 ### クラス定義
 
-製品リストコンポーネントのクラス定義を簡単に見てみましょう。
+商品リストコンポーネントのクラス定義を簡単に見てみましょう。
 
 1. `product-list`ディレクトリで、`product-list.component.ts`を開きます。
 
@@ -189,7 +189,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 * `app-root`（オレンジ色のボックス）はアプリケーションシェルです。 これは最初にロードするコンポーネントであり、他のすべてのコンポーネントの親です。 これをベースページと考えることができます。
 * `app-top-bar`（青い背景）は店名とチェックアウトボタンです。
-* `app-product-list`（紫色のボックス）は前のセクションで修正した製品リストです。
+* `app-product-list`（紫色のボックス）は前のセクションで修正した商品リストです。
 
 次のセクションでは、商品アラート用の新しいコンポーネントを追加してアプリの機能を拡張します。 商品リストコンポーネントの子として追加します。
 
@@ -204,10 +204,10 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 {@a input}
 ## Input
 
-現在、製品リストには各製品の名前と説明が表示されています。
+現在、商品リストには各商品の名前と説明が表示されています。
 お気づきかもしれませんが、商品リストコンポーネントは各商品のインポートデータを含む `products`プロパティも定義しています。 （`products.ts`の`products`配列を見てください。）
 
-新しいアラート機能を作成します。 アラート機能は製品を入力として受け取り、それから製品の価格をチェックします。 そして、価格が700ドル以上であるならば、製品が発売されたとき、ユーザーが通知にサインアップすることを可能にする "Notify Me" ボタンを表示します。
+新しいアラート機能を作成します。 アラート機能は商品を入力として受け取り、それから商品の価格をチェックします。 そして、価格が700ドル以上であるならば、商品が発売されたとき、ユーザーが通知にサインアップすることを可能にする "Notify Me" ボタンを表示します。
 
 1. 新しい商品アラートコンポーネントを作成します。
 
@@ -234,7 +234,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
     1. コンポーネント定義にはエクスポートされたクラス（`ProductAlertsComponent`）も含まれています。 これはコンポーネントの機能を処理します。
 
-1. 入力として製品を受け取るように新しい製品アラートコンポーネントを設定します。
+1. 入力として商品を受け取るように新しい商品アラートコンポーネントを設定します。
 
     1. `@angular/core`から`Input`をインポートしてください。
 
@@ -244,13 +244,13 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
         <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="input-decorator"></code-example>
 
-1. 新しい製品警告コンポーネントのビューを定義します。
+1. 新しい商品警告コンポーネントのビューを定義します。
 
     `product-alerts.component.html`テンプレートを開き、商品価格が700ドル以上の場合に表示される"Notify Me"ボタンでプレースホルダーの段落を置き換えます。
 
     <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
-1. 製品リスト（の子）の一部として新しい製品アラートコンポーネントを表示します。
+1. 商品リスト（の子）の一部として新しい商品アラートコンポーネントを表示します。
 
     1. `product-list.component.html`を開きます。
     
@@ -260,7 +260,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
         <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.5.html" region="app-product-alerts"></code-example>
 
-新しい製品アラートコンポーネントは、製品リストからの入力として製品を受け取ります。 この入力による製品の価格に基づいて、"Notify Me"ボタンを表示もしくは隠す挙動をおこないます。 Phone XLの価格が700ドルを超えているため、製品には"Notify Me"ボタンが表示されます。
+新しい商品アラートコンポーネントは、商品リストからの入力として商品を受け取ります。 この入力による商品の価格に基づいて、"Notify Me"ボタンを表示もしくは隠す挙動をおこないます。 Phone XLの価格が700ドルを超えているため、商品には"Notify Me"ボタンが表示されます。
 
 <figure>
   <img src="generated/images/guide/start/product-alert-button.png" alt="Product alert button added to products over $700">
@@ -285,7 +285,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
     <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.ts" region="imports"></code-example>
 
-1. コンポーネントクラスで、`@Output`デコレーターとイベントエミッターのインスタンスを使って、`notify`という名前のプロパティを定義します。 これにより、notifyプロパティの値が変更されたときに製品アラートコンポーネントがイベントを発行することが可能になります。
+1. コンポーネントクラスで、`@Output`デコレーターとイベントエミッターのインスタンスを使って、`notify`という名前のプロパティを定義します。 これにより、notifyプロパティの値が変更されたときに商品アラートコンポーネントがイベントを発行することが可能になります。
 
     <code-example path="getting-started/src/app/product-alerts/product-alerts.component.ts" region="input-output"></code-example>
 
@@ -297,7 +297,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
     <code-example header="src/app/product-list/product-list.component.ts" path="getting-started/src/app/product-list/product-list.component.ts" region="on-notify"></code-example>
 
-1. 最後に、製品アラートコンポーネントからの出力を受け取るように製品リストコンポーネントを更新します。
+1. 最後に、商品アラートコンポーネントからの出力を受け取るように商品リストコンポーネントを更新します。
 
     `product-list.component.html`で、` app-product-alerts`コンポーネント（これは"Notify Me"ボタンを表示するものです）を商品リストコンポーネントの `onNotify()`メソッドにバインドします。
 
@@ -327,5 +327,5 @@ Angularの基礎、つまりコンポーネントとテンプレートの構文�
 また、コンポーネントクラスとテンプレートがどのように相互作用するのか、およびコンポーネントが相互に通信する方法も学びました。
 
 Angularの探索を続けるには、次のいずれかのオプションを選択してください。
-* ["ルーティング"セクションに進む](start/routing "入門： ルーティング")ことで、製品名をクリックしてアクセスでき、独自のURLパターンをもつ製品詳細ページを作成します。
+* ["ルーティング"セクションに進む](start/routing "入門： ルーティング")ことで、商品名をクリックしてアクセスでき、独自のURLパターンをもつ商品詳細ページを作成します。
 * [先に"デプロイ"セクションに進む](start/deployment "入門： デプロイ")ことで、ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーにデプロイします。

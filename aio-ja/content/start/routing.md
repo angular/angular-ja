@@ -31,13 +31,13 @@ Angular[ルーター](guide/glossary#router "router definition")を使うと、�
     ルーティングは、1つ以上のURLパスをコンポーネントに関連付けます。
 
 1. `RouterLink`ディレクティブを使ってリンクを定義します。
-    `routerLink`はユーザーがコンポーネントテンプレート内で宣言的にルーティング（またはURL）にどのようにナビゲートするかを定義します。
+    `routerLink`は、どのようにユーザーがルーティング（またはURL）にナビゲートするかを、コンポーネントテンプレート内で宣言的に定義します。
 
-    ユーザーに商品名をクリックしてその商品の詳細を表示させます。
+    商品名をクリックするユーザーには、その商品の詳細を表示します。
 
     1. `product-list.component.html`を開きます。
 
-    1. リストを反復処理するときに、`*ngFor`ディレクティブを更新して、` products`配列の各インデックスを `productId`変数に割り当てるようにします。
+    1. `*ngFor`ディレクティブを更新します。リストを反復処理するときに、`products`配列の各インデックスを`productId`変数に割り当てるようにします。
 
     1. `routerLink`を含めるように商品名のアンカーを変更します。
 
@@ -78,7 +78,7 @@ Angular[ルーター](guide/glossary#router "router definition")を使うと、�
         <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="props-methods">
         </code-example>
 
-        `ActivatedRoute`はAngularルーターによってロードされた各ルーティングコンポーネントに固有のものです。
+        `ActivatedRoute`はAngularルーターによってロードされた各ルーテッドコンポーネントに固有のものです。
         ルーティング、そのパラメータ、およびそのルーティングに関連する追加データに関する情報が含まれています。
 
         <!-- 
@@ -98,7 +98,7 @@ Angular[ルーター](guide/glossary#router "router definition")を使うと、�
     <code-example header="src/app/product-details/product-details.component.html" path="getting-started/src/app/product-details/product-details.component.html" region="details">
     </code-example>
 
-商品リストコンポーネントを商品詳細コンポーネントと入れ替えて、商品詳細を表示するようになりました。
+今や、商品リストの名前をクリックすると、ルーターはその商品の個別のURLへナビゲートし、商品リストコンポーネントを商品詳細コンポーネントと入れ替えて、商品詳細を表示するようになりました。
 
   <figure>
     <img src="generated/images/guide/start/product-details-routed.png" alt="Product details page with updated URL and full details displayed">
@@ -118,9 +118,9 @@ Angular[ルーター](guide/glossary#router "router definition")を使うと、�
 おめでとうございます！ あなたはオンラインストアにルーティングを統合しました。
 
 * 商品は商品一覧ページから個々の商品にリンクされています
-* ユーザーはリストから商品名をクリックして、別のURL（ルーティング）を使用して新しいビューに詳細を表示できます。
+* ユーザーはリストから商品名をクリックして、個別のURL（ルーティング）を使用した新しいビューに詳細を表示できます。
 
 Angularの探索を続けるには、次のいずれかのオプションを選択してください。
-* ["データの管理"セクションに進む](start/data "入門： データの管理")ことで、ショッピングデータ機能を追加します。 サービスを使用してカートデータを管理し、HTTPを使用して出荷価格の外部データを取得します。
-* [先に"デプロイ"セクションに進む](start/deployment "入門： デプロイ")ことで、ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーにデプロイします。
+* ["データ管理"セクションに進む](start/data "入門： データ管理")ことで、ショッピングデータ機能を追加します。サービスを使用してカートデータを管理し、HTTPを使用して配送料金の外部データを取得します。
+* [先に"デプロイ"セクションに進む](start/deployment "入門： デプロイ")ことで、アプリをFirebaseにデプロイするか、ローカル開発に移行します。
 

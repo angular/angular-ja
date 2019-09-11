@@ -1,12 +1,12 @@
 # データ管理
 
 [ルーティング](start/routing "Getting Started: Routing") の最後に、オンラインストアアプリケーションには、商品リストと商品詳細の2つのビューをもつ商品カタログがあります。
-ユーザーはリストから商品名をクリックして、別のURL（route）を使用して新しいビューに詳細を表示できます。
+ユーザーはリストから商品名をクリックして、個別のURL（ルーティング）を使用した新しいビューに詳細を表示できます。
 
 このセクションでは、ショッピングカートを作成します。 あなたは:
 * 商品の詳細ページに "Buy" ボタンを追加します。 これにより、現在の商品がカートサービスで管理されている商品のリストに追加されます。
-* カートに追加した商品を表示するカートコンポーネントを追加します。
-* Angularの`HttpClient`を使用して `.json` ファイルから配送データを取得することで、カート内の商品の配送料金を取得するshippingコンポーネントを追加します。
+* カートに追加したアイテムを表示するカートコンポーネントを追加します。
+* Angularの`HttpClient`を使用して `.json` ファイルから配送データを取得することで、カート内のアイテムの配送料金を取得する配送コンポーネントを追加します。
 
 {@a services}
 ## サービス
@@ -44,7 +44,7 @@
 
     <code-example path="getting-started/src/app/cart.service.ts" region="props"></code-example>
 
-1. カートへの商品の追加、商品リストの取得、商品リストのクリアを行う各メソッドを定義します:
+1. カートへのアイテムの追加、カートアイテムの取得、カートアイテムのクリアを行う各メソッドを定義します:
 
     <code-example path="getting-started/src/app/cart.service.ts" region="methods"></code-example>
 
@@ -109,7 +109,7 @@
      <img src='generated/images/guide/start/product-details-buy.png' alt="Display details for selected product with a Buy button">
    </figure>
  
-1. "Buy" ボタンをクリックしてください。 商品がカートに保存されている商品のリストに追加され、メッセージが表示されます。
+1. "Buy" ボタンをクリックしてください。 商品がカートに保存されているアイテムのリストに追加され、メッセージが表示されます。
 
     <figure>
       <img src='generated/images/guide/start/buy-alert.png' alt="Display details for selected product with a Buy button">
@@ -118,12 +118,12 @@
 
 ## カートページを作成する
 
-この時点で、ユーザーは "Buy" をクリックして商品をカートに入れることができますが、まだカートを見ることはできません。
+この時点で、ユーザーは "Buy" をクリックしてアイテムをカートに入れることができますが、まだカートを見ることはできません。
 
 カートページは2つのステップで作成します:
 
 1. カートコンポーネントを作成し、新しいコンポーネントへのルーティングを設定します。 この時点で、カートページにはデフォルトのテキストしかありません。
-1. カートの商品を表示します。
+1. カートのアイテムを表示します。
 
 ### コンポーネントを設定する
 
@@ -137,7 +137,7 @@
 
 1. カートコンポーネントのルーティング（URLパターン）を追加します。
 
-    リマインダー: `app.module.ts` を開き、 `cart` という `path` を使用して、コンポーネント `CartComponen` のルートを追加します：
+    リマインダー: `app.module.ts` を開き、 `cart` という `path` を使用して、コンポーネント `CartComponent` のルートを追加します：
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
     </code-example>
@@ -146,7 +146,7 @@
     To do: Can we shorten the example code to remove the extra at the bottom? 
     -->
 
-1. 新しいカートコンポーネントを見るには、 "チェックアウト" ボタンをクリックしてください。 あなたはデフォルトのテキスト "cart works!" を確認できます。 URLは `https://getting-started.stackblitz.io/cart` となっていますが、あなたのStackBlitzプロジェクトでは `getting-started.stackblitz.io` の部分は異なるでしょう。
+1. 新しいカートコンポーネントを見るには、 "Checkout" ボタンをクリックしてください。 あなたはデフォルトのテキスト "cart works!" を確認できます。 URLは `https://getting-started.stackblitz.io/cart` となっていますが、あなたのStackBlitzプロジェクトでは `getting-started.stackblitz.io` の部分は異なるでしょう。
 
     （注：トップバーコンポーネントに用意されている "Checkout" ボタンは、すでに `routerLink` で `/cart` が設定されています。）
 
@@ -160,7 +160,7 @@
 サービスを使用して、コンポーネント間でデータを共有できます:
 
 * 商品詳細コンポーネントは、すでにカートサービス（ `CartService` ）を使用して商品をカートに追加します。
-* このセクションでは、カート内の商品を表示するためにcartサービスを使用するようにcartコンポーネントを更新します。
+* このセクションでは、カート内の商品を表示するためにカートサービスを使用するようにcartコンポーネントを更新します。
 
 
 1. `cart.component.ts`を開きます。
@@ -239,7 +239,7 @@ Angular HTTP client（ `HttpClient` ）は、外部APIからデータを取得�
 ### 定義済み配送データ
 
 この入門ガイドのために、配送データを `assets/shipping.json` に用意しました。
-このデータを使用して、カート内の商品の配送料金を追加します。
+このデータを使用して、カート内のアイテムの配送料金を追加します。
 
 <code-example header="src/assets/shipping.json" path="getting-started/src/assets/shipping.json">
 </code-example>
@@ -250,7 +250,7 @@ Angular HTTP client（ `HttpClient` ）は、外部APIからデータを取得�
 AngularのHTTPクライアントを使用する前に、 `HttpClientModule` を使用するようにアプリを設定する必要があります。
 
 Angularの `HttpClientModule` は、アプリケーション全体で `HttpClient` サービスの単一のインスタンスを使用するために必要なプロバイダーを登録します。
-`HttpClient` サービスは、データを取得したり外部のAPIやリソースと対話したりするためにサービスに注入するものです。
+`HttpClient` サービスは、データを取得したり外部のAPIやリソースと対話したりするために、あなたのサービスに注入するものです。
 
 1. `app.module.ts`を開きます。
 
@@ -294,12 +294,12 @@ To do: Should ReactiveFormsModule already be here?
 ### get()メソッドを定義する
 
 すでに見たように、複数のコンポーネントが同じサービスを利用することができます。
-このチュートリアルの後半で、shippingコンポーネントはcartサービスを使用して `shipping.json` ファイルからHTTP経由で配送データを取得します。
+このチュートリアルの後半で、配送コンポーネントはカートサービスを使用して `shipping.json` ファイルからHTTP経由で配送データを取得します。
 ここでは使用される `get()` メソッドを定義します。
 
 1. `cart.service.ts` で作業を続けます。
 
-1. `clearCart()` メソッドの下に、 `HttpClient#get()` メソッドを使用して[配送データ（タイプと価格）を取得する新しいメソッド `getShippingPrices()` を定義します。
+1. `clearCart()` メソッドの下に、 `HttpClient#get()` メソッドを使用して配送データ（タイプと価格）を取得する新しいメソッド `getShippingPrices()` を定義します。
 
     <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.ts" region="get-shipping"></code-example>
 
@@ -361,7 +361,7 @@ To do: Should ReactiveFormsModule already be here?
 
 1. 配送料金の機能をテストします:
     
-    更新されたカートを見るには、 "チェックアウト" ボタンをクリックしてください。 （アプリを変更するとプレビューが更新され、カートが空になることを忘れないでください。）
+    更新されたカートを見るには、 "Checkout" ボタンをクリックしてください。 （アプリを変更するとプレビューが更新され、カートが空になることを忘れないでください。）
 
     <figure>
       <img src='generated/images/guide/start/cart-empty-with-shipping-prices.png' alt="Cart with link to shipping prices">

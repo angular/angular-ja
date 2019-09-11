@@ -63,7 +63,7 @@ ng build --prod
 1. `npm install -g firebase-tools` を使用してデプロイメントを処理する `firebase-tools` CLIをインストールします。
 1. CLIをFirebaseアカウントに接続し、 `firebase login` および `firebase init` を使用してプロジェクトへの接続を初期化します。
 1. プロンプトにしたがってホスティング用に作成した `Firebase` プロジェクトを選択します。
-1. StackBlitzがFirebaseにアプリケーションの提供方法を​​指示する `firebase.json` を作成したため、 `firebase deploy` を使用してアプリケーションをデプロイします。
+1. StackBlitzがFirebaseにアプリケーションの提供方法を指示する `firebase.json` を作成したため、 `firebase deploy` を使用してアプリケーションをデプロイします。
 1. デプロイが完了したら、 https://your-firebase-project-name.firebaseapp.com にアクセスして動かしてみましょう。
 
 ### 別のホストでAngularアプリをホストする

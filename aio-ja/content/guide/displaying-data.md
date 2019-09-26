@@ -128,7 +128,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 <div class="alert is-helpful">
 
-  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。あなたはそれを次のように覆せます：
+  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。あなたはそれを次のようにオーバーライドできます：
 
   <code-example hideCopy language="sh" class="code-shell">
     ng generate component hero -it

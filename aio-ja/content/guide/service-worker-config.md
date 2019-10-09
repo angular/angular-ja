@@ -133,8 +133,9 @@ export interface DataGroup {
 `assetGroups`と同様に、すべてのデータグループはそれを一意に識別する`name`を持っています。
 
 ### `urls`
-URLパターンのリスト。これらのパターンに一致するURLは、このデータグループのポリシーにしたがってキャッシュされます。<br>
-_(否定のglobパターンはサポートされず、?は文字通り一致します。つまり、?以外の文字は一致しません)_
+A list of URL patterns. URLs that match these patterns are cached according to this data group's policy. Only non-mutating requests (GET and HEAD) are cached.
+ * Negative glob patterns are not supported.
+ * `?` is matched literally; that is, it matches *only* the character `?`.
 
 ### `version`
 時には、APIは下位互換性のない形式でフォーマットを変更します。新しいバージョンのアプリケーションは古いAPI形式と互換性がなく、そのAPIの既存のキャッシュされたリソースと互換性がない可能性があります。

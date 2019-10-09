@@ -260,7 +260,7 @@ Angularアニメーションの高度な機能については、アニメーシ�
 </tr>
 
 <tr>
-<td><code>state()</code></td>
+<td><code><a href="api/animations/state" class="code-anchor">state()</a></code></td>
 <td>指定された状態への遷移が成功した場合に適用されるCSSスタイルの名前付きセットを作成します。状態は、他のアニメーション関数内で名前で参照することができます。</td>
 </tr>
 
@@ -280,7 +280,7 @@ Angularアニメーションの高度な機能については、アニメーシ�
 </tr>
 
 <tr>
-<td><code>group()</code></td>
+<td><code><a href="api/animations/group" class="code-anchor">group()</a></code></td>
 <td>並行して実行されるアニメーションステップ(内部アニメーション)のグループを指定します。アニメーションは、すべての内部アニメーションステップが完了した後にのみ継続されます。<code>sequence()</code>または<code>transition()</code>内で使用されます。</td>
 </tr>
 

@@ -13,16 +13,16 @@
 - Web Worker がまだ使用されていない場合は、使用するようにプロジェクトを構成します
 - `src/app/app.worker.ts` に雛形のコードを追加してメッセージを受信します:
 
-  ```typescript
+  <code-example language="typescript" header="src/app/app.worker.ts">
   addEventListener('message', ({ data }) => {
     const response = `worker response to ${data}`;
     postMessage(response);
   });
-  ```
+  </code-example>
 
 - Worker を使用するために、雛形のコードを `src/app/app.component.ts` に追加します:
 
-  ```typescript
+  <code-example language="typescript" header="src/app/app.component.ts">
   if (typeof Worker !== 'undefined') {
     // 新しく作成します
     const worker = new Worker('./app.worker', { type: 'module' });
@@ -34,7 +34,7 @@
     // この環境では Web Worker はサポートされていません。
     // プログラムが引き続き正しく実行されるように、フォールバックを追加する必要があります。
   }
-  ```
+  </code-example>
 
 最初のスキャフォールディングの後、メッセージをやり取りして Web Worker を使用するようにコードをリファクタリングする必要があります。
 

@@ -134,11 +134,20 @@ Driver state: NORMAL ((nominal))
 2つのデグレード状態が考えられます。
 
 * `EXISTING_CLIENTS_ONLY`: Service Workerは、既知の最新バージョンのクリーンコピーを持っていません。古いバージョンのキャッシュは安全に使用できるので、既存のタブはキャッシュから引き続き実行されますが、新しいアプリケーションのセットがネットワークから配信されるでしょう。
+The service worker will try to recover from this state when a new
+version of the application is detected and installed (that is,
+when a new `ngsw.json` is available).
 
 * `SAFE_MODE`: Service Workerはキャッシュされたデータの安全性を保証できません。予期しないエラーが発生したか、またはキャッシュされたすべてのバージョンが無効です。すべてのトラフィックはネットワークから提供され、最小限のService Workerのコードを実行します。
 
 いずれの場合も、括弧内の注釈は、Service Workerがデグレード状態に入る原因となったエラーを提示します。
 
+Both states are temporary; they are saved only for the lifetime of the [ServiceWorker
+instance](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope).
+The browser sometimes terminates an idle service worker to conserve memory and
+processor power, and creates a new service worker instance in response to
+network events. The new instance starts in the `NORMAL` mode, regardless of the
+state of the previous instance.
 
 #### Latest manifest hash
 

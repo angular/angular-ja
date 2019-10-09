@@ -90,8 +90,16 @@ Angular[ルーター](guide/glossary#router "router definition")を使うと、�
     <code-example path="getting-started/src/app/product-details/product-details.component.1.ts" region="get-product">
     </code-example>
 
+    Angularはコンポーネントの作成したすぐ後に `ngOnInit()` を呼び出します。
+
     ルーティングパラメータは、ルーティングで定義されているパス変数に対応しています。
     `productId`はルーティングにマッチしたURLから提供されます。 個々のユニークな商品の詳細を表示するためには`productId`を使います。
+
+    <div class="alert is-helpful">
+
+    `ngOnInit()` についての詳細は [ライフサイクルフック](guide/lifecycle-hooks)をご覧ください。
+    
+    </div>
 
 1. テンプレートを更新して、`*ngIf`内に製品の詳細情報を表示します。
 

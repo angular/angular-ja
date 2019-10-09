@@ -60,7 +60,7 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 
 テンプレートは、ECMAScript 2015バッククオート(<code>\`</code>)内の複数行の文字列です。
-一重引用符(`'`)と同じ文字ではないバッククオート(<code>\`</code>)&mdash;は複数行にわたって
+一重引用符(`'`)と同じ文字*ではない*バッククオート(<code>\`</code>)は複数行にわたって
 文字列を構成することができ、
 HTMLをより読みやすくします 。
 
@@ -89,17 +89,17 @@ Angularは、これらのプロパティが変更されると、表示を更新�
 `AppComponent` クラスのインスタンスを作成するために、**new** を呼び出さないことに注目してください。
 Angularがインスタンスを作成しています。どのように？
 
-`@Component` デコレーターの CSSセレクターは、`<app-root>` という名前の要素を指定します。
-その要素は `index.html` ファイルの本文のプレースホルダです：
+`@Component` デコレーターの CSSの`selector`は、`<app-root>` という名前の要素を指定します。
+その要素は `index.html` ファイルのbody内のプレースホルダです：
 
 
 <code-example path="displaying-data/src/index.html" header="src/index.html (body)" region="body"></code-example>
 
 
 
-`AppComponent` クラス（<code>main.ts</code>内）でブートストラップすると、
+`AppComponent` クラスでブートストラップすると（<code>main.ts</code>内）、
 Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
-`AppComponent` を呼び出して、 `<app-root>` タグの中にレンダリングします。
+`AppComponent` をインスタンス化して、 `<app-root>` タグの中にレンダリングします。
 
 今すぐアプリケーションを実行しましょう。 タイトルとヒーロー名が表示されます。
 
@@ -117,18 +117,18 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 コンポーネントのテンプレートは、2つの場所のいずれかに格納できます。
 `template` プロパティを使って *インライン* で定義するか、
 あるいは別のHTMLファイルにテンプレートを定義し、
-`@Component` デコレーターの `templateUrl` プロパティを使って
-コンポーネントのメタデータで紐付けられます。
+`@Component` デコレーターの `templateUrl` プロパティを使ってコンポーネントのメタデータで紐付けられます。
 
-インラインHTMLと個別HTMLの選択は、好み、状況、および組織ポリシーの問題です。
+インラインHTMLと個別HTMLの選択は、好み、状況、
+および組織ポリシーの問題です。
 ここでは、テンプレートが小さく、追加のHTMLファイルなしでデモが簡単であるため、
 アプリケーションはインラインHTMLを使用します。
 
-どちらのスタイルでも、テンプレートデータバインディングはコンポーネントのプロパティと同じアクセス権を持ちます。
+どちらのスタイルでも、テンプレートデータバインディングはコンポーネントのプロパティへの同じアクセス権を持ちます。
 
 <div class="alert is-helpful">
 
-  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを使用してコンポーネントを生成します。あなたはそれを次のようにオーバーライドできます：
+  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。あなたはそれを次のようにオーバーライドできます：
 
   <code-example hideCopy language="sh" class="code-shell">
     ng generate component hero -it
@@ -150,7 +150,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 {@a ngFor}
 
-## ** *ngFor ** の配列プロパティを表示する
+## ** *ngFor ** で配列プロパティを表示する
 
 ヒーローのリストを表示するには、ヒーロー名の配列をコンポーネントに追加し、配列の最初の名前になるように `myHero` を再定義します。
 
@@ -159,7 +159,7 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 
 
-テンプレートのAngular `ngFor` ディレクティブを使用して、
+テンプレートでAngular `ngFor` ディレクティブを使用して、
 各項目を `heroes` リストに表示します。
 
 
@@ -193,7 +193,8 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 さらに詳しいテンプレート入力変数については、[テンプレート構文](guide/template-syntax) ページの
 [ミクロ構文](guide/template-syntax#microsyntax) セクションを読んでください。
 
-Angularはリスト内の各項目の `<li>` を複製し、 `hero` 変数を現在の反復の項目（ヒーロー）に設定します。
+Angularはリスト内の各項目の `<li>` を複製し、
+`hero` 変数を現在の反復の項目（ヒーロー）に設定します。
 Angularはその変数を二重中括弧内の補間のコンテキストとして使用します。
 
 
@@ -201,8 +202,8 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 
 
 
-この場合、 `ngFor` は配列を表示していますが、 `ngFor` は任意のオブジェクトの項目を繰り返すことができます。
-[繰り返し処理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+この場合は、 `ngFor` は配列を表示していますが、
+`ngFor` は任意の[反復可能](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)オブジェクトについて項目を繰り返すことができます。
 
 </div>
 
@@ -227,8 +228,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 実際のアプリケーションでは、ほとんどのバインディングはより特殊なオブジェクトになります。
 
 このバインディングを特殊なオブジェクトを使用するように変換するには、
-ヒーロー名の配列を `Hero` オブジェクトの配列に変換します。
-そのためには、 `Hero` クラスが必要です。
+ヒーロー名の配列を `Hero` オブジェクトの配列に変換します。そのためには、 `Hero` クラスが必要です。
 
 <code-example language="sh" class="code-shell">
   ng generate class hero
@@ -272,7 +272,7 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 
 
 次に、テンプレートを更新します。
-現時点では、主人公の`id` と `name` が表示されます。
+現時点では、ヒーローの`id` と `name` が表示されます。
 ヒーローの `name` プロパティだけを表示するように修正しました。
 
 
@@ -286,11 +286,11 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 
 ## NgIfによる条件付き表示
 
-時には、特定の状況下でのみアプリケーションがビューまたはビューの一部を表示する必要がある場合があります。
+アプリケーションは時には、特定の状況下でのみビューまたはビューの一部を表示する必要があります。
 
 3人以上のヒーローがいる場合、メッセージを表示するように例を変更しましょう。
 
-Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要素を挿入または削除します。
+Angular `ngIf` ディレクティブは _真偽_ 条件に基づいて要素を挿入または削除します。
 実際の動作を確認するには、テンプレートの一番下に次の段落を追加します。
 
 
@@ -303,21 +303,20 @@ Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要�
 
 
 `*ngIf` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
-さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの
-[ngIf セクション](guide/template-syntax#ngIf) を読んでください。
+さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの[ngIf セクション](guide/template-syntax#ngIf) を読んでください。
 
 
 </div>
 
 
 
-`*ngIf="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、TypeScriptとよく似ています。
+`*ngIf="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、
+TypeScriptとよく似ています。
 コンポーネントのヒーローのリストに3つより多いアイテムがある場合、Angularは段落をDOMに追加し、
-メッセージが表示されます。 3つあるいはいくつかのアイテムがある場合、 Angularは段落を省略するので、
+メッセージが表示されます。 3つ以内のアイテムがある場合、 Angularは段落を省略するので、
 メッセージは表示されません。 詳細については、
 [テンプレート構文](guide/template-syntax) ページの
 [テンプレート式](guide/template-syntax#template-expressions) を参照してください。
-.
 
 
 <div class="alert is-helpful">
@@ -325,15 +324,16 @@ Angular `ngIf` ディレクティブは _truthy/falsy_ 条件に基づいて要�
 
 
 Angularはメッセージを表示したり隠したりしていません。DOMから段落要素を追加したり削除したりしています。
-これは、特に大規模なプロジェクトで多くのデータバインディングを含むHTMLを
-条件により含めたり除外したりするときに、パフォーマンスを改善します。
+これは、特に大規模なプロジェクトで多くのデータバインディングを含むHTMLを条件により含めたり除外したりするときに、パフォーマンスを改善します。
+
+
 </div>
 
 
 
 やってみましょう。 配列には4つの項目があるため、メッセージが表示されます。
 <code>app.component.ts</code>に戻り、ヒーロー配列の要素の1つを削除またはコメントアウトします。
-
+ブラウザは自動で更新し、メッセージは消えるでしょう。
 
 
 

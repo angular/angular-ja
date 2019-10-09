@@ -445,7 +445,7 @@
               "url": "guide/hierarchical-dependency-injection",
               "title": "階層的インジェクター",
               "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-providers",

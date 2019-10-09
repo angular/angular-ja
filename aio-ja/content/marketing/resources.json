@@ -66,6 +66,13 @@
             "rev": true,
             "title": "Happy Angular Podcast",
             "url": "https://happy-angular.de/"
+          },
+          "ngruair": {
+            "desc": "Russian language video podcast about Angular.",
+            "logo": "",
+            "rev": true,
+            "title": "NgRuAir",
+            "url": "https://github.com/ngRuAir/ngruair"
           }
         }
       }
@@ -114,6 +121,12 @@
             "rev": true,
             "title": "NGXS",
             "url": "https://ngxs.io/"
+          },
+          "akita": {
+            "desc": "Akita is a state management pattern, built on top of RxJS, which takes the idea of multiple data stores from Flux and the immutable updates from Redux, along with the concept of streaming data, to create the Observable Data Store model.",
+            "rev": true,
+            "title": "Akita",
+            "url": "https://netbasal.gitbook.io/akita/"
           },
           "ab": {
             "desc": "The official library for Firebase and Angular",
@@ -264,6 +277,12 @@
             "rev": true,
             "title": "Angular UI Toolkit",
             "url": "https://www.angular-ui-tools.com"
+          },
+          "SenchaforAngular": {
+            "desc": "Build modern web apps faster with 115+ pre-built UI components. Try for free and download today.",
+            "rev": true,
+            "title": "Sencha for Angular",
+            "url": "https://www.sencha.com/products/extangular/"
           },
           "IgniteUIforAngular": {
             "desc": "Ignite UI for Angular is a dependency-free Angular toolkit for building modern web apps.",
@@ -649,6 +668,19 @@
             "rev": true,
             "title": "web.dev/angular",
             "url": "https://web.dev/angular"
+          },
+          "mdb-angular-boilerplate": {
+            "desc": "Angular CRUD application starter with NgRx state management, Firebase backend and installation guide.",
+            "rev": true,
+            "title": "MDB Angular Boilerplate",
+            "url": "https://github.com/mdbootstrap/Angular-Bootstrap-Boilerplate"
+          },
+          "dotnettricks": {
+            "desc": "Online videos and training for Angular.",
+            "logo": "",
+            "rev": true,
+            "title": "DotNetTricks",
+            "url": "https://www.dotnettricks.com/courses/angular"
           }
         }
       },

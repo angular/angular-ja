@@ -50,9 +50,6 @@ rules:
   - expected: 伝播し
     pattern: 伝わり
 
-  - expected: 個々の
-    pattern: それぞれの
-
   - expected: 静的な
     pattern: staticな
   

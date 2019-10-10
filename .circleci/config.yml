@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - run: sudo apt install rsync
-      - run: sudo npm i -g yarn@~1.16
+      - run: sudo npm i -g yarn@~1.17
 
       - checkout
       - run: git submodule sync

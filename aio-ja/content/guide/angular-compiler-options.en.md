@@ -1,6 +1,6 @@
 # Angular compiler options
 
-When you use [AOT compilation](guide/aot-compiler), you can control how your application is compiled by specifying *template* compiler options in the `tsconfig.json` [TypeScript configuration file](guide/typescript-configuration).
+When you use [AoT compilation](guide/aot-compiler), you can control how your application is compiled by specifying *template* compiler options in the `tsconfig.json` [TypeScript configuration file](guide/typescript-configuration).
 
 The template options object, `angularCompilerOptions`, is a sibling to the `compilerOptions` object that supplies standard options to the TypeScript compiler.
 
@@ -17,7 +17,38 @@ The template options object, `angularCompilerOptions`, is a sibling to the `comp
       }
   }
   ```
-This page describes the available Angular template compiler options.
+
+{@a tsconfig-extends}
+## Configuration inheritance with extends
+
+Like the TypeScript compiler, The Angular AoT compiler also supports `extends` in the `angularCompilerOptions` section of the TypeScript configuration file, `tsconfig.json`.
+The `extends` property is at the top level, parallel to `compilerOptions` and `angularCompilerOptions`.
+
+A TypeScript configuration can inherit settings from another file using the `extends` property.
+The configuration options from the base file are loaded first, then overridden by those in the inheriting `tsconfig` file.
+
+For example:
+
+```json
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    ...
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": true,
+    ...
+  }
+}
+```
+
+For more informaton, see the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+
+## Template options
+
+The following options are available for configuring the AoT template compiler.
 
 ### `allowEmptyCodegenFiles`
 
@@ -29,7 +60,7 @@ Modifies how Angular-specific annotations are emitted to improve tree-shaking. N
 
 * By default, the compiler replaces decorators with a static field in the class, which allows advanced tree-shakers like [Closure compiler](https://github.com/google/closure-compiler) to remove unused classes.
 
-* The `decorators` value leaves the decorators in place, which makes compilation faster. TypeScript emits calls to the` __decorate` helper. Use `--emitDecoratorMetadata` for runtime reflection (but note taht the resulting code will not properly tree-shake.
+* The `decorators` value leaves the decorators in place, which makes compilation faster. TypeScript emits calls to the` __decorate` helper. Use `--emitDecoratorMetadata` for runtime reflection (but note that the resulting code will not properly tree-shake.
 
 ### `annotateForClosureCompiler`
 
@@ -57,7 +88,7 @@ When enabled, the `.js` output of `ngc` does not include any lazy-loaded templat
 
 ### `enableLegacyTemplate`
 
-When true, enables use of the `<template>` element, which was deprecated in Angular 4.0, in favor of `<ng-template>` (to avoid colliding with the DOM's element of the same name). Default is false. Might be required by some third-party Angular libraries. |
+When true, enables use of the `<template>` element, which was deprecated in Angular 4.0, in favor of `<ng-template>` (to avoid colliding with the DOM's element of the same name). Default is false. Might be required by some third-party Angular libraries.
 
 ### `flatModuleId`
 

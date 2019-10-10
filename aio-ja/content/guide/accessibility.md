@@ -84,48 +84,15 @@ Angular Material において上記のパターンのサンプルは [`MatButton
 
 * このコンポーネントは標準の HTML 属性の `role` と ARIA 属性の両方をもつ、アクセシビリティが有効の要素を定義します。ARIA 属性の `aria-valuenow` はユーザーの入力にひもづきます。
 
-   ```ts
-  import { Component, Input } from '@angular/core';
-   /**
-    * プログレスバーのコンポーネントのサンプル
-    */
-   @Component({
-     selector: 'example-progressbar',
-     template: `<div class="bar" [style.width.%]="value"></div>`,
-     styleUrls: ['./progress-bar.css'],
-     host: {
-       // このコンポーネントの role の値を "progressbar" に設定します。
-       role: 'progressbar',
+  <code-example path="accessibility/src/app/progress-bar.component.ts" header="src/app/progress-bar.component.ts" region="progressbar-component"></code-example>
 
-      // プログレスバーの role の最小と最大の値を設定します。
-       'aria-valuemin': '0',
-       'aria-valuemax': '0',
-
-       // プログレスバーの現在の値を更新するバインディング。
-       '[attr.aria-valuenow]': 'value',
-     }
-   })
-   export class ExampleProgressbar  {
-     /** プログレスバーの現在の値 */
-     @Input() value: number = 0;
-   }
-   ```
 
 * このテンプレートでは、 `aria-label` 属性によってスクリーンリーダーからの制御を可能にしています。
 
-   ```html
-   <label>
-      Enter an example progress value
-      <input type="number" min="0" max="100"
-         [value]="progress" (input)="progress = $event.target.value">
-   </label>
+  <code-example path="accessibility/src/app/app.component.html" header="src/app/app.component.html" region="template"></code-example>
 
-   <!-- プログレスバーを使う場合は aria-label を設定することでプログレスバーの意味を伝えることができます。 -->
-   <example-progressbar [value]="progress" aria-label="Example of a progress bar">
-   </example-progressbar>
-   ```
 
-[StackBlitz で完全なサンプルを見ることができます](https://stackblitz.com/edit/angular-kn5jdi?file=src%2Fapp%2Fapp.component.html)。
+プログレスバーを動作するサンプルアプリ中で見るには <live-example></live-example> を参照してください。
 
 ## ルーティングとフォーカスの制御
 

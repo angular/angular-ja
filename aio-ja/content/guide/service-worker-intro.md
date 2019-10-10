@@ -61,11 +61,21 @@ To learn more about other browsers that are service worker ready, see the [Can I
 
 ## 関連資料
 
+The rest of the articles in this section specifically address the Angular implementation of service workers.
+
+* [App Shell](guide/app-shell)
+* [Service Worker Communication](guide/service-worker-communications)
+* [Service Worker in Production](guide/service-worker-devops)
+* [Service Worker Configuration](guide/service-worker-config)
+
 Service Workerの一般的な情報については、[Service Workerの紹介](https://developers.google.com/web/fundamentals/primers/service-workers/)を参照してください。
 
 ブラウザサポートの詳細については、[Service Workerの紹介](https://developers.google.com/web/fundamentals/primers/service-workers/)の[サポートしているブラウザを使う](https://developers.google.com/web/fundamentals/primers/service-workers/#browser_support)セクションや、Jake Archibaldの[Is Serviceworker ready?](https://jakearchibald.github.io/isserviceworkerready/)、[Can I Use](http://caniuse.com/#feat=serviceworkers)を参照してください。
 
-このドキュメンテーションの続きでは、Service WorkerをAngularに実装することに取り組みます。
+For additional recommendations and examples, see:
+
+* [Precaching with Angular Service Worker](https://web.dev/precaching-with-the-angular-service-worker/)
+* [Creating a PWA with Angular CLI](https://web.dev/creating-pwa-with-angular-cli/)
 
 ## 次のステップへ
 

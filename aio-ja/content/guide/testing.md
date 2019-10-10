@@ -1189,7 +1189,8 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 
 #### _fakeAsync()_を使用した非同期テスト
 
-`fakeAsync()`機能を使うためには、 `zone-testing`をインポートする必要があります。詳細は[セットアップガイド](guide/setup#appendix-test-using-fakeasyncasync)を参照してください。
+`fakeAsync()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
 次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
 
@@ -1206,6 +1207,13 @@ fakeAsync(() => { /* test body */ })`
 `fakeAsync`関数は、特別な_fakeAsyncテストゾーン_でテスト本体を実行することによって、線形的なコーディングスタイルを可能にします。
 テスト本体は同期的に見えます。
 `Promise.then()`のようなネストされた構文はなく、制御の流れを混乱させることはありません。
+
+<div class="alert is-helpful">
+
+Limitation: The `fakeAsync()` function won't work if the test body makes an `XMLHttpRequest` (XHR) call.
+XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#async), below.
+
+</div>
 
 {@a tick}
 
@@ -1374,13 +1382,13 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 #### _async()_を使用した非同期テスト
 
-`async()`機能を使うためには、 `zone-testing`をインポートする必要があります。詳細は[セットアップガイド](guide/setup#appendix-test-using-fakeasyncasync)を参照してください。
+`async()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
 `fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
-特に、テスト本体が`XHR`呼び出しを行う場合は動作しません。
-
-テスト中の`XHR`呼び出しはまれであるため、普通は`fakeAsync()`を使うことができます。
-しかし、`XHR`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
+特に、テスト本体が`XMLHttpRequest` （XHR）呼び出しを行う場合は動作しません。
+テスト中のXHR呼び出しはまれであるため、普通は[`fakeAsync()`](#fake-async)を使うことができます。
+しかし、`XMLHttpRequest`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
 
 <div class="alert is-helpful">
 
@@ -2710,7 +2718,7 @@ DOMとのやりとりがほとんどありません。
 
 1. Karmaのブラウザウィンドウを表示します（前に隠れています）。
 1. **DEBUG**ボタンをクリックします。新しいブラウザタブが開き、テストを再実行します。
-1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、OSXでは`Command-Option-I`）を開きます。
+1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、macOSでは`Command-Option-I`）を開きます。
 1. "sources"セクションを選択します。
 1. `1st.spec.ts`テストファイル（Control/Command-Pを押して、その後にファイル名を入力してください）を開きます。
 1. テストにブレークポイントをセットします。
@@ -3207,7 +3215,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       また、`detectChanges`を呼び出すまで、`name`のバインディングは更新されません。
 
       `detectChanges(false)`として呼び出さない場合、
-      循環更新を確認するためにあとで`checkNoChanges`を実行してください。
+      循環更新を確認するためにあとで `checkNoChanges` を実行してください。
 
     </td>
   </tr>

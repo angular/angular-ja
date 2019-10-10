@@ -1,6 +1,6 @@
 # Angular コンパイラオプション
 
-[事前コンパイル](guide/aot-compiler) を使用する場合、`tsconfig.json` [TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
+[AoTコンパイル](guide/aot-compiler) を使用する場合、`tsconfig.json` [TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
 
 テンプレートオプションオブジェクトの `angularCompilerOptions` は、TypeScript コンパイラに標準オプションを提供する `compilerOptions` オブジェクトに近いものです。
 
@@ -17,7 +17,38 @@
       }
   }
   ```
-このページでは、利用可能なAngularテンプレートコンパイラオプションについて説明します。
+
+{@a tsconfig-extends}
+## Configuration inheritance with extends
+
+Like the TypeScript compiler, The Angular AoT compiler also supports `extends` in the `angularCompilerOptions` section of the TypeScript configuration file, `tsconfig.json`.
+The `extends` property is at the top level, parallel to `compilerOptions` and `angularCompilerOptions`.
+
+A TypeScript configuration can inherit settings from another file using the `extends` property.
+The configuration options from the base file are loaded first, then overridden by those in the inheriting `tsconfig` file.
+
+For example:
+
+```json
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    ...
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": true,
+    ...
+  }
+}
+```
+
+For more informaton, see the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+
+## Template options
+
+The following options are available for configuring the AoT template compiler.
 
 ### `allowEmptyCodegenFiles`
 

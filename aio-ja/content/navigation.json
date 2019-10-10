@@ -594,6 +594,12 @@
           "tooltip": "Incrementally upgrade an AngularJS application to Angular.",
           "children": [
             {
+              "url": "guide/upgrade-setup",
+              "title": "Setup for Upgrading from AngularJS",
+              "tooltip": "Use code from the Angular QuickStart seed as part of upgrading from AngularJS.",
+              "hidden": true
+            },
+            {
               "url": "guide/upgrade",
               "title": "Upgrading Instructions",
               "tooltip": "Incrementally upgrade an AngularJS application to Angular."
@@ -679,23 +685,35 @@
       "tooltip": "Build, testing, and deployment information.",
       "children": [
         {
-          "url": "guide/setup",
+          "url": "guide/upgrade-setup",
           "title": "ローカル開発環境のセットアップ",
           "tooltip": "より高速で効率的な開発のためにマシン上にAngularクイックスタートをインストールします。",
+          "hidden": true,
           "translated": true
         },
         {
-          "url": "guide/aot-compiler",
-          "title": "事前コンパイル",
-          "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
-          "translated": true
+          "title": "AoT Compiler",
+          "tooltip": "Understanding ahead-of-time compilation.",
+          "children": [
+            {
+              "url": "guide/aot-compiler",
+              "title": "事前コンパイル",
+              "tooltip": "AoT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+              "translated": true
+            },
+            {
+              "url": "guide/angular-compiler-options",
+              "title": "Angularコンパイラオプション",
+              "tooltip": "AoTコンパイラの構成オプション。",
+              "translated": true
+            },
+            {
+              "url": "guide/aot-metadata-errors",
+              "title": "AoT Metadata Errors",
+              "tooltip": "Troubleshooting AoT compilation."
+            }
+          ]
         },
-        {
-          "url": "guide/angular-compiler-options",
-          "title": "Angularコンパイラオプション",
-          "tooltip": "AOTコンパイラの構成オプション。",
-          "translated": true
-        },  
         {
           "url": "guide/build",
           "title": "ビルドとサーブ",

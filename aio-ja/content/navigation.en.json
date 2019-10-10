@@ -507,6 +507,12 @@
           "tooltip": "Incrementally upgrade an AngularJS application to Angular.",
           "children": [
             {
+              "url": "guide/upgrade-setup",
+              "title": "Setup for Upgrading from AngularJS",
+              "tooltip": "Use code from the Angular QuickStart seed as part of upgrading from AngularJS.",
+              "hidden": true
+            },
+            {
               "url": "guide/upgrade",
               "title": "Upgrading Instructions",
               "tooltip": "Incrementally upgrade an AngularJS application to Angular."
@@ -587,21 +593,32 @@
       "tooltip": "Build, testing, and deployment information.",
       "children": [
         {
-          "url": "guide/setup",
+          "url": "guide/upgrade-setup",
           "title": "Upgrade setup",
           "tooltip": "How to set up the Angular QuickStart seed in the context of upgrading from AngularJS.",
           "hidden": true
         },
         {
-          "url": "guide/aot-compiler",
-          "title": "Ahead-of-Time Compilation",
-          "tooltip": "Learn why and how to use the Ahead-of-Time (AOT) compiler."
-        },
-        {
-          "url": "guide/angular-compiler-options",
-          "title": "Compiler Options",
-          "tooltip": "Configuration options for the AOT compiler."
-        },
+          "title": "AoT Compiler",
+          "tooltip": "Understanding ahead-of-time compilation.",
+          "children": [
+            {
+              "url": "guide/aot-compiler",
+              "title": "Ahead-of-Time Compilation",
+              "tooltip": "Learn why and how to use the Ahead-of-Time (AoT) compiler."
+            },
+            {
+              "url": "guide/angular-compiler-options",
+              "title": "Angular Compiler Options",
+              "tooltip": "Configuring AoT compilation."
+           },
+           {
+              "url": "guide/aot-metadata-errors",
+              "title": "AoT Metadata Errors",
+              "tooltip": "Troubleshooting AoT compilation."
+           }
+        ]
+      },
         {
           "url": "guide/build",
           "title": "Building & Serving",

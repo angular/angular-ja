@@ -276,8 +276,7 @@
     "twitter": "deborahkurata",
     "website": "http://blogs.msmvps.com/deborahk/",
     "bio": "Deborah is a software developer, author, and Google Developer Expert. She is author of several Pluralsight courses including: 'Angular 2: Getting Started' and ‘Angular Routing’",
-    "groups": ["Collaborators", "GDE"],
-    "mentor": "kara"
+    "groups": ["GDE"]
   },
   "alyssa": {
     "name": "Alyssa Nicoll",
@@ -808,6 +807,14 @@
     "twitter": "kammysliwiec",
     "website": "https://github.com/kamilmysliwiec",
     "bio": "Kamil Mysliwiec is a software engineer truly passionate about Web Technologies. Creator of NestJS, Co-Founder of Trilon.io, speaker, and trainer.",
+    "groups": ["GDE"]
+  },
+  "yurzui": {
+    "name": "Alexey Zuev",
+    "picture": "yurzui.jpg",
+    "twitter": "yurzui",
+    "website": "https://medium.com/@a.yurich.zuev",
+    "bio": "Alexey is a web development addict who likes diving deep into the source code and sharing his knowledge through visualization. Creator of ng-run.com",
     "groups": ["GDE"]
   }
 }

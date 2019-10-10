@@ -6,8 +6,7 @@
   h4 .syntax { font-size: 100%; }
 </style>
 
-Angular アプリケーションは、ユーザーが表示して実行できる機能を管理し、
-これをコンポーネントクラスインスタンス(*コンポーネント*)と、そのユーザー向けテンプレートとのやりとりを通して実現します。
+Angular アプリケーションは、ユーザーが表示して実行できる機能を管理し、これをコンポーネントクラスインスタンス(*コンポーネント*)と、そのユーザー向けテンプレートとのやりとりを通して実現します。
 
 あなたは、モデル・ビュー・コントローラー(MVC)やモデル・ビュー・ビューモデル(MVVM)の経験から、コンポーネント/テンプレートの相対性に精通しているかもしれません。
 Angular では、コンポーネントはコントローラー/ビューモデルの一部として機能し、テンプレートはビューを表現します。
@@ -85,11 +84,9 @@ Angular は、二重中括弧内のすべての式を評価し、式の結果を
 最後に、この合成補間の結果を **要素またはディレクティブのプロパティ** に割り当てます。
 
 要素タグ間にその結果を挿入したり、属性に割り当てるように表示します。
+ただし、補間は Angular がプロパティバインディングに変換する特別な構文です。
 
 <div class="alert is-helpful">
-
-ただし、
-補間は Angular がプロパティバインディングに変換する特別な構文です。
 
 `{{` および `}}` 以外のものを使用する場合は、
 `Component` メタデータの
@@ -124,8 +121,8 @@ Angularは 式を実行し、それをバインディングターゲットのプ
 その他の JavaScript 構文との注目すべき違いは次のとおりです。
 
 * `|` や `&` などのビット演算子はサポートされていません
-* `|`、`?.` や `!` などの新しいテンプレート式演算子を持ちます
-<!-- link to: guide/template-syntax#expression-operators -->
+* `|`、`?.` や `!` などの新しい[テンプレート式演算子](guide/template-syntax#expression-operators)を持ちます
+
 
 ### 式のコンテキスト
 
@@ -171,12 +168,29 @@ _コンテキスト_ オブジェクト(ある場合)、およびコンポーネ
 
 テンプレート式を使う場合は、次のガイドラインにしたがってください:
 
-* [副作用を起こさない](guide/template-syntax#no-visible-side-effects)
-* [素早い実行](guide/template-syntax#quick-execution)
 * [シンプルさ](guide/template-syntax#simplicity)
+* [素早い実行](guide/template-syntax#quick-execution)
+* [副作用を起こさない](guide/template-syntax#no-visible-side-effects)
 
-{@a no-visible-side-effects}
-### 副作用を起こさない
+#### シンプルさ {@a simplicity}
+
+複雑なテンプレート式を書くことは可能ですが、
+避けることをお勧めします。
+
+プロパティ名、またはメソッド呼び出しは標準的であるべきです、しかし、必要なときには真偽値の否定 `!` はよいでしょう。
+それ以外の場合、アプリケーションとビジネスロジックをコンポーネントに限定してください。
+そうすることで、コンポーネントの開発とテストが容易になります。
+
+#### 素早い実行 {@a quick-execution}
+
+Angular はすべての変更検知サイクルの後にテンプレート式を実行します。
+変更検知サイクルは、Promise の解決、HTTP の結果、タイマーイベント、
+キープレス、マウスの移動などの多くの非同期アクティビティによって引き起こされます。
+
+特に遅いデバイスでは、式が早く終了しなければユーザー体験が低下する可能性があります。
+計算コストが高い場合、値をキャッシュすることを検討してください。
+
+#### 副作用を起こさない {@a no-visible-side-effects}
 
 テンプレート式は、
 対象のプロパティの値以外のアプリケーションの状態を変更すべきではありません。
@@ -187,39 +201,17 @@ _コンテキスト_ オブジェクト(ある場合)、およびコンポーネ
 
 [冪等](https://en.wikipedia.org/wiki/Idempotence)な式は、副作用がなく、
 Angular の変更検知の性能を向上させるので理想的です。
-
 Angular の項の中で冪等な式は、
-その依存する値の1つが変わるまで、
-*常にまったく同じもの* を返します。
+その依存する値の1つが変わるまで、*常にまったく同じもの* を返します。
 
 依存する値は、イベントループが1回転する間に変化すべきではありません。
 冪等な式が文字列または数値を返す場合、2回続けて呼び出されると同じ文字列または数値を返します。式が `array` を含むオブジェクトを返す場合、2回続けて呼び出されると同じオブジェクト *参照* を返します。
 
 <div class="alert is-helpful">
 
-`*ngFor` に適用される振る舞いについて1つ例外があります。`*ngFor` には、繰り返しをまたいだときに、参照の違うオブジェクトを処理できる `trackBy` 機能があります。
-
-詳しくは、このガイドの [`trackBy` を使用した *ngFor](guide/template-syntax#ngfor-with-trackby) セクションを参照してください。
+`*ngFor` に適用される振る舞いについて1つ例外があります。`*ngFor` には、繰り返しをまたいだときに、参照の違うオブジェクトを処理できる `trackBy` 機能があります。詳しくは、このガイドの [`trackBy` を使用した *ngFor](guide/template-syntax#ngfor-with-trackby) セクションを参照してください。
 
 </div>
-
-### 素早い実行 {@a quick-execution}
-
-Angular はすべての変更検知サイクルの後にテンプレート式を実行します。
-変更検知サイクルは、Promise の解決、HTTP の結果、タイマーイベント、
-キープレス、マウスの移動などの多くの非同期アクティビティによって引き起こされます。
-
-特に遅いデバイスでは、式が早く終了しなければユーザー体験が低下する可能性があります。
-計算コストが高い場合、値をキャッシュすることを検討してください。
-
-### シンプルさ {@a simplicity}
-
-複雑なテンプレート式を書くことは可能ですが、
-避けることをお勧めします。
-
-プロパティ名、またはメソッド呼び出しは標準的であるべきです、しかし、必要なときには真偽値の否定 `!` はよいでしょう。
-それ以外の場合、アプリケーションとビジネスロジックをコンポーネントに限定してください。
-そうすることで、コンポーネントの開発とテストが容易になります。
 
 <!-- end of Interpolation doc -->
 
@@ -278,24 +270,20 @@ Angular はすべての変更検知サイクルの後にテンプレート式を
 上記の `deleteHero(hero)` では、
 `hero` はテンプレート入力変数であり、コンポーネントの `hero` プロパティではありません。
 
+### 文のガイドライン
+
 テンプレート文は、グローバル名前空間内のものを参照できません。
 `window` や `document` を参照することはできません。
 `console.log` や `Math.max` を呼び出すことはできません。
 
-### 文のガイドライン
-
 式と同様に、複雑なテンプレート文を書かないでください。
 メソッド呼び出しまたは単純なプロパティ割り当てが一般的です。
-
-さて、テンプレートの式と文を理解したので、
-補間以外のさまざまなデータバインディング構文について学習する準備が整いました。
-
 
 <hr/>
 
 {@a binding-syntax}
 
-## バインディング構文: 概要
+## Binding syntax: an overview
 
 Data-binding is a mechanism for coordinating what users see, specifically
 with application data values.
@@ -347,7 +335,8 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
       <code-example>
         {{expression}}
         [target]="expression"
-        bind-target="expression"</code-example>
+        bind-target="expression"
+      </code-example>
 
     </td>
 
@@ -361,7 +350,8 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
       <td>
         <code-example>
           (target)="statement"
-          on-target="statement"</code-example>
+          on-target="statement"
+        </code-example>
       </td>
 
       <td>
@@ -375,7 +365,8 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
       <td>
         <code-example>
           [(target)]="expression"
-          bindon-target="expression"</code-example>
+          bindon-target="expression"
+        </code-example>
       </td>
       <td>
         Two-way
@@ -393,7 +384,7 @@ Every public member of a **source** directive is automatically available for bin
 You don't have to do anything special to access a directive member in a template expression or statement.
 
 
-## Data-binding and HTML
+### Data-binding and HTML
 
 In the normal course of HTML development, you create a visual structure with HTML elements, and
 you modify those elements by setting element attributes with string constants.
@@ -412,10 +403,10 @@ Notice that the binding is to the `disabled` property of the button's DOM elemen
 **not** the attribute. This applies to data-binding in general. Data-binding works with *properties* of DOM elements, components, and directives, not HTML *attributes*.
 
 
-## HTML attribute vs. DOM property
+### HTML attribute vs. DOM property
 
 The distinction between an HTML attribute and a DOM property is key to understanding
-how Angular binding works. **Attributes are defined by HTML. Properties are accessed from DOM, or the Document Object Model, nodes.**
+how Angular binding works. **Attributes are defined by HTML. Properties are accessed from DOM (Document Object Model) nodes.**
 
 * A few HTML attributes have 1:1 mapping to properties; for example, `id`.
 
@@ -423,31 +414,30 @@ how Angular binding works. **Attributes are defined by HTML. Properties are acce
 
 * Some DOM properties don't have corresponding attributes; for example, `textContent`.
 
-This general rule can help you build a mental model of attributes and DOM properties:
-**attributes initialize DOM properties and then they are done.
-Property values can change; attribute values can't.**
+It is important to remember that *HTML attribute* and the *DOM property* are different things, even when they have the same name.
+In Angular, the only role of HTML attributes is to initialize element and directive state.
+
+**Template binding works with *properties* and *events*, not *attributes*.**
+
+When you write a data-binding, you're dealing exclusively with the *DOM properties* and *events* of the target object.
 
 <div class="alert is-helpful">
 
-There is, of course, an exception to this rule because attributes can be changed by `setAttribute()`, which will re-initialize corresponding DOM properties again.
+This general rule can help you build a mental model of attributes and DOM properties:
+**Attributes initialize DOM properties and then they are done.
+Property values can change; attribute values can't.**
+
+There is one exception to this rule.
+Attributes can be changed by `setAttribute()`, which re-initializes corresponding DOM properties.
 
 </div>
 
-Comparing the [`<td>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td)
- attributes to the [`<td>` properties](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement)
- provides a helpful
-example for differentiation. In particular, you can navigate from the attributes
-page to the properties via "DOM interface" link, and navigate the inheritance
-hierarchy up to `HTMLTableCellElement`.
-
-**The HTML attribute and the DOM property are not the same thing, even when they have the same name.**
-
 For more information, see the [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) which has API docs for all the standard DOM elements and their properties.
+Comparing the [`<td>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) attributes to the [`<td>` properties](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) provides a helpful example for differentiation.
+In particular, you can navigate from the attributes page to the properties via "DOM interface" link, and navigate the inheritance hierarchy up to `HTMLTableCellElement`.
 
 
-
-
-### Example 1: an `<input>`
+#### Example 1: an `<input>`
 
 When the browser renders `<input type="text" value="Sarah">`, it creates a
 corresponding DOM node with a `value` property initialized to "Sarah".
@@ -463,7 +453,7 @@ The HTML attribute `value` specifies the *initial* value; the DOM `value` proper
 
 To see attributes versus DOM properties in a functioning app, see the <live-example name="binding-syntax"></live-example> especially for binding syntax.
 
-### Example 2: a disabled button
+#### Example 2: a disabled button
 
 The `disabled` attribute is another example. A button's `disabled`
 *property* is `false` by default so the button is enabled.
@@ -476,8 +466,7 @@ so the button is disabled.
 <button disabled>Test Button</button>
 ```
 
-Adding and removing the `disabled` *attribute* disables and
-enables the button.
+Adding and removing the `disabled` *attribute* disables and enables the button.
 However, the value of the *attribute* is irrelevant,
 which is why you cannot enable a button by writing `<button disabled="false">Still Disabled</button>`.
 
@@ -485,7 +474,7 @@ To control the state of the button, set the `disabled` *property*,
 
 <div class="alert is-helpful">
 
-**Note:** Though you could technically set the `[attr.disabled]` attribute binding, the values are different in that the property binding requires to a boolean value, while its corresponding attribute binding relies on whether the value is `null` or not. Consider the following:
+Though you could technically set the `[attr.disabled]` attribute binding, the values are different in that the property binding requires to a boolean value, while its corresponding attribute binding relies on whether the value is `null` or not. Consider the following:
 
 ```html
 <input [disabled]="condition ? true : false">
@@ -496,26 +485,15 @@ Generally, use property binding over attribute binding as it is more intuitive (
 
 </div>
 
-**The HTML attribute and the DOM property are different things, even when they have the same name.**
-
-**Template binding works with *properties* and *events*, not *attributes*.**
 
 To see the `disabled` button example in a functioning app, see the <live-example name="binding-syntax"></live-example> especially for binding syntax. This example shows you how to toggle the disabled property from the component.
 
-
-### Angular and attributes
-
-In Angular, the only role of attributes is to initialize element and directive state.
-When you write a data-binding, you're dealing exclusively with properties and events of the target object.
-
-
-## Binding targets
+## Binding types and targets
 
 The **target of a data-binding** is something in the DOM.
-Depending on the binding type, the target can be a
-property (element, component, or directive), an
-event (element, component, or directive), or sometimes an attribute name.
-The following table summarizes:
+Depending on the binding type, the target can be a property (element, component, or directive),
+an event (element, component, or directive), or sometimes an attribute name.
+The following table summarizes the targets for the different binding types.
 
 <style>
   td, th {vertical-align: top}
@@ -657,7 +635,7 @@ which is the attribute, spelled with a lowercase `s`.
 
 <code-example path="property-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
 
-For more details, see the [MDN HTMLTableCellElment](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) documentation.
+For more details, see the [MDN HTMLTableCellElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) documentation.
 
 <!-- Add link when Attribute Binding updates are merged:
 For more about `colSpan` and `colspan`, see (Attribute Binding)[guide/template-syntax]. -->
@@ -675,10 +653,9 @@ for parent and child components to communicate:
 
 <code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
 
-### Binding target
+### Binding targets
 
-An element property between enclosing square brackets identifies
-the target property.
+An element property between enclosing square brackets identifies the target property.
 The target property in the following code is the image element's `src` property.
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
@@ -744,7 +721,7 @@ In the following example, the `childItem` property of the `ItemDetailComponent` 
 <code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
 
 You can confirm this by looking in the `ItemDetailComponent` where the `@Input` type is set to a string:
-<code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts (setting the @Input() type"></code-example>
+<code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)"></code-example>
 
 As you can see here, the `parentItem` in `AppComponent` is a string, which the `ItemDetailComponent` expects:
 <code-example path="property-binding/src/app/app.component.ts" region="parent-data-type" header="src/app/app.component.ts"></code-example>
@@ -844,10 +821,10 @@ property binding but both approaches render the
 content harmlessly. The following is the browser output
 of the `evilTitle` examples.
 
-```
+<code-example language="bash">
 "Template <script>alert("evil never sleeps")</script> Syntax" is the interpolated evil title.
 "Template alert("evil never sleeps")Syntax" is the property bound evil title.
-```
+</code-example>
 
 <hr/>
 {@a other-bindings}
@@ -890,13 +867,15 @@ Notice the difference between the `colspan` attribute and the `colSpan` property
 If you wrote something like this:
 
 <code-example language="html">
-  &lt;tr&gt;&lt;td colspan="{{1 + 1}}"&gt;Three-Four&lt;/td&gt;&lt;/tr&gt;</code-example>
+  &lt;tr&gt;&lt;td colspan="{{1 + 1}}"&gt;Three-Four&lt;/td&gt;&lt;/tr&gt;
+</code-example>
 
 You'd get this error:
 
-<code-example format="nocode">
+<code-example language="bash">
   Template parse errors:
-  Can't bind to 'colspan' since it isn't a known native property</code-example>
+  Can't bind to 'colspan' since it isn't a known native property
+</code-example>
 
 As the message says, the `<td>` element does not have a `colspan` property. This is true
 because `colspan` is an attribute&mdash;`colSpan`, with a capital `S`, is the
@@ -963,8 +942,8 @@ The following example conditionally sets the font size in  “em” and “%” 
 
 <code-example path="attribute-binding/src/app/app.component.html" region="style-binding-condition" header="src/app/app.component.html"></code-example>
 
-**This technique is suitable for setting a single style, but consider
-the [`NgStyle`](guide/template-syntax#ngStyle) directive when setting several inline styles at the same time.**
+This technique is suitable for setting a single style, but consider
+the [`NgStyle`](guide/template-syntax#ngStyle) directive when setting several inline styles at the same time.
 
 <div class="alert is-helpful">
 
@@ -1151,7 +1130,7 @@ Angular desugars the `SizerComponent` binding into this:
 The `$event` variable contains the payload of the `SizerComponent.sizeChange` event.
 Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
 
-## Two-way binding in forms
+### Two-way binding in forms
 
 The two-way binding syntax is a great convenience compared to
 separate property and event bindings. It would be convenient to
@@ -1412,7 +1391,7 @@ efficient alternative to showing/hiding.
 
 <div class="alert is-helpful">
 
-**Note:** For more information on `NgIf` and `ngIfElse`, see the [API documentation about NgIf](api/common/NgIf).
+For more information on `NgIf` and `ngIfElse`, see the [API documentation about NgIf](api/common/NgIf).
 
 </div>
 
@@ -1443,26 +1422,20 @@ See also the
 `NgFor` is a repeater directive&mdash;a way to present a list of items.
 You define a block of HTML that defines how a single item should be displayed
 and then you tell Angular to use that block as a template for rendering each item in the list.
+The text assigned to `*ngFor` is the instruction that guides the repeater process.
 
-Here is an example of `NgFor` applied to a simple `<div>`:
+The following example shows `NgFor` applied to a simple `<div>`. (Don't forget the asterisk (`*`) in front of `ngFor`.)
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1" header="src/app/app.component.html"></code-example>
 
-You can also apply an `NgFor` to a component element, as in this example:
+You can also apply an `NgFor` to a component element, as in the following example.
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-2" header="src/app/app.component.html"></code-example>
 
-<div class="alert is-critical">
-
-Don't forget the asterisk (`*`) in front of `ngFor`.
-
-</div>
-
-The text assigned to `*ngFor` is the instruction that guides the repeater process.
-
 {@a microsyntax}
 
-#### `*ngFor` microsyntax
+<div class="callout is-critical">
+<header>*ngFor microsyntax</header>
 
 The string assigned to `*ngFor` is not a [template expression](guide/template-syntax#template-expressions). Rather,
 it's a *microsyntax*&mdash;a little language of its own that Angular interprets.
@@ -1474,14 +1447,14 @@ make it available to the templated HTML for each iteration.*
 Angular translates this instruction into an `<ng-template>` around the host element,
 then uses this template repeatedly to create a new set of elements and bindings for each `item`
 in the list.
-
 For more information about microsyntax, see the [Structural Directives](guide/structural-directives#microsyntax) guide.
+
+</div>
 
 
 {@a template-input-variable}
 
 {@a template-input-variables}
-
 
 #### Template input variables
 
@@ -1637,8 +1610,8 @@ by HTML.
 
 The reference value of itemForm, without the ngForm attribute value, would be
 the [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement).
-There is, however, a difference between a Component and a Directive in that a `Component
-`will be referenced without specifying the attribute value, and a `Directive` will not
+There is, however, a difference between a Component and a Directive in that a `Component`
+will be referenced without specifying the attribute value, and a `Directive` will not
 change the implicit reference (that is, the element).
 
 
@@ -1707,7 +1680,7 @@ Though `@Input()` and `@Output()` often appear together in apps, you can use
 them separately. If the nested
 component is such that it only needs to send data to its parent, you wouldn't
 need an `@Input()`, only an `@Output()`. The reverse is also true in that if the
-child only needs to receive data from the parent, you'd only neeed `@Input()`.
+child only needs to receive data from the parent, you'd only need `@Input()`.
 
 </div>
 
@@ -1925,7 +1898,7 @@ in the child template UI.
 
 Now, in order to see the `@Output()` working, add the following to the parent's template:
 
-```
+```html
   <ul>
     <li *ngFor="let item of items">{{item}}</li>
   </ul>
@@ -1964,13 +1937,13 @@ to declare inputs and outputs, you can identify
 members in the `inputs` and `outputs` arrays
 of the directive metadata, as in this example:
 
-<code-example path="inputs-outputs/src/app/in-the-metadata/in-the-metadata.component.ts" region="metadata" header="src/app/app.component.html"></code-example>
+<code-example path="inputs-outputs/src/app/in-the-metadata/in-the-metadata.component.ts" region="metadata" header="src/app/in-the-metadata/in-the-metadata.component.ts"></code-example>
 
 While declaring `inputs` and `outputs` in the `@Directive` and `@Component`
 metadata is possible, it is a better practice to use the `@Input()` and `@Output()`
 class decorators instead, as follows:
 
-<code-example path="inputs-outputs/src/app/input-output/input-output.component.ts" region="input-output" header="src/app/app.component.html"></code-example>
+<code-example path="inputs-outputs/src/app/input-output/input-output.component.ts" region="input-output" header="src/app/input-output/input-output.component.ts"></code-example>
 
 See the [Decorate input and output properties](guide/styleguide#decorate-input-and-output-properties) section of the
 [Style Guide](guide/styleguide) for details.
@@ -1984,9 +1957,10 @@ properties do indeed exist, double check
 that your properties are annotated with `@Input()` / `@Output()` or that you've declared
 them in an `inputs`/`outputs` array:
 
-<code-example language="sh" class="code-shell">
+<code-example language="bash">
 Uncaught Error: Template parse errors:
-Can't bind to 'item' since it isn't a known property of 'app-item-detail'</code-example>
+Can't bind to 'item' since it isn't a known property of 'app-item-detail'
+</code-example>
 
 </div>
 
@@ -2002,14 +1976,14 @@ offer a solution.
 Alias inputs and outputs in the metadata using a colon-delimited (`:`) string with
 the directive property name on the left and the public alias on the right:
 
-<code-example path="inputs-outputs/src/app/aliasing/aliasing.component.ts" region="alias" header="src/app/app.component.html"></code-example>
+<code-example path="inputs-outputs/src/app/aliasing/aliasing.component.ts" region="alias" header="src/app/aliasing/aliasing.component.ts"></code-example>
 
 
 ### Aliasing with the `@Input()`/`@Output()` decorator
 
 You can specify the alias for the property name by passing the alias name to the `@Input()`/`@Output()` decorator. The internal name remains as usual.
 
-<code-example path="inputs-outputs/src/app/aliasing/aliasing.component.ts" region="alias-input-output" header="src/app/app.component.html"></code-example>
+<code-example path="inputs-outputs/src/app/aliasing/aliasing.component.ts" region="alias-input-output" header="src/app/aliasing/aliasing.component.ts"></code-example>
 
 
 <hr/>
@@ -2056,11 +2030,12 @@ The generated output would look something like this:
 <code-example language="json">
   { "name": "Telephone",
     "manufactureDate": "1980-02-25T05:00:00.000Z",
-    "price": 98 }</code-example>
+    "price": 98 }
+</code-example>
 
 <div class="alert is-helpful">
 
-**Note**: The pipe operator has a higher precedence than the ternary operator (`?:`),
+The pipe operator has a higher precedence than the ternary operator (`?:`),
 which means `a ? b : c | x` is parsed as `a ? b : (c | x)`.
 Nevertheless, for a number of reasons,
 the pipe operator cannot be used without parentheses in the first and second operands of `?:`.
@@ -2085,12 +2060,14 @@ If `item` is `null`, the view still renders but the displayed value is blank; yo
 Consider the next example, with a `nullItem`.
 
 <code-example language="html">
-  The null item name is {{nullItem.name}}</code-example>
+  The null item name is {{nullItem.name}}
+</code-example>
 
 Since there is no safe navigation operator and `nullItem` is `null`, JavaScript and Angular would throw a `null` reference error and break the rendering process of Angular:
 
-<code-example format="nocode">
-  TypeError: Cannot read property 'name' of null.</code-example>
+<code-example language="bash">
+  TypeError: Cannot read property 'name' of null.
+</code-example>
 
 Sometimes however, `null` values in the property
 path may be OK under certain circumstances,
@@ -2130,35 +2107,34 @@ Rather, it tells the TypeScript type checker to suspend strict `null` checks for
 
 The non-null assertion operator, `!`, is optional with the exception that you must use it when you turn on strict null checks.
 
-
-<a href="#top-of-page">トップに戻る</a>
+<a href="#top-of-page">back to top</a>
 
 <hr/>
 
 {@a built-in-template-functions}
 
-## ビルトインテンプレート関数
+## Built-in template functions
 
 {@a any-type-cast-function}
 
-### `$any()` 型キャスト関数
+### The `$any()` type cast function
 
-[AOT コンパイル](guide/aot-compiler) 中にバインディング式が型エラーを引き起こし、かつ型を完全に指定することが不可能または困難である場合があります。
-エラーを止めるには、次の例のように `$any()` キャスト関数を使用して式を
-[`any` 型](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) にキャストします:
+Sometimes a binding expression triggers a type error during [AOT compilation](guide/aot-compiler) and it is not possible or difficult to fully specify the type.
+To silence the error, you can use the `$any()` cast function to cast
+the expression to the [`any` type](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) as in the following example:
 
 <code-example path="built-in-template-functions/src/app/app.component.html" region="any-type-cast-function-1" header="src/app/app.component.html"></code-example>
 
-Angular コンパイラがこのテンプレートを TypeScript コードに変換するとき、
-そのテンプレートに対して型チェックを実行したときに、
-`bestByDate` が `item` オブジェクトのメンバーではないことが TypeScript から報告されなくなります。
+When the Angular compiler turns this template into TypeScript code,
+it prevents TypeScript from reporting that `bestByDate` is not a member of the `item`
+object when it runs type checking on the template.
 
-`$any()` キャスト関数も `this`
-と連携して、コンポーネントの宣言されていないメンバーへのアクセスを許可します。
+The `$any()` cast function also works with `this` to allow access to undeclared members of
+the component.
 
 <code-example path="built-in-template-functions/src/app/app.component.html" region="any-type-cast-function-2" header="src/app/app.component.html"></code-example>
 
-`$any()` キャスト関数は、メソッド呼び出しが有効なバインディング式のどこでも機能します。
+The `$any()` cast function works anywhere in a binding expression where a method call is valid.
 
 ## SVG in templates
 
@@ -2175,7 +2151,7 @@ Refer to the sample code snippet below for a syntax example:
 
 <code-example path="template-syntax/src/app/svg.component.ts" header="src/app/svg.component.ts"></code-example>
 
-Add the below code to your `svg.component.svg` file:
+Add the following code to your `svg.component.svg` file:
 
 <code-example path="template-syntax/src/app/svg.component.svg" header="src/app/svg.component.svg"></code-example>
 

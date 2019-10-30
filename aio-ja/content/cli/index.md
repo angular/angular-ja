@@ -38,9 +38,9 @@ ng serve
 
 <div class="alert is-helpful">
 
-   When you run `ng new my-first-project` a new folder, named `my-first-project`, will be created in the current working directory. Since you want to be able to create files inside that folder, make sure you have sufficient rights in the current working directory before running the command.
+`ng new my-first-project`を実行すると、`my-first-project`という名前の新しいフォルダーが作業中のディレクトリに作成されます。このフォルダの中でファイルを作成することになるので、このコマンドを実行する前に作業ディレクトリに対する十分な権限があることを確認してください。
 
-   If the current working directory is not the right place for your project, you can change to a more appropriate directory by running `cd <path-to-other-directory>` first.
+もし作業ディレクトリがプロジェクトの正しい場所でなければ、事前に`cd <path-to-other-directory>`コマンドで正しい場所に移動しましょう。
 
 </div>
 

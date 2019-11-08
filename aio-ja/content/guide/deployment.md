@@ -1,33 +1,32 @@
-# Deployment
+# デプロイメント
 
-When you are ready to deploy your Angular application to a remote server, you have various options for deployment.
+Angular アプリケーションをリモートサーバーにデプロイする準備ができたら、デプロイのためのさまざまなオプションを選択することができます。
 
 {@a dev-deploy}
 {@a copy-files}
 
+## シンプルなデプロイオプション
 
-## Simple deployment options
+アプリケーションを完全にデプロイする前に、これらの暫定的な手法のいずれかを使用して、プロセス、ビルド構成、およびデプロイされた動作をテストすることができます。
 
-Before fully deploying your application, you can test the process, build configuration, and deployed behavior by using one of these interim techniques.
+### ディスクからのビルドとサーブ
 
-### Building and serving from disk
+通常、開発時には `ng serve` コマンドにて、[webpack-dev-server](https://webpack.js.org/guides/development/#webpack-dev-server) を使用して、ローカルメモリからアプリケーションをビルド、ファイル監視、およびサーブします。
+ただし、デプロイする準備ができたら、 `ng build` コマンドを使用してアプリをビルドし、ビルドされたアーティファクトを他の場所にデプロイする必要があります。
 
-During development, you typically use the `ng serve` command to build, watch, and serve the application from local memory, using [webpack-dev-server](https://webpack.js.org/guides/development/#webpack-dev-server).
-When you are ready to deploy, however, you must use the `ng build` command to build the app and deploy the build artifacts elsewhere.
-
-Both `ng build` and `ng serve` clear the output folder before they build the project, but only the `ng build` command writes the generated build artifacts to the output folder.
+`ng build` と `ng serve` はプロジェクトをビルドする前に出力先フォルダをクリアしますが、生成されたアーティファクトを出力先フォルダに書き込むのは `ng build` コマンドのみです。
 
 <div class="alert is-helpful">
 
-The output folder is  `dist/project-name/` by default.
-To output to a different folder, change the `outputPath` in `angular.json`.
+デフォルトの出力先フォルダは `dist/project-name/` です。  
+別のフォルダーに出力するには、 `angular.json` の `outputPath` を変更します。
 
 </div>
 
-As you near the end of the development process, serving the contents of your output folder from a local web server can give you a better idea of how your application will behave when it is deployed to a remote server.
-You will need two terminals to get the live-reload experience.
+開発プロセスが終わりに近づいたら、ローカル Web サーバーから出力先フォルダのコンテンツをサーブすることで、リモートサーバーにデプロイされたときのアプリケーションの動作をよりよく理解できます。  
+ライブリロードを体験するには、2 つのターミナルが必要です。
 
-* On the first terminal, run the [`ng build` command](cli/build) in *watch* mode to compile the application to the `dist` folder.
+- 1 つ目のターミナルで、 _watch_ モードで [`ng build` コマンド](cli/build) を実行し、アプリケーションを `dist` フォルダにコンパイルします。
 
   <code-example language="none" class="code-shell">
 
@@ -35,9 +34,9 @@ You will need two terminals to get the live-reload experience.
 
   </code-example>
 
-  Like the `ng serve` command, this regenerates output files when source files change.
+  `ng serve` コマンドと同様に、ソースファイルが変更されると出力ファイルが再生成されます。
 
-* On the second terminal, install a web server (such as [lite-server](https://github.com/johnpapa/lite-server)), and run it against the output folder. For example:
+- 2 つ目のターミナルで、Web サーバー（[lite-server](https://github.com/johnpapa/lite-server)など）をインストールし、出力先フォルダに対して実行します。例えば：
 
   <code-example language="none" class="code-shell">
 
@@ -45,48 +44,49 @@ You will need two terminals to get the live-reload experience.
 
   </code-example>
 
-   The server will automatically reload your browser when new files are output.
+  サーバーは、新しいファイルが出力されると、ブラウザを自動的にリロードします。
 
 <div class="alert is-critical">
 
-This method is for development and testing only, and is not a supported or secure way of deploying an application.
+この方法は開発とテストのみを目的としており、アプリケーションをデプロイするためのサポートされた方法、または安全な方法ではありません。
 
 </div>
 
-### Automatic deployment with the CLI
+### CLI を利用した自動デプロイ
 
-The Angular CLI command `ng deploy` (introduced in version 8.3.0) executes the `deploy` [CLI builder](https://angular.io/guide/cli-builder) associated with your project. A number of third-party builders implement deployment capabilities to different platforms. You can add any of them to your project by running `ng add [package name]`.
+Angular CLI コマンドの `ng deploy`（バージョン 8.3.0 で導入）は、プロジェクトに関連づけられた `deploy` [CLI ビルダー](https://angular.io/guide/cli-builder)を実行します。
+多くのサードパーティビルダーは、さまざまなプラットフォームに対してのデプロイ機能を実装しています。 `ng add [パッケージ名]` を実行することで、それらをプロジェクトに追加することができます。
 
-When you add a package with deployment capability, it'll automatically update your workspace configuration (`angular.json` file) with a `deploy` section for the selected project. You can then use the `ng deploy` command to deploy that project.
+デプロイメント機能を備えたパッケージを追加すると、選択したプロジェクトの `deploy` セクションでワークスペース設定（ `angular.json` ファイル）が自動的に更新されます。その後、 `ng deploy` コマンドを使用してそのプロジェクトをデプロイできます。
 
-For example, the following command automatically deploys a project to Firebase.
+たとえば、次のコマンドは、プロジェクトを Firebase に自動的にデプロイします。
 
 <code-example language="none" class="code-shell">
 ng add @angular/fire
 ng deploy
 </code-example>
 
-The command is interactive. In this case, you must have or create a Firebase account, and authenticate using that account. The command prompts you to select a Firebase project for deployment
+このコマンドはインタラクティブです。この場合、 Firebase アカウントを持っているか、なければ作成してそのアカウントを使用して認証する必要があります。このコマンドで、デプロイする Firebase プロジェクトを選択するように求められます。
 
-After the command produces an optimal build of your application (equivalent to `ng deploy --prod`), it'll upload the production assets to Firebase.
+コマンドがアプリケーションの最適なビルド（ `ng deploy --prod` と同等）を実行した後、プロダクション用のアセットを Firebase にアップロードします。
 
-In the table below, you can find a list of packages which implement deployment functionality to different platforms. The `deploy` command for each package may require different command line options. You can read more by following the links associated with the package names below:
+以下の表にて、さまざまなプラットフォームへのデプロイ機能を実装するパッケージのリストを見つけることができます。各パッケージの `deploy` コマンドには、異なるコマンドラインオプションが必要な場合があります。以下のパッケージ名に関連付けられているリンクをたどると、さらに読むことができます。
 
-| Deployment to                                                 | Package                                                                        |
-|---------------------------------------------------------------|--------------------------------------------------------------------------------|
-| [Firebase hosting](https://firebase.google.com/docs/hosting)  | [`@angular/fire`](https://npmjs.org/package/@angular/fire)                     |
-| [Azure](https://azure.microsoft.com/en-us/)                   | [`@azure/ng-deploy`](https://npmjs.org/package/@azure/ng-deploy)               |
-| [Now](https://zeit.co/now)                                    | [`@zeit/ng-deploy`](https://npmjs.org/package/@zeit/ng-deploy)                 |
-| [Netlify](https://www.netlify.com/)                           | [`@netlify-builder/deploy`](https://npmjs.org/package/@netlify-builder/deploy) |
-| [GitHub pages](https://pages.github.com/)                     | [`angular-cli-ghpages`](https://npmjs.org/package/angular-cli-ghpages)         |
+| デプロイ先                                                   | パッケージ                                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| [Firebase hosting](https://firebase.google.com/docs/hosting) | [`@angular/fire`](https://npmjs.org/package/@angular/fire)                     |
+| [Azure](https://azure.microsoft.com/en-us/)                  | [`@azure/ng-deploy`](https://npmjs.org/package/@azure/ng-deploy)               |
+| [Now](https://zeit.co/now)                                   | [`@zeit/ng-deploy`](https://npmjs.org/package/@zeit/ng-deploy)                 |
+| [Netlify](https://www.netlify.com/)                          | [`@netlify-builder/deploy`](https://npmjs.org/package/@netlify-builder/deploy) |
+| [GitHub pages](https://pages.github.com/)                    | [`angular-cli-ghpages`](https://npmjs.org/package/angular-cli-ghpages)         |
 
-If you're deploying to a self-managed server or there's no builder for your favorite cloud platform, you can either create a builder that allows you to use the `ng deploy` command, or read through this guide to learn how to manually deploy your app.
+もし自己管理しているサーバーにデプロイする場合、またはお気に入りのクラウドプラットフォーム用のビルダーがない場合は、 `ng deploy` コマンドを使用できるビルダーを作成するか、このガイドを読んで手動であなたのアプリをデプロイする方法を学習することができます。
 
-### Basic deployment to a remote server
+### リモートサーバーへの基本的なデプロイ
 
-For the simplest deployment, create a production build and copy the output directory to a web server.
+最も単純なデプロイの場合は、プロダクション用ビルドを作成し、出力ディレクトリをそのまま Web サーバーにコピーします。
 
-1. Start with the production build:
+1. プロダクション用ビルドから開始します
 
   <code-example language="none" class="code-shell">
 
@@ -94,24 +94,23 @@ For the simplest deployment, create a production build and copy the output direc
 
   </code-example>
 
+2. 出力フォルダー（デフォルトでは `dist/` ）内の _すべて_ をサーバー上のフォルダーにコピーします。
 
-2. Copy _everything_ within the output folder (`dist/` by default) to a folder on the server.
+3. 不足しているファイルのリクエストを `index.html` にリダイレクトするようにサーバーを設定します。
+   サーバー側リダイレクトの詳細は [こちら](#fallback) にて学習できます。
 
-3. Configure the server to redirect requests for missing files to `index.html`.
-Learn more about server-side redirects [below](#fallback).
-
-This is the simplest production-ready deployment of your application.
+これは、アプリケーションの最も簡単なプロダクション環境へのデプロイです。
 
 {@a deploy-to-github}
 
-### Deploy to GitHub pages
+### GitHub pages へのデプロイ
 
-Another simple way to deploy your Angular app is to use [GitHub Pages](https://help.github.com/articles/what-is-github-pages/).
+Angular アプリをデプロイするもう1つの簡単な方法は、[GitHub Pages](https://help.github.com/articles/what-is-github-pages/) を使用することです。
 
-1. You need to [create a GitHub account](https://github.com/join) if you don't have one, and then [create a repository](https://help.github.com/articles/create-a-repo/) for your project.
-Make a note of the user name and project name in GitHub.
+1. アカウントがない場合は [GitHub アカウントを作成する](https://github.com/join) 、次に [リポジトリを作成する](https://help.github.com/articles/create-a-repo/) 。  
+   GitHub でユーザー名とプロジェクト名を書き留めます。
 
-1. Build your project using Github project name, with the Angular CLI command [`ng build`](cli/build) and the options shown here:
+2. Angular CLI コマンド [ng build](cli/build) とここに示すオプションを使用して、Github プロジェクト名を使用してプロジェクトをビルドします:
 
   <code-example language="none" class="code-shell">
 
@@ -119,17 +118,18 @@ Make a note of the user name and project name in GitHub.
 
   </code-example>
 
-1. When the build is complete, make a copy of `docs/index.html` and name it `docs/404.html`.
+3. ビルドが完了したら、 `docs/index.html`のコピーを作成し、`docs/404.html` という名前を付けます。
 
-1. Commit your changes and push.
+4. 変更をコミットしてプッシュします。
 
-1. On the GitHub project page, configure it to [publish from the docs folder](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch).
+5. GitHub プロジェクトページで、[publish from the docs folder](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch) に設定します。
 
-You can see your deployed page at `https://<user_name>.github.io/<project_name>/`.
+デプロイされたページは次の URL で見ることができます:  
+ `https://<user_name>.github.io/<project_name>/`
 
 <div class="alert is-helpful">
 
-Check out [angular-cli-ghpages](https://github.com/angular-buch/angular-cli-ghpages), a full featured package that does all this for you and has extra functionality.
+[angular-cli-ghpages](https://github.com/angular-buch/angular-cli-ghpages) をチェックしてください。これはあなたのためにこれをすべて行い、追加機能を備えたフル機能のパッケージです。
 
 </div>
 
@@ -137,217 +137,189 @@ Check out [angular-cli-ghpages](https://github.com/angular-buch/angular-cli-ghpa
 
 {@a server-configuration}
 
-## Server configuration
+## サーバー構成
 
-This section covers changes you may have make to the server or to files deployed to the server.
+このセクションでは、サーバーまたはサーバーにデプロイされたファイルに対して行った変更について説明します。
 
 {@a fallback}
 
-### Routed apps must fallback to `index.html`
+### ルーティングされたアプリは、`index.html` にフォールバックする必要があります
 
-Angular apps are perfect candidates for serving with a simple static HTML server.
-You don't need a server-side engine to dynamically compose application pages because
-Angular does that on the client-side.
+Angular アプリケーションは、単純な静的 HTML サーバーで提供するのに最適な候補です。
+アプリケーションページを動的に構成するためにサーバー側エンジンは必要ありません。なぜなら Angular はクライアント側でそれを行うからです。
 
-If the app uses the Angular router, you must configure the server
-to return the application's host page (`index.html`) when asked for a file that it does not have.
+アプリケーションが Angular ルーターを使用する場合、サーバーを構成する必要があります。
+サーバーに存在しないファイルを要求されたときにアプリケーションのホストページ（ `index.html` ）を返します。
 
 {@a deep-link}
 
-A routed application should support "deep links".
-A _deep link_ is a URL that specifies a path to a component inside the app.
-For example, `http://www.mysite.com/heroes/42` is a _deep link_ to the hero detail page
-that displays the hero with `id: 42`.
+ルーティングされたアプリケーションは、「ディープリンク」をサポートする必要があります。  
+_deep link_ は、アプリ内のコンポーネントへのパスを指定する URL です。  
+たとえば、`http://www.mysite.com/heroes/42` はヒーローの詳細ページへの _ディープリンク_ で、`id：42` のヒーローを表示します。
 
-There is no issue when the user navigates to that URL from within a running client.
-The Angular router interprets the URL and routes to that page and hero.
+ユーザーが実行中のクライアント内からその URL に移動しても問題はありません。  
+Angular ルーターは URL を解釈し、そのページとヒーローにルーティングを行います。
 
-But clicking a link in an email, entering it in the browser address bar,
-or merely refreshing the browser while on the hero detail page &mdash;
-all of these actions are handled by the browser itself, _outside_ the running application.
-The browser makes a direct request to the server for that URL, bypassing the router.
+ただし、メール内のリンクをクリックして、ブラウザのアドレスバーに入力したり、
+または、ヒーローの詳細ページでブラウザを更新するだけです &mdash;  
+これらのアクションはすべて、実行中のアプリケーションの _外部の_ ブラウザー自体によって処理されます。  
+ブラウザーは、ルーターをバイパスして、その URL を直接サーバーにリクエストします。
 
-A static server routinely returns `index.html` when it receives a request for `http://www.mysite.com/`.
-But it rejects `http://www.mysite.com/heroes/42` and returns a `404 - Not Found` error *unless* it is
-configured to return `index.html` instead.
+静的サーバーは、 `http://www.mysite.com/` のリクエストを受信すると、定期的に `index.html` を返します。
+しかし、 `http://www.mysite.com/heroes/42` を拒否し、 `404-Not Found` エラーを返し、
+代わりに `index.html` を返すように設定されています。
 
-#### Fallback configuration examples
+#### フォールバック構成の例
 
-There is no single configuration that works for every server.
-The following sections describe configurations for some of the most popular servers.
-The list is by no means exhaustive, but should provide you with a good starting point.
+すべてのサーバーで機能する単一の構成はありません。
+以下のセクションでは、最も一般的なサーバーのいくつかの構成について説明します。
+リストは決して網羅的ではありませんが、良い出発点をあなたに提供してくれるはずです。
 
-* [Apache](https://httpd.apache.org/): add a
-[rewrite rule](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) to the `.htaccess` file as shown
-  (https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
+- [Apache](https://httpd.apache.org/):
+  次に示されているように、 `.htaccess` ファイルに [書き換えルール](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) を追加します(https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
 
-  <code-example>
-    RewriteEngine On
-    &#35 If an existing asset or directory is requested go to it as it is
-    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
-    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
-    RewriteRule ^ - [L]<br>
-    &#35 If the requested resource doesn't exist, use index.html
-    RewriteRule ^ /index.html
-  </code-example>
+    <code-example>
+      RewriteEngine On
+      &#35 If an existing asset or directory is requested go to it as it is
+      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+      RewriteRule ^ - [L]<br>
+      &#35 If the requested resource doesn't exist, use index.html
+      RewriteRule ^ /index.html
+    </code-example>
 
-
-* [Nginx](http://nginx.org/): use `try_files`, as described in
-[Front Controller Pattern Web Apps](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps),
-modified to serve `index.html`:
+* [Nginx](http://nginx.org/): `try_files` を使用し、[フロントコントローラーパターン Web アプリケーション](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps) で `index.html` をサーブするように変更します:
 
   ```
   try_files $uri $uri/ /index.html;
   ```
 
+- [IIS](https://www.iis.net/): 示されているものと同様の書き換えルールを `web.config` に追加します。
+  [こちら](http://stackoverflow.com/a/26152011/2116927):
 
-* [IIS](https://www.iis.net/): add a rewrite rule to `web.config`, similar to the one shown
-[here](http://stackoverflow.com/a/26152011/2116927):
+    <code-example format='.' language="xml">
+      &lt;system.webServer&gt;
+        &lt;rewrite&gt;
+          &lt;rules&gt;
+            &lt;rule name="Angular Routes" stopProcessing="true"&gt;
+              &lt;match url=".*" /&gt;
+              &lt;conditions logicalGrouping="MatchAll"&gt;
+                &lt;add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" /&gt;
+                &lt;add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" /&gt;
+              &lt;/conditions&gt;
+              &lt;action type="Rewrite" url="/index.html" /&gt;
+            &lt;/rule&gt;
+          &lt;/rules&gt;
+        &lt;/rewrite&gt;
+      &lt;/system.webServer&gt;
+    </code-example>
 
-  <code-example format='.' language="xml">
-    &lt;system.webServer&gt;
-      &lt;rewrite&gt;
-        &lt;rules&gt;
-          &lt;rule name="Angular Routes" stopProcessing="true"&gt;
-            &lt;match url=".*" /&gt;
-            &lt;conditions logicalGrouping="MatchAll"&gt;
-              &lt;add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" /&gt;
-              &lt;add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" /&gt;
-            &lt;/conditions&gt;
-            &lt;action type="Rewrite" url="/index.html" /&gt;
-          &lt;/rule&gt;
-        &lt;/rules&gt;
-      &lt;/rewrite&gt;
-    &lt;/system.webServer&gt;
-  </code-example>
+* [GitHub Pages](https://pages.github.com/): GitHub Pages サーバーを [直接構成](https://github.com/isaacs/github/issues/408) することはできませんが、404 ページを追加できます。  
+   `index.html`を`404.html`にコピーします。  
+  それでも 404 レスポンスとして提供されますが、ブラウザはそのページを処理し、アプリを適切にロードします。  
+  次のこともお勧めします。  
+  [master の docs/ でサーブする](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch)
+  や
+  [.nojekyll ファイルを生成する](https://www.bennadel.com/blog/3181-including-node-modules-and-vendors-folders-in-your-github-pages-site.htm)
 
+- [Firebase のホスティング](https://firebase.google.com/docs/hosting/):[書き換えルール](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)を追加する。
 
-* [GitHub Pages](https://pages.github.com/): you can't
-[directly configure](https://github.com/isaacs/github/issues/408)
-the GitHub Pages server, but you can add a 404 page.
-Copy `index.html` into `404.html`.
-It will still be served as the 404 response, but the browser will process that page and load the app properly.
-It's also a good idea to
-[serve from `docs/` on master](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch)
-and to
-[create a `.nojekyll` file](https://www.bennadel.com/blog/3181-including-node-modules-and-vendors-folders-in-your-github-pages-site.htm)
-
-
-* [Firebase hosting](https://firebase.google.com/docs/hosting/): add a
-[rewrite rule](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites).
-
-  <code-example language="json">
-    "rewrites": [ {
-      "source": "**",
-      "destination": "/index.html"
-    } ]
-  </code-example>
+    <code-example language="json">
+      "rewrites": [ {
+        "source": "**",
+        "destination": "/index.html"
+      } ]
+    </code-example>
 
 {@a cors}
 
-### Requesting services from a different server (CORS)
+### 別のサーバーからのサービスのリクエスト（CORS）
 
-Angular developers may encounter a
-<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" title="Cross-origin resource sharing">
-<i>cross-origin resource sharing</i></a> error when making a service request (typically a data service request)
-to a server other than the application's own host server.
-Browsers forbid such requests unless the server permits them explicitly.
+Angular 開発者は、サービスリクエスト（通常はデータサービスリクエスト）を行うときに、アプリケーション自身のホストサーバー以外のサーバーに対して、<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" title="クロスオリジンリソース共有">
+<i>クロスオリジンリソース共有</i></a>エラーに遭遇する場合があります。
+サーバーが明示的に許可しない限り、ブラウザはそのようなリクエストを禁止します。
 
-There isn't anything the client application can do about these errors.
-The server must be configured to accept the application's requests.
-Read about how to enable CORS for specific servers at
-<a href="http://enable-cors.org/server.html" title="Enabling CORS server">enable-cors.org</a>.
+クライアントアプリケーションがこれらのエラーについてできることは何もありません。
+サーバーは、アプリケーションからのリクエストを受け入れるように構成する必要があります。
+<a href="http://enable-cors.org/server.html" title="CORSサーバーを有効にする">enable-cors.org</a> で、特定のサーバーの CORS を有効にする方法について読んでください。
 
 <hr>
 
 {@a optimize}
 
-## Production optimizations
+## プロダクションの最適化
 
-The `--prod` _meta-flag_ engages the following build optimization features.
+`--prod` *meta-flag*は、次のビルド最適化機能を使用します。
 
-* [Ahead-of-Time (AOT) Compilation](guide/aot-compiler): pre-compiles Angular component templates.
-* [Production mode](#enable-prod-mode): deploys the production environment which enables _production mode_.
-* Bundling: concatenates your many application and library files into a few bundles.
-* Minification: removes excess whitespace, comments, and optional tokens.
-* Uglification: rewrites code to use short, cryptic variable and function names.
-* Dead code elimination: removes unreferenced modules and much unused code.
+- [Ahead-of-Time (AOT) コンパイラ](guide/aot-compiler): Angular コンポーネントテンプレートをプリコンパイルします。
+- [プロダクションモード](#enable-prod-mode): _本番モード_ を有効にする本番環境をデプロイします。
+- バンドル: 多くのアプリケーションとライブラリファイルをいくつかのバンドルに連結します。
+- ミニファイ: 余分な空白、コメント、およびオプションのトークンを削除します。
+- 難読化: 短い暗号化された変数名と関数名を使用するようにコードを書き換えます。
+- デッドコード除去: 参照されていないモジュールと多くの未使用コードを削除します。
 
-See [`ng build`](cli/build) for more about CLI build options and what they do.
-
+CLI ビルドオプションとその機能の詳細については、[`ng build`](cli/build) を参照してください。
 
 {@a enable-prod-mode}
 
-### Enable runtime production mode
+### ランタイムプロダクションモードを有効にする
 
-In addition to build optimizations, Angular also has a runtime production mode. Angular apps run in development mode by default, as you can see by the following message on the browser console:
+ビルドの最適化に加えて、Angular にはランタイムプロダクションモードもあります。ブラウザコンソールの次のメッセージでわかるように、Angular アプリはデフォルトでは開発モードで実行されます。
 
 <code-example format="nocode">
 
-  Angular is running in the development mode. Call enableProdMode() to enable the production mode.
+Angular は開発モードで実行されています。 enableProdMode() を呼び出して、プロダクションモードを有効にします。
 
 </code-example>
 
-Switching to _production mode_ makes it run faster by disabling development specific checks such as the dual change detection cycles.
+_プロダクションモード_ に切り替えると、二重変更検出サイクルなどの開発固有のチェックが無効になり、実行が高速になります。
 
-When you enable production builds via `--prod` command line flag, the runtime production mode is enabled as well.
+`--prod` コマンドラインフラグを使用してプロダクションビルドを有効にすると、ランタイムプロダクションモードも有効になります。
 
 {@a lazy-loading}
 
-### Lazy loading
+### 遅延ロード
 
-You can dramatically reduce launch time by only loading the application modules that
-absolutely must be present when the app starts.
+アプリの起動時に絶対に欠かせないアプリケーションモジュールのみをロードすることで、起動時間を劇的に短縮できます。
 
-Configure the Angular Router to defer loading of all other modules (and their associated code), either by
-[waiting until the app has launched](guide/router#preloading  "Preloading")
-or by [_lazy loading_](guide/router#asynchronous-routing "Lazy loading")
-them on demand.
+オンデマンドで[アプリが起動するまで待つ](guide/router#preloading 'Preloading')か [遅延ロード](guide/router#asynchronous-routing 'Lazy loading')を行うかといった方法で、他のすべてのモジュール（および関連するコード）の読み込みを遅延するように、Angular Router を構成します。
 
 <div class="callout is-helpful">
 
-<header>Don't eagerly import something from a lazy-loaded module</header>
+<header>遅延ロードされたモジュールから何かを熱心にインポートしないでください</header>
 
-If you mean to lazy-load a module, be careful not import it
-in a file that's eagerly loaded when the app starts (such as the root `AppModule`).
-If you do that, the module will be loaded immediately.
+モジュールを遅延ロードするつもりなら、アプリの起動時に熱心にロードされるファイル（ルート `AppModule` など）をインポートしないように注意してください。  
+これを行うと、モジュールが直ちにロードされてしまいます。
 
-The bundling configuration must take lazy loading into consideration.
-Because lazy-loaded modules aren't imported in JavaScript, bundlers exclude them by default.
-Bundlers don't know about the router configuration and can't create separate bundles for lazy-loaded modules.
-You would have to create these bundles manually.
+バンドル構成では、遅延ロードを考慮する必要があります。
+遅延ロードされたモジュールは JavaScript にインポートされないため、バンドラーはそれらをデフォルトで除外します。
+バンドラーはルーターの構成を知らず、遅延ロードされたモジュール用に個別のバンドルを作成できません。
+これらのバンドルは手動で作成する必要があります。
 
-The CLI runs the
-[Angular Ahead-of-Time Webpack Plugin](https://github.com/angular/angular-cli/tree/master/packages/%40ngtools/webpack)
-which automatically recognizes lazy-loaded `NgModules` and creates separate bundles for them.
+その CLI は遅延ロードされた `NgModules` を自動的に認識し、それらの個別のバンドルを作成する [Angular Ahead-of-Time Webpack プラグイン](https://github.com/angular/angular-cli/tree/master/packages/%40ngtools/webpack) を実行します。
 
 </div>
 
 {@a measure}
 
-### Measure performance
+### パフォーマンスを計測する
 
-You can make better decisions about what to optimize and how when you have a clear and accurate understanding of
-what's making the application slow.
-The cause may not be what you think it is.
-You can waste a lot of time and money optimizing something that has no tangible benefit or even makes the app slower.
-You should measure the app's actual behavior when running in the environments that are important to you.
+アプリケーションを遅くしている原因が明確かつ正確に理解できているとき、何を最適化するかについては適切な決定を下すことができます。  
+原因は、あなたが考えている通りではないかもしれません。  
+目に見えるメリットがなかったり、アプリの動作が遅くなるようなものを最適化するために、多くの時間とお金を無駄にすることもあります。  
+自分にとって重要な環境で実行するときは、アプリケーションの実際の動作を計測する必要があります。
 
-The
-<a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" title="Chrome DevTools Network Performance">
-Chrome DevTools Network Performance page</a> is a good place to start learning about measuring performance.
+<a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" title="Chrome DevTools Network Performance">Chrome DevTools ネットワークパフォーマンスページ</a>は、パフォーマンスの測定について学習を始めるのに適した場所です。
 
-The [WebPageTest](https://www.webpagetest.org/) tool is another good choice
-that can also help verify that your deployment was successful.
+デプロイが成功したことを確認するのにも役立つ [WebPageTest](https://www.webpagetest.org/) ツールも適切な選択肢です。
 
 {@a inspect-bundle}
 
-### Inspect the bundles
+### バンドルを検査する
 
-The <a href="https://github.com/danvk/source-map-explorer/blob/master/README.md">source-map-explorer</a>
-tool is a great way to inspect the generated JavaScript bundles after a production build.
+<a href="https://github.com/danvk/source-map-explorer/blob/master/README.md">source-map-explorer</a> ツールは、プロダクションビルド後に生成された JavaScript バンドルを検査するのに最も適した方法です。
 
-Install `source-map-explorer`:
+`source-map-explorer` をインストール:
 
 <code-example language="none" class="code-shell">
 
@@ -355,7 +327,7 @@ Install `source-map-explorer`:
 
 </code-example>
 
-Build your app for production _including the source maps_
+_ソースマップを含めて_ プロダクション用のアプリをビルドする。
 
 <code-example language="none" class="code-shell">
 
@@ -363,7 +335,7 @@ Build your app for production _including the source maps_
 
 </code-example>
 
-List the generated bundles in the `dist/` folder.
+生成されたバンドルを `dist/` フォルダーにリストします。
 
 <code-example language="none" class="code-shell">
 
@@ -371,8 +343,8 @@ List the generated bundles in the `dist/` folder.
 
 </code-example>
 
-Run the explorer to generate a graphical representation of one of the bundles.
-The following example displays the graph for the _main_ bundle.
+エクスプローラーを実行して、バンドルの 1 つのグラフィカルな表現を生成します。  
+次の例は、_main_ バンドルのグラフを表示しています。
 
 <code-example language="none" class="code-shell">
 
@@ -380,10 +352,9 @@ The following example displays the graph for the _main_ bundle.
 
 </code-example>
 
-The `source-map-explorer` analyzes the source map generated with the bundle and draws a map of all dependencies,
-showing exactly which classes are included in the bundle.
+`source-map-explorer` はバンドルで生成されたソースマップを分析し、バンドルに含まれるクラスを正確に示したすべての依存関係のマップを描画します。
 
-Here's the output for the _main_ bundle of an example app called `cli-quickstart`.
+これは、`cli-quickstart` というサンプルアプリの _main_ バンドルの出力です。
 
 <figure>
   <img src="generated/images/guide/deployment/quickstart-sourcemap-explorer.png" alt="quickstart sourcemap explorer">
@@ -391,79 +362,79 @@ Here's the output for the _main_ bundle of an example app called `cli-quickstart
 
 {@a base-tag}
 
-## The `base` tag
+## `base` タグ
 
-The HTML [_&lt;base href="..."/&gt;_](/guide/router)
-specifies a base path for resolving relative URLs to assets such as images, scripts, and style sheets.
-For example, given the `<base href="/my/app/">`, the browser resolves a URL such as `some/place/foo.jpg`
-into a server request for `my/app/some/place/foo.jpg`.
-During navigation, the Angular router uses the _base href_ as the base path to component, template, and module files.
+HTML の [_&lt;base href="..."/&gt;_](/guide/router) は、画像、スクリプト、スタイルシートなどのアセットへの相対 URL を解決するためのベースパスを指定します。
+例えば、 `<base href="/my/app/">` を指定すると、ブラウザは `some/place/foo.jpg` を `my/app/some/place/foo.jpg` へのサーバーのリクエストとして URL を解決します。  
+ナビゲーション中に、Angular ルーターは _base href_ をコンポーネント、テンプレート、およびモジュールファイルへのベースパスとして使用します。
 
 <div class="alert is-helpful">
 
-See also the [*APP_BASE_HREF*](api/common/APP_BASE_HREF "API: APP_BASE_HREF") alternative.
+[_APP_BASE_HREF_](api/common/APP_BASE_HREF 'API: APP_BASE_HREF') の代替案も閲覧してください。
 
 </div>
 
-In development, you typically start the server in the folder that holds `index.html`.
-That's the root folder and you'd add `<base href="/">` near the top of `index.html` because `/` is the root of the app.
+開発中は、通常 `index.html` を格納しているフォルダーでサーバーを起動します。  
+これがルートフォルダーであり、 `/` がアプリのルートであるため、 `index.html` の上部近くに `<base href="/">` を追加します。
 
-But on the shared or production server, you might serve the app from a subfolder.
-For example, when the URL to load the app is something like `http://www.mysite.com/my/app/`,
-the subfolder is `my/app/` and you should add `<base href="/my/app/">` to the server version of the `index.html`.
+ただし、共有サーバーまたは運用サーバーでは、サブフォルダーからアプリを提供できます。  
+例えば、アプリを読み込む URL が `http://www.mysite.com/my/app/` のような場合、
+サブフォルダーは `my/app/`であり、 `<base href ="/my/app/">` をサーバーバージョンの `index.html` に追加する必要があります。
 
-When the `base` tag is mis-configured, the app fails to load and the browser console displays `404 - Not Found` errors
-for the missing files. Look at where it _tried_ to find those files and adjust the base tag appropriately.
+`base` タグの設定が間違っていると、アプリの読み込みに失敗し、ブラウザコンソールに見つからないファイルに対して `404-Not Found` エラーが表示されます。_tried_ を見てそれらのファイルを見つけ、base タグを適切に調整します。
 
 {@a differential-loading}
 
-## Differential Loading
+## 差分ロード
 
-When building web applications, making sure your application is compatible with the majority of browsers is a goal.
-Even as JavaScript continues to evolve, with new features being introduced, not all browsers are updated with support for these new features at the same pace.
+Web アプリケーションを構築する場合、アプリケーションが大部分のブラウザーと互換性があることを確認することが目標です。
+JavaScript が進化し続け、新機能が導入されても、すべてのブラウザーにてこれらの新機能のサポートが同じペースで更新されるわけではありません。
 
-The code you write in development using TypeScript is compiled and bundled into ES2015, the JavaScript syntax that is compatible with most browsers.
-All modern browsers support ES2015 and beyond, but in most cases, you still have to account for users accessing your application from a browser that doesn't.
-When targeting older browsers, [polyfills](guide/browser-support#polyfills) can bridge the gap by providing functionality that  doesn't exist in the older versions of JavaScript supported by those browsers.
+TypeScript を使用して開発で作成したコードはコンパイルされ、ほとんどのブラウザーと互換性のある JavaScript 構文である ES2015 にバンドルされます。  
+最新のブラウザはすべて ES2015 以降をサポートしていますが、ほとんどの場合、サポートしていないブラウザからアプリケーションにアクセスするユーザーを考慮する必要があります。  
+古いブラウザーを対象とする場合、[polyfills](guide/browser-support#polyfills) は、これらのブラウザーでサポートされている古いバージョンの JavaScript には存在しない機能を提供することにより、ギャップを埋めることができます。
 
-To maximize compatibility, you could ship a single bundle that includes all your compiled code, plus any polyfills that may be needed.
-Users with modern browsers, however, shouldn't have to pay the price of increased bundle size that comes with polyfills they don't need.
-Differential loading, which is supported by default in Angular CLI version 8 and higher, solves this problem.
+互換性を最大化するために、コンパイルされたすべてのコードと必要なポリフィルを含む単一のバンドルを出荷できます。  
+ただし、最新のブラウザを使用しているユーザーは、不要なポリフィルに伴うバンドルサイズの増加という代価を支払う必要はありません。  
+Angular CLI バージョン 8 以降でデフォルトでサポートされている差分ロードは、この問題を解決します。
 
-Differential loading is a strategy where the CLI builds two separate bundles as part of your deployed application.
+差分ロードは、デプロイされたアプリケーションの一部として CLI が 2 つの個別のバンドルを構築する戦略です。
 
-* The first bundle contains modern ES2015 syntax, takes advantage of built-in support in modern browsers, ships less polyfills, and results in a smaller bundle size.
+- 最初のバンドルには最新の ES2015 構文が含まれており、最新のブラウザーの組み込みサポートを利用し、ポリフィルの出荷を減らし、バンドルサイズを小さくしています。
 
-* The second bundle contains code in the old ES5 syntax, along with all necessary polyfills. This results in a larger bundle size, but supports older browsers.
+- 2 番目のバンドルには、必要なすべてのポリフィルとともに、古い ES5 構文のコードが含まれています。これにより、バンドルサイズが大きくなりますが、古いブラウザーがサポートされます。
 
-This strategy allows you to continue to build your web application to support multiple browsers, but only load the necessary code that the browser needs.
+この戦略により、複数のブラウザーをサポートする Web アプリケーションを引き続き構築できますが、ブラウザーが必要とする必要なコードのみをロードできます。
 
-### Differential builds
+### 差分ビルド
 
-The Angular CLI handles differential loading for you as part of the _build_ process for deployment.
-The `ng build` command produces the necessary bundles used for differential loading, based on your browser support requirements and compilation target.
+Angular CLI は、デプロイの _build_ プロセスの一部として、差分ロードを処理します。  
+`ng build` コマンドは、ブラウザのサポート要件とコンパイルターゲットに基づいて、差分ロードに使用される必要なバンドルを生成します。
 
-The Angular CLI uses two configurations for differential loading:
+Angular CLI は、差分ロードに 2 つの構成を使用します:
 
-* Browsers list
-   The `browserslist` configuration file is included in your application [project structure](guide/file-structure#application-configuration-files) and provides the minimum browsers your application supports. See the [Browserslist spec](https://github.com/browserslist/browserslist) for complete configuration options.
+- ブラウザーリスト
+  `browserslist` 設定ファイルはアプリケーション [プロジェクト構造](guide/file-structure#application-configuration-files) に含まれ、アプリケーションがサポートする最小のブラウザーを提供します。
+  完全な構成オプションについては、[Browserslist spec](https://github.com/browserslist/browserslist) を参照してください。
 
-* TypeScript configuration
-   In the TypeScript configuration file, `tsconfig.json`, the `target` in the `compilerOptions` section determines the ECMAScript target version that the code is compiled to.
-   Modern browsers support ES2015 natively, while ES5 is more commonly used to support legacy browsers.
+- TypeScript の構成
+  TypeScript 設定ファイルである `tsconfig.json` では、`compilerOptions` セクションの `target` でコードがコンパイルされる ECMAScript ターゲットバージョンを決定します。  
+  最新のブラウザーは ES2015 をネイティブでサポートしますが、ES5 はレガシーブラウザーをサポートするためにより一般的に使用されます。
 
 <div class="alert is-helpful">
 
-   Differential loading is currently only supported when using `es2015` as a compilation `target`. When used with targets higher than `es2015`, a warning is emitted during build time.
+現在、差分ロードは、コンパイル `ターゲット` として `es2015` を使用する場合にのみサポートされます。
+`es2015` よりも新しいターゲットで使用すると、ビルド時に警告が発せられます。
 
 </div>
 
-The CLI queries the Browserslist configuration, and checks the `target` to determine if support for legacy browsers is required.
-The combination of these two configurations determines whether multiple bundles are produced when you create a _build_.
-When you create a development build using [`ng build`](cli/build) and differential loading is enabled, the output produced is simpler and easier to debug, allowing you to rely less on sourcemaps of compiled code.
-When you create a production build using [`ng build --prod`](cli/build), the CLI uses the defined configurations above to determine the bundles to build for deployment of your application.
+CLI は Browserslist 設定を照会し、`target` をチェックして、レガシーブラウザのサポートが必要かどうかを判断します。  
+これら 2 つの構成の組み合わせにより、 _build_ の作成時に複数のバンドルが生成されるかどうかが決まります。  
+[ng build](cli/build) を使用して開発ビルドを作成し、差分ロードが有効になっている場合、生成される出力はよりシンプルで簡単にデバッグできるため、コンパイルされたコードのソースマップに依存しにくくなります。  
+[`ng build --prod`](cli/build) を使用してプロダクションビルドを作成する場合、CLI は上記で定義された構成を使用して、アプリケーションのデプロイメント用にビルドするバンドルを決定します。
 
-The `index.html` file is also modified during the build process to include script tags that enable differential loading. See the sample output below from the `index.html` file produced during a build using `ng build`.
+`index.html` ファイルもビルドプロセス中に変更され、差分ロードを可能にする script タグが含まれます。
+`ng build`を使用してビルド中に生成される `index.html` ファイルからの以下のサンプル出力を参照してください。
 
 <code-example language="html">
 &lt;body>
@@ -481,22 +452,25 @@ The `index.html` file is also modified during the build process to include scrip
 &lt;/body>
 </code-example>
 
-Each script tag has a `type="module"` or `nomodule` attribute. Browsers with native support for ES modules only load the scripts with the `module` type attribute and ignore scripts with the `nomodule` attribute. Legacy browsers only load the scripts with the `nomodule` attribute, and ignore the script tags with the `module` type that load ES modules.
+各 script タグには、 `type="module"` または `nomodule` 属性があります。
+ES モジュールをネイティブでサポートするブラウザーは、 `module` タイプ属性を持つスクリプトのみをロードし、`nomodule` 属性を持つスクリプトを無視します。
+レガシーブラウザは、 `nomodule` 属性を持つスクリプトのみをロードし、ES モジュールをロードする `module` タイプの script タグを無視します。
 
 <div class="alert is-helpful">
 
-   Some legacy browsers still download both bundles, but only execute the appropriate scripts based on the attributes mentioned above. You can read more on the issue [here](https://github.com/philipwalton/webpack-esnext-boilerplate/issues/1).
+一部のレガシーブラウザはまだ両方のバンドルをダウンロードしますが、上記の属性に基づいて適切なスクリプトのみを実行します。
+この問題の詳細については、[こちら](https://github.com/philipwalton/webpack-esnext-boilerplate/issues/1) をご覧ください。
 
 </div>
 
-See the [configuration table](#configuration-table) below for the configurations for enabling differential loading.
+差分読み込みを有効にするための構成については、以下の [構成テーブル](#configuration-table) を参照してください。
 
-### Configuring differential loading
+### 差分ロードの構成
 
-Differential loading is supported by default with version 8 and later of the Angular CLI.
-For each application project in your workspace, you can configure how builds are produced based on the `browserslist` and `tsconfig.json` files in your application project.
+差分ロードは、Angular CLI バージョン 8 以降でデフォルトでサポートされています。  
+ワークスペースの各アプリケーションプロジェクトに対して、アプリケーションプロジェクトの `browserslist` ファイルと `tsconfig.json` ファイルに基づいてビルドの生成方法を構成できます。
 
-For a newly created Angular application, the default `browserslist` looks like this:
+新しく作成された Angular アプリケーションの場合、デフォルトの `browserslist` は次のようになります:
 
 ```
 > 0.5%
@@ -506,7 +480,7 @@ not dead
 not IE 9-11 # For IE 9-11 support, remove 'not'.
 ```
 
-The `tsconfig.json` looks like this:
+`tsconfig.json` は次のようになります:
 
 <code-example language="json">
 
@@ -535,49 +509,51 @@ The `tsconfig.json` looks like this:
 
 </code-example>
 
-By default, legacy browsers such as IE 9-11 are ignored, and the compilation target is ES2015. As a result, this produces two builds, and differential loading is enabled. If you ignore browsers without ES2015 support, a single build is produced. To see the build result for differential loading based on different configurations, refer to the table below.
+デフォルトでは、IE 9-11 などのレガシーブラウザーは無視され、コンパイルターゲットは ES2015 です。その結果、これにより 2 つのビルドが生成され、差分ロードが有効になります。 ES2015 サポートのないブラウザーを無視すると、単一のビルドが作成されます。
+さまざまな構成に基づいた差分ロードのビルド結果を確認するには、以下の表を参照してください。
 
 <div class="alert is-important">
 
-   To see which browsers are supported with the above configuration, see which settings meet to your browser support requirements, see the [Browserslist compatibility page](https://browserl.ist/?q=%3E+0.5%25%2C+last+2+versions%2C+Firefox+ESR%2C+not+dead%2C+not+IE+9-11).
+上記の構成でどのブラウザーがサポートされているか、ブラウザーのサポート要件を満たす設定を確認するには[ブラウザーリストの互換性ページ](https://browserl.ist/?q=%3E+0.5%25%2C+last+2+versions%2C+Firefox+ESR%2C+not+dead%2C+not+IE+9-11)を参照してください。
 
 </div>
 
 {@a configuration-table }
 
-| ES5 Browserslist Result | ES Target | Build Result |
-| -------- | -------- | -------- |
-| disabled | es5     | Single build |
-| enabled  | es5     | Single build w/Conditional Polyfills |
-| disabled | es2015  | Single build |
-| enabled  | es2015  | Differential Loading (Two builds w/Conditional Polyfills |
+| ES5 ブラウザリスト結果 | ES ターゲット | ビルド結果                                      |
+| ---------------------- | ------------- | ----------------------------------------------- |
+| 無効                   | es5           | シングルビルド                                  |
+| 有効                   | es5           | シングルビルド 条件付きポリフィル付き           |
+| 無効                   | es2015        | シングルビルド                                  |
+| 有効                   | es2015        | 差分ロード (2 つのビルド 条件付きポリフィル付き |
 
-When the ES5 Browserslist result is `disabled`, then ES5 browser support is not required. Otherwise, ES5 browser support is required.
+ES5 ブラウザリスト結果が `無効` の場合、ES5 ブラウザーのサポートは必要ありません。
+それ以外の場合は、ES5 ブラウザーのサポートが必要です。
 
-### Opting out of differential loading
+### 差分ロードのオプトアウト
 
-Differential loading can be explicitly disabled if it causes unexpected issues or you need to target ES5 specifically for legacy browser support.
+予期しない問題が発生する場合、またはレガシーブラウザサポート専用に ES5 をターゲットにする必要がある場合は、差分ロードを明示的に無効にすることができます。
 
-To explicitly disable differential loading:
+明示的に差分ロードを無効にするには:
 
-- Enable the `dead` or `IE` browsers in the `browserslist` config file by removing the `not` keyword in front of them.
-- Set the `target` in the `compilerOptions` to `es5`.
+- `browserslist` 設定ファイルで `dead` または `IE` ブラウザの前にある `not`キーワードを削除して有効にします。
+- `compilerOptions` の `target` を `es5` に設定します。
 
 {@a test-and-serve}
 
-## Local development in older browsers
+## 古いブラウザでのローカル開発
 
-In Angular CLI version 8 and higher, differential loading is enabled by default for the `ng build` command.
-The `ng serve`, `ng test`, and `ng e2e` commands, however, generate a single ES2015 build which cannot run in older browsers that don't support the modules, such as IE 11.
+Angular CLI バージョン 8 以降では、デフォルトで `ng build` コマンドの差分読み込みが有効になっています。  
+ただし、`ng serve`、`ng test`、`ng e2e` コマンドは、IE 11 などのモジュールをサポートしない古いブラウザーでは実行できない単一の ES2015 ビルドを生成します。
 
-If you want to run ES5 code during development, you could disable differential loading completely.
-To maintain the benefits of differential loading, however, a better option is to define multiple configurations for `ng serve`, `ng e2e`, and `ng test`.
+開発中に ES5 コードを実行する場合は、差分ロードを完全に無効にすることができます。  
+ただし、差分ロードの利点を維持するには、`ng serve`、`ng e2e`、`ng test` の複数の構成を定義することをお勧めします。
 
 {@a differential-serve}
 
-### Configuring serve for ES5
+### ES5 のサーバーの構成
 
-To do this for `ng serve`, create a new file, `tsconfig-es5.app.json` next to `tsconfig.app.json` with the following content.
+これを `ng serve` に対して行うには、`tsconfig.app.json` とは別に以下の内容の `tsconfig-es5.app.json` という新しいファイルを作成します。
 
 <code-example language="json">
 
@@ -590,7 +566,7 @@ To do this for `ng serve`, create a new file, `tsconfig-es5.app.json` next to `t
 
 </code-example>
 
-In `angular.json` add two new configuration sections under the `build` and `serve` targets to point to the new TypeScript configuration.
+`angular.json` では、`build` および `serve` ターゲットの下に 2 つの新しい設定セクションを追加して、新しい TypeScript 設定を指すようにします。
 
 <code-example language="json">
 
@@ -625,7 +601,8 @@ In `angular.json` add two new configuration sections under the `build` and `serv
 
 </code-example>
 
-You can then run the `ng serve` command with this configuration. Make sure to replace `<app-name>` (in `"<app-name>:build:es5"`) with the actual name of the app, as it appears under `projects` in `angular.json`. For example, if your app name is `myAngularApp` the config will become `"browserTarget": "myAngularApp:build:es5"`.
+この設定で `ng serve` コマンドを実行できます。
+`<app-name>` (`"<app-name>:build:es5"` 内) を `angular.json` の `projects` の下に表示されるアプリの実際の名前に置き換えてください。たとえば、アプリ名が `myAngularApp` の場合、設定は `"browserTarget"： "myAngularApp：build：es5"` になります。
 
 <code-example language="none" class="code-shell">
 
@@ -635,9 +612,9 @@ ng serve --configuration es5
 
 {@a differential-test}
 
-### Configuring the test command
+### テストコマンドの構成
 
-Create a new file, `tsconfig-es5.spec.json` next to `tsconfig.spec.json` with the following content.
+次の内容で、`tsconfig.spec.json` とは別に `tsconfig-es5.spec.json` という新しいファイルを作成します。
 
 <code-example language="json">
 
@@ -655,7 +632,7 @@ Create a new file, `tsconfig-es5.spec.json` next to `tsconfig.spec.json` with th
 "test": {
   "builder": "@angular-devkit/build-angular:karma",
   "options": {
-      ...
+    ...
   },
   "configurations": {
     "es5": {
@@ -666,7 +643,7 @@ Create a new file, `tsconfig-es5.spec.json` next to `tsconfig.spec.json` with th
 
 </code-example>
 
-You can then run the tests with this configuration
+その後、この構成でテストを実行できます
 
 <code-example language="none" class="code-shell">
 
@@ -674,21 +651,21 @@ ng test --configuration es5
 
 </code-example>
 
-### Configuring the e2e command
+### e2e コマンドの構成
 
-Create an [ES5 serve configuration](guide/deployment#configuring-serve-for-es5) as explained above, and configuration an ES5 configuration for the E2E target.
+上記の説明に従って [ES5 サーバー構成](guide/deployment#differential-serve) を作成し、E2E ターゲット用に ES5 構成を構成します。
 
 <code-example language="json">
 
 "e2e": {
   "builder": "@angular-devkit/build-angular:protractor",
   "options": {
-      ...
+    ...
   },
   "configurations": {
-	  "production": {
-		  ...
-	  },
+    "production": {
+      ...
+	},
     "es5": {
       "devServerTarget": "<app-name>:serve:es5"
     }
@@ -697,7 +674,7 @@ Create an [ES5 serve configuration](guide/deployment#configuring-serve-for-es5) 
 
 </code-example>
 
-You can then run the `ng e2e` command with this configuration. Make sure to replace `<app-name>` (in `"<app-name>:serve:es5"`) with the actual name of the app, as it appears under `projects` in `angular.json`. For example, if your app name is `myAngularApp` the config will become `"devServerTarget": "myAngularApp:serve:es5"`.
+この設定で `ng e2e`コマンドを実行できます。 `<app-name>`（ `"<app-name>：serve：es5"`内）を実際のアプリの名前に置き換えてください。これは `angular.json` の `projects` の下に表示されます。たとえば、アプリ名が `myAngularApp` の場合、設定は`"devServerTarget": "myAngularApp：serve：es5"` になります。
 
 <code-example language="none" class="code-shell">
 

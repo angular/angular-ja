@@ -676,7 +676,7 @@ ng test --configuration es5
 
 ### Configuring the e2e command
 
-Create an [ES5 serve configuration](guide/deployment#configuring-serve-for-es5) as explained above, and configuration an ES5 configuration for the E2E target.
+Create an [ES5 serve configuration](guide/deployment#differential-serve) as explained above, and configuration an ES5 configuration for the E2E target.
 
 <code-example language="json">
 

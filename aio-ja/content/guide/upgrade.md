@@ -1829,7 +1829,7 @@ AngularJS のための追加の型定義も同様にアンインストールで�
 <code-example path="upgrade-phonecat-3-final/index.html" region="full" header="index.html">
 </code-example>
 
-これが AngularJS を見る最後です!それは私たちによく支えてくれましたが、
+これが AngularJS を見る最後です!それは私たちをよく支えてくれましたが、
 もうお別れをいう時です。
 
 ## 付録: PhoneCat のテストをアップグレードする

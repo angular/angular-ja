@@ -37,7 +37,7 @@ Angular アプリケーションをリモートサーバーにデプロイする
 
   `ng serve` コマンドと同様に、ソースファイルが変更されると出力ファイルが再生成されます。
 
-* 2つ目のターミナルで、Web サーバー（[lite-server](https://github.com/johnpapa/lite-server)など）をインストールし、出力先フォルダに対して実行します。たとえば：
+* 2つ目のターミナルで、Web サーバー（[lite-server](https://github.com/johnpapa/lite-server)など）をインストールし、出力先フォルダに対して実行します。たとえば:
 
   <code-example language="none" class="code-shell">
 
@@ -157,7 +157,7 @@ Angular アプリケーションは、単純な静的 HTML サーバーで提供
 ルーティングされたアプリケーションは、「ディープリンク」をサポートする必要があります。  
 _deep link_ は、アプリ内のコンポーネントへのパスを指定する URL です。  
 たとえば、`http://www.mysite.com/heroes/42` はヒーローの詳細ページへの _ディープリンク_ で、
-`id：42` のヒーローを表示します。
+`id: 42` のヒーローを表示します。
 
 ユーザーが実行中のクライアント内からその URL に移動しても問題はありません。  
 Angular ルーターは URL を解釈し、そのページとヒーローにルーティングを行います。
@@ -625,7 +625,7 @@ Angular CLI バージョン8以降では、デフォルトで `ng build` コマ�
 
 </code-example>
 
-この設定で `ng serve` コマンドを実行できます。`<app-name>` (`"<app-name>:build:es5"` 内) を `angular.json` の `projects` の下に表示されるアプリの実際の名前に置き換えてください。たとえば、アプリ名が `myAngularApp` の場合、設定は `"browserTarget"： "myAngularApp：build：es5"` になります。
+この設定で `ng serve` コマンドを実行できます。`<app-name>` (`"<app-name>:build:es5"` 内) を `angular.json` の `projects` の下に表示されるアプリの実際の名前に置き換えてください。たとえば、アプリ名が `myAngularApp` の場合、設定は `"browserTarget": "myAngularApp:build:es5"` になります。
 
 <code-example language="none" class="code-shell">
 
@@ -697,7 +697,7 @@ ng test --configuration es5
 
 </code-example>
 
-この設定で `ng e2e`コマンドを実行できます。 `<app-name>`（ `"<app-name>：serve：es5"`内）を実際のアプリの名前に置き換えてください。これは `angular.json` の `projects` の下に表示されます。たとえば、アプリ名が `myAngularApp` の場合、設定は`"devServerTarget": "myAngularApp：serve：es5"` になります。
+この設定で `ng e2e`コマンドを実行できます。 `<app-name>`（ `"<app-name>:serve:es5"`内）を実際のアプリの名前に置き換えてください。これは `angular.json` の `projects` の下に表示されます。たとえば、アプリ名が `myAngularApp` の場合、設定は`"devServerTarget": "myAngularApp:serve:es5"` になります。
 
 <code-example language="none" class="code-shell">
 

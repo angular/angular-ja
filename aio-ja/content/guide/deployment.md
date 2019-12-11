@@ -5,6 +5,7 @@ Angular アプリケーションをリモートサーバーにデプロイする
 {@a dev-deploy}
 {@a copy-files}
 
+
 ## シンプルなデプロイオプション
 
 アプリケーションを完全にデプロイする前に、これらの暫定的な手法のいずれかを使用して、プロセス、ビルド構成、およびデプロイされた動作をテストすることができます。
@@ -54,8 +55,7 @@ Angular アプリケーションをリモートサーバーにデプロイする
 
 ### CLI を利用した自動デプロイ
 
-Angular CLI コマンドの `ng deploy`（バージョン8.3.0で導入）は、プロジェクトに関連づけられた `deploy` [CLI ビルダー](https://angular.io/guide/cli-builder)を実行します。
-多くのサードパーティビルダーは、さまざまなプラットフォームに対してのデプロイ機能を実装しています。 `ng add [パッケージ名]` を実行することで、それらをプロジェクトに追加することができます。
+Angular CLI コマンドの `ng deploy`（バージョン8.3.0で導入）は、プロジェクトに関連づけられた `deploy` [CLI ビルダー](https://angular.io/guide/cli-builder)を実行します。多くのサードパーティビルダーは、さまざまなプラットフォームに対してのデプロイ機能を実装しています。 `ng add [パッケージ名]` を実行することで、それらをプロジェクトに追加することができます。
 
 デプロイメント機能を備えたパッケージを追加すると、選択したプロジェクトの `deploy` セクションでワークスペース設定（ `angular.json` ファイル）が自動的に更新されます。その後、 `ng deploy` コマンドを使用してそのプロジェクトをデプロイできます。
 
@@ -94,6 +94,7 @@ ng deploy
 
   </code-example>
 
+
 2. 出力フォルダー（デフォルトでは `dist/` ）内の _すべて_ をサーバー上のフォルダーにコピーします。
 
 3. 不足しているファイルのリクエストを `index.html` にリダイレクトするようにサーバーを設定します。
@@ -110,7 +111,7 @@ Angular アプリをデプロイするもう1つの簡単な方法は、[GitHub 
 1. アカウントがない場合は [GitHub アカウントを作成する](https://github.com/join) 、次に [リポジトリを作成する](https://help.github.com/articles/create-a-repo/) 。  
    GitHub でユーザー名とプロジェクト名を書き留めます。
 
-2. Angular CLI コマンド [ng build](cli/build) とここに示すオプションを使用して、Github プロジェクト名を使用してプロジェクトをビルドします:
+1. Angular CLI コマンド [ng build](cli/build) とここに示すオプションを使用して、Github プロジェクト名を使用してプロジェクトをビルドします:
 
   <code-example language="none" class="code-shell">
 
@@ -118,14 +119,13 @@ Angular アプリをデプロイするもう1つの簡単な方法は、[GitHub 
 
   </code-example>
 
-3. ビルドが完了したら、 `docs/index.html`のコピーを作成し、`docs/404.html` という名前を付けます。
+1. ビルドが完了したら、 `docs/index.html`のコピーを作成し、`docs/404.html` という名前を付けます。
 
-4. 変更をコミットしてプッシュします。
+1. 変更をコミットしてプッシュします。
 
-5. GitHub プロジェクトページで、[publish from the docs folder](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch) に設定します。
+1. GitHub プロジェクトページで、[publish from the docs folder](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch) に設定します。
 
-デプロイされたページは次の URL で見ることができます:  
- `https://<user_name>.github.io/<project_name>/`
+デプロイされたページは次の URL で見ることができます。 `https://<user_name>.github.io/<project_name>/`
 
 <div class="alert is-helpful">
 
@@ -146,7 +146,8 @@ Angular アプリをデプロイするもう1つの簡単な方法は、[GitHub 
 ### ルーティングされたアプリは、`index.html` にフォールバックする必要があります
 
 Angular アプリケーションは、単純な静的 HTML サーバーで提供するのに最適な候補です。
-アプリケーションページを動的に構成するためにサーバー側エンジンは必要ありません。なぜなら Angular はクライアント側でそれを行うからです。
+アプリケーションページを動的に構成するためにサーバー側エンジンは必要ありません。
+なぜなら Angular はクライアント側でそれを行うからです。
 
 アプリケーションが Angular ルーターを使用する場合、サーバーを構成する必要があります。
 サーバーに存在しないファイルを要求されたときにアプリケーションのホストページ（ `index.html` ）を返します。
@@ -155,7 +156,8 @@ Angular アプリケーションは、単純な静的 HTML サーバーで提供
 
 ルーティングされたアプリケーションは、「ディープリンク」をサポートする必要があります。  
 _deep link_ は、アプリ内のコンポーネントへのパスを指定する URL です。  
-たとえば、`http://www.mysite.com/heroes/42` はヒーローの詳細ページへの _ディープリンク_ で、`id：42` のヒーローを表示します。
+たとえば、`http://www.mysite.com/heroes/42` はヒーローの詳細ページへの _ディープリンク_ で、
+`id：42` のヒーローを表示します。
 
 ユーザーが実行中のクライアント内からその URL に移動しても問題はありません。  
 Angular ルーターは URL を解釈し、そのページとヒーローにルーティングを行います。
@@ -176,7 +178,8 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
 リストは決して網羅的ではありませんが、よい出発点をあなたに提供してくれるはずです。
 
 * [Apache](https://httpd.apache.org/):
-  次に示されているように、 `.htaccess` ファイルに [書き換えルール](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) を追加します(https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
+  次に示されているように、 `.htaccess` ファイルに [書き換えルール](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) を
+  追加します(https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
 
   <code-example>
     RewriteEngine On
@@ -188,11 +191,15 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
     RewriteRule ^ /index.html
   </code-example>
 
-* [Nginx](http://nginx.org/): `try_files` を使用し、[フロントコントローラーパターン Web アプリケーション](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps) で `index.html` をサーブするように変更します:
+
+* [Nginx](http://nginx.org/): `try_files` を使用し、
+[フロントコントローラーパターン Web アプリケーション](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps) で
+ `index.html` をサーブするように変更します:
 
   ```
   try_files $uri $uri/ /index.html;
   ```
+
 
 * [IIS](https://www.iis.net/): 示されているものと同様の書き換えルールを `web.config` に追加します。
   [こちら](http://stackoverflow.com/a/26152011/2116927):
@@ -214,15 +221,20 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
     &lt;/system.webServer&gt;
   </code-example>
 
-* [GitHub Pages](https://pages.github.com/): GitHub Pages サーバーを [直接構成](https://github.com/isaacs/github/issues/408) することはできませんが、404ページを追加できます。  
-   `index.html`を`404.html`にコピーします。  
+
+* [GitHub Pages](https://pages.github.com/):
+  GitHub Pages サーバーを [直接構成](https://github.com/isaacs/github/issues/408) することはできませんが、
+  404ページを追加できます。  
+  `index.html`を`404.html`にコピーします。  
   それでも404レスポンスとして提供されますが、ブラウザはそのページを処理し、アプリを適切にロードします。  
   次のこともお勧めします。  
   [master の docs/ でサーブする](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch)
   や
   [.nojekyll ファイルを生成する](https://www.bennadel.com/blog/3181-including-node-modules-and-vendors-folders-in-your-github-pages-site.htm)
 
-* [Firebase のホスティング](https://firebase.google.com/docs/hosting/):[書き換えルール](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)を追加する。
+
+* [Firebase のホスティング](https://firebase.google.com/docs/hosting/):
+[書き換えルール](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)を追加する。
 
   <code-example language="json">
     "rewrites": [ {
@@ -235,13 +247,16 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
 
 ### 別のサーバーからのサービスのリクエスト（CORS）
 
-Angular 開発者は、サービスリクエスト（通常はデータサービスリクエスト）を行うときに、アプリケーション自身のホストサーバー以外のサーバーに対して、<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" title="クロスオリジンリソース共有">
+Angular 開発者は、サービスリクエスト（通常はデータサービスリクエスト）を行うときに、
+アプリケーション自身のホストサーバー以外のサーバーに対して、<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" title="クロスオリジンリソース共有">
 <i>クロスオリジンリソース共有</i></a>エラーに遭遇する場合があります。
-サーバーが明示的に許可しない限り、ブラウザはそのようなリクエストを禁止します。
+サーバーが明示的に許可しない限り、
+ブラウザはそのようなリクエストを禁止します。
 
 クライアントアプリケーションがこれらのエラーについてできることは何もありません。
 サーバーは、アプリケーションからのリクエストを受け入れるように構成する必要があります。
-<a href="http://enable-cors.org/server.html" title="CORSサーバーを有効にする">enable-cors.org</a> で、特定のサーバーの CORS を有効にする方法について読んでください。
+<a href="http://enable-cors.org/server.html" title="CORSサーバーを有効にする">enable-cors.org</a> で、
+特定のサーバーの CORS を有効にする方法について読んでください。
 
 <hr>
 
@@ -259,6 +274,7 @@ Angular 開発者は、サービスリクエスト（通常はデータサービ
 * デッドコード除去: 参照されていないモジュールと多くの未使用コードを削除します。
 
 CLI ビルドオプションとその機能の詳細については、[`ng build`](cli/build) を参照してください。
+
 
 {@a enable-prod-mode}
 
@@ -280,15 +296,20 @@ _プロダクションモード_ に切り替えると、二重変更検知サ�
 
 ### 遅延ロード
 
-アプリの起動時に絶対に欠かせないアプリケーションモジュールのみをロードすることで、起動時間を劇的に短縮できます。
+アプリの起動時に絶対に欠かせないアプリケーションモジュールのみをロードすることで、
+起動時間を劇的に短縮できます。
 
-オンデマンドで[アプリが起動するまで待つ](guide/router#preloading 'Preloading')か [遅延ロード](guide/router#asynchronous-routing 'Lazy loading')を行うかといった方法で、他のすべてのモジュール（および関連するコード）の読み込みを遅延するように、Angular Router を構成します。
+オンデマンドで[アプリが起動するまで待つ](guide/router#preloading 'Preloading')か 
+[遅延ロード](guide/router#asynchronous-routing 'Lazy loading')を行うかといった方法で、
+他のすべてのモジュール（および関連するコード）の読み込みを遅延するように、
+Angular Router を構成します。
 
 <div class="callout is-helpful">
 
 <header>遅延ロードされたモジュールから何かを即時にインポートしないでください</header>
 
-モジュールを遅延ロードするつもりなら、アプリの起動時に熱心にロードされるファイル（ルート `AppModule` など）をインポートしないように注意してください。  
+モジュールを遅延ロードするつもりなら、
+アプリの起動時に熱心にロードされるファイル（ルート `AppModule` など）をインポートしないように注意してください。  
 これを行うと、モジュールが直ちにロードされてしまいます。
 
 バンドル構成では、遅延ロードを考慮する必要があります。
@@ -296,7 +317,9 @@ _プロダクションモード_ に切り替えると、二重変更検知サ�
 バンドラーはルーターの構成を知らず、遅延ロードされたモジュール用に個別のバンドルを作成できません。
 これらのバンドルは手動で作成する必要があります。
 
-CLI は遅延ロードされた `NgModules` を自動的に認識し、それらの個別のバンドルを作成する [Angular Ahead-of-Time Webpack プラグイン](https://github.com/angular/angular-cli/tree/master/packages/%40ngtools/webpack) を実行します。
+CLI は遅延ロードされた `NgModules` を自動的に認識し、
+それらの個別のバンドルを作成する
+ [Angular Ahead-of-Time Webpack プラグイン](https://github.com/angular/angular-cli/tree/master/packages/%40ngtools/webpack) を実行します。
 
 </div>
 
@@ -304,20 +327,25 @@ CLI は遅延ロードされた `NgModules` を自動的に認識し、それら
 
 ### パフォーマンスを計測する
 
-アプリケーションを遅くしている原因が明確かつ正確に理解できているとき、何を最適化するかについては適切な決定を下すことができます。  
+アプリケーションを遅くしている原因が明確かつ正確に理解できているとき、
+何を最適化するかについては適切な決定を下すことができます。  
 原因は、あなたが考えているとおりではないかもしれません。  
 目に見えるメリットがなかったり、アプリの動作が遅くなるようなものを最適化するために、多くの時間とお金を無駄にすることもあります。  
 自分にとって重要な環境で実行するときは、アプリケーションの実際の動作を計測する必要があります。
 
-<a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" title="Chrome DevTools Network Performance">Chrome DevTools ネットワークパフォーマンスページ</a>は、パフォーマンスの測定について学習を始めるのに適した場所です。
+<a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing" title="Chrome DevTools Network Performance">
+Chrome DevTools ネットワークパフォーマンスページ</a>は、
+パフォーマンスの測定について学習を始めるのに適した場所です。
 
-デプロイが成功したことを確認するのにも役立つ [WebPageTest](https://www.webpagetest.org/) ツールも適切な選択肢です。
+デプロイが成功したことを確認するのにも役立つ
+ [WebPageTest](https://www.webpagetest.org/) ツールも適切な選択肢です。
 
 {@a inspect-bundle}
 
 ### バンドルを検査する
 
-<a href="https://github.com/danvk/source-map-explorer/blob/master/README.md">source-map-explorer</a> ツールは、プロダクションビルド後に生成された JavaScript バンドルを検査するのにもっとも適した方法です。
+<a href="https://github.com/danvk/source-map-explorer/blob/master/README.md">source-map-explorer</a> ツールは、
+プロダクションビルド後に生成された JavaScript バンドルを検査するのにもっとも適した方法です。
 
 `source-map-explorer` をインストール:
 
@@ -352,7 +380,8 @@ _ソースマップを含めて_ プロダクション用のアプリをビル�
 
 </code-example>
 
-`source-map-explorer` はバンドルで生成されたソースマップを分析し、バンドルに含まれるクラスを正確に示したすべての依存関係のマップを描画します。
+`source-map-explorer` はバンドルで生成されたソースマップを分析し、
+バンドルに含まれるクラスを正確に示したすべての依存関係のマップを描画します。
 
 これは、`cli-quickstart` というサンプルアプリの _main_ バンドルの出力です。
 
@@ -364,8 +393,10 @@ _ソースマップを含めて_ プロダクション用のアプリをビル�
 
 ## `base` タグ
 
-HTML の [_&lt;base href="..."/&gt;_](/guide/router) は、画像、スクリプト、スタイルシートなどのアセットへの相対 URL を解決するためのベースパスを指定します。
-たとえば、 `<base href="/my/app/">` を指定すると、ブラウザは `some/place/foo.jpg` を `my/app/some/place/foo.jpg` へのサーバーのリクエストとして URL を解決します。  
+HTML の [_&lt;base href="..."/&gt;_](/guide/router) は、
+画像、スクリプト、スタイルシートなどのアセットへの相対 URL を解決するためのベースパスを指定します。
+たとえば、 `<base href="/my/app/">` を指定すると、
+ブラウザは `some/place/foo.jpg` を `my/app/some/place/foo.jpg` へのサーバーのリクエストとして URL を解決します。  
 ナビゲーション中に、Angular ルーターは _base href_ をコンポーネント、テンプレート、およびモジュールファイルへのベースパスとして使用します。
 
 <div class="alert is-helpful">
@@ -381,7 +412,8 @@ HTML の [_&lt;base href="..."/&gt;_](/guide/router) は、画像、スクリプ
 たとえば、アプリを読み込む URL が `http://www.mysite.com/my/app/` のような場合、
 サブフォルダーは `my/app/`であり、 `<base href ="/my/app/">` をサーバーバージョンの `index.html` に追加する必要があります。
 
-`base` タグの設定が間違っていると、アプリの読み込みに失敗し、ブラウザコンソールに見つからないファイルに対して `404-Not Found` エラーが表示されます。_tried_ を見てそれらのファイルを見つけ、base タグを適切に調整します。
+`base` タグの設定が間違っていると、アプリの読み込みに失敗し、ブラウザコンソールに見つからないファイルに対して `404-Not Found` エラーが表示されます。
+_tried_ を見てそれらのファイルを見つけ、base タグを適切に調整します。
 
 {@a differential-loading}
 
@@ -414,8 +446,7 @@ Angular CLI は、デプロイの _build_ プロセスの一部として、デ�
 Angular CLI は、ディファレンシャルローディングに2つの構成を使用します:
 
 * ブラウザリスト
-  `browserslist` 設定ファイルはアプリケーション [プロジェクト構造](guide/file-structure#application-configuration-files) に含まれ、アプリケーションがサポートする最小のブラウザを提供します。
-  完全な構成オプションについては、[Browserslist spec](https://github.com/browserslist/browserslist) を参照してください。
+  `browserslist` 設定ファイルはアプリケーション [プロジェクト構造](guide/file-structure#application-configuration-files) に含まれ、アプリケーションがサポートする最小のブラウザを提供します。完全な構成オプションについては、[Browserslist spec](https://github.com/browserslist/browserslist) を参照してください。
 
 * TypeScript の構成
   TypeScript 設定ファイルである `tsconfig.json` では、`compilerOptions` セクションの `target` でコードがコンパイルされる ECMAScript ターゲットバージョンを決定します。  
@@ -423,8 +454,7 @@ Angular CLI は、ディファレンシャルローディングに2つの構成�
 
 <div class="alert is-helpful">
 
-現在、ディファレンシャルローディングは、コンパイル `ターゲット` として `es2015` を使用する場合にのみサポートされます。
-`es2015` よりも新しいターゲットで使用すると、ビルド時に警告が発せられます。
+現在、ディファレンシャルローディングは、コンパイル `ターゲット` として `es2015` を使用する場合にのみサポートされます。`es2015` よりも新しいターゲットで使用すると、ビルド時に警告が発せられます。
 
 </div>
 
@@ -433,8 +463,7 @@ CLI は Browserslist 設定を照会し、`target` をチェックして、レ�
 [ng build](cli/build) を使用して開発ビルドを作成し、ディファレンシャルローディングが有効になっている場合、生成される出力はよりシンプルで簡単にデバッグできるため、コンパイルされたコードのソースマップに依存しにくくなります。  
 [`ng build --prod`](cli/build) を使用してプロダクションビルドを作成する場合、CLI は上記で定義された構成を使用して、アプリケーションのデプロイメント用にビルドするバンドルを決定します。
 
-`index.html` ファイルもビルドプロセス中に変更され、ディファレンシャルローディングを可能にする script タグが含まれます。
-`ng build`を使用してビルド中に生成される `index.html` ファイルからの次のサンプル出力を参照してください。
+`index.html` ファイルもビルドプロセス中に変更され、ディファレンシャルローディングを可能にする script タグが含まれます。`ng build`を使用してビルド中に生成される `index.html` ファイルからの次のサンプル出力を参照してください。
 
 <code-example language="html">
 &lt;body>
@@ -452,14 +481,11 @@ CLI は Browserslist 設定を照会し、`target` をチェックして、レ�
 &lt;/body>
 </code-example>
 
-各 script タグには、 `type="module"` または `nomodule` 属性があります。
-ES モジュールをネイティブでサポートするブラウザは、 `module` タイプ属性をもつスクリプトのみをロードし、`nomodule` 属性をもつスクリプトを無視します。
-レガシーブラウザは、 `nomodule` 属性をもつスクリプトのみをロードし、ES モジュールをロードする `module` タイプの script タグを無視します。
+各 script タグには、 `type="module"` または `nomodule` 属性があります。ES モジュールをネイティブでサポートするブラウザは、 `module` タイプ属性をもつスクリプトのみをロードし、`nomodule` 属性をもつスクリプトを無視します。レガシーブラウザは、 `nomodule` 属性をもつスクリプトのみをロードし、ES モジュールをロードする `module` タイプの script タグを無視します。
 
 <div class="alert is-helpful">
 
-一部のレガシーブラウザはまだ両方のバンドルをダウンロードしますが、上記の属性に基づいて適切なスクリプトのみを実行します。
-この問題の詳細については、[こちら](https://github.com/philipwalton/webpack-esnext-boilerplate/issues/1) をご覧ください。
+一部のレガシーブラウザはまだ両方のバンドルをダウンロードしますが、上記の属性に基づいて適切なスクリプトのみを実行します。この問題の詳細については、[こちら](https://github.com/philipwalton/webpack-esnext-boilerplate/issues/1) をご覧ください。
 
 </div>
 
@@ -509,8 +535,7 @@ not IE9-11 # For IE9-11 support, remove 'not'.
 
 </code-example>
 
-デフォルトでは、IE9-11などのレガシーブラウザは無視され、コンパイルターゲットはES2015です。その結果、これにより2つのビルドが生成され、ディファレンシャルローディングが有効になります。ES2015サポートのないブラウザを無視すると、単一のビルドが作成されます。
-さまざまな構成に基づいたディファレンシャルローディングのビルド結果を確認するには、次の表を参照してください。
+デフォルトでは、IE9-11などのレガシーブラウザは無視され、コンパイルターゲットはES2015です。その結果、これにより2つのビルドが生成され、ディファレンシャルローディングが有効になります。ES2015サポートのないブラウザを無視すると、単一のビルドが作成されます。さまざまな構成に基づいたディファレンシャルローディングのビルド結果を確認するには、次の表を参照してください。
 
 <div class="alert is-important">
 
@@ -527,8 +552,7 @@ not IE9-11 # For IE9-11 support, remove 'not'.
 | 無効                   | es2015      | シングルビルド                                  |
 | 有効                   | es2015      | ディファレンシャルローディング (2つのビルド 条件付きポリフィル付き |
 
-ES5ブラウザリスト結果が `無効` の場合、ES5ブラウザのサポートは必要ありません。
-それ以外の場合は、ES5ブラウザのサポートが必要です。
+ES5ブラウザリスト結果が `無効` の場合、ES5ブラウザのサポートは必要ありません。それ以外の場合は、ES5ブラウザのサポートが必要です。
 
 ### ディファレンシャルローディングのオプトアウト
 
@@ -601,8 +625,7 @@ Angular CLI バージョン8以降では、デフォルトで `ng build` コマ�
 
 </code-example>
 
-この設定で `ng serve` コマンドを実行できます。
-`<app-name>` (`"<app-name>:build:es5"` 内) を `angular.json` の `projects` の下に表示されるアプリの実際の名前に置き換えてください。たとえば、アプリ名が `myAngularApp` の場合、設定は `"browserTarget"： "myAngularApp：build：es5"` になります。
+この設定で `ng serve` コマンドを実行できます。`<app-name>` (`"<app-name>:build:es5"` 内) を `angular.json` の `projects` の下に表示されるアプリの実際の名前に置き換えてください。たとえば、アプリ名が `myAngularApp` の場合、設定は `"browserTarget"： "myAngularApp：build：es5"` になります。
 
 <code-example language="none" class="code-shell">
 

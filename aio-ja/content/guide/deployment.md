@@ -268,7 +268,7 @@ CLI ビルドオプションとその機能の詳細については、[`ng build
 
 <code-example format="nocode">
 
-Angular は開発モードで実行されています。 enableProdMode() を呼び出して、プロダクションモードを有効にします。
+  Angular is running in the development mode. Call enableProdMode() to enable the production mode.
 
 </code-example>
 

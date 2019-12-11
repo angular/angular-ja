@@ -178,15 +178,15 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
 * [Apache](https://httpd.apache.org/):
   次に示されているように、 `.htaccess` ファイルに [書き換えルール](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) を追加します(https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
 
-    <code-example>
-      RewriteEngine On
-      &#35 If an existing asset or directory is requested go to it as it is
-      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
-      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
-      RewriteRule ^ - [L]<br>
-      &#35 If the requested resource doesn't exist, use index.html
-      RewriteRule ^ /index.html
-    </code-example>
+  <code-example>
+    RewriteEngine On
+    &#35 If an existing asset or directory is requested go to it as it is
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+    RewriteRule ^ - [L]<br>
+    &#35 If the requested resource doesn't exist, use index.html
+    RewriteRule ^ /index.html
+  </code-example>
 
 * [Nginx](http://nginx.org/): `try_files` を使用し、[フロントコントローラーパターン Web アプリケーション](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps) で `index.html` をサーブするように変更します:
 
@@ -197,22 +197,22 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
 * [IIS](https://www.iis.net/): 示されているものと同様の書き換えルールを `web.config` に追加します。
   [こちら](http://stackoverflow.com/a/26152011/2116927):
 
-    <code-example format='.' language="xml">
-      &lt;system.webServer&gt;
-        &lt;rewrite&gt;
-          &lt;rules&gt;
-            &lt;rule name="Angular Routes" stopProcessing="true"&gt;
-              &lt;match url=".*" /&gt;
-              &lt;conditions logicalGrouping="MatchAll"&gt;
-                &lt;add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" /&gt;
-                &lt;add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" /&gt;
-              &lt;/conditions&gt;
-              &lt;action type="Rewrite" url="/index.html" /&gt;
-            &lt;/rule&gt;
-          &lt;/rules&gt;
-        &lt;/rewrite&gt;
-      &lt;/system.webServer&gt;
-    </code-example>
+  <code-example format='.' language="xml">
+    &lt;system.webServer&gt;
+      &lt;rewrite&gt;
+        &lt;rules&gt;
+          &lt;rule name="Angular Routes" stopProcessing="true"&gt;
+            &lt;match url=".*" /&gt;
+            &lt;conditions logicalGrouping="MatchAll"&gt;
+              &lt;add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" /&gt;
+              &lt;add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" /&gt;
+            &lt;/conditions&gt;
+            &lt;action type="Rewrite" url="/index.html" /&gt;
+          &lt;/rule&gt;
+        &lt;/rules&gt;
+      &lt;/rewrite&gt;
+    &lt;/system.webServer&gt;
+  </code-example>
 
 * [GitHub Pages](https://pages.github.com/): GitHub Pages サーバーを [直接構成](https://github.com/isaacs/github/issues/408) することはできませんが、404ページを追加できます。  
    `index.html`を`404.html`にコピーします。  
@@ -224,12 +224,12 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
 
 * [Firebase のホスティング](https://firebase.google.com/docs/hosting/):[書き換えルール](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)を追加する。
 
-    <code-example language="json">
-      "rewrites": [ {
-        "source": "**",
-        "destination": "/index.html"
-      } ]
-    </code-example>
+  <code-example language="json">
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html"
+    } ]
+  </code-example>
 
 {@a cors}
 
@@ -632,7 +632,7 @@ ng serve --configuration es5
 "test": {
   "builder": "@angular-devkit/build-angular:karma",
   "options": {
-    ...
+      ...
   },
   "configurations": {
     "es5": {
@@ -660,12 +660,12 @@ ng test --configuration es5
 "e2e": {
   "builder": "@angular-devkit/build-angular:protractor",
   "options": {
-    ...
+      ...
   },
   "configurations": {
-    "production": {
-      ...
-	},
+	  "production": {
+		  ...
+	  },
     "es5": {
       "devServerTarget": "<app-name>:serve:es5"
     }

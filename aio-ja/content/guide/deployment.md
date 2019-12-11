@@ -26,7 +26,7 @@ Angular アプリケーションをリモートサーバーにデプロイする
 開発プロセスが終わりに近づいたら、ローカル Web サーバーから出力先フォルダのコンテンツをサーブすることで、リモートサーバーにデプロイされたときのアプリケーションの動作をよりよく理解できます。  
 ライブリロードを体験するには、2つのターミナルが必要です。
 
-- 1つ目のターミナルで、 _watch_ モードで [`ng build` コマンド](cli/build) を実行し、アプリケーションを `dist` フォルダにコンパイルします。
+* 1つ目のターミナルで、 _watch_ モードで [`ng build` コマンド](cli/build) を実行し、アプリケーションを `dist` フォルダにコンパイルします。
 
   <code-example language="none" class="code-shell">
 
@@ -36,7 +36,7 @@ Angular アプリケーションをリモートサーバーにデプロイする
 
   `ng serve` コマンドと同様に、ソースファイルが変更されると出力ファイルが再生成されます。
 
-- 2つ目のターミナルで、Web サーバー（[lite-server](https://github.com/johnpapa/lite-server)など）をインストールし、出力先フォルダに対して実行します。たとえば：
+* 2つ目のターミナルで、Web サーバー（[lite-server](https://github.com/johnpapa/lite-server)など）をインストールし、出力先フォルダに対して実行します。たとえば：
 
   <code-example language="none" class="code-shell">
 
@@ -175,7 +175,7 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
 次のセクションでは、もっとも一般的なサーバーのいくつかの構成について説明します。
 リストは決して網羅的ではありませんが、よい出発点をあなたに提供してくれるはずです。
 
-- [Apache](https://httpd.apache.org/):
+* [Apache](https://httpd.apache.org/):
   次に示されているように、 `.htaccess` ファイルに [書き換えルール](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) を追加します(https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/):
 
     <code-example>
@@ -194,7 +194,7 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
   try_files $uri $uri/ /index.html;
   ```
 
-- [IIS](https://www.iis.net/): 示されているものと同様の書き換えルールを `web.config` に追加します。
+* [IIS](https://www.iis.net/): 示されているものと同様の書き換えルールを `web.config` に追加します。
   [こちら](http://stackoverflow.com/a/26152011/2116927):
 
     <code-example format='.' language="xml">
@@ -222,7 +222,7 @@ Angular ルーターは URL を解釈し、そのページとヒーローにル�
   や
   [.nojekyll ファイルを生成する](https://www.bennadel.com/blog/3181-including-node-modules-and-vendors-folders-in-your-github-pages-site.htm)
 
-- [Firebase のホスティング](https://firebase.google.com/docs/hosting/):[書き換えルール](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)を追加する。
+* [Firebase のホスティング](https://firebase.google.com/docs/hosting/):[書き換えルール](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)を追加する。
 
     <code-example language="json">
       "rewrites": [ {
@@ -251,12 +251,12 @@ Angular 開発者は、サービスリクエスト（通常はデータサービ
 
 `--prod` *meta-flag*は、次のビルド最適化機能を使用します。
 
-- [Ahead-of-Time (AOT) コンパイラ](guide/aot-compiler): Angular コンポーネントテンプレートをプリコンパイルします。
-- [プロダクションモード](#enable-prod-mode): _本番モード_ を有効にする本番環境をデプロイします。
-- バンドル: 多くのアプリケーションとライブラリファイルをいくつかのバンドルに連結します。
-- ミニファイ: 余分な空白、コメント、およびオプションのトークンを削除します。
-- 難読化: 短い暗号化された変数名と関数名を使用するようにコードを書き換えます。
-- デッドコード除去: 参照されていないモジュールと多くの未使用コードを削除します。
+* [Ahead-of-Time (AOT) コンパイラ](guide/aot-compiler): Angular コンポーネントテンプレートをプリコンパイルします。
+* [プロダクションモード](#enable-prod-mode): _本番モード_ を有効にする本番環境をデプロイします。
+* バンドル: 多くのアプリケーションとライブラリファイルをいくつかのバンドルに連結します。
+* ミニファイ: 余分な空白、コメント、およびオプションのトークンを削除します。
+* 難読化: 短い暗号化された変数名と関数名を使用するようにコードを書き換えます。
+* デッドコード除去: 参照されていないモジュールと多くの未使用コードを削除します。
 
 CLI ビルドオプションとその機能の詳細については、[`ng build`](cli/build) を参照してください。
 
@@ -400,9 +400,9 @@ Angular CLI バージョン8以降でデフォルトでサポートされてい�
 
 ディファレンシャルローディングは、デプロイされたアプリケーションの一部として CLI が2つの個別のバンドルを構築する戦略です。
 
-- 最初のバンドルには最新のES2015構文が含まれており、最新のブラウザの組み込みサポートを利用し、ポリフィルの出荷を減らし、バンドルサイズを小さくしています。
+* 最初のバンドルには最新のES2015構文が含まれており、最新のブラウザの組み込みサポートを利用し、ポリフィルの出荷を減らし、バンドルサイズを小さくしています。
 
-- 2番目のバンドルには、必要なすべてのポリフィルとともに、古いES5構文のコードが含まれています。これにより、バンドルサイズが大きくなりますが、古いブラウザがサポートされます。
+* 2番目のバンドルには、必要なすべてのポリフィルとともに、古いES5構文のコードが含まれています。これにより、バンドルサイズが大きくなりますが、古いブラウザがサポートされます。
 
 この戦略により、複数のブラウザをサポートする Web アプリケーションを引き続き構築できますが、ブラウザが必要とする必要なコードのみをロードできます。
 
@@ -413,11 +413,11 @@ Angular CLI は、デプロイの _build_ プロセスの一部として、デ�
 
 Angular CLI は、ディファレンシャルローディングに2つの構成を使用します:
 
-- ブラウザリスト
+* ブラウザリスト
   `browserslist` 設定ファイルはアプリケーション [プロジェクト構造](guide/file-structure#application-configuration-files) に含まれ、アプリケーションがサポートする最小のブラウザを提供します。
   完全な構成オプションについては、[Browserslist spec](https://github.com/browserslist/browserslist) を参照してください。
 
-- TypeScript の構成
+* TypeScript の構成
   TypeScript 設定ファイルである `tsconfig.json` では、`compilerOptions` セクションの `target` でコードがコンパイルされる ECMAScript ターゲットバージョンを決定します。  
   最新のブラウザはES2015をネイティブでサポートしますが、ES5はレガシーブラウザをサポートするためにより一般的に使用されます。
 

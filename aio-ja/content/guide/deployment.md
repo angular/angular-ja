@@ -296,7 +296,7 @@ _プロダクションモード_ に切り替えると、二重変更検知サ�
 バンドラーはルーターの構成を知らず、遅延ロードされたモジュール用に個別のバンドルを作成できません。
 これらのバンドルは手動で作成する必要があります。
 
-その CLI は遅延ロードされた `NgModules` を自動的に認識し、それらの個別のバンドルを作成する [Angular Ahead-of-Time Webpack プラグイン](https://github.com/angular/angular-cli/tree/master/packages/%40ngtools/webpack) を実行します。
+CLI は遅延ロードされた `NgModules` を自動的に認識し、それらの個別のバンドルを作成する [Angular Ahead-of-Time Webpack プラグイン](https://github.com/angular/angular-cli/tree/master/packages/%40ngtools/webpack) を実行します。
 
 </div>
 

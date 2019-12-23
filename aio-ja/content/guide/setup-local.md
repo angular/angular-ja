@@ -48,7 +48,6 @@ Angular CLIを使用して、
 
 Angular CLIをグローバルにインストールします。
 
-To install the CLI using `npm`, open a terminal/console window and enter the following command:
 `npm` を使用してCLIをインストールするには、ターミナル/コンソールウィンドウを開き、次のコマンドを入力します。
 
 <code-example language="sh" class="code-shell">

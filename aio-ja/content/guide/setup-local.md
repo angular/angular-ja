@@ -25,7 +25,7 @@ Angular をはじめて使用する場合は、[入門](start)を参照してく
 
 Angular は `Node.js` バージョン 10.9.0 以降を必要とします。
 
-- バージョンを確認するには、端末 ¥¥ ターミナル/コンソールウィンドウで`node -v`を実行してください。
+- バージョンを確認するには、ターミナル/コンソールウィンドウで`node -v`を実行してください。
 
 - `Node.js`を取得するには、[nodejs.org](https://nodejs.org 'Nodejs.org')にアクセスしてください。
 
@@ -48,7 +48,6 @@ Angular CLIを使用して、
 
 Angular CLIをグローバルにインストールします。
 
-To install the CLI using `npm`, open a terminal/console window and enter the following command:
 `npm` を使用してCLIをインストールするには、ターミナル/コンソールウィンドウを開き、次のコマンドを入力します。
 
 <code-example language="sh" class="code-shell">

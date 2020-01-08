@@ -11,3 +11,7 @@ Angular のチャネル(GitHub、Gitter、IRC、メーリングリスト、Googl
 コミュニティのメンバーがこの行動規範に違反した場合、Angular プロジェクトのメンテナは問題やコメント、Pull request を削除したり、あるいはアカウントをブロックするなど、適切な処置を取ることができます。
 
 許容できない行為を受けたり、目撃したり、その他の懸念がある場合は、conduct@angular.io まで e-mail でお問い合わせください。
+
+---
+
+この文書は [angular/code-of-conduct/CODE_OF_CONDUCT.md](https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md) を日本語訳したものです。

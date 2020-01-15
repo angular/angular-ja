@@ -137,7 +137,7 @@
 
 1. カートコンポーネントのルーティング（URLパターン）を追加します。
 
-    リマインダー: `app.module.ts` を開き、 `cart` という `path` を使用して、コンポーネント `CartComponen` のルートを追加します：
+    リマインダー: `app.module.ts` を開き、 `cart` という `path` を使用して、コンポーネント `CartComponent` のルートを追加します：
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
     </code-example>
@@ -285,7 +285,7 @@ To do: Should ReactiveFormsModule already be here?
     <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.ts" region="import-http">
     </code-example>
 
-1. `CartService` コンポーネントクラスのコンストラクターに `HttpClient` を注入します:
+1. `CartService` クラスのコンストラクターに `HttpClient` を注入します:
 
     <code-example path="getting-started/src/app/cart.service.ts" region="inject-http">
     </code-example>
@@ -299,7 +299,7 @@ To do: Should ReactiveFormsModule already be here?
 
 1. `cart.service.ts` で作業を続けます。
 
-1. `clearCart()` メソッドの下に、 `HttpClient#get()` メソッドを使用して[配送データ（タイプと価格）を取得する新しいメソッド `getShippingPrices()` を定義します。
+1. `clearCart()` メソッドの下に、 `HttpClient#get()` メソッドを使用して配送データ（タイプと価格）を取得する新しいメソッド `getShippingPrices()` を定義します。
 
     <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.ts" region="get-shipping"></code-example>
 

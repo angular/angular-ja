@@ -1,4 +1,4 @@
-# Lifecycle Hooks
+# Lifecycle hooks
 
 A component has a lifecycle managed by Angular.
 
@@ -291,9 +291,9 @@ The peek-a-boo exists to show how Angular calls the hooks in the expected order.
 
 This snapshot reflects the state of the log after the user clicked the *Create...* button and then the *Destroy...* button.
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/lifecycle-hooks/peek-a-boo.png" alt="Peek-a-boo">
-</figure>
+</div>
 
 The sequence of log messages follows the prescribed hook calling order:
 `OnChanges`, `OnInit`, `DoCheck`&nbsp;(3x), `AfterContentInit`, `AfterContentChecked`&nbsp;(3x),
@@ -349,9 +349,9 @@ Here it is attached to the repeated hero `<div>`:
 Each spy's birth and death marks the birth and death of the attached hero `<div>`
 with an entry in the *Hook Log* as seen here:
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/spy-directive.gif' alt="Spy Directive">
-</figure>
+</div>
 
 Adding a hero results in a new hero `<div>`. The spy's `ngOnInit()` logs that event.
 
@@ -440,9 +440,9 @@ The host `OnChangesParentComponent` binds to them like this:
 
 Here's the sample in action as the user makes changes.
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/on-changes-anim.gif' alt="OnChanges">
-</figure>
+</div>
 
 The log entries appear as the string value of the *power* property changes.
 But the `ngOnChanges` does not catch changes to `hero.name`
@@ -473,9 +473,9 @@ This code inspects certain _values of interest_, capturing and comparing their c
 It writes a special message to the log when there are no substantive changes to the `hero` or the `power`
 so you can see how often `DoCheck` is called. The results are illuminating:
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/do-check-anim.gif' alt="DoCheck">
-</figure>
+</div>
 
 While the `ngDoCheck()` hook can detect when the hero's `name` has changed, it has a frightful cost.
 This hook is called with enormous frequency&mdash;after _every_
@@ -527,9 +527,9 @@ for one turn of the browser's JavaScript cycle and that's just long enough.
 
 Here's *AfterView* in action:
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/after-view-anim.gif' alt="AfterView">
-</figure>
+</div>
 
 Notice that Angular frequently calls `AfterViewChecked()`, often when there are no changes of interest.
 Write lean hook methods to avoid performance problems.
@@ -572,9 +572,9 @@ The `<ng-content>` tag is a *placeholder* for the external content.
 It tells Angular where to insert that content.
 In this case, the projected content is the `<app-child>` from the parent.
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/projected-child-view.png' alt="Projected Content">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 

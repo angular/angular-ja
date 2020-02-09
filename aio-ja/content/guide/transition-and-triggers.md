@@ -2,7 +2,8 @@
 
 あなたは[イントロダクション](guide/animations)ページでAngularアニメーションの基本について学びました。
 
-このガイドでは、`*`(ワイルドカード)や`void`などの特別な遷移状態についてより深く述べ、これらの特別な状態がビューに入る、またはビューから出る要素にどのように使用されるかを示します。この章では、複数のアニメーショントリガー、アニメーションコールバック、およびキーフレームを使用するシーケンスベースのアニメーションについても説明します。
+このガイドでは、`*`(ワイルドカード)や`void`などの特別な遷移状態についてより深く述べ、これらの特別な状態がビューに入る、またはビューから出る要素にどのように使用されるかを示します。
+この章では、複数のアニメーショントリガー、アニメーションコールバック、およびキーフレームを使用するシーケンスベースのアニメーションについても説明します。
 
 ## 定義済み状態とワイルドカードマッチング
 
@@ -14,11 +15,12 @@ Angularでは、遷移の状態は`state()`関数を介して明示的に定義�
 
 たとえば、`open => *`の遷移は要素の状態がopenから何か別の状態に変わるときに適用されます。
 
-<figure>
-<img src="generated/images/guide/animations/wildcard-state-500.png" alt="wildcard state expressions">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/wildcard-state-500.png" alt="wildcard state expressions">
+</div>
 
-以前の`open`と`closed`状態を使用する例を、ワイルドカード状態を一緒に使用するようにしたコードサンプルは次のようになります。各状態間の遷移のペアを定義するかわりに、`closed`への遷移に1秒、`open`への遷移に0.5秒かかることを定義しています。
+以前の`open`と`closed`状態を使用する例を、ワイルドカード状態を一緒に使用するようにしたコードサンプルは次のようになります。
+各状態間の遷移のペアを定義するかわりに、`closed`への遷移に1秒、`open`への遷移に0.5秒かかることを定義しています。
 
 これにより、各状態に別々の遷移を含めずに新しい状態を追加することができます。
 
@@ -30,11 +32,13 @@ Angularでは、遷移の状態は`state()`関数を介して明示的に定義�
 
 ### 複数の遷移状態でワイルドカード状態を使用する
 
-2状態のボタンの例では、ワイルドカードは役に立ちません。なぜなら、`open`と`close`の2つの状態しかないからです。ワイルドカード状態は、ある特定の状態の要素が複数の潜在的な状態に変化するときに役立ちます。`open`状態から`close`や`inProgress`のような状態に変わる場合、ワイルドカードを使用することで必要なコーディング量を減らすことができます。
+2状態のボタンの例では、ワイルドカードは役に立ちません。なぜなら、`open`と`close`の2つの状態しかないからです。
+ワイルドカード状態は、ある特定の状態の要素が複数の潜在的な状態に変化するときに役立ちます。
+`open`状態から`close`や`inProgress`のような状態に変わる場合、ワイルドカードを使用することで必要なコーディング量を減らすことができます。
 
-<figure>
-<img src="generated/images/guide/animations/wildcard-3-states.png" alt="wildcard state with 3 states">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/wildcard-3-states.png" alt="wildcard state with 3 states">
+</div>
 
 
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="trigger-transition" language="typescript"></code-example>
@@ -73,7 +77,7 @@ Angularでは、遷移の状態は`state()`関数を介して明示的に定義�
 
 <div class="alert is-helpful">
 
-**Note:** 意味としては、ビューに出入りする要素とは、DOMに挿入または削除される要素と同義です。
+**Note:** この例では、ビューに出入りする要素とは、DOMに挿入または削除される要素と同義です。
 
 </div>
 
@@ -169,11 +173,13 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 
 `@.disabled`バインディングがtrueの場合、`@childAnimation`トリガーは実行されません。
 
-HTMLテンプレート内の要素が`@.disabled`ホストバインディングを使ってアニメーションを無効にすると、すべての内部の要素でもアニメーションは無効になります。1つの要素上の複数のアニメーションを選択的に無効にすることはできません。
+HTMLテンプレート内の要素が`@.disabled`ホストバインディングを使ってアニメーションを無効にすると、すべての内部の要素でもアニメーションは無効になります。
+1つの要素上の複数のアニメーションを選択的に無効にすることはできません。
 
 ただし、次のいずれかの方法で、選択した子アニメーションを無効な親に対して実行することはできます:
 
-* 親アニメーションは、[`query()`](https://angular.io/api/animations/query)関数を使用して、HTMLテンプレートの無効な領域にある内部要素を集収することができます。これらの要素はまだアニメーションできます。
+* 親アニメーションは、[`query()`](https://angular.io/api/animations/query)関数を使用して、HTMLテンプレートの無効な領域にある内部要素を集収することができます。
+これらの要素はまだアニメーションできます。
 
 * サブアニメーションは親によってクエリーされ、その後で`animateChild()`関数でアニメーション化できます。
 
@@ -194,18 +200,23 @@ Angularアプリケーションのすべてのアニメーションを無効に�
 
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events1" language="typescript"></code-example>
 
-HTMLテンプレートでは、`@trigger.start`と`@trigger.done`から`$event`を介してアニメーションイベントが渡されます。ここで`trigger`は使用されているトリガーの名前です。この例では、トリガーの`openClose`は次のように登場します。
+HTMLテンプレートでは、`@trigger.start`と`@trigger.done`から`$event`を介してアニメーションイベントが渡されます。ここで`trigger`は使用されているトリガーの名前です。
+この例では、トリガーの`openClose`は次のように登場します。
 
 <code-example path="animations/src/app/open-close.component.3.html" header="src/app/open-close.component.html" region="callbacks">
 </code-example>
 
-アニメーションコールバックの潜在的用途は、データベースルックアップなどの低速API呼び出しをカバーすることです。たとえば、**InProgress**ボタンを設定して、バックエンドシステムの操作が終了するまで脈動、または他の視覚的な動きをする独自のループアニメーションを作成することができます。
+アニメーションコールバックの潜在的用途は、データベースルックアップなどの低速API呼び出しをカバーすることです。
+たとえば、**InProgress**ボタンを設定して、バックエンドシステムの操作が終了するまで脈動、または他の視覚的な動きをする独自のループアニメーションを作成することができます。
 
-そして、現在動作しているアニメーションが終了すると別のアニメーションを呼び出すことができます。たとえば、API呼び出しが完了すると、ボタンは `inProgress`状態から`closed`状態になります。
+そして、現在動作しているアニメーションが終了すると別のアニメーションを呼び出すことができます。
+たとえば、API呼び出しが完了すると、ボタンは `inProgress`状態から`closed`状態になります。
 
-アニメーションは、それがないのと比べると操作がより速いとエンドユーザーに*知覚させる*ことができます。結果的に、サーバーコールのスピードを向上させたり、信頼性の低いネットワーク接続などの制御できない状況を補うよりもむしろ、シンプルなアニメーションはユーザーを幸せに保つための費用対効果の高い方法になります。
+アニメーションは、それがないのと比べると操作がより速いとエンドユーザーに*知覚させる*ことができます。
+結果的に、サーバーコールのスピードを向上させたり、信頼性の低いネットワーク接続などの制御できない状況を補うよりもむしろ、シンプルなアニメーションはユーザーを幸せに保つための費用対効果の高い方法になります。
 
-コールバックはデバッグツールとして役立ちます。たとえば、`console.warn()`と組み合わせて、ブラウザの開発者JavaScriptコンソールでアプリケーションの進行状況を表示することができます。次のコードスニペットは、元の例(`open`と`closed`の2つの状態をもつボタン)のコンソールログ出力を作成します。
+コールバックはデバッグツールとして役立ちます。たとえば、`console.warn()`と組み合わせて、ブラウザの開発者JavaScriptコンソールでアプリケーションの進行状況を表示することができます。
+次のコードスニペットは、元の例(`open`と`closed`の2つの状態をもつボタン)のコンソールログ出力を作成します。
 
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events" language="typescript"></code-example>
 
@@ -215,11 +226,12 @@ HTMLテンプレートでは、`@trigger.start`と`@trigger.done`から`$event`�
 
 さきほどのセクションでは、シンプルな2状態の遷移を解説しました。こんどは、*キーフレーム*を使用して複数のステップを順番に実行するアニメーションを作成します。
 
-Angularの`keyframe()`関数は、CSSのキーフレームに似ています。キーフレームは1つのタイミングセグメント内でいくつかのスタイルの変更ができるようにします。たとえば、ボタンはフェードするかわりに、1回の2秒間のタイムスパンで色を数回変えることができます。
+Angularの`keyframe()`関数は、CSSのキーフレームに似ています。キーフレームは1つのタイミングセグメント内でいくつかのスタイルの変更ができるようにします。
+たとえば、ボタンはフェードするかわりに、1回の2秒間のタイムスパンで色を数回変えることができます。
 
-<figure>
-<img src="generated/images/guide/animations/keyframes-500.png" alt="keyframes">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/keyframes-500.png" alt="keyframes">
+</div>
 
 この色の変化をコードにすると次のようになります。
 
@@ -227,13 +239,17 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 
 ### オフセット
 
-キーフレームには、各スタイルの変更が発生するアニメーション内の位置を定義する*オフセット*が含まれています。オフセットは、0から1までの相対的な尺度であり、それぞれアニメーションの開始と終了を示します。and should be applied to each of the keyframe's steps if used at least once.
+キーフレームには、各スタイルの変更が発生するアニメーション内の位置を定義する*オフセット*が含まれています。
+オフセットは、0から1までの相対的な尺度であり、それぞれアニメーションの開始と終了を示します。and should be applied to each of the keyframe's steps if used at least once.
 
-キーフレームのオフセットの定義はオプショナルです。これらを省略すると、均等に間隔を置いたオフセットが自動的に割り当てられます。たとえば、あらかじめ定義されたオフセットを持たない3つのキーフレームは、0、0.5、および1のオフセットを受け取ります。中間の遷移に対して0.8のオフセットを指定すると、上の例は次のようになるでしょう。
+キーフレームのオフセットの定義はオプショナルです。
+これらを省略すると、均等に間隔を置いたオフセットが自動的に割り当てられます。
+たとえば、あらかじめ定義されたオフセットを持たない3つのキーフレームは、0、0.5、および1のオフセットを受け取ります。
+中間の遷移に対して0.8のオフセットを指定すると、上の例は次のようになるでしょう。
 
-<figure>
-<img src="generated/images/guide/animations/keyframes-offset-500.png" alt="keyframes で offset">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/keyframes-offset-500.png" alt="keyframes with offset">
+</div>
 
 オフセットを指定したコードは次のようになります。
 
@@ -252,9 +268,9 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 
 * 中間に挿入されたキーフレームシーケンスで、同じ1秒の時間枠にわたってボタンが不規則に脈動するように見せます。
 
-<figure>
-<img src="generated/images/guide/animations/keyframes-pulsation.png" alt="keyframes with irregular pulsation">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/keyframes-pulsation.png" alt="keyframes with irregular pulsation">
+</div>
 
 このアニメーションのコードスニペットは次のようになります。
 
@@ -262,7 +278,8 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 
 ### アニメーション可能なプロパティと単位
 
-Angularのアニメーションサポートは、Webアニメーション上に構築されているため、ブラウザがアニメーション化可能なすべてのプロパティをアニメートできます。これには、位置、サイズ、変形、色、ボーダーなどが含まれます。W3Cは、[CSS Transitions](https://www.w3.org/TR/css-transitions-1/)ページにアニメーション可能なプロパティのリストを保持しています。
+Angularのアニメーションサポートは、Webアニメーション上に構築されているため、ブラウザがアニメーション化可能なすべてのプロパティをアニメートできます。
+これには、位置、サイズ、変形、色、ボーダーなどが含まれます。W3Cは、[CSS Transitions](https://www.w3.org/TR/css-transitions-1/)ページにアニメーション可能なプロパティのリストを保持しています。
 
 数値による位置プロパティの場合は、値を引用符で囲んだ文字列として適切な接尾辞で指定して単位を定義します:
 
@@ -270,15 +287,19 @@ Angularのアニメーションサポートは、Webアニメーション上に�
 * 相対的なフォントサイズ: `'3em'`
 * パーセント: `'100%'`
 
-大きさを指定するときに単位を指定しない場合、Angularはデフォルトのピクセル単位、つまりpxを仮定します。 50ピクセルを`50`と表現することは、`'50px'`と同じです。
+大きさを指定するときに単位を指定しない場合、Angularはデフォルトのピクセル単位、つまりpxを仮定します。 
+50ピクセルを`50`と表現することは、`'50px'`と同じです。
 
 ### ワイルドカードを使用した自動的なプロパティの計算
 
-実行時まで大きさのスタイルプロパティ値がわからないことがあります。たとえば、要素の内容や画面サイズによって幅と高さが異なることがあります。これらのプロパティは、CSSを使用してアニメーション化するのは難しいことがあります。
+実行時まで大きさのスタイルプロパティ値がわからないことがあります。
+たとえば、要素の内容や画面サイズによって幅と高さが異なることがあります。
+これらのプロパティは、CSSを使用してアニメーション化するのは難しいことがあります。
 
 このような場合、`style()`の下に特別なワイルドカード`*`のプロパティ値を使うことができるので、その特定のスタイルプロパティの値は実行時に計算され、その後アニメーションに繋げられます。
 
-この例では、`shrinkOut`というトリガーがあります。このトリガーは、HTML要素がページを離れるときに使用されます。アニメーションは、要素が離れる前の任意の高さを取り、その高さからゼロまでアニメーションします。
+この例では、`shrinkOut`というトリガーがあります。このトリガーは、HTML要素がページを離れるときに使用されます。
+アニメーションは、要素が離れる前の任意の高さを取り、その高さからゼロまでアニメーションします。
 
 <code-example path="animations/src/app/hero-list-auto.component.ts" header="src/app/hero-list-auto.component.ts" region="auto-calc" language="typescript"></code-example>
 

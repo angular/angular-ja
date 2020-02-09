@@ -35,21 +35,17 @@ NgModuleは`@NgModule`で装飾されたクラスとして定義されていま�
 
 NgModuleは、そのコンポーネントの *コンパイルコンテキスト* を提供します。ルートNgModuleには常にブートストラップ時に作成されるルートコンポーネントがありますが、任意のNgModuleに追加のコンポーネントをいくつでも含めることができます。これらのコンポーネントは、ルーター経由でロードするか、テンプレートから作成することができます。NgModuleに属するコンポーネントは、コンパイルコンテキストを共有します。
 
-<figure>
-
-<img src="generated/images/guide/architecture/compilation-context.png" alt="コンポーネントコンパイルコンテキスト" class="left">
-
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/compilation-context.png" alt="Component compilation context" class="left">
+</div>
 
 <br class="clear">
 
 コンポーネントとそのテンプレートは一緒に *ビュー* を定義します。コンポーネントには、*ビュー階層* を含めることができます。これにより、画面の任意の複雑な領域を定義し、ユニットとして作成、変更、および破棄することができます。ビュー階層は、異なるNgModuleに属するコンポーネントで定義されたビューを混在させることができます。これは多くの場合、特にUIライブラリの場合に当てはまります。
 
-<figure>
-
-<img src="generated/images/guide/architecture/view-hierarchy.png" alt="ビュー階層" class="left">
-
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/view-hierarchy.png" alt="View hierarchy" class="left">
+</div>
 
 <br class="clear">
 

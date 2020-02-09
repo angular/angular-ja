@@ -42,7 +42,6 @@
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" header="heroes.component.html (heroes template)"></code-example>
 
-That shows one hero. To list them all, add an `*ngFor` to the `<li>` to iterate through the list of heroes:
 これは一人のヒーローを示しています。それらをすべてリストするには、ヒーローのリストを反復処理するために、 `*ngFor*` を `<li>` に追加します。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">

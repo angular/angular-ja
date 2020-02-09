@@ -39,7 +39,7 @@
 
 直近のリリースされたAngularの安定バージョンが、[Angularドキュメンテーション](https://angular.io/docs "Angular documentation")の左側のナビゲーションの下部に表示されます。たとえば、`stable (v5.2.9)`。
 
-CLIコマンドの[`ng update`](cli/update)を使用してAngularの最新バージョンを見つけることもできます。デフォルトでは`ng update`（追加の引数なしで）利用可能な更新が一覧表示されます。
+CLIコマンドの[`ng update`](cli/update)を使用してAngularの最新バージョンを見つけることもできます。デフォルトでは [`ng update`](cli/update)（追加の引数なしで）利用可能な更新が一覧表示されます。
 
 
 {@a updating}
@@ -49,7 +49,7 @@ CLIコマンドの[`ng update`](cli/update)を使用してAngularの最新バー
 
 Angularアップデートガイドでは、指定した現在のバージョンと目標のバージョンに基づいて、カスタマイズされた更新手順が提供されます。アプリケーションの複雑さに合わせて、基本および高度な更新パスが含まれています。また、新しいリリースを最大限に活用するためのトラブルシューティング情報や推奨されるマニュアルの変更も含まれています。
 
-簡単な更新のためには、CLIコマンドの[`ng update`](cli/update)で十分です。追加の引数を与えなければ、`ng update`は利用可能な更新を一覧表示し、アプリケーションを最新のバージョンに更新するための推奨手順が示されます。
+簡単な更新のためには、CLIコマンドの[`ng update`](cli/update)で十分です。追加の引数を与えなければ、[`ng update`](cli/update) は利用可能な更新を一覧表示し、アプリケーションを最新のバージョンに更新するための推奨手順が示されます。
 
 [Angularバージョンとリリース](guide/releases#versioning "Angular Release Practices, Versioning") は、リリースのバージョン番号に基づいて予想される変更のレベルについて説明しています。サポートされているアップデートパスについても説明します。
 
@@ -67,5 +67,3 @@ Angularアップデートガイドでは、指定した現在のバージョン�
 * アップデートコマンドについて: [Angular CLI `ng update` コマンドリファレンス](cli/update)
 
 * バージョニング、リリース、サポートと廃止のプラクティス: [Angularのバージョニングとリリース](guide/releases "Angular versioning and releases")
-
-* リリーススケジュール: [Angularのバージョニングとリリース](guide/releases#schedule "Angular versioning and releases")

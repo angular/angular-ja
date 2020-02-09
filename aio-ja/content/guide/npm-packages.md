@@ -81,8 +81,8 @@ Angularのパッケージの完全な一覧は、[API reference](http://angular.
 
 Package name                                      | Description
 ----------------------------------------   | --------------------------------------------------
-[**rxjs**](https://github.com/ReactiveX/rxjs)     | 多くのAngularのAPIは[_Observable_](guide/glossary#observable)を返します。RxJSはJavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)委員会に現在提案されている[Observables仕様](https://github.com/tc39/proposal-observable)を実装したものです。
-[**zone.js**](https://github.com/angular/zone.js) | Angularはzone.jsに依存しています。これはネイティブのJavaScriptの作用でイベントが発生した時にAngularの変更検知プロセスを実行するためのものです。Zone.jsは JavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39-m.htm)委員会に現在提案されている[仕様](https://gist.github.com/mhevery/63fdcdf7c65886051d55)を実装したものです。
+[**rxjs**](https://github.com/ReactiveX/rxjs)     | 多くのAngularのAPIは[_Observable_](guide/glossary#observable)を返します。RxJSはJavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39.htm)委員会に現在提案されている[Observables仕様](https://github.com/tc39/proposal-observable)を実装したものです。
+[**zone.js**](https://github.com/angular/zone.js) | Angularはzone.jsに依存しています。これはネイティブのJavaScriptの作用でイベントが発生した時にAngularの変更検知プロセスを実行するためのものです。Zone.jsは JavaScript言語の標準を策定する[TC39](https://www.ecma-international.org/memento/tc39.htm)委員会に現在提案されている[仕様](https://gist.github.com/mhevery/63fdcdf7c65886051d55)を実装したものです。
 
 
 {@a polyfills}
@@ -106,7 +106,7 @@ Package name                                      | Description
 新しく `devDependency` に追加するには、次のいずれかのコマンドを利用してください。
 
 <code-example language="sh" class="code-shell">
-  npm install --dev &lt;package-name&gt;
+  npm install --save-dev &lt;package-name&gt;
 </code-example>
 
 <code-example language="sh" class="code-shell">

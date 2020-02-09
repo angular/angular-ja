@@ -73,7 +73,7 @@ ng build --leaveBazelFilesOnDisk
 * `/WORKSPACE` は外部の依存関係をダウンロードする方法を Bazel に伝えます。
 * `/BUILD.bazel` と `/src/BUILD.bazel` はあなたのソースコードについて Bazel に伝えます。
 
-カスタム Bazel 構成を含めたすべての機能の例を http://github.com/angular/angular-bazel-example で、見ることができます。
+カスタム Bazel 構成を含めたすべての機能の例を https://github.com/bazelbuild/rules_nodejs/tree/master/examples/angular. で、見ることができます。
 
 フロントエンドプロジェクトに Bazel を使用するためのドキュメントは https://docs.bazel.build/versions/master/bazel-and-javascript.html にリンクされています。
 

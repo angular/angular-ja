@@ -118,10 +118,9 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 上の例では `<script>`タグのみサニタイズされ、`<b>`タグのような安全なコンテンツは変更されていません。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/security/binding-inner-html.png' alt='A screenshot showing interpolated and bound HTML values'>
-</figure>
-
+</div>
 
 
 ### DOM APIの直接使用と、明示的なサニタイズ呼び出し
@@ -209,9 +208,9 @@ URLに` javascript：alert(...)` をバインドするとします。
 
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/security/bypass-security-component.png' alt='A screenshot showing an alert box created from a trusted URL'>
-</figure>
+</div>
 
 
 
@@ -276,7 +275,7 @@ Cookieが設定されているWebサイトのコードだけが、そのサイ�
 つまり、アプリケーションだけがこのCookieトークンを読み取り、カスタムヘッダーを設定できます。
 `evil.com`の悪意のあるコードにはできません。
 
-Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClient guide](/guide/http) の章を参照してください。
+Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClient guide](/guide/http#security-xsrf-protection) の章を参照してください。
 
 CSRFについてはオープンWebアプリケーションセキュリティプロジェクト（OWASP）の、
 <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29">Cross-Site Request Forgery (CSRF)</a> および

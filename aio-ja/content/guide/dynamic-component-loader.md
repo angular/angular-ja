@@ -153,7 +153,8 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 
 ## _AdComponent_ インターフェース
 
-広告バナーでは、すべてのコンポーネントが共通の `AdComponent` インターフェースを実装して、コンポーネントにデータを渡すためのAPIを標準化します。
+広告バナーでは、すべてのコンポーネントが共通の `AdComponent` インターフェースを実装して、
+コンポーネントにデータを渡すためのAPIを標準化します。
 
 次の2つのサンプルコンポーネントと、参照のための `AdComponent` インターフェースがあります：
 
@@ -182,10 +183,8 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 ## 最終的な広告バナー
  最終的な広告バナーは次のようになります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dynamic-component-loader/ads-example.gif" alt="Ads">
-</figure>
-
-
+</div>
 
 <live-example name="dynamic-component-loader"></live-example>を参照してください。

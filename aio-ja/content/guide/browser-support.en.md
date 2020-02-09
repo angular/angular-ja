@@ -89,7 +89,7 @@ Angular supports most recent browsers. This includes the following specific vers
     </td>
 
     <td>
-      Nougat (7.0), Marshmallow (6.0), Lollipop (5.0, 5.1), KitKat (4.4)
+      X (10.0), Pie (9.0), Oreo (8.0), Nougat (7.0)
     </td>
   </tr>
 
@@ -252,30 +252,6 @@ Some features of Angular may require additional polyfills.
       <p>If AnimationBuilder is used, enables scrubbing
       support for IE/Edge and Safari.
       (Chrome and Firefox support this natively).</p>
-    </td>
-
-  </tr>
-
-  <tr style="vertical-align: top">
-
-    <td>
-
-     If you use the following deprecated i18n pipes:
-     [date](api/common/DeprecatedDatePipe),
-     [currency](api/common/DeprecatedCurrencyPipe),
-     [decimal](api/common/DeprecatedDecimalPipe),
-     [percent](api/common/DeprecatedPercentPipe)
-
-    </td>
-
-    <td>
-
-      [Intl API](guide/browser-support#intl)
-
-    </td>
-
-    <td>
-      All but Chrome, Firefox, Edge, IE 11 and Safari 10
     </td>
 
   </tr>
@@ -539,7 +515,7 @@ For example:
      */
     // __Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
     // __Zone_disable_on_property = true; // disable patch onProperty such as onclick
-    // __zone_symbol__BLACK_LISTED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+    // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
 
     /*
      * in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js

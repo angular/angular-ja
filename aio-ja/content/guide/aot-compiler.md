@@ -1,12 +1,12 @@
-# Ahead-of-Time (AOT) コンパイラ
+# Ahead-of-time (AOT) コンパイラ
 
 Angular アプリケーションは、主にコンポーネントとその HTML テンプレートで構成されています。Angular が提供するコンポーネントとテンプレートはブラウザで直接理解できないため、Angular アプリケーションをブラウザで実行するにはコンパイルプロセスが必要です。
 
-Angular の Ahead-of-Time (AOT) コンパイラは、ブラウザがそのコードをダウンロードして実行する _前_ に、Angular HTML コードと TypeScript コードを効率的な JavaScript コードに変換します。ビルドプロセス中にアプリケーションをコンパイルすると、ブラウザでのレンダリングが速くなります。
+Angular の [ahead-of-time (AOT) コンパイラ](guide/glossary#aot) は、ブラウザがそのコードをダウンロードして実行する _前_ に、Angular HTML コードと TypeScript コードを効率的な JavaScript コードに変換します。ビルドプロセス中にアプリケーションをコンパイルすると、ブラウザでのレンダリングが速くなります。
 
 このガイドでは、AOT コンパイラを使用してアプリケーションを効率的にコンパイルするためのメタデータの指定方法と利用可能なコンパイラオプションの適用方法について説明します。
 
-<div class="alert is-helpful"
+<div class="alert is-helpful">
 
   AngularConnect 2016で、<a href="https://www.youtube.com/watch?v=kW9cJsvcsGo">コンパイラの作者 Tobias Bosch が Angular コンパイラについて説明しています</a>。
 
@@ -564,9 +564,24 @@ export class TypicalModule {}
 {@a binding-expression-validation}
 ## フェーズ 3: テンプレート型チェック
 
+One of the Angular compiler's most helpful features is the ability to type-check expressions within templates, and catch any errors before they cause crashes at runtime.
 テンプレート型チェックの段階では、Angular テンプレートコンパイラは TypeScript コンパイラを使用してテンプレート内のバインディング式を検証します。
+
 プロジェクトの `tsconfig.json` の `"angularCompilerOptions"` にコンパイラオプション `"fullTemplateTypeCheck"`を追加して、
 このフェーズを明示的に有効にします ([Angular コンパイラオプション](guide/angular-compiler-options)を参照)。
+
+<div class="alert is-helpful>
+
+In [Angular Ivy](guide/ivy), the template type checker has been completely rewritten to be more capable as well as stricter, meaning it can catch a variety of new errors that the previous type checker would not detect.
+
+As a result, templates that previously compiled under View Engine can fail type checking under Ivy. This can happen because Ivy's stricter checking catches genuine errors, or because application code is not typed correctly, or because the application uses libraries in which typings are inaccurate or not specific enough.
+
+This stricter type checking is not enabled by default in version 9, but can be enabled by setting the `strictTemplates` configuration option.
+We do expect to make strict type checking the default in the future.
+
+<!-- For more information about type-checking options, and about improvements to template type checking in version 9 and above, see [Template type checking](guide/template-type-checking). -->
+
+</div>
 
 テンプレート検証では、
 `.ts` ファイル内のコードに対して TypeScript コンパイラによって型エラーが報告されるのと同様に、
@@ -674,22 +689,5 @@ class MyComponent {
     this.person = person;
     this.address = address;
   }
-}
-```
-
-### `$any()` を使って型チェックを無効にする
-
-[`$any()` キャスト疑似関数](guide/template-syntax)の呼び出しで式を囲むことによって、バインディング式のチェックを無効にします。
-`<any>` が使用されている場合、または `as any` キャストが使用されている場合は、TypeScript の場合と同様に、コンパイラはこれを `any` 型へのキャストとして扱います。
-
-次の例では、`Property addresss does not exist` というエラーは、`person` を `any` 型にキャストすることによって抑制されます。
-
-```typescript
-@Component({
-  selector: 'my-component',
-  template: '{{$any(person).addresss.street}}'
-})
-class MyComponent {
-  person?: Person;
 }
 ```

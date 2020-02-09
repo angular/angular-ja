@@ -325,7 +325,7 @@ For more information, see [Autoprefixer documentation](https://autoprefixer.gith
 
 ## バックエンドサーバーへのプロキシ
 
-`--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
+`--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserverproxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
 たとえば、`http://localhost:4200/api`に対するすべての要求を`http://localhost:3000/api`で実行しているサーバーに転送するには、次の手順を実行してください。
 
 1. `proxy.conf.json` ファイルを、 `package.json` と同じディレクトリにある `src/` フォルダの中に作成します。
@@ -356,7 +356,7 @@ For more information, see [Autoprefixer documentation](https://autoprefixer.gith
 4. このプロキシ設定で開発サーバーを起動するには、`ng serve`を実行します。
 
 プロキシ設定ファイルを編集して設定オプションを追加することができます。次にいくつか例を示します。
-すべてのオプションの説明については、[webpack DevServer ドキュメンテーション](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を参照してください。
+すべてのオプションの説明については、[webpack DevServer ドキュメンテーション](https://webpack.js.org/configuration/dev-server/#devserverproxy)を参照してください。
 
 プロキシ設定ファイルを編集した場合、変更を有効にするために`ng serve`プロセスを再起動する必要があることに注意してください。
 

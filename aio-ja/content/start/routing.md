@@ -65,7 +65,7 @@ Angular [Router](guide/glossary#router "Router definition") を使用すると�
         <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="imports">
         </code-example>
 
-    1. `product`プロパティを定義し、さらにコンストラクタの括弧内に引数として追加することで、コンストラクタに`ActivatedRoute`を注入します。
+    1. `product`プロパティを定義し、さらにコンストラクターの括弧内に引数として追加することで、コンストラクターに`ActivatedRoute`を注入します。
 
         <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="props-methods">
         </code-example>

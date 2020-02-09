@@ -44,7 +44,7 @@
 
         <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.1.ts"></code-example>
 
-    1. StackBlitzは、上記のように `{ providedIn: 'root' }` ステートメントなしで `@Injectable()`デコレータを生成する場合があります。代わりに、ジェネレーターはデフォルトで `app.module.ts`にカートサービスを提供します。
+    1. StackBlitzは、上記のように `{ providedIn: 'root' }` ステートメントなしで `@Injectable()`デコレーターを生成する場合があります。代わりに、ジェネレーターはデフォルトで `app.module.ts`にカートサービスを提供します。
     このチュートリアルでは、どちらの方法でも機能します。 `@Injectable()` の `{ providedIn: 'root' }` 構文は、[tree shaking](/guide/dependency-injection-providers#tree-shakable-providers) を可能にしますが、これはこのガイドの範囲外です。
 
 1. `CartService` クラスで、商品の配列をカートに格納するためのプロパティ `items` を定義します。
@@ -126,7 +126,7 @@
 
 ### コンポーネントを設定する
 
-カートページを作成するには、最初に製品詳細コンポーネントを作成し、新しいコンポーネントのルーティングを構成したときと同じ手順に従ってください。
+カートページを作成するには、最初に製品詳細コンポーネントを作成し、新しいコンポーネントのルーティングを構成したときと同じ手順にしたがってください。
 
 1. `cart` という名前のコンポーネントを生成します。
 

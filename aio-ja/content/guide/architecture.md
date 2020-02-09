@@ -1,8 +1,10 @@
-# アーキテクチャ概要
+# Introduction to Angular concepts
 
-Angularは、HTMLとTypeScriptでクライアントアプリケーションを開発するためのプラットフォームであり、そしてフレームワークです。
-Angularはそれ自身がTypeScriptで書かれています。コア部分と、アプリケーションにインポートするオプショナルな機能をTypeScriptライブラリのセットとして実装しています。
+Angularは、HTMLとTypeScriptでシングルページクライアントアプリケーションを開発するためのプラットフォームであり、そしてフレームワークです。
+Angularはそれ自身がTypeScriptで書かれています。
+コア部分と、アプリケーションにインポートするオプショナルな機能をTypeScriptライブラリのセットとして実装しています。
 
+Angularアプリケーションのアーキテクチャは、いくらかの基本概念に依存しています。
 Angularアプリケーションの基本となる構成要素は *NgModule* です。これは *コンポーネント* のコンパイルコンテキストを提供します。NgModuleは関連するコードを機能的なセットに集約します。つまり、AngularアプリケーションはNgModuleのセットとして定義されます。アプリケーションは少なくともブートストラップのための *ルートモジュール* を常に持ち、普通はさらに多くの *フィーチャーモジュール* を持ちます。
 
 * コンポーネントは *ビュー* を定義します。ビューは、プログラムのロジックとデータの中からAngularが選択し、変更できる画面要素のセットです。すべてのアプリには、少なくともルートコンポーネントがあります。
@@ -16,6 +18,12 @@ Angularアプリケーションの基本となる構成要素は *NgModule* で�
 * サービスクラスのメタデータは、*Dependency Injection（DI）* を通してサービスをコンポーネントで使用可能にするためにAngularが必要とする情報を提供します。
 
 アプリのコンポーネントは通常、階層的に配置された多数のビューを定義します。 Angularは、ビュー間のナビゲーションパスを定義するための`Router`サービスを提供します。ルーターは、高度なブラウザ内ナビゲーション機能を提供します。
+
+<div class="alert is-helpful>
+
+  See the [Angular Glossary](guide/glossary) for basic definitions of important Angular terms and usage.
+
+</div>
 
 ## モジュール {@a modules}
 
@@ -113,9 +121,9 @@ Angularの`Router` NgModuleは、アプリケーションのさまざまなア�
 
 Angularアプリケーションの主要な構成要素についての基礎を学びました。次の図は、これらの基本パーツがどのように関連しているかを示しています。
 
-<figure>
-  <img src="generated/images/guide/architecture/overview2.png" alt="概要">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/overview2.png" alt="overview">
+</div>
 
 * コンポーネントとテンプレートを合わせて、Angularのビューを定義します。
   * コンポーネントクラスのデコレーターは、関連するテンプレートへの参照を含むメタデータを追加します。

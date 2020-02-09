@@ -1,13 +1,17 @@
 <h1 class="no-toc">ツアー・オブ・ヒーローズ アプリケーションとチュートリアル</h1>
 
 <div class="callout is-helpful">
-<header>入門チュートリアル</header>
+<header>入門</header>
 
 
 もしあなたがAngular未経験であれば、 [**入門チュートリアル**](start) を見てください。
 入門チュートリアルはこのツアー・オブ・ヒーローズと同じ主要なトピック &mdash; コンポーネント、テンプレート構文、ルーティング、サービス、HTTP経由のデータアクセス &mdash; を凝縮したフォーマットでカバーし、最新のベストプラクティスにしたがっています。
 
-**このツアー・オブ・ヒーローズチュートリアル** は一連のドキュメンテーション中の多くの例の概念的な基礎です。この導入ページを読むことで、それらの例を扱うのに十分な文脈が得られます。これら以外の例を理解するためにこのチュートリアルを行う必要はありません。 Tour of Heroesチュートリアルは、コンテキストと継続性のためにここで管理されています。
+In this tutorial, you build your own app from the ground up, providing experience with the development process as well as a more thorough introduction to basic concepts.
+
+**このツアー・オブ・ヒーローズチュートリアル** は一連のドキュメンテーション中の多くの例の概念的な基礎です。
+この導入ページを読むことで、それらの例を扱うのに十分な文脈が得られます。
+これら以外の例を理解するためにこのチュートリアルを行う必要はありません。 Tour of Heroesチュートリアルは、コンテキストと継続性のためにここで管理されています。
 
 </div> 
 
@@ -46,26 +50,26 @@ Angularを始めるためにAngularのことを十分に学び、Angularは必�
 これは、このチュートリアルがもっとも勇敢なヒーローを表示するダッシュボードから始まり、どこに誘導するか
 という視覚的アイデアです。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/toh/heroes-dashboard-1.png' alt="Output of heroes dashboard">
-</figure>
+</div>
 
 ダッシュボード上の2つのリンク("Dashboard" と "Heroes")をクリックすることができ、
 このダッシュボード画面とヒーローの画面を遷移します。
 
 ダッシュボードで"Magneta"というヒーローをクリックしたら、ルーターはヒーローの名前を編集できる"Hero Details"画面を開きます。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/toh/hero-details-1.png' alt="Details of hero in app">
-</figure>
+</div>
 
 ”Back"ボタンをクリックすることでダッシュボードに戻ります。
 上部にあるリンクは個々のメインビューに遷移させます。
 "Heroes"をクリックしたら、アプリケーションは"Heroes"のマスターリストのビューを表示します。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/toh/heroes-list-2.png' alt="Output of heroes list app">
-</figure>
+</div>
 
 別のヒーローの名前をクリックすると、リストの下にある読み取り専用の小さな詳細ビューが、新しく選択されたものを反映します。
 
@@ -73,12 +77,12 @@ Angularを始めるためにAngularのことを十分に学び、Angularは必�
 
 次の図はすべての遷移の選択肢をキャプチャしたものです。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
-</figure>
+</div>
 
 以下がアプリケーションでユーザーがアクションを取っている様子です。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/toh/toh-anim.gif' alt="Tour of Heroes in Action">
-</figure>
+</div>

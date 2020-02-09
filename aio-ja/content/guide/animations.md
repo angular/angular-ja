@@ -69,9 +69,9 @@ Angularアニメーションをプロジェクトに追加するには、標準�
 
 HTMLでは、これらの属性は色や不透明度などの通常のCSSスタイルを使用して設定されます。Angularでは、`style()`関数を使用して、アニメーションで使用する一連のCSSスタイルを指定します。アニメーションの状態に対して一連のスタイルをまとめて、その状態に対して`open`や`closed`などの名前を付けることができます。
 
-<figure>
-<img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
+</div>
 
 ### アニメーションの状態とスタイル
 
@@ -93,7 +93,7 @@ Angularの`state()`関数がCSSスタイル属性を設定する`style⁣()`関�
 
 Angularでは、アニメーションなしで複数のスタイルを設定できます。しかし、このままでは、ボタンはフェード、収縮やその他の変化が起きたことを視認できるなにかがなく瞬時に変形されます。
 
-突然の変形をなくすためには、アニメーションの*遷移*を定義して一定の期間にわたってある状態と別の状態の間で発生する変更を指定する必要があります。`transition()`関数は2つの引数を受け取ります。最初の引数は2つの遷移状態間の方向を定義する式を受け取り、2つ目の引数は `animate()`関数を受け取ります。
+突然の変形をなくすためには、アニメーションの*遷移*を定義して一定の期間にわたってある状態と別の状態の間で発生する変更を指定する必要があります。`transition()`関数は2つの引数を受け取ります。最初の引数は2つの遷移状態間の方向を定義する式を受け取り、2つ目の引数は ひとつまたは複数の `animate()`関数を受け取ります。
 
 
 デュレーション、ディレイ、イージングを定義したり、遷移の実行中にスタイルを定義するスタイル関数を指定するには、`animate()`関数を使用します。`animate()`関数を使用して複数ステップアニメーションの`keyframes()`関数を定義することもできます。これらの定義は`animate()`関数の第2引数に置かれます。
@@ -166,9 +166,9 @@ region="transition2">
 
 この例では、トリガーに`openClose`という名前をつけて、`button`要素にアタッチします。トリガーには、`open`状態と`close`状態、および2つの遷移のタイミングを記述します。
 
-<figure>
-<img src="generated/images/guide/animations/triggering-the-animation.png" alt="triggering the animation">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/triggering-the-animation.png" alt="triggering the animation">
+</div>
 
 <div class="alert is-helpful">
 

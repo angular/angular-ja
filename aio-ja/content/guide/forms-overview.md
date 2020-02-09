@@ -67,9 +67,9 @@ Angularは、フォームを通じてユーザー入力を処理するための2
 
 特定の時点のform要素の値と状態は、真のソースが提供します。リアクティブフォームでは、フォームモデルが真のソースになります。上記の例では、フォームモデルは`FormControl`インスタンスです。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms-overview/key-diff-reactive-forms.png" alt="Reactive forms key differences">
-</figure>
+</div>
 
 リアクティブフォームでは、フォームモデルはコンポーネントクラスで明示的に定義されています。次に、リアクティブフォームディレクティブ(この場合は`FormControlDirective`)は、値アクセサ(`ControlValueAccessor`インスタンス)を使って既存の`FormControl`インスタンスをビュー内の特定のform要素にリンクします。
 
@@ -82,9 +82,9 @@ Angularは、フォームを通じてユーザー入力を処理するための2
 
 テンプレート駆動フォームでは、真のソースはテンプレートです。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms-overview/key-diff-td-forms.png" alt="Template-driven forms key differences">
-</figure>
+</div>
 
 フォームモデルの抽象化により、構造化するよりも単純さが増します。テンプレート駆動のフォームディレクティブ`NgModel`が、与えられたform要素の`FormControl`インスタンスを作成し管理する責務を持ちます。明示的ではありませんが、フォームモデルを直接制御する必要がなくなります。
 
@@ -98,9 +98,9 @@ Angularでフォームを作成するときは、フレームワークがユー�
 
 さきほど説明したように、リアクティブフォームでは、ビュー内の各form要素はフォームモデル(`FormControl`インスタンス)に直接リンクされています。ビューからモデルへの更新とモデルからビューへの更新は同期的であり、レンダリングされたUIには依存しません。次の図では、同じお気に入りの色の例を使用して、入力フィールドの値がビューから変更されたときと、モデルから変更されたときのデータフローを説明しています。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms-overview/dataflow-reactive-forms-vtm.png" alt="Reactive forms data flow - view to model" width="100%">
-</figure>
+</div>
 
 次の手順は、ビューからモデルへのデータフローの概要です。
 
@@ -110,9 +110,9 @@ Angularでフォームを作成するときは、フレームワークがユー�
 1. `FormControl`インスタンスは`valueChanges`オブジェクトを通して新しい値を発行します。
 1. `valueChanges`Observableのサブスクライバーが新しい値を受け取ります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms-overview/dataflow-reactive-forms-mtv.png" alt="Reactive forms data flow - model to view" width="100%">
-</figure>
+</div>
 
 次の手順は、モデルからビューへのデータフローの概要です。
 
@@ -125,9 +125,9 @@ Angularでフォームを作成するときは、フレームワークがユー�
 
 テンプレート駆動フォームでは、各form要素はフォームモデルを内部的に管理するディレクティブにリンクされています。次の図では、同じお気に入りの色の例を使用して、入力フィールドの値がビューから変更されたときと、モデルから変更されたときのデータフローを説明しています。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms-overview/dataflow-td-forms-vtm.png" alt="Template-driven forms data flow - view to model" width="100%">
-</figure>
+</div>
 
 次の手順は、入力値が*Red*から*Blue*に変化したときのビューからモデルへのデータフローの概要です。
 
@@ -140,9 +140,9 @@ Angularでフォームを作成するときは、フレームワークがユー�
 1. コンポーネントテンプレートは`favoriteColor`プロパティに双方向データバインディングを使っているので、コンポーネントの`favoriteColor`プロパティは
 `ngModelChange`イベント(*Blue*)によって発行された値に更新されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms-overview/dataflow-td-forms-mtv.png" alt="Template-driven forms data flow - model to view" width="100%">
-</figure>
+</div>
 
 次の手順は、`favoriteColor`が*Blue*から*Red*に変わったときのモデルからビューへのデータフローの概要です。
 
@@ -271,4 +271,3 @@ Angularでフォームを作成するときは、フレームワークがユー�
 
 * [テンプレート駆動フォーム](guide/forms#template-driven-forms)
 * [フォームバリデーション](guide/form-validation#template-driven-validation)
-

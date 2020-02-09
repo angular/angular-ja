@@ -44,7 +44,7 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 <code-example path="observables-in-angular/src/main.ts" header="ルーターイベント" region="router"></code-example>
 
-[ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivateRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
+[ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivatedRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
 
 <code-example path="observables-in-angular/src/main.ts" header="ActivatedRoute" region="activated_route"></code-example>
 

@@ -1,4 +1,4 @@
-# Server-side Rendering (SSR): An intro to Angular Universal
+# Server-side rendering (SSR) with Angular Universal
 
 This guide describes **Angular Universal**, a technology that renders Angular applications on the server.
 
@@ -26,14 +26,14 @@ The CLI schematic `@nguniversal/express-engine` performs the required steps, as 
 The [Tour of Heroes tutorial](tutorial) is the foundation for this walkthrough.
 
 In this example, the Angular CLI compiles and bundles the Universal version of the app with the
-[Ahead-of-Time (AoT) compiler](guide/aot-compiler).
+[Ahead-of-Time (AOT) compiler](guide/aot-compiler).
 A Node Express web server compiles HTML pages with Universal based on client requests.
 
 To create the server-side app module, `app.server.module.ts`, run the following CLI command.
 
 <code-example language="bash">
 
-ng add @nguniversal/express-engine --clientProject angular.io-example
+ng add @nguniversal/express-engine
 
 </code-example>
 
@@ -53,7 +53,6 @@ tsconfig.app.json            <i>TypeScript client configuration</i>
 tsconfig.server.json         <i>* TypeScript server configuration</i>
 tsconfig.spec.json           <i>TypeScript spec configuration</i>
 package.json                 <i>npm configuration</i>
-webpack.server.config.js     <i>* webpack server configuration</i>
 </code-example>
 
 The files marked with `*` are new and not in the original tutorial sample.
@@ -152,7 +151,7 @@ The sample web server for this guide is based on the popular [Express](https://e
 
 <div class="alert is-helpful">
 
-  **Note:** _Any_ web server technology can serve a Universal app as long as it can call Universal's `renderModuleFactory()` function.
+  **Note:** _Any_ web server technology can serve a Universal app as long as it can call Universal's `renderModule()` function.
   The principles and decision points discussed here apply to any web server technology.
 
 </div>
@@ -162,15 +161,15 @@ server implementations of the DOM, `XMLHttpRequest`, and other low-level feature
 
 The server ([Node Express](https://expressjs.com/) in this guide's example)
 passes client requests for application pages to the NgUniversal `ngExpressEngine`. Under the hood, this
-calls Universal's `renderModuleFactory()` function, while providing caching and other helpful utilities.
+calls Universal's `renderModule()` function, while providing caching and other helpful utilities.
 
-The `renderModuleFactory()` function takes as inputs a *template* HTML page (usually `index.html`),
+The `renderModule()` function takes as inputs a *template* HTML page (usually `index.html`),
 an Angular *module* containing components,
 and a *route* that determines which components to display.
 The route comes from the client's request to the server.
 
 Each request results in the appropriate view for the requested route.
-The `renderModuleFactory()` function renders the view within the `<app>` tag of the template,
+The `renderModule()` function renders the view within the `<app>` tag of the template,
 creating a finished HTML page for the client.
 
 Finally, the server returns the rendered page to the client.
@@ -215,7 +214,7 @@ import {REQUEST} from '@nguniversal/express-engine/tokens';
 @Injectable()
 export class UniversalInterceptor implements HttpInterceptor {
 
-  constructor(@Optional() @Inject(REQUEST) protected request: Request) {}
+  constructor(@Optional() @Inject(REQUEST) protected request?: Request) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     let serverReq: HttpRequest<any> = req;
@@ -263,7 +262,7 @@ The important bit in the `server.ts` file is the `ngExpressEngine()` function.
 <code-example path="universal/server.ts" header="server.ts" region="ngExpressEngine">
 </code-example>
 
-The `ngExpressEngine()` function is a wrapper around Universal's `renderModuleFactory()` function which turns a client's
+The `ngExpressEngine()` function is a wrapper around Universal's `renderModule()` function which turns a client's
 requests into server-rendered HTML pages.
 
 * The first parameter is `AppServerModule`.
@@ -282,7 +281,7 @@ which then forwards it to the client in the HTTP response.
 
 <div class="alert is-helpful">
 
-  **Note:**  These wrappers help hide the complexity of the `renderModuleFactory()` function. There are more wrappers
+  **Note:**  These wrappers help hide the complexity of the `renderModule()` function. There are more wrappers
   for different backend technologies at the [Universal repository](https://github.com/angular/universal).
 
 </div>

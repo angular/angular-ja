@@ -949,7 +949,7 @@ RxJSの`Subject`として定義されていて、マルチキャストする`Obs
 
 </div>
 
-## セキュリティ: XSRFプロテクション
+## セキュリティ: XSRFプロテクション {@a security-xsrf-protection}
 
 [XSRF(Cross-Site Request Forgery)](https://en.wikipedia.org/wiki/Cross-site_request_forgery)は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。
 `HttpClient`は、XSRF攻撃を防ぐための[共通メカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token)をサポートしています。

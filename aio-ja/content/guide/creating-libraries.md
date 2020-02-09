@@ -107,7 +107,7 @@ NgModule を使用してサービスとコンポーネントを公開します�
 
 詳細については、[Schematics の概要](guide/schematics) および [ライブラリの Schematics](guide/schematics-for-libraries) を参照してください。
 
-## ライブラリを公開する
+## ライブラリを公開する {@a publishing-your-library}
 
 Angular CLI と npm パッケージマネージャーを使用して、ライブラリを npm パッケージとしてビルドおよび公開します。 It is not recommended to publish Ivy libraries to NPM repositories. Before publishing a library to NPM, build it using the `--prod` flag which will use the older compiler and runtime known as View Engine instead of Ivy.
 

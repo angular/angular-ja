@@ -125,9 +125,9 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 ブラウザの開発者ツールを使用して DOM を調査し、その事実を確認してください。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/element-not-in-dom.png' alt="ngIf=false element not in DOM">
-</figure>
+</div>
 
 
 
@@ -151,9 +151,9 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 見えない間も要素は DOM に残ります。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/element-display-in-dom.png' alt="hidden element still in DOM">
-</figure>
+</div>
 
 
 
@@ -211,9 +211,9 @@ Angular はデータバインディングに影響を与える可能性のある
 最初の形式は実際にはレンダリングされず、最終結果だけが DOM に入ります。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/hero-div-in-dom.png' alt="hero div in DOM">
-</figure>
+</div>
 
 
 
@@ -297,7 +297,7 @@ Angular は、現在のイテレーションで `NgFor`
 
 These microsyntax mechanisms are also available to you when you write your own structural directives.
 For example, microsyntax in Angular allows you to write `<div *ngFor="let item of items">{{item}}</div>`
-instead of `<ng-template ngFor [ngForOf]="items"><div>{{item}}</div></ng-template>`.
+instead of `<ng-template ngFor let-item [ngForOf]="items"><div>{{item}}</div></ng-template>`.
 The following sections provide detailed information on constraints, grammar,
 and translation of microsyntax.
 
@@ -559,9 +559,9 @@ Angular の _NgSwitch_ は、実際には `NgSwitch`、`NgSwitchCase`、およ�
 Angular は中央の "Hip!" を消去し、歓声と熱狂をやや抑えます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/template-rendering.png' alt="template tag rendering">
-</figure>
+</div>
 
 
 
@@ -617,9 +617,9 @@ CSS スタイルは新しいレイアウトを想定も対応もしないので�
 構築されたパラグラフは変にレンダリングされます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/bad-paragraph.png' alt="spanned paragraph with bad style">
-</figure>
+</div>
 
 
 
@@ -639,9 +639,9 @@ _options_ を条件付きの `<div>` または `<span>` で囲むことはでき
 ドロップダウンは空になります。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/bad-select.png' alt="spanned options don't work">
-</figure>
+</div>
 
 
 
@@ -662,9 +662,9 @@ Angular は _それを DOM 内に配置しません_。
 正しくレンダリングされます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/good-paragraph.png' alt="ngcontainer paragraph with proper style">
-</figure>
+</div>
 
 
 
@@ -678,9 +678,9 @@ Angular は _それを DOM 内に配置しません_。
 ドロップダウンは正しく動きます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/select-ngcontainer-anim.gif' alt="ngcontainer options work properly">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -828,9 +828,9 @@ Angular は、条件の値が変わるたびに `appUnless` プロパティを�
 `condition` が truthy のとき、上段 (A) パラグラフが削除され、下段 (B) パラグラフが表示されます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/unless-anim.gif' alt="UnlessDirective in action">
-</figure>
+</div>
 
 
 

@@ -111,9 +111,9 @@ BrowserModule`をインポートします。
 遅延読み込みされたフィーチャーモジュールに`BrowserModule`をインポートした場合、
 Angularは`CommonModule`を代わりに使用するように指示するエラーを返します。
 
-<figure>
- <img src="generated/images/guide/frequent-ngmodules/browser-module-error.gif" width=750 alt="BrowserModule error">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/frequent-ngmodules/browser-module-error.gif" width=750 alt="BrowserModule error">
+</div>
 
 <hr />
 

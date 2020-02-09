@@ -45,9 +45,9 @@ otherwise wrestle with yourself.
 
 You'll learn to build a template-driven form that looks like this:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-1.png" alt="Clean Form">
-</figure>
+</div>
 
 The *Hero Employment Agency* uses this form to maintain personal information about heroes.
 Every hero needs a job. It's the company mission to match the right hero with the right crisis.
@@ -56,9 +56,9 @@ Two of the three fields on this form are required. Required fields have a green 
 
 If you delete the hero name, the form displays a validation error in an attention-grabbing style:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-2.png" alt="Invalid, Name Required">
-</figure>
+</div>
 
 Note that the *Submit* button is disabled, and the "required" bar to the left of the input control changes from green to red.
 
@@ -272,9 +272,9 @@ you display its name using the interpolation syntax.
 
 Running the app right now would be disappointing.
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-3.png" alt="Early form with no binding">
-</figure>
+</div>
 
 
 You don't see hero data because you're not binding to the `Hero` yet.
@@ -335,9 +335,9 @@ adding and deleting characters, you'd see them appear and disappear
 from the interpolated text.
 At some point it might look like this:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/ng-model-in-action.png" alt="ngModel in action">
-</figure>
+</div>
 
 The diagnostic is evidence that values really are flowing from the input box to the model and
 back again.
@@ -383,9 +383,9 @@ After revision, the core of the form should look like this:
 
 If you run the app now and change every hero model property, the form might display like this:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/ng-model-in-action-2.png" alt="ngModel in action">
-</figure>
+</div>
 
 The diagnostic near the top of the form
 confirms that all of your changes are reflected in the model.
@@ -483,15 +483,15 @@ Follow these steps *precisely*:
 
 The actions and effects are as follows:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/control-state-transitions-anim.gif" alt="Control State Transition">
-</figure>
+</div>
 
 You should see the following transitions and class names:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/ng-control-class-changes.png" alt="Control state transitions">
-</figure>
+</div>
 
 The `ng-valid`/`ng-invalid` pair is the most interesting, because you want to send a
 strong visual signal when the values are invalid. You also want to mark required fields.
@@ -504,9 +504,9 @@ To create such visual feedback, add definitions for the `ng-*` CSS classes.
 You can mark required fields and invalid data at the same time with a colored bar
 on the left of the input box:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/validity-required-indicator.png" alt="Invalid Form">
-</figure>
+</div>
 
 You achieve this effect by adding these class definitions to a new `forms.css` file
 that you add to the project as a sibling to `index.html`:
@@ -525,9 +525,9 @@ Leverage the control's state to reveal a helpful message.
 
 When the user deletes the name, the form should look like this:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/name-required-error.png" alt="Name required">
-</figure>
+</div>
 
 To achieve this effect, extend the `<input>` tag with the following:
 

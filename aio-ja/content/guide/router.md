@@ -770,17 +770,17 @@ Once the app warms up, you'll see a row of navigation buttons
 and the *Heroes* view with its list of heroes.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/hero-list.png' alt="Hero List">
-</figure>
+</div>
 
 
 
 Select one hero and the app takes you to a hero editing screen.
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/hero-detail.png' alt="Crisis Center Detail">
-</figure>
+</div>
 
 
 
@@ -795,9 +795,9 @@ Angular app navigation updates the browser history as normal web navigation does
 Now click the *Crisis Center* link for a list of ongoing crises.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/crisis-center-list.png' alt="Crisis Center List">
-</figure>
+</div>
 
 
 
@@ -808,9 +808,9 @@ Alter the name of a crisis.
 Notice that the corresponding name in the crisis list does _not_ change.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/crisis-center-detail.png' alt="Crisis Center Detail">
-</figure>
+</div>
 
 
 
@@ -824,9 +824,9 @@ Click the browser back button or the "Heroes" link instead.
 Up pops a dialog box.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/confirm-dialog.png' alt="Confirm Dialog">
-</figure>
+</div>
 
 
 
@@ -847,9 +847,9 @@ Proceed to the first application milestone.
 Begin with a simple version of the app that navigates between two empty views.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/router-1-anim.gif' alt="App in action">
-</figure>
+</div>
 
 {@a import}
 
@@ -932,9 +932,9 @@ Registering the `RouterModule.forRoot()` in the `AppModule` imports makes the `R
 The root `AppComponent` is the application shell. It has a title, a navigation bar with two links, and a router outlet where the router swaps components on and off the page. Here's what you get:
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/shell-and-outlet.png' alt="Shell">
-</figure>
+</div>
 
 The router outlet serves as a placeholder when the routed components will be rendered below it.
 
@@ -1268,7 +1268,7 @@ The **Routing Module** has several characteristics:
 
 The sample routing application does not include routing by default.
 When you use the [Angular CLI](cli) to create a project that will use routing, set the `--routing` option for the project or app, and for each NgModule.
-When you create or initialize a new project (using the CLI [`ng new`](cli/new) command) or a new app (using the [`ng generate app`](cli/generate) command), specify the `--routing` option.  This tells the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
+When you create or initialize a new project (using the CLI [`ng new`](cli/new) command) or a new app (using the [`ng generate app`](cli/generate) command), specify the `--routing` option. This tells the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
 You can then use routing in any NgModule that you add to the project or app.
 
 For example, the following command generates an NgModule that can use routing.
@@ -1293,7 +1293,7 @@ Create an `AppRouting` module in the `/app` folder to contain the routing config
 
 Import the `CrisisListComponent`, `HeroListComponent`, and `PageNotFoundComponent` symbols
 just like you did in the `app.module.ts`. Then move the `Router` imports
-and routing configuration, including `RouterModule.forRoot`, into this routing module.
+and routing configuration, including `RouterModule.forRoot()`, into this routing module.
 
 Re-export the Angular `RouterModule` by adding it to the module `exports` array.
 By re-exporting the `RouterModule` here the components declared in `AppModule` will have access to router directives such as `RouterLink` and `RouterOutlet`.
@@ -1302,7 +1302,7 @@ After these steps, the file should look like this.
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts"></code-example>
 
-Next, update the `app.module.ts` file, removing `RouterModule.forRoot` in 
+Next, update the `app.module.ts` file, removing `RouterModule.forRoot` in
 the `imports` array.
 
 <code-example path="router/src/app/app.module.2.ts" header="src/app/app.module.ts"></code-example>
@@ -1367,9 +1367,9 @@ from the <live-example name="toh-pt4" title="Tour of Heroes: Services example co
 Here's how the user will experience this version of the app:
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/router-2-anim.gif' alt="App in action">
-</figure>
+</div>
 
 
 
@@ -1409,7 +1409,7 @@ Follow these steps:
 
   * Change the component class name to `HeroListComponent`.
   * Change the `selector` to `app-hero-list`.
-  
+
 <div class="alert is-helpful">
 
    Selectors are **not required** for _routed components_ due to the components are dynamically inserted when the page is rendered, but are useful for identifying and targeting them in your HTML element tree.
@@ -1481,7 +1481,7 @@ When you're done, you'll have these *hero management* files:
 
     <div class='file'>
       hero.service.ts
-    </div>    
+    </div>
 
     <div class='file'>
       hero.ts
@@ -1489,7 +1489,7 @@ When you're done, you'll have these *hero management* files:
 
     <div class='file'>
       heroes-routing.module.ts
-    </div>    
+    </div>
 
     <div class='file'>
       heroes.module.ts
@@ -1594,7 +1594,7 @@ Remove the `HeroListComponent` from the `AppModule`'s `declarations` because it'
 After these steps, the `AppModule` should look like this:
 
 
-<code-example path="router/src/app/app.module.3.ts" header="src/app/app.module.ts"></code-example>
+<code-example path="router/src/app/app.module.3.ts" header="src/app/app.module.ts" region="remove-heroes"></code-example>
 
 
 
@@ -1948,9 +1948,9 @@ For example, when returning to the hero-detail.component.ts list from the hero d
 it would be nice if the viewed hero was preselected in the list.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero">
-</figure>
+</div>
 
 
 
@@ -2133,9 +2133,9 @@ Add some styles to apply when the list item is selected.
 
 When the user navigates from the heroes list to the "Magneta" hero and back, "Magneta" appears selected:
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected List">
-</figure>
+</div>
 
 
 
@@ -2527,9 +2527,9 @@ to conform to the following recommended pattern for Angular applications:
 If your app had many feature areas, the app component trees might look like this:
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/component-tree.png' alt="Component Tree">
-</figure>
+</div>
 
 
 
@@ -2793,9 +2793,9 @@ It displays a simple form with a header, an input box for the message,
 and two buttons, "Send" and "Cancel".
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/router/contact-popup.png' alt="Contact popup">
-</figure>
+</div>
 
 
 
@@ -3601,7 +3601,7 @@ of its values. You use the `take` operator with an argument of `1` to ensure tha
 Observable completes after retrieving the first value from the Observable returned by the
 `getCrisis` method.
 
-If it doesn't return a valid `Crisis`, return an empty `Observable`, canceling the previous in-flight navigation to the `CrisisDetailComponent` and navigate the user back to the `CrisisListComponent`. The update resolver service looks like this:
+If it doesn't return a valid `Crisis`, return an empty `Observable`, canceling the previous in-flight navigation to the `CrisisDetailComponent` and navigate the user back to the `CrisisListComponent`. The updated resolver service looks like this:
 
 <code-example path="router/src/app/crisis-center/crisis-detail-resolver.service.ts" header="src/app/crisis-center/crisis-detail-resolver.service.ts"></code-example>
 
@@ -3630,7 +3630,7 @@ The `CrisisDetailResolverService` doesn't inherit from a base class.
 The router looks for that method and calls it if found.
 
 1. Rely on the router to call the resolver.
-Don't worry about all the ways that the user  could navigate away.
+Don't worry about all the ways that the user could navigate away.
 That's the router's job. Write this class and let the router take it from there.
 
 The relevant *Crisis Center* code for this milestone follows.
@@ -3865,7 +3865,7 @@ and remove the `AdminModule` from the NgModule's `imports` array.
 
 You're already protecting the `AdminModule` with a `CanActivate` guard that prevents unauthorized users from
 accessing the admin feature area.
-It redirects to the  login page if the user is not authorized.
+It redirects to the login page if the user is not authorized.
 
 But the router is still loading the `AdminModule` even if the user can't visit any of its components.
 Ideally, you'd only load the `AdminModule` if the user is logged in.
@@ -4289,7 +4289,7 @@ Here's the *Crisis Center* URL in this "HTML5 pushState" style:
 Older browsers send page requests to the server when the location URL changes
 _unless_ the change occurs after a "#" (called the "hash").
 Routers can take advantage of this exception by composing in-application route
-URLs with hashes.  Here's a "hash URL" that routes to the *Crisis Center*.
+URLs with hashes. Here's a "hash URL" that routes to the *Crisis Center*.
 
 
 <code-example format="nocode">

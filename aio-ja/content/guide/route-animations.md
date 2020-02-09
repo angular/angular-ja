@@ -25,9 +25,9 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 </br>
 
-<figure>
-<img src="generated/images/guide/animations/route-animation.gif" alt="Animations in action" width="440">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/animations/route-animation.gif" alt="Animations in action" width="440">
+</div>
 
 ## ルーティング設定
 
@@ -67,7 +67,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 <code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="prepare-router-outlet" language="typescript"></code-example>
 
-ここで、`prepareRoute()`メソッドは出力ディレクティブ(`#outlet="outlet"`によって確立されます)の値をとり、アクティブなルーティングのカスタムデータに基づいて、アニメーションの状態を表す文字列値を返します。 このデータを使用して、各ルーティングに対して実行する遷移を制御できます。
+ここで、`prepareRoute()`メソッドはアウトレットディレクティブ(`#outlet="outlet"`によって確立されます)の値をとり、アクティブなルーティングのカスタムデータに基づいて、アニメーションの状態を表す文字列値を返します。 このデータを使用して、各ルーティングに対して実行する遷移を制御できます。
 
 ## アニメーション定義
 
@@ -107,7 +107,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 *Home => About*へ遷移しているとしましょう。
 
-<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="query" language="typescript"></code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts (Continuation from above)" region="query" language="typescript"></code-example>
 
 このアニメーションコードは、ビューをスタイリングした後、次の処理を行います:
 

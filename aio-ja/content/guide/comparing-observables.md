@@ -21,46 +21,47 @@ Observable はしばしば Promise と比較されます。主な違いは次の
 
 * Observable は、消費者が購読するまで実行されません。`subscribe()` は定義された振る舞いを一度実行し、再び呼び出すことができます。各サブスクリプションには独自の計算機能があります。再購読によって値の再計算が行われます。
 
-<code-example hideCopy>
-// declare a publishing operation
-new Observable((observer) => { subscriber_fn });
-// initiate execution
-observable.subscribe(() => {
-      // observer handles notifications
-    });
-</code-example>
+  <code-example 
+    path="comparing-observables/src/observables.ts" 
+    header="src/observables.ts (observable)" 
+    region="observable">
+  </code-example>
 
 * Promise はすぐに、一度だけ実行されます。結果の計算は Promise が作成されたときに開始されます。作業を再開する方法はありません。 すべての `then` 句 (サブスクリプション) は同じ計算を共有します。
 
-<code-example hideCopy>
-// initiate execution
-new Promise((resolve, reject) => { executer_fn });
-// handle return value
-promise.then((value) => {
-      // handle result here
-    });
-</code-example>
+  <code-example 
+    path="comparing-observables/src/promises.ts" 
+    header="src/promises.ts (promise)"
+    region="promise">
+  </code-example>
 
 ### チェーンにする
 
 * Observable は map やサブスクリプションなどの変換機能を区別します。サブスクリプションだけがサブスクライバー機能をアクティブにして値の計算を開始します。
 
-<code-example hideCopy>observable.pipe(map((v) => 2*v));</code-example>
-
+  <code-example 
+    path="comparing-observables/src/observables.ts" 
+    header="src/observables.ts (chain)" 
+    region="chain">
+  </code-example>
 
 * Promise は最後の `.then` 節 (サブスクリプションに相当) と中間の `.then` 節 (mapに相当) を区別しません。
 
-<code-example hideCopy>promise.then((v) => 2*v);</code-example>
-
+  <code-example 
+    path="comparing-observables/src/observables.ts" 
+    header="src/observables.ts (unsubcribe)" 
+    region="unsubscribe">
+  </code-example>
 
 ### キャンセル処理
 
 * Observable のサブスクリプションはキャンセル可能です。サブスクライブ解除は、リスナーがそれ以上の値を受け取らないようにし、サブスクライバー関数に作業を取り消すよう通知します。
 
-<code-example hideCopy>
-const sub = obs.subscribe(...);
-sub.unsubscribe();
-</code-example>
+  <code-example 
+    path="comparing-observables/src/observables.ts" 
+    header="src/observables.ts (unsubcribe)" 
+    region="unsubscribe">
+  </code-example>
 
 * Promise はキャンセルできません。
 
@@ -68,19 +69,19 @@ sub.unsubscribe();
 
 * Observable の実行エラーはサブスクライバーのエラーハンドラーに渡され、サブスクライバーは Observable から自動的にサブスクライブを解除します。
 
-<code-example hideCopy>
-obs.subscribe(() => {
-  throw Error('my error');
-});
-</code-example>
+  <code-example 
+    path="comparing-observables/src/observables.ts" 
+    header="src/observables.ts (error)"
+    region="error">
+  </code-example>
 
 * Promise は子の Promise にエラーをプッシュします。
 
-<code-example hideCopy>
-promise.then(() => {
-      throw Error('my error');
-});
-</code-example>
+  <code-example 
+    path="comparing-observables/src/promises.ts" 
+    header="src/promises.ts (error)"
+    region="error">
+  </code-example>
 
 ### チートシート
 
@@ -98,14 +99,16 @@ promise.then(() => {
     <tr>
       <td>作成</td>
       <td>
-        <pre>new Observable((observer) => {
-    observer.next(123);
+        <pre>
+new Observable((observer) => {
+  observer.next(123);
   });</pre>
       </td>
       <td>
-        <pre>new Promise((resolve, reject) => {
-    resolve(123);
-  });</pre>
+        <pre>
+new Promise((resolve, reject) => {
+  resolve(123);
+});</pre>
       </td>
     </tr>
     <tr>
@@ -116,14 +119,16 @@ promise.then(() => {
     <tr>
       <td>サブスクライブ</td>
       <td>
-        <pre>sub = obs.subscribe((value) => {
-    console.log(value)
-  });</pre>
+        <pre>
+sub = obs.subscribe((value) => {
+  console.log(value)
+});</pre>
       </td>
       <td>
-        <pre>promise.then((value) => {
-    console.log(value);
-  });</pre>
+        <pre>
+promise.then((value) => {
+  console.log(value);
+});</pre>
       </td>
     </tr>
     <tr>
@@ -163,7 +168,6 @@ subscription.unsubscribe();</pre>
 <pre>function handler(e) {
   console.log(‘Clicked’, e);
 }
-
 // Setup & begin listening
 button.addEventListener(‘click’, handler);
 // Stop listening
@@ -312,6 +316,3 @@ Observable は時間とともに値を生成します。配列は静的な値の
     </td>
   </tr>
 </table>
-
-
-

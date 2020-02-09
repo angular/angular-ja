@@ -1,4 +1,4 @@
-# Structural Directives
+# Structural directives
 
 <style>
   h4 {font-size: 17px !important; text-transform: none !important;}
@@ -125,9 +125,9 @@ The `ngIf` directive doesn't hide elements with CSS. It adds and removes them ph
 Confirm that fact using browser developer tools to inspect the DOM.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/element-not-in-dom.png' alt="ngIf=false element not in DOM">
-</figure>
+</div>
 
 
 
@@ -151,9 +151,9 @@ A directive could hide the unwanted paragraph instead by setting its `display` s
 While invisible, the element remains in the DOM.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/element-display-in-dom.png' alt="hidden element still in DOM">
-</figure>
+</div>
 
 
 
@@ -211,9 +211,9 @@ Internally, Angular translates the `*ngIf` _attribute_ into a `<ng-template>` _e
 The first form is not actually rendered, only the finished product ends up in the DOM.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/hero-div-in-dom.png' alt="hero div in DOM">
-</figure>
+</div>
 
 
 
@@ -297,7 +297,7 @@ describes additional `NgFor` directive properties and context properties.
 
 These microsyntax mechanisms are also available to you when you write your own structural directives.
 For example, microsyntax in Angular allows you to write `<div *ngFor="let item of items">{{item}}</div>`
-instead of `<ng-template ngFor [ngForOf]="items"><div>{{item}}</div></ng-template>`.
+instead of `<ng-template ngFor let-item [ngForOf]="items"><div>{{item}}</div></ng-template>`.
 The following sections provide detailed information on constraints, grammar,
 and translation of microsyntax.
 
@@ -559,9 +559,9 @@ That's the fate of the middle "Hip!" in the phrase "Hip! Hip! Hooray!".
 Angular erases the middle "Hip!", leaving the cheer a bit less enthusiastic.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/template-rendering.png' alt="template tag rendering">
-</figure>
+</div>
 
 
 
@@ -617,9 +617,9 @@ You also have a CSS style rule that happens to apply to a `<span>` within a `<p>
 The constructed paragraph renders strangely.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/bad-paragraph.png' alt="spanned paragraph with bad style">
-</figure>
+</div>
 
 
 
@@ -639,9 +639,9 @@ When you try this,
 the drop down is empty.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/bad-select.png' alt="spanned options don't work">
-</figure>
+</div>
 
 
 
@@ -662,9 +662,9 @@ Here's the conditional paragraph again, this time using `<ng-container>`.
 It renders properly.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/good-paragraph.png' alt="ngcontainer paragraph with proper style">
-</figure>
+</div>
 
 
 
@@ -678,9 +678,9 @@ Now conditionally exclude a _select_ `<option>` with `<ng-container>`.
 The drop down works properly.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/select-ngcontainer-anim.gif' alt="ngcontainer options work properly">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -828,9 +828,9 @@ When the `condition` is falsy, the top (A) paragraph appears and the bottom (B) 
 When the `condition` is truthy, the top (A) paragraph is removed and the bottom (B) paragraph appears.
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/structural-directives/unless-anim.gif' alt="UnlessDirective in action">
-</figure>
+</div>
 
 
 

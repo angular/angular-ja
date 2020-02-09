@@ -1,4 +1,4 @@
-# HTTP
+# サーバーからデータの取得
 
 このチュートリアルではAngularの`HttpClient`を使用して、
 次のデータ永続の機能を追加します。
@@ -140,7 +140,7 @@ HTTPはリクエスト/レスポンスプロトコルです。
 ### `HttpClient.get()`はレスポンスデータを返す
 
 `HttpClient.get()`はデフォルトではレスポンスの本文を型のないJSONで返します。
-特定の型 `<Hero[]>` 指定をすると、その型のオブジェクトを返します。
+Applying the optional type specifier, `<Hero[]>` , adds TypeScript capabilities, which reduce errors during compile time.
 
 サーバーのデータAPIがJSONデータの形状を決定します。
 _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
@@ -513,9 +513,9 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 アプリを再度起動しましょう。*Dashboard*にて、検索ボックスで何かテキストを入力してください。
 ヒーロー名にマッチするような文字を入力すると、こんなふうに見えるはずです。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/toh/toh-hero-search.png' alt="Hero Search Component">
-</figure>
+</div>
 
 ## 最終的なコードレビュー
 

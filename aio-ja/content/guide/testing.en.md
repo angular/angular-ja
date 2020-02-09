@@ -41,9 +41,9 @@ It shows that Karma ran three tests that all passed.
 
 A chrome browser also opens and displays the test output in the "Jasmine HTML Reporter" like this.
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
-</figure>
+</div>
 
 Most people find this browser output easier to read than the console log.
 You can click on a test row to re-run just that test or click on a description to re-run the tests in the selected test group ("test suite").
@@ -186,7 +186,7 @@ When the CLI commands `ng test` and `ng e2e` are generally running the CI tests 
 
 There are configuration files for both the [Karma JavaScript test runner](https://karma-runner.github.io/latest/config/configuration-file.html)
 and [Protractor](https://www.protractortest.org/#/api-overview) end-to-end testing tool,
-which  you must adjust to start Chrome without sandboxing.
+which you must adjust to start Chrome without sandboxing.
 
 We'll be using [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) in these examples.
 
@@ -233,7 +233,7 @@ Now you can run the following commands to use the `--no-sandbox` flag:
 ## Enable code coverage reports
 
 The CLI can run unit tests and create code coverage reports.
-Code coverage reports show you  any parts of our code base that may not be properly tested by your unit tests.
+Code coverage reports show you any parts of our code base that may not be properly tested by your unit tests.
 
 To generate a coverage report run the following command in the root of your project.
 
@@ -241,7 +241,7 @@ To generate a coverage report run the following command in the root of your proj
   ng test --no-watch --code-coverage
 </code-example>
 
-When  the tests are complete, the command creates a new `/coverage` folder in the project. Open the `index.html` file to see a report with your source code and code coverage values.
+When the tests are complete, the command creates a new `/coverage` folder in the project. Open the `index.html` file to see a report with your source code and code coverage values.
 
 If you want to create code-coverage reports every time you test, you can set the following option in the CLI configuration file, `angular.json`:
 
@@ -352,10 +352,19 @@ array of the services that you'll test or mock.
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
   region="value-service-before-each"
-  header="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach">
+  header="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach)">
 </code-example>
 
-Then inject it inside a test by calling `TestBed.get()` with the service class as the argument.
+Then inject it inside a test by calling `TestBed.inject()` with the service class as the argument.
+
+<div class="alert is-helpful">
+
+**Note:** We used to have `TestBed.get()` instead of `TestBed.inject()`.
+The `get` method wasn't type safe, it always returned `any`, and this is error prone.
+We decided to migrate to a new function instead of updating the existing one given
+the large scale use that would have an immense amount of breaking changes.
+
+</div>
 
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
@@ -608,6 +617,16 @@ It also generates an initial test file for the component, `banner-external.compo
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v1"
   header="app/banner/banner-external.component.spec.ts (initial)"></code-example>
+
+<div class="alert is-helpful">
+
+Because `compileComponents` is asynchronous, it uses
+the [`async`](api/core/testing/async) utility
+function imported from `@angular/core/testing`.
+
+Please refer to the [async](#async) section for more details.
+
+</div>
 
 #### Reduce the setup
 
@@ -1060,16 +1079,16 @@ The component injector is a property of the fixture's `DebugElement`.
   header="WelcomeComponent's injector">
 </code-example>
 
-{@a testbed-get}
+{@a testbed-inject}
 
-#### _TestBed.get()_
+#### _TestBed.inject()_
 
-You _may_ also be able to get the service from the root injector via `TestBed.get()`.
+You _may_ also be able to get the service from the root injector via `TestBed.inject()`.
 This is easier to remember and less verbose.
 But it only works when Angular injects the component with the service instance in the test's root injector.
 
 In this test suite, the _only_ provider of `UserService` is the root testing module,
-so it is safe to call `TestBed.get()` as follows:
+so it is safe to call `TestBed.inject()` as follows:
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
@@ -1079,7 +1098,7 @@ so it is safe to call `TestBed.get()` as follows:
 
 <div class="alert is-helpful">
 
-For a use case in which `TestBed.get()` does not work,
+For a use case in which `TestBed.inject()` does not work,
 see the [_Override component providers_](#component-override) section that
 explains when and why you must get the service from the component's injector instead.
 
@@ -1101,7 +1120,7 @@ a clone of the provided `userServiceStub`.
 
 #### Final setup and tests
 
-Here's the complete `beforeEach()`, using `TestBed.get()`:
+Here's the complete `beforeEach()`, using `TestBed.inject()`:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" header="app/welcome/welcome.component.spec.ts"></code-example>
 
@@ -1242,19 +1261,19 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 
 #### The _tick()_ function
 
-You do have to call `tick()` to advance the (virtual) clock.
+You do have to call [tick()](api/core/testing/tick) to advance the (virtual) clock.
 
-Calling `tick()` simulates the passage of time until all pending asynchronous activities finish.
+Calling [tick()](api/core/testing/tick) simulates the passage of time until all pending asynchronous activities finish.
 In this case, it waits for the error handler's `setTimeout()`.
 
-The `tick()` function accepts milliseconds as a parameter (defaults to 0 if not provided). The parameter represents how much the virtual clock advances. For example, if you have a `setTimeout(fn, 100)` in a `fakeAsync()` test, you need to use tick(100) to trigger the fn callback.
+The [tick()](api/core/testing/tick) function accepts milliseconds as a parameter (defaults to 0 if not provided). The parameter represents how much the virtual clock advances. For example, if you have a `setTimeout(fn, 100)` in a `fakeAsync()` test, you need to use tick(100) to trigger the fn callback.
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
   region="fake-async-test-tick">
 </code-example>
 
-The `tick()` function is one of the Angular testing utilities that you import with `TestBed`.
+The [tick()](api/core/testing/tick) function is one of the Angular testing utilities that you import with `TestBed`.
 It's a companion to `fakeAsync()` and you can only call it within a `fakeAsync()` body.
 
 #### Comparing dates inside fakeAsync()
@@ -1403,7 +1422,7 @@ in the real world.
 Notice that the quote element displays the placeholder value (`'...'`) after `ngOnInit()`.
 The first quote hasn't arrived yet.
 
-To flush the first quote from the observable, you call `tick()`.
+To flush the first quote from the observable, you call [tick()](api/core/testing/tick).
 Then call `detectChanges()` to tell Angular to update the screen.
 
 Then you can assert that the quote element displays the expected text.
@@ -1449,7 +1468,7 @@ When using an `intervalTimer()` such as `setInterval()` in `async()`, remember t
 #### _whenStable_
 
 The test must wait for the `getQuote()` observable to emit the next quote.
-Instead of calling `tick()`, it calls `fixture.whenStable()`.
+Instead of calling [tick()](api/core/testing/tick), it calls `fixture.whenStable()`.
 
 The `fixture.whenStable()` returns a promise that resolves when the JavaScript engine's
 task queue becomes empty.
@@ -1558,7 +1577,7 @@ you tell the `TestScheduler` to _flush_ its queue of prepared tasks like this.
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="test-scheduler-flush"></code-example>
 
-This step serves a purpose analogous to `tick()` and `whenStable()` in the
+This step serves a purpose analogous to [tick()](api/core/testing/tick) and `whenStable()` in the
 earlier `fakeAsync()` and `async()` examples.
 The balance of the test is the same as those examples.
 
@@ -1570,7 +1589,7 @@ Here's the marble testing version of the `getQuote()` error test.
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="error-test"></code-example>
 
-It's still an async test, calling `fakeAsync()` and `tick()`, because the component itself
+It's still an async test, calling `fakeAsync()` and [tick()](api/core/testing/tick), because the component itself
 calls `setTimeout()` when processing errors.
 
 Look at the marble observable definition.
@@ -2251,9 +2270,9 @@ tests with the `RouterTestingModule`.
 
 The `HeroDetailComponent` is a simple view with a title, two hero fields, and two buttons.
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/hero-detail.component.png' alt="HeroDetailComponent in action">
-</figure>
+</div>
 
 But there's plenty of template complexity even in this simple form.
 
@@ -2680,9 +2699,9 @@ A better solution is to create an artificial test component that demonstrates al
 
 <code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="test-component" header="app/shared/highlight.directive.spec.ts (TestComponent)"></code-example>
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/highlight-directive-spec.png' alt="HighlightDirective spec in action">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -2761,9 +2780,9 @@ Debug specs in the browser in the same way that you debug an application.
 1. Set a breakpoint in the test.
 1. Refresh the browser, and it stops at the breakpoint.
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/karma-1st-spec-debug.png' alt="Karma debugging">
-</figure>
+</div>
 
 <hr>
 
@@ -2955,7 +2974,7 @@ appropriate to the method, that is, the parameter of an `@NgModule`,
 {@a testbed-methods}
 {@a testbed-api-summary}
 
-The `TestBed` API consists of static class methods that either update or reference a _global_ instance of the`TestBed`.
+The `TestBed` API consists of static class methods that either update or reference a _global_ instance of the `TestBed`.
 
 Internally, all static methods cover methods of the current runtime `TestBed` instance,
 which is also returned by the `getTestBed()` function.
@@ -3074,8 +3093,8 @@ Here are the most important static methods, in order of likely utility.
 
   <tr>
     <td style="vertical-align: top">
-      {@a testbed-get}
-      <code>get</code>
+      {@a testbed-inject}
+      <code>inject</code>
     </td>
 
     <td>
@@ -3087,13 +3106,13 @@ Here are the most important static methods, in order of likely utility.
 
       What if the service is optional?
 
-      The `TestBed.get()` method takes an optional second parameter,
+      The `TestBed.inject()` method takes an optional second parameter,
       the object to return if Angular can't find the provider
       (`null` in this example):
 
       <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null" header="app/demo/demo.testbed.spec.ts"></code-example>
 
-      After calling `get`, the `TestBed` configuration is frozen for the duration of the current spec.
+      After calling `TestBed.inject`, the `TestBed` configuration is frozen for the duration of the current spec.
 
     </td>
   </tr>

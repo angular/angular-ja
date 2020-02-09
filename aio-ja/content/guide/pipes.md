@@ -5,7 +5,8 @@
 
 データが届いたあと、生の`toString`の値を直接ビューに挿入できますが、
 これがよいユーザー体験になることはめったにありません。
-たとえば、ほとんどのユースケースでは、ユーザーは<samp>Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)</samp>のような生の文字列ではなく、
+たとえば、ほとんどのユースケースでは、ユーザーは
+<samp>Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)</samp>のような生の文字列ではなく、
 <samp>1988年4月15日</samp>のような簡単な形式で日付を表示することを好みます。 
 
 明らかに、いくつかの値は少しの編集によって恩恵を受けます。多くのアプリケーションの内外で
@@ -21,7 +22,8 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 ## パイプを使う
 
 パイプは入力としてデータを取り込み、それを望んだ出力に変換します。
-このページでは、パイプを使用してコンポーネントの誕生日プロパティを人に優しい日付に変換します。
+このページでは、パイプを使用してコンポーネントの誕生日プロパティを
+人に優しい日付に変換します。
 
 
 <code-example path="pipes/src/app/hero-birthday1.component.ts" header="src/app/hero-birthday1.component.ts"></code-example>
@@ -41,9 +43,13 @@ Stackblitzの<live-example></live-example>を実行し、コードをダウン�
 
 
 
+
 ## ビルトインのパイプ
-Angularには`DatePipe`、`UpperCasePipe`、`LowerCasePipe`、`CurrencyPipe`や`PercentPipe`というようなパイプが付属しています。
+Angularには
+`DatePipe`、`UpperCasePipe`、`LowerCasePipe`、`CurrencyPipe`や`PercentPipe`というようなパイプが付属しています。
 それらはすべてテンプレートで使用できます。
+
+
 <div class="alert is-helpful">
 
 
@@ -57,9 +63,9 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 </div>
 
 
-{@a parameterizing-a-pipe}
 
-## パイプのパラメータ化
+
+## パイプのパラメータ化 {@a parameterizing-a-pipe}
 
 パイプは、任意の数のオプションパラメータを受け取り、その出力を微調整することができます。
 パイプにパラメータを追加するには、パイプ名の後にコロン（：）とパラメータ値を付けます（たとえば`currency:'EUR'`など）。
@@ -74,7 +80,9 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 
 
 パラメータ値には、文字列リテラルやコンポーネントプロパティなど、
-任意の有効なテンプレート式を使用できます（[テンプレート構文](guide/template-syntax)ページの[テンプレート式](guide/template-syntax#template-expressions)セクションを参照してください）。
+任意の有効なテンプレート式を使用できます
+（[テンプレート構文](guide/template-syntax)ページの
+[テンプレート式](guide/template-syntax#template-expressions)セクションを参照してください）。
 つまり、バインドを介して誕生日の値を制御するのと同じ方法で、バインディングを通じて書式を制御できます。
 
 パイプのformatパラメータをコンポーネントの`format`プロパティにバインドする、2番目のコンポーネントを記述します。
@@ -86,19 +94,21 @@ Angularは[付録](guide/pipes#no-filter-pipe)で説明されている理由の�
 
 
 また、テンプレートにボタンを追加し、そのクリックイベントをコンポーネントの`toggleFormat()`メソッドにバインドしました。
-このメソッドは、コンポーネントの`format`プロパティを短い書式（`'shortDate'`）と長い書式（`'fullDate'`）の間で切り替えます。
+このメソッドは、コンポーネントの`format`プロパティを
+短い書式（`'shortDate'`）と長い書式（`'fullDate'`）の間で切り替えます。
 
 
 <code-example path="pipes/src/app/hero-birthday2.component.ts" region="class" header="src/app/hero-birthday2.component.ts (class)"></code-example>
 
 
 
-ボタンをクリックすると、"**<samp>04/15/1988</samp>**"と"**<samp>Friday, April 15, 1988</samp>**"の間で切り替わります。
+ボタンをクリックすると、
+"**<samp>04/15/1988</samp>**"と
+"**<samp>Friday, April 15, 1988</samp>**"の間で切り替わります。
 
-
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/pipes/date-format-toggle-anim.gif' alt="Date Format Toggle">
-</figure>
+</div>
 
 
 
@@ -173,9 +183,9 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 <code-example path="pipes/src/app/power-booster.component.ts" header="src/app/power-booster.component.ts"></code-example>
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/pipes/power-booster.png' alt="Power Booster">
-</figure>
+</div>
 
 
 
@@ -216,9 +226,9 @@ Angularコアライブラリからインポートする`@Pipe`デコレーター
 
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/pipes/power-boost-calculator-anim.gif' alt="Power Boost Calculator">
-</figure>
+</div>
 
 
 
@@ -293,9 +303,9 @@ Flying Heroesアプリケーションは、
 チェックボックススイッチと追加の表示でコードを拡張し、これらの効果を体験するのに役立ちます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/pipes/flying-heroes-anim.gif' alt="Flying Heroes">
-</figure>
+</div>
 
 
 
@@ -469,9 +479,9 @@ Asyncパイプは、コンポーネントコードから定型文を削減しま
 コンポーネントは次のようにレンダリングされます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/pipes/hero-list.png' alt="Hero List">
-</figure>
+</div>
 
 
 

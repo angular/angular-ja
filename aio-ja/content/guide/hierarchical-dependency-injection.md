@@ -108,9 +108,9 @@ platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {...})
 `root`の`ModuleInjector`
 とその親インジェクターの関係を表しています。
 
- <figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection/injectors.svg" alt="NullInjector, ModuleInjector, root injector">
-</figure>
+</div>
 
 `root`という名前は特別なエイリアスですが、他の`ModuleInjector`にはエイリアスはありません。
 Routerが、子`ModuleInjector`を作成するように、
@@ -243,7 +243,7 @@ Angularの解決動作は、`@Optional()`、
 すべてさかのぼるまで検索を続けます。修飾子を使用すると、
 開始(自身)または終了の場所を変更できます。
 
-さらに、`@Host()`と`@Self()`、そして`@Skipself()`と`@Self()`を除くすべての修飾子を組み合わせることができます。
+さらに、`@Host()`と`@Self()`、そして`@SkipSelf()`と`@Self()`を除くすべての修飾子を組み合わせることができます。
 
 {@a optional}
 
@@ -320,7 +320,7 @@ Angularは`🍁`(カエデの葉)を無視して`🌿`(シダ)を使用します
 
 ``` ts
 class Person {
-  constructor(@Optional() @SkipSelf() parent: Person) {}
+  constructor(@Optional() @SkipSelf() parent?: Person) {}
 }
 ```
 
@@ -1096,10 +1096,9 @@ export class ChildComponent {
 * 他のコンポーネントの申告書に影響を与えずに納税申告書を変更することができます。
 * その納税申告書への変更を保存したり、それらをキャンセルすることができます。
 
-
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection/hid-heroes-anim.gif" alt="Heroes in action">
-</figure>
+</div>
 
 `HeroTaxReturnComponent`には変更を管理し復元するロジックがあるとします。
 それはシンプルなヒーローの納税申告書では簡単なタスクでしょう。
@@ -1168,9 +1167,9 @@ _編集中の納税申告書_は、ゲッターとセッターで実装されて
 コンポーネント(B)は、`CarService`の_さらに特殊化した_プロバイダーを定義する別のコンポーネント(C)の親でもあります。
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection/car-components.png" alt="car components">
-</figure>
+</div>
 
 舞台裏では、各コンポーネントは、そのコンポーネント自体に対して定義された0、1、または複数のプロバイダーを使用して各自のインジェクターを設定します。
 
@@ -1179,9 +1178,9 @@ _編集中の納税申告書_は、ゲッターとセッターで実装されて
 `Tires`インスタンスをルートインジェクター(A)から解決し取り出します。
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection/injector-tree.png" alt="car injector tree">
-</figure>
+</div>
 
 
 <hr />

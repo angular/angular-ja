@@ -1,4 +1,4 @@
-# サービス
+# サービスの作成
 
 Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ仮のデータを取得して表示している状態です。
 
@@ -11,15 +11,15 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 コンポーネントはデータの受け渡しに集中し、その他の処理はサービスクラスへ委譲するべきです。
 
 このチュートリアルでは、アプリケーション全体でヒーローを取得できる `HeroService` を作成します。
-そのサービスは `new` で生成するのではなく、
+そのサービスは [`new` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) で生成するのではなく、
 Angular による [*依存性の注入*](guide/dependency-injection) で、 
 `HeroesComponent` コンストラクターに注入します。
 
 サービスは、_お互いを知らない_ クラスの間で情報を共有する最適な方法です。
 このチュートリアル後半でも `MessageService` を作成し、次の2クラスに注入します。
 
-1. `HeroService`: メッセージを送信するため
-2. `MessagesComponent`: そのメッセージを表示するため
+1. メッセージを送信する`HeroService`への注入
+2. そのメッセージとユーザーがヒーローをクリックしたときにIDを表示する`MessagesComponent`への注入
 
 
 ## `HeroService` の作成
@@ -360,10 +360,20 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 ["最終的なコードレビュー"](#final-code-review) タブ内に記載されている `messages.component.css` をコンポーネントのスタイルに追加すると、このメッセージUIの外観はよりよいものになるでしょう。
 
-ブラウザの更新後、ページにはヒーローの一覧が表示されます。
-ページを下へスクロールすると、メッセージエリア内に `HeroService` からのメッセージを確認できます。
-また、"クリア" ボタンをクリックすると、メッセージ領域はなくなります。
+## Add additional messages to hero service
 
+The following example shows how to send and display a message each time the user clicks on
+a hero, showing a history of the user's selections. This will be helpful when you get to the
+next section on [Routing](tutorial/toh-pt5).
+
+<code-example header="src/app/heroes/heroes.component.ts"
+path="toh-pt4/src/app/heroes/heroes.component.ts">
+</code-example>
+
+The browser refreshes and the page displays the list of heroes.
+Refresh the browser to see the list of heroes, and scroll to the bottom to see the
+messages from the HeroService. Each time you click a hero, a new message appears to record
+the selection. Use the "clear" button to clear the message history.
 
 {@a final-code-review}
 

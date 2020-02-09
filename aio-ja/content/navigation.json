@@ -113,6 +113,42 @@
       "tooltip": "Angularの基礎",
       "children": [
         {
+          "title": "Angularの概念",
+          "tooltip": "Angularアプリケーションの基本概念の紹介",
+          "children": [
+            {
+              "url": "guide/architecture",
+              "title": "基本概念の紹介",
+              "tooltip": "Angularアプリケーションの基本構成要素",
+              "translated": true
+            },
+            {
+              "url": "guide/architecture-modules",
+              "title": "モジュールの紹介",
+              "tooltip": "NgModuleについて",
+              "translated": true
+            },
+            {
+              "url": "guide/architecture-components",
+              "title": "Componentの紹介",
+              "tooltip": "コンポーネント、テンプレート、およびビューについて。",
+              "translated": true
+            },
+            {
+              "url": "guide/architecture-services",
+              "title": "サービスとDIの紹介",
+              "tooltip": "サービスと依存性の注入について。",
+              "translated": true
+            },
+            {
+              "url": "guide/architecture-next-steps",
+              "title": "次のステップ",
+              "tooltip": "基本のその先へ。",
+              "translated": true
+            }
+          ]
+        },
+        {
           "title": "チュートリアル",
           "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
           "children": [
@@ -142,62 +178,26 @@
             },
             {
               "url": "tutorial/toh-pt3",
-              "title": "3. Master/Detail コンポーネント",
+              "title": "3. フィーチャーコンポーネントの作成",
               "tooltip": "Part 3: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
               "translated": true
             },
             {
               "url": "tutorial/toh-pt4",
-              "title": "4. サービス",
+              "title": "4. サービスの追加",
               "tooltip": "Part 4: ヒーローのデータを管理するための再利用可能なサービスを作ります",
               "translated": true
             },
             {
               "url": "tutorial/toh-pt5",
-              "title": "5. ルーティング",
+              "title": "5. アプリ内ナビゲーションの追加",
               "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
               "translated": true
             },
             {
               "url": "tutorial/toh-pt6",
-              "title": "6. HTTP",
+              "title": "6. サーバーからデータの取得",
               "tooltip": "Part 6: HTTPを使ってヒーローのデータを取得・保存します",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "title": "アーキテクチャ",
-          "tooltip": "Angularアプリケーションの基本構成要素",
-          "children": [
-            {
-              "url": "guide/architecture",
-              "title": "アーキテクチャ概要",
-              "tooltip": "Angularアプリケーションの基本構成要素",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-modules",
-              "title": "モジュールの紹介",
-              "tooltip": "NgModuleについて",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-components",
-              "title": "Componentの紹介",
-              "tooltip": "コンポーネント、テンプレート、およびビューについて。",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-services",
-              "title": "サービスとDIの紹介",
-              "tooltip": "サービスと依存性の注入について。",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-next-steps",
-              "title": "次のステップ",
-              "tooltip": "基本のその先へ。",
               "translated": true
             }
           ]
@@ -347,12 +347,6 @@
           ]
         },
         {
-          "url": "guide/bootstrapping",
-          "title": "ブートストラップ",
-          "tooltip": "ルートの\"AppModule\"で、アプリケーションをどのように構築、起動するかをAngularに伝えましょう。",
-          "translated": true
-        },
-        {
           "title": "NgModules",
           "tooltip": "NgModules.",
           "children": [
@@ -366,6 +360,12 @@
               "url": "guide/ngmodule-vs-jsmodule",
               "title": "JavaScriptモジュールとNgModule",
               "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
+              "translated": true
+            },
+            {
+              "url": "guide/bootstrapping",
+              "title": "ブートストラップ",
+              "tooltip": "ルートの\"AppModule\"で、アプリケーションをどのように構築、起動するかをAngularに伝えましょう。",
               "translated": true
             },
             {
@@ -667,12 +667,6 @@
           "tooltip": "Using builders to customize Angular CLI."
         },
         {
-          "url": "guide/ivy",
-          "title": "Angular Ivy",
-          "tooltip": "Angular CLIでAngular Ivyを選択します",
-          "translated": true
-        },
-        {
           "url": "guide/web-worker",
           "title": "Web Worker",
           "tooltip": "Angular CLIでのWeb Workerの使用",
@@ -692,13 +686,13 @@
           "translated": true
         },
         {
-          "title": "AoT Compiler",
+          "title": "AOT Compiler",
           "tooltip": "Understanding ahead-of-time compilation.",
           "children": [
             {
               "url": "guide/aot-compiler",
               "title": "事前コンパイル",
-              "tooltip": "AoT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+              "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
               "translated": true
             },
             {
@@ -710,7 +704,12 @@
             {
               "url": "guide/aot-metadata-errors",
               "title": "AoT Metadata Errors",
-              "tooltip": "Troubleshooting AoT compilation."
+              "tooltip": "Troubleshooting AOT compilation."
+            },
+            {
+              "url": "guide/template-typecheck",
+              "title": "Template Type-checking",
+              "tooltip": "Template type-checking in Angular."
             }
           ]
         },
@@ -745,7 +744,7 @@
               "url": "guide/language-service",
               "title": "Language Service",
               "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/visual-studio-2015",
@@ -810,9 +809,20 @@
           "translated": true
         },
         {
+          "url": "guide/updating-to-version-9",
+          "title": "Updating to Version 9",
+          "tooltip": "Support for updating your application from version 8 to 9."
+        },
+        {
           "url": "guide/deprecations",
           "title": "Deprecations",
           "tooltip": "Summary of Angular APIs and features that are deprecated."
+        },
+        {
+          "url": "guide/ivy",
+          "title": "Angular Ivy",
+          "tooltip": "Angular CLIでAngular Ivyを選択します",
+          "translated": false
         }
       ]
     },
@@ -975,6 +985,10 @@
   ],
 
   "docVersions": [
+    {
+      "title": "v8",
+      "url": "https://v8.angular.io/"
+    },
     { "title": "v7", "url": "https://v7.angular.io" },
     { "title": "v6", "url": "https://v6.angular.io" },
     { "title": "v5", "url": "https://v5.angular.io" },

@@ -50,9 +50,9 @@
 動作するアプリケーションは、三人のヒーローを表示します:
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/component-interaction/parent-to-child.png" alt="Parent-to-child">
-</figure>
+</div>
 
 
 
@@ -94,9 +94,9 @@ E2E は、予想とおりに、すべての子をインスタンス化と表示�
 
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/component-interaction/setter.png" alt="Parent-to-child-setter">
-</figure>
+</div>
 
 
 
@@ -152,9 +152,9 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 これはボタン押下シーケンスの出力です：
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/component-interaction/parent-to-child-on-changes.gif" alt="Parent-to-child-onchanges">
-</figure>
+</div>
 
 
 
@@ -206,9 +206,9 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 メソッドは処理を行います：
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/component-interaction/child-to-parent.gif" alt="Child-to-parent">
-</figure>
+</div>
 
 
 
@@ -268,9 +268,9 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 ここで親と子が一緒に動いているのを確認できます。
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/component-interaction/countdown-timer-anim.gif" alt="countdown timer">
-</figure>
+</div>
 
 
 
@@ -421,9 +421,9 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 サービスによって容易になったメッセージの双方向の移動を示します：
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/component-interaction/bidirectional-service.gif" alt="bidirectional-service">
-</figure>
+</div>
 
 
 

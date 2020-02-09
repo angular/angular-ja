@@ -3,8 +3,8 @@
 TypeScriptは、Angularアプリケーション開発の主要言語です。
 これはJavaScriptのスーパーセットで、型安全性とツールのための設計時サポートを備えています。
 
-ブラウザはTypeScriptを直接実行できません。TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する必要があります。
-そのためにはいくつか設定が必要です。
+ブラウザはTypeScriptを直接実行できません。
+TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する必要があります。そのためにはいくつか設定が必要です。
 
 このページでは、Angular開発者にとって重要なTypeScriptの構成と環境について、
 主に次のファイルの詳細を説明します。
@@ -15,11 +15,11 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 {@a tsconfig}
 
+## TypeScript configuration
 
-
-## *tsconfig.json*
-通常、`tsconfig.json`というTypeScript構成ファイルをプロジェクトに追加し、
-コンパイラがJavaScriptファイルを生成する際のガイドを行います。
+A TypeScript configuration file called `tsconfig.json` guides the compiler as it generates JavaScript files for a project.
+This file contains options and flags that are essential for Angular applications.
+Typically, the file is found at the [root level of the workspace](guide/file-structure).
 
 <div class="alert is-helpful">
 
@@ -30,34 +30,34 @@ TypeScriptは、Angularアプリケーション開発の主要言語です。
 
 The initial `tsconfig.json` for an Angular app typically looks like this example:
 
-
 <code-example lang="json" header="tsconfig.json" linenums="false">
-   {
-    "compileOnSave": false,
-    "compilerOptions": {
-      "baseUrl": "./",
-      "outDir": "./dist/out-tsc",
-      "sourceMap": true,
-      "declaration": false,
-      "module": "es2015",
-      "moduleResolution": "node",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "importHelpers": true,
-      "target": "es5",
-      "typeRoots": [
-        "node_modules/@types"
-      ],
-      "lib": [
-        "es2018",
-        "dom"
-      ]
-    }
-   }
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}
 </code-example>
-
-
-このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
 
 
 {@a noImplicitAny}
@@ -90,6 +90,13 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 </code-example>
 
+
+<div class="alert is-helpful">
+
+For more information about how the TypeScript configuration affects compilation, see [Angular Compiler Options](guide/angular-compiler-options) and [Template Type Checking](guide/template-typecheck).
+
+</div>
+
 {@a typings}
 
 ## TypeScriptの型定義
@@ -107,8 +114,12 @@ TypeScript対応エディタは、これらの型定義ファイルを活用し�
 Angularはこのようなライブラリの1つです。
 Angularアプリケーションの `node_modules/@angular/core/`フォルダには、Angularのcore部分を記述するいくつかの `d.ts`ファイルが含まれています。
 
-**`d.ts`ファイルを含む *typings* ファイルは、すでにAngularパッケージに含まれていますので、
-追加作業を行う必要はありません。**
+<div class="alert is-helpful">
+
+`d.ts`ファイルを含む *typings* ファイルは、すでにAngularパッケージに含まれていますので、
+追加作業を行う必要はありません。
+
+</div>
 
 ### lib.d.ts
 

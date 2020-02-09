@@ -145,9 +145,9 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 これが動作中の *Alex* と家族です。
 
-<figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex イン・アクション">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex in action">
+</div>
 
 
 
@@ -201,11 +201,9 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 これが *Alice*、*Barry*、そして家族の動きです。
 
 
-<figure>
-  <img src="generated/images/guide/dependency-injection-in-action/alice.png" alt="Alice イン・アクション">
-</figure>
-
-
+<div class="lightbox">
+  <img src="generated/images/guide/dependency-injection-in-action/alice.png" alt="Alice in action">
+</div>
 
 {@a parent-token}
 
@@ -279,4 +277,3 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 そして、これが別の親のタイプでそれを使用する方法です。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
-

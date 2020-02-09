@@ -13,8 +13,14 @@ Angular の機能を拡張するために新しいライブラリを作成して
 Angular CLI を使用して次のコマンドで新しいライブラリスケルトンを生成します。
 
 <code-example language="bash">
+ ng new my-workspace --create-application=false
+ cd my-workspace
  ng generate library my-lib
 </code-example>
+
+<div class="alert is-helpful">
+     <p>You can use the monorepo model to use the same workspace for multiple projects. See <a href="guide/file-structure#multiple-projects">Setting up for a multi-project workspace</a>.</p>
+</div>
 
 これはあなたのワークスペースに `projects/my-lib` フォルダを作成します。そこには NgModule 内のコンポーネントとサービスが含まれています。
 ワークスペースの設定ファイル `angular.json` は、タイプ 'library' のプロジェクトで更新されています。
@@ -101,18 +107,18 @@ NgModule を使用してサービスとコンポーネントを公開します�
 
 詳細については、[Schematics の概要](guide/schematics) および [ライブラリの Schematics](guide/schematics-for-libraries) を参照してください。
 
-## ライブラリを公開する
+## ライブラリを公開する {@a publishing-your-library}
 
-Angular CLI と npm パッケージマネージャーを使用して、ライブラリを npm パッケージとしてビルドおよび公開します。
-ライブラリはデフォルトで [AoT モード](guide/aot-compiler) でビルドされているので、公開用にビルドするときに `-prod` フラグを指定する必要はありません。
+Angular CLI と npm パッケージマネージャーを使用して、ライブラリを npm パッケージとしてビルドおよび公開します。 It is not recommended to publish Ivy libraries to NPM repositories. Before publishing a library to NPM, build it using the `--prod` flag which will use the older compiler and runtime known as View Engine instead of Ivy.
 
 <code-example language="bash">
-ng build my-lib
+ng build my-lib --prod
 cd dist/my-lib
 npm publish
 </code-example>
 
 これまでに npm でパッケージを公開したことがない場合は、ユーザーアカウントを作成する必要があります。[npm パッケージの公開](https://docs.npmjs.com/getting-started/publishing-npm-packages)で詳細を読んでください。
+
 
 ## リンクライブラリ
 
@@ -150,6 +156,7 @@ Angular ライブラリはすべての `@angular/*` 依存関係をピア依存�
 ```
 
 このマッピングにより、ライブラリは常に必要なモジュールのローカルコピーをロードするようになります。
+
 
 ## アプリで自身のライブラリを使う
 
@@ -208,3 +215,14 @@ For this reason, an app that depends on a library should only use TypeScript pat
 TypeScript path mappings should *not* point to the library source `.ts` files.
 
 </div>
+
+{@a lib-assets}
+
+### Managing library assets with ng-packagr
+
+Starting with version 9.x of the [ng-packagr](https://github.com/ng-packagr/ng-packagr/blob/master/README.md) tool, you can configure the tool to automatically copy assets into your library package as part of the build process.
+You can use this feature when your library needs to publish optional theming files, Sass mixins, or documentation (like a changelog).
+
+* Learn how to [copy assets into your library as part of the build](https://github.com/ng-packagr/ng-packagr/blob/master/docs/copy-assets.md).
+
+* Learn more about how to use the tool to [embed assets in CSS](https://github.com/ng-packagr/ng-packagr/blob/master/docs/embed-assets-css.md).

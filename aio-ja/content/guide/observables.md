@@ -1,3 +1,4 @@
+
 # Observable
 
 Observableは、アプリケーションの中でパブリッシャーとサブスクライバー間でメッセージを渡すためのサポートを提供します。Observableは、イベント処理、非同期プログラミング、および複数の値の処理のための他のテクニックよりも大きな利点を提供します。
@@ -16,7 +17,7 @@ Observableは、文脈に応じて、任意の型&mdash;リテラル、メッセ
 
 ここでは、Observableを使用してジオロケーションの更新を提供する方法を示すことによって、基本的な使用モデルの例を示します。
 
-<code-example path="observables/src/geolocation.ts" header="ジオロケーションのアップデートを監視する"></code-example>
+<code-example class="no-auto-link" path="observables/src/geolocation.ts" header="Observe geolocation updates"></code-example>
 
 ## オブザーバーを定義する
 

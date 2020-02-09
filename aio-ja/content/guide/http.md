@@ -949,7 +949,7 @@ RxJSの`Subject`として定義されていて、マルチキャストする`Obs
 
 </div>
 
-## セキュリティ: XSRFプロテクション
+## セキュリティ: XSRFプロテクション {@a security-xsrf-protection}
 
 [XSRF(Cross-Site Request Forgery)](https://en.wikipedia.org/wiki/Cross-site_request_forgery)は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。
 `HttpClient`は、XSRF攻撃を防ぐための[共通メカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token)をサポートしています。
@@ -1031,7 +1031,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
 
 テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットするでしょう。
 
-この設定では`TestBed.get()`を呼び出してテスト中に参照できるように`HttpClient`サービスとモックコントローラを注入します。
+この設定では`TestBed.inject()`を呼び出してテスト中に参照できるように`HttpClient`サービスとモックコントローラを注入します。
 
 
 ### リクエストの待ち受けと応答

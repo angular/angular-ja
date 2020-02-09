@@ -102,10 +102,9 @@ CLIがフィーチャーモジュールのために`CustomerDashboardComponent`�
 
 そして、デフォルトでレンダリングされるタイトルに加えて、 `CustomerDashboardComponent`テンプレートもレンダリングされます:
 
-
-<figure>
- <img src="generated/images/guide/feature-modules/feature-module.png" alt="feature module component">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/feature-modules/feature-module.png" alt="feature module component">
+</div>
 
 <hr />
 

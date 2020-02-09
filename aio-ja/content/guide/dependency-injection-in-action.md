@@ -40,9 +40,9 @@ Angularが `AppComponent` を作成するとき、DIフレームワークは `Lo
 
 すべての依存関係が準備できたとき、 `AppComponent` はユーザー情報を表示します。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/logged-in-user.png" alt="Logged In User">
-</figure>
+</div>
 
 {@a service-scope}
 
@@ -131,9 +131,9 @@ Angularが `HeroesBaseComponent` を作成すると、
 <live-example name="dependency-injection-in-action">live code</live-example>でこの例を見つけ、
 3つの `HeroBioComponent` インスタンスごとにキャッシュされたヒーローデータが存在することを確認してください。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/hero-bios.png" alt="Bios">
-</figure>
+</div>
 
 {@a qualify-dependency-lookup}
 
@@ -191,9 +191,9 @@ Angularは、`HeroBioComponent` ビュー内に対応する `HeroContactComponen
 
 結果は次のように、 `HeroContactComponent` にあるヒーローの電話番号が、ヒーローの説明の上に投影された状態で表示されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/hero-bio-and-content.png" alt="bio and contact">
-</figure>
+</div>
 
 
 デコレーターを制限するデモンストレーションを行う `HeroContactComponent` は次のようになります。
@@ -221,9 +221,9 @@ Angularは、`HeroBioComponent` ビュー内に対応する `HeroContactComponen
 
 `HeroBiosAndContactsComponent` の動作は次のようになります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/hero-bios-and-contacts.png" alt="Bios with contact into">
-</figure>
+</div>
 
 
 
@@ -232,9 +232,9 @@ Angularは `AppComponent` レベルでロガーを見つけるまでインジェ
 ロガーロジックが起動し、ヒーローの表示がロガーが見つかったことを示すマーカー
 "!!!" で更新されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/hero-bio-contact-no-host.png" alt="Without @Host">
-</figure>
+</div>
 
 
 `@Host()` デコレーターを戻して `@Optional()` をコメントアウトすると、
@@ -294,9 +294,9 @@ Angularは、コンストラクターの `el` パラメータに注入された 
 
 次の画像は `<hero-bios-and-contacts>` タグ上でマウスオーバーしたときのエフェクトを示しています。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/highlight.png" alt="Highlighted bios">
-</figure>
+</div>
 
 {@a providers}
 
@@ -347,9 +347,9 @@ Angularは、作成したインジェクターを優先的なプロバイダー�
 次の `HeroOfTheMonthComponent` の例は、多くの選択肢とその必要性を示します。
 見た目はシンプルで、いくつかのプロパティと、ロガーによって生成されたログが表示されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/hero-of-month.png" alt="Hero of the month">
-</figure>
+</div>
 
 その背後にあるコードでは、DIフレームワークが依存関係を提供する方法と場所をカスタマイズします。
 このユースケースでは、[*provide* オブジェクトリテラル](guide/dependency-injection-providers#provide)を使用して定義オブジェクトをDIトークンに関連付けるためのさまざまな方法を説明します。
@@ -460,9 +460,9 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 
 `HeroOfTheMonthComponent` コンストラクターの `logger` パラメータは `MinimalLogger` として型指定されているため、TypeScriptに対応するエディタでは `logs` および `logInfo` メンバーのみが表示されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/minimal-logger-intellisense.png" alt="MinimalLogger restricted API">
-</figure>
+</div>
 
 
 裏でAngularは `logger` パラメータに `LoggingService` トークンに登録された完全なサービスを設定します。これは、[上](guide/dependency-injection-in-action#useclass)で提供された `DateLoggerService` インスタンスです。
@@ -472,9 +472,9 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 
 これは次の図のように日付のログを表示します。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/date-logger-entry.png" alt="DateLoggerService entry">
-</figure>
+</div>
 
 </div>
 
@@ -627,9 +627,9 @@ TypeScriptの `MinimalLogger` クラスをもう一度見て、実装がない�
 次の例は、`SortedHeroesComponent` は `HeroesBaseComponent`
 を継承して、*ソートされた* ヒーローのリストを表示します。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/sorted-heroes.png" alt="Sorted Heroes">
-</figure>
+</div>
 
 `HeroesBaseComponent` は独立しています。
 それはヒーロー達を取得し、データベースから到着した順に彼らを表示するために

@@ -101,7 +101,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 | :--------------------- | :------------------------------------------|
 | `browserslist`         | ターゲットブラウザとさまざまなフロントエンドツールのNode.jsのバージョンの共有設定をします。詳しくは[Browserslist on GitHub](https://github.com/browserslist/browserslist) を参照してください。 |
 | `karma.conf.js`      | アプリケーション固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定。 |
-| `tsconfig.app.json`    | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、アプリケーション固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tsconfig.app.json`    | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、アプリケーション固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) と [Angular Compiler Options](guide/angular-compiler-options)を参照してください。 |
 | `tsconfig.spec.json`   | アプリケーションテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
 | `tslint.json`          | アプリケーション固有の [TSLint](https://palantir.github.io/tslint/) の設定。 |
 

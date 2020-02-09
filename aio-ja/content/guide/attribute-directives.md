@@ -145,11 +145,11 @@ ng serve
 
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" header="src/app/highlight.directive.ts"></code-example>
 
-アプリケーションを起動し、マウスが`p`の上へホバーするときに背景色が表示され、離れると消えていることを確認します。
+アプリケーションを起動し、ポインターがパラグラフ要素の上へホバーするときに背景色が表示され、ポインターが離れると消えていることを確認します。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/attribute-directives/highlight-directive-anim.gif" alt="Second Highlight">
-</figure>
+</div>
 
 {@a bindings}
 
@@ -236,9 +236,9 @@ ng serve
 
 ここにハーネスとディレクティブの動作するものがあります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/attribute-directives/highlight-directive-v2-anim.gif" alt="Highlight v.2">
-</figure>
+</div>
 
 {@a second-property}
 
@@ -268,9 +268,9 @@ Angularは、`@Input`デコレーターで _パブリック_ にしたため、`
 
 コーディングが完了したら、ハーネスがどのように機能するかを次に示します。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/attribute-directives/highlight-directive-final-anim.gif" alt="Final Highlight">
-</figure>
+</div>
 
 ## サマリー
 

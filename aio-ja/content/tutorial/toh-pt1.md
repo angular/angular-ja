@@ -67,17 +67,17 @@ Angular CLIで生成されたデフォルトのテキストを削除し、
 CLIの`ng serve`コマンドがまだ実行中であれば、
 ブラウザが更新され、アプリケーションのタイトルとヒーローの名前が表示されます。
 
-## Hero クラスを作成する {@a create-a-hero-class}
+## Hero インターフェースを作成する {@a create-a-hero-interface}
 
 本当のヒーローは名前だけではありません。
 
-`src/app`フォルダ内の独自のファイルに、`Hero`クラスを作成します。
+`src/app`フォルダ内の独自のファイルに、`Hero`インターフェースを作成します。
 それに`id`プロパティと`name`プロパティを与えます。
 
 <code-example path="toh-pt1/src/app/hero.ts"  header="src/app/hero.ts"></code-example>
 
 
-`HeroesComponent`クラスに戻り、`Hero`クラスをインポートします。
+`HeroesComponent`クラスに戻り、`Hero`インターフェースをインポートします。
 
 コンポーネントの`hero`プロパティを`Hero`型にリファクタリングします。
 それを、`1`という`id`と`Windstorm`という名前で初期化します。

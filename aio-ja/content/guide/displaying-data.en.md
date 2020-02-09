@@ -1,4 +1,4 @@
-# Displaying Data
+# Displaying data
 
 You can display data by binding controls in an HTML template to properties of an Angular component.
 
@@ -8,10 +8,9 @@ conditionally show a message below the list.
 
 The final UI looks like this:
 
-
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/displaying-data/final.png" alt="Final UI">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -103,11 +102,9 @@ inside the `<app-root>` tag.
 
 Now run the app. It should display the title and hero name:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/displaying-data/title-and-hero.png" alt="Title and Hero">
-</figure>
-
-
+</div>
 
 The next few sections review some of the coding choices in the app.
 
@@ -211,12 +208,9 @@ repeat items for any [iterable](https://developer.mozilla.org/en-US/docs/Web/Jav
 
 Now the heroes appear in an unordered list.
 
-
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/displaying-data/hero-names-list.png" alt="After ngfor">
-</figure>
-
-
+</div>
 
 
 ## Creating a class for the data
@@ -367,4 +361,3 @@ Here's the final code:
   </code-pane>
 
 </code-tabs>
-

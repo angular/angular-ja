@@ -1,15 +1,17 @@
 # ユーザー入力
 
-リンクをクリックしたり、ボタンを押したり、テキストを入力したりするようなユーザーアクションはDOMイベントを発生させます。
-このページでは、Angularのイベントバインディング構文を使用してコンポーネントのイベントハンドラーにそれらのイベントをバインドする方法を説明します。
+リンクをクリックしたり、ボタンを押したり、
+テキストを入力したりするようなユーザーアクションはDOMイベントを発生させます。
+このページでは、Angularのイベントバインディング構文を使用して
+コンポーネントのイベントハンドラーにそれらのイベントをバインドする方法を説明します。
 
 <live-example></live-example> を実行してください。
 
-{@a binding-to-user-input-events}
 
-## ユーザー入力イベントにバインドする
+## ユーザー入力イベントにバインドする {@a binding-to-user-input-events}
 
-[Angularイベントバインディング](guide/template-syntax#event-binding)を使用して、[DOMイベント](https://developer.mozilla.org/en-US/docs/Web/Events)に応答できます。
+[Angularイベントバインディング](guide/template-syntax#event-binding)を使用して、
+[DOMイベント](https://developer.mozilla.org/en-US/docs/Web/Events)に応答できます。
 多くのDOMイベントはユーザー入力によってトリガーされます。 
 これらのイベントにバインドすることで、ユーザーからの入力を得ることができます。
 
@@ -24,18 +26,21 @@ DOMイベントにバインドするには、DOMイベント名をカッコで�
 
 等号の左側の`(click)`は、**バインディングのターゲット**としてボタンのクリックイベントを識別します。 
 等号の右側のクォーテーションで囲まれたテキストは、
-コンポーネントの`onClickMe`メソッドを呼び出すことによってclickイベントに応答する**テンプレート文**です。
+コンポーネントの`onClickMe`メソッドを呼び出すことによって
+clickイベントに応答する**テンプレート文**です。
 
 バインディングを記述するときは、テンプレート文の**実行コンテキスト**に注意してください。
 テンプレート文中の識別子は、特定のコンテキストオブジェクトに属します。
 それは通常、テンプレートを制御するAngularコンポーネントです。 
 上の例はHTMLの1行を示していますが、HTMLはより大きなコンポーネントに属しています。
 
+
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts"></code-example>
 
 
 
 ユーザーがボタンをクリックすると、Angularは`ClickMeComponent`の`onClickMeメソッド`を呼び出します。
+
 
 
 ## $eventオブジェクトからユーザー入力を取得する
@@ -63,11 +68,13 @@ Angularは対応するDOMイベントオブジェクトをコンポーネント�
 この場合、`target`は[`<input>`要素](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)を参照し、
 `event.target.value`はその要素の現在の内容を返します。
 
-各呼び出しの後、`onKey()`メソッドは、入力ボックス値の内容をコンポーネントの`values`プロパティのリストに追加し、
+各呼び出しの後、`onKey()`メソッドは、
+入力ボックス値の内容をコンポーネントの`values`プロパティのリストに追加し、
 その後に区切り文字（|）を続けます。
 [補間](guide/template-syntax#interpolation)は、`values`プロパティからの累積された入力ボックスの変更を表示します。
 
-ユーザーが文字「abc」を入力した後、バックスペースで1つずつ削除するとします。 UIに表示される内容は次のとおりです。
+ユーザーが文字「abc」を入力した後、バックスペースで1つずつ削除するとします。 
+UIに表示される内容は次のとおりです。
 
 <code-example>
   a | ab | abc | ab | a | |
@@ -75,9 +82,9 @@ Angularは対応するDOMイベントオブジェクトをコンポーネント�
 
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/user-input/keyup1-anim.gif' alt="key up 1">
-</figure>
+</div>
 
 
 
@@ -149,9 +156,9 @@ Angularの[**テンプレート参照変数**](guide/template-syntax#ref-vars)�
 入力ボックスに何かを入力し、各キーストロークでディスプレイの更新を見てください。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/user-input/keyup-loop-back-anim.gif' alt="loop back">
-</figure>
+</div>
 
 
 
@@ -196,9 +203,9 @@ Angularは、ユーザーが_Enter_キーを押したときにのみイベント
 
 このように動作します。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/user-input/keyup3-anim.gif' alt="key up 3">
-</figure>
+</div>
 
 
 
@@ -223,9 +230,9 @@ Angularは、ユーザーが_Enter_キーを押したときにのみイベント
 ユーザーは、入力ボックスにヒーローの名前を入力して**Add**をクリックすると、ヒーローを追加できます。
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/user-input/little-tour-anim.gif' alt="Little Tour of Heroes">
-</figure>
+</div>
 
 
 

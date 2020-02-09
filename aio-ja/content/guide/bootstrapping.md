@@ -7,7 +7,7 @@
 
 <hr />
 
-NgModuleは、アプリケーション部品がどのように適合するかを記述します。
+`NgModule` は、アプリケーション部品がどのように適合するかを記述します。
 すべてのアプリケーションには少なくとも1つのAngularモジュール（アプリケーションを起動するためにブートストラップするルートモジュール）があります。
 慣例により、それは通常`AppModule`と呼ばれます。
 
@@ -105,7 +105,7 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 <code-example path="bootstrapping/src/app/item.directive.ts" region="directive" header="src/app/item.directive.ts"></code-example>
 
 重要な点は、別の場所にインポートできるようにエクスポートする必要があることです。
-次に、JavaScriptのimport文を使用してNgModule、この例では`app.module.ts`にインポートします。
+次に、JavaScriptのimport文を使用して `NgModule` 、この例では`app.module.ts`にインポートします。
 
 <code-example path="bootstrapping/src/app/app.module.ts" region="directive-import" header="src/app/app.module.ts"></code-example>
 

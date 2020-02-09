@@ -23,7 +23,7 @@ Angular をはじめて使用する場合は、[入門](start)を参照してく
 {@a nodejs}
 ### Node.js
 
-Angular は `Node.js` バージョン 10.9.0 以降を必要とします。
+Angular は `Node.js` の[現行またはアクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。特定のバージョン要求については、 [package.json](https://unpkg.com/@angular/cli/package.json)の `engines`キーを参照してください。
 
 - バージョンを確認するには、ターミナル/コンソールウィンドウで`node -v`を実行してください。
 
@@ -100,12 +100,12 @@ Angular CLIにはサーバーが含まれているため、アプリをローカ
  `--open`（または単に `-o`）オプションは、ブラウザを自動的に
 `http://localhost:4200/` に開きます。 
  
- あなたのアプリはメッセージであなたを迎えます：
+ これが見えるでしょう:
 
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/setup-local/app-works.png' alt="Welcome to my-app!">
-</figure>
+</div>
 
 
 ## 次のステップ
@@ -125,4 +125,3 @@ Angular CLIにはサーバーが含まれているため、アプリをローカ
 
 
 - `ng new` によって生成されたAngularファイルの詳細については、[ワークスペースとプロジェクトのファイル構造](guide/file-structure)を参照してください。
-

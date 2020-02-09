@@ -1,4 +1,4 @@
-# Attribute Directives
+# Attribute directives
 
 An **Attribute** directive changes the appearance or behavior of a DOM element.
 
@@ -173,11 +173,11 @@ Here's the updated directive in full:
 <code-example path="attribute-directives/src/app/highlight.directive.2.ts" header="src/app/highlight.directive.ts"></code-example>
 
 Run the app and confirm that the background color appears when
-the mouse hovers over the `p` and disappears as it moves out.
+the pointer hovers over the paragraph element and disappears as the pointer moves out.
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/attribute-directives/highlight-directive-anim.gif" alt="Second Highlight">
-</figure>
+</div>
 
 {@a bindings}
 
@@ -247,7 +247,7 @@ You get the best of both worlds: the property name you want and the binding synt
 <code-example path="attribute-directives/src/app/app.component.html" header="src/app/app.component.html (color)" region="color"></code-example>
 
 Now that you're binding via the alias to the `highlightColor`, modify the `onMouseEnter()` method to use that property.
-If someone neglects to bind to `appHighlightColor`, highlight the host element in red:
+If someone neglects to bind to `appHighlight`, highlight the host element in red:
 
 <code-example path="attribute-directives/src/app/highlight.directive.3.ts" header="src/app/highlight.directive.ts (mouse enter)" region="mouse-enter"></code-example>
 
@@ -271,9 +271,9 @@ Revise the `AppComponent.color` so that it has no initial value.
 
 Here are the harness and directive in action.
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/attribute-directives/highlight-directive-v2-anim.gif" alt="Highlight v.2">
-</figure>
+</div>
 
 {@a second-property}
 
@@ -307,9 +307,9 @@ because you made it _public_ with the `@Input` decorator.
 
 Here's how the harness should work when you're done coding.
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/attribute-directives/highlight-directive-final-anim.gif" alt="Final Highlight">
-</figure>
+</div>
 
 ## Summary
 

@@ -42,11 +42,9 @@ Custom Elements は自分自身をブートストラップします。つまり�
 
 Custom Elements がページ上に置かれると、ブラウザは登録されたクラスのインスタンスを作成し、それを DOM に追加します。コンテンツはコンポーネントのテンプレートによって提供され、コンポーネントと DOM データを使ってレンダリングされます。コンポーネントの入力プロパティは、その要素の入力属性に対応します。
 
-<figure>
-
-<img src="generated/images/guide/elements/customElement1.png" alt="Custom element in browser" class="left">
-
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/elements/customElement1.png" alt="Custom element in browser" class="left">
+</div>
 
 <hr class="clear">
 
@@ -60,14 +58,13 @@ Angular は、Angular コンポーネントとその依存関係をカスタム�
 変換処理では、`NgElementConstructor` インターフェースが実装され、
 コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタークラスを作成されます。
 
-設定されたコンストラクターとその関連した Custom Elements タグをブラウザの `CustomElementRegistry` に登録するには、JavaScript の関数 `customElements.define()` を使ってください。
+設定されたコンストラクターとその関連した Custom Elements タグをブラウザの `CustomElementRegistry` に登録するには、
+JavaScript の関数 `customElements.define()` を使ってください。
 ブラウザは、登録された要素のタグに遭遇した際に、Custom Elements のインスタンスを生成するためにコンストラクターを使用します。
 
-<figure>
-
-<img src="generated/images/guide/elements/createElement.png" alt="Transform a component to a custom element" class="left">  
-
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/elements/createElement.png" alt="Transform a component to a custom element" class="left">
+</div>
 
 ### マッピング
 
@@ -104,7 +101,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 </tr>
 <tr>
   <td>Firefox</td>
-  <td><code>dom.webcomponents.enabled</code> と <code>dom.webcomponents.customelements.enabled</code> の設定項目を true に設定してください。バージョン 63 にてデフォルトで使えるようになる予定です。</td>
+  <td>ネイティブサポート済み</td>
 </tr>
 <tr>
   <td>Edge</td>

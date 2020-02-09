@@ -1,43 +1,37 @@
 # Angular入門： はじめてのアプリ
 
-Welcome to Angular!
+Angularへようこそ！
 
-このチュートリアルでは、カタログ、ショッピングカート、チェックアウトフォームを備えたシンプルなeコマースサイトを構築しながら、Angularの基本を紹介します。 [StackBlitz](https://stackblitz.com/ "StackBlitz website")のオンライン開発環境を使用しているため、いますぐに開始できます。
-
-
-<div class="alert is-helpful">
-
-このガイドではStackBlitzジェネレーターを使用して、インタラクティブに調べたり操作したりできる既製のシンプルなアプリケーションを紹介します。実際の開発では、[Angular CLI](guide/glossary#command-line-interface-cli)を使用するのが一般的です。これは、アプリケーションを生成および変更できる強力なコマンドラインツールです。詳細については、[CLI Overview](cli)を参照してください。
-
-</div>
+このチュートリアルでは、カタログ、ショッピングカート、チェックアウトフォームを備えたシンプルなeコマースサイトを順を追って説明し、Angularの要点を紹介します。
+すぐに始められるように、このガイドでは、インタラクティブに調べて操作できる既製のシンプルなアプリケーションを使用します。
 
 <div class="callout is-helpful">
 <header>Web開発は初めてですか？</header>
 
 
-Angularのドキュメントを補完するための多くのリソースがあります。 MozillaのMDNドキュメントには[HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML "Learning HTML: Guides and tutorials")と[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")の両方の紹介が含まれています。 [TypeScriptのドキュメント](https://www.typescriptlang.org/docs/home.html "TypeScript documentation")には5分間のチュートリアルが含まれています。 [Udemy](http://www.udemy.com "Udemy online courses")や[Codecademy](https://www.codecademy.com/ "Codeacademy online courses")などのさまざまなオンラインコースプラットフォームもWeb開発の基本をカバーしています。
-
+Angularのドキュメントを補完するための多くのリソースがあります。 MozillaのMDNドキュメントには[HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML "Learning HTML: Guides and tutorials")と[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")の両方の紹介が含まれています。 [TypeScriptのドキュメント](https://www.typescriptlang.org/docs/home.html "TypeScript documentation")には5分間のチュートリアルが含まれています。 [Udemy](http://www.udemy.com "Udemy online courses")や[Codecademy](https://www.codecademy.com/ "Codecademy online courses")などのさまざまなオンラインコースプラットフォームもWeb開発の基本をカバーしています。
 
 </div> 
-
 
 
 {@a new-project}
 ## 新しいプロジェクトを作成する
 
 <h4>
-<live-example name="getting-started-v0" noDownload>StackBlitzで新しいプロジェクトを作成するためこちらをクリックしてください。</live-example> 
+<live-example name="getting-started-v0" noDownload>StackBlitzで既製のサンプルプロジェクトを作成するためこちらをクリックしてください。</live-example> 
 </h4>
 
-StackBlitzは、トップバー（ストアの名前とチェックアウトアイコンを含む）と
-商品リストのタイトルを備えた
-スターターAngularアプリケーションを作成します。
+<div class="lightbox">
+  <img src="generated/images/guide/start/new-app-all.gif" alt="Starter online store app">
+</div>
 
+* 右側のプレビューペインには、サンプルのAngularアプリの開始状態が表示されます。
+トップバー（ストア名とチェックアウトアイコンを含む）と製品リストのタイトル（アプリケーションからのデータが入力され、動的に更新されます）をもつフレームを明らかにします。
 
-<figure>
-    <img src="generated/images/guide/start/new-app.png" alt="Starter online store app">
-</figure>
+* 左側のプロジェクトペインには、すべてのインフラストラクチャファイルと構成ファイルを含む、アプリケーションを構成するソースファイルが表示されます。現在選択されているファイルは、中央のエディターペインに表示されます。
 
+ソースの構造に入る前に、次のセクションでは提供されたサンプルデータを使用して、製品リストのHTML *テンプレート* を記入する方法を示します。
+これにより、ページを動的に変更および更新することがどれほど簡単かが分かるでしょう。
 
 <div class="callout is-helpful">
 <header>StackBlitz tips</header>
@@ -56,8 +50,22 @@ Saveボタンをクリックして
 * StackBlitzは継続的に改善されているので、
 生成されたコードにわずかな違いがあるかもしれませんが、
 アプリの動作は同じになります。
+* チュートリアルに付随するStackBlitzサンプルアプリを生成すると、
+StackBlitzはスターターファイルと
+モックデータを作成します。
+チュートリアル全体で使用するファイルは、
+StackBlitzサンプルアプリの `src`フォルダーにあります。
 
 </div>
+
+<div class="alert is-helpful">
+
+[StackBlitzオンライン開発環境](https://stackblitz.com/)に直接移動し、[新しいAngularワークスペースを開始する](https://stackblitz.com/fork/angular)を選択すると、一般的なこの[例のサンプル](#new-project)ではなく汎用的なスタブアプリケーションが作られます。ここで基本的な概念に入門したあとは、Angularを学習しながらインタラクティブに作業するのに役立ちます。
+
+実際の開発では、通常、[Angular CLI](guide/glossary#command-line-interface-cli) を使用します。これは、アプリケーションを生成および変更できる強力なコマンドラインツールです。詳細については、[CLI Overview](cli) を参照してください。
+
+</div>
+
 
 {@a template-syntax}
 ## テンプレート構文
@@ -67,12 +75,11 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
 <div class="alert is-helpful">
 
-作業を進めるために、次の手順では定義済みの製品データとメソッドを `product-list.component.ts`ファイルから使用します。
+作業を進めるために、次の手順では、 `products.ts`ファイル（StackBlitzのサンプルで作成済み）の定義済み製品データと` product-list.component.ts`ファイルのメソッドを使用します。
 
 </div>
 
-1.  `product-list`フォルダーで、
-テンプレートファイル`product-list.component.html`を開きます。
+1.  `product-list`フォルダーで、テンプレートファイル`product-list.component.html`を開きます。
 
 1. 製品リストのテンプレートを変更して製品名のリストを表示します。
 
@@ -96,9 +103,9 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
       プレビューペインがすぐに更新されて、リスト内の各製品の名前が表示されます。
 
-      <figure>
+      <div class="lightbox">
         <img src="generated/images/guide/start/template-syntax-product-names.png" alt="Product names added to list">
-      </figure>
+      </div>
 
 1. 各商品名を商品詳細へのリンクにするには、次のように`<a>`要素を追加し、プロパティバインディング `[]` 構文を使用してそのタイトルを製品名に設定します。
 
@@ -112,9 +119,9 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
     プロパティバインディング `[]`を使用すると、
     テンプレート式の中でプロパティ値を使用できます。
 
-    <figure>
+    <div class="lightbox">
       <img src="generated/images/guide/start/template-syntax-product-anchor.png" alt="Product name anchor text is product name property">
-    </figure>
+    </div>
 
   
 1. 商品の説明を追加しましょう。 `<p>`要素で`*ngIf`ディレクティブを使用して、現在の製品に説明がある場合にのみAngularが `<p>` 要素を作成するようにします。
@@ -124,9 +131,9 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
     アプリはリストに各商品の名前と説明を表示します。 最後の製品には説明文がまったくないことに注意してください。 商品のdescriptionプロパティが空なので、 Angularは`<p>`要素（"Description"という単語を含む）を作成しません。
 
-    <figure>
+    <div class="lightbox">
       <img src="generated/images/guide/start/template-syntax-product-description.png" alt="Product descriptions added to list">
-    </figure>
+    </div>
 
 1. ユーザーが商品を友人と共有できるようにボタンを追加します。 ボタンの`click`イベントを、（`product-list.component.ts`に）定義した`share()`メソッドに紐付けます。 イベントバインディングは次の `<button>` 要素のように、イベントを囲むカッコ `( )` を使用します。
 
@@ -135,15 +142,15 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
     各製品には"Share"ボタンがあります。
 
-    <figure>
+    <div class="lightbox">
       <img src="generated/images/guide/start/template-syntax-product-share-button.png" alt="Share button added for each product">
-    </figure>
+    </div>
 
     "Share"ボタンをテストします。
 
-    <figure>
+    <div class="lightbox">
       <img src="generated/images/guide/start/template-syntax-product-share-alert.png" alt="Alert box indicating product has been shared">
-    </figure>
+    </div>
 
 アプリは現在、製品リストと共有機能を持っています。
 その過程で、Angularのテンプレート構文の5つの一般的な機能を使用する方法を学びました。
@@ -198,9 +205,9 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 現在、サンプルアプリには3つのコンポーネントがあります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/start/app-components.png" alt="Online store with three components">
-</figure>
+</div>
 
 * `app-root`（オレンジ色のボックス）はアプリケーションシェルです。 これは最初にロードするコンポーネントであり、他のすべてのコンポーネントの親です。 これをベースページと考えることができます。
 * `app-top-bar`（青い背景）は店名とチェックアウトボタンです。
@@ -228,9 +235,9 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
     1. `app`フォルダを右クリックし、` Angular Generator`を使って `product-alerts`という名前の新しいコンポーネントを生成します。
 
-        <figure>
+        <div class="lightbox">
           <img src="generated/images/guide/start/generate-component.png" alt="StackBlitz command to generate component">
-        </figure>
+        </div>
 
         ジェネレータは、コンポーネントの3つの部分すべてに対してスターターファイルを作成します:
         * `product-alerts.component.ts`
@@ -253,11 +260,11 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
     1. `@angular/core`から`Input`をインポートしてください。
 
-        <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="imports" header="src/app/product-list/product-alerts.component.ts"></code-example>
+        <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="imports" header="src/app/product-alerts/product-alerts.component.ts"></code-example>
 
     1. `ProductAlertsComponent`クラス定義で、`@Input()`デコレーターを使って`product`という名前のプロパティを定義します。 `@Input`デコレーターはプロパティ値がコンポーネントの親（この場合は商品リストコンポーネント）から渡されることを示します。
 
-        <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="input-decorator" header="src/app/product-list/product-alerts.component.ts"></code-example>
+        <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="input-decorator" header="src/app/product-alerts/product-alerts.component.ts"></code-example>
 
 1. 新しい製品警告コンポーネントのビューを定義します。
 
@@ -277,10 +284,9 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 新しい製品アラートコンポーネントは、製品リストからの入力として製品を受け取ります。 この入力による製品の価格に基づいて、"Notify Me"ボタンを表示もしくは隠す挙動をおこないます。 Phone XLの価格が700ドルを超えているため、製品には"Notify Me"ボタンが表示されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/start/product-alert-button.png" alt="Product alert button added to products over $700">
-</figure>
-
+</div>
 
 <div class="alert is-helpful">
 
@@ -305,6 +311,13 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 1. コンポーネントクラスで、`@Output()`デコレーターと `EventEmitter()` のインスタンスを使って、`notify`という名前のプロパティを定義します。 これにより、notifyプロパティの値が変更されたときに製品アラートコンポーネントがイベントを発行することが可能になります。
 
+<div class="alert is-helpful">
+
+  Angular CLIが新しいコンポーネントを生成すると、空のコンストラクター、 `OnInit`インターフェース、および` ngOnInit() `メソッドが含まれます。
+  次の例ではそれらを使用していないため、簡潔にするためにここでは省略します。
+
+</div>
+
     <code-example path="getting-started/src/app/product-alerts/product-alerts.component.ts" header="src/app/product-alerts/product-alerts.component.ts" region="input-output"></code-example>
 
 1. 商品アラートテンプレート `product-alerts.component.html` にて、`notify.emit()`メソッドを呼び出すためのイベントバインディングで"Notify Me"ボタンを更新します。
@@ -323,9 +336,9 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 1. "Notify Me"ボタンを試してください。
 
-    <figure>
+    <div class="lightbox">
       <img src="generated/images/guide/start/product-alert-notification.png" alt="Product alert notification confirmation dialog">
-    </figure>
+    </div>
 
 
 <div class="alert is-helpful">

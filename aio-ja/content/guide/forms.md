@@ -1,14 +1,17 @@
-{@a template-driven-forms}
-# テンプレート駆動フォーム
+# テンプレート駆動フォーム {@a template-driven-forms}
 
 フォームはビジネスアプリケーションの根幹です。
-フォームを使用してログインし、ヘルプリクエストを送信し、注文し、フライトを予約し、ミーティングをスケジュールし、その他の無数のデータ入力タスクを実行します。
+フォームを使用してログインし、ヘルプリクエストを送信し、注文し、フライトを予約し、
+ミーティングをスケジュールし、その他の無数のデータ入力タスクを実行します。
 
-フォームを開発するには、ワークフローを通じて効率的かつ効果的にユーザーを誘導するデータ入力エクスペリエンスを作成することが重要です。
+フォームを開発するには、ワークフローを通じて効率的かつ
+効果的にユーザーを誘導するデータ入力エクスペリエンスを作成することが重要です。
 
 ## テンプレート駆動フォームの導入
 
-フォームを開発するには、デザインスキル（このページの対象外）と*双方向データ・バインディング、変更検知、検証、エラー処理*のためのフレームワークサポートが必要です。
+フォームを開発するには、デザインスキル（このページの対象外）と
+*双方向データ・バインディング、変更検知、検証、エラー処理*のための
+フレームワークサポートが必要です。
 
 このページでは、単純なフォームを最初から作成する方法を示します。ここでは次のことを学びます
 
@@ -37,13 +40,14 @@ Angular[テンプレート構文](guide/template-syntax)でテンプレートを
 コントロールを創造的に配置し、データにバインドし、検証ルールを指定し、検証エラーを表示し、特定のコントロールを条件付きで有効または無効にしたり、
 ビジュアルフィードバックをトリガーしたりできます。
 
-Angularは、あなた自身が苦労している反復的で定型的なタスクの多くを処理することで、プロセスを簡単にします。
+Angularは、あなた自身が苦労している反復的で定型的なタスクの多くを処理することで、
+プロセスを簡単にします。
 
 次のようなテンプレート駆動フォームを構築する方法を学びます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-1.png" alt="Clean Form">
-</figure>
+</div>
 
 *Hero Employment Agency* はこのフォームを使用してヒーローに関する個人情報を管理しています。
 すべてのヒーローは仕事が必要です。適切な英雄と正しい危機を一致させることがこの会社の使命です。
@@ -52,9 +56,9 @@ Angularは、あなた自身が苦労している反復的で定型的なタス�
 
 ヒーロー名を削除すると、フォームは注意を引いたスタイルで検証エラーを表示します。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-2.png" alt="Invalid, Name Required">
-</figure>
+</div>
 
 *Submit* ボタンは無効になっており、入力コントロールの左側の"必須"バーが緑色から赤色に変わっていることに注目しましょう。
 
@@ -259,9 +263,9 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 今すぐアプリケーションを実行してもがっかりするでしょう。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-3.png" alt="Early form with no binding">
-</figure>
+</div>
 
 
 まだ `Hero` にバインドしていないので、ヒーローデータは表示されません。
@@ -320,9 +324,9 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 補間されたテキストが表示されたり消えてたりする様子が見られます。
 ある時点では、次のようになります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/ng-model-in-action.png" alt="ngModel in action">
-</figure>
+</div>
 
 この診断は、値が実際に入力ボックスからモデルに流れて戻ってきたという証拠です
 
@@ -363,9 +367,9 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 アプリを実行し、すべてのヒーローモデルのプロパティを変更すると、フォームは次のように表示されるでしょう。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/ng-model-in-action-2.png" alt="ngModel in action">
-</figure>
+</div>
 
 フォーム上部の診断では、すべての変更がモデルに反映されていることが確認されます。
 
@@ -463,15 +467,15 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 アクションと効果は次のとおりです。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/control-state-transitions-anim.gif" alt="Control State Transition">
-</figure>
+</div>
 
 次の遷移とクラス名が表示されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/ng-control-class-changes.png" alt="Control state transitions">
-</figure>
+</div>
 
 値が無効であるときに強力なシグナルを送りたいので、 `ng-valid` / `ng-invalid` のペアにもっとも関心があります。
 また、必須項目にも印を付けたいです。このような視覚的フィードバックを作成するには、 `ng-*` CSSクラスの定義を追加します。
@@ -483,9 +487,10 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 入力ボックスの左側にある色付きのバーを使用して、
 必須フィールドと無効なデータを同時にマークすることができます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/validity-required-indicator.png" alt="Invalid Form">
-</figure>
+</div>
+
 
 この効果は、プロジェクトの `index.html` の隣に追加する新しい `forms.css` ファイルに定義したこれらのクラス定義によって得られます。
 
@@ -503,9 +508,9 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 ユーザーが名前を削除すると、フォームは次のようになります
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/forms/name-required-error.png" alt="Name required">
-</figure>
+</div>
 
 この効果を得るには、次のように `<input>` タグを拡張します。
 

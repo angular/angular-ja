@@ -46,9 +46,9 @@ HTMLの `<title>`は、ドキュメントの`<head>`の中にあり、ボディ�
 
 この関数を3つのアンカータグにバインドしてください、すると、ほら！
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/set-document-title/set-title-anim.gif" alt="Set title">
-</figure>
+</div>
 
 これが完璧な解決策です。
 

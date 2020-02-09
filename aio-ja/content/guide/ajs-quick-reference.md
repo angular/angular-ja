@@ -1,4 +1,4 @@
-# AngularJS to Angular Concepts: Quick Reference
+# AngularJS to Angular concepts: Quick reference
 
 
 {@a top}
@@ -1148,9 +1148,7 @@ The Angular code is shown using TypeScript.
       <code-example hideCopy path="ajs-quick-reference/src/app/movie-list.component.ts" region="class"></code-example>
 
 
-      In Angular, you create a component class.
-
-      NOTE: If you are using TypeScript with AngularJS, you must use the `export` keyword to export the component class.
+      In Angular, you create a component class to contain the data model and control methods. Use the TypeScript <code>export</code> keyword to export the class so that the functionality can be imported into NgModules.
 
       For more information, see the [Components](guide/architecture#components)
       section of the [Architecture Overview](guide/architecture) page.
@@ -1273,4 +1271,3 @@ also encapsulate a style sheet within a specific component.
   </tr>
 
 </table>
-

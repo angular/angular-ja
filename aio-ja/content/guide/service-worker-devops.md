@@ -219,7 +219,7 @@ Service WorkerペインでService Workerを停止して開始すると、アッ�
 Angular Service Workerが予期しない方法でふるまう可能性があります。
 そのような問題の影響を最小限に抑えるよう設計されていますが、管理者がService Workerを迅速に非アクティブ化する必要がある場合に備えて、AngularService Workerにはフェールセーフメカニズムが組み込まれています。
 
-### フェールセーフ
+### フェールセーフ {@a fail-safe}
 
 Service Workerを非アクティブにするには、 `ngsw.json`ファイルを削除するか名前を変更します。
 Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、
@@ -244,6 +244,24 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 このスクリプトは、
 あなたのサイトで過去に提供されていたService Workerだけでなく
 `@angular/service-worker`を無効にするためにも使用できます。
+
+### Changing your app's location
+
+It is important to note that service workers don't work behind redirect. You 
+may have already encountered the error `The script resource is behind a redirect, which is disallowed`.
+
+This can be a problem if you have to change your app's location. If you setup 
+a redirect from the old location (for example `example.com`) to the new 
+location (for example `www.example.com`) the worker will stop working. 
+Also, the redirect won't even trigger for users who are loading the site 
+entirely from Service Worker. The old worker (registered at `example.com`)
+ tries to update and sends requests to the old location `example.com` which 
+ get redirected to the new location `www.example.com` and create the error 
+`The script resource is behind a redirect, which is disallowed`.
+
+To remedy this, you may need to kill the old worker using one of the above
+techniques ([Fail-safe](#fail-safe) or [Safety Worker](#safety-worker)).
+
 
 ## もっとAngular Service Workerを知りたい
 

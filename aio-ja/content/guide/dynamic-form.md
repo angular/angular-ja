@@ -195,10 +195,9 @@ DynamicFormQuestionComponentにマッチします。
 
 最終的にフォームは次のようになります:
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dynamic-form/dynamic-form.png" alt="Dynamic-Form">
-</figure>
-
+</div>
 
 
 [トップに戻る](guide/dynamic-form#top)

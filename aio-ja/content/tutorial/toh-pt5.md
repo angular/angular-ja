@@ -1,4 +1,4 @@
-# ルーティング
+# アプリ内ナビゲーションの追加（ルーティング）
 
 Tour of Heroes アプリケーションには新しい要求があります：
 
@@ -9,11 +9,9 @@ Tour of Heroes アプリケーションには新しい要求があります：
 
 これらの変更が完了したら、ユーザーは図のようにアプリケーションを行き来できるようになるでしょう：
 
-<figure>
-
-  <img src='generated/images/guide/toh/nav-diagram.png' alt="ビューのナビゲーション">
-
-</figure>
+<div class="lightbox">
+  <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
+</div>
 
 ## `AppRoutingModule`を追加する
 
@@ -108,7 +106,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 <div class="alert is-helpful">
 
 `RouterModule`をエクスポートした`AppRoutingModule`を`AppModule`がインポートしているので、
-この`RouterOutlet`は、この`AppComponent`で利用できるようになったルーターのディレクティブのひとつです。
+この`RouterOutlet`は、この`AppComponent`で利用できるようになったルーターのディレクティブのひとつです。The `ng generate` command you ran at the start of this tutorial added this import because of the `--module=app` flag. If you manually created `app-routing.module.ts` or used a tool other than the CLI to do so, you'll need to import `AppRoutingModule` into `app.module.ts` and add it to the `imports` array of the `NgModule`.
 
 </div>
 
@@ -367,7 +365,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `ActivatedRoute`, ` HeroService`,  `Location`サービスをコンストラクターに注入し、
 それらの値をプライベートフィールドに保存します。
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" header="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="ctor">
+<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" header="src/app/hero-detail/hero-detail.component.ts" region="ctor">
 </code-example>
 
 [`ActivatedRoute`](api/router/ActivatedRoute)は、この`HeroDetailComponent`のインスタンスへのルートに関する情報を保持します。

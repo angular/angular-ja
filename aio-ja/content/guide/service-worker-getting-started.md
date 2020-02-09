@@ -73,9 +73,9 @@ If you are not using HTTPS, the service worker will only be registered when acce
 2. **Networkタブ**を選びます。
 3. **Offlineボックス**をチェックしてください。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/service-worker/offline-checkbox.png" alt="The offline checkbox in the Network tab is checked">
-</figure>
+</div>
 
 これで、アプリケーションはネットワークにアクセスできなくなりました。
 
@@ -85,11 +85,9 @@ Angular Service Workerを追加すると、アプリケーションの動作が�
 
 networkタブを見ると、Service Workerがアクティブであることを確認できます。
 
-<figure>
-  <!-- textlint-disable prh -->
-  <img src="generated/images/guide/service-worker/sw-active.png" alt="Requests are marked as from ServiceWorker">
-  <!-- textlint-enable prh -->
-</figure>
+<div class="lightbox">
+  <!-- textlint-disable prh --><img src="generated/images/guide/service-worker/sw-active.png" alt="Requests are marked as from ServiceWorker"><!-- textlint-enable prh -->
+</div>
 
 「サイズ」列の下にある要求状態は、<!-- textlint-disable prh -->(from ServiceWorker)<!-- textlint-enable prh -->となっていることに注目してください。これは、リソースがネットワークからロードされていないことを意味します。代わりに、Service Workerのキャッシュからロードされています。
 
@@ -144,9 +142,9 @@ http-server -p 8080 -c-1 dist/<project-name>
 
 1. 同じウィンドウでもう一度http://localhost:8080を開きます。何が起こりましたか?
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/service-worker/welcome-msg-en.png" alt="It still says Welcome to Service Workers!">
-</figure>
+</div>
 
 何が駄目だったのでしょうか？実際には何も悪いことは起こっていません。Angular Service Workerは、利用可能なアップデートがあるにもかかわらず、**インストールされている**アプリケーションのバージョンを提供しています。速度の観点から、Service Workerは、キャッシュされたアプリケーションを提供する前に、更新の確認を待つことはありません。
 
@@ -154,9 +152,9 @@ http-server -p 8080 -c-1 dist/<project-name>
 
 2. ページを再読み込みします。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/service-worker/welcome-msg-fr.png" alt="The text has changed to say Bienvenue à app!">
-</figure>
+</div>
 
 Service Workerは、あなたのアプリケーションの更新版を*バックグラウンドで*インストールし、次にページを読み込んだりリロードしたりすると、Service Workerは最新のバージョンに切り替わります。
 

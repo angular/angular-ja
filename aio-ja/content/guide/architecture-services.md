@@ -70,9 +70,9 @@ Angular はコンポーネントがサービスに依存していることを検
 
 `HeroService`注入のプロセスは、このようになります。
 
-<figure>
-  <img src="generated/images/guide/architecture/injector-injects.png" alt="サービス" class="left">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/injector-injects.png" alt="Service" class="left">
+</div>
 
 ### サービスの提供
 

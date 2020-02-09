@@ -7,13 +7,17 @@
 
 <hr />
 
-`src/ngsw-config.json`設定ファイルは、Angular Service WorkerがキャッシュすべきファイルとデータのURLと、キャッシュされたファイルとデータをどのように更新すべきかを指定します。[Angular CLI](cli)は`ng build --prod`中に設定ファイルを作成します。手動で`ngsw-config`ツールで作成することもできます。
+`ngsw-config.json`設定ファイルは、
+Angular Service WorkerがキャッシュすべきファイルとデータのURLと、
+キャッシュされたファイルとデータをどのように更新すべきかを指定します。[Angular CLI](cli)は`ng build --prod`中に設定ファイルを作成します。
+手動で`ngsw-config`ツールで作成することもできます。(`<project-name>` にはビルドしているプロジェクトの名前が入ります)
 
-```sh
-ngsw-config dist src/ngsw-config.json /base/href
-```
+<code-example language="sh">
+./node_modules/.bin/ngsw-config ./dist/&lt;project-name&gt; ./ngsw-config.json [/base/href]
+</code-example>
 
-設定ファイルはJSON形式を使用します。すべてのファイルパスは`/`で始まらなければなりません。これはCLIプロジェクトでの展開ディレクトリであり、通常は `dist`です。
+設定ファイルはJSON形式を使用します。すべてのファイルパスは`/`で始まらなければなりません。
+これはCLIプロジェクトでの展開ディレクトリに対応し、通常は `dist/<project-name>`です。
 
 {@a glob-patterns}
 特に指定のない限り、パターンは制限されたglobフォーマットを使います。
@@ -67,8 +71,6 @@ interface AssetGroup {
   updateMode?: 'prefetch' | 'lazy';
   resources: {
     files?: string[];
-    /** @deprecated v6から`versionedFiles`と`files`は同じ挙動になりました。`files`を使ってください。 */
-    versionedFiles?: string[];
     urls?: string[];
   };
 }
@@ -100,11 +102,9 @@ interface AssetGroup {
 
 ### `resources`
 
-このセクションでは、キャッシュするリソースを3つのグループに分けて説明します。
+このセクションでは、キャッシュするリソースを次のグループに分けて説明します。
 
 * `files`は、配布ディレクトリ内のファイルと一致するパターンをリストします。これらは、単一のファイルまたは複数のファイルに一致するglobのようなパターンです。
-
-* `versionedFiles`は、非推奨になりました。v6では`versionedFiles`と`files`は同じ挙動になります。`files`を使ってください。
 
 * `urls`は、実行時に照合されるURLとURLパターンの両方が含まれます。これらのリソースは直接取得されず、コンテンツハッシュもありませんが、HTTPヘッダーにしたがってキャッシュされます。これは、Google FontsサービスなどのCDNでもっとも便利です。<br>
 _(否定のglobパターンはサポートされず、?は文字通り一致します。つまり、?以外の文字は一致しません)_

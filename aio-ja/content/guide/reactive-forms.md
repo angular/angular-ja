@@ -3,6 +3,7 @@
 *リアクティブフォーム* は、時間とともに入力値が変わるフォームを扱うためのモデル駆動なアプローチを提供します。このガイドでは、シンプルなフォームコントロールの作成と更新から、グループ内の複数コントロールの使用、フォームのバリデーション、高度なフォームの実装の方法を説明します。
 
 
+
 {@a toc}
 
 <live-example header="Reactive Forms in Stackblitz">リアクティブフォームのライブサンプル</live-example>をお試しください。
@@ -63,13 +64,14 @@
 
 <code-example path="reactive-forms/src/app/app.component.1.html" region="app-name-editor" header="src/app/app.component.html (name editor)"></code-example>
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/reactive-forms/name-editor-1.png" alt="Name Editor">
-</figure>
+</div>
 
 ## コントロール値の管理
 
-リアクティブフォームでは、その時点での状態と値へアクセスすることができます。コンポーネントクラスまたはテンプレートを通して現在の状態と値を操作することができます。次の例では、フォームコントロールのインスタンスの値の表示と変更を行います。
+リアクティブフォームでは、その時点での状態と値へアクセスすることができます。コンポーネントクラスまたはテンプレートを通して現在の状態と値を操作することができます。
+次の例では、フォームコントロールのインスタンスの値の表示と変更を行います。
 
 {@a display-value}
 
@@ -106,9 +108,9 @@
 
 フォームモデルはコントロールのデータ源なので、ボタンをクリックするとコンポーネントクラス内で入力の値が変更され、現在の値も上書きされます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/reactive-forms/name-editor-2.png" alt="Name Editor Update">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -186,10 +188,9 @@
 
 `ProfileEditor`は、フォームグループインスタンス内の`firstName`と`lastName`のフォームコントロールインスタンスを管理できます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/reactive-forms/profile-editor-1.png" alt="Profile Editor">
-</figure>
-
+</div>
 ## ネストしたフォームグループの作成
 
 複雑なフォームを作る場合、異なる分類の情報は小さいセクションに分けた方が簡単であり、いくつかの情報のグループは自然と同じグループにまとまります。ネストしたフォームグループを使うことで、巨大なフォームを小さく管理しやすく分割できます。
@@ -212,9 +213,9 @@
 
 `ProfileEditor`フォームはひとつのグループとして表示されますが、モデルは論理グループ領域を表すためにさらに分解されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/reactive-forms/profile-editor-2.png" alt="Profile Editor Update">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -347,9 +348,9 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="display-status" header="src/app/profile-editor/profile-editor.component.html (display status)"></code-example>
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/reactive-forms/profile-editor-3.png" alt="Profile Editor Validation">
-</figure>
+</div>
 
 `profileForm`が`firstName`フォームコントロールの必須によってinvalidになっているため、**Submit** ボタンは非活性になっています。`firstName`を入力すると、フォームはvalidになり　**Submit** ボタンは活性になります。
 
@@ -413,9 +414,9 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 `*ngFor`ディレクティブはエイリアスフォーム配列インスタンス内の各コントロールインスタンスを反復します。フォーム配列要素は名前がついていないため、`i`変数にインデックスを割り当て、各コントロールに渡して`formControlName`にバインドします。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/reactive-forms/profile-editor-4.png" alt="Profile Editor Aliases">
-</figure>
+</div>
 
 新しいエイリアスインスタンスが追加される度に、新しいフォーム配列インスタンスがインデックスに応じて制御されます。これにより、ルートコントロールの状態や値を計算する時に、個々のコントロールを追跡することができます。
 

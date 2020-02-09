@@ -145,9 +145,9 @@ the same way you've done it before.
 
 Here's *Alex* and family in action.
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/alex.png" alt="Alex in action">
-</figure>
+</div>
 
 
 
@@ -201,11 +201,9 @@ which *is* what parent means.
 Here's *Alice*, *Barry*, and family in action.
 
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/alice.png" alt="Alice in action">
-</figure>
-
-
+</div>
 
 {@a parent-token}
 
@@ -229,7 +227,7 @@ A component that could serve as a parent *should* implement the class interface 
 
 
 
-Doing so adds clarity to the code.  But it's not technically necessary.
+Doing so adds clarity to the code. But it's not technically necessary.
 Although `AlexComponent` has a `name` property, as required by its `Base` class,
 its class signature doesn't mention `Parent`.
 
@@ -279,4 +277,3 @@ Here's a revised version that defaults to `parent` but also accepts an optional 
 And here's how you could use it with a different parent type.
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
-

@@ -8,10 +8,9 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 最終的なUIは次のようになります：
 
-
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/displaying-data/final.png" alt="Final UI">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -103,11 +102,9 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 今すぐアプリケーションを実行しましょう。 タイトルとヒーロー名が表示されます。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/displaying-data/title-and-hero.png" alt="Title and Hero">
-</figure>
-
-
+</div>
 
 次のいくつかのセクションでは、アプリケーションのコーディングの選択肢のいくつかをレビューします。
 
@@ -211,12 +208,9 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 
 今、ヒーローは順不同のリストに表示されます。
 
-
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/displaying-data/hero-names-list.png" alt="After ngfor">
-</figure>
-
-
+</div>
 
 
 ## データのクラスを作成する

@@ -291,9 +291,9 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 
 このスナップショットは、*Create...* ボタンをクリックしてから *Destroy...* ボタンをクリックした後のログの状態を反映しています。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/lifecycle-hooks/peek-a-boo.png" alt="Peek-a-boo">
-</figure>
+</div>
 
 一連のログメッセージは、規定のフックの呼び出し順序に従います：
 `OnChanges`, `OnInit`, `DoCheck`&nbsp;(3x), `AfterContentInit`, `AfterContentChecked`&nbsp;(3x),
@@ -349,9 +349,9 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
 個々のスパイの誕生と死は、付属のヒーロー `<div>` の出生と死を、つぎに示すように
  *フック・ログ* に記入して記録します。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/spy-directive.gif' alt="Spy Directive">
-</figure>
+</div>
 
 ヒーローを追加すると、新しいヒーローの `<div>` になります。 スパイの `ngOnInit()` はそのイベントを記録します。
 
@@ -440,9 +440,9 @@ Angularは、コンポーネント(またはディレクティブ)の ***入力�
 
 ここでは、ユーザーが変更を加えたときの実際のサンプルを示します。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/on-changes-anim.gif' alt="OnChanges">
-</figure>
+</div>
 
 ログエントリは、*power* プロパティの文字列値として表示されます。
 しかし、 `ngOnChanges` は `hero.name` への変更をキャッチしません。
@@ -473,9 +473,9 @@ Angularがそれ自身で捕捉しない変更を検出し、それに対応す�
 `hero` や `power` に実質的な変更がないときに特別なメッセージをログに書き込むので、 `DoCheck` が呼び出される
 頻度を知ることができます。 この結果はわかりやすいです：
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/do-check-anim.gif' alt="DoCheck">
-</figure>
+</div>
 
 `ngDoCheck()` フックはヒーローの `name` が変更された時を検出できますが、恐ろしいコストがあります。
 このフックは非常に頻繁に呼び出されます&mdash;変更が発生した場所に関係なく _すべて_ の変更検知サイクルの後で。
@@ -527,9 +527,9 @@ Angularは、フックがコンポーネントのデータバインドされた 
 
 *AfterView* の実際の動作はこれです：
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/after-view-anim.gif' alt="AfterView">
-</figure>
+</div>
 
 Angularは `AfterViewChecked()` を頻繁に呼び出し、興味のある変更がない場合が多いことに注意してください。
 パフォーマンスの問題を回避するために、小さなフックメソッドを記述しましょう。
@@ -572,9 +572,9 @@ Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` �
 Angularはそのコンテンツをどこに挿入するかを指示します。
 この場合、投影されるコンテンツは親からの `<app-child>` です。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/projected-child-view.png' alt="Projected Content">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 

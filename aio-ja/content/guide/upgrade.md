@@ -266,9 +266,10 @@ AngularJS のコードは AngularJS フレームワークの中で動きます�
   ダウングレードされたサービスを登録する際は、AngularJS で使うための
   *文字列のトークン* を指定しなければなりません。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/upgrade/injectors.png" alt="The two injectors in a hybrid application">
-</figure>
+</div>
+
 
 #### コンポーネントと DOM
 
@@ -302,9 +303,9 @@ Angular が出てきます。そのコンポーネントのテンプレートは
    ngUpgrade は AngularJS のトランスクルードと Angular のコンテンツ投影という
    関連した概念を橋渡しします。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/upgrade/dom.png" alt="DOM element ownership in a hybrid application">
-</figure>
+</div>
 
 もう一方のフレームワークのコンポーネントを使う際は常に
 フレームワーク間の行き来が発生します。しかし、その行き来は
@@ -347,9 +348,9 @@ Angular のやり方を橋渡しします。次のようなことが起こりま
   `$rootScope.$apply()` を実行します。これにより、AngularJS の変更検知が
   イベントごとに発生することになります。
 
-<figure>
+<div class="lightbox">
   <img src="generated/images/guide/upgrade/change_detection.png" alt="Change detection in a hybrid application">
-</figure>
+</div>
 
 実用上は、AngularJS か Angular であるかにかかわらず、
 `$apply()` を呼び出す必要はありません。`UpgradeModule` が
@@ -423,7 +424,7 @@ HTML から `ng-app` と `ng-strict-di` ディレクティブを削除し、
 
 AngularJS のアプリケーションをハイブリッドに置き換え始めるために、Angular フレームワークをロードする必要があります。
 これを SystemJS を使って行う方法については [クイックスタート github リポジトリ](https://github.com/angular/quickstart)
-からの抜粋が [セットアップ](guide/setup) に記載されています。
+からの抜粋が [Setup for Upgrading to AngularJS](guide/upgrade-setup) に記載されています。
 
 `npm install @angular/upgrade --save` で `@angular/upgrade` パッケージをインストールし、
 `@angular/upgrade/static` パッケージへのマッピングを追加することも必要です。
@@ -933,7 +934,7 @@ export class AppModule {}
 
 ```ts
 LocationUpgradeModule.config({
-  useHash: true
+  useHash: true,
   hashPrefix: '!'
 })
 ```

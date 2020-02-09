@@ -1,4 +1,4 @@
-# ヒーローのリストを表示する
+# 選択リストを表示する
 
 このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、
 ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
@@ -185,11 +185,9 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 もしユーザーが "Magneta" をクリックすると、そのヒーローはこのような目立った背景色で描画されるべきです：
 
-<figure>
-
+<div class="lightbox">
   <img src='generated/images/guide/toh/heroes-list-selected.png' alt="Selected hero">
-
-</figure>
+</div>
 
 _選択されたヒーロー_ の着色は [あなたが先ほど追加したスタイル](#styles) の `.selected` CSSクラスの仕事です。
 あなたはただ、ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するだけです。

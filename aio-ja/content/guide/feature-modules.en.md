@@ -1,4 +1,4 @@
-# Feature Modules
+# Feature modules
 
 Feature modules are NgModules for the purpose of organizing code.
 
@@ -102,10 +102,9 @@ Next, in the `AppComponent`, `app.component.html`, add the tag `<app-customer-da
 
 Now, in addition to the title that renders by default, the `CustomerDashboardComponent` template renders too:
 
-
-<figure>
- <img src="generated/images/guide/feature-modules/feature-module.png" alt="feature module component">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/feature-modules/feature-module.png" alt="feature module component">
+</div>
 
 <hr />
 

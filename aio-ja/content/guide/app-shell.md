@@ -21,11 +21,10 @@ ng new my-app --routing
 CLI を使用して App shell を自動的に作成します。
 
 <code-example language="bash">
-ng generate app-shell --client-project my-app --universal-project server-app
+ng generate app-shell
 </code-example>
 
-* `my-app` はクライアントアプリケーションの名前を取ります。
-* `server-app` はユニバーサル (またはサーバー) アプリケーションの名前を取ります。
+* `client-project` はクライアントアプリケーションの名前を取ります。
 
 このコマンドを実行した後、`angular.json` 設定ファイルが更新されて、他にいくつかの変更が加わり2つの新しいターゲットが追加されていることに気付くでしょう。
 

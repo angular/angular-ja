@@ -50,6 +50,12 @@ ng build --prod
 
 これにより、デプロイする必要があるファイルが生成されます。
 
+<div class="alert is-helpful">
+
+上記の `ng build`コマンドがパッケージの欠落についてエラーを投げる場合は、ローカルプロジェクトの` package.json`ファイルに欠落している依存関係を追加して、ダウンロードしたStackBlitzプロジェクトの依存関係と一致させましょう。
+
+</div>
+
 #### ビルドしたプロジェクトをホストする
 
 `dist/my-project-name` フォルダ内のファイルは静的であり、ファイルを提供できる任意のWebサーバー（`Node.js`、Java、.NET）または任意のバックエンド（Firebase、Google Cloud、App Engine、その他）でホストできます。
@@ -63,6 +69,9 @@ ng build --prod
 1. `npm install -g firebase-tools` を使用してデプロイメントを処理する `firebase-tools` CLIをインストールします。
 1. CLIをFirebaseアカウントに接続し、 `firebase login` および `firebase init` を使用してプロジェクトへの接続を初期化します。
 1. プロンプトにしたがってホスティング用に作成した `Firebase` プロジェクトを選択します。
+  - 最初のプロンプトで`Hosting`オプションを選択します。
+  - 先ほどFirebaseで作ったプロジェクトを選択します。
+  - 公開ディレクトリとして `dist/my-project-name` を選択します。
 1. StackBlitzがFirebaseにアプリケーションの提供方法を​​指示する `firebase.json` を作成したため、 `firebase deploy` を使用してアプリケーションをデプロイします。
 1. デプロイが完了したら、 https://your-firebase-project-name.firebaseapp.com にアクセスして動かしてみましょう。
 

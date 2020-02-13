@@ -10,7 +10,7 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 主に次のファイルの詳細を説明します。
 
 * [tsconfig.json](guide/typescript-configuration#tsconfig)&mdash;TypeScriptコンパイラの設定。
-* [typings](guide/typescript-configuration#typings)&mdash;TypesScriptの宣言ファイル.
+* [typings](guide/typescript-configuration#typings)&mdash;TypesScriptの宣言ファイル。
 
 
 {@a tsconfig}
@@ -24,7 +24,7 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 <div class="alert is-helpful">
 
 `tsconfig.json`の詳細については、公式の
-[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html) を参照してください。
 
 </div>
 

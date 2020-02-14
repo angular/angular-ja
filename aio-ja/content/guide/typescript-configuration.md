@@ -10,25 +10,25 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 主に次のファイルの詳細を説明します。
 
 * [tsconfig.json](guide/typescript-configuration#tsconfig)&mdash;TypeScriptコンパイラの設定。
-* [typings](guide/typescript-configuration#typings)&mdash;TypesScriptの宣言ファイル.
+* [typings](guide/typescript-configuration#typings)&mdash;TypesScriptの宣言ファイル。
 
 
 {@a tsconfig}
 
-## TypeScript configuration
+## TypeScriptの構成
 
-A TypeScript configuration file called `tsconfig.json` guides the compiler as it generates JavaScript files for a project.
-This file contains options and flags that are essential for Angular applications.
-Typically, the file is found at the [root level of the workspace](guide/file-structure).
+`tsconfig.json` と呼ばれるTypeScriptの構成ファイルは、プロジェクトのJavaScriptファイルを生成する際にコンパイラーをガイドします。
+このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
+通常、ファイルは [ワークスペースのルートレベル](guide/file-structure) にあります。
 
 <div class="alert is-helpful">
 
 `tsconfig.json`の詳細については、公式の
-[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html) を参照してください。
 
 </div>
 
-The initial `tsconfig.json` for an Angular app typically looks like this example:
+Angular アプリケーションの最初の `tsconfig.json` は通常、次の例のようになります：
 
 <code-example lang="json" header="tsconfig.json" linenums="false">
 {
@@ -93,7 +93,7 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 <div class="alert is-helpful">
 
-For more information about how the TypeScript configuration affects compilation, see [Angular Compiler Options](guide/angular-compiler-options) and [Template Type Checking](guide/template-typecheck).
+TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [Template の型チェック](guide/template-typecheck) を参照してください。
 
 </div>
 

@@ -19,7 +19,7 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 
 `tsconfig.json` と呼ばれるTypeScriptの構成ファイルは、プロジェクトのJavaScriptファイルを生成する際にコンパイラーをガイドします。
 このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
-通常、ファイルは [ワークスペースのルートレベル]（guide/file-structure） にあります。
+通常、ファイルは [ワークスペースのルートレベル](guide/file-structure) にあります。
 
 <div class="alert is-helpful">
 
@@ -93,7 +93,7 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 <div class="alert is-helpful">
 
-TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション]（guide/angular-compiler-options） および [Template の型チェック]（guide/template-typecheck） を参照してください。
+TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [Template の型チェック](guide/template-typecheck) を参照してください。
 
 </div>
 

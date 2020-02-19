@@ -1,4 +1,4 @@
-# Angular Universal におけるサーバーサイドレンダリング (SSR)
+# Angular Universal を使ったサーバーサイドレンダリング (SSR)
 
 このガイドでは、Angular アプリケーションをサーバー上でレンダリングするテクノロジーである **Angular Universal** について説明します。
 
@@ -11,7 +11,7 @@ SSR を取り巻くさまざまな手法と概念の詳細については、
 この[記事](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)をご覧ください。
 
 [Angular CLI](guide/glossary#cli) を使用して、サーバーサイドレンダリング用のアプリを簡単に準備できます。
-CLI スキーマティック `@nguniversal/express-engine` は、以下で説明するように、必要な手順を実行します。
+CLI の schematic `@nguniversal/express-engine` は、以下で説明するように、必要な手順を実行します。
 
 <div class="alert is-helpful">
 

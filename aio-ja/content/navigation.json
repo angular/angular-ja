@@ -744,7 +744,7 @@
               "url": "guide/language-service",
               "title": "Language Service",
               "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/visual-studio-2015",

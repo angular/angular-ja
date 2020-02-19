@@ -1,22 +1,22 @@
-# Angular Universal を使ったサーバーサイドレンダリング (SSR)
+# Server-side rendering (SSR) with Angular Universal
 
-このガイドでは、Angular アプリケーションをサーバー上でレンダリングするテクノロジーである **Angular Universal** について説明します。
+This guide describes **Angular Universal**, a technology that renders Angular applications on the server.
 
-通常の Angular アプリケーションは _ブラウザ_ で実行され、ユーザーのアクションに応じて DOM にページをレンダリングします。
-Angular Universal は _サーバー_ 上で実行され、あとでクライアント上でブートストラップされる _静的_ アプリケーションページを生成します。
-これは通常、アプリケーションがより高速にレンダリングされ、
-ユーザーが完全にインタラクティブになる前にアプリケーションのレイアウトを表示する機会を与えることを意味します。
+A normal Angular application executes in the _browser_, rendering pages in the DOM in response to user actions.
+Angular Universal executes on the _server_, generating _static_ application pages that later get bootstrapped on
+the client. This means that the application generally renders more quickly, giving users a chance to view the application
+layout before it becomes fully interactive.
 
-SSR を取り巻くさまざまな手法と概念の詳細については、
-この[記事](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)をご覧ください。
+For a more detailed look at different techniques and concepts surrounding SSR, please check out this
+[article](https://developers.google.com/web/updates/2019/02/rendering-on-the-web).
 
-[Angular CLI](guide/glossary#cli) を使用して、サーバーサイドレンダリング用のアプリを簡単に準備できます。
-CLI の schematic `@nguniversal/express-engine` は、以下で説明するように、必要な手順を実行します。
+You can easily prepare an app for server-side rendering using the [Angular CLI](guide/glossary#cli).
+The CLI schematic `@nguniversal/express-engine` performs the required steps, as described below.
 
 <div class="alert is-helpful">
 
-  **メモ:** [Node.js® Express](https://expressjs.com/) サーバーで実行される
-  [完成したサンプルコードをダウンロード](generated/zips/universal/universal.zip)します。
+  **Note:** [Download the finished sample code](generated/zips/universal/universal.zip),
+  which runs in a [Node.js® Express](https://expressjs.com/) server.
 
 </div>
 

@@ -1,4 +1,4 @@
-# Angularのコンセプトの紹介
+# Angularの概念の紹介
 
 Angularは、HTMLとTypeScriptでシングルページクライアントアプリケーションを開発するためのプラットフォームであり、そしてフレームワークです。
 Angularはそれ自身がTypeScriptで書かれています。
@@ -19,7 +19,7 @@ Angularアプリケーションの基本となる構成要素は *NgModule* で�
 
 アプリのコンポーネントは通常、階層的に配置された多数のビューを定義します。 Angularは、ビュー間のナビゲーションパスを定義するための`Router`サービスを提供します。ルーターは、高度なブラウザ内ナビゲーション機能を提供します。
 
-<div class="alert is-helpful>
+<div class="alert is-helpful">
 
   重要なAngularの用語や使用法の基本的な定義については、 [Angular 用語集](guide/glossary) を参照してください。
 

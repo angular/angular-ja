@@ -319,7 +319,7 @@ Angularの`HttpClient`の詳細については、 [HttpClientガイド](guide/ht
 
     1. カートサービスをインポートします。
 
-        <code-example path="getting-started/src/app/shipping/shipping.component.ts" header="src/app/shipping/shipping.component.ts" region="props"></code-example>
+        <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="imports"></code-example>
 
     1. `shippingCosts` プロパティを定義します。
 

@@ -238,15 +238,15 @@ Angular の項の中で冪等な式は、
 テンプレート式と同様に、テンプレート *文*
 は JavaScript のような言語を使用します。
 テンプレート文パーサーはテンプレート式パーサーとは異なり、
-特に基本的な代入(`=`)と連鎖式（<code>;</code> または <code>,</code>）の両方をサポートします。
+特に基本的な代入(`=`)と <code>;</code>による連鎖式の両方をサポートします。
 
-ただし、特定の JavaScript 構文は許可されていません:
+ただし、特定の JavaScriptとテンプレート式の構文は許可されていません:
 
 * <code>new</code>
 * `++` や `--` などの、インクリメント、デクリメント演算子
 * `+=` and `-=` などの代入演算子
 * ビット演算子 `|` や `&`
-* [テンプレート式演算子](guide/template-syntax#expression-operators)
+* [パイプ演算子](guide/template-syntax#pipe)
 
 ### 文のコンテキスト
 
@@ -735,7 +735,7 @@ In this scenario, `ListItemComponent` is nested within `AppComponent` and the `i
 
 <code-example path="property-binding/src/app/app.component.html" region="pass-object" header="src/app/app.component.html"></code-example>
 
-The `item` property is declared in the `ListItemComponent` with a type of `Item` and decorated with `@Input()`:
+The `items` property is declared in the `ListItemComponent` with a type of `Item` and decorated with `@Input()`:
 
 <code-example path="property-binding/src/app/list-item/list-item.component.ts" region="item-input" header="src/app/list-item.component.ts"></code-example>
 
@@ -748,7 +748,7 @@ specify a different item in `app.component.ts` so that the new item will render:
 
 <code-example path="property-binding/src/app/app.component.ts" region="pass-object" header="src/app.component.ts"></code-example>
 
-You just have to make sure, in this case, that you're supplying an object because that's the type of `item` and is what the nested component, `ListItemComponent`, expects.
+You just have to make sure, in this case, that you're supplying an array of objects because that's the type of `items` and is what the nested component, `ListItemComponent`, expects.
 
 In this example, `AppComponent` specifies a different `item` object
 (`currentItem`) and passes it to the nested `ListItemComponent`. `ListItemComponent` was able to use `currentItem` because it matches what an `Item` object is according to `item.ts`. The `item.ts` file is where

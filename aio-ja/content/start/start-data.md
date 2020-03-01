@@ -1,6 +1,6 @@
-# データ管理
+# Angular入門: データ管理
 
-[ルーティング](start/routing "Getting Started: Routing") の最後に、オンラインストアアプリケーションには、製品リストと製品詳細の2つのビューをもつ製品カタログがあります。
+[ルーティング](start/start-routing "Getting Started: Routing") の最後に、オンラインストアアプリケーションには、製品リストと製品詳細の2つのビューをもつ製品カタログがあります。
 ユーザーはリストから製品名をクリックして、別のURLあるいはrouteを使用して新しいビューに詳細を表示できます。
 
 このページでは、ショッピングカートを3段階で作成します。
@@ -29,7 +29,7 @@
 
 <div class="alert is-helpful">
 
-後で、このチュートリアルの[フォーム](start/forms "Getting Started: Forms") パートでは、
+後で、このチュートリアルの[フォーム](start/start-forms "Getting Started: Forms") パートでは、
 ユーザーがチェックアウトするページから
 このカートサービスにアクセスする方法を説明します。
 
@@ -361,5 +361,5 @@ Angularの`HttpClient`の詳細については、 [HttpClientガイド](guide/ht
 おめでとうございます！ 商品カタログとショッピングカートを含むオンラインストアアプリケーションがあります。 配送料金を調べて表示することもできます。
 
 Angularの探索を続けるには、次のいずれかのオプションを選択してください:
-* ショッピングカートページとチェックアウトフォームを追加してアプリを完成させるには、 ["フォーム"セクションに進んで](start/forms "Getting Started: Forms") ください。 チェックアウトの一環としてユーザー情報を収集するためのフォームを作成します。
-* ["デプロイ" セクションに進んで](start/deployment "Getting Started: Deployment") ローカル開発に移行するか、アプリをFirebaseまたは独自のサーバーにデプロイします。
+* ショッピングカートページとチェックアウトフォームを追加してアプリを完成させるには、 ["フォーム"セクションに進んで](start/start-forms "Getting Started: Forms") ください。 チェックアウトの一環としてユーザー情報を収集するためのフォームを作成します。
+* ["デプロイ" セクションに進んで](start/start-deployment "Getting Started: Deployment") ローカル開発に移行するか、アプリをFirebaseまたは独自のサーバーにデプロイします。

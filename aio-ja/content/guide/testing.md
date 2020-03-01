@@ -1244,7 +1244,7 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 [tick()](api/core/testing/tick) を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
 このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-[tick()](api/core/testing/tick)関数は、パラメーターとしてミリ秒とtickOptionsを受け入れます。ミリ秒（指定されていない場合はデフォルトの0）パラメーターは、仮想クロックの進み具合を表します。たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、tick(100) を使用してfnコールバックをトリガーする必要があります。 tickOptionsは、processNewMacroTasksSynchronously（デフォルトはtrue）というプロパティを持つオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
+[tick()](api/core/testing/tick)関数は、パラメーターとしてミリ秒とtickOptionsを受け入れます。ミリ秒（指定されていない場合はデフォルトの0）パラメーターは、仮想クロックの進み具合を表します。たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、tick(100) を使用してfnコールバックをトリガーする必要があります。 tickOptionsは、processNewMacroTasksSynchronously（デフォルトはtrue）というプロパティをもつオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"

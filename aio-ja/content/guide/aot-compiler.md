@@ -570,7 +570,7 @@ Angularコンパイラのもっとも役立つ特徴の1つは、テンプレー
 プロジェクトの `tsconfig.json` の `"angularCompilerOptions"` にコンパイラオプション `"fullTemplateTypeCheck"`を追加して、
 このフェーズを明示的に有効にします ([Angular コンパイラオプション](guide/angular-compiler-options)を参照)。
 
-<div class="alert is-helpful>
+<div class="alert is-helpful">
 
 [AngularのIvy](guide/ivy)においては、テンプレート型チェッカーはより厳格かつ有能に完全に書き換えられます。つまり、以前の型チェッカーが検出しないさまざまな新しいエラーを捕捉できることを意味します。
 

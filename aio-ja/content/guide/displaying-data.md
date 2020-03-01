@@ -1,11 +1,20 @@
-# データの表示
+# ビューへのデータの表示
 
-HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることで、データを表示できます。
+Angular [components](guide/glossary#component) form the data structure of your application.
+The HTML [template](guide/glossary#template) associated with a component provides the means to display that data in the context of a web page.
+Together, a component's class and template form a [view](guide/glossary#view) of your application data.
 
-このページでは、ヒーローのリストを含むコンポーネントを作成します。
-あなたはヒーロー名のリストを表示し、
-条件付きでリストの下にメッセージを表示します。
+The process of combining data values with their representation on the page is called [data binding](guide/glossary#data-binding).
+You display your data to a user (and collect data from the user) by *binding* controls in the HTML template to the data properties of the component class.
 
+In addition, you can add logic to the template by including [directives](guide/glossary#directive), which tell Angular how to modify the page as it is rendered.
+
+Angular defines a *template language* that expands HTML notation with syntax that allows you to define various kinds of data binding and logical directives.
+When the page is rendered, Angular interprets the template syntax to update the HTML according to your logic and current data state.
+Before you read the complete [template syntax guide](guide/template-syntax), the exercises on this page give you a quick demonstration of how template syntax works.
+
+このデモでは、ヒーローのリストを含むコンポーネントを作成します。
+あなたはヒーロー名のリストを表示し、条件付きでリストの下にメッセージを表示します。
 最終的なUIは次のようになります：
 
 <div class="lightbox">
@@ -14,20 +23,14 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 <div class="alert is-helpful">
 
-
-
-<live-example></live-example> は、このページで説明している
-すべての構文とコードスニペットを示しています。
-
+<live-example></live-example> は、このページで説明しているすべての構文とコードスニペットを示しています。
 
 </div>
-
 
 {@a interpolation}
 
 ## 補間によるコンポーネントプロパティの表示
-コンポーネントプロパティを表示するもっとも簡単な方法は、
-補間によってプロパティ名をバインドすることです。
+コンポーネントプロパティを表示するもっとも簡単な方法は、補間によってプロパティ名をバインドすることです。
 補間では、プロパティ名をビューテンプレートに入れ、二重中括弧で囲みます： `{{myHero}}`
 
 `displaying-data` という名前のワークスペースとアプリケーションを作成するために、CLIコマンド [`ng new displaying-data`](cli/new) を実行します。
@@ -39,51 +42,34 @@ HTMLテンプレートのコントロールをAngularコンポーネントのプ
 
 完了したら、このようになります。
 
-
 <code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts"></code-example>
-
-
 
 空のコンポーネントには、`title` と　`myHero` の2つのプロパティを追加しました。
 
 テンプレートは、二重中括弧補間を使用して
 2つのコンポーネントプロパティを表示します：
 
-
 <code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
 
-
-
 <div class="alert is-helpful">
-
-
 
 テンプレートは、ECMAScript 2015バッククオート(<code>\`</code>)内の複数行の文字列です。
 一重引用符(`'`)と同じ文字*ではない*バッククオート(<code>\`</code>)は複数行にわたって
 文字列を構成することができ、
 HTMLをより読みやすくします 。
 
-
 </div>
-
-
 
 Angularは自動的にコンポーネントから `title` と `myHero` プロパティの値を取り出し、
 それらの値をブラウザに挿入します。
 Angularは、これらのプロパティが変更されると、表示を更新します。
 
-
 <div class="alert is-helpful">
-
-
 
 より正確には、再表示は、キーストローク、タイマー完了、HTTPリクエストへの応答など、
 ビューに関連する何らかの非同期イベントの後に発生します。
 
-
 </div>
-
-
 
 `AppComponent` クラスのインスタンスを作成するために、**new** を呼び出さないことに注目してください。
 Angularがインスタンスを作成しています。どのように？
@@ -91,10 +77,7 @@ Angularがインスタンスを作成しています。どのように？
 `@Component` デコレーターの CSSの`selector`は、`<app-root>` という名前の要素を指定します。
 その要素は `index.html` ファイルのbody内のプレースホルダです：
 
-
 <code-example path="displaying-data/src/index.html" header="src/index.html (body)" region="body"></code-example>
-
-
 
 `AppComponent` クラスでブートストラップすると（<code>main.ts</code>内）、
 Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
@@ -109,45 +92,44 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 次のいくつかのセクションでは、アプリケーションのコーディングの選択肢のいくつかをレビューします。
 
 
-## テンプレートインラインまたはテンプレートファイル？
+## Choosing the template source
 
+The `@Component` metadata tells Angular where to find the component's template.
 コンポーネントのテンプレートは、2つの場所のいずれかに格納できます。
-`template` プロパティを使って *インライン* で定義するか、
-あるいは別のHTMLファイルにテンプレートを定義し、
-`@Component` デコレーターの `templateUrl` プロパティを使ってコンポーネントのメタデータで紐付けられます。
 
-インラインHTMLと個別HTMLの選択は、好み、状況、
-および組織ポリシーの問題です。
-ここでは、テンプレートが小さく、追加のHTMLファイルなしでデモが簡単であるため、
-アプリケーションはインラインHTMLを使用します。
+* You can define the template *inline* using the `template` property of the `@Component` decorator. An inline template is useful for a small demo or test.
+* Alternatively, you can define the template in a separate HTML file and link to that file in the `templateUrl` property of the `@Component` decorator. This configuration is typical for anything more complex than a small test or demo, and is the default when you generate a new component.
 
 どちらのスタイルでも、テンプレートデータバインディングはコンポーネントのプロパティへの同じアクセス権を持ちます。
+ここでは、テンプレートが小さく、追加のHTMLファイルなしでデモが簡単であるため、アプリケーションはインラインHTMLを使用します。
 
 <div class="alert is-helpful">
 
-  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。あなたはそれを次のようにオーバーライドできます：
+  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。
+  You can override that by adding the "-t" (short for `inlineTemplate=true`) option:
 
   <code-example hideCopy language="sh" class="code-shell">
-    ng generate component hero -it
+    ng generate component hero -t
   </code-example>
 
 </div>
 
 
-## コンストラクターまたは変数の初期化？
+## Initialization
 
-この例では、変数の割り当てを使用してコンポーネントを初期化していますが、コンストラクターを使用してプロパティを宣言して初期化することもできます。
-
+The following example uses variable assignment to initialize the components.
 
 <code-example path="displaying-data/src/app/app-ctor.component.1.ts" region="class"></code-example>
 
+You could instead declare and initialize the properties using a constructor.
+このアプリは簡単のために、より簡潔な「変数割り当て」スタイルを使用しています。
 
-
-このアプリは、簡潔にするために、より簡潔な「変数割り当て」スタイルを使用しています。
 
 {@a ngFor}
 
-## ** *ngFor ** で配列プロパティを表示する
+## Add logic to loop through data
+
+The `*ngFor` directive (predefined by Angular) lets you loop through data. The following example uses the directive to show all of the values in an array property.
 
 ヒーローのリストを表示するには、ヒーロー名の配列をコンポーネントに追加し、配列の最初の名前になるように `myHero` を再定義します。
 
@@ -155,13 +137,10 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 <code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (class)" region="class"></code-example>
 
 
-
-テンプレートでAngular `ngFor` ディレクティブを使用して、
-各項目を `heroes` リストに表示します。
+テンプレートでAngular `ngFor` ディレクティブを使用して、各項目を `heroes` リストに表示します。
 
 
 <code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
-
 
 
 このUIでは、HTMLの順序付けられていないリストを `<ul>`および `<li>`タグとともに使用します。
@@ -171,19 +150,12 @@ Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
 
 <code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (li)" region="li"></code-example>
 
-
-
 <div class="alert is-important">
-
-
 
 `*ngFor` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
 詳細については、[テンプレート構文](guide/template-syntax#ngFor) ページを参照してください.
 
-
 </div>
-
-
 
 `ngFor` 二重引用符命令の `hero` に注目してください。
 これはテンプレート入力変数の例です。
@@ -194,17 +166,12 @@ Angularはリスト内の各項目の `<li>` を複製し、
 `hero` 変数を現在の反復の項目（ヒーロー）に設定します。
 Angularはその変数を二重中括弧内の補間のコンテキストとして使用します。
 
-
 <div class="alert is-helpful">
-
-
 
 この場合は、 `ngFor` は配列を表示していますが、
 `ngFor` は任意の[反復可能](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)オブジェクトについて項目を繰り返すことができます。
 
 </div>
-
-
 
 今、ヒーローは順不同のリストに表示されます。
 
@@ -228,12 +195,10 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
   ng generate class hero
 </code-example>
 
-次のコードを使用します。
+This command creates the following code.
 
 
 <code-example path="displaying-data/src/app/hero.ts" header="src/app/hero.ts"></code-example>
-
-
 
 コンストラクターと2つのプロパティ、 `id` と `name` をもつクラスを定義しました。
 
@@ -245,14 +210,11 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 
 <code-example path="displaying-data/src/app/hero.ts" header="src/app/hero.ts (id)" region="id"></code-example>
 
-
-
 簡単な構文で多くのことをしています。：
 
 * コンストラクターパラメータとその型を宣言します。
 * 同じ名前のパブリックプロパティを宣言します。
 * クラスのインスタンスを作成するときに、対応する引数でそのプロパティを初期化します。
-
 
 
 ### Heroクラスの使用
@@ -273,7 +235,6 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 <code-example path="displaying-data/src/app/app.component.3.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
 
 
-
 ディスプレイは同じように見えますが、コードはきれいになります。
 
 {@a ngIf}
@@ -291,44 +252,33 @@ Angular `ngIf` ディレクティブは _真偽_ 条件に基づいて要素を�
 <code-example path="displaying-data/src/app/app.component.ts" header="src/app/app.component.ts (message)" region="message"></code-example>
 
 
-
 <div class="alert is-important">
-
-
 
 `*ngIf` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
 さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの[ngIf セクション](guide/template-syntax#ngIf) を読んでください。
 
-
 </div>
-
 
 
 `*ngIf="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、
 TypeScriptとよく似ています。
 コンポーネントのヒーローのリストに3つより多いアイテムがある場合、Angularは段落をDOMに追加し、
-メッセージが表示されます。 3つ以内のアイテムがある場合、 Angularは段落を省略するので、
-メッセージは表示されません。 詳細については、
-[テンプレート構文](guide/template-syntax) ページの
-[テンプレート式](guide/template-syntax#template-expressions) を参照してください。
+メッセージが表示されます。 
+3つ以内のアイテムがある場合、 Angularは段落を省略するので、メッセージは表示されません。 
+
+詳細については、[テンプレート構文](guide/template-syntax) ページの[テンプレート式](guide/template-syntax#template-expressions) を参照してください。
 
 
 <div class="alert is-helpful">
 
-
-
 Angularはメッセージを表示したり隠したりしていません。DOMから段落要素を追加したり削除したりしています。
 これは、特に大規模なプロジェクトで多くのデータバインディングを含むHTMLを条件により含めたり除外したりするときに、パフォーマンスを改善します。
 
-
 </div>
-
-
 
 やってみましょう。 配列には4つの項目があるため、メッセージが表示されます。
 <code>app.component.ts</code>に戻り、ヒーロー配列の要素の1つを削除またはコメントアウトします。
 ブラウザは自動で更新し、メッセージは消えるでしょう。
-
 
 
 ## まとめ
@@ -340,7 +290,6 @@ Angularはメッセージを表示したり隠したりしていません。DOM�
 * 真偽式に基づいて条件付きでHTMLの塊を表示するための **ngIf** 。
 
 最終的なコードはこちらです：
-
 
 <code-tabs>
 

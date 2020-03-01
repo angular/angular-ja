@@ -1,6 +1,6 @@
-# Forms
+# Getting Started with Angular: Forms
 
-At the end of [Managing Data](start/data "Getting Started: Managing Data"), the online store application has a product catalog and a shopping cart.
+At the end of [Managing Data](start/start-data "Getting Started: Managing Data"), the online store application has a product catalog and a shopping cart.
 
 This section walks you through adding a form-based checkout feature to collect user information as part of checkout.
 
@@ -40,7 +40,7 @@ of the constructor.
 
 1. For the checkout process, users need to submit their name and address. When they submit their order, the form should reset and the cart should clear.
 
-    1. In `cart.component.ts`, define an `onSubmit()` method to process the form. Use the `CartService` `clearCart()` method to empty the cart items and reset the form after it is submission. In a real-world app, this method would also submit the data to an external server. The entire cart component class is as follows:
+    1. In `cart.component.ts`, define an `onSubmit()` method to process the form. Use the `CartService` `clearCart()` method to empty the cart items and reset the form after its submission. In a real-world app, this method would also submit the data to an external server. The entire cart component class is as follows:
 
     <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts">
     </code-example>
@@ -82,4 +82,4 @@ To confirm submission, open the console where you should see an object containin
 
 Congratulations! You have a complete online store application with a product catalog, a shopping cart, and a checkout function.
 
-[Continue to the "Deployment" section](start/deployment "Getting Started: Deployment") to move to local development, or deploy your app to Firebase or your own server.
+[Continue to the "Deployment" section](start/start-deployment "Getting Started: Deployment") to move to local development, or deploy your app to Firebase or your own server.

@@ -1,4 +1,4 @@
-# サービスの作成
+# サービスの追加
 
 Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ仮のデータを取得して表示している状態です。
 
@@ -128,7 +128,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 
 `HeroService` 型のプライベートプロパティである `heroService` をコンストラクターに追加しましょう。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
 </code-example>
 
 このパラメータはプライベートな `heroService` プロパティとして定義されると同時に、 `HeroService` を注入すべき場所として認識されます。

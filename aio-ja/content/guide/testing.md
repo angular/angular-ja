@@ -1244,7 +1244,7 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 [tick()](api/core/testing/tick) を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
 このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-[tick()](api/core/testing/tick) 関数はパラメーターとしてミリ秒を受け取ります（指定されていない場合はデフォルトで0になります）。このパラメーターは、仮想クロックの進捗状況を表します。たとえば、 `fakeAsync()` テスト中に `setTimeout(fn, 100)` がある場合は、 tick(100) を使用してfnコールバックをトリガーする必要があります。
+[tick()](api/core/testing/tick)関数は、パラメーターとしてミリ秒とtickOptionsを受け入れます。ミリ秒（指定されていない場合はデフォルトの0）パラメーターは、仮想クロックの進み具合を表します。たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、tick(100) を使用してfnコールバックをトリガーする必要があります。 tickOptionsは、processNewMacroTasksSynchronously（デフォルトはtrue）というプロパティをもつオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
@@ -1252,6 +1252,22 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 
 [tick()](api/core/testing/tick) 関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
 これは`fakeAsync()`と対になっており、`fakeAsync()`の内部でのみ呼び出すことができます。
+
+#### tickOptions
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-tick-new-macro-task-sync">
+</code-example>
+
+In this example, we have a new macro task (nested setTimeout), by default, when we `tick`, the setTimeout `outside` and `nested` will both be triggered.
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-tick-new-macro-task-async">
+</code-example>
+
+And in some case, we don't want to trigger the new maco task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new maco task.
 
 #### fakeAsync() 内部での日時の比較
 
@@ -3547,13 +3563,13 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 
 <hr>
 
-{@a faq}
+{@a useful-tips}
 
-## FAQ
+## Useful tips
 
 {@a q-spec-file-location}
 
-#### スペックファイルをテストするファイルの隣に置くのはなぜですか？
+#### スペックファイルはテストするファイルの隣に置く
 
 ユニットテストのスペックファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
 
@@ -3563,11 +3579,9 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 - あなたがソースを移動するときは、（必然的に）テストを移動することを忘れません。
 - ソースファイルの名前を変更するときは、（必然的に）テストファイルの名前を変更することを忘れません。
 
-<hr>
-
 {@a q-specs-in-test-folder}
 
-#### テストフォルダにスペックを入れるのはいつですか？
+#### テストフォルダにスペックを入れる
 
 アプリケーションの統合的なスペックでは、
 フォルダやモジュールに分散された複数のパーツの相互作用をテストできます。
@@ -3579,15 +3593,17 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 もちろん、テストヘルパーをテストするスペックは、
 `test`フォルダ内の対応するヘルパーファイルの隣に置くほうがよいでしょう。
 
-{@a q-e2e}
+{@a q-kiss}
 
-#### なぜDOM統合のE2Eテストに頼らないのでしょうか？
+#### Keep it simple
 
-このガイドで説明されているコンポーネントのDOMテストでは、
-多くの場合、広範な設定と高度な技術が必要ですが、
-[ユニットテスト](#component-class-testing)は比較的簡単です。
+[Component class testing](#component-class-testing) should be kept very clean and simple.
+It should test only a single unit. On a first glance, you should be able to understand 
+what the test is testing. If it's doing more, then it doesn't belong here.
 
-#### なぜDOMの統合テストをエンドツーエンド（E2E）テストに任せないのですか？
+{@a q-end-to-end}
+
+#### E2E（エンドツーエンド）を使用して複数のユニットをテストする
 
 E2Eテストは、システム全体の高レベルな検証に最適です。
 しかし、ユニットテストで期待されるような包括的なテストカバレッジを与えることはできません。

@@ -77,25 +77,25 @@
           "translated": true
         },
         {
-          "url": "start/routing",
+          "url": "start/start-routing",
           "title": "ルーティング",
           "tooltip": "ブラウザのURLを使用したコンポーネント間のルーティングの概要",
           "translated": true
         },
         {
-          "url": "start/data",
+          "url": "start/start-data",
           "title": "データ管理",
           "tooltip": "サービスの紹介とHTTPを介した外部データへのアクセス",
           "translated": true
         },
         {
-          "url": "start/forms",
+          "url": "start/start-forms",
           "title": "フォーム",
           "tooltip": "フォームを使用してユーザーからデータを取得および管理する方法について説明します。",
           "translated": true
         },
         {
-          "url": "start/deployment",
+          "url": "start/start-deployment",
           "title": "デプロイ",
           "tooltip": "ローカル開発に移行し、アプリケーションをFirebaseまたは独自のサーバーにデプロイしましょう",
           "translated": true
@@ -155,19 +155,19 @@
             {
               "url": "tutorial",
               "title": "イントロダクション",
-              "tooltip": "Tour of Heroesチュートリアルの紹介",
+              "tooltip": "Tour of Heroesアプリとチュートリアルの紹介",
               "translated": true
             },
             {
               "url": "tutorial/toh-pt0",
-              "title": "アプリケーションシェル",
+              "title": "プロジェクトの作成",
               "tooltip": "アプリケーションシェルを作成します",
               "translated": true
             },
             {
               "url": "tutorial/toh-pt1",
               "title": "1. ヒーローエディター",
-              "tooltip": "Part 1: シンプルなヒーローエディターを組み立てます",
+              "tooltip": "Part 1: シンプルなエディターを組み立てます",
               "translated": true
             },
             {

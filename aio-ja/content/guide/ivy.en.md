@@ -97,7 +97,7 @@ Don't use `--create-ivy-entry-points` as this will cause Node not to resolve the
 </div>
 
 {@a opting-out-of-angular-ivy}
-## Opting out of Ivy in version 9
+## Opting out of Ivy in version 9 {@a opting-out-of-ivy-in-version-9}
 
 In version 9, Ivy is the default.
 For compatibility with current workflows during the update process, you can choose to opt out of Ivy and continue using the previous compiler, View Engine.

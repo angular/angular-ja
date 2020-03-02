@@ -97,7 +97,7 @@ AngularのCLIや`ng-packagr`へ統合されたツールを使用するときは�
 </div>
 
 {@a opting-out-of-angular-ivy}
-## バージョン9でIvyをオプトアウトする
+## バージョン9でIvyをオプトアウトする {@a opting-out-of-ivy-in-version-9}
 
 バージョン9では、Ivyはデフォルトです。
 アップデートプロセス中、現在のワークフローとの互換性のため、Ivyのオプトアウトを選択して以前のコンパイラView Engineの使用を継続できます。

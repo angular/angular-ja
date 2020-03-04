@@ -1248,7 +1248,7 @@ These changes propagate through the system and ultimately display in this and ot
 
 このセクションで示す文法のデモやコードスニペットについては、<live-example name="two-way-binding">双方向バインディングの例</live-example> をご覧ください。
 
-### 双方向バインディングの基本
+### 双方向バインディングの基本 {@a basics-of-two-way-binding}
 
 双方向バインディングがすることは2つです:
 
@@ -1303,7 +1303,7 @@ Angular は次のように `SizerComponent` バインディングを _デシュ�
 `$event` 変数には、`SizerComponent.sizeChange` イベントのペイロードが含まれています。
 ユーザーがボタンをクリックすると、Angular は `$event` 値を `AppComponent.fontSizePx` に割り当てます。
 
-### フォームでの双方向バインディング
+### フォームでの双方向バインディング {@a two-way-binding-in-forms}
 
 双方向バインディングの構文は、プロパティとイベントを
 別々にバインドするのに比べて非常に便利です。

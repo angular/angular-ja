@@ -1,21 +1,21 @@
 # Angular Ivy
 
-Ivy is the code name for Angular's [next-generation compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7).
-With the version 9 release of Angular, the new compiler and runtime instructions are used by default instead of the older compiler and runtime, known as View Engine.
+IvyはAngularの[次世代のコンパイルとパイプラインのレンダリング](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7)についてのコードネームです。
+Angularリリースバージョン9では、View Engineとして知られる以前のコンパイラとランタイムの代わりに、新しいコンパイラとランタイム命令がデフォルトで使用されます。
 
 <div class="alert is-helpful">
 
-Learn more about the [Compiler](https://www.youtube.com/watch?v=anphffaCZrQ) and [Runtime](https://www.youtube.com/watch?v=S0o-4yc2n-8) in these videos from our team.
+私達のチームによるこれらの動画で[コンパイラ](https://www.youtube.com/watch?v=anphffaCZrQ)と[ランタイム](https://www.youtube.com/watch?v=S0o-4yc2n-8)についてより学んでください。
 
 
 </div>
 
 {@a aot-and-ivy}
-## AOT and Ivy
+## AOTとIvy
 
-AOT compilation with Ivy is faster and should be used by default.
-In the `angular.json` workspace configuration file, set the default build options for your project to always use AOT compilation.
-When using application internationalization (i18n) with Ivy, [translation merging](guide/i18n#merge) also requires the use of AOT compilation.
+Ivyを伴ったAOTコンパイルはより速く、デフォルトで使用すべきです。
+ワークスペース設定ファイルの`angular.json`において、常にAOTコンパイルを使用するようにデフォルトのビルドオプションをプロジェクトに対して設定してください。
+Ivyとともにアプリケーション国際化(i18n)を用いるとき、[翻訳のマージ](guide/i18n#merge)もAOTコンパイルの使用を必要とします。
 
 <code-example language="json" header="angular.json">
 
@@ -35,20 +35,20 @@ When using application internationalization (i18n) with Ivy, [translation mergin
 }
 </code-example>
 
-## Ivy and libraries
+## Ivyとライブラリ
 
-Ivy applications can be built with libraries that were created with the View Engine compiler.
-This compatibility is provided by a tool known as the Angular compatibility compiler (`ngcc`).
-CLI commands run `ngcc` as needed when performing an Angular build.
+Ivyアプリケーションは、View Engineコンパイラで作られたライブラリとともにビルドできます。
+この互換性は、Angularの互換性コンパイラ(`ngcc`)として知られるツールによって提供されます。
+CLIコマンドはAngularビルドの実行時に必要に応じて`ngcc`を実行します。
 
-For more information on how to publish libraries see [Publishing your Library](guide/creating-libraries#publishing-your-library).
+ライブラリの公開方法についてより詳しくは、[ライブラリを公開する](guide/creating-libraries#publishing-your-library)を参照してください。
 
 {@a speeding-up-ngcc-compilation}
-### Speeding up ngcc compilation
+### ngccコンパイルをスピードアップ
 
-The standalone `ngcc` program can run in parallel over your third party modules, making it more efficient than letting Angular CLI run it as needed.
+スタンドアロンの`ngcc`プログラムはサードパーティのモジュールに対して並列に処理でき、AngularのCLIにそれを必要な時に処理させるよりも効率的になります。
 
-You can run `ngcc` after each installation of node_modules by adding a `postinstall` [npm script](https://docs.npmjs.com/misc/scripts):
+`postinstall`の[npmスクリプト](https://docs.npmjs.com/misc/scripts)を加えることで、node_modulesのインストールそれぞれの後で`ngcc`を実行できます。
 
 <code-example language="json" header="package.json">
 {
@@ -60,27 +60,27 @@ You can run `ngcc` after each installation of node_modules by adding a `postinst
 
 <div class="alert is-important">
 
-The `postinstall` script will run on every installation of `node_modules`, including those performed by `ng update` and `ng add`.
+`postinstall`スクリプトは、`ng update`と`ng add`によって行われるものも含めて`node_modules`のすべてのインストール上で実行します。
 
-If you perform multiple installs in a row, this can end up being slower than letting Angular CLI run `ngcc` on builds.
+もし連続して複数のインストールを実行する場合、AngulaのCLIに`ngcc`をビルドで実行させるよりも結局遅くなる可能性があります。
 
 </div>
 
 {@a maintaining-library-compatibility}
-### Maintaining library compatibility
+### ライブラリの互換性を維持する
 
-If you are a library author, you should keep using the View Engine compiler as of version 9.
-By having all libraries continue to use View Engine, you will maintain compatibility with default v9 applications that use Ivy, as well as with applications that have opted to continue using View Engine.
+ライブラリの作者の場合、バージョン9現在でView Engineコンパイラの使用を続けるべきです。
+すべてのライブラリにView Engineの使用を継続させることで、View Engineの使用を継続することを決めたアプリケーションと同様に、Ivyを使うデフォルトのv9アプリケーションとも互換性を維持することになります。
 
-See the [Creating Libraries](guide/creating-libraries) guide for more on how to compile or bundle your Angular library.
-When you use the tools integrated into the Angular CLI or `ng-packagr`, your library will always be built the right way automatically.
+あなたのAngularライブラリのコンパイルやバンドル方法について詳しくは、[ライブラリを作成する](guide/creating-libraries)ガイドを参照してください。
+AngularのCLIや`ng-packagr`へ統合されたツールを使用するときは、ライブラリは常に適切に自動でビルドされます。
 
 {@a ivy-and-universal-app-shell}
-## Ivy and Universal/App shell
-In version 9, the server builder which is used for [App shell](guide/app-shell) and [Angular Universal](guide/universal) has the `bundleDependencies` option enabled by default.
-If you opt-out of bundling dependencies you will need to run the standalone Angular compatibility compiler (`ngcc`). This is needed because otherwise Node will be unable to resolve the Ivy version of the packages.
+## IvyとUniversalやApp shell
+バージョン9では、[App shell](guide/app-shell)と[Angular Universal](guide/universal)に使われるサーバービルダはデフォルトで有効な`bundleDependencies`オプションをもちます。
+依存関係のバンドルをオプトアウトする場合は、スタンドアロンのAngular互換性コンパイラ(`ngcc`)の実行が必要になるでしょう。これが必要なのは、そうでなければNodeがパッケージのIvyバージョンを解決できなくなるからです。
 
-You can run `ngcc` after each installation of node_modules by adding a `postinstall` [npm script](https://docs.npmjs.com/misc/scripts):
+`postinstall`の[npmスクリプト](https://docs.npmjs.com/misc/scripts)を加えることで、node_modulesのインストールそれぞれの後で`ngcc`を実行できます。
 
 <code-example language="json" header="package.json">
 {
@@ -92,27 +92,27 @@ You can run `ngcc` after each installation of node_modules by adding a `postinst
 
 <div class="alert is-important">
 
-Don't use `--create-ivy-entry-points` as this will cause Node not to resolve the Ivy version of the packages correctly.
+`--create-ivy-entry-points`を使わないでください。これが、NodeがパッケージのIvyバージョンを正しく解決しない原因になるからです。
 
 </div>
 
 {@a opting-out-of-angular-ivy}
-## Opting out of Ivy in version 9
+## バージョン9でIvyをオプトアウトする {@a opting-out-of-ivy-in-version-9}
 
-In version 9, Ivy is the default.
-For compatibility with current workflows during the update process, you can choose to opt out of Ivy and continue using the previous compiler, View Engine.
+バージョン9では、Ivyはデフォルトです。
+アップデートプロセス中、現在のワークフローとの互換性のため、Ivyのオプトアウトを選択して以前のコンパイラView Engineの使用を継続できます。
 
 <div class="alert is-helpful">
 
-Before disabling Ivy, check out the debugging recommendations in the [Ivy Compatibility Guide](guide/ivy-compatibility#debugging).
+Ivyを無効にする前に、[Ivy互換性ガイド](guide/ivy-compatibility#debugging)でデバッグの推奨事項を確認してください。
 
 </div>
 
-To opt out of Ivy, change the `angularCompilerOptions` in your project's TypeScript configuration, most commonly located at `tsconfig.app.json` at the root of the workspace.
+Ivyをオプトアウトするためには、もっとも一般的にはワークスペースのルートに配置された`tsconfig.app.json`の、プロジェクトのTypeScript設定において`angularCompilerOptions`を変更してください。
 
-The value of the `enableIvy` flag is set to `true` by default, as of version 9.
+`enableIvy`フラグの値は、バージョン9からデフォルトで`true`に設定されています。
 
-The following example shows how to set the `enableIvy` option to `false` in order to opt out of Ivy.
+次の例ではIvyのオプトアウトのために`enableIvy`オプションを`false`に設定する方法を示しています。
 
 <code-example language="json" header="tsconfig.app.json">
 {
@@ -136,15 +136,15 @@ The following example shows how to set the `enableIvy` option to `false` in orde
 
 <div class="alert is-important">
 
-If you disable Ivy, you might also want to reconsider whether to make AOT compilation the default for your application development, as described [above](#aot-and-ivy).
+もしIvyを無効にする場合、[上で](#aot-and-ivy)説明したように、アプリケーション開発でAOTコンパイルをデフォルトにするかどうかについても再考慮したいかもしれません。
 
-To revert the compiler default, set the build option `aot: false` in the `angular.json` configuration file.
+コンパイラのデフォルトを元に戻すには、設定ファイル`angular.json`においてビルドオプションの`aot: false`を設定してください。
 
 </div>
 
-If you disable Ivy and the project uses internationalization, you can also remove the `@angular/localize` runtime component from the project's polyfills file located be default at `src/polyfills.ts`.
+もしIvyを無効にしつつプロジェクトが国際化を用いる場合、デフォルトで`src/polyfills.ts`に配置されているプロジェクトのポリフィルファイルから、`@angular/localize`のランタイムコンポーネントも削除できます。
 
-To remove, delete the `import '@angular/localize/init';` line from the polyfills file.
+削除するために、ポリフィルファイルから`import '@angular/localize/init';`の行を消してください。
 
 <code-example language="typescript" header="polyfills.ts">
 /***************************************************************************************************
@@ -154,14 +154,14 @@ import '@angular/localize/init';
 </code-example>
 
 {@a using-ssr-without-angular-ivy}
-### Using SSR without Ivy
+### IvyなしでSSR使用
 
-If you opt out of Ivy and your application uses  [Angular Universal](guide/universal) to render Angular applications on the server, you must also change the way the server performs bootstrapping.
+もしIvyをオプトアウトしつつ[AngularのUniversal](guide/universal)を用いてサーバー上でAngularアプリケーションをレンダリングする場合、サーバーがブートストラップを実行する方法も変更する必要があります。
 
-The following example shows how you modify the `server.ts` file to provide the `AppServerModuleNgFactory` as the bootstrap module.
+次の例は、ブートストラップモジュールとしての`AppServerModuleNgFactory`を提供するために`server.ts`ファイルをどう変更するかを示しています。
 
-* Import `AppServerModuleNgFactory` from the `app.server.module.ngfactory` virtual file.
-* Set `bootstrap: AppServerModuleNgFactory` in the `ngExpressEngine` call.
+* 実際のファイル`app.server.module.ngfactory`から`AppServerModuleNgFactory`をインポートします。
+* `ngExpressEngine`の呼び出しにおいて`bootstrap: AppServerModuleNgFactory`を設定します。
 
 <code-example language="typescript" header="server.ts">
 import 'zone.js/dist/zone-node';

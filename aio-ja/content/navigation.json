@@ -822,7 +822,7 @@
           "url": "guide/ivy",
           "title": "Angular Ivy",
           "tooltip": "Angular CLIでAngular Ivyを選択します",
-          "translated": false
+          "translated": true
         }
       ]
     },

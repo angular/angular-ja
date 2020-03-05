@@ -1241,78 +1241,78 @@ These changes propagate through the system and ultimately display in this and ot
 
 {@a two-way}
 
-## Two-way binding `[(...)]`
+## 双方向バインディング `[(...)]`
 
-Two-way binding gives your app a way to share data between a component class and
-its template.
+双方向バインディングを使うと、コンポーネントクラスとそのテンプレートとの間で
+データを共有することができます。
 
-For a demonstration of the syntax and code snippets in this section, see the <live-example name="two-way-binding">two-way binding example</live-example>.
+このセクションで示す文法のデモやコードスニペットについては、<live-example name="two-way-binding">双方向バインディングの例</live-example> をご覧ください。
 
-### Basics of two-way binding
+### 双方向バインディングの基本 {@a basics-of-two-way-binding}
 
-Two-way binding does two things:
+双方向バインディングがすることは2つです:
 
-1. Sets a specific element property.
-1. Listens for an element change event.
+1. 特定の要素のプロパティを設定します。
+1. 要素の変更イベントをリッスンします。
 
-Angular offers a special _two-way data binding_ syntax for this purpose, `[()]`.
-The `[()]` syntax combines the brackets
-of property binding, `[]`, with the parentheses of event binding, `()`.
+Angular は、この目的のための特別な _双方向データバインディング_ の構文、`[()]` を提供しています。
+`[(x)]` 構文は、プロパティバインディングの括弧 `[]`
+とイベントバインディングの括弧 `()` を組み合わせたものです。
 
 <div class="callout is-important">
 
 <header>
-  [( )] = banana in a box
+  [( )] = 箱の中のバナナ
 </header>
 
-Visualize a *banana in a box* to remember that the parentheses go _inside_ the brackets.
+括弧が角括弧の _中_ にあることを覚えておくために *箱の中のバナナ* を思い描いてください。
 
 </div>
 
-The `[()]` syntax is easy to demonstrate when the element has a settable
-property called `x` and a corresponding event named `xChange`.
-Here's a `SizerComponent` that fits this pattern.
-It has a `size` value property and a companion `sizeChange` event:
+`[()]` 構文は、要素が `x` という設定可能なプロパティと
+対応する `xChange` というイベントを持っているときに簡単に説明できます。
+このパターンに合う `SizerComponent` は次のようになります。
+これは、`size` 値プロパティと、それに付随する `sizeChange` イベントを持ちます:
 
 <code-example path="two-way-binding/src/app/sizer/sizer.component.ts" header="src/app/sizer.component.ts"></code-example>
 
 <code-example path="two-way-binding/src/app/sizer/sizer.component.html" header="src/app/sizer.component.html"></code-example>
 
-The initial `size` is an input value from a property binding.
-Clicking the buttons increases or decreases the `size`, within
-min/max value constraints,
-and then raises, or emits, the `sizeChange` event with the adjusted size.
+`size` の初期値は、プロパティバインディングからの入力値です。
+ボタンをクリックすると、
+最小値/最大値の制限内で `size` が増減し、
+調整されたサイズで `sizeChange` イベントが発生（発行）します。
 
-Here's an example in which the `AppComponent.fontSizePx` is two-way bound to the `SizerComponent`:
+`AppComponent.fontSizePx` が `SizerComponent` に双方向でバインドされている例は次のようになります:
 
 <code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (two-way-1)" region="two-way-1"></code-example>
 
-The `AppComponent.fontSizePx` establishes the initial `SizerComponent.size` value.
+`AppComponent.fontSizePx` は、`SizerComponent.size` の初期値を与えます。
 
 <code-example path="two-way-binding/src/app/app.component.ts" header="src/app/app.component.ts" region="font-size"></code-example>
 
-Clicking the buttons updates the `AppComponent.fontSizePx` via the two-way binding.
-The revised `AppComponent.fontSizePx` value flows through to the _style_ binding,
-making the displayed text bigger or smaller.
+ボタンをクリックすると、双方向バインディングによって `AppComponent.fontSizePx` が更新されます。
+変更された `AppComponent.fontSizePx` 値は _スタイル_ バインディングに流れ込み、
+表示されるテキストが大きくなったり小さくなったりします。
 
-The two-way binding syntax is really just syntactic sugar for a _property_ binding and an _event_ binding.
-Angular desugars the `SizerComponent` binding into this:
+双方向バインディングの構文は、実際には _プロパティ_ バインディングと _イベント_ バインディングの単なる糖衣構文です。
+Angular は次のように `SizerComponent` バインディングを _デシュガー_ します:
 
 <code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (two-way-2)" region="two-way-2"></code-example>
 
-The `$event` variable contains the payload of the `SizerComponent.sizeChange` event.
-Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
+`$event` 変数には、`SizerComponent.sizeChange` イベントのペイロードが含まれています。
+ユーザーがボタンをクリックすると、Angular は `$event` 値を `AppComponent.fontSizePx` に割り当てます。
 
-### Two-way binding in forms
+### フォームでの双方向バインディング {@a two-way-binding-in-forms}
 
-The two-way binding syntax is a great convenience compared to
-separate property and event bindings. It would be convenient to
-use two-way binding with HTML form elements like `<input>` and
-`<select>`. However, no native HTML element follows the `x`
-value and `xChange` event pattern.
+双方向バインディングの構文は、プロパティとイベントを
+別々にバインドするのに比べて非常に便利です。
+`<input>` や `<select>` のような HTML の
+form 要素を使って双方向バインディングを使うと便利です。
+ただし、`x` 値および `xChange` イベントパターンに従うネイティブ HTML 要素はありません。
 
-For more on how to use two-way binding in forms, see
-Angular [NgModel](guide/template-syntax#ngModel).
+フォームでの双方向バインディングについての詳細は
+Angular [NgModel](guide/template-syntax#ngModel) を参照してください.
 
 <hr/>
 

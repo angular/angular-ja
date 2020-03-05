@@ -13,6 +13,7 @@ const copyTargets = [
     'src/index.html',
     'src/app/layout/doc-viewer/doc-viewer.component.ts',
     'src/app/layout/nav-item/nav-item.component.html',
+    'src/app/layout/footer/footer.component.html',
     'src/app/navigation/navigation.model.ts',
     'content/examples/toh-pt6/src/app/hero-search/hero-search.component.ts',
     'content/examples/toh-pt6/src/app/heroes/heroes.component.html',

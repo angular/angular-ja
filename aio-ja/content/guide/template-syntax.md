@@ -488,12 +488,12 @@ HTML 属性の `value` は *初期値* を指定します。DOM の `value` プ�
 
 実際に動くアプリで `disabled` ボタンの動作を見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。この例ではコンポーネントから disabled プロパティをトグルする方法を示しています。
 
-## Binding types and targets
+## バインディングタイプとターゲット {@a binding-types-and-targets}
 
-The **target of a data-binding** is something in the DOM.
-Depending on the binding type, the target can be a property (element, component, or directive),
-an event (element, component, or directive), or sometimes an attribute name.
-The following table summarizes the targets for the different binding types.
+**データバインディングのターゲット** はDOM内のものです。
+バインディングタイプに応じて、ターゲットはプロパティ（要素、コンポーネント、ディレクティブ）、
+イベント（要素、コンポーネント、ディレクティブ）、また時には属性の名前となります。
+以下の表は様々なバインディングタイプのターゲットをまとめたものです。
 
 <style>
   td, th {vertical-align: top}
@@ -508,26 +508,26 @@ The following table summarizes the targets for the different binding types.
   </col>
   <tr>
     <th>
-      Type
+      タイプ
     </th>
     <th>
-      Target
+      ターゲット
     </th>
     <th>
-      Examples
+      例
     </th>
   </tr>
   <tr>
     <td>
-      Property
+      プロパティ
     </td>
     <td>
-      Element&nbsp;property<br>
-      Component&nbsp;property<br>
-      Directive&nbsp;property
+      要素のプロパティ<br>
+      コンポーネントのプロパティ<br>
+      ディレクティブのプロパティ
     </td>
     <td>
-      <code>src</code>, <code>hero</code>, and <code>ngClass</code> in the following:
+      以下の <code>src</code>, <code>hero</code>, <code>ngClass</code>:
       <code-example path="template-syntax/src/app/app.component.html" region="property-binding-syntax-1"></code-example>
       <!-- For more information, see [Property Binding](guide/property-binding). -->
     </td>
@@ -537,12 +537,12 @@ The following table summarizes the targets for the different binding types.
       Event
     </td>
     <td>
-      Element&nbsp;event<br>
-      Component&nbsp;event<br>
-      Directive&nbsp;event
+      要素のイベント<br>
+      コンポーネントのイベント<br>
+      ディレクティブのイベント
     </td>
     <td>
-      <code>click</code>, <code>deleteRequest</code>, and <code>myClick</code> in the following:
+      以下の <code>click</code>, <code>deleteRequest</code>, <code>myClick</code>:
       <code-example path="template-syntax/src/app/app.component.html" region="event-binding-syntax-1"></code-example>
       <!-- KW--Why don't these links work in the table? -->
       <!-- <div>For more information, see [Event Binding](guide/event-binding).</div> -->
@@ -550,10 +550,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Two-way
+      双方向
     </td>
     <td>
-      Event and property
+      イベントとプロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="2-way-binding-syntax-1"></code-example>
@@ -561,11 +561,11 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Attribute
+      属性
     </td>
     <td>
-      Attribute
-      (the&nbsp;exception)
+      属性
+      (例外です)
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="attribute-binding-syntax-1"></code-example>
@@ -573,10 +573,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Class
+      クラス
     </td>
     <td>
-      <code>class</code> property
+      <code>class</code> プロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="class-binding-syntax-1"></code-example>
@@ -584,10 +584,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Style
+      スタイル
     </td>
     <td>
-      <code>style</code> property
+      <code>style</code> プロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="style-binding-syntax-1"></code-example>

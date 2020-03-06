@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:12.16-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -43,13 +43,3 @@ jobs:
             - node_modules
             - .tmp
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      # Deployment
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              yarn deploy
-            fi
-
-
-

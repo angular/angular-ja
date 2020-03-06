@@ -283,21 +283,21 @@ Angular の項の中で冪等な式は、
 
 {@a binding-syntax}
 
-## Binding syntax: an overview
+## バインディング構文: 概要
 
-Data-binding is a mechanism for coordinating what users see, specifically
-with application data values.
-While you could push values to and pull values from HTML,
-the application is easier to write, read, and maintain if you turn these tasks over to a binding framework.
-You simply declare bindings between binding sources, target HTML elements, and let the framework do the rest.
+データバインディングは、アプリケーションのデータ値を使用して、
+ユーザーに表示される内容を調整するための仕組みです。
+HTML に値をプッシュしたり、プルしたりすることはできますが、
+これらの雑用をバインディングフレームワークに任せることで、アプリケーションの読み書きや保守が簡単になります。
+あなたはバインディングソースとターゲット HTML 要素の間のバインディングを宣言するだけで、あとはフレームワークにお任せです。
 
-For a demonstration of the syntax and code snippets in this section, see the <live-example name="binding-syntax">binding syntax example</live-example>.
+このセクションで示す構文のデモとコードスニペットについては <live-example name="binding-syntax">バインディング構文の例</live-example>を参照してください。
 
-Angular provides many kinds of data-binding. Binding types can be grouped into three categories distinguished by the direction of data flow:
+Angular はさまざまな種類のデータバインディングを提供します。バインディングタイプは、データフローの方向によって3つのカテゴリーに分類できます。
 
-* From the _source-to-view_
-* From _view-to-source_
-* Two-way sequence: _view-to-source-to-view_
+* _ソースからビュー_
+* _ビューからソース_
+* 双方向シーケンス: _ビューとソースの双方向_
 
 <style>
   td, th {vertical-align: top}
@@ -312,23 +312,23 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
   </col>
   <tr>
     <th>
-      Type
+      タイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Category
+      カテゴリ
     </th>
 
   </tr>
   <tr>
      <td>
-      Interpolation<br>
-      Property<br>
-      Attribute<br>
-      Class<br>
-      Style
+      補間<br>
+      プロパティ<br>
+      属性<br>
+      クラス<br>
+      スタイル
     </td>
     <td>
 
@@ -341,11 +341,11 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
     </td>
 
     <td>
-      One-way<br>from data source<br>to view target
+      単方向<br>データソースから<br>ビューターゲットへ
     </td>
     <tr>
       <td>
-        Event
+        イベント
       </td>
       <td>
         <code-example>
@@ -355,12 +355,12 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
       </td>
 
       <td>
-        One-way<br>from view target<br>to data source
+        単方向<br>ビューターゲットから<br>データソースへ
       </td>
     </tr>
     <tr>
       <td>
-        Two-way
+        双方向
       </td>
       <td>
         <code-example>
@@ -369,25 +369,25 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
         </code-example>
       </td>
       <td>
-        Two-way
+        双方向
       </td>
     </tr>
   </tr>
 </table>
 
-Binding types other than interpolation have a **target name** to the left of the equal sign, either surrounded by punctuation, `[]` or `()`,
-or preceded by a prefix: `bind-`, `on-`, `bindon-`.
+補間以外のバインディングタイプは、等号の左側に **ターゲット名** があり、記号(`[]`、`()`)で囲まれているか、
+または接頭辞 `bind-`、`on-`、`bindon-` が前に付いています。
 
-The *target* of a binding is the property or event inside the binding punctuation: `[]`, `()` or `[()]`.
+バインディングの *ターゲット* は、バインディングの記号 `[]`, `()`, `[()]` で囲まれたプロパティかイベントです。
 
-Every public member of a **source** directive is automatically available for binding.
-You don't have to do anything special to access a directive member in a template expression or statement.
+すべての **ソース** ディレクティブのパブリックメンバは、自動的にバインディングできるようになっています。
+テンプレートの式や文からディレクティブのメンバにアクセスするために、特別に何かをする必要はありません。
 
 
-### Data-binding and HTML
+### データバインディングとHTML {@a data-binding-and-html}
 
-In the normal course of HTML development, you create a visual structure with HTML elements, and
-you modify those elements by setting element attributes with string constants.
+通常の HTML 開発では、HTML 要素を使用して視覚的な構造を作り、
+文字列定数を要素の属性に設定することによってそれらの要素を変更します。
 
 ```html
 <div class="special">Plain old HTML</div>
@@ -395,105 +395,105 @@ you modify those elements by setting element attributes with string constants.
 <button disabled>Save</button>
 ```
 
-With data-binding, you can control things like the state of a button:
+データバインディングを使えば、ボタンの状態などを制御することができます:
 
 <code-example path="binding-syntax/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
 
-Notice that the binding is to the `disabled` property of the button's DOM element,
-**not** the attribute. This applies to data-binding in general. Data-binding works with *properties* of DOM elements, components, and directives, not HTML *attributes*.
+バインディングの対象は、ボタンの DOM 要素の `disabled` プロパティで、属性 **ではない** ことに注意してください。
+これはデータバインディング一般に適用されます。データバインディングは、DOM 要素、コンポーネント、ディレクティブの *プロパティ* に対するもので、HTML *属性* に対するものではありません。
 
 
-### HTML attribute vs. DOM property
+### HTML 属性 vs. DOM プロパティ {@a html-attribute-vs-dom-property}
 
-The distinction between an HTML attribute and a DOM property is key to understanding
-how Angular binding works. **Attributes are defined by HTML. Properties are accessed from DOM (Document Object Model) nodes.**
+HTML 属性と DOM プロパティの違いは、Angular バインディングがどのように機能するかを理解する上で非常に重要です。
+**属性は HTML によって定義されています。プロパティは DOM(Document Object Model)ノードからアクセスされます。**
 
-* A few HTML attributes have 1:1 mapping to properties; for example, `id`.
+* いくつかの HTML 属性は、プロパティへの1対1のマッピングを持っています。`id` はその一例です。
 
-* Some HTML attributes don't have corresponding properties; for example, `aria-*`.
+* 一部の HTML 属性には対応するプロパティがありません。`aria-*` はその一例です。
 
-* Some DOM properties don't have corresponding attributes; for example, `textContent`.
+* 一部の DOM プロパティには対応する属性がありません。`textContent` はその一例です。
 
-It is important to remember that *HTML attribute* and the *DOM property* are different things, even when they have the same name.
-In Angular, the only role of HTML attributes is to initialize element and directive state.
+たとえ同じ名前だったとしても、 *HTML 属性* と *DOM プロパティ* は別物だということを肝に銘じておきましょう。
+Angular での HTML 属性の役割は、要素やディレクティブの状態を初期化することだけです。
 
-**Template binding works with *properties* and *events*, not *attributes*.**
+**テンプレートバインディングは *属性* ではなく *プロパティ* と *イベント* に対するものです。**
 
-When you write a data-binding, you're dealing exclusively with the *DOM properties* and *events* of the target object.
+データバインディングを書くときは、対象のオブジェクトの *DOM プロパティ* と *イベント* だけを扱います。
 
 <div class="alert is-helpful">
 
-This general rule can help you build a mental model of attributes and DOM properties:
-**Attributes initialize DOM properties and then they are done.
-Property values can change; attribute values can't.**
+この一般的なルールは、属性と DOM プロパティのメンタルモデルを構築するのに役立ちます:
+**属性は DOM プロパティを初期化するとその役割を終えます。
+プロパティは変化します。属性は変化しません。**
 
-There is one exception to this rule.
-Attributes can be changed by `setAttribute()`, which re-initializes corresponding DOM properties.
+このルールにはひとつだけ例外があります。
+属性は `setAttribute()` で変えることができ、それによって対応する DOM プロパティも再初期化されます。
 
 </div>
 
-For more information, see the [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) which has API docs for all the standard DOM elements and their properties.
-Comparing the [`<td>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) attributes to the [`<td>` properties](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) provides a helpful example for differentiation.
-In particular, you can navigate from the attributes page to the properties via "DOM interface" link, and navigate the inheritance hierarchy up to `HTMLTableCellElement`.
+詳しくは、すべての標準 DOM 要素やそのプロパティについての API ドキュメントがある [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) を参照してください。
+[`<td>` の属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) と [`<td>` のプロパティ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) を見比べれば、より違いがはっきりするでしょう。
+具体的には、属性のページの "DOM interface" リンクをたどることでプロパティのページに移動でき、 `HTMLTableCellElement` まで継承の階層を移動できます。
 
 
-#### Example 1: an `<input>`
+#### 例 1: `<input>`
 
-When the browser renders `<input type="text" value="Sarah">`, it creates a
-corresponding DOM node with a `value` property initialized to "Sarah".
+ブラウザが `<input type="text" value="Sarah">` をレンダリングするとき、
+ブラウザは `value` プロパティが "Sarah" で初期化された DOM ノードを作ります。
 
 ```html
 <input type="text" value="Sarah">
 ```
 
-When the user enters "Sally" into the `<input>`, the DOM element `value` *property* becomes "Sally".
-However, if you look at the HTML attribute `value` using `input.getAttribute('value')`, you can see that the *attribute* remains unchanged&mdash;it returns "Sarah".
+ユーザーが `<input>` に「Sally」と入力すると、DOM 要素の `value` プロパティは「Sally」になります。
+しかし、`input.getAttribute('value')` で HTML の `value` 属性を見れば分かるとおり、 *属性* は変わらず「Sarah」のままです。
 
-The HTML attribute `value` specifies the *initial* value; the DOM `value` property is the *current* value.
+HTML 属性の `value` は *初期値* を指定します。DOM の `value` プロパティは *現在* の値です。
 
-To see attributes versus DOM properties in a functioning app, see the <live-example name="binding-syntax"></live-example> especially for binding syntax.
+実際に動くアプリで属性と DOM プロパティの違いを見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。
 
-#### Example 2: a disabled button
+#### 例 2: disabled ボタン
 
-The `disabled` attribute is another example. A button's `disabled`
-*property* is `false` by default so the button is enabled.
+`disabled` 属性はもうひとつの例です。
+ボタンの `disabled` *プロパティ* のデフォルトは `false` なので、ボタンは有効な状態です。
 
-When you add the `disabled` *attribute*, its presence alone
-initializes the button's `disabled` *property* to `true`
-so the button is disabled.
+`disabled` *属性* を追加すると、その存在だけでボタンの
+`disabled` *プロパティ* が `true` に初期化されるため、
+ボタンは無効になります。
 
 ```html
 <button disabled>Test Button</button>
 ```
 
-Adding and removing the `disabled` *attribute* disables and enables the button.
-However, the value of the *attribute* is irrelevant,
-which is why you cannot enable a button by writing `<button disabled="false">Still Disabled</button>`.
+`disabled` *属性* の追加と削除で、ボタンの無効、有効が切り換わります。
+しかし *属性* の値とは無関係なため、
+`<button disabled="false">Still Disabled</button>` と書いてボタンを有効にすることはできません。
 
-To control the state of the button, set the `disabled` *property*,
+ボタンの状態を制御するには `disabled` *プロパティ* を設定します。
 
 <div class="alert is-helpful">
 
-Though you could technically set the `[attr.disabled]` attribute binding, the values are different in that the property binding requires to a boolean value, while its corresponding attribute binding relies on whether the value is `null` or not. Consider the following:
+技術的には属性バインディング `[attr.disabled]` を設定することはできますが、値は次のように異なります。プロパティバインディングがブーリアンの値を必要とするのに対して、対応する属性バインディングは、値が `null` かそうでないかを見ています。
 
 ```html
 <input [disabled]="condition ? true : false">
 <input [attr.disabled]="condition ? 'disabled' : null">
 ```
 
-Generally, use property binding over attribute binding as it is more intuitive (being a boolean value), has a shorter syntax, and is more performant.
+一般的には、属性バインディングよりもプロパティバインディングを使ったほうが、ブーリアンの値なのでより直感的で、構文も短く、パフォーマンスもよいです。
 
 </div>
 
 
-To see the `disabled` button example in a functioning app, see the <live-example name="binding-syntax"></live-example> especially for binding syntax. This example shows you how to toggle the disabled property from the component.
+実際に動くアプリで `disabled` ボタンの動作を見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。この例ではコンポーネントから disabled プロパティをトグルする方法を示しています。
 
-## Binding types and targets
+## バインディングタイプとターゲット {@a binding-types-and-targets}
 
-The **target of a data-binding** is something in the DOM.
-Depending on the binding type, the target can be a property (element, component, or directive),
-an event (element, component, or directive), or sometimes an attribute name.
-The following table summarizes the targets for the different binding types.
+**データバインディングのターゲット** はDOM内のものです。
+バインディングタイプに応じて、ターゲットはプロパティ（要素、コンポーネント、ディレクティブ）、
+イベント（要素、コンポーネント、ディレクティブ）、また時には属性の名前となります。
+次の表はさまざまなバインディングタイプのターゲットをまとめたものです。
 
 <style>
   td, th {vertical-align: top}
@@ -508,26 +508,26 @@ The following table summarizes the targets for the different binding types.
   </col>
   <tr>
     <th>
-      Type
+      タイプ
     </th>
     <th>
-      Target
+      ターゲット
     </th>
     <th>
-      Examples
+      例
     </th>
   </tr>
   <tr>
     <td>
-      Property
+      プロパティ
     </td>
     <td>
-      Element&nbsp;property<br>
-      Component&nbsp;property<br>
-      Directive&nbsp;property
+      要素のプロパティ<br>
+      コンポーネントのプロパティ<br>
+      ディレクティブのプロパティ
     </td>
     <td>
-      <code>src</code>, <code>hero</code>, and <code>ngClass</code> in the following:
+      以下の <code>src</code>, <code>hero</code>, <code>ngClass</code>:
       <code-example path="template-syntax/src/app/app.component.html" region="property-binding-syntax-1"></code-example>
       <!-- For more information, see [Property Binding](guide/property-binding). -->
     </td>
@@ -537,12 +537,12 @@ The following table summarizes the targets for the different binding types.
       Event
     </td>
     <td>
-      Element&nbsp;event<br>
-      Component&nbsp;event<br>
-      Directive&nbsp;event
+      要素のイベント<br>
+      コンポーネントのイベント<br>
+      ディレクティブのイベント
     </td>
     <td>
-      <code>click</code>, <code>deleteRequest</code>, and <code>myClick</code> in the following:
+      以下の <code>click</code>, <code>deleteRequest</code>, <code>myClick</code>:
       <code-example path="template-syntax/src/app/app.component.html" region="event-binding-syntax-1"></code-example>
       <!-- KW--Why don't these links work in the table? -->
       <!-- <div>For more information, see [Event Binding](guide/event-binding).</div> -->
@@ -550,10 +550,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Two-way
+      双方向
     </td>
     <td>
-      Event and property
+      イベントとプロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="2-way-binding-syntax-1"></code-example>
@@ -561,11 +561,11 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Attribute
+      属性
     </td>
     <td>
-      Attribute
-      (the&nbsp;exception)
+      属性
+      (例外です)
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="attribute-binding-syntax-1"></code-example>
@@ -573,10 +573,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Class
+      クラス
     </td>
     <td>
-      <code>class</code> property
+      <code>class</code> プロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="class-binding-syntax-1"></code-example>
@@ -584,10 +584,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Style
+      スタイル
     </td>
     <td>
-      <code>style</code> property
+      <code>style</code> プロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="style-binding-syntax-1"></code-example>

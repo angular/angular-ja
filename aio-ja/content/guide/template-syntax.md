@@ -432,7 +432,7 @@ Angular での HTML 属性の役割は、要素やディレクティブの状態
 
 </div>
 
-詳しくは、全ての標準 DOM 要素やそのプロパティについての API ドキュメントがある [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) を参照してください。
+詳しくは、すべての標準 DOM 要素やそのプロパティについての API ドキュメントがある [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) を参照してください。
 [`<td>` の属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) と [`<td>` のプロパティ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) を見比べれば、より違いがはっきりするでしょう。
 具体的には、属性のページの "DOM interface" リンクをたどることでプロパティのページに移動でき、 `HTMLTableCellElement` まで継承の階層を移動できます。
 
@@ -447,7 +447,7 @@ Angular での HTML 属性の役割は、要素やディレクティブの状態
 ```
 
 ユーザーが `<input>` に「Sally」と入力すると、DOM 要素の `value` プロパティは「Sally」になります。
-しかし、`input.getAttribute('value')` で HTML の `value` 属性を見れば分かる通り、 *属性* は変わらず「Sarah」のままです。
+しかし、`input.getAttribute('value')` で HTML の `value` 属性を見れば分かるとおり、 *属性* は変わらず「Sarah」のままです。
 
 HTML 属性の `value` は *初期値* を指定します。DOM の `value` プロパティは *現在* の値です。
 
@@ -481,7 +481,7 @@ HTML 属性の `value` は *初期値* を指定します。DOM の `value` プ�
 <input [attr.disabled]="condition ? 'disabled' : null">
 ```
 
-一般的には、属性バインディングよりもプロパティバインディングを使ったほうが、ブーリアンの値なのでより直感的で、構文も短く、パフォーマンスも良いです。
+一般的には、属性バインディングよりもプロパティバインディングを使ったほうが、ブーリアンの値なのでより直感的で、構文も短く、パフォーマンスもよいです。
 
 </div>
 
@@ -493,7 +493,7 @@ HTML 属性の `value` は *初期値* を指定します。DOM の `value` プ�
 **データバインディングのターゲット** はDOM内のものです。
 バインディングタイプに応じて、ターゲットはプロパティ（要素、コンポーネント、ディレクティブ）、
 イベント（要素、コンポーネント、ディレクティブ）、また時には属性の名前となります。
-以下の表は様々なバインディングタイプのターゲットをまとめたものです。
+次の表はさまざまなバインディングタイプのターゲットをまとめたものです。
 
 <style>
   td, th {vertical-align: top}

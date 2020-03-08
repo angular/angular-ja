@@ -253,34 +253,34 @@ export class AppServerModule {}
 リクエスト URL を Express `Request` オブジェクトで提供された絶対 URL に置き換えます。
 
 {@a universal-engine}
-### Universal template engine
+### Universal テンプレートエンジン
 
-The important bit in the `server.ts` file is the `ngExpressEngine()` function.
+`server.ts` ファイルの重要な部分は `ngExpressEngine()` 関数です。
 
 <code-example path="universal/server.ts" header="server.ts" region="ngExpressEngine">
 </code-example>
 
-The `ngExpressEngine()` function is a wrapper around Universal's `renderModule()` function which turns a client's
-requests into server-rendered HTML pages.
+`ngExpressEngine()` 関数は、クライアントのリクエストをサーバーレンダリングされた HTML ページに変換する
+Universal の `renderModule()` 関数のラッパーです。
 
-* The first parameter is `AppServerModule`.
-It's the bridge between the Universal server-side renderer and the Angular application.
+* 最初のパラメータは `AppServerModule` です。
+これは、Universal の サーバーサイドレンダラーと Angular アプリケーション間のブリッジです。
 
-* The second parameter, `extraProviders`, is optional. It lets you specify dependency providers that apply only when
-running on this server.
-You can do this when your app needs information that can only be determined by the currently running server instance.
-One example could be the running server's *origin*, which could be used to [calculate absolute HTTP URLs](#http-urls) if
-not using the `Request` token as shown above.
+* 2番目のパラメータは `extraProviders` で、オプションです。
+このサーバーで実行されている場合にのみ適用される依存関係プロバイダーを指定できます。
+これは、現在実行中のサーバーインスタンスによってのみ判断できる情報がアプリに必要な場合に実行できます。
+1つの例としては、実行中のサーバーのオリジンがあります。
+これは、上記のように `Request` トークンを使用しない場合に[絶対 HTTP URL を計算する](#http-urls) ために使用できます。
 
-The `ngExpressEngine()` function returns a `Promise` callback that resolves to the rendered page.
-It's up to the engine to decide what to do with that page.
-This engine's `Promise` callback returns the rendered page to the web server,
-which then forwards it to the client in the HTTP response.
+`ngExpressEngine()` 関数は、レンダリングされたページに解決される `Promise` コールバックを返します。
+そのページをどう処理するかはエンジン次第です。
+このエンジンの `Promise` コールバックは、レンダリングされたページを Web サーバーに返し、
+Web サーバーはそれを HTTP レスポンスでクライアントに転送します。
 
 <div class="alert is-helpful">
 
-  **Note:**  These wrappers help hide the complexity of the `renderModule()` function. There are more wrappers
-  for different backend technologies at the [Universal repository](https://github.com/angular/universal).
+  **メモ:**  これらのラッパーは、`renderModule()` 関数の複雑さを隠すのに役立ちます。
+  [Universal リポジトリ](https://github.com/angular/universal)には、さまざまなバックエンドテクノロジー用のラッパーがさらにあります。
 
 </div>
 

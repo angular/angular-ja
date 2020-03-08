@@ -59,41 +59,41 @@ package.json                 <i>npm 構成</i>
 
 ### Universal in action
 
-To start rendering your app with Universal on your local system, use the following command.
+ローカルシステムで Universal を使用してアプリのレンダリングを開始するには、次のコマンドを使用します。
 
 <code-example language="bash">
 npm run build:ssr && npm run serve:ssr
 </code-example>
 
-Open a browser and navigate to http://localhost:4000/.
-You should see the familiar Tour of Heroes dashboard page.
+ブラウザを開き、http://localhost:4000/ に移動します。
+おなじみの Tour of Heroes ダッシュボードページが表示されます。
 
-Navigation via `routerLinks` works correctly because they use the native anchor (`<a>`) tags.
-You can go from the Dashboard to the Heroes page and back.
-You can click a hero on the Dashboard page to display its Details page.
+`routerLinks` を介したナビゲーションはネイティブアンカー (`<a>`) タグを使用するため、正常に機能します。
+ダッシュボードからヒーローページに遷移して戻ることができます。
+ダッシュボードページでヒーローをクリックすると、その詳細ページが表示されます。
 
-If you throttle your network speed so that the client-side scripts take longer to download (instructions below),
-you'll notice:
-* Clicking a hero on the Heroes page does nothing.
-* You can't add or delete a hero.
-* The search box on the Dashboard page is ignored.
-* The *Back* and *Save* buttons on the Details page don't work.
+クライアント側のスクリプトのダウンロードに時間がかかるように (次の手順) ネットワーク速度を調整する場合、
+次のことに気づくでしょう:
+* ヒーローページでヒーローをクリックしても何も起こりません。
+* ヒーローを追加または削除することはできません。
+* ダッシュボードページの検索ボックスは無視されます。
+* 詳細ページの *戻る* ボタンと *保存* ボタンは機能しません。
 
-User events other than `routerLink` clicks aren't supported.
-You must wait for the full client app to bootstrap and run, or buffer the events using libraries like
-[preboot](https://github.com/angular/preboot), which allow you to replay these events once the client-side scripts load.
+`routerLink` クリック以外のユーザーイベントはサポートされていません。
+完全なクライアントアプリがブートストラップして実行されるのを待つか、
+[preboot](https://github.com/angular/preboot) などのライブラリを使用してイベントをバッファリングする必要があります。
 
-The transition from the server-rendered app to the client app happens quickly on a development machine, but you should
-always test your apps in real-world scenarios.
+サーバーレンダリングされたアプリからクライアントアプリへの移行は開発マシンで迅速に行われますが、
+実際のシナリオでは常にアプリをテストする必要があります。
 
-You can simulate a slower network to see the transition more clearly as follows:
+遅いネットワークをシミュレートして、次のように移行をより明確に確認できます:
 
-1. Open the Chrome Dev Tools and go to the Network tab.
-1. Find the [Network Throttling](https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#throttling)
-dropdown on the far right of the menu bar.
-1. Try one of the "3G" speeds.
+1. Chrome Dev Tools を開き、ネットワークタブに移動します。
+1. メニューバーの右端にある [Network Throttling](https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#throttling)
+ドロップダウンを見つけます。
+1. "3G" 速度のいずれかを試します。
 
-The server-rendered app still launches quickly but the full client app may take seconds to load.
+サーバーレンダリングされたアプリは引き続き迅速に起動しますが、完全なクライアントアプリの読み込みには数秒かかる場合があります。
 
 {@a why-do-it}
 ## Why use server-side rendering?

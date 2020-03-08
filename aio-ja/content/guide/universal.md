@@ -325,15 +325,15 @@ Node Express サーバーパイプラインは、データリクエスト用に�
 
 <code-example path="universal/server.ts" header="server.ts (navigation)" region="navigation-request"></code-example>
 
-### Serving static files safely
+### 静的ファイルを安全に提供する
 
-A single `app.use()` treats all other URLs as requests for static assets
-such as JavaScript, image, and style files.
+単一の `app.use()` は、他のすべての URL を
+JavaScript、画像、スタイルファイルなどの静的アセットのリクエストとして扱います。
 
-To ensure that clients can only download the files that they are permitted to see, put all client-facing asset files in
-the `/dist` folder and only honor requests for files from the `/dist` folder.
+クライアントが表示が許可されているファイルのみをダウンロードできるようにするには、すべてのクライアント向けアセットファイルを `/dist` フォルダーに入れ、
+`/dist` フォルダーからのファイルのリクエストのみを受け入れます。
 
-The following Node Express code routes all remaining requests to `/dist`, and returns a `404 - NOT FOUND` error if the
-file isn't found.
+次の Node Express コードは、残りのすべてのリクエストを `/dist` にルーティングし、
+ファイルが見つからない場合は `404 - NOT FOUND` エラーを返します。
 
 <code-example path="universal/server.ts" header="server.ts (static files)" region="static"></code-example>

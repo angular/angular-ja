@@ -284,44 +284,44 @@ Web サーバーはそれを HTTP レスポンスでクライアントに転送�
 
 </div>
 
-### Filtering request URLs
+### リクエスト URL のフィルタリング
 
-NOTE: the basic behavior described below is handled automatically when using the NgUniversal Express schematic, this
-is helpful when trying to understand the underlying behavior or replicate it without using the schematic.
+メモ: NgUniversal Express スキーマティックを使用すると、次に説明する基本的な動作が自動的に処理されます。
+これは、基本的な動作を理解したり、スキーマティックを使用せずに複製したりするときに役立ちます。
 
-The web server must distinguish _app page requests_ from other kinds of requests.
+Web サーバーは、_アプリのページのリクエスト_ を他の種類のリクエストと区別する必要があります。
 
-It's not as simple as intercepting a request to the root address `/`.
-The browser could ask for one of the application routes such as `/dashboard`, `/heroes`, or `/detail:12`.
-In fact, if the app were only rendered by the server, _every_ app link clicked would arrive at the server
-as a navigation URL intended for the router.
+ルートアドレス `/` へのリクエストをインターセプトするほど簡単ではありません。
+ブラウザは、`/dashboard`、`/heroes`、`/detail:12` などのアプリケーションルートのいずれかをリクエストできます。
+実際、アプリがサーバーによってのみレンダリングされた場合、
+クリックされた _すべての_ アプリリンクは、ルーター向けのナビゲーション URL としてサーバーに到達します。
 
-Fortunately, application routes have something in common: their URLs lack file extensions.
-(Data requests also lack extensions but they're easy to recognize because they always begin with `/api`.)
-All static asset requests have a file extension (such as `main.js` or `/node_modules/zone.js/dist/zone.js`).
+幸いなことに、アプリケーションルートには共通点があります。URL にはファイル拡張子がありません。
+(データリクエストにも拡張子はありませんが、常に `/api` で始まるため、簡単に認識できます。)
+すべての静的アセットリクエストには (`main.js` や `/node_modules/zone.js/dist/zone.js` など) ファイル拡張子があります。
 
-Because we use routing, we can easily recognize the three types of requests and handle them differently.
+ルーティングを使用するため、3種類のリクエストを簡単に認識して、異なる方法で処理できます。
 
-1. **Data request**: request URL that begins `/api`.
-1. **App navigation**: request URL with no file extension.
-1. **Static asset**: all other requests.
+1. **データリクエスト**: `/api` で始まるリクエスト URL
+1. **アプリのナビゲーション**: ファイル拡張子のないリクエスト URL
+1. **静的アセット**: 他のすべてのリクエスト
 
-A Node Express server is a pipeline of middleware that filters and processes requests one after the other.
-You configure the Node Express server pipeline with calls to `app.get()` like this one for data requests.
+Node Express サーバーは、リクエストを次々にフィルタリングして処理するミドルウェアのパイプラインです。
+Node Express サーバーパイプラインは、データリクエスト用にこのような `app.get()` の呼び出しで構成します。
 
 <code-example path="universal/server.ts" header="server.ts (data URL)" region="data-request"></code-example>
 
 <div class="alert is-helpful">
 
-  **Note:** This sample server doesn't handle data requests.
+  **メモ:** このサンプルサーバーはデータリクエストを処理しません。
 
-  The tutorial's "in-memory web API" module, a demo and development tool, intercepts all HTTP calls and
-  simulates the behavior of a remote data server.
-  In practice, you would remove that module and register your web API middleware on the server here.
+  チュートリアルの「インメモリ Web API」モジュールであるデモおよび開発ツールは、
+  すべての HTTP 呼び出しをインターセプトし、リモートデータサーバーの動作をシミュレートします。
+  実際には、このモジュールを削除して、Web API ミドルウェアをサーバーに登録します。
 
 </div>
 
-The following code filters for request URLs with no extensions and treats them as navigation requests.
+次のコードは、拡張子のないリクエスト URL をフィルタリングし、それらをナビゲーションリクエストとして扱います。
 
 <code-example path="universal/server.ts" header="server.ts (navigation)" region="navigation-request"></code-example>
 

@@ -139,38 +139,38 @@ Angular Universal を使用すると、完全なアプリのように見える�
 アプリが完全に読み込まれた後、完全なインタラクティブエクスペリエンスを取得します。
 
 {@a how-does-it-work}
-## Universal web servers
+## Universal Web サーバー
 
-A Universal web server responds to application page requests with static HTML rendered by the [Universal template engine](#universal-engine).
-The server receives and responds to HTTP requests from clients (usually browsers), and serves static assets such as scripts, CSS, and images.
-It may respond to data requests, either directly or as a proxy to a separate data server.
+Universal Web サーバーは、[Universal テンプレートエンジン](#universal-engine)によってレンダリングされた静的 HTML でアプリケーションページリクエストに応答します。
+サーバーは、クライアント (通常はブラウザ) から HTTP リクエストを受信して応答し、スクリプト、CSS、画像などの静的アセットを提供します。
+データリクエストに、直接または別のデータサーバーへのプロキシとして応答する場合があります。
 
-The sample web server for this guide is based on the popular [Express](https://expressjs.com/) framework.
+このガイドのサンプル Web サーバーは、一般的な [Express](https://expressjs.com/) フレームワークに基づいています。
 
 <div class="alert is-helpful">
 
-  **Note:** _Any_ web server technology can serve a Universal app as long as it can call Universal's `renderModule()` function.
-  The principles and decision points discussed here apply to any web server technology.
+  **メモ:** Universal の `renderModule()` 関数を呼び出すことができる限り、_どの_ Web サーバーテクノロジーでも Universal アプリを提供できます。
+  ここで説明する原則と決定事項は、すべての Web サーバーテクノロジーに適用されます。
 
 </div>
 
-Universal applications use the Angular `platform-server` package (as opposed to `platform-browser`), which provides
-server implementations of the DOM, `XMLHttpRequest`, and other low-level features that don't rely on a browser.
+ユニバーサルアプリケーションは、Angular `platform-server` パッケージ (`platform-browser` ではなく) を使用します。
+これは、DOM、`XMLHttpRequest`、およびブラウザに依存しないその他の低レベル機能のサーバー実装を提供します。
 
-The server ([Node Express](https://expressjs.com/) in this guide's example)
-passes client requests for application pages to the NgUniversal `ngExpressEngine`. Under the hood, this
-calls Universal's `renderModule()` function, while providing caching and other helpful utilities.
+サーバー (このガイドの例では [Node Express](https://expressjs.com/)) は、アプリケーションページのクライアントリクエストを NgUniversal の `ngExpressEngine` に渡します。
+内部では、これは Universal の `renderModule()` 関数を呼び出しますが、
+キャッシングやその他の有用なユーティリティを提供します。
 
-The `renderModule()` function takes as inputs a *template* HTML page (usually `index.html`),
-an Angular *module* containing components,
-and a *route* that determines which components to display.
-The route comes from the client's request to the server.
+`renderModule()` 関数は、入力としてテンプレート HTML ページ (通常は `index.html`)、
+コンポーネントを含む Angular *モジュール*、
+および表示するコンポーネントを決定する *ルート* を受け取ります。
+ルートは、クライアントの要求からサーバーに到達します。
 
-Each request results in the appropriate view for the requested route.
-The `renderModule()` function renders the view within the `<app>` tag of the template,
-creating a finished HTML page for the client.
+各リクエストの結果、リクエストされたルートの適切なビューが表示されます。
+`renderModule()` 関数は、テンプレートの `<app>` タグ内でビューをレンダリングし、
+クライアント用の完成した HTML ページを作成します。
 
-Finally, the server returns the rendered page to the client.
+最後に、サーバーはレンダリングされたページをクライアントに返します。
 
 ### Working around the browser APIs
 

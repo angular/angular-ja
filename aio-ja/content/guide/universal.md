@@ -96,48 +96,47 @@ npm run build:ssr && npm run serve:ssr
 サーバーレンダリングされたアプリは引き続き迅速に起動しますが、完全なクライアントアプリの読み込みには数秒かかる場合があります。
 
 {@a why-do-it}
-## Why use server-side rendering?
+## サーバーサイドレンダリングを使用する理由
 
-There are three main reasons to create a Universal version of your app.
+アプリの Universal バージョンを作成する主な理由は3つあります。
 
-1. Facilitate web crawlers through [search engine optimization (SEO)](https://static.googleusercontent.com/media/www.google.com/en//webmasters/docs/search-engine-optimization-starter-guide.pdf)
-1. Improve performance on mobile and low-powered devices
-1. Show the first page quickly with a [first-contentful paint (FCP)](https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint)
+1. [検索エンジン最適化 (SEO)](https://support.google.com/webmasters/answer/7451184?hl=ja)による Web クローラーの促進
+1. モバイルおよび低電力デバイスのパフォーマンスを改善する
+1. [first-contentful paint (FCP)](https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint) で最初のページをすばやく表示します
 
 {@a seo}
 {@a web-crawlers}
-### Facilitate web crawlers (SEO)
+### Web クローラーを促進する (SEO)
 
-Google, Bing, Facebook, Twitter, and other social media sites rely on web crawlers to index your application content and
-make that content searchable on the web.
-These web crawlers may be unable to navigate and index your highly interactive Angular application as a human user could do.
+Google、Bing、Facebook、Twitter、およびその他のソーシャルメディアサイトは、Web クローラーに依存してアプリケーションコンテンツのインデックスを作成し、
+そのコンテンツを Web 上で検索可能にします。
+これらの Web クローラーは、人間のユーザーのように、高度にインタラクティブな Angular アプリケーションをナビゲートおよびインデックス化できない場合があります。
 
-Angular Universal can generate a static version of your app that is easily searchable, linkable, and navigable without JavaScript.
-Universal also makes a site preview available since each URL returns a fully rendered page.
+Angular Universal は、JavaScript なしで簡単に検索、リンク、ナビゲートできるアプリの静的バージョンを生成できます。また、Universal は、各 URL が完全にレンダリングされたページを返すため、サイトプレビューを利用可能にします。
 
 {@a no-javascript}
-### Improve performance on mobile and low-powered devices
+### モバイルおよび低電力デバイスのパフォーマンスを改善する
 
-Some devices don't support JavaScript or execute JavaScript so poorly that the user experience is unacceptable.
-For these cases, you may require a server-rendered, no-JavaScript version of the app.
-This version, however limited, may be the only practical alternative for
-people who otherwise couldn't use the app at all.
+一部のデバイスはJavaScriptをサポートしていないか、JavaScriptの実行が不十分であるため、
+ユーザー体験が受け入れられません。
+このような場合、サーバーレンダリングされたJavaScriptなしのアプリが必要になる場合があります。
+このバージョンは、制限はありますが、アプリをまったく使用できなかった場合の唯一の実用的な代替手段になる可能性があります。
 
 {@a startup-performance}
-### Show the first page quickly
+### 最初のページをすばやく表示する
 
-Displaying the first page quickly can be critical for user engagement.
-Pages that load faster perform better, [even with changes as small as 100ms](https://web.dev/shopping-for-speed-on-ebay/).
-Your app may have to launch faster to engage these users before they decide to do something else.
+最初のページをすばやく表示することは、ユーザーエンゲージメントにとって重要です。
+読み込みが高速なページは、[100ミリ秒の小さな変更でも](https://web.dev/shopping-for-speed-on-ebay/)パフォーマンスが向上します。
+これらのユーザーが何か他のことをする前にエンゲージするには、アプリの起動を高速化する必要があります。
 
-With Angular Universal, you can generate landing pages for the app that look like the complete app.
-The pages are pure HTML, and can display even if JavaScript is disabled.
-The pages don't handle browser events, but they _do_ support navigation through the site using [`routerLink`](guide/router#router-link).
+Angular Universal を使用すると、完全なアプリのように見えるアプリのランディングページを生成できます。
+ページは純粋な HTML であり、JavaScript が無効になっていても表示できます。
+ページはブラウザイベントを処理しませんが、[`routerLink`](guide/router#router-link) を使用してサイト内のナビゲーションをサポート _します_ 。
 
-In practice, you'll serve a static version of the landing page to hold the user's attention.
-At the same time, you'll load the full Angular app behind it.
-The user perceives near-instant performance from the landing page
-and gets the full interactive experience after the full app loads.
+実際には、静的バージョンのランディングページを提供して、ユーザーの注意を引き付けます。
+同時に、その背後にある完全な Angular アプリをロードします。
+ユーザーは、ランディングページからほぼ瞬時のパフォーマンスを認識し、
+アプリが完全に読み込まれた後、完全なインタラクティブエクスペリエンスを取得します。
 
 {@a how-does-it-work}
 ## Universal web servers

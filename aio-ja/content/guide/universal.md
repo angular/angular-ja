@@ -188,19 +188,19 @@ Angular がそれを提供しない場合、ブラウザ内ではブラウザ AP
 これは、アプリを[ルーティング可能](guide/router)にするためのよい議論です。
 
 {@a http-urls}
-### Using absolute URLs for server requests
+### サーバーリクエストに絶対 URL を使用する
 
-The tutorial's `HeroService` and `HeroSearchService` delegate to the Angular `HttpClient` module to fetch application data.
-These services send requests to _relative_ URLs such as `api/heroes`.
-In a Universal app, HTTP URLs must be _absolute_ (for example, `https://my-server.com/api/heroes`).
-This means you need to change your services to make requests with absolute URLs when running on the server and with relative
-URLs when running in the browser.
+チュートリアルの `HeroService` と `HeroSearchService` は、Angular `HttpClient` モジュールに委任して、アプリケーションデータを取得します。
+これらのサービスは、`api/heroes` などの _相対_ URL にリクエストを送信します。
+ユニバーサルアプリでは、HTTP URL は _絶対_ (たとえば、`https://my-server.com/api/heroes`) である必要があります。
+つまり、サーバーで実行する場合は絶対 URL で、
+ブラウザで実行する場合は相対 URL でリクエストを行うようにサービスを変更する必要があります。
 
-One solution is to provide the full URL to your application on the server, and write an interceptor that can retrieve this
-value and prepend it to the request URL. If you're using the `ngExpressEngine`, as shown in the example in this guide, half
-the work is already done. We'll assume this is the case, but it's trivial to provide the same functionality.
+1つの解決策は、サーバー上のアプリケーションに完全な URL を提供し、この値を取得してリクエスト URL に追加できるインターセプターを作成することです。
+このガイドの例に示すように、`ngExpressEngine` を使用している場合、作業の半分はすでに完了しています。
+これが当てはまると仮定しますが、同じ機能を提供するのは簡単です。
 
-Start by creating an [HttpInterceptor](api/common/http/HttpInterceptor).
+[HttpInterceptor](api/common/http/HttpInterceptor) を作成することから始めます。
 
 <code-example language="typescript" header="universal-interceptor.ts">
 
@@ -230,7 +230,7 @@ export class UniversalInterceptor implements HttpInterceptor {
 
 </code-example>
 
-Next, provide the interceptor in the providers for the server `AppModule`.
+次に、サーバー `AppModule` のプロバイダーにインターセプターを提供します。
 
 <code-example language="typescript" header="app.server.module.ts">
 
@@ -249,8 +249,8 @@ export class AppServerModule {}
 
 </code-example>
 
-Now, on every HTTP request made on the server, this interceptor will fire and replace the request URL with the absolute
-URL provided in the Express `Request` object.
+これで、サーバーで行われたすべての HTTP リクエストで、このインターセプターが起動し、
+リクエスト URL を Express `Request` オブジェクトで提供された絶対 URL に置き換えます。
 
 {@a universal-engine}
 ### Universal template engine

@@ -172,20 +172,20 @@ Universal Web サーバーは、[Universal テンプレートエンジン](#univ
 
 最後に、サーバーはレンダリングされたページをクライアントに返します。
 
-### Working around the browser APIs
+### ブラウザ API の回避
 
-Because a Universal app doesn't execute in the browser, some of the browser APIs and capabilities may be missing on the server.
+ユニバーサルアプリはブラウザで実行されないため、ブラウザ API と機能の一部がサーバー上にない場合があります。
 
-For example, server-side applications can't reference browser-only global objects such as `window`, `document`, `navigator`, or `location`.
+たとえば、サーバー側のアプリケーションは、`window`、`document`、`navigator`、`location` などのブラウザのみのグローバルオブジェクトを参照できません。
 
-Angular provides some injectable abstractions over these objects, such as [`Location`](api/common/Location)
-or [`DOCUMENT`](api/common/DOCUMENT); it may substitute adequately for these APIs.
-If Angular doesn't provide it, it's possible to write new abstractions that delegate to the browser APIs while in the browser
-and to an alternative implementation while on the server (aka shimming).
+Angular は、[`Location`](api/common/Location) や [`DOCUMENT`](api/common/DOCUMENT) など、
+これらのオブジェクトに対して注入可能な抽象化を提供します。
+これらの API を適切に置き換えることができます。
+Angular がそれを提供しない場合、ブラウザ内ではブラウザ API に委任し、サーバー上では別名実装 (別名シミング) に委任する新しい抽象化を記述することができます。
 
-Similarly, without mouse or keyboard events, a server-side app can't rely on a user clicking a button to show a component.
-The app must determine what to render based solely on the incoming client request.
-This is a good argument for making the app [routable](guide/router).
+同様に、マウスまたはキーボードイベントがない場合、サーバーサイドアプリは、ユーザーがボタンをクリックしてコンポーネントを表示することに依存できません。
+アプリは、受信するクライアントリクエストのみに基づいてレンダリングするものを決定する必要があります。
+これは、アプリを[ルーティング可能](guide/router)にするためのよい議論です。
 
 {@a http-urls}
 ### Using absolute URLs for server requests

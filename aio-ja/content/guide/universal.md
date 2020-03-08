@@ -21,15 +21,15 @@ CLI の schematic `@nguniversal/express-engine` は、以下で説明するよ�
 </div>
 
 {@a the-example}
-## Universal tutorial
+## Universal チュートリアル
 
-The [Tour of Heroes tutorial](tutorial) is the foundation for this walkthrough.
+[ツアー オブ ヒーローズ チュートリアル](tutorial) は、このチュートリアルの基礎です。
 
-In this example, the Angular CLI compiles and bundles the Universal version of the app with the
-[Ahead-of-Time (AOT) compiler](guide/aot-compiler).
-A Node Express web server compiles HTML pages with Universal based on client requests.
+この例では、Angular CLI は [Ahead-of-Time (AOT) コンパイラー](guide/aot-compiler)を使用して
+アプリの Universal バージョンをコンパイルおよびバンドルします。
+Node Express Web サーバーは、クライアント要求に基づいて、Universal で HTML ページをコンパイルします。
 
-To create the server-side app module, `app.server.module.ts`, run the following CLI command.
+サーバー側のアプリモジュール `app.server.module.ts` を作成するには、次の CLI コマンドを実行します。
 
 <code-example language="bash">
 
@@ -37,25 +37,25 @@ ng add @nguniversal/express-engine
 
 </code-example>
 
-The command creates the following folder structure.
+このコマンドは、次のフォルダ構造を作成します。
 
 <code-example language="none">
 src/
-  index.html                 <i>app web page</i>
-  main.ts                    <i>bootstrapper for client app</i>
-  main.server.ts             <i>* bootstrapper for server app</i>
-  style.css                  <i>styles for the app</i>
-  app/ ...                   <i>application code</i>
-    app.server.module.ts     <i>* server-side application module</i>
-server.ts                    <i>* express web server</i>
-tsconfig.json                <i>TypeScript client configuration</i>
-tsconfig.app.json            <i>TypeScript client configuration</i>
-tsconfig.server.json         <i>* TypeScript server configuration</i>
-tsconfig.spec.json           <i>TypeScript spec configuration</i>
-package.json                 <i>npm configuration</i>
+  index.html                 <i>アプリの Web ページ</i>
+  main.ts                    <i>クライアントアプリのブートストラップ</i>
+  main.server.ts             <i>* サーバーアプリのブートストラップ</i>
+  style.css                  <i>アプリのスタイル</i>
+  app/ ...                   <i>アプリケーションコード</i>
+    app.server.module.ts     <i>* サーバーサイドアプリケーションモジュール</i>
+server.ts                    <i>* Express Web サーバー</i>
+tsconfig.json                <i>TypeScript クライアント構成</i>
+tsconfig.app.json            <i>TypeScript クライアント構成</i>
+tsconfig.server.json         <i>* TypeScript サーバー構成</i>
+tsconfig.spec.json           <i>TypeScript 仕様の構成</i>
+package.json                 <i>npm 構成</i>
 </code-example>
 
-The files marked with `*` are new and not in the original tutorial sample.
+`*` でマークされたファイルは新しいもので、元のチュートリアルサンプルにはありません。
 
 ### Universal in action
 

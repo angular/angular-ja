@@ -2,20 +2,20 @@
 
 ## 大まかな概要
 
-デフォルトでは、NgModuleは積極的にロードされます。つまり、アプリがロードされるとすぐに、すぐに必要であるかどうかにかかわらず、すべてのNgModuleがロードされます。多数のルートをもつ大規模なアプリケーションの場合は、遅延ロード（必要に応じてNgModuleをロードする設計パターン）を検討してください。
-遅延ロードは、初期バンドルサイズを小さくするのに役立ちます。これにより、ロード時間が短縮されます。
+デフォルトでは、NgModuleは即時にロードされます。つまり、アプリがロードされるとすぐに、すぐに必要であるかどうかにかかわらず、すべてのNgModuleがロードされます。多数のルートをもつ大規模なアプリケーションの場合は、遅延ロード（必要に応じてNgModuleをロードする設計パターン）を検討してください。
+遅延ロードは、初期バンドルサイズを小さく保つのに役立ち、これによりロード時間が短縮されます。
 
-このページで説明している、2つの遅延ロードされたモジュールの最終的なサンプルについては
+このページで説明する2つの遅延ロードされたモジュールをもつ最終的なサンプルについては
 <live-example></live-example>を参照してください。
 
-遅延ロードするフィーチャーモジュールをセットアップするための主なステップが3つあります:
+遅延ロードするフィーチャーモジュールをセットアップするための主なステップが2つあります:
 
 1. CLIで `--route` フラグを使ってフィーチャーモジュールを作成する
 1. ルート(route)を設定する
 
 ## アプリケーションをセットアップする
 
-まだアプリケーションがない場合、CLIでアプリケーションを作成するために次のステップにしたがってください。
+まだアプリケーションを作成していない場合、次のステップにしたがってCLIを使用してアプリケーションを作成してください。
 すでに作成している場合は[ルート(route)を設定する](#config-routes)に進んでください。
 次のコマンドを実行してください。
 ここでの`customer-app`はアプリケーション名です。
@@ -31,24 +31,24 @@ ng new customer-app --routing
 
 <div class="alert is-helpful">
 
-The `--routing` option requires Angular/CLI version 8.1 or higher.
-See [Keeping Up to Date](guide/updating).
+`--routing`オプションはAngular/CLI 8.1以上で有効です。
+[プロジェクトの更新](guide/updating)を参照してください。
 
 </div>
 
 ## ルーティングをもつフィーチャーモジュールを作成する
 
 次に、ルーティングするためのコンポーネントとフィーチャーモジュールが必要になります。
-作成するために、ターミナルで次のコマンドを実行してください。`customers`はフィーチャーモジュールの名前で、`customers`は`customers`コンポーネントをロードするためのルート(route)パスです。
+作成するために、ターミナルで次のコマンドを実行してください。`customers`はフィーチャーモジュールの名前です。`customers`フィーチャーモジュールをロードするパスもまた`--route`オプションを使用して`customers`に指定します。
 
 <code-example language="bash">
 ng generate module customers --route customers --module app.module
 </code-example>
 
-これにより、`customers.module.ts`ファイルで定義された新しい遅延ロードできるモジュール`CustomersModule`をもつ、`customers`フォルダーが作成されます。コマンドは`CustomersComponent`を新しいフィーチャーモジュールに自動的に宣言します。
+これにより、`customers.module.ts`ファイルで定義された新しい遅延ロード可能なモジュール`CustomersModule`をもつ、`customers`フォルダーが作成されます。コマンドは`CustomersComponent`を新しいフィーチャーモジュール内に自動的に宣言します。
 
-新しいモジュールは遅延ロードされることになっているため、コマンドは新フィーチャーモジュールへの参照をルートアプリケーションモジュールのファイル`app.module.ts`に追加「しません」。
-代わりに、宣言したルート(route)の`customers`を`Routes`配列に追加します。その配列は`--module`オプションにより提供されたモジュール内で宣言されます。
+新しいモジュールは遅延ロードされることを意図しているため、コマンドは新しいフィーチャーモジュールへの参照をルートアプリケーションモジュールの`app.module.ts`ファイルに追加「しません」。
+代わりに、`--module`オプションで指定したモジュール内の`routes`配列に、宣言したルート(route)`customers`を追加します。
 
 <code-example
   header="src/app/app-routing.module.ts"
@@ -56,19 +56,19 @@ ng generate module customers --route customers --module app.module
   region="routes-customers">
 </code-example>
 
-遅延ロードの構文では、関数が後ろに続く`loadChildren`を使うことに注目してください。関数はブラウザ組み込みの動的インポート用の`import('...')`構文を用います。
+遅延ロード構文では、関数が後ろに続く`loadChildren`を使うことに注目してください。関数はブラウザ組み込みの動的インポート用の`import('...')`構文を用います。
 インポートのパスはそのモジュールへの相対パスです。
 
 ### もう1つのフィーチャーモジュールを追加する
 
-同じコマンドを使って、2つ目の遅延ロードのフィーチャーモジュールとルーティングとそのコンポーネントを作成します。
+同じコマンドを使って、2つ目の遅延ロードのフィーチャーモジュールとルーティングとそのスタブコンポーネントを作成します。
 
 <code-example language="bash">
 ng generate module orders --route orders --module app.module
 </code-example>
 
-これにより`orders`という新しいフォルダーが作成され、`OrdersModule`と`OrdersRoutingModule`と、新しい`OrdersComponent`ソースファイルが含まれます。
-`orders`ルート(route)は、遅延ロードの構文を使って`app-routing.module.ts`内の`Routes`配列に追加されます。
+これにより、`OrdersModule`と`OrdersRoutingModule`と、新しい`OrdersComponent`ソースファイルが含まれる、`orders`という新しいフォルダーが作成されます。
+`--routes`オプションを使用して指定した`orders`ルート(route)は、遅延ロード構文を使用して`app-routing.module.ts`ファイル内の`routes`配列に追加されます。
 
 <code-example
   header="src/app/app-routing.module.ts"
@@ -98,7 +98,7 @@ ng serve
   <img src="generated/images/guide/lazy-loading-ngmodules/three-buttons.png" width="300" alt="three buttons in the browser">
 </div>
 
-これらのボタンは機能します。なぜならCLIが、フィーチャーモジュールへのルート(route)を`app.module.ts`内の`routes`配列に自動的に追加するからです。
+これらのボタンは機能します。なぜならCLIが、フィーチャーモジュールへのルート(route)を`app.module.ts`内の`routes`配列に自動的に追加したからです。
 
 {@a config-routes}
 
@@ -115,22 +115,22 @@ CLIは各フィーチャーモジュールをアプリケーションレベル�
 
 ### フィーチャーモジュールの内部
 
-次に、`customers.module.ts`を見てください。もしあなたがCLIを使用していて、このページに記載されている手順にしたがっている場合は、ここで何もする必要はありません。
+次に、`customers.module.ts`ファイルを見てください。もしあなたがCLIを使用していて、このページに記載されている手順にしたがっている場合は、ここで何もする必要はありません。
 
 <code-example path="lazy-loading-ngmodules/src/app/customers/customers.module.ts" id="customers.module.ts" region="customers-module" header="src/app/customers/customers.module.ts"></code-example>
 
-`customers.module.ts`ファイルでは、`CustomersModule`クラスが`customers-routing.module.ts` と `customers.component.ts` にアクセスできるようにそれらをインポートします。そのあとに、`CustomersModule`が自分自身のルーティングモジュールにアクセスするために`@NgModule`の`imports`配列に`CustomersRoutingModule`を追加します。そして、`CustomersComponent`は`declarations`配列に配置されます。これは`CustomersComponent`が`CustomersModule`に属することを意味します。
+`customers.module.ts`ファイルでは、`customers-routing.module.ts`と`customers.component.ts`をインポートします。`CustomersModule`が自分自身のルーティングモジュールにアクセスするために`@NgModule`の`imports`配列に`CustomersRoutingModule`を追加します。そして、`CustomersComponent`は`declarations`配列に配置されます。これは`CustomersComponent`が`CustomersModule`に属することを意味します。
 
 
-The `app-routing.module.ts` then imports the feature module, `customers.module.ts` using JavaScript's dynamic import.
+次に、`app-routing.module.ts`はフィーチャーモジュール`customers.module.ts`をJavaScriptの動的インポートを使用してインポートします。
 
-The feature-specific route definition file `customers-routing.module.ts` imports its own feature component defined in the `customers.component.ts` file, along with the other JavaScript import statements. It then maps the empty path to the `CustomersComponent`.
+フィーチャー固有のルート定義ファイル`customers-routing.module.ts`はJavaScriptのインポート文を使用して、`customers.component.ts`内で定義された自身のフィーチャーコンポーネントをインポートします。それから`CustomersComponent`に空のパスをマップします。
 
 <code-example path="lazy-loading-ngmodules/src/app/customers/customers-routing.module.ts" id="customers-routing.module.ts" region="customers-routing-module" header="src/app/customers/customers-routing.module.ts"></code-example>
 
-`path`に空文字列が設定されています。これは、`AppRoutingModule`内のパスがすでに`customers`に設定されているからです。つまり、この`CustomersRoutingModule`内のルート(route)はすでに`customers`コンテキスト内にあります。このルーティングモジュール内のすべてのルート(route)は、子ルートとなります。
+`AppRoutingModule`内のパスがすでに`customers`に設定されているため、ここの`path`には空文字列が設定されています。つまり、この`CustomersRoutingModule`内のルート(route)はすでに`customers`コンテキスト内にあります。このルーティングモジュール内のすべてのルート(route)は、子ルートとなります。
 
-他のフィーチャーモジュールがもつルーティングモジュールは、同様に設定されます。
+他のフィーチャーモジュールがもつルーティングモジュールも同様に設定されます。
 
 <code-example path="lazy-loading-ngmodules/src/app/orders/orders-routing.module.ts" id="orders-routing.module.ts" region="orders-routing-module-detail" header="src/app/orders/orders-routing.module.ts (excerpt)"></code-example>
 
@@ -162,16 +162,16 @@ OrdersまたはCustomersボタンをクリックしてください。もしチ�
 
 ## `forRoot()`と`forChild()`
 
-あなたはCLIが`RouterModule.forRoot(routes)`を `AppRoutingModule` の`imports`配列に追加したことに気づいたかもしれません。これはAngularに、`AppRoutingModule`がルーティングモジュールであることと、
-`forRoot()`によってこれがルート(root)のルーティングモジュールであることを知らせます。これは渡したすべてのルート(route)を設定します。
-ルーターディレクティブへアクセスできるようにしたり、`Router`を登録します。
+あなたはCLIが`RouterModule.forRoot(routes)`を `AppRoutingModule` の`imports`配列に追加したことに気づいたかもしれません。これにより、Angularは`AppRoutingModule`がルーティングモジュールであることと、
+`forRoot()`によってルート(root)のルーティングモジュールであることを認識します。これは渡したすべてのルート(route)を設定して、
+ルーターディレクティブへアクセスできるようにし、`Router`サービスを登録します。
 `forRoot()`は`AppRoutingModule`の中で、アプリケーション内で1回だけ使用してください。
 
 CLIは、フィーチャールーティングモジュールにも`RouterModule.forChild(routes)`を追加します。
-これにより、Angularはそのルート(route)リストが追加のルート(route)の提供のみに責任をもつことと、フィーチャーモジュールを対象としていることを知ります。
+これにより、Angularはそのルート(route)リストが追加のルート(route)の提供のみに責任をもつことと、フィーチャーモジュールを対象としていることを認識します。
 `forChild()`は複数のモジュールで使用することができます。
 
-`forRoot()`メソッドはRouterのための*グローバルな*インジェクター設定を扱います。
+`forRoot()`メソッドはRouterのための*グローバルな*インジェクター設定を管理します。
 `forChild()`メソッドはインジェクター設定を持ちません。それは`RouterOutlet`や`RouterLink`のようなディレクティブを使います。
 詳しくは、 [シングルトンサービス](guide/singleton-services) ガイドの中の [`forRoot()` パターン](guide/singleton-services#forRoot) セクションを参照してください。
 

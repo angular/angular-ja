@@ -92,7 +92,7 @@ To help you get going, the following steps use predefined product data from the 
 
       <div class="alert is-helpful">
 
-      `*ngFor` is a "structural directive". Structural directives shape or reshape the DOM's structure, typically by adding, removing, and manipulating the elements to which they are attached. Any directive with an asterisk, `*`, is a structural directive.
+      `*ngFor` is a "structural directive". Structural directives shape or reshape the DOM's structure, typically by adding, removing, and manipulating the elements to which they are attached. Directives with an asterisk, `*`, are structural directives.
 
       </div>
 
@@ -358,5 +358,5 @@ You've learned about the foundation of Angular: components and template syntax.
 You've also learned how the component class and template interact, and how components communicate with each other.
 
 To continue exploring Angular, choose either of the following options:
-* [Continue to the "Routing" section](start/routing "Getting Started: Routing") to create a product details page that can be accessed by clicking a product name and that has its own URL pattern.
-* [Skip ahead to the "Deployment" section](start/deployment "Getting Started: Deployment") to move to local development, or deploy your app to Firebase or your own server.
+* [Continue to the "Routing" section](start/start-routing "Getting Started: Routing") to create a product details page that can be accessed by clicking a product name and that has its own URL pattern.
+* [Skip ahead to the "Deployment" section](start/start-deployment "Getting Started: Deployment") to move to local development, or deploy your app to Firebase or your own server.

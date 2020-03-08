@@ -116,7 +116,7 @@ Angular CLIにはサーバーが含まれているため、アプリをローカ
   <div class="alert is-helpful">
 
   入門は[StackBlitz](https://stackblitz.com/)のオンライン開発環境を想定しています。
-   StackBlitzからローカル環境にアプリをエクスポートする方法については、[デプロイ](start/deployment 'Getting Started: Deployment')のセクションに進んでください。
+   StackBlitzからローカル環境にアプリをエクスポートする方法については、[デプロイ](start/start-deployment "Getting Started: Deployment")のセクションに進んでください。
 
   </div>
 

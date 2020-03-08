@@ -35,3 +35,7 @@ https://github.com/angular/angular-ja/commit/d0b7be4a43769c3ef554b56159747ce626b
 ## angular.jpへリダイレクト
 
 - index.html
+
+## Netlifyバッヂの追加
+
+- aio-ja/src/app/layout/footer/footer.component.html

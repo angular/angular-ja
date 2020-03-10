@@ -1,6 +1,6 @@
 # NgZone
 
-ゾーンは非同期タスクにまたがって持続する実行コンテキストです。JavaScript VMの[スレッドローカル ストレージ](http://en.wikipedia.org/wiki/Thread-local_storage)と考えることができます。
+Zoneは非同期タスクにまたがって持続する実行コンテキストです。JavaScript VMの[スレッドローカル ストレージ](http://en.wikipedia.org/wiki/Thread-local_storage)と考えることができます。
 このガイドでは、AngularのNgZoneを使用して、コンポーネントの変更を自動的に検出してHTMLを更新する方法を説明します。
 
 ## 変更検知の基礎
@@ -169,12 +169,12 @@ export class AppComponent implements OnInit {
 6. その他の非同期操作。`addEventListener()`/`setTimeout()`/`Promise.then()`に加え、他にも非同期にデータを更新できる操作はあります。いくつかの例には`WebSocket.onmessage()`や`Canvas.toBlob()`を含みます。
 
 上記のリストには、アプリケーションがデータを変更する可能性があるもっとも一般的なシナリオが含まれています。Angularは、データが変更された可能性があることを検知するたびに変更検知を実行します。
-変更検知の結果、DOMは新しいデータで更新されます。Angularはさまざまな方法で変更を検知します。コンポーネントの初期化では、Angularは明示的に変更検知を呼び出します。[非同期操作](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)では、Angularはゾーンを使用してデータが変更された可能性のある場所の変更を検知し、自動的に変更検知を実行します。
+変更検知の結果、DOMは新しいデータで更新されます。Angularはさまざまな方法で変更を検知します。コンポーネントの初期化では、Angularは明示的に変更検知を呼び出します。[非同期操作](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)では、AngularはZoneを使用してデータが変更された可能性のある場所の変更を検知し、自動的に変更検知を実行します。
 
 
-## ゾーンと実行コンテキスト
+## Zoneと実行コンテキスト
 
-ゾーンは非同期タスクにまたがって持続する実行コンテキストを提供します。[実行コンテキスト](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)は、実行中の現在のコード内の環境に関する情報を保持する抽象的な概念です。次の例を考えてみましょう。
+Zoneは非同期タスクにまたがって持続する実行コンテキストを提供します。[実行コンテキスト](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)は、実行中の現在のコード内の環境に関する情報を保持する抽象的な概念です。次の例を考えてみましょう。
 
 ```javascript
 const callback = function() {
@@ -200,16 +200,16 @@ func.apply(ctx2);
 `setTimeout`のコールバック内の`this`の値は、`setTimeout`がいつ呼び出されるかによって異なる場合があります。
 したがって、非同期操作内のコンテキストを見失ってしまう可能性があります。
 
-ゾーンは`this`以外の新しいゾーンコンテキストを提供します。そのゾーンコンテキストは非同期操作にまたがって持続します。
-次の例では、新しいゾーンコンテキストを`zoneThis`としています。
+Zoneは`this`以外の新しいZoneコンテキストを提供します。そのZoneコンテキストは非同期操作にまたがって持続します。
+次の例では、新しいZoneコンテキストを`zoneThis`としています。
 
 ```javascript
 zone.run(() => {
-  // ゾーン内です
+  // Zone内です
   expect(zoneThis).toBe(zone);
   setTimeout(function() {
     // setTimeoutがスケジュールされているとき、
-    // zoneThisコンテキストは同じゾーンになります
+    // zoneThisコンテキストは同じZoneになります
     expect(zoneThis).toBe(zone);
   });
 });
@@ -218,7 +218,7 @@ zone.run(() => {
 この新しいコンテキスト`zoneThis`は、`setTimeout()`コールバック関数から取得することができます。このコンテキストは、`setTimeout()`がスケジュールされているとき、同じものです。
 コンテキストを取得するには、[`Zone.current`](https://github.com/angular/angular/blob/master/packages/zone.js/lib/zone.ts)を呼び出すことができます。
 
-### ゾーンと非同期ライフサイクルフック
+### Zoneと非同期ライフサイクルフック
 
 Zone.jsは、非同期操作にライフサイクルフックを提供するだけでなく、非同期操作にまたがって持続するコンテキストを作成できます。
 
@@ -249,7 +249,7 @@ zone.run(() => {
 });
 ```
 
-上記の例ではいくつかのフックを備えたゾーンを作成します。
+上記の例ではいくつかのフックを備えたZoneを作成します。
 
 `onXXXTask`フックは、タスクの状態が変化したときにトリガーされます。
 Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似ています。
@@ -263,10 +263,10 @@ Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似て
 
 - `onScheduleTask`: 新しい非同期タスクがスケジュールされたときにトリガーされます。たとえば`setTimeout()`を呼び出したときです。
 - `onInvokeTask`: 非同期タスクが実行されるときにトリガーされます。たとえば`setTimeout()`のコールバックが実行されるときです。
-- `onHasTask`: ゾーン内の1種類のタスクの状態が、stableからunstable、またはunstableからstableへ変化したときにトリガーされます。stable状態はZone内にタスクがないことを意味し、unstable状態はゾーン内で新しいタスクがスケジュールされていることを意味します。
-- `onInvoke`: ゾーン内で同期関数が実行されるときにトリガーされます。
+- `onHasTask`: Zone内の1種類のタスクの状態が、stableからunstable、またはunstableからstableへ変化したときにトリガーされます。stable状態はZone内にタスクがないことを意味し、unstable状態はZone内で新しいタスクがスケジュールされていることを意味します。
+- `onInvoke`: Zone内で同期関数が実行されるときにトリガーされます。
 
-これらのフックを用いて、`Zone`はゾーン内のすべての同期および非同期の操作の状態を監視することができます。
+これらのフックを用いて、`Zone`はZone内のすべての同期および非同期の操作の状態を監視することができます。
 
 上記の例では、次のようなアウトプットを返します。
 
@@ -296,7 +296,7 @@ Zoneのすべての機能は、[zone.js](https://github.com/angular/angular/tree
 ## NgZone
 
 Zone.jsは同期および非同期操作のすべての状態を監視できますが、AngularはさらにNgZoneと呼ばれるサービスを提供します。
-このサービスは、`angular`という名前のゾーンを作成し、次の条件が満たされたときに自動的に変更検知をトリガーします。
+このサービスは、`angular`という名前のZoneを作成し、次の条件が満たされたときに自動的に変更検知をトリガーします。
 
 1. 同期および非同期関数が実行されたとき
 1. スケジュールされた`microTask`がないとき
@@ -308,7 +308,7 @@ Zone.jsは同期および非同期操作のすべての状態を監視できま�
 このため、これらの非同期APIについては、手動で変更検知をトリガーする必要はありません。
 
 Zoneが処理しないサードパーティのAPIもまだあります。
-これらのケースでは、NgZoneサービスは[`run()`](api/core/NgZone#run)メソッドを提供し、angularゾーンの中で関数を実行できるようにします。
+これらのケースでは、NgZoneサービスは[`run()`](api/core/NgZone#run)メソッドを提供し、angularZoneの中で関数を実行できるようにします。
 この関数および関数内で実行されるすべての非同期操作は、適切なタイミングで自動的に変更検知をトリガーします。
 
 ```typescript
@@ -316,7 +316,7 @@ export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
   ngOnInit() {
     // 新しい非同期APIはZoneで処理されません。
-    // そのため、ngZone.runを使用してangularゾーン内で非同期操作を行い、
+    // そのため、ngZone.runを使用してangularZone内で非同期操作を行い、
     // 自動的に変更検知をトリガーする必要があります。
     this.ngZone.run(() => {
       someNewAsyncAPI(() => {
@@ -327,7 +327,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-デフォルトでは、すべての非同期操作はangularゾーンの中にあり、自動的に変更検知をトリガーします。
+デフォルトでは、すべての非同期操作はangularZoneの中にあり、自動的に変更検知をトリガーします。
 もうひとつの一般的なケースは、変更検知をトリガーしたくない場合です。
 その状況では、NgZoneのもうひとつのメソッド、[runOutsideAngular()](api/core/NgZone#runoutsideangular)を使用できます。
 
@@ -364,7 +364,7 @@ import 'zone.js/dist/zone';  // Angular CLIに含まれます
 - よりよいパフォーマンスのために、いくつかの非同期APIのモンキーパッチを無効にすることができます。
 たとえば、`requestAnimationFrame()`のモンキーパッチを無効にすることで、`requestAnimationFrame()`のコールバックは変更検知をトリガーしません。
 これは、アプリケーション内において`requestAnimationFrame()`のコールバックが何もデータを更新しない場合に便利です。
-- 特定のDOMイベントがangularゾーン内で実行されないように指定できます。たとえば、`mousemove`または`scroll`イベントが変更検知をトリガーすることを防ぐためです。
+- 特定のDOMイベントがangularZone内で実行されないように指定できます。たとえば、`mousemove`または`scroll`イベントが変更検知をトリガーすることを防ぐためです。
 
 変更できる設定は他にもいくつかあります。
 これらの変更を行うには、次のような`zone-flags.ts`ファイルを作成する必要があります。

@@ -58,7 +58,7 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 </code-example>
 
-| PROPERTY | DESCRIPTION |
+| プロパティ | 説明 |
 | :-------------- | :---------------------------- |
 | `root`          | ワークスペースフォルダを基準とした、このプロジェクトのルートフォルダです。ワークスペースのトップ階層にある初期アプリでは空です。 |
 | `sourceRoot`    | このプロジェクトのソースファイルのルートフォルダです。 |
@@ -72,12 +72,12 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 ## 生成 schematics
 
 Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
-デフォルトのAngular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@angular` にまとめられています。
-サブコマンドのschematicの名称を、 `schematic-package:schematic-name` の形式で指定します;
+デフォルトの Angular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@angular` にまとめられています。
+サブコマンドの schematic の名称を、 `schematic-package:schematic-name` の形式で指定します;
 たとえば、コンポーネントを生成するためのschematicは `@angular:component` です。
 
-プロジェクトおよびプロジェクトの一部を生成するためにCLIによって使用されるデフォルトのschematicsのJSONスキーマは、 [`@schematics/angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/schematics/angular/application/schema.json) パッケージに集められています。
-スキーマは、 `--help` の出力に示されているように、各 `ng generate` サブコマンドに対してCLIで使用可能なオプションを記述したものです。
+プロジェクトおよびプロジェクトの一部を生成するために CLI によって使用されるデフォルトの schematics の JSON スキーマは、 [`@schematics/angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/schematics/angular/application/schema.json) パッケージに集められています。
+スキーマは、`--help` の出力に示されているように、各 `ng generate` サブコマンドに対して CLI で使用可能なオプションを記述したものです。
 
 スキーマに示されているフィールドは、CLIサブコマンドオプションの許容される引数の値、およびデフォルトに対応しています。
 ワークスペーススキーマファイルを更新して、サブコマンドオプションに別のデフォルトを設定できます。
@@ -86,18 +86,18 @@ Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追
 
 ## プロジェクトツールの設定オプション {@a project-tool-configuration-options}
 
-Architectは、コンパイルやテスト実行などの複雑なタスクを実行するためにCLIが使用するツールです。
-Architect is a shell that runs a specified [builder](guide/glossary#builder) to perform a given task, according to a [target](guide/glossary#target) configuration.
-You can define and configure new builders and targets to extend the CLI.
-See [Angular CLI Builders](guide/cli-builder).
+Architect は、コンパイルやテスト実行などの複雑なタスクを実行するために CLI が使用するツールです。
+Architect は、[ターゲット](guide/glossary#target)構成にしたがって、指定された[builder](guide/glossary#builder) を実行して特定のタスクを実行するシェルです。
+新しい Builder とターゲットを定義および構成して、CLI を拡張できます。
+[Angular CLI Builders](guide/cli-builder) を参照してください。
 
 {@a default-build-targets}
 
 ### デフォルトのビルドターゲット
 
-Angularは、Architectツールと `ng run` コマンドで使用するデフォルトビルダーを定義します。
-これらの各デフォルトビルダーのオプションとデフォルトを定義するJSONスキーマは、 [`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/angular/cli/lib/config/schema.json) パッケージに集められています。 
-スキーマは、次のArchitectビルドターゲットのオプションを構成します。
+Angular は、Architect ツールと `ng run` コマンドで使用するデフォルトビルダーを定義します。
+これらの各デフォルトビルダーのオプションとデフォルトを定義する JSON スキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/9.0.x/packages/angular/cli/lib/config/schema.json) パッケージに集められています。 
+スキーマは、次の Architect ビルドターゲットのオプションを構成します。
 
 * app-shell
 * browser

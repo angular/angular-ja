@@ -19,15 +19,15 @@
   ```
 
 {@a tsconfig-extends}
-## Configuration inheritance with extends
+## 拡張による構成の継承
 
-Like the TypeScript compiler, The Angular AOT compiler also supports `extends` in the `angularCompilerOptions` section of the TypeScript configuration file, `tsconfig.json`.
-The `extends` property is at the top level, parallel to `compilerOptions` and `angularCompilerOptions`.
+TypeScript コンパイラと同様に、Angular AOT コンパイラは、TypeScript 構成ファイル `tsconfig.json` の `angularCompilerOptions` セクションで `extends` もサポートしています。
+`extends` プロパティはトップレベルにあり、`compilerOptions` および `angularCompilerOptions` と並行しています。
 
-A TypeScript configuration can inherit settings from another file using the `extends` property.
-The configuration options from the base file are loaded first, then overridden by those in the inheriting `tsconfig` file.
+TypeScript 設定は、`extends` プロパティを使用して別のファイルから設定を継承できます。
+ベースファイルの設定オプションが最初にロードされ、次に継承する `tsconfig` ファイルの設定オプションによって上書きされます。
 
-For example:
+例:
 
 ```json
 {
@@ -44,11 +44,11 @@ For example:
 }
 ```
 
-For more informaton, see the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+詳細については、[TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) を参照してください。
 
-## Template options
+## テンプレートオプション
 
-The following options are available for configuring the AOT template compiler.
+次のオプションは、AOT テンプレートコンパイラの構成に使用できます。
 
 ### `allowEmptyCodegenFiles`
 
@@ -79,9 +79,9 @@ The following options are available for configuring the AOT template compiler.
 
 ### `enableIvy`
 
-Enables the [Ivy](guide/ivy) compilation and rendering pipeline. Default is `true`, as of version 9. In version 9, you can [opt out of Ivy](guide/ivy#opting-out-of-angular-ivy) to continue using the previous compiler, View Engine.
+[Ivy](guide/ivy) コンパイルおよびレンダリングパイプラインを有効にします。バージョン9では、デフォルトは `true` です。バージョン9では、[Ivy をオプトアウト](guide/ivy#opting-out-of-angular-ivy) して、以前のコンパイラである View Engine を引き続き使用できます。
 
-For library projects generated with the CLI, the `prod` configuration default is `false` in version 9.
+CLI で生成されたライブラリプロジェクトの場合、バージョン9の `prod` 設定のデフォルトは `false` です。
 
 ### `enableResourceInlining`
 
@@ -89,7 +89,7 @@ For library projects generated with the CLI, the `prod` configuration default is
 
 有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
-For library projects generated with the CLI, the dev configuration default is `true`.
+CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
 
 
 {@a enablelegacytemplate}
@@ -128,7 +128,7 @@ For library projects generated with the CLI, the dev configuration default is `t
 
 `true` (推奨) の場合、TypeScript を使用してバインディング式を検証するテンプレートコンパイラの[バインディング式の検証](guide/aot-compiler#binding-expression-validation)フェーズを有効にするようにコンパイラに指示します。 For more information, see [Template type checking](guide/template-typecheck).
 
-Default is `false`, but when you use the CLI command `ng new`, it is set to `true` by default in the generated project's configuration.
+デフォルトは `false` ですが、CLI コマンド `ng new` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
 
 ### `generateCodeForLibraries`
 
@@ -162,7 +162,7 @@ TypeScript の `--outFile` オプションを使用している場合は、こ�
 
 このオプションは、`npm` に配布できない `.ngfactory.js` および `.ngstyle.js` ファイルの作成を避けながら、`npm` パッケージで配布するための `.metadata.json` ファイルを作成するようにテンプレートコンパイラに指示するために使用できます。
 
-For library projects generated with the CLI, the dev configuration default is `true`.
+CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
 
 ### `strictMetadataEmit`
 
@@ -180,19 +180,19 @@ For library projects generated with the CLI, the dev configuration default is `t
 このオプションはライブラリのビルド段階でこれらのエラーを検出することを可能にし、
 たとえば Angular ライブラリ自身を作成する際に使用されます。
 
-For library projects generated with the CLI, the dev configuration default is `true`.
+CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
 
 ### `strictInjectionParameters`
 
 `true` (推奨) に設定した場合、このオプションは、インジェクションタイプを判別できない指定されたパラメーターについてエラーを報告するようコンパイラーに指示します。このオプションが提供されていないか `false` (現在はデフォルト) の場合、型を解決できない `@Injectable` でマークされたクラスのコンストラクターパラメータは警告を生成します。
 
-When you use the CLI command `ng new`, it is set to `true` by default in the generated project's configuration.
+CLI コマンド `ng new` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
 
 ### `strictTemplates`
 
-When `true`, enables [strict template type checking](guide/template-typecheck#strict-mode) in Angular version 9. Strict mode is only available when using [Ivy](guide/ivy).
+`true` の場合、Angular バージョン9で [厳格なテンプレートタイプチェック](guide/template-typecheck#strict-mode) を有効にします。厳格モードは [Ivy](guide/ivy) を使用する場合にのみ使用できます。
 
-Additional strictness flags allow you to enable and disable specific types of strict template type checking. See [troubleshooting template errors](guide/template-typecheck#troubleshooting-template-errors).
+追加の厳密性フラグを使用すると、特定のタイプの厳密なテンプレートタイプチェックを有効または無効にできます。[テンプレートエラーのトラブルシューティング](guide/template-typecheck#troubleshooting-template-errors) をご覧ください。
 
 
 ### `trace`

@@ -515,6 +515,12 @@
               "translated": true
             }
           ]
+        },
+        {
+	        "url": "guide/zone",
+          "title": "NgZone",
+          "tooltip": "NgZoneの仕組み",
+          "translated": true
         }
       ]
     },

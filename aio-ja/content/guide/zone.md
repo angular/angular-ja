@@ -1,30 +1,30 @@
 # NgZone
 
-A zone is an execution context that persists across async tasks. You can think of it as [thread-local storage](http://en.wikipedia.org/wiki/Thread-local_storage) for JavaScript VMs.
-This guide describes how to use Angular's NgZone to automatically detect changes in the component to update HTML.
+Zoneは非同期タスクにまたがって持続する実行コンテキストです。JavaScript VMの[スレッドローカル ストレージ](http://en.wikipedia.org/wiki/Thread-local_storage)と考えることができます。
+このガイドでは、AngularのNgZoneを使用して、コンポーネントの変更を自動的に検出してHTMLを更新する方法を説明します。
 
-## Fundamentals of change detection
+## 変更検知の基礎
 
-To understand the benefits of `NgZone`, it is important to have a clear grasp of what change detection is and how it works.
+`NgZone`の利点を理解するには、変更検知とは何か、そしてどのように機能するのかを明確に把握することが重要です。
 
-### Displaying and updating data in Angular
+### Angularにおけるデータ更新と表示
 
-In Angular, you can [display data](guide/displaying-data) by binding controls in an HTML template to the properties of an Angular component.
+Angularでは、HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることにより、[データを表示](guide/displaying-data) できます。
 
 <code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts"></code-example>
 
-In addition, you can bind DOM events to a method of an Angular component. In such methods, you can also update a property of the Angular component, which updates the corresponding data displayed in the template.
+さらに、DOMイベントをAngularコンポーネントのメソッドにバインドできます。イベントをバインドしたメソッドでは、Angularコンポーネントのプロパティを更新することもできます。これにより、テンプレートに表示される対応するデータが更新されます。
 
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts"></code-example>
 
-In both of the above examples, the component's code updates only the property of the component.
-However, the HTML is also updated automatically.
-This guide describes how and when Angular renders the HTML based on the data from the Angular component.
+上記の例のどちらも、コンポーネントのコードはコンポーネントのプロパティのみを更新します。
+しかし、それに伴ってHTMLも自動的に更新されます。
+このガイドでは、Anuglarコンポーネントからのデータに基づいて、AngularがいつどのようにHTMLをレンダリングするかを説明します。
 
 
-### Detecting changes with plain JavaScript
+### プレーンJavaScriptを使った変更検知
 
-To clarify how changes are detected and values updated, consider the following code written in plain JavaScript.
+どのように変更が検知され、値が更新されるのかを明確にするには、プレーンJavaScriptで書かれた次のコードを考えてみましょう。
 
 ```javascript
 <html>
@@ -33,7 +33,7 @@ To clarify how changes are detected and values updated, consider the following c
   <canvas id="canvas"><canvas>
   <script>
     let value = 'initialValue';
-    // initial rendering
+    // 初期レンダリング
     detectChange();
 
     function renderHTML() {
@@ -47,68 +47,68 @@ To clarify how changes are detected and values updated, consider the following c
       }
     }
 
-    // example 1: update data inside button click event handler
+    // 例 1: ボタンクリックイベントハンドラー内でのデータ更新
     document.getElementById('btn').addEventListener('click', () => {
-      // update value
+      // 値の更新
       value = 'button update value';
-      // call detectChange manually
+      // 手動で detectChange を呼び出す
       detectChange();
     });
 
-    // example 2: Http Request
+    // 例 2: Http Request
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', function() {
-      // get response from server
+      // サーバーからのレスポンスを取得する
       value = this.responseText;
-      // call detectChange manually
+      // 手動で detectChange を呼び出す
       detectChange();
     });
     xhr.open('GET', serverUrl);
     xhr.send();
 
-    // example 3: setTimeout
+    // 例 3: setTimeout
     setTimeout(() => {
-      // update value inside setTimeout callback
+      // setTimeout コールバック内での値の更新
       value = 'timeout update value';
-      // call detectChange manually
+      // 手動で detectChange を呼び出す
       detectChange();
     }, 100);
 
-    // example 4: Promise.then
+    // 例 4: Promise.then
     Promise.resolve('promise resolved a value').then((v) => {
-      // update value inside Promise thenCallback
+      // Promise thenコールバック内での値の更新
       value = v;
-      // call detectChange manually
+      // 手動で detectChange を呼び出す
       detectChange();
     }, 100);
 
-    // example 5: some other asynchronous APIs
+    // 例 5: その他の非同期API
     document.getElementById('canvas').toBlob(blob => {
-      // update value when blob data is created from the canvas
+      // canvas から blob データが生成されたときの値の更新
       value = `value updated by canvas, size is ${blog.size}`;
-      // call detectChange manually
+      // 手動で detectChange を呼び出す
       detectChange();
     });
   </script>
 </html>
 ```
 
-After you update the data, you need to call `detectChange()` manually to check whether the data changed.
-If the data changed, you render the HTML to reflect the updated data.
+データを更新した後、データが変更されたかどうかをチェックするために手動で`detectChange()`を呼び出す必要があります。
+データが変更されていた場合、更新されたデータを反映するためにHTMLをレンダリングします。
 
-In Angular, this step is unnecessary. Whenever you update the data, your HTML is updated automatically.
+Angularでは、このステップは不要です。データの更新するたびに、HTMLは自動的に更新されます。
 
-### When apps update HTML
+### アプリがHTMLを更新するとき
 
-To understand how change detection works, first consider when the application needs to update the HTML. Typically, updates occur for one of the following reasons:
+変更検知がどのように機能するかを理解するには、まずアプリケーションがHTMLの更新を必要とするときについて考えてみましょう。通常、更新は次のいずれかの理由によって発生します。
 
-1. Component initialization. For example, when bootstrapping an Angular application, Angular loads the bootstrap component and triggers the [ApplicationRef.tick()](api/core/ApplicationRef#tick) to call change detection and View Rendering. Just as in the [displaying data](guide/displaying-data) sample, the `AppComponent` is the bootstrap component. This component has the properties `title` and `myHero`, which the application renders in the HTML.
+1. コンポーネントの初期化。たとえば、Angularアプリケーションをブートストラップするとき、Angularはブートストラップコンポーネントを読み込み、 [ApplicationRef.tick()](api/core/ApplicationRef#tick)をトリガーして変更検知とビューレンダリングを呼び出します。 [データの表示](guide/displaying-data)のサンプルのように、`AppComponent`はブートストラップコンポーネントです。このコンポーネントは`title`および`myHero`プロパティを持っており、アプリケーションはこれらをHTMLにレンダリングします。
 
-2. Event listener. The DOM event listener can update the data in an Angular component and also trigger change detection, as in the following example.
+2. イベントリスナー。次の例のように、DOMイベントリスナーはAngularコンポーネントのデータを更新し、変更検知をトリガーすることもできます。
 
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts"></code-example>
 
-3. Http Data Request. You can also get data from a server through an Http request. For example:
+3. Httpデータリクエスト。Httpリクエストを介してサーバーからデータを取得することもできます。
 
 ```typescript
 @Component({
@@ -121,14 +121,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.httpClient.get(serverUrl).subscribe(response => {
-      // user does not need to trigger change detection manually
+      // ユーザーは手動で変更検知をトリガーする必要はない
       data = response.data;
     });
   }
 }
 ```
 
-4. MacroTasks, such as `setTimeout()`/`setInterval()`. You can also update the data in the callback function of `macroTask` such as `setTimeout()`. For example:
+4. `setTimeout()`/`setInterval()` などのMacroTask。`setTimeout()`のような`macroTask`のコールバック関数でデータを更新することもできます。
 
 ```typescript
 @Component({
@@ -140,14 +140,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      // user does not need to trigger change detection manually
+      // ユーザーは手動で変更検知をトリガーする必要はない
       data = 'value updated';
     });
   }
 }
 ```
 
-5. MicroTask, such as `Promise.then()`. Other asynchronous APIs return a Promise object (such as `fetch`), so the `then()` callback function can also update the data. For example:
+5. `Promise.then()`などのMicroTask。その他の非同期APIはPromiseオブジェクトを返す（`fetch`など）ため、`then()`コールバック関数もデータを更新することができます。
 
 ```typescript
 @Component({
@@ -159,22 +159,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     Promise.resolve(1).then(v => {
-      // user does not need to trigger change detection manually
+      // ユーザーは手動で変更検知をトリガーする必要はない
       data = v;
     });
   }
 }
 ```
 
-6. Other async operations. In addition to `addEventListener()`/`setTimeout()`/`Promise.then()`, there are other operations that can update the data asynchronously. Some examples include `WebSocket.onmessage()` and `Canvas.toBlob()`.
+6. その他の非同期操作。`addEventListener()`/`setTimeout()`/`Promise.then()`に加え、他にも非同期にデータを更新できる操作はあります。いくつかの例には`WebSocket.onmessage()`や`Canvas.toBlob()`を含みます。
 
-The preceding list contains most common scenarios in which the application might change the data. Angular runs change detection whenever it detects that data could have changed.
-The result of change detection is that DOM is updated with new data. Angular detects the changes in different ways. For component initialization, Angular calls change detection explicitly. For [asynchronous operations](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous), Angular uses a Zone to detect changes in places where the data could have possibly mutated and it runs change detection automatically.
+上記のリストには、アプリケーションがデータを変更する可能性があるもっとも一般的なシナリオが含まれています。Angularは、データが変更された可能性があることを検知するたびに変更検知を実行します。
+変更検知の結果、DOMは新しいデータで更新されます。Angularはさまざまな方法で変更を検知します。コンポーネントの初期化では、Angularは明示的に変更検知を呼び出します。[非同期操作](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)では、AngularはZoneを使用してデータが変更された可能性のある場所の変更を検知し、自動的に変更検知を実行します。
 
 
-## Zones and execution contexts
+## Zoneと実行コンテキスト
 
-A zone provides an execution context that persists across async tasks. [Execution Context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is an abstract concept that holds information about the environment within the current code being executed. Consider the following example.
+Zoneは非同期タスクにまたがって持続する実行コンテキストを提供します。[実行コンテキスト](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)は、実行中の現在のコード内の環境に関する情報を保持する抽象的な概念です。次の例を考えてみましょう。
 
 ```javascript
 const callback = function() {
@@ -197,30 +197,30 @@ func.apply(ctx1);
 func.apply(ctx2);
 ```
 
-The value of `this` in the callback of `setTimeout` might differ depending on when `setTimeout` is called.
-Thus you can lose the context in asynchronous operations.
+`setTimeout`のコールバック内の`this`の値は、`setTimeout`がいつ呼び出されるかによって異なる場合があります。
+したがって、非同期操作内のコンテキストを見失ってしまう可能性があります。
 
-A zone provides a new zone context other than `this`, the zone context persists across asynchronous operations.
-In the following example, the new zone context is called `zoneThis`.
+Zoneは`this`以外の新しいZoneコンテキストを提供します。そのZoneコンテキストは非同期操作にまたがって持続します。
+次の例では、新しいZoneコンテキストを`zoneThis`としています。
 
 ```javascript
 zone.run(() => {
-  // now you are in a zone
+  // Zone内です
   expect(zoneThis).toBe(zone);
   setTimeout(function() {
-    // the zoneThis context will be the same zone
-    // when the setTimeout is scheduled
+    // setTimeoutがスケジュールされているとき、
+    // zoneThisコンテキストは同じZoneになります
     expect(zoneThis).toBe(zone);
   });
 });
 ```
 
-This new context, `zoneThis`, can be retrieved from the `setTimeout()` callback function, and this context is the same when the `setTimeout()` is scheduled.
-To get the context, you can call [`Zone.current`](https://github.com/angular/angular/blob/master/packages/zone.js/lib/zone.ts).
+この新しいコンテキスト`zoneThis`は、`setTimeout()`コールバック関数から取得することができます。このコンテキストは、`setTimeout()`がスケジュールされているとき、同じものです。
+コンテキストを取得するには、[`Zone.current`](https://github.com/angular/angular/blob/master/packages/zone.js/lib/zone.ts)を呼び出すことができます。
 
-### Zones and async lifecycle hooks
+### Zoneと非同期ライフサイクルフック
 
-Zone.js can create contexts that persist across asynchronous operations as well as provide lifecycle hooks for asynchronous operations.
+Zone.jsは、非同期操作にライフサイクルフックを提供するだけでなく、非同期操作にまたがって持続するコンテキストを作成できます。
 
 ```javascript
 const zone = Zone.current.fork({
@@ -249,26 +249,26 @@ zone.run(() => {
 });
 ```
 
-The above example creates a zone with several hooks.
+上記の例ではいくつかのフックを備えたZoneを作成します。
 
-`onXXXTask` hooks trigger when the status of Task changes.
-The Zone Task concept is very similar to the Javascript VM Task concept.
-- `macroTask`: such as `setTimeout()`.
-- `microTask`: such as `Promise.then()`.
-- `eventTask`: such as `element.addEventListener()`.
+`onXXXTask`フックは、タスクの状態が変化したときにトリガーされます。
+Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似ています。
+- `macroTask`: `setTimeout()`など
+- `microTask`: `Promise.then()`など
+- `eventTask`: `element.addEventListener()`など
 
-The `onInvoke` hook triggers when a synchronize function is executed in a Zone.
+`onInvoke`フックは、Zone内で非同期関数が実行されたときにトリガーされます。
 
-These hooks trigger under the following circumstances:
+次に挙げるフックは、次の状況においてトリガーされます。
 
-- `onScheduleTask`: triggers when a new asynchronous task is scheduled, such as when you call `setTimeout()`.
-- `onInvokeTask`: triggers when an asynchronous task is about to execute, such as when the callback of `setTimeout()` is about to execute.
-- `onHasTask`: triggers when the status of one kind of task inside a zone changes from stable to unstable or from unstable to stable. A status of stable means there are no tasks inside the Zone, while unstable means a new task is scheduled in the zone.
-- `onInvoke`: triggers when a synchronize function is going to execute in the zone.
+- `onScheduleTask`: 新しい非同期タスクがスケジュールされたときにトリガーされます。たとえば`setTimeout()`を呼び出したときです。
+- `onInvokeTask`: 非同期タスクが実行されるときにトリガーされます。たとえば`setTimeout()`のコールバックが実行されるときです。
+- `onHasTask`: Zone内の1種類のタスクの状態が、stableからunstable、またはunstableからstableへ変化したときにトリガーされます。stable状態はZone内にタスクがないことを意味し、unstable状態はZone内で新しいタスクがスケジュールされていることを意味します。
+- `onInvoke`: Zone内で同期関数が実行されるときにトリガーされます。
 
-With these hooks, `Zone` can monitor the status of all synchronize and asynchronous operations inside a zone.
+これらのフックを用いて、`Zone`はZone内のすべての同期および非同期の操作の状態を監視することができます。
 
-The above example returns the following output.
+上記の例では、次のようなアウトプットを返します。
 
 ```
 the callback will be invoked () => {
@@ -289,128 +289,128 @@ task state changed in the zone { microTask: false,
   change: 'macroTask' }
 ```
 
-All of the functions of Zone are provided by a library called [zone.js](https://github.com/angular/angular/tree/master/packages/zone.js/README.md).
-This library implements those features by intercepting asynchronous APIs through monkey patching.
-Monkey patching is a technique to add or modify the default behavior of a function at runtime without changing the source code.
+Zoneのすべての機能は、[zone.js](https://github.com/angular/angular/tree/master/packages/zone.js/README.md)というライブラリによって提供されています。
+このライブラリは、モンキーパッチを介して非同期APIをインターセプトすることにより、それらの特徴を実装しています。
+モンキーパッチは、ソースコードを変更せずに、実行時に機能のデフォルトの動作を追加または変更するテクニックです。
 
 ## NgZone
 
-While Zone.js can monitor all the states of synchronous and asynchronous operations, Angular additionally provides a service called NgZone.
-This service creates a zone named `angular` to automatically trigger change detection when the following conditions are satisfied:
+Zone.jsは同期および非同期操作のすべての状態を監視できますが、AngularはさらにNgZoneと呼ばれるサービスを提供します。
+このサービスは、`angular`という名前のZoneを作成し、次の条件が満たされたときに自動的に変更検知をトリガーします。
 
-1. When a sync or async function is executed.
-1. When there is no `microTask` scheduled.
+1. 同期および非同期関数が実行されたとき
+1. スケジュールされた`microTask`がないとき
 
 ### NgZone `run()`/`runOutsideOfAngular()`
 
-`Zone` handles most asynchronous APIs such as `setTimeout()`, `Promise.then(),and `addEventListener()`.
-For the full list, see the [Zone Module document](https://github.com/angular/angular/blob/master/packages/zone.js/MODULE.md).
-Therefore in those asynchronous APIs, you don't need to trigger change detection manually.
+`Zone`は`setTimeout()`, `Promise.then()`, `addEventListener()`など、ほとんどの非同期APIを処理します。
+すべての一覧は、[Zone Module document](https://github.com/angular/angular/blob/master/packages/zone.js/MODULE.md)を参照してください。
+このため、これらの非同期APIについては、手動で変更検知をトリガーする必要はありません。
 
-There are still some third party APIs that Zone does not handle.
-In those cases, the NgZone service provides a [`run()`](api/core/NgZone#run) method that allows you to execute a function inside the angular zone.
-This function, and all asynchronous operations in that function, trigger change detection automatically at the correct time.
+Zoneが処理しないサードパーティのAPIもまだあります。
+これらのケースでは、NgZoneサービスは[`run()`](api/core/NgZone#run)メソッドを提供し、angular Zoneの中で関数を実行できるようにします。
+この関数および関数内で実行されるすべての非同期操作は、適切なタイミングで自動的に変更検知をトリガーします。
 
 ```typescript
 export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
   ngOnInit() {
-    // new async API is not handled by Zone, so you need to
-    // use ngZone.run to make the asynchronous operation in angular zone
-    // and trigger change detection automatically
+    // 新しい非同期APIはZoneで処理されません。
+    // そのため、ngZone.runを使用してangular Zone内で非同期操作を行い、
+    // 自動的に変更検知をトリガーする必要があります。
     this.ngZone.run(() => {
       someNewAsyncAPI(() => {
-        // update data of component
+        // コンポーネントのデータを更新
       });
     });
   }
 }
 ```
 
-By default, all asynchronous operations are inside the angular zone, which triggers change detection automatically.
-Another common case is when you don't want to trigger change detection.
-In that situation, you can use another NgZone method: [runOutsideAngular()](api/core/NgZone#runoutsideangular).
+デフォルトでは、すべての非同期操作はangular Zoneの中にあり、自動的に変更検知をトリガーします。
+もうひとつの一般的なケースは、変更検知をトリガーしたくない場合です。
+その状況では、NgZoneのもうひとつのメソッド、[runOutsideAngular()](api/core/NgZone#runoutsideangular)を使用できます。
 
 ```typescript
 export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
   ngOnInit() {
-    // you know no data will be updated
-    // you don't want to do change detection in this
-    // specified operation, you can call runOutsideAngular
+    // この操作でデータが変更されないことがわかっており、
+    // 変更検知を行いたくない場合は、
+    // runOutsideAngularを呼び出すことができます。
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
-        // do something will not update component data
+        // コンポーネントのデータを更新しない処理を実行
       });
     });
   }
 }
 ```
 
-### Seting up Zone.js
+### Zone.jsのセットアップ
 
-To make Zone.js available in Angular, you need to import the zone.js package.
-If you are using the Angular CLI, this step is done automatically, and you will see the following line in the `src/polyfills.ts`:
+Zone.jsをAngularで利用できるようにするには、zone.jsパッケージをインポートする必要があります。
+Angular CLIを使用している場合はこのステップは自動で行われ、`src/polyfills.ts`に次の行が表示されます。
 
 ```typescript
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
+import 'zone.js/dist/zone';  // Angular CLIに含まれます
 ```
 
-Before importing the  `zone.js` package, you can set the following configurations:
+`zone.js`パッケージをインポートする前に、次の構成をセットすることができます。
 
-- You can disable some asynchronous API monkey patching for better performance.
-For example, you can disable the `requestAnimationFrame()` monkey patch, so the callback of `requestAnimationFrame()` will not trigger change detection.
-This is useful if, in your application, the callback of the `requestAnimationFrame()` will not update any data.
-- You can specify that certain DOM events not run inside the angular zone; for example, to prevent a `mousemove` or `scroll` event to trigger change detection.
+- よりよいパフォーマンスのために、いくつかの非同期APIのモンキーパッチを無効にすることができます。
+たとえば、`requestAnimationFrame()`のモンキーパッチを無効にすることで、`requestAnimationFrame()`のコールバックは変更検知をトリガーしません。
+これは、アプリケーション内において`requestAnimationFrame()`のコールバックが何もデータを更新しない場合に便利です。
+- 特定のDOMイベントがangular Zone内で実行されないように指定できます。たとえば、`mousemove`または`scroll`イベントが変更検知をトリガーすることを防ぐためです。
 
-There are several other settings you can change.
-To make these changes, you need to create a `zone-flags.ts` file, such as the following.
+変更できる設定は他にもいくつかあります。
+これらの変更を行うには、次のような`zone-flags.ts`ファイルを作成する必要があります。
 
 ```typescript
- (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
- (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+ (window as any).__Zone_disable_requestAnimationFrame = true; // requestAnimationFrameのパッチを無効化する
+ (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // 指定したeventNamesのパッチを無効化する
 ```
 
-Next, import `zone-flags` before you import `zone` in the `polyfills.ts`.
+次に、`polyfills.ts`で`zone`をインポートする前に`zone-flags`をインポートします。
 
 ```typescript
 /***************************************************************************************************
  * Zone JS is required by default for Angular.
  */
 import `./zone-flags`;
-import 'zone.js/dist/zone';  // Included with Angular CLI.
+import 'zone.js/dist/zone';  // Angular CLIに含まれます
 ```
 
-For more information of what you can configure, see the [zone.js](https://github.com/angular/angular/tree/master/packages/zone.js) documentation.
+設定できるものの詳細については、[zone.js](https://github.com/angular/angular/tree/master/packages/zone.js)ドキュメントを参照してください。
 
 ### NoopZone
 
-`Zone` helps Angular know when to trigger change detection and let the developers focus on the application development.
-By default, `Zone` is loaded and works without additional configuration. However, you don't have to use `Zone` to make Angular work, instead opting to trigger change detection on your own.
+`Zone`は、Angularが変更検知をトリガーするタイミングを知るのを補助し、開発者がアプリケーション開発に集中できるようにします。
+デフォルトで`Zone`は読み込まれ、追加の設定をすることなく動作します。しかし、Angularを動作させるために`Zone`を使用する必要はなく、かわりに自分で変更検知をトリガーすることも選択できます。
 
 <div class="alert is-helpful">
 
-<h4>Disabling <code>Zone</code></h4>
+<h4><code>Zone</code>の無効化</h4>
 
-**If you disable `Zone`, you will need to trigger all change detection at the correct timing yourself, which requires comprehensive knowledge of change detection**.
+**`Zone`を無効化する場合、すべての変更検知を自分で適切なタイミングにトリガーする必要があり、変更検知に関する包括的な知識が必要です。**
 
 </div>
 
-To remove `zone.js`, make the following changes.
+`zone.js`を削除するには、次のように変更します。
 
-1. Remove the `zone.js` import from `polyfills.ts`.
+1. `polyfills.ts`から`zone.js`のインポートを削除します。
 
   ```typescript
   /***************************************************************************************************
    * Zone JS is required by default for Angular itself.
    */
-  // import 'zone.js/dist/zone';  // Included with Angular CLI.
+  // import 'zone.js/dist/zone';  // Angular CLIに含まれます
   ```
 
-2. Bootstrap Angular with `noop zone` in `src/main.ts`.
+2. `src/main.ts`で`noop zone`を使用してAngularをブートストラップします。
 
   ```typescript
   platformBrowserDynamic().bootstrapModule(AppModule, {ngZone: 'noop'})

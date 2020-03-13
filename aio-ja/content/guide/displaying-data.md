@@ -92,21 +92,21 @@ Angular は `index.html` 内の `<app-root>` を探してそれを見つけ、
 次のいくつかのセクションでは、アプリケーションのコーディングの選択肢のいくつかをレビューします。
 
 
-## Choosing the template source
+## テンプレートソースの選択
 
-The `@Component` metadata tells Angular where to find the component's template.
+`@Component` メタデータは、Angular にコンポーネントのテンプレートの場所を伝えます。
 コンポーネントのテンプレートは、2つの場所のいずれかに格納できます。
 
-* You can define the template *inline* using the `template` property of the `@Component` decorator. An inline template is useful for a small demo or test.
-* Alternatively, you can define the template in a separate HTML file and link to that file in the `templateUrl` property of the `@Component` decorator. This configuration is typical for anything more complex than a small test or demo, and is the default when you generate a new component.
+* `@Component` デコレーターの `template` プロパティを使用して、テンプレートを *インライン* で定義できます。インラインテンプレートは、小規模なデモやテストに役立ちます。
+* または、別の HTML ファイルでテンプレートを定義し、`@Component` デコレーターの `templateUrl` プロパティでそのファイルにリンクできます。この構成は、小規模なテストやデモよりも複雑な場合に一般的であり、新しいコンポーネントを生成するときのデフォルトです。
 
 どちらのスタイルでも、テンプレートデータバインディングはコンポーネントのプロパティへの同じアクセス権を持ちます。
-ここでは、テンプレートが小さく、追加のHTMLファイルなしでデモが簡単であるため、アプリケーションはインラインHTMLを使用します。
+ここでは、テンプレートが小さく、追加の HTML ファイルなしでデモが簡単であるため、アプリケーションはインライン HTML を使用します。
 
 <div class="alert is-helpful">
 
-  デフォルトでは、Angular CLIコマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。
-  You can override that by adding the "-t" (short for `inlineTemplate=true`) option:
+  デフォルトでは、Angular CLI コマンド [`ng generate component`](cli/generate) はテンプレートファイルを伴うコンポーネントを生成します。
+  "-t" (`inlineTemplate=true` の略）オプションを追加することでオーバーライドできます：
 
   <code-example hideCopy language="sh" class="code-shell">
     ng generate component hero -t
@@ -115,21 +115,21 @@ The `@Component` metadata tells Angular where to find the component's template.
 </div>
 
 
-## Initialization
+## 初期化
 
-The following example uses variable assignment to initialize the components.
+次の例では、変数の割り当てを使用してコンポーネントを初期化します。
 
 <code-example path="displaying-data/src/app/app-ctor.component.1.ts" region="class"></code-example>
 
-You could instead declare and initialize the properties using a constructor.
+代わりに、コンストラクターを使用してプロパティを宣言および初期化できます。
 このアプリは簡単のために、より簡潔な「変数割り当て」スタイルを使用しています。
 
 
 {@a ngFor}
 
-## Add logic to loop through data
+## データをループするロジックを追加する
 
-The `*ngFor` directive (predefined by Angular) lets you loop through data. The following example uses the directive to show all of the values in an array property.
+`*ngFor` ディレクティブ (Angular で事前定義) を使用すると、データをループできます。次の例では、ディレクティブを使用して、配列プロパティのすべての値を表示します。
 
 ヒーローのリストを表示するには、ヒーロー名の配列をコンポーネントに追加し、配列の最初の名前になるように `myHero` を再定義します。
 
@@ -137,22 +137,22 @@ The `*ngFor` directive (predefined by Angular) lets you loop through data. The f
 <code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (class)" region="class"></code-example>
 
 
-テンプレートでAngular `ngFor` ディレクティブを使用して、各項目を `heroes` リストに表示します。
+テンプレートで Angular `ngFor` ディレクティブを使用して、各項目を `heroes` リストに表示します。
 
 
 <code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (template)" region="template"></code-example>
 
 
-このUIでは、HTMLの順序付けられていないリストを `<ul>`および `<li>`タグとともに使用します。
-`<li>` 要素の `*ngFor` はAngular 「繰り返し」 ディレクティブです。
-これは `<li>`要素（とその子要素）を「リピータテンプレート」としてマークします：
+このUIでは、HTML の順序付けられていないリストを `<ul>` および `<li>` タグとともに使用します。
+`<li>` 要素の `*ngFor` は Angular 「繰り返し」 ディレクティブです。
+これは `<li>`要素 (とその子要素) を「リピータテンプレート」としてマークします：
 
 
 <code-example path="displaying-data/src/app/app.component.2.ts" header="src/app/app.component.ts (li)" region="li"></code-example>
 
 <div class="alert is-important">
 
-`*ngFor` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
+`*ngFor` の先頭のアスタリスク（\*）を忘れないでください。それは構文の不可欠な部分です。
 詳細については、[テンプレート構文](guide/template-syntax#ngFor) ページを参照してください.
 
 </div>
@@ -162,14 +162,14 @@ The `*ngFor` directive (predefined by Angular) lets you loop through data. The f
 さらに詳しいテンプレート入力変数については、[テンプレート構文](guide/template-syntax) ページの
 [ミクロ構文](guide/template-syntax#microsyntax) セクションを読んでください。
 
-Angularはリスト内の各項目の `<li>` を複製し、
-`hero` 変数を現在の反復の項目（ヒーロー）に設定します。
-Angularはその変数を二重中括弧内の補間のコンテキストとして使用します。
+Angular はリスト内の各項目の `<li>` を複製し、
+`hero` 変数を現在の反復の項目 (ヒーロー) に設定します。
+Angular はその変数を二重中括弧内の補間のコンテキストとして使用します。
 
 <div class="alert is-helpful">
 
-この場合は、 `ngFor` は配列を表示していますが、
-`ngFor` は任意の[反復可能](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)オブジェクトについて項目を繰り返すことができます。
+この場合は、`ngFor` は配列を表示していますが、
+`ngFor` は任意の[反復可能](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Iteration_protocols)オブジェクトについて項目を繰り返すことができます。
 
 </div>
 
@@ -189,35 +189,35 @@ Angularはその変数を二重中括弧内の補間のコンテキストとし�
 実際のアプリケーションでは、ほとんどのバインディングはより特殊なオブジェクトになります。
 
 このバインディングを特殊なオブジェクトを使用するように変換するには、
-ヒーロー名の配列を `Hero` オブジェクトの配列に変換します。そのためには、 `Hero` クラスが必要です。
+ヒーロー名の配列を `Hero` オブジェクトの配列に変換します。そのためには、`Hero` クラスが必要です。
 
 <code-example language="sh" class="code-shell">
   ng generate class hero
 </code-example>
 
-This command creates the following code.
+このコマンドは、次のコードを作成します。
 
 
 <code-example path="displaying-data/src/app/hero.ts" header="src/app/hero.ts"></code-example>
 
-コンストラクターと2つのプロパティ、 `id` と `name` をもつクラスを定義しました。
+コンストラクターと2つのプロパティ、`id` と `name` をもつクラスを定義しました。
 
 クラスにプロパティがあるように見えないかもしれませんが、それはあります。
-コンストラクターパラメータの宣言は、TypeScriptのショートカットを利用します。
+コンストラクターパラメータの宣言は、TypeScript のショートカットを利用します。
 
 最初のパラメータを考えてみましょう：
 
 
 <code-example path="displaying-data/src/app/hero.ts" header="src/app/hero.ts (id)" region="id"></code-example>
 
-簡単な構文で多くのことをしています。：
+簡単な構文で多くのことをしています：
 
 * コンストラクターパラメータとその型を宣言します。
 * 同じ名前のパブリックプロパティを宣言します。
 * クラスのインスタンスを作成するときに、対応する引数でそのプロパティを初期化します。
 
 
-### Heroクラスの使用
+### Hero クラスの使用
 
 `Hero` クラスをインポートした後、`AppComponent.heroes` プロパティは `Hero` オブジェクト
 の _型付きの_ 配列を返すことができます：
@@ -239,7 +239,7 @@ This command creates the following code.
 
 {@a ngIf}
 
-## NgIfによる条件付き表示
+## NgIf による条件付き表示
 
 アプリケーションは時には、特定の状況下でのみビューまたはビューの一部を表示する必要があります。
 
@@ -255,24 +255,24 @@ Angular `ngIf` ディレクティブは _真偽_ 条件に基づいて要素を�
 <div class="alert is-important">
 
 `*ngIf` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
-さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの[ngIf セクション](guide/template-syntax#ngIf) を読んでください。
+さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの [ngIf セクション](guide/template-syntax#ngIf) を読んでください。
 
 </div>
 
 
 `*ngIf="heroes.length > 3"` という二重引用符で囲まれたテンプレート式は、
-TypeScriptとよく似ています。
-コンポーネントのヒーローのリストに3つより多いアイテムがある場合、Angularは段落をDOMに追加し、
+TypeScript とよく似ています。
+コンポーネントのヒーローのリストに3つより多いアイテムがある場合、Angular は段落を DOM に追加し、
 メッセージが表示されます。 
-3つ以内のアイテムがある場合、 Angularは段落を省略するので、メッセージは表示されません。 
+3つ以内のアイテムがある場合、 Angular は段落を省略するので、メッセージは表示されません。 
 
 詳細については、[テンプレート構文](guide/template-syntax) ページの[テンプレート式](guide/template-syntax#template-expressions) を参照してください。
 
 
 <div class="alert is-helpful">
 
-Angularはメッセージを表示したり隠したりしていません。DOMから段落要素を追加したり削除したりしています。
-これは、特に大規模なプロジェクトで多くのデータバインディングを含むHTMLを条件により含めたり除外したりするときに、パフォーマンスを改善します。
+Angular はメッセージを表示したり隠したりしていません。DOM から段落要素を追加したり削除したりしています。
+これは、特に大規模なプロジェクトで多くのデータバインディングを含む HTML を条件により含めたり除外したりするときに、パフォーマンスを改善します。
 
 </div>
 

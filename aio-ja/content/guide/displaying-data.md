@@ -1,21 +1,21 @@
 # ビューへのデータの表示
 
-Angular [components](guide/glossary#component) form the data structure of your application.
-The HTML [template](guide/glossary#template) associated with a component provides the means to display that data in the context of a web page.
-Together, a component's class and template form a [view](guide/glossary#view) of your application data.
+Angular [コンポーネント](guide/glossary#component) は、アプリケーションのデータ構造を形成します。
+コンポーネントに関連付けられた HTML [テンプレート](guide/glossary#template)は、Web ページのコンテキストでそのデータを表示する手段を提供します。
+コンポーネントのクラスとテンプレートが一緒になって、アプリケーションデータの[ビュー](guide/glossary#view)を形成します。
 
-The process of combining data values with their representation on the page is called [data binding](guide/glossary#data-binding).
-You display your data to a user (and collect data from the user) by *binding* controls in the HTML template to the data properties of the component class.
+データの値をページ上の表現と結合するプロセスは、[データバインディング](guide/glossary#data-binding)と呼ばれます。
+HTML テンプレートのコントロールをコンポーネントクラスのデータプロパティに *バインドすること* により、ユーザーにデータを表示 (およびユーザーからデータを収集) します。
 
-In addition, you can add logic to the template by including [directives](guide/glossary#directive), which tell Angular how to modify the page as it is rendered.
+さらに、[ディレクティブ](guide/glossary#directive)を含めることでテンプレートにロジックを追加できます。ディレクティブは、レンダリングされるページを変更する方法を Angular に指示します。
 
-Angular defines a *template language* that expands HTML notation with syntax that allows you to define various kinds of data binding and logical directives.
-When the page is rendered, Angular interprets the template syntax to update the HTML according to your logic and current data state.
-Before you read the complete [template syntax guide](guide/template-syntax), the exercises on this page give you a quick demonstration of how template syntax works.
+Angular は、さまざまな種類のデータバインディングと論理ディレクティブを定義できる構文で HTML 表記を拡張する *テンプレート言語* を定義します。
+ページがレンダリングされると、Angular はテンプレート構文を解釈して、ロジックと現在のデータ状態にしたがって HTML を更新します。
+完全な[テンプレート構文ガイド](guide/template-syntax)を読む前に、このページの演習では、テンプレート構文がどのように機能するかを簡単に説明します。
 
 このデモでは、ヒーローのリストを含むコンポーネントを作成します。
 あなたはヒーロー名のリストを表示し、条件付きでリストの下にメッセージを表示します。
-最終的なUIは次のようになります：
+最終的な UI は次のようになります：
 
 <div class="lightbox">
   <img src="generated/images/guide/displaying-data/final.png" alt="Final UI">
@@ -53,37 +53,37 @@ Before you read the complete [template syntax guide](guide/template-syntax), the
 
 <div class="alert is-helpful">
 
-テンプレートは、ECMAScript 2015バッククオート(<code>\`</code>)内の複数行の文字列です。
+テンプレートは、ECMAScript 2015 バッククオート(<code>\`</code>)内の複数行の文字列です。
 一重引用符(`'`)と同じ文字*ではない*バッククオート(<code>\`</code>)は複数行にわたって
 文字列を構成することができ、
-HTMLをより読みやすくします 。
+HTML をより読みやすくします。
 
 </div>
 
 Angularは自動的にコンポーネントから `title` と `myHero` プロパティの値を取り出し、
 それらの値をブラウザに挿入します。
-Angularは、これらのプロパティが変更されると、表示を更新します。
+Angular は、これらのプロパティが変更されると、表示を更新します。
 
 <div class="alert is-helpful">
 
-より正確には、再表示は、キーストローク、タイマー完了、HTTPリクエストへの応答など、
+より正確には、再表示は、キーストローク、タイマー完了、HTTP リクエストへの応答など、
 ビューに関連する何らかの非同期イベントの後に発生します。
 
 </div>
 
 `AppComponent` クラスのインスタンスを作成するために、**new** を呼び出さないことに注目してください。
-Angularがインスタンスを作成しています。どのように？
+Angular がインスタンスを作成しています。どのように？
 
-`@Component` デコレーターの CSSの`selector`は、`<app-root>` という名前の要素を指定します。
-その要素は `index.html` ファイルのbody内のプレースホルダです：
+`@Component` デコレーターの CSS の`selector`は、`<app-root>` という名前の要素を指定します。
+その要素は `index.html` ファイルの body 内のプレースホルダです：
 
 <code-example path="displaying-data/src/index.html" header="src/index.html (body)" region="body"></code-example>
 
 `AppComponent` クラスでブートストラップすると（<code>main.ts</code>内）、
-Angularは `index.html` 内の `<app-root>` を探してそれを見つけ、
+Angular は `index.html` 内の `<app-root>` を探してそれを見つけ、
 `AppComponent` をインスタンス化して、 `<app-root>` タグの中にレンダリングします。
 
-今すぐアプリケーションを実行しましょう。 タイトルとヒーロー名が表示されます。
+今すぐアプリケーションを実行しましょう。タイトルとヒーロー名が表示されます。
 
 <div class="lightbox">
   <img src="generated/images/guide/displaying-data/title-and-hero.png" alt="Title and Hero">

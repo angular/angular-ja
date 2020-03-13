@@ -334,12 +334,12 @@ See also [Using runtime-global libraries inside your app](guide/using-libraries#
 
 {@a optimize-and-srcmap}
 
-### Optimization and source map configuration
+### 最適化とソースマップの構成
 
-The `optimization` and `sourceMap` command options are simple Boolean flags.
-You can supply an object as a configuration value for either of these to provide more detailed instruction.
+`optimization` および `sourceMap` コマンドオプションは単純なブールフラグです。
+これらのいずれかの構成値としてオブジェクトを指定して、より詳細な指示を提供できます。
 
-* The flag `--optimization="true"` applies to both scripts and styles. You can supply a value such as the following to apply optimization to one or the other:
+* フラグ `--optimization="true"` は、スクリプトとスタイルの両方に適用されます。次のような値を指定して、どちらかに最適化を適用できます:
 
 <code-example language="json">
 
@@ -347,10 +347,10 @@ You can supply an object as a configuration value for either of these to provide
 
 </code-example>
 
-* The flag `--sourceMap="true"` outputs source maps for both scripts and styles.
-You can configure the option to apply to one or the other.
-You can also choose to output hidden source maps, or resolve vendor package source maps.
-For example:
+* フラグ `--sourceMap="true"` は、スクリプトとスタイルの両方のソースマップを出力します。
+どちらかに適用するオプションを構成できます。
+非表示のソースマップを出力するか、ベンダーパッケージのソースマップを解決することもできます。
+たとえば:
 
 <code-example language="json">
 
@@ -360,11 +360,11 @@ For example:
 
 <div class="alert is-helpful">
 
-   When using hidden source maps, source maps will not be referenced in the bundle.
-   These are useful if you only want source maps to map error stack traces in error reporting tools,
-   but don't want to expose your source maps in the browser developer tools.
+   非表示のソースマップを使用する場合、ソースマップはバンドルで参照されません。
+   これらは、ソースマップでエラー報告ツールのエラースタックトレースのみをマッピングするが、
+   ブラウザ開発者ツールでソースマップを公開したくない場合に役立ちます。
 
-   For [Universal](guide/glossary#universal), you can reduce the code rendered in the HTML page by
-   setting styles optimization to `true` and styles source maps to `false`.
+   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、
+   スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
 
 </div>

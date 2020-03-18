@@ -1,0 +1,8 @@
+# Javascript Node CircleCI 2.0 configuration file
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12-browsers
+    steps:
+      - run: echo 'No checks.'

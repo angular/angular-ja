@@ -8,13 +8,11 @@
   "private": true,
   "scripts": {
     "test": "npm run textlint",
-    "deploy": "firebase deploy --token \"$FIREBASE_TOKEN\"",
     "update-origin": "./update-origin.sh",
     "textlint": "textlint 'aio-ja/**/!(*.en).md'",
     "textlint:f": "textlint --fix 'aio-ja/**/!(*.en).md'"
   },
   "devDependencies": {
-    "firebase-tools": "^6.10.0",
     "glob": "^7.1.2",
     "prh-rules": "prh/rules",
     "textlint": "^11.0.0",

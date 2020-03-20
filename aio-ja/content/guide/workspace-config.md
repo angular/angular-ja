@@ -302,11 +302,11 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 
 {@a style-preprocessor}
 
-#### Style preprocessor options
+#### スタイルプリプロセッサオプション
 
-In Sass and Stylus you can make use of the `includePaths` functionality for both component and global styles, which allows you to add extra base paths that will be checked for imports.
+Sass と Stylus では、コンポーネントスタイルとグローバルスタイルの両方で `includePaths` 機能を利用できます。これにより、インポートのためにチェックされる追加のベースパスを追加できます。
 
-To add paths, use the `stylePreprocessorOptions` option:
+パスを追加するには、`stylePreprocessorOptions` オプションを使用します:
 
 <code-example language="json">
 
@@ -318,7 +318,7 @@ To add paths, use the `stylePreprocessorOptions` option:
 
 </code-example>
 
-Files in that folder, such as `src/style-paths/_variables.scss`, can be imported from anywhere in your project without the need for a relative path:
+`src/style-paths/_variables.scss` のようなそのフォルダ内のファイルは、相対パスを必要とせずにプロジェクトのどこからでもインポートできます:
 
 ```ts
 // src/app/app.component.scss
@@ -328,8 +328,8 @@ Files in that folder, such as `src/style-paths/_variables.scss`, can be imported
 @import 'variables';
 ```
 
-Note that you will also need to add any styles or scripts to the `test` builder if you need them for unit tests.
-See also [Using runtime-global libraries inside your app](guide/using-libraries#using-runtime-global-libraries-inside-your-app).
+ユニットテストに必要な場合は、`test` ビルダーにスタイルやスクリプトを追加する必要があることに注意してください。
+[アプリ内でのランタイムグローバルライブラリの使用](guide/using-libraries#using-runtime-global-libraries-inside-your-app)も参照してください。
 
 
 {@a optimize-and-srcmap}

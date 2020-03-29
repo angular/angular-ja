@@ -316,32 +316,32 @@
           "children": [
             {
               "url": "guide/observables",
-              "title": "Observable",
-              "tooltip": "",
+              "title": "Observableの概要",
+              "tooltip": "Observableを使用して、同期または非同期で値を渡します。",
               "translated": true
             },
             {
               "url": "guide/rx-library",
               "title": "RxJSライブラリ",
-              "tooltip": "",
+              "tooltip": "RxJSライブラリは便利なオペレーターを提供します。",
               "translated": true
             },
             {
               "url": "guide/observables-in-angular",
               "title": "AngularでのObservable",
-              "tooltip": "",
+              "tooltip": "AngularサブシステムがObservableをどのように使用するか。",
               "translated": true
             },
             {
               "url": "guide/practical-observable-usage",
               "title": "実用的な使用法",
-              "tooltip": "",
+              "tooltip": "Observableが役立つ領域",
               "translated": true
             },
             {
               "url": "guide/comparing-observables",
               "title": "他の技術との比較",
-              "tooltip": "",
+              "tooltip": "ObservableとPromiseや他のメッセージパッシングテクニックとの比較。",
               "translated": true
             }
           ]

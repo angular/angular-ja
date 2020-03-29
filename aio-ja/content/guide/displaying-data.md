@@ -153,7 +153,7 @@ Angular は `index.html` 内の `<app-root>` を探してそれを見つけ、
 <div class="alert is-important">
 
 `*ngFor` の先頭のアスタリスク（\*）を忘れないでください。それは構文の不可欠な部分です。
-詳細については、[テンプレート構文](guide/template-syntax#ngFor) ページを参照してください.
+`ngFor` や `*` の詳細については、[テンプレート構文](guide/template-syntax#ngFor)ページの[ngForセクション](guide/template-syntax#ngfor)を参照してください。
 
 </div>
 

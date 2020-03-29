@@ -43,29 +43,6 @@ CLI commands run `ngcc` as needed when performing an Angular build.
 
 For more information on how to publish libraries see [Publishing your Library](guide/creating-libraries#publishing-your-library).
 
-{@a speeding-up-ngcc-compilation}
-### Speeding up ngcc compilation
-
-The standalone `ngcc` program can run in parallel over your third party modules, making it more efficient than letting Angular CLI run it as needed.
-
-You can run `ngcc` after each installation of node_modules by adding a `postinstall` [npm script](https://docs.npmjs.com/misc/scripts):
-
-<code-example language="json" header="package.json">
-{
-  "scripts": {
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
-  }
-}
-</code-example>
-
-<div class="alert is-important">
-
-The `postinstall` script will run on every installation of `node_modules`, including those performed by `ng update` and `ng add`.
-
-If you perform multiple installs in a row, this can end up being slower than letting Angular CLI run `ngcc` on builds.
-
-</div>
-
 {@a maintaining-library-compatibility}
 ### Maintaining library compatibility
 
@@ -92,12 +69,13 @@ You can run `ngcc` after each installation of node_modules by adding a `postinst
 
 <div class="alert is-important">
 
-Don't use `--create-ivy-entry-points` as this will cause Node not to resolve the Ivy version of the packages correctly.
-
+ * The `postinstall` script will run on every installation of `node_modules`, including those performed by `ng update` and `ng add`.
+ * Don't use `--create-ivy-entry-points` as this will cause Node not to resolve the Ivy version of the packages correctly.
+ 
 </div>
 
 {@a opting-out-of-angular-ivy}
-## Opting out of Ivy in version 9 {@a opting-out-of-ivy-in-version-9}
+## Opting out of Ivy in version 9
 
 In version 9, Ivy is the default.
 For compatibility with current workflows during the update process, you can choose to opt out of Ivy and continue using the previous compiler, View Engine.

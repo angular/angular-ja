@@ -141,19 +141,21 @@
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
     </code-example>
 
-1. 新しいカートコンポーネントを見るには、 "チェックアウト" ボタンをクリックしてください。 あなたはデフォルトのテキスト "cart works!" を確認できます。 URLは `https://getting-started.stackblitz.io/cart` となっていますが、あなたのStackBlitzプロジェクトでは `getting-started.stackblitz.io` の部分は異なるでしょう。
+1. "チェックアウト" ボタンを更新して、 `/cart` URLにルーティングされるようにします。
 
-    <div class="alert is-helpful">
+    `top-bar.component.html` を開き、`/cart` を指す `routerLink` ディレクティブを追加します。
 
-    The starter code for the "Checkout" button already includes a `routerLink` for `/cart` the top-bar component.
-    "Checkout" ボタンのスターターコードは、トップバーコンポーネントに `/cart` の`routerLink` がすでに含まれています。
+    <code-example
+        header="src/app/top-bar/top-bar.component.html"
+        path="getting-started/src/app/top-bar/top-bar.component.html"
+        region="cart-route">
+    </code-example>
 
-    </div>
+1. 新しいカートコンポーネントを表示するには、"チェックアウト" ボタンをクリックします。 デフォルトのテキスト "cart works!" を確認できます。そしてURLのパターンは `https://getting-started.stackblitz.io/cart`です。`getting-started.stackblitz.io` の部分はStackBlitzプロジェクトによって異なる場合があります。
 
     <div class="lightbox">
       <img src='generated/images/guide/start/cart-works.png' alt="Display cart page before customizing">
     </div>
-
 
 ### カートのアイテムを表示する
 

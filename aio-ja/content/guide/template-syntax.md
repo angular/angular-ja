@@ -731,13 +731,13 @@ Angular は変更を検知して警告のエラーを起こすかもしれませ
 先ほどの簡単な例では文字列を渡していました。
 オブジェクトを渡すときの文法や考え方も似たようなものです。
 
-`AppComponent` の中に `ListItemComponent` がネストされていて `item` プロパティがオブジェクトを期待しているものとします。
+`AppComponent` の中に `ItemListComponent` がネストされていて `item` プロパティがオブジェクトを期待しているものとします。
 
 <code-example path="property-binding/src/app/app.component.html" region="pass-object" header="src/app/app.component.html"></code-example>
 
-`items` プロパティは `ListItemComponent` の中で宣言されており、型は `Item` で `@Input()` で修飾されています:
+`items` プロパティは `ItemListComponent` の中で宣言されており、型は `Item` で `@Input()` で修飾されています:
 
-<code-example path="property-binding/src/app/list-item/list-item.component.ts" region="item-input" header="src/app/list-item.component.ts"></code-example>
+<code-example path="property-binding/src/app/item-list/item-list.component.ts" region="item-input" header="src/app/item-list.component.ts"></code-example>
 
 サンプルアプリでは `Item` は `id` と `name` の2つのプロパティを持ったオブジェクトです。
 
@@ -750,9 +750,9 @@ Angular は変更を検知して警告のエラーを起こすかもしれませ
 
 この場合はオブジェクトの配列を指定していることに注意してください。この型は `items` の型であり、ネストされたコンポーネント `ListItemComponent` が求める型でもあります。
 
-この例では `AppComponent` は別の `item` オブジェクト (`currentItem`) を指定し、
-それをネストされた `ListItemComponent` に渡しています。`item.ts` に書かれた `Item` の形と `currentItem` の形が一致するため、 `ListItemComponent` はそれを使うことができます。
-`item.ts` ファイルは `ListItemComponent` が `item` の定義を得るために参照しているファイルです。
+この例では `AppComponent` は別の `item` オブジェクト (`currentItems`) を指定し、
+それをネストされた `ItemListComponent` に渡しています。`item.ts` に書かれた `Item` の形と `currentItems` の形が一致するため、 `ItemListComponent` はそれを使うことができます。
+`item.ts` ファイルは `ItemListComponent` が `item` の定義を得るために参照しているファイルです。
 
 ### 角括弧を忘れずに {@a remember-the-brackets}
 
@@ -1601,6 +1601,14 @@ The following example shows `NgFor` applied to a simple `<div>`. (Don't forget t
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1" header="src/app/app.component.html"></code-example>
 
+<div class="alert is-helpful">
+
+Don't forget the asterisk (`*`) in front of `ngFor`. For more information
+on the asterisk, see the [asterisk (*) prefix](guide/structural-directives#the-asterisk--prefix) section of
+[Structural Directives](guide/structural-directives).
+
+</div>
+
 You can also apply an `NgFor` to a component element, as in the following example.
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-2" header="src/app/app.component.html"></code-example>
@@ -2257,11 +2265,11 @@ It works perfectly with long property paths such as `a?.b?.c?.d`.
 
 ### The non-null assertion operator ( `!` )
 
-As of Typescript 2.0, you can enforce [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript") with the `--strictNullChecks` flag. TypeScript then ensures that no variable is unintentionally null or undefined.
+As of Typescript 2.0, you can enforce [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript") with the `--strictNullChecks` flag. TypeScript then ensures that no variable is unintentionally `null` or `undefined`.
 
 In this mode, typed variables disallow `null` and `undefined` by default. The type checker throws an error if you leave a variable unassigned or try to assign `null` or `undefined` to a variable whose type disallows `null` and `undefined`.
 
-The type checker also throws an error if it can't determine whether a variable will be `null` or undefined at runtime. You tell the type checker not to throw an error by applying the postfix
+The type checker also throws an error if it can't determine whether a variable will be `null` or `undefined` at runtime. You tell the type checker not to throw an error by applying the postfix
 [non-null assertion operator, !](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator "Non-null assertion operator").
 
 The Angular non-null assertion operator, `!`, serves the same purpose in
@@ -2272,7 +2280,7 @@ to check that `item` is defined, you can assert that
 <code-example path="template-expression-operators/src/app/app.component.html" region="non-null" header="src/app/app.component.html"></code-example>
 
 When the Angular compiler turns your template into TypeScript code,
-it prevents TypeScript from reporting that `item` might be `null` or `undefined`.
+it prevents TypeScript from reporting that `item.color` might be `null` or `undefined`.
 
 Unlike the [_safe navigation operator_](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?)"),
 the non-null assertion operator does not guard against `null` or `undefined`.

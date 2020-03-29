@@ -117,12 +117,13 @@ To understand how change detection works, first consider when the application ne
 })
 export class AppComponent implements OnInit {
   data = 'initial value';
+  serverUrl = 'SERVER_URL';
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    this.httpClient.get(serverUrl).subscribe(response => {
+    this.httpClient.get(this.serverUrl).subscribe(response => {
       // user does not need to trigger change detection manually
-      data = response.data;
+      this.data = response.data;
     });
   }
 }
@@ -141,7 +142,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       // user does not need to trigger change detection manually
-      data = 'value updated';
+      this.data = 'value updated';
     });
   }
 }
@@ -160,7 +161,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     Promise.resolve(1).then(v => {
       // user does not need to trigger change detection manually
-      data = v;
+      this.data = v;
     });
   }
 }
@@ -200,7 +201,7 @@ func.apply(ctx2);
 The value of `this` in the callback of `setTimeout` might differ depending on when `setTimeout` is called.
 Thus you can lose the context in asynchronous operations.
 
-A zone provides a new zone context other than `this`, the zone context persists across asynchronous operations.
+A zone provides a new zone context other than `this`, the zone context that persists across asynchronous operations.
 In the following example, the new zone context is called `zoneThis`.
 
 ```javascript
@@ -218,7 +219,7 @@ zone.run(() => {
 This new context, `zoneThis`, can be retrieved from the `setTimeout()` callback function, and this context is the same when the `setTimeout()` is scheduled.
 To get the context, you can call [`Zone.current`](https://github.com/angular/angular/blob/master/packages/zone.js/lib/zone.ts).
 
-### Zones and async lifecycle hooks
+## Zones and async lifecycle hooks
 
 Zone.js can create contexts that persist across asynchronous operations as well as provide lifecycle hooks for asynchronous operations.
 
@@ -257,16 +258,14 @@ The Zone Task concept is very similar to the Javascript VM Task concept.
 - `microTask`: such as `Promise.then()`.
 - `eventTask`: such as `element.addEventListener()`.
 
-The `onInvoke` hook triggers when a synchronize function is executed in a Zone.
-
 These hooks trigger under the following circumstances:
 
 - `onScheduleTask`: triggers when a new asynchronous task is scheduled, such as when you call `setTimeout()`.
 - `onInvokeTask`: triggers when an asynchronous task is about to execute, such as when the callback of `setTimeout()` is about to execute.
 - `onHasTask`: triggers when the status of one kind of task inside a zone changes from stable to unstable or from unstable to stable. A status of stable means there are no tasks inside the Zone, while unstable means a new task is scheduled in the zone.
-- `onInvoke`: triggers when a synchronize function is going to execute in the zone.
+- `onInvoke`: triggers when a synchronous function is going to execute in the zone.
 
-With these hooks, `Zone` can monitor the status of all synchronize and asynchronous operations inside a zone.
+With these hooks, `Zone` can monitor the status of all synchronous and asynchronous operations inside a zone.
 
 The above example returns the following output.
 
@@ -303,7 +302,7 @@ This service creates a zone named `angular` to automatically trigger change dete
 
 ### NgZone `run()`/`runOutsideOfAngular()`
 
-`Zone` handles most asynchronous APIs such as `setTimeout()`, `Promise.then(),and `addEventListener()`.
+`Zone` handles most asynchronous APIs such as `setTimeout()`, `Promise.then()`, and `addEventListener()`.
 For the full list, see the [Zone Module document](https://github.com/angular/angular/blob/master/packages/zone.js/MODULE.md).
 Therefore in those asynchronous APIs, you don't need to trigger change detection manually.
 
@@ -315,12 +314,12 @@ This function, and all asynchronous operations in that function, trigger change 
 export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
   ngOnInit() {
-    // new async API is not handled by Zone, so you need to
-    // use ngZone.run to make the asynchronous operation in angular zone
-    // and trigger change detection automatically
+    // New async API is not handled by Zone, so you need to
+    // use ngZone.run() to make the asynchronous operation in the angular zone
+    // and trigger change detection automatically.
     this.ngZone.run(() => {
       someNewAsyncAPI(() => {
-        // update data of component
+        // update the data of the component
       });
     });
   }
@@ -335,19 +334,20 @@ In that situation, you can use another NgZone method: [runOutsideAngular()](api/
 export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
   ngOnInit() {
-    // you know no data will be updated
-    // you don't want to do change detection in this
-    // specified operation, you can call runOutsideAngular
+    // You know no data will be updated,
+    // so you don't want to trigger change detection in this
+    // specified operation. Instead, call ngZone.runOutsideAngular()
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
-        // do something will not update component data
+        // update component data
+        // but don't trigger change detection.
       });
     });
   }
 }
 ```
 
-### Seting up Zone.js
+### Setting up Zone.js
 
 To make Zone.js available in Angular, you need to import the zone.js package.
 If you are using the Angular CLI, this step is done automatically, and you will see the following line in the `src/polyfills.ts`:

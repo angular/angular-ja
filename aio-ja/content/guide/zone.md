@@ -117,12 +117,13 @@ Angularでは、このステップは不要です。データの更新するた�
 })
 export class AppComponent implements OnInit {
   data = 'initial value';
+  serverUrl = 'SERVER_URL';
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    this.httpClient.get(serverUrl).subscribe(response => {
-      // ユーザーは手動で変更検知をトリガーする必要はない
-      data = response.data;
+    this.httpClient.get(this.serverUrl).subscribe(response => {
+      // user does not need to trigger change detection manually
+      this.data = response.data;
     });
   }
 }
@@ -141,7 +142,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       // ユーザーは手動で変更検知をトリガーする必要はない
-      data = 'value updated';
+      this.data = 'value updated';
     });
   }
 }
@@ -160,7 +161,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     Promise.resolve(1).then(v => {
       // ユーザーは手動で変更検知をトリガーする必要はない
-      data = v;
+      this.data = 'value updated';
     });
   }
 }
@@ -218,7 +219,7 @@ zone.run(() => {
 この新しいコンテキスト`zoneThis`は、`setTimeout()`コールバック関数から取得することができます。このコンテキストは、`setTimeout()`がスケジュールされているとき、同じものです。
 コンテキストを取得するには、[`Zone.current`](https://github.com/angular/angular/blob/master/packages/zone.js/lib/zone.ts)を呼び出すことができます。
 
-### Zoneと非同期ライフサイクルフック
+## Zoneと非同期ライフサイクルフック
 
 Zone.jsは、非同期操作にライフサイクルフックを提供するだけでなく、非同期操作にまたがって持続するコンテキストを作成できます。
 
@@ -256,8 +257,6 @@ Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似て
 - `macroTask`: `setTimeout()`など
 - `microTask`: `Promise.then()`など
 - `eventTask`: `element.addEventListener()`など
-
-`onInvoke`フックは、Zone内で非同期関数が実行されたときにトリガーされます。
 
 次に挙げるフックは、次の状況においてトリガーされます。
 
@@ -340,7 +339,8 @@ export class AppComponent implements OnInit {
     // runOutsideAngularを呼び出すことができます。
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
-        // コンポーネントのデータを更新しない処理を実行
+        // コンポーネントのデータを更新
+        // ただし変更検知をトリガーしない
       });
     });
   }

@@ -82,16 +82,16 @@ ng build --leaveBazelFilesOnDisk
 ## Bazel の直接実行
 
 場合によっては、 Angular CLI ビルダーを使わず、 Bazel CLI を直接実行する必要があります。
-Bazel CLIは `@bazel/bazel` npmパッケージにあります。
-あなたのパスに `bazel` コマンドを入れるためにグローバルインストールするか、または bazel の代わりに `$(npm bin)/bazel` を使うことができます。
+Bazelツールは、 `@bazel/bazelisk`パッケージによって管理されます（Node.jsが` nvm`によって管理されるのと似ています）。
+あなたのパスに `bazelisk` コマンドを入れるためにグローバルインストールするか、または次の bazelisk の代わりに `$(npm bin)/bazelisk` を使うことができます。
 
 Bazel の一般的なコマンドは次のとおりです。:
 
-* `bazel build [targets]`: 指定ターゲットのデフォルト出力成果をコンパイルします。
-* `bazel test [targets]`: パターンの中で見つかったどの `*_test` ターゲットについてもテストを実行します。
-* `bazel run [target]`: target で表されるプログラムをコンパイルしてから実行します。
+* `bazelisk build [targets]`: 指定ターゲットのデフォルト出力成果をコンパイルします。
+* `bazelisk test [targets]`: パターンの中で見つかったどの `*_test` ターゲットについてもテストを実行します。
+* `bazelisk run [target]`: target で表されるプログラムをコンパイルしてから実行します。
 
-入力が変わるたびにコマンドを繰り返すには（監視モード）、これらのコマンドで `bazel` を `ibazel` に置き換えてください。
+入力が変わるたびにコマンドを繰り返すには（監視モード）、これらのコマンドで `bazelisk` を `ibazel` に置き換えてください。
 
 アウトプットの場所は出力に記されます。
 

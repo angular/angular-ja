@@ -9,7 +9,7 @@
 
 Angularでシングルトンサービスを作成する方法は2種類あります:
 
-* `@Injectable()`の`providedIn`プロパティに対して`root`を宣言する。
+* `@Injectable()`の`providedIn`プロパティに対して`root`をセットする。
 * `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
 
 

@@ -962,6 +962,12 @@ angular.module('myHybridApp', [...])
 
 Angular のルーターを導入したならば、AngularJS と Angular での遷移のための単一のソースコードを使ったままで、統合された location サービスを通して Angular のルーターによって実行することができます。
 
+<!--
+TODO:
+Correctly document how to use AOT with SystemJS-based `ngUpgrade` apps (or better yet update the
+`ngUpgrade` examples/guides to use `@angular/cli`).
+See https://github.com/angular/angular/issues/35989.
+
 ## ハイブリッドのアプリケーションで事前コンパイルを使う
 
 他の Angular アプリケーションのように、ハイブリッドのアプリケーション上でも
@@ -981,6 +987,7 @@ AOT コンパイラも `index.html` にあるそれらのファイルを読み�
 </code-example>
 
 Angular のアプリケーションの AOT の恩恵をすべて得るために必要なことは以上です！
+-->
 
 ## PhoneCat のアップグレードのチュートリアル
 

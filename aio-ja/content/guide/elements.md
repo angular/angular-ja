@@ -2,7 +2,7 @@
 
 _Angular Elements_ は、 _Custom Elements_ （Web Componentsとも呼ばれます）としてパッケージ化される Angular コンポーネントです。Custom Elements は、フレームワークに依存しない形で新たな HTML 要素を定義するウェブ標準技術です。
 
-[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Firefox、Opera、Safari でサポートされている機能で、それ以外のブラウザでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
+[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Edge (Chromium-based)、 Firefox、Opera、Safari でサポートされている機能で、それ以外のブラウザでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
 Custom Elements は、独自にタグを定義することによって HTML を拡張します。定義したタグの中のコンテンツは、JavaScript のコードで作成し、制御します。
 ブラウザは、定義された Custom Elementsの `CustomElementRegistry` を管理します。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
 
@@ -80,7 +80,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 
 ## Custom Elementsのブラウザのサポート状況
 
-最近開発された [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) のWebプラットフォーム機能は、現在多くのブラウザでネイティブにサポートされています。他のブラウザではサポートが保留中または計画中です。
+最近開発された [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) のWebプラットフォーム機能は、現在多くのブラウザでネイティブにサポートされています。
 
 <table>
 <tr>
@@ -92,11 +92,7 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
   <td>ネイティブサポート済み</td>
 </tr>
 <tr>
-  <td>Opera</td>
-  <td>ネイティブサポート済み</td>
-</tr>
-<tr>
-  <td>Safari</td>
+  <td>Edge (Chromium-based)</td>
   <td>ネイティブサポート済み</td>
 </tr>
 <tr>
@@ -104,10 +100,12 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
   <td>ネイティブサポート済み</td>
 </tr>
 <tr>
-  <td>Edge</td>
-  <td>実装中<br>    
-
-  </td>
+  <td>Opera</td>
+  <td>ネイティブサポート済み</td>
+</tr>
+<tr>
+  <td>Safari</td>
+  <td>ネイティブサポート済み</td>
 </tr>
 </table>
 

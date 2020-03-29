@@ -43,29 +43,6 @@ CLIコマンドはAngularビルドの実行時に必要に応じて`ngcc`を実�
 
 ライブラリの公開方法についてより詳しくは、[ライブラリを公開する](guide/creating-libraries#publishing-your-library)を参照してください。
 
-{@a speeding-up-ngcc-compilation}
-### ngccコンパイルをスピードアップ
-
-スタンドアロンの`ngcc`プログラムはサードパーティのモジュールに対して並列に処理でき、AngularのCLIにそれを必要な時に処理させるよりも効率的になります。
-
-`postinstall`の[npmスクリプト](https://docs.npmjs.com/misc/scripts)を加えることで、node_modulesのインストールそれぞれの後で`ngcc`を実行できます。
-
-<code-example language="json" header="package.json">
-{
-  "scripts": {
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
-  }
-}
-</code-example>
-
-<div class="alert is-important">
-
-`postinstall`スクリプトは、`ng update`と`ng add`によって行われるものも含めて`node_modules`のすべてのインストール上で実行します。
-
-もし連続して複数のインストールを実行する場合、AngulaのCLIに`ngcc`をビルドで実行させるよりも結局遅くなる可能性があります。
-
-</div>
-
 {@a maintaining-library-compatibility}
 ### ライブラリの互換性を維持する
 
@@ -92,7 +69,8 @@ AngularのCLIや`ng-packagr`へ統合されたツールを使用するときは�
 
 <div class="alert is-important">
 
-`--create-ivy-entry-points`を使わないでください。これが、NodeがパッケージのIvyバージョンを正しく解決しない原因になるからです。
+* `postinstall` スクリプトは、`ng update` や `ng add`によって実行されるものを含め、`node_modules` のすべてのインストールで実行されます。
+* `--create-ivy-entry-points`を使わないでください。これが、NodeがパッケージのIvyバージョンを正しく解決しない原因になるからです。
 
 </div>
 

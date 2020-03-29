@@ -503,10 +503,11 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
 きっと、あなたは`click()`メソッドがライトの_オン/オフ_状態を切り替えて、
 メッセージを適切にセットすることをテストしたいだけだと思います。
 
-このコンポーネントクラスには依存関係はありません。
-依存関係のないサービスをテストするには、`new`でサービスを作成し、
-そのAPIを叩いて、公開されている状態のエクスペクテーションをアサートします。
-コンポーネントクラスでも同じことをします。
+このコンポーネントクラスには依存関係はありません。これらのタイプのクラスをテストするには、依存関係のないサービスの場合と同じ手順に従います。
+
+1. newキーワードを使用してコンポーネントを作成します。
+2. APIを叩きます。
+3. 公開されている状態のエクスペクテーションをアサートします。
 
 <code-example
   path="testing/src/app/demo/demo.spec.ts"
@@ -883,8 +884,7 @@ Angularが**変更検知**を実行したときにバインディングが発生
 ユーザーがキーストロークを入力するか、非同期アクティビティ(AJAXなど)が完了したときに
 変更検知が自動的に起動します。
 
-`TestBed.createComponent`は変更検知をトリガー_しません_。
-この事実は改定したテストで確認されます:
+`TestBed.createComponent`は変更検知をトリガー_しません_。この事実は改定したテストで確認されます:
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes"></code-example>
@@ -1033,8 +1033,7 @@ _テスト中のコンポーネント_に実際のサービスを注入する必
 このような動作は補足するのが難しい場合があります。
 実際の`UserService`の代わりにテストダブルを作成して登録する方がはるかに簡単で安全です。
 
-この特定のテストスイートは、
-`WelcomeComponent`とそのテストのニーズを満たす`UserService`の最小のモックを提供します:
+この特定のテストスイートは、`WelcomeComponent`とそのテストのニーズを満たす`UserService`の最小のモックを提供します:
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
@@ -1304,51 +1303,45 @@ import 'zone.js/dist/zone-testing';
 
 #### より多くのmacroTasksをサポートする
 
-デフォルトでは`fakeAsync()`は次の`macroTask`をサポートします。
+デフォルトでは`fakeAsync()`は次のmacro taskをサポートします。
 
-- setTimeout
-- setInterval
-- requestAnimationFrame
-- webkitRequestAnimationFrame
-- mozRequestAnimationFrame
+- `setTimeout`
+- `setInterval`
+- `requestAnimationFrame`
+- `webkitRequestAnimationFrame`
+- `mozRequestAnimationFrame`
 
-`HTMLCanvasElement.toBlob()`のような他の`macroTask`を実行したとき、`Unknown macroTask scheduled in fake async test`エラーがスローされます。
+`HTMLCanvasElement.toBlob()`のような他のmacro taskを実行したとき、`Unknown macroTask scheduled in fake async test`エラーがスローされます。
 
 <code-tabs>
   <code-pane
+    header="src/app/shared/canvas.component.spec.ts (failing)"
     path="testing/src/app/shared/canvas.component.spec.ts"
-    header="src/app/shared/canvas.component.spec.ts">
+    region="without-toBlob-macrotask">
   </code-pane>
   <code-pane
+    header="src/app/shared/canvas.component.ts"
     path="testing/src/app/shared/canvas.component.ts"
-    header="src/app/shared/canvas.component.ts">
+    region="main">
   </code-pane>
 </code-tabs>
 
-このようなケースをサポートしたい場合は、`beforeEach`でサポートしたい`macroTask`を定義する必要があります。
+このようなケースをサポートしたい場合は、`beforeEach`でサポートしたいmacro taskを定義する必要があります。
 たとえば次のようになります:
 
-```javascript
-beforeEach(() => {
-  window['__zone_symbol__FakeAsyncTestMacroTask'] = [
-    {
-      source: 'HTMLCanvasElement.toBlob',
-      callbackArgs: [{ size: 200 }]
-    }
-  ];
-});
+<code-example
+  header="src/app/shared/canvas.component.spec.ts (excerpt)"
+  path="testing/src/app/shared/canvas.component.spec.ts"
+  region="enable-toBlob-macrotask">
+</code-example>
 
-it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
-    const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-    let blob = null;
-    canvas.toBlob(function(b) {
-      blob = b;
-    });
-    tick();
-    expect(blob.size).toBe(200);
-  })
-);
-```
+アプリで `<canvas>` 要素をZone.js対応にするために、 `zone-patch-canvas`  パッチをインポートする必要があることに注意してください（`polyfills.ts` または `<canvas>` を使用する特定のファイルのいずれかの中で）：
+
+<code-example
+  header="src/polyfills.ts or src/app/shared/canvas.component.ts"
+  path="testing/src/app/shared/canvas.component.ts"
+  region="import-canvas-patch">
+</code-example>
 
 #### 非同期のObservable
 

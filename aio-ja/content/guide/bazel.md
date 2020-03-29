@@ -83,7 +83,7 @@ ng build --leaveBazelFilesOnDisk
 
 場合によっては、 Angular CLI ビルダーを使わず、 Bazel CLI を直接実行する必要があります。
 Bazelツールは、 `@bazel/bazelisk`パッケージによって管理されます（Node.jsが` nvm`によって管理されるのと似ています）。
-あなたのパスに `bazelisk` コマンドを入れるためにグローバルインストールするか、または以下の bazelisk の代わりに `$(npm bin)/bazelisk` を使うことができます。
+あなたのパスに `bazelisk` コマンドを入れるためにグローバルインストールするか、または次の bazelisk の代わりに `$(npm bin)/bazelisk` を使うことができます。
 
 Bazel の一般的なコマンドは次のとおりです。:
 

@@ -54,7 +54,6 @@ CLIを使って生成することができます。
 *ルート*は、ユーザーがリンクをクリックしたとき、またはURLをブラウザのアドレスバーに貼り付けたときに、
 どのビューを表示したらよいかをルーターに伝えます。
 
-Since `AppRoutingModule` already imports `HeroesComponent`, you can use it in the `routes` array:
 `AppRoutingModule` はすでに `HeroesComponent` をインポートしているため、 `routes` 配列で使用できます。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts"

@@ -1227,7 +1227,7 @@ Angular は “unknown directive” エラーを報告します。
 
 ### テンプレート文は副作用をもつ {@a template-statements-have-side-effects}
 
-[テンプレート式](guide/template-syntax#template-expressions)は[副作用](guide/template-syntax#avoid-side-effects)を持つべきではありませんが、
+[テンプレート式](guide/template-syntax#template-expressions)は[副作用](guide/template-syntax#avoid-side-effects)をもつべきではありませんが、
 テンプレート文には通常副作用があります。
 `deleteItem()` メソッドには、アイテムを削除するという副作用があります。
 

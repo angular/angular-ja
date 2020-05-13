@@ -1486,30 +1486,30 @@ Angular の基本的な[双方向バインディングの構文](guide/template-
 
 {@a structural-directives}
 
-## Built-in _structural_ directives
+## 組み込みの _構造_ ディレクティブ {@a built-in-structural-directives}
 
-Structural directives are responsible for HTML layout.
-They shape or reshape the DOM's structure, typically by adding, removing, and manipulating
-the host elements to which they are attached.
+構造ディレクティブは HTML レイアウトを担当します。
+それらがアタッチされているホスト要素に対する追加、削除、加工といった、
+DOM 構造の形成、または再形成を行います。
 
-This section is an introduction to the common built-in structural directives:
+このセクションでは、一般的な組み込みの構造ディレクティブについて紹介します:
 
-* [`NgIf`](guide/template-syntax#ngIf)&mdash;conditionally creates or destroys subviews from the template.
-* [`NgFor`](guide/template-syntax#ngFor)&mdash;repeat a node for each item in a list.
-* [`NgSwitch`](guide/template-syntax#ngSwitch)&mdash;a set of directives that switch among alternative views.
+* [`NgIf`](guide/template-syntax#ngIf)&mdash;条件に応じてテンプレートからサブビューを作成、または破棄します。
+* [`NgFor`](guide/template-syntax#ngFor)&mdash;リストの各項目に対してノードを繰り返します。
+* [`NgSwitch`](guide/template-syntax#ngSwitch)&mdash;いくつかのビューから選んで表示するディレクティブ一式です。
 
 <div class="alert is-helpful">
 
-The deep details of structural directives are covered in the
-[Structural Directives](guide/structural-directives) guide,
-which explains the following:
+構造ディレクティブについての詳細を記した
+[構造ディレクティブ](guide/structural-directives)ガイドでは、
+次の内容を説明しています:
 
-* Why you
-[prefix the directive name with an asterisk (\*)](guide/structural-directives#the-asterisk--prefix).
-* Using [`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>")
-to group elements when there is no suitable host element for the directive.
-* How to write your own structural directive.
-* That you can only apply [one structural directive](guide/structural-directives#one-per-element "one per host element") to an element.
+* なぜ
+[ディレクティブ名の先頭にアスタリスク (\*) をつけるのか](guide/structural-directives#the-asterisk--prefix)。
+* ディレクティブをホストする適切な要素がないときに [`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>")
+でグルーピングする方法。
+* 構造ディレクティブの作り方。
+* ひとつの要素には[ひとつの構造ディレクティブ](guide/structural-directives#one-per-element "one per host element")しか適用できない件。
 
 </div>
 
@@ -1519,62 +1519,62 @@ to group elements when there is no suitable host element for the directive.
 
 ### NgIf
 
-You can add or remove an element from the DOM by applying an `NgIf` directive to
-a host element.
-Bind the directive to a condition expression like `isActive` in this example.
+ホスト要素に
+`NgIf` ディレクティブを適用することで、DOM に要素を追加、削除することができます。
+この例では、ディレクティブから条件式 `isActive` にバインドしています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-1" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Don't forget the asterisk (`*`) in front of `ngIf`. For more information
-on the asterisk, see the [asterisk (*) prefix](guide/structural-directives#the-asterisk--prefix) section of
-[Structural Directives](guide/structural-directives).
+`ngIf` の前にアスタリスク (`*`) をつけるのを忘れないでください。
+アスタリスクについての詳細は、[構造ディレクティブ](guide/structural-directives)の
+[アスタリスク (*) 接頭辞](guide/structural-directives#the-asterisk--prefix)セクションを参照してください。
 
 </div>
 
-When the `isActive` expression returns a truthy value, `NgIf` adds the
-`ItemDetailComponent` to the DOM.
-When the expression is falsy, `NgIf` removes the `ItemDetailComponent`
-from the DOM, destroying that component and all of its sub-components.
+`isActive` が truthy な値を返すとき、`NgIf` は
+DOM に `ItemDetailComponent` を追加します。
+式が falsy なら、`NgIf` は DOM から `ItemDetailComponent` を削除し、
+そのコンポーネントと、そのサブコンポーネントすべてを破棄します。
 
 
-#### Show/hide vs. `NgIf`
+#### Show/hide と `NgIf` {@a showhide-vs-ngif}
 
-Hiding an element is different from removing it with `NgIf`.
-For comparison, the following example shows how to control
-the visibility of an element with a
-[class](guide/template-syntax#class-binding) or [style](guide/template-syntax#style-binding) binding.
+要素を非表示にすることは、`NgIf` で削除することとは異なります。
+次の例では、[class](guide/template-syntax#class-binding) と
+[style](guide/template-syntax#style-binding) バインディングが、
+それぞれどのように要素の表示状態を制御しているかを比較しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-3" header="src/app/app.component.html"></code-example>
 
-When you hide an element, that element and all of its descendants remain in the DOM.
-All components for those elements stay in memory and
-Angular may continue to check for changes.
-You could be holding onto considerable computing resources and degrading performance
-unnecessarily.
+要素を非表示にすると、要素とその子孫すべては DOM に残ります。
+それらの要素のすべてのコンポーネントはメモリ上に残り、
+Angular は変更を検出し続けることがあります。
+かなりのコンピューティングリソースを使い、
+不必要にパフォーマンスを低下させている可能性があります。
 
-`NgIf` works differently. When `NgIf` is `false`, Angular removes the element and its descendants from the DOM.
-It destroys their components, freeing up resources, which
-results in a better user experience.
+`NgIf` は違った動作をします。`NgIf` が `false` のとき、Angular は要素とその子孫を DOM から削除します。
+コンポーネントも削除し、リソースを解放するので、
+よりよいユーザー体験を提供できます。
 
-If you are hiding large component trees, consider `NgIf` as a more
-efficient alternative to showing/hiding.
+大きなコンポーネントツリーを非表示にするときは、
+より効率的な手段として `NgIf` を使うことを検討してください。
 
 <div class="alert is-helpful">
 
-For more information on `NgIf` and `ngIfElse`, see the [API documentation about NgIf](api/common/NgIf).
+`NgIf` と `ngIfElse` については [NgIf の API ドキュメント](api/common/NgIf)で詳しく知ることができます。
 
 </div>
 
-#### Guard against null
+#### null 対策 {@a guard-against-null}
 
-Another advantage of `ngIf` is that you can use it to guard against null. Show/hide
-is best suited for very simple use cases, so when you need a guard, opt instead for `ngIf`. Angular will throw an error if a nested expression tries to access a property of `null`.
+`ngIf` のもうひとつの長所は null 対策として使えることです。
+表示/非表示がとてもシンプルなユースケースで、もし null 対策が必要なら `ngIf` を使ってください。ネストされた式が `null` のプロパティにアクセスしようとすると、Angular はエラーを投げます。
 
-The following shows `NgIf` guarding two `<div>`s.
-The `currentCustomer` name appears only when there is a `currentCustomer`.
-The `nullCustomer` will not be displayed as long as it is `null`.
+次の例では、2つの `<div>` について `NgIf` で対策しています。
+`currentCustomer` の名前は `currentCustomer` が存在するときだけ表示されます。
+`nullCustomer` は、その値が `null` であれば表示されません。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-2" header="src/app/app.component.html"></code-example>
 
@@ -1582,8 +1582,8 @@ The `nullCustomer` will not be displayed as long as it is `null`.
 
 <div class="alert is-helpful">
 
-See also the
-[safe navigation operator](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?.)") below.
+後述する
+[セーフナビゲーション演算子](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?.)")もご覧ください。
 
 </div>
 <hr/>

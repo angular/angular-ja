@@ -1127,84 +1127,84 @@ _スタイルプロパティ_ の名前は前述のとおり
 
 {@a event-binding}
 
-## Event binding `(event)`
+## イベントバインディング `(event)`
 
-Event binding allows you to listen for certain events such as
-keystrokes, mouse movements, clicks, and touches. For an example
-demonstrating all of the points in this section, see the <live-example name="event-binding">event binding example</live-example>.
+イベントバインディングを使えば、キー操作、マウス移動、クリック、タッチなどの
+イベントをリッスンすることができます。このセクションで示すすべてのポイントのデモについては
+<live-example name="event-binding">イベントバインディングの例</live-example>を参照してください。
 
-Angular event binding syntax consists of a **target event** name
-within parentheses on the left of an equal sign, and a quoted
-template statement on the right.
-The following event binding listens for the button's click events, calling
-the component's `onSave()` method whenever a click occurs:
+Angular のイベントバインディングの構文は、等号の左側にある
+括弧に囲まれた **ターゲットイベント** の名前と、
+等号の右側にある引用符に囲まれたテンプレート文から成り立ちます。
+次のイベントバインディングはボタンのクリックイベントをリッスンし、
+クリックされたらコンポーネントの `onSave()` メソッドを呼び出します:
 
 <div class="lightbox">
   <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </div>
 
-### Target event
+### ターゲットイベント {@a target-event}
 
-As above, the target is the button's click event.
+前に示したとおり、ターゲットはボタンのクリックイベントです。
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-1" header="src/app/app.component.html"></code-example>
 
-Alternatively, use the `on-` prefix, known as the canonical form:
+または、標準形式として知られている接頭辞 `on-` を使うこともできます:
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-2" header="src/app/app.component.html"></code-example>
 
-Element events may be the more common targets, but Angular looks first to see if the name matches an event property
-of a known directive, as it does in the following example:
+要素のイベントは、より一般的なターゲットかもしれませんが、次の例で示すように、
+Angular は名前が既知のディレクティブのイベントプロパティと一致するかどうかを最初に調べます。
 
 <code-example path="event-binding/src/app/app.component.html" region="custom-directive" header="src/app/app.component.html"></code-example>
 
-If the name fails to match an element event or an output property of a known directive,
-Angular reports an “unknown directive” error.
+名前が、要素のイベントや、既知のディレクティブの出力プロパティと一致しないときは、
+Angular は “unknown directive” エラーを報告します。
 
 
-### *$event* and event handling statements
+### *$event* とイベントハンドル文 {@a event-and-event-handling-statements}
 
-In an event binding, Angular sets up an event handler for the target event.
+イベントバインディングでは、Angular はターゲットイベントのイベントハンドラーをセットアップします。
 
-When the event is raised, the handler executes the template statement.
-The template statement typically involves a receiver, which performs an action
-in response to the event, such as storing a value from the HTML control
-into a model.
+イベントが発生すると、ハンドラーはテンプレート文を実行します。
+通常、テンプレート文にはレシーバーが含まれます。
+レシーバーでは、HTML コントロールの値をモデルに格納するなどといった、
+イベントに反応したアクションを実行します。
 
-The binding conveys information about the event. This information can include data values such as an event object, string, or number named `$event`.
+バインディングは、イベントに関する情報を伝えます。この情報には、 `$event` という名前でイベントオブジェクト、文字列、数値などのデータ値を含めることができます。
 
-The target event determines the shape of the `$event` object.
-If the target event is a native DOM element event, then `$event` is a
-[DOM event object](https://developer.mozilla.org/en-US/docs/Web/Events),
-with properties such as `target` and `target.value`.
+`$event` オブジェクトの形式はターゲットのイベントによって決まります。
+ターゲットのイベントがネイティブの DOM 要素イベントであれば、 `$event` は
+`target` や `target.value` といったプロパティを持った
+[DOM イベントオブジェクト](https://developer.mozilla.org/en-US/docs/Web/Events)です。
 
-Consider this example:
+この例について考えてみましょう:
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-3" header="src/app/app.component.html"></code-example>
 
-This code sets the `<input>` `value` property by binding to the `name` property.
-To listen for changes to the value, the code binds to the `input`
-event of the `<input>` element.
-When the user makes changes, the `input` event is raised, and the binding executes
-the statement within a context that includes the DOM event object, `$event`.
+このコードでは、 `name` プロパティをバインドすることで `<input>` の `value` を設定しています。
+値の変化をリッスンするため、 `<input>` 要素の
+`input` イベントにバインドしています。
+ユーザーが値を変更すると `input` イベントが発生し、
+バインディングは DOM イベントオブジェクト `$event` を含むコンテキストで文を実行します。
 
-To update the `name` property, the changed text is retrieved by following the path `$event.target.value`.
+`name` プロパティを更新するため、パス `$event.target.value` を使って変更されたテキストを取得します。
 
-If the event belongs to a directive&mdash;recall that components
-are directives&mdash;`$event` has whatever shape the directive produces.
+イベントがディレクティブに属している場合&mdash;コンポーネントはディレクティブであることを思い出してください
+&mdash;`$event` はディレクティブが生成する形式となります。
 
 
-### Custom events with `EventEmitter`
+### `EventEmitter` によるカスタムイベント {@a custom-events-with-eventemitter}
 
-Directives typically raise custom events with an Angular [EventEmitter](api/core/EventEmitter).
-The directive creates an `EventEmitter` and exposes it as a property.
-The directive calls `EventEmitter.emit(payload)` to fire an event, passing in a message payload, which can be anything.
-Parent directives listen for the event by binding to this property and accessing the payload through the `$event` object.
+典型的なディレクティブは、Angular の [EventEmitter](api/core/EventEmitter) によってカスタムイベントを発生させます。
+ディレクティブは `EventEmitter` を作り、プロパティとして公開します。
+ディレクティブはイベントを起こすために `EventEmitter.emit(payload)` を呼び出し、任意のメッセージペイロードを渡します。
+親ディレクティブは、プロパティをバインドしてイベントをリッスンし、 `$event` オブジェクトを通じてペイロードにアクセスします。
 
-Consider an `ItemDetailComponent` that presents item information and responds to user actions.
-Although the `ItemDetailComponent` has a delete button, it doesn't know how to delete the hero. It can only raise an event reporting the user's delete request.
+`ItemDetailComponent` がアイテムの情報を表示して、ユーザーアクションに反応するものだとします。
+`ItemDetailComponent` には削除ボタンがありますが、それ自身はヒーローを削除する方法を知りません。ユーザーの削除要求を伝えるイベントを発生させるだけです。
 
-Here are the pertinent excerpts from that `ItemDetailComponent`:
+`ItemDetailComponent` の関連コードの抜粋です:
 
 
 <code-example path="event-binding/src/app/item-detail/item-detail.component.html" header="src/app/item-detail/item-detail.component.html (template)" region="line-through"></code-example>
@@ -1212,28 +1212,28 @@ Here are the pertinent excerpts from that `ItemDetailComponent`:
 <code-example path="event-binding/src/app/item-detail/item-detail.component.ts" header="src/app/item-detail/item-detail.component.ts (deleteRequest)" region="deleteRequest"></code-example>
 
 
-The component defines a `deleteRequest` property that returns an `EventEmitter`.
-When the user clicks *delete*, the component invokes the `delete()` method,
-telling the `EventEmitter` to emit an `Item` object.
+コンポーネントは `EventEmitter` を返す `deleteRequest` プロパティを定義しています。
+ユーザーが *delete* をクリックすると、コンポーネントは `delete()` メソッドを呼び出し、
+`EventEmitter` に `Item` オブジェクトを出力させます。
 
-Now imagine a hosting parent component that binds to the `deleteRequest` event
-of the `ItemDetailComponent`.
+ホストする親コンポーネントが `ItemDetailComponent` の `deleteRequest`
+にバインドしているとしましょう。
 
 <code-example path="event-binding/src/app/app.component.html" header="src/app/app.component.html (event-binding-to-component)" region="event-binding-to-component"></code-example>
 
-When the `deleteRequest` event fires, Angular calls the parent component's
-`deleteItem()` method, passing the *item-to-delete* (emitted by `ItemDetail`)
-in the `$event` variable.
+`deleteRequest` イベントが発生すると、Angular は親コンポーネントの
+`deleteItem()` メソッドを呼び出し、 `$event` 変数の *削除するアイテム* (`ItemDetail` によって出力)
+を渡します。
 
-### Template statements have side effects
+### テンプレート文は副作用をもつ {@a template-statements-have-side-effects}
 
-Though [template expressions](guide/template-syntax#template-expressions) shouldn't have [side effects](guide/template-syntax#avoid-side-effects), template
-statements usually do. The `deleteItem()` method does have
-a side effect: it deletes an item.
+[テンプレート式](guide/template-syntax#template-expressions)は[副作用](guide/template-syntax#avoid-side-effects)をもつべきではありませんが、
+テンプレート文には通常副作用があります。
+`deleteItem()` メソッドには、アイテムを削除するという副作用があります。
 
-Deleting an item updates the model, and depending on your code, triggers
-other changes including queries and saving to a remote server.
-These changes propagate through the system and ultimately display in this and other views.
+アイテムの削除によってモデルが更新され、どういうコードを書くかにもよりますが、
+リモートサーバーへの問い合わせや保存といったその他の変化も引き起こします。
+これらの変化はシステムを伝播していき、最終的にはさまざまなビューによって表示されます。
 
 
 <hr/>
@@ -1317,31 +1317,31 @@ Angular [NgModel](guide/template-syntax#ngModel) を参照してください.
 
 {@a directives}
 
-## Built-in directives
+## 組み込みディレクティブ {@a built-in-directives}
 
-Angular offers two kinds of built-in directives: attribute
-directives and structural directives. This segment reviews some of the most common built-in directives,
-classified as either [_attribute_ directives](guide/template-syntax#attribute-directives) or [_structural_ directives](guide/template-syntax#structural-directives) and has its own <live-example name="built-in-directives">built-in directives example</live-example>.
+Angular には2種類の組み込みディレクティブがあります。属性ディレクティブと構造ディレクティブです。
+ここでは、[_属性_ ディレクティブ](guide/template-syntax#attribute-directives)か[_構造_ ディレクティブ](guide/template-syntax#structural-directives)に分類される、
+一般的な組み込みディレクティブについて見ていきます。<live-example name="built-in-directives">組み込みディレクティブの例</live-example>もあります。
 
-For more detail, including how to build your own custom directives, see [Attribute Directives](guide/attribute-directives) and [Structural Directives](guide/structural-directives).
+自作のディレクティブの作り方といった詳細については、[属性ディレクティブ](guide/attribute-directives)や[構造ディレクティブ](guide/structural-directives)を参照してください。
 
 <hr/>
 
 {@a attribute-directives}
 
-### Built-in attribute directives
+### 組み込み属性ディレクティブ {@a built-in-attribute-directives}
 
-Attribute directives listen to and modify the behavior of
-other HTML elements, attributes, properties, and components.
-You usually apply them to elements as if they were HTML attributes, hence the name.
+属性ディレクティブは、他の HTML 要素、属性、プロパティ、コンポーネントの
+動作をリッスンして変更します。
+それらは通常、HTML の属性であるかのように要素に適用されます。
 
-Many NgModules such as the [`RouterModule`](guide/router "Routing and Navigation")
-and the [`FormsModule`](guide/forms "Forms") define their own attribute directives.
-The most common attribute directives are as follows:
+[`RouterModule`](guide/router "Routing and Navigation")
+や [`FormsModule`](guide/forms "Forms") などの多くの NgModule では独自の属性ディレクティブを定義しています。
+もっとも一般的に使用されている属性ディレクティブは次のとおりです:
 
-* [`NgClass`](guide/template-syntax#ngClass)&mdash;adds and removes a set of CSS classes.
-* [`NgStyle`](guide/template-syntax#ngStyle)&mdash;adds and removes a set of HTML styles.
-* [`NgModel`](guide/template-syntax#ngModel)&mdash;adds two-way data binding to an HTML form element.
+* [`NgClass`](guide/template-syntax#ngClass) - 一連の CSS クラスを追加および削除する
+* [`NgStyle`](guide/template-syntax#ngStyle) - 一連の HTML スタイルを追加および削除する
+* [`NgModel`](guide/template-syntax#ngModel) - HTML の form 要素への双方向データバインディング
 
 <hr/>
 
@@ -1349,31 +1349,31 @@ The most common attribute directives are as follows:
 
 ### `NgClass`
 
-Add or remove several CSS classes simultaneously with `ngClass`.
+`ngClass` を使うと、CSS クラスの追加と削除を同時にできます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="special-div" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-To add or remove a *single* class, use [class binding](guide/template-syntax#class-binding) rather than `NgClass`.
+追加、削除するクラスが *ひとつだけ* のときは、`NgClass` よりも[クラスバインディング](guide/template-syntax#class-binding)を使いましょう。
 
 </div>
 
-Consider a `setCurrentClasses()` component method that sets a component property,
-`currentClasses`, with an object that adds or removes three classes based on the
-`true`/`false` state of three other component properties. Each key of the object is a CSS class name; its value is `true` if the class should be added,
-`false` if it should be removed.
+コンポーネントがもつ他の3つのプロパティの `true`/`false` 状態に基づいて、3つのクラスの追加または削除をする
+コンポーネントのプロパティ `currentClasses` オブジェクトを設定する `setCurrentClasses` コンポーネントメソッド
+を考えてみましょう。オブジェクトの各キーは CSS クラス名になります。
+クラスを追加する必要がある場合はその値を `true` に、削除する必要がある場合は `false` にしてください。
 
 <code-example path="built-in-directives/src/app/app.component.ts" region="setClasses" header="src/app/app.component.ts"></code-example>
 
-Adding an `ngClass` property binding to `currentClasses` sets the element's classes accordingly:
+`currentClasses` への `ngClass` プロパティバインディングを追加すると、それに応じて要素のクラスが設定されます: 
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgClass-1" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Remember that in this situation you'd call `setCurrentClasses()`,
-both initially and when the dependent properties change.
+初期化時と、依存するプロパティ変更時の両方で、
+`setCurrentClasses()` を呼び出す必要があることを忘れないでください。
 
 </div>
 
@@ -1383,29 +1383,29 @@ both initially and when the dependent properties change.
 
 ### `NgStyle`
 
-Use `NgStyle` to set many inline styles simultaneously and dynamically, based on the state of the component.
+`NgStyle` を使うと、コンポーネントの状態に応じて、たくさんのインラインスタイルを同時に動的に設定することができます。
 
-#### Without `NgStyle`
+#### `NgStyle` を使わないケース {@a without-ngstyle}
 
-For context, consider setting a *single* style value with [style binding](guide/template-syntax#style-binding), without `NgStyle`.
+*単一の* スタイルの値を設定するときは `NgStyle` ではなく[スタイルバインディング](guide/template-syntax#style-binding)を使うことを検討してください。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="without-ng-style" header="src/app/app.component.html"></code-example>
 
-However, to set *many* inline styles at the same time, use the `NgStyle` directive.
+*たくさん* のインラインスタイルを同時に設定するときは、`NgStyle` ディレクティブを使いましょう。
 
-The following is a `setCurrentStyles()` method that sets a component
-property, `currentStyles`, with an object that defines three styles,
-based on the state of three other component properties:
+次に示すのは、コンポーネントプロパティ `currentStyles` に、
+他のコンポーネントプロパティ3つの状態に基づいた3つのスタイルを定義するオブジェクトを設定する、
+`setCurrentStyles()` メソッドです。
 
 <code-example path="built-in-directives/src/app/app.component.ts" region="setStyles" header="src/app/app.component.ts"></code-example>
 
-Adding an `ngStyle` property binding to `currentStyles` sets the element's styles accordingly:
+`currentStyles` への `ngStyle` プロパティバインディングを追加すると、それに応じて要素のスタイルが設定されます: 
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgStyle-2" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Remember to call `setCurrentStyles()`, both initially and when the dependent properties change.
+初期化時と、依存するプロパティ変更時の両方で、 `setCurrentStyles()` を呼び出す必要があることを忘れないでください。
 
 </div>
 
@@ -1414,69 +1414,69 @@ Remember to call `setCurrentStyles()`, both initially and when the dependent pro
 
 {@a ngModel}
 
-### `[(ngModel)]`: Two-way binding
+### `[(ngModel)]`: 双方向バインディング {@a ngmodel-two-way-binding}
 
-The `NgModel` directive allows you to display a data property and
-update that property when the user makes changes. Here's an example:
+`NgModel` ディレクティブを使うと、データプロパティを表示したり、
+ユーザー操作に応じてプロパティを更新したりすることができます。例を示します:
 
 <code-example path="built-in-directives/src/app/app.component.html" header="src/app/app.component.html (NgModel example)" region="NgModel-1"></code-example>
 
 
-#### Import `FormsModule` to use `ngModel`
+#### `ngModel` を使うために `FormsModule` をインポートする {@a import-formsmodule-to-use-ngmodel}
 
-Before using the `ngModel` directive in a two-way data binding,
-you must import the `FormsModule` and add it to the NgModule's `imports` list.
-Learn more about the `FormsModule` and `ngModel` in [Forms](guide/forms#ngModel).
+双方向のデータバインディングで `ngModel` ディレクティブを使う前に、
+`FormsModule` をインポートして NgModule の `imports` リストに加える必要があります。
+[Forms](guide/forms#ngModel) で `FormsModule` と `ngModel` について詳しく知ることができます。
 
-Remember to import the `FormsModule` to make `[(ngModel)]` available as follows:
+`[(ngModel)]` を使えるようにするため、次のように `FormsModule` をインポートすることを忘れないでください:
 
 <code-example path="built-in-directives/src/app/app.module.ts" header="src/app/app.module.ts (FormsModule import)" region="import-forms-module"></code-example>
 
 
-You could achieve the same result with separate bindings to
-the `<input>` element's  `value` property and `input` event:
+`<input>` 要素の `value` プロパティと `input` イベントへの
+別々のバインディングによって、同じことができます:
 
 <code-example path="built-in-directives/src/app/app.component.html" region="without-NgModel" header="src/app/app.component.html"></code-example>
 
-To streamline the syntax, the `ngModel` directive hides the details behind its own `ngModel` input and `ngModelChange` output properties:
+構文を簡素化するため、`ngModel` ディレクティブは `ngModel` 入力プロパティと `ngModelChange` 出力プロパティの詳細を隠蔽しています:
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgModelChange" header="src/app/app.component.html"></code-example>
 
-The `ngModel` data property sets the element's value property and the `ngModelChange` event property
-listens for changes to the element's value.
+`ngModel` データプロパティは要素の値プロパティを設定し、
+`ngModelChange` イベントプロパティは要素の値の変更をリッスンします。
 
-#### `NgModel` and value accessors
+#### `NgModel` と値アクセサ {@a ngmodel-and-value-accessors}
 
-The details are specific to each kind of element and therefore the `NgModel` directive only works for an element
-supported by a [ControlValueAccessor](api/forms/ControlValueAccessor)
-that adapts an element to this protocol.
-Angular provides *value accessors* for all of the basic HTML form elements and the
-[Forms](guide/forms) guide shows how to bind to them.
+詳細な動作は要素によって異なるため、`NgModel` ディレクティブは、
+要素をこのプロトコルに適応させる [ControlValueAccessor](api/forms/ControlValueAccessor)
+がサポートする要素に対してのみ機能します。
+Angular は、基本的な HTML のフォーム要素すべてについて *値アクセサ* を提供しており、
+[フォーム](guide/forms)ガイドでそれらにバインドする方法を説明しています。
 
-You can't apply `[(ngModel)]` to a non-form native element or a
-third-party custom component until you write a suitable value accessor. For more information, see
-the API documentation on [DefaultValueAccessor](https://angular.io/api/forms/DefaultValueAccessor).
+適切な値アクセサを作らない限り、
+`[(ngModel)]` をフォーム以外のネイティブ要素またはサードパーティのカスタムコンポーネントに適用することはできません。
+詳しくは [DefaultValueAccessor](https://angular.io/api/forms/DefaultValueAccessor) の API ドキュメントを参照してください。
 
-You don't need a value accessor for an Angular component that
-you write because you can name the value and event properties
-to suit Angular's basic [two-way binding syntax](guide/template-syntax#two-way)
-and skip `NgModel` altogether.
-The `sizer` in the
-[Two-way Binding](guide/template-syntax#two-way) section is an example of this technique.
+自作した Angular コンポーネントについては、
+Angular の基本的な[双方向バインディングの構文](guide/template-syntax#two-way)に
+合った値とイベントのプロパティ名をつければ、
+値アクセサを作らずに済み、`NgModel` も省略できます。
+[双方向バインディング](guide/template-syntax#two-way)セクションの `sizer` は
+このテクニックの一例です。
 
-Separate `ngModel` bindings are an improvement over binding to the
-element's native properties, but you can streamline the binding with a
-single declaration using the `[(ngModel)]` syntax:
+個別の `ngModel` バインディングは、
+要素のネイティブプロパティにバインドするよりもよいですが、
+`[(ngModel)]` 構文を使えば宣言ひとつにバインディングをスリム化できます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgModel-1" header="src/app/app.component.html"></code-example>
 
-This `[(ngModel)]` syntax can only _set_ a data-bound property.
-If you need to do something more, you can write the expanded form;
-for example, the following changes the `<input>` value to uppercase:
+`[(ngModel)]` 構文ができるのは、データバウンドのプロパティの _設定_ だけです。
+さらに何かする必要があるときは、展開された形式で書くことができます;
+次の例では、`<input>` の値を大文字に変換しています:
 
 <code-example path="built-in-directives/src/app/app.component.html" region="uppercase" header="src/app/app.component.html"></code-example>
 
-Here are all variations in action, including the uppercase version:
+大文字化を含むすべての書き方が動いている様子です:
 
 <div class="lightbox">
   <img src='generated/images/guide/built-in-directives/ng-model-anim.gif' alt="NgModel variations">

@@ -1591,43 +1591,43 @@ Angular は変更を検出し続けることがあります。
 {@a ngFor}
 ### `NgFor`
 
-`NgFor` is a repeater directive&mdash;a way to present a list of items.
-You define a block of HTML that defines how a single item should be displayed
-and then you tell Angular to use that block as a template for rendering each item in the list.
-The text assigned to `*ngFor` is the instruction that guides the repeater process.
+`NgFor` は、項目のリストを表示する繰り返しディレクティブです。
+ひとつの項目を表示するための HTML ブロックを定義し、
+そのブロックをリストの各項目を表示するテンプレートとして使うよう Angular に伝えます。
+繰り返しのプロセスは `*ngFor` に与えられたテキストが指示します。
 
-The following example shows `NgFor` applied to a simple `<div>`. (Don't forget the asterisk (`*`) in front of `ngFor`.)
+次の例はシンプルな `<div>` に `NgFor` を適用したものです。 (`ngFor` の前にアスタリスク (`*`) をつけるのを忘れないでください) 
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Don't forget the asterisk (`*`) in front of `ngFor`. For more information
-on the asterisk, see the [asterisk (*) prefix](guide/structural-directives#the-asterisk--prefix) section of
-[Structural Directives](guide/structural-directives).
+`ngFor` の前にアスタリスク (`*`) をつけるのを忘れないでください。
+アスタリスクについての詳細は、[構造ディレクティブ](guide/structural-directives)の
+[アスタリスク (*) 接頭辞](guide/structural-directives#the-asterisk--prefix)セクションを参照してください。
 
 </div>
 
-You can also apply an `NgFor` to a component element, as in the following example.
+次の例が示すように、コンポーネント要素に対しても `NgFor` を使うことができます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-2" header="src/app/app.component.html"></code-example>
 
 {@a microsyntax}
 
 <div class="callout is-critical">
-<header>*ngFor microsyntax</header>
+<header>*ngFor マイクロシンタックス</header>
 
-The string assigned to `*ngFor` is not a [template expression](guide/template-syntax#template-expressions). Rather,
-it's a *microsyntax*&mdash;a little language of its own that Angular interprets.
-The string `"let item of items"` means:
+`*ngFor` に与えられた文字列は[テンプレート式](guide/template-syntax#template-expressions)ではありません。
+それは*マイクロシンタックス*&mdash;Angular が解釈する独自の小さな言語です。
+文字列 `"let item of items"` は次を意味します:
 
-> *Take each item in the `items` array, store it in the local `item` looping variable, and
-make it available to the templated HTML for each iteration.*
+> *`items` 配列の各項目を取り出し、ローカルのループ変数 `item` として保存し、
+繰り返しのたびにテンプレート HTML で使えるようにする。*
 
-Angular translates this instruction into an `<ng-template>` around the host element,
-then uses this template repeatedly to create a new set of elements and bindings for each `item`
-in the list.
-For more information about microsyntax, see the [Structural Directives](guide/structural-directives#microsyntax) guide.
+Angular はこの指示をホスト要素を囲む `<ng-template>` に変換し、
+このテンプレートを繰り返し使って一連の新しい要素を作り、それぞれにリストの `item`
+をバインディングします。
+マイクロシンタックスについての詳細は[構造ディレクティブ](guide/structural-directives#microsyntax)ガイドをご覧ください。
 
 </div>
 
@@ -1636,61 +1636,61 @@ For more information about microsyntax, see the [Structural Directives](guide/st
 
 {@a template-input-variables}
 
-#### Template input variables
+#### テンプレート入力変数
 
-The `let` keyword before `item` creates a template input variable called `item`.
-The `ngFor` directive iterates over the `items` array returned by the parent component's `items` property
-and sets `item` to the current item from the array during each iteration.
+`item` の前にある `let` キーワードは、`item` という名前のテンプレート入力変数を作ります。
+`ngFor` ディレクティブは、親コンポーネントの `items` プロパティが返す `items` 配列の中を反復し、
+反復中は `item` に配列の現在の項目を設定します。
 
-Reference `item` within the `ngFor` host element
-as well as within its descendants to access the item's properties.
-The following example references `item` first in an interpolation
-and then passes in a binding to the `item` property of the `<app-item-detail>` component.
+`item` を参照することで、
+`ngFor` のホスト要素やその子孫から項目のプロパティにアクセスできます。
+次の例では、まず補間で `item` を参照し、
+次に `<app-item-detail>` コンポーネントの `item` プロパティのバインディングに渡しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1-2" header="src/app/app.component.html"></code-example>
 
-For more information about template input variables, see
-[Structural Directives](guide/structural-directives#template-input-variable).
+テンプレート入力変数についての詳細は
+[構造ディレクティブ](guide/structural-directives#template-input-variable)をご覧ください。
 
-#### `*ngFor` with `index`
+#### `index` を使った `*ngFor` {@a ngfor-with-index}
 
-The `index` property of the `NgFor` directive context
-returns the zero-based index of the item in each iteration.
-You can capture the `index` in a template input variable and use it in the template.
+`NgFor` ディレクティブのコンテキストでの `index` プロパティは、
+ゼロベースの各反復での配列の添字を返します。
+テンプレート入力変数の中で `index` をつかまえて、それをテンプレートで使うことができます。
 
-The next example captures the `index` in a variable named `i` and displays it with the item name.
+次の例では `index` を変数 `i` としてつかまえて、項目名とともに表示しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-3" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-`NgFor` is implemented by the `NgForOf` directive. Read more about the other `NgForOf` context values such as `last`, `even`,
-and `odd` in the [NgForOf API reference](api/common/NgForOf).
+`NgFor` は `NgForOf` ディレクティブによって実装されています。`last`、`even`、`odd` といった、その他の `NgForOf` コンテキストの変数については、
+[NgForOf API リファレンス](api/common/NgForOf)をご覧ください。
 
 </div>
 
 {@a trackBy}
-#### *ngFor with `trackBy`
+#### `trackBy` を使った *ngFor {@a ngfor-with-trackby}
 
-If you use `NgFor` with large lists, a small change to one item, such as removing or adding an item, can trigger a cascade of DOM manipulations. For example, re-querying the server could reset a list with all new item objects, even when those items were previously displayed. In this case, Angular sees only a fresh list of new object references and has no choice but to replace the old DOM elements with all new DOM elements.
+大きなリストで `NgFor` を使うと、項目ひとつの追加や削除といった小さな変更が、多数の DOM 操作を引き起こすことがあります。たとえば、サーバーへの再問い合わせの結果がほとんど表示済みのものであっても、すべての項目を新しく作り直してしまうことがあります。このとき Angular は、新しいオブジェクトの参照のリストが与えられたことしか分からず、新しい DOM 要素で古い DOM 要素を置き換えることしかできません。
 
-You can make this more efficient with `trackBy`.
-Add a method to the component that returns the value `NgFor` should track.
-In this case, that value is the hero's `id`. If the `id` has already been rendered,
-Angular keeps track of it and doesn't re-query the server for the same `id`.
+`trackBy` を使うことで、これを効率化できます。
+`NgFor` が追跡すべき値を返すメソッドを、コンポーネントに追加します。
+この場合に返す値はヒーローの `id` の値です。`id` が表示済みであれば、
+Angular はそれを追跡し、同じ `id` に対してはサーバーに再問い合わせしません。
 
 <code-example path="built-in-directives/src/app/app.component.ts" region="trackByItems" header="src/app/app.component.ts"></code-example>
 
-In the microsyntax expression, set `trackBy` to the `trackByItems()` method.
+マイクロシンタックスの式で `trackBy` に `trackByItems()` メソッドを設定しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="trackBy" header="src/app/app.component.html"></code-example>
 
-Here is an illustration of the `trackBy` effect.
-"Reset items" creates new items with the same `item.id`s.
-"Change ids" creates new items with new `item.id`s.
+`trackBy` の効果を図示します。
+"Reset items" では、新しい項目を同じ `item.id` で作っています。
+"Change ids" では、新しい項目を新しい `item.id` で作っています。
 
-* With no `trackBy`, both buttons trigger complete DOM element replacement.
-* With `trackBy`, only changing the `id` triggers element replacement.
+* `trackBy` を使わないと、どちらのボタンでもすべての DOM 要素置き換えが発生します。
+* `trackBy` を使うと、`id` を変更したときだけ要素の置き換えが発生します。
 
 <div class="lightbox">
   <img src="generated/images/guide/built-in-directives/ngfor-trackby.gif" alt="Animation of trackBy">
@@ -1699,8 +1699,8 @@ Here is an illustration of the `trackBy` effect.
 
 <div class="alert is-helpful">
 
-Built-in directives use only public APIs; that is,
-they do not have special access to any private APIs that other directives can't access.
+組み込みディレクティブは公開 API だけを使っています。
+他のディレクティブが使えない非公開 API を特別に使っているといったことはありません。
 
 </div>
 

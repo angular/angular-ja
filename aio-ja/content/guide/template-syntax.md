@@ -1707,14 +1707,14 @@ Angular はそれを追跡し、同じ `id` に対してはサーバーに再問
 <hr/>
 
 {@a ngSwitch}
-## The `NgSwitch` directives
+## `NgSwitch` ディレクティブ {@a the-ngswitch-directives}
 
-NgSwitch is like the JavaScript `switch` statement.
-It displays one element from among several possible elements, based on a switch condition.
-Angular puts only the selected element into the DOM.
+NgSwitch は JavaScript の `switch` 文のようなものです。
+いくつかの要素の中から、条件に応じてひとつの要素を表示します。
+Angular は選ばれた要素だけを DOM に挿入します。
 <!-- API Flagged -->
-`NgSwitch` is actually a set of three, cooperating directives:
-`NgSwitch`, `NgSwitchCase`, and `NgSwitchDefault` as in the following example.
+`NgSwitch` は、実際には、次の例のように協調する3つのディレクティブ
+`NgSwitch`, `NgSwitchCase`, `NgSwitchDefault` の組み合わせです。
 
  <code-example path="built-in-directives/src/app/app.component.html" region="NgSwitch" header="src/app/app.component.html"></code-example>
 
@@ -1722,30 +1722,30 @@ Angular puts only the selected element into the DOM.
   <img src="generated/images/guide/built-in-directives/ngswitch.gif" alt="Animation of NgSwitch">
 </figure>
 
-`NgSwitch` is the controller directive. Bind it to an expression that returns
-the *switch value*, such as `feature`. Though the `feature` value in this
-example is a string, the switch value can be of any type.
+`NgSwitch` はコントローラーディレクティブです。`feature` のような
+*スイッチ値* を返す式にバインドしてください。この例では `feature`
+の値は文字列ですが、任意の型を使うことができます。
 
-**Bind to `[ngSwitch]`**. You'll get an error if you try to set `*ngSwitch` because
-`NgSwitch` is an *attribute* directive, not a *structural* directive.
-Rather than touching the DOM directly, it changes the behavior of its companion directives.
+**`[ngSwitch]` へのバインド**について。`NgSwitch` は*構造*ディレクティブではなく*属性*ディレクティブなので、
+`*ngSwitch` を設定しようとするとエラーになります。
+これは DOM を直接操作するのではなく、対応するディレクティブの動作に手を加えています。
 
-**Bind to `*ngSwitchCase` and `*ngSwitchDefault`**.
-The `NgSwitchCase` and `NgSwitchDefault` directives are _structural_ directives
-because they add or remove elements from the DOM.
+**`*ngSwitchCase` と `*ngSwitchDefault` へのバインド**について。
+`NgSwitchCase` と `NgSwitchDefault` ディレクティブは、DOM に要素を追加、削除するため、
+_構造_ ディレクティブです。
 
-* `NgSwitchCase` adds its element to the DOM when its bound value equals the switch value and removes
-its bound value when it doesn't equal the switch value.
+* `NgSwitchCase` は、バインドされた値がスイッチ値と同じなら DOM に要素を追加し、
+異なれば DOM から要素を削除します。
 
-* `NgSwitchDefault` adds its element to the DOM when there is no selected `NgSwitchCase`.
+* `NgSwitchDefault` は、どの `NgSwitchCase` も選択されていないときに DOM に要素を追加します。
 
-The switch directives are particularly useful for adding and removing *component elements*.
-This example switches among four `item` components defined in the `item-switch.components.ts` file.
-Each component has an `item` [input property](guide/template-syntax#inputs-outputs "Input property")
-which is bound to the `currentItem` of the parent component.
+スイッチディレクティブは、*コンポーネント要素*を追加、削除するときに特に便利です。
+この例では、 `item-switch.components.ts` で定義している4つの `item` コンポーネントを切り替えています。
+それぞれのコンポーネントは `item` [入力プロパティ](guide/template-syntax#inputs-outputs "Input property")を持ち、
+親コンポーネントの `currentItem` にバインドされています。
 
-Switch directives work as well with native elements and web components too.
-For example, you could replace the `<app-best-item>` switch case with the following.
+スイッチディレクティブは、ネイティブ要素や Web Components に対しても動作します。
+たとえば `<app-best-item>` になるケースを次のコードに置き換えることができます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgSwitch-div" header="src/app/app.component.html"></code-example>
 

@@ -1509,7 +1509,7 @@ DOM 構造の形成、または再形成を行います。
 * ディレクティブをホストする適切な要素がないときに [`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>")
 でグルーピングする方法。
 * 構造ディレクティブの作り方。
-* ひとつの要素には[ひとつの構造ディレクティブ](guide/structural-directives#one-per-element "one per host element")しか適用できない件。
+* ひとつの要素には[ひとつの構造ディレクティブ](guide/structural-directives#one-per-element "one per host element")しか適用できないこと。
 
 </div>
 

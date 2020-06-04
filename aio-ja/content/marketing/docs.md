@@ -1,28 +1,35 @@
 <h1 class="no-toc">Angular Docsの紹介</h1>
 
-Angularは、効率的で洗練されたシングルページアプリケーションを作成するためのアプリ設計フレームワークおよび開発プラットフォームです。
+Angularは、効率的で洗練されたシングルページアプリケーションを作成するためのアプリケーション設計フレームワークおよび開発プラットフォームです。
 
-これらのAngularドキュメントは、最初のアプリから複雑なエンタープライズアプリの最適化まで、Angularのプラットフォームとフレームワークの学習と使用に役立ちます。
+これらのAngularドキュメントは、最初のアプリケーションから複雑なエンタープライズアプリの最適化まで、Angularのプラットフォームとフレームワークの学習と使用に役立ちます。
 チュートリアルとガイドには、プロジェクトを加速するためのダウンロード可能なサンプルが含まれています。
 
 
 <div class="card-container">
-  <a href="start" class="docs-card" title="Angular Getting Started">
-      <section>学ぶ</section>
-      <p>セットアップなしで、小さな既製Angularアプリで遊び、拡張しましょう</p>
-      <p class="card-footer">入門</p> 
-  </a>
   <a href="guide/setup-local" class="docs-card"
     title="Angular Local Environment Setup">
-      <section>仕事をはじめる</section>
-      <p>Angular CLIを使ってローカル環境を設定しましょう</p>
+      <section>はじめよう</section>
+      <p>Angular CLIを使用して、開発用のローカル環境をセットアップします。</p>
       <p class="card-footer">ローカルセットアップ</p>
   </a>
-  <a href="guide/architecture" class="docs-card" title="Angular App Architecture">
-      <section>探検する</section>
-      <p>Angularアプリの基本的な設計概念とアーキテクチャについて学ぶ</p>
+  <a href="guide/architecture" class="docs-card" title="Angular Concepts">
+      <section>学習と探検</section>
+      <p>Angularアプリの基本的な設計概念とアーキテクチャについて学びましょう。</p>
       <p class="card-footer">Angularの概念の紹介</p>
   </a>
+  <a href="start" class="docs-card" title="Angular Getting Started">
+      <section>見学してみよう</section>
+      <p>セットアップなしで、既成の小さなAngularアプリを調べ、動かしてみましょう。</p>
+      <p class="card-footer">いますぐ試す</p> 
+  </a>
+  <a href="tutorial" class="docs-card" title="Create an app">
+      <section>Hello World</section>
+      <p>完全なチュートリアルを実行して、最初のアプリを作成します。</p>
+      <p class="card-footer">Tour of Heroesチュートリアル</p>
+  </a>
+
+
 </div>
 
 

@@ -590,7 +590,7 @@
           "url": "guide/web-worker",
           "title": "Web Worker",
           "tooltip": "Using web workers for background processing.",
-          "translated": true
+          "translated": false
         },
         {
           "url": "guide/universal",
@@ -679,7 +679,7 @@
           "url": "guide/web-worker",
           "title": "AngularにおけるWeb Workers",
           "tooltip": "Using web workers for background processing.",
-          "translated": true
+          "translated": false
         }
       ]
     },

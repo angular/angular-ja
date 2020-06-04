@@ -252,7 +252,7 @@
               "url": "guide/lifecycle-hooks",
               "title": "コンポーネントライフサイクルへのフック",
               "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/component-interaction",
@@ -482,7 +482,7 @@
           "url": "guide/router",
           "title": "ルーティングと画面遷移",
           "tooltip": "Build in-app navigation among views using the Angular Router.",
-          "translated": true
+          "translated": false
         },
         {
           "url": "guide/security",

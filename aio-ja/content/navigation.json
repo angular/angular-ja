@@ -498,7 +498,7 @@
       "children": [
         {
           "title": "アニメーション",
-          "tooltip": "Enhance the user experience with animation.",,
+          "tooltip": "Enhance the user experience with animation.",
           "children": [
             {
               "url": "guide/animations",

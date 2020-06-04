@@ -1,6 +1,6 @@
-# Angular入門: フォーム
+# 試してみよう: ユーザー入力にフォームを使おう
 
-[データ管理](start/start-data "入門： データ管理") を終えると、オンラインストアアプリケーションには製品カタログとショッピングカートがあります。
+[データ管理](start/start-data "Try it: Managing Data") を終えると、オンラインストアアプリケーションには製品カタログとショッピングカートがあります。
 
 このセクションでは、フォームベースのチェックアウト機能を追加して、チェックアウトの一部としてユーザー情報を収集する方法を説明します。
 
@@ -48,7 +48,7 @@ Angularのフォームは、標準のHTMLフォームに基づいて構築され
 
 ## チェックアウトフォームを作成する
 
-"カート" ページの下部にチェックアウトフォームを追加するには、次の手順を使用します。
+"カート" ビューの下部にチェックアウトフォームを追加するには、次の手順を使用します。
 
 1. `cart.component.html`を開きます。
 
@@ -72,7 +72,7 @@ Angularのフォームは、標準のHTMLフォームに基づいて構築され
 カートにいくつかの商品を入れた後、ユーザーは自分の商品を確認し、名前と住所を入力し、購入を送信することができます:
 
 <div class="lightbox">
-  <img src='generated/images/guide/start/cart-with-items-and-form.png' alt="Cart page with checkout form">
+  <img src='generated/images/guide/start/cart-with-items-and-form.png' alt="Cart view with checkout form">
 </div>
 
 送信を確認するには、送信した名前と住所を含むオブジェクトが表示されるはずのコンソールを開きます。
@@ -81,4 +81,4 @@ Angularのフォームは、標準のHTMLフォームに基づいて構築され
 
 おめでとうございます！製品カタログ、ショッピングカート、およびチェックアウト機能を備えた完全なオンラインストアアプリケーションがあります。
 
-["デプロイ"セクションに進んで](start/start-deployment "入門： デプロイ") ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーに配置します。
+["デプロイ"セクションに進んで](start/start-deployment "Try it: Deployment") ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーに配置します。

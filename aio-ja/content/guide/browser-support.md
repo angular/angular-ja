@@ -303,7 +303,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     <td>
 
       [Router](guide/router) when using
-      [hash-based routing](guide/router#appendix-locationstrategy-and-browser-url-styles)
+      [hash-based routing](guide/router#location-strategy)
     </td>
 
     <td>

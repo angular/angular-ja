@@ -5,7 +5,7 @@
 
 <div class="alert is-helpful">
 
-[パート1](start "Try it: A basic app")から直接ここに来ても、[アプリ内ナビゲーション](start/start-routing "Try it: In-app navigation")、[データの管理](start/start-data "Try it: Manage data")、および[ユーザー入力用のフォーム](start/start-forms "Try it: Forms for user input")セクションを通してオンラインストアアプリケーションを完成させても、あなたはこのセクションの指示に従ってデプロイできるアプリケーションをもっています。
+[パート1](start "Try it: A basic app")から直接ここに来ても、[アプリ内ナビゲーション](start/start-routing "Try it: In-app navigation")、[データの管理](start/start-data "Try it: Manage data")、および[ユーザー入力用のフォーム](start/start-forms "Try it: Forms for user input")セクションを通してオンラインストアアプリケーションを完成させても、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションをもっています。
 
 </div>
 

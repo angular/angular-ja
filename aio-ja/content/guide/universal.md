@@ -196,7 +196,7 @@ Angular がそれを提供しない場合、ブラウザ内ではブラウザ AP
 </code-example>
 
 `ngExpressEngine()` 関数は、クライアントのリクエストをサーバーレンダリングされた HTML ページに変換する
-Universal の `renderModule()` 関数のラッパーです。次のプロパティを持つオブジェクトを受け入れます。
+Universal の `renderModule()` 関数のラッパーです。次のプロパティをもつオブジェクトを受け入れます。
 
 * `bootstrap`: The root `NgModule` or `NgModule` factory to use for bootstraping the app when rendering on the server. For the example app, it is `AppServerModule`. It's the bridge between the Universal server-side renderer and the Angular application.
 * `extraProviders`: This is optional and lets you specify dependency providers that apply only when rendering the app on the server. You can do this when your app needs information that can only be determined by the currently running server instance.

@@ -36,7 +36,7 @@ export class HeroService {
   // #docregion getHeroes, getHeroes-1
   /** サーバーからヒーローを取得する */
   // #docregion getHeroes-2
-  getHeroes (): Observable<Hero[]> {
+  getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
   // #enddocregion getHeroes-1
       .pipe(
@@ -96,7 +96,7 @@ export class HeroService {
 
   // #docregion addHero
   /** POST: サーバーに新しいヒーローを登録する */
-  addHero (hero: Hero): Observable<Hero> {
+  addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Hero>('addHero'))
@@ -106,7 +106,7 @@ export class HeroService {
 
   // #docregion deleteHero
   /** DELETE: サーバーからヒーローを削除 */
-  deleteHero (hero: Hero | number): Observable<Hero> {
+  deleteHero(hero: Hero | number): Observable<Hero> {
     const id = typeof hero === 'number' ? hero : hero.id;
     const url = `${this.heroesUrl}/${id}`;
 
@@ -119,7 +119,7 @@ export class HeroService {
 
   // #docregion updateHero
   /** PUT: サーバー上でヒーローを更新 */
-  updateHero (hero: Hero): Observable<any> {
+  updateHero(hero: Hero): Observable<any> {
     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
@@ -134,7 +134,7 @@ export class HeroService {
    * @param operation - 失敗した操作の名前
    * @param result - observableな結果として返す任意の値
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: リモート上のロギング基盤にエラーを送信する

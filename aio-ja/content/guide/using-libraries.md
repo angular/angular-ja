@@ -1,7 +1,7 @@
 # 公開ライブラリの使用
 
 Angular アプリケーションを構築する際には、高度な自社製ライブラリや、[Angular Material](https://material.angular.io/) などの他社製ライブラリの豊富なエコシステムを活用できます。
-もっとも人気のあるものへのリンクについては、[Angular Resources](https://angular.io/resources) のページを参照してください。
+もっとも人気のあるものへのリンクについては、[Angular Resources](resources) のページを参照してください。
 
 ## ライブラリのインストール
 

@@ -1083,18 +1083,6 @@ Angularは階層的な注入システムを持ちます。
 
 </div>
 
-{@a service-from-injector}
-
-#### 常にインジェクターからサービスを取得してください
-
-テスト本体にあるテストモジュールに提供されている`userServiceStub`
-オブジェクトを参照_しないでください_。
-**それは動作しません！**
-コンポーネントに注入された`userService`インスタンスは、完全に_異なる_オブジェクトであり、
-提供された`userServiceStub`のクローンです。
-
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="stub-not-injected" header="app/welcome/welcome.component.spec.ts"></code-example>
-
 {@a welcome-spec-setup}
 
 #### 最後のステップとテスト
@@ -1220,7 +1208,7 @@ Angular CLIで作成されたプロジェクトであれば、 `zone-testing` �
 `it()`関数が次の形式の引数を受け取ることに注目してください。
 
 ```javascript
-fakeAsync(() => { /* test body */ })`
+fakeAsync(() => { /* test body */ })
 ```
 
 `fakeAsync`関数は、特別な_fakeAsyncテストゾーン_でテスト本体を実行することによって、線形的なコーディングスタイルを可能にします。
@@ -1934,7 +1922,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 
 <div class="alert is-helpful">
 
-[ルーター](guide/router#route-parameters)ガイドでは、`ActivatedRoute.paramMap`について詳しく説明しています。
+[Router](guide/router) ガイドの[ActivatedRoute in action](guide/router#activated-route-in-action) セクションでは、`ActivatedRoute.paramMap`について詳しく説明しています。
 
 </div>
 
@@ -3122,7 +3110,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     </td>
   </tr>
-</table
+</table>
 
 いくつかの`TestBed`インスタンスメソッドは静的な`TestBed`クラスメソッドがカバーしていないものです。
 これらはほとんど必要ありません。

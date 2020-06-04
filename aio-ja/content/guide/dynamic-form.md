@@ -1,42 +1,53 @@
-# ダイナミックフォーム
+# Building dynamic forms
 
-{@a top}
+Many forms, such as questionaires, can be very similar to one another in format and intent.
+To make it faster and easier to generate different versions of such a form,
+you can create a *dynamic form template* based on metadata that describes the business object model.
+You can then use the template to generate new forms automatically, according to changes in the data model.
 
-フォームを手作業で実装すると、時間もコストもかかることがあります。
-必要なフォームの数が多く、それらが似ており、
-そして変化の激しいビジネスやレギュレーションの要件に合わせて頻繁に変更が入る場合には特にそうです。
+The technique is particularly useful when you have a type of form whose content must
+change frequently to meet rapidly changing business and regulatory requirements.
+A typical use case is a questionaire. You might need to get input from users in different contexts.
+The format and style of the forms a user sees should remain constant, while the actual questions you need to ask vary with the context.
 
-ビジネス・オブジェクト・モデルを記述するメタデータに基づいて、
-フォームを動的に作成する方がより経済的かもしれません。
+In this tutorial you will build a dynamic form that presents a basic questionaire.
+You will build an online application for heroes seeking employment.
+The agency is constantly tinkering with the application process, but by using the dynamic form
+you can create the new forms on the fly without changing the application code.
 
-このクックブックでは、`formGroup` を使って異なるコントロールタイプとバリデーションをもつ簡単なフォームを、
-動的にレンダリングする方法を解説していきます。
-ここで解説するのは原始的なスタート部分です。
-はるかにバラエティに富んだフォーム項目、よりよいレンダリング、優れたユーザー体験をサポートするように進化するかもしれません。
-そのような偉大なフォームも、すべて始まりは質素なものです。
+The tutorial walks you through the following steps.
 
-このクックブックにおける例題は、仕事を求めるヒーローのための
-オンラインアプリケーションエクスペリエンスを構築するためのダイナミックフォームです。
-紹介会社は、選考プロセスを常に見直しています。
-*アプリケーションコードを変更せずに* フォームを作成することができます。
-{@a toc}
+1. Enable reactive forms for a project.
+2. Establish a data model to represent form controls.
+3. Populate the model with sample data.
+4. Develop a component to create form controls dynamically.
 
-<live-example name="dynamic-form"></live-example> を参照してください。
+The form you create uses input validation and styling to improve the user experience.
+It has a Submit button that is only enabled when all user input is valid, and flags invalid input with color coding and error messages.
 
-{@a bootstrap}
+The basic version can evolve to support a richer variety of questions, more graceful rendering, and superior user experience.
 
-## ブートストラップ
+<div class="alert is-helpful">
 
-まず、`AppModule` と呼ばれる`NgModule`を作成しましょう。
+See the <live-example name="dynamic-form"></live-example>.
 
-このクックブックでは、[reactive forms](guide/reactive-forms)を用いてフォームを作成していきます。
+</div>
 
-リアクティブフォームは、`ReactiveFormsModule`と呼ばれる別の`NgModule`に属します。
-したがって、リアクティブフォームのディレクティブにアクセスするためには、
-`ReactiveFormsModule`を`@angular/forms`ライブラリからインポートする必要があります。
+## Prerequisites
 
-そして、`main.ts`で`AppModule`をブートストラップします。
+Before doing this tutorial, you should have a basic understanding to the following.
 
+* [TypeScript](https://www.typescriptlang.org/docs/home.html "The TypeScript language") and HTML5 programming.
+
+* Fundamental concepts of [Angular app design](guide/architecture "Introduction to Angular app-design concepts").
+
+* Basic knowledge of [reactive forms](guide/reactive-forms "Reactive forms guide").
+
+## Enable reactive forms for your project
+
+Dynamic forms are based on reactive forms. To give the application access reactive forms directives, the [root module](guide/bootstrapping "Learn about bootstrapping an app from the root module.") imports `ReactiveFormsModule` from the `@angular/forms` library.
+
+The following code from the example shows the setup in the root module.
 
 <code-tabs>
 
@@ -50,78 +61,56 @@
 
 </code-tabs>
 
-
 {@a object-model}
 
-## 質問のモデル
+## Create a form object model
 
-次のステップでは、フォーム機能によって必要とされるすべてのシナリオを記述できるオブジェクトモデルを定義していきます。
-ヒーローの選考プロセスには、多くの質問が用意されたフォームが含まれています。
-質問は、モデルのもっとも基本的なオブジェクトです。
+A dynamic form requires an object model that can describe all scenarios needed by the form functionality.
+The example hero-application form is a set of questions&mdash;that is, each control in the form must ask a question and accept an answer.
 
-次の`QuestionBase`は基本的な質問のクラスです。
+The data model for this type of form must represent a question.
+The example includes the `DynamicFormQuestionComponent`, which defines a  question as the fundamental object in the model.
 
+The following `QuestionBase` is a base class for a set of controls that can represent the question and its answer in the form.
 
 <code-example path="dynamic-form/src/app/question-base.ts" header="src/app/question-base.ts">
 
 </code-example>
 
+### Define control classes
 
+From this base, the example derives two new classes, `TextboxQuestion` and `DropdownQuestion`,
+that represent different control types.
+When you create the form template in the next step, you will instantiate these specific question types in order to render the appropriate controls dynamically.
 
-この基底クラスから`TextboxQuestion`と`DropdownQuestion`という、
-2つの新しいクラスを派生させることができます。
-これは、テキストボックスとドロップダウン質問を表します。
-考え方としては、フォームが特定の質問タイプにバインドされ、適切なコントロールを動的にレンダリングするということです。
+* The `TextboxQuestion` control type presents a question and allows users to enter input.
 
-`TextboxQuestion`は、`type`プロパティを介してtext、email、urlといった
-複数のHTML5タイプをサポートしています。
+   <code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts"></code-example>
 
+   The `TextboxQuestion` control type will be represented in a form template using an `<input>` element.
+   The `type` attribute of the element will be defined based on the `type` field specified in the `options` argument (for example `text`, `email`, `url`).
 
-<code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts"></code-example>
+* The `DropdownQuestion` control presents a list of choices in a select box.
 
+   <code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts"></code-example>
 
+### Compose form groups
 
-`DropdownQuestion`は、セレクトボックスに選択肢のリストを表示します。
-
-
-<code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts"></code-example>
-
-
-
-次に`QuestionControlService`です。
-これは質問を`FormGroup`に変換するためのシンプルなサービスで、
-一言でいえば、フォームグループは質問モデルのメタデータを用いて、デフォルト値とバリデーションルールをセットすることができます。
-
+A dynamic form uses a service to create grouped sets of input controls, based on the form model.
+The following `QuestionControlService` collects a set of `FormGroup` instances that consume the metadata from the question model. You can specify default values and validation rules.
 
 <code-example path="dynamic-form/src/app/question-control.service.ts" header="src/app/question-control.service.ts"></code-example>
 
 {@a form-component}
 
-## 質問フォームコンポーネント
-完成したモデルを定義できたので、
-ダイナミックフォームを描画するコンポーネントを作成する準備が整いました。
+## Compose dynamic form contents
 
+The dynamic form itself will be represented by a container component, which you will add in a later step.
+Each question is represented in the form component's template by an `<app-question>` tag, which matches an instance of `DynamicFormQuestionComponent`.
 
-`DynamicFormComponent`はエントリーポイントで、フォームのメインコンテナです。
-
-<code-tabs>
-
-  <code-pane header="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
-
-  </code-pane>
-
-  <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
-
-  </code-pane>
-
-</code-tabs>
-
-
-
-これは質問のリストを表し、それぞれは `<app-question>` コンポーネントにバインドされています。
-`<app-question>` タグは、データバインドされた質問オブジェクトの値に基づいて _個々の_ 質問の詳細を表現するコンポーネントである、
-DynamicFormQuestionComponentにマッチします。
-
+The `DynamicFormQuestionComponent` is responsible for rendering the details of an individual question based on values in the data-bound question object.
+The form relies on a [`[formGroup]` directive](api/forms/FormGroupDirective "API reference") to connect the template HTML to the underlying control objects.
+The `DynamicFormQuestionComponent` creates form groups and populates them with controls defined in the question model, specifying display and validation rules.
 
 <code-tabs>
 
@@ -135,69 +124,88 @@ DynamicFormQuestionComponentにマッチします。
 
 </code-tabs>
 
+The goal of the `DynamicFormQuestionComponent` is to present question types defined in your model.
+You only have two types of questions at this point but you can imagine many more.
+The `ngSwitch` statement in the template determines which type of question to display.
+The switch uses directives with the [`formControlName`](api/forms/FormControlName "FormControlName directive API reference") and [`formGroup`](api/forms/FormGroupDirective "FormGroupDirective API reference") selectors. Both directives are defined in `ReactiveFormsModule`.
 
-
-このコンポーネントは、あなたのモデルに任意のタイプの質問を提示できます。
-この時点では2つのタイプの質問しかありませんが、もっと多くのことを想像することができます。
-`ngSwitch`は表示する質問のタイプを決定します。
-
-どちらのコンポーネントでもAngularの**formGroup**を使用して、表示および検証のルールをもつ質問モデルから定義された、基礎となるコントロールオブジェクトにテンプレートHTMLを接続します。
-
-`formControlName`と`formGroup`は`ReactiveFormsModule`で定義されたディレクティブです。
-テンプレートは`AppModule`から`ReactiveFormsModule`をインポートしたので、
-これらのディレクティブに直接アクセスできます。
 {@a questionnaire-data}
 
-## アンケートデータ
+### Supply data
 
-`DynamicFormComponent`は、`@Input() questions`で宣言されている配列のかたちで、質問のリストがバインディングされることを期待しています。
+Another service is needed to supply a specific set of questions from which to build an individual form.
+For this exercise you will create the `QuestionService` to supply this array of questions from the hard-coded sample data.
+In a real-world app, the service might fetch data from a backend system.
+The key point, however, is that you control the hero job-application questions entirely through the objects returned from `QuestionService`.
+To maintain the questionnaire as requirements change, you only need to add, update, and remove objects from the `questions` array.
 
- 求人申請のために定義した一連の質問は、`QuestionService`から返されます。
- 実際のアプリでは、これらの質問をストレージから取得します。
 
- キーポイントは、あなたが`QuestionService`から返されたオブジェクトを通して
- ヒーローを雇用するためのアプリケーションの質問を完全に制御することです。
- アンケートのメンテナンスは、`questions`配列の
- オブジェクトを追加、更新、削除するというシンプルな作業で済みます。
-
+The `QuestionService` supplies a set of questions in the form of an array bound to `@Input()` questions.
 
 <code-example path="dynamic-form/src/app/question.service.ts" header="src/app/question.service.ts">
 
 </code-example>
 
 
+{@a dynamic-template}
 
-最後に、`AppComponent`シェルにフォームのインスタンスを表示します。
+## Create a dynamic form template
 
+The `DynamicFormComponent` component is the entry point and the main container for the form, which is represented using the `<app-dynamic-form>` in a template.
+
+The `DynamicFormComponent` component presents a list of questions by binding each one to an `<app-question>` element that matches the `DynamicFormQuestionComponent`.
+
+<code-tabs>
+
+  <code-pane header="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
+
+  </code-pane>
+
+  <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
+
+  </code-pane>
+
+</code-tabs>
+
+### Display the form
+
+To display an instance of the dynamic form, the `AppComponent` shell template passes the `questions` array returned by the `QuestionService` to the form container component, `<app-dynamic-form>`.
 
 <code-example path="dynamic-form/src/app/app.component.ts" header="app.component.ts">
 
 </code-example>
 
-{@a dynamic-template}
+The example provides a model for a job application for heroes, but there are
+no references to any specific hero question other than the objects returned by `QuestionService`.
+This separation of model and data allows you to repurpose the components for any type of survey
+as long as it's compatible with the *question* object model.
 
-## ダイナミック テンプレート
-この例ではヒーローのジョブアプリケーションをモデリングしていますが、
-`QuestionService`から返されたオブジェクト以外に
-特定のヒーローに関する質問は一切ありません。
+### Ensuring valid data
 
-これは、*質問* オブジェクトモデルと互換性がある限り、
-任意のタイプの調査のコンポーネントを再利用することができるので、非常に重要です。
-キーは、特定の質問についてハードコーディングされた前提を作らずに
-フォームをレンダリングするために使用されるメタデータの動的データバインディングです。
-コントロールのメタデータに加えて、動的なバリデーションを追加します。
+The form template uses dynamic data binding of metadata to render the form
+without making any hardcoded assumptions about specific questions.
+It adds both control metadata and validation criteria dynamically.
 
-*保存* ボタンは、フォームのバリデーションがパスされた状態になるまで無効となります。
-フォームのバリデーションをパスした場合、*保存* をクリックすることで、アプリケーションは現在のフォームの値をJSONとしてレンダリングします。
-これは、任意のユーザー入力がデータモデルにバインドされていることを証明します。
-データの保存と取り込み処理については、別の機会に学習しましょう。
+To ensure valid input, the *Save* button is disabled until the form is in a valid state.
+When the form is valid, you can click *Save* and the app renders the current form values as JSON.
 
-
-最終的にフォームは次のようになります:
+The following figure shows the final form.
 
 <div class="lightbox">
   <img src="generated/images/guide/dynamic-form/dynamic-form.png" alt="Dynamic-Form">
 </div>
 
+## Next steps
 
-[トップに戻る](guide/dynamic-form#top)
+* **Different types of forms and control collection**
+
+   This tutorial shows how to build a a questionaire, which is just one kind of dynamic form.
+   The example uses `FormGroup` to collect a set of controls.
+   For an example of a different type of dynamic form, see the section [Creating dynamic forms](guide/reactive-forms#creating-dynamic-forms "Create dynamic forms with arrays") in the Reactive Forms guide.
+   That example also shows how to use `FormArray` instead of `FormGroup` to collect a set of controls.
+
+* **Validating user input**
+
+   The section [Validating form input](guide/reactive-forms#validating-form-input "Basic input validation") introduces the basics of how input validation works in reactive forms.
+
+   The [Form validation guide](guide/form-validation "Form validation guide") covers the topic in more depth.

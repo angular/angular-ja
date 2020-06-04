@@ -7,6 +7,12 @@
 フォームを開発するには、ワークフローを通じて効率的かつ
 効果的にユーザーを誘導するデータ入力エクスペリエンスを作成することが重要です。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 ## テンプレート駆動フォームの導入
 
 フォームを開発するには、デザインスキル（このページの対象外）と
@@ -21,8 +27,6 @@
 * コントロールの状態を追跡する特別なCSSクラスを使用して視覚的フィードバックを提供します。
 * 検証エラーをユーザーに表示し、フォームコントロールを有効または無効にします。 
 * テンプレート参照変数を使用してHTML要素間で情報を共有します。
-
-Stackblitzで<live-example></live-example>を実行し、そこからコードをダウンロードすることができます。
 
 {@a template-driven}
 

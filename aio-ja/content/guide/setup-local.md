@@ -6,10 +6,9 @@
 
 
 <div class="callout is-helpful">
-<header>Angularの学習</header>
+<header>ローカルセットアップなしでAngularを試す</header>
 
-Angular をはじめて使用する場合は、[入門](start)を参照してください。 入門では基本的なオンラインストアアプリを構築するなかで、Angularの基本事項をすぐに習得できます。 [StackBlitz](https://stackblitz.com/)オンライン開発環境を活用しているので、準備が整うまでローカル環境をセットアップする必要はありません。
-
+Angular をはじめて使用する場合は、[入門](start)から始めるのがよいかもしれません。入門では変更可能な既成のオンラインストアアプリを構築するなかで、Angularの基本事項をすぐに習得できます。 [StackBlitz](https://stackblitz.com/)オンライン開発環境を活用しているので、準備が整うまでローカル環境をセットアップする必要はありません。
 
 </div>
 
@@ -18,10 +17,18 @@ Angular をはじめて使用する場合は、[入門](start)を参照してく
 {@a prerequisites}
 ## 前提条件
 
-はじめに、開発環境に`Node.js®`と npm パッケージマネージャーが含まれていることを確認してください。
+Angularフレームワークを使用するには、次の知識が必要です。
+
+* [JavaScript](https://developer.mozilla.org/ja/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
+* [HTML](https://developer.mozilla.org/ja/docs/Learn/HTML/Introduction_to_HTML)
+* [CSS](https://developer.mozilla.org/ja/docs/Learn/CSS/First_steps)
+
+[TypeScript](https://www.typescriptlang.org/)についての知識は役立ちますが、必須ではありません。
 
 {@a nodejs}
 ### Node.js
+
+はじめに、開発環境に`Node.js®`と npm パッケージマネージャーが含まれていることを確認してください。
 
 Angular は `Node.js` の[現行またはアクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。特定のバージョン要求については、 [package.json](https://unpkg.com/@angular/cli/package.json)の `engines`キーを参照してください。
 
@@ -111,17 +118,10 @@ Angular CLIにはサーバーが含まれているため、アプリをローカ
 ## 次のステップ
 
 
-- Angularに慣れていない場合は、[入門](start)チュートリアルを参照してください。 入門では基本的なオンラインストアアプリを構築するなかで、Angularの基本事項をすぐに習得できます。
+* Angularシングルページアプリのアーキテクチャと設計原則の基本的な概念と用語のより完全な紹介については、[Angularの概念](guide/architecture)セクションをお読みください。
 
-  <div class="alert is-helpful">
-
-  入門は[StackBlitz](https://stackblitz.com/)のオンライン開発環境を想定しています。
-   StackBlitzからローカル環境にアプリをエクスポートする方法については、[デプロイ](start/start-deployment "Getting Started: Deployment")のセクションに進んでください。
-
-  </div>
-
+* Angular CLIを使用したアプリ開発プロセスを紹介し、重要なサブシステムをウォークスルーする完全な実践演習である[Tour of Heroes チュートリアル](tutorial)を実行します。
 
 * Angular CLIの使用方法の詳細については、[CLIの概要](cli 'CLI Overview')を参照してください。初期ワークスペースとアプリの雛形を作成するだけでなく、CLIを使用してコンポーネントやサービスなどのAngularコードを生成できます。 CLIは、ビルド、テスト、バンドリング、およびデプロイを含む開発サイクル全体をサポートします。
-
 
 - `ng new` によって生成されたAngularファイルの詳細については、[ワークスペースとプロジェクトのファイル構造](guide/file-structure)を参照してください。

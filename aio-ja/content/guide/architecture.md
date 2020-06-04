@@ -25,6 +25,11 @@ Angularアプリケーションの基本となる構成要素は *NgModule* で�
 
 </div>
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+</div>
+
 ## モジュール {@a modules}
 
 Angularの*NgModule*はJavaScript（ES2015）のモジュールとは異なり、それを補完します。 NgModuleは、アプリケーションドメイン、ワークフロー、あるいは一連の機能と密接に関連するコンポーネントセットのコンパイルコンテキストを宣言します。 NgModuleは、そのコンポーネントをサービスなどの関連コードとまとめて、機能単位を形成できます。

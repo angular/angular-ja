@@ -8,7 +8,7 @@ Angular の [ahead-of-time (AOT) コンパイラ](guide/glossary#aot) は、ブ�
 
 <div class="alert is-helpful">
 
-  AngularConnect 2016で、<a href="https://www.youtube.com/watch?v=kW9cJsvcsGo">コンパイラの作者 Tobias Bosch が Angular コンパイラについて説明しています</a>。
+  <a href="https://www.youtube.com/watch?v=anphffaCZrQ">Watch Alex Rickabaugh explain the Angular compiler</a> at AngularConnect 2019.
 
 </div>
 
@@ -43,32 +43,12 @@ AOTを使用する理由は次のとおりです。
 
 Angular には、アプリケーションをコンパイルする2つの方法があります。
 
-* **_Just-in-Time_ (JIT)** は実行時にブラウザ内でアプリケーションをコンパイルします
-* **_Ahead-of-Time_ (AOT)** はビルド時にアプリをコンパイルします
+* **_Just-in-Time_ (JIT)** は実行時にブラウザ内でアプリケーションをコンパイルします。This was the default until Angular 8.
+* **_Ahead-of-Time_ (AOT)** はビルド時にアプリとライブラリをコンパイルします。This is the default since Angular 9.
 
-JIT コンパイルは [`ng build`](cli/build) (ビルドのみ) あるいは [`ng serve`](cli/serve) (ローカルでビルドしてサーブする) CLI コマンドを実行したときのデフォルトです。
-
-<code-example language="sh" class="code-shell">
-  ng build
-  ng serve
-</code-example>
-
-{@a compile}
-
-AOT コンパイルをするには、`ng build` または `ng serve` コマンドに `--aot` オプションを含めます。
-
-<code-example language="sh" class="code-shell">
-  ng build --aot
-  ng serve --aot
-</code-example>
-
-<div class="alert is-helpful">
-
-`--prod` メタフラグを付けた `ng build` コマンド (`ng build --prod`) はデフォルトで AOT でコンパイルします。
+When you run the [`ng build`](cli/build) (build only) or [`ng serve`](cli/serve) (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the `aot` property in your build configuration specified in `angular.json`. By default, `aot` is set to `true` for new CLI apps.
 
 詳細については、[CLI コマンドリファレンス](cli) および [Angularアプリのビルドとサーブ](guide/build)を参照してください。
-
-</div>
 
 ## どのようにAOTは機能するか
 
@@ -562,6 +542,7 @@ export class TypicalModule {}
 
 
 {@a binding-expression-validation}
+
 ## フェーズ 3: テンプレート型チェック
 
 Angularコンパイラのもっとも役立つ特徴の1つは、テンプレート内の式を型チェックしてそれらが実行時にクラッシュを引き起こす前にエラーを捕捉する能力です。
@@ -579,7 +560,7 @@ Angularコンパイラのもっとも役立つ特徴の1つは、テンプレー
 このより厳格な型チェックはバージョン9においてデフォルトで有効ではありませんが、`strictTemplates`設定オプションを設定することで有効にできます。
 将来はデフォルトで厳格な型チェックを行うことになるでしょう。
 
-<!-- For more information about type-checking options, and about improvements to template type checking in version 9 and above, see [Template type checking](guide/template-type-checking). -->
+For more information about type-checking options, and about improvements to template type checking in version 9 and above, see [Template type checking](guide/template-typecheck).
 
 </div>
 
@@ -638,16 +619,7 @@ class MyComponent {
 
 `*ngIf` を使用すると、TypeScript コンパイラは、バインディング式で使用されている `person` が `undefined` になることはないと推測できます。
 
-#### カスタムの `ngIf` に似たディレクティブ
-
-`*ngIf` のように動作するディレクティブは、`*ngIf` のように扱うためのテンプレートコンパイラへのシグナルである静的メンバーマーカーを含めることで、同じ扱いが必要であることを宣言できます。`*ngIf` のこの静的メンバは次のとおりです。
-
-```typescript
-  public static ngIfUseIfTypeGuard: void;
-```
-
-これは、`NgIf` ディレクティブの入力プロパティ `ngIf` がそのテンプレートの使用に対する保護として扱われるべきであることを宣言します。つまり、`ngIf` 入力プロパティが true の場合にのみテンプレートがインスタンス化されることを意味します。
-
+For more information about input type narrowing, see [Input setter coercion](guide/template-typecheck#input-setter-coercion) and [Improving template type checking for custom directives](guide/structural-directives#directive-type-checks).
 
 ### null 以外の型アサーション演算子
 

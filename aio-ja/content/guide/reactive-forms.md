@@ -135,7 +135,7 @@ To register a single form control, import the `FormControl` class and create a n
 
 </div>
 
-## フォームコントロールのグループ化
+## フォームコントロールのグループ化 {@a grouping-form-controls}
 
 Forms typically contain several related controls. Reactive forms provide two ways of grouping multiple related controls into a single input form.
 

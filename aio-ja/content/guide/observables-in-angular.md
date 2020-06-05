@@ -12,7 +12,7 @@ Angularは コンポーネントから値を [`@Output()` デコレーター](gu
 `EventEmitter` は [RxJSの `Subject`](https://rxjs.dev/api/index/class/Subject) を拡張し、任意の値を送ることができるように `emit()` メソッドを追加します。
 `emit()` を呼び出すと、サブスクライブされたオブザーバーの `next()` メソッドに送出された値が渡されます。
 
-[EventEmitter](https://angular.io/api/core/EventEmitter) のドキュメントに、使い方の良い例があります。オープンイベントとクローズイベントを待ち受けるサンプルコンポーネントを次に示します。
+[EventEmitter](api/core/EventEmitter) のドキュメントに、使い方の良い例があります。オープンイベントとクローズイベントを待ち受けるサンプルコンポーネントを次に示します。
 
 `<zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>`
 
@@ -30,7 +30,7 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 ## 非同期パイプ
 
-[AsyncPipe](https://angular.io/api/common/AsyncPipe) は Observable または Promise をサブスクライブし、送出した最新の値を返します。新しい値が発行されると、パイプはコンポーネントの変更をチェックします。
+[AsyncPipe](api/common/AsyncPipe) は Observable または Promise をサブスクライブし、送出した最新の値を返します。新しい値が発行されると、パイプはコンポーネントの変更をチェックします。
 
 次の例では `time` observable をコンポーネントのビューにバインドします。observable は現在時刻でビューを継続的に更新します。
 
@@ -40,16 +40,16 @@ Angularの `HttpClient` は、HTTPメソッド呼び出しからの Observable �
 
 ## ルーター
 
-[`Router.events`](https://angular.io/api/router/Router#events) は Observable としてイベントを提供します。RxJS の `filter()` オペレーターを使用して目的のイベントを検索し、それらのイベントをサブスクライブして、ナビゲーションプロセスの一連のイベントに基づいて決定することができます。ここに例があります：
+[`Router.events`](api/router/Router#events) は Observable としてイベントを提供します。RxJS の `filter()` オペレーターを使用して目的のイベントを検索し、それらのイベントをサブスクライブして、ナビゲーションプロセスの一連のイベントに基づいて決定することができます。ここに例があります：
 
 <code-example path="observables-in-angular/src/main.ts" header="ルーターイベント" region="router"></code-example>
 
-[ActivatedRoute](https://angular.io/api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivatedRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
+[ActivatedRoute](api/router/ActivatedRoute) は Observable を利用してルートパスとパラメータに関する情報を取得する、注入されたルーターサービスです。たとえば、 `ActivatedRoute.url` にはルートパスを報告する Observable が含まれています。ここに例があります：
 
 <code-example path="observables-in-angular/src/main.ts" header="ActivatedRoute" region="activated_route"></code-example>
 
 ## リアクティブフォーム
 
-リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](https://angular.io/api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティを購読することは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
+リアクティブフォームには Observable を使用してフォームコントロール値を監視するプロパティがあります。[`FormControl`](api/forms/FormControl) プロパティの `valueChanges` および `statusChanges` には、変更イベントを発生させる Observable が含まれます。 Observable のフォームコントロールプロパティを購読することは、コンポーネントクラス内でアプリケーションロジックをトリガーする方法です。たとえば：
 
 <code-example path="observables-in-angular/src/main.ts" header="リアクティブフォーム" region="forms"></code-example>

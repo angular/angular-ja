@@ -207,7 +207,7 @@ NgModuleはAngularアプリケーションを整理する方法で、
 
       Angularはモジュールの`bootstrap`とルート定義内のコンポーネントを`entryComponents`配列に自動的に追加します。
 
-      これでは、[`ViewComponentRef.createComponent()`](https://angular.io/api/core/ViewContainerRef#createComponent)のような命令的なテクニックのひとつを使ってブートストラップされるコンポーネントを検出できないままです。
+      これでは、[`ViewComponentRef.createComponent()`](api/core/ViewContainerRef#createComponent)のような命令的なテクニックのひとつを使ってブートストラップされるコンポーネントを検出できないままです。
 
       動的なコンポーネントのロードはルーター以外のほとんどのアプリケーションで一般的ではありません。動的にコンポーネントをロードしたい場合は、`entryComponents`配列に手動でコンポーネントを追加する必要があります。
 

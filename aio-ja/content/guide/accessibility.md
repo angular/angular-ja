@@ -10,6 +10,12 @@ Web は視覚・運動障害をもつ方を含む、さまざまな方によっ�
 このページには、支援技術を必要とする方を含むすべてのユーザーにとって使いやすい
 Angular アプリケーションを設計するためのベストプラクティスが記述されています。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 ## アクセシビリティのための属性
 
 Web 上でのアクセシビリティを構築するためには、セマンティックな意味情報が欠落しないように
@@ -38,7 +44,7 @@ Angular 内で ARIA 属性をバインドするためには接頭辞として `a
 
    規約により、HTML の属性の名前には小文字が使われます(`tabindex`)。一方でプロパティにはキャメルケースを使われます(`tabIndex`)。
 
-   属性とプロパティの違いについて詳しい背景は [テンプレート記法](https://angular.io/guide/template-syntax#html-attribute-vs-dom-property)ガイドを参照してください。
+   属性とプロパティの違いについて詳しい背景は [テンプレート記法](guide/template-syntax#html-attribute-vs-dom-property)ガイドを参照してください。
 
 </div>
 
@@ -91,8 +97,6 @@ Angular Material において上記のパターンのサンプルは [`MatButton
 
   <code-example path="accessibility/src/app/app.component.html" header="src/app/app.component.html" region="template"></code-example>
 
-
-プログレスバーを動作するサンプルアプリ中で見るには <live-example></live-example> を参照してください。
 
 ## ルーティングとフォーカスの制御
 

@@ -2,6 +2,12 @@
 
 _Angular Elements_ は、 _Custom Elements_ （Web Componentsとも呼ばれます）としてパッケージ化される Angular コンポーネントです。Custom Elements は、フレームワークに依存しない形で新たな HTML 要素を定義するウェブ標準技術です。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) は、現在 Chrome、Edge (Chromium-based)、 Firefox、Opera、Safari でサポートされている機能で、それ以外のブラウザでもポリフィルを通して利用することができます（[Browser Support](#browser-support) 参照）。
 Custom Elements は、独自にタグを定義することによって HTML を拡張します。定義したタグの中のコンテンツは、JavaScript のコードで作成し、制御します。
 ブラウザは、定義された Custom Elementsの `CustomElementRegistry` を管理します。この `CustomElementRegistry` は、インスタンス化可能な JavaScript のクラスを HTML のタグに関連付けます。
@@ -150,12 +156,6 @@ Angular の Custom Elements を使用すれば、自動的にインフラスト�
 
   </code-pane>
 </code-tabs>
-
-<!--
-  StackBlitz transpiles code to ES5. The live example will not work without a polyfill.
-  Only offer a `.zip` to download for now.
--->
-この例のコードはすべて<live-example downloadOnly>here</live-example>からダウンロードできます。
 
 
 ## Custom Elementsの型指定

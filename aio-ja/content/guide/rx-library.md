@@ -22,7 +22,7 @@ RxJS には新しい observables を作成するために使用できるいく�
 
 <code-example path="rx-library/src/simple-creation.ts" region="ajax" header="AJAX リクエストから observable を作成する"></code-example>
 
-## オペレーター
+## オペレーター {@a operators}
 
 オペレーターは、コレクションの高度な操作を可能にするために、observables 基盤上に構築される関数です。たとえば RxJS は `map()`、`filter()`、`concat()`、`flatMap()` のようなオペレーターを定義します。
 

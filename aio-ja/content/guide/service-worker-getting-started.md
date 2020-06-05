@@ -23,7 +23,7 @@ ng add @angular/pwa --project *project-name*
 2. CLIでService Workerのビルドサポートを有効にします。
 3. アプリケーションモジュールにService Workerをインポートして登録します。
 4. `index.html`ファイルを更新します。
-    * `manifest.json`ファイルを追加するためのリンクを含めます。
+    * `manifest.webmanifest`ファイルを追加するためのリンクを含めます。
     * `theme=color`のメタタグを追加します。
 5. インストール可能なプログレッシブウェブアプリ（PWA）をサポートするアイコンファイルをインストールします。 
 6. [`ngsw-config.json`](/guide/service-worker-config)というService Worker構成ファイルを作成します。このファイルは、キャッシュの動作やその他の設定を指定します。

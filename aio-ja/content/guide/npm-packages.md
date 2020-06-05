@@ -93,9 +93,6 @@ Package name                                      | Description
 [ブラウザサポート](guide/browser-support)はどのブラウザがポリフィルを必要としていて
 ポリフィルの追加方法が説明されています。
 
-新しいAngularワークスペース用の `package.json` は[core-js](https://github.com/zloirock/core-js)パッケージをインストールします。
-これはいくつかの一般向けのブラウザに不足している機能のポリフィルです。
-
 
 {@a dev-dependencies}
 

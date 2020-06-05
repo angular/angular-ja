@@ -29,8 +29,8 @@ Angularでは、HTMLテンプレートのコントロールをAngularコンポ�
 ```javascript
 <html>
   <div id="dataDiv"></div>
-  <button id="btn">updateData<btn>
-  <canvas id="canvas"><canvas>
+  <button id="btn">updateData</button>
+  <canvas id="canvas"></canvas>
   <script>
     let value = 'initialValue';
     // 初期レンダリング
@@ -75,7 +75,7 @@ Angularでは、HTMLテンプレートのコントロールをAngularコンポ�
     }, 100);
 
     // 例 4: Promise.then
-    Promise.resolve('promise resolved a value').then((v) => {
+    Promise.resolve('promise resolved a value').then(v => {
       // Promise thenコールバック内での値の更新
       value = v;
       // 手動で detectChange を呼び出す
@@ -85,7 +85,7 @@ Angularでは、HTMLテンプレートのコントロールをAngularコンポ�
     // 例 5: その他の非同期API
     document.getElementById('canvas').toBlob(blob => {
       // canvas から blob データが生成されたときの値の更新
-      value = `value updated by canvas, size is ${blog.size}`;
+      value = `value updated by canvas, size is ${blob.size}`;
       // 手動で detectChange を呼び出す
       detectChange();
     });
@@ -129,7 +129,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-4. `setTimeout()`/`setInterval()` などのMacroTask。`setTimeout()`のような`macroTask`のコールバック関数でデータを更新することもできます。
+4. `setTimeout()` または `setInterval()` などのMacroTask。`setTimeout()`のような`macroTask`のコールバック関数でデータを更新することもできます。
 
 ```typescript
 @Component({
@@ -167,7 +167,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-6. その他の非同期操作。`addEventListener()`/`setTimeout()`/`Promise.then()`に加え、他にも非同期にデータを更新できる操作はあります。いくつかの例には`WebSocket.onmessage()`や`Canvas.toBlob()`を含みます。
+6. その他の非同期操作。`addEventListener()`や`setTimeout()`、`Promise.then()`に加え、他にも非同期にデータを更新できる操作はあります。いくつかの例には`WebSocket.onmessage()`や`Canvas.toBlob()`を含みます。
 
 上記のリストには、アプリケーションがデータを変更する可能性があるもっとも一般的なシナリオが含まれています。Angularは、データが変更された可能性があることを検知するたびに変更検知を実行します。
 変更検知の結果、DOMは新しいデータで更新されます。Angularはさまざまな方法で変更を検知します。コンポーネントの初期化では、Angularは明示的に変更検知を呼び出します。[非同期操作](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)では、AngularはZoneを使用してデータが変更された可能性のある場所の変更を検知し、自動的に変更検知を実行します。
@@ -182,12 +182,8 @@ const callback = function() {
   console.log('setTimeout callback context is', this);
 }
 
-const ctx1 = {
-  name: 'ctx1'
-};
-const ctx2 = {
-  name: 'ctx2'
-};
+const ctx1 = { name: 'ctx1' };
+const ctx2 = { name: 'ctx2' };
 
 const func = function() {
   console.log('caller context is', this);
@@ -198,7 +194,7 @@ func.apply(ctx1);
 func.apply(ctx2);
 ```
 
-`setTimeout`のコールバック内の`this`の値は、`setTimeout`がいつ呼び出されるかによって異なる場合があります。
+`setTimeout()`のコールバック内の`this`の値は、`setTimeout()`がいつ呼び出されるかによって異なる場合があります。
 したがって、非同期操作内のコンテキストを見失ってしまう可能性があります。
 
 Zoneは`this`以外の新しいZoneコンテキストを提供します。そのZoneコンテキストは非同期操作にまたがって持続します。
@@ -227,19 +223,19 @@ Zone.jsは、非同期操作にライフサイクルフックを提供するだ�
 const zone = Zone.current.fork({
   name: 'zone',
   onScheduleTask: function(delegate, curr, target, task) {
-    console.log('new task is scheduled: ', task.type, task.source);
+    console.log('new task is scheduled:', task.type, task.source);
     return delegate.scheduleTask(target, task);
   },
   onInvokeTask: function(delegate, curr, target, task, applyThis, applyArgs) {
-    console.log('task will be invoked', task.type, task.source);
+    console.log('task will be invoked:', task.type, task.source);
     return delegate.invokeTask(target, task, applyThis, applyArgs);
   },
   onHasTask: function(delegate, curr, target, hasTaskState) {
-    console.log('task state changed in the zone', hasTaskState);
+    console.log('task state changed in the zone:', hasTaskState);
     return delegate.hasTask(target, hasTaskState);
   },
   onInvoke: function(delegate, curr, target, callback, applyThis, applyArgs) {
-    console.log('the callback will be invoked', callback);
+    console.log('the callback will be invoked:', callback);
     return delegate.invoke(target, callback, applyThis, applyArgs);
   }
 });
@@ -253,7 +249,7 @@ zone.run(() => {
 上記の例ではいくつかのフックを備えたZoneを作成します。
 
 `onXXXTask`フックは、タスクの状態が変化したときにトリガーされます。
-Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似ています。
+*Zoneタスク* の概念は、JavaScript VMのタスクの概念とよく似ています。
 - `macroTask`: `setTimeout()`など
 - `microTask`: `Promise.then()`など
 - `eventTask`: `element.addEventListener()`など
@@ -262,7 +258,7 @@ Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似て
 
 - `onScheduleTask`: 新しい非同期タスクがスケジュールされたときにトリガーされます。たとえば`setTimeout()`を呼び出したときです。
 - `onInvokeTask`: 非同期タスクが実行されるときにトリガーされます。たとえば`setTimeout()`のコールバックが実行されるときです。
-- `onHasTask`: Zone内の1種類のタスクの状態が、stableからunstable、またはunstableからstableへ変化したときにトリガーされます。stable状態はZone内にタスクがないことを意味し、unstable状態はZone内で新しいタスクがスケジュールされていることを意味します。
+- `onHasTask`: Zone内の1種類のタスクの状態が、"stable"から"unstable"、または"unstable"から"stable"へ変化したときにトリガーされます。"stable"状態はZone内にタスクがないことを意味し、"unstable"状態はZone内で新しいタスクがスケジュールされていることを意味します。
 - `onInvoke`: Zone内で同期関数が実行されるときにトリガーされます。
 
 これらのフックを用いて、`Zone`はZone内のすべての同期および非同期の操作の状態を監視することができます。
@@ -270,25 +266,25 @@ Zoneのタスクの概念は、JavaScript VMのタスクの概念とよく似て
 上記の例では、次のようなアウトプットを返します。
 
 ```
-the callback will be invoked () => {
+the callback will be invoked: () => {
   setTimeout(() => {
     console.log('timeout callback is invoked.');
   });
 }
-new task is scheduled:  macroTask setTimeout
-task state changed in the zone { microTask: false,
+new task is scheduled: macroTask setTimeout
+task state changed in the zone: { microTask: false,
   macroTask: true,
   eventTask: false,
   change: 'macroTask' }
-task will be invoked macroTask setTimeout
+task will be invoked macroTask: setTimeout
 timeout callback is invoked.
-task state changed in the zone { microTask: false,
+task state changed in the zone: { microTask: false,
   macroTask: false,
   eventTask: false,
   change: 'macroTask' }
 ```
 
-Zoneのすべての機能は、[zone.js](https://github.com/angular/angular/tree/master/packages/zone.js/README.md)というライブラリによって提供されています。
+`Zone`のすべての機能は、[Zone.js](https://github.com/angular/angular/tree/master/packages/zone.js/README.md)というライブラリによって提供されています。
 このライブラリは、モンキーパッチを介して非同期APIをインターセプトすることにより、それらの特徴を実装しています。
 モンキーパッチは、ソースコードを変更せずに、実行時に機能のデフォルトの動作を追加または変更するテクニックです。
 
@@ -300,14 +296,14 @@ Zone.jsは同期および非同期操作のすべての状態を監視できま�
 1. 同期および非同期関数が実行されたとき
 1. スケジュールされた`microTask`がないとき
 
-### NgZone `run()`/`runOutsideOfAngular()`
+### NgZone `run()` と `runOutsideOfAngular()`
 
 `Zone`は`setTimeout()`, `Promise.then()`, `addEventListener()`など、ほとんどの非同期APIを処理します。
 すべての一覧は、[Zone Module document](https://github.com/angular/angular/blob/master/packages/zone.js/MODULE.md)を参照してください。
 このため、これらの非同期APIについては、手動で変更検知をトリガーする必要はありません。
 
 Zoneが処理しないサードパーティのAPIもまだあります。
-これらのケースでは、NgZoneサービスは[`run()`](api/core/NgZone#run)メソッドを提供し、angular Zoneの中で関数を実行できるようにします。
+これらのケースでは、`NgZone`サービスは[`run()`](api/core/NgZone#run)メソッドを提供し、angular Zoneの中で関数を実行できるようにします。
 この関数および関数内で実行されるすべての非同期操作は、適切なタイミングで自動的に変更検知をトリガーします。
 
 ```typescript
@@ -328,7 +324,7 @@ export class AppComponent implements OnInit {
 
 デフォルトでは、すべての非同期操作はangular Zoneの中にあり、自動的に変更検知をトリガーします。
 もうひとつの一般的なケースは、変更検知をトリガーしたくない場合です。
-その状況では、NgZoneのもうひとつのメソッド、[runOutsideAngular()](api/core/NgZone#runoutsideangular)を使用できます。
+その状況では、`NgZone`のもうひとつのメソッド、[`runOutsideAngular()`](api/core/NgZone#runoutsideangular)を使用できます。
 
 ```typescript
 export class AppComponent implements OnInit {
@@ -349,7 +345,7 @@ export class AppComponent implements OnInit {
 
 ### Zone.jsのセットアップ
 
-Zone.jsをAngularで利用できるようにするには、zone.jsパッケージをインポートする必要があります。
+Zone.jsをAngularで利用できるようにするには、`zone.js`パッケージをインポートする必要があります。
 Angular CLIを使用している場合はこのステップは自動で行われ、`src/polyfills.ts`に次の行が表示されます。
 
 ```typescript
@@ -370,11 +366,14 @@ import 'zone.js/dist/zone';  // Angular CLIに含まれます
 これらの変更を行うには、次のような`zone-flags.ts`ファイルを作成する必要があります。
 
 ```typescript
- (window as any).__Zone_disable_requestAnimationFrame = true; // requestAnimationFrameのパッチを無効化する
- (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // 指定したeventNamesのパッチを無効化する
+ // requestAnimationFrameのパッチを無効化する
+ (window as any).__Zone_disable_requestAnimationFrame = true;
+
+ // 指定したeventNamesのパッチを無効化する
+ (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove'];
 ```
 
-次に、`polyfills.ts`で`zone`をインポートする前に`zone-flags`をインポートします。
+次に、`polyfills.ts`で`zone.js`をインポートする前に`zone-flags`をインポートします。
 
 ```typescript
 /***************************************************************************************************
@@ -384,7 +383,7 @@ import `./zone-flags`;
 import 'zone.js/dist/zone';  // Angular CLIに含まれます
 ```
 
-設定できるものの詳細については、[zone.js](https://github.com/angular/angular/tree/master/packages/zone.js)ドキュメントを参照してください。
+設定できるものの詳細については、[Zwone.js](https://github.com/angular/angular/tree/master/packages/zone.js)ドキュメントを参照してください。
 
 ### NoopZone
 
@@ -399,7 +398,7 @@ import 'zone.js/dist/zone';  // Angular CLIに含まれます
 
 </div>
 
-`zone.js`を削除するには、次のように変更します。
+Zone.jsを削除するには、次のように変更します。
 
 1. `polyfills.ts`から`zone.js`のインポートを削除します。
 
@@ -410,9 +409,9 @@ import 'zone.js/dist/zone';  // Angular CLIに含まれます
   // import 'zone.js/dist/zone';  // Angular CLIに含まれます
   ```
 
-2. `src/main.ts`で`noop zone`を使用してAngularをブートストラップします。
+2. `src/main.ts`で`noop` zoneを使用してAngularをブートストラップします。
 
   ```typescript
-  platformBrowserDynamic().bootstrapModule(AppModule, {ngZone: 'noop'})
+  platformBrowserDynamic().bootstrapModule(AppModule, { ngZone: 'noop' })
     .catch(err => console.error(err));
   ```

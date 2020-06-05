@@ -1,36 +1,54 @@
 # リアクティブフォーム
 
-*リアクティブフォーム* は、時間とともに入力値が変わるフォームを扱うためのモデル駆動なアプローチを提供します。このガイドでは、シンプルなフォームコントロールの作成と更新から、グループ内の複数コントロールの使用、フォームのバリデーション、高度なフォームの実装の方法を説明します。
+リアクティブフォームは、時間とともに値が変化するフォーム入力を処理するためのモデル駆動型アプローチを提供します。このガイドでは、基本的なフォームコントロールを作成および更新する方法、グループ内で複数のコントロールを使用する方法、フォームの値を検証する方法、実行時にコントロールを追加または削除できる動的フォームを作成する方法について説明します。
 
+<div class="alert is-helpful">
 
+Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-example</live-example>.
 
-{@a toc}
+</div>
 
-<live-example header="Reactive Forms in Stackblitz">リアクティブフォームのライブサンプル</live-example>をお試しください。
+**Prerequisites**
+
+Before going further into reactive forms, you should have a basic understanding of the following:
+
+* TypeScript programming.
+* Angular app-design fundamentals, as described in [Angular Concepts](guide/architecture "Introduction to Angular concepts.").
+* The form-design concepts that are presented in [Introduction to Forms](guide/forms-overview "Overview of Angular forms.").
 
 {@a intro}
 
-## リアクティブフォームの紹介
+## リアクティブフォームの概要
 
-リアクティブフォームは明示的でイミュータブルなアプローチを用い、特定の時点におけるフォームの状態を管理します。フォームの状態への変更の度に、変更間でのモデルの整合性を維持する新しい状態を返します。リアクティブフォームはObservableストリームを中心に構築されており、フォーム入力や値は入力値のストリームとして提供され、同期的にアクセスができます。
+リアクティブフォームは明示的でイミュータブルなアプローチを用い、特定の時点におけるフォームの状態を管理します。フォームの状態への変更の度に、変更間でのモデルの整合性を維持する新しい状態を返します。リアクティブフォームは[Observable](guide/glossary#observable "Observable definition.")ストリームを中心に構築されており、フォーム入力や値は入力値のストリームとして提供され、同期的にアクセスができます。
 
 またリアクティブフォームでは、リクエストのデータには一貫性があり予測性が保証されているので、テストが簡単に行えます。すべてのストリームの利用者は、データに安全にアクセスし操作することができます。
 
-リアクティブフォームはテンプレート駆動フォームとは明確に異なる点があります。リアクティブフォームは、データモデルへの同期アクセス、Observableオペレーターによる不変性、Observableストリームを通した変更監視により、多くの予測性を提供します。もしテンプレートのデータに直接アクセスして変更する場合、テンプレート駆動フォームはテンプレート内に埋め込まれたディレクティブに依存し、可変データを非同期に変更追跡するためあまり明示的ではありません。ふたつのパラダイムの詳細な比較については、[フォーム概要](guide/forms-overview)を参照してください。
+Reactive forms differ from [template-driven forms](guide/forms "Template-driven forms guide") in distinct ways. Reactive forms provide more predictability with synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
 
-## はじめる
+Template-driven forms allow direct access to modify data in your template, but are less explicit than reactive forms because they rely on directives embedded in the template, along with mutable data to track changes asynchronously. See the [Forms Overview](guide/forms-overview "Overview of Angular forms.") for detailed comparisons between the two paradigms.
 
-このセクションでは、単一のフォームコントロールを追加する手順を説明します。この例では、ユーザーが入力欄に名前を入力し、その入力値を取り込み、フォームコントロール要素の現在の値を表示します。
+## Adding a basic form control
 
-### ステップ 1: リアクティブフォームモジュールの登録
+There are three steps to using form controls.
 
-リアクティブフォームを使うには、 `ReactiveFormsModule` を `@angular/forms` パッケージからインポートし、 NgModuleの `imports` 配列に追加します。
+1. Register the reactive forms module in your app. This module declares the reactive-form directives that you need to use reactive forms.
+2. Generate a new `FormControl` instance and save it in the component.
+3. Register the `FormControl` in the template.
+
+You can then display the form by adding the component to the template.
+
+The following examples show how to add a single form control. In the example, the user enters their name into an input field, captures that input value, and displays the current value of the form control element.
+
+**Register the reactive forms module**
+
+To use reactive form controls, import `ReactiveFormsModule` from the `@angular/forms` package and add it to your NgModule's `imports` array.
 
 <code-example path="reactive-forms/src/app/app.module.ts" region="imports" header="src/app/app.module.ts (excerpt)"></code-example>
 
-### ステップ 2: 新しいフォームコントロールの作成とインポート
+**Generate a new `FormControl`**
 
-コントロールのコンポーネントを生成します。
+Use the [CLI command](cli "Using the Angular command-line interface.") `ng generate` to generate a component in your project to host the control.
 
 <code-example language="sh" class="code-shell">
 
@@ -38,13 +56,13 @@
 
 </code-example>
 
-`FormControl`クラスはリアクティブフォームを使う上でもっとも基本的な構成要素です。単一のフォームコントロールを登録するには、`FormControl`クラスをコンポーネントにインポートし、クラスプロパティとして保存するフォームコントロールの新しいインスタンスを作成します。
+To register a single form control, import the `FormControl` class and create a new instance of `FormControl` to save as a class property.
 
 <code-example path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="create-control" header="src/app/name-editor/name-editor.component.ts"></code-example>
 
 `FormControl`のコンストラクターを使い、初期値を設定します。この場合は空文字を設定しています。このコントロールをコンポーネントクラスに作ることで、フォーム入力の状態の監視、更新、バリデーションを行うことができます。
 
-### ステップ 3: テンプレートへのコントロールの登録
+**Register the control in the template**
 
 コンポーネントクラスにコントロールを作成した後は、テンプレート内のフォームコントロール要素へ紐付ける必要があります。 `ReactiveFormsModule`内の`FormControlDirective`が提供する`formControl`バインディングを使い、フォームコントロールとともにテンプレートを更新します。
 
@@ -52,13 +70,15 @@
 
 <div class="alert is-helpful">
 
-**注:** `ReactiveFormsModule`が提供するクラスやディレクティブの詳細は、[Reactive forms API](#reactive-forms-api)を参照してください。
+* `ReactiveFormsModule`が提供するクラスやディレクティブの概要は、[Reactive forms API](#reactive-forms-api "API summary.")を参照してください。
+
+* For complete syntax details of these classes and directives, see the API reference documentation for the [Forms package](api/forms "API reference.").
 
 </div>
 
 テンプレートバインディング構文を使うことで、フォームコントロールはテンプレート内の`name`入力要素に登録されました。フォームコントロールとDOM要素は相互に作用します。画面にモデルの変更を反映し、画面での変更をモデルに反映します。
 
-#### コンポーネントの表示
+**Display the component**
 
 `name`が割り当てられたフォームコントロールは、コンポーネントがテンプレートに追加すると表示されます。
 
@@ -68,11 +88,6 @@
   <img src="generated/images/guide/reactive-forms/name-editor-1.png" alt="Name Editor">
 </div>
 
-## コントロール値の管理
-
-リアクティブフォームでは、その時点での状態と値へアクセスすることができます。コンポーネントクラスまたはテンプレートを通して現在の状態と値を操作することができます。
-次の例では、フォームコントロールのインスタンスの値の表示と変更を行います。
-
 {@a display-value}
 
 ### フォームコントロール値の表示
@@ -80,6 +95,7 @@
 次の手順で値の表示を行います:
 
 * テンプレートの`AsyncPipe`またはコンポーネントクラスの`subscribe()`メソッドを使い、`valueChanges`を介してフォームの値の変更を監視することができます。
+
 * `value`プロパティから現在の値のスナップショットを表示します。
 
 次の例では、テンプレートの補間を使ってどのように現在の値を表示するのかを示します。
@@ -88,9 +104,10 @@
 
 フォームコントロール要素を更新することで、表示されている値が変更されます。
 
-リアクティブフォームでは、各インスタンスが提供するプロパティやメソッドからコントロールへの詳細情報にアクセスすることができます。基底となっている[AbstractControl](api/forms/AbstractControl)クラスのプロパティやメソッドは、フォームの状態を制御し、バリデーションのメッセージを表示するタイミングを決めるのに使われています。さらに詳しい情報は、後述の[Simple form validation](#simple-form-validation)を参照してください。
+リアクティブフォームでは、各インスタンスが提供するプロパティやメソッドからコントロールへの詳細情報にアクセスすることができます。
+基底となっている[AbstractControl](api/forms/AbstractControl "API reference.")クラスのプロパティやメソッドは、フォームの状態を制御し、バリデーションのメッセージを表示するタイミングを決めるのに使われています。さらに詳しい情報は、後述の[Simple form validation](#basic-form-validation "Learn more about validating form input.")を参照してください。
 
-`FormControl`の他のプロパティやメソッドについては、[Reactive forms API](#reactive-forms-api)の項目をご覧ください。
+`FormControl`の他のプロパティやメソッドについては、[APIリファレンス](api/forms/FormControl "Detailed syntax reference.")の項目をご覧ください。
 
 ### コントロール値の置き換え
 
@@ -114,11 +131,16 @@
 
 <div class="alert is-helpful">
 
-**注:** この例では、単一のコントロールを扱っています。 `setValue()`メソッドをフォームグループやフォーム配列のインスタンスに使用した場合には、値はグループか配列の構造に合わせる必要があります。
+**注:** この例では、単一のコントロールを扱っています。 `setValue()`メソッドを[フォームグループ](#grouping-form-controls "Learn more about form groups.")や[フォーム配列](#creating-dynamic-forms "Learn more about dynamic forms.")のインスタンスに使用した場合には、値はグループか配列の構造に合わせる必要があります。
 
 </div>
 
-## フォームコントロールのグループ化
+## フォームコントロールのグループ化 {@a grouping-form-controls}
+
+Forms typically contain several related controls. Reactive forms provide two ways of grouping multiple related controls into a single input form.
+
+* A form *group* defines a form with a fixed set of controls that you can manage together. Form group basics are discussed in this section. You can also [nest form groups](#nested-groups "See more about nesting groups.") to create more complex forms.
+* A form *array* defines a dynamic form, where you can add and remove controls at run time. You can also nest form arrays to create more complex forms. For more about this option, see [Creating dynamic forms](#dynamic-forms "See more about form arrays.") below.
 
 フォームコントロールのインスタンスが単一の入力欄を制御したように、フォームグループのインスタンスはフォームコントロールのインスタンスのグループ（たとえばフォームなど）の状態を管理します。フォームグループインスタンス内の個々のコントロールは、フォームグループを作る時に名前で管理されます。次の例では、どのように複数のフォームコントロールインスタンスをひとつのグループで管理するのかを示します。
 
@@ -134,7 +156,13 @@
 
 </code-example>
 
-### ステップ 1: FormGroupインスタンスを作成する
+To add a form group to this component, take the following steps.
+
+1. Create a `FormGroup` instance.
+2. Associate the `FormGroup` model and view.
+3. Save the form data.
+
+**Create a FormGroup instance**
 
 コンポーネントクラス内に`profileForm`という名前でプロパティを作成し、新しいフォームグループのインスタンスを設定します。フォームグループを初期化するには、名前付けされたキーとコントロールがマップされたオブジェクトをコンストラクターに渡します。
 
@@ -146,7 +174,7 @@
 
 各コントロールはグループ内にいます。`FormGroup`インスタンスは、グループ内のコントロールの値をまとめたオブジェクトを、自身のモデルの値として提供します。フォームグループのインスタンスはフォームコントロールと同じプロパティ（`value` や `untouched`）、同じメソッド（`setValue()`など）を持っています。
 
-### ステップ 2: FormGroupモデルとビューの紐付け
+**FormGroupモデルとビューの紐付け**
 
 フォームグループは個々のコントロールの状態と変更を監視しているので、ひとつのコントロールに変更があれば、親のコントロールも新しい状態や値変更を発行します。グループのモデルはメンバーによって維持されています。モデルを定義した後、モデルをビューに反映させるようにテンプレートを更新する必要があります。
 
@@ -154,7 +182,7 @@
 
 フォームグループがコントロールのグループをもつように、*profile form* の`FormGroup`は`form`要素の`FormGroup`ディレクティブとバインドされ、モデルとフォームがもつinputとの間に通信レイヤーが作られることに注意してください。 `FormControlName`ディレクティブが提供する`formControlName`は、各inputと `FormGroup`内に定義されたフォームコントロールをバインドします。フォームコントロールは個々の紐付けられた要素と通信します。また、フォームグループのインスタンスへの変更のやりとりも行います。
 
-### フォームデータの保存
+**フォームデータの保存**
 
 `ProfileEditor`コンポーネントはユーザーから入力を受けますが、実際のシナリオでは、フォーム値を受け取りコンポーネントの外で利用したいことがあります。`FormGroup`ディレクティブは、`form`要素が発行した`submit`イベントを監視し、コールバック関数にバインドできる`ngSubmit`イベントを発行します。
 
@@ -176,11 +204,11 @@
 
 <div class="alert is-helpful">
 
-**注:** 上のスニペット内のボタンは、`profileForm`が無効なときにボタンを非活性にする`disabled`バインディングが付与されています。まだバリデーションを行っていないので、ボタンは常に活性になっています。単一フォームのバリデーションは、[シンプルフォームバリデーション](#simple-form-validation)のセクションを参照してください。
+**注:** 上のスニペット内のボタンは、`profileForm`が無効なときにボタンを非活性にする`disabled`バインディングが付与されています。まだバリデーションを行っていないので、ボタンは常に活性になっています。単一フォームのバリデーションは、[Validating form input](#basic-form-validation "Basic form validation.")のセクションを参照してください。
 
 </div>
 
-#### コンポーネントの表示
+**コンポーネントの表示**
 
 フォームを含む`ProfileEditor`コンポーネントを表示するために、コンポーネントテンプレートへ追加します。
 
@@ -191,19 +219,31 @@
 <div class="lightbox">
   <img src="generated/images/guide/reactive-forms/profile-editor-1.png" alt="Profile Editor">
 </div>
-## ネストしたフォームグループの作成
 
-複雑なフォームを作る場合、異なる分類の情報は小さいセクションに分けた方が簡単であり、いくつかの情報のグループは自然と同じグループにまとまります。ネストしたフォームグループを使うことで、巨大なフォームを小さく管理しやすく分割できます。
+{@a nested-groups}
 
-### ステップ 1: ネストしたグループを作成する
+### ネストしたフォームグループの作成
 
-住所はグループ化する情報として適した例です。フォームグループは、フォームコントロールとフォームグループの両方のインスタンスを子としてもつことができます。これにより複雑なフォームモデルを構築しやすく、論理的なグループにできます。`profileForm`にネストしたグループを作るには、フォームグループインスタンスにネストした`address`要素を追加します。
+Form groups can accept both individual form control instances and other form group instances as children. This makes composing complex form models easier to maintain and logically group together.
+
+When building complex forms, managing the different areas of information is easier in smaller sections. Using a nested form group instance allows you to break large forms groups into smaller, more manageable ones.
+
+To make more complex forms, use the following steps.
+
+1. Create a nested group.
+2. Group the nested form in the template.
+
+Some types of information naturally fall into the same group. A name and address are typical examples of such nested groups, and are used in the following examples.
+
+**Create a nested group**
+
+To create a nested group in `profileForm`, add a nested `address` element to the form group instance.
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="nested-formgroup" header="src/app/profile-editor/profile-editor.component.ts (nested form group)"></code-example>
 
 この例では、`address group`は、既存の`firstName`と`lastName`のコントロールを、新しく`street`、`city`、 `state`、`zip`のコントロールと組み合わせます。フォームグループ内の`address`要素はフォームグループ内の`profileForm` 要素の子であっても、値や状態変更に同じルールが適用されます。ネストしたグループからの状態や値の変更は親のフォームグループに伝播し、モデル全体の一貫性を維持します。
 
-### ステップ 2: テンプレート内のネストしたフォームのグループ化
+**テンプレート内のネストしたフォームのグループ化**
 
 コンポーネントクラス内のモデルを更新した後、フォームグループインスタンスと入力要素をつなげるためにテンプレートを更新します。
 
@@ -223,11 +263,9 @@
 
 </div>
 
-## モデルの部分更新
+### Updating parts of the data model
 
 複数のコントロールを含んだフォームグループインスタンスの値を更新する時、モデルの一部分のみを更新することができます。このセクションでは、フォームコントロールのデータモデルの特定部分を更新する方法を説明します。
-
-### モデル値のパッチ
 
 モデルの更新にはふたつの方法があります。
 
@@ -253,9 +291,15 @@
 
 フォームコントロールインスタンスを手動で作成するのは、複数のフォームを扱う時は反復的になることがあります。`FormBuilder`サービスはコントロールを作成するのに便利なメソッドを提供します。
 
-次のセクションでは、 フォームビルダーサービスを使ってフォームコントロールとフォームグループのインスタンスを作るように`ProfileEditor`コンポーネントをリファクタします。
+Use the following steps to take advantage of this service.
 
-### ステップ 1: FormBuilderクラスのインポート
+1. Import the `FormBuilder` class.
+2. Inject the `FormBuilder` service.
+3. Generate the form contents.
+
+The following examples show how to refactor the `ProfileEditor` component to use the form builder service to create form control and form group instances.
+
+**Import the FormBuilder class**
 
 `@angular/forms`パッケージから`FormBuilder`クラスをインポートします。
 
@@ -263,7 +307,7 @@
 
 </code-example>
 
-### ステップ 2: FormBuilderサービスの注入
+**FormBuilderサービスの注入**
 
 `FormBuilder`サービスは、リアクティブフォームモジュールが提供する注入できるプロバイダーです。コンポーネントのコンスタラクターに追加することで依存性を注入します。
 
@@ -271,7 +315,7 @@
 
 </code-example>
 
-### スタップ 3: フォームコントロールの作成
+**フォームコントロールの作成**
 
 `FormBuilder`は三つのメソッドを提供します: `control()`、`group()`、 `array()`。
 これらは、フォームコントロール、フォームグループ、フォーム配列を含むコンポーネントクラスにインスタンスを作成するファクトリメソッドです。
@@ -304,13 +348,21 @@
 
 </code-tabs>
 
-{@a simple-form-validation}
+{@a basic-form-validation}
 
-## シンプルフォームバリデーション
+## Validating form input
 
-_フォームバリデーション_ は、ユーザー入力を検証し、入力が完了して正しいことを確認するために使います。このセクションでは、フォームコントロールにシングルバリデーターを追加し、フォーム全体の状態を表示を行います。[Form Validation](guide/form-validation)ガイドにて、より詳細なフォームバリデーションについて説明されています。
+_Form validation_ is used to ensure that user input is complete and correct. This section covers adding a single validator to a form control and displaying the overall form status. Form validation is covered more extensively in the [Form Validation](guide/form-validation "All about form validation.") guide.
 
-### ステップ 1: バリデーター関数のインポート
+Use the following steps to add form validation.
+
+1. Import a validator function in your form component.
+2. Add the validator to the field in the form.
+3. Add logic to handle the validation status.
+
+The most common validation is making a field required. The following example shows how to add a required validation to the `firstName` control and display the result of validation.
+
+**バリデーター関数のインポート**
 
 リアクティブフォームは、一般的な用途に使えるバリデーター関数のセットを含んでいます。これらの関数は、コントロールを受けてバリデーションを行い、バリデーション結果に応じてエラーオブジェクトかnullを返します。
 
@@ -320,9 +372,7 @@ _フォームバリデーション_ は、ユーザー入力を検証し、入�
 
 </code-example>
 
-### Step 2: 必須フィールドを作成する
-
-もっとも一般的なバリデーションは必須フィールドです。このセクションでは、必須バリデーションを`firstName`コントロールへ追加する方法について説明します。
+**必須フィールドを作成する**
 
 `ProfileEditor`コンポーネント内で、静的な`Validators.required`メソッドを`firstName`コントロールの配列の2つ目の項目に追加します。
 
@@ -340,7 +390,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 </div>
 
-### フォームのステータスを表示する
+**フォームのステータスを表示する**
 
 必須フィールドをフォームコントロールに追加すると、初期ステータスはinvalidになります。invalidステータスは親のフォームグループ要素に伝播し、ステータスがinvalidになります。現在のフォームグループインスタンスのステータスは、`status`プロパティからアクセスします。
 
@@ -354,13 +404,24 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 `profileForm`が`firstName`フォームコントロールの必須によってinvalidになっているため、**Submit** ボタンは非活性になっています。`firstName`を入力すると、フォームはvalidになり　**Submit** ボタンは活性になります。
 
-フォームバリデーションについて詳細は、[フォームバリデーション](guide/form-validation)ガイドを参照してください。
+フォームバリデーションについて詳細は、[フォームバリデーション](guide/form-validation "All about form validation.")ガイドを参照してください。
 
-## 配列を使った動的コントロール
+{@a dynamic-forms}
 
-`FormArray`は`FormGroup`で複数の名前のないコントロールを管理するときの代替手段です。フォームグループインスタンスのように、フォーム配列インスタンスへのコントロールを動的に挿入や削除ができ、フォーム配列インスタンスの値とバリデーション状態は子のコントロールから計算されます。しかし、個々のコントロールにキーの名前を定義する必要はなく、事前に子の数がわからない時に最適です。次の例は、`ProfileEditor`内の *aliases* 配列の管理する方法を説明します。
+## Creating dynamic forms
 
-### Step 1: フォーム配列クラスのインポート
+`FormArray` is an alternative to `FormGroup` for managing any number of unnamed controls. As with form group instances, you can dynamically insert and remove controls from form array instances, and the form array instance value and validation status is calculated from its child controls. However, you don't need to define a key for each control by name, so this is a great option if you don't know the number of child values in advance.
+
+To define a dynamic form, take the following steps.
+
+1. Import the `FormArray` class.
+2. Define a `FormArray` control.
+3. Access the `FormArray` control with a getter method.
+4. Display the form array in a template.
+
+The following example shows you how to manage an array of *aliases* in `ProfileEditor`.
+
+**フォーム配列クラスのインポート**
 
 `@angular/forms`から`FormArray`クラスをインポートして、型情報として使用します。`FormBuilder`から`FormArray`インスタンスを作成することもできます。
 
@@ -368,7 +429,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 </code-example>
 
-### Step 2: フォーム配列コントロールを定義する
+**フォーム配列コントロールを定義する**
 
 フォーム配列は、0から多数の任意の数のコントロールを配列内で定義して初期化することができます。フォーム配列を定義するために、`aliases`プロパティを`profileForm`に追加します。
 
@@ -380,7 +441,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 フォームグループインスタンス内のエイリアスコントロールは、動的に追加されるまでは単一のコントロールが設定されています。
 
-### Step 3: フォーム配列コントロールへのアクセス
+**フォーム配列コントロールへのアクセス**
 
 `profileForm.get()`メソッドで繰り返し各インスタンスから取得するより、ゲッターを使う方がフォーム配列インスタンス内のエイリアスに簡単にアクセスすることができます。フォーム配列インスタンスは配列内に不特定多数のコントロールを持っています。コントロールにアクセスするにはゲッターが便利です。このアプローチは追加のコントロールについて繰り返すのも簡単です。
 
@@ -396,7 +457,8 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 </div>
 
-動的にエイリアスコントロールをエイリアスのフォーム配列へ追加するメソッドを定義します。`FormArray.push()`メソッドは、配列へコントロールを新しいアイテムとして挿入します。
+動的にエイリアスコントロールをエイリアスのフォーム配列へ追加するメソッドを定義します。
+`FormArray.push()`メソッドは、配列へコントロールを新しいアイテムとして挿入します。
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="add-alias" header="src/app/profile-editor/profile-editor.component.ts (エイリアスの追加)">
 
@@ -404,7 +466,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 テンプレートでは、各コントロールは別々の入力フィールドとして表示されます。
 
-### Step 4: テンプレートにフォーム配列を表示する
+**テンプレートにフォーム配列を表示する**
 
 フォームモデルからエイリアスを付与するには、テンプレートに追加する必要があります。`FormGroupNameDirective`が提供する`formGroupName`のように、`FormArrayNameDirective`の`formArrayName`でフォーム配列インスタンスとテンプレートへの通信をバインドします。
 
@@ -420,7 +482,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 新しいエイリアスインスタンスが追加される度に、新しいフォーム配列インスタンスがインデックスに応じて制御されます。これにより、ルートコントロールの状態や値を計算する時に、個々のコントロールを追跡することができます。
 
-#### エイリアスを追加する
+**エイリアスを追加する**
 
 最初は、フォームにはひとつの`Alias`フィールドのみです。別フィールドを追加するには **Add Alias** ボタンをクリックします。テンプレートの下の`Form Value`に表示されているフォームモデルにあるエイリアス配列のバリデーションもできます。
 
@@ -430,15 +492,13 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 
 </div>
 
-{@a appendix}
-
-## 付録
 
 {@a reactive-forms-api}
 
-### リアクティブフォーム API
+### リアクティブフォーム APIの概要
 
-以下が、フォームコントロールの作成と管理に使用する基本クラスとサービスです。
+The following table lists the base classes and services used to create and manage reactive form controls.
+For complete syntax details, see the API reference documentation for the [Forms package](api/forms "API reference.").
 
 #### クラス
 

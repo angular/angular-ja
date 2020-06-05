@@ -1455,7 +1455,7 @@ Angular は、基本的な HTML のフォーム要素すべてについて *値�
 
 適切な値アクセサを作らない限り、
 `[(ngModel)]` をフォーム以外のネイティブ要素またはサードパーティのカスタムコンポーネントに適用することはできません。
-詳しくは [DefaultValueAccessor](https://angular.io/api/forms/DefaultValueAccessor) の API ドキュメントを参照してください。
+詳しくは [DefaultValueAccessor](api/forms/DefaultValueAccessor) の API ドキュメントを参照してください。
 
 自作した Angular コンポーネントについては、
 Angular の基本的な[双方向バインディングの構文](guide/template-syntax#two-way)に

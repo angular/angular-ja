@@ -1,13 +1,11 @@
-# Angular入門: デプロイ
+# 試してみよう: デプロイ
 
 
 アプリケーションをデプロイするには、それをコンパイルしてから、JavaScript、CSS、およびHTMLをWebサーバー上でホストする必要があります。 ビルドされたAngularアプリケーションは非常に移植性が高く、あらゆる環境で動作したり、Node、Java、.NET、PHP、その他多くのテクノロジーによって提供されます。
 
 <div class="alert is-helpful">
 
-
-あなたが [はじめてのアプリ](start "Getting Started: Your First App") から直接来たのか、 [ルーティング](start/start-routing "Getting Started: Routing") 、 [データ管理](start/start-data "Getting Started: Managing Data") 、そして [フォーム](start/start-forms "Getting Started: Forms") セクションを通してオンラインストアアプリケーション全体を完成させたのかにかかわらず、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションを持っています。
-
+[パート1](start "Try it: A basic app")から直接ここに来ても、[アプリ内ナビゲーション](start/start-routing "Try it: In-app navigation")、[データの管理](start/start-data "Try it: Manage data")、および[ユーザー入力用のフォーム](start/start-forms "Try it: Forms for user input")セクションを通してオンラインストアアプリケーションを完成させても、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションをもっています。
 
 </div>
 
@@ -90,6 +88,6 @@ Angularはさらに多くの機能を提供します。 そして、あなたは
 * Angularは、モバイルアプリ、アニメーション、国際化、サーバーサイドレンダリングなどの高度な機能を提供します。
 * [Angular Material](https://material.angular.io/ "Angular Material web site") は、Material Designコンポーネントの広範なライブラリを提供しています。
 * [Angular Protractor](https://protractor.angular.io/ "Angular Protractor web site") はAngularアプリのエンドツーエンドのテストフレームワークを提供します。
-* Angularには、広範な[サードパーティ製のツールやライブラリのネットワーク](https://angular.io/resources "Angular resources list") もあります。
+* Angularには、広範な[サードパーティ製のツールやライブラリのネットワーク](resources "Angular resources list") もあります。
 
 [Angularのブログ](https://blog.angular.io/ "Angular blog") をフォローして最新の情報を入手してください。

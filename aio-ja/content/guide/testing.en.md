@@ -1103,18 +1103,6 @@ explains when and why you must get the service from the component's injector ins
 
 </div>
 
-{@a service-from-injector}
-
-#### Always get the service from an injector
-
-Do _not_ reference the `userServiceStub` object
-that's provided to the testing module in the body of your test.
-**It does not work!**
-The `userService` instance injected into the component is a completely _different_ object,
-a clone of the provided `userServiceStub`.
-
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="stub-not-injected" header="app/welcome/welcome.component.spec.ts"></code-example>
-
 {@a welcome-spec-setup}
 
 #### Final setup and tests
@@ -1242,7 +1230,7 @@ The following test confirms the expected behavior when the service returns an `E
 Note that the `it()` function receives an argument of the following form.
 
 ```javascript
-fakeAsync(() => { /* test body */ })`
+fakeAsync(() => { /* test body */ })
 ```
 
 The `fakeAsync()` function enables a linear coding style by running the test body in a special `fakeAsync test zone`.
@@ -1289,7 +1277,7 @@ In this example, we have a new macro task (nested setTimeout), by default, when 
   region="fake-async-test-tick-new-macro-task-async">
 </code-example>
 
-And in some case, we don't want to trigger the new macro task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new maco task.
+And in some case, we don't want to trigger the new macro task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new macro task.
 
 #### Comparing dates inside fakeAsync()
 
@@ -1970,7 +1958,7 @@ for the `id` to change during its lifetime.
 
 <div class="alert is-helpful">
 
-The [Router](guide/router#route-parameters) guide covers `ActivatedRoute.paramMap` in more detail.
+The [ActivatedRoute in action](guide/router#activated-route-in-action) section of the [Router](guide/router) guide covers `ActivatedRoute.paramMap` in more detail.
 
 </div>
 
@@ -3159,7 +3147,7 @@ Here are the most important static methods, in order of likely utility.
 
     </td>
   </tr>
-</table
+</table>
 
 A few of the `TestBed` instance methods are not covered by static `TestBed` _class_ methods.
 These are rarely needed.

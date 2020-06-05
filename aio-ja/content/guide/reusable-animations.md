@@ -9,11 +9,11 @@
 
 <hr>
 
-Angularアニメーションの[AnimationOptions](https://angular.io/api/animations/AnimationOptions)インターフェースを使用すると、異なるコンポーネント間で再利用できるアニメーションを作成できます。
+Angularアニメーションの[AnimationOptions](api/animations/AnimationOptions)インターフェースを使用すると、異なるコンポーネント間で再利用できるアニメーションを作成できます。
 
 ## 再利用可能なアニメーションの作成
 
-再利用可能なアニメーションを作成するには、[`animation()`](https://angular.io/api/animations/animation)メソッドを使用してアニメーションを別の`.ts`ファイルに定義し、このアニメーション定義を`const`のexport変数として宣言します。 このアニメーションは、[`useAnimation()`](https://angular.io/api/animations/useAnimation)APIを使用して任意のコンポーネントでimportすると再利用できます。
+再利用可能なアニメーションを作成するには、[`animation()`](api/animations/animation)メソッドを使用してアニメーションを別の`.ts`ファイルに定義し、このアニメーション定義を`const`のexport変数として宣言します。 このアニメーションは、[`useAnimation()`](api/animations/useAnimation)APIを使用して任意のコンポーネントでimportすると再利用できます。
 
 <code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="reusable" language="typescript"></code-example>
 

@@ -1,13 +1,12 @@
-# Angular入門： はじめてのアプリ
+# パート1：基本的なAngularアプリをはじめる
 
 Angularへようこそ！
 
 このチュートリアルでは、カタログ、ショッピングカート、チェックアウトフォームを備えたシンプルなeコマースサイトを順を追って説明し、Angularの要点を紹介します。
-すぐに始められるように、このガイドでは、インタラクティブに調べて操作できる既製のシンプルなアプリケーションを使用します。
+すぐに始められるように、このガイドでは（[ローカル環境のセットアップ](guide/setup-local "Setup guide")の必要なく）インタラクティブに調べて変更できる既製のシンプルなアプリケーションを使用します。
 
 <div class="callout is-helpful">
 <header>Web開発は初めてですか？</header>
-
 
 Angularのドキュメントを補完するための多くのリソースがあります。 MozillaのMDNドキュメントには[HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML "Learning HTML: Guides and tutorials")と[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")の両方の紹介が含まれています。 [TypeScriptのドキュメント](https://www.typescriptlang.org/docs/home.html "TypeScript documentation")には5分間のチュートリアルが含まれています。 [Udemy](http://www.udemy.com "Udemy online courses")や[Codecademy](https://www.codecademy.com/ "Codecademy online courses")などのさまざまなオンラインコースプラットフォームもWeb開発の基本をカバーしています。
 
@@ -15,7 +14,7 @@ Angularのドキュメントを補完するための多くのリソースがあ�
 
 
 {@a new-project}
-## 新しいプロジェクトを作成する
+## サンプルプロジェクトを作成する
 
 <h4>
 <live-example name="getting-started-v0" noDownload>StackBlitzで既製のサンプルプロジェクトを作成するためこちらをクリックしてください。</live-example> 
@@ -58,11 +57,11 @@ StackBlitzサンプルアプリの `src`フォルダーにあります。
 
 </div>
 
-<div class="alert is-helpful">
+<div class="alert is-important">
 
 [StackBlitzオンライン開発環境](https://stackblitz.com/)に直接移動し、[新しいAngularワークスペースを開始する](https://stackblitz.com/fork/angular)を選択すると、一般的なこの[例のサンプル](#new-project)ではなく汎用的なスタブアプリケーションが作られます。ここで基本的な概念に入門したあとは、Angularを学習しながらインタラクティブに作業するのに役立ちます。
 
-実際の開発では、通常、[Angular CLI](guide/glossary#command-line-interface-cli) を使用します。これは、アプリケーションを生成および変更できる強力なコマンドラインツールです。詳細については、[CLI Overview](cli) を参照してください。
+実際の開発では、通常、[Angular CLI](guide/glossary#command-line-interface-cli) を使用します。これは、アプリケーションを生成および変更できる強力なコマンドラインツールです。CLIを使用して新しいプロジェクトとそのすべてのパーツを作成する方法を示す完全なステップバイステップガイドについては、[Tour of Heroesチュートリアル](tutorial) を参照してください。
 
 </div>
 
@@ -163,8 +162,7 @@ Angularのテンプレート構文はHTMLとJavaScriptを拡張します。
 
 <div class="alert is-helpful">
 
-Angularのテンプレート構文の全機能については、
-[テンプレート構文ガイド](guide/template-syntax "テンプレート構文")を参照してください。
+Angularのテンプレート構文の全機能については、[コンポーネントとテンプレートのイントロダクション](guide/architecture-components#template-syntax "Template Syntax")を参照してください。
 
 </div>
 
@@ -218,7 +216,7 @@ Angularアプリケーションはコンポーネントのツリーで構成さ�
 
 <div class="alert is-helpful">
 
-コンポーネントとそれらがテンプレートとどのように相互作用するかについての詳細は[コンポーネントのイントロダクション](guide/architecture-components "コンポーネントのイントロダクション")を参照してください。
+コンポーネントとそれらがテンプレートとどのように相互作用するかについての詳細は[コンポーネントのイントロダクション](guide/architecture-components "コンポーネントとテンプレートのイントロダクション")を参照してください。
 
 </div>
 
@@ -358,5 +356,5 @@ Angularの基礎、つまりコンポーネントとテンプレートの構文�
 また、コンポーネントクラスとテンプレートがどのように相互作用するのか、およびコンポーネントが相互に通信する方法も学びました。
 
 Angularの探索を続けるには、次のいずれかのオプションを選択してください。
-* ["ルーティング"セクションに進む](start/start-routing "入門： ルーティング")ことで、製品名をクリックしてアクセスでき、独自のURLパターンをもつ製品詳細ページを作成します。
+* ["アプリ内ナビゲーション"セクションに進む](start/start-routing "入門： アプリ内ナビゲーション")ことで、製品名をクリックしてアクセスでき、独自のURLパターンをもつ製品詳細ページを作成します。
 * [先に"デプロイ"セクションに進む](start/start-deployment "入門： デプロイ")ことで、ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーにデプロイします。

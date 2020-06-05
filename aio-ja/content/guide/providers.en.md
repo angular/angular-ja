@@ -1,4 +1,4 @@
-# Providers
+# Providing dependencies in modules
 
 A provider is an instruction to the [Dependency Injection](/guide/dependency-injection) system on how to obtain a value for a dependency. Most of the time, these dependencies are services that you create and provide.
 
@@ -58,8 +58,8 @@ Though you can provide services by lazy loading modules, not all services can be
 Another way to limit provider scope is by adding the service you want to limit to the component’s
 `providers` array. Component providers and NgModule providers are independent of each other. This
 method is helpful when you want to eagerly load a module that needs a service all to itself.
-Providing a service in the component limits the service only to that component (other components in
-the same module can’t access it).
+Providing a service in the component limits the service only to that component and its descendants.
+Other components in the same module can’t access it.
 
 <code-example path="providers/src/app/app.component.ts" region="component-providers" header="src/app/app.component.ts"></code-example>
 

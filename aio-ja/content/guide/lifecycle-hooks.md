@@ -1,45 +1,49 @@
-# ライフサイクル・フック
+# Hooking into the component lifecycle
 
-コンポーネントのライフサイクルは、Angularによって管理されています。
+A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views.
+The lifecycle continues with change detection, as Angular checks to see when data-bound properties change, and updates both the view and the component instance as needed.
+The lifecycle ends when Angular destroys the component instance and removes its rendered template from the DOM.
+Directives have a similar lifecycle, as Angular creates, updates, and destroys instances in the course of execution.
 
-Angularは、コンポーネントとその子を作成およびレンダリングし、データバインドプロパティが変更されたときにチェックし、DOMから削除する前にそれらを破棄します。
+Your application can use [lifecycle hook methods](guide/glossary#lifecycle-hook "Definition of lifecycle hook") to tap into key events in the lifecycle of a component or directive in order to initialize new instances, initiate change detection when needed, respond to updates during change detection, and clean up before deletion of instances.
 
-Angularはそれらの重要な生存の瞬間を可視化し、発生時に行動できるようにする
-**ライフサイクル・フック** を提供します。
+## Prerequisites
 
-ディレクティブにも一連のライフサイクル・フックがあります。
+Before working with lifecycle hooks, you should have a basic understanding of the following:
+
+* [TypeScript programming](https://www.typescriptlang.org/).
+* Angular app-design fundamentals, as described in [Angular Concepts](guide/architecture "Introduction to fundamental app-design concepts").
 
 {@a hooks-overview}
 
-## コンポーネントのライフサイクル・フックの概要
+## Responding to lifecycle events
 
-ディレクティブとコンポーネントのインスタンスは、Angularがライフサイクルを作成、
-更新、および破棄するにつれてライフサイクルを持ちます。
-開発者は、ライフサイクルの中の重要な瞬間を、Angular `core` ライブラリの
-*ライフサイクル・フック*　インターフェースの1つあるいは複数実装することで傍受できます。
+You can respond to events in the lifecycle of a component or directive by implementing one or more of the *lifecycle hook* interfaces in the Angular `core` library.
+The hooks give you the opportunity to act on a component or directive instance at the appropriate moment, as Angular creates, updates, or destroys that instance.
 
-各インターフェースは、名前が `ng` で始まるインターフェース名である単一のフックメソッドを持っています。
-たとえば、 `OnInit` インターフェースは　`ngOnInit()` という名前のフックメソッドを持っています。
-Angularはコンポーネントの作成直後に呼び出します。
+Each interface defines the prototype for a single hook method, whose name is the interface name prefixed with `ng`.
+For example, the `OnInit` interface has a hook method named `ngOnInit()`. If you implement this method in your component or directive class, Angular calls it shortly after checking the input properties for that component or directive for the first time.
 
 <code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" header="peek-a-boo.component.ts (excerpt)"></code-example>
 
-ディレクティブやコンポーネントはライフサイクルフックすべてを実装しないでしょう。
-Angularは、ディレクティブ/コンポーネント・フック・メソッド *が定義されている場合* にのみ呼び出します。
+You don't have to implement all (or any) of the lifecycle hooks, just the ones you need.
 
 {@a hooks-purpose-timing}
 
-## ライフサイクル・シーケンス
+### Lifecycle event sequence
 
-コンストラクターの呼び出しによってコンポーネント/ディレクティブを作成した *後に* 、
-Angularはライフサイクル・フックメソッドを特定の瞬間に次の順序で呼び出します。
+After your application instantiates a component or directive by calling its constructor, Angular calls the hook methods you have implemented at the appropriate point in the lifecycle of that instance.
+
+Angular executes hook methods in the following sequence. You can use them to perform the following kinds of operations.
 
 <table width="100%">
   <col width="20%"></col>
-  <col width="80%"></col>
+  <col width="60%"></col>
+  <col width="20%"></col>
   <tr>
-    <th>フック</th>
-    <th>目的とタイミング</th>
+    <th>Hook method</th>
+    <th>Purpose</th>
+    <th>Timing</th>
   </tr>
   <tr style='vertical-align:top'>
     <td>
@@ -47,10 +51,16 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angular がデータバインドされた入力プロパティを(再)設定するときに応答します。
-      このメソッドは、現在および以前のプロパティ値の `SimpleChanges` オブジェクトを受け取ります。
+      Respond when Angular sets or resets data-bound input properties.
+      The method receives a `SimpleChanges` object of current and previous property values.
 
-      `ngOnInit()` の前に呼び出され、データバインドされた入力プロパティが変更されるたびに呼び出されます。
+      Note that this happens very frequently, so any operation you perform here impacts performance significantly.
+      See details in [Using change detection hooks](#onchanges) in this document.
+
+    </td>
+    <td>
+
+      Called before `ngOnInit()` and whenever one or more data-bound input properties change.
 
     </td>
   </tr>
@@ -60,10 +70,14 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularがデータバインドされたプロパティを最初に表示し、ディレクティブ/コンポーネントの入力プロパティを設定した後で、
-      ディレクティブ/コンポーネントを初期化します。
+      Initialize the directive or component after Angular first displays the data-bound properties
+      and sets the directive or component's input properties.
+      See details in [Initializing a component or directive](#oninit) in this document.
 
-      *最初* の `ngOnChanges()` の後に *一度* 呼び出されます。
+    </td>
+    <td>
+
+      Called once, after the first `ngOnChanges()`.
 
     </td>
   </tr>
@@ -73,9 +87,13 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularが検出できない、または検出できない変更を検出して、それに基づいて実行します。
+      Detect and act upon changes that Angular can't or won't detect on its own.
+      See details and example in [Defining custom change detection](#docheck) in this document.
 
-      変更検知の実行中に毎回、そして `ngOnChanges()` と `ngOnInit()` の直後に呼び出されます。
+    </td>
+    <td>
+
+    Called immediately after `ngOnChanges()` on every change detection run, and immediately after `ngOnInit()` on the first run.
 
     </td>
   </tr>
@@ -85,9 +103,15 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularがコンポーネントのビューあるいはディレクティブが存在するビューに、外部コンテンツを投影した後に応答します。
+      Respond after Angular projects external content into the component's view, or into the view that a directive is in.
 
-      最初の `ngDoCheck()` の後に _1度_ 呼び出されます。
+      See details and example in [Responding to changes in content](#aftercontent) in this document.
+
+
+    </td>
+    <td>
+
+      Called _once_ after the first `ngDoCheck()`.
 
     </td>
   </tr>
@@ -97,9 +121,15 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularがディレクティブ/コンポーネントに投影された外部コンテンツをチェックした後に応答します。
+      Respond after Angular checks the content projected into the directive or component.
 
-      `ngAfterContentInit()` とその後全ての `ngDoCheck()` の後に呼び出されます。
+      See details and example in [Responding to projected content changes](#aftercontent) in this document.
+
+    </td>
+
+    <td>
+
+      Called after `ngAfterContentInit()` and every subsequent `ngDoCheck()`.
 
     </td>
   </tr>
@@ -109,10 +139,15 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularがコンポーネントのビューと子のビュー、あるいはディレクティブが存在するビューを初期化した後に応答します。
+      Respond after Angular initializes the component's views and child views, or the view that contains the directive.
 
-      最初の `ngAfterContentChecked()` の後に _1度_ 呼び出されます。
+      See details and example in [Responding to view changes](#afterview) in this document.
 
+    </td>
+
+    <td>
+
+      Called _once_ after the first `ngAfterContentChecked()`.
     </td>
   </tr>
   <tr style='vertical-align:top'>
@@ -121,9 +156,13 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularがコンポーネントのビューと子のビュー、あるいはディレクティブが存在するビューをチェックした後に応答します。
+      Respond after Angular checks the component's views and child views, or the view that contains the directive.
 
-      `ngAfterViewInit()` とその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
+    </td>
+
+    <td>
+
+      Called after the `ngAfterViewInit()` and every subsequent `ngAfterContentChecked()`.
 
     </td>
   </tr>
@@ -133,60 +172,39 @@ Angularはライフサイクル・フックメソッドを特定の瞬間に次�
     </td>
     <td>
 
-      Angularがディレクティブ/コンポーネントを破棄する直前に、クリーンアップします。
-      メモリリークを回避するためにObservableの購読を解除し、イベントハンドラをデタッチしましょう。
+      Cleanup just before Angular destroys the directive or component.
+      Unsubscribe Observables and detach event handlers to avoid memory leaks.
+      See details in [Cleaning up on instance destruction](#ondestroy) in this document.
 
-      Angularがディレクティブ/コンポーネントを破棄する _直前_ に呼び出されます。
+    </td>
+
+    <td>
+
+      Called immediately before Angular destroys the directive or component.
 
     </td>
   </tr>
 </table>
 
-{@a interface-optional}
-
-## インターフェースはオプションです(技術的に)
-
-純粋に技術的な観点から、JavaScript と Typescript の開発者はインターフェースを省略することができます。
-JavaScript言語にはインターフェースがありません。
-変換されたJavaScriptからは消えてしまうため、Angularは実行時にTypeScriptのインターフェースを見ることはできません。
-
-幸いにも、それらは必要ではありません。
-フックそのものの恩恵を受けるために、ディレクティブやコンポーネントにライフサイクル・フックのインターフェースを追加する必要はありません。
-
-Angularはディレクティブとコンポーネントのクラスを調べ、フックメソッドが _定義されていたら_ それらを呼び出します。
-Angularはインターフェースの有無にかかわらず、`ngOnInit()`のようなメソッドを探して呼び出します。
-
-それでもやはり、強い型付けやエディターの恩恵を受けるためには、
-TypeScriptのディレクティブクラスにインターフェースを追加することをお勧めします。
-
-{@a other-lifecycle-hooks}
-
-## 他の Angular ライフサイクル・フック
-
-他のAngularサブシステムは、これらのコンポーネント・フックとは別のライフサイクル・フックをもつことがあります。
-
-サードパーティのライブラリは、開発者がこれらのライブラリの使用方法をより詳細に制御できるように、
-フックを実装することもできます。
-
 {@a the-sample}
 
-## ライフサイクルの例
+### Lifecycle example set
 
-<live-example></live-example> は、
-ルートの`AppComponent`の制御下にあるコンポーネントとして与えられる一連のエクササイズを通して、
-実際のライフサイクル・フックをデモンストレーションします。
+The <live-example></live-example>
+demonstrates the use of lifecycle hooks through a series of exercises
+presented as components under the control of the root `AppComponent`.
+In each case a *parent* component serves as a test rig for
+a *child* component that illustrates one or more of the lifecycle hook methods.
 
-それらは共通のパターンに従います： それらは、_親_ コンポーネントが1つ以上のライフサイクル・フックの
-メソッドを表す _子_ コンポーネントのテスト用具として機能するという、共通のパターンに従います。
-
-各エクササイズについて簡単に説明します：
+The following table lists the exercises with brief descriptions.
+The sample code is also used to illustrate specific tasks in the following sections.
 
 <table width="100%">
   <col width="20%"></col>
   <col width="80%"></col>
   <tr>
-    <th>コンポーネント</th>
-    <th>説明</th>
+    <th>Component</th>
+    <th>Description</th>
   </tr>
   <tr style='vertical-align:top'>
     <td>
@@ -194,8 +212,8 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
     </td>
     <td>
 
-      すべてのライフサイクル・フックを示します。
-      各フックメソッドは画面上のログに書き込みます。
+      Demonstrates every lifecycle hook.
+      Each hook method writes to the on-screen log.
 
     </td>
   </tr>
@@ -205,12 +223,9 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
     </td>
     <td>
 
-      ディレクティブもライフサイクル・フックをもちます。
-      `SpyDirective` は、それがスパイする要素が `ngOnInit` と `ngOnDestroy` フック
-      を使って作成または破棄されるとログに記録できます。
-
-      この例では、親の `SpyComponent` によって管理される `ngFor` *hero* リピータの
-      中にある `<div>` に `SpyDirective` を適用します。
+      Shows how you can use lifecycle hooks with a custom directive.
+      The `SpyDirective` implements the `ngOnInit()` and `ngOnDestroy()` hooks,
+      and uses them to watch and report when an element goes in or out of the current view.
 
     </td>
   </tr>
@@ -220,9 +235,9 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
     </td>
     <td>
 
-      コンポーネント入力プロパティの1つが変更されるたびに、
-      Angularがどのように`ngOnChanges()`フックを呼び出すかを見てください。
-      `changes` オブジェクトの解釈方法を示します。
+      Demonstrates how Angular calls the `ngOnChanges()` hook
+      every time one of the component input properties changes,
+      and shows how to interpret the `changes` object passed to the hook method.
 
     </td>
   </tr>
@@ -232,8 +247,8 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
     </td>
     <td>
 
-      カスタム変更の検出を伴う `ngDoCheck()` メソッドを実装します。
-      Angularがこのフックを呼び出す頻度を確認し、変更がログに記録されるのを見てください。
+      Implements the `ngDoCheck()` method with custom change detection.
+      Watch the hook post changes to a log to see how often Angular calls this hook.
 
     </td>
   </tr>
@@ -243,8 +258,8 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
     </td>
     <td>
 
-      Angularが *ビュー* と呼ぶものを示します。
-      `ngAfterViewInit` と `ngAfterViewChecked` フックをデモンストレーションします。
+      Shows what Angular means by a [view](guide/glossary#view "Definition of view.").
+      Demonstrates the `ngAfterViewInit()` and `ngAfterViewChecked()` hooks.
 
     </td>
   </tr>
@@ -254,363 +269,344 @@ TypeScriptのディレクティブクラスにインターフェースを追加�
     </td>
     <td>
 
-      外部コンテンツをコンポーネントに投影する方法、および投影されたコンテンツをコンポーネント
-      のビューの子供と区別する方法を示します。
-      `ngAfterContentInit` と `ngAfterContentChecked` フックをデモンストレーションします。
+      Shows how to project external content into a component and
+      how to distinguish projected content from a component's view children.
+      Demonstrates the `ngAfterContentInit()` and `ngAfterContentChecked()` hooks.
 
     </td>
   </tr>
   <tr style='vertical-align:top'>
     <td>
-      Counter
+       <a href="#counter">Counter</a>
     </td>
     <td>
 
-      独自のフックを持つコンポーネントとディレクティブの組み合わせ
-      を示します。
-
-      この例では、`CounterComponent` は、親コンポーネントが入力カウンタのプロパティ
-      をインクリメントするたびに、(`ngOnChanges` を介して)変更を記録します。
-      一方、前の例の `SpyDirective` は `CounterComponent` ログに適用され、
-      ログエントリが作成および破棄されるのを監視します。
+      Demonstrates a combination of a component and a directive, each with its own hooks.
 
     </td>
   </tr>
 </table>
 
-このページの残りの部分では、選択した演習についてさらに詳しく説明します。
+
+{@a oninit}
+
+## Initializing a component or directive
+
+Use the `ngOnInit()` method to perform the following initialization tasks.
+
+* Perform complex initializations outside of the constructor.
+  Components should be cheap and safe to construct.
+  You should not, for example, fetch data in a component constructor.
+  You shouldn't worry that a new component will try to contact a remote server when
+  created under test or before you decide to display it.
+
+  An `ngOnInit()` is a good place for a component to fetch its initial data.
+  For an example, see the [Tour of Heroes tutorial](tutorial/toh-pt4#oninit).
+
+  <div class="alert is-helpful">
+
+  In [Flaw: Constructor does Real Work](http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/), Misko Hevery, Angular team lead, explains why you should avoid complex constructor logic.
+
+  </div>
+
+* Set up the component after Angular sets the input properties.
+  Constructors should do no more than set the initial local variables to simple values.
+
+  Keep in mind that a directive's data-bound input properties are not set until _after construction_.
+  If you need to initialize the directive based on those properties, set them when `ngOnInit()` runs.
+
+  <div class="alert is-helpful">
+
+     The `ngOnChanges()` method is your first opportunity to access those properties.
+     Angular calls `ngOnChanges()` before `ngOnInit()`, but also many times after that.
+     It only calls `ngOnInit()` once.
+
+  </div>
+
+{@a ondestroy}
+
+## Cleaning up on instance destruction
+
+Put cleanup logic in `ngOnDestroy()`, the logic that must run before Angular destroys the directive.
+
+This is the place to free resources that won't be garbage-collected automatically.
+You risk memory leaks if you neglect to do so.
+
+* Unsubscribe from Observables and DOM events.
+* Stop interval timers.
+* Unregister all callbacks that the directive registered with global or application services.
+
+The `ngOnDestroy()` method is also the time to notify another part of the application that the component is going away.
+
+
+## General examples
+
+The following examples demonstrate the call sequence and relative frequency of the various lifecycle events, and how the hooks can be used separately or together for components and directives.
 
 {@a peek-a-boo}
 
-## ピーク・ア・ブー(いないいないばー)：すべてのフック
+### Sequence and frequency of all lifecycle events
 
-`PeekABooComponent` は、1つのコンポーネント内のすべてのフックを示します。
+To show how Angular calls the hooks in the expected order, the `PeekABooComponent` demonstrates all of the hooks in one component.
 
-このようなインターフェースをすべて実装することはめったにありません。
-ピーク・ア・ブー(いないいないばー)は、Angularが予想される順序でAngularがフックを呼び出す様子を示すために存在します。
+In practice you would rarely, if ever, implement all of the interfaces the way this demo does.
 
-このスナップショットは、*Create...* ボタンをクリックしてから *Destroy...* ボタンをクリックした後のログの状態を反映しています。
+The following snapshot reflects the state of the log after the user clicked the *Create...* button and then the *Destroy...* button.
 
 <div class="lightbox">
   <img src="generated/images/guide/lifecycle-hooks/peek-a-boo.png" alt="Peek-a-boo">
 </div>
 
-一連のログメッセージは、規定のフックの呼び出し順序に従います：
+The sequence of log messages follows the prescribed hook calling order:
 `OnChanges`, `OnInit`, `DoCheck`&nbsp;(3x), `AfterContentInit`, `AfterContentChecked`&nbsp;(3x),
-`AfterViewInit`, `AfterViewChecked`&nbsp;(3x), と `OnDestroy`。
+`AfterViewInit`, `AfterViewChecked`&nbsp;(3x), and `OnDestroy`.
 
 <div class="alert is-helpful">
 
-  コンストラクターは、Angularフック *そのもの* ではありません。
-  ログは、入力プロパティ（この場合は `name` プロパティ）が構築時に割り当てられた値を持たないことを確認します。
+  Notice that the log confirms that input properties (the `name` property in this case) have no assigned values at construction.
+  The input properties are available to the `onInit()` method for further initialization.
 
 </div>
 
-ユーザーが *Update Hero* ボタンをクリックしたとき、 ログには別の `OnChanges` と、
-`DoCheck`、`AfterContentChecked`、`AfterViewChecked` のトリプレットが追加で2つ表示されます。
-明らかに、これらの3つのフックは *頻繁* に点火します。 これらのフックにロジックを可能な限り少なくしておきましょう！
-
-次の例は、フックの詳細に焦点を当てています。
-
+Had the user clicked the *Update Hero* button, the log would show another `OnChanges` and two more triplets of `DoCheck`, `AfterContentChecked` and `AfterViewChecked`.
+Notice that these three hooks fire *often*, so it is important to keep their logic as lean as possible.
 
 {@a spy}
 
-## *OnInit* と *OnDestroy* をスパイする
+### Use directives to watch the DOM
 
-これらの2つのスパイフックで潜伏して、要素が初期化または破棄されたときを発見します。
+The `Spy` example demonstrates how you can use hook method for directives as well as components.
+The `SpyDirective` implements two hooks, `ngOnInit()` and `ngOnDestroy()`, in order to discover when a watched element is in the current view.
 
-これは、ディレクティブのための完璧な潜入ジョブです。
-ヒーローたちは彼らが見守られていることを決して知らないでしょう。
+This template applies the `SpyDirective` to a `<div>` in the `ngFor` *hero* repeater managed by the parent `SpyComponent`.
 
-<div class="alert is-helpful">
+The example does not perform any initialization or clean-up.
+It just tracks the appearance and disappearance of an element in the view by recording when the directive itself is instantiated and destroyed.
 
-  冗談はさておき、ふたつの重要な点に注意を払います：
+A spy directive like this can provide insight into a DOM object that you cannot change directly.
+You can't touch the implementation of a native `<div>`, or modify a third party component.
+You can, however watch these elements with a directive.
 
-  1. *ディレクティブ* およびコンポーネントのAngular呼び出しフックメソッド。<br><br>
-
-  2. spyディレクティブは、直接変更できないDOMオブジェクトの洞察を提供します。
-  明らかに、ネイティブの `<div>` の実装に触れることはできません。
-  サードパーティのコンポーネントも変更できません。
-  しかし、あなたは両方のディレクティブを見ることができます。
-
-</div>
-
-こそこそしたスパイ・ディレクティブはシンプルで、注入された `LoggerService` を介して親にメッセージを記録する
-`ngOnInit()` と `ngOnDestroy()` フックでほぼ全体を構成しています。
+The directive defines `ngOnInit()` and `ngOnDestroy()` hooks
+that log messages to the parent via an injected `LoggerService`.
 
 <code-example path="lifecycle-hooks/src/app/spy.directive.ts" region="spy-directive" header="src/app/spy.directive.ts"></code-example>
 
-スパイをネイティブ要素またはコンポーネント要素に適用すると、その要素と同時に初期化され、
-破棄されます。
-これは、繰り返しのヒーローの `<div>` に付け加えられています：
+You can apply the spy to any native or component element, and see that it is initialized and destroyed
+at the same time as that element.
+Here it is attached to the repeated hero `<div>`:
 
 <code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html"></code-example>
 
-個々のスパイの誕生と死は、付属のヒーロー `<div>` の出生と死を、つぎに示すように
- *フック・ログ* に記入して記録します。
+Each spy's creation and destruction marks the appearance and disappearance of the attached hero `<div>`
+with an entry in the *Hook Log* as seen here:
 
 <div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/spy-directive.gif' alt="Spy Directive">
 </div>
 
-ヒーローを追加すると、新しいヒーローの `<div>` になります。 スパイの `ngOnInit()` はそのイベントを記録します。
+Adding a hero results in a new hero `<div>`. The spy's `ngOnInit()` logs that event.
 
-*Reset* ボタンは `ヒーロー` リストをクリアします。
-Angularはすべてのヒーローの `<div>` 要素をDOMから削除し、同時にそのスパイ・ディレクティブを破棄します。
-スパイの `ngOnDestroy()` メソッドは最後の瞬間を報告します。
+The *Reset* button clears the `heroes` list.
+Angular removes all hero `<div>` elements from the DOM and destroys their spy directives at the same time.
+The spy's `ngOnDestroy()` method reports its last moments.
 
-`ngOnInit()` と `ngOnDestroy()` メソッドは、実際のアプリケーションでもっと重要な役割を果たします。
+{@a counter}
 
-{@a oninit}
+### Use component and directive hooks together
 
-### _OnInit()_
+In this example, a `CounterComponent` uses the `ngOnChanges()` method to log a change every time the parent component increments its input `counter` property.
 
-`ngOnInit()` を使う主な理由は2つあります。
-
-1. 構築直後に複雑な初期化を実行する。
-1. Angularが入力プロパティを設定した後コンポーネントを設定する。
-
-経験豊富な開発者は、コンポーネントを安価で安全に構築する必要があることに同意します。
-
-<div class="alert is-helpful">
-
-  Angular チームリーダーであるMisko Heveryが、
-  複雑なコンストラクターロジックを避けるべき
-  [理由を説明します](http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/)
-
-</div>
-
-コンポーネントコンストラクターでデータをフェッチしないでください。
-新しいコンポーネントが、テスト中に作成されたとき、または表示する前に、
-リモートサーバーに接続しようとすることを心配すべきではありません。
-コンストラクターは、初期のローカル変数を単純な値に設定すること以外は、やるべきではありません。
-
-`ngOnInit()` は、コンポーネントが初期データを取得するのに適しています。
-[ツアー・オブ・ヒーローズ チュートリアル](tutorial/toh-pt4#oninit)のガイドはその方法を示しています。
-
-
-ディレクティブのデータバインドされた入力プロパティは、_構築後_ まで設定されません。
-これは、それらのプロパティに基づいてディレクティブを初期化する必要がある場合には、問題になります。
-これらは `ngOnInit()` の実行時には設定されています。
-
-<div class="alert is-helpful">
-
-  `ngOnChanges()` メソッドは、それらのプロパティにアクセスする最初の機会です。
-  Angularは `ngOnInit()` の前に `ngOnChanges()` を呼び出し、その後何度も呼び出します。
-  `ngOnInit()`は一度だけ呼び出されます。
-
-</div>
-
-Angularを使用すると、コンポーネントを作成した _すぐ_ 後で、`ngOnInit()` メソッドを呼び出すことができます。
-これは、重たい初期化ロジックが属する場所です。
-
-{@a ondestroy}
-
-### _OnDestroy()_
-
-`ngOnDestroy()` にクリーンアップ・ロジックを入れます、これは、Angularがディレクティブを破棄する前に実行しなければならないロジックです。
-
-これは、アプリケーションの別の部分にコンポーネントが終了することを通知するためのタイミングです。
-
-これは自動的にガベージ・コレクションされないリソースを解放する場所です。
-ObservableとDOMイベントの購読を解除しましょう。インターバルタイマーを停止しましょう。
-このディレクティブがグローバル・サービスまたはアプリケーション・サービスに登録したすべてのコールバックを登録解除しましょう。
-あなたがそれを怠ると、メモリーリークが発生する可能性があります。
+This example applies the `SpyDirective` from the previous example to the `CounterComponent` log, in order to watch the creation and destruction of log entries.
 
 {@a onchanges}
 
-## _OnChanges()_
+## Using change detection hooks
 
-Angularは、コンポーネント(またはディレクティブ)の ***入力プロパティ***　への変更を検出するたびに、その `ngOnChanges()` メソッドを呼び出します。
-この例は `OnChanges` フックを監視します。
+Angular calls the `ngOnChanges()` method of a component or directive whenever it detects changes to the  ***input properties***.
+The *onChanges* example demonstrates this by monitoring the `OnChanges()` hook.
 
 <code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="ng-on-changes" header="on-changes.component.ts (excerpt)"></code-example>
 
-`ngOnChanges()` メソッドは、変更された各プロパティの名前と、現在および前のプロパティ値を保持する
-[SimpleChange](api/core/SimpleChange) オブジェクトをマップするオブジェクトを受け取ります。
-このフックは、変更されたプロパティを反復処理してログに記録します。
+The `ngOnChanges()` method takes an object that maps each changed property name to a
+[SimpleChange](api/core/SimpleChange) object holding the current and previous property values.
+This hook iterates over the changed properties and logs them.
 
-サンプルのコンポーネントである `OnChangesComponent` は、` hero` と `power` の2つの入力プロパティを持っています。
+The example component, `OnChangesComponent`, has two input properties: `hero` and `power`.
 
 <code-example path="lifecycle-hooks/src/app/on-changes.component.ts" region="inputs" header="src/app/on-changes.component.ts"></code-example>
 
-ホストの `OnChangesParentComponent` は次のようにそれらにバインドします：
+The host `OnChangesParentComponent` binds to them as follows.
 
 <code-example path="lifecycle-hooks/src/app/on-changes-parent.component.html" region="on-changes" header="src/app/on-changes-parent.component.html"></code-example>
 
-ここでは、ユーザーが変更を加えたときの実際のサンプルを示します。
+Here's the sample in action as the user makes changes.
 
 <div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/on-changes-anim.gif' alt="OnChanges">
 </div>
 
-ログエントリは、*power* プロパティの文字列値として表示されます。
-しかし、 `ngOnChanges` は `hero.name` への変更をキャッチしません。
-はじめはそれに驚きます。
+The log entries appear as the string value of the *power* property changes.
+Notice, however, that the `ngOnChanges()` method does not catch changes to `hero.name`.
+This is because Angular calls the hook only when the value of the input property changes.
+In this case, `hero` is the input property, and the value of the `hero` property is the *reference to the hero object*.
+The object reference did not change when the value of its own `name` property changed.
 
-Angularは、入力プロパティの値が変更されたときにのみフックを呼び出します。
-`hero` プロパティの値は、*ヒーローオブジェクトへの参照です* 。
-Angularは、ヒーロー自身の `name` プロパティが変更されても気にしません。
-ヒーローオブジェクトの *参照* は変わらなかったので、Angularの観点から報告する変更はありません！
-
-{@a docheck}
-
-## _DoCheck()_
-
-Angularがそれ自身で捕捉しない変更を検出し、それに対応するために `DoCheck` フックを使います。
-
-<div class="alert is-helpful">
-
-  Angularが見落とした変更を検出するには、このメソッドを使用します。
-
-</div>
-
-*DoCheck* サンプルは *OnChanges* サンプルを次の `ngDoCheck()` フックで拡張します：
-
-<code-example path="lifecycle-hooks/src/app/do-check.component.ts" region="ng-do-check" header="DoCheckComponent (ngDoCheck)"></code-example>
-
-このコードは、特定の _関心のある値_ を検査し、現在の状態を以前の値とキャプチャして比較します。
-`hero` や `power` に実質的な変更がないときに特別なメッセージをログに書き込むので、 `DoCheck` が呼び出される
-頻度を知ることができます。 この結果はわかりやすいです：
-
-<div class="lightbox">
-  <img src='generated/images/guide/lifecycle-hooks/do-check-anim.gif' alt="DoCheck">
-</div>
-
-`ngDoCheck()` フックはヒーローの `name` が変更された時を検出できますが、恐ろしいコストがあります。
-このフックは非常に頻繁に呼び出されます&mdash;変更が発生した場所に関係なく _すべて_ の変更検知サイクルの後で。
-この例では、ユーザーが何かをする前に20回以上呼び出されています。
-
-これらの初期チェックのほとんどは、Angularが最初に *関連しないデータをページの他の場所で* レンダリングすることによってトリガーされます。
-別の `<input>` にマウスを移動するだけで呼び出しがトリガーされます。
-関連するデータへの実際の変更を明らかにする呼び出しは比較的少ないです。
-明らかに、私たちの実装は非常に軽量でなければならず、そうでなければユーザー体験は苦しくなります。
 
 {@a afterview}
 
-## AfterView
+### Responding to view changes
 
-*AfterView* サンプルは、コンポーネントの子ビューを作成した *後* 、Angularが呼び出す `AfterViewInit()` および
-`AfterViewChecked()` フックを調べます。
+As Angular traverses the [view hierarchy](guide/glossary#view-hierarchy "Definition of view hierarchy definition") during change detection, it needs to be sure that a change in a child does not attempt to cause a change in its own parent. Such a change would not be rendered properly, because of how [unidirectional data flow](guide/glossary#unidirectional-data-flow "Definition") works.
 
-ここでは、 `<input>` にヒーローの名前を表示する子ビューがあります：
+If you need to make a change that inverts the expected data flow, you must trigger a new change detection cycle to allow that change to be rendered.
+The examples illustrate how to make such changes safely.
+
+The *AfterView* sample explores the `AfterViewInit()` and `AfterViewChecked()` hooks that Angular calls
+*after* it creates a component's child views.
+
+Here's a child view that displays a hero's name in an `<input>`:
 
 <code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" header="ChildComponent"></code-example>
 
-`AfterViewComponent` は、この子ビューを *テンプレート内* に表示します：
+The `AfterViewComponent` displays this child view *within its template*:
 
 <code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="template" header="AfterViewComponent (template)"></code-example>
 
-次のフックは、子ビュー *内の値の変更* に基づいてアクションを実行します。
-[@ViewChild](api/core/ViewChild) で
-装飾されたプロパティを使用して子ビューを照会することによってのみ到達できます。
-
+The following hooks take action based on changing values *within the child view*,
+which can only be reached by querying for the child view via the property decorated with
+[@ViewChild](api/core/ViewChild).
 
 <code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="hooks" header="AfterViewComponent (class excerpts)"></code-example>
 
 {@a wait-a-tick}
 
-### 単方向データフローのルールに従う
-ヒーロー名が10文字を超えると、 `doSomething()` メソッドは画面を更新します。
+#### Wait before updating the view
+
+In this example, the `doSomething()` method updates the screen when the hero name exceeds 10 characters, but waits a tick before updating `comment`.
 
 <code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="do-something" header="AfterViewComponent (doSomething)"></code-example>
 
-なぜ `doSomething()` メソッドは `comment` を更新する前にティックを待つのでしょうか？
+Both the `AfterViewInit()` and `AfterViewChecked()` hooks fire after the component's view has been composed.
+If you modify the code so that the hook updates the component's data-bound `comment` property immediately, you can see that Angular throws an error.
 
-Angularの単方向データフローのルールは、ビューが構成された *後* の更新を禁止します。
-これら両方のフックはコンポーネントのビューが構成された _後_ に発火します。
+The `LoggerService.tick_then()` statement postpones the log update
+for one turn of the browser's JavaScript cycle, which triggers a new change-detection cycle.
 
-Angularは、フックがコンポーネントのデータバインドされた `comment` プロパティを直ちに更新する場合、
-エラーをスローします(試してみてください)。
-`LoggerService.tick_then()` は、ブラウザの JavaScript サイクルの1度転分の
-ログ更新を延期します。
+#### Write lean hook methods to avoid performance problems
 
-*AfterView* の実際の動作はこれです：
+When you run the *AfterView* sample, notice how frequently Angular calls `AfterViewChecked()`$emdash;often when there are no changes of interest.
+Be very careful about how much logic or computation you put into one of these methods.
 
 <div class="lightbox">
+
   <img src='generated/images/guide/lifecycle-hooks/after-view-anim.gif' alt="AfterView">
+
 </div>
 
-Angularは `AfterViewChecked()` を頻繁に呼び出し、興味のある変更がない場合が多いことに注意してください。
-パフォーマンスの問題を回避するために、小さなフックメソッドを記述しましょう。
 
 {@a aftercontent}
-
-## AfterContent
-
-*AfterContent* のサンプルは、Angularが外部コンテンツをコンポーネントに投影した *後* に
-Angularが呼び出す `AfterContentInit()` および `AfterContentChecked()` フックを調べます。
-
+{@a aftercontent-hooks}
 {@a content-projection}
 
-### コンテンツ投影
+### Responding to projected content changes
 
-*コンテンツ投影* は、コンポーネントの外部からHTMLコンテンツをインポートし、
-そのコンテンツをコンポーネントのテンプレートに指定された場所に挿入する方法です。
+*Content projection* is a way to import HTML content from outside the component and insert that content
+into the component's template in a designated spot.
+You can identify content projection in a template by looking for the following constructs.
+
+  * HTML between component element tags.
+  * The presence of `<ng-content>` tags in the component's template.
 
 <div class="alert is-helpful">
 
-  AngularJSの開発者は、この手法を *transclusion* として認識しています。
+  AngularJS developers know this technique as *transclusion*.
 
 </div>
 
-[前の_AfterView_](guide/lifecycle-hooks#afterview) の例でこの変化を考えてみましょう。
-今回は、テンプレート内に子ビューを含めるのではなく、 `AfterContentComponent` の親からコンテンツをインポートします。
-親のテンプレートは次のとおりです：
+The *AfterContent* sample explores the `AfterContentInit()` and `AfterContentChecked()` hooks that Angular calls *after* Angular projects external content into the component.
+
+Consider this variation on the [previous _AfterView_](#afterview) example.
+This time, instead of including the child view within the template, it imports the content from
+the `AfterContentComponent`'s parent.
+The following is the parent's template.
 
 <code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)"></code-example>
 
-`<app-child>` タグは `<after-content>` タグの間に挟まれています。
-そのコンテンツをコンポーネントに投影するつもりでない限り、コンポーネントの要素タグ
-*の間にコンテンツを置かないでください*。
+Notice that the `<app-child>` tag is tucked between the `<after-content>` tags.
+Never put content between a component's element tags *unless you intend to project that content
+into the component*.
 
-コンポーネントのテンプレートを見てみましょう：
+Now look at the component's template.
 
 <code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="template" header="AfterContentComponent (template)"></code-example>
 
-`<ng-content>` タグは、外部コンテンツの *プレースホルダー* です。
-Angularはそのコンテンツをどこに挿入するかを指示します。
-この場合、投影されるコンテンツは親からの `<app-child>` です。
+The `<ng-content>` tag is a *placeholder* for the external content.
+It tells Angular where to insert that content.
+In this case, the projected content is the `<app-child>` from the parent.
 
 <div class="lightbox">
   <img src='generated/images/guide/lifecycle-hooks/projected-child-view.png' alt="Projected Content">
 </div>
 
-<div class="alert is-helpful">
 
-  *コンテンツ投影* の兆候は2つあります：
+#### Using AfterContent hooks
 
-  * コンポーネント要素タグ間のHTML。
-  * コンポーネントのテンプレート中の `<ng-content>` タグの存在。
+*AfterContent* hooks are similar to the *AfterView* hooks.
+The key difference is in the child component.
 
-</div>
+* The *AfterView* hooks concern `ViewChildren`, the child components whose element tags
+appear *within* the component's template.
 
-{@a aftercontent-hooks}
+* The *AfterContent* hooks concern `ContentChildren`, the child components that Angular
+projected into the component.
 
-### AfterContent フック
-
-*AfterContent* フックは *AfterView* フックと似ています。
-重要な違いは、子コンポーネントにあります。
-
-* *AfterView* フックは、要素のタグがコンポーネントのテンプレート *内に*
-表示されている子コンポーネントである `ViewChildren` に関係します。
-
-* *AfterContent* フックは、Angularがコンポーネントに投影した子コンポーネントである
-`ContentChildren` に関係します。
-
-次の *AfterContent* フックは、[@ContentChild](api/core/ContentChild) で装飾された
-プロパティを介してそれらを照会することによってのみ達することができる
-*子コンテント* の値を変更することに基づいてアクションを実行します。
+The following *AfterContent* hooks take action based on changing values in a *content child*,
+which can only be reached by querying for them via the property decorated with
+[@ContentChild](api/core/ContentChild).
 
 <code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="hooks" header="AfterContentComponent (class excerpts)"></code-example>
 
 {@a no-unidirectional-flow-worries}
 
-### _AfterContent_ で単方向フローの心配はありません
+<div class="alert is-helpful>
 
-このコンポーネントの `doSomething()` メソッドは、コンポーネントのデータバインドされた `comment` プロパティを直ちに更新します。
-[待つ必要は](guide/lifecycle-hooks#wait-a-tick) ありません。
+<header>No need to wait for content updates</header>
 
-Angularは *AfterView* フックのいずれかを呼び出す前に *AfterContent* フックを呼び出すことを思い出してください。
-Angularは、このコンポーネントのビューの構成を完了する前に投影されたコンテンツの構成を完了します。
-`AfterContent ...` と `AfterView ...` フックの間にはホストビューを変更するためのわずかな時間帯があります。
+This component's `doSomething()` method updates the component's data-bound `comment` property immediately.
+There's no need to [delay the update to ensure proper rendering](#wait-a-tick "Delaying updates").
+
+Angular calls both *AfterContent* hooks before calling either of the *AfterView* hooks.
+Angular completes composition of the projected content *before* finishing the composition of this component's view.
+There is a small window between the `AfterContent...` and `AfterView...` hooks that allows you to modify the host view.
+
+</div>
+
+{@a docheck}
+
+## Defining custom change detection
+
+To monitor changes that occur where `ngOnChanges()` won't catch them, you can implement your own change check, as shown in the *DoCheck* example.
+This example shows how you can use the `ngDoCheck()` hook to detect and act upon changes that Angular doesn't catch on its own.
+
+The *DoCheck* sample extends the *OnChanges* sample with the following `ngDoCheck()` hook:
+
+<code-example path="lifecycle-hooks/src/app/do-check.component.ts" region="ng-do-check" header="DoCheckComponent (ngDoCheck)"></code-example>
+
+This code inspects certain _values of interest_, capturing and comparing their current state against previous values.
+It writes a special message to the log when there are no substantive changes to the `hero` or the `power` so you can see how often `DoCheck()` is called.
+The results are illuminating.
+
+<div class="lightbox">
+  <img src='generated/images/guide/lifecycle-hooks/do-check-anim.gif' alt="DoCheck">
+</div>
+
+While the `ngDoCheck()` hook can detect when the hero's `name` has changed, it is very expensive.
+This hook is called with enormous frequency&mdash;after _every_
+change detection cycle no matter where the change occurred.
+It's called over twenty times in this example before the user can do anything.
+
+Most of these initial checks are triggered by Angular's first rendering of *unrelated data elsewhere on the page*.
+Just moving the cursor into another `<input>` triggers a call.
+Relatively few calls reveal actual changes to pertinent data.
+If you use this hook, your implementation must be extremely lightweight or the user experience suffers.

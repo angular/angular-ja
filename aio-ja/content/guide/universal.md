@@ -16,7 +16,7 @@ CLI の schematic `@nguniversal/express-engine` は、以下で説明するよ�
 <div class="alert is-helpful">
 
   **メモ:** [Node.js® Express](https://expressjs.com/) サーバーで実行される
-  [完成したサンプルコードをダウンロード](generated/zips/universal/universal.zip)します。
+  <live-example downloadOnly>完成したサンプルコードをダウンロード</live-example>します。
 
 </div>
 
@@ -27,7 +27,7 @@ CLI の schematic `@nguniversal/express-engine` は、以下で説明するよ�
 
 この例では、Angular CLI は [Ahead-of-Time (AOT) コンパイラー](guide/aot-compiler)を使用して
 アプリの Universal バージョンをコンパイルおよびバンドルします。
-Node Express Web サーバーは、クライアント要求に基づいて、Universal で HTML ページをコンパイルします。
+Node.js Express Web サーバーは、クライアント要求に基づいて、Universal で HTML ページをコンパイルします。
 
 サーバー側のアプリモジュール `app.server.module.ts` を作成するには、次の CLI コマンドを実行します。
 
@@ -62,10 +62,10 @@ package.json                 <i>npm 構成</i>
 ローカルシステムで Universal を使用してアプリのレンダリングを開始するには、次のコマンドを使用します。
 
 <code-example language="bash">
-npm run build:ssr && npm run serve:ssr
+npm run dev:ssr
 </code-example>
 
-ブラウザを開き、http://localhost:4000/ に移動します。
+ブラウザを開き、http://localhost:4200/ に移動します。
 おなじみの Tour of Heroes ダッシュボードページが表示されます。
 
 `routerLinks` を介したナビゲーションはネイティブアンカー (`<a>`) タグを使用するため、正常に機能します。
@@ -157,13 +157,12 @@ Universal Web サーバーは、[Universal テンプレートエンジン](#univ
 ユニバーサルアプリケーションは、Angular `platform-server` パッケージ (`platform-browser` ではなく) を使用します。
 これは、DOM、`XMLHttpRequest`、およびブラウザに依存しないその他の低レベル機能のサーバー実装を提供します。
 
-サーバー (このガイドの例では [Node Express](https://expressjs.com/)) は、アプリケーションページのクライアントリクエストを NgUniversal の `ngExpressEngine` に渡します。
+サーバー (このガイドの例では [Node.js Express](https://expressjs.com/)) は、アプリケーションページのクライアントリクエストを NgUniversal の `ngExpressEngine` に渡します。
 内部では、これは Universal の `renderModule()` 関数を呼び出しますが、
 キャッシングやその他の有用なユーティリティを提供します。
 
 `renderModule()` 関数は、入力としてテンプレート HTML ページ (通常は `index.html`)、
-コンポーネントを含む Angular *モジュール*、
-および表示するコンポーネントを決定する *ルート* を受け取ります。
+コンポーネントを含む Angular *モジュール*、および表示するコンポーネントを決定する *ルート* を受け取ります。
 ルートは、クライアントの要求からサーバーに到達します。
 
 各リクエストの結果、リクエストされたルートの適切なビューが表示されます。
@@ -187,70 +186,6 @@ Angular がそれを提供しない場合、ブラウザ内ではブラウザ AP
 アプリは、受信するクライアントリクエストのみに基づいてレンダリングするものを決定する必要があります。
 これは、アプリを[ルーティング可能](guide/router)にするためのよい議論です。
 
-{@a http-urls}
-### サーバーリクエストに絶対 URL を使用する
-
-チュートリアルの `HeroService` と `HeroSearchService` は、Angular `HttpClient` モジュールに委任して、アプリケーションデータを取得します。
-これらのサービスは、`api/heroes` などの _相対_ URL にリクエストを送信します。
-ユニバーサルアプリでは、HTTP URL は _絶対_ (たとえば、`https://my-server.com/api/heroes`) である必要があります。
-つまり、サーバーで実行する場合は絶対 URL で、
-ブラウザで実行する場合は相対 URL でリクエストを行うようにサービスを変更する必要があります。
-
-1つの解決策は、サーバー上のアプリケーションに完全な URL を提供し、この値を取得してリクエスト URL に追加できるインターセプターを作成することです。
-このガイドの例に示すように、`ngExpressEngine` を使用している場合、作業の半分はすでに完了しています。
-これが当てはまると仮定しますが、同じ機能を提供するのは簡単です。
-
-[HttpInterceptor](api/common/http/HttpInterceptor) を作成することから始めます。
-
-<code-example language="typescript" header="universal-interceptor.ts">
-
-import {Injectable, Inject, Optional} from '@angular/core';
-import {HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders} from '@angular/common/http';
-import {Request} from 'express';
-import {REQUEST} from '@nguniversal/express-engine/tokens';
-
-@Injectable()
-export class UniversalInterceptor implements HttpInterceptor {
-
-  constructor(@Optional() @Inject(REQUEST) protected request?: Request) {}
-
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    let serverReq: HttpRequest<any> = req;
-    if (this.request) {
-      let newUrl = `${this.request.protocol}://${this.request.get('host')}`;
-      if (!req.url.startsWith('/')) {
-        newUrl += '/';
-      }
-      newUrl += req.url;
-      serverReq = req.clone({url: newUrl});
-    }
-    return next.handle(serverReq);
-  }
-}
-
-</code-example>
-
-次に、サーバー `AppModule` のプロバイダーにインターセプターを提供します。
-
-<code-example language="typescript" header="app.server.module.ts">
-
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {UniversalInterceptor} from './universal-interceptor';
-
-@NgModule({
-  ...
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: UniversalInterceptor,
-    multi: true
-  }],
-})
-export class AppServerModule {}
-
-</code-example>
-
-これで、サーバーで行われたすべての HTTP リクエストで、このインターセプターが起動し、
-リクエスト URL を Express `Request` オブジェクトで提供された絶対 URL に置き換えます。
 
 {@a universal-engine}
 ### Universal テンプレートエンジン
@@ -261,16 +196,10 @@ export class AppServerModule {}
 </code-example>
 
 `ngExpressEngine()` 関数は、クライアントのリクエストをサーバーレンダリングされた HTML ページに変換する
-Universal の `renderModule()` 関数のラッパーです。
+Universal の `renderModule()` 関数のラッパーです。次のプロパティをもつオブジェクトを受け入れます。
 
-* 最初のパラメータは `AppServerModule` です。
-これは、Universal の サーバーサイドレンダラーと Angular アプリケーション間のブリッジです。
-
-* 2番目のパラメータは `extraProviders` で、オプショナルです。
-このサーバーで実行されている場合にのみ適用される依存関係プロバイダーを指定できます。
-これは、現在実行中のサーバーインスタンスによってのみ判断できる情報がアプリに必要な場合に実行できます。
-1つの例としては、実行中のサーバーのオリジンがあります。
-これは、上記のように `Request` トークンを使用しない場合に[絶対 HTTP URL を計算する](#http-urls) ために使用できます。
+* `bootstrap`: The root `NgModule` or `NgModule` factory to use for bootstraping the app when rendering on the server. For the example app, it is `AppServerModule`. It's the bridge between the Universal server-side renderer and the Angular application.
+* `extraProviders`: This is optional and lets you specify dependency providers that apply only when rendering the app on the server. You can do this when your app needs information that can only be determined by the currently running server instance.
 
 `ngExpressEngine()` 関数は、レンダリングされたページに解決される `Promise` コールバックを返します。
 そのページをどう処理するかはエンジン次第です。
@@ -306,8 +235,8 @@ Web サーバーは、_アプリのページのリクエスト_ を他の種類�
 1. **アプリのナビゲーション**: ファイル拡張子のないリクエスト URL
 1. **静的アセット**: 他のすべてのリクエスト
 
-Node Express サーバーは、リクエストを次々にフィルタリングして処理するミドルウェアのパイプラインです。
-Node Express サーバーパイプラインは、データリクエスト用にこのような `app.get()` の呼び出しで構成します。
+Node.js Express サーバーは、リクエストを次々にフィルタリングして処理するミドルウェアのパイプラインです。
+Node.js Express サーバーパイプラインは、データリクエスト用にこのような `app.get()` の呼び出しで構成します。
 
 <code-example path="universal/server.ts" header="server.ts (data URL)" region="data-request"></code-example>
 
@@ -327,13 +256,32 @@ Node Express サーバーパイプラインは、データリクエスト用に�
 
 ### 静的ファイルを安全に提供する
 
-単一の `app.use()` は、他のすべての URL を
+単一の `server.use()` は、他のすべての URL を
 JavaScript、画像、スタイルファイルなどの静的アセットのリクエストとして扱います。
 
 クライアントが表示が許可されているファイルのみをダウンロードできるようにするには、すべてのクライアント向けアセットファイルを `/dist` フォルダーに入れ、
 `/dist` フォルダーからのファイルのリクエストのみを受け入れます。
 
-次の Node Express コードは、残りのすべてのリクエストを `/dist` にルーティングし、
+次の Node.js Express コードは、残りのすべてのリクエストを `/dist` にルーティングし、
 ファイルが見つからない場合は `404 - NOT FOUND` エラーを返します。
 
 <code-example path="universal/server.ts" header="server.ts (static files)" region="static"></code-example>
+
+### Using absolute URLs for HTTP (data) requests on the server
+
+The tutorial's `HeroService` and `HeroSearchService` delegate to the Angular `HttpClient` module to fetch application data.
+These services send requests to _relative_ URLs such as `api/heroes`.
+In a server-side rendered app, HTTP URLs must be _absolute_ (for example, `https://my-server.com/api/heroes`).
+This means that the URLs must be somehow converted to absolute when running on the server and be left relative when running in the browser.
+
+If you are using one of the `@nguniversal/*-engine` packages (such as `@nguniversal/express-engine`), this is taken care for you automatically.
+You don't need to do anything to make relative URLs work on the server.
+
+If, for some reason, you are not using an `@nguniversal/*-engine` package, you may need to handle it yourself.
+
+The recommended solution is to pass the full request URL to the `options` argument of [renderModule()](api/platform-server/renderModule) or [renderModuleFactory()](api/platform-server/renderModuleFactory) (depending on what you use to render `AppServerModule` on the server).
+This option is the least intrusive as it does not require any changes to the app.
+Here, "request URL" refers to the URL of the request as a response to which the app is being rendered on the server.
+For example, if the client requested `https://my-server.com/dashboard` and you are rendering the app on the server to respond to that request, `options.url` should be set to `https://my-server.com/dashboard`.
+
+Now, on every HTTP request made as part of rendering the app on the server, Angular can correctly resolve the request URL to an absolute URL, using the provided `options.url`.

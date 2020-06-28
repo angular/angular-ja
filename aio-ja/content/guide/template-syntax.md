@@ -1261,10 +1261,10 @@ Angular は、この目的のための特別な _双方向データバインデ�
 <div class="callout is-important">
 
 <header>
-  [( )] = 箱の中のバナナ
+  [( )] = banana in a box
 </header>
 
-括弧が角括弧の _中_ にあることを覚えておくために *箱の中のバナナ* を思い描いてください。
+括弧が角括弧の _中_ にあることを覚えておくために *banana in a box* を思い描いてください。
 
 </div>
 
@@ -1962,12 +1962,12 @@ Angular の[ライフサイクル・フック](guide/lifecycle-hooks#onchanges) 
 
 `@Input()` と同じように、子コンポーネントのプロパティに対して
 `@Output()` を使うことができますが、その型は
-`EventEmitter` でなければなりません。
+`EventEmitter` であるべきです。
 
 `@Output()` は、子コンポーネントのプロパティが、
 データを子から親に伝える玄関口となることを示します。
-子コンポーネントがイベントを起こすことで、
-親コンポーネントが変化に気づくことができます。イベントを起こすには、
+子コンポーネントがイベントを発火することで、
+親コンポーネントが変化に気づくことができます。イベントを発火するには、
 カスタムイベントを発生させるために使う `@angular/core` のクラス
 `EventEmitter` と、
 `@Output()` が連動します。
@@ -2105,7 +2105,7 @@ import { Output, EventEmitter } from '@angular/core';
 図が示すように、入力と出力を同時に使うのは、個別に使うのと同じことです。ここで、子のセレクターは `<app-input-output>` で、`item` と `deleteRequest` は子コンポーネントクラスの `@Input()` と `@Output()` プロパティです。
 プロパティ `currentItem` とメソッド `crossOffItem()` は、どちらも親コンポーネントクラスのものです。
 
-箱の中のバナナ構文 `[()]` を使うことで、プロパティとイベントバインディングを合体させることができます。
+banana-in-a-box 構文 `[()]` を使うことで、プロパティとイベントバインディングを合体させることができます。
 詳しくは[双方向バインディング](guide/template-syntax#two-way)をご覧ください。
 
 これらの動作の詳細については、前のセクションの[入力](guide/template-syntax#input)と[出力](guide/template-syntax#output)をご覧ください。動いている例を見るには<live-example name="inputs-outputs">入力と出力の例</live-example>をご覧ください。

@@ -590,7 +590,7 @@
           "url": "guide/web-worker",
           "title": "Web Worker",
           "tooltip": "Using web workers for background processing.",
-          "translated": false
+          "translated": true
         },
         {
           "url": "guide/universal",

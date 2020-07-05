@@ -1,6 +1,6 @@
 # Angular コンパイラオプション
 
-[AOTコンパイル](guide/aot-compiler) を使用する場合、`tsconfig.json` [TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
+[AOTコンパイル](guide/aot-compiler) を使用する場合、[TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
 
 テンプレートオプションオブジェクトの `angularCompilerOptions` は、TypeScript コンパイラに標準オプションを提供する `compilerOptions` オブジェクトに近いものです。
 
@@ -21,11 +21,11 @@
 {@a tsconfig-extends}
 ## 拡張による構成の継承
 
-TypeScript コンパイラと同様に、Angular AOT コンパイラは、TypeScript 構成ファイル `tsconfig.json` の `angularCompilerOptions` セクションで `extends` もサポートしています。
+TypeScript コンパイラと同様に、Angular AOT コンパイラは、TypeScript 構成ファイルの `angularCompilerOptions` セクションで `extends` もサポートしています。
 `extends` プロパティはトップレベルにあり、`compilerOptions` および `angularCompilerOptions` と並行しています。
 
 TypeScript 設定は、`extends` プロパティを使用して別のファイルから設定を継承できます。
-ベースファイルの設定オプションが最初にロードされ、次に継承する `tsconfig` ファイルの設定オプションによって上書きされます。
+ベースファイルの設定オプションが最初にロードされ、次に継承する設定ファイルの設定オプションによって上書きされます。
 
 例:
 

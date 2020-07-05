@@ -7,7 +7,11 @@
 * ユーザーはヒーロー情報を追加、編集、削除ができ、その変更をHTTPを通して保存することができます。
 * ユーザーは名前でヒーロー情報を検索できます。
 
-このページを終えたとき、このアプリは次のようになります。<live-example></live-example>
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
 
 ## HTTPサービスの有効化
 
@@ -75,7 +79,8 @@
 
 <code-example path="toh-pt6/src/app/in-memory-data.service.ts" region="init" header="src/app/in-memory-data.service.ts"></code-example>
 
-`in-memory-data.service.ts`ファイルは`mock-heroes.ts`を置き換えます。これは削除しても安全です。
+`in-memory-data.service.ts`ファイルは` mock-heroes.ts`の機能を引き継ぎます。
+ただし、このチュートリアルのいくつかのステップで必要になるため、まだ `mock-heroes.ts`を削除しないでください。
 
 サーバーが準備されたら、インメモリWeb APIを外せば、アプリのリクエストはサーバーに送信されます。
 
@@ -518,8 +523,6 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 </div>
 
 ## 最終的なコードレビュー
-
-アプリはこの<live-example></live-example>のようになっているはずです。
 
 これがこのページで説明していたコードファイルです。(すべて`src/app/`フォルダーの中にあります)
 

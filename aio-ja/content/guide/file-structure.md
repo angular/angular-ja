@@ -40,7 +40,8 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
 | `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |
 | `node_modules`         | [npmパッケージ](guide/npm-packages)をワークスペース全体に提供します。 |
-| `tsconfig.json`        | ワークスペース内のアプリケーションが利用する[TypeScript](https://www.typescriptlang.org/) のデフォルト設定です。この中にはTypeScriptとAngularテンプレートのコンパイラオプションが含まれます。[TypeScript Configuration](guide/typescript-configuration)を参照してください。 |
+| `tsconfig.json`         | The `tsconfig.json` file is a ["Solution Style"](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#support-for-solution-style-tsconfigjson-files) TypeScript configuration file. Code editors and TypeScript’s language server use this file to improve development experience. Compilers do not use this file. |
+| `tsconfig.base.json`    | The base [TypeScript](https://www.typescriptlang.org/) configuration for projects in the workspace. All other configuration files inherit from this base file. For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.|
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 
 
@@ -77,6 +78,12 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `styles.sass`          | プロジェクトに適用するスタイルをもつCSSファイルを記載します。拡張子はプロジェクトに設定したスタイルプロセッサーを反映します。|
 | `test.ts`              | Angular特有の設定をもつ単体テストのメインエントリーポイントです。基本的にこのファイルを編集する必要はありません。|
 
+<div class="alert is-helpful">
+
+If you create an application using Angular's strict mode, you will also have an additional `package.json` file in the `src/app` directory. For more information, see [Strict mode](/guide/strict-mode).
+
+</div>
+
 {@a app-src}
 
 `src/` フォルダ内の `app/` フォルダには、プロジェクトのロジックとデータが含まれています。
@@ -89,17 +96,18 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 | `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
 | `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
 | `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
+| `app/package.json`              | This file is generated only in applications created using `--strict` mode. This file is not used by package managers. It is used to tell the tools and bundlers whether the code under this directory is free of non-local [side-effects](guide/strict-mode#side-effect). |
 
 ### アプリケーション設定ファイル {@a application-configuration-files}
 
 ルートアプリケーション用のアプリケーション固有の設定ファイルは、ワークスペースのルートレベルにあります。
 マルチプロジェクトワークスペースの場合、プロジェクト固有の設定ファイルはプロジェクトルートの `projects/project-name/` にあります。
 
-プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
+プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.base.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
 
 | アプリケーション固有の設定ファイル    | 目的 |
 | :--------------------- | :------------------------------------------|
-| `browserslist`         | ターゲットブラウザとさまざまなフロントエンドツールのNode.jsのバージョンの共有設定をします。詳しくは[Browserslist on GitHub](https://github.com/browserslist/browserslist) を参照してください。 |
+| `.browserslistrc`         | ターゲットブラウザとさまざまなフロントエンドツールのNode.jsのバージョンの共有設定をします。詳しくは[Browserslist on GitHub](https://github.com/browserslist/browserslist) を参照してください。 |
 | `karma.conf.js`      | アプリケーション固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定。 |
 | `tsconfig.app.json`    | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、アプリケーション固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) と [Angular Compiler Options](guide/angular-compiler-options)を参照してください。 |
 | `tsconfig.spec.json`   | アプリケーションテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |

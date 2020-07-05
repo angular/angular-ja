@@ -115,9 +115,9 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 </tr>
 </table>
 
-Custom Elements をサポートしているブラウザにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの `tsconfig.json` ファイルに `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザで利用可能であるとは限らないので、古いブラウザや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
+Custom Elements をサポートしているブラウザにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの [TypeScript 設定ファイル](/guide/typescript-configuration) に `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザで利用可能であるとは限らないので、古いブラウザや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
 
-自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](cli) をお使いください。
+自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](cli) をお使いください: `ng add @angular/elements --project=*your_project_name*`
 - ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を参照してください。
 
 - Angular のブラウザサポート状況についての詳細は、[Browser Support](guide/browser-support) を参照してください。

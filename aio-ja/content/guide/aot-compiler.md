@@ -105,7 +105,7 @@ AOTコンパイルでのエラーは一般的に、コンパイラの要求(以�
 
 ### AOTコンパイルを設定する
 
-[TypeScript設定ファイル](guide/typescript-configuration)の`tsconfig.json`においてオプションを加えることで、コンパイルプロセスを制御できます。利用可能なオプションの完全なリストについては[Angularコンパイラオプション](guide/angular-compiler-options)を参照してください。
+[TypeScript設定ファイル](guide/typescript-configuration)においてオプションを加えることで、コンパイルプロセスを制御できます。利用可能なオプションの完全なリストについては[Angularコンパイラオプション](guide/angular-compiler-options)を参照してください。
 
 ## フェーズ 1: コード解析
 
@@ -211,7 +211,7 @@ AOTコレクター は JavaScript のサブセットしか理解できません�
 
 <div class="alert is-helpful">
 
- エラーを伴う `.metadata.json` ファイルを生成せずに `ngc` に構文エラーを即座に報告させたい場合は、TypeScript設定ファイル `tsconfig.json` の `strictMetadataEmit` オプションを設定してください。
+ エラーを伴う `.metadata.json` ファイルを生成せずに `ngc` に構文エラーを即座に報告させたい場合は、TypeScript設定ファイルの `strictMetadataEmit` オプションを設定してください。
 
 ```
   "angularCompilerOptions": {

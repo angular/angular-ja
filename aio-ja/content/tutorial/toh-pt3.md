@@ -10,6 +10,12 @@
 `HeroesComponent` はヒーローのリストのみを表示します。
 `HeroDetailComponent` は選択されたヒーローの詳細を表示します。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 ## `HeroDetailComponent` を作成する
 
 Angular CLIを使用して､ `hero-detail` という名前の新しいコンポーネントを生成します。
@@ -133,7 +139,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 ## 最終的なコードレビュー
 
-このページで解説したコードファイルは次のとおりで、あなたのアプリケーションはこのように見えるはずです <live-example></live-example>。
+このページで解説したコードファイルは次のとおりです。
 
 <code-tabs>
 

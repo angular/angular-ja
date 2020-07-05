@@ -114,7 +114,7 @@ Observableは値を非同期的に生成するため、try/catchは効果的に�
 <code-example>
 myObservable.subscribe({
   next(num) { console.log('Next num: ' + num)},
-  error(err) { console.log('Received an errror: ' + err)}
+  error(err) { console.log('Received an error: ' + err)}
 });
 </code-example>
 

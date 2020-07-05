@@ -2619,7 +2619,7 @@ If the user is logged in, it returns true and the navigation continues.
 The `ActivatedRouteSnapshot` contains the _future_ route that will be activated and the `RouterStateSnapshot` contains the _future_ `RouterState` of the application, should you pass through the guard check.
 
 If the user is not logged in, you store the attempted URL the user came from using the `RouterStateSnapshot.url` and tell the router to redirect to a login page&mdash;a page you haven't created yet.
-This secondary navigation automatically cancels the current navigation; `checkLogin()` returns `false`.
+Returning a `UrlTree` tells the `Router` to cancel the current navigation and schedule a new one to redirect the user.
 
 {@a add-login-component}
 
@@ -2672,8 +2672,8 @@ Extend the `AuthGuard` to protect when navigating between the `admin` routes.
 Open `auth.guard.ts` and add the `CanActivateChild` interface to the imported tokens from the router package.
 
 Next, implement the `canActivateChild()` method which takes the same arguments as the `canActivate()` method: an `ActivatedRouteSnapshot` and `RouterStateSnapshot`.
-The `canActivateChild()` method can return an `Observable<boolean>` or `Promise<boolean>` for async checks and a `boolean` for sync checks.
-This one returns a `boolean`:
+The `canActivateChild()` method can return an `Observable<boolean|UrlTree>` or `Promise<boolean|UrlTree>` for async checks and a `boolean` or `UrlTree` for sync checks.
+This one returns either `true` to allow the user to access the admin feature module or `UrlTree` to redirect the user to the login page instead:
 
 <code-example path="router/src/app/auth/auth.guard.3.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-activate-child"></code-example>
 
@@ -2838,13 +2838,15 @@ Update the `CrisisDetailComponent` to get the crisis from the  `ActivatedRoute.d
 
 <code-example path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.ts" header="src/app/crisis-center/crisis-detail/crisis-detail.component.ts (ngOnInit v2)" region="ngOnInit"></code-example>
 
-Note the following two important points:
+Note the following three important points:
 
 1. The router's `Resolve` interface is optional.
 The `CrisisDetailResolverService` doesn't inherit from a base class.
 The router looks for that method and calls it if found.
 
 1. The router calls the resolver in any case where the the user could navigate away so you don't have to code for each use case.
+
+1. Returning an empty `Observable` in at least one resolver will cancel navigation.
 
 The relevant Crisis Center code for this milestone follows.
 

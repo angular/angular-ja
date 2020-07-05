@@ -166,7 +166,7 @@ export class AppComponent {
 {@a size-budgets}
 {@a configure-size-budgets}
 
-## サイズ予算の設定
+## サイズ予算の設定 {@a configuring-size-budgets}
 
 アプリケーションの機能性が増すにつれて、それらのサイズも大きくなります。
 CLIを使用すると、サイズにしきい値を設定してアプリケーションの一部が定義したサイズ境界内に収まるようにすることができます。

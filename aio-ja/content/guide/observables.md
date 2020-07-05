@@ -1,4 +1,4 @@
-# Observableを使用して値を渡す
+# Observableを使用して値を渡す {@a using-observables-to-pass-values}
 
 Observableは、アプリケーションの中でパブリッシャーとサブスクライバー間でメッセージを渡すためのサポートを提供します。
 Observableは、イベント処理、非同期プログラミング、および複数の値の処理のための他のテクニックよりも大きな利点を提供します。

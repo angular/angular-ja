@@ -15,20 +15,46 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 
 {@a tsconfig}
 
-## TypeScriptの構成
+## 構成ファイル
 
-`tsconfig.json` と呼ばれるTypeScriptの構成ファイルは、プロジェクトのJavaScriptファイルを生成する際にコンパイラーをガイドします。
-このファイルには、Angularアプリケーションに不可欠なオプションとフラグが含まれています。
-通常、ファイルは [ワークスペースのルートレベル](guide/file-structure) にあります。
+A given Angular workspace contains several TypeScript configuration files.
+At the root level, there are two main TypeScript configuration files: a `tsconfig.json` file and a `tsconfig.base.json` file.
 
+The `tsconfig.json` file is a ["Solution Style"](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#support-for-solution-style-tsconfigjson-files) TypeScript configuration file.
+Code editors and TypeScript’s language server use this file to improve development experience.
+Compilers do not use this file.
+
+The `tsconfig.json` file contains a list of paths to the other TypeScript configuration files used in the workspace.
+
+<code-example lang="json" header="tsconfig.json" linenums="false">
+{
+ "files": [],
+ "references": [
+   {
+     "path": "./tsconfig.app.json"
+   },
+   {
+     "path": "./tsconfig.spec.json"
+   },
+   {
+     "path": "./projects/my-lib/tsconfig.lib.json"
+   }
+ ]
+}
+</code-example>
+
+The `tsconfig.base.json` file specifies the base TypeScript and Angular compiler options that all projects in the workspace inherit.
+
+The TypeScript and Angular have a wide range of options which can be used to configure type-checking features and generated output.
+For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.
 <div class="alert is-helpful">
 
-`tsconfig.json`の詳細については、公式の
-[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html) を参照してください。
+For more information TypeScript configuration files, see the official [TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+For details about configuration inheritance, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section.
 
 </div>
 
-Angular アプリケーションの最初の `tsconfig.json` は通常、次の例のようになります：
+Angular アプリケーションの最初の `tsconfig.base.json` は通常、次の例のようになります：
 
 <code-example lang="json" header="tsconfig.json" linenums="false">
 {
@@ -40,28 +66,25 @@ Angular アプリケーションの最初の `tsconfig.json` は通常、次の�
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ]
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
   }
 }
 </code-example>
 
 
-{@a noImplicitAny}
+### Strict mode
 
+When you create new workspaces and projects, you have the option to use Angular's strict mode, which can help you write better, more maintainable code.
+For more information, see [Strict mode](/guide/strict-mode).
+
+{@a noImplicitAny}
 
 ### *noImplicitAny* と *suppressImplicitAnyIndexErrors*
 
@@ -90,12 +113,12 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 </code-example>
 
-
 <div class="alert is-helpful">
 
 TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [Template の型チェック](guide/template-typecheck) を参照してください。
 
 </div>
+
 
 {@a typings}
 
@@ -146,7 +169,6 @@ TypeScript 2.0以降では自動認識されます。
 
 
 {@a target}
-
 
 ### *target*
 

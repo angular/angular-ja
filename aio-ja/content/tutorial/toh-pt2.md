@@ -3,6 +3,12 @@
 このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、
 ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 
 ## ヒーローのモックを作成する
 
@@ -206,8 +212,6 @@ Angularの [クラスバインディング](guide/template-syntax#class-binding)
 {@a final-code-review}
 
 ## 最終的なコードレビュー
-
-あなたのアプリはこのように見えるはずです。 <live-example></live-example>
 
 こちらが `HeroesComponent` のスタイルを含んだ、このページで解説したコードファイルです。
 

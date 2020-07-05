@@ -1,4 +1,4 @@
-# Observableを使用して値を渡す
+# Observableを使用して値を渡す {@a using-observables-to-pass-values}
 
 Observableは、アプリケーションの中でパブリッシャーとサブスクライバー間でメッセージを渡すためのサポートを提供します。
 Observableは、イベント処理、非同期プログラミング、および複数の値の処理のための他のテクニックよりも大きな利点を提供します。
@@ -114,7 +114,7 @@ Observableは値を非同期的に生成するため、try/catchは効果的に�
 <code-example>
 myObservable.subscribe({
   next(num) { console.log('Next num: ' + num)},
-  error(err) { console.log('Received an errror: ' + err)}
+  error(err) { console.log('Received an error: ' + err)}
 });
 </code-example>
 

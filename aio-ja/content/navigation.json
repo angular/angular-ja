@@ -246,7 +246,7 @@
               "url": "guide/pipes",
               "title": "パイプ",
               "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/lifecycle-hooks",
@@ -295,12 +295,6 @@
               "title": "リアクティブフォーム",
               "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
               "translated": false
-            },
-            {
-              "url": "guide/forms",
-              "title": "テンプレート駆動フォーム",
-              "tooltip": "ディレクティブとAngularテンプレート構文を使用して、テンプレート駆動フォームを作成しましょう",
-              "translated": true
             },
             {
               "url": "guide/form-validation",
@@ -536,7 +530,7 @@
           "url": "guide/i18n",
           "title": "国際化 (i18n)",
           "tooltip": "アプリのテンプレートテキストを複数の言語に翻訳します",
-          "translated": true
+          "translated": false
         },
         {
           "url": "guide/accessibility",
@@ -590,95 +584,12 @@
           "url": "guide/web-worker",
           "title": "Web Worker",
           "tooltip": "Using web workers for background processing.",
-          "translated": false
+          "translated": true
         },
         {
           "url": "guide/universal",
           "title": "サーバーサイドレンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-          "translated": false
-        },
-        {
-          "title": "Upgrading from AngularJS",
-          "tooltip": "Incrementally upgrade an AngularJS application to Angular.",
-          "children": [
-            {
-              "url": "guide/upgrade-setup",
-              "title": "Setup for Upgrading from AngularJS",
-              "tooltip": "Use code from the Angular QuickStart seed as part of upgrading from AngularJS.",
-              "hidden": true
-            },
-            {
-              "url": "guide/upgrade",
-              "title": "Upgrading Instructions",
-              "tooltip": "Incrementally upgrade an AngularJS application to Angular."
-            },
-            {
-              "url": "guide/upgrade-performance",
-              "title": "Upgrading for Performance",
-              "tooltip": "Upgrade from AngularJS to Angular in a more flexible way."
-            },
-            {
-              "url": "guide/ajs-quick-reference",
-              "title": "AngularJS-Angular Concepts",
-              "tooltip": "Learn how AngularJS concepts and techniques map to Angular."
-            }
-          ]
-        },
-        {
-          "title": "Angular Libraries",
-          "tooltip": "Extending Angular with shared libraries.",
-          "children": [
-            {
-              "url": "guide/libraries",
-              "title": "ライブラリの概要",
-              "tooltip": "ライブラリを使用または作成する方法と時期を理解します。",
-              "translated": true
-            },
-            {
-              "url": "guide/using-libraries",
-              "title": "公開ライブラリの使用",
-              "tooltip": "公開ライブラリをアプリに統合します。",
-              "translated": true
-            },
-            {
-              "url": "guide/creating-libraries",
-              "title": "ライブラリの作成",
-              "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "title": "Schematics",
-          "tooltip": "Using CLI schematics for code generation.",
-          "children": [
-            {
-              "url": "guide/schematics",
-              "title": "Schematics Overview",
-              "tooltip": "How the CLI uses schematics to generate code."
-            },
-            {
-              "url": "guide/schematics-authoring",
-              "title": "Authoring Schematics",
-              "tooltip": "Understand the structure of a schematic."
-            },
-            {
-              "url": "guide/schematics-for-libraries",
-              "title": "Schematics for Libraries",
-              "tooltip": "Use schematics to integrate your library with the Angular CLI."
-            }
-          ]
-        },
-        {
-          "url": "guide/cli-builder",
-          "title": "CLI Builders",
-          "tooltip": "Using builders to customize Angular CLI."
-        },
-        {
-          "url": "guide/web-worker",
-          "title": "AngularにおけるWeb Workers",
-          "tooltip": "Using web workers for background processing.",
           "translated": false
         }
       ]
@@ -719,12 +630,6 @@
           "url": "guide/build",
           "title": "ビルドとサーブ",
           "tooltip": "Angularアプリのビルドとサーブ",
-          "translated": true
-        },
-        {
-          "url": "guide/bazel",
-          "title": "Bazel を使ったビルド",
-          "tooltip": "Bazelでビルドしてテストするための環境設定方法",
           "translated": true
         },
         {
@@ -791,6 +696,11 @@
           "title": "ブラウザサポート",
           "tooltip": "ブラウザサポートとポリフィルのガイド",
           "translated": true
+        },
+        {
+          "url": "guide/strict-mode",
+          "title": "Strict mode",
+          "tooltip": "Reference documentation for Angular's strict mode."
         }
       ]
     },
@@ -851,6 +761,22 @@
       ]
     },
     {
+      "title": "チュートリアル",
+      "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
+      "children": [
+        {
+          "url": "guide/router-tutorial",
+          "title": "Using Angular Routes in a Single-page Application",
+          "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+        },
+        {
+          "url": "guide/forms",
+          "title": "Building a Template-driven Form",
+          "tooltip": "Create a template-driven form using directives and Angular template syntax."
+        }
+      ]
+    },
+    {
       "title": "リリース情報",
       "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
       "children": [
@@ -867,13 +793,13 @@
           "translated": true
         },
         {
-          "title": "バージョン9へのアップデート",
-          "tooltip": "Support for updating your application from version 8 to 9.",
+          "title": "バージョン10へのアップデート",
+          "tooltip": "Support for updating your application from version 9 to 10.",
           "children": [
             {
-              "url": "guide/updating-to-version-9",
+              "url": "guide/updating-to-version-10",
               "title": "Overview",
-              "tooltip": "Everything you need to know for updating your application from version 8 to 9."
+              "tooltip": "Everything you need to know for updating your application from version 9 to 10."
             },
             {
               "url": "guide/ivy-compatibility",
@@ -881,29 +807,9 @@
               "tooltip": "Details to help you make sure your application is compatible with Ivy."
             },
             {
-              "title": "Optional Migrations",
-              "tooltip": "Optional migration details regarding updating to version 9.",
+              "title": "Migrations",
+              "tooltip": "Migration details regarding updating to version 10.",
               "children": [
-                {
-                  "url": "guide/migration-renderer",
-                  "title": "Renderer to Renderer2",
-                  "tooltip": "Migration from the deprecated Renderer API to the newer Renderer2 API."
-                },
-                {
-                  "url": "guide/migration-dynamic-flag",
-                  "title": "Dynamic Queries Flag",
-                  "tooltip": "Migration to remove unnecessary `static: false` flag from @ViewChild and @ContentChild queries."
-                },
-                {
-                  "url": "guide/migration-injectable",
-                  "title": "Missing @Injectable() Decorators",
-                  "tooltip": "Migration to add missing @Injectable() decorators and incomplete provider definitions."
-                },
-                {
-                  "url": "guide/migration-localize",
-                  "title": "$localize Global Import",
-                  "tooltip": "Migration to add an import statement for @angular/localize to polyfills.ts."
-                },
                 {
                   "url": "guide/migration-module-with-providers",
                   "title": "Missing ModuleWithProviders Generic",
@@ -913,6 +819,26 @@
                   "url": "guide/migration-undecorated-classes",
                   "title": "Missing @Directive() Decorators",
                   "tooltip": "Migration to add missing @Directive()/@Component() decorators."
+                },
+                {
+                  "url": "guide/migration-injectable",
+                  "title": "Missing @Injectable() Decorators",
+                  "tooltip": "Migration to add missing @Injectable() decorators and incomplete provider definitions."
+                },
+                {
+                  "url": "guide/migration-solution-style-tsconfig",
+                  "title": "Solution-style `tsconfig.json`",
+                  "tooltip": "Migration to create a solution-style `tsconfig.json`."
+                },
+                {
+                  "url": "guide/migration-update-libraries-tslib",
+                  "title": "`tslib` direct dependency",
+                  "tooltip": "Migration to a direct dependency on the `tslib` npm package."
+                },
+                {
+                  "url": "guide/migration-update-module-and-target-compiler-options",
+                  "title": "`module` and `target` compiler options",
+                  "tooltip": "Migration to update `module` and `target` compiler options."
                 }
               ]
             }
@@ -1116,6 +1042,10 @@
   ],
 
   "docVersions": [
+    {
+      "title": "v9",
+      "url": "https://v9.angular.io/"
+    },
     {
       "title": "v8",
       "url": "https://v8.angular.io/"

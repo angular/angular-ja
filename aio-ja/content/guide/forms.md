@@ -1,407 +1,265 @@
-# テンプレート駆動フォーム {@a template-driven-forms}
-
-フォームはビジネスアプリケーションの根幹です。
-フォームを使用してログインし、ヘルプリクエストを送信し、注文し、フライトを予約し、
-ミーティングをスケジュールし、その他の無数のデータ入力タスクを実行します。
-
-フォームを開発するには、ワークフローを通じて効率的かつ
-効果的にユーザーを誘導するデータ入力エクスペリエンスを作成することが重要です。
-
-<div class="alert is-helpful">
-
-  For the sample app that this page describes, see the <live-example></live-example>.
-
-</div>
-
-## テンプレート駆動フォームの導入
-
-フォームを開発するには、デザインスキル（このページの対象外）と
-*双方向データ・バインディング、変更検知、検証、エラー処理*のための
-フレームワークサポートが必要です。
-
-このページでは、単純なフォームを最初から作成する方法を示します。ここでは次のことを学びます
-
-* コンポーネントとテンプレートを使ってAngularフォームを作成します。
-* `ngModel` を使用して、入力コントロールの値を読み書きするための双方向データバインディングを作成します。
-* 状態の変化とフォームコントロールの有効性を追跡します。
-* コントロールの状態を追跡する特別なCSSクラスを使用して視覚的フィードバックを提供します。
-* 検証エラーをユーザーに表示し、フォームコントロールを有効または無効にします。 
-* テンプレート参照変数を使用してHTML要素間で情報を共有します。
+# Building a template-driven form
 
 {@a template-driven}
 
-このページで説明されているフォーム固有のディレクティブとテクニックを使用して、
-Angular[テンプレート構文](guide/template-syntax)でテンプレートを記述することにより、フォームを構築できます。
+This tutorial shows you how to create a template-driven form whose control elements are bound to data properties, with input validation to maintain data integrity and styling to improve the user experience.
+
+Template-driven forms use [two-way data binding](guide/architecture-components#data-binding "Intro to 2-way data binding") to update the data model in the component as changes are made in the template and vice versa.
 
 <div class="alert is-helpful">
 
-  リアクティブ（またはモデル駆動型）アプローチを使用してフォームを構築することもできます。
-  ただし、このページでは、テンプレート駆動フォームに焦点を当てています。
+Angular supports two design approaches for interactive forms. You can build forms by writing templates using Angular [template syntax and directives](guide/glossary#template "Definition of template terms") with the form-specific directives and techniques described in this tutorial, or you can use a reactive (or model-driven) approach to build forms.
+
+Template-driven forms are suitable for small or simple forms, while reactive forms are more scalable and suitable for complex forms.
+For a comparison of the two approaches, see [Introduction to Forms](guide/forms-overview "Overview of Angular forms.")
 
 </div>
 
-ほとんどのフォームは、Angularテンプレートを使って構築することができます&mdash;ログインフォーム、コンタクトフォーム、ほぼすべてのビジネスフォーム。
-コントロールを創造的に配置し、データにバインドし、検証ルールを指定し、検証エラーを表示し、特定のコントロールを条件付きで有効または無効にしたり、
-ビジュアルフィードバックをトリガーしたりできます。
+You can build almost any kind of form with an Angular template&mdash;login forms, contact forms, and pretty much any business form.
+You can lay out the controls creatively and bind them to the data in your object model.
+You can specify validation rules and display validation errors,
+conditionally enable or disable specific controls, trigger built-in visual feedback, and much more.
 
-Angularは、あなた自身が苦労している反復的で定型的なタスクの多くを処理することで、
-プロセスを簡単にします。
+This tutorial shows you how to build a form from scratch, using a simplified sample form like the one from the [Tour of Heroes tutorial](tutorial "Tour of Heroes") to illustrate the techniques.
 
-次のようなテンプレート駆動フォームを構築する方法を学びます。
+<div class="alert is-helpful">
+
+  Run or download the example app: <live-example></live-example>.
+
+</div>
+
+## Objectives
+
+This tutorial teaches you how to do the following:
+
+* Build an Angular form with a component and template.
+* Use `ngModel` to create two-way data bindings for reading and writing input-control values.
+* Provide visual feedback using special CSS classes that track the state of the controls.
+* Display validation errors to users and enable or disable form controls based on the form status.
+* Share information across HTML elements using [template reference variables](guide/template-syntax#template-reference-variables-var).
+
+## Prerequisites
+
+Before going further into template-driven forms, you should have a basic understanding of the following.
+
+* TypeScript and HTML5 programming.
+* Angular app-design fundamentals, as described in [Angular Concepts](guide/architecture "Introduction to Angular concepts.").
+* The basics of [Angular template syntax](guide/template-syntax "Template syntax guide").
+* The form-design concepts that are presented in [Introduction to Forms](guide/forms-overview "Overview of Angular forms.").
+
+{@a intro}
+
+## Build a template-driven form
+
+Template-driven forms rely on directives defined in the `FormsModule`.
+
+* The `NgModel` directive reconciles value changes in the attached form element with changes in the data model, allowing you to respond to user input with input validation and error handling.
+
+* The `NgForm` directive creates a top-level `FormGroup` instance and binds it to a `<form>` element to track aggregated form value and validation status.
+As soon as you import `FormsModule`, this directive becomes active by default on all `<form>` tags. You don't need to add a special selector.
+
+* The `NgModelGroup` directive creates and binds a `FormGroup` instance to a DOM element.
+
+### The sample application
+
+The sample form in this guide is used by the *Hero Employment Agency* to maintain personal information about heroes.
+Every hero needs a job. This form helps the agency match the right hero with the right crisis.
 
 <div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-1.png" alt="Clean Form">
 </div>
 
-*Hero Employment Agency* はこのフォームを使用してヒーローに関する個人情報を管理しています。
-すべてのヒーローは仕事が必要です。適切な英雄と正しい危機を一致させることがこの会社の使命です。
+The form highlights some design features that make it easier to use. For instance, the two required fields have a green bar on the left to make them easy to spot. These fields have initial values, so the form is valid and the **Submit** button is enabled.
 
-このフォームの3つのフィールドのうち2つが必須です。必要なフィールドには、左側に緑色のバーが表示されます。
-
-ヒーロー名を削除すると、フォームは注意を引いたスタイルで検証エラーを表示します。
+As you work with this form, you will learn how to include validation logic, how to customize the presentation with standard CSS, and how to handle error conditions to ensure valid input.
+If the user deletes the hero name, for example, the form becomes invalid. The app detects the changed status, and displays a validation error in an attention-grabbing style.
+In addition, the **Submit** button is disabled, and the "required" bar to the left of the input control changes from green to red.
 
 <div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-2.png" alt="Invalid, Name Required">
 </div>
 
-*Submit* ボタンは無効になっており、入力コントロールの左側の"必須"バーが緑色から赤色に変わっていることに注目しましょう。
+### Step overview
 
-<div class="alert is-helpful">
+In the course of this tutorial, you bind a sample form to data and handle user input using the following steps.
 
-  標準のCSSを使用して、"必須"バーの色と位置をカスタマイズできます。
+1. Build the basic form.
+   * Define a sample data model.
+   * Include required infrastructure such as the `FormsModule`.
+2. Bind form controls to data properties using the `ngModel` directive and two-way data-binding syntax.
+   * Examine how `ngModel` reports control states using CSS classes.
+   * Name controls to make them accessible to `ngModel`.
+3. Track input validity and control status using `ngModel`.
+   * Add custom CSS to provide visual feedback on the status.
+   * Show and hide validation-error messages.
+4. Respond to a native HTML button-click event by adding to the model data.
+5. Handle form submission using the [`ngSubmit`(api/forms/NgForm#properties)] output property of the form.
+   * Disable the **Submit** button until the form is valid.
+   * After submit, swap out the finished form for different content on the page.
 
-</div>
+{@a step1}
 
-このフォームは小さな手順で作成します。
+## Build the form
 
-1. `Hero` モデルクラスを作成します。 
-1. フォームを制御するコンポーネントを作成します。
-1. 初期フォームレイアウトのテンプレートを作成します。
-1. `ngModel` 双方向データバインディング構文を使用して、各フォームコントロールにデータプロパティをバインドします。 
-1. 各フォーム入力コントロールに `name` 属性を追加します。
-1. 視覚的なフィードバックを提供するカスタムCSSを追加します。
-1. 検証エラーメッセージの表示と非表示を切り替えます。
-1. *ngSubmit* でフォームの送信を処理します。
-1. フォームが有効になるまで、フォームの *Submit* ボタンを無効にします。
+You can recreate the sample application from the code provided here, or you can examine or download the <live-example></live-example>.
 
-## セットアップ
+1. The provided sample application creates the `Hero` class which defines the data model reflected in the form.
 
-<code>angular-forms</code>という名前の新しいプロジェクトを作成します。
+   <code-example path="forms/src/app/hero.ts" header="src/app/hero.ts"></code-example>
 
-<code-example language="sh" class="code-shell">
+2. The form layout and details are defined in the `HeroFormComponent` class.
 
-  ng new angular-forms
+   <code-example path="forms/src/app/hero-form/hero-form.component.ts" header="src/app/hero-form/hero-form.component.ts (v1)" region="v1"></code-example>
 
-</code-example>
+   The component's `selector` value of "app-hero-form" means you can drop this form in a parent
+template using the `<app-hero-form>` tag.
 
-## ヒーローモデルクラスを作成する
+3. The following code creates a new hero instance, so that the initial form can show an example hero.
 
-ユーザーがフォームデータを入力すると、その変更をキャプチャしてモデルのインスタンスを更新します。
-モデルがどのように見えるかを知るまで、フォームをレイアウトすることはできません。
+   <code-example path="forms/src/app/hero-form/hero-form.component.ts" region="SkyDog"></code-example>
 
-モデルは、アプリケーションが重要視する事実を保持する「プロパティバッグ」のように単純にできます。
-これは `Hero` クラスの3つの必須フィールド（ `id` 、 `name` 、 `power` ）と1つのオプションフィールド（ `alterEgo` ）でうまく記述されています。
+   This demo uses dummy data for `model` and `powers`. In a real app, you would inject a data service to get and save real data, or expose these properties as inputs and outputs.
 
-Angular CLIコマンド [ `ng generate class` ](cli/generate) を使用して、 `Hero` という名前の新しいクラスを生成します。
+4. The application enables the Forms feature and registers the created form component.
 
-<code-example language="sh" class="code-shell">
+   <code-example path="forms/src/app/app.module.ts" header="src/app/app.module.ts"></code-example>
 
-  ng generate class Hero
+5. The form is displayed in the application layout defined by the root component's template.
 
-</code-example>
+   <code-example path="forms/src/app/app.component.html" header="src/app/app.component.html"></code-example>
 
-中身を記述します。
+   The initial template defines the layout for a form with two form groups and a submit button.
+   The form groups correspond to two properties of the Hero data model, name and alterEgo. Each group has a label and a box for user input.
 
-<code-example path="forms/src/app/hero.ts" header="src/app/hero.ts"></code-example>
+   * The **Name** `<input>` control element has the HTML5 `required` attribute.
+   * The **Alter Ego** `<input>` control element does not because `alterEgo` is optional.
 
-これは要件が少なく振る舞いもない貧弱なモデルです。このデモには最適です。
+   The **Submit** button has some classes on it for styling.
+   At this point, the form  layout is all plain HTML5, with no bindings or directives.
 
-TypeScriptコンパイラは、 `public` コンストラクターパラメータごとにパブリックフィールドを生成し、
-ヒーローを作成するときにそのフィールドにパラメータの値を自動的に割り当てます。
+6. The sample form uses some style classes from [Twitter Bootstrap](http://getbootstrap.com/css/): `container`, `form-group`, `form-control`, and `btn`.
+   To use these styles, the app's style sheet imports the library.
 
-`alterEgo` はオプションであるため、コンストラクターで省略することができます。  `alterEgo?` の疑問符（?）に注目してください。
+   <code-example path="forms/src/styles.1.css" header="src/styles.css"></code-example>
 
-このように新しいヒーローを作成することができます。
+7. The form makes the hero applicant choose one superpower from a fixed list of agency-approved powers.
+   The predefined list of `powers` is part of the data model, maintained internally in `HeroFormComponent`.
+   The Angular [NgForOf directive](api/common/NgForOf "API reference") iterates over the data values to populate the `<select>` element.
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="SkyDog"></code-example>
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (powers)" region="powers"></code-example>
 
-## フォームコンポーネントを作成する
-
-Angularフォームには、HTMLベースの_テンプレート_と、 
-データとユーザー対話をプログラムで処理するコンポーネント _クラス_ の2つの部分があります。
-まずはクラスから、簡単にいえば、ヒーローエディターは何ができるのかということから始めましょう。
-
-Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用して、 `HeroForm` という名前の新しいコンポーネントを生成します。
-
-<code-example language="sh" class="code-shell">
-
-  ng generate component HeroForm
-
-</code-example>
-
-中身を記述します。
-
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" header="src/app/hero-form/hero-form.component.ts (v1)" region="v1"></code-example>
-
-このコンポーネントには何も特別なものはありません。フォーム固有のものはありません。
-前に書いたコンポーネントと区別するものはありません。
-
-このコンポーネントを理解するには、前のページで説明したAngularの概念のみが必要です。
-
-* コードはAngularコアライブラリと作成した `Hero` モデルをインポートします。
-* "hero-form"という `@Component` のセレクター値は、このフォームを `<app-hero-form>` タグによって親テンプレートに配置できることを意味します。
-* `templateUrl` プロパティは、テンプレートHTMLのための別のファイルを指します。
-* デモにふさわしいダミーデータを `model` と `powers` に定義します。
-
-実際のデータを取得して保存するためのデータサービスを挿入したり、親コンポーネントへのバインドのために、
-これらのプロパティを入力と出力として公開することができます（[テンプレート構文ページ](guide/template-syntax)の[入力プロパティと出力プロパティ](guide/template-syntax#inputs-outputs)を参照してください）。
-これは今は気にすることではなく、これらの将来の変更はフォームに影響しません。
-
-* `diagnostic` モデルのJSON表現を返すためのプロパティを追加しました。
-開発中に何をしているのかを理解するのに役立つので、あとで破棄するためのクリーンアップノートを残しました。
-
-## *app.module.ts*の改訂
-
-`app.module.ts` アプリケーションのルートモジュールを定義します。その中でアプリケーションで使用する外部モジュールを特定し、
-`HeroFormComponent` モジュールに属するコンポーネントを宣言します。
-
-テンプレート駆動フォームは専用のモジュールに含まれているので、フォームを使用する前に、アプリケーションモジュールの `imports` 配列に `FormsModule` を追加する必要があります。
-
-次のように更新してください。
-
-<code-example path="forms/src/app/app.module.ts" header="src/app/app.module.ts"></code-example>
-
-<div class="alert is-helpful">
-
-  2つの変更点があります。
-
-  1. `FormsModule` をインポートします。
-
-  1. `@NgModule` デコレーターに定義されている `imports` リストに `FormsModule` を追加します。これにより、
-  アプリケーションは `ngModel` を含むすべてのテンプレート駆動フォーム機能にアクセスできます。
-
-</div>
-
-<div class="alert is-important">
-
-  コンポーネント、ディレクティブ、またはパイプが `imports` 配列内のモジュールに属している場合、 `declarations` 配列で再宣言してはいけません。
-  それがあなたが記述したもので、モジュールに含める場合は、 `declarations` 配列で宣言してください。
-
-</div>
-
-## *app.component.html*の改訂
-
-`AppComponent` はアプリケーションのルートコンポーネントです。これは新しい `HeroFormComponent` のホストになります。
-
-テンプレートの内容を次のものに置き換えます。
-
-<code-example path="forms/src/app/app.component.html" header="src/app/app.component.html"></code-example>
-
-<div class="alert is-helpful">
-
-  変更は2つだけです。 `template` は、単にコンポーネントの `selector` プロパティによって識別される新しい要素タグになります。
-  これは、アプリケーションコンポーネントがロードされたときにヒーローフォームを表示します。
-  クラス本体から `name` フィールドを削除することも忘れないでください。
-
-</div>
-
-## 最初のHTMLフォームテンプレートを作成する
-
-テンプレートファイルを次の内容で更新します。
-
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="start" header="src/app/hero-form/hero-form.component.html"></code-example>
-
-言語は単なるHTML5です。 `Hero` のフィールド、 `name` と `alterEgo` を表示しており、ユーザー入力のためにそれらを入力ボックスに公開しています。
-
-*Name*の `<input>` コントロールは、HTML5の `required` 属性をもちますが、
-*Alter Ego*の `<input>` コントロールはオプションであるためそうではありません。
-
-下部に *Submit* ボタンを追加し、スタイリングのためにいくつかのクラスを追加しました。
-
-*Angularはまだ使用していません* 。バインディングや追加のディレクティブはなく、レイアウトだけです。
-
-<div class="alert is-helpful">
-
-  テンプレート駆動フォームでは、 `FormsModule` をインポートした場合は、 `FormsModule` の用途で `<form>` タグを使用するために何もする必要はありません。
-  それがどのように機能するかを確認してください。
-
-</div>
-
-`container` 、 `form-group` 、 `form-control` 、および `btn` クラスは[Twitter Bootstrap](http://getbootstrap.com/css/)由来です。
-これらのクラスは純粋に化粧品です。Bootstrapはフォームに小さなスタイルを与えます。
-
-<div class="callout is-important">
-
-  <header>
-    Angularフォームにはスタイルライブラリは必要ありません
-  </header>
-
-  Angularは `container` 、 `form-group` 、 `form-control` 、および `btn` クラスあるいは任意の外部ライブラリのスタイルを一切使用いたしません。
-  AngularアプリはCSSライブラリを使用することも、まったく使用しないこともできます。
-
-</div>
-
-スタイルシートを追加するには `styles.css` を開き、上部に次のインポート行を追加します。
-
-<code-example path="forms/src/styles.1.css" header="src/styles.css"></code-example>
-
-## _*ngFor_ を使って能力を追加する
-
-ヒーローは、エージェンシーが認可した能力のリストから1つの超能力を選択する必要があります。
-あなたはそのリストを( `HeroFormComponent` の中で)内部的に維持します。
-
-フォームに `select` を追加し、
-以前に[Displaying Data](guide/displaying-data)ページで見た手法である `ngFor` を使用して、オプションをリストにバインドします。
-
-次のHTMLを *Alter Ego* グループの *直下* に追加します。
-
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (powers)" region="powers"></code-example>
-
-このコードは、能力のリストの個々の能力ごとに `<option>` タグを繰り返します。
-テンプレート入力変数 `pow` は、各繰り返しにおいて異なる能力です。
-補間構文を使用して能力の名前を表示します。
-
-{@a ngModel}
-
-## _ngModel_による双方向データバインディング
-
-今すぐアプリケーションを実行してもがっかりするでしょう。
+If you run the app right now, you see the list of powers in the selection control. The input elements are not yet bound to data values or events, so they are still blank and have no behavior.
 
 <div class="lightbox">
   <img src="generated/images/guide/forms/hero-form-3.png" alt="Early form with no binding">
 </div>
 
+{@a ngModel}
 
-まだ `Hero` にバインドしていないので、ヒーローデータは表示されません。
-それをおこなう方法はこれまでのページで知っています。
-[データの表示は](guide/displaying-data)プロパティのバインディングを教えます。
-[ユーザー入力](guide/user-input)は、イベントバインディングを使用してDOMイベントをリッスンする方法、
-および表示された値でコンポーネントプロパティを更新する方法を示します。
+## Bind input controls to data properties
 
-今度は、表示とリッスン、さらに抽出を同時にする必要があります。
+The next step is to bind the input controls to the corresponding `Hero` properties with two-way data binding, so that they respond to user input by updating the data model, and also respond to programmatic changes in the data by updating the display.
 
-あなたはすでに知っているテクニックを使うことができますが、
-代わりに新しい `[(ngModel)]` 構文を使用することで、
-フォームをモデルに簡単にバインドすることができます。
+The `ngModel` directive declared in the `FormsModule` lets you bind controls in your template-driven form to properties in your data model.
+When you include the directive using the  syntax for two-way data binding, `[(ngModel)]`, Angular can track the value and user interaction of the control and keep the view synced with the model.
 
-*Name* の `<input>` タグを見つけて、次のように更新します。
+1. Edit the template file `hero-form.component.html`.
+
+2. Find the `<input>` tag next to the **Name** label.
+
+3. Add the `ngModel` directive, using two-way data binding syntax `[(ngModel)]="..."`.
 
 <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-1"></code-example>
 
 <div class="alert is-helpful">
 
-  入力タグの後に診断用の補間を追加して、
-  何をしているのかを確認できます。
-  完了したら捨てるためにメモを残しました。
+This example has a temporary diagnostic interpolation after each input tag, `{{model.name}}`, to show the current data value of the corresponding property.
+The note reminds you to remove the diagnostic lines when you have finished observing the two-way data binding at work.
 
 </div>
 
-`[(ngModel)]="..."` というバインディング構文に焦点を当ててください。
+{@a ngForm}
 
-データを表示するにはさらに1つの追加が必要です。
-フォームのテンプレート変数を宣言します。
-次のように `<form>` タグを `#heroForm="ngForm"` を使って更新します。
+### Access the overall form status
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="template-variable"></code-example>
+When you imported the `FormsModule` in your component, Angular automatically created and attached an [NgForm](api/forms/NgForm "API reference for NgForm") directive to the `<form>` tag in the template (because `NgForm` has the selector `form` that matches `<form>` elements).
 
-この変数 `heroForm` は `NgForm` というフォーム全体を管理するディレクティブへの参照になりました。
+To get access to the `NgForm` and the overall form status, declare a [template reference variable](guide/template-syntax#template-reference-variables-var).
 
-<div class="alert is-helpful">
+1. Edit the template file `hero-form.component.html`.
 
-  {@a ngForm}
+2. Update the `<form>` tag with a template reference variable, `#heroForm`, and set its value as follows.
 
-  ### _NgForm_ディレクティブ
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="template-variable"></code-example>
 
-  `NgForm` とはどのようなディレクティブでしょうか？あなたは[NgForm](api/forms/NgForm)ディレクティブを追加していません。
+   The `heroForm` template variable  is now a reference to the `NgForm` directive instance that governs the form as a whole.
 
-  Angularがやりました。Angularは自動的に `NgForm` ディレクティブを作成し `<form>` タグに付加します。
+3. Run the app.
 
-  この `NgForm` ディレクティブは `form` 要素に追加の機能を与えます。
-  `ngModel` ディレクティブと `name` 属性をもつ要素に対して作成したコントロールを保持し、
-  その有効性を含むプロパティを監視します。
-  また、それ自身の `valid` プロパティもあります。
-  これは、 *含まれているすべてのコントロール* が有効な場合にのみtrueです。
+4. Start typing in the **Name** input box.
 
-</div>
+  As you add and delete characters, you can see them appear and disappear from the data model.
+  For example:
 
-アプリケーションを実行して、 *Name* の入力ボックスでタイピングを始めて、文字の追加と削除をおこなえば、
-補間されたテキストが表示されたり消えてたりする様子が見られます。
-ある時点では、次のようになります。
+   <div class="lightbox">
+     <img src="generated/images/guide/forms/ng-model-in-action.png" alt="ngModel in action">
+   </div>
 
-<div class="lightbox">
-  <img src="generated/images/guide/forms/ng-model-in-action.png" alt="ngModel in action">
-</div>
+  The diagnostic line that shows interpolated values demonstrates that values are really flowing from the input box to the model and back again.
 
-この診断は、値が実際に入力ボックスからモデルに流れて戻ってきたという証拠です
+### Naming control elements
 
-<div class="alert is-helpful">
+When you use `[(ngModel)]` on an element, you must define a `name` attribute for that element.
+Angular uses the assigned name to register the element with the `NgForm` directive attached to the parent `<form>` element.
 
-  これが *双方向データバインディング* です。
-  詳細については、[テンプレート構文](guide/template-syntax)ページの[NgModelによる双方向バインディング](guide/template-syntax#ngModel)を参照してください。
+The example added a `name` attribute to the `<input>` element and set it to "name",
+which makes sense for the hero's name.
+Any unique value will do, but using a descriptive name is helpful.
 
-</div>
+1. Add similar `[(ngModel)]` bindings and `name` attributes to **Alter Ego** and **Hero Power**.
 
-`<input>` タグに `name` 属性を追加し、ヒーローの名前をあらわす"name"に設定することにも注意してください。
-一意の値であればなんでもよいですが、わかりやすい名前を使用すると便利です。
-フォームと組み合わせて `[(ngModel)]` を使用する場合は、 `name` 属性を定義する必要があります。
+2. You can now remove the diagnostic messages that show interpolated values.
 
-<div class="alert is-helpful">
+3. To confirm that two-way data binding works for the entire hero model, add a new binding at the top to the component's `diagnostic` property.
 
-  内部的に、Angularは `FormControl` インスタンスを作成し、
-  `<form>` タグにアタッチした `NgForm` ディレクティブとあわせてインスタンスを登録します。
-  個々の `FormControl` は、 `name` 属性に割り当てた名前で登録されます。
-  詳しくは前のセクション、[NgFormディレクティブ](guide/forms#ngForm)を参照してください。
-
-</div>
-
-同様の `[(ngModel)]` バインディングと属性を *Alter Ego* と *Hero Powers* に追加します。
-入力ボックスのバインディングメッセージを捨て、コンポーネントの `diagnostic` プロパティに新しいバインディング（上部）を追加します。
-そうすれば、 *ヒーローモデル全体に対して* 双方向データバインディングが機能することを確認できます。
-
-改訂後、フォームのコアは次のようになります。
+After these revisions, the form template should look like the following:
 
 <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModel-2"></code-example>
 
-<div class="alert is-helpful">
+* Notice that each `<input>` element has an `id` property. This is used by the `<label>` element's `for` attribute to match the label to its input control. This is a [standard HTML feature](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label).
 
-  * 各入力要素は `id` プロパティをもちます。これはラベルを入力コントロールに一致させるために `label` 要素の `for` 属性によって使用されます。
-  * 各入力要素は `name` プロパティをもちます。これはAngularフォームがコントロールを登録するために必要です。
+* Each `<input>` element also has the required `name` property that Angular uses to register the control with the form.
 
-</div>
-
-アプリを実行し、すべてのヒーローモデルのプロパティを変更すると、フォームは次のように表示されるでしょう。
+If you run the app now and change every hero model property, the form might display like this:
 
 <div class="lightbox">
   <img src="generated/images/guide/forms/ng-model-in-action-2.png" alt="ngModel in action">
 </div>
 
-フォーム上部の診断では、すべての変更がモデルに反映されていることが確認されます。
+The diagnostic near the top of the form confirms that all of your changes are reflected in the model.
 
-目的を果たしたので、一番上の `{{diagnostic}}` バインディングを削除してください。
+4. When you have observed the effects, you can delete the `{{diagnostic}}` binding.
 
-## _ngModel_ を使用してコントロールの状態と有効性を追跡する
+## Track control states
 
-フォームで `ngModel` を使うことで、単なる双方向データバインディング以上のことが可能になります。
-ユーザーがコントロールにタッチしたかどうか、値が変更されたかどうか、または値が無効になったかどうかを教えてくれます。
-
-*NgModel* ディレクティブは、状態を追跡するだけではありません。
-状態を反映する特殊なAngular CSSクラスでコントロールを更新します。
-これらのクラス名を利用して、コントロールの外観を変更することができます。
+The `NgModel` directive on a control tracks the state of that control.
+It tells you if the user touched the control, if the value changed, or if the value became invalid.
+Angular sets special CSS classes on the control element to reflect the state, as shown in the following table.
 
 <table>
 
   <tr>
 
     <th>
-      状態
+      State
     </th>
 
     <th>
-      trueのときのクラス
+      Class if true
     </th>
 
     <th>
-      falseのときのクラス
+      Class if false
     </th>
 
   </tr>
@@ -409,7 +267,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
   <tr>
 
     <td>
-      コントロールが訪問されました。
+      The control has been visited.
     </td>
 
     <td>
@@ -425,7 +283,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
   <tr>
 
     <td>
-      コントロールの値が変更されました。
+      The control's value has changed.
     </td>
 
     <td>
@@ -441,7 +299,7 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
   <tr>
 
     <td>
-      コントロールの値は有効です。
+      The control's value is valid.
     </td>
 
     <td>
@@ -456,224 +314,207 @@ Angular CLIコマンド [ `ng generate component` ](cli/generate) を使用し�
 
 </table>
 
-一時的に `spy` という名前の[テンプレート参照変数](guide/template-syntax#ref-vars)を _Name_ の `<input>` に追加し、
-それを使用して入力のCSSクラスを表示します。
+You use these CSS classes to define the styles for your control based on its status.
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="ngModelName-2"></code-example>
+### Observe control states
 
-アプリケーションを実行し、 _Name_ 入力ボックスを見てください。
-次の手順を *正確に* 実行してください。
+To see how the classes are added and removed by the framework, open the browser's developer tools and inspect the `<input>` element that represents the hero name.
 
-1. 触らずに見てください
-1. 名前ボックスの内側をクリックし、外側をクリックします。
-1. 名前の最後にスラッシュを追加します。
-1. 名前を消去します。
+1. Using your browser's developer tools, find the  `<input>` element that corresponds to the **Name** input box.
+   You can see that the element has multiple CSS classes in addition to "form-control".
 
-アクションと効果は次のとおりです。
+2. When you first bring it up, the classes indicate that it has a valid value, that the value has not been changed since initialization or reset, and that the control has not been visited since initialization or reset.
 
-<div class="lightbox">
-  <img src="generated/images/guide/forms/control-state-transitions-anim.gif" alt="Control State Transition">
-</div>
+   ```
+   <input ... class="form-control ng-untouched ng-pristine ng-valid" ...>
+   ```
 
-次の遷移とクラス名が表示されます。
+3. Take the following actions on the **Name** `<input>` box, and observe which classes appear.
+   * Look but don't touch. The classes indicate that it is untouched, pristine, and valid.
+   * Click inside the name box, then click outside it. The control has now been visited, and the element has the `ng-touched` class instead of the `ng-untouched` class.
+   * Add slashes to the end of the name. It is now touched and dirty.
+   * Erase the name. This makes the value invalid, so the `ng-invalid` class replaces the `ng-valid` class.
 
-<div class="lightbox">
-  <img src="generated/images/guide/forms/ng-control-class-changes.png" alt="Control state transitions">
-</div>
+### Create visual feedback for states
 
-値が無効であるときに強力なシグナルを送りたいので、 `ng-valid` / `ng-invalid` のペアにもっとも関心があります。
-また、必須項目にも印を付けたいです。このような視覚的フィードバックを作成するには、 `ng-*` CSSクラスの定義を追加します。
+The `ng-valid`/`ng-invalid` pair is particularly interesting, because you want to send a
+strong visual signal when the values are invalid.
+You also want to mark required fields.
 
-`#spy` テンプレート参照変数と `TODO` はその目的を果たしたので削除しましょう。
-
-## 視覚的なフィードバックのためにカスタムCSSを追加する
-
-入力ボックスの左側にある色付きのバーを使用して、
-必須フィールドと無効なデータを同時にマークすることができます。
+You can mark required fields and invalid data at the same time with a colored bar
+on the left of the input box:
 
 <div class="lightbox">
   <img src="generated/images/guide/forms/validity-required-indicator.png" alt="Invalid Form">
 </div>
 
+To change the appearance in this way, take the following steps.
 
-この効果は、プロジェクトの `index.html` の隣に追加する新しい `forms.css` ファイルに定義したこれらのクラス定義によって得られます。
+1. Add definitions for the `ng-*` CSS classes.
 
-<code-example path="forms/src/assets/forms.css" header="src/assets/forms.css"></code-example>
+2. Add these class definitions to a new `forms.css` file.
 
-`index.html` の `<head>` を更新してこのスタイルシートを読み込みます。
+3. Add the new file to the project as a sibling to `index.html`:
 
-<code-example path="forms/src/index.html" header="src/index.html (styles)" region="styles"></code-example>
+   <code-example path="forms/src/assets/forms.css" header="src/assets/forms.css"></code-example>
 
-## 検証エラーメッセージの表示と非表示
+4. In the `index.html` file, update the `<head>` tag to include the new style sheet.
 
-このフォームは改善できます。 _Name_ の入力ボックスは必須項目で、それをクリアすると、バーが赤色に点灯しています。
-何かが間違っていることはわかりますが、ユーザーは *何が* 間違っているのか、何をすべきなのか分かりません。
-コントロールの状態を利用して役立つメッセージを表示します。
+   <code-example path="forms/src/index.html" header="src/index.html (styles)" region="styles"></code-example>
 
-ユーザーが名前を削除すると、フォームは次のようになります
+### Show and hide validation error messages
+
+The **Name** input box is required and clearing it turns the bar red.
+That indicates that something is wrong, but the user doesn't know what is wrong or what to do about it.
+You can provide a helpful message by checking for and responding to the control's state.
+
+When the user deletes the name, the form should look like this:
 
 <div class="lightbox">
   <img src="generated/images/guide/forms/name-required-error.png" alt="Name required">
 </div>
 
-この効果を得るには、次のように `<input>` タグを拡張します。
+The **Hero Power** select box is also required, but it doesn't need this kind of error handling because the selection box already constrains the selection to valid values.
 
-* [テンプレートの参照変数](guide/template-syntax#ref-vars)
-* コントロールが無効である場合にのみ表示される `<div>` の" *is required* "メッセージ。
+To define and show an error message when appropriate, take the following steps.
 
-次に、 _Name_ 入力ボックスに追加されたエラーメッセージの例を示します。
+1. Extend the `<input>` tag with a template reference variable that you can use to access the input box's Angular control from within the template. In the example, the variable is `#name="ngModel"`.
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="name-with-error-msg"></code-example>
+   <div class="alert is-helpful">
 
-テンプレート内から入力ボックスのAngularコントロールにアクセスするには、テンプレート参照変数が必要です。
-ここでは、 `name` という変数を作成し、それに"ngModel"という値を与えました。
+     The template reference variable (`#name`) is set to `"ngModel"` because that is the value of the [`NgModel.exportAs`](api/core/Directive#exportAs) property. This property tells Angular how to link a reference variable to a directive.
 
-<div class="alert is-helpful">
+   </div>
 
-  なぜ"ngModel"なのでしょうか?
-  ディレクティブの[exportAs](api/core/Directive)プロパティは、参照変数をディレクティブにリンクする方法をAngularに指示します。
-  `name` を `ngModel` に設定するのは、 `ngModel` ディレクティブの `exportAs` プロパティが "ngModel"であるためです。
+2. Add a `<div>` that contains a suitable error message.
+3. Show or hide the error message by binding properties of the `name`
+control to the message `<div>` element's `hidden` property.
 
-</div>
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (hidden-error-msg)" region="hidden-error-msg"></code-example>
 
-`name` コントロールのプロパティをメッセージ `<div>` 要素の `hidden` プロパティにバインドすることにより、
-名前のエラーメッセージの表示を制御します。
+4. Add a conditional error message to the _name_ input box, as in the following example.
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (hidden-error-msg)" region="hidden-error-msg"></code-example>
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="name-with-error-msg"></code-example>
 
-この例では、コントロールが有効またはpristineの状態のときにメッセージを非表示にします。
-"pristine"とは、ユーザーがこのフォームで表示されて以来、値を変更していないことを意味します。
+<div class="callout is-helpful">
 
-このユーザー体験は開発者の選択です。開発者によっては、メッセージを常に表示することを望みます。
-`pristine` 状態を無視すれば、値が有効な場合にのみメッセージが非表示になります。
-このコンポーネントに新しい（空白の）主人公または無効な主人公がいる場合は、何かをする前にすぐにエラーメッセージが表示されます。
+<header>Illustrating the "pristine" state</header>
 
-開発者によっては、ユーザーが無効な変更を行った場合にのみ、メッセージを表示することを望みます。
-コントロールが"pristine"である間はメッセージを非表示にすると、その目標が達成されます。
-フォームに新しいヒーローを追加すると、この選択の重要性がわかります。
+In this example, you hide the message when the control is either valid or *pristine*.
+Pristine means the user hasn't changed the value since it was displayed in this form.
+If you ignore the `pristine` state, you would hide the message only when the value is valid.
+If you arrive in this component with a new (blank) hero or an invalid hero,
+you'll see the error message immediately, before you've done anything.
 
-ヒーローの *Alter Ego* はオプションですので、そのままでもよいでしょう。
-
-ヒーローの *Powwer* の選択は必須です。
-必要に応じて同じ種類のエラー処理を `<select>` に追加することができますが、
-選択ボックスではすでに有効な値に制限されているため、必須ではありません。
-
-新しいヒーローをこのフォームに追加しましょう。
-*New Hero* ボタンをフォームの下部に置き、そのクリックイベントを `newHero` コンポーネントメソッドにバインドします。
-
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-no-reset" header="src/app/hero-form/hero-form.component.html (New Hero button)"></code-example>
-
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" region="new-hero" header="src/app/hero-form/hero-form.component.ts (New Hero method)"></code-example>
-
-アプリケーションを再度実行し、 *New Hero* ボタンをクリックすると、フォームがクリアされます。
-入力ボックスの左の *required* バーが赤くなり、 `name` と `power` プロパティが無効であることを示します。
-これは必須フィールドなので当然です。
-エラーメッセージはフォームがまだ何も変えていないpristine状態であるため、非表示になります。
-
-名前を入力し、 *New Hero* をもう一度クリックします。
-アプリケーションには、 _Name is required_ というエラーメッセージが表示されます。
-新しい（空の）ヒーローを作成したときには、エラーメッセージは表示されてほしくありません。
-なぜ今表示されたのでしょうか？
-
-ブラウザのツールで要素を調べると、 *name* の入力ボックスが _pristineになっていない_ ことがわかります。
-フォームは、 *New Hero* をクリックする前に名前を入力したことを記憶しています。
-ヒーローオブジェクトを置き換えても、フォームコントロールの *pristineの状態は復元されません* でした。
-
-あなたはすべてのフラグを命令的にクリアする必要があります。
-`newHero()` メソッドを呼び出した後にフォームの `reset()` メソッドを呼び出すことで実行できます。
-
-<code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-form-reset" header="src/app/hero-form/hero-form.component.html (Reset the form)"></code-example>
-
-*New Hero* をクリックすると、フォームとそのコントロールフラグがリセットされます。
-
-## _ngSubmit_ でフォームを送信する
-
-ユーザーはフォームを入力した後にこのフォームを送信することができます。
-フォームの下部にある *送信* ボタンは何もしませんが、そのタイプ（ `type="submit"` ）によってフォーム送信をトリガーします。
-
-現時点では、"フォームの送信"は役に立ちません。
-これを便利にするには、フォームの `ngSubmit` イベントプロパティを
-ヒーローフォームコンポーネントの `onSubmit()` メソッドにバインドします。
-
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (ngSubmit)" region="ngSubmit"></code-example>
-
-すでにテンプレート参照変数 `#heroForm` を定義し、それを値"ngForm"で初期化しています。
-さて、この変数を使用して、Submitボタンでフォームにアクセスします。
-
-
-イベントバインディングを使用し、フォームの全体的な有効性を `heroForm` 変数を介して
-ボタンの `disabled` プロパティにバインドします。コードは次のとおりです：
-
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (submit-button)" region="submit-button"></code-example>
-
-アプリケーションを実行すると、ボタンが有効になっていることがわかります&mdash;が、まだ便利な機能はありません。
-
-名前を削除すると、エラーメッセージに正しく記載されているとおり、 *required* ルールに違反します。
-また、 *Submit* ボタンも無効になっています。
-
-感動しませんか？ちょっと考えてみてください。
-Angularの助けがなかったらボタンの有効/無効状態をフォームの有効性に結びつけるために何をする必要がありますか？
-
-あなたにとってはこんなに簡単でした。
-
-1. （拡張された）フォーム要素にテンプレート参照変数を定義します。
-2. 数行離れたボタンで変数を参照します。
-
-## 2つのフォーム領域を切り替える（追加クレジット）
-
-フォームの送信は現時点ではドラマティックではありません。
-
-<div class="alert is-helpful">
-
-  デモに対する当然の意見です。正直に言って、
-  それを誇大にしてもフォームについて新しいことは何も学べません。
-  しかし、これはあなたが新たに獲得したバインディングスキルのいくつかを行使する機会です。
-  あなたが興味がないなら、このページのまとめにスキップしてください。
+You might want the message to display only when the user makes an invalid change.
+Hiding the message while the control is in the `pristine` state achieves that goal.
+You'll see the significance of this choice when you add a new hero to the form in the next step.
 
 </div>
 
-より目立つような視覚効果を得るには、
-データ入力領域を非表示にして別のものを表示します。
+## Add a new hero
 
-フォームを `div` にラップし、その `hidden` プロパティを `HeroFormComponent.submitted` プロパティにバインドします。
+This exercise shows how you can respond to a native HTML button-click event by adding to the model data.
+To let form users add a new hero, you will add a **New Hero** button that responds to a click event.
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="edit-div"></code-example>
+1. In the template, place a "New Hero" `<button>` element at the bottom of the form.
+2. In the component file, add the hero-creation method to the hero data model.
 
-メインのフォームは最初に表示されます。この `HeroFormComponent` の断片が示すとおり、
-フォームを送信するまで `submitted` プロパティがfalseであるためです。
+   <code-example path="forms/src/app/hero-form/hero-form.component.ts" region="new-hero" header="src/app/hero-form/hero-form.component.ts (New Hero method)"></code-example>
 
-<code-example path="forms/src/app/hero-form/hero-form.component.ts" header="src/app/hero-form/hero-form.component.ts (submitted)" region="submitted"></code-example>
+3. Bind the button's click event to a hero-creation method, `newHero()`.
 
-*Submit* ボタンをクリックすると、 `submitted` フラグがtrueになり、計画どおりにフォームが消えます。
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-no-reset" header="src/app/hero-form/hero-form.component.html (New Hero button)"></code-example>
 
-フォームが送信された状態になっている間、アプリは別のものを表示する必要があります。
-先ほど記述した `<div>` ラッパーの下に次のHTMLを追加します。
+4. Run the application again and click the **New Hero** button.
 
-<code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="submitted"></code-example>
+   The form clears, and the *required* bars to the left of the input box are red, indicating invalid `name` and `power` properties.
+   Notice that the error messages are hidden. This is because the form is pristine; you haven't changed anything yet.
 
-ヒーローが再び現れ、補間バインディングで読み取り専用で表示されます。
-この `<div>` は、コンポーネントが送信された状態のときにのみ表示されます。
+5. Enter a name and click **New Hero** again.
 
-HTMLには、 `submitted` フラグをクリアする式にクリックイベントがバインドされた *Edit* ボタンが含まれています。
+   Now the app displays a _Name is required_ error message, because the input box is no longer pristine.
+   The form remembers that you entered a name before clicking **New Hero**.
 
-*Edit* ボタンをクリックすると、このブロックは消え、編集可能なフォームが再び表示されます。
+6. To restore the pristine state of the form controls, clear all of the flags imperatively by calling the form's `reset()` method after calling the `newHero()` method.
 
-## まとめ
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" region="new-hero-button-form-reset" header="src/app/hero-form/hero-form.component.html (Reset the form)"></code-example>
 
-このページで説明したAngularフォームは、データの変更、
-検証などのサポートを提供するために、次のフレームワーク機能を利用しています。
+   Now clicking **New Hero** resets both the form and its control flags.
 
-* Angular HTMLフォームテンプレート。
-* `@Component` デコレーターをもつフォームコンポーネントクラス。
-* `NgForm.ngSubmit` イベントプロパティにバインドしてフォームの送信を処理します。
-* `#heroForm` や `#name` のようなテンプレート参照変数。
-* 双方向データバインディングのための `[(ngModel)]` 構文。
-* 検証およびフォーム要素の変更追跡のために `name` 属性を使います。
-* コントロールが有効かどうかをチェックし、エラーメッセージを表示/非表示にするための入力コントロールの参照変数の `valid` プロパティ。
-* `NgForm` の有効性にバインドすることによって、 *Submit* ボタンの有効な状態を制御します。
-* 無効なコントロールについてユーザーに視覚的なフィードバックを提供するカスタムCSSクラス。
+<div class="alert is-helpful">
 
-アプリケーションの最終バージョンのコードは次のとおりです。
+See the [User Input](guide/user-input) guide for more information about listening for DOM events with an event binding and updating a corresponding component property.
+
+</div>
+
+## Submit the form with _ngSubmit_
+
+The user should be able to submit this form after filling it in.
+The **Submit** button at the bottom of the form does nothing on its own, but it does
+trigger a form-submit event because of its type (`type="submit"`).
+To respond to this event, take the following steps.
+
+1. Bind the form's [`ngSubmit`](api/forms/NgForm#properties) event property to the hero-form component's `onSubmit()` method.
+
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (ngSubmit)" region="ngSubmit"></code-example>
+
+2. Use the template reference variable, `#heroForm` to access the form that contains the **Submit** button and create an event binding.
+You will bind the form property that indicates its overall validity to the **Submit** button's `disabled` property.
+
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (submit-button)" region="submit-button"></code-example>
+
+3. Run the application now. Notice that the button is enabled&mdash;although
+it doesn't do anything useful yet.
+
+4. Delete the **Name** value. This violates the "required" rule, so it displays the error message&emdash;and notice that it also disables the **Submit** button.
+
+
+   You didn't have to explicitly wire the button's enabled state to the form's validity.
+   The `FormsModule` did this automatically when you defined a template reference variable on the enhanced form element, then referred to that variable in the button control.
+
+### Respond to form submission
+
+To show a response to form submission, you can hide the data entry area and display something else in its place.
+
+1. Wrap the entire form in a `<div>` and bind
+its `hidden` property to the `HeroFormComponent.submitted` property.
+
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="edit-div"></code-example>
+
+   * The main form is visible from the start because the `submitted` property is false until you submit the form, as this fragment from the `HeroFormComponent` shows:
+
+      <code-example path="forms/src/app/hero-form/hero-form.component.ts" header="src/app/hero-form/hero-form.component.ts (submitted)" region="submitted"></code-example>
+
+   * When you click the **Submit** button, the `submitted` flag becomes true and the form disappears.
+
+2. To show something else while the form is in the submitted state, add the following HTML below the new `<div>` wrapper.
+
+   <code-example path="forms/src/app/hero-form/hero-form.component.html" header="src/app/hero-form/hero-form.component.html (excerpt)" region="submitted"></code-example>
+
+   This `<div>`, which shows a read-only hero with interpolation bindings, appears only while the component is in the submitted state.
+
+   The alternative display includes an *Edit* button whose click event is bound to an expression
+that clears the `submitted` flag.
+
+3. Click the *Edit* button to switch the display back to the editable form.
+
+## Summary
+
+The Angular form discussed in this page takes advantage of the following
+framework features to provide support for data modification, validation, and more.
+
+* An Angular HTML form template.
+* A form component class with a `@Component` decorator.
+* Handling form submission by binding to the `NgForm.ngSubmit` event property.
+* Template-reference variables such as `#heroForm` and `#name`.
+* `[(ngModel)]` syntax for two-way data binding.
+* The use of `name` attributes for validation and form-element change tracking.
+* The reference variable’s `valid` property on input controls to check if a control is valid and show or hide error messages.
+* Controlling the **Submit** button's enabled state by binding to `NgForm` validity.
+* Custom CSS classes that provide visual feedback to users about invalid controls.
+
+Here’s the code for the final version of the application:
 
 <code-tabs>
 
@@ -710,4 +551,3 @@ HTMLには、 `submitted` フラグをクリアする式にクリックイベン
   </code-pane>
 
 </code-tabs>
-

@@ -25,48 +25,48 @@ Angularフレームワークを使用するには、次の知識が必要です�
 
 [TypeScript](https://www.typescriptlang.org/)についての知識は役立ちますが、必須ではありません。
 
+To install Angular on your local system, you need the following:
+
 {@a nodejs}
-### Node.js
 
-はじめに、開発環境に`Node.js®`と npm パッケージマネージャーが含まれていることを確認してください。
+* **Node.js**
 
-Angular は `Node.js` の[現行またはアクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。特定のバージョン要求については、 [package.json](https://unpkg.com/@angular/cli/package.json)の `engines`キーを参照してください。
+  Angular は `Node.js` の[現行またはアクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。
 
-- バージョンを確認するには、ターミナル/コンソールウィンドウで`node -v`を実行してください。
+  <div class="alert is-helpful">
 
-- `Node.js`を取得するには、[nodejs.org](https://nodejs.org 'Nodejs.org')にアクセスしてください。
+  For information about specific version requirements, see the `engines` key in the [package.json](https://unpkg.com/@angular/cli/package.json) file.
+
+  </div>
+
+  For more information on installing Node.js, see [nodejs.org](http://nodejs.org "Nodejs.org").
+  If you are unsure what version of Node.js runs on your system, run `node -v` in a terminal window.
 
 {@a npm}
-### npm パッケージマネージャー
 
-Angular、Angular CLI、および Angular アプリは、[npm パッケージ](https://docs.npmjs.com/getting-started/what-is-npm)として利用可能なライブラリによって提供される機能に依存します。 npm パッケージをダウンロードしてインストールするには、npm パッケージマネージャーが必要です。
+* **npm package manager**
 
-このセットアップガイドでは、デフォルトで `Node.js` と共にインストールされる[npmクライアント](https://docs.npmjs.com/cli/install)のコマンドラインインターフェースを使用しています。
-
-npmクライアントがインストールされていることを確認するには、ターミナル/コンソールウィンドウで`npm -v`を実行します。
+  Angular, the Angular CLI, and Angular applications depend on [npm packages](https://docs.npmjs.com/getting-started/what-is-npm) for many features and functions.
+  To download and install npm packages, you need an npm package manager.
+  This guide uses the [npm client](https://docs.npmjs.com/cli/install) command line interface, which is installed with `Node.js` by default.
+  To check that you have the npm client installed, run `npm -v` in a terminal window.
 
 
 {@a install-cli}
 
-## ステップ1: Angular CLIをインストールする
+## Angular CLIをインストールする
 
-Angular CLIを使用して、
-プロジェクトの作成、アプリケーションおよびライブラリコードの生成、そしてテスト、バンドル、デプロイなどのさまざまな進行中の開発タスクを実行します。
+You use the Angular CLI to create projects, generate application and library code, and perform a variety of ongoing development tasks such as testing, bundling, and deployment.
 
-Angular CLIをグローバルにインストールします。
-
-`npm` を使用してCLIをインストールするには、ターミナル/コンソールウィンドウを開き、次のコマンドを入力します。
+To install the Angular CLI, open a terminal window and run the following command:
 
 <code-example language="sh" class="code-shell">
   npm install -g @angular/cli
-
 </code-example>
-
-
 
 {@a create-proj}
 
-## ステップ2: ワークスペースと初期アプリケーションを作成する
+## ワークスペースと初期アプリケーションを作成する
 
 Angular [**ワークスペース**](guide/glossary#workspace)のコンテキストでアプリを開発します。
 
@@ -85,16 +85,22 @@ Angular CLIは、必要なAngular npmパッケージとその他の依存関係�
 
 CLIによって、新しいワークスペースと簡単なWelcomeアプリケーションが作成され、すぐに実行できます。
 
+<div class="alert is-helpful">
+
+You also have the option to use Angular's strict mode, which can help you write better, more maintainable code.
+For more information, see [Strict mode](/guide/strict-mode).
+
+</div>
 
 {@a serve}
 
-## ステップ3: アプリケーションを実行する
+## アプリケーションを実行する
 
-Angular CLIにはサーバーが含まれているため、アプリをローカルで簡単にビルドしてサーブできます。
+Angular CLIにはサーバーが含まれているため、アプリをローカルでビルドしてサーブできます。
 
 1. ワークスペースフォルダ（`my-app`）に行きます。 
 
-1. CLIコマンド `ng serve` を `--open` オプション付きで使用して、サーバーを起動します。
+1. 次のコマンドを実行します。
 
 <code-example language="sh" class="code-shell">
   cd my-app
@@ -107,7 +113,7 @@ Angular CLIにはサーバーが含まれているため、アプリをローカ
  `--open`（または単に `-o`）オプションは、ブラウザを自動的に
 `http://localhost:4200/` に開きます。 
  
- これが見えるでしょう:
+ If your installation and setup was successful, you should see a page similar to the following.
 
 
 <div class="lightbox">

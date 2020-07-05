@@ -39,7 +39,7 @@
 
 * [TypeScript](https://www.typescriptlang.org/docs/home.html "The TypeScript language") および HTML5 プログラミング。
 
-* [Angular アプリデザイン](guide/architecture "Introduction to Angular app-design concepts") の基本的な概念。
+* [Angular アプリケーション設計](guide/architecture "Introduction to Angular app-design concepts") の基本的な概念。
 
 * [リアクティブフォーム](guide/reactive-forms "Reactive forms guide") の基本的な知識。
 
@@ -149,7 +149,7 @@
 
 {@a dynamic-template}
 
-## Create a dynamic form template
+## ダイナミックフォームテンプレートを作成する
 
 `DynamicFormComponent` コンポーネントは、フォームのエントリポイントとメインコンテナーであり、テンプレートで `<app-dynamic-form>` を使用して表されます。
 

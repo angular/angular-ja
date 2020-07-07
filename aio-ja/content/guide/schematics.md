@@ -1,8 +1,7 @@
-# Schematics を使用してコードを生成する
+# Schematics を使用したコード生成
 
 Schematics は、複雑なロジックをサポートするテンプレートベースのコードジェネレーターです。
 これは、コードを生成または変更してソフトウェアプロジェクトを変換するための一連の命令です。
-
 Schematics は [collections](guide/glossary#collection) にパッケージ化され、npm でインストールします。
 
 Schematic コレクションは、ソフトウェアプロジェクトを作成、変更、維持するための強力なツールですが、組織の特定のニーズに合わせて Angular プロジェクトをカスタマイズする場合に特に役立ちます。
@@ -16,8 +15,7 @@ Schematics を変更し、新たに定義して、たとえば、依存関係の
 
 `@schematics/angular` コレクションに含まれる Schematics は、デフォルトでは `ng generate` および `ng add` コマンドによって実行されます。
 パッケージには、`ng generate component` や `ng generate service` などの `ng generate` サブコマンドの CLI で使用可能なオプションを構成する名前付き Schematics が含まれています。
-`ng generate` のサブコマンドは、対応する Schematic の省略形です。
-長い形式を使用すると、特定の Schematic（または Schematics のコレクション）を指定して生成できます。
+`ng generate` のサブコマンドは、対応する Schematic の省略形です。長い形式を使用すると、特定の Schematic（または Schematics のコレクション）を指定して生成できます。
 
 <code-example language="bash">
 ng generate my-schematic-collection:my-schematic-name
@@ -35,7 +33,7 @@ Schematic に関連付けられた JSON スキーマは、コマンドとサブ�
 これらのデフォルトは、コマンドラインのオプションに別の値を指定することで上書きできます。
 ワークスペースの生成オプションのデフォルトを変更する方法については、[ワークスペースの設定](guide/workspace-config) を参照してください。
 
-CLI がプロジェクトとプロジェクトの一部を生成するために使用するデフォルトの Schematics の JSON スキーマは、パッケージ [`@schematics/angular`](https://raw.githubusercontent.com/angular/angular-cli/v7.0.0/packages/schematics/angular/application/schema.json) に収集されます。
+CLI がプロジェクトとプロジェクトの一部を生成するために使用するデフォルトの Schematics の JSON スキーマは、パッケージ [`@schematics/angular`](https://raw.githubusercontent.com/angular/angular-cli/v7.0.0/packages/schematics/angular/application/schema.json) に集約されます。
 `--help` の出力に示されているように、スキーマは `ng generate` サブコマンドごとに CLI で使用可能なオプションを記述しています。
 
 ## ライブラリの Schematics の開発
@@ -60,10 +58,10 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 たとえば、[`@angular/material`](https://material.angular.io/guide/schematics) Schematic は、Angular Material とテーマをインストールおよび設定し、`ng generate` で作成できる新しいスターターコンポーネントを登録するように `add` コマンドに指示します。
 あなたはこれを、自身の追加 Schematic の例およびモデルとして見ることができます。
 
-パートナーライブラリとサードパーティライブラリも、Schematics を追加した Angular CLIをサポートしています。
+パートナーライブラリとサードパーティライブラリも、追加 Schematics により Angular CLIをサポートしています。
 たとえば、`@ng-bootstrap/schematics` はアプリに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare から Clarity](https://vmware.github.io/clarity/documentation/v1.0/get-started) をインストールして設定します。
 
-また、Schematic を追加すると、設定の変更でプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
+また、追加 Schematic は設定の変更のためにプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
 たとえば、`@angular/pwa` Schematic は、マニフェストとサービスワーカーを追加することでアプリケーションを PWA に変換し、`@angular/elements` Schematic は、Angular Elements の `document-register-element.js` ポリフィルと依存関係を追加します。
 
 ### 生成 Schematics

@@ -655,8 +655,9 @@
           "children": [
             {
               "url": "guide/schematics",
-              "title": "Schematics Overview",
-              "tooltip": "How the CLI uses schematics to generate code."
+              "title": "Schematics 概要",
+              "tooltip": "How the CLI uses schematics to generate code.",
+              "translated": true
             },
             {
               "url": "guide/schematics-authoring",

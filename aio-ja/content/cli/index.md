@@ -109,8 +109,3 @@ ng serve
 [ng generate](cli/generate) と [ng add](cli/add) コマンドは、アーティファクトやライブラリが生成されるか、現在のプロジェクトに追加する引数として取ります
 一般的なオプションに加えて、各アーティファクトまたはライブラリは、 *schematics* で独自のオプションを定義します。
 Schematicオプションは、即時コマンドオプションと同じ形式でコマンドに提供されます。
-
-
-### Bazelを使ったビルド
-
-オプションで [Bazel](https://docs.bazel.build) をビルドツールとして使用するようにAngular CLIを設定できます。詳しくは [Building with Bazel](guide/bazel) を参照してください。

@@ -5,6 +5,13 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 このチュートリアルのリファクタリング後には、`HeroesComponent` は小さくなりビューをサポートすることに専念します。
 これはモックサービスを使用して、ユニットテストをより簡潔にすることにもつながります。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
+
 ## なぜサービスが必要なのか？
 
 コンポーネント内では直接データの取得や保存を行うべきではありません。もちろん、故意に仮のデータを渡してもいけません。
@@ -137,7 +144,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 ### `getHeroes()` の追加
 
-サービスからヒーローデータを取得するための関数を作成しましょう。
+サービスからヒーローデータを取得するためのメソッドを作成しましょう。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="getHeroes">
 </code-example>
@@ -380,7 +387,6 @@ path="toh-pt4/src/app/heroes/heroes.component.ts">
 ## 最終的なコードレビュー
 
 このページで解説したコードを次に記載します。
-また、アプリケーションの見た目はリンク先のようになっているはずです。 <live-example></live-example>.
 
 <code-tabs>
 

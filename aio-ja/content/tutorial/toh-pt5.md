@@ -7,6 +7,12 @@ Tour of Heroes アプリケーションには新しい要求があります：
 * ユーザーが各ビューでヒーロー名をクリックしたとき、選択されたヒーローの詳細ビューを表示する。
 * ユーザーがEメール上で*ディープリンク*をクリックしたとき、特定のヒーローの詳細ビューを開く。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 これらの変更が完了したら、ユーザーは図のようにアプリケーションを行き来できるようになるでしょう：
 
 <div class="lightbox">
@@ -456,8 +462,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 ## 最後のコード・レビュー
 
-このページで解説したコードのファイルは次のとおりで、
-アプリは<live-example> </live-example>のようになっているはずです。
+このページで解説したコードのファイルは次のとおりです。
 
 {@a approutingmodule}
 {@a appmodule}

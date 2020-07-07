@@ -75,7 +75,7 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 {@a forRoot-router}
 
-### `forRoot()`と`Router`
+### `forRoot()`と`Router` {@a forroot-and-the-router}
 
 `RouterModule`は`Router`サービスを提供し、`RouterOutlet`や`routerLink`などのルーターディレクティブも提供します。ルートアプリケーションモジュールは`RouterModule`をインポートするので、アプリケーションは`Router`を持ち、ルートアプリケーションコンポーネントはルーターディレクティブにアクセスできます。すべてのフィーチャーモジュールは、そのコンポーネントがテンプレートにルーターディレクティブを配置できるように、`RouterModule`もインポートする必要があります。
 

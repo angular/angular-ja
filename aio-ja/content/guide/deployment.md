@@ -304,7 +304,7 @@ In addition to build optimizations, Angular also has a runtime production mode. 
 
 <code-example format="nocode">
 
-  Angular is running in the development mode. Call enableProdMode() to enable the production mode.
+  Angular is running in development mode. Call enableProdMode() to enable production mode.
 
 </code-example>
 
@@ -469,7 +469,7 @@ The following configurations determine your requirements.
 
 * TypeScript configuration
 
-   In the TypeScript configuration file, `tsconfig.json`, the "target" option in the `compilerOptions` section determines the ECMAScript target version that the code is compiled to.
+   In the TypeScript configuration file, the "target" option in the `compilerOptions` section determines the ECMAScript target version that the code is compiled to.
    Modern browsers support ES2015 natively, while ES5 is more commonly used to support legacy browsers.
 
 <div class="alert is-helpful">

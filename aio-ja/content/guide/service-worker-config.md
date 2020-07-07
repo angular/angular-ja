@@ -73,6 +73,9 @@ interface AssetGroup {
     files?: string[];
     urls?: string[];
   };
+  cacheQueryOptions?: {
+    ignoreSearch?: boolean;
+  };
 }
 ```
 
@@ -109,6 +112,12 @@ interface AssetGroup {
 * `urls`は、実行時に照合されるURLとURLパターンの両方が含まれます。これらのリソースは直接取得されず、コンテンツハッシュもありませんが、HTTPヘッダーにしたがってキャッシュされます。これは、Google FontsサービスなどのCDNでもっとも便利です。<br>
 _(否定のglobパターンはサポートされず、?は文字通り一致します。つまり、?以外の文字は一致しません)_
 
+### `cacheQueryOptions`
+
+These options are used to modify the matching behavior of requests. They are passed to the browsers `Cache#match` function. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Cache/match) for details. Currently, only the following options are supported:
+
+* `ignoreSearch`: Ignore query parameters. Defaults to `false`.
+
 ## `dataGroups`
 
 アセットリソースとは異なり、データリクエストはアプリケーションとともにバージョン管理されません。これらは、手動で構成されたポリシーにしたがってキャッシュされます。このポリシーは、API要求やその他のデータの依存関係などの状況に役立ちます。
@@ -125,6 +134,9 @@ export interface DataGroup {
     maxAge: string;
     timeout?: string;
     strategy?: 'freshness' | 'performance';
+  };
+  cacheQueryOptions?: {
+    ignoreSearch?: boolean;
   };
 }
 ```
@@ -179,6 +191,24 @@ Angular Service Workerは、データリソース用の2つのキャッシング
 * デフォルトの`performance`はできるだけ速いレスポンスのために最適化します。リソースがキャッシュに存在する場合、キャッシュされたバージョンが使用され、ネットワークリクエストは作られません。これにより、よりよいパフォーマンスと引き換えに、maxAgeに依存して多少の古さを許容します。これは頻繁に変更されないリソースに適しています。たとえば、ユーザーのアバター画像です。
 
 * `freshness`は、データをリアルタイム性で最適化し、ネットワークから要求されたデータを優先的に取り出します。`timeout`にしたがってネットワークがタイムアウトした場合にのみ、要求はキャッシュにフォールバックされます。これは、頻繁に変更されるリソースに役立ちます。たとえば、勘定残高などです。
+
+<div class="alert is-helpful">
+
+You can also emulate a third strategy, [staleWhileRevalidate](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate), which returns cached data (if available), but also fetches fresh data from the network in the background for next time.
+To use this strategy set `strategy` to `freshness` and `timeout` to `0u` in `cacheConfig`.
+
+This will essentially do the following:
+
+1. Try to fetch from the network first.
+2. If the network request does not complete after 0ms (i.e. immediately), fall back to the cache (ignoring cache age).
+3. Once the network request completes, update the cache for future requests.
+4. If the resource does not exist in the cache, wait for the network request anyway.
+
+</div>
+
+### `cacheQueryOptions`
+
+See [assetGroups](#assetgroups) for details.
 
 ## `navigationUrls`
 

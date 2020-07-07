@@ -166,7 +166,7 @@ export class AppComponent {
 {@a size-budgets}
 {@a configure-size-budgets}
 
-## サイズ予算の設定
+## サイズ予算の設定 {@a configuring-size-budgets}
 
 アプリケーションの機能性が増すにつれて、それらのサイズも大きくなります。
 CLIを使用すると、サイズにしきい値を設定してアプリケーションの一部が定義したサイズ境界内に収まるようにすることができます。
@@ -262,6 +262,33 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
  </table>
 
+{@a commonjs }
+## Configuring CommonJS dependencies
+
+<div class="alert is-important">
+
+It is recommended that you avoid depending on CommonJS modules in your Angular applications.
+Depending on CommonJS modules can prevent bundlers and minifiers from optimizing your application, which results in larger bundle sizes.
+Instead, it is recommended that you use [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) in your entire application.
+For more information, see [How CommonJS is making your bundles larger](https://web.dev/commonjs-larger-bundles/).
+
+</div>
+
+The Angular CLI outputs warnings if it detects that your browser application depends on CommonJS modules.
+To disable these warnings, you can add the CommonJS module name to `allowedCommonJsDependencies` option in the `build` options located in `angular.json` file.
+
+<code-example lang="json">
+"build": {
+  "builder": "@angular-devkit/build-angular:browser",
+  "options": {
+     "allowedCommonJsDependencies": [
+        "lodash"
+     ]
+     ...
+   }
+   ...
+},
+</code-example>
 
 {@a browser-compat}
 

@@ -41,6 +41,11 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 </div>
 
+## Strict mode
+
+When you create new workspaces and projects, you have the option to use Angular's strict mode, which can help you write better, more maintainable code.
+For more information, see [Strict mode](/guide/strict-mode).
+
 ## プロジェクトの設定オプション
 
 次のようなトップ階層の設定プロパティは、`projects:<project_name>` 配下の各プロジェクトで使用できます。

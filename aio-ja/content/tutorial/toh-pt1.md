@@ -4,6 +4,12 @@
 次に、ヒーロー情報を表示するための新しいコンポーネントを作成し、
 そのコンポーネントをアプリケーションシェルに配置します。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 ## heroes コンポーネントを作成する {@a create-the-heroes-component}
 
 Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
@@ -201,10 +207,9 @@ region="ng-imports">
 `AppModule`は`AppComponent`と`HeroesComponent`の両方のアプリケーションコンポーネントを宣言しています。
 
 
-{@a final-code-review}
-## 最終的なコードレビュー
+## 最終的なコードレビュー {@a final-code-review}
 
-あなたのアプリケーションはこのように見えるはずです <live-example></live-example> 。このページで解説したコードファイルは次のとおりです。
+このページで解説したコードファイルは次のとおりです。
 
 <code-tabs>
 

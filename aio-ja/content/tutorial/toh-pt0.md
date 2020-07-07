@@ -9,6 +9,11 @@
 3. アプリケーションをサーブします。
 4. アプリケーションを変更します。
 
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
 
 ## 環境を設定する
 
@@ -111,9 +116,6 @@ CLIはこの目的のために、空の`styles.css`を生成しました。
 </code-example>
 
 ## 最終的なコードのおさらい
-
-このチュートリアルのソースコードと _Tour Of Heroes_ のグローバルスタイルシートの完成版は
-<live-example></live-example>で利用可能です。
 
 以下がこのページで述べられたコードのファイルです。
 

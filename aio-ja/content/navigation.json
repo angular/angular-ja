@@ -738,8 +738,9 @@
           "children": [
             {
               "url": "guide/schematics",
-              "title": "Schematics Overview",
-              "tooltip": "Extending CLI generation capabilities."
+              "title": "Schematics 概要",
+              "tooltip": "Extending CLI generation capabilities.",
+              "translated": true
             },
             {
               "url": "guide/schematics-authoring",

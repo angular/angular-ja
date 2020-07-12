@@ -1,6 +1,6 @@
 # Schematics の作成
 
-独自の Schematics を作成して、Angular プロジェクトで操作する事ができます。
+独自の Schematics を作成して、Angular プロジェクトで操作することができます。
 ライブラリ開発者は通常、Angular CLI と統合するために、ライブラリと一緒に Schematics をパッケージ化します。
 また、スタンドアロンの Schematics を作成することで、開発環境に合わせてカスタマイズし、規格や制約に準拠させる方法として、Angular アプリケーションのファイルや構造を操作することもできます。
 Schematics を連鎖させ、他の Schematics を実行して複雑な操作を行うことができます。
@@ -125,7 +125,7 @@ Schematic *prompts* は、ユーザー操作を Schematics 実行に導入しま
 これらの例では、質問のテキストのみを提供するプロンプト構文の省略形を使用しています。
 ほとんどの場合、これで十分です。
 ただし、2つのプロンプトは異なるタイプの入力を想定していることに注意してください。
-省略形を使用すると、プロパティのスキーマに基づいて、最も適切なタイプが自動的に選択されます。
+省略形を使用すると、プロパティのスキーマに基づいて、もっとも適切なタイプが自動的に選択されます。
 この例では、`name` プロンプトは文字列プロパティであるため、`input` タイプを使用しています。
 `useColor` プロンプトはブール型プロパティであるため、`confirmation` タイプを使用します。
 この場合、"yes" は `true` に対応し、"no" は `false` に対応します。
@@ -148,7 +148,7 @@ Schematic *prompts* は、ユーザー操作を Schematics 実行に導入しま
 | "type": "integer" |	input (有効な番号のみ許可) |
 | "enum": [...]   	| list 	(列挙型メンバーはリスト選択になります) |
 
-以下の例では、プロパティは列挙値を取るため、Schematics は自動的にリストタイプを選択し、可能な値からメニューを作成します。
+次の例では、プロパティは列挙値を取るため、Schematics は自動的にリストタイプを選択し、可能な値からメニューを作成します。
 
 <code-example language="json" header="schema.json">
 
@@ -175,7 +175,7 @@ Schematic *prompts* は、ユーザー操作を Schematics 実行に導入しま
 #### 長形式のプロンプト構文
 
 `x-prompt` フィールド構文は、プロンプトの追加のカスタマイズと制御が必要な場合のために長い形式をサポートします。
-この形式では、`x-prompt` フィールドの値は、プロンプトの動作をカスタマイズするサブフィールドを持つ JSON オブジェクトです。
+この形式では、`x-prompt` フィールドの値は、プロンプトの動作をカスタマイズするサブフィールドをもつ JSON オブジェクトです。
 
 | フィールド |	データ値 |
 | :----------- | :------ |
@@ -183,7 +183,7 @@ Schematic *prompts* は、ユーザー操作を Schematics 実行に導入しま
 | message |	文字列 (必須) |
 | items   |	文字列 および/または ラベル/値 オブジェクトのペア ( `list` タイプでのみ有効) |
 
-以下の長い形式の例は、CLI が [generate applications](https://github.com/angular/angular-cli/blob/ba8a6ea59983bb52a6f1e66d105c5a77517f062e/packages/schematics/angular/application/schema.json#L56) に使用する Schematics のJSONスキーマです。
+次の長い形式の例は、CLI が [generate applications](https://github.com/angular/angular-cli/blob/ba8a6ea59983bb52a6f1e66d105c5a77517f062e/packages/schematics/angular/application/schema.json#L56) に使用する Schematics のJSONスキーマです。
 作成するアプリケーションに使用するスタイルプリプロセッサをユーザーが選択できるプロンプトを定義します。
 長い形式を使用することにより、Schematics はメニュー選択の明確なフォーマットを提供できます。
 
@@ -269,7 +269,7 @@ npm install -g @angular-devkit/schematics-cli
 
 次のセクションでは、CLI を使用して新しい Schematics コレクションを作成し、ファイルとファイル構造、およびいくつかの基本的な概念を紹介します。
 
-ただし、Schematics の最も一般的な使用法は、Angular ライブラリを Angular CLI と統合することです。
+ただし、Schematics のもっとも一般的な使用法は、Angular ライブラリを Angular CLI と統合することです。
 これを行うには、Schematics CLI を使用せずに、Angular ワークスペースのライブラリプロジェクト内で Schematics ファイルを直接作成します。
 [Schematics for Libraries](guide/schematics-for-libraries) を参照してください。
 

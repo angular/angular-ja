@@ -3,8 +3,6 @@
 Observableは、アプリケーションの中でパブリッシャーとサブスクライバー間でメッセージを渡すためのサポートを提供します。
 Observableは、イベント処理、非同期プログラミング、および複数の値の処理のための他のテクニックよりも大きな利点を提供します。
 
-The observer pattern is a software design pattern in which an object, called the *subject*, maintains a list of its dependents, called *observers*, and notifies them automatically of state changes.
-This pattern is similar (but not identical) to the [publish/subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) design pattern.
 オブザーバーパターンは、 *subject* と呼ばれるオブジェクトが *observers* と呼ばれるその依存オブジェクトのリストを維持し、状態の変化を自動的に通知するソフトウェア設計パターンです。このパターンは、[publish/subscribe](https://ja.wikipedia.org/wiki/%E5%87%BA%E7%89%88-%E8%B3%BC%E8%AA%AD%E5%9E%8B%E3%83%A2%E3%83%87%E3%83%AB) のデザインパターンと似ています（ただし、同一ではありません）。
 
 Observableは宣言的です&mdash;つまり、値を公開するための関数を定義しますが、コンシューマーがそれを購読するまでは実行されません。

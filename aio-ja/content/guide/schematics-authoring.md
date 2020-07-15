@@ -1,42 +1,42 @@
-# Authoring schematics
+# Schematics の作成
 
-You can create your own schematics to operate on Angular projects.
-Library developers typically package schematics with their libraries in order to integrate them with the Angular CLI.
-You can also create stand-alone schematics to manipulate the files and constructs in Angular applications as a way of customizing them for your development environment and making them conform to your standards and constraints.
-Schematics can be chained, running other schematics to perform complex operations.
+独自の Schematics を作成して、Angular プロジェクトで操作することができます。
+ライブラリ開発者は通常、Angular CLI と統合するために、ライブラリと一緒に Schematics をパッケージ化します。
+また、スタンドアロンの Schematics を作成することで、開発環境に合わせてカスタマイズし、規格や制約に準拠させる方法として、Angular アプリケーションのファイルや構造を操作することもできます。
+Schematics を連鎖させ、他の Schematics を実行して複雑な操作を行うことができます。
 
-Manipulating the code in an application has the potential to be both very powerful and correspondingly dangerous.
-For example, creating a file that already exists would be an error, and if it was applied immediately, it would discard all the other changes applied so far.
-The Angular Schematics tooling guards against side effects and errors by creating a virtual file system.
-A schematic describes a pipeline of transformations that can be applied to the virtual file system.
-When a schematic runs, the transformations are recorded in memory, and only applied in the real file system once they're confirmed to be valid.
+アプリケーションのコードを操作することは、非常に強力であり、相応の危険性があります。
+たとえば、すでに存在するファイルを作成するとエラーが発生し、そのファイルを直ちに適用した場合、これまでに適用された他のすべての変更が破棄されます。
+Angular Schematics ツールは、仮想ファイルシステムを作成することにより、副作用やエラーから保護します。
+Schematics は、仮想ファイルシステムに適用できる変換のパイプラインについて記述しています。
+Schematics が実行されると、変換はメモリに記録され、有効であることが確認された場合のみ、実際のファイルシステムに適用されます。
 
-## Schematics concepts
+## Schematics の概念
 
-The public API for schematics defines classes that represent the basic concepts.
+Schematics のパブリック API は、基本的な概念を表すクラスを定義します。
 
-* The virtual file system is represented by a `Tree`.   The `Tree` data structure contains a *base* (a set of files that already exists) and a *staging area* (a list of changes to be applied to the base).
-When making modifications, you don't actually change the base, but add those modifications to the staging area.
+* 仮想ファイルシステムは `Tree` で表されます。   `Tree` データ構造には、*ベース* (すでに存在するファイルのセット) と *ステージング領域* (ベースに適用される変更のリスト) が含まれています。
+変更を行う場合、実際にはベースを変更するのではなく、それらの変更をステージング領域に追加します。
 
-* A `Rule` object defines a function that takes a `Tree`, applies transformations, and returns a new `Tree`. The main file for a schematic, `index.ts`, defines a set of rules that implement the schematic's logic.
+* `Rule` オブジェクトは、`Tree` を受け取り、変換を適用し、新しい `Tree` を返す関数を定義します。 Schematics のメインファイルである `index.ts` は、Schematics のロジックを実装する一連のルールを定義します。
 
-* A transformation is represented by an `Action`. There are four action types: `Create`, `Rename`, `Overwrite`, and `Delete`.
+* 変換は `Action` で表されます。 `Create`、`Rename`、`Overwrite`、`Delete` の4つのアクションタイプがあります。
 
-* Each schematic runs in a context, represented by a `SchematicContext` object.
+* 各 Schematics は、`SchematicContext` オブジェクトによって表されるコンテキストで実行されます。
 
-The context object passed into a rule provides access to utility functions and metadata that the schematic may need to work with, including a logging API to help with debugging.
-The context also defines a *merge strategy* that determines how changes are merged from the staged tree into the base tree. A change can be accepted or ignored, or throw an exception.
+ルールに渡されたコンテキストオブジェクトは、デバッグに役立つロギング API を含め、Schematics で使用する可能性のあるユーティリティ関数とメタデータへのアクセスを提供します。
+コンテキストは、ステージングされたツリーからベースツリーに変更をマージする方法を決定する *マージ戦略* も定義します。変更を受け入れるか無視するか、または例外をスローすることができます。
 
-### Defining rules and actions
+### ルールとアクションの定義
 
-When you create a new blank schematic with the [Schematics CLI](#cli), the generated entry function is a *rule factory*.
-A `RuleFactory` object defines a higher-order function that creates a `Rule`.
+[Schematics CLI](#cli) で新しい空の Schematics を作成すると、生成された入力関数は *rule factory* になります。
+`RuleFactory` オブジェクトは、`Rule` を作成する高次関数を定義します。
 
 <code-example language="TypeScript" header="index.ts">
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
-// You don't have to export the function as default.
-// You can also have more than one rule factory per file.
+// 関数をデフォルトとしてエクスポートする必要はありません。
+// ファイルごとに複数の rule factory を設定することもできます。
 export function helloWorld(_options: any): Rule {
  return (tree: Tree, _context: SchematicContext) => {
    return tree;
@@ -44,10 +44,10 @@ export function helloWorld(_options: any): Rule {
 }
 </code-example>
 
-Your rules can make changes to your projects by calling external tools and implementing logic.
-You need a rule, for example, to define how a template in the schematic is to be merged into the hosting project.
+ルールは、外部ツールを呼び出してロジックを実装することにより、プロジェクトに変更を加えることができます。
+たとえば、Schematics のテンプレートをホスティングプロジェクトにマージする方法を定義するルールが必要です。
 
-Rules can make use of utilities provided with the `@schematics/angular` package. Look for helper functions for working with modules, dependencies, TypeScript, AST, JSON, Angular CLI workspaces and projects, and more.
+ルールは `@schematics/angular` パッケージで提供されるユーティリティを利用できます。 モジュール、依存関係、TypeScript、AST、JSON、Angular CLI のワークスペースとプロジェクトなどを操作するためのヘルパー関数を探します。
 
 <code-example language="TypeScript" header="index.ts">
 
@@ -63,14 +63,14 @@ import {
 
 </code-example>
 
-### Defining input options with a schema and interfaces
+### スキーマとインターフェースを使用した入力オプションの定義
 
-Rules can collect option values from the caller and inject them into templates.
-The options available to your rules, with their allowed values and defaults, are defined in the schematic's JSON schema file, `<schematic>/schema.json`.
-You can define variable or enumerated data types for the schema using TypeScript interfaces.
+ルールは、呼び出し元からオプション値を集約し、それらをテンプレートに挿入できます。
+ルールで使用できるオプションとその許容値およびデフォルトは、Schematics の JSON スキーマファイル `<schematic>/schema.json` で定義されています。
+TypeScript インターフェースを使用して、スキーマの変数または列挙データ型を定義できます。
 
-The schema defines the types and default values of variables used in the schematic.
-For example, the hypothetical "Hello World" schematic might have the following schema.
+スキーマは、Schematics で使用される変数の型とデフォルト値を定義します。
+たとえば、以下は架空の "Hello World" Schematics のスキーマの例です。
 
 <code-example language="json" header="src/hello-world/schema.json">
 
@@ -89,18 +89,18 @@ For example, the hypothetical "Hello World" schematic might have the following s
 </code-example>
 
 
-You can see examples of schema files for the Angular CLI command schematics in [`@schematics/angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/schematics/angular/application/schema.json).
+Angular CLI コマンド Schematics のスキーマファイルの例は、[`@schematics/angular`](https://github.com/angular/angular-cli/blob/7.0.x/packages/schematics/angular/application/schema.json) にあります。
 
-### Schematic prompts
+### Schematic プロンプト
 
-Schematic *prompts* introduce user interaction into schematic execution.
-You can configure schematic options to display a customizable question to the user.
-The prompts are displayed before the execution of the schematic, which then uses the response as the value for the option.
-This allows users to direct the operation of the schematic without requiring in-depth knowledge of the full spectrum of available options.
+Schematic *prompts* は、ユーザー操作を Schematics 実行に導入します。
+カスタマイズ可能な質問をユーザーに表示するための Schematics オプションを設定できます。
+プロンプトは Schematics を実行する前に表示され、Schematics はオプションの値として回答を使用します。
+これにより、ユーザーは、利用可能なオプションの全範囲について深い知識を必要とせずに、Schematics の操作を指示できます。
 
-The "Hello World" schematic might, for example, ask the user for their name, and display that name in place of the default name "world". To define such a prompt, add an `x-prompt` property to the schema for the `name` variable.
+たとえば、"Hello World"　の Schematics は、ユーザーに名前を尋ね、デフォルトの名前 "world" の代わりにその名前を表示することもできます。このようなプロンプトを定義するには、`name` 変数のスキーマに `x-prompt` プロパティを追加します。
 
-Similarly, you can add a prompt to allow the user to decide whether the schematic will use color when executing its hello action. The schema with both prompts would be as follows.
+同様に、hello アクションの実行時に Schematics で色を使用するかどうかをユーザーが決定できるプロンプトを追加できます。両方のプロンプトのスキーマは次のようになります。
 
 <code-example language="json" header="src/hello-world/schema.json">
 
@@ -120,35 +120,35 @@ Similarly, you can add a prompt to allow the user to decide whether the schemati
 }
 </code-example>
 
-#### Prompt short-form syntax
+#### 短形式のプロンプト構文
 
-These examples use a shorthand form of the prompt syntax, supplying only the text of the question.
-In most cases, this is all that is required.
-Notice however, that the two prompts expect different types of input.
-When using the shorthand form, the most appropriate type is automatically selected based on the property's schema.
-In the example, the `name` prompt uses the `input` type because it it is a string property.
-The `useColor` prompt uses a `confirmation` type because it is a Boolean property.
-In this case, "yes" corresponds to `true` and "no" corresponds to `false`.
+これらの例では、質問のテキストのみを提供するプロンプト構文の省略形を使用しています。
+ほとんどの場合、これで十分です。
+ただし、2つのプロンプトは異なるタイプの入力を想定していることに注意してください。
+省略形を使用すると、プロパティのスキーマに基づいて、もっとも適切なタイプが自動的に選択されます。
+この例では、`name` プロンプトは文字列プロパティであるため、`input` タイプを使用しています。
+`useColor` プロンプトはブール型プロパティであるため、`confirmation` タイプを使用します。
+この場合、"yes" は `true` に対応し、"no" は `false` に対応します。
 
-There are three supported input types.
+サポートされている入力タイプは3つあります。
 
-| Input type | Description |
+| 入力タイプ | 説明 |
 | :----------- | :-------------------|
-| confirmation | A yes or no question; ideal for Boolean options. |
-| input | Textual input; ideal for string or number options. |
-| list | A predefined set of allowed values. |
+| confirmation | はい、またはいいえの質問。ブールオプションに最適です。 |
+| input | テキスト入力。文字列または数値オプションに最適です。 |
+| list | 事前定義された許可値のセット。 |
 
-In the short form, the type is inferred from the property's type and constraints.
+短い形式では、型はプロパティの型と制約から推測されます。
 
-| Property Schema |	Prompt Type |
+| プロパティスキーマ |	プロンプトタイプ |
 | :--------------- | :------------- |
 | "type": "boolean" |	confirmation ("yes"=`true`, "no"=`false`) |
 | "type": "string"  |	input |
-| "type": "number"  |	input (only valid numbers accepted) |
-| "type": "integer" |	input (only valid numbers accepted) |
-| "enum": [...]   	| list 	(enum members become list selections) |
+| "type": "number"  |	input (有効な番号のみ許可) |
+| "type": "integer" |	input (有効な番号のみ許可) |
+| "enum": [...]   	| list 	(列挙型メンバーはリスト選択になります) |
 
-In the following example, the property takes an enumerated value, so the schematic automatically chooses the list type, and creates a menu from the possible values.
+次の例では、プロパティは列挙値を取るため、Schematics は自動的にリストタイプを選択し、可能な値からメニューを作成します。
 
 <code-example language="json" header="schema.json">
 
@@ -168,24 +168,24 @@ In the following example, the property takes an enumerated value, so the schemat
 
 </code-example>
 
-The prompt runtime automatically validates the provided response against the constraints provided in the JSON schema.
-If the value is not acceptable, the user is prompted for a new value.
-This ensures that any values passed to the schematic meet the expectations of the schematic's implementation, so that you do not need to add additional checks within the schematic's code.
+プロンプトランタイムは、JSON スキーマで提供された制約に対して与えられた応答を自動的に検証します。
+値が受け入れられない場合、ユーザーは新しい値の入力を求められます。
+これにより、Schematics に渡されるすべての値が Schematics の実装の期待値に確実に適合するため、Schematics のコード内に追加のチェックを加える必要はありません。
 
-#### Prompt long-form syntax
+#### 長形式のプロンプト構文
 
-The `x-prompt` field syntax supports a long form for cases where you require additional customization and control over the prompt.
-In this form, the `x-prompt` field value is a JSON object with subfields that customize the behavior of the prompt.
+`x-prompt` フィールド構文は、プロンプトの追加のカスタマイズと制御が必要な場合のために長い形式をサポートします。
+この形式では、`x-prompt` フィールドの値は、プロンプトの動作をカスタマイズするサブフィールドをもつ JSON オブジェクトです。
 
-| Field |	Data Value |
+| フィールド |	データ値 |
 | :----------- | :------ |
-| type    | `confirmation`, `input`, or `list` (selected automatically in short form) |
-| message |	string (required) |
-| items   |	string and/or label/value object pair (only valid with type `list`) |
+| type    | `confirmation`、`input`、または `list` (短い形式で自動的に選択されます) |
+| message |	文字列 (必須) |
+| items   |	文字列 および/または ラベル/値 オブジェクトのペア ( `list` タイプでのみ有効) |
 
-The following example of the long form is from the JSON schema for the schematic that the CLI uses to [generate applications](https://github.com/angular/angular-cli/blob/ba8a6ea59983bb52a6f1e66d105c5a77517f062e/packages/schematics/angular/application/schema.json#L56).
-It defines the prompt that allows users to choose which style preprocessor they want to use for the application being created.
-By using the long form, the schematic can provide more explicit formatting of the menu choices.
+次の長い形式の例は、CLI が [generate applications](https://github.com/angular/angular-cli/blob/ba8a6ea59983bb52a6f1e66d105c5a77517f062e/packages/schematics/angular/application/schema.json#L56) に使用する Schematics のJSONスキーマです。
+作成するアプリケーションに使用するスタイルプリプロセッサをユーザーが選択できるプロンプトを定義します。
+長い形式を使用することにより、Schematics はメニュー選択の明確なフォーマットを提供できます。
 
 <code-example language="json" header="package/schematics/angular/application/schema.json">
 
@@ -214,11 +214,11 @@ By using the long form, the schematic can provide more explicit formatting of th
     },
 </code-example>
 
-#### x-prompt schema
+#### x-prompt スキーマ
 
-The JSON schema that defines a schematic's options supports extensions to allow the declarative definition of prompts and their respective behavior.
-No additional logic or changes are required to the code of a schematic to support the prompts.
-The following JSON schema is a complete description of the long-form syntax for the `x-prompt` field.
+Schematics のオプションを定義する JSON スキーマは、プロンプトとそれらの各動作の宣言的な定義を可能にする拡張機能をサポートしています。
+プロンプトをサポートするために、Schematics のコードに追加のロジックや変更は必要ありません。
+次の JSON スキーマは、`x-prompt` フィールドの長形式構文の完全な記述です。
 
 <code-example language="json" header="x-prompt schema">
 
@@ -258,32 +258,32 @@ The following JSON schema is a complete description of the long-form syntax for 
 
 ## Schematics CLI
 
-Schematics come with their own command-line tool.
-Using Node 6.9 or above, install the Schematics command line tool globally:
+Schematics には独自のコマンドラインツールが付属しています。
+Node 6.9 以降を使用して、Schematics コマンドラインツールをグローバルにインストールします。
 
 <code-example language="bash">
 npm install -g @angular-devkit/schematics-cli
 </code-example>
 
-This installs the `schematics` executable, which you can use to create a new schematics collection in its own project folder, add a new schematic to an existing collection, or extend an existing schematic.
+これにより、`schematics` 実行可能ファイルがインストールされます。これを使用して、独自のプロジェクトフォルダーに新しい Schematics コレクションを作成したり、既存のコレクションに新しい Schematics を追加したり、既存の Schematics を拡張したりできます。
 
-In the following sections, we will create a new schematics collection using the CLI in order to introduce the files and file structure, and some of the basic concepts.
+次のセクションでは、CLI を使用して新しい Schematics コレクションを作成し、ファイルとファイル構造、およびいくつかの基本的な概念を紹介します。
 
-The most common use of schematics, however, is to integrate an Angular library with the Angular CLI.
-You can do this by creating the schematic files directly within the library project in an Angular workspace, without using the Schematics CLI.
-See [Schematics for Libraries](guide/schematics-for-libraries).
+ただし、Schematics のもっとも一般的な使用法は、Angular ライブラリを Angular CLI と統合することです。
+これを行うには、Schematics CLI を使用せずに、Angular ワークスペースのライブラリプロジェクト内で Schematics ファイルを直接作成します。
+[Schematics for Libraries](guide/schematics-for-libraries) を参照してください。
 
-### Creating a schematics collection
+### Schematics コレクションの作成
 
-The following command creates a new schematic named `hello-world` in a new project folder of the same name.
+次のコマンドは、同じ名前の新しいプロジェクトフォルダーに `hello-world` という名前の新しい Schematics を作成します。
 
 <code-example language="bash">
 schematics blank --name=hello-world
 </code-example>
 
-The `blank` schematic is provided by the Schematics CLI. The command creates a new project folder (the root folder for the collection) and an initial named schematic in the collection.
+`blank` Schematics は Schematics CLI によって提供されます。このコマンドは、新しいプロジェクトフォルダー (コレクションのルートフォルダー) とコレクション内の最初の名前付き Schematics を作成します。
 
-Go to the collection folder, install your npm dependencies, and open your new collection in your favorite editor to see the generated files. For example, if you are using VSCode:
+コレクションフォルダーに移動し、npm 依存関係をインストールし、お気に入りのエディターで新しいコレクションを開いて、生成されたファイルを確認します。たとえば、VSCode を使用している場合：
 
 <code-example language="bash">
 cd hello-world
@@ -292,43 +292,43 @@ npm run build
 code .
 </code-example>
 
-The initial schematic gets the same name as the project folder, and is generated in `src/hello-world`.
-You can add related schematics to this collection, and modify the generated skeleton code to define your schematic's functionality.
-Each schematic name must be unique within the collection.
+最初の Schematics はプロジェクトフォルダーと同じ名前を取得し、`src/hello-world` に生成されます。
+このコレクションに関連する Schematics を追加し、生成されたスケルトンコードを変更して、Schematics の機能を定義できます。
+各 Schematics 名は、コレクション内で一意である必要があります。
 
-### Running a schematic
+### Schematic の実行
 
-Use the `schematics` command to run a named schematic.
-Provide the path to the project folder, the schematic name, and any mandatory options, in the following format.
+名前の付いた Schematics を実行するには、`schematics`　コマンドを使用します。
+プロジェクトフォルダーへのパス、Schematics 名、および必須オプションを次の形式で入力します。
 
 <code-example language="bash">
 schematics &lt;path-to-schematics-project&gt;:&lt;schematics-name&gt; --&lt;required-option&gt;=&lt;value&gt;
 </code-example>
 
-The path can be absolute or relative to the current working directory where the command is executed.
-For example, to run the schematic we just generated (which has no required options), use the following command.
+パスは、絶対パスでも、コマンドが実行される現在の作業ディレクトリからの相対パスでもかまいません。
+たとえば、生成したばかりの Schematics (必要なオプションはありません) を実行するには、次のコマンドを使用します。
 
 <code-example language="bash">
 schematics .:hello-world
 </code-example>
 
-### Adding a schematic to a collection
+### コレクションへの Schematics の追加
 
-To add a schematic to an existing collection, use the same command you use to start a new schematics project, but run the command inside the project folder.
+Schematics を既存のコレクションに追加するには、新規 Schematics プロジェクトを開始するのと同じコマンドを使用しますが、コマンドはプロジェクトフォルダー内で実行します。
 
 <code-example language="bash">
 cd hello-world
 schematics blank --name=goodbye-world
 </code-example>
 
-The command generates the new named schematic inside your collection, with a main `index.ts` file and its associated test spec.
-It also adds the name, description, and factory function for the new schematic to the collection's schema in the `collection.json` file.
+このコマンドは、メインの `index.ts` ファイルとそれに関連付けられたテストを使用して、コレクション内に新しい名前の付いた Schematics を生成します。
+また、新しい Schematics の名前、説明、ファクトリー関数を、`collection.json` ファイル内のコレクションのスキーマに追加します。
 
-## Collection contents
+## コレクションの内容
 
-The top level of the root project folder for a collection contains configuration files, a `node_modules` folder, and a `src/` folder.
-The `src/` folder contains subfolders for named schematics in the collection, and a schema, `collection.json`, which describes the collected schematics.
-Each schematic is created with a name, description, and factory function.
+コレクションのルートプロジェクトフォルダーの最上位には、設定ファイル、`node_modules` フォルダー、および `src/` フォルダーが含まれています。
+`src/` フォルダーには、コレクション内の名前付き Schematics のサブフォルダーと、集約された Schematics を説明するスキーマ `collection.json` が含まれています。
+各 Schematics は、名前、説明、およびファクトリー関数を使用して作成されます。
 
 <code-example language="none">
 {
@@ -343,35 +343,35 @@ Each schematic is created with a name, description, and factory function.
 }
 </code-example>
 
-* The `$schema` property specifies the schema that the CLI uses for validation.
-* The `schematics` property lists named schematics that belong to this collection.
-   Each schematic has a plain-text description, and points to the generated entry function in the main file.
-* The `factory` property points to the generated entry function. In this example, you invoke the `hello-world` schematic by calling the `helloWorld()` factory function.
-* The optional  `schema` property points to a JSON schema file that defines the command-line options available to the schematic.
-* The optional `aliases` array specifies one or more strings that can be used to invoke the schematic.
-   For example, the schematic for the Angular CLI “generate” command has an alias “g”, allowing you to use the command `ng g`.
+* `$schema` プロパティは、CLI が検証に使用するスキーマを指定します。
+* `schematics` プロパティはこのコレクションに属する名前付きの Schematics をリストします。
+    各 Schematics にはプレーンテキストの説明があり、メインファイルで生成されたエントリ関数を指します。
+* `factory` プロパティは、生成されたエントリ関数を指します。この例では、`helloWorld()` ファクトリー関数を呼び出して、`hello-world` Schematics を起動します
+* オプションの `schema` プロパティは、Schematics で使用できるコマンドラインオプションを定義する JSON スキーマファイルを指します。
+* オプションの `aliases` 配列は、Schematics を起動するために使用できる1つ以上の文字列を指定します。
+   たとえば、Angular CLI の “generate” コマンドの Schematics にはエイリアス “g” があり、コマンド `ng g` を使用できます。
 
-### Named schematics
+### 名前付き Schematics
 
-When you use the Schematics CLI to create a blank schematics project, the new blank schematic is the first member of the collection, and has the same name as the collection.
-When you add a new named schematic to this collection, it is automatically added to the  `collection.json`  schema.
+Schematics CLI を使用して空の Schematics プロジェクトを作成すると、新しい空の Schematics がコレクションの最初のメンバーになり、コレクションと同じ名前になります。
+このコレクションに新しい名前の付いた Schematics を追加すると、自動的に `collection.json` スキーマに追加されます。
 
-In addition to the name and description, each schematic has a `factory` property that identifies the schematic’s entry point.
-In the example, you invoke the schematic's defined functionality by calling the `helloWorld()` function in the main file,  `hello-world/index.ts`.
+名前と説明に加えて、各 Schematics には、Schematics のエントリポイントを識別する `factory` プロパティがあります。
+この例では、メインファイル `hello-world/index.ts` の `helloWorld()` 関数を呼び出して、Schematics の定義済み機能を起動します。
 
 <div class="lightbox">
   <img src="generated/images/guide/schematics/collection-files.gif" alt="overview">
 </div>
 
-Each named schematic in the collection has the following main parts.
+コレクション内の名前付きの各 Schematics には、次の主要な要素があります。
 
 | | |
 | :------------- | :-------------------------------------------|
-| `index.ts`     | Code that defines the transformation logic for a named schematic.  |
-| `schema.json`  | Schematic variable definition. |
-| `schema.d.ts`  | Schematic variables.  |
-| `files/`       | Optional component/template files to replicate. |
+| `index.ts`     | 名前付き Schematics の変換ロジックを定義するコード。  |
+| `schema.json`  | Schematic 変数の定義。 |
+| `schema.d.ts`  | Schematic 変数。  |
+| `files/`       | 複製するオプションの コンポーネント/テンプレート ファイル。 |
 
-It is possible for a schematic to provide all of its logic in the `index.ts` file, without additional templates.
-You can create dynamic schematics for Angular, however, by providing components and templates in the `files/` folder, like those in standalone Angular projects.
-The logic in the index file configures these templates by defining rules that inject data and modify variables.
+追加のテンプレートなしで、Schematics がそのすべてのロジックを `index.ts` ファイルで提供することが可能です。
+ただし、スタンドアロンの Angular プロジェクトと同様に、`files/` フォルダーにコンポーネントとテンプレートを提供することで、Angular の動的な Schematics を作成できます。
+インデックスファイルのロジックは、データを挿入して変数を変更するルールを定義することにより、これらのテンプレートを構成します。

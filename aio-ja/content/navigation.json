@@ -745,7 +745,8 @@
             {
               "url": "guide/schematics-authoring",
               "title": "Authoring Schematics",
-              "tooltip": "Understand the structure of a schematic."
+              "tooltip": "Understand the structure of a schematic.",
+              "translated": true
             },
             {
               "url": "guide/schematics-for-libraries",

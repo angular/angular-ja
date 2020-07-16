@@ -178,7 +178,7 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Imports)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="schematics-imports">
 </code-example>
 
-1. Schematic のオプションのタイプ情報を提供する定義されたスキーマインターフェイスをインポートします。
+1. Schematic のオプションのタイプ情報を提供する定義されたスキーマインターフェースをインポートします。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Schema Import)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="schema-imports">
 </code-example>
@@ -268,7 +268,7 @@ Schematic ルール関数の完全な例をご覧ください。
 
 ## ライブラリ Schematic の実行
 
-ライブラリと Schematics を作成したら、Schematics コレクションをインストールしてプロジェクトに対して実行できます。 以下の手順は、上記で作成した Schematic を使用してサービスを生成する方法を示しています。
+ライブラリと Schematics を作成したら、Schematics コレクションをインストールしてプロジェクトに対して実行できます。 次の手順は、上記で作成した Schematic を使用してサービスを生成する方法を示しています。
 
 ### ライブラリと schematics の構築
 

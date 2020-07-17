@@ -2148,7 +2148,7 @@ Can't bind to 'item' since it isn't a known property of 'app-item-detail'
 
 ## 入出力のエイリアス {@a aliasing-inputs-and-outputs}
 
-時々、入力/出力のパブリックな名前を、内部の名前とは異なるものにすべき場合があります。ベストプラクティスとしてはそうすべきではないのですが、
+時々、インプット/アウトプットのパブリックな名前を、内部の名前とは異なるものにすべき場合があります。ベストプラクティスとしてはそうすべきではないのですが、
 Angular はその方法を用意しています。
 
 ### メタデータでのエイリアス {@a aliasing-in-the-metadata}
@@ -2177,7 +2177,7 @@ Angular のテンプレート式言語は、JavaScript 構文のサブセット�
 
 * [パイプ](guide/template-syntax#pipe)
 * [セーフナビゲーション演算子](guide/template-syntax#safe-navigation-operator)
-* [非 null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)
+* [non-null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)
 
 {@a pipe}
 
@@ -2262,16 +2262,16 @@ Angular のセーフナビゲーション演算子 (`?`) は、プロパティ�
 
 {@a non-null-assertion-operator}
 
-### 非 null アサーション演算子 ( `!` ) {@a the-non-null-assertion-operator---}
+### non-null アサーション演算子 ( `!` ) {@a the-non-null-assertion-operator---}
 
 Typescript 2.0 以降、`--strictNullChecks` フラグを使うことで[厳密な null チェック](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript")を強制できます。TypeScript は、変数が意図せず `null` や `undefined` になってしなわないことを保証します。
 
 このモードでは、デフォルトで、型が付いた変数が `null` や `undefined` になることを禁じます。`null` や `undefined` を禁じた型の変数に代入しなかったり、`null` や `undefined` を代入しようとすると、型チェッカーがエラーを投げます。
 
 変数が実行時に `null` や `undefined` になることを判断できない場合にも、型チェッカーはエラーを投げます。
-接尾辞として[非 null アサーション演算子 (!)](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator "Non-null assertion operator")を使うことで、型チェッカーがエラーを投げないようにできます。
+接尾辞として [non-null アサーション演算子 (!)](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator "Non-null assertion operator")を使うことで、型チェッカーがエラーを投げないようにできます。
 
-Angular の非 null アサーション演算子 (`!`) は、Angular テンプレートでも同じ役割を果たします。
+Angular の non-null アサーション演算子 (`!`) は、Angular テンプレートでも同じ役割を果たします。
 この例では `item` のプロパティが定義されていることにできます。
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="non-null" header="src/app/app.component.html"></code-example>
@@ -2280,10 +2280,10 @@ Angular コンパイラーがテンプレートを TypeScript のコードに置
 `item.color` が `null` か `undefined` になりうることを TypeScript が報告することを防げます。
 
 [_セーフナビゲーション演算子_](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?)")と違い、
-非 null アサーション演算子は `null` や `undefined` から守ってくれるものではありません。
+non-null アサーション演算子は `null` や `undefined` から守ってくれるものではありません。
 TypeScript の型チェッカーに、特定のプロパティ式に対する厳密な `null` チェックを一時停止させます。
 
-非 null アサーション演算子 (`!`) の使用は任意ですが、厳密な null チェックを有効にしているときは必須となります。
+non-null アサーション演算子 (`!`) の使用は任意ですが、厳密な null チェックを有効にしているときは必須となります。
 
 <a href="#top-of-page">back to top</a>
 

@@ -2146,22 +2146,22 @@ Can't bind to 'item' since it isn't a known property of 'app-item-detail'
 
 {@a aliasing-io}
 
-## Aliasing inputs and outputs
+## 入出力のエイリアス {@a aliasing-inputs-and-outputs}
 
-Sometimes the public name of an input/output property should be different from the internal name. While it is a best practice to avoid this situation, Angular does
-offer a solution.
+時々、インプット/アウトプットのパブリックな名前を、内部の名前とは異なるものにすべき場合があります。ベストプラクティスとしてはそうすべきではないのですが、
+Angular はその方法を用意しています。
 
-### Aliasing in the metadata
+### メタデータでのエイリアス {@a aliasing-in-the-metadata}
 
-Alias inputs and outputs in the metadata using a colon-delimited (`:`) string with
-the directive property name on the left and the public alias on the right:
+メタデータの入力と出力でエイリアスを指定するには、コロン区切り (`:`)
+でプロパティ名を左に、パブリックな別名を右に書いた文字列を指定します。
 
 <code-example path="inputs-outputs/src/app/aliasing/aliasing.component.ts" region="alias" header="src/app/aliasing/aliasing.component.ts"></code-example>
 
 
-### Aliasing with the `@Input()`/`@Output()` decorator
+### `@Input()`/`@Output()` デコレーターでのエイリアス {@a aliasing-with-the-inputoutput-decorator}
 
-You can specify the alias for the property name by passing the alias name to the `@Input()`/`@Output()` decorator. The internal name remains as usual.
+`@Input()`/`@Output()` デコレーターにエイリアスの名前を与えることで、プロパティ名にエイリアスを指定することができます。内部の名前はそのまま残ります。
 
 <code-example path="inputs-outputs/src/app/aliasing/aliasing.component.ts" region="alias-input-output" header="src/app/aliasing/aliasing.component.ts"></code-example>
 
@@ -2170,42 +2170,42 @@ You can specify the alias for the property name by passing the alias name to the
 
 {@a expression-operators}
 
-## Template expression operators
+## テンプレート式の演算子
 
-The Angular template expression language employs a subset of JavaScript syntax supplemented with a few special operators
-for specific scenarios. The next sections cover three of these operators:
+Angular のテンプレート式言語は、JavaScript 構文のサブセットを採用し、いくつかの特定のシナリオ向けの特別な演算子を追加しています。
+次のセクションでは、これらの演算子から3つを紹介します。
 
-* [pipe](guide/template-syntax#pipe)
-* [safe navigation operator](guide/template-syntax#safe-navigation-operator)
-* [non-null assertion operator](guide/template-syntax#non-null-assertion-operator)
+* [パイプ](guide/template-syntax#pipe)
+* [セーフナビゲーション演算子](guide/template-syntax#safe-navigation-operator)
+* [non-null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)
 
 {@a pipe}
 
-### The pipe operator (`|`)
+### パイプ演算子 (`|`) {@a the-pipe-operator-}
 
-The result of an expression might require some transformation before you're ready to use it in a binding.
-For example, you might display a number as a currency, change text to uppercase, or filter a list and sort it.
+式の結果をバインドする前に、少し変換したいときがあります。
+たとえば、数値を通貨として表示する、テキストを大文字にする、リストをフィルターしてソートするといった場合です。
 
-Pipes are simple functions that accept an input value and return a transformed value.
-They're easy to apply within template expressions, using the pipe operator (`|`):
+パイプは、入力値を受け取り、変換した値を返す、シンプルな関数です。
+これらはテンプレート式でパイプ演算子 (`|`) を使うことで簡単に適用できます:
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="uppercase-pipe" header="src/app/app.component.html"></code-example>
 
-The pipe operator passes the result of an expression on the left to a pipe function on the right.
+パイプ演算子は、演算子の左側の式を、右側のパイプ関数に渡します。
 
-You can chain expressions through multiple pipes:
+複数のパイプで式をつなぐこともできます:
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="pipe-chain" header="src/app/app.component.html"></code-example>
 
-And you can also [apply parameters](guide/pipes#parameterizing-a-pipe) to a pipe:
+パイプに[パラメータを適用](guide/pipes#parameterizing-a-pipe)することもできます:
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="date-pipe" header="src/app/app.component.html"></code-example>
 
-The `json` pipe is particularly helpful for debugging bindings:
+`json` パイプはバインディングのデバッグで特に役立ちます:
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="json-pipe" header="src/app/app.component.html"></code-example>
 
-The generated output would look something like this:
+出力結果はこのようになります:
 
 <code-example language="json">
   { "name": "Telephone",
@@ -2215,11 +2215,11 @@ The generated output would look something like this:
 
 <div class="alert is-helpful">
 
-The pipe operator has a higher precedence than the ternary operator (`?:`),
-which means `a ? b : c | x` is parsed as `a ? b : (c | x)`.
-Nevertheless, for a number of reasons,
-the pipe operator cannot be used without parentheses in the first and second operands of `?:`.
-A good practice is to use parentheses in the third operand too.
+パイプ演算子は三項演算子 (`?:`) よりも高い優先順位を持っているので、
+`a ? b : c | x` は `a ? b : (c | x)` として解釈されます。
+にもかかわらず、さまざまな理由から、
+`?:` の第1、第2オペランドではカッコなしでパイプ演算子を使うことはできません。
+第3オペランドでもカッコを使うのがよいプラクティスです。
 
 </div>
 
@@ -2228,64 +2228,62 @@ A good practice is to use parentheses in the third operand too.
 
 {@a safe-navigation-operator}
 
-### The safe navigation operator ( `?` ) and null property paths
+### セーフナビゲーション演算子 ( `?` ) と null プロパティパス {@a the-safe-navigation-operator----and-null-property-paths}
 
-The Angular safe navigation operator, `?`, guards against `null` and `undefined`
-values in property paths. Here, it protects against a view render failure if `item` is `null`.
+Angular のセーフナビゲーション演算子 (`?`) は、プロパティパスの `null` や `undefined`
+に対するガードとなります。ここでは `item` が `null` でもビューのレンダリングが失敗することを防いでいます。
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="safe" header="src/app/app.component.html"></code-example>
 
-If `item` is `null`, the view still renders but the displayed value is blank; you see only "The item name is:" with nothing after it.
+`item` が `null` でも、ビューをレンダリングできますが、表示される値は空白となります; 表示されるのは "The item name is:" だけで、その後に続く文字はありません。
 
-Consider the next example, with a `nullItem`.
+次は `nullItem` の例を見てみましょう。
 
 <code-example language="html">
   The null item name is {{nullItem.name}}
 </code-example>
 
-Since there is no safe navigation operator and `nullItem` is `null`, JavaScript and Angular would throw a `null` reference error and break the rendering process of Angular:
+セーフナビゲーション演算子を使っておらず、`nullItem` も `null` なので、JavaScript と Angular は `null` 参照エラーを発生させ、Angular のレンダリングプロセスは中断します:
 
 <code-example language="bash">
   TypeError: Cannot read property 'name' of null.
 </code-example>
 
-Sometimes however, `null` values in the property
-path may be OK under certain circumstances,
-especially when the value starts out null but the data arrives eventually.
+しかし時には、特定の状況下ではプロパティパス中に
+`null` 値があってもよい場合があります。
+特に値が最初は null で、後からデータが来る場合です。
 
-With the safe navigation operator, `?`, Angular stops evaluating the expression when it hits the first `null` value and renders the view without errors.
+セーフナビゲーション演算子 (`?`) を使うことで、Angular は最初の `null` 値にヒットすると式の評価を止め、エラーを起こさずにビューをレンダリングします。
 
-It works perfectly with long property paths such as `a?.b?.c?.d`.
+`a?.b?.c?.d` のような長いプロパティパスであっても問題なく動作します。
 
 
 <hr/>
 
 {@a non-null-assertion-operator}
 
-### The non-null assertion operator ( `!` )
+### non-null アサーション演算子 ( `!` ) {@a the-non-null-assertion-operator---}
 
-As of Typescript 2.0, you can enforce [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript") with the `--strictNullChecks` flag. TypeScript then ensures that no variable is unintentionally `null` or `undefined`.
+Typescript 2.0 以降、`--strictNullChecks` フラグを使うことで[厳密な null チェック](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript")を強制できます。TypeScript は、変数が意図せず `null` や `undefined` になってしなわないことを保証します。
 
-In this mode, typed variables disallow `null` and `undefined` by default. The type checker throws an error if you leave a variable unassigned or try to assign `null` or `undefined` to a variable whose type disallows `null` and `undefined`.
+このモードでは、デフォルトで、型が付いた変数が `null` や `undefined` になることを禁じます。`null` や `undefined` を禁じた型の変数に代入しなかったり、`null` や `undefined` を代入しようとすると、型チェッカーがエラーを投げます。
 
-The type checker also throws an error if it can't determine whether a variable will be `null` or `undefined` at runtime. You tell the type checker not to throw an error by applying the postfix
-[non-null assertion operator, !](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator "Non-null assertion operator").
+変数が実行時に `null` や `undefined` になることを判断できない場合にも、型チェッカーはエラーを投げます。
+接尾辞として [non-null アサーション演算子 (!)](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator "Non-null assertion operator")を使うことで、型チェッカーがエラーを投げないようにできます。
 
-The Angular non-null assertion operator, `!`, serves the same purpose in
-an Angular template. For example, after you use [*ngIf](guide/template-syntax#ngIf)
-to check that `item` is defined, you can assert that
-`item` properties are also defined.
+Angular の non-null アサーション演算子 (`!`) は、Angular テンプレートでも同じ役割を果たします。
+この例では `item` のプロパティが定義されていることにできます。
 
 <code-example path="template-expression-operators/src/app/app.component.html" region="non-null" header="src/app/app.component.html"></code-example>
 
-When the Angular compiler turns your template into TypeScript code,
-it prevents TypeScript from reporting that `item.color` might be `null` or `undefined`.
+Angular コンパイラーがテンプレートを TypeScript のコードに置き換えるとき、
+`item.color` が `null` か `undefined` になりうることを TypeScript が報告することを防げます。
 
-Unlike the [_safe navigation operator_](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?)"),
-the non-null assertion operator does not guard against `null` or `undefined`.
-Rather, it tells the TypeScript type checker to suspend strict `null` checks for a specific property expression.
+[_セーフナビゲーション演算子_](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?)")と違い、
+non-null アサーション演算子は `null` や `undefined` から守ってくれるものではありません。
+TypeScript の型チェッカーに、特定のプロパティ式に対する厳密な `null` チェックを一時停止させます。
 
-The non-null assertion operator, `!`, is optional with the exception that you must use it when you turn on strict null checks.
+non-null アサーション演算子 (`!`) の使用は任意ですが、厳密な null チェックを有効にしているときは必須となります。
 
 <a href="#top-of-page">back to top</a>
 
@@ -2293,47 +2291,47 @@ The non-null assertion operator, `!`, is optional with the exception that you mu
 
 {@a built-in-template-functions}
 
-## Built-in template functions
+## 組み込みのテンプレート関数
 
 {@a any-type-cast-function}
 
-### The `$any()` type cast function
+### `$any()` 型キャスト関数 {@a the-any-type-cast-function}
 
-Sometimes a binding expression triggers a type error during [AOT compilation](guide/aot-compiler) and it is not possible or difficult to fully specify the type.
-To silence the error, you can use the `$any()` cast function to cast
-the expression to the [`any` type](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) as in the following example:
+バインディング式が[AOT コンパイル](guide/aot-compiler)中に型エラーを出すことがあり、その型を明記することが不可能だったり難しかったりすることがあります。
+エラーをおとなしくするため、次の例で示すように `$any()` キャスト関数を使い、
+式を [`any` 型](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) にキャストすることができます:
 
 <code-example path="built-in-template-functions/src/app/app.component.html" region="any-type-cast-function-1" header="src/app/app.component.html"></code-example>
 
-When the Angular compiler turns this template into TypeScript code,
-it prevents TypeScript from reporting that `bestByDate` is not a member of the `item`
-object when it runs type checking on the template.
+Angular コンパイラがこのテンプレートを TypeScript コードに変換するときに、
+テンプレートの型チェックで `bestByDate` が `item`
+オブジェクトのメンバーではないと TypeScript が報告することを防げます。
 
-The `$any()` cast function also works with `this` to allow access to undeclared members of
-the component.
+`$any()` キャスト関数は `this` にも使うことができ、コンポーネントで宣言していない
+メンバーにアクセスすることができます。
 
 <code-example path="built-in-template-functions/src/app/app.component.html" region="any-type-cast-function-2" header="src/app/app.component.html"></code-example>
 
-The `$any()` cast function works anywhere in a binding expression where a method call is valid.
+`$any()` キャスト関数は、メソッド呼び出しが可能な場所ならバインディング式のどこでも呼び出すことができます。
 
-## SVG in templates
+## テンプレート中の SVG {@a svg-in-templates}
 
-It is possible to use SVG as valid templates in Angular. All of the template syntax below is
-applicable to both SVG and HTML. Learn more in the SVG [1.1](https://www.w3.org/TR/SVG11/) and
-[2.0](https://www.w3.org/TR/SVG2/) specifications.
+Angular では SVG を有効なテンプレートとして使うことができます。次に示すすべてのテンプレート構文は、
+SVG と HTML の両方に適用できます。詳しくは SVG [1.1](https://www.w3.org/TR/SVG11/) と
+[2.0](https://www.w3.org/TR/SVG2/) の仕様をご覧ください。
 
-Why would you use SVG as template, instead of simply adding it as image to your application?
+なぜ SVG を画像としてアプリケーションに追加するのではなく、テンプレートとして使うのでしょうか？
 
-When you use an SVG as the template, you are able to use directives and bindings just like with HTML
-templates. This means that you will be able to dynamically generate interactive graphics.
+SVG をテンプレートとして使うことで、HTML のときと同じようにディレクティブやバインディングを使うことができます。
+つまりインタラクティブな画像を動的に生成することができます。
 
-Refer to the sample code snippet below for a syntax example:
+構文の例として次のコードスニペットをご覧ください:
 
 <code-example path="template-syntax/src/app/svg.component.ts" header="src/app/svg.component.ts"></code-example>
 
-Add the following code to your `svg.component.svg` file:
+次のコードを `svg.component.svg` ファイルとして追加します:
 
 <code-example path="template-syntax/src/app/svg.component.svg" header="src/app/svg.component.svg"></code-example>
 
-Here you can see the use of a `click()` event binding and the property binding syntax
-(`[attr.fill]="fillColor"`).
+`click()` イベントバインディングと、プロパティバインディングの構文 (`[attr.fill]="fillColor"`)
+を使っている様子を確認できます。

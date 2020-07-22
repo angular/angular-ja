@@ -1,147 +1,147 @@
-# Schematics for libraries
+# ライブラリの Schematics
 
-When you create an Angular library, you can provide and package it with schematics that integrate it with the Angular CLI.
-With your schematics, your users can use `ng add` to install an initial version of your library,
-`ng generate` to create artifacts defined in your library, and `ng update` to adjust their project for a new version of your library that introduces breaking changes.
+Angular ライブラリを作成するときは、Angular CLI と統合する Schematics を提供してパッケージ化できます。
+Schematics では、ユーザーは `ng add` を使用してライブラリの初期バージョンをインストールし、
+`ng generate` を使用してライブラリで定義されたアーティファクトを作成し、`ng update` を使用して破壊的変更を導入するライブラリの新しいバージョンにプロジェクトを調整できます。
 
-All three types of schematics can be part of a collection that you package with your library.
+3種類の Schematics はすべて、ライブラリと一緒にパッケージ化するコレクションの一部とすることができます。
 
-Download the <live-example downloadOnly>library schematics project</live-example> for a completed example of the steps below.
+次の手順の完全な例については、<live-example downloadOnly>ライブラリ schematics プロジェクト</live-example>をダウンロードしてください。
 
-## Creating a schematics collection
+## Schematics コレクションの作成
 
-To start a collection, you need to create the schematic files.
-The following steps show you how to add initial support without modifying any project files.
+コレクションを開始するには、Schematic ファイルを作成する必要があります。
+次の手順は、プロジェクトファイルを変更せずに初期サポートを追加する方法を示しています。
 
-1. In your library's root folder, create a `schematics/`  folder.
+1. ライブラリのルートフォルダーに、`schematics/` フォルダーを作成します。
 
-1. In the `schematics/` folder, create an `ng-add/` folder for your first schematic.
+2. `schematics/` フォルダーに、最初の Schematic 用の `ng-add/` フォルダーを作成します。
 
-1. At the root level of the `schematics/` folder, create a `collection.json` file.
+3. `schematics/` フォルダーのルートレベルで、`collection.json` ファイルを作成します。
 
-1. Edit the `collection.json` file to define the initial schema for your collection.
+4. `collection.json` ファイルを編集して、コレクションの初期スキーマを定義します。
 
 <code-example header="projects/my-lib/schematics/collection.json (Schematics Collection)" path="schematics-for-libraries/projects/my-lib/schematics/collection.1.json">
 </code-example>
 
-  * The `$schema` path is relative to the Angular Devkit collection schema.
-  * The `schematics` object describes the named schematics that are part of this collection.
-  * The first entry is for a schematic named `ng-add`. It contains the description, and points to the factory function that is called when your schematic is executed.
+  * `$schema` パスは、Angular Devkit コレクションスキーマを基準にしています。
+  * `schematics` オブジェクトは、このコレクションの一部である名前付き schematics を記述します。
+  * 最初のエントリは、`ng-add` という名前の Schematic です。説明が含まれ、Schematic が実行されたときに呼び出されるファクトリ関数を指定します。
 
-1. In your library project's `package.json` file, add a "schematics" entry with the path to your schema file.
-   The Angular CLI uses this entry to find named schematics in your collection when it runs commands.
+1. ライブラリプロジェクトの `package.json` ファイルに、スキーマファイルへのパスを含む "schematics" エントリを追加します。
+   Angular CLI はこのエントリを使用して、コマンドを実行するときにコレクション内の名前付き Schematics を検索します。
 
 <code-example header="projects/my-lib/package.json (Schematics Collection Reference)" path="schematics-for-libraries/projects/my-lib/package.json" region="collection">
 </code-example>
 
-The initial schema that you have created tells the CLI where to find the schematic that supports the `ng add` command.
-Now you are ready to create that schematic.
+作成した最初のスキーマは、`ng add` コマンドをサポートする Schematic の場所を CLI に通知します。
+これで、その Schematic を作成する準備が整いました。
 
-## Providing installation support
+## インストールサポートの提供
 
-A schematic for the `ng add` command can enhance the initial installation process for your users.
-The following steps will define this type of schematic.
+`ng add` コマンドの Schematic により、ユーザーの初期インストールプロセスを強化できます。
+次の手順では、このタイプの Schematic を定義します。
 
-1. Go to the <lib-root>/schematics/ng-add/ folder.
+1. <lib-root>/schematics/ng-add/ フォルダーに移動します。
 
-1. Create the main file, `index.ts`.
+2. メインファイル `index.ts` を作成します。
 
-1. Open `index.ts` and add the source code for your schematic factory function.
+3. `index.ts` を開き、Schematic ファクトリ関数のソースコードを追加します。
 
 <code-example header="projects/my-lib/schematics/ng-add/index.ts (ng-add Rule Factory)" path="schematics-for-libraries/projects/my-lib/schematics/ng-add/index.ts">
 </code-example>
 
-The only step needed to provide initial `ng add` support is to trigger an installation task using the `SchematicContext`.
-The task uses the user's preferred package manager to add the library to the project's `package.json` configuration file, and install it in the project’s `node_modules` directory.
+最初の `ng add` サポートを提供するために必要な唯一の手順は、`SchematicContext` を使用してインストールタスクをトリガーすることです。
+タスクは、ユーザーの優先パッケージマネージャーを使用して、ライブラリをプロジェクトの `package.json` 設定ファイルに追加し、それをプロジェクトの `node_modules` ディレクトリにインストールします。
 
-In this example, the function receives the current `Tree` and returns it without any modifications.
-If you need to, you can do additional setup when your package is installed, such as generating files, updating configuration, or any other initial setup your library requires.
+この例では、関数は現在の `Tree` を受け取り、変更せずにそれを返します。
+必要に応じて、パッケージのインストール時に、ファイルの生成、設定の更新、またはライブラリに必要なその他の初期設定などの追加設定を行うことができます。
 
-## Building your schematics
+## Schematics の作成
 
-To bundle your schematics together with your library, you must configure the library to build the schematics separately, then add them to the bundle.
-You must build your schematics *after* you build your library, so they are placed in the correct directory.
+Schematics をライブラリと一緒にバンドルするには、ライブラリを設定して Schematics を個別にビルドしてから、それらをバンドルに追加する必要があります。
+ライブラリをビルドした *後*、Schematics をビルドする必要があります。これにより、Schematics は正しいディレクトリに配置されます。
 
-* Your library needs a custom Typescript configuration file with instructions on how to compile your schematics into your distributed library.
+* ライブラリには、Schematics を分散ライブラリにコンパイルする方法の手順が記載されたカスタム Typescript 設定ファイルが必要です。
 
-* To add the schematics to the library bundle, add scripts to the library's `package.json` file.
+* Schematics をライブラリバンドルに追加するには、ライブラリの `package.json` ファイルにスクリプトを追加します。
 
-Assume you have a library project `my-lib` in your Angular workspace.
-To tell the library how to build the schematics, add a `tsconfig.schematics.json` file next to the generated `tsconfig.lib.json` file that configures the library build.
+Angular ワークスペースにライブラリプロジェクト `my-lib` があるとします。
+ライブラリに Schematics のビルド方法を伝えるには、ライブラリのビルドを設定する `tsconfig.lib.json` ファイルの隣に `tsconfig.schematics.json` ファイルを追加します。
 
-1. Edit the `tsconfig.schematics.json` file to add the following content.
+1. `tsconfig.schematics.json` ファイルを編集して、次の内容を追加します。
 
 <code-example header="projects/my-lib/tsconfig.schematics.json (TypeScript Config)" path="schematics-for-libraries/projects/my-lib/tsconfig.schematics.json">
 </code-example>
 
-  * The `rootDir` specifies that your `schematics/` folder contains the input files to be compiled.
+  * `rootDir` は、`schematics/` フォルダーにコンパイルされる入力ファイルが含まれていることを指定します。
 
-  * The `outDir` maps to the library's output folder. By default, this is the `dist/my-lib` folder at the root of your workspace.
+  * `outDir` はライブラリの出力フォルダーにマップされます。デフォルトでは、これはワークスペースのルートにある `dist/my-lib` フォルダーです。
 
-1. To make sure your schematics source files get compiled into the library bundle, add the following scripts to the `package.json` file in your library project's root folder (`projects/my-lib`).
+1. Schematics ソースファイルがライブラリバンドルにコンパイルされるようにするには、ライブラリプロジェクトのルートフォルダー (`projects/my-lib`) の `package.json` ファイルに次のスクリプトを追加します。
 
 <code-example header="projects/my-lib/package.json (Build Scripts)" path="schematics-for-libraries/projects/my-lib/package.json">
 </code-example>
 
-  * The `build` script compiles your schematic using the custom `tsconfig.schematics.json` file.
-  * The `copy:*` statements copy compiled schematic files into the proper locations in the library output folder in order to preserve the file structure.
-  * The `postbuild` script copies the schematic files after the `build` script completes.
+  * `build` スクリプトは、カスタム `tsconfig.schematics.json` ファイルを使用して Schematic をコンパイルします。
+  * `copy:*` ステートメントは、ファイル構造を保持するために、コンパイルされた Schematic ファイルをライブラリ出力フォルダーの適切な場所にコピーします。
+  * `build` スクリプトが完了すると、`postbuild` スクリプトが Schematic ファイルをコピーします。
 
-## Providing generation support
+## 生成サポートの提供
 
-You can add a named schematic to your collection that lets your users use the `ng generate` command to create an artifact that is defined in your library.
+名前付きの Schematic をコレクションに追加すると、ユーザーは `ng generate` コマンドを使用して、ライブラリで定義されたアーティファクトを作成できます。
 
-We'll assume that your library defines a service, `my-service`, that requires some setup. You want your users to be able to generate it using the following CLI command.
+ライブラリは、いくつかの設定を必要とする `my-service` サービスを定義していると想定します。 ユーザーが次の CLI コマンドを使用してそれを生成できるようにする必要があります。
 
 <code-example language="bash">
 ng generate my-lib:my-service
 </code-example>
 
-To begin, create a new subfolder, `my-service`, in the `schematics` folder.
+まず、`schematics` フォルダに新しいサブフォルダ、`my-service` を作成します。
 
-### Configure the new schematic
+### 新しい Schematic を設定
 
-When you add a schematic to the collection, you have to point to it in the collection's schema, and provide configuration files to define options that a user can pass to the command.
+コレクションに Schematic を追加するときは、コレクションのスキーマでそれをポイントし、ユーザーがコマンドに渡すことができるオプションを定義した設定ファイルを提供する必要があります。
 
-1. Edit the `schematics/collection.json` file to point to the new schematic subfolder, and include a pointer to a schema file that will specify inputs for the new schematic.
+1. 新しい Schematic のサブフォルダーを指すように `schematics/collection.json` ファイルを編集し、新しい Schematic の入力を指定するスキーマファイルへのポインターを含めます。
 
 <code-example header="projects/my-lib/schematics/collection.json (Schematics Collection)" path="schematics-for-libraries/projects/my-lib/schematics/collection.json">
 </code-example>
 
-1. Go to the `<lib-root>/schematics/my-service/` folder.
+1. `<lib-root>/schematics/my-service/` フォルダーに移動します。
 
-1. Create a `schema.json` file and define the available options for the schematic.
+2. `schema.json` ファイルを作成し、Schematic で使用可能なオプションを定義します。
 
 <code-example header="projects/my-lib/schematics/my-service/schema.json (Schematic JSON Schema)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/schema.json">
 </code-example>
 
-  * *id*: A unique id for the schema in the collection.
-  * *title*: A human-readable description of the schema.
-  * *type*: A descriptor for the type provided by the properties.
-  * *properties*: An object that defines the available options for the schematic.
+  * *id*: コレクション内のスキーマの一意のID。
+  * *title*: 人が読むことのできるスキーマの説明。
+  * *type*: プロパティによって提供されるタイプの記述子。
+  * *properties*: Schematic で使用可能なオプションを定義するオブジェクト。
 
-  Each option associates key with a type, description, and optional alias.
-  The type defines the shape of the value you expect, and the description is displayed when the user requests usage help for your schematic.
+  各オプションは、キーをタイプ、説明、およびオプションのエイリアスに関連付けます。
+  タイプは期待する値の型を定義し、ユーザーが Schematic の使用方法のヘルプを要求すると、説明が表示されます。
 
-  See the workspace schema for additional customizations for schematic options.
+  Schematic オプションの追加のカスタマイズについては、ワークスペーススキーマを参照してください。
 
-1. Create a `schema.ts` file and define an interface that stores the values of the options defined in the `schema.json` file.
+1. `schema.ts` ファイルを作成し、`schema.json` ファイルで定義されたオプションの値を格納するインターフェースを定義します。
 
 <code-example header="projects/my-lib/schematics/my-service/schema.ts (Schematic Interface)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/schema.ts">
 </code-example>
 
-  * *name*: The name you want to provide for the created service.
-  * *path*: Overrides the path provided to the schematic. The default path value is based on the current working directory.
-  * *project*: Provides a specific project to run the schematic on. In the schematic, you can provide a default if the option is not provided by the user.
+  * *name*: 作成したサービスに与える名前。
+  * *path*: Schematic に渡されたパスをオーバーライドします。デフォルトのパス値は、現在の作業ディレクトリに基づいています。
+  * *project*: Schematic を実行する特定のプロジェクトを与えます。Schematic では、オプションがユーザーによって与えられない場合、デフォルトとなります。
 
-### Add template files
+### テンプレートファイルの追加
 
-To add artifacts to a project, your schematic needs its own template files.
-Schematic templates support special syntax to execute code and variable substitution.
+アーティファクトをプロジェクトに追加するには、Schematic に独自のテンプレートファイルが必要です。
+Schematic テンプレートは、コードと変数置換を実行する特別な構文をサポートしています。
 
-1. Create a `files/` folder inside the `schematics/my-service/` folder.
+1. `schematics/my-service/` フォルダー内に `files/` フォルダーを作成します。
 
-1. Create a file named `__name@dasherize__.service.ts.template` that defines a template you can use for generating files. This template will generate a service that already has Angular's `HttpClient` injected into its constructor.
+2. ファイルの生成に使用できるテンプレートを定義する `__name@dasherize__.service.ts.template` という名前のファイルを作成します。このテンプレートは、Angularの `HttpClient` がすでにコンストラクターに挿入されたサービスを生成します。
 
 <code-example lang="ts" header="projects/my-lib/schematics/my-service/files/__name@dasherize__.service.ts.template (Schematic Template)">
 
@@ -157,122 +157,122 @@ export class <%= classify(name) %>Service {
 
 </code-example>
 
-* The `classify` and `dasherize` methods are utility functions that your schematic will use to transform your source template and filename.
+* `classify` メソッドと `dasherize` メソッドは、Schematic がソーステンプレートとファイル名を変換するために使用するユーティリティ関数です。
 
-* The `name` is provided as a property from your factory function. It is the same `name` you defined in the schema.
+* `name` は、ファクトリ関数からのプロパティとして与えられます。スキーマで定義した `name` と同じです。
 
-### Add the factory function
+### ファクトリー関数の追加
 
-Now that you have the infrastructure in place, you can define the main function that performs the modifications you need in the user's project.
+これでインフラストラクチャが整ったので、ユーザーのプロジェクトで必要な変更を実行するメイン関数を定義できます。
 
-The Schematics framework provides a file templating system, which supports both path and content templates.
-The system operates on placeholders defined inside files or paths that loaded in the input `Tree`.
-It fills these in using values passed into the `Rule`.
+Schematics フレームワークは、パステンプレートとコンテンツテンプレートの両方をサポートするファイルテンプレートシステムを提供します。
+システムは、入力 `Tree` にロードされたファイルまたはパス内で定義されたプレースホルダーを操作します。
+`Rule` に渡された値を使用してこれらを埋めます。
 
-For details of these data structures and syntax, see the [Schematics README](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/schematics/README.md).
+これらのデータ構造と構文の詳細については、[Schematics の README](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/schematics/README.md) を参照してください。
 
-1. Create the main file `index.ts` and add the source code for your schematic factory function.
+1. メインファイル `index.ts` を作成し、Schematic ファクトリ関数のソースコードを追加します。
 
-1. First, import the schematics definitions you will need. The Schematics framework offers many utility functions to create and use rules when running a schematic.
+2. 最初に、必要な Schematics の定義をインポートします。 Schematics フレームワークは、Schematic の実行時にルールを作成および使用するための多くのユーティリティ関数を提供します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Imports)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="schematics-imports">
 </code-example>
 
-1. Import the defined schema interface that provides the type information for your schematic's options.
+1. Schematic のオプションのタイプ情報を提供する定義されたスキーマインターフェースをインポートします。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Schema Import)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="schema-imports">
 </code-example>
 
-1. To build up the generation schematic, start with an empty rule factory.
+1. 生成 Schematic を構築するには、空のルールファクトリから始めます。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Initial Rule)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.1.ts" region="factory">
 </code-example>
 
-This simple rule factory returns the tree without modification.
-The options are the option values passed through from the `ng generate` command.
+この単純なルールファクトリは、変更をせずにツリーを返します。
+オプションは、`ng generate` コマンドから渡されるオプション値です。
 
-## Define a generation rule
+## 生成ルールの定義
 
-We now have the framework in place for creating the code that actually modifies the user's application to set it up for the service defined in your library.
+これで、ユーザーのアプリケーションを実際に変更してライブラリで定義されたサービス用に設定するコードを作成するためのフレームワークが整いました。
 
-The Angular workspace where the user has installed your library contains multiple projects (applications and libraries).
-The user can specify the project on the command line, or allow it to default.
-In either case, your code needs to identify the specific project to which this schematic is being applied, so that you can retrieve information from the project configuration.
+ユーザーがライブラリをインストールした Angular ワークスペースには、複数のプロジェクト (アプリケーションとライブラリ) が含まれています。
+ユーザーは、コマンドラインでプロジェクトを指定するか、デフォルトにすることができます。
+どちらの場合でも、プロジェクト設定から情報を取得できるように、コードはこの Schematic が適用されている特定のプロジェクトを識別する必要があります。
 
-You can do this using the `Tree` object that is passed in to the factory function.
-The `Tree` methods give you access to the complete file tree in your workspace, allowing you to read and write files during the execution of the schematic.
+これは、ファクトリ関数に渡される `Tree` オブジェクトを使用して行うことができます。
+`Tree` メソッドを使用すると、ワークスペース内の完全なファイルツリーにアクセスできるため、Schematic の実行中にファイルを読み書きできます。
 
-### Get the project configuration
+### プロジェクト設定の取得
 
-1. To determine the destination project, use the `Tree.read()` method to read the contents of the workspace configuration file, `angular.json`, at the root of the workspace.
-   Add the following code to your factory function.
+1. 目的のプロジェクトを判別するには、`Tree.read()` メソッドを使用して、ワークスペースのルートにあるワークスペース設定ファイル `angular.json` の内容を読み取ります。
+   次のコードをファクトリー関数に追加します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Schema Import)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="workspace">
 </code-example>
 
-  * Be sure to check that the context exists and throw the appropriate error.
+  * コンテキストが存在することを確認し、適切なエラーをスローしてください。
 
-  * After reading the contents into a string, parse the configuration into a JSON object, typed to the `WorkspaceSchema`.
+  * コンテンツを文字列に読み込んだ後、構造を解析して JSON オブジェクトに変換し、`WorkspaceSchema` に入力します。
 
-1. The `WorkspaceSchema` contains all the properties of the workspace configuration, including a `defaultProject` value for determining which project to use if not provided.
-   We will use that value as a fallback, if no project is explicitly specified in the `ng generate` command.
+1. `WorkspaceSchema` には、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値を含む、ワークスペース設定のすべてのプロパティが含まれています。
+   `ng generate` コマンドでプロジェクトが明示的に指定されていない場合は、その値をフォールバックとして使用します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Default Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-fallback">
 </code-example>
 
-1. Now that you have the project name, use it to retrieve the project-specific configuration information.
+1. これでプロジェクト名がわかったので、それを使用してプロジェクト固有の設定情報を取得します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-info">
 </code-example>
 
-   The `workspace projects` object contains all the project-specific configuration information.
+   `workspace projects` オブジェクトには、プロジェクト固有の設定情報がすべて含まれています。
 
-1. The `options.path` determines where the schematic template files are moved to once the schematic is applied.
+1. `options.path` は、Schematic が適用された後の Schematic テンプレートファイルの移動先を決定します。
 
-   The `path` option in the schematic's schema is substituted by default with the current working directory.
-   If the `path` is not defined, use the `sourceRoot` from the project configuration along with the `projectType`.
+   Schematic のスキーマの `path` オプションは、デフォルトで現在の作業ディレクトリに置き換えられます。
+   `path` が定義されていない場合は、`projectType` とともにプロジェクト設定の `sourceRoot` を使用します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Project Info)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="path">
 </code-example>
 
-### Define the rule
+### ルールの定義
 
-A `Rule` can use external template files, transform them, and return another `Rule` object with the transformed template. You can use the templating to generate any custom files required for your schematic.
+`Rule` は、外部テンプレートファイルを使用してそれらを変換し、変換されたテンプレートを使用して別の `Rule` オブジェクトを返すことができます。 テンプレートを使用して、Schematic に必要なカスタムファイルを生成できます。
 
-1. Add the following code to your factory function.
+1. 次のコードをファクトリー関数に追加します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Template transform)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="template">
 </code-example>
 
-  * The `apply()` method applies multiple rules to a source and returns the transformed source. It takes 2 arguments, a source and an array of rules.
-  * The `url()` method reads source files from your filesystem, relative to the schematic.
-  * The `applyTemplates()` method receives an argument of methods and properties you want make available to the schematic template and the schematic filenames. It returns a `Rule`. This is where you define the `classify()` and `dasherize()` methods, and the `name` property.
-  * The `classify()` method takes a value and returns the value in title case. For example, if the provided name is `my service`, it is returned as `MyService`
-  * The `dasherize()` method takes a value and returns the value in dashed and lowercase. For example, if the provided name is MyService, it is returned as `my-service`.
-  * The `move` method moves the provided source files to their destination when the schematic is applied.
+  * `apply()` メソッドは、ソースに複数のルールを適用し、変換されたソースを返します。 ソースとルールの配列の2つの引数を取ります。
+  * `url()` メソッドは、Schematic に対して、ファイルシステムからソースファイルを読み取ります。
+  * `applyTemplates()` メソッドは、Schematic テンプレートと Schematic ファイル名で使用できるようにするメソッドとプロパティの引数を受け取り、`Rule` を返します。 ここで、`classify()`メソッドと `dasherize()` メソッド、および `name` プロパティを定義します。
+  * `classify()` メソッドは値を受け取り、タイトルケースの値を返します。たとえば、提供された名前が `my service` の場合、`MyService` として返されます。
+  * `dasherize()` メソッドは値を受け取り、その値を破線と小文字で返します。たとえば、提供された名前が MyService の場合、`my-service` として返されます。
+  * `move` メソッドは、Schematic が適用されたときに、与えられたソースファイルを目的の場所に移動します。
 
-1. Finally, the rule factory must return a rule.
+1. 最後に、ルールファクトリはルールを返す必要があります。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Chain Rule)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="chain">
 </code-example>
 
-  The `chain()` method allows you to combine multiple rules into a single rule, so that you can perform multiple operations in a single schematic.
-  Here you are only merging the template rules with any code executed by the schematic.
+  `chain()` メソッドを使用すると、複数のルールを1つのルールに結合できるため、1つの Schematic で複数の操作を実行できます。
+  ここでは、テンプレートルールと Schematic によって実行されるコードをマージするだけです。
 
-See a complete exampled of the schematic rule function.
+Schematic ルール関数の完全な例をご覧ください。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts">
 </code-example>
 
-For more information about rules and utility methods, see [Provided Rules](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/schematics#provided-rules).
+ルールとユーティリティメソッドの詳細については、[Provided Rules](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/schematics#provided-rules) を参照してください。
 
-## Running your library schematic
+## ライブラリ Schematic の実行
 
-After you build your library and schematics, you can install the schematics collection to run against your project. The steps below show you how to generate a service using the schematic you created above.
+ライブラリと Schematics を作成したら、Schematics コレクションをインストールしてプロジェクトに対して実行できます。 次の手順は、上記で作成した Schematic を使用してサービスを生成する方法を示しています。
 
-### Build your library and schematics
+### ライブラリと schematics の構築
 
-From the root of your workspace, run the `ng build` command for your library.
+ワークスペースのルートから、ライブラリの `ng build` コマンドを実行します。
 
 <code-example language="bash">
 
@@ -280,7 +280,7 @@ From the root of your workspace, run the `ng build` command for your library.
 
 </code-example>
 
-Then, you change into your library directory to build the schematic
+次に、ライブラリディレクトリに移動して、Schematic をビルドします。
 
 <code-example language="bash">
 
@@ -289,9 +289,9 @@ Then, you change into your library directory to build the schematic
 
 </code-example>
 
-### Link the library
+### ライブラリのリンク
 
-Your library and schematics are packaged and placed in the `dist/my-lib` folder at the root of your workspace. For running the schematic, you need to link the library into your `node_modules` folder. From the root of your workspace, run the `npm link` command with the path to your distributable library.
+ライブラリと Schematics がパッケージ化され、ワー​​クスペースのルートにある `dist/my-lib` フォルダーに配置されます。 Schematic を実行するには、ライブラリを `node_modules` フォルダーにリンクする必要があります。 ワークスペースのルートから、配布可能なライブラリへのパスを指定して `npm link` コマンドを実行します。
 
 <code-example language="bash">
 
@@ -299,9 +299,9 @@ npm link dist/my-lib
 
 </code-example>
 
-### Run the schematic
+### Schematic の実行
 
-Now that your library is installed, you can run the schematic using the `ng generate` command.
+ライブラリがインストールされたので、`ng generate` コマンドを使用して Schematic を実行できます。
 
 <code-example language="bash">
 
@@ -309,7 +309,7 @@ ng generate my-lib:my-service --name my-data
 
 </code-example>
 
-In the console, you will see that the schematic was run and the `my-data.service.ts` file was created in your app folder.
+コンソールで、Schematic が実行され、`my-data.service.ts` ファイルが app フォルダーに作成されたことがわかります。
 
 <code-example language="bash" hideCopy="true">
 

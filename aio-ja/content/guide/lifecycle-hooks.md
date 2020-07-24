@@ -421,7 +421,7 @@ Angular は DOM からすべての hero の `<div>` 要素を削除し、同時�
 
 {@a onchanges}
 
-## 変更検知フックの使用
+## 変更検知フックの使用 {@a using-change-detection-hooks}
 
 Angular は ***入力プロパティ*** の変更を検出するたびに、コンポーネントまたはディレクティブの `ngOnChanges()` メソッドを呼び出します。
 *onChanges* の例では、 `OnChanges()` フックをモニタリングすることでこれを示しています。
@@ -584,7 +584,7 @@ Angular はこのコンポーネントのビューの構成を完了する *前�
 
 {@a docheck}
 
-## カスタム変更検知の定義
+## カスタム変更検知の定義 {@a defining-custom-change-detection}
 
 `ngOnChanges()` が変更をキャッチしない場所で発生する変更を監視するには、 *DoCheck* の例に示すように、独自の変更チェックを実装できます。
 この例は `ngDoCheck()` フックを使用して Angular が独自にキャッチしない変更を検出して対処する方法を示しています。

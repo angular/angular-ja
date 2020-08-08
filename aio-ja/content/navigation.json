@@ -296,7 +296,7 @@
                 },
                 {
                   "url": "guide/svg-in-templates",
-                  "title": "テンプレート中のSVG",
+                  "title": "テンプレート内SVG",
                   "tooltip": "Guide to using SVGs as templates to create interactive graphics.",
                   "translated": true
                 }
@@ -764,7 +764,7 @@
             },
             {
               "url": "guide/testing-utility-apis",
-              "title": "テスティングユーティリティAPI",
+              "title": "ユーティリティAPI",
               "tooltip": "Features of the Angular testing utilities.",
               "translated": true
             }
@@ -939,8 +939,9 @@
         },
         {
           "url": "guide/roadmap",
-          "title": "Roadmap",
-          "tooltip": "Roadmap of the Angular team."
+          "title": "ロードマップ",
+          "tooltip": "Roadmap of the Angular team.",
+          "translated": true
         },
         {
           "title": "バージョン10へのアップデート",

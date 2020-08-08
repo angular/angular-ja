@@ -53,7 +53,7 @@
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-[`*ngFor`](guide/template-syntax#ngFor) はAngularの _繰り返し_ ディレクティブです。
+[`*ngFor`](guide/built-in-directives#ngFor) はAngularの _繰り返し_ ディレクティブです。
 これは、リスト内の各要素に対して、ホスト要素を繰り返します。
 
 この例の構文は次のとおりです。
@@ -116,7 +116,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" header="heroes.component.html (template excerpt)"></code-example>
 
-これはAngularの [イベントバインディング](guide/template-syntax#event-binding) シンタックスにおける1つの例です。
+これはAngularの [イベントバインディング](guide/event-binding) シンタックスにおける1つの例です。
 
 `click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
 ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
@@ -197,7 +197,7 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 _選択されたヒーロー_ の着色は [あなたが先ほど追加したスタイル](#styles) の `.selected` CSSクラスの仕事です。
 あなたはただ、ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するだけです。
 
-Angularの [クラスバインディング](guide/template-syntax#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
+Angularの [クラスバインディング](guide/attribute-binding#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
 装飾したい要素に `[class.some-css-class]="some-condition"` を追加するだけです。
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：

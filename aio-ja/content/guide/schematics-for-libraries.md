@@ -57,6 +57,20 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 この例では、関数は現在の `Tree` を受け取り、変更せずにそれを返します。
 必要に応じて、パッケージのインストール時に、ファイルの生成、設定の更新、またはライブラリに必要なその他の初期設定などの追加設定を行うことができます。
 
+### Define dependency type
+
+Use the `save` option of `ng-add` to configure if the library should be added to the `dependencies`, the `devDepedencies`, or not saved at all in the project's `package.json` configuration file.
+
+<code-example header="projects/my-lib/package.json (ng-add Reference)" path="schematics-for-libraries/projects/my-lib/package.json" region="ng-add">
+</code-example>
+
+Possible values are:
+
+  * `false` - Don't add the package to package.json
+  * `true` - Add the package to the dependencies
+  * `"dependencies"` - Add the package to the dependencies
+  * `"devDependencies"` - Add the package to the devDependencies
+
 ## Schematics の作成
 
 Schematics をライブラリと一緒にバンドルするには、ライブラリを設定して Schematics を個別にビルドしてから、それらをバンドルに追加する必要があります。

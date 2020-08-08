@@ -38,15 +38,15 @@ DOM の _構造_ を構築または再構成します。
 角括弧なし。括弧なし。`*ngIf` に文字列をセットするだけです。
 
 このガイドでは、[アスタリスク (*) は便利な表記法](guide/structural-directives#asterisk) であること、
-文字列は通常のテンプレート式ではなく
+文字列は通常の[テンプレート式](guide/interpolation#template-expressions)ではなく
 [_マイクロシンタックス_](guide/structural-directives#microsyntax) であることを学びます。
 Angular はこの表記法を、`<ng-template>`
 でホスト要素とその子孫を囲むマークアップにデシュガーします。
 個々の構造ディレクティブは、そのテンプレートを使用して何か違うことをします。
 
 3つの一般的なビルトイン構造ディレクティブ
-([NgIf](guide/template-syntax#ngIf)、[NgFor](guide/template-syntax#ngFor)、[NgSwitch...](guide/template-syntax#ngSwitch)) は、
-[_テンプレート構文_](guide/template-syntax) ガイドで説明されており、
+([NgIf](guide/built-in-directives#ngIf)、[NgFor](guide/built-in-directives#ngFor)、[NgSwitch...](guide/built-in-directives#ngSwitch)) は、
+[ビルトインディレクティブ](guide/built-in-directives) ガイドで説明されており、
 Angular のドキュメント全体のサンプルで見られます。テンプレートの例は次のようになります:
 
 
@@ -96,7 +96,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 
 [*属性* ディレクティブ](guide/attribute-directives)
 は、要素、コンポーネント、または他のディレクティブの外観または動作を変更します。
-たとえば、ビルトインの [`NgStyle`](guide/template-syntax#ngStyle)
+たとえば、ビルトインの [`NgStyle`](guide/built-in-directives#ngStyle)
 ディレクティブは同時にいくつかの要素スタイルを変更します。
 
 1つのホスト要素に複数の _属性_ ディレクティブを適用できます。
@@ -440,7 +440,7 @@ _テンプレート入力変数_ は、テンプレートの単一インスタ�
 すべてのキーワードの前には `let` が付きます。
 
 _テンプレート入力変数_ は、
-[テンプレート _参照_ 変数](guide/template-syntax#ref-vars) と
+[テンプレート _参照_ 変数](guide/template-reference-variables) と
 _意味的_ にも _構文的_ にも同じでは **ありません**。
 
 `let` キーワード (`let hero`) を使ってテンプレート _入力_ 変数を宣言します。
@@ -786,7 +786,7 @@ Angular が生成した
 
 
 
-[_テンプレート構文_](guide/template-syntax#inputs-outputs) ガイドの `@Input` について参照してください。
+[`@Input()` と `@Output()` プロパティ](guide/inputs-outputs) ガイドの `@Input` について参照してください。
 
 
 </div>
@@ -879,12 +879,14 @@ export type LoadingState<T> = Loaded<T> | Loading;
 export class IfLoadedDirective<T> {
     @Input('ifLoaded') set state(state: LoadingState<T>) {}
     static ngTemplateGuard_state<T>(dir: IfLoadedDirective<T>, expr: LoadingState<T>): expr is Loaded<T> { return true; };
+}
+
 export interface Person {
   name: string;
 }
 
 @Component({
-  template: `<div *ifLoaded="state">{{ state.data }}</div>`,
+  template: `&lt;div *ifLoaded="state">{{ state.data }}&lt;/div>`,
 })
 export class AppComponent {
   state: LoadingState<Person>;

@@ -219,10 +219,88 @@
               "translated": true
             },
             {
-              "url": "guide/template-syntax",
               "title": "テンプレート構文",
-              "tooltip": "データバインディングを使用してデータを表示し、ユーザーイベントを利用するテンプレートの作成方法を学びます。",
-              "translated": true
+              "tooltip": "Syntax to use in templates for binding, expressions, and directives.",
+              "children": [
+                {
+                  "url": "guide/template-syntax",
+                  "title": "イントロダクション",
+                  "tooltip": "データバインディングを使用してデータを表示し、ユーザーイベントを利用するテンプレートの作成方法を学びます。",
+                  "translated": false
+                },
+                {
+                  "url": "guide/interpolation",
+                  "title": "補間",
+                  "tooltip": "An introduction to interpolation and expressions in HTML.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/template-statements",
+                  "title": "テンプレート文",
+                  "tooltip": "Introductory guide to statements in templates that respond to events that components, directives, or elements raise.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/binding-syntax",
+                  "title": "バインディング構文",
+                  "tooltip": "Introductory guide to coordinating app values.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/property-binding",
+                  "title": "プロパティバインディング",
+                  "tooltip": "Introductory guide to setting element or input properties.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/attribute-binding",
+                  "title": "属性・クラス・スタイルバインディング",
+                  "tooltip": "Introductory guide to setting the value of HTML attributes.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/event-binding",
+                  "title": "イベントバインディング",
+                  "tooltip": "Introductory guide to listening for user interaction.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/two-way-binding",
+                  "title": "双方向バインディング",
+                  "tooltip": "Introductory guide to sharing data between a class and a template.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/built-in-directives",
+                  "title": "組み込みディレクティブ",
+                  "tooltip": "Introductory guide to some of the most popular built-in directives.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/template-reference-variables",
+                  "title": "テンプレート参照変数",
+                  "tooltip": "Introductory guide to referring to DOM elements within a template.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/inputs-outputs",
+                  "title": "InputとOutput",
+                  "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/template-expression-operators",
+                  "title": "テンプレート式演算子",
+                  "tooltip": "Introductory guide to transforming data, ensuring safe navigation, and guarding against null variables in templates.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/svg-in-templates",
+                  "title": "テンプレート内SVG",
+                  "tooltip": "Guide to using SVGs as templates to create interactive graphics.",
+                  "translated": true
+                }
+              ]
             },
             {
               "url": "guide/user-input",
@@ -360,7 +438,7 @@
               "url": "guide/ngmodule-vs-jsmodule",
               "title": "JavaScriptモジュールとNgModule",
               "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/bootstrapping",
@@ -378,7 +456,7 @@
               "url": "guide/module-types",
               "title": "フィーチャーモジュールの種類",
               "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/entry-components",
@@ -633,10 +711,64 @@
           "translated": true
         },
         {
-          "url": "guide/testing",
           "title": "テスト",
-          "tooltip": "Angularアプリをテストするためのテクニックと実践。",
-          "translated": true
+          "tooltip": "Testing your Angular apps.",
+          "children": [
+            {
+              "url": "guide/testing",
+              "title": "イントロダクション",
+              "tooltip": "Angularアプリをテストするためのテクニックと実践。",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-code-coverage",
+              "title": "Code Coverage",
+              "tooltip": "Determine how much of your code is tested.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-services",
+              "title": "サービスのテスト",
+              "tooltip": "How to test services.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-components-basics",
+              "title": "コンポーネントのテストの基本",
+              "tooltip": "The fundamentals of how to test components.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-components-scenarios",
+              "title": "コンポーネントテストシナリオ",
+              "tooltip": "Use cases for testing components.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-attribute-directives",
+              "title": "属性ディレクティブのテスト",
+              "tooltip": "How to test attribute directives.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-pipes",
+              "title": "パイプのテスト",
+              "tooltip": "Writing tests for pipes.",
+              "translated": true
+            },
+            {
+              "url": "guide/test-debugging",
+              "title": "テストのデバッグ",
+              "tooltip": "How to debug tests.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-utility-apis",
+              "title": "ユーティリティAPI",
+              "tooltip": "Features of the Angular testing utilities.",
+              "translated": true
+            }
+          ]
         },
         {
           "url": "guide/deployment",
@@ -767,9 +899,20 @@
       "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
       "children": [
         {
-          "url": "guide/router-tutorial",
-          "title": "Using Angular Routes in a Single-page Application",
-          "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+          "title": "ルーティング",
+          "tooltip": "End-to-end tutorials for learning about Angular's router.",
+          "children": [
+            {
+              "url": "guide/router-tutorial",
+              "title": "Using Angular Routes in a Single-page Application",
+              "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+            },
+            {
+              "url": "guide/router-tutorial-toh",
+              "title": "Router tutorial: tour of heroes",
+              "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
+            }
+          ]
         },
         {
           "url": "guide/forms",
@@ -792,6 +935,12 @@
           "url": "guide/releases",
           "title": "リリースプラクティス",
           "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
+          "translated": true
+        },
+        {
+          "url": "guide/roadmap",
+          "title": "ロードマップ",
+          "tooltip": "Roadmap of the Angular team.",
           "translated": true
         },
         {

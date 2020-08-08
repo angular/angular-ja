@@ -38,7 +38,7 @@ ng generate service User
 
 <code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts"></code-example>
 
-## 遅延ロードモジュールでプロバイダーのスコープを制限する
+## 遅延ロードモジュールでプロバイダーのスコープを制限する {@a limiting-provider-scope-by-lazy-loading-modules}
 
 基本的に、CLIで生成されたアプリケーションでは、モジュールは事前ロードされます(つまり、アプリケーションの起動時にすべてロードされます)。Angularはインジェクターシステムを使用してモジュール間でのやりとりを可能にします。事前ロードされたアプリケーションでは、ルートアプリケーションインジェクターは、すべてのモジュールのすべてのプロバイダーをアプリケーション全体で利用可能にします。
 
@@ -51,6 +51,14 @@ Angularルーターがモジュールを遅延ロードすると、新しいイ�
 遅延ロードされたモジュールのコンテキスト内で作成されたコンポーネント(ルーターのナビゲーションなど)は、ルートアプリケーションインジェクターのインスタンスではなく、サービスのローカルインスタンスを取得します。外部モジュール内のコンポーネントは、アプリケーションルート用に作成されたインスタンスを受け取り続けます。
 
 遅延ロードするモジュールでサービスを提供することはできますが、すべてのサービスを遅延ロードすることはできません。たとえば、ルーターなど、ルートモジュールでのみ機能するモジュールもあります。ルーターは、ブラウザ内のグローバルのlocationオブジェクトを使用して動作します。
+
+As of Angular version 9, you can provide a new instance of a service with each lazy loaded module. The following code adds this functionality to `UserService`.
+
+<code-example path="providers/src/app/user.service.2.ts"  header="src/app/user.service.ts"></code-example>
+
+With `providedIn: 'any'`, all eagerly loaded modules share a singleton instance; however, lazy loaded modules each get their own unique instance, as shown in the following diagram.
+
+<img src="generated/images/guide/providers/any-provider.svg" alt="any-provider-scope" class="left">
 
 
 ## コンポーネントでプロバイダーのスコープを制限する

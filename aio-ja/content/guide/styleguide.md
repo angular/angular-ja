@@ -3304,7 +3304,7 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 
 
-**Why?** Angularでは、`on-*` という[代替構文](guide/template-syntax#binding-syntax)が使えます。イベント自体に`on`接頭辞が付いていると、`on-onEvent`バインディング式になってしまいます。
+**Why?** Angularでは、`on-*` という[代替構文](guide/binding-syntax)が使えます。イベント自体に`on`接頭辞が付いていると、`on-onEvent`バインディング式になってしまいます。
 
 
 </div>

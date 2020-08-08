@@ -18,12 +18,12 @@ Angularには、3つのディレクティブがあります。
 [入門](start "Getting Started with Angular") チュートリアルでコンポーネントをはじめて見たはずです。
 
 *構造ディレクティブ*は、ビューの構造を変更します。
-2つの例としては、[NgFor](guide/template-syntax#ngFor)と[NgIf](guide/template-syntax#ngIf)です。
+2つの例としては、[NgFor](guide/built-in-directives#ngFor)と[NgIf](guide/built-in-directives#ngIf)です。
 それらについては[構造ディレクティブ](guide/structural-directives)ガイドで学んでください。
 
 *属性ディレクティブ*は、要素の属性として扱われます。
-たとえば、[テンプレートシンタックス](guide/template-syntax)ガイドの組み込みの
-[NgStyle](guide/template-syntax#ngStyle)ディレクティブは、
+たとえば、[テンプレートシンタックス](guide/built-in-directives#ngStyle)ガイドの組み込みの
+[NgStyle](guide/built-in-directives)ディレクティブは、
 同時に複数の要素のスタイルを変更することができます。
 
 ## シンプルな属性ディレクティブを作成する

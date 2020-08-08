@@ -20,7 +20,7 @@ Angular アプリケーションを設計するためのベストプラクティ
 
 Web 上でのアクセシビリティを構築するためには、セマンティックな意味情報が欠落しないように
 [ARIA 属性](https://developers.google.com/web/fundamentals/accessibility/semantics-aria)を設定します。
-アクセシビリティ関連の属性の値を制御するためには [属性バインディング](guide/template-syntax#attribute-binding)テンプレート記法を使います。
+アクセシビリティ関連の属性の値を制御するためには [属性バインディング](guide/attribute-binding)テンプレート記法を使います。
 
 ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依存しています。
 Angular 内で ARIA 属性をバインドするためには接頭辞として `attr.` を使用してください。
@@ -44,7 +44,7 @@ Angular 内で ARIA 属性をバインドするためには接頭辞として `a
 
    規約により、HTML の属性の名前には小文字が使われます(`tabindex`)。一方でプロパティにはキャメルケースを使われます(`tabIndex`)。
 
-   属性とプロパティの違いについて詳しい背景は [テンプレート記法](guide/template-syntax#html-attribute-vs-dom-property)ガイドを参照してください。
+   属性とプロパティの違いについて詳しい背景は [バインディング構文](guide/binding-syntax#html-attribute-vs-dom-property)ガイドを参照してください。
 
 </div>
 

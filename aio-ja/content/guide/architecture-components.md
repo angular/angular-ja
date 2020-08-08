@@ -92,7 +92,7 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 * `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
-* `[hero]`[*プロパティバインディング*](guide/template-syntax#property-binding)は、
+* `[hero]`[*プロパティバインディング*](guide/property-binding)は、
 親である`HeroListComponent`から子の`HeroDetailComponent`の`hero`プロパティに`selectedHero`の値を渡します。
 
 * `(click)` [*イベントバインディング*](guide/user-input#binding-to-user-input-events)は、ユーザーがヒーローの名前をクリックすると、コンポーネントの `selectHero` メソッドを呼び出します。
@@ -124,9 +124,9 @@ Angular は、JavaScriptイベントサイクルごとに*すべての*データ
 
 Angular のパイプを使用すると、テンプレートHTMLの表示値変換を宣言できます。`@Pipe` デコレーターをもつクラスは、入力値を出力値に変換してビューに表示する関数を定義します。
 
-Angular は、[date](https://angular.io/api/common/DatePipe)パイプや[currency](https://angular.io/api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](https://angular.io/api?type=pipe)を参照してください。新しいパイプを定義することもできます。
+Angular は、[date](api/common/DatePipe)パイプや[currency](api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](api?type=pipe)を参照してください。新しいパイプを定義することもできます。
 
-HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](https://angular.io/guide/template-syntax#pipe)を使用します。
+HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/template-expression-operators#pipe)を使用します。
 
 `{{interpolated_value | pipe_name}}`
 
@@ -179,9 +179,9 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 <code-example path="architecture/src/app/hero-detail.component.html" header="src/app/hero-detail.component.html (ngModel)" region="ngModel"></code-example>
 
 Angularには、レイアウト構造を変更する
-（たとえば、[ngSwitch](guide/template-syntax#ngSwitch)）  
+（たとえば、[ngSwitch](guide/built-in-directives#ngSwitch)）  
 、あるいはDOM要素とコンポーネントのよう相を変更する  
-（たとえば、[ngStyle](guide/template-syntax#ngStyle) や [ngClass](guide/template-syntax#ngClass)）ディレクティブがあらかじめ定義されています。
+（たとえば、[ngStyle](guide/built-in-directives#ngStyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
 
 <div class="alert is-helpful">
 

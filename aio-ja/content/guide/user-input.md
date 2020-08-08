@@ -10,13 +10,13 @@
 
 ## ユーザー入力イベントにバインドする {@a binding-to-user-input-events}
 
-[Angularイベントバインディング](guide/template-syntax#event-binding)を使用して、
+[Angularイベントバインディング](guide/event-binding)を使用して、
 [DOMイベント](https://developer.mozilla.org/en-US/docs/Web/Events)に応答できます。
 多くのDOMイベントはユーザー入力によってトリガーされます。 
 これらのイベントにバインドすることで、ユーザーからの入力を得ることができます。
 
 DOMイベントにバインドするには、DOMイベント名をカッコで囲み、
-クォーテーションの中に[テンプレート文](guide/template-syntax#template-statements)を割り当てます。
+クォーテーションの中に[テンプレート文](guide/template-statements)を割り当てます。
 
 次の例は、クリックハンドラーを実装するイベントバインディングを示しています。
 
@@ -71,7 +71,7 @@ Angularは対応するDOMイベントオブジェクトをコンポーネント�
 各呼び出しの後、`onKey()`メソッドは、
 入力ボックス値の内容をコンポーネントの`values`プロパティのリストに追加し、
 その後に区切り文字（|）を続けます。
-[補間](guide/template-syntax#interpolation)は、`values`プロパティからの累積された入力ボックスの変更を表示します。
+[補間](guide/interpolation)は、`values`プロパティからの累積された入力ボックスの変更を表示します。
 
 ユーザーが文字「abc」を入力した後、バックスペースで1つずつ削除するとします。 
 UIに表示される内容は次のとおりです。
@@ -136,7 +136,7 @@ UIに表示される内容は次のとおりです。
 
 ## テンプレート参照変数からユーザー入力を取得する
 ユーザーデータを取得するもう1つの方法は、
-Angularの[**テンプレート参照変数**](guide/template-syntax#ref-vars)を使用することです。
+Angularの[**テンプレート参照変数**](guide/template-reference-variables)を使用することです。
 これらの変数は、テンプレート内から要素への直接アクセスを提供します。
 テンプレート参照変数を宣言するには、識別子の前にハッシュ（またはポンド）文字（#）を付けます。
 

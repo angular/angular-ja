@@ -157,9 +157,9 @@ Observable と events API を使用して同じ種類の操作を定義する方
     <td>作成 & キャンセル</td>
     <td>
 <pre>// Setup
-let clicks$ = fromEvent(buttonEl, ‘click’);
+const clicks$ = fromEvent(buttonEl, ‘click’);
 // Begin listening
-let subscription = clicks$
+const subscription = clicks$
   .subscribe(e => console.log(‘Clicked’, e))
 // Stop listening
 subscription.unsubscribe();</pre>

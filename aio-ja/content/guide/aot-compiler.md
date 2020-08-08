@@ -623,7 +623,7 @@ For more information about input type narrowing, see [Input setter coercion](gui
 
 ### null 以外の型アサーション演算子
 
-`*ngIf` を使用するのが不便な場合、またはバインディング式の補間時にコンポーネント内の制約によって式が常に NULL 以外になることが保証されている場合は、[非 null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)を使用して`Object is possibly 'undefined'` エラーを抑制します。
+`*ngIf` を使用するのが不便な場合、またはバインディング式の補間時にコンポーネント内の制約によって式が常に NULL 以外になることが保証されている場合は、[非 null 型アサーション演算子](guide/template-expression-operators#non-null-assertion-operator)を使用して`Object is possibly 'undefined'` エラーを抑制します。
 
 次の例では、`person` プロパティと `address` プロパティは常に一緒に設定されているため、`person` が null 以外の場合、`address` は常に null 以外の値になります。
 TypeScript やテンプレートコンパイラにこの制約を記述するのに便利な方法はありませんが、この例では `address!.street` を使用してエラーを抑制しています。

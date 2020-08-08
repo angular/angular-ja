@@ -24,7 +24,7 @@ StackBlitzプロジェクトはデフォルトで公開されているため、�
 
 アプリケーションをローカルまたは本番用にビルドするには、StackBlitzプロジェクトからソースコードをダウンロードする必要があります。 ファイルをダウンロードするには、プロジェクトの横にある左メニューの `Download Project` アイコンをクリックします。
 
-ソースコードをダウンロードして解凍したら、 [Angularコンソール](https://angularconsole.com "Angular Console web site") を使用してアプリケーションを実行するか、`Node.js`をインストールしてAngular CLIをインストールします。
+ソースコードをダウンロードして解凍したら、`Node.js`をインストールしてAngular CLIをインストールします。
 
 ターミナルから、Angular CLIをグローバルにインストールします:
 

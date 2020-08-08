@@ -1568,7 +1568,7 @@ AngularJS では、コンポーネントの名前をもとにマッチさせて�
 
 <code-example path="upgrade-phonecat-2-hybrid/app/phone-list/phone-list.template.html" region="controls" header="app/phone-list/phone-list.template.html (search controls)"></code-example>
 
-[テンプレート記法のページに記載されているように](guide/template-syntax#directives)、
+[テンプレート記法のページに記載されているように](guide/built-in-directives)、
 リストの `ng-repeat` を `*ngFor` に置き換えます。
 イメージタグの `ng-src` をネイティブの `src` プロパティに置き換えます。
 

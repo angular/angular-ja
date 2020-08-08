@@ -438,7 +438,7 @@
               "url": "guide/ngmodule-vs-jsmodule",
               "title": "JavaScriptモジュールとNgModule",
               "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/bootstrapping",
@@ -456,7 +456,7 @@
               "url": "guide/module-types",
               "title": "フィーチャーモジュールの種類",
               "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/entry-components",

@@ -18,7 +18,7 @@ See the <live-example></live-example> for a working example containing the code 
 プロパティバインディングは、
 対象の要素から値を読み出したり引き出したりすることには使えません。同様に、
 プロパティバインディングで対象の要素のメソッドを呼び出すこともできません。
-要素が発生するイベントは、 [イベントバインディング](guide/template-syntax#event-binding)を使ってリッスンすることができます。
+要素が発生するイベントは、 [イベントバインディング](guide/event-binding)を使ってリッスンすることができます。
 
 対象の要素のプロパティを読んだり、メソッドを呼び出したりする必要があるときは、
 API リファレンスの [ViewChild](api/core/ViewChild) や

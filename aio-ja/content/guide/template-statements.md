@@ -10,8 +10,7 @@ the syntax and code snippets in this guide.
 
 </div>
 
-テンプレート文は [イベントバインディング](guide/template-syntax#event-binding) セクションでも触れますが、
-`(event)="statement"` のように `=` 記号の右側に引用符で囲まれた形で現れます。
+The following template statement appears in quotes to the right of the `=`&nbsp;symbol as in `(event)="statement"`.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html"></code-example>
 
@@ -32,7 +31,7 @@ the syntax and code snippets in this guide.
 * `++` や `--` などの、インクリメント、デクリメント演算子
 * `+=` and `-=` などの代入演算子
 * ビット演算子 `|` や `&`
-* [パイプ演算子](guide/template-syntax#pipe)
+* [パイプ演算子](guide/template-expression-operators#pipe)
 
 ## 文のコンテキスト
 
@@ -46,8 +45,8 @@ the syntax and code snippets in this guide.
 
 文のコンテキストはテンプレート自身のコンテキストのプロパティも参照します。
 次の例では、テンプレートの `$event` オブジェクト、
-[テンプレート入力変数](guide/template-syntax#template-input-variable) (`let hero`)、
-および [テンプレート参照変数](guide/template-syntax#ref-vars) (`#heroForm`)
+[テンプレート入力変数](guide/built-in-directives#template-input-variable) (`let hero`)、
+および [テンプレート参照変数](guide/template-reference-variables) (`#heroForm`)
 がコンポーネントのイベント処理メソッドに渡されています。
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-var-statement" header="src/app/app.component.html"></code-example>

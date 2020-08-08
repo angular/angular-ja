@@ -1640,7 +1640,7 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
 
 * `ng-class` 周りでプロパティバインディング記法を使っています。
   Angular は AngularJS が持っているのと
-  [そっくりの `ngClass`](guide/template-syntax#directives) を持っていますが、その値は式として魔法のように評価されません。
+  [そっくりの `ngClass`](guide/built-in-directives) を持っていますが、その値は式として魔法のように評価されません。
   Angular ではアトリビュートの値がプロパティの式のとき、
   文字列のリテラルとは対照的に、必ずテンプレートで指定します。
 

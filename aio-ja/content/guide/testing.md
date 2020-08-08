@@ -29,7 +29,7 @@ This sample application is much like the one in the [_Tour of Heroes_ tutorial](
 
 {@a setup}
 
-## セットアップ
+## セットアップ {@a set-up-testing}
 
 Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/) を使用してAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
 

@@ -25,7 +25,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
     <td>
 
     特別な_asyncテストゾーン_内でテスト（`it`）またはセットアップ（`beforeEach`）関数の本体を実行します。
-    [上記の説明](#async)を参照してください。
+    [上記の説明](guide/testing-components-scenarios#async)を参照してください。
 
     </td>
   </tr>
@@ -38,7 +38,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
     <td>
 
       特別な_fakeAsyncテストゾーン_内でテストの本体(`it`)を実行し、線形コントロールフローのコーディングスタイルを可能にします。
-      [上記の説明](#fake-async)を参照してください。
+      [上記の説明](guide/testing-components-scenarios#fake-async)を参照してください。
 
     </td>
   </tr>
@@ -62,7 +62,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
       仮想クロックを指定されたミリ秒数だけ前進させ、
       その時間枠内でスケジュールされた非同期アクティビティをクリアするオプションの引数を受け入れます。
-      [上記の説明](#tick)
+      [上記の説明](guide/testing-components-scenarios#tick)
       を参照してください。
 
     </td>
@@ -77,7 +77,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
       現在の`TestBed`インジェクターから1つ以上のサービスをテスト関数に注入します。
       コンポーネント自身によって提供されるサービスを注入することはできません。
-      [debugElement.injector](#get-injected-services)の説明を参照してください。
+      [debugElement.injector](guide/testing-components-scenarios#get-injected-services)の説明を参照してください。
 
     </td>
   </tr>
@@ -123,7 +123,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     <td>
 
-      [自動変更検知](#automatic-change-detection)を有効にする、サービスのプロバイダートークン。
+      [自動変更検知](guide/testing-components-scenarios#automatic-change-detection)を有効にする、サービスのプロバイダートークン。
 
     </td>
   </tr>
@@ -230,7 +230,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       テストモジュールの構成が完了したら、テストモジュールを非同期でコンパイルします。
       コンポーネントテンプレートとスタイルファイルの取得は必ず非同期であるため、
       テストモジュールコンポーネントの_いずれか_に`templateUrl`または`styleUrls`がある場合は、このメソッドを呼び出す**必要があります**。
-      [上記](#compile-components)を参照してください。
+      [上記](guide/testing-components-scenarios#compile-components)を参照してください。
 
       `compileComponents`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズされます。
 
@@ -543,7 +543,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
 
       非同期アクティビティまたは非同期変更検知が完了した後でテストを再開するには、
       そのPromiseをフックしてください。
-      [上記](#when-stable)を参照してください。
+      [上記](guide/testing-components-scenarios#when-stable)を参照してください。
 
     </td>
   </tr>
@@ -713,7 +713,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       指定した名前に対応するリスナーが、要素の`listeners`コレクション内にある場合、
       その名前でイベントをトリガーします。
       2番目のパラメータは、ハンドラが期待する_イベントオブジェクト_です。
-      [上記](#trigger-event-handler)を参照してください。
+      [上記](guide/testing-components-scenarios#trigger-event-handler)を参照してください。
 
       イベントにリスナーがない場合やその他の問題がある場合は、
       `nativeElement.dispatchEvent(eventObject)`を呼び出すことを検討してください。

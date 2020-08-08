@@ -73,4 +73,4 @@ form 要素を使って双方向バインディングを使うと便利です。
 ただし、`x` 値および `xChange` イベントパターンに従うネイティブ HTML 要素はありません。
 
 フォームでの双方向バインディングについての詳細は
-Angular [NgModel](guide/template-syntax#ngModel) を参照してください.
+Angular [NgModel](guide/built-in-directives#ngModel) を参照してください.

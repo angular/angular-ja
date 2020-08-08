@@ -157,7 +157,7 @@ Because `compileComponents` is asynchronous, it uses
 the [`async`](api/core/testing/async) utility
 function imported from `@angular/core/testing`.
 
-Please refer to the [async](#async) section for more details.
+Please refer to the [async](guide/testing-components-scenarios#async) section for more details.
 
 </div>
 

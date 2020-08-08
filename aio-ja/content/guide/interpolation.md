@@ -82,7 +82,7 @@ Angularは 式を実行し、それをバインディングターゲットのプ
 その他の JavaScript 構文との注目すべき違いは次のとおりです。
 
 * `|` や `&` などのビット演算子はサポートされていません
-* `|`、`?.` や `!` などの新しい[テンプレート式演算子](guide/template-syntax#expression-operators)を持ちます
+* `|`、`?.` や `!` などの新しい[テンプレート式演算子](guide/template-expression-operators)を持ちます
 
 ## 式のコンテキスト
 
@@ -128,9 +128,9 @@ _コンテキスト_ オブジェクト(ある場合)、およびコンポーネ
 
 テンプレート式を使う場合は、次のガイドラインにしたがってください:
 
-* [シンプルさ](guide/template-syntax#simplicity)
-* [素早い実行](guide/template-syntax#quick-execution)
-* [副作用を起こさない](guide/template-syntax#no-visible-side-effects)
+* [シンプルさ](guide/interpolation#simplicity)
+* [素早い実行](guide/interpolation#quick-execution)
+* [副作用を起こさない](guide/interpolation#no-visible-side-effects)
 
 ### シンプルさ {@a simplicity}
 
@@ -169,6 +169,6 @@ Angular の項の中で冪等な式は、
 
 <div class="alert is-helpful">
 
-`*ngFor` に適用される振る舞いについて1つ例外があります。`*ngFor` には、繰り返しをまたいだときに、参照の違うオブジェクトを処理できる `trackBy` 機能があります。詳しくは、このガイドの [`trackBy` を使用した *ngFor](guide/template-syntax#ngfor-with-trackby) セクションを参照してください。
+`*ngFor` に適用される振る舞いについて1つ例外があります。`*ngFor` には、繰り返しをまたいだときに、参照の違うオブジェクトを処理できる `trackBy` 機能があります。詳しくは、このガイドの [`trackBy` を使用した *ngFor](guide/built-in-directives#ngfor-with-trackby) セクションを参照してください。
 
 </div>

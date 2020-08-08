@@ -91,7 +91,7 @@ See the <live-example></live-example> for a working example containing the code 
 
 最初に、子のセレクター（ここでは `<app-item-detail>`）を
 親コンポーネントのテンプレートでのディレクティブとして使います。
-次に[プロパティバインディング](guide/template-syntax#property-binding)を使い、子のプロパティを親のプロパティにバインドします。
+次に[プロパティバインディング](guide/property-binding)を使い、子のプロパティを親のプロパティにバインドします。
 
 <code-example path="inputs-outputs/src/app/app.component.html" region="input-parent" header="src/app/app.component.html"></code-example>
 
@@ -134,7 +134,7 @@ Angular の[ライフサイクル・フック](guide/lifecycle-hooks#onchanges) 
 子のコンポーネントやディレクティブで `@Output()` デコレーターを使えば、
 子 _から_ 親へデータを流すことができます。
 
-`@Output()` プロパティは、通常は Angular の [`EventEmitter`](api/core/EventEmitter) で初期化され、[イベント](#event-binding)として値をコンポーネントの外に流します。
+`@Output()` プロパティは、通常は Angular の [`EventEmitter`](api/core/EventEmitter) で初期化され、[イベント](guide/event-binding)として値をコンポーネントの外に流します。
 
 
 <div class="lightbox">
@@ -210,12 +210,12 @@ import { Output, EventEmitter } from '@angular/core';
 
 子のテンプレートには2つのコントロールがあります。
 1つ目は、ユーザーが項目名を入力する HTML の `<input>` で、
-[テンプレート参照変数](guide/template-syntax#ref-var)の `#newItem` がついています。
+[テンプレート参照変数](guide/template-reference-variables)の `#newItem` がついています。
 ユーザーが `<input>` に入力したものは何でも `#newItem` 変数に保存されます。
 
 <code-example path="inputs-outputs/src/app/item-output/item-output.component.html" region="child-output" header="src/app/item-output/item-output.component.html"></code-example>
 
-2つ目の要素は[イベントバインディング](guide/template-syntax#event-binding)
+2つ目の要素は[イベントバインディング](guide/event-binding)
 がついた `<button>` です。
 等号の左側が括弧に囲まれた `(click)` であることから、
 これがイベントバインディングであることが分かります。
@@ -287,7 +287,7 @@ import { Output, EventEmitter } from '@angular/core';
 プロパティ `currentItem` とメソッド `crossOffItem()` は、どちらも親コンポーネントクラスのものです。
 
 banana-in-a-box 構文 `[()]` を使うことで、プロパティとイベントバインディングを合体させることができます。
-詳しくは[双方向バインディング](guide/template-syntax#two-way)をご覧ください。
+詳しくは[双方向バインディング](guide/two-way-binding)をご覧ください。
 
 ## `@Input()` と `@Output()` の宣言
 

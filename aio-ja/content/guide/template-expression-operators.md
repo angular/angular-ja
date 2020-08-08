@@ -5,9 +5,9 @@
 Angular のテンプレート式言語は、JavaScript 構文のサブセットを採用し、いくつかの特定のシナリオ向けの特別な演算子を追加しています。
 次のセクションでは、これらの演算子から3つを紹介します。
 
-* [パイプ](guide/template-syntax#pipe)
-* [セーフナビゲーション演算子](guide/template-syntax#safe-navigation-operator)
-* [non-null 型アサーション演算子](guide/template-syntax#non-null-assertion-operator)
+* [パイプ](guide/template-expression-operators#pipe)
+* [セーフナビゲーション演算子](guide/template-expression-operators#safe-navigation-operator)
+* [non-null 型アサーション演算子](guide/template-expression-operators#non-null-assertion-operator)
 
 <div class="alert is-helpful">
 
@@ -115,7 +115,7 @@ Angular の non-null アサーション演算子 (`!`) は、Angular テンプ�
 Angular コンパイラーがテンプレートを TypeScript のコードに置き換えるとき、
 `item.color` が `null` か `undefined` になりうることを TypeScript が報告することを防げます。
 
-[_セーフナビゲーション演算子_](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?)")と違い、
+[_セーフナビゲーション演算子_](guide/template-expression-operators#safe-navigation-operator "Safe navigation operator (?)")と違い、
 non-null アサーション演算子は `null` や `undefined` から守ってくれるものではありません。
 TypeScript の型チェッカーに、特定のプロパティ式に対する厳密な `null` チェックを一時停止させます。
 

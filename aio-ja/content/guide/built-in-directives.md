@@ -25,9 +25,9 @@ See the <live-example></live-example> for a working example containing the code 
 や [`FormsModule`](guide/forms "Forms") などの多くの NgModule では独自の属性ディレクティブを定義しています。
 もっとも一般的に使用されている属性ディレクティブは次のとおりです:
 
-* [`NgClass`](guide/template-syntax#ngClass) - 一連の CSS クラスを追加および削除する
-* [`NgStyle`](guide/template-syntax#ngStyle) - 一連の HTML スタイルを追加および削除する
-* [`NgModel`](guide/template-syntax#ngModel) - HTML の form 要素への双方向データバインディング
+* [`NgClass`](#ngClass) - 一連の CSS クラスを追加および削除する
+* [`NgStyle`](#ngStyle) - 一連の HTML スタイルを追加および削除する
+* [`NgModel`](#ngModel) - HTML の form 要素への双方向データバインディング
 
 <hr/>
 
@@ -41,7 +41,7 @@ See the <live-example></live-example> for a working example containing the code 
 
 <div class="alert is-helpful">
 
-追加、削除するクラスが *ひとつだけ* のときは、`NgClass` よりも[クラスバインディング](guide/template-syntax#class-binding)を使いましょう。
+追加、削除するクラスが *ひとつだけ* のときは、`NgClass` よりも[クラスバインディング](guide/attribute-binding#class-binding)を使いましょう。
 
 </div>
 
@@ -73,7 +73,7 @@ See the <live-example></live-example> for a working example containing the code 
 
 ### `NgStyle` を使わないケース {@a without-ngstyle}
 
-*単一の* スタイルの値を設定するときは `NgStyle` ではなく[スタイルバインディング](guide/template-syntax#style-binding)を使うことを検討してください。
+*単一の* スタイルの値を設定するときは `NgStyle` ではなく[スタイルバインディング](guide/attribute-binding#style-binding)を使うことを検討してください。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="without-ng-style" header="src/app/app.component.html"></code-example>
 
@@ -144,10 +144,10 @@ Angular は、基本的な HTML のフォーム要素すべてについて *値�
 詳しくは [DefaultValueAccessor](api/forms/DefaultValueAccessor) の API ドキュメントを参照してください。
 
 自作した Angular コンポーネントについては、
-Angular の基本的な[双方向バインディングの構文](guide/template-syntax#two-way)に
+Angular の基本的な[双方向バインディングの構文](guide/two-way-binding)に
 合った値とイベントのプロパティ名をつければ、
 値アクセサを作らずに済み、`NgModel` も省略できます。
-[双方向バインディング](guide/template-syntax#two-way)セクションの `sizer` は
+[双方向バインディング](guide/two-way-binding)セクションの `sizer` は
 このテクニックの一例です。
 
 個別の `ngModel` バインディングは、
@@ -180,9 +180,9 @@ DOM 構造の形成、または再形成を行います。
 
 このセクションでは、一般的な組み込みの構造ディレクティブについて紹介します:
 
-* [`NgIf`](guide/template-syntax#ngIf)&mdash;条件に応じてテンプレートからサブビューを作成、または破棄します。
-* [`NgFor`](guide/template-syntax#ngFor)&mdash;リストの各項目に対してノードを繰り返します。
-* [`NgSwitch`](guide/template-syntax#ngSwitch)&mdash;いくつかのビューから選んで表示するディレクティブ一式です。
+* [`NgIf`](#ngIf)&mdash;条件に応じてテンプレートからサブビューを作成、または破棄します。
+* [`NgFor`](#ngFor)&mdash;リストの各項目に対してノードを繰り返します。
+* [`NgSwitch`](#ngSwitch)&mdash;いくつかのビューから選んで表示するディレクティブ一式です。
 
 <div class="alert is-helpful">
 
@@ -228,8 +228,8 @@ DOM に `ItemDetailComponent` を追加します。
 ### Show/hide と `NgIf` {@a showhide-vs-ngif}
 
 要素を非表示にすることは、`NgIf` で削除することとは異なります。
-次の例では、[class](guide/template-syntax#class-binding) と
-[style](guide/template-syntax#style-binding) バインディングが、
+次の例では、[class](guide/attribute-binding#class-binding) と
+[style](guide/attribute-binding#style-binding) バインディングが、
 それぞれどのように要素の表示状態を制御しているかを比較しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-3" header="src/app/app.component.html"></code-example>
@@ -269,7 +269,7 @@ Angular は変更を検出し続けることがあります。
 <div class="alert is-helpful">
 
 後述する
-[セーフナビゲーション演算子](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?.)")もご覧ください。
+[セーフナビゲーション演算子](guide/template-expression-operators#safe-navigation-operator "Safe navigation operator (?.)")もご覧ください。
 
 </div>
 <hr/>
@@ -303,7 +303,7 @@ Angular は変更を検出し続けることがあります。
 <div class="callout is-critical">
 <header>*ngFor マイクロシンタックス</header>
 
-`*ngFor` に与えられた文字列は[テンプレート式](guide/template-syntax#template-expressions)ではありません。
+`*ngFor` に与えられた文字列は[テンプレート式](guide/interpolation)ではありません。
 それは*マイクロシンタックス*&mdash;Angular が解釈する独自の小さな言語です。
 文字列 `"let item of items"` は次を意味します:
 
@@ -427,7 +427,7 @@ _構造_ ディレクティブです。
 
 スイッチディレクティブは、*コンポーネント要素*を追加、削除するときに特に便利です。
 この例では、 `item-switch.components.ts` で定義している4つの `item` コンポーネントを切り替えています。
-それぞれのコンポーネントは `item` [入力プロパティ](guide/template-syntax#inputs-outputs "Input property")を持ち、
+それぞれのコンポーネントは `item` [入力プロパティ](guide/inputs-outputs#input "Input property")を持ち、
 親コンポーネントの `currentItem` にバインドされています。
 
 スイッチディレクティブは、ネイティブ要素や Web Components に対しても動作します。

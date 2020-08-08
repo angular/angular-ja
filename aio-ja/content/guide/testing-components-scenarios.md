@@ -856,7 +856,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 <div class="alert is-helpful">
 
 この小さなテストでは、
-Angularテストが[コンポーネントクラスのテスト](#component-class-testing)
+Angularテストが[コンポーネントクラスのテスト](guide/testing-components-basics#component-class-testing)
 では不可能だったコンポーネントのビジュアル表現を低コストで、
 はるかに遅く複雑なエンドツーエンドのテストに頼らずに検証する方法を示しています。
 
@@ -1099,7 +1099,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 
 <div class="alert is-helpful">
 
-[Router](guide/router) ガイドの[ActivatedRoute in action](guide/router#activated-route-in-action) セクションでは、`ActivatedRoute.paramMap`について詳しく説明しています。
+[Router](guide/router) ガイドの[ActivatedRoute in action](guide/router-tutorial-toh#activated-route-in-action) セクションでは、`ActivatedRoute.paramMap`について詳しく説明しています。
 
 </div>
 
@@ -1741,7 +1741,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-component-method" header="app/hero/hero-detail.component.spec.ts (overrideComponent)"></code-example>
 
 これは2つの引数を受け取ります。オーバーライドするコンポーネントタイプ(`HeroDetailComponent`)とオーバーライドメタデータオブジェクトです。
-[オーバーライドメタデータオブジェクト](#metadata-override-object)は、次のように定義されるジェネリック型のオブジェクトです:
+[オーバーライドメタデータオブジェクト](guide/testing-utility-apis#metadata-override-object)は、次のように定義されるジェネリック型のオブジェクトです:
 
 <code-example language="javascript">
   type MetadataOverride&lt;T&gt; = {

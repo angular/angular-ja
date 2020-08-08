@@ -38,7 +38,7 @@ ng generate service User
 
 <code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts"></code-example>
 
-## 遅延ロードモジュールでプロバイダーのスコープを制限する
+## 遅延ロードモジュールでプロバイダーのスコープを制限する {@a limiting-provider-scope-by-lazy-loading-modules}
 
 基本的に、CLIで生成されたアプリケーションでは、モジュールは事前ロードされます(つまり、アプリケーションの起動時にすべてロードされます)。Angularはインジェクターシステムを使用してモジュール間でのやりとりを可能にします。事前ロードされたアプリケーションでは、ルートアプリケーションインジェクターは、すべてのモジュールのすべてのプロバイダーをアプリケーション全体で利用可能にします。
 

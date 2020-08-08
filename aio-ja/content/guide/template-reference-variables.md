@@ -47,7 +47,7 @@ HTML の中でバラバラに3回出現します。
 
 <h3 class="no-toc">テンプレート参照変数の考慮事項</h3> {@a template-reference-variable-considerations}
 
-テンプレート _参照_ 変数 (`#phone`) は、[`*ngFor`](guide/template-syntax#template-input-variable) に出てくるようなテンプレート _入力_ 変数 (`let phone`) とは異なります。
+テンプレート _参照_ 変数 (`#phone`) は、[`*ngFor`](guide/built-in-directives#template-input-variable) に出てくるようなテンプレート _入力_ 変数 (`let phone`) とは異なります。
 詳しくは [_構造ディレクティブ_](guide/structural-directives#template-input-variable) をご覧ください。
 
 参照変数のスコープは、テンプレート全体です。実行時の値が予測不可能となるため、同じテンプレート内で同じ名前の変数を2回以上宣言しないでください。

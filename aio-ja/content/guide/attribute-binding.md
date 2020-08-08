@@ -14,7 +14,7 @@ See the <live-example></live-example> for a working example containing the code 
 **属性バインディング** を使うと属性の値を直接設定できます。これは、バインディングがターゲット・プロパティを設定するというルールの唯一の例外であり、属性を作成して設定する唯一のバインディングです。
 
 通常は、文字列で属性を設定するよりも、
-[プロパティバインディング](guide/template-syntax#property-binding)で要素のプロパティを設定する方が望ましいです。
+[プロパティバインディング](guide/property-binding)で要素のプロパティを設定する方が望ましいです。
 しかし、バインドする要素のプロパティがない場合もあるので、属性バインディングが解決策となります。
 
 [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) と
@@ -30,6 +30,8 @@ See the <live-example></live-example> for a working example containing the code 
 この例のような ARIA 属性の設定です:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="attrib-binding-aria" header="src/app/app.component.html"></code-example>
+
+{@a colspan}
 
 <div class="alert is-helpful">
 
@@ -136,7 +138,7 @@ Angular はバインドされた式が truthy の場合にクラスを追加し�
 </table>
 
 
-直接 `[class]` バインディングを使わずに [NgClass](#ngclass) ディレクティブを使うこともできます。
+直接 `[class]` バインディングを使わずに [NgClass](guide/built-in-directives#ngclass) ディレクティブを使うこともできます。
 しかし、Angular のクラスバインディングの改善により、 `NgClass` は重要な価値を提供しなくなり、将来的には削除される可能性があるため、 `NgClass` を使用せずに上記のクラスバインディング構文を使用することが望ましいです。
 
 
@@ -230,7 +232,7 @@ _スタイルプロパティ_ の名前は前述のとおり
   </tr>
 </table>
 
-直接 `[style]` バインディングを使わずに [NgStyle](#ngstyle) ディレクティブを使うこともできます。
+直接 `[style]` バインディングを使わずに [NgStyle](guide/built-in-directives#ngstyle) ディレクティブを使うこともできます。
 しかし、Angular のスタイルバインディングの改善により、 `NgStyle` は重要な価値を提供しなくなり、将来的には削除される可能性があるため、 `NgStyle` を使用せずに上記のクラスバインディング構文を使用することが望ましいです。
 
 

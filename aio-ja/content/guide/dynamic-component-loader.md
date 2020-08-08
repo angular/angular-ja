@@ -42,7 +42,7 @@ Angularにコンポーネントを挿入する場所を指定する必要があ�
 `AdDirective` は動的に追加されたコンポーネントをホストする要素の
 ビューコンテナへのアクセスを得るために `ViewContainerRef` を挿入します。
 
-`@Directive` デコレーターでは、セレクター名 `ad-host` に注目してください；
+`@Directive` デコレーターでは、セレクター名 `adHost` に注目してください；
 これは、要素にディレクティブを適用するために使用します。
 次のセクションでは、その方法について説明します。
 
@@ -55,7 +55,7 @@ Angularにコンポーネントを挿入する場所を指定する必要があ�
 テンプレート文字列として入れています。
 
 `<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
-`AdDirective` を適用するには、セレクターを `ad.directive.ts` 、 `ad-host` から呼び出します。
+`AdDirective` を適用するには、セレクターを `ad.directive.ts` 、 `[adHost]` から呼び出します。
 それを大括弧なしで `<ng-template>` に適用してください。
 これで、Angularはコンポーネントを動的にロードする場所を認識しています。
 
@@ -129,22 +129,6 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 
 `createComponent()` メソッドはロードされたコンポーネントへの参照を返します。
 その参照を使用して、そのプロパティに割り当てたり、そのメソッドを呼び出したりして、コンポーネントとやり取りします。
-
-
-{@a selector-references}
-
-
-#### セレクター参照
-
-一般に、Angularコンパイラは、テンプレートで参照されているコンポーネントのために 
-`ComponentFactory` を生成します。
-ただし、動的にロードされるコンポーネントのテンプレートには、
-実行時にロードされるため、セレクター参照はありません。
-
-コンパイラが引き続きファクトリを生成するようにするには、
-動的にロードされるコンポーネントを `NgModule` の `entryComponents` 配列に追加します：
-
-<code-example path="dynamic-component-loader/src/app/app.module.ts" region="entry-components" header="src/app/app.module.ts (entry components)"></code-example>
 
 
 

@@ -25,7 +25,7 @@
 ## 入力バインディングで親から子へデータを渡す
 
 `HeroChildComponent` は、ふたつの ***入力プロパティ*** を持っています,
-一般的に [@Input デコレーション](guide/template-syntax#inputs-outputs) で装飾しています。
+一般的に [@Input() デコレーター](guide/inputs-outputs#input) で装飾しています。
 
 
 <code-example path="component-interaction/src/app/hero-child.component.ts" header="component-interaction/src/app/hero-child.component.ts">
@@ -181,7 +181,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 子の `EventEmitter` プロパティはひとつの ***出力プロパティ*** であり、
  　一般的に、この `VoterComponent` に見られるような
-  [@Output デコレーション](guide/template-syntax#inputs-outputs) で装飾されます：
+  [@Output() デコレーター](guide/inputs-outputs#output) で装飾されます：
 
 
 <code-example path="component-interaction/src/app/voter.component.ts" header="component-interaction/src/app/voter.component.ts">

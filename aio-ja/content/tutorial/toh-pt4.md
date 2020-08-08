@@ -363,7 +363,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 * `*ngFor` は、`<div>` 要素をくり返してメッセージリストを表示します
 
-* Angular の [イベントバインディング](guide/template-syntax#event-binding) は、ボタンのクリックイベントと `MessageService.clear()` を紐付けます
+* Angular の [イベントバインディング](guide/event-binding) は、ボタンのクリックイベントと `MessageService.clear()` を紐付けます
 
 ["最終的なコードレビュー"](#final-code-review) タブ内に記載されている `messages.component.css` をコンポーネントのスタイルに追加すると、このメッセージUIの外観はよりよいものになるでしょう。
 

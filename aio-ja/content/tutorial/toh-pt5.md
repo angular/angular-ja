@@ -311,7 +311,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
   header="src/app/dashboard/dashboard.component.html (hero links)">
 </code-example>
 
-`*ngFor`リピーター内でAngularの[補間バインディング](guide/template-syntax#interpolation)を使用していて、
+`*ngFor`リピーター内でAngularの[補間バインディング](guide/interpolation)を使用していて、
 現在の繰り返しの `hero.id`を個々の[`routerLink`](#routerlink)に挿入します。
 
 {@a heroes-component-links}

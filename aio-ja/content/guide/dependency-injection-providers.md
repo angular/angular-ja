@@ -262,7 +262,7 @@ Angular は、さまざまなシステムの動作をカスタマイズするた
 
 ```
 export const APP_TOKENS = [
- { provide: PLATFORM_INITIALIZER, useFactory: platformInitialized, multi: true    },
+ { provide: PLATFORM_INITIALIZER, useFactory: platformInitialized, multi: true },
  { provide: APP_INITIALIZER, useFactory: delayBootstrapping, multi: true },
  { provide: APP_BOOTSTRAP_LISTENER, useFactory: appBootstrapped, multi: true },
 ];

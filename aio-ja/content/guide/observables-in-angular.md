@@ -2,19 +2,19 @@
 
 Angular はさまざまな一般的な非同期操作を処理するためのインターフェースとして Observable を使用します。たとえば：
 
-* You can define [custom events](guide/template-syntax#custom-events-with-eventemitter) that send observable output data from a child to a parent component.
+* You can define [custom events](guide/event-binding#custom-events-with-eventemitter) that send observable output data from a child to a parent component.
 * HTTP モジュールは Observable を使用して AJAX リクエストとレスポンスを処理します。
 * Router と Form モジュールは、ユーザー入力イベントを待ち受けてレスポンスするために Observable を使用します。
 
 ## Transmitting data between components
 
-Angularは コンポーネントから値を [`@Output()` デコレーター](guide/template-syntax#how-to-use-output)を通してパブリッシュするときに使用される `EventEmitter` クラスを提供します。
+Angularは コンポーネントから値を [`@Output()` デコレーター](guide/inputs-outputs#how-to-use-output)を通してパブリッシュするときに使用される `EventEmitter` クラスを提供します。
 `EventEmitter` は [RxJSの `Subject`](https://rxjs.dev/api/index/class/Subject) を拡張し、任意の値を送ることができるように `emit()` メソッドを追加します。
 `emit()` を呼び出すと、サブスクライブされたオブザーバーの `next()` メソッドに送出された値が渡されます。
 
 [EventEmitter](api/core/EventEmitter) のドキュメントに、使い方の良い例があります。オープンイベントとクローズイベントを待ち受けるサンプルコンポーネントを次に示します。
 
-`<zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>`
+`<app-zippy (open)="onOpen($event)" (close)="onClose($event)"></app-zippy>`
 
 コンポーネントの定義は次のとおりです。
 

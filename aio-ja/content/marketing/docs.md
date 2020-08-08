@@ -44,7 +44,7 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
 
 ## フィードバック
 
-<h4>わたしたちは誰でも歓迎します！</h4>
+<h3>わたしたちは誰でも歓迎します！</h3>
 
 声を聞かせてください。 [問題を報告するか、将来のドキュメンテーションに関する提案を提出してください](https://github.com/angular/angular/issues/new/choose "Angular GitHub repository new issue form") 。
 

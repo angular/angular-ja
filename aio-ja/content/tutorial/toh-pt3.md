@@ -61,7 +61,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (import Hero)">
 </code-example>
 
-`hero` プロパティは `@Input()` デコレーターで注釈された[ _Input_ プロパティでなければなりません](guide/template-syntax#inputs-outputs "Input and Output properties")。
+`hero` プロパティは `@Input()` デコレーターで注釈された[ _Input_ プロパティでなければなりません](guide/inputs-outputs "Input and Output properties")。
 これは、_外部の_ `HeroesComponent` がこのようにバインドするためです。
 
 <code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding">
@@ -105,7 +105,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 </code-example>
 
-`[hero]="selectedHero"` は、Angularの[プロパティバインディング](guide/template-syntax#property-binding)です。
+`[hero]="selectedHero"` は、Angularの[プロパティバインディング](guide/property-binding)です。
 
 これは `HeroesComponent` の `selectedHero` プロパティから、ターゲット要素の `hero` プロパティへの単方向データバインディングです。
 ここでは、`HeroDetailComponent` の `hero` プロパティがマッピングされています。
@@ -162,8 +162,8 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 * 独立し、再利用可能な `HeroDetailComponent` を作成しました。
 
 
-* 親の `HeroesComponent` が子の`HeroDetailComponent` を制御できるように、[プロパティバインディング](guide/template-syntax#property-binding)を使用しました。
+* 親の `HeroesComponent` が子の`HeroDetailComponent` を制御できるように、[プロパティバインディング](guide/property-binding)を使用しました。
 
 
 * 外部の `HeroesComponent` によるバインディングが `hero` プロパティを利用できるように
-[`@Input` デコレータ](guide/template-syntax#inputs-outputs)を使用しました。
+[`@Input` デコレータ](guide/inputs-outputs)を使用しました。

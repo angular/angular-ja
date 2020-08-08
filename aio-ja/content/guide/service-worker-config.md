@@ -65,7 +65,7 @@ Angular Service WorkerがキャッシュすべきファイルとデータのURL�
 
 <div class="alert is-helpful">
 
-When the ServiceWorker handles a request, it checks asset groups in the order in which they appear in `ngsw-config.json`.
+When the Service Worker handles a request, it checks asset groups in the order in which they appear in `ngsw-config.json`.
 The first asset group that matches the requested resource handles the request.
 
 It is recommended that you put the more specific asset groups higher in the list.
@@ -152,7 +152,7 @@ This field contains an array of data groups, each of which defines a set of data
 
 <div class="alert is-helpful">
 
-When the ServiceWorker handles a request, it checks data groups in the order in which they appear in `ngsw-config.json`.
+When the Service Worker handles a request, it checks data groups in the order in which they appear in `ngsw-config.json`.
 The first data group that matches the requested resource handles the request.
 
 It is recommended that you put the more specific data groups higher in the list.

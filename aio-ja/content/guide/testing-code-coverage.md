@@ -1,9 +1,9 @@
 {@a code-coverage}
 
-# Find out how much code you're testing
+# テストしているコードの量を調べる
 
-The CLI can run unit tests and create code coverage reports.
-Code coverage reports show you any parts of your code base that may not be properly tested by your unit tests.
+CLIでユニットテストを実行し、コードカバレッジレポートを作成することができます。
+コードカバレッジレポートは、ユニットテストで正しくテストされていないコードベースの部分を表示します。
 
 <div class="alert is-helpful">
 
@@ -14,15 +14,15 @@ Code coverage reports show you any parts of your code base that may not be prope
 </div>
 
 
-To generate a coverage report run the following command in the root of your project.
+カバレッジレポートを生成するには、プロジェクト直下で次のコマンドを実行します。
 
 <code-example language="sh" class="code-shell">
   ng test --no-watch --code-coverage
 </code-example>
 
-When the tests are complete, the command creates a new `/coverage` folder in the project. Open the `index.html` file to see a report with your source code and code coverage values.
+テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。
 
-If you want to create code-coverage reports every time you test, you can set the following option in the CLI configuration file, `angular.json`:
+テストするたびにコードカバレッジレポートを作成したい場合は、CLIの設定ファイル、`angular.json`で次のようなオプションを設定します:
 
 ```
   "test": {
@@ -32,13 +32,13 @@ If you want to create code-coverage reports every time you test, you can set the
   }
 ```
 
-## Code coverage enforcement
+## コードカバレッジの適用
 
-The code coverage percentages let you estimate how much of your code is tested.
-If your team decides on a set minimum amount to be unit tested, you can enforce this minimum with the Angular CLI.
+コードカバレッジ率から、テストされたコードの量を見積もることができます。
+あなたのチームがユニットテストされている最低限の量を決定する場合、Angular CLIを使用して、この最小値を適用することができます。
 
-For example, suppose you want the code base to have a minimum of 80% code coverage.
-To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the following in the `coverageIstanbulReporter:` key.
+たとえば、コードベースに最低80％のコードカバレッジを設定するとします。
+これを有効にするには、[Karma](https://karma-runner.github.io)テストプラットフォーム設定ファイル、`karma.conf.js`を開いて、`coverageIstanbulReporter:`に次のような内容を追加します。
 
 ```
 coverageIstanbulReporter: {
@@ -53,5 +53,5 @@ coverageIstanbulReporter: {
 }
 ```
 
-The `thresholds` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
+`thresholds`プロパティは、ユニットテストがプロジェクトで実行されたときに、ツールが最低80％のコードカバレッジを強制するようにします。
 

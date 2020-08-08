@@ -1,6 +1,6 @@
-# Testing Pipes
+# パイプのテスト
 
-You can test [pipes](guide/pipes) without the Angular testing utilities.
+[パイプ](guide/pipes)はAngularのテストユーティリティなしで簡単にテストできます。
 
 <div class="alert is-helpful">
 
@@ -12,19 +12,19 @@ You can test [pipes](guide/pipes) without the Angular testing utilities.
 
 ## Testing the `TitleCasePipe`
 
-A pipe class has one method, `transform`, that manipulates the input
-value into a transformed output value.
-The `transform` implementation rarely interacts with the DOM.
-Most pipes have no dependence on Angular other than the `@Pipe`
-metadata and an interface.
+パイプクラスには、
+入力値を変換された出力値に操作する`transform`というメソッドがあります。
+`transform`の実装は、
+DOMとのやりとりがほとんどありません。
+ほとんどのパイプはAngularの`@Pipe`メタデータとそのインターフェース以外に依存しません。
 
-Consider a `TitleCasePipe` that capitalizes the first letter of each word.
-Here's an implementation with a regular expression.
+各単語の最初の文字を大文字にする`TitleCasePipe`を考えてみましょう。
+次は、正規表現を使った素朴な実装です。
 
 <code-example path="testing/src/app/shared/title-case.pipe.ts" header="app/shared/title-case.pipe.ts"></code-example>
 
-Anything that uses a regular expression is worth testing thoroughly.
-Use simple Jasmine to explore the expected cases and the edge cases.
+正規表現を使用するものはすべて、十分にテストする価値があります。
+シンプルにJasmineを使用して、期待されるケースとエッジケースを調べます。
 
 <code-example path="testing/src/app/shared/title-case.pipe.spec.ts" region="excerpt" header="app/shared/title-case.pipe.spec.ts"></code-example>
 
@@ -32,10 +32,10 @@ Use simple Jasmine to explore the expected cases and the edge cases.
 
 ## Writing DOM tests to support a pipe test
 
-These are tests of the pipe _in isolation_.
-They can't tell if the `TitleCasePipe` is working properly as applied in the application components.
+これらは、パイプを_単独_でテストします。
+`TitleCasePipe`がアプリケーションのコンポーネントに正しく適用されているかどうかはわかりません。
 
-Consider adding component tests such as this one:
+次のようなコンポーネントテストを追加することを検討してください:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe" header="app/hero/hero-detail.component.spec.ts (pipe test)"></code-example>
 

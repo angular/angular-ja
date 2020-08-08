@@ -1,4 +1,4 @@
-# Debugging tests
+# テストのデバッグ
 
 If your tests aren't working as you expect them to, you can inspect and debug them in the browser.
 
@@ -11,15 +11,15 @@ If your tests aren't working as you expect them to, you can inspect and debug th
 </div>
 
 
-Debug specs in the browser in the same way that you debug an application.
+アプリケーションをデバッグするのと同じ方法で、ブラウザ内のスペックをデバッグします。
 
-1. Reveal the Karma browser window. See [Set up testing](guide/testing#set-up-testing) if you need help with this step.
-1. Click the **DEBUG** button; it opens a new browser tab and re-runs the tests.
-1. Open the browser's “Developer Tools” (`Ctrl-Shift-I` on Windows; `Command-Option-I` in macOS).
-1. Pick the "sources" section.
-1. Open the `1st.spec.ts` test file (Control/Command-P, then start typing the name of the file).
-1. Set a breakpoint in the test.
-1. Refresh the browser, and it stops at the breakpoint.
+1. Karmaのブラウザウィンドウを表示します（前に隠れています）。
+1. **DEBUG**ボタンをクリックします。新しいブラウザタブが開き、テストを再実行します。
+1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、macOSでは`Command-Option-I`）を開きます。
+1. "sources"セクションを選択します。
+1. `1st.spec.ts`テストファイル（Control/Command-Pを押して、その後にファイル名を入力してください）を開きます。
+1. テストにブレークポイントをセットします。
+1. ブラウザを更新すると、ブレークポイントで停止します。
 
 <div class="lightbox">
   <img src='generated/images/guide/testing/karma-1st-spec-debug.png' alt="Karma debugging">

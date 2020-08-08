@@ -1,10 +1,10 @@
 
 {@a attribute-directive}
 
-# Testing Attribute Directives
+# 属性ディレクティブのテスト
 
-An _attribute directive_ modifies the behavior of an element, component or another directive.
-Its name reflects the way the directive is applied: as an attribute on a host element.
+_属性ディレクティブ_は、要素、コンポーネントまたは別のディレクティブの動作を変更します。
+その名前は、ディレクティブが適用されるホストエレメントの属性として反映されます。
 
 <div class="alert is-helpful">
 
@@ -16,30 +16,32 @@ Its name reflects the way the directive is applied: as an attribute on a host el
 
 ## Testing the `HighlightDirective`
 
-The sample application's `HighlightDirective` sets the background color of an element
-based on either a data bound color or a default color (lightgray).
-It also sets a custom property of the element (`customProperty`) to `true`
-for no reason other than to show that it can.
+サンプルアプリケーションの`HighlightDirective`は、
+データバインドされた色またはデフォルトの色(ライトグレー)のいずれかに基づいて要素の背景色を設定します。
+また、要素のカスタムプロパティ(`customProperty`)を、
+それが可能であることを示す以外の理由なしに`true`に設定します。
 
 <code-example path="testing/src/app/shared/highlight.directive.ts" header="app/shared/highlight.directive.ts"></code-example>
 
-It's used throughout the application, perhaps most simply in the `AboutComponent`:
+これはアプリケーション全体で使用されています。多分、`AboutComponent`内のものがもっともシンプルです:
 
 <code-example path="testing/src/app/about/about.component.ts" header="app/about/about.component.ts"></code-example>
 
 Testing the specific use of the `HighlightDirective` within the `AboutComponent` requires only the techniques explored in the ["Nested component tests"](guide/testing-components-scenarios#nested-component-tests) section of [Component testing scenarios](guide/testing-components-scenarios).
+`AboutComponent`内の特定の`HighlightDirective`の使用をテストするのに必要なのは、
+[コンポーネントテストシナリオ](guide/testing-components-scenarios)の["Nested component tests"](guide/testing-components-scenarios#nested-component-tests) セクションで取り上げたテクニックだけです。
 
 <code-example path="testing/src/app/about/about.component.spec.ts" region="tests" header="app/about/about.component.spec.ts"></code-example>
 
-However, testing a single use case is unlikely to explore the full range of a directive's capabilities.
-Finding and testing all components that use the directive is tedious, brittle, and almost as unlikely to afford full coverage.
+しかし、単一のユースケースをテストすることは、ディレクティブの機能の全範囲を調査することにはなりません。
+このディレクティブを使用しているすべてのコンポーネントを見つけてテストするのは面倒で脆く、完全にカバーすることはほとんどありません。
 
-_Class-only tests_ might be helpful,
-but attribute directives like this one tend to manipulate the DOM.
-Isolated unit tests don't touch the DOM and, therefore,
-do not inspire confidence in the directive's efficacy.
+_クラスのみ_のテストは役に立ちますが、
+このような属性ディレクティブはDOMを操作する傾向があります。
+隔離されたユニットテストはDOMに触れることはないので、
+ディレクティブの効果に対する信頼を促すものではありません。
 
-A better solution is to create an artificial test component that demonstrates all ways to apply the directive.
+よりよい解決策は、ディレクティブを適用するすべての方法を示す人工的なテストコンポーネントを作成することです。
 
 <code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="test-component" header="app/shared/highlight.directive.spec.ts (TestComponent)"></code-example>
 
@@ -49,30 +51,30 @@ A better solution is to create an artificial test component that demonstrates al
 
 <div class="alert is-helpful">
 
-The `<input>` case binds the `HighlightDirective` to the name of a color value in the input box.
-The initial value is the word "cyan" which should be the background color of the input box.
+`<input>`は、`HighlightDirective`をインプットボックスのカラー値の名前にバインドします。
+初期値にはインプットボックスの背景色であるべき"cyan"というワードが設定されています。
 
 </div>
 
-Here are some tests of this component:
+このコンポーネントのテストは次のとおりです:
 
 <code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="selected-tests" header="app/shared/highlight.directive.spec.ts (selected tests)"></code-example>
 
-A few techniques are noteworthy:
+いくつか注目に値するテクニックがあります:
 
-- The `By.directive` predicate is a great way to get the elements that have this directive _when their element types are unknown_.
+- `By.directive`述部は、_要素の型が不明な場合_にこのディレクティブをもつ要素を取得するための優れた方法です。
 
-- The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not">`:not` pseudo-class</a>
-  in `By.css('h2:not([highlight])')` helps find `<h2>` elements that _do not_ have the directive.
-  `By.css('*:not([highlight])')` finds _any_ element that does not have the directive.
+- `By.css('h2：not([highlight])')`内の<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not">`:not`疑似クラス</a>は、
+  ディレクティブを持たない`<h2>`要素を見つけるのに役立ちます。
+  `By.css('*：not([highlight])')`は、ディレクティブを持たない要素を検出します。
 
-- `DebugElement.styles` affords access to element styles even in the absence of a real browser, thanks to the `DebugElement` abstraction.
-  But feel free to exploit the `nativeElement` when that seems easier or more clear than the abstraction.
+- `DebugElement.styles`は、`DebugElement`抽象化のおかげで、実際のブラウザがなくても要素のスタイルにアクセスできます。
+  しかし、抽象化よりも簡単で明快な場合は、`nativeElement`の利用を遠慮しないでください。
 
-- Angular adds a directive to the injector of the element to which it is applied.
-  The test for the default color uses the injector of the second `<h2>` to get its `HighlightDirective` instance
-  and its `defaultColor`.
+- Angularは、それが適用されている要素のインジェクターにディレクティブを追加します。
+  デフォルトカラーのテストでは、
+  `HighlightDirective`インスタンスの`defaultColor`を取得するために2番目の`<h2>`のインジェクターを使用しています。
 
-- `DebugElement.properties` affords access to the artificial custom property that is set by the directive.
+- `DebugElement.properties`は、ディレクティブによって設定された人工的なカスタムプロパティへのアクセスを提供します。
 
 <hr>

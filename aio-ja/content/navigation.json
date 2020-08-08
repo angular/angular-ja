@@ -711,42 +711,50 @@
             {
               "url": "guide/testing-code-coverage",
               "title": "Code Coverage",
-              "tooltip": "Determine how much of your code is tested."
+              "tooltip": "Determine how much of your code is tested.",
+              "translated": true
             },
             {
               "url": "guide/testing-services",
-              "title": "Testing Services",
-              "tooltip": "How to test services."
+              "title": "サービスのテスト",
+              "tooltip": "How to test services.",
+              "translated": true
             },
             {
               "url": "guide/testing-components-basics",
-              "title": "Basics of Testing Components",
-              "tooltip": "The fundamentals of how to test components."
+              "title": "コンポーネントのテストの基本",
+              "tooltip": "The fundamentals of how to test components.",
+              "translated": true
             },
             {
               "url": "guide/testing-components-scenarios",
-              "title": "Component Testing Scenarios",
-              "tooltip": "Use cases for testing components."
+              "title": "コンポーネントテストシナリオ",
+              "tooltip": "Use cases for testing components.",
+              "translated": true
             },
             {
               "url": "guide/testing-attribute-directives",
-              "title": "Testing Attribute Directives",
-              "tooltip": "How to test attribute directives."
+              "title": "属性ディレクティブのテスト",
+              "tooltip": "How to test attribute directives.",
+              "translated": true
             },
             {
               "url": "guide/testing-pipes",
-              "title": "Testing Pipes",
-              "tooltip": "Writing tests for pipes."
+              "title": "パイプのテスト",
+              "tooltip": "Writing tests for pipes.",
+              "translated": true
             },
             {
               "url": "guide/test-debugging",
-              "title": "Debugging Tests",
-              "tooltip": "How to debug tests."
+              "title": "テストのデバッグ",
+              "tooltip": "How to debug tests.",
+              "translated": true
             },
             {
               "url": "guide/testing-utility-apis",
-              "title": "Testing Utility APIs",
-              "tooltip": "Features of the Angular testing utilities."
+              "title": "テスティングユーティリティAPI",
+              "tooltip": "Features of the Angular testing utilities.",
+              "translated": true
             }
           ]
         },

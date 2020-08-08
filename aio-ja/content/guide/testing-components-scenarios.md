@@ -1,4 +1,4 @@
-# Component testing scenarios
+# コンポーネントのテストシナリオ
 
 This guide explores common component testing use cases.
 
@@ -10,28 +10,28 @@ This guide explores common component testing use cases.
 
 </div>
 
-## Component binding
+## コンポーネントバインディング
 
-In the example app, the `BannerComponent` presents static title text in the HTML template.
+現在の`BannerComponent`は、静的なタイトルテキストをHTMLテンプレートに表示します。
 
-After a few changes, the `BannerComponent` presents a dynamic title by binding to
-the component's `title` property like this.
+少しの変更を加えた後、
+次のようなコンポーネントの`title`プロパティにバインドすることによって、`BannerComponent`は動的なタイトルを表示します。
 
 <code-example
   path="testing/src/app/banner/banner.component.ts"
   region="component"
   header="app/banner/banner.component.ts"></code-example>
 
-As minimal as this is, you decide to add a test to confirm that component
-actually displays the right content where you think it should.
+これは簡単なので、
+コンポーネントが実際に正しいと思われる場所にコンテンツが表示されることを確認するためにテストを追加します。
 
-#### Query for the _&lt;h1&gt;_
+#### _&lt;h1&gt;_のクエリ
 
-You'll write a sequence of tests that inspect the value of the `<h1>` element
-that wraps the _title_ property interpolation binding.
+_title_プロパティのインターポレーションバインディングをラップする`<h1>`
+要素の値を検証する一連のテストを書きます。
 
-You update the `beforeEach` to find that element with a standard HTML `querySelector`
-and assign it to the `h1` variable.
+標準HTMLの`querySelector`を使用して要素を検索し、
+それを`h1`という変数に割り当てるために`beforeEach`を更新します。
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
@@ -40,87 +40,84 @@ and assign it to the `h1` variable.
 
 {@a detect-changes}
 
-#### _createComponent()_ does not bind data
+#### _createComponent()_はデータをバインドしない
 
-For your first test you'd like to see that the screen displays the default `title`.
-Your instinct is to write a test that immediately inspects the `<h1>` like this:
+最初のテストでは、画面にデフォルトの`title`が表示されていることを確認したいと思います。
+あなたの直感は、次のような、`<h1>`を直ちに検証するテストを書くことでしょう。
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
-  region="expect-h1-default-v1">
-</code-example>
+  region="expect-h1-default-v1"></code-example>
 
-_That test fails_ with the message:
+メッセージとともに_このテストは失敗します_:
 
 ```javascript
 expected '' to contain 'Test Tour of Heroes'.
 ```
 
-Binding happens when Angular performs **change detection**.
+Angularが**変更検知**を実行したときにバインディングが発生します。
 
-In production, change detection kicks in automatically
-when Angular creates a component or the user enters a keystroke or
-an asynchronous activity (e.g., AJAX) completes.
+プロダクションでは、Angularがコンポーネントを作成するか、
+ユーザーがキーストロークを入力するか、非同期アクティビティ(AJAXなど)が完了したときに
+変更検知が自動的に起動します。
 
-The `TestBed.createComponent` does _not_ trigger change detection; a fact confirmed in the revised test:
+`TestBed.createComponent`は変更検知をトリガー_しません_。この事実は改定したテストで確認されます:
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes"></code-example>
 
 #### _detectChanges()_
 
-You must tell the `TestBed` to perform data binding by calling `fixture.detectChanges()`.
-Only then does the `<h1>` have the expected title.
+あなたは`fixture.detectChanges()`を呼び出すことで、データバインディングを実行するように`TestBed`に指示する必要があります。
+そうするだけで、`<h1>`は期待されたタイトルをもつようになります。
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
-  region="expect-h1-default">
-</code-example>
+  region="expect-h1-default"></code-example>
 
-Delayed change detection is intentional and useful.
-It gives the tester an opportunity to inspect and change the state of
-the component _before Angular initiates data binding and calls [lifecycle hooks](guide/lifecycle-hooks)_.
+遅延した変化検知は意図的かつ便利です。
+_Angularがデータバインディングを開始して[ライフサイクルフック](guide/lifecycle-hooks)を呼び出す前に_、
+コンポーネントの状態を検証して変更する機会をテスターに与えます。
 
-Here's another test that changes the component's `title` property _before_ calling `fixture.detectChanges()`.
+次は、`fixture.detectChanges()`を呼び出す_前_にコンポーネントの`title`プロパティを変更するもうひとつのテストです。
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
-  region="after-change">
-</code-example>
+  region="after-change"></code-example>
 
-{@a auto-detect-changes}
+{@a automatic-change-detection}
 
-#### Automatic change detection
+#### 自動変更検知
 
-The `BannerComponent` tests frequently call `detectChanges`.
-Some testers prefer that the Angular test environment run change detection automatically.
+`BannerComponent`は、頻繁に`detectChanges`を呼び出します。
+テスターの中には、Angularテスト環境が自動的に変更検知を実行することを好む人もいます。
 
-That's possible by configuring the `TestBed` with the `ComponentFixtureAutoDetect` provider.
-First import it from the testing utility library:
+これは`ComponentFixtureAutoDetect`プロバイダーで`TestBed`を構成することで可能です。
+まず、テスティングユーティリティライブラリからインポートします:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="import-ComponentFixtureAutoDetect" header="app/banner/banner.component.detect-changes.spec.ts (import)"></code-example>
 
-Then add it to the `providers` array of the testing module configuration:
+それから、それをテストモジュール構成の`providers`配列に追加します:
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect" header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)"></code-example>
 
-Here are three tests that illustrate how automatic change detection works.
+次は、自動変更検知がどのように機能するかを示す3つのテストです。
 
 <code-example path="testing/src/app/banner/banner.component.detect-changes.spec.ts" region="auto-detect-tests" header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect Tests)"></code-example>
 
-The first test shows the benefit of automatic change detection.
+最初のテストでは、自動変更検知の利点が示されています。
 
-The second and third test reveal an important limitation.
-The Angular testing environment does _not_ know that the test changed the component's `title`.
-The `ComponentFixtureAutoDetect` service responds to _asynchronous activities_ such as promise resolution, timers, and DOM events.
-But a direct, synchronous update of the component property is invisible.
-The test must call `fixture.detectChanges()` manually to trigger another cycle of change detection.
+2回目と3回目のテストで重要な制限が明らかになりました。
+Angularのテスト環境では、テストがコンポーネントのタイトルを変更したことが_わかりません_。
+`ComponentFixtureAutoDetect`サービスは、Promiseの解決、タイマー、DOMイベントなどの非同期アクティビティに応答します。
+ただし、コンポーネントプロパティの直接で同期的な更新は不可視です。
+テストは変更検知の別のサイクルをトリガーするために`fixture.detectChanges()`を手動で呼び出す必要があります。
 
 <div class="alert is-helpful">
 
-Rather than wonder when the test fixture will or won't perform change detection,
-the samples in this guide _always call_ `detectChanges()` _explicitly_.
-There is no harm in calling `detectChanges()` more often than is strictly necessary.
+テストフィクスチャーが変更検知を実行するかどうかに思いを巡らせるのではなく、
+このガイドのサンプルは_常に_`detectChanges()`を_明示的_に呼び出します。
+`detectChanges()`を厳密に必要な数以上に頻繁に呼び出しても問題はありません。
 
 </div>
 
@@ -128,44 +125,44 @@ There is no harm in calling `detectChanges()` more often than is strictly necess
 
 {@a dispatch-event}
 
-#### Change an input value with _dispatchEvent()_
+#### _dispatchEvent()_を使用してinputの値を変更する
 
-To simulate user input, you can find the input element and set its `value` property.
+ユーザーインプットをシミュレートするために、input要素を探して`value`プロパティをセットします。
 
-You will call `fixture.detectChanges()` to trigger Angular's change detection.
-But there is an essential, intermediate step.
+Angularの変更検知をトリガーするために`fixture.detectChanges()`を呼び出しましょう。
+しかし、本質的で中間的なステップがあります。
 
-Angular doesn't know that you set the input element's `value` property.
-It won't read that property until you raise the element's `input` event by calling `dispatchEvent()`.
-_Then_ you call `detectChanges()`.
+Angularは、input要素の`value`プロパティがセットされたことを認識していません。
+`dispatchEvent()`を呼び出して要素の`input`イベントを発生させるまで、
+そのプロパティは読み取られません。_そのあとに_ `detectChanges()`を呼び出します。
 
-The following example demonstrates the proper sequence.
+次の例では、正しい手順を示しています。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe" header="app/hero/hero-detail.component.spec.ts (pipe test)"></code-example>
 
 <hr>
 
-## Component with external files
+## 外部ファイルを使用したコンポーネント
 
-The `BannerComponent` above is defined with an _inline template_ and _inline css_, specified in the `@Component.template` and `@Component.styles` properties respectively.
+さきほどの`BannerComponent`は、`@Component.template`プロパティと`@Component.styles`プロパティのそれぞれで指定された_インラインテンプレート_と_インラインCSS_で定義されています。
 
-Many components specify _external templates_ and _external css_ with the
-`@Component.templateUrl` and `@Component.styleUrls` properties respectively,
-as the following variant of `BannerComponent` does.
+多くのコンポーネントは、次のように変更した`BannerComponent`がするように、
+`@Component.templateUrl`プロパティと`@Component.styleUrls`プロパティでそれぞれ_外部テンプレート_と
+_外部CSS_を指定します。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.ts"
   region="metadata"
   header="app/banner/banner-external.component.ts (metadata)"></code-example>
 
-This syntax tells the Angular compiler to read the external files during component compilation.
+この構文は、コンポーネントコンパイル時に外部ファイルを読み込むようにAngularコンパイラに指示します。
 
-That's not a problem when you run the CLI `ng test` command because it
-_compiles the app before running the tests_.
+CLIで `ng test`コマンドを実行するときは、
+_テストを実行する前にアプリケーションをコンパイルするので_問題になりません。
 
-However, if you run the tests in a **non-CLI environment**,
-tests of this component may fail.
-For example, if you run the `BannerComponent` tests in a web coding environment such as [plunker](https://plnkr.co/), you'll see a message like this one:
+ただし、**非CLI環境**でテストを実行すると、このコンポーネントのテストは失敗するでしょう。
+たとえば、[plunker](https://plnkr.co/)などのWebコーディング環境で`BannerComponent`テストを実行すると、
+次のようなメッセージが表示されます:
 
 <code-example language="sh" class="code-shell" hideCopy>
 Error: This test module uses the component BannerComponent
@@ -173,165 +170,163 @@ which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
 </code-example>
 
-You get this test failure message when the runtime environment
-compiles the source code _during the tests themselves_.
+_テスト中に_ランタイム環境がソースコードをコンパイルすると、
+このテストエラーメッセージが表示されます。
 
-To correct the problem, call `compileComponents()` as explained [below](#compile-components).
+問題を解決するには、[以下](#compile-components)で説明するように`compileComponents()`を呼び出します。
 
 {@a component-with-dependency}
 
-## Component with a dependency
+### 依存関係のあるコンポーネント
 
-Components often have service dependencies.
+コンポーネントの多くはサービスの依存関係を持ちます。
 
-The `WelcomeComponent` displays a welcome message to the logged in user.
-It knows who the user is based on a property of the injected `UserService`:
+`WelcomeComponent`は、ログインしたユーザーへのウェルカムメッセージを表示します。
+それは注入した`UserService`のプロパティからユーザーが誰かを知ります:
 
 <code-example path="testing/src/app/welcome/welcome.component.ts" header="app/welcome/welcome.component.ts"></code-example>
 
-The `WelcomeComponent` has decision logic that interacts with the service, logic that makes this component worth testing.
-Here's the testing module configuration for the spec file, `app/welcome/welcome.component.spec.ts`:
+`WelcomeComponent`には、サービスとやりとりするロジックと、このコンポーネントの値のテストをするロジックの決定権があります。
+次は、スペックファイル`app/welcome/welcome.component.spec.ts`のテスティングモジュールの構成です:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" header="app/welcome/welcome.component.spec.ts"></code-example>
 
-This time, in addition to declaring the _component-under-test_,
-the configuration adds a `UserService` provider to the `providers` list.
-But not the real `UserService`.
+今回は、_テスト中のコンポーネント_を宣言することに加えて、
+`providers`配列に`UserService`プロバイダーを追加します。
+しかし、実際の`UserService`ではありません。
 
 {@a service-test-doubles}
 
-#### Provide service test doubles
+#### テストダブルのサービスを提供する
 
-A _component-under-test_ doesn't have to be injected with real services.
-In fact, it is usually better if they are test doubles (stubs, fakes, spies, or mocks).
-The purpose of the spec is to test the component, not the service,
-and real services can be trouble.
+_テスト中のコンポーネント_に実際のサービスを注入する必要はありません。
+事実、通常はテストダブル(スタブ、フェイク、スパイ、またはモック)であればよりよいです。
+スペックの目的は、サービスではなくコンポーネントをテストすることであり、
+実際のサービスだと問題になる可能性があります。
 
-Injecting the real `UserService` could be a nightmare.
-The real service might ask the user for login credentials and
-attempt to reach an authentication server.
-These behaviors can be hard to intercept.
-It is far easier and safer to create and register a test double in place of the real `UserService`.
+実際の`UserService`を注入することは悪夢になる可能性があります。
+実際のサービスは、ユーザーにログイン資格情報を要求し、
+認証サーバーに到達しようとします。
+このような動作は補足するのが難しい場合があります。
+実際の`UserService`の代わりにテストダブルを作成して登録する方がはるかに簡単で安全です。
 
-This particular test suite supplies a minimal mock of the `UserService` that satisfies the needs of the `WelcomeComponent` and its tests:
+この特定のテストスイートは、`WelcomeComponent`とそのテストのニーズを満たす`UserService`の最小のモックを提供します:
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="user-service-stub"
   header="app/welcome/welcome.component.spec.ts"></code-example>
 
-{@a get-injected-service}
+{@a get-injected-services}
 
-#### Get injected services
+#### 注入したサービスを取得する
 
-The tests need access to the (stub) `UserService` injected into the `WelcomeComponent`.
+テストでは、`WelcomeComponent`に注入された`UserService`(スタブ)へのアクセスが必要です。
 
-Angular has a hierarchical injection system.
-There can be injectors at multiple levels, from the root injector created by the `TestBed`
-down through the component tree.
+Angularは階層的な注入システムを持ちます。
+`TestBed`によって作成されたルートインジェクターからコンポーネントツリーまで、
+複数のレベルのインジェクターがあります。
 
-The safest way to get the injected service, the way that **_always works_**,
-is to **get it from the injector of the _component-under-test_**.
-The component injector is a property of the fixture's `DebugElement`.
+注入されたサービスを取得するもっとも安全な、
+**常に動作する**方法は、**テスト中のコンポーネントのインジェクターから取得することです**。
+コンポーネントインジェクターは、フィクスチャーの`DebugElement`のプロパティです。
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="injected-service"
-  header="WelcomeComponent's injector">
-</code-example>
+  header="WelcomeComponent's injector"></code-example>
 
 {@a testbed-inject}
 
 #### _TestBed.inject()_
 
-You _may_ also be able to get the service from the root injector via `TestBed.inject()`.
-This is easier to remember and less verbose.
-But it only works when Angular injects the component with the service instance in the test's root injector.
+`TestBed.inject()`経由でルートインジェクターからサービスを取得することも_できます_。
+これは覚えやすく、あまり冗長ではありません。
+しかし、Angularがコンポーネントとサービスのインスタンスをテストのルートインジェクターに注入する場合にのみ機能します。
 
-In this test suite, the _only_ provider of `UserService` is the root testing module,
-so it is safe to call `TestBed.inject()` as follows:
+このテストスイートでは、`UserService`の_唯一_のプロバイダーはルートテスティングモジュールなので、
+`TestBed.inject()`を次のように呼び出すことは安全です:
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
   region="inject-from-testbed"
-  header="TestBed injector">
-</code-example>
+  header="TestBed injector"></code-example>
 
 <div class="alert is-helpful">
 
-For a use case in which `TestBed.inject()` does not work,
-see the [_Override component providers_](#component-override) section that
-explains when and why you must get the service from the component's injector instead.
+`TestBed.inject()`が機能しないユースケースについては、
+いつ、そしてなぜかわりにコンポーネントのインジェクターからサービスを取得しなくてはいけないのかを説明する
+[_コンポーネントのプロバイダーを上書きする_](#component-override)セクションを参照してください。
 
 </div>
 
 {@a welcome-spec-setup}
 
-#### Final setup and tests
+#### 最後のステップとテスト
 
-Here's the complete `beforeEach()`, using `TestBed.inject()`:
+次では、`TestBed.inject()`を使用して`beforeEach()`を完了しています:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" header="app/welcome/welcome.component.spec.ts"></code-example>
 
-And here are some tests:
+そして何個かのテストを書きます:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="tests" header="app/welcome/welcome.component.spec.ts"></code-example>
 
-The first is a sanity test; it confirms that the stubbed `UserService` is called and working.
+最初のものはサニティーテストです。これはスタブされた`UserService`が呼び出され、動作していることを確認します。
 
 <div class="alert is-helpful">
 
-The second parameter to the Jasmine matcher (e.g., `'expected name'`) is an optional failure label.
-If the expectation fails, Jasmine appends this label to the expectation failure message.
-In a spec with multiple expectations, it can help clarify what went wrong and which expectation failed.
+Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、オプショナルの失敗ラベルです。
+エクスペクテーションが失敗した場合、Jasmineはこのラベルをエクスペクテーション失敗メッセージに追加します。
+複数のエクスペクテーションをもつスペックでは、何が間違っていて、どのエクスペクテーションが失敗したかを明確にするのに役立ちます。
 
 </div>
 
-The remaining tests confirm the logic of the component when the service returns different values.
-The second test validates the effect of changing the user name.
-The third test checks that the component displays the proper message when there is no logged-in user.
+残りのテストは、サービスが異なる値を返すときのコンポーネントのロジックを確認します。
+2番目のテストでは、ユーザー名の変更の影響を検証します。
+3番目のテストでは、ログインしているユーザーがいない場合、コンポーネントが適切なメッセージを表示していることを確認します。
 
 <hr>
 
 {@a component-with-async-service}
 
-## Component with async service
+## 非同期サービスを使用するコンポーネント
 
-In this sample, the `AboutComponent` template hosts a `TwainComponent`.
-The `TwainComponent` displays Mark Twain quotes.
+このサンプルでは、`AboutComponent`テンプレートは`TwainComponent`をホストします。
+`TwainComponent`はMark Twainの引用を表示します。
 
 <code-example
   path="testing/src/app/twain/twain.component.ts"
   region="template"
   header="app/twain/twain.component.ts (template)"></code-example>
 
-Note that the value of the component's `quote` property passes through an `AsyncPipe`.
-That means the property returns either a `Promise` or an `Observable`.
+コンポーネントの`quote`プロパティの値は、`AsyncPipe`を経由することに注意してください。
+つまり、プロパティは`Promise`または`Observable`のいずれかを返します。
 
-In this example, the `TwainComponent.getQuote()` method tells you that
-the `quote` property returns an `Observable`.
+この例では、`TwainComponent.getQuote()`メソッドは、
+`quote`プロパティが`Observable`を返すことを示しています。
 
 <code-example
   path="testing/src/app/twain/twain.component.ts"
   region="get-quote"
   header="app/twain/twain.component.ts (getQuote)"></code-example>
 
-The `TwainComponent` gets quotes from an injected `TwainService`.
-The component starts the returned `Observable` with a placeholder value (`'...'`),
-before the service can return its first quote.
+`TwainComponent`は、注入された`TwainService`から引用を取得します。
+コンポーネントは、サービスが最初の引用を返せるようになる前にプレースホルダー値(`'...'`)
+を設定した`Observable`を返し始めます。
 
-The `catchError` intercepts service errors, prepares an error message,
-and returns the placeholder value on the success channel.
-It must wait a tick to set the `errorMessage`
-in order to avoid updating that message twice in the same change detection cycle.
+`catchError`はサービスのエラーを補足し、
+エラーメッセージを作成し、成功チャネルのプレースホルダー値を返します。
+同じ変更検知サイクルでそのメッセージが2回更新されるのを避けるために、
+時間の経過を待って`errorMessage`を設定する必要があります。
 
-These are all features you'll want to test.
+これらがテストするための機能のすべてです。
 
-#### Testing with a spy
+#### スパイを使用したテスト
 
-When testing a component, only the service's public API should matter.
-In general, tests themselves should not make calls to remote servers.
-They should emulate such calls. The setup in this `app/twain/twain.component.spec.ts` shows one way to do that:
+コンポーネントをテストするときは、サービスの公開APIだけが重要です。
+一般に、テスト自体はリモートサーバー呼び出しをすべきではありません。
+そのような呼び出しはエミュレートする必要があります。次の`app/twain/twain.component.spec.ts`のセットアップは、これを行うための1つの方法を示しています:
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
@@ -340,64 +335,62 @@ They should emulate such calls. The setup in this `app/twain/twain.component.spe
 
 {@a service-spy}
 
-Focus on the spy.
+スパイに注目してください。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="spy">
-</code-example>
+  region="spy"></code-example>
 
-The spy is designed such that any call to `getQuote` receives an observable with a test quote.
-Unlike the real `getQuote()` method, this spy bypasses the server
-and returns a synchronous observable whose value is available immediately.
+スパイは、`getQuote`への任意の呼び出しがテストの引用のObservableを受け取るように設計されています。
+実際の`getQuote()`メソッドとは異なり、このスパイはサーバーをバイパスし、
+その値がすぐに利用できる同期的なObservableを返します。
 
-You can write many useful tests with this spy, even though its `Observable` is synchronous.
+`Observable`が同期的であっても、このスパイで多くの有用なテストを書くことができます。
 
 {@a sync-tests}
 
-#### Synchronous tests
+#### 同期的テスト
 
-A key advantage of a synchronous `Observable` is that
-you can often turn asynchronous processes into synchronous tests.
+同期的な`Observable`の主な利点は、
+非同期プロセスを同期的テストにすることができる点です。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="sync-test">
-</code-example>
+  region="sync-test"></code-example>
 
-Because the spy result returns synchronously, the `getQuote()` method updates
-the message on screen immediately _after_
-the first change detection cycle during which Angular calls `ngOnInit`.
+スパイの結果が同期的に返されるため、
+`getQuote()`メソッドは、
+Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_に画面上のメッセージを更新します。
 
-You're not so lucky when testing the error path.
-Although the service spy will return an error synchronously,
-the component method calls `setTimeout()`.
-The test must wait at least one full turn of the JavaScript engine before the
-value becomes available. The test must become _asynchronous_.
+エラーパスをテストするとき、あなたはラッキーではないかもしれません。
+サービスのスパイはエラーを同期的に返しますが、
+コンポーネントメソッドは`setTimeout()`を呼び出します。
+このテストは、JavaScriptエンジンが少なくとも1回動作しきるのを待ってから値を取得できるようにする必要があります。
+テストは_非同期_に行う必要があります。
 
 {@a fake-async}
+{@a async-test-with-fakeasync}
 
-#### Async test with _fakeAsync()_
+#### _fakeAsync()_を使用した非同期テスト
 
-To use `fakeAsync()` functionality, you must import `zone.js/dist/zone-testing` in your test setup file.
-If you created your project with the Angular CLI, `zone-testing` is already imported in `src/test.ts`.
+`fakeAsync()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
-The following test confirms the expected behavior when the service returns an `ErrorObservable`.
+次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="error-test">
-</code-example>
+  region="error-test"></code-example>
 
-Note that the `it()` function receives an argument of the following form.
+`it()`関数が次の形式の引数を受け取ることに注目してください。
 
 ```javascript
 fakeAsync(() => { /* test body */ })
 ```
 
-The `fakeAsync()` function enables a linear coding style by running the test body in a special `fakeAsync test zone`.
-The test body appears to be synchronous.
-There is no nested syntax (like a `Promise.then()`) to disrupt the flow of control.
+`fakeAsync`関数は、特別な_fakeAsyncテストゾーン_でテスト本体を実行することによって、線形的なコーディングスタイルを可能にします。
+テスト本体は同期的に見えます。
+`Promise.then()`のようなネストされた構文はなく、制御の流れを混乱させることはありません。
 
 <div class="alert is-helpful">
 
@@ -408,22 +401,21 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 
 {@a tick}
 
-#### The _tick()_ function
+#### _tick()_関数
 
-You do have to call [tick()](api/core/testing/tick) to advance the (virtual) clock.
+(仮想)クロックを進めるには、[tick()](api/core/testing/tick) を呼び出さなければなりません。
 
-Calling [tick()](api/core/testing/tick) simulates the passage of time until all pending asynchronous activities finish.
-In this case, it waits for the error handler's `setTimeout()`.
+[tick()](api/core/testing/tick) を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
+このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-The [tick()](api/core/testing/tick) function accepts milliseconds and tickOptions as parameters, the millisecond (defaults to 0 if not provided) parameter represents how much the virtual clock advances. For example, if you have a `setTimeout(fn, 100)` in a `fakeAsync()` test, you need to use tick(100) to trigger the fn callback. The tickOptions is an optional parameter with a property called `processNewMacroTasksSynchronously` (defaults to true) represents whether to invoke new generated macro tasks when ticking.
+[tick()](api/core/testing/tick)関数は、パラメーターとしてミリ秒とtickOptionsを受け入れます。ミリ秒（指定されていない場合はデフォルトの0）パラメーターは、仮想クロックの進み具合を表します。たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、tick(100) を使用してfnコールバックをトリガーする必要があります。 tickOptionsは、processNewMacroTasksSynchronously（デフォルトはtrue）というプロパティをもつオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-tick">
-</code-example>
+  region="fake-async-test-tick"></code-example>
 
-The [tick()](api/core/testing/tick) function is one of the Angular testing utilities that you import with `TestBed`.
-It's a companion to `fakeAsync()` and you can only call it within a `fakeAsync()` body.
+[tick()](api/core/testing/tick) 関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
+これは`fakeAsync()`と対になっており、`fakeAsync()`の内部でのみ呼び出すことができます。
 
 #### tickOptions
 
@@ -439,25 +431,24 @@ In this example, we have a new macro task (nested setTimeout), by default, when 
   region="fake-async-test-tick-new-macro-task-async">
 </code-example>
 
-And in some case, we don't want to trigger the new macro task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new macro task.
+And in some case, we don't want to trigger the new maco task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new maco task.
 
-#### Comparing dates inside fakeAsync()
+#### fakeAsync() 内部での日時の比較
 
-`fakeAsync()` simulates passage of time, which allows you to calculate the difference between dates inside `fakeAsync()`.
+`fakeAsync()` は、 `fakeAsync()`の中の日付の差を計算できるようにするため、時間の流れをシミュレートします。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-date">
-</code-example>
+  region="fake-async-test-date"></code-example>
 
-#### jasmine.clock with fakeAsync()
+#### jasmine.clock と fakeAsync()
 
-Jasmine also provides a `clock` feature to mock dates. Angular automatically runs tests that are run after
-`jasmine.clock().install()` is called inside a `fakeAsync()` method until `jasmine.clock().uninstall()` is called. `fakeAsync()` is not needed and throws an error if nested.
+Jasmineも日付をシミュレートするための `clock` 機能を提供しています。`jasmine.clock().install()` が呼び出されてから`jasmine.clock().uninstall()`が呼び出されるまで、Angularは自動的に`fakeAsync()` の中でテストを実行します。
+`fakeAsync()`は必要なく、ネストされていればエラーを投げます。
 
-By default, this feature is disabled. To enable it, set a global flag before importing `zone-testing`.
+デフォルトではこの機能は無効化されています。有効にするには、 `zone-testing` をインポートするまえにグローバルフラグをセットしてください。
 
-If you use the Angular CLI, configure this flag in `src/test.ts`.
+Angular CLIを使う場合は、 `src/test.ts` の中でこのフラグを設定してください。
 
 ```
 (window as any)['__zone_symbol__fakeAsyncPatchLock'] = true;
@@ -466,20 +457,18 @@ import 'zone.js/dist/zone-testing';
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-clock">
-</code-example>
+  region="fake-async-test-clock"></code-example>
 
-#### Using the RxJS scheduler inside fakeAsync()
+#### fakeAsync() の中でのRxJSスケジューラーの使用
 
-You can also use RxJS scheduler in `fakeAsync()` just like using `setTimeout()` or `setInterval()`, but you need to import `zone.js/dist/zone-patch-rxjs-fake-async` to patch RxJS scheduler.
+`setTimeout()` や `setInterval()` を使うのと同じように `fakeAsync()` の中でRxJSスケジューラを使うこともできますが、RxJSスケジューラにパッチを当てるには `zone.js/dist/zone-patch-rxjs-fake-async` をインポートする必要があります。
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
-  region="fake-async-test-rxjs">
-</code-example>
+  region="fake-async-test-rxjs"></code-example>
 
-#### Support more macroTasks
+#### より多くのmacroTasksをサポートする
 
-By default, `fakeAsync()` supports the following macro tasks.
+デフォルトでは`fakeAsync()`は次のmacro taskをサポートします。
 
 - `setTimeout`
 - `setInterval`
@@ -487,7 +476,7 @@ By default, `fakeAsync()` supports the following macro tasks.
 - `webkitRequestAnimationFrame`
 - `mozRequestAnimationFrame`
 
-If you run other macro tasks such as `HTMLCanvasElement.toBlob()`, an _"Unknown macroTask scheduled in fake async test"_ error will be thrown.
+`HTMLCanvasElement.toBlob()`のような他のmacro taskを実行したとき、`Unknown macroTask scheduled in fake async test`エラーがスローされます。
 
 <code-tabs>
   <code-pane
@@ -502,8 +491,8 @@ If you run other macro tasks such as `HTMLCanvasElement.toBlob()`, an _"Unknown 
   </code-pane>
 </code-tabs>
 
-If you want to support such a case, you need to define the macro task you want to support in `beforeEach()`.
-For example:
+このようなケースをサポートしたい場合は、`beforeEach`でサポートしたいmacro taskを定義する必要があります。
+たとえば次のようになります:
 
 <code-example
   header="src/app/shared/canvas.component.spec.ts (excerpt)"
@@ -511,7 +500,7 @@ For example:
   region="enable-toBlob-macrotask">
 </code-example>
 
-Note that in order to make the `<canvas>` element Zone.js-aware in your app, you need to import the `zone-patch-canvas` patch (either in `polyfills.ts` or in the specific file that uses `<canvas>`):
+アプリで `<canvas>` 要素をZone.js対応にするために、 `zone-patch-canvas`  パッチをインポートする必要があることに注意してください（`polyfills.ts` または `<canvas>` を使用する特定のファイルのいずれかの中で）：
 
 <code-example
   header="src/polyfills.ts or src/app/shared/canvas.component.ts"
@@ -519,157 +508,153 @@ Note that in order to make the `<canvas>` element Zone.js-aware in your app, you
   region="import-canvas-patch">
 </code-example>
 
+#### 非同期のObservable
 
-#### Async observables
+あなたはこれらのテストのテストカバレッジに満足しているかもしれません。
 
-You might be satisfied with the test coverage of these tests.
+しかし、実際のサービスではこのように動作しないという事実に悩まされるかもしれません。
+実際のサービスは、リクエストをリモートサーバーに送信します。
+サーバーは応答するのに時間がかかり、
+前の2つのテストのように応答をすぐには利用できないでしょう。
 
-However, you might be troubled by the fact that the real service doesn't quite behave this way.
-The real service sends requests to a remote server.
-A server takes time to respond and the response certainly won't be available immediately
-as in the previous two tests.
-
-Your tests will reflect the real world more faithfully if you return an _asynchronous_ observable
-from the `getQuote()` spy like this.
+次のように`getQuote()`スパイから非同期的なObservableを返すと、
+あなたのテストは実世界をより忠実に反映できるでしょう。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-setup">
-</code-example>
+  region="async-setup"></code-example>
 
-#### Async observable helpers
+#### 非同期Observableヘルパー
 
-The async observable was produced by an `asyncData` helper.
-The `asyncData` helper is a utility function that you'll have to write yourself, or you can copy this one from the sample code.
+非同期のObservableは、`asyncData`ヘルパーによって生成されました。
+`asyncData`ヘルパーは、自分で作成する必要があるユーティリティ関数です。
+または、サンプルコードからこれをコピーすることもできます。
 
 <code-example
   path="testing/src/testing/async-observable-helpers.ts"
   region="async-data"
-  header="testing/async-observable-helpers.ts">
-</code-example>
+  header="testing/async-observable-helpers.ts"></code-example>
 
-This helper's observable emits the `data` value in the next turn of the JavaScript engine.
+このヘルパーのObservableは、JavaScriptエンジンの次のターンで`data`の値を発行します。
 
-The [RxJS `defer()` operator](http://reactivex.io/documentation/operators/defer.html) returns an observable.
-It takes a factory function that returns either a promise or an observable.
-When something subscribes to _defer_'s observable,
-it adds the subscriber to a new observable created with that factory.
+[RxJSの`defer()`演算子](http://reactivex.io/documentation/operators/defer.html)は、Observableを返します。
+PromiseかObservableのどちらかを返すファクトリー関数を受け取ります。
+なにかしらが_defer_のObservableをサブスクライブしたとき、
+そのファクトリーで作成された新しいObservableにサブスクライバーが追加されます。
 
-The `defer()` operator transforms the `Promise.resolve()` into a new observable that,
-like `HttpClient`, emits once and completes.
-Subscribers are unsubscribed after they receive the data value.
+`defer()`演算子は、`HttpClient`のように`Promise.resolve()`を新しいObservableに変換して、
+1回発行して完了します。
+サブスクライバーは、データ値を受け取った後、アンサブスクライブされます。
 
-There's a similar helper for producing an async error.
+次は、非同期エラーを生成するための同様のヘルパーです。
 
 <code-example
   path="testing/src/testing/async-observable-helpers.ts"
-  region="async-error">
-</code-example>
+  region="async-error"></code-example>
 
-#### More async tests
+#### さらに非同期テスト
 
-Now that the `getQuote()` spy is returning async observables,
-most of your tests will have to be async as well.
+`getQuote()`スパイが非同期Observableを返すようになったので、
+ほとんどのテストは非同期でなければならないでしょう。
 
-Here's a `fakeAsync()` test that demonstrates the data flow you'd expect
-in the real world.
+次は、現実世界で期待されるデータフローを示す
+`fakeAsync()`テストです。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="fake-async-test">
-</code-example>
+  region="fake-async-test"></code-example>
 
-Notice that the quote element displays the placeholder value (`'...'`) after `ngOnInit()`.
-The first quote hasn't arrived yet.
+`ngOnInit()`の後に、引用にはプレースホルダー値(`'...'`)が表示されることに注意してください。
+最初の引用はまだ届いていません。
 
-To flush the first quote from the observable, you call [tick()](api/core/testing/tick).
-Then call `detectChanges()` to tell Angular to update the screen.
+最初の引用をObservableからフラッシュするには、[tick()](api/core/testing/tick) を呼び出します。
+次に、`detectChanges()`を呼び出して、Angularに画面を更新するように指示します。
 
-Then you can assert that the quote element displays the expected text.
+それから、引用の要素に期待されるテキストが表示することをアサートしてみましょう。
 
 {@a async}
 
-#### Async test with _async()_
+#### _async()_を使用した非同期テスト
 
-To use `async()` functionality, you must import `zone.js/dist/zone-testing` in your test setup file.
-If you created your project with the Angular CLI, `zone-testing` is already imported in `src/test.ts`.
+`async()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
-The `fakeAsync()` utility function has a few limitations.
-In particular, it won't work if the test body makes an `XMLHttpRequest` (XHR) call.
-XHR calls within a test are rare so you can generally stick with [`fakeAsync()`](#fake-async).
-But if you ever do need to call `XMLHttpRequest`, you'll want to know about `async()`.
+`fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
+特に、テスト本体が`XMLHttpRequest` （XHR）呼び出しを行う場合は動作しません。
+テスト中のXHR呼び出しはまれであるため、普通は[`fakeAsync()`](#fake-async)を使うことができます。
+しかし、`XMLHttpRequest`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
 
 <div class="alert is-helpful">
 
-The `TestBed.compileComponents()` method (see [below](#compile-components)) calls `XHR`
-to read external template and css files during "just-in-time" compilation.
-Write tests that call `compileComponents()` with the `async()` utility.
+`TestBed.compileComponents()`メソッド([下記参照](#compile-components))は、
+"just-in-time"コンパイル時に外部テンプレートとcssファイルを読み込むために`XHR`を呼び出します。
+`async()`ユーティリティを使用して`compileComponents()`を呼び出すテストを作成してください。
 
 </div>
 
-Here's the previous `fakeAsync()` test, re-written with the `async()` utility.
+次は、さきほどの`fakeAsync()`テストを`async()`ユーティリティで書き直したものです。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-test">
-</code-example>
+  region="async-test"></code-example>
 
-The `async()` utility hides some asynchronous boilerplate by arranging for the tester's code
-to run in a special _async test zone_.
-You don't need to pass Jasmine's `done()` into the test and call `done()` because it is `undefined` in promise or observable callbacks.
+`async()`ユーティリティは、
+テスターのコードを特別な_asyncテストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。
+Jasmineの`done()`は `undefined` なのでテストに渡す必要はなく、
+PromiseやObservableのコールバック内で`done()`を呼び出す必要はありません。
 
-But the test's asynchronous nature is revealed by the call to `fixture.whenStable()`,
-which breaks the linear flow of control.
+しかし、テストの非同期性は`fixture.whenStable()`の呼び出しによって明示的になります。
+これは制御の線形的なフローを壊します。
 
-When using an `intervalTimer()` such as `setInterval()` in `async()`, remember to cancel the timer with `clearInterval()` after the test, otherwise the `async()` never ends.
+`async()` の中で `setInterval()` などの `intervalTimer()` を使用する場合は、テスト後に `clearInterval()` を使用してタイマーをキャンセルする必要があります。それ以外の場合は、 `async()` は終了しません。
 
 {@a when-stable}
 
 #### _whenStable_
 
-The test must wait for the `getQuote()` observable to emit the next quote.
-Instead of calling [tick()](api/core/testing/tick), it calls `fixture.whenStable()`.
+テストは、`getQuote()` Observableが次の引用を発行するのを待つ必要があります。
+[tick()](api/core/testing/tick) を呼び出す代わりに、`fixture.whenStable()`を呼び出します。
 
-The `fixture.whenStable()` returns a promise that resolves when the JavaScript engine's
-task queue becomes empty.
-In this example, the task queue becomes empty when the observable emits the first quote.
+`fixture.whenStable()`は、
+JavaScriptエンジンのタスクキューが空になったときに解決するPromiseを返します。
+この例では、Observableが最初の引用を発行すると、タスクキューは空になります。
 
-The test resumes within the promise callback, which calls `detectChanges()` to
-update the quote element with the expected text.
+テストは、Promiseコールバック内で再開し、
+期待されるテキストで引用の要素を更新するために`detectChanges()`を呼び出します。
 
 {@a jasmine-done}
 
-#### Jasmine _done()_
+#### Jasmineの _done()_
 
-While the `async()` and `fakeAsync()` functions greatly
-simplify Angular asynchronous testing,
-you can still fall back to the traditional technique
-and pass `it` a function that takes a
-[`done` callback](https://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support).
+`async()`関数と
+`fakeAsync()`関数はAngular非同期テストを大幅に簡素化しますが、
+伝統的なテクニックに立ち戻って、
+[`done`コールバック](https://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support)
+を受け取る関数を`it`に渡すことができます。
 
-You can't call `done()` in `async()` or `fakeAsync()` functions, because the `done parameter`
-is `undefined`.
+`done パラメーター` が `undefined` なので、 `async()` や `fakeAsync()` の中で `done()` を呼び出すことはできません。
 
-Now you are responsible for chaining promises, handling errors, and calling `done()` at the appropriate moments.
+さて、あなたはPromiseをチェーンさせ、エラーを処理し、適切な時に`done()`を呼び出す責任があります。
 
-Writing test functions with `done()`, is more cumbersome than `async()`and `fakeAsync()`, but it is occasionally necessary when code involves the `intervalTimer()` like `setInterval`.
+`done()`を使用してテスト関数を書くことは、`async()`と`fakeAsync()`よりも面倒です。
+しかしコードが `intervalTimer()` や `setInterval` を含むときには時折必要です。
 
-Here are two more versions of the previous test, written with `done()`.
-The first one subscribes to the `Observable` exposed to the template by the component's `quote` property.
+次は、さきほどの2つのバージョンのテストを`done()`を使用して書いたものです。
+最初の1つは、コンポーネントの`quote`プロパティによってテンプレートに公開された`Observable`をサブスクライブします。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
   region="quote-done-test"></code-example>
 
-The RxJS `last()` operator emits the observable's last value before completing, which will be the test quote.
-The `subscribe` callback calls `detectChanges()` to
-update the quote element with the test quote, in the same manner as the earlier tests.
+RxJSの`last()`演算子は、完了する前のObservableの最後の値を発行します。
+これはテストの引用になります。
+`subscribe`コールバックでは、以前のテストと同じ方法で、引用の要素をテストの引用で更新するために`detectChanges()`を呼び出します。
 
-In some tests, you're more interested in how an injected service method was called and what values it returned,
-than what appears on screen.
+いくつかのテストでは、画面に表示されるものよりも、
+注入されたサービスメソッドがどのように呼び出されるかと、どんな値が返されるかに関心があります。
 
-A service spy, such as the `qetQuote()` spy of the fake `TwainService`,
-can give you that information and make assertions about the state of the view.
+偽の`TwainService`の`qetQuote()`スパイなどのサービススパイは、
+その情報を提供し、ビューの状態についてアサーションを行うことができます。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
@@ -678,137 +663,137 @@ can give you that information and make assertions about the state of the view.
 <hr>
 
 {@a marble-testing}
-## Component marble tests
+## コンポーネントのマーブルテスト
 
-The previous `TwainComponent` tests simulated an asynchronous observable response
-from the `TwainService` with the `asyncData` and `asyncError` utilities.
+さきほどの`TwainComponent`テストでは、`asyncData`と`asyncError`ユーティリティを使用して、
+`TwainService`からの非同期Observableの応答をシミュレートしました。
 
-These are short, simple functions that you can write yourself.
-Unfortunately, they're too simple for many common scenarios.
-An observable often emits multiple times, perhaps after a significant delay.
-A component may coordinate multiple observables
-with overlapping sequences of values and errors.
+これらはあなた自身で書くことができる短くて簡単な関数です。
+残念ながら、これらは多くの一般的なシナリオでは単純すぎます。
+Observableは大幅な遅延の後に、複数回発行されることが多いです。
+コンポーネントは、
+重複する値とエラーのシーケンスで複数のObservableを調整するかもしれません。
 
-**RxJS marble testing** is a great way to test observable scenarios,
-both simple and complex.
-You've likely seen the [marble diagrams](http://rxmarbles.com/)
-that illustrate how observables work.
-Marble testing uses a similar marble language to
-specify the observable streams and expectations in your tests.
+**RxJSマーブルテスト**は、シンプル、複雑、
+両方の場合のObservableのシナリオをテストするための素晴らしい方法です。
+あなたはおそらく、
+Observableがどのように動作するかを示す[マーブルダイアグラム](http://rxmarbles.com/)を見たことがあるでしょう。
+マーブルテストでは、同様のマーブル言語を使用して、
+テスト内でObservableのストリームとエクスペクテーションを指定します。
 
-The following examples revisit two of the `TwainComponent` tests
-with marble testing.
+次の例では、
+`TwainComponen`の2つのテストをマーブルテストで再訪します。
 
-Start by installing the `jasmine-marbles` npm package.
-Then import the symbols you need.
+まず、`jasmine-marbles` npmパッケージをインストールします。
+次に、必要なシンボルをインポートします。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="import-marbles"
   header="app/twain/twain.component.marbles.spec.ts (import marbles)"></code-example>
 
-Here's the complete test for getting a quote:
+引用を取得するための完全なテストは次のようになります:
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="get-quote-test"></code-example>
 
-Notice that the Jasmine test is synchronous. There's no `fakeAsync()`.
-Marble testing uses a test scheduler to simulate the passage of time
-in a synchronous test.
+Jasmineのテストが同期的であることに注意してください。
+`fakeAsync()`はありません。
+マーブルテストは、テストスケジューラーを使用して、同期的テストにおける時間の経過をシミュレートします。
 
-The beauty of marble testing is in the visual definition of the observable streams.
-This test defines a [_cold_ observable](#cold-observable) that waits
-three [frames](#marble-frame) (`---`),
-emits a value (`x`), and completes (`|`).
-In the second argument you map the value marker (`x`) to the emitted value (`testQuote`).
+マーブルテストの美しさは、Obsrevalbeストリームの視覚的定義にあります。
+このテストでは、3つの[フレーム](#marble-frame)(`---`)を待ち、
+値(`x`)を発行し、
+完了(`|`)する[_コールド_ Observable](#cold-observable)を定義します。
+2番目の引数では、値マーカー(`x`)を発行する値(`testQuote`)にマップします。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="test-quote-marbles"></code-example>
 
-The marble library constructs the corresponding observable, which the
-test sets as the `getQuote` spy's return value.
+マーブルライブラリは、
+テストが`getQuote`スパイの戻り値としてセットする対応するObservableを構築します。
 
-When you're ready to activate the marble observables,
-you tell the `TestScheduler` to _flush_ its queue of prepared tasks like this.
+マーブルObservableをアクティブにする準備ができたら、
+次のように`TestScheduler`に用意されたタスクキューを_フラッシュ_するように指示します。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="test-scheduler-flush"></code-example>
 
-This step serves a purpose analogous to [tick()](api/core/testing/tick) and `whenStable()` in the
-earlier `fakeAsync()` and `async()` examples.
-The balance of the test is the same as those examples.
+このステップは、
+以前の`fakeAsync()`と`async()`での例の中での [tick()](api/core/testing/tick) と`whenStable()`と似た目的を果たします。
+テストのバランスはそれらの例と同じです。
 
-#### Marble error testing
+## マーブルエラーテスト
 
-Here's the marble testing version of the `getQuote()` error test.
+次は、`getQuote()`エラーテストのマーブルテストバージョンです。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="error-test"></code-example>
 
-It's still an async test, calling `fakeAsync()` and [tick()](api/core/testing/tick), because the component itself
-calls `setTimeout()` when processing errors.
+コンポーネント自体がエラーを処理するときに`setTimeout()`を呼び出すため、
+これはまだ非同期テストです。`fakeAsync()`と [tick()](api/core/testing/tick) を呼び出す必要があります。
 
-Look at the marble observable definition.
+マーブルObservableの定義を見てください。
 
 <code-example
   path="testing/src/app/twain/twain.component.marbles.spec.ts"
   region="error-marbles"></code-example>
 
-This is a _cold_ observable that waits three frames and then emits an error,
-The hash (`#`) indicates the timing of the error that is specified in the third argument.
-The second argument is null because the observable never emits a value.
+これは、3つのフレームを待ってからエラーを発行する _コールド_ Observableです。
+ハッシュ(`#`)は、3番目の引数で指定されたエラーのタイミングを示します。
+Observableは決して値を発行しないので、2番目の引数は`null`です。
 
-#### Learn about marble testing
+#### マーブルテストについて学ぶ
 
 {@a marble-frame}
-A _marble frame_ is a virtual unit of testing time.
-Each symbol (`-`, `x`, `|`, `#`) marks the passing of one frame.
+_マーブルフレーム_とは、テスト時間の仮想的な単位です。
+各シンボル( `-` 、`x`、`|`、`#`)は、1つのフレームの通過をマークします。
 
 {@a cold-observable}
-A _cold_ observable doesn't produce values until you subscribe to it.
-Most of your application observables are cold.
-All [_HttpClient_](guide/http) methods return cold observables.
+_コールド_ Observableはサブスクライブされるまで値を発行しません。
+アプリケーションのObservableのほとんどはコールドです。
+すべての[_HttpClient_](guide/http)メソッドはコールドObservableを返します。
 
-A _hot_ observable is already producing values _before_ you subscribe to it.
-The [_Router.events_](api/router/Router#events) observable,
-which reports router activity, is a _hot_ observable.
+_ホット_ Observableは購読する_前_にすでに値を発行しています。
+ルーターアクティビティを報告する[_Router.events_](api/router/Router#events)Observable、
+これは _ホット_ Observableです。
 
-RxJS marble testing is a rich subject, beyond the scope of this guide.
-Learn about it on the web, starting with the
-[official documentation](https://rxjs.dev/guide/testing/marble-testing).
+RxJSマーブルテストは、このガイドの範囲を超えて、豊富な題材をもちます。
+[公式ドキュメント](https://github.com/ReactiveX/rxjs/blob/master/doc/writing-marble-tests.md)から始めて、
+ウェブ上で学習してください。
 
 <hr>
 
 {@a component-with-input-output}
 
-## Component with inputs and outputs
+## インプットとアウトプットを使用したコンポーネント
 
-A component with inputs and outputs typically appears inside the view template of a host component.
-The host uses a property binding to set the input property and an event binding to
-listen to events raised by the output property.
+インプットとアウトプットをもつコンポーネントは、通常、ホストコンポーネントのビューテンプレート内に配置されます。
+ホストは、プロパティバインディングを使用してインプットプロパティを設定し、
+イベントバインディングを使用してアウトプットプロパティによって発生したイベントをリッスンします。
 
-The testing goal is to verify that such bindings work as expected.
-The tests should set input values and listen for output events.
+テストの目標は、そのようなバインディングが期待どおりに機能することを確認することです。
+テストではインプット値を設定し、アウトプットイベントをリッスンする必要があります。
 
-The `DashboardHeroComponent` is a tiny example of a component in this role.
-It displays an individual hero provided by the `DashboardComponent`.
-Clicking that hero tells the `DashboardComponent` that the user has selected the hero.
+`DashboardHeroComponent`は、このロール内のコンポーネントの小さな例です。
+`DashboardComponent`によって提供される個々のヒーローを表示します。
+そのヒーローをクリックすると、ユーザーがヒーローを選択したことを`DashboardComponent`に伝えます。
 
-The `DashboardHeroComponent` is embedded in the `DashboardComponent` template like this:
+`DashboardHeroComponent`は、次のような`DashboardComponent`テンプレートに組み込まれています:
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.html"
   region="dashboard-hero"
   header="app/dashboard/dashboard.component.html (excerpt)"></code-example>
 
-The `DashboardHeroComponent` appears in an `*ngFor` repeater, which sets each component's `hero` input property
-to the looping value and listens for the component's `selected` event.
+`DashboardHeroComponent`は`*ngFor`リピーター内に配置され、
+各コンポーネントの`hero`インプットプロパティにループ値を設定し、コンポーネントの`selected`イベントをリッスンします。
 
-Here's the component's full definition:
+コンポーネントの完全な定義は次のとおりです:
 
 {@a dashboard-hero-component}
 
@@ -817,182 +802,177 @@ Here's the component's full definition:
   region="component"
   header="app/dashboard/dashboard-hero.component.ts (component)"></code-example>
 
-While testing a component this simple has little intrinsic value, it's worth knowing how.
-You can use one of these approaches:
+この単純なコンポーネントのテストに本質的な価値はほとんどありませんが、方法を知ることには価値があります。
+あなたは次のアプローチの1つを使用することができます:
 
-- Test it as used by `DashboardComponent`.
-- Test it as a stand-alone component.
-- Test it as used by a substitute for `DashboardComponent`.
+- `DashboardComponent`で使用されているようにテストする。
+- スタンドアロンコンポーネントとしてテストする。
+- `DashboardComponent`に代替して使用されているようにテストする。
 
-A quick look at the `DashboardComponent` constructor discourages the first approach:
+最初のアプローチとして`DashboardComponent`コンストラクターを簡単に見てみると:
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="ctor"
   header="app/dashboard/dashboard.component.ts (constructor)"></code-example>
 
-The `DashboardComponent` depends on the Angular router and the `HeroService`.
-You'd probably have to replace them both with test doubles, which is a lot of work.
-The router seems particularly challenging.
+`DashboardComponent`はAngularのルーターと`HeroService`に依存します。
+おそらくそれらを両方ともテストダブルと置き換える必要があります。
+これは多くの作業が必要です。ルーターは特に難しそうです。
 
 <div class="alert is-helpful">
 
-The [discussion below](#routing-component) covers testing components that require the router.
+[以下の議論](#routing-component)では、ルーターを必要とするコンポーネントのテストについて説明します。
 
 </div>
 
-The immediate goal is to test the `DashboardHeroComponent`, not the `DashboardComponent`,
-so, try the second and third options.
+直近の目標は、`DashboardComponent`ではなく`DashboardHeroComponent`をテストすることです。
+したがって、2番目と3番目のオプションを試してみてください。
 
 {@a dashboard-standalone}
 
-#### Test _DashboardHeroComponent_ stand-alone
+#### _DashboardHeroComponent_ スタンドアロンテスト
 
-Here's the meat of the spec file setup.
+スペックファイルのセットアップは次のとおりです。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="setup"
   header="app/dashboard/dashboard-hero.component.spec.ts (setup)"></code-example>
 
-Note how the setup code assigns a test hero (`expectedHero`) to the component's `hero` property,
-emulating the way the `DashboardComponent` would set it
-via the property binding in its repeater.
+セットアップコードがどのようにコンポーネントの`hero`プロパティにテストヒーロー
+(`expectedHero`)を割り当てるのか、
+`DashboardComponent`が自身のリピーター内でプロパティバインディングを介してそれを設定する方法をエミュレートするかに注目してください。
 
-The following test verifies that the hero name is propagated to the template via a binding.
+次のテストでは、ヒーロー名がバインディングを介してテンプレートに伝播することを確認します。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
-  region="name-test">
-</code-example>
+  region="name-test"></code-example>
 
-Because the [template](#dashboard-hero-component) passes the hero name through the Angular `UpperCasePipe`,
-the test must match the element value with the upper-cased name.
+[テンプレート](#dashboard-hero-component)ではヒーロー名をAngularの`UpperCasePipe`を通して渡すので、
+テストではアッパーケースの名前をもつ要素の値とマッチする必要があります。
 
 <div class="alert is-helpful">
 
-This small test demonstrates how Angular tests can verify a component's visual
-representation&mdash;something not possible with
-[component class tests](guide/testing-components-basics#component-class-testing)&mdash;at
-low cost and without resorting to much slower and more complicated end-to-end tests.
+この小さなテストでは、
+Angularテストが[コンポーネントクラスのテスト](#component-class-testing)
+では不可能だったコンポーネントのビジュアル表現を低コストで、
+はるかに遅く複雑なエンドツーエンドのテストに頼らずに検証する方法を示しています。
 
 </div>
 
-#### Clicking
+#### クリックする
 
-Clicking the hero should raise a `selected` event that
-the host component (`DashboardComponent` presumably) can hear:
+ヒーローをクリックすると、ホストコンポーネント(おそらく`DashboardComponent`)
+が受け取ることができる`selected`イベントが発生するはずです:
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
-  region="click-test">
-</code-example>
+  region="click-test"></code-example>
 
-The component's `selected` property returns an `EventEmitter`,
-which looks like an RxJS synchronous `Observable` to consumers.
-The test subscribes to it _explicitly_ just as the host component does _implicitly_.
+コンポーネントの`selected`プロパティは`EventEmitter`を返します。
+これは利用者にはRxJS同期的`Observable`のように見えます。
+テストでは、ホストコンポーネントが_暗黙的_に行うのと同じように、_明示的_にサブスクライブします。
 
-If the component behaves as expected, clicking the hero's element
-should tell the component's `selected` property to emit the `hero` object.
+コンポーネントが期待どおりに動作する場合、ヒーローの要素をクリックすると、
+コンポーネントの`selected`プロパティに`hero`オブジェクトを発行するように指示するはずです。
 
-The test detects that event through its subscription to `selected`.
+テストでは、`selected`へのサブスクリプションを通じてそのイベントが検知されます。
 
 {@a trigger-event-handler}
 
 #### _triggerEventHandler_
 
-The `heroDe` in the previous test is a `DebugElement` that represents the hero `<div>`.
+さきほどのテストの`heroDe`は、ヒーローの`<div>`を表す`DebugElement`です。
 
-It has Angular properties and methods that abstract interaction with the native element.
-This test calls the `DebugElement.triggerEventHandler` with the "click" event name.
-The "click" event binding responds by calling `DashboardHeroComponent.click()`.
+これはAngularのプロパティと、ネイティブ要素とのやりとりを抽象化するメソッドを持ちます。
+このテストでは、 "click"というイベント名で`DebugElement.triggerEventHandler`を呼び出します。
+"click"イベントバインディングは、`DashboardHeroComponent.click()`を呼び出して応答します。
 
-The Angular `DebugElement.triggerEventHandler` can raise _any data-bound event_ by its _event name_.
-The second parameter is the event object passed to the handler.
+Angularの`DebugElement.triggerEventHandler`は、
+その_イベント名_で_データバインドされたイベント_を発生させることができます。2番目のパラメータは、ハンドラーに渡されるイベントオブジェクトです。
 
-The test triggered a "click" event with a `null` event object.
+このテストでは、`null`イベントオブジェクトをもつ"click"イベントがトリガーされます。
 
 <code-example
-  path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="trigger-event-handler">
-</code-example>
+  path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="trigger-event-handler"></code-example>
 
-The test assumes (correctly in this case) that the runtime
-event handler&mdash;the component's `click()` method&mdash;doesn't
-care about the event object.
+テストで
+ランタイムのイベントハンドラー(コンポーネントの`click()`メソッド)
+がイベントオブジェクトを使用していないことを前提(まさにこのケース)としています。
 
 <div class="alert is-helpful">
 
-Other handlers are less forgiving. For example, the `RouterLink`
-directive expects an object with a `button` property
-that identifies which mouse button (if any) was pressed during the click.
-The `RouterLink` directive throws an error if the event object is missing.
+他のハンドラーはあまり寛容ではありません。
+たとえば、`RouterLink`ディレクティブは、
+クリック中にどのマウスボタン(ある場合)が押されたのかを識別する`button`プロパティをもつオブジェクトを想定しています。
+イベントオブジェクトがない場合、`RouterLink`ディレクティブはエラーをスローします。
 
 </div>
 
-#### Click the element
+#### 要素をクリックする
 
-The following test alternative calls the native element's own `click()` method,
-which is perfectly fine for _this component_.
+次のテストでは、かわりにネイティブ要素自身の`click()`メソッドを呼び出します。
+これは、_このコンポーネント_では問題ありません。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
-  region="click-test-2">
-</code-example>
+  region="click-test-2"></code-example>
 
 {@a click-helper}
 
-#### _click()_ helper
+#### _click()_ ヘルパー
 
-Clicking a button, an anchor, or an arbitrary HTML element is a common test task.
+ボタン、アンカー、または任意のHTML要素をクリックすることは、一般的なテストタスクです。
 
-Make that consistent and easy by encapsulating the _click-triggering_ process
-in a helper such as the `click()` function below:
+_クリックトリガー_プロセスを次のような`click()`関数などのヘルパーにカプセル化することで、
+一貫性と容易さを実現します:
 
 <code-example
   path="testing/src/testing/index.ts"
   region="click-event"
   header="testing/index.ts (click helper)"></code-example>
 
-The first parameter is the _element-to-click_. If you wish, you can pass a
-custom event object as the second parameter. The default is a (partial)
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button">left-button mouse event object</a>
-accepted by many handlers including the `RouterLink` directive.
+最初のパラメータは_クリックする要素_です。
+必要に応じて、カスタムイベントオブジェクトを2番目のパラメータとして渡すことができます。
+デフォルトは、`RouterLink`ディレクティブを含む多くのハンドラーで受け入れられる(一部の)
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button">左ボタンマウスイベントオブジェクト</a>です。
 
 <div class="alert is-important">
 
-The `click()` helper function is **not** one of the Angular testing utilities.
-It's a function defined in _this guide's sample code_.
-All of the sample tests use it.
-If you like it, add it to your own collection of helpers.
+`click()`ヘルパー関数はAngularテストユーティリティの1つでは**ありません**。
+この_ガイドのサンプルコード_で定義されている関数です。
+すべてのサンプルテストでこれを使用しています。
+あなたがこれを好むなら、あなた自身のヘルパーのコレクションに追加してください。
 
 </div>
 
-Here's the previous test, rewritten using the click helper.
+次は、さきほどのテストを、クリックヘルパーを使って書き直したものです。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="click-test-3"
-  header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)"></code-example>
 
 <hr>
 
 {@a component-inside-test-host}
 
-## Component inside a test host
+## テストホスト内部のコンポーネント
 
-The previous tests played the role of the host `DashboardComponent` themselves.
-But does the `DashboardHeroComponent` work correctly when properly data-bound to a host component?
+さきほどのテストでは、ホストである`DashboardComponent`自身をロールプレイしました。
+しかし、`DashboardHeroComponent`は、ホストコンポーネントに適切にデータバインドされているときに正常に動作するでしょうか?
 
-You could test with the actual `DashboardComponent`.
-But doing so could require a lot of setup,
-especially when its template features an `*ngFor` repeater,
-other components, layout HTML, additional bindings,
-a constructor that injects multiple services,
-and it starts interacting with those services right away.
+実際の`DashboardComponent`でテストできますが、
+特に、そのテンプレートが`*ngFor`リピーター、他のコンポーネント、
+レイアウトHTML、追加のバインディング、
+複数のサービスを注入するコンストラクターを持っていて、
+それらのサービスとすぐにやりとりし始めるとき、
+多くのセットアップが必要になる可能性があります。
 
-Imagine the effort to disable these distractions, just to prove a point
-that can be made satisfactorily with a _test host_ like this one:
+これらの気が狂いそうなものを無効にするための努力を想像してみてください。
+ちょうどこのような_テストホスト_でうまくいくことができる点を検証することです。
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
@@ -1000,87 +980,86 @@ that can be made satisfactorily with a _test host_ like this one:
   header="app/dashboard/dashboard-hero.component.spec.ts (test host)"
  ></code-example>
 
-This test host binds to `DashboardHeroComponent` as the `DashboardComponent` would
-but without the noise of the `Router`, the `HeroService`, or the `*ngFor` repeater.
+このテストホストは、`DashboardComponent`のように`DashboardHeroComponent`にバインドしますが、ルーター、
+`HeroService`、`*ngFor`リピーターなどのノイズはありません。
 
-The test host sets the component's `hero` input property with its test hero.
-It binds the component's `selected` event with its `onSelected` handler,
-which records the emitted hero in its `selectedHero` property.
+テストホストは、自身のテストヒーローをコンポーネントの`hero`インプットプロパティに設定します。
+これはコンポーネントの`selected`イベントを`onSelected`ハンドラーにバインドします。
+このハンドラーは、発行されたヒーローを`selectedHero`プロパティに記録します。
 
-Later, the tests will be able to easily check `selectedHero` to verify that the
-`DashboardHeroComponent.selected` event emitted the expected hero.
+その後、
+テストでは`DashboardHeroComponent.selected`イベントが期待されるヒーローを発行したことを検証するために`selectedHero`を簡単にチェックすることができます。
 
-The setup for the _test-host_ tests is similar to the setup for the stand-alone tests:
+_テストホスト_のテストのセットアップは、スタンドアロンテストのセットアップと似ています:
 
 <code-example path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="test-host-setup" header="app/dashboard/dashboard-hero.component.spec.ts (test host setup)"></code-example>
 
-This testing module configuration shows three important differences:
+このテストモジュールの構成では、3つの重要な違いがあります:
 
-1. It _declares_ both the `DashboardHeroComponent` and the `TestHostComponent`.
-1. It _creates_ the `TestHostComponent` instead of the `DashboardHeroComponent`.
-1. The `TestHostComponent` sets the `DashboardHeroComponent.hero` with a binding.
+1. `DashboardHeroComponent`と`TestHostComponent`の両方を_宣言_します。
+1. `DashboardHeroComponent`の代わりに`TestHostComponent`を_作成_します。
+1. `TestHostComponent`は`DashboardHeroComponent.hero`にバインディングをセットします。
 
-The `createComponent` returns a `fixture` that holds an instance of `TestHostComponent` instead of an instance of `DashboardHeroComponent`.
+`createComponent`は、`DashboardHeroComponent`のインスタンスの代わりに`TestHostComponent`のインスタンスをもつ`fixture`を返します。
 
-Creating the `TestHostComponent` has the side-effect of creating a `DashboardHeroComponent`
-because the latter appears within the template of the former.
-The query for the hero element (`heroEl`) still finds it in the test DOM,
-albeit at greater depth in the element tree than before.
+`TestHostComponent`を作成すると、
+前者のテンプレート内に`DashboardHeroComponent`が表示されるため、
+それを作成するという副作用があります。
+ヒーロー要素(`heroEl`)のクエリは、さきほどよりも要素ツリーの深さが深いものの、テストDOM内でそれを見つけ出せます。
 
-The tests themselves are almost identical to the stand-alone version:
+テスト自体はスタンドアロンバージョンとほぼ同じです:
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="test-host-tests"
   header="app/dashboard/dashboard-hero.component.spec.ts (test-host)"></code-example>
 
-Only the selected event test differs. It confirms that the selected `DashboardHeroComponent` hero
-really does find its way up through the event binding to the host component.
+選択したイベントテストのみが異なります。
+これは、選択された`DashboardHeroComponen`のヒーローが実際にホストコンポーネントへのイベントバインディングを通じて登ってきたことを確認します。
 
 <hr>
 
 {@a routing-component}
 
-## Routing component
+## ルーティングコンポーネント
 
-A _routing component_ is a component that tells the `Router` to navigate to another component.
-The `DashboardComponent` is a _routing component_ because the user can
-navigate to the `HeroDetailComponent` by clicking on one of the _hero buttons_ on the dashboard.
+_ルーティングコンポーネント_は、`Router`に別のコンポーネントにナビゲートするように指示するコンポーネントです。
+`DashboardComponent`は、ユーザーがダッシュボード上の_ヒーローボタン_の1つをクリックして`HeroDetailComponent`にナビゲートできるため、
+_ルーティングコンポーネント_です。
 
-Routing is pretty complicated.
-Testing the `DashboardComponent` seemed daunting in part because it involves the `Router`,
-which it injects together with the `HeroService`.
+ルーティングはかなり複雑です。
+`DashboardComponent`のテストは、`HeroService`と一緒に注入される`Router`が関係しているため、
+部分的には厄介にみえます。
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="ctor"
   header="app/dashboard/dashboard.component.ts (constructor)"></code-example>
 
-Mocking the `HeroService` with a spy is a [familiar story](#component-with-async-service).
-But the `Router` has a complicated API and is entwined with other services and application preconditions. Might it be difficult to mock?
+`HeroService`をスパイでモックするのは[おなじみの話](#component-with-async-service)です。
+しかし、`Router`には複雑なAPIがあり、他のサービスやアプリケーションの前提条件と絡み合っています。モックするのは難しいかもしれないでしょうか?
 
-Fortunately, not in this case because the `DashboardComponent` isn't doing much with the `Router`
+幸いなことに、このケースでは、`DashboardComponent`が`Router`をあまり使用していないのでそうでもないです。
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="goto-detail"
-  header="app/dashboard/dashboard.component.ts (goToDetail)">
-</code-example>
+  header="app/dashboard/dashboard.component.ts (goToDetail)"></code-example>
 
-This is often the case with _routing components_.
-As a rule you test the component, not the router,
-and care only if the component navigates with the right address under the given conditions.
+これは_ルーティングコンポーネント_でよくあるケースです。
+原則として、ルーターではなくコンポーネントをテストし、
+指定された条件の下でコンポーネントが正しいアドレスでナビゲートする場合にのみ注意してください。
 
-Providing a router spy for _this component_ test suite happens to be as easy
-as providing a `HeroService` spy.
+_このコンポーネント_のテストスイートのためのルータースパイを提供することは、
+`HeroService`スパイを提供するのと同じくらい簡単です。
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.spec.ts"
   region="router-spy"
   header="app/dashboard/dashboard.component.spec.ts (spies)"></code-example>
 
-The following test clicks the displayed hero and confirms that
-`Router.navigateByUrl` is called with the expected url.
+次のテストでは、表示されたヒーローをクリックし、
+`Router.navigateByUrl`が期待されるURLで呼び出されたことを確認します。
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.spec.ts"
@@ -1089,102 +1068,102 @@ The following test clicks the displayed hero and confirms that
 
 {@a routed-component-w-param}
 
-## Routed components
+## ルーテッドコンポーネント
 
-A _routed component_ is the destination of a `Router` navigation.
-It can be trickier to test, especially when the route to the component _includes parameters_.
-The `HeroDetailComponent` is a _routed component_ that is the destination of such a route.
+_ルーテッドコンポーネント_は`Router`ナビゲーションの行き先です。
+特にコンポーネントへのルーティングに_パラメータが含まれている_場合は、テストするのが難しい場合があります。
+`HeroDetailComponent`は、そのようなルーティングの行き先である_ルーテッドコンポーネント_です。
 
-When a user clicks a _Dashboard_ hero, the `DashboardComponent` tells the `Router`
-to navigate to `heroes/:id`.
-The `:id` is a route parameter whose value is the `id` of the hero to edit.
+ユーザーが_ダッシュボード_のヒーローをクリックしたとき、
+`DashboardComponent`はルーターに`heroes/:id`にナビゲートするように指示します。
+`:id`はルーティングパラメータであり、その値は編集するヒーローの`id`です。
 
-The `Router` matches that URL to a route to the `HeroDetailComponent`.
-It creates an `ActivatedRoute` object with the routing information and
-injects it into a new instance of the `HeroDetailComponent`.
+`Router`はそのURLを`HeroDetailComponent`へのルーティングとマッチします。
+`Router`はルーティング情報を含む`ActivatedRoute`オブジェクトを作成し、
+それを`HeroDetailComponent`の新しいインスタンスに挿入します。
 
-Here's the `HeroDetailComponent` constructor:
+`HeroDetailComponent`のコンストラクターは次のようになります:
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="ctor" header="app/hero/hero-detail.component.ts (constructor)"></code-example>
 
-The `HeroDetail` component needs the `id` parameter so it can fetch
-the corresponding hero via the `HeroDetailService`.
-The component has to get the `id` from the `ActivatedRoute.paramMap` property
-which is an `Observable`.
+`HeroDetail`コンポーネントは`HeroDetailService`
+経由で対応するヒーローをフェッチするために`id`パラメータを必要とします。
+コンポーネントは、
+`Observable`である`ActivatedRoute.paramMap`プロパティから`id`を取得する必要があります。
 
-It can't just reference the `id` property of the `ActivatedRoute.paramMap`.
-The component has to _subscribe_ to the `ActivatedRoute.paramMap` observable and be prepared
-for the `id` to change during its lifetime.
+`ActivatedRoute.paramMap`の`id`プロパティを参照するだけでは不十分です。
+コンポーネントは、`ActivatableRoute.paramMap` Observableを_サブスクライブ_し、
+`id`がそのライフタイム内で変更されるように準備する必要があります。
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="ng-on-init" header="app/hero/hero-detail.component.ts (ngOnInit)"></code-example>
 
 <div class="alert is-helpful">
 
-The [ActivatedRoute in action](guide/router-tutorial-toh#activated-route-in-action) section of the [Router tutorial: tour of heroes](guide/router-tutorial-toh) guide covers `ActivatedRoute.paramMap` in more detail.
+[Router](guide/router) ガイドの[ActivatedRoute in action](guide/router#activated-route-in-action) セクションでは、`ActivatedRoute.paramMap`について詳しく説明しています。
 
 </div>
 
-Tests can explore how the `HeroDetailComponent` responds to different `id` parameter values
-by manipulating the `ActivatedRoute` injected into the component's constructor.
+テストでは、コンポーネントのコンストラクターに注入された`ActivatedRoute`を操作することによって、
+`HeroDetailComponent`が異なる`id`パラメータ値にどのように応答するかを調べることができます。
 
-You know how to spy on the `Router` and a data service.
+あなたは`Router`とデータサービスをスパイする方法を知っています。
 
-You'll take a different approach with `ActivatedRoute` because
+あなたは次の理由で`ActivatedRoute`とは異なるアプローチをとるでしょう。
 
-- `paramMap` returns an `Observable` that can emit more than one value
-  during a test.
-- You need the router helper function, `convertToParamMap()`, to create a `ParamMap`.
-- Other _routed component_ tests need a test double for `ActivatedRoute`.
+- `paramMap`は、
+  テスト中に複数の値を出力できる`Observable`を返します。
+- `ParamMap`を作成するためのルーターヘルパー関数`convertToParamMap()`が必要です。
+- 他の_ルーテッドコンポーネント_のテストでは、`ActivatedRoute`のテストダブルが必要です。
 
-These differences argue for a re-usable stub class.
+これらの違いは、再利用可能なスタブクラスが必要だと言っています。
 
 #### _ActivatedRouteStub_
 
-The following `ActivatedRouteStub` class serves as a test double for `ActivatedRoute`.
+次の`ActivatedRouteStub`クラスは、`ActivatedRoute`のテストダブルとして機能します。
 
 <code-example
   path="testing/src/testing/activated-route-stub.ts"
   region="activated-route-stub"
   header="testing/activated-route-stub.ts (ActivatedRouteStub)"></code-example>
 
-Consider placing such helpers in a `testing` folder sibling to the `app` folder.
-This sample puts `ActivatedRouteStub` in `testing/activated-route-stub.ts`.
+このようなヘルパーを`app`フォルダと同一階層の`testing`フォルダに配置することを検討してください。
+このサンプルでは`ActivatedRouteStub`を`testing/activated-route-stub.ts`に置きます。
 
 <div class="alert is-helpful">
 
-Consider writing a more capable version of this stub class with
-the [_marble testing library_](#marble-testing).
+  [_マーブルテストライブラリ_](#marble-testing)
+  でこのスタブクラスのより能力の高いバージョンを書くことを検討してください。
 
 </div>
 
 {@a tests-w-test-double}
 
-#### Testing with _ActivatedRouteStub_
+#### _ActivatedRouteStub_ を使用したテスト
 
-Here's a test demonstrating the component's behavior when the observed `id` refers to an existing hero:
+Observableより取得した`id`が既存のヒーローを参照しているときのコンポーネントの動作を示すテストは次のようになります:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-good-id" header="app/hero/hero-detail.component.spec.ts (existing id)"></code-example>
 
 <div class="alert is-helpful">
 
-The `createComponent()` method and `page` object are discussed [below](#page-object).
-Rely on your intuition for now.
+`createComponent()`メソッドと`page`オブジェクトについては[後述](#page-object)します。
+今はあなたの直感に頼ってください。
 
 </div>
 
-When the `id` cannot be found, the component should re-route to the `HeroListComponent`.
+`id`が見つからない場合、コンポーネントは`HeroListComponent`にルーティングし直す必要があります。
 
-The test suite setup provided the same router spy [described above](#routing-component) which spies on the router without actually navigating.
+テストスイートのセットアップは、実際にナビゲートせずにルーターをスパイしている[上記](#routing-component)と同じルータースパイを提供しました。
 
-This test expects the component to try to navigate to the `HeroListComponent`.
+次のテストでは、コンポーネントが`HeroListComponent`にナビゲートしようとします。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-bad-id" header="app/hero/hero-detail.component.spec.ts (bad id)"></code-example>
 
-While this app doesn't have a route to the `HeroDetailComponent` that omits the `id` parameter, it might add such a route someday.
-The component should do something reasonable when there is no `id`.
+このアプリは`id`パラメータを省略した`HeroDetailComponent`へのルーティングを持っていませんが、いつかそのようなルーティングを追加するかもしれません。
+コンポーネントは、`id`がないときに妥当な何かを行うべきです。
 
-In this implementation, the component should create and display a new hero.
-New heroes have `id=0` and a blank `name`. This test confirms that the component behaves as expected:
+この実装では、コンポーネントは新しいヒーローを作成して表示する必要があります。
+新しいヒーローは`id=0`と空の`name`を持ちます。次のテストではコンポーネントが期待どおりに動作することを確認します:
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
@@ -1192,185 +1171,186 @@ New heroes have `id=0` and a blank `name`. This test confirms that the component
   header="app/hero/hero-detail.component.spec.ts (no id)"></code-example>
 
 <hr>
+{@a nested-component-tests}
 
-## Nested component tests
+## ネストしたコンポーネントのテスト
 
-Component templates often have nested components, whose templates
-may contain more components.
+コンポーネントテンプレートはネストしたコンポーネントをもつことが多いです。
+そのテンプレートにはさらにコンポーネントが含まれるているでしょう。
 
-The component tree can be very deep and, most of the time, the nested components
-play no role in testing the component at the top of the tree.
+コンポーネントツリーはとても深いかもしれませんが、
+ほとんどの場合、ネストしたコンポーネントは、ツリーの最上部にあるコンポーネントのテストには何の役割も果たしません。
 
-The `AppComponent`, for example, displays a navigation bar with anchors and their `RouterLink` directives.
+たとえば、`AppComponent`は、アンカーとその`RouterLink`ディレクティブを含むナビゲーションバーを表示します。
 
 <code-example
   path="testing/src/app/app.component.html"
   header="app/app.component.html"></code-example>
 
-While the `AppComponent` _class_ is empty,
-you may want to write unit tests to confirm that the links are wired properly
-to the `RouterLink` directives, perhaps for the reasons [explained below](#why-stubbed-routerlink-tests).
+`AppComponent`_クラス_は空ですが、
+おそらく[以下の理由](#why-stubbed-routerlink-tests)で、
+リンクが`RouterLink`ディレクティブに正しく配線されているかどうかを確認するためのユニットテストを書きたいかもしれません。
 
-To validate the links, you don't need the `Router` to navigate and you don't
-need the `<router-outlet>` to mark where the `Router` inserts _routed components_.
+リンクを検証するには、ナビゲートするための`Router`は必要ではありませんし、
+`Router`が_ルーテッドコンポーネント_を挿入する場所をマークするための`<router-outlet>`も必要ありません。
 
-The `BannerComponent` and `WelcomeComponent`
-(indicated by `<app-banner>` and `<app-welcome>`) are also irrelevant.
+`BannerComponent`と`WelcomeComponent`
+(`<app-banner>`と`<app-welcome>`で示される)も無関係です。
 
-Yet any test that creates the `AppComponent` in the DOM will also create instances of
-these three components and, if you let that happen,
-you'll have to configure the `TestBed` to create them.
+しかし、`AppComponent`をDOMに作成するテストでは、
+これらの3つのコンポーネントのインスタンスも作成されます。
+そのような場合は、それらを作成するために`TestBed`を設定する必要があるでしょう。
 
-If you neglect to declare them, the Angular compiler won't recognize the
-`<app-banner>`, `<app-welcome>`, and `<router-outlet>` tags in the `AppComponent` template
-and will throw an error.
+それらの宣言を怠ると、
+Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、`<app-welcome>`、および`<router-outlet>`タグを認識せず、
+エラーをスローします。
 
-If you declare the real components, you'll also have to declare _their_ nested components
-and provide for _all_ services injected in _any_ component in the tree.
+実際のコンポーネントを宣言する場合は、_それら_のネストしたコンポーネントを宣言し、
+ツリー内の_あらゆる_コンポーネントに注入された_すべて_のサービスも提供する必要があります。
 
-That's too much effort just to answer a few simple questions about links.
+これはリンクについての簡単な質問に答えるだけに対して過大な労力です。
 
-This section describes two techniques for minimizing the setup.
-Use them, alone or in combination, to stay focused on the testing the primary component.
+このセクションでは、セットアップを最小限に抑えるための2つのテクニックについて説明します。
+主要なコンポーネントのテストに集中するために、これらを単独または組み合わせて使用​​してください。
 
 {@a stub-component}
 
-##### Stubbing unneeded components
+##### 不必要なコンポーネントをスタブする
 
-In the first technique, you create and declare stub versions of the components
-and directive that play little or no role in the tests.
+最初のテクニックでは、
+テストでほとんど役割を果たさないコンポーネントとディレクティブのスタブバージョンを作成して宣言します。
 
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="component-stubs"
   header="app/app.component.spec.ts (stub declaration)"></code-example>
 
-The stub selectors match the selectors for the corresponding real components.
-But their templates and classes are empty.
+スタブのセレクターは、対応する実際のコンポーネントのセレクターと一致します。
+しかし、そのテンプレートとクラスは空です。
 
-Then declare them in the `TestBed` configuration next to the
-components, directives, and pipes that need to be real.
+その後、`TestBed`の構成内で、
+実際に必要なコンポーネント、ディレクティブ、パイプの次に宣言します。
 
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="testbed-stubs"
   header="app/app.component.spec.ts (TestBed stubs)"></code-example>
 
-The `AppComponent` is the test subject, so of course you declare the real version.
+`AppComponent`はテスト対象ですので、もちろん実際のバージョンを宣言してください。
 
-The `RouterLinkDirectiveStub`, [described later](#routerlink), is a test version
-of the real `RouterLink` that helps with the link tests.
+[後述](#routerlink)する`RouterLinkDirectiveStub`は、
+リンクのテストに役立つ、実際の`RouterLink`のテストバージョンです。
 
-The rest are stubs.
+残りはスタブです。
 
 {@a no-errors-schema}
 
 #### _NO_ERRORS_SCHEMA_
 
-In the second approach, add `NO_ERRORS_SCHEMA` to the `TestBed.schemas` metadata.
+2つ目のアプローチでは、`NO_ERRORS_SCHEMA`を`TestBed.schemas`メタデータに追加します。
 
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="no-errors-schema"
   header="app/app.component.spec.ts (NO_ERRORS_SCHEMA)"></code-example>
 
-The `NO_ERRORS_SCHEMA` tells the Angular compiler to ignore unrecognized elements and attributes.
+`NO_ERRORS_SCHEMA`は、認識できない要素と属性を無視するようにAngularコンパイラに指示します。
 
-The compiler will recognize the `<app-root>` element and the `routerLink` attribute
-because you declared a corresponding `AppComponent` and `RouterLinkDirectiveStub`
-in the `TestBed` configuration.
+コンパイラは、
+`TestBed`の設定で対応する`AppComponent`と`RouterLinkDirectiveStub`を宣言したため、
+`<app-root>`要素と`routerLink`属性を認識します。
 
-But the compiler won't throw an error when it encounters `<app-banner>`, `<app-welcome>`, or `<router-outlet>`.
-It simply renders them as empty tags and the browser ignores them.
+しかし、`<app-banner>`、`<app-welcome>`、または`<router-outlet>`が見つかった場合、コンパイラはエラーを投げません。
+単に空のタグとしてレンダリングし、ブラウザはそれらを無視します。
 
-You no longer need the stub components.
+スタブコンポーネントはもう必要ありません。
 
-#### Use both techniques together
+#### 両方のテクニックを使用する
 
-These are techniques for _Shallow Component Testing_ ,
-so-named because they reduce the visual surface of the component to just those elements
-in the component's template that matter for tests.
+これらのテクニックは、
+コンポーネントの視覚的な外見を、テストの対象となるコンポーネントのテンプレート内の要素だけに縮小するので、
+_浅いコンポーネントテスト_と呼ばれます。
 
-The `NO_ERRORS_SCHEMA` approach is the easier of the two but don't overuse it.
+`NO_ERRORS_SCHEMA`のアプローチは2つの方法を使うよりも簡単ですが、それを過度に使用しないでください。
 
-The `NO_ERRORS_SCHEMA` also prevents the compiler from telling you about the missing
-components and attributes that you omitted inadvertently or misspelled.
-You could waste hours chasing phantom bugs that the compiler would have caught in an instant.
+また、`NO_ERRORS_SCHEMA`は、誤って省略した、
+またはスペルの間違ったコンポーネントや属性についてもコンパイラに知らせないようにします。
+コンパイラが瞬時に捉えていた隠されたバグを追跡する時間を無駄にすることがあります。
 
-The _stub component_ approach has another advantage.
-While the stubs in _this_ example were empty,
-you could give them stripped-down templates and classes if your tests
-need to interact with them in some way.
+_スタブコンポーネント_のアプローチには別の利点があります。
+_この_例のスタブは空ですが、
+テストで何らかの方法でそれとやりとりする必要がある場合は、
+テンプレートとクラスを取り除くことができます。
 
-In practice you will combine the two techniques in the same setup,
-as seen in this example.
+実際には、
+この例のように同じセットアップ内で2つのテクニックを組み合わせます。
 
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="mixed-setup"
   header="app/app.component.spec.ts (mixed setup)"></code-example>
 
-The Angular compiler creates the `BannerComponentStub` for the `<app-banner>` element
-and applies the `RouterLinkStubDirective` to the anchors with the `routerLink` attribute,
-but it ignores the `<app-welcome>` and `<router-outlet>` tags.
+Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作成し、
+`routerLink`属性をもつアンカーに`RouterLinkStubDirective`を適用しますが、
+`<app-welcome>`タグと`<router-outlet>`タグは無視します。
 
 <hr>
 
 {@a routerlink}
-## Components with _RouterLink_
+## _RouterLink_を使用したコンポーネント
 
-The real `RouterLinkDirective` is quite complicated and entangled with other components
-and directives of the `RouterModule`.
-It requires challenging setup to mock and use in tests.
+実際の`RouterLinkDirective`はかなり複雑で、
+他のコンポーネントや`RouterModule`のディレクティブと絡み合っています。
+テストでモックして使用するには、頑張ったセットアップが必要です。
 
-The `RouterLinkDirectiveStub` in this sample code replaces the real directive
-with an alternative version designed to validate the kind of anchor tag wiring
-seen in the `AppComponent` template.
+このサンプルコードの`RouterLinkDirectiveStub`は、
+実際のディレクティブを、
+`AppComponent`テンプレートに見られるアンカータグ配線の種類を検証するために設計された代替バージョンに置き換えます。
 
 <code-example
   path="testing/src/testing/router-link-directive-stub.ts"
   region="router-link"
   header="testing/router-link-directive-stub.ts (RouterLinkDirectiveStub)"></code-example>
 
-The URL bound to the `[routerLink]` attribute flows in to the directive's `linkParams` property.
+`[routerLink]`属性にバインドされたURLは、ディレクティブの`linkParams`プロパティに流れます。
 
-The `HostListener` wires the click event of the host element
-(the `<a>` anchor elements in `AppComponent`) to the stub directive's `onClick` method.
+`HostListener`メタデータプロパティは、
+ホスト要素のクリックイベント(`AppComponent`の`<a>`アンカー要素)をスタブディレクティブの`onClick`メソッドに紐づけます。
 
-Clicking the anchor should trigger the `onClick()` method,
-which sets the stub's telltale `navigatedTo` property.
-Tests inspect `navigatedTo` to confirm that clicking the anchor
-set the expected route definition.
+アンカーをクリックすると、
+`onClick()`メソッドをトリガーして、スタブに露出した`navigatedTo`プロパティが設定されます。
+テストでは、
+アンカーをクリックしたときに期待どおりのルート定義が設定されていることを確認するために`navigatedTo`を検証します。
 
 <div class="alert is-helpful">
 
-Whether the router is configured properly to navigate with that route definition is a
-question for a separate set of tests.
+ルーターがそのルーティング定義でナビゲートするように正しく設定されているかどうかは、
+別のテストセットで考えることです。
 
 </div>
 
 {@a by-directive}
 {@a inject-directive}
 
-#### _By.directive_ and injected directives
+#### _By.directive_ と注入したディレクティブ
 
-A little more setup triggers the initial data binding and gets references to the navigation links:
+もう少しセットアップすると、最初のデータバインディングがトリガーされ、ナビゲーションリンクへの参照が取得されます:
 
 <code-example
   path="testing/src/app/app.component.spec.ts"
   region="test-setup"
   header="app/app.component.spec.ts (test setup)"></code-example>
 
-Three points of special interest:
+特に興味のあるポイントは3つあります:
 
-1.  You can locate the anchor elements with an attached directive using `By.directive`.
+1. `By.directive`を使用して、添付されたディレクティブでアンカー要素を見つけることができます。
 
-1.  The query returns `DebugElement` wrappers around the matching elements.
+1. クエリは、マッチする要素を囲むような`DebugElement`ラッパーを返します。
 
-1.  Each `DebugElement` exposes a dependency injector with the
-    specific instance of the directive attached to that element.
+1. 各`DebugElement`は、
+   特定の、その要素にアタッチされたディレクティブのインスタンスをもつ依存性のインジェクターを公開します。
 
-The `AppComponent` links to validate are as follows:
+検証のための`AppComponent`のリンクは次のとおりです:
 
 <code-example
   path="testing/src/app/app.component.html"
@@ -1379,46 +1359,46 @@ The `AppComponent` links to validate are as follows:
 
 {@a app-component-tests}
 
-Here are some tests that confirm those links are wired to the `routerLink` directives
-as expected:
+これらのリンクが期待どおりに`routerLink`ディレクティブに配線されていることを確認するテストは次のようになります:
 
 <code-example path="testing/src/app/app.component.spec.ts" region="tests" header="app/app.component.spec.ts (selected tests)"></code-example>
 
 <div class="alert is-helpful">
 
-The "click" test _in this example_ is misleading.
-It tests the `RouterLinkDirectiveStub` rather than the _component_.
-This is a common failing of directive stubs.
+_この例_の"click"テストは誤解を招きます。
+これは、_コンポーネント_ではなく、`RouterLinkDirectiveStub`をテストします。
+これは、ディレクティブスタブの一般的な失敗です。
 
-It has a legitimate purpose in this guide.
-It demonstrates how to find a `RouterLink` element, click it, and inspect a result,
-without engaging the full router machinery.
-This is a skill you may need to test a more sophisticated component, one that changes the display,
-re-calculates parameters, or re-arranges navigation options when the user clicks the link.
+このガイドには正当な目的があります。
+ルーターの全機能を使用することなく、`RouterLink`要素を見つけてクリックし、結果を検証する方法を示します。
+これは、ユーザーがリンクをクリックしたときに、
+表示を変更したり、パラメータを再計算したり、
+ナビゲーションオプションを並べ替えたりする、
+より洗練されたコンポーネントをテストするために必要なスキルです。
 
 </div>
 
 {@a why-stubbed-routerlink-tests}
 
-#### What good are these tests?
+#### それらのテストは何がよいのですか?
 
-Stubbed `RouterLink` tests can confirm that a component with links and an outlet is setup properly,
-that the component has the links it should have, and that they are all pointing in the expected direction.
-These tests do not concern whether the app will succeed in navigating to the target component when the user clicks a link.
+スタブした`RouterLink`テストでは、リンクとアウトレットをもつコンポーネントが適切に設定されていること、
+コンポーネントが必要なリンクを持っていること、そしてそれらすべてが期待される行き先になっていることを確認できます。
+これらのテストは、ユーザーがリンクをクリックしたときにアプリケーションが対象のコンポーネントにナビゲートすることに成功するかどうかには関係ありません。
 
-Stubbing the RouterLink and RouterOutlet is the best option for such limited testing goals.
-Relying on the real router would make them brittle.
-They could fail for reasons unrelated to the component.
-For example, a navigation guard could prevent an unauthorized user from visiting the `HeroListComponent`.
-That's not the fault of the `AppComponent` and no change to that component could cure the failed test.
+このような制限されたテストを達成するためには、`RouterLink`と`RouterOutlet`をスタブすることが最良の選択肢です。
+実際のルーターに依存すると、それらは脆弱になります。
+コンポーネントと無関係の理由で失敗する可能性があります。
+たとえば、ナビゲーションガードによって、権限のないユーザーが`HeroListComponent`にアクセスするのを防ぐかもしれません。
+これは`AppComponent`の落ち度ではなく、そのコンポーネントへの変更は失敗したテストを修正することはできません。
 
-A _different_ battery of tests can explore whether the application navigates as expected
-in the presence of conditions that influence guards such as whether the user is authenticated and authorized.
+_別_の総合テストでは、ユーザーが認証され、許可されているかどうかなどの、
+ガードに影響する条件が存在する場合にアプリケーションが期待どおりにナビゲートするかどうかを調べることができます。
 
 <div class="alert is-helpful">
 
-A future guide update will explain how to write such
-tests with the `RouterTestingModule`.
+将来のガイドアップデートでは、
+`RouterTestingModule`でこのようなテストを書く方法を説明します。
 
 </div>
 
@@ -1426,53 +1406,53 @@ tests with the `RouterTestingModule`.
 
 {@a page-object}
 
-## Use a _page_ object
+## _page_ オブジェクトを使用する
 
-The `HeroDetailComponent` is a simple view with a title, two hero fields, and two buttons.
+`HeroDetailComponent`は、タイトル、2つのヒーローのフィールド、2つのボタンをもつシンプルなビューです。
 
 <div class="lightbox">
   <img src='generated/images/guide/testing/hero-detail.component.png' alt="HeroDetailComponent in action">
 </div>
 
-But there's plenty of template complexity even in this simple form.
+しかし、このシンプルなフォームでも多くの複雑なテンプレートを持ちます。
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.html" header="app/hero/hero-detail.component.html"></code-example>
 
-Tests that exercise the component need ...
+コンポーネントを実行するテストに必要なことは...
 
-- to wait until a hero arrives before elements appear in the DOM.
-- a reference to the title text.
-- a reference to the name input box to inspect and set it.
-- references to the two buttons so they can click them.
-- spies for some of the component and router methods.
+- 要素がDOMに現れる前にヒーローが到着するまで待つこと。
+- タイトルテキストへの参照。
+- 検証して値をセットするための名前のインプットボックスへの参照。
+- クリック可能な2つのボタンへの参照。
+- いくつかのコンポーネントとルーターのメソッドをスパイする。
 
-Even a small form such as this one can produce a mess of tortured conditional setup and CSS element selection.
+このような小さなフォームであっても、苦しくて面倒くさい条件設定とCSS要素の選択が必要になるでしょう。
 
-Tame the complexity with a `Page` class that handles access to component properties
-and encapsulates the logic that sets them.
+コンポーネントプロパティへのアクセスを処理し、
+それらを設定するロジックをカプセル化する`Page`クラスを使用して、複雑さを克服してください。
 
-Here is such a `Page` class for the `hero-detail.component.spec.ts`
+`hero-detail.component.spec.ts`の`Page`クラスは次のとおりです。
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="page"
   header="app/hero/hero-detail.component.spec.ts (Page)"></code-example>
 
-Now the important hooks for component manipulation and inspection are neatly organized and accessible from an instance of `Page`.
+コンポーネントの操作と検証のための重要なフックは、`Page`のインスタンスからきれいに整理され、アクセス可能になりました。
 
-A `createComponent` method creates a `page` object and fills in the blanks once the `hero` arrives.
+`createComponent`メソッドは`page`オブジェクトを作成し、`hero`が到着すると空白を埋め込みます。
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="create-component"
   header="app/hero/hero-detail.component.spec.ts (createComponent)"></code-example>
 
-The [_HeroDetailComponent_ tests](#tests-w-test-double) in an earlier section demonstrate how `createComponent` and `page`
-keep the tests short and _on message_.
-There are no distractions: no waiting for promises to resolve and no searching the DOM for element values to compare.
+上のセクションの[_HeroDetailComponent_のテスト](#tests-w-test-double)では、
+`createComponent`と`page`がテストの短さと_方針_を保つ方法を示しています。
+注意を払う必要はありません。Promiseを待つことはなく、比較する要素値のDOMを検索する必要もありません。
 
-Here are a few more `HeroDetailComponent` tests to reinforce the point.
+次は、この点を補強する`HeroDetailComponent`テストです。
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
@@ -1482,16 +1462,15 @@ Here are a few more `HeroDetailComponent` tests to reinforce the point.
 <hr>
 
 {@a compile-components}
-## Calling _compileComponents()_
-
+## _compileComponents()_ を呼び出す
 <div class="alert is-helpful">
 
-You can ignore this section if you _only_ run tests with the CLI `ng test` command
-because the CLI compiles the application before running the tests.
+CLIから`ng test`コマンドを使用してテストを実行する_だけ_な場合、
+CLIがテストを実行する前にアプリケーションをコンパイルするのでこのセクションは無視してもかまいません。
 
 </div>
 
-If you run tests in a **non-CLI environment**, the tests may fail with a message like this one:
+**非CLI環境**でテストを実行すると、テストはこのようなメッセージで失敗することがあります:
 
 <code-example language="sh" class="code-shell" hideCopy>
 Error: This test module uses the component BannerComponent
@@ -1499,15 +1478,15 @@ which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
 </code-example>
 
-The root of the problem is at least one of the components involved in the test
-specifies an external template or CSS file as
-the following version of the `BannerComponent` does.
+この問題の根本原因は、
+`BannerComponent`の次のバージョンのように、
+テストに関係するコンポーネントの少なくとも1つが外部テンプレートまたはCSSファイルを指定していることです。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.ts"
   header="app/banner/banner-external.component.ts (external template & css)"></code-example>
 
-The test fails when the `TestBed` tries to create the component.
+`TestBed`がコンポーネントを作成しようとすると、テストは失敗します。
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts"
@@ -1515,28 +1494,28 @@ The test fails when the `TestBed` tries to create the component.
   header="app/banner/banner.component.spec.ts (setup that fails)"
   avoid></code-example>
 
-Recall that the app hasn't been compiled.
-So when you call `createComponent()`, the `TestBed` compiles implicitly.
+アプリケーションがコンパイルされていないことを思い出してください。
+したがって、`createComponent()`を呼び出すと、`TestBed`は暗黙的にコンパイルされます。
 
-That's not a problem when the source code is in memory.
-But the `BannerComponent` requires external files
-that the compiler must read from the file system,
-an inherently _asynchronous_ operation.
+これは、ソースコードがメモリ上にあるときには問題ありません。
+しかし、`BannerComponent`は、
+コンパイルが本質的に
+_非同期_な操作である、ファイルシステムから読み取らなくてはいけない外部ファイルを必要とします。
 
-If the `TestBed` were allowed to continue, the tests would run and fail mysteriously
-before the compiler could finished.
+`TestBed`を続行することが許されていれば、
+テストは実行され、コンパイラが終了する前に不思議に失敗するでしょう。
 
-The preemptive error message tells you to compile explicitly with `compileComponents()`.
+さきほどのエラーメッセージは、`compileComponents()`で明示的にコンパイルするよう指示しています。
 
-#### _compileComponents()_ is async
+#### _compileComponents()_ は非同期
 
-You must call `compileComponents()` within an asynchronous test function.
+あなたは非同期テスト関数内で`compileComponents()`を呼び出す必要があります。
 
 <div class="alert is-critical">
 
-If you neglect to make the test function async
-(e.g., forget to use `async()` as described below),
-you'll see this error message
+テスト関数を非同期にすることを怠った場合
+(たとえば、後述の`async()`の使用を忘れた場合)、
+このようなエラーメッセージが表示されます。
 
 <code-example language="sh" class="code-shell" hideCopy>
 Error: ViewDestroyedError: Attempt to use a destroyed view
@@ -1544,117 +1523,115 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 </div>
 
-A typical approach is to divide the setup logic into two separate `beforeEach()` functions:
+典型的な方法は、セットアップロジックを2つの別々の`beforeEach()`関数に分割することです。
 
-1.  An async `beforeEach()` that compiles the components
-1.  A synchronous `beforeEach()` that performs the remaining setup.
+1. コンポーネントをコンパイルする非同期的な`beforeEach()`
+1. 残りのセットアップを実行する同期的な`beforeEach()`
 
-To follow this pattern, import the `async()` helper with the other testing symbols.
+このパターンにしたがうには、`async()`ヘルパーを他のテストシンボルと一緒にインポートします。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
-  region="import-async">
-</code-example>
+  region="import-async"></code-example>
 
-#### The async _beforeEach_
+#### 非同期な_beforeEach_
 
-Write the first async `beforeEach` like this.
+次のように、最初の非同期な`beforeEach`を書いてください。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="async-before-each"
   header="app/banner/banner-external.component.spec.ts (async beforeEach)"></code-example>
 
-The `async()` helper function takes a parameterless function with the body of the setup.
+`async()`ヘルパー関数は、セットアップを行うパラメーターなしの関数を受け取ります。
 
-The `TestBed.configureTestingModule()` method returns the `TestBed` class so you can chain
-calls to other `TestBed` static methods such as `compileComponents()`.
+`TestBed.configureTestingModule()`メソッドは`TestBed`クラスを返します。
+これにより、`compileComponents()`などの他の`TestBed`の静的メソッドの呼び出しをチェーンすることができます。
 
-In this example, the `BannerComponent` is the only component to compile.
-Other examples configure the testing module with multiple components
-and may import application modules that hold yet more components.
-Any of them could be require external files.
+この例では、`BannerComponent`がコンパイルする唯一のコンポーネントです。
+他の例では、複数のコンポーネントをもつテストモジュールを構成し、
+より多くのコンポーネントを保持するアプリケーションモジュールをインポートできます。
+いずれも外部ファイルを必要とする可能性があります。
 
-The `TestBed.compileComponents` method asynchronously compiles all components configured in the testing module.
+`TestBed.compileComponents`メソッドは、テストモジュールで構成されたすべてのコンポーネントを非同期にコンパイルします。
 
 <div class="alert is-important">
 
-Do not re-configure the `TestBed` after calling `compileComponents()`.
+`compileComponents()`を呼び出した後に`TestBed`を再構成しないでください.
 
 </div>
 
-Calling `compileComponents()` closes the current `TestBed` instance to further configuration.
-You cannot call any more `TestBed` configuration methods, not `configureTestingModule()`
-nor any of the `override...` methods. The `TestBed` throws an error if you try.
+`compileComponents()`を呼び出すと、追加の設定を行うために現在の`TestBed`インスタンスが閉じられます。
+`configureTestingModule()`や`override...`メソッドのいずれも呼び出すことはできません。
+試してみると、`TestBed`はエラーをスローします。
 
-Make `compileComponents()` the last step
-before calling `TestBed.createComponent()`.
+`compileComponents()`を`TestBed.createComponent()`
+を呼び出す前の最後のステップにしてください。
 
-#### The synchronous _beforeEach_
+#### 同期的な _beforeEach_
 
-The second, synchronous `beforeEach()` contains the remaining setup steps,
-which include creating the component and querying for elements to inspect.
+次の、同期的な`beforeEach()`には、
+コンポーネントの作成と、検証する要素のクエリの実行を含む残りの設定手順が含まれています。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="sync-before-each"
   header="app/banner/banner-external.component.spec.ts (synchronous beforeEach)"></code-example>
 
-You can count on the test runner to wait for the first asynchronous `beforeEach` to finish before calling the second.
+テストランナーは、2番めの`beforeEach`の呼び出し前に、最初の非同期の`beforeEach`の完了を待つことができます。
 
-#### Consolidated setup
+#### セットアップを統合する
 
-You can consolidate the two `beforeEach()` functions into a single, async `beforeEach()`.
+2つの`beforeEach()`関数を1つの非同期の`beforeEach()`に統合することができます。
 
-The `compileComponents()` method returns a promise so you can perform the
-synchronous setup tasks _after_ compilation by moving the synchronous code
-into a `then(...)` callback.
+`compileComponents()`メソッドはPromiseを返します。
+なので、同期的コードを`then(...)`コールバックに移動することによって、
+コンパイル_後_に同期的なセットアップタスクを実行できます。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="one-before-each"
   header="app/banner/banner-external.component.spec.ts (one beforeEach)"></code-example>
 
-#### _compileComponents()_ is harmless
+#### _compileComponents()_ は無害
 
-There's no harm in calling `compileComponents()` when it's not required.
+`compileComponents()`が必要でないときに呼び出すことに害はありません。
 
-The component test file generated by the CLI calls `compileComponents()`
-even though it is never required when running `ng test`.
+CLIによって生成されたコンポーネントテストファイルは、
+`ng test`の実行時には必要ではないのに`compileComponents()`を呼び出します。
 
-The tests in this guide only call `compileComponents` when necessary.
+このガイドのテストでは必要になったときだけ`commpileComponents`を呼び出します。
 
 <hr>
 
 {@a import-module}
 
-## Setup with module imports
+## モジュールのインポートを使用してセットアップする
 
-Earlier component tests configured the testing module with a few `declarations` like this:
+これまでのコンポーネントテストでは、次のようにいくつかの`declarations`でテストモジュールを構成しました:
 
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts"
   region="config-testbed"
-  header="app/dashboard/dashboard-hero.component.spec.ts (configure TestBed)">
-</code-example>
+  header="app/dashboard/dashboard-hero.component.spec.ts (configure TestBed)"></code-example>
 
-The `DashboardComponent` is simple. It needs no help.
-But more complex components often depend on other components, directives, pipes, and providers
-and these must be added to the testing module too.
+`DashboardComponent`はシンプルです。
+補助を必要としません。
+しかし、より複雑なコンポーネントは多くの場合、他のコンポーネント、ディレクティブ、パイプ、プロバイダーに依存し、これらもテストモジュールに追加する必要があります。
 
-Fortunately, the `TestBed.configureTestingModule` parameter parallels
-the metadata passed to the `@NgModule` decorator
-which means you can also specify `providers` and `imports`.
+幸いにも、`TestBed.configureTestingModule`パラメータは、
+`@NgModule`デコレーターに渡されるメタデータと平行です。
+つまり、`providers`と`imports`を指定することもできます。
 
-The `HeroDetailComponent` requires a lot of help despite its small size and simple construction.
-In addition to the support it receives from the default testing module `CommonModule`, it needs:
+`HeroDetailComponent`は、サイズが小さく簡単な構成にもかかわらず、多くの補助が必要です。
+デフォルトのテストモジュールの`CommonModule`から受け取るサポートに加えて、次のものが必要になります:
 
-- `NgModel` and friends in the `FormsModule` to enable two-way data binding.
-- The `TitleCasePipe` from the `shared` folder.
-- Router services (which these tests are stubbing).
-- Hero data access services (also stubbed).
+- 双方向バインディングを有効にするための`FormsModule`内の`NgModel`とその仲間
+- `shared`フォルダ内の`TitleCasePipe`
+- ルーターサービス(これらのテストではスタブしています)
+- ヒーローデータアクセスサービス(これもスタブされています)
 
-One approach is to configure the testing module from the individual pieces as in this example:
+1つのアプローチは、次の例のように個々の部品からテストモジュールを構成することです:
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
@@ -1663,50 +1640,50 @@ One approach is to configure the testing module from the individual pieces as in
 
 <div class="alert is-helpful">
 
-Notice that the `beforeEach()` is asynchronous and calls `TestBed.compileComponents`
-because the `HeroDetailComponent` has an external template and css file.
+`HeroDetailComponent`は外部テンプレートとCSSファイルをもつため、
+`beforeEach()`は非同期的に`TestBed.compileComponents`を呼び出します。
 
-As explained in [_Calling compileComponents()_](#compile-components) above,
-these tests could be run in a non-CLI environment
-where Angular would have to compile them in the browser.
+上記の[_`compileComponents()`の呼び出し_](#compile-components)
+で説明したように、
+これらのテストはAngularがブラウザ上でコンパイルしなければならない非CLI環境で実行できます。
 
 </div>
 
-#### Import a shared module
+#### 共有モジュールをインポートする
 
-Because many app components need the `FormsModule` and the `TitleCasePipe`, the developer created
-a `SharedModule` to combine these and other frequently requested parts.
+多くのアプリケーションのコンポーネントは`FormsModule`と`TitleCasePipe`を必要とするため、
+開発者は頻繁に要求されるこれらのコンポーネントを組み合わせるために`SharedModule`を作成しました。
 
-The test configuration can use the `SharedModule` too as seen in this alternative setup:
+テスト構成では、この代替のセットアップのような`SharedModule`も使用できます:
 
 <code-example
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="setup-shared-module"
   header="app/hero/hero-detail.component.spec.ts (SharedModule setup)"></code-example>
 
-It's a bit tighter and smaller, with fewer import statements (not shown).
+インポート文の数が少なくて済むようになります(表示はしません)。
 
 {@a feature-module-import}
 
-#### Import a feature module
+#### フィーチャーモジュールをインポートする
 
-The `HeroDetailComponent` is part of the `HeroModule` [Feature Module](guide/feature-modules) that aggregates more of the interdependent pieces
-including the `SharedModule`.
-Try a test configuration that imports the `HeroModule` like this one:
+`HeroDetailComponent`は`HeroModule`[フィーチャーモジュール](guide/feature-modules)の一部品で、
+`SharedModule`を含む相互依存関係の多くを集約します。
+次のような`HeroModule`をインポートするテスト構成を試してみてください:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-hero-module" header="app/hero/hero-detail.component.spec.ts (HeroModule setup)"></code-example>
 
-That's _really_ crisp. Only the _test doubles_ in the `providers` remain. Even the `HeroDetailComponent` declaration is gone.
+これは_本当_に簡潔です。`providers`のテストダブルが残っているだけです。`HeroDetailComponent`の宣言さえもなくなりました。
 
-In fact, if you try to declare it, Angular will throw an error because
-`HeroDetailComponent` is declared in both the `HeroModule` and the `DynamicTestModule`
-created by the `TestBed`.
+実際に`HeroDetailComponent`を宣言しようとすると、
+`HeroDetailComponent`が`TestBed`によって作成された`HeroModule`と`DynamicTestModule`の両方で宣言されるため、
+Angularはエラーをスローします。
 
 <div class="alert is-helpful">
 
-Importing the component's feature module can be the easiest way to configure tests
-when there are many mutual dependencies within the module and
-the module is small, as feature modules tend to be.
+フィーチャーモジュールがそうであるように、
+コンポーネントのフィーチャーモジュールをインポートすることは、
+モジュール内に相互依存関係が多くてモジュールが小さい場合にテストを構成するもっとも簡単な方法です。
 
 </div>
 
@@ -1714,57 +1691,57 @@ the module is small, as feature modules tend to be.
 
 {@a component-override}
 
-## Override component providers
+## コンポーネントのプロバイダーをオーバーライドする
 
-The `HeroDetailComponent` provides its own `HeroDetailService`.
+`HeroDetailComponent`は自分自身の`HeroDetailService`を提供します。
 
 <code-example path="testing/src/app/hero/hero-detail.component.ts" region="prototype" header="app/hero/hero-detail.component.ts (prototype)"></code-example>
 
-It's not possible to stub the component's `HeroDetailService` in the `providers` of the `TestBed.configureTestingModule`.
-Those are providers for the _testing module_, not the component. They prepare the dependency injector at the _fixture level_.
+`TestBed.configureTestingModule`の`providers`でコンポーネントの`HeroDetailService`をスタブすることはできません。
+それらはコンポーネントではなく、_テストモジュール_のプロバイダーです。_フィクスチャーレベル_で依存性のインジェクターを準備します。
 
-Angular creates the component with its _own_ injector, which is a _child_ of the fixture injector.
-It registers the component's providers (the `HeroDetailService` in this case) with the child injector.
+Angularはコンポーネントを、フィクスチャーインジェクターの_子_であるコンポーネント_自身_のインジェクターを使用して作成します。
+コンポーネントのプロバイダー(このケースでは`HeroDetailService`)を子インジェクターに登録します。
 
-A test cannot get to child injector services from the fixture injector.
-And `TestBed.configureTestingModule` can't configure them either.
+テストでは、フィクスチャーのインジェクターから子インジェクターサービスを受け取ることができません。
+また、`TestBed.configureTestingModule`ではそれらを構成することもできません。
 
-Angular has been creating new instances of the real `HeroDetailService` all along!
+Angularは最初からずっと本物の`HeroDetailService`のインスタンスを作成していました!
 
 <div class="alert is-helpful">
 
-These tests could fail or timeout if the `HeroDetailService` made its own XHR calls to a remote server.
-There might not be a remote server to call.
+`HeroDetailService`がリモートサーバーへの自身のXHR呼び出しを行った場合、これらのテストは失敗するか、タイムアウトになる可能性があります。
+呼び出すリモートサーバーがない可能性があります。
 
-Fortunately, the `HeroDetailService` delegates responsibility for remote data access to an injected `HeroService`.
+幸いにも、`HeroDetailService`は、注入された`HeroService`へリモートデータアクセスの責任を委譲します。
 
 <code-example path="testing/src/app/hero/hero-detail.service.ts" region="prototype" header="app/hero/hero-detail.service.ts (prototype)"></code-example>
 
-The [previous test configuration](#feature-module-import) replaces the real `HeroService` with a `TestHeroService`
-that intercepts server requests and fakes their responses.
+[以前のテスト構成](#feature-module-import)では、
+実際の`HeroService`をサーバー要求をインターセプトしてレスポンスを偽装する`TestHeroService`に置き換えていました。
 
 </div>
 
-What if you aren't so lucky. What if faking the `HeroService` is hard?
-What if `HeroDetailService` makes its own server requests?
+もしあなたがとても幸運でないならどうでしょうか? `HeroService`をモックするのが難しい場合はどうすればいいですか?
+`HeroDetailService`自身がサーバーへリクエストする場合はどうなりますか？
 
-The `TestBed.overrideComponent` method can replace the component's `providers` with easy-to-manage _test doubles_
-as seen in the following setup variation:
+`TestBed.overrideComponent`メソッドは、コンポーネントの`providers`を、
+次のセットアップの変更で示すように、管理しやすい_テストダブル_に置き換えることができます:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-override" header="app/hero/hero-detail.component.spec.ts (Override setup)"></code-example>
 
-Notice that `TestBed.configureTestingModule` no longer provides a (fake) `HeroService` because it's [not needed](#spy-stub).
+`TestBed.configureTestingModule`が(偽の)`HeroService`を提供しなくなったことに([不要](#spy-stub)であるため)注目してください。
 
 {@a override-component-method}
 
-#### The _overrideComponent_ method
+#### _overrideComponent_ メソッド
 
-Focus on the `overrideComponent` method.
+`overrideComponent` メソッドに注目してください。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-component-method" header="app/hero/hero-detail.component.spec.ts (overrideComponent)"></code-example>
 
-It takes two arguments: the component type to override (`HeroDetailComponent`) and an override metadata object.
-The [override metadata object](guide/testing-utility-apis#metadata-override-object) is a generic defined as follows:
+これは2つの引数を受け取ります。オーバーライドするコンポーネントタイプ(`HeroDetailComponent`)とオーバーライドメタデータオブジェクトです。
+[オーバーライドメタデータオブジェクト](#metadata-override-object)は、次のように定義されるジェネリック型のオブジェクトです:
 
 <code-example language="javascript">
   type MetadataOverride&lt;T&gt; = {
@@ -1774,10 +1751,10 @@ The [override metadata object](guide/testing-utility-apis#metadata-override-obje
   };
 </code-example>
 
-A metadata override object can either add-and-remove elements in metadata properties or completely reset those properties.
-This example resets the component's `providers` metadata.
+メタデータオーバーライドオブジェクトは、メタデータプロパティに要素を追加または削除するか、またはこれらのプロパティを完全にリセットすることができます。
+この例では、コンポーネントの`providers`のメタデータをリセットします。
 
-The type parameter, `T`, is the kind of metadata you'd pass to the `@Component` decorator:
+型パラメータ`T`は`@Component`デコレーターに渡すメタデータの種類です
 
 <code-example language="javascript">
   selector?: string;
@@ -1789,38 +1766,38 @@ The type parameter, `T`, is the kind of metadata you'd pass to the `@Component` 
 
 {@a spy-stub}
 
-#### Provide a _spy stub_ (_HeroDetailServiceSpy_)
+#### _スパイスタブ_を提供する (_HeroDetailServiceSpy_)
 
-This example completely replaces the component's `providers` array with a new array containing a `HeroDetailServiceSpy`.
+この例では、コンポーネントの`providers`配列を、`HeroDetailServiceSpy`を含む新しい配列で完全に置き換えます。
 
-The `HeroDetailServiceSpy` is a stubbed version of the real `HeroDetailService`
-that fakes all necessary features of that service.
-It neither injects nor delegates to the lower level `HeroService`
-so there's no need to provide a test double for that.
+`HeroDetailServiceSpy`は、そのサービスのすべての必要な機能を偽装する
+実際の`HeroDetailService`のスタブバージョンです。
+下位レベルの`HeroService`に注入も委譲もしないので、
+そのためのテストダブルを用意する必要はありません。
 
-The related `HeroDetailComponent` tests will assert that methods of the `HeroDetailService`
-were called by spying on the service methods.
-Accordingly, the stub implements its methods as spies:
+関連する`HeroDetailComponent`テストは、
+`HeroDetailService`のメソッドがサービスメソッドをスパイすることによって呼び出されたことをアサートします。
+したがって、スタブはそのメソッドをスパイとして実装します:
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="hds-spy" header="app/hero/hero-detail.component.spec.ts (HeroDetailServiceSpy)"></code-example>
 
 {@a override-tests}
 
-#### The override tests
+#### テストを上書きする
 
-Now the tests can control the component's hero directly by manipulating the spy-stub's `testHero`
-and confirm that service methods were called.
+テストでは、スパイスタブの`testHero`を操作してコンポーネントのヒーローを直接制御し、
+サービスメソッドが呼び出されたことを確認できます。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="override-tests" header="app/hero/hero-detail.component.spec.ts (override tests)"></code-example>
 
 {@a more-overrides}
 
-#### More overrides
+#### さらに上書きする
 
-The `TestBed.overrideComponent` method can be called multiple times for the same or different components.
-The `TestBed` offers similar `overrideDirective`, `overrideModule`, and `overridePipe` methods
-for digging into and replacing parts of these other classes.
+`TestBed.overrideComponent`メソッドは、同じコンポーネントまたは異なるコンポーネントに対して複数回呼び出すことができます。
+`TestBed`は同様の、他のクラスの部分を掘り下げて置き換えるための`overrideDirective`、`overrideModule`、
+および`overridePipe`メソッドを提供します。
 
-Explore the options and combinations on your own.
+あなた自身のオプションと組み合わせを探しましょう。
 
 <hr>

@@ -1,93 +1,93 @@
-# Angular Roadmap
+# Angularのロードマップ
 
-Angular receives a large number of feature requests, both from inside Google and from the broader open-source community. At the same time, our list of projects contains plenty of maintenance tasks, code refactorings, potential performance improvements, and so on. We bring together representatives from developer relations, product management, and engineering to prioritize this list. As new projects come into the queue, we regularly position them based on relative priority to other projects. As work gets done, projects will move up in the queue.
+Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。 同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 私たちは、Dev Relや製品管理、エンジニアリングの代表者を集めて、このリストに優先順位を付けます。 新しいプロジェクトがキューに入ると、他のプロジェクトに対する相対的な優先順位に基づいて、それらを定期的に配置します。 作業が完了すると、プロジェクトはキューの上位に移動します。
 
-The projects below are not associated with a particular Angular version. We'll release them on completion, and they will be part of a specific version based on our release schedule, following semantic versioning. For example, features are released in the next minor after they are complete, or the next major if they include breaking changes.
+以下のプロジェクトは、特定のAngularバージョンに関連付けられていません。 完了したときにリリースされ、セマンティックバージョニングに従って、リリーススケジュールに基づいて特定のバージョンの一部になります。 たとえば、機能追加は完成後に次のマイナーでリリースされますが、破壊的な変更が含まれている場合は次のメジャーでリリースされます。
 
-## In Progress
+## 進行中
 
-### Operation Bye Bye Backlog (aka Operation Byelog)
+### Bye Bye Backlog 作戦(別名 Operation Byelog)
 
-We are actively investing up to 50% of our engineering capacity on triaging issues and PRs until we have a clear understanding of broader community needs. After that, we'll commit up to 20% of our engineering capacity to keep up with new submissions promptly.
+コミュニティの幅広いニーズを明確に理解するまで、IssueとPRのトリアージにエンジニアリング能力の最大50％を積極的に投資しています。 その後、エンジニアリング能力の最大20％をコミットして、新しく投稿されたものに迅速に対応します。
 
-### Support TypeScript 4.0
+### TypeScript 4.0 サポート
 
-We're working on adding support for TypeScript 4.0 ahead of its stable release. We always want Angular to stay up-to-date with the latest version of TypeScript so that developers get the best the language has to offer.
+TypeScript 4.0のサポートを、安定版リリースより前に追加する作業を行っています。 私たちは常に、Angularが最新バージョンのTypeScriptを使用して最新の状態を保ち、開発者が言語で提供される最高のものを入手できるようにしたいと考えています。
 
-### Update our e2e testing strategy
+### E2Eテスト戦略のアップデート
 
-To ensure we provide a future-proof e2e testing strategy, we want to evaluate the state of Protractor, community innovations, e2e best practices, and explore novel opportunities.
+将来を見据えたe2eテスト戦略を確実に提供するために、Protractorの現状、コミュニティによるイノベーション、e2eのベストプラクティスを評価し、新しい可能性を模索したいと考えています。
 
-### Angular libraries use Ivy
+### Ivyを利用したAngularライブラリ
 
-We are investing in the design and development of Ivy library distribution plan, which will include an update of the library package format to use Ivy compilation, unblock the deprecation of the View Engine library format, and [ngcc](guide/glossary#ngcc).
+Ivyライブラリの配布計画の設計と開発に投資しています。これには、Ivyコンパイルを使用するためのライブラリパッケージ形式の更新、View Engineライブラリ形式の非推奨のブロック解除、および[ngcc](guide/glossary#ngcc)が含まれます。 。
 
-### Evaluate future RxJS changes (v7 and beyond)
+### 将来のRxJSの変更の評価 （v7とそれ以降）
 
-We want to ensure Angular developers are taking advantage of the latest capabilities of RxJS and have a smooth transition to the next major releases of the framework. For this purpose, we will explore and document the scope of the changes in v7 and beyond of RxJS and plan an update strategy.
+Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
 
-### Angular language service uses Ivy
+### Ivyを利用したAngular Language Service
 
-Today the language service still uses the View Engine compiler and type checking, even for Ivy applications. We want to use the Ivy template parser and improved type checking for the Angular Language service to match application behavior. This migration will also be a step towards unblocking the removal of View Engine, which will simplify Angular, reduce the npm package size, and improve the framework's maintainability.
+現在、Language Serviceは、Ivyアプリケーションの場合でも、View Engineのコンパイラと型チェックを引き続き使用しています。 IvyテンプレートパーサーとAngular Languageサービスの改善された型チェックを使用して、アプリケーションの動作を一致させたいと考えています。 この移行は、View Engineの削除のブロックを解除するためのステップにもなります。これにより、Angularが簡素化され、npmパッケージサイズが削減され、フレームワークの保守性が向上します。
 
-### Expand component harnesses best practices
+### コンポーネントハーネスのベストプラクティスの拡大
 
-Angular CDK introduced the concept of [component test harnesses](https://material.angular.io/cdk/test-harnesses) to Angular in version 9. Test harnesses allow component authors to create supported APIs for testing component interactions. We're continuing to improve this harness infrastructure and clarifying the best practices around using harnesses. We're also working to drive more harness adoption inside of Google.
+Angular CDKは、バージョン9で[コンポーネントテストハーネス](https://material.angular.io/cdk/test-harnesses)の概念をAngularに導入しました。テストハーネスを使用すると、コンポーネントの作成者はコンポーネントの相互作用をテストするためのサポートされているAPIを作成できます。私たちはこのハーネスインフラストラクチャを改善し続け、ハーネスの使用に関するベストプラクティスを明確化しています。また、Google内でのハーネスの採用を促進するためにも取り組んでいます。
 
-### Support native [Trusted Types](https://web.dev/trusted-types/) in Angular
+### Angularにおける ネイティブ [Trusted Types](https://web.dev/trusted-types/) のサポート
 
-In collaboration with Google's security team, we're adding support for the new Trusted Types API. This web platform API will help developers build more secure web applications.
+Googleのセキュリティチームと協力して、新しいTrusted Types APIのサポートを追加します。 このWebプラットフォームAPIは、開発者がより安全なWebアプリケーションを構築するのに役立ちます。
 
-### Integrate [MDC Web](https://material.io/develop/web/) into Angular Material
+### [MDC Web](https://material.io/develop/web/)の Angular Material への統合
 
-MDC Web is a library created by Google's Material Design team that provides reusable primitives for building Material Design components. The Angular team is incorporating these primitives into Angular Material. Using MDC Web will align Angular Material more closely with the Material Design specification, expand accessibility, overall improve component quality, and improve our team's velocity.
+MDC Webは、GoogleのMaterial Designチームが作成したライブラリで、Material Designコンポーネントを構築するための再利用可能なプリミティブを提供します。 AngularチームはこれらのプリミティブをAngular Materialに組み込んでいます。 MDC Webを使用すると、Angular MaterialがMaterial Designの仕様により密接に連携し、アクセシビリティが拡張され、全体的にコンポーネントの品質が向上し、チームの速度が向上します。
 
-### Offer Google engineers better integration with Angular and Google's internal server stack
+### GoogleエンジニアにAngularおよびGoogleの内部サーバースタックとのより良い統合を提供する
 
-This is an internal project to add support for Angular front-ends to Google's internal integrated server stack.
+これは、Googleの内部統合サーバースタックにAngularフロントエンドのサポートを追加するための内部プロジェクトです。
 
-### Angular versioning & branching
+### Angularバージョニングとブランチング
 
-We want to consolidate release management tooling between Angular's multiple GitHub repositories ([angular/angular](https://github.com/angular/angular), [angular/angular-cli](https://github.com/angular/angular-cli), and [angular/components](https://github.com/angular/components)). This effort will allow us to reuse infrastructure, unify and simplify processes, and improve our release process's reliability.
+Angularの複数のGitHubリポジトリ（[angular/angular](https://github.com/angular/angular)、[angular/angular-cli](https://github.com/angular/angular-cli)、および[angular/components](https://github.com/angular/components)）間でリリース管理ツールを統合したいと考えています。この取り組みにより、インフラストラクチャの再利用、プロセスの統一と簡素化、リリースプロセスの信頼性の向上が可能になります。
 
-## Future
+## 将来
 
-### Refresh introductory documentation
+### 入門ドキュメントの更新
 
-We will redefine the user learning journeys and refresh the introductory documentation. We will clearly state the benefits of Angular, how to explore its capabilities, and provide guidance so developers can become proficient with the framework in as little time as possible.
+ユーザーの学習ジャーニーを再定義し、入門ドキュメントを更新します。 Angularの利点とその機能を探る方法を明確に述べ、開発者が可能な限り短時間でフレームワークに習熟できるようにガイダンスを提供します。
 
-### Strict typing for `@angular/forms`
+### `@angular/forms` の厳密な型付け
 
-We will work on implementing stricter type checking for reactive forms. This way, we will allow developers to catch more issues during development time, enable better text editor and IDE support, and improve the type checking for reactive forms.
+リアクティブフォームのより厳密な型チェックの実装に取り組みます。 このようにして、開発者は開発中により多くの問題をキャッチし、テキストエディターとIDEへのより優れたサポートを有効にし、リアクティブフォームの型チェックを改善できます。
 
-### webpack 5 in the Angular CLI
+### Angular CLI の webpack 5対応
 
-Webpack 5 brings a lot of build speed and bundle size improvements. To make them available for Angular developers, we will invest in migrating Angular CLI from using deprecated and removed webpack APIs.
+Webpack 5では、ビルド速度とバンドルサイズが大幅に改善されています。それらをAngular開発者が利用できるようにするために、非推奨または削除されたwebpack APIの使用から移行することに投資します。
 
-### Commit message standardization
+### コミットメッセージの標準化
 
-We want to unify commit message requirements and conformance across Angular repositories ([angular/angular](https://github.com/angular/angular), [angular/components](https://github.com/angular/components), [angular/angular-cli](https://github.com/angular/angular-cli)) to bring consistency to our development process and reuse infrastructure tooling.
+開発プロセスに一貫性を持たせ、インフラストラクチャツールを再利用するために、Angularリポジトリ全体（[angular/angular](https://github.com/angular/angular)、[angular/components](https://github.com/angular/components)、および[angular/angular-cli](https://github.com/angular/angular-cli)）でコミットメッセージの要件と準拠を統一したいと考えています。
 
-### Optional Zone.js
+### オプショナル Zone.js
 
-We are going to design and implement a plan to make Zone.js optional from Angular applications. This way, we will simplify the framework, improve debugging, and reduce application bundle size. Additionally, this will allow us to take advantage of native async/await syntax, which currently Zone.js does not support.
+Zone.jsをAngularアプリケーションからオプショナルにするための計画を設計して実装します。これにより、フレームワークを簡素化し、デバッグを改善し、アプリケーションバンドルのサイズを縮小します。さらに、これにより、現在Zone.jsでサポートされていないネイティブのasync/await構文を利用できるようになります。
 
-### Remove legacy [View Engine](guide/ivy)
+### レガシー[View Engine](guide/ivy)の削除
 
-After the transition of all our internal tooling to Ivy has completed, we want to remove the legacy View Engine for smaller Angular conceptual overhead, smaller package size, lower maintenance cost, and lower complexity of the codebase.
+すべての内部ツールのIvyへの移行が完了したら、レガシーView Engineを削除して、Angularの概念的オーバーヘッドを小さくし、パッケージサイズを小さくして、メンテナンスコストを削減し、コードベースの複雑さを減らします。
 
 ### Angular DevTools
 
-We’ll be working on development tooling for Angular that will provide utilities for debugging and performance profiling. This project aims to help developers understand the component structure and the change detection in an Angular application.
+デバッグとパフォーマンスプロファイリング用のユーティリティを提供するAngularの開発ツールに取り組む予定です。このプロジェクトは、開発者がコンポーネントの構造とAngularアプリケーションでの変更検出を理解できるようにすることを目的としています。
 
-### Optional NgModules
+### オプショナル NgModule
 
-To simplify the Angular mental model and learning journey, we’ll be working on making NgModules optional. This work will allow developers to develop standalone components and implement an alternative API for declaring the component’s compilation scope.
+Angularメンタルモデルと学習経路を簡略化するために、NgModulesをオプションにすることに取り組みます。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。
 
-### Ergonomic component level code-splitting APIs
+### 使いやすいコンポーネントレベルのコード分割API
 
-A common problem of web applications is their slow initial load time. A way to improve it is to apply more granular code-splitting on a component level. To encourage this practice, we’ll be working on more ergonomic code-splitting APIs.
+Webアプリケーションの一般的な問題は、初期ロード時間が遅いことです。それを改善するひとつの方法は、コンポーネントレベルでより細かいコード分割を適用することです。このプラクティスを促進するために、より使いやすいコード分割APIに取り組みます。
 
-### Migration to ESLint
+### ESLintへの移行
 
-With the deprecation of TSLint we will be moving to ESLint. As part of the process, we will work on ensuring backward compatibility with our current recommended TSLint configuration, implement a migration strategy for existing Angular applications and introduce new tooling to the Angular CLI toolchain.
+TSLintの廃止により、ESLintに移行します。プロセスの一部として、現在推奨されているTSLint設定との下位互換性の確保に取り組み、既存のAngularアプリケーションの移行戦略を実装し、Angular CLIツールチェーンに新しいツールを導入します。

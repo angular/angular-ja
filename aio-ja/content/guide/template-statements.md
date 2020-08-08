@@ -1,7 +1,7 @@
-# Template statements
+# テンプレート文
 
-A template **statement** responds to an **event** raised by a binding target
-such as an element, component, or directive.
+テンプレート **文**
+は、要素、コンポーネント、ディレクティブなどのバインディングターゲットによって発生した **イベント** に応答します。
 
 <div class="alert is-helpful">
 
@@ -10,56 +10,57 @@ the syntax and code snippets in this guide.
 
 </div>
 
-The following template statement appears in quotes to the right of the `=`&nbsp;symbol as in `(event)="statement"`.
+テンプレート文は [イベントバインディング](guide/template-syntax#event-binding) セクションでも触れますが、
+`(event)="statement"` のように `=` 記号の右側に引用符で囲まれた形で現れます。
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html"></code-example>
 
-A template statement *has a side effect*.
-That's the whole point of an event.
-It's how you update application state from user action.
+テンプレート文には *副作用があります*。
+それがイベントのポイントです。
+これは、ユーザーの操作からアプリケーションの状態を更新する方法です。
 
-Responding to events is the other side of Angular's "unidirectional data flow".
-You're free to change anything, anywhere, during this turn of the event loop.
+イベントへの対応は、Angular の「単方向データフロー」の反対側です。
+あなたは、このイベントループのターンの間に、何でも、どこでも自由に変更できます。
 
-Like template expressions, template *statements* use a language that looks like JavaScript.
-The template statement parser differs from the template expression parser and
-specifically supports both basic assignment (`=`) and chaining expressions with <code>;</code>.
+テンプレート式と同様に、テンプレート *文* は JavaScript のような言語を使用します。
+テンプレート文パーサーはテンプレート式パーサーとは異なり、
+特に基本的な代入(`=`)と <code>;</code>による連鎖式の両方をサポートします。
 
-However, certain JavaScript and template expression syntax is not allowed:
+ただし、特定の JavaScriptとテンプレート式の構文は許可されていません:
 
 * <code>new</code>
-* increment and decrement operators, `++` and `--`
-* operator assignment, such as `+=` and `-=`
-* the bitwise operators, such as `|` and `&`
-* the [pipe operator](guide/template-expression-operators#pipe)
+* `++` や `--` などの、インクリメント、デクリメント演算子
+* `+=` and `-=` などの代入演算子
+* ビット演算子 `|` や `&`
+* [パイプ演算子](guide/template-syntax#pipe)
 
-## Statement context
+## 文のコンテキスト
 
-As with expressions, statements can refer only to what's in the statement context
-such as an event handling method of the component instance.
+式と同様に、文はコンポーネントインスタンスのイベント処理メソッドなど、
+文のコンテキスト内にあるものだけを参照できます。
 
-The *statement context* is typically the component instance.
-The *deleteHero* in `(click)="deleteHero()"` is a method of the data-bound component.
+*文* のコンテキストは通常、コンポーネントインスタンスです。
+`(click)="deleteHero()"` 内の *deleteHero* は、データがバインドされたコンポーネントのメソッドです。
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html"></code-example>
 
-The statement context may also refer to properties of the template's own context.
-In the following examples, the template `$event` object,
-a [template input variable](guide/built-in-directives#template-input-variable) (`let hero`),
-and a [template reference variable](guide/template-reference-variables) (`#heroForm`)
-are passed to an event handling method of the component.
+文のコンテキストはテンプレート自身のコンテキストのプロパティも参照します。
+次の例では、テンプレートの `$event` オブジェクト、
+[テンプレート入力変数](guide/template-syntax#template-input-variable) (`let hero`)、
+および [テンプレート参照変数](guide/template-syntax#ref-vars) (`#heroForm`)
+がコンポーネントのイベント処理メソッドに渡されています。
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-var-statement" header="src/app/app.component.html"></code-example>
 
-Template context names take precedence over component context names.
-In `deleteHero(hero)` above, the `hero` is the template input variable,
-not the component's `hero` property.
+テンプレートコンテキストの名前はコンポーネントコンテキストの名前よりも優先されます。
+上記の `deleteHero(hero)` では、
+`hero` はテンプレート入力変数であり、コンポーネントの `hero` プロパティではありません。
 
-## Statement guidelines
+## 文のガイドライン
 
-Template statements cannot refer to anything in the global namespace. They
-can't refer to `window` or `document`.
-They can't call `console.log` or `Math.max`.
+テンプレート文は、グローバル名前空間内のものを参照できません。
+`window` や `document` を参照することはできません。
+`console.log` や `Math.max` を呼び出すことはできません。
 
-As with expressions, avoid writing complex template statements.
-A method call or simple property assignment should be the norm.
+式と同様に、複雑なテンプレート文を書かないでください。
+メソッド呼び出しまたは単純なプロパティ割り当てが一般的です。

@@ -1,7 +1,7 @@
-# Template reference variables (`#var`)
+# テンプレート参照変数 (`#var`)
 
-A **template reference variable** is often a reference to a DOM element within a template.
-It can also refer to a directive (which contains a component), an element, [TemplateRef](api/core/TemplateRef), or a <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" title="MDN: Web Components">web component</a>.
+**テンプレート参照変数**は、テンプレートから DOM 要素を参照するために使うことがあります。
+他にも、ディレクティブ（コンポーネントも含む）、要素、[TemplateRef](api/core/TemplateRef)、<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" title="MDN: Web Components">web components</a> を参照することができます。
 
 <div class="alert is-helpful">
 
@@ -9,60 +9,53 @@ See the <live-example></live-example> for a working example containing the code 
 
 </div>
 
-Use the hash symbol (#) to declare a reference variable.
-The following reference variable, `#phone`, declares a `phone` variable on an `<input>` element.
+ハッシュ記号 (#) を使うことで参照変数を宣言できます。
+次の参照変数 `#phone` は、`<input>` を参照する `phone` 変数を宣言します。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-var" header="src/app/app.component.html"></code-example>
 
-You can refer to a template reference variable anywhere in the component's template.
-Here, a `<button>` further down the template refers to the `phone` variable.
+テンプレート参照変数は、コンポーネントのテンプレートのどこからでも参照することができます。
+ここでは、テンプレートの下の方に出てくる `<button>` が `phone` 変数を参照しています。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-phone" header="src/app/app.component.html"></code-example>
 
-Angular assigns each template reference variable a value based on where you declare the variable:
+<h3 class="no-toc">参照変数がその値を得る方法</h3> {@a how-a-reference-variable-gets-its-value}
 
-* If you declare the variable on a component, the variable refers to the component instance.
-* If you declare the variable on a standard HTML tag, the variable refers to the element.
-* If you declare the variable on an `<ng-template>` element, the variable refers to a `TemplateRef` instance, which represents the template.
-* If the variable specifies a name on the right-hand side, such as `#var="ngModel"`, the variable refers to the directive or component on the element with a matching `exportAs` name.
+ほとんどの場合、Angular は参照変数の値を、それが宣言された要素とします。
+前の例では `phone` は電話番号の `<input>` を参照しています。
+ボタンのクリックハンドラーは、`<input>` の値をコンポーネントの `callPhone()` メソッドに渡します。
 
-<h3 class="no-toc">How a reference variable gets its value</h3>
-
-In most cases, Angular sets the reference variable's value to the element on which it is declared.
-In the previous example, `phone` refers to the phone number `<input>`.
-The button's click handler passes the `<input>` value to the component's `callPhone()` method.
-
-The `NgForm` directive can change that behavior and set the value to something else. In the following example, the template reference variable, `itemForm`, appears three times separated
-by HTML.
+`NgForm` ディレクティブはこの動作を変更することができ、値を少し違ったものに設定します。次の例では、テンプレート参照変数 `itemForm` は
+HTML の中でバラバラに3回出現します。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ngForm" header="src/app/hero-form.component.html"></code-example>
 
-The reference value of itemForm, without the ngForm attribute value, would be
-the [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement).
-There is, however, a difference between a Component and a Directive in that a `Component`
-will be referenced without specifying the attribute value, and a `Directive` will not
-change the implicit reference (that is, the element).
+属性の値が ngForm でなければ、itemForm が参照する値は
+[HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) となります。
+ただし、コンポーネントとディレクティブには違いがあります。
+`Component` は属性の値がなくても参照されるのに対して、
+`Directive` は暗黙の参照（つまり要素）を変更しません。
 
 
 
-However, with `NgForm`, `itemForm` is a reference to the [NgForm](api/forms/NgForm "API: NgForm")
-directive with the ability to track the value and validity of every control in the form.
+しかしここでは `NgForm` があるので、`itemForm` は [NgForm](api/forms/NgForm "API: NgForm")
+ディレクティブへの参照となり、フォーム内のすべてのコントロールの値や妥当性を追うことができます。
 
-The native `<form>` element doesn't have a `form` property, but the `NgForm` directive does, which allows disabling the submit button
-if the `itemForm.form.valid` is invalid and passing the entire form control tree
-to the parent component's `onSubmit()` method.
+ネイティブの `<form>` 要素には `form` というプロパティはありませんが、`NgForm` ディレクティブにはあり、
+`itemForm.form.valid` が無効なら送信ボタンを無効化したり、
+親コンポーネントの `onSubmit()` メソッドにフォームコントロールツリー全体を渡したりできます。
 
-<h3 class="no-toc">Template reference variable considerations</h3>
+<h3 class="no-toc">テンプレート参照変数の考慮事項</h3> {@a template-reference-variable-considerations}
 
-A template _reference_ variable (`#phone`) is not the same as a template _input_ variable (`let phone`) such as in an [`*ngFor`](guide/built-in-directives#template-input-variable).
-See [_Structural directives_](guide/structural-directives#template-input-variable) for more information.
+テンプレート _参照_ 変数 (`#phone`) は、[`*ngFor`](guide/template-syntax#template-input-variable) に出てくるようなテンプレート _入力_ 変数 (`let phone`) とは異なります。
+詳しくは [_構造ディレクティブ_](guide/structural-directives#template-input-variable) をご覧ください。
 
-The scope of a reference variable is the entire template. So, don't define the same variable name more than once in the same template as the runtime value will be unpredictable.
+参照変数のスコープは、テンプレート全体です。実行時の値が予測不可能となるため、同じテンプレート内で同じ名前の変数を2回以上宣言しないでください。
 
-### Alternative syntax
+### 別の構文 {@a alternative-syntax}
 
-You can use the `ref-` prefix alternative to `#`.
-This example declares the `fax` variable as `ref-fax` instead of `#fax`.
+`#` の代わりに、接頭辞 `ref-` を使うこともできます。
+この例では `fax` 変数を `#fax` ではなく `ref-fax` で宣言しています。
 
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-fax" header="src/app/app.component.html"></code-example>

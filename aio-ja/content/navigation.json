@@ -226,67 +226,79 @@
                   "url": "guide/template-syntax",
                   "title": "イントロダクション",
                   "tooltip": "データバインディングを使用してデータを表示し、ユーザーイベントを利用するテンプレートの作成方法を学びます。",
-                  "translated": true
+                  "translated": false
                 },
                 {
                   "url": "guide/interpolation",
-                  "title": "Interpolation",
-                  "tooltip": "An introduction to interpolation and expressions in HTML."
+                  "title": "補間",
+                  "tooltip": "An introduction to interpolation and expressions in HTML.",
+                  "translated": true
                 },
                 {
                   "url": "guide/template-statements",
-                  "title": "Template statements",
-                  "tooltip": "Introductory guide to statements in templates that respond to events that components, directives, or elements raise."
+                  "title": "テンプレート文",
+                  "tooltip": "Introductory guide to statements in templates that respond to events that components, directives, or elements raise.",
+                  "translated": true
                 },
                 {
                   "url": "guide/binding-syntax",
-                  "title": "Binding syntax",
-                  "tooltip": "Introductory guide to coordinating app values."
+                  "title": "バインディング構文",
+                  "tooltip": "Introductory guide to coordinating app values.",
+                  "translated": true
                 },
                 {
                   "url": "guide/property-binding",
-                  "title": "Property binding",
-                  "tooltip": "Introductory guide to setting element or input properties."
+                  "title": "プロパティバインディング",
+                  "tooltip": "Introductory guide to setting element or input properties.",
+                  "translated": true
                 },
                 {
                   "url": "guide/attribute-binding",
-                  "title": "Attribute, class, and style bindings",
-                  "tooltip": "Introductory guide to setting the value of HTML attributes."
+                  "title": "属性・クラス・スタイルバインディング",
+                  "tooltip": "Introductory guide to setting the value of HTML attributes.",
+                  "translated": true
                 },
                 {
                   "url": "guide/event-binding",
-                  "title": "Event binding",
-                  "tooltip": "Introductory guide to listening for user interaction."
+                  "title": "イベントバインディング",
+                  "tooltip": "Introductory guide to listening for user interaction.",
+                  "translated": true
                 },
                 {
                   "url": "guide/two-way-binding",
-                  "title": "Two-way binding",
-                  "tooltip": "Introductory guide to sharing data between a class and a template."
+                  "title": "双方向バインディング",
+                  "tooltip": "Introductory guide to sharing data between a class and a template.",
+                  "translated": true
                 },
                 {
                   "url": "guide/built-in-directives",
-                  "title": "Built-in directives",
-                  "tooltip": "Introductory guide to some of the most popular built-in directives."
+                  "title": "組み込みディレクティブ",
+                  "tooltip": "Introductory guide to some of the most popular built-in directives.",
+                  "translated": true
                 },
                 {
                   "url": "guide/template-reference-variables",
-                  "title": "Template reference variables",
-                  "tooltip": "Introductory guide to referring to DOM elements within a template."
+                  "title": "テンプレート参照変数",
+                  "tooltip": "Introductory guide to referring to DOM elements within a template.",
+                  "translated": true
                 },
                 {
                   "url": "guide/inputs-outputs",
-                  "title": "Inputs and Outputs",
-                  "tooltip": "Introductory guide to sharing data between parent and child directives or components."
+                  "title": "InputとOutput",
+                  "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
+                  "translated": true
                 },
                 {
                   "url": "guide/template-expression-operators",
-                  "title": "Template expression operators",
-                  "tooltip": "Introductory guide to transforming data, ensuring safe navigation, and guarding against null variables in templates."
+                  "title": "テンプレート式演算子",
+                  "tooltip": "Introductory guide to transforming data, ensuring safe navigation, and guarding against null variables in templates.",
+                  "translated": true
                 },
                 {
                   "url": "guide/svg-in-templates",
-                  "title": "SVG in templates",
-                  "tooltip": "Guide to using SVGs as templates to create interactive graphics."
+                  "title": "テンプレート中のSVG",
+                  "tooltip": "Guide to using SVGs as templates to create interactive graphics.",
+                  "translated": true
                 }
               ]
             },

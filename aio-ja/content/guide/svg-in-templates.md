@@ -1,8 +1,8 @@
-# SVG in templates
+# テンプレート中の SVG
 
-It is possible to use SVG as valid templates in Angular. All of the template syntax below is
-applicable to both SVG and HTML. Learn more in the SVG [1.1](https://www.w3.org/TR/SVG11/) and
-[2.0](https://www.w3.org/TR/SVG2/) specifications.
+Angular では SVG を有効なテンプレートとして使うことができます。次に示すすべてのテンプレート構文は、
+SVG と HTML の両方に適用できます。詳しくは SVG [1.1](https://www.w3.org/TR/SVG11/) と
+[2.0](https://www.w3.org/TR/SVG2/) の仕様をご覧ください。
 
 <div class="alert is-helpful">
 
@@ -10,18 +10,18 @@ See the <live-example name="template-syntax"></live-example> for a working examp
 
 </div>
 
-Why would you use SVG as template, instead of simply adding it as image to your application?
+なぜ SVG を画像としてアプリケーションに追加するのではなく、テンプレートとして使うのでしょうか？
 
-When you use an SVG as the template, you are able to use directives and bindings just like with HTML
-templates. This means that you will be able to dynamically generate interactive graphics.
+SVG をテンプレートとして使うことで、HTML のときと同じようにディレクティブやバインディングを使うことができます。
+つまりインタラクティブな画像を動的に生成することができます。
 
-Refer to the sample code snippet below for a syntax example:
+構文の例として次のコードスニペットをご覧ください:
 
 <code-example path="template-syntax/src/app/svg.component.ts" header="src/app/svg.component.ts"></code-example>
 
-Add the following code to your `svg.component.svg` file:
+次のコードを `svg.component.svg` ファイルとして追加します:
 
 <code-example path="template-syntax/src/app/svg.component.svg" header="src/app/svg.component.svg"></code-example>
 
-Here you can see the use of a `click()` event binding and the property binding syntax
-(`[attr.fill]="fillColor"`).
+`click()` イベントバインディングと、プロパティバインディングの構文 (`[attr.fill]="fillColor"`)
+を使っている様子を確認できます。

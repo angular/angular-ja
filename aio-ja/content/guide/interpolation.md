@@ -1,8 +1,8 @@
-# Interpolation and template expressions
+# 補間とテンプレート式
 
-Interpolation allows you to incorporate calculated strings into the text
-between HTML element tags and within attribute assignments. Template
-expressions are what you use to calculate those strings.
+補間を使用すると、計算された文字列を HTML 要素タグ間および属性割り当て内のテキストに組み込むことができます。
+テンプレート式は、
+これらの文字列を計算するために使用するものです。
 
 <div class="alert is-helpful">
 
@@ -11,165 +11,164 @@ the syntax and code snippets in this guide.
 
 </div>
 
-## Interpolation `{{...}}`
+## 補間 `{{...}}`
 
-Interpolation refers to embedding expressions into marked up text.
-By default, interpolation uses as its delimiter the double curly braces, `{{` and `}}`.
+補間では、マークアップされたテキストに埋め込まれた式を参照します。
+デフォルトでは、補間は二重中括弧 `{{` と `}}` を区切り文字として使います。
 
-In the following snippet, `{{ currentCustomer }}` is an example of interpolation.
+次のスニペットでは、`{{ currentCustomer }}` が補間の例です。
 
 <code-example path="interpolation/src/app/app.component.html" region="interpolation-example1" header="src/app/app.component.html"></code-example>
 
-The text between the braces is often the name of a component
-property. Angular replaces that name with the
-string value of the corresponding component property.
+中括弧間のテキストは多くの場合、
+コンポーネントのプロパティ名です。
+Angular は、その名前を対応するコンポーネントプロパティの文字列値に置き換えます。
 
 <code-example path="interpolation/src/app/app.component.html" region="component-property" header="src/app/app.component.html"></code-example>
 
-In the example above, Angular evaluates the `title` and `itemImageUrl` properties
-and fills in the blanks, first displaying some title text and then an image.
+上記の例では、Angular は `title` プロパティと `itemImageUrl`
+プロパティを評価して空白を埋めます。最初にタイトルテキストを表示し、次に画像を表示します。
 
-More generally, the text between the braces is a **template expression**
-that Angular first **evaluates** and then **converts to a string**.
-The following interpolation illustrates the point by adding two numbers:
+より一般的には、中括弧間のテキストは、
+Angular が最初に **評価** してから **文字列に変換** する **テンプレート式** です。
+次の補間の例では、2つの数を加算していることがポイントです:
 
 <code-example path="interpolation/src/app/app.component.html" region="convert-string" header="src/app/app.component.html"></code-example>
 
-The expression can invoke methods of the host component such as `getVal()` in
-the following example:
+式では次の例のように `getVal()`
+などのホストコンポーネントのメソッドを呼び出すことができます:
 
 <code-example path="interpolation/src/app/app.component.html" region="invoke-method" header="src/app/app.component.html"></code-example>
 
-Angular evaluates all expressions in double curly braces,
-converts the expression results to strings, and links them with neighboring literal strings. Finally,
-it assigns this composite interpolated result to an **element or directive property**.
+Angular は、二重中括弧内のすべての式を評価し、式の結果を文字列に変換して、
+それらを隣接するリテラル文字列とリンクします。
+最後に、この合成補間の結果を **要素またはディレクティブのプロパティ** に割り当てます。
 
-You appear to be inserting the result between element tags and assigning it to attributes.
-However, interpolation is a special syntax that Angular converts into a *property binding*.
+要素タグ間にその結果を挿入したり、属性に割り当てるように表示します。
+ただし、補間は Angular が *プロパティバインディング* に変換する特別な構文です。
 
 <div class="alert is-helpful">
 
-If you'd like to use something other than `{{` and `}}`, you can
-configure the interpolation delimiter via the
+`{{` および `}}` 以外のものを使用する場合は、
+`Component` メタデータの
 [interpolation](api/core/Component#interpolation)
-option in the `Component` metadata.
+オプションを使用して補間の区切り文字を設定できます。
 
 </div>
 
-## Template expressions
+## テンプレート式 {@a template-expressions}
 
-A template **expression** produces a value and appears within the double
-curly braces, `{{ }}`.
-Angular executes the expression and assigns it to a property of a binding target;
-the target could be an HTML element, a component, or a directive.
+テンプレート **式** は値を生成し、二重中括弧
+`{{ }}` 内に表示します。
+Angularは 式を実行し、それをバインディングターゲットのプロパティに割り当てます。
+ターゲットは HTML 要素、コンポーネント、またはディレクティブです。
 
-The interpolation braces in `{{1 + 1}}` surround the template expression `1 + 1`.
-In the property binding,
-a template expression appears in quotes to the right of the&nbsp;`=` symbol as in `[property]="expression"`.
+`{{1 + 1}}` 内の補間中括弧はテンプレート式 `1 + 1` を囲みます。
+プロパティバインディングでは、`[property]="expression"`
+のように、テンプレート式は `=` 記号の右側の引用符で囲まれます。
 
-In terms of syntax, template expressions are similar to JavaScript.
-Many JavaScript expressions are legal template expressions, with a few exceptions.
+構文に関しては、テンプレート式は JavaScript に似ています。
+いくつかの例外を除き、多くの JavaScript 式は妥当なテンプレート式です。
 
-You can't use JavaScript expressions that have or promote side effects,
-including:
+次のような、副作用をもつ、
+または促進する JavaScript 式は使用できません:
 
-* Assignments (`=`, `+=`, `-=`, `...`)
-* Operators such as `new`, `typeof`, `instanceof`, etc.
-* Chaining expressions with <code>;</code> or <code>,</code>
-* The increment and decrement operators `++` and `--`
-* Some of the ES2015+ operators
+* 代入（`=`、`+=`、`-=`、`...`）
+* `new`、`typeof`、`instanceof` などの演算子
+* <code>;</code> や <code>,</code> で式をつなげる
+* `++` や `--` などのインクリメントおよびデクリメント演算子
+* いくつかの ES2015+ 演算子
 
-Other notable differences from JavaScript syntax include:
+その他の JavaScript 構文との注目すべき違いは次のとおりです。
 
-* No support for the bitwise operators such as `|` and `&`
-* New [template expression operators](guide/template-expression-operators), such as `|`, `?.` and `!`
+* `|` や `&` などのビット演算子はサポートされていません
+* `|`、`?.` や `!` などの新しい[テンプレート式演算子](guide/template-syntax#expression-operators)を持ちます
 
+## 式のコンテキスト
 
-## Expression context
-
-The *expression context* is typically the _component_ instance.
-In the following snippets, the `recommended` within double curly braces and the
-`itemImageUrl2` in quotes refer to properties of the `AppComponent`.
+*式のコンテキスト* は通常、 _コンポーネント_ インスタンスです。
+次のスニペットでは、二重中括弧内の `recommended` と、引用符内の `itemImageUrl2`
+は `AppComponent` のプロパティを参照しています。
 
 <code-example path="interpolation/src/app/app.component.html" region="component-context" header="src/app/app.component.html"></code-example>
 
-An expression may also refer to properties of the _template's_ context
-such as a template input variable,
-<!-- link to built-in-directives#template-input-variables -->
-`let customer`, or a template reference variable, `#customerInput`.
-<!-- link to guide/template-ref-variables -->
+式は
+テンプレート入力変数 `let customer` <!-- link to built-in-directives#template-input-variables -->
+やテンプレート参照変数 `#customerInput` <!-- link to guide/template-ref-variables -->
+などの _テンプレートが持つ_
+コンテキストのプロパティも参照できます。
 
 <code-example path="interpolation/src/app/app.component.html" region="template-input-variable" header="src/app/app.component.html (template input variable)"></code-example>
 
 <code-example path="interpolation/src/app/app.component.html" region="template-reference-variable" header="src/app/app.component.html (template reference variable)"></code-example>
 
-The context for terms in an expression is a blend of the _template variables_,
-the directive's _context_ object (if it has one), and the component's _members_.
-If you reference a name that belongs to more than one of these namespaces,
-the template variable name takes precedence, followed by a name in the directive's _context_,
-and, lastly, the component's member names.
+式の中にある項のコンテキストは、_テンプレート変数_、ディレクティブの
+_コンテキスト_ オブジェクト(ある場合)、およびコンポーネントの _メンバー_ の組み合わせです。
+これらの名前空間に複数存在する名前を参照する場合は、テンプレート変数名が優先され、
+その後にディレクティブの _コンテキスト_ 内の名前、
+最後にコンポーネントのメンバー名が参照されます。
 
-The previous example presents such a name collision. The component has a `customer`
-property and the `*ngFor` defines a `customer` template variable.
+前の例はそのような名前の衝突を示しています。
+コンポーネントは `customer` プロパティを持ち、`*ngFor` では `customer` テンプレート変数を定義しています。
 
 <div class="alert is-helpful">
 
-The `customer` in `{{customer.name}}`
-refers to the template input variable, not the component's property.
+`{{customer.name}}` 内の `customer` は、コンポーネントのプロパティではなく、
+テンプレート入力変数を参照しています。
 
-Template expressions cannot refer to anything in
-the global namespace, except `undefined`. They can't refer to
-`window` or `document`. Additionally, they
-can't call `console.log()` or `Math.max()` and they are restricted to referencing
-members of the expression context.
+テンプレート式は、`undefined`
+以外のグローバル名前空間内のものを参照できません。
+`window` や `document` を参照することはできません。
+また、`console.log()` や `Math.max()` を呼び出すことはできず、
+式のコンテキストのメンバーを参照することに制限されています。
 
 </div>
 
-## Expression guidelines
+## 式のガイドライン
 
-When using template expressions follow these guidelines:
+テンプレート式を使う場合は、次のガイドラインにしたがってください:
 
-* [Simplicity](guide/interpolation#simplicity)
-* [Quick execution](guide/interpolation#quick-execution)
-* [No visible side effects](guide/interpolation#no-visible-side-effects)
+* [シンプルさ](guide/template-syntax#simplicity)
+* [素早い実行](guide/template-syntax#quick-execution)
+* [副作用を起こさない](guide/template-syntax#no-visible-side-effects)
 
-### Simplicity
+### シンプルさ {@a simplicity}
 
-Although it's possible to write complex template expressions, it's a better
-practice to avoid them.
+複雑なテンプレート式を書くことは可能ですが、
+避けることをお勧めします。
 
-A property name or method call should be the norm, but an occasional Boolean negation, `!`, is OK.
-Otherwise, confine application and business logic to the component,
-where it is easier to develop and test.
+プロパティ名、またはメソッド呼び出しは標準的であるべきです、しかし、必要なときには真偽値の否定 `!` はよいでしょう。
+それ以外の場合、アプリケーションとビジネスロジックをコンポーネントに限定してください。
+そうすることで、コンポーネントの開発とテストが容易になります。
 
-### Quick execution
+### 素早い実行 {@a quick-execution}
 
-Angular executes template expressions after every change detection cycle.
-Change detection cycles are triggered by many asynchronous activities such as
-promise resolutions, HTTP results, timer events, key presses and mouse moves.
+Angular はすべての変更検知サイクルの後にテンプレート式を実行します。
+変更検知サイクルは、Promise の解決、HTTP の結果、タイマーイベント、
+キープレス、マウスの移動などの多くの非同期アクティビティによって引き起こされます。
 
-Expressions should finish quickly or the user experience may drag, especially on slower devices.
-Consider caching values when their computation is expensive.
+特に遅いデバイスでは、式が早く終了しなければユーザー体験が低下する可能性があります。
+計算コストが高い場合、値をキャッシュすることを検討してください。
 
-### No visible side effects
+### 副作用を起こさない {@a no-visible-side-effects}
 
-A template expression should not change any application state other than the value of the
-target property.
+テンプレート式は、
+対象のプロパティの値以外のアプリケーションの状態を変更すべきではありません。
 
-This rule is essential to Angular's "unidirectional data flow" policy.
-You should never worry that reading a component value might change some other displayed value.
-The view should be stable throughout a single rendering pass.
+このルールは Angular の「単方向データフロー」ポリシーに不可欠です。
+コンポーネントの値を読み込むことで、他の表示された値を変えるかもしれないと決して心配すべきではありません。
+ビューは1回のレンダリングパスを通して安定しているべきです。
 
-An [idempotent](https://en.wikipedia.org/wiki/Idempotence) expression is ideal because
-it is free of side effects and improves Angular's change detection performance.
-In Angular terms, an idempotent expression always returns
-*exactly the same thing* until one of its dependent values changes.
+[冪等](https://en.wikipedia.org/wiki/Idempotence)な式は、副作用がなく、
+Angular の変更検知の性能を向上させるので理想的です。
+Angular の項の中で冪等な式は、
+その依存する値の1つが変わるまで、*常にまったく同じもの* を返します。
 
-Dependent values should not change during a single turn of the event loop.
-If an idempotent expression returns a string or a number, it returns the same string or number when called twice in a row. If the expression returns an object, including an `array`, it returns the same object *reference* when called twice in a row.
+依存する値は、イベントループが1回転する間に変化すべきではありません。
+冪等な式が文字列または数値を返す場合、2回続けて呼び出されると同じ文字列または数値を返します。式が `array` を含むオブジェクトを返す場合、2回続けて呼び出されると同じオブジェクト *参照* を返します。
 
 <div class="alert is-helpful">
 
-There is one exception to this behavior that applies to `*ngFor`. `*ngFor` has `trackBy` functionality that can deal with referential inequality of objects when iterating over them. See [*ngFor with `trackBy`](guide/built-in-directives#ngfor-with-trackby) for details.
+`*ngFor` に適用される振る舞いについて1つ例外があります。`*ngFor` には、繰り返しをまたいだときに、参照の違うオブジェクトを処理できる `trackBy` 機能があります。詳しくは、このガイドの [`trackBy` を使用した *ngFor](guide/template-syntax#ngfor-with-trackby) セクションを参照してください。
 
 </div>

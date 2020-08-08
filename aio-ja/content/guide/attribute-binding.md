@@ -1,6 +1,6 @@
-# Attribute, class, and style bindings
+# 属性、クラス、スタイルのバインディング
 
-The template syntax provides specialized one-way bindings for scenarios less well-suited to property binding.
+テンプレート構文には、プロパティ・バインディングがあまり適していないシナリオのために、特殊な単方向バインディングがあります。
 
 <div class="alert is-helpful">
 
@@ -9,85 +9,82 @@ See the <live-example></live-example> for a working example containing the code 
 </div>
 
 
-## Attribute binding
+## 属性バインディング {@a attribute-binding}
 
-Set the value of an attribute directly with an **attribute binding**. This is the only exception to the rule that a binding sets a target property and the only binding that creates and sets an attribute.
+**属性バインディング** を使うと属性の値を直接設定できます。これは、バインディングがターゲット・プロパティを設定するというルールの唯一の例外であり、属性を作成して設定する唯一のバインディングです。
 
-Usually, setting an element property with a [property binding](guide/property-binding)
-is preferable to setting the attribute with a string. However, sometimes
-there is no element property to bind, so attribute binding is the solution.
+通常は、文字列で属性を設定するよりも、
+[プロパティバインディング](guide/template-syntax#property-binding)で要素のプロパティを設定する方が望ましいです。
+しかし、バインドする要素のプロパティがない場合もあるので、属性バインディングが解決策となります。
 
-Consider the [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) and
-[SVG](https://developer.mozilla.org/en-US/docs/Web/SVG). They are purely attributes, don't correspond to element properties, and don't set element properties. In these cases, there are no property targets to bind to.
+[ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) と
+[SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) について考えてみましょう。これらは純粋に属性であり、要素のプロパティに対応しておらず、要素のプロパティを設定していません。これらの場合、バインドするプロパティターゲットはありません。
 
-Attribute binding syntax resembles property binding, but
-instead of an element property between brackets, start with the prefix `attr`,
-followed by a dot (`.`), and the name of the attribute.
-You then set the attribute value, using an expression that resolves to a string,
-or remove the attribute when the expression resolves to `null`.
+属性バインディングの構文はプロパティバインディングに似ていますが、
+括弧で囲まれた要素プロパティの代わりに、接頭辞 `attr` で始まり、
+その後にドット (`.`) と属性名が続きます。
+文字列になる式を使うと属性値を設定でき、
+式が `null` になると属性を削除します。
 
-One of the primary use cases for attribute binding
-is to set ARIA attributes, as in this example:
+属性バインディングの主な使用例のひとつは、
+この例のような ARIA 属性の設定です:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="attrib-binding-aria" header="src/app/app.component.html"></code-example>
 
-{@a colspan}
-
 <div class="alert is-helpful">
 
-#### `colspan` and `colSpan`
+#### `colspan` と `colSpan` {@a colspan-and-colspan}
 
-Notice the difference between the `colspan` attribute and the `colSpan` property.
+`colspan` 属性と `colSpan` プロパティの違いに注意してください。
 
-If you wrote something like this:
+このように書いたとすると:
 
 <code-example language="html">
   &lt;tr&gt;&lt;td colspan="{{1 + 1}}"&gt;Three-Four&lt;/td&gt;&lt;/tr&gt;
 </code-example>
 
-You'd get this error:
+このようなエラーが発生するでしょう:
 
 <code-example language="bash">
   Template parse errors:
   Can't bind to 'colspan' since it isn't a known native property
 </code-example>
 
-As the message says, the `<td>` element does not have a `colspan` property. This is true
-because `colspan` is an attribute&mdash;`colSpan`, with a capital `S`, is the
-corresponding property. Interpolation and property binding can set only *properties*, not attributes.
+メッセージが示すように `<td>` 要素には `colspan` プロパティがありません。
+`colspan` は属性なので、そのとおりです&mdash;対応するプロパティは `S` が大文字の `colSpan` です。
+補間やプロパティバインディングが設定できるのは *プロパティ* だけで、属性はできません。
 
-Instead, you'd use property binding and write it like this:
+代わりに、プロパティバインディングを使ってこのように書くことができます:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
 
 </div>
 
+
 <hr/>
 
-{@a class-binding}
+## クラスバインディング {@a class-binding}
 
-## Class binding
-
-Here's how to set the `class` attribute without a binding in plain HTML:
+素の HTML で、バインディングを使わずに `class` 属性を指定する方法はこうです:
 
 ```html
 <!-- standard class attribute setting -->
 <div class="foo bar">Some text</div>
 ```
 
-You can also add and remove CSS class names from an element's `class` attribute with a **class binding**.
+**クラスバインディング** を使うことで、要素の `class` 属性に CSS クラス名を追加したり削除したりすることができます。
 
-To create a single class binding, start with the prefix `class` followed by a dot (`.`) and the name of the CSS class (for example, `[class.foo]="hasFoo"`).
-Angular adds the class when the bound expression is truthy, and it removes the class when the expression is falsy (with the exception of `undefined`, see [styling delegation](#styling-delegation)).
+クラス単体のバインディングを作るには、接頭辞 `class` にドット (`.`) と CSS クラス名をつけます (たとえば `[class.foo]="hasFoo"`)。
+Angular はバインドされた式が truthy の場合にクラスを追加し、式が falsy の場合にクラスを削除します (`undefined` の場合は例外です。詳しくは[スタイル委譲](#styling-delegation)を見てください)。
 
-To create a binding to multiple classes, use a generic `[class]` binding without the dot (for example, `[class]="classExpr"`).
-The expression can be a space-delimited string of class names, or you can format it as an object with class names as the keys and truthy/falsy expressions as the values.
-With object format, Angular will add a class only if its associated value is truthy.
+複数のクラスのバインディングを作るには、ドットがない汎用的な `[class]` バインディングを使います (たとえば `[class]="classExpr"`)。
+式はクラス名をスペースで区切った文字列にすることもできますし、クラス名をキーにして truthy/falsy 式を値にしたオブジェクト形式にすることもできます。
+オブジェクト形式では、Angular は関連する値が truthy の場合にのみクラスを追加します。
 
-It's important to note that with any object-like expression (`object`, `Array`, `Map`, `Set`, etc), the identity of the object must change for the class list to be updated.
-Updating the property without changing object identity will have no effect.
+注意しなければならないのは、オブジェクトのような表現 (`object`, `Array`, `Map`, `Set` など) では、クラスリストを更新するためにはオブジェクト自身を変更する必要があることです。
+オブジェクト自身を変更せずにプロパティを更新しても何の効果もありません。
 
-If there are multiple bindings to the same class name, conflicts are resolved using [styling precedence](#styling-precedence).
+同じクラス名について複数のバインディングがある場合は[スタイリングの優先順位](#styling-precedence)にしたがって競合が解決されます。
 
 <style>
   td, th {vertical-align: top}
@@ -104,26 +101,26 @@ If there are multiple bindings to the same class name, conflicts are resolved us
   </col>
   <tr>
     <th>
-      Binding Type
+      バインディングタイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Input Type
+      入力タイプ
     </th>
     <th>
-      Example Input Values
+      入力値の例
     </th>
   </tr>
   <tr>
-    <td>Single class binding</td>
+    <td>クラス単体のバインディング</td>
     <td><code>[class.foo]="hasFoo"</code></td>
     <td><code>boolean | undefined | null</code></td>
     <td><code>true</code>, <code>false</code></td>
   </tr>
   <tr>
-    <td rowspan=3>Multi-class binding</td>
+    <td rowspan=3>複数クラスのバインディング</td>
     <td rowspan=3><code>[class]="classExpr"</code></td>
     <td><code>string</code></td>
     <td><code>"my-class-1 my-class-2 my-class-3"</code></td>
@@ -139,43 +136,43 @@ If there are multiple bindings to the same class name, conflicts are resolved us
 </table>
 
 
-The [NgClass](guide/built-in-directives/#ngclass) directive can be used as an alternative to direct `[class]` bindings.
-However, using the above class binding syntax without `NgClass` is preferred because due to improvements in class binding in Angular, `NgClass` no longer provides significant value, and might eventually be removed in the future.
+直接 `[class]` バインディングを使わずに [NgClass](#ngclass) ディレクティブを使うこともできます。
+しかし、Angular のクラスバインディングの改善により、 `NgClass` は重要な価値を提供しなくなり、将来的には削除される可能性があるため、 `NgClass` を使用せずに上記のクラスバインディング構文を使用することが望ましいです。
 
 
 <hr/>
 
-## Style binding
+## スタイルバインディング {@a style-binding}
 
-Here's how to set the `style` attribute without a binding in plain HTML:
+素の HTML で、バインディングを使わずに `style` 属性を指定する方法はこうです:
 
 ```html
 <!-- standard style attribute setting -->
 <div style="color: blue">Some text</div>
 ```
 
-You can also set styles dynamically with a **style binding**.
+**スタイルバインディング** を使うことで動的にスタイルを設定できます。
 
-To create a single style binding, start with the prefix `style` followed by a dot (`.`) and the name of the CSS style property (for example, `[style.width]="width"`).
-The property will be set to the value of the bound expression, which is normally a string.
-Optionally, you can add a unit extension like `em` or `%`, which requires a number type.
+スタイル単体のバインディングを作るには、接頭辞 `style` にドット (`.`) と CSS スタイルプロパティの名前をつけます (たとえば `[style.width]="width"`)。
+このプロパティは、バインドされた式の値 (通常は文字列) に設定されます。
+オプションで、`em` や `%` のような単位を追加して数値型を要求するようにもできます。
 
 <div class="alert is-helpful">
 
-Note that a _style property_ name can be written in either
-[dash-case](guide/glossary#dash-case), as shown above, or
-[camelCase](guide/glossary#camelcase), such as `fontSize`.
+_スタイルプロパティ_ の名前は前述のとおり
+[dash-case](guide/glossary#dash-case) で書くこともできますし、
+`fontSize` のように [camelCase](guide/glossary#camelcase) で書くこともできます。
 
 </div>
 
-If there are multiple styles you'd like to toggle, you can bind to the `[style]` property directly without the dot (for example, `[style]="styleExpr"`).
-The expression attached to the `[style]` binding is most often a string list of styles like `"width: 100px; height: 100px;"`.
+切り替えたいスタイルが複数あるときは、ドットのない `[style]` プロパティに直接バインドできます (たとえば `[style]="styleExpr"`)。
+ほとんどの場合、 `[style]` バインディングでアタッチされる式は `"width: 100px; height: 100px;"` のようなスタイルを並べた文字列です。
 
-You can also format the expression as an object with style names as the keys and style values as the values, like `{width: '100px', height: '100px'}`.
-It's important to note that with any object-like expression (`object`, `Array`, `Map`, `Set`, etc), the identity of the object must change for the class list to be updated.
-Updating the property without changing object identity will have no effect.
+式には、 `{width: '100px', height: '100px'}` のように、スタイルの名前をキーに、スタイルの値を値にしたオブジェクトを与えることもできます。
+注意しなければならないのは、オブジェクトのような表現 (`object`, `Array`, `Map`, `Set` など) では、スタイルリストを更新するためにはオブジェクト自身を変更する必要があることです。
+オブジェクト自身を変更せずにプロパティを更新しても何の効果もありません。
 
-If there are multiple bindings to the same style property, conflicts are resolved using [styling precedence rules](#styling-precedence).
+同じスタイルプロパティについて複数のバインディングがある場合は[スタイリングの優先順位](#styling-precedence)にしたがって競合が解決されます。
 
 <style>
   td, th {vertical-align: top}
@@ -192,33 +189,33 @@ If there are multiple bindings to the same style property, conflicts are resolve
   </col>
   <tr>
     <th>
-      Binding Type
+      バインディングタイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Input Type
+      入力タイプ
     </th>
     <th>
-      Example Input Values
+      入力値の例
     </th>
   </tr>
   <tr>
-    <td>Single style binding</td>
+    <td>スタイル単体のバインディング</td>
     <td><code>[style.width]="width"</code></td>
     <td><code>string | undefined | null</code></td>
     <td><code>"100px"</code></td>
   </tr>
   <tr>
   <tr>
-    <td>Single style binding with units</td>
+    <td>単位つきのスタイル単体のバインディング</td>
     <td><code>[style.width.px]="width"</code></td>
     <td><code>number | undefined | null</code></td>
     <td><code>100</code></td>
   </tr>
     <tr>
-    <td rowspan=3>Multi-style binding</td>
+    <td rowspan=3>複数スタイルのバインディング</td>
     <td rowspan=3><code>[style]="styleExpr"</code></td>
     <td><code>string</code></td>
     <td><code>"width: 100px; height: 100px"</code></td>
@@ -233,71 +230,71 @@ If there are multiple bindings to the same style property, conflicts are resolve
   </tr>
 </table>
 
-The [NgStyle](guide/built-in-directives/#ngstyle) directive can be used as an alternative to direct `[style]` bindings.
-However, using the above style binding syntax without `NgStyle` is preferred because due to improvements in style binding in Angular, `NgStyle` no longer provides significant value, and might eventually be removed in the future.
+直接 `[style]` バインディングを使わずに [NgStyle](#ngstyle) ディレクティブを使うこともできます。
+しかし、Angular のスタイルバインディングの改善により、 `NgStyle` は重要な価値を提供しなくなり、将来的には削除される可能性があるため、 `NgStyle` を使用せずに上記のクラスバインディング構文を使用することが望ましいです。
 
 
 <hr/>
 
 {@a styling-precedence}
 
-## Styling Precedence
+## スタイリングの優先順位
 
-A single HTML element can have its CSS class list and style values bound to multiple sources (for example, host bindings from multiple directives).
+ひとつの HTML 要素について、CSS のクラスリストやスタイルの値を複数のソース (たとえば複数のディレクティブからのホストバインディング) にバインドすることができます。
 
-When there are multiple bindings to the same class name or style property, Angular uses a set of precedence rules to resolve conflicts and determine which classes or styles are ultimately applied to the element.
+同じクラス名やスタイルプロパティに複数のバインディングがあるとき、Angular は優先順位のルールにしたがって競合を解決し、どのクラスやスタイルを最終的に要素に適用するかを決定します。
 
 <div class="alert is-helpful">
-<h4>Styling precedence (highest to lowest)</h4>
+<h4>スタイリングの優先順位 (高い方から低い方へ)</h4>
 
-1. Template bindings
-    1. Property binding (for example, `<div [class.foo]="hasFoo">` or `<div [style.color]="color">`)
-    1. Map binding (for example, `<div [class]="classExpr">` or `<div [style]="styleExpr">`)
-    1. Static value (for example, `<div class="foo">` or `<div style="color: blue">`)
-1. Directive host bindings
-    1. Property binding (for example, `host: {'[class.foo]': 'hasFoo'}` or `host: {'[style.color]': 'color'}`)
-    1. Map binding (for example, `host: {'[class]': 'classExpr'}` or `host: {'[style]': 'styleExpr'}`)
-    1. Static value (for example, `host: {'class': 'foo'}` or `host: {'style': 'color: blue'}`)
-1. Component host bindings
-    1. Property binding (for example, `host: {'[class.foo]': 'hasFoo'}` or `host: {'[style.color]': 'color'}`)
-    1. Map binding (for example, `host: {'[class]': 'classExpr'}` or `host: {'[style]': 'styleExpr'}`)
-    1. Static value (for example, `host: {'class': 'foo'}` or `host: {'style': 'color: blue'}`)
+1. テンプレートバインディング
+    1. プロパティバインディング (たとえば `<div [class.foo]="hasFoo">` や `<div [style.color]="color">`)
+    1. マップバインディング (たとえば `<div [class]="classExpr">` や `<div [style]="styleExpr">`)
+    1. 静的な値 (たとえば `<div class="foo">` や `<div style="color: blue">`) 
+1. ディレクティブのホストバインディング
+    1. プロパティバインディング (たとえば `host: {'[class.foo]': 'hasFoo'}` や `host: {'[style.color]': 'color'}`)
+    1. マップバインディング (たとえば `host: {'[class]': 'classExpr'}` や `host: {'[style]': 'styleExpr'}`)
+    1. 静的な値 (たとえば `host: {'class': 'foo'}` や `host: {'style': 'color: blue'}`)    
+1. コンポーネントのホストバインディング
+    1. プロパティバインディング (たとえば `host: {'[class.foo]': 'hasFoo'}` や `host: {'[style.color]': 'color'}`)
+    1. マップバインディング (たとえば `host: {'[class]': 'classExpr'}` や `host: {'[style]': 'styleExpr'}`)
+    1. 静的な値 (たとえば `host: {'class': 'foo'}` や `host: {'style': 'color: blue'}`)    
 
 </div>
 
-The more specific a class or style binding is, the higher its precedence.
+クラスやスタイルのバインディングが詳細なほど、優先度が高くなります。
 
-A binding to a specific class (for example, `[class.foo]`) will take precedence over a generic `[class]` binding, and a binding to a specific style (for example, `[style.bar]`) will take precedence over a generic `[style]` binding.
+特定のクラス (たとえば `[class.foo]`) へのバインディングは、汎用的な `[class]` へのバインディングよりも優先され、特定のスタイル (たとえば `[style.bar]`) へのバインディングは、汎用的な `[style]` へのバインディングよりも優先されます。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="basic-specificity" header="src/app/app.component.html"></code-example>
 
-Specificity rules also apply when it comes to bindings that originate from different sources.
-It's possible for an element to have bindings in the template where it's declared, from host bindings on matched directives, and from host bindings on matched components.
+異なるソースからのバインディングがあるときは、詳細度のルールも適用されます。
+要素は、宣言されたテンプレートから、対応するディレクティブのホストバインディングから、対応するコンポーネントのホストバインディングからのバインディングをもつことができます。
 
-Template bindings are the most specific because they apply to the element directly and exclusively, so they have the highest precedence.
+テンプレートバインディングは、要素に対して直接、排他的に適用するため、もっとも詳細度が高く、もっとも高い優先順位を持ちます。
 
-Directive host bindings are considered less specific because directives can be used in multiple locations, so they have a lower precedence than template bindings.
+ディレクティブは複数の場所で使えるため、ディレクティブのホストバインディングはあまり詳細でないとみなされ、テンプレートバインディングよりも優先順位が低くなります。
 
-Directives often augment component behavior, so host bindings from components have the lowest precedence.
+ディレクティブはコンポーネントの動作を拡張することがあるため、コンポーネントによるホストバインディングの優先度は低くなります。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="source-specificity" header="src/app/app.component.html"></code-example>
 
-In addition, bindings take precedence over static attributes.
+さらに、バインディングは静的な属性よりも優先されます。
 
-In the following case, `class` and `[class]` have similar specificity, but the `[class]` binding will take precedence because it is dynamic.
+次のケースでは `class` と `[class]` は同じ詳細度を持ちますが、 `[class]` バインディングのほうが動的なため優先度が高くなります。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="dynamic-priority" header="src/app/app.component.html"></code-example>
 
 {@a styling-delegation}
-### Delegating to styles with lower precedence
+### 優先度が低いスタイルへの委譲 {@a delegating-to-styles-with-lower-precedence}
 
-It is possible for higher precedence styles to "delegate" to lower precedence styles using `undefined` values.
-Whereas setting a style property to `null` ensures the style is removed, setting it to `undefined` will cause Angular to fall back to the next-highest precedence binding to that style.
+`undefined` 値を使うことで、高い優先度のスタイルから低い優先度のスタイルに "委譲" することができます。
+スタイルプロパティを `null` にするとスタイルは確実に削除される一方、 `undefined` に設定すると Angular はそのスタイルについて優先度が次に高いバインディングにフォールバックする動作をします。
 
-For example, consider the following template:
+たとえば次のようなテンプレートを考えます:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="style-delegation" header="src/app/app.component.html"></code-example>
 
-Imagine that the `dirWithHostBinding` directive and the `comp-with-host-binding` component both have a `[style.width]` host binding.
-In that case, if `dirWithHostBinding` sets its binding to `undefined`, the `width` property will fall back to the value of the `comp-with-host-binding` host binding.
-However, if `dirWithHostBinding` sets its binding to `null`, the `width` property will be removed entirely.
+`dirWithHostBinding` ディレクティブと `comp-with-host-binding` コンポーネントの両方が `[style.width]` ホストバインディングをもつとします。
+そこでもし `dirWithHostBinding` がそのバインディングを `undefined` に設定すれば、 `width` プロパティは `comp-with-host-binding` のホストバインディングの値にフォールバックします。
+もし `dirWithHostBinding` がそのバインディングを `null` に設定すれば、 `width` プロパティは完全に削除されます。

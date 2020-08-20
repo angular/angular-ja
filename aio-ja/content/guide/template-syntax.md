@@ -1,18 +1,18 @@
 # テンプレート構文
 
-In Angular, a *template* is a chunk of HTML.
-Within a template, you can use special syntax to leverage many of Angular's features.
+Angularでは*テンプレート*はHTMLのかたまりです。
+テンプレート内で特別な構文を用いてAngularの機能の多くを活用できます。
 
 
+## 前提
 
-## Prerequisites
+テンプレート構文を学ぶ前に、次のことを熟知してください。
 
-Before learning template syntax, you should be familiar with the following:
-
-* [Angular concepts](guide/architecture)
+* [Angularの概念](guide/architecture)
 * JavaScript
 * HTML
 * CSS
+
 
 <!-- Do we still need the following section? It seems more relevant to those coming from AngularJS, which is now 7 versions ago. -->
 <!-- You may be familiar with the component/template duality from your experience with model-view-controller (MVC) or model-view-viewmodel (MVVM).
@@ -20,54 +20,54 @@ In Angular, the component plays the part of the controller/viewmodel, and the te
 
 <hr />
 
-Each Angular template in your app is a section of HTML that you can include as a part of the page that the browser displays.
-An Angular HTML template renders a view, or user interface, in the browser, just like regular HTML, but with a lot more functionality.
+あなたのアプリにおいてAngularの各テンプレートはHTMLのセクションであり、ブラウザが表示するページの一部分として含めることができます。
+AngularのHTMLテンプレートはブラウザでちょうど通常のHTMLのように、ただしより多くの機能をもって、ビューやユーザーインターフェースを描画します。
 
-When you generate an Angular app with the Angular CLI, the `app.component.html` file is the default template containing placeholder HTML.
+AngularのCLIでAngularアプリを生成するとき、`app.component.html`ファイルはプレースホルダのHTMLを含んでいるデフォルトのテンプレートです。
 
-The template syntax guides show you how you can control the UX/UI by coordinating data between the class and the template.
+このテンプレート構文のガイドは、クラスとテンプレートの間でデータを連携してどのようにUX/UIを制御できるかを示します。
 
 <div class="is-helpful alert">
 
-Most of the Template Syntax guides have dedicated working example apps that demonstrate the individual topic of each guide.
-To see all of them working together in one app, see the comprehensive <live-example title="Template Syntax Live Code"></live-example>.
+テンプレート構文のガイドのほとんどには、各ガイドの独自のトピックを実演する専用の動くサンプルアプリがあります。
+それらのすべてを1つのアプリで一緒に見るには、包括した<live-example title="Template Syntax Live Code"></live-example>をご覧ください。
 
 </div>
 
 
-## Empower your HTML
+## HTMLを強化
 
-With special Angular syntax in your templates, you can extend the HTML vocabulary of your apps.
-For example, Angular helps you get and set DOM (Document Object Model) values dynamically with features such as built-in template functions, variables, event listening, and data binding.
+あなたのテンプレートにおいて特別なAngular構文を用いて、アプリのHTML表現を拡張できます。
+たとえば、Angularはビルトインのテンプレート関数や変数、イベントリスニング、データバインディングのような機能をもって、DOM(ドキュメントオブジェクトモデル)の値を動的に取得・設定するのを手助けします。
 
-Almost all HTML syntax is valid template syntax.
-However, because an Angular template is part of an overall webpage, and not the entire page, you don't need to include elements such as `<html>`, `<body>`, or `<base>`.
-You can focus exclusively on the part of the page you are developing.
+ほとんどのHTML構文は有効なテンプレート構文です。
+しかしながら、Angularのテンプレートはひとつのウェブページ全体の一部分であってページまるごとではないため、`<html>`や`<body>`、`<base>`のような要素を含める必要はありません。
+あなたは開発しているページの一部分に限定してフォーカスできます。
 
 
 <div class="alert is-important">
 
-To eliminate the risk of script injection attacks, Angular does not support the `<script>` element in templates.
-Angular ignores the `<script>` tag and outputs a warning to the browser console.
-For more information, see the [Security](guide/security) page.
+スクリプト注入攻撃のリスクを取り除くため、Angularはテンプレートにおいて`<script>`要素をサポートしていません。
+Angularは`<script>`タグを無視して、ブラウザコンソールへ警告を出力します。
+詳細は、[セキュリティ](guide/security)ページをご覧ください。
 
 </div>
 
 <hr />
 
-## More on template syntax
+## テンプレート構文の詳細
 
-You may also be interested in the following:
+あなたは次のことに興味があるかもしれません:
 
-* [Interpolation](guide/interpolation)&mdash;learn how to use interpolation and expressions in HTML.
-* [Template statements](guide/template-statements)&mdash;respond to events in your templates.
-* [Binding syntax](guide/binding-syntax)&mdash;use binding to coordinate values in your app.
-* [Property binding](guide/property-binding)&mdash;set properties of target elements or directive `@Input()` decorators.
-* [Attribute, class, and style bindings](guide/attribute-binding)&mdash;set the value of attributes, classes, and styles.
-* [Event binding](guide/event-binding)&mdash;listen for events and your HTML.
-* [Two-way binding](guide/two-way-binding)&mdash;share data between a class and its template.
-* [Built-in directives](guide/built-in-directives)&mdash;listen to and modify the behavior and layout of HTML.
-* [Template reference variables](guide/template-reference-variables)&mdash;use special variables to reference a DOM element within a template.
-* [Inputs and Outputs](guide/inputs-outputs)&mdash;share data between the parent context and child directives or components
-* [Template expression operators](guide/template-expression-operators)&mdash;learn about the pipe operator, `|`, and protect against `null` or `undefined` values in your HTML.
-* [SVG in templates](guide/svg-in-templates)&mdash;dynamically generate interactive graphics.
+* [補間](guide/interpolation): 補間と式をHTMLでどう使うかを学びます。
+* [テンプレート文](guide/template-statements): テンプレートでイベントに応答します。
+* [バインディング構文](guide/binding-syntax): アプリで値を連携するためにバインディングを使います。
+* [プロパティバインディング](guide/property-binding): 対象となる要素や`@Input()`デコレーターのディレクティブのプロパティを設定します。
+* [属性、クラス、スタイルのバインディング](guide/attribute-binding): 属性、クラス、スタイルの値を設定します。
+* [イベントバインディング](guide/event-binding): イベントやあなたのHTMLをリッスンします。
+* [双方向バインディング](guide/two-way-binding): クラスとそのテンプレート間でデータを共有します。
+* [組み込みディレクティブ](guide/built-in-directives): HTMLの動作とレイアウトをリッスンして変更します。
+* [テンプレート参照変数](guide/template-reference-variables): テンプレート内でDOM要素を参照するために特別な変数を使います。
+* [InputとOutput](guide/inputs-outputs): 親のコンテキストと子のディレクティブやコンポーネントとの間でデータを共有します。
+* [テンプレート式演算子](guide/template-expression-operators): パイプ演算子`|`について学び、あなたのHTMLにおける`null`や`undefined`値に対して防御します。
+* [テンプレート内SVG](guide/svg-in-templates): インタラクティブな画像を動的に生成します。

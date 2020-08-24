@@ -1,11 +1,11 @@
 # JavaScriptモジュールとNgModule
 
 JavaScriptモジュールとNgModuleはあなたのコードをモジュール化するのに役立ちますが、これらはとても異なっています。
-Angularアプリは両方の種類のモジュールに頼っています。
+Angularアプリは両方の種類のモジュールに依存しています。
 
 ## JavaScriptモジュール: コードを含んでいるファイル
 
-[JavaScriptモジュール](https://javascript.info/modules "JavaScript.Info - Modules")はJavaScriptコードを用いた個々のファイルであり、通常はあなたのアプリ内の特定の目的のためのクラスや関数のライブラリを含んでいます。
+[JavaScriptモジュール](https://javascript.info/modules "JavaScript.Info - Modules")はJavaScriptコードを含む独立したファイルであり、通常はあなたのアプリ内の特定の目的のためのクラスや関数のライブラリを含んでいます。
 JavaScriptモジュールはあなたの成果を多数のファイルに渡って広げます。
 
 <div class="alert is-helpful">

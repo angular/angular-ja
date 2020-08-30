@@ -1,82 +1,82 @@
-# JavaScript modules vs. NgModules
+# JavaScriptモジュールとNgModule
 
-JavaScript modules and NgModules can help you modularize your code, but they are very different.
-Angular apps rely on both kinds of modules.
+JavaScriptモジュールとNgModuleはあなたのコードをモジュール化するのに役立ちますが、これらはとても異なっています。
+Angularアプリは両方の種類のモジュールに依存しています。
 
-## JavaScript modules: Files containing code
+## JavaScriptモジュール: コードを含んでいるファイル
 
-A [JavaScript module](https://javascript.info/modules "JavaScript.Info - Modules") is an individual file with JavaScript code, usually containing a class or a library of functions for a specific purpose within your app.
-JavaScript modules let you spread your work across multiple files.
+[JavaScriptモジュール](https://javascript.info/modules "JavaScript.Info - Modules")はJavaScriptコードを含む独立したファイルであり、通常はあなたのアプリ内の特定の目的のためのクラスや関数のライブラリを含んでいます。
+JavaScriptモジュールはあなたの成果を多数のファイルに渡って広げます。
 
 <div class="alert is-helpful">
 
-To learn more about JavaScript modules, see [ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/).
-For the module specification, see the [6th Edition of the ECMAScript standard](http://www.ecma-international.org/ecma-262/6.0/#sec-modules).
+JavaScriptモジュールの詳細を学ぶために、[ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)をご覧ください。
+モジュール仕様については、[6th Edition of the ECMAScript standard](http://www.ecma-international.org/ecma-262/6.0/#sec-modules)をご覧ください。
 
 </div>
 
-To make the code in a JavaScript module available to other modules, use an `export` statement at the end of the relevant code in the module, such as the following:
+JavaScriptモジュールにおけるコードを他のモジュールで有効にするには、次のように、そのモジュールにおいて関連するコードの最後で`export`文を使います。:
 
 ```typescript
 export class AppComponent { ... }
 ```
 
-When you need that module’s code in another module, use an `import` statement as follows:
+そのモジュールのコードをもう一方のモジュールで必要とするとき、次のように`import`文を使います。:
 
 ```typescript
 import { AppComponent } from './app.component';
 ```
 
-Each module has its own top-level scope.
-In other words, top-level variables and functions in a module are not seen in other scripts or modules.
-Each module provides a namespace for identifiers to prevent them from clashing with identifiers in other modules.
-With multiple modules, you can prevent accidental global variables by creating a single global namespace and adding sub-modules to it.
+各モジュールはそれ自身のトップレベルスコープを持ちます。
+すなわち、モジュールにおけるトップレベルの変数や関数は他のスクリプトやモジュールにおいて見えません。
+各モジュールは他のモジュールにおける識別子との衝突を防ぐ、識別子のための名前空間を提供します。
+多数のモジュールにおいても、唯一のグローバルな名前空間を作ってそこへサブモジュールを加えることで、思いがけないグローバル変数を防止できます。
 
-The Angular framework itself is loaded as a set of JavaScript modules.
+Angularフレームワークそれ自身はJavaScriptモジュールの集合としてロードされます。
 
-## NgModules: Classes with metadata for compiling
+## NgModule: コンパイルのためのメタデータを持ったクラス
 
-An [NgModule](guide/glossary#ngmodule "Definition of NgModule") is a class marked by the `@NgModule` decorator with a metadata object that describes how that particular part of the app fits together with the other parts.
-NgModules are specific to Angular.
-While classes with an `@NgModule` decorator are by convention kept in their own files, they differ from JavaScript modules because they include this metadata.
+[NgModule](guide/glossary#ngmodule "NgModuleの定義")は、アプリの特定の部分がどのように他の部分と一体となるかを表現するメタデータオブジェクトをもつ`@NgModule`デコレーターによってマークされたクラスです。
+NgModuleはAngular特有です。
+`@NgModule`デコレーターをもつクラスは慣例でそれら自身のファイルに置かれますが、このメタデータを含むのでJavaScriptモジュールとは異なります。
 
-The `@NgModule` metadata plays an important role in guiding the Angular compilation process that converts the app code you write into highly performant JavaScript code.
-The metadata describes how to compile a component's template and how to create an [injector](guide/glossary#injector "Definition of injector") at runtime.
-It identifies the NgModule's [components](guide/glossary#component "Definition of component"), [directives](guide/glossary#directive "Definition of directive"), and [pipes](guide/glossary#pipe "Definition of pipe)"),
-and makes some of them public through the `exports` property so that external components can use them.
-You can also use an NgModule to add [providers](guide/glossary#provider "Definition of provider") for [services](guide/glossary#service "Definition of a service"), so that the services are available elsewhere in your app.
+`@NgModule`のメタデータは、あなたが書くアプリのコードを高性能のJavaScriptコードに変換するAngularのコンパイルプロセスをガイドすることで、重要な役割を果たします。
+メタデータはコンポーネントのテンプレートのコンパイル方法と実行時の[インジェクター](guide/glossary#injector "インジェクターの定義")の作り方を表現します。
+それはNgModuleの[コンポーネント](guide/glossary#component "コンポーネントの定義")と[ディレクティブ](guide/glossary#directive "ディレクティブの定義")、[パイプ](guide/glossary#pipe "パイプの定義)"を認識し、
+それらのいくつかを`exports`プロパティを通して公開することで、外部のコンポーネントがそれらを使えるようにします。
+あなたは[サービス](guide/glossary#service "サービスの定義")のための[プロパイダー](guide/glossary#provider "プロバイダーの定義")を追加することにもNgModuleを使うことで、サービスをアプリのどこにおいても有効にできます。
 
-Rather than defining all member classes in one giant file as a JavaScript module, declare which components, directives, and pipes belong to the NgModule in the `@NgModule.declarations` list.
-These classes are called [declarables](guide/glossary#declarable "Definition of a declarable").
-An NgModule can export only the declarable classes it owns or imports from other NgModules.
-It doesn't declare or export any other kind of class.
-Declarables are the only classes that matter to the Angular compilation process.
+JavaScriptモジュールとしての1つの巨大なファイルですべてのメンバークラスを定義するよりも、`@NgModule.declarations`のリストで、どのコンポーネントやディレクティブ、パイプがNgModuleに所属するかを宣言してください。
+これらのクラスは[宣言](guide/glossary#declarable "宣言の定義")と呼ばれます。
+NgModuleは自身が所有するか他のNgModuleからインポートした宣言クラスのみをエクスポートできます。
+それは他の種類のクラスを宣言したりエクスポートしたりしません。
+宣言はAngularのコンパイルプロセスに関係する唯一のクラスです。
 
-For a complete description of the NgModule metadata properties, see [Using the NgModule metadata](guide/ngmodule-api "Using the NgModule metadata").
+NgModuleのメタデータのプロパティについての完全な説明は、[NgModuleのメタデータを使う](guide/ngmodule-api "NgModuleのメタデータを使う")をご覧ください。
 
-## An example that uses both
+## 両方を使うサンプル
 
-The root NgModule `AppModule` generated by the [Angular CLI](cli) for a new app project demonstrates how you use both kinds of modules:
+新しいアプリプロジェクトのために[Angular CLI](cli)によって生成されるルートNgModuleの`AppModule`は、両方の種類のモジュールをどのように使うかを実演します。:
 
 <code-example path="ngmodules/src/app/app.module.1.ts" header="src/app/app.module.ts (default AppModule)"></code-example>
 
-The root NgModule starts with `import` statements to import JavaScript modules.
-It then configures the `@NgModule` with the following arrays:
+ルートNgModuleはJavaScriptモジュールをインポートするための`import`文から始まります。
+それから次の配列とともに`@NgModule`を設定します。:
 
-* `declarations`: The components, directives, and pipes that belong to the NgModule.
-  A new app project's root NgModule has only one component, called `AppComponent`.
+* `declarations`: このNgModuleに所属するコンポーネントとディレクティブ、パイプ。
+  新しいアプリプロジェクトのルートNgModuleは`AppComponent`というただ1つのコンポーネントを持ちます。
 
-* `imports`: Other NgModules you are using, so that you can use their declarables.
-  The newly generated root NgModule imports [`BrowserModule`](api/platform-browser/BrowserModule "BrowserModule NgModule") in order to use browser-specific services such as [DOM](https://www.w3.org/TR/DOM-Level-2-Core/introduction.html "Definition of Document Object Model") rendering, sanitization, and location.
+* `imports`: あなたが使用する他のNgModule。これによりそれらの宣言を使用できます。
+  新しく生成されるルートNgModuleは、ブラウザ特有の[DOM](https://www.w3.org/TR/DOM-Level-2-Core/introduction.html "Definition of Document Object Model")レンダリングやサニタイズ、ロケーションといったサービスを使用するために[`BrowserModule`](api/platform-browser/BrowserModule "BrowserModule NgModule")をインポートします。
 
-* `providers`: Providers of services that components in other NgModules can use.
-  There are no providers in a newly generated root NgModule.
+* `providers`: 他のNgModuleにおけるコンポーネントが使用できるサービスのプロバイダー。
+  新しく生成されるルートNgModuleにおいてプロバイダーはありません。
 
-* `bootstrap`: The [entry component](guide/entry-components "Specifying an entry component") that Angular creates and inserts into the `index.html` host web page, thereby bootstrapping the app.
-  This entry component, `AppComponent`, appears in both the `declarations` and the `bootstrap` arrays.
+* `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリをブートストラップします。
+  このエントリーコンポーネントの`AppComponent`は`declarations`と`bootstrap`の両方の配列に現れます。
 
-## Next steps
+## 次のステップ
 
-* For more about NgModules, see [Organizing your app with NgModules](guide/ngmodules "Organizing your app with NgModules").
-* To learn more about the root NgModule, see [Launching an app with a root NgModule](guide/bootstrapping "Launching an app with a root NgModule").
-* To learn about frequently used Angular NgModules and how to import them into your app, see [Frequently-used modules](guide/frequent-ngmodules "Frequently-used modules").
+* NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")をご覧ください。
+* ルートNgModuleについてより学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")をご覧ください。
+* よく使用されるAngularのNgModuleとそれらをアプリにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")をご覧ください。

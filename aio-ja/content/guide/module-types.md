@@ -1,36 +1,36 @@
-# Guidelines for creating NgModules
+# NgModule作成のガイドライン
 
-This topic provides a conceptual overview of the different categories of [NgModules](guide/glossary#ngmodule "Definition of NgModule") you can create in order to organize your code in a modular structure.
-These categories are not cast in stone—they are suggestions.
-You may want to create NgModules for other purposes, or combine the characteristics of some of these categories.
+このトピックでは、あなたのコードをモジュール構造にまとめるために作成可能な、さまざまなカテゴリーの[NgModules](guide/glossary#ngmodule "NgModuleの定義")について概念的な概要を提供します。
+これらのカテゴリーは石のように不変なものではなく、提案です。
+あなたは他の目的のためにNgModuleを作ったり、これらのカテゴリーのいくつかの特徴を結合したりしたいかもしれません。
 
-NgModules are a great way to organize an app and keep code related to a specific functionality or feature separate from other code.
-Use NgModules to consolidate [components](guide/glossary#component "Definition of component"), [directives](guide/glossary#directive "Definition of directive"), and [pipes](guide/glossary#pipe "Definition of pipe)") into cohesive blocks of functionality.
-Focus each block on a feature or business domain, a workflow or navigation flow, a common collection of utilities, or one or more [providers](guide/glossary#provider "Definition of provider") for [services](guide/glossary#service "Definition of service").
+NgModuleは、アプリを系統だててコードを他のコードから分離された特定の機能・特徴に関連付けた状態に保つ、よい方法です。
+NgModuleを使って[コンポーネント](guide/glossary#component "コンポーネントの定義")と[ディレクティブ](guide/glossary#directive "ディレクティブの定義")と[パイプ](guide/glossary#pipe "パイプの定義)")をまとまりのある機能のブロックに整理してください。
+それぞれのブロックを、特徴やビジネスドメイン、ワークフローやナビゲーションフロー、共通のユーティリティ・コレクション、[サービス](guide/glossary#service "サービスの定義")のための1つ以上の[プロバイダー](guide/glossary#provider "プロバイダーの定義")にフォーカスしてください。
 
-For more about NgModules, see [Organizing your app with NgModules](guide/ngmodules "Organizing your app with NgModules").
+NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")を参照してください。
 
 <div class="alert is-helpful">
 
-For the example app used in NgModules-related topics, see the <live-example name="ngmodules"></live-example>.
+NgModuleに関連したトピックで使われるサンプルアプリについては、<live-example name="ngmodules"></live-example>を参照してください。
 
 </div>
 
-## Summary of NgModule categories
+## NgModuleのカテゴリー概要
 
-All apps start by [bootstrapping a root NgModule](guide/bootstrapping "Launching an app with a root NgModule").
-You can organize your other NgModules any way you wish.
+すべてのアプリは[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")から始まります。
+他のNgModuleは望む方法でまとめることができます。
 
-This topic provides some guidelines for the following general categories of NgModules:
+このトピックはNgModuleの次の一般的なカテゴリーに関するいくつかのガイドラインを提供します:
 
-* [Domain](#domain): A domain NgModule is organized around a feature, business domain, or user experience.
-* [Routed](#routed): The top component of the NgModule acts as the destination of a [router](guide/glossary#router "Definition of router") navigation route.
-* [Routing](#routing): A routing NgModule provides the routing configuration for another NgModule.
-* [Service](#service): A service NgModule provides utility services such as data access and messaging.
-* [Widget](#widget): A widget NgModule makes a component, directive, or pipe available to other NgModules.
-* [Shared](#shared): A shared NgModule makes a set of components, directives, and pipes available to other NgModules.
+* [ドメイン](#domain): ドメインNgModuleは特徴、ビジネスドメインやユーザー体験を中心にまとめます。
+* [ルーテッド](#routed): このNgModuleのトップコンポーネントは[ルーター](guide/glossary#router "ルーターの定義")のナビゲーションルートの行き先としての役割を果たします。
+* [ルーティング](#routing): ルーティングNgModuleは別のNgModuleのためのルーティング設定を提供します。
+* [サービス](#service): サービスNgModuleはデータアクセスとメッセージ伝達のようなユーティリティーサービスを提供します。
+* [ウィジェット](#widget): ウィジェットNgModuleは1つのコンポーネントやディレクティブ、パイプを他のNgModuleで使えるようにします。
+* [シェアード](#shared): シェアードNgModuleはコンポーネントやディレクティブ、パイプの一式を他のNgModuleで使えるようにします。
 
-The following table summarizes the key characteristics of each category.
+次のテーブルは各カテゴリーの重要な特徴を要約しています。
 
 <table>
  <tr>
@@ -39,190 +39,190 @@ The following table summarizes the key characteristics of each category.
    </th>
 
    <th style="vertical-align: top">
-     Declarations
+     宣言
    </th>
 
    <th style="vertical-align: top">
-     Providers
+     プロバイダー
    </th>
 
    <th style="vertical-align: top">
-     Exports
+     エクスポート
    </th>
 
    <th style="vertical-align: top">
-     Imported by
+     何にインポートされるか
    </th>
  </tr>
 
  <tr>
-   <td>Domain</td>
-   <td>Yes</td>
-   <td>Rare</td>
-   <td>Top component</td>
-   <td>Another domain, AppModule</td>
+   <td>ドメイン</td>
+   <td>あり</td>
+   <td>まれ</td>
+   <td>トップコンポーネント</td>
+   <td>別のドメイン、AppModule</td>
  </tr>
 
  <tr>
-   <td>Routed</td>
-   <td>Yes</td>
-   <td>Rare</td>
-   <td>No</td>
-   <td>None</td>
+   <td>ルーテッド</td>
+   <td>あり</td>
+   <td>まれ</td>
+   <td>なし</td>
+   <td>なし</td>
  </tr>
 
  <tr>
-   <td>Routing</td>
-   <td>No</td>
-   <td>Yes (Guards)</td>
+   <td>ルーティング</td>
+   <td>なし</td>
+   <td>あり (ガード)</td>
    <td>RouterModule</td>
-   <td>Another domain (for routing)</td>
+   <td>別のドメイン(ルーティングのため)</td>
  </tr>
 
  <tr>
-   <td>Service</td>
-   <td>No</td>
-   <td>Yes</td>
-   <td>No</td>
+   <td>サービス</td>
+   <td>なし</td>
+   <td>あり</td>
+   <td>なし</td>
    <td>AppModule</td>
  </tr>
 
  <tr>
-   <td>Widget</td>
-   <td>Yes</td>
-   <td>Rare</td>
-   <td>Yes</td>
-   <td>Another domain</td>
+   <td>ウィジェット</td>
+   <td>あり</td>
+   <td>まれ</td>
+   <td>あり</td>
+   <td>別のドメイン</td>
  </tr>
 
  <tr>
-   <td>Shared</td>
-   <td>Yes</td>
-   <td>No</td>
-   <td>Yes</td>
-   <td>Another domain</td>
+   <td>シェアード</td>
+   <td>あり</td>
+   <td>なし</td>
+   <td>あり</td>
+   <td>別のドメイン</td>
  </tr>
 </table>
 
 {@a domain}
 
-## Domain NgModules
+## ドメインNgModule
 
-Use a domain NgModule to deliver a user experience dedicated to a particular feature or app domain, such as editing a customer or placing an order.
-One example is `ContactModule` in the <live-example name="ngmodules"></live-example>.
+ドメインNgModuleは、顧客の編集や発注といった特定の特徴やアプリドメインに特化したユーザー体験をもたらすことに使ってください。
+1つの例は<live-example name="ngmodules"></live-example>にある`ContactModule`です。
 
-A domain NgModule organizes the code related to a certain function, containing all of the components, routing, and templates that make up the function.
-Your top component in the domain NgModule acts as the feature or domain's root, and is the only component you export.
-Private supporting subcomponents descend from it.
+ドメインNgModuleはある一定の機能に関連したコードをまとめます。その機能を作り上げるコンポーネントとルーティング、テンプレートのすべてを含みます。
+ドメインNgModuleにおけるトップコンポーネントは特徴やドメインのルートの役割を果たし、あなたがエクスポートする唯一のコンポーネントです。
+プライベートにサポートするサブコンポーネントはそれの子孫になります。
 
-Import a domain NgModule exactly once into another NgModule, such as a domain NgModule, or into the root NgModule (`AppModule`) of an app that contains only a few NgModules.
+ドメインNgModuleを別のNgModuleにちょうど1回だけインポートしてください。たとえばあるドメインNgModuleに、もしくはごくわずかなNgModuleを含むアプリのルートNgModule(`AppModule`)にです。
 
-Domain NgModules consist mostly of declarations.
-You rarely include providers.
-If you do, the lifetime of the provided services should be the same as the lifetime of the NgModule.
+ドメインNgModuleはふつうは宣言で構成されます。
+プロバイダーをめったに含みません。
+もし含むなら、提供されたサービスのライフタイムはそのNgModuleのライフタイムと同じになるでしょう。
 
 <div class="alert is-helpful">
 
-For more information about lifecycles, see [Hooking into the component lifecycle](guide/lifecycle-hooks "Hooking into the component lifecycle").
+ライフサイクルについての詳細は、[コンポーネントのライフサイクルにフックする](guide/lifecycle-hooks "コンポーネントのライフサイクルにフックする")を参照してください。
 
 </div>
 
 {@a routed}
 
-## Routed NgModules
+## ルーテッドNgModule
 
-Use a routed NgModule for all [lazy-loaded NgModules](guide/lazy-loading-ngmodules "Lazy-loading an NgModule").
-Use the top component of the NgModule as the destination of a router navigation route.
-Routed NgModules don’t export anything because their components never appear in the template of an external component.
+ルーテッドNgModuleは、すべての[遅延ロードのNgModule](guide/lazy-loading-ngmodules "NgModuleを遅延ロードする")用に使ってください。
+そのNgModuleのトップコンポーネントはルーターのナビゲーションルートの行き先として使ってください。
+ルーテッドNgModuleは何もエクスポートしません。それらのコンポーネントは外部コンポーネントのテンプレートに決して現れないからです。
 
-Don't import a lazy-loaded routed NgModule into another NgModule, as this would trigger an eager load, defeating the purpose of lazy loading.
+遅延ロードされるルーテッドNgModuleを別のNgModuleへインポートしないでください。これは即時ロードを引き起こし、遅延ロードの目的をだめにしてしまいます。
 
-Routed NgModules rarely have providers because you load a routed NgModule only when needed (such as for routing).
-Services listed in the NgModules' `provider` array would not be available because the root injector wouldn’t know about the lazy-loaded NgModule.
-If you include providers, the lifetime of the provided services should be the same as the lifetime of the NgModule.
-Don't provide app-wide [singleton services](guide/singleton-services) in a routed NgModule or in an NgModule that the routed NgModule imports.
+ルーテッドNgModuleはめったにプロバイダーを持ちません。なぜなら必要なとき(ルーティングのためなど)だけルーテッドNgModuleをロードするからです。
+このNgModuleの`provider`配列にリストされたサービスは有効になりません。ルートインジェクターが遅延ロードのNgModuleについて認識しないからです。
+もしプロバイダーを含めるなら、提供されたサービスのライフタイムはそのNgModuleのライフタイムと同じになるでしょう。
+ルーテッドNgModuleで、もしくはルーテッドNgModuleがインポートするNgModuleで、アプリの広範囲に至る[シングルトンサービス](guide/singleton-services)を提供しないでください。
 
 <div class="alert is-helpful">
 
-For more information about providers and lazy-loaded routed NgModules, see [Limiting provider scope](guide/providers#limiting-provider-scope-by-lazy-loading-modules "Providing dependencies: Limiting provider scope").
+プロバイダーと遅延ロードされるルーテッドNgModuleの詳細は、[プロバイダーのスコープを制限する](guide/providers#limiting-provider-scope-by-lazy-loading-modules "依存性の提供: プロバイダーのスコープを制限する")を参照してください。
 
 </div>
 
 {@a routing}
 
-## Routing NgModules
+## ルーティングNgModule
 
-Use a routing NgModule to provide the routing configuration for a domain NgModule, thereby separating routing concerns from its companion domain NgModule.
-One example is `ContactRoutingModule` in the <live-example name="ngmodules"></live-example>, which provides the routing for its companion domain NgModule `ContactModule`.
+ルーティングNgModuleは、ドメインNgModuleのためのルーティング設定を提供することに使ってください。それにより、対応するドメインNgModuleからルーティングの事柄を切り離します。
+1つの例が<live-example name="ngmodules"></live-example>にある`ContactRoutingModule`です。それは対応するドメインNgModuleの`ContactModule`のためにルーティングを提供します。
 
 <div class="alert is-helpful">
 
-For an overview and details about routing, see [In-app navigation: routing to views](guide/router "In-app navigation: routing to views").
+ルーティングについての概要と詳細については、[アプリ内のナビゲーション: ビューへのルーティング](guide/router "アプリ内のナビゲーション: ビューへのルーティング")を参照してください。
 
 </div>
 
-Use a routing NgModule to do the following tasks:
+ルーティングNgModuleを次のタスクのために使ってください:
 
-* Define routes.
-* Add router configuration to the NgModule's import.
-* Add guard and resolver service providers to the NgModule's providers.
+* ルートを定義します。
+* NgModuleのインポートにルーター設定を追加します。
+* NgModuleのプロバイダーにガードとリゾルバのサービスプロバイダーを追加します。
 
-The name of the routing NgModule should parallel the name of its companion NgModule, using the suffix `Routing`.
-For example, <code>ContactModule</code> in <code>contact.module.ts</code> has a routing NgModule named <code>ContactRoutingModule</code> in <code>contact-routing.module.ts</code>.
+ルーティングNgModuleの名前は対応するNgModuleの名前に合わせて、語尾に`Routing`を使います。
+たとえば<code>contact.module.ts</code>の<code>ContactModule</code>は、<code>contact-routing.module.ts</code>の<code>ContactRoutingModule</code>という名前のルーティングNgModuleを持っています。
 
-Import a routing NgModule only into its companion NgModule.
-If the companion NgModule is the root <code>AppModule</code>, the <code>AppRoutingModule</code> adds router configuration to its imports with <code>RouterModule.forRoot(routes)</code>.
-All other routing NgModules are children that import <code>RouterModule.forChild(routes)</code>.
+ルーティングNgModuleをその対応するNgModuleにのみインポートしてください。
+対応するNgModuleがルートの<code>AppModule</code>なら、<code>AppRoutingModule</code>がルーター設定を<code>RouterModule.forRoot(routes)</code>を使ってそのインポートに追加します。
+他のすべてのルーティングNgModuleは子であり、<code>RouterModule.forChild(routes)</code>をインポートします。
 
-In your routing NgModule, re-export the <code>RouterModule</code> as a convenience so that components of the companion NgModule have access to router directives such as <code>RouterLink</code> and <code>RouterOutlet</code>.
+ルーティングNgModuleでは利便性のために<code>RouterModule</code>を再エクスポートしてください。それにより対応するNgModuleのコンポーネントは<code>RouterLink</code>や<code>RouterOutlet</code>のようなルーターのディレクティブへのアクセス権を持ちます。
 
-Don't use declarations in a routing NgModule.
-Components, directives, and pipes are the responsibility of the companion domain NgModule, not the routing NgModule.
+ルーティングNgModuleでは宣言を使わないでください。
+コンポーネントとディレクティブとパイプは、ルーティングNgModuleではなくその対応するドメインNgModuleの責任です。
 
 {@a service}
 
-## Service NgModules
+## サービスNgModule
 
-Use a service NgModule to provide a utility service such as data access or messaging.
-Ideal service NgModules consist entirely of providers and have no declarations.
-Angular's `HttpClientModule` is a good example of a service NgModule.
+サービスNgModuleは、データアクセスやメッセージ伝達のようなユーティリティーサービスを提供することに使ってください。
+理想的なサービスNgModuleは完全にプロバイダーで構成され、宣言を持ちません。
+Angularの`HttpClientModule`はサービスNgModuleの好例です。
 
-Use only the root `AppModule` to import service NgModules.
+サービスNgModuleをインポートするにはルートの`AppModule`のみを使ってください。
 
 {@a widget}
 
-## Widget NgModules
+## ウィジェットNgModule
 
-Use a widget NgModule to make a component, directive, or pipe available to external NgModules.
-Import widget NgModules into any NgModules that need the widgets in their templates.
-Many third-party UI component libraries are provided as widget NgModules.
+ウィジェットNgModuleは、コンポーネントやディレクティブ、パイプを外部のNgModuleで有効にすることに使ってください。
+テンプレートでウィジェットを必要とするNgModuleにウィジェットNgModuleをインポートしてください。
+多くのサードパーティのUIコンポーネントライブラリはウィジェットNgModuleとして提供されています。
 
-A widget NgModule should consist entirely of declarations, most of them exported.
-It would rarely have providers.
+ウィジェットNgModuleは完全に宣言で構成するものとし、そのほとんどはエクスポートされます。
+めったにプロバイダーを持ちません。
 
 {@a shared}
 
-## Shared NgModules
+## シェアードNgModule
 
-Put commonly used directives, pipes, and components into one NgModule, typically named `SharedModule`, and then import just that NgModule wherever you need it in other parts of your app.
-You can import the shared NgModule in your domain NgModules, including [lazy-loaded NgModules](guide/lazy-loading-ngmodules "Lazy-loading an NgModule").
-One example is `SharedModule` in the <live-example name="ngmodules"></live-example>, which provides the `AwesomePipe` custom pipe and `HighlightDirective` directive.
+共通に使われるディレクティブとパイプとコンポーネントを1つのNgModule(典型的には`SharedModule`という名前)に入れてください。それから、アプリの他の部分でそれを必要とするところならどこでもそのNgModuleをインポートしてください。
+[遅延ロードのNgModule](guide/lazy-loading-ngmodules "NgModuleを遅延ロードする")を含むあなたのドメインNgModuleで、シェアードNgModuleをインポートできます。
+1つの例が<live-example name="ngmodules"></live-example>にある`SharedModule`で、カスタムパイプの`AwesomePipe`と`HighlightDirective`ディレクティブを提供しています。
 
-Shared NgModules should not include providers, nor should any of its imported or re-exported NgModules include providers.
+シェアードNgModuleはプロバイダーを含まないようにし、同じく、それがインポートしたか再エクスポートしたどんなNgModuleもプロバイダーを含まないようにします。
 
-To learn how to use shared modules to organize and streamline your code, see [Sharing NgModules in an app](guide/sharing-ngmodules "Sharing NgModules in an app").
+あなたのコードをまとめ上げて合理化するための、共有のモジュールを使う方法について学ぶには、[アプリでNgModuleを共有する](guide/sharing-ngmodules "アプリでNgModuleを共有する")を参照してください。
 
-## Next steps
+## 次のステップ
 
-You may also be interested in the following:
+あなたは次のことにも関心があるかもしれません:
 
-* For more about NgModules, see [Organizing your app with NgModules](guide/ngmodules "Organizing your app with NgModules").
-* To learn more about the root NgModule, see [Launching an app with a root NgModule](guide/bootstrapping "Launching an app with a root NgModule").
-* To learn about frequently used Angular NgModules and how to import them into your app, see [Frequently-used modules](guide/frequent-ngmodules "Frequently-used modules").
-* For a complete description of the NgModule metadata properties, see [Using the NgModule metadata](guide/ngmodule-api "Using the NgModule metadata").
+* NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")を参照してください。
+* ルートNgModuleの詳細を学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")を参照してください。
+* よく使用されるAngularのNgModuleとそれらをアプリにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")を参照してください。
+* NgModuleのメタデータのプロパティについての完全な説明は、[NgModuleのメタデータを使う](guide/ngmodule-api "NgModuleのメタデータを使う")を参照してください。
 
-If you want to manage NgModule loading and the use of dependencies and services, see the following:
+NgModuleのロードと依存性とサービスの使用を管理したい場合、次を参照してください:
 
-* To learn about loading NgModules eagerly when the app starts, or lazy-loading NgModules asynchronously by the router, see [Lazy-loading feature modules](guide/lazy-loading-ngmodules).
-* To understand how to provide a service or other dependency for your app, see [Providing Dependencies for an NgModule](guide/providers "Providing Dependencies for an NgModule").
-* To learn how to create a singleton service to use in NgModules, see [Making a service a singleton](guide/singleton-services "Making a service a singleton").
+* アプリ開始時のNgModuleの即時ロードや、ルーターによるNgModuleの非同期の遅延ロードについて学ぶには、[フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules)を参照してください。
+* あなたのアプリ用にサービスや他の依存を提供する方法を理解するには、[NgModuleのために依存性を提供する](guide/providers "NgModuleのために依存性を提供する")を参照してください。
+* NgModuleで使うためのシングルトンサービスを作成する方法について学ぶには、[サービスをシングルトンにする](guide/singleton-services "サービスをシングルトンにする")を参照してください。

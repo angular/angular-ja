@@ -7,13 +7,13 @@ TypeScript がコードの型エラーをキャッチするのと同じように
 
 ### 基本モード
 
-最も基本的な型チェックモードでは、`fullTemplateTypeCheck` フラグを `false` に設定すると、Angular はテンプレートの最上位の式のみを検証します。
+もっとも基本的な型チェックモードでは、`fullTemplateTypeCheck` フラグを `false` に設定すると、Angular はテンプレートの最上位の式のみを検証します。
 
 `<map [city]="user.address.city">` と記述した場合、コンパイラーは以下を検証します。
 
 * `user` はコンポーネントクラスのプロパティです。
-* `user` は、アドレスプロパティを持つオブジェクトです。
-* `user.address` は、cityプロパティを持つオブジェクトです。
+* `user` は、アドレスプロパティをもつオブジェクトです。
+* `user.address` は、cityプロパティをもつオブジェクトです。
 
 コンパイラーは、`user.address.city` の値が `<map>` コンポーネントの city インプットに割り当て可能であることを確認しません。
 
@@ -88,7 +88,7 @@ interface User {
 `<h2>` と `<span>` は `* ngFor` 埋め込みビューにあります。
 基本モードでは、Angular はどちらもチェックしません。
 ただし、フルモードでは、Angular は `config` と `user` が存在することを確認し、`any` 型を想定します。
-厳格モードでは、Angular は `<span>` の `user` の堅が `User` であり、`address` が `string` 型の `city` プロパティを持つオブジェクトであることを認識しています。
+厳格モードでは、Angular は `<span>` の `user` の堅が `User` であり、`address` が `string` 型の `city` プロパティをもつオブジェクトであることを認識しています。
 
 {@a troubleshooting-template-errors}
 
@@ -117,9 +117,9 @@ Angular ライブラリの入力が不完全または正しくない場合、ま
 |`strictNullInputTypes`|( `strictInputTypes` ごとに ) `@Input()` バインディングをチェックするときに、`strictNullChecks` が受け入れられるかどうか。これをオフにすると、`strictNullChecks` を考慮せずにビルドされたライブラリを使用するときに役立ちます。|
 |`strictAttributeTypes`|テキスト属性を使用して作成された `@Input()` バインディングをチェックするかどうか ( たとえば、`<mat-tab label="Step 1">` と `<mat-tab [label]="'Step 1'">` ) 。
 |`strictSafeNavigationTypes`|安全なナビゲーション操作の戻り値の型 ( たとえば、`user?.name` ) が、`user` の型に基づいて正しく推測されるかどうか。無効にすると、`user?.name` の型は `any` になります。
-|`strictDomLocalRefTypes`|DOM 要素へのローカル参照が正しい型を持つかどうか。無効にすると、`ref` は `<input #ref>` の型が `any` になります。|
-|`strictOutputEventTypes`|`$event` がコンポーネント/ディレクティブ `@Output()` へのイベントバインディング、またはアニメーションイベントに正しい型を持つかどうか。無効にすると、`any` になります。|
-|`strictDomEventTypes`|`$event` が DOM イベントへのイベントバインディングに適切な型を持つかどうか。無効にすると、`any` になります。|
+|`strictDomLocalRefTypes`|DOM 要素へのローカル参照が正しい型をもつかどうか。無効にすると、`ref` は `<input #ref>` の型が `any` になります。|
+|`strictOutputEventTypes`|`$event` がコンポーネント/ディレクティブ `@Output()` へのイベントバインディング、またはアニメーションイベントに正しい型をもつかどうか。無効にすると、`any` になります。|
+|`strictDomEventTypes`|`$event` が DOM イベントへのイベントバインディングに適切な型をもつかどうか。無効にすると、`any` になります。|
 |`strictContextGenerics`|ジェネリックコンポーネントの型パラメータが正しく推論されるかどうか ( ジェネリック境界を含む ) 。無効にすると、すべての型パラメーターは `any` になります。|
 |`strictLiteralTypes`|テンプレートで宣言されたオブジェクトおよび配列リテラルの型が推論されるかどうか。無効にすると、そのようなリテラルの型は `any` になります。|
 
@@ -165,14 +165,14 @@ export class AppComponent {
 
 ここでは、`AppComponent` のテンプレートの型チェック中に、`[user]="selectedUser"` バインディングが `UserDetailComponent.user` 入力に対応しています。
 したがって、Angularは `selectedUser` プロパティを `UserDetailComponent.user` に割り当てます。これにより、それらの型に互換性がない場合にエラーが発生します。
-TypeScript は、アプリケーションで設定されている `strictNullChecks` などのフラグに沿って、型システムに従って割り当てをチェックします。
+TypeScript は、アプリケーションで設定されている `strictNullChecks` などのフラグに沿って、型システムにしたがって割り当てをチェックします。
 
 テンプレート型チェッカーに、より具体的なテンプレート内の型要件を提供することで、実行時の型エラーを回避できます。ディレクティブ定義でテンプレートガード関数を提供することにより、独自のディレクティブの入力型要件をできるだけ具体的にします。このガイドの [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks) および [入力セッターの強制](#input-setter-coercion) を参照してください。
 
 
 ### 厳密な null チェック
 
-`strictTemplates` および TypeScript フラグ `strictNullChecks` を有効にすると、簡単に回避できない特定の状況で型チェックエラーが発生する場合があります。例えば：
+`strictTemplates` および TypeScript フラグ `strictNullChecks` を有効にすると、簡単に回避できない特定の状況で型チェックエラーが発生する場合があります。たとえば：
 
   * `strictNullChecks` が有効になっていないライブラリからのディレクティブにバインドされているnull許容値。
 
@@ -182,7 +182,7 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 
   * 同期的に発行することがわかっている Observable で `async` パイプを使用する。
 
-  現在、`async` パイプは、それがサブスクライブする Observable が非同期である可能性があることを前提としています。つまり、まだ利用可能な値がない可能性があります。
+  現在、`async` パイプは、それが購読する Observable が非同期である可能性があることを前提としています。つまり、まだ利用可能な値がない可能性があります。
   その場合でも、何かを返す必要があります &mdash; これは `null` です。
   つまり、`async` パイプの戻り値の型には `null` が含まれているため、Observableが null 以外の値を同期的に発行することがわかっている状況では、エラーが発生する可能性があります。
 
@@ -203,7 +203,7 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 
 ライブラリの作成者は、いくつかの方法でユーザーに最適なエクスペリエンスを提供できます。
 まず、`strictNullChecks` を有効にし、必要に応じて入力の型に `null` を含めると、null値を提供できるかどうかがコンシューマーに通知されます。
-さらに、テンプレート型チェッカーに固有の型ヒントを提供することもできます。 以下の [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks) と [入力セッターの強制](#input-setter-coercion) を参照してください。
+さらに、テンプレート型チェッカーに固有の型ヒントを提供することもできます。 次の [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks) と [入力セッターの強制](#input-setter-coercion) を参照してください。
 
 
 {@a input-setter-coercion}
@@ -260,9 +260,9 @@ set disabled(value: boolean) {
 ここで `value` の型を `boolean` から `boolean|''`に変更して、セッターが実際に受け入れる値のセットと一致させるのが理想的です。
 TypeScript では、ゲッターとセッターの両方が同じ型である必要があるため、ゲッターが `boolean` を返す必要がある場合、セッターはより狭義の型で固定されます。
 
-コンシューマーでテンプレートの Angular の最も厳密な型チェックが有効になっている場合、これにより問題が発生します。空の文字列 `''` は、実際には `disabled` フィールドに割り当てられず、属性フォームが使用されると型エラーが発生します。
+コンシューマーでテンプレートの Angular のもっとも厳密な型チェックが有効になっている場合、これにより問題が発生します。空の文字列 `''` は、実際には `disabled` フィールドに割り当てられず、属性フォームが使用されると型エラーが発生します。
 
-この問題の回避策として、Angular は `@Input()` に対して、入力フィールド自体に対して宣言されているよりも広くより寛容な型のチェックをサポートしています。これを有効にするには、`ngAcceptInputType_` プレフィックスを含む静的プロパティをコンポーネントクラスに追加します。
+この問題の回避策として、Angular は `@Input()` に対して、入力フィールド自体に対して宣言されているよりも広くより寛容な型のチェックをサポートしています。これを有効にするには、`ngAcceptInputType_` 接頭辞を含む静的プロパティをコンポーネントクラスに追加します。
 
 ```typescript
 class SubmitButton {

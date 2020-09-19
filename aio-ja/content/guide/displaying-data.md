@@ -153,14 +153,14 @@ Angular は `index.html` 内の `<app-root>` を探してそれを見つけ、
 <div class="alert is-important">
 
 `*ngFor` の先頭のアスタリスク（\*）を忘れないでください。それは構文の不可欠な部分です。
-`ngFor` や `*` の詳細については、[テンプレート構文](guide/template-syntax#ngFor)ページの[ngForセクション](guide/template-syntax#ngfor)を参照してください。
+`ngFor` や `*` の詳細については、[ビルトインディレクティブ](guide/built-in-directives)ページの[ngForセクション](guide/built-in-directives#ngfor)を参照してください。
 
 </div>
 
 `ngFor` 二重引用符命令の `hero` に注目してください。
 これはテンプレート入力変数の例です。
-さらに詳しいテンプレート入力変数については、[テンプレート構文](guide/template-syntax) ページの
-[ミクロ構文](guide/template-syntax#microsyntax) セクションを読んでください。
+さらに詳しいテンプレート入力変数については、[ビルトインディレクティブ](guide/built-in-directives) ページの
+[ミクロ構文](guide/built-in-directives#microsyntax) セクションを読んでください。
 
 Angular はリスト内の各項目の `<li>` を複製し、
 `hero` 変数を現在の反復の項目 (ヒーロー) に設定します。
@@ -255,7 +255,7 @@ Angular `ngIf` ディレクティブは _真偽_ 条件に基づいて要素を�
 <div class="alert is-important">
 
 `*ngIf` の先頭のアスタリスク（\*）を忘れないでください。 それは構文の不可欠な部分です。
-さらに詳しい `ngIf` と `*` については、[テンプレート構文](guide/template-syntax) ページの [ngIf セクション](guide/template-syntax#ngIf) を読んでください。
+さらに詳しい `ngIf` と `*` については、[ビルトインディレクティブ](guide/built-in-directives) ページの [ngIf セクション](guide/built-in-directives#ngIf) を読んでください。
 
 </div>
 
@@ -266,7 +266,7 @@ TypeScript とよく似ています。
 メッセージが表示されます。 
 3つ以内のアイテムがある場合、 Angular は段落を省略するので、メッセージは表示されません。 
 
-詳細については、[テンプレート構文](guide/template-syntax) ページの[テンプレート式](guide/template-syntax#template-expressions) を参照してください。
+詳細については、[テンプレート式演算子](guide/interpolation#template-expressions) を参照してください。
 
 
 <div class="alert is-helpful">

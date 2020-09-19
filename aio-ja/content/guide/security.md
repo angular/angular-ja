@@ -75,7 +75,7 @@ _テンプレートインジェクション_と呼ばれるこれらの脆弱性
 [オフラインテンプレートコンパイラ](guide/security#offline-template-compiler)を使用します。
 
 {@a sanitization-and-security-contexts}
-### サニタイズとコンテキスト
+### サニタイズとセキュリティコンテキスト
 
 _サニタイズ_とは、信頼できない値を検査しDOMに挿入できるような安全な値に無害化することです。
 多くの場合、サニタイズは値をまったく変更しません。
@@ -127,15 +127,15 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 
 ブラウザの提供する DOM API は脆弱性から自動的にはアプリケーションを保護してくれません。
 `document` オブジェクトや `ElementRef` クラスより参照可能なノード、多くのサードパーティAPIなどには
-潜在的に安全でないメソッドが含まれています。同様に、DOMを操作する他のライブラリとやりとりする場合、Angularの補間と同じような自動サニタイズはありません。 DOMと直接対話するのではなく、可能であればAngularテンプレートを使用してください。
+潜在的に安全でないメソッドが含まれています。
+同様に、DOMを操作する他のライブラリとやりとりする場合、Angularの補間と同じような自動サニタイズはありません。
+DOMと直接対話するのではなく、可能であればAngularテンプレートを使用してください。
 
 避けられない場合は、組み込みのAngularのサニタイズ関数を使用してください。
-Sanitize untrusted values with the [DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)
-method and the appropriate `SecurityContext`. That function also accepts values that were
-marked as trusted using the `bypassSecurityTrust`... functions, and will not sanitize them,
-as [described below](#bypass-security-apis).
-信頼できない値を[DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)メソッドと適切な `SecurityContext`でサニタイズします。この関数は、[後述](#bypass-security-apis)のように、`bypassSecurityTrust` ...関数を使って信頼できるとマークされた値を受け取り、それらをサニタイズしません。
-
+信頼できない値を[DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)メソッドと適切な `SecurityContext`でサニタイズします。
+この関数は、[後述](#bypass-security-apis)のように、
+`bypassSecurityTrust` ...関数を使って信頼できるとマークされた値を受け取り、
+それらをサニタイズしません。
 
 ### Content Security Policy
 
@@ -147,6 +147,7 @@ Webサーバーを設定する必要があります。CSP に関するより詳�
 
 
 {@a offline-template-compiler}
+
 
 ### オフラインテンプレートコンパイラを使う
 
@@ -191,7 +192,7 @@ Angularはテンプレート文字列を全面的に信頼するため、動的�
 * `bypassSecurityTrustResourceUrl`
 
 値が安全かどうかはコンテキストによって変わります。意図した値の用途に適したメソッドを使用してください。
-たとえば次のように、 
+たとえば次のように、
 URLに` javascript：alert(...)` をバインドするとします。
 
 

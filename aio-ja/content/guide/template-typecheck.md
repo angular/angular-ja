@@ -106,7 +106,7 @@ Angular ライブラリの入力が不完全または正しくない場合、ま
 
 このような誤検知の場合、いくつかのオプションがあります。
 
-* 特定のコンテキストで [`$any()` 型キャスト関数](guide/template-syntax#any-type-cast-function) を使用して、式の一部の型チェックをオプトアウトします。
+* 特定のコンテキストで [`$any()` 型キャスト関数](guide/template-expression-operators#any-type-cast-function) を使用して、式の一部の型チェックをオプトアウトします。
 * アプリケーションの TypeScript 設定ファイルで `strictTemplates: false` を設定することにより、厳密なチェックを完全に無効にすることができます。
 * _strictness flag_ を `false` に設定することにより、特定の型チェック操作を個別に無効にしながら、他の面では厳密性を維持できます。
 * `strictTemplates` と `strictNullChecks` を一緒に使用したい場合は、`strictNullInputTypes` による入力バインディング専用の厳密な null 型チェックをオプトアウトできます。
@@ -286,7 +286,7 @@ class SubmitButton {
 
 ## `$any()` を使用して型チェックを無効にする
 
-[`$any()` キャスト疑似関数](guide/template-syntax) の呼び出しで式を囲むことにより、バインディング式のチェックを無効にします。
+[`$any()` キャスト疑似関数](guide/template-expression-operators) の呼び出しで式を囲むことにより、バインディング式のチェックを無効にします。
 コンパイラーは、`<any>` または `as any` キャストが使用される場合、TypeScript と同様に、`any` 型へのキャストとしてそれを扱います。
 
 次の例では、`person` を `any` 型にキャストすると、`Property address does not exist` エラーが抑制されます。

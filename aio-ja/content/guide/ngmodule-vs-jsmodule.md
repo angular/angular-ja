@@ -1,72 +1,82 @@
 # JavaScriptモジュールとNgModule
 
-JavaScriptとAngularにはコードを整理するためのモジュールという仕組みがあります。
-両者は別々の方法でモジュールを管理しますが、Angularアプリケーションは両方に依存しています。
+JavaScriptモジュールとNgModuleはあなたのコードをモジュール化するのに役立ちますが、これらはとても異なっています。
+Angularアプリは両方の種類のモジュールに依存しています。
 
+## JavaScriptモジュール: コードを含んでいるファイル
 
-## JavaScriptモジュール
+[JavaScriptモジュール](https://javascript.info/modules "JavaScript.Info - Modules")はJavaScriptコードを含む独立したファイルであり、通常はあなたのアプリ内の特定の目的のためのクラスや関数のライブラリを含んでいます。
+JavaScriptモジュールはあなたの成果を多数のファイルに渡って広げます。
 
-JavaScriptモジュールはJavaScriptコードが含まれる単一のファイルです。モジュール内のものを利用するためには、次のようにエクスポート文を記述して、大抵はそのあとに関連するコードを書きます:
+<div class="alert is-helpful">
+
+JavaScriptモジュールの詳細を学ぶために、[ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)をご覧ください。
+モジュール仕様については、[6th Edition of the ECMAScript standard](http://www.ecma-international.org/ecma-262/6.0/#sec-modules)をご覧ください。
+
+</div>
+
+JavaScriptモジュールにおけるコードを他のモジュールで有効にするには、次のように、そのモジュールにおいて関連するコードの最後で`export`文を使います。:
 
 ```typescript
 export class AppComponent { ... }
 ```
 
-それから、他のファイルからそのファイルのコードが必要になったときには次のようにインポートします:
+そのモジュールのコードをもう一方のモジュールで必要とするとき、次のように`import`文を使います。:
 
 ```typescript
 import { AppComponent } from './app.component';
 ```
 
-JavaScriptモジュールは名前空間や、グローバル変数名が競合することを防ぐのに役立ちます。
+各モジュールはそれ自身のトップレベルスコープを持ちます。
+すなわち、モジュールにおけるトップレベルの変数や関数は他のスクリプトやモジュールにおいて見えません。
+各モジュールは他のモジュールにおける識別子との衝突を防ぐ、識別子のための名前空間を提供します。
+多数のモジュールにおいても、唯一のグローバルな名前空間を作ってそこへサブモジュールを加えることで、思いがけないグローバル変数を防止できます。
 
-JavaScriptモジュールについてのさらに詳しい情報は、[JavaScript/ECMAScript モジュール](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)を参照してください。
+Angularフレームワークそれ自身はJavaScriptモジュールの集合としてロードされます。
 
-## NgModule
+## NgModule: コンパイルのためのメタデータを持ったクラス
 
-<!-- KW-- perMisko: let's discuss. This does not answer the question why it is different. Also, last sentence is confusing.-->
-NgModuleは`@NgModule`デコレーターで装飾されたクラスです。`@NgModule`デコレーターの`imports`配列はAngularに現在のモジュールが他のどのようなモジュールが必要かを教えてくれます。`imports`配列内のモジュールは通常のJavaScriptモジュールではなくNgModuleです。`@NgModule`デコレーターをもつクラスは慣例によりそれを定義したファイルが持っていますが、そのクラスを`NgModule`にしているのはJavaScriptモジュールのようなファイルではなく、`@NgModule`とそのメタデータによるものです。
+[NgModule](guide/glossary#ngmodule "NgModuleの定義")は、アプリの特定の部分がどのように他の部分と一体となるかを表現するメタデータオブジェクトをもつ`@NgModule`デコレーターによってマークされたクラスです。
+NgModuleはAngular特有です。
+`@NgModule`デコレーターをもつクラスは慣例でそれら自身のファイルに置かれますが、このメタデータを含むのでJavaScriptモジュールとは異なります。
 
-[Angular CLI](cli)に生成された`AppModule`では両方のモジュールが使用されていることを確認できます:
+`@NgModule`のメタデータは、あなたが書くアプリのコードを高性能のJavaScriptコードに変換するAngularのコンパイルプロセスをガイドすることで、重要な役割を果たします。
+メタデータはコンポーネントのテンプレートのコンパイル方法と実行時の[インジェクター](guide/glossary#injector "インジェクターの定義")の作り方を表現します。
+それはNgModuleの[コンポーネント](guide/glossary#component "コンポーネントの定義")と[ディレクティブ](guide/glossary#directive "ディレクティブの定義")、[パイプ](guide/glossary#pipe "パイプの定義)"を認識し、
+それらのいくつかを`exports`プロパティを通して公開することで、外部のコンポーネントがそれらを使えるようにします。
+あなたは[サービス](guide/glossary#service "サービスの定義")のための[プロパイダー](guide/glossary#provider "プロバイダーの定義")を追加することにもNgModuleを使うことで、サービスをアプリのどこにおいても有効にできます。
 
-```typescript
-/* これはJavaScriptのインポート文です。Angularはこれについては何も知りません。 */
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+JavaScriptモジュールとしての1つの巨大なファイルですべてのメンバークラスを定義するよりも、`@NgModule.declarations`のリストで、どのコンポーネントやディレクティブ、パイプがNgModuleに所属するかを宣言してください。
+これらのクラスは[宣言](guide/glossary#declarable "宣言の定義")と呼ばれます。
+NgModuleは自身が所有するか他のNgModuleからインポートした宣言クラスのみをエクスポートできます。
+それは他の種類のクラスを宣言したりエクスポートしたりしません。
+宣言はAngularのコンパイルプロセスに関係する唯一のクラスです。
 
-import { AppComponent } from './app.component';
+NgModuleのメタデータのプロパティについての完全な説明は、[NgModuleのメタデータを使う](guide/ngmodule-api "NgModuleのメタデータを使う")をご覧ください。
 
-/* @NgModuleデコレーターは、このクラスがNgModuleであることをAngularに知らせます。 */
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [     /* ここでNgModuleをインポートしています。 */
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
+## 両方を使うサンプル
 
+新しいアプリプロジェクトのために[Angular CLI](cli)によって生成されるルートNgModuleの`AppModule`は、両方の種類のモジュールをどのように使うかを実演します。:
 
-NgModuleクラスはJavaScriptモジュールとは次のような点で異なります:
+<code-example path="ngmodules/src/app/app.module.1.ts" header="src/app/app.module.ts (default AppModule)"></code-example>
 
-* NgModuleは[宣言クラス](guide/ngmodule-faq#q-declarable)のみを束縛します。
-宣言クラスは単なるクラス([Angularコンパイラ](guide/ngmodule-faq#q-angular-compiler)にとっては重要)です。
-* JavaScriptモジュールのようにすべてのメンバークラスを1つの巨大なファイルに定義するかわりに、
-モジュールのクラスを`@NgModule.declarations`リストに記述します。
-* NgModuleは自身が持っている、または他のモジュールからインポートした[宣言クラス](guide/ngmodule-faq#q-declarable)のみエクスポートすることができます。
-他の種類のクラスを宣言したりエクスポートすることはしません。
-* JavaScriptモジュールとは異なり、
-NgModuleはプロバイダーを`@NgModule.providers`リストに追加することでアプリケーション_全体_をサービスで拡張することができます。
+ルートNgModuleはJavaScriptモジュールをインポートするための`import`文から始まります。
+それから次の配列とともに`@NgModule`を設定します。:
 
-<hr />
+* `declarations`: このNgModuleに所属するコンポーネントとディレクティブ、パイプ。
+  新しいアプリプロジェクトのルートNgModuleは`AppComponent`というただ1つのコンポーネントを持ちます。
 
-## NgModule についてのさらに詳しい情報
+* `imports`: あなたが使用する他のNgModule。これによりそれらの宣言を使用できます。
+  新しく生成されるルートNgModuleは、ブラウザ特有の[DOM](https://www.w3.org/TR/DOM-Level-2-Core/introduction.html "Definition of Document Object Model")レンダリングやサニタイズ、ロケーションといったサービスを使用するために[`BrowserModule`](api/platform-browser/BrowserModule "BrowserModule NgModule")をインポートします。
 
-NgModule についてのさらに詳しい情報については次の記事を参照してください:
-* [ブートストラップ](guide/bootstrapping)
-* [よく使用されるモジュール](guide/frequent-ngmodules)
-* [プロバイダー](guide/providers)
+* `providers`: 他のNgModuleにおけるコンポーネントが使用できるサービスのプロバイダー。
+  新しく生成されるルートNgModuleにおいてプロバイダーはありません。
+
+* `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリをブートストラップします。
+  このエントリーコンポーネントの`AppComponent`は`declarations`と`bootstrap`の両方の配列に現れます。
+
+## 次のステップ
+
+* NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")をご覧ください。
+* ルートNgModuleについてより学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")をご覧ください。
+* よく使用されるAngularのNgModuleとそれらをアプリにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")をご覧ください。

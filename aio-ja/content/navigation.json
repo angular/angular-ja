@@ -699,8 +699,9 @@
             },
             {
               "url": "guide/template-typecheck",
-              "title": "Template Type-checking",
-              "tooltip": "Template type-checking in Angular."
+              "title": "テンプレート型チェック",
+              "tooltip": "Template type-checking in Angular.",
+              "translated": true
             }
           ]
         },

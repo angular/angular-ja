@@ -63,6 +63,7 @@ CLIを使って生成することができます。
 `AppRoutingModule` はすでに `HeroesComponent` をインポートしているため、 `routes` 配列で使用できます。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts"
+  region="heroes-route">
 </code-example>
 
 典型的なAngularの`Route`はふたつのプロパティを持っています：

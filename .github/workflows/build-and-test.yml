@@ -14,6 +14,11 @@ jobs:
         node-version: [12.x]
 
     steps:
+    - name: Get PR number
+      uses: actions/github-script@v3
+      id: pr-number
+      with:
+        script: return context.issue.number;
     - uses: actions/checkout@v2
       with:
         submodules: true
@@ -47,4 +52,4 @@ jobs:
         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
         expires: 7d
         projectId: angular-ja
-        channelId: preview
+        channelId: "preview-pr${{steps.pr-number.outputs.result}}"

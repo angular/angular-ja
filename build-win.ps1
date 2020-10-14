@@ -1,13 +1,13 @@
-# copy origin to temporary workspace
+# Copy origin to temporary workspace.
 Set-Location origin
 git clean -xdn
 Set-Location ..
 robocopy origin .tmp /e
 
-# overrides files from ja directory
+# Overrides files from ja directory.
 robocopy aio-ja/ .tmp/aio /e
 
-# build angular.io
+# Build angular.io
 Set-Location .tmp
 yarn install --frozen-lockfile --non-interactive
 Set-Location aio

@@ -162,7 +162,7 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
     <td>
 
-      `ngAfterViewInit()` およびその後のすべての `ngAfterContentChecke()` の後に呼び出されます。
+      `ngAfterViewInit()` およびその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
 
     </td>
   </tr>

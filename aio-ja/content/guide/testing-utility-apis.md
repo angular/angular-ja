@@ -19,13 +19,13 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
   <tr>
     <td style="vertical-align: top">
-      <code>async</code>
+      <code>waitForAsync</code>
     </td>
 
     <td>
 
-    特別な_asyncテストゾーン_内でテスト（`it`）またはセットアップ（`beforeEach`）関数の本体を実行します。
-    [上記の説明](guide/testing-components-scenarios#async)を参照してください。
+    特別な_非同期テストゾーン_内でテスト（`it`）またはセットアップ（`beforeEach`）関数の本体を実行します。
+    [上記の説明](guide/testing-components-scenarios#waitForAsync)を参照してください。
 
     </td>
   </tr>

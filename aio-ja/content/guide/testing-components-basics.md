@@ -154,10 +154,10 @@ ng generate component banner --inline-template --inline-style --module app
 <div class="alert is-helpful">
 
 Because `compileComponents` is asynchronous, it uses
-the [`async`](api/core/testing/async) utility
+the [`waitForAsync`](api/core/testing/waitForAsync) utility
 function imported from `@angular/core/testing`.
 
-Please refer to the [async](guide/testing-components-scenarios#async) section for more details.
+Please refer to the [waitForAsync](guide/testing-components-scenarios#waitForAsync) section for more details.
 
 </div>
 
@@ -358,6 +358,6 @@ Angularコアライブラリから`DebugElement`シンボルをインポート�
 
 CSSセレクターでフィルタリングし、ブラウザの_ネイティブ要素_のプロパティのみをテストする場合、`By.css`でのアプローチは過度のものになるかもしれません。
 
-次の一連のテストで示すように、
 `querySelector()`や`querySelectorAll()`などの標準的な`HTMLElement`メソッドを使用してフィルタ処理する方が簡単で、
 より明確になることがよくあります。
+

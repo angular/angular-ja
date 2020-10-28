@@ -86,24 +86,6 @@
     "groups": ["Angular"],
     "lead": "kara"
   },
-  "matsko": {
-    "name": "Matias Niemela",
-    "picture": "matias.jpg",
-    "twitter": "yearofmoo",
-    "website": "http://yearofmoo.com",
-    "bio": "Matias Niemela is a fullstack web developer who has been programming & building websites for over 10 years, and a core team member of AngularJS for two years. In the spring of 2015 Matias joined Angular full time at Google. In his free time Matias loves to build complex things and is always up for public speaking, travelling and tweaking his current Vim setup.",
-    "groups": ["Angular"],
-    "lead": "kara"
-  },
-  "kara": {
-    "name": "Kara Erickson",
-    "picture": "kara-erickson.jpg",
-    "twitter": "karaforthewin",
-    "website": "https://github.com/kara",
-    "bio": "Kara is a software engineer on the Angular team at Google and a co-organizer of the Angular-SF Meetup. Prior to Google, she helped build UI components in Angular for guest management systems at OpenTable.  She enjoys snacking indiscriminately and probably other things too.",
-    "groups": ["Angular"],
-    "lead": "igorminar"
-  },
   "pkozlowski-opensource": {
     "name": "Pawel Kozlowski",
     "picture": "pawel.jpg",
@@ -476,8 +458,8 @@
     "name": "Sajeetharan Sinnathurai",
     "picture": "sajee.jpg",
     "twitter": "kokkisajee",
-    "website": "https://sajeetharan.herokuapp.com/",
-    "bio": "Sajeetharan is a Developer, Top contributor on stackoverflow for #Angular, ng-SriLanka organizer. He makes use of his extensive knowledge over the past years to contribute to community to make the world a better place.",
+    "website": "https://sajeetharan.com/",
+    "bio": "Sajeetharan is a Cloud Architect, Top contributor on stackoverflow for #Angular, ng-SriLanka organizer. He makes use of his extensive knowledge over the past years to contribute to community to make the world a better place.",
     "groups": ["GDE"]
   },
   "lacolaco": {
@@ -618,26 +600,6 @@
     "bio": "Justin (aka Schwarty) is a Google Developer Expert in Web Technologies and Angular, the host and maintainer of the weekly AngularAir live video broadcast, educator, writer and content creator. He has Angular courses available on LinkedIn Learning and Pluralsight and loves passing on years of full stack development knowledge to help empower others to find their inner awesomeness!",
     "groups": ["GDE"]
   },
-  "dennispbrown": {
-    "name": "Denny Brown",
-    "picture": "denny.jpg",
-    "bio": "Denny is founder of Expert Support, a professional services firm specializing in technical communication, and leads the Angular technical writing team. His lifelong passion has been to reduce the time and effort required to understand complex technical information. Early on, he was Associate Chairman of the Computer Science Department at Stanford, where he taught introductory courses in programming. He also plays old-timers baseball in local leagues and national tournaments.",
-    "groups": ["Angular"],
-    "lead": "aikidave"
-  },
-  "jbogarthyde": {
-    "name": "Judy Bogart",
-    "picture": "judy.png",
-    "groups": ["Angular"],
-    "lead": "dennispbrown"
-  },
-  "rockument69": {
-    "name": "Tony Bove",
-    "picture": "rockument69.jpg",
-    "bio": "Tony is a technical writer with Expert Support. His lifelong passions are helping people use technology, writing fiction, and playing music. When he's not working or playing the harmonica with friends in a bluegrass band, he's swimming and snorkeling on a Kauai beach and playing ball with his Irish Wolfhound. He's worked at home for decades before it became a thing.",
-    "groups": ["Angular"],
-    "lead": "aikidave"
-  },
   "kapunahelewong": {
     "name": "Kapunahele Wong",
     "picture": "kapunahele.jpg",
@@ -751,9 +713,9 @@
   "santosh": {
     "name": "Santosh Yadav",
     "picture": "santoshyadav.jpg",
-    "twitter": "Santosh19742211",
+    "twitter": "SantoshYadavDev",
     "website": "https://www.santoshyadav.dev",
-    "bio": "Santosh is a GDE for Angular and Web Technologies and loves to contribute to Open Source. He is the creator of ng deploy for netlify and core team member for NestJS Addons. He writes for AngularInDepth, mentors for DotNetTricks, organizes Pune Tech Meetup, and conducts free workshops on Angular.",
+    "bio": "Santosh is a GDE for Angular and loves to contribute to Open Source. He is the creator of ng deploy for netlify and core team member for NestJS Addons. He writes for AngularInDepth, mentors for DotNetTricks, organizes Pune Tech Meetup, and conducts free workshops on Angular.",
     "groups": ["GDE"]
   },
   "josephperrott": {
@@ -848,5 +810,46 @@
     "website": "kreuzercode.com",
     "bio": "Kevin is a passionate freelance front-end engineer and Google Developer Expert based in Switzerland. He is a JavaScript enthusiast and fascinated by Angular. Kevin always tries to learn new things, expand his knowledge, and share it with others in the form of blog posts, workshops, podcasts, or presentations. He is a writer for various publications and the most active writer on Angular in-depth in 2019. Contributing to multiple projects and maintaining 7 npm packages, Kevin is also a big believer in open source. Furthermore, Kevin is a big football fan. Since his childhood, he has supported Real Madrid, which you might notice in a lot of his blog posts and tutorials.",
     "groups": ["GDE"]
+  },
+  "samvloeberghs": {
+    "name": "Sam Vloeberghs",
+    "picture": "samvloeberghs.jpg",
+    "groups": ["GDE"],
+    "twitter": "samvloeberghs",
+    "website": "https://samvloeberghs.be",
+    "bio": "Sam is a freelance software architect and Internet entrepreneur, currently focusing on frontend technologies. Co-organiser of the Belgian Angular conference NG-BE and Angular Belgium Meetup group."
+  },
+  "thekiba": {
+    "name": "Andrew Grekov",
+    "picture": "thekiba.jpg",
+    "twitter": "thekiba_io",
+    "website": "https://thekiba.io",
+    "bio": "Andrew is a software engineer using Angular and .NET. He spends most of his spare time staying up-to-date, helping other people, and experimenting with web tech.",
+    "groups": ["GDE"]
+  },
+  "fmalcher": {
+    "name": "Ferdinand Malcher",
+    "picture": "fmalcher.jpg",
+    "twitter": "fmalcher01",
+    "website": "https://angular.schule",
+    "bio": "Ferdinand is a developer, trainer, and international speaker from Leipzig, Germany. He is co-author of the German Angular book and loves to share knowledge – that's why he writes books and blog posts, speaks at meetups and conferences, does Angular training and works as a consultant in his company \"Angular.Schule\".",
+    "groups": ["GDE"]
+  },
+  "johanneshoppe": {
+    "name": "Johannes Hoppe",
+    "picture": "johanneshoppe.jpg",
+    "twitter": "johanneshoppe",
+    "website": "https://angular.schule",
+    "bio": "Johannes works as a software architect and consultant for Angular. He is co-author of the German Angular book and a passionate speaker. With his company \"Angular.Schule\" he offers public Angular training and consulting. Johannes is head of the Angular Meetup in Heidelberg, Germany, and is engaged in a couple of open source projects.",
+    "groups": ["GDE"]
+  },
+  "jessicajaniuk": {
+    "name": "Jessica Janiuk",
+    "picture": "jessicajaniuk.jpg",
+    "twitter": "thepunderwoman",
+    "website": "https://github.com/jessicajaniuk",
+    "bio": "Jessica is a software engineer at Google. In her free time she is a historical fencer, astromech droid builder, photographer, pun purveyor, occasional cosplayer, and full time cat mom.",
+    "groups": ["Angular"],
+    "lead": "jelbourn"
   }
 }

@@ -31,7 +31,7 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 ```json
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "experimentalDecorators": true,
     ...

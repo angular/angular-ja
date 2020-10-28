@@ -89,7 +89,7 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 
 <code-example path="architecture/src/app/hero-list.component.1.html" header="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
-* `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
+* `{{hero.name}}`[*補間*](guide/interpolation)は
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
 * `[hero]`[*プロパティバインディング*](guide/property-binding)は、
@@ -166,8 +166,8 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 
 <code-example path="architecture/src/app/hero-list.component.1.html" header="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
-* [`*ngFor`](guide/displaying-data#ngFor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
-* [`*ngIf`](guide/displaying-data#ngIf) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
+* [`*ngFor`](guide/structural-directives#inside-ngfor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
+* [`*ngIf`](guide/structural-directives#ngif-case-study) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
 
 #### 属性ディレクティブ
 

@@ -1,4 +1,4 @@
-# アプリ内ナビゲーション
+# ナビゲーションの追加
 
 [パート1](start "Get started with a basic Angular app")を終えると、オンラインストアアプリケーションは基本的な製品カタログを持っています。
 アプリには可変状態やナビゲーションはありません。
@@ -85,6 +85,13 @@ URLは1つあり、そのURLには常に"My Store"ページが製品のリスト
 
     <code-example header="src/app/product-details/product-details.component.html" path="getting-started/src/app/product-details/product-details.component.html" region="details">
     </code-example>
+
+    <div class="alert is-helpful">
+
+    The line, `<h4>{{ product.price | currency }}</h4>`, uses the `currency` pipe to transform `product.price` from a number to a currency string. A pipe is a way you can transform data in your HTML template. For more information about Angular pipes, see [Pipes](guide/pipes "Pipes").
+
+    </div>
+
 
 商品リストコンポーネントを商品詳細コンポーネントと入れ替えて、商品詳細を表示するようになりました。
 

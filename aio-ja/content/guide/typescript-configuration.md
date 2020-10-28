@@ -18,32 +18,7 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 ## 構成ファイル
 
 A given Angular workspace contains several TypeScript configuration files.
-At the root level, there are two main TypeScript configuration files: a `tsconfig.json` file and a `tsconfig.base.json` file.
-
-The `tsconfig.json` file is a ["Solution Style"](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#support-for-solution-style-tsconfigjson-files) TypeScript configuration file.
-Code editors and TypeScript’s language server use this file to improve development experience.
-Compilers do not use this file.
-
-The `tsconfig.json` file contains a list of paths to the other TypeScript configuration files used in the workspace.
-
-<code-example lang="json" header="tsconfig.json" linenums="false">
-{
- "files": [],
- "references": [
-   {
-     "path": "./tsconfig.app.json"
-   },
-   {
-     "path": "./tsconfig.spec.json"
-   },
-   {
-     "path": "./projects/my-lib/tsconfig.lib.json"
-   }
- ]
-}
-</code-example>
-
-The `tsconfig.base.json` file specifies the base TypeScript and Angular compiler options that all projects in the workspace inherit.
+At the root `tsconfig.json` specifies the base TypeScript and Angular compiler options that all projects in the workspace inherit.
 
 The TypeScript and Angular have a wide range of options which can be used to configure type-checking features and generated output.
 For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.
@@ -54,7 +29,7 @@ For details about configuration inheritance, see the [Configuration inheritance 
 
 </div>
 
-Angular アプリケーションの最初の `tsconfig.base.json` は通常、次の例のようになります：
+Angular アプリケーションの最初の `tsconfig.json` は通常、次の例のようになります：
 
 <code-example lang="json" header="tsconfig.json" linenums="false">
 {

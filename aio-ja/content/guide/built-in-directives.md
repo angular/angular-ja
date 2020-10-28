@@ -282,7 +282,7 @@ Angular は変更を検出し続けることがあります。
 そのブロックをリストの各項目を表示するテンプレートとして使うよう Angular に伝えます。
 繰り返しのプロセスは `*ngFor` に与えられたテキストが指示します。
 
-次の例はシンプルな `<div>` に `NgFor` を適用したものです。 (`ngFor` の前にアスタリスク (`*`) をつけるのを忘れないでください) 
+次の例はシンプルな `<div>` に `NgFor` を適用したものです。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1" header="src/app/app.component.html"></code-example>
 

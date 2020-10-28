@@ -9,7 +9,7 @@ Zoneは非同期タスクにまたがって持続する実行コンテキスト�
 
 ### Angularにおけるデータ更新と表示
 
-Angularでは、HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることにより、[データを表示](guide/displaying-data) できます。
+Angularでは、HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることにより、データを表示できます。
 
 <code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts"></code-example>
 
@@ -102,13 +102,13 @@ Angularでは、このステップは不要です。データの更新するた�
 
 変更検知がどのように機能するかを理解するには、まずアプリケーションがHTMLの更新を必要とするときについて考えてみましょう。通常、更新は次のいずれかの理由によって発生します。
 
-1. コンポーネントの初期化。たとえば、Angularアプリケーションをブートストラップするとき、Angularはブートストラップコンポーネントを読み込み、 [ApplicationRef.tick()](api/core/ApplicationRef#tick)をトリガーして変更検知とビューレンダリングを呼び出します。 [データの表示](guide/displaying-data)のサンプルのように、`AppComponent`はブートストラップコンポーネントです。このコンポーネントは`title`および`myHero`プロパティを持っており、アプリケーションはこれらをHTMLにレンダリングします。
+1. コンポーネントの初期化。たとえば、Angularアプリケーションをブートストラップするとき、Angularはブートストラップコンポーネントを読み込み、 [ApplicationRef.tick()](api/core/ApplicationRef#tick)をトリガーして変更検知とビューレンダリングを呼び出します。
 
-2. イベントリスナー。次の例のように、DOMイベントリスナーはAngularコンポーネントのデータを更新し、変更検知をトリガーすることもできます。
+1. イベントリスナー。次の例のように、DOMイベントリスナーはAngularコンポーネントのデータを更新し、変更検知をトリガーすることもできます。
 
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts"></code-example>
 
-3. Httpデータリクエスト。Httpリクエストを介してサーバーからデータを取得することもできます。
+1. Httpデータリクエスト。Httpリクエストを介してサーバーからデータを取得することもできます。
 
 ```typescript
 @Component({

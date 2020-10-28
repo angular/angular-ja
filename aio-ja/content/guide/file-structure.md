@@ -40,8 +40,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
 | `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |
 | `node_modules`         | [npmパッケージ](guide/npm-packages)をワークスペース全体に提供します。 |
-| `tsconfig.json`         | The `tsconfig.json` file is a ["Solution Style"](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#support-for-solution-style-tsconfigjson-files) TypeScript configuration file. Code editors and TypeScript’s language server use this file to improve development experience. Compilers do not use this file. |
-| `tsconfig.base.json`    | The base [TypeScript](https://www.typescriptlang.org/) configuration for projects in the workspace. All other configuration files inherit from this base file. For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.|
+| `tsconfig.json`    | The base [TypeScript](https://www.typescriptlang.org/) configuration for projects in the workspace. All other configuration files inherit from this base file. For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.|
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 
 
@@ -103,7 +102,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 ルートアプリケーション用のアプリケーション固有の設定ファイルは、ワークスペースのルートレベルにあります。
 マルチプロジェクトワークスペースの場合、プロジェクト固有の設定ファイルはプロジェクトルートの `projects/project-name/` にあります。
 
-プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.base.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
+プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
 
 | アプリケーション固有の設定ファイル    | 目的 |
 | :--------------------- | :------------------------------------------|

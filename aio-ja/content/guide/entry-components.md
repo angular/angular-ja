@@ -75,6 +75,11 @@ const routes: Routes = [
 
 
 ## `entryComponents`配列
+<div class="alert is-helpful">
+
+   Since 9.0.0 with Ivy, the `entryComponents` property is no longer necessary. See [deprecations guide](guide/deprecations#entryComponents).
+
+</div>
 
 `@NgModule`デコレーターは`entryComponents`配列を持っていますが、
 Angularが`@NgModule.bootstrap`にリストされたコンポーネントと、ルーティング定義内のコンポーネントをエントリーコンポーネントとして自動的に追加するので、ほとんどの場合エントリーコンポーネントを明示的に設定する必要はありません。これらの2つのメカニズムによって追加されたエントリーコンポーネントがほとんどを占めますが、アプリケーションからブートストラップを行ったり、コンポーネントを型に基づいて命令的に動的ロードしたりする場合は、

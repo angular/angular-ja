@@ -1,12 +1,9 @@
 # ライブラリを作成する
 
-Angular の機能を拡張するために新しいライブラリを作成して公開することができます。同じ問題を複数のアプリで解決する必要があると判断した場合 (または他の開発者と解決策を共有したい場合)、それはライブラリの候補となります。
+Angular の機能を拡張するために新しいライブラリを作成して公開することができます。
 
+同じ問題を複数のアプリで解決する必要があると判断した場合 (または他の開発者と解決策を共有したい場合)、それはライブラリの候補となります。
 簡単な例としては、会社の Web サイトにユーザーを送信するボタンがあります。これは、会社が構築するすべてのアプリに含まれています。
-
-<div class="alert is-helpful">
-     <p>ライブラリプロジェクトの構造の詳細については、<a href="guide/file-structure#library-project-files">ライブラリプロジェクトファイル</a>を参照してください。</p>
-</div>
 
 ## はじめに
 
@@ -18,12 +15,18 @@ Angular CLI を使用して次のコマンドで新しいライブラリスケ�
  ng generate library my-lib
 </code-example>
 
+The `ng generate` command creates the `projects/my-lib` folder in your workspace, which contains a component and a service inside an NgModule.
+
 <div class="alert is-helpful">
-     <p>You can use the monorepo model to use the same workspace for multiple projects. See <a href="guide/file-structure#multiple-projects">Setting up for a multi-project workspace</a>.</p>
+
+     For more details on how a library project is structured, refer to the [Library project files](guide/file-structure#library-project-files) section of the [Project File Structure guide](guide/file-structure).
+
+     You can use the monorepo model to use the same workspace for multiple projects.
+     See [Setting up for a multi-project workspace](guide/file-structure#multiple-projects).
+
 </div>
 
-これはあなたのワークスペースに `projects/my-lib` フォルダを作成します。そこには NgModule 内のコンポーネントとサービスが含まれています。
-ワークスペースの設定ファイル `angular.json` は、タイプ 'library' のプロジェクトで更新されています。
+When you generate a new library, the workspace configuration file, `angular.json`, is updated with a project of type `library`.
 
 <code-example format="json">
 "projects": {
@@ -69,20 +72,35 @@ NgModule を使用してサービスとコンポーネントを公開します�
 
 * コンポーネントは、コンテキストを提供するための入力、およびイベントを他のコンポーネントに伝達するための出力を介してそれらの相互作用を公開する必要があります。
 
-* サービスは (NgModule やコンポーネントでプロバイダーを宣言するのではなく) 独自のプロバイダーを宣言する必要があります。そのため、それらは*ツリーシェイク可能*です。これにより、ライブラリをインポートするアプリケーションにサービスがインジェクトされることがない場合、コンパイラはサービスをバンドルから除外することができます。これについて詳しくは、[ツリーシェイク可能プロバイダ](guide/dependency-injection-providers#tree-shakable-providers) を参照してください。
-
-* グローバルサービスプロバイダーを登録したり、複数の NgModule にわたってプロバイダーを共有したりする場合は、[RouterModule](api/router/RouterModule)で提供されている [`forRoot()` および `forChild()` パターン](guide/singleton-services) を使用してください。
-
 * すべての内部依存関係を確認してください。
    * コンポーネントまたはサービスで使用されるカスタムクラスまたはインターフェースの場合は、それらも移行が必要な追加のクラスまたはインターフェースに依存しているかどうかを確認します。
    * 同様に、ライブラリコードがサービスに依存している場合は、そのサービスを移行する必要があります。
    * ライブラリコードまたはそのテンプレートが他のライブラリ (Angular Material など) に依存している場合は、それらの依存関係を使用してライブラリを構成する必要があります。
 
-## 再利用可能なコードと schematics
+* Consider how you provide services to client applications.
+
+   * Services should declare their own providers (rather than declaring providers in the NgModule or a component), so that they are *tree-shakable*. This allows the compiler to leave the service out of the bundle if it never gets injected into the application that imports the library. For more about this, see [Tree-shakable providers](guide/dependency-injection-providers#tree-shakable-providers).
+
+   * If you register global service providers or share providers across multiple NgModules, use the [`forRoot()` and `forChild()` design patterns](guide/singleton-services) provided by the [RouterModule](api/router/RouterModule).
+
+   * If your library provides optional services that might not be used by all client applications, support proper tree-shaking for that case by using the [lightweight token design pattern](guide/lightweight-injection-tokens).
+
+{@a integrating-with-the-cli}
+
+## コード生成Schematicsを使ったCLIとの連携
 
 ライブラリには通常、コンポーネント、サービス、およびプロジェクトにインポートするだけのその他の Angular アーティファクト (パイプ、ディレクティブなど) を定義する再利用可能なコードが含まれています。
 ライブラリーは、公開および共有のために npm パッケージにパッケージ化されており、このパッケージには、CLI が `ng generate component` を使用して汎用スケルトンアプリケーションを作成するのと同じ方法で、プロジェクト内で直接コードを生成または変換するための手順を提供する [schematics](guide/glossary#schematic) を含めることもできます。
 ライブラリと組み合わせた schematics は、たとえば Angular CLI にそのライブラリで定義された特定のコンポーネントを生成するために必要な情報を提供することができます。
+One example of this is Angular Material's navigation schematic which configures the CDK's `BreakpointObserver` and uses it with Material's `MatSideNav` and `MatToolbar` components.
+
+You can create and include the following kinds of schematics.
+
+* `ng add` がライブラリをプロジェクトに追加できるようにインストール用の schematic を含めてください。
+
+* `ng generate` がプロジェクト内の定義済みの成果物 (コンポーネント、サービス、テストなど) に雛形を生成することができるように、生成用の schematics を含めます。
+
+* `ng update` がライブラリの依存関係を更新し、新しいリリースでの破壊的変更の移行を提供できるように、更新 schematic を含めてください。
 
 ライブラリーに含めるものは、実現したいタスクの種類によって決まります。
 たとえば、データをドロップダウンしてアプリに追加する方法を示すために、ライブラリに作成する schematic を定義することができます。
@@ -92,18 +110,6 @@ NgModule を使用してサービスとコンポーネントを公開します�
 そのフォームがユーザーによる追加のカスタマイズを必要とするならば、それは schematic としてもっともうまくいくかもしれません。
 ただし、フォームが常に同じで開発者がそれほどカスタマイズする必要がない場合は、構成を取得してフォームを生成する動的コンポーネントを作成できます。
 一般に、カスタマイズが複雑になればなるほど、schematic アプローチはより有用になります。
-
-{@a integrating-with-the-cli}
-
-## CLI との統合
-
-ライブラリには、Angular CLI と統合するための [schematics](guide/glossary#schematic) を含めることができます。
-
-* `ng add` がライブラリをプロジェクトに追加できるようにインストール用の schematic を含めてください。
-
-* `ng generate` がプロジェクト内の定義済みの成果物 (コンポーネント、サービス、テストなど) に雛形を生成することができるように、生成用の schematics を含めます。
-
-* `ng update` がライブラリの依存関係を更新し、新しいリリースでの破壊的変更の移行を提供できるように、更新 schematic を含めてください。
 
 詳細については、[Schematics の概要](guide/schematics) および [ライブラリの Schematics](guide/schematics-for-libraries) を参照してください。
 
@@ -149,7 +155,7 @@ You can use this feature when your library needs to publish optional theming fil
 ライブラリをリンクするときは、ビルドステップが監視モードで実行されていること、およびライブラリの `package.json` 設定が正しいエントリポイントを指していることを確認してください。
 たとえば、`main` は TypeScript ファイルではなく JavaScript ファイルを指す必要があります。
 
-## ピア依存関係に TypeScript パスマッピングを使用する
+### ピア依存関係に TypeScript パスマッピングを使用する
 
 Angular ライブラリはすべての `@angular/*` 依存関係をピア依存関係として一覧にするべきです。
 これは、モジュールが Angular を要求したときに、それらがすべてまったく同じモジュールを取得することを保証します。

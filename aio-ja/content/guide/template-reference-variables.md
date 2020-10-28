@@ -30,9 +30,9 @@ HTML の中でバラバラに3回出現します。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ngForm" header="src/app/hero-form.component.html"></code-example>
 
-属性の値が ngForm でなければ、itemForm が参照する値は
+属性の値が ngForm でなければ、`itemForm` が参照する値は
 [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) となります。
-ただし、コンポーネントとディレクティブには違いがあります。
+ただし、`Component`と`Directive`には違いがあります。
 `Component` は属性の値がなくても参照されるのに対して、
 `Directive` は暗黙の参照（つまり要素）を変更しません。
 

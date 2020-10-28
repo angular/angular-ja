@@ -1,4 +1,4 @@
-# 試してみよう: デプロイ
+# アプリケーションのデプロイ
 
 
 アプリケーションをデプロイするには、それをコンパイルしてから、JavaScript、CSS、およびHTMLをWebサーバー上でホストする必要があります。 ビルドされたAngularアプリケーションは非常に移植性が高く、あらゆる環境で動作したり、Node、Java、.NET、PHP、その他多くのテクノロジーによって提供されます。
@@ -65,6 +65,7 @@ ng build --prod
 1. [Firebase](https://firebase.google.com/ "Firebase web site") で firebaseアカウントにサインアップしてください。
 1. 新しいプロジェクトを作成し、好きな名前を付けます。
 1. `ng add @angular/fire`を使用して、デプロイメントを処理する`@angular/fire` schematicsを追加します。
+1. Install [Firebase CLI](https://firebase.google.com/docs/cli) globally using `npm install -g firebase-tools`.
 1. CLIをFirebaseアカウントに接続し、 `firebase login` および `firebase init` を使用してプロジェクトへの接続を初期化します。
 1. プロンプトにしたがってホスティング用に作成した `Firebase` プロジェクトを選択します。
   - 最初のプロンプトで`Hosting`オプションを選択します。

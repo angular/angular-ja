@@ -1,7 +1,7 @@
-# イベントバインディング `(event)`
+# イベントバインディング
 
 イベントバインディングを使えば、キー操作、マウス移動、クリック、タッチなどの
-イベントをリッスンすることができます。
+イベントをリッスンし、応答することができます。
 
 <div class="alert is-helpful">
 
@@ -9,102 +9,59 @@ See the <live-example></live-example> for a working example containing the code 
 
 </div>
 
-Angular のイベントバインディングの構文は、等号の左側にある
-括弧に囲まれた **ターゲットイベント** の名前と、
-等号の右側にある引用符に囲まれたテンプレート文から成り立ちます。
-次のイベントバインディングはボタンのクリックイベントをリッスンし、
-クリックされたらコンポーネントの `onSave()` メソッドを呼び出します:
+## Binding to events
+
+To bind to an event you use the Angular event binding syntax.
+This syntax consists of a target event name within parentheses to the left of an equal sign, and a quoted template statement to the right.
+In the following example, the target event name is `click` and the template statement is `onSave()`.
+
+<code-example language="html" header="Event binding syntax">
+&lt;button (click)="onSave()"&gt;Save&lt;button&gt;
+</code-example>
+
+The event binding listens for the button's click events and calls the component's `onSave()` method whenever a click occurs.
 
 <div class="lightbox">
   <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </div>
 
-## ターゲットイベント {@a target-event}
+## Custom events with `EventEmitter`
 
-前に示したとおり、ターゲットはボタンのクリックイベントです。
+[Directives](guide/built-in-directives) typically raise custom events with an Angular [EventEmitter](api/core/EventEmitter) as follows.
 
-<code-example path="event-binding/src/app/app.component.html" region="event-binding-1" header="src/app/app.component.html"></code-example>
+1. The directive creates an `EventEmitter` and exposes it as a property.
+1. The directive then calls `EventEmitter.emit(data)` to emit an event, passing in message data, which can be anything.
+1. Parent directives listen for the event by binding to this property and accessing the data through the `$event` object.
 
-または、標準形式として知られている接頭辞 `on-` を使うこともできます:
-
-<code-example path="event-binding/src/app/app.component.html" region="event-binding-2" header="src/app/app.component.html"></code-example>
-
-要素のイベントは、より一般的なターゲットかもしれませんが、次の例で示すように、
-Angular は名前が既知のディレクティブのイベントプロパティと一致するかどうかを最初に調べます。
-
-<code-example path="event-binding/src/app/app.component.html" region="custom-directive" header="src/app/app.component.html"></code-example>
-
-名前が、要素のイベントや、既知のディレクティブの出力プロパティと一致しないときは、
-Angular は “unknown directive” エラーを報告します。
-
-## *$event* とイベントハンドル文 {@a event-and-event-handling-statements}
-
-イベントバインディングでは、Angular はターゲットイベントのイベントハンドラーをセットアップします。
-
-イベントが発生すると、ハンドラーはテンプレート文を実行します。
-通常、テンプレート文にはレシーバーが含まれます。
-レシーバーでは、HTML コントロールの値をモデルに格納するなどといった、
-イベントに反応したアクションを実行します。
-
-バインディングは、イベントに関する情報を伝えます。この情報には、 `$event` という名前でイベントオブジェクト、文字列、数値などのデータ値を含めることができます。
-
-`$event` オブジェクトの形式はターゲットのイベントによって決まります。
-ターゲットのイベントがネイティブの DOM 要素イベントであれば、 `$event` は
-`target` や `target.value` といったプロパティを持った
-[DOM イベントオブジェクト](https://developer.mozilla.org/en-US/docs/Web/Events)です。
-
-この例について考えてみましょう:
-
-<code-example path="event-binding/src/app/app.component.html" region="event-binding-3" header="src/app/app.component.html"></code-example>
-
-このコードでは、 `name` プロパティをバインドすることで `<input>` の `value` を設定しています。
-値の変化をリッスンするため、 `<input>` 要素の
-`input` イベントにバインドしています。
-ユーザーが値を変更すると `input` イベントが発生し、
-バインディングは DOM イベントオブジェクト `$event` を含むコンテキストで文を実行します。
-
-`name` プロパティを更新するため、パス `$event.target.value` を使って変更されたテキストを取得します。
-
-イベントがディレクティブに属している場合&mdash;コンポーネントはディレクティブであることを思い出してください
-&mdash;`$event` はディレクティブが生成する形式となります。
-
-## `EventEmitter` によるカスタムイベント {@a custom-events-with-eventemitter}
-
-典型的なディレクティブは、Angular の [EventEmitter](api/core/EventEmitter) によってカスタムイベントを発生させます。
-ディレクティブは `EventEmitter` を作り、プロパティとして公開します。
-ディレクティブはイベントを起こすために `EventEmitter.emit(payload)` を呼び出し、任意のメッセージペイロードを渡します。
-親ディレクティブは、プロパティをバインドしてイベントをリッスンし、 `$event` オブジェクトを通じてペイロードにアクセスします。
-
-`ItemDetailComponent` がアイテムの情報を表示して、ユーザーアクションに反応するものだとします。
-`ItemDetailComponent` には削除ボタンがありますが、それ自身はヒーローを削除する方法を知りません。ユーザーの削除要求を伝えるイベントを発生させるだけです。
-
-`ItemDetailComponent` の関連コードの抜粋です:
+Consider an `ItemDetailComponent` that presents item information and responds to user actions.
+Although the `ItemDetailComponent` has a delete button, it doesn't contain the functionality to delete the hero.
+It can only raise an event reporting the user's delete request.
 
 
 <code-example path="event-binding/src/app/item-detail/item-detail.component.html" header="src/app/item-detail/item-detail.component.html (template)" region="line-through"></code-example>
 
+The component defines a `deleteRequest` property that returns an `EventEmitter`.
+When the user clicks **Delete**, the component invokes the `delete()` method, telling the `EventEmitter` to emit an `Item` object.
+
 <code-example path="event-binding/src/app/item-detail/item-detail.component.ts" header="src/app/item-detail/item-detail.component.ts (deleteRequest)" region="deleteRequest"></code-example>
 
-
-コンポーネントは `EventEmitter` を返す `deleteRequest` プロパティを定義しています。
-ユーザーが *delete* をクリックすると、コンポーネントは `delete()` メソッドを呼び出し、
-`EventEmitter` に `Item` オブジェクトを出力させます。
-
-ホストする親コンポーネントが `ItemDetailComponent` の `deleteRequest`
-にバインドしているとしましょう。
+The hosting parent component binds to the `deleteRequest` event of the `ItemDetailComponent` as follows.
 
 <code-example path="event-binding/src/app/app.component.html" header="src/app/app.component.html (event-binding-to-component)" region="event-binding-to-component"></code-example>
 
-`deleteRequest` イベントが発生すると、Angular は親コンポーネントの
-`deleteItem()` メソッドを呼び出し、 `$event` 変数の *削除するアイテム* (`ItemDetail` によって出力)
-を渡します。
+When the `deleteRequest` event fires, Angular calls the parent component's `deleteItem()` method with the item.
 
-## テンプレート文は副作用をもつ {@a template-statements-have-side-effects}
+### Determining an event target
 
-[テンプレート式](guide/interpolation#template-expressions)は[副作用](guide/property-binding#avoid-side-effects)をもつべきではありませんが、
-テンプレート文には通常副作用があります。
-`deleteItem()` メソッドには、アイテムを削除するという副作用があります。
+To determine an event target, Angular checks if the name of the target event matches an event property of a known directive.
+In the following example, Angular checks to see if `myClick` is an event on the custom `ClickDirective`.
 
-アイテムの削除によってモデルが更新され、どういうコードを書くかにもよりますが、
-リモートサーバーへの問い合わせや保存といったその他の変化も引き起こします。
-これらの変化はシステムを伝播していき、最終的にはさまざまなビューによって表示されます。
+<code-example path="event-binding/src/app/app.component.html" region="custom-directive" header="src/app/app.component.html"></code-example>
+
+If the target event name, `myClick` fails to match an element event or an output property of `ClickDirective`, Angular reports an "unknown directive" error.
+
+<hr />
+
+## What's next
+
+For more information on how event binding works, see [How event binding works](guide/event-binding-concepts).

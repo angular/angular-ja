@@ -526,7 +526,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     // __Zone_enable_cross_context_check = true;
   &lt;/script>
   &lt;!-- zone.js required by Angular -->
-  &lt;script src="node_modules/zone.js/dist/zone.js">&lt;/script>
+  &lt;script src="node_modules/zone.js/bundles/zone.umd.js">&lt;/script>
 
   &lt;!-- application polyfills -->
 </code-example>

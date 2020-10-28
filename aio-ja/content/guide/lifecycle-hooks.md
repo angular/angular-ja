@@ -62,6 +62,8 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
       `ngOnInit()` の前、および1つ以上のデータバインド入力プロパティが変更されるたびに呼び出されます。
 
+      Note that if your component has no inputs or you use it without providing any inputs, the framework will not call `ngOnChanges()`.
+
     </td>
   </tr>
   <tr style='vertical-align:top'>
@@ -550,7 +552,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 </div>
 
 
-#### AfterContent フックの使用
+#### AfterContent フックの使用 {@a using-aftercontent-hooks}
 
 *AfterContent* フックは *AfterView* フックに似ています。
 主な違いは、子コンポーネントにあります。

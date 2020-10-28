@@ -196,7 +196,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 2. `@SkipSelf` デコレーターを省略した場合、Angular は循環依存エラーを送出します。
 
-  `Cannot instantiate cyclic dependency! (BethComponent -> Parent -> BethComponent)`
+  `Circular dependency in DI detected for BethComponent. Dependency path: BethComponent -> Parent -> BethComponent`
 
 これが *Alice*、*Barry*、そして家族の動きです。
 

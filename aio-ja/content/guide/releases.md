@@ -93,7 +93,7 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 
 * 上記の[リリース周期](#frequency "Release frequency")で説明したように、定期的にスケジュールされたアップデートとパッチがリリースされる、6ヶ月の*アクティブサポート*。
 
-* 12ヶ月の*長期サポート（LTS）*。LTS期間中は、重要な修正とセキュリティパッチのみがリリースされます。
+* 12ヶ月の*長期サポート（LTS）*。LTS期間中は、[重要な修正とセキュリティパッチ](#lts-fixes)のみがリリースされます。
 
 次の表は、サポート対象のAngularバージョンのステータスを示しています
 
@@ -101,11 +101,17 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 バージョン | 状態 | リリース     | アクティブの終了  | LTSの終了
 ------- | ------ | ------------ | ------------ | ------------ 
 ^10.0.0 | Active | Jun 24, 2020 | Dec 24, 2020 | Dec 24, 2021
-^9.0.0  | Active | Feb 06, 2020 | Aug 06, 2020 | Aug 06, 2021
+^9.0.0  | LTS    | Feb 06, 2020 | Aug 06, 2020 | Aug 06, 2021
 ^8.0.0  | LTS    | May 28, 2019 | Nov 28, 2019 | Nov 28, 2020
 
 Angularバージョン ^4.0.0と ^5.0.0、 ^6.0.0、 ^7.0.0 のサポートは終了しました。
 
+### LTS fixes
+
+As a general rule, a fix is considered for an LTS version if it resolves one of:
+
+* a newly identified security vulnerability,
+* a regression, since the start of LTS, caused by a 3rd party change, such as a new browser version.
 
 {@a deprecation}
 ## 廃止のプラクティス {@a deprecation-practices}

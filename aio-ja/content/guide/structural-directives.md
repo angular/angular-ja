@@ -111,7 +111,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 
 
 
-## NgIf ケーススタディ
+## NgIf ケーススタディ {@a ngif-case-study}
 
 `NgIf` はもっとも単純で、もっとも理解しやすい構造ディレクティブです。
 真偽値を返す式を受け取り、DOM のチャンク全体を追加、削除します。
@@ -227,7 +227,7 @@ Angular は実際のレンダリング中に `<ng-template>` のコンテンツ�
 
 
 
-## _*ngFor_ の内側
+## _*ngFor_ の内側 {@a inside-ngfor}
 
 Angular は、同じ方法で `*ngFor` をアスタリスク (*) 構文から `<ng-template>` _要素_ に変換します。
 

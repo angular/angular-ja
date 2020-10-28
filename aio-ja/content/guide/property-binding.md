@@ -1,8 +1,8 @@
 
-# プロパティバインディング `[property]`
+# Property binding
 
-プロパティバインディングを使うことで、対象の要素のプロパティや
-ディレクティブの `@Input()` デコレーターを _設定_ できます。
+Property binding in Angular helps you set values for properties of HTML elements or directives.
+With property binding, you can do things such as toggle button functionality, set paths programatically, and share values between components.
 
 <div class="alert is-helpful">
 
@@ -10,219 +10,194 @@ See the <live-example></live-example> for a working example containing the code 
 
 </div>
 
-## 内側への単方向 {@a one-way-in}
+## Prerequisites
 
-プロパティバインディングは、値をコンポーネントのプロパティから
-対象の要素のプロパティへと、単方向に流します。
+To get the most out of property binding, you should be familiar with the following:
 
-プロパティバインディングは、
-対象の要素から値を読み出したり引き出したりすることには使えません。同様に、
-プロパティバインディングで対象の要素のメソッドを呼び出すこともできません。
-要素が発生するイベントは、 [イベントバインディング](guide/event-binding)を使ってリッスンすることができます。
+* [Basics of components](guide/architecture-components)
+* [Basics of templates](guide/glossary#template)
+* [Binding syntax](guide/binding-syntax)
 
-対象の要素のプロパティを読んだり、メソッドを呼び出したりする必要があるときは、
-API リファレンスの [ViewChild](api/core/ViewChild) や
-[ContentChild](api/core/ContentChild) を参照してください。
+<hr />
 
-## Examples
+## Understanding the flow of data
 
-一番よくあるプロパティバインディングは、要素のプロパティを
-コンポーネントのプロパティの値に設定するものです。例では
-イメージ要素の `src` プロパティを、コンポーネントの `itemImageUrl` プロパティにバインドしています:
-
-<code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
-
-これは `colSpan` プロパティのバインディングの例です。`s` を小文字で書く属性
-`colspan` とは違うことに注意してください。
-
-<code-example path="property-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
-
-詳しくは [MDN HTMLTableCellElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) のドキュメントを参照してください。
-
-For more information about `colSpan` and `colspan`, see the [Attribute binding](guide/attribute-binding#colspan) guide.
-
-もうひとつの例ではコンポーネントが `isUnchanged` のときにボタンを無効化しています:
-
-<code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
-
-こちらはディレクティブのプロパティを設定しています:
-
-<code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
-
-また、こちらはカスタムコンポーネントのモデルプロパティを設定しています&mdash;
-親コンポーネントと子コンポーネントがやりとりするための優れた方法です:
-
-<code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
-
-## バインディングターゲット
-
-角括弧で囲まれた要素のプロパティは、ターゲットプロパティを識別します。
-次のコードのターゲットプロパティは、img 要素の `src` プロパティです。
-
-<code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
-
-代わりに `bind-` 接頭辞を使うこともできます:
-
-<code-example path="property-binding/src/app/app.component.html" region="bind-prefix" header="src/app/app.component.html"></code-example>
-
-
-ターゲットの名前が属性の名前に見えたとしても、
-プロパティの名前であることがほとんどです。
-この場合は `src` は `<img>` 要素のプロパティの名前です。
-
-要素のプロパティはより一般的なターゲットかもしれませんが、
-次の例のように、
-Angular は最初に名前が既知のディレクティブのプロパティであるかどうかを確認します:
-
-<code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
-
-技術的には、Angular は名前をディレクティブの `@Input()` 、
-ディレクティブの `inputs` 配列に書かれたプロパティ名、
-`@Input()` で装飾されたプロパティに対して照合します。
-そのような入力はディレクティブ自身のプロパティにマッピングされます。
-
-名前が既知のディレクティブまたは要素のプロパティと一致しない場合、Angular は “unknown directive” エラーを報告します。
+Property binding moves a value in one direction, from a component's property into a target element property.
 
 <div class="alert is-helpful">
 
-ターゲットの名前は一般にはプロパティの名前ですが、
-いくつかの属性については Angular が属性-プロパティを自動でマッピングします。
-`class`/`className`、`innerHtml`/`innerHTML`、`tabindex`/`tabIndex`
-がその例です。
+For more information on listening for events, see [Event binding](guide/event-binding).
 
 </div>
 
+To read a target element property or call one of its methods, see the API reference for [ViewChild](api/core/ViewChild) and [ContentChild](api/core/ContentChild).
 
-## 副作用を避ける {@a avoid-side-effects}
+## Binding to a property
 
-テンプレート式の評価には目に見える副作用はありません。
-式の言語自体や、テンプレート式の記述方法は、
-ある程度その役に立ちます。
-プロパティバインディング式でに何か値を代入したり、
-インクリメント演算子とデクリメント演算子を使用することはできません。
+To bind to an element's property, enclose it in square brackets, `[]`, which identifies the property as a target property.
+A target property is the DOM property to which you want to assign a value.
+For example, the target property in the following code is the image element's `src` property.
 
-たとえば、式は副作用のあるプロパティやメソッドを呼び出すかもしれません。
-式は `getFoo()` のようなものを呼び出すことができますが、
-`getFoo()` が何をするかを知っているのはあなただけです。
-もし `getFoo()` が何かを変更し、それがバインディングされていたとすると、
-Angular は変更後の値を表示するかもしれないし、しないかもしれません。
-Angular は変更を検知して警告のエラーを起こすかもしれません。
-値を返すだけで副作用がないプロパティやメソッドを使うことが
-ベストプラクティスです。
+<code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
-## 適切な型を返す {@a return-the-proper-type}
 
-テンプレート式は、ターゲットプロパティが期待する値の型として
-評価されるべきです。
-ターゲットプロパティが文字列を期待する場合は文字列を、数値を期待する場合は数値を、
-オブジェクトを期待する場合はオブジェクトを返してください。
+In most cases, the target name is the name of a property, even when it appears to be the name of an attribute.
+In this example, `src` is the name of the `<img>` element property.
 
-次の例の `ItemDetailComponent` の `childItem` プロパティは文字列を期待していて、それはプロパティバインディングが送り込む型と一致しています:
-
-<code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
-
-`ItemDetailComponent` を見ると `@Input` の型が文字列になっていることが確認できます:
-<code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)"></code-example>
-
-`ItemDetailComponent` が期待するとおり、`AppComponent` の `parentItem` も文字列です:
-<code-example path="property-binding/src/app/app.component.ts" region="parent-data-type" header="src/app/app.component.ts"></code-example>
-
-### オブジェクトを渡す {@a passing-in-an-object}
-
-先ほどの簡単な例では文字列を渡していました。
-オブジェクトを渡すときの文法や考え方も似たようなものです。
-
-`AppComponent` の中に `ItemListComponent` がネストされていて `item` プロパティがオブジェクトを期待しているものとします。
-
-<code-example path="property-binding/src/app/app.component.html" region="pass-object" header="src/app/app.component.html"></code-example>
-
-`items` プロパティは `ItemListComponent` の中で宣言されており、型は `Item` で `@Input()` で修飾されています:
-
-<code-example path="property-binding/src/app/item-list/item-list.component.ts" region="item-input" header="src/app/item-list.component.ts"></code-example>
-
-サンプルアプリでは `Item` は `id` と `name` の2つのプロパティを持ったオブジェクトです。
-
-<code-example path="property-binding/src/app/item.ts" region="item-class" header="src/app/item.ts"></code-example>
-
-`mock-items.ts` という別のファイルにアイテムのリストがありますが、
-新しいアイテムを表示するために `app.component.ts` で別のアイテムを指定することができます:
-
-<code-example path="property-binding/src/app/app.component.ts" region="pass-object" header="src/app.component.ts"></code-example>
-
-この場合はオブジェクトの配列を指定していることに注意してください。この型は `items` の型であり、ネストされたコンポーネント `ListItemComponent` が求める型でもあります。
-
-この例では `AppComponent` は別の `item` オブジェクト (`currentItems`) を指定し、
-それをネストされた `ItemListComponent` に渡しています。`item.ts` に書かれた `Item` の形と `currentItems` の形が一致するため、 `ItemListComponent` はそれを使うことができます。
-`item.ts` ファイルは `ItemListComponent` が `item` の定義を得るために参照しているファイルです。
-
-## 角括弧を忘れずに {@a remember-the-brackets}
-
-角括弧 `[]` は Angular にテンプレート式を評価するように指示します。
-角括弧を省略すると Angular は文字列を定数として扱い、
-その文字列で *ターゲットプロパティを初期化* します。
+The brackets, `[]`, cause Angular to evaluate the right-hand side of the assignment as a dynamic expression.
+Without the brackets, Angular treats the the right-hand side as a string literal and sets the property to that static value.
 
 <code-example path="property-binding/src/app/app.component.html" region="no-evaluation" header="src/app.component.html"></code-example>
 
+Omitting the brackets renders the string `parentItem`, not the value of `parentItem`.
 
-角括弧を忘れると `parentItem` の値ではなく
-`parentItem` という文字列が表示されてしまいます。
+## Setting an element property to a component property value
 
-## ワンタイムの文字列の初期化 {@a one-time-string-initialization}
+To bind the `src` property of an `<img>` element to a component's property, place the target, `src`, in square brackets followed by an equal sign and then the property.
+The property here is `itemImageUrl`.
 
-次のすべてが当てはまる場合は、角括弧を省略する *べき* です:
+<code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
-* ターゲットプロパティが文字列値を受け入れる。
-* 文字列がテンプレートに直接書き込める固定値。
-* この初期値が変化しない。
+Declare the `itemImageUrl` property in the class, in this case `AppComponent`.
 
-普段の標準の HTML ではこの方法で属性を初期化していますが、
-これはディレクティブやコンポーネントのプロパティの初期化に対しても同様に機能します。
-次の例では、`StringInitComponent` の `prefix` プロパティをテンプレート式ではなく固定の文字列で初期化します。
-Angular はそれを設定し、それについて忘れます。
+<code-example path="property-binding/src/app/app.component.ts" region="item-image" header="src/app/app.component.ts"></code-example>
 
-<code-example path="property-binding/src/app/app.component.html" region="string-init" header="src/app/app.component.html"></code-example>
+{@a colspan}
 
-一方で `[item]` バインディングは、コンポーネントの `currentItem` プロパティへのライブバインディングです。
+#### `colspan` and `colSpan`
 
-## プロパティバインディング vs. 補間 {@a property-binding-vs-interpolation}
+A common point of confusion is between the attribute, `colspan`, and the property, `colSpan`.
+Notice that these two names differ by only a single letter.
 
-補間とプロパティバインディングのどちらかを選べるシーンがよくあります。
-次のバインディングのペアは同じことをします:
+If you wrote something like this:
 
-<code-example path="property-binding/src/app/app.component.html" region="property-binding-interpolation" header="src/app/app.component.html"></code-example>
+<code-example language="html">
+  &lt;tr&gt;&lt;td colspan="{{1 + 1}}"&gt;Three-Four&lt;/td&gt;&lt;/tr&gt;
+</code-example>
 
-多くの場合、補間はプロパティバインディングよりも簡単な手段です。
-データの値を文字列として表示するときは、
-技術的にはどちらでもよく、読みやすさは補間に分があります。
-しかし *要素のプロパティに文字列以外の値を設定する場合は、
-プロパティバインディングを使う必要があります。*
+You'd get this error:
 
-## コンテンツのセキュリティ {@a content-security}
+<code-example language="bash">
+  Template parse errors:
+  Can't bind to 'colspan' since it isn't a known native property
+</code-example>
 
-次の *悪意のある* コンテンツを想像してください。
+As the message says, the `<td>` element does not have a `colspan` property. This is true
+because `colspan` is an attribute&mdash;`colSpan`, with a capital `S`, is the
+corresponding property. Interpolation and property binding can set only *properties*, not attributes.
+
+Instead, you'd use property binding and write it like this:
+
+<code-example path="attribute-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
+
+
+Another example is disabling a button when the component says that it `isUnchanged`:
+
+<code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
+
+Another is setting a property of a directive:
+
+<code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
+
+Yet another is setting the model property of a custom component&mdash;a great way
+for parent and child components to communicate:
+
+<code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
+
+
+## Toggling button functionality
+
+To disable a button's functionality depending on a Boolean value, bind the DOM `disabled` property to a property in the class that is `true` or `false`.
+
+<code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
+
+Because the value of the property `isUnchanged` is `true` in the `AppComponent`, Angular disables the button.
+
+<code-example path="property-binding/src/app/app.component.ts" region="boolean" header="src/app/app.component.ts"></code-example>
+
+
+## Setting a directive property
+
+To set a property of a directive, place the directive within square brackets , such as `[ngClass]`, followed by an equal sign and the property.
+Here, the property is `classes`.
+
+<code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
+
+To use the property, you must declare it in the class, which in this example is `AppComponent`.
+The value of `classes` is `special`.
+
+<code-example path="property-binding/src/app/app.component.ts" region="directive-property" header="src/app/app.component.ts"></code-example>
+
+Angular applies the class `special` to the `<p>` element so that you can use `special` to apply CSS styles.
+
+## Bind values between components
+
+To set the model property of a custom component, place the target, here `childItem`, between square brackets `[]` followed by an equal sign and the property.
+Here, the property is `parentItem`.
+
+<code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
+
+To use the target and the property, you must declare them in their respective classes.
+
+Declare the target of `childItem` in its component class, in this case `ItemDetailComponent`.
+
+For example, the following code declares the target of `childItem` in its component class, in this case `ItemDetailComponent`.
+
+Then, the code contains an `@Input()` decorator with the `childItem` property so data can flow into it.
+
+<code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts"></code-example>
+
+Next, the code declares the property of `parentItem` in its component class, in this case `AppComponent`.
+In this example the type of `childItem` is `string`, so `parentItem` needs to be a string.
+Here, `parentItem` has the string value of `lamp`.
+
+<code-example path="property-binding/src/app/app.component.ts" region="parent-data-type" header="src/app/app.component.ts"></code-example>
+
+With this configuration, the view of `<app-item-detail>` uses the value of `lamp` for `childItem`.
+
+## Property binding and security
+
+Property binding can help keep content secure.
+For example, consider the following malicious content.
 
 <code-example path="property-binding/src/app/app.component.ts" region="malicious-content" header="src/app/app.component.ts"></code-example>
 
-コンポーネントのテンプレートでは、コンテンツが補間で使われることがあります:
+The component template interpolates the content as follows:
 
 <code-example path="property-binding/src/app/app.component.html" region="malicious-interpolated" header="src/app/app.component.html"></code-example>
 
-幸いなことに、Angular のデータバインディングは危険な HTML に対して警戒しています。
-先ほどの例では HTML がそのまま表示され、Javascript は実行されません。
-Angular は、補間でもプロパティバインディングでも、
-script タグが含まれた HTML をブラウザにリークすることを *許しません。*
-
-次の例では値を表示する前に
-Angular が[サニタイズ](guide/security#sanitization-and-security-contexts)しています。
-
-<code-example path="property-binding/src/app/app.component.html" region="malicious-content" header="src/app/app.component.html"></code-example>
-
-補間は `<script>` タグを
-プロパティバインディングとは違った方法で扱いますが、
-どちらの方法でもコンテンツを無害な形で表示します。
-ブラウザで `evilTitle` を表示した例がこちらになります。
+The browser doesn't process the HTML and instead displays it raw, as follows.
 
 <code-example language="bash">
 "Template &lt;script&gt;alert("evil never sleeps")&lt;/script&gt; Syntax" is the interpolated evil title.
-"Template alert("evil never sleeps")Syntax" is the property bound evil title.
 </code-example>
+
+
+Angular does not allow HTML with `<script>` tags, neither with [interpolation](guide/interpolation) nor property binding, which prevents the JavaScript from running.
+
+In the following example, however, Angular [sanitizes](guide/security#sanitization-and-security-contexts) the values before displaying them.
+
+<code-example path="property-binding/src/app/app.component.html" region="malicious-content" header="src/app/app.component.html"></code-example>
+
+Interpolation handles the `<script>` tags differently than property binding, but both approaches render the content harmlessly.
+The following is the browser output of the sanitized `evilTitle` example.
+
+<code-example language="bash">
+"Template Syntax" is the property bound evil title.
+</code-example>
+
+## Property binding and interpolation
+
+Often [interpolation](guide/interpolation) and property binding can achieve the same results.
+The following binding pairs do the same thing.
+
+<code-example path="property-binding/src/app/app.component.html" region="property-binding-interpolation" header="src/app/app.component.html"></code-example>
+
+You can use either form when rendering data values as strings, though interpolation is preferable for readability.
+However, when setting an element property to a non-string data value, you must use property binding.
+
+<hr />
+
+## What's next
+
+* [Property binding best practices](guide/property-binding-best-practices)

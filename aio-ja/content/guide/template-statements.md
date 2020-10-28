@@ -1,7 +1,7 @@
 # テンプレート文
 
-テンプレート **文**
-は、要素、コンポーネント、ディレクティブなどのバインディングターゲットによって発生した **イベント** に応答します。
+Template statements are methods or properties that you can use in your HTML to respond to user events.
+With template statements, your application can engage users through actions such as displaying dynamic content or submitting forms.
 
 <div class="alert is-helpful">
 
@@ -10,23 +10,30 @@ the syntax and code snippets in this guide.
 
 </div>
 
-The following template statement appears in quotes to the right of the `=`&nbsp;symbol as in `(event)="statement"`.
+In the following example, the template statement `deleteHero()` appears in quotes to the right of the `=`&nbsp;symbol as in `(event)="statement"`.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html"></code-example>
 
-テンプレート文には *副作用があります*。
-それがイベントのポイントです。
-これは、ユーザーの操作からアプリケーションの状態を更新する方法です。
+When the user clicks the **Delete hero** button, Angular calls the `deleteHero()` method in the component class.
 
-イベントへの対応は、Angular の「単方向データフロー」の反対側です。
-あなたは、このイベントループのターンの間に、何でも、どこでも自由に変更できます。
+You can use template statements with elements, components, or directives in response to events.
 
-テンプレート式と同様に、テンプレート *文* は JavaScript のような言語を使用します。
-テンプレート文パーサーはテンプレート式パーサーとは異なり、
-特に基本的な代入(`=`)と <code>;</code>による連鎖式の両方をサポートします。
+<div class="alert is-helpful">
 
-ただし、特定の JavaScriptとテンプレート式の構文は許可されていません:
+Responding to events is an aspect of Angular's [unidirectional data flow](guide/glossary#unidirectional-data-flow).
+You can change anything in your application during a single event loop.
 
+</div>
+
+## Syntax
+
+Like [template expressions](guide/interpolation), template statements use a language that looks like JavaScript.
+However, the parser for template statements differs from the parser for template expressions.
+In addition, the template statements parser specifically supports both basic assignment, `=`, and chaining expressions with semicolons, `;`.
+
+The following JavaScript and template expression syntax is not allowed:
+
+* `new`
 * <code>new</code>
 * `++` や `--` などの、インクリメント、デクリメント演算子
 * `+=` and `-=` などの代入演算子
@@ -35,31 +42,32 @@ The following template statement appears in quotes to the right of the `=`&nbsp;
 
 ## 文のコンテキスト
 
-式と同様に、文はコンポーネントインスタンスのイベント処理メソッドなど、
-文のコンテキスト内にあるものだけを参照できます。
+Statements have a context&mdash;a particular part of the application to which the statement belongs.
 
-*文* のコンテキストは通常、コンポーネントインスタンスです。
-`(click)="deleteHero()"` 内の *deleteHero* は、データがバインドされたコンポーネントのメソッドです。
+Statements can refer only to what's in the statement context, which is typically the component instance.
+For example, `deleteHero()` of `(click)="deleteHero()"` is a method of the component in the following snippet.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-component-statement" header="src/app/app.component.html"></code-example>
 
-文のコンテキストはテンプレート自身のコンテキストのプロパティも参照します。
-次の例では、テンプレートの `$event` オブジェクト、
-[テンプレート入力変数](guide/built-in-directives#template-input-variable) (`let hero`)、
-および [テンプレート参照変数](guide/template-reference-variables) (`#heroForm`)
-がコンポーネントのイベント処理メソッドに渡されています。
+The statement context may also refer to properties of the template's own context.
+In the following example, the component's event handling method, `onSave()` takes the template's own `$event` object as an argument.
+On the next two lines, the `deleteHero()` method takes a [template input variable](guide/built-in-directives#template-input-variable), `hero`, and `onSubmit()` takes a [template reference variable](guide/template-reference-variables), `#heroForm`.
 
 <code-example path="template-syntax/src/app/app.component.html" region="context-var-statement" header="src/app/app.component.html"></code-example>
 
+In this example, the context of the `$event` object, `hero`, and `#heroForm` is the template.
+
 テンプレートコンテキストの名前はコンポーネントコンテキストの名前よりも優先されます。
-上記の `deleteHero(hero)` では、
-`hero` はテンプレート入力変数であり、コンポーネントの `hero` プロパティではありません。
+上記の `deleteHero(hero)` では、`hero` はテンプレート入力変数であり、コンポーネントの `hero` プロパティではありません。
 
-## 文のガイドライン
+## Statement best practices
 
-テンプレート文は、グローバル名前空間内のものを参照できません。
-`window` や `document` を参照することはできません。
-`console.log` や `Math.max` を呼び出すことはできません。
+* **Conciseness**
 
-式と同様に、複雑なテンプレート文を書かないでください。
-メソッド呼び出しまたは単純なプロパティ割り当てが一般的です。
+  Keep template statements minimal by using method calls or basic property assignments.
+
+* **Work within the context**
+
+  The context of a template statement can be the component class instance or the template.
+  Because of this, template statements cannot refer to anything in the global namespace such as `window` or `document`.
+  For example, template statements can't call `console.log()` or `Math.max()`.

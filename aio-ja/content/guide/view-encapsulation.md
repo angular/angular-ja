@@ -1,49 +1,49 @@
-# View encapsulation
+# ビューのカプセル化
 
-In Angular, component CSS styles are encapsulated into the component's view and don't
-affect the rest of the application.
+AngularではコンポーネントのCSSスタイルはコンポーネントのビューにカプセル化され、
+アプリケーションの残りの部分には影響しません。
 
-To control how this encapsulation happens on a *per
-component* basis, you can set the *view encapsulation mode* in the component metadata.
-Choose from the following modes:
+このカプセル化が *コンポーネントごとに* どのように行われるかを制御するには、
+コンポーネントのメタデータに *ビューのカプセル化モード* を設定します。
+次のモードから選択してください：
 
-* `ShadowDom` view encapsulation uses the browser's native shadow DOM implementation (see
-  [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)
-  on the [MDN](https://developer.mozilla.org) site)
-  to attach a shadow DOM to the component's host element, and then puts the component
-  view inside that shadow DOM. The component's styles are included within the shadow DOM.
+* `ShadowDom` ビューカプセル化では、ブラウザのネイティブShadow DOM実装
+（[MDN](https://developer.mozilla.org/ja/)サイトの
+[Shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)を参照）を使用して、
+Shadow DOMをコンポーネントのホスト要素にアタッチし、
+そのShadow DOM内にコンポーネントビューを配置します。コンポーネントのスタイルは、Shadow DOM内に含まれています。
 
-* `Native` view encapsulation uses a now deprecated version of the browser's native shadow DOM implementation - [learn about the changes](https://hayato.io/2016/shadowdomv1/).
+* `Native` ビューカプセル化は、ブラウザのネイティブShadow DOM実装の非推奨バージョンを使用します。 - [この変更について学びましょう](https://hayato.io/2016/shadowdomv1/).
 
-* `Emulated` view encapsulation (the default) emulates the behavior of shadow DOM by preprocessing
-  (and renaming) the CSS code to effectively scope the CSS to the component's view.
-  For details, see [Inspecting generated CSS](guide/view-encapsulation#inspect-generated-css) below.
+* `Emulated` ビューカプセル化（デフォルト）は、CSSコードを事前処理（および名前変更）して、
+Shadow DOMの動作をエミュレートし、CSSをコンポーネントのビューに効果的に適用します。
+  詳細は、[生成されたCSSの検査](guide/view-encapsulation#inspect-generated-css) を参照してください。
 
-* `None` means that Angular does no view encapsulation.
-  Angular adds the CSS to the global styles.
-  The scoping rules, isolations, and protections discussed earlier don't apply.
-  This is essentially the same as pasting the component's styles into the HTML.
+* `None` は、Angularビューカプセル化を行わないことを意味します。
+AngularはCSSをグローバルスタイルに追加します。
+先に説明したスコープのルール、隔離および保護は適用されません。
+これは、コンポーネントのスタイルをHTMLに貼り付けるのと本質的に同じです。
 
-To set the components encapsulation mode, use the `encapsulation` property in the component metadata:
+コンポーネントのカプセル化モードを設定するには、コンポーネントメタデータ内の `encapsulation` プロパティを使用します：
 
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" header="src/app/quest-summary.component.ts"></code-example>
 
-`ShadowDom` view encapsulation only works on browsers that have native support
-for shadow DOM (see [Shadow DOM v1](https://caniuse.com/#feat=shadowdomv1) on the
-[Can I use](http://caniuse.com) site). The support is still limited,
-which is why `Emulated` view encapsulation is the default mode and recommended
-in most cases.
+`ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
+( [Can I use](http://caniuse.com) サイトの
+[Shadow DOM v1](http://caniuse.com/#feat=shadowdomv1) を参照)。サポートは未だ限定的です。
+そのため、`Emulated`ビューカプセル化がデフォルトモードであり、
+ほとんどの場合に推奨されます。
 
 {@a inspect-generated-css}
 
-## Inspecting generated CSS
+## 生成されたCSSの検査
 
-When using emulated view encapsulation, Angular preprocesses
-all component styles so that they approximate the standard shadow CSS scoping rules.
+エミュレートされたビューカプセル化を使用する場合、Angularはすべてのコンポーネントスタイルを前処理して、
+標準的なShadow CSSスコープルールに近似させます。
 
-In the DOM of a running Angular application with emulated view
-encapsulation enabled, each DOM element has some extra attributes
-attached to it:
+エミュレートされたビューカプセル化が有効になっている
+実行中のAngularアプリケーションのDOMでは、
+各DOM要素にはいくつかの特別な属性が付加されています：
 
 <code-example format="">
   &lt;hero-details _nghost-pmm-5>
@@ -55,16 +55,16 @@ attached to it:
 
 </code-example>
 
-There are two kinds of generated attributes:
+生成される属性には2種類あります。：
 
-* An element that would be a shadow DOM host in native encapsulation has a
-  generated `_nghost` attribute. This is typically the case for component host elements.
-* An element within a component's view has a `_ngcontent` attribute
-that identifies to which host's emulated shadow DOM this element belongs.
+* ネイティブのカプセル化でShadow DOMのホストになる要素には、生成された`_nghost`属性があります。
+これは、一般的にコンポーネントのホスト要素のケースです。
+* コンポーネントのビュー内の要素には、この要素がどのホストのエミュレートされたShadow DOMに
+属するかを識別する`_ngcontent`属性があります。
 
-The exact values of these attributes aren't important. They are automatically
-generated and you never refer to them in application code. But they are targeted
-by the generated component styles, which are in the `<head>` section of the DOM:
+これらの属性の正確な値は重要ではありません。
+それらは自動的に生成され、アプリケーションコードで参照することはありません。
+しかし、生成されたコンポーネントスタイルは、DOMの`<head>`セクションにあります。
 
 <code-example format="">
   [_nghost-pmm-5] {
@@ -78,6 +78,6 @@ by the generated component styles, which are in the `<head>` section of the DOM:
   }
 </code-example>
 
-These styles are post-processed so that each selector is augmented
-with `_nghost` or `_ngcontent` attribute selectors.
-These extra selectors enable the scoping rules described in this page.
+これらのスタイルは後処理され、
+各セレクターに`_nghost`または`_ngcontent`属性セレクターが追加されます。
+これらの追加のセレクターは、このページで説明しているスコープルールを有効にします。

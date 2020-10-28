@@ -187,7 +187,7 @@ _テスト中に_ランタイム環境がソースコードをコンパイルす
 <code-example path="testing/src/app/welcome/welcome.component.ts" header="app/welcome/welcome.component.ts"></code-example>
 
 `WelcomeComponent`には、サービスとやりとりするロジックと、このコンポーネントの値のテストをするロジックの決定権があります。
-次は、スペックファイル`app/welcome/welcome.component.spec.ts`のテスティングモジュールの構成です:
+次は、スペックファイルのテスティングモジュールの構成です:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="config-test-module" header="app/welcome/welcome.component.spec.ts"></code-example>
 
@@ -395,7 +395,7 @@ fakeAsync(() => { /* test body */ })
 <div class="alert is-helpful">
 
 Limitation: The `fakeAsync()` function won't work if the test body makes an `XMLHttpRequest` (XHR) call.
-XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#async), below.
+XHR calls within a test are rare, but if you need to call XHR, see [`waitForAsync()`](#waitForAsync), below.
 
 </div>
 
@@ -572,33 +572,28 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 それから、引用の要素に期待されるテキストが表示することをアサートしてみましょう。
 
-{@a async}
+{@a waitForAsync}
 
-#### _async()_を使用した非同期テスト
+#### _waitForAsync()_を使用した非同期テスト
 
-`async()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+`waitForAsync()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
 Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
-
-`fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
-特に、テスト本体が`XMLHttpRequest` （XHR）呼び出しを行う場合は動作しません。
-テスト中のXHR呼び出しはまれであるため、普通は[`fakeAsync()`](#fake-async)を使うことができます。
-しかし、`XMLHttpRequest`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
 
 <div class="alert is-helpful">
 
 `TestBed.compileComponents()`メソッド([下記参照](#compile-components))は、
 "just-in-time"コンパイル時に外部テンプレートとcssファイルを読み込むために`XHR`を呼び出します。
-`async()`ユーティリティを使用して`compileComponents()`を呼び出すテストを作成してください。
+`waitForAsync()`ユーティリティを使用して`compileComponents()`を呼び出すテストを作成してください。
 
 </div>
 
-次は、さきほどの`fakeAsync()`テストを`async()`ユーティリティで書き直したものです。
+次は、さきほどの`fakeAsync()`テストを`waitForAsync()`ユーティリティで書き直したものです。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
   region="async-test"></code-example>
 
-`async()`ユーティリティは、
+`waitForAsync()`ユーティリティは、
 テスターのコードを特別な_asyncテストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。
 Jasmineの`done()`は `undefined` なのでテストに渡す必要はなく、
 PromiseやObservableのコールバック内で`done()`を呼び出す必要はありません。
@@ -606,7 +601,7 @@ PromiseやObservableのコールバック内で`done()`を呼び出す必要は�
 しかし、テストの非同期性は`fixture.whenStable()`の呼び出しによって明示的になります。
 これは制御の線形的なフローを壊します。
 
-`async()` の中で `setInterval()` などの `intervalTimer()` を使用する場合は、テスト後に `clearInterval()` を使用してタイマーをキャンセルする必要があります。それ以外の場合は、 `async()` は終了しません。
+`waitForAsync()` の中で `setInterval()` などの `intervalTimer()` を使用する場合は、テスト後に `clearInterval()` を使用してタイマーをキャンセルする必要があります。それ以外の場合は、 `waitForAsync()` は終了しません。
 
 {@a when-stable}
 
@@ -626,17 +621,17 @@ JavaScriptエンジンのタスクキューが空になったときに解決す�
 
 #### Jasmineの _done()_
 
-`async()`関数と
+`waitForAsync()`関数と
 `fakeAsync()`関数はAngular非同期テストを大幅に簡素化しますが、
 伝統的なテクニックに立ち戻って、
 [`done`コールバック](https://jasmine.github.io/2.0/introduction.html#section-Asynchronous_Support)
 を受け取る関数を`it`に渡すことができます。
 
-`done パラメーター` が `undefined` なので、 `async()` や `fakeAsync()` の中で `done()` を呼び出すことはできません。
+`done パラメーター` が `undefined` なので、 `waitForAsync()` や `fakeAsync()` の中で `done()` を呼び出すことはできません。
 
 さて、あなたはPromiseをチェーンさせ、エラーを処理し、適切な時に`done()`を呼び出す責任があります。
 
-`done()`を使用してテスト関数を書くことは、`async()`と`fakeAsync()`よりも面倒です。
+`done()`を使用してテスト関数を書くことは、`waitForAsync()`と`fakeAsync()`よりも面倒です。
 しかしコードが `intervalTimer()` や `setInterval` を含むときには時折必要です。
 
 次は、さきほどの2つのバージョンのテストを`done()`を使用して書いたものです。
@@ -723,7 +718,7 @@ Jasmineのテストが同期的であることに注意してください。
   region="test-scheduler-flush"></code-example>
 
 このステップは、
-以前の`fakeAsync()`と`async()`での例の中での [tick()](api/core/testing/tick) と`whenStable()`と似た目的を果たします。
+以前の`fakeAsync()`と`waitForAsync()`での例の中での [tick()](api/core/testing/tick) と`whenStable()`と似た目的を果たします。
 テストのバランスはそれらの例と同じです。
 
 ## マーブルエラーテスト
@@ -1514,7 +1509,7 @@ _非同期_な操作である、ファイルシステムから読み取らなく
 <div class="alert is-critical">
 
 テスト関数を非同期にすることを怠った場合
-(たとえば、後述の`async()`の使用を忘れた場合)、
+(たとえば、後述の`waitForAsync()`の使用を忘れた場合)、
 このようなエラーメッセージが表示されます。
 
 <code-example language="sh" class="code-shell" hideCopy>
@@ -1528,7 +1523,7 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 1. コンポーネントをコンパイルする非同期的な`beforeEach()`
 1. 残りのセットアップを実行する同期的な`beforeEach()`
 
-このパターンにしたがうには、`async()`ヘルパーを他のテストシンボルと一緒にインポートします。
+このパターンにしたがうには、`waitForAsync()`ヘルパーを他のテストシンボルと一緒にインポートします。
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"

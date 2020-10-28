@@ -14,12 +14,16 @@ CLI は、Web worker での Angular 自体の実行をサポートしていま�
 
 Web Worker を既存のプロジェクトに追加するには、 Angular CLI の `ng generate` コマンドを使用します。
 
-`ng generate web-worker` *location*
+```bash
+ng generate web-worker <location>
+```
 
 アプリケーションのどこにでも Web worker を追加できます。
 たとえば、ルートコンポーネント `src/app/app.component.ts` に Web worker を追加するには、次のコマンドを実行します。
 
-`ng generate web-worker app`
+```bash
+ng generate web-worker app
+```
 
 このコマンドは次のアクションを実行します。
 

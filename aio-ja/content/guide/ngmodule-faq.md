@@ -192,7 +192,7 @@ NgModuleは自身がもつ宣言、選択したインポートしたクラス、
 
 `forRoot()`静的メソッドは、開発者がシングルトンであることを意図したサービスとプロバイダーを簡単に設定できるようにするための規約です。`forRoot()`の良い例は、`RouterModule.forRoot()`メソッドです。
 
-アプリケーションはアプリケーション全体の`Router`サービスを設定するために`RouterModule.forRoot()`に`Routes`オブジェクトを渡します。
+アプリケーションはアプリケーション全体の`Router`サービスを設定するために`RouterModule.forRoot()`に`Routes`配列を渡します。
 `RouterModule.forRoot()`は[ModuleWithProviders](api/core/ModuleWithProviders)を返します。
 ルートの`AppModule`の`imports`配列にその結果を追加します。
 

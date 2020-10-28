@@ -481,6 +481,15 @@ AngularJS のモジュールの中に登録できます。
 <code-example path="upgrade-module/src/app/downgrade-static/app.module.ts" region="downgradecomponent" header="app.module.ts">
 </code-example>
 
+<div class="alert is-helpful">
+
+By default, Angular change detection will also run on the component for every
+AngularJS `$digest` cycle. If you wish to only have change detection run when
+the inputs change, you can set `propagateDigest` to `false` when calling
+`downgradeComponent()`.
+
+</div>
+
 `HeroDetailComponent` は Angular のコンポーネントであるため、 `AppModule` の中で宣言
 する必要があります。
 

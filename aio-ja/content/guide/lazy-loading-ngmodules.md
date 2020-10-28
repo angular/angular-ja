@@ -87,7 +87,7 @@ ng new customer-app --routing
 ng generate module customers --route customers --module app.module
 </code-example>
 
-これにより、`customers.module.ts`ファイルで定義された新しい遅延ロード可能なモジュール`CustomersModule`をもつ、`customers`フォルダーが作成されます。コマンドは`CustomersComponent`を新しいフィーチャーモジュール内に自動的に宣言します。
+This creates a `customers` folder having the new lazy-loadable feature module `CustomersModule` defined in the `customers.module.ts` file and the routing module `CustomersRoutingModule` defined in the `customers-routing.module.ts` file. The command automatically declares the `CustomersComponent` and imports `CustomersRoutingModule` inside the new feature module.
 
 新しいモジュールは遅延ロードされることを意図しているため、コマンドは新しいフィーチャーモジュールへの参照をルートアプリケーションモジュールの`app.module.ts`ファイルに追加「しません」。
 代わりに、`--module`オプションで指定したモジュール内の`routes`配列に、宣言したルート(route)`customers`を追加します。

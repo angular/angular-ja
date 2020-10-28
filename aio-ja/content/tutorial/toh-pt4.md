@@ -377,7 +377,6 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 path="toh-pt4/src/app/heroes/heroes.component.ts">
 </code-example>
 
-ブラウザが更新され、ページにヒーローリストを表示されます。
 ヒーローリストを見るためにブラウザを更新し、一番下までスクロールすると 
 `HeroService` からのメッセージを表示されます。あなたがヒーローをクリックするたびに、新しいメッセージが選択を登録して表示されます。
 メッセージ履歴を削除するために「clear」ボタンを使用します。

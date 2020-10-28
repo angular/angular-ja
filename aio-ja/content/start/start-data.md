@@ -1,4 +1,4 @@
-# 試してみよう: データの管理
+# データの管理
 
 [アプリ内ナビゲーション](start/start-routing "Try it: In-app Navigation") の最後に、オンラインストアアプリケーションには、製品リストと製品詳細の2つのビューをもつ製品カタログがあります。
 ユーザーはリストから製品名をクリックして、別のURLあるいはrouteを使用して新しいビューに詳細を表示できます。
@@ -40,7 +40,7 @@
 
         <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.1.ts"></code-example>
 
-    <div class="alert is-helpful>
+    <div class="alert is-helpful">
 
         StackBlitzジェネレーターは、デフォルトで`app.module.ts`でカートサービスを提供する場合があります。これは、バンドル最適化手法である `@Injectable()` デコレータと `{ providedIn： 'root' }`ステートメントを使用する例とは異なります。
         サービスの詳細については、[サービスと依存性の注入の概要](guide/architecture-services "Concepts > Intro to Services and DI") を参照してください。

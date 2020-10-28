@@ -75,7 +75,7 @@ The tests run again, the browser refreshes, and the new test results appear.
 
 The CLI takes care of Jasmine and Karma configuration for you.
 
-You can fine-tune many options by editing the `karma.conf.js` and
+You can fine-tune many options by editing the `karma.conf.js` in the root folder of the project and
 the `test.ts` files in the `src/` folder.
 
 The `karma.conf.js` file is a partial Karma configuration file.
@@ -217,7 +217,7 @@ script:
   - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 ```
 
-This does the same things as the Circle CI configuration, except that Travis doesn't come with Chrome, so we use Chromium instead.
+This does the same things as the CircleCI configuration, except that Travis doesn't come with Chrome, so use Chromium instead.
 
 Step 2: Commit your changes and push them to your repository.
 

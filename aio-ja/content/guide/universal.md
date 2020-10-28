@@ -48,8 +48,7 @@ src/
   app/ ...                   <i>アプリケーションコード</i>
     app.server.module.ts     <i>* サーバーサイドアプリケーションモジュール</i>
 server.ts                    <i>* Express Web サーバー</i>
-tsconfig.json                <i>TypeScript solution style configuration</i>
-tsconfig.base.json           <i>TypeScript 基本構成</i>
+tsconfig.json                <i>TypeScript 基本構成</i>
 tsconfig.app.json            <i>TypeScript クライアント構成</i>
 tsconfig.server.json         <i>* TypeScript サーバー構成</i>
 tsconfig.spec.json           <i>TypeScript 仕様の構成</i>
@@ -227,7 +226,7 @@ Web サーバーは、_アプリのページのリクエスト_ を他の種類�
 
 幸いなことに、アプリケーションルートには共通点があります。URL にはファイル拡張子がありません。
 (データリクエストにも拡張子はありませんが、常に `/api` で始まるため、簡単に認識できます。)
-すべての静的アセットリクエストには (`main.js` や `/node_modules/zone.js/dist/zone.js` など) ファイル拡張子があります。
+すべての静的アセットリクエストには (`main.js` や `/node_modules/zone.js/bundles/zone.umd.js` など) ファイル拡張子があります。
 
 ルーティングを使用するため、3種類のリクエストを簡単に認識して、異なる方法で処理できます。
 

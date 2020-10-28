@@ -14,11 +14,11 @@ RxJS は `Observable` 型の実装を提供します。Observable 型は、型�
 
 RxJS には新しい observables を作成するために使用できるいくつかの関数が用意されています。これらの関数はイベント、タイマー、promise などから observables を作成するプロセスを簡素化できます。たとえば：
 
-<code-example path="rx-library/src/simple-creation.ts" region="promise" header="promise から observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.1.ts" region="promise" header="promise から observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="interval" header="カウンターから observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.2.ts" region="interval" header="カウンターから observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.ts" region="event" header="イベントから observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.3.ts" region="event" header="イベントから observable を作成する"></code-example>
 
 <code-example path="rx-library/src/simple-creation.ts" region="ajax" header="AJAX リクエストから observable を作成する"></code-example>
 

@@ -114,6 +114,7 @@ Angular ライブラリの入力が不完全または正しくない場合、ま
 |厳密性フラグ|効果|
 |-|-|
 |`strictInputTypes`|`@Input()` フィールドへのバインディング式の割り当て可能性がチェックされるかどうか。ディレクティブジェネリック型の推論にも影響します。|
+|`strictInputAccessModifiers`|Whether access modifiers such as `private`/`protected`/`readonly` are honored when assigning a binding expression to an `@Input()`. If disabled, the access modifiers of the `@Input` are ignored; only the type is checked.|
 |`strictNullInputTypes`|( `strictInputTypes` ごとに ) `@Input()` バインディングをチェックするときに、`strictNullChecks` が受け入れられるかどうか。これをオフにすると、`strictNullChecks` を考慮せずにビルドされたライブラリを使用するときに役立ちます。|
 |`strictAttributeTypes`|テキスト属性を使用して作成された `@Input()` バインディングをチェックするかどうか ( たとえば、`<mat-tab label="Step 1">` と `<mat-tab [label]="'Step 1'">` ) 。
 |`strictSafeNavigationTypes`|安全なナビゲーション操作の戻り値の型 ( たとえば、`user?.name` ) が、`user` の型に基づいて正しく推測されるかどうか。無効にすると、`user?.name` の型は `any` になります。

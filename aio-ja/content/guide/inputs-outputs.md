@@ -211,7 +211,7 @@ import { Output, EventEmitter } from '@angular/core';
 子のテンプレートには2つのコントロールがあります。
 1つ目は、ユーザーが項目名を入力する HTML の `<input>` で、
 [テンプレート参照変数](guide/template-reference-variables)の `#newItem` がついています。
-ユーザーが `<input>` に入力したものは何でも `#newItem` 変数に保存されます。
+ユーザーが `<input>` に入力したものは何でも `#newItem` 変数の`value`プロパティに保存されます。
 
 <code-example path="inputs-outputs/src/app/item-output/item-output.component.html" region="child-output" header="src/app/item-output/item-output.component.html"></code-example>
 
@@ -221,7 +221,7 @@ import { Output, EventEmitter } from '@angular/core';
 これがイベントバインディングであることが分かります。
 
 `(click)` イベントは子コンポーネントのクラスの `addNewItem()` メソッドにバインドされていて、
-`#newItem` の値が何であるかを引数に取ります。
+`#newItem.value` の値が何であるかを引数に取ります。
 
 これで、子コンポーネントから親にデータを送るための `@Output()` と、
 イベントを発生させるメソッドができました。

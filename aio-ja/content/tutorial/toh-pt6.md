@@ -179,8 +179,8 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 <code-example path="toh-pt6/src/app/hero.service.ts" region="getHeroes-2" header="src/app/hero.service.ts">
 </code-example>
 
-`catchError()`オペレーターは**失敗したObservable**をインターセプトします。
-これはエラーをそれを処理するエラーハンドラーに渡します。
+`catchError()`オペレーターは**失敗したObservable**に割り込みます。
+そうするとオペレーターはエラーをエラーハンドリング関数に渡します。
 
 次の`handleError()`メソッドはエラーを報告し、
 アプリを動作し続けるために無害な結果を返します。

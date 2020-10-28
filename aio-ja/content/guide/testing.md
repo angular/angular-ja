@@ -75,7 +75,7 @@ Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内に次の
 
 CLIはJasmineとKarmaの設定を引き受けてくれます。
 
-`src/`フォルダ内の`karma.conf.js`と`test.ts`ファイルを編集することで
+プロジェクトルートフォルダ内の`karma.conf.js`と`src/`フォルダ内の`test.ts`ファイルを編集することで
 多くのオプションの微調整ができます。
 
 `karma.conf.js`は部分的なKarma設定ファイルです。

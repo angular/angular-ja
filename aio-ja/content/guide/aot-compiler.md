@@ -62,7 +62,7 @@ AngularのAOTコンパイラは、Angularが管理することになるアプリ
 @Component({
   selector: 'app-typical',
   template: '<div>A typical component for {{data.name}}</div>'
-)}
+})
 export class TypicalComponent {
   @Input() data: TypicalData;
   constructor(private someService: SomeService) { ... }

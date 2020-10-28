@@ -879,7 +879,7 @@
                   "title": "次のステップ",
                   "tooltip": "基本のその先へ。",
                   "translated": true
-                }
+                },
                 {
                   "url": "guide/event-binding-concepts",
                   "title": "How event binding works",

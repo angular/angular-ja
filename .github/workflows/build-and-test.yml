@@ -45,11 +45,12 @@ jobs:
       run: npm test
     - name: Build
       run: ./build.sh
-    # - name: Preview Deploy
-    #   uses: FirebaseExtended/action-hosting-deploy@v0
-    #   with:
-    #     repoToken: "${{ secrets.GITHUB_TOKEN }}"
-    #     firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-    #     expires: 7d
-    #     projectId: angular-ja
-    #     channelId: "preview-pr${{steps.pr-number.outputs.result}}"
+    - name: Preview Deploy
+      uses: FirebaseExtended/action-hosting-deploy@v0
+      if: "${{ secrets.FIREBASE_SERVICE_ACCOUNT != '' }}"
+      with:
+        repoToken: "${{ secrets.GITHUB_TOKEN }}"
+        firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+        expires: 7d
+        projectId: angular-ja
+        channelId: "preview-pr${{steps.pr-number.outputs.result}}"

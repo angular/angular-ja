@@ -552,7 +552,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 </div>
 
 
-#### AfterContent フックの使用
+#### AfterContent フックの使用 {@a using-aftercontent-hooks}
 
 *AfterContent* フックは *AfterView* フックに似ています。
 主な違いは、子コンポーネントにあります。

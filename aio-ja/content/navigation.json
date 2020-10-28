@@ -61,7 +61,7 @@
       "translated": true
     },
     {
-      "title": "入門",
+      "title": "はじめに",
       "tooltip": "Set up your environment and learn basic concepts",
       "children": [
         {
@@ -172,14 +172,14 @@
           ]
         },
         {
-          "title": "Templates",
+          "title": "テンプレート",
           "tooltip": "Syntax to use in templates for binding, expressions, and directives.",
           "children": [
             {
               "url": "guide/template-syntax",
               "title": "イントロダクション",
               "tooltip": "データバインディングを使用してデータを表示し、ユーザーイベントを利用するテンプレートの作成方法を学びます。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/interpolation",
@@ -250,7 +250,7 @@
           ]
         },
         {
-          "title": "Directives",
+          "title": "ディレクティブ",
           "tooltip": "Control the behavior of elements and the layout of your pages with directives.",
           "children": [
             {
@@ -347,7 +347,7 @@
         },
         {
           "url": "guide/http",
-          "title": "HTTPによるサーバーアクセス",
+          "title": "HTTPクライアント",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
           "translated": true
         },
@@ -612,7 +612,7 @@
               "url": "guide/universal",
               "title": "サーバーサイドレンダリング",
               "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/language-service",
@@ -943,7 +943,7 @@
                   "url": "guide/ngmodule-vs-jsmodule",
                   "title": "JavaScriptモジュールとNgModule",
                   "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
-                  "translated": false
+                  "translated": true
                 },
                 {
                   "url": "guide/bootstrapping",
@@ -961,7 +961,7 @@
                   "url": "guide/module-types",
                   "title": "フィーチャーモジュールの種類",
                   "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
-                  "translated": false
+                  "translated": true
                 },
                 {
                   "url": "guide/entry-components",

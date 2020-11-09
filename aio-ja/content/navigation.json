@@ -135,7 +135,7 @@
             },
             {
               "url": "guide/view-encapsulation",
-              "title": "ピューのカプセル化",
+              "title": "ビューのカプセル化",
               "tooltip": "Describes how component CSS styles are encapsulated into a component's view.",
               "translated": true
             },

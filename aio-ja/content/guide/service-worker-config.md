@@ -266,6 +266,12 @@ Service Workerは、`asset`または`data`グループと一致しないナビ�
 1. URLの最後のパスセグメントにファイル拡張子（`.`）が含まれていないこと。
 2. URLに`__`を含まれていないこと。
 
+<div class="alert is-helpful">
+
+To configure whether navigation requests are sent through to the network or not, see the [navigationRequestStrategy](#navigation-request-strategy) section.
+
+</div>
+
 ### ナビゲーションリクエストURLのマッチング
 
 ほとんどの場合、これらのデフォルト基準は問題ありませんが、異なるルールを設定することが望ましい場合があります。たとえば、Angularアプリの一部ではない特定のルートを無視して、それらをサーバーに渡すことができます。
@@ -284,3 +290,32 @@ URLがネガティブでないURL/パターンの _いずれか_ と一致し、
   '!/**/*__*/**',  // その他のセグメントに`__`を含むURLを除外する
 ]
 ```
+
+{@a navigation-request-strategy}
+
+## `navigationRequestStrategy`
+
+This optional property enables you to configure how the service worker handles navigation requests:
+
+```json
+{
+  "navigationRequestStrategy": "freshness"
+}
+```
+
+Possible values:
+
+- `'performance'`: The default setting. Serves the specified [index file](#index-file), which is typically cached.
+- `'freshness'`: Passes the requests through to the network and falls back to the `performance` behavior when offline.
+  This value is useful when the server redirects the navigation requests elsewhere using an HTTP redirect (3xx status code).
+  Reasons for using this value include:
+    - Redirecting to an authentication website when authentication is not handled by the application.
+    - Redirecting specific URLs to avoid breaking existing links/bookmarks after a website redesign.
+    - Redirecting to a different website, such as a server-status page, while a page is temporarily down.
+
+<div class="alert is-important">
+
+The `freshness` strategy usually results in more requests sent to the server, which can increase response latency.
+It is recommended that you use the default performance strategy whenever possible.
+
+</div>

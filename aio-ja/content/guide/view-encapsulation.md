@@ -13,8 +13,6 @@ AngularではコンポーネントのCSSスタイルはコンポーネントの�
 Shadow DOMをコンポーネントのホスト要素にアタッチし、
 そのShadow DOM内にコンポーネントビューを配置します。コンポーネントのスタイルは、Shadow DOM内に含まれています。
 
-* `Native` ビューカプセル化は、ブラウザのネイティブShadow DOM実装の非推奨バージョンを使用します。 - [この変更について学びましょう](https://hayato.io/2016/shadowdomv1/).
-
 * `Emulated` ビューカプセル化（デフォルト）は、CSSコードを事前処理（および名前変更）して、
 Shadow DOMの動作をエミュレートし、CSSをコンポーネントのビューに効果的に適用します。
   詳細は、[生成されたCSSの検査](guide/view-encapsulation#inspect-generated-css) を参照してください。
@@ -26,7 +24,7 @@ AngularはCSSをグローバルスタイルに追加します。
 
 コンポーネントのカプセル化モードを設定するには、コンポーネントメタデータ内の `encapsulation` プロパティを使用します：
 
-<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" header="src/app/quest-summary.component.ts"></code-example>
+<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.shadow" header="src/app/quest-summary.component.ts"></code-example>
 
 `ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
 ( [Can I use](http://caniuse.com) サイトの

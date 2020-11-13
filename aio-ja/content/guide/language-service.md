@@ -64,36 +64,9 @@ Angular Language Serviceは、コード内の間違いを予告することも�
 
 ### WebStorm
 
-[WebStorm](https://www.jetbrains.com/webstorm/)では、プロジェクトの開発用依存関係としてLanguage Serviceをインストールする必要があります。
+In [WebStorm](https://www.jetbrains.com/webstorm/), enable the plugin [Angular and AngularJS](https://plugins.jetbrains.com/plugin/6971-angular-and-angularjs).
 
-1. 下記をプロジェクトの`package.json`内の`devDependencies`に追記します
-
-<code-example language="json" header="package.json">
-devDependencies {
-  "@angular/language-service": "^6.0.0"
-}
-</code-example>
-
-2. プロジェクトルートのターミナルで、この`devDependencies`を`npm`か`yarn`でインストールします：
-
-```sh
-npm install
-```
-*または*
-
-```sh
-yarn
-```
-
-*または*
-
-```sh
-yarn install
-```
-
-Angularはこの開発用依存関係を認識すると、WebStorm環境内で言語機能を提供します。
-WebStormは、Language Serviceに加えて、テンプレート内の色付けとオートコンプリートを提供します。
-
+Since WebStorm 2019.1, the `@angular/language-service` is not required anymore and should be removed from your `package.json`.
 
 ### Sublime Text
 

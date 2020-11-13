@@ -1,7 +1,7 @@
-# 双方向バインディング `[(...)]`
+# Two-way binding
 
-双方向バインディングを使うと、コンポーネントクラスとそのテンプレートとの間で
-データを共有することができます。
+Two-way binding gives components in your application a way to share data.
+Use two-way binding binding to listen for events and update values simultaneously between parent and child components.
 
 <div class="alert is-helpful">
 
@@ -9,68 +9,73 @@ See the <live-example></live-example> for a working example containing the code 
 
 </div>
 
-## 双方向バインディングの基本 {@a basics-of-two-way-binding}
+## Prerequisites
 
-双方向バインディングがすることは2つです:
+To get the most out of two-way binding, you should have a basic understanding of the following concepts:
 
-1. 特定の要素のプロパティを設定します。
-1. 要素の変更イベントをリッスンします。
+* [Property binding](guide/property-binding)
+* [Event binding](guide/event-binding)
+* [Inputs and Outputs](guide/inputs-outputs)
 
-Angular は、この目的のための特別な _双方向データバインディング_ の構文、`[()]` を提供しています。
-`[(x)]` 構文は、プロパティバインディングの括弧 `[]`
-とイベントバインディングの括弧 `()` を組み合わせたものです。
+<hr>
 
-<div class="callout is-important">
+Two-way binding combines property binding with event binding:
 
-<header>
-  [( )] = banana in a box
-</header>
+* [Property binding](guide/property-binding) sets a specific element property.
+* [Event binding](guide/event-binding) listens for an element change event.
 
-括弧が角括弧の _中_ にあることを覚えておくために *banana in a box* を思い描いてください。
+## Adding two-way data binding
 
-</div>
+Angular's two-way binding syntax is a combination of square brackets and parentheses, `[()]`.
+The `[()]` syntax combines the brackets of property binding, `[]`, with the parentheses of event binding, `()`, as follows.
 
-`[()]` 構文は、要素が `x` という設定可能なプロパティと
-対応する `xChange` というイベントを持っているときに簡単に説明できます。
-このパターンに合う `SizerComponent` は次のようになります。
-これは、`size` 値プロパティと、それに付随する `sizeChange` イベントを持ちます:
+<code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html" region="two-way-syntax"></code-example>
 
-<code-example path="two-way-binding/src/app/sizer/sizer.component.ts" header="src/app/sizer.component.ts"></code-example>
+## How two-way binding works
+
+For two-way data binding to work, the `@Output()` property must use the pattern, `inputChange`, where `input` is the name of the `@Input()` property.
+For example, if the `@Input()` property is `size`, the `@Output()` property must be `sizeChange`.
+
+The following `sizerComponent` has a `size` value property and a `sizeChange` event.
+The `size` property is an `@Input()`, so data can flow into the `sizerComponent`.
+The `sizeChange` event is an `@Output()`, which allows data to flow out of the `sizerComponent` to the parent component.
+
+Next, there are two methods, `dec()` to decrease the font size and `inc()` to increase the font size.
+These two methods use `resize()` to change the value of the `size` property within min/max value constraints, and to emit an event that conveys the new `size` value.
+
+<code-example path="two-way-binding/src/app/sizer/sizer.component.ts" region="sizer-component" header="src/app/sizer.component.ts"></code-example>
+
+The `sizerComponent` template has two buttons that each bind the click event to the `inc()` and `dec()` methods.
+When the user clicks one of the buttons, the `sizerComponent` calls the corresponding method.
+Both methods, `inc()` and `dec()`, call the `resize()` method with a `+1` or `-1`, which in turn raises the `sizeChange` event with the new size value.
 
 <code-example path="two-way-binding/src/app/sizer/sizer.component.html" header="src/app/sizer.component.html"></code-example>
 
-`size` の初期値は、プロパティバインディングからの入力値です。
-ボタンをクリックすると、
-最小値/最大値の制限内で `size` が増減し、
-調整されたサイズで `sizeChange` イベントが発生（発行）します。
 
-`AppComponent.fontSizePx` が `SizerComponent` に双方向でバインドされている例は次のようになります:
+In the `AppComponent` template, `fontSizePx` is two-way bound to the `SizerComponent`.
 
-<code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (two-way-1)" region="two-way-1"></code-example>
+<code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html" region="two-way-1"></code-example>
 
-`AppComponent.fontSizePx` は、`SizerComponent.size` の初期値を与えます。
+In the `AppComponent`, `fontSizePx` establishes the initial `SizerComponent.size` value by setting the value to `16`.
 
 <code-example path="two-way-binding/src/app/app.component.ts" header="src/app/app.component.ts" region="font-size"></code-example>
 
-ボタンをクリックすると、双方向バインディングによって `AppComponent.fontSizePx` が更新されます。
-変更された `AppComponent.fontSizePx` 値は _スタイル_ バインディングに流れ込み、
-表示されるテキストが大きくなったり小さくなったりします。
+Clicking the buttons updates the `AppComponent.fontSizePx`.
+The revised `AppComponent.fontSizePx` value updates the style binding, which makes the displayed text bigger or smaller.
 
-双方向バインディングの構文は、実際には _プロパティ_ バインディングと _イベント_ バインディングの単なる糖衣構文です。
-Angular は次のように `SizerComponent` バインディングを _デシュガー_ します:
+The two-way binding syntax is shorthand for a combination of property binding and event binding.
+The `SizerComponent` binding as separate property binding and event binding is as follows.
 
-<code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (two-way-2)" region="two-way-2"></code-example>
+<code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (expanded)" region="two-way-2"></code-example>
 
-`$event` 変数には、`SizerComponent.sizeChange` イベントのペイロードが含まれています。
-ユーザーがボタンをクリックすると、Angular は `$event` 値を `AppComponent.fontSizePx` に割り当てます。
+The `$event` variable contains the data of the `SizerComponent.sizeChange` event.
+Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
 
-## フォームでの双方向バインディング {@a two-way-binding-in-forms}
+<div class="callout is-helpful">
 
-双方向バインディングの構文は、プロパティとイベントを
-別々にバインドするのに比べて非常に便利です。
-`<input>` や `<select>` のような HTML の
-form 要素を使って双方向バインディングを使うと便利です。
-ただし、`x` 値および `xChange` イベントパターンに従うネイティブ HTML 要素はありません。
+  <header>Two-way binding in forms</header>
 
-フォームでの双方向バインディングについての詳細は
-Angular [NgModel](guide/built-in-directives#ngModel) を参照してください.
+  Because no native HTML element follows the `x` value and `xChange` event pattern, two-way binding with form elements requires `NgModel`.
+  For more information on how to use two-way binding in forms, see Angular [NgModel](guide/built-in-directives#ngModel).
+
+</div>

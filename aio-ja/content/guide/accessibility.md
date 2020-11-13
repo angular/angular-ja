@@ -70,7 +70,7 @@ Angular コンポーネントを作成する際は、すでにサポートされ
 たとえば、新しく色々なボタンのためにカスタム要素を作成するのではなく、属性のセレクターにネイティブの `<button>` 要素を使用したコンポーネントを作成することができます。
 これは `<button>` と `<a>` に典型的に適用できますが、他の多くのタイプの要素にも使うことができるでしょう。
 
-Angular Material において上記のパターンのサンプルは [`MatButton`](https://github.com/angular/components/blob/master/src/material/button/button.ts#L66-L68) や [`MatTabNav`](https://github.com/angular/components/blob/master/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L67) 、[`MatTable`](https://github.com/angular/components/blob/master/src/material/table/table.ts#L17) などがあります。
+Angular Material において上記のパターンのサンプルは [`MatButton`](https://github.com/angular/components/blob/50d3f29b6dc717b512dbd0234ce76f4ab7e9762a/src/material/button/button.ts#L67-L69) や [`MatTabNav`](https://github.com/angular/components/blob/50d3f29b6dc717b512dbd0234ce76f4ab7e9762a/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L139) 、[`MatTable`](https://github.com/angular/components/blob/50d3f29b6dc717b512dbd0234ce76f4ab7e9762a/src/material/table/table.ts#L22) などがあります。
 
 ### ネイティブ要素にコンテナを使う
 

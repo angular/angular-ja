@@ -45,8 +45,8 @@ jobs:
       run: npm test
     - name: Build
       run: ./build.sh
-    - name: Preview Deploy
-      uses: FirebaseExtended/action-hosting-deploy@v0
+    # - name: Preview Deploy
+    #   uses: FirebaseExtended/action-hosting-deploy@v0
       # A PR from forked repository cannot access secrets.
       # if: "${{ github.repository_owner == 'angular' }}"
       # with:

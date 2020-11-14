@@ -1,5 +1,17 @@
 # コンポーネントツリーを DI でナビゲートする
 
+<div class="callout is-critical">
+<header>Marked for archiving</header>
+
+To ensure that you have the best experience possible, this topic is marked for archiving until we determine
+that it clearly conveys the most accurate information possible.
+
+In the meantime, this topic might be helpful: [Hierarchical injectors](guide/hierarchical-dependency-injection).
+
+If you think this content should not be archived, please file a [GitHub issue](https://github.com/angular/angular/issues/new?template=3-docs-bug.md).
+
+</div>
+
 アプリケーションのコンポーネントはしばしば情報を共有する必要があります。
 データバインディングやサービスの共有など、
 情報を共有するために疎結合のテクニックを使用することがよくありますが、
@@ -170,7 +182,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 
 *Barry* の `providers` 配列は、[Alex の配列](#alex-providers)とまったく同じです。
-このような[エイリアスプロバイダ](guide/dependency-injection-in-action#useexisting)を書き続けるのであれば、[ヘルパー関数](#provideparent)を作成するべきです。
+このような[エイリアスプロバイダ](guide/dependency-injection-in-action#useexisting)を書き続けるのであれば、ヘルパー関数を作成するべきです。
 
 今は、*Barry* のコンストラクターに焦点を当てます。
 
@@ -196,7 +208,7 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 2. `@SkipSelf` デコレーターを省略した場合、Angular は循環依存エラーを送出します。
 
-  `Circular dependency in DI detected for BethComponent. Dependency path: BethComponent -> Parent -> BethComponent`
+  `NG0200: Circular dependency in DI detected for BethComponent. Dependency path: BethComponent -> Parent -> BethComponent`
 
 これが *Alice*、*Barry*、そして家族の動きです。
 
@@ -244,36 +256,3 @@ Angular は常にコンポーネントインスタンスを独自のインジェ
 
 
 </div>
-
-
-
-{@a provideparent}
-
-
-### `provideParent()` ヘルパー関数
-
-同じ親*エイリアスプロバイダ*のバリエーションを書くとすぐに古くなります。
-[*forwardRef*](guide/dependency-injection-in-action#forwardref) を使うと、これは特にひどいものです。
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
-
-次のように、そのロジックをヘルパー関数に抽出できます。
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-the-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
-
-今、コンポーネントに、より単純で意味のある Parent プロバイダーを追加することができます。
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alice-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
-
-
-あなたはもっとうまくやれます。現在のバージョンのヘルパー関数は、`Parent`クラスのインターフェースのみを別名で設定できます。
-アプリケーションにはさまざまな親の型があり、それぞれに独自のクラスインターフェーストークンがあります。
-
-これは `parent` をデフォルトとしていますが、別の親クラスのインターフェースのためのオプションの2番目のパラメータも受け付ける改訂版です。
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
-
-
-そして、これが別の親のタイプでそれを使用する方法です。
-
-<code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="beth-providers" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>

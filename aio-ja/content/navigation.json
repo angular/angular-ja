@@ -122,12 +122,6 @@
               "tooltip": "Overview of how to create Angular components."
             },
             {
-              "url": "guide/user-input",
-              "title": "ユーザー入力",
-              "tooltip": "ユーザー入力はDOMイベントを発火します。イベントバインディングを使用してこれらのイベントをリッスンし、更新された値をコンポーネントとモデルに戻します。",
-              "translated": true
-            },
-            {
               "url": "guide/lifecycle-hooks",
               "title": "コンポーネントライフサイクルへのフック",
               "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
@@ -227,13 +221,7 @@
               "url": "guide/two-way-binding",
               "title": "双方向バインディング",
               "tooltip": "Introductory guide to sharing data between a class and a template.",
-              "translated": true
-            },
-            {
-              "url": "guide/template-reference-variables",
-              "title": "テンプレート参照変数",
-              "tooltip": "Introductory guide to referring to DOM elements within a template.",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/template-expression-operators",
@@ -293,12 +281,6 @@
               "url": "guide/dependency-injection-in-action",
               "title": "DIイン・アクション",
               "tooltip": "依存性の注入のためのテクニック",
-              "translated": true
-            },
-            {
-              "url": "guide/dependency-injection-navtree",
-              "title": "コンポーネントツリーのナビゲート",
-              "tooltip": "インジェクションツリーを使って親コンポーネントを見つけます。",
               "translated": true
             }
           ]
@@ -600,7 +582,7 @@
           "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
         },
         {
-          "title": "Angular Tools",
+          "title": "Angularツール",
           "tooltip": "Tools to help you build your Angular applications.",
           "children": [
             {
@@ -623,7 +605,7 @@
           ]
         },
         {
-          "title": "Tutorials",
+          "title": "チュートリアル",
           "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
           "children": [
             {
@@ -752,49 +734,18 @@
           "translated": true
         },
         {
-          "title": "バージョン10へのアップデート",
+          "title": "バージョン11へのアップデート",
           "tooltip": "Support for updating your application from version 9 to 10.",
           "children": [
             {
-              "url": "guide/updating-to-version-10",
+              "url": "guide/updating-to-version-11",
               "title": "Overview",
-              "tooltip": "Everything you need to know for updating your application from version 9 to 10."
+              "tooltip": "Everything you need to know for updating your application from version 10 to 11."
             },
             {
               "url": "guide/ivy-compatibility",
               "title": "Ivy Compatibility Guide",
               "tooltip": "Details to help you make sure your application is compatible with Ivy."
-            },
-            {
-              "title": "Migrations",
-              "tooltip": "Migration details regarding updating to version 10.",
-              "children": [
-                {
-                  "url": "guide/migration-module-with-providers",
-                  "title": "Missing ModuleWithProviders Generic",
-                  "tooltip": "Migration to add a generic type to any ModuleWithProviders usages that are missing the generic."
-                },
-                {
-                  "url": "guide/migration-undecorated-classes",
-                  "title": "Missing @Directive() Decorators",
-                  "tooltip": "Migration to add missing @Directive()/@Component() decorators."
-                },
-                {
-                  "url": "guide/migration-injectable",
-                  "title": "Missing @Injectable() Decorators",
-                  "tooltip": "Migration to add missing @Injectable() decorators and incomplete provider definitions."
-                },
-                {
-                  "url": "guide/migration-update-libraries-tslib",
-                  "title": "`tslib` direct dependency",
-                  "tooltip": "Migration to a direct dependency on the `tslib` npm package."
-                },
-                {
-                  "url": "guide/migration-update-module-and-target-compiler-options",
-                  "title": "`module` and `target` compiler options",
-                  "tooltip": "Migration to update `module` and `target` compiler options."
-                }
-              ]
             }
           ]
         },
@@ -884,6 +835,12 @@
                   "url": "guide/event-binding-concepts",
                   "title": "How event binding works",
                   "tooltip": "About event binding."
+                },
+                {
+                  "url": "guide/template-reference-variables",
+                  "title": "テンプレート変数",
+                  "tooltip": "Introductory guide to referring to DOM elements within a template.",
+                  "translated": false
                 }
               ]
             },
@@ -1228,6 +1185,10 @@
   ],
 
   "docVersions": [
+    {
+      "title": "v10",
+      "url": "https://v10.angular.io/"
+    },
     {
       "title": "v9",
       "url": "https://v9.angular.io/"

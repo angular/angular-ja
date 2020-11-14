@@ -108,7 +108,7 @@ Angularでは、このステップは不要です。データの更新するた�
 
 <code-example path="user-input/src/app/click-me.component.ts" region="click-me-component" header="src/app/click-me.component.ts"></code-example>
 
-1. Httpデータリクエスト。Httpリクエストを介してサーバーからデータを取得することもできます。
+3. Httpデータリクエスト。Httpリクエストを介してサーバーからデータを取得することもできます。
 
 ```typescript
 @Component({

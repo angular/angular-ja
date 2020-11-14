@@ -149,7 +149,7 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 
 * `architect/lint` セクションでは、プロジェクトのソースファイルに対してコード解析を実行する `ng lint` コマンドのデフォルトオプションを設定します。Angularのデフォルトの静的解析ツールは [TSLint](https://palantir.github.io/tslint/) です。
 
-* `architect/extract-i18n` セクションでは `ng xi18n` コマンドが使用する `ng-xi18n` ツールのデフォルトオプションを設定します。このコマンドは、マークされたメッセージ文字列をソースコードから抽出し、翻訳ファイルを出力します。
+* `architect/extract-i18n` セクションでは `ng extract-i18n` コマンドが使用する `ng-xi18n` ツールのデフォルトオプションを設定します。このコマンドは、マークされたメッセージ文字列をソースコードから抽出し、翻訳ファイルを出力します。
 
 * `architect/server` セクションでは `ng run <project>:server` コマンドを使用してサーバーサイドレンダリングでUniversalアプリを作成する際のデフォルトを設定します。
 
@@ -241,8 +241,16 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 <code-example language="json">
 
 "assets": [
-  { "glob": "**/*", "input": "src/assets/", "output": "/assets/" },
-  { "glob": "favicon.ico", "input": "src/", "output": "/" },
+  {
+    "glob": "**/*",
+    "input": "src/assets/",
+    "output": "/assets/"
+  },
+  {
+    "glob": "favicon.ico",
+    "input": "src/",
+    "output": "/"
+  }
 ]
 
 </code-example>
@@ -253,7 +261,11 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 <code-example language="json">
 
 "assets": [
- { "glob": "**/*", "input": "./node_modules/some-package/images", "output": "/some-package/" },
+ {
+   "glob": "**/*",
+   "input": "./node_modules/some-package/images",
+   "output": "/some-package/"
+ }
 ]
 
 </code-example>
@@ -265,7 +277,12 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 <code-example language="json">
 
 "assets": [
- { "glob": "**/*", "input": "src/assets/", "ignore": ["**/*.svg"], "output": "/assets/" },
+ { 
+   "glob": "**/*",
+   "input": "src/assets/",
+   "ignore": ["**/*.svg"],
+   "output": "/assets/" 
+ }
 ]
 
 </code-example>
@@ -284,10 +301,18 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 <code-example language="json">
 
    "styles": [
-     { "input": "src/external-module/styles.scss", "inject": false, "bundleName": "external-module" }
+     {
+       "input": "src/external-module/styles.scss",
+       "inject": false,
+       "bundleName": "external-module"
+     }
    ],
    "scripts": [
-     { "input": "src/external-module/main.js", "inject": false, "bundleName": "external-module" }
+     { 
+       "input": "src/external-module/main.js",
+       "inject": false,
+       "bundleName": "external-module"
+     }
    ]
 
 </code-example>
@@ -341,25 +366,38 @@ Sass と Stylus では、コンポーネントスタイルとグローバルス�
 
 ### 最適化とソースマップの構成
 
-`optimization` および `sourceMap` コマンドオプションは単純なブールフラグです。
-これらのいずれかの構成値としてオブジェクトを指定して、より詳細な指示を提供できます。
+ブラウザビルダの `optimization` および `sourceMap` オプションには、より詳細な設定を行うために、ブール値かオブジェクトを指定することができます。
+このセクションでは、これらのオプションを微調整する方法を説明します。
 
-* フラグ `--optimization="true"` は、スクリプトとスタイルの両方に適用されます。次のような値を指定して、どちらかに最適化を適用できます:
+* `optimization`オプションはスクリプト、スタイル、フォントに適用されます。次のような値を指定することで、どちらか一方に最適化を適用することができます。
 
 <code-example language="json">
 
-   "optimization": { "scripts": true, "styles": false }
+  "optimization": { 
+    "scripts": true,
+    "styles": false,
+    "fonts": true
+  }
 
 </code-example>
 
-* フラグ `--sourceMap="true"` は、スクリプトとスタイルの両方のソースマップを出力します。
-どちらかに適用するオプションを構成できます。
-非表示のソースマップを出力するか、ベンダーパッケージのソースマップを解決することもできます。
-たとえば:
+<div class="alert is-important">
+
+  Fonts optimization requires internet access.
+  When enabled, render blocking requests will be reduced by inlining external Google fonts and icons CSS definitions in the application's HTML index file. 
+
+</div>
+
+* sourceMap` オプションはスクリプトとスタイルの両方に適用されます。非表示のソースマップを出力したり、 ベンダパッケージのソースマップを解決したりすることもできます。
 
 <code-example language="json">
 
-   "sourceMap": { "scripts": true, "styles": false, "hidden": true, "vendor": true }
+  "sourceMap": {
+    "scripts": true,
+    "styles": false,
+    "hidden": true,
+    "vendor": true
+  }
 
 </code-example>
 

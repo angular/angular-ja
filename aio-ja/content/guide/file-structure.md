@@ -95,7 +95,6 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 | `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
 | `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
 | `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
-| `app/package.json`              | This file is generated only in applications created using `--strict` mode. This file is not used by package managers. It is used to tell the tools and bundlers whether the code under this directory is free of non-local [side-effects](guide/strict-mode#side-effect). |
 
 ### アプリケーション設定ファイル {@a application-configuration-files}
 

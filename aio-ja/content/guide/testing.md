@@ -238,7 +238,7 @@ TravisではChromeが付属していないため、代わりにChromiumを使用
 
 * Karma設定ファイル、`karma.conf.js`のbrowsersの下にChromeHeadlessCIというカスタムランチャーを追加します:
 ```
-browsers: ['Chrome'],
+browsers: ['ChromeHeadlessCI'],
 customLaunchers: {
   ChromeHeadlessCI: {
     base: 'ChromeHeadless',

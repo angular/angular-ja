@@ -541,7 +541,7 @@ Angular の _NgSwitch_ は、実際には `NgSwitch`、`NgSwitchCase`、およ�
 
 
 
-## *&lt;ng-template&gt;*
+## *&lt;ng-template&gt;* {@a the-ng-template}
 
 &lt;ng-template&gt; は HTML をレンダリングするための Angular の要素です。
 直接表示されることはありません。

@@ -1,31 +1,30 @@
 
-# How event binding works
+# イベントバインディングのしくみ {@a how-event-binding-works}
 
-In an event binding, Angular configures an event handler for the target event.
-You can use event binding with your own custom events.
+イベントバインディングでは、Angularはターゲットイベントのイベントハンドラーを構成します。
+独自のカスタムイベントでイベントバインディングを使用できます。
 
-When the component or directive raises the event, the handler executes the template statement.
-The template statement performs an action in response to the event.
+コンポーネントやディレクティブがイベントを発生させると、ハンドラーはテンプレート文を実行します。
+テンプレート文は、イベントに応答してアクションを起こします。
 
-## Handling events
+## イベントハンドリング {@a handling-events}
 
-A common way to handle events is to pass the event object, `$event`, to the method handling the event.
-The `$event` object often contains information the method needs, such as a user's name or an image URL.
+イベントを処理する一般的な方法は、イベントオブジェクトの`$event`をイベントを処理するメソッドに渡すことです。
+`$event`オブジェクトには、ユーザー名や画像のURLなどメソッドに必要な情報がたいてい含まれています。
 
-The target event determines the shape of the `$event` object.
-If the target event is a native DOM element event, then `$event` is a [DOM event object](https://developer.mozilla.org/en-US/docs/Web/Events), with properties such as `target` and `target.value`.
+ターゲットのイベントにより`$event`オブジェクトの形式が決まります。
+ターゲットのイベントがネイティブのDOM要素イベントなら、`$event`は`target`や`target.value`などのプロパティをもつ[DOMのイベントオブジェクト](https://developer.mozilla.org/en-US/docs/Web/Events)です。
 
-In the following example the code sets the `<input>` `value` property by binding to the `name` property.
+次のコード例では、`name`プロパティにバインドして`<input>`の`value`プロパティを設定します。
 
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-3" header="src/app/app.component.html"></code-example>
 
-With this example, the following actions occur:
+この例では、次のアクションが起こります:
 
-1. The code binds to the `input` event of the `<input>` element, which allows the code to listen for changes.
-1. When the user makes changes, the component raises the `input` event.
-1. The binding executes the statement within a context that includes the DOM event object, `$event`.
-1. Angular retrieves the changed text by following the path `$event.target.value` and updates the `name` property.
+1. このコードは`<input>`要素の`input`イベントにバインドして、それにより変更をリッスンできます。
+1. ユーザーが変更を加えると、コンポーネントは`input`イベントを発生させます。
+1. バインディングは、DOMのイベントオブジェクトの`$event`を含むコンテキスト内でその式を実行します。
+1. Angularは、`$event.target.value`というパスをたどってその変更されたテキストを取得し、`name`プロパティを更新します。
 
-If the event belongs to a directive or component, `$event` has the shape that the directive or component produces.
-
+イベントがディレクティブやコンポーネントに属している場合、`$event`はディレクティブやコンポーネントが生成する形式になります。

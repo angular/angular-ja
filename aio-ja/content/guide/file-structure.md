@@ -40,7 +40,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
 | `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |
 | `node_modules`         | [npmパッケージ](guide/npm-packages)をワークスペース全体に提供します。 |
-| `tsconfig.json`    | The base [TypeScript](https://www.typescriptlang.org/) configuration for projects in the workspace. All other configuration files inherit from this base file. For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.|
+| `tsconfig.json`    | ワークスペースのプロジェクトの[TypeScript](https://www.typescriptlang.org/)の基本設定。他のすべての設定ファイルはこの基本となるファイルを継承します。詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。|
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 
 
@@ -68,7 +68,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | APPソース & 設定ファイル  | 目的 |
 | :--------------------- | :------------------------------------------|
 | `app/`                 | アプリケーションのロジックやデータが定義されているコンポーネントファイルが含まれています。詳しくは[後述](#app-src)を参照してください。|
-| `assets/`              | 画像ファイルやその他のアセットファイルなどアプリケーションをビルドした時にそのままコピーされるべきものが格納されます。 | 
+| `assets/`              | 画像ファイルやその他のアセットファイルなどアプリケーションをビルドした時にそのままコピーされるべきものが格納されます。 |
 | `environments/`        | 特定のターゲット環境向けのビルド設定を持ちます。デフォルトでは名前のない標準開発環境と本番("prod")環境が用意されています。追加でターゲット環境設定を定義することができます。 |
 | `favicon.ico`          | ブックマークバーで利用されるアプリケーションのアイコンです。|
 | `index.html`           | 誰かがサイトを訪れた際に表示されるメインのHTMLページです。アプリケーションをビルドする時にCLIは自動的にすべてのJavaScriptとCSSファイルを追加するため、基本的には`<script>`や`<link>`タグを手で足す必要はありません。 |
@@ -79,7 +79,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 
 <div class="alert is-helpful">
 
-If you create an application using Angular's strict mode, you will also have an additional `package.json` file in the `src/app` directory. For more information, see [Strict mode](/guide/strict-mode).
+Angularのstrictモードを使用してアプリケーションを作成する場合は、`src/app`ディレクトリに追加の`package.json`ファイルもあります。詳しくは[Strictモード](/guide/strict-mode)を参照してください。
 
 </div>
 

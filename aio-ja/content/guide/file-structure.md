@@ -40,7 +40,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
 | `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |
 | `node_modules`         | [npmパッケージ](guide/npm-packages)をワークスペース全体に提供します。 |
-| `tsconfig.json`    | ワークスペースのプロジェクトの[TypeScript](https://www.typescriptlang.org/)の基本設定。他のすべての設定ファイルはこの基本となるファイルを継承します。詳しくはTypeScriptドキュメントの[設定継承して拡張](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。|
+| `tsconfig.json`    | ワークスペースのプロジェクトの[TypeScript](https://www.typescriptlang.org/)の基本設定。他のすべての設定ファイルはこの基本となるファイルを継承します。詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。|
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 
 

@@ -15,17 +15,18 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 
 {@a tsconfig}
 
-## 構成ファイル
+## 設定ファイル
 
-A given Angular workspace contains several TypeScript configuration files.
-At the root `tsconfig.json` specifies the base TypeScript and Angular compiler options that all projects in the workspace inherit.
+既定のAngularワークスペースには、いくつかのTypeScript設定ファイルが含まれています。
+ルートにある`tsconfig.json`は、ワークスペース内のすべてのプロジェクトが継承する基本となるTypeScriptとAngularコンパイラオプションを指定します。
 
-The TypeScript and Angular have a wide range of options which can be used to configure type-checking features and generated output.
-For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.
+TypeScriptとAngularには、型チェック機能と生成される出力を設定するために使用できる幅広いオプションがあります。
+詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
+
 <div class="alert is-helpful">
 
-For more information TypeScript configuration files, see the official [TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
-For details about configuration inheritance, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section.
+TypeScript設定ファイルの詳細は、公式の[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+設定の継承について詳しくは、[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
 
 </div>
 
@@ -54,10 +55,10 @@ Angular アプリケーションの最初の `tsconfig.json` は通常、次の�
 </code-example>
 
 
-### Strict mode
+### Strictモード {@a strict-mode}
 
-When you create new workspaces and projects, you have the option to use Angular's strict mode, which can help you write better, more maintainable code.
-For more information, see [Strict mode](/guide/strict-mode).
+新しいワークスペースとプロジェクトを作成するときは、Angularのstrictモードを使用するオプションがあります。これは、より優れた、より保守しやすいコードを作成するのに役立ちます。
+詳しくは、[Strictモード](/guide/strict-mode)を参照してください。
 
 {@a noImplicitAny}
 
@@ -90,7 +91,7 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 <div class="alert is-helpful">
 
-TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [Template の型チェック](guide/template-typecheck) を参照してください。
+TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [テンプレートの型チェック](guide/template-typecheck) を参照してください。
 
 </div>
 

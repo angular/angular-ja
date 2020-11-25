@@ -313,7 +313,7 @@ A lookup token associated with a dependency [provider](#provider), for use with 
 
 {@a differential-loading}
 
-## 区分ロード
+## differential loading
 
 A build technique that creates two bundles for an application. One smaller bundle is for modern browsers. A second, larger bundle allows the application to run correctly in older browsers (such as IE11) that do not support all modern browser APIs.
 
@@ -446,7 +446,7 @@ each change to the data model produces a new data model rather than modifying th
 
 {@a injectable}
 
-## 注入可能
+## injectable
 
 An Angular class or other definition that provides a dependency using the [dependency injection](#di) mechanism. An injectable [service](#service) class must be marked by the `@Injectable()` [decorator](#decorator). Other items, such as constant values, can also be injectable.
 
@@ -691,7 +691,7 @@ Support for the various Angular run-time platforms is provided by the `@angular/
 
 {@a polyfill}
 
-## polyfill
+## ポリフィル
 
 An [npm package](guide/npm-packages) that plugs gaps in a browser's JavaScript implementation.
 See [Browser Support](guide/browser-support) for polyfills that support particular functionality for particular platforms.

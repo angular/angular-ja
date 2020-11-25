@@ -77,7 +77,7 @@ const routes: Routes = [
 ## `entryComponents`配列
 <div class="alert is-helpful">
 
-   Since 9.0.0 with Ivy, the `entryComponents` property is no longer necessary. See [deprecations guide](guide/deprecations#entryComponents).
+   Ivyを使う9.0.0からは、`entryComponents`プロパティはもはや必要ありません。[非推奨ガイド](guide/deprecations#entryComponents)を参照してください。
 
 </div>
 

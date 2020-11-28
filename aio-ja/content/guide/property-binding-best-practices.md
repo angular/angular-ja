@@ -1,65 +1,65 @@
-# Property binding best practices
+# プロパティバインディング ベストプラクティス
 
-By following a few guidelines, you can use property binding in a way that helps you minimize bugs and keep your code readable.
+いくつかのガイドラインに従うことにより、プロパティバインディングを、バグを最小限にしてコードを読みやすくするのに役立つように使用できます。
 
 <div class="alert is-helpful">
 
-See the <live-example name="property-binding"></live-example> for a working example containing the code snippets in this guide.
+このガイドのコードを含む動作例については、<live-example name="property-binding"></live-example>を参照してください。
 
 </div>
 
-## Avoid side effects
+## 副作用を避ける {@a avoid-side-effects}
 
-Evaluation of a template expression should have no visible side effects.
-Use the syntax for template expressions to help avoid side effects.
-In general, the correct syntax prevents you from assigning a value to anything in a property binding expression.
-The syntax also prevents you from using increment and decrement operators.
+テンプレート式の評価は、目に見える副作用がありません。
+副作用を避けるのに役立つため、テンプレート式の構文を使います。
+一般に、その正しい構文によって、プロパティバインディング式で何かに値を代入することが防止されます。
+この構文では、インクリメント演算子とデクリメント演算子を使うことも防がれます。
 
-### An example of producing side effects
+### 副作用の発生例 {@a an-example-of-producing-side-effects}
 
-If you had an expression that changed the value of something else that you were binding to, that change of value would be a side effect.
-Angular might or might not display the changed value.
-If Angular does detect the change, it throws an error.
+バインドしている他の何かの値を変更する式がある場合、その値の変更は副作用になります。
+Angularは、変更された値を表示したり、しなかったりします。
+Angularはその変更を検出すると、エラーをスローします。
 
-As a best practice, use only properties and methods that return values.
+ベストプラクティスとして、値を返すプロパティとメソッドのみを使用します。
 
-## Return the proper type
+## 適切な型を返す {@a return-the-proper-type}
 
-A template expression should evaluate to the type of value that the target property expects.
-For example, return a string if the target property expects a string, a number if it expects a number, or an object if it expects an object.
+テンプレート式は、ターゲットのプロパティが期待する値の型に評価する必要があります。
+たとえば、ターゲットのプロパティが文字列を期待するなら文字列を、数値を期待するなら数値を、オブジェクトを期待するならオブジェクトを返します。
 
-### Passing in a string
+### 文字列を渡す {@a passing-in-a-string}
 
-In the following example, the `childItem` property of the `ItemDetailComponent` expects a string.
+次の例では、`ItemDetailComponent`の`childItem`プロパティは文字列を期待しています。
 
 <code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
 
-You can confirm this expectation by looking in the `ItemDetailComponent` where the `@Input()` type is `string`:
+`ItemDetailComponent`で`@Input()`の型が`string`のところを調べることで、この期待を確認できます:
 
 <code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)"></code-example>
 
-The `parentItem` in `AppComponent` is a string, which means that the expression, `parentItem` within `[childItem]="parentItem"`, evaluates to a string.
+`AppComponent`で`parentItem`は文字列です。つまり、`[childItem]="parentItem"`内の式である`parentItem`は、文字列に評価されます。
 
 <code-example path="property-binding/src/app/app.component.ts" region="parent-data-type" header="src/app/app.component.ts"></code-example>
 
-If `parentItem` were some other type, you would need to specify `childItem`  `@Input()` as that type as well.
+`parentItem`が他の型の場合は、同様の型で`childItem`の`@Input()`を指定する必要があります。
 
-### Passing in an object
+### オブジェクトを渡す {@a passing-in-an-object}
 
-In this example, `ItemListComponent` is a child component of `AppComponent` and the `items` property expects an array of objects.
+この例では、`ItemListComponent`は`AppComponent`の子コンポーネントであり、`items`プロパティはオブジェクトの配列を期待します。
 
 <code-example path="property-binding/src/app/app.component.html" region="pass-object" header="src/app/app.component.html"></code-example>
 
-In the `ItemListComponent` the `@Input()`, `items`, has a type of `Item[]`.
+`ItemListComponent`では、`@Input()`の`items`は`Item[]`の型を持ちます。
 
 <code-example path="property-binding/src/app/item-list/item-list.component.ts" region="item-input" header="src/app/item-list.component.ts"></code-example>
 
-Notice that `Item` is an object that it has two properties; an `id` and a `name`.
+`Item`は`id`と`name`の2つのプロパティをもつオブジェクトであることに注意してください。
 
 <code-example path="property-binding/src/app/item.ts" region="item-class" header="src/app/item.ts"></code-example>
 
-In `app.component.ts`, `currentItems` is an array of objects in the same shape as the `Item` object in `items.ts`, with an `id` and a `name`.
+`app.component.ts`では、`currentItems`は`item.ts`の`Item`オブジェクトと同じ形で`id`と`name`をもつオブジェクトの配列です。
 
 <code-example path="property-binding/src/app/app.component.ts" region="pass-object" header="src/app.component.ts"></code-example>
 
-By supplying an object in the same shape, you satisfy the expectations of `items` when Angular evaluates the expression `currentItems`.
+同じ形のオブジェクトを提供することで、Angularが式の`currentItems`を評価するときに`items`の期待を満たします。

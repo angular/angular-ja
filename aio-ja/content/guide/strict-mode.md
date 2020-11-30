@@ -1,19 +1,19 @@
-# Strict mode
+# strictモード
 
-When you create a new workspace or an application you have an option to create them in a strict mode using the `--strict` flag.
+新しいワークスペースやアプリケーションを作成する際に、`--strict`フラグを使ってstrictモードでそれらを作成するオプションがあります。
 
-Enabling this flag initializes your new workspace or application with a few new settings that improve maintainability, help you catch bugs ahead of time.
-Additionally, applications that use these stricter settings are easier to statically analyze, which can help the `ng update` command refactor code more safely and precisely when you are updating to future versions of Angular.
+このフラグを有効にすると、新規のワークスペースやアプリケーションがいくつかの新しい設定で初期化します。これは、保守性を向上させ事前にバグを検知するのに役立つものです。
+さらに、これらのより厳格な設定を使うアプリケーションは、静的な分析が簡単です。これにより、あなたがAngularの将来のバージョンに更新する際に、`ng update`コマンドがコードをより安全かつ正確にリファクタリングするのに役立ちます。
 
-Specifically, the `strict` flag does the following:
+具体的に、`strict`フラグは次のことを行います:
 
-* Enables [`strict` mode in TypeScript](https://www.staging-typescript.org/tsconfig#strict), as well as other strictness flags recommended by the TypeScript team. Specifically, `forceConsistentCasingInFileNames`, `noImplicitReturns`,  `noFallthroughCasesInSwitch`.
-* Turns on strict Angular compiler flags [`strictTemplates`](guide/angular-compiler-options#stricttemplates), [`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters) and [`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors).
-* [Bundle size budgets](guide/build#configuring-size-budgets) have been reduced by ~75%.
+* [TypeScriptで`strict`モード](https://www.staging-typescript.org/tsconfig#strict)を有効にします。TypeScriptチームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
+* Angularコンパイラの厳密フラグをオンにします。[`strictTemplates`](guide/angular-compiler-options#stricttemplates)、[`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)、[`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors)です。
+* [バンドルサイズ予算](guide/build#configuring-size-budgets)が最大75％の削減になっています。
 
-You can apply these settings at the workspace and project level.
+これらの設定は、ワークスペースおよびプロジェクトレベルで適用できます。
 
-To create a new workspace and application using the strict mode, run the following command:
+strictモードを使って新しいワークスペースとアプリケーションを作成するには、次のコマンドを実行します:
 
 <code-example language="sh" class="code-shell">
 
@@ -21,7 +21,7 @@ ng new [project-name] --strict
 
 </code-example>
 
-To create a new application in the strict mode within an existing non-strict workspace, run the following command:
+既存のstrictではないワークスペース内にstrictモードで新しいアプリケーションを作成するには、次のコマンドを実行します:
 
 <code-example language="sh" class="code-shell">
 

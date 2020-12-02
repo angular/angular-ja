@@ -467,8 +467,9 @@
         },
         {
           "url": "guide/property-binding-best-practices",
-          "title": "Property Binding Best Practices",
-          "tooltip": "Use property binding efficiently."
+          "title": "プロパティバインディングベストプラクティス",
+          "tooltip": "Use property binding efficiently.",
+          "translated": true
         },
         {
           "title": "テスト",
@@ -833,14 +834,15 @@
                 },
                 {
                   "url": "guide/event-binding-concepts",
-                  "title": "How event binding works",
-                  "tooltip": "About event binding."
+                  "title": "イベントバインディングの仕組み",
+                  "tooltip": "About event binding.",
+                  "translated": true
                 },
                 {
                   "url": "guide/template-reference-variables",
                   "title": "テンプレート変数",
                   "tooltip": "Introductory guide to referring to DOM elements within a template.",
-                  "translated": false
+                  "translated": true
                 }
               ]
             },
@@ -881,8 +883,9 @@
                 },
                 {
                   "url": "guide/strict-mode",
-                  "title": "Strict mode",
-                  "tooltip": "Reference documentation for Angular's strict mode."
+                  "title": "strictモード",
+                  "tooltip": "Reference documentation for Angular's strict mode.",
+                  "translated": true
                 }
               ]
             },

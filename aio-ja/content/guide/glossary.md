@@ -270,7 +270,7 @@ Read about the following forms of binding in Angular's [Template Syntax](guide/t
 [NgModule](#ngmodule)の`declarations`リストに追加できるクラス型。
 [コンポーネント](#component)と[ディレクティブ](#directive)、[パイプ](#pipe)を宣言できます。
 
-次のことを宣言しないでください:
+次のものは宣言しないでください:
 * 別のNgModuleですでに宣言されているクラス。
 * 別のパッケージからインポートされたディレクティブの配列。たとえば、`@angular/forms`由来の`FORMS_DIRECTIVES`を宣言しないでください。
 * NgModuleクラス。
@@ -303,7 +303,7 @@ See [class decorator](#class-decorator), [class field decorator](#class-field-de
 Angularでは、依存性は通常サービスですが、文字列や関数などの値にすることもできます。
 アプリのための[インジェクター](#injector)(ブートストラップ中に自動的に作成される)は、サービスや値について設定した[プロバイダー](#provider)を使用して、必要に応じて依存性をインスタンス化します。
 
-[依存性の注入](guide/dependency-injection)でもっと学んでください。
+[依存性の注入](guide/dependency-injection)でさらに学びましょう。
 
 {@a di-token}
 
@@ -466,7 +466,7 @@ Angularの[依存性の注入](#dependency-injection)システムにおけるオ
 
 * 同じ依存性の別の実装を提供できるさまざまなプロバイダーを用いてインジェクターを構成できます。
 
-[階層的インジェクター](guide/hierarchical-dependency-injection)にて、インジェクター階層の詳細を学んでください。
+[階層的インジェクター](guide/hierarchical-dependency-injection)にて、インジェクター階層の詳細を学びましょう。
 
 {@a input}
 
@@ -721,7 +721,7 @@ Angularは、Angularが定義するサービスのために、すべてのイン
 
 [サービス](#service)と[依存性の注入](#di)も参照してください。
 
-[依存性の注入](guide/dependency-injection)でもっと学んでください。
+[依存性の注入](guide/dependency-injection)でさらに学びましょう。
 
 
 {@a Q}

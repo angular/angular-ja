@@ -267,15 +267,15 @@ Read about the following forms of binding in Angular's [Template Syntax](guide/t
 
 ## 宣言
 
-A class type that you can add to the `declarations` list of an [NgModule](#ngmodule).
-You can declare [components](#component), [directives](#directive), and [pipes](#pipe).
+[NgModule](#ngmodule)の`declarations`リストに追加できるクラス型。
+[コンポーネント](#component)と[ディレクティブ](#directive)、[パイプ](#pipe)を宣言できます。
 
-Don't declare the following:
-* A class that's already declared in another NgModule
-* An array of directives imported from another package. For example, don't declare `FORMS_DIRECTIVES` from `@angular/forms`
-* NgModule classes
-* Service classes
-* Non-Angular classes and objects, such as strings, numbers, functions, entity models, configurations, business logic, and helper classes
+次のものは宣言しないでください:
+* 別のNgModuleですでに宣言されているクラス。
+* 別のパッケージからインポートされたディレクティブの配列。たとえば、`@angular/forms`由来の`FORMS_DIRECTIVES`を宣言しないでください。
+* NgModuleクラス。
+* サービスクラス。
+* Angularではないクラスとオブジェクト。たとえば文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなど。
 
 
 {@a decorator}
@@ -298,18 +298,18 @@ See [class decorator](#class-decorator), [class field decorator](#class-field-de
 
 ## 依存性の注入(DI) {@a dependency-injection-di}
 
-A design pattern and mechanism for creating and delivering some parts of an application (dependencies) to other parts of an application that require them.
+アプリケーションのある部分(依存性)を作成して、それらを必要とするアプリケーションの他の部分に届けるための、デザインパターンとメカニズム。
 
-In Angular, dependencies are typically services, but they also can be values, such as strings or functions.
-An [injector](#injector) for an app (created automatically during bootstrap) instantiates dependencies when needed, using a configured [provider](#provider) of the service or value.
+Angularでは、依存性は通常サービスですが、文字列や関数などの値にすることもできます。
+アプリのための[インジェクター](#injector)(ブートストラップ中に自動的に作成される)は、サービスや値について設定した[プロバイダー](#provider)を使用して、必要に応じて依存性をインスタンス化します。
 
-Learn more in [Dependency Injection in Angular](guide/dependency-injection).
+[依存性の注入](guide/dependency-injection)でさらに学びましょう。
 
 {@a di-token}
 
 ## DIトークン
 
-A lookup token associated with a dependency [provider](#provider), for use with the [dependency injection](#di) system.
+[依存性の注入](#di)システムで使用するための、依存性の[プロバイダー](#provider)に関連付けられた検索トークン。
 
 {@a differential-loading}
 
@@ -448,25 +448,25 @@ each change to the data model produces a new data model rather than modifying th
 
 ## injectable
 
-An Angular class or other definition that provides a dependency using the [dependency injection](#di) mechanism. An injectable [service](#service) class must be marked by the `@Injectable()` [decorator](#decorator). Other items, such as constant values, can also be injectable.
+[依存性の注入](#di)のメカニズムを使用して依存性を提供するAngularクラスやその他の定義。injectableの[サービス](#service)クラスは、`@Injectable()`[デコレーター](#decorator)でマークする必要があります。定数値などの他のアイテムもinjectableにできます。
 
 {@a injector}
 
 ## インジェクター
 
-An object in the Angular [dependency-injection](#dependency-injection) system
-that can find a named dependency in its cache or create a dependency
-using a configured [provider](#provider).
-Injectors are created for NgModules automatically as part of the bootstrap process
-and are inherited through the component hierarchy.
+Angularの[依存性の注入](#dependency-injection)システムにおけるオブジェクトであり、
+そのキャッシュ内で名前のある依存性を検索したり、
+設定した[プロバイダー](#provider)を使用して依存性を作成したりできます。
+インジェクターは、ブートストラッププロセスの一環としてNgModuleのために自動的に作成され、
+コンポーネント階層を通じて継承されます。
 
-* An injector provides a singleton instance of a dependency, and can inject this same instance in multiple components.
+* インジェクターは依存性のシングルトンのインスタンスを提供し、この同じインスタンスを複数のコンポーネントに注入できます。
 
-* A hierarchy of injectors at the NgModule and component level can provide different instances of a dependency to their own components and child components.
+* NgModuleレベルとコンポーネントレベルでのインジェクター階層は、依存性の別のインスタンスをその所属するコンポーネントと子コンポーネントへ提供できます。
 
-* You can configure injectors with different providers that can provide different implementations of the same dependency.
+* 同じ依存性の別の実装を提供できるさまざまなプロバイダーを用いてインジェクターを構成できます。
 
-Learn more about the injector hierarchy in [Hierarchical Dependency Injectors](guide/hierarchical-dependency-injection).
+[階層的インジェクター](guide/hierarchical-dependency-injection)にて、インジェクター階層の詳細を学びましょう。
 
 {@a input}
 
@@ -608,16 +608,16 @@ If you build your app using [Ivy](#ivy), but it depends on libraries that have n
 
 ## NgModule
 
-A class definition preceded by the `@NgModule()` [decorator](#decorator), which declares and serves as a manifest for a block of code dedicated to an application domain, a workflow, or a closely related set of capabilities.
+`@NgModule()`[デコレーター](#decorator)が前に付いたクラス定義。これはコードブロックのためのマニフェストとして宣言および機能し、アプリケーションドメインやワークフロー、密接に関連する一連の機能に専念します。
 
-Like a [JavaScript module](#module), an NgModule can export functionality for use by other NgModules and import public functionality from other NgModules.
-The metadata for an NgModule class collects components, directives, and pipes that the application uses along with the list of imports and exports. See also [declarable](#declarable).
+[JavaScriptのモジュール](#module)のように、NgModuleは、他のNgModuleでの使用のために機能をエクスポートでき、他のNgModuleから公開の機能をインポートできます。
+NgModuleクラスのメタデータは、コンポーネント、ディレクティブ、パイプを集めます。それらを、アプリケーションがインポートとエクスポートのリストと一緒に使います。[宣言](#declarable)も参照してください。
 
-NgModules are typically named after the file in which the exported thing is defined. For example, the Angular [DatePipe](api/common/DatePipe) class belongs to a feature module named `date_pipe` in the file `date_pipe.ts`. You import them from an Angular [scoped package](#scoped-package) such as `@angular/core`.
+NgModuleは通常、エクスポートされたものが定義されているファイルにちなんで名前を付けます。たとえば、Angularの[DatePipe](api/common/DatePipe)クラスは、`date_pipe.ts`ファイルで`date_pipe`という名前の機能モジュールに属しています。それらは`@angular/core`といったAngularの[スコープパッケージ](#scoped-package)からインポートします。
 
-Every Angular application has a root module. By convention, the class is called `AppModule` and resides in a file named `app.module.ts`.
+すべてのAngularアプリケーションにはルートモジュールがあります。慣例で、そのクラスは`AppModule`と呼ばれ`app.module.ts`という名前のファイルに存在します。
 
-To learn more, see [NgModules](guide/ngmodules).
+もっと学ぶには、[NgModule](guide/ngmodules)を参照してください。
 
 {@a npm-package}
 
@@ -712,16 +712,16 @@ The [`angular.json`](guide/workspace-config) file configures all projects in a [
 
 ## プロバイダー
 
-An object that implements one of the [`Provider`](api/core/Provider) interfaces. A provider object defines how to obtain an injectable dependency associated with a [DI token](#token).
-An [injector](#injector) uses the provider to create a new instance of a dependency
-for a class that requires it.
+[`Provider`](api/core/Provider)インターフェースの1つを実装するオブジェクト。プロバイダーオブジェクトは、[DIトークン](#token)に関連付けられた注入可能な依存性を取得する方法を定義します。
+[インジェクター](#injector)はプロバイダーを使用して、
+必要とするクラスのために依存性の新しいインスタンスを作成します。
 
-Angular registers its own providers with every injector, for services that Angular defines.
-You can register your own providers for services that your app needs.
+Angularは、Angularが定義するサービスのために、すべてのインジェクターに独自のプロバイダーを登録します。
+あなたは、アプリに必要なサービスのために、独自のプロバイダーを登録できます。
 
-See also [service](#service), [dependency injection](#di).
+[サービス](#service)と[依存性の注入](#di)も参照してください。
 
-Learn more in [Dependency Injection](guide/dependency-injection).
+[依存性の注入](guide/dependency-injection)でさらに学びましょう。
 
 
 {@a Q}
@@ -859,14 +859,14 @@ You can easily prepare an app for server-side rendering by using the [CLI](#cli)
 
 ## サービス
 
-In Angular, a class with the [@Injectable()](#injectable) decorator that encapsulates non-UI logic and code that can be reused across an application.
-Angular distinguishes components from services to increase modularity and reusability.
+Angularにおいて、[@Injectable()](#injectable)デコレーターの付いたクラス。アプリケーション全体で再利用できる非UIロジックとコードをカプセル化するものです。
+Angularは、コンポーネントとサービスを区別して、モジュール性と再利用性を向上させます。
 
-The `@Injectable()` metadata allows the service class to be used with the [dependency injection](#di) mechanism.
-The injectable class is instantiated by a [provider](#provider).
-[Injectors](#injector) maintain lists of providers and use them to provide service instances when they are required by components or other services.
+`@Injectable()`メタデータによって、サービスクラスを[依存性の注入](#di)のメカニズムで使用できます。
+injectableクラスは[プロバイダー](#provider)によってインスタンス化されます。
+[インジェクター](#injector)はプロバイダーのリストを維持し、コンポーネントや他のサービスで必要なときにそれらを使用してサービスのインスタンスを提供します。
 
-To learn more, see [Introduction to Services and Dependency Injection](guide/architecture-services).
+もっと学ぶには、[サービスと依存性の注入のイントロダクション](guide/architecture-services)を参照してください。
 
 {@a structural-directive}
 {@a structural-directives}
@@ -962,7 +962,7 @@ For more information, see the [Template reference variable](guide/template-refer
 
 ## トークン
 
-An opaque identifier used for efficient table lookup. In Angular, a [DI token](#di-token) is used to find [providers](#provider) of dependencies in the [dependency injection](#di) system.
+効率的なテーブル検索のために使用される不明瞭な識別子。Angularでは[DIトークン](#di-token)が、[依存性の注入](#di)システムにおいて依存性の[プロバイダー](#provider)を見つけるために使用されます。
 
 {@a transpile}
 

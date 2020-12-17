@@ -39,8 +39,8 @@ Angularには2つのインジェクター階層があります。
 
 ツリーシェイキングは特にライブラリで役立ちます。
 ライブラリを使用しているアプリにとって注入する必要のないものもあるからです。
-詳しくは[DI プロバイダー](guide/dependency-injection-providers)
-の[ツリーシェイク可能なプロバイダー](guide/dependency-injection-providers#tree-shakable-providers)
+詳しくは[サービスと依存性の注入の紹介](guide/architecture-services)
+の[ツリーシェイク可能なプロバイダー](guide/architecture-services#providing-services)
 のセクションを参照してください。
 
 </div>

@@ -12,7 +12,7 @@
 
 たとえば、`HeroListComponent`にはヒーローの配列を保持する`heroes`プロパティがあります。
 その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
-コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
+コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](https://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
 <code-example path="architecture/src/app/hero-list.component.ts" header="src/app/hero-list.component.ts (class)" region="class"></code-example>
@@ -126,7 +126,7 @@ Angular のパイプを使用すると、テンプレートHTMLの表示値変�
 
 Angular は、[date](api/common/DatePipe)パイプや[currency](api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](api?type=pipe)を参照してください。新しいパイプを定義することもできます。
 
-HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/template-expression-operators#pipe)を使用します。
+HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/pipes)を使用します。
 
 `{{interpolated_value | pipe_name}}`
 

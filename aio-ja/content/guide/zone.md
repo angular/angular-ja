@@ -1,6 +1,6 @@
 # NgZone
 
-Zoneは非同期タスクにまたがって持続する実行コンテキストです。JavaScript VMの[スレッドローカル ストレージ](http://en.wikipedia.org/wiki/Thread-local_storage)と考えることができます。
+Zoneは非同期タスクにまたがって持続する実行コンテキストです。JavaScript VMの[スレッドローカル ストレージ](https://en.wikipedia.org/wiki/Thread-local_storage)と考えることができます。
 このガイドでは、AngularのNgZoneを使用して、コンポーネントの変更を自動的に検出してHTMLを更新する方法を説明します。
 
 ## 変更検知の基礎

@@ -599,7 +599,7 @@ _フィーチャー_モジュールには`SharedModule`をインポートして�
 Angularアプリケーションでは、NgModuleとJavaScriptモジュールのどちらも一緒に働きます。
 
 モダンなJavaScriptではすべてのファイルはモジュールです
-(Exploring ES6ウェブサイトの[モジュール](http://exploringjs.com/es6/ch_modules.html)のページを参照してください)。
+(Exploring ES6ウェブサイトの[モジュール](https://exploringjs.com/es6/ch_modules.html)のページを参照してください)。
 モジュールの一部を公開するために個々のファイルで`export`文を書きます。
 
 AngularのNgModuleは`@NgModule`デコレーター(JavaScriptモジュールは`@NgModule`デコレーターを持ちません)のついたクラスです。

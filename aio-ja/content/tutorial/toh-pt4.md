@@ -192,7 +192,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 ### Observable `HeroService`
 
-`Observable` は [RxJS ライブラリ](http://reactivex.io/rxjs/) で重要なクラスのひとつです。
+`Observable` は [RxJS ライブラリ](https://rxjs.dev/) で重要なクラスのひとつです。
 
 [HTTP に関する後の章](tutorial/toh-pt6), でも Angular の `HttpClient` メソッドが `Observable` を返すことに触れるでしょう。
 この章ではRxJSの `of()` 関数を使ってサーバーからのデータの取得をシミュレートします。

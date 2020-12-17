@@ -1210,7 +1210,7 @@ The `name` string cannot use hyphens ("dash-case" or "kebab-case").
 
 
 
-**Why?** [karma](http://karma-runner.github.io/) や他のテストランナーでパターンマッチできるようになります。
+**Why?** [karma](https://karma-runner.github.io/) や他のテストランナーでパターンマッチできるようになります。
 
 
 </div>
@@ -3944,9 +3944,9 @@ Angular用の便利なツールとヒント。
 
 **Consider** スタイルガイドに従った[Atom](https://atom.io/)用の[スニペット](https://atom.io/packages/angular-2-typescript-snippets) を使います。
 
-**Consider** スタイルガイドに従った[Sublime Text](http://www.sublimetext.com/)用の[スニペット](https://github.com/orizens/sublime-angular2-snippets)を使います。
+**Consider** スタイルガイドに従った[Sublime Text](https://www.sublimetext.com/)用の[スニペット](https://github.com/orizens/sublime-angular2-snippets)を使います。
 
-**Consider** スタイルガイドに従った[Vim](http://www.vim.org/)用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使います。
+**Consider** スタイルガイドに従った[Vim](https://www.vim.org/)用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使います。
 
 
 </div>

@@ -18,7 +18,7 @@ NgModule セクションの関連ページを参照してください。
 
 `FormsModule`、`HttpClientModule`や`RouterModule`などの Angular ライブラリは NgModule です。
 <a href="https://material.angular.io/">Material Design</a>、
-<a href="http://ionicframework.com/">Ionic</a>や
+<a href="https://ionicframework.com/">Ionic</a>や
 <a href="https://github.com/angular/angularfire2">AngularFire2</a>
 のような多くのサードパーティライブラリも NgModule として利用することができます。
 

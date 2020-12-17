@@ -81,6 +81,22 @@ Angularバージョン9からは、遅延ロードのモジュールそれぞれ
 <!-- KW--Make a diagram here -->
 サービスのインスタンスをコンポーネントおよびそのコンポーネントツリー、つまりその子コンポーネントに限定する必要がある場合は、プロバイダーをコンポーネントに登録してください。たとえば、`UserService`のキャッシュのプライベートコピーが必要であるユーザー編集コンポーネント `UserEditorComponent`は、`UserEditorComponent`に`UserService`を登録すべきです。そうすることで、個々の`UserEditorComponent`の新しいインスタンスごとに、自身のキャッシュされたサービスのインスタンスを得ることができます。
 
+{@a singleton-services}
+{@a component-child-injectors}
+
+## Injector hierarchy and service instances
+
+Services are singletons within the scope of an injector, which means there is at most one instance of a service in a given injector.
+
+Angular DI has a [hierarchical injection system](guide/hierarchical-dependency-injection), which means that nested injectors can create their own service instances.
+Whenever Angular creates a new instance of a component that has `providers` specified in `@Component()`, it also creates a new child injector for that instance.
+Similarly, when a new NgModule is lazy-loaded at run time, Angular can create an injector for it with its own providers.
+
+Child modules and component injectors are independent of each other, and create their own separate instances of the provided services. When Angular destroys an NgModule or component instance, it also destroys that injector and that injector's service instances.
+
+For more information, see [Hierarchical injectors](guide/hierarchical-dependency-injection).
+
+
 
 <hr>
 
@@ -89,5 +105,5 @@ Angularバージョン9からは、遅延ロードのモジュールそれぞれ
 あなたはこちらにも興味があるかもしれません:
 * [シングルトンサービス](guide/singleton-services)では、このページで取り上げられている概念を詳しく説明しています。
 * [モジュールの遅延ロード](guide/lazy-loading-ngmodules)
-* [ツリーシェイキング可能なプロバイダー](guide/dependency-injection-providers#tree-shakable-providers)
+* [依存性プロバイダー](guide/dependency-injection-providers)
 * [NgModule FAQ](guide/ngmodule-faq)

@@ -11,7 +11,7 @@ JavaScriptモジュールはあなたの成果を多数のファイルに渡っ�
 <div class="alert is-helpful">
 
 JavaScriptモジュールの詳細を学ぶために、[ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)をご覧ください。
-モジュール仕様については、[6th Edition of the ECMAScript standard](http://www.ecma-international.org/ecma-262/6.0/#sec-modules)をご覧ください。
+モジュール仕様については、[6th Edition of the ECMAScript standard](https://www.ecma-international.org/ecma-262/6.0/#sec-modules)をご覧ください。
 
 </div>
 

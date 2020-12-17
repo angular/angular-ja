@@ -25,7 +25,7 @@ TypeScriptとAngularには、型チェック機能と生成される出力を設
 
 <div class="alert is-helpful">
 
-TypeScript設定ファイルの詳細は、公式の[TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+TypeScript設定ファイルの詳細は、公式の[TypeScript wiki](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
 設定の継承について詳しくは、[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
 
 </div>
@@ -138,7 +138,7 @@ _追加の_アンビエント宣言を追加します。
 公開しています。
 
 これらの型定義ファイルは、
-[`@types/*` スコープ化パッケージ](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)を使って`npm`でインストールすることができ、
+[`@types/*` スコープ化パッケージ](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)を使って`npm`でインストールすることができ、
 TypeScript 2.0以降では自動認識されます。
 
 たとえば`jasmine`の型定義ファイルをインストールするには、`npm install @types/jasmine --save-dev`を実行します。

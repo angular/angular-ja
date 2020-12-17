@@ -1,90 +1,14 @@
 # DI イン・アクション
 
-このセクションでは、Angularの依存性の注入(DI)機能の多くについて説明します。
-{@a toc}
-
-このクックブックのコードは<live-example name="dependency-injection-in-action"></live-example>
-を参照してください。
-
-{@a nested-dependencies}
-
-## ネストしたサービスの依存関係
-
-注入されたサービスの _利用者_ は、そのサービスを作成する方法を知る必要はありません。
-依存関係の作成とキャッシュはDIフレームワークの仕事です。
-利用者は、DIフレームワークにどの依存関係が必要かを知らせるだけです。
-
-サービスが他のサービスに依存していることはありますし、それがさらに他のサービスに依存しているかもしれません。
-DIフレームワークは、これらのネストした依存関係を正しい順序で解決します。
-各ステップで、
-依存関係の利用者はコンストラクターで必要なものを宣言し、それをフレームワークに提供させます。
-
-次の例では、 `AppComponent` が `LoggerService` と `UserContext` への依存を宣言します。
-
-<code-example path="dependency-injection-in-action/src/app/app.component.ts" region="ctor" header="src/app/app.component.ts"></code-example>
-
-
-`UserContext` は `LoggerService` と、特定のユーザーに関する情報を収集するサービスである
-`UserService` の両方に依存します。
-
-
-<code-example path="dependency-injection-in-action/src/app/user-context.service.ts" region="injectables" header="user-context.service.ts (injection)"></code-example>
-
-Angularが `AppComponent` を作成するとき、DIフレームワークは `LoggerService` のインスタンスを作成し、 `UserContextService` の作成を開始します。
-`UserContextService` も `LoggerService` が必要としますが、フレームワークはすでにそのインスタンスを持っているので、同じインスタンスを提供できます。
-`UserContextService` には、フレームワークがまだ作成していない `UserService` も必要です。 `UserService` にはそれ以上の依存関係はないため、フレームワークは単純に `new` を使用してクラスをインスタンス化し、そのインスタンスを `UserContextService` コンストラクターに渡すことができます。
-
-親の `AppComponent` は、依存先の依存関係について知る必要はありません。
-コンストラクター(この場合は `LoggerService` と `UserContextService`)で必要なものを宣言すると、
-フレームワークはネストした依存関係を解決します。
-
-すべての依存関係が準備できたとき、 `AppComponent` はユーザー情報を表示します。
-
-<div class="lightbox">
-  <img src="generated/images/guide/dependency-injection-in-action/logged-in-user.png" alt="Logged In User">
-</div>
-
-{@a service-scope}
-
-## コンポーネントサブツリーにサービスのスコープを制限する
-
-Angularアプリケーションは、コンポーネントツリーと並列したツリー階層に配置された複数のインジェクターを持ちます。
-各インジェクターは依存関係のためのシングルトンのインスタンスを作成します。
-そのインジェクターがそのサービスを提供する場所すべてにその同一インスタンスが注入されます。
-特定のサービスをインジェクター階層の任意のレベルで提供および作成できます。
-これはつまり、サービスが複数のインジェクターによって提供される場合、サービスインスタンスは複数存在する可能性があることを意味します。
-
-ルートインジェクターによって提供される依存関係は、アプリケーション内の *任意の場所* にある *任意* のコンポーネントに注入できます。
-場合によっては、サービスの使用可能範囲をアプリケーションの特定の領域に制限したいことがあるかもしれません。
-たとえば、ルートインジェクターに自動的にサービスを提供させるのではなく、
-ユーザーにサービスの使用を明示的に選択させることができます。
-
-アプリケーション階層の *特定のブランチのサブルートコンポーネント* でサービスを提供することで、
-注入されるサービスのスコープをその *ブランチ* に制限することができます。
-次の例では、 `HeroesBaseComponent` サブコンポーネントの `@Component()` デコレーターの `providers` 配列に
-`HeroService` を追加することで、 `HeroesBaseComponent` ごとに `HeroService` インスタンスを作成する方法を説明します。
-
-<code-example path="dependency-injection-in-action/src/app/sorted-heroes.component.ts" region="injection" header="src/app/sorted-heroes.component.ts (HeroesBaseComponent excerpt)">
-
-</code-example>
-
-Angularが `HeroesBaseComponent` を作成すると、
-そのコンポーネントとその子にだけ参照できる `HeroService` の新しいインスタンスも作成されます。
-
-アプリケーション内の別の場所にある別のコンポーネントに `HeroService` を提供することもできます。
-その結果、別のサービスインスタンスが別のインジェクターに存在することになります。
+This guide explores many of the features of dependency injection (DI) in Angular.
 
 <div class="alert is-helpful">
 
-このようなスコープされた `HeroService` シングルトンの例は、
-`HeroBiosComponent` 、 `HeroOfTheMonthComponent` 、および `HeroesBaseComponent` を含む添付のサンプルコードのあらゆる場所でみることができます。
-これらの各コンポーネントは、自身のヒーローのコレクションを管理する自身の `HeroService` インスタンスを持ちます。
+See the <live-example></live-example> for a working example containing the code snippets in this guide.
 
 </div>
 
-
 {@a multiple-service-instances}
-
 
 ## 複数のサービスインスタンス (サンドボックス化)
 
@@ -297,46 +221,6 @@ Angularは、コンストラクターの `el` パラメータに注入された 
 <div class="lightbox">
   <img src="generated/images/guide/dependency-injection-in-action/highlight.png" alt="Highlighted bios">
 </div>
-
-{@a providers}
-
-
-## プロバイダーを使用して依存関係を定義する
-
-このセクションでは、依存サービスを提供するプロバイダーの書き方を説明します。
-
-依存性のインジェクターからサービスを受け取るには、[トークン](guide/glossary#token)を渡す必要があります。
-Angularは通常、コンストラクターパラメータとその型を指定することによってこの処理を行います。
-パラメータとその型はインジェクターを検索するトークンとして機能します。
-Angularはこのトークンをインジェクターに渡し、結果をパラメータに割り当てます。
-
-次はその典型的な例です。
-
-
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="ctor" header="src/app/hero-bios.component.ts (component constructor injection)"></code-example>
-
-
-Angularは、 `LoggerService` に関連付けられているサービスをインジェクターに要求し、
-返された値を `logger` パラメータに割り当てます。
-
-インジェクターがトークンに関連付けられているサービスインスタンスをすでにキャッシュしている場合は、
-そのインスタンスを提供します。
-そうでない場合は、トークンに関連付けられているプロバイダーを使用して作成する必要があります。
-
-<div class="alert is-helpful">
-
-要求されたトークンのプロバイダーがインジェクターにない場合は、その要求をその親インジェクターに委譲し、
-インジェクターがなくなるまでプロセスが繰り返されます。
-検索が失敗すると、要求が[オプショナル](guide/dependency-injection-in-action#optional)でない限り、インジェクターはエラーを投げます。
-
-
-</div>
-
-新しいインジェクターにはプロバイダーを持っていません。
-Angularは、作成したインジェクターを優先的なプロバイダーのセットで初期化します。
-あなたは自身のアプリ特有の依存関係のためにプロバイダーを設定する必要があります。
-
-
 {@a defining-providers}
 
 
@@ -563,7 +447,7 @@ Angularの依存性の注入を使用するのがもっとも簡単です。
 
 このようにクラスを使用する場合、それは *クラスインターフェース* と呼ばれます。
 
-[DIプロバイダー](guide/dependency-injection-providers#interface-not-valid-token)で説明されているように、
+[DIプロバイダー](guide/dependency-injection-providers#di-and-interfaces)で説明されているように、
 インターフェースは実行時には存在しないTypeScriptアーティファクトであるため、有効なDIトークンではありません。
 この抽象クラスインターフェースを使用することで、インターフェースの厳密な型を取得し、
 かつ通常のクラスと同じ方法でプロバイダートークンとしても使用できます。
@@ -700,53 +584,3 @@ Angularの `forwardRef()` 関数は、Angularが遅延して解決できる *間
 `forwardRef` で循環参照を解消しましょう。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="parent-finder.component.ts (AlexComponent providers)"></code-example>
-
-
-<!--- Waiting for good examples
-
-{@a directive-level-providers}
-
-{@a element-level-providers}
-
-## Element-level providers
-
-A component is a specialization of directive, and the `@Component()` decorator inherits the `providers` property from `@Directive`. The injector is at the element level, so a provider configured with any element-level injector is available to any component, directive, or pipe attached to the same element.
-
-Here's a live example that implements a custom form control, taking advantage of an injector that is shared by a component and a directive on the same element.
-
-https://stackblitz.com/edit/basic-form-control
-
-The component, `custom-control`, configures a provider for the DI token `NG_VALUE_ACCESSOR`.
-In the template, the `FormControlName` directive is instantiated along with the custom component.
-It can inject the `NG_VALUE_ACCESSOR` dependency because they share the same injector.
-(Notice that this example also makes use of `forwardRef()` to resolve a circularity in the definitions.)
-
-### Sharing a service among components
-
-__NEED TO TURN THIS INTO FULL EXTERNAL EXAMPLE__
-
-Suppose you want to share the same `HeroCacheService` among multiple components. One way to do this is to create a directive.
-
-```
-<ng-container heroCache>
-  <hero-overview></hero-overview>
-  <hero-details></hero-details>
-</ng-container>
-```
-
-Use the `@Directive()` decorator to configure the provider for the service:
-
-```
-@Directive(providers:[HeroCacheService])
-
-class heroCache{...}
-```
-
-Because the injectors for both the overview and details components are children of the injector created from the `heroCache` directive, they can inject things it provides.
-If the `heroCache` directive provides the `HeroCacheService`, the two components end up sharing them.
-
-If you want to show only one of them, use the directive to make sure __??of what??__.
-
-`<hero-overview heroCache></hero-overview>`
-
- --->

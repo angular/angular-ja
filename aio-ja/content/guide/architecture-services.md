@@ -1,4 +1,4 @@
-# サービスと依存性の注入のイントロダクション
+# サービスと依存性の注入のイントロダクション {@a introduction-to-services-and-dependency-injection}
 
 *サービス*は、アプリが必要とするあらゆる値、関数、機能を含む幅広いカテゴリーです。
 サービスは通常、目的が明確な小規模のクラスです。
@@ -74,7 +74,7 @@ Angular はコンポーネントがサービスに依存していることを検
   <img src="generated/images/guide/architecture/injector-injects.png" alt="Service" class="left">
 </div>
 
-### サービスの提供
+### サービスの提供 {@a providing-services}
 
 あなたは、使用しようとしているサービスの*プロバイダー*を少なくとも1つ登録する必要があります。
 プロバイダーはサービスをどこからでも利用できるようにサービス自体のメタデータの一部にできるし、

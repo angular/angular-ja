@@ -182,7 +182,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
   <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="as-generated"></code-example>
 
-  `Component()`の主な特徴は以下のとおりである。
+  `Component()`の主な特徴は次のとおりである。
 
     * `app-product-alerts`という`selector` はコンポーネントを識別します。
       慣例では、Angularのコンポーネントセレクターは接頭辞 `app-` で始まり、その後にコンポーネント名が続きます。

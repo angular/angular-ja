@@ -89,8 +89,8 @@ Angularは最新のブラウザをサポートしています。サポートし�
 <div class="alert is-helpful">
 
 Angularの開発プロセスでは、各プルリクエストに対して、すべてのサポート対象ブラウザ上でユニットテストを実行しています。
-ユニットテスト実行には<a href="https://saucelabs.com/">SauceLabs</a>と
-<a href="https://www.browserstack.com">Browserstack</a>を使用しています。
+ユニットテスト実行には[Sauce Labs](https://saucelabs.com/)と
+[BrowserStack](https://www.browserstack.com/)を使用しています。
 
 </div>
 
@@ -130,7 +130,7 @@ When you create a project with the `ng new` command, a `src/polyfills.ts` config
 
 * If you need an _optional_ polyfill, you must install its npm package, then uncomment or create the corresponding import statement in the `src/polyfills.ts` configuration file.
 
-たとえば、[WEBアニメーションのポリフィルが必要な場合](http://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
+たとえば、[WEBアニメーションのポリフィルが必要な場合](https://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
 
 <code-example language="sh" class="code-shell">
   # install the optional web animations polyfill
@@ -143,7 +143,7 @@ For many polyfills, you can simply un-comment the corresponding `import` stateme
 <code-example header="src/polyfills.ts">
   /**
   * Required to support Web Animations `@angular/platform-browser/animations`.
-  * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
+  * Needed for: All but Chrome, Firefox and Opera. https://caniuse.com/#feat=web-animation
   **/
   import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 </code-example>
@@ -393,7 +393,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
 
 \* 数値は縮小し、gzip圧縮されたコードを
-<a href="http://closure-compiler.appspot.com/home">closure compiler</a>で計算したものです。
+[closure compiler](https://closure-compiler.appspot.com/home)で計算したものです。
 
 {@a non-cli}
 

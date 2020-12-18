@@ -101,6 +101,15 @@ This creates a `customers` folder having the new lazy-loadable feature module `C
 遅延ロード構文では、関数が後ろに続く`loadChildren`を使うことに注目してください。関数はブラウザ組み込みの動的インポート用の`import('...')`構文を用います。
 インポートのパスはそのモジュールへの相対パスです。
 
+<div class="callout is-helpful">
+<header>String-based lazy loading</header>
+
+In Angular version 8, the string syntax for the `loadChildren` route specification [was deprecated](https://angular.io/guide/deprecations#loadchildren-string-syntax) in favor of the `import()` syntax. However, you can opt into using string-based lazy loading (`loadChildren: './path/to/module#Module'`) by including the lazy-loaded routes in your `tsconfig` file, which includes the lazy-loaded files in the compilation.
+
+By default the CLI will generate projects which stricter file inclusions intended to be used with the `import()` syntax.
+
+</div>
+
 #### もう1つのフィーチャーモジュールを追加する
 
 同じコマンドを使って、2つ目の遅延ロードのフィーチャーモジュールとルーティングとそのスタブコンポーネントを作成します。

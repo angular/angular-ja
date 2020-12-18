@@ -141,8 +141,8 @@ DOMと直接対話するのではなく、可能であればAngularテンプレ�
 
 Content Security Policy (CSP) を用いることでより確実にXSSを防止することもできます。
 CSP を有効にするには、レスポンスヘッダ `Content-Security-Policy` が適切に返却されるよう
-Webサーバーを設定する必要があります。CSP に関するより詳細な情報は HTML5Rocks の
-[An Introduction to Content Security Policy](http://www.html5rocks.com/en/tutorials/security/content-security-policy/)
+Webサーバーを設定する必要があります。CSP に関するより詳細な情報は Google Developersサイトの
+[Web Fundamentals guide](https://developers.google.com/web/fundamentals/security/csp) 
 を参照してください。
 
 
@@ -279,13 +279,13 @@ Cookieが設定されているWebサイトのコードだけが、そのサイ�
 Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClient guide](/guide/http#security-xsrf-protection) の章を参照してください。
 
 CSRFについてはオープンWebアプリケーションセキュリティプロジェクト（OWASP）の、
-<a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29">Cross-Site Request Forgery (CSRF)</a> および
-<a href="https://www.owasp.org/index.php/CSRF_Prevention_Cheat_Sheet">Cross-Site Request Forgery (CSRF) Prevention Cheat Sheet</a>を参照してください。
+[Cross-Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf) および
+[Cross-Site Request Forgery (CSRF) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)を参照してください。
 スタンフォード大学の論文
-<a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf">Robust Defenses for Cross-Site Request Forgery</a> にも豊富な情報が掲載されています。
+[Robust Defenses for Cross-Site Request Forgery](https://seclab.stanford.edu/websec/csrf/csrf.pdf) にも豊富な情報が掲載されています。
 
 Dave Smith氏による
-<a href="https://www.youtube.com/watch?v=9inczw6qtpY" header="Cross Site Request Funkery Securing Your Angular Apps From Evil Doers">AngularConnect 2016でのXSRFに関する発表</a> も解りやすい解説です。
+[AngularConnect 2016でのXSRFに関する発表](https://www.youtube.com/watch?v=9inczw6qtpY "Cross Site Request Funkery Securing Your Angular Apps From Evil Doers") も解りやすい解説です。
 
 
 <h3 id='xssi'>

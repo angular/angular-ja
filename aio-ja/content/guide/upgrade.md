@@ -79,7 +79,7 @@ Angular の `upgrade/static` モジュールを使って *順次移行* を
 それらのタグを正しい順番でメンテナンスしなければいけない場合は特にそうです。
 そのため、 *モジュールローダー* を使い始めるとよいでしょう。
 
-[SystemJS](https://github.com/systemjs/systemjs) や、[Webpack](http://webpack.github.io/) 、
+[SystemJS](https://github.com/systemjs/systemjs) や、[Webpack](https://webpack.github.io/) 、
 [Browserify](http://browserify.org/) のようなモジュールローダーを使うことで
 TypeScript や ES2015 の組み込みモジュール機構を使うことができます。
 アプリケーションの別々の部分でどのソースコードが共有されるべきかを

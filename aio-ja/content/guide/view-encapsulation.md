@@ -27,8 +27,8 @@ AngularはCSSをグローバルスタイルに追加します。
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.shadow" header="src/app/quest-summary.component.ts"></code-example>
 
 `ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
-( [Can I use](http://caniuse.com) サイトの
-[Shadow DOM v1](http://caniuse.com/#feat=shadowdomv1) を参照)。サポートは未だ限定的です。
+( [Can I use](https://caniuse.com) サイトの
+[Shadow DOM v1](https://caniuse.com/shadowdomv1) を参照)。サポートは未だ限定的です。
 そのため、`Emulated`ビューカプセル化がデフォルトモードであり、
 ほとんどの場合に推奨されます。
 

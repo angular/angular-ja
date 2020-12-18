@@ -109,7 +109,7 @@
       ]
     },
     {
-      "title": "メインコンセプト",
+      "title": "Angularを理解する",
       "tooltip": "Learn the concepts essential to becoming a proficient Angular developer.",
       "children": [
         {
@@ -147,7 +147,7 @@
             },
             {
               "url": "guide/inputs-outputs",
-              "title": "InputとOutput",
+              "title": "ディレクティブとコンポーネントの親子間でのデータ共有",
               "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
               "translated": true
             },
@@ -177,7 +177,7 @@
             },
             {
               "url": "guide/interpolation",
-              "title": "補間",
+              "title": "テキスト補間",
               "tooltip": "An introduction to interpolation and expressions in HTML.",
               "translated": true
             },
@@ -192,12 +192,6 @@
               "title": "パイプ",
               "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
               "translated": false
-            },
-            {
-              "url": "guide/binding-syntax",
-              "title": "バインディング構文",
-              "tooltip": "Introductory guide to coordinating app values.",
-              "translated": true
             },
             {
               "url": "guide/property-binding",
@@ -224,15 +218,14 @@
               "translated": false
             },
             {
-              "url": "guide/template-expression-operators",
-              "title": "テンプレート式演算子",
-              "tooltip": "Introductory guide to transforming data, ensuring safe navigation, and guarding against null variables in templates.",
-              "translated": true
+              "url": "guide/template-reference-variables",
+              "title": "テンプレート参照変数",
+              "tooltip": "Introductory guide to referring to DOM elements within a template."
             },
             {
-              "url": "guide/svg-in-templates",
-              "title": "テンプレート内SVG",
-              "tooltip": "Guide to using SVGs as templates to create interactive graphics.",
+              "url": "guide/inputs-outputs",
+              "title": "InputとOutput",
+              "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
               "translated": true
             }
           ]
@@ -269,27 +262,21 @@
               "url": "guide/dependency-injection",
               "title": "依存性の注入",
               "tooltip": "Angularの依存性の注入システムは、依存するサービスを \"ジャストインタイム\"で作成し、配信します。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/dependency-injection-providers",
               "title": "依存関係プロバイダー",
               "tooltip": "More about the different kinds of providers.",
-              "translated": true
-            },
-            {
-              "url": "guide/dependency-injection-in-action",
-              "title": "DIイン・アクション",
-              "tooltip": "依存性の注入のためのテクニック",
-              "translated": true
+              "translated": false
             }
           ]
         }
       ]
     },
     {
-      "title": "ビルトイン機能",
-      "tooltip": "Learn how to add Angular's built-in features to add functionality to your applications.",
+      "title": "開発者ガイド",
+      "tooltip": "Learn more about how to use Angular to build your applications.",
       "children": [
         {
           "url": "guide/router",
@@ -332,6 +319,66 @@
           "title": "HTTPクライアント",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
           "translated": true
+        },
+        {
+          "title": "テスト",
+          "tooltip": "Testing your Angular apps.",
+          "children": [
+            {
+              "url": "guide/testing",
+              "title": "イントロダクション",
+              "tooltip": "Angularアプリをテストするためのテクニックと実践。",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-code-coverage",
+              "title": "Code Coverage",
+              "tooltip": "Determine how much of your code is tested.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-services",
+              "title": "サービスのテスト",
+              "tooltip": "How to test services.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-components-basics",
+              "title": "コンポーネントのテストの基本",
+              "tooltip": "The fundamentals of how to test components.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-components-scenarios",
+              "title": "コンポーネントテストシナリオ",
+              "tooltip": "Use cases for testing components.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-attribute-directives",
+              "title": "属性ディレクティブのテスト",
+              "tooltip": "How to test attribute directives.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-pipes",
+              "title": "パイプのテスト",
+              "tooltip": "Writing tests for pipes.",
+              "translated": true
+            },
+            {
+              "url": "guide/test-debugging",
+              "title": "テストのデバッグ",
+              "tooltip": "How to debug tests.",
+              "translated": true
+            },
+            {
+              "url": "guide/testing-utility-apis",
+              "title": "ユーティリティAPI",
+              "tooltip": "Features of the Angular testing utilities.",
+              "translated": true
+            }
+          ]
         },
         {
           "url": "guide/i18n",
@@ -472,112 +519,6 @@
           "translated": true
         },
         {
-          "title": "テスト",
-          "tooltip": "Testing your Angular apps.",
-          "children": [
-            {
-              "url": "guide/testing",
-              "title": "イントロダクション",
-              "tooltip": "Angularアプリをテストするためのテクニックと実践。",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-code-coverage",
-              "title": "Code Coverage",
-              "tooltip": "Determine how much of your code is tested.",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-services",
-              "title": "サービスのテスト",
-              "tooltip": "How to test services.",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-components-basics",
-              "title": "コンポーネントのテストの基本",
-              "tooltip": "The fundamentals of how to test components.",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-components-scenarios",
-              "title": "コンポーネントテストシナリオ",
-              "tooltip": "Use cases for testing components.",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-attribute-directives",
-              "title": "属性ディレクティブのテスト",
-              "tooltip": "How to test attribute directives.",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-pipes",
-              "title": "パイプのテスト",
-              "tooltip": "Writing tests for pipes.",
-              "translated": true
-            },
-            {
-              "url": "guide/test-debugging",
-              "title": "テストのデバッグ",
-              "tooltip": "How to debug tests.",
-              "translated": true
-            },
-            {
-              "url": "guide/testing-utility-apis",
-              "title": "ユーティリティAPI",
-              "tooltip": "Features of the Angular testing utilities.",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "title": "開発ワークフロー",
-          "tooltip": "Build, and deployment information.",
-          "children": [
-            {
-              "url": "guide/deployment",
-              "title": "Deployment",
-              "tooltip": "Learn how to deploy your Angular app."
-            },
-            {
-              "title": "AOT Compiler",
-              "tooltip": "Understanding ahead-of-time compilation.",
-              "children": [
-                {
-                  "url": "guide/aot-compiler",
-                  "title": "事前コンパイル",
-                  "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
-                  "translated": true
-                },
-                {
-                  "url": "guide/angular-compiler-options",
-                  "title": "Angularコンパイラオプション",
-                  "tooltip": "AoTコンパイラの構成オプション。",
-                  "translated": true
-                },
-                {
-                  "url": "guide/aot-metadata-errors",
-                  "title": "AoT Metadata Errors",
-                  "tooltip": "Troubleshooting AOT compilation."
-                },
-                {
-                  "url": "guide/template-typecheck",
-                  "title": "テンプレート型チェック",
-                  "tooltip": "Template type-checking in Angular.",
-                  "translated": true
-                }
-              ]
-            },
-            {
-              "url": "guide/build",
-              "title": "ビルドとサーブ",
-              "tooltip": "Angularアプリのビルドとサーブ",
-              "translated": true
-            }
-          ]
-        },
-        {
           "url": "guide/lightweight-injection-tokens",
           "title": "Lightweight Injection Tokens for Libraries",
           "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
@@ -586,6 +527,52 @@
           "title": "Angularツール",
           "tooltip": "Tools to help you build your Angular applications.",
           "children": [
+            {
+              "title": "開発ワークフロー",
+              "tooltip": "Build, and deployment information.",
+              "children": [
+                {
+                  "url": "guide/deployment",
+                  "title": "Deployment",
+                  "tooltip": "Learn how to deploy your Angular app."
+                },
+                {
+                  "title": "AOT Compiler",
+                  "tooltip": "Understanding ahead-of-time compilation.",
+                  "children": [
+                    {
+                      "url": "guide/aot-compiler",
+                      "title": "事前コンパイル",
+                      "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+                      "translated": true
+                    },
+                    {
+                      "url": "guide/angular-compiler-options",
+                      "title": "Angularコンパイラオプション",
+                      "tooltip": "AoTコンパイラの構成オプション。",
+                      "translated": true
+                    },
+                    {
+                      "url": "guide/aot-metadata-errors",
+                      "title": "AoT Metadata Errors",
+                      "tooltip": "Troubleshooting AOT compilation."
+                    },
+                    {
+                      "url": "guide/template-typecheck",
+                      "title": "テンプレート型チェック",
+                      "tooltip": "Template type-checking in Angular.",
+                      "translated": true
+                    }
+                  ]
+                },
+                {
+                  "url": "guide/build",
+                  "title": "ビルドとサーブ",
+                  "tooltip": "Angularアプリのビルドとサーブ",
+                  "translated": true
+                }
+              ]
+            },
             {
               "url": "guide/cli-builder",
               "title": "CLI Builders",
@@ -833,6 +820,12 @@
                   "translated": true
                 },
                 {
+                  "url": "guide/binding-syntax",
+                  "title": "バインディング構文",
+                  "tooltip": "Introductory guide to coordinating app values.",
+                  "translated": true
+                },
+                {
                   "url": "guide/event-binding-concepts",
                   "title": "イベントバインディングの仕組み",
                   "tooltip": "About event binding.",
@@ -1010,11 +1003,24 @@
               ]
             },
             {
-              "url": "guide/hierarchical-dependency-injection",
-              "title": "階層的インジェクター",
-              "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-              "translated": true
+              "title": "依存性の注入",
+              "tooltip": "Using dependency injection in Angular.",
+              "children": [
+                {
+                  "url": "guide/hierarchical-dependency-injection",
+                  "title": "階層的インジェクター",
+                  "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/dependency-injection-in-action",
+                  "title": "DIイン・アクション",
+                  "tooltip": "依存性の注入のためのテクニック",
+                  "translated": true
+                }
+              ]
             }
+            
           ]
         },
         {
@@ -1039,6 +1045,11 @@
           "title": "APIリファレンス",
           "tooltip": "Angularパッケージ、クラス、インターフェース、およびその他のタイプの詳細。",
           "url": "api"
+        },
+        {
+          "title": "サンプルアプリケーション",
+          "tooltip": "List of all of the example applications in the Angular documentation.",
+          "url": "guide/example-apps-list"
         },
         {
           "url": "guide/glossary",
@@ -1143,7 +1154,7 @@
           "tooltip": "Post issues and suggestions on github."
         },
         {
-          "url": "http://www.meetup.com/topics/angularjs/",
+          "url": "https://www.meetup.com/topics/angularjs/",
           "title": "Meetups",
           "tooltip": "Attend a meetup and learn from fellow developers."
         },
@@ -1172,8 +1183,16 @@
           "title": "English Edition (Official)"
         },
         {
-          "title": "中文版",
+          "title": "Español",
+          "url": "http://docs.angular.lat/"
+        },
+        {
+          "title": "简体中文版",
           "url": "https://angular.cn/"
+        },
+        {
+          "title": "正體中文版",
+          "url": "https://angular.tw/"
         },
         {
           "title": "日本語版",
@@ -1185,25 +1204,5 @@
         }
       ]
     }
-  ],
-
-  "docVersions": [
-    {
-      "title": "v10",
-      "url": "https://v10.angular.io/"
-    },
-    {
-      "title": "v9",
-      "url": "https://v9.angular.io/"
-    },
-    {
-      "title": "v8",
-      "url": "https://v8.angular.io/"
-    },
-    { "title": "v7", "url": "https://v7.angular.io" },
-    { "title": "v6", "url": "https://v6.angular.io" },
-    { "title": "v5", "url": "https://v5.angular.io" },
-    { "title": "v4", "url": "https://v4.angular.io" },
-    { "title": "v2", "url": "https://v2.angular.io" }
   ]
 }

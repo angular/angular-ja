@@ -8,7 +8,7 @@ Angular はさまざまな一般的な非同期操作を処理するためのイ
 
 ## Transmitting data between components
 
-Angularは コンポーネントから値を [`@Output()` デコレーター](guide/inputs-outputs#how-to-use-output)を通してパブリッシュするときに使用される `EventEmitter` クラスを提供します。
+Angularは コンポーネントから値を [`@Output()` デコレーター](guide/inputs-outputs#output)を通してパブリッシュするときに使用される `EventEmitter` クラスを提供します。
 `EventEmitter` は [RxJSの `Subject`](https://rxjs.dev/api/index/class/Subject) を拡張し、任意の値を送ることができるように `emit()` メソッドを追加します。
 `emit()` を呼び出すと、サブスクライブされたオブザーバーの `next()` メソッドに送出された値が渡されます。
 

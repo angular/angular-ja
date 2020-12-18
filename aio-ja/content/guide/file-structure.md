@@ -35,7 +35,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `.editorconfig`        | コードエディタ向けの設定です。 [EditorConfig](https://editorconfig.org/)を参照してください。 |
 | `.gitignore`           | [Git](https://git-scm.com/)に無視してほしい、意図的な未追跡ファイルの指定をします。 |
 | `README.md`            | 紹介用のドキュメントです。|
-| `angular.json`         | ワークスペース内のすべてのプロジェクトを対象としたCLIのデフォルト設定をします。CLIの使うビルド、サーブ、テストツールの設定オプションを規定します。たとえば、[TSLint](https://palantir.github.io/tslint/)、[Karma](https://karma-runner.github.io/)や[Protractor](http://www.protractortest.org/)などです。詳しくは [Angularワークスペースの設定](guide/workspace-config)を参照してください。 |
+| `angular.json`         | ワークスペース内のすべてのプロジェクトを対象としたCLIのデフォルト設定をします。CLIの使うビルド、サーブ、テストツールの設定オプションを規定します。たとえば、[TSLint](https://palantir.github.io/tslint/)、[Karma](https://karma-runner.github.io/)や[Protractor](https://www.protractortest.org/)などです。詳しくは [Angularワークスペースの設定](guide/workspace-config)を参照してください。 |
 | `package.json`         | ワークスペース内の全プロジェクトが利用可能な[npmパッケージの依存関係](guide/npm-packages) の設定をします。具体的なフォーマットやファイルの中身については[npm documentation](https://docs.npmjs.com/files/package.json) を参照してください。|
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
 | `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |

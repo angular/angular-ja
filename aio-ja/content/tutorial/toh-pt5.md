@@ -49,7 +49,7 @@ CLIを使って生成することができます。
 <code-example path="toh-pt5/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts (updated)">
 </code-example>
 
-最初に、 `AppRoutingModule` は アプリにルーティング機能を持たせることができる `RouterModule` と `Routes` をインポートします。次のインポートである `HeroesComponent`は、ルートを設定することでルーターに向かう場所を教えます。
+最初に、 `app-routing.module.ts`ファイルはアプリにルーティング機能を持たせることができる `RouterModule` と `Routes` をインポートします。次のインポートである `HeroesComponent`は、ルートを設定することでルーターに向かう場所を教えます。
 
 `CommonModule` の参照と` declarations`配列は不要なので、 `AppRoutingModule`の一部ではなくなっていることに注意してください。
 次のセクションでは、`AppRoutingModule` の残りの部分について詳しく説明します。
@@ -60,7 +60,7 @@ CLIを使って生成することができます。
 *ルート*は、ユーザーがリンクをクリックしたとき、またはURLをブラウザのアドレスバーに貼り付けたときに、
 どのビューを表示したらよいかをルーターに伝えます。
 
-`AppRoutingModule` はすでに `HeroesComponent` をインポートしているため、 `routes` 配列で使用できます。
+`app-routing.module.ts` はすでに `HeroesComponent` をインポートしているため、 `routes` 配列で使用できます。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts"
   region="heroes-route">
@@ -211,12 +211,12 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 ダッシュボードに遷移するには、ルーターに適切なルートが必要です。
 
-`AppRoutingModule`で`DashboardComponent`をインポートします。
+`app-routing.module.ts`で`DashboardComponent`をインポートします。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" region="import-dashboard" header="src/app/app-routing.module.ts (import DashboardComponent)">
 </code-example>
 
-`AppRoutingModule.routes`配列に、` DashboardComponent`へのパスにマッチするルートを追加します。
+`routes`配列に、` DashboardComponent`へのパスにマッチするルートを追加します。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="dashboard-route">
 </code-example>
@@ -228,7 +228,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `<router-outlet>`の下のスペースが空白になってしまうのです。
 
 アプリケーションをダッシュボードに自動的に遷移するには、次のルートを
-`AppRoutingModule.Routes`配列に追加します。
+`routes`配列に追加します。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="redirect-route">
 </code-example>
@@ -282,12 +282,12 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 `~/detail/11`のようなURLは、`id`が`11`のヒーローの*ヒーロー詳細*ビューにナビゲートするための正しいURLになります。
 
-`AppRoutingModule`を開き、`HeroDetailComponent`をインポートします。
+`app-routing.module.ts`を開き、`HeroDetailComponent`をインポートします。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" region="import-herodetail" header="src/app/app-routing.module.ts (import HeroDetailComponent)">
 </code-example>
 
-次に、_ヒーロー詳細_ビューへのパスのパターンと一致する_パラメータ付き_ルートを`AppRoutingModule.routes`配列に追加します。
+次に、_ヒーロー詳細_ビューへのパスのパターンと一致する_パラメータ付き_ルートを`routes`配列に追加します。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="detail-route">
 </code-example>

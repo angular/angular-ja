@@ -38,8 +38,6 @@ Angular 内で ARIA 属性をバインドするためには接頭辞として `a
 <button aria-label="Save document">...</button>
 ```
 
-備考:
-
 <div class="alert is-helpful">
 
    規約により、HTML の属性の名前には小文字が使われます(`tabindex`)。一方でプロパティにはキャメルケースを使われます(`tabIndex`)。

@@ -496,7 +496,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 <div class="alert is-helpful">
   
 
-  [switchMap operator](http://www.learnrxjs.io/operators/transformation/switchmap.html)により
+  [switchMap operator](https://www.learnrxjs.io/learn-rxjs/operators/transformation/switchmap)により
   すべての適格なキーイベントが`HttpClient.get`メソッドを呼び出すことができます。
   各リクエスト間の300msの休止により、複数のHTTPリクエストを送信できますが、
   それらは順序どおりに戻ってこないかもしれません。

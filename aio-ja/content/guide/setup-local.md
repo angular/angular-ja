@@ -39,7 +39,7 @@ Angularフレームワークを使用するには、次の知識が必要です�
 
   </div>
 
-  Node.jsのインストールの詳細については、[nodejs.org](http://nodejs.org "Nodejs.org")を参照してください。
+  Node.jsのインストールの詳細については、[nodejs.org](https://nodejs.org "Nodejs.org")を参照してください。
   システムで実行のNode.jsのバージョンがわからない場合は、ターミナルウィンドウで`node -v`を実行しましょう。
 
 {@a npm}

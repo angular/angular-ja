@@ -70,7 +70,7 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 <code-example path="architecture/src/app/app.module.ts" region="export"></code-example>
 
 <div class="alert is-helpful">
-  <a href="http://exploringjs.com/es6/ch_modules.html">ウェブ上のJavaScriptモジュールシステムの詳細をご覧ください。</a>
+  <a href="https://exploringjs.com/es6/ch_modules.html">ウェブ上のJavaScriptモジュールシステムの詳細をご覧ください。</a>
 </div>
 
 ## Angular ライブラリ

@@ -39,8 +39,8 @@ Angularには2つのインジェクター階層があります。
 
 ツリーシェイキングは特にライブラリで役立ちます。
 ライブラリを使用しているアプリにとって注入する必要のないものもあるからです。
-詳しくは[DI プロバイダー](guide/dependency-injection-providers)
-の[ツリーシェイク可能なプロバイダー](guide/dependency-injection-providers#tree-shakable-providers)
+詳しくは[サービスと依存性の注入の紹介](guide/architecture-services)
+の[ツリーシェイク可能なプロバイダー](guide/architecture-services#providing-services)
 のセクションを参照してください。
 
 </div>
@@ -387,7 +387,7 @@ Angularのテンプレートの根本的な論理構造を理解すると、
 
 コンポーネントクラス内でサービスを設定する場合は、`<#VIEW>`境界の概念を理解することが特に重要です。
 
-## `@Component()`内でサービスを提供する
+## `@Component()`内でサービスを提供する {@a providing-services-in-component}
 
 どのように`@Component()`(または`@Directive()`)デコレーターを介してサービスを提供するかによって、
 それらの可視性が決まります。
@@ -803,7 +803,7 @@ Emoji from AnimalService: 🐶
 
 {@a modify-visibility}
 
-## サービスの可視性を変更する
+## サービスの可視性を変更する {@a modifying-service-visibility}
 
 このセクションでは、可視性デコレーター`@Host()`、`@Self()`、および
 `@SkipSelf()`を使用して、

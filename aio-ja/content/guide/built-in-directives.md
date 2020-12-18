@@ -266,12 +266,6 @@ Angular は変更を検出し続けることがあります。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-2b" header="src/app/app.component.html"></code-example>
 
-<div class="alert is-helpful">
-
-後述する
-[セーフナビゲーション演算子](guide/template-expression-operators#safe-navigation-operator "Safe navigation operator (?.)")もご覧ください。
-
-</div>
 <hr/>
 
 {@a ngFor}

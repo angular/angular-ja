@@ -64,7 +64,7 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 ### `annotateForClosureCompiler`
 
-`true` の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](http://usejsdoc.org/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
+`true` の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](https://jsdoc.app/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
 デフォルトは `false` です。
 
 ### `disableExpressionLowering`
@@ -190,7 +190,7 @@ CLI コマンド `ng new --strict` を使用すると、生成されたプロジ
 
 ### `strictTemplates`
 
-`true` の場合、Angular バージョン9で [厳格なテンプレートタイプチェック](guide/template-typecheck#strict-mode) を有効にします。厳格モードは [Ivy](guide/ivy) を使用する場合にのみ使用できます。
+`true` の場合、[厳格なテンプレートタイプチェック](guide/template-typecheck#strict-mode) を有効にします。厳格モードは [Ivy](guide/ivy) を使用する場合にのみ使用できます。(Angularバージョン9以上).
 
 追加の厳密性フラグを使用すると、特定のタイプの厳密なテンプレートタイプチェックを有効または無効にできます。[テンプレートエラーのトラブルシューティング](guide/template-typecheck#troubleshooting-template-errors) をご覧ください。
 

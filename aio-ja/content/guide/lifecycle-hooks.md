@@ -305,12 +305,6 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
   `ngOnInit()` は、コンポーネントが初期データをフェッチするのに適した場所です。
   例については、 [Tour of Heroesチュートリアル](tutorial/toh-pt4#oninit) を参照してください。
 
-  <div class="alert is-helpful">
-
-  Angular チームリーダーの Misko Hevery は、 [Flaw：Constructor does Real Work](http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/) で、複雑なコンストラクターロジックを避けるべき理由を説明しています。
-
-  </div>
-
 * Angular が入力プロパティを設定した後にコンポーネントを設定します。
   コンストラクターは、初期ローカル変数を単純な値に設定するだけです。
 

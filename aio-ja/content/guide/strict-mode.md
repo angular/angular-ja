@@ -7,7 +7,7 @@
 
 具体的に、`strict`フラグは次のことを行います:
 
-* [TypeScriptで`strict`モード](https://www.staging-typescript.org/tsconfig#strict)を有効にします。TypeScriptチームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
+* [TypeScriptで`strict`モード](https://www.typescriptlang.org/tsconfig#strict)を有効にします。TypeScriptチームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
 * Angularコンパイラの厳密フラグをオンにします。[`strictTemplates`](guide/angular-compiler-options#stricttemplates)、[`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)、[`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors)です。
 * [バンドルサイズ予算](guide/build#configuring-size-budgets)が最大75％の削減になっています。
 

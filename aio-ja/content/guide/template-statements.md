@@ -38,7 +38,7 @@ The following JavaScript and template expression syntax is not allowed:
 * `++` や `--` などの、インクリメント、デクリメント演算子
 * `+=` and `-=` などの代入演算子
 * ビット演算子 `|` や `&`
-* [パイプ演算子](guide/template-expression-operators#pipe)
+* [パイプ演算子](guide/pipes)
 
 ## 文のコンテキスト
 

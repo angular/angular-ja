@@ -94,7 +94,7 @@
       ]
     },
     {
-      "title": "Main Concepts",
+      "title": "Understanding Angular",
       "tooltip": "Learn the concepts essential to becoming a proficient Angular developer.",
       "children": [
         {
@@ -128,7 +128,7 @@
             },
             {
               "url": "guide/inputs-outputs",
-              "title": "Inputs and Outputs",
+              "title": "Sharing data between child and parent directives and components",
               "tooltip": "Introductory guide to sharing data between parent and child directives or components."
             },
             {
@@ -154,7 +154,7 @@
             },
             {
               "url": "guide/interpolation",
-              "title": "Interpolation",
+              "title": "Text interpolation",
               "tooltip": "An introduction to interpolation and expressions in HTML."
             },
             {
@@ -166,11 +166,6 @@
               "url": "guide/pipes",
               "title": "Pipes",
               "tooltip": "Pipes transform displayed values within a template."
-            },
-            {
-              "url": "guide/binding-syntax",
-              "title": "Binding syntax",
-              "tooltip": "Introductory guide to coordinating app values."
             },
             {
               "url": "guide/property-binding",
@@ -193,14 +188,14 @@
               "tooltip": "Introductory guide to sharing data between a class and a template."
             },
             {
-              "url": "guide/template-expression-operators",
-              "title": "Template expression operators",
-              "tooltip": "Introductory guide to transforming data, ensuring safe navigation, and guarding against null variables in templates."
+              "url": "guide/template-reference-variables",
+              "title": "Template reference variables",
+              "tooltip": "Introductory guide to referring to DOM elements within a template."
             },
             {
-              "url": "guide/svg-in-templates",
-              "title": "SVG in templates",
-              "tooltip": "Guide to using SVGs as templates to create interactive graphics."
+              "url": "guide/inputs-outputs",
+              "title": "Inputs and Outputs",
+              "tooltip": "Introductory guide to sharing data between parent and child directives or components."
             }
           ]
         },
@@ -238,19 +233,14 @@
               "url": "guide/dependency-injection-providers",
               "title": "DI Providers",
               "tooltip": "More about the different kinds of providers."
-            },
-            {
-              "url": "guide/dependency-injection-in-action",
-              "title": "DI in Action",
-              "tooltip": "Techniques for dependency injection."
             }
           ]
         }
       ]
     },
     {
-      "title": "Built-in Features",
-      "tooltip": "Learn how to add Angular's built-in features to add functionality to your applications.",
+      "title": "Developer Guides",
+      "tooltip": "Learn more about how to use Angular to build your applications.",
       "children": [
         {
           "url": "guide/router",
@@ -287,6 +277,57 @@
           "url": "guide/http",
           "title": "HTTP Client",
           "tooltip": "Use HTTP to talk to a remote server."
+        },
+        {
+          "title": "Testing",
+          "tooltip": "Testing your Angular apps.",
+          "children": [
+            {
+              "url": "guide/testing",
+              "title": "Intro to Testing",
+              "tooltip": "Introduction to testing an Angular app."
+            },
+            {
+              "url": "guide/testing-code-coverage",
+              "title": "Code Coverage",
+              "tooltip": "Determine how much of your code is tested."
+            },
+            {
+              "url": "guide/testing-services",
+              "title": "Testing Services",
+              "tooltip": "How to test services."
+            },
+            {
+              "url": "guide/testing-components-basics",
+              "title": "Basics of Testing Components",
+              "tooltip": "The fundamentals of how to test components."
+            },
+            {
+              "url": "guide/testing-components-scenarios",
+              "title": "Component Testing Scenarios",
+              "tooltip": "Use cases for testing components."
+            },
+            {
+              "url": "guide/testing-attribute-directives",
+              "title": "Testing Attribute Directives",
+              "tooltip": "How to test attribute directives."
+            },
+            {
+              "url": "guide/testing-pipes",
+              "title": "Testing Pipes",
+              "tooltip": "Writing tests for pipes."
+            },
+            {
+              "url": "guide/test-debugging",
+              "title": "Debugging Tests",
+              "tooltip": "How to debug tests."
+            },
+            {
+              "url": "guide/testing-utility-apis",
+              "title": "Testing Utility APIs",
+              "tooltip": "Features of the Angular testing utilities."
+            }
+          ]
         },
         {
           "url": "guide/i18n",
@@ -408,56 +449,16 @@
           "tooltip": "Use property binding efficiently."
         },
         {
-          "title": "Testing",
-          "tooltip": "Testing your Angular apps.",
-          "children": [
-            {
-              "url": "guide/testing",
-              "title": "Intro to Testing",
-              "tooltip": "Introduction to testing an Angular app."
-            },
-            {
-              "url": "guide/testing-code-coverage",
-              "title": "Code Coverage",
-              "tooltip": "Determine how much of your code is tested."
-            },
-            {
-              "url": "guide/testing-services",
-              "title": "Testing Services",
-              "tooltip": "How to test services."
-            },
-            {
-              "url": "guide/testing-components-basics",
-              "title": "Basics of Testing Components",
-              "tooltip": "The fundamentals of how to test components."
-            },
-            {
-              "url": "guide/testing-components-scenarios",
-              "title": "Component Testing Scenarios",
-              "tooltip": "Use cases for testing components."
-            },
-            {
-              "url": "guide/testing-attribute-directives",
-              "title": "Testing Attribute Directives",
-              "tooltip": "How to test attribute directives."
-            },
-            {
-              "url": "guide/testing-pipes",
-              "title": "Testing Pipes",
-              "tooltip": "Writing tests for pipes."
-            },
-            {
-              "url": "guide/test-debugging",
-              "title": "Debugging Tests",
-              "tooltip": "How to debug tests."
-            },
-            {
-              "url": "guide/testing-utility-apis",
-              "title": "Testing Utility APIs",
-              "tooltip": "Features of the Angular testing utilities."
-            }
-          ]
-        },
+          "url": "guide/lightweight-injection-tokens",
+          "title": "Lightweight Injection Tokens for Libraries",
+          "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
+        }
+      ]
+    },
+    {
+      "title": "Angular Tools",
+      "tooltip": "Tools to help you build your Angular applications.",
+      "children": [
         {
           "title": "Dev Workflow",
           "tooltip": "Build, and deployment information.",
@@ -500,17 +501,6 @@
             }
           ]
         },
-        {
-          "url": "guide/lightweight-injection-tokens",
-          "title": "Lightweight Injection Tokens for Libraries",
-          "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
-        }
-      ]
-    },
-    {
-      "title": "Angular Tools",
-      "tooltip": "Tools to help you build your Angular applications.",
-      "children": [
         {
           "url": "guide/cli-builder",
           "title": "CLI Builders",
@@ -733,6 +723,11 @@
                   "tooltip": "Beyond the basics."
                 },
                 {
+                  "url": "guide/binding-syntax",
+                  "title": "Binding syntax",
+                  "tooltip": "Introductory guide to coordinating app values."
+                },
+                {
                   "url": "guide/event-binding-concepts",
                   "title": "How event binding works",
                   "tooltip": "About event binding."
@@ -883,9 +878,20 @@
               ]
             },
             {
-              "url": "guide/hierarchical-dependency-injection",
-              "title": "Hierarchical Injectors",
-              "tooltip": "An injector tree parallels the component tree and supports nested dependencies."
+              "title": "Dependency injection",
+              "tooltip": "Using dependency injection in Angular.",
+              "children": [
+                {
+                  "url": "guide/hierarchical-dependency-injection",
+                  "title": "Hierarchical Injectors",
+                  "tooltip": "An injector tree parallels the component tree and supports nested dependencies."
+                },
+                {
+                  "url": "guide/dependency-injection-in-action",
+                  "title": "DI in Action",
+                  "tooltip": "Techniques for dependency injection."
+                }
+              ]
             }
           ]
         },
@@ -909,6 +915,11 @@
           "title": "API Reference",
           "tooltip": "Details of the Angular packages, classes, interfaces, and other types.",
           "url": "api"
+        },
+        {
+          "title": "Example applications",
+          "tooltip": "List of all of the example applications in the Angular documentation.",
+          "url": "guide/example-apps-list"
         },
         {
           "url": "guide/glossary",
@@ -1009,7 +1020,7 @@
           "tooltip": "Angular events around the world."
         },
         {
-          "url": "http://www.meetup.com/topics/angularjs/",
+          "url": "https://www.meetup.com/topics/angularjs/",
           "title": "Meetups",
           "tooltip": "Attend a meetup and learn from fellow developers."
         },
@@ -1034,6 +1045,10 @@
       "title": "Languages",
       "children": [
         {
+          "title": "Español",
+          "url": "http://docs.angular.lat/"
+        },
+        {
           "title": "简体中文版",
           "url": "https://angular.cn/"
         },
@@ -1050,36 +1065,6 @@
           "url": "https://angular.kr/"
         }
       ]
-    }
-  ],
-  "docVersions": [
-    {
-      "title": "v9",
-      "url": "https://v9.angular.io/"
-    },
-    {
-      "title": "v8",
-      "url": "https://v8.angular.io/"
-    },
-    {
-      "title": "v7",
-      "url": "https://v7.angular.io/"
-    },
-    {
-      "title": "v6",
-      "url": "https://v6.angular.io/"
-    },
-    {
-      "title": "v5",
-      "url": "https://v5.angular.io/"
-    },
-    {
-      "title": "v4",
-      "url": "https://v4.angular.io/"
-    },
-    {
-      "title": "v2",
-      "url": "https://v2.angular.io/"
     }
   ]
 }

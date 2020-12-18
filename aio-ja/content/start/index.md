@@ -5,7 +5,7 @@ Angularへようこそ！
 このチュートリアルでは、カタログ、ショッピングカート、チェックアウトフォームを備えたシンプルなeコマースサイトを順を追って説明し、Angularの要点を紹介します。
 
 すぐに始められるように、このガイドでは[Stackblitz](https://stackblitz.com/)上で（[ローカル環境のセットアップ](guide/setup-local "Setup guide")の必要なく）インタラクティブに調べて変更できる既製のシンプルなアプリケーションを使用します。
-StackBlitzは、様々な技術を使ってプロジェクトを作成・保存・共有できるブラウザベースの開発環境です。
+StackBlitzは、さまざまな技術を使ってプロジェクトを作成・保存・共有できるブラウザベースの開発環境です。
 
 ## 前提条件
 
@@ -82,7 +82,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
 1. `product-list`フォルダ内のテンプレートファイル `product-list.component.html` を開く。
 
-1. 以下のように `<div>` に `*ngFor` 構造ディレクティブを追加する。
+1. 次のように `<div>` に `*ngFor` 構造ディレクティブを追加する。
 
   <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.2.html" region="ngfor">
   </code-example>
@@ -107,7 +107,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
 1. 各商品名を商品詳細へのリンクにするには、`{{ product.name }}` の周りに `<a>` 要素を追加します。
 
-1. 以下のように、プロパティバインディング `[ ]` 構文を用いて、タイトルを商品名に設定します。
+1. 次のように、プロパティバインディング `[ ]` 構文を用いて、タイトルを商品名に設定します。
 
     <code-example path="getting-started/src/app/product-list/product-list.component.2.html" header="src/app/product-list/product-list.component.html">
     </code-example>
@@ -150,7 +150,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
       <img src="generated/images/guide/start/template-syntax-product-share-alert.png" alt="Alert box indicating product has been shared">
     </div>
 
-テンプレートの編集では、Angularテンプレートの最も一般的な機能のいくつかを探ってきました。
+テンプレートの編集では、Angularテンプレートのもっとも一般的な機能のいくつかを探ってきました。
 詳しくは、[コンポーネントとテンプレート入門](guide/architecture-components#template-syntax "Template Syntax")を参照してください。
 
 {@a passing-data-in}
@@ -177,15 +177,15 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     * `product-alerts.component.css`
 
 1. `product-alerts.component.ts` を開く。
-  `@Component()`デコレータは、以下のクラスがコンポーネントであることを示します。
-  また、`@Component()` は、セレクタ、テンプレート、スタイルなど、コンポーネントに関するメタデータを提供します。
+  `@Component()`デコレーターは、次のクラスがコンポーネントであることを示します。
+  また、`@Component()` は、セレクター、テンプレート、スタイルなど、コンポーネントに関するメタデータを提供します。
 
   <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="as-generated"></code-example>
 
-  `Component()`の主な特徴は以下の通りである。
+  `Component()`の主な特徴は以下のとおりである。
 
     * `app-product-alerts`という`selector` はコンポーネントを識別します。
-      慣例では、Angularのコンポーネントセレクタは接頭辞 `app-` で始まり、その後にコンポーネント名が続きます。
+      慣例では、Angularのコンポーネントセレクターは接頭辞 `app-` で始まり、その後にコンポーネント名が続きます。
     * テンプレートとスタイルのファイル名は、コンポーネントのHTMLとCSSを参照します。
     * `@Component()`定義は、コンポーネントの機能を処理するクラス `ProductAlertsComponent`もエクスポートします。
 
@@ -193,8 +193,8 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
   <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="imports" header="src/app/product-alerts/product-alerts.component.ts"></code-example>
 
-1. `ProductAlertsComponent` クラスの定義で、`product` という名前のプロパティに `@Input()` デコレータを付けて定義します。
-  この `@Input()` デコレータは、プロパティの値がコンポーネントの親である `ProductListComponent` から渡されることを示します。
+1. `ProductAlertsComponent` クラスの定義で、`product` という名前のプロパティに `@Input()` デコレーターを付けて定義します。
+  この `@Input()` デコレーターは、プロパティの値がコンポーネントの親である `ProductListComponent` から渡されることを示します。
 
   <code-example path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="input-decorator" header="src/app/product-alerts/product-alerts.component.ts"></code-example>
 
@@ -202,7 +202,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
   <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
-1. `ProductListComponent` の子として `ProductAlertsComponent` を表示するには、`product-list.component.html` にセレクタ `<app-product-alerts>` を追加します。
+1. `ProductListComponent` の子として `ProductAlertsComponent` を表示するには、`product-list.component.html` にセレクター `<app-product-alerts>` を追加します。
   プロパティバインディングを使用して、現在の製品を入力としてコンポーネントに渡します。
 
   <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.5.html" region="app-product-alerts"></code-example>
@@ -220,13 +220,13 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 ## 親コンポーネントにデータを渡す
 
 **Notify Me**ボタンを動作させるには、子コンポーネントが通知して親コンポーネントにデータを渡す必要があります。
-`ProductAlertsComponent`はユーザが**Notify Me**をクリックしたときにイベントを発生させ、`ProductListComponent`はそのイベントに応答する必要があります。
+`ProductAlertsComponent`はユーザーが**Notify Me**をクリックしたときにイベントを発生させ、`ProductListComponent`はそのイベントに応答する必要があります。
 
 1. `product-alerts.component.ts` で、`@angular/core` から `Output` と `EventEmitter` をインポートします。
 
   <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.ts" region="imports"></code-example>
 
-1. コンポーネントクラスで、`notify` という名前のプロパティを `@Output()` デコレータと `EventEmitter()` のインスタンスで定義します。
+1. コンポーネントクラスで、`notify` という名前のプロパティを `@Output()` デコレーターと `EventEmitter()` のインスタンスで定義します。
   `ProductAlertsComponent`を `@Output()` で設定することで、`ProductAlertsComponent`が `notify` プロパティの値が変更されたときにイベントを発行することができます。
 
   <code-example path="getting-started/src/app/product-alerts/product-alerts.component.ts" header="src/app/product-alerts/product-alerts.component.ts" region="input-output"></code-example>
@@ -234,7 +234,7 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
   <div class="alert is-helpful">
 
   新しいコンポーネントでは、Angular Generatorは空の `constructor()`、`OnInit` インターフェース、`ngOnInit()`メソッドを含みます。
-  これらのステップは使用しないので、以下のコード例では簡潔にするために省略しています。
+  これらのステップは使用しないので、次のコード例では簡潔にするために省略しています。
 
   </div>
 
@@ -271,7 +271,7 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 
 このセクションでは、データを反復処理し、互いに通信するコンポーネントを特徴とするアプリケーションを作成しました。
 
-Angularの探索を続け、このアプリケーションを開発するには、以下の手順に従ってください。
+Angularの探索を続け、このアプリケーションを開発するには、次の手順にしたがってください。
 
 * 製品の詳細ページを作成するには、[アプリ内ナビゲーション](start/start-routing "Getting started: In-app navigation")に進みます。
 * [デプロイ](start/start-deployment "Getting started: Deployment")にスキップしてローカル開発に移行したり、Firebaseや独自のサーバーにアプリをデプロイしたりします。

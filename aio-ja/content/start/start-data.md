@@ -79,7 +79,7 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
     パイプは、HTMLテンプレートのデータを変換できる方法です。
     Angularのパイプの詳細については、[パイプ](guide/pipes "Pipes")を参照してください。
 
-1. アプリケーションを更新し、商品名をクリックして詳細を表示して、新しい**Buy**ボタンが期待通りに表示されていることを確認します。
+1. アプリケーションを更新し、商品名をクリックして詳細を表示して、新しい**Buy**ボタンが期待どおりに表示されていることを確認します。
 
     <div class="lightbox">
       <img src='generated/images/guide/start/product-details-buy.png' alt="Display details for selected product with a Buy button">
@@ -111,7 +111,7 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
     </code-example>
 
-1. **Checkout**ボタンをクリックして、新しい `CartComponent` が期待通りに動作することを確認します。
+1. **Checkout**ボタンをクリックして、新しい `CartComponent` が期待どおりに動作することを確認します。
     `top-bar.component.html` に `/cart` を指す `routerLink` ディレクティブを追加します。
 
     <code-example header="src/app/top-bar/top-bar.component.html" path="getting-started/src/app/top-bar/top-bar.component.html" region="cart-route">
@@ -158,7 +158,7 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
     <code-example header="src/app/cart/cart.component.html" path="getting-started/src/app/cart/cart.component.2.html" region="prices">
     </code-example>
 
-1. カートが期待通りに動作することを確認してください。
+1. カートが期待どおりに動作することを確認してください。
 
     * **My Store**をクリックしてください。
     * 商品名をクリックすると詳細が表示されます。
@@ -189,7 +189,7 @@ StackBlitzがこのガイド用に生成するアプリには、定義済みの�
 
 Angularの `HttpClient` を使うには、アプリケーションが `HttpClientModule` を使うように設定する必要があります。
 
-Angularの `HttpClientModule` はアプリケーション全体で `HttpClient` サービスを利用するために必要なプロバイダを登録します。
+Angularの `HttpClientModule` はアプリケーション全体で `HttpClient` サービスを利用するために必要なプロバイダーを登録します。
 
 1. `app.module.ts` で、ファイルの先頭にある `@angular/common/http` パッケージから `HttpClientModule` を他のインポートと一緒にインポートします。
     他にも多くのインポートがあるので、このコードスニペットでは簡潔のために省略しています。
@@ -198,7 +198,7 @@ Angularの `HttpClientModule` はアプリケーション全体で `HttpClient` 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="http-client-module-import">
     </code-example>
 
-1. Angularの`HttpClient`プロバイダをグローバルに登録するには、`AppModule`の`@NgModule()`の`imports`配列に`HttpClientModule`を追加します。
+1. Angularの`HttpClient`プロバイダーをグローバルに登録するには、`AppModule`の`@NgModule()`の`imports`配列に`HttpClientModule`を追加します。
 
     <code-example path="getting-started/src/app/app.module.ts" header="src/app/app.module.ts" region="http-client-module">
     </code-example>

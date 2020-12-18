@@ -4,7 +4,7 @@
 
 この段階では、オンラインストアアプリは基本的な商品カタログを持っています。
 
-以下のセクションでは、アプリケーションに以下の機能を追加していきます。
+次のセクションでは、アプリケーションに次の機能を追加していきます。
 
 * アドレスバーにURLを入力して、対応する商品ページに移動します。
 * ページ上のリンクをクリックして、単一ページのアプリケーション内を移動します。
@@ -28,7 +28,7 @@
 
 1. `product-list.component.html`を開きます。
 
-1. `*ngFor` ディレクティブを以下のように更新します。
+1. `*ngFor` ディレクティブを次のように更新します。
     この文は、Angularに `products` 配列の項目を反復処理するよう指示し、リストを反復処理する際に配列の各インデックスを `productId` 変数に代入します。
 
 1. `routerLink`を含めるように製品名のアンカーを変更します。
@@ -41,7 +41,7 @@
     最後のセグメントは可変で、現在の製品の`id`プロパティを挿入します。 
     たとえば、`id`が1の商品のURLは`https://getting-started-myfork.stackblitz.io/products/1`のようになります。
 
-1. 製品名をクリックして、ルーターが意図した通りに動作することを確認します。
+1. 製品名をクリックして、ルーターが意図したとおりに動作することを確認します。
     アプリケーションは `ProductDetailsComponent` を表示するはずです。
 
     プレビューウィンドウのURLが変わることに注意してください。 
@@ -68,7 +68,7 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="product-prop">
     </code-example>
 
-1. コンストラクタの括弧内の引数に `private route. ActivatedRoute` をコンストラクタの括弧内の引数に追加する。
+1. コンストラクターの括弧内の引数に `private route. ActivatedRoute` をコンストラクターの括弧内の引数に追加する。
 
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="props-methods">
     </code-example>
@@ -96,7 +96,7 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
     パイプとは、HTML テンプレート内のデータを変換する方法です。
     Angularのパイプについての詳細は、[パイプ](guide/pipes "Pipes")を参照してください。
 
-ユーザが製品リストの名前をクリックすると、ルーターは製品の別個のURLに移動し、`ProductDetailsComponent`を表示し、製品の詳細を表示します。
+ユーザーが製品リストの名前をクリックすると、ルーターは製品の別個のURLに移動し、`ProductDetailsComponent`を表示し、製品の詳細を表示します。
 
 <div class="lightbox">
   <img src="generated/images/guide/start/product-details-routed.png" alt="Product details page with updated URL and full details displayed">

@@ -20,7 +20,7 @@ To generate a new `HeroService` class in the `src/app/heroes` folder use the fol
 ng generate service heroes/hero
 </code-example>
 
-このコマンドは以下のデフォルトの `HeroService` を作成します。
+このコマンドは次のデフォルトの `HeroService` を作成します。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.0.ts" header="src/app/heroes/hero.service.ts (CLI-generated)">
 </code-example>

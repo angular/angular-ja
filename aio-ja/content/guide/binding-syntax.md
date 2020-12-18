@@ -106,7 +106,7 @@ The second line, which uses the disabled attribute checks for `null`.
 
 ## Types of data binding
 
-Angularは、データフローの方向に応じて3つのカテゴリのデータバインディングを提供します。
+Angularは、データフローの方向に応じて3つのカテゴリーのデータバインディングを提供します。
 
 * ソースからビューへ
 * ビューからソースへ

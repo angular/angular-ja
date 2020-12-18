@@ -1,9 +1,9 @@
 # Angularワークスペースの設定
 
 Angular [ワークスペース](guide/glossary#workspace) のルート階層にある `angular.json` というファイルは、Angular CLIによって提供されるビルドおよび開発ツールに対して、ワークスペース全体およびプロジェクト固有のデフォルトの設定を提供します。
-設定の中で与えられたパスの値は、ルートのワークスペースフォルダと関連しています。
+設定の中で指定されたパスの値は、ルートであるワークスペースフォルダが基準となります。
 
-## 全体的なJSONの構成
+## 全体的なJSONの構造
 
 `angular.json` のトップ階層では、いくつかのプロパティからワークスペースを設定し、`projects` セクションにはプロジェクトごとのオプションを設定します。 ワークスペースレベルで設定されたCLIのデフォルトは、プロジェクトレベルで設定されたデフォルトによって上書きされ、プロジェクトレベルで設定されたデフォルトはコマンドラインで上書きされます。
 
@@ -13,7 +13,7 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 * `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
 * `defaultProject`: 引数として与えられていない場合にコマンドで使われる、デフォルトのプロジェクト名。新しいワークスペースに新しいアプリケーションを `ng new` で作成したとき、ここの値が変更されるまで、そのアプリはワークスペースのデフォルトプロジェクトになります
 * `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。
-* `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリ）のサブセクションと、プロジェクトごとの構成オプションが含まれます
+* `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリ）のサブセクションと、プロジェクトごとの設定オプションが含まれます
 
 `ng new app_name` で作成した最初のアプリは "projects" の配下にあります。
 
@@ -41,10 +41,10 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 </div>
 
-## Strict mode
+## strictモード {@a strict-mode}
 
-When you create new workspaces and projects, you have the option to use Angular's strict mode, which can help you write better, more maintainable code.
-For more information, see [Strict mode](/guide/strict-mode).
+新しいワークスペースとプロジェクトを作成するときは、Angularのstrictモードを使用するオプションがあります。これは、より優れた、より保守しやすいコードを作成するのに役立ちます。
+詳しくは、[strictモード](/guide/strict-mode)を参照してください。
 
 ## プロジェクトの設定オプション
 
@@ -92,17 +92,17 @@ Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追
 ## プロジェクトツールの設定オプション {@a project-tool-configuration-options}
 
 Architect は、コンパイルやテスト実行などの複雑なタスクを実行するために CLI が使用するツールです。
-Architect は、[ターゲット](guide/glossary#target)構成にしたがって、指定された[builder](guide/glossary#builder) を実行して特定のタスクを実行するシェルです。
-新しい Builder とターゲットを定義および構成して、CLI を拡張できます。
+Architect は、[ターゲット](guide/glossary#target)設定にしたがって、指定された[ビルダ](guide/glossary#builder) を実行して特定のタスクを実行するシェルです。
+新しいビルダとターゲットを定義および構成して、CLIを拡張できます。
 [Angular CLI Builders](guide/cli-builder) を参照してください。
 
 {@a default-build-targets}
 
-### デフォルトのビルドターゲット
+### デフォルトのArchitectビルダとターゲット {@a default-architect-builders-and-targets}
 
-Angular は、Architect ツールと `ng run` コマンドで使用するデフォルトビルダーを定義します。
-これらの各デフォルトビルダーのオプションとデフォルトを定義する JSON スキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/9.0.x/packages/angular/cli/lib/config/schema.json) パッケージに集められています。 
-スキーマは、次の Architect ビルドターゲットのオプションを構成します。
+Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使用するデフォルトのビルダを定義します。
+これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/8.0.x/packages/angular/cli/lib/config/schema.json)パッケージに収集されています。
+スキーマは、次のビルダについてオプションを構成します。
 
 * app-shell
 * browser
@@ -113,9 +113,9 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 * server
 * tslint
 
-### Builder ターゲットの構成
+### ビルダのターゲットの設定
 
-`architect` セクションには、一連の Architect ターゲットが含まれています。
+`angular.json`の`architect`セクションには、Architectのターゲットのセットが含まれています。
 ターゲットの多くはそれらを実行する CLI コマンドに対応しています。
 `ng run` コマンドを使用することでいくつかの追加の定義済みターゲットを実行できますし、あなた自身のターゲットを定義することもできます。
 
@@ -166,7 +166,7 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 
 | プロパティ | 説明 |
 | :-------------- | :---------------------------- |
-| `builder`       | このターゲットの作成に使用されたビルドツールのnpmパッケージです。アプリケーションのデフォルトのビルダー (`ng build myApp`) は `@angular-devkit/build-angular:browser` で、[webpack](https://webpack.js.org/) パッケージバンドラーを使用します。ライブラリの構築 (`ng build myLib`) には別のビルダーが使用されることに注意してください。 |
+| `builder`       | このターゲットの作成に使用されたビルドツールのnpmパッケージです。アプリケーションのデフォルトのビルダ (`ng build myApp`) は `@angular-devkit/build-angular:browser` で、[webpack](https://webpack.js.org/) パッケージバンドラーを使用します。ライブラリの構築 (`ng build myLib`) には別のビルダが使用されることに注意してください。 |
 | `options`       | このセクションには、名前付けされた設定が指定されていない場合に使用される、デフォルトのビルドオプションが含まれています。詳しくは [デフォルトのビルドターゲット](#default-build-targets) をご覧ください。 |
 | `configurations`| このセクションには、異なる目的のための設定を定義して名前を付けます。それはそれぞれ名前付けされた、特定の環境のためのデフォルトオプションを設定するためのセクションを含みます。詳しくは [代替ビルドの構成](#build-configs) をご覧ください。 |
 
@@ -199,7 +199,7 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 | `styles`                   | プロジェクトのグローバルコンテキストに追加するスタイルファイルの配列です。Angular CLI は、CSS のインポートおよびすべての主要な CSS プリセッサをサポートしています: [sass/scss](https://sass-lang.com/)、[less](http://lesscss.org/) や [stylus](https://stylus-lang.com/)。詳細については、次の [スタイルとスクリプトの構成](#style-script-config) を参照してください。 |
 | `stylePreprocessorOptions` | スタイルプリプロセッサに渡すオプションと値のペアを含むオブジェクト。詳細については、次の [スタイルとスクリプトの構成](#style-script-config) を参照してください。 |
 | `scripts`                  | プロジェクトのグローバルコンテキストに追加する、JavaScript のスクリプトファイルを含むオブジェクトです。スクリプトはあたかもそれらが、`index.html` の中の `<script>` タグに記述されたかのように正確にロードします。 詳細については、次の [スタイルとスクリプトの構成](#style-script-config) を参照してください。 |
-| `budgets`                  | 出力が閾値のサイズに達っしたり越えたりしたときに、警告やエラーを報告するようにビルダーを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください (`test` セクションにはありません)。 |
+| `budgets`                  | 出力が閾値のサイズに達っしたり越えたりしたときに、警告やエラーを報告するようにビルダを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください (`test` セクションにはありません)。 |
 | `fileReplacements`         | オブジェクトとそのコンパイル時間を書き換えを含むオブジェクトです。詳しくは、[ターゲット固有のファイル置換の構成](guide/build#configure-target-specific-file-replacements)を参照してください。 |
 
 {@a complex-config}
@@ -212,9 +212,9 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 
 {@a asset-config}
 
-## プロジェクトのアセットの設定
+### アセットの設定
 
-各 `build` ターゲット設定には、プロジェクトをビルドするときにそのままコピーするファイルまたはフォルダを一覧表示する `assets` 配列を含めることができます。
+各`build`ターゲット設定には、ファイルやフォルダをリストする`assets`配列を含めることができます。それらはプロジェクトのビルド時にそのままコピーされます。
 デフォルトでは、 `src/assets/` フォルダーと `src/favicon.ico` がコピーされます。
 
 <code-example language="json">
@@ -277,11 +277,11 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 <code-example language="json">
 
 "assets": [
- { 
+ {
    "glob": "**/*",
    "input": "src/assets/",
    "ignore": ["**/*.svg"],
-   "output": "/assets/" 
+   "output": "/assets/"
  }
 ]
 
@@ -289,10 +289,10 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
 
 {@a style-script-config}
 
-### スタイルとスクリプトの構成
+### スタイルとスクリプトの設定
 
 `styles` および `scripts` オプションの配列エントリは、単純なパス文字列、または追加のエントリポイントファイルを指すオブジェクトにすることができます。
-関連するビルダーは、ビルド中にそのファイルとその依存関係を別個のバンドルとしてロードします。
+関連するビルダは、ビルド中にそのファイルとその依存関係を別個のバンドルとしてロードします。
 設定オブジェクトでは、`bundleName` フィールドを使用して、エントリポイントのバンドルに名前を付けるオプションがあります。
 
 バンドルはデフォルトでインジェクトされますが、インジェクションからバンドルを除外するために `inject` を false に設定できます。
@@ -308,7 +308,7 @@ Angular は、Architect ツールと `ng run` コマンドで使用するデフ�
      }
    ],
    "scripts": [
-     { 
+     {
        "input": "src/external-module/main.js",
        "inject": false,
        "bundleName": "external-module"
@@ -358,22 +358,22 @@ Sass と Stylus では、コンポーネントスタイルとグローバルス�
 @import 'variables';
 ```
 
-ユニットテストに必要な場合は、`test` ビルダーにスタイルやスクリプトを追加する必要があることに注意してください。
+ユニットテストに必要な場合は、`test`ビルダにスタイルやスクリプトを追加する必要があることに注意してください。
 [アプリ内でのランタイムグローバルライブラリの使用](guide/using-libraries#using-runtime-global-libraries-inside-your-app)も参照してください。
 
 
 {@a optimize-and-srcmap}
 
-### 最適化とソースマップの構成
+### 最適化とソースマップの設定
 
-ブラウザビルダの `optimization` および `sourceMap` オプションには、より詳細な設定を行うために、ブール値かオブジェクトを指定することができます。
+browserビルダの `optimization` および `sourceMap` オプションには、より詳細な設定を行うために、ブール値かオブジェクトを指定することができます。
 このセクションでは、これらのオプションを微調整する方法を説明します。
 
 * `optimization`オプションはスクリプト、スタイル、フォントに適用されます。次のような値を指定することで、どちらか一方に最適化を適用することができます。
 
 <code-example language="json">
 
-  "optimization": { 
+  "optimization": {
     "scripts": true,
     "styles": false,
     "fonts": true
@@ -383,8 +383,8 @@ Sass と Stylus では、コンポーネントスタイルとグローバルス�
 
 <div class="alert is-important">
 
-  Fonts optimization requires internet access.
-  When enabled, render blocking requests will be reduced by inlining external Google fonts and icons CSS definitions in the application's HTML index file. 
+  フォントの最適化にはインターネットアクセスが必要です。
+  有効にすると、アプリケーションのHTMLのindexファイルに外部のGoogleフォントとアイコンのCSS定義をインライン化することで、レンダリングをブロックするリクエストが削減されます。
 
 </div>
 

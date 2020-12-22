@@ -19,12 +19,12 @@ Angularシステム内で特定の意味をもつ一般的な英単語やコン�
 
 ## 事前(AOT)コンパイル {@a ahead-of-time-aot-compilation}
 
-The Angular ahead-of-time (AOT) compiler converts Angular HTML and TypeScript code
-into efficient JavaScript code during the build phase, before the browser downloads
-and runs that code.
-This is the best compilation mode for production environments, with decreased load time and increased performance compared to [just-in-time (JIT) compilation](#jit).
+Angularの事前(AOT)コンパイラは、
+ブラウザがコードをダウンロードして実行する前のビルドフェーズ中に、
+AngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
+これは本番環境に最適なコンパイルモードであり、[実行時(JIT)コンパイル](#jit)と比較して、ロード時間が短縮され、パフォーマンスが向上します。
 
-By compiling your application using the `ngc` command-line tool, you can bootstrap directly to a module factory, so you don't need to include the Angular compiler in your JavaScript bundle.
+`ngc`コマンドラインツールを使用してアプリケーションをコンパイルすることで、モジュールファクトリに直接ブートストラップできるため、JavaScriptバンドルにAngularコンパイラを含める必要はありません。
 
 {@a angular-element}
 
@@ -99,13 +99,13 @@ between a [token](#token) and a dependency [provider](#provider).
 
 ## ブートストラップ
 
-A way to initialize and launch an app or system.
+アプリやシステムを初期化して起動する方法。
 
-In Angular, an app's root NgModule (`AppModule`) has a `bootstrap` property that identifies the app's top-level [components](#component).
-During the bootstrap process, Angular creates and inserts these components into the `index.html` host web page.
-You can bootstrap multiple apps in the same `index.html`. Each app contains its own components.
+Angularでは、アプリのルートNgModule(`AppModule`)には、アプリのトップレベル[コンポーネント](#component)を識別する`bootstrap`プロパティがあります。
+ブートストラッププロセス中に、Angularはこれらのコンポーネントを作成してホストのWebページ`index.html`に挿入します。
+同じ`index.html`で複数のアプリをブートストラップできます。各アプリには独自のコンポーネントが含まれています。
 
-Learn more in [Bootstrapping](guide/bootstrapping).
+詳細は[ブートストラップ](guide/bootstrapping)で学びましょう。
 
 {@a builder}
 
@@ -315,9 +315,9 @@ Angularでは、依存性は通常サービスですが、文字列や関数な�
 
 ## differential loading
 
-A build technique that creates two bundles for an application. One smaller bundle is for modern browsers. A second, larger bundle allows the application to run correctly in older browsers (such as IE11) that do not support all modern browser APIs.
+1つのアプリケーション用に2つのバンドルを作成するビルド手法。1つ目の、小さなバンドルは最新のブラウザ用です。2つ目の、より大きなバンドルを使用すると、最新のブラウザAPIすべてはサポートしていない古いブラウザ(IE11など)でアプリケーションを正しく実行できます。
 
-For more information, see the [Deployment](guide/deployment#differential-loading) guide.
+詳しくは[デプロイメント](guide/deployment#differential-loading)のガイドを参照してください。
 
 
 {@a directive}
@@ -351,9 +351,9 @@ Angular extends TypeScript with domain-specific languages for a number of domain
 
 ## 動的コンポーネントロード
 
-A technique for adding a component to the DOM at run time. Requires that you exclude the component from compilation and then connect it to Angular's change-detection and event-handling framework when you add it to the DOM.
+実行時にコンポーネントをDOMに追加するための手法。コンポーネントをコンパイルから除外し、それをDOMに追加するときに、Angularの変更検知およびイベント処理フレームワークに接続する必要があります。
 
-See also [custom element](#custom-element), which provides an easier path with the same result.
+同じ結果でより簡単な方法を提供する[カスタム要素](#custom-element)も参照してください。
 
 
 {@a E}
@@ -362,9 +362,9 @@ See also [custom element](#custom-element), which provides an easier path with t
 
 ## 即時ロード
 
-NgModules or components that are loaded on launch are called eager-loaded, to distinguish them from those
-that are loaded at run time (lazy-loaded).
-See [lazy loading](#lazy-load).
+起動時にロードされるNgModuleやコンポーネントは、
+実行時にロード(遅延ロード)されるものと区別するために、即時ロードと呼ばれます。
+[遅延ロード](#lazy-load)を参照してください。
 
 
 {@a ecma}
@@ -498,10 +498,10 @@ Read more in the [Interpolation](guide/interpolation) guide.
 
 ## Ivy
 
-Ivy is the code name for Angular's [next-generation compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7).
-With the version 9 release of Angular, the new compiler and runtime instructions are used by default instead of the older compiler and runtime, known as [View Engine](#ve).
+IvyはAngularの[次世代のコンパイルとパイプラインのレンダリング](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7)についてのコードネームです。
+Angularリリースバージョン9では、[ビューエンジン](#ve)として知られる以前のコンパイラとランタイムの代わりに、新しいコンパイラとランタイム命令がデフォルトで使用されます。
 
-See [Angular Ivy](guide/ivy).
+[Angular Ivy](guide/ivy)を参照してください。
 
 
 {@a J}
@@ -518,14 +518,14 @@ See [ECMAScript](#ecma), [TypeScript](#typescript).
 
 ## 実行時(JIT)コンパイル {@a just-in-time-jit-compilation}
 
-The Angular just-in-time (JIT) compiler converts your Angular HTML and TypeScript code into
-efficient JavaScript code at run time, as part of bootstrapping.
+Angularの実行時(JIT)コンパイラは、ブートストラップの一部として、
+実行時にAngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
 
-JIT compilation is the default (as opposed to AOT compilation) when you run Angular's `ng build` and `ng serve` CLI commands, and is a good choice during development.
-JIT mode is strongly discouraged for production use
-because it results in large application payloads that hinder the bootstrap performance.
+JITコンパイルは、Angularの`ng build`と`ng serve`CLIコマンドを実行するときのデフォルトであり(AOTコンパイルとは対照的に)、開発時のよい選択です。
+JITモードは本番環境での使用は強くお勧めしません。
+ブートストラップのパフォーマンスを妨げる大きなアプリケーションペイロードをもたらすためです。
 
-Compare to [ahead-of-time (AOT) compilation](#aot).
+[事前(AOT)コンパイル](#aot)と比較しましょう。
 
 
 {@a K}
@@ -537,11 +537,11 @@ Compare to [ahead-of-time (AOT) compilation](#aot).
 
 ## 遅延ロード {@a lazy-loading}
 
-A process that speeds up application load time by splitting the application into multiple bundles and loading them on demand.
-For example, dependencies can be lazy loaded as needed&mdash;as opposed to [eager-loaded](#eager-loading) modules that are required by the root module and are thus loaded on launch.
+アプリケーションを複数のバンドルに分割し、オンデマンドでロードすることにより、アプリケーションのロード時間を短縮するプロセス。
+たとえば、依存性は必要に応じて遅延ロードできます。対照的に、[即時ロード](#eager-loading)のモジュールはルートモジュールに必要であり、それゆえ起動時にロードされます。
 
-The [router](#router) makes use of lazy loading to load child views only when the parent view is activated.
-Similarly, you can build custom elements that can be loaded into an Angular app when needed.
+[ルーター](#router)は遅延ロードを利用して、親ビューがアクティブ化されている場合にのみ子ビューをロードします。
+同様に、Angularアプリに必要なときにロードできるカスタム要素を構築できます。
 
 {@a library}
 
@@ -749,20 +749,20 @@ The alternative is a template-driven form. For an introduction and comparison of
 
 ## リゾルバ
 
-A class that implements the [Resolve](api/router/Resolve "API reference") interface (or a function with the same signature as the [resolve() method](api/router/Resolve#resolve "API reference")) that you use to produce or retrieve data that is needed before navigation to a requested route can be completed.
+[Resolve](api/router/Resolve "APIリファレンス")インターフェース(または[resolve()メソッド](api/router/Resolve#resolve "APIリファレンス")と同じ特徴をもつ関数)を実装するクラス。要求されたルートへのナビゲーションの完了前に必要な、データを生成または取得するために、これを使用します。
 
-Resolvers run after all [route guards](#route-guard "Definition") for a route tree have been executed and have succeeded.
+リゾルバが実行するのは、ルートツリーのすべての[ルートガード](#route-guard "定義")が実行され成功したあとです。
 
-See an example of using a [resolve guard](guide/router-tutorial-toh#resolve-guard "Routing techniques tutorial") to retrieve dynamic data.
+[ガードの解決](guide/router-tutorial-toh#resolve-guard "ルーティングテクニックのチュートリアル")を使用して動的データを取得する例を参照してください。
 
 {@a route-guard}
 
 ## ルートガード
 
-A method that controls navigation to a requested route in a routing application.
-Guards determine whether a route can be activated or deactivated, and whether a lazy-loaded module can be loaded.
+ルーティングアプリケーションで、要求されたルートへのナビゲーションを制御するメソッド。
+ガードは、ルートをアクティブ化または非アクティブ化できるかどうかと、遅延ロードのモジュールをロードできるかどうかを決定します。
 
-Learn more in the [Routing and Navigation](guide/router#preventing-unauthorized-access "Examples") guide.
+詳しくは[ルーティングとナビゲーション](guide/router#preventing-unauthorized-access "Examples")のガイドで学びましょう。
 
 
 {@a router}
@@ -770,27 +770,27 @@ Learn more in the [Routing and Navigation](guide/router#preventing-unauthorized-
 
 ## ルーター
 
-A tool that configures and implements navigation among states and [views](#view) within an Angular app.
+Angularアプリ内の状態と[ビュー](#view)間のナビゲーションを設定および実装するツール。
 
-The `Router` module is an [NgModule](#ngmodule) that provides the necessary service providers and directives for navigating through application views. A [routing component](#routing-component) is one that imports the `Router` module and whose template contains a `RouterOutlet` element where it can display views produced by the router.
+`Router`モジュールは[NgModule](#ngmodule)であり、アプリケーションビューをナビゲートするために必要なサービスプロバイダーとディレクティブを提供します。[ルーティングコンポーネント](#routing-component)は`Router`モジュールをインポートするコンポーネントです。そのテンプレートには`RouterOutlet`要素が含まれており、ルーターによって生成されたビューをそこに表示できます。
 
-The router defines navigation among views on a single page, as opposed to navigation among pages. It interprets URL-like links to determine which views to create or destroy, and which components to load or unload. It allows you to take advantage of [lazy loading](#lazy-load) in your Angular apps.
+ルーターはページ間のナビゲーションではなく、シングルページ上のビュー間のナビゲーションを定義します。URLのようなリンクを解釈して、どのビューを作成または破棄するか、どのコンポーネントをロードまたはアンロードするかを決定します。これにより、あなたのAngularアプリで[遅延ロード](#lazy-load)を利用できます。
 
-To learn more, see [Routing and Navigation](guide/router).
+詳しく学ぶには、[ルーティングとナビゲーション](guide/router)を参照してください。
 
 {@a router-outlet}
 
 ## ルーターアウトレット
 
-A [directive](#directive) that acts as a placeholder in a routing component's template. Angular dynamically renders the template based on the current router state.
+ルーティングコンポーネントのテンプレートでプレースホルダとして機能する[ディレクティブ](#directive)。Angularは、現在のルーターの状態に基づいてテンプレートを動的にレンダリングします。
 
 {@a router-component}
 
 ## ルーティングコンポーネント {@a routing-component}
 
-An Angular [component](#component) with a `RouterOutlet` directive in its template that displays views based on router navigations.
+そのテンプレートに`RouterOutlet`ディレクティブをもつAngularの[コンポーネント](#component)。ルーターのナビゲーションに基づいてビューを表示します。
 
-For more information, see [Routing and Navigation](guide/router).
+詳しくは、[ルーティングとナビゲーション](guide/router)を参照してください。
 
 {@a rule}
 

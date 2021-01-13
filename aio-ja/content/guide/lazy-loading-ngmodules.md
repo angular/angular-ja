@@ -17,7 +17,7 @@
 このセクションでは、遅延ロードされるルートを設定するための基本的な手順を紹介します。
 ステップバイステップの例については、このページの[ステップバイステップのセットアップ](#step-by-step)セクションを参照してください。
 
-Angularモジュールを遅延ロードするには、次のように、`AppRoutingModule`の`routes`設定で`loadchildren`を(`component`の代わりに)使用します。
+Angularモジュールを遅延ロードするには、次のように、`AppRoutingModule`の`routes`設定で`loadChildren`を(`component`の代わりに)使用します。
 
 <code-example header="AppRoutingModule (excerpt)">
 

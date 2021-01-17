@@ -84,17 +84,17 @@ Angularバージョン9からは、遅延ロードのモジュールそれぞれ
 {@a singleton-services}
 {@a component-child-injectors}
 
-## Injector hierarchy and service instances
+## インジェクター階層とサービスのインスタンス {@a injector-hierarchy-and-service-instances}
 
-Services are singletons within the scope of an injector, which means there is at most one instance of a service in a given injector.
+サービスは1つのインジェクターのスコープ内においてシングルトンです。つまり、特定のインジェクターにおいて、あるサービスのインスタンスは最大で1つです。
 
-Angular DI has a [hierarchical injection system](guide/hierarchical-dependency-injection), which means that nested injectors can create their own service instances.
-Whenever Angular creates a new instance of a component that has `providers` specified in `@Component()`, it also creates a new child injector for that instance.
-Similarly, when a new NgModule is lazy-loaded at run time, Angular can create an injector for it with its own providers.
+AngularのDIには[階層的な注入システム](guide/hierarchical-dependency-injection)があります。これは、ネストされたインジェクターが独自のサービスインスタンスを作成できることを意味します。
+Angularは、`@Component()`で指定された`providers`をもつコンポーネントの新しいインスタンスを作成するたびに、そのインスタンス用に新しい子インジェクターも作成します。
+同様に、実行時に新しいNgModuleが遅延ロードされると、AngularはそのNgModule用に、独自のプロバイダーをもつインジェクターを作成できます。
 
-Child modules and component injectors are independent of each other, and create their own separate instances of the provided services. When Angular destroys an NgModule or component instance, it also destroys that injector and that injector's service instances.
+子モジュールとコンポーネントのインジェクターは互いに独立しており、提供されるサービスの独自の別個のインスタンスを作成します。AngularがNgModuleやコンポーネントのインスタンスを破棄すると、そのインジェクターと、インジェクターのサービスのインスタンスも破棄します。
 
-For more information, see [Hierarchical injectors](guide/hierarchical-dependency-injection).
+詳しくは、[階層的インジェクター](guide/hierarchical-dependency-injection)を参照してください。
 
 
 

@@ -49,7 +49,7 @@ Angularアプリケーションはコンポーネントを使って構築しま�
 
 ## Create the sample project
 
-サンプルプロジェクトを作成するには、<live-example name="get-started-v0" noDownload>既製のサンプルプロジェクトをStackBlitz</live-example>で生成します。
+サンプルプロジェクトを作成するには、<live-example name="getting-started-v0" noDownload>既製のサンプルプロジェクトをStackBlitz</live-example>で生成します。
 作業を保存するには
 
 1. StackBlitzにログインします。

@@ -32,9 +32,22 @@ ng generate app-shell
 "server": {
   "builder": "@angular-devkit/build-angular:server",
   "options": {
-    "outputPath": "dist/my-app-server",
+    "outputPath": "dist/my-app/server",
     "main": "src/main.server.ts",
     "tsConfig": "tsconfig.server.json"
+  },
+  "configurations": {
+    "production": {
+      "outputHashing": "media",
+      "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.prod.ts"
+        }
+      ],
+      "sourceMap": false,
+      "optimization": true
+    }
   }
 },
 "app-shell": {
@@ -67,6 +80,6 @@ ng run my-app:app-shell
 ng run my-app:app-shell:production
 </code-example>
 
-ビルド出力を確認するには、`dist/my-app/index.html` を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。
+ビルド出力を確認するには、`dist/my-app/browser/index.html` を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。
 
 

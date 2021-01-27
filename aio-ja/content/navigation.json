@@ -227,6 +227,12 @@
               "title": "InputとOutput",
               "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
               "translated": true
+            },
+            {
+              "url": "guide/svg-in-templates",
+              "title": "SVGテンプレート",
+              "tooltip": "Learn how to use SVGs as templates for Angular applications.",
+              "translated": true
             }
           ]
         },
@@ -1047,7 +1053,17 @@
           "url": "api"
         },
         {
-          "title": "サンプルアプリケーション",
+          "title": "エラーリファレンス",
+          "tooltip": "Details of the errors that can be thrown by Angular.",
+          "children": [
+            {
+              "title": "概要",
+              "url": "errors",
+              "hidden": true
+            }
+          ]
+        },
+        { "title": "サンプルアプリケーション",
           "tooltip": "List of all of the example applications in the Angular documentation.",
           "url": "guide/example-apps-list"
         },

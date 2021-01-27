@@ -106,6 +106,8 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
     <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.1.ts"></code-example>
 
+    また、StackBlitzはデフォルトで `ngOnInit()`をコンポーネント内に生成します。このチュートリアルでは `CartComponent`の`ngOnInit()`は無視できます。
+
 1. `app.module.ts` を開き、コンポーネント `CartComponent` のルートを `path` の `cart` に追加します。
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
@@ -143,14 +145,9 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
     <code-example path="getting-started/src/app/cart/cart.component.2.ts" header="src/app/cart/cart.component.ts" region="items">
     </code-example>
 
-1. カートサービスの `getItems()` メソッドでitemsを設定します。
+    このコードはカートサービスの `getItems()` メソッドでitemsを設定します。
     [`cart.service.ts` の生成時](#generate-cart-service) にこのメソッドを定義したことを思い出しましょう。
     このメソッドは [`cart.service.ts` を作成したとき](#generate-cart-service)に定義されています。
-    Angularの `ngOnInit()` の `getItems()` メソッドを利用することで、Angularは `CartComponent` の初期化時に `getItems()` を利用します。
-    CartComponentクラスは次のようになります:
-
-    <code-example path="getting-started/src/app/cart/cart.component.3.ts" header="src/app/cart/cart.component.ts" region="props-services">
-    </code-example>
 
 1. ヘッダーとともにカートのテンプレートを更新し、 `<div>` と `*ngFor` を使用してカートアイテムの名前と価格を表示します。
     結果、CartComponentテンプレートは次のようになります。
@@ -253,15 +250,11 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
 
 1. `shippingCosts` プロパティを定義します。
 
-    <code-example path="getting-started/src/app/shipping/shipping.component.ts" region="props"></code-example>
-
-1. カートサービスを `ShippingComponent` の `constructor()`に注入します:
-
     <code-example path="getting-started/src/app/shipping/shipping.component.ts" header="src/app/shipping/shipping.component.ts" region="inject-cart-service"></code-example>
 
-1. `CartService` の `getShippingPrices()` メソッドを用いて `shippingCosts` プロパティを設定する。
+1. `shippingCosts`プロパティを定義して、`CartService` の `getShippingPrices()` メソッドを用いて `shippingCosts` プロパティを設定する。
 
-    <code-example path="getting-started/src/app/shipping/shipping.component.ts" region="ctor"></code-example>
+    <code-example path="getting-started/src/app/shipping/shipping.component.ts" header="src/app/shipping/shipping.component.ts" region="props"></code-example>
 
 1. `ShippingComponent`のテンプレートで、`async`パイプを使用して配送タイプと価格を表示するように更新します:
 

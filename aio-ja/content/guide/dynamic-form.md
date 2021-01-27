@@ -37,7 +37,7 @@
 
 このチュートリアルを実行する前に、次のことを基本的に理解しておく必要があります。
 
-* [TypeScript](https://www.typescriptlang.org/docs/home.html "The TypeScript language") および HTML5 プログラミング。
+* [TypeScript](https://www.typescriptlang.org/ "The TypeScript language") および HTML5 プログラミング。
 
 * [Angular アプリケーション設計](guide/architecture "Introduction to Angular app-design concepts") の基本的な概念。
 

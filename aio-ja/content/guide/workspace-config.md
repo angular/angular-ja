@@ -28,7 +28,6 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 </code-example>
 
-`ng generate application` を使用して作成された追加の各アプリには、対応するエンドツーエンドのテストプロジェクトがあり、それぞれに独自の設定セクションがあります。
 `ng generate library` を使用してライブラリプロジェクトを作成すると、そのライブラリプロジェクトも `projects` セクションに追加されます。
 
 <div class="alert is-helpful">
@@ -361,34 +360,161 @@ Sass と Stylus では、コンポーネントスタイルとグローバルス�
 ユニットテストに必要な場合は、`test`ビルダにスタイルやスクリプトを追加する必要があることに注意してください。
 [アプリ内でのランタイムグローバルライブラリの使用](guide/using-libraries#using-runtime-global-libraries-inside-your-app)も参照してください。
 
+### Optimization configuration
 
-{@a optimize-and-srcmap}
+The `optimization` browser builder option can be either a Boolean or an Object for more fine-tune configuration. This option enables various optimizations of the build output, including:
 
-### 最適化とソースマップの設定
+- Minification of scripts and styles
+- Tree-shaking
+- Dead-code elimination
+- Inlining of critical CSS
+- Fonts inlining
 
-browserビルダの `optimization` および `sourceMap` オプションには、より詳細な設定を行うために、ブール値かオブジェクトを指定することができます。
-このセクションでは、これらのオプションを微調整する方法を説明します。
+There are several options that can be used to fine-tune the optimization of an application.
 
-* `optimization`オプションはスクリプト、スタイル、フォントに適用されます。次のような値を指定することで、どちらか一方に最適化を適用することができます。
+<table class="is-full-width is-fixed-layout">
+<thead>
+<tr>
+<th>Option</th>
+<th width="40%">Description</th>
+<th>Value Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts</code></td>
+<td>Enables optimization of the scripts output.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>styles</code></td>
+<td>Enables optimization of the scripts output.</td>
+<td><code>boolean|<a href="#styles-optimization-options">Styles optimization options</a></code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>fonts</code></td>
+<td>Enables optimization for fonts.<br><strong>Note:</strong> This requires internet access.</td>
+<td><code class="no-auto-link">boolean|<a href="#fonts-optimization-options">Fonts optimization options</a></code></td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+
+#### Styles optimization options
+<table class="is-full-width is-fixed-layout">
+<thead>
+<tr>
+<th>Option</th>
+<th width="40%">Description</th>
+<th>Value Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>minify</code></td>
+<td>Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers and minimizing values.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>inlineCritical</code></td>
+<td>Extract and inline critical CSS definitions to improve <a href="https://web.dev/first-contentful-paint/">First Contentful Paint.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+
+#### Fonts optimization options
+<table class="is-full-width is-fixed-layout">
+<thead>
+<tr>
+<th>Option</th>
+<th width="40%">Description</th>
+<th>Value Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inline</code></td>
+<td>Reduce <a href="https://web.dev/render-blocking-resources/">render blocking requests</a> by inlining external Google fonts and icons CSS definitions in the application's HTML index file.<br><strong>Note:</strong>This requires internet access.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+
+
+You can supply a value such as the following to apply optimization to one or the other:
 
 <code-example language="json">
 
   "optimization": {
     "scripts": true,
-    "styles": false,
+    "styles": {
+      "minify": true,
+      "inlineCritical": true
+    },
     "fonts": true
   }
 
 </code-example>
 
-<div class="alert is-important">
+<div class="alert is-helpful">
 
-  フォントの最適化にはインターネットアクセスが必要です。
-  有効にすると、アプリケーションのHTMLのindexファイルに外部のGoogleフォントとアイコンのCSS定義をインライン化することで、レンダリングをブロックするリクエストが削減されます。
+   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、
+   スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
 
 </div>
 
-* sourceMap` オプションはスクリプトとスタイルの両方に適用されます。非表示のソースマップを出力したり、 ベンダパッケージのソースマップを解決したりすることもできます。
+### Source map configuration
+
+The `sourceMap` browser builder option can be either a Boolean or an Object for more fine-tune configuration to control the source maps of an application.
+
+<table class="is-full-width is-fixed-layout">
+<thead>
+<tr>
+<th>Option</th>
+<th width="40%">Description</th>
+<th>Value Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts</code></td>
+<td>Output source maps for all scripts.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>styles</code></td>
+<td>Output source maps for all styles.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>vendor</code></td>
+<td>Resolve vendor packages source maps.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>hidden</code></td>
+<td>Output source maps used for error reporting tools.</td>
+<td><code class="no-auto-link">boolean</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+
+
+The example below shows how to toggle one or more values to configure the source map outputs:
 
 <code-example language="json">
 
@@ -406,8 +532,5 @@ browserビルダの `optimization` および `sourceMap` オプションには�
    非表示のソースマップを使用する場合、ソースマップはバンドルで参照されません。
    これらは、ソースマップでエラー報告ツールのエラースタックトレースのみをマッピングするが、
    ブラウザ開発者ツールでソースマップを公開したくない場合に役立ちます。
-
-   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、
-   スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
 
 </div>

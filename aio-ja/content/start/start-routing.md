@@ -28,10 +28,7 @@
 
 1. `product-list.component.html`を開きます。
 
-1. `*ngFor` ディレクティブを次のように更新します。
-    この文は、Angularに `products` 配列の項目を反復処理するよう指示し、リストを反復処理する際に配列の各インデックスを `productId` 変数に代入します。
-
-1. `routerLink`を含めるように製品名のアンカーを変更します。
+1. 製品名のアンカーに `product.id` をパラメータとして `routerLink` を含めるように変更します。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.html" region="router-link">
     </code-example>
@@ -79,12 +76,15 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
     `ActivatedRoute` を注入することで、サービスを使用するようにコンポーネントを設定しています。
     [データの管理](start/start-data "Try it: Managing Data") ページでサービスの詳細を説明しています。
 
-1. `ngOnInit()`メソッドで、ルーティングパラメータをサブスクライブし、`productId`に基づいて製品を取得します。
+1. `ngOnInit()`メソッドで、ルーティングパラメータから`productId`を取り出し、`products`配列から対応する製品を取得します。
 
     <code-example path="getting-started/src/app/product-details/product-details.component.1.ts" header="src/app/product-details/product-details.component.ts" region="get-product">
     </code-example>
 
-    ルートパラメータは、ルートで定義するパス変数に対応します。ルートに一致するURLは、`productId`を提供します。 Angularは `productId`を使用して、それぞれ固有の製品の詳細を表示します。
+    ルートパラメータは、ルートで定義するパス変数に対応します。
+    ルートパラメータにアクセスするためにここでは`route.snapshot`を使います。これは特定の瞬間にアクティブなルートについての情報を格納した`ActivatedRouteSnapshot`です。
+    ルートに一致するURLは、`productId`を提供します。 
+    Angularは `productId`を使用して、それぞれ固有の製品の詳細を表示します。
 
 1. 商品の詳細を `*ngIf` で表示するように `ProductDetailsComponent` テンプレートを更新します。
     商品が存在する場合、`<div>` には名前、価格、説明が表示されます。

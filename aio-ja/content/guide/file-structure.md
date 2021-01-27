@@ -138,7 +138,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 次のコマンドは、すべてのワークスペース全体の構成ファイルを使用してワークスペースを作成しますが、ルートレベルのアプリケーションは作成しません。
 
 <code-example language="bash">
-ng new my-workspace --createApplication="false"
+ng new my-workspace --create-application="false"
 </code-example>
 
 その後、ワークスペース内でユニークな名前でアプリやライブラリを生成できます。

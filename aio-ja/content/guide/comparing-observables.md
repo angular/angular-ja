@@ -47,10 +47,10 @@ Observable はしばしば Promise と比較されます。主な違いは次の
 
 * Promise は最後の `.then` 節 (サブスクリプションに相当) と中間の `.then` 節 (mapに相当) を区別しません。
 
-  <code-example 
-    path="comparing-observables/src/observables.ts" 
-    header="src/observables.ts (unsubcribe)" 
-    region="unsubscribe">
+  <code-example
+    path="comparing-observables/src/promises.ts"
+    header="src/promises.ts (chain)"
+    region="chain">
   </code-example>
 
 ### キャンセル処理

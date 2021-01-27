@@ -91,8 +91,13 @@ See [styling delegation](guide/style-precedence#styling-delegation) for more inf
 ### Binding to multiple CSS classes
 
 To bind to multiple classes, use `[class]` set to an expression&mdash;for example, `[class]="classExpression"`.
-The expression can be a space-delimited string of class names, or an object with class names as the keys and truthy or falsy expressions as the values.
-With an object format, Angular adds a class only if its associated value is truthy.
+The expression can be one of:
+
+* A space-delimited string of class names.
+* An object with class names as the keys and truthy or falsy expressions as the values.
+* An array of class names.
+
+With the object format, Angular adds a class only if its associated value is truthy.
 
 <div class="alert is-important">
 
@@ -145,7 +150,7 @@ The following table summarizes class binding syntax.
     <td><code>"my-class-1 my-class-2 my-class-3"</code></td>
   </tr>
   <tr>
-    <td><code>{[key: string]: boolean | undefined | null}</code></td>
+    <td><code>Record&lt;string, boolean | undefined | null&gt;</code></td>
     <td><code>{foo: true, bar: false}</code></td>
   </tr>
   <tr>
@@ -178,13 +183,16 @@ You can write a style property name in either [dash-case](guide/glossary#dash-ca
 ### Binding to multiple styles
 
 To toggle multiple styles, bind to the `[style]` attribute&mdash;for example, `[style]="styleExpression"`.
-The expression is often a string list of styles such as `"width: 100px; height: 100px;"`.
+The `styleExpression` can be one of:
 
-You can also format the expression as an object with style names as the keys and style values as the values, such as `{width: '100px', height: '100px'}`.
+* A string list of styles such as `"width: 100px; height: 100px;"`.
+* An object with style names as the keys and style values as the values, such as `{width: '100px', height: '100px'}`.
+
+Note that binding an array to `[style]` is not supported.
 
 <div class="alert is-important">
 
-With any object-like expression&mdash;such as `object`, `Array`, `Map`, or `Set`&mdash;the identity of the object must change for Angular to update the class list.
+When binding `[style]` to an object expression, the identity of the object must change for Angular to update the class list.
 Updating the property without changing object identity has no effect.
 
 </div>
@@ -234,24 +242,23 @@ The following table summarizes style binding syntax.
     <td><code>100</code></td>
   </tr>
     <tr>
-    <td rowspan=3>Multi-style binding</td>
-    <td rowspan=3><code>[style]="styleExpression"</code></td>
+    <td rowspan=2>Multi-style binding</td>
+    <td rowspan=2><code>[style]="styleExpression"</code></td>
     <td><code>string</code></td>
     <td><code>"width: 100px; height: 100px"</code></td>
   </tr>
   <tr>
-    <td><code>{[key: string]: string | undefined | null}</code></td>
+    <td><code>Record&lt;string, string | undefined | null&gt;</code></td>
     <td><code>{width: '100px', height: '100px'}</code></td>
   </tr>
-  <tr>
-    <td><code>Array</code><<code>string</code>></td>
-    <td><code>['width', '100px']</code></td>
-  </tr>
 </table>
+
+<div class="alert is-helpful">
 
 The [NgStyle](guide/built-in-directives/#ngstyle) directive can be used as an alternative to direct `[style]` bindings.
 However, using the above style binding syntax without `NgStyle` is preferred because due to improvements in style binding in Angular, `NgStyle` no longer provides significant value, and might eventually be removed in the future.
 
+</div>
 
 <hr/>
 
@@ -328,12 +335,14 @@ There are cases where you need to differentiate the behavior of a [Component](ap
 The [Attribute](api/core/Attribute) parameter decorator is great for passing the value of an HTML attribute to a component/directive constructor via [dependency injection](guide/dependency-injection).
 
 <div class="alert is-helpful">
+
   The injected value captures the value of the specified HTML attribute at that moment.
   Future updates to the attribute value are not reflected in the injected value.
+
 </div>
 
-<code-example 
-  path="attribute-binding/src/app/my-input-with-attribute-decorator.component.ts" 
+<code-example
+  path="attribute-binding/src/app/my-input-with-attribute-decorator.component.ts"
   header="src/app/my-input-with-attribute-decorator.component.ts">
 </code-example>
 

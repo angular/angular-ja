@@ -1,94 +1,96 @@
 # アプリケーションのデプロイ
 
+アプリケーションのデプロイとは、コードをコンパイルしたり、ビルドしたりして、JavaScript、CSS、HTML をウェブサーバー上でホスティングするプロセスです。
 
-アプリケーションをデプロイするには、それをコンパイルしてから、JavaScript、CSS、およびHTMLをWebサーバー上でホストする必要があります。 ビルドされたAngularアプリケーションは非常に移植性が高く、あらゆる環境で動作したり、Node、Java、.NET、PHP、その他多くのテクノロジーによって提供されます。
+このセクションでは、[入門](start "Try it: A basic application") チュートリアルの前のステップをもとに、アプリケーションをデプロイする方法を説明します。
 
-<div class="alert is-helpful">
+## 前提条件
 
-[パート1](start "Try it: A basic app")から直接ここに来ても、[アプリ内ナビゲーション](start/start-routing "Try it: In-app navigation")、[データの管理](start/start-data "Try it: Manage data")、および[ユーザー入力用のフォーム](start/start-forms "Try it: Forms for user input")セクションを通してオンラインストアアプリケーションを完成させても、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションをもっています。
+ベストプラクティスは、デプロイする前にプロジェクトをローカルで実行することです。プロジェクトをローカルで実行するには、次のものがコンピュータにインストールされている必要があります。
 
-</div>
+* [Node.js](https://nodejs.org/en/)。
+* [Angular CLI](https://cli.angular.io/)。
+    ターミナルから、Angular CLIをグローバルにインストールします。
+
+    ```sh
+    npm install -g @angular/cli
+    ```
+
+    Angular CLIでは、`ng`コマンドを使って新しいワークスペースや新しいプロジェクトを作成したり、開発中のアプリケーションにサービスを提供したり、ビルドを作成して共有したり配布したりすることができます。
+
+## アプリケーションをローカルで実行する
+
+1. 左メニューの `Project` の横にある `Download Project` アイコンをクリックして、StackBlitz プロジェクトのソースコードをダウンロードします。
+
+1. [`ng new`](cli/new "CLI ng new command reference") コマンドを使って新しい Angular CLI ワークスペースを作成します。ここで、`my-project-name` はプロジェクトの好きな呼び名です。
+
+    ```sh
+    ng new my-project-name
+    ```
+
+1. 新しくCLIを生成したアプリケーションで、`/src` フォルダを `StackBlitz` ダウンロードの `/src` フォルダに置き換えます。
+
+1. 次のCLIコマンドを使ってアプリケーションをローカルで実行します。
+
+    ```sh
+    ng serve
+    ```
+
+1. ブラウザでアプリケーションを確認するには、http://localhost:4200/ にアクセスします。
+    デフォルトの4200番ポートが利用できない場合は、次の例のようにポートフラグを指定して別のポートを指定することができます。
+
+    ```sh
+    ng serve --port 4201
+    ```
+
+    アプリケーションをサーブしている間に、コードを編集したり、変更がブラウザで自動的に更新されるのを見ることができます。
+    `ng serve` コマンドを停止するには、`Ctrl`+`c` を押してください。
+
+{@a building}
+## アプリケーションのビルドとホスティング
+
+ 1. 本番用にアプリケーションをビルドするには、`prod` フラグを指定して `build` コマンドを使ってください。
+
+    ```sh
+    ng build --prod
+    ```
+
+    このコマンドはアプリケーションのルートディレクトリに `dist` フォルダを作成し、ホスティングサービスがアプリケーションにサービスを提供するために必要なすべてのファイルを格納します。
+
+    <div class="alert is-helpful">
+
+    上記の `ng build` コマンドでパッケージが見つからないというエラーが出た場合は、ローカルプロジェクトの `package.json` ファイルに見つからない依存関係を追加して、ダウンロードした StackBlitz プロジェクトの依存関係と一致させてください。
+
+    </div> </div
+
+1. `dist/my-project-name` フォルダの内容をウェブサーバーにコピーします。
+    これらのファイルは静的なものなので、`Node.js`、Java、.NET、または [Firebase](https://firebase.google.com/docs/hosting)、[Google Cloud](https://cloud.google.com/solutions/web-hosting)、[App Engine](https://cloud.google.com/appengine/docs/standard/python/getting-started/hosting-a-static-website) などのバックエンドなど、ファイルを提供できるウェブサーバーであれば、どのような場所でもホストすることができます。
+    詳細については、 [ビルドとサーブ](guide/build "「Angular Appsのビルドとサーブ」")、[デプロイ](guide/deployment "Deployment guide")を参照してください。
+
+<hr />
+
+## 次は何をするの？
+
+このチュートリアルでは、モバイル開発、UX/UI開発、サーバーサイドレンダリングなどの分野でAngularの世界を探求するための基礎を築きました。
+Angularの機能をより深く学び、活気あるコミュニティに参加し、堅牢なエコシステムを探索することで、より深く理解を深めることができます。
+
+### Angularをもっと学ぶ
+
+ローカルでアプリケーションを構築し、Angularの人気のある機能の多くを探求する、より詳細なチュートリアルについては、[Tour of Heroes](tutorial)を参照してください。
+
+Angularの基本的な概念については、[Angularコンポーネントの概要](guide/component-overview)や[テンプレート構文](guide/template-syntax)などの主要概念セクションのガイドを参照してください。
+
+### コミュニティに参加する
 
 
+このチュートリアルを終えたことを[ツイート](https://twitter.com/intent/tweet?url=https://angular.jp/start&text=Angularの入門チュートリアルを終了しました！ "Angular on Twitter")したり、感想を伝えたり、[今後のバージョンへの提案](https://github.com/angular/angular/issues/new/choose "Angular GitHub リポジトリ新規発行フォーム")を投稿したりしてください。
 
-## アプリケーションを共有する
+また、[Angularブログ](https://blog.angular.io/ "Angular blog")をフォローして最新情報を入手してください。
 
-StackBlitzプロジェクトはデフォルトで公開されているため、プロジェクトのURLを介してAngularアプリを共有できます。 これはアイデアやプロトタイプを共有するのに最適な方法ですが、プロダクションホスティングを目的としたものではありません。
+### Angularのエコシステムを探る
 
-1. StackBlitzプロジェクトで、プロジェクトをフォークまたは保存したことを確認してください。
-1. プレビューウィンドウに、 `https://<Project ID>.stackblitz.io` のようなURLが表示されるはずです。
-1. このURLを友人や同僚と共有してください。
-1. あなたのURLにアクセスしたユーザーは開発サーバーが起動し、その後あなたのアプリケーションがロードされるのを見るでしょう。
+UX/UI開発をサポートするには、[Angular Material](https://material.angular.io/ "Angular Material web site")を参照してください。
 
-## ローカルでビルドする
+Angularアプリケーションをテストするには、[Angular Protractor](https://protractor.angular.io/ "Angular Protractor web site")を参照してください。
 
-アプリケーションをローカルまたは本番用にビルドするには、StackBlitzプロジェクトからソースコードをダウンロードする必要があります。 ファイルをダウンロードするには、プロジェクトの横にある左メニューの `Download Project` アイコンをクリックします。
-
-ソースコードをダウンロードして解凍したら、`Node.js`をインストールしてAngular CLIをインストールします。
-
-ターミナルから、Angular CLIをグローバルにインストールします:
-
-```sh
-npm install -g @angular/cli
-```
-
-これにより、システムに `ng` コマンドがインストールされます。 これは、新しいワークスペース、新しいプロジェクトの作成、開発中のアプリケーションの提供、または共有や配布が可能なビルドの作成に使用するコマンドです。
-
-[`ng new`](cli/new "CLI ng new command reference") コマンドを使用して新しいAngular CLIワークスペースを作成します:
-
-```sh
-ng new my-project-name
-```
-
-そこから、 `/src` フォルダを `StackBlitz` からダウンロードしたもので置き換え、次にビルドを実行してください。
-
-```sh
-ng build --prod
-```
-
-これにより、デプロイする必要があるファイルが生成されます。
-
-<div class="alert is-helpful">
-
-上記の `ng build`コマンドがパッケージの欠落についてエラーを投げる場合は、ローカルプロジェクトの` package.json`ファイルに欠落している依存関係を追加して、ダウンロードしたStackBlitzプロジェクトの依存関係と一致させましょう。
-
-</div>
-
-#### ビルドしたプロジェクトをホストする
-
-`dist/my-project-name` フォルダ内のファイルは静的であり、ファイルを提供できる任意のWebサーバー（`Node.js`、Java、.NET）または任意のバックエンド（Firebase、Google Cloud、App Engine、その他）でホストできます。
-
-### FirebaseでAngularアプリをホストする
-
-あなたのサイトを動かすもっとも簡単な方法のひとつはFirebaseを使ってホストすることです。
-
-1. [Firebase](https://firebase.google.com/ "Firebase web site") で firebaseアカウントにサインアップしてください。
-1. 新しいプロジェクトを作成し、好きな名前を付けます。
-1. `ng add @angular/fire`を使用して、デプロイメントを処理する`@angular/fire` schematicsを追加します。
-1. Install [Firebase CLI](https://firebase.google.com/docs/cli) globally using `npm install -g firebase-tools`.
-1. CLIをFirebaseアカウントに接続し、 `firebase login` および `firebase init` を使用してプロジェクトへの接続を初期化します。
-1. プロンプトにしたがってホスティング用に作成した `Firebase` プロジェクトを選択します。
-  - 最初のプロンプトで`Hosting`オプションを選択します。
-  - 先ほどFirebaseで作ったプロジェクトを選択します。
-  - 公開ディレクトリとして `dist/my-project-name` を選択します。
-1. `ng deploy`でアプリケーションをデプロイします。
-1. デプロイが完了したら、 https://your-firebase-project-name.firebaseapp.com にアクセスして動かしてみましょう。
-
-### 別のホストでAngularアプリをホストする
-
-Angularアプリを別のWebホストでホストするには、ファイルをアップロードするかホストに送信する必要があります。
-シングルページアプリケーションを構築しているため、無効なURLを `index.html` ファイルにリダイレクトする必要があります。
-アプリケーションの開発と配布の詳細については、 [ビルドとサーブ](guide/build "Building and Serving Angular Apps") と [デプロイ](guide/deployment "Deployment guide") のガイドを参照してください。
-
-## Angularコミュニティに参加する
-
-あなたはもうAngularの開発者です！ [この瞬間を共有](https://twitter.com/intent/tweet?url=https://angular.jp/start&text=Angularの入門チュートリアルを終了しました！ "Angular on Twitter") し、この入門についての考えをお聞かせください。 または、 [今後のエディションについての提案](https://github.com/angular/angular/issues/new/choose "Angular GitHub repository new issue form")を送信してください。
-
-Angularはさらに多くの機能を提供します。 そして、あなたは今、アプリケーションを構築し、それらの他の機能を探求することを可能にする基盤を持っています:
-
-* Angularは、モバイルアプリ、アニメーション、国際化、サーバーサイドレンダリングなどの高度な機能を提供します。
-* [Angular Material](https://material.angular.io/ "Angular Material web site") は、Material Designコンポーネントの広範なライブラリを提供しています。
-* [Angular Protractor](https://protractor.angular.io/ "Angular Protractor web site") はAngularアプリのエンドツーエンドのテストフレームワークを提供します。
-* Angularには、広範な[サードパーティ製のツールやライブラリのネットワーク](resources "Angular resources list") もあります。
-
-[Angularのブログ](https://blog.angular.io/ "Angular blog") をフォローして最新の情報を入手してください。
+また、Angularコミュニティには広範な[サードパーティのツールやライブラリのネットワーク](resources "「Angularリソースリスト」")があります。

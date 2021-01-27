@@ -85,7 +85,7 @@ HTML 属性の `value` は *初期値* を指定します。DOM の `value` プ�
 
 ボタンの状態を制御するには `disabled` *プロパティ* を設定します。
 
-Property and attribute comparison
+#### Property and attribute comparison
 
 技術的には属性バインディング `[attr.disabled]` を設定することはできますが、値は次のように異なります。プロパティバインディングが真偽値を必要とするのに対して、対応する属性バインディングは、値が `null` かそうでないかを見ています。
 Consider the following:

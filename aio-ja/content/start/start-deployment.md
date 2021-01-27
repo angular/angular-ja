@@ -65,7 +65,7 @@
 
 1. `dist/my-project-name` フォルダの内容をウェブサーバーにコピーします。
     これらのファイルは静的なものなので、`Node.js`、Java、.NET、または [Firebase](https://firebase.google.com/docs/hosting)、[Google Cloud](https://cloud.google.com/solutions/web-hosting)、[App Engine](https://cloud.google.com/appengine/docs/standard/python/getting-started/hosting-a-static-website) などのバックエンドなど、ファイルを提供できるウェブサーバーであれば、どのような場所でもホストすることができます。
-    詳細については、 [ビルドとサーブ](guide/build, "「Angular Appsのビルドとサーブ」")、[デプロイ](guide/deployment "Deployment guide")を参照してください。
+    詳細については、 [ビルドとサーブ](guide/build "「Angular Appsのビルドとサーブ」")、[デプロイ](guide/deployment "Deployment guide")を参照してください。
 
 <hr />
 

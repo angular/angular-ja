@@ -77,6 +77,19 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 `true` の場合、このオプションはコンパイラに TypeScript のバージョンをチェックしないように指示します。TypeScript のサポートされていないバージョンが使用されている場合、コンパイラはチェックをスキップし、エラーにはなりません。このオプションを `true` に設定することは TypeScript のサポートされていないバージョンが未定義の動作をするかもしれないのでお勧めできません。このオプションはデフォルトでは `false` です。
 
+### `enableI18nLegacyMessageIdFormat`
+
+Instructs the Angular template compiler to generate legacy ids for messages that are tagged in templates by the `i18n` attribute.
+See [Localizing your app](guide/i18n#mark-text-for-translations) for more information about marking messages for localization.
+
+Set this option to `false` unless your project relies upon translations that were previously generated using legacy ids. Default is `true`.
+
+The pre-Ivy message extraction tooling generated a variety of legacy formats for extracted message ids.
+These message formats have a number of issues, such as whitespace handling and reliance upon information inside the original HTML of a template.
+
+The new message format is more resilient to whitespace changes, is the same across all translation file formats, and can be generated directly from calls to `$localize`.
+This allows `$localize` messages in application code to use the same id as identical `i18n` messages in component templates.
+
 ### `enableIvy`
 
 [Ivy](guide/ivy) コンパイルおよびレンダリングパイプラインを有効にします。バージョン9では、デフォルトは `true` です。バージョン9では、[Ivy をオプトアウト](guide/ivy#opting-out-of-angular-ivy) して、以前のコンパイラである View Engine を引き続き使用できます。
@@ -128,7 +141,7 @@ CLI で生成されたライブラリプロジェクトの場合、dev 構成の
 
 `true` (推奨) の場合、TypeScript を使用してバインディング式を検証するテンプレートコンパイラの[バインディング式の検証](guide/aot-compiler#binding-expression-validation)フェーズを有効にするようにコンパイラに指示します。 For more information, see [Template type checking](guide/template-typecheck).
 
-デフォルトは `false` ですが、CLI コマンド `ng new` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
+デフォルトは `false` ですが、CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
 
 ### `generateCodeForLibraries`
 
@@ -167,7 +180,7 @@ CLI で生成されたライブラリプロジェクトの場合、dev 構成の
 ### `strictMetadataEmit`
 
 `true` の場合、`"skipMetadataEmit"` が `false` のときに `.metadata.json` ファイルにエラーを報告するようにテンプレートコンパイラに指示します。
-このオプションはデフォルトでは `false` です。これは、`"skipMetadataEmit"` が `false` で `"skipTemplateCodeGen"` が `true` の場合にのみ使用します。
+このオプションはデフォルトでは `false` です。これは、`"skipMetadataEmit"` が `false` で `"skipTemplateCodegen"` が `true` の場合にのみ使用します。
 
 このオプションは、`npm` パッケージとのバンドル用に発行された `.metadata.json` ファイルを検証するためのものです。検証は厳密であり、テンプレートコンパイラで使用されたときにエラーが発生しないようなメタデータに対してエラーを発生させる可能性があります。シンボルを説明するコメントに `@dynamic` を含めることで、エクスポートされたシンボルに対してこのオプションによって発生するエラーを抑制することを選択できます。
 

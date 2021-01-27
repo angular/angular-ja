@@ -53,7 +53,7 @@
   </code-example>
 
 1. `name`と`address`のそれぞれに`<input>`フィールドを追加し、それぞれに `formControlName` 属性を付加します。
-  完全なコンポーネントは以下のとおりです。
+  完全なコンポーネントは次のとおりです。
 
   <code-example path="getting-started/src/app/cart/cart.component.html" header="src/app/cart/cart.component.html" region="checkout-form-2">
   </code-example>

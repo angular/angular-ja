@@ -23,6 +23,7 @@ const copyTargets = [
     'content/examples/universal/src/server.ts',
     'content/examples/universal/src/webpack.server.config.js',
     'tools/transforms/templates/lib/githubLinks.html',
+    'tools/transforms/templates/error/error.template.html',
 ];
 
 const promiseGlob = promisify(glob);

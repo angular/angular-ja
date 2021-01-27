@@ -250,7 +250,7 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
 
 1. `shippingCosts` プロパティを定義します。
 
-    <code-example path="getting-started/src/app/shipping/shipping.component.ts" region="props"></code-example>
+    <code-example path="getting-started/src/app/shipping/shipping.component.ts" header="src/app/shipping/shipping.component.ts" region="inject-cart-service"></code-example>
 
 1. `shippingCosts`プロパティを定義して、`CartService` の `getShippingPrices()` メソッドを用いて `shippingCosts` プロパティを設定する。
 

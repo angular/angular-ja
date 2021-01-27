@@ -49,23 +49,19 @@ export class HeroService {
   }
   // #enddocregion getHeroes, getHeroes-1, getHeroes-2
 
-  // #docregion getHeroNo404
   /** IDによりヒーローを取得する。idが見つからない場合は`undefined`を返す。 */
   getHeroNo404<Data>(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/?id=${id}`;
     return this.http.get<Hero[]>(url)
       .pipe(
         map(heroes => heroes[0]), // {0|1} 要素の配列を返す
-        // #enddocregion getHeroNo404
         tap(h => {
           const outcome = h ? `fetched` : `did not find`;
           this.log(`${outcome} hero id=${id}`);
         }),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
-        // #docregion getHeroNo404
       );
   }
-  // #enddocregion getHeroNo404
 
   // #docregion getHero
   /** IDによりヒーローを取得する。見つからなかった場合は404を返却する。 */

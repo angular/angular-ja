@@ -31,7 +31,7 @@
   このメソッドにより、ユーザーは自分の名前と住所を入力することができます。
   また、このメソッドは `CartService` の `clearCart()` メソッドを利用してフォームをリセットし、カートをクリアします。
 
-  カートコンポーネントクラス全体は以下のようになります。
+  カートコンポーネントクラス全体は次のようになります。
 
   <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts">
   </code-example>
@@ -53,7 +53,7 @@
   </code-example>
 
 1. `name`と`address`のそれぞれに`<input>`フィールドを追加し、それぞれに `formControlName` 属性を付加します。
-  完全なコンポーネントは以下の通りです。
+  完全なコンポーネントは以下のとおりです。
 
   <code-example path="getting-started/src/app/cart/cart.component.html" header="src/app/cart/cart.component.html" region="checkout-form-2">
   </code-example>

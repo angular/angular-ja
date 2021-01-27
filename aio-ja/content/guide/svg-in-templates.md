@@ -10,11 +10,11 @@ See the <live-example name="template-syntax"></live-example> for a working examp
 
 ## SVG構文の例
 
-以下の例では、SVG をテンプレートとして使用するための構文を示しています。
+次の例では、SVG をテンプレートとして使用するための構文を示しています。
 
 <code-example path="template-syntax/src/app/svg.component.ts" header="src/app/svg.component.ts"></code-example>
 
-プロパティとイベントバインディングの動作を見るには、以下のコードを `svg.component.svg` ファイルに追加します。
+プロパティとイベントバインディングの動作を見るには、次のコードを `svg.component.svg` ファイルに追加します。
 
 <code-example path="template-syntax/src/app/svg.component.svg" header="src/app/svg.component.svg"></code-example>
 

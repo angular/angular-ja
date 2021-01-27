@@ -6,6 +6,7 @@ const { promisify } = require('util');
 const copyTargets = [
     'content/cli/**/*.md',
     'content/guide/**/*.md',
+    'content/errors/**/*.md',
     'content/marketing/**/*',
     'content/start/**/*.md',
     'content/tutorial/**/*.md',
@@ -22,6 +23,7 @@ const copyTargets = [
     'content/examples/universal/src/server.ts',
     'content/examples/universal/src/webpack.server.config.js',
     'tools/transforms/templates/lib/githubLinks.html',
+    'tools/transforms/templates/error/error.template.html',
 ];
 
 const promiseGlob = promisify(glob);

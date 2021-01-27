@@ -36,6 +36,7 @@ https://github.com/angular/angular-ja/commit/d0b7be4a43769c3ef554b56159747ce626b
 
 - index.html
 
-## Netlifyバッヂの追加
 
-- aio-ja/src/app/layout/footer/footer.component.html
+## エラーガイドのテンプレートの翻訳
+
+- tools/transforms/templates/error/error.template.html

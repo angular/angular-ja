@@ -14,11 +14,6 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - name: Get PR number
-      uses: actions/github-script@v3
-      id: pr-number
-      with:
-        script: return context.issue.number;
     - uses: actions/checkout@v2
       with:
         submodules: true
@@ -45,13 +40,3 @@ jobs:
       run: npm test
     - name: Build
       run: ./build.sh
-    # - name: Preview Deploy
-    #   uses: FirebaseExtended/action-hosting-deploy@v0
-      # A PR from forked repository cannot access secrets.
-      # if: "${{ github.repository_owner == 'angular' }}"
-      # with:
-      #   repoToken: "${{ secrets.GITHUB_TOKEN }}"
-      #   firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-      #   expires: 7d
-      #   projectId: angular-ja
-      #   channelId: "preview-pr${{steps.pr-number.outputs.result}}"

@@ -4,9 +4,10 @@
 name: Deploy to Production
 
 on: 
-  push:
-    branches:
-      - master
+  pull_request_target:
+    # Restrict to use secrets
+    paths-ignore:
+      - '.github/**'
 
 jobs:
   build:
@@ -29,10 +30,10 @@ jobs:
       run: yarn install
     - name: Build
       run: ./build.sh
-    - name: Deploy to Production
+    - name: Deploy preview version
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: "${{ secrets.GITHUB_TOKEN }}"
         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+        expires: 30d
         projectId: angular-ja
-        channelId: live

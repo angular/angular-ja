@@ -6,6 +6,7 @@ const { promisify } = require('util');
 const copyTargets = [
     'content/cli/**/*.md',
     'content/guide/**/*.md',
+    'content/errors/**/*.md',
     'content/marketing/**/*',
     'content/start/**/*.md',
     'content/tutorial/**/*.md',

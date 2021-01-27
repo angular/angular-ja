@@ -218,7 +218,8 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 
 ### プロジェクト設定の取得
 
-1. 目的のプロジェクトを判別するには、`Tree.read()` メソッドを使用して、ワークスペースのルートにあるワークスペース設定ファイル `angular.json` の内容を読み取ります。
+1. 目的のプロジェクトを判別するには、`workspaces.readWorkspace` メソッドを使用して、ワークスペースのルートにあるワークスペース設定ファイル `angular.json` の内容を読み取ります。
+   To use `workspaces.readWorkspace` you need to create a `workspaces.WorkspaceHost` from the `Tree`.
    次のコードをファクトリー関数に追加します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Schema Import)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="workspace">
@@ -226,9 +227,7 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 
   * コンテキストが存在することを確認し、適切なエラーをスローしてください。
 
-  * コンテンツを文字列に読み込んだ後、構造を解析して JSON オブジェクトに変換し、`WorkspaceSchema` に入力します。
-
-1. `WorkspaceSchema` には、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値を含む、ワークスペース設定のすべてのプロパティが含まれています。
+1. `WorkspaceDefinition`の`extensions`プロパティには、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値が含まれています。
    `ng generate` コマンドでプロジェクトが明示的に指定されていない場合は、その値をフォールバックとして使用します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Default Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-fallback">

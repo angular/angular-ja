@@ -13,7 +13,7 @@ StackBlitzは、さまざまな技術を使ってプロジェクトを作成・�
 
 * [HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML "Learning HTML: Guides and tutorials")
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")
-* [TypeScript](https://www.typescriptlang.org/docs/home.html "TypeScript documentation")
+* [TypeScript](https://www.typescriptlang.org/ "TypeScript documentation")
 
 <hr />
 

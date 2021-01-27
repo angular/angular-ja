@@ -1,5 +1,12 @@
 # エントリーコンポーネント
 
+<div class="alert is-helpful">
+
+Entry components have been deprecated with the [Ivy rendering engine](https://angular.io/guide/ivy). 
+For more information, see [entryComponents deprecation](https://angular.io/guide/deprecations#entrycomponents-and-analyze_for_entry_components-no-longer-required) in the [Deprecated APIs and features](https://angular.io/guide/deprecations).
+
+</div>
+
 エントリーコンポーネントは、Angularが型に基づいて命令的にロードするコンポーネント(つまり、そのコンポーネントはテンプレートで参照していないことを意味します)です。 エントリーコンポーネントは、NgModuleでブートストラップするか、ルーティング定義に含めることで指定します。
 
 <div class="alert is-helpful">

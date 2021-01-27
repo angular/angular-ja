@@ -20,6 +20,12 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 既定のAngularワークスペースには、いくつかのTypeScript設定ファイルが含まれています。
 ルートにある`tsconfig.json`は、ワークスペース内のすべてのプロジェクトが継承する基本となるTypeScriptとAngularコンパイラオプションを指定します。
 
+<div class="alert is-helpful">
+
+See the [Angular compiler options](guide/angular-compiler-options) guide for information about what Angular specific options are available.
+
+</div>
+
 TypeScriptとAngularには、型チェック機能と生成される出力を設定するために使用できる幅広いオプションがあります。
 詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
 

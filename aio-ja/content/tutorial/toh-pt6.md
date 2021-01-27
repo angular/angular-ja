@@ -30,7 +30,7 @@
 
 ## データサーバーをシミュレートする
 
-本チュートリアルでは [In-memory Web API](https://github.com/angular/in-memory-web-api "インメモリWebAPI")モジュール
+本チュートリアルでは [In-memory Web API](https://github.com/angular/angular/tree/master/packages/misc/angular-in-memory-web-api "インメモリWebAPI")モジュール
 を利用してリモートデータサーバーとの通信を再現します。
 
 このモジュールをインストールすると、アプリは*インメモリWeb API*がリクエストをインターセプトして、そのリクエストを

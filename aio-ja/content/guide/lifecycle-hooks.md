@@ -24,7 +24,7 @@ Angular の `core` ライブラリ中の 1 つ以上の *ライフサイクル�
 各インターフェースは、単一のフックメソッドのプロトタイプを定義します。その名前は、接頭辞が `ng` のインターフェース名です。
 たとえば、 `OnInit` インターフェースには `ngOnInit()` という名前のフックメソッドがあります。 このメソッドをコンポーネントまたはディレクティブクラスに実装する場合、 Angular はそのコンポーネントまたはディレクティブの入力プロパティをはじめて確認した直後にこのメソッドを呼び出します。
 
-<code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" header="peek-a-boo.component.ts (excerpt)"></code-example>
+<code-example path="lifecycle-hooks/src/app/peek-a-boo.directive.ts" region="ngOnInit" header="peek-a-boo.directive.ts (excerpt)"></code-example>
 
 ライフサイクルフックのすべて（またはいずれか）を実装する必要はなく、必要なものだけを実装します。
 
@@ -463,7 +463,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 
 `<input>` にヒーローの名前を表示する子ビューは次のとおりです:
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" header="ChildComponent"></code-example>
+<code-example path="lifecycle-hooks/src/app/child-view.component.ts" region="child-view" header="ChildViewComponent"></code-example>
 
 `AfterViewComponent` は、 *テンプレート内に* この子ビューを表示します:
 
@@ -527,7 +527,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 `AfterContentComponent` の親からコンテンツをインポートします。
 以下は、親のテンプレートです。
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content-parent.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)"></code-example>
 
 `<app-child>` タグが `<after-content>` タグの間に隠れていることに注意してください。
 *コンテンツをコンポーネントに投影する場合を除き*

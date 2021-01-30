@@ -64,13 +64,21 @@ Angular は、Angular コンポーネントとその依存関係をカスタム�
 変換処理では、`NgElementConstructor` インターフェースが実装され、
 コンポーネントが自分でブートストラップするインスタンスを生成するように設定されたコンストラクタークラスを作成されます。
 
-設定されたコンストラクターとその関連した Custom Elements タグをブラウザの `CustomElementRegistry` に登録するには、
-JavaScript の関数 `customElements.define()` を使ってください。
+設定されたコンストラクターとその関連した Custom Elements タグをブラウザの [`CustomElementRegistry`](https://developer.mozilla.org/ja/docs/Web/API/CustomElementRegistry) に登録するには、ビルトインの [`customElements.define()`](https://developer.mozilla.org/ja/docs/Web/API/CustomElementRegistry/define)関数を使ってください。
 ブラウザは、登録された要素のタグに遭遇した際に、Custom Elements のインスタンスを生成するためにコンストラクターを使用します。
 
 <div class="lightbox">
   <img src="generated/images/guide/elements/createElement.png" alt="Transform a component to a custom element" class="left">
 </div>
+
+<div class="alert is-important">
+
+  Avoid using the [`@Component`](api/core/Component) [selector](api/core/Directive#selector) as the custom-element tag name.
+  This can lead to unexpected behavior, due to Angular creating two component instances for a single DOM element:
+  One regular Angular component and a second one using the custom element.
+
+</div>
+
 
 ### マッピング
 

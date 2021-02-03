@@ -258,7 +258,7 @@
               "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
               "translated": true
             }
-          ]   
+          ]
         },
         {
           "title": "依存性の注入",
@@ -493,7 +493,6 @@
             }
           ]
         }
-        
       ]
     },
     {
@@ -528,184 +527,184 @@
           "url": "guide/lightweight-injection-tokens",
           "title": "Lightweight Injection Tokens for Libraries",
           "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
-        },
+        }
+      ]
+    },
+    {
+      "title": "Angularツール",
+      "tooltip": "Tools to help you build your Angular applications.",
+      "children": [
         {
-          "title": "Angularツール",
-          "tooltip": "Tools to help you build your Angular applications.",
+          "title": "開発ワークフロー",
+          "tooltip": "Build, and deployment information.",
           "children": [
             {
-              "title": "開発ワークフロー",
-              "tooltip": "Build, and deployment information.",
+              "url": "guide/deployment",
+              "title": "Deployment",
+              "tooltip": "Learn how to deploy your Angular app."
+            },
+            {
+              "title": "AOT Compiler",
+              "tooltip": "Understanding ahead-of-time compilation.",
               "children": [
                 {
-                  "url": "guide/deployment",
-                  "title": "Deployment",
-                  "tooltip": "Learn how to deploy your Angular app."
+                  "url": "guide/aot-compiler",
+                  "title": "事前コンパイル",
+                  "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+                  "translated": true
                 },
                 {
-                  "title": "AOT Compiler",
-                  "tooltip": "Understanding ahead-of-time compilation.",
-                  "children": [
-                    {
-                      "url": "guide/aot-compiler",
-                      "title": "事前コンパイル",
-                      "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
-                      "translated": true
-                    },
-                    {
-                      "url": "guide/angular-compiler-options",
-                      "title": "Angularコンパイラオプション",
-                      "tooltip": "AoTコンパイラの構成オプション。",
-                      "translated": true
-                    },
-                    {
-                      "url": "guide/aot-metadata-errors",
-                      "title": "AoT Metadata Errors",
-                      "tooltip": "Troubleshooting AOT compilation."
-                    },
-                    {
-                      "url": "guide/template-typecheck",
-                      "title": "テンプレート型チェック",
-                      "tooltip": "Template type-checking in Angular.",
-                      "translated": true
-                    }
-                  ]
+                  "url": "guide/angular-compiler-options",
+                  "title": "Angularコンパイラオプション",
+                  "tooltip": "AoTコンパイラの構成オプション。",
+                  "translated": true
                 },
                 {
-                  "url": "guide/build",
-                  "title": "ビルドとサーブ",
-                  "tooltip": "Angularアプリのビルドとサーブ",
+                  "url": "guide/aot-metadata-errors",
+                  "title": "AoT Metadata Errors",
+                  "tooltip": "Troubleshooting AOT compilation."
+                },
+                {
+                  "url": "guide/template-typecheck",
+                  "title": "テンプレート型チェック",
+                  "tooltip": "Template type-checking in Angular.",
                   "translated": true
                 }
               ]
             },
             {
-              "url": "guide/cli-builder",
-              "title": "CLI Builders",
-              "tooltip": "Using builders to customize Angular CLI."
-            },
-            {
-              "url": "guide/universal",
-              "title": "サーバーサイドレンダリング",
-              "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-              "translated": true
-            },
-            {
-              "url": "guide/language-service",
-              "title": "Language Service",
-              "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
+              "url": "guide/build",
+              "title": "ビルドとサーブ",
+              "tooltip": "Angularアプリのビルドとサーブ",
               "translated": true
             }
           ]
         },
         {
-          "title": "チュートリアル",
-          "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
+          "url": "guide/cli-builder",
+          "title": "CLI Builders",
+          "tooltip": "Using builders to customize Angular CLI."
+        },
+        {
+          "url": "guide/universal",
+          "title": "サーバーサイドレンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "translated": true
+        },
+        {
+          "url": "guide/language-service",
+          "title": "Language Service",
+          "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
+          "translated": true
+        }
+      ]
+    },
+    {
+      "title": "チュートリアル",
+      "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
+      "children": [
+        {
+          "title": "チュートリアル: Tour of Heroes",
+          "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
           "children": [
             {
-              "title": "チュートリアル: Tour of Heroes",
-              "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
-              "children": [
-                {
-                  "url": "tutorial",
-                  "title": "イントロダクション",
-                  "tooltip": "Tour of Heroesアプリとチュートリアルの紹介",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt0",
-                  "title": "プロジェクトの作成",
-                  "tooltip": "アプリケーションシェルを作成します",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt1",
-                  "title": "1. ヒーローエディター",
-                  "tooltip": "Part 1: シンプルなエディターを組み立てます",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt2",
-                  "title": "2. リストの表示",
-                  "tooltip": "Part 2: ヒーローのリストを備えたmaster/detailページを組み立てます",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt3",
-                  "title": "3. フィーチャーコンポーネントの作成",
-                  "tooltip": "Part 3: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt4",
-                  "title": "4. サービスの追加",
-                  "tooltip": "Part 4: ヒーローのデータを管理するための再利用可能なサービスを作ります",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt5",
-                  "title": "5. アプリ内ナビゲーションの追加",
-                  "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
-                  "translated": true
-                },
-                {
-                  "url": "tutorial/toh-pt6",
-                  "title": "6. サーバーからデータの取得",
-                  "tooltip": "Part 6: HTTPを使ってヒーローのデータを取得・保存します",
-                  "translated": true
-                }
-              ]
-            },
-            {
-              "title": "ルーティング",
-              "tooltip": "End-to-end tutorials for learning about Angular's router.",
-              "children": [
-                {
-                  "url": "guide/router-tutorial",
-                  "title": "Using Angular Routes in a Single-page Application",
-                  "tooltip": "A tutorial that covers many patterns associated with Angular routing."
-                },
-                {
-                  "url": "guide/router-tutorial-toh",
-                  "title": "Router tutorial: tour of heroes",
-                  "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
-                }
-              ]
-            },
-            {
-              "url": "guide/forms",
-              "title": "Building a Template-driven Form",
-              "tooltip": "Create a template-driven form using directives and Angular template syntax."
-            },
-            {
-              "url": "guide/web-worker",
-              "title": "Web Worker",
-              "tooltip": "Using web workers for background processing.",
+              "url": "tutorial",
+              "title": "イントロダクション",
+              "tooltip": "Tour of Heroesアプリとチュートリアルの紹介",
               "translated": true
             },
             {
-              "title": "Angularライブラリ",
-              "tooltip": "Extending Angular with shared libraries.",
-              "children": [
-                {
-                  "url": "guide/libraries",
-                  "title": "ライブラリの概要",
-                  "tooltip": "ライブラリを使用または作成する方法と時期を理解します。",
-                  "translated": true
-                },
-                {
-                  "url": "guide/using-libraries",
-                  "title": "公開ライブラリの使用",
-                  "tooltip": "公開ライブラリをアプリに統合します。",
-                  "translated": true
-                },
-                {
-                  "url": "guide/creating-libraries",
-                  "title": "ライブラリの作成",
-                  "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
-                  "translated": true
-                }
-              ]
+              "url": "tutorial/toh-pt0",
+              "title": "プロジェクトの作成",
+              "tooltip": "アプリケーションシェルを作成します",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt1",
+              "title": "1. ヒーローエディター",
+              "tooltip": "Part 1: シンプルなエディターを組み立てます",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt2",
+              "title": "2. リストの表示",
+              "tooltip": "Part 2: ヒーローのリストを備えたmaster/detailページを組み立てます",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt3",
+              "title": "3. フィーチャーコンポーネントの作成",
+              "tooltip": "Part 3: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt4",
+              "title": "4. サービスの追加",
+              "tooltip": "Part 4: ヒーローのデータを管理するための再利用可能なサービスを作ります",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt5",
+              "title": "5. アプリ内ナビゲーションの追加",
+              "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt6",
+              "title": "6. サーバーからデータの取得",
+              "tooltip": "Part 6: HTTPを使ってヒーローのデータを取得・保存します",
+              "translated": true
+            }
+          ]
+        },
+        {
+          "title": "ルーティング",
+          "tooltip": "End-to-end tutorials for learning about Angular's router.",
+          "children": [
+            {
+              "url": "guide/router-tutorial",
+              "title": "Using Angular Routes in a Single-page Application",
+              "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+            },
+            {
+              "url": "guide/router-tutorial-toh",
+              "title": "Router tutorial: tour of heroes",
+              "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
+            }
+          ]
+        },
+        {
+          "url": "guide/forms",
+          "title": "Building a Template-driven Form",
+          "tooltip": "Create a template-driven form using directives and Angular template syntax."
+        },
+        {
+          "url": "guide/web-worker",
+          "title": "Web Worker",
+          "tooltip": "Using web workers for background processing.",
+          "translated": true
+        },
+        {
+          "title": "Angularライブラリ",
+          "tooltip": "Extending Angular with shared libraries.",
+          "children": [
+            {
+              "url": "guide/libraries",
+              "title": "ライブラリの概要",
+              "tooltip": "ライブラリを使用または作成する方法と時期を理解します。",
+              "translated": true
+            },
+            {
+              "url": "guide/using-libraries",
+              "title": "公開ライブラリの使用",
+              "tooltip": "公開ライブラリをアプリに統合します。",
+              "translated": true
+            },
+            {
+              "url": "guide/creating-libraries",
+              "title": "ライブラリの作成",
+              "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
+              "translated": true
             }
           ]
         }
@@ -867,7 +866,7 @@
                   "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
                   "translated": true
                 },
-        
+
                 {
                   "url": "guide/typescript-configuration",
                   "title": "TypeScript設定",
@@ -1026,7 +1025,7 @@
                 }
               ]
             }
-            
+
           ]
         },
         {

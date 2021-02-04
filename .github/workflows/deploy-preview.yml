@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'actions: preview_allowed')
+    if: "contains(github.event.pull_request.labels.*.name, 'actions: preview_allowed')"
     strategy:
       matrix:
         node-version: [12.x]

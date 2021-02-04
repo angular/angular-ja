@@ -5,12 +5,12 @@ name: Deploy preview version
 
 on: 
   pull_request_target:
-    types: [labeled]
+    types: [labeled, synchronize]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "contains(github.event.pull_request.labels.*.name, 'actions: preview_allowed')"
+    if: contains(github.event.pull_request.labels.*.name, 'safe to deploy')
     strategy:
       matrix:
         node-version: [12.x]

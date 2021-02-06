@@ -100,7 +100,7 @@ Angularは、コントロールの値が変更されるたびにこれらの関�
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="form-group" header="reactive/hero-form-reactive.component.ts (validator functions)"></code-example>
 
- このサンプルでは、`name`コントロールは、2つの組み込みバリデーター&mdash;`Validators.required`と`Validators.minLength(4)`&mdash;と1つのカスタムバリデーター`forbiddenNameValidator`を設定します。詳細は、以下の[カスタムバリデーター](#custom-validators)を参照してください。
+このサンプルでは、`name`コントロールは、2つの組み込みバリデーター&mdash;`Validators.required`と`Validators.minLength(4)`&mdash;と1つのカスタムバリデーター`forbiddenNameValidator`を設定します。詳細は、次の[カスタムバリデーター](#custom-validators)を参照してください。
 
 これらのバリデーターはすべて同期バリデーターであるため、2番目の引数として渡します。関数を配列として渡すことで、複数のバリデーターをサポートできます。
 
@@ -143,7 +143,7 @@ Observableの場合は、Observableを完了する必要があります。フォ
 
 ### カスタムバリデーターをリアクティブフォームに追加する
 
-リアクティブフォームでは、関数を`FormControl`に直接渡すことでカスタムバリデータを追加できます。
+リアクティブフォームでは、関数を`FormControl`に直接渡すことでカスタムバリデーターを追加できます。
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.1.ts" region="custom-validator" header="reactive/hero-form-reactive.component.ts (validator functions)"></code-example>
 
@@ -152,16 +152,15 @@ Observableの場合は、Observableを完了する必要があります。フォ
 ### カスタムバリデーターをテンプレート駆動フォームに追加する
 
 テンプレート駆動フォームでは、バリデーター関数をラップしているディレクティブをテンプレートに追加します。
-例えば、対応する`ForbiddenValidatorDirective`は`forbiddenNameValidator`のラッパーとして機能します。
+たとえば、対応する`ForbiddenValidatorDirective`は`forbiddenNameValidator`のラッパーとして機能します。
 
 次の例に示すように、ディレクティブはそれ自体を`NG_VALIDATORS`プロバイダーに登録するため、Angularは検証プロセスにおけるディレクティブの役割を認識します。
 `NG_VALIDATORS`は、バリデーターの拡張可能なコレクションを備えた事前定義されたプロバイダーです。
 
 <code-example path="form-validation/src/app/shared/forbidden-name.directive.ts" region="directive-providers" header="shared/forbidden-name.directive.ts (providers)"></code-example>
 
-ディレクティブクラスは`Validator`インターフェイスを実装するため、Angularのフォームと
+ディレクティブクラスは`Validator`インターフェースを実装するため、Angularのフォームと
 簡単に統合できます。
-これが、全てがどのように行われるかを理解するのに役立つ残りのディレクティブです。
 これは、すべてがどのように行われるかを理解するのに役立つ残りの
 ディレクティブです。
 
@@ -186,7 +185,7 @@ Observableの場合は、Observableを完了する必要があります。フォ
 ## コントロールステータスCSSクラス
 
 Angularは、多くのコントロールプロパティをCSSクラスとしてフォームコントロール要素に自動的にミラーリングします。これらのクラスを使用して、フォームの状態に応じてフォーム制御要素のスタイルを設定できます。
-現在サポートされているクラスは次の通りです：
+現在サポートされているクラスは次のとおりです：
 
 * `.ng-valid`
 * `.ng-invalid`
@@ -206,10 +205,10 @@ Angularは、多くのコントロールプロパティをCSSクラスとして�
 ## クロスフィールドバリデーション
 
 クロスフィールドバリデーションは、フォーム内の異なる複数のフィールドの値を比較し、それらを組み合わせて許容または拒否する[カスタムバリデーター](#custom-validators "Read about custom validators")です。
-例えば、相互に互換性のないオプションを提供するフォームがある場合に、ユーザーはAまたはBを選択できるが、両方を選択できないようにすることができます。
-一部のフィールド値が他の値に依存する場合もあります。例えば、ユーザーはAが選択されている場合にのみ、Bを選択できるようにすることができます。
+たとえば、相互に互換性のないオプションを提供するフォームがある場合に、ユーザーはAまたはBを選択できるが、両方を選択できないようにすることができます。
+一部のフィールド値が他の値に依存する場合もあります。たとえば、ユーザーはAが選択されている場合にのみ、Bを選択できるようにすることができます。
 
-次のクロスバリデーションの例は、以下の方法を示しています。
+次のクロスバリデーションの例は、次の方法を示しています。
 
 * 2つの兄弟コントロールの値に基づいて、リアクティブまたはテンプレートベースのフォーム入力を検証します。
 * ユーザーがフォームを操作し、検証が失敗した後、説明的なエラーメッセージを表示します。
@@ -253,11 +252,11 @@ const heroForm = new FormGroup({
 値が一致しない場合、ヒーローのアイデンティティは秘密のままであり、両方とも有効となり、バリデーターはnullを返します。
 値が一致する場合、ヒーローのアイデンティティは明らかになり、バリデーターはエラーオブジェクトを返すことでフォームを無効としてマークします。
 
-より良いユーザー体験を提供するために、フォームが無効な場合、テンプレートは適切なエラーメッセージを表示します。
+よりよいユーザー体験を提供するために、フォームが無効な場合、テンプレートは適切なエラーメッセージを表示します。
 
 <code-example path="form-validation/src/app/reactive/hero-form-reactive.component.html" region="cross-validation-error-message" header="reactive/hero-form-template.component.html"></code-example>
 
-この`*ngIf`は、`FormGroup`が`identityRevealed`バリデーターによってクロスバリデーションエラーを持つ場合に、エラーを表示しますが、これはユーザーが[フォーム入力](#dirty-or-touched)を終了した場合に限ります。
+この`*ngIf`は、`FormGroup`が`identityRevealed`バリデーターによってクロスバリデーションエラーをもつ場合に、エラーを表示しますが、これはユーザーが[フォーム入力](#dirty-or-touched)を終了した場合に限ります。
 
 ### テンプレート駆動フォームにクロスバリデーションを追加する
 
@@ -304,11 +303,11 @@ const heroForm = new FormGroup({
 新しいヒーロー達は絶えず入隊して、古いヒーロー達はサービスを離れます。利用可能なalter egoのリストが事前に取得できないようにするためです。
 潜在的なalter egoの検証をするには、バリデーターは現時点で存在するヒーローの中央データベースを確認するために、非同期オペレーションを開始する必要があります。
 
-次のコードは、`AsyncValidator`インターフェイスを実装するバリデータークラス`UniqueAlterEgoValidator`を作成しています。
+次のコードは、`AsyncValidator`インターフェースを実装するバリデータークラス`UniqueAlterEgoValidator`を作成しています。
 
 <code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator"></code-example>
 
-コンストラクタは、次のインターフェイスを定義するために`HeroesService`を注入しています。
+コンストラクターは、次のインターフェースを定義するために`HeroesService`を注入しています。
 
 ```typescript
 interface HeroesService {

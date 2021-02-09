@@ -1,0 +1,13 @@
+diff --git a/aio/src/app/app.module.ts b/aio/src/app/app.module.ts
+index 8e604d2696..b745538c68 100644
+--- a/aio/src/app/app.module.ts
++++ b/aio/src/app/app.module.ts
+@@ -143,7 +143,7 @@ export const svgIconProviders = [
+     MatToolbarModule,
+     SwUpdatesModule,
+     SharedModule,
+-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
++    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production && false}),
+   ],
+   declarations: [
+     AppComponent,

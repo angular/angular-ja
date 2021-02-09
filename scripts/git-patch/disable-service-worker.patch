@@ -7,7 +7,7 @@ index 8e604d2696..b745538c68 100644
      SwUpdatesModule,
      SharedModule,
 -    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: false}),
++    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production && false}),
    ],
    declarations: [
      AppComponent,

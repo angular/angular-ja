@@ -1183,8 +1183,6 @@ _編集中の納税申告書_は、ゲッターとセッターで実装されて
 </div>
 
 
-<hr />
-
 ## 依存性の注入の詳細について
 
 Angularの依存性の注入の詳細については、DIプロバイダー[DI プロバイダー](guide/dependency-injection-providers)および[DI イン・アクション](guide/dependency-injection-in-action)ガイドを参照してください。

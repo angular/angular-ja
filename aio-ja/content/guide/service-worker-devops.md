@@ -7,8 +7,6 @@
 次の基本的理解があること
 * [Service Workerと通信する](guide/service-worker-communications)
 
-<hr />
-
 ## Service Workerとアプリケーションリソースのキャッシュ
 
 概念的には、Angular Service Workerは、エンドユーザーのWebブラウザにインストールされているフォワードキャッシュまたはCDNエッジと考えることができます。Service Workerの仕事は、ネットワークを待つことなく、Angularアプリケーションがリソースまたはデータを要求したら、ローカルキャッシュからその要求を満たすことです。他のキャッシュと同様に、コンテンツの期限切れおよび更新方法に関するルールがあります。

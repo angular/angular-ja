@@ -158,8 +158,6 @@ http-server -p 8080 -c-1 dist/<project-name>
 
 Service Workerは、あなたのアプリケーションの更新版を*バックグラウンドで*インストールし、次にページを読み込んだりリロードしたりすると、Service Workerは最新のバージョンに切り替わります。
 
-<hr />
-
 ## もっとAngular Service Workerを知りたい
 
 次の記事がお勧めです。

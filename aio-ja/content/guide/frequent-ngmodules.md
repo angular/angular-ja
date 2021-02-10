@@ -115,8 +115,6 @@ Angularは`CommonModule`を代わりに使用するように指示するエラ�
   <img src="generated/images/guide/frequent-ngmodules/browser-module-error.gif" width=750 alt="BrowserModule error">
 </div>
 
-<hr />
-
 
 ## NgModuleについてのさらに詳しい情報
 

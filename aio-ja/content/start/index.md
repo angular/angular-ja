@@ -15,11 +15,8 @@ StackBlitzは、さまざまな技術を使ってプロジェクトを作成・�
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")
 * [TypeScript](https://www.typescriptlang.org/ "TypeScript documentation")
 
-<hr />
-
 
 {@a components}
-
 ## サンプルアプリケーションの見学
 
 Angularアプリケーションはコンポーネントを使って構築します。

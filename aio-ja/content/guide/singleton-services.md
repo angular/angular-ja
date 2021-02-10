@@ -171,8 +171,6 @@ Angularは、
  </code-pane>
 </code-tabs>
 
-<hr />
-
 ## NgModuleについてのさらに詳しい情報
 
 あなたはこちらにも興味があるかもしれません:

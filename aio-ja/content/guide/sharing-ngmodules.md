@@ -53,8 +53,6 @@ Angularの[依存性の注入](guide/dependency-injection)を使用すること�
 サービスの共有については[プロバイダー](guide/providers)を参照してください。
 
 
-<hr />
-
 ## NgModuleのさらに詳しい情報
 
 あなたはこちらにも興味があるかもしれません:

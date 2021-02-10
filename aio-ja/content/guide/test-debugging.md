@@ -24,5 +24,3 @@ If your tests aren't working as you expect them to, you can inspect and debug th
 <div class="lightbox">
   <img src='generated/images/guide/testing/karma-1st-spec-debug.png' alt="Karma debugging">
 </div>
-
-<hr>

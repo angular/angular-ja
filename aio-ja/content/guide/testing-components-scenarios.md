@@ -121,10 +121,7 @@ Angularのテスト環境では、テストがコンポーネントのタイト�
 
 </div>
 
-<hr>
-
 {@a dispatch-event}
-
 #### _dispatchEvent()_を使用してinputの値を変更する
 
 ユーザーインプットをシミュレートするために、input要素を探して`value`プロパティをセットします。
@@ -139,8 +136,6 @@ Angularは、input要素の`value`プロパティがセットされたことを�
 次の例では、正しい手順を示しています。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe" header="app/hero/hero-detail.component.spec.ts (pipe test)"></code-example>
-
-<hr>
 
 ## 外部ファイルを使用したコンポーネント
 
@@ -286,10 +281,7 @@ Jasmineのマッチャーの第2引数(たとえば、 `'expected name'`)は、�
 2番目のテストでは、ユーザー名の変更の影響を検証します。
 3番目のテストでは、ログインしているユーザーがいない場合、コンポーネントが適切なメッセージを表示していることを確認します。
 
-<hr>
-
 {@a component-with-async-service}
-
 ## 非同期サービスを使用するコンポーネント
 
 このサンプルでは、`AboutComponent`テンプレートは`TwainComponent`をホストします。
@@ -655,8 +647,6 @@ RxJSの`last()`演算子は、完了する前のObservableの最後の値を発�
   path="testing/src/app/twain/twain.component.spec.ts"
   region="spy-done-test"></code-example>
 
-<hr>
-
 {@a marble-testing}
 ## コンポーネントのマーブルテスト
 
@@ -761,10 +751,7 @@ RxJSマーブルテストは、このガイドの範囲を超えて、豊富な�
 [公式ドキュメント](https://github.com/ReactiveX/rxjs/blob/master/doc/writing-marble-tests.md)から始めて、
 ウェブ上で学習してください。
 
-<hr>
-
 {@a component-with-input-output}
-
 ## インプットとアウトプットを使用したコンポーネント
 
 インプットとアウトプットをもつコンポーネントは、通常、ホストコンポーネントのビューテンプレート内に配置されます。
@@ -950,10 +937,7 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
   region="click-test-3"
   header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)"></code-example>
 
-<hr>
-
 {@a component-inside-test-host}
-
 ## テストホスト内部のコンポーネント
 
 さきほどのテストでは、ホストである`DashboardComponent`自身をロールプレイしました。
@@ -1012,10 +996,7 @@ _テストホスト_のテストのセットアップは、スタンドアロン
 選択したイベントテストのみが異なります。
 これは、選択された`DashboardHeroComponen`のヒーローが実際にホストコンポーネントへのイベントバインディングを通じて登ってきたことを確認します。
 
-<hr>
-
 {@a routing-component}
-
 ## ルーティングコンポーネント
 
 _ルーティングコンポーネント_は、`Router`に別のコンポーネントにナビゲートするように指示するコンポーネントです。
@@ -1165,7 +1146,6 @@ Observableより取得した`id`が既存のヒーローを参照していると
   region="route-no-id"
   header="app/hero/hero-detail.component.spec.ts (no id)"></code-example>
 
-<hr>
 {@a nested-component-tests}
 
 ## ネストしたコンポーネントのテスト
@@ -1289,8 +1269,6 @@ Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作�
 `routerLink`属性をもつアンカーに`RouterLinkStubDirective`を適用しますが、
 `<app-welcome>`タグと`<router-outlet>`タグは無視します。
 
-<hr>
-
 {@a routerlink}
 ## _RouterLink_を使用したコンポーネント
 
@@ -1397,10 +1375,7 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 
 </div>
 
-<hr>
-
 {@a page-object}
-
 ## _page_ オブジェクトを使用する
 
 `HeroDetailComponent`は、タイトル、2つのヒーローのフィールド、2つのボタンをもつシンプルなビューです。
@@ -1453,8 +1428,6 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="selected-tests"
   header="app/hero/hero-detail.component.spec.ts (selected tests)"></code-example>
-
-<hr>
 
 {@a compile-components}
 ## _compileComponents()_ を呼び出す
@@ -1597,10 +1570,7 @@ CLIによって生成されたコンポーネントテストファイルは、
 
 このガイドのテストでは必要になったときだけ`commpileComponents`を呼び出します。
 
-<hr>
-
 {@a import-module}
-
 ## モジュールのインポートを使用してセットアップする
 
 これまでのコンポーネントテストでは、次のようにいくつかの`declarations`でテストモジュールを構成しました:
@@ -1682,10 +1652,7 @@ Angularはエラーをスローします。
 
 </div>
 
-<hr>
-
 {@a component-override}
-
 ## コンポーネントのプロバイダーをオーバーライドする
 
 `HeroDetailComponent`は自分自身の`HeroDetailService`を提供します。
@@ -1794,5 +1761,3 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 および`overridePipe`メソッドを提供します。
 
 あなた自身のオプションと組み合わせを探しましょう。
-
-<hr>

@@ -106,8 +106,6 @@ CLIがフィーチャーモジュールのために`CustomerDashboardComponent`�
   <img src="generated/images/guide/feature-modules/feature-module.png" alt="feature module component">
 </div>
 
-<hr />
-
 ## NgModuleについてのさらに詳しい情報
 
 あなたは次の記事に興味があるかもしれません:

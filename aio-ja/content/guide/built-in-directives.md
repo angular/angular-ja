@@ -10,11 +10,7 @@ See the <live-example></live-example> for a working example containing the code 
 
 自作のディレクティブの作り方といった詳細については、[属性ディレクティブ](guide/attribute-directives)や[構造ディレクティブ](guide/structural-directives)を参照してください。
 
-
-<hr/>
-
 {@a attribute-directives}
-
 ## 組み込み属性ディレクティブ {@a built-in-attribute-directives}
 
 属性ディレクティブは、他の HTML 要素、属性、プロパティ、コンポーネントの
@@ -29,10 +25,7 @@ See the <live-example></live-example> for a working example containing the code 
 * [`NgStyle`](#ngStyle) - 一連の HTML スタイルを追加および削除する
 * [`NgModel`](#ngModel) - HTML の form 要素への双方向データバインディング
 
-<hr/>
-
 {@a ngClass}
-
 ## `NgClass`
 
 `ngClass` を使うと、CSS クラスの追加と削除を同時にできます。
@@ -96,10 +89,7 @@ See the <live-example></live-example> for a working example containing the code 
 </div>
 
 
-<hr/>
-
 {@a ngModel}
-
 ## `[(ngModel)]`: 双方向バインディング {@a ngmodel-two-way-binding}
 
 `NgModel` ディレクティブを使うと、データプロパティを表示したり、
@@ -168,10 +158,7 @@ Angular の基本的な[双方向バインディングの構文](guide/two-way-b
   <img src='generated/images/guide/built-in-directives/ng-model-anim.gif' alt="NgModel variations">
 </div>
 
-<hr/>
-
 {@a structural-directives}
-
 ## 組み込みの _構造_ ディレクティブ {@a built-in-structural-directives}
 
 構造ディレクティブは HTML レイアウトを担当します。
@@ -199,10 +186,7 @@ DOM 構造の形成、または再形成を行います。
 
 </div>
 
-<hr/>
-
 {@a ngIf}
-
 ## NgIf
 
 ホスト要素に
@@ -265,8 +249,6 @@ Angular は変更を検出し続けることがあります。
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-2" header="src/app/app.component.html"></code-example>
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-2b" header="src/app/app.component.html"></code-example>
-
-<hr/>
 
 {@a ngFor}
 ## `NgFor`
@@ -383,8 +365,6 @@ Angular はそれを追跡し、同じ `id` に対してはサーバーに再問
 他のディレクティブが使えない非公開 API を特別に使っているといったことはありません。
 
 </div>
-
-<hr/>
 
 {@a ngSwitch}
 ## `NgSwitch` ディレクティブ {@a the-ngswitch-directives}

@@ -52,8 +52,6 @@ Custom Elements がページ上に置かれると、ブラウザは登録され�
   <img src="generated/images/guide/elements/customElement1.png" alt="Custom element in browser" class="left">
 </div>
 
-<hr class="clear">
-
 ## コンポーネントをカスタムエレメンツに変換する
 
 Angular は、Angular コンポーネントとその依存関係をカスタム要素に変換する

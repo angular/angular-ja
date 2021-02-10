@@ -144,10 +144,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
   </tr>
 </table>
 
-<hr>
-
 {@a testbed-class-summary}
-
 #### _TestBed_ クラスの概要
 
 `TestBed`クラスは、主要なAngularテストユーティリティの1つです。

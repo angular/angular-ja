@@ -98,7 +98,7 @@ export class AppComponent {
 
 ## ターゲット固有ファイルの置換の設定 {@a configure-target-specific-file-replacements}
 
-メインのCLI設定ファイル`angular.json`には、各ビルドターゲットの設定に`fileReplacements`セクションが含まれており、これにより任意のファイルをターゲット固有バージョンのものに置き換えることができます。
+メインのCLI設定ファイル`angular.json`には、各ビルドターゲットの設定に`fileReplacements`セクションが含まれており、これによりTypeScriptプログラム中の任意のファイルをターゲット固有バージョンのものに置き換えることができます。
 これは本番やステージングなどの固有の環境をターゲットとするビルドにおいて、ターゲット固有のコードや変数を含めるのに便利です。
 
 デフォルトではファイルは置き換えられません。

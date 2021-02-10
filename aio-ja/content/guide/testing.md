@@ -275,8 +275,6 @@ exports.config = config;
 </div>
 
 
-<hr />
-
 ## More info on testing
 
 After you've set up your app for testing, you may find the following testing  guides useful.

@@ -97,9 +97,6 @@ Angularは、`@Component()`で指定された`providers`をもつコンポーネ
 詳しくは、[階層的インジェクター](guide/hierarchical-dependency-injection)を参照してください。
 
 
-
-<hr>
-
 ## NgModuleについてのさらに詳しい情報
 
 あなたはこちらにも興味があるかもしれません:

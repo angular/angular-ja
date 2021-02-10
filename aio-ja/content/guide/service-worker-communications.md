@@ -7,8 +7,6 @@
 次の基本的理解があること
 * [Service Workerを始める](guide/service-worker-getting-started)
 
-<hr />
-
 
 ## `SwUpdate`サービス
 

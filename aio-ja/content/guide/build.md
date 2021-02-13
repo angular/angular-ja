@@ -267,7 +267,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
 <div class="alert is-important">
 
-Angular アプリケーションでは、CommonJS モジュールに依存することは避けた方が良いでしょう。
+Angular アプリケーションでは、CommonJS モジュールに依存することは避けた方がよいでしょう。
 CommonJS モジュールに依存すると、バンドラーやミニファイヤーがアプリケーションを最適化できなくなり、結果的にバンドルサイズが大きくなります。
 代わりに、アプリケーション全体で [ECMAScript モジュール](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)を使用することをお勧めします。
 詳細については、[How CommonJS is making your bundles larger](https://web.dev/commonjs-larger-bundles/) を参照してください。
@@ -335,7 +335,7 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 これまでデフォルトでオンになっていた Autoprefixer の CSS グリッドレイアウトサポートが、Angular 8 以降ではデフォルトでオフになっています。
 
 IE 10/11 で CSS グリッドを使うには、`autoplace` オプションを使って明示的に有効にする必要があります。
-これを行うには、グローバルスタイルファイルの先頭 (または特定の CSS セレクタスコープ内) に以下を追加します。
+これを行うには、グローバルスタイルファイルの先頭 (または特定の CSS セレクタースコープ内) に以下を追加します。
 
 ```
 /* autoprefixer grid: autoplace */

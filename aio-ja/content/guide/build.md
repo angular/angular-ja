@@ -269,7 +269,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
 Angular アプリケーションでは、CommonJS モジュールに依存することは避けた方がよいでしょう。
 CommonJS モジュールに依存すると、バンドラーやミニファイヤーがアプリケーションを最適化できなくなり、結果的にバンドルサイズが大きくなります。
-代わりに、アプリケーション全体で [ECMAScript モジュール](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)を使用することをお勧めします。
+代わりに、アプリケーション全体で [ECMAScript モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import)を使用することをお勧めします。
 詳細については、[How CommonJS is making your bundles larger](https://web.dev/commonjs-larger-bundles/) を参照してください。
 
 </div>

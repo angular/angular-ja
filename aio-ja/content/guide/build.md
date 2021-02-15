@@ -1,16 +1,16 @@
-# Angularアプリのビルドとサーブ
+# Angularアプリのビルドとサーブ {@a building-and-serving-angular-apps}
 
 このページではAngularプロジェクトのビルド固有の設定オプションを取り上げます。
 
 {@a app-environments}
 
-## アプリケーション環境の設定
+## アプリケーション環境の設定 {@a configuring-application-environments}
 
 *stage*や*production*など、さまざまなデフォルト設定を持ったさまざまな名前付きビルド設定をプロジェクトに定義することができます。
 
 それぞれの名前付き設定は、`build`、`serve`や`test`など、さまざまな[builderターゲット](guide/glossary#target)に適用されるオプションすべてについてデフォルト設定をもつことができます。[Angular CLI](cli)の`build`、`serve`、そして`test`コマンドは、ファイルを目的のターゲット環境に適したバージョンに置き換えることができます。
 
-### 環境固有のデフォルトの設定
+### 環境固有のデフォルトの設定 {@a configure-environment-specific-defaults}
 
 プロジェクトの`src/environment/`フォルダにはデフォルト環境を提供する基本設定ファイル`environment.ts`が含まれています。
 ターゲット固有の設定ファイルを追加すれば、本番やステージングなどの環境用にデフォルト設定をオーバーライドすることができます。
@@ -53,7 +53,7 @@ export const environment = {
 };
 ```
 
-### アプリで環境固有の変数の使用
+### アプリでの環境固有の変数の使用 {@a using-environment-specific-variables-in-your-app}
 
 次のアプリケーション構造は本番環境およびステージング環境用のビルドターゲットを設定しています:
 
@@ -263,19 +263,19 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
  </table>
 
 {@a commonjs }
-## Configuring CommonJS dependencies
+## CommonJS の依存関係の設定 {@a configuring-commonjs-dependencies}
 
 <div class="alert is-important">
 
-It is recommended that you avoid depending on CommonJS modules in your Angular applications.
-Depending on CommonJS modules can prevent bundlers and minifiers from optimizing your application, which results in larger bundle sizes.
-Instead, it is recommended that you use [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) in your entire application.
-For more information, see [How CommonJS is making your bundles larger](https://web.dev/commonjs-larger-bundles/).
+Angular アプリケーションでは、CommonJS モジュールに依存することは避けた方がよいでしょう。
+CommonJS モジュールに依存すると、バンドラーやミニファイヤーがアプリケーションを最適化できなくなり、結果的にバンドルサイズが大きくなります。
+代わりに、アプリケーション全体で [ECMAScript モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import)を使用することをお勧めします。
+詳細については、[How CommonJS is making your bundles larger](https://web.dev/commonjs-larger-bundles/) を参照してください。
 
 </div>
 
-The Angular CLI outputs warnings if it detects that your browser application depends on CommonJS modules.
-To disable these warnings, you can add the CommonJS module name to `allowedCommonJsDependencies` option in the `build` options located in `angular.json` file.
+Angular CLI はブラウザアプリケーションが CommonJS モジュールに依存していることを検知すると警告を出力します。
+これらの警告を無効にするには、`angular.json` ファイルにある `build` オプションの `allowedCommonJsDependencies` オプションに CommonJS モジュール名を追加します。
 
 <code-example lang="json">
 "build": {
@@ -292,7 +292,7 @@ To disable these warnings, you can add the CommonJS module name to `allowedCommo
 
 {@a browser-compat}
 
-## ブラウザ互換性の設定
+## ブラウザ互換性の設定 {@a configuring-browser-compatibility}
 
 CLIは[Autoprefixer](https://github.com/postcss/autoprefixer)を使ってさまざまなブラウザやブラウザバージョンとの互換性を保証しています。
 特定のブラウザをターゲットにしたり、特定のブラウザバージョンをビルドから除外したりする必要が出てくるかもしれません。
@@ -318,7 +318,7 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 
 特定のブラウザとバージョンをターゲットにする方法の例については[browserslistのリポジトリ](https://github.com/browserslist/browserslist)を参照してください。
 
-### Backward compatibility with Lighthouse
+### Lighthouse との下位互換性 {@a backward-compatibility-with-lighthouse}
 
 もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次の`browserslist`エントリを`package.json`に追加してください:
 
@@ -330,27 +330,27 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 ]
 ```
 
-### Backward compatibility with CSS grid
+### CSS グリッドとの下位互換性 {@a backward-compatibility-with-css-grid}
 
-CSS grid layout support in Autoprefixer, which was previously on by default, is off by default in Angular 8 and higher.
+これまでデフォルトでオンになっていた Autoprefixer の CSS グリッドレイアウトサポートが、Angular 8 以降ではデフォルトでオフになっています。
 
-To use CSS grid with IE10/11, you must explicitly enable it using the `autoplace` option.
-To do this, add the following to the top of the global styles file (or within a specific css selector scope):
+IE 10/11 で CSS グリッドを使うには、`autoplace` オプションを使って明示的に有効にする必要があります。
+これを行うには、グローバルスタイルファイルの先頭 (または特定の CSS セレクタースコープ内) に以下を追加します。
 
 ```
 /* autoprefixer grid: autoplace */
 ```
-or
+または
 ```
 /* autoprefixer grid: no-autoplace */
 ```
 
-For more information, see [Autoprefixer documentation](https://autoprefixer.github.io/).
+詳しくは、[Autoprefixer のドキュメント](https://autoprefixer.github.io/)を参照してください。
 
 
 {@a proxy}
 
-## バックエンドサーバーへのプロキシ
+## バックエンドサーバーへのプロキシ {@a proxying-to-a-backend-server}
 
 `--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserverproxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
 たとえば、`http://localhost:4200/api`に対するすべての要求を`http://localhost:3000/api`で実行しているサーバーに転送するには、次の手順を実行してください。
@@ -387,7 +387,7 @@ For more information, see [Autoprefixer documentation](https://autoprefixer.gith
 
 プロキシ設定ファイルを編集した場合、変更を有効にするために`ng serve`プロセスを再起動する必要があることに注意してください。
 
-### URLパスの書き換え
+### URL パスの書き換え {@a rewrite-the-url-path}
 
 `pathRewrite`プロキシ設定オプションを使って実行時にURLパスを書き換えることができます。 
 たとえば、次の`pathRewrite`値をプロキシ設定に指定してパスの末尾から"api"を削除することができます。
@@ -436,7 +436,7 @@ For more information, see [Autoprefixer documentation](https://autoprefixer.gith
 
 プロキシのログレベルは`info`（デフォルト）、 `debug`、`warn`、`error`、そして`silent`です。
 
-### 複数エントリのプロキシ
+### 複数エントリのプロキシ {@a proxy-multiple-entries}
 
 JavaScriptで設定を定義することで、同じターゲットに対して複数のエントリをプロキシすることができます。
 
@@ -476,7 +476,7 @@ CLI設定ファイル`angular.json`で、JavaScriptプロキシ設定ファイ�
 ...
 ```
 
-### プロキシのバイパス
+### プロキシのバイパス {@a bypass-the-proxy}
 
 必要に応じてプロキシをバイパスする必要がある場合、または送信前にリクエストを動的に変更する必要がある場合は、このJavaScriptの例に示すように、bypassオプションを追加してください。
 
@@ -498,7 +498,7 @@ const PROXY_CONFIG = {
 module.exports = PROXY_CONFIG;
 ```
 
-### コーポレートプロキシの使用
+### コーポレートプロキシの使用 {@a using-corporate-proxy}
 
 もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求はバックエンドが直接プロキシできません。
 この場合、エージェントを使用してコーポレートプロキシを介して要求をリダイレクトするようにバックエンドプロキシを設定することができます:

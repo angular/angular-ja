@@ -8,7 +8,7 @@ UIでのユーザー入力の検証方法と、有効な検証メッセージの
 
 フォームバリデーションについて読む前に、次の事項の基本を理解しておく必要があります。
 
-* [TypeScript](https://www.typescriptlang.org/docs/home.html "TypeScript")とHTML5を使ったプログラミング。
+* [TypeScript](https://www.typescriptlang.org/ "The TypeScript language")とHTML5を使ったプログラミング。
 
 * [Angularアプリ設計](guide/architecture "Angular概念の紹介") の基本的な概念。
 
@@ -19,7 +19,7 @@ UIでのユーザー入力の検証方法と、有効な検証メッセージの
 <div class="alert is-helpful">
 
 フォームバリデーションの説明のために、リアクティブフォームとテンプレート駆動フォームの完全なサンプルコードを入手してください。
-<live-example></live-example>を起動する。
+<live-example></live-example>を起動しましょう。
 
 </div>
 
@@ -32,7 +32,7 @@ UIでのユーザー入力の検証方法と、有効な検証メッセージの
 Angularはディレクティブを使用して、これらの属性をフレームワークのバリデーター関数と照合します。
 
 フォームコントロールの値が変更されるたびに、Angularはバリデーションを実行し、
-INVALIDステータスに起因するバリデーションエラーのリスト、あるいはVALIDステータスに起因するnullを返します。
+INVALIDステータスになるバリデーションエラーのリスト、あるいはVALIDステータスになるnullを返します。
 
 `ngModel`をローカルテンプレートの変数にエクスポートすることで、コントロールの状態を調べることができます。
 次の例では、`NgModel`を`name`という名前の変数にエクスポートします:
@@ -175,7 +175,8 @@ Observableの場合は、Observableを完了する必要があります。フォ
 
 <div class="alert is-helpful">
 
-カスタムバリデーションディレクティブは、`useClass`ではなく`useExisting`でインスタンス化されることに注意してください。登録されたバリデーターは、`ForbiddenValidatorDirective`_インスタンス_でなければなりません。&mdash;`forbiddenName`プロパティを含むそのフォームのインスタンスは、
+カスタムバリデーションディレクティブは、`useClass`ではなく`useExisting`でインスタンス化されることに注意してください。登録されたバリデーターは、`ForbiddenValidatorDirective`_インスタンス_でなければなりません。
+&mdash;`forbiddenName`プロパティを含むそのフォームのインスタンスは、
 "bob"にバインドされています。
 
 `useExisting`を`useClass`に置き換えた場合は、`forbiddenName`を持たない新しいクラスインスタンスを登録することになります。
@@ -349,3 +350,4 @@ interface HeroesService {
 
 ```typescript
 new FormControl('', {updateOn: 'blur'});
+```

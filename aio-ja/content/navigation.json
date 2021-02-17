@@ -244,7 +244,7 @@
               "url": "guide/built-in-directives",
               "title": "組み込みディレクティブ",
               "tooltip": "Introductory guide to some of the most popular built-in directives.",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/attribute-directives",

@@ -96,7 +96,7 @@ Angular ディレクティブには他にも (1)&nbsp;コンポーネントと (
 
 [*属性* ディレクティブ](guide/attribute-directives)
 は、要素、コンポーネント、または他のディレクティブの外観または動作を変更します。
-たとえば、ビルトインの [`NgStyle`](guide/built-in-directives#ngStyle)
+たとえば、ビルトインの [`NgStyle`](guide/built-in-directives#ngstyle)
 ディレクティブは同時にいくつかの要素スタイルを変更します。
 
 1つのホスト要素に複数の _属性_ ディレクティブを適用できます。

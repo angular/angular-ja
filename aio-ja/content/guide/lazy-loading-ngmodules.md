@@ -322,8 +322,13 @@ ngOnInit() {
 
 動作例と詳細については、[ルーティングチュートリアルのプリロードのセクション](guide/router-tutorial-toh#preloading-background-loading-of-feature-areas)を参照してください。
 
+## Troubleshooting lazy-loading modules
 
-<hr>
+A common error when lazy-loading modules is importing common modules in multiple places within an application.  You can test for this condition by first generating the module using the Angular CLI and including the `--route route-name` parameter, where `route-name` is the name of your module. Next, generate the module without the `--route` parameter. If the Angular CLI generates an error when you use the `--route` parameter, but runs correctly without it, you may have imported the same module in multiple places.
+
+Remember, many common Angular modules should be imported at the base of your application.
+
+For more information on Angular Modules, see [NgModules](guide/ngmodules).
 
 ## NgModuleとルーティングの詳細
 

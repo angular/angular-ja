@@ -54,13 +54,13 @@ Angular Language Serviceは、コード内の間違いを予告することも�
 ## エディターにおけるAngular Language Service
 
 現状では、Angular Language Serviceは[Visual Studio Code](https://code.visualstudio.com/)、
-[WebStorm](https://www.jetbrains.com/webstorm)、[Sublime Text](https://www.sublimetext.com/)の拡張機能として利用可能です。
+[WebStorm](https://www.jetbrains.com/webstorm)、[Sublime Text](https://www.sublimetext.com/)、[Eclipse IDE](https://www.eclipse.org/eclipseide/)の拡張機能として利用可能です。
 
 ### Visual Studio Code
 
-[Visual Studio Code](https://code.visualstudio.com/)では、[Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)から拡張機能をインストールしてください。マーケットプレイスは、左側のメニューペインにおける拡張機能アイコンから開けます。また、VS Quick Open (⌘+P on Mac, CTRL+P on Windows) に"? ext"と入力して開くことも可能です。
+[Visual Studio Code](https://code.visualstudio.com/)では、[Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)から拡張機能をインストールしてください。マーケットプレイスは、左側のメニューペインにおける拡張機能アイコンから開けます。また、VS Quick Open (⌘+P on Mac, CTRL+P on Windows) に"? ext"と入力して開くことも可能です。In the marketplace, search for Angular Language Service extension, and click the **Install** button.
 
-マーケットプレイスを開いたら、Angular Language Service拡張機能を検索し、**Install**ボタンをクリックしてください。
+The Visual Studio Code integration with the Angular language service is maintained and distributed by the Angular team.
 
 ### WebStorm
 
@@ -103,7 +103,9 @@ npm install --save-dev @angular/language-service
 
 これでAngular Language Serviceがエラーチェックや補完を`.ts`ファイルで提供するようになります。
 
+### Eclipse IDE
 
+Either directly install the "Eclipse IDE for Web and JavaScript developers" package which comes with the Angular Language Server included, or from other Eclipse IDE packages, use Help > Eclipse Marketplace to find and install [Eclipse Wild Web Developer](https://marketplace.eclipse.org/content/wild-web-developer-html-css-javascript-typescript-nodejs-angular-json-yaml-kubernetes-xml).
 
 
 ## Language Serviceの仕組み

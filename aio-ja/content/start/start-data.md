@@ -75,10 +75,6 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
     <code-example header="src/app/product-details/product-details.component.html" path="getting-started/src/app/product-details/product-details.component.html">
     </code-example>
 
-    この行、 `<h4>{{ product.price | currency }}</h4>` は、`currency`パイプを使用して、 `product.price`を数値から通貨文字列に変換します。
-    パイプは、HTMLテンプレートのデータを変換できる方法です。
-    Angularのパイプの詳細については、[パイプ](guide/pipes "Pipes")を参照してください。
-
 1. アプリケーションを更新し、商品名をクリックして詳細を表示して、新しい**Buy**ボタンが期待どおりに表示されていることを確認します。
 
     <div class="lightbox">
@@ -280,8 +276,6 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
     <div class="lightbox">
       <img src='generated/images/guide/start/shipping-prices.png' alt="Display shipping prices">
     </div>
-
-<hr />
 
 ## 次は何をするの？
 

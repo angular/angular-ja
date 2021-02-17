@@ -27,6 +27,8 @@ A best practice is to run your project locally before you deploy it. To run your
     ```sh
     ng new my-project-name
     ```
+    
+    This command displays a series of configuration prompts. For this tutorial, accept the default settings for each prompt.
 
 1. In your newly CLI-generated application, replace the `/src` folder with the `/src` folder from your `StackBlitz` download.
 
@@ -67,8 +69,6 @@ A best practice is to run your project locally before you deploy it. To run your
     Because these files are static, you can host them on any web server capable of serving files; such as `Node.js`, Java, .NET, or any backend such as [Firebase](https://firebase.google.com/docs/hosting), [Google Cloud](https://cloud.google.com/solutions/web-hosting), or [App Engine](https://cloud.google.com/appengine/docs/standard/python/getting-started/hosting-a-static-website).
     For more information, see [Building & Serving](guide/build "Building and Serving Angular Apps") and [Deployment](guide/deployment "Deployment guide").
 
-<hr />
-
 ## What's next
 
 In this tutorial, you've laid the foundation to explore the Angular world in areas such as mobile development, UX/UI development, and server-side rendering.
@@ -78,7 +78,7 @@ You can go deeper by studying more of Angular's features, engaging with the vibr
 
 For a more in-depth tutorial that leads you through building an application locally and exploring many of Angular's most popular features, see [Tour of Heroes](tutorial).
 
-To explore Angular's foundational concepts, see the guides in the Main Concepts section such as [Angular Components Overview](guide/component-overview) or [Template syntax](guide/template-syntax).
+To explore Angular's foundational concepts, see the guides in the Understanding Angular section such as [Angular Components Overview](guide/component-overview) or [Template syntax](guide/template-syntax).
 
 ### Joining the community
 

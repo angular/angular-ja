@@ -76,9 +76,9 @@ The following top-level configuration properties are available for each project,
 ## Generation schematics
 
 Angular generation [schematics](guide/glossary#schematic) are instructions for modifying a project by adding files or modifying existing files.
-Individual schematics for the default Angular CLI `ng generate` sub-commands are collected in the package `@angular`.
+Individual schematics for the default Angular CLI `ng generate` sub-commands are collected in the package `@schematics/angular`.
 Specify the schematic name for a subcommand in the format `schematic-package:schematic-name`;
-for example, the schematic for generating a component is `@angular:component`.
+for example, the schematic for generating a component is `@schematics/angular:component`.
 
 The JSON schemas for the default schematics used by the CLI to generate projects and parts of projects are collected in the package [`@schematics/angular`](https://github.com/angular/angular-cli/blob/master/packages/schematics/angular/application/schema.json).
 The schema describes the options available to the CLI for each of the `ng generate` sub-commands, as shown in the `--help` output.
@@ -100,7 +100,7 @@ See [Angular CLI Builders](guide/cli-builder).
 ### Default Architect builders and targets
 
 Angular defines default builders for use with specific CLI commands, or with the general `ng run` command.
-The JSON schemas that the define the options and defaults for each of these default builders are collected in the [`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/8.0.x/packages/angular/cli/lib/config/schema.json) package.
+The JSON schemas that define the options and defaults for each of these default builders are collected in the [`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/master/packages/angular/cli/lib/config/schema.json) package.
 The schemas configure options for the following builders.
 
 * app-shell
@@ -390,7 +390,7 @@ There are several options that can be used to fine-tune the optimization of an a
 </tr>
 <tr>
 <td><code>styles</code></td>
-<td>Enables optimization of the scripts output.</td>
+<td>Enables optimization of the styles output.</td>
 <td><code>boolean|<a href="#styles-optimization-options">Styles optimization options</a></code></td>
 <td><code>true</code></td>
 </tr>

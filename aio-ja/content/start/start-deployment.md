@@ -28,6 +28,8 @@
     ng new my-project-name
     ```
 
+    このコマンドは一連の設定プロンプトを表示します。このチュートリアルでは、各プロンプトのデフォルト設定を受け入れます。
+
 1. 新しくCLIを生成したアプリケーションで、`/src` フォルダを `StackBlitz` ダウンロードの `/src` フォルダに置き換えます。
 
 1. 次のCLIコマンドを使ってアプリケーションをローカルで実行します。
@@ -67,8 +69,6 @@
     これらのファイルは静的なものなので、`Node.js`、Java、.NET、または [Firebase](https://firebase.google.com/docs/hosting)、[Google Cloud](https://cloud.google.com/solutions/web-hosting)、[App Engine](https://cloud.google.com/appengine/docs/standard/python/getting-started/hosting-a-static-website) などのバックエンドなど、ファイルを提供できるウェブサーバーであれば、どのような場所でもホストすることができます。
     詳細については、 [ビルドとサーブ](guide/build "「Angular Appsのビルドとサーブ」")、[デプロイ](guide/deployment "Deployment guide")を参照してください。
 
-<hr />
-
 ## 次は何をするの？
 
 このチュートリアルでは、モバイル開発、UX/UI開発、サーバーサイドレンダリングなどの分野でAngularの世界を探求するための基礎を築きました。
@@ -78,7 +78,7 @@ Angularの機能をより深く学び、活気あるコミュニティに参加�
 
 ローカルでアプリケーションを構築し、Angularの人気のある機能の多くを探求する、より詳細なチュートリアルについては、[Tour of Heroes](tutorial)を参照してください。
 
-Angularの基本的な概念については、[Angularコンポーネントの概要](guide/component-overview)や[テンプレート構文](guide/template-syntax)などの主要概念セクションのガイドを参照してください。
+Angularの基本的な概念については、[Angularコンポーネントの概要](guide/component-overview)や[テンプレート構文](guide/template-syntax)などの、「Angularを理解する」セクションのガイドを参照してください。
 
 ### コミュニティに参加する
 

@@ -181,7 +181,7 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 Angularには、レイアウト構造を変更する
 （たとえば、[ngSwitch](guide/built-in-directives#ngSwitch)）  
 、あるいはDOM要素とコンポーネントのよう相を変更する  
-（たとえば、[ngStyle](guide/built-in-directives#ngStyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
+（たとえば、[ngStyle](guide/built-in-directives#ngstyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
 
 <div class="alert is-helpful">
 

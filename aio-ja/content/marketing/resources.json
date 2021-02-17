@@ -265,11 +265,17 @@
             "title": "UI-jar - Test Driven Style Guide Development",
             "url": "https://github.com/ui-jar/ui-jar"
           },
-          "protactor": {
-            "desc": "The official end to end testing framework for Angular apps",
+          "protractor": {
+            "desc": "The official end to end testing framework for Angular applications.",
             "logo": "",
             "title": "Protractor",
             "url": "https://protractor.angular.io/"
+          },
+          "observer-spy": {
+            "desc": "A library for testing RxJS observables that offers an alternative to Marble Tests.",
+            "logo": "",
+            "title": "observer-spy",
+            "url": "https://github.com/hirezio/observer-spy"
           },
           "scully": {
             "desc": "Scully (Jamstack Toolchain for Angular) makes building, testing, and deploying Jamstack apps extremely simple.",
@@ -469,6 +475,11 @@
             "desc": "NGX Skeleton Loader is a lightweight and A11Y friendly solution for blazing fast loading skeletons that automatically adapt to your Angular apps.",
             "title": "NGX Skeleton Loader",
             "url": "https://www.npmjs.com/package/ngx-skeleton-loader"
+          },
+          "taiga-ui": {
+            "desc": "Taiga UI is fully-treeshakable Angular UI Kit consisting of multiple base libraries and several add-ons. We have 130+ components, 100+ directives, dozens of tokens, utils and tools. They are easily customizable and well engineered.",
+            "title": "Taiga UI",
+            "url": "https://taiga-ui.dev"
           }
         }
       }
@@ -542,6 +553,17 @@
             "desc": "Practical journey with Angular framework, ES6, TypeScript, webpack and Angular CLI.",
             "title": "Developing with Angular",
             "url": "https://leanpub.com/developing-with-angular"
+          },
+          "reactive-state-for-angular-with-ngrx": {
+            "desc": "Learn how to build a Reactive Application with Ngrx and Angular",
+            "title": "Reactive State for Angular with NgRx",
+            "url": "https://bpbonline.com/products/reactive-state-for-angular-with-ngrx"
+          },
+          "ngrx-reactive-state-management": {
+            "title": "NgRx: Reactive State Management for Angular",
+            "desc": "Comprehensive learning resource on building Angular apps with NgRx",
+            "url": "https://gumroad.com/l/angular-ngrx-book",
+            "logo": ""
           }
         }
       },

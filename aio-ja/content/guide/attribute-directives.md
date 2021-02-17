@@ -22,7 +22,7 @@ Angularには、3つのディレクティブがあります。
 それらについては[構造ディレクティブ](guide/structural-directives)ガイドで学んでください。
 
 *属性ディレクティブ*は、要素の属性として扱われます。
-たとえば、[テンプレートシンタックス](guide/built-in-directives#ngStyle)ガイドの組み込みの
+たとえば、[テンプレートシンタックス](guide/built-in-directives#ngstyle)ガイドの組み込みの
 [NgStyle](guide/built-in-directives)ディレクティブは、
 同時に複数の要素のスタイルを変更することができます。
 

@@ -66,7 +66,7 @@ This section walks you through using the `CartService` to add a product to the c
 
     The `addToCart()` method does the following:
     * Takes the current `product` as an argument.
-    * Uses the `CartService` `addToCart()` method to add the product the cart.
+    * Uses the `CartService` `addToCart()` method to add the product to the cart.
     * Displays a message that you've added a product to the cart.
 
 1. In `product-details.component.html`, add a button with the label **Buy**, and bind the `click()` event to the `addToCart()` method.
@@ -74,10 +74,6 @@ This section walks you through using the `CartService` to add a product to the c
 
     <code-example header="src/app/product-details/product-details.component.html" path="getting-started/src/app/product-details/product-details.component.html">
     </code-example>
-
-    The line, `<h4>{{ product.price | currency }}</h4>`, uses the `currency` pipe to transform `product.price` from a number to a currency string.
-    A pipe is a way you can transform data in your HTML template.
-    For more information about Angular pipes, see [Pipes](guide/pipes "Pipes").
 
 1. Verify that the new **Buy** button appears as expected by refreshing the application and clicking on a product's name to display its details.
 
@@ -280,8 +276,6 @@ This section guides you through modifying the `ShippingComponent` to retrieve sh
     <div class="lightbox">
       <img src='generated/images/guide/start/shipping-prices.png' alt="Display shipping prices">
     </div>
-
-<hr />
 
 ## What's next
 

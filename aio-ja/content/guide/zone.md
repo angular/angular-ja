@@ -303,7 +303,7 @@ Zone.jsは同期および非同期操作のすべての状態を監視できま�
 このため、これらの非同期APIについては、手動で変更検知をトリガーする必要はありません。
 
 Zoneが処理しないサードパーティのAPIもまだあります。
-これらのケースでは、`NgZone`サービスは[`run()`](api/core/NgZone#run)メソッドを提供し、angular Zoneの中で関数を実行できるようにします。
+これらのケースでは、`NgZone`サービスは[`run()`](api/core/NgZone#run)メソッドを提供し、AngularのZoneの中で関数を実行できるようにします。
 この関数および関数内で実行されるすべての非同期操作は、適切なタイミングで自動的に変更検知をトリガーします。
 
 ```typescript
@@ -311,7 +311,7 @@ export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
   ngOnInit() {
     // 新しい非同期APIはZoneで処理されません。
-    // そのため、ngZone.runを使用してangular Zone内で非同期操作を行い、
+    // そのため、ngZone.runを使用してAngularのZone内で非同期操作を行い、
     // 自動的に変更検知をトリガーする必要があります。
     this.ngZone.run(() => {
       someNewAsyncAPI(() => {
@@ -322,7 +322,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-デフォルトでは、すべての非同期操作はangular Zoneの中にあり、自動的に変更検知をトリガーします。
+デフォルトでは、すべての非同期操作はAngularのZoneの中にあり、自動的に変更検知をトリガーします。
 もうひとつの一般的なケースは、変更検知をトリガーしたくない場合です。
 その状況では、`NgZone`のもうひとつのメソッド、[`runOutsideAngular()`](api/core/NgZone#runoutsideangular)を使用できます。
 
@@ -360,7 +360,7 @@ import 'zone.js/dist/zone';  // Angular CLIに含まれます
 - よりよいパフォーマンスのために、いくつかの非同期APIのモンキーパッチを無効にすることができます。
 たとえば、`requestAnimationFrame()`のモンキーパッチを無効にすることで、`requestAnimationFrame()`のコールバックは変更検知をトリガーしません。
 これは、アプリケーション内において`requestAnimationFrame()`のコールバックが何もデータを更新しない場合に便利です。
-- 特定のDOMイベントがangular Zone内で実行されないように指定できます。たとえば、`mousemove`または`scroll`イベントが変更検知をトリガーすることを防ぐためです。
+- 特定のDOMイベントがAngularのZone内で実行されないように指定できます。たとえば、`mousemove`または`scroll`イベントが変更検知をトリガーすることを防ぐためです。
 
 変更できる設定は他にもいくつかあります。
 これらの変更を行うには、次のような`zone-flags.ts`ファイルを作成する必要があります。

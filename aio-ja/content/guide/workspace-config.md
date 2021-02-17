@@ -76,9 +76,9 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 ## 生成 schematics
 
 Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
-デフォルトの Angular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@angular` にまとめられています。
+デフォルトの Angular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@schematics/angular` にまとめられています。
 サブコマンドの schematic の名称を、`schematic-package:schematic-name` の形式で指定します;
-たとえば、コンポーネントを生成するための schematic は `@angular:component` です。
+たとえば、コンポーネントを生成するための schematic は `@schematics/angular:component` です。
 
 プロジェクトおよびプロジェクトの一部を生成するために CLI によって使用されるデフォルトの schematics の JSON スキーマは、 [`@schematics/angular`](https://github.com/angular/angular-cli/blob/master/packages/schematics/angular/application/schema.json) パッケージに集められています。
 スキーマは、`--help` の出力に示されているように、各 `ng generate` サブコマンドに対して CLI で使用可能なオプションを記述したものです。
@@ -100,7 +100,7 @@ Architect は、[ターゲット](guide/glossary#target)設定にしたがって
 ### デフォルトのArchitectビルダとターゲット {@a default-architect-builders-and-targets}
 
 Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使用するデフォルトのビルダを定義します。
-これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/8.0.x/packages/angular/cli/lib/config/schema.json)パッケージに収集されています。
+これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/master/packages/angular/cli/lib/config/schema.json)パッケージに収集されています。
 スキーマは、次のビルダについてオプションを構成します。
 
 * app-shell
@@ -390,7 +390,7 @@ There are several options that can be used to fine-tune the optimization of an a
 </tr>
 <tr>
 <td><code>styles</code></td>
-<td>Enables optimization of the scripts output.</td>
+<td>Enables optimization of the styles output.</td>
 <td><code>boolean|<a href="#styles-optimization-options">Styles optimization options</a></code></td>
 <td><code>true</code></td>
 </tr>

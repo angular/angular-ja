@@ -260,8 +260,6 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 
 コンポーネント間の通信については、[Component Interaction](guide/component-interaction "Component interaction")を参照してください。
 
-<hr />
-
 {@a whats-next}
 
 ## 次は何をするの？

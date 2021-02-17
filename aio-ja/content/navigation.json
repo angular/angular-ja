@@ -310,7 +310,7 @@
               "url": "guide/form-validation",
               "title": "フォーム入力のバリデーション",
               "tooltip": "ユーザーのフォーム入力を検証しましょう。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/dynamic-form",

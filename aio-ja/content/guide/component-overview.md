@@ -109,7 +109,7 @@ Angular CLI は Angular コンポーネントを作成するもっとも簡単�
         region="class">
    </code-example>
 
-## コンポーネントの CSS セレクターの指定 {@ specifying-a-components-css-selector}
+## コンポーネントの CSS セレクターの指定 {@a specifying-a-components-css-selector}
 
 すべてのコンポーネントには CSS _セレクタ_ が必要です。セレクターは HTML テンプレートの中で対応するタグを見つけたらどこでも、そのコンポーネントをインスタンス化するように Angular に指示します。たとえば、`hello-world.component.ts` が `app-hello-world` というセレクターを定義しているコンポーネントを考えてみましょう。このセレクターは、テンプレートに `<app-hello-world>` タグが現れるたびに、このコンポーネントのインスタンスを作成するように Angular に指示します。
 

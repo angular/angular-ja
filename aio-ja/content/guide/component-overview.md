@@ -1,145 +1,145 @@
-# Angular Components Overview
+# Angular コンポーネントの概要 {@a angular-components-overview}
 
-Components are the main building block for Angular applications. Each component consists of:
+コンポーネントは Angular アプリケーションの主な構成要素です。各コンポーネントは次のように構成されています。
 
-* An HTML template that declares what renders on the page
-* A Typescript class that defines behavior
-* A CSS selector that defines how the component is used in a template
-* Optionally, CSS styles applied to the template
+* ページに表示するものを宣言する HTML テンプレート
+* 振る舞いを定義する Typescript クラス
+* テンプレート内でコンポーネントがどのように使用されるかを定義する CSS セレクター
+* オプションで、テンプレートに適用される CSS スタイル
 
-This topic describes how to create and configure an Angular component.
-
-<div class="alert is-helpful">
-
-To view or download the example code used in this topic, see the <live-example></live-example>.
-
-</div>
-
-## Prerequisites
-
-To create a component, verify that you have met the following prerequisites:
-
-1. Install the Angular CLI.
-1. Create an Angular project.
-   If you don't have a project, you can create one using `ng new <project-name>`, where `<project-name>` is the name of your Angular application.
-
-## Creating a component
-
-The easiest way to create a component is with the Angular CLI. You can also create a component manually.
-
-### Creating a component using the Angular CLI
-
-To create a component using the Angular CLI:
-
-1. From a terminal window, navigate to the directory containing your application.
-1. Run the `ng generate component <component-name>` command, where `<component-name>` is the name of your new component.
-
-By default, this command creates the following:
-
-* A folder named after the component
-* A component file, `<component-name>.component.ts`
-* A template file, `<component-name>.component.html`
-* A CSS file, `<component-name>.component.css`
-* A testing specification file, `<component-name>.component.spec.ts`
-
-Where `<component-name>` is the name of your component.
+このトピックでは、Angular コンポーネントを作成して設定する方法について説明します。
 
 <div class="alert is-helpful">
 
-You can change how `ng generate component` creates new components.
-For more information, see [ng generate component](cli/generate#component-command) in the Angular CLI documentation.
+このトピックで使用されているサンプルコードを表示またはダウンロードするには、<live-example></live-example> を参照してください。
 
 </div>
 
-### Creating a component manually
+## 前提条件 {@a prerequisites}
 
-Although the Angular CLI is the easiest way to create an Angular component, you can also create a component manually.
-This section describes how to create the core component file within an existing Angular project.
+コンポーネントを作成するには、次の前提条件を満たしていることを確認します。
 
-To create a new component manually:
+1. Angular CLI をインストールします
+1. Angular プロジェクトを作成します
+   プロジェクトを持っていない場合は、`ng new <project-name>` を使ってプロジェクトを作成することができます。ここで、`<project-name>` は Angular アプリケーションの名前です。
 
-1. Navigate to your Angular project directory.
-1. Create a new file, `<component-name>.component.ts`.
-1. At the top of the file, add the following import statement.
+## コンポーネントの作成 {@a creating-a-component}
+
+コンポーネントを作成するもっとも簡単な方法は Angular CLI です。手動でコンポーネントを作成することもできます。
+
+### Angular CLI を使ったコンポーネントの作成 {@a creating-a-component-using-the-angular-cli}
+
+Angular CLI を使ってコンポーネントを作成するには:
+
+1. ターミナルウィンドウから、アプリケーションを含むディレクトリに移動します
+1. `ng generate component <component-name>` コマンドを実行します。ここで `<component-name>` は新しいコンポーネントの名前です
+
+デフォルトでは、このコマンドは次のものに作成します。
+
+* コンポーネントの名前のついたフォルダ
+* コンポーネントファイル `<component-name>.component.ts`
+* テンプレートファイル `<component-name>.component.html`
+* CSS ファイル `<component-name>.component.css`
+* テスト仕様ファイル `<component-name>.component.spec.ts`
+
+ここで、`<component-name>` はコンポーネントの名前です。
+
+<div class="alert is-helpful">
+
+`ng generate component` が新しいコンポーネントを作成する方法を変更することができます。
+詳細は Angular CLI ドキュメントの [ng generate component](cli/generate#component-command) を参照してください。
+
+</div>
+
+### コンポーネントを手動で作成する {@a creating-a-component-manually}
+
+Angular CLI は Angular コンポーネントを作成するもっとも簡単な方法ですが、手動でコンポーネントを作成することもできます。
+ここでは、既存の Angular プロジェクト内でコアコンポーネントファイルを作成する方法を説明します。
+
+新しいコンポーネントを手動で作成するには:
+
+1. Angular プロジェクトのディレクトリに移動します
+1. 新しいファイル `<component-name>.component.ts` を作成します
+1. ファイルの先頭に、次の import 文を追加します
 
    <code-example
         path="component-overview/src/app/component-overview/component-overview.component.ts"
         region="import">
    </code-example>
 
-1. After the `import` statement, add a `@Component` decorator.
+1. `import`  文の後に `@Component` デコレーターを追加します
 
    <code-example
         path="component-overview/src/app/component-overview/component-overview.component.ts"
         region="decorator-skeleton">
    </code-example>
 
-1. Choose a CSS selector for the component.
+1. コンポーネントの CSS セレクターを選択します
 
    <code-example
         path="component-overview/src/app/component-overview/component-overview.component.ts"
         region="selector">
    </code-example>
 
-   For more information on choosing a selector, see [Specifying a component's selector](#specifying-a-components-css-selector).
+   セレクターの選択については、[コンポーネントのセレクタを指定する](#specifying-a-components-css-selector)を参照してください。
 
-1. Define the HTML template that the component uses to display information.
-   In most cases, this template is a separate HTML file.
+1. コンポーネントが情報を表示するために使用する HTML テンプレートを定義します。
+   ほとんどの場合、このテンプレートは別の HTML ファイルです
 
    <code-example
         path="component-overview/src/app/component-overview/component-overview.component.ts"
         region="templateUrl">
    </code-example>
 
-   For more information on defining a component's template, see [Defining a component's template](#defining-a-components-template).
+   コンポーネントのテンプレートの定義については、[コンポーネントのテンプレートの定義](#defining-a-components-template)を参照してください。
 
-1. Select the styles for the component's template.
-   In most cases, you define the styles for your component's template in a separate file.
+1. コンポーネントのテンプレートのスタイルを選択します。
+   ほとんどの場合、コンポーネントのテンプレートのスタイルは別のファイルで定義します
 
    <code-example
         path="component-overview/src/app/component-overview/component-overview.component.ts"
         region="decorator">
    </code-example>
 
-1. Add a `class` statement that includes the code for the component.
+1. コンポーネントのコードを含む `class` 文を追加します
 
    <code-example
         path="component-overview/src/app/component-overview/component-overview.component.ts"
         region="class">
    </code-example>
 
-## Specifying a component's CSS selector
+## コンポーネントの CSS セレクターの指定 {@a specifying-a-components-css-selector}
 
-Every component requires a CSS _selector_. A selector instructs Angular to instantiate this component wherever it finds the corresponding tag in template HTML. For example, consider a component `hello-world.component.ts` that defines its selector as `app-hello-world`. This selector instructs Angular to instantiate this component any time the tag `<app-hello-world>` appears in a template.
+すべてのコンポーネントには CSS _セレクタ_ が必要です。セレクターは HTML テンプレートの中で対応するタグを見つけたらどこでも、そのコンポーネントをインスタンス化するように Angular に指示します。たとえば、`hello-world.component.ts` が `app-hello-world` というセレクターを定義しているコンポーネントを考えてみましょう。このセレクターは、テンプレートに `<app-hello-world>` タグが現れるたびに、このコンポーネントのインスタンスを作成するように Angular に指示します。
 
-Specify a component's selector by adding a `selector` statement to the `@Component` decorator.
+コンポーネントのセレクターを指定するには、`@Component` デコレーターに `selector` 文を追加します。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.ts"
     region="selector">
 </code-example>
 
-## Defining a component's template
+## コンポーネントのテンプレートの定義 {@a defining-a-components-template}
 
-A template is a block of HTML that tells Angular how to render the component in your application.
-You can define a template for your component in one of two ways: by referencing an external file, or directly within the component.
+テンプレートとは、アプリケーション内でコンポーネントをどのようにレンダリングするかを Angular に指示する HTML のブロックです。
+コンポーネントのテンプレートを定義するには、外部ファイルを参照する方法と、コンポーネント内で直接定義する方法の2つの方法があります。
 
-To define a template as an external file, add a `templateUrl` property to the `@Component` decorator.
+テンプレートを外部ファイルとして定義するには、`@Component` デコレーターに `templateUrl` プロパティを追加します。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.ts"
     region="templateUrl">
 </code-example>
 
-To define a template within the component, add a `template` property to the `@Component` decorator that contains the HTML you want to use.
+コンポーネント内でテンプレートを定義するには、使用したい HTML を含む `@Component` デコレーターに `template` プロパティを追加します。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.1.ts"
     region="template">
 </code-example>
 
-If you want your template to span multiple lines, you can use backticks (<code> ` </code>).
-For example:
+テンプレートを複数行にまたがるようにしたい場合は、バックティック (<code> ` </code>) を使うことができます。
+たとえば、次のようになります。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.2.ts"
@@ -148,35 +148,35 @@ For example:
 
 <div class="alert is-helpful">
 
-An Angular component requires a template defined using `template` or `templateUrl`. You cannot have both statements in a component.
+Angular コンポーネントは、`template` または `templateUrl` で定義されたテンプレートを必要とします。コンポーネントの中で両方の記述をもつことはできません。
 
 </div>
 
-## Declaring a component's styles
+## コンポーネントのスタイルの宣言 {@a declaring-a-components-styles}
 
-You can declare component styles uses for its template in one of two ways: by referencing an external file, or directly within the component.
+コンポーネントのスタイルは、外部ファイルを参照するか、コンポーネント内で直接宣言するかの 2 つの方法でテンプレートの使用を宣言することができます。
 
-To declare the styles for a component in a separate file, add a `styleUrls` property to the `@Component` decorator.
+コンポーネントのスタイルを別のファイルで宣言するには、`@Component` デコレーターに `styleUrls` プロパティを追加します。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.ts"
     region="decorator">
 </code-example>
 
-To declare the styles within the component, add a `styles` property to the `@Component` decorator that contains the styles you want to use.
+コンポーネント内でスタイルを宣言するには、使用したいスタイルを含む `styles` プロパティを `@Component` デコレーターに追加します。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.3.ts"
     region="styles">
 </code-example>
 
-The `styles` property takes an array of strings that contain the CSS rule declarations.
+`styles` プロパティは、CSS ルールの宣言を含む文字列の配列を取ります。
 
 
-## Next steps
+## 次のステップ {@a next-steps}
 
-* For an architectural overview of components, see [Introduction to components and templates](guide/architecture-components).
-* For additional options you can use when creating a component, see [Component](api/core/Component) in the API Reference.
-* For more information on styling components, see [Component styles](guide/component-styles).
-* For more information on templates, see [Template syntax](guide/template-syntax).
+* コンポーネントのアーキテクチャの概要については、[コンポーネントとテンプレート入門](guide/architecture-components)を参照してください
+* コンポーネントを作成する際に使用できるその他のオプションについては、API リファレンスの [Component](api/core/Component) を参照してください
+* コンポーネントのスタイルについては、[コンポーネントスタイル](guide/component-styles)を参照してください
+* テンプレートの詳細については、[テンプレート構文](guide/template-syntax)を参照してください
 

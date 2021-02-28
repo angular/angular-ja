@@ -62,7 +62,7 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
       `ngOnInit()` の前、および1つ以上のデータバインド入力プロパティが変更されるたびに呼び出されます。
 
-      Note that if your component has no inputs or you use it without providing any inputs, the framework will not call `ngOnChanges()`.
+      コンポーネントが入力を持たない場合や入力を提供せずに使用している場合、フレームワークは `ngOnChanges()` を呼び出さないことに注意してください。
 
     </td>
   </tr>

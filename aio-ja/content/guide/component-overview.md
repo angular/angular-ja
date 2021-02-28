@@ -21,8 +21,7 @@
 
 1. Angular CLI をインストールします
 1. Angular プロジェクトを作成します
-   プロジェクトを持っていない場合は、`ng new <project-name>` を使ってプロジェクトを作成することができます。
-   ここで、`<project-name>` は Angular アプリケーションの名前です。
+   プロジェクトを持っていない場合は、`ng new <project-name>` を使ってプロジェクトを作成することができます。ここで、`<project-name>` は Angular アプリケーションの名前です。
 
 ## コンポーネントの作成 {@a creating-a-component}
 

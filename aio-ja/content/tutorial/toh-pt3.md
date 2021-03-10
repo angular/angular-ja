@@ -81,9 +81,8 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 ## `HeroDetailComponent` を表示する
 
-`HeroesComponent` は、まだ master/detail ビューのままです。
-
-テンプレートからヒーローの詳細を切り取るまでは、このコンポーネント自身でそれを表示していました。今度は `HeroDetailComponent` に委譲しましょう。
+ヒーローの詳細は、テンプレートのその部分を削除する前は`HeroesComponent`自身が表示していました。
+このセクションでは、ロジックを `HeroDetailComponent` に委譲する方法を説明します。
 
 2つのコンポーネントには親子関係があります。
 ユーザーがリストからヒーローを選択するたびに新しいヒーローを表示するため、
@@ -129,7 +128,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 元の `HeroesComponent` を2つのコンポーネントにリファクタリングすることで、現在も将来も利益が得られます。
 
-1. `HeroesComponent` をその責任を減らすことによって単純化しました。
+1. `HeroesComponent` の責任を減らしました。
 
 1. 親の `HeroesComponent` に触れることなく、`HeroDetailComponent` をリッチなヒーローエディタに進化させることができます。
 

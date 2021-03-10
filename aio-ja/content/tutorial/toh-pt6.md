@@ -9,7 +9,7 @@
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+  For the sample application that this page describes, see the <live-example></live-example>.
 
 </div>
 
@@ -17,7 +17,7 @@
 
 `HttpClient` はHTTPを通してリモートサーバーと通信するための仕組みです。
 
-2つのステップでアプリのどこでも `HttpClient`を利用できるようにします。まず、インポートしてルートの `AppModule`に追加します：
+2つのステップでアプリケーションのどこでも `HttpClient`を利用できるようにします。まず、インポートしてルートの `AppModule`に追加します：
 
 <code-example path="toh-pt6/src/app/app.module.ts" region="import-http-client" header="src/app/app.module.ts (HttpClientModule import)">
 </code-example>
@@ -519,7 +519,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 ヒーロー名にマッチするような文字を入力すると、こんなふうに見えるはずです。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/toh-hero-search.png' alt="Hero Search Component">
+  <img src='generated/images/guide/toh/toh-hero-search.gif' alt="Hero Search field with the letters 'm' and 'a' along with four search results that match the query displayed in a list beneath the search input">
 </div>
 
 ## 最終的なコードレビュー

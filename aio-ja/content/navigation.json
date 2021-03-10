@@ -64,6 +64,10 @@
       "title": "はじめに",
       "tooltip": "Set up your environment and learn basic concepts",
       "children": [
+        { "url": "guide/what-is-angular",
+          "title": "Angularとは？",
+          "tooltip": "A brief description of the Angular platform."
+        },
         {
           "title": "試してみよう",
           "tooltip": "セットアップなしで、既製のサンプルアプリを調べて動かします。",
@@ -251,13 +255,13 @@
               "url": "guide/attribute-directives",
               "title": "属性ディレクティブ",
               "tooltip": "属性ディレクティブは要素に振る舞いを付与します。",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/structural-directives",
               "title": "構造ディレクティブ",
               "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
-              "translated": true
+              "translated": false
             }
           ]
         },
@@ -646,7 +650,7 @@
             },
             {
               "url": "tutorial/toh-pt5",
-              "title": "5. アプリ内ナビゲーションの追加",
+              "title": "5. ナビゲーションの追加",
               "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
               "translated": true
             },

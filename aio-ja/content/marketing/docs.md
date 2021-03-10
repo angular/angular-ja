@@ -7,6 +7,12 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
 
 
 <div class="card-container">
+  <a href="guide/what-is-angular" class="docs-card"
+    title="Angular Local Environment Setup">
+      <section>Angularとは何か</section>
+      <p>Angularプラットフォームの概要を知ることができます。</p>
+      <p class="card-footer">ローカルセットアップ</p>
+  </a>
   <a href="guide/setup-local" class="docs-card"
     title="Angular Local Environment Setup">
       <section>はじめよう</section>

@@ -118,8 +118,9 @@
           "children": [
             {
               "url": "guide/component-overview",
-              "title": "Overview",
-              "tooltip": "Overview of how to create Angular components."
+              "title": "概要",
+              "tooltip": "Overview of how to create Angular components.",
+              "translated": true
             },
             {
               "url": "guide/lifecycle-hooks",

@@ -36,7 +36,7 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
 * コンポーネントで変数を宣言すると、変数はそのコンポーネントのインスタンスを参照します。
 * 標準のHTMLタグで変数を宣言すると、変数はその要素を参照します。
 * `<ng-template>`要素で変数を宣言すると、変数はそのテンプレートを表す`TemplateRef`のインスタンスを参照します。
-  `<ng-template>`の詳細については、[構造ディレクティブ](guide/structural-directives)の[ng-template](guide/structural-directives#the-ng-template)セクションを参照してください。
+  `<ng-template>`の詳細については、[構造ディレクティブ](guide/structural-directives)の[How Angular uses the asterisk, `*`, syntax](guide/structural-directives#asterisk)を参照してください。
 * 変数が`#var="ngModel"`のように右側に名前を指定すると、変数は要素において一致する`exportAs`名をもつディレクティブやコンポーネントを参照します。
 <!-- What does the second half of this mean?^^ Can we explain this more fully? Could I see a working example? -kw -->
 
@@ -152,3 +152,21 @@ name: "TemplateRef"
 __proto__: Function
 
 </code-example>
+
+{@a template-input-variable}
+{@a template-input-variables}
+## Template input variable
+
+A _template input variable_ is a variable you can reference within a single instance of the template.
+You declare a template input variable using the `let` keyword as in `let hero`.
+
+There are several such variables in this example: `hero`, `i`, and `odd`.
+
+The variable's scope is limited to a single instance of the repeated template.
+You can use the same variable name again in the definition of other structural directives.
+
+In contrast, you declare a template variable by prefixing the variable name with `#`, as in `#var`.
+A template variable refers to its attached element, component, or directive.
+
+Template input variables and template variables names have their own namespaces.
+The template input variable `hero` in `let hero` is distinct from the template variable `hero` in `#hero`.

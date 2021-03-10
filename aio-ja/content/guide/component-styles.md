@@ -83,6 +83,15 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css"></code-example>
 
+The `:host` selector can also be combined with other selectors.
+Add selectors behind the `:host` to select child elements, for example using `:host h2` to target all `<h2>` elements inside a component's view.
+
+<div class="alert is-helpful">
+
+You should not add selectors (other than `:host-context`) in front of the `:host` selector to style a component based on the outer context of the component's view. Such selectors are not scoped to a component's view and will select the outer context, but it's not native behavior. Use `:host-context` selector for that purpose instead.
+
+</div>
+
 ### :host-context
 
 場合によっては、コンポーネントのビューの *外* にある条件に基づいてスタイルを適用すると便利です。

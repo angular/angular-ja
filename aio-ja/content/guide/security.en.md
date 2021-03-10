@@ -94,7 +94,7 @@ vulnerability. For example, one could execute JavaScript in a following way:
 
 <code-example path="security/src/app/inner-html-binding.component.ts" header="src/app/inner-html-binding.component.ts (class)" region="class"></code-example>
 
-Angular recognizes the value as unsafe and automatically sanitizes it, which removes the `onerror` attribute but keeps safe content such as the `<b>` element.
+Angular recognizes the value as unsafe and automatically sanitizes it, which removes the `script` element but keeps safe content such as the `<b>` element.
 
 <div class="lightbox">
   <img src='generated/images/guide/security/binding-inner-html.png' alt='A screenshot showing interpolated and bound HTML values'>
@@ -151,10 +151,10 @@ this, mark the URL value as a trusted URL using the `bypassSecurityTrustUrl` cal
 </div>
 
 If you need to convert user input into a trusted value, use a
-controller method. The following template allows users to enter a YouTube video ID and load the
+component method. The following template allows users to enter a YouTube video ID and load the
 corresponding video in an `<iframe>`. The `<iframe src>` attribute is a resource URL security
 context, because an untrusted source can, for example, smuggle in file downloads that unsuspecting users
-could execute. So call a method on the controller to construct a trusted video URL, which causes
+could execute. So call a method on the component to construct a trusted video URL, which causes
 Angular to allow binding into `<iframe src>`:
 
 

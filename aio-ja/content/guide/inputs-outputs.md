@@ -5,7 +5,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 <div class="alert is-helpful">
 
-See the <live-example></live-example> for a working example containing the code snippets in this guide.
+このガイドのコードスニペットを含む動作例については <live-example></live-example> を参照しましょう。
 
 </div>
 
@@ -18,28 +18,28 @@ See the <live-example></live-example> for a working example containing the code 
 
 ```
 
-The `<parent-component>` serves as the context for the `<child-component>`.
+`<parent-component>`は `<child-component>`のためのコンテキストとして機能します。
 
-`@Input()` and `@Output()` give a child component a way to communicate with its parent component.
-`@Input()` allows a parent component to update data in the child component.
-Conversely, `@Output()` allows the child to send data to a parent component.
+`@Input()`と`@Output()`は、子コンポーネントにその親コンポーネントと通信する方法を提供します。
+`@Input()`を使用して、親コンポーネントは子コンポーネントのデータを更新できます。
+逆に、`@Output()`を使用して、子は親コンポーネントにデータを送信できます。
 
 
 {@a input}
 
-## Sending data to a child component
+## 子コンポーネントへのデータの送信
 
-The `@Input()` decorator in a child component or directive signifies that the property can receive its value from its parent component.
+子のコンポーネントやディレクティブにおける`@Input()`デコレーターは、プロパティがその親コンポーネントから値を受け取れることを示します。
 
 <div class="lightbox">
   <img src="generated/images/guide/inputs-outputs/input.svg" alt="Input data flow diagram">
 </div>
 
-To use `@Input()`, you must configure the parent and child.
+`@Input()`を使用するには、親と子を設定する必要があります。
 
-### Configuring the child component
+### 子コンポーネントの設定 {@a configuring-the-child-component}
 
-To use the `@Input()` decorator in a child component class, first import `Input` and then decorate the property with `@Input()`, as in the following example.
+子コンポーネントクラスで`@Input()`デコレーターを使用するには、次の例のように、最初に`Input`をインポートしてから、プロパティを`@Input()`でデコレートします。
 
 <code-example path="inputs-outputs/src/app/item-detail/item-detail.component.ts" region="use-input" header="src/app/item-detail/item-detail.component.ts"></code-example>
 
@@ -51,7 +51,7 @@ To use the `@Input()` decorator in a child component class, first import `Input`
 
 <code-example path="inputs-outputs/src/app/item-detail/item-detail.component.html" region="property-in-template" header="src/app/item-detail/item-detail.component.html"></code-example>
 
-### Configuring the parent component
+### 親コンポーネントの設定 {@a configuring-the-parent-component}
 
 次のステップでは、親コンポーネントのテンプレートでプロパティをバインドします。
 この例では親コンポーネントのテンプレートは `app.component.html` です。
@@ -59,7 +59,7 @@ To use the `@Input()` decorator in a child component class, first import `Input`
 1. 子のセレクター（ここでは `<app-item-detail>`）を
 親コンポーネントのテンプレートでのディレクティブとして使います。
 
-2. [プロパティバインディング](guide/property-binding)を使い、子のプロパティを親のプロパティにバインドします。
+2. [プロパティバインディング](guide/property-binding)を使い、子の`item`プロパティを親の`currentItem`プロパティにバインドします。
 
 <code-example path="inputs-outputs/src/app/app.component.html" region="input-parent" header="src/app/app.component.html"></code-example>
 
@@ -78,75 +78,75 @@ To use the `@Input()` decorator in a child component class, first import `Input`
 角括弧 (`[]`) で囲まれたターゲットは、子コンポーネントで `@Input()` で装飾したプロパティです。
 等号の右側にあるバインディングのソースは、親コンポーネントからネストされたコンポーネントに渡すデータです。
 
-### Watching for `@Input()` changes
+### `@Input()`の変更を監視する {@a watching-for-input-changes}
 
-To watch for changes on an `@Input()` property, you can use `OnChanges`, one of Angular's [lifecycle hooks](guide/lifecycle-hooks).
-See the [`OnChanges`](guide/lifecycle-hooks#onchanges) section of the [Lifecycle Hooks](guide/lifecycle-hooks) guide for more details and examples.
+`@Input()`プロパティの変更を監視するには、`OnChanges`を使用します。Angularの[ライフサイクルフック](guide/lifecycle-hooks)の1つです。
+詳細と例については、[ライフサイクルフック](guide/lifecycle-hooks)の[`OnChanges`](guide/lifecycle-hooks#onchanges)セクションを参照しましょう。
 
 {@a output}
 
-## Sending data to a parent component
+## 親コンポーネントへのデータの送信
 
-The `@Output()` decorator in a child component or directive allows data to flow from the child to the parent.
+子のコンポーネントやディレクティブにおける`@Output()`デコレーターを使用すると、データを子から親に流すことができます。
 
 <div class="lightbox">
   <img src="generated/images/guide/inputs-outputs/output.svg" alt="Output diagram">
 </div>
 
-`@Output()` marks a property in a child component as a doorway through which data can travel from the child to the parent.
+`@Output()`は、子コンポーネントのプロパティを、データが子から親に移動できる出入り口としてマークします。
 
-The child component uses the `@Output()` property to raise an event to notify the parent of the change.
-To raise an event, an `@Output()` must have the type of `EventEmitter`, which is a class in `@angular/core` that you use to emit custom events.
+子コンポーネントは`@Output()`プロパティを使用して、親に変更を通知するイベントを発生させます。
+イベントを発生させるには、`@Output()`が`EventEmitter`の型をもつ必要があります。それは`@angular/core`のクラスであり、カスタムイベントを発行するために使用します。
 
-The following example shows how to set up an `@Output()` in a child component that pushes data from an HTML `<input>` to an array in the parent component.
+以降の例は、HTMLの`<input>`から親コンポーネントの配列にデータをプッシュする、子コンポーネントに`@Output()`を設定する方法を示しています。
 
-To use `@Output()`, you must configure the parent and child.
+`@Output()`を使用するには、親と子を設定する必要があります。
 
-### Configuring the child component
+### 子コンポーネントの設定 {@a configuring-the-child-component-1}
 
-The following example features an `<input>` where a user can enter a value and click a `<button>` that raises an event. The `EventEmitter` then relays the data to the parent component.
+以降の例は`<input>`を特徴としていて、そこでユーザーは値を入力でき、イベントを発生させる`<button>`をクリックできます。それから`EventEmitter`はそのデータを親コンポーネントに転送します。
 
-1. Import `Output` and `EventEmitter` in the child component class:
+1. 子コンポーネントクラスに`Output`と`EventEmitter`をインポートします:
 
-```js
-import { Output, EventEmitter } from '@angular/core';
+  ```js
+  import { Output, EventEmitter } from '@angular/core';
 
-```
+  ```
 
-1. In the component class, decorate a property with `@Output()`.
-  The following example `newItemEvent` `@Output()` has a type of `EventEmitter`, which means it's an event.
+1. コンポーネントクラスで、プロパティを`@Output()`でデコレートします。
+  次の例の`newItemEvent`は`@Output()`が`EventEmitter`の型をもっていて、それがイベントであることを意味します。
 
-<code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output" header="src/app/item-output/item-output.component.ts"></code-example>
+  <code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output" header="src/app/item-output/item-output.component.ts"></code-example>
 
-この宣言のそれぞれの部分を説明するとこうなります:
+  この宣言のそれぞれの部分を説明するとこうなります:
 
-* `@Output()`&mdash;プロパティがデータを子から親へ伝える玄関口であることを示すデコレーター関数
-* `newItemEvent`&mdash;`@Output()` の名前
-* `EventEmitter<string>`&mdash;`@Output()` の型
-* `new EventEmitter<string>()`&mdash;Angular に新しいイベントエミッターを作るよう指示し、そのデータの型が文字列であることを示します。型は `number` や `boolean` のようにどのような型でも指定できます。
+    * `@Output()`: データを子から親に移動するための方法としてプロパティをマークするデコレーター関数
+    * `newItemEvent`: `@Output()`の名前
+    * `EventEmitter<string>`: `@Output()`の型
+    * `new EventEmitter<string>()`: 新しいイベントを作ってその発行するデータの型が文字列であることをAngularに指示します
 
-`EventEmitter` についての詳細は [EventEmitter API ドキュメント](api/core/EventEmitter)をご覧ください。
+  `EventEmitter` についての詳細は [EventEmitter API ドキュメント](api/core/EventEmitter)をご覧ください。
 
 1. 同じコンポーネントクラス内に `addNewItem()` メソッドを作ります:
 
-<code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output-class" header="src/app/item-output/item-output.component.ts"></code-example>
+  <code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output-class" header="src/app/item-output/item-output.component.ts"></code-example>
 
-`addNewItem()` 関数では `@Output()` の `newItemEvent`を使ってイベントを発生させ、ユーザーが `<input>`に入力した値を送出しています。
+  `addNewItem()`関数は、`@Output()`の`newItemEvent`を使用して、ユーザーが`<input>`に入力した値をもつイベントを発生させます。
 
-### Configuring the child's template
+### 子テンプレートの設定 {@a configuring-the-childs-template}
 
-The child's template has two controls.
-The first is an HTML `<input>` with a [template reference variable](guide/template-reference-variables) , `#newItem`, where the user types in an item name.
-The `value` property of the `#newItem` variable stores what the user types into the `<input>`.
+子のテンプレートには2つのコントロールがあります。
+1つ目は、[テンプレート参照変数](guide/template-reference-variables)の`#newItem`をもつHTMLの`<input>`で、そこにユーザーはアイテム名を入力します。
+`#newItem`変数の`value`プロパティは、ユーザーが`<input>`に入力した内容を格納します。
 
 <code-example path="inputs-outputs/src/app/item-output/item-output.component.html" region="child-output" header="src/app/item-output/item-output.component.html"></code-example>
 
-2つ目の要素は[イベントバインディング](guide/event-binding)がついた `<button>` です。
+2つ目の要素は、[イベントバインディング](guide/event-binding)の`click`をもつ`<button>`です。
 
-`(click)` イベントは子コンポーネントのクラスの `addNewItem()` メソッドにバインドされていて、
-`#newItem.value` の値が何であるかを引数に取ります。
+`(click)`イベントは、子コンポーネントクラスの`addNewItem()`メソッドにバインドされます。
+`addNewItem()`メソッドは、引数として`#newItem.value`プロパティの値を取ります。
 
-### Configuring the parent component
+### 親コンポーネントの設定 {@a configuring-the-parent-component-1}
 
 この例の `AppComponent` には、 `items` 配列と、その配列に項目を追加するメソッドがあります。
 
@@ -154,31 +154,31 @@ The `value` property of the `#newItem` variable stores what the user types into 
 
 `addItem()` メソッドは文字列として引数を取り、その文字列を `items` に追加します。
 
-### Configuring the parent's template
+### 親テンプレートの設定 {@a configuring-the-parents-template}
 
 1. 親のテンプレートで、親のメソッドを子のイベントにバインドします。
 
 1. 親コンポーネントのテンプレート `app.component.html` に、子のセレクター（ここでは `<app-item-output>`）を置いてください。
 
-<code-example path="inputs-outputs/src/app/app.component.html" region="output-parent" header="src/app/app.component.html"></code-example>
+  <code-example path="inputs-outputs/src/app/app.component.html" region="output-parent" header="src/app/app.component.html"></code-example>
 
-  The event binding, `(newItemEvent)='addItem($event)'`, connects the event in the child, `newItemEvent`, to the method in the parent, `addItem()`.
+  イベントバインディングの`(newItemEvent)='addItem($event)'`は、子のイベント`newItemEvent`を親のメソッド`addItem()`に接続します。
 
-  The `$event` contains the data that the user types into the `<input>` in the child template UI.
+  `$event`には、ユーザーが子テンプレートUIの`<input>`に入力するデータが含まれています。
 
-  To see the `@Output()` working, you can add the following to the parent's template:
+  `@Output()`が機能していることを確認するには、親のテンプレートに以降を追加します:
 
-```html
-  <ul>
-    <li *ngFor="let item of items">{{item}}</li>
-  </ul>
+  ```html
+    <ul>
+      <li *ngFor="let item of items">{{item}}</li>
+    </ul>
   ```
 
-`*ngFor` で `items` 配列の中の項目を反復しています。
-子の `<input>` に値を入力してボタンをクリックすると、子はイベントを発生させ、親の `addItem()` メソッドがその値を `items` 配列に追加し、新しいアイテムを表示します。
+  `*ngFor` で `items` 配列の中の項目を反復しています。
+  子の `<input>` に値を入力してボタンをクリックすると、子はイベントを発生させ、親の `addItem()` メソッドがその値を `items` 配列に追加し、新しいアイテムを表示します。
 
 
-## `@Input()` と `@Output()` を同時に使う
+## `@Input()` と `@Output()` を同時に使う {@a using-input-and-output-together}
 
 次に示すとおり、同じ子コンポーネントに対して `@Input()` と `@Output()` を同時に使うことができます:
 
@@ -187,7 +187,7 @@ The `value` property of the `#newItem` variable stores what the user types into 
 ターゲットとなる `item` は子コンポーネントクラスの `@Input()` プロパティで、親のプロパティ `currentItem` から値を受け取ります。
 delete をクリックすると、子コンポーネントはイベント `deleteRequest` を発生させます。これは親の `crossOffItem()` メソッドの引数となります。
 
-The following diagram shows the different parts of the `@Input()` and `@Output()` on the `<app-input-output>` child component.
+次の図は、子コンポーネント`<app-input-output>`上の`@Input()`と`@Output()`のさまざまな部分を示しています。
 
 <div class="lightbox">
   <img src="generated/images/guide/inputs-outputs/input-output-diagram.svg" alt="Input/Output diagram">

@@ -1,6 +1,7 @@
+<div class="center-layout-wide">
+
 <h1 class="no-toc">チートシート</h1>
 
-<div id="cheatsheet">
 <table class="is-full-width is-fixed-layout">
 <tbody><tr>
 <th>ブートストラップ</th>
@@ -23,7 +24,12 @@
 </th>
 </tr>
 <tr>
-<td><code>@<b>NgModule</b>({ declarations: ..., imports: ...,<br>     exports: ..., providers: ..., bootstrap: ...})<br>class MyModule {}</code></td>
+<td><code>@<b>NgModule</b>({
+  declarations: ..., imports: ..., exports: ...,
+  providers: ..., bootstrap: ...
+})
+class MyModule {}
+</code></td>
 <td><p>コンポーネント、ディレクティブ、パイプおよびプロバイダーを含むモジュールを定義します。</p>
 </td>
 </tr><tr>
@@ -32,7 +38,8 @@
 </td>
 </tr><tr>
 <td><code><b>imports:</b> [BrowserModule, SomeOtherModule]</code></td>
-<td><p>このモジュールにインポートするモジュールのリスト。 インポートされたモジュールのすべては、このモジュールの<code>declarations</code>で使用できます。</p>
+<td><p>このモジュールにインポートするモジュールのリスト。
+インポートされたモジュールのすべては、このモジュールの<code>declarations</code>で使用できます。</p>
 </td>
 </tr><tr>
 <td><code><b>exports:</b> [MyRedComponent, MyDatePipe]</code></td>
@@ -91,7 +98,9 @@
 <td><p>双方向データバインディングを設定します。次と同等です: <code>&lt;my-cmp [title]="name" (titleChange)="name=$event"&gt;</code></p>
 </td>
 </tr><tr>
-<td><code>&lt;video <b>#movieplayer</b> ...&gt;<br>  &lt;button <b>(click)</b>="movieplayer.play()"&gt;<br>&lt;/video&gt;</code></td>
+<td><code>&lt;video <b>#movieplayer</b> ...&gt;&lt;/video&gt;
+&lt;button <b>(click)</b>="movieplayer.play()"&gt;Play&lt;/button&gt;
+</code></td>
 <td><p>現在のテンプレートのデータバインディング式およびイベントバインディング式の中で、<code>video</code>要素のインスタンスへのアクセスを提供するローカル変数<code>movieplayer</code>を作成します。</p>
 </td>
 </tr><tr>
@@ -112,7 +121,10 @@
 <td><p>SVG要素をHTML要素から曖昧さを取り除くために、SVGスニペットテンプレートにはルート要素に<code>svg:</code>というプレフィックスが必要です。</p>
 </td>
 </tr><tr>
-<td><code>&lt;<b>svg</b>&gt;<br>  &lt;rect x="0" y="0" width="100" height="100"/&gt;<br>&lt;/<b>svg</b>&gt;</code></td>
+<td><code>&lt;<b>svg</b>&gt;
+  &lt;rect x="0" y="0" width="100" height="100"/&gt;
+&lt;/<b>svg</b>&gt;
+</code></td>
 <td><p><code>&lt;svg&gt;</code>ルート要素は接頭辞なしで自動的にSVG要素として検出されます。</p>
 </td>
 </tr>
@@ -134,7 +146,12 @@
 <td><p>li要素とその内容をテンプレートに変換し、それを使用してlist内の各項目のビューをインスタンス化します。</p>
 </td>
 </tr><tr>
-<td><code>&lt;div <b>[ngSwitch]</b>="conditionExpression"&gt;<br>  &lt;ng-template <b>[<b>ngSwitchCase</b>]</b>="case1Exp"&gt;...&lt;/ng-template&gt;<br>  &lt;ng-template <b>ngSwitchCase</b>="case2LiteralString"&gt;...&lt;/ng-template&gt;<br>  &lt;ng-template <b>ngSwitchDefault</b>&gt;...&lt;/ng-template&gt;<br>&lt;/div&gt;</code></td>
+<td><code>&lt;div <b>[ngSwitch]</b>="conditionExpression"&gt;
+  &lt;ng-template <b>[<b>ngSwitchCase</b>]</b>="case1Exp"&gt;...&lt;/ng-template&gt;
+  &lt;ng-template <b>ngSwitchCase</b>="case2LiteralString"&gt;...&lt;/ng-template&gt;
+  &lt;ng-template <b>ngSwitchDefault</b>&gt;...&lt;/ng-template&gt;
+&lt;/div&gt;
+</code></td>
 <td><p><code>conditionExpression</code>の現在の値に基づいて埋め込みテンプレートの1つを選択することによって、divの内容を条件にしたがって入れ替えます。</p>
 </td>
 </tr><tr>
@@ -143,7 +160,9 @@
 </td>
 </tr>
 <tr>
-<td><code>&lt;div <b>[ngStyle]</b>="{'property': 'value'}"&gt;</code><br><code>&lt;div <b>[ngStyle]</b>="dynamicStyles()"&gt;</code></td>
+<td><code>&lt;div <b>[ngStyle]</b>="{'property': 'value'}"&gt;
+&lt;div <b>[ngStyle]</b>="dynamicStyles()"&gt;
+</code></td>
 <td><p>CSSを使ってスタイルをHTML要素に適用します。最初の例のようにCSSを直接使うこともできますし、コンポーネントのメソッドを呼び出すこともできます。</p>
 </td>
 </tr>
@@ -171,19 +190,27 @@
 </th>
 </tr>
 <tr>
-<td><code><b>@Component({...})</b><br>class MyComponent() {}</code></td>
+<td><code><b>@Component({...})</b>
+class MyComponent() {}
+</code></td>
 <td><p>クラスがコンポーネントであることを宣言し、コンポーネントに関するメタデータを提供します。</p>
 </td>
 </tr><tr>
-<td><code><b>@Directive({...})</b><br>class MyDirective() {}</code></td>
+<td><code><b>@Directive({...})</b>
+class MyDirective() {}
+</code></td>
 <td><p>クラスがディレクティブであることを宣言し、ディレクティブに関するメタデータを提供します。</p>
 </td>
 </tr><tr>
-<td><code><b>@Pipe({...})</b><br>class MyPipe() {}</code></td>
+<td><code><b>@Pipe({...})</b>
+class MyPipe() {}
+</code></td>
 <td><p>クラスがパイプであることを宣言し、パイプに関するメタデータを提供します。</p>
 </td>
 </tr><tr>
-<td><code><b>@Injectable()</b><br>class MyService() {}</code></td>
+<td><code><b>@Injectable()</b>
+class MyService() {}
+</code></td>
 <td><p>Declares that a class can be provided and injected by other classes. Without this decorator, the compiler won't generate enough metadata to allow the class to be created properly when it's injected somewhere.</p>
 </td>
 </tr>
@@ -226,11 +253,15 @@
 <td><p>このコンポーネントのビューにスコープされた依存性注入プロバイダのリスト。</p>
 </td>
 </tr><tr>
-<td><code><b>template:</b> 'Hello {{name}}'<br><b>templateUrl:</b> 'my-component.html'</code></td>
+<td><code><b>template:</b> 'Hello {{name}}'
+<b>templateUrl:</b> 'my-component.html'
+</code></td>
 <td><p>コンポーネントのビューのインラインテンプレートまたは外部テンプレートURL。</p>
 </td>
 </tr><tr>
-<td><code><b>styles:</b> ['.primary {color: red}']<br><b>styleUrls:</b> ['my-component.css']</code></td>
+<td><code><b>styles:</b> ['.primary {color: red}']
+<b>styleUrls:</b> ['my-component.css']
+</code></td>
 <td><p>コンポーネントのビューをスタイリングするためのインラインCSSスタイルまたは外部スタイルシートURLのリスト。</p>
 </td>
 </tr>
@@ -353,41 +384,100 @@
 </th>
 </tr>
 <tr>
-<td><code>const routes: <b>Routes</b> = [<br>  { path: '', component: HomeComponent },<br>  { path: 'path/:routeParam', component: MyComponent },<br>  { path: 'staticPath', component: ... },<br>  { path: '**', component: ... },<br>  { path: 'oldPath', redirectTo: '/staticPath' },<br>  { path: ..., component: ..., data: { message: 'Custom' } }<br>]);<br><br>const routing = RouterModule.forRoot(routes);</code></td>
+<td><code>const routes: <b>Routes</b> = [
+  { path: '', component: HomeComponent },
+  { path: 'path/:routeParam', component: MyComponent },
+  { path: 'staticPath', component: ... },
+  { path: '**', component: ... },
+  { path: 'oldPath', redirectTo: '/staticPath' },
+  { path: ..., component: ..., data: { message: 'Custom' } }
+]);
+
+const routing = RouterModule.forRoot(routes);
+</code></td>
 <td><p>アプリケーションのルートを構成します。 静的なもの、パラメータ化されたもの、リダイレクトおよびワイルドカードのルートをサポートします。 また、カスタムのdataおよびresolveをサポートします。</p>
 </td>
 </tr><tr>
-<td><code><br>&lt;<b>router-outlet</b>&gt;&lt;/<b>router-outlet</b>&gt;<br>&lt;<b>router-outlet</b> name="aux"&gt;&lt;/<b>router-outlet</b>&gt;<br></code></td>
+<td><code>&lt;<b>router-outlet</b>&gt;&lt;/<b>router-outlet</b>&gt;
+&lt;<b>router-outlet</b> name="aux"&gt;&lt;/<b>router-outlet</b>&gt;
+</code></td>
 <td><p>アクティブなルートのコンポーネントをロードする場所をマークします。</p>
 </td>
 </tr><tr>
-<td><code><br>&lt;a routerLink="/path"&gt;<br>&lt;a <b>[routerLink]</b>="[ '/path', routeParam ]"&gt;<br>&lt;a <b>[routerLink]</b>="[ '/path', { matrixParam: 'value' } ]"&gt;<br>&lt;a <b>[routerLink]</b>="[ '/path' ]" [queryParams]="{ page: 1 }"&gt;<br>&lt;a <b>[routerLink]</b>="[ '/path' ]" fragment="anchor"&gt;<br></code></td>
+<td><code>&lt;a <b>routerLink</b>="/path"&gt;
+&lt;a <b>[routerLink]</b>="[ '/path', routeParam ]"&gt;
+&lt;a <b>[routerLink]</b>="[ '/path', { matrixParam: 'value' } ]"&gt;
+&lt;a <b>[routerLink]</b>="[ '/path' ]" [queryParams]="{ page: 1 }"&gt;
+&lt;a <b>[routerLink]</b>="[ '/path' ]" fragment="anchor"&gt;
+</code></td>
 <td><p>ルートパス、必須もしくはオプショナルのパラメータ、クエリパラメータおよびフラグメントで構成されるルートの設定に基づいて、別のビューへのリンクを作成します。 rootとなるルートに移動するには、<code>/</code>接頭辞を使用します。 子ルートの場合は、<code>./</code>接頭辞を使用します。 兄弟または親の場合は、<code>../</code>接頭辞を使用します。</p>
 </td>
 </tr><tr>
-<td><code>&lt;a [routerLink]="[ '/path' ]" routerLinkActive="active"&gt;</code></td>
+<td><code>&lt;a [routerLink]="[ '/path' ]" <b>routerLinkActive</b>="active"&gt;</code></td>
 <td><p><code>routerLink</code>が現在のアクティブなルートになると、指定されたクラスが要素に追加されます。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanActivate</b>Guard implements <b>CanActivate</b> {<br>    canActivate(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canActivate: [<b>CanActivate</b>Guard] }</code></td>
+<td><code>class <b>CanActivate</b>Guard implements <b>CanActivate</b> {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }
+}
+
+{ path: ..., canActivate: [<b>CanActivate</b>Guard] }
+</code></td>
 <td><p>このコンポーネントをアクティブにすべきかを判断するためにルータが最初に呼び出すクラスを定義するためのインタフェース。 boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanDeactivate</b>Guard implements <b>CanDeactivate</b>&lt;T&gt; {<br>    canDeactivate(<br>      component: T,<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canDeactivate: [<b>CanDeactivate</b>Guard] }</code></td>
+<td><code>class <b>CanDeactivate</b>Guard implements <b>CanDeactivate</b>&lt;T&gt; {
+  canDeactivate(
+    component: T,
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }
+}
+
+{ path: ..., canDeactivate: [<b>CanDeactivate</b>Guard] }
+</code></td>
 <td><p>ナビゲーション後にルータがこのコンポーネントを非アクティブ化すべきかを判断するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。 boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanActivateChild</b>Guard implements <b>CanActivateChild</b> {<br>    canActivateChild(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canActivateChild: [CanActivateGuard],<br>    children: ... }</code></td>
+<td><code>class <b>CanActivateChild</b>Guard implements <b>CanActivateChild</b> {
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }
+}
+
+{ path: ..., canActivateChild: [CanActivateGuard],
+  children: ... }
+</code></td>
 <td><p>子ルートをアクティブにすべかを判断するためにルータが最初に呼び出すクラスを定義するためのインタフェース。boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>Resolve</b>Guard implements <b>Resolve</b>&lt;T&gt; {<br>    resolve(<br>      route: ActivatedRouteSnapshot,<br>      state: RouterStateSnapshot<br>    ): Observable&lt;any&gt;|Promise&lt;any&gt;|any { ... }<br>}<br><br>{ path: ..., resolve: [<b>Resolve</b>Guard] }</code></td>
+<td><code>class <b>Resolve</b>Guard implements <b>Resolve</b>&lt;T&gt; {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable&lt;any&gt;|Promise&lt;any&gt;|any { ... }
+}
+
+{ path: ..., resolve: [<b>Resolve</b>Guard] }
+</code></td>
 <td><p>ルートをレンダリングする前にルートデータを解決するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。 値か、その値を解決するObservableおよびPromiseを返す必要があります。</p>
 </td>
 </tr><tr>
-<td><code>class <b>CanLoad</b>Guard implements <b>CanLoad</b> {<br>    canLoad(<br>      route: Route<br>    ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }<br>}<br><br>{ path: ..., canLoad: [<b>CanLoad</b>Guard], loadChildren: ... }</code></td>
+<td><code>class <b>CanLoad</b>Guard implements <b>CanLoad</b> {
+  canLoad(
+    route: Route
+  ): Observable&lt;boolean|UrlTree&gt;|Promise&lt;boolean|UrlTree&gt;|boolean|UrlTree { ... }
+}
+
+{ path: ..., canLoad: [<b>CanLoad</b>Guard], loadChildren: ... }
+</code></td>
 <td><p>遅延ロードされたモジュールがロードされるべきかを判断するためにルータが最初に呼び出すべきクラスを定義するためのインタフェース。boolean|UrlTree、もしくはboolean|UrlTreeを解決するObservableかPromiseを返す必要があります。</p>
 </td>
 </tr>
 </tbody></table>
+
 </div>

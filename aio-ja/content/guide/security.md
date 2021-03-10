@@ -94,7 +94,7 @@ For example, one could execute JavaScript in a following way:
 
 <code-example path="security/src/app/inner-html-binding.component.ts" header="src/app/inner-html-binding.component.ts (class)" region="class"></code-example>
 
-Angular recognizes the value as unsafe and automatically sanitizes it, which removes the `onerror` attribute but keeps safe content such as the `<b>` element.
+Angular recognizes the value as unsafe and automatically sanitizes it, which removes the `script` element but keeps safe content such as the `<b>` element.
 
 <div class="lightbox">
   <img src='generated/images/guide/security/binding-inner-html.png' alt='A screenshot showing interpolated and bound HTML values'>
@@ -150,11 +150,11 @@ URLに` javascript：alert(...)` をバインドするとします。
   <img src='generated/images/guide/security/bypass-security-component.png' alt='A screenshot showing an alert box created from a trusted URL'>
 </div>
 
-ユーザー入力を信頼できる値に変換する必要がある場合は、コントローラーメソッドを使用します。
+ユーザー入力を信頼できる値に変換する必要がある場合は、コンポーネントメソッドを使用します。
 次のテンプレートでは、ユーザーはYouTubeの動画IDを入力し、対応する動画を`<iframe>`に読み込むことができます。
 信頼できないソースは、たとえば、無防備なユーザーが実行する可能性があるファイルを密かにダウンロードする可能性があるため、
 `<iframe src>`属性はリソースURLのセキュリティコンテキストです。
-したがって、コントローラ上のメソッドを呼び出して信頼できるビデオURLを作成します。
+したがってコンポーネント上のメソッドを呼び出して信頼できるビデオURLを作成します。
 これにより、Angularは`<iframe src>`へのバインディングを許可します
 
 

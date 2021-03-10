@@ -1028,6 +1028,15 @@ For example, the prefix `toh` represents **T**our **o**f **H**eroes and the pref
 
 </div>
 
+<div class="s-rule avoid">
+
+
+
+**Don't** prefix a directive name with `ng` because that prefix is reserved for Angular and using it could cause bugs that are difficult to diagnose.
+
+
+</div>
+
 
 
 <div class="s-why">
@@ -3883,35 +3892,6 @@ signatures. Use those signatures to flag spelling and syntax mistakes.
 ## Appendix
 
 Useful tools and tips for Angular.
-
-<a href="#toc">Back to top</a>
-
-{@a A-01}
-
-### Codelyzer
-
-#### Style A-01
-
-
-<div class="s-rule do">
-
-
-
-**Do** use [codelyzer](https://www.npmjs.com/package/codelyzer) to follow this guide.
-
-
-</div>
-
-
-
-<div class="s-rule consider">
-
-
-
-**Consider** adjusting the rules in codelyzer to suit your needs.
-
-
-</div>
 
 <a href="#toc">Back to top</a>
 

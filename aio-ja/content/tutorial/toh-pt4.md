@@ -124,7 +124,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts (import HeroService)" region="hero-service-import">
 </code-example>
 
-`heroes` プロパティの定義を、単純な宣言に置き換えます。
+`heroes` プロパティの定義を宣言に置き換えます。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="heroes">
 </code-example>
@@ -379,7 +379,7 @@ path="toh-pt4/src/app/heroes/heroes.component.ts">
 
 ヒーローリストを見るためにブラウザを更新し、一番下までスクロールすると 
 `HeroService` からのメッセージを表示されます。あなたがヒーローをクリックするたびに、新しいメッセージが選択を登録して表示されます。
-メッセージ履歴を削除するために「clear」ボタンを使用します。
+メッセージ履歴を削除するために**Clear messages**ボタンを使用します。
 
 {@a final-code-review}
 

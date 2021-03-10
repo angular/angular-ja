@@ -389,7 +389,7 @@ In the following example, the `HeroesService` makes an HTTP POST request when ad
 The `HttpClient.post()` method is similar to `get()` in that it has a type parameter, which you can use to specify that you expect the server to return data of a given type. The method takes a resource URL and two additional parameters:
 
 * *body* - The data to POST in the body of the request.
-* *options*` - An object containing method options which, in this case, [specify required headers](#adding-headers).
+* *options* - An object containing method options which, in this case, [specify required headers](#adding-headers).
 
 The example catches errors as [described above](#error-details).
 
@@ -653,8 +653,20 @@ There are many more interceptors in the complete sample code.
 ### Interceptor order
 
 Angular applies interceptors in the order that you provide them.
-If you provide interceptors _A_, then _B_, then _C_,  requests flow in _A->B->C_ and
-responses flow out _C->B->A_.
+For example, consider a situation in which you want to handle the authentication of your HTTP requests and log them before sending them to a server. To accomplish this task, you could provide an `AuthInterceptor` service and then a `LoggingInterceptor` service.
+Outgoing requests would flow from the `AuthInterceptor` to the `LoggingInterceptor`.
+Responses from these requests would flow in the other direction, from `LoggingInterceptor` back to `AuthInterceptor`.
+The following is a visual representation of the process:
+
+<div class="lightbox">
+  <img src="generated/images/guide/http/interceptor-order.svg" alt="Interceptor order">
+</div>
+
+<div class="alert is-helpful">
+
+   The last interceptor in the process is always the `HttpBackend` that handles communication with the server.
+
+</div>
 
 You cannot change the order or remove interceptors later.
 If you need to enable and disable an interceptor dynamically, you'll have to build that capability into the interceptor itself.
@@ -978,6 +990,16 @@ a search request for a package with that name to the npm web API.
 </code-example>
 
 Here, the `keyup` event binding sends every keystroke to the component's `search()` method.
+
+<div class="alert is-helpful">
+
+The type of `$event.target` is only `EventTarget` in the template.
+In the `getValue()` method, the target is cast to an `HTMLInputElement` to allow type-safe access to its `value` property.
+
+<code-example path="http/src/app/package-search/package-search.component.ts" region="getValue"></code-example>
+
+</div>
+
 The following snippet implements debouncing for this input using RxJS operators.
 
 <code-example

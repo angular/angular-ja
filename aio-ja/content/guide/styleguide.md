@@ -879,7 +879,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 05-02}
 
-### コンポーネントセレクター
+### コンポーネントセレクター {@a component-selectors}
 
 #### Style 05-02
 
@@ -1024,6 +1024,15 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 **Do** ネイティブのHTML属性にマッチさせることを意図しない限り、非要素のセレクターはlowerCamelCaseで命名してください。
+
+
+</div>
+
+<div class="s-rule avoid">
+
+
+
+**Don't** prefix a directive name with `ng` because that prefix is reserved for Angular and using it could cause bugs that are difficult to diagnose.
 
 
 </div>
@@ -3901,35 +3910,6 @@ You may want to have a required `@Input` field, meaning all your component users
 ## 付録
 
 Angular用の便利なツールとヒント。
-
-<a href="#toc">トップに戻る</a>
-
-{@a A-01}
-
-### Codelyzer
-
-#### Style A-01
-
-
-<div class="s-rule do">
-
-
-
-**Do** [codelyzer](https://www.npmjs.com/package/codelyzer)を使ってこのスタイルガイドに従います。
-
-
-</div>
-
-
-
-<div class="s-rule consider">
-
-
-
-**Consider** あなたのニーズに合うようにcodelyzerのルールを調整します。
-
-
-</div>
 
 <a href="#toc">トップに戻る</a>
 

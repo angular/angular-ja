@@ -357,24 +357,6 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
     <td>
 
-      <a id='intl' href="https://github.com/andyearnshaw/Intl.js">Intl</a>
-
-    </td>
-
-    <td>
-      MIT / Unicode license
-    </td>
-
-    <td>
-      13.5KB
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-
        <a id='web-animations' href="https://github.com/web-animations/web-animations-js">Web Animations</a>
 
     </td>

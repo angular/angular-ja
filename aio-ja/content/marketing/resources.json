@@ -207,12 +207,6 @@
             "title": "UI Bakery",
             "url": "https://uibakery.io/"
           },
-          "a1": {
-            "desc": "A Google Chrome Dev Tools extension for debugging Angular applications.",
-            "logo": "https://augury.angular.io/images/augury-logo.svg",
-            "title": "Augury",
-            "url": "https://augury.rangle.io/"
-          },
           "b1": {
             "desc": "Server-side Rendering for Angular apps.",
             "logo": "https://cloud.githubusercontent.com/assets/1016365/10639063/138338bc-7806-11e5-8057-d34c75f3cafc.png",
@@ -230,11 +224,11 @@
             "title": "Angular CLI",
             "url": "https://cli.angular.io"
           },
-          "d1": {
-            "desc": "Static analysis for Angular projects.",
+          "angular-eslint": {
+            "desc": "The tooling which enables ESLint to lint Angular projects.",
             "logo": "",
-            "title": "Codelyzer",
-            "url": "https://github.com/mgechev/codelyzer"
+            "title": "Angular ESLint",
+            "url": "https://github.com/angular-eslint/angular-eslint#readme"
           },
           "f1": {
             "desc": "This tool generates dedicated documentation for Angular applications.",
@@ -282,6 +276,12 @@
             "title": "Scully",
             "logo": "https://raw.githubusercontent.com/scullyio/scully/main/assets/logos/PNG/Green/scullyio-logo-green.png",
             "url": "https://scully.io"
+          },
+          "ng-mocks": {
+            "desc": "A testing library for creating mock services, components, directives, pipes and modules out of annoying dependencies in unit tests.",
+            "title": "ng-mocks",
+            "logo": "",
+            "url": "https://github.com/ike18t/ng-mocks#readme"
           }
         }
       },

@@ -2,11 +2,11 @@
 
 <!-- #docregion add -->
 <div>
-  <label>Hero name:
-    <input #heroName />
-  </label>
+  <label id="new-hero">Hero name: </label>
+  <input for="new-hero" #heroName />
+
   <!-- (click) 入力値をadd()に渡したあと、入力をクリアする -->
-  <button (click)="add(heroName.value); heroName.value=''">
+  <button class="add-button" (click)="add(heroName.value); heroName.value=''">
     add
   </button>
 </div>

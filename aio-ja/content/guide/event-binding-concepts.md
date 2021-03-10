@@ -25,6 +25,15 @@
 1. このコードは`<input>`要素の`input`イベントにバインドして、それにより変更をリッスンできます。
 1. ユーザーが変更を加えると、コンポーネントは`input`イベントを発生させます。
 1. バインディングは、DOMのイベントオブジェクトの`$event`を含むコンテキスト内でその式を実行します。
-1. Angularは、`$event.target.value`というパスをたどってその変更されたテキストを取得し、`name`プロパティを更新します。
+1. Angularは、`getValue($event.target)`を呼び出して変更されたテキストを取得し、`name`プロパティを更新します。
 
 イベントがディレクティブやコンポーネントに属している場合、`$event`はディレクティブやコンポーネントが生成する形式になります。
+
+<div class="alert is-helpful">
+
+The type of `$event.target` is only `EventTarget` in the template.
+In the `getValue()` method, the target is cast to an `HTMLInputElement` to allow type-safe access to its `value` property.
+
+<code-example path="event-binding/src/app/app.component.ts" region="getValue"></code-example>
+
+</div>

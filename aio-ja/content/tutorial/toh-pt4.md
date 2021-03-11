@@ -371,7 +371,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 次の例は、ユーザーがヒーローをクリックするたびに、メッセージを送信、表示し、
 そしてユーザーの選択履歴を表示する方法を示します。
-これは、あなたが次ののセクション[Routing](tutorial/toh-pt5)を見るときに助けになります。
+これは、あなたが次のセクション[Routing](tutorial/toh-pt5)を見るときに助けになります。
 
 <code-example header="src/app/heroes/heroes.component.ts"
 path="toh-pt4/src/app/heroes/heroes.component.ts">

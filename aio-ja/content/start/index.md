@@ -240,7 +240,7 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
     <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.html"></code-example>
 
 1. ユーザーがボタンをクリックしたときの動作を定義します。
-  親の `ProductListComponent`は、`ProductAlertsComponent`ではなく、`ProductAlertsComponent`がイベントを発生させたときに動作します。
+  親の `ProductListComponent`—`ProductAlertsComponent`ではなく—は、`ProductAlertsComponent`がイベントを発生させたときに動作します。
   `product-list.component.ts` で `onNotify()` メソッドを定義します。
 
   <code-example header="src/app/product-list/product-list.component.ts" path="getting-started/src/app/product-list/product-list.component.ts" region="on-notify"></code-example>

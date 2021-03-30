@@ -65,7 +65,7 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="product-prop">
     </code-example>
 
-1. コンストラクターの括弧内の引数に `private route. ActivatedRoute` をコンストラクターの括弧内の引数に追加する。
+1. コンストラクターの括弧内に引数として `private route. ActivatedRoute` を追加し、`ActivatedRoute` を `constructor()` に注入する。
 
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="props-methods">
     </code-example>

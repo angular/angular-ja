@@ -42,7 +42,7 @@
     アプリケーションは `ProductDetailsComponent` を表示するはずです。
 
     プレビューウィンドウのURLが変わることに注意してください。 
-    最後のセグメントは `products/#`で、`#`にはあなたがクリックしたルートの数字です。
+    最後のセグメントは `products/#`で、`#`はあなたがクリックしたルートの数字です。
 
     <div class="lightbox">
       <img src="generated/images/guide/start/product-details-works.png" alt="Product details view with updated URL">
@@ -60,7 +60,7 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="imports">
     </code-example>
 
-1. product` プロパティを定義する。
+1. `product` プロパティを定義する。
 
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="product-prop">
     </code-example>

@@ -9,6 +9,10 @@ robocopy aio-ja/ .tmp/aio /e
 
 # Build angular.io
 Set-Location .tmp
+
+# Apply git patches
+git apply -p1 ../scripts/git-patch/*.patch
+
 yarn install --frozen-lockfile --non-interactive
 Set-Location aio
 yarn build

@@ -1,0 +1,11 @@
+diff --git a/aio/src/styles/_constants.scss b/aio/src/styles/_constants.scss
+index 890ca7a974..2b46c3fbbd 100755
+--- a/aio/src/styles/_constants.scss
++++ b/aio/src/styles/_constants.scss
+@@ -1,5 +1,5 @@
+ // TYPOGRAPHY
+-$main-font: "Roboto","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
++$main-font: "Noto Sans JP","Roboto","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+ $code-font: "Roboto Mono", monospace;
+ 
+ // Z-LAYER

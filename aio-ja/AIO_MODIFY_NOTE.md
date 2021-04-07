@@ -21,7 +21,6 @@ https://github.com/angular/angular-ja/commit/d0b7be4a43769c3ef554b56159747ce626b
 - aio-ja/src/favicon.ico
 
 
-
 ## エラーガイドのテンプレートの翻訳
 
 - tools/transforms/templates/error/error.template.html

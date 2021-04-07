@@ -1,0 +1,24 @@
+diff --git a/aio/src/app/layout/nav-item/nav-item.component.html b/aio/src/app/layout/nav-item/nav-item.component.html
+index 0ec330e0b8..6aa94506cb 100644
+--- a/aio/src/app/layout/nav-item/nav-item.component.html
++++ b/aio/src/app/layout/nav-item/nav-item.component.html
+@@ -2,6 +2,7 @@
+   <a href="{{node.url}}" [ngClass]="classes" title="{{node.tooltip}}"
+     class="vertical-menu-item">
+     <span>{{node.title}}</span>
++    <div *ngIf="node.translated">🇯🇵</div>
+   </a>
+ </div>
+ 
+diff --git a/aio/src/app/navigation/navigation.model.ts b/aio/src/app/navigation/navigation.model.ts
+index 1d832de471..7ecc78caa5 100644
+--- a/aio/src/app/navigation/navigation.model.ts
++++ b/aio/src/app/navigation/navigation.model.ts
+@@ -13,6 +13,7 @@ export interface NavigationNode {
+   tooltip?: string;
+   hidden?: boolean;
+   children?: NavigationNode[];
++  translated?: boolean;
+ }
+ 
+ export type NavigationResponse = {__versionInfo: VersionInfo } & { [name: string]: NavigationNode[]|VersionInfo };

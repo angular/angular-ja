@@ -12,7 +12,7 @@ rsync -ar --exclude='**/*.en.*' --exclude='**/*.old' aio-ja/ .tmp/aio
 cd .tmp
 
 # apply git patches
-git apply -p1 ../scripts/git-patch/disable-service-worker.patch
+git apply -p1 ../scripts/git-patch/*.patch
 
 # build angular.io
 yarn install --frozen-lockfile --non-interactive

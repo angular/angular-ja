@@ -1,0 +1,83 @@
+diff --git a/aio/src/app/layout/doc-viewer/doc-viewer.component.ts b/aio/src/app/layout/doc-viewer/doc-viewer.component.ts
+index 26c0528a84..9958b6fc81 100644
+--- a/aio/src/app/layout/doc-viewer/doc-viewer.component.ts
++++ b/aio/src/app/layout/doc-viewer/doc-viewer.component.ts
+@@ -121,7 +121,7 @@ export class DocViewerComponent implements OnDestroy {
+         }
+       }
+ 
+-      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular');
++      this.titleService.setTitle(title ? `Angular 日本語ドキュメンテーション - ${title}` : 'Angular 日本語ドキュメンテーション');
+     };
+   }
+ 
+diff --git a/aio/src/index.html b/aio/src/index.html
+index d8c7b34674..0e8ec69909 100644
+--- a/aio/src/index.html
++++ b/aio/src/index.html
+@@ -1,11 +1,11 @@
+ <!doctype html>
+-<html lang="en">
+-
++<html lang="ja">
+ <head>
+   <meta charset="utf-8">
+-  <title>Angular</title>
+-  <meta name="Description" content="Angular is a platform for building mobile and desktop web applications.
+-    Join the community of millions of developers who build compelling user interfaces with Angular.">
++  <meta name="google-site-verification" content="VDsUl97MN_iK9s7BAQia_MH6bjYsQDTOAdU_psUEzZg" />
++  <title>Angular 日本語ドキュメンテーション</title>
++  <meta name="Description" content="Angularは、モバイルおよびデスクトップWebアプリケーションを構築するためのプラットフォームです。
++    Angularを使用して魅力的なユーザーインターフェースを構築する何百万もの開発者のコ​​ミュニティに参加してください。">
+   <base href="/">
+ 
+   <link rel="preconnect" href="https://www.google-analytics.com">
+@@ -25,6 +25,7 @@
+   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicons/favicon-144x144.png">
+ 
+   <!-- NOTE: These need to be kept in sync with `ngsw-config.json`. -->
++  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,500,600,700&display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block">
+@@ -35,6 +36,13 @@
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+ 
++  <script>
++    // Redirect to custom domain hosted version
++    if (location.hostname === 'angular-ja.firebaseapp.com') {
++      location.href = `https://angular.jp${location.pathname}`;
++    }
++  </script>
++
+   <script>
+     // Dynamically, pre-emptively, add `noindex`, which will be removed when the doc is ready and valid
+     tag = document.createElement('meta'); tag.name = 'robots'; tag.content = 'noindex';
+@@ -101,11 +109,11 @@
+         <img src="assets/images/logos/angular/angular.svg" width="250" height="250" alt="Angular">
+       </div>
+       <div class="homepage-container">
+-        <div class="hero-headline">The modern web<br>developer's platform</div>
++        <b><i>This website requires JavaScript.</i></b>
+       </div>
+     </section>
+     <h2 style="color: red; margin-top: 40px; position: relative; text-align: center; text-shadow: 1px 1px #fafafa;">
+-      <b><i>This website requires JavaScript.</i></b>
++      <b><i>このウェブサイトにはJavaScriptが必要です。</i></b>
+     </h2>
+   </noscript>
+ </body>
+diff --git a/aio/src/pwa-manifest.json b/aio/src/pwa-manifest.json
+index 12f667f483..3d535da1b1 100644
+--- a/aio/src/pwa-manifest.json
++++ b/aio/src/pwa-manifest.json
+@@ -1,6 +1,6 @@
+ {
+-  "name": "Angular Documentation",
+-  "short_name": "angular.io",
++  "name": "Angular 日本語ドキュメンテーション",
++  "short_name": "angular.jp",
+   "background_color": "#1976d2",
+   "theme_color": "#1976d2",
+   "display": "standalone",

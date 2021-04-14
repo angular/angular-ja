@@ -2,7 +2,13 @@
 
 echo "Checking aio changes in origin..."
 
-aioHash="01c1677151" # v11.2.5
+aioHash="$1"
+
+if [ -z "${aioHash}" ]; then
+    echo "No aio origin SHA is provided.";
+    exit 1;
+fi
+
 
 git -C origin fetch --all
 git -C origin reset ${aioHash} --hard

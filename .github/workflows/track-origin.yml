@@ -13,7 +13,9 @@ jobs:
     - uses: actions/checkout@v2
       with: 
         submodules: true
-    - run: git -C origin fetch --all
-    - run: echo "::set-output name=COMMIT_HASH::`git -C origin rev-parse origin/${ANGULAR_BRANCH}`"
+    - run: git fetch --all
+      working-directory: origin
+    - run: echo "::set-output name=COMMIT_HASH::`git rev-parse origin/${ANGULAR_BRANCH}`"
+      working-directory: origin
       id: get-branch-head
     - run: echo ${{steps.get-branch-head.outputs.COMMIT_HASH}}

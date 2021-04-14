@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with: 
-        depth: 0
+        fetch-depth: 0
         submodules: true
     - run: echo "::set-output name=COMMIT_HASH::`gh api repos/angular/angular/git/ref/heads/${ANGULAR_BRANCH} --jq ".object.sha"`"
       working-directory: origin

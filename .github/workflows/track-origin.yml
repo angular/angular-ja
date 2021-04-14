@@ -1,0 +1,19 @@
+name: Track origin update
+
+on:
+  schedule:
+    - cron: "* * * * *"
+env:
+  ANGULAR_BRANCH: "11.2.x"
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with: 
+        submodules: true
+    - run: git -C origin fetch --all
+    - run: echo "::set-output name=COMMIT_HASH::(git -C origin rev-parse origin/${ANGULAR_BRANCH})"
+      id: get-branch-head
+    - run: echo ${{steps.get-branch-head.outputs.COMMIT_HASH}}

@@ -5,6 +5,7 @@ on:
     - cron: "* * * * *"
 env:
   ANGULAR_BRANCH: "11.2.x"
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   create-pr:
@@ -13,9 +14,7 @@ jobs:
     - uses: actions/checkout@v2
       with: 
         submodules: true
-    - run: git fetch --all
-      working-directory: origin
-    - run: echo "::set-output name=COMMIT_HASH::`git rev-parse origin/${ANGULAR_BRANCH}`"
+    - run: echo "::set-output name=COMMIT_HASH::`gh api repos/angular/angular/git/ref/heads/${ANGULAR_BRANCH}`"
       working-directory: origin
       id: get-branch-head
     - run: echo ${{steps.get-branch-head.outputs.COMMIT_HASH}}

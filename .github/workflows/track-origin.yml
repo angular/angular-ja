@@ -18,5 +18,9 @@ jobs:
     - run: echo "::set-output name=COMMIT_HASH::`gh api repos/angular/angular/git/ref/heads/${ANGULAR_BRANCH} --jq ".object.sha"`"
       working-directory: origin
       id: get-branch-head
-    - run: ./update-origin.sh ${{steps.get-branch-head.outputs.COMMIT_HASH}}
+    - uses: actions/setup-node@v2
+      with:
+        node-version: "14"
+    - run: yarn install
+    - run: yarn update-origin ${{steps.get-branch-head.outputs.COMMIT_HASH}}
     - run: git status

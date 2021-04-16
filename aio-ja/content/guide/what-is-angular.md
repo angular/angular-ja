@@ -129,7 +129,7 @@ Angularの宣言型テンプレートを使用すると、アプリケーショ�
 
 <code-example path="what-is-angular/src/app/hello-world-di/hello-world-di.component.ts"></code-example>
 
-依存性の注入とAngularの詳細については、[Angularの依存性注入](guide/dependency-injection)セクションを参照してください。
+依存性の注入とAngularの詳細については、[Angularの依存性の注入](guide/dependency-injection)セクションを参照してください。
 
 {@a cli}
 

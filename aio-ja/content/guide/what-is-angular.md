@@ -1,88 +1,88 @@
-# What is Angular?
+# Angularとは何か？
 
-This topic can help you understand Angular: what Angular is, what advantages it provides, and what you might expect as you start to build your applications.
+このトピックはAngularを理解するのに役立ちます。Angularとは何であるか、Angularが提供する利点、そしてあなたがアプリケーションを作るときに何が期待できるのか、といったことです。
 
-Angular is a development platform, built on [TypeScript](https://www.typescriptlang.org/). As a platform, Angular includes:
+Angularは[TypeScript](https://www.typescriptlang.org/)上に作られた開発プラットフォームです。プラットフォームとしてAngularには次のことが含まれます：
 
-* A component-based framework for building scalable web applications
-* A collection of well-integrated libraries that cover a wide variety of features, including routing, forms management, client-server communication, and more
-* A suite of developer tools to help you develop, build, test, and update your code
+* スケーラブルなウェブアプリケーションを構築するためのコンポーネントベースのフレームワーク
+* ルーティング、フォーム管理、クライアントとサーバー間の通信など、さまざまな機能をカバーする、十分に統合されたライブラリのコレクション
+* コードの開発、ビルド、テスト、更新を支援する一連の開発者ツール
 
-When you build applications with Angular, you're taking advantage of a platform that can scale from single-developer projects to enterprise-level applications. Angular is designed to make updating as easy as possible, so you can take advantage of the latest developments with a minimum of effort. Best of all, the Angular ecosystem consists of a diverse group of over 1.7 million developers, library authors, and content creators.
+Angularを使用すると、ひとりの開発者によるプロジェクトからエンタープライズレベルのアプリケーションまで拡張できるプラットフォームを利用できます。Angularは、更新を可能な限り簡単にするように設計されているため、最小限の労力で最新の開発を利用できます。何よりも、Angularエコシステムは、170万人を超える開発者、ライブラリ作成者、コンテンツ作成者からなる多様なグループで構成されています。
 
 <div class="alert is-helpful">
 
-See the <live-example name="what-is-angular"></live-example> for a working example containing the code snippets in this guide.
+このガイドのコードスニペットを含む実用的な例については <live-example name="what-is-angular"></live-example> を参照してください。
 
 </div>
 
 {@a essentials}
-## Angular applications: The essentials
+## Angularアプリケーション：基本事項
 
-This section explains the core ideas behind Angular. Understanding these ideas can help you design and build your applications more effectively.
+このセクションでは、Angularの背後にある中心的なアイデアについて説明します。これらのアイデアを理解すると、アプリケーションをより効果的に設計および構築するのに役立ちます。
 
 {@a components}
-### Components
+### コンポーネント
 
-Components are the building blocks that compose an application. A component includes a TypeScript class with a `@Component()` decorator, an HTML template, and styles. The `@Component()` decorator specifies the following Angular-specific information:
+コンポーネントは、アプリケーションを組み立てる構成要素です。コンポーネントには、`@Component()`デコレーターを付けたTypeScriptのクラス、HTMLテンプレート、およびスタイルが含まれます。`@Component()`デコレーターには、次のAngular固有の情報を指定します。
 
-* A CSS selector that defines how the component is used in a template. HTML elements in your template that match this selector become instances of the component.
-* An HTML template that instructs Angular how to render the component.
-* An optional set of CSS styles that define the appearance of the template's HTML elements.
+* コンポーネントがテンプレートでどのように使用されるかを定義するCSSセレクター。このセレクターに一致するテンプレート内のHTML要素は、コンポーネントのインスタンスになります。
+* コンポーネントのレンダリング方法をAngularに指示するHTMLテンプレート。
+* テンプレートのHTML要素の外観を定義するCSSスタイルのオプションのセット。
 
-The following is a minimal Angular component.
+以下は最小限のAngularコンポーネントです。
 
 <code-example
   path="what-is-angular/src/app/hello-world/hello-world.component.ts"></code-example>
 
-To use this component, you write the following in a template:
+このコンポーネントを使用するには、テンプレートに次のように記述します。
 
 <code-example path="what-is-angular/src/app/app.component.html" region="hello-world-selector"></code-example>
 
-When Angular renders this component, the resulting DOM looks like this:
+Angularがこのコンポーネントをレンダリングすると、結果のDOMは次のようになります。
 
 <code-example path="what-is-angular/src/app/hello-world-example.html" language="html"></code-example>
 
-Angular's component model offers strong encapsulation and an intuitive application structure. Components also make your application easier to unit test and can improve the overall readability of your code.
+Angularのコンポーネントモデルは、強力なカプセル化と直感的なアプリケーション構造を提供します。また、コンポーネントは、アプリケーションの単体テストを容易にし、コードの全体的な可読性を向上させることができます。
 
-For more information on what you can do with components, see the [Components](guide/component-overview) section.
+コンポーネントでできることの詳細については、[コンポーネント](guide/component-overview)セクションを参照してください。
 
 {@a templates}
-### Templates
+### テンプレート
 
-Every component has an HTML template that declares how that component renders. You define this template either inline or by file path.
+すべてのコンポーネントには、そのコンポーネントのレンダリング方法を宣言するHTMLテンプレートがあります。このテンプレートは、インラインまたはファイルパスで定義します。
 
-Angular extends HTML with additional syntax that lets you insert dynamic values from your component. Angular automatically updates the rendered DOM when your component’s state changes. One application of this feature is inserting dynamic text, as shown in the following example.
+Angularは、コンポーネントから動的な値を挿入できる追加の構文でHTMLを拡張します。コンポーネントの状態が変化すると、AngularはレンダリングされたDOMを自動的に更新します。次の例に示すように、この機能の応用例のひとつは動的なテキストの挿入です。
 
 <code-example path="what-is-angular/src/app/hello-world-interpolation/hello-world-interpolation.component.html" region="say-hello"></code-example>
 
-The value for message comes from the component class:
+メッセージの値は、コンポーネントクラスから取得されます。
 
 <code-example path="what-is-angular/src/app/hello-world-interpolation/hello-world-interpolation.component.ts"></code-example>
 
-When the application loads the component and its template, the user sees the following:
+アプリケーションがコンポーネントとそのテンプレートをロードすると、ユーザーには次のように表示されます。
 
 <code-example language="html">
 &lt;p&gt;Hello, World!&lt;/p&gt;
 </code-example>
 
-Notice the use of double curly braces--they instruct Angular to interpolate the contents within them.
+二重中括弧の使用に注意してください。二重中括弧はAngularにそれらの中の内容を補間するように指示します。
 
-Angular also supports property bindings, to help you set values for properties and attributes of HTML elements and pass values to your application's presentation logic.
+Angularはプロパティバインディングもサポートしており、HTML要素のプロパティと属性の値を設定し、アプリケーションのプレゼンテーションロジックに値を渡すのに役立ちます。
 
 <code-example path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.html" region="bindings"></code-example>
 
-Notice the use of the square brackets--that syntax indicates that you're binding the property or attribute to a value in the component class.
+角かっこが使用されていることに注意してください。この構文は、プロパティまたは属性をコンポーネントクラスの値にバインドしていることを示しています。
 
-You can also declare event listeners to listen for and respond to user actions such as keystrokes, mouse movements, clicks, and touches. You declare an event listener by specifying the event name in parentheses:
+キーストローク、マウスの動き、クリック、タッチなどのユーザーアクションを待ち受けて応答するイベントリスナーを宣言することもできます。括弧内にイベント名を指定して、イベントリスナーを宣言します。
 
 <code-example path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.html" region="event-binding"></code-example>
 
-The preceding example calls a method, which is defined in the component class:
+前の例では、コンポーネントクラスで定義されているメソッドを呼び出しています。
 
 <code-example path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.ts" region="method"></code-example>
 
-The following is an example of interpolation and bindings within an Angular template:
+以下は、Angularテンプレート内の補間とバインディングの例です。
 
 <code-tabs linenums="true">
   <code-pane
@@ -96,9 +96,9 @@ The following is an example of interpolation and bindings within an Angular temp
   </code-pane>
 </code-tabs>
 
-You can add additional functionality to your templates through the use of [directives](guide/built-in-directives). The most popular directives in Angular are `*ngIf` and `*ngFor`. You can use directives to perform a variety of tasks, such as dynamically modifying the DOM structure. And you can also create your own custom directives to create great user experiences.
+[ディレクティブ](guide/built-in-directives)を使用して、テンプレートに機能を追加できます。Angularでもっとも人気のあるディレクティブは`*ngIf`と`*ngFor`です。ディレクティブを使用して、DOM構造を動的に変更するなど、さまざまな作業を実行できます。また、独自のカスタムディレクティブを作成して、優れたユーザー体験を作成することもできます。
 
-The following code is an example of the `*ngIf` directive.
+次のコードは、`*ngIf`ディレクティブの例です。
 
 <code-tabs linenums="true">
   <code-pane
@@ -112,100 +112,100 @@ The following code is an example of the `*ngIf` directive.
   </code-pane>
 </code-tabs>
 
-Angular's declarative templates allow you to cleanly separate your application's logic from its presentation. Templates are based on standard HTML, so they're easy to build, maintain, and update.
+Angularの宣言型テンプレートを使用すると、アプリケーションのロジックをそのプレゼンテーションから明確に分離できます。テンプレートは標準のHTMLに基づいているため、作成、保守、更新が簡単です。
 
-For more information on what you can do with templates, see the [Templates](guide/template-syntax) section.
+テンプレートでできることの詳細については、[テンプレート](guide/template-syntax)セクションを参照してください。
 
 {@a di}
-### Dependency injection
+### 依存性の注入
 
-Dependency injection allows you to declare the dependencies of your TypeScript classes without taking care of their instantiation. Instead, Angular handles the instantiation for you. This design pattern allows you to write more testable and flexible code. Even though understanding dependency injection is not critical to start using Angular, we strongly recommend it as a best practice and many aspects of Angular take advantage of it to some degree.
+依存性の注入を使用すると、インスタンス化を行わなくても、TypeScriptクラスの依存性を宣言できます。代わりに、Angularがインスタンス化を処理します。このデザインパターンにより、よりテスト可能で柔軟なコードを記述できます。依存性の注入を理解することはAngularの使用を開始するために必須ではありませんが、ベストプラクティスとしてAngularの多くの側面である程度使用しているので、理解しておくことを強くお勧めします。
 
-To illustrate how dependency injection works, consider the following example. The first file, `logger.service.ts`, defines a `Logger` class. This class contains a `writeCount` function that logs a number to the console.
+依存性の注入がどのように機能するかを説明するために、次の例を考えてください。最初のファイル`logger.service.ts`は`Logger`クラスを定義しています。このクラスには、コンソールに数値を記録する`writeCount`関数が含まれています。
 
 <code-example path="what-is-angular/src/app/logger.service.ts"></code-example>
 
-Next, the `hello-world-di.component.ts` file defines an Angular component. This component contains a button that uses the `writeCount` function of the Logger class. To access that function, the `Logger` service is injected into the `HelloWorldDI` class by adding `private logger: Logger` to the constructor.
+次に、`hello-world-di.component.ts`ファイルはAngularコンポーネントを定義しています。このコンポーネントには、`Logger`クラスの`writeCount`関数を使用するボタンが含まれています。その関数にアクセスするために、コンストラクターに`private logger: Logger`を追加することにより、`Logger`サービスが`HelloWorldDI`クラスに注入されます。
 
 <code-example path="what-is-angular/src/app/hello-world-di/hello-world-di.component.ts"></code-example>
 
-For more information about dependency injection and Angular, see the [Dependency injection in Angular](guide/dependency-injection) section.
+依存性の注入とAngularの詳細については、[Angularの依存性の注入](guide/dependency-injection)セクションを参照してください。
 
 {@a cli}
 
 ## Angular CLI
 
-The Angular CLI is the fastest, easiest, and recommended way to develop Angular applications. The Angular CLI makes a number of tasks easy. Here are some examples:
+Angular CLIは、Angularアプリケーションを開発するための、もっとも速く、もっとも簡単で、推奨される方法です。Angular CLIを使用すると、多くの作業が簡単になります。ここではいくつかの例を示します。
 
 <table>
 <tr>
 <td><a href="cli/build">ng build</a></td>
-<td>Compiles an Angular app into an output directory.</td>
+<td>Angularアプリを出力ディレクトリにコンパイルします。</td>
 </tr>
 <tr>
 <td><a href="cli/serve">ng serve</a></td>
-<td>Builds and serves your application, rebuilding on file changes.</td>
+<td>アプリケーションをビルドして提供し、ファイルの変更時に再ビルドします。</td>
 </tr>
 <tr>
 <td><a href="cli/generate">ng generate</a></td>
-<td>Generates or modifies files based on a schematic.</td>
+<td>Schematicに基づいてファイルを生成または変更します。</td>
 </tr>
 <tr>
 <td><a href="cli/test">ng test</a></td>
-<td>Runs unit tests on a given project.</td>
+<td>特定のプロジェクトで単体テストを実行します。</td>
 </tr>
 <tr>
 <td><a href="cli/e2e">ng e2e</a></td>
-<td>Builds and serves an Angular application, then runs end-to-end tests.</td>
+<td>Angularアプリケーションをビルドして提供し、エンドツーエンドのテストを実行します。</td>
 </tr>
 </table>
 
-You'll find the Angular CLI a valuable tool for building out your applications.
+Angular CLIは、アプリケーションを構築するための貴重なツールです。
 
-For more information about the Angular CLI, see the [CLI Reference](/cli) section.
+Angular CLIの詳細については、[CLIリファレンス](/cli)セクションを参照してください。
 
 {@a 1p-libraries}
-## First-party libraries
+## ファーストパーティライブラリ
 
-The section, [Angular applications: The essentials](#essentials), provides a brief overview of a couple of the key architectural elements you'll use when building Angular applications. But the many benefits of Angular really become apparent when your application grows and you want to add additional functions such as site navigation or user input. That's when you can leverage the Angular platform to incorporate one of the many first-party libraries that Angular provides.
+[Angularアプリケーション：基本事項](#essentials)では、Angularアプリケーションを構築するときに使用するいくつかの主要なアーキテクチャ要素の概要を説明しています。しかし、Angularの多くの利点は、アプリケーションが成長し、サイトナビゲーションやユーザー入力などの機能を追加したいときに実際に明らかになります。そのとき、Angularプラットフォームを活用して、Angularが提供する多くのファーストパーティライブラリのひとつを組み込むことができます。
 
-Some of the libraries available to you include:
+利用可能なライブラリには、次のものがあります。
 <table>
 <tr>
 <td><a href="guide/router">Angular Router</a></td>
-<td>Advanced client-side navigation and routing based on Angular components. Supports lazy-loading, nested routes, custom path matching, and more.</td>
+<td>Angularコンポーネントに基づく高度なクライアント側のナビゲーションとルーティング。遅延読み込み、ネストされたルート、カスタムパスマッチングなどをサポートします。</td>
 </tr>
 <tr>
 <td><a href="guide/forms-overview">Angular Forms</td>
-<td>Uniform system for form participation and validation.</td>
+<td>フォームへの介入と検証のための統一されたシステム。</td>
 <tr>
 <td><a href="guide/http">Angular HttpClient</a></td>
-<td>Robust HTTP client that can power more advanced client-server communication.</td>
+<td>より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。</td>
 </tr>
 <tr>
 <td><a href="guide/animations">Angular Animations</a></td>
-<td>Rich system for driving animations based on application state.</td>
+<td>アプリケーションの状態に基づいてアニメーションを駆動するリッチなシステム。</td>
 </tr>
 <tr>
 <td><a href="guide/service-worker-intro">Angular PWA</a>
-<td>Tools for building Progressive Web Applications (PWAs) including a service worker and Web app manifest.</td>
+<td>Service WorkerやWebアプリマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。</td>
 </tr>
 <tr>
 <td><a href="guide/schematics">Angular Schematics</td>
-<td>Automated scaffolding, refactoring, and update tools that simplify development at large scale.</td>
+<td>大規模な開発を簡素化する自動化されたスキャフォールディング、リファクタリング、および更新ツール。</td>
 </tr>
 </table>
 
-These libraries expand your application's functionality while also allowing you to focus more on the features that make your application unique. And you can add these libraries knowing that they're designed to integrate seamlessly into and update simultaneously with the Angular framework.
+これらのライブラリは、アプリケーションの機能を拡張すると同時に、アプリケーションを独自のものにする機能にさらに集中できるようにします。また、Angularフレームワークにシームレスに統合され、同時に更新されるように設計されていることを知りながら、これらのライブラリを追加できます。
 
-These libraries are only required if and when they can help you add functionality to your applications or solve a particular problem.
+これらのライブラリは、アプリケーションに機能を追加したり、特定の問題を解決したりするのに役立つ場合にのみ必要です。
 
-## Next steps
+## 次のステップ
 
-This topic is intended to give you a brief overview of what Angular is, the advantages it provides, and what you can expect as you start to build your applications.
+このトピックは、Angularとは何か、Angularが提供する利点、およびアプリケーションの構築を開始するときに期待できることの概要を説明することを目的としています。
 
-To see Angular in action, see our [Getting Started](https://angular.io/start) tutorial. This tutorial uses [stackblitz.com](https://stackblitz.com/), so you can explore a working example of Angular without any installation requirements.
+Angularの動作を確認するには、[はじめに](start)のチュートリアルを参照してください。このチュートリアルでは[stackblitz.com](https://stackblitz.com/)を使い、インストールすることなくAngularの実用的な例を探索することができます。
 
-To explore Angular's capabilities further, we recommend reading through the sections, Understanding Angular and Developer Guides.
+Angularの機能をさらに詳しく調べるには、[Angularを理解する](guide/component-overview)と[開発者ガイド](guide/router)のセクションを読むことをお勧めします。
 
 @reviewed 2021-03-02

@@ -83,12 +83,12 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css"></code-example>
 
-The `:host` selector can also be combined with other selectors.
-Add selectors behind the `:host` to select child elements, for example using `:host h2` to target all `<h2>` elements inside a component's view.
+`:host` セレクターは他のセレクターと組み合わせることもできます。
+子要素を選択するには、 `:host` の後ろにセレクターを追加します。たとえば、`:host h2` を使って、コンポーネントのビュー内にあるすべての `<h2>` 要素をターゲットにすることができます。
 
 <div class="alert is-helpful">
 
-You should not add selectors (other than `:host-context`) in front of the `:host` selector to style a component based on the outer context of the component's view. Such selectors are not scoped to a component's view and will select the outer context, but it's not native behavior. Use `:host-context` selector for that purpose instead.
+コンポーネントのビューの外側のコンテキストに基づいてコンポーネントのスタイルを決めるために、`:host` セレクターの前に (`:host-context` 以外の) セレクターを追加してはいけません。このようなセレクターはコンポーネントのビューにスコープされておらず、外側のコンテキストを選択してしまいますが、これはネイティブな動作ではありません。そのような場合には、`:host-context` セレクターを使用してください。
 
 </div>
 
@@ -111,11 +111,11 @@ You should not add selectors (other than `:host-context`) in front of the `:host
 
 コンポーネントスタイルは通常、コンポーネント自身のテンプレートのHTMLにのみ適用されます。
 
-Applying the `::ng-deep` pseudo-class to any CSS rule completely disables view-encapsulation for
-that rule. Any style with `::ng-deep` applied becomes a global style. In order to scope the specified style
-to the current component and all its descendants, be sure to include the `:host` selector before
-`::ng-deep`. If the `::ng-deep` combinator is used without the `:host` pseudo-class selector, the style
-can bleed into other components.
+擬似クラス `::ng-deep` を任意の CSS ルールに適用すると、そのルールに対するビューのカプセル化が
+完全に無効になります。また、`::ng-deep` が適用されたすべてのスタイルは、グローバルなスタイルになります。指定されたスタイルを
+現在のコンポーネントとそのすべての子孫に適用するには、必ず `::ng-deep` の前に `:host` セレクターを含めるように
+してください。擬似セレクター `:host` を使用せずに `::ng-deep` コンビネーターを使用すると、スタイルが
+他のコンポーネントに波及する可能性があります。
 
 次の例では、ホスト要素からこのコンポーネントを経由してDOM内のすべての子要素に至るまで、
 すべての `<h3>` 要素を対象としています。

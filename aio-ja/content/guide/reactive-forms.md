@@ -349,7 +349,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 {@a basic-form-validation}
 
-## フォーム入力の検証
+## フォーム入力の検証 {@a validating-form-input}
 
 _フォームバリデーション_は、ユーザーの入力が完全で正しいことを確認するために使用されます。このセクションでは、フォームコントロールにひとつのバリデータを追加する方法と、フォーム全体の状態を表示する方法を説明します。フォームバリデーションについては、[フォームバリデーション](guide/form-validation "All about form validation.")ガイドで詳しく説明しています。
 

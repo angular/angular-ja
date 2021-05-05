@@ -62,7 +62,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 `FormControl`のコンストラクターを使い、初期値を設定します。この場合は空文字を設定しています。このコントロールをコンポーネントクラスに作ることで、フォーム入力の状態の監視、更新、バリデーションを行うことができます。
 
-**コントロールをテンプレートに登録**
+**テンプレートへのコントロールの登録**
 
 コンポーネントクラスにコントロールを作成した後は、テンプレート内のフォームコントロール要素へ紐付ける必要があります。 `ReactiveFormsModule`内の`FormControlDirective`が提供する`formControl`バインディングを使い、フォームコントロールとともにテンプレートを更新します。
 

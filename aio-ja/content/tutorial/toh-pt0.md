@@ -110,7 +110,7 @@ Angular CLIにより生成されたデフォルトのテンプレートを削除
 CLIはこの目的のために、空の`styles.css`を生成しました。
 アプリケーション全体に適用するスタイルをそこに記述してください。
 
-`src/style.css` を開き、次のコードをファイルに追加します。
+`src/styles.css` を開き、次のコードをファイルに追加します。
 
 <code-example path="toh-pt0/src/styles.1.css" header="src/styles.css (excerpt)">
 </code-example>

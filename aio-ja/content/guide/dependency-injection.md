@@ -54,6 +54,7 @@ ng generate service heroes/hero
 region="ctor-signature">
 </code-example>
 
+
 詳細については、[モジュールに依存オブジェクトを提供する](guide/providers) と [階層的インジェクター](guide/hierarchical-dependency-injection) を参照してください。
 
 {@a service-needs-service}

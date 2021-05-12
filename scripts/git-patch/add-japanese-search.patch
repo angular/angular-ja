@@ -1,0 +1,76 @@
+diff --git a/aio/tools/transforms/angular-base-package/processors/generateKeywords.js b/aio/tools/transforms/angular-base-package/processors/generateKeywords.js
+index 7cad35b0db..2ccdc1b3fb 100644
+--- a/aio/tools/transforms/angular-base-package/processors/generateKeywords.js
++++ b/aio/tools/transforms/angular-base-package/processors/generateKeywords.js
+@@ -134,7 +134,7 @@ function convertToMap(collection) {
+ // If the heading contains a name starting with ng, e.g. "ngController", then add the
+ // name without the ng to the text, e.g. "controller".
+ function tokenize(text) {
+-  const rawTokens = text.split(/[\s\/]+/mg);
++  const rawTokens = text.split(/[\s\/、。]+/mg);
+   const tokens = [];
+   rawTokens.forEach(token => {
+     // Strip off unwanted trivial characters
+@@ -143,7 +143,8 @@ function tokenize(text) {
+         .replace(/^[_\-"'`({[<$*)}\]>.]+/, '')
+         .replace(/[_\-"'`({[<$*)}\]>.]+$/, '');
+     // Ignore tokens that contain weird characters
+-    if (/^[\w.\-]+$/.test(token)) {
++    // Non-ASCII characters: [^\x00-\x7F]
++    if (/^([\w.\-]|[^\x00-\x7F])+$/.test(token)) {
+       tokens.push(token.toLowerCase());
+       const ngTokenMatch = /^[nN]g([A-Z]\w*)/.exec(token);
+       if (ngTokenMatch) {
+diff --git a/aio/package.json b/aio/package.json
+index 23f7a77ac8..aa9773a2f5 100644
+--- a/aio/package.json
++++ b/aio/package.json
+@@ -151,6 +151,7 @@
+     "lighthouse-logger": "^1.2.0",
+     "lodash": "^4.17.4",
+     "lunr": "^2.1.0",
++    "lunr-languages": "1.4.0",
+     "npm-run-all": "^4.1.5",
+     "protractor": "~7.0.0",
+     "puppeteer": "5.4.1",
+diff --git a/aio/src/app/search/search.worker.ts b/aio/src/app/search/search.worker.ts
+index 153416a680..7e53cc5f14 100644
+--- a/aio/src/app/search/search.worker.ts
++++ b/aio/src/app/search/search.worker.ts
+@@ -1,6 +1,11 @@
+ /// <reference lib="webworker" />
+ import { WebWorkerMessage } from '../shared/web-worker-message';
+ import * as lunr from 'lunr';
++declare const require: any;
++require('lunr-languages/lunr.stemmer.support.js')(lunr);
++require('lunr-languages/tinyseg.js')(lunr);
++require('lunr-languages/lunr.ja.js')(lunr);
++require('lunr-languages/lunr.multi.js')(lunr);
+ 
+ const SEARCH_TERMS_URL = '/generated/docs/app/search-data.json';
+ let index: lunr.Index;
+@@ -27,6 +32,8 @@ function createIndex(loadIndexFn: IndexLoader): lunr.Index {
+   const queryLexer = (lunr as any as { QueryLexer: { termSeparator: RegExp } }).QueryLexer;
+   queryLexer.termSeparator = lunr.tokenizer.separator = /\s+/;
+   return lunr(function() {
++    this.use((lunr as any).multiLanguage('en', 'ja'));
++
+     this.ref('path');
+     this.field('topics', { boost: 15 });
+     this.field('titleWords', { boost: 10 });
+diff --git a/aio/yarn.lock b/aio/yarn.lock
+index 6c9a9b5571..12a7e619f8 100644
+--- a/aio/yarn.lock
++++ b/aio/yarn.lock
+@@ -8815,6 +8815,11 @@ lru-queue@0.1:
+   dependencies:
+     es5-ext "~0.10.2"
+ 
++lunr-languages@1.4.0:
++  version "1.4.0"
++  resolved "https://registry.yarnpkg.com/lunr-languages/-/lunr-languages-1.4.0.tgz#42abb12aa81447d1ece5aa35676adcdf40a3e8a8"
++  integrity sha512-YWfZDExJN/MJEVE/DbM4AuVRLsqeHi+q3wmECMsWjGIOkd5mr9DUNos7fv8f5do9VLRMYXIzFjn+N4+KPI9pQA==
++
+ lunr@^2.1.0:
+   version "2.3.8"
+   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.8.tgz#a8b89c31f30b5a044b97d2d28e2da191b6ba2072"

@@ -34,20 +34,22 @@ index 23f7a77ac8..aa9773a2f5 100644
      "protractor": "~7.0.0",
      "puppeteer": "5.4.1",
 diff --git a/aio/src/app/search/search.worker.ts b/aio/src/app/search/search.worker.ts
-index 153416a680..5f2300d8f9 100644
+index 153416a680..397c850ab0 100644
 --- a/aio/src/app/search/search.worker.ts
 +++ b/aio/src/app/search/search.worker.ts
-@@ -1,6 +1,9 @@
+@@ -1,6 +1,12 @@
  /// <reference lib="webworker" />
  import { WebWorkerMessage } from '../shared/web-worker-message';
  import * as lunr from 'lunr';
-+require('lunr-language/lunr.stemmer.support.js')(lunr);
-+require('lunr-language/lunr.ja.js')(lunr);
-+require('lunr-language/lunr.multi.js')(lunr);
++declare const require: any;
++require('lunr-languages/lunr.stemmer.support.js')(lunr);
++require('lunr-languages/tinyseg.js')(lunr);
++require('lunr-languages/lunr.ja.js')(lunr);
++require('lunr-languages/lunr.multi.js')(lunr);
  
  const SEARCH_TERMS_URL = '/generated/docs/app/search-data.json';
  let index: lunr.Index;
-@@ -27,6 +30,8 @@ function createIndex(loadIndexFn: IndexLoader): lunr.Index {
+@@ -27,6 +33,8 @@ function createIndex(loadIndexFn: IndexLoader): lunr.Index {
    const queryLexer = (lunr as any as { QueryLexer: { termSeparator: RegExp } }).QueryLexer;
    queryLexer.termSeparator = lunr.tokenizer.separator = /\s+/;
    return lunr(function() {

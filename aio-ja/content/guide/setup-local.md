@@ -52,7 +52,7 @@ Angularフレームワークを使用するには、次の知識が必要です�
 
 {@a install-cli}
 
-## Angular CLIをインストールする
+## Angular CLIをインストールする {@a install-the-angular-cli}
 
 Angular CLIを使用して、プロジェクトを作成し、アプリケーションとライブラリコードを生成し、テストやバンドル、デプロイなどのさまざまな進行中の開発タスクを実行します。
 
@@ -64,7 +64,7 @@ Angular CLIをインストールするには、ターミナルウィンドウを
 
 {@a create-proj}
 
-## ワークスペースと初期アプリケーションを作成する
+## ワークスペースと初期アプリケーションを作成する {@a create-a-workspace-and-initial-application}
 
 Angular [**ワークスペース**](guide/glossary#workspace)のコンテキストでアプリを開発します。
 

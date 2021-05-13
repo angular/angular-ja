@@ -68,7 +68,7 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 {@a schematics}
 
-## 生成 schematics
+## 生成 schematics {@a generation-schematics}
 
 Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
 デフォルトの Angular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@schematics/angular` にまとめられています。
@@ -207,7 +207,7 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 {@a asset-config}
 
-### アセットの設定
+### アセットの設定 {@a assets-configuration}
 
 各`build`ターゲット設定には、ファイルやフォルダをリストする`assets`配列を含めることができます。それらはプロジェクトのビルド時にそのままコピーされます。
 デフォルトでは、 `src/assets/` フォルダーと `src/favicon.ico` がコピーされます。
@@ -285,7 +285,7 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 {@a style-script-config}
 
-### スタイルとスクリプトの設定
+### スタイルとスクリプトの設定 {@a styles-and-scripts-configuration}
 
 `styles` および `scripts` オプションの配列エントリは、単純なパス文字列、または追加のエントリポイントファイルを指すオブジェクトにすることができます。
 関連するビルダは、ビルド中にそのファイルとその依存関係を別個のバンドルとしてロードします。

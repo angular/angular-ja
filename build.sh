@@ -4,18 +4,17 @@
 cd origin
 git clean -xdn
 cd ..
-rsync -ar --delete origin/ .tmp/ 
+rsync -a --delete origin/ tmp/
 
 # overrides files from ja directory
 rsync -ar --exclude='**/*.en.*' --exclude='**/*.old' aio-ja/ .tmp/aio
 
-cd .tmp
+cd tmp
 
 # apply git patches
 git apply -p1 ../scripts/git-patch/*.patch
 
 # build angular.io
-yarn install --frozen-lockfile --non-interactive
 cd aio
 yarn build
 

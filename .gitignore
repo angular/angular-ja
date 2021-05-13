@@ -1,4 +1,2 @@
-.tmp
-node_modules
-# Local Netlify folder
-.netlify
+/tmp
+/node_modules

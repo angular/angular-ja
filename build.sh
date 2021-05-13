@@ -15,7 +15,7 @@ cd .tmp
 git apply -p1 ../scripts/git-patch/*.patch
 
 # build angular.io
-export NODE_OPTIONS="--max-old-space-size=2048"
+export NODE_OPTIONS="--max-old-space-size=4096"
 yarn install --frozen-lockfile --non-interactive
 cd aio
 yarn build

@@ -54,20 +54,6 @@ index d8c7b34674..0e8ec69909 100644
    <script>
      // Dynamically, pre-emptively, add `noindex`, which will be removed when the doc is ready and valid
      tag = document.createElement('meta'); tag.name = 'robots'; tag.content = 'noindex';
-@@ -101,11 +109,11 @@
-         <img src="assets/images/logos/angular/angular.svg" width="250" height="250" alt="Angular">
-       </div>
-       <div class="homepage-container">
--        <div class="hero-headline">The modern web<br>developer's platform</div>
-+        <b><i>This website requires JavaScript.</i></b>
-       </div>
-     </section>
-     <h2 style="color: red; margin-top: 40px; position: relative; text-align: center; text-shadow: 1px 1px #fafafa;">
--      <b><i>This website requires JavaScript.</i></b>
-+      <b><i>このウェブサイトにはJavaScriptが必要です。</i></b>
-     </h2>
-   </noscript>
- </body>
 diff --git a/aio/src/pwa-manifest.json b/aio/src/pwa-manifest.json
 index 12f667f483..3d535da1b1 100644
 --- a/aio/src/pwa-manifest.json

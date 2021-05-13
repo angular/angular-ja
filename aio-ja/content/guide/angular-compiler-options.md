@@ -67,6 +67,15 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 `true` の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](https://jsdoc.app/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
 デフォルトは `false` です。
 
+### `compilationMode`
+
+Specifies the compilation mode to use. The following modes are available:
+
+- `'full'`: generates fully AOT-compiled code according to the version of Angular that is currently being used.
+- `'partial'`: generates code in a stable, but intermediate form suitable for a published library.
+
+The default value is `'full'`.
+
 ### `disableExpressionLowering`
 
 `true` の場合（デフォルト）、Angular テンプレートコンパイラは、アノテーションで使用されている、または使用される可能性があるコードを変換して、テンプレートファクトリモジュールからインポートできるようにします。詳細については、[メタデータの書き換え](guide/aot-compiler#metadata-rewriting) を参照してください。

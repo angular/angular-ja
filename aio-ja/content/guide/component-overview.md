@@ -19,8 +19,8 @@
 
 コンポーネントを作成するには、次の前提条件を満たしていることを確認します。
 
-1. Angular CLI をインストールします
-1. Angular プロジェクトを作成します
+1. [Angular CLI をインストールします](guide/setup-local#install-the-angular-cli)
+1. 初期アプリケーションを備えた[Angular ワークスペースを作成します](guide/setup-local#create-a-workspace-and-initial-application)
    プロジェクトを持っていない場合は、`ng new <project-name>` を使ってプロジェクトを作成することができます。ここで、`<project-name>` は Angular アプリケーションの名前です。
 
 ## コンポーネントの作成 {@a creating-a-component}
@@ -180,3 +180,4 @@ Angular コンポーネントは、`template` または `templateUrl` で定義�
 * コンポーネントのスタイルについては、[コンポーネントスタイル](guide/component-styles)を参照してください
 * テンプレートの詳細については、[テンプレート構文](guide/template-syntax)を参照してください
 
+@reviewed 2021-03-18

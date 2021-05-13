@@ -14,7 +14,7 @@
 
 Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component heroes
 </code-example>
 
@@ -147,7 +147,7 @@ Angularは複数のビルトインパイプを備えており、あなた自身�
 エラーを表示するには、ブラウザの開発ツールを開き、
 コンソールで次のようなメッセージを探します、
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 Template parse errors:
 Can't bind to 'ngModel' since it isn't a known property of 'input'.
 </code-example>

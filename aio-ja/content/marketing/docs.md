@@ -7,14 +7,12 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
 
 
 <div class="card-container">
-  <a href="guide/what-is-angular" class="docs-card"
-    title="Angular Local Environment Setup">
+  <a href="guide/what-is-angular" class="docs-card" title="Angular Platform Overview">
       <section>Angularとは何か</section>
       <p>Angularプラットフォームの概要を知ることができます。</p>
-      <p class="card-footer">ローカルセットアップ</p>
+      <p class="card-footer">プラットフォームの概要</p>
   </a>
-  <a href="guide/setup-local" class="docs-card"
-    title="Angular Local Environment Setup">
+  <a href="guide/setup-local" class="docs-card" title="Angular Local Environment Setup">
       <section>はじめよう</section>
       <p>Angular CLIを使用して、開発用のローカル環境をセットアップします。</p>
       <p class="card-footer">ローカルセットアップ</p>
@@ -29,13 +27,11 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
       <p>セットアップなしで、既成の小さなAngularアプリを調べ、動かしてみましょう。</p>
       <p class="card-footer">いますぐ試す</p> 
   </a>
-  <a href="tutorial" class="docs-card" title="Create an app">
+  <a href="tutorial" class="docs-card" title="Work through a full tutorial">
       <section>Hello World</section>
       <p>完全なチュートリアルを実行して、最初のアプリを作成します。</p>
       <p class="card-footer">Tour of Heroesチュートリアル</p>
   </a>
-
-
 </div>
 
 

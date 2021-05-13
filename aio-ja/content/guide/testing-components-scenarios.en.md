@@ -162,7 +162,7 @@ However, if you run the tests in a **non-CLI environment**,
 tests of this component may fail.
 For example, if you run the `BannerComponent` tests in a web coding environment such as [plunker](https://plnkr.co/), you'll see a message like this one:
 
-<code-example language="sh" class="code-shell" hideCopy>
+<code-example language="sh" hideCopy>
 Error: This test module uses the component BannerComponent
 which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
@@ -371,7 +371,7 @@ value becomes available. The test must become _asynchronous_.
 
 #### Async test with _fakeAsync()_
 
-To use `fakeAsync()` functionality, you must import `zone.js/dist/zone-testing` in your test setup file.
+To use `fakeAsync()` functionality, you must import `zone.js/testing` in your test setup file.
 If you created your project with the Angular CLI, `zone-testing` is already imported in `src/test.ts`.
 
 The following test confirms the expected behavior when the service returns an `ErrorObservable`.
@@ -453,7 +453,7 @@ If you use the Angular CLI, configure this flag in `src/test.ts`.
 
 ```
 (window as any)['__zone_symbol__fakeAsyncPatchLock'] = true;
-import 'zone.js/dist/zone-testing';
+import 'zone.js/testing';
 ```
 
 <code-example
@@ -463,7 +463,7 @@ import 'zone.js/dist/zone-testing';
 
 #### Using the RxJS scheduler inside fakeAsync()
 
-You can also use RxJS scheduler in `fakeAsync()` just like using `setTimeout()` or `setInterval()`, but you need to import `zone.js/dist/zone-patch-rxjs-fake-async` to patch RxJS scheduler.
+You can also use RxJS scheduler in `fakeAsync()` just like using `setTimeout()` or `setInterval()`, but you need to import `zone.js/plugins/zone-patch-rxjs-fake-async` to patch RxJS scheduler.
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
   region="fake-async-test-rxjs">
@@ -583,22 +583,14 @@ Then you can assert that the quote element displays the expected text.
 
 #### Async test with _waitForAsync()_
 
-To use `waitForAsync()` functionality, you must import `zone.js/dist/zone-testing` in your test setup file.
+To use `waitForAsync()` functionality, you must import `zone.js/testing` in your test setup file.
 If you created your project with the Angular CLI, `zone-testing` is already imported in `src/test.ts`.
-
-<div class="alert is-helpful">
-
-The `TestBed.compileComponents()` method (see [below](#compile-components)) calls `XHR`
-to read external template and css files during "just-in-time" compilation.
-Write tests that call `compileComponents()` with the `waitForAsync()` utility.
-
-</div>
 
 Here's the previous `fakeAsync()` test, re-written with the `waitForAsync()` utility.
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-test">
+  region="waitForAsync-test">
 </code-example>
 
 The `waitForAsync()` utility hides some asynchronous boilerplate by arranging for the tester's code
@@ -1460,7 +1452,7 @@ because the CLI compiles the application before running the tests.
 
 If you run tests in a **non-CLI environment**, the tests may fail with a message like this one:
 
-<code-example language="sh" class="code-shell" hideCopy>
+<code-example language="sh" hideCopy>
 Error: This test module uses the component BannerComponent
 which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
@@ -1502,10 +1494,10 @@ You must call `compileComponents()` within an asynchronous test function.
 <div class="alert is-critical">
 
 If you neglect to make the test function async
-(e.g., forget to use `waitForAsync()` as described below),
+(e.g., forget to use the `async` keyword as described below),
 you'll see this error message
 
-<code-example language="sh" class="code-shell" hideCopy>
+<code-example language="sh" hideCopy>
 Error: ViewDestroyedError: Attempt to use a destroyed view
 </code-example>
 
@@ -1516,13 +1508,6 @@ A typical approach is to divide the setup logic into two separate `beforeEach()`
 1.  An async `beforeEach()` that compiles the components
 1.  A synchronous `beforeEach()` that performs the remaining setup.
 
-To follow this pattern, import the `waitForAsync()` helper with the other testing symbols.
-
-<code-example
-  path="testing/src/app/banner/banner-external.component.spec.ts"
-  region="import-async">
-</code-example>
-
 #### The async _beforeEach_
 
 Write the first async `beforeEach` like this.
@@ -1531,8 +1516,6 @@ Write the first async `beforeEach` like this.
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="async-before-each"
   header="app/banner/banner-external.component.spec.ts (async beforeEach)"></code-example>
-
-The `waitForAsync()` helper function takes a parameterless function with the body of the setup.
 
 The `TestBed.configureTestingModule()` method returns the `TestBed` class so you can chain
 calls to other `TestBed` static methods such as `compileComponents()`.

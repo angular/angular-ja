@@ -22,7 +22,7 @@
 <code-example path="toh-pt6/src/app/app.module.ts" region="import-http-client" header="src/app/app.module.ts (HttpClientModule import)">
 </code-example>
 
-次に、また `AppModule`で、`HttpClient` を `imports`配列に追加します。
+次に、また `AppModule`で、`HttpClientModule` を `imports`配列に追加します。
 
 <code-example path="toh-pt6/src/app/app.module.ts" region="import-httpclientmodule" header="src/app/app.module.ts (imports array excerpt)">
 </code-example>
@@ -50,7 +50,7 @@
 
 次のコマンドを使用して、npmからインメモリWeb APIパッケージをインストールします。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   npm install angular-in-memory-web-api --save
 </code-example>
 
@@ -71,7 +71,7 @@
 
 次のコマンドで `src/app/in-memory-data.service.ts` クラスを生成します:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate service InMemoryData
 </code-example>
 
@@ -406,7 +406,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 CLIで`HeroSearchComponent`を作ります。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component hero-search
 </code-example>
 

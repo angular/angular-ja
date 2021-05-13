@@ -33,7 +33,7 @@ Angular による [*依存性の注入*](guide/dependency-injection) で、
 
 Angular CLI を使用して `HeroService` を作成しましょう。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate service hero
 </code-example>
 
@@ -262,7 +262,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 Angular CLI を使い `MessagesComponent` を作成しましょう。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component messages
 </code-example>
 
@@ -281,7 +281,7 @@ Angular CLI は `src/app/messages` 配下にコンポーネントファイル群
 
 Angular CLI を使い、`src/app` 配下に `MessageService` を作成します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate service message
 </code-example>
 

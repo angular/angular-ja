@@ -102,11 +102,11 @@ Package name                                      | Description
 
 新しく `devDependency` に追加するには、次のいずれかのコマンドを利用してください。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   npm install --save-dev &lt;package-name&gt;
 </code-example>
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   yarn add --dev &lt;package-name&gt;
 </code-example>
 
@@ -119,12 +119,8 @@ Package name                                      | Description
 [**@angular/cli**](https://github.com/angular/angular-cli/)                                    | Angularのコマンドラインツール
 **@angular/<br />compiler&#8209;cli**                                                          | Angular CLIの `ng build` と `ng serve` コマンドから呼び出されるAngularのコンパイラ
 **@types/... **                                                                                | JasmineやNode.jsといったサードパーティライブラリのTypeScriptの型定義ファイルです。
-[**codelyzer**](https://www.npmjs.com/package/codelyzer)                                       | Angularの[スタイルガイド](guide/styleguide)に準拠したAngularアプリケーションのためのLinterのルールです。
 **jasmine/... **                                                                               | [Jasmine](https://jasmine.github.io/)テストライブラリをサポートするパッケージです。
 **karma/... **                                                                                 | [karma](https://www.npmjs.com/package/karma)テストランナーをサポートするパッケージです。
-[**protractor**](https://www.npmjs.com/package/protractor)                                     | AngularアプリケーションのためのE2Eフレームワークです。[WebDriverJS](https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs)上に構築されています。
-[**ts-node**](https://www.npmjs.com/package/ts-node)                                           | Node.jsのためのTypeScript実行環境とREPL
-[**tslint**](https://www.npmjs.com/package/tslint)                                             | 可読性、保守性、機能性のエラーについてTypeScriptのコードをチェックする静的解析ツールです。
 [**typescript**](https://www.npmjs.com/package/typescript)                                     | *tsc*(TypeScript Compiler)を含むTypeScriptのランゲージサーバー
 
 

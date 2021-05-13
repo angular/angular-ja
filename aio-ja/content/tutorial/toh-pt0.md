@@ -29,7 +29,7 @@ Angularワークスペースのコンテキストでアプリケーションを�
  1. Angularワークスペースフォルダにないことを確認します。たとえば、Getting Startedワークスペースを以前に作成した場合は、そのフォルダの親フォルダに変更します。
  2. CLIコマンド `ng new` を実行し、次に示すように、`angular-tour-of-heroes` という名前を指定します。
 
-  <code-example language="sh" class="code-shell">
+  <code-example language="sh">
     ng new angular-tour-of-heroes
   </code-example>
 
@@ -50,7 +50,7 @@ Angular CLIは、必要なAngular npmパッケージおよびその他の依存�
 
 ワークスペースディレクトリに移動し、アプリケーションを起動します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   cd angular-tour-of-heroes
   ng serve --open
 </code-example>

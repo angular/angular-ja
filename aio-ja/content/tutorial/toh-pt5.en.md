@@ -28,7 +28,7 @@ By convention, the module class name is `AppRoutingModule` and it belongs in the
 
 Use the CLI to generate it.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate module app-routing --flat --module=app
 </code-example>
 
@@ -120,7 +120,7 @@ because `AppModule` imports `AppRoutingModule` which exported `RouterModule`. Th
 
 You should still be running with this CLI command.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng serve
 </code-example>
 
@@ -174,7 +174,7 @@ So far there's only the heroes view.
 
 Add a `DashboardComponent` using the CLI:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component dashboard
 </code-example>
 
@@ -259,8 +259,8 @@ After the browser refreshes you can navigate freely between the two views by cli
 {@a hero-details}
 ## Navigating to hero details
 
-The `HeroDetailsComponent` displays details of a selected hero.
-At the moment the `HeroDetailsComponent` is only visible at the bottom of the `HeroesComponent`
+The `HeroDetailComponent` displays details of a selected hero.
+At the moment the `HeroDetailComponent` is only visible at the bottom of the `HeroesComponent`
 
 The user should be able to get to these details in three ways.
 
@@ -268,7 +268,7 @@ The user should be able to get to these details in three ways.
 1. By clicking a hero in the heroes list.
 1. By pasting a "deep link" URL into the browser address bar that identifies the hero to display.
 
-In this section, you'll enable navigation to the `HeroDetailsComponent`
+In this section, you'll enable navigation to the `HeroDetailComponent`
 and liberate it from the `HeroesComponent`.
 
 ### Delete _hero details_ from `HeroesComponent`
@@ -406,7 +406,7 @@ The `paramMap` is a dictionary of route parameter values extracted from the URL.
 The `"id"` key returns the `id` of the hero to fetch.
 
 Route parameters are always strings.
-The JavaScript (+) operator converts the string to a number,
+The JavaScript `Number` function converts the string to a number,
 which is what a hero `id` should be.
 
 The browser refreshes and the application crashes with a compiler error.
@@ -469,6 +469,9 @@ using the `Location` service that you [injected previously](#hero-detail-ctor).
 Refresh the browser and start clicking.
 Users can navigate around the app, from the dashboard to hero details and back,
 from heroes list to the mini detail to the hero details and back to the heroes again.
+
+The details will look better when you add the private CSS styles to `hero-detail.component.css`
+as listed in one of the ["final code review"](#final-code-review) tabs below.
 
 ## Final code review
 

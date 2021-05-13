@@ -12,7 +12,7 @@ Angular アプリケーションを設計するためのベストプラクティ
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+  For the sample application that this page describes, see the <live-example></live-example>.
 
 </div>
 
@@ -84,7 +84,7 @@ Angular Material において上記のパターンのサンプルは [`MatButton
 
 ## ケーススタディ: 独自のプログレスバーを実装する
 
-次のサンプルではアクセシビリティ関連の属性を制御するために、ホストバインディングを使った簡易的なプログレスバーを作る方法を説明します。
+次のサンプルではアクセシビリティ関連の属性を制御するために、ホストバインディングを使ったプログレスバーを作る方法を説明します。
 
 * このコンポーネントは標準の HTML 属性の `role` と ARIA 属性の両方をもつ、アクセシビリティが有効の要素を定義します。ARIA 属性の `aria-valuenow` はユーザーの入力にひもづきます。
 
@@ -141,15 +141,10 @@ router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
 
 * [Rob Dodson A11ycasts](https://www.youtube.com/watch?v=HtTyRajRuyY)
 
-* [Codelyzer](http://codelyzer.com/rules/) ではアクセシビリティ標準に適合しているかを確認するための助けとなる Lint のルールが提供されています。
+* [Angular ESLint](https://github.com/angular-eslint/angular-eslint#functionality) ではアクセシビリティ標準に適合しているかを確認するための助けとなる Lint のルールが提供されています。
 
 書籍
 
 * "A Web for Everyone: Designing Accessible User Experiences", Sarah Horton and Whitney Quesenbery
 
 * "Inclusive Design Patterns", Heydon Pickering
-
-## さらなるアクセシビリティについて
-
-以下が参考になるかもしれません。
-* [codelyzer を使って Angulr アプリケーションのアクセシビリティをチェックする](https://web.dev/accessible-angular-with-codelyzer/)。

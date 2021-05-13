@@ -267,7 +267,7 @@ RouterModule.forRoot(
 CLIでサービスを生成するコマンドは次のとおりです:
 
 
-<code-example language="none" class="code-shell">
+<code-example language="sh">
   ng generate service <service-name>
 </code-example>
 

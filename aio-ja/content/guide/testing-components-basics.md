@@ -140,7 +140,7 @@ CLIが新しいコンポーネントを生成すると、
 
 たとえば、次のCLIコマンドは、`app/banner`フォルダに`BannerComponent`を生成します(インラインのテンプレートとスタイルを含む):
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 ng generate component banner --inline-template --inline-style --module app
 </code-example>
 

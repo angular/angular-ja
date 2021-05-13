@@ -20,7 +20,7 @@
 
 Angular CLIを使用して､ `hero-detail` という名前の新しいコンポーネントを生成します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component hero-detail
 </code-example>
 

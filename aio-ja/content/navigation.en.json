@@ -136,6 +136,11 @@
               "tooltip": "Introductory guide to sharing data between parent and child directives or components."
             },
             {
+              "url": "guide/content-projection",
+              "title": "Content Projection",
+              "tooltip": "Learn how to create reusable components using Angular's content projection feature."
+            },
+            {
               "url": "guide/dynamic-component-loader",
               "title": "Dynamic Components",
               "tooltip": "Load components dynamically."
@@ -458,6 +463,11 @@
           "tooltip": "Use property binding efficiently."
         },
         {
+          "url": "guide/lazy-loading-ngmodules",
+          "title": "Lazy Loading Feature Modules",
+          "tooltip": "Lazy load modules to speed up your apps."
+        },
+        {
           "url": "guide/lightweight-injection-tokens",
           "title": "Lightweight Injection Tokens for Libraries",
           "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
@@ -641,18 +651,23 @@
           "tooltip": "Roadmap of the Angular team."
         },
         {
-          "title": "Updating to Version 11",
-          "tooltip": "Support for updating your application from version 9 to 10.",
+          "title": "Updating to Version 12",
+          "tooltip": "Support for updating your application from version 11 to 12.",
           "children": [
             {
-              "url": "guide/updating-to-version-11",
+              "url": "guide/updating-to-version-12",
               "title": "Overview",
-              "tooltip": "Everything you need to know for updating your application from version 10 to 11."
+              "tooltip": "Everything you need to know for updating your application from version 11 to 12."
             },
             {
               "url": "guide/ivy-compatibility",
               "title": "Ivy Compatibility Guide",
               "tooltip": "Details to help you make sure your application is compatible with Ivy."
+            },
+            {
+              "url": "guide/migration-legacy-message-id",
+              "title": "Migration: Legacy Localization IDs",
+              "tooltip": "Learn how to migrate legacy IDs for localization to new, more stable ones."
             }
           ]
         },
@@ -780,7 +795,8 @@
                 {
                   "url": "guide/strict-mode",
                   "title": "Strict mode",
-                  "tooltip": "Reference documentation for Angular's strict mode."
+                  "tooltip": "Reference documentation for Angular's strict mode.",
+                  "hidden": true
                 }
               ]
             },
@@ -832,11 +848,6 @@
                   "url": "guide/singleton-services",
                   "title": "Singleton Services",
                   "tooltip": "Creating singleton services."
-                },
-                {
-                  "url": "guide/lazy-loading-ngmodules",
-                  "title": "Lazy Loading Feature Modules",
-                  "tooltip": "Lazy load modules to speed up your apps."
                 },
                 {
                   "url": "guide/sharing-ngmodules",
@@ -959,6 +970,32 @@
               "url": "guide/styleguide",
               "title": "Coding Style Guide",
               "tooltip": "Guidelines for writing Angular code."
+            }
+          ]
+        },
+        {
+          "title": "Content Contributor's Guide",
+          "tooltip": "Describes how to contribute to the Angular documentation.",
+          "children": [
+            {
+              "url": "guide/contributors-guide-overview",
+              "title": "Overview",
+              "tooltip": "Provides an overview of how to contribute to Angular's documentation."
+            },
+            {
+              "url": "guide/reviewing-content",
+              "title": "Reviewing content",
+              "tooltip": "Keep Angular content up-to-date by reviewing topics for accuracy."
+            },
+            {
+              "url": "guide/updating-search-keywords",
+              "title": "Updating search keywords",
+              "tooltip": "Help users find the content they need by adding additional search keywords."
+            },
+            {
+              "url": "guide/updating-content-github-ui",
+              "title": "Updating content using GitHub UI",
+              "tooltip": "Update topics in the browser through the GitHub user interface."
             },
             {
               "url": "guide/docs-style-guide",

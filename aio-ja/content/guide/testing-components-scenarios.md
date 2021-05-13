@@ -575,7 +575,7 @@ Angular CLIで作成されたプロジェクトであれば、 `zone-testing` �
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-test"></code-example>
+  region="waitForAsync-test"></code-example>
 
 `waitForAsync()`ユーティリティは、
 テスターのコードを特別な_asyncテストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。

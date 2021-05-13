@@ -40,11 +40,6 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 </div>
 
-## strictモード {@a strict-mode}
-
-新しいワークスペースとプロジェクトを作成するときは、Angularのstrictモードを使用するオプションがあります。これは、より優れた、より保守しやすいコードを作成するのに役立ちます。
-詳しくは、[strictモード](/guide/strict-mode)を参照してください。
-
 ## プロジェクトの設定オプション
 
 次のようなトップ階層の設定プロパティは、`projects:<project_name>` 配下の各プロジェクトで使用できます。
@@ -73,7 +68,7 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 {@a schematics}
 
-## 生成 schematics
+## 生成 schematics {@a generation-schematics}
 
 Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追加するか既存のファイルを変更することによってプロジェクトを変更するための命令です。
 デフォルトの Angular CLI `ng generate` サブコマンドの個々のschematicsは、パッケージ `@schematics/angular` にまとめられています。
@@ -108,7 +103,6 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 * dev-server
 * extract-i18n
 * karma
-* protractor
 * server
 * tslint
 
@@ -174,15 +168,17 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 ### 代替のビルド設定
 
-デフォルトでは、`production` 設定が定義されており、`ng build` コマンドにはこの設定を使用してビルドする `--prod` オプションがあります。`production` 設定には、ファイルのバンドル、余分な空白の最小化、コメントやデッドコードの削除、短かくて暗号のような名前を用いたコードの書き換え ("minification") など、さまざまな方法でアプリを最適化するためのデフォルトを設定します。
+Angular CLI comes with two build configurations: `production` and `development`. By default, the `ng build` command uses the `production` configuration, which applies a number of build optimizations, including:
+* Bundling files
+* Minimizing excess whitespace
+* Removing comments and dead code
+* Rewriting code to use short, mangled names (minification)
 
 また、あなたの開発プロセスに適した追加の代替設定（インスタンスの `stage` など）を定義して名前を付けることもできます。さまざまな異なるビルド設定の例として、`stable` 、`archive` やAIO自体が使用する `next` 、ローカライズされたバージョンのアプリを構築するために必要なロケーション固有の設定があります。詳細については [国際化 (i18n)](guide/i18n#merge-aot) を参照してください。
 
 名前を `--configuration` コマンドラインフラグに渡すことで、代替設定を選択できます。
 
 複数の構成名をコンマ区切りリストとして渡すこともできます。たとえば、`stage` と `fr` の両方のビルド構成を適用するには、コマンド `ng build --configuration stage,fr` を使用します。この場合、コマンドは名前付き構成を左から右に解析します。複数の構成が同じ設定を変更する場合、最後に設定された値が最後の値となります。
-
-`--prod` コマンドラインフラグも使用される場合、最初に適用され、その設定は `--configuration` フラグで指定された設定によって上書きできます。
 
 {@a build-props}
 
@@ -211,7 +207,7 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 {@a asset-config}
 
-### アセットの設定
+### アセットの設定 {@a assets-configuration}
 
 各`build`ターゲット設定には、ファイルやフォルダをリストする`assets`配列を含めることができます。それらはプロジェクトのビルド時にそのままコピーされます。
 デフォルトでは、 `src/assets/` フォルダーと `src/favicon.ico` がコピーされます。
@@ -234,6 +230,7 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 * `input`: ワークスペースのルートからの相対パス。
 * `output`: `outDir` からの相対パス（デフォルトは`dist/`*project-name*）。 セキュリティへの影響のため、CLIはプロジェクトの出力パスの外側にファイルを書き込むことはありません。
 * `ignore`: 除外するglobsのリスト。
+* `followSymlinks`: Allow glob patterns to follow symlink directories. This allows subdirectories of the symlink to be searched. Defaults to `false`.
 
 たとえば、デフォルトのアセットのパスは、次のオブジェクトを使用してより詳細に表すことができます。
 
@@ -288,7 +285,7 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 {@a style-script-config}
 
-### スタイルとスクリプトの設定
+### スタイルとスクリプトの設定 {@a styles-and-scripts-configuration}
 
 `styles` および `scripts` オプションの配列エントリは、単純なパス文字列、または追加のエントリポイントファイルを指すオブジェクトにすることができます。
 関連するビルダは、ビルド中にそのファイルとその依存関係を別個のバンドルとしてロードします。
@@ -424,7 +421,7 @@ There are several options that can be used to fine-tune the optimization of an a
 <td><code>inlineCritical</code></td>
 <td>Extract and inline critical CSS definitions to improve <a href="https://web.dev/first-contentful-paint/">First Contentful Paint.</td>
 <td><code class="no-auto-link">boolean</code></td>
-<td><code>false</code></td>
+<td><code>true</code></td>
 </tr>
 </tbody>
 </table>

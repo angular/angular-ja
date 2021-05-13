@@ -2,12 +2,12 @@
 
 <!-- #docregion add -->
 <div>
-  <label id="new-hero">Hero name: </label>
-  <input for="new-hero" #heroName />
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #heroName />
 
   <!-- (click) 入力値をadd()に渡したあと、入力をクリアする -->
   <button class="add-button" (click)="add(heroName.value); heroName.value=''">
-    add
+    Add hero
   </button>
 </div>
 <!-- #enddocregion add -->
@@ -20,7 +20,7 @@
     </a>
     <!-- #docregion delete -->
     <button class="delete" title="delete hero"
-    (click)="delete(hero)">x</button>
+      (click)="delete(hero)">x</button>
     <!-- #enddocregion delete -->
   </li>
 </ul>

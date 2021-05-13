@@ -45,13 +45,13 @@ When you generate a new library, the workspace configuration file, `angular.json
 You can build, test, and lint the project with CLI commands:
 
 <code-example language="bash">
- ng build my-lib
+ ng build my-lib --configuration development
  ng test my-lib
  ng lint my-lib
 </code-example>
 
 Notice that the configured builder for the project is different from the default builder for app projects.
-This builder, among other things, ensures that the library is always built with the [AOT compiler](guide/aot-compiler), without the need to specify the `--prod` flag.
+This builder, among other things, ensures that the library is always built with the [AOT compiler](guide/aot-compiler).
 
 To make library code reusable you must define a public API for it. This "user layer" defines what is available to consumers of your library. A user of your library should be able to access public functionality (such as NgModules, service providers and general utility functions) through a single import path.
 
@@ -93,9 +93,9 @@ A library typically includes *reusable code* that defines components, services, 
 A library is packaged into an npm package for publishing and sharing.
 This package can also include [schematics](guide/glossary#schematic) that provide instructions for generating or transforming code directly in your project, in the same way that the CLI creates a generic new component with `ng generate component`.
 A schematic that is packaged with a library can, for example, provide the Angular CLI with the information it needs to generate a component that configures and uses a particular feature, or set of features, defined in that library.
-One example of this is Angular Material's navigation schematic which configures the CDK's `BreakpointObserver` and uses it with Material's `MatSideNav` and `MatToolbar` components.
+One example of this is [Angular Material's navigation schematic](https://material.angular.io/guide/schematics#navigation-schematic) which configures the CDK's [BreakpointObserver](https://material.angular.io/cdk/layout/overview#breakpointobserver) and uses it with Material's [MatSideNav](https://material.angular.io/components/sidenav/overview) and [MatToolbar](https://material.angular.io/components/toolbar/overview) components.
 
-You can create and include the following kinds of schematics.
+You can create and include the following kinds of schematics:
 
 * Include an installation schematic so that `ng add` can add your library to a project.
 
@@ -112,29 +112,29 @@ If that form will need additional customization by the developer who is using yo
 However, if the form will always be the same and not need much customization by developers, then you could create a dynamic component that takes the configuration and generates the form.
 In general, the more complex the customization, the more useful the schematic approach.
 
-To learn more, see [Schematics Overview](guide/schematics) and [Schematics for Libraries](guide/schematics-for-libraries).
+To learn more, see [Schematics Overview](guide/schematics) and [Schematics for Libraries](guide/schematics-for-libraries).
 
 ## Publishing your library
 
 Use the Angular CLI and the npm package manager to build and publish your library as an npm package.
 
-Before publishing a library to NPM, build it using the `--prod` flag which will use the older compiler and runtime known as View Engine instead of Ivy.
+
+Angular CLI uses a tool called [ng-packagr](https://github.com/ng-packagr/ng-packagr/blob/master/README.md) to create packages
+from your compiled code that can be published to npm.
+See [Building libraries with Ivy](guide/creating-libraries#ivy-libraries) for information on the
+distribution formats supported by `ng-packagr` and guidance on how
+to choose the right format for your library.
+
+You should always build libraries for distribution using the `production` configuration.
+This ensures that generated output uses the appropriate optimizations and the correct package format for npm.
 
 <code-example language="bash">
-ng build my-lib --prod
+ng build my-lib
 cd dist/my-lib
 npm publish
 </code-example>
 
-If you've never published a package in npm before, you must create a user account. Read more in [Publishing npm Packages](https://docs.npmjs.com/getting-started/publishing-npm-packages).
 
-<div class="alert is-important">
-
-For now, it is not recommended to publish Ivy libraries to NPM because Ivy generated code is not backward compatible with View Engine, so apps using View Engine will not be able to consume them. Furthermore, the internal Ivy instructions are not yet stable, which can potentially break consumers using a different Angular version from the one used to build the library.
-
-When a published library is used in an Ivy app, the Angular CLI will automatically convert it to Ivy using a tool known as the Angular compatibility compiler (`ngcc`). Thus, publishing your libraries using the View Engine compiler ensures that they can be transparently consumed by both View Engine and Ivy apps.
-
-</div>
 
 {@a lib-assets}
 
@@ -146,7 +146,6 @@ You can use this feature when your library needs to publish optional theming fil
 * Learn how to [copy assets into your library as part of the build](https://github.com/ng-packagr/ng-packagr/blob/master/docs/copy-assets.md).
 
 * Learn more about how to use the tool to [embed assets in CSS](https://github.com/ng-packagr/ng-packagr/blob/master/docs/embed-assets-css.md).
-
 
 ## Linked libraries
 
@@ -241,5 +240,105 @@ This means that the TypeScript source can result in different JavaScript code in
 
 For this reason, an app that depends on a library should only use TypeScript path mappings that point to the *built library*.
 TypeScript path mappings should *not* point to the library source `.ts` files.
+
+</div>
+
+{@a ivy-libraries}
+
+## Building libraries with Ivy
+
+There are three distribution formats that you can use when publishing a library:
+
+* View Engine _(deprecated)_&mdash;legacy format, slated for removal in Angular version 13.
+  Only use this format if you must support View Engine applications.
+* partial-Ivy **(recommended)**&mdash;contains portable code that can be consumed by Ivy applications built with any version of Angular from v12 onwards.
+* full-Ivy&mdash;contains private Angular Ivy instructions, which are not guaranteed to work across different versions of Angular. This format requires that the library and application are built with the _exact_ same version of Angular. This format is useful for environments where all library and application code is built directly from source.
+
+New libraries created with Angular CLI default to partial-Ivy format.
+If you are creating a new library with `ng generate library`, Angular uses Ivy by default with no further action on your part.
+
+### Transitioning libraries to partial-Ivy format
+
+Existing libraries, which are configured to generate the View Engine format, do not change when upgrading to later versions of Angular that use Ivy.
+
+If you intend to publish your library to npm, compile with partial-Ivy code by setting `"compilationMode": "partial"` in `tsconfig.prod.json`.
+
+A library that uses View Engine, rather than Ivy, has a `tsconfig.prod.json` file that contains the following:
+
+<code-example>
+
+"angularCompilerOptions": {
+  "enableIvy": false
+}
+
+</code-example>
+
+To convert such libraries to use the partial-Ivy format, change the `tsconfig.prod.json` file by removing the `enableIvy` option and adding the `compilationMode` option.
+
+Enable partial-Ivy compilation by replacing `"enableIvy": false` with `"compilationMode": "partial"` as follows:
+
+<code-example>
+
+"angularCompilerOptions": {
+  "compilationMode": "partial"
+}
+
+</code-example>
+
+For publishing to npm use the partial-Ivy format as it is stable between patch versions of Angular.
+
+Avoid compiling libraries with full-Ivy code if you are publishing to npm because the generated Ivy instructions are not part of Angular's public API, and so may change between patch versions.
+
+Partial-Ivy code is not backward compatible with View Engine.
+If you use the library in a View Engine application, you must compile the library into the View Engine format by setting `"enableIvy": false` in the `tsconfig.json` file.
+
+Ivy applications can still consume the View Engine format because the Angular compatibility compiler, or `ngcc`, can convert it to Ivy.
+
+## Ensuring library version compatibility
+
+The Angular version used to build an application should always be the same or greater than the Angular versions used to build any of its dependent libraries.
+For example, if you had a library using Angular version 12, the application that depends on that library should use Angular version 12 or later.
+Angular does not support using an earlier version for the application.
+
+<div class="alert is-helpful">
+
+The Angular CLI uses Ivy to build applications and no longer uses View Engine.
+A library or an application built with View Engine cannot consume a partial-Ivy library.
+
+</div>
+
+Because this process happens during the application build, it uses the same version of the Angular compiler, ensuring that the application and all of its libraries use a single version of Angular.
+
+If you intend to publish your library to npm, compile with partial-Ivy code by setting `"compilationMode": "partial"` in `tsconfig.prod.json`.
+This partial format is stable between different versions of Angular, so is safe to publish to npm.
+
+Avoid compiling libraries with full-Ivy code if you are publishing to npm because the generated Ivy instructions are not part of Angular's public API, and so might change between patch versions.
+
+Partial-Ivy code is not backward compatible with View Engine.
+If you use the library in a View Engine application, you must compile the library into the View Engine format by setting `"enableIvy": false` in the `tsconfig.json` file.
+
+Ivy applications can still consume the View Engine format because the Angular compatibility compiler, or `ngcc`, can convert it to Ivy in the Angular CLI.
+
+If you've never published a package in npm before, you must create a user account. Read more in [Publishing npm Packages](https://docs.npmjs.com/getting-started/publishing-npm-packages).
+
+
+## Consuming partial-Ivy code outside the Angular CLI
+
+An application installs many Angular libraries from npm into its `node_modules` directory.
+However, the code in these libraries cannot be bundled directly along with the built application as it is not fully compiled.
+To finish compilation, you can use the Angular linker.
+
+For applications that don't use the Angular CLI, the linker is available as a Babel plugin.
+You can use the Babel plugin using the module `@angular/compiler-cli/linker/babel` to incorporate into your builds.
+For example, you can integrate the plugin into a custom Webpack build by registering the linker as a plugin for `babel-loader`.
+
+Previously, if you ran `yarn install` or `npm install` you had to re-run `ngcc`.
+Now, libraries only need to be processed by the linker a single time, regardless of other npm operations.
+
+The Angular linker Babel plugin supports build caching, meaning that libraries only need to be processed by the linker a single time, regardless of other npm operations.
+
+<div class="alert is-helpful">
+
+The Angular CLI integrates the linker plugin automatically, so if consumers of your library are using the CLI, they can install Ivy-native libraries from npm without any additional configuration.
 
 </div>

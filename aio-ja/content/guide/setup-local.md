@@ -1,9 +1,7 @@
 # ローカル環境とワークスペースのセットアップ
 
-
 このガイドでは、[Angular CLI ツール](cli 'CLI command reference')を使用して Angular 開発用に環境を設定する方法について説明します。
 前提条件、CLI のインストール、初期ワークスペースとスターターアプリの作成、セットアップを確認するためのそのアプリのローカルでの実行に関する情報が含まれています。
-
 
 <div class="callout is-helpful">
 <header>ローカルセットアップなしでAngularを試す</header>
@@ -31,11 +29,11 @@ Angularフレームワークを使用するには、次の知識が必要です�
 
 * **Node.js**
 
-  Angular は `Node.js` の[現行またはアクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。
+  Angular は `Node.js` の[アクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。
 
   <div class="alert is-helpful">
 
-  特定バージョンの要件については、[package.json](https://unpkg.com/@angular/cli/package.json)ファイルの`engines`キーを参照してください。
+  特定バージョンの要件については、[package.json](https://unpkg.com/browse/@angular/core/package.json)ファイルの`engines`キーを参照してください。
 
   </div>
 
@@ -54,19 +52,19 @@ Angularフレームワークを使用するには、次の知識が必要です�
 
 {@a install-cli}
 
-## Angular CLIをインストールする
+## Angular CLIをインストールする {@a install-the-angular-cli}
 
 Angular CLIを使用して、プロジェクトを作成し、アプリケーションとライブラリコードを生成し、テストやバンドル、デプロイなどのさまざまな進行中の開発タスクを実行します。
 
 Angular CLIをインストールするには、ターミナルウィンドウを開き、次のコマンドを実行します:
 
-<code-example language="sh" class="code-shell">
-  npm install -g @angular/cli
+<code-example language="sh">
+  npm install -g @angular/cli<aio-angular-dist-tag class="pln"></aio-angular-dist-tag>
 </code-example>
 
 {@a create-proj}
 
-## ワークスペースと初期アプリケーションを作成する
+## ワークスペースと初期アプリケーションを作成する {@a create-a-workspace-and-initial-application}
 
 Angular [**ワークスペース**](guide/glossary#workspace)のコンテキストでアプリを開発します。
 
@@ -74,7 +72,7 @@ Angular [**ワークスペース**](guide/glossary#workspace)のコンテキス�
 
 1. 次に示すように、CLIコマンド `ng new` を実行し、`my-app` という名前を付けます。
 
-    <code-example language="sh" class="code-shell">
+    <code-example language="sh">
       ng new my-app
 
     </code-example>
@@ -84,13 +82,6 @@ Angular [**ワークスペース**](guide/glossary#workspace)のコンテキス�
 Angular CLIは、必要なAngular npmパッケージとその他の依存関係をインストールします。これには数分かかることがあります。
 
 CLIによって、新しいワークスペースと簡単なWelcomeアプリケーションが作成され、すぐに実行できます。
-
-<div class="alert is-helpful">
-
-Angularのstrictモードを使うオプションもあります。これは、より優れた、より保守しやすいコードを作成するのに役立ちます。
-詳しくは、[strictモード](/guide/strict-mode)を参照してください。
-
-</div>
 
 {@a serve}
 
@@ -102,7 +93,7 @@ Angular CLIにはサーバーが含まれているため、アプリをローカ
 
 1. 次のコマンドを実行します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   cd my-app
   ng serve --open
 </code-example>

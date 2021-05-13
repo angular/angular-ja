@@ -33,7 +33,7 @@ Schematic に関連付けられた JSON スキーマは、コマンドとサブ�
 これらのデフォルトは、コマンドラインのオプションに別の値を指定することで上書きできます。
 ワークスペースの生成オプションのデフォルトを変更する方法については、[ワークスペースの設定](guide/workspace-config) を参照してください。
 
-CLI がプロジェクトとプロジェクトの一部を生成するために使用するデフォルトの Schematics の JSON スキーマは、パッケージ [`@schematics/angular`](https://raw.githubusercontent.com/angular/angular-cli/v7.0.0/packages/schematics/angular/application/schema.json) に集約されます。
+CLI がプロジェクトとプロジェクトの一部を生成するために使用するデフォルトの Schematics の JSON スキーマは、パッケージ [`@schematics/angular`](https://github.com/angular/angular-cli/tree/master/packages/schematics/angular) に集約されます。
 `--help` の出力に示されているように、スキーマは `ng generate` サブコマンドごとに CLI で使用可能なオプションを記述しています。
 
 ## ライブラリの Schematics の開発

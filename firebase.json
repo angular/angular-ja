@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": ".tmp/aio/dist",
+    "public": "build-out/aio/dist",
     "ignore": [
       "firebase.json",
       "**/.*",

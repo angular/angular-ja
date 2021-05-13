@@ -79,7 +79,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 
 <div class="alert is-helpful">
 
-Angularのstrictモードを使用してアプリケーションを作成する場合は、`src/app`ディレクトリに追加の`package.json`ファイルもあります。詳しくは[Strictモード](/guide/strict-mode)を参照してください。
+New Angular projects use strict mode by default. If this is not desired you can opt-out when creating the project. For more information, see [Strict mode](/guide/strict-mode).
 
 </div>
 
@@ -171,7 +171,7 @@ my-workspace/
 
 ## ライブラリプロジェクトファイル {@a library-project-files}
 
-CLIを使用して（ `ng generate library my-lib` などのコマンドを使用して）ライブラリを生成すると、生成されたファイルはワークスペースのprojects/フォルダに入ります。 独自のライブラリを作成する方法の詳細については、 [ライブラリの作成](guide/creating-libraries) を参照してください。
+CLIを使用して（ `ng generate library my-lib` などのコマンドを使用して）ライブラリを生成すると、生成されたファイルはワークスペースの`projects/`フォルダに入ります。 独自のライブラリを作成する方法の詳細については、 [ライブラリの作成](guide/creating-libraries) を参照してください。
 
 ライブラリは（アプリケーションや関連するe2eプロジェクトとは異なり）独自の `package.json` 設定ファイルを持っています。
 
@@ -186,5 +186,6 @@ CLIを使用して（ `ng generate library my-lib` などのコマンドを使�
 | `ng-package.json`    | ライブラリを構築するために [ng-packagr](https://github.com/ng-packagr/ng-packagr) によって使用される設定ファイル。 |
 | `package.json`       | このライブラリに必要な [npmパッケージの依存関係](guide/npm-packages) を設定します。 |
 | `tsconfig.lib.json`  | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、ライブラリ固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tsconfig.lib.prod.json`  | Library-specific [TypeScript](https://www.typescriptlang.org/) configuration that is used when building the library in production mode.              |
 | `tsconfig.spec.json` | ライブラリテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
 | `tslint.json`        | ライブラリ固有の [TSLint](https://palantir.github.io/tslint/) の設定 |

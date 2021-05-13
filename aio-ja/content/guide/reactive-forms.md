@@ -24,7 +24,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 またリアクティブフォームでは、リクエストのデータには一貫性があり予測性が保証されているので、テストが簡単に行えます。すべてのストリームの利用者は、データに安全にアクセスし操作することができます。
 
-リアクティブフォームには、[テンプレート駆動フォーム](guide/forms "Template-driven forms guide")とは異なる点があります。リアクティブフォームは、データモデルへの同期アクセス、Observableオペレーターによるイミュータビリティ、Observableストリームによる変更の追跡など、より予測可能な機能を提供します。
+リアクティブフォームには、[テンプレート駆動フォーム](guide/forms "Template-driven forms guide")とは異なる点があります。リアクティブフォームは、データモデルへの同期アクセス、Observableオペレーターによるイミュータビリティ、Observableストリームによる変更の追跡などを提供します。
 
 テンプレート駆動フォームでは、テンプレート内のデータを変更するために直接アクセスすることができますが、テンプレートに埋め込まれたディレクティブと、非同期に変更を追跡するためのミュータブルなデータに依存しているため、リアクティブフォームよりも明示的ではありません。この2つのパラダイムの詳細な比較については、[フォームの概要](guide/forms-overview "Overview of Angular forms.")を参照してください。
 
@@ -50,7 +50,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 [CLIコマンド](cli "Using the Angular command-line interface.")`ng generate`を使ってコントロールをホストするコンポーネントをプロジェクトに生成します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
   ng generate component NameEditor
 
@@ -146,7 +146,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 `ProfileEditor`コンポーネントを生成し、`FormGroup` と `FormControl`クラスを`@angular/forms`パッケージからインポートします。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
   ng generate component ProfileEditor
 

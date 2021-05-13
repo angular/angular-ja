@@ -210,7 +210,7 @@ Angularは、コンストラクターの `el` パラメータに注入された 
 (`ElementRef` はDOM要素のラッパーで、
 `nativeElement` プロパティは、操作するディレクティブのDOM要素を公開します)。
 
-サンプルコードでは、ディレクティブの `myHighlight` 属性を2つの `<div>` タグに適用します。
+サンプルコードでは、ディレクティブの `appHighlight` 属性を2つの `<div>` タグに適用します。
 最初は値なし(デフォルト色)、次にカラー値が割り当てられます。
 
 <code-example path="dependency-injection-in-action/src/app/app.component.html" region="highlight" header="src/app/app.component.html (highlight)"></code-example>

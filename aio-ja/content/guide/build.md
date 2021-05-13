@@ -94,6 +94,7 @@ export class AppComponent {
   title = 'app works!';
 }
 ```
+
 {@a file-replacement}
 
 ## ターゲット固有ファイルの置換の設定 {@a configure-target-specific-file-replacements}
@@ -117,7 +118,7 @@ export class AppComponent {
     ...
 ```
 
-これは（`ng build --prod`または`ng build --configuration=production`を使って）本番設定をビルドするとき、`src/environment/environment.ts`ファイルはターゲット固有バージョンの`src/environment/environment.prod.ts`ファイルに置き換えられることを意味します。
+これは `ng build --configuration production` を使って本番設定をビルドするとき、`src/environment/environment.ts`ファイルはターゲット固有バージョンの`src/environment/environment.prod.ts`ファイルに置き換えられることを意味します。
 
 必要に応じてさらに設定を追加することができます。ステージング環境を追加するには、`src/environments/environment.ts`をコピーして`src/environments/environment.staging.ts`を作り、それから`staging`設定を`angular.json`に追加してください:
 
@@ -140,7 +141,7 @@ export class AppComponent {
 
 ステージング設定を使ってビルドするには、次のコマンドを実行してください:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
  ng build --configuration=staging
 </code-example>
 
@@ -503,7 +504,7 @@ module.exports = PROXY_CONFIG;
 もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求はバックエンドが直接プロキシできません。
 この場合、エージェントを使用してコーポレートプロキシを介して要求をリダイレクトするようにバックエンドプロキシを設定することができます:
 
-<code-example language="none" class="code-shell">
+<code-example language="sh">
 npm install --save-dev https-proxy-agent
 </code-example>
 

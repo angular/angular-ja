@@ -40,6 +40,7 @@ v12 - v15
 | ----------------------------- | ---------------------------------------------------------------------------   | ----------------- |
 | `@angular/common`             | [`ReflectiveInjector`](#reflectiveinjector)                                   | <!--v8--> v11 |
 | `@angular/common`             | [`CurrencyPipe` - `DEFAULT_CURRENCY_CODE`](api/common/CurrencyPipe#currency-code-deprecation) | <!--v9--> v11 |
+| `@angular/common/http`        | [`XhrFactory`](api/common/http/XhrFactory)                                    | <!--v12--> v15 |
 | `@angular/core`               | [`DefaultIterableDiffer`](#core)                                              | <!--v7--> v11 |
 | `@angular/core`               | [`ReflectiveKey`](#core)                                                      | <!--v8--> v11 |
 | `@angular/core`               | [`RenderComponentType`](#core)                                                | <!--v7--> v11 |
@@ -82,19 +83,28 @@ Tip: In the [API reference section](api) of this doc site, deprecated APIs are i
 | [`CurrencyPipe` - `DEFAULT_CURRENCY_CODE`](api/common/CurrencyPipe#currency-code-deprecation) | `{provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}` | v9                    | From v11 the default code will be extracted from the locale data given by `LOCAL_ID`, rather than `USD`. |
 
 
+{@a common-http}
+### @angular/common/http
+
+| API                                          | Replacement                          | Deprecation announced | Notes |
+| -------------------------------------------- | ------------------------------------ | --------------------- | ----- |
+| [`XhrFactory`](api/common/http/XhrFactory)   | `XhrFactory` in `@angular/common`    | v12                   | The `XhrFactory` has moved from `@angular/common/http` to `@angular/common`. |
+
+
 {@a core}
 ### @angular/core
 
 | API | Replacement | Deprecation announced | Notes |
 | --- | ----------- | --------------------- | ----- |
 | [`DefaultIterableDiffer`](api/core/DefaultIterableDiffer) | n/a | v4 | Not part of public API. |
-| [`ReflectiveInjector`](api/core/ReflectiveInjector) | [`Injector.create`](api/core/Injector#create)  | v5 | See [`ReflectiveInjector`](#reflectiveinjector) |
+| [`ReflectiveInjector`](api/core/ReflectiveInjector) | `{@link Injector#create Injector.create()}` | v5 | See [`ReflectiveInjector`](#reflectiveinjector) |
 | [`ReflectiveKey`](api/core/ReflectiveKey) | none | v5 | none |
 | [`defineInjectable`](api/core/defineInjectable) | `ɵɵdefineInjectable` | v8 | Used only in generated code. No source code should depend on this API. |
 | [`entryComponents`](api/core/NgModule#entryComponents) | none | v9 | See [`entryComponents`](#entryComponents) |
 | [`ANALYZE_FOR_ENTRY_COMPONENTS`](api/core/ANALYZE_FOR_ENTRY_COMPONENTS) | none | v9 | See [`ANALYZE_FOR_ENTRY_COMPONENTS`](#entryComponents) |
 | [`WrappedValue`](api/core/WrappedValue) | none | v10 | See [removing `WrappedValue`](#wrapped-value) |
 | [`async`](api/core/testing/async) | [`waitForAsync`](api/core/testing/waitForAsync) | v11 | The `async` function from `@angular/core/testing` has been renamed to `waitForAsync` in order to avoid confusion with the native JavaScript `async` syntax. The existing function is deprecated and will be removed in a future version. |
+[ `ViewChildren.emitDistinctChangesOnly` / `ContentChildren.emitDistinctChangesOnly` | none (was part of [issue #40091](https://github.com/angular/angular/issues/40091)) ] | This is a temporary flag introduced as part of bugfix of [issue #40091](https://github.com/angular/angular/issues/40091) and will be removed. |
 
 {@a testing}
 ### @angular/core/testing
@@ -429,6 +439,14 @@ If you rely on the behavior that the same object instance should cause change de
 - Clone the resulting value so that it has a new identity.
 - Explicitly call [`ChangeDetectorRef.detectChanges()`](api/core/ChangeDetectorRef#detectchanges) to force the update.
 
+### Internet Explorer 11
+Angular support for Microsoft's Internet Explorer 11 (IE11) is deprecated and will be removed in Angular v13.
+Ending IE11 support allows Angular to take advantage of web platform APIs present only in evergreen browsers, resulting in better APIs for developers and more capabilities for application users.
+An additional motivation behind this removal is the drop in global usage of IE11 to just ~1% (as of March 2021).
+For full rationale and discussion behind this deprecation see [RFC: Internet Explorer 11 support deprecation and removal](https://github.com/angular/angular/issues/41840).
+
+*Note: IE11 will be supported in Angular v12 LTS releases through November 2022.*
+
 {@a deprecated-cli-flags}
 ## Deprecated CLI APIs and Options
 
@@ -441,23 +459,13 @@ This section contains a complete list all of the currently deprecated CLI flags.
 | `extractCss`                    | <!--v11--> v13     | No longer required to disable CSS extraction during development.               |
 | `i18nFormat`                    | <!--v9--> v12      | Format is now automatically detected.                                           |
 | `i18nLocale`                    | <!--v9--> v12      | New [localization option](/guide/i18n#localize-config) in version 9 and later.  |
-| `lazyModules`                   | <!--v9--> v12      | Used with deprecated SystemJsNgModuleLoader.                                    |
 | `hmrWarning`                    | <!--v11--> v13     | No longer has an effect.                                                       |
 | `servePathDefaultWarning`       | <!--v11--> v13     | No longer has an effect.                                                       |
-
-### @ngtools/webpack
-
-| API/Option                      | May be removed in | Notes                                                                           |
-| ------------------------------- | ----------------- |-------------------------------------------------------------------------------- |
-| `discoverLazyRoutes`            | <!--v9--> v12     | Used with deprecated SystemJsNgModuleLoader.                                    |
-| `additionalLazyModules`         | <!--v9--> v12     | Used with deprecated SystemJsNgModuleLoader.                                    |
-| `additionalLazyModuleResources` | <!--v9--> v12     | Used with deprecated SystemJsNgModuleLoader.                                    |
 
 ### @schematics/angular
 
 | API/Option                      | May be removed in | Notes                                                                           |
 | ------------------------------- | ----------------- |-------------------------------------------------------------------------------- |
-| `entryComponent`                | <!--v9--> v12     | No longer needed with Ivy.                                                      |
 | `lintFix`                       | <!--v11--> v12    | Deprecated as part of TSLint deprecation.                                      |
 
 {@a removed}

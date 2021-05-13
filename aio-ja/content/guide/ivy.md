@@ -142,7 +142,7 @@ import '@angular/localize/init';
 * `ngExpressEngine`の呼び出しにおいて`bootstrap: AppServerModuleNgFactory`を設定します。
 
 <code-example language="typescript" header="server.ts">
-import 'zone.js/dist/zone-node';
+import 'zone.js/node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';

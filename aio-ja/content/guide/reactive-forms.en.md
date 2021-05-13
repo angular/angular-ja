@@ -24,7 +24,7 @@ Reactive forms use an explicit and immutable approach to managing the state of a
 
 Reactive forms also provide a straightforward path to testing because you are assured that your data is consistent and predictable when requested. Any consumers of the streams have access to manipulate that data safely.
 
-Reactive forms differ from [template-driven forms](guide/forms "Template-driven forms guide") in distinct ways. Reactive forms provide more predictability with synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
+Reactive forms differ from [template-driven forms](guide/forms "Template-driven forms guide") in distinct ways. Reactive forms provide synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
 
 Template-driven forms allow direct access to modify data in your template, but are less explicit than reactive forms because they rely on directives embedded in the template, along with mutable data to track changes asynchronously. See the [Forms Overview](guide/forms-overview "Overview of Angular forms.") for detailed comparisons between the two paradigms.
 
@@ -50,7 +50,7 @@ To use reactive form controls, import `ReactiveFormsModule` from the `@angular/f
 
 Use the [CLI command](cli "Using the Angular command-line interface.") `ng generate` to generate a component in your project to host the control.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
   ng generate component NameEditor
 
@@ -146,7 +146,7 @@ Just as a form control instance gives you control over a single input field, a f
 
 Generate a `ProfileEditor` component and import the `FormGroup` and `FormControl` classes from the `@angular/forms` package.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
   ng generate component ProfileEditor
 

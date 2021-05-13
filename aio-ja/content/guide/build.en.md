@@ -94,6 +94,7 @@ export class AppComponent {
   title = 'app works!';
 }
 ```
+
 {@a file-replacement}
 
 ## Configure target-specific file replacements
@@ -117,7 +118,7 @@ For example:
     ...
 ```
 
-This means that when you build your production configuration (using `ng build --prod` or `ng build --configuration=production`), the `src/environments/environment.ts` file is replaced with the target-specific version of the file, `src/environments/environment.prod.ts`.
+This means that when you build your production configuration with `ng build --configuration production`, the `src/environments/environment.ts` file is replaced with the target-specific version of the file, `src/environments/environment.prod.ts`.
 
 You can add additional configurations as required. To add a staging environment, create a copy of `src/environments/environment.ts` called `src/environments/environment.staging.ts`, then add a `staging` configuration to `angular.json`:
 
@@ -140,7 +141,7 @@ Any option that your build supports can be overridden in a build target configur
 
 To build using the staging configuration, run the following command:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
  ng build --configuration=staging
 </code-example>
 
@@ -503,7 +504,7 @@ module.exports = PROXY_CONFIG;
 If you work behind a corporate proxy, the backend cannot directly proxy calls to any URL outside your local network.
 In this case, you can configure the backend proxy to redirect calls through your corporate proxy using an agent:
 
-<code-example language="none" class="code-shell">
+<code-example language="sh">
 npm install --save-dev https-proxy-agent
 </code-example>
 

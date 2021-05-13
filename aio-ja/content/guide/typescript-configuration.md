@@ -61,11 +61,6 @@ Angular アプリケーションの最初の `tsconfig.json` は通常、次の�
 </code-example>
 
 
-### Strictモード {@a strict-mode}
-
-新しいワークスペースとプロジェクトを作成するときは、Angularのstrictモードを使用するオプションがあります。これは、より優れた、より保守しやすいコードを作成するのに役立ちます。
-詳しくは、[Strictモード](/guide/strict-mode)を参照してください。
-
 {@a noImplicitAny}
 
 ### *noImplicitAny* と *suppressImplicitAnyIndexErrors*

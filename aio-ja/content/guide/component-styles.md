@@ -170,7 +170,7 @@ shadow-piercing子孫コンビネータは廃止され、主要なツールや[�
 
 Angular CLIコマンド [`ng generate component`](cli/generate) は、 `--inline-style` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 ng generate component hero-app --inline-style
 </code-example>
 
@@ -199,7 +199,7 @@ ng generate component hero-app --inline-style
 
 Angular CLIコマンド [`ng generate component`](cli/generate) を `--inline-style` フラグなしで使用すると、空のスタイルファイルを生成し、コンポーネントの生成された `styleUrls` で参照します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 ng generate component hero-app
 </code-example>
 
@@ -220,8 +220,7 @@ CSSスタイルをHTMLテンプレートに直接埋め込むことができま�
 
 <div class="alert is-critical">
 
-CLIを使用して構築する場合は、[CLI wiki](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
-<!-- 2018-10-16: The link above is still the best source for this information. -->
+CLIを使用して構築する場合は、[Assets configuration guide](guide/workspace-config#assets-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
 
 リンクタグのhref URLがアプリケーションルートまたはコンポーネントファイルのどちらへの相対パスであっても、CLIはスタイルシートを取り込みます。
 
@@ -244,8 +243,8 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 
 デフォルトでグローバルな `styles.css` ファイルを事前設定している `styles` セクションに、 **グローバル** スタイルファイルを登録します。
 
-もっと学びたい場合は、 [CLI wiki](https://github.com/angular/angular-cli/wiki/stories-global-styles) を参照してください。
-<!-- 2018-10-16: The link above is still the best source for this information. -->
+もっと学びたい場合は、 [Styles configuration guide](guide/workspace-config#styles-and-scripts-configuration) を参照してください。
+
 
 ### CSS以外のスタイルファイル
 
@@ -264,10 +263,8 @@ CLIを使用して構築する場合、
 CLIビルドプロセスは、適切なCSSプリプロセッサを実行します。
 
 `ng generate component` を使用してコンポーネントファイルを生成する場合、CLI は、デフォルトで空の CSS　スタイルファイル(`.css`)を生成します。
-[CLI wiki](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
-"CSS Preprocessor integration") 
+[Workspace configuration guide](guide/workspace-config#generation-schematics) 
 で説明されているように、CLIのデフォルトのプリプロセッサを設定することができます。
-<!-- 2018-10-16: The link above is still the best source for this information. -->
 
 <div class="alert is-important">
 

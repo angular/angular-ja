@@ -1,7 +1,7 @@
 # Communicating with backend services using HTTP
 
 Most front-end applications need to communicate with a server over the HTTP protocol, in order to download or upload data and access other back-end services.
-Angular provides a simplified client HTTP API for Angular applications, the `HttpClient` service class in `@angular/common/http`.
+Angular provides a client HTTP API for Angular applications, the `HttpClient` service class in `@angular/common/http`.
 
 The HTTP client service offers the following major features.
 
@@ -72,7 +72,7 @@ The `get()` method takes two arguments; the endpoint URL from which to fetch, an
 options: {
     headers?: HttpHeaders | {[header: string]: string | string[]},
     observe?: 'body' | 'events' | 'response',
-    params?: HttpParams|{[param: string]: string | string[]},
+    params?: HttpParams|{[param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>},
     reportProgress?: boolean,
     responseType?: 'arraybuffer'|'blob'|'json'|'text',
     withCredentials?: boolean,
@@ -327,7 +327,7 @@ Two types of errors can occur.
 
 * The server backend might reject the request, returning an HTTP response with a status code such as 404 or 500. These are error _responses_.
 
-* Something could go wrong on the client-side such as a network error that prevents the request from completing successfully or an exception thrown in an RxJS operator. These errors produce JavaScript `ErrorEvent` objects.
+* Something could go wrong on the client-side such as a network error that prevents the request from completing successfully or an exception thrown in an RxJS operator. These errors have `status` set to `0` and the `error` property contains a `ProgressEvent` object, whose `type` might provide further information.
 
 `HttpClient` captures both kinds of errors in its `HttpErrorResponse`. You can inspect that response to identify the error's cause.
 
@@ -371,7 +371,7 @@ The following example shows how you can pipe a failed request to the `retry()` o
 
 In addition to fetching data from a server, `HttpClient` supports other HTTP methods such as PUT, POST, and DELETE, which you can use to modify the remote data.
 
-The sample app for this guide includes a simplified version of the "Tour of Heroes" example
+The sample app for this guide includes an abridged version of the "Tour of Heroes" example
 that fetches heroes and enables users to add, delete, and update them.
 The following sections show examples of the data-update methods from the sample's `HeroesService`.
 
@@ -563,7 +563,8 @@ for each `HttpClient` method call.
 
 To implement an interceptor, declare a class that implements the `intercept()` method of the `HttpInterceptor` interface.
 
- Here is a do-nothing _noop_ interceptor that simply passes the request through without touching it:
+Here is a do-nothing _noop_ interceptor that passes the request through without touching it:
+
 <code-example
   path="http/src/app/http-interceptors/noop-interceptor.ts"
   header="app/http-interceptors/noop-interceptor.ts">
@@ -582,7 +583,7 @@ export abstract class HttpHandler {
 
 Like `intercept()`, the `handle()` method transforms an HTTP request into an `Observable` of [`HttpEvents`](#interceptor-events) which ultimately include the server's response. The `intercept()` method could inspect that observable and alter it before returning it to the caller.
 
-This _no-op_ interceptor simply calls `next.handle()` with the original request and returns the observable without doing a thing.
+This _no-op_ interceptor calls `next.handle()` with the original request and returns the observable without doing a thing.
 
 ### The _next_ object
 
@@ -654,12 +655,12 @@ There are many more interceptors in the complete sample code.
 
 Angular applies interceptors in the order that you provide them.
 For example, consider a situation in which you want to handle the authentication of your HTTP requests and log them before sending them to a server. To accomplish this task, you could provide an `AuthInterceptor` service and then a `LoggingInterceptor` service.
-Outgoing requests would flow from the `AuthInterceptor` to the `LoggingInterceptor`.
+Outgoing requests would flow from the `AuthInterceptor` to the `AuthInterceptor`.
 Responses from these requests would flow in the other direction, from `LoggingInterceptor` back to `AuthInterceptor`.
 The following is a visual representation of the process:
 
 <div class="lightbox">
-  <img src="generated/images/guide/http/interceptor-order.svg" alt="Interceptor order">
+  <img src="generated/images/guide/http/interceptor-order.svg" alt="Interceptor in order of HttpClient, AuthInterceptor, AuthInterceptor, HttpBackend, Server, and back in opposite order to show the two-way flow">
 </div>
 
 <div class="alert is-helpful">
@@ -811,7 +812,7 @@ Neither `tap` nor `finalize` touch the values of the observable stream returned 
 Interceptors can be used to replace the built-in JSON parsing with a custom implementation.
 
 The `CustomJsonInterceptor` in the following example demonstrates how to achieve this.
-If the intercepted request expects a `'json'` response, the `reponseType` is changed to `'text'`
+If the intercepted request expects a `'json'` response, the `responseType` is changed to `'text'`
 to disable the built-in JSON parsing. Then the response is parsed via the injected `JsonParser`.
 
 <code-example
@@ -857,7 +858,7 @@ The `CachingInterceptor` in the following example demonstrates this approach.
 * The `isCacheable()` function determines if the request is cacheable.
 In this sample, only GET requests to the npm package search api are cacheable.
 
-* If the request is not cacheable, the interceptor simply forwards the request
+* If the request is not cacheable, the interceptor forwards the request
 to the next handler in the chain.
 
 * If a cacheable request is found in the cache, the interceptor returns an `of()` _observable_ with
@@ -1196,3 +1197,50 @@ Alternatively, you can call `request.error()` with an `ErrorEvent`.
   path="http/src/testing/http-client.spec.ts"
   region="network-error">
 </code-example>
+
+
+## Passing metadata to interceptors
+
+Many interceptors require or benefit from configuration. Consider an interceptor that retries failed requests.
+By default, the interceptor might retry a request three times, but you might want to override this retry count for particularly error-prone or sensitive requests.
+
+`HttpClient` requests contain a _context_ that can carry metadata about the request.
+This context is available for interceptors to read or modify, though it is not transmitted to the backend server when the request is sent.
+This allows applications or other interceptors to tag requests with configuration parameters, such as how many times to retry a request.
+
+### Creating a context token
+
+Angular stores and retrieves a value in the context using an `HttpContextToken`.
+You can create a context token using the `new` operator, as in the following example:
+
+<code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="context-token" header="creating a context token"></code-example>
+
+The lambda function `() => 3` passed during the creation of the `HttpContextToken` serves two purposes:
+
+1. It allows TypeScript to infer the type of this token: `HttpContextToken<number>`.
+  The request context is type-safe&mdash;reading a token from a request's context returns a value of the appropriate type.
+
+1. It sets the default value for the token.
+  This is the value that the request context returns if no other value has been set for this token.
+  Using a default value avoids the need to check if a particular value is set.
+
+### Setting context values when making a request
+
+When making a request, you can provide an `HttpContext` instance, in which you have already set the context values.
+
+<code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="set-context" header="setting context values"></code-example>
+
+### Reading context values in an interceptor
+
+Within an interceptor, you can read the value of a token in a given request's context with `HttpContext.get()`.
+If you have not explicitly set a value for the token, Angular returns the default value specified in the token.
+
+<code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="reading-context" header="reading context values in an interceptor"></code-example>
+
+### Contexts are mutable
+
+Unlike most other aspects of `HttpRequest` instances, the request context is mutable and persists across other immutable transformations of the request.
+This allows interceptors to coordinate operations through the context.
+For instance, the `RetryInterceptor` example could use a second context token to track how many errors occur during the execution of a given request:
+
+<code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="mutable-context" header="coordinating operations through the context"></code-example>

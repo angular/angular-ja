@@ -29,7 +29,7 @@ Angularのベストプラクティスは、
 
 CLIを使って生成することができます。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate module app-routing --flat --module=app
 </code-example>
 
@@ -120,7 +120,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 
 こちらのCLIコマンドを使用して実行する必要があります。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng serve
 </code-example>
 
@@ -169,7 +169,7 @@ URLが`/`で終わっています。
 
 CLIを使って`DashboardComponent`を追加します：
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component dashboard
 </code-example>
 
@@ -253,8 +253,8 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 {@a hero-details}
 ## ヒーローの詳細へ遷移する
 
-`HeroDetailsComponent`は選択されたヒーローの詳細を表示します。
-現時点では `HeroDetailsComponent`は`HeroesComponent`の一番下にしか見えません。
+`HeroDetailComponent`は選択されたヒーローの詳細を表示します。
+現時点では `HeroDetailComponent`は`HeroesComponent`の一番下にしか見えません。
 
 ユーザーは3つの方法でこれらの詳細にアクセスできるはずです。
 
@@ -262,7 +262,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 1. ヒーローリストのヒーローをクリックする。
 1. 表示するヒーローを識別するブラウザのアドレスバーに"ディープリンク"URLを貼り付ける。
 
-このセクションでは、 `HeroDetailsComponent`への遷移を有効にして、
+このセクションでは、 `HeroDetailComponent`への遷移を有効にして、
 `HeroesComponent`から解き放ちます。
 
 ### `HeroesComponent`から_ヒーローの詳細_を削除する
@@ -398,7 +398,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `"id"`キーは、フェッチするヒーローの`id`を返します。
 
 ルートパラメータは常に文字列です。
-JavaScript (+) 演算子は文字列を数値に変換します。これがヒーローの`id`の値です。
+JavaScriptの `Number` 関数は文字列を数値に変換します。これがヒーローの`id`の値です。
 
 ブラウザがリフレッシュされ、コンパイラのエラーでアプリケーションがクラッシュします。
 `HeroService`は`getHero()`メソッドを持っていません。
@@ -461,7 +461,9 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 ユーザーは、ダッシュボードからヒーローの詳細に行って戻ったり、ヒーローリストから小さな詳細へ行き
 ヒーローの詳細に行って再びヒーローリストに戻ったりと、アプリケーションのあちこちを行き来することができます。
 
-## 最後のコード・レビュー
+次の ["最終コードのレビュー"](#final-code-review) タブのひとつに記載されてるように、独自のCSSスタイルを `hero-detail.component.css` に追加すると、詳細がより美しく表示されます。
+
+## 最終コードのレビュー {@a final-code-review}
 
 このページで解説したコードのファイルは次のとおりです。
 

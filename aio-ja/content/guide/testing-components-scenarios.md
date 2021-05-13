@@ -159,7 +159,7 @@ _テストを実行する前にアプリケーションをコンパイルする�
 たとえば、[plunker](https://plnkr.co/)などのWebコーディング環境で`BannerComponent`テストを実行すると、
 次のようなメッセージが表示されます:
 
-<code-example language="sh" class="code-shell" hideCopy>
+<code-example language="sh" hideCopy>
 Error: This test module uses the component BannerComponent
 which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
@@ -365,7 +365,7 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 
 #### _fakeAsync()_を使用した非同期テスト
 
-`fakeAsync()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+`fakeAsync()`機能を使うためには、 `zone.js/testing` をテストセットアップファイルでインポートする必要があります。
 Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
 次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
@@ -444,7 +444,7 @@ Angular CLIを使う場合は、 `src/test.ts` の中でこのフラグを設定
 
 ```
 (window as any)['__zone_symbol__fakeAsyncPatchLock'] = true;
-import 'zone.js/dist/zone-testing';
+import 'zone.js/testing';
 ```
 
 <code-example
@@ -453,7 +453,7 @@ import 'zone.js/dist/zone-testing';
 
 #### fakeAsync() の中でのRxJSスケジューラーの使用
 
-`setTimeout()` や `setInterval()` を使うのと同じように `fakeAsync()` の中でRxJSスケジューラを使うこともできますが、RxJSスケジューラにパッチを当てるには `zone.js/dist/zone-patch-rxjs-fake-async` をインポートする必要があります。
+`setTimeout()` や `setInterval()` を使うのと同じように `fakeAsync()` の中でRxJSスケジューラを使うこともできますが、RxJSスケジューラにパッチを当てるには `zone.js/plugins/zone-patch-rxjs-fake-async` をインポートする必要があります。
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
   region="fake-async-test-rxjs"></code-example>
@@ -568,22 +568,14 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 #### _waitForAsync()_を使用した非同期テスト
 
-`waitForAsync()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+`waitForAsync()`機能を使うためには、 `zone.js/testing` をテストセットアップファイルでインポートする必要があります。
 Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
-
-<div class="alert is-helpful">
-
-`TestBed.compileComponents()`メソッド([下記参照](#compile-components))は、
-"just-in-time"コンパイル時に外部テンプレートとcssファイルを読み込むために`XHR`を呼び出します。
-`waitForAsync()`ユーティリティを使用して`compileComponents()`を呼び出すテストを作成してください。
-
-</div>
 
 次は、さきほどの`fakeAsync()`テストを`waitForAsync()`ユーティリティで書き直したものです。
 
 <code-example
   path="testing/src/app/twain/twain.component.spec.ts"
-  region="async-test"></code-example>
+  region="waitForAsync-test"></code-example>
 
 `waitForAsync()`ユーティリティは、
 テスターのコードを特別な_asyncテストゾーン_で実行するようにすることによって、非同期的なボイラープレートを隠してくれます。
@@ -1440,7 +1432,7 @@ CLIがテストを実行する前にアプリケーションをコンパイル�
 
 **非CLI環境**でテストを実行すると、テストはこのようなメッセージで失敗することがあります:
 
-<code-example language="sh" class="code-shell" hideCopy>
+<code-example language="sh" hideCopy>
 Error: This test module uses the component BannerComponent
 which is using a "templateUrl" or "styleUrls", but they were never compiled.
 Please call "TestBed.compileComponents" before your test.
@@ -1482,10 +1474,10 @@ _非同期_な操作である、ファイルシステムから読み取らなく
 <div class="alert is-critical">
 
 テスト関数を非同期にすることを怠った場合
-(たとえば、後述の`waitForAsync()`の使用を忘れた場合)、
+(たとえば、後述の `async` キーワードの使用を忘れた場合)、
 このようなエラーメッセージが表示されます。
 
-<code-example language="sh" class="code-shell" hideCopy>
+<code-example language="sh" hideCopy>
 Error: ViewDestroyedError: Attempt to use a destroyed view
 </code-example>
 
@@ -1496,12 +1488,6 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 1. コンポーネントをコンパイルする非同期的な`beforeEach()`
 1. 残りのセットアップを実行する同期的な`beforeEach()`
 
-このパターンにしたがうには、`waitForAsync()`ヘルパーを他のテストシンボルと一緒にインポートします。
-
-<code-example
-  path="testing/src/app/banner/banner-external.component.spec.ts"
-  region="import-async"></code-example>
-
 #### 非同期な_beforeEach_
 
 次のように、最初の非同期な`beforeEach`を書いてください。
@@ -1510,8 +1496,6 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
   path="testing/src/app/banner/banner-external.component.spec.ts"
   region="async-before-each"
   header="app/banner/banner-external.component.spec.ts (async beforeEach)"></code-example>
-
-`async()`ヘルパー関数は、セットアップを行うパラメーターなしの関数を受け取ります。
 
 `TestBed.configureTestingModule()`メソッドは`TestBed`クラスを返します。
 これにより、`compileComponents()`などの他の`TestBed`の静的メソッドの呼び出しをチェーンすることができます。

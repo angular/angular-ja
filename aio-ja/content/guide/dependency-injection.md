@@ -16,7 +16,7 @@ AngularのDIを使用することで、アプリケーションの柔軟性と�
 
 `src/app/heroes` フォルダに新しく `HeroService` を生成するには、次の[Angular CLI](cli)コマンドを使用します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 ng generate service heroes/hero
 </code-example>
 

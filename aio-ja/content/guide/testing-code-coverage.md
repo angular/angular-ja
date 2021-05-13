@@ -16,7 +16,7 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 
 カバレッジレポートを生成するには、プロジェクト直下で次のコマンドを実行します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng test --no-watch --code-coverage
 </code-example>
 
@@ -38,20 +38,27 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 あなたのチームがユニットテストされている最低限の量を決定する場合、Angular CLIを使用して、この最小値を適用することができます。
 
 たとえば、コードベースに最低80％のコードカバレッジを設定するとします。
-これを有効にするには、[Karma](https://karma-runner.github.io)テストプラットフォーム設定ファイル、`karma.conf.js`を開いて、`coverageIstanbulReporter:`に次のような内容を追加します。
+To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the `check` property in the `coverageReporter:` key.
 
-```
-coverageIstanbulReporter: {
-  reports: [ 'html', 'lcovonly' ],
-  fixWebpackSourcePaths: true,
-  thresholds: {
-    statements: 80,
-    lines: 80,
-    branches: 80,
-    functions: 80
+```js
+coverageReporter: {
+  dir: require('path').join(__dirname, './coverage/<project-name>'),
+  subdir: '.',
+  reporters: [
+    { type: 'html' },
+    { type: 'text-summary' }
+  ],
+  check: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80
+    }
   }
 }
 ```
 
-`thresholds`プロパティは、ユニットテストがプロジェクトで実行されたときに、ツールが最低80％のコードカバレッジを強制するようにします。
+The `check` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
 
+You can find more info about the different coverage configuration options [here](https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md).

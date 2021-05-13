@@ -352,7 +352,7 @@ Angular CLIを使用している場合はこのステップは自動で行われ
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Angular CLIに含まれます
+import 'zone.js';  // Included with Angular CLI.
 ```
 
 `zone.js`パッケージをインポートする前に、次の構成をセットすることができます。
@@ -380,7 +380,7 @@ import 'zone.js/dist/zone';  // Angular CLIに含まれます
  * Zone JS is required by default for Angular.
  */
 import `./zone-flags`;
-import 'zone.js/dist/zone';  // Angular CLIに含まれます
+import 'zone.js';  // Included with Angular CLI.
 ```
 
 設定できるものの詳細については、[Zwone.js](https://github.com/angular/angular/tree/master/packages/zone.js)ドキュメントを参照してください。
@@ -406,7 +406,7 @@ Zone.jsを削除するには、次のように変更します。
   /***************************************************************************************************
    * Zone JS is required by default for Angular itself.
    */
-  // import 'zone.js/dist/zone';  // Angular CLIに含まれます
+  // import 'zone.js';  // Included with Angular CLI.
   ```
 
 2. `src/main.ts`で`noop` zoneを使用してAngularをブートストラップします。

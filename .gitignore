@@ -1,4 +1,3 @@
 .tmp
-node_modules
-# Local Netlify folder
-.netlify
+/build-out
+/node_modules

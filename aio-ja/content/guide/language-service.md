@@ -4,6 +4,20 @@ Angular Language ServiceはコードエディタにAngularテンプレート内�
 ヒント、ナビゲーションの機能を提供します。
 これらの機能はHTMLファイルとして分割された外部テンプレートやインラインテンプレートに対して動作します。
 
+## Configuring compiler options for the Angular Language Service
+
+To enable the latest Language Service features, set the `strictTemplates` option in `tsconfig.json` by setting `strictTemplates` to `true,` as shown in the following example:
+
+<code-example language="json">
+
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  }
+
+</code-example>
+
+For more information, see the [Angular compiler options](guide/angular-compiler-options) guide.
+
 ## 機能
 
 エディタはAngularファイルを開いていることを自動で検出します。
@@ -61,6 +75,12 @@ Angular Language Serviceは、コード内の間違いを予告することも�
 [Visual Studio Code](https://code.visualstudio.com/)では、[Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)から拡張機能をインストールしてください。マーケットプレイスは、左側のメニューペインにおける拡張機能アイコンから開けます。また、VS Quick Open (⌘+P on Mac, CTRL+P on Windows) に"? ext"と入力して開くことも可能です。In the marketplace, search for Angular Language Service extension, and click the **Install** button.
 
 The Visual Studio Code integration with the Angular language service is maintained and distributed by the Angular team.
+
+### Visual Studio
+
+In [Visual Studio](https://visualstudio.microsoft.com/), install the extension from the [Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.AngularLanguageService). You can open the marketplace from the editor selecting Extensions on the top menu pane, and then selecting Manage Extensions. In the marketplace, search for Angular Language Service extension, and click the **Install** button.
+
+The Visual Studio integration with the Angular language service is maintained and distributed by Microsoft with help from the Angular team. Check out the project [here](https://github.com/microsoft/vs-ng-language-service)
 
 ### WebStorm
 

@@ -32,7 +32,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 子のコンポーネントやディレクティブにおける`@Input()`デコレーターは、プロパティがその親コンポーネントから値を受け取れることを示します。
 
 <div class="lightbox">
-  <img src="generated/images/guide/inputs-outputs/input.svg" alt="Input data flow diagram">
+  <img src="generated/images/guide/inputs-outputs/input.svg" alt="Input data flow diagram of data flowing from parent to child">
 </div>
 
 `@Input()`を使用するには、親と子を設定する必要があります。
@@ -72,7 +72,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 次の図はこの構造を説明したものです:
 
 <div class="lightbox">
-  <img src="generated/images/guide/inputs-outputs/input-diagram-target-source.svg" alt="Property binding diagram">
+  <img src="generated/images/guide/inputs-outputs/input-diagram-target-source.svg" alt="Property binding diagram of the target, item, in square brackets set to the source, currentItem, on the right of an equal sign">
 </div>
 
 角括弧 (`[]`) で囲まれたターゲットは、子コンポーネントで `@Input()` で装飾したプロパティです。
@@ -90,7 +90,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 子のコンポーネントやディレクティブにおける`@Output()`デコレーターを使用すると、データを子から親に流すことができます。
 
 <div class="lightbox">
-  <img src="generated/images/guide/inputs-outputs/output.svg" alt="Output diagram">
+  <img src="generated/images/guide/inputs-outputs/output.svg" alt="Output diagram of the data flow going from child to parent">
 </div>
 
 `@Output()`は、子コンポーネントのプロパティを、データが子から親に移動できる出入り口としてマークします。
@@ -190,7 +190,7 @@ delete をクリックすると、子コンポーネントはイベント `delet
 次の図は、子コンポーネント`<app-input-output>`上の`@Input()`と`@Output()`のさまざまな部分を示しています。
 
 <div class="lightbox">
-  <img src="generated/images/guide/inputs-outputs/input-output-diagram.svg" alt="Input/Output diagram">
+  <img src="generated/images/guide/inputs-outputs/input-output-diagram.svg" alt="Diagram of an input target and an output target each bound to a source.">
 </div>
 
 子のセレクターは `<app-input-output>` で、`item` と `deleteRequest` は

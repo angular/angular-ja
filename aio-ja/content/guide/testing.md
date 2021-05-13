@@ -36,7 +36,7 @@ Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/
 CLIで作成したプロジェクトは、すぐにテストする準備ができています。
 [`ng test`](cli/test)CLIコマンドを実行するだけです:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng test
 </code-example>
 
@@ -45,7 +45,7 @@ CLIで作成したプロジェクトは、すぐにテストする準備がで�
 
 コンソールのアウトプットは次のようになります:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 10% building modules 1/1 modules 0 active
 ...INFO [karma]: Karma v1.7.1 server started at http://0.0.0.0:9876/
 ...INFO [launcher]: Launching browser Chrome ...
@@ -173,7 +173,6 @@ jobs:
           paths:
             - "node_modules"
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-      - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 ```
 
 この設定は`node_modules/`をキャッシュして、CLIコマンドを実行するために[`npm run`](https://docs.npmjs.com/cli/run-script)を使用します(`@angular/cli`がグローバルにインストールされていないため)。
@@ -191,19 +190,12 @@ Step 4: [Circle CIにサインアップ](https://circleci.com/docs/2.0/first-ste
 ステップ 1: プロジェクト直下に次のような内容の`.travis.yml`を作成します:
 
 ```
-dist: trusty
-sudo: false
-
 language: node_js
 node_js:
   - "10"
 
 addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
+  chrome: stable
 
 cache:
   directories:
@@ -214,7 +206,6 @@ install:
 
 script:
   - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-  - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 ```
 
 TravisではChromeが付属していないため、代わりにChromiumを使用していることを除いて、Circle CIの設定と同じものです。
@@ -226,13 +217,97 @@ TravisではChromeが付属していないため、代わりにChromiumを使用
 
 * Travis CIでのテストの詳細については[Travis CI documentation](https://docs.travis-ci.com/)を参照してください。
 
+### Configure project for GitLab CI
+
+Step 1: Create a file called `.gitlab-ci.yml` at the project root, with the following content:
+
+```
+image: node:14.15-stretch
+variables:
+  FF_USE_FASTZIP: "true"
+
+cache:
+  untracked: true
+  policy: push
+  key: ${CI_COMMIT_SHORT_SHA}
+  paths:
+    - node_modules/
+
+.pull_cached_node_modules:
+  cache:
+    untracked: true
+    key: ${CI_COMMIT_SHORT_SHA}
+    policy: pull
+
+stages:
+  - setup
+  - test
+
+install:
+  stage: setup
+  script:
+    - npm ci
+
+test:
+  stage: test
+  extends: .pull_cached_node_modules
+  before_script:
+    - apt-get update
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - apt install -y ./google-chrome*.deb;
+    - export CHROME_BIN=/usr/bin/google-chrome
+  script:
+    - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+```
+
+This configuration caches `node_modules/` in the `install` job and re-uses the cached `node_modules/` in the `test` job.
+
+Step 2: [Sign up for GitLab CI](https://gitlab.com/users/sign_in) and [add your project](https://gitlab.com/projects/new).
+You'll need to push a new commit to trigger a build.
+
+Step 3: Commit your changes and push them to your repository.
+
+* Learn more about GitLab CI testing from [GitLab CI/CD documentation](https://docs.gitlab.com/ee/ci/).
+
+### Configure project for GitHub Actions
+
+Step 1: Create a folder called `.github/workflows` at root of your project
+
+Step 2: In the new folder, create a file called `main.yml` with the following content:
+
+```yml
+name: CI Angular app through Github Actions
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Setup
+        run: npm ci
+
+      - name: Test
+        run: |
+          npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+```
+
+Step 3: [Sign up for GitHub](https://github.com/join) and [add your project](https://github.com/new). You'll need to push a new commit to trigger a build.
+
+Step 4: Commit your changes and push them to your repository.
+
+* Learn more about GitHub Actions from [GitHub Actions documentation](https://docs.github.com/en/actions).
+
 ### ChromeでのCIテスト用にCLIを設定する
 
-一般的にCLIコマンドの`ng test`と`ng e2e`があなたの環境でCIテストを実行しているとき、Chromeブラウザでのテストを実行するために設定を調整する必要があります。
+一般的にCLIコマンドの`ng test`があなたの環境でCIテストを実行している間、Chromeブラウザでのテストを実行するために設定を調整する必要があります。
 
-[Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)
-と[Protractor](https://www.protractortest.org/#/api-overview) E2Eテスティングツールの2つの設定ファイルについて、
-サンドボックスを使用せずにChromeを起動するように調整する必要があります。
+[Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)の設定ファイルについて、
+サンドボックス化を使用せずにChromeを起動するように調整する必要があります。
 
 この例では[ヘッドレスChrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) を使用します。
 
@@ -247,25 +322,10 @@ customLaunchers: {
 },
 ```
 
-* オリジナルの`protractor.conf.js`を拡張した、`protractor-ci.conf.js`という新しいファイルをE2Eテストプロジェクトのフォルダ直下に作成します:
-```
-const config = require('./protractor.conf').config;
-
-config.capabilities = {
-  browserName: 'chrome',
-  chromeOptions: {
-    args: ['--headless', '--no-sandbox']
-  }
-};
-
-exports.config = config;
-```
-
 これで、`--no-sandbox`フラグを使用するために次のコマンドを実行できます:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
-  ng e2e --protractor-config=e2e/protractor-ci.conf.js
 </code-example>
 
 <div class="alert is-helpful">

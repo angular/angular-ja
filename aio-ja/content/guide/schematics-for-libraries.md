@@ -42,7 +42,7 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 `ng add` コマンドの Schematic により、ユーザーの初期インストールプロセスを強化できます。
 次の手順では、このタイプの Schematic を定義します。
 
-1. <lib-root>/schematics/ng-add/ フォルダーに移動します。
+1. `<lib-root>/schematics/ng-add/` フォルダーに移動します。
 
 2. メインファイル `index.ts` を作成します。
 
@@ -66,7 +66,7 @@ Use the `save` option of `ng-add` to configure if the library should be added to
 
 Possible values are:
 
-  * `false` - Don't add the package to package.json
+  * `false` - Don't add the package to `package.json`
   * `true` - Add the package to the dependencies
   * `"dependencies"` - Add the package to the dependencies
   * `"devDependencies"` - Add the package to the devDependencies
@@ -225,9 +225,9 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Schema Import)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="workspace">
 </code-example>
 
-  * コンテキストが存在することを確認し、適切なエラーをスローしてください。
+  コンテキストが存在することを確認し、適切なエラーをスローしてください。
 
-1. `WorkspaceDefinition`の`extensions`プロパティには、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値が含まれています。
+1. `workspace.extensions`プロパティには、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値が含まれています。
    `ng generate` コマンドでプロジェクトが明示的に指定されていない場合は、その値をフォールバックとして使用します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Default Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-fallback">
@@ -238,7 +238,7 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-info">
 </code-example>
 
-   `workspace projects` オブジェクトには、プロジェクト固有の設定情報がすべて含まれています。
+   `workspace.projects` オブジェクトには、プロジェクト固有の設定情報がすべて含まれています。
 
 1. `options.path` は、Schematic が適用された後の Schematic テンプレートファイルの移動先を決定します。
 

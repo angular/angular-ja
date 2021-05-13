@@ -32,7 +32,7 @@ ng add @angular/pwa --project *project-name*
 今度は、プロジェクトをビルドします。
 
 ```sh
-ng build --prod
+ng build
 ```
 
 CLIプロジェクトはAngular Service Workerを使用するように設定されました。
@@ -130,7 +130,7 @@ Service Workerがアプリケーションをキャッシュする方法を見て
 6. もう一度ビルドしてサーバーを起動します。
 
 ```sh
-ng build --prod
+ng build
 http-server -p 8080 -c-1 dist/<project-name>
 ```
 

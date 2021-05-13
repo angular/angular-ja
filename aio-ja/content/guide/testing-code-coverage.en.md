@@ -7,16 +7,16 @@ Code coverage reports show you any parts of your code base that may not be prope
 
 <div class="alert is-helpful">
 
-  For the sample app that the testing guides describe, see the <live-example name="testing" embedded-style noDownload>sample app</live-example>.
+For the sample app that the testing guides describe, see the <live-example name="testing" embedded-style noDownload>sample app</live-example>.
 
-  For the tests features in the testing guides, see <live-example name="testing" stackblitz="specs" noDownload>tests</live-example>.
+For the tests features in the testing guides, see <live-example name="testing" stackblitz="specs" noDownload>tests</live-example>.
 
 </div>
 
 
 To generate a coverage report run the following command in the root of your project.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng test --no-watch --code-coverage
 </code-example>
 
@@ -38,20 +38,27 @@ The code coverage percentages let you estimate how much of your code is tested.
 If your team decides on a set minimum amount to be unit tested, you can enforce this minimum with the Angular CLI.
 
 For example, suppose you want the code base to have a minimum of 80% code coverage.
-To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the following in the `coverageIstanbulReporter:` key.
+To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the `check` property in the `coverageReporter:` key.
 
-```
-coverageIstanbulReporter: {
-  reports: [ 'html', 'lcovonly' ],
-  fixWebpackSourcePaths: true,
-  thresholds: {
-    statements: 80,
-    lines: 80,
-    branches: 80,
-    functions: 80
+```js
+coverageReporter: {
+  dir: require('path').join(__dirname, './coverage/<project-name>'),
+  subdir: '.',
+  reporters: [
+    { type: 'html' },
+    { type: 'text-summary' }
+  ],
+  check: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80
+    }
   }
 }
 ```
 
-The `thresholds` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
+The `check` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
 
+You can find more info about the different coverage configuration options [here](https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md).

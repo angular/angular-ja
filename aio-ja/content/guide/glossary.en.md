@@ -593,7 +593,7 @@ To learn more, see [Lifecycle Hooks](guide/lifecycle-hooks).
 
 In general, a module collects a block of code dedicated to a single purpose. Angular uses standard JavaScript modules and also defines an Angular module, `NgModule`.
 
-In JavaScript (ECMAScript), each file is a module and all objects defined in the file belong to that module. Objects can exported, making them public, and public objects can be imported for use by other modules.
+In JavaScript (ECMAScript), each file is a module and all objects defined in the file belong to that module. Objects can be exported, making them public, and public objects can be imported for use by other modules.
 
 Angular ships as a collection of JavaScript modules (also called libraries). Each Angular library name begins with the `@angular` prefix. Install Angular libraries with the [npm package manager](https://docs.npmjs.com/getting-started/what-is-npm) and import parts of them with JavaScript `import` declarations.
 
@@ -907,7 +907,7 @@ A buildable or runnable subset of a [project](#project), configured as an object
 
 In the `angular.json` file, each project has an "architect" section that contains targets which configure builders. Some of these targets correspond to [CLI commands](#cli), such as `build`, `serve`, `test`, and `lint`.
 
-For example, the Architect builder invoked by the `ng build` command to compile a project uses a particular build tool, and has a default configuration whose values can be overridden on the command line. The `build` target also defines an alternate configuration for a "production" build, that can be invoked with the `--prod` flag on the `build` command.
+For example, the Architect builder invoked by the `ng build` command to compile a project uses a particular build tool, and has a default configuration with values that you can override on the command line. The `build` target also defines an alternate configuration for a "development" build, which you can invoke with the `--configuration development` flag on the `build` command.
 
 The Architect tool provides a set of builders. The [`ng new` command](cli/new) provides a set of targets for the initial application project. The [`ng generate application`](cli/generate#application) and [`ng generate library`](cli/generate#library) commands provide a set of targets for each new [project](#project). These targets, their options and configurations, can be customized to meet the needs of your project. For example, you may want to add a "staging" or "testing" configuration to a project's "build" target.
 
@@ -963,6 +963,27 @@ The following example defines a template reference variable named `#phone`.
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-var" header="src/app/app.component.html"></code-example>
 
 For more information, see the [Template reference variable](guide/template-reference-variables) guide.
+
+
+{@a template-input-variable}
+
+## template input variable
+
+A template input variable is a variable you can reference within a single instance of the template. You declare a template input variable using the `let` keyword as in `let customer`.
+
+```
+ <tr *ngFor="let customer of customers;">
+     <td>{{customer.customerNo}}</td>
+     <td>{{customer.name}}</td>
+     <td>{{customer.address}}</td>
+     <td>{{customer.city}}</td>
+     <td>{{customer.state}}</td>
+     <button (click)="selectedCustomer=customer">Select</button>
+   </tr>
+```
+
+Read and learn more about [template input variables](guide/template-reference-variables#template-input-variable).
+
 
 {@a token}
 

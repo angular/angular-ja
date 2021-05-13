@@ -51,10 +51,10 @@ A best practice is to run your project locally before you deploy it. To run your
 {@a building}
 ## Building and hosting your application
 
- 1. To build your application for production, use the `build` command with the `prod` flag.
+ 1. To build your application for production, use the `build` command. By default, this command uses the `production` build configuration.
 
     ```sh
-    ng build --prod
+    ng build
     ```
 
     This command creates a `dist` folder in the application root directory with all the files that a hosting service needs for serving your application.
@@ -90,7 +90,5 @@ Keep current by following the [Angular blog](https://blog.angular.io/ "Angular b
 ### Exploring the Angular ecosystem
 
 To support your UX/UI development, see [Angular Material](https://material.angular.io/ "Angular Material web site").
-
-To test your Angular applications, see [Angular Protractor](https://protractor.angular.io/ "Angular Protractor web site").
 
 The Angular community also has an extensive [network of third-party tools and libraries](resources "Angular resources list").

@@ -1,11 +1,11 @@
 # strictモード
 
-新しいワークスペースやアプリケーションを作成する際に、`--strict`フラグを使ってstrictモードでそれらを作成するオプションがあります。
+Angular CLI creates all new workspaces and projects with **strict mode** enabled.
 
-このフラグを有効にすると、新規のワークスペースやアプリケーションがいくつかの新しい設定で初期化します。これは、保守性を向上させ事前にバグを検知するのに役立つものです。
-さらに、これらのより厳格な設定を使うアプリケーションは、静的な分析が簡単です。これにより、あなたがAngularの将来のバージョンに更新する際に、`ng update`コマンドがコードをより安全かつ正確にリファクタリングするのに役立ちます。
+Strict mode improves maintainability and helps you catch bugs ahead of time.
+Additionally, strict mode applications are easier to statically analyze and can help the `ng update` command refactor code more safely and precisely when you are updating to future versions of Angular.
 
-具体的に、`strict`フラグは次のことを行います:
+具体的に、strictモードは次のことを行います:
 
 * [TypeScriptで`strict`モード](https://www.typescriptlang.org/tsconfig#strict)を有効にします。TypeScriptチームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
 * Angularコンパイラの厳密フラグをオンにします。[`strictTemplates`](guide/angular-compiler-options#stricttemplates)、[`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)、[`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors)です。
@@ -13,17 +13,17 @@
 
 これらの設定は、ワークスペースおよびプロジェクトレベルで適用できます。
 
-strictモードを使って新しいワークスペースとアプリケーションを作成するには、次のコマンドを実行します:
+基本的な `ng new` コマンドを使用して新しいワークスペースとアプリケーションを作成すると、自動的に strict モードが使用されます。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
-ng new [project-name] --strict
+ng new [project-name]
 
 </code-example>
 
 既存のstrictではないワークスペース内にstrictモードで新しいアプリケーションを作成するには、次のコマンドを実行します:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
 ng generate application [project-name] --strict
 

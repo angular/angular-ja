@@ -48,7 +48,7 @@ Make it look like this:
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" header="heroes.component.html (heroes template)"></code-example>
 
-That shows one hero. To list them all, add an `*ngFor` to the `<li>` to iterate through the list of heroes:
+That displays an error since the property 'hero' does not exist. To have access to each individual hero and list them all, add an `*ngFor` to the `<li>` to iterate through the list of heroes:
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
@@ -153,7 +153,7 @@ After the browser refreshes, the application is broken.
 
 Open the browser developer tools and look in the console for an error message like this:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
 </code-example>
 

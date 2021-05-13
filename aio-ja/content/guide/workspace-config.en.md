@@ -40,11 +40,6 @@ When you create a library project with `ng generate library`, the library projec
 
 </div>
 
-## Strict mode
-
-When you create new workspaces and projects, you have the option to use Angular's strict mode, which can help you write better, more maintainable code.
-For more information, see [Strict mode](/guide/strict-mode).
-
 ## Project configuration options
 
 The following top-level configuration properties are available for each project, under `projects:<project_name>`.
@@ -108,7 +103,6 @@ The schemas configure options for the following builders.
 * dev-server
 * extract-i18n
 * karma
-* protractor
 * server
 * tslint
 
@@ -174,15 +168,17 @@ The `architect/build` section configures defaults for options of the `ng build` 
 
 ### Alternate build configurations
 
-By default, a `production` configuration is defined, and the `ng build` command has `--prod` option that builds using this configuration. The `production` configuration sets defaults that optimize the app in a number of ways, such as bundling files, minimizing excess whitespace, removing comments and dead code, and rewriting code to use short, cryptic names ("minification").
+Angular CLI comes with two build configurations: `production` and `development`. By default, the `ng build` command uses the `production` configuration, which applies a number of build optimizations, including:
+* Bundling files
+* Minimizing excess whitespace
+* Removing comments and dead code
+* Rewriting code to use short, mangled names (minification)
 
 You can define and name additional alternate configurations (such as `stage`, for instance) appropriate to your development process. Some examples of different build configurations are `stable`, `archive` and `next` used by AIO itself, and the individual locale-specific configurations required for building localized versions of an app. For details, see [Internationalization (i18n)](guide/i18n#merge-aot).
 
 You can select an alternate configuration by passing its name to the `--configuration` command line flag.
 
 You can also pass in more than one configuration name as a comma-separated list. For example, to apply both `stage` and `fr` build configurations, use the command `ng build --configuration stage,fr`. In this case,  the command parses the named configurations from left to right. If multiple configurations change the same setting, the last-set value is the final one.
-
-If the `--prod` command line flag is also used, it is applied first, and its settings can be overridden by any configurations specified via the `--configuration` flag.
 
 {@a build-props}
 
@@ -234,6 +230,7 @@ A asset specification object can have the following fields.
 * `input`: A path relative to the workspace root.
 * `output`: A path relative to `outDir` (default is `dist/`*project-name*). Because of the security implications, the CLI never writes files outside of the project output path.
 * `ignore`: A list of globs to exclude.
+* `followSymlinks`: Allow glob patterns to follow symlink directories. This allows subdirectories of the symlink to be searched. Defaults to `false`.
 
 For example, the default asset paths can be represented in more detail using the following objects.
 
@@ -276,11 +273,11 @@ The following example uses the `ignore` field to exclude certain files in the as
 <code-example language="json">
 
 "assets": [
- { 
+ {
    "glob": "**/*",
    "input": "src/assets/",
    "ignore": ["**/*.svg"],
-   "output": "/assets/" 
+   "output": "/assets/"
  }
 ]
 
@@ -307,7 +304,7 @@ For example, the following object values create and name a bundle that contains 
      }
    ],
    "scripts": [
-     { 
+     {
        "input": "src/external-module/main.js",
        "inject": false,
        "bundleName": "external-module"
@@ -424,7 +421,7 @@ There are several options that can be used to fine-tune the optimization of an a
 <td><code>inlineCritical</code></td>
 <td>Extract and inline critical CSS definitions to improve <a href="https://web.dev/first-contentful-paint/">First Contentful Paint.</td>
 <td><code class="no-auto-link">boolean</code></td>
-<td><code>false</code></td>
+<td><code>true</code></td>
 </tr>
 </tbody>
 </table>
@@ -454,7 +451,7 @@ You can supply a value such as the following to apply optimization to one or the
 
 <code-example language="json">
 
-  "optimization": { 
+  "optimization": {
     "scripts": true,
     "styles": {
       "minify": true,

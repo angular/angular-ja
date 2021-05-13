@@ -51,10 +51,10 @@
 {@a building}
 ## アプリケーションのビルドとホスティング
 
- 1. 本番用にアプリケーションをビルドするには、`prod` フラグを指定して `build` コマンドを使ってください。
+ 1. 本番用にアプリケーションをビルドするには、`build` コマンドを使います。By default, this command uses the `production` build configuration.
 
     ```sh
-    ng build --prod
+    ng build
     ```
 
     このコマンドはアプリケーションのルートディレクトリに `dist` フォルダを作成し、ホスティングサービスがアプリケーションにサービスを提供するために必要なすべてのファイルを格納します。
@@ -90,7 +90,5 @@ Angularの基本的な概念については、[Angularコンポーネントの�
 ### Angularのエコシステムを探る
 
 UX/UI開発をサポートするには、[Angular Material](https://material.angular.io/ "Angular Material web site")を参照してください。
-
-Angularアプリケーションをテストするには、[Angular Protractor](https://protractor.angular.io/ "Angular Protractor web site")を参照してください。
 
 また、Angularコミュニティには広範な[サードパーティのツールやライブラリのネットワーク](resources "「Angularリソースリスト」")があります。

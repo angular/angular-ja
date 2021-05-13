@@ -9,7 +9,7 @@
 
 `ngsw-config.json`設定ファイルは、
 Angular Service WorkerがキャッシュすべきファイルとデータのURLと、
-キャッシュされたファイルとデータをどのように更新すべきかを指定します。[Angular CLI](cli)は`ng build --prod`中に設定ファイルを作成します。
+キャッシュされたファイルとデータをどのように更新すべきかを指定します。[Angular CLI](cli)は`ng build`中に設定ファイルを作成します。
 手動で`ngsw-config`ツールで作成することもできます。(`<project-name>` にはビルドしているプロジェクトの名前が入ります)
 
 <code-example language="sh">

@@ -53,8 +53,7 @@
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-[`*ngFor`](guide/built-in-directives#ngFor) はAngularの _繰り返し_ ディレクティブです。
-これは、リスト内の各要素に対して、ホスト要素を繰り返します。
+プロパティ 'hero' が存在しないため、エラーが表示されます。個々のヒーローにアクセスしてすべてのヒーローをリストアップするには、`<li>` に `*ngFor` を追加してヒーローのリストを繰り返し表示します。
 
 この例の構文は次のとおりです。
 
@@ -146,7 +145,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 ブラウザの開発者ツールを開いて、コンソールの中のこのようなエラーメッセージを探してください：
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
 </code-example>
 

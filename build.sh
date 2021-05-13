@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-BUILD_DIR=tmp
+BUILD_DIR=build-out
 
 # copy origin to temporary workspace
 cd origin

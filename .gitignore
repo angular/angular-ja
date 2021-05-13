@@ -1,2 +1,3 @@
-/tmp
+.tmp
+/build-out
 /node_modules

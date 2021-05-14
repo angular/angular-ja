@@ -130,7 +130,7 @@
               "url": "guide/lifecycle-hooks",
               "title": "コンポーネントライフサイクルへのフック",
               "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/view-encapsulation",
@@ -230,7 +230,8 @@
             {
               "url": "guide/template-reference-variables",
               "title": "テンプレート参照変数",
-              "tooltip": "Introductory guide to referring to DOM elements within a template."
+              "tooltip": "Introductory guide to referring to DOM elements within a template.",
+              "translated": true
             },
             {
               "url": "guide/inputs-outputs",
@@ -278,7 +279,7 @@
               "url": "guide/dependency-injection",
               "title": "依存性の注入",
               "tooltip": "Angularの依存性の注入システムは、依存するサービスを \"ジャストインタイム\"で作成し、配信します。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-providers",
@@ -314,7 +315,7 @@
               "url": "guide/reactive-forms",
               "title": "リアクティブフォーム",
               "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/form-validation",
@@ -326,7 +327,7 @@
               "url": "guide/dynamic-form",
               "title": "ダイナミックフォームの構築",
               "tooltip": "Create dynamic form templates using FormGroup.",
-              "translated": false
+              "translated": true
             }
           ]
         },
@@ -457,7 +458,8 @@
             {
               "url": "guide/schematics-for-libraries",
               "title": "Schematics for Libraries",
-              "tooltip": "Use schematics to integrate your library with the Angular CLI."
+              "tooltip": "Use schematics to integrate your library with the Angular CLI.",
+              "translated": true
             }
           ]
         },

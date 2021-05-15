@@ -72,7 +72,7 @@ Angular Service Workerが実行中のアプリケーションのバージョン�
 * ページが再読み込み、または更新された。
 * `SwUpdate`サービスを介して、ページがアップデートを直ちにアクティブ化するように要求した。
 
-### Service workerの更新
+### Service Workerの更新
 
 Angular Service Workerは、Webブラウザで動作する小さなスクリプトです。
 時折、Service Workerはバグフィックスや機能改善で更新されます。

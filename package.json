@@ -10,7 +10,9 @@
     "test": "npm run textlint",
     "update-origin": "./update-origin.sh",
     "textlint": "textlint 'aio-ja/**/!(*.en).md'",
-    "textlint:f": "textlint --fix 'aio-ja/**/!(*.en).md'"
+    "textlint:f": "textlint --fix 'aio-ja/**/!(*.en).md'",
+    "prebuild": "rm -rf build-out && mkdir build-out",
+    "build": "docker compose run --rm -v ./build-out:/origin/aio/dist aio"
   },
   "devDependencies": {
     "glob": "^7.1.2",

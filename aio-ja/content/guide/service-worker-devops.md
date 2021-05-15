@@ -223,7 +223,7 @@ Service Workerを非アクティブにするには、 `ngsw.json`ファイルを
 Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、
 自身を登録解除し、自己破棄します。
 
-### Safety Worker
+### Safety Worker {@a safety-worker}
 
 `@angular/service-worker`NPMパッケージには`safety-worker.js`という小さなスクリプトも含まれています。
 このスクリプトは読み込まれるとブラウザから自身を登録解除します。
@@ -258,7 +258,7 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 `The script resource is behind a redirect, which is disallowed`というエラーを発生させます。
 
 この問題を解決するためには、上記のような方法で古いService Workerを解除する必要があります。
-([フェールセーフ](#フェールセーフ)または[Safety Worker](#safety-worker))
+([フェールセーフ](#fail-safe)または[Safety Worker](#safety-worker))
 
 
 ## もっとAngular Service Workerを知りたい

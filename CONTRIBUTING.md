@@ -61,18 +61,35 @@ $ git clone git@github.com:angular/angular-ja.git
 $ git submodule sync
 $ git submodule update --init
 ```
+#### 開発用サーバーを使った作業
 
-#### 3. 初回ビルド
-
-ビルドが完了すると、 `build-out/aio/dist` ディレクトリにドキュメンテーションサイトが出力されます。
-好みのツールで開発サーバーを立ててビルドされたサイトを確認できます。
+開発用サーバーを起動すると、ビルド結果を確認しながら翻訳作業ができます。
+開発用サーバーの起動中は、`aio-ja/content`内のファイルが変更されたときに自動的に再ビルドされます。
 
 ```
-$ ./build.sh
+$ yarn start
 ```
 
 **注意**
 
+- 事前に[Docker](https://www.docker.com/get-started)の実行環境を用意してください。
+- 初回はDockerイメージのビルド時間が長いので、コーヒーを淹れながら待ちます。
+- Dockerイメージサイズが10GB程度と非常に大きいため、ホストマシンのストレージ残量に注意してください。
+
+#### ビルド
+
+次のコマンドでデプロイ可能な生成物をビルドします。
+
+```
+$ yarn build
+```
+
+ビルドが完了すると、 `build-out` ディレクトリにビルド結果が出力されます。
+好みのツールで開発サーバーを立ててビルドされたサイトを確認できます。
+
+**注意**
+
+- 事前に[Docker](https://www.docker.com/get-started)の実行環境を用意してください。
 - ビルド時間がとても長いので、コーヒーを淹れながら待ちます。
 - MacOSにおいて、ビルド処理の途中でOSのファイルディスクリプタを使い切ってしまうことがあります。
   その場合は次のように最大数を増やす必要があります。
@@ -85,17 +102,6 @@ $ echo kern.maxfilesperproc=65536 | sudo tee -a /etc/sysctl.conf
 $ sudo sysctl -w kern.maxfiles=65536
 $ sudo sysctl -w kern.maxfilesperproc=65536
 $ ulimit -n 65536
-```
-
-#### 差分ビルドを使った作業
-
-一度ローカルビルドをおこなった後であれば、`build-out/aio` ディレクトリの中で直接ファイルを書き換えて差分ビルドによりスムーズに作業できます。
-`yarn serve-and-sync`コマンドの実行中であれば、`build-out/aio`内のファイルへの変更があるときに自動でリビルドできます。
-ただし`build-out`ディレクトリ内での作業はGit管理されないので、作業後に`aio-ja`ディレクトリに反映することを忘れないようにしましょう。
-
-```
-$ cd build-out/aio
-$ yarn serve-and-sync # localhost:4200でサーバーが立ち上がります
 ```
 
 ### 翻訳イシューの作成

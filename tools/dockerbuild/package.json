@@ -1,0 +1,8 @@
+{
+    "name": "angular-ja-dockerbuild",
+    "private": true,
+    "dependencies": {
+        "chokidar": "^3.5.1",
+        "zx": "^1.6.0"
+    }
+}

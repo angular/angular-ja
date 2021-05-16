@@ -84,8 +84,8 @@ Angular Service Workerの最新情報は、アプリケーションにはわか�
 ### Service Workerを回避する
 
 ある場合では、Service Workerを完全に回避し代わりにブラウザでリクエストを処理したい
-ケースがあるかも知れません。たとえば、現在サービスワーカーでサポートされていない機能に依存している
-場合です。(e.g.
+ケースがあるかも知れません。たとえば、現在Service Workerでサポートされていない機能に依存している
+場合です。(例:
 [アップロードされたファイルの進捗状況の報告する](https://github.com/w3c/ServiceWorker/issues/1141)).
 
 Service Workerを回避するために`ngsw-bypass`をリクエストヘッダーかクエリパラメータにセットすることもできます。
@@ -253,8 +253,8 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 にリダイレクトを設定すると、Service Workerは動作しなくなります。
 また、Service Workerから完全にサイトを読み込んでいるユーザーの場合、
 リダイレクトはされません。古いService Worker(`example.com`に登録されているもの)は
-更新しようとして`example.com`という古い場所(URL)にリクエストを送信します。しかし、
-この場所(URL)はすでに`www.example.com`という新しい場所(URL)にリダイレクトされており
+更新しようとして`example.com`という古いURLにリクエストを送信します。しかし、
+このURLはすでに`www.example.com`という新しい場所(URL)にリダイレクトされており
 `The script resource is behind a redirect, which is disallowed`というエラーを発生させます。
 
 この問題を解決するためには、上記のような方法で古いService Workerを解除する必要があります。

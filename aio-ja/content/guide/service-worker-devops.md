@@ -72,7 +72,7 @@ Angular Service Workerが実行中のアプリケーションのバージョン�
 * ページが再読み込み、または更新された。
 * `SwUpdate`サービスを介して、ページがアップデートを直ちにアクティブ化するように要求した。
 
-### Service workerの更新
+### Service Workerの更新
 
 Angular Service Workerは、Webブラウザで動作する小さなスクリプトです。
 時折、Service Workerはバグフィックスや機能改善で更新されます。
@@ -81,15 +81,15 @@ Angular Service Workerは、アプリケーションが最初に開かれたと�
 
 Angular Service Workerの最新情報は、アプリケーションにはわかりません。古いキャッシュは引き続き有効で、コンテンツは引き続き配信されます。ただし、Angular Service Workerのバグフィックスや機能では、古いキャッシュが無効になることがあります。この場合、アプリケーションはネットワークから透過的にリフレッシュされます。
 
-### Bypassing the service worker
+### Service Workerを回避する
 
-In some cases, you may want to bypass the service worker entirely and let the browser handle the
-request instead. An example is when you rely on a feature that is currently not supported in service
-workers (e.g.
-[reporting progress on uploaded files](https://github.com/w3c/ServiceWorker/issues/1141)).
+ある場合では、Service Workerを完全に回避し代わりにブラウザでリクエストを処理したい
+ケースがあるかも知れません。たとえば、現在Service Workerでサポートされていない機能に依存している
+場合です。(例:
+[アップロードされたファイルの進捗状況の報告する](https://github.com/w3c/ServiceWorker/issues/1141)).
 
-To bypass the service worker you can set `ngsw-bypass` as a request header, or as a query parameter.
-(The value of the header or query parameter is ignored and can be empty or omitted.)
+Service Workerを回避するために`ngsw-bypass`をリクエストヘッダーかクエリパラメータにセットすることもできます。
+(ヘッダーやクエリパラメータの値は無視され、空にするか省略することもできます)
 
 ## Angular Service Workerのデバッグ
 
@@ -140,12 +140,12 @@ when a new `ngsw.json` is available).
 
 いずれの場合も、括弧内の注釈は、Service Workerがデグレード状態に入る原因となったエラーを提示します。
 
-Both states are temporary; they are saved only for the lifetime of the [ServiceWorker
-instance](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope).
-The browser sometimes terminates an idle service worker to conserve memory and
-processor power, and creates a new service worker instance in response to
-network events. The new instance starts in the `NORMAL` mode, regardless of the
-state of the previous instance.
+どちらの状態も一時的なものであり、[Service Workerのインスタンス](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope)
+が存続する間だけ保存されます。
+ブラウザはメモリやプロセッサの電力を節約するために、アイドル状態のService Workerを
+終了させることがあります。また、ネットワークイベントに応じて新しいService Workerの
+インスタンスを作成します。新しいインスタンスは、前のインスタンスの状態にかかわらず
+`NORMAL`モードで起動します。
 
 #### Latest manifest hash
 
@@ -223,7 +223,7 @@ Service Workerを非アクティブにするには、 `ngsw.json`ファイルを
 Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Workerはすべてのキャッシュを削除し、
 自身を登録解除し、自己破棄します。
 
-### Safety Worker
+### Safety Worker {@a safety-worker}
 
 `@angular/service-worker`NPMパッケージには`safety-worker.js`という小さなスクリプトも含まれています。
 このスクリプトは読み込まれるとブラウザから自身を登録解除します。
@@ -243,22 +243,22 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 あなたのサイトで過去に提供されていたService Workerだけでなく
 `@angular/service-worker`を無効にするためにも使用できます。
 
-### Changing your app's location
+### アプリの場所(URL)を変更する
 
-It is important to note that service workers don't work behind redirect. You 
-may have already encountered the error `The script resource is behind a redirect, which is disallowed`.
+ここで注意しておきたいのは、Service Workerはリダイレクトの後では動作しないということです。
+あなたはすでに`The script resource is behind a redirect, which is disallowed`というエラーに遭遇したことがあるかも知れません。
 
-This can be a problem if you have to change your app's location. If you setup 
-a redirect from the old location (for example `example.com`) to the new 
-location (for example `www.example.com`) the worker will stop working. 
-Also, the redirect won't even trigger for users who are loading the site 
-entirely from Service Worker. The old worker (registered at `example.com`)
- tries to update and sends requests to the old location `example.com` which 
- get redirected to the new location `www.example.com` and create the error 
-`The script resource is behind a redirect, which is disallowed`.
+これはあなたが アプリの場所(URL)を変更する必要がある場合に問題となります。もし
+古いURL(たとえば`example.com`)から新しいURL(たとえば`www.example.com`)
+にリダイレクトを設定すると、Service Workerは動作しなくなります。
+また、Service Workerから完全にサイトを読み込んでいるユーザーの場合、
+リダイレクトはされません。古いService Worker(`example.com`に登録されているもの)は
+更新しようとして`example.com`という古いURLにリクエストを送信します。しかし、
+このURLはすでに`www.example.com`という新しい場所(URL)にリダイレクトされており
+`The script resource is behind a redirect, which is disallowed`というエラーを発生させます。
 
-To remedy this, you may need to kill the old worker using one of the above
-techniques ([Fail-safe](#fail-safe) or [Safety Worker](#safety-worker)).
+この問題を解決するためには、上記のような方法で古いService Workerを解除する必要があります。
+([フェールセーフ](#fail-safe)または[Safety Worker](#safety-worker))
 
 
 ## もっとAngular Service Workerを知りたい

@@ -38,7 +38,7 @@ Learn more in [Angular Elements Overview](guide/elements).
 
 ## アノテーション
 
-A structure that provides metadata for a class. See [decorator](#decorator).
+クラスに関するメタデータを提供する構造。[デコレーター](#decorator)を参照しましょう。
 
 {@a app-shell}
 
@@ -75,11 +75,11 @@ Integrators can add builders to enable tools and workflows to run through the An
 
 ## 属性ディレクティブ
 
-A category of [directive](#directive) that can listen to and modify the behavior of
-other HTML elements, attributes, properties, and components. They are usually represented
-as HTML attributes, hence the name.
+[ディレクティブ](#directive)の一種。
+他のHTML要素、属性、プロパティ、コンポーネントの動作をリッスンし変更できます。
+これらは通常、HTML属性として表されるため、この名前が付けられています。
 
-Learn more in [Attribute Directives](guide/attribute-directives).
+[属性ディレクティブ](guide/attribute-directives)でさらに学びましょう。
 
 
 {@a B}
@@ -128,21 +128,21 @@ The [workspace configuration](guide/workspace-config) file, `angular.json`, cont
 
 ## ケースタイプ {@a case-types}
 
-Angular uses capitalization conventions to distinguish the names of various types, as described in the [naming guidelines section](guide/styleguide#02-01) of the Style Guide. Here's a summary of the case types:
+Angularは、スタイルガイドの[命名ガイドラインのセクション](guide/styleguide#02-01)で説明されるように、大文字と小文字の慣例を使用してさまざまな型の名前を区別します。 ケースタイプの概要は次のとおりです:
 
-* camelCase : Symbols, properties, methods, pipe names, non-component directive selectors, constants.
-Standard or lower camel case uses lowercase on the first letter of the item. For example, "selectedHero".
+* camelCase : シンボル、プロパティ、メソッド、パイプの名前や、コンポーネントではないディレクティブのセレクター、定数。
+標準のまたはローワーキャメルケースは、項目の最初の文字に小文字を使用します。たとえば、"selectedHero"。
 
-* UpperCamelCase (or PascalCase): Class names, including classes that define components, interfaces, NgModules, directives, and pipes,
-Upper camel case uses uppercase on the first letter of the item. For example, "HeroListComponent".
+* UpperCamelCase (またはPascalCase): クラス名。これはコンポーネント、インターフェース、NgModule、ディレクティブ、パイプを定義するクラスを含みます。
+アッパーキャメルケースは、項目の最初の文字に大文字を使用します。たとえば、"HeroListComponent"。
 
-* dash-case (or "kebab-case"): Descriptive part of file names, component selectors. For example, "app-hero-list".
+* dash-case (または"kebab-case"): 説明部分でのファイル名、コンポーネントのセレクター。たとえば、"app-hero-list"。
 
-* underscore_case (or "snake_case"): Not typically used in Angular. Snake case uses words connected with underscores.
-For example, "convert_link_mode".
+* underscore_case (または"snake_case"): 通常、Angularでは使用しません。スネークケースは、アンダースコアで繋げた単語を使用します。
+たとえば、"convert_link_mode"。
 
-* UPPER_UNDERSCORE_CASE (or UPPER_SNAKE_CASE, or SCREAMING_SNAKE_CASE): Traditional for constants (acceptable, but prefer camelCase).
-Upper snake case uses words in all capital letters connected with underscores. For example, "FIX_ME".
+* UPPER_UNDERSCORE_CASE (またはUPPER_SNAKE_CASE、SCREAMING_SNAKE_CASE): 従来の定数(許容されますが、camelCaseが好まれます)。
+アッパースネークケースは、アンダースコアで繋げたすべて大文字の単語を使用します。たとえば、"FIX_ME"。
 
 {@a change-detection}
 
@@ -165,9 +165,9 @@ If you set the `OnPush` ("CheckOnce") change-detection strategy, the change dete
 
 ## クラスデコレーター
 
-A [decorator](#decorator) that appears immediately before a class definition, which declares the class to be of the given type, and provides metadata suitable to the type.
+クラス定義の直前に現れる[デコレーター](#decorator)。クラスが指定された型であることを宣言し、その型に適したメタデータを提供します。
 
-The following decorators can declare Angular class types:
+次のデコレーターはAngularのクラス型を宣言できます:
 * `@Component()`
 * `@Directive()`
 * `@Pipe()`
@@ -179,7 +179,7 @@ The following decorators can declare Angular class types:
 
 ## クラスフィールドデコレーター
 
-A [decorator](#decorator) statement immediately before a field in a class definition that declares the type of that field. Some examples are `@Input` and `@Output`.
+クラス定義においてフィールド直前の[デコレーター](#decorator)文であり、そのフィールドの型を宣言します。いくつかの例は`@Input`と`@Output`です。
 
 {@a collection}
 
@@ -202,13 +202,13 @@ See also [Schematics CLI](#schematics-cli).
 
 ## コンポーネント
 
-A class with the `@Component()` [decorator](#decorator) that associates it with a companion [template](#template). Together, the component class and template define a [view](#view).
-A component is a special type of [directive](#directive).
-The `@Component()` decorator extends the `@Directive()` decorator with template-oriented features.
+`@Component()`[デコレーター](#decorator)の付いたクラス。その対となる[テンプレート](#template)と関連付けます。コンポーネントのクラスとテンプレートが一緒になって、[ビュー](#view)を定義します。
+コンポーネントは、[ディレクティブ](#directive)の特別な型です。
+`@Component()`デコレーターは、テンプレート指向の機能をもつ`@Directive()`デコレーターを継承します。
 
-An Angular component class is responsible for exposing data and handling most of the view's display and user-interaction logic through [data binding](#data-binding).
+Angularのコンポーネントクラスは、[データバインディング](#data-binding)を介して、データを公開し、ビューの表示とユーザーインタラクションのロジックのほとんどを処理する役割を果たします。
 
-Read more about component classes, templates, and views in [Introduction to Angular concepts](guide/architecture).
+コンポーネントクラスやテンプレート、ビューについて詳しくは、[Angularの概念の紹介](guide/architecture)を参照しましょう。
 
 
 ## 設定 {@a configuration}
@@ -244,24 +244,24 @@ See also [dynamic component loading](#dynamic-components).
 
 ## データバインディング
 
-A process that allows apps to display data values to a user and respond to user
-actions (such as clicks, touches, and keystrokes).
+アプリがデータ値をユーザーに表示し、
+ユーザーのアクション(クリック、タッチ、キーストロークなど)に応答するようにするプロセス。
 
-In data binding, you declare the relationship between an HTML widget and a data source
-and let the framework handle the details.
-Data binding is an alternative to manually pushing application data values into HTML, attaching
-event listeners, pulling changed values from the screen, and
-updating application data values.
+データバインディングでは、HTMLウィジェットとデータソース間の関係を定義し、
+フレームワークに詳細を処理させます。
+データバインディングは、手動でアプリケーションデータ値をHTMLにプッシュし、
+イベントリスナーを付けて、画面から変更値をプルし、
+アプリケーションのデータ値を更新することの、代替手段です。
 
-Read about the following forms of binding in Angular's [Template Syntax](guide/template-syntax):
+次のバインディング形式について、Angularの[テンプレート構文](guide/template-syntax)で参照しましょう:
 
- * [Interpolation](guide/interpolation)
- * [Property binding](guide/property-binding)
- * [Event binding](guide/event-binding)
- * [Attribute binding](guide/attribute-binding)
- * [Class binding](guide/attribute-binding#class-binding)
- * [Style binding](guide/attribute-binding#style-binding)
- * [Two-way data binding with ngModel](guide/built-in-directives#ngModel)
+ * [補間](guide/interpolation)
+ * [プロパティバインディング](guide/property-binding)
+ * [イベントバインディング](guide/event-binding)
+ * [属性バインディング](guide/attribute-binding)
+ * [クラスバインディング](guide/attribute-binding#class-binding)
+ * [スタイルバインディング](guide/attribute-binding#style-binding)
+ * [ngModelで双方向のデータバインディング](guide/built-in-directives#ngModel)
 
 {@a declarable}
 
@@ -284,13 +284,13 @@ Read about the following forms of binding in Angular's [Template Syntax](guide/t
 
 ## デコレーター | デコレーション {@a decorator--decoration}
 
-A function that modifies a class or property definition. Decorators (also called *annotations*) are an experimental (stage 2) [JavaScript language feature](https://github.com/wycats/javascript-decorators).
-TypeScript adds support for decorators.
+クラスやプロパティの定義を変更する関数。デコレーター(*アノテーション*とも呼ばれます)は、実験的な(ステージ2)[JavaScript言語機能](https://github.com/wycats/javascript-decorators)です。
+TypeScriptはデコレーターのサポートを追加しています。
 
-Angular defines decorators that attach metadata to classes or properties
-so that it knows what those classes or properties mean and how they should work.
+Angularは、メタデータをクラスやプロパティに付けるデコレーターを定義して、
+それらのクラスやプロパティが何を意味し、どのように機能するかを認識できるようにします。
 
-See [class decorator](#class-decorator), [class field decorator](#class-field-decorator).
+[クラスデコレーター](#class-decorator)、[クラスフィールドデコレーター](#class-field-decorator)を参照しましょう。
 
 {@a di}
 
@@ -325,26 +325,26 @@ Angularでは、依存性は通常サービスですが、文字列や関数な�
 
 ## ディレクティブ
 
-A class that can modify the structure of the DOM or modify attributes in the DOM and component data model. A directive class definition is immediately preceded by a `@Directive()` [decorator](#decorator) that supplies metadata.
+1つのクラスです。DOMの構造を変更したり、DOMにおける属性とコンポーネントデータモデルを変更したりできます。ディレクティブのクラス定義の直前には、メタデータを提供する`@Directive()`[デコレーター](#decorator)があります。
 
-A directive class is usually associated with an HTML element or attribute, and that element or attribute is often referred to as the directive itself. When Angular finds a directive in an HTML [template](#template), it creates the matching directive class instance and gives the instance control over that portion of the browser DOM.
+ディレクティブクラスは通常、HTML要素や属性に関連付けられており、この要素や属性は、しばしばそのディレクティブ自身を指し示します。AngularはHTML[テンプレート](#template)でディレクティブを見つけると、一致するディレクティブクラスのインスタンスを作成し、ブラウザDOMのその部分の制御をインスタンスに渡します。
 
-There are three categories of directive:
-* [Components](#component) use `@Component()` (an extension of `@Directive()`) to associate a template with a class.
+ディレクティブには3つの種類があります:
+* [コンポーネント](#component)は、`@Component()`(`@Directive()`の拡張)を使用して、テンプレートをクラスに関連付けます。
 
-* [Attribute directives](#attribute-directive) modify behavior and appearance of page elements.
+* [属性ディレクティブ](#attribute-directive)は、ページ要素の動作と外観を変更します。
 
-* [Structural directives](#structural-directive) modify the structure of the DOM.
+* [構造ディレクティブ](#structural-directive)は、DOMの構造を変更します。
 
-Angular supplies a number of built-in directives that begin with the `ng` prefix.
-You can also create new directives to implement your own functionality.
-You associate a *selector* (an HTML tag such as `<my-directive>`) with a custom directive, thereby extending the [template syntax](guide/template-syntax) that you can use in your apps.
+Angularは、接頭語の`ng`で始まる組み込みディレクティブをいくつか提供します。
+新しいディレクティブを作成して、独自の機能を実装することもできます。
+*セレクター*(`<my-directive>`などのHTMLタグ)をカスタムディレクティブに関連付けることで、あなたのアプリで使用できる[テンプレート構文](guide/template-syntax)を拡張します。
 
-**UpperCamelCase**, such as `NgIf`, refers to a directive class.
-You can use **UpperCamelCase** when describing properties and directive behavior.
+`NgIf`などの**UpperCamelCase**は、ディレクティブのクラスを示します。
+プロパティとディレクティブの動作を説明するときに**UpperCamelCase**を使用できます。
 
-**lowerCamelCase**, such as `ngIf` refers to a directive's attribute name.
-You can use **lowerCamelCase** when describing how to apply the directive to an element in the HTML template.
+`ngIf`などの**lowerCamelCase**は、ディレクティブの属性名を示します。
+HTMLテンプレートの要素にディレクティブを適用する方法を説明するときに、**lowerCamelCase**を使用できます。
 
 {@a dom}
 
@@ -879,9 +879,9 @@ injectableクラスは[プロバイダー](#provider)によってインスタン
 
 ## 構造ディレクティブ
 
-A category of [directive](#directive) that is responsible for shaping HTML layout by modifying the DOM&mdash;that is, adding, removing, or manipulating elements and their children.
+[ディレクティブ](#directive)の一種。DOMを変更してHTMLレイアウトを形成する役割です。つまり、要素とそれらの子を追加、削除、操作します。
 
-To learn more, see [Structural Directives](guide/structural-directives).
+詳しく学ぶには、[構造ディレクティブ](guide/structural-directives)を参照しましょう。
 
 {@a subscriber}
 
@@ -967,7 +967,7 @@ For more information, see the [Template reference variable](guide/template-refer
 
 {@a template-input-variable}
 
-## template input variable
+## テンプレートインプット変数
 
 A template input variable is a variable you can reference within a single instance of the template. You declare a template input variable using the `let` keyword as in `let customer`.
 

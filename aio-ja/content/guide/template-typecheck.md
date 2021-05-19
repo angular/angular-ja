@@ -228,6 +228,7 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 class SubmitButton {
   private _disabled: boolean;
 
+  @Input()
   get disabled(): boolean {
     return this._disabled;
   }

@@ -130,7 +130,7 @@ Angular Universal は、JavaScript なしで簡単に検索、リンク、ナビ
 
 Angular Universal を使用すると、完全なアプリのように見えるアプリのランディングページを生成できます。
 ページは純粋な HTML であり、JavaScript が無効になっていても表示できます。
-ページはブラウザイベントを処理しませんが、[`routerLink`](guide/router#router-link) を使用してサイト内のナビゲーションをサポート _します_ 。
+ページはブラウザイベントを処理しませんが、[`routerLink`](guide/router-reference#router-link) を使用してサイト内のナビゲーションをサポート _します_ 。
 
 実際には、静的バージョンのランディングページを提供して、ユーザーの注意を引き付けます。
 同時に、その背後にある完全な Angular アプリをロードします。

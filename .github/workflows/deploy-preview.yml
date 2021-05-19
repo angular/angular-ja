@@ -29,7 +29,7 @@ jobs:
     - name: Install
       run: yarn install
     - name: Build
-      run: ./build.sh
+      run: yarn build
     - name: Deploy preview version
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:

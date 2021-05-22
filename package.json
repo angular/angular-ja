@@ -7,13 +7,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "npm run textlint",
-    "update-origin": "./update-origin.sh",
-    "textlint": "textlint 'aio-ja/**/!(*.en).md'",
-    "textlint:f": "textlint --fix 'aio-ja/**/!(*.en).md'",
     "prebuild": "rm -rf build-out && mkdir build-out",
     "build": "docker-compose run --rm build-aio",
-    "start": "docker-compose up --remove-orphans watch-aio"
+    "build:docker": "docker-compose build --parallel",
+    "lint": "yarn ~~textlint",
+    "lint:fix": "yarn ~~textlint --fix",
+    "start": "docker-compose up --remove-orphans watch-aio",
+    "test": "npm run lint",
+    "update-origin": "./update-origin.sh",
+    "~~textlint": "textlint 'aio-ja/**/!(*.en).md'"
   },
   "devDependencies": {
     "glob": "^7.1.2",

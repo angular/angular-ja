@@ -6,10 +6,6 @@ Angularは、Google内からも、より広範なオープンソースコミュ�
 
 ## 進行中
 
-### Accelerated debugging and performance profiling with Angular DevTools
-
-デバッグやパフォーマンスプロファイリングのためのユーティリティを提供するAngularの開発ツールに取り組んでいます。このプロジェクトでは、Angularアプリケーションのコンポーネント構造や変更検知を開発者が理解できるようにすることを目的としています。
-
 ### テスト環境の自動ティアダウンによるテスト時間とデバッグの改善
 
 テスト時間を改善し、テスト間の分離を改善するために、<code>[TestBed](https://angular.io/api/core/testing/TestBed)</code> を変更して、各テスト実行後にテスト環境を自動的にクリーンアップしたり、分解したりするようにしたいと思います。
@@ -54,6 +50,10 @@ Develop and publish an in-depth guide on change detection. Develop content for p
 
 Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
 
+### オプショナルのNgModulesを使用したシンプルなAngularメンタルモデル
+
+Angularメンタルモデルと学習経路を簡略化するために、NgModulesをオプションにすることに取り組みます。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。
+
 ## 将来
 
 ### Investigate micro frontend architecture for scalable development processes
@@ -76,16 +76,18 @@ Angular コンパイラを TypeScript コンパイラのプラグインとして
 
 A long-standing feature request is to add the ability to add directives to host elements. The feature will allow developers to augment their own components with additional behaviors without using inheritance. The project will require substantial effort in terms of the definition of APIs, semantics, and implementation.
 
-### オプショナルのNgModulesを使用したシンプルなAngularメンタルモデル
-
-Angularメンタルモデルと学習経路を簡略化するために、NgModulesをオプションにすることに取り組みます。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。
-
 ### 使いやすいコンポーネントレベルのコード分割API
 
 Webアプリケーションの一般的な問題は、初期ロード時間が遅いことです。それを改善するひとつの方法は、コンポーネントレベルでより細かいコード分割を適用することです。このプラクティスを促進するために、より使いやすいコード分割APIに取り組みます。
 
 <details class="roadmap-done-details">
 <summary class="roadmap-done-summary">完了</summary>
+
+### Accelerated debugging and performance profiling with Angular DevTools
+
+_Completed Q2 2021_
+
+デバッグやパフォーマンスプロファイリングのためのユーティリティを提供するAngularの開発ツールに取り組んでいます。このプロジェクトでは、Angularアプリケーションのコンポーネント構造や変更検知を開発者が理解できるようにすることを目的としています。
 
 ### 統合されたAngularのバージョニングとブランチでリリースを効率化
 
@@ -117,11 +119,11 @@ _Completed Q2 2021_
 
 v11リリースの一環として、Angular CLIでwebpack 5のオプトインプレビューを導入しました。安定性を確保するために、ビルド速度とバンドルサイズの改善を可能にするための実装を引き続きイテレーションしていきます。
 
-### ユニバーサルアプリケーションにおける重要なスタイルのインライン化によるアプリ高速化
+### ユニバーサルアプリケーションにおける重要なスタイルのインライン化によるアプリケーション高速化
 
 _Completed Q1 2021_
 
-外部スタイルシートの読み込みはブロッキング操作であり、ブラウザは参照されているすべての CSS を読み込むまでアプリケーションのレンダリングを開始できないことを意味します。ページのヘッダーにレンダーブロッキングリソースがあると、そのロードパフォーマンスに大きな影響を与える可能性があり、たとえば、[First contentful paint](https://web.dev/first-contentful-paint/)などです。アプリを高速化するために、Google Chrome チームと協力して、重要な CSS をインライン化し、残りのスタイルを非同期にロードします。
+外部スタイルシートの読み込みはブロッキング操作であり、ブラウザは参照されているすべての CSS を読み込むまでアプリケーションのレンダリングを開始できないことを意味します。ページのヘッダーにレンダーブロッキングリソースがあると、そのロードパフォーマンスに大きな影響を与える可能性があり、たとえば、[First contentful paint](https://web.dev/first-contentful-paint/)などです。アプリケーションを高速化するために、Google Chrome チームと協力して、重要な CSS をインライン化し、残りのスタイルを非同期にロードします。
 
 ### よりよいAngularエラーメッセージでデバッグを改善
 

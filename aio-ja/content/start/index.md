@@ -1,4 +1,4 @@
-# 基本的なAngularアプリをはじめる
+# 基本的なAngularアプリケーションをはじめる
 
 Angularへようこそ！
 
@@ -65,7 +65,7 @@ StackBlitzでは、右側のプレビューペインにサンプルアプリケ�
 
 左側のプロジェクトセクションには、インフラストラクチャファイルや設定ファイルなど、アプリケーションを構成するソースファイルが表示されています。
 
-チュートリアルに含まれる StackBlitz のサンプルアプリを作成すると、StackBlitz がスターターファイルとモックデータを作成してくれます。
+チュートリアルに含まれる StackBlitz のサンプルアプリケーションを作成すると、StackBlitz がスターターファイルとモックデータを作成してくれます。
 チュートリアルで使用するファイルは `src` フォルダにあります。
 
 StackBlitzの使い方については、[StackBlitz documentation](https://developer.stackblitz.com/docs/platform/)を参照してください。
@@ -269,4 +269,4 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 Angularの探索を続け、このアプリケーションを開発するには、次の手順にしたがってください。
 
 * 製品の詳細ページを作成するには、[アプリ内ナビゲーション](start/start-routing "Getting started: In-app navigation")に進みます。
-* [デプロイ](start/start-deployment "Getting started: Deployment")にスキップしてローカル開発に移行したり、Firebaseや独自のサーバーにアプリをデプロイしたりします。
+* [デプロイ](start/start-deployment "Getting started: Deployment")にスキップしてローカル開発に移行したり、Firebaseや独自のサーバーにアプリケーションをデプロイしたりします。

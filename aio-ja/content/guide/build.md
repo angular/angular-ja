@@ -1,4 +1,4 @@
-# Angularアプリのビルドとサーブ {@a building-and-serving-angular-apps}
+# Angularアプリケーションのビルドとサーブ {@a building-and-serving-angular-apps}
 
 このページではAngularプロジェクトのビルド固有の設定オプションを取り上げます。
 
@@ -53,7 +53,7 @@ export const environment = {
 };
 ```
 
-### アプリでの環境固有の変数の使用 {@a using-environment-specific-variables-in-your-app}
+### アプリケーションでの環境固有の変数の使用 {@a using-environment-specific-variables-in-your-app}
 
 次のアプリケーション構造は本番環境およびステージング環境用のビルドターゲットを設定しています:
 
@@ -198,7 +198,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 
 * 12%: ベースラインに対するサイズの割合。（ベースライン値には無効）
 
-予算を設定した場合、アプリの特定の部分が設定した境界サイズに達するか超えた際に、ビルドシステムによって警告または報告が行われ、エラーが発生します。
+予算を設定した場合、アプリケーションの特定の部分が設定した境界サイズに達するか超えた際に、ビルドシステムによって警告または報告が行われ、エラーが発生します。
 
 各予算エントリは、次のプロパティをもつJSONオブジェクトです:
 
@@ -215,9 +215,9 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
     予算の種類。次のうちどれか:
 
 * `bundle` - 特定のバンドルのサイズ。
-* `initial` - アプリの初期サイズ。
+* `initial` - アプリケーションの初期サイズ。
 * `allScript` - 全スクリプトのサイズ。
-* `all` - アプリ全体のサイズ。
+* `all` - アプリケーション全体のサイズ。
 * `anyComponentStyle` - いずれか1つのコンポーネントのスタイルシートのサイズ。
 * `anyScript` - いずれか1つのスクリプトのサイズ。
 * `any` - いずれかのファイルのサイズ。
@@ -321,7 +321,7 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 
 ### Lighthouse との下位互換性 {@a backward-compatibility-with-lighthouse}
 
-もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次の`browserslist`エントリを`package.json`に追加してください:
+もしプログレッシブウェブアプリケーションを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次の`browserslist`エントリを`package.json`に追加してください:
 
 ```
 "browserslist": [

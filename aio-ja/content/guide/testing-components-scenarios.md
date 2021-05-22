@@ -492,7 +492,7 @@ import 'zone.js/testing';
   region="enable-toBlob-macrotask">
 </code-example>
 
-アプリで `<canvas>` 要素をZone.js対応にするために、 `zone-patch-canvas`  パッチをインポートする必要があることに注意してください（`polyfills.ts` または `<canvas>` を使用する特定のファイルのいずれかの中で）：
+アプリケーションで `<canvas>` 要素をZone.js対応にするために、 `zone-patch-canvas`  パッチをインポートする必要があることに注意してください（`polyfills.ts` または `<canvas>` を使用する特定のファイルのいずれかの中で）：
 
 <code-example
   header="src/polyfills.ts or src/app/shared/canvas.component.ts"
@@ -1127,7 +1127,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-bad-id" header="app/hero/hero-detail.component.spec.ts (bad id)"></code-example>
 
-このアプリは`id`パラメータを省略した`HeroDetailComponent`へのルーティングを持っていませんが、いつかそのようなルーティングを追加するかもしれません。
+このアプリケーションは`id`パラメータを省略した`HeroDetailComponent`へのルーティングを持っていませんが、いつかそのようなルーティングを追加するかもしれません。
 コンポーネントは、`id`がないときに妥当な何かを行うべきです。
 
 この実装では、コンポーネントは新しいヒーローを作成して表示する必要があります。
@@ -1474,7 +1474,7 @@ _非同期_な操作である、ファイルシステムから読み取らなく
 <div class="alert is-critical">
 
 テスト関数を非同期にすることを怠った場合
-(たとえば、後述の `async` キーワードの使用を忘れた場合)、
+(たとえば、後述の `waitForAsync()` の使用を忘れた場合)、
 このようなエラーメッセージが表示されます。
 
 <code-example language="sh" hideCopy>

@@ -136,7 +136,7 @@ Angularは、`HeroBioComponent` ビュー内に対応する `HeroContactComponen
 親になければAngularはエラーを投げます。
 
 2番目の `@Host()` 関数は、 `loggerService` コンストラクタープロパティを装飾します。
-アプリ内唯一の `LoggerService` インスタンスは、 `AppComponent` レベルで提供されます。
+アプリケーション内唯一の `LoggerService` インスタンスは、 `AppComponent` レベルで提供されます。
 ホストの `HeroBioComponent` は、自身の `LoggerService` プロバイダーを持ちません。
 
 `@Optional()` でプロパティを装飾していない場合、Angularはエラーを投げます。
@@ -439,7 +439,7 @@ Angularの依存性の注入を使用するのがもっとも簡単です。
 <code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" header="dependency-injection-in-action/src/app/minimal-logger.service.ts"></code-example>
 
 抽象クラスは通常、拡張できるベースクラスです。
-しかし、このアプリでは、 `MinimalLogger` を継承するクラスはありません。
+しかし、このアプリケーションでは、 `MinimalLogger` を継承するクラスはありません。
 `LoggerService` と `DateLoggerService` は、
 `MinimalLogger` を継承、
 または代わりにインターフェースを実装することができましたが、

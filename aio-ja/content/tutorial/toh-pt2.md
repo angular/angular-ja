@@ -1,6 +1,6 @@
 # 選択リストを表示する
 
-このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、
+このページでは「Tour of Heroes」アプリケーションを拡張してヒーローのリストを表示し、
 ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
 <div class="alert is-helpful">
@@ -151,7 +151,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 ### なにが起きたのか？
 
-アプリを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
+アプリケーションを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
 
 `selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
 
@@ -227,7 +227,7 @@ Angularの [クラスバインディング](guide/attribute-binding#class-bindin
 
 ## まとめ
 
-* 「Tour of Heroes」アプリはヒーローのリストと詳細ビューを表示します
+* 「Tour of Heroes」アプリケーションはヒーローのリストと詳細ビューを表示します
 * ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
 * リストを表示するために `*ngFor` を使いました
 * HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました

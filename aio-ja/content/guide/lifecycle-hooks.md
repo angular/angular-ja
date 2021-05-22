@@ -12,7 +12,7 @@ Angular は実行中にインスタンスを作成、更新、破棄するため
 ライフサイクルフックを使用する前に、次の基本的な知識が必要です:
 
 * [TypeScript プログラミング](https://www.typescriptlang.org/)
-* [Angularの概念](guide/architecture "Introduction to fundamental app-design concepts") で説明されている Angular アプリの設計の基礎。
+* [Angularの概念](guide/architecture "Introduction to fundamental app-design concepts") で説明されている Angular アプリケーションの設計の基礎。
 
 {@a hooks-overview}
 

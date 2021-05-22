@@ -1,11 +1,11 @@
 # JavaScriptモジュールとNgModule
 
 JavaScriptモジュールとNgModuleはあなたのコードをモジュール化するのに役立ちますが、これらはとても異なっています。
-Angularアプリは両方の種類のモジュールに依存しています。
+Angularアプリケーションは両方の種類のモジュールに依存しています。
 
 ## JavaScriptモジュール: コードを含んでいるファイル
 
-[JavaScriptモジュール](https://javascript.info/modules "JavaScript.Info - Modules")はJavaScriptコードを含む独立したファイルであり、通常はあなたのアプリ内の特定の目的のためのクラスや関数のライブラリを含んでいます。
+[JavaScriptモジュール](https://javascript.info/modules "JavaScript.Info - Modules")はJavaScriptコードを含む独立したファイルであり、通常はあなたのアプリケーション内の特定の目的のためのクラスや関数のライブラリを含んでいます。
 JavaScriptモジュールはあなたの成果を多数のファイルに渡って広げます。
 
 <div class="alert is-helpful">
@@ -36,15 +36,15 @@ Angularフレームワークそれ自身はJavaScriptモジュールの集合と
 
 ## NgModule: コンパイルのためのメタデータを持ったクラス
 
-[NgModule](guide/glossary#ngmodule "NgModuleの定義")は、アプリの特定の部分がどのように他の部分と一体となるかを表現するメタデータオブジェクトをもつ`@NgModule`デコレーターによってマークされたクラスです。
+[NgModule](guide/glossary#ngmodule "NgModuleの定義")は、アプリケーションの特定の部分がどのように他の部分と一体となるかを表現するメタデータオブジェクトをもつ`@NgModule`デコレーターによってマークされたクラスです。
 NgModuleはAngular特有です。
 `@NgModule`デコレーターをもつクラスは慣例でそれら自身のファイルに置かれますが、このメタデータを含むのでJavaScriptモジュールとは異なります。
 
-`@NgModule`のメタデータは、あなたが書くアプリのコードを高性能のJavaScriptコードに変換するAngularのコンパイルプロセスをガイドすることで、重要な役割を果たします。
+`@NgModule`のメタデータは、あなたが書くアプリケーションのコードを高性能のJavaScriptコードに変換するAngularのコンパイルプロセスをガイドすることで、重要な役割を果たします。
 メタデータはコンポーネントのテンプレートのコンパイル方法と実行時の[インジェクター](guide/glossary#injector "インジェクターの定義")の作り方を表現します。
 それはNgModuleの[コンポーネント](guide/glossary#component "コンポーネントの定義")と[ディレクティブ](guide/glossary#directive "ディレクティブの定義")、[パイプ](guide/glossary#pipe "パイプの定義)"を認識し、
 それらのいくつかを`exports`プロパティを通して公開することで、外部のコンポーネントがそれらを使えるようにします。
-あなたは[サービス](guide/glossary#service "サービスの定義")のための[プロパイダー](guide/glossary#provider "プロバイダーの定義")を追加することにもNgModuleを使うことで、サービスをアプリのどこにおいても有効にできます。
+あなたは[サービス](guide/glossary#service "サービスの定義")のための[プロパイダー](guide/glossary#provider "プロバイダーの定義")を追加することにもNgModuleを使うことで、サービスをアプリケーションのどこにおいても有効にできます。
 
 JavaScriptモジュールとしての1つの巨大なファイルですべてのメンバークラスを定義するよりも、`@NgModule.declarations`のリストで、どのコンポーネントやディレクティブ、パイプがNgModuleに所属するかを宣言してください。
 これらのクラスは[宣言](guide/glossary#declarable "宣言の定義")と呼ばれます。
@@ -56,7 +56,7 @@ NgModuleのメタデータのプロパティについての完全な説明は、
 
 ## 両方を使うサンプル
 
-新しいアプリプロジェクトのために[Angular CLI](cli)によって生成されるルートNgModuleの`AppModule`は、両方の種類のモジュールをどのように使うかを実演します。:
+新しいアプリケーションプロジェクトのために[Angular CLI](cli)によって生成されるルートNgModuleの`AppModule`は、両方の種類のモジュールをどのように使うかを実演します。:
 
 <code-example path="ngmodules/src/app/app.module.1.ts" header="src/app/app.module.ts (default AppModule)"></code-example>
 
@@ -64,7 +64,7 @@ NgModuleのメタデータのプロパティについての完全な説明は、
 それから次の配列とともに`@NgModule`を設定します。:
 
 * `declarations`: このNgModuleに所属するコンポーネントとディレクティブ、パイプ。
-  新しいアプリプロジェクトのルートNgModuleは`AppComponent`というただ1つのコンポーネントを持ちます。
+  新しいアプリケーションプロジェクトのルートNgModuleは`AppComponent`というただ1つのコンポーネントを持ちます。
 
 * `imports`: あなたが使用する他のNgModule。これによりそれらの宣言を使用できます。
   新しく生成されるルートNgModuleは、ブラウザ特有の[DOM](https://www.w3.org/TR/DOM-Level-2-Core/introduction.html "Definition of Document Object Model")レンダリングやサニタイズ、ロケーションといったサービスを使用するために[`BrowserModule`](api/platform-browser/BrowserModule "BrowserModule NgModule")をインポートします。
@@ -72,11 +72,11 @@ NgModuleのメタデータのプロパティについての完全な説明は、
 * `providers`: 他のNgModuleにおけるコンポーネントが使用できるサービスのプロバイダー。
   新しく生成されるルートNgModuleにおいてプロバイダーはありません。
 
-* `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリをブートストラップします。
+* `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリケーションをブートストラップします。
   このエントリーコンポーネントの`AppComponent`は`declarations`と`bootstrap`の両方の配列に現れます。
 
 ## 次のステップ
 
 * NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")をご覧ください。
 * ルートNgModuleについてより学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")をご覧ください。
-* よく使用されるAngularのNgModuleとそれらをアプリにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")をご覧ください。
+* よく使用されるAngularのNgModuleとそれらをアプリケーションにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")をご覧ください。

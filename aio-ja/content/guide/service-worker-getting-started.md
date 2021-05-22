@@ -11,7 +11,7 @@
 ## アプリケーションにService Workerを追加する
 
 プロジェクトでAngular Service Workerを設定するには、CLIコマンド`ng add @angular/pwa`を使用します。
-必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリを設定します。
+必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリケーションを設定します。
 
 ```sh
 ng add @angular/pwa --project *project-name* 
@@ -25,7 +25,7 @@ ng add @angular/pwa --project *project-name*
 4. `index.html`ファイルを更新します。
     * `manifest.webmanifest`ファイルを追加するためのリンクを含めます。
     * `theme=color`のメタタグを追加します。
-5. インストール可能なプログレッシブウェブアプリ（PWA）をサポートするアイコンファイルをインストールします。 
+5. インストール可能なプログレッシブウェブアプリケーション（PWA）をサポートするアイコンファイルをインストールします。 
 6. [`ngsw-config.json`](/guide/service-worker-config)というService Worker構成ファイルを作成します。このファイルは、キャッシュの動作やその他の設定を指定します。
 
 

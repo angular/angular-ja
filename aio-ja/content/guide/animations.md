@@ -1,6 +1,6 @@
 # Angularアニメーション・イントロダクション
 
-アニメーションは動きの錯覚を提供します(時間の経過と共にHTML要素のスタイルが変化します)。うまく設計されたアニメーションはアプリケーションをより楽しく使いやすくすることができます。しかし、ただの飾りではありません。アニメーションは、さまざまな方法でアプリ・ユーザー体験を向上させることができます:
+アニメーションは動きの錯覚を提供します(時間の経過と共にHTML要素のスタイルが変化します)。うまく設計されたアニメーションはアプリケーションをより楽しく使いやすくすることができます。しかし、ただの飾りではありません。アニメーションは、さまざまな方法でアプリケーション・ユーザー体験を向上させることができます:
 
 * アニメーションがなければ、Webページの遷移は突然で不快感を与えるかもしれません。
 
@@ -21,7 +21,7 @@ AngularのアニメーションシステムはCSSの機能に基づいて構築�
 
 #### 前提条件
 
-このガイドでは、次のセクションで説明されているような基本的なAngularアプリの作成に精通していることを前提としています:
+このガイドでは、次のセクションで説明されているような基本的なAngularアプリケーションの作成に精通していることを前提としています:
 
 * [チュートリアル](tutorial)
 * [アーキテクチャオーバービュー](guide/architecture)
@@ -71,6 +71,17 @@ HTMLでは、これらの属性は色や不透明度などの通常のCSSスタ�
 
 <div class="lightbox">
   <img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
+</div>
+
+<div class="alert is-helpful">
+
+  Let's create a new `open-close` component to animate with simple transitions.
+
+  Run the following command in terminal to generate the component:
+
+  `ng g component open-close`
+
+  This will create the component at `src/app/open-close.component.ts`.
 </div>
 
 ### アニメーションの状態とスタイル
@@ -192,7 +203,7 @@ region="transition2">
 次のコードスニペットでは、トリガーを`isOpen`プロパティの値にバインドします。
 
 <code-example path="animations/src/app/open-close.component.1.html" header="src/app/open-close.component.html"
-region="compare">
+region="trigger">
 </code-example>
 
 この例では、`isOpen`式が`open`または`closed`の定義された状態として評価されたとき、状態変更のトリガー`openClose`を通知します。それから、状態変更をハンドルし、状態変更アニメーションを開始するのは、`openClose`のコードにゆだねます。

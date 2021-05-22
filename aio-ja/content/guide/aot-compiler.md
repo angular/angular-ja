@@ -25,7 +25,7 @@ AOTを使用する理由は次のとおりです。
    それらのソースファイルに対する別々の ajax リクエストを排除します。
 
 * *より小さい Angular フレームワークのダウンロードサイズ*
-   アプリがすでにコンパイルされている場合は、Angular コンパイラをダウンロードする必要はありません。
+   アプリケーションがすでにコンパイルされている場合は、Angular コンパイラをダウンロードする必要はありません。
    コンパイラは Angular 自体の約半分なので、これを省略するとアプリケーションのペイロードが大幅に減少します。
 
 * *テンプレートエラーを早期に検出する*
@@ -44,7 +44,7 @@ AOTを使用する理由は次のとおりです。
 Angular には、アプリケーションをコンパイルする2つの方法があります。
 
 * **_Just-in-Time_ (JIT)** は実行時にブラウザ内でアプリケーションをコンパイルします。This was the default until Angular 8.
-* **_Ahead-of-Time_ (AOT)** はビルド時にアプリとライブラリをコンパイルします。This is the default since Angular 9.
+* **_Ahead-of-Time_ (AOT)** はビルド時にアプリケーションとライブラリをコンパイルします。This is the default since Angular 9.
 
 When you run the [`ng build`](cli/build) (build only) or [`ng serve`](cli/serve) (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the `aot` property in your build configuration specified in `angular.json`. By default, `aot` is set to `true` for new CLI apps.
 

@@ -426,7 +426,7 @@ path="toh-pt4/src/app/heroes/heroes.component.ts">
 ## まとめ
 
 * `HeroService` クラスのデータ利用方法を修正しました
-* `HeroService`をルートレベルでサービスの _プロバイダ_ として登録し、アプリ内のどこにでも注入できるようにしました。
+* `HeroService`をルートレベルでサービスの _プロバイダ_ として登録し、アプリケーション内のどこにでも注入できるようにしました。
 * [Angular の依存性の注入](guide/dependency-injection) を使用して、それをコンポーネントに注入しました
 * `HeroService` の _データ取得_ メソッドを非同期化しました
 * `Observable` および、それを扱うために利用する RxJS ライブラリについて学びました

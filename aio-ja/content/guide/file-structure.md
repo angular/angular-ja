@@ -90,11 +90,11 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 
 | `src/app/` ファイル          | 目的 |
 | :-------------------------- | :------------------------------------------|
-| `app/app.component.ts`      | `AppComponent` という名前のアプリのルートコンポーネントのロジックを定義します。 このルートコンポーネントに関連付けられたビューは、コンポーネントやサービスをアプリケーションに追加したときに [ビュー階層](guide/glossary#view-hierarchy) のルートになります。 |
+| `app/app.component.ts`      | `AppComponent` という名前のアプリケーションのルートコンポーネントのロジックを定義します。 このルートコンポーネントに関連付けられたビューは、コンポーネントやサービスをアプリケーションに追加したときに [ビュー階層](guide/glossary#view-hierarchy) のルートになります。 |
 | `app/app.component.html`    | ルート `AppComponent` に関連付けられているHTMLテンプレートを定義します。 |
 | `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
 | `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
-| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
+| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリケーションにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
 
 ### アプリケーション設定ファイル {@a application-configuration-files}
 
@@ -141,7 +141,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 ng new my-workspace --create-application="false"
 </code-example>
 
-その後、ワークスペース内でユニークな名前でアプリやライブラリを生成できます。
+その後、ワークスペース内でユニークな名前でアプリケーションやライブラリを生成できます。
 
 <code-example language="bash">
 cd my-workspace

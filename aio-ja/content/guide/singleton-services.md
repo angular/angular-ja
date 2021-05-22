@@ -2,7 +2,7 @@
 
 シングルトンサービスは、そのインスタンスがアプリケーションにひとつだけ存在するサービスです。
 
-この記事で説明されている、アプリ全体でシングルトンなサービスを使用したサンプルアプリケーションについては、
+この記事で説明されている、アプリケーション全体でシングルトンなサービスを使用したサンプルアプリケーションについては、
 すべてのドキュメント化されたNgModuleの機能を紹介している<live-example name="ngmodules"></live-example>を参照してください。
 
 ## シングルトンサービスを提供する
@@ -58,7 +58,7 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 <div class="alert is-helpful">
 
-**注:** このシナリオを見ることができるアプリの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example noDownload  name="ngmodules">NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
+**注:** このシナリオを見ることができるアプリケーションの例が２つあります。ルーティングモジュールと`GreetingModule`に`forRoot()`と`forChild()`を含んでいる、より高度な<live-example noDownload  name="ngmodules">NgModules live example</live-example>と、より単純な<live-example name="lazy-loading-ngmodules" noDownload>Lazy Loading live example</live-example>です。導入の説明は [フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules) ガイドを参照してください。
 
 </div>
 
@@ -109,7 +109,7 @@ Angularは`@NgModule.providers`にリストされている項目を追加する�
 あなたが明示的に`AppModule`プロバイダーに追加したプロバイダーが、
 インポートされたモジュールのプロバイダーよりも優先されることを保証します。
 
-サンプルアプリでは `GreetingModule` をインポートし、その`forRoot()`メソッドを一度だけ`AppModule`で使用しています。複数のインスタンスを避けるためにこのように登録します。
+サンプルアプリケーションでは `GreetingModule` をインポートし、その`forRoot()`メソッドを一度だけ`AppModule`で使用しています。複数のインスタンスを避けるためにこのように登録します。
 
 `GreetingModule` に greeting の`UserService`の設定を行う
 `forRoot()`メソッドを追加することもできます。

@@ -49,7 +49,7 @@ CLIを使って生成することができます。
 <code-example path="toh-pt5/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts (updated)">
 </code-example>
 
-最初に、 `app-routing.module.ts`ファイルはアプリにルーティング機能を持たせることができる `RouterModule` と `Routes` をインポートします。次のインポートである `HeroesComponent`は、ルートを設定することでルーターに向かう場所を教えます。
+最初に、 `app-routing.module.ts`ファイルはアプリケーションにルーティング機能を持たせることができる `RouterModule` と `Routes` をインポートします。次のインポートである `HeroesComponent`は、ルートを設定することでルーターに向かう場所を教えます。
 
 `CommonModule` の参照と` declarations`配列は不要なので、 `AppRoutingModule`の一部ではなくなっていることに注意してください。
 次のセクションでは、`AppRoutingModule` の残りの部分について詳しく説明します。
@@ -93,7 +93,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 
 </div>
 
-次に、`AppRoutingModule` は `RouterModule` をエクスポートし、アプリ全体で利用できるようにします。
+次に、`AppRoutingModule` は `RouterModule` をエクスポートし、アプリケーション全体で利用できるようにします。
 
 <code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts (exports array)" region="export-routermodule">
 </code-example>
@@ -105,7 +105,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 <code-example path="toh-pt5/src/app/app.component.html" region="outlet" header="src/app/app.component.html (router-outlet)">
 </code-example>
 
-ユーザーが遷移したときにアプリは `HeroesComponent`のみを表示するため、`AppComponent`のテンプレートはもう `<app-heroes>`を必要としません。
+ユーザーが遷移したときにアプリケーションは `HeroesComponent`のみを表示するため、`AppComponent`のテンプレートはもう `<app-heroes>`を必要としません。
 
 この`<router-outlet>`は、ルーティングされたビューをどこに表示するかをルーターに教えます。
 
@@ -124,7 +124,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
   ng serve
 </code-example>
 
-ブラウザを更新するとアプリのタイトルは表示されますがヒーローのリストは表示されないはずです。
+ブラウザを更新するとアプリケーションのタイトルは表示されますがヒーローのリストは表示されないはずです。
 
 ブラウザのアドレスバーを見てみましょう。
 URLが`/`で終わっています。
@@ -426,7 +426,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 #### 試す
 
-ブラウザがリフレッシュされ、アプリは再び動くようになります。
+ブラウザがリフレッシュされ、アプリケーションは再び動くようになります。
 ダッシュボードまたはヒーローリストでヒーローをクリックでき、
 そのヒーローの詳細ビューに移動することができます。
 

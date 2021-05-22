@@ -20,24 +20,24 @@ In Angular, the component plays the part of the controller/viewmodel, and the te
 
 <hr />
 
-あなたのアプリにおいてAngularの各テンプレートはHTMLのセクションであり、ブラウザが表示するページの一部分として含めることができます。
+あなたのアプリケーションにおいてAngularの各テンプレートはHTMLのセクションであり、ブラウザが表示するページの一部分として含めることができます。
 AngularのHTMLテンプレートはブラウザでちょうど通常のHTMLのように、ただしより多くの機能をもって、ビューやユーザーインターフェースを描画します。
 
-AngularのCLIでAngularアプリを生成するとき、`app.component.html`ファイルはプレースホルダのHTMLを含んでいるデフォルトのテンプレートです。
+AngularのCLIでAngularアプリケーションを生成するとき、`app.component.html`ファイルはプレースホルダのHTMLを含んでいるデフォルトのテンプレートです。
 
 このテンプレート構文のガイドは、クラスとテンプレートの間でデータを連携してどのようにUX/UIを制御できるかを示します。
 
 <div class="is-helpful alert">
 
-テンプレート構文のガイドのほとんどには、各ガイドの独自のトピックを実演する専用の動くサンプルアプリがあります。
-それらのすべてを1つのアプリで一緒に見るには、包括した<live-example title="Template Syntax Live Code"></live-example>をご覧ください。
+テンプレート構文のガイドのほとんどには、各ガイドの独自のトピックを実演する専用の動くサンプルアプリケーションがあります。
+それらのすべてを1つのアプリケーションで一緒に見るには、包括した<live-example title="Template Syntax Live Code"></live-example>をご覧ください。
 
 </div>
 
 
 ## HTMLを強化
 
-あなたのテンプレートにおいて特別なAngular構文を用いて、アプリのHTML表現を拡張できます。
+あなたのテンプレートにおいて特別なAngular構文を用いて、アプリケーションのHTML表現を拡張できます。
 たとえば、Angularはビルトインのテンプレート関数や変数、イベントリスニング、データバインディングのような機能をもって、DOM(ドキュメントオブジェクトモデル)の値を動的に取得・設定するのを手助けします。
 
 ほとんどのHTML構文は有効なテンプレート構文です。
@@ -60,7 +60,7 @@ Angularは`<script>`タグを無視して、ブラウザコンソールへ警告
 
 * [補間](guide/interpolation): 補間と式をHTMLでどう使うかを学びます。
 * [テンプレート文](guide/template-statements): テンプレートでイベントに応答します。
-* [バインディング構文](guide/binding-syntax): アプリで値を連携するためにバインディングを使います。
+* [バインディング構文](guide/binding-syntax): アプリケーションで値を連携するためにバインディングを使います。
 * [プロパティバインディング](guide/property-binding): 対象となる要素や`@Input()`デコレーターのディレクティブのプロパティを設定します。
 * [属性、クラス、スタイルのバインディング](guide/attribute-binding): 属性、クラス、スタイルの値を設定します。
 * [イベントバインディング](guide/event-binding): イベントやあなたのHTMLをリッスンします。

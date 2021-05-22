@@ -75,7 +75,7 @@ For more information about this command see [App shell command](cli/generate#app
 }
 </code-example>
 
-## ステップ 3: アプリがシェルコンテンツで構築されていることを確認します
+## ステップ 3: アプリケーションがシェルコンテンツで構築されていることを確認します
 
 CLI を使って `app-shell` ターゲットを構築します。
 

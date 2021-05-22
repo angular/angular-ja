@@ -68,6 +68,9 @@ rules:
 
 # カタカナ語
 
+  - expected: アプリケーション
+    pattern: /アプリ(?!ケーション)/
+
   - expected: オブザーバー
     pattern: /オブザーバ(?!ー)/
 

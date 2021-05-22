@@ -4,7 +4,7 @@
 これらのカテゴリーは石のように不変なものではなく、提案です。
 あなたは他の目的のためにNgModuleを作ったり、これらのカテゴリーのいくつかの特徴を結合したりしたいかもしれません。
 
-NgModuleは、アプリを系統だててコードを他のコードから分離された特定の機能・特徴に関連付けた状態に保つ、よい方法です。
+NgModuleは、アプリケーションを系統だててコードを他のコードから分離された特定の機能・特徴に関連付けた状態に保つ、よい方法です。
 NgModuleを使って[コンポーネント](guide/glossary#component "コンポーネントの定義")と[ディレクティブ](guide/glossary#directive "ディレクティブの定義")と[パイプ](guide/glossary#pipe "パイプの定義)")をまとまりのある機能のブロックに整理してください。
 それぞれのブロックを、特徴やビジネスドメイン、ワークフローやナビゲーションフロー、共通のユーティリティ・コレクション、[サービス](guide/glossary#service "サービスの定義")のための1つ以上の[プロバイダー](guide/glossary#provider "プロバイダーの定義")にフォーカスしてください。
 
@@ -12,13 +12,13 @@ NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "Ng
 
 <div class="alert is-helpful">
 
-NgModuleに関連したトピックで使われるサンプルアプリについては、<live-example name="ngmodules"></live-example>を参照してください。
+NgModuleに関連したトピックで使われるサンプルアプリケーションについては、<live-example name="ngmodules"></live-example>を参照してください。
 
 </div>
 
 ## NgModuleのカテゴリー概要
 
-すべてのアプリは[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")から始まります。
+すべてのアプリケーションは[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")から始まります。
 他のNgModuleは望む方法でまとめることができます。
 
 このトピックはNgModuleの次の一般的なカテゴリーに関するいくつかのガイドラインを提供します:
@@ -108,14 +108,14 @@ NgModuleに関連したトピックで使われるサンプルアプリについ
 
 ## ドメインNgModule
 
-ドメインNgModuleは、顧客の編集や発注といった特定の特徴やアプリドメインに特化したユーザー体験をもたらすことに使ってください。
+ドメインNgModuleは、顧客の編集や発注といった特定の特徴やアプリケーションドメインに特化したユーザー体験をもたらすことに使ってください。
 1つの例は<live-example name="ngmodules"></live-example>にある`ContactModule`です。
 
 ドメインNgModuleはある一定の機能に関連したコードをまとめます。その機能を作り上げるコンポーネントとルーティング、テンプレートのすべてを含みます。
 ドメインNgModuleにおけるトップコンポーネントは特徴やドメインのルートの役割を果たし、あなたがエクスポートする唯一のコンポーネントです。
 プライベートにサポートするサブコンポーネントはそれの子孫になります。
 
-ドメインNgModuleを別のNgModuleにちょうど1回だけインポートしてください。たとえばあるドメインNgModuleに、もしくはごくわずかなNgModuleを含むアプリのルートNgModule(`AppModule`)にです。
+ドメインNgModuleを別のNgModuleにちょうど1回だけインポートしてください。たとえばあるドメインNgModuleに、もしくはごくわずかなNgModuleを含むアプリケーションのルートNgModule(`AppModule`)にです。
 
 ドメインNgModuleはふつうは宣言で構成されます。
 プロバイダーをめったに含みません。
@@ -140,7 +140,7 @@ NgModuleに関連したトピックで使われるサンプルアプリについ
 ルーテッドNgModuleはめったにプロバイダーを持ちません。なぜなら必要なとき(ルーティングのためなど)だけルーテッドNgModuleをロードするからです。
 このNgModuleの`provider`配列にリストされたサービスは有効になりません。ルートインジェクターが遅延ロードのNgModuleについて認識しないからです。
 もしプロバイダーを含めるなら、提供されたサービスのライフタイムはそのNgModuleのライフタイムと同じになるでしょう。
-ルーテッドNgModuleで、もしくはルーテッドNgModuleがインポートするNgModuleで、アプリの広範囲に至る[シングルトンサービス](guide/singleton-services)を提供しないでください。
+ルーテッドNgModuleで、もしくはルーテッドNgModuleがインポートするNgModuleで、アプリケーションの広範囲に至る[シングルトンサービス](guide/singleton-services)を提供しないでください。
 
 <div class="alert is-helpful">
 
@@ -204,7 +204,7 @@ Angularの`HttpClientModule`はサービスNgModuleの好例です。
 
 ## シェアードNgModule
 
-共通に使われるディレクティブとパイプとコンポーネントを1つのNgModule(典型的には`SharedModule`という名前)に入れてください。それから、アプリの他の部分でそれを必要とするところならどこでもそのNgModuleをインポートしてください。
+共通に使われるディレクティブとパイプとコンポーネントを1つのNgModule(典型的には`SharedModule`という名前)に入れてください。それから、アプリケーションの他の部分でそれを必要とするところならどこでもそのNgModuleをインポートしてください。
 [遅延ロードのNgModule](guide/lazy-loading-ngmodules "NgModuleを遅延ロードする")を含むあなたのドメインNgModuleで、シェアードNgModuleをインポートできます。
 1つの例が<live-example name="ngmodules"></live-example>にある`SharedModule`で、カスタムパイプの`AwesomePipe`と`HighlightDirective`ディレクティブを提供しています。
 
@@ -218,11 +218,11 @@ Angularの`HttpClientModule`はサービスNgModuleの好例です。
 
 * NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")を参照してください。
 * ルートNgModuleの詳細を学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")を参照してください。
-* よく使用されるAngularのNgModuleとそれらをアプリにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")を参照してください。
+* よく使用されるAngularのNgModuleとそれらをアプリケーションにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")を参照してください。
 * NgModuleのメタデータのプロパティについての完全な説明は、[NgModuleのメタデータを使う](guide/ngmodule-api "NgModuleのメタデータを使う")を参照してください。
 
 NgModuleのロードと依存性とサービスの使用を管理したい場合、次を参照してください:
 
-* アプリ開始時のNgModuleの即時ロードや、ルーターによるNgModuleの非同期の遅延ロードについて学ぶには、[フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules)を参照してください。
-* あなたのアプリ用にサービスや他の依存を提供する方法を理解するには、[NgModuleのために依存性を提供する](guide/providers "NgModuleのために依存性を提供する")を参照してください。
+* アプリケーション開始時のNgModuleの即時ロードや、ルーターによるNgModuleの非同期の遅延ロードについて学ぶには、[フィーチャーモジュールの遅延ロード](guide/lazy-loading-ngmodules)を参照してください。
+* あなたのアプリケーション用にサービスや他の依存を提供する方法を理解するには、[NgModuleのために依存性を提供する](guide/providers "NgModuleのために依存性を提供する")を参照してください。
 * NgModuleで使うためのシングルトンサービスを作成する方法について学ぶには、[サービスをシングルトンにする](guide/singleton-services "サービスをシングルトンにする")を参照してください。

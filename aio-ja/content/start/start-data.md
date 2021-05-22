@@ -16,7 +16,7 @@
 
 Angularでは、サービスはAngularの [依存性の注入システム](guide/glossary#dependency-injection-di "dependency injection definition") を使用してアプリケーションの任意の部分で使用できるクラスのインスタンスです。
 
-現在、ユーザーは商品情報を閲覧することができ、アプリでは商品変更の共有や通知をシミュレーションすることができます。
+現在、ユーザーは商品情報を閲覧することができ、アプリケーションでは商品変更の共有や通知をシミュレーションすることができます。
 
 次のステップは、ユーザーが商品をカートに追加する方法を構築することです。
 このセクションでは、**Buy**ボタンを追加し、カート内の製品に関する情報を保存するためのカートサービスを設定する方法を説明します。
@@ -172,7 +172,7 @@ Angularの `HttpClient` は外部APIからデータを取得し、ストリー�
 
 このセクションでは、`HttpClient`を使って外部ファイルから出荷価格を取得する方法を示します。
 
-StackBlitzがこのガイド用に生成するアプリには、定義済みの出荷データが `assets/shipping.json` に含まれています。
+StackBlitzがこのガイド用に生成するアプリケーションには、定義済みの出荷データが `assets/shipping.json` に含まれています。
 このデータを使用して、カート内のアイテムの送料を追加します。
 
 <code-example header="src/assets/shipping.json" path="getting-started/src/assets/shipping.json">
@@ -265,7 +265,7 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
     <code-example header="src/app/cart/cart.component.html" path="getting-started/src/app/cart/cart.component.2.html"></code-example>
 
 1. 更新されたカートを見るには、 **Checkout** ボタンをクリックしてください。 
-    アプリを変更するとプレビューが更新され、カートが空になることを忘れないでください。
+    アプリケーションを変更するとプレビューが更新され、カートが空になることを忘れないでください。
 
     <div class="lightbox">
       <img src='generated/images/guide/start/cart-empty-with-shipping-prices.png' alt="Cart with link to shipping prices">

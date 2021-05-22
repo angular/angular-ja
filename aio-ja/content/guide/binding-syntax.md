@@ -68,7 +68,7 @@ Angular での HTML 属性の役割は、要素やディレクティブの状態
 
 HTML 属性の `value` は *初期値* を指定します。DOM の `value` プロパティは *現在* の値です。
 
-実際に動くアプリで属性と DOM プロパティの違いを見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。
+実際に動くアプリケーションで属性と DOM プロパティの違いを見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。
 
 #### 例 2: disabled ボタン
 
@@ -100,7 +100,7 @@ The second line, which uses the disabled attribute checks for `null`.
 
 一般的には、属性バインディングよりもプロパティバインディングを使ったほうが、ブーリアンの値なのでより直感的で、構文も短く、パフォーマンスもよいです。
 
-実際に動くアプリで `disabled` ボタンの動作を見るには、<live-example></live-example> のバインディング構文を見てください。
+実際に動くアプリケーションで `disabled` ボタンの動作を見るには、<live-example></live-example> のバインディング構文を見てください。
 この例ではコンポーネントから disabled プロパティをトグルする方法を示しています。
 
 

@@ -243,12 +243,12 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 あなたのサイトで過去に提供されていたService Workerだけでなく
 `@angular/service-worker`を無効にするためにも使用できます。
 
-### アプリの場所(URL)を変更する
+### アプリケーションの場所(URL)を変更する
 
 ここで注意しておきたいのは、Service Workerはリダイレクトの後では動作しないということです。
 あなたはすでに`The script resource is behind a redirect, which is disallowed`というエラーに遭遇したことがあるかも知れません。
 
-これはあなたが アプリの場所(URL)を変更する必要がある場合に問題となります。もし
+これはあなたが アプリケーションの場所(URL)を変更する必要がある場合に問題となります。もし
 古いURL(たとえば`example.com`)から新しいURL(たとえば`www.example.com`)
 にリダイレクトを設定すると、Service Workerは動作しなくなります。
 また、Service Workerから完全にサイトを読み込んでいるユーザーの場合、

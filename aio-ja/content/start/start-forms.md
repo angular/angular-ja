@@ -70,4 +70,4 @@
 
 製品カタログ、ショッピングカート、およびチェックアウト機能を備えた完全なオンラインストアアプリケーションができました。
 
-["デプロイ"セクションに進んで](start/start-deployment "Try it: Deployment") ローカル開発に移動するか、アプリをFirebaseまたは独自のサーバーに配置します。
+["デプロイ"セクションに進んで](start/start-deployment "Try it: Deployment") ローカル開発に移動するか、アプリケーションをFirebaseまたは独自のサーバーに配置します。

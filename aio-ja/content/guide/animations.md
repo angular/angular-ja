@@ -73,6 +73,17 @@ HTMLでは、これらの属性は色や不透明度などの通常のCSSスタ�
   <img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
 </div>
 
+<div class="alert is-helpful">
+
+  Let's create a new `open-close` component to animate with simple transitions.
+
+  Run the following command in terminal to generate the component:
+
+  `ng g component open-close`
+
+  This will create the component at `src/app/open-close.component.ts`.
+</div>
+
 ### アニメーションの状態とスタイル
 
 各遷移の終了時に呼び出す個別の状態を定義するためには、Angularの`state()`関数を使用します。この関数は、`open`や`closed`のようなユニークな名前と`style()`関数の2つの引数をとります。
@@ -192,7 +203,7 @@ region="transition2">
 次のコードスニペットでは、トリガーを`isOpen`プロパティの値にバインドします。
 
 <code-example path="animations/src/app/open-close.component.1.html" header="src/app/open-close.component.html"
-region="compare">
+region="trigger">
 </code-example>
 
 この例では、`isOpen`式が`open`または`closed`の定義された状態として評価されたとき、状態変更のトリガー`openClose`を通知します。それから、状態変更をハンドルし、状態変更アニメーションを開始するのは、`openClose`のコードにゆだねます。

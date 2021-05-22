@@ -1474,7 +1474,7 @@ _非同期_な操作である、ファイルシステムから読み取らなく
 <div class="alert is-critical">
 
 テスト関数を非同期にすることを怠った場合
-(たとえば、後述の `async` キーワードの使用を忘れた場合)、
+(たとえば、後述の `waitForAsync()` の使用を忘れた場合)、
 このようなエラーメッセージが表示されます。
 
 <code-example language="sh" hideCopy>

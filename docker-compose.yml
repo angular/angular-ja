@@ -19,3 +19,5 @@ services:
     volumes: 
       - ./aio-ja:/aio-ja
       - ./scripts:/scripts
+    environment:
+      CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING:-false}

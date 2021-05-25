@@ -231,7 +231,7 @@ Webプラットフォームの機能です。現在ほとんどのブラウザ�
 
 カスタム要素機能は、タグを定義できるようにすることでHTMLを拡張します。タグの内容はJavaScriptコードによって作成・制御されます。カスタム要素(*web component*とも呼ばれます)は、[CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)に追加されるとブラウザによって認識されます。
 
-Angularコンポーネントを変換するAPIを使うことによって、それをブラウザに登録し、Angularアプリケーション内のDOMに直接追加する任意のHTMLで使用できるようになります。カスタム要素のタグは、変更検知とデータバインディング機能を備えたコンポーネントのビューを、Angularのプロセスなしで表示されたはずのコンテンツに挿入します。
+Angularコンポーネントを変換するAPIを使うことによって、それをブラウザに登録し、Angularアプリケーション内でDOMに直接追加された任意のHTML中で使用できるようになります。カスタム要素のタグは、変更検知とデータバインディング機能を備えたコンポーネントのビューを、Angularのプロセスなしで表示されるであろうコンテンツに挿入します。
 
 [Angular element](#angular-element)を参照しましょう。
 
@@ -575,7 +575,7 @@ See also [schematic](#schematic).
 Angularはこれらのフックメソッドを次の順序で呼び出します:
 
 * `ngOnChanges`: [input](#input)/[output](#output)バインディングの値が変更のとき。
-* `ngOnInit`: はじめての`ngOnChanges`の後。
+* `ngOnInit`: 最初の`ngOnChanges`の後。
 * `ngDoCheck`: 開発者のカスタム変更検知。
 * `ngAfterContentInit`: コンポーネントのコンテンツ初期化の後。
 * `ngAfterContentChecked`: コンポーネントのコンテンツを毎回チェックした後。

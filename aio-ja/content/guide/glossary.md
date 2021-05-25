@@ -30,9 +30,9 @@ AngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換�
 
 ## Angular element
 
-An Angular [component](#component) packaged as a [custom element](#custom-element).
+[カスタム要素](#custom-element)としてパッケージされたAngular[コンポーネント](#component)です。
 
-Learn more in [Angular Elements Overview](guide/elements).
+[Angular Elements概要](guide/elements)で詳しく学びましょう。
 
 {@a annotation}
 
@@ -88,12 +88,12 @@ Integrators can add builders to enable tools and workflows to run through the An
 
 ## バインディング
 
-Generally, the practice of setting a variable or property to a data value.
-Within Angular, typically refers to [data binding](#data-binding),
-which coordinates DOM object properties with data object properties.
+一般に、変数やプロパティにデータの値を設定する方法。
+Angular内では通常、[データバインディング](#data-binding)のことを指し、
+これは、DOMオブジェクトのプロパティをデータオブジェクトのプロパティと連携させます。
 
-Sometimes refers to a [dependency-injection](#dependency-injection) binding
-between a [token](#token) and a dependency [provider](#provider).
+ときには、[トークン](#token)と依存性[プロバイダー](#provider)の間の、
+[依存性の注入](#dependency-injection)のバインディングを意味します。
 
 {@a bootstrap}
 
@@ -148,18 +148,18 @@ Angularは、スタイルガイドの[命名ガイドラインのセクション
 
 ## 変更検知
 
-The mechanism by which the Angular framework synchronizes the state of an application's UI with the state of the data.
-The change detector checks the current state of the data model whenever it runs, and maintains it as the previous state to compare on the next iteration.
+AngularフレームワークがアプリケーションのUIの状態をデータの状態と同期させるメカニズム。
+変更検知の実行時はいつも、データモデルの現在の状態をチェックし、それを次回の反復において比較するために前の状態として保持します。
 
-As the application logic updates component data, values that are bound to DOM properties in the view can change.
-The change detector is responsible for updating the view to reflect the current data model.
-Similarly, the user can interact with the UI, causing events that change the state of the data model.
-These events can trigger change detection.
+アプリケーションのロジックがコンポーネントデータを更新すると、ビュー上のDOMプロパティにバインドされた値が変更することがあります。
+変更検知は、現在のデータモデルを反映してビューを更新する役割を果たします。
+同様に、ユーザーはUIを操作して、データモデルの状態を変更するイベントを発生させることができます。
+これらのイベントは変更検知をトリガーできます。
 
-Using the default ("CheckAlways") change-detection strategy, the change detector goes through the [view hierarchy](#view-tree) on each VM turn to check every [data-bound property](#data-binding) in the template. In the first phase, it compares the current state of the dependent data with the previous state, and collects changes.
-In the second phase, it updates the page DOM to reflect any new data values.
+デフォルト("CheckAlways")の変更検知戦略を使うと、変更検知は、各VMのターンで[ビュー階層](#view-tree)を通過し、テンプレートで[データバインドされたプロパティ](#data-binding)をすべてチェックします。最初の段階では、依存データの現在の状態を前の状態と比較し、変更を収集します。
+次の段階では、新しいデータ値を反映してページのDOMを更新します。
 
-If you set the `OnPush` ("CheckOnce") change-detection strategy, the change detector runs only when [explicitly invoked] (api/core/ChangeDetectorRef), or when it is triggered by an `Input` reference change or event handler. This typically improves performance. For more information, see [Optimize Angular's change detection](https://web.dev/faster-angular-change-detection/).
+`OnPush`("CheckOnce")の変更検知戦略を設定した場合、変更検知は、[明示的に呼び出される](api/core/ChangeDetectorRef)とき、または`Input`の参照変更やイベントハンドラーによってトリガーされるときのみ実行されます。これは通常、パフォーマンスが向上します。より詳しい情報は、[Angularの変更検知を最適化する](https://web.dev/faster-angular-change-detection/)を参照しましょう。
 
 {@a class-decorator}
 
@@ -219,23 +219,23 @@ See  [workspace configuration](#cli-config)
 
 ## コンテンツ投影
 
-A way to insert DOM content from outside a component into the component's view in a designated spot.
+DOMコンテンツをコンポーネントの外部からそのコンポーネントのビューへ指定された場所で挿入する方法。
 
-For more information, see [Responding to changes in content](guide/lifecycle-hooks#content-projection).
+詳しい情報は、[コンテンツ変更への応答](guide/lifecycle-hooks#content-projection)を参照しましょう。
 
 {@a custom-element}
 
 ## カスタム要素
 
-A web platform feature, currently supported by most browsers and available in other browsers through polyfills (see [Browser support](guide/browser-support)).
+Webプラットフォームの機能です。現在ほとんどのブラウザでサポートされており、その他のブラウザではポリフィルを介して利用できます([ブラウザサポート](guide/browser-support)を参照しましょう)。
 
-The custom element feature extends HTML by allowing you to define a tag whose content is created and controlled by JavaScript code. A custom element (also called a *web component*) is recognized by a browser when it's added to the [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry).
+カスタム要素機能は、タグを定義できるようにすることでHTMLを拡張します。タグの内容はJavaScriptコードによって作成・制御されます。カスタム要素(*web component*とも呼ばれます)は、[CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)に追加されるとブラウザによって認識されます。
 
-You can use the API to transform an Angular component so that it can be registered with the browser and used in any HTML that you add directly to the DOM within an Angular app. The custom element tag inserts the component's view, with change-detection and data-binding functionality, into content that would otherwise be displayed without Angular processing.
+Angularコンポーネントを変換するAPIを使うことによって、それをブラウザに登録し、Angularアプリケーション内でDOMに直接追加された任意のHTML中で使用できるようになります。カスタム要素のタグは、変更検知とデータバインディング機能を備えたコンポーネントのビューを、Angularのプロセスなしで表示されるであろうコンテンツに挿入します。
 
-See [Angular element](#angular-element).
+[Angular element](#angular-element)を参照しましょう。
 
-See also [dynamic component loading](#dynamic-components).
+[動的コンポーネントロード](#dynamic-components)も参照しましょう。
 
 
 {@a D}
@@ -388,14 +388,14 @@ To learn more, see [Browser Support](guide/browser-support).
 
 ## 要素
 
-Angular defines an `ElementRef` class to wrap render-specific native UI elements.
-In most cases, this allows you to use Angular templates and data binding to access DOM elements
-without reference to the native element.
+Angularは、レンダリング固有のネイティブUI要素をラップする`ElementRef`クラスを定義しています。
+ほとんどの場合、これにより、Angularのテンプレートとデータバインディングを使って、
+ネイティブ要素への参照を用いずにDOM要素にアクセスできます。
 
-The documentation generally refers to *elements* (`ElementRef` instances), as distinct from  *DOM elements*
-(which can be accessed directly if necessary).
+ドキュメントでは通常は*要素*(`ElementRef`インスタンス)について言及しており、
+*DOM要素*(これは必要に応じて直接アクセスできます)とは異なります。
 
-Compare to [custom element](#custom-element).
+[カスタム要素](#custom-element)と比較しましょう。
 
 {@a entry-point}
 
@@ -478,12 +478,12 @@ Angularの[依存性の注入](#dependency-injection)システムにおけるオ
 
 ## Input
 
-When defining a [directive](#directive), the `@Input()` decorator on a directive property
-makes that property available as a *target* of a [property binding](guide/property-binding).
-Data values flow into an input property from the data source identified
-in the [template expression](#template-expression) to the right of the equal sign.
+[ディレクティブ](#directive)を定義する際、ディレクティブのプロパティについた`@Input()`デコレーターが、
+そのプロパティを[プロパティバインディング](guide/property-binding)の*ターゲット*として利用できるようにします。
+データの値は、等号の右側の[テンプレート式](#template-expression)で認識されるデータソースから、
+inputのプロパティに流れ込みます。
 
-To learn more, see [input and output properties](guide/inputs-outputs).
+詳しく学ぶには、[inputとoutputのプロパティ](guide/inputs-outputs)を参照しましょう。
 
 {@a interpolation}
 
@@ -567,23 +567,23 @@ See also [schematic](#schematic).
 
 ## ライフサイクルフック
 
-An interface that allows you to tap into the lifecycle of [directives](#directive) and [components](#component) as they are created, updated, and destroyed.
+[ディレクティブ](#directive)と[コンポーネント](#component)が作成・更新・破棄されるライフサイクルを活用できるようにするインターフェース。
 
-Each interface has a single hook method whose name is the interface name prefixed with `ng`.
-For example, the `OnInit` interface has a hook method named `ngOnInit`.
+インターフェースごとに単一のフックメソッドがあり、その名前は`ng`で始まるインターフェース名です。
+たとえば、`OnInit`インターフェースには`ngOnInit`という名前のフックメソッドがあります。
 
-Angular calls these hook methods in the following order:
+Angularはこれらのフックメソッドを次の順序で呼び出します:
 
-* `ngOnChanges`: When an [input](#input)/[output](#output) binding value changes.
-* `ngOnInit`: After the first `ngOnChanges`.
-* `ngDoCheck`: Developer's custom change detection.
-* `ngAfterContentInit`: After component content initialized.
-* `ngAfterContentChecked`: After every check of component content.
-* `ngAfterViewInit`: After a component's views are initialized.
-* `ngAfterViewChecked`: After every check of a component's views.
-* `ngOnDestroy`: Just before the directive is destroyed.
+* `ngOnChanges`: [input](#input)/[output](#output)バインディングの値が変更のとき。
+* `ngOnInit`: 最初の`ngOnChanges`の後。
+* `ngDoCheck`: 開発者のカスタム変更検知。
+* `ngAfterContentInit`: コンポーネントのコンテンツ初期化の後。
+* `ngAfterContentChecked`: コンポーネントのコンテンツを毎回チェックした後。
+* `ngAfterViewInit`: コンポーネントのビューが初期化された後。
+* `ngAfterViewChecked`: コンポーネントのビューを毎回チェックした後。
+* `ngOnDestroy`: ディレクティブが破棄される直前。
 
-To learn more, see [Lifecycle Hooks](guide/lifecycle-hooks).
+詳しく学ぶには、[ライフサイクルフック](guide/lifecycle-hooks)を参照しましょう。
 
 {@a M}
 
@@ -664,12 +664,12 @@ An object passed to the `subscribe()` method for an [observable](#observable). T
 
 ## Output
 
-When defining a [directive](#directive), the `@Output{}` decorator on a directive property
-makes that property available as a *target* of [event binding](guide/event-binding).
-Events stream *out* of this property to the receiver identified
-in the [template expression](#template-expression) to the right of the equal sign.
+[ディレクティブ](#directive)を定義する際、ディレクティブのプロパティについた`@Output()`デコレーターが、
+そのプロパティを[イベントバインディング](guide/event-binding)のターゲットとして利用できるようにします。
+イベントはこのプロパティ*から*、
+等号の右側の[テンプレート式](#template-expression)で認識される受信側へ流れます。
 
-To learn more, see [Input and Output Properties](guide/inputs-outputs).
+詳しく学ぶには、[inputとoutputのプロパティ](guide/inputs-outputs)を参照しましょう。
 
 
 {@a P}
@@ -917,15 +917,15 @@ You can also define a custom builder, and add a target to the project configurat
 
 ## テンプレート
 
-Code that defines how to render a component's [view](#view).
+コンポーネントの[ビュー](#view)をどのようにレンダリングするかを定義するコード。
 
-A template combines straight HTML with Angular [data-binding](#data-binding) syntax, [directives](#directive),
-and [template expressions](#template-expression) (logical constructs).
-The Angular elements insert or calculate values that modify the HTML elements before the page is displayed. Learn more about Angular template language in the [Template Syntax](guide/template-syntax) guide.
+テンプレートは、そのままのHTMLとAngularの[データバインディング](#data-binding)構文や、
+[ディレクティブ](#directive)、[テンプレート式](#template-expression)を組み合わせたものです(論理構造)。
+Angularの要素は、ページが表示される前にHTML要素を変更する値を挿入または計算します。Angularのテンプレート言語の詳細については、[テンプレート構文](guide/template-syntax)のガイドで学びましょう。
 
-A template is associated with a [component class](#component) through the `@Component()` [decorator](#decorator). The template code can be provided inline, as the value of the `template` property, or in a separate HTML file linked through the `templateUrl` property.
+テンプレートは、`@Component()`[デコレーター](#decorator)を介して[コンポーネントクラス](#component)と関連付けられます。テンプレートのコードは、`template`プロパティの値としてインラインで、もしくは`templateUrl`プロパティを介してリンクされる別個のHTMLファイルで提供できます。
 
-Additional templates, represented by `TemplateRef` objects, can define alternative or *embedded* views, which can be referenced from multiple components.
+`TemplateRef`オブジェクトで表される追加のテンプレートは、複数のコンポーネントから参照できる代替ビューや*埋め込み*ビューを定義できます。
 
 {@a template-driven-forms}
 
@@ -947,29 +947,29 @@ The alternative is a reactive form. For an introduction and comparison of both f
 
 ## テンプレート式
 
-A TypeScript-like syntax that Angular evaluates within a [data binding](#data-binding).
+TypeScriptのような構文であり、Angularが[データバインディング](#data-binding)内で評価します。
 
-Read about how to write template expressions in the [template expressions](guide/interpolation#template-expressions) section of the [Interpolation](guide/interpolation) guide.
+テンプレート式の書き方については、[補間](guide/interpolation)ガイドの[テンプレート式](guide/interpolation#template-expressions)セクションを読みましょう。
 
 {@a template-reference-variable}
 
 ## テンプレート参照変数
 
-A variable defined in a template that references an instance associated with an element, such as a directive instance, component instance, template as in `TemplateRef`, or DOM element.
-After declaring a template reference variable on an element in a template,
-you can access values from that variable elsewhere within the same template.
-The following example defines a template reference variable named `#phone`.
+テンプレートにおいて定義される変数であり、要素と結び付けられたインスタンスを参照します。それはディレクティブのインスタンス、コンポーネントのインスタンス、`TemplateRef`におけるようなテンプレート、DOM要素などです。
+テンプレートにおいて要素上でテンプレート参照変数を宣言した後、
+同じテンプレート内ならどこでもその変数から値にアクセスできます。
+次の例では、`#phone`という名前のテンプレート参照変数を定義しています。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-var" header="src/app/app.component.html"></code-example>
 
-For more information, see the [Template reference variable](guide/template-reference-variables) guide.
+詳しい情報については、[テンプレート参照変数](guide/template-reference-variables)ガイドを参照しましょう。
 
 
 {@a template-input-variable}
 
 ## テンプレートインプット変数
 
-A template input variable is a variable you can reference within a single instance of the template. You declare a template input variable using the `let` keyword as in `let customer`.
+テンプレートインプット変数は、テンプレートのある1つのインスタンス内で参照できる変数です。テンプレートインプット変数は、`let customer`におけるように`let`キーワードを使って宣言します。
 
 ```
  <tr *ngFor="let customer of customers;">
@@ -982,7 +982,7 @@ A template input variable is a variable you can reference within a single instan
    </tr>
 ```
 
-Read and learn more about [template input variables](guide/template-reference-variables#template-input-variable).
+[テンプレートインプット変数](guide/template-reference-variables#template-input-variable)について、詳しく学びましょう。
 
 
 {@a token}
@@ -1027,14 +1027,14 @@ A file specifies the root files and the compiler options required to compile a T
 
 ## 単方向データフロー
 
-A data flow model where the component tree is always checked for changes in one direction (parent to child), which prevents cycles in the change detection graph.
+コンポーネントツリーが常に単方向(親から子)の変更についてチェックされるデータフローモデル。これにより、変更検知グラフにおける循環が防止されます。
 
-In practice, this means that data in Angular flows downward during change detection.
-A parent component can easily change values in its child components because the parent is checked first.
-A failure could occur, however, if a child component tries to change a value in its parent during change detection (inverting the expected data flow), because the parent component has already been rendered.
-In development mode, Angular throws the `ExpressionChangedAfterItHasBeenCheckedError` error if your app attempts to do this, rather than silently failing to render the new value.
+実際のところこれは、Angularにおけるデータが変更検知中に下向きに流れることを意味します。
+親コンポーネントは子コンポーネントの値を簡単に変更できます。親が最初にチェックされるからです。
+しかしながら、子コンポーネントが親の値を変更検知中に変更しようとすると(期待されるデータフローが反転)、誤りが発生する可能性があります。親コンポーネントがすでにレンダリングされているからです。
+開発モードでは、アプリケーションがこれをしようとすると、Angularは新しい値のレンダリングに黙って失敗するのではなく、`ExpressionChangedAfterItHasBeenCheckedError`エラーをスローします。
 
-To avoid this error, a [lifecycle hook](guide/lifecycle-hooks) method that seeks to make such a change should trigger a new change detection run. The new run follows the same direction as before, but succeeds in picking up the new value.
+このエラーを回避するには、そのような変更の実行を探し出す[ライフサイクルフック](guide/lifecycle-hooks)メソッドが、新しい変更検知の実行をトリガーする必要があります。その新しい実行は以前と同じ方向へ進みますが、新しい値を取得することに成功します。
 
 {@a universal}
 
@@ -1052,41 +1052,41 @@ To learn more, see [Angular Universal: server-side rendering](guide/universal).
 
 ## ビュー
 
-The smallest grouping of display elements that can be created and destroyed together.
-Angular renders a view under the control of one or more [directives](#directive).
+一緒に作成および破棄できる表示要素の最小グループ。
+Angularは1つ以上の[ディレクティブ](#directive)の制御下でビューをレンダリングします。
 
-A [component](#component) class and its associated [template](#template) define a view.
-A view is specifically represented by a `ViewRef` instance associated with a component.
-A view that belongs immediately to a component is called a *host view*.
-Views are typically collected into [view hierarchies](#view-tree).
+[コンポーネント](#component)クラスとそれに結び付けられた[テンプレート](#template)はビューを定義します。
+ビューは具体的には、コンポーネントと結び付けられた`ViewRef`インスタンスによって表されます。
+コンポーネントに直接属するビューは*ホストビュー*と呼ばれます。
+ビューは通常、[ビュー階層](#view-tree)に収集されます。
 
-Properties of elements in a view can change dynamically, in response to user actions;
-the structure (number and order) of elements in a view can't.
-You can change the structure of elements by inserting, moving, or removing nested views within their view containers.
+ビュー内の要素のプロパティはユーザーの操作に応じて動的に変更できますが、
+ビュー内の要素の構造(数と順序)はできません。
+ビューコンテナ内のネストされたビューを挿入・移動・削除することで、要素の構造を変更できます。
 
-View hierarchies can be loaded and unloaded dynamically as the user navigates through the application, typically under the control of a [router](#router).
+ビュー階層は、ユーザーがアプリケーション内を移動するときに、通常は[ルーター](#router)の制御下で、動的にロードおよびアンロードできます。
 
 {@a ve}
 
 ## ビューエンジン {@a view-engine}
 
-The compilation and rendering pipeline used by Angular before version 9. Compare [Ivy](#ivy).
+Angularのバージョン9より前に使用されていたコンパイルとレンダリングのパイプライン。[Ivy](#ivy)と比較しましょう。
 
 
 {@a view-tree}
 
 ## ビュー階層 {@a view-hierarchy}
 
-A tree of related views that can be acted on as a unit. The root view is a component's *host view*. A host view can be the root of a tree of *embedded views*, collected in a *view container* (`ViewContainerRef`) attached to an anchor element in the hosting component. The view hierarchy is a key part of Angular [change detection](#change-detection).
+関連のあるビューのツリーで、構成単位として機能します。ルートビューはコンポーネントの*ホストビュー*です。ホストビューは*埋め込みビュー*のツリーのルートにできます。埋め込みビューは、ホストしているコンポーネントのアンカー要素に接続された、*ビューコンテナ*(`ViewContainerRef`)へ収集されます。ビュー階層はAngularの[変更検知](#change-detection)の重要な部分です。
 
-The view hierarchy doesn't imply a component hierarchy. Views that are embedded in the context of a particular hierarchy can be host views of other components. Those components can be in the same NgModule as the hosting component, or belong to other NgModules.
+ビュー階層はコンポーネント階層を意味するものではありません。特定の階層のコンテキストに埋め込まれているビューは、他のコンポーネントのホストビューにできます。これらのコンポーネントは、ホストしているコンポーネントと同じNgModule内や、他のNgModuleに属することができます。
 
 {@a W}
 {@a web-component}
 
 ## web component
 
-See [custom element](#custom-element).
+[カスタム要素](#custom-element)を参照しましょう。
 
 {@a workspace}
 

@@ -49,6 +49,16 @@ Angularの開発プロセスでは、各プルリクエストに対して、す�
 
 </div>
 
+
+{@a ie11}
+## Configuring Angular CLI for compatibility with IE11
+
+While Angular supports all browsers listed above, in order to improve the build times and output,  Angular CLI applications don't support IE11 by default.
+
+Angular CLI uses [`browserlist`](https://github.com/browserslist/browserslist) to configure browser support for applications.
+
+You can enable the IE11 support by following the instructions in the `.browserslistrc` file at the root of your project.
+
 ## ポリフィル {@a polyfills}
 
 AngularはWEBプラットフォームの最新標準に基づいて構築されています。

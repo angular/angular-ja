@@ -330,7 +330,6 @@
               "title": "Router reference",
               "tooltip": "Describes highlight some core router API concepts."
             }
-
           ]
         },
         {
@@ -467,30 +466,6 @@
               "url": "guide/route-animations",
               "title": "ルーティング遷移のアニメーション",
               "tooltip": "ルーティング遷移をアニメーション化する",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "title": "Schematics",
-          "tooltip": "Understanding schematics.",
-          "children": [
-            {
-              "url": "guide/schematics",
-              "title": "Schematics 概要",
-              "tooltip": "Extending CLI generation capabilities.",
-              "translated": true
-            },
-            {
-              "url": "guide/schematics-authoring",
-              "title": "Authoring Schematics",
-              "tooltip": "Understand the structure of a schematic.",
-              "translated": true
-            },
-            {
-              "url": "guide/schematics-for-libraries",
-              "title": "Schematics for Libraries",
-              "tooltip": "Use schematics to integrate your library with the Angular CLI.",
               "translated": true
             }
           ]
@@ -651,6 +626,30 @@
           "title": "DevTools",
           "tooltip": "DevTools",
           "url": "guide/devtools"
+        },
+        {
+          "title": "Schematics",
+          "tooltip": "Understanding schematics.",
+          "children": [
+            {
+              "url": "guide/schematics",
+              "title": "Schematics 概要",
+              "tooltip": "Extending CLI generation capabilities.",
+              "translated": true
+            },
+            {
+              "url": "guide/schematics-authoring",
+              "title": "Authoring Schematics",
+              "tooltip": "Understand the structure of a schematic.",
+              "translated": true
+            },
+            {
+              "url": "guide/schematics-for-libraries",
+              "title": "Schematics for Libraries",
+              "tooltip": "Use schematics to integrate your library with the Angular CLI.",
+              "translated": true
+            }
+          ]
         }
       ]
     },
@@ -763,6 +762,12 @@
           "url": "guide/roadmap",
           "title": "ロードマップ",
           "tooltip": "Roadmap of the Angular team.",
+          "translated": true
+        },
+        {
+          "url": "guide/browser-support",
+          "title": "ブラウザサポート",
+          "tooltip": "ブラウザサポートとポリフィルのガイド",
           "translated": true
         },
         {
@@ -915,12 +920,6 @@
                   "url": "guide/typescript-configuration",
                   "title": "TypeScript設定",
                   "tooltip": "Angular開発者のためのTypeScript設定。",
-                  "translated": true
-                },
-                {
-                  "url": "guide/browser-support",
-                  "title": "ブラウザサポート",
-                  "tooltip": "ブラウザサポートとポリフィルのガイド",
                   "translated": true
                 },
                 {

@@ -1449,9 +1449,9 @@ Please call "TestBed.compileComponents" before your test.
 `TestBed`がコンポーネントを作成しようとすると、テストは失敗します。
 
 <code-example
-  path="testing/src/app/banner/banner.component.spec.ts"
-  region="configure-and-create"
-  header="app/banner/banner.component.spec.ts (setup that fails)"
+  path="testing/src/app/banner/banner-external.component.spec.ts"
+  region="setup-may-fail"
+  header="app/banner/banner-external.component.spec.ts (setup that fails)"
   avoid></code-example>
 
 アプリケーションがコンパイルされていないことを思い出してください。

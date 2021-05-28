@@ -134,7 +134,6 @@ npm publish
 </code-example>
 
 
-
 {@a lib-assets}
 
 ## Managing assets in a library

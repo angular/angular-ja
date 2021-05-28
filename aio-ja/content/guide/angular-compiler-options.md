@@ -1,4 +1,4 @@
-# Angular コンパイラオプション
+# Angular コンパイラオプション {@a angular-compiler-options}
 
 [AOTコンパイル](guide/aot-compiler) を使用する場合、[TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
 
@@ -103,7 +103,7 @@ This allows `$localize` messages in application code to use the same id as ident
 
 [Ivy](guide/ivy) コンパイルおよびレンダリングパイプラインを有効にします。バージョン9では、デフォルトは `true` です。バージョン9では、[Ivy をオプトアウト](guide/ivy#opting-out-of-angular-ivy) して、以前のコンパイラである View Engine を引き続き使用できます。
 
-CLI で生成されたライブラリプロジェクトの場合、バージョン9の `prod` 設定のデフォルトは `false` です。
+CLI で生成されたライブラリプロジェクトの場合、バージョン9の production 設定のデフォルトは `false` です。
 
 ### `enableResourceInlining`
 
@@ -111,7 +111,7 @@ CLI で生成されたライブラリプロジェクトの場合、バージョ�
 
 有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
-CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
+CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 
 {@a enablelegacytemplate}
@@ -184,7 +184,7 @@ TypeScript の `--outFile` オプションを使用している場合は、こ�
 
 このオプションは、`npm` に配布できない `.ngfactory.js` および `.ngstyle.js` ファイルの作成を避けながら、`npm` パッケージで配布するための `.metadata.json` ファイルを作成するようにテンプレートコンパイラに指示するために使用できます。
 
-CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
+CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 ### `strictMetadataEmit`
 
@@ -202,7 +202,7 @@ CLI で生成されたライブラリプロジェクトの場合、dev 構成の
 このオプションはライブラリのビルド段階でこれらのエラーを検出することを可能にし、
 たとえば Angular ライブラリ自身を作成する際に使用されます。
 
-CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
+CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 ### `strictInjectionParameters`
 
@@ -221,3 +221,14 @@ CLI コマンド `ng new --strict` を使用すると、生成されたプロジ
 ### `trace`
 
 `true` の場合、テンプレートのコンパイル中に追加情報を出力します。デフォルトは false です。
+
+
+{@a cli-options}
+## Command Line Options
+
+While most of the time you interact with the Angular Compiler indirectly using Angular CLI, when debugging certain issues, you might find it useful to invoke the Angular Compiler directly.
+You can use the `ngc` command provided by the `@angular/compiler-cli` npm package to call the compiler from the command line.
+
+The `ngc` command is just a wrapper around TypeScript's `tsc` compiler command and is primarily configured via the `tsconfig.json` configuration options documented in [the previous sections](#angular-compiler-options).
+
+In addition to the configuration file, you can also use [`tsc` command line options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to configure `ngc`.

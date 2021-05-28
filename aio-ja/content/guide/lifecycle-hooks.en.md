@@ -60,7 +60,7 @@ Angular executes hook methods in the following sequence. You can use them to per
     </td>
     <td>
 
-      Called before `ngOnInit()` and whenever one or more data-bound input properties change.
+      Called before `ngOnInit()` (if the component has bound inputs) and whenever one or more data-bound input properties change.
 
       Note that if your component has no inputs or you use it without providing any inputs, the framework will not call `ngOnChanges()`.
 
@@ -79,7 +79,7 @@ Angular executes hook methods in the following sequence. You can use them to per
     </td>
     <td>
 
-      Called once, after the first `ngOnChanges()`.
+      Called once, after the first `ngOnChanges()`. `ngOnInit()` is still called even when `ngOnChanges()` is not (which is the case when there are no template-bound inputs).
 
     </td>
   </tr>
@@ -395,14 +395,7 @@ Here it is attached to the repeated hero `<div>`:
 
 <code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html"></code-example>
 
-Each spy's creation and destruction marks the appearance and disappearance of the attached hero `<div>`
-with an entry in the *Hook Log* as seen here:
-
-<div class="lightbox">
-  <img src='generated/images/guide/lifecycle-hooks/spy-directive.gif' alt="Spy Directive">
-</div>
-
-Adding a hero results in a new hero `<div>`. The spy's `ngOnInit()` logs that event.
+Each spy's creation and destruction marks the appearance and disappearance of the attached hero `<div>` with an entry in the *Hook Log*. Adding a hero results in a new hero `<div>`. The spy's `ngOnInit()` logs that event.
 
 The *Reset* button clears the `heroes` list.
 Angular removes all hero `<div>` elements from the DOM and destroys their spy directives at the same time.

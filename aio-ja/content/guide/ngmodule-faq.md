@@ -180,6 +180,12 @@ NgModuleは自身がもつ宣言、選択したインポートしたクラス、
 他のモジュール、特に遅延ロードされるモジュールでインポートしないでください。
 詳細については[シングルトンサービス](guide/singleton-services) の [`forRoot()` パターン](guide/singleton-services#the-forroot-pattern) セクションを参照してください。
 
+<div class="alert is-helpful">
+Note: the `forRoot()` import can be used in a module other than `AppModule`. Importantly,
+`forRoot()` should only be called once, and the module that imports the `forRoot()` needs to be available to
+the root `ModuleInjector`. For more information, refer to the guide on [Hierarchical injectors](guide/hierarchical-dependency-injection#moduleinjector).
+</div>
+
 サービスについては、`forRoot()`を使用するかわりにサービスの`@Injectable()`デコレーターに`providedIn: 'root'`を指定してください。
 これはサービスを自動的にアプリケーション全体で有効にし、この結果としてデフォルトでシングルトンになります。
 

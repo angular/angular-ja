@@ -145,9 +145,9 @@ Angular の Custom Elements を使用すれば、自動的にインフラスト�
 サンプルアプリケーション（下記）のポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
 
 - `popup.component.ts` は、シンプルな pop-up 要素をアニメーションとスタイルとともに定義しています。
-- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として PopupComponent を実行する2つの異なる方法を提供する注入可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
-- `app.module.ts` は、PopupComponent をモジュールの `entryComponents` のリストに追加します。そうすることで、PopupComponent をコンパイルから除外し、スタートアップ時の警告やエラーを防ぐようにしています。
-- `app.component.ts` は、アプリケーションのルートコンポーネントを定義しています。このコンポーネントは、PopupService を使用して、実行時に pop-up を DOM に追加します。アプリケーションが起動すると、ルートコンポーネントのコンストラクターは PopupComponent を Custom Elements に変換します。
+- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として `PopupComponent` を実行する2つの異なる方法を提供する注入可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
+- `app.module.ts` は、`PopupComponent` をモジュールの `declarations` のリストに追加します。
+- `app.component.ts` は、アプリケーションのルートコンポーネントを定義しています。このコンポーネントは、`PopupService` を使用して、実行時に pop-up を DOM に追加します。アプリケーションが起動すると、ルートコンポーネントのコンストラクターは `PopupComponent` を Custom Elements に変換します。
 
 比較のため、デモでは、両方の手法を使っています。ひとつは動的読み込みの手法を使ってポップアップを追加するボタンです。もうひとつは Custom Elements を使って popup を追加するボタンです。準備の方法が異なるだけで、結果は同じだということが分かるでしょう。
 

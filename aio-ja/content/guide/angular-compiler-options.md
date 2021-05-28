@@ -1,4 +1,4 @@
-# Angular コンパイラオプション
+# Angular コンパイラオプション {@a angular-compiler-options}
 
 [AOTコンパイル](guide/aot-compiler) を使用する場合、[TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
 

@@ -36,3 +36,5 @@ jobs:
         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
         projectId: angular-ja
         channelId: live
+    - name: Purge CDN cache
+      run: curl -X PURGE https://angular.jp

@@ -215,10 +215,10 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
     予算の種類。次のうちどれか:
 
 * `bundle` - 特定のバンドルのサイズ。
-* `initial` - アプリケーションの初期サイズ。
+* `initial` - The size of JavaScript needed for bootstrapping the application. Defaults to warning @ 500kb and erroring at 1mb.
 * `allScript` - 全スクリプトのサイズ。
 * `all` - アプリケーション全体のサイズ。
-* `anyComponentStyle` - いずれか1つのコンポーネントのスタイルシートのサイズ。
+* `anyComponentStyle` - いずれか1つのコンポーネントのスタイルシートのサイズ。Defaults to warning at 2kb and erroring at 4kb.
 * `anyScript` - いずれか1つのスクリプトのサイズ。
 * `any` - いずれかのファイルのサイズ。
 
@@ -335,7 +335,7 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 
 これまでデフォルトでオンになっていた Autoprefixer の CSS グリッドレイアウトサポートが、Angular 8 以降ではデフォルトでオフになっています。
 
-IE 10/11 で CSS グリッドを使うには、`autoplace` オプションを使って明示的に有効にする必要があります。
+Internet Explorer 10/11 で CSS グリッドを使うには、`autoplace` オプションを使って明示的に有効にする必要があります。
 これを行うには、グローバルスタイルファイルの先頭 (または特定の CSS セレクタースコープ内) に以下を追加します。
 
 ```
@@ -534,3 +534,9 @@ function setupForCorporateProxy(proxyConfig) {
 
 module.exports = setupForCorporateProxy(proxyConfig);
 ```
+
+{@a browser-compat}
+
+## Configuring browser compatibility
+
+See [browser support guide](guide/browser-support).

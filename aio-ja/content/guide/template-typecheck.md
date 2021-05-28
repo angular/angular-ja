@@ -112,17 +112,58 @@ Angular ライブラリの入力が不完全または正しくない場合、ま
 * _strictness flag_ を `false` に設定することにより、特定の型チェック操作を個別に無効にしながら、他の面では厳密性を維持できます。
 * `strictTemplates` と `strictNullChecks` を一緒に使用したい場合は、`strictNullInputTypes` による入力バインディング専用の厳密な null 型チェックをオプトアウトできます。
 
-|厳密性フラグ|効果|
-|-|-|
-|`strictInputTypes`|`@Input()` フィールドへのバインディング式の割り当て可能性がチェックされるかどうか。ディレクティブジェネリック型の推論にも影響します。|
-|`strictInputAccessModifiers`|Whether access modifiers such as `private`/`protected`/`readonly` are honored when assigning a binding expression to an `@Input()`. If disabled, the access modifiers of the `@Input` are ignored; only the type is checked.|
-|`strictNullInputTypes`|( `strictInputTypes` ごとに ) `@Input()` バインディングをチェックするときに、`strictNullChecks` が受け入れられるかどうか。これをオフにすると、`strictNullChecks` を考慮せずにビルドされたライブラリを使用するときに役立ちます。|
-|`strictAttributeTypes`|テキスト属性を使用して作成された `@Input()` バインディングをチェックするかどうか ( たとえば、`<mat-tab label="Step 1">` と `<mat-tab [label]="'Step 1'">` ) 。
-|`strictSafeNavigationTypes`|安全なナビゲーション操作の戻り値の型 ( たとえば、`user?.name` ) が、`user` の型に基づいて正しく推測されるかどうか。無効にすると、`user?.name` の型は `any` になります。
-|`strictDomLocalRefTypes`|DOM 要素へのローカル参照が正しい型をもつかどうか。無効にすると、`ref` は `<input #ref>` の型が `any` になります。|
-|`strictOutputEventTypes`|`$event` がコンポーネント/ディレクティブ `@Output()` へのイベントバインディング、またはアニメーションイベントに正しい型をもつかどうか。無効にすると、`any` になります。|
-|`strictDomEventTypes`|`$event` が DOM イベントへのイベントバインディングに適切な型をもつかどうか。無効にすると、`any` になります。|
-|`strictContextGenerics`|ジェネリックコンポーネントの型パラメータが正しく推論されるかどうか ( ジェネリック境界を含む ) 。無効にすると、すべての型パラメーターは `any` になります。|
+Unless otherwise noted, each option below is set to the value for `strictTemplates` (`true` when `strictTemplates` is `true` and vice versa).
+<table>
+  <thead>
+    <tr>
+      <th>厳密性フラグ</th>
+      <th>効果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>strictInputTypes</code></td>
+      <td><code>@Input()</code> フィールドへのバインディング式の割り当て可能性がチェックされるかどうか。ディレクティブジェネリック型の推論にも影響します。</td>
+    </tr>
+    <tr>
+      <td><code>strictInputAccessModifiers</code></td>
+      <td>Whether access modifiers such as <code>private</code>/<code>protected</code>/<code>readonly</code> are honored when assigning a binding expression to an <code>@Input()</code>. If disabled, the access modifiers of the <code>@Input</code> are ignored; only the type is checked. This option is <code>false</code> by default, even with <code>strictTemplates</code> set to <code>true</code>.</td>
+    </tr>
+    <tr>
+      <td><code>strictNullInputTypes</code></td>
+      <td>( <code>strictInputTypes</code> ごとに ) <code>@Input()</code> バインディングをチェックするときに、`strictNullChecks` が受け入れられるかどうか。これをオフにすると、<code>strictNullChecks</code> を考慮せずにビルドされたライブラリを使用するときに役立ちます。</td>
+    </tr>
+    <tr>
+      <td><code>strictAttributeTypes</code></td>
+      <td>テキスト属性を使用して作成された <code>@Input()</code> バインディングをチェックするかどうか ( たとえば、<code>&lt;mat-tab label="Step 1"&gt;</code> と <code>&lt;mat-tab [label]="'Step 1'"&gt;</code> ) 。</td>
+    </tr>
+    <tr>
+      <td><code>strictSafeNavigationTypes</code></td>
+      <td>安全なナビゲーション操作の戻り値の型 ( たとえば、<code>user?.name</code> ) が、<code>user</code> の型に基づいて正しく推測されるかどうか。無効にすると、<code>user?.name</code> の型は <code>any</code> になります。</td>
+    </tr>
+    <tr>
+      <td><code>strictDomLocalRefTypes</code></td>
+      <td>DOM 要素へのローカル参照が正しい型をもつかどうか。無効にすると、<code>ref</code> は <code>&lt;input #ref&gt;</code> の型が <code>any</code> になります。</td>
+    </tr>
+    <tr>
+      <td><code>strictOutputEventTypes</code></td>
+      <td><code>$event</code> がコンポーネント/ディレクティブ <code>@Output()</code> へのイベントバインディング、またはアニメーションイベントに正しい型をもつかどうか。無効にすると、<code>any</code> になります。</td>
+    </tr>
+    <tr>
+      <td><code>strictDomEventTypes</code></td>
+      <td><code>$event</code> が DOM イベントへのイベントバインディングに適切な型をもつかどうか。無効にすると、<code>any</code> になります。</td>
+    </tr>
+    <tr>
+      <td><code>strictContextGenerics</code></td>
+      <td>ジェネリックコンポーネントの型パラメータが正しく推論されるかどうか ( ジェネリック境界を含む ) 。無効にすると、すべての型パラメーターは <code>any</code> になります。</td>
+    </tr>
+    <tr>
+      <td><code>strictLiteralTypes</code></td>
+      <td>テンプレートで宣言されたオブジェクトおよび配列リテラルの型が推論されるかどうか。無効にすると、そのようなリテラルの型は <code>any</code> になります。This flag is <code>true</code> when <em>either</em> <code>fullTemplateTypeCheck</code> or <code>strictTemplates</code> is set to <code>true</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
 |`strictLiteralTypes`|テンプレートで宣言されたオブジェクトおよび配列リテラルの型が推論されるかどうか。無効にすると、そのようなリテラルの型は `any` になります。|
 
 これらのフラグを使用してトラブルシューティングを行っても問題が解決しない場合は、`strictTemplates` を無効にすることでフルモードにフォールバックできます。
@@ -156,7 +197,7 @@ export class UserDetailComponent {
 
 ```ts
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
   template: '<user-detail [user]="selectedUser" />',
 })
 export class AppComponent {

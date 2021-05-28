@@ -60,7 +60,7 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
     </td>
     <td>
 
-      `ngOnInit()` の前、および1つ以上のデータバインド入力プロパティが変更されるたびに呼び出されます。
+      （コンポーネントがバインドされた入力を持つ場合）`ngOnInit()` の前、および1つ以上のデータバインド入力プロパティが変更されるたびに呼び出されます。
 
       コンポーネントが入力を持たない場合や入力を提供せずに使用している場合、フレームワークは `ngOnChanges()` を呼び出さないことに注意してください。
 
@@ -79,7 +79,7 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
     </td>
     <td>
 
-      最初の `ngOnChanges()` の後で1回呼び出されます。
+      最初の `ngOnChanges()` の後で1回呼び出されます。`ngOnInit()` is still called even when `ngOnChanges()` is not (which is the case when there are no template-bound inputs).
 
     </td>
   </tr>
@@ -394,14 +394,7 @@ Angular がフックを予想される順序で呼び出す方法を示すため
 
 <code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html"></code-example>
 
-各スパイの作成と破棄は、次のように、 *フックログ* のエントリで、
-アタッチされた hero の `<div>` の出現と消滅をマークします:
-
-<div class="lightbox">
-  <img src='generated/images/guide/lifecycle-hooks/spy-directive.gif' alt="Spy Directive">
-</div>
-
-ヒーローを追加すると、新しい hero の `<div>` が作成されます。 スパイの `ngOnInit()` はそのイベントを記録します。
+各スパイの作成と破棄は、次のように、 *フックログ* のエントリで、アタッチされた hero の `<div>` の出現と消滅をマークします。ヒーローを追加すると、新しい hero の `<div>` が作成されます。 スパイの `ngOnInit()` はそのイベントを記録します。
 
 *リセット* ボタンは `heroes` リストをクリアします。
 Angular は DOM からすべての hero の `<div>` 要素を削除し、同時にそれらのスパイディレクティブを破棄します。

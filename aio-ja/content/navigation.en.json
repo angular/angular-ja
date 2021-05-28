@@ -291,7 +291,6 @@
               "title": "Router reference",
               "tooltip": "Describes highlight some core router API concepts."
             }
-
           ]
         },
         {
@@ -409,27 +408,6 @@
               "url": "guide/route-animations",
               "title": "Route Transition Animations",
               "tooltip": "Animate route transitions."
-            }
-          ]
-        },
-        {
-          "title": "Schematics",
-          "tooltip": "Understanding schematics.",
-          "children": [
-            {
-              "url": "guide/schematics",
-              "title": "Schematics Overview",
-              "tooltip": "Extending CLI generation capabilities."
-            },
-            {
-              "url": "guide/schematics-authoring",
-              "title": "Authoring Schematics",
-              "tooltip": "Understand the structure of a schematic."
-            },
-            {
-              "url": "guide/schematics-for-libraries",
-              "title": "Schematics for Libraries",
-              "tooltip": "Use schematics to integrate your library with the Angular CLI."
             }
           ]
         },
@@ -572,6 +550,27 @@
           "title": "DevTools",
           "tooltip": "DevTools",
           "url": "guide/devtools"
+        },
+        {
+          "title": "Schematics",
+          "tooltip": "Understanding schematics.",
+          "children": [
+            {
+              "url": "guide/schematics",
+              "title": "Schematics Overview",
+              "tooltip": "Extending CLI generation capabilities."
+            },
+            {
+              "url": "guide/schematics-authoring",
+              "title": "Authoring Schematics",
+              "tooltip": "Understand the structure of a schematic."
+            },
+            {
+              "url": "guide/schematics-for-libraries",
+              "title": "Schematics for Libraries",
+              "tooltip": "Use schematics to integrate your library with the Angular CLI."
+            }
+          ]
         }
       ]
     },
@@ -671,6 +670,11 @@
           "url": "guide/roadmap",
           "title": "Roadmap",
           "tooltip": "Roadmap of the Angular team."
+        },
+        {
+          "url": "guide/browser-support",
+          "title": "Browser Support",
+          "tooltip": "Browser support and polyfills guide."
         },
         {
           "title": "Updating to Version 12",
@@ -808,11 +812,6 @@
                   "url": "guide/typescript-configuration",
                   "title": "TypeScript Configuration",
                   "tooltip": "TypeScript configuration for Angular developers."
-                },
-                {
-                  "url": "guide/browser-support",
-                  "title": "Browser Support",
-                  "tooltip": "Browser support and polyfills guide."
                 },
                 {
                   "url": "guide/strict-mode",

@@ -64,7 +64,7 @@
       "title": "はじめに",
       "tooltip": "Set up your environment and learn basic concepts",
       "children": [
-        { 
+        {
           "url": "guide/what-is-angular",
           "title": "Angularとは？",
           "tooltip": "A brief description of the Angular platform."
@@ -159,8 +159,9 @@
             },
             {
               "url": "guide/content-projection",
-              "title": "Content Projection",
-              "tooltip": "Learn how to create reusable components using Angular's content projection feature."
+              "title": "コンテンツ投影",
+              "tooltip": "Angularのコンテンツ投影機能を使った再利用可能なコンポーネントの作り方を学びましょう。",
+              "translated": true
             },
             {
               "url": "guide/dynamic-component-loader",

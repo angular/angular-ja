@@ -1,157 +1,157 @@
-# Content projection
+# コンテンツ投影
 
-This topic describes how to use content projection to create flexible, reusable components.
+このトピックでは、柔軟で再利用可能なコンポーネントを作るための、コンテンツ投影の使い方について説明します。
 
 <div class="alert is-helpful">
 
-To view or download the example code used in this topic, see the <live-example></live-example>.
+このトピックで使われているサンプルコードを表示またはダウンロードするには、<live-example></live-example>を参照しましょう。
 
 </div>
 
-Content projection is a pattern in which you insert, or *project*, the content you want to use inside another component. For example, you could have a `Card` component that accepts content provided by another component.
+コンテンツ投影は、使いたいコンテンツを別のコンポーネント内に挿入または*投影*するというパターンです。たとえば、別のコンポーネントによって提供されるコンテンツを受け取る`Card`コンポーネントがあるでしょう。
 
-The following sections describe common implementations of content projection in Angular, including:
+次のセクションでは、Angularでのコンテンツ投影の一般的な実装について説明します:
 
-* [Single-slot content projection](#single-slot). With this type of content projection, a component accepts content from a single source.
-* [Multi-slot content projection](#multi-slot). In this scenario, a component accepts content from multiple sources.
-* [Conditional content projection](#conditional). Components that use conditional content projection render content only when specific conditions are met.
+* [シングルスロットのコンテンツ投影](#single-slot)。このタイプのコンテンツ投影では、コンポーネントは単一のソースからコンテンツを受け取ります。
+* [マルチスロットのコンテンツ投影](#multi-slot)。このシナリオでは、コンポーネントは複数のソースからコンテンツを受け取ります。
+* [条件付きのコンテンツ投影](#conditional)。条件付きのコンテンツ投影を使うコンポーネントは、特定の条件が満たされた場合のみコンテンツをレンダリングします。
 
 {@a single-slot }
-## Single-slot content projection
+## シングルスロットのコンテンツ投影
 
-The most basic form of content projection is *single-slot content projection*. Single-slot content projection refers to creating a component into which you can project one component.
+コンテンツ投影のもっとも基本的な形式は*シングルスロットのコンテンツ投影*です。シングルスロットのコンテンツ投影とは、1つのコンポーネントを中に投影できるコンポーネントを作ることを意味します。
 
-To create a component that uses single-slot content projection:
+シングルスロットのコンテンツ投影を使うコンポーネントを作るには:
 
-1. [Create](guide/component-overview) a component.
+1. コンポーネントを[作ります](guide/component-overview)。
 
-1. In the template for your component, add an `ng-content` element where you want the projected content to appear.
+1. コンポーネントのテンプレートにおいて、投影コンテンツを表示したい場所に`ng-content`要素を追加します。
 
-For example, the following component uses an `ng-content` element to display a message.
+たとえば、次のコンポーネントは`ng-content`要素を使ってメッセージを表示します。
 
 <code-example path="content-projection/src/app/zippy-basic/zippy-basic.component.ts" header="content-projection/src/app/zippy-basic/zippy-basic.component.ts"></code-example>
 
-With the `ng-content` element in place, users of this component can now project their own message into the component. For example:
+`ng-content`要素のある場所で、このコンポーネントのユーザーは独自のメッセージをコンポーネントへ投影できるようになります。たとえば:
 
 <code-example path="content-projection/src/app/app.component.html" header="content-projection/src/app/app.component.html"
 region="single-slot"></code-example>
 
 <div class="alert is-helpful">
 
-The `ng-content` element is a placeholder that does not create a real DOM element. Custom attributes applied to `ng-content` are ignored.
+`ng-content`要素はプレースホルダーであり実際のDOM要素を作成しません。`ng-content`に適用されたカスタム属性は無視されます。
 
 </div>
 
 {@a multi-slot}
-## Multi-slot content projection
+## マルチスロットのコンテンツ投影
 
-A component can have multiple slots. Each slot can specify a CSS selector that determines which content goes into that slot. This pattern is referred to as *multi-slot content projection*. With this pattern, you must specify where you want the projected content to appear. You accomplish this task by using the `select` attribute of `ng-content`.
+コンポーネントは複数のスロットを持てます。各スロットは、どのコンテンツがそのスロットに入るかを決定するCSSセレクターを指定できます。このパターンは*マルチスロットのコンテンツ投影*と呼ばれます。このパターンでは、投影コンテンツを表示したい場所を指定する必要があります。この作業は`ng-content`の`select`属性を使って行います。
 
-To create a component that uses multi-slot content projection:
+マルチスロットのコンテンツ投影を使うコンポーネントを作るには:
 
-1. [Create](guide/component-overview) a component.
+1. コンポーネントを[作ります](guide/component-overview)。
 
-1. In the template for your component, add an `ng-content` element where you want the projected content to appear.
+1. コンポーネントのテンプレートにおいて、投影コンテンツを表示したい場所に`ng-content`要素を追加します。
 
-1. Add a `select` attribute to the `ng-content` elements. Angular supports [selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) for any combination of tag name, attribute, CSS class, and the `:not` pseudo-class.
+1. `ng-content`要素に`select`属性を追加します。Angularは、タグ名、属性、CSSクラス、`:not`疑似クラスの、あらゆる組み合わせによる[セレクター](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)をサポートしています。
 
- For example, the following component uses two  `ng-content` elements.
+たとえば、次のコンポーネントは2つの`ng-content`要素を使っています。
 
  <code-example path="content-projection/src/app/zippy-multislot/zippy-multislot.component.ts" header="content-projection/src/app/zippy-multislot/zippy-multislot.component.ts"></code-example>
 
-Content that uses the `question` attribute is projected into the `ng-content` element with the `select=[question]` attribute.
+この`question`属性を使うコンテンツは、`select=[question]`属性をもつ`ng-content`要素へ投影されます。
 
 <code-example path="content-projection/src/app/app.component.html" header="content-projection/src/app/app.component.html"
 region="multi-slot"></code-example>
 
 <div class="callout is-helpful">
 
-<header>ng-content without a select attribute</header>
+<header>select属性をもたないng-content</header>
 
-If your component includes an `ng-content` element without a `select` attribute, that instance receives all projected components that do not match any of the other `ng-content` elements.
+コンポーネントが`select`属性をもたない`ng-content`要素を含んでいる場合、そのインスタンスは、他の`ng-content`要素のいずれにも一致しない、投影されるコンポーネントの全部を受け取ります。
 
-In the preceding example, only the second `ng-content` element defines a `select` attribute. As a result, the first `ng-content` element receives any other content projected into the component.
+前の例では、2番目の`ng-content`要素のみが`select`属性を定義しています。その結果、最初の`ng-content`要素はコンポーネントへ投影されるその他のコンテンツを受け取ります。
 
 </div>
 
 {@a conditional }
 
-## Conditional content projection
+## 条件付きのコンテンツ投影
 
-If your component needs to _conditionally_ render content, or render content multiple times, you should configure that component to accept an `ng-template` element that contains the content you want to conditionally render.
+コンポーネントが_条件付きで_コンテンツをレンダリングするかコンテンツを複数回レンダリングする必要がある場合は、条件付きでレンダリングしたいコンテンツを含んでいる`ng-template`要素を受け取るように、コンポーネントを構成する必要があります。
 
-Using an `ng-content` element in these cases is not recommended, because when the consumer of a component supplies the content, that content is _always_ initialized, even if the component does not define an `ng-content` element or if that `ng-content` element is inside of an `ngIf` statement.
+これらのケースでは`ng-content`要素を使うことは推奨されません。なぜなら、コンポーネントの使用者がコンテンツを提供するとき、そのコンテンツは_常に_初期化されるからです。それは、コンポーネントが`ng-content`要素を定義していない場合や、その`ng-content`要素が`ngIf`文の中にある場合でもです。
 
-With an `ng-template` element, you can have your component explicitly render content based on any condition you want, as many times as you want. Angular will not initialize the content of an `ng-template` element until that element is explicitly rendered.
+`ng-template`要素を使えば、コンポーネントに、必要な条件に基づいて必要な回数だけコンテンツを明示的にレンダリングさせることができます。 Angularは、`ng-template`要素のコンテンツをその要素が明示的にレンダリングされるまでは初期化しません。
 
-The following steps demonstrate a typical implementation of conditional content projection using `ng-template`.
+次の手順は、`ng-template`を使う条件付きのコンテンツ投影の一般的な実装を示しています。
 
-1. [Create](guide/component-overview) a component.
+1. コンポーネントを[作ります](guide/component-overview)。
 
-1. In the component that accepts an `ng-template` element, use an `ng-container` element to render that template, such as:
+1. `ng-template`要素を受け取るそのコンポーネントにおいて、そのテンプレートをレンダリングするために`ng-container`要素を使います。このように:
 
    <code-example path="content-projection/src/app/example-zippy.template.html" header="content-projection/src/app/example-zippy.template.html" region="ng-container">
    </code-example>
 
-   This example uses the `ngTemplateOutlet` directive to render a given `ng-template` element, which you will define in a later step. You can apply an `ngTemplateOutlet` directive to any type of element. This example assigns the directive to an `ng-container` element because the component does not need to render a real DOM element.
+   この例では、`ngTemplateOutlet`ディレクティブを使って、後の手順で定義する予定の与えられた`ng-template`要素をレンダリングします。`ngTemplateOutlet`ディレクティブは任意のタイプの要素に適用できます。この例では、このディレクティブを`ng-container`要素に割り当てます。そのコンポーネントは実際のDOM要素をレンダリングする必要がないからです。
 
-1. Wrap the `ng-container` element in another element, such as a `div` element, and apply your conditional logic.
+1. `ng-container`要素を`div`要素などの別の要素でラップし、条件付きのロジックを適用します。
 
       <code-example path="content-projection/src/app/example-zippy.template.html"  header="content-projection/src/app/example-zippy.template.html" region="ngif">
       </code-example>
 
-1. In the template where you want to project content, wrap the projected content in an `ng-template` element, such as:
+1. コンテンツを投影したいテンプレートにおいて、投影コンテンツを`ng-template`要素でラップします。このように:
 
       <code-example path="content-projection/src/app/app.component.html" region="ng-template">
       </code-example>
 
-   The `ng-template` element defines a block of content that a component can render based on its own logic. A component can get a reference to this template content, or [`TemplateRef`](/api/core/TemplateRef), by using either the [`@ContentChild`](/api/core/ContentChild) or [`@ContentChildren`](/api/core/ContentChildren) decorators. The preceding example creates a custom directive, `appExampleZippyContent`, as an API to mark the `ng-template` for the component's content. With the `TemplateRef`, the component can render the referenced content by using either the [`ngTemplateOutlet`](/api/common/NgTemplateOutlet) directive, or with [`ViewContainerRef.createEmbeddedView`](/api/core/ViewContainerRef#createembeddedview).
+   `ng-template`要素は、コンポーネントが独自のロジックに基づいてレンダリングできるコンテンツのブロックを定義します。コンポーネントは、 [`@ContentChild`](/api/core/ContentChild)か[`@ContentChildren`](/api/core/ContentChildren)デコレーターを使って、このテンプレートのコンテンツや[`TemplateRef`](/api/core/TemplateRef)への参照を取得できます。前の例ではカスタムディレクティブ`appExampleZippyContent`を作成しており、それはそのコンポーネントのコンテンツのための`ng-template`をマークするAPIとしてです。`TemplateRef`をもってそのコンポーネントは、[`ngTemplateOutlet`](/api/common/NgTemplateOutlet)ディレクティブか、 [`ViewContainerRef.createEmbeddedView`](/api/core/ViewContainerRef#createembeddedview)を使って、参照されたコンテンツをレンダリングできます。
 
-1. Create a directive with a selector that matches the custom attribute for your template. In this directive, inject a TemplateRef instance.
+1. そのカスタム属性に一致するセレクターをもつディレクティブをテンプレートのために作成します。このディレクティブにTemplateRefインスタンスを挿入します。
 
    <code-example path="content-projection/src/app/app.component.ts" header="content-projection/src/app/app.component.ts" region="zippycontentdirective">
    </code-example>
 
-   In the previous step, you added an `ng-template` element with a custom attribute, `appExampleZippyDirective`. This code provides the logic that Angular will use when it encounters that custom attribute. In this case, that logic instructs Angular to instantiate a template reference.
+   前の手順で、カスタム属性`appExampleZippyContent`をもつ`ng-template`要素を追加しました。このコードは、Angularがそのカスタム属性に遭遇したときに使うことになるロジックを提供します。この場合、そのロジックはAngularにテンプレート参照をインスタンス化するように指示します。
 
-1. In the component you want to project content into, use `@ContentChild` to get the template of the projected content.
+1. コンテンツを投影したいコンポーネントで、`@ContentChild`を使って投影コンテンツのテンプレートを取得します。
 
    <code-example path="content-projection/src/app/app.component.ts" header="content-projection/src/app/app.component.ts" region="contentchild">
    </code-example>
 
-   Prior to this step, your application has a component that instantiates a template when certain conditions are met. You've also created a directive that provides a reference to that template. In this last step, the `@ContentChild` decorator instructs Angular to instantiate the template in the designated component.
+   このステップ以前に、アプリケーションには、特定の条件が満たされたときにテンプレートをインスタンス化するコンポーネントがあります。また、そのテンプレートへの参照を提供するディレクティブを作成しました。この最後のステップでは、`@ContentChild`デコレーターが、指定されたコンポーネントでテンプレートをインスタンス化するようにAngularに指示します。
 
    <div class="alert is-helpful">
 
-   In the case of multi-slot content projection, you can use `@ContentChildren` to get a QueryList of projected elements.
+   マルチスロットのコンテンツ投影の場合、`@ContentChildren`を使って投影要素のQueryListを取得できます。
 
    </div>
 
 {@a ngprojectas }
 
-## Projecting content in more complex environments
+## より複雑な環境でのコンテンツ投影
 
-As described in [Multi-slot Content Projection](#multi-slot), you typically use either an attribute, element, CSS Class, or some combination of all three to identify where to project your content. For example, in the following HTML template, a paragraph tag uses a custom attribute, `question`, to project content into the `app-zippy-multislot` component.
+[マルチスロットのコンテンツ投影](#multi-slot)に記載のように、通常は、属性、要素、CSSクラス、またはこれら3つのいくつかの組み合わせを使って、コンテンツを投影する場所を識別します。たとえば次のHTMLテンプレートでは、段落タグがカスタム属性の`question`を使ってコンテンツを`app-zippy-multislot`コンポーネントへ投影しています。
 
 <code-example path="content-projection/src/app/app.component.html" header="content-projection/src/app/app.component.html"
 region="multi-slot"></code-example>
 
-In some cases, you might want to project content as a different element. For example, the content you want to project might be a child of another
-element. You can accomplish this by using the `ngProjectAs` attribute.
+場合によっては、別の要素としてのコンテンツを投影したいことがあります。たとえば、投影したいコンテンツは別の要素の子かもしれません。
+これは`ngProjectAs`属性を使って達成できます。
 
-For instance, consider the following HTML snippet:
+たとえば、次のHTMLスニペットについて考えてみましょう:
 
 <code-example path="content-projection/src/app/app.component.html" header="content-projection/src/app/app.component.html" region="ngprojectas">
 </code-example>
 
-This example uses an `ng-container` attribute to simulate projecting a component into a more complex structure.
+この例では、`ng-container`の属性を使ってコンポーネントをより複雑な構造へ投影することをシミュレートしています。
 
 <div class="callout is-helpful">
 
-<header>Reminder!</header>
+<header>確認しましょう!</header>
 
-The `ng-container` element is a logical construct that you can use to group other DOM elements; however, the `ng-container` itself is not rendered in the DOM tree.
+`ng-container`要素は、他のDOM要素をグループ化するために使用できる論理構造です。しかし、`ng-container`自体はそのDOMツリーにレンダリングされません。
 
 </div>
 
-In this example, the content we want to project resides inside another element. To project this content as intended, the template uses the `ngProjectAs` attribute. With `ngProjectAs`, the entire `ng-container` element is projected into a component using the `question` selector.
+この例では、投影したいコンテンツは別の要素の中に存在します。このコンテンツを意図するとおりに投影するために、テンプレートは`ngProjectAs`属性を使っています。`ngProjectAs`を用いて、`ng-container`要素全体が`question`セレクターを使っているコンポーネントへ投影されます。

@@ -304,30 +304,31 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
 
 {@a error-handling}
 
-## Handling request errors
+## リクエストエラーの処理
 
-If the request fails on the server, `HttpClient` returns an _error_ object instead of a successful response.
+サーバーでリクエストが失敗した場合、`HttpClient`は成功したレスポンスではなく_error_オブジェクトを返します。
 
-The same service that performs your server transactions should also perform error inspection, interpretation, and resolution.
+サーバートランザクションを実行するのと同じサービスが、エラーの検査、解釈、および解決も実行する必要があります。
 
-When an error occurs, you can obtain details of what failed in order to inform your user. In some cases, you might also automatically [retry the request](#retry).
+エラーが発生した場合、ユーザーに通知するために失敗した内容の詳細を取得できます。場合によっては、自動的に[リクエストのリトライ](#retry)が可能です。
 
 {@a error-details}
-### Getting error details
+### エラーの詳細を取得する
 
-An app should give the user useful feedback when data access fails.
-A raw error object is not particularly useful as feedback.
-In addition to detecting that an error has occurred, you need to get error details and use those details to compose a user-friendly response.
+アプリケーションは、データアクセスが失敗したときに、ユーザーに役立つフィードバックを提供する必要があります。
+生のエラーオブジェクトは、フィードバックとして特に役立ちません。
+エラーが発生したことを検出することに加えて、エラーの詳細を取得し、それらの詳細を使用してユーザーフレンドリーなレスポンスを作成する必要があります。
 
-Two types of errors can occur.
+2種類のエラーが発生する可能性があります。
 
-* The server backend might reject the request, returning an HTTP response with a status code such as 404 or 500. These are error _responses_.
+* サーバーバックエンドがリクエストを拒否し、404や500などのステータスコードを含むHTTPレスポンスを返す場合があります。これらはエラー_レスポンス_です。
 
-* Something could go wrong on the client-side such as a network error that prevents the request from completing successfully or an exception thrown in an RxJS operator. These errors have `status` set to `0` and the `error` property contains a `ProgressEvent` object, whose `type` might provide further information.
+* 要求を正常に完了できないネットワークエラーや、RxJSオペレーターでスローされた例外など、クライアント側で問題が発生する可能性があります。これらのエラーは`0`に設定された`status`と、`ProgressEvent`オブジェクトが含まれる`error`プロパティを持っています。`ProgressEvent`オブジェクトの`type`は詳細な情報を提供する可能性があります。
 
-`HttpClient` captures both kinds of errors in its `HttpErrorResponse`. You can inspect that response to identify the error's cause.
+`HttpClient`は、`HttpErrorResponse`で両方の種類のエラーをキャプチャします。
+そのレスポンスを調べて、エラーの原因を特定できます。
 
-The following example defines an error handler in the previously defined [ConfigService](#config-service "ConfigService defined").
+次の例では、以前に定義された[ConfigService](#config-service "ConfigService defined")でエラーハンドラーを定義します。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -335,8 +336,8 @@ The following example defines an error handler in the previously defined [Config
   header="app/config/config.service.ts (handleError)">
 </code-example>
 
-The handler returns an RxJS `ErrorObservable` with a user-friendly error message.
-The following code updates the `getConfig()` method, using a [pipe](guide/pipes "Pipes guide") to send all observables returned by the `HttpClient.get()` call to the error handler.
+ハンドラーは、ユーザーフレンドリーなエラーメッセージとともにRxJS`ErrorObservable`を返します。
+次のコードは、[パイプ](guide/pipes "Pipes guide")を使用して`getConfig()`メソッドを更新し、`HttpClient.get()`呼び出しによって返されたすべてのObservableをエラーハンドラーに送信します。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -345,16 +346,16 @@ The following code updates the `getConfig()` method, using a [pipe](guide/pipes 
 </code-example>
 
 {@a retry}
-### Retrying a failed request
+### 失敗したリクエストのリトライ
 
-Sometimes the error is transient and goes away automatically if you try again.
-For example, network interruptions are common in mobile scenarios, and trying again
-can produce a successful result.
+エラーは一時的なものであり、再試行すると自動的に消える場合があります。
+たとえば、ネットワークの中断はモバイルシナリオで一般的であり、再試行すると
+成功する可能性があります。
 
-The [RxJS library](guide/rx-library) offers several _retry_ operators.
-For example, the `retry()` operator automatically re-subscribes to a failed `Observable` a specified number of times. _Re-subscribing_ to the result of an `HttpClient` method call has the effect of reissuing the HTTP request.
+[RxJS library](guide/rx-library)はいくつかの_retry_オペレーターを提供します。
+例えば、`retry()`オペレーターは、失敗した`Observable`を指定された回数だけ自動的に再サブスクライブします。`HttpClient`メソッド呼び出しの結果を_再サブスクライブ_すると、HTTPリクエストを再発行する効果があります。
 
-The following example shows how you can pipe a failed request to the `retry()` operator before passing it to the error handler.
+次の例は、失敗したリクエストをエラーハンドラーに渡す前に、`retry()`オペレーターにパイプする方法を示しています。
 
 <code-example
   path="http/src/app/config/config.service.ts"

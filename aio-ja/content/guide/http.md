@@ -364,18 +364,17 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
 </code-example>
 
 
-## Sending data to a server
+## サーバーへのデータの送信
 
-In addition to fetching data from a server, `HttpClient` supports other HTTP methods such as PUT, POST, and DELETE, which you can use to modify the remote data.
+サーバーからデータを取得することに加えて、`HttpClient`は、リモートデータを変更するために使用できるPUT、POST、DELETEなどの他のHTTPメソッドをサポートします。
 
-The sample app for this guide includes an abridged version of the "Tour of Heroes" example
-that fetches heroes and enables users to add, delete, and update them.
-The following sections show examples of the data-update methods from the sample's `HeroesService`.
+このガイドのサンプルアプリには、ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の要約版が含まれています。
+次のセクションでは、サンプルの`HeroesService`からのデータ更新メソッドの例を示します。
 
-### Making a POST request
+### POSTリクエストの作成
 
-Apps often send data to a server with a POST request when submitting a form.
-In the following example, the `HeroesService` makes an HTTP POST request when adding a hero to the database.
+多くの場合、アプリはフォームを送信するときにPOSTリクエストを使用してサーバーにデータを送信します。
+次の例では、データベースにヒーローを追加するときに、`HeroesService`がHTTP POSTリクエストを実行します。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -383,15 +382,14 @@ In the following example, the `HeroesService` makes an HTTP POST request when ad
   header="app/heroes/heroes.service.ts (addHero)">
 </code-example>
 
-The `HttpClient.post()` method is similar to `get()` in that it has a type parameter, which you can use to specify that you expect the server to return data of a given type. The method takes a resource URL and two additional parameters:
+`HttpClient.post()`メソッドは、型パラメータがあり、サーバーが特定の型のデータを返すことを期待すると明示できるという点で、`get()`に似ています。このメソッドは、リソースURLと2つの追加パラメーターを取ります。
 
-* *body* - The data to POST in the body of the request.
-* *options* - An object containing method options which, in this case, [specify required headers](#adding-headers).
+* *body* - POSTするリクエストのボディ内のデータ
+* *options* - メソッドオプションを含むオブジェクト。この場合のオプションは、[必要なヘッダーを指定してください](#adding-headers)。
 
-The example catches errors as [described above](#error-details).
+この例では、[前述](#error-details)のようにエラーをキャッチします。
 
-The `HeroesComponent` initiates the actual POST operation by subscribing to
-the `Observable` returned by this service method.
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`をサブスクライブすることによって、実際のPOST処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -399,13 +397,11 @@ the `Observable` returned by this service method.
   header="app/heroes/heroes.component.ts (addHero)">
 </code-example>
 
-When the server responds successfully with the newly added hero, the component adds
-that hero to the displayed `heroes` list.
+サーバーが正常に新しく追加されたヒーローを返すと、コンポーネントはそのヒーローを画面に表示された`heroes`リストに追加します。
 
-### Making a DELETE request
+### DELETEリクエストの作成
 
-This application deletes a hero with the `HttpClient.delete` method by passing the hero's id
-in the request URL.
+このアプリケーションは、リクエストURLでヒーローのIDを渡すことにより、`HttpClient.delete`メソッドを使用してヒーローを削除します。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -413,8 +409,7 @@ in the request URL.
   header="app/heroes/heroes.service.ts (deleteHero)">
 </code-example>
 
-The `HeroesComponent` initiates the actual DELETE operation by subscribing to
-the `Observable` returned by this service method.
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`をサブスクライブすることによって、実際のDELETE処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -422,11 +417,11 @@ the `Observable` returned by this service method.
   header="app/heroes/heroes.component.ts (deleteHero)">
 </code-example>
 
-The component isn't expecting a result from the delete operation, so it subscribes without a callback. Even though you are not using the result, you still have to subscribe. Calling the `subscribe()` method _executes_ the observable, which is what initiates the DELETE request.
+コンポーネントは削除処理の結果を要求していないため、コールバックなしでサブスクライブします。結果を使用していなくても、サブスクライブする必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
 
 <div class="alert is-important">
 
-You must call _subscribe()_ or nothing happens. Just calling `HeroesService.deleteHero()` does not initiate the DELETE request.
+_subscribe()_を呼び出す必要があります。そうしないと、何も起こりません。`HeroesService.deleteHero()`を呼び出すだけでは、DELETEリクエストは開始しません。
 
 </div>
 
@@ -437,29 +432,28 @@ You must call _subscribe()_ or nothing happens. Just calling `HeroesService.dele
 </code-example>
 
 {@a always-subscribe}
-**Always _subscribe_!**
+**常に_subscribe_!**
 
-An `HttpClient` method does not begin its HTTP request until you call `subscribe()` on the observable returned by that method. This is true for _all_ `HttpClient` _methods_.
+`HttpClient`のメソッドは、そのメソッドが返すObservableに対し`subscribe()`を呼び出すまで、HTTPリクエストを開始しません。これは_すべての_`HttpClient`のメソッドに当てはまります。
 
 <div class="alert is-helpful">
 
-The [`AsyncPipe`](api/common/AsyncPipe) subscribes (and unsubscribes) for you automatically.
+[`AsyncPipe`](api/common/AsyncPipe)は自動的にサブスクライブ（およびサブスクライブ解除）します。
 
 </div>
 
-All observables returned from `HttpClient` methods are _cold_ by design.
-Execution of the HTTP request is _deferred_, allowing you to extend the
-observable with additional operations such as  `tap` and `catchError` before anything actually happens.
+`HttpClient`のメソッドは意図的に_コールド_になっています。
+HTTPリクエストの実行は_遅延型_であり、実際に何かが起こる前に、`tap`や`catchError`などの追加のオペレーターでobservableを拡張できます。
 
-Calling `subscribe(...)` triggers execution of the observable and causes
-`HttpClient` to compose and send the HTTP request to the server.
+`subscribe(...)`を呼び出すと、Observableの実行がトリガーされ、
+`HttpClient`はHTTPリクエストを作成してサーバーに送信します。
 
-You can think of these observables as _blueprints_ for actual HTTP requests.
+これらのObservableは、実際のHTTPリクエストの_青写真_と考えることができます。
 
 <div class="alert is-helpful">
 
-In fact, each `subscribe()` initiates a separate, independent execution of the observable.
-Subscribing twice results in two HTTP requests.
+実際、各`subscribe()`、Observableの個別の独立した実行を開始します。
+2回サブスクライブすると、2つのHTTPリクエストが発生します。
 
 ```javascript
 const req = http.get<Heroes>('/api/heroes');

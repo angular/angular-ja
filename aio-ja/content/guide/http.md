@@ -1,28 +1,28 @@
-# Communicating with backend services using HTTP
+# HTTPによるバックエンドサービスとの通信
 
-Most front-end applications need to communicate with a server over the HTTP protocol, in order to download or upload data and access other back-end services.
-Angular provides a client HTTP API for Angular applications, the `HttpClient` service class in `@angular/common/http`.
+ほとんどのフロントエンドアプリケーションは、データのダウンロードやアップロードや他のバックエンドサービスへのアクセスのため、HTTPプロトコルによりサーバーと通信する必要があります。
+Angularは、Angularアプリケーション向けのHTTPクライアントのAPIとして、`@angular/common/http`内に`HttpClient` サービスクラスを提供しています。
 
-The HTTP client service offers the following major features.
+HTTP client serviceの主な機能は以下の通りです。
 
-* The ability to request [typed response objects](#typed-response).
-* Streamlined [error handling](#error-handling).
-* [Testability](#testing-requests) features.
-* Request and response [interception](#intercepting-requests-and-responses).
+* [型付けされたレスポンスオブジェクト](#typed-response)を要求
+* 最新式の[error handling](#error-handling).
+* [テスタビリティ](#testing-requests)
+* リクエストとレスポンスへの[interception](#intercepting-requests-and-responses).
 
-##### Prerequisites
+##### 前提条件
 
-Before working with the `HttpClientModule`, you should have a basic understanding of the following:
+`HttpClientModule`を使用する前に、以下の基礎的な理解が必要です。
 
-* TypeScript programming
-* Usage of the HTTP protocol
-* Angular app-design fundamentals, as described in [Angular Concepts](guide/architecture)
-* Observable techniques and operators. See the [Observables](guide/observables) guide.
+* TypeScriptプログラミング
+* HTTPプロトコル
+* [Angular Concepts](guide/architecture)で説明されている、Angularアプリケーションのアーキテクチャ
+* Observableのテクニックとoperatorについて。[Observables](guide/observables)ガイドを参照
 
-## Setup for server communication
+## サーバーとの通信の設定
 
-Before you can use `HttpClient`, you need to import the Angular `HttpClientModule`.
-Most apps do so in the root `AppModule`.
+`HttpClient`を使用可能にするには, Angularの`HttpClientModule`をインポートする必要があります。
+ほとんどのアプリケーションではルートの`AppModule`で行います。
 
 <code-example
   path="http/src/app/app.module.ts"
@@ -30,7 +30,7 @@ Most apps do so in the root `AppModule`.
   header="app/app.module.ts (excerpt)">
 </code-example>
 
-You can then inject the `HttpClient` service as a dependency of an application class, as shown in the following `ConfigService` example.
+そして、次の`ConfigService`の例のように、依存として`HttpClient`サービスをアプリケーションに注入します。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -38,7 +38,7 @@ You can then inject the `HttpClient` service as a dependency of an application c
   header="app/config/config.service.ts (excerpt)">
 </code-example>
 
-The `HttpClient` service makes use of [observables](guide/glossary#observable "Observable definition") for all transactions. You must import the RxJS observable and operator symbols that appear in the example snippets. These `ConfigService` imports are typical.
+`HttpClient` サービスはすべてのトランザクションで[observables](guide/glossary#observable "Observable definition")を使用します。サンプルのスニペットに現れるRxJS observableとoperatorをインポートする必要があります。これらの`ConfigService`のインポートは典型的なものです。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -50,23 +50,21 @@ The `HttpClient` service makes use of [observables](guide/glossary#observable "O
 
 You can run the <live-example></live-example> that accompanies this guide.
 
-The sample app does not require a data server.
-It relies on the
-[Angular _in-memory-web-api_](https://github.com/angular/angular/tree/master/packages/misc/angular-in-memory-web-api),
-which replaces the _HttpClient_ module's `HttpBackend`.
-The replacement service simulates the behavior of a REST-like backend.
+サンプルアプリケーションはデータサーバーを必要としていません。
+_HttpClient_ モジュールの `HttpBackend`を[Angular _in-memory-web-api_](https://github.com/angular/angular/tree/master/packages/misc/angular-in-memory-web-api)に依存しています。
+この代わりのサービスはREST-likeなバックエンドの振る舞いをシミュレートしたものです。
 
-Look at the `AppModule` _imports_ to see how it is configured.
+`AppModule` の _imports_ をご覧ください。
 
 </div>
 
-## Requesting data from a server
+## サーバーにデータを要求する
 
-Use the [`HttpClient.get()`](api/common/http/HttpClient#get) method to fetch data from a server.
-The asynchronous method sends an HTTP request, and returns an Observable that emits the requested data when the response is received.
-The return type varies based on the `observe` and `responseType` values that you pass to the call.
+サーバーからデータを取得するには、[`HttpClient.get()`](api/common/http/HttpClient#get)メソッドを使います。
+非同期メソッドがHTTPリクエストを送信し、レスポンスを受信すると要求されたデータを発するObservableを返します。
+戻り値の型は呼び出し時に渡す `observe` と `responseType` の値によって変わります。
 
-The `get()` method takes two arguments; the endpoint URL from which to fetch, and an *options* object that you can use to configure the request.
+`get()` メソッドは2つの引数を取ります。取得エンドポイントURLと、リクエストの設定をするための *options* オブジェクトです。
 
 ```
 options: {
@@ -79,39 +77,38 @@ options: {
   }
 ```
 
-Important options include the *observe* and *responseType* properties.
+*observe* と *responseType* プロパティは、重要なオプションです。
 
-* The *observe* option specifies how much of the response to return.
-* The *responseType* option specifies the format in which to return data.
+* *observe* オプションはどのくらいの量のレスポンスを返すのかを指定します。
+* *responseType* オプションはどのようなフォーマットでデータを返すのかを指定します。
 
 <div class="alert is-helpful">
 
-You can use the `options` object to configure various other aspects of an outgoing request.
-In [Adding headers](#adding-headers), for example, the service set the default headers using the `headers` option property.
+`options` オブジェクトは送信するリクエストに対して他にも様々な設定を行うことができます。
+例えば、[Adding headers](#adding-headers)にあるように、サービスは `headers`オプションプロパティを使ってデフォルトのヘッダーを設定できます。
 
-Use the `params` property to configure a request with [HTTP URL parameters](#url-params), and the `reportProgress` option to [listen for progress events](#report-progress) when transferring large amounts of data.
+`params` プロパティで [HTTP URL parameters](#url-params)の設定を行い、 `reportProgress` オプションで大量のデータを送信するときの [listen for progress events](#report-progress) の設定を行うことができます。
 
 </div>
 
-Applications often request JSON data from a server.
-In the `ConfigService` example, the app needs a configuration file on the server, `config.json`,
-that specifies resource URLs.
+アプリケーションはサーバーにJSONデータを要求することがよくあります。
+`ConfigService` の例では、アプリケーションはリソースURLを指定する `config.json` という設定ファイルが必要です。
 
 <code-example
   path="http/src/assets/config.json"
   header="assets/config.json">
 </code-example>
 
-To fetch this kind of data, the `get()` call needs the following options: `{observe: 'body', responseType: 'json'}`.
-These are the default values for those options, so the following examples do not pass the options object.
-Later sections show some of the additional option possibilities.
+この種のデータを取得するには、 `get()` の呼び出し時に次のオプションが必要です: `{observe: 'body', responseType: 'json'}` 。
+これらはオプションのデフォルト値であるため、次の例ではoptionsオブジェクトを渡していません。
+追加で指定できるオプションは、後続のセクションで説明します。
 
 {@a config-service}
 
-The example conforms to the best practices for creating scalable solutions by defining a re-usable [injectable service](guide/glossary#service "service definition") to perform the data-handling functionality.
-In addition to fetching data, the service can post-process the data, add error handling, and add retry logic.
+例は、データ処理機能を果たす再利用可能な[injectable service](guide/glossary#service "service definition")を定義することで、スケーラブルな解決法を生み出すためのベストプラクティスに従っています。
+データの取得に加え、サービスはデータの後処理、エラーハンドリングの追加、リトライロジックの追加が可能です。
 
-The `ConfigService` fetches this file using the `HttpClient.get()` method.
+`ConfigService` は `HttpClient.get()` メソッドにより、このファイルを取得します。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -119,13 +116,13 @@ The `ConfigService` fetches this file using the `HttpClient.get()` method.
   header="app/config/config.service.ts (getConfig v.1)">
 </code-example>
 
-The `ConfigComponent` injects the `ConfigService` and calls
-the `getConfig` service method.
+`ConfigComponent` は `ConfigService` を注入し、
+`getConfig` サービスメソッドを呼び出します。
 
-Because the service method returns an `Observable` of configuration data,
-the component *subscribes* to the method's return value.
-The subscription callback performs minimal post-processing.
-It copies the data fields into the component's `config` object, which is data-bound in the component template for display.
+サービスメソッドが設定データの `Observable` を返すため、
+コンポーネントはメソッドの戻り値を *subscribe* します。
+Subscription のコールバックは最小限の後処理を行います。
+データフィールドの内容がコンポーネントの `config` オブジェクトにコピーされ、表示用にコンポーネントテンプレートへデータバインドされます。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -135,27 +132,27 @@ It copies the data fields into the component's `config` object, which is data-bo
 
 {@a typed-response}
 
-### Requesting a typed response
+### 型付けされたレスポンスの要求
 
-You can structure your `HttpClient` request to declare the type of the response object, to make consuming the output easier and more obvious.
-Specifying the response type acts as a type assertion at compile time.
+レスポンスオブジェクトの型を宣言する`HttpClient` リクエストを構築し、出力を消費するのをより簡単かつ明確にすることができます。
+レスポンスの型を指定することは、コンパイル時に型アサーションとして機能します。
 
 <div class="alert is-important">
 
-Specifying the response type is a declaration to TypeScript that it should treat your response as being of the given type.
-This is a build-time check and doesn't guarantee that the server will actually respond with an object of this type. It is up to the server to ensure that the type specified by the server API is returned.
+レスポンスの型を指定することは、レスポンスが与えられた型であるとして扱うべきであるというTypeScriptへの宣言です。
+これはビルド時のチェックであり、サーバーが実際にこの型のオブジェクトでレスポンスを返すことは保証しません。サーバーAPIによって指定された型が返されることを保証するのは、サーバーの責任です。
 
 </div>
 
-To specify the response object type, first define an interface with the required properties.
-Use an interface rather than a class, because the response is a plain object that cannot be automatically converted to an instance of a class.
+レスポンスオブジェクトの型を指定するため、最初に必要なプロパティを持ったインターフェースを定義してください。
+レスポンスはクラスのインスタンスに自動的に変換ができないプレーンオブジェクトであるため、クラスではなくインターフェースを使用してください。
 
 <code-example
   path="http/src/app/config/config.service.ts"
   region="config-interface">
 </code-example>
 
-Next, specify that interface as the `HttpClient.get()` call's type parameter in the service.
+次に、そのインターフェースを `HttpClient.get()` 呼び出しの型パラメータとして指定してください。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -165,12 +162,11 @@ Next, specify that interface as the `HttpClient.get()` call's type parameter in 
 
 <div class="alert is-helpful">
 
- When you pass an interface as a type parameter to the `HttpClient.get()` method, you can use the [RxJS `map` operator](guide/rx-library#operators) to transform the response data as needed by the UI. You can then pass the transformed data to the [async pipe](api/common/AsyncPipe).
+ インターフェースを型パラメータとして `HttpClient.get()` メソッドに渡す際、[RxJS `map` operator](guide/rx-library#operators)を使用してUIで必要とされる形式にレスポンスデータを変換することができます。そして、変換されたデータを[async pipe](api/common/AsyncPipe)に渡すことができます。
 
 </div>
 
-The callback in the updated component method receives a typed data object, which is
-easier and safer to consume:
+最新のコンポーネントメソッドのコールバックは、型付けされたデータオブジェクトを受け取ります。これは消費がより簡単で安全です。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -178,8 +174,8 @@ easier and safer to consume:
   header="app/config/config.component.ts (showConfig v.2)">
 </code-example>
 
-To access properties that are defined in an interface, you must explicitly convert the plain object you get from the JSON to the required response type.
-For example, the following `subscribe` callback receives `data` as an Object, and then type-casts it in order to access the properties.
+インターフェースで定義されているプロパティにアクセスするには、JSONから取得したプレーンオブジェクトを必要なレスポンス型に明示的に変換する必要があります。
+例えば、次の`subscribe`コールバックは、`data`をObjectとして受け取り、プロパティにアクセスするためにそれを型キャストします。
 
 <code-example>
    .subscribe(data => this.config = {
@@ -191,9 +187,9 @@ For example, the following `subscribe` callback receives `data` as an Object, an
 {@a string-union-types}
 
 <div class="callout is-important">
-<header>*observe* and *response* types</header>
+<header>*observe*と*response*型</header>
 
-The types of the `observe` and `response` options are *string unions*, rather than plain strings.
+`observe`オプションと`response`オプションの型は、単純なstringではなく*string unions*です。
 
 ```
 options: {
@@ -204,7 +200,7 @@ options: {
     ...
   }
 ```
-This can cause confusion. For example:
+これは混乱を引き起こす可能性があります。例えば、
 
 ```typescript
 // this works
@@ -217,11 +213,11 @@ const options = {
 client.get('/foo', options)
 ```
 
-In the second case, TypeScript infers the type of `options` to be `{responseType: string}`.
-The type is too wide to pass to `HttpClient.get` which is expecting the type of `responseType` to be one of the _specific_ strings.
-`HttpClient` is typed explicitly this way so that the compiler can report the correct return type based on the options you provided.
+2つ目のケースでは、TypeScriptは`options`の型を`{responseType: string}`であると推論します。
+型が広すぎて、`responseType`の型が_特定の_文字列の1つであることを期待している`HttpClient.get`に渡すことができません。
+コンパイラが指定されたオプションに基づいて正しい戻り値型を報告できるよう、このように`HttpClient`は明示的に型付けされています。
 
-Use `as const` to let TypeScript know that you really do mean to use a constant string type:
+`as const`を使用して、定数のstring型を使用することを本当は意図しているとTypeScriptに知らせましょう。
 
 ```typescript
 const options = {
@@ -232,22 +228,22 @@ client.get('/foo', options);
 
 </div>
 
-### Reading the full response
+### 完全なレスポンスの読み取り
 
-In the previous example, the call to `HttpClient.get()` did not specify any options. By default, it returned the JSON data contained in the response body.
+前の例で、`HttpClient.get()`の呼び出しでは何のオプションも指定していませんでした。デフォルトでは、レスポンスボディに含まれているJSONデータを返しました。
 
-You might need more information about the transaction than is contained in the response body. Sometimes servers return special headers or status codes to indicate certain conditions that are important to the application workflow.
+レスポンスボディに含まれているよりも多くのトランザクションに関する情報が必要になる場合があります。サーバーは、アプリケーションワークフローにとって重要な特定の状態を表すために、特別なヘッダーまたはステータスコードを返す場合があります。
 
-Tell `HttpClient` that you want the full response with the `observe` option of the `get()` method:
+`get（）`メソッドの `observe`オプションにより、完全なレスポンスが必要であることを` HttpClient`に伝えます。
 
 <code-example
   path="http/src/app/config/config.service.ts"
   region="getConfigResponse">
 </code-example>
 
-Now `HttpClient.get()` returns an `Observable` of type `HttpResponse` rather than just the JSON data contained in the body.
+これで、 `HttpClient.get（）`は、ボディに含まれるJSONデータだけでなく、 `HttpResponse`型の` Observable`を返します。
 
-The component's `showConfigResponse()` method displays the response headers as well as the configuration:
+コンポーネントの`showConfigResponse（）`メソッドは、レスポンスヘッダーと設定値を表示します。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -256,17 +252,17 @@ The component's `showConfigResponse()` method displays the response headers as w
  >
 </code-example>
 
-As you can see, the response object has a `body` property of the correct type.
+ご覧の通り、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
 
-### Making a JSONP request
+### JSONPリクエストの作成
 
-Apps can use the `HttpClient` to make [JSONP](https://en.wikipedia.org/wiki/JSONP) requests across domains when a server doesn't support [CORS protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+サーバーが[CORSプロトコル](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)をサポートしていない場合、アプリケーションは`HttpClient` を使用してドメインをまたいで[JSONP](https://en.wikipedia.org/wiki/JSONP)リクエストを実行できます。
 
-Angular JSONP requests return an `Observable`.
-Follow the pattern for subscribing to observables and use the RxJS `map` operator to transform the response before using the [async pipe](api/common/AsyncPipe) to manage the results.
+AngularのJSONPリクエストは`Observable`を返します。
+[async pipe](api/common/AsyncPipe)を使用して結果を処理する前に、Observableをsubscribeするためのパターンに従い、RxJSの`map`演算子を使用してレスポンスを変換します。
 
-In Angular, use JSONP by including `HttpClientJsonpModule` in the `NgModule` imports.
-In the following example, the `searchHeroes()` method uses a JSONP request to query for heroes whose names contain the search term.
+Angularでは、`NgModule`のインポートに`HttpClientJsonpModule`を含めることで、JSONPを使用します。
+次の例では、`searchHeroes()`メソッドはJSONPリクエストを使用して、名前に検索語が含まれているヒーローをクエリします。
 
 ```ts
 /* GET heroes whose name contains search term */
@@ -280,13 +276,13 @@ searchHeroes(term: string): Observable {
 }
 ```
 
-This request passes the `heroesURL` as the first parameter and the callback function name as the second parameter.
-The response is wrapped in the callback function, which takes the observables returned by the JSONP method and pipes them through to the error handler.
+このリクエストは、1つ目の引数として `heroesURL`を渡し、2つ目の引数としてコールバック関数名を渡します。
+レスポンスはコールバック関数でラップされます。コールバック関数は、JSONPメソッドによって返されたObservableを取得し、それらをエラーハンドラーにパイプします。
 
-### Requesting non-JSON data
+### 非JSONデータのリクエスト
 
-Not all APIs return JSON data.
-In this next example, a `DownloaderService` method reads a text file from the server and logs the file contents, before returning those contents to the caller as an `Observable<string>`.
+すべてのAPIがJSONデータを返すわけではありません。
+この次の例では、`DownloaderService`メソッドがサーバーからテキストファイルを読み取り、ファイルの内容をログに記録してから、それらの内容を` Observable<string>`として呼び出し元に返します。
 
 <code-example
   path="http/src/app/downloader/downloader.service.ts"
@@ -294,11 +290,11 @@ In this next example, a `DownloaderService` method reads a text file from the se
   header="app/downloader/downloader.service.ts (getTextFile)" linenums="false">
 </code-example>
 
-`HttpClient.get()` returns a string rather than the default JSON because of the `responseType` option.
+`HttpClient.get()`は`responseType`オプションがあるため、デフォルトのJSONではなく文字列を返します。
 
-The RxJS `tap` operator (as in "wiretap") lets the code inspect both success and error values passing through the observable without disturbing them.
+RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コードがObservableを妨害せずに成功値とエラー値の両方を検査することを許可します。
 
-A `download()` method in the `DownloaderComponent` initiates the request by subscribing to the service method.
+`DownloaderComponent`の`download()`メソッドは、サービスのメソッドをsubscribeすることでリクエストを開始します。
 
 <code-example
   path="http/src/app/downloader/downloader.component.ts"

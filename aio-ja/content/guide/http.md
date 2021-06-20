@@ -282,7 +282,7 @@ searchHeroes(term: string): Observable {
 ### 非JSONデータのリクエスト
 
 すべてのAPIがJSONデータを返すわけではありません。
-この次の例では、`DownloaderService`メソッドがサーバーからテキストファイルを読み取り、ファイルの内容をログに記録してから、それらの内容を` Observable<string>`として呼び出し元に返します。
+この次の例では、`DownloaderService`のメソッドがサーバーからテキストファイルを読み取り、ファイルの内容をログに記録してから、それらの内容を` Observable<string>`として呼び出し元に返します。
 
 <code-example
   path="http/src/app/downloader/downloader.service.ts"

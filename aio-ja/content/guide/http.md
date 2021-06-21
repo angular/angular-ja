@@ -465,10 +465,10 @@ req.subscribe();
 ```
 </div>
 
-### Making a PUT request
+### PUTリクエストの作成
 
-An app can send PUT requests using the HTTP client service.
-The following `HeroesService` example, like the POST example, replaces a resource with updated data.
+アプリケーションは、HTTPクライアントサービスを使用してPUTリクエストを送信できます。
+次の`HeroesService`の例は、POSTの例と同様に、リソースを更新されたデータに置き換えます。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -476,17 +476,16 @@ The following `HeroesService` example, like the POST example, replaces a resourc
   header="app/heroes/heroes.service.ts (updateHero)">
 </code-example>
 
-As for any of the HTTP methods that return an observable, the caller, `HeroesComponent.update()` [must `subscribe()`](#always-subscribe "Why you must always subscribe.") to the observable returned from the `HttpClient.put()` in order to initiate the request.
+Observableを返すHTTPメソッドについて言えば、呼び出し元の`HeroesComponent.update()`はリクエストを開始するため、`HttpClient.put()`から返されたObservableを[`subscribe()`する必要があります。](#always-subscribe "Why you must always subscribe.")
 
-### Adding and updating headers
+### ヘッダーの追加と更新
 
-Many servers require extra headers for save operations.
-For example, a server might require an authorization token, or "Content-Type" header to explicitly declare the MIME type of the request body.
+多くのサーバーでは、保存処理のために追加のヘッダーが必要です。。
+例えば、サーバーは、認証トークンや、リクエスト本文のMIMEタイプを明示的に宣言するため「Content-Type」ヘッダーを必要とする場合があります。
 
-##### Adding headers
+##### ヘッダーの追加
 
-The `HeroesService` defines such headers in an `httpOptions` object that are passed
-to every `HttpClient` save method.
+`HeroesService`は、`HttpClient`の保存メソッド全てに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義します。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -494,13 +493,12 @@ to every `HttpClient` save method.
   header="app/heroes/heroes.service.ts (httpOptions)">
 </code-example>
 
-##### Updating headers
+##### ヘッダーの更新
 
-You can't directly modify the existing headers within the previous options
-object because instances of the `HttpHeaders` class are immutable.
-Use the `set()` method instead, to return a clone of the current instance with the new changes applied.
+`HttpHeaders`クラスのインスタンスは不変であるため、前述のoptionsオブジェクト内の既存のヘッダーを直接変更することはできません。
+代わりに`set()`メソッドを使用して、新しい変更が適用された現在のインスタンスのクローンを返します。
 
-The following example shows how, when an old token has expired, you can update the authorization header before making the next request.
+次の例は、古いトークンの有効期限が切れたときに、次のリクエストを行う前に認証ヘッダーを更新する方法を示しています。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"

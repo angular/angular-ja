@@ -85,7 +85,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 <code-example path="reactive-forms/src/app/app.component.1.html" region="app-name-editor" header="src/app/app.component.html (name editor)"></code-example>
 
 <div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/name-editor-1.png" alt="Name Editor">
+  <img src="generated/images/guide/reactive-forms/name-editor-1.png" alt="Name Editor, which has a name label and an input so the user can enter a name">
 </div>
 
 {@a display-value}
@@ -126,7 +126,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 フォームモデルはコントロールのデータ源なので、ボタンをクリックするとコンポーネントクラス内で入力の値が変更され、現在の値も上書きされます。
 
 <div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/name-editor-2.png" alt="Name Editor Update">
+  <img src="generated/images/guide/reactive-forms/name-editor-2.gif" alt="Name Editor Update with a name label, the name Nancy in the input, text specifying that the value of the input is Nancy and an Update Name button">
 </div>
 
 <div class="alert is-helpful">
@@ -217,7 +217,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 `ProfileEditor`は、フォームグループインスタンス内の`firstName`と`lastName`のフォームコントロールインスタンスを管理できます。
 
 <div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/profile-editor-1.png" alt="Profile Editor">
+  <img src="generated/images/guide/reactive-forms/profile-editor-1.gif" alt="Profile Editor with labels and inputs for first and last name as well as a submit button">
 </div>
 
 {@a nested-groups}
@@ -254,7 +254,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 `ProfileEditor`フォームはひとつのグループとして表示されますが、モデルは論理グループ領域を表すためにさらに分解されます。
 
 <div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/profile-editor-2.png" alt="Profile Editor Update">
+  <img src="generated/images/guide/reactive-forms/profile-editor-2.png" alt="Profile editor update adding address inputs, instructive text for filling out the form to enable the submit button, and a disabled submit button">
 </div>
 
 <div class="alert is-helpful">
@@ -379,16 +379,6 @@ _フォームバリデーション_は、ユーザーの入力が完全で正し
 
 </code-example>
 
-HTML5には、`required`、`minlength`、`maxlength`などのネイティブバリデーションとして使用できるビルトイン属性があります。これらのオプション属性はフォーム入力要素で使用できます。`required`属性を`firstName`入力要素に追加します。
-
-<code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="required-attribute" header="src/app/profile-editor/profile-editor.component.html (required attribute)"></code-example>
-
-<div class="alert is-important">
-
-**注:** これらのHTML5バリデーション属性は、Angularのリアクティブフォームが提供するビルトインバリデーターと*組み合わせて*使用してください。これらを組み合わせて使用することで、テンプレートがチェックされた後に式が変更された時のエラーを防ぐことができます。
-
-</div>
-
 **フォームのステータスを表示する**
 
 必須フィールドをフォームコントロールに追加すると、初期ステータスはinvalidになります。invalidステータスは親のフォームグループ要素に伝播し、ステータスがinvalidになります。現在のフォームグループインスタンスのステータスは、`status`プロパティからアクセスします。
@@ -398,7 +388,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.html" region="display-status" header="src/app/profile-editor/profile-editor.component.html (display status)"></code-example>
 
 <div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/profile-editor-3.png" alt="Profile Editor Validation">
+  <img src="generated/images/guide/reactive-forms/profile-editor-3.png" alt="Profile Editor with validation status of invalid">
 </div>
 
 `profileForm`が`firstName`フォームコントロールの必須によってinvalidになっているため、**Submit** ボタンは非活性になっています。`firstName`を入力すると、フォームはvalidになり　**Submit** ボタンは活性になります。
@@ -476,7 +466,7 @@ HTML5には、`required`、`minlength`、`maxlength`などのネイティブバ�
 `*ngFor`ディレクティブはエイリアスフォーム配列インスタンス内の各コントロールインスタンスを反復します。フォーム配列要素は名前がついていないため、`i`変数にインデックスを割り当て、各コントロールに渡して`formControlName`にバインドします。
 
 <div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/profile-editor-4.png" alt="Profile Editor Aliases">
+  <img src="generated/images/guide/reactive-forms/profile-editor-4.png" alt="Profile Editor with aliases section, which includes an alias label, input, and button for adding another alias text input">
 </div>
 
 新しいエイリアスインスタンスが追加される度に、新しいフォーム配列インスタンスがインデックスに応じて制御されます。これにより、ルートコントロールの状態や値を計算する時に、個々のコントロールを追跡することができます。

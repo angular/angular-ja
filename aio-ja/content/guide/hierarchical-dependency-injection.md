@@ -1019,10 +1019,10 @@ export class ChildComponent {
 <app-root @NgModule(AppModule)
         @Inject(AnimalService=>"🐳")>
   <#VIEW @Provide(AnimalService="🦔")
-         @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"🦔">
+         @Inject(AnimalService, @Optional)=>"🦔">
     <!-- ^^@SkipSelf() starts here,  @Host() stops here^^ -->
     <app-child>
-      <#VIEW @Provide(AnimalService="🐶")
+      <#VIEW @Provide(AnimalService="🦔")
              @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"🐶">
                <!-- Add @SkipSelf ^^-->
       </#VIEW>

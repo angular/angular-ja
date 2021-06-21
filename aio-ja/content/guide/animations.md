@@ -63,15 +63,11 @@ Angularアニメーションをプロジェクトに追加するには、標準�
 <code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="decorator" language="typescript">
 </code-example>
 
-## シンプルな遷移アニメーション
+## 遷移アニメーション
 
 単一のHTML要素をある状態から別の状態に変更するシンプルな遷移をアニメーション化しましょう。たとえば、ユーザーの最後の操作から、ボタンが**Open**または**Closed**のいずれかを表示するように指定できます。ボタンが`open`状態では表示され黄色になり、`closed`状態になると透明で緑色になります。
 
 HTMLでは、これらの属性は色や不透明度などの通常のCSSスタイルを使用して設定されます。Angularでは、`style()`関数を使用して、アニメーションで使用する一連のCSSスタイルを指定します。アニメーションの状態に対して一連のスタイルをまとめて、その状態に対して`open`や`closed`などの名前を付けることができます。
-
-<div class="lightbox">
-  <img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
-</div>
 
 <div class="alert is-helpful">
 
@@ -95,7 +91,7 @@ Angularの`state()`関数がCSSスタイル属性を設定する`style⁣()`関�
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state1" language="typescript">
 </code-example>
 
-次の`closed`状態では、ボタンの高さは100ピクセル、不透明度は0.5、背景色は緑になります。
+次の`closed`状態では、ボタンの高さは100ピクセル、不透明度は0.7、背景色は青になります。
 
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state2" language="typescript">
 </code-example>
@@ -117,7 +113,7 @@ Angularでは、アニメーションなしで複数のスタイルを設定で�
 
 >`animate ('duration delay easing')`
 
-最初の部分、`duration`は必須です。デュレーションは、クオートのない純粋な数値で表現されたミリ秒、またはクオートと時間指定子を含む秒単位で表現することができます。たとえば、10分の1秒のデュレーションは、次のように表現することができます:
+最初の部分、`duration`は必須です。デュレーションは、クオートのない数値で表現されたミリ秒、またはクオートと時間指定子を含む秒単位で表現することができます。たとえば、10分の1秒のデュレーションは、次のように表現することができます:
 
 * 純粋な数値(ミリ秒単位): `100`
 
@@ -177,10 +173,6 @@ region="transition2">
 
 この例では、トリガーに`openClose`という名前をつけて、`button`要素にアタッチします。トリガーには、`open`状態と`close`状態、および2つの遷移のタイミングを記述します。
 
-<div class="lightbox">
-  <img src="generated/images/guide/animations/triggering-the-animation.png" alt="triggering the animation">
-</div>
-
 <div class="alert is-helpful">
 
 **Note:** 各`trigger()`関数呼び出しの中では、1つの要素はある時点で1つの状態にしかなれません。ただし、一度に複数のトリガーをアクティブにすることは可能です。
@@ -239,7 +231,7 @@ region="trigger">
 
 ### まとめ
 
-あなたは、`style()`と`state()`と`animate()`を使って2つの状態間の単純な遷移にアニメーションを追加する方法を学びました。
+あなたは、`style()`と`state()`と`animate()`を使って2つの状態間の遷移にアニメーションを追加する方法を学びました。
 
 Angularアニメーションの高度な機能については、アニメーションセクションの[遷移とトリガー](guide/transition-and-triggers)の高度なテクニックから開始して学ぶことができます。
 

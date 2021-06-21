@@ -512,6 +512,23 @@
               "translated": true
             }
           ]
+        },
+        {
+          "url": "guide/web-worker",
+          "title": "Web Worker",
+          "tooltip": "Using web workers for background processing.",
+          "translated": true
+        },
+        {
+          "url": "guide/universal",
+          "title": "サーバーサイドレンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "translated": true
+        },
+        {
+          "url": "guide/prerendering",
+          "title": "Prerendering",
+          "tooltip": "Prerender HTML server-side with Angular Universal."
         }
       ]
     },
@@ -612,12 +629,6 @@
           "tooltip": "Using builders to customize Angular CLI."
         },
         {
-          "url": "guide/universal",
-          "title": "サーバーサイドレンダリング",
-          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-          "translated": true
-        },
-        {
           "url": "guide/language-service",
           "title": "Language Service",
           "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
@@ -716,12 +727,6 @@
           "url": "guide/forms",
           "title": "Building a Template-driven Form",
           "tooltip": "Create a template-driven form using directives and Angular template syntax."
-        },
-        {
-          "url": "guide/web-worker",
-          "title": "Web Worker",
-          "tooltip": "Using web workers for background processing.",
-          "translated": true
         },
         {
           "title": "Angularライブラリ",

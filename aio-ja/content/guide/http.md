@@ -507,13 +507,13 @@ Observableを返すHTTPメソッドについて言えば、呼び出し元の`He
 
 {@a url-params}
 
-## Configuring HTTP URL parameters
+## HTTP URLパラメーターの構成
 
-Use the `HttpParams` class with the `params` request option to add URL query strings in your `HttpRequest`.
+`HttpRequest`において、URLにクエリ文字列を追加する`HttpParams`クラスを`params`リクエストオプションとともに使用します。
 
-The following example, the `searchHeroes()` method queries for heroes whose names contain the search term.
+次の例では、`searchHeroes()`メソッドは、名前に検索語が含まれているヒーローをクエリします。
 
-Start by importing `HttpParams` class.
+`HttpParams`クラスのインポートから始めます。
 
 <code-example hideCopy language="typescript">
 import {HttpParams} from "@angular/common/http";
@@ -524,12 +524,12 @@ import {HttpParams} from "@angular/common/http";
   region="searchHeroes" linenums="false">
 </code-example>
 
-If there is a search term, the code constructs an options object with an HTML URL-encoded search parameter.
-If the term is "cat", for example, the GET request URL would be `api/heroes?name=cat`.
+検索語がある場合、コードはHTML URLエンコードされた検索パラメーターを持つoptionsオブジェクトを作成します。
+例えば検索語が「cat」の場合、GETリクエストのURLは`api/heroes?name=cat`になります。
 
-The `HttpParams` object is immutable. If you need to update the options, save the returned value of the `.set()` method.
+`HttpParams`オブジェクトはイミュータブルです。optionsを更新する必要がある場合、`.set()`メソッドの戻り値を保存してください。
 
-You can also create HTTP parameters directly from a query string by using the `fromString` variable:
+`fromString`変数を使用して、クエリ文字列から直接HTTPパラメータを作成することもできます。
 
 <code-example hideCopy language="typescript">
 const params = new HttpParams({fromString: 'name=foo'});

@@ -31,7 +31,7 @@ AngularはCSSをグローバルスタイルに追加します。
 
 {@a inspect-generated-css}
 
-## 生成されたCSSの検査
+## 生成されたCSSの検査 {@a inspecting-generated-css}
 
 エミュレートされたビューカプセル化を使用する場合、Angularはすべてのコンポーネントスタイルを前処理して、
 標準的なShadow CSSスコープルールに近似させます。

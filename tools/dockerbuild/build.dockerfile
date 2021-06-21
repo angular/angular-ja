@@ -1,8 +1,9 @@
-FROM node:14.16
+FROM node:14.17
 
 # install dependencies
 RUN apt-get update
 RUN apt-get install -y rsync
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 # copy source files
 WORKDIR /

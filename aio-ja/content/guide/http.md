@@ -537,32 +537,31 @@ const params = new HttpParams({fromString: 'name=foo'});
 
 
 {@a intercepting-requests-and-responses}
-## Intercepting requests and responses
+## リクエストとレスポンスのインターセプト
 
-With interception, you declare _interceptors_ that inspect and transform HTTP requests from your application to a server.
-The same interceptors can also inspect and transform a server's responses on their way back to the application.
-Multiple interceptors form a _forward-and-backward_ chain of request/response handlers.
+インターセプトを使用することで、アプリケーションからサーバーへのHTTPリクエストを検査して変換する_interceptors_を宣言します。
+同じインターセプターが、アプリケーションに返ってくるサーバーのレスポンスを検査および変換することもできます。
+複数のインターセプターが、リクエスト/レスポンスハンドラーの_前後の_チェーンを形成します。
 
-Interceptors can perform a variety of  _implicit_ tasks, from authentication to logging, in a routine, standard way, for every HTTP request/response.
+インターセプターは、すべてのHTTPリクエスト/レスポンスに対して、認証からロギングまで、さまざまな_暗黙の_タスクを1つのルーチンの中で、標準的な方法で実行できます。
 
-Without interception, developers would have to implement these tasks _explicitly_
-for each `HttpClient` method call.
+インターセプトがなければ、開発者は各`HttpClient`メソッド呼び出しに対してこれらのタスクを_明示的に_実装する必要があります。
 
-### Write an interceptor
+### インターセプターを書く
 
-To implement an interceptor, declare a class that implements the `intercept()` method of the `HttpInterceptor` interface.
+インターセプターを実装するには、`HttpInterceptor`インターフェースの`intercept()`メソッドを実装するクラスを宣言します。
 
-Here is a do-nothing _noop_ interceptor that passes the request through without touching it:
+ここには、リクエストに触れずに渡すことだけ行う_noop_インターセプターがあります。
 
 <code-example
   path="http/src/app/http-interceptors/noop-interceptor.ts"
   header="app/http-interceptors/noop-interceptor.ts">
 </code-example>
 
-The `intercept` method transforms a request into an `Observable` that eventually returns the HTTP response.
-In this sense, each interceptor is fully capable of handling the request entirely by itself.
+`intercept`メソッドは、リクエストを、最終的にHTTPレスポンスを返す`Observable`に変換します。
+こういう意味では、各インターセプターは完全に単独でリクエストを処理することができます。
 
-Most interceptors inspect the request on the way in and forward the (perhaps altered) request to the `handle()` method of the `next` object which implements the [`HttpHandler`](api/common/http/HttpHandler) interface.
+ほとんどのインターセプターは、途中でリクエストを検査し、[`HttpHandler`](api/common/http/HttpHandler)インターフェースを実装する`next`オブジェクトの`handle()`メソッドに（おそらく変更された）リクエストを転送します。
 
 ```javascript
 export abstract class HttpHandler {
@@ -570,52 +569,49 @@ export abstract class HttpHandler {
 }
 ```
 
-Like `intercept()`, the `handle()` method transforms an HTTP request into an `Observable` of [`HttpEvents`](#interceptor-events) which ultimately include the server's response. The `intercept()` method could inspect that observable and alter it before returning it to the caller.
+`intercept()`と同様に、`handle()`メソッドは、HTTPリクエストを最終的にサーバーのレスポンスを含む[`HttpEvents`](#httpevents)の`Observable`に変換します。`intercept()`メソッドは、そのObservableを検査し、呼び出し元に返す前に変更することができます。
 
-This _no-op_ interceptor calls `next.handle()` with the original request and returns the observable without doing a thing.
+_何もしない_インターセプターは、元のリクエストを渡して`next.handle()`を呼び出し、何もせずにObservableを返します。
 
-### The _next_ object
+### _next_オブジェクト
 
-The `next` object represents the next interceptor in the chain of interceptors.
-The final `next` in the chain is the `HttpClient` backend handler that sends the request to the server and receives the server's response.
+`next`オブジェクトは、インターセプターのチェーン内の次のインターセプターを表します。
+チェーンの最後の`next`は、リクエストをサーバーに送信し、サーバーのレスポンスを受け取る`HttpClient`バックエンドハンドラーです。
 
 
-Most interceptors call `next.handle()` so that the request flows through to the next interceptor and, eventually, the backend handler.
-An interceptor _could_ skip calling `next.handle()`, short-circuit the chain, and [return its own `Observable`](#caching) with an artificial server response.
+ほとんどのインターセプターは、`next.handle()`を呼び出して、リクエストが次のインターセプター、そして最終的にはバックエンドハンドラーに流れるようにします。
+インターセプターは、`next.handle()`の呼び出しをスキップしチェーンを近道して、人工のサーバーレスポンスで[自身の`Observable`を返す](#caching)こともできます。
 
-This is a common middleware pattern found in frameworks such as Express.js.
+これは、Express.jsなどのフレームワークでよく見られるミドルウェアパターンです。
 
-### Provide the interceptor
+### インターセプターを提供する
 
-The `NoopInterceptor` is a service managed by Angular's [dependency injection (DI)](guide/dependency-injection) system.
-Like other services, you must provide the interceptor class before the app can use it.
+`NoopInterceptor`は、Angularの[依存性の注入（DI）](guide/dependency-injection)システムによって管理されるサービスです。
+他のサービスと同様に、アプリケーションが使用する前にインターセプタークラスを提供する必要があります。
 
-Because interceptors are (optional) dependencies of the `HttpClient` service,
-you must provide them in the same injector (or a parent of the injector) that provides `HttpClient`.
-Interceptors provided _after_ DI creates the `HttpClient` are ignored.
+インターセプターは`HttpClient`サービスの（オプショナルな）依存関係であるため、
+`HttpClient`を提供しているのと同じインジェクター（またはインジェクターの親）にそれらを提供する必要があります。
+DIが`HttpClient`を作成した_後に_提供されるインターセプターは無視されます。
 
-This app provides `HttpClient` in the app's root injector, as a side-effect of importing the `HttpClientModule` in `AppModule`.
-You should provide interceptors in `AppModule` as well.
+このアプリケーションは、`AppModule`で`HttpClientModule`をインポートする副作用として、アプリケーションのルートインジェクターに`HttpClient`を提供します。
+同様にインターセプターは`AppModule`の中で提供すべきです。
 
-After importing the `HTTP_INTERCEPTORS` injection token from `@angular/common/http`,
-write the `NoopInterceptor` provider like this:
+`@angular/common/http`から`HTTP_INTERCEPTORS`インジェクショントークンをインポートした後、
+次のように`NoopInterceptor`プロバイダーを記述します。
 
 <code-example
   path="http/src/app/http-interceptors/index.ts"
   region="noop-provider">
 </code-example>
 
-Note the `multi: true` option.
-This required setting tells Angular that `HTTP_INTERCEPTORS` is a token for a _multiprovider_
-that injects an array of values, rather than a single value.
+`multi：true`オプションに注意してください。
+この必須設定は、Angularに`HTTP_INTERCEPTORS`は単一の値ではなく値の配列を注入する_マルチプロバイダー_のトークンであることを伝えます。
 
-You _could_ add this provider directly to the providers array of the `AppModule`.
-However, it's rather verbose and there's a good chance that
-you'll create more interceptors and provide them in the same way.
-You must also pay [close attention to the order](#interceptor-order)
-in which you provide these interceptors.
+このプロバイダーを `AppModule`のproviders配列に直接追加することができます。
+ただし、それはむしろ冗長であるし、より多くのインターセプターを作成して同じ方法で提供できる可能性があります。
+また、これらのインターセプターを提供する[順序に細心の注意](#interceptor-order)を払う必要があります。
 
-Consider creating a "barrel" file that gathers all the interceptor providers into an `httpInterceptorProviders` array, starting with this first one, the `NoopInterceptor`.
+この最初の`NoopInterceptor`から始まる`httpInterceptorProviders`配列の中にすべてのインターセプタープロバイダーを集める「バレル」ファイルを作成することを検討してください。
 
 <code-example
   path="http/src/app/http-interceptors/index.ts"
@@ -623,7 +619,7 @@ Consider creating a "barrel" file that gathers all the interceptor providers int
   header="app/http-interceptors/index.ts">
 </code-example>
 
-Then import and add it to the `AppModule` _providers array_ like this:
+次に、それをインポートして`AppModule`の _providers配列_ に追加します。
 
 <code-example
   path="http/src/app/app.module.ts"
@@ -631,12 +627,11 @@ Then import and add it to the `AppModule` _providers array_ like this:
   header="app/app.module.ts (interceptor providers)">
 </code-example>
 
-As you create new interceptors, add them to the `httpInterceptorProviders` array and
-you won't have to revisit the `AppModule`.
+新しいインターセプターを作成するとき、それらを`httpInterceptorProviders`配列に追加するだけです。`AppModule`を開く必要はありません。
 
 <div class="alert is-helpful">
 
-There are many more interceptors in the complete sample code.
+完全なサンプルコードには、より多くのインターセプターがあります。
 
 </div>
 

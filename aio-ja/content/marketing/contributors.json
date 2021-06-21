@@ -92,13 +92,6 @@
     "groups": ["Angular"],
     "lead": "jelbourn"
   },
-  "anneiyw": {
-    "name": "Annie Wang",
-    "picture": "annieyw.jpg",
-    "bio": "Annie is an engineering resident on the Angular Components team at Google. She is passionate about the intersection between design and technology and enjoys drawing in her free time.",
-    "groups": ["Angular"],
-    "lead": "jelbourn"
-  },
   "atscott": {
     "name": "Andrew Scott",
     "picture": "andrewscott.jpg",
@@ -223,6 +216,12 @@
     "bio": "Kristiyan is a front-end developer, passionate open-source contributor and a core team member on Angular Material.",
     "groups": ["Angular"],
     "lead": "jelbourn"
+  },
+  "danieltre23": {
+    "name": "Daniel Trevino",
+    "picture": "danieltre23.jpg",
+    "bio": "Daniel is a Software Engineer Intern at Google, loves to learn new things, write code and listen to music.",
+    "groups": ["Angular"]
   },
   "danwahlin": {
     "name": "Dan Wahlin",
@@ -416,7 +415,7 @@
   "jiali": {
     "name": "Jia Li",
     "groups": ["Collaborators"],
-    "mentor": "mhevery",
+    "mentor": "igorminar",
     "picture": "JiaLiPassion.jpg",
     "twitter": "Jialipassion",
     "website": "https://github.com/JiaLiPassion",
@@ -589,6 +588,14 @@
     "mentor": "mgechev",
     "groups": ["GDE", "Collaborators"]
   },
+  "marsibarsi": {
+    "name": "Roman Sedov",
+    "picture": "sedov.jpg",
+    "website": "http://marsibarsi.me/",
+    "twitter": "marsibarsi",
+    "bio": "Roman is an Angular Enthusiast and a Frontend Developer from Nizhny Novgorod, Russia. He writes tech articles, speaks at conferences, develops local GDG community and contributes to Open Source. He is also a co-creator of Taiga UI library and Ng Web APIs Open Source organization.",
+    "groups": ["GDE"]
+  },
   "martinakraus": {
     "name": "Martina Kraus",
     "picture": "martinakraus.jpg",
@@ -627,15 +634,6 @@
     "website": "https://mhartington.io",
     "bio": "Mike is a Developer Advocate for the Ionic Framework and a GDE in Angular. He spends most of his time making fast PWAs and exploring emerging web standards. When not behind a keyboard, you'll probably find him with a guitar and beer.",
     "groups": ["GDE"]
-  },
-  "mhevery": {
-    "name": "Miško Hevery",
-    "picture": "misko.jpg",
-    "twitter": "mhevery",
-    "website": "http://misko.hevery.com",
-    "bio": "Miško Hevery is the creator of AngularJS framework. He has passion for making complex things simple. He currently works at Google, but has previously worked at Adobe, Sun Microsystems, Intel, and Xerox, where he became an expert in building web applications in web related technologies such as Java, JavaScript, Flex and ActionScript.",
-    "groups": ["Angular"],
-    "lead": "jelbourn"
   },
   "michaelhladky": {
     "name": "Michael Hladky",

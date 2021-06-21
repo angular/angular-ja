@@ -5,9 +5,9 @@ To check that your services are working as you intend, you can write tests speci
 
 <div class="alert is-helpful">
 
-  For the sample app that the testing guides describe, see the <live-example name="testing" embedded-style noDownload>sample app</live-example>.
+  For a hands-on experience, you can <live-example name="testing" stackblitz="specs" noDownload>run tests and explore the test code</live-example> in your browser as you read this guide.
 
-  For the tests features in the testing guides, see <live-example name="testing" stackblitz="specs" noDownload>tests</live-example>.
+  If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
 
 </div>
 
@@ -42,7 +42,7 @@ _注入_することは簡単なことです。
 
 かわりに、
 依存性をモックしたり、ダミーの値を使用したり、
-適切なサービスのメソッドの[スパイ](https://jasmine.github.io/2.0/introduction.html#section-Spies)を作成することができます。
+適切なサービスのメソッドの[スパイ](https://jasmine.github.io/tutorials/your_first_suite#section-Spies)を作成することができます。
 
 <div class="alert is-helpful">
 

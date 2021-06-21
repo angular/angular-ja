@@ -178,7 +178,7 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 名前を `--configuration` コマンドラインフラグに渡すことで、代替設定を選択できます。
 
-複数の構成名をコンマ区切りリストとして渡すこともできます。たとえば、`stage` と `fr` の両方のビルド構成を適用するには、コマンド `ng build --configuration stage,fr` を使用します。この場合、コマンドは名前付き構成を左から右に解析します。複数の構成が同じ設定を変更する場合、最後に設定された値が最後の値となります。
+複数の構成名をコンマ区切りリストとして渡すこともできます。たとえば、`stage` と `fr` の両方のビルド構成を適用するには、コマンド `ng build --configuration stage,fr` を使用します。この場合、コマンドは名前付き構成を左から右に解析します。複数の構成が同じ設定を変更する場合、最後に設定された値が最後の値となります。 So in this example, if both `stage` and `fr` configurations set the output path the value in `fr` would get used.
 
 {@a build-props}
 

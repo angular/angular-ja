@@ -68,7 +68,7 @@ Angularは、この`providers`の値を次のように完全なプロバイダ�
 
 {@a class-provider}
 
-## 代わりのクラスプロバイダーの指定
+## 代替クラスプロバイダーの指定
 
 異なるクラスが同じサービスを提供できます。
 たとえば次のコードは、コンポーネントが`Logger`トークンを使ってロガーを要求したとき`BetterLogger`インスタンスを返すよう、インジェクターに指示しています。
@@ -127,7 +127,7 @@ Angularは、この`providers`の値を次のように完全なプロバイダ�
 
 それぞれが独自のクラスインターフェースのトークンをもつ、複数の親の型にエイリアス設定するには、より多くの引数を受け取る`provideParent()`を設定します。
 
-これはデフォルトで`Parent`になる改訂版ですが、異なる親クラスのインターフェース用にオプションで2番目のパラメータも受け取ります。
+これはデフォルトで`Parent`になりますが、異なる親クラスのインターフェース用にオプションで2番目のパラメータも受け取る改訂バージョンです。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="provide-parent" header="dependency-injection-in-action/src/app/parent-finder.component.ts"></code-example>
 

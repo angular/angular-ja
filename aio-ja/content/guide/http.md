@@ -942,15 +942,14 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 
 </div>
 
-## Optimizing server interaction with debouncing
+## デバウンスによるサーバーインタラクションの最適化
 
-If you need to make an HTTP request in response to user input, it's not efficient to send a request for every keystroke.
-It's better to wait until the user stops typing and then send a request.
-This technique is known as debouncing.
+ユーザー入力に応答してHTTPリクエストを行う必要がある場合、キーストロークごとにリクエストを送信するのは効率的ではありません。
+ユーザーが入力をやめるのを待ってからリクエストを送信する方がよいでしょう。
+この手法はデバウンスとして知られています。
 
-Consider the following template, which lets a user enter a search term to find an npm package by name.
-When the user enters a name in a search-box, the `PackageSearchComponent` sends
-a search request for a package with that name to the npm web API.
+次のテンプレートについて考えてみます。このテンプレートでは、ユーザーが検索語を入力して、名前からnpmパッケージを見つけることができます。
+ユーザーが検索ボックスに名前を入力すると、`PackageSearchComponent`はその名前のパッケージの検索リクエストをnpm Web APIに送信します。
 
 <code-example
   path="http/src/app/package-search/package-search.component.html"
@@ -958,18 +957,18 @@ a search request for a package with that name to the npm web API.
   header="app/package-search/package-search.component.html (search)">
 </code-example>
 
-Here, the `keyup` event binding sends every keystroke to the component's `search()` method.
+ここでは、`keyup`イベントバインディングは、すべてのキーストロークをコンポーネントの`search()`メソッドに送信します。
 
 <div class="alert is-helpful">
 
-The type of `$event.target` is only `EventTarget` in the template.
-In the `getValue()` method, the target is cast to an `HTMLInputElement` to allow type-safe access to its `value` property.
+`$event.target`の型は、テンプレート内の`EventTarget`に過ぎません。
+`getValue()`メソッドでは、ターゲットが`HTMLInputElement`にキャストされ、その`value`プロパティへの型安全なアクセスが可能になります。
 
 <code-example path="http/src/app/package-search/package-search.component.ts" region="getValue"></code-example>
 
 </div>
 
-The following snippet implements debouncing for this input using RxJS operators.
+次のスニペットは、RxJSオペレーターを使用してこの入力のデバウンスを実装します。
 
 <code-example
   path="http/src/app/package-search/package-search.component.ts"
@@ -977,45 +976,42 @@ The following snippet implements debouncing for this input using RxJS operators.
   header="app/package-search/package-search.component.ts (excerpt)">
 </code-example>
 
-The `searchText$` is the sequence of search-box values coming from the user.
-It's defined as an RxJS `Subject`, which means it is a multicasting `Observable`
-that can also emit values for itself by calling `next(value)`,
-as happens in the `search()` method.
+`searchText$`は、ユーザーからの検索ボックス値のシーケンスです。
+これは、RxJSの`Subject`として定義されています。`Subject`は、`search()`メソッドで行っているように、`next(value)`を呼び出すことによって、自身に対して値を発行できるマルチキャスト`Observable`です。
 
-Rather than forward every `searchText` value directly to the injected `PackageSearchService`,
-the code in `ngOnInit()` pipes search values through three operators, so that a search value reaches the service only if it's a new value and the user has stopped typing.
+すべての`searchText`値を注入された`PackageSearchService`に直接転送するのではなく、
+`ngOnInit()`のコードは、検索値を3つのオペレーターにパイプしているので、検索値が新しい値でかつユーザーが入力を停止した場合にのみ、検索値がサービスに到達します。
 
-* `debounceTime(500)`⁠—Wait for the user to stop typing (1/2 second in this case).
+* `debounceTime(500)`⁠—ユーザーが入力を停止するのを待ちます（この場合は1/2秒）。
 
-* `distinctUntilChanged()`⁠—Wait until the search text changes.
+* `distinctUntilChanged()`⁠—検索テキストが変わるまで待ちます。
 
-* `switchMap()`⁠—Send the search request to the service.
+* `switchMap()`⁠—検索リクエストをサービスに送信します。
 
-The code sets `packages$` to this re-composed `Observable` of search results.
-The template subscribes to `packages$` with the [AsyncPipe](api/common/AsyncPipe)
-and displays search results as they arrive.
+このコードは、`packages$`をこの再構成された検索結果の`Observable`に設定します。
+テンプレートは、[AsyncPipe](api/common/AsyncPipe)を使用して`packages$`をサブスクライブし、
+検索結果が届いた際に表示します。
 
 <div class="alert is-helpful">
 
-See [Using interceptors to request multiple values](#cache-refresh) for more about the `withRefresh` option.
+`withRefresh`オプションの詳細については、[インターセプターを使用して複数の値を要求する](#cache-refresh)を参照してください。
 
 </div>
 
-### Using the *switchMap()* operator
+### *switchMap()*オペレーターの使用
 
-The `switchMap()` operator takes a function argument that returns an `Observable`.
-In the example, `PackageSearchService.search` returns an `Observable`, as other data service methods do.
-If a previous search request is still in-flight (as when the network connection is poor),
-the operator cancels that request and sends a new one.
+The `switchMap()`オペレーターは、`Observable`を返す関数を引数に取ります。
+例えば、`PackageSearchService.search`は他のデータサービスメソッドと同様に`Observable`を返します。
+以前の検索リクエストがまだ実行中である場合（接続が悪い場合など）、
+オペレーターはリクエストをキャンセルして新しいリクエストを送信します。
 
-Note that `switchMap()` returns service responses in their original request order, even if the
-server returns them out of order.
+サービスのレスポンスをサーバーが順不同で返したとしても、`switchMap()`は、元のリクエストの順序で返すことに注意してください。
 
 
 <div class="alert is-helpful">
 
-If you think you'll reuse this debouncing logic,
-consider moving it to a utility function or into the `PackageSearchService` itself.
+このデバウンスロジックを再利用しようと考えるなら、
+ユーティリティ関数または `PackageSearchService`自体に移動することを検討してください。
 
 </div>
 

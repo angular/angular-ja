@@ -895,14 +895,13 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 
 {@a report-progress}
 
-## Tracking and showing request progress
+## リクエストの進行状況の追跡と表示
 
-Sometimes applications transfer large amounts of data and those transfers can take a long time.
-File uploads are a typical example.
-You can give the users a better experience by providing feedback on the progress of such transfers.
+アプリケーションが大量のデータを転送し、それらの転送に長い時間がかかる場合があります。
+ファイルのアップロードは典型的な例です。
+そのような転送の進捗状況に関するフィードバックを提供することにより、ユーザーによりよい経験を提供します。
 
-To make a request with progress events enabled, you can create an instance of `HttpRequest`
-with the `reportProgress` option set true to enable tracking of progress events.
+プログレスイベントを有効にしてリクエストを行うには、`reportProgress`オプションをtrueに設定して`HttpRequest`のインスタンスを作成し、プログレスイベントを追跡できるようにします。
 
 <code-example
   path="http/src/app/uploader/uploader.service.ts"
@@ -912,15 +911,15 @@ with the `reportProgress` option set true to enable tracking of progress events.
 
 <div class="alert is-important">
 
-**Tip**: Every progress event triggers change detection, so only turn them on if you need to report progress in the UI.
+**Tip**: すべてのプログレスイベントは変更検知をトリガーします。したがって、UIで進捗状況を本当に報告する必要がある場合にのみ、それらを有効にしてください。
 
-When using [`HttpClient.request()`](api/common/http/HttpClient#request) with an HTTP method, configure the method with
-[`observe: 'events'`](api/common/http/HttpClient#request) to see all events, including the progress of transfers.
+[`HttpClient.request()`](api/common/http/HttpClient#request)でHTTPメソッドを使うときには、
+[`observe: 'events'`](api/common/http/HttpClient#request)で転送の進捗を含むすべてのイベントを見るように設定してください。
 
 </div>
 
-Next, pass this request object to the `HttpClient.request()` method, which
-returns an `Observable` of `HttpEvents` (the same events processed by [interceptors](#interceptor-events)).
+次に、このリクエストオブジェクトを`HttpClient.request()`メソッドに渡します。
+このメソッドは、[インターセプター](#interceptor-events)によって処理されたのと同じイベントである`HttpEvents`の`Observable`を返します。
 
 <code-example
   path="http/src/app/uploader/uploader.service.ts"
@@ -928,7 +927,7 @@ returns an `Observable` of `HttpEvents` (the same events processed by [intercept
   header="app/uploader/uploader.service.ts (upload body)">
 </code-example>
 
-The `getEventMessage` method interprets each type of `HttpEvent` in the event stream.
+`getEventMessage`メソッドは、イベントストリーム中の各タイプの`HttpEvent`を解釈します。
 
 <code-example
   path="http/src/app/uploader/uploader.service.ts"
@@ -938,10 +937,8 @@ The `getEventMessage` method interprets each type of `HttpEvent` in the event st
 
 <div class="alert is-helpful">
 
-The sample app for this guide doesn't have a server that accepts uploaded files.
-The `UploadInterceptor` in `app/http-interceptors/upload-interceptor.ts`
-intercepts and short-circuits upload requests
-by returning an observable of simulated events.
+このガイドのサンプルアプリケーションには、アップロードされたファイルを受け入れるサーバーがありません。
+`app/http-interceptors/upload-interceptor.ts`の`UploadInterceptor`は、アップロードリクエストをインターセプトしてショートサーキットし、シミュレートされたイベントのObservableを返します。
 
 </div>
 

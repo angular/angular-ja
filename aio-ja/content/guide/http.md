@@ -738,44 +738,42 @@ TypeScriptにより、`HttpRequest`の読み取り専用プロパティは設定
   newReq = req.clone({ body: null }); // clear the body
 ```
 
-## Http interceptor use-cases
+## Httpインターセプターのユースケース
 
-Below are a number of common uses for interceptors.
+以下は、インターセプターのよくある使用法です。
 
-### Setting default headers
+### デフォルトのヘッダーをセットする
 
-Apps often use an interceptor to set default headers on outgoing requests.
+アプリケーションでは、送信するリクエストにインターセプターを使用してデフォルトのヘッダーを設定することがよくあります。
 
-The sample app has an `AuthService` that produces an authorization token.
-Here is its `AuthInterceptor` that injects that service to get the token and
-adds an authorization header with that token to every outgoing request:
+サンプルアプリケーションには、認可トークンを生成する`AuthService`があります。
+これは、トークンを取得するサービスを注入し、トークンを全ての送信するリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
 
 <code-example
   path="http/src/app/http-interceptors/auth-interceptor.ts"
   header="app/http-interceptors/auth-interceptor.ts">
 </code-example>
 
-The practice of cloning a request to set new headers is so common that
-there's a `setHeaders` shortcut for it:
+新しいヘッダーを設定するため、リクエストのクローンを作成するというプラクティスは非常に一般的であるため、
+`setHeaders`ショートカットがあります。
 
 <code-example
   path="http/src/app/http-interceptors/auth-interceptor.ts"
   region="set-header-shortcut">
 </code-example>
 
-An interceptor that alters headers can be used for a number of different operations, including:
+ヘッダーを変更するインターセプターは、次のようなさまざまな操作に使用できます。
 
-* Authentication/authorization
-* Caching behavior; for example, `If-Modified-Since`
-* XSRF protection
+* 認証/認可
+* キャッシュ動作。例えば、`If-Modified-Since`
+* XSRF防止
 
-### Logging request and response pairs
+### リクエストとレスポンスのペアをロギングする
 
-Because interceptors can process the request and response _together_, they can perform tasks such as timing and logging an entire HTTP operation.
+インターセプターはリクエストとレスポンスを_一緒に_処理できるため、HTTPオペレーション全体について時間の計測やログの記録ができます。
 
-Consider the following `LoggingInterceptor`, which captures the time of the request,
-the time of the response, and logs the outcome with the elapsed time
-with the injected `MessageService`.
+次の`LoggingInterceptor`を考えてみましょう。
+これは、リクエストの時間とレスポンスの時間を取得し、注入された`MessageService`で経過時間とともに結果を記録します。
 
 <code-example
   path="http/src/app/http-interceptors/logging-interceptor.ts"
@@ -783,21 +781,20 @@ with the injected `MessageService`.
   header="app/http-interceptors/logging-interceptor.ts)">
 </code-example>
 
-The RxJS `tap` operator captures whether the request succeeded or failed.
-The RxJS `finalize` operator is called when the response observable either errors or completes (which it must),
-and reports the outcome to the `MessageService`.
+RxJSの`tap`オペレーターは、リクエストが成功するか失敗したかを取得します。
+RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーとなったか、完了したとき（必ず起きる）に呼ばれ、その結果を`MessageService`に報告します。
 
-Neither `tap` nor `finalize` touch the values of the observable stream returned to the caller.
+`tap`も`finalize`も、呼び出し元に返されたObservableのストリームの値には影響を及ぼしません。
 
 {@a custom-json-parser}
 
-### Custom JSON parsing
+### カスタムJSONパース
 
-Interceptors can be used to replace the built-in JSON parsing with a custom implementation.
+インターセプターを使用して、組み込みのJSONパースをカスタム実装に置き換えることができます。
 
-The `CustomJsonInterceptor` in the following example demonstrates how to achieve this.
-If the intercepted request expects a `'json'` response, the `responseType` is changed to `'text'`
-to disable the built-in JSON parsing. Then the response is parsed via the injected `JsonParser`.
+次の例の`CustomJsonInterceptor`は、これを実現する方法を示しています。
+インターセプトされたリクエストが`'json'`レスポンスを期待している場合、組み込みのJSONパースを無効化するため、`responseType`は`'text'`に変更されます。
+次に、注入された`JsonParser`を介してレスポンスがパースされます。
 
 <code-example
   path="http/src/app/http-interceptors/custom-json-interceptor.ts"
@@ -805,8 +802,8 @@ to disable the built-in JSON parsing. Then the response is parsed via the inject
   header="app/http-interceptors/custom-json-interceptor.ts">
 </code-example>
 
-You can then implement your own custom `JsonParser`.
-Here is a custom JsonParser that has a special date reviver.
+独自のカスタム`JsonParser`を実装できます。
+これは、特別なdate reviverを持つカスタムJsonParserです。
 
 <code-example
   path="http/src/app/http-interceptors/custom-json-interceptor.ts"
@@ -814,7 +811,7 @@ Here is a custom JsonParser that has a special date reviver.
   header="app/http-interceptors/custom-json-interceptor.ts">
 </code-example>
 
-You provide the `CustomParser` along with the `CustomJsonInterceptor`.
+`CustomParser`とともに`CustomJsonInterceptor`を提供します。
 
 <code-example
   path="http/src/app/http-interceptors/index.ts"
@@ -824,14 +821,14 @@ You provide the `CustomParser` along with the `CustomJsonInterceptor`.
 
 
 {@a caching}
-### Caching requests
+### リクエストをキャッシュする
 
-Interceptors can handle requests by themselves, without forwarding to `next.handle()`.
+インターセプターは`next.handle()`に転送せずに、自分でリクエストを処理できます。
 
-For example, you might decide to cache certain requests and responses to improve performance.
-You can delegate caching to an interceptor without disturbing your existing data services.
+たとえば、パフォーマンスを向上させるために、特定のリクエストとレスポンスをキャッシュすると決めることがあります。
+既存のデータサービスを妨げることなく、インターセプターにキャッシュを移譲できます。
 
-The `CachingInterceptor` in the following example demonstrates this approach.
+次の例の`CachingInterceptor`はこのアプローチを示しています。
 
 <code-example
   path="http/src/app/http-interceptors/caching-interceptor.ts"
@@ -839,18 +836,16 @@ The `CachingInterceptor` in the following example demonstrates this approach.
   header="app/http-interceptors/caching-interceptor.ts)">
 </code-example>
 
-* The `isCacheable()` function determines if the request is cacheable.
-In this sample, only GET requests to the npm package search API are cacheable.
+* `isCachable()`関数はリクエストがキャッシュ可能かどうかを決定します。
+このサンプルでは、npmパッケージの検索APIに対するGETリクエストのみがキャッシュ可能です。
 
-* If the request is not cacheable, the interceptor forwards the request
-to the next handler in the chain.
+* リクエストがキャッシュ可能でない場合、インターセプターはリクエストをチェーン内の次のハンドラーに転送します。
 
-* If a cacheable request is found in the cache, the interceptor returns an `of()` _observable_ with
-the cached response, by-passing the `next` handler (and all other interceptors downstream).
+* キャッシング可能なリクエストがキャッシュ内に見つかった場合、インターセプターはキャッシュされたレスポンスを`of()`_Observable_で返し、`next`ハンドラー（および他のすべての下流のインターセプター）をバイパスします。
 
-* If a cacheable request is not in cache, the code calls `sendRequest()`.
-This function creates a [request clone](#immutability) without headers, because the npm API forbids them.
-The function then forwards the clone of the request to `next.handle()` which ultimately calls the server and returns the server's response.
+* キャッシュ可能なリクエストがキャッシュにない場合、コードは`sendRequest`を呼び出します。
+この関数は、ヘッダーなしで[リクエストのクローン](#immutability)を作成します。これは、npm APIがヘッダーを禁止しているためです。
+次に、この関数はリクエストのクローンを`next.handle()`に転送し、最終的にサーバーを呼び出してサーバーのレスポンスを返します。
 
 {@a send-request}
 <code-example
@@ -858,24 +853,21 @@ The function then forwards the clone of the request to `next.handle()` which ult
   region="send-request">
 </code-example>
 
-Note how `sendRequest()` intercepts the response on its way back to the application.
-This method pipes the response through the `tap()` operator, whose callback adds the response to the cache.
+`sendRequest`がアプリケーションに戻る途中の_レスポンスをインターセプトする_方法に注意してください。
+`tap()`オペレーターによりレスポンスを_パイプ_して、そのコールバックでレスポンスをキャッシュに追加します。
 
-The original response continues untouched back up through the chain of interceptors
-to the application caller.
+元のレスポンスは、インターセプターのチェーンを通ってアプリケーション呼び出し元にオリジナルの状態で戻ります。
 
-Data services, such as `PackageSearchService`, are unaware that
-some of their `HttpClient` requests actually return cached responses.
+`PackageSearchService`のようなデータサービスは、`HttpClient`リクエストのいくつかは実際にはキャッシュされたレスポンスを返すものがあることを知りません。
 
 {@a cache-refresh}
-### Using interceptors to request multiple values
+### インターセプターを使用して複数の値を要求する
 
-The `HttpClient.get()` method normally returns an observable that emits a single value, either the data or an error.
-An interceptor can change this to an observable that emits [multiple values](guide/observables).
+`HttpClient.get()`メソッドは通常、データまたはエラーのいずれかの単一の値を発行するObservableを返します。
+インターセプターは、[複数の値](guide/observables)を発出するObservableに変更できます。
 
-The following revised version of the `CachingInterceptor` optionally returns an observable that
-immediately emits the cached response, sends the request on to the npm web API,
-and emits again later with the updated search results.
+次の修正された`CachingInterceptor`は、任意でObservableを返します。
+このObservableは、キャッシュされたレスポンスをすぐに発出し、リクエストをnpm Web APIに送信し、最新の検索結果を再度発出します。
 
 <code-example
   path="http/src/app/http-interceptors/caching-interceptor.ts"
@@ -884,27 +876,22 @@ and emits again later with the updated search results.
 
 <div class="alert is-helpful">
 
-The _cache-then-refresh_ option is triggered by the presence of a custom `x-refresh` header.
+_cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダーが存在するとトリガーされます。
 
-A checkbox on the `PackageSearchComponent` toggles a `withRefresh` flag,
-which is one of the arguments to `PackageSearchService.search()`.
-That `search()` method creates the custom `x-refresh` header
-and adds it to the request before calling `HttpClient.get()`.
+`PackageSearchComponent`のチェックボックスは、`withRefresh`フラグを切り替えます。
+これは`PackageSearchService.search()`の引数のメソッドです。
+`search()`メソッドはカスタムの`x-refresh`ヘッダーを作成し、
+`HttpClient.get()`を呼び出す前にそれをリクエストに追加します。
 
 </div>
 
-The revised `CachingInterceptor` sets up a server request
-whether there's a cached value or not,
-using the same `sendRequest()` method described [above](#send-request).
-The `results$` observable makes the request when subscribed.
+修正された`CachingInterceptor`は、[上記](#send-request)で説明したのと同じ`sendRequest()`メソッドを使用して、キャッシュされた値があるかどうかに関係なく、サーバーリクエストを設定します。
+`results$`observableは、サブスクライブ時にリクエストを行います。
 
-* If there's no cached value, the interceptor returns `results$`.
+* キャッシュされた値がない場合、インターセプターは`results$`を返します。
 
-* If there is a cached value, the code _pipes_ the cached response onto
-`results$`, producing a recomposed observable that emits twice,
-the cached response first (and immediately), followed later
-by the response from the server.
-Subscribers see a sequence of two responses.
+* キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`に_パイプ_します。そして、最初に（ただちに）キャッシュされた応答を発出し、その後にサーバーからのレスポンスを発出する、再構成されたObservableを作成します。
+サブスクライバーは、連続の2つの応答を参照します。
 
 {@a report-progress}
 

@@ -3,7 +3,7 @@
 ほとんどのフロントエンドアプリケーションは、データのダウンロードやアップロードや他のバックエンドサービスへのアクセスのため、HTTPプロトコルによりサーバーと通信する必要があります。
 Angularは、Angularアプリケーション向けのHTTPクライアントのAPIとして、`@angular/common/http`内に`HttpClient` サービスクラスを提供しています。
 
-HTTP client serviceの主な機能は以下の通りです。
+HTTP client serviceの主な機能は以下のとおりです。
 
 * [型付けされたレスポンスオブジェクト](#typed-response)を要求
 * 最新式の[error handling](#error-handling).
@@ -12,7 +12,7 @@ HTTP client serviceの主な機能は以下の通りです。
 
 ##### 前提条件
 
-`HttpClientModule`を使用する前に、以下の基礎的な理解が必要です。
+`HttpClientModule`を使用する前に、次の基礎的な理解が必要です。
 
 * TypeScriptプログラミング
 * HTTPプロトコル
@@ -84,8 +84,8 @@ options: {
 
 <div class="alert is-helpful">
 
-`options` オブジェクトは送信するリクエストに対して他にも様々な設定を行うことができます。
-例えば、[Adding headers](#adding-headers)にあるように、サービスは `headers`オプションプロパティを使ってデフォルトのヘッダーを設定できます。
+`options` オブジェクトは送信するリクエストに対して他にもさまざまな設定を行うことができます。
+たとえば、[Adding headers](#adding-headers)にあるように、サービスは `headers`オプションプロパティを使ってデフォルトのヘッダーを設定できます。
 
 `params` プロパティで [HTTP URL parameters](#url-params)の設定を行い、 `reportProgress` オプションで大量のデータを送信するときの [listen for progress events](#report-progress) の設定を行うことができます。
 
@@ -105,7 +105,7 @@ options: {
 
 {@a config-service}
 
-例は、データ処理機能を果たす再利用可能な[injectable service](guide/glossary#service "service definition")を定義することで、スケーラブルな解決法を生み出すためのベストプラクティスに従っています。
+例は、データ処理機能を果たす再利用可能な[injectable service](guide/glossary#service "service definition")を定義することで、スケーラブルな解決法を生み出すためのベストプラクティスにしたがっています。
 データの取得に加え、サービスはデータの後処理、エラーハンドリングの追加、リトライロジックの追加が可能です。
 
 `ConfigService` は `HttpClient.get()` メソッドにより、このファイルを取得します。
@@ -175,7 +175,7 @@ Subscription のコールバックは最小限の後処理を行います。
 </code-example>
 
 インターフェースで定義されているプロパティにアクセスするには、JSONから取得したプレーンオブジェクトを必要なレスポンス型に明示的に変換する必要があります。
-例えば、次の`subscribe`コールバックは、`data`をObjectとして受け取り、プロパティにアクセスするためにそれを型キャストします。
+たとえば、次の`subscribe`コールバックは、`data`をObjectとして受け取り、プロパティにアクセスするためにそれを型キャストします。
 
 <code-example>
    .subscribe(data => this.config = {
@@ -200,7 +200,7 @@ options: {
     ...
   }
 ```
-これは混乱を引き起こす可能性があります。例えば、
+これは混乱を引き起こす可能性があります。たとえば、
 
 ```typescript
 // this works
@@ -252,7 +252,7 @@ client.get('/foo', options);
  >
 </code-example>
 
-ご覧の通り、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
+ご覧のとおり、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
 
 ### JSONPリクエストの作成
 
@@ -353,7 +353,7 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
 成功する可能性があります。
 
 [RxJS library](guide/rx-library)はいくつかの_retry_オペレーターを提供します。
-例えば、`retry()`オペレーターは、失敗した`Observable`を指定された回数だけ自動的に再サブスクライブします。`HttpClient`メソッド呼び出しの結果を_再サブスクライブ_すると、HTTPリクエストを再発行する効果があります。
+たとえば、`retry()`オペレーターは、失敗した`Observable`を指定された回数だけ自動的に再サブスクライブします。`HttpClient`メソッド呼び出しの結果を_再サブスクライブ_すると、HTTPリクエストを再発行する効果があります。
 
 次の例は、失敗したリクエストをエラーハンドラーに渡す前に、`retry()`オペレーターにパイプする方法を示しています。
 
@@ -368,12 +368,12 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
 
 サーバーからデータを取得することに加えて、`HttpClient`は、リモートデータを変更するために使用できるPUT、POST、DELETEなどの他のHTTPメソッドをサポートします。
 
-このガイドのサンプルアプリには、ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の要約版が含まれています。
+このガイドのサンプルアプリケーションには、ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の要約版が含まれています。
 次のセクションでは、サンプルの`HeroesService`からのデータ更新メソッドの例を示します。
 
 ### POSTリクエストの作成
 
-多くの場合、アプリはフォームを送信するときにPOSTリクエストを使用してサーバーにデータを送信します。
+多くの場合、アプリケーションはフォームを送信するときにPOSTリクエストを使用してサーバーにデータを送信します。
 次の例では、データベースにヒーローを追加するときに、`HeroesService`がHTTP POSTリクエストを実行します。
 
 <code-example
@@ -389,7 +389,7 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
 
 この例では、[前述](#error-details)のようにエラーをキャッチします。
 
-`HeroesComponent`がこのサービスのメソッドが返す`Observable`をサブスクライブすることによって、実際のPOST処理が開始します。
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のPOST処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -409,7 +409,7 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
   header="app/heroes/heroes.service.ts (deleteHero)">
 </code-example>
 
-`HeroesComponent`がこのサービスのメソッドが返す`Observable`をサブスクライブすることによって、実際のDELETE処理が開始します。
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のDELETE処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -417,7 +417,7 @@ RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コード
   header="app/heroes/heroes.component.ts (deleteHero)">
 </code-example>
 
-コンポーネントは削除処理の結果を要求していないため、コールバックなしでサブスクライブします。結果を使用していなくても、サブスクライブする必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
+コンポーネントは削除処理の結果を要求していないため、コールバックなしでサブスクライブします。結果を使用していなくても、購読する必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
 
 <div class="alert is-important">
 
@@ -453,7 +453,7 @@ HTTPリクエストの実行は_遅延型_であり、実際に何かが起こ�
 <div class="alert is-helpful">
 
 実際、各`subscribe()`、Observableの個別の独立した実行を開始します。
-2回サブスクライブすると、2つのHTTPリクエストが発生します。
+2回購読すると、2つのHTTPリクエストが発生します。
 
 ```javascript
 const req = http.get<Heroes>('/api/heroes');
@@ -476,16 +476,16 @@ req.subscribe();
   header="app/heroes/heroes.service.ts (updateHero)">
 </code-example>
 
-Observableを返すHTTPメソッドについて言えば、呼び出し元の`HeroesComponent.update()`はリクエストを開始するため、`HttpClient.put()`から返されたObservableを[`subscribe()`する必要があります。](#always-subscribe "Why you must always subscribe.")
+Observableを返すHTTPメソッドについていえば、呼び出し元の`HeroesComponent.update()`はリクエストを開始するため、`HttpClient.put()`から返されたObservableを[`subscribe()`する必要があります。](#always-subscribe "Why you must always subscribe.")
 
 ### ヘッダーの追加と更新
 
-多くのサーバーでは、保存処理のために追加のヘッダーが必要です。。
-例えば、サーバーは、認証トークンや、リクエスト本文のMIMEタイプを明示的に宣言するため「Content-Type」ヘッダーを必要とする場合があります。
+多くのサーバーでは、保存処理のために追加のヘッダーが必要です。
+たとえば、サーバーは、認証トークンや、リクエスト本文のMIMEタイプを明示的に宣言するため「Content-Type」ヘッダーを必要とする場合があります。
 
 ##### ヘッダーの追加
 
-`HeroesService`は、`HttpClient`の保存メソッド全てに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義します。
+`HeroesService`は、`HttpClient`の保存メソッドすべてに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義します。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -524,8 +524,8 @@ import {HttpParams} from "@angular/common/http";
   region="searchHeroes" linenums="false">
 </code-example>
 
-検索語がある場合、コードはHTML URLエンコードされた検索パラメーターを持つoptionsオブジェクトを作成します。
-例えば検索語が「cat」の場合、GETリクエストのURLは`api/heroes?name=cat`になります。
+検索語がある場合、コードはHTML URLエンコードされた検索パラメーターをもつoptionsオブジェクトを作成します。
+たとえば検索語が「cat」の場合、GETリクエストのURLは`api/heroes?name=cat`になります。
 
 `HttpParams`オブジェクトはイミュータブルです。optionsを更新する必要がある場合、`.set()`メソッドの戻り値を保存してください。
 
@@ -709,7 +709,7 @@ TypeScriptにより、`HttpRequest`の読み取り専用プロパティは設定
   req.body.name = req.body.name.trim(); // bad idea!
 ```
 
-リクエストボディを変更する必要がある場合は、次の手順に従ってください。
+リクエストボディを変更する必要がある場合は、次の手順にしたがってください。
 
 1. ボディをコピーして、コピーに変更を加えます。
 2. `clone()`メソッドを使用して、リクエストオブジェクトのクローンを作成します。
@@ -747,7 +747,7 @@ TypeScriptにより、`HttpRequest`の読み取り専用プロパティは設定
 アプリケーションでは、送信するリクエストにインターセプターを使用してデフォルトのヘッダーを設定することがよくあります。
 
 サンプルアプリケーションには、認可トークンを生成する`AuthService`があります。
-これは、トークンを取得するサービスを注入し、トークンを全ての送信するリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
+これは、トークンを取得するサービスを注入し、トークンをすべての送信するリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
 
 <code-example
   path="http/src/app/http-interceptors/auth-interceptor.ts"
@@ -765,7 +765,7 @@ TypeScriptにより、`HttpRequest`の読み取り専用プロパティは設定
 ヘッダーを変更するインターセプターは、次のようなさまざまな操作に使用できます。
 
 * 認証/認可
-* キャッシュ動作。例えば、`If-Modified-Since`
+* キャッシュ動作。たとえば、`If-Modified-Since`
 * XSRF保護
 
 ### リクエストとレスポンスのペアをロギングする
@@ -803,7 +803,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 </code-example>
 
 独自のカスタム`JsonParser`を実装できます。
-これは、特別なdate reviverを持つカスタムJsonParserです。
+これは、特別なdate reviverをもつカスタムJsonParserです。
 
 <code-example
   path="http/src/app/http-interceptors/custom-json-interceptor.ts"
@@ -1001,7 +1001,7 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 ### *switchMap()*オペレーターの使用
 
 The `switchMap()`オペレーターは、`Observable`を返す関数を引数に取ります。
-例えば、`PackageSearchService.search`は他のデータサービスメソッドと同様に`Observable`を返します。
+たとえば、`PackageSearchService.search`は他のデータサービスメソッドと同様に`Observable`を返します。
 以前の検索リクエストがまだ実行中である場合（接続が悪い場合など）、
 オペレーターはリクエストをキャンセルして新しいリクエストを送信します。
 

@@ -635,62 +635,62 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 
 </div>
 
-### Interceptor order
+### インターセプターの順番
 
-Angular applies interceptors in the order that you provide them.
-For example, consider a situation in which you want to handle the authentication of your HTTP requests and log them before sending them to a server. To accomplish this task, you could provide an `AuthInterceptor` service and then a `LoggingInterceptor` service.
-Outgoing requests would flow from the `AuthInterceptor` to the `LoggingInterceptor`.
-Responses from these requests would flow in the other direction, from `LoggingInterceptor` back to `AuthInterceptor`.
-The following is a visual representation of the process:
+Angularは、あなたが提供した順序でインターセプターを適用します。
+たとえば、サーバーに送信する前にHTTPリクエストの認証を処理し、ログに記録する必要がある状況を考えてみます。 このタスクを実行するには、`AuthInterceptor`サービスを提供してから、`LoggingInterceptor`サービスを提供します。
+送信リクエストは`AuthInterceptor`から`LoggingInterceptor`に流れます。
+これらのリクエストからのレスポンスは、`LoggingInterceptor`から`AuthInterceptor`へと逆方向に流れます。
+以下は、プロセスを視覚的に表したものです。
 
 <div class="lightbox">
-  <img src="generated/images/guide/http/interceptor-order.svg" alt="Interceptor in order of HttpClient, AuthInterceptor, AuthInterceptor, HttpBackend, Server, and back in opposite order to show the two-way flow">
+  <img src="generated/images/guide/http/interceptor-order.svg" alt="HttpClient、AuthInterceptor、AuthInterceptor、HttpBackend、Serverの順と、その逆に並んだインターセプターで、双方向のフローを表しています">
 </div>
 
 <div class="alert is-helpful">
 
-   The last interceptor in the process is always the `HttpBackend` that handles communication with the server.
+   プロセスの最後のインターセプターは常に、サーバーとの通信を処理する`HttpBackend`です。
 
 </div>
 
-You cannot change the order or remove interceptors later.
-If you need to enable and disable an interceptor dynamically, you'll have to build that capability into the interceptor itself.
+後で順序を変更したり、インターセプターを削除したりすることはできません。
+インターセプターを動的に有効または無効にする必要がある場合は、その機能をインターセプター自体に組み込む必要があります。
 
 {@a interceptor-events}
 
-### Handling interceptor events
+### インターセプターイベントの処理
 
-Most `HttpClient` methods return observables of `HttpResponse<any>`.
-The `HttpResponse` class itself is actually an event, whose type is `HttpEventType.Response`.
-A single HTTP request can, however, generate multiple events of other types, including upload and download progress events.
-The methods `HttpInterceptor.intercept()` and `HttpHandler.handle()` return observables of `HttpEvent<any>`.
+ほとんどの`HttpClient`メソッドは`HttpResponse<any>`のObservableを返します。
+`HttpResponse`クラス自体は実際にはイベントであり、その型は`HttpEventType.Response`です。
+ただし、単一のHTTPリクエストで、アップロードおよびダウンロードの進行状況イベントなど、他の型の複数のイベントが発生する可能性があります。
+`HttpInterceptor.intercept()`や`HttpHandler.handle()`は`HttpEvent<any>`のObservableを返します。
 
-Many interceptors are only concerned with the outgoing request and return the event stream from `next.handle()` without modifying it.
-Some interceptors, however, need to examine and modify the response from `next.handle()`; these operations can see all of these events in the stream.
+多くのインターセプターは、送信リクエストのみに関係し、リクエストを変更せずに `next.handle()`からイベントストリームを返します。
+ただし、一部のインターセプターは、`next.handle()`からのレスポンスを検査して変更する必要があります。これらの操作は、ストリーム内のこれらすべてのイベントを確認できます。
 
 {@a immutability}
 
-Although interceptors are capable of modifying requests and responses,
-the `HttpRequest` and `HttpResponse` instance properties are `readonly`,
-rendering them largely immutable.
-They are immutable for a good reason: an app might retry a request several times before it succeeds, which means that the interceptor chain can re-process the same request multiple times.
-If an interceptor could modify the original request object, the re-tried operation would start from the modified request rather than the original. Immutability ensures that interceptors see the same request for each try.
+インターセプターはリクエストとレスポンスを変更できますが、
+`HttpRequest`と`HttpResponse`インスタンスのプロパティは`readonly`であり、
+ほとんどイミュータブルになります。
+これらは正当な理由で不変です。アプリケーションはリクエストが成功する前に数回再試行する場合がある、すなわち、インターセプターチェーンが同じリクエストを複数回再処理する可能性があるためです。
+インターセプターが元のリクエストオブジェクトを変更できる場合、再試行された操作は、元のリクエストではなく、変更されたリクエストから開始します。イミュータビリティは、インターセプターが試行ごとに同じ要求を確認することを保証します。
 
 <div class="alert is-helpful">
 
-   Your interceptor should return every event without modification unless it has a compelling reason to do otherwise.
+   インターセプターは、やむを得ない理由がない限り、変更せずにすべてのイベントを返す必要があります。
 
 </div>
 
-TypeScript prevents you from setting `HttpRequest` read-only properties.
+TypeScriptにより、`HttpRequest`の読み取り専用プロパティは設定できません。
 
 ```javascript
   // Typescript disallows the following assignment because req.url is readonly
   req.url = req.url.replace('http://', 'https://');
 ```
 
-If you must alter a request, clone it first and modify the clone before passing it to `next.handle()`.
-You can clone and modify the request in a single step, as shown in the following example.
+リクエストを変更する必要がある場合は、最初にクローンを作成し、クローンを変更してから`next.handle()`に渡します。
+次の例に示すように、リクエストを1つのステップで複製および変更できます。
 
 <code-example
   path="http/src/app/http-interceptors/ensure-https-interceptor.ts"
@@ -698,22 +698,22 @@ You can clone and modify the request in a single step, as shown in the following
   header="app/http-interceptors/ensure-https-interceptor.ts (excerpt)">
 </code-example>
 
-The `clone()` method's hash argument allows you to mutate specific properties of the request while copying the others.
+`clone()`メソッドのハッシュ引数を使用すると、リクエストの特定のプロパティを変更しながら、他のプロパティをコピーできます。
 
-#### Modifying a request body
+#### リクエストボディの変更
 
-The `readonly` assignment guard can't prevent deep updates and, in particular,
-it can't prevent you from modifying a property of a request body object.
+`readonly`への代入に対するガードは、深い更新を防ぐことはできません。特に、
+リクエストボディオブジェクトのプロパティを変更することを防ぐことはできません。
 
 ```javascript
   req.body.name = req.body.name.trim(); // bad idea!
 ```
 
-If you must modify the request body, follow these steps.
+リクエストボディを変更する必要がある場合は、次の手順に従ってください。
 
-1. Copy the body and make your change in the copy.
-2. Clone the request object, using its `clone()` method.
-3. Replace the clone's body with the modified copy.
+1. ボディをコピーして、コピーに変更を加えます。
+2. `clone()`メソッドを使用して、リクエストオブジェクトのクローンを作成します。
+3. クローンのボディを変更されたコピーに置き換えます。
 
 <code-example
   path="http/src/app/http-interceptors/trim-name-interceptor.ts"
@@ -721,14 +721,14 @@ If you must modify the request body, follow these steps.
   header="app/http-interceptors/trim-name-interceptor.ts (excerpt)">
 </code-example>
 
-#### Clearing the request body in a clone
+#### クローンのリクエストボディをクリアする
 
-Sometimes you need to clear the request body rather than replace it.
-To do this, set the cloned request body to `null`.
+リクエストボディを置き換えるのではなく、クリアする必要がある場合があります。
+これを行うには、複製されたリクエストボディを `null`に設定します。
 
 <div class="alert is-helpful">
 
-**Tip**: If you set the cloned request body to `undefined`, Angular assumes you intend to leave the body as is.
+**Tip**: 複製されたリクエストボディを`undefined`に設定すると、Angularはボディをそのままにしておくつもりであると想定します。
 
 </div>
 

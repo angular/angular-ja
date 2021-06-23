@@ -766,7 +766,7 @@ TypeScriptにより、`HttpRequest`の読み取り専用プロパティは設定
 
 * 認証/認可
 * キャッシュ動作。例えば、`If-Modified-Since`
-* XSRF防止
+* XSRF保護
 
 ### リクエストとレスポンスのペアをロギングする
 
@@ -1016,36 +1016,34 @@ The `switchMap()`オペレーターは、`Observable`を返す関数を引数に
 </div>
 
 
-## Security: XSRF protection
+## セキュリティ：XSRF保護
 
-[Cross-Site Request Forgery (XSRF or CSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery) is an attack technique by which the attacker can trick an authenticated user into unknowingly executing actions on your website.
-`HttpClient` supports a [common mechanism](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token) used to prevent XSRF attacks.
-When performing HTTP requests, an interceptor reads a token from a cookie, by default `XSRF-TOKEN`, and sets it as an HTTP header, `X-XSRF-TOKEN`.
-Since only code that runs on your domain could read the cookie, the backend can be certain that the HTTP request came from your client application and not an attacker.
+[Cross-Site Request Forgery (XSRF or CSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery)は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。
+`HttpClient`は、XSRF攻撃を防ぐための[共通メカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token)をサポートしています。
+HTTPリクエストを実行するとき、インターセプターはクッキーからトークンを読み取り（デフォルトでは「XSRF-TOKEN」）、それをHTTPヘッダの`X-XSRF-TOKEN`として設定します。
+ドメインで実行されているコードのみがクッキーを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションから送信されたことを確認できます。
 
-By default, an interceptor sends this header on all mutating requests (such as POST)
-to relative URLs, but not on GET/HEAD requests or on requests with an absolute URL.
+デフォルトでは、インターセプターは相対URLへのすべての変更リクエスト（POSTなど）に対してこのヘッダーを送信しますが、GET/HEADリクエストや絶対URLには送りません。
 
-To take advantage of this, your server needs to set a token in a JavaScript readable session cookie called `XSRF-TOKEN` on either the page load or the first GET request.
-On subsequent requests the server can verify that the cookie matches the `X-XSRF-TOKEN` HTTP header, and therefore be sure that only code running on your domain could have sent the request.
-The token must be unique for each user and must be verifiable by the server; this prevents the client from making up its own tokens.
-Set the token to a digest of your site's authentication cookie with a salt for added security.
+これを利用するには、サーバーがページ読み込みまたは最初のGETリクエストのいずれかで、`XSRF-TOKEN`というJavaScriptで読み取れるセッションクッキーにトークンを設定する必要があります。
+その後のリクエストでは、サーバーはクッキーが`X-XSRF-TOKEN`HTTPヘッダーと一致することを検証でき、したがって、ドメイン上で実行されているコードだけがリクエストを送信できることを保証します。
+トークンは、各ユーザーごとに一意でなければならず、サーバーによって検証可能でなければなりません。これにより、クライアントは独自のトークンを作成することができなくなります。
+セキュリティを強化するために、ソルトをつけたサイトの認証クッキーのダイジェストをトークンに設定します。
 
-In order to prevent collisions in environments where multiple Angular apps share the same domain or subdomain, give each application a unique cookie name.
+複数のAngularアプリケーションが同じドメインまたはサブドメインを共有する環境での衝突を防ぐために、各アプリケーションに固有のクッキー名を付けましょう。
 
 <div class="alert is-important">
 
-*`HttpClient` supports only the client half of the XSRF protection scheme.*
-Your backend service must be configured to set the cookie for your page, and to verify that
-the header is present on all eligible requests.
-Failing to do so renders Angular's default protection ineffective.
+*`HttpClient`は、XSRFプロテクションのスキームの半分であるクライアント側をサポートするのみです。*
+バックエンドサービスは、ページのクッキーを設定し、
+該当するすべてのリクエストにヘッダーが存在することを検証するように構成する必要があります。
+そうでない場合、Angularのデフォルトの保護は効果がありません。
 
 </div>
 
-### Configuring custom cookie/header names
+### カスタムのクッキー/ヘッダーの名前を設定する
 
-If your backend service uses different names for the XSRF token cookie or header,
-use `HttpClientXsrfModule.withOptions()` to override the defaults.
+バックエンドサービスがXSRFトークンのクッキーまたはヘッダーに異なる名前を使っている場合、`HttpClientXsrfModule.withConfig()`を使用してデフォルト設定を上書きします。
 
 <code-example
   path="http/src/app/app.module.ts"

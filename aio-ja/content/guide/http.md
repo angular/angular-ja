@@ -3,7 +3,7 @@
 ほとんどのフロントエンドアプリケーションは、データのダウンロードやアップロードや他のバックエンドサービスへのアクセスのため、HTTPプロトコルによりサーバーと通信する必要があります。
 Angularは、Angularアプリケーション向けのHTTPクライアントのAPIとして、`@angular/common/http`内に`HttpClient` サービスクラスを提供しています。
 
-HTTP client serviceの主な機能は以下のとおりです。
+HTTP client serviceの主な機能は次のとおりです。
 
 * [型付けされたレスポンスオブジェクト](#typed-response)を要求
 * 最新式の[error handling](#error-handling).
@@ -1198,6 +1198,6 @@ Angularは、`HttpContextToken`を使用してコンテキスト内への値の�
 
 `HttpRequest`インスタンスの他の多くの性質とは異なり、リクエストコンテキストは変更可能であり、リクエストの他の不変の変換間で持続します。
 これにより、インターセプターはコンテキストを介してオペレーターを協調して動作させることができます。
-例えば、`RetryInterceptor`の例では、2番目のコンテキストトークンを使用して、特定のリクエストの実行中に発生したエラーの数を追跡できます。
+たとえば、`RetryInterceptor`の例では、2番目のコンテキストトークンを使用して、特定のリクエストの実行中に発生したエラーの数を追跡できます。
 
 <code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="mutable-context" header="coordinating operations through the context"></code-example>

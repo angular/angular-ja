@@ -483,6 +483,7 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 多くのサーバーでは、保存処理のために追加のヘッダーが必要です。
 たとえば、サーバーは、認証トークンや、リクエスト本文のMIMEタイプを明示的に宣言するため「Content-Type」ヘッダーを必要とする場合があります。
 
+{@a adding-headers}
 ##### ヘッダーの追加
 
 `HeroesService`は、`HttpClient`の保存メソッドすべてに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義します。
@@ -569,7 +570,7 @@ export abstract class HttpHandler {
 }
 ```
 
-`intercept()`と同様に、`handle()`メソッドは、HTTPリクエストを最終的にサーバーのレスポンスを含む[`HttpEvents`](#httpevents)の`Observable`に変換します。`intercept()`メソッドは、そのObservableを検査し、呼び出し元に返す前に変更することができます。
+`intercept()`と同様に、`handle()`メソッドは、HTTPリクエストを最終的にサーバーのレスポンスを含む[`HttpEvents`](#interceptor-events)の`Observable`に変換します。`intercept()`メソッドは、そのObservableを検査し、呼び出し元に返す前に変更することができます。
 
 _何もしない_インターセプターは、元のリクエストを渡して`next.handle()`を呼び出し、何もせずにObservableを返します。
 
@@ -635,6 +636,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 
 </div>
 
+{@a interceptor-order}
 ### インターセプターの順番
 
 Angularは、あなたが提供した順序でインターセプターを適用します。
@@ -1051,34 +1053,30 @@ HTTPリクエストを実行するとき、インターセプターはクッキ�
 </code-example>
 
 {@a testing-requests}
-## Testing HTTP requests
+## HTTPリクエストをテストする
 
-As for any external dependency, you must mock the HTTP backend so your tests can simulate interaction with a remote server.
-The `@angular/common/http/testing` library makes it straightforward to set up such mocking.
+外部依存関係と同様に、HTTPバックエンドをモックして、テストでリモートサーバーとのやりとりをシミュレートできるようにする必要があります。
+`@angular/common/http/testing`ライブラリでは、そのようなモッキングを簡単に設定できます。
 
-Angular's HTTP testing library is designed for a pattern of testing in which the app executes code and makes requests first.
-The test then expects that certain requests have or have not been made,
-performs assertions against those requests,
-and finally provides responses by "flushing" each expected request.
+Angular HTTPテストライブラリは、アプリケーションがコードを実行してリクエストを最初に行うテストパターン用に設計されています。
+テストは特定のリクエストが作成されたかどうかを期待し、
+リクエストに対してアサーションを実行し、
+最終的に期待された各リクエストを「フラッシュ」することによってレスポンスを提供します。
 
-At the end, tests can verify that the app has made no unexpected requests.
+最後に、期待しないリクエストをしていないことを確認します。
 
 <div class="alert is-helpful">
 
-You can run <live-example stackblitz="specs">these sample tests</live-example>
-in a live coding environment.
+実際のコーディング環境で<live-example stackblitz="specs">これらのサンプルテスト</live-example>を実行できます。
 
-The tests described in this guide are in `src/testing/http-client.spec.ts`.
-There are also tests of an application data service that call `HttpClient` in
-`src/app/heroes/heroes.service.spec.ts`.
+このガイドで説明されているテストは、`src/testing/http-client.spec.ts`にあります。
+`src/app/heroes/heroes.service.spec.ts`に`HttpClient`を呼び出すアプリケーションデータサービスのテストもあります。
 
 </div>
 
-### Setup for testing
+### テストのセットアップ
 
-To begin testing calls to `HttpClient`,
-import the `HttpClientTestingModule` and the mocking controller, `HttpTestingController`,
-along with the other symbols your tests require.
+`HttpClient`への呼び出しをテストするには、`HttpClientTestingModule`とモックコントローラ`HttpTestingController`をテストに必要な他のシンボルと共にインポートしてください。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1086,8 +1084,7 @@ along with the other symbols your tests require.
   header="app/testing/http-client.spec.ts (imports)">
 </code-example>
 
-Then add the `HttpClientTestingModule` to the `TestBed` and continue with
-the setup of the _service-under-test_.
+次に`HttpClientTestingModule`を`TestBed`に追加し_テスト環境のサービス_の設定を続けます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1095,14 +1092,13 @@ the setup of the _service-under-test_.
   header="app/testing/http-client.spec.ts(setup)">
 </code-example>
 
-Now requests made in the course of your tests hit the testing backend instead of the normal backend.
+テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットするでしょう。
 
-This setup also calls `TestBed.inject()` to inject the `HttpClient` service and the mocking controller
-so they can be referenced during the tests.
+この設定では`TestBed.inject()`を呼び出して`HttpClient`サービスとモックコントローラを注入し、テスト中に参照できるようにします。
 
-### Expecting and answering requests
+### リクエストの期待と応答
 
-Now you can write a test that expects a GET Request to occur and provides a mock response.
+これで、GETリクエストの発生を期待し、モックレスポンスを提供するテストを作成できます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1110,50 +1106,49 @@ Now you can write a test that expects a GET Request to occur and provides a mock
   header="app/testing/http-client.spec.ts (HttpClient.get)">
 </code-example>
 
-The last step, verifying that no requests remain outstanding, is common enough for you to move it into an `afterEach()` step:
+最後に残ったステップは、未解決のリクエストが残ってないことを確認することです。これは、`afterEach()`ステップに移動して行うことが一般的です。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
   region="afterEach">
 </code-example>
 
-#### Custom request expectations
+#### カスタムリクエストの期待
 
-If matching by URL isn't sufficient, it's possible to implement your own matching function.
-For example, you could look for an outgoing request that has an authorization header:
+URLによる照合では不十分な場合は、独自の照合機能を実装することができます。
+たとえば、認可ヘッダーをもつ外部へのリクエストを検索できます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
   region="predicate">
 </code-example>
 
-As with the previous `expectOne()`,
-the test fails if 0 or 2+ requests satisfy this predicate.
+以前の`expectOne()`と同様に、0または2以上のリクエストがこの条件を満たしていれば、テストは失敗します。
 
-#### Handling more than one request
+#### 複数のリクエストの処理
 
-If you need to respond to duplicate requests in your test, use the `match()` API instead of `expectOne()`.
-It takes the same arguments but returns an array of matching requests.
-Once returned, these requests are removed from future matching and
-you are responsible for flushing and verifying them.
+テストで重複したリクエストに応答する必要がある場合は、`expectOne()`の代わりに`match()`APIを使用してください。
+同じ引数をとりますが、一致するリクエストの配列を返します。
+これらのリクエストは一度返されると、今後の照合から削除され、
+それらをフラッシュして検証する必要があります。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
   region="multi-request">
 </code-example>
 
-### Testing for errors
+### エラーのテスト
 
-You should test the app's defenses against HTTP requests that fail.
+失敗したHTTPリクエストに対してアプリケーションがどう防御しているかテストする必要があります。
 
-Call `request.flush()` with an error message, as seen in the following example.
+次の例に示すように、エラーメッセージと共に`request.flush()`を呼び出します。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
   region="404">
 </code-example>
 
-Alternatively, you can call `request.error()` with an `ErrorEvent`.
+あるいは、`ErrorEvent`と共に`request.error()`を呼び出すこともできます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"

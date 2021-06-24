@@ -1156,48 +1156,48 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 </code-example>
 
 
-## Passing metadata to interceptors
+## メタデータをインターセプターに渡す
 
-Many interceptors require or benefit from configuration. Consider an interceptor that retries failed requests.
-By default, the interceptor might retry a request three times, but you might want to override this retry count for particularly error-prone or sensitive requests.
+多くのインターセプターは、設定を必要とするか、設定から恩恵を受けます。失敗したリクエストをリトライするインターセプターについて考えてみます。
+デフォルトでは、インターセプターはリクエストを3回リトライするとよいですが、特にエラーが発生しやすいリクエストや機密性の高いリクエストの場合は、このリトライ回数を上書きすることをお勧めします。
 
-`HttpClient` requests contain a _context_ that can carry metadata about the request.
-This context is available for interceptors to read or modify, though it is not transmitted to the backend server when the request is sent.
-This allows applications or other interceptors to tag requests with configuration parameters, such as how many times to retry a request.
+`HttpClient`リクエストには、リクエストに関するメタデータを運ぶことができる_コンテキスト_が含まれています。
+このコンテキストは、インターセプターが読み取りまたは変更するために使用できますが、リクエスト送信時にバックエンドサーバーには送信されません。
+これにより、アプリケーションまたは他のインターセプターは、リクエストに対しリクエストをリトライする回数などの設定パラメーターを付加できます。
 
-### Creating a context token
+### コンテキストトークンの作成
 
-Angular stores and retrieves a value in the context using an `HttpContextToken`.
-You can create a context token using the `new` operator, as in the following example:
+Angularは、`HttpContextToken`を使用してコンテキスト内への値の格納とコンテキストからの値の取得を行います。
+次の例のように、`new`オペレーターを使用してコンテキストトークンを作成できます。
 
 <code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="context-token" header="creating a context token"></code-example>
 
-The lambda function `() => 3` passed during the creation of the `HttpContextToken` serves two purposes:
+`HttpContextToken`の作成中に渡されるラムダ関数`() => 3`は2つの目的を果たします。
 
-1. It allows TypeScript to infer the type of this token: `HttpContextToken<number>`.
-  The request context is type-safe&mdash;reading a token from a request's context returns a value of the appropriate type.
+1. このトークンの型を、`HttpContextToken<number>`と推論できるようにします。
+  リクエストコンテキストは型安全です。&mdash;リクエストのコンテキストからトークンを読み取ると、適切な型の値が返されます
 
-1. It sets the default value for the token.
-  This is the value that the request context returns if no other value has been set for this token.
-  Using a default value avoids the need to check if a particular value is set.
+1. トークンのデフォルト値を設定します。
+  これは、このトークンに他の値が設定されていない場合にリクエストコンテキストが返す値です。
+  デフォルト値を使用すると、特定の値が設定されているかどうかを確認する必要がなくなります。
 
-### Setting context values when making a request
+### リクエスト時にコンテキスト値を設定する
 
-When making a request, you can provide an `HttpContext` instance, in which you have already set the context values.
+リクエストを行うときに、コンテキスト値をすでに設定している`HttpContext`インスタンスを提供できます。
 
 <code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="set-context" header="setting context values"></code-example>
 
-### Reading context values in an interceptor
+### インターセプターでのコンテキスト値の読み取り
 
-Within an interceptor, you can read the value of a token in a given request's context with `HttpContext.get()`.
-If you have not explicitly set a value for the token, Angular returns the default value specified in the token.
+インターセプター内では、`HttpContext.get()`を使用して、特定のリクエストのコンテキストでトークンの値を読み取ることができます。
+トークンの値を明示的に設定していない場合、Angularはトークンに指定されたデフォルト値を返します。
 
 <code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="reading-context" header="reading context values in an interceptor"></code-example>
 
-### Contexts are mutable
+### コンテキストは変更可能
 
-Unlike most other aspects of `HttpRequest` instances, the request context is mutable and persists across other immutable transformations of the request.
-This allows interceptors to coordinate operations through the context.
-For instance, the `RetryInterceptor` example could use a second context token to track how many errors occur during the execution of a given request:
+`HttpRequest`インスタンスの他の多くの性質とは異なり、リクエストコンテキストは変更可能であり、リクエストの他の不変の変換間で持続します。
+これにより、インターセプターはコンテキストを介してオペレーターを協調して動作させることができます。
+例えば、`RetryInterceptor`の例では、2番目のコンテキストトークンを使用して、特定のリクエストの実行中に発生したエラーの数を追跡できます。
 
 <code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="mutable-context" header="coordinating operations through the context"></code-example>

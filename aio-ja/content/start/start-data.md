@@ -109,13 +109,13 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
     </code-example>
 
-1. **Checkout**ボタンをクリックして、新しい `CartComponent` が期待どおりに動作することを確認します。
+1. **Checkout**ボタンをクリックした際に`/cart`のURLにルーティングされるようにしましょう。 
     `top-bar.component.html` に `/cart` を指す `routerLink` ディレクティブを追加します。
 
     <code-example header="src/app/top-bar/top-bar.component.html" path="getting-started/src/app/top-bar/top-bar.component.html" region="cart-route">
     </code-example>
 
-1. 新しいカートコンポーネントを表示するには、"チェックアウト" ボタンをクリックします。 
+1. 新しいカートコンポーネントを表示するには、**Checkout**ボタンをクリックします。 
     デフォルトのテキスト "cart works!" を確認できます。そしてURLのパターンは `https://getting-started.stackblitz.io/cart`です。`getting-started.stackblitz.io` の部分はStackBlitzプロジェクトによって異なる場合があります。
 
     <div class="lightbox">
@@ -126,7 +126,7 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
 ここでは、カートサービスを利用してカート内に商品を表示させる方法をご紹介します。
 
-1. cart.component.ts` で、`cart.service.ts` ファイルから `CartService` をインポートする。
+1. `cart.component.ts` で、`cart.service.ts` ファイルから `CartService` をインポートする。
 
     <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.2.ts" region="imports">
     </code-example>

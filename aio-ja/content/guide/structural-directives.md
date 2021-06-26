@@ -133,7 +133,8 @@ Angularは `i` と `odd` をコンテキストの `index` と `odd` プロパテ
 パーサーはパスカルケース(PascalCase)をすべてのディレクティブに適用し、それらの前に `ngFor` などのディレクティブの属性名を付けます。
 たとえば、`ngFor` の入力プロパティである `of` と `trackBy` は、`ngForOf` と  `ngForTrackBy` にマッピングされます。
 `NgFor`ディレクティブがリストをループすると、独自のコンテキストオブジェクトのプロパティが設定およびリセットされます。
-これらのプロパティには、`index`、`odd`、および `$implicit` という名前の特別なプロパティを含めることができますが、これらに限定されません。
+これらのプロパティには、`index`、`odd`、および `$implicit` という名前の特別なプロパティを含めることができますが、
+これらに限定されません。
 
 Angularは `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
 
@@ -220,7 +221,8 @@ Angularは、構造ディレクティブの短縮表記を次のように通常�
     <td><code>[prefixKey] "expression"
     (let-prefixKey="export")</code>
     <br />
-    <code>prefix</code> が <code>key</code>に追加されていることに注意してください
+    <code>prefix</code> が
+    <code>key</code> に追加されていることに注意してください
     </td>
   </tr>
   <tr>
@@ -283,7 +285,8 @@ Angularは、構造ディレクティブの短縮表記を次のように通常�
 このような関数を提供して、型チェッカーがコンパイル時に式の適切な型を推測できるようにします。
 
 たとえば、`NgIf` の実装では、型の絞り込みを使用して、`*ngIf` への入力式が `true` である場合にのみテンプレートがインスタンス化されるようにしています。
-特定の型要件を提供するために、`NgIf` ディレクティブは [静的プロパティ `ngTemplateGuard_ngIf: 'binding'`](api/common/NgIf#static-properties) を定義しています。
+特定の型要件を提供するために、`NgIf` ディレクティブは
+[静的プロパティ `ngTemplateGuard_ngIf: 'binding'`](api/common/NgIf#static-properties) を定義しています。
 `binding` の値は、入力式を評価して型の要件を満たすという、一般的な型の絞り込みのための特殊なケースです。
 
 テンプレート内のディレクティブへの入力式に、より具体的な型を提供するには、ディレクティブに `ngTemplateGuard_xx`プロパティを追加します。ここでの静的プロパティ名の接尾辞 `xx` は `@Input()` フィールド名です。
@@ -312,7 +315,7 @@ export class AppComponent {
 }
 </code-example>
 
-この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の2つの状態のいずれかを許可します。ディレクティブの `state` を入力として使用される式は、その時点でのロード状態が不明であるため、`LoadingState` です。
+この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の2つの状態のいずれかを許可します。ディレクティブの `state` を入力として使用される式は、その時点でのロード状態が不明であるため、包括的な `LoadingState` 型です。
 
 `ifLoadedDirective` の定義では、絞り込みの動作を表現する静的関数 `ngTemplateGuard_state` を宣言しています。
 `AppComponent` テンプレートの中で、`*ifLoaded` 構造ディレクティブは、`state` が実際に `Loaded<Person>` である場合にのみ、このテンプレートをレンダリングすべきです。

@@ -1,14 +1,14 @@
 # HTTPによるバックエンドサービスとの通信
 
-ほとんどのフロントエンドアプリケーションは、データのダウンロードやアップロードや他のバックエンドサービスへのアクセスのため、HTTPプロトコルによりサーバーと通信する必要があります。
-Angularは、Angularアプリケーション向けのHTTPクライアントのAPIとして、`@angular/common/http`内に`HttpClient` サービスクラスを提供しています。
+ほとんどのフロントエンドアプリケーションは、データをダウンロードやアップロードし、他のバックエンドサービスにアクセスするため、HTTPプロトコルを使用してサーバーと通信する必要があります。
+Angularは、Angularアプリケーション向けのHTTPクライアントのAPIとして、`@angular/common/http`内に`HttpClient`サービスクラスを提供しています。
 
-HTTP client serviceの主な機能は次のとおりです。
+HTTPクライアントサービスの主な機能は次のとおりです。
 
 * [型付けされたレスポンスオブジェクト](#typed-response)を要求
-* 最新式の[error handling](#error-handling).
+* 簡素化された[エラーハンドリング](#error-handling).
 * [テスタビリティ](#testing-http-requests)
-* リクエストとレスポンスへの[interception](#intercepting-requests-and-responses).
+* リクエストとレスポンスへの[インターセプション](#intercepting-requests-and-responses).
 
 ##### 前提条件
 
@@ -16,13 +16,13 @@ HTTP client serviceの主な機能は次のとおりです。
 
 * TypeScriptプログラミング
 * HTTPプロトコル
-* [Angular Concepts](guide/architecture)で説明されている、Angularアプリケーションのアーキテクチャ
-* Observableのテクニックとoperatorについて。[Observables](guide/observables)ガイドを参照
+* [Angularの概念の紹介](guide/architecture)で説明されている、Angularアプリケーションのアーキテクチャ
+* Observable技術とオペレーターについて。[Observables](guide/observables)ガイドを参照。
 
 ## サーバーとの通信の設定
 
-`HttpClient`を使用可能にするには, Angularの`HttpClientModule`をインポートする必要があります。
-ほとんどのアプリケーションではルートの`AppModule`で行います。
+`HttpClient`を使う前に、Angularの`HttpClientModule`をインポートする必要があります。
+ほとんどのアプリケーションはルートの`AppModule`で行います。
 
 <code-example
   path="http/src/app/app.module.ts"
@@ -30,7 +30,7 @@ HTTP client serviceの主な機能は次のとおりです。
   header="app/app.module.ts (excerpt)">
 </code-example>
 
-そして、次の`ConfigService`の例のように、依存として`HttpClient`サービスをアプリケーションに注入します。
+そして、次の`ConfigService`の例に示すように、依存として`HttpClient`サービスをアプリケーションクラスに注入できるようになります。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -38,7 +38,7 @@ HTTP client serviceの主な機能は次のとおりです。
   header="app/config/config.service.ts (excerpt)">
 </code-example>
 
-`HttpClient` サービスはすべてのトランザクションで[observables](guide/glossary#observable "Observable definition")を使用します。サンプルのスニペットに現れるRxJS observableとoperatorをインポートする必要があります。これらの`ConfigService`のインポートは典型的なものです。
+`HttpClient` サービスはすべてのトランザクションで[Observable](guide/glossary#observable "Observable definition")を使用します。サンプルのスニペットに現れるRxJS Observableとオペレーターをインポートする必要があります。これらの`ConfigService`のインポートは典型的なものです。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -48,13 +48,13 @@ HTTP client serviceの主な機能は次のとおりです。
 
 <div class="alert is-helpful">
 
-You can run the <live-example></live-example> that accompanies this guide.
+このガイドを達成する<live-example></live-example>を実行できます。
 
-サンプルアプリケーションはデータサーバーを必要としていません。
-_HttpClient_ モジュールの `HttpBackend`を[Angular _in-memory-web-api_](https://github.com/angular/angular/tree/master/packages/misc/angular-in-memory-web-api)に依存しています。
-この代わりのサービスはREST-likeなバックエンドの振る舞いをシミュレートしたものです。
+サンプルアプリはデータサーバーを必要としません。
+_HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
+この置き換えのサービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
 
-`AppModule` の _imports_ をご覧ください。
+それがどのように設定されているかを確認するには、`AppModule`の_imports_を見てください。
 
 </div>
 

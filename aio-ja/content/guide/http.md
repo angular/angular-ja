@@ -7,7 +7,7 @@ HTTP client serviceの主な機能は次のとおりです。
 
 * [型付けされたレスポンスオブジェクト](#typed-response)を要求
 * 最新式の[error handling](#error-handling).
-* [テスタビリティ](#testing-requests)
+* [テスタビリティ](#testing-http-requests)
 * リクエストとレスポンスへの[interception](#intercepting-requests-and-responses).
 
 ##### 前提条件
@@ -1053,7 +1053,7 @@ HTTPリクエストを実行するとき、インターセプターはクッキ�
   region="xsrf">
 </code-example>
 
-{@a testing-requests}
+{@a testing-http-requests}
 ## HTTPリクエストをテストする
 
 外部依存関係と同様に、HTTPバックエンドをモックして、テストでリモートサーバーとのやりとりをシミュレートできるようにする必要があります。

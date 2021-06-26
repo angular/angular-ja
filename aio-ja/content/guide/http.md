@@ -58,13 +58,13 @@ _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory
 
 </div>
 
-## サーバーにデータを要求する
+## サーバーにデータをリクエストする
 
 サーバーからデータを取得するには、[`HttpClient.get()`](api/common/http/HttpClient#get)メソッドを使います。
-非同期メソッドがHTTPリクエストを送信し、レスポンスを受信すると要求されたデータを発するObservableを返します。
-戻り値の型は呼び出し時に渡す `observe` と `responseType` の値によって変わります。
+非同期メソッドがHTTPリクエストを送信し、レスポンスを受信すると要求されたデータを発行するObservableを返します。
+戻り値の型は呼び出し時に渡す`observe`と`responseType`の値によって変わります。
 
-`get()` メソッドは2つの引数を取ります。取得エンドポイントURLと、リクエストの設定をするための *options* オブジェクトです。
+`get()`メソッドは2つの引数を取ります。取得元のエンドポイントURLと、リクエストの設定をするための*options* オブジェクトです。
 
 ```
 options: {
@@ -77,38 +77,38 @@ options: {
   }
 ```
 
-*observe* と *responseType* プロパティは、重要なオプションです。
+*observe*と*responseType*プロパティは、重要なオプションです。
 
 * *observe* オプションはどのくらいの量のレスポンスを返すのかを指定します。
 * *responseType* オプションはどのようなフォーマットでデータを返すのかを指定します。
 
 <div class="alert is-helpful">
 
-`options` オブジェクトは送信するリクエストに対して他にもさまざまな設定を行うことができます。
-たとえば、[Adding headers](#adding-headers)にあるように、サービスは `headers`オプションプロパティを使ってデフォルトのヘッダーを設定できます。
+`options`オブジェクトは送信するリクエストに対して他にもさまざまな設定を行うことができます。
+たとえば、[ヘッダーの追加](#adding-headers)にあるように、サービスは `headers`オプションプロパティを使ってデフォルトのヘッダーを設定できます。
 
-`params` プロパティで [HTTP URL parameters](#url-params)の設定を行い、 `reportProgress` オプションで大量のデータを送信するときの [listen for progress events](#report-progress) の設定を行うことができます。
+`params`プロパティでリクエストの[HTTP URLパラメーター](#url-params)の設定を行い、`reportProgress`オプションで大量のデータを送信するときの[リクエストの進行状況の監視](#report-progress)の設定を行うことができます。
 
 </div>
 
 アプリケーションはサーバーにJSONデータを要求することがよくあります。
-`ConfigService` の例では、アプリケーションはリソースURLを指定する `config.json` という設定ファイルが必要です。
+`ConfigService`の例では、アプリケーションはリソースURLを指定する `config.json`という設定ファイルが必要です。
 
 <code-example
   path="http/src/assets/config.json"
   header="assets/config.json">
 </code-example>
 
-この種のデータを取得するには、 `get()` の呼び出し時に次のオプションが必要です: `{observe: 'body', responseType: 'json'}` 。
+この種のデータを取得するには、`get()`の呼び出し時に次のオプションが必要です: `{observe: 'body', responseType: 'json'}` 。
 これらはオプションのデフォルト値であるため、次の例ではoptionsオブジェクトを渡していません。
-追加で指定できるオプションは、後続のセクションで説明します。
+追加で指定可能なオプションは、後続のセクションで説明します。
 
 {@a config-service}
 
-例は、データ処理機能を果たす再利用可能な[injectable service](guide/glossary#service "service definition")を定義することで、スケーラブルな解決法を生み出すためのベストプラクティスにしたがっています。
-データの取得に加え、サービスはデータの後処理、エラーハンドリングの追加、リトライロジックの追加が可能です。
+この例は、データ処理機能を実行するため再利用できる[注入可能なサービス](guide/glossary#service "service definition")を定義することで、スケーラブルな解決法を生み出す上でのベストプラクティスにしたがっています。
+サービスは、データの取得に加え、データの後処理、エラー処理の追加、リトライロジックの追加が可能です。
 
-`ConfigService` は `HttpClient.get()` メソッドにより、このファイルを取得します。
+`ConfigService`は`HttpClient.get()`メソッドにより、このファイルを取得します。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -116,13 +116,13 @@ options: {
   header="app/config/config.service.ts (getConfig v.1)">
 </code-example>
 
-`ConfigComponent` は `ConfigService` を注入し、
-`getConfig` サービスメソッドを呼び出します。
+`ConfigComponent`は`ConfigService`を注入し、
+`getConfig`サービスメソッドを呼び出します。
 
-サービスメソッドが設定データの `Observable` を返すため、
-コンポーネントはメソッドの戻り値を *subscribe* します。
-Subscription のコールバックは最小限の後処理を行います。
-データフィールドの内容がコンポーネントの `config` オブジェクトにコピーされ、表示用にコンポーネントテンプレートへデータバインドされます。
+サービスメソッドが設定データの`Observable`を返すため、
+コンポーネントはメソッドの戻り値を*サブスクライブ*します。
+サブスクリプションのコールバックは最小限の後処理を行います。
+データフィールドの内容がコンポーネントの`config`オブジェクトにコピーされ、表示用にコンポーネントテンプレートへデータバインドされます。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -132,19 +132,19 @@ Subscription のコールバックは最小限の後処理を行います。
 
 {@a typed-response}
 
-### 型付けされたレスポンスの要求
+### 型付けされたレスポンスをリクエストする
 
-レスポンスオブジェクトの型を宣言する`HttpClient` リクエストを構築し、出力を消費するのをより簡単かつ明確にすることができます。
-レスポンスの型を指定することは、コンパイル時に型アサーションとして機能します。
+`HttpClient`のリクエストを、そのレスポンスオブジェクトの型を宣言して構成すると、アウトプットをより簡単かつ明瞭に使えます。
+レスポンスの型を指定することでコンパイル時に型アサーションとして機能します。
 
 <div class="alert is-important">
 
-レスポンスの型を指定することは、レスポンスが与えられた型であるとして扱うべきであるというTypeScriptへの宣言です。
+レスポンスの型の指定は、レスポンスを指定された型として扱うべきであるというTypeScriptへの宣言です。
 これはビルド時のチェックであり、サーバーが実際にこの型のオブジェクトでレスポンスを返すことは保証しません。サーバーAPIによって指定された型が返されることを保証するのは、サーバーの責任です。
 
 </div>
 
-レスポンスオブジェクトの型を指定するため、最初に必要なプロパティを持ったインターフェースを定義してください。
+まず、レスポンスオブジェクトの型を指定するため、必要なプロパティを持ったインターフェースを定義してください。
 レスポンスはクラスのインスタンスに自動的に変換ができないプレーンオブジェクトであるため、クラスではなくインターフェースを使用してください。
 
 <code-example
@@ -152,7 +152,7 @@ Subscription のコールバックは最小限の後処理を行います。
   region="config-interface">
 </code-example>
 
-次に、そのインターフェースを `HttpClient.get()` 呼び出しの型パラメータとして指定してください。
+次に、そのインターフェースを`HttpClient.get()`呼び出しの型パラメーターとして指定してください。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -162,11 +162,11 @@ Subscription のコールバックは最小限の後処理を行います。
 
 <div class="alert is-helpful">
 
- インターフェースを型パラメータとして `HttpClient.get()` メソッドに渡す際、[RxJS `map` operator](guide/rx-library#operators)を使用してUIで必要とされる形式にレスポンスデータを変換することができます。そして、変換されたデータを[async pipe](api/common/AsyncPipe)に渡すことができます。
+ インターフェースを型パラメーターとして`HttpClient.get()`メソッドに渡す際、[RxJSの`map`オペレーター](guide/rx-library#operators)を使用してUIで必要とされる形式にレスポンスデータを変換することができます。そして、変換されたデータを[asyncパイプ](api/common/AsyncPipe)に渡すことができます。
 
 </div>
 
-最新のコンポーネントメソッドのコールバックは、型付けされたデータオブジェクトを受け取ります。これは消費がより簡単で安全です。
+更新されたコンポーネントメソッドのコールバックは、型付けされたデータオブジェクトを受け取ります。これは使用がより簡単で安全です。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -174,8 +174,8 @@ Subscription のコールバックは最小限の後処理を行います。
   header="app/config/config.component.ts (showConfig v.2)">
 </code-example>
 
-インターフェースで定義されているプロパティにアクセスするには、JSONから取得したプレーンオブジェクトを必要なレスポンス型に明示的に変換する必要があります。
-たとえば、次の`subscribe`コールバックは、`data`をObjectとして受け取り、プロパティにアクセスするためにそれを型キャストします。
+インターフェースで定義されているプロパティにアクセスするには、JSONから取得したプレーンオブジェクトを必要なレスポンスの型に明示的に変換する必要があります。
+たとえば、次の`subscribe`のコールバックは、`data`をObjectとして受け取り、プロパティにアクセスするためにそれを型キャストします。
 
 <code-example>
    .subscribe(data => this.config = {
@@ -187,9 +187,9 @@ Subscription のコールバックは最小限の後処理を行います。
 {@a string-union-types}
 
 <div class="callout is-important">
-<header>*observe*と*response*型</header>
+<header>*observe*と*response*の型</header>
 
-`observe`オプションと`response`オプションの型は、単純なstringではなく*string unions*です。
+`observe`オプションと`response`オプションの型は、単なるstringではなく*string unions*です。
 
 ```
 options: {
@@ -228,22 +228,22 @@ client.get('/foo', options);
 
 </div>
 
-### 完全なレスポンスの読み取り
+### レスポンス全体の読み取り
 
 前の例で、`HttpClient.get()`の呼び出しでは何のオプションも指定していませんでした。デフォルトでは、レスポンスボディに含まれているJSONデータを返しました。
 
 レスポンスボディに含まれているよりも多くのトランザクションに関する情報が必要になる場合があります。サーバーは、アプリケーションワークフローにとって重要な特定の状態を表すために、特別なヘッダーまたはステータスコードを返す場合があります。
 
-`get（）`メソッドの `observe`オプションにより、完全なレスポンスが必要であることを` HttpClient`に伝えます。
+`get()`メソッドの`observe`オプションにより、レスポンス全体が必要であることを`HttpClient`に伝えます。
 
 <code-example
   path="http/src/app/config/config.service.ts"
   region="getConfigResponse">
 </code-example>
 
-これで、 `HttpClient.get（）`は、ボディに含まれるJSONデータだけでなく、 `HttpResponse`型の` Observable`を返します。
+これで、`HttpClient.get()`は、ボディに含まれるJSONデータだけでなく、 `HttpResponse`型の`Observable`を返します。
 
-コンポーネントの`showConfigResponse（）`メソッドは、レスポンスヘッダーと設定値を表示します。
+コンポーネントの`showConfigResponse()`メソッドは、レスポンスヘッダーと設定値を表示します。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -252,14 +252,14 @@ client.get('/foo', options);
  >
 </code-example>
 
-ご覧のとおり、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
+見ての通り、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
 
 ### JSONPリクエストの作成
 
-サーバーが[CORSプロトコル](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)をサポートしていない場合、アプリケーションは`HttpClient` を使用してドメインをまたいで[JSONP](https://en.wikipedia.org/wiki/JSONP)リクエストを実行できます。
+サーバーが[CORSプロトコル](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)をサポートしていない場合、アプリケーションは`HttpClient`を使用してドメインをまたいで[JSONP](https://en.wikipedia.org/wiki/JSONP)リクエストを実行できます。
 
 AngularのJSONPリクエストは`Observable`を返します。
-[async pipe](api/common/AsyncPipe)を使用して結果を処理する前に、Observableをsubscribeするためのパターンに従い、RxJSの`map`演算子を使用してレスポンスを変換します。
+Observableをサブスクライブするためのパターンに従い、[asyncパイプ](api/common/AsyncPipe)を使用して結果を処理する前に、RxJSの`map`オペレーターを使用してレスポンスを変換します。
 
 Angularでは、`NgModule`のインポートに`HttpClientJsonpModule`を含めることで、JSONPを使用します。
 次の例では、`searchHeroes()`メソッドはJSONPリクエストを使用して、名前に検索語が含まれているヒーローをクエリします。
@@ -276,10 +276,10 @@ searchHeroes(term: string): Observable {
 }
 ```
 
-このリクエストは、1つ目の引数として `heroesURL`を渡し、2つ目の引数としてコールバック関数名を渡します。
-レスポンスはコールバック関数でラップされます。コールバック関数は、JSONPメソッドによって返されたObservableを取得し、それらをエラーハンドラーにパイプします。
+このリクエストは、1つ目の引数として`heroesURL`を渡し、2つ目の引数としてコールバック関数名を渡します。
+レスポンスはコールバック関数でラップされます。そのコールバック関数は、JSONPメソッドによって返されたObservableを受け取って、パイプでエラーハンドラーに通します。
 
-### 非JSONデータのリクエスト
+### JSON以外のデータをリクエストする
 
 すべてのAPIがJSONデータを返すわけではありません。
 この次の例では、`DownloaderService`のメソッドがサーバーからテキストファイルを読み取り、ファイルの内容をログに記録してから、それらの内容を` Observable<string>`として呼び出し元に返します。
@@ -292,9 +292,9 @@ searchHeroes(term: string): Observable {
 
 `HttpClient.get()`は`responseType`オプションがあるため、デフォルトのJSONではなく文字列を返します。
 
-RxJSの `tap`演算子は、「wiretap（盗聴器）」のように、コードがObservableを妨害せずに成功値とエラー値の両方を検査することを許可します。
+RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、Obervableを通過する正常値とエラー値の双方を、コードがそれらを妨害することなく検査できます。
 
-`DownloaderComponent`の`download()`メソッドは、サービスのメソッドをsubscribeすることでリクエストを開始します。
+`DownloaderComponent`の`download()`メソッドは、サービスのメソッドをサブスクライブすることでリクエストを開始します。
 
 <code-example
   path="http/src/app/downloader/downloader.component.ts"

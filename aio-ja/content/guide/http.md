@@ -1018,6 +1018,7 @@ The `switchMap()`オペレーターは、`Observable`を返す関数を引数に
 </div>
 
 
+{@a security-xsrf-protection}
 ## セキュリティ：XSRF保護
 
 [Cross-Site Request Forgery (XSRF or CSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery)は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。

@@ -364,9 +364,9 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
 
 ## サーバーへのデータの送信
 
-サーバーからデータを取得することに加えて、`HttpClient`は、リモートデータを変更するために使用できるPUT、POST、DELETEなどの他のHTTPメソッドをサポートします。
+サーバーからデータを取得することに加えて、`HttpClient`はPUT、POST、DELETEなどの他のHTTPメソッドをサポートしています。これらは遠隔のデータを変更するために使用できます。
 
-このガイドのサンプルアプリケーションには、ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の要約版が含まれています。
+このガイドのサンプルアプリケーションには、ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の簡略版が含まれています。
 次のセクションでは、サンプルの`HeroesService`からのデータ更新メソッドの例を示します。
 
 ### POSTリクエストの作成
@@ -380,12 +380,12 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.service.ts (addHero)">
 </code-example>
 
-`HttpClient.post()`メソッドは、型パラメータがあり、サーバーが特定の型のデータを返すことを期待すると明示できるという点で、`get()`に似ています。このメソッドは、リソースURLと2つの追加パラメーターを取ります。
+`HttpClient.post()`メソッドは、型パラメータがあり、サーバーが特定の型のデータを返すことを期待するのを明示できるという点で、`get()`に似ています。このメソッドは、リソースURLと2つの追加パラメーターを取ります。
 
 * *body* - POSTするリクエストのボディ内のデータ
-* *options* - メソッドオプションを含むオブジェクト。この場合のオプションは、[必要なヘッダーを指定してください](#adding-headers)。
+* *options* - メソッドオプションを含むオブジェクト。この場合のオプションは、[必要なヘッダーを指定してします](#adding-headers)。
 
-この例では、[前述](#error-details)のようにエラーをキャッチします。
+この例では、[前述](#error-details)のようにエラーを捕捉します。
 
 `HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のPOST処理が開始します。
 
@@ -395,11 +395,11 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.component.ts (addHero)">
 </code-example>
 
-サーバーが正常に新しく追加されたヒーローを返すと、コンポーネントはそのヒーローを画面に表示された`heroes`リストに追加します。
+サーバーが新しく追加されたヒーローを正常に返すと、コンポーネントはそのヒーローを画面に表示されている`heroes`リストに追加します。
 
 ### DELETEリクエストの作成
 
-このアプリケーションは、リクエストURLでヒーローのIDを渡すことにより、`HttpClient.delete`メソッドを使用してヒーローを削除します。
+このアプリケーションは、リクエストURLにヒーローのIDを渡すことによって、`HttpClient.delete`メソッドを使用してヒーローを削除します。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -407,7 +407,7 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.service.ts (deleteHero)">
 </code-example>
 
-`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のDELETE処理が開始します。
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`をサブスクライブすることによって、実際のDELETE処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -415,11 +415,11 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.component.ts (deleteHero)">
 </code-example>
 
-コンポーネントは削除処理の結果を要求していないため、コールバックなしでサブスクライブします。結果を使用していなくても、購読する必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
+コンポーネントは削除処理の結果を要求していないため、コールバックなしでサブスクライブします。結果を使用していなくても、サブスクライブする必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
 
 <div class="alert is-important">
 
-_subscribe()_を呼び出す必要があります。そうしないと、何も起こりません。`HeroesService.deleteHero()`を呼び出すだけでは、DELETEリクエストは開始しません。
+_subscribe()_を呼び出さなければ何も起こりません。`HeroesService.deleteHero()`を呼び出すだけでは、DELETEリクエストは開始されません。
 
 </div>
 
@@ -430,7 +430,7 @@ _subscribe()_を呼び出す必要があります。そうしないと、何も�
 </code-example>
 
 {@a always-subscribe}
-**常に_subscribe_!**
+**いつも_subscribe_!**
 
 `HttpClient`のメソッドは、そのメソッドが返すObservableに対し`subscribe()`を呼び出すまで、HTTPリクエストを開始しません。これは_すべての_`HttpClient`のメソッドに当てはまります。
 
@@ -440,18 +440,18 @@ _subscribe()_を呼び出す必要があります。そうしないと、何も�
 
 </div>
 
-`HttpClient`のメソッドは意図的に_コールド_になっています。
-HTTPリクエストの実行は_遅延型_であり、実際に何かが起こる前に、`tap`や`catchError`などの追加のオペレーターでobservableを拡張できます。
+`HttpClient`のメソッドから返されたすべてのObservableは、意図的に_コールド_になっています。
+HTTPリクエストは_遅延実行_され、実際に何かが起こる前に、`tap`や`catchError`などの追加のオペレーターでObservableを拡張できます。
 
 `subscribe(...)`を呼び出すと、Observableの実行がトリガーされ、
-`HttpClient`はHTTPリクエストを作成してサーバーに送信します。
+`HttpClient`がHTTPリクエストを作成してサーバーに送信します。
 
-これらのObservableは、実際のHTTPリクエストの_青写真_と考えることができます。
+これらのObservableは、実際のHTTPリクエストの_設計図_と考えることができます。
 
 <div class="alert is-helpful">
 
-実際、各`subscribe()`、Observableの個別の独立した実行を開始します。
-2回購読すると、2つのHTTPリクエストが発生します。
+実際、各`subscribe()`により、Observableは個々で独立して実行を開始します。
+2回サブスクライブすると、2つのHTTPリクエストが発生します。
 
 ```javascript
 const req = http.get<Heroes>('/api/heroes');
@@ -478,13 +478,13 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 
 ### ヘッダーの追加と更新
 
-多くのサーバーでは、保存処理のために追加のヘッダーが必要です。
-たとえば、サーバーは、認証トークンや、リクエスト本文のMIMEタイプを明示的に宣言するため「Content-Type」ヘッダーを必要とする場合があります。
+多くのサーバーでは、保存操作のために追加のヘッダーが必要です。
+たとえば、サーバーは認可トークンや、リクエスト本文のMIMEタイプを明示的に宣言するために「Content-Type」ヘッダーを必要とする場合があります。
 
 {@a adding-headers}
 ##### ヘッダーの追加
 
-`HeroesService`は、`HttpClient`の保存メソッドすべてに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義します。
+`HeroesService`は、`HttpClient`の保存メソッドすべてに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義しています。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -494,10 +494,10 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 
 ##### ヘッダーの更新
 
-`HttpHeaders`クラスのインスタンスは不変であるため、前述のoptionsオブジェクト内の既存のヘッダーを直接変更することはできません。
+`HttpHeaders`クラスのインスタンスはイミュータブルなので、前述のoptionsオブジェクト内の既存のヘッダーを直接変更することはできません。
 代わりに`set()`メソッドを使用して、新しい変更が適用された現在のインスタンスのクローンを返します。
 
-次の例は、古いトークンの有効期限が切れたときに、次のリクエストを行う前に認証ヘッダーを更新する方法を示しています。
+次の例は、古いトークンの有効期限が切れたときに、次のリクエストを行う前に認可ヘッダーを更新する方法を示しています。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"

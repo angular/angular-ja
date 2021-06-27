@@ -1054,19 +1054,19 @@ HTTPリクエストを実行するとき、インターセプターはクッキ�
 {@a testing-http-requests}
 ## HTTPリクエストをテストする
 
-外部依存関係と同様に、HTTPバックエンドをモックして、テストでリモートサーバーとのやりとりをシミュレートできるようにする必要があります。
+外部依存と同様に、テストがリモートサーバーとのやりとりをシミュレートできるようにするには、HTTPバックエンドをモックする必要があります。
 `@angular/common/http/testing`ライブラリでは、そのようなモッキングを簡単に設定できます。
 
-Angular HTTPテストライブラリは、アプリケーションがコードを実行してリクエストを最初に行うテストパターン用に設計されています。
+AngularのHTTPテスティングライブラリは、アプリケーションがコードを実行してリクエストを行うテストパターンに向けて設計されています。
 テストは特定のリクエストが作成されたかどうかを期待し、
 リクエストに対してアサーションを実行し、
 最終的に期待された各リクエストを「フラッシュ」することによってレスポンスを提供します。
 
-最後に、期待しないリクエストをしていないことを確認します。
+最後に、期待しないリクエストをしていないことを確認できます。
 
 <div class="alert is-helpful">
 
-実際のコーディング環境で<live-example stackblitz="specs">これらのサンプルテスト</live-example>を実行できます。
+ライブコーディング環境で<live-example stackblitz="specs">これらのサンプルテスト</live-example>を実行できます。
 
 このガイドで説明されているテストは、`src/testing/http-client.spec.ts`にあります。
 `src/app/heroes/heroes.service.spec.ts`に`HttpClient`を呼び出すアプリケーションデータサービスのテストもあります。
@@ -1075,7 +1075,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
 
 ### テストのセットアップ
 
-`HttpClient`への呼び出しをテストするには、`HttpClientTestingModule`とモックコントローラ`HttpTestingController`をテストに必要な他のシンボルと共にインポートしてください。
+`HttpClient`への呼び出しをテストするには、`HttpClientTestingModule`とモックコントローラ`HttpTestingController`を、テストに必要な他のシンボルと共にインポートしてください。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1083,7 +1083,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
   header="app/testing/http-client.spec.ts (imports)">
 </code-example>
 
-次に`HttpClientTestingModule`を`TestBed`に追加し_テスト環境のサービス_の設定を続けます。
+次に`HttpClientTestingModule`を`TestBed`に追加し、_テスト環境下のサービス_の設定を続けます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1091,7 +1091,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
   header="app/testing/http-client.spec.ts(setup)">
 </code-example>
 
-テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットするでしょう。
+これで、テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットします。
 
 この設定では`TestBed.inject()`を呼び出して`HttpClient`サービスとモックコントローラを注入し、テスト中に参照できるようにします。
 
@@ -1105,7 +1105,7 @@ Angular HTTPテストライブラリは、アプリケーションがコード�
   header="app/testing/http-client.spec.ts (HttpClient.get)">
 </code-example>
 
-最後に残ったステップは、未解決のリクエストが残ってないことを確認することです。これは、`afterEach()`ステップに移動して行うことが一般的です。
+最後に残ったステップは、未解決のリクエストが残っていないことを確認することです。これは、`afterEach()`ステップに移動して行うことが一般的です。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1128,7 +1128,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 
 テストで重複したリクエストに応答する必要がある場合は、`expectOne()`の代わりに`match()`APIを使用してください。
 同じ引数をとりますが、一致するリクエストの配列を返します。
-これらのリクエストは一度返されると、今後の照合から削除され、
+これらのリクエストは一度返されると、その後の照合から削除され、
 それらをフラッシュして検証する必要があります。
 
 <code-example
@@ -1138,7 +1138,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 
 ### エラーのテスト
 
-失敗したHTTPリクエストに対してアプリケーションがどう防御しているかテストする必要があります。
+失敗したHTTPリクエストに対するアプリケーションの防御をテストするべきです。
 
 次の例に示すように、エラーメッセージと共に`request.flush()`を呼び出します。
 

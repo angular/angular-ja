@@ -506,9 +506,9 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 
 {@a url-params}
 
-## HTTP URLパラメーターの構成
+## HTTP URLパラメーターの設定
 
-`HttpRequest`において、URLにクエリ文字列を追加する`HttpParams`クラスを`params`リクエストオプションとともに使用します。
+URLクエリ文字列を`HttpRequest`に追加するには、`params`リクエストオプションに`HttpParams`クラスを使用します。
 
 次の例では、`searchHeroes()`メソッドは、名前に検索語が含まれているヒーローをクエリします。
 

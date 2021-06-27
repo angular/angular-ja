@@ -204,10 +204,10 @@ options: {
 これは混乱を引き起こす可能性があります。たとえば、
 
 ```typescript
-// this works
+// これは動作する
 client.get('/foo', {responseType: 'text'})
 
-// but this does NOT work
+// これは動作しない
 const options = {
   responseType: 'text',
 };
@@ -266,13 +266,13 @@ Angularでは、`NgModule`のインポートに`HttpClientJsonpModule`を含め�
 次の例では、`searchHeroes()`メソッドはJSONPリクエストを使用して、名前に検索語が含まれているヒーローをクエリします。
 
 ```ts
-/* GET heroes whose name contains search term */
+/* 名前に検索語を含むヒーローを取得する */
 searchHeroes(term: string): Observable {
   term = term.trim();
 
   const heroesURL = `${this.heroesURL}?${term}`;
   return this.http.jsonp(heroesUrl, 'callback').pipe(
-      catchError(this.handleError('searchHeroes', [])) // then handle the error
+      catchError(this.handleError('searchHeroes', [])) // エラーを処理する
     );
 }
 ```
@@ -457,11 +457,11 @@ HTTPリクエストは_遅延実行_され、実際に何かが起こる前に�
 
 ```javascript
 const req = http.get<Heroes>('/api/heroes');
-// 0 requests made - .subscribe() not called.
+// 0件のリクエストが実行される - .subscribe()が呼ばれていない
 req.subscribe();
-// 1 request made.
+// 1件のリクエストが実行される
 req.subscribe();
-// 2 requests made.
+// 2件のリクエストが実行される
 ```
 </div>
 
@@ -688,7 +688,7 @@ Angularは、あなたが提供した順序でインターセプターを適用�
 TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定できないようにしています。
 
 ```javascript
-  // Typescript disallows the following assignment because req.url is readonly
+  // req.urlがreadonlyであるため、Typescriptは次の代入を許可しない
   req.url = req.url.replace('http://', 'https://');
 ```
 
@@ -709,7 +709,7 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 リクエストボディオブジェクトのプロパティを変更することを防ぐことはできません。
 
 ```javascript
-  req.body.name = req.body.name.trim(); // bad idea!
+  req.body.name = req.body.name.trim(); // 良くないアイディア！
 ```
 
 リクエストボディを変更する必要がある場合は、次の手順にしたがってください。
@@ -736,9 +736,9 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 </div>
 
 ```javascript
-  newReq = req.clone({ ... }); // body not mentioned => preserve original body
-  newReq = req.clone({ body: undefined }); // preserve original body
-  newReq = req.clone({ body: null }); // clear the body
+  newReq = req.clone({ ... }); // ボディは記載されていない => 元々のボディを保持する
+  newReq = req.clone({ body: undefined }); // 元々のボディを保持する
+  newReq = req.clone({ body: null }); // ボディを消去する
 ```
 
 ## Httpインターセプターのユースケース

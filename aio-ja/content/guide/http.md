@@ -38,7 +38,7 @@ HTTPクライアントサービスの主な機能は次のとおりです。
   header="app/config/config.service.ts (excerpt)">
 </code-example>
 
-`HttpClient` サービスはすべてのトランザクションで[Observable](guide/glossary#observable "Observable definition")を使用します。サンプルのスニペットに現れるRxJS Observableとオペレーターをインポートする必要があります。これらの`ConfigService`のインポートは典型的なものです。
+`HttpClient`サービスはすべてのトランザクションで[Observable](guide/glossary#observable "Observable definition")を使用します。サンプルのスニペットに現れるRxJS Observableとオペレーターをインポートする必要があります。これらの`ConfigService`のインポートは典型的なものです。
 
 <code-example
   path="http/src/app/config/config.service.ts"
@@ -51,8 +51,9 @@ HTTPクライアントサービスの主な機能は次のとおりです。
 このガイドを達成する<live-example></live-example>を実行できます。
 
 サンプルアプリケーションはデータサーバーを必要としません。
-_HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
-この置き換えのサービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
+[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
+これは、_HttpClient_モジュールの`HttpBackend`を置換します。
+この置換サービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
 
 それがどのように設定されているかを確認するには、`AppModule`の_imports_を見てください。
 

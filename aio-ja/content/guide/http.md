@@ -52,8 +52,8 @@ HTTPクライアントサービスの主な機能は次のとおりです。
 
 サンプルアプリケーションはデータサーバーを必要としません。
 [Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
-これは、_HttpClient_モジュールの`HttpBackend`を置換します。
-この置換サービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
+これは、_HttpClient_モジュールの`HttpBackend`に取って代わります。
+この代わりのサービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
 
 それがどのように設定されているかを確認するには、`AppModule`の_imports_を見てください。
 

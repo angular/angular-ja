@@ -349,7 +349,8 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
 ### 失敗したリクエストの再試行
 
 エラーは一時的なものであり、再試行すると自動的に消える場合があります。
-たとえば、ネットワークの中断はモバイルシナリオで一般的であり、再試行すると成功する可能性があります。
+たとえば、ネットワークの中断はモバイルシナリオで一般的であり、再試行すると
+成功する可能性があります。
 
 [RxJSライブラリ](guide/rx-library)はいくつかの_再試行_オペレーターを提供しています。
 たとえば、`retry()`オペレーターは、失敗した`Observable`を指定された回数だけ自動的に再サブスクライブします。`HttpClient`メソッド呼び出しの結果を_再サブスクライブ_すると、HTTPリクエストを再発行する効果があります。
@@ -481,6 +482,7 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 
 多くのサーバーでは、保存操作のために追加のヘッダーが必要です。
 たとえば、サーバーは認可トークンや、リクエスト本文のMIMEタイプを明示的に宣言するために「Content-Type」ヘッダーを必要とする場合があります。
+
 
 {@a adding-headers}
 ##### ヘッダーの追加
@@ -627,13 +629,15 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
   header="app/app.module.ts (interceptor providers)">
 </code-example>
 
-新しいインターセプターを作成するとき、それらを`httpInterceptorProviders`配列に追加するだけです。`AppModule`を開く必要はありません。
+新しいインターセプターを作成するとき、それらを`httpInterceptorProviders`配列に追加するだけです。
+`AppModule`を開く必要はありません。
 
 <div class="alert is-helpful">
 
 完全なサンプルコードには、より多くのインターセプターがあります。
 
 </div>
+
 
 {@a interceptor-order}
 ### インターセプターの順番
@@ -783,13 +787,14 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 </code-example>
 
 RxJSの`tap`オペレーターは、リクエストが成功したか失敗したかを取得します。
-RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーとなったか、完了したとき（必ず起きる）に呼ばれ、その結果を`MessageService`に報告します。
+RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーとなったか、完了したとき（必ず起きる）に呼ばれ、
+その結果を`MessageService`に報告します。
 
 `tap`も`finalize`も、呼び出し元に返されるObservableのストリームの値には影響を及ぼしません。
 
 {@a custom-json-parser}
 
-### カスタムJSONパース
+### カスタムJSONパース処理
 
 インターセプターを使用して、組み込みのJSONパース処理をカスタム実装に置き換えることができます。
 
@@ -868,7 +873,8 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 インターセプターはこれを、[複数の値](guide/observables)を発行するObservableに変更できます。
 
 次の修正された`CachingInterceptor`は、任意でObservableを返します。
-このObservableは、キャッシュされたレスポンスをすぐに発行し、リクエストをnpm Web APIに送信し、最新の検索結果を再度発行します。
+このObservableは、キャッシュされたレスポンスをすぐに発行し、リクエストをnpm Web APIに送信し、
+後で最新の検索結果を再度発行します。
 
 <code-example
   path="http/src/app/http-interceptors/caching-interceptor.ts"
@@ -939,7 +945,8 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 <div class="alert is-helpful">
 
 このガイドのサンプルアプリケーションには、アップロードされたファイルを受け入れるサーバーがありません。
-`app/http-interceptors/upload-interceptor.ts`の`UploadInterceptor`は、アップロードリクエストをインターセプトしてショートサーキットし、シミュレートされたイベントのObservableを返します。
+`app/http-interceptors/upload-interceptor.ts`の`UploadInterceptor`は、アップロードリクエストをインターセプトしてショートサーキットし、
+シミュレートされたイベントのObservableを返します。
 
 </div>
 
@@ -1045,7 +1052,8 @@ HTTPリクエストを実行するとき、インターセプターはクッキ�
 
 ### カスタムのクッキー/ヘッダーの名前を設定する
 
-バックエンドサービスがXSRFトークンのクッキーまたはヘッダーに異なる名前を使っている場合、`HttpClientXsrfModule.withConfig()`を使用してデフォルト設定を上書きします。
+バックエンドサービスがXSRFトークンのクッキーまたはヘッダーに異なる名前を使っている場合、
+`HttpClientXsrfModule.withOptions()`を使用してデフォルト設定を上書きします。
 
 <code-example
   path="http/src/app/app.module.ts"
@@ -1076,7 +1084,8 @@ AngularのHTTPテスティングライブラリは、アプリケーションが
 
 ### テストのセットアップ
 
-`HttpClient`への呼び出しをテストするには、`HttpClientTestingModule`とモックコントローラ`HttpTestingController`を、テストに必要な他のシンボルと共にインポートしてください。
+`HttpClient`への呼び出しをテストするには、
+`HttpClientTestingModule`とモックコントローラ`HttpTestingController`を、テストに必要な他のシンボルと共にインポートしてください。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1094,7 +1103,8 @@ AngularのHTTPテスティングライブラリは、アプリケーションが
 
 これで、テストの過程で行われたリクエストは、通常のバックエンドの代わりにテストバックエンドにヒットします。
 
-この設定では`TestBed.inject()`を呼び出して`HttpClient`サービスとモックコントローラを注入し、テスト中に参照できるようにします。
+この設定では`TestBed.inject()`を呼び出して`HttpClient`サービスとモックコントローラを注入し、
+テスト中に参照できるようにします。
 
 ### リクエストの期待と応答
 

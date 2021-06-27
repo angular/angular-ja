@@ -1178,7 +1178,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
 Angularは、`HttpContextToken`を使用してコンテキスト内への値の格納とコンテキストからの値の取得を行います。
 次の例のように、`new`オペレーターを使用してコンテキストトークンを作成できます。
 
-<code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="context-token" header="コンテキストトークンの作成"></code-example>
+<code-example path="http/src/app/http-interceptors/retry-interceptor.ts" region="context-token" header="creating a context token"></code-example>
 
 `HttpContextToken`の作成中に渡されるラムダ関数`() => 3`は2つの目的を果たします。
 

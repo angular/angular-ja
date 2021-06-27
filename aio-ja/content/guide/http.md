@@ -744,17 +744,17 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 
 ### デフォルトのヘッダーをセットする
 
-アプリケーションでは、送信するリクエストにインターセプターを使用してデフォルトのヘッダーを設定することがよくあります。
+アプリケーションでは、インターセプターを使用して外部へのリクエストにデフォルトのヘッダーを設定することがよくあります。
 
 サンプルアプリケーションには、認可トークンを生成する`AuthService`があります。
-これは、トークンを取得するサービスを注入し、トークンをすべての送信するリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
+これは、トークンを取得するサービスを注入し、トークンをすべての外部へのリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
 
 <code-example
   path="http/src/app/http-interceptors/auth-interceptor.ts"
   header="app/http-interceptors/auth-interceptor.ts">
 </code-example>
 
-新しいヘッダーを設定するため、リクエストのクローンを作成するというプラクティスは非常に一般的であるため、
+新しいヘッダーを設定するため、リクエストのクローンを作成するというプラクティスは非常によくあるため、
 `setHeaders`ショートカットがあります。
 
 <code-example
@@ -781,19 +781,19 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
   header="app/http-interceptors/logging-interceptor.ts)">
 </code-example>
 
-RxJSの`tap`オペレーターは、リクエストが成功するか失敗したかを取得します。
+RxJSの`tap`オペレーターは、リクエストが成功したか失敗したかを取得します。
 RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーとなったか、完了したとき（必ず起きる）に呼ばれ、その結果を`MessageService`に報告します。
 
-`tap`も`finalize`も、呼び出し元に返されたObservableのストリームの値には影響を及ぼしません。
+`tap`も`finalize`も、呼び出し元に返されるObservableのストリームの値には影響を及ぼしません。
 
 {@a custom-json-parser}
 
 ### カスタムJSONパース
 
-インターセプターを使用して、組み込みのJSONパースをカスタム実装に置き換えることができます。
+インターセプターを使用して、組み込みのJSONパース処理をカスタム実装に置き換えることができます。
 
 次の例の`CustomJsonInterceptor`は、これを実現する方法を示しています。
-インターセプトされたリクエストが`'json'`レスポンスを期待している場合、組み込みのJSONパースを無効化するため、`responseType`は`'text'`に変更されます。
+インターセプトされたリクエストが`'json'`レスポンスを期待している場合、組み込みのJSONパース処理を無効化するため、`responseType`は`'text'`に変更されます。
 次に、注入された`JsonParser`を介してレスポンスがパースされます。
 
 <code-example
@@ -811,7 +811,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
   header="app/http-interceptors/custom-json-interceptor.ts">
 </code-example>
 
-`CustomParser`とともに`CustomJsonInterceptor`を提供します。
+`CustomJsonInterceptor`とともに、`CustomParser`を提供します。
 
 <code-example
   path="http/src/app/http-interceptors/index.ts"
@@ -825,7 +825,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 
 インターセプターは`next.handle()`に転送せずに、自分でリクエストを処理できます。
 
-たとえば、パフォーマンスを向上させるために、特定のリクエストとレスポンスをキャッシュすると決めることがあります。
+たとえば、パフォーマンスを向上させるために、特定のリクエストとレスポンスをキャッシュすると決めることがあるかもしれません。
 既存のデータサービスを妨げることなく、インターセプターにキャッシュを移譲できます。
 
 次の例の`CachingInterceptor`はこのアプローチを示しています。
@@ -843,7 +843,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 
 * キャッシング可能なリクエストがキャッシュ内に見つかった場合、インターセプターはキャッシュされたレスポンスを`of()`_Observable_で返し、`next`ハンドラー（および他のすべての下流のインターセプター）をバイパスします。
 
-* キャッシュ可能なリクエストがキャッシュにない場合、コードは`sendRequest`を呼び出します。
+* キャッシュ可能なリクエストがキャッシュにない場合、コードは`sendRequest()`を呼び出します。
 この関数は、ヘッダーなしで[リクエストのクローン](#immutability)を作成します。これは、npm APIがヘッダーを禁止しているためです。
 次に、この関数はリクエストのクローンを`next.handle()`に転送し、最終的にサーバーを呼び出してサーバーのレスポンスを返します。
 
@@ -853,7 +853,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
   region="send-request">
 </code-example>
 
-`sendRequest`がアプリケーションに戻る途中の_レスポンスをインターセプトする_方法に注意してください。
+`sendRequest()`がアプリケーションに返ってくる途中の_レスポンスをインターセプトする_方法に注意してください。
 `tap()`オペレーターによりレスポンスを_パイプ_して、そのコールバックでレスポンスをキャッシュに追加します。
 
 元のレスポンスは、インターセプターのチェーンを通ってアプリケーション呼び出し元にオリジナルの状態で戻ります。
@@ -864,10 +864,10 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 ### インターセプターを使用して複数の値を要求する
 
 `HttpClient.get()`メソッドは通常、データまたはエラーのいずれかの単一の値を発行するObservableを返します。
-インターセプターは、[複数の値](guide/observables)を発出するObservableに変更できます。
+インターセプターはこれを、[複数の値](guide/observables)を発行するObservableに変更できます。
 
 次の修正された`CachingInterceptor`は、任意でObservableを返します。
-このObservableは、キャッシュされたレスポンスをすぐに発出し、リクエストをnpm Web APIに送信し、最新の検索結果を再度発出します。
+このObservableは、キャッシュされたレスポンスをすぐに発行し、リクエストをnpm Web APIに送信し、最新の検索結果を再度発行します。
 
 <code-example
   path="http/src/app/http-interceptors/caching-interceptor.ts"
@@ -879,19 +879,19 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダーが存在するとトリガーされます。
 
 `PackageSearchComponent`のチェックボックスは、`withRefresh`フラグを切り替えます。
-これは`PackageSearchService.search()`の引数のメソッドです。
+これは`PackageSearchService.search()`の引数の1つです。
 `search()`メソッドはカスタムの`x-refresh`ヘッダーを作成し、
 `HttpClient.get()`を呼び出す前にそれをリクエストに追加します。
 
 </div>
 
 修正された`CachingInterceptor`は、[上記](#send-request)で説明したのと同じ`sendRequest()`メソッドを使用して、キャッシュされた値があるかどうかに関係なく、サーバーリクエストを設定します。
-`results$`observableは、サブスクライブ時にリクエストを行います。
+`results$`Observableは、サブスクライブ時にリクエストを行います。
 
 * キャッシュされた値がない場合、インターセプターは`results$`を返します。
 
-* キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`に_パイプ_します。そして、最初に（ただちに）キャッシュされた応答を発出し、その後にサーバーからのレスポンスを発出する、再構成されたObservableを作成します。
-サブスクライバーは、連続の2つの応答を参照します。
+* キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`に_パイプ_します。そして、最初に（ただちに）キャッシュされたレスポンスを発行し、その後にサーバーからのレスポンスを発行する、再構成されたObservableを作成します。
+サブスクライバーは、連続の2つのレスポンスを参照します。
 
 {@a report-progress}
 

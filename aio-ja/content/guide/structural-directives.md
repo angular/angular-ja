@@ -1,30 +1,30 @@
-# Writing structural directives
+# 構造ディレクティブの記述
 
-This topic demonstrates how to create a structural directive and provides conceptual information on how directives work, how Angular interprets shorthand, and how to add template guard properties to catch template type errors.
+このトピックでは、構造ディレクティブを作成する方法を示し、ディレクティブがどのように機能するのか、Angularがどのように短縮表記を解釈するのか、テンプレートの型エラーをキャッチするためにテンプレートガードプロパティを追加する方法など、概念的な情報を説明します。
 
 <div class="alert is-helpful">
 
-For the example application that this page describes, see the <live-example></live-example>.
+このトピックで使用されているサンプルコードを表示またはダウンロードするには、<live-example></live-example> を参照してください。
 
 </div>
 
-For more information on Angular's built-in structural directives, such as `NgIf`, `NgForOf`, and `NgSwitch`, see [Built-in directives](guide/built-in-directives).
+Angularにビルトインされているディレクティブ(たとえば、`NgIf`, `NgForOf`, `NgSwitch` など)については、[組み込みディレクティブ](guide/built-in-directives) を参照してください。
 
 {@a unless}
 
-## Creating a structural directive
+## 構造ディレクティブの作成
 
-This section guides you through creating an `UnlessDirective` and how to set `condition` values.
-The `UnlessDirective` does the opposite of `NgIf`, and `condition` values can be set to `true` or `false`.
-`NgIf` displays the template content when the condition is `true`.
-`UnlessDirective` displays the content when the condition is `false`.
+ここでは `UnlessDirective` の作成方法と `condition` の値の設定方法について説明します。
+`UnlessDirective` は `NgIf` と反対のことを行わせ、`condition` の値は `true` または `false` に設定できるようにします。
+`NgIf` は、条件が `true` のときにテンプレートの内容を表示します。
+`UnlessDirective` は、条件が `false` のときにテンプレートの内容を表示させます。
 
-Following is the `UnlessDirective` selector, `appUnless`, applied to the paragraph element.
-When `condition` is `false`, the browser displays the sentence.
+以下は、`UnlessDirective` のセレクターである `appUnless` をパラグラフ要素に適用したものです。
+条件が `false` のとき、ブラウザは文章を表示します。
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless-1)" region="appUnless-1"></code-example>
 
-1. Using the Angular CLI, run the following command, where `unless` is the name of the directive:
+1. Angular CLIを使って、次のコマンドを実行します。`unless` はディレクティブの名前です。
 
   ```bash
 
@@ -32,56 +32,56 @@ When `condition` is `false`, the browser displays the sentence.
 
   ```
 
-  Angular creates the directive class and specifies the CSS selector, `appUnless`, that identifies the directive in a template.
+  Angularは、ディレクティブクラスを作成し、テンプレートの中でディレクティブを識別するCSSセレクターとして `appUnless` を設定します。
 
-1. Import `Input`, `TemplateRef`, and `ViewContainerRef`.
+1. `Input`, `TemplateRef`, `ViewContainerRef` をインポートします。
 
   <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (skeleton)" region="skeleton"></code-example>
 
-1. Inject `TemplateRef` and `ViewContainerRef` in the directive constructor as private variables.
+1. ディレクティブのコンストラクターに、`TemplateRef` と `ViewContainerRef` をプライベート変数としてインジェクトします。
 
   <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (ctor)" region="ctor"></code-example>
 
-  The `UnlessDirective` creates an [embedded view](api/core/EmbeddedViewRef "API: EmbeddedViewRef") from the Angular-generated `<ng-template>` and inserts that view in a [view container](api/core/ViewContainerRef "API: ViewContainerRef") adjacent to the directive's original `<p>` host element.
+  `UnlessDirective` は、Angularが生成した `<ng-template>` から [埋め込みビュー](api/core/EmbeddedViewRef "API: EmbeddedViewRef") を作成し、そのビューを、ディレクティブの元のホスト要素 `<p>` に隣接する [ビューコンテナー](api/core/ViewContainerRef "API: ViewContainerRef") に挿入します。
 
-  [`TemplateRef`](api/core/TemplateRef "API: TemplateRef") helps you get to the `<ng-template>` contents and [`ViewContainerRef`](api/core/ViewContainerRef "API: ViewContainerRef") accesses the view container.
+  [`TemplateRef`](api/core/TemplateRef "API: TemplateRef")は、`<ng-template>`のコンテンツにアクセスし、[`ViewContainerRef`](api/core/ViewContainerRef "API: ViewContainerRef")は、ビューコンテナーにアクセスします。
 
-1. Add an `appUnless` `@Input()` property with a setter.
+1. セッターとしての `appUnless` `@Input()` プロパティを追加します。
 
   <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (set)" region="set"></code-example>
 
-  Angular sets the `appUnless` property whenever the value of the condition changes.
+  Angularは、条件の値が変更されるたびに `appUnless` プロパティを設定します。
 
-    * If the condition is falsy and Angular hasn't created the view previously, the setter causes the view container to create the embedded view from the template.
+    * 条件が `false` で、Angularが以前にビューを作成したことがない場合、セッターはビューコンテナーにテンプレートから埋め込みビューを作成させます。
 
-    * If the condition is truthy and the view is currently displayed, the setter clears the container, which disposes of the view.
+    * 条件が `true` で、ビューが現在表示されている場合、セッターはコンテナーをクリアし、コンテナーはビューを破棄します。
 
-The complete directive is as follows:
+完全なディレクティブは次のとおりです:
 
 <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (excerpt)" region="no-docs"></code-example>
 
-### Testing the directive
+### ディレクティブのテスト
 
-In this section, you'll update your application to test the `UnlessDirective`.
+このセクションでは、アプリケーションを更新して `UnlessDirective` をテストします。
 
-1. Add a `condition` set to `false` in the `AppComponent`.
+1. `AppComponent` に `false` に設定された `condition` を追加します。
 
   <code-example path="structural-directives/src/app/app.component.ts" header="src/app/app.component.ts (excerpt)" region="condition"></code-example>
 
-1. Update the template to use the directive.
-  Here, `*appUnless` is on two `<p>` tags with opposite `condition` values, one `true` and one `false`.
+1. ディレクティブを使用するようにテンプレートを更新します。
+   ここで、`*appUnless` は反対の `condition`値をもつ2つの `<p>` タグ上にあります。1つは `true`、もう1つは `false` です。
 
   <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless)" region="appUnless"></code-example>
 
-  The asterisk is shorthand that marks `appUnless` as a structural directive.
-  When the `condition` is falsy, the top (A) paragraph appears and the bottom (B) paragraph disappears.
-  When the `condition` is truthy, the top (A) paragraph disappears and the bottom (B) paragraph appears.
+  アスタリスク(`*`)は、構造ディレクティブとして `appUnless` をマークする短縮表記です。
+   `condition` が `false` の場合、上の（A）の段落が表示され、下（B）の段落が消えます。
+   `condition` が `true` の場合、上（A）の段落が消え、下（B）の段落が表示されます。
 
-1. To change and display the value of `condition` in the browser, add markup that displays the status and a button.
+1. ブラウザで `condition`値を変更して表示するには、ステータスとボタンを表示するマークアップを追加します。
 
   <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html" region="toggle-info"></code-example>
 
-To verify that the directive works, click the button to change the value of `condition`.
+このディレクティブが機能することを確認するには、ボタンをクリックして `condition` の値を変更します。
 
   <div class="lightbox">
     <img src='generated/images/guide/structural-directives/unless-anim.gif' alt="UnlessDirective in action">
@@ -91,21 +91,21 @@ To verify that the directive works, click the button to change the value of `con
 {@a shorthand}
 {@a asterisk}
 
-## Structural directive shorthand
+## 構造ディレクティブの短縮表記
 
-The asterisk, `*`,  syntax on a structural directive, such as `*ngIf`, is shorthand that Angular interprets into a longer form.
-Angular transforms the asterisk in front of a structural directive into an `<ng-template>` that surrounds the host element and its descendants.
+`*ngIf` などの構造ディレクティブのアスタリスク `*` 構文は、Angularがより長い形式に解釈するための短縮表記です。
+Angularは、構造ディレクティブの前のアスタリスクを、ホスト要素とその子孫を囲む `<ng-template>` に変換します。
 
-The following is an example of `*ngIf` that displays the hero's name if `hero` exists:
+以下は、`hero` が存在する場合にヒーローの名前を表示する `*ngIf` の例です:
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (asterisk)" region="asterisk"></code-example>
 
-The `*ngIf` directive moves to the `<ng-template>` where it becomes a property binding in square brackets, `[ngIf]`.
-The rest of the `<div>`, including its class attribute, moves inside the `<ng-template>`.
+`*ngIf` ディレクティブは `<ng-template>` に移動し、角括弧 `[ngIf]` でバインドされたプロパティになります。
+クラス属性を含む残りの `<div>` は、`<ng-template>` 内に移動します。
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-template)" region="ngif-template"></code-example>
 
-Angular does not create a real `<ng-template>` element, instead rendering only the `<div>` and a comment node placeholder to the DOM.
+Angularは実際の `<ng-template>`要素を作成せず、代わりに `<div>` とコメントノードプレースホルダーのみをDOMにレンダリングします。
 
 ```html
 <!--bindings={
@@ -115,38 +115,38 @@ Angular does not create a real `<ng-template>` element, instead rendering only t
 
 ```
 
-The following example compares the shorthand use of the asterisk in `*ngFor` with the longhand `<ng-template>` form:
+次の例では、アスタリスクを使用する短縮記法の `*ngFor`形式と `<ng-template>`形式を比較しています:
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (inside-ngfor)" region="inside-ngfor"></code-example>
 
-Here, everything related to the `ngFor` structural directive applies to the `<ng-template>`.
-All other bindings and attributes on the element apply to the `<div>` element within the `<ng-template>`.
-Other modifiers on the host element, in addition to the `ngFor` string, remain in place as the element moves inside the `<ng-template>`.
-In this example, the `[class.odd]="odd"` stays on the `<div>`.
+ここでは、`ngFor`構造ディレクティブに関連するすべてのものが `<ng-template>` に適用されます。
+要素上の他のバインディングや属性はすべて、`<ng-template>`内の `<div>` 要素に適用されます。
+ホスト要素上の他の修飾子は、`ngFor` の文字列に加えて、要素が `<ng-template>`内を移動する際にもそのまま適用されます。
+この例では、`[class.odd]="odd"` は `<div>` に残ります。
 
-The `let` keyword declares a template input variable that you can reference within the template.
-The input variables in this example are `hero`, `i`, and `odd`.
-The parser translates `let hero`, `let i`, and `let odd` into variables named `let-hero`, `let-i`, and `let-odd`.
-The `let-i` and `let-odd` variables become `let i=index` and `let odd=odd`.
-Angular sets `i` and `odd` to the current value of the context's `index` and `odd` properties.
+`let` キーワードは、テンプレート内で参照できるテンプレート入力変数を宣言します。
+この例の入力変数は、 `hero`、`i`、および `odd` です。
+パーサーは、 `let hero`、`let i`、および `let odd` を `let-hero`、`let-i`、および `let-odd` という名前の変数に変換します。
+`let-i`変数と `let-odd`変数は `let i = index` と `let odd = odd` になります。
+Angularは `i` と `odd` をコンテキストの `index` と `odd` プロパティを現在の値に設定します。
 
-The parser applies PascalCase to all directives and prefixes them with the directive's attribute name, such as ngFor.
-For example, the `ngFor` input properties, `of` and `trackBy`, map to `ngForOf` and `ngForTrackBy`.
-As the `NgFor` directive loops through the list, it sets and resets properties of its own context object.
-These properties can include, but aren't limited to, `index`, `odd`, and a special property
-named `$implicit`.
+パーサーはパスカルケース(PascalCase)をすべてのディレクティブに適用し、それらの前に `ngFor` などのディレクティブの属性名を付けます。
+たとえば、`ngFor` の入力プロパティである `of` と `trackBy` は、`ngForOf` と  `ngForTrackBy` にマッピングされます。
+`NgFor`ディレクティブがリストをループすると、独自のコンテキストオブジェクトのプロパティが設定およびリセットされます。
+これらのプロパティには、`index`、`odd`、および `$implicit` という名前の特別なプロパティを含めることができますが、
+これらに限定されません。
 
-Angular sets `let-hero` to the value of the context's `$implicit` property, which `NgFor` has initialized with the hero for the current iteration.
+Angularは `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
 
-For more information, see the [NgFor API](api/common/NgForOf "API: NgFor") and [NgForOf API](api/common/NgForOf) documentation.
+詳細については [NgFor API](api/common/NgForOf "API: NgFor") と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
 
-### Creating template fragments with `<ng-template>`
+### `<ng-template>` を使用してテンプレートフラグメントを作成する
 
-Angular's `<ng-template>` element defines a template that doesn't render anything by default.
-With `<ng-template>`, you can render the content manually for full control over how the content displays.
+Angularの `<ng-template>`要素は、デフォルトでは何もレンダリングしないテンプレートを定義します。
+`<ng-template>`を使用すると、コンテンツを手動でレンダリングして、コンテンツの表示方法を完全に制御できます。
 
-If there is no structural directive and you wrap some elements in an `<ng-template>`, those elements disappear.
-In the following example, Angular does not render the middle "Hip!" in the phrase "Hip! Hip! Hooray!" because of the surrounding `<ng-template>`.
+構造ディレクティブがない状態で、一部の要素を `<ng-template>`でラップすると、それらの要素は表示されなくなります。
+次の例では、Angularはフレーズの中の真ん中の "Hip!"をレンダリングしません。"Hip! Hip! Hooray!" の真ん中の "Hip!" は、`<ng-template>` で囲まれているためにレンダリングされません。
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (template-tag)" region="template-tag"></code-example>
 
@@ -154,37 +154,37 @@ In the following example, Angular does not render the middle "Hip!" in the phras
   <img src='generated/images/guide/structural-directives/template-rendering.png' alt="template tag rendering">
 </div>
 
-## Structural directive syntax reference
+## 構造ディレクティブの構文リファレンス
 
-When you write your own structural directives, use the following syntax:
+独自の構造ディレクティブを作成する場合は、次の構文を使用してください:
 
 ```
 *:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )*"
 ```
 
-The following tables describe each portion of the structural directive grammar:
+次の表では、構造ディレクティブ構文の各部分について説明します:
 
 <table>
 
   <tr>
     <td><code>prefix</code></td>
-    <td>HTML attribute key</td>
+    <td>HTML属性接頭辞</td>
   </tr>
   <tr>
     <td><code>key</code></td>
-    <td>HTML attribute key</td>
+    <td>HTML属性キー</td>
   </tr>
   <tr>
     <td><code>local</code></td>
-    <td>local variable name used in the template</td>
+    <td>テンプレートで使用されるローカル変数名</td>
   </tr>
   <tr>
     <td><code>export</code></td>
-    <td>value exported by the directive under a given name</td>
+    <td>指定された名前でディレクティブによってエクスポートされた値</td>
   </tr>
   <tr>
     <td><code>expression</code></td>
-    <td>standard Angular expression</td>
+    <td>標準のAngular式</td>
   </tr>
 </table>
 
@@ -203,17 +203,17 @@ The following tables describe each portion of the structural directive grammar:
   </tr>
 </table>
 
-### How Angular translates shorthand
+### どのようにAngularが短縮表記を変換するか
 
-Angular translates structural directive shorthand into the normal binding syntax as follows:
+Angularは、構造ディレクティブの短縮表記を次のように通常のバインディング構文に変換します:
 
 <table>
   <tr>
-    <th>Shorthand</th>
-    <th>Translation</th>
+    <th>短縮表記</th>
+    <th>変換</th>
   </tr>
   <tr>
-    <td><code>prefix</code> and naked <code>expression</code></td>
+    <td><code>prefix</code> と そのままの <code>expression</code></td>
     <td><code>[prefix]="expression"</code></td>
   </tr>
   <tr>
@@ -221,8 +221,8 @@ Angular translates structural directive shorthand into the normal binding syntax
     <td><code>[prefixKey] "expression"
     (let-prefixKey="export")</code>
     <br />
-    Notice that the <code>prefix</code>
-    is added to the <code>key</code>
+    <code>prefix</code> が
+    <code>key</code> に追加されていることに注意してください
     </td>
   </tr>
   <tr>
@@ -231,14 +231,14 @@ Angular translates structural directive shorthand into the normal binding syntax
   </tr>
 </table>
 
-### Shorthand examples
+### 短縮表記 例
 
-The following table provides shorthand examples:
+次の表に、簡単な例を示します:
 
 <table>
   <tr>
-    <th>Shorthand</th>
-    <th>How Angular interprets the syntax</th>
+    <th>短縮表記</th>
+    <th>Angularが構文を解釈する方法</th>
   </tr>
   <tr>
     <td><code>*ngFor="let item of [1,2,3]"</code></td>
@@ -262,37 +262,37 @@ The following table provides shorthand examples:
 {@a directive-type-checks}
 
 <!-- To do follow up PR: move this section to a more general location because it also applies to attribute directives. -->
-## Improving template type checking for custom directives
+## 独自ディレクティブのテンプレート型チェックの改善
 
-You can improve template type checking for custom directives by adding template guard properties to your directive definition.
-These properties help the Angular template type checker find mistakes in the template at compile time, which can avoid runtime errors.
-These properties are as follows:
+テンプレートガードプロパティをディレクティブ定義に追加することで、独自ディレクティブのテンプレート型チェックを改善できます。
+これらのプロパティは、Angularのテンプレート型チェッカーがコンパイル時にテンプレートの間違いを見つけるのに役立ち、ランタイムエラーを回避できます。
+これらのプロパティは次のとおりです:
 
-* A property `ngTemplateGuard_(someInputProperty)` lets you specify a more accurate type for an input expression within the template.
-* The `ngTemplateContextGuard` static property declares the type of the template context.
+* プロパティ `ngTemplateGuard_(someInputProperty)` を使用すると、テンプレート内の入力式により正確な型を指定できます。
+* `ngTemplateContextGuard` 静的プロパティは、テンプレートコンテキストの型を宣言します。
 
-This section provides examples of both kinds of type-guard property.
-For more information, see [Template type checking](guide/template-typecheck "Template type-checking guide").
+このセクションでは、両方の種類の型ガードプロパティの例を示します。
+詳細については、[テンプレート型チェック](guide/template-typecheck "Template type-checking guide")を参照してください。
 
 {@a narrowing-input-types}
 
-### Making in-template type requirements more specific with template guards
+### テンプレートガードを使用して、テンプレート内の型要件をより具体的にする
 
-A structural directive in a template controls whether that template is rendered at run time, based on its input expression.
-To help the compiler catch template type errors, you should specify as closely as possible the required type of a directive's input expression when it occurs inside the template.
+テンプレート内の構造ディレクティブは、その入力式に基づいて、そのテンプレートが実行時にレンダリングされるかどうかを制御します。
+コンパイラがテンプレートの型エラーを検出しやすくするために、テンプレート内で入力式が発生した場合には、指令の入力式に要求される型をできるだけ細かく指定する必要があります。
 
-A type guard function narrows the expected type of an input expression to a subset of types that might be passed to the directive within the template at run time.
-You can provide such a function to help the type-checker infer the proper type for the expression at compile time.
+型ガード関数は、入力式の予想される型を、実行時にテンプレート内のディレクティブに渡される可能性のある型のサブセットに絞り込みます。
+このような関数を提供して、型チェッカーがコンパイル時に式の適切な型を推測できるようにします。
 
-For example, the `NgIf` implementation uses type-narrowing to ensure that the
-template is only instantiated if the input expression to `*ngIf` is truthy.
-To provide the specific type requirement, the `NgIf` directive defines a [static property `ngTemplateGuard_ngIf: 'binding'`](api/common/NgIf#static-properties).
-The `binding` value is a special case for a common kind of type-narrowing where the input expression is evaluated in order to satisfy the type requirement.
+たとえば、`NgIf` の実装では、型の絞り込みを使用して、`*ngIf` への入力式が `true` である場合にのみテンプレートがインスタンス化されるようにしています。
+特定の型要件を提供するために、`NgIf` ディレクティブは
+[静的プロパティ `ngTemplateGuard_ngIf: 'binding'`](api/common/NgIf#static-properties) を定義しています。
+`binding` の値は、入力式を評価して型の要件を満たすという、一般的な型の絞り込みのための特殊なケースです。
 
-To provide a more specific type for an input expression to a directive within the template, add an `ngTemplateGuard_xx` property to the directive, where the suffix to the static property name, `xx`, is the `@Input()` field name.
-The value of the property can be either a general type-narrowing function based on its return type, or the string `"binding"`, as in the case of `NgIf`.
+テンプレート内のディレクティブへの入力式に、より具体的な型を提供するには、ディレクティブに `ngTemplateGuard_xx`プロパティを追加します。ここでの静的プロパティ名の接尾辞 `xx` は `@Input()` フィールド名です。
+プロパティの値は、戻り値の型に基づく一般的な型絞り関数、または `NgIf`の場合のように文字列 `"binding"` のいずれかになります。
 
-For example, consider the following structural directive that takes the result of a template expression as an input:
+たとえば、テンプレート式の結果を入力として受け取る次の構造ディレクティブについて考えてみます:
 
 <code-example language="ts" header="IfLoadedDirective">
 export type Loaded<T> = { type: 'loaded', data: T };
@@ -315,24 +315,24 @@ export class AppComponent {
 }
 </code-example>
 
-In this example, the `LoadingState<T>` type permits either of two states, `Loaded<T>` or `Loading`. The expression used as the directive’s `state` input is of the umbrella type `LoadingState`, as it’s unknown what the loading state is at that point.
+この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の2つの状態のいずれかを許可します。ディレクティブの `state` を入力として使用される式は、その時点でのロード状態が不明であるため、包括的な `LoadingState` 型です。
 
-The `IfLoadedDirective` definition declares the static field `ngTemplateGuard_state`, which expresses the narrowing behavior.
-Within the `AppComponent` template, the `*ifLoaded` structural directive should render this template only when `state` is actually `Loaded<Person>`.
-The type guard allows the type checker to infer that the acceptable type of `state` within the template is a `Loaded<T>`, and further infer that `T` must be an instance of `Person`.
+`ifLoadedDirective` の定義では、絞り込みの動作を表現する静的関数 `ngTemplateGuard_state` を宣言しています。
+`AppComponent` テンプレートの中で、`*ifLoaded` 構造ディレクティブは、`state` が実際に `Loaded<Person>` である場合にのみ、このテンプレートをレンダリングすべきです。
+型ガードにより、型チェッカーはテンプレート内の `state` の許容する型が `Loaded<T>` であることを推論し、さらに `T` が `Person` のインスタンスでなければならないことを推論します。
 
 {@a narrowing-context-type}
 
-### Typing the directive's context
+### ディレクティブのコンテキスト入力
 
-If your structural directive provides a context to the instantiated template, you can properly type it inside the template by providing a static `ngTemplateContextGuard` function.
-The following snippet shows an example of such a function.
+構造ディレクティブがインスタンス化されたテンプレートにコンテキストを提供している場合、静的な `ngTemplateContextGuard` 関数を用意することで、テンプレート内部で適切な型を参照し入力することができます。
+次のスニペットはそのような関数の例を示しています。
 
 <code-example language="ts" header="myDirective.ts">
 @Directive({…})
 export class ExampleDirective {
-    // Make sure the template checker knows the type of the context with which the
-    // template of this directive will be rendered
+    // テンプレートチェッカーが、このディレクティブのテンプレートが
+    // レンダリングされるコンテキストの型を認識していることを確認してください。
     static ngTemplateContextGuard(dir: ExampleDirective, ctx: unknown): ctx is ExampleContext { return true; };
 
     // …

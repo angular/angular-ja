@@ -50,7 +50,7 @@ HTTPクライアントサービスの主な機能は次のとおりです。
 
 このガイドを達成する<live-example></live-example>を実行できます。
 
-サンプルアプリはデータサーバーを必要としません。
+サンプルアプリケーションはデータサーバーを必要としません。
 _HttpClient_モジュールの`HttpBackend`を置き換える[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
 この置き換えのサービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
 
@@ -252,14 +252,14 @@ client.get('/foo', options);
  >
 </code-example>
 
-見ての通り、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
+見てのとおり、レスポンスオブジェクトは正しい型の`body`プロパティを持っています。
 
 ### JSONPリクエストの作成
 
 サーバーが[CORSプロトコル](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)をサポートしていない場合、アプリケーションは`HttpClient`を使用してドメインをまたいで[JSONP](https://en.wikipedia.org/wiki/JSONP)リクエストを実行できます。
 
 AngularのJSONPリクエストは`Observable`を返します。
-Observableをサブスクライブするためのパターンに従い、[asyncパイプ](api/common/AsyncPipe)を使用して結果を処理する前に、RxJSの`map`オペレーターを使用してレスポンスを変換します。
+Observableを購読するためのパターンに従い、[asyncパイプ](api/common/AsyncPipe)を使用して結果を処理する前に、RxJSの`map`オペレーターを使用してレスポンスを変換します。
 
 Angularでは、`NgModule`のインポートに`HttpClientJsonpModule`を含めることで、JSONPを使用します。
 次の例では、`searchHeroes()`メソッドはJSONPリクエストを使用して、名前に検索語が含まれているヒーローをクエリします。
@@ -294,7 +294,7 @@ searchHeroes(term: string): Observable {
 
 RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、Obervableを通過する正常値とエラー値の双方を、コードがそれらを妨害することなく検査できます。
 
-`DownloaderComponent`の`download()`メソッドは、サービスのメソッドをサブスクライブすることでリクエストを開始します。
+`DownloaderComponent`の`download()`メソッドは、サービスのメソッドを購読することでリクエストを開始します。
 
 <code-example
   path="http/src/app/downloader/downloader.component.ts"
@@ -407,7 +407,7 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.service.ts (deleteHero)">
 </code-example>
 
-`HeroesComponent`がこのサービスのメソッドが返す`Observable`をサブスクライブすることによって、実際のDELETE処理が開始します。
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のDELETE処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -415,7 +415,7 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.component.ts (deleteHero)">
 </code-example>
 
-コンポーネントは削除処理の結果を要求していないため、コールバックなしでサブスクライブします。結果を使用していなくても、サブスクライブする必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
+コンポーネントは削除処理の結果を要求していないため、コールバックなしで購読します。結果を使用していなくても、購読する必要があります。`subscribe()`メソッドを呼び出すと、Observableが_実行_され、DELETEリクエストが開始します。
 
 <div class="alert is-important">
 
@@ -451,7 +451,7 @@ HTTPリクエストは_遅延実行_され、実際に何かが起こる前に�
 <div class="alert is-helpful">
 
 実際、各`subscribe()`により、Observableは個々で独立して実行を開始します。
-2回サブスクライブすると、2つのHTTPリクエストが発生します。
+2回購読すると、2つのHTTPリクエストが発生します。
 
 ```javascript
 const req = http.get<Heroes>('/api/heroes');
@@ -542,7 +542,7 @@ const params = new HttpParams({fromString: 'name=foo'});
 同じインターセプターが、アプリケーションに返ってくるサーバーのレスポンスを検査および変換することもできます。
 複数のインターセプターが、リクエスト/レスポンスハンドラーの_前後の_チェーンを形成します。
 
-インターセプターは、すべてのHTTPリクエスト/レスポンスに対して、認証からロギングまで、さまざまな_暗黙の_タスクを型通りの、標準的な方法で実行できます。
+インターセプターは、すべてのHTTPリクエスト/レスポンスに対して、認証からロギングまで、さまざまな_暗黙の_タスクを型どおりの、標準的な方法で実行できます。
 
 インターセプト無しでは、開発者は各`HttpClient`メソッド呼び出しに対してこれらのタスクを_明示的に_実装する必要があります。
 

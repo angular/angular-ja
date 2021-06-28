@@ -1,58 +1,58 @@
 {@a router-tutorial}
 
-# Router tutorial: tour of heroes
+# ルーターチュートリアル：ツアーオブヒーローズ
 
-This tutorial provides an extensive overview of the Angular router.
-In this tutorial, you will build upon a basic router configuration to explore features such as child routes, route parameters, lazy load NgModules, guard routes, and preloading data to improve the user experience.
+このチュートリアルでは、Angularルーターの広範囲な概要を説明します。
+このチュートリアルでは、基本的なルーター構成に基づいて、子ルート、ルートパラメーター、遅延読み込みNgModule、ガードルート、ユーザーエクスペリエンスを向上するデータのプリロードなどの機能を探索します。
 
-For a working example of the final version of the app, see the <live-example name="router"></live-example>.
+最終的なバージョンのアプリのサンプルは、<live-example name = "router"> </ live-example> を参照してください。
 
 {@a router-tutorial-objectives}
 
-## Objectives
+## 目的
 
-This guide describes development of a multi-page routed sample application.
-Along the way, it highlights key features of the router such as:
+このガイドでは、複数ページにルーティングされたサンプルアプリケーションの開発について説明します。
+その過程で、次のようなルーターの主要な機能に焦点を当てます：
 
-* Organizing the application features into modules.
-* Navigating to a component (*Heroes* link to "Heroes List").
-* Including a route parameter (passing the Hero `id` while routing to the "Hero Detail").
-* Child routes (the *Crisis Center* has its own routes).
-* The `CanActivate` guard (checking route access).
-* The `CanActivateChild` guard (checking child route access).
-* The `CanDeactivate` guard (ask permission to discard unsaved changes).
-* The `Resolve` guard (pre-fetching route data).
-* Lazy loading an `NgModule`.
-* The `CanLoad` guard (check before loading feature module assets).
+* アプリケーション機能をモジュールに編成します。
+* コンポーネントへの移動（*Heroes* は "Heroes List" にリンク）。
+* ルートパラメータを含みます（"Hero Detail" へのルーティング中に Hero `id` を渡す）。
+* 子ルート（*Crisis Center* は独自のルートを持つ）。
+* `CanActivate` ガード（ルートアクセスのチェック）。
+* `CanActivateChild` ガード（子ルートアクセスのチェック）。
+* `CanDeactivate` ガード（保存されていない変更を破棄する許可を求める）。
+* `Resolve` ガード（ルートデータのプリフェッチ）。
+* `NgModule` の遅延読み込み。
+* `CanLoad` ガード（フューチャーモジュールアセットをロードする前のチェック）。
 
-This guide proceeds as a sequence of milestones as if you were building the application step-by-step, but assumes you are familiar with basic [Angular concepts](guide/architecture).
-For a general introduction to angular, see the [Getting Started](start). For a more in-depth overview, see the [Tour of Heroes](tutorial) tutorial.
+このガイドは、アプリケーションを段階的に構築しているかのように一連のマイルストーンとして進行しますが、基本的な[Angularの概念](guide/architecture)に精通していることを前提としています。
+Angularの一般的な概要については、[はじめに](start)を参照してください。より詳細な概要については、[Tour of Heroes](tutorial)チュートリアルを参照してください。
 
-## Prerequisites
+## 前提条件
 
-To complete this tutorial, you should have a basic understanding of the following concepts:
+このチュートリアルを完了するには、次の概念の基本を理解している必要があります：
 
 * JavaScript
 * HTML
 * CSS
 * [Angular CLI](/cli)
 
-You might find the [Tour of Heroes tutorial](/tutorial) helpful, but it is not required.
+[Tour of Heroesチュートリアル](/tutorial)が役立つかもしれませんが、必須ではありません。
 
 
-## The sample application in action
+## サンプルアプリケーションの動作
 
-The sample application for this tutorial helps the Hero Employment Agency find crises for heroes to solve.
+このチュートリアルのサンプルアプリケーションは、Hero Employment Agency がヒーローが解決すべきクライシス（crises）を見つけることに役立ちます。
 
-The application has three main feature areas:
+このアプリケーションには、次の3つの主要な機能領域があります：
 
-1. A *Crisis Center* for maintaining the list of crises for assignment to heroes.
-1. A *Heroes* area for maintaining the list of heroes employed by the agency.
-1. An *Admin* area to manage the list of crises and heroes.
+1. ヒーローに割り当てるクライシスのリストを維持するための *Crisis Center*。
+1. エージェンシーによって雇用されているヒーローのリストを維持する *Heroes*。
+1. クライシスとヒーローのリストを管理するための *Admin*。
 
-Try it by clicking on this <live-example name="router" title="Hero Employment Agency Live Example">live example link</live-example>.
+このリンクからお試しください。 <live-example name="router" title="Hero Employment Agency Live Example">live example link</live-example>.
 
-The application renders with a row of navigation buttons and the *Heroes* view with its list of heroes.
+アプリケーションは、ナビゲーションボタンの行と、ヒーローのリストを含む *Heroes* ビューでレンダリングします。
 
 
 <div class="lightbox">
@@ -61,7 +61,7 @@ The application renders with a row of navigation buttons and the *Heroes* view w
 
 
 
-Select one hero and the application takes you to a hero editing screen.
+ヒーローを1人選択すると、アプリケーションによってヒーロー編集画面が表示されます。
 
 <div class="lightbox">
   <img src='generated/images/guide/router/hero-detail.png' alt="Detail view of hero with additional information, input, and back button">
@@ -69,25 +69,25 @@ Select one hero and the application takes you to a hero editing screen.
 
 
 
-Alter the name.
-Click the "Back" button and the application returns to the heroes list which displays the changed hero name.
-Notice that the name change took effect immediately.
+名前を変更します。
+「Back」ボタンをクリックすると、アプリケーションは変更されたヒーロー名を表示するヒーローリストに戻ります。
+名前の変更がすぐに有効になったことに注意してください。
 
-Had you clicked the browser's back button instead of the application's "Back" button, the application would have returned you to the heroes list as well.
-Angular application navigation updates the browser history as normal web navigation does.
+アプリケーションの「Back」ボタンではなく、ブラウザの戻るボタンをクリックしていたら、アプリケーションもヒーローのリストに戻っていたでしょう。
+Angularのアプリケーション・ナビゲーションは、通常のウェブ・ナビゲーションと同様にブラウザの履歴を更新します。
 
-Now click the *Crisis Center* link for a list of ongoing crises.
+ここで、*Crisis Center* のリンクをクリックすると、現在進行中のクライシスのリストが表示されます。
 
 
 <div class="lightbox">
   <img src='generated/images/guide/router/crisis-center-list.gif' alt="Crisis Center list of crises">
 </div>
 
-Select a crisis and the application takes you to a crisis editing screen.
-The _Crisis Detail_ appears in a child component on the same page, beneath the list.
+クライシスを選択すると、アプリケーションはクライシスの編集画面を表示します。
+_Crisis Detail_ は、同じページの、リストの下にある子コンポーネントに表示されます。
 
-Alter the name of a crisis.
-Notice that the corresponding name in the crisis list does _not_ change.
+クライシスの名前を変更します。
+対応するクライシスリストの名前は変更 _されない_ ことに注意してください。
 
 
 <div class="lightbox">
@@ -95,10 +95,10 @@ Notice that the corresponding name in the crisis list does _not_ change.
 </div>
 
 
-Unlike *Hero Detail*, which updates as you type, *Crisis Detail* changes are temporary until you either save or discard them by pressing the "Save" or "Cancel" buttons.
-Both buttons navigate back to the *Crisis Center* and its list of crises.
+入力中に更新される *Hero Detail* とは異なり、*Crisis Detail* の変更は、「Save」または「Cancel」ボタンを押して保存または破棄するまで、一時的に行われます。
+どちらのボタンも、*Crisis Center* とそのクライシスのリストに戻ります。
 
-Click the browser back button or the "Heroes" link to activate a dialog.
+ブラウザの戻るボタンや "Heroes"のリンクをクリックすると、ダイアログが表示されます。
 
 
 <div class="lightbox">
@@ -107,19 +107,19 @@ Click the browser back button or the "Heroes" link to activate a dialog.
 
 
 
-You can say "OK" and lose your changes or click "Cancel" and continue editing.
+「OK」をクリックして変更内容を失うか、「Cancel」をクリックして編集を続けることができます。
 
-Behind this behavior is the router's `CanDeactivate` guard.
-The guard gives you a chance to clean-up or ask the user's permission before navigating away from the current view.
+この動作の背景には、ルーターの `CanDeactivate` ガードがあります。
+このガードは、現在のビューから離れる前に、掃除をしたり、ユーザの許可を得たりする機会を与えてくれます。
 
-The `Admin` and `Login` buttons illustrate other router capabilities covered later in the guide.
+「Admin」と「Login」ボタンは、本ガイドで後述するルータの他の機能を説明しています。
 
 
 {@a getting-started}
 
-## Milestone 1: Getting started
+## マイルストーン 1: はじめる
 
-Begin with a basic version of the application that navigates between two empty views.
+まず、2つの空のビューの間を移動する基本的なアプリケーションから始めます。
 
 
 <div class="lightbox">
@@ -128,29 +128,29 @@ Begin with a basic version of the application that navigates between two empty v
 
 {@a import}
 
-Generate a sample application with the Angular CLI.
+Angular CLI でサンプルアプリケーションを生成します。
 
 <code-example language="sh">
   ng new angular-router-sample
 </code-example>
 
-### Define Routes
+### Routes を定義する
 
-A router must be configured with a list of route definitions.
+ルーターには、ルート定義のリストを設定する必要があります。
 
-Each definition translates to a [Route](api/router/Route) object which has two things: a `path`, the URL path segment for this route; and a `component`, the component associated with this route.
+各定義は[Route](api/router/Route)オブジェクトに変換され、2つの要素を持ちます。`path` はこのルートのURLパスセグメントで、`component` はこのルートに関連するコンポーネントです。
 
-The router draws upon its registry of definitions when the browser URL changes or when application code tells the router to navigate along a route path.
+ルータは、ブラウザのURLが変更されたときや、アプリケーションコードがルータにルートパスに沿って移動するよう指示したときに、その定義のレジストリを利用します。
 
-The first route does the following:
+最初のルートは次のように行われます：
 
-* When the browser's location URL changes to match the path segment `/crisis-center`, then the router activates an instance of the `CrisisListComponent` and displays its view.
+* ブラウザのロケーション URL がパスセグメント `/crisis-center` と一致するように変更されると、ルーターは `CrisisListComponent` のインスタンスをアクティブにし、そのビューを表示します。
 
-* When the application requests navigation to the path `/crisis-center`, the router activates an instance of `CrisisListComponent`, displays its view, and updates the browser's address location and history with the URL for that path.
+* アプリケーションがパス `/crisis-center` へのナビゲーションを要求すると、ルータは `CrisisListComponent` のインスタンスをアクティブにしてそのビューを表示し、ブラウザのアドレスロケーションと履歴をそのパスの URL で更新します。
 
-The first configuration defines an array of two routes with minimal paths leading to the `CrisisListComponent` and `HeroListComponent`.
+最初の構成では、`CrisisListComponent` と `HeroListComponent` につながる最小限のパスを持つ2つのルートの配列を定義しています。
 
-Generate the `CrisisList` and `HeroList` components so that the router has something to render.
+`CrisisList` と `HeroList` のコンポーネントを生成して、ルーターがレンダリングできるようにします。
 
 <code-example language="sh">
   ng generate component crisis-list
@@ -160,7 +160,7 @@ Generate the `CrisisList` and `HeroList` components so that the router has somet
   ng generate component hero-list
 </code-example>
 
-Replace the contents of each component with the sample HTML below.
+各コンポーネントの内容を、以下のサンプルHTMLに置き換えます。
 
 <code-tabs>
 
@@ -174,12 +174,12 @@ Replace the contents of each component with the sample HTML below.
 
 </code-tabs>
 
-### Register `Router` and `Routes`
+### `Router` と `Routes` を登録する
 
-In order to use the `Router`, you must first register the `RouterModule` from the `@angular/router` package.
-Define an array of routes, `appRoutes`, and pass them to the `RouterModule.forRoot()` method.
-The `RouterModule.forRoot()` method returns a module that contains the configured `Router` service provider, plus other providers that the routing library requires.
-Once the application is bootstrapped, the `Router` performs the initial navigation based on the current browser URL.
+`Router` を使用するには、まず `@angular/router` パッケージの `RouterModule` を登録する必要があります。
+ルートの配列である `appRoutes` を定義して、それを `RouterModule.forRoot()` メソッドに渡します。
+`RouterModule.forRoot()` メソッドは、設定された `Router` サービスプロバイダーと、ルーティングライブラリが必要とする他のプロバイダを含むモジュールを返します。
+アプリケーションが起動されると、`Router` は現在のブラウザのURLに基づいて最初のナビゲーションを行います。
 
 <div class="alert is-important">
 
@@ -191,13 +191,13 @@ Once the application is bootstrapped, the `Router` performs the initial navigati
 
 <div class="alert is-helpful">
 
-Adding the configured `RouterModule` to the `AppModule` is sufficient for minimal route configurations.
-However, as the application grows, [refactor the routing configuration](#refactor-the-routing-configuration-into-a-routing-module) into a separate file and create a [Routing Module](#routing-module).
-A routing module is a special type of `Service Module` dedicated to routing.
+設定した `RouterModule` を `AppModule` に追加することで、最小限のルート設定として十分です。
+しかし、アプリケーションの規模が大きくなってきたら、[ルーティング設定をリファクタリング](#refactor-the-routing-configuration-into-a-routing-module)して別ファイルにし、[ルーティングモジュール](#routing-module)を作成します。
+ルーティングモジュールは、ルーティングに特化した特別なタイプの`サービスモジュール`です。
 
 </div>
 
-Registering the `RouterModule.forRoot()` in the `AppModule` `imports` array makes the `Router` service available everywhere in the application.
+`AppModule` の `imports` 配列に `RouterModule.forRoot()` を登録することで、アプリケーション内のあらゆる場所で `Router` サービスを利用できるようになります。
 
 {@a shell}
 

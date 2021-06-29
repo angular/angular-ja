@@ -513,144 +513,144 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 {@a routing-module}
 
-## Milestone 2: *Routing module*
+## マイルストーン 2: *ルーティングモジュール*
 
-This milestone shows you how to configure a special-purpose module called a *Routing Module*, which holds your application's routing configuration.
+このマイルストーンでは、アプリケーションのルーティング設定を保持する、*ルーティングモジュール* と呼ばれる特別な目的のモジュールを設定する方法を説明します。
 
-The Routing Module has several characteristics:
+ルーティングモジュールにはいくつかの特徴があります：
 
-* Separates routing concerns from other application concerns.
-* Provides a module to replace or remove when testing the application.
-* Provides a well-known location for routing service providers such as guards and resolvers.
-* Does not declare components.
+* ルーティングに関する関心事を他のアプリケーションに関する関心事から分離する。
+* アプリケーションをテストする際に、交換または削除するモジュールを提供する。
+* ガードやリゾルバなどのルーティングサービスプロバイダのための有名なロケーションを提供する。
+* コンポーネントを宣言しない。
 
 {@a integrate-routing}
 
-### Integrate routing with your app
+### ルーティングをアプリに組み込む
 
-The sample routing application does not include routing by default.
-When you use the [Angular CLI](cli) to create a project that does use routing, set the `--routing` option for the project or application, and for each NgModule.
-When you create or initialize a new project (using the CLI [`ng new`](cli/new) command) or a new application (using the [`ng generate app`](cli/generate) command), specify the `--routing` option.
-This tells the CLI to include the `@angular/router` npm package and create a file named `app-routing.module.ts`.
-You can then use routing in any NgModule that you add to the project or application.
+サンプルのルーティングアプリケーションは、デフォルトではルーティングを含んでいません。
+Angular CLI](cli) を使ってルーティングを使用するプロジェクトを作成する際には、プロジェクトやアプリケーション、各NgModuleに `--routing` オプションを設定してください。
+新しいプロジェクト（CLIの[`ng new`](cli/new) コマンドを使用）や新しいアプリケーション（[`ng generate app`](cli/generate) コマンドを使用）を作成または初期化する際には、`--routing` オプションを指定します。
+これによりCLIは、`@angular/router` のnpmパッケージをインクルードし、`app-routing.module.ts` という名前のファイルを作成するようになります。
+これにより、プロジェクトやアプリケーションに追加したNgModuleでルーティングを使用することができます。
 
-For example, the following command generates an NgModule that can use routing.
+例えば、次のコマンドは、ルーティングを使用できるNgModuleを生成します。
 
 ```sh
 ng generate module my-module --routing
 ```
 
-This creates a separate file named `my-module-routing.module.ts` to store the NgModule's routes.
-The file includes an empty `Routes` object that you can fill with routes to different components and NgModules.
+これにより、NgModuleのルートを格納するために、`my-module-routing.module.ts` という別のファイルが作成されます。
+このファイルには、空の `Routes` オブジェクトが含まれており、ここに様々なコンポーネントやNgModuleへのルートを入力することができます。
 
 {@a routing-refactor}
 
 
-### Refactor the routing configuration into a routing module
+### ルーティング設定をルーティングモジュールにリファクタリングする
 
-Create an `AppRouting` module in the `/app` folder to contain the routing configuration.
+`AppRouting` モジュールを `/app` フォルダ内に作成し、ルーティングの設定を格納します。
 
 <code-example language="sh">
   ng generate module app-routing --module app --flat
 </code-example>
 
-Import the `CrisisListComponent`, `HeroListComponent`, and `PageNotFoundComponent` symbols like you did in the `app.module.ts`.
-Then move the `Router` imports and routing configuration, including `RouterModule.forRoot()`, into this routing module.
+`app.module.ts` で行ったように、`CrisisListComponent`、`HeroListComponent`、`PageNotFoundComponent` のシンボルをインポートします。
+そして、`Router` のインポートと、`RouterModule.forRoot()` を含むルーティング設定を、このルーティングモジュールに移動します。
 
-Re-export the Angular `RouterModule` by adding it to the module `exports` array.
-By re-exporting the `RouterModule` here, the components declared in `AppModule` have access to router directives such as `RouterLink` and `RouterOutlet`.
+モジュールの `exports` 配列に追加して、Angular の `RouterModule` を再エクスポートします。
+ここで `RouterModule` を再インポートすることで、`AppModule` で宣言されたコンポーネントは、`RouterLink` や `RouterOutlet` といったルーターディレクティブにアクセスできるようになります。
 
-After these steps, the file should look like this.
+以上の手順を経て、ファイルは以下のようになります。
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts"></code-example>
 
-Next, update the `app.module.ts` file by removing `RouterModule.forRoot` in the `imports` array.
+次に、`app.module.ts`ファイルを更新し、`imports` 配列の `RouterModule.forRoot` を削除します。
 
 <code-example path="router/src/app/app.module.2.ts" header="src/app/app.module.ts"></code-example>
 
 <div class="alert is-helpful">
 
-Later, this guide shows you how to create [multiple routing modules](#heroes-functionality) and import those routing modules [in the correct order](#routing-module-order).
+後ほど、このガイドで[複数のルーティングモジュール](#heroes-functionality)を作成し、それらのルーティングモジュールを[正しい順序で](#routing-module-order)インポートする方法を紹介します。
 
 </div>
 
-The application continues to work just the same, and you can use `AppRoutingModule` as the central place to maintain future routing configuration.
+アプリケーションはそのまま動作し、今後のルーティング設定を維持するための包括的な場所として、`AppRoutingModule` を使用することができます。
 
 {@a why-routing-module}
 
-### Benefits of a routing module
+### ルーティングモジュールのメリット
 
-The routing module, often called the `AppRoutingModule`, replaces the routing configuration in the root or feature module.
+ルーティングモジュールはしばしば `AppRoutingModule` と呼ばれ、ルートモジュールやフューチャーモジュールのルーティング設定を代わりになります。
 
-The routing module is helpful as your application grows and when the configuration includes specialized guard and resolver services.
+ルーティングモジュールは、アプリケーションが成長したときや、特化したガードやリゾルバサービスを含む構成のときに役立ちます。
 
-Some developers skip the routing module when the configuration is minimal and merge the routing configuration directly into the companion module (for example, `AppModule`).
+開発者の中には、構成が最小限の場合にはルーティングモジュールをスキップして、ルーティングコンフィグレーションをコンパニオンモジュール (例えば、`AppModule`) に直接マージする人もいます。
 
-Most applications should implement a routing module for consistency.
-It keeps the code clean when configuration becomes complex.
-It makes testing the feature module easier.
-Its existence calls attention to the fact that a module is routed.
-It is where developers expect to find and expand routing configuration.
+ほとんどのアプリケーションは、一貫性のためにルーティングモジュールを実装すべきです。
+構成が複雑になったときにコードをきれいに保つことができます。
+フューチャーモジュールのテストを容易にします。
+ルーティングモジュールの存在は、モジュールがルーティングされているという事実に注意を喚起します。
+このモジュールは、開発者がルーティング設定を見つけたり、拡張したりするための場所です。
 
 {@a heroes-feature}
 
-## Milestone 3: Heroes feature
+## Milestone 3: ヒーロー機能
 
-This milestone covers the following:
+このマイルストーンは、以下の内容を含んでいます：
 
-* Organizing the application and routes into feature areas using modules.
-* Navigating imperatively from one component to another.
-* Passing required and optional information in route parameters.
+* モジュールを使って、アプリケーションとルートをフューチャーエリアに整理する。
+* あるコンポーネントから別のコンポーネントへの必須のナビゲーション。
+* ルートのパラメータに必要な情報とオプションの情報を渡す。
 
-This sample application recreates the heroes feature in the "Services" section of the [Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services"), and reuses much of the code from the <live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>.
+このサンプルアプリケーションは、[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services") の"Services"セクションにあるヒーロー機能を再現したもので、<live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>のコードの多くを再利用しています。
 
-A typical application has multiple feature areas, each dedicated to a particular business purpose with its own folder.
+典型的なアプリケーションには複数のフューチャーエリアがあり、それぞれが特定のビジネス目的のために専用のフォルダを持っています。
 
-This section shows you how refactor the application into different feature modules, import them into the main module and navigate among them.
+このセクションでは、アプリケーションを異なるフューチャーモジュールにリファクタリングし、それらをメインモジュールにインポートして、それらの間をナビゲートする方法を紹介します。
 
 
 {@a heroes-functionality}
 
-### Add heroes functionality
+### ヒーロー機能の追加
 
-Follow these steps:
+以下の手順に従ってください：
 
-* To manage the heroes, create a `HeroesModule` with routing in the heroes folder and register it with the root `AppModule`.
+* ヒーローを管理するために、heroes フォルダにルーティング機能を持つ `HeroesModule` を作成し、ルートの `AppModule` に登録します。
 
 <code-example language="sh">
   ng generate module heroes/heroes --module app --flat --routing
 </code-example>
 
-* Move the placeholder `hero-list` folder that's in the `app` folder into the `heroes` folder.
-* Copy the contents of the `heroes/heroes.component.html` from
-  the <live-example name="toh-pt4" title="Tour of Heroes: Services example code">"Services" tutorial</live-example> into the `hero-list.component.html` template.
+* `app` フォルダの中にあるプレースホルダーの `hero-list` フォルダを `heroes` フォルダの中に移動します。
+* <live-example name="toh-pt4" title="Tour of Heroes: Services example code">"Services" tutorial</live-example> から、
+  `heroes/heroes.component.html` の内容を `hero-list.component.html` テンプレートにコピーします。
 
-  * Re-label the `<h2>` to `<h2>HEROES</h2>`.
-  * Delete the `<app-hero-detail>` component at the bottom of the template.
+  * `<h2>` のラベルを `<h2>HEROES</h2>` に変更します。
+  * テンプレートの下部にある `<app-hero-detail>` コンポーネントを削除します。
 
-* Copy the contents of the `heroes/heroes.component.css` from the live example into the `hero-list.component.css` file.
-* Copy the contents of the `heroes/heroes.component.ts` from the live example into the `hero-list.component.ts` file.
+* live sample の `heroes/heroes.component.css` の内容を `hero-list.component.css` ファイルにコピーします。
+* live sample の `heroes/heroes.component.ts` の内容を `hero-list.component.ts` ファイルにコピーします。
 
-  * Change the component class name to `HeroListComponent`.
-  * Change the `selector` to `app-hero-list`.
+  * コンポーネントのクラス名を `HeroListComponent` に変更します。
+  * `selector` を `app-hero-list` に変更します。
 
 <div class="alert is-helpful">
 
-   Selectors are not required for routed components because components are dynamically inserted when the page is rendered. However, they are useful for identifying and targeting them in your HTML element tree.
+   コンポーネントはページがレンダリングされるときに動的に挿入されるので、ルーティングされたコンポーネントにはセレクタは必要ありません。しかし、HTMLの要素ツリーでコンポーネントを特定し、ターゲットにするには便利です。
 
 </div>
 
-* Copy the `hero-detail` folder, the `hero.ts`, `hero.service.ts`,  and `mock-heroes.ts` files into the `heroes` subfolder.
-* Copy the `message.service.ts` into the `src/app` folder.
-* Update the relative path import to the `message.service` in the `hero.service.ts` file.
+* `hero-detail` フォルダ、`hero.ts`, `hero.service.ts`, `mock-heroes.ts` ファイルを `heroes` サブフォルダにコピーします。
+* `message.service.ts` を `src/app` フォルダにコピーします。
+* `hero.service.ts` ファイルの `message.service` への相対パスのインポートを更新します。
 
-Next, update the `HeroesModule` metadata.
+次に、`HeroesModule` のメタデータを更新します。
 
-  * Import and add the `HeroDetailComponent` and `HeroListComponent` to the `declarations` array in the `HeroesModule`.
+  * `HeroesModule` 内の `declarations` 配列に `HeroDetailComponent` と `HeroListComponent` をインポートして追加します。
 
 <code-example path="router/src/app/heroes/heroes.module.ts" header="src/app/heroes/heroes.module.ts"></code-example>
 
-The hero management file structure is as follows:
+ヒーロー管理のファイル構成は以下の通りです：
 
 <div class='filetree'>
 
@@ -728,31 +728,31 @@ The hero management file structure is as follows:
 
 {@a hero-routing-requirements}
 
-#### Hero feature routing requirements
+#### ヒーロー機能のルーティング要件
 
-The heroes feature has two interacting components, the hero list and the hero detail.
-When you navigate to list view, it gets a list of heroes and displays them.
-When you click on a hero, the detail view has to display that particular hero.
+ヒーロー機能には、hero list と hero detail という相互作用する2つのコンポーネントがあります。
+リストビューに移動すると、ヒーローのリストを取得し、それらを表示します。
+ヒーローをクリックすると、detailビューはその特定のヒーローを表示しなければなりません。
 
-You tell the detail view which hero to display by including the selected hero's id in the route URL.
+ルートURLに選択したヒーローのIDを含めることで、どのヒーローを表示するかをdetailビューに伝えます。
 
-Import the hero components from their new locations in the `src/app/heroes/` folder and define the two hero routes.
+`src/app/moes/` フォルダの新しい場所からヒーローコンポーネントをインポートし、2つのヒーロールートを定義します。
 
-Now that you have routes for the `Heroes` module, register them with the `Router` using the `RouterModule` as you did in the `AppRoutingModule`, with an important difference.
+`Heroes` モジュール用のルートができたので、`AppRoutingModule` で行ったように `RouterModule` を使用して `Router` にそれらを登録します。
 
-In the `AppRoutingModule`, you used the static `RouterModule.forRoot()` method to register the routes and application level service providers.
-In a feature module you use the static `forChild()` method.
+`AppRoutingModule` では、静的な `RouterModule.forRoot()` メソッドを使用して、ルートとアプリケーションレベルのサービスプロバイダを登録しました。
+フューチャーモジュールでは、静的な `forChild()` メソッドを使用します。
 
 
 <div class="alert is-helpful">
 
-Only call `RouterModule.forRoot()` in the root `AppRoutingModule`
-(or the `AppModule` if that's where you register top level application routes).
-In any other module, you must call the `RouterModule.forChild()` method to register additional routes.
+ルートの `AppRoutingModule` でのみ、`RouterModule.forRoot()` を呼び出します。
+（もしくは、トップレベルのアプリケーションルートを登録する場所であれば `AppModule` で呼び出す。）
+その他のモジュールでは、追加のルートを登録するためには `RouterModule.forChild()` メソッドを呼び出す必要があります。
 
 </div>
 
-The updated `HeroesRoutingModule` looks like this:
+更新された`HeroesRoutingModule` は以下のようになります：
 
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts"></code-example>
@@ -760,8 +760,8 @@ The updated `HeroesRoutingModule` looks like this:
 
 <div class="alert is-helpful">
 
-Consider giving each feature module its own route configuration file.
-Though the feature routes are currently minimal, routes have a tendency to grow more complex even in small applications.
+各フューチャーモジュールに独自のルート設定ファイルを与えることを検討してください。
+現在、フューチャーのルートは最小限ですが、小さなアプリケーションでもルートは複雑になる傾向があります。
 
 </div>
 
@@ -769,71 +769,70 @@ Though the feature routes are currently minimal, routes have a tendency to grow 
 {@a remove-duplicate-hero-routes}
 
 
-#### Remove duplicate hero routes
+#### 重複するヒーロールートの削除
 
-The hero routes are currently defined in two places: in the `HeroesRoutingModule`,
-by way of the `HeroesModule`, and in the `AppRoutingModule`.
+現在、ヒーロールートは `HeroesRoutingModule` 内の2つの場所：`HeroesModule` と `AppRoutingModule` で定義されています。
 
-Routes provided by feature modules are combined together into their imported module's routes by the router.
-This allows you to continue defining the feature module routes without modifying the main route configuration.
+フューチャーモジュールによって提供されたルートは、ルーターによってそのインポートされたモジュールのルートに統合されます。
+これにより、メインのルート設定を変更することなく、機能モジュールのルートを定義し続けることができます。
 
-Remove the `HeroListComponent` import and the `/heroes` route from the `app-routing.module.ts`.
+`app-routing.module.ts` から、`HeroListComponent` のインポートと `/heroes` のルートを削除します。
 
-Leave the default and the wildcard routes as these are still in use at the top level of the application.
+デフォルトとワイルドカードのルートは、アプリケーションのトップレベルでまだ使用されているので残しておきます。
 
 <code-example path="router/src/app/app-routing.module.2.ts" header="src/app/app-routing.module.ts (v2)"></code-example>
 
 {@a merge-hero-routes}
 
-#### Remove heroes declarations
+#### heroes declarations の削除
 
-Because the `HeroesModule` now provides the `HeroListComponent`, remove it from the `AppModule`'s `declarations` array.
-Now that you have a separate `HeroesModule`, you can evolve the hero feature with more components and different routes.
+`HeroesModule` が `HeroListComponent` を提供するようになったので、`AppModule` の `declarations` 配列からこれを削除します。
+これで、独立した `HeroesModule` ができたので、より多くのコンポーネントやさまざまなルートでヒーロー機能を進化させることができます。
 
-After these steps, the `AppModule` should look like this:
+以上の手順を経て、`AppModule`は以下のようになるはずです：
 
 <code-example path="router/src/app/app.module.3.ts" header="src/app/app.module.ts" region="remove-heroes"></code-example>
 
 {@a routing-module-order}
 
-### Module import order
+### モジュールのインポート順序
 
-Notice that in the module `imports` array, the `AppRoutingModule` is last and comes _after_ the `HeroesModule`.
+モジュールの `imports` 配列では、`AppRoutingModule` が最後で、`HeroesModule` の_後_に来ていることに注意してください。
 
 <code-example path="router/src/app/app.module.3.ts" region="module-imports" header="src/app/app.module.ts (module-imports)"></code-example>
 
 
-The order of route configuration is important because the router accepts the first route that matches a navigation request path.
+ルーターはナビゲーションのリクエストパスにマッチする最初のルートを受け入れるので、ルート設定の順序は重要です。
 
-When all routes were in one `AppRoutingModule`, you put the default and [wildcard](#wildcard) routes last, after the `/heroes` route, so that the router had a chance to match a URL to the `/heroes` route _before_ hitting the wildcard route and navigating to "Page not found".
+すべてのルートが1つの `AppRoutingModule` にあったときは、デフォルトと [wildcard](#wildcard) ルートを `/heroes` ルートの後、つまり最後に置いていました。これにより、ワイルドカードルートにヒットして "Page not found" にナビゲートされる前に、ルーターが `/heroes` ルートにURLをマッチさせるチャンスがありました。
 
-Each routing module augments the route configuration in the order of import.
-If you listed `AppRoutingModule` first, the wildcard route would be registered _before_ the hero routes.
-The wildcard route&mdash;which matches _every_ URL&mdash;would intercept the attempt to navigate to a hero route.
+各ルーティングモジュールは、インポートされた順にルート設定を拡張します。
+もし `AppRoutingModule` を最初にリストアップした場合、ワイルドカードルートはヒーロールートの_前_に登録されます。
+ワイルドカードルート&mdash;は_全ての_URL&mdash;にマッチする_ので、ヒーロールートにナビゲートしようとする試みを遮断します。
 
 
 <div class="alert is-helpful">
 
-Reverse the routing modules to see a click of the heroes link resulting in "Page not found".
-Learn about inspecting the runtime router configuration [below](#inspect-config "Inspect the router config").
+ルーティングモジュールを逆にして、ヒーローのリンクをクリックすると "Page not found" という結果になることを確認します。
+ランタイムのルーター設定の検査については[下記](#inspect-config "Inspect the router config")を参照してください。
 
 </div>
 
-### Route Parameters
+### ルートパラメータ
 
 {@a route-def-with-parameter}
 
-#### Route definition with a parameter
+#### パラメータ付きのルート定義
 
-Return to the `HeroesRoutingModule` and look at the route definitions again.
-The route to `HeroDetailComponent` has an `:id` token in the path.
+`HeroesRoutingModule` に戻り、ルート定義をもう一度見てみましょう。
+`HeroDetailComponent` へのルートには、パスに `:id` トークンが含まれています。
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts (excerpt)" region="hero-detail-route"></code-example>
 
-The `:id` token creates a slot in the path for a Route Parameter.
-In this case,  this configuration causes the router to insert the `id` of a hero into that slot.
+`:id` トークンは、パスにルートパラメーター用のスロットを作成します。
+この場合、この設定によりルーターはヒーローの `id` をそのスロットに挿入します。
 
-If you tell the router to navigate to the detail component and display "Magneta", you expect a hero id to appear in the browser URL like this:
+detailコンポーネントにナビゲートし、"Magneta" を表示するようルーターに指示した場合、ブラウザのURLにヒーローのidが次のように表示されることが期待されます：
 
 
 <code-example format="nocode">
@@ -843,7 +842,7 @@ If you tell the router to navigate to the detail component and display "Magneta"
 
 
 
-If a user enters that URL into the browser address bar, the router should recognize the pattern and go to the same "Magneta" detail view.
+ユーザーがブラウザのアドレスバーにそのURLを入力すると、ルーターはそのパターンを認識し、同じ "Magneta" の詳細画面に移動するはずです。
 
 
 <div class="callout is-helpful">
@@ -852,60 +851,64 @@ If a user enters that URL into the browser address bar, the router should recogn
   Route parameter: Required or optional?
 </header>
 
-Embedding the route parameter token, `:id`, in the route definition path is a good choice for this scenario because the `id` is *required* by the `HeroDetailComponent` and because the value `15` in the path clearly distinguishes the route to "Magneta" from a route for some other hero.
+ルートパラメータトークンである `:id` をルート定義のパスに埋め込むことは、このシナリオでは良い選択です。なぜなら `id` は `HeroDetailComponent` で*必須*であり、パス内の値 `15` は "Magneta" へのルートと他のヒーローへのルートを明確に区別するからです。
 
 </div>
 
 
 {@a route-parameters}
 
-#### Setting the route parameters in the list view
+#### リストビューでのルートパラメーターの設定
 
-After navigating to the `HeroDetailComponent`, you expect to see the details of the selected hero.
-You need two pieces of information: the routing path to the component and the hero's `id`.
-
-Accordingly, the _link parameters array_ has two items: the routing _path_ and a _route parameter_ that specifies the
 `id` of the selected hero.
+`HeroDetailComponent` にナビゲートした後、選択されたヒーローの詳細を見ることができます。
+2つの情報が必要です: コンポーネントへのルーティングパスとヒーローの `id` です。
+
+したがって、_link parameters array_ には2つのアイテムがあります:
+ルーティングの _path_ と、選択されたヒーローの `id` を指定する _route parameter_ です。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array"></code-example>
 
-The router composes the destination URL from the array like this: `localhost:4200/hero/15`.
-
 The router extracts the route parameter (`id:15`) from the URL and supplies it to
 the `HeroDetailComponent` using the `ActivatedRoute` service.
+ルーターは、配列から宛先URLを次のように構成します：`localhost:4200/hero/15`
+
+ルータはURLからルートパラメータ(`id:15`)を抽出し、
+`ActivatedRoute` サービスを使って，`HeroDetailComponent`に供給します。
 
 
 {@a activated-route-in-action}
 
-### `Activated Route` in action
+### `Activated Route` の動作
 
-Import the `Router`, `ActivatedRoute`, and `ParamMap` tokens from the router package.
+router パッケージから `Router`, `ActivatedRoute`, `ParamMap` トークンをインポートします。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.1.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (activated route)" region="imports"></code-example>
 
-Import the `switchMap` operator because you need it later to process the `Observable` route parameters.
+後で `Observable` のルートパラメータを処理するために必要になるので、`switchMap` オペレータをインポートします。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (switchMap operator import)" region="rxjs-operator-import"></code-example>
 
 {@a hero-detail-ctor}
 
 Add the services as private variables to the constructor so that Angular injects them (makes them visible to the component).
+サービスをプライベート変数としてコンストラクタに追加し、Angularがそれらを注入するようにします（コンポーネントから使えるようにします）。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (constructor)" region="ctor"></code-example>
 
-In the `ngOnInit()` method, use the `ActivatedRoute` service to retrieve the parameters for the route, pull the hero `id` from the parameters, and retrieve the hero to display.
+`ngOnInit()` メソッドでは、`ActivatedRoute` サービスを使用してルートのパラメータを取得し、パラメータからヒーローの `id` を引き出し、表示するヒーローを取得します。
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (ngOnInit)" region="ngOnInit"></code-example>
 
-When the map changes, `paramMap` gets the `id` parameter from the changed parameters.
+マップが変更されると、`paramMap` は変更されたパラメータから `id` パラメータを取得します。
 
-Then you tell the `HeroService` to fetch the hero with that `id` and return the result of the `HeroService` request.
+そして、その `id` を持つヒーローを取得するように `HeroService` に指示し、`HeroService` のリクエストの結果を返します。
 
-The `switchMap` operator does two things. It flattens the `Observable<Hero>` that `HeroService` returns and cancels previous pending requests.
-If the user re-navigates to this route with a new `id` while the `HeroService` is still retrieving the old `id`, `switchMap` discards that old request and returns the hero for the new `id`.
+`switchMap` 演算子は2つのことを行います。`HeroService` が返す `Observable<Hero>` をフラット化し、以前の保留中のリクエストをキャンセルします。
+`HeroService` が古い `id` を取得している間に、ユーザーが新しい `id` でこのルートに再ナビゲートすると、`switchMap` はその古いリクエストを破棄して、新しい `id` のヒーローを返します。
 
-`AsyncPipe` handles the observable subscription and the component's `hero` property will be (re)set with the retrieved hero.
+`AsyncPipe` はオブザーバブルなサブスクリプションを処理し、コンポーネントの `hero` プロパティは取得されたヒーローで(再)設定されます。
 
 #### _ParamMap_ API
 
@@ -970,35 +973,35 @@ It provides methods to handle parameter access for both route parameters (`param
 
 {@a reuse}
 
-#### Observable <i>paramMap</i> and component reuse
+#### Observableの<i>paramMap</i>とコンポーネントの再利用
 
-In this example, you retrieve the route parameter map from an `Observable`.
-That implies that the route parameter map can change during the lifetime of this component.
+この例では、`Observable` からルートパラメータマップを取得しています。
+これは、ルートパラメータマップがこのコンポーネントの存続期間中に変更される可能性があることを意味します。
 
-By default, the router re-uses a component instance when it re-navigates to the same component type
-without visiting a different component first. The route parameters could change each time.
+デフォルトでは、ルーターは、同じコンポーネントタイプに再ナビゲートする際に、最初に別のコンポーネントを訪れることなく、
+コンポーネントインスタンスを再利用します。ルートパラメータはその都度変わる可能性があります。
 
-Suppose a parent component navigation bar had "forward" and "back" buttons
-that scrolled through the list of heroes.
-Each click navigated imperatively to the `HeroDetailComponent` with the next or previous `id`.
+親コンポーネントのナビゲーションバーに、ヒーローのリストをスクロールする
+"forward" と "back" ボタンがあったとします。
+クリックするたびに、次または前の `id` を持つ `HeroDetailComponent` に強制的にナビゲートされます。
 
-You wouldn't want the router to remove the current `HeroDetailComponent` instance from the DOM only to re-create it for the next `id` as this would re-render the view.
-For better UX, the router re-uses the same component instance and updates the parameter.
+ルーターが現在の `HeroDetailComponent` インスタンスをDOMから削除し、次の `id` のために再作成することは、ビューを再レンダリングすることになるため、望まないでしょう。
+UXを向上させるために、ルーターは同じコンポーネントインスタンスを再利用し、パラメータを更新します。
 
-Since `ngOnInit()` is only called once per component instantiation, you can detect when the route parameters change from _within the same instance_ using the observable `paramMap` property.
+`ngOnInit()` はコンポーネントのインスタンスごとに一度しか呼び出されないので、オブザーバブルな `paramMap` プロパティを使用して、ルートのパラメータが_同じインスタンス内で_変更されたことを検出することができます。
 
 
 <div class="alert is-helpful">
 
-When subscribing to an observable in a component, you almost always unsubscribe when the component is destroyed.
+コンポーネントのオブザーバブルをサブスクライブする時、ほとんどの場合、そのコンポーネントが破棄されるときにサブスクライブを解除します。
 
-However, `ActivatedRoute` observables are among the exceptions because `ActivatedRoute` and its observables are insulated from the `Router` itself.
-The `Router` destroys a routed component when it is no longer needed. This means all the component's members will also be destroyed,
-including the injected `ActivatedRoute` and the subscriptions to its `Observable` properties.
+しかし、`ActivatedRoute` とそのオブザーバブルは `Router` 自体から隔離されているため、`ActivatedRoute` のオブザーバブルは例外となります。
+`Router` はルート化されたコンポーネントが不要になったときにそれを破棄します。これは、コンポーネントのすべてのメンバーも破棄されることを意味します。
+これには、注入された `ActivatedRoute` とその `Observable` プロパティへのサブスクリプションが含まれます。
 
-The `Router` does not `complete` any `Observable` of the `ActivatedRoute` so any `finalize` or `complete` blocks will not run.
-If you need to handle something in a `finalize`, you will still need to unsubscribe in `ngOnDestroy`. You will also have to
-unsubscribe if your observable pipe has a delay with code you do not want to run after the component is destroyed.
+また、`Router` は `ActivatedRoute` の `Observable` を `complete` しないので、`finalize` や `complete` のブロックは実行されません。
+`finalize` で何かを処理する必要がある場合は、やはり `ngOnDestroy` でアンサブスクライブする必要があります。
+また、コンポーネントが破棄された後に実行したくないコードの遅延が Observable pipe にある場合にも、アンサブスクライブする必要があります。
 
 </div>
 

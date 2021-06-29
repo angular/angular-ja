@@ -201,54 +201,54 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 {@a shell}
 
-### Add the Router Outlet
+### Router Outlet を追加する
 
-The root `AppComponent` is the application shell. It has a title, a navigation bar with two links, and a router outlet where the router renders components.
+ルートの `AppComponent` は、アプリケーションシェルです。タイトル、2つのリンクがあるナビゲーションバー、ルーターがコンポーネントをレンダリングするルーターアウトレットを備えています。
 
 <div class="lightbox">
   <img src='generated/images/guide/router/shell-and-outlet.gif' alt="A nav, made of two navigation buttons, with the first button active and its associated view displayed">
 </div>
 
-The router outlet serves as a placeholder where the routed components are rendered.
+ルーターアウトレットは、ルーティングされたコンポーネントがレンダリングされるプレースホルダーの役割を果たします。
 
 {@a shell-template}
 
-The corresponding component template looks like this:
+対応するコンポーネントのテンプレートは以下のようになります：
 
 <code-example path="router/src/app/app.component.1.html" header="src/app/app.component.html"></code-example>
 
 {@a wildcard}
 
-### Define a Wildcard route
+### ワイルドカードルートを定義する
 
-You've created two routes in the application so far, one to `/crisis-center` and the other to `/heroes`.
-Any other URL causes the router to throw an error and crash the app.
+これまでのアプリケーションでは、`/crisis-center` へのルートと `/heroes` へのルートの2つを作成しました。
+それ以外のURLだと、ルーターがエラーを起こしてアプリがクラッシュしてしまいます。
 
-Add a wildcard route to intercept invalid URLs and handle them gracefully.
-A wildcard route has a path consisting of two asterisks.
-It matches every URL.
-Thus, the router selects this wildcard route if it can't match a route earlier in the configuration.
-A wildcard route can navigate to a custom "404 Not Found" component or [redirect](#redirect) to an existing route.
+ワイルドカードルートを追加して、無効なURLをインターセプトし、優雅に処理します。
+ワイルドカードルートは、2つのアスタリスクで構成されるパスを持ちます。
+これはすべてのURLにマッチします。
+このように、ルーターは、設定の初期段階でルートをマッチできない場合、このワイルドカードルートを選択します。
+ワイルドカードルートは、カスタムの「404 Not Found」コンポーネントにナビゲートしたり、既存のルートに[リダイレクト](#redirect)することができます。
 
 
 <div class="alert is-helpful">
 
-The router selects the route with a [_first match wins_](/guide/router-reference#example-config) strategy.
-Because a wildcard route is the least specific route, place it last in the route configuration.
+ルーターは、[_初めに合致したものが優先される_](/guide/router-reference#example-config)戦略でルートを選択します。
+ワイルドカードルートは最も具体性に欠けるルートなので、ルート設定では最後に配置します。
 
 </div>
 
-To test this feature, add a button with a `RouterLink` to the `HeroListComponent` template and set the link to a non-existant route called `"/sidekicks"`.
+この機能をテストするには、`HeroListComponent` テンプレートに `RouterLink` 付きのボタンを追加し、そのリンク先を`"/sidekicks"` という存在しないルートに設定します。
 
 <code-example path="router/src/app/hero-list/hero-list.component.1.html" header="src/app/hero-list/hero-list.component.html (excerpt)"></code-example>
 
-The application fails if the user clicks that button because you haven't defined a `"/sidekicks"` route yet.
+まだ `"/sidekicks"` ルートを定義していないので、ユーザがそのボタンをクリックするとアプリケーションは失敗します。
 
-Instead of adding the `"/sidekicks"` route, define a `wildcard` route and have it navigate to a `PageNotFoundComponent`.
+"/sidekicks"` ルートを追加する代わりに、`wildcard` ルートを定義して、`PageNotFoundComponent` にナビゲートするようにしましょう。
 
 <code-example path="router/src/app/app.module.1.ts" header="src/app/app.module.ts (wildcard)" region="wildcard"></code-example>
 
-Create the `PageNotFoundComponent` to display when users visit invalid URLs.
+ユーザーが無効なURLにアクセスしたときに表示する `PageNotFoundComponent` を作成します。
 
 <code-example language="sh">
   ng generate component page-not-found
@@ -256,37 +256,37 @@ Create the `PageNotFoundComponent` to display when users visit invalid URLs.
 
 <code-example path="router/src/app/page-not-found/page-not-found.component.html" header="src/app/page-not-found.component.html (404 component)"></code-example>
 
-Now when the user visits `/sidekicks`, or any other invalid URL, the browser displays "Page not found".
-The browser address bar continues to point to the invalid URL.
+これで、ユーザーが `/sidekicks` やその他の無効なURLにアクセスすると、ブラウザに「Page not found」と表示されます。
+ブラウザのアドレスバーには、無効なURLが表示され続けます。
 
 {@a redirect}
 
-### Set up redirects
+### リダイレクト設定
 
-When the application launches, the initial URL in the browser bar is by default:
+アプリケーションの起動時、ブラウザバーに表示される初期URLはデフォルトで次のようになります：
 
 <code-example>
   localhost:4200
 </code-example>
 
-That doesn't match any of the hard-coded routes which means the router falls through to the wildcard route and displays the `PageNotFoundComponent`.
+これはハードコードされたルートのどれとも一致しないため、ルーターはワイルドカードのルートに移行し、`PageNotFoundComponent` を表示します。
 
-The application needs a default route to a valid page.
-The default page for this application is the list of heroes.
-The application should navigate there as if the user clicked the "Heroes" link or pasted `localhost:4200/heroes` into the address bar.
+アプリケーションには、有効なページへのデフォルトルートが必要です。
+このアプリケーションのデフォルトページはヒーローのリストです。
+ユーザーが "Heroes" リンクをクリックするか、アドレスバーに `localhost:4200/heroes` がペーストされたかのように、アプリケーションはそこにナビゲートしなければなりません。
 
-Add a `redirect` route that translates the initial relative URL (`''`) to the desired default path (`/heroes`).
+最初の相対URL(`''`)を希望のデフォルトパス(`/heroes`)に変換する `redirect` ルートを追加します。
 
-Add the default route somewhere _above_ the wildcard route.
-It's just above the wildcard route in the following excerpt showing the complete `appRoutes` for this milestone.
+ワイルドカードルートの _上_ にデフォルトルートを追加します。
+このマイルストーンの `appRoutes` の全体像を示す以下の抜粋では、ワイルドカードルートのすぐ上にあります。
 
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts (appRoutes)" region="appRoutes"></code-example>
 
-The browser address bar shows `.../heroes` as if you'd navigated there directly.
+ブラウザのアドレスバーには `.../heroes` が表示され、あたかもそこに直接アクセスしたかのように見えます。
 
-A redirect route requires a `pathMatch` property to tell the router how to match a URL to the path of a route.
-In this app, the router should select the route to the `HeroListComponent` only when the *entire URL* matches `''`, so set the `pathMatch` value to `'full'`.
+リダイレクトルートには、URLとルートのパスをどのようにマッチさせるかをルーターに伝えるために、`pathMatch` プロパティが必要です。
+このアプリでは、*全体のURL*が `''` にマッチしたときにのみ、ルーターが `HeroListComponent` へのルートを選択する必要があるので、`pathMatch` の値を `'full'` に設定します。
 
 {@a pathmatch}
 
@@ -294,42 +294,42 @@ In this app, the router should select the route to the `HeroListComponent` only 
 
   <header>Spotlight on pathMatch</header>
 
-  Technically, `pathMatch = 'full'` results in a route hit when the *remaining*, unmatched  segments of the URL match `''`.
-  In this example, the redirect is in a top level route so the *remaining* URL and the  *entire* URL are the same thing.
+  技術的には、`pathMatch = 'full'` は、URLの*残っている*、マッチしていない部分が`''`にマッチした場合にルートヒットとなります。
+  この例では、リダイレクトはトップレベルのルートにあるので、*残っている*URLと*全体*のURLは同じものになります。
 
-  The other possible `pathMatch` value is `'prefix'` which tells the router to match the  redirect route when the remaining URL begins with the redirect route's prefix  path.
-  This doesn't apply to this sample application because if the `pathMatch` value were `'prefix'`,   every URL would match `''`.
+  他の可能な `pathMatch` 値は `'prefix'` で、これは、残りのURLがリダイレクトルートのプレフィックスパスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
+  `pathMatch` 値が `'prefix'` であれば、すべてのURLが `''` にマッチするので、このサンプルアプリケーションでは適用されません。
 
-  Try setting it to `'prefix'` and clicking the `Go to sidekicks` button.
-  Since that's a bad URL, you should see the "Page not found" page.
-  Instead, you're still on the "Heroes" page.
-  Enter a bad URL in the browser address bar.
-  You're instantly re-routed to `/heroes`.
-  Every URL, good or bad, that falls through to this route definition is a match.
+  `'prefix'` に設定して、`Go to sidekicks` ボタンをクリックしてみてください。
+  これは不正なURLなので、"Page not found" というページが表示されるはずです。
+  その代わり、"Heroes" のページが表示されたままになっています。
+  ブラウザのアドレスバーに不正なURLを入力します。
+  すぐに `/heroes` に再ルーティングされます。
+  有効でも不正でも、このルート定義に該当するURLはすべてマッチします。
 
-  The default route should redirect to the `HeroListComponent` only when the entire url is    `''`.
-  Remember to restore the redirect to `pathMatch = 'full'`.
+  デフォルトのルートでは、URL全体が `''` である場合にのみ、`HeroListComponent` にリダイレクトされるようになっています。
+  リダイレクトを `pathMatch = 'full'` に戻すことを忘れないでください。
 
-  Learn more in Victor Savkin's
+  詳しくはVictor Savkin氏の記事をご覧ください。
   [post on redirects](https://vsavkin.tumblr.com/post/146722301646/angular-router-empty-paths-componentless-routes).
 
 </div>
 
-### Milestone 1 wrap up
+### マイルストーン1のまとめ
 
-Your sample application can switch between two views when the user clicks a link.
+サンプルアプリケーションでは、ユーザーがリンクをクリックすると、2つのビューを切り替えることができます。
 
-Milestone 1 has covered how to do the following:
+マイルストーン1では、次のような方法を取り上げました：
 
-* Load the router library.
-* Add a nav bar to the shell template with anchor tags, `routerLink`  and `routerLinkActive` directives.
-* Add a `router-outlet` to the shell template where views are displayed.
-* Configure the router module with `RouterModule.forRoot()`.
-* Set the router to compose HTML5 browser URLs.
-* Handle invalid routes with a `wildcard` route.
-* Navigate to the default route when the application launches with an empty path.
+* ルーターライブラリを読み込む。
+* アンカータグ、`routerLink` 、 `routerLinkActive` ディレクティブを使って、シェルテンプレートにナビゲーションバーを追加。
+* シェルテンプレートに、ビューを表示する `router-outlet` を追加。
+* `RouterModule.forRoot()` で、ルーターモジュールを設定。
+* HTML5 ブラウザの URL を合成するようにルータを設定。
+* `ワイルドカード` ルートで、無効なルートを処理。
+* アプリケーションが空のパスで起動した場合、デフォルトのルートにナビゲート。
 
-The starter application's structure looks like this:
+スターターアプリケーションの構造は次のようになっています：
 
 <div class='filetree'>
 
@@ -479,7 +479,7 @@ The starter application's structure looks like this:
 
 
 
-Here are the files in this milestone.
+このマイルストーン内のファイルです。
 
 
 <code-tabs>

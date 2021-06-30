@@ -1194,65 +1194,65 @@ As such, the Router provides support for the matrix notation across browsers.
 
 {@a route-animation}
 
-### Adding routable animations
+### ルーティング可能なアニメーションの追加
 
-This section shows you how to add some [animations](guide/animations) to the `HeroDetailComponent`.
+ここでは、`HeroDetailComponent` に[animations](guide/animations)を追加する方法を説明します。
 
-First, import the `BrowserAnimationsModule` and add it to the `imports` array:
+まず、`BrowserAnimationsModule` をインポートして、`imports` 配列に追加します。
 
 <code-example path="router/src/app/app.module.ts" header="src/app/app.module.ts (animations-module)" region="animations-module"></code-example>
 
-Next, add a `data` object to the routes for `HeroListComponent` and `HeroDetailComponent`.
-Transitions are based on `states` and you use the `animation` data from the route to provide a named animation `state` for the transitions.
+次に、`HeroListComponent` と `HeroDetailComponent` のルートに `data` オブジェクトを追加します。
+トランジションは `state` に基づいており、ルートからの `animation` データを使用して、トランジションに名前付きのアニメーション `state` を提供します。
 
 <code-example path="router/src/app/heroes/heroes-routing.module.2.ts" header="src/app/heroes/heroes-routing.module.ts (animation data)"></code-example>
 
-Create an `animations.ts` file in the root `src/app/` folder. The contents look like this:
+ルートの `src/app/` フォルダに `animations.ts` ファイルを作成します。内容は以下のようになります：
 
 <code-example path="router/src/app/animations.ts" header="src/app/animations.ts (excerpt)"></code-example>
 
-This file does the following:
+このファイルは以下のことを行います：
 
-* Imports the animation symbols that build the animation triggers, control state, and manage transitions between states.
+* アニメーションのトリガーを作成したり、状態を制御したり、状態間の遷移を管理するアニメーションシンボルをインポートします。
 
-* Exports a constant named `slideInAnimation` set to an animation trigger named `routeAnimation`.
+* `routeAnimation` という名前のアニメーショントリガーに設定された `slideInAnimation` という名前の定数をエクスポートします。
 
-* Defines one transition when switching back and forth from the `heroes` and `hero` routes to ease the component in from the left of the screen as it enters the application view (`:enter`), the other to animate the component to the right as it leaves the application view (`:leave`).
+* `heroes` と `hero` のルートを行き来する際に、アプリケーションビューに入るときにコンポーネントが画面の左から入ってくるようにするためのトランジション（`:enter`）と、アプリケーションビューから出るときにコンポーネントが右に移動するようにするためのトランジション（`:leave`）を定義しています。
 
-Back in the `AppComponent`, import the `RouterOutlet` token from the `@angular/router` package and the `slideInAnimation` from `'./animations.ts`.
+`AppComponent`に戻り、`@angular/router` パッケージから `RouterOutlet` トークンを、 `'./animations.ts'` から `slideInAnimation` をインポートします。
 
-Add an `animations` array to the `@Component` metadata that contains the `slideInAnimation`.
+`slideInAnimation` を含む`@Component` のメタデータに、`animations` 配列を追加します。
 
 <code-example path="router/src/app/app.component.2.ts" header="src/app/app.component.ts (animations)" region="animation-imports"></code-example>
 
-In order to use the routable animations, wrap the `RouterOutlet` inside an element, use the `@routeAnimation` trigger, and bind it to the element.
+ルーティング可能なアニメーションを使用するには、`RouterOutlet` をエレメントで囲み、`@routeAnimation` トリガーを使用してエレメントにバインドします。
 
-For the `@routeAnimation` transitions to key off states, provide it with the `data` from the `ActivatedRoute`.
-The `RouterOutlet` is exposed as an `outlet` template variable, so you bind a reference to the router outlet.
-This example uses a variable of `routerOutlet`.
+キーオフ状態への `@routeAnimation` の遷移には、`ActivatedRoute` の `data` を指定します。
+`RouterOutlet` は `outlet` テンプレート変数として公開されているので、ルーターのアウトレットへの参照をバインドします。
+この例では、`routerOutlet` の変数を使用しています。
 
 <code-example path="router/src/app/app.component.2.html" header="src/app/app.component.html (router outlet)"></code-example>
 
-The `@routeAnimation` property is bound to the `getAnimationData()` with the provided `routerOutlet` reference, so the next step is to define that function in the `AppComponent`.
-The `getAnimationData()` function returns the animation property from the `data` provided through the `ActivatedRoute`. The `animation` property matches the `transition` names you used in the `slideInAnimation` defined in `animations.ts`.
+`@routeAnimation` プロパティは、提供された `routerOutlet` の参照によって `getAnimationData()` にバインドされているので、次のステップでは `AppComponent` でその関数を定義します。
+`getAnimationData()` 関数は、`ActivatedRoute` を通じて提供される `data` からアニメーションのプロパティを返します。この `animation` プロパティは `animations.ts` で定義した `slideInAnimation` で使用した `transition` の名前と一致します。
 
 <code-example path="router/src/app/app.component.2.ts" header="src/app/app.component.ts (router outlet)" region="function-binding"></code-example>
 
-When switching between the two routes, the `HeroDetailComponent` and `HeroListComponent` now ease in from the left when routed to and will slide to the right when navigating away.
+これで、2つのルート間で切り替える際`HeroDetailComponent` と `HeroListComponent` はルートにあるときは左からイーズインされ、ナビゲートして離れるときは右にスライドするようになりました。
 
 {@a milestone-3-wrap-up}
 
-### Milestone 3 wrap up
+### マイルストーン3のまとめ
 
-This section has covered the following:
+本節では、以下の内容を取り上げました：
 
-* Organizing the application into feature areas.
-* Navigating imperatively from one component to another.
-* Passing information along in route parameters and subscribe to them in the component.
-* Importing the feature area NgModule into the `AppModule`.
-* Applying routable animations based on the page.
+* アプリケーションをフューチャーエリアに整理する。
+* あるコンポーネントから別のコンポーネントへの絶対的な移動。
+* ルートパラメータで情報を渡し、コンポーネントでそれをサブスクライブする。
+* フューチャーエリアのNgModuleを`AppModule` にインポートする。
+* ページに基づいて、ルーティング可能なアニメーションを適用する。
 
-After these changes, the folder structure is as follows:
+これらの変更後、フォルダ構造は以下のようになります：
 
 <div class='filetree'>
 
@@ -1448,7 +1448,7 @@ After these changes, the folder structure is as follows:
 
 </div>
 
-Here are the relevant files for this version of the sample application.
+このバージョンのサンプルアプリケーションの関連ファイルは以下の通りです。
 
 <code-tabs>
 

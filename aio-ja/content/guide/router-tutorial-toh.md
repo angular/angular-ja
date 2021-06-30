@@ -1516,66 +1516,67 @@ As such, the Router provides support for the matrix notation across browsers.
 
 
 
-## Milestone 4: Crisis center feature
+## マイルストーン4: クライシスセンター機能
 
-This section shows you how to add child routes and use relative routing in your app.
+このセクションでは、アプリに子ルートを追加し、相対的なルーティングを使用する方法を紹介します。
 
-To add more features to the application's current crisis center, take similar steps as for the heroes feature:
+アプリケーションの現在のクライシスセンターにさらに機能を追加するには、ヒーロー機能の場合と同様の手順で行います：
 
-* Create a `crisis-center` subfolder in the `src/app` folder.
-* Copy the files and folders from `app/heroes` into the new `crisis-center` folder.
-* In the new files, change every mention of "hero" to "crisis", and "heroes" to "crises".
-* Rename the NgModule files to `crisis-center.module.ts` and `crisis-center-routing.module.ts`.
+* `src/app` フォルダ内に `crisis-center` サブフォルダを作成します。
+* `app/heroes` からファイルとフォルダを新しい `crisis-center` フォルダにコピーします。
+* 新しいファイルで、"hero" のすべての記述を "crisis" に変更し、"heroes" を "crises" に変換します。
+* NgModuleファイルの名前を、`crisis-center.module.ts` と `crisis-center-routing.module.ts` に変更します。
 
-Use mock crises instead of mock heroes:
+モックヒーローの代わりに、モッククライシスを使用します：
 
 <code-example path="router/src/app/crisis-center/mock-crises.ts" header="src/app/crisis-center/mock-crises.ts"></code-example>
 
-The resulting crisis center is a foundation for introducing a new concept&mdash;child routing.
-You can leave Heroes in its current state as a contrast with the Crisis Center.
+結果的にクライシスセンターは、新しいコンセプト&mdash;子ルートを導入するための基盤となっています。
+クライシスセンターとの対比として、ヒーローズを現状のままにしておくこともできます。
 
 <div class="alert is-helpful">
 
-In keeping with the <a href="https://blog.8thlight.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html" title="Separation of Concerns">Separation of Concerns principle</a>, changes to the Crisis Center don't affect the `AppModule` or any other feature's component.
+<a href="https://blog.8thlight.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html" title="Separation of Concerns">Separation of Concernsの原則</a>に則り、クライシスセンターへの変更は、`AppModule` や他のフィーチャーのコンポーネントには影響を与えません。
 
 </div>
 
 {@a crisis-child-routes}
 
-### A crisis center with child routes
+### 子ルートを持つクライシスセンター
 
-This section shows you how to organize the crisis center to conform to the following recommended pattern for Angular applications:
+このセクションでは、Angularアプリケーションで推奨される以下のパターンに準拠してクライシスセンターを構成する方法を紹介します：
 
-* Each feature area resides in its own folder.
-* Each feature has its own Angular feature module.
-* Each area has its own area root component.
-* Each area root component has its own router outlet and child routes.
-* Feature area routes rarely (if ever) cross with routes of other features.
+* 各機フィ＝チャーエリアは、それぞれのフォルダに存在します。
+* 各フィーチャーには、独自のAngularフィーチャーモジュールが存在します。
+* 各エリアには、それぞれのエリアルートコンポーネントがあります。
+* 各エリアルートコンポーネントは、独自のルーターアウトレットと子ルートを持ちます。
+* フィーチャーエリアのルートが他のフィーチャーのルートと交差することは、ほとんどありません。
 
-If your application had many feature areas, the component trees might consist of multiple components for those features, each with branches of other, related, components.
+アプリケーションに多くのフィーチャーエリアがある場合、コンポーネントツリーはそれらのフィーチャーのための複数のコンポーネントと、それぞれに関連する他のコンポーネントのブランチで構成されているかもしれません。
 
 
 {@a child-routing-component}
 
 
-### Child routing component
+### 子ルーティングコンポーネント
 
-Generate a `CrisisCenter` component in the `crisis-center` folder:
+`crisis-center` フォルダに `CrisisCenter` コンポーネントを生成します：
 
 <code-example language="sh">
   ng generate component crisis-center/crisis-center
 </code-example>
 
-Update the component template with the following markup:
+コンポーネントテンプレートを以下のマークアップで更新します：
 
 <code-example path="router/src/app/crisis-center/crisis-center/crisis-center.component.html" header="src/app/crisis-center/crisis-center/crisis-center.component.html"></code-example>
 
-The `CrisisCenterComponent` has the following in common with the `AppComponent`:
+`CrisisCenterComponent` は、`AppComponent` と以下の共通点があります：
 
-* It is the root of the crisis center area, just as `AppComponent` is the root of the entire application.
-* It is a shell for the crisis management feature area, just as the `AppComponent` is a shell to manage the high-level workflow.
+* `AppComponent` がアプリケーション全体のルートであるように、`CrisisCenterComponent` はクライシスセンターエリアのルートである。
+* `AppComponent` がハイレベルなワークフローを管理するためのシェルであるように、クライシスセンター機能エリアのシェルである。
 
 Like most shells, the `CrisisCenterComponent` class is minimal because it has no business logic, and its template has no links, just a title and `<router-outlet>` for the crisis center child component.
+ほとんどのシェルと同様に、`CrisisCenterComponent` クラスはビジネスロジックを持たないため最小限に抑えられており、そのテンプレートにはリンクがなく、クライシス管理センターのタイトルと子コンポーネントのための `<router-outlet>` があるだけです。
 
 {@a child-route-config}
 

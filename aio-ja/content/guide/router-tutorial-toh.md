@@ -1007,36 +1007,36 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 {@a snapshot}
 
-#### `snapshot`: the no-observable alternative
+#### `snapshot`: 観察不可能な代替手段
 
-This application won't re-use the `HeroDetailComponent`.
-The user always returns to the hero list to select another hero to view.
-There's no way to navigate from one hero detail to another hero detail without visiting the list component in between.
-Therefore, the router creates a new `HeroDetailComponent` instance every time.
+このアプリケーションは `HeroDetailComponent` を再利用しません。
+ユーザーは常にヒーローリストに戻り、表示する別のヒーローを選択します。
+間にリストコンポーネントを訪れることなく、1つのヒーローの詳細から別のヒーローの詳細へとナビゲートする方法はありません。
+そのため、ルーターは毎回、新しい `HeroDetailComponent` インスタンスを作成します。
 
-When you know for certain that a `HeroDetailComponent` instance will never be re-used, you can use `snapshot`.
+`HeroDetailComponent` のインスタンスが決して再利用されないことが確実に分かっている場合は、`snapshot` を使用できます。
 
-`route.snapshot` provides the initial value of the route parameter map.
-You can access the parameters directly without subscribing or adding observable operators as in the following:
+`route.snapshot` は、ルートのパラメータマップの初期値を提供します。
+以下のように，サブスクライブや observable 演算子を追加することなく，パラメータに直接アクセスすることができます：
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.2.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (ngOnInit snapshot)" region="snapshot"></code-example>
 
 <div class="alert is-helpful">
 
-`snapshot` only gets the initial value of the parameter map with this technique.
-Use the observable `paramMap` approach if there's a possibility that the router could re-use the component.
-This tutorial sample application uses with the observable `paramMap`.
+`snapshot` は、この手法ではパラメータマップの初期値しか取得できません。
+ルータがコンポーネントを再利用する可能性がある場合は、オブザーバブルな `paramMap` を使用してください。
+このチュートリアルのサンプルアプリケーションでは、オブザーバブルな `paramMap` を使用しています。
 
 </div>
 
 {@a nav-to-list}
 
-### Navigating back to the list component
+### リストコンポーネントへ戻るナビゲーション
 
-The `HeroDetailComponent` "Back" button uses the `gotoHeroes()` method that navigates imperatively back to the `HeroListComponent`.
+`HeroDetailComponent` の "Back" ボタンは `gotoHeroes()` メソッドを使って `HeroListComponent` に戻るように命令的にナビゲートします。
 
-The router `navigate()` method takes the same one-item _link parameters array_ that you can bind to a `[routerLink]` directive.
-It holds the path to the `HeroListComponent`:
+ルーターの `navigate()` メソッドは、`[routerLink]` ディレクティブにバインドできるのと同じ、1つの _link parameters array_ を取ります。
+これは `HeroListComponent` へのパスを保持します：
 
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.1.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (excerpt)" region="gotoHeroes"></code-example>
@@ -1044,10 +1044,12 @@ It holds the path to the `HeroListComponent`:
 
 {@a optional-route-parameters}
 
-#### Route Parameters: Required or optional?
-
 Use [route parameters](#route-parameters) to specify a required parameter value within the route URL
 as you do when navigating to the `HeroDetailComponent` in order to view the hero with `id` 15:
+#### ルートパラメーター：必須またはオプション？
+
+ルートURL内で必須のパラメータ値を指定するには、`id` 15 のヒーローを表示するために `HeroDetailComponent` にナビゲートした時のように、
+[route parameters](#rout-parameters)を使用します。
 
 
 <code-example format="nocode">
@@ -1057,135 +1059,138 @@ as you do when navigating to the `HeroDetailComponent` in order to view the hero
 
 
 
-You can also add optional information to a route request.
-For example, when returning to the `hero-detail.component.ts` list from the hero detail view, it would be nice if the viewed hero were preselected in the list.
+ルートリクエストにオプションの情報を追加することもできます。
+例えば、ヒーローの詳細画面から `hero-detail.component.ts` のリストに戻るとき、表示されたヒーローがリストの中で事前に選択されていれば良いでしょう。
 
 <div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero">
 </div>
 
-You implement this feature by including the viewed hero's `id` in the URL as an optional parameter when returning from the `HeroDetailComponent`.
 
-Optional information can also include other forms such as:
+`HeroDetailComponent` から戻る際に、閲覧されたヒーローの `id` をオプションのパラメータとしてURLに含めることで、この機能を実装します。
 
-* Loosely structured search criteria; for example, `name='wind*'`.
-* Multiple values;  for example, `after='12/31/2015' & before='1/1/2017'`&mdash;in no
-particular order&mdash;`before='1/1/2017' & after='12/31/2015'`&mdash; in a
-variety of formats&mdash;`during='currentYear'`.
+オプション情報には、次のような他の形式も含めることができます：
 
-As these kinds of parameters don't fit easily in a URL path, you can use optional parameters for conveying arbitrarily complex information during navigation.
-Optional parameters aren't involved in pattern matching and afford flexibility of expression.
+* 例えば、`name='wind*'`のような緩い構造の検索条件。
+* 複数の値；例えば、`after='12/31/2015' & before='1/1/2017'` &mdash;
+  順不同で&mdash; `before='1/1/2017' & after='12/31/2015'` &mdash;
+  様々なフォーマットで&mdash; `during='currentYear'`。
 
-The router supports navigation with optional parameters as well as required route parameters.
-Define optional parameters in a separate object _after_ you define the required route parameters.
+このようなパラメータはURLパスに収まりにくいため、ナビゲーション時に任意の複雑な情報を伝えるためにオプションパラメータを使用することができます。
+オプションのパラメータは、パターンマッチングに関与しないため、柔軟な表現が可能です。
 
-In general, use a required route parameter when the value is mandatory (for example, if necessary to distinguish one route path from another); and an optional parameter when the value is optional, complex, and/or multivariate.
+ルーターは、必須のルートパラメーターと同様に、オプショナルパラメーターによるナビゲーションをサポートしています。
+オプションのパラメータは、必須ルートのパラメーターを定義した_後_に、別のオブジェクトで定義してください。
+
+一般的には、値が必須の場合（例えば、ある経路パスを他の経路パスと区別するために必要な場合）は必須のルートパラメーターを使用し、値が任意、複雑、可変の場合はオプショナルパラメーターを使用します。
 
 {@a optionally-selecting}
 
-#### Heroes list: optionally selecting a hero
+#### Heroes list: 任意でヒーローを選択する
 
-When navigating to the `HeroDetailComponent` you specified the required `id` of the hero-to-edit in the
-route parameter and made it the second item of the [_link parameters array_](#link-parameters-array).
+`HeroDetailComponent` に移動する際、編集するヒーローの `id` をルートパラメータで指定し、
+それを [_link parameters array_](#link-parameters-array) の2番目の要素にしました。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array"></code-example>
 
 The router embedded the `id` value in the navigation URL because you had defined it as a route parameter with an `:id` placeholder token in the route `path`:
+ルーターがナビゲーションURLに `id` 値を埋め込んだのは、ルートの `path` に `:id` プレースホルダートークンを使ってルートパラメータとして定義したからです：
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts (hero-detail-route)" region="hero-detail-route"></code-example>
 
-When the user clicks the back button, the `HeroDetailComponent` constructs another _link parameters array_
-which it uses to navigate back to the `HeroListComponent`.
+ユーザーが戻るボタンをクリックすると、`HeroDetailComponent` は別の_link parameters array_を構築します。
+これを使って、`HeroListComponent`に戻ります。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.1.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (gotoHeroes)" region="gotoHeroes"></code-example>
 
-This array lacks a route parameter because previously you didn't need to send information to the `HeroListComponent`.
+以前は `HeroListComponent` に情報を送る必要がなかったので、この配列にはルートパラメータがありません。
 
-Now, send the `id` of the current hero with the navigation request so that the
-`HeroListComponent` can highlight that hero in its list.
+今は、`HeroListComponent` がそのリストの中でそのヒーローをハイライトできるように、
+現在のヒーローの `id` をナビゲーションリクエストで送ります。
 
-Send the `id` with an object that contains an optional `id` parameter.
-For demonstration purposes, there's an extra junk parameter (`foo`) in the object that the `HeroListComponent` should ignore.
-Here's the revised navigation statement:
+任意の `id` パラメータを含むオブジェクトで `id` を送信します。
+デモのために、`HeroListComponent` が無視すべき余分なジャンクパラメータ(`foo`)がオブジェクトの中にあります。
+これが修正されたナビゲーション文です：
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (go to heroes)" region="gotoHeroes"></code-example>
 
-The application still works. Clicking "back" returns to the hero list view.
+アプリケーションはまだ動作しています。"back" をクリックすると、ヒーローリスト画面に戻ります。
 
-Look at the browser address bar.
+ブラウザのアドレスバーを見てください。
 
-It should look something like this, depending on where you run it:
+実行した場所にもよりますが、以下のように見えるはずです：
 
 <code-example language="bash">
   localhost:4200/heroes;id=15;foo=foo
 
 </code-example>
 
-The `id` value appears in the URL as (`;id=15;foo=foo`), not in the URL path.
-The path for the "Heroes" route doesn't have an `:id` token.
+`id` の値はURLのパスではなく、URLの中に(`;id=15;foo=foo`)として現れます。
+"Heroes" ルートのパスには `:id` トークンがありません。
 
-The optional route parameters are not separated by "?" and "&" as they would be in the URL query string.
-They are separated by semicolons ";".
-This is matrix URL notation.
+任意ののルートパラメータは、URLのクエリ文字列のように、"? " や "&" で区切られていません。
+セミコロン ";" で区切られています。
+これはマトリクスURLの表記法です。
 
 <div class="alert is-helpful">
 
-Matrix URL notation is an idea first introduced in a [1996 proposal](https://www.w3.org/DesignIssues/MatrixURIs.html) by the founder of the web, Tim Berners-Lee.
-
-Although matrix notation never made it into the HTML standard, it is legal and it became popular among browser routing systems as a way to isolate parameters belonging to parent and child routes.
 As such, the Router provides support for the matrix notation across browsers.
+マトリクスURL表記は、Webの創始者であるTim Berners-Lee氏が[1996年の提案](https://www.w3.org/DesignIssues/MatrixURIs.html)で初めて紹介したアイデアです。
+
+マトリクス記法はHTML標準には採用されませんでしたが、合法であり、親ルートと子ルートに属するパラメータを分離する方法として、ブラウザのルーティングシステムの間で普及しました。
+このように、ルーターはマトリクス表記でのブラウザアクセスのサポートを提供しています。
 
 </div>
 
 {@a route-parameters-activated-route}
 
-### Route parameters in the `ActivatedRoute` service
+### `ActivatedRoute` サービスのルートパラメータ
 
-In its current state of development, the list of heroes is unchanged.
-No hero row is highlighted.
+現在の開発状況では、ヒーローのリストは変更されません。
+ヒーローの列はハイライトされていません。
 
-The `HeroListComponent` needs code that expects parameters.
+`HeroListComponent`には、パラメータを期待するコードが必要です。
 
-Previously, when navigating from the `HeroListComponent` to the `HeroDetailComponent`,
-you subscribed to the route parameter map `Observable` and made it available to the `HeroDetailComponent`
-in the `ActivatedRoute` service.
-You injected that service in the constructor of the `HeroDetailComponent`.
+これまでは `HeroListComponent` から `HeroDetailComponent` に移動するとき、
+ルートのパラメータマップ `Observable` をサブスクライブし、それを `ActivatedRoute` 内の `HeroDetailComponent` で
+利用できるようにしていました。
+そのサービスを `HeroDetailComponent` のコンストラクタに注入しました。
 
-This time you'll be navigating in the opposite direction, from the `HeroDetailComponent` to the `HeroListComponent`.
+今回は逆に、`HeroDetailComponent` から `HeroListComponent` へと移動します。
 
-First, extend the router import statement to include the `ActivatedRoute` service symbol:
+まず、ルーターのインポート文を拡張して、`ActivatedRoute` サービスシンボルを含めるようにします：
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.ts" header="src/app/heroes/hero-list/hero-list.component.ts (import)" region="import-router"></code-example>
 
-Import the `switchMap` operator to perform an operation on the `Observable` of route parameter map.
+ルートパラメータマップの `Observable` に対する操作を行うために、`switchMap` オペレータをインポートします。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.ts" header="src/app/heroes/hero-list/hero-list.component.ts (rxjs imports)" region="rxjs-imports"></code-example>
 
-Inject the `ActivatedRoute` in the `HeroListComponent` constructor.
+`HeroListComponent` のコンストラクタに `ActivatedRoute` を注入します。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.ts" header="src/app/heroes/hero-list/hero-list.component.ts (constructor and ngOnInit)" region="ctor"></code-example>
 
-The `ActivatedRoute.paramMap` property is an `Observable` map of route parameters.
-The `paramMap` emits a new map of values that includes `id` when the user navigates to the component.
-In `ngOnInit()` you subscribe to those values, set the `selectedId`, and get the heroes.
+`ActivatedRoute.paramMap` プロパティは、ルートパラメータの `Observable` マップです。
+`paramMap` は、ユーザーがコンポーネントに移動したときに、`id` を含む新しい値のマップを発行します。
+`ngOnInit()` では、これらの値をサブスクライブして `selectedId` を設定し、ヒーローを取得します。
 
-Update the template with a [class binding](guide/attribute-binding#class-binding).
-The binding adds the `selected` CSS class when the comparison returns `true` and removes it when `false`.
-Look for it within the repeated `<li>` tag as shown here:
+テンプレートを[クラスバインディング](guide/attribute-binding#class-binding)で更新します。
+このバインディングは、比較結果が `true` を返すと `selected` の CSS クラスを追加し、`false` を返すと削除します。
+このバインディングは、以下のように繰り返される `<li>` タグの中にあります：
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.html" header="src/app/heroes/hero-list/hero-list.component.html"></code-example>
 
-Add some styles to apply when the hero is selected.
+ヒーローが選択されたときに適用されるスタイルを追加します。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.css" region="selected" header="src/app/heroes/hero-list/hero-list.component.css"></code-example>
 
-When the user navigates from the heroes list to the "Magneta" hero and back, "Magneta" appears selected:
+ユーザーがヒーローリストから "Magneta " ヒーローに移動して戻ってくると、"Magneta " が選択された状態で表示されます：
 
 <div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero in list has different background color">
 </div>
 
-The optional `foo` route parameter is harmless and the router continues to ignore it.
+任意の `foo` ルートパラメータは無害なので、ルータはこれを無視し続けます。
 
 {@a route-animation}
 

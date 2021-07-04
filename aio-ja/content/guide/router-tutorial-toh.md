@@ -1752,31 +1752,31 @@ _リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` �
 
 {@a secondary-routes}
 
-#### Secondary routes
+#### セカンダリルート
 
-Named outlets are the targets of  _secondary routes_.
+名前の付いたアウトレットは、_セカンダリルート_ のターゲットとなります。
 
-Secondary routes look like primary routes and you configure them the same way.
-They differ in a few key respects.
+セカンダリルートはプライマリルートに似ており、同じように設定します。
+しかし、いくつかの重要な点が異なります。
 
-* They are independent of each other.
-* They work in combination with other routes.
-* They are displayed in named outlets.
+* 互いに独立しています。
+* 他のルートと組み合わせて動作します。
+* 名前の付いたアウトレットに表示されます。
 
-Generate a new component to compose the message.
+メッセージを構成する新しいコンポーネントを生成します。
 
 <code-example language="sh">
   ng generate component compose-message
 </code-example>
 
-It displays a short form with a header, an input box for the message,
-and two buttons, "Send" and "Cancel".
+ヘッダー、メッセージ用の入力ボックス、"Send "と "Cancel "の2つのボタンからなる
+ショートフォームを表示します。
 
 <div class="lightbox">
   <img src='generated/images/guide/router/contact-form.png' alt="Contact textarea with send and cancel buttons">
 </div>
 
-Here's the component, its template, and styles:
+ここでは、コンポーネントとそのテンプレート、そしてスタイルを紹介します：
 
 <code-tabs>
 
@@ -1797,77 +1797,77 @@ Here's the component, its template, and styles:
 
 </code-tabs>
 
-It looks similar to any other component in this guide, but there are two key differences.
+このコンポーネントは、このガイドの他のコンポーネントと似ていますが、2つの重要な違いがあります。
 
-Note that the `send()` method simulates latency by waiting a second before "sending" the message and closing the popup.
+`send()` メソッドは、メッセージを "送信" してポップアップを閉じるまでに1秒待つことで、待ち時間をシミュレートしていることに注意してください。
 
-The `closePopup()` method closes the popup view by navigating to the popup outlet with a `null` which the section on [clearing secondary routes](#clear-secondary-routes) covers.
+`closePopup()` メソッドは、[セカンダリルートをクリアする](#clear-secondary-routes)のセクションで説明されているように、`null` を使ってポップアップの出口に移動することで、ポップアップビューを閉じます。
 
 {@a add-secondary-route}
 
-#### Add a secondary route
+#### セカンダリルートの追加
 
-Open the `AppRoutingModule` and add a new `compose` route to the `appRoutes`.
+`AppRoutingModule` を開き、`appRoutes` に新しい `compose` ルートを追加します。
 
 <code-example path="router/src/app/app-routing.module.3.ts" header="src/app/app-routing.module.ts (compose route)" region="compose"></code-example>
 
-In addition to the `path` and `component` properties, there's a new property called `outlet`, which is set to `'popup'`.
-This route now targets the popup outlet and the `ComposeMessageComponent` will display there.
+`path` と `component` プロパティに加えて、`outlet` という新しいプロパティがあり、`'popup'` に設定されています。
+これで、このルートはポップアップのアウトレットをターゲットとし、`ComposeMessageComponent` がそこに表示されるようになります。
 
-To give users a way to open the popup, add a "Contact" link to the `AppComponent` template.
+ユーザーがポップアップを開く方法を提供するために、`AppComponent` テンプレートに "Contact" リンクを追加します。
 
 <code-example path="router/src/app/app.component.4.html" header="src/app/app.component.html (contact-link)" region="contact-link"></code-example>
 
-Although the `compose` route is configured to the "popup" outlet, that's not sufficient for connecting the route to a `RouterLink` directive.
-You have to specify the named outlet in a _link parameters array_ and bind it to the `RouterLink` with a property binding.
+`compose` ルートには "popup" というアウトレットが設定されていますが、ルートを `RouterLink` ディレクティブに接続するにはそれだけでは不十分です。
+_リンクパラメータ配列_ で名前の付いたアウトレットを指定して、それを `RouterLink` にプロパティバインディングで結合する必要があります。
 
-The _link parameters array_ contains an object with a single `outlets` property whose value is another object keyed by one (or more) outlet names.
-In this case there is only the "popup" outlet property and its value is another _link parameters array_ that specifies the `compose` route.
+_リンクパラメータ配列_ には、1つの `outlets` プロパティを持つオブジェクトが含まれており、その値は1つ（または複数）のアウトレット名をキーにした別のオブジェクトです。
+この例では、"popup" というアウトレットのプロパティだけがあり、その値は別の _リンクパラメータ配列_ で、`compose` ルートを指定しています。
 
-In other words, when the user clicks this link, the router displays the component associated with the `compose` route in the `popup` outlet.
+つまり、ユーザーがこのリンクをクリックすると、ルーターは `compose` ルートに関連付けられたコンポーネントを `popup` アウトレットに表示します。
 
 <div class="alert is-helpful">
 
-This `outlets` object within an outer object was unnecessary when there was only one route and one unnamed outlet.
+外側のオブジェクトの中にあるこの `outlets` オブジェクトは、1つのルートと1つの無名アウトレットしかない場合には不要でした。
 
-The router assumed that your route specification targeted the unnamed primary outlet and created these objects for you.
+ルーターは、あなたのルート指定が名前のないプライマリーアウトレットをターゲットにしていると仮定し、これらのオブジェクトを作成しました。
 
-Routing to a named outlet has revealed a router feature:
-you can target multiple outlets with multiple routes in the same `RouterLink` directive.
+名前のあるアウトレットへのルート指定は、ルーターの機能を明らかにしました。
+同じ `RouterLink` ディレクティブで複数のルートを指定して、複数のアウトレットをターゲットにすることができるのです。
 
 </div>
 
 {@a secondary-route-navigation}
 
-#### Secondary route navigation: merging routes during navigation
+#### セカンダリルートナビゲーション：ナビゲーション中にルートをマージする
 
-Navigate to the _Crisis Center_ and click "Contact".
-you should see something like the following URL in the browser address bar.
+_Crisis Center_ に移動し、"Contact" をクリックします。
+ブラウザのアドレスバーに以下のようなURLが表示されるはずです。
 
 <code-example>
   http://.../crisis-center(popup:compose)
 
 </code-example>
 
-The relevant part of the URL follows the `...`:
+URLの関連部分は、`...`に続いています。
 
-* The `crisis-center` is the primary navigation.
-* Parentheses surround the secondary route.
-* The secondary route consists of an outlet name (`popup`), a `colon` separator, and the secondary route path (`compose`).
+* `crisis-center` はプライマリナビゲーションです。
+* 括弧でセカンダリルートを囲みます。
+* セカンダリルートは，アウトレット名 (`popup`) 、`colon` セパレーター、およびセカンダリルートのパス (`compose`) で構成されます．
 
-Click the _Heroes_ link and look at the URL again.
+_Heroes_ リンクをクリックして、もう一度URLを見てみましょう。
 
 <code-example>
   http://.../heroes(popup:compose)
 </code-example>
 
-The primary navigation part has changed; the secondary route is the same.
+プライマリナビゲーションは変更されていますが、セカンダリルートは同じです。
 
-The router is keeping track of two separate branches in a navigation tree and generating a representation of that tree in the URL.
+ルーターは、ナビゲーションツリーの2つの別々のブランチを追跡し、そのツリー表現をURLに生成しています。
 
-You can add many more outlets and routes, at the top level and in nested levels, creating a navigation tree with many branches and the router will generate the URLs to go with it.
+さらに多くのアウトレットやルートをトップレベルやネストしたレベルに追加して、多くのブランチを持つナビゲーションツリーを作成することができ、ルーターはそれに合わせてURLを生成します。
 
-You can tell the router to navigate an entire tree at once by filling out the `outlets` object and then pass that object inside a _link parameters array_  to the `router.navigate` method.
+`outlets` オブジェクトを記入し、そのオブジェクトを _リンクパラメータ配列_ の中に入れて `router.navigate` メソッドに渡すことで、ツリー全体を一度にナビゲートするようルータに指示することができます。
 
 {@a clear-secondary-routes}
 

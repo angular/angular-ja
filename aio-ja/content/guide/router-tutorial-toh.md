@@ -1871,28 +1871,28 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 {@a clear-secondary-routes}
 
-#### Clearing secondary routes
+#### セカンダリルートの消去
 
-Like regular outlets, secondary outlets persists until you navigate away to a new component.
+通常のアウトレットと同様に、セカンダリアウトレットは、新しいコンポーネントにナビゲートして移動するまで存続します。
 
-Each secondary outlet has its own navigation, independent of the navigation driving the primary outlet.
-Changing a current route that displays in the primary outlet has no effect on the popup outlet.
-That's why the popup stays visible as you navigate among the crises and heroes.
+各セカンダリアウトレットは、プライマリアウトレットを駆動するナビゲーションとは独立した独自のナビゲーションを持っています。
+プライマリーアウトレットに表示されているルートを変更しても、ポップアップアウトレットには影響しません。
+そのため、クライシスやヒーローの間を移動しても、ポップアップは表示されたままになります。
 
-The `closePopup()` method again:
+再び `closePopup()` メソッド：
 
 <code-example path="router/src/app/compose-message/compose-message.component.ts" header="src/app/compose-message/compose-message.component.ts (closePopup)" region="closePopup"></code-example>
 
-Clicking the "send" or "cancel" buttons clears the popup view.
-The `closePopup()` function navigates imperatively with the `Router.navigate()` method, passing in a [link parameters array](#link-parameters-array).
+"send" または "cancel" ボタンをクリックすると、ポップアップビューが消去されます。
+`closePopup()` 関数は、`Router.navigate()` メソッドに[リンクパラメータ配列](#link-parameters-array)を渡すことで、必須のナビゲーションを行います。
 
-Like the array bound to the _Contact_ `RouterLink` in the `AppComponent`, this one includes an object with an `outlets` property.
-The `outlets` property value is another object with outlet names for keys.
-The only named outlet is `'popup'`.
+`AppComponent` の_Contact_`RouterLink`にバインドされた配列と同様に、この配列にも `outlets` プロパティを持つオブジェクトが含まれています。
+`outlets` プロパティの値は、キーにアウトレット名を持つ別のオブジェクトです。
+唯一のアウトレット名は `'popup'` です。
 
-This time, the value of `'popup'` is `null`.
-That's not a route, but it is a legitimate value.
-Setting the popup `RouterOutlet` to `null` clears the outlet and removes the secondary popup route from the current URL.
+今回、`'popup'` の値は `null` です。
+これはルートではありませんが、正当な値です。
+ポップアップの `RouterOutlet` を `null` に設定すると、アウトレットがクリアされ、現在のURLからセカンダリのポップアップルートが削除されます。
 
 {@a guards}
 

@@ -1575,73 +1575,72 @@ As such, the Router provides support for the matrix notation across browsers.
 * `AppComponent` がアプリケーション全体のルートであるように、`CrisisCenterComponent` はクライシスセンターエリアのルートである。
 * `AppComponent` がハイレベルなワークフローを管理するためのシェルであるように、クライシスセンター機能エリアのシェルである。
 
-Like most shells, the `CrisisCenterComponent` class is minimal because it has no business logic, and its template has no links, just a title and `<router-outlet>` for the crisis center child component.
 ほとんどのシェルと同様に、`CrisisCenterComponent` クラスはビジネスロジックを持たないため最小限に抑えられており、そのテンプレートにはリンクがなく、クライシス管理センターのタイトルと子コンポーネントのための `<router-outlet>` があるだけです。
 
 {@a child-route-config}
 
-### Child route configuration
+### 子ルートの設定
 
-As a host page for the "Crisis Center" feature, generate a `CrisisCenterHome` component in the `crisis-center` folder.
+「クライシスセンター」機能のホストページとして、`crisis-center` フォルダ内に `CrisisCenterHome` コンポーネントを生成します。
 
 <code-example language="sh">
   ng generate component crisis-center/crisis-center-home
 </code-example>
 
-Update the template with a welcome message to the `Crisis Center`.
+テンプレートを更新して、`Crisis Center` へのウェルカムメッセージを表示します。
 
 <code-example path="router/src/app/crisis-center/crisis-center-home/crisis-center-home.component.html" header="src/app/crisis-center/crisis-center-home/crisis-center-home.component.html"></code-example>
 
-Update the `crisis-center-routing.module.ts` you renamed after copying it from `heroes-routing.module.ts` file.
-This time, you define child routes within the parent `crisis-center` route.
+`heroes-routing.module.ts` ファイルからコピーして名前を変更した`crisis-center-routing.module.ts` を更新します。
+今回は、親の `crisis-center` ルートの中に子のルートを定義します。
 
 <code-example path="router/src/app/crisis-center/crisis-center-routing.module.1.ts" header="src/app/crisis-center/crisis-center-routing.module.ts (Routes)" region="routes"></code-example>
 
-Notice that the parent `crisis-center` route has a `children` property with a single route containing the `CrisisListComponent`.
-The `CrisisListComponent` route also has a `children` array with two routes.
+親の `crisis-center` ルートには `children` プロパティがあり、`CrisisListComponent` を含む1つのルートがあることに注意してください。
+また、`CrisisListComponent` ルートは、2つのルートを持つ `children` 配列を持っています。
 
-These two routes navigate to the crisis center child components,
-`CrisisCenterHomeComponent` and `CrisisDetailComponent`, respectively.
+これらの2つのルートはクライシスセンターの子コンポーネントにナビゲートします。
+それぞれ、`CrisisCenterHomeComponent` と `CrisisDetailComponent` です。
 
-There are important differences in the way the router treats child routes.
+ルーターの子ルートの扱い方に重要な違いがあります。
 
-The router displays the components of these routes in the `RouterOutlet` of the `CrisisCenterComponent`, not in the `RouterOutlet` of the `AppComponent` shell.
+ルーターは、これらのルートのコンポーネントを `AppComponent` シェルの `RouterOutlet` ではなく、`CrisisCenterComponent` の `RouterOutlet` に表示します。
 
-The `CrisisListComponent` contains the crisis list and a `RouterOutlet` to display the `Crisis Center Home` and `Crisis Detail` route components.
+`CrisisListComponent` には、クライシスリストと、`Crisis Center Home` と `Crisis Detail` のルートコンポーネントを表示するための `RouterOutlet` が含まれます。
 
-The `Crisis Detail` route is a child of the `Crisis List`.
-The router [reuses components](#reuse) by default, so the `Crisis Detail` component will be re-used as you select different crises.
-In contrast, back in the `Hero Detail` route, [the component was recreated](#snapshot-the-no-observable-alternative) each time you selected a different hero from the list of heroes.
+`Crisis Detail` ルートは `Crisis List` の子です。
+ルーターはデフォルトで[コンポーネントを再利用](#reuse)するので、`Crisis Detail` のコンポーネントは、異なるクライシスを選択すると再利用されます。
+対照的に、`Hero Detail` ルートでは、ヒーローのリストから異なるヒーローを選択するたびに[コンポーネントが再作成](#snapshot-the-no-observable-alternative)されていました。
 
-At the top level, paths that begin with `/` refer to the root of the application.
-But child routes extend the path of the parent route.
-With each step down the route tree,
-you add a slash followed by the route path, unless the path is empty.
+トップレベルでは、`/`で始まるパスは、アプリケーションのルートを参照します。
+しかし、子ルートでは親ルートのパスを拡張します。
+ルートツリーの各ステップごとに、
+パスが空でない限り、スラッシュの後にルートのパスを追加します。
 
-Apply that logic to navigation within the crisis center for which the parent path is `/crisis-center`.
+このロジックを、親パスが `/crisis-center` となっているクライシスセンター内のナビゲーションに適用します。
 
-* To navigate to the `CrisisCenterHomeComponent`, the full URL is `/crisis-center` (`/crisis-center` + `''` + `''`).
+* `CrisisCenterHomeComponent` に移動するには、完全なURLは `/crisis-center` (`/crisis-center` + `''` + `''`) となります。
 
-* To navigate to the `CrisisDetailComponent` for a crisis with `id=2`, the full URL is
-`/crisis-center/2` (`/crisis-center` + `''` +  `'/2'`).
+* `id=2` のクライシスの `CrisisDetailComponent` に移動するには、完全なURLは、
+`/crisis-center/2` (`/crisis-center` + `''` + `'/2'`) となります。
 
-The absolute URL for the latter example, including the `localhost` origin, is as follows:
+後者の例の絶対URLは、`localhost` のオリジンを含めて、以下のようになります：
 
 <code-example>
   localhost:4200/crisis-center/2
 
 </code-example>
 
-Here's the complete `crisis-center-routing.module.ts` file with its imports.
+以下は、インポートされた `crisis-center-routing.module.ts` ファイルの全体像です。
 
 <code-example path="router/src/app/crisis-center/crisis-center-routing.module.1.ts" header="src/app/crisis-center/crisis-center-routing.module.ts (excerpt)"></code-example>
 
 {@a import-crisis-module}
 
-### Import crisis center module into the `AppModule` routes
+### クライシスセンターモジュールを `AppModule` のルートにインポートする
 
-As with the `HeroesModule`, you must add the `CrisisCenterModule` to the `imports` array of the `AppModule`
-_before_ the `AppRoutingModule`:
+`HeroesModule` と同様に、`AppModule` の `imports` 配列に `CrisisCenterModule` を
+`AppRoutingModule` の_前に_追加する必要があります：
 
 <code-tabs>
 
@@ -1656,97 +1655,100 @@ _before_ the `AppRoutingModule`:
 </code-tabs>
 
 <div class="alert is-helpful">
-The import order of the modules is important because the order of the routes defined in the modules affects route matching.
-If the `AppModule` were imported first, its wildcard route (`path: '**'`) would take precedence over the routes defined in `CrisisCenterModule`.
-For more information, see the section on [route order](guide/router#route-order).
+モジュールで定義されているルートの順番がルートマッチングに影響するので、モジュールのインポート順序は重要です。
+`AppModule` が最初にインポートされた場合、そのワイルドカードルート（`path: '**'`）は、`CrisisCenterModule` で定義されたルートよりも優先されます。
+詳しくは、[ルートの順序](guide/router#route-order)の項を参照してください。
 </div>
 
-Remove the initial crisis center route from the `app-routing.module.ts` because now the `HeroesModule` and the `CrisisCenter` modules provide the feature routes.
+現在は、`HeroesModule` と `CrisisCenter` モジュールがフィーチャールートを提供しているので、`app-routing.module.ts` から最初のクライシスセンターのルートを削除します。
 
-The `app-routing.module.ts` file retains the top-level application routes such as the default and wildcard routes.
+なお、`app-routing.module.ts` ファイルには、デフォルトルートやワイルドカードルートなど、トップレベルのアプリケーションルートが残されています。
 
 <code-example path="router/src/app/app-routing.module.3.ts" header="src/app/app-routing.module.ts (v3)" region="v3"></code-example>
 
 {@a relative-navigation}
 
-### Relative navigation
+### 相対ナビゲーション
 
-While building out the crisis center feature, you navigated to the
-crisis detail route using an absolute path that begins with a slash.
+クライシスセンターのフィーチャーを構築する際、スラッシュで始まる絶対パスを使って、
+クライシスの詳細ルートにナビゲートしました。
 
-The router matches such absolute paths to routes starting from the top of the route configuration.
+ルーターは、このような絶対パスを、ルート構成の先頭から順にルートにマッチさせます。
 
-You could continue to use absolute paths like this to navigate inside the Crisis Center feature, but that pins the links to the parent routing structure.
-If you changed the parent `/crisis-center` path, you would have to change the link parameters array.
+このような絶対パスを使ってクライシスセンターのフィーチャー内を移動することは可能ですが、その場合は親のルーティング構造へのリンクが固定されます。
+親の `/crisis-center` パスを変更すると、リンクのパラメータ配列も変更しなければなりません。
 
-You can free the links from this dependency by defining paths that are relative to the current URL segment.
-Navigation within the feature area remains intact even if you change the parent route path to the feature.
+現在のURLセグメントからの相対パスを定義することで、この依存関係からリンクを解放することができます。
+フィーチャーへの親ルートのパスを変更しても、フィーチャーエリア内のナビゲーションはそのまま維持されます。
+
 
 <div class="alert is-helpful">
 
-The router supports directory-like syntax in a _link parameters list_ to help guide route name lookup:
+ルーターは、ルート名の検索を助けるために、 _リンクパラメータリストリンク_ でディレクトリライクな構文をサポートしています：
 
-`./` or `no leading slash` is relative to the current level.
+`./` または `先頭のスラッシュな` は現在のレベルからの相対的なものです。
 
-`../` to go up one level in the route path.
+`../` はルートパスの1つ上のレベルに移動します。
 
-You can combine relative navigation syntax with an ancestor path.
-If you must navigate to a sibling route, you could use the `../<sibling>` convention to go up
-one level, then over and down the sibling route path.
+相対的なナビゲーションの構文と祖先のパスを組み合わせることができます。
+兄弟ルートに移動しなければならない場合、`../<sibling>`という規約を使って、1つ上の階層に移動した後、
+兄弟ルートのパスを越えて下に降りることができます。
 
 </div>
 
-To navigate a relative path with the `Router.navigate` method, you must supply the `ActivatedRoute`
-to give the router knowledge of where you are in the current route tree.
+`Router.navigate` メソッドで相対パスをナビゲートするには、`ActivatedRoute` を供給して
+現在のルートツリーのどこにいるのかという情報をルーターに与える必要があります。
 
-After the _link parameters array_, add an object with a `relativeTo` property set to the `ActivatedRoute`.
-The router then calculates the target URL based on the active route's location.
+_リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` プロパティを設定したオブジェクトを追加します。
+するとルーターは、アクティブなルートの位置に基づいて、ターゲットのURLを計算します。
 
 <div class="alert is-helpful">
 
-Always specify the complete absolute path when calling router's `navigateByUrl()` method.
+ルーターの `navigateByUrl()` メソッドを呼び出す際には、常に完全な絶対パスを指定してください。
 
 </div>
 
 {@a nav-to-crisis}
 
-### Navigate to crisis list with a relative URL
+### 相対URLでクライシスリストにナビゲートする
 
-You've already injected the `ActivatedRoute` that you need to compose the relative navigation path.
+相対的なナビゲーションパスを構成するのに必要な `ActivatedRoute` はすでに注入されています。
 
-When using a `RouterLink` to navigate instead of the `Router` service, you'd use the same link parameters array, but you wouldn't provide the object with the `relativeTo` property.
-The `ActivatedRoute` is implicit in a `RouterLink` directive.
+`Router` サービスの代わりに `RouterLink` を使用してナビゲートする場合は、同じリンクパラメータ配列を使用しますが、オブジェクトに `relativeTo` プロパティを指定することはありません。
+`RouterLink` ディレクティブでは，`ActivatedRoute` が暗黙の了解となっています．
 
-Update the `gotoCrises()` method of the `CrisisDetailComponent` to navigate back to the Crisis Center list using relative path navigation.
+`CrisisDetailComponent` の `gotoCrises()` メソッドを更新し、相対パスナビゲーションを使ってクライシスセンターリストに戻るようにしました。
 
 <code-example path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.ts" header="src/app/crisis-center/crisis-detail/crisis-detail.component.ts (relative navigation)" region="gotoCrises-navigate"></code-example>
 
-Notice that the path goes up a level using the `../` syntax.
-If the current crisis `id` is `3`, the resulting path back to the crisis list is  `/crisis-center/;id=3;foo=foo`.
+パスは `../` 構文を使って1つ上の階層に上がっていることに注意してください。
+現在のクライシスの `id` が `3` であれば、クライシスリストに戻る結果のパスは `/crisis-center/;id=3;foo=foo` となります。
 
 {@a named-outlets}
 
-### Displaying multiple routes in named outlets
+### 名前付きアウトレットに複数のルートを表示する
 
-You decide to give users a way to contact the crisis center.
-When a user clicks a "Contact" button, you want to display a message in a popup view.
+クライシスセンターに連絡する手段をユーザーに提供することにしました。
+ユーザーが "Contact" ボタンをクリックすると、ポップアップビューにメッセージを表示します。
 
-The popup should stay open, even when switching between pages in the application, until the user closes it
-by sending the message or canceling.
-Clearly you can't put the popup in the same outlet as the other pages.
 
-Until now, you've defined a single outlet and you've nested child routes under that outlet to group routes together.
-The router only supports one primary unnamed outlet per template.
+ポップアップは、アプリケーションのページを切り替えても、ユーザーがメッセージを送信するかキャンセルしてポップアップを閉じるまで、開いたままにしておく必要があります。
+ユーザーがメッセージを送信するか、キャンセルしてポップアップを閉じるまで、アプリケーションのページを切り替えても、ポップアップは開いたままでなければなりません。
+明らかに、ポップアップを他のページと同じアウトレットに置くことはできません。
 
-A template can also have any number of named outlets.
-Each named outlet has its own set of routes with their own components.
-Multiple outlets can display different content, determined by different routes, all at the same time.
 
-Add an outlet named "popup" in the `AppComponent`, directly below the unnamed outlet.
+これまでは、1つのアウトレットを定義し、そのアウトレットの下に子ルートを入れ子にしてルートをまとめていました。
+ルーターは、プライマリな無名アウトレットはテンプレートごとに1つしかサポートしていません。
+
+1つのテンプレートは、任意の数の名前付きアウトレットを持つことができます。
+それぞれの名前付きアウトレットは、独自のコンポーネントを持つルートのセットを持っています。
+複数のアウトレットは、異なるルートで決定された異なるコンテンツを、すべて同時に表示することができます。
+
+`AppComponent` に "popup"という名前のアウトレットを、無名アウトレットのすぐ下に追加します。
 
 <code-example path="router/src/app/app.component.4.html" header="src/app/app.component.html (outlets)" region="outlets"></code-example>
 
-That's where a popup will go, once you learn how to route a popup component to it.
+ポップアップコンポーネントをルーティングする方法を学べば、そこにポップアップが表示されるようになります。
 
 {@a secondary-routes}
 

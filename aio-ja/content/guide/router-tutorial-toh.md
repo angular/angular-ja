@@ -1899,82 +1899,82 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 {@a milestone-5-route-guards}
 
 
-## Milestone 5: Route guards
+## マイルストーン 5: ルートガード
 
-At the moment, any user can navigate anywhere in the application any time, but sometimes you need to control access to different parts of your application for various reasons. Some of which may include the following:
+現時点では、ユーザーはいつでもアプリケーション内の任意の場所に移動することができますが、様々な理由でアプリケーションの異なる部分へのアクセスを制御する必要がある場合があります。その中には以下のようなものがあるかもしれません：
 
-* Perhaps the user is not authorized to navigate to the target component.
-* Maybe the user must login (authenticate) first.
-* Maybe you should fetch some data before you display the target component.
-* You might want to save pending changes before leaving a component.
-* You might ask the user if it's OK to discard pending changes rather than save them.
+* ユーザーがターゲットコンポーネントへの移動を許可されていない可能性があります。
+* おそらく、ユーザーは最初にログイン（認証）する必要があります。
+* ターゲット・コンポーネントを表示する前に、いくつかのデータをフェッチする必要があるかもしれません。
+* コンポーネントを離れる前に、保留中の変更を保存したい場合があります。
+* 保留中の変更を保存するのではなく、破棄してもよいかどうかをユーザに尋ねることがあります。
 
-You add guards to the route configuration to handle these scenarios.
+これらのシナリオを処理するために、ルート設定にガードを追加します。
 
-A guard's return value controls the router's behavior:
+ガードの戻り値は、ルータの動作を制御します：
 
-* If it returns `true`, the navigation process continues.
-* If it returns `false`, the navigation process stops and the user stays put.
-* If it returns a `UrlTree`, the current navigation cancels and a new navigation is initiated to the `UrlTree` returned.
+* `true` を返した場合、ナビゲーションプロセスは続行されます。
+* `false` を返した場合、ナビゲーションプロセスは停止し、ユーザーはそのままの状態になります。
+* `UrlTree` を返した場合、現在のナビゲーションはキャンセルされ、返された `UrlTree` への新たなナビゲーションが開始されます。
 
 <div class="alert is-helpful">
 
-**Note:** The guard can also tell the router to navigate elsewhere, effectively canceling the current navigation.
-When doing so inside a guard, the guard should return `false`;
+**注意：** ガードは、ルーターに別の場所に移動するように指示することもでき、現在の移動を効果的にキャンセルします。
+ガードの中でそれを行う場合、ガードは `false` を返さなければなりません。
 
 </div>
 
-The guard might return its boolean answer synchronously.
-But in many cases, the guard can't produce an answer synchronously.
-The guard could ask the user a question, save changes to the server, or fetch fresh data.
-These are all asynchronous operations.
+ガードはそのブール値の答えを同期的に返すかもしれません。
+しかし、多くの場合、ガードは同期的に答えを出すことはできません。
+ガードは、ユーザに質問したり、サーバに変更を保存したり、新しいデータを取得したりすることができます。
+これらはすべて非同期の操作です。
 
-Accordingly, a routing guard can return an `Observable<boolean>` or a `Promise<boolean>` and the
-router will wait for the observable to resolve to `true` or `false`.
+したがって、ルーティングガードは `Observable<boolean>` や `Promise<boolean>` を返すことができます。
+ルーターはオブザバブルが `true` または `false` に解決するのを待ちます。
 
 <div class="alert is-critical">
 
-**Note:** The observable provided to the `Router` must also complete. If the observable does not complete, the navigation does not continue.
+**注意：** `Router` に提供されるオブザバブルも完了する必要があります。オブザバブルが完了しない場合、ナビゲーションは続行されません。
 
 </div>
 
-The router supports multiple guard interfaces:
+ルーターは複数のガードインターフェイスをサポートしています：
 
-* [`CanActivate`](api/router/CanActivate) to mediate navigation *to* a route.
+* [`CanActivate`](api/router/CanActivate) は、ルート*への*ナビゲーションを仲介します。
 
-* [`CanActivateChild`](api/router/CanActivateChild) to mediate navigation *to* a child route.
+* [`CanActivateChild`](api/router/CanActivateChild) は、子ルート*への*ナビゲーションを仲介します。
 
-* [`CanDeactivate`](api/router/CanDeactivate) to mediate navigation *away* from the current route.
+* [`CanDeactivate`](api/router/CanDeactivate) は、現在のルートから*離れる*ためのナビゲーションを仲介します。
 
-* [`Resolve`](api/router/Resolve) to perform route data retrieval *before* route activation.
+* [`Resolve`](api/router/Resolve) は、ルートをアクティブにする*前に*、ルートデータの検索を行います。
 
-* [`CanLoad`](api/router/CanLoad) to mediate navigation *to* a feature module loaded _asynchronously_.
+* [`CanLoad`](api/router/CanLoad) は、_非同期的に_ロードされたフィーチャーモジュール*への*ナビゲーションを仲介します。
 
 
-You can have multiple guards at every level of a routing hierarchy.
-The router checks the `CanDeactivate` guards first, from the deepest child route to the top.
-Then it checks the `CanActivate` and `CanActivateChild` guards from the top down to the deepest child route.
-If the feature module is loaded asynchronously, the `CanLoad` guard is checked before the module is loaded.
-If _any_ guard returns false, pending guards that have not completed will be canceled, and the entire navigation is canceled.
+ルーティング階層の各レベルで複数のガードを持つことができます。
+ルーターは、一番深い子ルートから上に向かって、最初に `CanDeactivate` ガードをチェックします。
+次に、`CanActivate` と `CanActivateChild` のガードを、一番上から一番下の子ルートまでチェックします。
+フィーチャーモジュールが非同期にロードされる場合は、モジュールがロードされる前に `CanLoad` ガードがチェックされます。
+もし、_いずれかの_ガードが false を返すと、完了していない保留中のガードがキャンセルされ、ナビゲーション全体がキャンセルされます。
 
-There are several examples over the next few sections.
+次のいくつかのセクションでは、複数の例を紹介します。
 
 {@a can-activate-guard}
 
-### `CanActivate`: requiring authentication
+### `CanActivate`: 認証を必要とする
 
-Applications often restrict access to a feature area based on who the user is.
-You could permit access only to authenticated users or to users with a specific role.
-You might block or limit access until the user's account is activated.
+アプリケーションでは、ユーザーが誰であるかに基づいてフィーチャー領域へのアクセスを制限することがよくあります。
+認証されたユーザーや特定の役割を持つユーザーにのみアクセスを許可することができます。
+また、ユーザのアカウントが有効になるまで、アクセスをブロックしたり制限したりすることもあるでしょう。
 
-The `CanActivate` guard is the tool to manage these navigation business rules.
+`CanActivate` ガードは、これらのナビゲーションビジネスルールを管理するツールです。
 
-#### Add an admin feature module
+#### 管理機能モジュールの追加
 
-This section guides you through extending the crisis center with some new administrative features.
-Start by adding a new feature module named `AdminModule`.
+このセクションでは、クライシスセンターに新しい管理機能を追加する方法を説明します。
+まず、`AdminModule` という名前の新しいフィーチャーモジュールを追加します。
 
-Generate an `admin` folder with a feature module file and a routing configuration file.
+フィーチャーモジュールファイルとルーティング設定ファイルを含む `admin` フォルダを作成します。
 
 <code-example language="sh">
   ng generate module admin --routing
@@ -2101,8 +2101,8 @@ The admin feature file structure looks like this:
 
 </div>
 
-The admin feature module contains the `AdminComponent` used for routing within the
-feature module, a dashboard route and two unfinished components to manage crises and heroes.
+管理機能モジュールには、フィーチャーモジュール内のルーティングに使用される `AdminComponent` と、
+ダッシュボードのルート、そしてクライシスとヒーローを管理する2つの未完成のコンポーネントが含まれています。
 
 <code-tabs>
 
@@ -2130,9 +2130,9 @@ feature module, a dashboard route and two unfinished components to manage crises
 
 <div class="alert is-helpful">
 
-Although the admin dashboard `RouterLink` only contains a relative slash without an additional URL segment, it is a match to any route within the admin feature area.
-You only want the `Dashboard` link to be active when the user visits that route.
-Adding an additional binding to the `Dashboard` routerLink,`[routerLinkActiveOptions]="{ exact: true }"`, marks the `./` link as active when the user navigates to the `/admin` URL and not when navigating to any of the child routes.
+管理画面の `RouterLink` には相対スラッシュのみが含まれ、追加のURLセグメントは含まれませんが、管理画面のフィーチャーエリア内のどのルートにもマッチします。
+ユーザーがそのルートにアクセスしたときに、`Dashboard` のリンクがアクティブになるようにするだけです。
+`Dashboard` の routerLink に追加のバインディング `[routerLinkActiveOptions]="{ exact: true }"` を追加すると、ユーザーが `/admin` のURLに移動したときに `./` リンクがアクティブになり、子ルートに移動したときにはアクティブになりません。
 
 </div>
 

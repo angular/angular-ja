@@ -1071,7 +1071,7 @@ as you do when navigating to the `HeroDetailComponent` in order to view the hero
 
 オプション情報には、次のような他の形式も含めることができます：
 
-* 例えば、`name='wind*'`のような緩い構造の検索条件。
+* 例えば、`name='wind*'` のような緩い構造の検索条件。
 * 複数の値；例えば、`after='12/31/2015' & before='1/1/2017'` &mdash;
   順不同で&mdash; `before='1/1/2017' & after='12/31/2015'` &mdash;
   様々なフォーマットで&mdash; `during='currentYear'`。
@@ -2138,108 +2138,112 @@ The admin feature file structure looks like this:
 
 {@a component-less-route}
 
-##### Component-less route: grouping routes without a component
+##### コンポーネントレスルート：コンポーネントを持たないルートのグループ化
 
-The initial admin routing configuration:
+アドミンのルーティングの初期設定は、このようになっています：
 
 <code-example path="router/src/app/admin/admin-routing.module.1.ts" header="src/app/admin/admin-routing.module.ts (admin routing)" region="admin-routes"></code-example>
 
-The child route under the `AdminComponent` has a `path` and a `children` property but it's not using a `component`.
-This defines a _component-less_ route.
+`AdminComponent` の下にある子ルートは、`path` と`children` のプロパティを持っていますが、`component` を使っていません。
+これは _component-less_ ルートを定義しています。
 
-To group the `Crisis Center` management routes under the `admin` path a component is unnecessary.
-Additionally, a _component-less_ route makes it easier to [guard child routes](#can-activate-child-guard).
+マネジメントルートである `Crisis Center` を `admin` パスにまとめるためには、コンポーネントは必要ありません。
+さらに、_component-less_ ルートは、[子ルートのガード](#can-activate-child-guard) を容易にします。
 
 Next, import the `AdminModule` into `app.module.ts` and add it to the `imports` array
 to register the admin routes.
+次に、`AdminModule` を `app.module.ts` にインポートして、`imports` 配列に追加し、
+アドミンルートを登録します。
 
 <code-example path="router/src/app/app.module.4.ts" header="src/app/app.module.ts (admin module)" region="admin-module"></code-example>
 
-Add an "Admin" link to the `AppComponent` shell so that users can get to this feature.
+ユーザーがこの機能を利用できるように、`AppComponent` シェルに "Admin" リンクを追加します。
 
 <code-example path="router/src/app/app.component.5.html" header="src/app/app.component.html (template)"></code-example>
 
 {@a guard-admin-feature}
 
-#### Guard the admin feature
+#### アドミンフィーチャーをガードする
 
-Currently, every route within the Crisis Center is open to everyone.
-The new admin feature should be accessible only to authenticated users.
+現在、クライシスセンター内のすべてのルートは誰でもアクセス可能です。
+新しいアドミンフィーチャーは、認証されたユーザのみがアクセスできるようにする必要があります。
 
-Write a `canActivate()` guard method to redirect anonymous users to the
-login page when they try to enter the admin area.
+匿名のユーザーがアドミンエリアに入ろうとしたときにログインページにリダイレクトするために、
+`canActivate()` ガードメソッドを書きます。
 
-Generate an `AuthGuard` in the `auth` folder.
+`auth` フォルダに `AuthGuard` を生成します。
 
 <code-example language="sh">
   ng generate guard auth/auth
 </code-example>
 
-To demonstrate the fundamentals, this example only logs to the console, `returns` true immediately, and allows navigation to proceed:
+基本的なことを説明するために、この例ではコンソールにログを出力し、すぐに true を`返し`、ナビゲーションを続行できるようにしています：
 
 <code-example path="router/src/app/auth/auth.guard.1.ts" header="src/app/auth/auth.guard.ts (excerpt)"></code-example>
 
-Next, open `admin-routing.module.ts `, import the `AuthGuard` class, and
-update the admin route with a `canActivate` guard property that references it:
+次に、`admin-routing.module.ts` を開き、`AuthGuard` クラスをインポートします。
+それを参照する `canActivate` ガードプロパティで admin ルートを更新します：
 
 <code-example path="router/src/app/admin/admin-routing.module.2.ts" header="src/app/admin/admin-routing.module.ts (guarded admin route)" region="admin-route"></code-example>
 
-The admin feature is now protected by the guard, but the guard requires more customization to work fully.
+アドミンフィーチャーはガードによって守られるようになりましたが、ガードが完全に機能するためにはさらにカスタマイズが必要です。
 
 {@a teach-auth}
 
-#### Authenticate with `AuthGuard`
+#### `AuthGuard` で認証を行う
 
-Make the `AuthGuard` mimic authentication.
+`AuthGuard` に認証の真似事をさせます。
 
-The `AuthGuard` should call an application service that can login a user and retain information about the current user. Generate a new `AuthService` in the `auth` folder:
+`AuthGuard` はユーザーをログインさせ、現在のユーザーに関する情報を保持できるアプリケーションサービスを呼び出す必要があります。`auth` フォルダに新しい `AuthService` を作成します：
 
 <code-example language="sh">
   ng generate service auth/auth
 </code-example>
 
-Update the `AuthService` to log in the user:
+ユーザーをログインさせるために、`AuthService` を更新します：
 
 <code-example path="router/src/app/auth/auth.service.ts" header="src/app/auth/auth.service.ts (excerpt)"></code-example>
 
-Although it doesn't actually log in, it has an `isLoggedIn` flag to tell you whether the user is authenticated.
-Its `login()` method simulates an API call to an external service by returning an observable that resolves successfully after a short pause.
-The `redirectUrl` property stores the URL that the user wanted to access so you can navigate to it after authentication.
+実際にはログインしませんが、ユーザーが認証されているかどうかを知るために `isLoggedIn` フラグを持っています。
+`login()` メソッドは、外部サービスへのAPIコールをシミュレートするために、短い休止時間の後に正常に解決されるオブザーバブルを返します。
+`redirectUrl` プロパティには、ユーザーがアクセスしようとしたURLが格納されるので、認証後にそのURLに移動することができます。
 
 <div class="alert is-helpful">
 
-To keep things minimal, this example redirects unauthenticated users to `/admin`.
+最小限に抑えるために、この例では、認証されていないユーザーを `/admin` にリダイレクトしています。
 
 </div>
 
-Revise the `AuthGuard` to call the `AuthService`.
+`AuthGuard` が `AuthService` を呼び出すように修正しました。
 
 <code-example path="router/src/app/auth/auth.guard.2.ts" header="src/app/auth/auth.guard.ts (v2)"></code-example>
 
-Notice that you inject the `AuthService` and the `Router` in the constructor.
-You haven't provided the `AuthService` yet but it's good to know that you can inject helpful services into routing guards.
+コンストラクタで `AuthService` と `Router` を注入していることに注目してください。
+まだ `AuthService` を提供していませんが、便利なサービスをルーティングガードに注入できることを知っておくといいでしょう。
 
-This guard returns a synchronous boolean result.
-If the user is logged in, it returns true and the navigation continues.
+このガードは、同期したブール値の結果を返します。
+ユーザーがログインしている場合、このガードは true を返し、ナビゲーションを続行します。
 
-The `ActivatedRouteSnapshot` contains the _future_ route that will be activated and the `RouterStateSnapshot` contains the _future_ `RouterState` of the application, should you pass through the guard check.
+`ActivivatedRouteSnapshot` には、今後有効化される_未来_のルートが格納され、`RouterStateSnapshot` には、ガードチェックを通過した場合のアプリケーションの_未来_の `RouterState` が格納されています。
 
-If the user is not logged in, you store the attempted URL the user came from using the `RouterStateSnapshot.url` and tell the router to redirect to a login page&mdash;a page you haven't created yet.
-Returning a `UrlTree` tells the `Router` to cancel the current navigation and schedule a new one to redirect the user.
+ユーザーがログインしていない場合には、`RouterStateSnapshot.url` を使ってユーザーが訪れたURLを保存し、ルーターにログインページ&mdash;まだ作成していないページにリダイレクトするように指示します。
+`UrlTree` を返すことで、`Router` は現在のナビゲーションをキャンセルし、ユーザーをリダイレクトするための新しいナビゲーションを予約します。
 
 {@a add-login-component}
 
 #### Add the `LoginComponent`
 
-You need a `LoginComponent` for the user to log in to the application. After logging in, you'll redirect to the stored URL if available, or use the default URL.
-There is nothing new about this component or the way you use it in the router configuration.
+#### `LoginComponent` の追加
+
+ユーザーがアプリケーションにログインするためには、`LoginComponent` が必要です。ログイン後、保存されているURLがあればそこにリダイレクトするか、デフォルトのURLを使用します。
+このコンポーネントや、ルーターの設定で使用する方法については、特に目新しいものはありません。
 
 <code-example language="sh">
   ng generate component auth/login
 </code-example>
 
-Register a `/login` route in the `auth/auth-routing.module.ts`.
-In `app.module.ts`, import and add the `AuthModule` to the `AppModule` imports.
+`auth/auth-routing.module.ts` に `/login` ルートを登録します。
+`app.module.ts` では、`AuthModule` をインポートして、`AppModule` の import に追加します。
 
 
 <code-tabs>
@@ -2265,26 +2269,28 @@ In `app.module.ts`, import and add the `AuthModule` to the `AppModule` imports.
 
 {@a can-activate-child-guard}
 
-### `CanActivateChild`: guarding child routes
+### `CanActivateChild`: 子ルートのガード
 
-You can also protect child routes with the `CanActivateChild` guard.
-The `CanActivateChild` guard is similar to the `CanActivate` guard.
-The key difference is that it runs before any child route is activated.
+`CanActivateChild` ガードで子ルートを保護することもできます。
+`CanActivateChild` ガードは `CanActivate` ガードと似ています。
+主な違いは、子ルートがアクティブになる前に実行されることです。
 
-You protected the admin feature module from unauthorized access.
-You should also protect child routes _within_ the feature module.
+アドミン機能モジュールを不正なアクセスから保護しました。
+また、フィーチャーモジュール_内_の子ルートも保護する必要があります。
 
-Extend the `AuthGuard` to protect when navigating between the `admin` routes.
-Open `auth.guard.ts` and add the `CanActivateChild` interface to the imported tokens from the router package.
+`AuthGuard` を拡張して、`admin` ルートの間を移動するときに保護するようにします。
+`auth.guard.ts` を開き、`CanActivateChild` インターフェースを、ルーターパッケージからインポートしたトークンに追加します。
 
-Next, implement the `canActivateChild()` method which takes the same arguments as the `canActivate()` method: an `ActivatedRouteSnapshot` and `RouterStateSnapshot`.
-The `canActivateChild()` method can return an `Observable<boolean|UrlTree>` or `Promise<boolean|UrlTree>` for async checks and a `boolean` or `UrlTree` for sync checks.
-This one returns either `true` to allow the user to access the admin feature module or `UrlTree` to redirect the user to the login page instead:
+次に、`canActivate()` メソッドと同じ引数： `ActivatedRouteSnapshot` と `RouterStateSnapshot`を取る、`canActivateChild()` メソッドを実装します。
+`canActivateChild()` メソッドは、非同期のチェックでは `Observable<boolean|UrlTree>` や `Promise<boolean|UrlTree>` を、同期のチェックでは `boolean` や `UrlTree` を返すことができます。
+これは、ユーザーがアドミンフィーチャーモジュールにアクセスできるようにするためには `true` を、代わりにログインページにリダイレクトするためには `UrlTree` を返します：
 
 <code-example path="router/src/app/auth/auth.guard.3.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-activate-child"></code-example>
 
 Add the same `AuthGuard` to the `component-less` admin route to protect all other child routes at one time
 instead of adding the `AuthGuard` to each route individually.
+`AuthGuard` を各ルートに追加する代わりに、
+同じ `AuthGuard` を `component-less` の admin ルートに追加して、他のすべての子ルートを一度に保護します。
 
 <code-example path="router/src/app/admin/admin-routing.module.3.ts" header="src/app/admin/admin-routing.module.ts (excerpt)" region="can-activate-child"></code-example>
 
@@ -2293,90 +2299,92 @@ instead of adding the `AuthGuard` to each route individually.
 
 ### `CanDeactivate`: handling unsaved changes
 
-Back in the "Heroes" workflow, the application accepts every change to a hero immediately without validation.
+### `CanDeactivate`: 保存されていない変更の処理
 
-In the real world, you might have to accumulate the users changes, validate across fields, validate on the server, or hold changes in a pending state until the user confirms them as a group or cancels and reverts all changes.
+"Heroes" のワークフローに戻ると、アプリケーションはヒーローに対するすべての変更を検証なしですぐに受け入れます。
 
-When the user navigates away, you can let the user decide what to do with unsaved changes.
-If the user cancels, you'll stay put and allow more changes.
-If the user approves, the application can save.
+現実の世界では、ユーザーの変更を蓄積したり、フィールド間で検証したり、サーバー上で検証したり、ユーザーがグループとして確認するか、キャンセルしてすべての変更を元に戻すまで、変更を保留状態で保持する必要があるかもしれません。
 
-You still might delay navigation until the save succeeds.
-If you let the user move to the next screen immediately and saving were to fail (perhaps the data is ruled invalid), you would lose the context of the error.
+ユーザーがナビゲートして離れたとき、保存されていない変更をどうするかをユーザーに決めさせることができます。
+ユーザーがキャンセルした場合は、そのままの状態で、さらに変更を許可します。
+ユーザーが承認した場合、アプリケーションは保存できます。
 
-You need to stop the navigation while you wait, asynchronously, for the server to return with its answer.
+それでも、保存が成功するまでナビゲーションを遅らせるかもしれません。
+ユーザーをすぐに次の画面に移動させ、保存が失敗した場合（データが無効と判断された場合など）、エラーの文脈を失うことになります。
 
-The `CanDeactivate` guard helps you decide what to do with unsaved changes and how to proceed.
+非同期的にサーバーが回答を返すのを待つ間、ナビゲーションを停止する必要があります。
+
+`CanDeactivate` ガードは、保存されていない変更をどうするか、どのように進めるかを決めるのに役立ちます。
 
 {@a cancel-save}
 
-#### Cancel and save
+#### キャンセルして保存
 
-Users update crisis information in the `CrisisDetailComponent`.
-Unlike the `HeroDetailComponent`, the user changes do not update the crisis entity immediately.
-Instead, the application updates the entity when the user presses the Save button and discards the changes when the user presses the Cancel button.
+ユーザーは `CrisisDetailComponent` でクライシス情報を更新します。
+`HeroDetailComponent` とは異なり、ユーザーの変更はクライシスのエンティティをすぐには更新しません。
+代わりに、アプリケーションはユーザーが Save ボタンを押したときにエンティティを更新し、ユーザーが Cancel ボタンを押したときに変更を破棄します。
 
-Both buttons navigate back to the crisis list after save or cancel.
+どちらのボタンも、保存またはキャンセル後にクライシスリストに戻るようになっています。
 
 <code-example path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.ts" header="src/app/crisis-center/crisis-detail/crisis-detail.component.ts (cancel and save methods)" region="cancel-save"></code-example>
 
-In this scenario, the user could click the heroes link, cancel, push the browser back button, or navigate away without saving.
+このシナリオでは、ユーザーはヒーローのリンクをクリックしたり、キャンセルしたり、ブラウザの戻るボタンを押したり、保存せずに移動したりすることができます。
 
-This example application asks the user to be explicit with a confirmation dialog box that waits asynchronously for the user's
-response.
+このアプリケーション例では、確認ダイアログボックスでユーザーに明示的な要求を行い、
+ユーザーの応答を非同期的に待ちます。
 
 <div class="alert is-helpful">
 
-You could wait for the user's answer with synchronous, blocking code, however, the application is more responsive&mdash;and can do other work&mdash;by waiting for the user's answer asynchronously.
+同期的なブロッキングコードでユーザーの回答を待つこともできますが、非同期的にユーザーの回答を待った方が、アプリケーションの応答性&mdash;そして他の作業を行うことができます&mdash;。
 
 </div>
 
-Generate a `Dialog` service to handle user confirmation.
+ユーザーの確認を行うための `Dialog` サービスを生成します。
 
 <code-example language="sh">
   ng generate service dialog
 </code-example>
 
-Add a `confirm()` method to the `DialogService` to prompt the user to confirm their intent.
-The `window.confirm` is a blocking action that displays a modal dialog and waits for user interaction.
+ユーザーに意思確認を促すために，`DialogService` に `confirm()` メソッドを追加します。
+`window.confirm` はモーダルなダイアログを表示して、ユーザーの操作を待つブロッキングアクションです。
 
 <code-example path="router/src/app/dialog.service.ts" header="src/app/dialog.service.ts"></code-example>
 
-It returns an `Observable` that resolves when the user eventually decides what to do: either to discard changes and navigate away (`true`) or to preserve the pending changes and stay in the crisis editor (`false`).
+これは、ユーザーが最終的に何をすべきかを決定するときに解決する `Observable` を返します。変更を破棄してナビゲートする（`true`）か、保留中の変更を保持して危機管理エディタに留まる（`false`）かのどちらかです。
 
 {@a CanDeactivate}
 
-Generate a guard that checks for the presence of a `canDeactivate()` method in a component&mdash;any component.
+コンポーネント&mdash;あらゆるコンポーネントに `canDeactivate()` メソッドがあるかどうかをチェックするガードを生成します。
 
 <code-example language="sh">
   ng generate guard can-deactivate
 </code-example>
 
-Paste the following code into your guard.
+以下のコードをガードに貼り付けます。
 
 <code-example path="router/src/app/can-deactivate.guard.ts" header="src/app/can-deactivate.guard.ts"></code-example>
 
-While the guard doesn't have to know which component has a deactivate method, it can detect that the `CrisisDetailComponent` component has the `canDeactivate()` method and call it.
-The guard not knowing the details of any component's deactivation method makes the guard reusable.
+ガードはどのコンポーネントが deactivate メソッドを持っているかを知る必要はありませんが、`CrisisDetailComponent` コンポーネントが `canDeactivate()` メソッドを持っていることを検出して、それを呼び出すことができます。
+ガードがどのコンポーネントの deactivate メソッドの詳細を知らないことで、ガードの再利用が可能になります。
 
-Alternatively, you could make a component-specific `CanDeactivate` guard for the `CrisisDetailComponent`.
-The `canDeactivate()` method provides you with the current instance of the `component`, the current `ActivatedRoute`, and `RouterStateSnapshot` in case you needed to access some external information.
-This would be useful if you only wanted to use this guard for this component and needed to get the component's properties or confirm whether the router should allow navigation away from it.
+あるいは、`CrisisDetailComponent` のために，コンポーネント固有の `CanDeactivate` ガードを作ることもできます。
+`canDeactivate()` メソッドは、外部の情報にアクセスする必要がある場合に備えて、`component` の現在のインスタンス、現在の`ActivatedRoute`、`RouterStateSnapshot`を提供します。
+これは、このコンポーネントに対してのみこのガードを使用したい場合や、コンポーネントのプロパティを取得したり、ルーターがコンポーネントからのナビゲーションを許可するかどうかを確認する必要がある場合に便利です。
 
 <code-example path="router/src/app/can-deactivate.guard.1.ts" header="src/app/can-deactivate.guard.ts (component-specific)"></code-example>
 
-Looking back at the `CrisisDetailComponent`, it implements the confirmation workflow for unsaved changes.
+`CrisisDetailComponent` を見てみると、未保存の変更に対する確認のワークフローが実装されています。
 
 <code-example path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.ts" header="src/app/crisis-center/crisis-detail/crisis-detail.component.ts (excerpt)" region="canDeactivate"></code-example>
 
-Notice that the `canDeactivate()` method can return synchronously; it returns `true` immediately if there is no crisis or there are no pending changes.
-But it can also return a `Promise` or an `Observable` and the router will wait for that to resolve to truthy (navigate) or falsy (stay on the current route).
+`canDeactivate()` メソッドは同期的に返すことができることに注意してください。クライシスがなかったり、保留中の変更がなかったりすると、すぐに `true` を返します。
+しかし、`Promise` や `Observable` を返すこともでき、ルーターはそれが truthy (ナビゲートする)または falsy (現在のルートに留まる)に解決するのを待ちます。
 
-Add the `Guard` to the crisis detail route in `crisis-center-routing.module.ts` using the `canDeactivate` array property.
+`crisis-center-routing.module.ts` のクライシスの詳細ルートに、`canDeactivate` の配列プロパティを使って `Guard` を追加します。
 
 <code-example path="router/src/app/crisis-center/crisis-center-routing.module.3.ts" header="src/app/crisis-center/crisis-center-routing.module.ts (can deactivate guard)"></code-example>
 
-Now you have given the user a safeguard against unsaved changes.
+これで、ユーザーに保存されていない変更に対する保護手段を与えたことになります。
 
 {@a Resolve}
 

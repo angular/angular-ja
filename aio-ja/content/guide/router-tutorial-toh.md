@@ -2390,33 +2390,33 @@ instead of adding the `AuthGuard` to each route individually.
 
 {@a resolve-guard}
 
-### _Resolve_: pre-fetching component data
+### _Resolve_: コンポーネントデータのプリフェッチ
 
-In the `Hero Detail` and `Crisis Detail`, the application waited until the route was activated to fetch the respective hero or crisis.
+"Hero Detail" と "Crisis Detail" では、アプリケーションはルートがアクティブになるまで待って、それぞれのヒーローやクライシスを取得しました。
 
-If you were using a real world API, there might be some delay before the data to display is returned from the server.
-You don't want to display a blank component while waiting for the data.
+現実のAPIを使用していた場合、表示するデータがサーバーから返されるまでに多少の遅延があるかもしれません。
+データを待っている間、真っ白なコンポーネントを表示したくはないですよね。
 
-To improve this behavior, you can pre-fetch data from the server using a resolver so it's ready the
-moment the route is activated.
-This also allows you to handle errors before routing to the component.
-There's no point in navigating to a crisis detail for an `id` that doesn't have a record.
-It'd be better to send the user back to the `Crisis List` that shows only valid crisis centers.
+この動作を改善するには、リゾルバを使ってサーバーからデータを事前に取得することで、
+ルートが有効になった瞬間に準備ができます。
+これにより、コンポーネントにルーティングする前にエラーを処理することもできます。
+レコードがない `id` のクライシスの詳細に移動しても意味がありません。
+有クライシスセンターのみを表示する `Crisis List` にユーザーを戻す方が良いでしょう。
 
-In summary, you want to delay rendering the routed component until all necessary data has been fetched.
+まとめると、必要なデータがすべて取得されるまで、ルーティングされたコンポーネントのレンダリングを遅らせたいということです。
 
 
 {@a fetch-before-navigating}
 
-#### Fetch data before navigating
+#### ナビゲートする前にデータをフェッチする
 
-At the moment, the `CrisisDetailComponent` retrieves the selected crisis.
-If the crisis is not found, the router navigates back to the crisis list view.
+現時点では、`CrisisDetailComponent` は選択されたクライシスを取得します。
+クライシスが見つからない場合、ルーターはクライシスリストビューに戻ってナビゲートします。
 
-The experience might be better if all of this were handled first, before the route is activated.
-A `CrisisDetailResolver` service could retrieve a `Crisis` or navigate away, if the `Crisis` did not exist, _before_ activating the route and creating the `CrisisDetailComponent`.
+ルートをアクティブにする前に、これらすべてが最初に処理されると、より良い体験ができるかもしれません。
+`CrisisDetailResolver` サービスは、ルートをアクティブにして `CrisisDetailComponent` を作成する前に、`Crisis` を取得したり、`Crisis` が存在しない場合には離れた場所に移動したりすることができます。
 
-Generate a `CrisisDetailResolver` service file within the `Crisis Center` feature area.
+`Crisis Center` 機能エリア内に `CrisisDetailResolver` サービスファイルを生成します。
 
 <code-example language="sh">
   ng generate service crisis-center/crisis-detail-resolver
@@ -2424,45 +2424,45 @@ Generate a `CrisisDetailResolver` service file within the `Crisis Center` featur
 
 <code-example path="router/src/app/crisis-center/crisis-detail-resolver.service.1.ts" header="src/app/crisis-center/crisis-detail-resolver.service.ts (generated)"></code-example>
 
-Move the relevant parts of the crisis retrieval logic in `CrisisDetailComponent.ngOnInit()` into the `CrisisDetailResolverService`.
-Import the `Crisis` model, `CrisisService`, and the `Router` so you can navigate elsewhere if you can't fetch the crisis.
+`CrisisDetailComponent.ngOnInit()` にあるクライシスの取得ロジックの関連部分を、`CrisisDetailResolverService` に移動します。
+`Crisis` モデル、`CrisisService`、`Router` をインポートして、クライシスを取得できなかった場合に別の場所に移動できるようにします。
 
-Be explicit and implement the `Resolve` interface with a type of `Crisis`.
+明示的に、`Crisis` 型の `Resolve` インターフェースを実装してください。
 
-Inject the `CrisisService` and `Router` and implement the `resolve()` method.
-That method could return a `Promise`, an `Observable`, or a synchronous return value.
+`CrisisService` と `Router` をインジェクトして、`resolve()` メソッドを実装します。
+このメソッドは `Promise`、`Observable`、または同期的な戻り値を返すことができます．
 
-The `CrisisService.getCrisis()` method returns an observable in order to prevent the route from loading until the data is fetched.
-The `Router` guards require an observable to `complete`, which means it has emitted all
-of its values.
-You use the `take` operator with an argument of `1` to ensure that the `Observable` completes after retrieving the first value from the Observable returned by the `getCrisis()` method.
+`CrisisService.getCrisis()` メソッドは、データが取得されるまでルートがロードされないようにするために、observableを返します。
+`Router` のガードは observable が `complete` であること、
+つまり、値のすべてがemitされたことを要求します。
+`getCrisis()` メソッドが返す Observable から最初の値を取得した後に `Observable` が完了するようにするには、引数に`1`を指定して`take` 演算子を使用します。
 
-If it doesn't return a valid `Crisis`, then return an empty `Observable`, cancel the previous in-progress navigation to the `CrisisDetailComponent`, and navigate the user back to the `CrisisListComponent`.
-The updated resolver service looks like this:
+有効な `Crisis` を返さない場合は、空の `Observable` を返し、`CrisisDetailComponent` への進行中のナビゲーションをキャンセルして、`CrisisListComponent` へとユーザーを戻します。
+更新されたリゾルバサービスは以下のようになります：
 
 <code-example path="router/src/app/crisis-center/crisis-detail-resolver.service.ts" header="src/app/crisis-center/crisis-detail-resolver.service.ts"></code-example>
 
-Import this resolver in the `crisis-center-routing.module.ts` and add a `resolve` object to the `CrisisDetailComponent` route configuration.
+このリゾルバを `crisis-center-routing.module.ts` でインポートし、`resolve` オブジェクトを `CrisisDetailComponent` のルート構成に追加します。
 
 <code-example path="router/src/app/crisis-center/crisis-center-routing.module.4.ts" header="src/app/crisis-center/crisis-center-routing.module.ts (resolver)"></code-example>
 
-The `CrisisDetailComponent` should no longer fetch the crisis.
-When you re-configured the route, you changed where the crisis is.
-Update the `CrisisDetailComponent` to get the crisis from the  `ActivatedRoute.data.crisis` property instead;
+`CrisisDetailComponent` は、もはやクライシスをフェッチする必要はありません。
+ルートを再構成したときに、クライシスがどこにあるかを変更しました。
+代わりに `ActivatedRoute.data.crisis` プロパティからクライシスを取得するように `CrisisDetailComponent` を更新してください。
 
 <code-example path="router/src/app/crisis-center/crisis-detail/crisis-detail.component.ts" header="src/app/crisis-center/crisis-detail/crisis-detail.component.ts (ngOnInit v2)" region="ngOnInit"></code-example>
 
-Note the following three important points:
+次の3つの重要なポイントに注意してください：
 
-1. The router's `Resolve` interface is optional.
-The `CrisisDetailResolverService` doesn't inherit from a base class.
-The router looks for that method and calls it if found.
+1. ルーターの `Resolve` インターフェースはオプションです。
+`CrisisDetailResolverService` はbase classを継承していません。
+ルーターはそのメソッドを探し、見つかった場合はそれを呼び出します。
 
-1. The router calls the resolver in any case where the user could navigate away so you don't have to code for each use case.
+1. ルーターは、ユーザーが離れてナビゲートする可能性があるあらゆるケースでリゾルバを呼び出すので、ユースケースごとにコーディングする必要はありません。
 
-1. Returning an empty `Observable` in at least one resolver will cancel navigation.
+1. 少なくとも1つのリゾルバで空の `Observable` を返すと、ナビゲーションがキャンセルされます。
 
-The relevant Crisis Center code for this milestone follows.
+このマイルストーンに関連するクライシスセンターのコードは以下の通りです。
 
 <code-tabs>
 

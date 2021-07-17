@@ -440,7 +440,7 @@ _subscribe()_を呼び出さなければ何も起こりません。`HeroesServic
 </code-example>
 
 {@a always-subscribe}
-**いつも_subscribe_!**
+**常に_subscribe_!**
 
 `HttpClient`のメソッドは、そのメソッドが返すObservableに対し`subscribe()`を呼び出すまで、HTTPリクエストを開始しません。これは_すべての_`HttpClient`のメソッドに当てはまります。
 

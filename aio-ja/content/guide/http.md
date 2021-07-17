@@ -6,7 +6,7 @@ Angularは、Angularアプリケーション向けのHTTPクライアントのAP
 HTTPクライアントサービスの主な機能は次のとおりです。
 
 * [型付けされたレスポンスオブジェクト](#typed-response)を要求
-* 簡素化された[エラーハンドリング](#error-handling)
+* 合理化された[エラーハンドリング](#error-handling)
 * [テスタビリティ](#testing-http-requests)
 * リクエストとレスポンスへの[インターセプション](#intercepting-requests-and-responses)
 

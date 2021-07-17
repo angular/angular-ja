@@ -51,7 +51,8 @@ HTTPクライアントサービスの主な機能は次のとおりです。
 このガイドを達成する<live-example></live-example>を実行できます。
 
 サンプルアプリケーションはデータサーバーを必要としません。
-[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)に依存しています。
+[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)
+に依存しています。
 これは、_HttpClient_モジュールの`HttpBackend`に取って代わります。
 この代わりのサービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
 
@@ -93,7 +94,8 @@ options: {
 </div>
 
 アプリケーションはサーバーにJSONデータを要求することがよくあります。
-`ConfigService`の例では、アプリケーションはリソースURLを指定する `config.json`という設定ファイルが必要です。
+`ConfigService`の例では、
+アプリケーションはリソースURLを指定する`config.json`という設定ファイルが必要です。
 
 <code-example
   path="http/src/assets/config.json"
@@ -167,7 +169,8 @@ options: {
 
 </div>
 
-更新されたコンポーネントメソッドのコールバックは、型付けされたデータオブジェクトを受け取ります。これは使用がより簡単で安全です。
+更新されたコンポーネントメソッドのコールバックは、型付けされたデータオブジェクトを受け取ります。
+これは使用がより簡単で安全です。
 
 <code-example
   path="http/src/app/config/config.component.ts"
@@ -368,7 +371,8 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
 
 サーバーからデータを取得することに加えて、`HttpClient`はPUT、POST、DELETEなどの他のHTTPメソッドをサポートしています。これらは遠隔のデータを変更するために使用できます。
 
-このガイドのサンプルアプリケーションには、ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の簡略版が含まれています。
+このガイドのサンプルアプリケーションには、
+ヒーローを取得し、ユーザーがヒーローを追加、削除、更新できる「Tour of Heroes」の例の簡略版が含まれています。
 次のセクションでは、サンプルの`HeroesService`からのデータ更新メソッドの例を示します。
 
 ### POSTリクエストの作成
@@ -389,7 +393,8 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
 
 この例では、[前述](#error-details)のようにエラーを捕捉します。
 
-`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のPOST処理が開始します。
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、
+実際のPOST処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -397,11 +402,13 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.component.ts (addHero)">
 </code-example>
 
-サーバーが新しく追加されたヒーローを正常に返すと、コンポーネントはそのヒーローを画面に表示されている`heroes`リストに追加します。
+サーバーが新しく追加されたヒーローを正常に返すと、
+コンポーネントはそのヒーローを画面に表示されている`heroes`リストに追加します。
 
 ### DELETEリクエストの作成
 
-このアプリケーションは、リクエストURLにヒーローのIDを渡すことによって、`HttpClient.delete`メソッドを使用してヒーローを削除します。
+このアプリケーションは、リクエストURLにヒーローのIDを渡すことによって、
+`HttpClient.delete`メソッドを使用してヒーローを削除します。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -409,7 +416,8 @@ RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、O
   header="app/heroes/heroes.service.ts (deleteHero)">
 </code-example>
 
-`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、実際のDELETE処理が開始します。
+`HeroesComponent`がこのサービスのメソッドが返す`Observable`を購読することによって、
+実際のDELETE処理が開始します。
 
 <code-example
   path="http/src/app/heroes/heroes.component.ts"
@@ -443,7 +451,8 @@ _subscribe()_を呼び出さなければ何も起こりません。`HeroesServic
 </div>
 
 `HttpClient`のメソッドから返されたすべてのObservableは、意図的に_コールド_になっています。
-HTTPリクエストは_遅延実行_され、実際に何かが起こる前に、`tap`や`catchError`などの追加のオペレーターでObservableを拡張できます。
+HTTPリクエストは_遅延実行_され、
+実際に何かが起こる前に、`tap`や`catchError`などの追加のオペレーターでObservableを拡張できます。
 
 `subscribe(...)`を呼び出すと、Observableの実行がトリガーされ、
 `HttpClient`がHTTPリクエストを作成してサーバーに送信します。
@@ -483,10 +492,10 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 多くのサーバーでは、保存操作のために追加のヘッダーが必要です。
 たとえば、サーバーは認可トークンや、リクエスト本文のMIMEタイプを明示的に宣言するために「Content-Type」ヘッダーを必要とする場合があります。
 
-{@a adding-headers}
-##### ヘッダーの追加
+##### ヘッダーの追加 {@a adding-headers}
 
-`HeroesService`は、`HttpClient`の保存メソッドすべてに渡される`httpOptions`オブジェクトで、そのようなヘッダーを定義しています。
+`HeroesService`は、`HttpClient`の保存メソッドすべてに渡される`httpOptions`オブジェクトで、
+そのようなヘッダーを定義しています。
 
 <code-example
   path="http/src/app/heroes/heroes.service.ts"
@@ -496,7 +505,8 @@ Observableを返すHTTPメソッドについていえば、呼び出し元の`He
 
 ##### ヘッダーの更新
 
-`HttpHeaders`クラスのインスタンスはイミュータブルなので、前述のoptionsオブジェクト内の既存のヘッダーを直接変更することはできません。
+`HttpHeaders`クラスのインスタンスはイミュータブルなので、
+前述のoptionsオブジェクト内の既存のヘッダーを直接変更することはできません。
 代わりに`set()`メソッドを使用して、新しい変更が適用された現在のインスタンスのクローンを返します。
 
 次の例は、古いトークンの有効期限が切れたときに、次のリクエストを行う前に認可ヘッダーを更新する方法を示しています。
@@ -546,7 +556,8 @@ const params = new HttpParams({fromString: 'name=foo'});
 
 インターセプターは、すべてのHTTPリクエスト/レスポンスに対して、認証からロギングまで、さまざまな_暗黙の_タスクを型どおりの、標準的な方法で実行できます。
 
-インターセプト無しでは、開発者は各`HttpClient`メソッド呼び出しに対してこれらのタスクを_明示的に_実装する必要があります。
+インターセプト無しでは、開発者は
+各`HttpClient`メソッド呼び出しに対してこれらのタスクを_明示的に_実装する必要があります。
 
 ### インターセプターを書く
 
@@ -606,11 +617,14 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 </code-example>
 
 `multi：true`オプションに注意してください。
-この必須設定は、Angularに`HTTP_INTERCEPTORS`は単一の値ではなく値の配列を注入する_マルチプロバイダー_のトークンであることを伝えます。
+この必須設定は、Angularに`HTTP_INTERCEPTORS`は
+単一の値ではなく値の配列を注入する_マルチプロバイダー_のトークンであることを伝えます。
 
 このプロバイダーを `AppModule`のproviders配列に直接追加することができます。
-ただし、それはむしろ冗長であり、より多くのインターセプターを作成し、同じ方法でそれらを提供するよい方法があります。
-また、これらのインターセプターを提供する[順序に細心の注意](#interceptor-order)を払う必要があります。
+ただし、それはむしろ冗長であり、
+より多くのインターセプターを作成し、同じ方法でそれらを提供するよい方法があります。
+また、これらのインターセプターを提供する
+[順序に細心の注意](#interceptor-order)を払う必要があります。
 
 この最初の`NoopInterceptor`から始まる`httpInterceptorProviders`配列の中にすべてのインターセプタープロバイダーを集める「バレル」ファイルを作成することを検討してください。
 
@@ -637,8 +651,7 @@ DIが`HttpClient`を作成した_後に_提供されるインターセプター�
 
 </div>
 
-{@a interceptor-order}
-### インターセプターの順番
+### インターセプターの順番 {@a interceptor-order}
 
 Angularは、あなたが提供した順序でインターセプターを適用します。
 たとえば、サーバーに送信する前にHTTPリクエストの認証を処理し、ログに記録する必要がある状況を考えてみます。 このタスクを実行するには、`AuthInterceptor`サービスを提供してから、`LoggingInterceptor`サービスを提供します。
@@ -750,7 +763,8 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 アプリケーションでは、インターセプターを使用して外部へのリクエストにデフォルトのヘッダーを設定することがよくあります。
 
 サンプルアプリケーションには、認可トークンを生成する`AuthService`があります。
-これは、トークンを取得するサービスを注入し、トークンをすべての外部へのリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
+これは、トークンを取得するサービスを注入し、
+トークンをすべての外部へのリクエストの認可ヘッダーに追加する、`AuthInterceptor`です。
 
 <code-example
   path="http/src/app/http-interceptors/auth-interceptor.ts"
@@ -776,7 +790,8 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 インターセプターはリクエストとレスポンスを_一緒に_処理できるため、HTTPオペレーション全体について時間の計測やログの記録ができます。
 
 次の`LoggingInterceptor`を考えてみましょう。
-これは、リクエストの時間とレスポンスの時間を取得し、注入された`MessageService`で経過時間とともに結果を記録します。
+これは、リクエストの時間とレスポンスの時間を取得し、
+注入された`MessageService`で経過時間とともに結果を記録します。
 
 <code-example
   path="http/src/app/http-interceptors/logging-interceptor.ts"
@@ -843,9 +858,11 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 * `isCachable()`関数はリクエストがキャッシュ可能かどうかを決定します。
 このサンプルでは、npmパッケージの検索APIに対するGETリクエストのみがキャッシュ可能です。
 
-* リクエストがキャッシュ可能でない場合、インターセプターはリクエストをチェーン内の次のハンドラーに転送します。
+* リクエストがキャッシュ可能でない場合、インターセプターはリクエストを
+チェーン内の次のハンドラーに転送します。
 
-* キャッシング可能なリクエストがキャッシュ内に見つかった場合、インターセプターはキャッシュされたレスポンスを`of()`_Observable_で返し、`next`ハンドラー（および他のすべての下流のインターセプター）をバイパスします。
+* キャッシング可能なリクエストがキャッシュ内に見つかった場合、インターセプターは
+キャッシュされたレスポンスを`of()`_Observable_で返し、`next`ハンドラー（および他のすべての下流のインターセプター）をバイパスします。
 
 * キャッシュ可能なリクエストがキャッシュにない場合、コードは`sendRequest()`を呼び出します。
 この関数は、ヘッダーなしで[リクエストのクローン](#immutability)を作成します。これは、npm APIがヘッダーを禁止しているためです。
@@ -860,9 +877,11 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 `sendRequest()`がアプリケーションに返ってくる途中の_レスポンスをインターセプトする_方法に注意してください。
 `tap()`オペレーターによりレスポンスを_パイプ_して、そのコールバックでレスポンスをキャッシュに追加します。
 
-元のレスポンスは、インターセプターのチェーンを通ってアプリケーション呼び出し元にオリジナルの状態で戻ります。
+元のレスポンスは、インターセプターのチェーンを通って
+アプリケーション呼び出し元にオリジナルの状態で戻ります。
 
-`PackageSearchService`のようなデータサービスは、`HttpClient`リクエストのいくつかは実際にはキャッシュされたレスポンスを返すものがあることを知りません。
+`PackageSearchService`のようなデータサービスは、
+`HttpClient`リクエストのいくつかは実際にはキャッシュされたレスポンスを返すものがあることを知りません。
 
 {@a cache-refresh}
 ### インターセプターを使用して複数の値を要求する
@@ -890,12 +909,17 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 
 </div>
 
-修正された`CachingInterceptor`は、[上記](#send-request)で説明したのと同じ`sendRequest()`メソッドを使用して、キャッシュされた値があるかどうかに関係なく、サーバーリクエストを設定します。
+修正された`CachingInterceptor`は、[上記](#send-request)で説明したのと同じ`sendRequest()`メソッドを使用して、
+キャッシュされた値があるかどうかに関係なく、
+サーバーリクエストを設定します。
 `results$`Observableは、サブスクライブ時にリクエストを行います。
 
 * キャッシュされた値がない場合、インターセプターは`results$`を返します。
 
-* キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`に_パイプ_します。そして、最初に（ただちに）キャッシュされたレスポンスを発行し、その後にサーバーからのレスポンスを発行する、再構成されたObservableを作成します。
+* キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`に_パイプ_します。
+そして、最初に（ただちに）キャッシュされたレスポンスを発行し、
+その後にサーバーからのレスポンスを発行する、
+再構成されたObservableを作成します。
 サブスクライバーは、連続の2つのレスポンスを参照します。
 
 {@a report-progress}
@@ -906,7 +930,8 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 ファイルのアップロードは典型的な例です。
 そのような転送の進行状況に関するフィードバックを提供することにより、ユーザーによりよい体験を提供します。
 
-プログレスイベントを有効にしてリクエストを行うには、`reportProgress`オプションをtrueに設定して`HttpRequest`のインスタンスを作成し、プログレスイベントを追跡できるようにします。
+プログレスイベントを有効にしてリクエストを行うには、
+`reportProgress`オプションをtrueに設定して`HttpRequest`のインスタンスを作成し、プログレスイベントを追跡できるようにします。
 
 <code-example
   path="http/src/app/uploader/uploader.service.ts"
@@ -943,7 +968,8 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 <div class="alert is-helpful">
 
 このガイドのサンプルアプリケーションには、アップロードされたファイルを受け入れるサーバーがありません。
-`app/http-interceptors/upload-interceptor.ts`の`UploadInterceptor`は、アップロードリクエストをインターセプトしてショートサーキットし、
+`app/http-interceptors/upload-interceptor.ts`の`UploadInterceptor`は、
+アップロードリクエストをインターセプトしてショートサーキットし、
 シミュレートされたイベントのObservableを返します。
 
 </div>
@@ -955,7 +981,8 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 この手法はデバウンスとして知られています。
 
 次のテンプレートについて考えてみます。このテンプレートでは、ユーザーが検索語を入力して、名前からnpmパッケージを見つけることができます。
-ユーザーが検索ボックスに名前を入力すると、`PackageSearchComponent`はその名前のパッケージの検索リクエストをnpm Web APIに送信します。
+ユーザーが検索ボックスに名前を入力すると、`PackageSearchComponent`は
+その名前のパッケージの検索リクエストをnpm Web APIに送信します。
 
 <code-example
   path="http/src/app/package-search/package-search.component.html"
@@ -983,7 +1010,9 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 </code-example>
 
 `searchText$`は、ユーザーからの検索ボックス値のシーケンスです。
-これは、RxJSの`Subject`として定義されています。`Subject`は、`search()`メソッドで行っているように、`next(value)`を呼び出すことによって、自身に対して値を発行できるマルチキャスト`Observable`です。
+これは、RxJSの`Subject`として定義されています。
+`Subject`は、`search()`メソッドで行っているように、`next(value)`を呼び出すことによって、
+自身に対して値を発行できるマルチキャスト`Observable`です。
 
 すべての`searchText`値を注入された`PackageSearchService`に直接転送するのではなく、
 `ngOnInit()`のコードは、検索値を3つのオペレーターにパイプしています。これにより、検索値が新しい値でかつユーザーが入力を停止した場合にのみ、検索値がサービスに到達します。
@@ -1011,7 +1040,8 @@ The `switchMap()`オペレーターは、`Observable`を返す関数を引数に
 以前の検索リクエストがまだ実行中である場合（接続が悪い場合など）、
 オペレーターはリクエストをキャンセルして新しいリクエストを送信します。
 
-サービスのレスポンスをサーバーが順不同で返したとしても、`switchMap()`は、元のリクエストの順序で返すことに注意してください。
+サービスのレスポンスをサーバーが順不同で返したとしても、
+`switchMap()`は、元のリクエストの順序で返すことに注意してください。
 
 
 <div class="alert is-helpful">
@@ -1022,15 +1052,15 @@ The `switchMap()`オペレーターは、`Observable`を返す関数を引数に
 </div>
 
 
-{@a security-xsrf-protection}
-## セキュリティ：XSRF保護
+## セキュリティ：XSRF保護 {@a security-xsrf-protection}
 
 [Cross-Site Request Forgery (XSRF or CSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery)は、攻撃者が認証されたユーザーにそうとは知らずにあなたのWebサイト上のアクションを実行させる攻撃手法です。
 `HttpClient`は、XSRF攻撃を防ぐための[共通メカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-Header_Token)をサポートしています。
 HTTPリクエストを実行するとき、インターセプターはクッキーからトークンを読み取り（デフォルトでは「XSRF-TOKEN」）、それをHTTPヘッダの`X-XSRF-TOKEN`として設定します。
 ドメインで実行されているコードのみがクッキーを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションから送信されたことを確認できます。
 
-デフォルトでは、インターセプターは相対URLへのすべての変更リクエスト（POSTなど）に対してこのヘッダーを送信しますが、GET/HEADリクエストや絶対URLには送りません。
+デフォルトでは、インターセプターは相対URLへのすべての変更リクエスト（POSTなど）に対してこのヘッダーを送信しますが、
+GET/HEADリクエストや絶対URLには送りません。
 
 これを利用するには、サーバーがページ読み込みまたは最初のGETリクエストのいずれかで、`XSRF-TOKEN`というJavaScriptで読み取れるセッションクッキーにトークンを設定する必要があります。
 その後のリクエストで、サーバーはクッキーが`X-XSRF-TOKEN`HTTPヘッダーと一致することを検証でき、よって、ドメイン上で実行されているコードだけがリクエストを送信可能だと保証できます。
@@ -1073,17 +1103,20 @@ AngularのHTTPテスティングライブラリは、アプリケーションが
 
 <div class="alert is-helpful">
 
-ライブコーディング環境で<live-example stackblitz="specs">これらのサンプルテスト</live-example>を実行できます。
+ライブコーディング環境で
+<live-example stackblitz="specs">これらのサンプルテスト</live-example>を実行できます。
 
 このガイドで説明されているテストは、`src/testing/http-client.spec.ts`にあります。
-`src/app/heroes/heroes.service.spec.ts`に`HttpClient`を呼び出すアプリケーションデータサービスのテストもあります。
+`src/app/heroes/heroes.service.spec.ts`に
+`HttpClient`を呼び出すアプリケーションデータサービスのテストもあります。
 
 </div>
 
 ### テストのセットアップ
 
 `HttpClient`への呼び出しをテストするには、
-`HttpClientTestingModule`とモックコントローラ`HttpTestingController`を、テストに必要な他のシンボルと共にインポートしてください。
+`HttpClientTestingModule`とモックコントローラ`HttpTestingController`を、
+テストに必要な他のシンボルと共にインポートしてください。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1091,7 +1124,8 @@ AngularのHTTPテスティングライブラリは、アプリケーションが
   header="app/testing/http-client.spec.ts (imports)">
 </code-example>
 
-次に`HttpClientTestingModule`を`TestBed`に追加し、_テスト環境下のサービス_の設定を続けます。
+次に`HttpClientTestingModule`を`TestBed`に追加し、
+_テスト環境下のサービス_の設定を続けます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"
@@ -1131,7 +1165,8 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
   region="predicate">
 </code-example>
 
-以前の`expectOne()`と同様に、0または2以上のリクエストがこの条件を満たしていれば、テストは失敗します。
+以前の`expectOne()`と同様に、
+0または2以上のリクエストがこの条件を満たしていれば、テストは失敗します。
 
 #### 複数のリクエストの処理
 

@@ -260,7 +260,7 @@ client.get('/foo', options);
 
 ### JSONPリクエストの作成
 
-サーバーが[CORSプロトコル](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)をサポートしていない場合、アプリケーションは`HttpClient`を使用してドメインをまたいで[JSONP](https://en.wikipedia.org/wiki/JSONP)リクエストを実行できます。
+サーバーが[CORSプロトコル](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS)をサポートしていない場合、アプリケーションは`HttpClient`を使用してドメインをまたいで[JSONP](https://ja.wikipedia.org/wiki/JSONP)リクエストを実行できます。
 
 AngularのJSONPリクエストは`Observable`を返します。
 Observableを購読するためのパターンに従い、[asyncパイプ](api/common/AsyncPipe)を使用して結果を処理する前に、RxJSの`map`オペレーターを使用してレスポンスを変換します。

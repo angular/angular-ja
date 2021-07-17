@@ -191,12 +191,12 @@ In Angular, a set of related [schematics](#schematic) collected in an [npm packa
 
 ## コマンドラインインターフェース(CLI) {@a command-line-interface-cli}
 
-[AngularのCLI](cli)はAngularの開発サイクルを管理するためのコマンドラインツールです。これを使用して、[ワークスペース](#workspace)や[プロジェクト](#project)の初期ファイルシステムの足場を作成し、さまざまな要素の初期の汎用バージョンに関するコードを追加・変更する[schematics](#schematic)を実行します。このCLIは、ビルド、テスト、バンドル、デプロイを含む開発サイクルのすべての段階をサポートします。
+[Angular CLI](cli)はAngularの開発サイクルを管理するためのコマンドラインツールです。これを使用して、[ワークスペース](#workspace)や[プロジェクト](#project)の初期ファイルシステムの足場を作成し、さまざまな要素の汎用な初期コードを追加・変更する[schematics](#schematic)を実行します。このCLIは、ビルド、テスト、バンドル、デプロイを含む開発サイクルのすべての段階をサポートします。
 
 * 新しいプロジェクトでCLIの使用を始めるには、[ローカル環境のセットアップ](guide/setup-local "ローカル開発のセットアップ")を参照しましょう。
-* CLIの完全な機能についてより学ぶには、[CLI コマンドリファレンス](cli)を参照しましょう。
+* CLIの完全な機能について詳しく学ぶには、[CLI コマンドリファレンス](cli)を参照しましょう。
 
-[SchematicsのCLI](#schematics-cli)も参照しましょう。
+[Schematics CLI](#schematics-cli)も参照しましょう。
 
 {@a component}
 
@@ -557,9 +557,9 @@ Angularにおいて、他のAngularアプリケーションに含めることが
 ライブラリは完全なAngularアプリケーションではなく、独立して実行することはできません。
 (再利用可能なAngularの機能をAngular以外のWebアプリケーションに追加するには、Angularの[カスタム要素](#angular-element)を使用できます。)
 
-* ライブラリの開発者は[AngularのCLI](#cli)を使って、新しいライブラリのための足場を既存の[ワークスペース](#workspace)に`generate`し、ライブラリを`npm`パッケージとして公開できます。
+* ライブラリの開発者は[Angular CLI](#cli)を使って、新しいライブラリのための足場を既存の[ワークスペース](#workspace)に`generate`し、ライブラリを`npm`パッケージとして公開できます。
 
-* アプリケーションの開発者は[AngularのCLI](#cli)を使って、アプリケーションで使用するための公開ライブラリを同じ[ワークスペース](#workspace)に`add`できます。
+* アプリケーションの開発者は[Angular CLI](#cli)を使って、アプリケーションで使用するための公開ライブラリを同じ[ワークスペース](#workspace)に`add`できます。
 
 [schematic](#schematic)も参照しましょう。
 
@@ -606,7 +606,7 @@ Angularは、JavaScriptモジュールのコレクション(ライブラリと�
 
 ## ngcc
 
-Angular互換のコンパイラ。
+Angular互換性コンパイラ。
 [Ivy](#ivy)を使ってアプリケーションをビルドするが、それがIvyでコンパイルされていないライブラリに依存している場合、CLIは`ngcc`を使用して、依存ライブラリをIvyを使うように自動的に更新します。
 
 
@@ -706,7 +706,7 @@ See [Browser Support](guide/browser-support) for polyfills that support particul
 
 ## プロジェクト
 
-AngularのCLIにおいて、スタンドアロンのアプリケーションや[ライブラリ](#library)であり、CLIコマンドで作成・変更できます。
+Angular CLIにおいて、スタンドアロンのアプリケーションや[ライブラリ](#library)であり、CLIコマンドで作成・変更できます。
 
 [`ng new`](cli/new)によって生成されたプロジェクトには、ソースファイル、リソース、設定ファイルのセットが含まれています。それらは、CLIを使用してアプリケーションを開発およびテストするのに必要です。プロジェクトは、`ng generate application`や`ng generate library`コマンドを使用して作成することもできます。
 
@@ -1092,7 +1092,7 @@ Angularのバージョン9より前に使用されていたコンパイルとレ
 
 ## ワークスペース
 
-[AngularのCLI](#cli)で動くAngular[プロジェクト](#project)(つまりアプリケーションとライブラリ)の集まりです。通常は、単一のソース管理のリポジトリ([git](https://git-scm.com/)など)に同じく配置されます。
+[Angular CLI](#cli)で動くAngular[プロジェクト](#project)(つまりアプリケーションとライブラリ)の集まりです。通常は、単一のソース管理のリポジトリ([git](https://git-scm.com/)など)に同じく配置されます。
 
 [CLI](#cli)の[`ng new`コマンド](cli/new)はファイルシステムのディレクトリ("ワークスペースのルート")を作ります。
 そのワークスペースのルートに、CLIはワークスペースの[設定ファイル](#configuration)(`angular.json`)と、デフォルトで同じ名前の初期アプリケーションプロジェクトも作ります。
@@ -1107,7 +1107,7 @@ Angularのバージョン9より前に使用されていたコンパイルとレ
 
 ## ワークスペース設定 {@a workspace-configuration}
 
-Angularの[ワークスペース](#workspace)のルートレベルにある`angular.json`という名前のファイルは、[AngularのCLI](#cli)によって提供または統合されるビルドと開発ツールについての、ワークスペース全体およびプロジェクト固有設定のデフォルトを提供します。
+Angularの[ワークスペース](#workspace)のルートレベルにある`angular.json`という名前のファイルは、[Angular CLI](#cli)によって提供または統合されるビルドと開発ツールについての、ワークスペース全体およびプロジェクト固有設定のデフォルトを提供します。
 
 詳しい情報は[ワークスペースの設定](guide/workspace-config)を参照しましょう。
 

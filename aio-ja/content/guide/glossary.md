@@ -191,12 +191,12 @@ In Angular, a set of related [schematics](#schematic) collected in an [npm packa
 
 ## コマンドラインインターフェース(CLI) {@a command-line-interface-cli}
 
-The [Angular CLI](cli) is a command-line tool for managing the Angular development cycle. Use it to create the initial filesystem scaffolding for a [workspace](#workspace) or [project](#project), and to run [schematics](#schematic) that add and modify code for initial generic versions of various elements. The CLI supports all stages of the development cycle, including building, testing, bundling, and deployment.
+[Angular CLI](cli)はAngularの開発サイクルを管理するためのコマンドラインツールです。これを使用して、[ワークスペース](#workspace)や[プロジェクト](#project)の初期ファイルシステムの足場を作成し、さまざまな要素の汎用な初期コードを追加・変更する[schematics](#schematic)を実行します。このCLIは、ビルド、テスト、バンドル、デプロイを含む開発サイクルのすべての段階をサポートします。
 
-* To begin using the CLI for a new project, see [Local Environment Setup](guide/setup-local "Setting up for Local Development").
-* To learn more about the full capabilities of the CLI, see the [CLI command reference](cli).
+* 新しいプロジェクトでCLIの使用を始めるには、[ローカル環境のセットアップ](guide/setup-local "ローカル開発のセットアップ")を参照しましょう。
+* CLIの完全な機能について詳しく学ぶには、[CLI コマンドリファレンス](cli)を参照しましょう。
 
-See also [Schematics CLI](#schematics-cli).
+[Schematics CLI](#schematics-cli)も参照しましょう。
 
 {@a component}
 
@@ -213,7 +213,7 @@ Angularのコンポーネントクラスは、[データバインディング](#
 
 ## 設定 {@a configuration}
 
-See  [workspace configuration](#cli-config)
+[ワークスペースの設定](#cli-config)を参照しましょう。
 
 {@a content-projection}
 
@@ -377,11 +377,11 @@ Angular extends TypeScript with domain-specific languages for a number of domain
 
 ## ECMAScript {@a ecmascript}
 
-The [official JavaScript language specification](https://en.wikipedia.org/wiki/ECMAScript).
+[JavaScript言語の公式の仕様](https://en.wikipedia.org/wiki/ECMAScript)です。
 
-Not all browsers support the latest ECMAScript standard, but you can use a [transpiler](#transpile) (like [TypeScript](#typescript)) to write code using the latest features, which will then be transpiled to code that runs on versions that are supported by browsers.
+すべてのブラウザが最新のECMAScript標準をサポートしているわけではありませんが、[トランスパイラ](#transpile)([TypeScript](#typescript)など)を使用することで、最新の機能を使ったコードを記述して、それからそれをプラウザでサポートされるバージョンで実行するコードにトランスパイルできます。
 
-To learn more, see [Browser Support](guide/browser-support).
+詳しく学ぶには、[ブラウザサポート](guide/browser-support)を参照しましょう。
 
 
 {@a element}
@@ -401,12 +401,12 @@ Angularは、レンダリング固有のネイティブUI要素をラップす�
 
 ## エントリーポイント
 
-A [JavaScript module](#module) that is intended to be imported by a user of [an
-npm package](guide/npm-packages). An entry-point module typically re-exports
-symbols from other internal modules. A package can contain multiple
-entry points. For example, the `@angular/core` package has two entry-point
-modules, which can be imported using the module names `@angular/core` and
-`@angular/core/testing`.
+[npmパッケージ](guide/npm-packages)のユーザーによってインポートされることを目的とした[JavaScriptモジュール](#module)です。
+エントリポイントのモジュールは通常、他の内部モジュールからシンボルを再エクスポートします。
+パッケージは複数のエントリーポイントを含むことがあります。
+たとえば、`@angular/core`パッケージには2つのエントリーポイントのモジュールがあり、
+モジュール名`@angular/core`と`@angular/core/testing`を使って
+インポートできます。
 
 {@a F}
 
@@ -516,7 +516,7 @@ Angularリリースバージョン9では、[ビューエンジン](#ve)とし�
 
 ## JavaScript
 
-See [ECMAScript](#ecma), [TypeScript](#typescript).
+[ECMAScript](#ecma)と[TypeScript](#typescript)を参照しましょう。
 
 
 {@a jit}
@@ -553,15 +553,15 @@ JITモードは本番環境での使用は強くお勧めしません。
 
 ## ライブラリ
 
-In Angular, a [project](#project) that provides functionality that can be included in other Angular apps.
-A library isn't a complete Angular app and can't run independently.
-(To add re-usable Angular functionality to non-Angular web apps, you can use Angular [custom elements](#angular-element).)
+Angularにおいて、他のAngularアプリケーションに含めることができる機能を提供する[プロジェクト](#project)。
+ライブラリは完全なAngularアプリケーションではなく、独立して実行することはできません。
+(再利用可能なAngularの機能をAngular以外のWebアプリケーションに追加するには、Angularの[カスタム要素](#angular-element)を使用できます。)
 
-* Library developers can use the [Angular CLI](#cli) to `generate` scaffolding for a new library in an existing [workspace](#workspace), and can publish a library as an `npm` package.
+* ライブラリの開発者は[Angular CLI](#cli)を使って、新しいライブラリのための足場を既存の[ワークスペース](#workspace)に`generate`し、ライブラリを`npm`パッケージとして公開できます。
 
-* Application developers can use the [Angular CLI](#cli) to `add` a published library for use with an application in the same [workspace](#workspace).
+* アプリケーションの開発者は[Angular CLI](#cli)を使って、アプリケーションで使用するための公開ライブラリを同じ[ワークスペース](#workspace)に`add`できます。
 
-See also [schematic](#schematic).
+[schematic](#schematic)も参照しましょう。
 
 {@a lifecycle-hook}
 
@@ -591,13 +591,13 @@ Angularはこれらのフックメソッドを次の順序で呼び出します:
 
 ## モジュール
 
-In general, a module collects a block of code dedicated to a single purpose. Angular uses standard JavaScript modules and also defines an Angular module, `NgModule`.
+一般にモジュールは、単一目的に専用のコードブロックを収集します。Angularは標準のJavaScriptモジュールを使用し、Angularモジュールの `NgModule`も定義しています。
 
-In JavaScript (ECMAScript), each file is a module and all objects defined in the file belong to that module. Objects can exported, making them public, and public objects can be imported for use by other modules.
+JavaScript(ECMAScript)では、各ファイルはモジュールであり、ファイルで定義されたすべてのオブジェクトはそのモジュールに属します。オブジェクトを公開するようエクスポートし、公開のオブジェクトを他のモジュールで使うためにインポートできます。
 
-Angular ships as a collection of JavaScript modules (also called libraries). Each Angular library name begins with the `@angular` prefix. Install Angular libraries with the [npm package manager](https://docs.npmjs.com/getting-started/what-is-npm) and import parts of them with JavaScript `import` declarations.
+Angularは、JavaScriptモジュールのコレクション(ライブラリとも呼ばれます)として公開されます。Angularの各ライブラリ名は`@angular`の接頭辞で始まります。[npmパッケージマネージャー](https://docs.npmjs.com/getting-started/what-is-npm)でAngularライブラリをインストールし、JavaScriptの`import`宣言でそれらの一部をインポートします。
 
-Compare to [NgModule](#ngmodule).
+[NgModule](#ngmodule)と比較しましょう。
 
 
 {@a N}
@@ -606,8 +606,8 @@ Compare to [NgModule](#ngmodule).
 
 ## ngcc
 
-Angular compatibility compiler.
-If you build your app using [Ivy](#ivy), but it depends on libraries that have not been compiled with Ivy, the CLI uses `ngcc` to automatically update the dependent libraries to use Ivy.
+Angular互換性コンパイラ。
+[Ivy](#ivy)を使ってアプリケーションをビルドするが、それがIvyでコンパイルされていないライブラリに依存している場合、CLIは`ngcc`を使用して、依存ライブラリをIvyを使うように自動的に更新します。
 
 
 {@a ngmodule}
@@ -629,15 +629,15 @@ NgModuleは通常、エクスポートされたものが定義されているフ
 
 ## npmパッケージ
 
-The [npm package manager](https://docs.npmjs.com/getting-started/what-is-npm) is used to distribute and load Angular modules and libraries.
+[npmパッケージマネージャー](https://docs.npmjs.com/getting-started/what-is-npm)はAngularのモジュールとライブラリを配布およびロードするために使われます。
 
-Learn more about how Angular uses [Npm Packages](guide/npm-packages).
+Angularが[npmパッケージ](guide/npm-packages)をどのように使用しているか詳しく学びましょう。
 
 {@a ngc}
 
 ## ngc
-`ngc` is a Typescript-to-Javascript transpiler that processes Angular decorators, metadata, and templates, and emits JavaScript code.
-The most recent implementation is internally referred to as `ngtsc` because it's a minimalistic wrapper around the TypeScript compiler `tsc` that adds a transform for processing Angular code.
+`ngc`はTypeScriptからJavaScriptへのトランスパイラであり、Angularのデコレーター、メタデータ、テンプレートを処理し、JavaScriptコードを出力します。
+最新の実装は内部的には`ngtsc`と呼ばれます。それはTypeScriptコンパイラ`tsc`を軸にした最小限のラッパーであり、Angularコードを処理するための変換を加えるからです。
 
 {@a O}
 
@@ -686,14 +686,14 @@ To learn more, see [Pipes](guide/pipes).
 
 ## プラットフォーム
 
-In Angular terminology, a platform is the context in which an Angular application runs.
-The most common platform for Angular applications is a web browser, but it can also be an operating system for a mobile device, or a web server.
+Angularの用語では、プラットフォームはAngularアプリケーションが実行されるコンテキストです。
+Angularアプリケーションのもっとも一般的なプラットフォームはWebブラウザですが、モバイルデバイスのオペレーティングシステムやWebサーバーにすることもできます。
 
-Support for the various Angular run-time platforms is provided by the `@angular/platform-*` packages. These packages allow applications that make use of `@angular/core` and `@angular/common` to execute in different environments by providing implementation for gathering user input and rendering UIs for the given platform. Isolating platform-specific functionality allows the developer to make platform-independent use of the rest of the framework.
+さまざまなAngularランタイムプラットフォームのサポートは、`@angular/platform-*`パッケージによって提供されます。これらのパッケージが特定のプラットフォーム用のユーザー入力収集およびUIレンダリングの実装を提供することにより、`@angular/core`と`@angular/common`を使用するアプリケーションはさまざまな環境で実行できます。プラットフォーム固有の機能を分離することで、開発者はフレームワークの残りの部分をプラットフォームに依存せずに使用できます。
 
-* When running in a web browser, [`BrowserModule`](api/platform-browser/BrowserModule) is imported from the `platform-browser` package, and supports services that simplify security and event processing, and allows applications to access browser-specific features, such as interpreting keyboard input and controlling the title of the document being displayed. All applications running in the browser use the same platform service.
+* Webブラウザで実行する場合、[`BrowserModule`](api/platform-browser/BrowserModule)が`platform-browser`パッケージからインポートされ、セキュリティとイベント処理を簡素化するサービスをサポートします。これによりアプリケーションは、キーボード入力の解釈や表示されているドキュメントのタイトルの制御など、ブラウザ固有の機能にアクセスできます。ブラウザで実行されているすべてのアプリケーションは、同じプラットフォームサービスを使用します。
 
-* When [server-side rendering](#server-side-rendering) (SSR) is used, the [`platform-server`](api/platform-server) package provides web server implementations of the `DOM`, `XMLHttpRequest`, and other low-level features that don't rely on a browser.
+* [サーバサイドレンダリング](#server-side-rendering)(SSR)を使う場合、[`platform-server`](api/platform-server)パッケージが、`DOM`、`XMLHttpRequest`、およびブラウザに依存しないその他の低レベル機能の、Webサーバーの実装を提供します。
 
 {@a polyfill}
 
@@ -706,13 +706,13 @@ See [Browser Support](guide/browser-support) for polyfills that support particul
 
 ## プロジェクト
 
-In the Angular CLI, a standalone application or [library](#library) that can be created or modified by a CLI command.
+Angular CLIにおいて、スタンドアロンのアプリケーションや[ライブラリ](#library)であり、CLIコマンドで作成・変更できます。
 
-A project, as generated by the [`ng new`](cli/new), contains the set of source files, resources, and configuration files that you need to develop and test the application using the CLI. Projects can also be created with the `ng generate application` and `ng generate library` commands.
+[`ng new`](cli/new)によって生成されたプロジェクトには、ソースファイル、リソース、設定ファイルのセットが含まれています。それらは、CLIを使用してアプリケーションを開発およびテストするのに必要です。プロジェクトは、`ng generate application`や`ng generate library`コマンドを使用して作成することもできます。
 
-For more information, see [Project File Structure](guide/file-structure).
+詳しい情報は[プロジェクトのファイル構造](guide/file-structure)を参照しましょう。
 
-The [`angular.json`](guide/workspace-config) file configures all projects in a [workspace](#workspace).
+[`angular.json`](guide/workspace-config)ファイルは、[ワークスペース](#workspace)内のすべてのプロジェクトを設定します。
 
 {@a provider}
 
@@ -995,7 +995,7 @@ TypeScriptのような構文であり、Angularが[データバインディン�
 
 ## トランスパイル
 
-The translation process that transforms one version of JavaScript to another version; for example, down-leveling ES2015 to the older ES5 version.
+JavaScriptのあるバージョンを別のバージョンに変換する翻訳プロセス。たとえば、ES2015を古いES5バージョンにレベルをダウンします。
 
 {@a file-tree}
 
@@ -1008,17 +1008,17 @@ Schematic [rules](#rule) take a tree object as input, operate on them, and retur
 
 ## TypeScript
 
-A programming language based on JavaScript that is notable for its optional typing system.
-TypeScript provides compile-time type checking and strong tooling support (such as
-code completion, refactoring, inline documentation, and intelligent search).
-Many code editors and IDEs support TypeScript either natively or with plug-ins.
+JavaScriptベースのプログラミング言語で、オプションの型システムで有名です。
+TypeScriptはコンパイル時の型チェックと強力なツールサポートを提供します
+(コード補完、リファクタリング、インラインドキュメント、気のきいた検索など)。
+多くのコードエディタとIDEは、ネイティブにまたはプラグインを使用してTypeScriptをサポートしています。
 
-TypeScript is the preferred language for Angular development.
-Read more about TypeScript at [typescriptlang.org](https://www.typescriptlang.org/).
+TypeScriptはAngular開発に推奨される言語です。
+TypeScriptについて詳しくは[typescriptlang.org](https://www.typescriptlang.org/)を参照しましょう。
 
 ## TypeScript設定ファイル {@a typescript-configuration-file}
 
-A file specifies the root files and the compiler options required to compile a TypeScript project. For more information, see [TypeScript configuration](/guide/typescript-configuration).
+TypeScriptプロジェクトをコンパイルするために必要なルートファイルとコンパイラオプションを指定するファイルです。詳しい情報は、[TypeScriptの設定](/guide/typescript-configuration)を参照しましょう。
 
 
 {@a U}
@@ -1092,14 +1092,14 @@ Angularのバージョン9より前に使用されていたコンパイルとレ
 
 ## ワークスペース
 
-A collection of Angular [projects](#project) (that is, applications and libraries) powered by the [Angular CLI] (#cli) that are typically co-located in a single source-control repository (such as [git](https://git-scm.com/)).
+[Angular CLI](#cli)で動くAngular[プロジェクト](#project)(つまりアプリケーションとライブラリ)の集まりです。通常は、単一のソース管理のリポジトリ([git](https://git-scm.com/)など)に同じく配置されます。
 
-The [CLI](#cli) [`ng new` command](cli/new) creates a file system directory (the "workspace root").
-In the workspace root, it also creates the workspace [configuration file](#configuration) (`angular.json`) and, by default, an initial application project with the same name.
+[CLI](#cli)の[`ng new`コマンド](cli/new)はファイルシステムのディレクトリ("ワークスペースのルート")を作ります。
+そのワークスペースのルートに、CLIはワークスペースの[設定ファイル](#configuration)(`angular.json`)と、デフォルトで同じ名前の初期アプリケーションプロジェクトも作ります。
 
-Commands that create or operate on apps and libraries (such as `add` and `generate`) must be executed from within a workspace folder.
+アプリケーションやライブラリに対して作成・操作するコマンド(`add`や`generate`など)は、ワークスペースのフォルダー内から実行する必要があります。
 
-For more information, see [Workspace Configuration](guide/workspace-config).
+詳しい情報は[ワークスペースの設定](guide/workspace-config)を参照しましょう。
 
 {@a cli-config}
 
@@ -1107,13 +1107,13 @@ For more information, see [Workspace Configuration](guide/workspace-config).
 
 ## ワークスペース設定 {@a workspace-configuration}
 
-A file named `angular.json` at the root level of an Angular [workspace](#workspace) provides workspace-wide and project-specific configuration defaults for build and development tools that are provided by or integrated with the [Angular CLI](#cli).
+Angularの[ワークスペース](#workspace)のルートレベルにある`angular.json`という名前のファイルは、[Angular CLI](#cli)によって提供または統合されるビルドと開発ツールについての、ワークスペース全体およびプロジェクト固有設定のデフォルトを提供します。
 
-For more information, see [Workspace Configuration](guide/workspace-config).
+詳しい情報は[ワークスペースの設定](guide/workspace-config)を参照しましょう。
 
-Additional project-specific configuration files are used by tools, such as `package.json` for the [npm package manager](#npm-package), `tsconfig.json` for [TypeScript transpilation](#transpile), and `tslint.json` for [TSLint](https://palantir.github.io/tslint/).
+追加のプロジェクト固有設定ファイルはツールにより使用されます。[npmパッケージマネージャー](#npm-package)の`package.json`や、[TypeScriptトランスパイル](#transpile)の`tsconfig.json`、[TSLint](https://palantir.github.io/tslint/)の`tslint.json`などです。
 
-For more information, see [Workspace and Project File Structure](guide/file-structure).
+詳しい情報は[ワークスペースとプロジェクトのファイル構造](guide/file-structure)を参照しましょう。
 
 {@a X}
 

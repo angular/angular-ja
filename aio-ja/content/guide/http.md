@@ -1089,7 +1089,7 @@ GET/HEADリクエストや絶対URLには送りません。
 </code-example>
 
 {@a testing-requests}
-## HTTPリクエストをテストする
+## HTTPリクエストをテストする {@a testing-http-requests}
 
 外部依存と同様に、テストがリモートサーバーとのやりとりをシミュレートできるようにするには、HTTPバックエンドをモックする必要があります。
 `@angular/common/http/testing`ライブラリでは、そのようなモッキングを簡単に設定できます。

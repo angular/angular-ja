@@ -222,7 +222,7 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
   <div class="alert is-helpful">
 
   新しいコンポーネントには、Angular Generator が空の `constructor()`、`OnInit` インターフェース、`ngOnInit()` メソッドを含めます。
-  このステップではこれらを使用しないので、以下のコード例では簡潔にするために省略しています。
+  このステップではこれらを使用しないので、次のコード例では簡潔にするために省略しています。
 
   </div>
 

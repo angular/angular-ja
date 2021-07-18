@@ -45,20 +45,22 @@ import文の後に、
 * **_declarations_**&mdash;このアプリケーションの唯一のコンポーネントです。
 * **_imports_**&mdash;DOMレンダリング、サニタイズ、およびロケーションなどのブラウザ特定のサービスをもつ`BrowserModule`をインポートします。
 * **_providers_**&mdash;サービスプロバイダー
-* **_bootstrap_**&mdash;Angularが作成してホストWebページである`index.html`に挿入する_ルート_コンポーネント。
+* **_bootstrap_**&mdash;Angularが作成して
+ホストWebページである`index.html`に挿入する_ルート_コンポーネント。
 
 Angular CLIで作成されたデフォルトのアプリケーションにはコンポーネントが`AppComponent`1つしかなく、
 `declarations`と`bootstrap`配列の両方にあります。
 
-{@a the-declarations-array}
+{@a declarations}
 
-## `declarations`配列
+## `declarations`配列 {@a the-declarations-array}
 
 モジュールの`declarations`配列は、そのモジュールに属するコンポーネントをAngularに示します。
 追加のコンポーネントを作成したら、それらを`declarations`に追加します。
 
 すべてのコンポーネントを厳密に1つの`NgModule`クラスに宣言する必要があります。
-コンポーネントを宣言せずに使用すると、Angularはエラーメッセージを返します。
+コンポーネントを宣言せずに使用すると、
+Angularはエラーメッセージを返します。
 
 `declarations`配列は宣言を受け取ります。
 宣言とはコンポーネント、[ディレクティブ](guide/attribute-directives)および[パイプ](guide/pipes)です。
@@ -80,7 +82,8 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
   ],
 ```
 
-宣言は1つのモジュールにしか属せないので、1つの`@NgModule`だけに宣言します。
+宣言は1つのモジュールにしか属せないので、
+1つの`@NgModule`だけに宣言します。
 必要なときは、必要な宣言をもつモジュールをインポートします。
 
 
@@ -107,6 +110,7 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 そして、同じファイルで`@NgModule`の`declarations`配列に追加します。
 
 <code-example path="bootstrapping/src/app/app.module.ts" region="declarations" header="src/app/app.module.ts"></code-example>
+
 
 これで`ItemDirective`をコンポーネントで使えるようになりました。この例では`AppModule`を使いましたが、フィーチャーモジュールでも同じようにできます。ディレクティブの詳細については、[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)を参照してください。また、[パイプ](guide/pipes)やコンポーネントにも同じテクニックを使用します。
 
@@ -146,18 +150,25 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 
 ## `bootstrap`配列
 
-アプリケーションは、ルートの`AppModule`をブートストラップすることで起動します、これは`entryComponent`とも呼ばれます。
-とりわけ、ブートストラッププロセスは、`bootstrap`配列にリストされているコンポーネントを作成し、それぞれをブラウザDOMに挿入します。
+アプリケーションは、ルートの`AppModule`をブートストラップすることで起動します、
+これは`entryComponent`とも呼ばれます。
+とりわけ、ブートストラッププロセスは、`bootstrap`配列にリストされているコンポーネントを作成し、
+それぞれをブラウザDOMに挿入します。
 
 ブートストラップされた各コンポーネントは、それ自身のコンポーネントツリーのベースです。
 通常、ブートストラップされたコンポーネントを挿入すると、
 そのツリーを埋めるコンポーネントの作成が次々に起こります。
 
-ホストWebページに複数のコンポーネントツリーを配置することはできますが、ほとんどのアプリケーションではコンポーネントツリーが1つしかなく、単一のルートコンポーネントをブートストラップします。
+ホストWebページに複数のコンポーネントツリーを配置することはできますが、
+ほとんどのアプリケーションではコンポーネントツリーが1つしかなく、単一のルートコンポーネントをブートストラップします。
 
-この1つのルートコンポーネントは、通常`AppComponent`と呼ばれ、ルートモジュールの`bootstrap`配列内にあります。
+この1つのルートコンポーネントは、通常`AppComponent`と呼ばれ、
+ルートモジュールの`bootstrap`配列内にあります。
 
-
+In a situation where you want to bootstrap a component based on an API response,
+or you want to mount the `AppComponent` in a different DOM node that doesn't match
+the component selector, please refer to `ApplicationRef.bootstrap()`
+documentation.
 
 ## Angularモジュールについての詳細
 

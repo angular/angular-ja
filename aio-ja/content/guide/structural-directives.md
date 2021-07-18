@@ -91,7 +91,7 @@ Angularにビルトインされているディレクティブ(たとえば、`Ng
 {@a shorthand}
 {@a asterisk}
 
-## 構造ディレクティブの短縮表記
+## 構造ディレクティブの短縮表記 {@a structural-directive-shorthand}
 
 `*ngIf` などの構造ディレクティブのアスタリスク `*` 構文は、Angularがより長い形式に解釈するための短縮表記です。
 Angularは、構造ディレクティブの前のアスタリスクを、ホスト要素とその子孫を囲む `<ng-template>` に変換します。

@@ -219,6 +219,13 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 **Notify Me**ボタンを動作させるには、子コンポーネントが通知して親コンポーネントにデータを渡す必要があります。
 `ProductAlertsComponent`はユーザーが**Notify Me**をクリックしたときにイベントを発生させ、`ProductListComponent`はそのイベントに応答する必要があります。
 
+  <div class="alert is-helpful">
+
+  新しいコンポーネントには、Angular Generator が空の `constructor()`、`OnInit` インターフェース、`ngOnInit()` メソッドを含めます。
+  このステップではこれらを使用しないので、次のコード例では簡潔にするために省略しています。
+
+  </div>
+
 1. `product-alerts.component.ts` で、`@angular/core` から `Output` と `EventEmitter` をインポートします。
 
   <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.ts" region="imports"></code-example>
@@ -227,13 +234,6 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
   `ProductAlertsComponent`を `@Output()` で設定することで、`ProductAlertsComponent`が `notify` プロパティの値が変更されたときにイベントを発行することができます。
 
   <code-example path="getting-started/src/app/product-alerts/product-alerts.component.ts" header="src/app/product-alerts/product-alerts.component.ts" region="input-output"></code-example>
-
-  <div class="alert is-helpful">
-
-  新しいコンポーネントでは、Angular Generatorは空の `constructor()`、`OnInit` インターフェース、`ngOnInit()`メソッドを含みます。
-  これらのステップは使用しないので、次のコード例では簡潔にするために省略しています。
-
-  </div>
 
 1. `product-alerts.component.html`で、**Notify Me**ボタンをイベントバインディングで更新し、`notify.emit()`メソッドを呼び出すようにします。
 

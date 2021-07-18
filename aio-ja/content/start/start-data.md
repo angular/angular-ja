@@ -30,6 +30,7 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
     <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.1.ts"></code-example>
 
+1. `./products.ts` から `Product` インターフェースを読み込みます。
 1. `CartService` クラスで、商品の配列をカートに格納するためのプロパティ `items` を定義します。
 
     <code-example path="getting-started/src/app/cart.service.ts" header="src/app/cart.service.ts" region="props"></code-example>

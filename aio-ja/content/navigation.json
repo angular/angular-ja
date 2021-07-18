@@ -236,12 +236,6 @@
               "translated": true
             },
             {
-              "url": "guide/inputs-outputs",
-              "title": "InputとOutput",
-              "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
-              "translated": true
-            },
-            {
               "url": "guide/svg-in-templates",
               "title": "SVGテンプレート",
               "tooltip": "Learn how to use SVGs as templates for Angular applications.",
@@ -498,6 +492,11 @@
               "title": "Service Workerとの通信",
               "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
               "translated": true
+            },
+            {
+              "url": "guide/service-worker-notifications",
+              "title": "Service Worker Notifications",
+              "tooltip": "Configuring service worker notification behavior."
             },
             {
               "url": "guide/service-worker-devops",

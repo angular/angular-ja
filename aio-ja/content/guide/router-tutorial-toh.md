@@ -2777,116 +2777,116 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 {@a custom-preloading}
 
-### Custom Preloading Strategy
+### カスタムプリロード戦略
 
-Preloading every lazy loaded module works well in many situations.
-However, in consideration of things such as low bandwidth and user metrics, you can use a custom preloading strategy for specific feature modules.
+遅延ロードされたモジュールをすべてプリロードすることは、多くの状況でうまくいきます。
+しかし、帯域幅の狭さやユーザーメトリクスなどを考慮して、特定のフィーチャーモジュールに対してカスタムプリロード戦略を使用することができます。
 
-This section guides you through adding a custom strategy that only preloads routes whose `data.preload` flag is set to `true`.
-Recall that you can add anything to the `data` property of a route.
+このセクションでは、`data.preload` フラグが `true` に設定されているルートのみをプリロードするカスタムストラテジーを追加する方法を説明します。
+ルートの `data` プロパティには何でも追加できることを思い出してください。
 
-Set the `data.preload` flag in the `crisis-center` route in the `AppRoutingModule`.
+`AppRoutingModule` の `crisis-center` ルートに、`data.preload` フラグを設定します。
 
 <code-example path="router/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts (route data preload)" region="preload-v2"></code-example>
 
-Generate a new `SelectivePreloadingStrategy` service.
+新しい `SelectivePreloadingStrategy` サービスを生成します。
 
 <code-example language="sh">
   ng generate service selective-preloading-strategy
 </code-example>
 
-Replace the contents of `selective-preloading-strategy.service.ts` with the following:
+`selective-preloading-strategy.service.ts` の内容を以下のように置き換えてください：
 
 <code-example path="router/src/app/selective-preloading-strategy.service.ts" header="src/app/selective-preloading-strategy.service.ts"></code-example>
 
-`SelectivePreloadingStrategyService` implements the `PreloadingStrategy`, which has one method, `preload()`.
+`SelectivePreloadingStrategyService` は `PreloadingStrategy` を実装しており、`preload()` という1つのメソッドを持っています。
 
-The router calls the `preload()` method with two arguments:
+ルータは2つの引数を指定して `preload()` メソッドを呼び出します：
 
-1. The route to consider.
-1. A loader function that can load the routed module asynchronously.
+1. 考慮すべきルート。
+1. ルート化されたモジュールを非同期的にロードすることができるローダー関数。
 
-An implementation of `preload` must return an `Observable`.
-If the route does preload, it returns the observable returned by calling the loader function.
-If the route does not preload, it returns an `Observable` of `null`.
+`preload` の実装は、`Observable` を返さなければなりません。
+ルートがプリロードする場合は、ローダー関数を呼び出して返されるオブザーバブルを返します。
+ルートがプリロードされない場合は、`null`の`Observable`を返します。
 
-In this sample, the  `preload()` method loads the route if the route's `data.preload` flag is truthy.
+このサンプルでは、ルートの `data.preload` フラグがtrueであれば、`preload()` メソッドがルートをロードします。
 
-As a side-effect, `SelectivePreloadingStrategyService` logs the `path` of a selected route in its public `preloadedModules` array.
+副作用として、`SelectivePreloadingStrategyService` は、選択されたルートの `path` を publicの `preloadedModules` 配列に記録します。
 
-Shortly, you'll extend the `AdminDashboardComponent` to inject this service and display its `preloadedModules` array.
+まもなく、このサービスを注入して、その `preloadedModules` 配列を表示するために、`AdminDashboardComponent` を拡張します。
 
-But first, make a few changes to the `AppRoutingModule`.
+その前に、`AppRoutingModule`に少しの変更を加えます。
 
-1. Import `SelectivePreloadingStrategyService` into `AppRoutingModule`.
-1. Replace the `PreloadAllModules` strategy in the call to `forRoot()` with this `SelectivePreloadingStrategyService`.
+1. `SelectivePreloadingStrategyService` を `AppRoutingModule` にインポートする。
+1. `forRoot()` の呼び出し内で、`PreloadAllModules` 戦略をこの `SelectivePreloadingStrategyService` で置き換えます。
 
-Now edit the `AdminDashboardComponent` to display the log of preloaded routes.
+次に、プリロードされたルートのログを表示するために、`AdminDashboardComponent` を編集します。
 
-1. Import the `SelectivePreloadingStrategyService`.
-1. Inject it into the dashboard's constructor.
-1. Update the template to display the strategy service's `preloadedModules` array.
+1. `SelectivePreloadingStrategyService` をインポートします。
+1. ダッシュボードのコンストラクタにインジェクトします。
+1. ストラテジーサービスの `preloadedModules` 配列を表示するようにテンプレートを更新します。
 
-Now the file is as follows:
+これで、ファイルは以下のようになります：
 
 <code-example path="router/src/app/admin/admin-dashboard/admin-dashboard.component.ts" header="src/app/admin/admin-dashboard/admin-dashboard.component.ts (preloaded modules)"></code-example>
 
-Once the application loads the initial route, the `CrisisCenterModule` is preloaded.
-Verify this by logging in to the `Admin` feature area and noting that the `crisis-center` is listed in the `Preloaded Modules`.
-It also logs to the browser's console.
+アプリケーションが最初のルートをロードすると、`CrisisCenterModule` がプリロードされます。
+これを確認するには、`Admin` 機能エリアにログインして、`Preloaded Modules` に `crisis-center` が表示されていることを確認してください。
+また、ブラウザのコンソールにもログが表示されます。
 
 {@a redirect-advanced}
 
-### Migrating URLs with redirects
+### リダイレクトによるURLの移行
 
-You've setup the routes for navigating around your application and used navigation imperatively and declaratively.
-But like any application, requirements change over time.
-You've setup links and navigation to `/heroes` and `/hero/:id` from the `HeroListComponent` and `HeroDetailComponent` components.
-If there were a requirement that links to `heroes` become `superheroes`, you would still want the previous URLs to navigate correctly.
-You also don't want to update every link in your application, so redirects makes refactoring routes trivial.
+アプリケーション内を移動するためのルートを設定し、ナビゲーションを命令的および宣言的に使用しました。
+しかし、他のアプリケーションと同様に、要件は時間とともに変化します。
+`HeroListComponent` と `HeroDetailComponent` のコンポーネントから `/heroes` と `/hero/:id` へのリンクとナビゲーションを設定しました。
+もし、`heroes` へのリンクが `superheroes` になるという要件があったとしても、以前のURLで正しくナビゲートしたいと思います。
+また、アプリケーション内のすべてのリンクを更新したくはないでしょうから、リダイレクトを使えばルートのリファクタリングが簡単になります。
 
 {@a url-refactor}
 
-#### Changing `/heroes` to `/superheroes`
+#### `/heroes` から `/superheroes` への変更
 
-This section guides you through migrating the `Hero` routes to new URLs.
-The `Router` checks for redirects in your configuration before navigating, so each redirect is triggered when needed. To support this change, add redirects from the old routes to the new routes in the `heroes-routing.module`.
+このセクションでは、`Hero` ルートを新しい URL に移行する方法を説明します。
+`Router` はナビゲートする前に設定でリダイレクトをチェックするので、各リダイレクトは必要なときに起動されます。この変更をサポートするために、`heroes-routing.module` で古いルートから新しいルートへのリダイレクトを追加します。
 
 <code-example path="router/src/app/heroes/heroes-routing.module.ts" header="src/app/heroes/heroes-routing.module.ts (heroes redirects)"></code-example>
 
-Notice two different types of redirects.
-The first change is from  `/heroes` to `/superheroes` without any parameters.
-The second change is from `/hero/:id` to `/superhero/:id`, which includes the `:id` route parameter.
-Router redirects also use powerful pattern-matching, so the `Router` inspects the URL and replaces route parameters in the `path` with their appropriate destination.
-Previously, you navigated to a URL such as `/hero/15` with a route parameter `id` of `15`.
+2つの異なるタイプのリダイレクトに注目してください。
+最初の変更は、パラメータなしで `/heroes` から `/superheroes` への変更です。
+2つ目の変更は、`/hero/:id` から `/superhero/:id` への変更で、`:id` ルートパラメータを含んでいます。
+ルーターのリダイレクトも強力なパターンマッチを使用しているので、`Router` は URL を検査して、`path` のルートパラメータを適切な宛先に置き換えます。
+以前は、`/hero/15` のようなURLにルートパラメータ `id` の `15` で移動していました。
 
 <div class="alert is-helpful">
 
-The `Router` also supports [query parameters](#query-parameters) and the [fragment](#fragment) when using redirects.
+`Router` は、リダイレクトを使用する際に、[クエリパラメータ](#query-parameters) と [フラグメント](#fragment) もサポートします。
 
-* When using absolute redirects, the `Router` will use the query parameters and the fragment from the `redirectTo` in the route config.
-* When using relative redirects, the `Router` use the query params and the fragment from the source URL.
+* 絶対的なリダイレクトを使用する場合、`Router` はルートコンフィグ内の `redirectTo` からクエリパラメータとフラグメントを使用します。
+* 相対的なリダイレクトを使用する場合、`Router` はクエリパラメータとソース URL のフラグメントを使用します。
 
 </div>
 
-Currently, the empty path route redirects to `/heroes`, which redirects to `/superheroes`.
-This won't work because the `Router` handles redirects once at each level of routing configuration.
-This prevents chaining of redirects, which can lead to endless redirect loops.
+現在、空のパスのルートは `/heroes` にリダイレクトされ、それは `/superheroes` にリダイレクトされます。
+これがうまくいかないのは、`Router` がルーティング設定の各レベルでリダイレクトを一度だけ処理するからです。
+これはリダイレクトの連鎖を防ぐためで、リダイレクトの無限ループにつながる可能性があります。
 
-Instead, update the empty path route in `app-routing.module.ts` to redirect to `/superheroes`.
+代わりに、`app-routing.module.ts` の空のパスのルートを更新して、`/superheroes` にリダイレクトしてください。
 
 <code-example path="router/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts (superheroes redirect)"></code-example>
 
-A `routerLink` isn't tied to route configuration, so update the associated router links to remain active when the new route is active.
-Update the `app.component.ts` template for the `/heroes` `routerLink`.
+`routerLink` はルート設定とは関係ないので、新しいルートがアクティブになっても、関連するルーターリンクがアクティブになるように更新してください。
+`/heroes` の `routerLink` 用に `app.component.ts` テンプレートを更新します。
 
 <code-example path="router/src/app/app.component.html" header="src/app/app.component.html (superheroes active routerLink)"></code-example>
 
-Update the `goToHeroes()` method in the `hero-detail.component.ts` to navigate back to `/superheroes` with the optional route parameters.
+オプションのルートパラメーターを使って、`/superheroes` に戻るように `hero-detail.component.ts` の `goToHeroes()` メソッドを更新します。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.ts" region="redirect" header="src/app/heroes/hero-detail/hero-detail.component.ts (goToHeroes)"></code-example>
 
-With the redirects setup, all previous routes now point to their new destinations and both URLs still function as intended.
+リダイレクトを設定すると、以前のすべてのルートが新しい目的地を指すようになり、両方のURLが意図したとおりに機能します。
 
 {@a inspect-config}
 

@@ -2530,207 +2530,206 @@ Guards
 
 {@a fragment}
 
-### Query parameters and fragments
+### クエリパラメータとフラグメント
 
-In the [route parameters](#optional-route-parameters) section, you only dealt with parameters specific to the route.
-However, you can use query parameters to get optional parameters available to all routes.
+[ルートパラメータ](#optional-route-parameters)のセクションでは、ルートに固有のパラメータのみを扱いました。
+しかし、クエリパラメータを使って、すべてのルートで利用できるオプションのパラメータを取得することができます。
 
-[Fragments](https://en.wikipedia.org/wiki/Fragment_identifier) refer to certain elements on the page
-identified with an `id` attribute.
+[フラグメント](https://en.wikipedia.org/wiki/Fragment_identifier)は、ページ上の特定の要素を指し、
+`id` 属性で識別されます。
 
-Update the `AuthGuard` to provide a `session_id` query that will remain after navigating to another route.
+`AuthGuard` を更新して、別のルートに移動した後も残る `session_id` クエリを提供します。
 
-Add an `anchor` element so you can jump to a certain point on the page.
+`anchor` 要素を追加して、ページの特定のポイントにジャンプできるようにしました。
 
-Add the `NavigationExtras` object to the `router.navigate()` method that navigates you to the `/login` route.
+`router.navigate()` メソッドに `NavigationExtras` オブジェクトを追加して、`/login` ルートに移動できるようにします。
 
 <code-example path="router/src/app/auth/auth.guard.4.ts" header="src/app/auth/auth.guard.ts (v3)"></code-example>
 
-You can also preserve query parameters and fragments across navigations without having to provide them again when navigating.
-In the `LoginComponent`, you'll add an *object* as the second argument in the `router.navigateUrl()` function and provide the `queryParamsHandling` and `preserveFragment` to pass along the current query parameters and fragment to the next route.
+また、クエリパラメータやフラグメントをナビゲート時に再度提供することなく、ナビゲート間で保存することができます。
+`LoginComponent` では、`router.navigateUrl()` 関数の第2引数に*object*を追加し、`queryParamsHandling` と `preserveFragment` を指定して、現在のクエリパラメータとフラグメントを次のルートに渡します。
 
 <code-example path="router/src/app/auth/login/login.component.ts" header="src/app/auth/login/login.component.ts (preserve)" region="preserve"></code-example>
 
 <div class="alert is-helpful">
 
-The `queryParamsHandling` feature also provides a `merge` option, which preserves and combines the current query parameters with any provided query parameters when navigating.
+また、`queryParamsHandling` 機能には、`merge` オプションがあり、ナビゲートする際に、現在のクエリパラメータと提供されたクエリパラメータを保存して結合することができます。
 
 </div>
 
-To navigate to the Admin Dashboard route after logging in, update `admin-dashboard.component.ts` to handle the
-query parameters and fragment.
+ログイン後にAdmin Dashboardルートに移動するには、`admin-dashboard.component.ts` を更新して、
+クエリパラメータとフラグメントを処理します。
 
 <code-example path="router/src/app/admin/admin-dashboard/admin-dashboard.component.1.ts" header="src/app/admin/admin-dashboard/admin-dashboard.component.ts (v2)"></code-example>
 
-Query parameters and fragments are also available through the `ActivatedRoute` service.
-Like route parameters, the query parameters and fragments are provided as an `Observable`.
-The updated Crisis Admin component feeds the `Observable` directly into the template using the `AsyncPipe`.
+クエリのパラメータやフラグメントは，`ActivatedRoute` サービスでも利用できます。
+ルートパラメータと同様に、クエリパラメータとフラグメントは `Observable` として提供されます。
+更新されたCrisis Adminコンポーネントは、`AsyncPipe`を使って、`Observable`をテンプレートに直接フィードします。
 
-Now, you can click on the Admin button, which takes you to the Login page with the provided `queryParamMap` and `fragment`.
-After you click the login button, notice that you have been redirected to the `Admin Dashboard` page with the query parameters and fragment still intact in the address bar.
+ここで、管理者ボタンをクリックすると、指定された `queryParamMap` と `fragment` を含むログインページに移動します。
+ログインボタンをクリックすると、`Admin Dashboard` ページにリダイレクトされ、アドレスバーにはクエリパラメータとフラグメントがそのまま残っていることに気がつきます。
 
-You can use these persistent bits of information for things that need to be provided across pages like authentication tokens or session ids.
+これらの永続的な情報は、認証トークンやセッションIDのように、ページ間で提供される必要があるものに使用できます。
 
 <div class="alert is-helpful">
 
-The `query params` and `fragment` can also be preserved using a `RouterLink` with
-the `queryParamsHandling` and `preserveFragment` bindings respectively.
+また、`queryParamsHandling` と `preserveFragment` のバインディングを持つ`RouterLink`を使って、
+`query params` と `fragment` を保存することもできます。
 
 </div>
 
 
 {@a asynchronous-routing}
 
-## Milestone 6: Asynchronous routing
+## マイルストーン 6: 非同期ルーティング
 
-As you've worked through the milestones, the application has naturally gotten larger.
-At some point you'll reach a point where the application takes a long time to load.
+マイルストーンに沿って作業を進めていくと、自然とアプリケーションのサイズが大きくなっていきます。
+ある時点で、アプリケーションのロードに時間がかかるようになるでしょう。
 
-To remedy this issue, use asynchronous routing, which loads feature modules lazily, on request.
-Lazy loading has multiple benefits.
+この問題を解決するには、フィーチャーモジュールをリクエストに応じて遅延的にロードする非同期ルーティングを使用します。
+遅延ロードには複数の利点があります。
 
-* You can load feature areas only when requested by the user.
-* You can speed up load time for users that only visit certain areas of the application.
-* You can continue expanding lazy loaded feature areas without increasing the size of the initial load bundle.
+* ユーザーからの要求があったときだけ、フィーチャーエリアをロードすることができます。
+* アプリケーションの特定のエリアにしかアクセスしないユーザーのロード時間を短縮できます。
+* 最初のロードバンドルのサイズを増やすことなく、遅延ロードされた機能領域を拡張し続けることができます。
 
-You're already part of the way there.
-By organizing the application into modules&mdash;`AppModule`,
-`HeroesModule`, `AdminModule` and `CrisisCenterModule`&mdash;you
-have natural candidates for lazy loading.
+あなたはすでにその道を歩んでいます。
+アプリケーションをモジュール&mdash; `AppModule`、
+`HeroesModule`、`AdminModule`、`CrisisCenterModule`&mdash;に整理することで、
+自然に遅延ロードの候補となります。
 
-Some modules, like `AppModule`, must be loaded from the start.
-But others can and should be lazy loaded.
-The `AdminModule`, for example, is needed by a few authorized users, so
-you should only load it when requested by the right people.
+`AppModule` のように、最初からロードしなければならないモジュールもあります。
+しかし、他のモジュールは遅延ロードすることができ、またそうすべきです。
+例えば、`AdminModule` は少数の許可されたユーザが必要とするものなので、適切な人から要求されたときにのみロードすべきです。
 
 {@a lazy-loading-route-config}
 
-### Lazy Loading route configuration
+### 遅延ロードのルート設定
 
-Change the `admin` path in the `admin-routing.module.ts` from `'admin'` to an empty string, `''`, the empty path.
+`admin-routing.module.ts` の `admin` パスを `'admin'` から空の文字列 `''` に変更し、空のパスにします。
 
-Use empty path routes to group routes together without adding any additional path segments to the URL.
-Users will still visit `/admin` and the `AdminComponent` still serves as the Routing Component containing child routes.
+空のパスのルートを使用すると、URLに追加のパスセグメントを追加することなく、ルートをグループ化することができます。
+ユーザーは `/admin` にアクセスし、`AdminComponent` は子ルートを含むルーティングコンポーネントとして機能します。
 
-Open the `AppRoutingModule` and add a new `admin` route to its `appRoutes` array.
+`AppRoutingModule` を開き、新しい `admin` ルートを `appRoutes` 配列に追加します。
 
-Give it a `loadChildren` property instead of a `children` property.
-The `loadChildren` property takes a function that returns a promise using the browser's built-in syntax for lazy loading code using dynamic imports `import('...')`.
-The path is the location of the `AdminModule` (relative to the application root).
-After the code is requested and loaded, the `Promise` resolves an object that contains the `NgModule`, in this case the `AdminModule`.
+このルートには、`children` プロパティの代わりに `loadChildren` プロパティを与えます。
+`loadChildren` プロパティは、ダイナミックインポートを使用したコードを遅延ロードするためのブラウザの組み込み構文である `import('...')` を使用して、promise を返す関数を取ります。
+パスは `AdminModule` の場所です (アプリケーションのルートからの相対パス)。
+コードがリクエストされてロードされると、`Promise` は `NgModule`（ここでは`AdminModule`）を含んだオブジェクトを解決します。
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin-1" header="app-routing.module.ts (load children)"></code-example>
 
 <div class="alert is-important">
 
-*Note*: When using absolute paths, the `NgModule` file location must begin with `src/app` in order to resolve correctly. For custom [path mapping with absolute paths](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping), you must configure the `baseUrl` and `paths` properties in the project `tsconfig.json`.
+*Note*: 絶対パスを使用する場合、正しく解決するためには、`NgModule` のファイルの場所が `src/app` で始まる必要があります。カスタム[絶対パスによるパスマッピング](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)するには、プロジェクトの `tsconfig.json` で `baseUrl` と `paths` のプロパティを設定する必要があります。
 
 </div>
 
-When the router navigates to this route, it uses the `loadChildren` string to dynamically load the `AdminModule`.
-Then it adds the `AdminModule` routes to its current route configuration.
-Finally, it loads the requested route to the destination admin component.
+ルータがこのルートに移動すると、文字列 `loadChildren` を使って、`AdminModule` を動的に読み込みます。
+そして、`AdminModule` のルートを現在のルート設定に追加します。
+最後に、要求されたルートを目的の admin コンポーネントにロードします。
 
-The lazy loading and re-configuration happen just once, when the route is first requested; the module and routes are available immediately for subsequent requests.
+遅延ロードと再設定は、ルートが最初にリクエストされたときに一度だけ行われます。モジュールとルートは、その後のリクエストですぐに利用できます。
 
 
 <div class="alert is-helpful">
 
-Angular provides a built-in module loader that supports SystemJS to load modules asynchronously. If you were
-using another bundling tool, such as Webpack, you would use the Webpack mechanism for asynchronously loading modules.
+Angularは、SystemJSをサポートする組み込みモジュールローダーを提供し、非同期にモジュールをロードします。
+もし、あなたがWebpack のような他のバンドルツールを使用している場合は、モジュールを非同期にロードするために Webpack のメカニズムを使用します。
 
 </div>
 
-Take the final step and detach the admin feature set from the main application.
-The root `AppModule` must neither load nor reference the `AdminModule` or its files.
+最後のステップとして、メインのアプリケーションからアドミン機能セットを切り離します。
+ルートの `AppModule` は、`AdminModule` やそのファイルをロードしたり、参照したりしてはいけません。
 
-In `app.module.ts`, remove the `AdminModule` import statement from the top of the file
-and remove the `AdminModule` from the NgModule's `imports` array.
+`app.module.ts` の中で、ファイルの先頭にある `AdminModule` のimport文を削除し、
+また、NgModule の `imports` 配列から `AdminModule` を削除します。
 
 {@a can-load-guard}
 
-### `CanLoad`: guarding unauthorized loading of feature modules
+### `CanLoad`: フィーチャーモジュールの不正な読み込みを防ぐ
 
-You're already protecting the `AdminModule` with a `CanActivate` guard that prevents unauthorized users from accessing the admin feature area.
-It redirects to the login page if the user is not authorized.
+あなたは既に `AdminModule` を `CanActivate` ガードで保護しており、権限のないユーザがアドミン機能エリアにアクセスするのを防いでいます。
+ユーザーが認証されていない場合は、ログインページにリダイレクトされます。
 
-But the router is still loading the `AdminModule` even if the user can't visit any of its components.
-Ideally, you'd only load the `AdminModule` if the user is logged in.
+しかし、ユーザーがどのコンポーネントにもアクセスできない場合でも、ルーターは `AdminModule` をロードしています。
+理想は、ユーザーがログインしている場合にのみ `AdminModule` をロードすることです。
 
-Add a `CanLoad` guard that only loads the `AdminModule` once the user is logged in _and_ attempts to access the admin feature area.
+`CanLoad` ガードを追加すると、ユーザーがログインしていて、_かつ_、アドミン機能エリアにアクセスしようとしたときにのみ、`AdminModule` をロードします。
 
-The existing `AuthGuard` already has the essential logic in its `checkLogin()` method to support the `CanLoad` guard.
+既存の `AuthGuard` には、`CanLoad` ガードをサポートするための必須ロジックが `checkLogin()` メソッドにすでに含まれています。
 
-Open `auth.guard.ts`.
-Import the `CanLoad` interface from `@angular/router`.
-Add it to the `AuthGuard` class's `implements` list.
-Then implement `canLoad()` as follows:
+`auth.guard.ts` を開きます。
+`CanLoad` インターフェースを `@angular/router` からインポートします。
+これを `AuthGuard` クラスの `implements` リストに追加します。
+そして、以下のように `canLoad()` を実装します：
 
 <code-example path="router/src/app/auth/auth.guard.ts" header="src/app/auth/auth.guard.ts (CanLoad guard)" region="canLoad"></code-example>
 
-The router sets the `canLoad()` method's `route` parameter to the intended destination URL.
-The `checkLogin()` method redirects to that URL once the user has logged in.
+ルーターは、`canLoad()` メソッドの `route` パラメータに、意図した宛先のURLを設定します。
+`checkLogin()` メソッドは、ユーザーがログインしたらそのURLにリダイレクトします。
 
-Now import the `AuthGuard` into the `AppRoutingModule` and add the `AuthGuard` to the `canLoad`
-array property for the `admin` route.
-The completed admin route looks like this:
+では、`AuthGuard` を `AppRoutingModule` にインポートして、`AuthGuard` を `admin` ルートの `canLoad`
+配列プロパティに追加します。
+完成したadminルートは以下のようになります：
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
 {@a preloading}
 
-### Preloading: background loading of feature areas
+### Preloading: フィーチャーエリアのバックグラウンドローディング
 
-In addition to loading modules on-demand, you can load modules asynchronously with preloading.
+モジュールをオンデマンドでロードするだけでなく、プリロードで非同期にモジュールをロードすることもできます。
 
-The `AppModule` is eagerly loaded when the application starts, meaning that it loads right away.
-Now the `AdminModule` loads only when the user clicks on a link, which is called lazy loading.
+`AppModule` はアプリケーションの起動時に eagerly loaded、つまりすぐにロードされます。
+一方、`AdminModule` はユーザがリンクをクリックしたときにのみロードされます。これを遅延ローディングと呼びます。
 
-Preloading allows you to load modules in the background so that the data is ready to render when the user activates a particular route.
-Consider the Crisis Center.
-It isn't the first view that a user sees.
-By default, the Heroes are the first view.
-For the smallest initial payload and fastest launch time, you should eagerly load the `AppModule` and the `HeroesModule`.
+プリロードは、ユーザーが特定のルートをアクティブにしたときにデータがレンダリングできるように、バックグラウンドでモジュールをロードすることができます。
+クライシスセンターの場合を考えてみましょう。
+クライシスセンターは、ユーザーが最初に目にする画面ではありません。
+デフォルトではヒーローがファーストビューです。
+最小の初期ペイロードと最速の起動時間を実現するには、`AppModule` と `HeroesModule` をeagerly loadする必要があります。
 
-You could lazy load the Crisis Center.
-But you're almost certain that the user will visit the Crisis Center within minutes of launching the app.
-Ideally, the application would launch with just the `AppModule` and the `HeroesModule` loaded and then, almost immediately, load the `CrisisCenterModule` in the background.
-By the time the user navigates to the Crisis Center, its module will have been loaded and ready.
+クライシスセンターを遅延ロードすることもできます。
+しかし，アプリを起動してから数分以内にユーザーがクライシスセンターを訪れることはほぼ間違いないでしょう．
+理想的には、アプリケーションは `AppModule` と `HeroesModule` だけがロードされた状態で起動し、その後ほぼ即座に `CrisisCenterModule` をバックグラウンドでロードすることです。
+ユーザーがクライシスセンターに移動する頃には、そのモジュールがロードされ、準備が整っています。
 
 {@a how-preloading}
 
-#### How preloading works
+#### プリロードの仕組み
 
-After each successful navigation, the router looks in its configuration for an unloaded module that it can preload.
-Whether it preloads a module, and which modules it preloads, depends upon the preload strategy.
+ナビゲーションが成功するたびに、ルータはプリロード可能な未読み込みのモジュールを設定から探します。
+モジュールをプリロードするかどうか、また、どのモジュールをプリロードするかは、プリロード戦略に依存します。
 
-The `Router` offers two preloading strategies:
+`Router` には2種類のプリロード戦略があります：
 
-* No preloading, which is the default. Lazy loaded feature areas are still loaded on-demand.
-* Preloading of all lazy loaded feature areas.
+* プリロードしない、これがデフォルトです。遅延ロードされたフィーチャーエリアはオンデマンドでロードされます。
+* 遅延ロードされたすべてのフィーチャーエリアをプリロードします。
 
-The router either never preloads, or preloads every lazy loaded module.
-The `Router` also supports [custom preloading strategies](#custom-preloading) for fine control over which modules to preload and when.
+ルーターは、プリロードしないか、遅延ロードされたモジュールをすべてプリロードします。
+また、`Router` は、どのモジュールをいつプリロードするかを細かく制御するための [カスタムプリロード戦略](#custom-preloading) もサポートしています。
 
-This section guides you through updating the `CrisisCenterModule` to load lazily by default and use the `PreloadAllModules` strategy to load all lazy loaded modules.
+このセクションでは、`CrisisCenterModule` を更新して、デフォルトで遅延ロードを行い、遅延ロードされたモジュールをすべてロードするために `PreloadAllModules` 戦略を使用する方法を説明します。
 
 {@a lazy-load-crisis-center}
 
-#### Lazy load the crisis center
+#### クライシスセンターを遅延ロードする
 
-Update the route configuration to lazy load the `CrisisCenterModule`.
-Take the same steps you used to configure `AdminModule` for lazy loading.
+`CrisisCenterModule` を遅延ロードするようにルート設定を更新します。
+`AdminModule` を遅延ロード用に設定したのと同じ手順で行います。
 
-1. Change the `crisis-center` path in the `CrisisCenterRoutingModule` to an empty string.
+1. `CrisisCenterRoutingModule` の `crisis-center` のパスを空の文字列に変更します。
 
-1. Add a `crisis-center` route to the `AppRoutingModule`.
+1. `AppRoutingModule` に `crisis-center` のルートを追加します。
 
-1. Set the `loadChildren` string to load the `CrisisCenterModule`.
+1. `loadChildren` という文字列を設定して、`CrisisCenterModule` をロードします。
 
-1. Remove all mention of the `CrisisCenterModule` from `app.module.ts`.
+1. `app.module.ts` から `CrisisCenterModule` の記述をすべて削除します。
 
 
-Here are the updated modules _before enabling preload_:
+プリロードを_有効にする前の_、更新されたモジュールは以下の通りです：
 
 
 <code-tabs>
@@ -2749,32 +2748,32 @@ Here are the updated modules _before enabling preload_:
 
 </code-tabs>
 
-You could try this now and confirm that the  `CrisisCenterModule` loads after you click the "Crisis Center" button.
+今すぐ試してみて、"Crisis Center"ボタンをクリックした後に `CrisisCenterModule` がロードされることを確認してみてください。
 
-To enable preloading of all lazy loaded modules, import the `PreloadAllModules` token from the Angular router package.
+遅延ロードされたすべてのモジュールのプリロードを有効にするには、Angular routerパッケージから `PreloadAllModules` トークンをインポートします。
 
-The second argument in the `RouterModule.forRoot()` method takes an object for additional configuration options.
-The `preloadingStrategy` is one of those options.
-Add the `PreloadAllModules` token to the `forRoot()` call:
+`RouterModule.forRoot()` メソッドの第2引数には、追加の設定オプションのためのオブジェクトが渡されます。
+`preloadingStrategy` はそのオプションの一つです。
+`forRoot()` の呼び出しに `PreloadAllModules` トークンを追加します：
 
 <code-example path="router/src/app/app-routing.module.6.ts" header="src/app/app-routing.module.ts (preload all)" region="forRoot"></code-example>
 
-This configures the `Router` preloader to immediately load all lazy loaded routes (routes with a `loadChildren` property).
+これは、遅延ロードされたすべてのルート（`loadChildren`プロパティを持つルート）を即座にロードするように `Router` プリローダーを設定します。
 
-When you visit `http://localhost:4200`, the `/heroes` route loads immediately upon launch and the router starts loading the `CrisisCenterModule` right after the `HeroesModule` loads.
+`http://localhost:4200` にアクセスすると、起動と同時に `/heroes` ルートがロードされ、`HeroesModule` がロードされた直後に、ルータが `CrisisCenterModule` のロードを開始します。
 
-Currently, the `AdminModule` does not preload because `CanLoad` is blocking it.
+現在、`CanLoad` がブロックしているため、`AdminModule` はプリロードされません。
 
 {@a preload-canload}
 
-#### `CanLoad` blocks preload
+#### `CanLoad` ブロックのプリロード
 
-The `PreloadAllModules` strategy does not load feature areas protected by a [CanLoad](#can-load-guard) guard.
+`PreloadAllModules` 戦略は、[CanLoad](#can-load-guard)ガードで保護されたフィーチャーエリアをロードしません。
 
-You added a `CanLoad` guard to the route in the `AdminModule` a few steps back to block loading of that module until the user is authorized.
-That `CanLoad` guard takes precedence over the preload strategy.
+数ステップ前に `AdminModule` のルートに `CanLoad` ガードを追加して、ユーザーが認証されるまでそのモジュールのロードをブロックしました。
+この `CanLoad` ガードは、プリロード戦略よりも優先されます。
 
-If you want to preload a module as well as guard against unauthorized access, remove the `canLoad()` guard method and rely on the [canActivate()](#can-activate-guard) guard alone.
+モジュールをプリロードすると同時に不正なアクセスを防ぎたい場合は、`canLoad()`ガードメソッドを削除して、[canActivate()](#can-activate-guard)ガードだけ使用してください。
 
 {@a custom-preloading}
 

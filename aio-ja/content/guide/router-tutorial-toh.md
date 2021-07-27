@@ -2892,18 +2892,20 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 ### Inspect the router's configuration
 
-To determine if your routes are actually evaluated [in the proper order](#routing-module-order), you can inspect the router's configuration.
+### ルーターの設定を確認する
 
-Do this by injecting the router and logging to the console its `config` property.
-For example, update the `AppModule` as follows and look in the browser console window
-to see the finished route configuration.
+ルートが[適切な順序](#routing-module-orderr)で評価されているかどうかを確認するには、ルーター設定を確認します。
+
+ルーターをインジェクションして、`config` プロパティをコンソールにロギングしてみましょう。
+例えば、次のように `AppModule` を更新して、ブラウザのコンソールウィンドウを見ると、
+完成したルートの構成がわかります。
 
 <code-example path="router/src/app/app.module.7.ts" header="src/app/app.module.ts (inspect the router config)" region="inspect-config"></code-example>
 
 {@a final-app}
 
-## Final application
+## 最終的なアプリケーション
 
-For the completed router application, see the <live-example name="router"></live-example> for the final source code.
+完成したルーターアプリケーションについては、最終的なソースコードの<live-example name="router"></live-example>を参照してください。
 
 {@a link-parameters-array}

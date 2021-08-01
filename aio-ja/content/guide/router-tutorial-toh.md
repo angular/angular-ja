@@ -244,7 +244,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 まだ `"/sidekicks"` ルートを定義していないので、ユーザがそのボタンをクリックするとアプリケーションは失敗します。
 
-"/sidekicks"` ルートを追加する代わりに、`wildcard` ルートを定義して、`PageNotFoundComponent` にナビゲートするようにしましょう。
+`"/sidekicks"` ルートを追加する代わりに、`wildcard` ルートを定義して、`PageNotFoundComponent` にナビゲートするようにしましょう。
 
 <code-example path="router/src/app/app.module.1.ts" header="src/app/app.module.ts (wildcard)" region="wildcard"></code-example>
 
@@ -771,7 +771,8 @@ ng generate module my-module --routing
 
 #### 重複するヒーロールートの削除
 
-現在、ヒーロールートは `HeroesRoutingModule` 内の2つの場所：`HeroesModule` と `AppRoutingModule` で定義されています。
+現在、ヒーロールートは `HeroesRoutingModule` 内の2つの場所：
+`HeroesModule` と `AppRoutingModule` で定義されています。
 
 フィーチャーモジュールによって提供されたルートは、ルーターによってそのインポートされたモジュールのルートに統合されます。
 これにより、メインのルート設定を変更することなく、機能モジュールのルートを定義し続けることができます。
@@ -860,7 +861,6 @@ detailコンポーネントにナビゲートし、"Magneta" を表示するよ�
 
 #### リストビューでのルートパラメーターの設定
 
-`id` of the selected hero.
 `HeroDetailComponent` にナビゲートした後、選択されたヒーローの詳細を見ることができます。
 2つの情報が必要です: コンポーネントへのルーティングパスとヒーローの `id` です。
 
@@ -869,9 +869,7 @@ detailコンポーネントにナビゲートし、"Magneta" を表示するよ�
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array"></code-example>
 
-The router extracts the route parameter (`id:15`) from the URL and supplies it to
-the `HeroDetailComponent` using the `ActivatedRoute` service.
-ルーターは、配列から宛先URLを次のように構成します：`localhost:4200/hero/15`
+ルーターは、配列から宛先URLを次のように構成します：`localhost:4200/hero/15`。
 
 ルータはURLからルートパラメータ(`id:15`)を抽出し、
 `ActivatedRoute` サービスを使って，`HeroDetailComponent`に供給します。
@@ -891,7 +889,6 @@ router パッケージから `Router`, `ActivatedRoute`, `ParamMap` トークン
 
 {@a hero-detail-ctor}
 
-Add the services as private variables to the constructor so that Angular injects them (makes them visible to the component).
 サービスをプライベート変数としてコンストラクタに追加し、Angularがそれらを注入するようにします（コンポーネントから使えるようにします）。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (constructor)" region="ctor"></code-example>
@@ -912,8 +909,8 @@ Add the services as private variables to the constructor so that Angular injects
 
 #### _ParamMap_ API
 
-The `ParamMap` API is inspired by the [URLSearchParams interface](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams).
-It provides methods to handle parameter access for both route parameters (`paramMap`) and query parameters (`queryParamMap`).
+`ParamMap` APIは[URLSearchParams interface](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)を参考にしています。
+ルートパラメータ（`paramMap`）とクエリパラメータ（`queryParamMap`）の両方のパラメータアクセスを処理するメソッドを提供します。
 
 <table>
   <tr>
@@ -1044,8 +1041,6 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 {@a optional-route-parameters}
 
-Use [route parameters](#route-parameters) to specify a required parameter value within the route URL
-as you do when navigating to the `HeroDetailComponent` in order to view the hero with `id` 15:
 #### ルートパラメーター：必須またはオプション？
 
 ルートURL内で必須のパラメータ値を指定するには、`id` 15 のヒーローを表示するために `HeroDetailComponent` にナビゲートした時のように、
@@ -1065,7 +1060,6 @@ as you do when navigating to the `HeroDetailComponent` in order to view the hero
 <div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero">
 </div>
-
 
 `HeroDetailComponent` から戻る際に、閲覧されたヒーローの `id` をオプションのパラメータとしてURLに含めることで、この機能を実装します。
 
@@ -1093,7 +1087,6 @@ as you do when navigating to the `HeroDetailComponent` in order to view the hero
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array"></code-example>
 
-The router embedded the `id` value in the navigation URL because you had defined it as a route parameter with an `:id` placeholder token in the route `path`:
 ルーターがナビゲーションURLに `id` 値を埋め込んだのは、ルートの `path` に `:id` プレースホルダートークンを使ってルートパラメータとして定義したからです：
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts (hero-detail-route)" region="hero-detail-route"></code-example>
@@ -1134,7 +1127,6 @@ The router embedded the `id` value in the navigation URL because you had defined
 
 <div class="alert is-helpful">
 
-As such, the Router provides support for the matrix notation across browsers.
 マトリクスURL表記は、Webの創始者であるTim Berners-Lee氏が[1996年の提案](https://www.w3.org/DesignIssues/MatrixURIs.html)で初めて紹介したアイデアです。
 
 マトリクス記法はHTML標準には採用されませんでしたが、合法であり、親ルートと子ルートに属するパラメータを分離する方法として、ブラウザのルーティングシステムの間で普及しました。
@@ -1681,7 +1673,6 @@ As such, the Router provides support for the matrix notation across browsers.
 現在のURLセグメントからの相対パスを定義することで、この依存関係からリンクを解放することができます。
 フィーチャーへの親ルートのパスを変更しても、フィーチャーエリア内のナビゲーションはそのまま維持されます。
 
-
 <div class="alert is-helpful">
 
 ルーターは、ルート名の検索を助けるために、 _リンクパラメータリストリンク_ でディレクトリライクな構文をサポートしています：
@@ -1731,11 +1722,9 @@ _リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` �
 クライシスセンターに連絡する手段をユーザーに提供することにしました。
 ユーザーが "Contact" ボタンをクリックすると、ポップアップビューにメッセージを表示します。
 
-
 ポップアップは、アプリケーションのページを切り替えても、ユーザーがメッセージを送信するかキャンセルしてポップアップを閉じるまで、開いたままにしておく必要があります。
 ユーザーがメッセージを送信するか、キャンセルしてポップアップを閉じるまで、アプリケーションのページを切り替えても、ポップアップは開いたままでなければなりません。
 明らかに、ポップアップを他のページと同じアウトレットに置くことはできません。
-
 
 これまでは、1つのアウトレットを定義し、そのアウトレットの下に子ルートを入れ子にしてルートをまとめていました。
 ルーターは、プライマリな無名アウトレットはテンプレートごとに1つしかサポートしていません。
@@ -2150,8 +2139,6 @@ The admin feature file structure looks like this:
 マネジメントルートである `Crisis Center` を `admin` パスにまとめるためには、コンポーネントは必要ありません。
 さらに、_component-less_ ルートは、[子ルートのガード](#can-activate-child-guard) を容易にします。
 
-Next, import the `AdminModule` into `app.module.ts` and add it to the `imports` array
-to register the admin routes.
 次に、`AdminModule` を `app.module.ts` にインポートして、`imports` 配列に追加し、
 アドミンルートを登録します。
 
@@ -2231,8 +2218,6 @@ to register the admin routes.
 
 {@a add-login-component}
 
-#### Add the `LoginComponent`
-
 #### `LoginComponent` の追加
 
 ユーザーがアプリケーションにログインするためには、`LoginComponent` が必要です。ログイン後、保存されているURLがあればそこにリダイレクトするか、デフォルトのURLを使用します。
@@ -2287,8 +2272,6 @@ to register the admin routes.
 
 <code-example path="router/src/app/auth/auth.guard.3.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-activate-child"></code-example>
 
-Add the same `AuthGuard` to the `component-less` admin route to protect all other child routes at one time
-instead of adding the `AuthGuard` to each route individually.
 `AuthGuard` を各ルートに追加する代わりに、
 同じ `AuthGuard` を `component-less` の admin ルートに追加して、他のすべての子ルートを一度に保護します。
 
@@ -2296,8 +2279,6 @@ instead of adding the `AuthGuard` to each route individually.
 
 {@a can-deactivate-guard}
 
-
-### `CanDeactivate`: handling unsaved changes
 
 ### `CanDeactivate`: 保存されていない変更の処理
 
@@ -2600,7 +2581,8 @@ Guards
 
 `AppModule` のように、最初からロードしなければならないモジュールもあります。
 しかし、他のモジュールは遅延ロードすることができ、またそうすべきです。
-例えば、`AdminModule` は少数の許可されたユーザが必要とするものなので、適切な人から要求されたときにのみロードすべきです。
+例えば、`AdminModule` は少数の許可されたユーザが必要とするものなので、
+適切な人から要求されたときにのみロードすべきです。
 
 {@a lazy-loading-route-config}
 
@@ -2889,8 +2871,6 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 リダイレクトを設定すると、以前のすべてのルートが新しい目的地を指すようになり、両方のURLが意図したとおりに機能します。
 
 {@a inspect-config}
-
-### Inspect the router's configuration
 
 ### ルーターの設定を確認する
 

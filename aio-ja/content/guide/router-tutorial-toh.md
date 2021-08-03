@@ -3,9 +3,9 @@
 # ルーターチュートリアル：ツアーオブヒーローズ
 
 このチュートリアルでは、Angularルーターの広範囲な概要を説明します。
-このチュートリアルでは、基本的なルーター構成に基づいて、子ルート、ルートパラメーター、遅延読み込みNgModule、ガードルート、ユーザーエクスペリエンスを向上するデータのプリロードなどの機能を探索します。
+このチュートリアルでは、基本的なルーター構成に基づいて、子ルート、ルートパラメーター、遅延読み込みNgModule、ガードルート、ユーザー体験を向上するデータのプリロードなどの機能を探索します。
 
-最終的なバージョンのアプリのサンプルは、<live-example name = "router"> </ live-example> を参照してください。
+最終的なバージョンのアプリケーションのサンプルは、次を参照してください。<live-example name="router"></ live-example>
 
 {@a router-tutorial-objectives}
 
@@ -17,7 +17,7 @@
 * アプリケーション機能をモジュールに編成します。
 * コンポーネントへの移動（*Heroes* は "Heroes List" にリンク）。
 * ルートパラメータを含みます（"Hero Detail" へのルーティング中に Hero `id` を渡す）。
-* 子ルート（*Crisis Center* は独自のルートを持つ）。
+* 子ルート（*Crisis Center* は独自のルートをもつ）。
 * `CanActivate` ガード（ルートアクセスのチェック）。
 * `CanActivateChild` ガード（子ルートアクセスのチェック）。
 * `CanDeactivate` ガード（保存されていない変更を破棄する許可を求める）。
@@ -110,9 +110,9 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
 「OK」をクリックして変更内容を失うか、「Cancel」をクリックして編集を続けることができます。
 
 この動作の背景には、ルーターの `CanDeactivate` ガードがあります。
-このガードは、現在のビューから離れる前に、掃除をしたり、ユーザの許可を得たりする機会を与えてくれます。
+このガードは、現在のビューから離れる前に、掃除をしたり、ユーザーの許可を得たりする機会を与えてくれます。
 
-「Admin」と「Login」ボタンは、本ガイドで後述するルータの他の機能を説明しています。
+「Admin」と「Login」ボタンは、本ガイドで後述するルーターの他の機能を説明しています。
 
 
 {@a getting-started}
@@ -140,15 +140,15 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 各定義は[Route](api/router/Route)オブジェクトに変換され、2つの要素を持ちます。`path` はこのルートのURLパスセグメントで、`component` はこのルートに関連するコンポーネントです。
 
-ルータは、ブラウザのURLが変更されたときや、アプリケーションコードがルータにルートパスに沿って移動するよう指示したときに、その定義のレジストリを利用します。
+ルーターは、ブラウザのURLが変更されたときや、アプリケーションコードがルーターにルートパスに沿って移動するよう指示したときに、その定義のレジストリを利用します。
 
 最初のルートは次のように行われます：
 
 * ブラウザのロケーション URL がパスセグメント `/crisis-center` と一致するように変更されると、ルーターは `CrisisListComponent` のインスタンスをアクティブにし、そのビューを表示します。
 
-* アプリケーションがパス `/crisis-center` へのナビゲーションを要求すると、ルータは `CrisisListComponent` のインスタンスをアクティブにしてそのビューを表示し、ブラウザのアドレスロケーションと履歴をそのパスの URL で更新します。
+* アプリケーションがパス `/crisis-center` へのナビゲーションを要求すると、ルーターは `CrisisListComponent` のインスタンスをアクティブにしてそのビューを表示し、ブラウザのアドレスロケーションと履歴をそのパスの URL で更新します。
 
-最初の構成では、`CrisisListComponent` と `HeroListComponent` につながる最小限のパスを持つ2つのルートの配列を定義しています。
+最初の構成では、`CrisisListComponent` と `HeroListComponent` につながる最小限のパスをもつ2つのルートの配列を定義しています。
 
 `CrisisList` と `HeroList` のコンポーネントを生成して、ルーターがレンダリングできるようにします。
 
@@ -160,7 +160,7 @@ Angular CLI でサンプルアプリケーションを生成します。
   ng generate component hero-list
 </code-example>
 
-各コンポーネントの内容を、以下のサンプルHTMLに置き換えます。
+各コンポーネントの内容を、次のサンプルHTMLに置き換えます。
 
 <code-tabs>
 
@@ -178,7 +178,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 `Router` を使用するには、まず `@angular/router` パッケージの `RouterModule` を登録する必要があります。
 ルートの配列である `appRoutes` を定義して、それを `RouterModule.forRoot()` メソッドに渡します。
-`RouterModule.forRoot()` メソッドは、設定された `Router` サービスプロバイダーと、ルーティングライブラリが必要とする他のプロバイダを含むモジュールを返します。
+`RouterModule.forRoot()` メソッドは、設定された `Router` サービスプロバイダーと、ルーティングライブラリが必要とする他のプロバイダーを含むモジュールを返します。
 アプリケーションが起動されると、`Router` は現在のブラウザのURLに基づいて最初のナビゲーションを行います。
 
 <div class="alert is-important">
@@ -213,7 +213,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 {@a shell-template}
 
-対応するコンポーネントのテンプレートは以下のようになります：
+対応するコンポーネントのテンプレートは次のようになります：
 
 <code-example path="router/src/app/app.component.1.html" header="src/app/app.component.html"></code-example>
 
@@ -222,7 +222,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 ### ワイルドカードルートを定義する
 
 これまでのアプリケーションでは、`/crisis-center` へのルートと `/heroes` へのルートの2つを作成しました。
-それ以外のURLだと、ルーターがエラーを起こしてアプリがクラッシュしてしまいます。
+それ以外のURLだと、ルーターがエラーを起こしてアプリケーションがクラッシュしてしまいます。
 
 ワイルドカードルートを追加して、無効なURLをインターセプトし、優雅に処理します。
 ワイルドカードルートは、2つのアスタリスクで構成されるパスを持ちます。
@@ -234,7 +234,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 <div class="alert is-helpful">
 
 ルーターは、[_初めに合致したものが優先される_](/guide/router-reference#example-config)戦略でルートを選択します。
-ワイルドカードルートは最も具体性に欠けるルートなので、ルート設定では最後に配置します。
+ワイルドカードルートはもっとも具体性に欠けるルートなので、ルート設定では最後に配置します。
 
 </div>
 
@@ -242,7 +242,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 <code-example path="router/src/app/hero-list/hero-list.component.1.html" header="src/app/hero-list/hero-list.component.html (excerpt)"></code-example>
 
-まだ `"/sidekicks"` ルートを定義していないので、ユーザがそのボタンをクリックするとアプリケーションは失敗します。
+まだ `"/sidekicks"` ルートを定義していないので、ユーザーがそのボタンをクリックするとアプリケーションは失敗します。
 
 `"/sidekicks"` ルートを追加する代わりに、`wildcard` ルートを定義して、`PageNotFoundComponent` にナビゲートするようにしましょう。
 
@@ -278,7 +278,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 最初の相対URL(`''`)を希望のデフォルトパス(`/heroes`)に変換する `redirect` ルートを追加します。
 
 ワイルドカードルートの _上_ にデフォルトルートを追加します。
-このマイルストーンの `appRoutes` の全体像を示す以下の抜粋では、ワイルドカードルートのすぐ上にあります。
+このマイルストーンの `appRoutes` の全体像を示す次の抜粋では、ワイルドカードルートのすぐ上にあります。
 
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts (appRoutes)" region="appRoutes"></code-example>
@@ -297,7 +297,7 @@ Angular CLI でサンプルアプリケーションを生成します。
   技術的には、`pathMatch = 'full'` は、URLの*残っている*、マッチしていない部分が`''`にマッチした場合にルートヒットとなります。
   この例では、リダイレクトはトップレベルのルートにあるので、*残っている*URLと*全体*のURLは同じものになります。
 
-  他の可能な `pathMatch` 値は `'prefix'` で、これは、残りのURLがリダイレクトルートのプレフィックスパスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
+  他の可能な `pathMatch` 値は `'prefix'` で、これは、残りのURLがリダイレクトルートの接頭辞パスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
   `pathMatch` 値が `'prefix'` であれば、すべてのURLが `''` にマッチするので、このサンプルアプリケーションでは適用されません。
 
   `'prefix'` に設定して、`Go to sidekicks` ボタンをクリックしてみてください。
@@ -519,14 +519,14 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 ルーティングモジュールにはいくつかの特徴があります：
 
-* ルーティングに関する関心事を他のアプリケーションに関する関心事から分離する。
+* ルーティングに関する関心ごとを他のアプリケーションに関する関心事から分離する。
 * アプリケーションをテストする際に、交換または削除するモジュールを提供する。
-* ガードやリゾルバなどのルーティングサービスプロバイダのための有名なロケーションを提供する。
+* ガードやリゾルバなどのルーティングサービスプロバイダーのための有名なロケーションを提供する。
 * コンポーネントを宣言しない。
 
 {@a integrate-routing}
 
-### ルーティングをアプリに組み込む
+### ルーティングをアプリケーションに組み込む
 
 サンプルのルーティングアプリケーションは、デフォルトではルーティングを含んでいません。
 Angular CLI](cli) を使ってルーティングを使用するプロジェクトを作成する際には、プロジェクトやアプリケーション、各NgModuleに `--routing` オプションを設定してください。
@@ -534,14 +534,14 @@ Angular CLI](cli) を使ってルーティングを使用するプロジェク�
 これによりCLIは、`@angular/router` のnpmパッケージをインクルードし、`app-routing.module.ts` という名前のファイルを作成するようになります。
 これにより、プロジェクトやアプリケーションに追加したNgModuleでルーティングを使用することができます。
 
-例えば、次のコマンドは、ルーティングを使用できるNgModuleを生成します。
+たとえば、次のコマンドは、ルーティングを使用できるNgModuleを生成します。
 
 ```sh
 ng generate module my-module --routing
 ```
 
 これにより、NgModuleのルートを格納するために、`my-module-routing.module.ts` という別のファイルが作成されます。
-このファイルには、空の `Routes` オブジェクトが含まれており、ここに様々なコンポーネントやNgModuleへのルートを入力することができます。
+このファイルには、空の `Routes` オブジェクトが含まれており、ここにさまざまなコンポーネントやNgModuleへのルートを入力することができます。
 
 {@a routing-refactor}
 
@@ -560,7 +560,7 @@ ng generate module my-module --routing
 モジュールの `exports` 配列に追加して、Angular の `RouterModule` を再エクスポートします。
 ここで `RouterModule` を再インポートすることで、`AppModule` で宣言されたコンポーネントは、`RouterLink` や `RouterOutlet` といったルーターディレクティブにアクセスできるようになります。
 
-以上の手順を経て、ファイルは以下のようになります。
+以上の手順を経て、ファイルは次のようになります。
 
 <code-example path="router/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts"></code-example>
 
@@ -584,7 +584,7 @@ ng generate module my-module --routing
 
 ルーティングモジュールは、アプリケーションが成長したときや、特化したガードやリゾルバサービスを含む構成のときに役立ちます。
 
-開発者の中には、構成が最小限の場合にはルーティングモジュールをスキップして、ルーティングコンフィグレーションをコンパニオンモジュール (例えば、`AppModule`) に直接マージする人もいます。
+開発者の中には、構成が最小限の場合にはルーティングモジュールをスキップして、ルーティングコンフィグレーションをコンパニオンモジュール (たとえば、`AppModule`) に直接マージする人もいます。
 
 ほとんどのアプリケーションは、一貫性のためにルーティングモジュールを実装すべきです。
 構成が複雑になったときにコードをきれいに保つことができます。
@@ -596,7 +596,7 @@ ng generate module my-module --routing
 
 ## Milestone 3: ヒーロー機能
 
-このマイルストーンは、以下の内容を含んでいます：
+このマイルストーンは、次の内容を含んでいます：
 
 * モジュールを使って、アプリケーションとルートをフィーチャーエリアに整理する。
 * あるコンポーネントから別のコンポーネントへの必須のナビゲーション。
@@ -613,9 +613,9 @@ ng generate module my-module --routing
 
 ### ヒーロー機能の追加
 
-以下の手順に従ってください：
+次の手順にしたがってください：
 
-* ヒーローを管理するために、heroes フォルダにルーティング機能を持つ `HeroesModule` を作成し、ルートの `AppModule` に登録します。
+* ヒーローを管理するために、heroes フォルダにルーティング機能をもつ `HeroesModule` を作成し、ルートの `AppModule` に登録します。
 
 <code-example language="sh">
   ng generate module heroes/heroes --module app --flat --routing
@@ -636,7 +636,7 @@ ng generate module my-module --routing
 
 <div class="alert is-helpful">
 
-   コンポーネントはページがレンダリングされるときに動的に挿入されるので、ルーティングされたコンポーネントにはセレクタは必要ありません。しかし、HTMLの要素ツリーでコンポーネントを特定し、ターゲットにするには便利です。
+   コンポーネントはページがレンダリングされるときに動的に挿入されるので、ルーティングされたコンポーネントにはセレクターは必要ありません。しかし、HTMLの要素ツリーでコンポーネントを特定し、ターゲットにするには便利です。
 
 </div>
 
@@ -650,7 +650,7 @@ ng generate module my-module --routing
 
 <code-example path="router/src/app/heroes/heroes.module.ts" header="src/app/heroes/heroes.module.ts"></code-example>
 
-ヒーロー管理のファイル構成は以下の通りです：
+ヒーロー管理のファイル構成は次のとおりです：
 
 <div class='filetree'>
 
@@ -740,7 +740,7 @@ ng generate module my-module --routing
 
 `Heroes` モジュール用のルートができたので、`AppRoutingModule` で行ったように `RouterModule` を使用して `Router` にそれらを登録します。
 
-`AppRoutingModule` では、静的な `RouterModule.forRoot()` メソッドを使用して、ルートとアプリケーションレベルのサービスプロバイダを登録しました。
+`AppRoutingModule` では、静的な `RouterModule.forRoot()` メソッドを使用して、ルートとアプリケーションレベルのサービスプロバイダーを登録しました。
 フィーチャーモジュールでは、静的な `forChild()` メソッドを使用します。
 
 
@@ -752,7 +752,7 @@ ng generate module my-module --routing
 
 </div>
 
-更新された`HeroesRoutingModule` は以下のようになります：
+更新された`HeroesRoutingModule` は次のようになります：
 
 
 <code-example path="router/src/app/heroes/heroes-routing.module.1.ts" header="src/app/heroes/heroes-routing.module.ts"></code-example>
@@ -790,7 +790,7 @@ ng generate module my-module --routing
 `HeroesModule` が `HeroListComponent` を提供するようになったので、`AppModule` の `declarations` 配列からこれを削除します。
 これで、独立した `HeroesModule` ができたので、より多くのコンポーネントやさまざまなルートでヒーロー機能を進化させることができます。
 
-以上の手順を経て、`AppModule`は以下のようになるはずです：
+以上の手順を経て、`AppModule`は次のようになるはずです：
 
 <code-example path="router/src/app/app.module.3.ts" header="src/app/app.module.ts" region="remove-heroes"></code-example>
 
@@ -852,7 +852,7 @@ detailコンポーネントにナビゲートし、"Magneta" を表示するよ�
   Route parameter: Required or optional?
 </header>
 
-ルートパラメータトークンである `:id` をルート定義のパスに埋め込むことは、このシナリオでは良い選択です。なぜなら `id` は `HeroDetailComponent` で*必須*であり、パス内の値 `15` は "Magneta" へのルートと他のヒーローへのルートを明確に区別するからです。
+ルートパラメータトークンである `:id` をルート定義のパスに埋め込むことは、このシナリオではよい選択です。なぜなら `id` は `HeroDetailComponent` で*必須*であり、パス内の値 `15` は "Magneta" へのルートと他のヒーローへのルートを明確に区別するからです。
 
 </div>
 
@@ -871,8 +871,8 @@ detailコンポーネントにナビゲートし、"Magneta" を表示するよ�
 
 ルーターは、配列から宛先URLを次のように構成します：`localhost:4200/hero/15`。
 
-ルータはURLからルートパラメータ(`id:15`)を抽出し、
-`ActivatedRoute` サービスを使って，`HeroDetailComponent`に供給します。
+ルーターはURLからルートパラメータ(`id:15`)を抽出し、
+`ActivatedRoute` サービスを使って、`HeroDetailComponent`に供給します。
 
 
 {@a activated-route-in-action}
@@ -883,13 +883,13 @@ router パッケージから `Router`, `ActivatedRoute`, `ParamMap` トークン
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.1.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (activated route)" region="imports"></code-example>
 
-後で `Observable` のルートパラメータを処理するために必要になるので、`switchMap` オペレータをインポートします。
+後で `Observable` のルートパラメータを処理するために必要になるので、`switchMap` オペレーターをインポートします。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (switchMap operator import)" region="rxjs-operator-import"></code-example>
 
 {@a hero-detail-ctor}
 
-サービスをプライベート変数としてコンストラクタに追加し、Angularがそれらを注入するようにします（コンポーネントから使えるようにします）。
+サービスをプライベート変数としてコンストラクターに追加し、Angularがそれらを注入するようにします（コンポーネントから使えるようにします）。
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.3.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (constructor)" region="ctor"></code-example>
 
@@ -900,12 +900,12 @@ router パッケージから `Router`, `ActivatedRoute`, `ParamMap` トークン
 
 マップが変更されると、`paramMap` は変更されたパラメータから `id` パラメータを取得します。
 
-そして、その `id` を持つヒーローを取得するように `HeroService` に指示し、`HeroService` のリクエストの結果を返します。
+そして、その `id` をもつヒーローを取得するように `HeroService` に指示し、`HeroService` のリクエストの結果を返します。
 
 `switchMap` 演算子は2つのことを行います。`HeroService` が返す `Observable<Hero>` をフラット化し、以前の保留中のリクエストをキャンセルします。
 `HeroService` が古い `id` を取得している間に、ユーザーが新しい `id` でこのルートに再ナビゲートすると、`switchMap` はその古いリクエストを破棄して、新しい `id` のヒーローを返します。
 
-`AsyncPipe` はオブザーバブルなサブスクリプションを処理し、コンポーネントの `hero` プロパティは取得されたヒーローで(再)設定されます。
+`AsyncPipe` はObservableなサブスクリプションを処理し、コンポーネントの `hero` プロパティは取得されたヒーローで(再)設定されます。
 
 #### _ParamMap_ API
 
@@ -980,25 +980,25 @@ router パッケージから `Router`, `ActivatedRoute`, `ParamMap` トークン
 
 親コンポーネントのナビゲーションバーに、ヒーローのリストをスクロールする
 "forward" と "back" ボタンがあったとします。
-クリックするたびに、次または前の `id` を持つ `HeroDetailComponent` に強制的にナビゲートされます。
+クリックするたびに、次または前の `id` をもつ `HeroDetailComponent` に強制的にナビゲートされます。
 
 ルーターが現在の `HeroDetailComponent` インスタンスをDOMから削除し、次の `id` のために再作成することは、ビューを再レンダリングすることになるため、望まないでしょう。
 UXを向上させるために、ルーターは同じコンポーネントインスタンスを再利用し、パラメータを更新します。
 
-`ngOnInit()` はコンポーネントのインスタンスごとに一度しか呼び出されないので、オブザーバブルな `paramMap` プロパティを使用して、ルートのパラメータが_同じインスタンス内で_変更されたことを検出することができます。
+`ngOnInit()` はコンポーネントのインスタンスごとに一度しか呼び出されないので、Observableな `paramMap` プロパティを使用して、ルートのパラメータが_同じインスタンス内で_変更されたことを検出することができます。
 
 
 <div class="alert is-helpful">
 
-コンポーネントのオブザーバブルをサブスクライブする時、ほとんどの場合、そのコンポーネントが破棄されるときにサブスクライブを解除します。
+コンポーネントのObservableを購読する時、ほとんどの場合、そのコンポーネントが破棄されるときにサブスクライブを解除します。
 
-しかし、`ActivatedRoute` とそのオブザーバブルは `Router` 自体から隔離されているため、`ActivatedRoute` のオブザーバブルは例外となります。
+しかし、`ActivatedRoute` とそのObservableは `Router` 自体から隔離されているため、`ActivatedRoute` のObservableは例外となります。
 `Router` はルート化されたコンポーネントが不要になったときにそれを破棄します。これは、コンポーネントのすべてのメンバーも破棄されることを意味します。
 これには、注入された `ActivatedRoute` とその `Observable` プロパティへのサブスクリプションが含まれます。
 
 また、`Router` は `ActivatedRoute` の `Observable` を `complete` しないので、`finalize` や `complete` のブロックは実行されません。
-`finalize` で何かを処理する必要がある場合は、やはり `ngOnDestroy` でアンサブスクライブする必要があります。
-また、コンポーネントが破棄された後に実行したくないコードの遅延が Observable pipe にある場合にも、アンサブスクライブする必要があります。
+`finalize` で何かを処理する必要がある場合は、やはり `ngOnDestroy` でアン購読する必要があります。
+また、コンポーネントが破棄された後に実行したくないコードの遅延が Observable pipe にある場合にも、アン購読する必要があります。
 
 </div>
 
@@ -1014,15 +1014,15 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 `HeroDetailComponent` のインスタンスが決して再利用されないことが確実に分かっている場合は、`snapshot` を使用できます。
 
 `route.snapshot` は、ルートのパラメータマップの初期値を提供します。
-以下のように，サブスクライブや observable 演算子を追加することなく，パラメータに直接アクセスすることができます：
+次のように、サブスクライブや observable 演算子を追加することなく、パラメータに直接アクセスすることができます：
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.2.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (ngOnInit snapshot)" region="snapshot"></code-example>
 
 <div class="alert is-helpful">
 
 `snapshot` は、この手法ではパラメータマップの初期値しか取得できません。
-ルータがコンポーネントを再利用する可能性がある場合は、オブザーバブルな `paramMap` を使用してください。
-このチュートリアルのサンプルアプリケーションでは、オブザーバブルな `paramMap` を使用しています。
+ルーターがコンポーネントを再利用する可能性がある場合は、Observableな `paramMap` を使用してください。
+このチュートリアルのサンプルアプリケーションでは、Observableな `paramMap` を使用しています。
 
 </div>
 
@@ -1055,7 +1055,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 
 ルートリクエストにオプションの情報を追加することもできます。
-例えば、ヒーローの詳細画面から `hero-detail.component.ts` のリストに戻るとき、表示されたヒーローがリストの中で事前に選択されていれば良いでしょう。
+たとえば、ヒーローの詳細画面から `hero-detail.component.ts` のリストに戻るとき、表示されたヒーローがリストの中で事前に選択されていればよいでしょう。
 
 <div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero">
@@ -1065,10 +1065,10 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 オプション情報には、次のような他の形式も含めることができます：
 
-* 例えば、`name='wind*'` のような緩い構造の検索条件。
-* 複数の値；例えば、`after='12/31/2015' & before='1/1/2017'` &mdash;
+* たとえば、`name='wind*'` のような緩い構造の検索条件。
+* 複数の値；たとえば、`after='12/31/2015' & before='1/1/2017'` &mdash;
   順不同で&mdash; `before='1/1/2017' & after='12/31/2015'` &mdash;
-  様々なフォーマットで&mdash; `during='currentYear'`。
+  さまざまなフォーマットで&mdash; `during='currentYear'`。
 
 このようなパラメータはURLパスに収まりにくいため、ナビゲーション時に任意の複雑な情報を伝えるためにオプションパラメータを使用することができます。
 オプションのパラメータは、パターンマッチングに関与しないため、柔軟な表現が可能です。
@@ -1076,7 +1076,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 ルーターは、必須のルートパラメーターと同様に、オプショナルパラメーターによるナビゲーションをサポートしています。
 オプションのパラメータは、必須ルートのパラメーターを定義した_後_に、別のオブジェクトで定義してください。
 
-一般的には、値が必須の場合（例えば、ある経路パスを他の経路パスと区別するために必要な場合）は必須のルートパラメーターを使用し、値が任意、複雑、可変の場合はオプショナルパラメーターを使用します。
+一般的には、値が必須の場合（たとえば、ある経路パスを他の経路パスと区別するために必要な場合）は必須のルートパラメーターを使用し、値が任意、複雑、可変の場合はオプショナルパラメーターを使用します。
 
 {@a optionally-selecting}
 
@@ -1111,7 +1111,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 ブラウザのアドレスバーを見てください。
 
-実行した場所にもよりますが、以下のように見えるはずです：
+実行した場所にもよりますが、次のように見えるはずです：
 
 <code-example language="bash">
   localhost:4200/heroes;id=15;foo=foo
@@ -1127,7 +1127,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 <div class="alert is-helpful">
 
-マトリクスURL表記は、Webの創始者であるTim Berners-Lee氏が[1996年の提案](https://www.w3.org/DesignIssues/MatrixURIs.html)で初めて紹介したアイデアです。
+マトリクスURL表記は、Webの創始者であるTim Berners-Lee氏が[1996年の提案](https://www.w3.org/DesignIssues/MatrixURIs.html)ではじめて紹介したアイデアです。
 
 マトリクス記法はHTML標準には採用されませんでしたが、合法であり、親ルートと子ルートに属するパラメータを分離する方法として、ブラウザのルーティングシステムの間で普及しました。
 このように、ルーターはマトリクス表記でのブラウザアクセスのサポートを提供しています。
@@ -1146,7 +1146,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 これまでは `HeroListComponent` から `HeroDetailComponent` に移動するとき、
 ルートのパラメータマップ `Observable` をサブスクライブし、それを `ActivatedRoute` 内の `HeroDetailComponent` で
 利用できるようにしていました。
-そのサービスを `HeroDetailComponent` のコンストラクタに注入しました。
+そのサービスを `HeroDetailComponent` のコンストラクターに注入しました。
 
 今回は逆に、`HeroDetailComponent` から `HeroListComponent` へと移動します。
 
@@ -1154,11 +1154,11 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.ts" header="src/app/heroes/hero-list/hero-list.component.ts (import)" region="import-router"></code-example>
 
-ルートパラメータマップの `Observable` に対する操作を行うために、`switchMap` オペレータをインポートします。
+ルートパラメータマップの `Observable` に対する操作を行うために、`switchMap` オペレーターをインポートします。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.ts" header="src/app/heroes/hero-list/hero-list.component.ts (rxjs imports)" region="rxjs-imports"></code-example>
 
-`HeroListComponent` のコンストラクタに `ActivatedRoute` を注入します。
+`HeroListComponent` のコンストラクターに `ActivatedRoute` を注入します。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.ts" header="src/app/heroes/hero-list/hero-list.component.ts (constructor and ngOnInit)" region="ctor"></code-example>
 
@@ -1168,7 +1168,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 テンプレートを[クラスバインディング](guide/attribute-binding#class-binding)で更新します。
 このバインディングは、比較結果が `true` を返すと `selected` の CSS クラスを追加し、`false` を返すと削除します。
-このバインディングは、以下のように繰り返される `<li>` タグの中にあります：
+このバインディングは、次のように繰り返される `<li>` タグの中にあります：
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.html" header="src/app/heroes/hero-list/hero-list.component.html"></code-example>
 
@@ -1182,7 +1182,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero in list has different background color">
 </div>
 
-任意の `foo` ルートパラメータは無害なので、ルータはこれを無視し続けます。
+任意の `foo` ルートパラメータは無害なので、ルーターはこれを無視し続けます。
 
 {@a route-animation}
 
@@ -1199,11 +1199,11 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 <code-example path="router/src/app/heroes/heroes-routing.module.2.ts" header="src/app/heroes/heroes-routing.module.ts (animation data)"></code-example>
 
-ルートの `src/app/` フォルダに `animations.ts` ファイルを作成します。内容は以下のようになります：
+ルートの `src/app/` フォルダに `animations.ts` ファイルを作成します。内容は次のようになります：
 
 <code-example path="router/src/app/animations.ts" header="src/app/animations.ts (excerpt)"></code-example>
 
-このファイルは以下のことを行います：
+このファイルは次のことを行います：
 
 * アニメーションのトリガーを作成したり、状態を制御したり、状態間の遷移を管理するアニメーションシンボルをインポートします。
 
@@ -1236,15 +1236,15 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 ### マイルストーン3のまとめ
 
-本節では、以下の内容を取り上げました：
+本節では、次の内容を取り上げました：
 
 * アプリケーションをフィーチャーエリアに整理する。
 * あるコンポーネントから別のコンポーネントへの絶対的な移動。
-* ルートパラメータで情報を渡し、コンポーネントでそれをサブスクライブする。
+* ルートパラメータで情報を渡し、コンポーネントでそれを購読する。
 * フィーチャーエリアのNgModuleを`AppModule` にインポートする。
 * ページに基づいて、ルーティング可能なアニメーションを適用する。
 
-これらの変更後、フォルダ構造は以下のようになります：
+これらの変更後、フォルダ構造は次のようになります：
 
 <div class='filetree'>
 
@@ -1440,7 +1440,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 </div>
 
-このバージョンのサンプルアプリケーションの関連ファイルは以下の通りです。
+このバージョンのサンプルアプリケーションの関連ファイルは次のとおりです。
 
 <code-tabs>
 
@@ -1534,9 +1534,9 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 {@a crisis-child-routes}
 
-### 子ルートを持つクライシスセンター
+### 子ルートをもつクライシスセンター
 
-このセクションでは、Angularアプリケーションで推奨される以下のパターンに準拠してクライシスセンターを構成する方法を紹介します：
+このセクションでは、Angularアプリケーションで推奨される次のパターンに準拠してクライシスセンターを構成する方法を紹介します：
 
 * 各機フィ＝チャーエリアは、それぞれのフォルダに存在します。
 * 各フィーチャーには、独自のAngularフィーチャーモジュールが存在します。
@@ -1558,11 +1558,11 @@ UXを向上させるために、ルーターは同じコンポーネントイン
   ng generate component crisis-center/crisis-center
 </code-example>
 
-コンポーネントテンプレートを以下のマークアップで更新します：
+コンポーネントテンプレートを次のマークアップで更新します：
 
 <code-example path="router/src/app/crisis-center/crisis-center/crisis-center.component.html" header="src/app/crisis-center/crisis-center/crisis-center.component.html"></code-example>
 
-`CrisisCenterComponent` は、`AppComponent` と以下の共通点があります：
+`CrisisCenterComponent` は、`AppComponent` と次の共通点があります：
 
 * `AppComponent` がアプリケーション全体のルートであるように、`CrisisCenterComponent` はクライシスセンターエリアのルートである。
 * `AppComponent` がハイレベルなワークフローを管理するためのシェルであるように、クライシスセンター機能エリアのシェルである。
@@ -1589,7 +1589,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 <code-example path="router/src/app/crisis-center/crisis-center-routing.module.1.ts" header="src/app/crisis-center/crisis-center-routing.module.ts (Routes)" region="routes"></code-example>
 
 親の `crisis-center` ルートには `children` プロパティがあり、`CrisisListComponent` を含む1つのルートがあることに注意してください。
-また、`CrisisListComponent` ルートは、2つのルートを持つ `children` 配列を持っています。
+また、`CrisisListComponent` ルートは、2つのルートをもつ `children` 配列を持っています。
 
 これらの2つのルートはクライシスセンターの子コンポーネントにナビゲートします。
 それぞれ、`CrisisCenterHomeComponent` と `CrisisDetailComponent` です。
@@ -1616,7 +1616,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 * `id=2` のクライシスの `CrisisDetailComponent` に移動するには、完全なURLは、
 `/crisis-center/2` (`/crisis-center` + `''` + `'/2'`) となります。
 
-後者の例の絶対URLは、`localhost` のオリジンを含めて、以下のようになります：
+後者の例の絶対URLは、`localhost` のオリジンを含めて、次のようになります：
 
 <code-example>
   localhost:4200/crisis-center/2
@@ -1706,7 +1706,7 @@ _リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` �
 相対的なナビゲーションパスを構成するのに必要な `ActivatedRoute` はすでに注入されています。
 
 `Router` サービスの代わりに `RouterLink` を使用してナビゲートする場合は、同じリンクパラメータ配列を使用しますが、オブジェクトに `relativeTo` プロパティを指定することはありません。
-`RouterLink` ディレクティブでは，`ActivatedRoute` が暗黙の了解となっています．
+`RouterLink` ディレクティブでは、`ActivatedRoute` が暗黙の了解となっています。
 
 `CrisisDetailComponent` の `gotoCrises()` メソッドを更新し、相対パスナビゲーションを使ってクライシスセンターリストに戻るようにしました。
 
@@ -1729,8 +1729,8 @@ _リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` �
 これまでは、1つのアウトレットを定義し、そのアウトレットの下に子ルートを入れ子にしてルートをまとめていました。
 ルーターは、プライマリな無名アウトレットはテンプレートごとに1つしかサポートしていません。
 
-1つのテンプレートは、任意の数の名前付きアウトレットを持つことができます。
-それぞれの名前付きアウトレットは、独自のコンポーネントを持つルートのセットを持っています。
+1つのテンプレートは、任意の数の名前付きアウトレットをもつことができます。
+それぞれの名前付きアウトレットは、独自のコンポーネントをもつルートのセットを持っています。
 複数のアウトレットは、異なるルートで決定された異なるコンテンツを、すべて同時に表示することができます。
 
 `AppComponent` に "popup"という名前のアウトレットを、無名アウトレットのすぐ下に追加します。
@@ -1810,7 +1810,7 @@ _リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` �
 `compose` ルートには "popup" というアウトレットが設定されていますが、ルートを `RouterLink` ディレクティブに接続するにはそれだけでは不十分です。
 _リンクパラメータ配列_ で名前の付いたアウトレットを指定して、それを `RouterLink` にプロパティバインディングで結合する必要があります。
 
-_リンクパラメータ配列_ には、1つの `outlets` プロパティを持つオブジェクトが含まれており、その値は1つ（または複数）のアウトレット名をキーにした別のオブジェクトです。
+_リンクパラメータ配列_ には、1つの `outlets` プロパティをもつオブジェクトが含まれており、その値は1つ（または複数）のアウトレット名をキーにした別のオブジェクトです。
 この例では、"popup" というアウトレットのプロパティだけがあり、その値は別の _リンクパラメータ配列_ で、`compose` ルートを指定しています。
 
 つまり、ユーザーがこのリンクをクリックすると、ルーターは `compose` ルートに関連付けられたコンポーネントを `popup` アウトレットに表示します。
@@ -1831,7 +1831,7 @@ _リンクパラメータ配列_ には、1つの `outlets` プロパティを�
 #### セカンダリルートナビゲーション：ナビゲーション中にルートをマージする
 
 _Crisis Center_ に移動し、"Contact" をクリックします。
-ブラウザのアドレスバーに以下のようなURLが表示されるはずです。
+ブラウザのアドレスバーに次のようなURLが表示されるはずです。
 
 <code-example>
   http://.../crisis-center(popup:compose)
@@ -1842,7 +1842,7 @@ URLの関連部分は、`...`に続いています。
 
 * `crisis-center` はプライマリナビゲーションです。
 * 括弧でセカンダリルートを囲みます。
-* セカンダリルートは，アウトレット名 (`popup`) 、`colon` セパレーター、およびセカンダリルートのパス (`compose`) で構成されます．
+* セカンダリルートは、アウトレット名 (`popup`) 、`colon` セパレーター、およびセカンダリルートのパス (`compose`) で構成されます。
 
 _Heroes_ リンクをクリックして、もう一度URLを見てみましょう。
 
@@ -1854,9 +1854,9 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 ルーターは、ナビゲーションツリーの2つの別々のブランチを追跡し、そのツリー表現をURLに生成しています。
 
-さらに多くのアウトレットやルートをトップレベルやネストしたレベルに追加して、多くのブランチを持つナビゲーションツリーを作成することができ、ルーターはそれに合わせてURLを生成します。
+さらに多くのアウトレットやルートをトップレベルやネストしたレベルに追加して、多くのブランチをもつナビゲーションツリーを作成することができ、ルーターはそれに合わせてURLを生成します。
 
-`outlets` オブジェクトを記入し、そのオブジェクトを _リンクパラメータ配列_ の中に入れて `router.navigate` メソッドに渡すことで、ツリー全体を一度にナビゲートするようルータに指示することができます。
+`outlets` オブジェクトを記入し、そのオブジェクトを _リンクパラメータ配列_ の中に入れて `router.navigate` メソッドに渡すことで、ツリー全体を一度にナビゲートするようルーターに指示することができます。
 
 {@a clear-secondary-routes}
 
@@ -1875,8 +1875,8 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 "send" または "cancel" ボタンをクリックすると、ポップアップビューが消去されます。
 `closePopup()` 関数は、`Router.navigate()` メソッドに[リンクパラメータ配列](#link-parameters-array)を渡すことで、必須のナビゲーションを行います。
 
-`AppComponent` の_Contact_`RouterLink`にバインドされた配列と同様に、この配列にも `outlets` プロパティを持つオブジェクトが含まれています。
-`outlets` プロパティの値は、キーにアウトレット名を持つ別のオブジェクトです。
+`AppComponent` の_Contact_`RouterLink`にバインドされた配列と同様に、この配列にも `outlets` プロパティをもつオブジェクトが含まれています。
+`outlets` プロパティの値は、キーにアウトレット名をもつ別のオブジェクトです。
 唯一のアウトレット名は `'popup'` です。
 
 今回、`'popup'` の値は `null` です。
@@ -1890,17 +1890,17 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 ## マイルストーン 5: ルートガード
 
-現時点では、ユーザーはいつでもアプリケーション内の任意の場所に移動することができますが、様々な理由でアプリケーションの異なる部分へのアクセスを制御する必要がある場合があります。その中には以下のようなものがあるかもしれません：
+現時点では、ユーザーはいつでもアプリケーション内の任意の場所に移動することができますが、さまざまな理由でアプリケーションの異なる部分へのアクセスを制御する必要がある場合があります。その中には次のようなものがあるかもしれません：
 
 * ユーザーがターゲットコンポーネントへの移動を許可されていない可能性があります。
 * おそらく、ユーザーは最初にログイン（認証）する必要があります。
 * ターゲット・コンポーネントを表示する前に、いくつかのデータをフェッチする必要があるかもしれません。
 * コンポーネントを離れる前に、保留中の変更を保存したい場合があります。
-* 保留中の変更を保存するのではなく、破棄してもよいかどうかをユーザに尋ねることがあります。
+* 保留中の変更を保存するのではなく、破棄してもよいかどうかをユーザーに尋ねることがあります。
 
 これらのシナリオを処理するために、ルート設定にガードを追加します。
 
-ガードの戻り値は、ルータの動作を制御します：
+ガードの戻り値は、ルーターの動作を制御します：
 
 * `true` を返した場合、ナビゲーションプロセスは続行されます。
 * `false` を返した場合、ナビゲーションプロセスは停止し、ユーザーはそのままの状態になります。
@@ -1915,7 +1915,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 ガードはそのブール値の答えを同期的に返すかもしれません。
 しかし、多くの場合、ガードは同期的に答えを出すことはできません。
-ガードは、ユーザに質問したり、サーバに変更を保存したり、新しいデータを取得したりすることができます。
+ガードは、ユーザーに質問したり、サーバーに変更を保存したり、新しいデータを取得したりすることができます。
 これらはすべて非同期の操作です。
 
 したがって、ルーティングガードは `Observable<boolean>` や `Promise<boolean>` を返すことができます。
@@ -1927,7 +1927,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 </div>
 
-ルーターは複数のガードインターフェイスをサポートしています：
+ルーターは複数のガードインターフェースをサポートしています：
 
 * [`CanActivate`](api/router/CanActivate) は、ルート*への*ナビゲーションを仲介します。
 
@@ -1940,7 +1940,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 * [`CanLoad`](api/router/CanLoad) は、_非同期的に_ロードされたフィーチャーモジュール*への*ナビゲーションを仲介します。
 
 
-ルーティング階層の各レベルで複数のガードを持つことができます。
+ルーティング階層の各レベルで複数のガードをもつことができます。
 ルーターは、一番深い子ルートから上に向かって、最初に `CanDeactivate` ガードをチェックします。
 次に、`CanActivate` と `CanActivateChild` のガードを、一番上から一番下の子ルートまでチェックします。
 フィーチャーモジュールが非同期にロードされる場合は、モジュールがロードされる前に `CanLoad` ガードがチェックされます。
@@ -1953,8 +1953,8 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 ### `CanActivate`: 認証を必要とする
 
 アプリケーションでは、ユーザーが誰であるかに基づいてフィーチャー領域へのアクセスを制限することがよくあります。
-認証されたユーザーや特定の役割を持つユーザーにのみアクセスを許可することができます。
-また、ユーザのアカウントが有効になるまで、アクセスをブロックしたり制限したりすることもあるでしょう。
+認証されたユーザーや特定の役割をもつユーザーにのみアクセスを許可することができます。
+また、ユーザーのアカウントが有効になるまで、アクセスをブロックしたり制限したりすることもあるでしょう。
 
 `CanActivate` ガードは、これらのナビゲーションビジネスルールを管理するツールです。
 
@@ -2153,7 +2153,7 @@ The admin feature file structure looks like this:
 #### アドミンフィーチャーをガードする
 
 現在、クライシスセンター内のすべてのルートは誰でもアクセス可能です。
-新しいアドミンフィーチャーは、認証されたユーザのみがアクセスできるようにする必要があります。
+新しいアドミンフィーチャーは、認証されたユーザーのみがアクセスできるようにする必要があります。
 
 匿名のユーザーがアドミンエリアに入ろうとしたときにログインページにリダイレクトするために、
 `canActivate()` ガードメソッドを書きます。
@@ -2179,7 +2179,7 @@ The admin feature file structure looks like this:
 
 #### `AuthGuard` で認証を行う
 
-`AuthGuard` に認証の真似事をさせます。
+`AuthGuard` に認証の真似ごとをさせます。
 
 `AuthGuard` はユーザーをログインさせ、現在のユーザーに関する情報を保持できるアプリケーションサービスを呼び出す必要があります。`auth` フォルダに新しい `AuthService` を作成します：
 
@@ -2192,7 +2192,7 @@ The admin feature file structure looks like this:
 <code-example path="router/src/app/auth/auth.service.ts" header="src/app/auth/auth.service.ts (excerpt)"></code-example>
 
 実際にはログインしませんが、ユーザーが認証されているかどうかを知るために `isLoggedIn` フラグを持っています。
-`login()` メソッドは、外部サービスへのAPIコールをシミュレートするために、短い休止時間の後に正常に解決されるオブザーバブルを返します。
+`login()` メソッドは、外部サービスへのAPIコールをシミュレートするために、短い休止時間の後に正常に解決されるObservableを返します。
 `redirectUrl` プロパティには、ユーザーがアクセスしようとしたURLが格納されるので、認証後にそのURLに移動することができます。
 
 <div class="alert is-helpful">
@@ -2205,7 +2205,7 @@ The admin feature file structure looks like this:
 
 <code-example path="router/src/app/auth/auth.guard.2.ts" header="src/app/auth/auth.guard.ts (v2)"></code-example>
 
-コンストラクタで `AuthService` と `Router` を注入していることに注目してください。
+コンストラクターで `AuthService` と `Router` を注入していることに注目してください。
 まだ `AuthService` を提供していませんが、便利なサービスをルーティングガードに注入できることを知っておくといいでしょう。
 
 このガードは、同期したブール値の結果を返します。
@@ -2326,7 +2326,7 @@ The admin feature file structure looks like this:
   ng generate service dialog
 </code-example>
 
-ユーザーに意思確認を促すために，`DialogService` に `confirm()` メソッドを追加します。
+ユーザーに意思確認を促すために、`DialogService` に `confirm()` メソッドを追加します。
 `window.confirm` はモーダルなダイアログを表示して、ユーザーの操作を待つブロッキングアクションです。
 
 <code-example path="router/src/app/dialog.service.ts" header="src/app/dialog.service.ts"></code-example>
@@ -2341,7 +2341,7 @@ The admin feature file structure looks like this:
   ng generate guard can-deactivate
 </code-example>
 
-以下のコードをガードに貼り付けます。
+次のコードをガードに貼り付けます。
 
 <code-example path="router/src/app/can-deactivate.guard.ts" header="src/app/can-deactivate.guard.ts"></code-example>
 
@@ -2382,7 +2382,7 @@ The admin feature file structure looks like this:
 ルートが有効になった瞬間に準備ができます。
 これにより、コンポーネントにルーティングする前にエラーを処理することもできます。
 レコードがない `id` のクライシスの詳細に移動しても意味がありません。
-有クライシスセンターのみを表示する `Crisis List` にユーザーを戻す方が良いでしょう。
+有クライシスセンターのみを表示する `Crisis List` にユーザーを戻す方がよいでしょう。
 
 まとめると、必要なデータがすべて取得されるまで、ルーティングされたコンポーネントのレンダリングを遅らせたいということです。
 
@@ -2394,7 +2394,7 @@ The admin feature file structure looks like this:
 現時点では、`CrisisDetailComponent` は選択されたクライシスを取得します。
 クライシスが見つからない場合、ルーターはクライシスリストビューに戻ってナビゲートします。
 
-ルートをアクティブにする前に、これらすべてが最初に処理されると、より良い体験ができるかもしれません。
+ルートをアクティブにする前に、これらすべてが最初に処理されると、よりよい体験ができるかもしれません。
 `CrisisDetailResolver` サービスは、ルートをアクティブにして `CrisisDetailComponent` を作成する前に、`Crisis` を取得したり、`Crisis` が存在しない場合には離れた場所に移動したりすることができます。
 
 `Crisis Center` 機能エリア内に `CrisisDetailResolver` サービスファイルを生成します。
@@ -2411,7 +2411,7 @@ The admin feature file structure looks like this:
 明示的に、`Crisis` 型の `Resolve` インターフェースを実装してください。
 
 `CrisisService` と `Router` をインジェクトして、`resolve()` メソッドを実装します。
-このメソッドは `Promise`、`Observable`、または同期的な戻り値を返すことができます．
+このメソッドは `Promise`、`Observable`、または同期的な戻り値を返すことができます。
 
 `CrisisService.getCrisis()` メソッドは、データが取得されるまでルートがロードされないようにするために、observableを返します。
 `Router` のガードは observable が `complete` であること、
@@ -2419,7 +2419,7 @@ The admin feature file structure looks like this:
 `getCrisis()` メソッドが返す Observable から最初の値を取得した後に `Observable` が完了するようにするには、引数に`1`を指定して`take` 演算子を使用します。
 
 有効な `Crisis` を返さない場合は、空の `Observable` を返し、`CrisisDetailComponent` への進行中のナビゲーションをキャンセルして、`CrisisListComponent` へとユーザーを戻します。
-更新されたリゾルバサービスは以下のようになります：
+更新されたリゾルバサービスは次のようになります：
 
 <code-example path="router/src/app/crisis-center/crisis-detail-resolver.service.ts" header="src/app/crisis-center/crisis-detail-resolver.service.ts"></code-example>
 
@@ -2443,7 +2443,7 @@ The admin feature file structure looks like this:
 
 1. 少なくとも1つのリゾルバで空の `Observable` を返すと、ナビゲーションがキャンセルされます。
 
-このマイルストーンに関連するクライシスセンターのコードは以下の通りです。
+このマイルストーンに関連するクライシスセンターのコードは次のとおりです。
 
 <code-tabs>
 
@@ -2543,7 +2543,7 @@ Guards
 
 <code-example path="router/src/app/admin/admin-dashboard/admin-dashboard.component.1.ts" header="src/app/admin/admin-dashboard/admin-dashboard.component.ts (v2)"></code-example>
 
-クエリのパラメータやフラグメントは，`ActivatedRoute` サービスでも利用できます。
+クエリのパラメータやフラグメントは、`ActivatedRoute` サービスでも利用できます。
 ルートパラメータと同様に、クエリパラメータとフラグメントは `Observable` として提供されます。
 更新されたCrisis Adminコンポーネントは、`AsyncPipe`を使って、`Observable`をテンプレートに直接フィードします。
 
@@ -2554,7 +2554,7 @@ Guards
 
 <div class="alert is-helpful">
 
-また、`queryParamsHandling` と `preserveFragment` のバインディングを持つ`RouterLink`を使って、
+また、`queryParamsHandling` と `preserveFragment` のバインディングをもつ`RouterLink`を使って、
 `query params` と `fragment` を保存することもできます。
 
 </div>
@@ -2581,7 +2581,7 @@ Guards
 
 `AppModule` のように、最初からロードしなければならないモジュールもあります。
 しかし、他のモジュールは遅延ロードすることができ、またそうすべきです。
-例えば、`AdminModule` は少数の許可されたユーザが必要とするものなので、
+たとえば、`AdminModule` は少数の許可されたユーザーが必要とするものなので、
 適切な人から要求されたときにのみロードすべきです。
 
 {@a lazy-loading-route-config}
@@ -2608,7 +2608,7 @@ Guards
 
 </div>
 
-ルータがこのルートに移動すると、文字列 `loadChildren` を使って、`AdminModule` を動的に読み込みます。
+ルーターがこのルートに移動すると、文字列 `loadChildren` を使って、`AdminModule` を動的に読み込みます。
 そして、`AdminModule` のルートを現在のルート設定に追加します。
 最後に、要求されたルートを目的の admin コンポーネントにロードします。
 
@@ -2632,7 +2632,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 ### `CanLoad`: フィーチャーモジュールの不正な読み込みを防ぐ
 
-あなたは既に `AdminModule` を `CanActivate` ガードで保護しており、権限のないユーザがアドミン機能エリアにアクセスするのを防いでいます。
+あなたはすでに `AdminModule` を `CanActivate` ガードで保護しており、権限のないユーザーがアドミン機能エリアにアクセスするのを防いでいます。
 ユーザーが認証されていない場合は、ログインページにリダイレクトされます。
 
 しかし、ユーザーがどのコンポーネントにもアクセスできない場合でも、ルーターは `AdminModule` をロードしています。
@@ -2645,7 +2645,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 `auth.guard.ts` を開きます。
 `CanLoad` インターフェースを `@angular/router` からインポートします。
 これを `AuthGuard` クラスの `implements` リストに追加します。
-そして、以下のように `canLoad()` を実装します：
+そして、次のように `canLoad()` を実装します：
 
 <code-example path="router/src/app/auth/auth.guard.ts" header="src/app/auth/auth.guard.ts (CanLoad guard)" region="canLoad"></code-example>
 
@@ -2654,7 +2654,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 では、`AuthGuard` を `AppRoutingModule` にインポートして、`AuthGuard` を `admin` ルートの `canLoad`
 配列プロパティに追加します。
-完成したadminルートは以下のようになります：
+完成したadminルートは次のようになります：
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
@@ -2674,7 +2674,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 最小の初期ペイロードと最速の起動時間を実現するには、`AppModule` と `HeroesModule` をeagerly loadする必要があります。
 
 クライシスセンターを遅延ロードすることもできます。
-しかし，アプリを起動してから数分以内にユーザーがクライシスセンターを訪れることはほぼ間違いないでしょう．
+しかし、アプリケーションを起動してから数分以内にユーザーがクライシスセンターを訪れることはほぼ間違いないでしょう。
 理想的には、アプリケーションは `AppModule` と `HeroesModule` だけがロードされた状態で起動し、その後ほぼ即座に `CrisisCenterModule` をバックグラウンドでロードすることです。
 ユーザーがクライシスセンターに移動する頃には、そのモジュールがロードされ、準備が整っています。
 
@@ -2682,7 +2682,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 #### プリロードの仕組み
 
-ナビゲーションが成功するたびに、ルータはプリロード可能な未読み込みのモジュールを設定から探します。
+ナビゲーションが成功するたびに、ルーターはプリロード可能な未読み込みのモジュールを設定から探します。
 モジュールをプリロードするかどうか、また、どのモジュールをプリロードするかは、プリロード戦略に依存します。
 
 `Router` には2種類のプリロード戦略があります：
@@ -2711,7 +2711,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 1. `app.module.ts` から `CrisisCenterModule` の記述をすべて削除します。
 
 
-プリロードを_有効にする前の_、更新されたモジュールは以下の通りです：
+プリロードを_有効にする前の_、更新されたモジュールは次のとおりです：
 
 
 <code-tabs>
@@ -2735,14 +2735,14 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 遅延ロードされたすべてのモジュールのプリロードを有効にするには、Angular routerパッケージから `PreloadAllModules` トークンをインポートします。
 
 `RouterModule.forRoot()` メソッドの第2引数には、追加の設定オプションのためのオブジェクトが渡されます。
-`preloadingStrategy` はそのオプションの一つです。
+`preloadingStrategy` はそのオプションのひとつです。
 `forRoot()` の呼び出しに `PreloadAllModules` トークンを追加します：
 
 <code-example path="router/src/app/app-routing.module.6.ts" header="src/app/app-routing.module.ts (preload all)" region="forRoot"></code-example>
 
-これは、遅延ロードされたすべてのルート（`loadChildren`プロパティを持つルート）を即座にロードするように `Router` プリローダーを設定します。
+これは、遅延ロードされたすべてのルート（`loadChildren`プロパティをもつルート）を即座にロードするように `Router` プリローダーを設定します。
 
-`http://localhost:4200` にアクセスすると、起動と同時に `/heroes` ルートがロードされ、`HeroesModule` がロードされた直後に、ルータが `CrisisCenterModule` のロードを開始します。
+`http://localhost:4200` にアクセスすると、起動と同時に `/heroes` ルートがロードされ、`HeroesModule` がロードされた直後に、ルーターが `CrisisCenterModule` のロードを開始します。
 
 現在、`CanLoad` がブロックしているため、`AdminModule` はプリロードされません。
 
@@ -2777,7 +2777,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
   ng generate service selective-preloading-strategy
 </code-example>
 
-`selective-preloading-strategy.service.ts` の内容を以下のように置き換えてください：
+`selective-preloading-strategy.service.ts` の内容を次のように置き換えてください：
 
 <code-example path="router/src/app/selective-preloading-strategy.service.ts" header="src/app/selective-preloading-strategy.service.ts"></code-example>
 
@@ -2789,7 +2789,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 1. ルート化されたモジュールを非同期的にロードすることができるローダー関数。
 
 `preload` の実装は、`Observable` を返さなければなりません。
-ルートがプリロードする場合は、ローダー関数を呼び出して返されるオブザーバブルを返します。
+ルートがプリロードする場合は、ローダー関数を呼び出して返されるObservableを返します。
 ルートがプリロードされない場合は、`null`の`Observable`を返します。
 
 このサンプルでは、ルートの `data.preload` フラグがtrueであれば、`preload()` メソッドがルートをロードします。
@@ -2806,10 +2806,10 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 次に、プリロードされたルートのログを表示するために、`AdminDashboardComponent` を編集します。
 
 1. `SelectivePreloadingStrategyService` をインポートします。
-1. ダッシュボードのコンストラクタにインジェクトします。
+1. ダッシュボードのコンストラクターにインジェクトします。
 1. ストラテジーサービスの `preloadedModules` 配列を表示するようにテンプレートを更新します。
 
-これで、ファイルは以下のようになります：
+これで、ファイルは次のようになります：
 
 <code-example path="router/src/app/admin/admin-dashboard/admin-dashboard.component.ts" header="src/app/admin/admin-dashboard/admin-dashboard.component.ts (preloaded modules)"></code-example>
 
@@ -2877,7 +2877,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 ルートが[適切な順序](#routing-module-orderr)で評価されているかどうかを確認するには、ルーター設定を確認します。
 
 ルーターをインジェクションして、`config` プロパティをコンソールにロギングしてみましょう。
-例えば、次のように `AppModule` を更新して、ブラウザのコンソールウィンドウを見ると、
+たとえば、次のように `AppModule` を更新して、ブラウザのコンソールウィンドウを見ると、
 完成したルートの構成がわかります。
 
 <code-example path="router/src/app/app.module.7.ts" header="src/app/app.module.ts (inspect the router config)" region="inspect-config"></code-example>

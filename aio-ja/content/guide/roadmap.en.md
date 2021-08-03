@@ -1,10 +1,12 @@
 # Angular Roadmap
 
+<p class="roadmap-last-updated">Last updated: 2021-05-19</p>
+
 Angular receives a large number of feature requests, both from inside Google and from the broader open-source community. At the same time, our list of projects contains plenty of maintenance tasks, code refactorings, and potential performance improvements. We bring together representatives from developer relations, product management, and engineering to prioritize this list. As new projects come into the queue, we regularly position them based on relative priority to other projects. As work gets done, projects will move up in the queue.
 
 The projects below are not associated with a particular Angular version. We'll release them on completion, and they will be part of a specific version based on our release schedule, following semantic versioning. For example, features are released in the next minor after they are complete, or the next major if they include breaking changes.
 
-## In Progress
+## In progress
 
 ### Improve test times and debugging with automatic test environment tear down
 
@@ -80,8 +82,16 @@ A long-standing feature request is to add the ability to add directives to host 
 
 A common problem with web applications is their slow initial load time. A way to improve it is to apply more granular code-splitting on a component level. To encourage this practice, we’ll be working on more ergonomic code-splitting APIs.
 
-<details class="roadmap-done-details">
-<summary class="roadmap-done-summary">Done</summary>
+<details class="completed-details" open="true">
+<summary>
+  <h2>Completed</h2>
+  <span class="actions">
+    <span class="action-expand">Show all</span>
+    <span class="action-collapse">Hide all</span>
+    <i class="material-icons expand">expand_more</i>
+  </span>
+</summary>
+<div class="details-content">
 
 ### Accelerated debugging and performance profiling with Angular DevTools
 
@@ -155,10 +165,11 @@ _Completed Q4 2020_
 
 With the deprecation of TSLint we will be moving to ESLint. As part of the process, we will work on ensuring backward compatibility with our current recommended TSLint configuration, implement a migration strategy for existing Angular applications and introduce new tooling to the Angular CLI toolchain.
 
-### Operation Bye Bye Backlog (aka Operation Byelog) 
+### Operation Bye Bye Backlog (aka Operation Byelog)
 
 _Completed Q4 2020_
 
 We are actively investing up to 50% of our engineering capacity on triaging issues and PRs until we have a clear understanding of broader community needs. After that, we'll commit up to 20% of our engineering capacity to keep up with new submissions promptly.
 
+</div>
 </details>

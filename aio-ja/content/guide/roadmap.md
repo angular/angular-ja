@@ -1,5 +1,7 @@
 # Angularのロードマップ
 
+<p class="roadmap-last-updated">Last updated: 2021-05-19</p>
+
 Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。 同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 私たちは、Dev Relや製品管理、エンジニアリングの代表者を集めて、このリストに優先順位を付けます。 新しいプロジェクトがキューに入ると、他のプロジェクトに対する相対的な優先順位に基づいて、それらを定期的に配置します。 作業が完了すると、プロジェクトはキューの上位に移動します。
 
 次のプロジェクトは、特定のAngularバージョンに関連付けられていません。 完了したときにリリースされ、セマンティックバージョニングにしたがって、リリーススケジュールに基づいて特定のバージョンの一部になります。 たとえば、機能追加は完成後に次のマイナーでリリースされますが、破壊的な変更が含まれている場合は次のメジャーでリリースされます。
@@ -80,8 +82,16 @@ A long-standing feature request is to add the ability to add directives to host 
 
 Webアプリケーションの一般的な問題は、初期ロード時間が遅いことです。それを改善するひとつの方法は、コンポーネントレベルでより細かいコード分割を適用することです。このプラクティスを促進するために、より使いやすいコード分割APIに取り組みます。
 
-<details class="roadmap-done-details">
-<summary class="roadmap-done-summary">完了</summary>
+<details class="completed-details" open="true">
+<summary>
+  <h2>Completed</h2>
+  <span class="actions">
+    <span class="action-expand">Show all</span>
+    <span class="action-collapse">Hide all</span>
+    <i class="material-icons expand">expand_more</i>
+  </span>
+</summary>
+<div class="details-content">
 
 ### Accelerated debugging and performance profiling with Angular DevTools
 
@@ -161,4 +171,5 @@ _Completed Q4 2020_
 
 We are actively investing up to 50% of our engineering capacity on triaging issues and PRs until we have a clear understanding of broader community needs. After that, we'll commit up to 20% of our engineering capacity to keep up with new submissions promptly.
 
+</div>
 </details>

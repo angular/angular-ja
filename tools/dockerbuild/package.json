@@ -3,6 +3,6 @@
     "private": true,
     "dependencies": {
         "chokidar": "^3.5.1",
-        "zx": "^1.6.0"
+        "zx": "^2.0.0"
     }
 }

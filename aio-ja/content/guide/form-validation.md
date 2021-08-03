@@ -195,6 +195,7 @@ Angularは、多くのコントロールプロパティをCSSクラスとして�
 * `.ng-dirty`
 * `.ng-untouched`
 * `.ng-touched`
+* `.ng-submitted` (enclosing form element only)
 
 次のサンプルでは、ヒーローフォームは`.ng-valid`と`.ng-invalid`クラスを使用して、
 各フォームコントロールの境界線の色を設定しています。

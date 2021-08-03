@@ -173,7 +173,7 @@ AOTコレクター は JavaScript のサブセットしか理解できません�
     <td><code>`pie is ${multiplier} times better than cake`</code></td>
    <tr>
     <td>文字列リテラル</td>
-    <td><code>pi</code></td>
+    <td><code>'pi'</code></td>
   </tr>
    <tr>
     <td>数値リテラル</td>

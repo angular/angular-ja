@@ -1532,7 +1532,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 </div>
 
-{@a crisis-child-routes}
+{@a a-crisis-center-with-child-routes}
 
 ### 子ルートをもつクライシスセンター
 

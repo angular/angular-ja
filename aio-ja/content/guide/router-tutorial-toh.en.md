@@ -1002,7 +1002,7 @@ unsubscribe if your observable pipe has a delay with code you do not want to run
 
 </div>
 
-{@a snapshot}
+{@a snapshot-the-no-observable-alternative}
 
 #### `snapshot`: the no-observable alternative
 
@@ -2658,7 +2658,7 @@ The completed admin route looks like this:
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
-{@a preloading}
+{@a preloading-background-loading-of-feature-areas}
 
 ### Preloading: background loading of feature areas
 

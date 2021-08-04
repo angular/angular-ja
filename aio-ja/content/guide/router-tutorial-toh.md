@@ -543,7 +543,7 @@ ng generate module my-module --routing
 これにより、NgModuleのルートを格納するために、`my-module-routing.module.ts` という別のファイルが作成されます。
 このファイルには、空の `Routes` オブジェクトが含まれており、ここにさまざまなコンポーネントやNgModuleへのルートを入力することができます。
 
-{@a routing-refactor}
+{@a refactor-the-routing-configuration-into-a-routing-module}
 
 
 ### ルーティング設定をルーティングモジュールにリファクタリングする
@@ -1002,7 +1002,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 </div>
 
-{@a snapshot}
+{@a snapshot-the-no-observable-alternative}
 
 #### `snapshot`: 観察不可能な代替手段
 
@@ -1044,7 +1044,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 #### ルートパラメーター：必須またはオプション？
 
 ルートURL内で必須のパラメータ値を指定するには、`id` 15 のヒーローを表示するために `HeroDetailComponent` にナビゲートした時のように、
-[route parameters](#rout-parameters)を使用します。
+[route parameters](#route-parameters)を使用します。
 
 
 <code-example format="nocode">
@@ -2658,7 +2658,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
-{@a preloading}
+{@a preloading-background-loading-of-feature-areas}
 
 ### Preloading: フィーチャーエリアのバックグラウンドローディング
 
@@ -2874,7 +2874,7 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 ### ルーターの設定を確認する
 
-ルートが[適切な順序](#routing-module-orderr)で評価されているかどうかを確認するには、ルーター設定を確認します。
+ルートが[適切な順序](#routing-module-order)で評価されているかどうかを確認するには、ルーター設定を確認します。
 
 ルーターをインジェクションして、`config` プロパティをコンソールにロギングしてみましょう。
 たとえば、次のように `AppModule` を更新して、ブラウザのコンソールウィンドウを見ると、

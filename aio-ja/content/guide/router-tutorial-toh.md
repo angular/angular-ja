@@ -5,18 +5,18 @@
 このチュートリアルでは、Angularルーターの広範囲な概要を説明します。
 このチュートリアルでは、基本的なルーター構成に基づいて、子ルート、ルートパラメーター、遅延読み込みNgModule、ガードルート、ユーザー体験を向上するデータのプリロードなどの機能を探索します。
 
-最終的なバージョンのアプリケーションのサンプルは、次を参照してください。<live-example name="router"></ live-example>
+最終的なバージョンのアプリケーションのサンプルは、次を参照してください。<live-example name="router"></live-example>
 
 {@a router-tutorial-objectives}
 
 ## 目的
 
 このガイドでは、複数ページにルーティングされたサンプルアプリケーションの開発について説明します。
-その過程で、次のようなルーターの主要な機能に焦点を当てます：
+その過程で、次のルーターの主要な機能に焦点を当てます：
 
-* アプリケーション機能をモジュールに編成します。
-* コンポーネントへの移動（*Heroes* は "Heroes List" にリンク）。
-* ルートパラメータを含みます（"Hero Detail" へのルーティング中に Hero `id` を渡す）。
+* アプリケーション機能をモジュールに編成する。
+* コンポーネントへの移動する（*Heroes* は "Heroes List" にリンク）。
+* ルートパラメータを含む（"Hero Detail" へのルーティング中に Hero `id` を渡す）。
 * 子ルート（*Crisis Center* は独自のルートをもつ）。
 * `CanActivate` ガード（ルートアクセスのチェック）。
 * `CanActivateChild` ガード（子ルートアクセスのチェック）。
@@ -42,9 +42,9 @@ Angularの一般的な概要については、[はじめに](start)を参照し�
 
 ## サンプルアプリケーションの動作
 
-このチュートリアルのサンプルアプリケーションは、Hero Employment Agency がヒーローが解決すべきクライシス（crises）を見つけることに役立ちます。
+このチュートリアルのサンプルアプリケーションは、Hero Employment Agency がヒーローが解決すべきクライシスを見つけることに役立ちます。
 
-このアプリケーションには、次の3つの主要な機能領域があります：
+このアプリケーションには、次の3つの主要なフィーチャーエリアがあります：
 
 1. ヒーローに割り当てるクライシスのリストを維持するための *Crisis Center*。
 1. エージェンシーによって雇用されているヒーローのリストを維持する *Heroes*。
@@ -70,10 +70,10 @@ Angularの一般的な概要については、[はじめに](start)を参照し�
 
 
 名前を変更します。
-「Back」ボタンをクリックすると、アプリケーションは変更されたヒーロー名を表示するヒーローリストに戻ります。
+"Back"ボタンをクリックすると、アプリケーションは変更されたヒーロー名を表示するヒーローリストに戻ります。
 名前の変更がすぐに有効になったことに注意してください。
 
-アプリケーションの「Back」ボタンではなく、ブラウザの戻るボタンをクリックしていたら、アプリケーションもヒーローのリストに戻っていたでしょう。
+アプリケーションの"Back"ボタンではなく、ブラウザの戻るボタンをクリックしていたら、アプリケーションもヒーローのリストに戻っていたでしょう。
 Angularのアプリケーション・ナビゲーションは、通常のウェブ・ナビゲーションと同様にブラウザの履歴を更新します。
 
 ここで、*Crisis Center* のリンクをクリックすると、現在進行中のクライシスのリストが表示されます。
@@ -95,7 +95,7 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
 </div>
 
 
-入力中に更新される *Hero Detail* とは異なり、*Crisis Detail* の変更は、「Save」または「Cancel」ボタンを押して保存または破棄するまで、一時的に行われます。
+入力中に更新される *Hero Detail* とは異なり、*Crisis Detail* の変更は、"Save"または"Cancel"ボタンを押して保存または破棄するまで、一時的に行われます。
 どちらのボタンも、*Crisis Center* とそのクライシスのリストに戻ります。
 
 ブラウザの戻るボタンや "Heroes"のリンクをクリックすると、ダイアログが表示されます。
@@ -107,12 +107,12 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
 
 
 
-「OK」をクリックして変更内容を失うか、「Cancel」をクリックして編集を続けることができます。
+"OK"をクリックして変更内容を失うか、"Cancel"をクリックして編集を続けることができます。
 
 この動作の背景には、ルーターの `CanDeactivate` ガードがあります。
-このガードは、現在のビューから離れる前に、掃除をしたり、ユーザーの許可を得たりする機会を与えてくれます。
+このガードは、現在のビューから離れる前に、クリアをしたりユーザーの許可を得たりする機会を与えてくれます。
 
-「Admin」と「Login」ボタンは、本ガイドで後述するルーターの他の機能を説明しています。
+"Admin"と"Login"ボタンは、本ガイドで後述するルーターの他の機能を示しています。
 
 
 {@a getting-started}
@@ -228,12 +228,12 @@ Angular CLI でサンプルアプリケーションを生成します。
 ワイルドカードルートは、2つのアスタリスクで構成されるパスを持ちます。
 これはすべてのURLにマッチします。
 このように、ルーターは、設定の初期段階でルートをマッチできない場合、このワイルドカードルートを選択します。
-ワイルドカードルートは、カスタムの「404 Not Found」コンポーネントにナビゲートしたり、既存のルートに[リダイレクト](#redirect)することができます。
+ワイルドカードルートは、カスタムの"404 Not Found"コンポーネントにナビゲートしたり、既存のルートに[リダイレクト](#redirect)することができます。
 
 
 <div class="alert is-helpful">
 
-ルーターは、[_初めに合致したものが優先される_](/guide/router-reference#example-config)戦略でルートを選択します。
+ルーターは、[_初めに合致したものを優先する_](/guide/router-reference#example-config)戦略でルートを選択します。
 ワイルドカードルートはもっとも具体性に欠けるルートなので、ルート設定では最後に配置します。
 
 </div>
@@ -256,7 +256,7 @@ Angular CLI でサンプルアプリケーションを生成します。
 
 <code-example path="router/src/app/page-not-found/page-not-found.component.html" header="src/app/page-not-found.component.html (404 component)"></code-example>
 
-これで、ユーザーが `/sidekicks` やその他の無効なURLにアクセスすると、ブラウザに「Page not found」と表示されます。
+これで、ユーザーが `/sidekicks` やその他の無効なURLにアクセスすると、ブラウザに"Page not found"と表示されます。
 ブラウザのアドレスバーには、無効なURLが表示され続けます。
 
 {@a redirect}
@@ -294,10 +294,10 @@ Angular CLI でサンプルアプリケーションを生成します。
 
   <header>Spotlight on pathMatch</header>
 
-  技術的には、`pathMatch = 'full'` は、URLの*残っている*、マッチしていない部分が`''`にマッチした場合にルートヒットとなります。
+  技術的には、`pathMatch = 'full'` は、URLに*残っている*、マッチしていない部分が`''`にマッチした場合にルートヒットとなります。
   この例では、リダイレクトはトップレベルのルートにあるので、*残っている*URLと*全体*のURLは同じものになります。
 
-  他の可能な `pathMatch` 値は `'prefix'` で、これは、残りのURLがリダイレクトルートの接頭辞パスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
+  他に設定可能な `pathMatch` の値は `'prefix'` で、これは、残りのURLがリダイレクトルートの接頭辞のパスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
   `pathMatch` 値が `'prefix'` であれば、すべてのURLが `''` にマッチするので、このサンプルアプリケーションでは適用されません。
 
   `'prefix'` に設定して、`Go to sidekicks` ボタンをクリックしてみてください。
@@ -580,11 +580,11 @@ ng generate module my-module --routing
 
 ### ルーティングモジュールのメリット
 
-ルーティングモジュールはしばしば `AppRoutingModule` と呼ばれ、ルートモジュールやフィーチャーモジュールのルーティング設定を代わりになります。
+ルーティングモジュールはしばしば `AppRoutingModule` と呼ばれ、ルートモジュールやフィーチャーモジュールのルーティング設定の代わりになります。
 
 ルーティングモジュールは、アプリケーションが成長したときや、特化したガードやリゾルバサービスを含む構成のときに役立ちます。
 
-開発者の中には、構成が最小限の場合にはルーティングモジュールをスキップして、ルーティングコンフィグレーションをコンパニオンモジュール (たとえば、`AppModule`) に直接マージする人もいます。
+開発者の中には、構成が最小限の場合にはルーティングモジュールをスキップして、ルーティング設定をコンパニオンモジュール (たとえば、`AppModule`) に直接マージする人もいます。
 
 ほとんどのアプリケーションは、一貫性のためにルーティングモジュールを実装すべきです。
 構成が複雑になったときにコードをきれいに保つことができます。
@@ -599,7 +599,7 @@ ng generate module my-module --routing
 このマイルストーンは、次の内容を含んでいます：
 
 * モジュールを使って、アプリケーションとルートをフィーチャーエリアに整理する。
-* あるコンポーネントから別のコンポーネントへの必須のナビゲーション。
+* あるコンポーネントから別のコンポーネントへの必然的なナビゲーション。
 * ルートのパラメータに必要な情報とオプションの情報を渡す。
 
 このサンプルアプリケーションは、[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services") の"Services"セクションにあるヒーロー機能を再現したもので、<live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>のコードの多くを再利用しています。
@@ -736,7 +736,7 @@ ng generate module my-module --routing
 
 ルートURLに選択したヒーローのIDを含めることで、どのヒーローを表示するかをdetailビューに伝えます。
 
-`src/app/moes/` フォルダの新しい場所からヒーローコンポーネントをインポートし、2つのヒーロールートを定義します。
+`src/app/heroes/` フォルダの新しい場所からヒーローコンポーネントをインポートし、2つのヒーロールートを定義します。
 
 `Heroes` モジュール用のルートができたので、`AppRoutingModule` で行ったように `RouterModule` を使用して `Router` にそれらを登録します。
 
@@ -775,7 +775,7 @@ ng generate module my-module --routing
 `HeroesModule` と `AppRoutingModule` で定義されています。
 
 フィーチャーモジュールによって提供されたルートは、ルーターによってそのインポートされたモジュールのルートに統合されます。
-これにより、メインのルート設定を変更することなく、機能モジュールのルートを定義し続けることができます。
+これにより、メインのルート設定を変更することなく、フィーチャーモジュールのルートを定義し続けることができます。
 
 `app-routing.module.ts` から、`HeroListComponent` のインポートと `/heroes` のルートを削除します。
 
@@ -805,7 +805,7 @@ ng generate module my-module --routing
 
 ルーターはナビゲーションのリクエストパスにマッチする最初のルートを受け入れるので、ルート設定の順序は重要です。
 
-すべてのルートが1つの `AppRoutingModule` にあったときは、デフォルトと [wildcard](#wildcard) ルートを `/heroes` ルートの後、つまり最後に置いていました。これにより、ワイルドカードルートにヒットして "Page not found" にナビゲートされる前に、ルーターが `/heroes` ルートにURLをマッチさせるチャンスがありました。
+すべてのルートが1つの `AppRoutingModule` にあったときは、デフォルトと [wildcard](#wildcard) ルートを `/heroes` ルートの後、つまり最後に置いていました。これにより、ワイルドカードルートにヒットして "Page not found" にナビゲートされる前に、ルーターが `/heroes` ルートにURLをマッチさせる可能性がありました。
 
 各ルーティングモジュールは、インポートされた順にルート設定を拡張します。
 もし `AppRoutingModule` を最初にリストアップした場合、ワイルドカードルートはヒーロールートの_前_に登録されます。
@@ -843,7 +843,7 @@ detailコンポーネントにナビゲートし、"Magneta" を表示するよ�
 
 
 
-ユーザーがブラウザのアドレスバーにそのURLを入力すると、ルーターはそのパターンを認識し、同じ "Magneta" の詳細画面に移動するはずです。
+ユーザーがブラウザのアドレスバーにそのURLを入力すると、ルーターはそのパターンを認識し、同じ "Magneta" のdetailビューに移動するはずです。
 
 
 <div class="callout is-helpful">
@@ -869,7 +869,7 @@ detailコンポーネントにナビゲートし、"Magneta" を表示するよ�
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array"></code-example>
 
-ルーターは、配列から宛先URLを次のように構成します：`localhost:4200/hero/15`。
+ルーターは、配列から宛先となるURLを次のように構成します：`localhost:4200/hero/15`。
 
 ルーターはURLからルートパラメータ(`id:15`)を抽出し、
 `ActivatedRoute` サービスを使って、`HeroDetailComponent`に供給します。
@@ -990,21 +990,21 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 <div class="alert is-helpful">
 
-コンポーネントのObservableを購読する時、ほとんどの場合、そのコンポーネントが破棄されるときにサブスクライブを解除します。
+コンポーネントのObservableを購読する時、ほとんどの場合、そのコンポーネントが破棄されるときに購読を解除します。
 
 しかし、`ActivatedRoute` とそのObservableは `Router` 自体から隔離されているため、`ActivatedRoute` のObservableは例外となります。
 `Router` はルート化されたコンポーネントが不要になったときにそれを破棄します。これは、コンポーネントのすべてのメンバーも破棄されることを意味します。
-これには、注入された `ActivatedRoute` とその `Observable` プロパティへのサブスクリプションが含まれます。
+これには、注入された `ActivatedRoute` とその `Observable` プロパティへの購読が含まれます。
 
 また、`Router` は `ActivatedRoute` の `Observable` を `complete` しないので、`finalize` や `complete` のブロックは実行されません。
-`finalize` で何かを処理する必要がある場合は、やはり `ngOnDestroy` でアン購読する必要があります。
-また、コンポーネントが破棄された後に実行したくないコードの遅延が Observable pipe にある場合にも、アン購読する必要があります。
+`finalize` で何かを処理する必要がある場合は、やはり `ngOnDestroy` で購読解除する必要があります。
+また、コンポーネントが破棄された後に実行したくないコードの遅延が Observable pipe にある場合にも、購読解除する必要があります。
 
 </div>
 
 {@a snapshot-the-no-observable-alternative}
 
-#### `snapshot`: 観察不可能な代替手段
+#### `snapshot`: no-observableな代替手段
 
 このアプリケーションは `HeroDetailComponent` を再利用しません。
 ユーザーは常にヒーローリストに戻り、表示する別のヒーローを選択します。
@@ -1014,7 +1014,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 `HeroDetailComponent` のインスタンスが決して再利用されないことが確実に分かっている場合は、`snapshot` を使用できます。
 
 `route.snapshot` は、ルートのパラメータマップの初期値を提供します。
-次のように、サブスクライブや observable 演算子を追加することなく、パラメータに直接アクセスすることができます：
+次のように、SubscribeやObservable演算子を追加することなく、パラメータに直接アクセスすることができます：
 
 <code-example path="router/src/app/heroes/hero-detail/hero-detail.component.2.ts" header="src/app/heroes/hero-detail/hero-detail.component.ts (ngOnInit snapshot)" region="snapshot"></code-example>
 
@@ -1055,7 +1055,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 
 ルートリクエストにオプションの情報を追加することもできます。
-たとえば、ヒーローの詳細画面から `hero-detail.component.ts` のリストに戻るとき、表示されたヒーローがリストの中で事前に選択されていればよいでしょう。
+たとえば、ヒーローの詳細画面から `hero-detail.component.ts` のリストに戻るとき、表示されたヒーローがリストの中で事前に選択されているようにします。
 
 <div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero">
@@ -1082,7 +1082,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 #### Heroes list: 任意でヒーローを選択する
 
-`HeroDetailComponent` に移動する際、編集するヒーローの `id` をルートパラメータで指定し、
+`HeroDetailComponent` に移動する際、編集するヒーローの `id` をルートパラメーターで指定し、
 それを [_link parameters array_](#link-parameters-array) の2番目の要素にしました。
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.1.html" header="src/app/heroes/hero-list/hero-list.component.html (link-parameters-array)" region="link-parameters-array"></code-example>
@@ -1129,7 +1129,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 マトリクスURL表記は、Webの創始者であるTim Berners-Lee氏が[1996年の提案](https://www.w3.org/DesignIssues/MatrixURIs.html)ではじめて紹介したアイデアです。
 
-マトリクス記法はHTML標準には採用されませんでしたが、合法であり、親ルートと子ルートに属するパラメータを分離する方法として、ブラウザのルーティングシステムの間で普及しました。
+マトリクス記法はHTML標準には採用されませんでしたが、正当であり、親ルートと子ルートに属するパラメータを分離する方法としてブラウザのルーティングシステムの間で普及しました。
 このように、ルーターはマトリクス表記でのブラウザアクセスのサポートを提供しています。
 
 </div>
@@ -1144,7 +1144,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 `HeroListComponent`には、パラメータを期待するコードが必要です。
 
 これまでは `HeroListComponent` から `HeroDetailComponent` に移動するとき、
-ルートのパラメータマップ `Observable` をサブスクライブし、それを `ActivatedRoute` 内の `HeroDetailComponent` で
+ルートのパラメータマップ `Observable` を購読し、それを `ActivatedRoute` 内の `HeroDetailComponent` で
 利用できるようにしていました。
 そのサービスを `HeroDetailComponent` のコンストラクターに注入しました。
 
@@ -1164,7 +1164,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 `ActivatedRoute.paramMap` プロパティは、ルートパラメータの `Observable` マップです。
 `paramMap` は、ユーザーがコンポーネントに移動したときに、`id` を含む新しい値のマップを発行します。
-`ngOnInit()` では、これらの値をサブスクライブして `selectedId` を設定し、ヒーローを取得します。
+`ngOnInit()` では、これらの値を購読して `selectedId` を設定し、ヒーローを取得します。
 
 テンプレートを[クラスバインディング](guide/attribute-binding#class-binding)で更新します。
 このバインディングは、比較結果が `true` を返すと `selected` の CSS クラスを追加し、`false` を返すと削除します。
@@ -1176,7 +1176,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 <code-example path="router/src/app/heroes/hero-list/hero-list.component.css" region="selected" header="src/app/heroes/hero-list/hero-list.component.css"></code-example>
 
-ユーザーがヒーローリストから "Magneta " ヒーローに移動して戻ってくると、"Magneta " が選択された状態で表示されます：
+ユーザーがヒーローリストから"Magneta"ヒーローに移動して戻ってくると、"Magneta"が選択された状態で表示されます：
 
 <div class="lightbox">
   <img src='generated/images/guide/router/selected-hero.png' alt="Selected hero in list has different background color">
@@ -1239,7 +1239,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 本節では、次の内容を取り上げました：
 
 * アプリケーションをフィーチャーエリアに整理する。
-* あるコンポーネントから別のコンポーネントへの絶対的な移動。
+* あるコンポーネントから別のコンポーネントへの必然的な移動。
 * ルートパラメータで情報を渡し、コンポーネントでそれを購読する。
 * フィーチャーエリアのNgModuleを`AppModule` にインポートする。
 * ページに基づいて、ルーティング可能なアニメーションを適用する。
@@ -1538,7 +1538,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 このセクションでは、Angularアプリケーションで推奨される次のパターンに準拠してクライシスセンターを構成する方法を紹介します：
 
-* 各機フィ＝チャーエリアは、それぞれのフォルダに存在します。
+* 各フィーチャーエリアは、それぞれのフォルダに存在します。
 * 各フィーチャーには、独自のAngularフィーチャーモジュールが存在します。
 * 各エリアには、それぞれのエリアルートコンポーネントがあります。
 * 各エリアルートコンポーネントは、独自のルーターアウトレットと子ルートを持ちます。
@@ -1573,7 +1573,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 ### 子ルートの設定
 
-「クライシスセンター」機能のホストページとして、`crisis-center` フォルダ内に `CrisisCenterHome` コンポーネントを生成します。
+"クライシスセンター"機能のホストページとして、`crisis-center` フォルダ内に `CrisisCenterHome` コンポーネントを生成します。
 
 <code-example language="sh">
   ng generate component crisis-center/crisis-center-home
@@ -1583,7 +1583,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 <code-example path="router/src/app/crisis-center/crisis-center-home/crisis-center-home.component.html" header="src/app/crisis-center/crisis-center-home/crisis-center-home.component.html"></code-example>
 
-`heroes-routing.module.ts` ファイルからコピーして名前を変更した`crisis-center-routing.module.ts` を更新します。
+`heroes-routing.module.ts` ファイルをコピーして名前を変更した`crisis-center-routing.module.ts` を更新します。
 今回は、親の `crisis-center` ルートの中に子のルートを定義します。
 
 <code-example path="router/src/app/crisis-center/crisis-center-routing.module.1.ts" header="src/app/crisis-center/crisis-center-routing.module.ts (Routes)" region="routes"></code-example>
@@ -1690,7 +1690,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 `Router.navigate` メソッドで相対パスをナビゲートするには、`ActivatedRoute` を供給して
 現在のルートツリーのどこにいるのかという情報をルーターに与える必要があります。
 
-_リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` プロパティを設定したオブジェクトを追加します。
+_リンクパラメーター配列_ の後に、`ActivatedRoute` に `relativeTo` プロパティを設定したオブジェクトを追加します。
 するとルーターは、アクティブなルートの位置に基づいて、ターゲットのURLを計算します。
 
 <div class="alert is-helpful">
@@ -1808,9 +1808,9 @@ _リンクパラメータ配列_ の後に、`ActivatedRoute` に `relativeTo` �
 <code-example path="router/src/app/app.component.4.html" header="src/app/app.component.html (contact-link)" region="contact-link"></code-example>
 
 `compose` ルートには "popup" というアウトレットが設定されていますが、ルートを `RouterLink` ディレクティブに接続するにはそれだけでは不十分です。
-_リンクパラメータ配列_ で名前の付いたアウトレットを指定して、それを `RouterLink` にプロパティバインディングで結合する必要があります。
+_リンクパラメーター配列_ で名前の付いたアウトレットを指定して、それを `RouterLink` にプロパティバインディングで結合する必要があります。
 
-_リンクパラメータ配列_ には、1つの `outlets` プロパティをもつオブジェクトが含まれており、その値は1つ（または複数）のアウトレット名をキーにした別のオブジェクトです。
+_リンクパラメーター配列_ には、1つの `outlets` プロパティをもつオブジェクトが含まれており、その値は1つ（または複数）のアウトレット名をキーにした別のオブジェクトです。
 この例では、"popup" というアウトレットのプロパティだけがあり、その値は別の _リンクパラメータ配列_ で、`compose` ルートを指定しています。
 
 つまり、ユーザーがこのリンクをクリックすると、ルーターは `compose` ルートに関連付けられたコンポーネントを `popup` アウトレットに表示します。
@@ -1856,7 +1856,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 さらに多くのアウトレットやルートをトップレベルやネストしたレベルに追加して、多くのブランチをもつナビゲーションツリーを作成することができ、ルーターはそれに合わせてURLを生成します。
 
-`outlets` オブジェクトを記入し、そのオブジェクトを _リンクパラメータ配列_ の中に入れて `router.navigate` メソッドに渡すことで、ツリー全体を一度にナビゲートするようルーターに指示することができます。
+`outlets` オブジェクトを記入し、そのオブジェクトを _リンクパラメーター配列_ の中に入れて `router.navigate` メソッドに渡すことで、ツリー全体を一度にナビゲートするようルーターに指示することができます。
 
 {@a clear-secondary-routes}
 
@@ -1873,7 +1873,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 <code-example path="router/src/app/compose-message/compose-message.component.ts" header="src/app/compose-message/compose-message.component.ts (closePopup)" region="closePopup"></code-example>
 
 "send" または "cancel" ボタンをクリックすると、ポップアップビューが消去されます。
-`closePopup()` 関数は、`Router.navigate()` メソッドに[リンクパラメータ配列](#link-parameters-array)を渡すことで、必須のナビゲーションを行います。
+`closePopup()` 関数は、`Router.navigate()` メソッドに[リンクパラメーター配列](#link-parameters-array)を渡すことで、必須のナビゲーションを行います。
 
 `AppComponent` の_Contact_`RouterLink`にバインドされた配列と同様に、この配列にも `outlets` プロパティをもつオブジェクトが含まれています。
 `outlets` プロパティの値は、キーにアウトレット名をもつ別のオブジェクトです。
@@ -1892,11 +1892,11 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 現時点では、ユーザーはいつでもアプリケーション内の任意の場所に移動することができますが、さまざまな理由でアプリケーションの異なる部分へのアクセスを制御する必要がある場合があります。その中には次のようなものがあるかもしれません：
 
-* ユーザーがターゲットコンポーネントへの移動を許可されていない可能性があります。
-* おそらく、ユーザーは最初にログイン（認証）する必要があります。
-* ターゲット・コンポーネントを表示する前に、いくつかのデータをフェッチする必要があるかもしれません。
-* コンポーネントを離れる前に、保留中の変更を保存したい場合があります。
-* 保留中の変更を保存するのではなく、破棄してもよいかどうかをユーザーに尋ねることがあります。
+* ユーザーがターゲットコンポーネントへの移動を許可されていない可能性
+* ユーザーは最初にログイン（認証）する必要
+* ターゲット・コンポーネントを表示する前に、いくつかのデータをフェッチする必要
+* コンポーネントを離れる前に、保留中の変更を保存したい場合
+* 保留中の変更を保存するのではなく、破棄してもよいかどうかをユーザーに確認する
 
 これらのシナリオを処理するために、ルート設定にガードを追加します。
 
@@ -1919,11 +1919,11 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 これらはすべて非同期の操作です。
 
 したがって、ルーティングガードは `Observable<boolean>` や `Promise<boolean>` を返すことができます。
-ルーターはオブザバブルが `true` または `false` に解決するのを待ちます。
+ルーターはObservableが `true` または `false` に解決するのを待ちます。
 
 <div class="alert is-critical">
 
-**注意：** `Router` に提供されるオブザバブルも完了する必要があります。オブザバブルが完了しない場合、ナビゲーションは続行されません。
+**注意：** `Router` に提供されるObservableも完了する必要があります。Observableが完了しない場合、ナビゲーションは続行されません。
 
 </div>
 
@@ -1952,15 +1952,15 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 ### `CanActivate`: 認証を必要とする
 
-アプリケーションでは、ユーザーが誰であるかに基づいてフィーチャー領域へのアクセスを制限することがよくあります。
+アプリケーションでは、ユーザーが誰であるかに基づいてフィーチャーエリアへのアクセスを制限することがよくあります。
 認証されたユーザーや特定の役割をもつユーザーにのみアクセスを許可することができます。
 また、ユーザーのアカウントが有効になるまで、アクセスをブロックしたり制限したりすることもあるでしょう。
 
 `CanActivate` ガードは、これらのナビゲーションビジネスルールを管理するツールです。
 
-#### 管理機能モジュールの追加
+#### アドミン機能モジュールの追加
 
-このセクションでは、クライシスセンターに新しい管理機能を追加する方法を説明します。
+このセクションでは、クライシスセンターに新しいアドミン機能を追加する方法を説明します。
 まず、`AdminModule` という名前の新しいフィーチャーモジュールを追加します。
 
 フィーチャーモジュールファイルとルーティング設定ファイルを含む `admin` フォルダを作成します。
@@ -2090,7 +2090,7 @@ The admin feature file structure looks like this:
 
 </div>
 
-管理機能モジュールには、フィーチャーモジュール内のルーティングに使用される `AdminComponent` と、
+アドミン機能モジュールには、フィーチャーモジュール内のルーティングに使用される `AdminComponent` と、
 ダッシュボードのルート、そしてクライシスとヒーローを管理する2つの未完成のコンポーネントが含まれています。
 
 <code-tabs>
@@ -2119,7 +2119,7 @@ The admin feature file structure looks like this:
 
 <div class="alert is-helpful">
 
-管理画面の `RouterLink` には相対スラッシュのみが含まれ、追加のURLセグメントは含まれませんが、管理画面のフィーチャーエリア内のどのルートにもマッチします。
+アドミン画面の `RouterLink` には相対スラッシュのみが含まれ、追加のURLセグメントは含まれませんが、アドミン画面のフィーチャーエリア内のどのルートにもマッチします。
 ユーザーがそのルートにアクセスしたときに、`Dashboard` のリンクがアクティブになるようにするだけです。
 `Dashboard` の routerLink に追加のバインディング `[routerLinkActiveOptions]="{ exact: true }"` を追加すると、ユーザーが `/admin` のURLに移動したときに `./` リンクがアクティブになり、子ルートに移動したときにはアクティブになりません。
 
@@ -2260,7 +2260,7 @@ The admin feature file structure looks like this:
 `CanActivateChild` ガードは `CanActivate` ガードと似ています。
 主な違いは、子ルートがアクティブになる前に実行されることです。
 
-アドミン機能モジュールを不正なアクセスから保護しました。
+アドミンフィーチャーモジュールを不正なアクセスから保護しました。
 また、フィーチャーモジュール_内_の子ルートも保護する必要があります。
 
 `AuthGuard` を拡張して、`admin` ルートの間を移動するときに保護するようにします。
@@ -2331,7 +2331,7 @@ The admin feature file structure looks like this:
 
 <code-example path="router/src/app/dialog.service.ts" header="src/app/dialog.service.ts"></code-example>
 
-これは、ユーザーが最終的に何をすべきかを決定するときに解決する `Observable` を返します。変更を破棄してナビゲートする（`true`）か、保留中の変更を保持して危機管理エディタに留まる（`false`）かのどちらかです。
+これは、ユーザーが最終的に何をすべきかを決定するときに解決する `Observable` を返します。変更を破棄してナビゲートする（`true`）か、保留中の変更を保持してクライシス管理エディタに留まる（`false`）かのどちらかです。
 
 {@a CanDeactivate}
 
@@ -2382,7 +2382,7 @@ The admin feature file structure looks like this:
 ルートが有効になった瞬間に準備ができます。
 これにより、コンポーネントにルーティングする前にエラーを処理することもできます。
 レコードがない `id` のクライシスの詳細に移動しても意味がありません。
-有クライシスセンターのみを表示する `Crisis List` にユーザーを戻す方がよいでしょう。
+有効なクライシスセンターのみを表示する `Crisis List` にユーザーを戻す方がよいでしょう。
 
 まとめると、必要なデータがすべて取得されるまで、ルーティングされたコンポーネントのレンダリングを遅らせたいということです。
 

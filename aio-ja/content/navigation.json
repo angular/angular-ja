@@ -322,8 +322,9 @@
             },
             {
               "url": "guide/router-reference",
-              "title": "Router reference",
-              "tooltip": "Describes highlight some core router API concepts."
+              "title": "ルーターレファレンス",
+              "tooltip": "いくつかのコアとなるルーターAPIのコンセプトにハイライトした説明です。",
+              "translated": true
             }
           ]
         },

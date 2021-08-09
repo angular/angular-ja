@@ -1,134 +1,134 @@
-# Router Reference
+# ルーターレファレンス {@a router-reference}
 
-The following sections highlight some core router concepts.
+以降のセクションでは、いくつかのコアルーターの概念にハイライトします。
 
 {@a basics-router-imports}
 
-### Router imports
+### ルーターのインポート {@a router-imports}
 
-The Angular Router is an optional service that presents a particular component view for a given URL.
-It is not part of the Angular core and thus is in its own library package, `@angular/router`.
+Angularのルーターはオプションのサービスであり、指定されたURLにおける特定のコンポーネントビューを表示します。
+これはAngularコアの一部ではなく、それゆえ独自のライブラリパッケージ`@angular/router`内にあります。
 
-Import what you need from it as you would from any other Angular package.
+他のAngularパッケージと同じく、そこから必要なものをインポートします。
 
 <code-example path="router/src/app/app.module.1.ts" header="src/app/app.module.ts (import)" region="import-router"></code-example>
 
 
 <div class="alert is-helpful">
 
-For more on browser URL styles, see [`LocationStrategy` and browser URL styles](guide/router#browser-url-styles).
+ブラウザのURLスタイルの詳細については、[`LocationStrategy`とブラウザのURLスタイル](guide/router#browser-url-styles)を参照しましょう。
 
 </div>
 
 {@a basics-config}
 
-### Configuration
+### 設定 {@a configuration}
 
-A routed Angular application has one singleton instance of the `Router` service.
-When the browser's URL changes, that router looks for a corresponding `Route` from which it can determine the component to display.
+ルーティングされたAngularアプリケーションには、`Router`サービスのシングルトンインスタンスが1つあります。
+ブラウザのURLが変わると、そのルーターは対応する`Route`を探します。そのルートから表示するコンポーネントを決定できます。
 
-A router has no routes until you configure it.
-The following example creates five route definitions, configures the router via the `RouterModule.forRoot()` method, and adds the result to the `AppModule`'s `imports` array.
+ルーターは設定するまではルートをもちません。
+次の例では、5つのルート定義を作成し、`RouterModule.forRoot()`メソッドを介してルーターを設定し、その結果を`AppModule`の`imports`配列に追加しています。
 
 <code-example path="router/src/app/app.module.0.ts" header="src/app/app.module.ts (excerpt)"></code-example>
 
 {@a example-config}
 
-The `appRoutes` array of routes describes how to navigate.
-Pass it to the `RouterModule.forRoot()` method in the module `imports` to configure the router.
+ルートの`appRoutes`配列は、どのようにナビゲートするかを記述しています。
+これをモジュールの`imports`にある`RouterModule.forRoot()`メソッドに渡してルーターを設定します。
 
-Each `Route` maps a URL `path` to a component.
-There are no leading slashes in the path.
-The router parses and builds the final URL for you, which allows you to use both relative and absolute paths when navigating between application views.
+各`Route`はURLの`path`をコンポーネントにマップしています。
+パスに先頭のスラッシュはありません。
+ルーターは最終的なURLを解析・構築するため、アプリケーションビュー間をナビゲートするときは相対パスと絶対パスの両方を使用できます。
 
-The `:id` in the second route is a token for a route parameter.
-In a URL such as `/hero/42`, "42" is the value of the `id` parameter.
-The corresponding `HeroDetailComponent` uses that value to find and present the hero whose `id` is 42.
+2番目のルートにある`:id`は、ルートのパラメータのためのトークンです。
+`/hero/42`などのURLでは、"42"は`id`パラメータの値です。
+対応する`HeroDetailComponent`はその値を使用して、`id`が42のヒーローを見つけて表示します。
 
-The `data` property in the third route is a place to store arbitrary data associated with
-this specific route.
-The data property is accessible within each activated route. Use it to store items such as page titles, breadcrumb text, and other read-only, static data.
-You can use the [resolve guard](guide/router-tutorial-toh#resolve-guard) to retrieve dynamic data.
+3番目のルートにある`data`プロパティは、
+この特定のルートに結び付けられた任意のデータを格納する場所です。
+データプロパティはアクティブ化された各ルート内でアクセスできます。これを使用して、ページタイトル、パンくずテキスト、その他の読み取り専用の静的データなどのアイテムを保存します。
+動的データを取得するには、[解決ガード](guide/router-tutorial-toh#resolve-guard)を使用できます。
 
-The empty path in the fourth route represents the default path for the application&mdash;the place to go when the path in the URL is empty, as it typically is at the start.
-This default route redirects to the route for the `/heroes` URL and, therefore, displays the `HeroesListComponent`.
+4番目のルートにある空のパスは、アプリケーションのデフォルトパスを表しています &mdash; URLのパスが空のときに移動する場所で、通常は先頭にあります。
+このデフォルトルートは`/Heroes`というURLのルートにリダイレクトしており、そのため`HeroesListComponent`を表示します。
 
-If you need to see what events are happening during the navigation lifecycle, there is the `enableTracing` option as part of the router's default configuration.
-This outputs each router event that took place during each navigation lifecycle to the browser console.
-Use `enableTracing` only for debugging purposes.
-You set the `enableTracing: true` option in the object passed as the second argument to the `RouterModule.forRoot()` method.
+ナビゲーションライフサイクル中に何のイベントが発生しているかを確認する必要がある場合は、ルーターのデフォルト設定の一部として`enableTracing`オプションがあります。
+これは、各ナビゲーションライフサイクル中に発生した各ルーターイベントをブラウザコンソールに出力します。
+`enableTracing`はデバッグ目的でのみ使用しましょう。
+`RouterModule.forRoot()`メソッドへの2番目の引数として渡されるオブジェクトにおいて、`enableTracing: true`オプションを設定します。
 
 {@a basics-router-outlet}
 
-### Router outlet
+### ルーターアウトレット {@a router-outlet}
 
-The `RouterOutlet` is a directive from the router library that is used like a component.
-It acts as a placeholder that marks the spot in the template where the router should
-display the components for that outlet.
+`RouterOutlet`はルーターライブラリからのディレクティブで、コンポーネントのように使われます。
+これは、テンプレートにおけるスポットをマークするプレースホルダーとして機能し、
+そこにルーターがその出口のコンポーネントを表示します。
 
 <code-example language="html">
   &lt;router-outlet>&lt;/router-outlet>
-  &lt;!-- Routed components go here -->
+  &lt;!-- ルーティングされたコンポーネントがここに出る -->
 
 </code-example>
 
-Given the configuration above, when the browser URL for this application becomes `/heroes`, the router matches that URL to the route path `/heroes` and displays the `HeroListComponent` as a sibling element to the `RouterOutlet` that you've placed in the host component's template.
+上記の設定では、このアプリケーションのブラウザURLが`/heroes`になると、ルーターはそのURLをルートパス`/heroes`に一致させ、ホストコンポーネントのテンプレートに配置した`RouterOutlet`の兄弟要素として、`HeroListComponent`を表示します。
 
 {@a basics-router-links}
 
 {@a router-link}
 
-### Router links
+### ルーターリンク {@a router-links}
 
-To navigate as a result of some user action such as the click of an anchor tag, use `RouterLink`.
+アンカータグのクリックといったユーザーアクションの結果としてナビゲートするには、`RouterLink`を使用します。
 
-Consider the following template:
+次のテンプレートに注目しましょう:
 
 <code-example path="router/src/app/app.component.1.html" header="src/app/app.component.html"></code-example>
 
-The `RouterLink` directives on the anchor tags give the router control over those elements.
-The navigation paths are fixed, so you can assign a string to the `routerLink` (a "one-time" binding).
+アンカータグ上の`RouterLink`ディレクティブは、ルーターにこれらの要素に対する制御を与えています。
+そのナビゲーションパスは固定されているため、`routerLink`に文字列を割り当てることができます("ワンタイム"のバインディング)。
 
-Had the navigation path been more dynamic, you could have bound to a template expression that returned an array of route link parameters; that is, the [link parameters array](guide/router#link-parameters-array).
-The router resolves that array into a complete URL.
+ナビゲーションパスがもっと動的な場合は、ルートのリンクパラメーターの配列を返すテンプレート式にバインドできます。それが、[リンクパラメータ配列](guide/router#link-parameters-array)です。
+ルーターはその配列を完全なURLに解決します。
 
 {@a router-link-active}
 
-### Active router links
+### アクティブなルーターリンク {@a active-router-links}
 
-The `RouterLinkActive` directive toggles CSS classes for active `RouterLink` bindings based on the current `RouterState`.
+`RouterLinkActive`ディレクティブは、現在の`RouterState`に基づいてアクティブな`RouterLink`バインディングのCSSクラスを切り替えます。
 
-On each anchor tag, you see a [property binding](guide/property-binding) to the `RouterLinkActive` directive that looks like `routerLinkActive="..."`.
+各アンカータグには、`routerLinkActive="..."`のように`RouterLinkActive`ディレクティブへの[プロパティバインディング](guide/property-binding)があります。
 
-The template expression to the right of the equal sign, `=`, contains a space-delimited string of CSS classes that the Router adds when this link is active (and removes when the link is inactive).
-You set the `RouterLinkActive` directive to a string of classes such as `[routerLinkActive]="'active fluffy'"` or bind it to a component property that returns such a string.
+等号`=`の右側のテンプレート式には、CSSクラスのスペース区切りの文字列が含まれています。ルーターはそれらをこのリンクがアクティブなときに追加します(リンクが非アクティブなときに削除します)。
+`RouterLinkActive`ディレクティブを`[routerLinkActive]="'active fluffy'"`のようにクラスの文字列に設定するか、そのような文字列を返すコンポーネントのプロパティにバインドします。
 
-Active route links cascade down through each level of the route tree, so parent and child router links can be active at the same time.
-To override this behavior, you can bind to the `[routerLinkActiveOptions]` input binding with the `{ exact: true }` expression. By using `{ exact: true }`, a given `RouterLink` will only be active if its URL is an exact match to the current URL.
+アクティブなルートのリンクはルートツリーの各レベルを通じてカスケードされるため、親子のルーターのリンクは同時にアクティブにできます。
+この動作をオーバーライドするには、`{ exact: true }`式で入力バインディングの`[routerLinkActiveOptions]`にバインドできます。`{ exact: true }`を使用すると、指定の`RouterLink`は、そのURLが現在のURLと完全に一致する場合にのみアクティブになります。
 
 {@a basics-router-state}
 
-### Router state
+### ルーターの状態 {@a router-state}
 
-After the end of each successful navigation lifecycle, the router builds a tree of `ActivatedRoute` objects that make up the current state of the router. You can access the current `RouterState` from anywhere in the application using the `Router` service and the `routerState` property.
+各ナビゲーションライフサイクルの成功の後に、ルーターはルーターの現在の状態を構成する`ActivatedRoute`オブジェクトのツリーを構築します。`Router`サービスと`routerState`プロパティを使用して、アプリケーションのどこからでも現在の`RouterState`にアクセスできます。
 
-Each `ActivatedRoute` in the `RouterState` provides methods to traverse up and down the route tree to get information from parent, child, and sibling routes.
+`RouterState`の各`ActivatedRoute`は、ルートのツリーを上下にトラバースして、親・子・兄弟のルートから情報を取得するメソッドを提供します。
 
 {@a activated-route}
 
-### Activated route
+### アクティブ化されたルート
 
-The route path and parameters are available through an injected router service called the [ActivatedRoute](api/router/ActivatedRoute).
-It has a great deal of useful information including:
+ルートのパスとパラメータは、[ActivatedRoute](api/router/ActivatedRoute)という注入されたルーターサービスを介して利用できます。
+それは以下を含む多くの有用な情報をもっています:
 
 <table>
   <tr>
     <th>
-      Property
+      プロパティ
     </th>
 
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -138,7 +138,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` of the route path(s), represented as an array of strings for each part of the route path.
+    そのルートの(各)パスの`Observable`で、ルートのパスの各部分に関する文字列の配列として表されます。
 
     </td>
   </tr>
@@ -149,8 +149,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` that contains the `data` object provided for the route.
-    Also contains any resolved values from the [resolve guard](guide/router-tutorial-toh#resolve-guard).
+    そのルートへ提供される`data`オブジェクトを含む`Observable`。
+    また、[解決ガード](guide/router-tutorial-toh#resolve-guard)からの解決済みの値も含みます。
 
     </td>
   </tr>
@@ -161,8 +161,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` that contains a [map](api/router/ParamMap) of the required and [optional parameters](guide/router-tutorial-toh#optional-route-parameters) specific to the route.
-    The map supports retrieving single and multiple values from the same parameter.
+    そのルート固有の、必須のおよび[オプションのパラメータ](guide/router-tutorial-toh#optional-route-parameters)の[マップ](api/router/ParamMap)を含む`Observable`。
+    このマップは、同じパラメータからの単一および複数の値の取得をサポートします。
 
     </td>
   </tr>
@@ -173,8 +173,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` that contains a [map](api/router/ParamMap) of the [query parameters](guide/router-tutorial-toh#query-parameters) available to all routes.
-    The map supports retrieving single and multiple values from the query parameter.
+    すべてのルートで利用できる[クエリパラメータ](guide/router-tutorial-toh#query-parameters)の[map](api/router/ParamMap)を含む`Observable`。
+    このマップは、クエリパラメータからの単一および複数の値の取得をサポートしています。
 
     </td>
   </tr>
@@ -185,7 +185,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    An `Observable` of the URL [fragment](guide/router-tutorial-toh#fragment) available to all routes.
+    すべてのルートで利用できるURL[フラグメント](guide/router-tutorial-toh#fragment)の`Observable`。
 
     </td>
   </tr>
@@ -196,8 +196,8 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    The name of the `RouterOutlet` used to render the route.
-    For an unnamed outlet, the outlet name is primary.
+    そのルートをレンダリングするために使われる`RouterOutlet`の名前。
+    名前を付けないアウトレットは、アウトレット名はprimaryです。
 
     </td>
   </tr>
@@ -208,7 +208,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    The route configuration used for the route that contains the origin path.
+    そのルートについて使用されたルート設定で、起点のパスを含みます。
 
     </td>
   </tr>
@@ -219,7 +219,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    The route's parent `ActivatedRoute` when this route is a [child route](guide/router-tutorial-toh#child-routing-component).
+    このルートが[子ルート](guide/router-tutorial-toh#child-routing-component)の場合、このルートの親の`ActivatedRoute`。
 
     </td>
   </tr>
@@ -230,7 +230,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    Contains the first `ActivatedRoute` in the list of this route's child routes.
+    このルートの子ルートのリストにおける最初の`ActivatedRoute`を含みます。
 
     </td>
   </tr>
@@ -241,7 +241,7 @@ It has a great deal of useful information including:
     </td>
     <td>
 
-    Contains all the [child routes](guide/router-tutorial-toh#child-routing-component) activated under the current route.
+    現在のルート下でアクティブ化されたすべての[子ルート](guide/router-tutorial-toh#child-routing-component)を含みます。
 
     </td>
   </tr>
@@ -249,28 +249,28 @@ It has a great deal of useful information including:
 
 <div class="alert is-helpful">
 
-Two older properties are still available; however, their replacements are preferable as they may be deprecated in a future Angular version.
+2つの古いプロパティはまだ利用可能です。ただし、将来のAngularバージョンで非推奨になる可能性があるため、これらの代わりが推奨です。
 
-* `params`: An `Observable` that contains the required and [optional parameters](guide/router-tutorial-toh#optional-route-parameters) specific to the route. Use `paramMap` instead.
+* `params`: そのルートに固有の、必須および[オプションのパラメーター](guide/router-tutorial-toh#optional-route-parameters)を含む`Observable`。代わりに`paramMap`を使用しましょう。
 
-* `queryParams`: An `Observable` that contains the [query parameters](guide/router-tutorial-toh#query-parameters) available to all routes.
-Use `queryParamMap` instead.
+* `queryParams`: すべてのルートで利用できる[クエリパラメータ](guide/router-tutorial-toh#query-parameters)を含む`Observable`。
+代わりに`queryParamMap`を使用しましょう。
 
 </div>
 
-### Router events
+### ルーターのイベント {@a router-events}
 
-During each navigation, the `Router` emits navigation events through the `Router.events` property.
-These events range from when the navigation starts and ends to many points in between. The full list of navigation events is displayed in the table below.
+各ナビゲーション中に、`Router`は`Router.events`プロパティを介してナビゲーションイベントを発行します。
+これらのイベントは、ナビゲーションの開始時と終了時から、その間の多くのポイントにまで及びます。 ナビゲーションイベントの完全なリストは、次の表に表示されています。
 
 <table>
   <tr>
     <th>
-      Router Event
+      ルーターのイベント
     </th>
 
     <th>
-      Description
+      説明
     </th>
   </tr>
 
@@ -280,7 +280,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/NavigationStart) triggered when navigation starts.
+      ナビゲーション開始時にトリガーされる[イベント](api/router/NavigationStart)。
 
     </td>
   </tr>
@@ -291,8 +291,8 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/RouteConfigLoadStart) triggered before the `Router`
-      [lazy loads](guide/router-tutorial-toh#asynchronous-routing) a route configuration.
+      `Router`がルート設定を[遅延ロード](guide/router-tutorial-toh#asynchronous-routing)する前にトリガーされる
+      [イベント](api/router/RouteConfigLoadStart)。
 
     </td>
   </tr>
@@ -303,7 +303,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/RouteConfigLoadEnd) triggered after a route has been lazy loaded.
+      ルートが遅延ロードされた後にトリガーされる[イベント](api/router/RouteConfigLoadEnd)。
 
     </td>
   </tr>
@@ -314,7 +314,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/RoutesRecognized) triggered when the Router parses the URL and the routes are recognized.
+      ルーターがURLを解析しルートが認識されるときにトリガーされる[イベント](api/router/RoutesRecognized)。
 
     </td>
   </tr>
@@ -325,7 +325,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/GuardsCheckStart) triggered when the Router begins the Guards phase of routing.
+      ルーターがルーティングのガード段階を開始するときにトリガーされる[イベント](api/router/GuardsCheckStart)。
 
     </td>
   </tr>
@@ -336,7 +336,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/ChildActivationStart) triggered when the Router begins activating a route's children.
+      ルーターがルートの子たちのアクティブ化を開始するときにトリガーされる[イベント](api/router/ChildActivationStart)。
 
     </td>
   </tr>
@@ -347,7 +347,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/ActivationStart) triggered when the Router begins activating a route.
+      ルーターがルートのアクティブ化を開始するときにトリガーされる[イベント](api/router/ActivationStart)。
 
     </td>
   </tr>
@@ -358,7 +358,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/GuardsCheckEnd) triggered when the Router finishes the Guards phase of routing successfully.
+      ルーターがルーティングのガード段階を正常に完了するときにトリガーされる[イベント](api/router/GuardsCheckEnd)。
 
     </td>
   </tr>
@@ -369,7 +369,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/ResolveStart) triggered when the Router begins the Resolve phase of routing.
+      ルーターがルーティングの解決段階を開始するときにトリガーされる[イベント](api/router/ResolveStart)。
 
     </td>
   </tr>
@@ -380,7 +380,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/ResolveEnd) triggered when the Router finishes the Resolve phase of routing successfuly.
+      ルーターがルーティングの解決段階を正常に完了するときにトリガーされる[イベント](api/router/ResolveEnd)。
 
     </td>
   </tr>
@@ -391,7 +391,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/ChildActivationEnd) triggered when the Router finishes activating a route's children.
+      ルーターがルートの子たちのアクティブ化を完了するときにトリガーされる[イベント](api/router/ChildActivationEnd)。
 
     </td>
   </tr>
@@ -402,7 +402,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/ActivationEnd) triggered when the Router finishes activating a route.
+      ルーターがルートのアクティブ化を完了するときにトリガーされる[イベント](api/router/ActivationEnd)。
 
     </td>
   </tr>
@@ -413,7 +413,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/NavigationEnd) triggered when navigation ends successfully.
+      ナビゲーションが正常に終了するときにトリガーされる[イベント](api/router/NavigationEnd)。
 
     </td>
   </tr>
@@ -424,9 +424,9 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/NavigationCancel) triggered when navigation is canceled.
-      This can happen when a [Route Guard](guide/router-tutorial-toh#guards) returns false during navigation,
-      or redirects by returning a `UrlTree`.
+      ナビゲーションがキャンセルされるときにトリガーされる[イベント](api/router/NavigationCancel)。
+      これは、[ルートガード](guide/router-tutorial-toh#guards)がナビゲーション中にfalseを返すときや、
+      `UrlTree`を返してリダイレクトするときに起こります。
 
     </td>
   </tr>
@@ -437,7 +437,7 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/NavigationError) triggered when navigation fails due to an unexpected error.
+      予期しないエラーによってナビゲーションが失敗するときにトリガーされる[イベント](api/router/NavigationError)。
 
     </td>
   </tr>
@@ -448,29 +448,29 @@ These events range from when the navigation starts and ends to many points in be
     </td>
     <td>
 
-      An [event](api/router/Scroll) that represents a scrolling event.
+      スクロールイベントを表す[イベント](api/router/Scroll)。
 
     </td>
   </tr>
 </table>
 
-When you enable the `enableTracing` option, Angular logs these events to the console.
-For an example of filtering router navigation events, see the [router section](guide/observables-in-angular#router) of the [Observables in Angular](guide/observables-in-angular) guide.
+`enableTracing`オプションを有効にすると、Angularはこれらのイベントをコンソールにログします。
+ルーターのナビゲーションイベントをフィルタリングする例については、[AngularでのObservable](guide/observables-in-angular)の[ルーターのセクション](guide/observables-in-angular#router)を参照しましょう。
 
-### Router terminology
+### ルーター用語 {@a router-terminology}
 
-Here are the key `Router` terms and their meanings:
+主な`Router`用語とその意味は次のとおりです:
 
 <table>
 
   <tr>
 
     <th>
-      Router Part
+      ルーター部分
     </th>
 
     <th>
-      Meaning
+      意味
     </th>
 
   </tr>
@@ -482,8 +482,8 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      Displays the application component for the active URL.
-      Manages navigation from one component to the next.
+      アクティブなURLのアプリケーションコンポーネントを表示します。
+      あるコンポーネントから次のコンポーネントへのナビゲーションを管理します。
     </td>
 
   </tr>
@@ -495,8 +495,8 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      A separate NgModule that provides the necessary service providers
-      and directives for navigating through application views.
+      アプリケーションビューをナビゲートするために必要なサービスプロバイダーとディレクティブを提供する、
+      別個のNgModuleです。
     </td>
 
   </tr>
@@ -508,7 +508,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      Defines an array of Routes, each mapping a URL path to a component.
+      ルートの配列を定義します。それぞれがURLパスをコンポーネントにマッピングしています。
     </td>
 
   </tr>
@@ -520,8 +520,8 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      Defines how the router should navigate to a component based on a URL pattern.
-      Most routes consist of a path and a component type.
+      ルーターがURLパターンに基づいてコンポーネントにナビゲートする方法を定義します。
+      ほとんどのルートは、パスとコンポーネントの型で構成されます。
     </td>
 
   </tr>
@@ -533,7 +533,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      The directive (<code>&lt;router-outlet></code>) that marks where the router displays a view.
+      ルーターがビューを表示する場所をマークするディレクティブ(<code>&lt;router-outlet></code>)。
     </td>
 
   </tr>
@@ -545,7 +545,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      The directive for binding a clickable HTML element to a route. Clicking an element with a <code>routerLink</code> directive that is bound to a <i>string</i> or a <i>link parameters array</i> triggers a navigation.
+      クリック可能なHTML要素をルートにバインドするためのディレクティブ。<i>文字列</i>や<i>リンクパラメータ配列</i>にバインドされている<code>routerLink</code>ディレクティブをもつ要素をクリックすると、ナビゲーションがトリガーされます。
     </td>
 
   </tr>
@@ -557,7 +557,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      The directive for adding/removing classes from an HTML element when an associated <code>routerLink</code> contained on or inside the element becomes active/inactive.
+      要素上または要素内に含まれる結び付けられた<code>routerLink</code>がアクティブ/非アクティブになったとき、HTML要素からクラスを追加/削除するためのディレクティブ。
     </td>
 
   </tr>
@@ -569,7 +569,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      A service that is provided to each route component that contains route specific information such as route parameters, static data, resolve data, global query params, and the global fragment.
+      各ルートのコンポーネントに提供されるサービス。ルートパラメータ、静的データ、解決データ、グローバルクエリパラメータ、グローバルフラグメントなどのルート固有の情報を含みます。
     </td>
 
   </tr>
@@ -581,7 +581,7 @@ Here are the key `Router` terms and their meanings:
     </td>
 
     <td>
-      The current state of the router including a tree of the currently activated routes together with convenience methods for traversing the route tree.
+      ルーターの現在の状態で、現在アクティブ化されたルートのツリーとともにルートツリーをトラバースするための便利なメソッドを含みます。
     </td>
 
   </tr>
@@ -589,12 +589,12 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <b><i>Link parameters array</i></b>
+      <b><i>リンクパラメータ配列</i></b>
     </td>
 
     <td>
-      An array that the router interprets as a routing instruction.
-      You can bind that array to a <code>RouterLink</code> or pass the array as an argument to the <code>Router.navigate</code> method.
+      ルーターがルーティングの指示として解釈する配列。
+      その配列を<code>RouterLink</code>にバインドするか、<code>Router.navigate</code>メソッドの引数として渡すことができます。
     </td>
 
   </tr>
@@ -602,11 +602,11 @@ Here are the key `Router` terms and their meanings:
   <tr>
 
     <td>
-      <b><i>Routing component</i></b>
+      <b><i>ルーティングコンポーネント</i></b>
     </td>
 
     <td>
-      An Angular component with a <code>RouterOutlet</code> that displays views based on router navigations.
+      <code>RouterOutlet</code>をもつAngularのコンポーネントで、ルーターのナビゲーションに基づいてビューを表示します。
     </td>
 
   </tr>

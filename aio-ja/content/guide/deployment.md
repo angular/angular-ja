@@ -353,7 +353,7 @@ You can dramatically reduce launch time by only loading the application modules 
 absolutely must be present when the application starts.
 
 Configure the Angular Router to defer loading of all other modules (and their associated code), either by
-[waiting until the app has launched](guide/router-tutorial-toh#preloading-background-loading-of-feature-areas  "Preloading")
+[waiting until the app has launched](guide/router-tutorial-toh#preloading  "Preloading")
 or by [_lazy loading_](guide/router#lazy-loading "Lazy loading")
 them on demand.
 

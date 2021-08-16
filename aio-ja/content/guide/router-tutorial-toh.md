@@ -14,7 +14,7 @@
 このガイドでは、複数ページにルーティングされたサンプルアプリケーションの開発について説明します。
 その過程で、次のルーターの主要な機能に焦点を当てます：
 
-* アプリケーション機能をモジュールに編成する。
+* アプリケーション機能をモジュールに整理する。
 * コンポーネントへの移動する（*Heroes* は "Heroes List" にリンク）。
 * ルートパラメータを含む（"Hero Detail" へのルーティング中に Hero `id` を渡す）。
 * 子ルート（*Crisis Center* は独自のルートをもつ）。
@@ -543,10 +543,10 @@ ng generate module my-module --routing
 これにより、NgModuleのルートを格納するために、`my-module-routing.module.ts` という別のファイルが作成されます。
 このファイルには、空の `Routes` オブジェクトが含まれており、ここにさまざまなコンポーネントやNgModuleへのルートを入力することができます。
 
-{@a refactor-the-routing-configuration-into-a-routing-module}
+{@a routing-refactor}
 
 
-### ルーティング設定をルーティングモジュールにリファクタリングする
+### ルーティング設定をルーティングモジュールにリファクタリングする {@a refactor-the-routing-configuration-into-a-routing-module}
 
 `AppRouting` モジュールを `/app` フォルダ内に作成し、ルーティングの設定を格納します。
 
@@ -628,8 +628,8 @@ ng generate module my-module --routing
   * `<h2>` のラベルを `<h2>HEROES</h2>` に変更します。
   * テンプレートの下部にある `<app-hero-detail>` コンポーネントを削除します。
 
-* live sample の `heroes/heroes.component.css` の内容を `hero-list.component.css` ファイルにコピーします。
-* live sample の `heroes/heroes.component.ts` の内容を `hero-list.component.ts` ファイルにコピーします。
+* live example の `heroes/heroes.component.css` の内容を `hero-list.component.css` ファイルにコピーします。
+* live example の `heroes/heroes.component.ts` の内容を `hero-list.component.ts` ファイルにコピーします。
 
   * コンポーネントのクラス名を `HeroListComponent` に変更します。
   * `selector` を `app-hero-list` に変更します。
@@ -1002,9 +1002,9 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 </div>
 
-{@a snapshot-the-no-observable-alternative}
+{@a snapshot}
 
-#### `snapshot`: no-observableな代替手段
+#### `snapshot`: no-observableな代替手段 {@a snapshot-the-no-observable-alternative}
 
 このアプリケーションは `HeroDetailComponent` を再利用しません。
 ユーザーは常にヒーローリストに戻り、表示する別のヒーローを選択します。
@@ -1532,9 +1532,9 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 
 </div>
 
-{@a a-crisis-center-with-child-routes}
+{@a crisis-child-routes}
 
-### 子ルートをもつクライシスセンター
+### 子ルートをもつクライシスセンター {@a a-crisis-center-with-child-routes}
 
 このセクションでは、Angularアプリケーションで推奨される次のパターンに準拠してクライシスセンターを構成する方法を紹介します：
 
@@ -2658,9 +2658,9 @@ Angularは、SystemJSをサポートする組み込みモジュールローダ�
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
-{@a preloading-background-loading-of-feature-areas}
+{@a preloading}
 
-### Preloading: フィーチャーエリアのバックグラウンドローディング
+### Preloading: フィーチャーエリアのバックグラウンドローディング {@a preloading-background-loading-of-feature-areas}
 
 モジュールをオンデマンドでロードするだけでなく、プリロードで非同期にモジュールをロードすることもできます。
 

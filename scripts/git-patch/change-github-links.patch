@@ -1,0 +1,16 @@
+diff --git a/aio/tools/transforms/templates/lib/githubLinks.html b/aio/tools/transforms/templates/lib/githubLinks.html
+index 7a9e4fe518..ffd99c2f65 100644
+--- a/aio/tools/transforms/templates/lib/githubLinks.html
++++ b/aio/tools/transforms/templates/lib/githubLinks.html
+@@ -17,8 +17,10 @@ https://github.com/{$ versionInfo.gitRepoInfo.owner $}/{$ versionInfo.gitRepoInf
+ {%- endmacro %}
+ 
+ {% macro githubEditHref(doc, versionInfo, pathPrefix) -%}
++{% set githubUrl = githubBaseUrl(versionInfo) -%}
++{%- if doc.docType === 'content' %}{% set githubUrl = 'https://github.com/angular/angular-ja' -%}{%- endif -%}
+ {% set lineInfo = doc.startingLine and ('#L' + (doc.startingLine + 1) + '-L' + (doc.endingLine + 1)) or '' -%}
+-{$ githubBaseUrl(versionInfo) $}/edit/master/{$ projectRelativePath(doc.fileInfo) $}?message=docs
++{$ githubUrl $}/edit/master/{$ projectRelativePath(doc.fileInfo).replace('aio', 'aio-ja') $}?message=docs
+   {%- if doc.moduleDoc %}({$ doc.moduleDoc.id.split('/')[0] $})
+   {%- elseif doc.docType === 'module' %}({$ doc.id.split('/')[0] $})
+   {%- elseif doc.docType === 'content' %}

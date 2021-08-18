@@ -14,7 +14,6 @@ const copyTargets = [
     'content/examples/toh-pt6/src/app/hero-search/hero-search.component.ts',
     'content/examples/toh-pt6/src/app/heroes/heroes.component.html',
     'content/examples/toh-pt6/src/app/hero.service.ts',
-    'tools/transforms/templates/lib/githubLinks.html',
     'tools/transforms/templates/error/error.template.html',
 ];
 

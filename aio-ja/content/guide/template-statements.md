@@ -16,7 +16,7 @@ In the following example, the template statement `deleteHero()` appears in quote
 
 When the user clicks the **Delete hero** button, Angular calls the `deleteHero()` method in the component class.
 
-You can use template statements with elements, components, or directives in response to events.
+Use template statements with elements, components, or directives in response to events.
 
 <div class="alert is-helpful">
 
@@ -64,7 +64,7 @@ In this example, the context of the `$event` object, `hero`, and `#heroForm` is 
 
 * **Conciseness**
 
-  Keep template statements minimal by using method calls or basic property assignments.
+  Use method calls or basic property assignments to keep template statements minimal.
 
 * **Work within the context**
 

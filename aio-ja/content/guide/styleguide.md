@@ -53,7 +53,7 @@ _常に_ は少し言葉が強いかもしれません。
 ## 単一責任
 
 すべてのコンポーネント、サービス、およびその他のシンボルに
-<a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>単一責任の原則</i> (SRP)</a>
+<a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>単一責任の原則 (SRP)</i></a>
 を適用させます。
 これは、アプリケーションをよりきれいにし、読みやすく、維持しやすくし、テストをしやすくするのに役立ちます。
 

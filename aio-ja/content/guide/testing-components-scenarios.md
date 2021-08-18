@@ -1536,9 +1536,9 @@ Error: ViewDestroyedError: Attempt to use a destroyed view
 
 2つの`beforeEach()`関数を1つの非同期の`beforeEach()`に統合することができます。
 
-`compileComponents()`メソッドはPromiseを返します。
-なので、同期的コードを`then(...)`コールバックに移動することによって、
-コンパイル_後_に同期的なセットアップタスクを実行できます。
+The `compileComponents()` method returns a promise so you can perform the
+synchronous setup tasks _after_ compilation by moving the synchronous code
+after the `await` keyword, where the promise has been resolved.
 
 <code-example
   path="testing/src/app/banner/banner-external.component.spec.ts"

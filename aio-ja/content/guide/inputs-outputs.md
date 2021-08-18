@@ -1,7 +1,7 @@
 # ディレクティブとコンポーネントの親子間でのデータ共有
 
 Angularでよくあるパターンは、親コンポーネントと1つ以上の子コンポーネントの間でデータを共有することです。
-このパターンは `@Input()` と `@Output()` ディレクティブを使って実装することができます。
+このパターンは `@Input()` と `@Output()` デコレーターを使って実装することができます。
 
 <div class="alert is-helpful">
 
@@ -180,7 +180,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 ## `@Input()` と `@Output()` を同時に使う {@a using-input-and-output-together}
 
-次に示すとおり、同じ子コンポーネントに対して `@Input()` と `@Output()` を同時に使うことができます:
+次に示すとおり、同じ子コンポーネントに対して `@Input()` と `@Output()` を同時に使います:
 
 <code-example path="inputs-outputs/src/app/app.component.html" region="together" header="src/app/app.component.html"></code-example>
 

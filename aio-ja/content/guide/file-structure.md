@@ -111,20 +111,6 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 | `tsconfig.spec.json`   | アプリケーションテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
 | `tslint.json`          | アプリケーション固有の [TSLint](https://palantir.github.io/tslint/) の設定。 |
 
-### エンドツーエンドテストのファイル
-
-`e2e/` フォルダはルートレベルのアプリケーションに対応したエンドツーエンドテストの設定とソースファイルを持ちます。
-
-マルチプロジェクトワークスペースの場合、アプリケーション固有のエンドツーエンドテストはプロジェクトルートの下 `projects/project-name/e2e/` にあります。
-
-<code-example language="none">
-  e2e/
-     src/                 (end-to-end tests for my-app)
-        app.e2e-spec.ts
-        app.po.ts
-    protractor.conf.js  (テストツールの設定)
-    tsconfig.json   (ワークスペースのtsconfig.jsonから引き継いだTypeScriptの設定)
-</code-example>
 
 {@a multiple-projects}
 
@@ -160,9 +146,6 @@ my-workspace/
   projects/       (生成されたアプリケーションとライブラリ)
     my-first-app/ --(明示的に生成されたアプリケーション)
       ...         --(アプリケーション固有の設定)
-      e2e/        ----(対応するe2eテスト)
-         src/     ----(e2eテストソース)
-         ...      ----(e2e固有の設定)
       src/        --(アプリケーションのソースファイルとサポートファイル)
     my-lib/       --(生成されたライブラリ)
       ...         --(ライブラリ固有の設定)
@@ -173,7 +156,7 @@ my-workspace/
 
 CLIを使用して（ `ng generate library my-lib` などのコマンドを使用して）ライブラリを生成すると、生成されたファイルはワークスペースの`projects/`フォルダに入ります。 独自のライブラリを作成する方法の詳細については、 [ライブラリの作成](guide/creating-libraries) を参照してください。
 
-ライブラリは（アプリケーションや関連するe2eプロジェクトとは異なり）独自の `package.json` 設定ファイルを持っています。
+ライブラリは（アプリケーションとは異なり）独自の `package.json` 設定ファイルを持っています。
 
 `projects/` フォルダの下の `my-lib` フォルダには、ライブラリコードが含まれています。
 

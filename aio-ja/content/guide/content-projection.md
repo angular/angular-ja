@@ -23,43 +23,43 @@
 
 シングルスロットのコンテンツ投影を使うコンポーネントを作るには:
 
-1. コンポーネントを[作ります](guide/component-overview)。
+1. [コンポーネントを作ります](guide/component-overview)。
 
-1. コンポーネントのテンプレートにおいて、投影コンテンツを表示したい場所に`ng-content`要素を追加します。
+1. コンポーネントのテンプレートにおいて、投影コンテンツを表示したい場所に`<ng-content>`要素を追加します。
 
-たとえば、次のコンポーネントは`ng-content`要素を使ってメッセージを表示します。
+たとえば、次のコンポーネントは`<ng-content>`要素を使ってメッセージを表示します。
 
 <code-example path="content-projection/src/app/zippy-basic/zippy-basic.component.ts" header="content-projection/src/app/zippy-basic/zippy-basic.component.ts"></code-example>
 
-`ng-content`要素のある場所で、このコンポーネントのユーザーは独自のメッセージをコンポーネントへ投影できるようになります。たとえば:
+`<ng-content>`要素のある場所で、このコンポーネントのユーザーは独自のメッセージをコンポーネントへ投影できるようになります。たとえば:
 
 <code-example path="content-projection/src/app/app.component.html" header="content-projection/src/app/app.component.html"
 region="single-slot"></code-example>
 
 <div class="alert is-helpful">
 
-`ng-content`要素はプレースホルダーであり実際のDOM要素を作成しません。`ng-content`に適用されたカスタム属性は無視されます。
+`<ng-content>`要素はプレースホルダーであり実際のDOM要素を作成しません。`<ng-content>`に適用されたカスタム属性は無視されます。
 
 </div>
 
 {@a multi-slot}
 ## マルチスロットのコンテンツ投影
 
-コンポーネントは複数のスロットを持てます。各スロットは、どのコンテンツがそのスロットに入るかを決定するCSSセレクターを指定できます。このパターンは*マルチスロットのコンテンツ投影*と呼ばれます。このパターンでは、投影コンテンツを表示したい場所を指定する必要があります。この作業は`ng-content`の`select`属性を使って行います。
+コンポーネントは複数のスロットを持てます。各スロットは、どのコンテンツがそのスロットに入るかを決定するCSSセレクターを指定できます。このパターンは*マルチスロットのコンテンツ投影*と呼ばれます。このパターンでは、投影コンテンツを表示したい場所を指定する必要があります。この作業は`<ng-content>`の`select`属性を使って行います。
 
 マルチスロットのコンテンツ投影を使うコンポーネントを作るには:
 
-1. コンポーネントを[作ります](guide/component-overview)。
+1. [コンポーネントを作ります](guide/component-overview)。
 
-1. コンポーネントのテンプレートにおいて、投影コンテンツを表示したい場所に`ng-content`要素を追加します。
+1. コンポーネントのテンプレートにおいて、投影コンテンツを表示したい場所に`<ng-content>`要素を追加します。
 
-1. `ng-content`要素に`select`属性を追加します。Angularは、タグ名、属性、CSSクラス、`:not`疑似クラスの、あらゆる組み合わせによる[セレクター](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)をサポートしています。
+1. `<ng-content>`要素に`select`属性を追加します。Angularは、タグ名、属性、CSSクラス、`:not`疑似クラスの、あらゆる組み合わせによる[セレクター](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)をサポートしています。
 
-たとえば、次のコンポーネントは2つの`ng-content`要素を使っています。
+たとえば、次のコンポーネントは2つの`<ng-content>`要素を使っています。
 
  <code-example path="content-projection/src/app/zippy-multislot/zippy-multislot.component.ts" header="content-projection/src/app/zippy-multislot/zippy-multislot.component.ts"></code-example>
 
-この`question`属性を使うコンテンツは、`select=[question]`属性をもつ`ng-content`要素へ投影されます。
+この`question`属性を使うコンテンツは、`select=[question]`属性をもつ`<ng-content>`要素へ投影されます。
 
 <code-example path="content-projection/src/app/app.component.html" header="content-projection/src/app/app.component.html"
 region="multi-slot"></code-example>
@@ -68,9 +68,9 @@ region="multi-slot"></code-example>
 
 <header>select属性をもたないng-content</header>
 
-コンポーネントが`select`属性をもたない`ng-content`要素を含んでいる場合、そのインスタンスは、他の`ng-content`要素のいずれにも一致しない、投影されるコンポーネントの全部を受け取ります。
+コンポーネントが`select`属性をもたない`<ng-content>`要素を含んでいる場合、そのインスタンスは、他の`<ng-content>`要素のいずれにも一致しない、投影されるコンポーネントの全部を受け取ります。
 
-前の例では、2番目の`ng-content`要素のみが`select`属性を定義しています。その結果、最初の`ng-content`要素はコンポーネントへ投影されるその他のコンテンツを受け取ります。
+前の例では、2番目の`<ng-content>`要素のみが`select`属性を定義しています。その結果、最初の`<ng-content>`要素はコンポーネントへ投影されるその他のコンテンツを受け取ります。
 
 </div>
 
@@ -78,41 +78,41 @@ region="multi-slot"></code-example>
 
 ## 条件付きのコンテンツ投影
 
-コンポーネントが_条件付きで_コンテンツをレンダリングするかコンテンツを複数回レンダリングする必要がある場合は、条件付きでレンダリングしたいコンテンツを含んでいる`ng-template`要素を受け取るように、コンポーネントを構成する必要があります。
+コンポーネントが_条件付きで_コンテンツをレンダリングするかコンテンツを複数回レンダリングする必要がある場合は、条件付きでレンダリングしたいコンテンツを含んでいる`<ng-template>`要素を受け取るように、コンポーネントを構成する必要があります。
 
-これらのケースでは`ng-content`要素を使うことは推奨されません。なぜなら、コンポーネントの使用者がコンテンツを提供するとき、そのコンテンツは_常に_初期化されるからです。それは、コンポーネントが`ng-content`要素を定義していない場合や、その`ng-content`要素が`ngIf`文の中にある場合でもです。
+これらのケースでは`<ng-content>`要素を使うことは推奨されません。なぜなら、コンポーネントの使用者がコンテンツを提供するとき、そのコンテンツは_常に_初期化されるからです。それは、コンポーネントが`<ng-content>`要素を定義していない場合や、その`<ng-content>`要素が`ngIf`文の中にある場合でもです。
 
-`ng-template`要素を使えば、コンポーネントに、必要な条件に基づいて必要な回数だけコンテンツを明示的にレンダリングさせることができます。 Angularは、`ng-template`要素のコンテンツをその要素が明示的にレンダリングされるまでは初期化しません。
+`<ng-template>`要素を使えば、コンポーネントに、必要な条件に基づいて必要な回数だけコンテンツを明示的にレンダリングさせることができます。 Angularは、`<ng-template>`要素のコンテンツをその要素が明示的にレンダリングされるまでは初期化しません。
 
-次の手順は、`ng-template`を使う条件付きのコンテンツ投影の一般的な実装を示しています。
+次の手順は、`<ng-template>`を使う条件付きのコンテンツ投影の一般的な実装を示しています。
 
-1. コンポーネントを[作ります](guide/component-overview)。
+1. [コンポーネントを作ります](guide/component-overview)。
 
-1. `ng-template`要素を受け取るそのコンポーネントにおいて、そのテンプレートをレンダリングするために`ng-container`要素を使います。このように:
+1. `<ng-template>`要素を受け取るそのコンポーネントにおいて、そのテンプレートをレンダリングするために`ng-container`要素を使います。このように:
 
    <code-example path="content-projection/src/app/example-zippy.template.html" header="content-projection/src/app/example-zippy.template.html" region="ng-container">
    </code-example>
 
-   この例では、`ngTemplateOutlet`ディレクティブを使って、後の手順で定義する予定の与えられた`ng-template`要素をレンダリングします。`ngTemplateOutlet`ディレクティブは任意のタイプの要素に適用できます。この例では、このディレクティブを`ng-container`要素に割り当てます。そのコンポーネントは実際のDOM要素をレンダリングする必要がないからです。
+   この例では、`ngTemplateOutlet`ディレクティブを使って、後の手順で定義する予定の与えられた`<ng-template>`要素をレンダリングします。`ngTemplateOutlet`ディレクティブは任意のタイプの要素に適用できます。この例では、このディレクティブを`ng-container`要素に割り当てます。そのコンポーネントは実際のDOM要素をレンダリングする必要がないからです。
 
 1. `ng-container`要素を`div`要素などの別の要素でラップし、条件付きのロジックを適用します。
 
       <code-example path="content-projection/src/app/example-zippy.template.html"  header="content-projection/src/app/example-zippy.template.html" region="ngif">
       </code-example>
 
-1. コンテンツを投影したいテンプレートにおいて、投影コンテンツを`ng-template`要素でラップします。このように:
+1. コンテンツを投影したいテンプレートにおいて、投影コンテンツを`<ng-template>`要素でラップします。このように:
 
       <code-example path="content-projection/src/app/app.component.html" region="ng-template">
       </code-example>
 
-   `ng-template`要素は、コンポーネントが独自のロジックに基づいてレンダリングできるコンテンツのブロックを定義します。コンポーネントは、 [`@ContentChild`](/api/core/ContentChild)か[`@ContentChildren`](/api/core/ContentChildren)デコレーターを使って、このテンプレートのコンテンツや[`TemplateRef`](/api/core/TemplateRef)への参照を取得できます。前の例ではカスタムディレクティブ`appExampleZippyContent`を作成しており、それはそのコンポーネントのコンテンツのための`ng-template`をマークするAPIとしてです。`TemplateRef`をもってそのコンポーネントは、[`ngTemplateOutlet`](/api/common/NgTemplateOutlet)ディレクティブか、 [`ViewContainerRef.createEmbeddedView`](/api/core/ViewContainerRef#createembeddedview)を使って、参照されたコンテンツをレンダリングできます。
+   `<ng-template>`要素は、コンポーネントが独自のロジックに基づいてレンダリングできるコンテンツのブロックを定義します。コンポーネントは、 `@ContentChild`か`@ContentChildren`デコレーターを使って、このテンプレートのコンテンツや`TemplateRef`への参照を取得できます。前の例ではカスタムディレクティブ`appExampleZippyContent`を作成しており、それはそのコンポーネントのコンテンツのための`<ng-template>`をマークするAPIとしてです。`TemplateRef`を使って、コンポーネントは`ngTemplateOutlet`ディレクティブか、 `ViewContainerRef`の`createEmbeddedView()`メソッドで、参照されたコンテンツをレンダリングできます。
 
-1. そのカスタム属性に一致するセレクターをもつディレクティブをテンプレートのために作成します。このディレクティブにTemplateRefインスタンスを挿入します。
+1. テンプレートのために、カスタム属性に一致するセレクターをもつ[属性ディレクティブを作成](guide/attribute-directives#building-an-attribute-directive)します。このディレクティブにTemplateRefインスタンスを挿入します。
 
    <code-example path="content-projection/src/app/app.component.ts" header="content-projection/src/app/app.component.ts" region="zippycontentdirective">
    </code-example>
 
-   前の手順で、カスタム属性`appExampleZippyContent`をもつ`ng-template`要素を追加しました。このコードは、Angularがそのカスタム属性に遭遇したときに使うことになるロジックを提供します。この場合、そのロジックはAngularにテンプレート参照をインスタンス化するように指示します。
+   前の手順で、カスタム属性`appExampleZippyContent`をもつ`<ng-template>`要素を追加しました。このコードは、Angularがそのカスタム属性に遭遇したときに使うことになるロジックを提供します。この場合、そのロジックはAngularにテンプレート参照をインスタンス化するように指示します。
 
 1. コンテンツを投影したいコンポーネントで、`@ContentChild`を使って投影コンテンツのテンプレートを取得します。
 

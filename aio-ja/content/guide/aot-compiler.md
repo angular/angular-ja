@@ -558,7 +558,6 @@ Angularコンパイラのもっとも役立つ特徴の1つは、テンプレー
 結果として、以前にビューエンジンのもとでコンパイルされたテンプレートは、Ivyでは型チェックに失敗する可能性があります。これが起こり得るのは、Ivyのより厳格なチェックが真のエラーを捕捉するため、またはアプリケーションのコードが正しく型を付けられていないため、またはアプリケーションが誤りのあるもしくは十分に明確でない型付けをしているライブラリを使用しているためです。
 
 このより厳格な型チェックはバージョン9においてデフォルトで有効ではありませんが、`strictTemplates`設定オプションを設定することで有効にできます。
-将来はデフォルトで厳格な型チェックを行うことになるでしょう。
 
 For more information about type-checking options, and about improvements to template type checking in version 9 and above, see [Template type checking](guide/template-typecheck).
 

@@ -157,13 +157,19 @@ __proto__: Function
 {@a template-input-variables}
 ## Template input variable
 
-A _template input variable_ is a variable you can reference within a single instance of the template.
+A _template input variable_ is a variable to reference within a single instance of the template.
 You declare a template input variable using the `let` keyword as in `let hero`.
 
 There are several such variables in this example: `hero`, `i`, and `odd`.
 
+```html
+<ng-template #hero let-hero let-i="index" let-odd="isOdd">
+  <div [class]="{'odd-row': odd}">{{i}}:{{hero.name}}</div>
+</ng-template>
+```
+
 The variable's scope is limited to a single instance of the repeated template.
-You can use the same variable name again in the definition of other structural directives.
+Use the same variable name again in the definition of other structural directives.
 
 In contrast, you declare a template variable by prefixing the variable name with `#`, as in `#var`.
 A template variable refers to its attached element, component, or directive.

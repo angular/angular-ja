@@ -197,8 +197,7 @@ Schematic *prompts* は、ユーザー操作を Schematics 実行に導入しま
         "css",
         "scss",
         "sass",
-        "less",
-        "styl"
+        "less"
       ],
       "x-prompt": {
         "message": "Which stylesheet format would you like to use?",
@@ -207,8 +206,7 @@ Schematic *prompts* は、ユーザー操作を Schematics 実行に導入しま
           { "value": "css",  "label": "CSS" },
           { "value": "scss", "label": "SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]" },
           { "value": "sass", "label": "Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]" },
-          { "value": "less", "label": "Less   [ http://lesscss.org/                                            ]" },
-          { "value": "styl", "label": "Stylus [ https://stylus-lang.com/                                       ]" }
+          { "value": "less", "label": "Less   [ http://lesscss.org/                                            ]" }
         ]
       },
     },

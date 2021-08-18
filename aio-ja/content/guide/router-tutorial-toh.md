@@ -2528,7 +2528,7 @@ Guards
 <code-example path="router/src/app/auth/auth.guard.4.ts" header="src/app/auth/auth.guard.ts (v3)"></code-example>
 
 また、クエリパラメータやフラグメントをナビゲート時に再度提供することなく、ナビゲート間で保存することができます。
-`LoginComponent` では、`router.navigateUrl()` 関数の第2引数に*object*を追加し、`queryParamsHandling` と `preserveFragment` を指定して、現在のクエリパラメータとフラグメントを次のルートに渡します。
+`LoginComponent` では、`router.navigate()` 関数の第2引数に*object*を追加し、`queryParamsHandling` と `preserveFragment` を指定して、現在のクエリパラメータとフラグメントを次のルートに渡します。
 
 <code-example path="router/src/app/auth/login/login.component.ts" header="src/app/auth/login/login.component.ts (preserve)" region="preserve"></code-example>
 

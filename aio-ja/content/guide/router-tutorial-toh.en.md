@@ -1002,7 +1002,7 @@ unsubscribe if your observable pipe has a delay with code you do not want to run
 
 </div>
 
-{@a snapshot-the-no-observable-alternative}
+{@a snapshot}
 
 #### `snapshot`: the no-observable alternative
 
@@ -2528,7 +2528,7 @@ Add the `NavigationExtras` object to the `router.navigate()` method that navigat
 <code-example path="router/src/app/auth/auth.guard.4.ts" header="src/app/auth/auth.guard.ts (v3)"></code-example>
 
 You can also preserve query parameters and fragments across navigations without having to provide them again when navigating.
-In the `LoginComponent`, you'll add an *object* as the second argument in the `router.navigateUrl()` function and provide the `queryParamsHandling` and `preserveFragment` to pass along the current query parameters and fragment to the next route.
+In the `LoginComponent`, you'll add an *object* as the second argument in the `router.navigate()` function and provide the `queryParamsHandling` and `preserveFragment` to pass along the current query parameters and fragment to the next route.
 
 <code-example path="router/src/app/auth/login/login.component.ts" header="src/app/auth/login/login.component.ts (preserve)" region="preserve"></code-example>
 
@@ -2658,7 +2658,7 @@ The completed admin route looks like this:
 
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
-{@a preloading-background-loading-of-feature-areas}
+{@a preloading}
 
 ### Preloading: background loading of feature areas
 

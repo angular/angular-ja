@@ -198,6 +198,10 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 1. `product-alerts.component.html`を開き、プレースホルダの段落を、製品価格が$700以上の場合に表示される**Notify Me**ボタンに置き換えます。
 
   <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
+  
+1. `ProductAlertsComponent`を他のコンポーネント内でも使えるように、 `app.module.ts`内の`AppModule's　declarations`に追加する。
+
+  <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-product-alerts"></code-example>
 
 1. `ProductListComponent` の子として `ProductAlertsComponent` を表示するには、`product-list.component.html` にセレクター `<app-product-alerts>` を追加します。
   プロパティバインディングを使用して、現在の製品を入力としてコンポーネントに渡します。

@@ -52,7 +52,7 @@
           },
           "angular-community-meetup": {
             "desc": "Come learn technical skills and network at this monthly, multi-series, multi-event, multi-timezone online meetup.",
-            "url": "https://ngxp.show",
+            "url": "https://angularcommunity.net",
             "title": "Angular Community Meetup"
           }
         }
@@ -97,7 +97,7 @@
             "url": "https://github.com/ngRuAir/ngruair"
           },
           "ngxp": {
-            "desc": "Weekly technical-adjacent podcast by Brooke Avery & Erik Slack.on't just code in Angular, come enjoy the Angular Experience!",
+            "desc": "Weekly technical-adjacent podcast by Brooke Avery & Erik Slack. Don't just code in Angular, come enjoy the Angular Experience!",
             "logo": "",
             "title": "Angular Experience (NgXP)",
             "url": "https://ngxp.show"
@@ -615,6 +615,11 @@
             "desc": "Integrate a Headless CMS into your Angular App, create blog posts and pages",
             "url":"https://medium.com/orlyknop/how-to-integrate-buttercms-into-angular-2-app-a1baaa51402",
             "logo": ""
+          },
+          "angular-projects": {
+            "title": "Angular Projects - Second Edition",
+            "desc": "Build modern web apps by exploring Angular with 10 different projects and cutting-edge technologies",
+            "url": "https://www.packtpub.com/product/angular-projects-second-edition/9781800205260"
           }
         }
       },
@@ -733,6 +738,11 @@
             "logo": "",
             "title": "DotNetTricks",
             "url": "https://www.dotnettricks.com/courses/angular"
+          },
+          "architect-angular-nation": {
+            "desc": "Whether you're already an architect or you'd like to become one, come learn how to keep your apps clean and fast (especially at the enterprise level). Four weeks of training includes live office hours every week with an Angular GDE, diversity discounts, and scholarships available!",
+            "title": "Angular Architect Training",
+            "url": "https://www.angularnation.net/"
           }
         }
       },

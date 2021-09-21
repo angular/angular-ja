@@ -68,7 +68,7 @@ Angularはこれらのタグ間に`HeroListComponent`ビューのインスタン
 このテンプレートは `<h2>`や `<p>`のような典型的なHTML要素を使い、Angularテンプレート構文要素、`*ngFor`、`{{hero.name}}`、`(click)`、`[hero]`、`<app-hero-detail>`なども含みます。テンプレート構文要素は、プログラムロジックとデータを使用してHTMLをスクリーンにレンダリングする方法をAngularに伝えます。
 
 * `*ngFor`ディレクティブはAngularにリストの繰り返しを指示します。
-* `{{hero.name}}`、`(click)`、`[hero]` はユーザー入力に応答してDOMとの間でプログラムデータをバインドします。次の[データバインディング](#データバインディング)の詳細を参照してください。
+* `{{hero.name}}`、`(click)`、`[hero]` はユーザー入力に応答してDOMとの間でプログラムデータをバインドします。次の[データバインディング](#data-binding)の詳細を参照してください。
 * この例の `<app-hero-detail>` タグは新しいコンポーネント `HeroDetailComponent` を表す要素です。
 `HeroDetailComponent`（コードは表示されません）は `HeroListComponent` のhero-detailの子ビューを定義します。
 このようなカスタムコンポーネントがどのように同じレイアウトのネイティブHTMLとシームレスに混在しているかに注目してください。

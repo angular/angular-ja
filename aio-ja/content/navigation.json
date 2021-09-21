@@ -1162,6 +1162,17 @@
               "url": "guide/docs-style-guide",
               "title": "Documentation Style Guide",
               "tooltip": "Style guide for documentation authors"
+            },
+            {
+              "url": "guide/localizing-angular",
+              "title": "Angular doc localization guidelines",
+              "tooltip": "Learn about the guidelines for localizing Angular documentation."
+            },
+            {
+              "url": "guide/localized-documentation",
+              "title": "Localized documentation",
+              "tooltip": "A list of localized versions of the Angular documentation",
+              "hidden": true
             }
           ]
         }
@@ -1286,6 +1297,10 @@
         {
           "title": "한국어",
           "url": "https://angular.kr/"
+        },
+        { 
+          "title": "Complete language list",
+          "url": "guide/localized-documentation"
         }
       ]
     }

@@ -10,7 +10,7 @@ Angularは、Google内からも、より広範なオープンソースコミュ�
 
 ### テスト環境の自動ティアダウンによるテスト時間とデバッグの改善
 
-テスト時間を改善し、テスト間の分離を改善するために、<code>[TestBed](https://angular.io/api/core/testing/TestBed)</code> を変更して、各テスト実行後にテスト環境を自動的にクリーンアップしたり、分解したりするようにしたいと思います。
+テスト時間を改善し、テスト間の分離を改善するために、<code>[TestBed](api/core/testing/TestBed)</code> を変更して、各テスト実行後にテスト環境を自動的にクリーンアップしたり、分解したりするようにしたいと思います。
 
 ### Deprecate and remove IE11 support
 
@@ -32,7 +32,7 @@ MDC Webは、GoogleのMaterial Designチームが作成したライブラリで�
 
 We're evaluating components in Angular Material against accessibility standards such as WCAG and working to fix any issues that arise from this process.
 
-### レガシー[View Engine](https://angular.io/guide/ivy)の削除
+### レガシー[View Engine](guide/ivy)の削除
 
 すべての内部ツールのIvyへの移行が完了したら、レガシーView Engineを削除して、Angularの概念的オーバーヘッドを小さくし、パッケージサイズを小さくして、メンテナンスコストを削減し、コードベースの複雑さを減らします。
 
@@ -46,7 +46,7 @@ Develop and publish an in-depth guide on change detection. Develop content for p
 
 ### Ivyを利用したAngularライブラリ
 
-2020年の初め、私たちはIvyライブラリ配布のための[RFC](https://github.com/angular/angular/issues/38366)を共有しました。コミュニティからの貴重なフィードバックの後、私たちはプロジェクトのデザインを開発しました。現在、Ivyコンパイルを利用するためのライブラリパッケージフォーマットの更新、View Engineライブラリフォーマットの非推奨のブロック解除、[ngcc](https://angular.io/guide/glossary#ngcc)など、Ivyライブラリ配布の開発に投資しています。
+2020年の初め、私たちはIvyライブラリ配布のための[RFC](https://github.com/angular/angular/issues/38366)を共有しました。コミュニティからの貴重なフィードバックの後、私たちはプロジェクトのデザインを開発しました。現在、Ivyコンパイルを利用するためのライブラリパッケージフォーマットの更新、View Engineライブラリフォーマットの非推奨のブロック解除、[ngcc](guide/glossary#ngcc)など、Ivyライブラリ配布の開発に投資しています。
 
 ### 将来のRxJSの変更（v7以降）にスムーズに対応できるようにする
 

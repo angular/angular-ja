@@ -155,13 +155,13 @@ This feature has been deprecated. For more information, please refer to the [mig
 {@a wtf}
 ### Web Tracing Framework integration
 
-Angular previously has supported an integration with the [Web Tracing Framework (WTF)](https://google.github.io/tracing-framework/) for performance testing of Angular applications. This integration has not been maintained and defunct. As a result, the integration was deprecated in Angular version 8 and due to no evidence of any existing usage removed in version 9.
+Angular previously supported an integration with the [Web Tracing Framework (WTF)](https://google.github.io/tracing-framework/) for performance testing of Angular applications. This integration has not been maintained and is now defunct. As a result, the integration was deprecated in Angular version 8, and due to no evidence of any existing usage, removed in version 9.
 
 
 {@a deep-component-style-selector}
-### `/deep/`, `>>>` and `:ng-deep` component style selectors
+### `/deep/`, `>>>`, and `::ng-deep` component style selectors
 
-The shadow-dom-piercing descendant combinator is deprecated and support is being [removed from major browsers and tools](https://developers.google.com/web/updates/2017/10/remove-shadow-piercing). As such, in v4 we deprecated support in Angular for all 3 of `/deep/`, `>>>` and `::ng-deep`. Until removal, `::ng-deep` is preferred for broader compatibility with the tools.
+The shadow-dom-piercing descendant combinator is deprecated and support is being [removed from major browsers and tools](https://developers.google.com/web/updates/2017/10/remove-shadow-piercing). As such, in v4 we deprecated support in Angular for all three of `/deep/`, `>>>`, and `::ng-deep`. Until removal, `::ng-deep` is preferred for broader compatibility with the tools.
 
 For more information, see [/deep/, >>>, and ::ng-deep](guide/component-styles#deprecated-deep--and-ng-deep "Component Styles guide, Deprecated deep and ngdeep")
  in the Component Styles guide.
@@ -170,7 +170,7 @@ For more information, see [/deep/, >>>, and ::ng-deep](guide/component-styles#de
 {@a template-tag}
 ### &lt;template&gt; tag
 
-The `<template>` tag was deprecated in v4 to avoid colliding with the DOM's element of the same name (such as when using web components). Use `<ng-template>` instead. For more information, see the [Ahead-of-Time Compilation](guide/angular-compiler-options#enablelegacytemplate) guide.
+The `<template>` tag was deprecated in v4 to avoid colliding with the DOM's element of the same name (such as when using web components). Use `<ng-template>` instead. For more information, see the [Ahead-of-Time Compilation](guide/aot-compiler) guide.
 
 
 
@@ -191,7 +191,7 @@ Now deprecated:
 this.value = 'some value';
 ```
 
-This has been deprecated for several reasons. First, developers have found this pattern
+This support was deprecated for several reasons. First, developers found this pattern
 confusing. It seems like the actual `ngModel` directive is being used, but in fact it's
 an input/output property named `ngModel` on the reactive form directive that
 approximates some, but not all, of the directive's behavior.
@@ -207,7 +207,7 @@ the class removes the convenience of defining forms in the template.
 
 To update your code before support is removed, you'll want to decide whether to stick
 with reactive form directives (and get/set values using reactive forms patterns) or
-switch over to template-driven directives.
+switch to template-driven directives.
 
 After (choice 1 - use reactive forms):
 

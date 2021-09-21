@@ -193,6 +193,12 @@ AngularJS と Angular のコンポーネントを同じアプリケーション�
 それにより、移行期間中に2つのフレームワークが自然に共存することができるため、
 アップグレード作業を一度にする必要がなくなります。
 
+<div class="alert is-helpful">
+With the <a href="https://blog.angular.io/finding-a-path-forward-with-angularjs-7e186fdd4429">
+deprecation of AngularJS</a>, ngUpgrade is now in a feature complete state. We will continue
+publishing security and bug fixes until December 31st, 2022.
+</div>
+
 ### ngUpgrade はどのように機能するか {@a how-ngupgrade-works}
 
 ngUpgrade が提供する主なツールのひとつが `UpgradeModule` です。

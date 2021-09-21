@@ -112,3 +112,5 @@ Angularの探索を続けるには。
 
 * ショッピングカート機能を追加したり、カートデータを管理したり、配送価格の外部データを取得したりするには、[Managing Data](start/start-data "Try it: Managing Data")に進みます。
 * アプリケーションをFirebaseにデプロイしたり、ローカル開発に移行したりするには、[デプロイ](start/start-deployment "Try it: Deployment")をスキップしてください。
+
+@reviewed 2021-09-15

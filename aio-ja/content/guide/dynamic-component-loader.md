@@ -172,3 +172,5 @@ Angularに動的コンポーネントをどこに挿入するのかを指示す�
 </div>
 
 <live-example name="dynamic-component-loader"></live-example>を参照してください。
+
+@reviewed 2021-09-17

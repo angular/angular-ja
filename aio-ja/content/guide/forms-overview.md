@@ -69,7 +69,7 @@ The two approaches share underlying building blocks, but differ in how you creat
 
 * `FormArray`はフォームコントロールの配列に対して同じ値とステータスを監視します。
 
-* `ControlValueAccessor`はAngularの`FormControl`インスタンスとネイティブのDOM要素との間の橋渡しをします。
+* `ControlValueAccessor`はAngularの`FormControl`インスタンスと組み込みのDOM要素との間の橋渡しをします。
 
 {@a setup-the-form-model}
 

@@ -101,7 +101,7 @@ Angularのルーターはオプションのサービスであり、指定され�
 各アンカータグには、`routerLinkActive="..."`のように`RouterLinkActive`ディレクティブへの[プロパティバインディング](guide/property-binding)があります。
 
 等号`=`の右側のテンプレート式には、CSSクラスのスペース区切りの文字列が含まれています。ルーターはそれらをこのリンクがアクティブなときに追加します(リンクが非アクティブなときに削除します)。
-`RouterLinkActive`ディレクティブを`[routerLinkActive]="'active fluffy'"`のようにクラスの文字列に設定するか、そのような文字列を返すコンポーネントのプロパティにバインドします。
+`RouterLinkActive`ディレクティブを`routerLinkActive="active fluffy"`のようにクラスの文字列に設定するか、そのような文字列を返すコンポーネントのプロパティにバインドします。 (たとえば `[routerLinkActive]="someStringProperty"`)
 
 アクティブなルートのリンクはルートツリーの各レベルを通じてカスケードされるため、親子のルーターのリンクは同時にアクティブにできます。
 この動作をオーバーライドするには、`{ exact: true }`式で入力バインディングの`[routerLinkActiveOptions]`にバインドできます。`{ exact: true }`を使用すると、指定の`RouterLink`は、そのURLが現在のURLと完全に一致する場合にのみアクティブになります。

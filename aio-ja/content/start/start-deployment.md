@@ -92,3 +92,5 @@ Angularの基本的な概念については、[Angularコンポーネントの�
 UX/UI開発をサポートするには、[Angular Material](https://material.angular.io/ "Angular Material web site")を参照してください。
 
 また、Angularコミュニティには広範な[サードパーティのツールやライブラリのネットワーク](resources "「Angularリソースリスト」")があります。
+
+@reviewed 2021-09-15

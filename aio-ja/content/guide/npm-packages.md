@@ -58,7 +58,7 @@ CLIコマンドの `ng new` は新しいワークスペースを作成すると�
 ### Angularパッケージ
 
 次のAngularのパッケージは新しいAngularワークスペース用のデフォルトの `package.json` ファイルの依存関係として含まれています。
-Angularのパッケージの完全な一覧は、[API reference](https://angular.jp/api?type=package) を見てください。
+Angularのパッケージの完全な一覧は、[API reference](api?type=package) を見てください。
 
 
 パッケージ名                                                                            | 説明

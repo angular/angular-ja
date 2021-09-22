@@ -37,7 +37,7 @@
 {@a checking-version-angular}
 ## Angularの最新のバージョンを見つける
 
-直近のリリースされたAngularの安定バージョンが、[Angularドキュメンテーション](https://angular.io/docs "Angular documentation")の左側のナビゲーションの下部に表示されます。たとえば、`stable (v5.2.9)`。
+直近のリリースされたAngularの安定バージョンが、[Angularドキュメンテーション](docs "Angular documentation")の左側のナビゲーションの下部に表示されます。たとえば、`stable (v5.2.9)`。
 
 CLIコマンドの[`ng update`](cli/update)を使用してAngularの最新バージョンを見つけることもできます。デフォルトでは [`ng update`](cli/update)（追加の引数なしで）利用可能な更新が一覧表示されます。
 

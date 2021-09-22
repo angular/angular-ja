@@ -40,7 +40,7 @@
   "alan-agius4": {
     "name": "Alan Agius",
     "groups": ["Angular"],
-    "lead": "kyliau",
+    "lead": "dgp1130",
     "picture": "alan-agius4.jpg",
     "bio": "Angular CLI Member, Loves TypeScript, Build Tools, Food, Beer & Coffee :)"
   },
@@ -181,13 +181,6 @@
     "bio": "Co-founder and CTO of Thinktecture AG, as well as Google GDE and Microsoft MVP. Since two decades active as an engaged and passionate speaker on several software conferences and events all over the world. Some people call him 'Mr. Cross-Platform'.",
     "groups": ["GDE"]
   },
-  "cindygk": {
-    "name": "Cindy Greene-Kaplan",
-    "picture": "cindygreenekaplan.jpg",
-    "twitter": "cindykaygk",
-    "bio": "Cindy is a Program Manager on the Angular team at Google. She is passionate about improving team processes and overall execution. She enjoys dance fitness, movies and travel.",
-    "groups": ["Angular"]
-  },
   "cironunes": {
     "name": "Ciro Nunes",
     "picture": "cironunes.jpg",
@@ -198,7 +191,7 @@
   "clydin": {
     "name": "Charles Lyding",
     "groups": ["Angular"],
-    "lead": "kyliau",
+    "lead": "dgp1130",
     "picture": "clydin.jpg"
   },
   "coryrylan": {
@@ -262,8 +255,15 @@
     "twitter": "develwoutacause",
     "website": "https://github.com/dgp1130",
     "bio": "Doug is an overly-opinionated software developer with a passion for making awesome developer tools. He is motivated primarily by his selfish desire to make his own life easier, but loves to share his tools and workflows with others to make everyone's lives easier.",
-    "groups": ["Angular"],
-    "lead": "kyliau"
+    "groups": ["Angular"]
+  },
+  "dmezhenskyi": {
+    "name": "Dmytro Mezhenskyi",
+    "picture": "dmytro-mezhenskyi.jpg",
+    "bio": "Dmytro is a self-taught Frontend Developer, originally from Ukraine and currently living in Vienna, Austria. He is also a content creator and author of a YouTube channel \"Decoded Frontend\".",
+    "groups": ["GDE"],
+    "twitter": "DecodedFrontend",
+    "website": "https://youtube.com/DecodedFrontend"
   },
   "doguhan": {
     "name": "Doguhan Uluca",
@@ -325,7 +325,7 @@
     "website": "https://github.com/filipesilva",
     "bio": "Filipe is a passion-driven developer that always strives for the most elegant solution for each problem. He is currently an author for Angular.io, a core contributor for Angular-CLI and senior front end engineer at KonnectAgain. When not busy going through PRs, you can find him scouring reddit for new dinner recipes to cook or enjoying a craft beer in Dublin.",
     "groups": ["Angular"],
-    "lead": "kyliau"
+    "lead": "dgp1130"
   },
   "fmalcher": {
     "name": "Ferdinand Malcher",
@@ -354,7 +354,7 @@
   "gregmagolan": {
     "name": "Greg Magolan",
     "groups": ["Angular"],
-    "lead": "kyliau",
+    "lead": "dgp1130",
     "picture": "gregmagolan.jpg",
     "bio": "Building great software with Angular and Node.js."
   },
@@ -368,7 +368,7 @@
   "jbedard": {
     "name": "Jason Bedard",
     "groups": ["Collaborators"],
-    "mentor": "kyliau",
+    "mentor": "dgp1130",
     "picture": "jbedard.jpg"
   },
   "jecelynyeen": {
@@ -536,15 +536,6 @@
     "website": "https://strongbrew.io",
     "bio": "Kwinten is a GDE for Angular with a passion for reactive coding. He works as a software engineer for Stackblitz. He shares his passion for Angular and coding through blogposts and training sessions with the company he co-founded called Strongbrew.",
     "groups": ["GDE"]
-  },
-  "kyliau": {
-    "name": "Keen Yee Liau",
-    "twitter": "liauky",
-    "website": "https://github.com/kyliau",
-    "bio": "Keen works on language service and CLI. He also maintains Karma and Protractor.",
-    "groups": ["Angular"],
-    "lead": "igorminar",
-    "picture": "kyliau.jpg"
   },
   "lacolaco": {
     "name": "Suguru Inatomi",
@@ -905,6 +896,14 @@
     "twitter": "UriShaked",
     "website": "https://urish.org",
     "bio": "Uri Shaked is a Google Developer Expert for Web Technologies. He regularly writes about Web and IoT related technologies in his medium blog, and speaks about these topics in conferences and meetup around the world. Among his interests are reverse engineering, hardware hacking, building 3d-printed robots and games, playing music and Salsa dancing.",
+    "groups": ["GDE"]
+  },
+  "usergalileo": {
+    "name": "Michele Stieven",
+    "picture": "usergalileo.jpg",
+    "twitter": "MicheleStieven",
+    "website": "https://accademia.dev",
+    "bio": "Michele is an Angular GDE who’s always looking for technologies which allow people to create complex, dynamic and reactive applications. He helps teams of big and small companies with tools like Angular, RxJS, Redux and Web Components. He loves writing and making complex things easy, and he does so in his italian blog (https://accademia.dev) which also hosts his video courses. He’s taken part of many conferences, meetups and online events, and loves to help people in community groups. When he’s not working, he’s a musician.",
     "groups": ["GDE"]
   },
   "wardbell": {

@@ -381,7 +381,7 @@ Angularのテンプレートの根本的な論理構造を理解すると、
        ...content goes here...
      </#VIEW>
     </app-child>
-  <#VIEW>
+  </#VIEW>
 </app-root>
  ```
 

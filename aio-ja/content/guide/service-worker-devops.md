@@ -227,7 +227,7 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 ### Safety Worker {@a safety-worker}
 
 `@angular/service-worker`NPMパッケージには`safety-worker.js`という小さなスクリプトも含まれています。
-このスクリプトは読み込まれるとブラウザから自身を登録解除します。
+このスクリプトは読み込まれるとブラウザから自身を登録解除し、and remove the service worker caches.
 クライアントページにすでにインストールされている
 不要なService Workerを取り除く最後の手段として使用できます。
 
@@ -242,7 +242,7 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 
 このスクリプトは、
 あなたのサイトで過去に提供されていたService Workerだけでなく
-`@angular/service-worker`を無効にするためにも使用できます。
+`@angular/service-worker`を無効にする(and remove the corresponding caches) ためにも使用できます。
 
 ### アプリケーションの場所(URL)を変更する
 

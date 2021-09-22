@@ -196,7 +196,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 </code-example>
 
-`submit`イベントはネイティブDOMイベントを使って`form`タグから発行されます。`submit`タイプのボタンをクリックすることでイベントを発火します。**Enter** キーを押して入力完了したフォームを送信することもできます。
+`submit`イベントは組み込みのDOMイベントを使って`form`タグから発行されます。`submit`タイプのボタンをクリックすることでイベントを発火します。**Enter** キーを押して入力完了したフォームを送信することもできます。
 
 `button`要素を使って、フォームの下にボタンを追加してフォーム送信を発火します。
 

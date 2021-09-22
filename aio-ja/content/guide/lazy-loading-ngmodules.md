@@ -104,7 +104,7 @@ ng generate module customers --route customers --module app.module
 <div class="callout is-helpful">
 <header>文字列ベースの遅延ロード</header>
 
-Angularバージョン8では、`loadChildren`のルート指定のための文字列構文は、`import()`構文の推奨によって[非推奨に](https://angular.io/guide/deprecations#loadchildren-string-syntax)なりました。ただし、`tsconfig`ファイルに遅延ロードされるルートを含めることで、文字列ベースの遅延ロード(`loadChildren: './path/to/module#Module'`)の使用を選択できます。それらはコンパイルで遅延ロードされるファイルを含みます。
+Angularバージョン8では、`loadChildren`のルート指定のための文字列構文は、`import()`構文の推奨によって[非推奨に](guide/deprecations#loadchildren-string-syntax)なりました。ただし、`tsconfig`ファイルに遅延ロードされるルートを含めることで、文字列ベースの遅延ロード(`loadChildren: './path/to/module#Module'`)の使用を選択できます。それらはコンパイルで遅延ロードされるファイルを含みます。
 
 デフォルトでCLIは、`import()`構文で使用することを意図したより厳密なファイル構成のプロジェクトを生成します。
 

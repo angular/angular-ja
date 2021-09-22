@@ -7,7 +7,7 @@ index 08043a7599..e16e785915 100644
          // Make sure service worker is loaded with a TrustedScriptURL
          unwrapScriptUrlForSink(scriptUrl`/ngsw-worker.js`),
 -        {enabled: environment.production}),
-+        {enabled: false}),
++        {enabled: false && environment.production}),
    ],
    declarations: [
      AppComponent,

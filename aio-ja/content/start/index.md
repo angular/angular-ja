@@ -199,7 +199,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
   <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
-1. To make `ProductAlertsComponent` available to other components in the application, add it to `AppModule`'s declarations in `app.module.ts`.
+1. `ProductAlertsComponent`を他のコンポーネント内でも使えるように、 `app.module.ts`内の`AppModule`の　`declarations`に追加します。
 
   <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-product-alerts"></code-example>
   

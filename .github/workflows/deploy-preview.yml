@@ -5,12 +5,12 @@ name: Deploy preview version
 
 on: 
   pull_request_target:
-    types: [labeled, synchronize]
+    types: [labeled]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'safe to deploy')
+    if: contains(github.event.pull_request.labels.*.name, 'deploy preview version')
     strategy:
       matrix:
         node-version: [14.x]
@@ -37,3 +37,14 @@ jobs:
         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
         expires: 30d
         projectId: angular-ja
+    - name: Remove Label
+      uses: actions/github-script@v5
+      with:
+        script: |
+          github.rest.issues.removeLabel({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            label: 'deploy preview version'
+          })
+      

@@ -527,8 +527,8 @@
         },
         {
           "url": "guide/prerendering",
-          "title": "プリレンダリング",
-          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをプリレンダリングしましょう。",
+          "title": "事前レンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
           "translated": true
         }
       ]

@@ -14,7 +14,7 @@ npm run prerender
 
 ### 事前レンダリングのビルドオプション
 
-アプリケーションに事前レンダリングを追加すると、以下のビルドオプションが利用可能になります。
+アプリケーションに事前レンダリングを追加すると、次のビルドオプションが利用可能になります。
 
 * `browserTarget`: ビルドするターゲットを指定します。
 * `serverTarget`: アプリケーションの事前レンダリングに使用するサーバーターゲットを指定します。
@@ -54,7 +54,7 @@ ng run &lt;app-name&gt;:prerender --routes /product/1 /product/2
   /products/555
 </code-example>
 
-`.txt`ファイルの準備ができたら、以下のコマンドを実行して、静的ファイルを動的な値で事前レンダリングします。
+`.txt`ファイルの準備ができたら、次のコマンドを実行して、静的ファイルを動的な値で事前レンダリングします。
 
 <code-example language="sh">
 ng run &lt;app-name&gt;:prerender --routes-file routes.txt

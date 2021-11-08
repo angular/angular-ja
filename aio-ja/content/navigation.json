@@ -527,8 +527,9 @@
         },
         {
           "url": "guide/prerendering",
-          "title": "Prerendering",
-          "tooltip": "Prerender HTML server-side with Angular Universal."
+          "title": "事前レンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
+          "translated": true
         }
       ]
     },
@@ -921,7 +922,6 @@
                   "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
                   "translated": true
                 },
-
                 {
                   "url": "guide/typescript-configuration",
                   "title": "TypeScript設定",
@@ -1069,7 +1069,6 @@
                 }
               ]
             }
-
           ]
         },
         {
@@ -1106,7 +1105,8 @@
             }
           ]
         },
-        { "title": "サンプルアプリケーション",
+        {
+          "title": "サンプルアプリケーション",
           "tooltip": "List of all of the example applications in the Angular documentation.",
           "url": "guide/example-apps-list"
         },
@@ -1179,7 +1179,6 @@
       ]
     }
   ],
-
   "Footer": [
     {
       "title": "資料集",
@@ -1298,7 +1297,7 @@
           "title": "한국어",
           "url": "https://angular.kr/"
         },
-        { 
+        {
           "title": "Complete language list",
           "url": "guide/localized-documentation"
         }

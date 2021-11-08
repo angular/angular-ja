@@ -1,68 +1,68 @@
-# Prerendering static pages
+# 静的ページの事前レンダリング
 
-Angular Universal lets you prerender the pages of your application. Prerendering is the process where a dynamic page is processed at build time generating static HTML.
+Angular Universalを使用すると、アプリケーションのページを事前にレンダリングできます。事前レンダリングとは、動的なページをビルド時に処理して静的なHTMLを生成するプロセスです。
 
-## How to prerender a page
+## ページを事前レンダリングする方法
 
-To prerender a static page make sure to add SSR capabilities to your application.
-For more information see the [universal guide](guide/universal).
-Once SSR is added, run the following command:
+静的ページを事前レンダリングするには、アプリケーションにSSR機能を追加する必要があります。
+詳細については、[Universalガイド](guide/universal)を参照してください。 
+SSR機能を追加したら、次のコマンドを実行します。
 
 <code-example language="sh">
 npm run prerender
 </code-example>
 
-### Build options for prerendering
+### 事前レンダリングのビルドオプション
 
-When you add prerendering to your application, the following build options are available:
+アプリケーションに事前レンダリングを追加すると、次のビルドオプションが利用可能になります。
 
-* `browserTarget`: Specify the target to build.
-* `serverTarget`: Specify the Server target to use for prerendering the application.
-* `routes`: Define an array of additional routes to prerender.
-* `guessRoutes`: Whether builder should extract routes and guess which paths to render. Defaults to `true`.
-* `routesFile`: Specify a file that contains a list of all routes to prerender, separated by newlines. This option is useful if you have a large number of routes.
-* `numProcesses`: Specify the number of CPUs to be used while running the prerendering command.
+* `browserTarget`: ビルドするターゲットを指定します。
+* `serverTarget`: アプリケーションの事前レンダリングに使用するサーバーターゲットを指定します。
+* `routes`: 事前レンダリングする追加ルートの配列を定義します。
+* `guessRoutes`: ビルダーがルートを抽出し、レンダリングするパスを推測する必要があるかどうか。デフォルトは、`true`です。
+* `routesFile`: 改行で区切られた、事前レンダリングするすべてのルートのリストを含むファイルを指定します。このオプションは、ルートが多数ある場合に役立ちます。
+* `numProcesses`: 事前レンダリングコマンドの実行中に使用するCPUの数を指定します。
 
-### Prerendering dynamic routes
+### 動的ルートの事前レンダリング
 
-You can prerender dynamic routes. An example of a dynamic route is `product/:id`, where `id` is dynamically provided.
+動的ルートを事前レンダリングできます。動的ルートの例としては、`product/:id`です。ここでの`id`は動的に提供されます。
 
-To prerender dynamic routes, choose one from the following options:
- * Provide additional routes in the command line
- * Provide routes using a file
- * Prerender specific routes 
+動的ルートを事前レンダリングするには、次のオプションから1つを選択します。
+ * コマンドラインで追加のルートを指定する
+ * ファイルを使用してルートを指定する
+ * 特定のルートを事前レンダリングする
 
-#### Provide additional routes in the command line
+#### コマンドラインで追加のルートを指定する
 
-While running the prerender command, you can provide additional routes. For example:
+事前レンダリングコマンドの実行中に、追加のルートを指定できます。これがその例です。
 
 <code-example language="sh">
 ng run &lt;app-name&gt;:prerender --routes /product/1 /product/2
 </code-example>
 
 
-#### Providing additonal routes using a file
+#### ファイルを使用して追加ルートを指定する
 
-You can provide routes using a file to generate static pages. This method is useful if you have a large number of routes to generate, such as product details for an e-commerce application, which might come from an external source (Database or CMS).
+ファイルを使用してルートを指定し、静的ページを生成できます。この方法は、外部ソース（データベースまたはCMS）から取得される可能性のある、eコマースアプリケーションの製品詳細など、生成するルートが多数ある場合に役立ちます。
 
-To provide routes using a file, use the `--routes-file` option with the name of a `.txt` file containing the routes.
+ファイルを使用してルートを指定するには、`--routes-file`オプションを使用し、ルートを含む`.txt`ファイルの名前を指定します。
 
-For example, you could generate this file by using a script to extract IDs from a database and save them to a `routes.txt` file:
+たとえば、スクリプトを使用してデータベースからIDを抽出し、それらを`routes.txt`ファイルに保存することで、このファイルを生成できます。
 
 <code-example language="none" header="routes.txt">
   /products/1
   /products/555
 </code-example>
 
-When your `.txt` file is ready, run the following command to prerender the static files with dynamic values:
+`.txt`ファイルの準備ができたら、次のコマンドを実行して、静的ファイルを動的な値で事前レンダリングします。
 
 <code-example language="sh">
 ng run &lt;app-name&gt;:prerender --routes-file routes.txt
 </code-example>
 
-#### Prerendering specific routes
+#### 特定のルートを事前レンダリングする
 
-You can also pass specific routes to the prerender command. If you choose this option, make sure to disable the `guessRoutes` option.
+コマンドに特定のルートを渡すこともできます。このオプションを選択する場合は、必ず`guessRoutes`オプションを無効にしてください。
 
 <code-example language="sh">
 ng run &lt;app-name&gt;:prerender --no-guess-routes --routes /product/1 /product/1 

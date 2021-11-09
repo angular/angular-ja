@@ -1517,7 +1517,7 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
 それを新しい `PhoneDetailsComponent` に注入しようとしています。
 
 残念なことに、AngularJS の 依存は自動的に Angular のコンポーネントで利用することはできません。
-`$routeParams` を Angular で注入できるようにするために、このサービスを [ファクトリプロバイダ][AioGuideUpgradeMakingAngularjsDependenciesInjectableToAngular] を通して、アップグレードしなければなりません。
+`$routeParams` を Angular で注入できるようにするために、このサービスを [ファクトリプロバイダー][AioGuideUpgradeMakingAngularjsDependenciesInjectableToAngular] を通して、アップグレードしなければなりません。
 `ajs-upgraded-providers.ts` という新しいファイルでこれを行い、`app.module.ts` でインポートしましょう。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/ajs-upgraded-providers.ts" header="app/ajs-upgraded-providers.ts"></code-example>
@@ -1612,7 +1612,7 @@ AngularJS のアプリケーションのコンポーネントを Angular の対�
 
 #### Angular のルーターを追加
 
-Angular には [全く新しいルーター][AioGuideRouter] があります。
+Angular には [まったく新しいルーター][AioGuideRouter] があります。
 
 すべてのルーターと同じように、ルーティングされたビューを表示するために UI に場所が必要です。
 Angular ではアプリケーションのコンポーネントツリーの先頭にある、

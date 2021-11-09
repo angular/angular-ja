@@ -43,7 +43,7 @@ The check might fail, which will cause a rejection of the `Promise`.
 <div class="alert is-important">
 
 In order to avoid negatively affecting the initial rendering of the page, `ServiceWorkerModule` waits for up to 30 seconds by default for the app to stabilize, before registering the Service Worker script.
-Constantly polling for updates, for example, with [setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) or RxJS' [interval()](https://rxjs.dev/api/index/function/interval), prevents the application from stabilizing and the ServiceWorker script is not registered with the browser until the 30 seconds upper limit is reached.
+Constantly polling for updates, for example, with [setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) or RxJS' [interval()](https://rxjs.dev/api/index/function/interval), prevents the application from stabilizing and the Service Worker script is not registered with the browser until the 30 seconds upper limit is reached.
 
 Note that this is true for any kind of polling done by your application.
 Check the {@link ApplicationRef#isStable isStable} documentation for more information.

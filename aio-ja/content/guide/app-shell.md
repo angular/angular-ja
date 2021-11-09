@@ -89,6 +89,6 @@ ng run my-app:app-shell:development
 ng run my-app:app-shell:production
 </code-example>
 
-ビルド出力を確認するには、`dist/my-app/browser/index.html` を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。
+ビルド出力を確認するには、 <code class="no-auto-link">dist/my-app/browser/index.html</code> を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。
 
 

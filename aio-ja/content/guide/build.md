@@ -319,36 +319,6 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 
 特定のブラウザとバージョンをターゲットにする方法の例については[browserslistのリポジトリ](https://github.com/browserslist/browserslist)を参照してください。
 
-### Lighthouse との下位互換性 {@a backward-compatibility-with-lighthouse}
-
-もしプログレッシブウェブアプリケーションを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次の`browserslist`エントリを`package.json`に追加してください:
-
-```
-"browserslist": [
-  "last 2 versions",
-  "not ie <= 10",
-  "not ie_mob <= 10"
-]
-```
-
-### CSS グリッドとの下位互換性 {@a backward-compatibility-with-css-grid}
-
-これまでデフォルトでオンになっていた Autoprefixer の CSS グリッドレイアウトサポートが、Angular 8 以降ではデフォルトでオフになっています。
-
-Internet Explorer 10/11 で CSS グリッドを使うには、`autoplace` オプションを使って明示的に有効にする必要があります。
-これを行うには、グローバルスタイルファイルの先頭 (または特定の CSS セレクタースコープ内) に以下を追加します。
-
-```
-/* autoprefixer grid: autoplace */
-```
-または
-```
-/* autoprefixer grid: no-autoplace */
-```
-
-詳しくは、[Autoprefixer のドキュメント](https://autoprefixer.github.io/)を参照してください。
-
-
 {@a proxy}
 
 ## バックエンドサーバーへのプロキシ {@a proxying-to-a-backend-server}

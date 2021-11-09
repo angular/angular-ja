@@ -148,7 +148,6 @@ Angularは、データフローの方向に応じて3つのカテゴリーのデ
       <code-example>
         {{expression}}
         [target]="expression"
-        bind-target="expression"
       </code-example>
 
     </td>
@@ -163,7 +162,6 @@ Angularは、データフローの方向に応じて3つのカテゴリーのデ
       <td>
         <code-example>
           (target)="statement"
-          on-target="statement"
         </code-example>
       </td>
 
@@ -178,7 +176,6 @@ Angularは、データフローの方向に応じて3つのカテゴリーのデ
       <td>
         <code-example>
           [(target)]="expression"
-          bindon-target="expression"
         </code-example>
       </td>
       <td>

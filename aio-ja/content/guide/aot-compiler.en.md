@@ -551,18 +551,6 @@ In the template type-checking phase, the Angular template compiler uses the Type
 Enable this phase explicitly by adding the compiler option `"fullTemplateTypeCheck"` in the `"angularCompilerOptions"` of the project's TypeScript configuration file
 (see [Angular Compiler Options](guide/angular-compiler-options)).
 
-<div class="alert is-helpful">
-
-In [Angular Ivy](guide/ivy), the template type checker has been completely rewritten to be more capable as well as stricter, meaning it can catch a variety of new errors that the previous type checker would not detect.
-
-As a result, templates that previously compiled under View Engine can fail type checking under Ivy. This can happen because Ivy's stricter checking catches genuine errors, or because application code is not typed correctly, or because the application uses libraries in which typings are inaccurate or not specific enough.
-
-This stricter type checking is not enabled by default in version 9, but can be enabled by setting the `strictTemplates` configuration option.
-
-For more information about type-checking options, and about improvements to template type checking in version 9 and above, see [Template type checking](guide/template-typecheck).
-
-</div>
-
 Template validation produces error messages when a type error is detected in a template binding
 expression, similar to how type errors are reported by the TypeScript compiler against code in a `.ts`
 file.
@@ -609,7 +597,7 @@ For example, to avoid `Object is possibly 'undefined'` error in the template abo
 ```typescript
   @Component({
     selector: 'my-component',
-    template: '<span *ngIf="person"> {{person.addresss.street}} </span>'
+    template: '<span *ngIf="person"> {{person.address.street}} </span>'
   })
   class MyComponent {
     person?: Person;
@@ -618,7 +606,7 @@ For example, to avoid `Object is possibly 'undefined'` error in the template abo
 
 Using `*ngIf` allows the TypeScript compiler to infer that the `person` used in the binding expression will never be `undefined`.
 
-For more information about input type narrowing, see [Input setter coercion](guide/template-typecheck#input-setter-coercion) and [Improving template type checking for custom directives](guide/structural-directives#directive-type-checks).
+For more information about input type narrowing, see [Improving template type checking for custom directives](guide/structural-directives#directive-type-checks).
 
 ### Non-null type assertion operator
 

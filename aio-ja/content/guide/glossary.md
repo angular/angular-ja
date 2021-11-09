@@ -34,6 +34,14 @@ AngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換�
 
 [Angular Elements概要](guide/elements)で詳しく学びましょう。
 
+{@a apf}
+
+## Angularパッケージ形式 (APF)
+
+すべてのファーストパーティのAngularパッケージと、ほとんどのサードパーティのAngularライブラリで使用される、npmパッケージのレイアウトに関するAngular固有の仕様です。
+
+詳しくは[Angular Package Format 仕様](guide/angular-package-format)をご覧ください。
+
 {@a annotation}
 
 ## アノテーション
@@ -311,15 +319,6 @@ Angularでは、依存性は通常サービスですが、文字列や関数な�
 
 [依存性の注入](#di)システムで使用するための、依存性の[プロバイダー](#provider)に関連付けられた検索トークン。
 
-{@a differential-loading}
-
-## differential loading
-
-1つのアプリケーション用に2つのバンドルを作成するビルド手法。1つ目の、小さなバンドルは最新のブラウザ用です。2つ目の、より大きなバンドルを使用すると、最新のブラウザAPIすべてはサポートしていない古いブラウザ(IE11など)でアプリケーションを正しく実行できます。
-
-詳しくは[デプロイメント](guide/deployment#differential-loading)のガイドを参照してください。
-
-
 {@a directive}
 {@a directives}
 
@@ -504,10 +503,9 @@ Read more in the [Interpolation](guide/interpolation) guide.
 
 ## Ivy
 
-IvyはAngularの[次世代のコンパイルとパイプラインのレンダリング](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7)についてのコードネームです。
-Angularリリースバージョン9では、[ビューエンジン](#ve)として知られる以前のコンパイラとランタイムの代わりに、新しいコンパイラとランタイム命令がデフォルトで使用されます。
-
-[Angular Ivy](guide/ivy)を参照してください。
+Ivy is the historical code name for Angular's current
+[compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7).
+It is now the only supported engine, so everything uses Ivy.
 
 
 {@a J}
@@ -1070,7 +1068,9 @@ Angularは1つ以上の[ディレクティブ](#directive)の制御下でビュ�
 
 ## ビューエンジン {@a view-engine}
 
-Angularのバージョン9より前に使用されていたコンパイルとレンダリングのパイプライン。[Ivy](#ivy)と比較しましょう。
+A previous compilation and rendering pipeline used by Angular. It has since been replaced by
+[Ivy](#ivy) and is no longer in use. View Engine was deprecated in version 9 and removed in version
+13.
 
 
 {@a view-tree}

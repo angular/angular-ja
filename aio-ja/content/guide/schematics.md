@@ -62,7 +62,7 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 たとえば、`@ng-bootstrap/schematics` はアプリケーションに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare から Clarity](https://vmware.github.io/clarity/documentation/v1.0/get-started) をインストールして設定します。
 
 また、追加 Schematic は設定の変更のためにプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
-たとえば、`@angular/pwa` Schematic は、マニフェストとサービスワーカーを追加することでアプリケーションを PWA に変換し、`@angular/elements` Schematic は、Angular Elements の `document-register-element.js` ポリフィルと依存関係を追加します。
+たとえば、`@angular/pwa` Schematic は、マニフェストとサービスワーカーを追加することでアプリケーションを PWA に変換します。
 
 ### 生成 Schematics
 

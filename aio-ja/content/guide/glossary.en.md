@@ -34,6 +34,14 @@ An Angular [component](#component) packaged as a [custom element](#custom-elemen
 
 Learn more in [Angular Elements Overview](guide/elements).
 
+{@a apf}
+
+## Angular package format (APF)
+
+An Angular specific specification for layout of npm packages that is used by all first-party Angular packages, and most third-party Angular libraries.
+
+Learn more in the [Angular Package Format specification](guide/angular-package-format).
+
 {@a annotation}
 
 ## annotation
@@ -311,15 +319,6 @@ Learn more in [Dependency Injection in Angular](guide/dependency-injection).
 
 A lookup token associated with a dependency [provider](#provider), for use with the [dependency injection](#di) system.
 
-{@a differential-loading}
-
-## differential loading
-
-A build technique that creates two bundles for an application. One smaller bundle is for modern browsers. A second, larger bundle allows the application to run correctly in older browsers (such as IE11) that do not support all modern browser APIs.
-
-For more information, see the [Deployment](guide/deployment#differential-loading) guide.
-
-
 {@a directive}
 {@a directives}
 
@@ -447,7 +446,7 @@ To learn more, see [Form Validation](guide/form-validation).
 
 ## immutability
 
-The ability to alter the state of a value after its creation. [Reactive forms](#reactive-forms) perform immutable changes in that
+The inability to alter the state of a value after its creation. [Reactive forms](#reactive-forms) perform immutable changes in that
 each change to the data model produces a new data model rather than modifying the existing one. [Template-driven forms](#template-driven-forms) perform mutable changes with `NgModel` and [two-way data binding](#data-binding) to modify the existing data model in place.
 
 {@a injectable}
@@ -504,10 +503,9 @@ Read more in the [Interpolation](guide/interpolation) guide.
 
 ## Ivy
 
-Ivy is the code name for Angular's [next-generation compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7).
-With the version 9 release of Angular, the new compiler and runtime instructions are used by default instead of the older compiler and runtime, known as [View Engine](#ve).
-
-See [Angular Ivy](guide/ivy).
+Ivy is the historical code name for Angular's current
+[compilation and rendering pipeline](https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7).
+It is now the only supported engine, so everything uses Ivy.
 
 
 {@a J}
@@ -1070,7 +1068,9 @@ View hierarchies can be loaded and unloaded dynamically as the user navigates th
 
 ## View Engine
 
-The compilation and rendering pipeline used by Angular before version 9. Compare [Ivy](#ivy).
+A previous compilation and rendering pipeline used by Angular. It has since been replaced by
+[Ivy](#ivy) and is no longer in use. View Engine was deprecated in version 9 and removed in version
+13.
 
 
 {@a view-tree}

@@ -12,20 +12,20 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
       <p>Angularプラットフォームの概要を知ることができます。</p>
       <p class="card-footer">プラットフォームの概要</p>
   </a>
-  <a href="guide/setup-local" class="docs-card" title="Angular Local Environment Setup">
-      <section>はじめよう</section>
-      <p>Angular CLIを使用して、開発用のローカル環境をセットアップします。</p>
-      <p class="card-footer">ローカルセットアップ</p>
+  <a href="start" class="docs-card" title="Getting started">
+    <section>はじめよう</section>
+    <p>小さな既製のAngularアプリで実験し、作業することができます。セットアップは不要です</p>
+    <p class="card-footer">今すぐ試してみよう</p>
   </a>
   <a href="guide/architecture" class="docs-card" title="Angular Concepts">
       <section>学習と探検</section>
       <p>Angularアプリの基本的な設計概念とアーキテクチャについて学びましょう。</p>
       <p class="card-footer">Angularの概念の紹介</p>
   </a>
-  <a href="start" class="docs-card" title="Angular Getting Started">
-      <section>見学してみよう</section>
-      <p>セットアップなしで、既成の小さなAngularアプリを調べ、動かしてみましょう。</p>
-      <p class="card-footer">いますぐ試す</p> 
+  <a href="guide/setup-local" class="docs-card" title="Angular Local Environment Setup">
+    <section>開発環境のセットアップ</section>
+    <p>Angular CLIを使った開発のローカル環境を整えましょう。</p>
+    <p class="card-footer">ローカルセットアップ</p>
   </a>
   <a href="tutorial" class="docs-card" title="Work through a full tutorial">
       <section>Hello World</section>

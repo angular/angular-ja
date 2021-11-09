@@ -210,7 +210,7 @@ Chromeなどのブラウザは、Service Workerとやり取りするための開
 
 * Cache Storageビューアを見ると、キャッシュは頻繁に古くなっています。Cache Storageタイトルを右クリックし、キャッシュをリフレッシュしてください。
 
-Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
+* Service WorkerペインでService Workerを停止して開始すると、アップデートのチェックがトリガーされます。
 
 ## Service Workerの安全性
 
@@ -258,7 +258,7 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 このURLはすでに`www.example.com`という新しい場所(URL)にリダイレクトされており
 `The script resource is behind a redirect, which is disallowed`というエラーを発生させます。
 
-この問題を解決するためには、上記のような方法で古いService Workerを解除する必要があります。
+この問題を解決するには、上記のいずれかの方法で古いワーカーを無効にする必要があります。
 ([フェールセーフ](#fail-safe)または[Safety Worker](#safety-worker))
 
 

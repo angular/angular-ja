@@ -551,18 +551,6 @@ Angularコンパイラのもっとも役立つ特徴の1つは、テンプレー
 プロジェクトの `tsconfig.json` の `"angularCompilerOptions"` にコンパイラオプション `"fullTemplateTypeCheck"`を追加して、
 このフェーズを明示的に有効にします ([Angular コンパイラオプション](guide/angular-compiler-options)を参照)。
 
-<div class="alert is-helpful">
-
-[AngularのIvy](guide/ivy)においては、テンプレート型チェッカーはより厳格かつ有能に完全に書き換えられます。つまり、以前の型チェッカーが検出しないさまざまな新しいエラーを捕捉できることを意味します。
-
-結果として、以前にビューエンジンのもとでコンパイルされたテンプレートは、Ivyでは型チェックに失敗する可能性があります。これが起こり得るのは、Ivyのより厳格なチェックが真のエラーを捕捉するため、またはアプリケーションのコードが正しく型を付けられていないため、またはアプリケーションが誤りのあるもしくは十分に明確でない型付けをしているライブラリを使用しているためです。
-
-このより厳格な型チェックはバージョン9においてデフォルトで有効ではありませんが、`strictTemplates`設定オプションを設定することで有効にできます。
-
-For more information about type-checking options, and about improvements to template type checking in version 9 and above, see [Template type checking](guide/template-typecheck).
-
-</div>
-
 テンプレート検証では、
 `.ts` ファイル内のコードに対して TypeScript コンパイラによって型エラーが報告されるのと同様に、
 テンプレートバインディング式で型エラーが検出されるとエラーメッセージが表示されます。
@@ -609,7 +597,7 @@ my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on t
 ```typescript
 @Component({
   selector: 'my-component',
-  template: '<span *ngIf="person"> {{person.addresss.street}} </span>'
+  template: '<span *ngIf="person"> {{person.address.street}} </span>'
 })
 class MyComponent {
   person?: Person;
@@ -618,7 +606,7 @@ class MyComponent {
 
 `*ngIf` を使用すると、TypeScript コンパイラは、バインディング式で使用されている `person` が `undefined` になることはないと推測できます。
 
-For more information about input type narrowing, see [Input setter coercion](guide/template-typecheck#input-setter-coercion) and [Improving template type checking for custom directives](guide/structural-directives#directive-type-checks).
+For more information about input type narrowing, see [Improving template type checking for custom directives](guide/structural-directives#directive-type-checks).
 
 ### null 以外の型アサーション演算子
 

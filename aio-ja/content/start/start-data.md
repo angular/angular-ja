@@ -105,7 +105,12 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
     また、StackBlitzはデフォルトで `ngOnInit()`をコンポーネント内に生成します。このチュートリアルでは `CartComponent`の`ngOnInit()`は無視できます。
 
-1. `app.module.ts` を開き、コンポーネント `CartComponent` のルートを `path` の `cart` に追加します。
+1. 新しく作成した`CartComponent`が、`app.module.ts`のモジュールの`declarations`に追加されていることを確認します。
+
+    <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-cart">
+    </code-example>
+
+1. 引き続き `app.module.ts` に、コンポーネント `CartComponent` のルートを、`path` を `cart` として追加します。
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="cart-route">
     </code-example>

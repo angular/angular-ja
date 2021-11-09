@@ -5,15 +5,16 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 ## 全体的なJSONの構造
 
-`angular.json` のトップ階層では、いくつかのプロパティからワークスペースを設定し、`projects` セクションにはプロジェクトごとのオプションを設定します。 ワークスペースレベルで設定されたCLIのデフォルトは、プロジェクトレベルで設定されたデフォルトによって上書きされ、プロジェクトレベルで設定されたデフォルトはコマンドラインで上書きされます。
+At the top-level of `angular.json`, a few properties configure the workspace and a `projects` section contains the remaining per-project configuration options. You can override CLI defaults set at the workspace level through defaults set at the project level. You can also override defaults set at the project level using the command line.
 
 ファイルの最上位にある次のプロパティは、ワークスペースを設定します。
 
-* `version`: 設定ファイルのバージョン
-* `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
-* `defaultProject`: 引数として与えられていない場合にコマンドで使われる、デフォルトのプロジェクト名。新しいワークスペースに新しいアプリケーションを `ng new` で作成したとき、ここの値が変更されるまで、そのアプリケーションはワークスペースのデフォルトプロジェクトになります
-* `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。
-* `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリケーション）のサブセクションと、プロジェクトごとの設定オプションが含まれます
+*   `version`: 設定ファイルのバージョン
+*   `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
+*   `defaultProject`: 引数として与えられていない場合にコマンドで使われる、デフォルトのプロジェクト名。新しいワークスペースに新しいアプリケーションを `ng new` で作成したとき、ここの値が変更されるまで、そのアプリケーションはワークスペースのデフォルトプロジェクトになります
+*   `cli` : A set of options that customize the [Angular CLI](cli). See the [CLI configuration options](#cli-configuration-options) section.
+*   `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。
+*   `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリケーション）のサブセクションと、プロジェクトごとの設定オプションが含まれます
 
 `ng new app_name` で作成した最初のアプリケーションは "projects" の配下にあります。
 
@@ -32,13 +33,50 @@ Angular [ワークスペース](guide/glossary#workspace) のルート階層に�
 
 <div class="alert is-helpful">
 
-  設定ファイルの `projects` セクションは、ワークスペースの構成ファイルとは正確には対応していないことに注意してください。
-  * `ng new` によって作成された最初のアプリケーションは、ワークスペースのファイル構造のトップレベルにあります。
-  * 追加されたアプリケーション、そしてライブラリはワークスペース内の `projects` フォルダに入ります。
+  **NOTE**: 設定ファイルの `projects` セクションは、ワークスペースの構成ファイルとは正確には対応していないことに注意してください。
+
+  *   `ng new` によって作成された最初のアプリケーションは、ワークスペースのファイル構造のトップレベルにあります。
+  *   追加されたアプリケーション、そしてライブラリはワークスペース内の `projects` フォルダに入ります。
 
   さらに詳しい情報は、[ワークスペースとプロジェクトのファイル構造](guide/file-structure) をご覧ください。
 
 </div>
+
+{@a cli-configuration-options}
+
+## CLI configuration options
+
+The following configuration properties are a set of options that customize the Angular CLI.
+
+| Property            | Description                                                                                      | Value Type                                               |
+| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------------------------- |
+| `analytics`         | Share anonymous [usage data](cli/usage-analytics-gathering) with the Angular Team.               | `boolean` \| `ci`                                        |
+| `analyticsSharing`  | A set of analytics sharing options.                                                              | [Analytics sharing options](#analytics-sharing-options)  |
+| `cache`             | Control [persistent disk cache](cli/cache) used by [Angular CLI Builders](guide/cli-builder).    | [Cache options](#cache-options)                          |
+| `defaultCollection` | The default schematics collection to use.                                                        | `string`                                                 |
+| `packageManager`    | The preferred package manager tool to use.                                                        | `npm` \| `cnpm` \| `pnpm` \| `yarn`                      |
+| `warnings`          | Control CLI specific console warnings.                                                           | [Warnings options](#warnings-options)                    |
+
+### Analytics sharing options
+
+| Property   | Description                                                  | Value Type |
+| :--------- | :----------------------------------------------------------- | :--------- |
+| `tracking` | Analytics sharing info tracking ID.                          | `string`   |
+| `uuid`     | Analytics sharing info UUID (Universally Unique Identifier). | `string`   |
+
+### Cache options
+
+| Property      | Description                                           | Value Type               | Default Value    |
+| :------------ | :---------------------------------------------------- | :----------------------- | :--------------- |
+| `enabled`     | Configure whether disk caching is enabled.            | `boolean`                | `true`           |
+| `environment` | Configure in which environment disk cache is enabled. | `local` \| `ci` \| `all` | `local`          |
+| `path`        | The directory used to stored cache results.           | `string`                 | `.angular/cache` |
+
+### Warnings options
+
+| Property          | Description                                                                     | Value Type | Default Value |
+| :---------------- | :------------------------------------------------------------------------------ | :--------- | :------------ |
+| `versionMismatch` | Show a warning when the global Angular CLI version is newer than the local one. | `boolean`  | `true`        |
 
 ## プロジェクトの設定オプション
 
@@ -95,16 +133,15 @@ Architect は、[ターゲット](guide/glossary#target)設定にしたがって
 ### デフォルトのArchitectビルダとターゲット {@a default-architect-builders-and-targets}
 
 Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使用するデフォルトのビルダを定義します。
-これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/master/packages/angular/cli/lib/config/schema.json)パッケージに収集されています。
+これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/builders.json) パッケージに収集されています。
 スキーマは、次のビルダについてオプションを構成します。
 
-* app-shell
-* browser
-* dev-server
-* extract-i18n
-* karma
-* server
-* tslint
+* [app-shell](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
+* [browser](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
+* [dev-server](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
+* [extract-i18n](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
+* [karma](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
+* [server](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/server/schema.json)
 
 ### ビルダのターゲットの設定
 
@@ -118,38 +155,31 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 <code-example language="json">
 
-      "architect": {
-        "build": { },
-        "serve": { },
-        "e2e" : { },
-        "test": { },
-        "lint": { },
-        "extract-i18n": { },
-        "server": { },
-        "app-shell": { }
-      }
+"architect": {
+  "build": {},
+  "serve": {},
+  "e2e" : {},
+  "test": {},
+  "lint": {},
+  "extract-i18n": {},
+  "server": {},
+  "app-shell": {}
+}
 
 </code-example>
 
-* `architect/build` セクションでは `ng build` コマンドのデフォルトオプションを設定します。
+*   `architect/build` セクションでは `ng build` コマンドのデフォルトオプションを設定します。
 詳細は [ビルドのターゲット](#build-target) を参照してください。
-
-* `architect/serve` セクションでは、ビルドのデフォルトを上書きし、 `ng serve` コマンドの追加のデフォルトを提供します。`ng build` コマンドで利用可能なオプションに加えて、アプリケーションの提供に関連するオプションを提供します。
-
-* `architect/e2e` セクションでは `ng e2e` コマンドを使用してエンドツーエンドテストアプリケーションをビルドするための追加のビルドオプションのデフォルトを上書きます。
-
-* `architect/test` セクションでは、テストビルドのためのビルドオプションのデフォルトを上書きし、`ng test` コマンドの追加のデフォルトのテスト実行を提供します。
-
-* `architect/lint` セクションでは、プロジェクトのソースファイルに対してコード解析を実行する `ng lint` コマンドのデフォルトオプションを設定します。
-
-* `architect/extract-i18n` セクションでは `ng extract-i18n` コマンドが使用する `ng-xi18n` ツールのデフォルトオプションを設定します。このコマンドは、マークされたメッセージ文字列をソースコードから抽出し、翻訳ファイルを出力します。
-
-* `architect/server` セクションでは `ng run <project>:server` コマンドを使用してサーバーサイドレンダリングでUniversalアプリケーションを作成する際のデフォルトを設定します。
-
-* `architect/app-shell` セクションでは `ng run <project>:app-shell` コマンドを使用して progressive web app (PWA)のための App Shell を作成する際のデフォルトを設定します。
+*   `architect/serve` セクションでは、ビルドのデフォルトを上書きし、 `ng serve` コマンドの追加のデフォルトを提供します。`ng build` コマンドで利用可能なオプションに加えて、アプリケーションの提供に関連するオプションを提供します。
+*   `architect/e2e` セクションでは `ng e2e` コマンドを使用してエンドツーエンドテストアプリケーションをビルドするための追加のビルドオプションのデフォルトを上書きます。
+*   `architect/test` セクションでは、テストビルドのためのビルドオプションのデフォルトを上書きし、`ng test` コマンドの追加のデフォルトのテスト実行を提供します。
+*   `architect/lint` セクションでは、プロジェクトのソースファイルに対してコード解析を実行する `ng lint` コマンドのデフォルトオプションを設定します。
+*   `architect/extract-i18n` セクションでは `ng extract-i18n` コマンドが使用する `ng-xi18n` ツールのデフォルトオプションを設定します。このコマンドは、マークされたメッセージ文字列をソースコードから抽出し、翻訳ファイルを出力します。
+*   `architect/server` セクションでは `ng run <project>:server` コマンドを使用してサーバーサイドレンダリングでUniversalアプリケーションを作成する際のデフォルトを設定します。
+*   `architect/app-shell` セクションでは `ng run <project>:app-shell` コマンドを使用して progressive web app (PWA)のための App Shell を作成する際のデフォルトを設定します。
 
 一般的に、デフォルトが設定できるアプションは、各コマンドの [CLIリファレンス](cli) にリストされているコマンドオプションに対応しています。
-設定ファイル内のすべてのオプションは、ダッシュケースではなく [キャメルケース](guide/glossary#case-conventions) を使用しなければならないことに注意してください。
+**NOTE**: 設定ファイル内のすべてのオプションは、ダッシュケースではなく [キャメルケース](guide/glossary#case-conventions) を使用しなければならないことに注意してください。
 
 {@a build-target}
 
@@ -159,22 +189,22 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 | プロパティ | 説明 |
 | :-------------- | :---------------------------- |
-| `builder`       | このターゲットの作成に使用されたビルドツールのnpmパッケージです。アプリケーションのデフォルトのビルダ (`ng build myApp`) は `@angular-devkit/build-angular:browser` で、[webpack](https://webpack.js.org/) パッケージバンドラーを使用します。ライブラリの構築 (`ng build myLib`) には別のビルダが使用されることに注意してください。 |
+| `builder`       | このターゲットの作成に使用されたビルドツールのnpmパッケージです。アプリケーションのデフォルトのビルダ (`ng build myApp`) は <code class="no-auto-link">@angular-devkit/build-angular:browser</code> で、[webpack](https://webpack.js.org/) パッケージバンドラーを使用します。**NOTE**: ライブラリの構築 (`ng build myLib`) には別のビルダが使用されることに注意してください。 |
 | `options`       | このセクションには、名前付けされた設定が指定されていない場合に使用される、デフォルトのビルドオプションが含まれています。詳しくは [デフォルトのビルドターゲット](#default-build-targets) をご覧ください。 |
 | `configurations`| このセクションには、異なる目的のための設定を定義して名前を付けます。それはそれぞれ名前付けされた、特定の環境のためのデフォルトオプションを設定するためのセクションを含みます。詳しくは [代替ビルドの構成](#build-configs) をご覧ください。 |
-
 
 {@a build-configs}
 
 ### 代替のビルド設定
 
 Angular CLI comes with two build configurations: `production` and `development`. By default, the `ng build` command uses the `production` configuration, which applies a number of build optimizations, including:
+
 * Bundling files
 * Minimizing excess whitespace
 * Removing comments and dead code
 * Rewriting code to use short, mangled names (minification)
 
-また、あなたの開発プロセスに適した追加の代替設定（インスタンスの `stage` など）を定義して名前を付けることもできます。さまざまな異なるビルド設定の例として、`stable` 、`archive` やAIO自体が使用する `next` 、ローカライズされたバージョンのアプリケーションを構築するために必要なロケーション固有の設定があります。詳細については [国際化 (i18n)](guide/i18n#merge-aot) を参照してください。
+また、あなたの開発プロセスに適した追加の代替設定（インスタンスの `stage` など）を定義して名前を付けることもできます。さまざまな異なるビルド設定の例として、`stable` 、`archive` やAIO自体が使用する `next` 、ローカライズされたバージョンのアプリケーションを構築するために必要なロケーション固有の設定があります。詳細については [国際化 (i18n)][AioGuideI18nCommonMerge] を参照してください。
 
 名前を `--configuration` コマンドラインフラグに渡すことで、代替設定を選択できます。
 
@@ -226,11 +256,11 @@ Angular CLI comes with two build configurations: `production` and `development`.
 ワークスペースのルートを基準にした単純なパスとしてではなく、アセットをオブジェクトとして指定することで、アセットをコピーするように構成できます。
 アセットを指定したオブジェクトは、次のフィールドをもつことができます。
 
-* `glob`: `input` をベースディレクトリとして使用する [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) 。
-* `input`: ワークスペースのルートからの相対パス。
-* `output`: `outDir` からの相対パス（デフォルトは`dist/`*project-name*）。 セキュリティへの影響のため、CLIはプロジェクトの出力パスの外側にファイルを書き込むことはありません。
-* `ignore`: 除外するglobsのリスト。
-* `followSymlinks`: Allow glob patterns to follow symlink directories. This allows subdirectories of the symlink to be searched. Defaults to `false`.
+*   `glob`: `input` をベースディレクトリとして使用する [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) 。
+*   `input`: ワークスペースのルートからの相対パス。
+*   `output`: `outDir` からの相対パス（デフォルトは`dist/`*project-name*）。 セキュリティへの影響のため、CLIはプロジェクトの出力パスの外側にファイルを書き込むことはありません。
+*   `ignore`: 除外するglobsのリスト。
+* ` followSymlinks`: Allow glob patterns to follow symlink directories. This allows subdirectories of the symlink to be searched. Defaults to `false`.
 
 たとえば、デフォルトのアセットのパスは、次のオブジェクトを使用してより詳細に表すことができます。
 
@@ -346,106 +376,49 @@ Sassでは、コンポーネントスタイルとグローバルスタイルの�
 
 `src/style-paths/_variables.scss` のようなそのフォルダ内のファイルは、相対パスを必要とせずにプロジェクトのどこからでもインポートできます:
 
-```ts
+<code-example language="typescript">
+
 // src/app/app.component.scss
 // A relative path works
 @import '../style-paths/variables';
 // But now this works as well
 @import 'variables';
-```
 
-ユニットテストに必要な場合は、`test`ビルダにスタイルやスクリプトを追加する必要があることに注意してください。
+</code-example>
+
+**NOTE**: ユニットテストに必要な場合は、`test`ビルダにスタイルやスクリプトを追加する必要があることに注意してください。
 [アプリ内でのランタイムグローバルライブラリの使用](guide/using-libraries#using-runtime-global-libraries-inside-your-app)も参照してください。
 
 ### Optimization configuration
 
 The `optimization` browser builder option can be either a Boolean or an Object for more fine-tune configuration. This option enables various optimizations of the build output, including:
 
-- Minification of scripts and styles
-- Tree-shaking
-- Dead-code elimination
-- Inlining of critical CSS
-- Fonts inlining
+*   Minification of scripts and styles
+*   Tree-shaking
+*   Dead-code elimination
+*   Inlining of critical CSS
+*   Fonts inlining
 
 There are several options that can be used to fine-tune the optimization of an application.
 
-<table class="is-full-width is-fixed-layout">
-<thead>
-<tr>
-<th>Option</th>
-<th width="40%">Description</th>
-<th>Value Type</th>
-<th>Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>scripts</code></td>
-<td>Enables optimization of the scripts output.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>styles</code></td>
-<td>Enables optimization of the styles output.</td>
-<td><code>boolean|<a href="#styles-optimization-options">Styles optimization options</a></code></td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>fonts</code></td>
-<td>Enables optimization for fonts.<br><strong>Note:</strong> This requires internet access.</td>
-<td><code class="no-auto-link">boolean|<a href="#fonts-optimization-options">Fonts optimization options</a></code></td>
-<td><code>true</code></td>
-</tr>
-</tbody>
-</table>
+| Option    | Description                                                                     | Value Type                                                               | Default Value |
+|:---       |:---                                                                             |:---                                                                      |:---           |
+| `scripts` | Enables optimization of the scripts output.                                     | `boolean`                                                                | `true`        |
+| `styles`  | Enables optimization of the styles output.                                      | `boolean` \| [Styles optimization options](#styles-optimization-options) | `true`        |
+| `fonts`   | Enables optimization for fonts. <br /> **NOTE**: This requires internet access. | `boolean` \| [Fonts optimization options](#fonts-optimization-options)   | `true`        |
 
 #### Styles optimization options
-<table class="is-full-width is-fixed-layout">
-<thead>
-<tr>
-<th>Option</th>
-<th width="40%">Description</th>
-<th>Value Type</th>
-<th>Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>minify</code></td>
-<td>Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers and minimizing values.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>inlineCritical</code></td>
-<td>Extract and inline critical CSS definitions to improve <a href="https://web.dev/first-contentful-paint/">First Contentful Paint.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>true</code></td>
-</tr>
-</tbody>
-</table>
+
+| Option           | Description                                                                                                              | Value Type | Default Value |
+|:---              |:---                                                                                                                      |:---        |:---           |
+| `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers and minimizing values.        | `boolean`  | `true`        |
+| `inlineCritical` | Extract and inline critical CSS definitions to improve [First Contentful Paint](https://web.dev/first-contentful-paint). | `boolean`  | `true`        |
 
 #### Fonts optimization options
-<table class="is-full-width is-fixed-layout">
-<thead>
-<tr>
-<th>Option</th>
-<th width="40%">Description</th>
-<th>Value Type</th>
-<th>Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>inline</code></td>
-<td>Reduce <a href="https://web.dev/render-blocking-resources/">render blocking requests</a> by inlining external Google Fonts and Adobe Fonts CSS definitions in the application's HTML index file.<br><strong>Note:</strong>This requires internet access.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>true</code></td>
-</tr>
-</tbody>
-</table>
 
+| Option   | Description                                                                                                                                                                                                                          | Value Type | Default Value |
+|:---      |:---                                                                                                                                                                                                                                  |:---        |:---           |
+| `inline` | Reduce [render blocking requests](https://web.dev/render-blocking-resources) by inlining external Google Fonts and Adobe Fonts CSS definitions in the application's HTML index file. <br /> **NOTE**: This requires internet access. | `boolean`  | `true`        |
 
 You can supply a value such as the following to apply optimization to one or the other:
 
@@ -464,8 +437,7 @@ You can supply a value such as the following to apply optimization to one or the
 
 <div class="alert is-helpful">
 
-   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、
-   スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
+   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
 
 </div>
 
@@ -473,43 +445,12 @@ You can supply a value such as the following to apply optimization to one or the
 
 The `sourceMap` browser builder option can be either a Boolean or an Object for more fine-tune configuration to control the source maps of an application.
 
-<table class="is-full-width is-fixed-layout">
-<thead>
-<tr>
-<th>Option</th>
-<th width="40%">Description</th>
-<th>Value Type</th>
-<th>Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>scripts</code></td>
-<td>Output source maps for all scripts.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>styles</code></td>
-<td>Output source maps for all styles.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>vendor</code></td>
-<td>Resolve vendor packages source maps.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>false</code></td>
-</tr>
-<tr>
-<td><code>hidden</code></td>
-<td>Output source maps used for error reporting tools.</td>
-<td><code class="no-auto-link">boolean</code></td>
-<td><code>false</code></td>
-</tr>
-</tbody>
-</table>
-
+| Option    | Description                                        | Value Type | Default Value |
+|:---       |:---                                                |:---        |:---           |
+| `scripts` | Output source maps for all scripts.                | `boolean`  | `true`        |
+| `styles`  | Output source maps for all styles.                 | `boolean`  | `true`        |
+| `vendor`  | Resolve vendor packages source maps.               | `boolean`  | `false`       |
+| `hidden`  | Output source maps used for error reporting tools. | `boolean`  | `false`       |
 
 The example below shows how to toggle one or more values to configure the source map outputs:
 
@@ -527,7 +468,14 @@ The example below shows how to toggle one or more values to configure the source
 <div class="alert is-helpful">
 
    非表示のソースマップを使用する場合、ソースマップはバンドルで参照されません。
-   これらは、ソースマップでエラー報告ツールのエラースタックトレースのみをマッピングするが、
-   ブラウザ開発者ツールでソースマップを公開したくない場合に役立ちます。
+   これらは、ソースマップでエラー報告ツールのエラースタックトレースのみをマッピングするが、ブラウザ開発者ツールでソースマップを公開したくない場合に役立ちます。
 
 </div>
+
+<!-- links -->
+
+[AioGuideI18nCommonMerge]: guide/i18n-common-merge "Common Internationalization task #6: Merge translations into the application | Angular"
+
+<!-- end links -->
+
+@reviewed 2021-10-14

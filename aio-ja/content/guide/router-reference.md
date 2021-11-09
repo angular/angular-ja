@@ -157,6 +157,17 @@ Angularのルーターはオプションのサービスであり、指定され�
 
   <tr>
     <td>
+      <code>params</code>
+    </td>
+    <td>
+
+    An `Observable` that contains the required and [optional parameters](guide/router-tutorial-toh#optional-route-parameters) specific to the route.
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>
       <code>paramMap</code>
     </td>
     <td>
@@ -175,6 +186,17 @@ Angularのルーターはオプションのサービスであり、指定され�
 
     すべてのルートで利用できる[クエリパラメータ](guide/router-tutorial-toh#query-parameters)の[map](api/router/ParamMap)を含む`Observable`。
     このマップは、クエリパラメータからの単一および複数の値の取得をサポートしています。
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>queryParams</code>
+    </td>
+    <td>
+
+    An `Observable` that contains the [query parameters](guide/router-tutorial-toh#query-parameters) available to all routes.
 
     </td>
   </tr>
@@ -246,17 +268,6 @@ Angularのルーターはオプションのサービスであり、指定され�
     </td>
   </tr>
 </table>
-
-<div class="alert is-helpful">
-
-2つの古いプロパティはまだ利用可能です。ただし、将来のAngularバージョンで非推奨になる可能性があるため、これらの代わりが推奨です。
-
-* `params`: そのルートに固有の、必須および[オプションのパラメーター](guide/router-tutorial-toh#optional-route-parameters)を含む`Observable`。代わりに`paramMap`を使用しましょう。
-
-* `queryParams`: すべてのルートで利用できる[クエリパラメータ](guide/router-tutorial-toh#query-parameters)を含む`Observable`。
-代わりに`queryParamMap`を使用しましょう。
-
-</div>
 
 ### ルーターのイベント {@a router-events}
 

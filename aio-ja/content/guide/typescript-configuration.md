@@ -160,4 +160,4 @@ update `tsconfig.spec.json` to add `"chai"` to the list of `types`.
 
 ### *target*
 
-デフォルトでは、ターゲットは`es2015`です。これはモダンブラウザでのみサポートされています。特別にレガシーブラウザをサポートするためにターゲットを`es5`に設定することができます。 [Differential loading](guide/deployment#differential-loading)もAngular CLIによって提供され、分離されたバンドルによって最新とレガシー、両方のブラウザをサポートします。
+By default, the target is `es2017`, which is supported in modern browsers.

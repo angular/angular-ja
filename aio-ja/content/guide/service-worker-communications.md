@@ -37,17 +37,18 @@ However, you might choose to manually check for updates if you have a site that 
 
 <code-example path="service-worker-getting-started/src/app/check-for-update.service.ts" header="check-for-update.service.ts"></code-example>
 
-このメソッドは、更新チェックが正常に完了したことを示すPromiseを返しますが、チェックの結果アップデートが検出されたかどうかは示しません。アップデートが見つかったとしても、Service Workerは変更されたファイルを正常にダウンロードする必要があり、まだ失敗する可能性があるからです。成功した場合、availableイベントが、新しいバージョンのアプリケーションが使用可能になったことを示します。
+This method returns a `Promise<boolean>` which indicates if an update is available for activation.
+The check might fail, which will cause a rejection of the `Promise`.
 
 <div class="alert is-important">
 
 In order to avoid negatively affecting the initial rendering of the page, `ServiceWorkerModule` waits for up to 30 seconds by default for the app to stabilize, before registering the Service Worker script.
-Constantly polling for updates, for example, with [setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) or RxJS' [interval()](https://rxjs.dev/api/index/function/interval), will prevent the app from stabilizing and the Service Worker script will not be registered with the browser until the 30 seconds upper limit is reached.
+Constantly polling for updates, for example, with [setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) or RxJS' [interval()](https://rxjs.dev/api/index/function/interval), prevents the application from stabilizing and the Service Worker script is not registered with the browser until the 30 seconds upper limit is reached.
 
 Note that this is true for any kind of polling done by your application.
 Check the {@link ApplicationRef#isStable isStable} documentation for more information.
 
-You can avoid that delay by waiting for the app to stabilize first, before starting to poll for updates, as shown in the example above.
+Avoid that delay by waiting for the application to stabilize first, before starting to poll for updates, as shown in the preceding example.
 Alternatively, you might want to define a different {@link SwRegistrationOptions#registrationStrategy registration strategy} for the Service Worker.
 
 </div>
@@ -71,25 +72,26 @@ In some cases, the version of the app used by the service worker to serve a clie
 
 For example, imagine the following scenario:
 - A user opens the app for the first time and the service worker caches the latest version of the app.
-  Let's assume the app's cached assets include `index.html`, `main.<main-hash-1>.js` and `lazy-chunk.<lazy-hash-1>.js`.
+  Assume the application's cached assets include `index.html`, `main.<main-hash-1>.js` and `lazy-chunk.<lazy-hash-1>.js`.
 - The user closes the app and does not open it for a while.
 - After some time, a new version of the app is deployed to the server.
-  This newer version includes the files `index.html`, `main.<main-hash-2>.js` and `lazy-chunk.<lazy-hash-2>.js` (note that the hashes are different now, because the content of the files has changed).
+  This newer version includes the files `index.html`, `main.<main-hash-2>.js` and `lazy-chunk.<lazy-hash-2>.js` (note that the hashes are different now, because the content of the files changed).
   The old version is no longer available on the server.
 - In the meantime, the user's browser decides to evict `lazy-chunk.<lazy-hash-1>.js` from its cache.
-  Browsers may decide to evict specific (or all) resources from a cache in order to reclaim disk space.
+  Browsers might decide to evict specific (or all) resources from a cache in order to reclaim disk space.
 - The user opens the app again.
   The service worker serves the latest version known to it at this point, namely the old version (`index.html` and `main.<main-hash-1>.js`).
 - At some later point, the app requests the lazy bundle, `lazy-chunk.<lazy-hash-1>.js`.
 - The service worker is unable to find the asset in the cache (remember that the browser evicted it).
-  Nor is it able to retrieve it from the server (since the server now only has `lazy-chunk.<lazy-hash-2>.js` from the newer version).
+  Nor is it able to retrieve it from the server (because the server now only has `lazy-chunk.<lazy-hash-2>.js` from the newer version).
 
-In the above scenario, the service worker is not able to serve an asset that would normally be cached.
+In the preceding scenario, the service worker is not able to serve an asset that would normally be cached.
 That particular app version is broken and there is no way to fix the state of the client without reloading the page.
 In such cases, the service worker notifies the client by sending an `UnrecoverableStateEvent` event.
-You can subscribe to `SwUpdate#unrecoverable` to be notified and handle these errors.
+Subscribe to `SwUpdate#unrecoverable` to be notified and handle these errors.
 
 <code-example path="service-worker-getting-started/src/app/handle-unrecoverable-state.service.ts" header="handle-unrecoverable-state.service.ts" region="sw-unrecoverable-state"></code-example>
+
 
 ## もっとAngular Service Workerを知りたい
 

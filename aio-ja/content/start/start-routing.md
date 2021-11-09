@@ -21,7 +21,7 @@
     ファイルリストで `app` フォルダを右クリックし、`Angular Generator` と `Component` を選択します。
     コンポーネントに `product-details` という名前を付けます。
 
-1. `app.module.ts`に、`products/:productId`の`path`と`component`の`ProductDetailsComponent`で、商品の詳細へのルーティングを追加します。
+1. `app.module.ts`では、`path`に`products/:productId`、`component`に`ProductDetailsComponent`を指定して、製品詳細のルートを追加し、`AppModule`の宣言に`ProductDetailsComponent`を含めます。
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="product-details-route">
     </code-example>

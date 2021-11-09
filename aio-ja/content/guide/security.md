@@ -8,9 +8,10 @@ Angularでの対応について説明します。認証や認可などアプリ�
 
 この章に付属の <live-example></live-example> はその場で実行できます。
 
+{@a report-issues}
+
 <div class="callout is-important">
 
-{@a report-issues}
 <header>脆弱性の報告</header>
 
 Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) へ報告をお願いします。
@@ -21,8 +22,10 @@ Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) �
 
 </div>
 
-<div class="callout is-helpful">
 {@a best-practices}
+
+<div class="callout is-helpful">
+
 <header>ベストプラクティス</header>
 
 * **Angularを最新に保つ**
@@ -171,6 +174,20 @@ Webサーバーを設定する必要があります。CSP に関するより詳�
 [Web Fundamentals guide](https://developers.google.com/web/fundamentals/security/csp) 
 を参照してください。
 
+The minimal policy required for brand new Angular is:
+
+```
+default-src 'self'; style-src 'self' 'unsafe-inline';
+```
+
+* The `default-src 'self';` section allows the page to load all its required resources from the same
+  origin.
+* `style-src 'self' 'unsafe-inline';` allows the page to load global styles from the same origin
+  (`'self'`) and enables components to load their styles (`'unsafe-inline'` - see
+  [`angular/angular#6361`](https://github.com/angular/angular/issues/6361)).
+
+Angular itself requires only these settings to function correctly. As your project grows, however, you may need to expand your CSP settings beyond this minimum to accommodate additional features specific to your application.
+
 {@a trusted-types}
 ### Enforcing Trusted Types
 
@@ -284,13 +301,13 @@ CSRFについてはオープンWebアプリケーションセキュリティプ�
 [Robust Defenses for Cross-Site Request Forgery](https://seclab.stanford.edu/websec/csrf/csrf.pdf) にも豊富な情報が掲載されています。
 
 Dave Smith氏による
-[AngularConnect 2016でのXSRFに関する発表](https://www.youtube.com/watch?v=9inczw6qtpY "Cross Site Request Funkery Securing Your Angular Apps From Evil Doers") も解りやすい解説です。
+[AngularConnect 2016でのXSRFに関する発表](https://www.youtube.com/watch?v=9inczw6qtpY "Cross Site Request Funkery Securing Your Angular Apps From Evil Doers") も参照してください。
 
 {@a xssi}
 ### クロスサイトスクリプトインクルージョン (XSSI)
 
 JSON脆弱性とも呼ばれるクロスサイトスクリプトインクルージョンにより、攻撃者のWebサイトで
-JSON APIからデータを読み取ることができます。この攻撃は、ネイティブJavaScriptオブジェクトコンストラクターを
+JSON APIからデータを読み取ることができます。この攻撃は、ビルトインのJavaScriptオブジェクトコンストラクターを
 オーバーライドしてから、`<script>`タグを使用してAPI URLを含めることによって、古いブラウザで機能します。
 
 この攻撃は、返されたJSONがJavaScriptとして実行可能な場合にのみ成功します。

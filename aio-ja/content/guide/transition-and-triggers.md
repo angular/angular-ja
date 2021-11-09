@@ -127,7 +127,7 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 
 <div class="alert is-helpful">
 
-**Note:** 次の例では、[複雑なシーケンス](guide/complex-animation-sequences#complex-sequence)のページで議論される`query()`と`stagger()`メソッドを使用しています。
+**Note:** The following example uses `query()` and `stagger()` methods. For more information on these methods, see the [complex sequences](guide/complex-animation-sequences#complex-sequence) page.
 
 </div>
 
@@ -140,7 +140,7 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 <code-example path="animations/src/app/open-close.component.2.html" header="src/app/open-close.component.html" region="trigger-boolean">
 </code-example>
 
-上記のコードスニペットでは、HTMLテンプレートは`<div>`要素を、`isOpen`のステータス式と、予想される値`true`と`false`をもつ`openClose`という名前のトリガーにバインドします。これは、`open`と`close`の2つの名前付き状態を作成する方法の代わりになります。
+上記のコードスニペットでは、HTMLテンプレートは`<div>`要素を、`isOpen`のステータス式と、予想される値`true`と`false`をもつ`openClose`という名前のトリガーにバインドします。このパターンは、`open`と`close`のような2つの名前付き状態を作成する方法の代わりになります。
 
 コンポーネントのコード内、`animations:`プロパティの下の`@Component`メタデータにおいて、状態が`true`(ここでは "open"を意味する)と評価されるとき、関連するHTML要素の高さはワイルドカードのスタイルまたはデフォルトのものなります。この場合、アニメーションを開始する前に要素がすでに持っていた高さを使用します。要素が"closed"のときは、要素は高さ0までアニメーションして非表示になります。
 
@@ -181,7 +181,7 @@ HTMLテンプレート内の要素が`@.disabled`ホストバインディング�
 * 親アニメーションは、[`query()`](api/animations/query)関数を使用して、HTMLテンプレートの無効な領域にある内部要素を集収することができます。
 これらの要素はまだアニメーションできます。
 
-* サブアニメーションは親によってクエリーされ、その後で`animateChild()`関数でアニメーション化できます。
+* 子アニメーションは親によってクエリーされ、その後で`animateChild()`関数でアニメーション化できます。
 
 #### すべてのアニメーションを無効化する
 
@@ -200,7 +200,7 @@ Angularアプリケーションのすべてのアニメーションを無効に�
 
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="events1" language="typescript"></code-example>
 
-HTMLテンプレートでは、`@trigger.start`と`@trigger.done`から`$event`を介してアニメーションイベントが渡されます。ここで`trigger`は使用されているトリガーの名前です。
+HTMLテンプレートでは、`@triggerName.start`と`@triggerName.done`から`$event`を介してアニメーションイベントが渡されます。ここで`triggerName`は使用されているトリガーの名前です。
 この例では、トリガーの`openClose`は次のように登場します。
 
 <code-example path="animations/src/app/open-close.component.3.html" header="src/app/open-close.component.html" region="callbacks">
@@ -239,7 +239,7 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 
 ### オフセット
 
-キーフレームには、各スタイルの変更が発生するアニメーション内の位置を定義する*オフセット*が含まれています。
+キーフレームには、各スタイルの変更が発生するアニメーション内の位置を定義する`offset`が含まれています。
 オフセットは、0から1までの相対的な尺度であり、それぞれアニメーションの開始と終了を示します。and should be applied to each of the keyframe's steps if used at least once.
 
 キーフレームのオフセットの定義はオプショナルです。
@@ -287,8 +287,8 @@ Angularのアニメーションサポートは、Webアニメーション上に�
 * 相対的なフォントサイズ: `'3em'`
 * パーセント: `'100%'`
 
-大きさを指定するときに単位を指定しない場合、Angularはデフォルトのピクセル単位、つまりpxを仮定します。 
-50ピクセルを`50`と表現することは、`'50px'`と同じです。
+You can also provide the value as a number (thus not providing a unit), in such cases Angular assumes a default unit of pixels, or `px`.
+Expressing 50 pixels as `50` is the same as saying `'50px'` (note that the string `"50"` would instead be considered invalid).
 
 ### ワイルドカードを使用した自動的なプロパティの計算
 
@@ -305,7 +305,7 @@ Angularのアニメーションサポートは、Webアニメーション上に�
 
 ### キーフレームのまとめ
 
-Angulerの`keyframes()`関数では、単一のトランジション内に複数の中間のスタイルを指定することができます。オプションのオフセットは、スタイルの変更が発生するアニメーション内の位置を定義します。
+Angulerの`keyframes()`関数では、単一のトランジション内に複数の中間のスタイルを指定することができます。オプションの`offset`は、スタイルの変更が発生するアニメーション内の位置を定義します。
 
 ## Angularアニメーションの詳細
 

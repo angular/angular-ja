@@ -15,7 +15,7 @@ Custom Elements は、独自にタグを定義することによって HTML を�
 `@angular/elements` パッケージは、`createCustomElement()` API をエクスポートします。この API は、Angular のコンポーネントインターフェースと変更検知機能からあらかじめ組み込まれているビルトイン DOM API へのブリッジを提供します。
 
 コンポーネントを Custom Elements に変換すると、必要なすべての Angular のインフラストラクチャ（基盤）がブラウザで利用できるようになります。
-Custom Elements は簡単に作成することができ、Angular の機能を対応するネイティブ HTML にマッピングする際に、変更検知とデータバインディングを自動的にビューとして定義したコンポーネントに結びつけます。
+Custom Elements は簡単に作成することができ、Angular の機能を対応するビルトインの HTML にマッピングする際に、変更検知とデータバインディングを自動的にビューとして定義したコンポーネントに結びつけます。
 
 <div class="alert is-helpful">
 
@@ -121,20 +121,13 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 </tr>
 </table>
 
-Custom Elements をサポートしているブラウザにおいて、Custom Elements を定義するには ES2015 のクラス構文を使うことが仕様として求められています。プロジェクトの [TypeScript 設定ファイル](/guide/typescript-configuration) に `target: "es2015"` プロパティを設定することによって、この仕様を受け入れることができます。Custom Elements と ES2015 はすべてのブラウザで利用可能であるとは限らないので、古いブラウザや ES5 のコードをサポートするために、代わりにポリフィルを使うという選択も可能です。
-
-自動的に正しいポリフィルを使ってプロジェクトを設定するには、[Angular CLI](cli) をお使いください:
+ワークスペースに `@angular/elements` パッケージを追加するには、次のコマンドを実行します。
 
 <code-example language="sh">
 
-ng add @angular/elements --project=*your_project_name*
+npm install @angular/elements --save
 
 </code-example>
-
-- ポリフィルについての詳細は、[polyfill documentation](https://www.webcomponents.org/polyfills) を参照してください。
-
-- Angular のブラウザサポート状況についての詳細は、[Browser Support](guide/browser-support) を参照してください。
-
 
 ## サンプル: ポップアップサービス
 

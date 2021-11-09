@@ -1,6 +1,6 @@
 # Angular Service Worker イントロダクション
 
-Service Workerは、従来のWebデプロイメントモデルを強化し、ネイティブにインストールされたコードと同等の信頼性とパフォーマンスでユーザー体験できるようにアプリケーションを補強します。AngularアプリケーションへのService Workerの追加は、アプリケーションを [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) (PWAとしても知られます) に変えるためのステップのひとつです。
+Service Workerは、従来のWebデプロイメントモデルを強化し、OSやハードウェア上で動作するように書かれたコードと同等の信頼性とパフォーマンスでユーザー体験できるようにアプリケーションを補強します。AngularアプリケーションへのService Workerの追加は、アプリケーションを [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) (PWAとしても知られます) に変えるためのステップのひとつです。
 
 簡潔にいうと、Service Workerは、Webブラウザで実行され、アプリケーションのキャッシュを管理するスクリプトのことです。
 
@@ -25,7 +25,7 @@ AngularにおけるService Workerの振る舞いは、次の設計目標に従�
 * 更新は、変更が公開された後、比較的迅速にバックグラウンドで行われます。以前のバージョンのアプリケーションは、アップデートがインストールされ準備が整うまで提供されます。
 * Service Workerは、可能な限り帯域幅を節約します。リソースは変更された場合にのみダウンロードされます。
 
-これらの動作をサポートするために、AngularにおけるService Workerは*マニフェスト*ファイルをサーバーからロードします。マニフェストは、キャッシュするリソースを記述し、すべてのファイルのハッシュを含みます。アプリケーションの更新が展開されると、マニフェストの内容が変更され、アプリケーションの新しいバージョンをダウンロードしてキャッシュする必要があることがService Workerに通知されます。このマニフェストは、CLIに生成された`ngsw-config.json`という設定ファイルから生成されます。
+これらの動作をサポートするために、AngularにおけるService Workerは*マニフェスト*ファイルをサーバーからロードします。`ngsw.json`と呼ばれるファイル（[web app manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)と混同しないように）は、キャッシュするリソースを記述し、すべてのファイルのハッシュを含みます。アプリケーションの更新が展開されると、マニフェストの内容が変更され、アプリケーションの新しいバージョンをダウンロードしてキャッシュする必要があることがService Workerに通知されます。このマニフェストは、CLIに生成された`ngsw-config.json`という設定ファイルから生成されます。
 
 AngularにおけるService Workerのインストールは、`NgModule`に含めるだけです。ブラウザにAngularにおけるService Workerを登録することに加えて、Service Workerとやりとりしたり、Service Workerを制御するために使用できる、いくつかのサービスをインジェクション可能にします。たとえば、新しい更新が利用可能になったときに通知を受けるようにアプリケーションに依頼することも、Service Workerに利用可能な更新をサーバーに確認するように依頼することもできます。
 

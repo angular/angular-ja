@@ -1,6 +1,6 @@
 # Angularのロードマップ
 
-<p class="roadmap-last-updated">Last updated: 2021-05-19</p>
+<p class="roadmap-last-updated">Last updated: 2021-11-03</p>
 
 Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。 同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 私たちは、Dev Relや製品管理、エンジニアリングの代表者を集めて、このリストに優先順位を付けます。 新しいプロジェクトがキューに入ると、他のプロジェクトに対する相対的な優先順位に基づいて、それらを定期的に配置します。 作業が完了すると、プロジェクトはキューの上位に移動します。
 
@@ -8,63 +8,42 @@ Angularは、Google内からも、より広範なオープンソースコミュ�
 
 ## 進行中
 
-### テスト環境の自動ティアダウンによるテスト時間とデバッグの改善
+### 開発者が使いやすい `@angular/forms` の厳格なタイピングを実現
 
-テスト時間を改善し、テスト間の分離を改善するために、<code>[TestBed](api/core/testing/TestBed)</code> を変更して、各テスト実行後にテスト環境を自動的にクリーンアップしたり、分解したりするようにしたいと思います。
-
-### Deprecate and remove IE11 support
-
-IE11 has been preventing Angular from taking advantage of some of the modern features of the Web platform. As part of this project we are going to deprecate and remove IE11 support to open the path for modern features that evergreen browsers provide. We ran an [RFC](https://github.com/angular/angular/issues/41840) to collected feedback from the community and decide on next steps to move forward.
-
-### Leverage ES2017+ as the default output language
-
-Supporting modern browsers will allow us to leverage the more compact, expressive, and performant new syntax of JavaScript. As part of this project we’ll investigate what are the blockers to move forward with this effort and take the steps forward to enable it.
-
-### リグレッションを検出するためにパフォーマンス・ダッシュボードを刷新
-
-Angularがパフォーマンス基準に沿ったものであることを確認するために、コード変更のたびに実行するベンチマークのセットを用意しています。コード変更後にフレームワークのランタイムがリグレッションしないようにするために、ダッシュボードが踏む既存のインフラの一部を改良する必要があります。
-
-### [MDC Web](https://material.io/develop/web/)の統合によるAngular Material Componentsの強化
-
-MDC Webは、GoogleのMaterial Designチームが作成したライブラリで、Material Designコンポーネントを構築するための再利用可能なプリミティブを提供します。 AngularチームはこれらのプリミティブをAngular Materialに組み込んでいます。 MDC Webを使用すると、Angular MaterialがMaterial Designの仕様により密接に連携し、アクセシビリティが拡張され、全体的にコンポーネントの品質が向上し、チームの速度が向上します。
-
-### Angular component accessibility
-
-We're evaluating components in Angular Material against accessibility standards such as WCAG and working to fix any issues that arise from this process.
-
-### レガシー[View Engine](guide/ivy)の削除
-
-すべての内部ツールのIvyへの移行が完了したら、レガシーView Engineを削除して、Angularの概念的オーバーヘッドを小さくし、パッケージサイズを小さくして、メンテナンスコストを削減し、コードベースの複雑さを減らします。
-
-### Publish guides on advanced concepts
-
-Develop and publish an in-depth guide on change detection. Develop content for performance profiling of Angular applications. Cover how change detection interacts with Zone.js and explain when it gets triggered, how to profile its duration, as well as common practices for performance optimization.
-
-### E2Eテスト戦略のアップデート
-
-将来を見据えたe2eテスト戦略を確実に提供するために、Protractorの現状、コミュニティによるイノベーション、e2eのベストプラクティスを評価し、新しい可能性を模索したいと考えています。As first steps of the effort, we shared an [RFC](https://github.com/angular/protractor/issues/5502) and worked with partners to ensure smooth integration between the Angular CLI and state of the art tooling for e2e testing. As the next step, we need to finalize the recommendations and compile a list of resources for the transition.
-
-### Ivyを利用したAngularライブラリ
-
-2020年の初め、私たちはIvyライブラリ配布のための[RFC](https://github.com/angular/angular/issues/38366)を共有しました。コミュニティからの貴重なフィードバックの後、私たちはプロジェクトのデザインを開発しました。現在、Ivyコンパイルを利用するためのライブラリパッケージフォーマットの更新、View Engineライブラリフォーマットの非推奨のブロック解除、[ngcc](guide/glossary#ngcc)など、Ivyライブラリ配布の開発に投資しています。
-
-### 将来のRxJSの変更（v7以降）にスムーズに対応できるようにする
-
-Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
-
+リアクティブフォームのより厳密な型チェックの実装に取り組みます。 このようにして、開発者は開発中により多くの問題をキャッチし、テキストエディターとIDEへのより優れたサポートを有効にし、リアクティブフォームの型チェックを改善できます。
 ### オプショナルのNgModulesを使用したシンプルなAngularメンタルモデル
 
-Angularメンタルモデルと学習経路を簡略化するために、NgModulesをオプションにすることに取り組みます。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。
-
-## 将来
+Angularメンタルモデルと学習経路を簡略化するために、NgModulesをオプションにすることに取り組みます。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。We kicked this project off with high-level design discussions that we captured in an [RFC](https://github.com/angular/angular/discussions/43784).
 
 ### Investigate micro frontend architecture for scalable development processes
 
 Look into independent deployability and development of large-scale applications to improve efficiency and productivity. The Angular community has an established story for micro frontend support. As part of this effort, we’d investigate what would be the correct abstractions to provide better support.
 
-### 開発者が使いやすい `@angular/forms` の厳格なタイピングを実現
+### [MDC Web](https://material.io/develop/web/)の統合によるAngular Material Componentsの強化
 
-リアクティブフォームのより厳密な型チェックの実装に取り組みます。 このようにして、開発者は開発中により多くの問題をキャッチし、テキストエディターとIDEへのより優れたサポートを有効にし、リアクティブフォームの型チェックを改善できます。
+MDC Webは、GoogleのMaterial Designチームが作成したライブラリで、Material Designコンポーネントを構築するための再利用可能なプリミティブを提供します。 AngularチームはこれらのプリミティブをAngular Materialに組み込んでいます。 MDC Webを使用すると、Angular MaterialがMaterial Designの仕様により密接に連携し、アクセシビリティが拡張され、全体的にコンポーネントの品質が向上し、チームの速度が向上します。
+
+### Angular コンポーネントアクセシビリティ
+
+Angular MaterialのコンポーネントをWCAGなどのアクセシビリティ基準に照らし合わせて評価し、そこから発生した問題を解決するための作業を行っています。
+
+### レガシー[View Engine](guide/glossary#ve)の削除
+
+すべての内部ツールのIvyへの移行が完了したら、レガシーView Engineを削除して、Angularの概念的オーバーヘッドを小さくし、パッケージサイズを小さくして、メンテナンスコストを削減し、コードベースの複雑さを減らします。
+
+### Launch advanced compiler diagnostics
+
+Extend the diagnostics of the Angular compiler outside type checking. Introduce other correctness and conformance checks to further guarantee correctness and best practices.
+
+### Improve Angular DevTools' integration with framework
+
+To improve the integration of Angular DevTools with the framework, we are working on moving the codebase to the [angular/angular](https://github.com/angular/angular) monorepository. This includes transitioning Angular DevTools to Bazel and integrating it into the existing processes and CI pipeline.
+
+## 将来
+
+### Revamp performance dashboards to detect regressions
+
+We have a set of benchmarks that we run against every code change to ensure Angular aligns with our performance standards. To ensure the framework’s runtime does not regress after a code change, we need to refine some of the existing infrastructure the dashboards step on.
 
 ### Zone.jsのオプトアウトでのフレームワーク機能のフル活用
 
@@ -82,6 +61,14 @@ A long-standing feature request is to add the ability to add directives to host 
 
 Webアプリケーションの一般的な問題は、初期ロード時間が遅いことです。それを改善するひとつの方法は、コンポーネントレベルでより細かいコード分割を適用することです。このプラクティスを促進するために、より使いやすいコード分割APIに取り組みます。
 
+### Publish guides on advanced concepts
+
+Develop and publish an in-depth guide on change detection. Develop content for performance profiling of Angular applications. Cover how change detection interacts with Zone.js and explain when it gets triggered, how to profile its duration, as well as common practices for performance optimization.
+
+### 将来のRxJSの変更（v7以降）にスムーズに対応できるようにする
+
+Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
+
 <details class="completed-details" open="true">
 <summary>
   <h2>Completed</h2>
@@ -92,6 +79,33 @@ Webアプリケーションの一般的な問題は、初期ロード時間が�
   </span>
 </summary>
 <div class="details-content">
+
+### E2Eテスト戦略のアップデート
+
+将来を見据えたe2eテスト戦略を確実に提供するために、Protractorの現状、コミュニティによるイノベーション、e2eのベストプラクティスを評価し、新しい可能性を模索したいと考えています。As first steps of the effort, we shared an [RFC](https://github.com/angular/protractor/issues/5502) and worked with partners to ensure smooth integration between the Angular CLI and state of the art tooling for e2e testing. As the next step, we need to finalize the recommendations and compile a list of resources for the transition.
+
+### Ivyを利用したAngularライブラリ
+
+2020年の初め、私たちはIvyライブラリ配布のための[RFC](https://github.com/angular/angular/issues/38366)を共有しました。コミュニティからの貴重なフィードバックの後、私たちはプロジェクトのデザインを開発しました。現在、Ivyコンパイルを利用するためのライブラリパッケージフォーマットの更新、View Engineライブラリフォーマットの非推奨のブロック解除、[ngcc](guide/glossary#ngcc)など、Ivyライブラリ配布の開発に投資しています。
+
+
+### テスト環境の自動ティアダウンによるテスト時間とデバッグの改善
+
+_Completed Q3 2021_
+
+テスト時間を改善し、テスト間の分離を改善するために、<code>[TestBed](api/core/testing/TestBed)</code> を変更して、各テスト実行後にテスト環境を自動的にクリーンアップしたり、分解したりするようにしたいと思います。
+
+### Deprecate and remove IE11 support
+
+_Completed Q3 2021_
+
+IE11 has been preventing Angular from taking advantage of some of the modern features of the Web platform. As part of this project we are going to deprecate and remove IE11 support to open the path for modern features that evergreen browsers provide. We ran an [RFC](https://github.com/angular/angular/issues/41840) to collected feedback from the community and decide on next steps to move forward.
+
+### Leverage ES2017+ as the default output language
+
+_Completed Q3 2021_
+
+Supporting modern browsers will allow us to leverage the more compact, expressive, and performant new syntax of JavaScript. As part of this project we’ll investigate what are the blockers to move forward with this effort and take the steps forward to enable it.
 
 ### Accelerated debugging and performance profiling with Angular DevTools
 

@@ -15,7 +15,7 @@
 
 * `query()` 1つまたは複数の内部HTML要素を検索します。
 * `stagger()` 複数要素のアニメーションにカスケーディングディレイを適用します。
-* `group()` 複数のアニメーションステップを並列に実行します。 
+* <code>[group](api/animations/group)()</code> 複数のアニメーションステップを並列に実行します。 
 * `sequence()` アニメーションステップを順次実行します。
 
 {@a complex-sequence}
@@ -26,9 +26,7 @@
 
 `stagger()`関数は、クエリーされた各項目の間にタイミングギャップを定義することができ、要素のアニメーション間を遅延させます。
 
-ライブサンプルの「Filter/Stagger」タブには、初歩的なシーケンスであるヒーローのリストが表示されます。 ヒーローのリスト全体は、上から下へわずかに遅れてカスケードします。
-
-次の例は、アニメーション要素の出現に`query()`関数と`stagger()`関数を使用する方法を示しています。
+The following example demonstrates how to use the `query()` and `stagger()` functions to animate a list (of heroes) adding each in sequence, with a slight delay, from top to bottom.
 
 * `query()`を使用し、ページに入ってくる特定の条件を満たす要素を探します。
 
@@ -42,20 +40,20 @@
 
 ## group()関数を使用した並列アニメーション
 
-連続する各アニメーションの間に遅延を追加する方法を書きました。 しかし他にも、並列に起こるアニメーションについても設定することもできます。 たとえば、同じ要素の2つのCSSプロパティをアニメーションし、それぞれに異なる`easing`関数を使用することができます。 このアニメーションは、[`group()`](api/animations/group)関数を使用することで実現できます。
+連続する各アニメーションの間に遅延を追加する方法を書きました。 しかし他にも、並列に起こるアニメーションについても設定することもできます。 たとえば、同じ要素の2つのCSSプロパティをアニメーションし、それぞれに異なる`easing`関数を使用することができます。 このアニメーションは、<code>[group](api/animations/group)()</code>関数を使用することで実現できます。
 
 <div class="alert is-helpful">
 
-**注意:** [`group()`](api/animations/group)関数はアニメーション要素ではなく、アニメーションの*ステップ*をグループ化するために使用されます。
+**注意:** <code>[group](api/animations/group)()</code>関数はアニメーション要素ではなく、アニメーションの*ステップ*をグループ化するために使用されます。
 </div>
 
-次の例では、 `:enter`と`:leave`それぞれがグループを使用することで、2つの異なるタイミングの構成が可能になります。 それらはパラレルに同じ要素へ適用されますが、独立して実行されます。
+The following example, uses <code>[group](api/animations/group)()</code>s on both `:enter` and `:leave` for two different timing configurations, thus applying two independent animations to the same element in parallel.
 
 <code-example path="animations/src/app/hero-list-groups.component.ts" region="animationdef" header="src/app/hero-list-groups.component.ts (excerpt)" language="typescript"></code-example>
 
 ## シーケンシャル vs. 並列アニメーション
 
-複雑なアニメーションでは、一度に多くのことが起こる可能性があります。 それでも、複数のアニメーションが連続したアニメーションを作成したい場合はどうすればよいでしょうか？ 以前は[`group()`](api/animations/group)を使うことで、同時に複数アニメーションを並列に実行していました。
+複雑なアニメーションでは、一度に多くのことが起こる可能性があります。 それでも、複数のアニメーションが連続したアニメーションを作成したい場合はどうすればよいでしょうか？ 以前は<code>[group](api/animations/group)()</code>を使うことで、同時に複数アニメーションを並列に実行していました。
 
 `sequence()`と呼ばれる第2の関数は、前述のように、同じアニメーションを次々に実行することを可能とします。 `sequence()`の中において、アニメーションのステップは`style()`または `animate()`のいずれかの関数呼び出しで構成されます。
 
@@ -72,27 +70,27 @@ HTMLテンプレートには、`filterAnimation`というトリガーが含ま�
 
 <code-example path="animations/src/app/hero-list-page.component.html" header="src/app/hero-list-page.component.html" region="filter-animations"></code-example>
 
-コンポーネントファイルには3つの遷移が含まれています。
+The `filterAnimation` in the component's decorator contains three transitions.
 
 <code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="filter-animations" language="typescript"></code-example>
 
-このアニメーションは次を実行します:
+The code in this example performs the following tasks:
 
-* ユーザーがこのページを最初に開いたり移動したりしたときに実行されるアニメーションは無視されます。 フィルターはすでに存在するものを絞り込みます。したがって、アニメーション化されるHTML要素はすべてDOMにすでに存在するとみなされます。
+* Skips animations when the user first opens or navigates to this page (the filter animation narrows what is already there, so it only works on elements that already exist in the DOM).
 
-* フィルターマッチを実行します。
+* Filters heroes based on the search input's value.
 
-各マッチについて:
+For each change:
 
-* opacityとwidthを0に設定することで、透明にして幅を持たせないようにし、要素を非表示にします。
+* Hides an element leaving the DOM by setting its opacity and width to 0.
 
-* 要素のアニメーションは300ミリ秒を超えます。 アニメーション中、要素はデフォルトの幅と不透明度を想定します。
+* Animates an element entering the DOM over 300 milliseconds. During the animation, the element assumes its default width and opacity.
 
-* 一致する要素が複数ある場合は、ページの先頭から各要素にずれがあり、各要素間に50ミリ秒の遅延があります。
+* If there are multiple elements entering or leaving the DOM, staggers each animation starting at the top of the page, with a 50-millisecond delay between each element.
 
 ## まとめ
 
-複数要素をアニメーションするためのAngular関数は、内部要素を見つけるために`query()`で始まります。 たとえば、`<div>`内のすべての画像を収集します。 残りの関数`stagger()`、[`group()`](api/animations/group)、`sequence()`はカスケードを適用したり、複数のアニメーションステップを適用する方法を制御することができます。
+複数要素をアニメーションするためのAngular関数は、内部要素を見つけるために`query()`で始まります。 たとえば、`<div>`内のすべての画像を収集します。 残りの関数`stagger()`、<code>[group](api/animations/group)()</code>、`sequence()`はカスケードを適用したり、複数のアニメーションステップを適用する方法を制御することができます。
 
 ## Angularアニメーションの詳細
 

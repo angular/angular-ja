@@ -20,13 +20,6 @@ Angularは最新のブラウザをサポートしています。サポートし�
     <td>2 most recent major versions</td>
   </tr>
   <tr>
-    <td>IE</td>
-    <td>
-      11<br>
-      <em>*deprecated, see the <a href="guide/deprecations#internet-explorer-11">deprecations guide</a></em>
-    </td>
-  </tr>
-  <tr>
     <td>Safari</td>
     <td>2 most recent major versions</td>
   </tr>
@@ -36,7 +29,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
   </tr>
   <tr>
     <td>Android</td>
-    <td>Q (10.0), Pie (9.0), Oreo (8.0), Nougat (7.0)</td>
+    <td>2 most recent major versions</td>
   </tr>
 </table>
 
@@ -44,27 +37,16 @@ Angularは最新のブラウザをサポートしています。サポートし�
 <div class="alert is-helpful">
 
 Angularの開発プロセスでは、各プルリクエストに対して、すべてのサポート対象ブラウザ上でユニットテストを実行しています。
-ユニットテスト実行には[Sauce Labs](https://saucelabs.com/)と
-[BrowserStack](https://www.browserstack.com/)を使用しています。
+ユニットテスト実行には[Sauce Labs](https://saucelabs.com/)を使用しています。
 
 </div>
-
-
-{@a ie11}
-## Configuring Angular CLI for compatibility with IE11
-
-While Angular supports all browsers listed above, in order to improve the build times and output,  Angular CLI applications don't support IE11 by default.
-
-Angular CLI uses [`browserlist`](https://github.com/browserslist/browserslist) to configure browser support for applications.
-
-You can enable the IE11 support by following the instructions in the `.browserslistrc` file at the root of your project.
 
 ## ポリフィル {@a polyfills}
 
 AngularはWEBプラットフォームの最新標準に基づいて構築されています。
 先述したような広範囲のブラウザをターゲットにすることは困難です。なぜならそれらがモダンブラウザの機能すべてをサポートしているわけではないからです。
 サポート必須なブラウザのために、ポリフィルを適用して補うことができます。
-[後述の表](#polyfill-libs)に必要になる可能性があるポリフィルのほとんどを記載しています。
+See instructions on how to include polyfills into your project below.
 
 <div class="alert is-important">
 
@@ -73,15 +55,6 @@ AngularはWEBプラットフォームの最新標準に基づいて構築され�
 ポリフィルでは、古く遅いブラウザを最新の早いブラウザに魔法のように変換できないことに注意しましょう。
 
 </div>
-
-In Angular CLI version 8 and higher, applications are built using *differential loading*, a strategy where the CLI builds two separate bundles as part of your deployed application.
-
-* The first bundle contains modern ES2015 syntax, takes advantage of built-in support in modern browsers, ships less polyfills, and results in a smaller bundle size.
-
-* The second bundle contains code in the old ES5 syntax, along with all necessary polyfills. This results in a larger bundle size, but supports older browsers.
-
-This strategy allows you to continue to build your web application to support multiple browsers, but only load the necessary code that the browser needs.
-For more information about how this works, see [Differential Loading](guide/deployment#differential-loading) in the [Deployment guide](guide/deployment).
 
 ## Enabling polyfills with CLI projects
 
@@ -95,110 +68,6 @@ When you create a project with the `ng new` command, a `src/polyfills.ts` config
 
 * If you need an _optional_ polyfill, you must install its npm package, then uncomment or create the corresponding import statement in the `src/polyfills.ts` configuration file.
 
-たとえば、[WEBアニメーションのポリフィルが必要な場合](https://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
-
-<code-example language="sh">
-  # install the optional web animations polyfill
-  npm install --save web-animations-js
-</code-example>
-
-You can then add the import statement in the `src/polyfills.ts` file.
-For many polyfills, you can un-comment the corresponding `import` statement in the file, as in the following example.
-
-<code-example header="src/polyfills.ts">
-  /**
-  * Required to support Web Animations `@angular/platform-browser/animations`.
-  * Needed for: All but Chrome, Firefox and Opera. https://caniuse.com/#feat=web-animation
-  **/
-  import 'web-animations-js';  // Run `npm install --save web-animations-js`.
-</code-example>
-
-If the polyfill you want is not already in `polyfills.ts` file, add the `import` statement by hand.
-
-
-{@a polyfill-libs}
-
-### ポリフィルが必要なオプショナルのブラウザ機能
-
-Angularのいくつかの機能では追加のポリフィルが必要になるかもしれません。
-
-<table>
-  <tr style="vertical-align: top">
-    <th>機能</th>
-    <th>ポリフィル</th>
-    <th style="width: 50%">ブラウザ</th>
-  </tr>
-  <tr style="vertical-align: top">
-    <td>
-      <a href="api/animations/AnimationBuilder">AnimationBuilder</a>
-      (Standard animation support does not require polyfills.)
-    </td>
-    <td>
-      <a href="guide/browser-support#web-animations">Web Animations</a>
-    </td>
-    <td>
-      <p>If AnimationBuilder is used, enables scrubbing
-      support for IE/Edge and Safari.
-      (Chrome and Firefox support this natively).</p>
-    </td>
-  </tr>
-
-  <tr style="vertical-align: top">
-    <td>
-      <a href="api/common/NgClass">NgClass</a> on SVG elements
-    </td>
-    <td>
-      <a href="guide/browser-support#classlist">classList</a>
-    </td>
-    <td>
-      IE 11
-    </td>
-  </tr>
-</table>
-
-### 推奨ポリフィル
-
-次のポリフィルはフレームワークそのものをテストするために使われています。これらはアプリケーションのためのよいスタート地点です。
-
-<table>
-  <tr>
-    <th>
-      ポリフィル
-    </th>
-    <th>
-      ライセンス
-    </th>
-    <th>
-      サイズ*
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <a id='classlist' href="https://github.com/eligrey/classList.js">classList</a>
-    </td>
-    <td>
-      Public domain
-    </td>
-    <td>
-      1KB
-    </td>
-  </tr>
-  <tr>
-    <td>
-       <a id='web-animations' href="https://github.com/web-animations/web-animations-js">Web Animations</a>
-    </td>
-    <td>
-      Apache
-    </td>
-    <td>
-      14.8KB
-    </td>
-  </tr>
-</table>
-
-
-\* 数値は縮小し、gzip圧縮されたコードを
-[closure compiler](https://closure-compiler.appspot.com/home)で計算したものです。
 
 {@a non-cli}
 
@@ -211,7 +80,6 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 <code-example header="src/index.html" language="html">
   &lt;!-- pre-zone polyfills -->
   &lt;script src="node_modules/core-js/client/shim.min.js">&lt;/script>
-  &lt;script src="node_modules/web-animations-js/web-animations.min.js">&lt;/script>
   &lt;script>
     /**
      * you can configure some zone flags which can disable zone interception for some
@@ -222,8 +90,8 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     // __Zone_disable_on_property = true; // disable patch onProperty such as onclick
     // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
     /*
-     * in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
-     * with the following flag, it will bypass `zone.js` patch for IE/Edge
+     * in Edge developer tools, the addEventListener will also be wrapped by zone.js
+     * with the following flag, it will bypass `zone.js` patch for Edge
      */
     // __Zone_enable_cross_context_check = true;
   &lt;/script>

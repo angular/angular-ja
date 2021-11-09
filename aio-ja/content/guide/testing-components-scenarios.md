@@ -168,7 +168,7 @@ Please call "TestBed.compileComponents" before your test.
 _テスト中に_ランタイム環境がソースコードをコンパイルすると、
 このテストエラーメッセージが表示されます。
 
-問題を解決するには、[以下](#compile-components)で説明するように`compileComponents()`を呼び出します。
+To correct the problem, call `compileComponents()` as explained in the following [Calling compileComponents](#compile-components) section.
 
 {@a component-with-dependency}
 
@@ -1114,7 +1114,7 @@ Observableより取得した`id`が既存のヒーローを参照していると
 
 <div class="alert is-helpful">
 
-`createComponent()`メソッドと`page`オブジェクトについては[後述](#page-object)します。
+In the following section, the `createComponent()` method and `page` object are discussed.
 今はあなたの直感に頼ってください。
 
 </div>

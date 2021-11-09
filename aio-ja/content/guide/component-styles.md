@@ -64,22 +64,25 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 の世界からの特別な *セレクター* がいくつかあります。
 次のセクションでは、これらのセレクターについて説明します。
 
+
 ### :host
+Every component is associated within an element that matches the component's selector. This element, into which the template is rendered, 
+is called the _host element_.
+The `:host` pseudo-class selector may be used to create styles that target the host element itself, as opposed to targeting elements inside the host.
 
-`:host` 擬似クラスセレクターを使用して、(コンポーネントのテンプレートの *内部の* ターゲティング要素とは対象的に)
-コンポーネントを *ホスト* する要素のスタイルをターゲットにします。
+<code-example path="component-styles/src/app/host-selector-example.component.ts" header="src/app/host-selector-example.component.ts">
+</code-example>
 
+Creating the following style will target the component's host element. Any rule applied to this selector will affect the host element and all its descendants (in this case, italicizing all contained text).
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="host" header="src/app/hero-details.component.css"></code-example>
 
-`:host` セレクターは、ホスト要素をターゲットにする唯一の方法です。
-コンポーネント自身のテンプレートの一部ではないため、他のセレクターを使用してコンポーネント内
-からホスト要素に到達することはできません。ホスト要素は、親コンポーネントのテンプレート内にあります。
+The `:host` selector only targets the host element of a component. Any styles within the `:host` block of a child component will *not* affect parent components.
 
 *関数形式* を使用して、`:host` の後のカッコ内に別なセレクターを含むことで、
 ホストスタイルを条件付きで適用します。
 
-次の例では、ホスト要素を再びターゲットにしていますが、`active` CSS クラスも持っている場合に限ります。
+In this example the host's content also becomes bold when the `active` CSS class is applied to the host element.
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css"></code-example>
 
@@ -88,13 +91,14 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 <div class="alert is-helpful">
 
-コンポーネントのビューの外側のコンテキストに基づいてコンポーネントのスタイルを決めるために、`:host` セレクターの前に (`:host-context` 以外の) セレクターを追加してはいけません。このようなセレクターはコンポーネントのビューにスコープされておらず、外側のコンテキストを選択してしまいますが、これはネイティブな動作ではありません。そのような場合には、`:host-context` セレクターを使用してください。
+コンポーネントのビューの外側のコンテキストに基づいてコンポーネントのスタイルを決めるために、`:host` セレクターの前に (`:host-context` 以外の) セレクターを追加してはいけません。このようなセレクターはコンポーネントのビューにスコープされておらず、外側のコンテキストを選択してしまいますが、これはビルトインの動作ではありません。そのような場合には、`:host-context` セレクターを使用してください。
 
 </div>
 
 ### :host-context
 
-場合によっては、コンポーネントのビューの *外* にある条件に基づいてスタイルを適用すると便利です。
+Sometimes it's useful to apply styles to elements within a component's template 
+based on some condition in an element that is an ancestor of the host element.
 たとえば、CSSのテーマクラスをドキュメントの `<body>` 要素に適用すると、
 それに基づいてコンポーネントの外観を変更することができます。
 
@@ -102,10 +106,12 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 `:host-context()` セレクターは、コンポーネントのホスト要素の先祖のうち、ドキュメントルートまでのCSSクラスを探します。
 `:host-context()` セレクターは、別のセレクターと組み合わせたときに便利です。
 
-次の例では、コンポーネント *内* のすべての `<h2>` 要素に `background-color`　のスタイルを適用します。
-ただし、一部の祖先要素にCSSクラス `theme-light` がある場合にのみ適用されます。
+The following example italicizes all text inside a component, but only
+if some _ancestor_ element of the host element has the CSS class `active`.
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" header="src/app/hero-details.component.css"></code-example>
+
+Note that only the host element and its descendants will be affected, not the ancestor with the assigned `active` class.
 
 ### (非推奨) `/deep/` 、 `>>>` と `::ng-deep` {@a deprecated-deep--and-ng-deep}
 

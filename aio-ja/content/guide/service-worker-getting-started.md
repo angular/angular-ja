@@ -11,7 +11,7 @@
 ## アプリケーションにService Workerを追加する
 
 プロジェクトでAngular Service Workerを設定するには、CLIコマンド`ng add @angular/pwa`を使用します。
-必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリケーションを設定します。
+必要なサポートファイルの設定とともに`@angular/service-worker`パッケージを追加することで、Service Workerを使用するようにアプリケーションを設定します。
 
 ```sh
 ng add @angular/pwa --project *project-name* 
@@ -56,7 +56,11 @@ http-server -p 8080 -c-1 dist/<project-name>
 
 サーバーが稼動している状態なら、ブラウザでhttp://localhost:8080/を指定できます。アプリケーションは正常に読み込まれるでしょう。
 
+<div class="alert is-helpful">
+
 **Tip:** Angular Service Workerをテストするときは、ブラウザでシークレットウィンドウまたはプライベートウィンドウを使うことをお勧めします。以前の状態が残存していると、Service Workerが読み取ったときに予期しない動作を引き起こし終了する可能性があるからです。
+
+</div>
 
 <div class="alert is-helpful">
 
@@ -67,14 +71,16 @@ If you are not using HTTPS, the service worker will only be registered when acce
 
 ### ネットワークの問題をシミュレートする
 
-ネットワークの問題をシミュレートするには、アプリケーションのネットワーク操作を無効にします。Chromeの場合は次になります。
+ネットワークの問題をシミュレートするには、アプリケーションのネットワーク操作を無効にします。
+
+Chromeの場合は次になります。
 
 1. ツールバーの右にあるメニューから**その他のツール** > **デベロッパー ツール**を選びます。
-2. **Networkタブ**を選びます。
-3. **Offlineボックス**をチェックしてください。
+1. **Networkタブ**を選びます。
+1. **Throttling**のドロップダウンメニューで**Offline**を選択します。
 
 <div class="lightbox">
-  <img src="generated/images/guide/service-worker/offline-checkbox.png" alt="The offline checkbox in the Network tab is checked">
+  <img src="generated/images/guide/service-worker/offline-option.png" alt="The offline option in the Network tab is selected">
 </div>
 
 これで、アプリケーションはネットワークにアクセスできなくなりました。
@@ -89,7 +95,7 @@ networkタブを見ると、Service Workerがアクティブであることを�
   <!-- textlint-disable prh --><img src="generated/images/guide/service-worker/sw-active.png" alt="Requests are marked as from ServiceWorker"><!-- textlint-enable prh -->
 </div>
 
-「サイズ」列の下にある要求状態は、<!-- textlint-disable prh -->(from ServiceWorker)<!-- textlint-enable prh -->となっていることに注目してください。これは、リソースがネットワークからロードされていないことを意味します。代わりに、Service Workerのキャッシュからロードされています。
+「サイズ」列の下にある要求状態は、<!-- textlint-disable prh -->`(ServiceWorker)`<!-- textlint-enable prh -->となっていることに注目してください。これは、リソースがネットワークからロードされていないことを意味します。代わりに、Service Workerのキャッシュからロードされています。
 
 
 ### 何がキャッシュされているのか？
@@ -103,7 +109,7 @@ networkタブを見ると、Service Workerがアクティブであることを�
 * 設定された`outputPath`（デフォルトでは`./dist/<project-name>/`）または `resourcesOutputPath` の直下にある画像やフォント。これらのオプションの詳細については[`ng build`](cli/build)を参照してください。
 
 
-<div class="alert is-helpful">
+<div class="alert is-important">
 2つのポイントに注意してください。
 
 1. 生成された `ngsw-config.json`はキャッシュ可能なフォントと画像の拡張子の限られたリストを含みます。場合によっては、ニーズに合わせてglobパターンを変更するでしょう。
@@ -119,15 +125,15 @@ Service Workerがアプリケーションをキャッシュする方法を見て
 
 1. シークレットウィンドウでテストする場合は、2つ目のタブを空白で開きます。これにより、テスト中にシークレットとキャッシュの状態が維持されます。
 
-2. アプリケーションタブを閉じますが、ウィンドウは閉じません。これにより、開発者ツールも閉じる必要があります。
+1. アプリケーションタブを閉じますが、ウィンドウは閉じません。これにより、開発者ツールも閉じる必要があります。
 
-3. `http-server`をシャットダウンします。
+1. `http-server`をシャットダウンします。
 
-4. 編集するために`src/app/app.component.html`を開きます。
+1. 編集するために`src/app/app.component.html`を開きます。
 
-5. `Welcome to {{title}}!`のテキストを`Bienvenue à {{title}}!`に変えます。
+1. `Welcome to {{title}}!`のテキストを`Bienvenue à {{title}}!`に変えます。
 
-6. もう一度ビルドしてサーバーを起動します。
+1. もう一度ビルドしてサーバーを起動します。
 
 ```sh
 ng build
@@ -138,7 +144,7 @@ http-server -p 8080 -c-1 dist/<project-name>
 
 ブラウザとService Workerが、更新されたアプリケーションをどのように処理するかを見てみましょう。
 
-1. 同じウィンドウでもう一度http://localhost:8080を開きます。何が起こりましたか?
+1. 同じウィンドウでもう一度[http://localhost:8080](http://localhost:8080)を開きます。何が起こりましたか?
 
 <div class="lightbox">
   <img src="generated/images/guide/service-worker/welcome-msg-en.png" alt="It still says Welcome to Service Workers!">
@@ -159,4 +165,5 @@ Service Workerは、あなたのアプリケーションの更新版を*バッ�
 ## もっとAngular Service Workerを知りたい
 
 次の記事がお勧めです。
+* [App Shell](guide/app-shell)
 * [Service Workerと通信する](guide/service-worker-communications)

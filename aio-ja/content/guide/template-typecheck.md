@@ -24,8 +24,6 @@ TypeScript がコードの型エラーをキャッチするのと同じように
 
 多くの場合、これらは最終的に `any` 型になり、式の後続部分がチェックされなくなる可能性があります。
 
-
-
 ### フルモード
 
 `fullTemplateTypeCheck` フラグが `true` に設定されている場合、Angular はテンプレート内の型チェックでより積極的です。
@@ -40,6 +38,12 @@ TypeScript がコードの型エラーをキャッチするのと同じように
 * DOM 要素へのローカル参照。
 * `$event` オブジェクト。
 * セーフナビゲーション式
+
+<div class="alert is-important">
+
+The `fullTemplateTypeCheck` flag has been deprecated in Angular 13. The `strictTemplates` family of compiler options should be used instead.
+
+</div>
 
 
 {@a strict-mode}
@@ -198,7 +202,7 @@ export class UserDetailComponent {
 ```ts
 @Component({
   selector: 'app-root',
-  template: '<user-detail [user]="selectedUser" />',
+  template: '<user-detail [user]="selectedUser"></user-detail>',
 })
 export class AppComponent {
   selectedUser: User | null = null;
@@ -209,7 +213,7 @@ export class AppComponent {
 したがって、Angularは `selectedUser` プロパティを `UserDetailComponent.user` に割り当てます。これにより、それらの型に互換性がない場合にエラーが発生します。
 TypeScript は、アプリケーションで設定されている `strictNullChecks` などのフラグに沿って、型システムにしたがって割り当てをチェックします。
 
-テンプレート型チェッカーに、より具体的なテンプレート内の型要件を提供することで、実行時の型エラーを回避できます。ディレクティブ定義でテンプレートガード関数を提供することにより、独自のディレクティブの入力型要件をできるだけ具体的にします。このガイドの [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks) および [入力セッターの強制](#input-setter-coercion) を参照してください。
+テンプレート型チェッカーに、より具体的なテンプレート内の型要件を提供することで、実行時の型エラーを回避できます。ディレクティブ定義でテンプレートガード関数を提供することにより、独自のディレクティブの入力型要件をできるだけ具体的にします。このガイドの [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks)を参照してください。
 
 
 ### 厳密な null チェック
@@ -230,10 +234,10 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 
 上記の問題に対する2つの潜在的な回避策があります。
 
-  1. テンプレートで、`<user-detail [user]="user!" />` のように null 許容式の最後に null 以外のアサーション演算子 `！` を含めます。
+  1. テンプレートで、`<user-detail [user]="user!"></user-detail>` のように null 許容式の最後に null 以外のアサーション演算子 `！` を含めます。
 
   この例では、コンパイラーは、TypeScript コードの場合と同様に、null可能性における型の非互換性を無視します。
-  `async` パイプの場合は、`<user-detail [user]="(user$ | async)!" />` のように、式を括弧で囲む必要があることに注意してください。
+  `async` パイプの場合は、`<user-detail [user]="(user$ | async)!"></user-detail>` のように、式を括弧で囲む必要があることに注意してください。
 
   1. Angular テンプレートの厳密な null チェックを完全に無効にします。
 
@@ -262,7 +266,7 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
   selector: 'submit-button',
   template: `
     <div class="wrapper">
-      <button [disabled]="disabled">Submit</button>'
+      <button [disabled]="disabled">Submit</button>
     </div>
   `,
 })
@@ -301,7 +305,7 @@ set disabled(value: boolean) {
 ```
 
 ここで `value` の型を `boolean` から `boolean|''`に変更して、セッターが実際に受け入れる値のセットと一致させるのが理想的です。
-TypeScript では、ゲッターとセッターの両方が同じ型である必要があるため、ゲッターが `boolean` を返す必要がある場合、セッターはより狭義の型で固定されます。
+バージョン4.3以前のTypeScript では、ゲッターとセッターの両方が同じ型である必要があるため、ゲッターが `boolean` を返す必要がある場合、セッターはより狭義の型で固定されます。
 
 コンシューマーでテンプレートの Angular のもっとも厳密な型チェックが有効になっている場合、これにより問題が発生します。空の文字列 `''` は、実際には `disabled` フィールドに割り当てられず、属性フォームが使用されると型エラーが発生します。
 
@@ -322,6 +326,12 @@ class SubmitButton {
   static ngAcceptInputType_disabled: boolean|'';
 }
 ```
+
+<div class="alert is-important">
+
+Since TypeScript 4.3, the setter could have been declared to accept `boolean|''` as type, making the input setter coercion field obsolete. As such, input setters coercion fields have been deprecated. 
+
+</div>
 
 このフィールドに値を入力する必要はありません。その存在は、Angular 型チェッカーと通信して、`disabled` 入力は型 `boolean|''` に一致するバインディングを受け入れると見なされるべきであることを伝えます。接尾辞は `@Input` _field_ の名前にする必要があります。
 

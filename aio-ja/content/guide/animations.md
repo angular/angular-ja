@@ -84,7 +84,7 @@ HTMLでは、これらの属性は色や不透明度などの通常のCSSスタ�
 
 各遷移の終了時に呼び出す個別の状態を定義するためには、Angularの`state()`関数を使用します。この関数は、`open`や`closed`のようなユニークな名前と`style()`関数の2つの引数をとります。
 
-`style()`関数を使って、与えられた状態名に関連付けるスタイルのセットを定義します。スタイル属性は[*キャメルケース(camelCase)*](guide/glossary#case-conventions)でなければならないことに注意してください。
+`style()`関数を使って、指定された状態名に関連付けるスタイルのセットを定義します。ダッシュを含むスタイル属性は`'background-color'`のように引用符で囲むか、`backgroundColor`のように、[*camelCase*](guide/glossary#case-conventions)を使用しなければなりません。
 
 Angularの`state()`関数がCSSスタイル属性を設定する`style⁣()`関数とどのように機能するかを見てみましょう。次のコードスニペットでは、複数のスタイル属性が状態に対して同時に設定されています。`open`状態では、ボタンの高さは200ピクセル、不透明度は1、背景色は黄色になります。
 
@@ -109,9 +109,9 @@ Angularでは、アニメーションなしで複数のスタイルを設定で�
 
 `animate()`関数(遷移関数の第2引数)では`timings`と`styles`の入力パラメータを受け取ります。
 
-`timings`パラメータは3つのパーツで定義された文字列をとります。
+`timings`パラメータは、数値または3つの部分で定義された文字列のいずれかを取ります。
 
->`animate ('duration delay easing')`
+>`animate (duration)` または `animate ('duration delay easing')`
 
 最初の部分、`duration`は必須です。デュレーションは、クオートのない数値で表現されたミリ秒、またはクオートと時間指定子を含む秒単位で表現することができます。たとえば、10分の1秒のデュレーションは、次のように表現することができます:
 
@@ -263,7 +263,7 @@ Angularアニメーションの高度な機能については、アニメーシ�
 </tr>
 
 <tr>
-<td><code><a href="api/animations/state" class="code-anchor">state()</a></code></td>
+<td><code><a href="api/animations/state" class="code-anchor">state</a>()</code></td>
 <td>指定された状態への遷移が成功した場合に適用されるCSSスタイルの名前付きセットを作成します。状態は、他のアニメーション関数内で名前で参照することができます。</td>
 </tr>
 

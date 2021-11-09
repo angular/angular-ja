@@ -27,7 +27,7 @@ ng config --global cli.analyticsSharing.tracking UA-123456-12
 この機能を無効にするには、次のコマンドを実行します:
 
 <code-example language="sh">
-ng config --global --remove cli.analyticsSharing
+ng config --global cli.analyticsSharing undefined
 </code-example>
 
 ## ユーザーごとのトラッキング
@@ -37,11 +37,11 @@ ng config --global --remove cli.analyticsSharing
 
 
 <code-example language="sh">
-ng config --global cli.analyticsSharing.user SOME_USER_NAME
+ng config --global cli.analyticsSharing.uuid SOME_USER_NAME
 </code-example>
 
 新しいランダムユーザーIDを生成するには、次のコマンドを実行します:
 
 <code-example language="sh">
-ng config --global cli.analyticsSharing.user ""
+ng config --global cli.analyticsSharing.uuid ""
 </code-example>

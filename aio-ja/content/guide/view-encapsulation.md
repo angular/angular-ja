@@ -7,7 +7,7 @@ AngularではコンポーネントのCSSスタイルはコンポーネントの�
 コンポーネントのメタデータに _ビューのカプセル化モード_ を設定します。
 次のモードから選択してください：
 
-- `ShadowDom` ビューカプセル化では、ブラウザのネイティブShadow DOM実装
+- `ShadowDom` ビューカプセル化では、ブラウザのビルトインShadow DOM実装
 （[Shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)を参照）を使用して、
 Shadow DOMをコンポーネントのホスト要素にアタッチし、
 そのShadow DOM内にコンポーネントビューを配置します。コンポーネントのスタイルは、Shadow DOM内に含まれています。
@@ -25,7 +25,7 @@ AngularはCSSをグローバルスタイルに追加します。
 
 <code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.shadow" header="src/app/quest-summary.component.ts"></code-example>
 
-`ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
+`ShadowDom` ビューカプセル化は、Shadow DOM をビルトインサポートしているブラウザでのみ機能します
 ([Can I use - Shadow DOM v1](https://caniuse.com/shadowdomv1) を参照)。サポートは未だ限定的です。
 そのため、`Emulated`ビューカプセル化がデフォルトモードであり、ほとんどの場合に推奨されます。
 

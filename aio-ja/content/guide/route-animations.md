@@ -33,11 +33,11 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 まず、`RouterModule`クラスのメソッドを使用してルーティングを設定します。 このルーティング設定は、ルーターにナビゲーションする方法を指示します。
 
-`RouterModule.forRoot`メソッドを使用してルーティングを定義します。 また、この`RouterModule`をメインモジュールである`AppModule`の`imports`配列にインポートします。
+`RouterModule.forRoot`メソッドを使用してルーティングを定義します。 また、この`RouterModule`をメインモジュールである`AppModule`の`imports`配列に追加します。
 
 <div class="alert is-helpful">
 
-**Note:** ルートモジュールである`AppModule`の`RouterModule.forRoot`メソッドを使用して、トップレベルのアプリケーションルーティングとプロバイダーを登録します。 その他の細分化された機能ごとのモジュールについては、`RouterModule.forChild`メソッドを呼び出して追加のルーティング登録を行います。
+**Note:** ルートモジュールである`AppModule`の`RouterModule.forRoot`メソッドを使用して、トップレベルのアプリケーションルーティングとプロバイダーを登録します。 その他の細分化された機能ごとのモジュールについては、`RouterModule.forChild`メソッドを代わりに呼び出します。
 
 </div>
 
@@ -47,7 +47,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 `home`および`about`パスは、`HomeComponent`および`AboutComponent`ビューに関連付けられます。 ルーティング設定は、ナビゲーションが対応するパスと一致したときに、`HomeComponent`ビューと`AboutComponent`ビューをインスタンス化するようにAngularルーターに指示します。
 
-`path`と`component`に加えて、各ルーティングの`data`プロパティに、ルーティングと関連付けられたキーのアニメーション固有の設定を定義します。 ルーティングが変更されると、`data`プロパティの値が`AppComponent`に渡されます。 また、アニメーション内で消費される追加のデータをルーティングコンフィグレーションへ渡すこともできます。 dataプロパティの値は`routeAnimation`トリガーで定義された遷移と一致する必要がありますが、これについては後で定義します。
+`path`と`component`に加えて、各ルーティングの`data`プロパティに、ルーティングと関連付けられたキーのアニメーション固有の設定を定義します。 ルーティングが変更されると、`data`プロパティの値が`AppComponent`に渡されます。 また、アニメーション内で消費される追加のデータをルーティングコンフィグレーションへ渡すこともできます。 dataプロパティの値は`routeAnimation`トリガーで定義された遷移と一致する必要がありますが、これについてはすぐ後で定義します。
 
 <div class="alert is-helpful">
 
@@ -57,9 +57,9 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 ## ルーターアウトレット
 
-ルーティングを設定した後、Angularルーターに、ルーティングと一致するビューをレンダリングする場所を伝えます。 ルートの`AppComponent`テンプレートの中に`<router-outlet>`コンテナを挿入して、ルーターアウトレットを設定することができます。
+After configuring the routes, add a `<router-outlet>` inside the root `AppComponent` template. The `<router-outlet>` directive tells the Angular router where to render the views when matched with a route.
 
-`<router-outlet>`コンテナには、ルーティング設定で設定した`data`プロパティに基づいて、アクティブなルーティングとその状態に関するデータを含む属性ディレクティブがあります。
+The `<router-outlet>` directive holds the custom data set for the currently active route which can be accessed via the directive's `activatedRouteData` property, we can use such data to animate our routing transitions.
 
 <code-example path="animations/src/app/app.component.html" header="src/app/app.component.html" region="route-animations-outlet"></code-example>
 
@@ -80,7 +80,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 アニメーション定義にはいくつかのことを行います:
 
-* 2つの遷移を定義します。 1つのトリガーで複数の状態と遷移を定義できます。
+* 2つの遷移を定義します。 (1つの`trigger`で複数の状態と遷移を定義できます。)
 * 遷移中の相対位置を制御するために、ホストビューと子ビューのスタイルを調整します。
 * `query()`を使用して、入力された子ビューとホストビューから離れる子ビューを判別します。
 
@@ -95,11 +95,13 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 <code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="define" language="typescript"></code-example>
 
+So, let's break down the animation definition and see more closely what it does...
+
 ### ホストコンポーネントと子コンポーネントのスタイル設定
 
-遷移中、古いビューの直後に新しいビューが挿入され、同時に両方の要素が画面に表示されます。 これを防ぐには、追加のスタイリングをホストビューに適用し、削除して挿入した子ビューに適用します。 ホストビューは相対位置を使用する必要があり、子ビューは絶対位置を使用する必要があります。 スタイルをビューに追加することで、DOMを動かすことなく、コンテナの位置をアニメーション化できます。
+During a transition, a new view is inserted directly after the old one and both elements appear on screen at the same time. To prevent this behavior, update the host view to use relative positioning. Then, update the removed and inserted child views to use absolute positioning. Adding these styles to the views animates the containers in place and prevents one view from affecting the position of the other on the page.
 
-<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="style-view" language="typescript"></code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts (excerpt)" region="style-view" language="typescript"></code-example>
 
 ### ビューコンテナのクエリ
 
@@ -107,14 +109,14 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 *Home => About*へ遷移しているとしましょう。
 
-<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts (Continuation from above)" region="query" language="typescript"></code-example>
+<code-example path="animations/src/app/animations.ts" header="src/app/animations.ts (excerpt)" region="query" language="typescript"></code-example>
 
 このアニメーションコードは、ビューをスタイリングした後、次の処理を行います:
 
 * `query(':enter', style({ left: '-100%' }))` は、新たに追加されたビューと一致し、これを一番左に配置することで隠します。
 * アニメーションを実行するため、離れるビューで`animateChild()`を呼び出します。
-* `group()`関数を使用して、内部アニメーションを並列に実行します。
-* `group()`関数の中で:
+* <code>[group](api/animations/group)()</code>関数を使用して、内部アニメーションを並列に実行します。
+* <code>[group](api/animations/group)()</code>関数の中で:
     * 削除されたビューをクエリーし、右にスライドするようにアニメーションします。
     * イージング関数と継続時間でビューをアニメーション化することにより、新しいビューにスライドします。 </br>
     このアニメーションの結果、左から右に向かって`about`ビューがスライドします。

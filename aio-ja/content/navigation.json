@@ -115,11 +115,17 @@
     },
     {
       "title": "Angularを理解する",
-      "tooltip": "Learn the concepts essential to becoming a proficient Angular developer.",
+      "tooltip": "Angularの開発者になるために必要な概念を学びます。",
       "children": [
         {
+          "title": "概要",
+          "url": "guide/understanding-angular-overview",
+          "tooltip": "Angularアプリケーションの代表的なパーツについて学びます。",
+          "translated": true
+        },
+        {
           "title": "コンポーネント",
-          "tooltip": "Building dynamic views with data binding",
+          "tooltip": "データバインディングを使用して動的なビューを構築する方法について詳しく説明します。",
           "children": [
             {
               "url": "guide/component-overview",
@@ -269,7 +275,7 @@
         },
         {
           "title": "依存性の注入",
-          "tooltip": "依存性の注入：サービスの作成と注入",
+          "tooltip": "依存性の注入:サービスの作成と注入",
           "children": [
             {
               "url": "guide/dependency-injection",
@@ -289,11 +295,16 @@
     },
     {
       "title": "開発者ガイド",
-      "tooltip": "Learn more about how to use Angular to build your applications.",
+      "tooltip": "Angularを使ってアプリケーションを構築する方法について詳しく説明します。",
       "children": [
         {
+          "url": "guide/developer-guide-overview",
+          "title": "概要",
+          "tooltip": "Angularアプリケーションを構築するための開発者向けガイドの一覧です。"
+        },
+        {
           "title": "ルーティングとナビゲーション",
-          "tooltip": "Build in-app navigation among views using the Angular Router.",
+          "tooltip": "Angular Routerを使用して、ビュー間のアプリ内ナビゲーションを構築する方法について説明します。",
           "children": [
             {
               "url": "guide/routing-overview",

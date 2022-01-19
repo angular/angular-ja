@@ -208,4 +208,4 @@ Angularの動作を確認するには、[はじめに](start)のチュートリ�
 
 Angularの機能をさらに詳しく調べるには、[Angularを理解する](guide/component-overview)と[開発者ガイド](guide/router)のセクションを読むことをお勧めします。
 
-@reviewed 2021-09-14
+@reviewed 2021-10-28

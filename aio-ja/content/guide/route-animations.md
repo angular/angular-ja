@@ -75,7 +75,6 @@ The `<router-outlet>` directive holds the custom data set for the currently acti
 
 次のコードスニペットは、`slideInAnimation`という名前の付いた再利用可能なアニメーション定義しています。
 
-
 <code-example path="animations/src/app/animations.ts" header="src/app/animations.ts" region="route-animations" language="typescript"></code-example>
 
 アニメーション定義にはいくつかのことを行います:

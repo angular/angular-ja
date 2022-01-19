@@ -98,8 +98,9 @@ Angular ワークスペースにライブラリプロジェクト `my-lib` が�
 </code-example>
 
   * `build` スクリプトは、カスタム `tsconfig.schematics.json` ファイルを使用して Schematic をコンパイルします。
-  * `copy:*` ステートメントは、ファイル構造を保持するために、コンパイルされた Schematic ファイルをライブラリ出力フォルダーの適切な場所にコピーします。
   * `build` スクリプトが完了すると、`postbuild` スクリプトが Schematic ファイルをコピーします。
+  * Both the `build` and the `postbuild` scripts require dependencies that are found in their parent directory.
+    They can be installed by running `npm install` prior to running the scripts.
 
 ## 生成サポートの提供
 

@@ -572,7 +572,7 @@ Angularにおいて、他のAngularアプリケーションに含めることが
 
 Angularはこれらのフックメソッドを次の順序で呼び出します:
 
-* `ngOnChanges`: [input](#input)/[output](#output)バインディングの値が変更のとき。
+* `ngOnChanges`: [input](#input)バインディングの値が変更のとき。
 * `ngOnInit`: 最初の`ngOnChanges`の後。
 * `ngDoCheck`: 開発者のカスタム変更検知。
 * `ngAfterContentInit`: コンポーネントのコンテンツ初期化の後。

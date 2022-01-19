@@ -1195,7 +1195,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 <code-example path="router/src/app/app.module.ts" header="src/app/app.module.ts (animations-module)" region="animations-module"></code-example>
 
 次に、`HeroListComponent` と `HeroDetailComponent` のルートに `data` オブジェクトを追加します。
-トランジションは `state` に基づいており、ルートからの `animation` データを使用して、トランジションに名前付きのアニメーション `state` を提供します。
+トランジションは `states` に基づいており、ルートからの `animation` データを使用して、トランジションに名前付きのアニメーション [`state`](api/animations/state) を提供します。
 
 <code-example path="router/src/app/heroes/heroes-routing.module.2.ts" header="src/app/heroes/heroes-routing.module.ts (animation data)"></code-example>
 

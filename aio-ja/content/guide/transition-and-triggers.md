@@ -7,7 +7,7 @@
 
 ## 定義済み状態とワイルドカードマッチング
 
-Angularでは、遷移の状態は`state()`関数を介して明示的に定義するか、定義済み状態である`*`(ワイルドカード)と`void`を使用することができます。
+Angularでは、遷移の状態は<code>[state](api/animations/state)()</code> 関数を介して明示的に定義するか、定義済み状態である`*`(ワイルドカード)と`void`を使用することができます。
 
 ### ワイルドカード状態
 
@@ -119,7 +119,7 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 <code-example path="animations/src/app/insert-remove.component.ts" header="src/app/insert-remove.component.ts" region="enter-leave-trigger" language="typescript">
 </code-example>
 
-この例では`state()`を使用する必要がないことに注意してください。
+この例では<code>[state](api/animations/state)()</code>を使用する必要がないことに注意してください。
 
 ## :increment と :decrement での遷移
 

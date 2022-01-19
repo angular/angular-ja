@@ -50,9 +50,6 @@ class MyModule {}
 <td><p>このモジュールと、このモジュールをインポートするモジュールの両方に公開される依存性注入のプロバイダーのリスト。</p>
 </td>
 </tr><tr>
-<td><code><b>entryComponents:</b> [SomeComponent, OtherComponent]</code></td>
-<td><p>到達可能なテンプレートで参照されていないコンポーネントのリスト。たとえば、コードから動的に作成されたもの。</p></td>
-</tr><tr>
 <td><code><b>bootstrap:</b> [MyAppComponent]</code></td>
 <td><p>このモジュールがブートストラップされたときにブートストラップされるコンポーネントのリスト。</p>
 </td>

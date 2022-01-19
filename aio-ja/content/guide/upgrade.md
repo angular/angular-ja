@@ -24,9 +24,7 @@ AngularJS アプリケーションを構築する方法はたくさんありま�
 これらのアプリケーションを Angular にアップグレードすることを始める際、いくつかのものは他のものよりも作業が簡単なことが明らかになるでしょう。
 移行を始める前からであっても、アプリケーションが将来性のあるものにするために使うことのできるいくつかの鍵となる技術やパターンがあります。
 
-### AngularJS スタイルガイドに準拠する
-
-{@a follow-the-angular-styleguide}
+### AngularJS スタイルガイドに準拠する {@a follow-the-angularjs-style-guide}
 
 [AngularJS スタイルガイド][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMd]にはAngularJS アプリケーションのメンテナンス性を向上させ、見通しをよくすることが証明されているパターンとプラクティスが集められています。
 そこにはどのように AngularJS のソースコードを書き、構成するかについてと &mdash;同じように重要な&mdash; どのようにAngularJS のソースコードを**書かず**、構成 **しない** かについて豊富な情報が含まれています。
@@ -349,7 +347,7 @@ AngularJS のアプリケーションをハイブリッドに置き換え始め�
 `npm install @angular/upgrade --save` で `@angular/upgrade` パッケージをインストールし、
 `@angular/upgrade/static` パッケージへのマッピングを追加することも必要です。
 
-<code-example path="upgrade-module/src/systemjs.config.1.js" region="upgrade-static-umd" header="systemjs.config.js (map)"></code-example>
+<code-example path="upgrade-module/src/systemjs.config.1.js" region="upgrade-static-package" header="systemjs.config.js (map)"></code-example>
 
 次に、`app.module.ts` ファイルを作成し、`NgModule` クラスを追加します。
 
@@ -413,10 +411,6 @@ the inputs change, you can set `propagateDigest` to `false` when calling
 `HeroDetailComponent` は Angular のコンポーネントであるため、 `AppModule` の中で宣言
 する必要があります。
 
-そしてこのコンポーネントは AngularJS のモジュールから使われれ、
-Angular のアプリケーションの開始地点になるため、
-NgModule の `entryComponents` に追加しなければなりません。
-
 <code-example path="upgrade-module/src/app/downgrade-static/app.module.ts" region="ngmodule" header="app.module.ts">
 </code-example>
 
@@ -468,7 +462,7 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
 入力または出力の名前が複数の単語から構成される場合に発生します。Angular ではこのような属性は
 キャメルケースを使います。
 
-<code-example format="typescript" language="typescript">
+<code-example language="html">
 
 [myHero]="hero"
 (heroDeleted)="handleHeroDeleted($event)"
@@ -477,7 +471,7 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
 
 しかし AngularJS のテンプレートから使う場合、ケバブケースを使わなければなりません。
 
-<code-example format="typescript" language="typescript">
+<code-example language="html">
 
 [my-hero]="hero"
 (hero-deleted)="handleHeroDeleted($event)"
@@ -780,7 +774,7 @@ AngularJS から Angular に移行する時、新しい API を使えるよう�
 
 `LocationUpgradeModule` を使うために、`@angular/common/upgrade` をインポートして、静的な `LocationUpgradeModule.config()` メソッドを使い、`AppModule` のインポートに追加します。
 
-<code-example format="typescript" language="typescript">
+<code-example language="typescript">
 
 // Other imports ...
 import { LocationUpgradeModule } from '@angular/common/upgrade';
@@ -799,7 +793,7 @@ export class AppModule {}
 
 `useHash` プロパティの初期値は `false` で、 `hashPrefix` の初期値は空の `string` です。上書きするには設定オブジェクトを渡してください。
 
-<code-example format="typescript" language="typescript">
+<code-example language="typescript">
 
 LocationUpgradeModule.config({
   useHash: true,
@@ -818,7 +812,7 @@ LocationUpgradeModule.config({
 
 AngularJS において `$location` サービスをプロバイダーとしてつかうために、ファクトリプロバイダーを使って `$locationShim` をダウングレードする必要があります。
 
-<code-example format="typescript" language="typescript">
+<code-example language="typescript">
 
 // Other imports ...
 import { $locationShim } from '@angular/common/upgrade';
@@ -870,9 +864,8 @@ Angular のアプリケーションの AOT の恩恵をすべて得るために�
 適用する方法を見ていきます。アプリケーションを Angular に合わせ、
 TypeScript で書き始めます。
 
-チュートリアルに沿って進めるために、
-[angular-phonecat][GithubAngularAngularPhonecat] リポジトリを
-クローンし、各手順を適用しながら進めてください。
+This tutorial is based on the 1.5.x version of the `angular-phonecat` tutorial, which is preserved in the [1.5-snapshot][GithubAngularAngularPhonecatCommits15Snapshot] branch of the repository.
+To follow along, clone the [angular-phonecat][GithubAngularAngularPhonecat] repository, check out the `1.5-snapshot` branch and apply the steps as you go.
 
 プロジェクト構成については、このようなところから始めていきます。
 
@@ -1008,7 +1001,7 @@ TypeScript で書き始めます。
 </div>
 
 これはかなりよい開始地点です。
-ソースコードはアップグレードの[事前準備][AioGuideUpgradeFollowTheAngularStyleguide] として重要な、AngularJS 1.5 のコンポーネント API を使っており、構成が [AngularJS スタイルガイド][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMd]にしたがっています。
+ソースコードはアップグレードの[事前準備][AioGuideUpgradeFollowTheAngularjsStyleGuide] として重要な、AngularJS 1.5 のコンポーネント API を使っており、構成が [AngularJS スタイルガイド][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMd]にしたがっています。
 
 * [Rule of 1][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdSingleResponsibility] にあるように、
   個々のコンポーネントやサービス、フィルターは個々のソースファイルにあります。
@@ -1032,7 +1025,7 @@ NPM を使って新しい依存関係をインストールし、Bower パッケ�
 
 始めに、TypeScript をプロジェクトへインストールしましょう。
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 npm i typescript --save-dev
 
@@ -1044,7 +1037,7 @@ AngularJS や AngularJS Material、Jasmine ユニットテストフレームワ�
 
 For the PhoneCat app, we can install the necessary type definitions by running the following command:
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 npm install @types/jasmine @types/angular @types/angular-animate @types/angular-aria @types/angular-cookies @types/angular-mocks @types/angular-resource @types/angular-route @types/angular-sanitize --save-dev
 
@@ -1052,7 +1045,7 @@ npm install @types/jasmine @types/angular @types/angular-animate @types/angular-
 
 If you are using AngularJS Material, you can install the type definitions via:
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 npm install @types/angular-material --save-dev
 
@@ -1066,7 +1059,7 @@ CommonJS のモジュールへバンドルされた ES5 のコードに変える
 最後に、TypeScript のファイルを JavaScript に(`tsconfig.json` 設定ファイルに基づいて)コンパイルするために、
 いくつかの npm スクリプトを `package.json` に追加します。
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 "scripts": {
   "tsc": "tsc",
@@ -1075,9 +1068,9 @@ CommonJS のモジュールへバンドルされた ES5 のコードに変える
 
 </code-example>
 
-コマンドラインから TypeScript のコンパイラを　watch モードで起動します。
+コマンドラインから TypeScript のコンパイラを watch モードで起動します。
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 npm run tsc:w
 
@@ -1201,7 +1194,7 @@ SystemJS モジュールローダーと共に、Angular をプロジェクトに
 
 これが終わったら、コマンドを実行してください。
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 npm install
 
@@ -1216,7 +1209,7 @@ npm install
 それから、`package.json` にある開発サーバーのルートのパスを `app` の代わりに、
 プロジェクトのルートに変更します。
 
-<code-example format="json" language="json">
+<code-example language="json">
 
 "start": "http-server ./ -a localhost -p 8000 -c-1",
 
@@ -1315,7 +1308,7 @@ If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manual
 
 1.  Use `npm` to globally install `rollup`
 
-    <code-example format="shell" language="shell">
+    <code-example language="shell">
 
     npm i -g rollup
 
@@ -1323,7 +1316,7 @@ If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manual
 
 1.  Output the version of `rollup` and verify the installation was successful
 
-    <code-example format="shell" language="shell">
+    <code-example language="shell">
 
     rollup -v
 
@@ -1334,7 +1327,7 @@ If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manual
     1.  Create a file named `rollup.config.js`
     1.  Copy the following content into `rollup.config.js`
 
-        <code-example format="javascript" language="javascript">
+        <code-example language="javascript">
 
         export default {
           input: 'node_modules/@angular/core/fesm2015/core.js',
@@ -1349,7 +1342,7 @@ If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manual
 
 1.  Use `rollup` to create the `bundle.js` UMD bundle using settings in `rollup.config.js`
 
-    <code-example format="shell" language="shell">
+    <code-example language="shell">
 
     rollup -c rollup.config.js
 
@@ -1497,8 +1490,7 @@ Angular のコンポーネントを AngularJS で使うために、ダウング�
 <code-example path="upgrade-phonecat-2-hybrid/app/phone-list/phone-list.component.ts" region="downgrade-component" header="app/phone-list/phone-list.component.ts"></code-example>
 
 新しい `PhoneListComponent` は `FormsModule` にある Angular の `ngModel` ディレクティブを使います。
-`FormsModule` を `NgModule` のインポートに追加し、新しい `PhoneListComponent` を宣言し、
-最後にダウングレードした `entryComponents` を追加してください。
+`FormsModule` を `NgModule` のインポートに追加し、新しい `PhoneListComponent` を宣言してください。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/app.module.ts" region="phonelist" header="app.module.ts"></code-example>
 
@@ -1553,7 +1545,7 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
   Angular の式は未定義のオブジェクトのプロパティを参照しようとした時に黙って失敗しません。
   これが起こるケースを想定しなければなりません。
 
-`PhoneDetailComponent` コンポーネントを `NgModule` の _declarations_ と _entryComponents_ に追加します。
+`PhoneDetailComponent` コンポーネントを `NgModule` の *declarations* に追加します。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/app.module.ts" region="phonedetail" header="app.module.ts">
 </code-example>
@@ -1708,8 +1700,6 @@ Angular のルーターはルートパラメータを異なる方法で渡しま
 
 すべての `downgradeInjectable()` や `downgradeComponent()` も
 関連する AngularJS のファクトリやディレクティブ宣言と一緒に削除してください。
-ダウングレードされたコンポーネントはもうないため、
-`entryComponents` にリストとして記載する必要はありません。
 
 <code-example path="upgrade-phonecat-3-final/app/app.module.ts" header="app.module.ts">
 </code-example>
@@ -1728,7 +1718,7 @@ AngularJS のための追加の型定義も同様にアンインストールで�
 唯一必要なのは Jasmine と Angular のポリフィルです。
 `@angular/upgrade` パッケージと `systemjs.config.js` のマッピングもアンインストールできます。
 
-<code-example format="shell" language="shell">
+<code-example language="shell">
 
 npm uninstall @angular/upgrade --save
 npm uninstall @types/angular @types/angular-animate @types/angular-cookies @types/angular-mocks @types/angular-resource @types/angular-route @types/angular-sanitize --save-dev
@@ -1766,7 +1756,7 @@ TypeScript への変換の間、E2E テストを動作させ続けるために�
 
 `protractor-conf.js` を更新して、ハイブリッドのアプリケーションと同期します。
 
-<code-example format="shell" language="shell">
+<code-example language="javascript">
 
 ng12Hybrid: true
 
@@ -1792,7 +1782,7 @@ AngularJS はページから完全に存在しなくなります。
 
 `protractor-conf.js` で以前追加した `ng12Hybrid` を次のように置き換えてください。
 
-<code-example format="javascript" language="javascript">
+<code-example language="javascript">
 
 useAllAngular2AppRoots: true,
 
@@ -1895,7 +1885,7 @@ Angular のコンポーネントのユニットテスト API を両方のコン�
 [AioGuideRouter]: guide/router "Common Routing Tasks | Angular"
 [AioGuideTypescriptConfiguration]: guide/typescript-configuration "TypeScript configuration | Angular"
 [AioGuideUpgradeBootstrappingHybridApplications]: guide/upgrade#bootstrapping-hybrid-applications "Bootstrapping hybrid applications - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradeFollowTheAngularStyleguide]: guide/upgrade#follow-the-angular-styleguide "Follow the AngularJS Style Guide - Upgrading from AngularJS to Angular | Angular"
+[AioGuideUpgradeFollowTheAngularjsStyleGuide]: guide/upgrade#follow-the-angularjs-style-guide "Follow the AngularJS Style Guide - Upgrading from AngularJS to Angular | Angular"
 [AioGuideUpgradeMakingAngularjsDependenciesInjectableToAngular]: guide/upgrade#making-angularjs-dependencies-injectable-to-angular "Making AngularJS Dependencies Injectable to Angular - Upgrading from AngularJS to Angular | Angular"
 [AioGuideUpgradePreparation]: guide/upgrade#preparation "Preparation - Upgrading from AngularJS to Angular | Angular"
 [AioGuideUpgradeUpgradingWithNgupgrade]: guide/upgrade#upgrading-with-ngupgrade "Upgrading with ngUpgrade - Upgrading from AngularJS to Angular | Angular"
@@ -1920,6 +1910,7 @@ Angular のコンポーネントのユニットテスト API を両方のコン�
 [GithubAngularAngularIssues38366]: https://github.com/angular/angular/issues/38366 " Issue 38366: RFC: Ivy Library Distribution| angular/angular | GitHub"
 
 [GithubAngularAngularPhonecat]: https://github.com/angular/angular-phonecat "angular/angular-phonecat | GitHub"
+[GithubAngularAngularPhonecatCommits15Snapshot]: https://github.com/angular/angular-phonecat/commits/1.5-snapshot "angular/angular-phonecat v1.5 | GitHub"
 
 [GithubAngularQuickstart]: https://github.com/angular/quickstart "angular/quickstart | GitHub"
 
@@ -1943,4 +1934,4 @@ Angular のコンポーネントのユニットテスト API を両方のコン�
 
 <!-- end links -->
 
-@reviewed 2021-10-26
+@reviewed 2021-11-02

@@ -53,6 +53,10 @@ Angularアプリケーションはコンポーネントを使って構築しま�
 1. 生成したプロジェクトをフォークします。
 1. 定期的に保存します。
 
+<div class="lightbox">
+  <img src="generated/images/guide/start/fork-the-project.png" alt="Fork the project">
+</div>
+
 StackBlitzでは、右側のプレビューペインにサンプルアプリケーションの起動状態が表示されます。
 プレビューには2つの領域があります。
 
@@ -162,16 +166,22 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
 このセクションでは、親コンポーネントである `ProductListComponent` からデータを受け取ることができる子コンポーネント `ProductAlertsComponent` を作成する方法を説明します。
 
-1. `app` フォルダを右クリックし、`Angular Generator` を使って `product-alerts` という名前の新しいコンポーネントを生成します。
+1. 現在のターミナルの上にあるプラス記号をクリックすると、コンポーネントを生成するためのコマンドを実行するための新しいターミナルが作成されます。
 
   <div class="lightbox">
-    <img src="generated/images/guide/start/generate-component.png" alt="StackBlitz command to generate component">
+    <img src="generated/images/guide/start/create-new-terminal.png" alt="StackBlitz command to generate component">
   </div>
 
-    ジェネレーターは、コンポーネントの3つの部分のスターターファイルを作成します。
-    * `product-alerts.component.ts`
-    * `product-alerts.component.html`
-    * `product-alerts.component.css`
+1. 新しいターミナルで、次のコマンドを実行して、`product-alerts`という名前の新しいコンポーネントを生成してください。
+
+  ```sh
+  ng generate component product-alerts
+  ```
+
+  ジェネレーターは、コンポーネントの3つの部分のスターターファイルを作成します。
+  * `product-alerts.component.ts`
+  * `product-alerts.component.html`
+  * `product-alerts.component.css`
 
 1. `product-alerts.component.ts` を開く。
   `@Component()`デコレーターは、次のクラスがコンポーネントであることを示します。
@@ -199,11 +209,11 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
   <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
-1. `ProductAlertsComponent`を他のコンポーネント内でも使えるように、 `app.module.ts`内の`AppModule`の　`declarations`に追加します。
+1. ジェネレーターは自動的に `AppModule` に `ProductAlertsComponent` を追加し、アプリケーション内の他のコンポーネントが利用できるようにしました。
 
   <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-product-alerts"></code-example>
   
-1. `ProductListComponent` の子として `ProductAlertsComponent` を表示するには、`product-list.component.html` にセレクター `<app-product-alerts>` を追加します。
+1. `ProductListComponent` の子として `ProductAlertsComponent` を表示するには、`product-list.component.html` に `<app-product-alerts>` 要素を追加します。
   プロパティバインディングを使用して、現在の製品を入力としてコンポーネントに渡します。
 
   <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.5.html" region="app-product-alerts"></code-example>

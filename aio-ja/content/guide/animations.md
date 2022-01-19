@@ -82,11 +82,11 @@ HTMLでは、これらの属性は色や不透明度などの通常のCSSスタ�
 
 ### アニメーションの状態とスタイル
 
-各遷移の終了時に呼び出す個別の状態を定義するためには、Angularの`state()`関数を使用します。この関数は、`open`や`closed`のようなユニークな名前と`style()`関数の2つの引数をとります。
+各遷移の終了時に呼び出す個別の状態を定義するためには、Angularの<code>[state](api/animations/state)()</code>関数を使用します。この関数は、`open`や`closed`のようなユニークな名前と`style()`関数の2つの引数をとります。
 
 `style()`関数を使って、指定された状態名に関連付けるスタイルのセットを定義します。ダッシュを含むスタイル属性は`'background-color'`のように引用符で囲むか、`backgroundColor`のように、[*camelCase*](guide/glossary#case-conventions)を使用しなければなりません。
 
-Angularの`state()`関数がCSSスタイル属性を設定する`style⁣()`関数とどのように機能するかを見てみましょう。次のコードスニペットでは、複数のスタイル属性が状態に対して同時に設定されています。`open`状態では、ボタンの高さは200ピクセル、不透明度は1、背景色は黄色になります。
+Angularの<code>[state](api/animations/state)()</code>関数がCSSスタイル属性を設定する`style⁣()`関数とどのように機能するかを見てみましょう。次のコードスニペットでは、複数のスタイル属性が状態に対して同時に設定されています。`open`状態では、ボタンの高さは200ピクセル、不透明度は1、背景色は黄色になります。
 
 <code-example path="animations/src/app/open-close.component.ts" header="src/app/open-close.component.ts" region="state1" language="typescript">
 </code-example>
@@ -154,13 +154,13 @@ region="transition2">
 
 <div class="alert is-helpful">
 
-**Note:** `state`関数と`transition`関数の中でスタイルを使用する際にいくつか追加の注意点があります。
+**Note:** [`state`](api/animations/state)関数と`transition`関数の中でスタイルを使用する際にいくつか追加の注意点があります。
 
-* 各遷移の最後に適用されるスタイルを定義するには、`state()`を使用します。これはアニメーションが完了した後も持続します。
+* 各遷移の最後に適用されるスタイルを定義するには、<code>[state](api/animations/state)()</code> を使用します。これはアニメーションが完了した後も持続します。
 
 * 中間のスタイルを定義するには、`transition()`を使います。これは、アニメーション中に動きの錯覚を作り出します。
 
-* アニメーションが無効になったとき、`transition()`のスタイルはスキップできますが、`state()`のスタイルはスキップできません。
+* アニメーションが無効になったとき、`transition()`のスタイルはスキップできますが、<code>[state](api/animations/state)()</code> のスタイルはスキップできません。
 
 * 同じ`transition()`引数に複数の状態のペアを含めることができます:<br/> `transition( 'on => off, off => void' )`。
 </div>
@@ -231,7 +231,7 @@ region="trigger">
 
 ### まとめ
 
-あなたは、`style()`と`state()`と`animate()`を使って2つの状態間の遷移にアニメーションを追加する方法を学びました。
+あなたは、`style()`と<code>[state](api/animations/state)()</code>と`animate()`を使って2つの状態間の遷移にアニメーションを追加する方法を学びました。
 
 Angularアニメーションの高度な機能については、アニメーションセクションの[遷移とトリガー](guide/transition-and-triggers)の高度なテクニックから開始して学ぶことができます。
 

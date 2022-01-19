@@ -20,17 +20,23 @@
 
 ## アプリケーションをローカルで実行する
 
-1. 左メニューの `Project` の横にある `Download Project` アイコンをクリックして、StackBlitz プロジェクトのソースコードをダウンロードします。
+1. 左メニューの `Project` の横にある `Download Project` アイコンをクリックして、StackBlitz プロジェクトのソースコードをZIP形式でダウンロードできます。
 
-1. [`ng new`](cli/new "CLI ng new command reference") コマンドを使って新しい Angular CLI ワークスペースを作成します。ここで、`my-project-name` はプロジェクトの好きな呼び名です。
+    <div class="lightbox">
+      <img src="generated/images/guide/start/download-project.png" alt="Download the stackblitz project">
+    </div>
+
+1. アーカイブを解凍し、新しく作成したプロジェクトにディレクトリを変更します。たとえば
 
     ```sh
-    ng new my-project-name
+    cd angular-ynqttp
     ```
 
-    このコマンドは一連の設定プロンプトを表示します。このチュートリアルでは、各プロンプトのデフォルト設定を受け入れます。
+1. npmパッケージのダウンロードとインストールは、次のnpm CLIコマンドを使用します。
 
-1. 新しくCLIを生成したアプリケーションで、`/src` フォルダを `StackBlitz` ダウンロードの `/src` フォルダに置き換えます。
+    ```sh
+    npm install
+    ```
 
 1. 次のCLIコマンドを使ってアプリケーションをローカルで実行します。
 

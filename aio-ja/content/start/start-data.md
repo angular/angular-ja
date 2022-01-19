@@ -25,13 +25,15 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
 ### カートサービスを定義する
 
-1. カートサービスを生成するには、`app`フォルダーを右クリックし、 **Angular Generator**を選択して、**Service**を選択します。
-    新しいサービスに`cart`という名前を付けます。
+このセクションでは、ショッピングカートに追加された商品を追跡する `CartService` を作成する手順を説明します。
 
-    <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.1.ts"></code-example>
+1. ターミナルで次のコマンドを実行し、新しい `cart` サービスを生成します。
 
-1. `./products.ts` から `Product` インターフェースを読み込みます。
-1. `CartService` クラスで、商品の配列をカートに格納するためのプロパティ `items` を定義します。
+    ```sh
+    ng generate service cart
+    ```
+
+1. `./products.ts` から `Product` インターフェースを `cart.service.ts` ファイルにインポートし、`CartService` クラスに、現在のカート内の商品の配列を格納する `items` プロパティを定義します。
 
     <code-example path="getting-started/src/app/cart.service.ts" header="src/app/cart.service.ts" region="props"></code-example>
 
@@ -99,7 +101,13 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
 カートビューを作成するには、`ProductDetailsComponent`を作成し、新しいコンポーネントのルーティングを設定するのと同じ手順に従います。
 
-1. `app`フォルダを右クリックし、**Angular Generator**、**Component**を選択して、`cart`という名前のカートコンポーネントを生成します。
+1. ターミナルで次のコマンドを実行し、`cart`という名前の新しいコンポーネントを生成します。
+
+    ```sh
+    ng generate component cart
+    ```
+
+    このコマンドは `cart.component.ts` ファイルとそれに関連するテンプレートファイル、スタイルファイルを生成します。
 
     <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.1.ts"></code-example>
 
@@ -230,7 +238,13 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
 
 これで、配送データを取得するようにアプリケーションを設定したので、そのデータをレンダリングする場所を作成することができます。
 
-1. `app`フォルダを右クリックし、**Angular Generator**を選択し、**Component**を選択して、`shipping`という名前の新しいコンポーネントを生成します。
+1. ターミナルで次のコマンドを実行し、`shipping`という名前のカートコンポーネントを生成します。
+
+    ```sh
+    ng generate component shipping
+    ```
+
+    このコマンドは `shipping.component.ts` ファイルとそれに関連するテンプレートファイル、スタイルファイルを生成します。
     
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.1.ts"></code-example>
 
@@ -240,7 +254,7 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="shipping-route"></code-example>
 
     新しい配送コンポーネントへのリンクはまだありませんが、ルートが指定するURLを入力すると、プレビューペインにテンプレートが表示されます。 
-    URLのパターンは `https://getting-started.stackblitz.io/shipping` です。ここで、`getting-started.stackblitz.io` の部分はStackBlitzプロジェクトによって異なる場合があります。
+    URLのパターンは `https://angular-ynqttp--4200.local.webcontainer.io/shipping` です。ここで、`angular-ynqttp--4200.local.webcontainer.io` の部分はStackBlitzプロジェクトによって異なる場合があります。
 
 ### `ShippingComponent` が `CartService` を使用するように設定する
 

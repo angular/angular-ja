@@ -19,7 +19,7 @@ For an example, see the [Angular Material][AngularMaterialMain] documentation.
 
 ### ライブラリの型定義
 
-Typicaly, library packages include typings in `.d.ts` files; see examples in `node_modules/@angular/material`.
+Typically, library packages include typings in `.d.ts` files; see examples in `node_modules/@angular/material`.
 If the package of your library does not include typings and your IDE complains, you might need to install the `@types/<lib_name>` package with the library.
 
 たとえば、`d3` という名前のライブラリがあるとします。
@@ -126,13 +126,13 @@ Configure the Angular CLI to do this at build time using the `scripts` and `styl
 After you import a library using the "scripts" array, do **not** import it using an import statement in your TypeScript code.
 The following code snippet is an example import statement.
 
-<code-example format="typscript" language="typescript">
+<code-example format="typescript" language="typescript">
 
 import * as $ from 'jquery';
 
 </code-example>
 
-If you inport it using import statements, you have two different copies of the library: one imported as a global library, and one imported as a module.
+If you import it using import statements, you have two different copies of the library: one imported as a global library, and one imported as a module.
 これは JQuery のようなプラグインをもつライブラリにとっては特に悪いです。なぜなら、個々のコピーは異なるプラグインをもつからです。
 
 Instead, run the `npm install @types/jquery` Angular CLI command to download typings for your library and then follow the library installation steps.
@@ -200,4 +200,4 @@ interface JQuery {
 
 <!-- end links -->
 
-@reviewed 2021-11-01
+@reviewed 2022-01-05

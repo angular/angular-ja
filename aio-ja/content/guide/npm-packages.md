@@ -35,7 +35,7 @@ CLIコマンドの `ng new` は新しいワークスペースを作成すると�
 <div class="alert is-helpful">
 
 **ライブラリ開発者へ**: デフォルトでは、CLIコマンドの [`ng generate library`](cli/generate) は新しいライブラリのための `package.json` を生成します。この `package.json` はnpmにライブラリを公開するときに利用されます。
-詳細については、CLIの [Library Support](https://github.com/angular/angular-cli/wiki/stories-create-library)のWikiページを見てください。
+詳細については、CLI Wikiの [Library Support](guide/creating-libraries)ページを見てください。
 </div>
 
 

@@ -147,7 +147,7 @@ ng serve
   <img src="generated/images/guide/lazy-loading-ngmodules/three-buttons.png" width="300" alt="three buttons in the browser">
 </div>
 
-これらのボタンは機能します。なぜならCLIが、フィーチャーモジュールへのルート(route)を`app.module.ts`内の`routes`配列に自動的に追加したからです。
+これらのボタンは機能します。なぜならCLIが、フィーチャーモジュールへのルート(route)を`app-routing.module.ts`内の`routes`配列に自動的に追加したからです。
 
 {@a config-routes}
 

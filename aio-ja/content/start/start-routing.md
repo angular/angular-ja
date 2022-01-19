@@ -18,10 +18,13 @@
 このセクションでは、個々の商品の詳細を表示するためのルートを定義する方法を示します。
 
 1. 商品詳細用の新しいコンポーネントを生成します。
-    ファイルリストで `app` フォルダを右クリックし、`Angular Generator` と `Component` を選択します。
-    コンポーネントに `product-details` という名前を付けます。
+    ターミナルで次のコマンドを実行し、新しい `product-details` コンポーネントを生成します。
 
-1. `app.module.ts`では、`path`に`products/:productId`、`component`に`ProductDetailsComponent`を指定して、製品詳細のルートを追加し、`AppModule`の宣言に`ProductDetailsComponent`を含めます。
+    ```sh
+    ng generate component product-details
+    ```
+
+1. `app.module.ts`では、`path`に`products/:productId`、`component`に`ProductDetailsComponent`を指定して、製品詳細のルートを追加します。
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="product-details-route">
     </code-example>

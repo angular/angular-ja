@@ -28,7 +28,7 @@
     "picture": "daveshevitz.jpg",
     "bio": "Dave is a technical writer focused on creating a great documentation experience for Angular developers. When he isn't writing, he's toying with new technologies. His favorite motto is: 'What could possibly go wrong?'",
     "groups": ["Angular"],
-    "lead": "igorminar"
+    "lead": "jelbourn"
   },
   "ajitsinghkaler": {
     "name": "Ajit Singh",
@@ -42,7 +42,7 @@
     "groups": ["Angular"],
     "lead": "dgp1130",
     "picture": "alan-agius4.jpg",
-    "bio": "Angular CLI Member, Loves TypeScript, Build Tools, Food, Beer & Coffee :)"
+    "bio": "Angular CLI Member, Loves TypeScript, Build Tools, Food, Beer & Coffee :)"
   },
   "alisaduncan": {
     "name": "Alisa Duncan",
@@ -100,6 +100,21 @@
     "bio": "Natalia started working professionally as a web software developer in the early 2000s. She now works in the role of technical lead and software/solutions architect. She is a public speaker, content creator, GDE for Angular and Web Technologies, Microsoft MVP Award (Developer Technologies), and a mentor with the RoadtoGDE program.",
     "groups": ["GDE"]
   },
+  "AnkitSharma-007": {
+    "name": "Ankit Sharma",
+    "picture": "ankit-sharma.jpg",
+    "twitter": "ankitsharma_007",
+    "website": "https://ankitsharmablogs.com",
+    "bio": "SDE III @cisco | GDE for Angular | Microsoft MVP | Author | Speaker | Passionate Programmer",
+    "groups": ["GDE"]
+  },
+  "armenvardanyan95": {
+    "name": "Armen Vardanyan",
+    "picture": "armen-vardanyan.jpg",
+    "groups": ["GDE"],
+    "twitter": "armandotrue",
+    "bio": "Armen is a senior Angular developer from Armenia, tech writer, speaker, mentor and a Google Developer Expert for Angular."
+  },
   "atscott": {
     "name": "Andrew Scott",
     "picture": "andrewscott.jpg",
@@ -127,7 +142,7 @@
     "picture": "aristeidis.jpg",
     "twitter": "abampakos",
     "website": "https://medium.com/@abampakos",
-    "bio": "Aristeidis is a web development team lead at Plex-Earth working with Angular. He is a co-organizer of the Angular Athens meetup and the author of Learning Angular - 3rd Edition and Angular Projects - 2nd Edition books. He is also a senior Angular instructor at Code.Hub where he teaches the Angular framework to other developers.",
+    "bio": "Aristeidis is a web development team lead at Plex-Earth working with Angular. He is the author of two books about Angular: Learning Angular - 3rd Edition and Angular Projects - 2nd Edition. He also works as an Angular senior tech instructor at Code.Hub where he teaches the Angular framework to other developers and professionals.",
     "groups": ["GDE"]
   },
   "bbrennan": {
@@ -168,7 +183,6 @@
   },
   "cexbrayat": {
     "name": "Cédric Exbrayat",
-    "mentor": "petebacondarwin",
     "groups": ["Collaborators"],
     "picture": "cexbrayat.jpg",
     "bio": "Author of `Become a ninja with Angular (2+)` https://books.ninja-squad.com/angular - Angular trainer and @Ninja-Squad co-founder"
@@ -225,12 +239,6 @@
     "bio": "Kristiyan is a front-end developer, passionate open-source contributor and a core team member on Angular Material.",
     "groups": ["Angular"],
     "lead": "jelbourn"
-  },
-  "danieltre23": {
-    "name": "Daniel Trevino",
-    "picture": "danieltre23.jpg",
-    "bio": "Daniel is a Software Engineer Intern at Google, loves to learn new things, write code and listen to music.",
-    "groups": ["Angular"]
   },
   "danwahlin": {
     "name": "Dan Wahlin",
@@ -365,21 +373,7 @@
     "website": "https://github.com/gkalpak",
     "bio": "George is a Software Engineer with a passion for chess, robotics and automating stuff. He has a strong need to know how things work (so if you already know, he'd love to have a talk with you). He has been a member of the AngularJS team since 2014. When not doing geeky stuff, he is probably trying to convince his wife and kids to apply programming principles in real life. (Or is it the other way around?)",
     "groups": ["Angular"],
-    "lead": "igorminar"
-  },
-  "gregmagolan": {
-    "name": "Greg Magolan",
-    "groups": ["Angular"],
-    "lead": "dgp1130",
-    "picture": "gregmagolan.jpg",
-    "bio": "Building great software with Angular and Node.js."
-  },
-  "igorminar": {
-    "name": "Igor Minar",
-    "picture": "igor-minar.jpg",
-    "twitter": "IgorMinar",
-    "bio": "Igor is a software engineer at Google. He is a lead on the Angular project, practitioner of test driven development, open source enthusiast, hacker. In his free time, Igor enjoys spending time with his wife and two kids, doing outdoor activities (including but not limited to sports, gardening and building retaining walls).",
-    "groups": ["Angular"]
+    "lead": "jelbourn"
   },
   "jbedard": {
     "name": "Jason Bedard",
@@ -409,8 +403,7 @@
     "twitter": "jelbourn",
     "website": "https://plus.google.com/+JeremyElbourn/",
     "bio": "Angular Material Team Lead. FE Engineer @ Google specializing in AngularJS, component design, and the cleanest of code.",
-    "groups": ["Angular"],
-    "lead": "igorminar"
+    "groups": ["Angular"]
   },
   "jeremywilken": {
     "name": "Jeremy Wilken",
@@ -431,7 +424,7 @@
   "jiali": {
     "name": "Jia Li",
     "groups": ["Collaborators"],
-    "mentor": "igorminar",
+    "mentor": "jelbourn",
     "picture": "JiaLiPassion.jpg",
     "twitter": "Jialipassion",
     "website": "https://github.com/JiaLiPassion",
@@ -472,8 +465,7 @@
     "name": "Joey Perrott",
     "picture": "josephperrott.jpeg",
     "twitter": "joeyperrott",
-    "groups": ["Angular"],
-    "lead": "igorminar"
+    "groups": ["Angular"]
   },
   "josmar-crwdstffng": {
     "name": "Joe Martin",
@@ -711,15 +703,6 @@
     "bio": "Pascal is a software engineer, author and Google Developer Expert for the Angular team. He loves contributing to open source and is the creator of the popular angular-translate module. In his spare time he’s fiddling with EDM production.",
     "groups": ["GDE"]
   },
-  "petebacondarwin": {
-    "name": "Pete Bacon Darwin",
-    "picture": "pete.jpg",
-    "twitter": "petebd",
-    "website": "https://www.bacondarwin.com/",
-    "bio": "AngularJS for JS Team Lead. Pete has been working on the core team since 2012 and became the team lead for the AngularJS for JS branch in November 2014. He has co-authored a book on AngularJS and regularly talks about and teaches Angular.",
-    "groups": ["Angular"],
-    "lead": "igorminar"
-  },
   "phenomnomnominal": {
     "name": "Craig Spence",
     "picture": "craig-spence.jpg",
@@ -742,6 +725,14 @@
     "twitter": "prestonjlamb",
     "website": "https://github.com/pjlamb12",
     "bio": "Preston is a JavaScript developer, husband, and father of four from Roy, UT. He also writes blog posts, creates training courses for Thinkster.io, and loves learning more about web development. In his free time he likes to spend time with his family and play or watch basketball (Go Jazz!). ",
+    "groups": ["GDE"]
+  },
+  "profanis": {
+    "name": "Fanis Prodromou",
+    "picture": "profanis.jpg",
+    "twitter": "prodromouf",
+    "website": "https://blog.profanis.me",
+    "bio": "Fanis is a Full Stack JavaScript developer, Angular GDE, speaker at meetups, author of the book 'Mastering Angular Reactive Forms', and he constantly creates videos in his YouTube channel to share his knowledge with others. He also teaches Angular in Code.Hub institute and mentors other developers. When he is not behind a keyboard, he spends time with his lovely daughter and enjoys family time with his wife.",
     "groups": ["GDE"]
   },
   "ralph": {
@@ -975,6 +966,14 @@
     "twitter": "willmendesneto",
     "website": "https://willmendesneto.github.io",
     "bio": "GDE (Google Developer Expert) Angular and Web Technologies, GDG Salvador organizer, passionate about technology and active in communities with a focus on web development, including Angular, JavaScript, HTML5, CSS3, Workflow, web performance, security and Internet of things. Participates in events organization, speaker at conferences in Brazil and other countries and contributes to several open source projects.",
+    "groups": ["GDE"]
+  },
+  "yharaskrik": {
+    "name": "Jay Bell",
+    "picture": "jaybell.jpg",
+    "twitter": "jaycooperbell",
+    "website": "tech.trellis.org",
+    "bio": "Jay is the CTO and Co-Founder of a Social Enterprise in Canada that is using Angular and technology to empower global collective impact in the non-profit and charity industries. He is an avid contributor to Nx and loves Angular, NgRx and Nest. Jay loves to share knowledge he has learned from figuring out problems (complex or otherwise) so that others can solve them easier the next time.",
     "groups": ["GDE"]
   },
   "yjaaidi": {

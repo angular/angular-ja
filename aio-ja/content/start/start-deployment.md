@@ -26,13 +26,13 @@
       <img src="generated/images/guide/start/download-project.png" alt="Download the stackblitz project">
     </div>
 
-1. アーカイブを解凍し、新しく作成したプロジェクトにディレクトリを変更します。例えば
+1. アーカイブを解凍し、新しく作成したプロジェクトにディレクトリを変更します。たとえば
 
     ```sh
     cd angular-ynqttp
     ```
 
-1. npmパッケージのダウンロードとインストールは、以下のnpm CLIコマンドを使用します。
+1. npmパッケージのダウンロードとインストールは、次のnpm CLIコマンドを使用します。
 
     ```sh
     npm install

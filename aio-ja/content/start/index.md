@@ -172,7 +172,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     <img src="generated/images/guide/start/create-new-terminal.png" alt="StackBlitz command to generate component">
   </div>
 
-1. 新しいターミナルで、以下のコマンドを実行して、`product-alerts`という名前の新しいコンポーネントを生成してください。
+1. 新しいターミナルで、次のコマンドを実行して、`product-alerts`という名前の新しいコンポーネントを生成してください。
 
   ```sh
   ng generate component product-alerts

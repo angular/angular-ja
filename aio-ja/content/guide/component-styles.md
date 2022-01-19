@@ -23,41 +23,43 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 <code-example path="component-styles/src/app/hero-app.component.ts" header="src/app/hero-app.component.ts"></code-example>
 
-## スタイルのスコープ
+## Component styling best practices
 
-<div class="alert is-critical">
+<div class="alert is-helpful">
 
-`@Component` メタデータで定義されたスタイルは、 _そのコンポーネントのテンプレート内でのみ適用されます_  。
+   See [View Encapsulation](guide/view-encapsulation) for information on how Angular scopes styles to specific components.
 
 </div>
 
-テンプレート内にネストされたコンポーネント、コンポーネントに投影されたコンテントによって、_継承されることはありません_ 。
+You should consider the styles of a component to be private implementation details for that component. When consuming a common component, you should not override the component's styles any more than you should access the private members of a TypeScript class. While Angular's default style encapsulation prevents component styles from affecting other components, global styles affect all components on the page. This includes `::ng-deep`, which promotes a component style to a global style.
 
-この例では、 `h1` スタイルは `HeroAppComponent` にのみ適用され、
-ネストされた `HeroMainComponent` にもアプリケーションの他の場所の `<h1>` タグにも適用されません。
+### Authoring a component to support customization
 
-このスコープの制限は、 ***スタイルのモジュール性の機能*** です。
+As component author, you can explicitly design a component to accept customization in one of four different ways.
 
-* CSSクラス名とセレクターは、各コンポーネントの文脈でもっとも合理的に利用できます。
+#### 1. Use CSS Custom Properties (recommended)
 
+You can define a supported customization API for your component by defining its styles with CSS Custom Properties, alternatively known as CSS Variables. Anyone using your component can consume this API by defining values for these properties, customizing the final appearance of the component on the rendered page.
 
-* クラス名とセレクターは、コンポーネント内で局所的で、アプリケーションの他の場所で使われている
-  クラスやセレクターと衝突しません。
+While this requires defining a custom property for each customization point, it creates a clear API contract that works in all style encapsulation modes.
 
+#### 2. Declare global CSS with @mixin
 
-* スタイルの変更は、他の場所のアプリケーションのコンポーネントスタイルに影響しません。
+While Angular's emulated style encapsulation prevents styles from escaping a component, it does not prevent global CSS from affecting the entire page. While component consumers should avoid directly overwriting the CSS internals of a component, you can offer a supported customization API via a CSS preprocessor like Sass.
 
+For example, a component may offer one or more supported mixins to customize various aspects of the component's appearance. While this approach uses global styles in it’s implementation, it allows the component author to keep the mixins up to date with changes to the component's private DOM structure and CSS classes.
 
-* 各コンポーネントのCSSコードをコンポーネントの TypeScript と HTMLコードと一緒に配置すると、
-  きちんと整理されたプロジェクト構造になります。
+#### 3. Customize with CSS ::part
 
+If your component uses [Shadow DOM](https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM), you can apply the `part` attribute to specify elements in your component's template. This allows consumers of the component to author arbitrary styles targeting those specific elements with [the `::part` pseudo-element](https://developer.mozilla.org/docs/Web/CSS/::part).
 
-* アプリケーション全体を検索してコードが使用されている場所を見つけることなく、
-コンポーネントのCSSコードを変更または削除できます。
+While this lets you limit the elements within your template that consumers can customize, it does not limit which CSS properties are customizable. 
 
-{@a special-selectors}
+#### 4. Provide a TypeScript API
 
-## 特別なセレクター
+You can define a TypeScript API for customizing styles, using template bindings to update CSS classes and styles. This is not recommended because the additional JavaScript cost of this style API incurs far more performance cost than CSS.
+
+## 特別なセレクター {@a special-selectors}
 
 コンポーネントスタイルには、Shadow DOMスタイルスコーピング([W3C](https://www.w3.org) サイトの
 [CSS スコーピング モデル レベル 1](https://www.w3.org/TR/css-scoping-1) ページに記述されています)
@@ -255,7 +257,7 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 ### CSS以外のスタイルファイル
 
 CLIを使用して構築する場合、
-スタイルファイルを、次の例のように、 [sass](https://sass-lang.com/)、または [less](http://lesscss.org/) に書き込んで、`@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
+スタイルファイルを、次の例のように、 [sass](https://sass-lang.com/)、または [less](https://lesscss.org/) に書き込んで、`@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
 
 <code-example>
 @Component({

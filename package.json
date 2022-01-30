@@ -1,9 +1,11 @@
 {
-  "name": "angular-ja",
+  "name": "angular-fr",
   "version": "0.0.1",
-  "main": "index.js",
   "repository": "https://github.com/angular/angular-ja",
-  "author": "Suguru Inatomi <suguru.inatomi@gmail.com>",
+  "author": {
+    "name": "Gerome Grignon",
+    "email": "gerome.grignon.lp2@gmail.com"
+  },
   "license": "MIT",
   "private": true,
   "scripts": {

@@ -1,4 +1,4 @@
-# angular-ja
+# angular-fr
 
 ![Deploy to Production](https://github.com/angular/angular-ja/actions/workflows/deploy-production.yml/badge.svg)
 ![CI](https://github.com/angular/angular-ja/workflows/build-and-test/badge.svg)

@@ -1,4 +1,4 @@
-# angular-jaへのコントリビューション
+# Guide de contribution
 
 ## ファイル構成
 

@@ -3,7 +3,6 @@
 import { watch } from 'chokidar';
 
 const contentsWatcher = watch('/aio-ja', {
-    ignored: ['**/*.en.md', '**/*.old'],
     cwd: '/aio-ja',
     persistent: true
 });

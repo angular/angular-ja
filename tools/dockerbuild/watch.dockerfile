@@ -17,7 +17,7 @@ RUN git clean -xdn
 
 # setup aio
 WORKDIR /
-COPY aio-ja /aio-ja/
+COPY aio-localized /aio-localized/
 COPY scripts /scripts/
 COPY tools/dockerbuild/scripts/apply-localization.mjs tools/dockerbuild/scripts/setup-aio.mjs /
 RUN npx zx apply-localization.mjs

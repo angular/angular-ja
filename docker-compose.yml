@@ -4,20 +4,20 @@ services:
     build:
       context: .
       dockerfile: tools/dockerbuild/build.dockerfile
-    image: angular-ja/build-aio
+    image: angular/build-aio
     volumes: 
-      - ./aio-ja:/aio-ja
+      - ./aio-localized:/aio-localized
       - ./scripts:/scripts
       - ./build-out:/origin/aio/dist
   watch-aio:
     build:
       context: .
       dockerfile: tools/dockerbuild/watch.dockerfile
-    image: angular-ja/watch-aio
+    image: angular/watch-aio
     ports:
       - "4200:4200"
     volumes: 
-      - ./aio-ja:/aio-ja
+      - ./aio-localized:/aio-localized
       - ./scripts:/scripts
     environment:
       CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING:-false}

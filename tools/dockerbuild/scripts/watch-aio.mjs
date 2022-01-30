@@ -2,14 +2,14 @@
 
 import { watch } from 'chokidar';
 
-const contentsWatcher = watch('/aio-ja', {
-    cwd: '/aio-ja',
+const contentsWatcher = watch('/aio-localized', {
+    cwd: '/aio-localized',
     persistent: true
 });
 
 async function copyFile(path) {
     cd('/');
-    await $`cp aio-ja/${path} origin/aio/${path}`;
+    await $`cp aio-localized/${path} origin/aio/${path}`;
 }
 
 contentsWatcher.on('change', (path) => {

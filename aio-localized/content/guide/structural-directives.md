@@ -1,6 +1,6 @@
 # 構造ディレクティブの記述
 
-このトピックでは、構造ディレクティブを作成する方法を示し、ディレクティブがどのように機能するのか、Angularがどのように短縮表記を解釈するのか、テンプレートの型エラーをキャッチするためにテンプレートガードプロパティを追加する方法など、概念的な情報を説明します。
+このトピックでは、構造ディレクティブを作成する方法を示し、ディレクティブがどのように機能するのか、Angular がどのように短縮表記を解釈するのか、テンプレートの型エラーをキャッチするためにテンプレートガードプロパティを追加する方法など、概念的な情報を説明します。
 
 <div class="alert is-helpful">
 
@@ -8,7 +8,7 @@
 
 </div>
 
-Angularにビルトインされているディレクティブ(たとえば、`NgIf`, `NgForOf`, `NgSwitch` など)については、[組み込みディレクティブ](guide/built-in-directives) を参照してください。
+Angular にビルトインされているディレクティブ(たとえば、`NgIf`, `NgForOf`, `NgSwitch` など)については、[組み込みディレクティブ](guide/built-in-directives) を参照してください。
 
 {@a unless}
 
@@ -24,33 +24,33 @@ Angularにビルトインされているディレクティブ(たとえば、`Ng
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless-1)" region="appUnless-1"></code-example>
 
-1. Angular CLIを使って、次のコマンドを実行します。`unless` はディレクティブの名前です。
+1. Angular CLI を使って、次のコマンドを実行します。`unless` はディレクティブの名前です。
 
-  ```bash
+```bash
 
-  ng generate directive unless
+ng generate directive unless
 
-  ```
+```
 
-  Angularは、ディレクティブクラスを作成し、テンプレートの中でディレクティブを識別するCSSセレクターとして `appUnless` を設定します。
+Angular は、ディレクティブクラスを作成し、テンプレートの中でディレクティブを識別する CSS セレクターとして `appUnless` を設定します。
 
 1. `Input`, `TemplateRef`, `ViewContainerRef` をインポートします。
 
-  <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (skeleton)" region="skeleton"></code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (skeleton)" region="skeleton"></code-example>
 
 1. ディレクティブのコンストラクターに、`TemplateRef` と `ViewContainerRef` をプライベート変数としてインジェクトします。
 
-  <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (ctor)" region="ctor"></code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (ctor)" region="ctor"></code-example>
 
-  `UnlessDirective` は、Angularが生成した `<ng-template>` から [埋め込みビュー](api/core/EmbeddedViewRef "API: EmbeddedViewRef") を作成し、そのビューを、ディレクティブの元のホスト要素 `<p>` に隣接する [ビューコンテナー](api/core/ViewContainerRef "API: ViewContainerRef") に挿入します。
+`UnlessDirective` は、Angular が生成した `<ng-template>` から [埋め込みビュー](api/core/EmbeddedViewRef 'API: EmbeddedViewRef') を作成し、そのビューを、ディレクティブの元のホスト要素 `<p>` に隣接する [ビューコンテナー](api/core/ViewContainerRef 'API: ViewContainerRef') に挿入します。
 
-  [`TemplateRef`](api/core/TemplateRef "API: TemplateRef")は、`<ng-template>`のコンテンツにアクセスし、[`ViewContainerRef`](api/core/ViewContainerRef "API: ViewContainerRef")は、ビューコンテナーにアクセスします。
+[`TemplateRef`](api/core/TemplateRef 'API: TemplateRef')は、`<ng-template>`のコンテンツにアクセスし、[`ViewContainerRef`](api/core/ViewContainerRef 'API: ViewContainerRef')は、ビューコンテナーにアクセスします。
 
 1. セッターとしての `appUnless` `@Input()` プロパティを追加します。
 
-  <code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (set)" region="set"></code-example>
+<code-example path="structural-directives/src/app/unless.directive.ts" header="src/app/unless.directive.ts (set)" region="set"></code-example>
 
-  Angularは、条件の値が変更されるたびに `appUnless` プロパティを設定します。
+Angular は、条件の値が変更されるたびに `appUnless` プロパティを設定します。
 
     * 条件が `false` で、Angularが以前にビューを作成したことがない場合、セッターはビューコンテナーにテンプレートから埋め込みビューを作成させます。
 
@@ -66,20 +66,20 @@ Angularにビルトインされているディレクティブ(たとえば、`Ng
 
 1. `AppComponent` に `false` に設定された `condition` を追加します。
 
-  <code-example path="structural-directives/src/app/app.component.ts" header="src/app/app.component.ts (excerpt)" region="condition"></code-example>
+<code-example path="structural-directives/src/app/app.component.ts" header="src/app/app.component.ts (excerpt)" region="condition"></code-example>
 
 1. ディレクティブを使用するようにテンプレートを更新します。
-   ここで、`*appUnless` は反対の `condition`値をもつ2つの `<p>` タグ上にあります。1つは `true`、もう1つは `false` です。
+   ここで、`*appUnless` は反対の `condition`値をもつ 2 つの `<p>` タグ上にあります。1 つは `true`、もう 1 つは `false` です。
 
-  <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless)" region="appUnless"></code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (appUnless)" region="appUnless"></code-example>
 
-  アスタリスク(`*`)は、構造ディレクティブとして `appUnless` をマークする短縮表記です。
-   `condition` が `false` の場合、上の（A）の段落が表示され、下（B）の段落が消えます。
-   `condition` が `true` の場合、上（A）の段落が消え、下（B）の段落が表示されます。
+アスタリスク(`*`)は、構造ディレクティブとして `appUnless` をマークする短縮表記です。
+`condition` が `false` の場合、上の（A）の段落が表示され、下（B）の段落が消えます。
+`condition` が `true` の場合、上（A）の段落が消え、下（B）の段落が表示されます。
 
 1. ブラウザで `condition`値を変更して表示するには、ステータスとボタンを表示するマークアップを追加します。
 
-  <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html" region="toggle-info"></code-example>
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html" region="toggle-info"></code-example>
 
 このディレクティブが機能することを確認するには、ボタンをクリックして `condition` の値を変更します。
 
@@ -87,14 +87,13 @@ Angularにビルトインされているディレクティブ(たとえば、`Ng
     <img src='generated/images/guide/structural-directives/unless-anim.gif' alt="UnlessDirective in action">
   </div>
 
-
 {@a shorthand}
 {@a asterisk}
 
 ## 構造ディレクティブの短縮表記 {@a structural-directive-shorthand}
 
-`*ngIf` などの構造ディレクティブのアスタリスク `*` 構文は、Angularがより長い形式に解釈するための短縮表記です。
-Angularは、構造ディレクティブの前のアスタリスクを、ホスト要素とその子孫を囲む `<ng-template>` に変換します。
+`*ngIf` などの構造ディレクティブのアスタリスク `*` 構文は、Angular がより長い形式に解釈するための短縮表記です。
+Angular は、構造ディレクティブの前のアスタリスクを、ホスト要素とその子孫を囲む `<ng-template>` に変換します。
 
 以下は、`hero` が存在する場合にヒーローの名前を表示する `*ngIf` の例です:
 
@@ -105,14 +104,13 @@ Angularは、構造ディレクティブの前のアスタリスクを、ホス�
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-template)" region="ngif-template"></code-example>
 
-Angularは実際の `<ng-template>`要素を作成せず、代わりに `<div>` とコメントノードプレースホルダーのみをDOMにレンダリングします。
+Angular は実際の `<ng-template>`要素を作成せず、代わりに `<div>` とコメントノードプレースホルダーのみを DOM にレンダリングします。
 
 ```html
 <!--bindings={
   "ng-reflect-ng-if": "[object Object]"
 }-->
 <div _ngcontent-c0>Mr. Nice</div>
-
 ```
 
 次の例では、アスタリスクを使用する短縮記法の `*ngFor`形式と `<ng-template>`形式を比較しています:
@@ -128,25 +126,25 @@ Angularは実際の `<ng-template>`要素を作成せず、代わりに `<div>` 
 この例の入力変数は、 `hero`、`i`、および `odd` です。
 パーサーは、 `let hero`、`let i`、および `let odd` を `let-hero`、`let-i`、および `let-odd` という名前の変数に変換します。
 `let-i`変数と `let-odd`変数は `let i = index` と `let odd = odd` になります。
-Angularは `i` と `odd` をコンテキストの `index` と `odd` プロパティを現在の値に設定します。
+Angular は `i` と `odd` をコンテキストの `index` と `odd` プロパティを現在の値に設定します。
 
 パーサーはパスカルケース(PascalCase)をすべてのディレクティブに適用し、それらの前に `ngFor` などのディレクティブの属性名を付けます。
-たとえば、`ngFor` の入力プロパティである `of` と `trackBy` は、`ngForOf` と  `ngForTrackBy` にマッピングされます。
+たとえば、`ngFor` の入力プロパティである `of` と `trackBy` は、`ngForOf` と `ngForTrackBy` にマッピングされます。
 `NgFor`ディレクティブがリストをループすると、独自のコンテキストオブジェクトのプロパティが設定およびリセットされます。
 これらのプロパティには、`index`、`odd`、および `$implicit` という名前の特別なプロパティを含めることができますが、
 これらに限定されません。
 
-Angularは `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
+Angular は `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
 
-詳細については [NgFor API](api/common/NgForOf "API: NgFor") と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
+詳細については [NgFor API](api/common/NgForOf 'API: NgFor') と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
 
 ### `<ng-template>` を使用してテンプレートフラグメントを作成する
 
-Angularの `<ng-template>`要素は、デフォルトでは何もレンダリングしないテンプレートを定義します。
+Angular の `<ng-template>`要素は、デフォルトでは何もレンダリングしないテンプレートを定義します。
 `<ng-template>`を使用すると、コンテンツを手動でレンダリングして、コンテンツの表示方法を完全に制御できます。
 
 構造ディレクティブがない状態で、一部の要素を `<ng-template>`でラップすると、それらの要素は表示されなくなります。
-次の例では、Angularはフレーズの中の真ん中の "Hip!"をレンダリングしません。"Hip! Hip! Hooray!" の真ん中の "Hip!" は、`<ng-template>` で囲まれているためにレンダリングされません。
+次の例では、Angular はフレーズの中の真ん中の "Hip!"をレンダリングしません。"Hip! Hip! Hooray!" の真ん中の "Hip!" は、`<ng-template>` で囲まれているためにレンダリングされません。
 
 <code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (template-tag)" region="template-tag"></code-example>
 
@@ -203,9 +201,9 @@ Angularの `<ng-template>`要素は、デフォルトでは何もレンダリン
   </tr>
 </table>
 
-### どのようにAngularが短縮表記を変換するか
+### どのように Angular が短縮表記を変換するか
 
-Angularは、構造ディレクティブの短縮表記を次のように通常のバインディング構文に変換します:
+Angular は、構造ディレクティブの短縮表記を次のように通常のバインディング構文に変換します:
 
 <table>
   <tr>
@@ -262,17 +260,18 @@ Angularは、構造ディレクティブの短縮表記を次のように通常�
 {@a directive-type-checks}
 
 <!-- To do follow up PR: move this section to a more general location because it also applies to attribute directives. -->
+
 ## 独自ディレクティブのテンプレート型チェックの改善
 
 テンプレートガードプロパティをディレクティブ定義に追加することで、独自ディレクティブのテンプレート型チェックを改善できます。
-これらのプロパティは、Angularのテンプレート型チェッカーがコンパイル時にテンプレートの間違いを見つけるのに役立ち、ランタイムエラーを回避できます。
+これらのプロパティは、Angular のテンプレート型チェッカーがコンパイル時にテンプレートの間違いを見つけるのに役立ち、ランタイムエラーを回避できます。
 これらのプロパティは次のとおりです:
 
-* プロパティ `ngTemplateGuard_(someInputProperty)` を使用すると、テンプレート内の入力式により正確な型を指定できます。
-* `ngTemplateContextGuard` 静的プロパティは、テンプレートコンテキストの型を宣言します。
+- プロパティ `ngTemplateGuard_(someInputProperty)` を使用すると、テンプレート内の入力式により正確な型を指定できます。
+- `ngTemplateContextGuard` 静的プロパティは、テンプレートコンテキストの型を宣言します。
 
 このセクションでは、両方の種類の型ガードプロパティの例を示します。
-詳細については、[テンプレート型チェック](guide/template-typecheck "Template type-checking guide")を参照してください。
+詳細については、[テンプレート型チェック](guide/template-typecheck 'Template type-checking guide')を参照してください。
 
 {@a narrowing-input-types}
 
@@ -304,18 +303,18 @@ export class IfLoadedDirective<T> {
 }
 
 export interface Person {
-  name: string;
+name: string;
 }
 
 @Component({
-  template: `&lt;div *ifLoaded="state">{{ state.data }}&lt;/div>`,
+template: `&lt;div *ifLoaded="state">{{ state.data }}&lt;/div>`,
 })
 export class AppComponent {
-  state: LoadingState<Person>;
+state: LoadingState<Person>;
 }
 </code-example>
 
-この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の2つの状態のいずれかを許可します。ディレクティブの `state` を入力として使用される式は、その時点でのロード状態が不明であるため、包括的な `LoadingState` 型です。
+この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の 2 つの状態のいずれかを許可します。ディレクティブの `state` を入力として使用される式は、その時点でのロード状態が不明であるため、包括的な `LoadingState` 型です。
 
 `ifLoadedDirective` の定義では、絞り込みの動作を表現する静的関数 `ngTemplateGuard_state` を宣言しています。
 `AppComponent` テンプレートの中で、`*ifLoaded` 構造ディレクティブは、`state` が実際に `Loaded<Person>` である場合にのみ、このテンプレートをレンダリングすべきです。
@@ -336,5 +335,6 @@ export class ExampleDirective {
     static ngTemplateContextGuard(dir: ExampleDirective, ctx: unknown): ctx is ExampleContext { return true; };
 
     // …
+
 }
 </code-example>

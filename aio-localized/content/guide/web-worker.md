@@ -30,12 +30,12 @@ ng generate web-worker app
 - まだ使用していない場合、 Web workers を使用するようにプロジェクトを構成します。
 - 次の雛形のコードを `src/app/app.worker.ts` に追加してメッセージを受信します。
 
-  <code-example language="typescript" header="src/app/app.worker.ts">
-  addEventListener('message', ({ data }) => {
-    const response = `worker response to ${data}`;
-    postMessage(response);
-  });
- </code-example>
+ <code-example language="typescript" header="src/app/app.worker.ts">
+ addEventListener('message', ({ data }) => {
+   const response = `worker response to ${data}`;
+   postMessage(response);
+ });
+</code-example>
 
 - 次の雛形のコードを worker を使用するために `src/app/app.component.ts` に追加します。
 

@@ -6,8 +6,8 @@ The Angular service worker enables the display of push notifications and the han
 
 <div class="alert is-helpful">
 
-  When using the Angular service worker, push notification interactions are handled using the `SwPush` service.
-  To learn more about the browser APIs involved see [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) and [Using the Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API).
+When using the Angular service worker, push notification interactions are handled using the `SwPush` service.
+To learn more about the browser APIs involved see [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) and [Using the Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API).
 
 </div>
 
@@ -23,8 +23,8 @@ Invoke push notifications by pushing a message with a valid payload. See `SwPush
 
 <div class="alert is-helpful">
 
-  In Chrome, you can test push notifications without a backend.
-  Open Devtools -> Application -> Service Workers and use the `Push` input to send a JSON notification payload.
+In Chrome, you can test push notifications without a backend.
+Open Devtools -> Application -> Service Workers and use the `Push` input to send a JSON notification payload.
 
 </div>
 
@@ -40,7 +40,7 @@ You can specify an additional operation to be executed on `notificationclick` by
     "title": "New Notification!",
     "data": {
       "onActionClick": {
-        "default": {"operation": "openWindow", "url": "foo"}
+        "default": { "operation": "openWindow", "url": "foo" }
       }
     }
   }
@@ -59,8 +59,8 @@ The Angular service worker supports the following operations:
 
 <div class="alert is-important">
 
-  If an `onActionClick` item does not define a `url`, then the service worker's registration scope is used.
-  
+If an `onActionClick` item does not define a `url`, then the service worker's registration scope is used.
+
 </div>
 
 ### Actions
@@ -95,7 +95,7 @@ In addition, using the `onActionClick` property on the `data` object, you can ti
 
 <div class="alert is-important">
 
-  If an action does not have a corresponding `onActionClick` entry, then the notification is closed and `SwPush.notificationClicks` is notified on existing clients.
+If an action does not have a corresponding `onActionClick` entry, then the notification is closed and `SwPush.notificationClicks` is notified on existing clients.
 
 </div>
 

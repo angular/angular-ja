@@ -1,11 +1,11 @@
-version: "3"
+version: '3'
 services:
   build-aio:
     build:
       context: .
       dockerfile: tools/dockerbuild/build.dockerfile
     image: angular/build-aio
-    volumes: 
+    volumes:
       - ./aio-localized:/aio-localized
       - ./scripts:/scripts
       - ./build-out:/origin/aio/dist
@@ -15,8 +15,8 @@ services:
       dockerfile: tools/dockerbuild/watch.dockerfile
     image: angular/watch-aio
     ports:
-      - "4200:4200"
-    volumes: 
+      - '4200:4200'
+    volumes:
       - ./aio-localized:/aio-localized
       - ./scripts:/scripts
     environment:

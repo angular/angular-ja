@@ -1,20 +1,20 @@
 # AngularJS から Angular へのアップグレード
 
-*Angular* は今日そして未来の Angular の名前です。
+_Angular_ は今日そして未来の Angular の名前です。
 
-*AngularJS* はすべてのバージョン 1.x の Angular の名前です。
+_AngularJS_ はすべてのバージョン 1.x の Angular の名前です。
 
 AngularJS のアプリケーションはすばらしいです。
 Angular へ移行する前に必ずビジネスケースを考慮してください。
 ビジネスケースに重要なことはそこへ至るまでの時間と努力です。
-このガイドでは AngularJS のプロジェクトを効率的にAngular のプラットフォームへ一歩ずつ移行するための組み込みツールについて記述します。
+このガイドでは AngularJS のプロジェクトを効率的に Angular のプラットフォームへ一歩ずつ移行するための組み込みツールについて記述します。
 
 いくつかのアプリケーションでは他のものよりも移行しやすいかもしれません。また、あなた自身のために移行しやすくするための方法もたくさんあります。
-アップグレード作業を始める前に準備し、AngularJS のアプリケーションをAngular に合わせることも可能です。
+アップグレード作業を始める前に準備し、AngularJS のアプリケーションを Angular に合わせることも可能です。
 これらの準備作業ではソースコードを切り離し、メンテナンス性を向上し、モダンな開発ツールに合わせていくことになります。このことは移行作業を楽にするだけでなく、
 既存の AngularJS アプリケーションを改善することを意味します。
 
-移行成功の鍵は2つのフレームワークを同じアプリケーション上で動かし、AngularJS のコンポーネントを Angular にひとつずつ移行し、順次すすめていくことです。
+移行成功の鍵は 2 つのフレームワークを同じアプリケーション上で動かし、AngularJS のコンポーネントを Angular にひとつずつ移行し、順次すすめていくことです。
 これにより、大きく複雑なアプリケーションであっても他のビジネスを妨げることなく移行することができるでしょう。なぜなら移行作業を共同で長い時間をかけて行うことができるようになるからです。
 Angular の `upgrade` モジュールはシームレスに順次アップグレードすることができるように設計されています。
 
@@ -26,22 +26,22 @@ AngularJS アプリケーションを構築する方法はたくさんありま�
 
 ### AngularJS スタイルガイドに準拠する {@a follow-the-angularjs-style-guide}
 
-[AngularJS スタイルガイド][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMd]にはAngularJS アプリケーションのメンテナンス性を向上させ、見通しをよくすることが証明されているパターンとプラクティスが集められています。
-そこにはどのように AngularJS のソースコードを書き、構成するかについてと &mdash;同じように重要な&mdash; どのようにAngularJS のソースコードを**書かず**、構成 **しない** かについて豊富な情報が含まれています。
+[AngularJS スタイルガイド][githubjohnpapaangularstyleguideblobprimarya1readmemd]には AngularJS アプリケーションのメンテナンス性を向上させ、見通しをよくすることが証明されているパターンとプラクティスが集められています。
+そこにはどのように AngularJS のソースコードを書き、構成するかについてと &mdash;同じように重要な&mdash; どのように AngularJS のソースコードを**書かず**、構成 **しない** かについて豊富な情報が含まれています。
 
 Angular は AngularJS の一番よい部分を再考したバージョンです。
 その意味で、ゴールは AngularJS スタイルガイドと同じです。
 AngularJS のよい部分はそのままに、悪い部分は避けるということです。
-もちろんそれ以外にも Angular には色々なものがありますが、*スタイルガイドに従うことで AngularJS のアプリケーションをAngular により近づけることができます*。
+もちろんそれ以外にも Angular には色々なものがありますが、_スタイルガイドに従うことで AngularJS のアプリケーションを Angular により近づけることができます_。
 
-Angular の `upgrade/static` モジュールを使って *順次移行* を簡単にするためのいくつかのルールがあります。
+Angular の `upgrade/static` モジュールを使って _順次移行_ を簡単にするためのいくつかのルールがあります。
 
-*   [Rule of 1][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdSingleResponsibility]にはひとつのコンポーネントにつきひとつのファイルがあるべきだと述べられています。
-    これはコンポーネントを指し示したり見つけたりしやすくするだけでなく、プログラミング言語やフレームワーク間の移行をひとつずつ行うことを可能にします。
-    このサンプルアプリケーションでは各コントローラーやコンポーネント、サービス、フィルターが個々のソースファイルに書かれています。
+- [Rule of 1][githubjohnpapaangularstyleguideblobprimarya1readmemdsingleresponsibility]にはひとつのコンポーネントにつきひとつのファイルがあるべきだと述べられています。
+  これはコンポーネントを指し示したり見つけたりしやすくするだけでなく、プログラミング言語やフレームワーク間の移行をひとつずつ行うことを可能にします。
+  このサンプルアプリケーションでは各コントローラーやコンポーネント、サービス、フィルターが個々のソースファイルに書かれています。
 
-*   [Folders-by-Feature Structure][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdFoldersByFeatureStructure]と [Modularity][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdModularity]ではより抽象的なレベルで似たような原則が定義されています。
-    アプリケーションの中で異なる部分は別のディレクトリや NgModule に配置するべきです。
+- [Folders-by-Feature Structure][githubjohnpapaangularstyleguideblobprimarya1readmemdfoldersbyfeaturestructure]と [Modularity][githubjohnpapaangularstyleguideblobprimarya1readmemdmodularity]ではより抽象的なレベルで似たような原則が定義されています。
+  アプリケーションの中で異なる部分は別のディレクトリや NgModule に配置するべきです。
 
 アプリケーションがこの方法で機能ごとにレイアウトされている場合は、機能をひとつずつ移行することが可能です。
 もしアプリケーションがこのようになっていなければ、準備作業として AngularJS スタイルガイドのルールを適用することを推奨します。
@@ -52,9 +52,9 @@ Angular の `upgrade/static` モジュールを使って *順次移行* を簡�
 アプリケーションのソースコードを分解しコンポーネントをひとつずつファイルに分けていくと、プロジェクトが大量の比較的小さいファイルによって構成されることになるでしょう。
 これは少数の大きなファイルによって構成するよりもきれいな方法です。しかし、 `<script>`　タグですべてのファイルを HTML ページで読み込む場合は難しくなります。
 それらのタグを正しい順番でメンテナンスしなければいけない場合は特にそうです。
-そのため、 *モジュールローダー* を使い始めるとよいでしょう。
+そのため、 _モジュールローダー_ を使い始めるとよいでしょう。
 
-[SystemJS][GithubSystemjsSystemjs] や、[Webpack][GithubWebpackMain] 、[Browserify][BrowserifyMain] のようなモジュールローダーを使うことでTypeScript や ES2015 の組み込みモジュール機構を使うことができます。
+[SystemJS][githubsystemjssystemjs] や、[Webpack][githubwebpackmain] 、[Browserify][browserifymain] のようなモジュールローダーを使うことで TypeScript や ES2015 の組み込みモジュール機構を使うことができます。
 アプリケーションの別々の部分でどのソースコードが共有されるべきかを明示的に指定するために`import` と `export` 機能を使うことができます。
 ES5 のアプリケーションの場合は CommonJS の`require` と `module.exports`を使うことができます。
 両方の場合で、モジュールローダーはアプリケーションのソースコードが正しい順番でロードされるように制御します。
@@ -63,7 +63,7 @@ ES5 のアプリケーションの場合は CommonJS の`require` と `module.ex
 
 ### TypeScript へ移行
 
-Angular へのアップグレード計画に TypeScript への移行も含まれる場合、アップグレードを開始する前にTypeScript のコンパイラを導入するとよいでしょう。
+Angular へのアップグレード計画に TypeScript への移行も含まれる場合、アップグレードを開始する前に TypeScript のコンパイラを導入するとよいでしょう。
 これにより、実際にアップグレードする時に学び、考慮しなければいけないことがひとつ減ります。
 同時に、 AngularJS のソースコードで TypeScript の機能を使い始めることもできます。
 
@@ -71,54 +71,54 @@ TypeScript は ECMAScript 5 のスーパーセットの次世代の ECMAScript 2
 しかしそれをすることは便利で刺激的であるだけではもちろんありません。
 次のような追加手順によってさらなる価値を生み出します。
 
-*   モジュールローダーを使うアプリケーションでは TypeScript のインポートとエクスポート（実態は ECMAScript 2015 のインポートとエクスポート）はソースコードをモジュール単位で構成するために使うことができます。
-*   型注釈は既存の関数や変数のそれらの型を定義するために順次適用することができ、ビルド時のエラー検出や自動補完、インラインのドキュメントなどの恩恵を得ることができます。
-*   アロー関数や `let`、 `const` 関数のデフォルト引数、分割代入などのようなES2015 で追加される JavaScript の機能を順次追加し、ソースコードをより表現豊かにできます。
-*   サービスとコントローラーを *クラス* にすることができます。
-    それにより、Angular でのサービスとコンポーネントのクラスにより近くすることができ、アップグレード後の生活がよりよいものとなります。
+- モジュールローダーを使うアプリケーションでは TypeScript のインポートとエクスポート（実態は ECMAScript 2015 のインポートとエクスポート）はソースコードをモジュール単位で構成するために使うことができます。
+- 型注釈は既存の関数や変数のそれらの型を定義するために順次適用することができ、ビルド時のエラー検出や自動補完、インラインのドキュメントなどの恩恵を得ることができます。
+- アロー関数や `let`、 `const` 関数のデフォルト引数、分割代入などのような ES2015 で追加される JavaScript の機能を順次追加し、ソースコードをより表現豊かにできます。
+- サービスとコントローラーを _クラス_ にすることができます。
+  それにより、Angular でのサービスとコンポーネントのクラスにより近くすることができ、アップグレード後の生活がよりよいものとなります。
 
 ### コンポーネントディレクティブを使う {@a using-component-directives}
 
 Angular において、コンポーネントはユーザーインターフェースを構築する上で中心となる原始的要素です。
 UI の別々の部分をコンポーネントで定義し、全体のユーザー体験として構成します。
 
-*コンポーネントディレクティブ* を使うことで、AngularJS でもこれを行うことができます。
-これらのディレクティブは自身のテンプレートやコントローラー、入力/出力のバインディングのようなAngular のコンポーネントが定義するものと同じものを定義することができます。
-コンポーネントディレクティブによって構築されたアプリケーションは`ng-controller` や `ng-include` 、スコープの継承などの低レベルの機能によって構築されたアプリケーションよりもAngular に移行しやすいです。
+_コンポーネントディレクティブ_ を使うことで、AngularJS でもこれを行うことができます。
+これらのディレクティブは自身のテンプレートやコントローラー、入力/出力のバインディングのような Angular のコンポーネントが定義するものと同じものを定義することができます。
+コンポーネントディレクティブによって構築されたアプリケーションは`ng-controller` や `ng-include` 、スコープの継承などの低レベルの機能によって構築されたアプリケーションよりも Angular に移行しやすいです。
 
 Angular 互換にするために、 AngularJS のコンポーネントディレクティブは次のような属性を設定する必要があります。
 
-*   `restrict: 'E'`
-    コンポーネントは通常、エレメントとして使われます。
+- `restrict: 'E'`
+  コンポーネントは通常、エレメントとして使われます。
 
-*   `scope: {}` - 分離されたスコープです。
-    Angular ではコンポーネントは常に周りと分離されているため、AngularJS でも同様にすべきです。
+- `scope: {}` - 分離されたスコープです。
+  Angular ではコンポーネントは常に周りと分離されているため、AngularJS でも同様にすべきです。
 
-*   `bindToController: {}`。 
-    コンポーネントへ入力と出力は `$scope` の代わりにコントローラーと繋げるべきです。
+- `bindToController: {}`。
+  コンポーネントへ入力と出力は `$scope` の代わりにコントローラーと繋げるべきです。
 
-*   `controller` もしくは `controllerAs`。
-    コンポーネントは自身のコントローラーを持ちます。
+- `controller` もしくは `controllerAs`。
+  コンポーネントは自身のコントローラーを持ちます。
 
-*   `template` もしくは `templateUrl`。 
-    コンポーネントは自身のテンプレートを持ちます。
+- `template` もしくは `templateUrl`。
+  コンポーネントは自身のテンプレートを持ちます。
 
 コンポーネントディレクティブは次の要素を使うこともできます。
 
-*   `transclude: true/{}` は、コンポーネントが他の場所からコンテンツをトランスクルードする場合に使います。
-*   `require` は、コンポーネントが親コンポーネントのコントローラーとやりとりするために使います。
+- `transclude: true/{}` は、コンポーネントが他の場所からコンテンツをトランスクルードする場合に使います。
+- `require` は、コンポーネントが親コンポーネントのコントローラーとやりとりするために使います。
 
 コンポーネントディレクティブでは次のような属性は使っては **いけません** 。
 
-*   `compile`。 
-    Angular ではこの属性はサポートされません。
+- `compile`。
+  Angular ではこの属性はサポートされません。
 
-*   `replace: true`。 
-    Angular はコンポーネントのエレメントをコンポーネントのテンプレートと置換しません。
-    AngularJS でもこの属性は廃止されました。
+- `replace: true`。
+  Angular はコンポーネントのエレメントをコンポーネントのテンプレートと置換しません。
+  AngularJS でもこの属性は廃止されました。
 
-*   `priority` と `terminal`。 
-    AngularJS のコンポーネントでは使うことができますが、Angular では使うことはできないのでそれらの属性に依存したコードは書かない方がよいでしょう。
+- `priority` と `terminal`。
+  AngularJS のコンポーネントでは使うことができますが、Angular では使うことはできないのでそれらの属性に依存したコードは書かない方がよいでしょう。
 
 Angular のアーキテクチャに合わせた、AngularJS のコンポーネントディレクティブは次のようになります。
 
@@ -127,26 +127,26 @@ Angular のアーキテクチャに合わせた、AngularJS のコンポーネ�
 AngularJS 1.5 ではこれらのようなコンポーネントディレクティブを定義しやすくするために、[コンポーネント API](https://docs.angularjs.org/api/ng/type/angular.Module#component) が導入されました。
 コンポーネントディレクティブでこの API を使うことには次のような利点があります。
 
-*   ボイラープレートのソースコードを減らせる。
-*   `controllerAs` のようなベストプラクティスをコンポーネントで使うように強制できる。
-*   `scope` and `restrict` のようなディレクティブの属性に適切なデフォルトの値が入る。
+- ボイラープレートのソースコードを減らせる。
+- `controllerAs` のようなベストプラクティスをコンポーネントで使うように強制できる。
+- `scope` and `restrict` のようなディレクティブの属性に適切なデフォルトの値が入る。
 
 上記のようなコンポーネントディレクティブの例はコンポーネントを使って表現すると次のようになります。
 
 <code-example path="upgrade-module/src/app/upgrade-io/hero-detail.component.ts" region="hero-detail-io" header="hero-detail.component.ts"></code-example>
 
 `$onInit()`　や `$onDestroy()`、`$onChanges()`のようなコントローラーのライフサイクルをフックするメソッドは AngularJS 1.5 で導入された便利な機能です。
-それらは [Angular においてほぼ同様のもの][AioGuideLifecycleHooks]があるため、コンポーネントのライフサイクルのロジックをそれらを使って構成することで、Angular へのアップグレード作業を簡単にすることができます。
+それらは [Angular においてほぼ同様のもの][aioguidelifecyclehooks]があるため、コンポーネントのライフサイクルのロジックをそれらを使って構成することで、Angular へのアップグレード作業を簡単にすることができます。
 
 ## ngUpgrade を使ったアップグレード {@a upgrading-with-ngupgrade}
 
 Angular の ngUpgrade ライブラリは本当に小さいアプリケーションが対象でない限り、アップグレードにとても便利なツールです。
 それを使うことで、AngularJS と Angular のコンポーネントを同じアプリケーションに混ぜたり、合わせたりすることができ、シームレスな相互運用が可能になります。
-それにより、移行期間中に2つのフレームワークが自然に共存することができるため、アップグレード作業を一度にする必要がなくなります。
+それにより、移行期間中に 2 つのフレームワークが自然に共存することができるため、アップグレード作業を一度にする必要がなくなります。
 
 <div class="alert is-helpful">
 
-The [end of life of AngularJS][AngularBlogFindingAPathForwardWithAngularjs7e186fdd4429] is December 31st, 2021.
+The [end of life of AngularJS][angularblogfindingapathforwardwithangularjs7e186fdd4429] is December 31st, 2021.
 With this event, ngUpgrade is now in a feature complete state.
 We will continue publishing security and bug fixes for ngUpgrade at least until December 31st, 2022.
 
@@ -157,35 +157,35 @@ We will continue publishing security and bug fixes for ngUpgrade at least until 
 ngUpgrade が提供する主なツールのひとつが `UpgradeModule` です。
 このモジュールには Angular と AngularJS のコードの両方をサポートするハイブリッドアプリケーションをブートストラップしたり、管理するために役立つツールが含まれています。
 
-ngUpgrade は *AngularJS と Angular を同時に動かす* ことが本当にやりたい場合に使います。
+ngUpgrade は _AngularJS と Angular を同時に動かす_ ことが本当にやりたい場合に使います。
 すべての Angular のコードは Angular フレームワークの中で動き、AngularJS のコードは AngularJS フレームワークの中で動きます。
 これらは両方とも実際に、フレームワークの完全な機能です。
 エミュレーションではないため、両方のフレームワークがもつすべての機能と自然な挙動を期待できます。
 
 これにより、ひとつのフレームワークで管理されるコンポーネントとサービスがもう一方のフレームワークのものと相互運用することができます。
-これは3つの主要な領域で発生します。
-依存性の注入と DOM、変更検知です。 
+これは 3 つの主要な領域で発生します。
+依存性の注入と DOM、変更検知です。
 
 #### 依存性の注入
 
-依存性の注入は AngularJS と Angular 両方で重要な部分ですが、実際の動作には2つのフレームワークの間でいくつかの重要な違いがあります。
+依存性の注入は AngularJS と Angular 両方で重要な部分ですが、実際の動作には 2 つのフレームワークの間でいくつかの重要な違いがあります。
 
-| AngularJS                                                                                                           | Angular                                                                                                                                                 |
-|:---                                                                                                                 |:---                                                                                                                                                     |
-| Dependency injection tokens are always strings                                                                      | Tokens [can have different types][AioGuideDependencyInjection].<br />They are often classes.<br />They may also be strings.                              |
-| There is exactly one injector.<br />Even in multi-module applications, everything is poured into one big namespace. |  There is a [tree hierarchy of injectors][AioGuideHierarchicalDependencyInjection], with a root injector and an additional injector for each component. |
+| AngularJS                                                                                                           | Angular                                                                                                                                                |
+| :------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dependency injection tokens are always strings                                                                      | Tokens [can have different types][aioguidedependencyinjection].<br />They are often classes.<br />They may also be strings.                            |
+| There is exactly one injector.<br />Even in multi-module applications, everything is poured into one big namespace. | There is a [tree hierarchy of injectors][aioguidehierarchicaldependencyinjection], with a root injector and an additional injector for each component. |
 
 これらの違いがあるものの、依存性の注入を相互運用することはできます。
 `upgrade/static` によって違いを解消し、すべてをシームレスに動作させられます。
 
-*   AngularJS のサービスを *アップグレード* することにより、Angular のコードでつかえるようになります。
-    個々のサービスの同じシングルトンインスタンスがフレームワーク間で共有されます。
-    Angular ではこれらのサービスは常に *ルートのインジェクター* として扱われ、すべてのコンポーネントから利用できます。
+- AngularJS のサービスを _アップグレード_ することにより、Angular のコードでつかえるようになります。
+  個々のサービスの同じシングルトンインスタンスがフレームワーク間で共有されます。
+  Angular ではこれらのサービスは常に _ルートのインジェクター_ として扱われ、すべてのコンポーネントから利用できます。
 
-*   Angular サービスを *ダウングレード* することにより、AngularJS のコードで使えるようになります。
-    Angular のルートのインジェクターからのサービスのみダウングレードできます。
-    同じシングルトンインスタンスがフレームワーク間で共有されます。
-    ダウングレードされたサービスを登録する際は、AngularJS で使うための*文字列のトークン* を指定しなければなりません。
+- Angular サービスを _ダウングレード_ することにより、AngularJS のコードで使えるようになります。
+  Angular のルートのインジェクターからのサービスのみダウングレードできます。
+  同じシングルトンインスタンスがフレームワーク間で共有されます。
+  ダウングレードされたサービスを登録する際は、AngularJS で使うための*文字列のトークン* を指定しなければなりません。
 
 <div class="lightbox">
 
@@ -195,20 +195,20 @@ ngUpgrade は *AngularJS と Angular を同時に動かす* ことが本当に�
 
 #### コンポーネントと DOM
 
-ハイブリッドの ngUpgrade の DOM の中ではアプリケーションはAngularJS と Angular のコンポーネントやディレクティブの集まりです。
+ハイブリッドの ngUpgrade の DOM の中ではアプリケーションは AngularJS と Angular のコンポーネントやディレクティブの集まりです。
 これらのコンポーネントは ngUpgrade によって共存する各フレームワークの入力と出力のバインディングを使ってお互いにやりとりします。
 上記に記載したように、それらは注入された依存性を通してやりとりする場合もあります。
 
 ハイブリッドのアプリケーションを理解する上で重要なことは DOM の中のすべての要素が
-必ず2つのフレームワークのどちらかによって所有されていることです。
+必ず 2 つのフレームワークのどちらかによって所有されていることです。
 もう一方のフレームワークでは無視されます。もしある要素が AngularJS によって所有されている場合、Angular はその要素が存在しないものとして扱います。逆も同様です。
 
 通常、ハイブリッドのアプリケーションは AngularJS のアプリケーションとして動作を開始し、AngularJS が index.html のようなルートのテンプレートを処理します。
-AngularJS のテンプレートのどこかで Angular のコンポーネントが使われた時にAngular が出てきます。
+AngularJS のテンプレートのどこかで Angular のコンポーネントが使われた時に Angular が出てきます。
 そのコンポーネントのテンプレートは Angular によって管理されることになり、Angular のコンポーネントやディレクティブを何個でも含めることができます。
 
-さらに、2つのフレームワークをインターリーブすることができます。
-次の2つの方法のうち、どちらかを使うことで2つのフレームワークの境界を
+さらに、2 つのフレームワークをインターリーブすることができます。
+次の 2 つの方法のうち、どちらかを使うことで 2 つのフレームワークの境界を
 行き来することができます。
 
 1. もう一方のフレームワークからコンポーネント使う方法。AngularJS のテンプレートで
@@ -239,7 +239,7 @@ Angular のコンポーネントを AngularJS から使う場合を考えてみ�
 DOM 要素の `<a-component>` は AngularJS の要素として管理されます。
 なぜなら、AngularJS のテンプレートの中で定義されているからです。
 そのため、そこには AngularJS のディレクティブのみ追加することができますが
-Angular のディレクティブは *できません* 。 `<a-component>` のテンプレートの中でのみ
+Angular のディレクティブは _できません_ 。 `<a-component>` のテンプレートの中でのみ
 Angular が入ることができます。同じことが Angular から AngularJS のコンポーネントを
 使う場合にもいえます。
 
@@ -251,7 +251,7 @@ AngularJS では `scope.$apply()` を使ってデータバインディングの�
 
 Angular では状況が異なります。イベントごとに変更検知が発生しますが、
 発生させるために `scope.$apply()` を呼び出す必要がありません。
-なぜなら Angular のコードは [Angular Zone][AioApiCoreNgzone]と
+なぜなら Angular のコードは [Angular Zone][aioapicorengzone]と
 呼ばれるものの中で実行されるからです。
 Angular は常にコードの終了を検知するため、
 いつ変更を検知するべきかも分かるのです。
@@ -260,11 +260,11 @@ Angular は常にコードの終了を検知するため、
 ハイブリッドのアプリケーションでは、`UpgradeModule` が AngularJS と
 Angular のやり方を橋渡しします。次のようなことが起こります。
 
-* アプリケーションで発生するすべてのことは Angular ゾーンの内部で実行されます。
+- アプリケーションで発生するすべてのことは Angular ゾーンの内部で実行されます。
   このことはイベントが発生した場所が AngularJS もしくは Angular のコードかにかかわらずいえることです。
   Angular ゾーンはイベントごとに Angular の変更検知を動作させます。
 
-* `UpgradeModule` は Angular ゾーンのターンごとに AngularJS の 
+- `UpgradeModule` は Angular ゾーンのターンごとに AngularJS の
   `$rootScope.$apply()` を実行します。これにより、AngularJS の変更検知が
   イベントごとに発生することになります。
 
@@ -276,14 +276,14 @@ Angular のやり方を橋渡しします。次のようなことが起こりま
 
 実用上は、AngularJS か Angular であるかにかかわらず、
 `$apply()` を呼び出す必要はありません。`UpgradeModule` が
-代わりにやってくれるからです。`$apply()` を呼び出すことも *できる* ため、
+代わりにやってくれるからです。`$apply()` を呼び出すことも _できる_ ため、
 既存のコードから該当の箇所を削除する必要はありません。それらの呼び出しは
 ハイブリッドアプリケーションの AngularJS の変更検知を追加で実行するだけです。
 
 Angular のコンポーネントをダウングレードし、AngularJS から使う場合は
 コンポーネントの入力は AngularJS の変更検知によって監視されます。
 それらの入力に変更があれば、コンポーネントの中の対応するプロパティが設定されます。
-コンポーネントの [OnChanges][AioApiCoreOnchanges]インターフェースを
+コンポーネントの [OnChanges][aioapicoreonchanges]インターフェースを
 実装することでダウングレードしてないかのように
 変更をフックすることもできます。
 
@@ -293,7 +293,7 @@ Angular のコンポーネントをダウングレードし、AngularJS から�
 として扱われます。それらの値は変更があった時に、アップグレードされたコンポーネントの
 スコープ（もしくはコントローラー）に書き込まれます。
 
-### Angular の *NgModules* で UpgradeModule を使う
+### Angular の _NgModules_ で UpgradeModule を使う
 
 アプリケーションを機能ごとにまとまったブロックとして構成するために、
 AngualrJS と Angular は両方とも自身のモジュールの概念を持ってみます。
@@ -301,7 +301,7 @@ AngualrJS と Angular は両方とも自身のモジュールの概念を持っ�
 それらの詳細はアーキテクチャと実装においてまったく異なります。
 AngularJS では Angular のアセットを `angular.module` プロパティに追加します。
 Angular ではひとつ以上の `NgModule` で修飾されたクラスを使って
-Angular のアセットをメタデータに記述することができます。2つの違いはそこで花開きます。
+Angular のアセットをメタデータに記述することができます。2 つの違いはそこで花開きます。
 
 ハイブリッドのアプリケーションでは両方のバージョンの Angular を一度に動かします。
 そのため、AngularJS と Angular 両方から最低でもひとつのモジュールが必要となります。
@@ -310,7 +310,7 @@ NgModule の内部で `UpgradeModule` をインポートし、 AngularJS のモ�
 
 <div class="alert is-helpful">
 
-詳しくは [NgModules][AioGuideNgmodules]. を参照してください。
+詳しくは [NgModules][aioguidengmodules]. を参照してください。
 
 </div>
 
@@ -329,20 +329,20 @@ AngularJS のアプリケーションでは AngularJS のアプリケーショ�
 自動的にブートストラップされます。しかしハイブリッドのアプリケーションでは
 `UpgradeModule` を通して手動でブートストラップします。
 そのため、ハイブリッド方式に切り替える前の予備準備として AngularJS のアプリケーションで手動で JavaScript の
-[`angular.bootstrap`][AngularjsDocsApiNgFunctionAngularBootstrap] 方式を使うことがよいでしょう。
+[`angular.bootstrap`][angularjsdocsapingfunctionangularbootstrap] 方式を使うことがよいでしょう。
 
 たとえば、次のような `ng-app` によるブートストラップがあるとします。
 
 <code-example path="upgrade-module/src/index-ng-app.html"></code-example>
 
 HTML から `ng-app` と `ng-strict-di` ディレクティブを削除し、
-代わりに JavaScriptから `angular.bootstrap` を呼ぶことで
+代わりに JavaScript から `angular.bootstrap` を呼ぶことで
 同じことができます。
 
 <code-example path="upgrade-module/src/app/ajs-bootstrap/app.module.ts" region="bootstrap" header="app.module.ts"></code-example>
 
 AngularJS のアプリケーションをハイブリッドに置き換え始めるために、Angular フレームワークをロードする必要があります。
-これを SystemJS を使って行う方法については [クイックスタート github リポジトリ][GithubAngularQuickstart]からの抜粋が [Setup for Upgrading to AngularJS][AioGuideUpgradeSetup] に記載されています。
+これを SystemJS を使って行う方法については [クイックスタート github リポジトリ][githubangularquickstart]からの抜粋が [Setup for Upgrading to AngularJS][aioguideupgradesetup] に記載されています。
 
 `npm install @angular/upgrade --save` で `@angular/upgrade` パッケージをインストールし、
 `@angular/upgrade/static` パッケージへのマッピングを追加することも必要です。
@@ -359,7 +359,7 @@ AngularJS のアプリケーションをハイブリッドに置き換え始め�
 
 `AppModule` のコンストラクターでは `UpgradeModule` のインスタンスを得るために依存性の注入が行われ、
 `AppModule.ngDoBootstrap` メソッドが AngularJS アプリケーションをブートストラップするために使われます。
-`upgrade.bootstrap` メソッドは [angular.bootstrap][AngularjsDocsApiNgFunctionAngularBootstrap] と完全に同じ引数をとります。
+`upgrade.bootstrap` メソッドは [angular.bootstrap][angularjsdocsapingfunctionangularbootstrap] と完全に同じ引数をとります。
 
 <div class="alert is-helpful">
 
@@ -374,7 +374,7 @@ AngularJS のアプリケーションをハイブリッドに置き換え始め�
 
 おめでとうございます！
 ハイブリッドのアプリケーションが動き始めました！
-既存の AngularJS のコードは以前と同じように動作します。*そして* Angular コードを追加する準備ができました。
+既存の AngularJS のコードは以前と同じように動作します。_そして_ Angular コードを追加する準備ができました。
 
 ### AngularJS のコードから Angular のコンポーネントを使う {@a using-angular-components-from-angularjs-code}
 
@@ -394,7 +394,7 @@ AngularJS のアプリケーションをハイブリッドに置き換え始め�
 <code-example path="upgrade-module/src/app/downgrade-static/hero-detail.component.ts" header="hero-detail.component.ts"></code-example>
 
 このコンポーネントを AngularJS から使いたいならば、 `downgradeComponent()` メソッドを使って
-*ダウングレード* する必要があります。その結果、AngularJS の *ディレクティブ* として、
+_ダウングレード_ する必要があります。その結果、AngularJS の _ディレクティブ_ として、
 AngularJS のモジュールの中に登録できます。
 
 <code-example path="upgrade-module/src/app/downgrade-static/app.module.ts" region="downgradecomponent" header="app.module.ts"></code-example>
@@ -430,12 +430,12 @@ the inputs change, you can set `propagateDigest` to `false` when calling
 
 この AngularJS のコードは `heroDetail` という名前のディレクティブ要素 (`restrict: 'E'`)
 だということに注意してください。AngularJS のディレクティブ要素は _名前_ に基づいてマッチします。
-*ダウングレードされた Angular のコンポーネントの `selector` メタデータは無視されます。*
+_ダウングレードされた Angular のコンポーネントの `selector` メタデータは無視されます。_
 
 </div>
 
 もちろん、ほとんどのコンポーネントはこれほど単純ではありません。
-多くは *入力* と *出力* を持ち、外の世界とつながっています。
+多くは _入力_ と _出力_ を持ち、外の世界とつながっています。
 ヒーローの情報を紹介する Angular のコンポーネントに
 入力と出力が加わると次のようになります。
 
@@ -478,7 +478,6 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
 
 </code-example>
 
-
 </div>
 
 吐かれたオブジェクトにアクセスするために、`$event` 変数を出力で使うことができます。
@@ -504,19 +503,19 @@ AngularJS のコードからそれを使うことができます。
 これは低レベルのコンポーネントから移行を始めて上に向かう時に役立ちます。
 しかしいくつかの場合では逆の順番（高レベルのコンポーネントから始めて下に向かう方法）で
 行う方が便利なときがあります。これも `upgrade/static` を使って行うことができます。
-AngularJS のコンポーネントディレクティブを *アップグレード* して
+AngularJS のコンポーネントディレクティブを _アップグレード_ して
 Angular から使うことができます。
 
 すべての種類の AngularJS のディレクティブがアップグレードできるわけではありません。
-[上記の準備ガイドに記載された][AioGuideUpgradeUsingComponentDirectives] 形式の*コンポーネントディレクティブ* である必要があります。
-互換性を保つ安全な方法は AngularJS 1.5 で導入された[コンポーネント API][AngularjsDocsApiNgTypeAngularModule]
+[上記の準備ガイドに記載された][aioguideupgradeusingcomponentdirectives] 形式の*コンポーネントディレクティブ* である必要があります。
+互換性を保つ安全な方法は AngularJS 1.5 で導入された[コンポーネント API][angularjsdocsapingtypeangularmodule]
 を使うことです。
 
 アップグレード可能なコンポーネントの簡単な例として、テンプレートとコントローラーのみもつコンポーネントがあります。
 
 <code-example path="upgrade-module/src/app/upgrade-static/hero-detail.component.ts" region="hero-detail" header="hero-detail.component.ts"></code-example>
 
-`UpgradeComponent` クラスを使うことでこのコンポーネントを Angular に *アップグレード* できます。
+`UpgradeComponent` クラスを使うことでこのコンポーネントを Angular に _アップグレード_ できます。
 `UpgradeComponent` を拡張して Angular の **ディレクティブ** を新しく作り、`super` を
 コンストラクターの中で呼び出すことで、 AngularJS のコンポーネントをアップグレードして Angular の中で使うことができます。
 あとは、`AppModule` の `declarations` 配列に追加するだけです。
@@ -543,7 +542,7 @@ Angular はその子要素に関しては気にしません。
 次のルールにしたがって入力と出力を提供してください。
 
 |                    | Binding definition            | Template syntax                                                                                                                                                                                                                |
-|:---                |:---                           |:---                                                                                                                                                                                                                            |
+| :----------------- | :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Attribute binding  | `myAttribute: '@myAttribute'` | `<my-component myAttribute="value">`                                                                                                                                                                                           |
 | Expression binding | `myOutput: '&myOutput'`       | `<my-component (myOutput)="action()">`                                                                                                                                                                                         |
 | One-way binding    | `myValue: '<myValue'`         | `<my-component [myValue]="anExpression">`                                                                                                                                                                                      |
@@ -569,9 +568,9 @@ Angular のテンプレート記法を使うことで、このコンポーネン
 </div>
 
 ダウングレードされた Angular のコンポーネントを AngularJS のテンプレートから
-使う時、いくつかのコンテンツを *トランスクルード* する必要が出てくるかもしれません。
+使う時、いくつかのコンテンツを _トランスクルード_ する必要が出てくるかもしれません。
 これをすることも可能です。Angular にトランスクルードにあたるものはないものの、
-似た概念として *コンテンツ投影* があります。`upgrade/static` を使うことで、
+似た概念として _コンテンツ投影_ があります。`upgrade/static` を使うことで、
 これらの２つの機能を相互運用することができます。
 
 Angular のコンポーネントは `<ng-content>` タグをそれらの中で使うためにコンテンツ投影
@@ -600,7 +599,7 @@ Angular コンポーネントの中で AngularJS のコンテンツが投影さ�
 
 ちょうど AngularJS のコンテンツを Angular のコンポーネントに投影したように、
 アップグレードされたバージョンを使うことで Angular のコンテンツを AngularJS の
-コンポーネントに *トランスクルードする* ことができます。
+コンポーネントに _トランスクルードする_ ことができます。
 
 AngularJS のコンポーネントディレクティブがトランスクルードをサポートする時、
 トランスクルードを行う地点を示すために `ng-transclude` ディレクティブを
@@ -622,14 +621,14 @@ AngularJS の依存性を Angular のコードに注入したい状況に遭遇�
 もしかしたらビジネスロジックが AngularJS のサービスに残っているかもしれません。
 もしかしたら `$location` や `$timeout` のような AngularJS の組み込みのサービスを使いたいかもしれません。
 
-このような状況では、AngularJS のプロバイダーを Angular に *アップグレード* することが可能です。
+このような状況では、AngularJS のプロバイダーを Angular に _アップグレード_ することが可能です。
 これにより、Angular のコードでそれらを使うことができます。たとえば、AngularJS で `HeroesService`
 というサービスがあったとします。
 
 <code-example path="upgrade-module/src/app/ajs-to-a-providers/heroes.service.ts" header="heroes.service.ts">
 </code-example>
 
-Angular の [ファクトリプロバイダー][AioGuideDependencyInjectionProvidersFactoryProviders] を使ってサービスをアップグレードすることができます。それは AngularJS の `$injector` からサービスを呼び出します。
+Angular の [ファクトリプロバイダー][aioguidedependencyinjectionprovidersfactoryproviders] を使ってサービスをアップグレードすることができます。それは AngularJS の `$injector` からサービスを呼び出します。
 
 ファクトリプロバイダーは別の `ajs-upgraded-providers.ts` ファイルで
 宣言することで共存させ、参照したり新しいものを作ったり、
@@ -672,7 +671,7 @@ TypeScript の型注釈を依存性の注入をする時に使うことができ
 ### Angular の依存性を AngularJS に注入できるようにする {@a making-angular-dependencies-injectable-to-angularjs}
 
 AngularJS の依存関係をアップグレードすることに加え、Angular の依存関係を
-*ダウングレード* し、 AngularJS から使うこともできます。これはサービスを
+_ダウングレード_ し、 AngularJS から使うこともできます。これはサービスを
 Angular に移行し始めた時や、AngularJS で書かれたコンポーネントを維持しつつ
 Angular で新しいサービスを作ったりする時に便利です。
 
@@ -686,7 +685,7 @@ Angular のコンポーネントではモジュールの `providers` のリス�
 <code-example path="upgrade-module/src/app/a-to-ajs-providers/app.module.ts" region="ngmodule" header="app.module.ts">
 </code-example>
 
-`downgradeInjectable()` を使って *AngularJS のファクトリ関数* に Angular `Heroes` を入れ、
+`downgradeInjectable()` を使って _AngularJS のファクトリ関数_ に Angular `Heroes` を入れ、
 ファクトリを AngularJS のモジュールにつなぎましょう。
 AngularJS での依存関係の名前は任意です。
 
@@ -702,7 +701,7 @@ AngularJS での依存関係の名前は任意です。
 
 アプリケーションを構築する時、必要なリソースが必要な時に読み込まれて欲しいことかと思います。アセットやコードにかかわらず、必要な時まで読み込みを待つことはアプリケーションを効率的にするために必要なことです。このことは異なるフレームワークをひとつのアプリケーションで動かしている場合に特にいえることです。
 
-[遅延読み込み][AioGuideGlossaryLazyLoading]はアセットやコードのようなリソースを必要になるまで読み込みを遅らせるテクニックです。これは特に異なるフレームワークをひとつのアプリケーションで動かしているような場合に、起動時間を減らし、効率性をあげることができます。
+[遅延読み込み][aioguideglossarylazyloading]はアセットやコードのようなリソースを必要になるまで読み込みを遅らせるテクニックです。これは特に異なるフレームワークをひとつのアプリケーションで動かしているような場合に、起動時間を減らし、効率性をあげることができます。
 
 ハイブリッド方式で大きなアプリケーションを AngularJS から Angular へ移行する場合、一番共通して使われている機能から先に移行し、あまり共通して使われていない機能は必要な場合にのみ使いたいかと思います。そのようにすることで、アプリケーションが移行中であってもシームレスなユーザー体験を提供することに役立つでしょう。
 
@@ -710,14 +709,14 @@ AngularJS での依存関係の名前は任意です。
 
 全体のアプリケーションのパフォーマンスは Angular によってレンダリングされるページをユーザーがみている場合に影響します。なぜなら AngularJS のフレームワークとアプリケーションはアクセスされていなくても読み込まれ、実行されているからです。
 
-バンドルのサイズとパフォーマンスの問題を段階的に減らすことができます。AngularJS を別のバンドルに分離させることで [遅延読み込み][AioGuideGlossaryLazyLoading]を使い、読み込みやブートストラップ、AngularJS のレンダリングを必要な時にだけ行うことができます。この戦略では最初に読み込まれるバンドルのサイズを減らし、両方のフレームワークの読み込みが与える影響を減らすことができ、アプリケーションを可能な限り効率的に動かすことができます。
+バンドルのサイズとパフォーマンスの問題を段階的に減らすことができます。AngularJS を別のバンドルに分離させることで [遅延読み込み][aioguideglossarylazyloading]を使い、読み込みやブートストラップ、AngularJS のレンダリングを必要な時にだけ行うことができます。この戦略では最初に読み込まれるバンドルのサイズを減らし、両方のフレームワークの読み込みが与える影響を減らすことができ、アプリケーションを可能な限り効率的に動かすことができます。
 
 次のステップにより行うことができます。
 
-* AngularJS のバンドルにコールバック関数を設定します。
-* AngularJS のアプリケーションをブートストラップし、遅延読み込みをするためのサービスを作成します。
-* AngularJS のコンテンツをルーティングするためのコンポーネントを作成します。
-* AngularJS 独自の URL 向けにカスタムの `matcher` 関数を作成し、Angular の `Router` に設定します。
+- AngularJS のバンドルにコールバック関数を設定します。
+- AngularJS のアプリケーションをブートストラップし、遅延読み込みをするためのサービスを作成します。
+- AngularJS のコンテンツをルーティングするためのコンポーネントを作成します。
+- AngularJS 独自の URL 向けにカスタムの `matcher` 関数を作成し、Angular の `Router` に設定します。
 
 ### AngularJS を遅延読み込みするためのサービスを作る
 
@@ -726,7 +725,7 @@ Angular バージョン 8 で、遅延読み込みは動的なインポート記
 <code-example path="upgrade-lazy-load-ajs/src/app/lazy-loader.service.ts" header="src/app/lazy-loader.service.ts">
 </code-example>
 
-このサービスはバンドル化された AngularJS のアプリケーションを遅延読み込みするために、`import()` メソッドを使います。これにより、ユーザーがまだ必要としない部分に関しては読み込みを行わないことで、最初に読み込まれるバンドルのサイズを減らすことができます。読み込みが行われたあと、アプリケーションを手動で _ブートストラップ_ する方法を提供する必要もあります。AngularJS では [angular.bootstrap()][AngularjsDocsApiNgFunctionAngularBootstrap] メソッドを HTML 要素と一緒に使うことでアプリケーションを手動でブートストラップできます。AngularJS のアプリケーションではブートストラップするために `bootstrap` メソッドを公開しておくことも必要です。
+このサービスはバンドル化された AngularJS のアプリケーションを遅延読み込みするために、`import()` メソッドを使います。これにより、ユーザーがまだ必要としない部分に関しては読み込みを行わないことで、最初に読み込まれるバンドルのサイズを減らすことができます。読み込みが行われたあと、アプリケーションを手動で _ブートストラップ_ する方法を提供する必要もあります。AngularJS では [angular.bootstrap()][angularjsdocsapingfunctionangularbootstrap] メソッドを HTML 要素と一緒に使うことでアプリケーションを手動でブートストラップできます。AngularJS のアプリケーションではブートストラップするために `bootstrap` メソッドを公開しておくことも必要です。
 
 AngularJS でグローバルのリスナーの削除などが必要に応じて実行されるために、`$rootScope.destroy()` メソッドを呼び出すメソッドを実装します。
 
@@ -737,7 +736,7 @@ AngularJS のアプリケーションにはコンテンツをレンダリング�
 
 <div class="alert is-important">
 
-**備考** AngularJS が読み込まれ、ブートストラップされたあとも、ルートの設定を紐づけるリスナーはルートの変更を監視し続けます。AngularJS が表示されていない時はリスナーが停止するように、 [$routeProvider][AngularjsDocsApiNgrouteProviderRouteprovider] で空のテンプレートをレンダリングする `otherwise` オプションを設定します。これにより、他のすべてのルートは Angular によって制御されます。
+**備考** AngularJS が読み込まれ、ブートストラップされたあとも、ルートの設定を紐づけるリスナーはルートの変更を監視し続けます。AngularJS が表示されていない時はリスナーが停止するように、 [$routeProvider][angularjsdocsapingrouteproviderrouteprovider] で空のテンプレートをレンダリングする `otherwise` オプションを設定します。これにより、他のすべてのルートは Angular によって制御されます。
 
 </div>
 
@@ -748,7 +747,7 @@ Angular のアプリケーションでは、AngularJS のコンテンツのプ�
 <code-example path="upgrade-lazy-load-ajs/src/app/angular-js/angular-js.component.ts" header="src/app/angular-js/angular-js.component.ts">
 </code-example>
 
-Angular のルーターが AngularJS のルートにマッチした場合、`AngularJSComponent` がレンダリングされ、コンテンツが AngularJS の [`ng-view`][AngularjsDocsApiNgrouteDirectiveNgview] ディレクティブの中でレンダリングされます。ユーザーがルートの外に遷移した時は AngularJS の `$rootScope` が削除されます。
+Angular のルーターが AngularJS のルートにマッチした場合、`AngularJSComponent` がレンダリングされ、コンテンツが AngularJS の [`ng-view`][angularjsdocsapingroutedirectivengview] ディレクティブの中でレンダリングされます。ユーザーがルートの外に遷移した時は AngularJS の `$rootScope` が削除されます。
 
 ### AngularJS のルート用にカスタムマッチャーを設定する
 
@@ -768,7 +767,7 @@ Angular のルーターを設定するために、AngularJS の URL のための
 
 ## 統合された Angular Location サービスを使う {@a using-the-unified-angular-location-service}
 
-AngularJS では [$location service][AngularjsDocsApiNgServiceLocation] がすべてのルーティングの設定とページ遷移、URL のエンコードとデコード、リダイレクト、ブラウザ API とのやりとりを制御します。Angular はこれらの処理を `Location` サービスが担当します。
+AngularJS では [$location service][angularjsdocsapingservicelocation] がすべてのルーティングの設定とページ遷移、URL のエンコードとデコード、リダイレクト、ブラウザ API とのやりとりを制御します。Angular はこれらの処理を `Location` サービスが担当します。
 
 AngularJS から Angular に移行する時、新しい API を使えるように、そのような責務はできるだけ Angular に移したいことでしょう。そのような移行のために、Angular は `LocationUpgradeModule` を提供しています。このモジュールは AngularJS の `$location` サービスと Angular の `Location` サービスの責務を _統合した_ location サービスを実現します。
 
@@ -780,10 +779,10 @@ AngularJS から Angular に移行する時、新しい API を使えるよう�
 import { LocationUpgradeModule } from '@angular/common/upgrade';
 
 @NgModule({
-  imports: [
-    // Other NgModule imports...
-    LocationUpgradeModule.config()
-  ]
+imports: [
+// Other NgModule imports...
+LocationUpgradeModule.config()
+]
 })
 export class AppModule {}
 
@@ -796,8 +795,8 @@ export class AppModule {}
 <code-example language="typescript">
 
 LocationUpgradeModule.config({
-  useHash: true,
-  hashPrefix: '!'
+useHash: true,
+hashPrefix: '!'
 })
 
 </code-example>
@@ -819,7 +818,7 @@ import { $locationShim } from '@angular/common/upgrade';
 import { downgradeInjectable } from '@angular/upgrade/static';
 
 angular.module('myHybridApp', [...])
-  .factory('$location', downgradeInjectable($locationShim));
+.factory('$location', downgradeInjectable($locationShim));
 
 </code-example>
 
@@ -856,16 +855,16 @@ Angular のアプリケーションの AOT の恩恵をすべて得るために�
 
 この章では、`ngUpgrade` を使ってアプリケーションのアップグレードを準備する方法を学びます。
 サンプルのアプリケーションは私たちの多くが Angular の冒険を開始したであろう、
-[AngularJS のチュートリアル][AngularjsDocsTutorial]の
-[Angular PhoneCat][GithubAngularAngularPhonecat]です。
+[AngularJS のチュートリアル][angularjsdocstutorial]の
+[Angular PhoneCat][githubangularangularphonecat]です。
 これから、このアプリケーションを Angular の勇敢な新しい世界へ連れてくる方法を見ていきます。
 
-その過程で、[準備ガイド][AioGuideUpgradePreparation] に書かれた手順を
+その過程で、[準備ガイド][aioguideupgradepreparation] に書かれた手順を
 適用する方法を見ていきます。アプリケーションを Angular に合わせ、
 TypeScript で書き始めます。
 
-This tutorial is based on the 1.5.x version of the `angular-phonecat` tutorial, which is preserved in the [1.5-snapshot][GithubAngularAngularPhonecatCommits15Snapshot] branch of the repository.
-To follow along, clone the [angular-phonecat][GithubAngularAngularPhonecat] repository, check out the `1.5-snapshot` branch and apply the steps as you go.
+This tutorial is based on the 1.5.x version of the `angular-phonecat` tutorial, which is preserved in the [1.5-snapshot][githubangularangularphonecatcommits15snapshot] branch of the repository.
+To follow along, clone the [angular-phonecat][githubangularangularphonecat] repository, check out the `1.5-snapshot` branch and apply the steps as you go.
 
 プロジェクト構成については、このようなところから始めていきます。
 
@@ -1001,18 +1000,18 @@ To follow along, clone the [angular-phonecat][GithubAngularAngularPhonecat] repo
 </div>
 
 これはかなりよい開始地点です。
-ソースコードはアップグレードの[事前準備][AioGuideUpgradeFollowTheAngularjsStyleGuide] として重要な、AngularJS 1.5 のコンポーネント API を使っており、構成が [AngularJS スタイルガイド][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMd]にしたがっています。
+ソースコードはアップグレードの[事前準備][aioguideupgradefollowtheangularjsstyleguide] として重要な、AngularJS 1.5 のコンポーネント API を使っており、構成が [AngularJS スタイルガイド][githubjohnpapaangularstyleguideblobprimarya1readmemd]にしたがっています。
 
-* [Rule of 1][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdSingleResponsibility] にあるように、
+- [Rule of 1][githubjohnpapaangularstyleguideblobprimarya1readmemdsingleresponsibility] にあるように、
   個々のコンポーネントやサービス、フィルターは個々のソースファイルにあります。
 
-* `core` や `phone-detain`、`phone-list` モジュールは
+- `core` や `phone-detain`、`phone-list` モジュールは
   個々のサブディレクトリにあり、
   これらのサブディレクトリには JavaScript のコードと、
   個々の機能に特有の HTML テンプレート があります。
-  これは [Folders-by-Feature Structure][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdFoldersByFeatureStructure] と[Modularity][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdModularity] のルールに書かれていることです。
+  これは [Folders-by-Feature Structure][githubjohnpapaangularstyleguideblobprimarya1readmemdfoldersbyfeaturestructure] と[Modularity][githubjohnpapaangularstyleguideblobprimarya1readmemdmodularity] のルールに書かれていることです。
 
-* ユニットテストは [Organizing Tests][GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdOrganizingTests] の
+- ユニットテストは [Organizing Tests][githubjohnpapaangularstyleguideblobprimarya1readmemdorganizingtests] の
   ルールに書かれているように、アプリケーションのコードと対応するように配置され、見つけやすくなっています。
 
 ### TypeScript に切り替える
@@ -1051,7 +1050,7 @@ npm install @types/angular-material --save-dev
 
 </code-example>
 
-[TypeScript 設定][AioGuideTypescriptConfiguration]ガイドに記載されているように、
+[TypeScript 設定][aioguidetypescriptconfiguration]ガイドに記載されているように、
 プロジェクトのディレクトリにある `tsconfig.json` を使って TypeScript のコンパイラを設定してください。
 `tsconfig.json` ファイルは TypeScript のコンパイラへどのように TypetScript のファイルを
 CommonJS のモジュールへバンドルされた ES5 のコードに変えるかを指定します。
@@ -1062,9 +1061,9 @@ CommonJS のモジュールへバンドルされた ES5 のコードに変える
 <code-example language="shell">
 
 "scripts": {
-  "tsc": "tsc",
-  "tsc:w": "tsc -w",
-  ...
+"tsc": "tsc",
+"tsc:w": "tsc -w",
+...
 
 </code-example>
 
@@ -1096,13 +1095,13 @@ ES2015 で追加された JavaScript の新機能を相互運用することが�
 たとえば、`let` や `const`、アロー関数、関数のデフォルト引数、
 分割代入などがあります。
 
-さらに、*型安全* をコードに追加し始めることができます。これは、
+さらに、_型安全_ をコードに追加し始めることができます。これは、
 実際はインストールした AngularJS の型によってすでに部分的に行われています。
 コンポーネントを Angular のモジュールに登録したりしたなどに、
 TypeScript は AngularJS の API が正しく呼ばれているかをチェックします。
 
 しかし、TypeScript の型システムをさらに活用するために、
-*型注釈* を使い始めることもできます。たとえば、チェックマークフィルターの
+_型注釈_ を使い始めることもできます。たとえば、チェックマークフィルターの
 アノテーションをつけることで、引数に真偽値をとることを明示することができます。
 これにより、フィルターが何をするのかを明らかにできます。
 
@@ -1121,7 +1120,7 @@ location と route サービスを使っている、`app.config.ts` のアプリ
 
 <div class="alert is-helpful">
 
-インストールした [AngularJS 1.x の型注釈][NpmjsPackageTypesAngular]はAngular の開発チームによって公式にメンテナンスされているものではありません。
+インストールした [AngularJS 1.x の型注釈][npmjspackagetypesangular]は Angular の開発チームによって公式にメンテナンスされているものではありません。
 しかし、かなりよくカバーされています。これらの定義を使い、AngularJS 1.x のアプリケーションを完全に型注釈することは可能です。
 
 もしこれがあなたのやりたいことであれば、`tsconfig.json` で
@@ -1132,7 +1131,7 @@ TypeScript コンパイラが型注釈がまだ付いていないコードがあ
 
 </div>
 
-TypeScript で使えるさらなる機能に *クラス* があります。
+TypeScript で使えるさらなる機能に _クラス_ があります。
 特に、コンポーネントコントローラーをクラスに変えることができます。
 それにより、Angular のコンポーネントクラスに近くなり、アップグレードの
 人生がより生きやすいものになります。
@@ -1150,14 +1149,14 @@ AngularJS ではコントローラーはコンストラクターを持ちます�
 クラスへ依存性の注入のアノテーションがつけられます。
 これは実行時に `PhoneListController.$inject` プロパティになります。
 
-そのクラスはさらに3つのメンバーを宣言します。電話の配列、現在の並び替えのキー、
+そのクラスはさらに 3 つのメンバーを宣言します。電話の配列、現在の並び替えのキー、
 検索クエリです。これらはすべてコントローラーへすでに紐づけていましたが、
 どこにも明示的に宣言されていませんでした。
 最後の１つに関してはテンプレートでだけ参照されており、
 TypeScript のコードでは実際には使われていませんでした。
 しかし、見通しをよくするために、すべてをコントローラーのメンバーで定義するべきです。
 
-Phone detail コントローラーには、2つのメンバーがあります。ひとつは
+Phone detail コントローラーには、2 つのメンバーがあります。ひとつは
 ユーザーが探している電話で、もう１つは現在表示されている画像の URL です。
 
 <code-example path="upgrade-phonecat-1-typescript/app/phone-detail/phone-detail.component.ts" header="app/phone-detail/phone-detail.component.ts"></code-example>
@@ -1175,22 +1174,22 @@ Phone detail コントローラーには、2つのメンバーがあります。
 ### Angular のインストール
 
 準備作業が終わったら、PhoneCat の Angular へのアップグレードを開始します。
-Angular に同梱されている  [ngUpgrade][AioGuideUpgradeUpgradingWithNgupgrade] を使って、
+Angular に同梱されている [ngUpgrade][aioguideupgradeupgradingwithngupgrade] を使って、
 順次行います。終わる頃には AngularJS をプロジェクトから完全に削除することができますが、鍵となるのはアプリケーションを壊さずに１つずつ行うことです。
 
 <div class="alert is-important">
 
 このプロジェクトにはいくつかアニメーションがあります。
 このガイドではそれらをアップグレードしません。
-それに関しては [Angular animations][AioGuideAnimations] を参照してください。
+それに関しては [Angular animations][aioguideanimations] を参照してください。
 
 </div>
 
 SystemJS モジュールローダーと共に、Angular をプロジェクトにインストールしてください。
-[アップグレードのセットアップ手順][AioGuideUpgradeSetup] の手順を行ったあとの結果を参照し、設定をそこから持ってきます。
+[アップグレードのセットアップ手順][aioguideupgradesetup] の手順を行ったあとの結果を参照し、設定をそこから持ってきます。
 
-*   Angular とその他の依存ライブラリを `package.json` に追加してください。
-*   SystemJS の設定ファイル `systemjs.config.js` をプロジェクトのルートディレクトリに置きます。
+- Angular とその他の依存ライブラリを `package.json` に追加してください。
+- SystemJS の設定ファイル `systemjs.config.js` をプロジェクトのルートディレクトリに置きます。
 
 これが終わったら、コマンドを実行してください。
 
@@ -1216,7 +1215,7 @@ npm install
 </code-example>
 
 すべてをプロジェクトのルートから Web ブラウザへ配信できるようになりました。しかし、開発用の
-設定に合わせるためにアプリケーションのコードのすべての画像とデータのパスを変更したくは *ない* でしょう。そのために、
+設定に合わせるためにアプリケーションのコードのすべての画像とデータのパスを変更したくは _ない_ でしょう。そのために、
 `<base>` タグを `index.html` に追加することで `/app` ディレクトリの後ろで相対 URL を
 解決することができます。
 
@@ -1228,7 +1227,7 @@ SystemJS の設定を `<head>` セクションの最後に追加しましょう�
 
 <code-example path="upgrade-phonecat-2-hybrid/index.html" region="angular" header="index.html"></code-example>
 
-さらに、[アップグレードのセットアップ][AioGuideUpgradeSetup]の過程でインストールした、`systemjs.config.js` ファイルにいくつか修正が必要です。
+さらに、[アップグレードのセットアップ][aioguideupgradesetup]の過程でインストールした、`systemjs.config.js` ファイルにいくつか修正が必要です。
 
 SystemJS を通してロードする際、`<base>` URL を使う代わりに、
 ブラウザからプロジェクトのルートを参照させてください。
@@ -1237,7 +1236,7 @@ SystemJS を通してロードする際、`<base>` URL を使う代わりに、
 
 <code-example path="upgrade-phonecat-2-hybrid/systemjs.config.1.js" region="paths" header="systemjs.config.js"></code-example>
 
-### *AppModule* を作る
+### _AppModule_ を作る
 
 `AppModule` という、ルートの `NgModule` クラスを作ります。AngularJS のモジュールをもつ、
 `app.module.ts` という名前のファイルがすでにあります。それを `app.module.ajs.ts` という名前に変更し、
@@ -1253,13 +1252,13 @@ SystemJS を通してロードする際、`<base>` URL を使う代わりに、
 ### ハイブリッドの PhoneCat をブートストラップする
 
 次に、アプリケーションを AngularJS と Angular のコンポーネントをサポートする、
-*ハイブリッドのアプリケーション* としてブートストラップします。そのあと、
+_ハイブリッドのアプリケーション_ としてブートストラップします。そのあと、
 個別に Angular へ変換し始めることができます。
 
 そのアプリケーションは今はホストのページの `<html>` エレメントに紐付け垂れた、
 AngularJS の　`ng-app` ディレクティブを使って、ブートストラップされています。
 これはハイブリッドのアプリケーションでは動作しません。代わりに、
-[ngUpgrade bootstrap][AioGuideUpgradeBootstrappingHybridApplications] 方式に切り替えてください。
+[ngUpgrade bootstrap][aioguideupgradebootstrappinghybridapplications] 方式に切り替えてください。
 
 始めに、`index.html` から `ng-app` アトリビュートを削除します。
 そして、`AppModule` に `UpgradeModule` をインポートし、`ngDoBootstrap` メソッドをオーバーライドします。
@@ -1282,10 +1281,10 @@ Angular のコンポーネントはまだ動かしていません。それは次
 
 <div class="alert is-helpful">
 
-#### なぜ *angular* を *angular.IAngularStatic* として宣言するか
+#### なぜ _angular_ を _angular.IAngularStatic_ として宣言するか
 
 `@types/angular` は UMD モジュールとして宣言されています。
-[UMD typings][GithubMicrosoftTypescriptWikiWhatsNewInTypescriptSupportForUmdModuleDefinitions] が動作する方法の都合上、一度 ES6 の `import` 文を使った場合、すべての UMD 型のモジュールもグローバルに利用する代わりに `import` 文を使ってインポートする必要があります。
+[UMD typings][githubmicrosofttypescriptwikiwhatsnewintypescriptsupportforumdmoduledefinitions] が動作する方法の都合上、一度 ES6 の `import` 文を使った場合、すべての UMD 型のモジュールもグローバルに利用する代わりに `import` 文を使ってインポートする必要があります。
 
 AngularJS は `index.html` で script タグを使ってロードされています。そのため、
 アプリケーション全体へグローバルにアクセスでき、`angular` 変数の同じインスタンスを使っています。
@@ -1302,9 +1301,9 @@ ES2015 のモジュールを使う必要があります。
 
 <header>Manually create a UMD bundle for your Angular application</header>
 
-Starting with Angular version 13, the [distribution format][GithubAngularAngularIssues38366] no longer includes UMD bundles.
+Starting with Angular version 13, the [distribution format][githubangularangularissues38366] no longer includes UMD bundles.
 
-If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manually produce a bundle from the flat ES module files.
+If your use case requires the UMD format, use [`rollup`][rollupjsmain] to manually produce a bundle from the flat ES module files.
 
 1.  Use `npm` to globally install `rollup`
 
@@ -1330,12 +1329,12 @@ If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manual
         <code-example language="javascript">
 
         export default {
-          input: 'node_modules/@angular/core/fesm2015/core.js',
-          output: {
-            file: 'bundle.js',
-            format: 'umd',
-            name: 'ng'
-          }
+        input: 'node_modules/@angular/core/fesm2015/core.js',
+        output: {
+        file: 'bundle.js',
+        format: 'umd',
+        name: 'ng'
+        }
         }
 
         </code-example>
@@ -1349,7 +1348,7 @@ If your use case requires the UMD format, use [`rollup`][RollupjsMain] to manual
     </code-example>
 
 The `bundle.js` file contains your UMD bundle.
-For an example on GitHub, see [UMD Angular bundle][GithubMgechevAngularUmdBundle].
+For an example on GitHub, see [UMD Angular bundle][githubmgechevangularumdbundle].
 
 </div>
 
@@ -1358,10 +1357,10 @@ For an example on GitHub, see [UMD Angular bundle][GithubMgechevAngularUmdBundle
 最初に Angular へ移行する部分は `Phone` サービスです。それは
 `app/core/phone/phone.service.ts` にあり、
 コンポーネントが電話の情報をサーバーから読み込むために使われます。
-今時点では ngResource を使って実装されており、2つの目的で使っています。
+今時点では ngResource を使って実装されており、2 つの目的で使っています。
 
-* すべての電話のリストをコンポーネントに読み込む。
-* ひとつの電話の詳細をコンポーネントに読み込む。
+- すべての電話のリストをコンポーネントに読み込む。
+- ひとつの電話の詳細をコンポーネントに読み込む。
 
 この実装を Angular のサービスクラスを使い、
 コントローラーを AngularJS の世界に置いたまま置き換えることができます。
@@ -1379,14 +1378,14 @@ ngResource を使ったサービスを `@Injectable` としてデコレートさ
 
 `@Injectable` デコレーターは Angular がその依存関係を把握できるように、
 依存性の注入のメタデータをクラスに付け足します。
-[依存性の注入ガイド][AioGuideDependencyInjection]に記載されているように、
+[依存性の注入ガイド][aioguidedependencyinjection]に記載されているように、
 これはクラスが他に Angular のデコレーターを持っていないけれど、
 それらの依存性が注入される必要がある際に使うマーカーデコレーターです。
 
 そのクラスのコンストラクターには `HttpClient` サービスが渡されます。
 それは注入され、プライベートのフィールドとして保存されます。
-そのサービスは2つのインスタンスメソッドで使われます。ひとつはすべての電話のリストを
-ロードし、もう1つは特定の電話の詳細を読み込みます。
+そのサービスは 2 つのインスタンスメソッドで使われます。ひとつはすべての電話のリストを
+ロードし、もう 1 つは特定の電話の詳細を読み込みます。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/core/phone/phone.service.ts" region="fullclass" header="app/core/phone/phone.service.ts"></code-example>
 
@@ -1417,7 +1416,7 @@ SystemJS によって解決されたインポートを通して、`phone.service
 これはアップグレードする中ですべてのコンポーネントに対してできることです。AngularJS から Angular への
 アップグレードと同時に、スクリプトからモジュールへコードを移行していきます。
 
-この時点で、2つのコンポーネントを古いサービスの代わりに新しいサービスを使うように
+この時点で、2 つのコンポーネントを古いサービスの代わりに新しいサービスを使うように
 切り替えることができます。それをダウングレードした `phone` ファクトリとして `$inject` を
 行う一方、それは `Phone` クラスのインスタンスであり、それぞれ型注釈がつきます。
 
@@ -1425,7 +1424,7 @@ SystemJS によって解決されたインポートを通して、`phone.service
 
 <code-example path="upgrade-phonecat-2-hybrid/app/phone-detail/phone-detail.component.ajs.ts" header="app/phone-detail/phone-detail.component.ts"></code-example>
 
-2つの AngularJS のコンポーネントで Angular のサービスを使うようになりました!
+2 つの AngularJS のコンポーネントで Angular のサービスを使うようになりました!
 事実として、そのサービスは Promise の代わりに Observable を返しますが、
 そのコンポーネントではそれは認識される必要はないです。
 ともかく、ここで達成したことは、サービスを使っているコンポーネントは
@@ -1443,7 +1442,7 @@ SystemJS によって解決されたインポートを通して、`phone.service
 
 次に、AngularJS のコンポーネントを Angular へアップグレードします。
 アプリケーションをハイブリッドモードに保ちつつ、一度に１つのコンポーネントを移行します。
-この変換を行う中で、はじめての Angular の *パイプ* を定義します。
+この変換を行う中で、はじめての Angular の _パイプ_ を定義します。
 
 まず、電話のリストのコンポーネントをみてください。今は TypeScript のコントローラーの
 クラスと、コンポーネントの定義のオブジェクトがあります。これをコントローラーのクラスの名前を
@@ -1465,14 +1464,14 @@ AngularJS では、コンポーネントの名前をもとにマッチさせて�
 
 <code-example path="upgrade-phonecat-2-hybrid/app/phone-list/phone-list.template.html" region="controls" header="app/phone-list/phone-list.template.html (search controls)"></code-example>
 
-[テンプレート記法のページに記載されているように][AioGuideBuiltInDirectives]、リストの `ng-repeat` を `*ngFor` に置き換えます。
+[テンプレート記法のページに記載されているように][aioguidebuiltindirectives]、リストの `ng-repeat` を `*ngFor` に置き換えます。
 イメージタグの `ng-src` をネイティブの `src` プロパティに置き換えます。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/phone-list/phone-list.template.html" region="list" header="app/phone-list/phone-list.template.html (phones)"></code-example>
 
-#### Angular には *filter* や *orderBy* フィルターはない
+#### Angular には _filter_ や _orderBy_ フィルターはない
 
-AngularJS の組み込みの  `filter` と `orderBy` フィルターは Angular にはありません。
+AngularJS の組み込みの `filter` と `orderBy` フィルターは Angular にはありません。
 そのため、フィルタリングとソートは自分で行う必要があります。
 
 コンポーネント内部でフィルタリングとソートのロジックを実装するように、
@@ -1482,7 +1481,7 @@ AngularJS の組み込みの  `filter` と `orderBy` フィルターは Angular 
 
 Angular のコンポーネントを AngularJS で使うために、ダウングレードする必要があります。
 コンポーネントを登録する代わりに、ダウングレードしたバージョンの Angular コンポーネントを
-`phoneList` *ディレクティブ* として登録します。
+`phoneList` _ディレクティブ_ として登録します。
 
 `as angular.IDirectiveFactory` によるキャストで TypeScript コンパイラは
 `downgradeComponent` メソッドの返り値がディレクティブファクトリであることを認識します。
@@ -1509,7 +1508,7 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
 それを新しい `PhoneDetailsComponent` に注入しようとしています。
 
 残念なことに、AngularJS の 依存は自動的に Angular のコンポーネントで利用することはできません。
-`$routeParams` を Angular で注入できるようにするために、このサービスを [ファクトリプロバイダー][AioGuideUpgradeMakingAngularjsDependenciesInjectableToAngular] を通して、アップグレードしなければなりません。
+`$routeParams` を Angular で注入できるようにするために、このサービスを [ファクトリプロバイダー][aioguideupgrademakingangularjsdependenciesinjectabletoangular] を通して、アップグレードしなければなりません。
 `ajs-upgraded-providers.ts` という新しいファイルでこれを行い、`app.module.ts` でインポートしましょう。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/ajs-upgraded-providers.ts" header="app/ajs-upgraded-providers.ts"></code-example>
@@ -1523,29 +1522,29 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
 
 いくつかの特筆すべき変更があります。
 
-* `$ctrl.` 接頭辞をすべての式から削除しました。
+- `$ctrl.` 接頭辞をすべての式から削除しました。
 
-* `ng-src` を標準の `src` プロパティへの
+- `ng-src` を標準の `src` プロパティへの
   プロパティバインディングで置き換えました。
 
-* `ng-class` 周りでプロパティバインディング記法を使っています。
+- `ng-class` 周りでプロパティバインディング記法を使っています。
   Angular は AngularJS が持っているのと
-  [そっくりの `ngClass`][AioGuideBuiltInDirectives] を持っていますが、その値は式として魔法のように評価されません。
+  [そっくりの `ngClass`][aioguidebuiltindirectives] を持っていますが、その値は式として魔法のように評価されません。
   Angular ではアトリビュートの値がプロパティの式のとき、
   文字列のリテラルとは対照的に、必ずテンプレートで指定します。
 
-* `ng-repeat` を `*ngFor` で置き換えました。
+- `ng-repeat` を `*ngFor` で置き換えました。
 
-* イベントのバインディングと共に、`ng-click` を `click` で置き換えました。
+- イベントのバインディングと共に、`ng-click` を `click` で置き換えました。
 
-* 電話が表示されている時だけレンダリングされるように、
+- 電話が表示されている時だけレンダリングされるように、
   `ngIf` の中にすべてのテンプレートをラップしました。
   これはコンポーネントが最初にロードされた時、 まだ `phone` が無く、
   式が存在しない値を参照してしまうからです。AngularJS とは違い、
   Angular の式は未定義のオブジェクトのプロパティを参照しようとした時に黙って失敗しません。
   これが起こるケースを想定しなければなりません。
 
-`PhoneDetailComponent` コンポーネントを `NgModule` の *declarations* に追加します。
+`PhoneDetailComponent` コンポーネントを `NgModule` の _declarations_ に追加します。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/app.module.ts" region="phonedetail" header="app.module.ts">
 </code-example>
@@ -1561,7 +1560,7 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
 必要ないのです。
 フィルターの関数を同等の Pipe クラスへ簡単に変えられます。
 実装は以前と同じのまま、`transform` メソッドで再パッケージされます。
-Angular の規約に従い、ファイルを `checkmark.pipe.ts` にリネームします。 
+Angular の規約に従い、ファイルを `checkmark.pipe.ts` にリネームします。
 
 <code-example path="upgrade-phonecat-2-hybrid/app/core/checkmark/checkmark.pipe.ts" header="app/core/checkmark/checkmark.pipe.ts"></code-example>
 
@@ -1574,7 +1573,7 @@ Angular の規約に従い、ファイルを `checkmark.pipe.ts` にリネーム
 ### ハイブリッドアプリケーションを事前コンパイルする
 
 ハイブリッドのアプリケーションで AOT を使うために、他の Angular のアプリケーションと同様、
-[事前コンパイラの章 ][AioGuideAotCompiler] にあるようなセットアップが必要です。
+[事前コンパイラの章 ][aioguideaotcompiler] にあるようなセットアップが必要です。
 
 それから、AOT コンパイラで生成された `AppComponentFactory` をブートストラップするように、
 `main-aot.ts` を変更します。
@@ -1604,11 +1603,11 @@ AngularJS のアプリケーションのコンポーネントを Angular の対�
 
 #### Angular のルーターを追加
 
-Angular には [まったく新しいルーター][AioGuideRouter] があります。
+Angular には [まったく新しいルーター][aioguiderouter] があります。
 
 すべてのルーターと同じように、ルーティングされたビューを表示するために UI に場所が必要です。
 Angular ではアプリケーションのコンポーネントツリーの先頭にある、
-*ルートコンポーネント* の中の、`<router-outlet>` がそれにあたります。
+_ルートコンポーネント_ の中の、`<router-outlet>` がそれにあたります。
 
 まだそのようなルートコンポーネントは持っていません。なぜなら、アプリケーションはまだ AngularJS のアプリケーションとして管理されているからです。
 次のような `AppComponent` クラスを持った `app.component.ts` ファイルを新しく作成します。
@@ -1626,21 +1625,22 @@ Angular ではアプリケーションのコンポーネントツリーの先頭
 
 <code-example path="upgrade-phonecat-3-final/index.html" region="appcomponent" header="index.html (body)"></code-example>
 
-#### *Routing Module* を作る
+#### _Routing Module_ を作る
+
 ルーターは AngularJS や Angular、他のどのルーターであっても設定が必要です。
 
-Angular のルーターの設定の詳細に関しては [ルーティングのドキュメント][AioGuideRouter] が一番です。
+Angular のルーターの設定の詳細に関しては [ルーティングのドキュメント][aioguiderouter] が一番です。
 （_Routing Module_ という）ルーターの設定に関する `NgModule` を、
 作ることが推奨されています。
 
 <code-example path="upgrade-phonecat-3-final/app/app-routing.module.ts" header="app/app-routing.module.ts"></code-example>
 
-このモジュールは2つの電話コンポーネントへの2つのルートと、
+このモジュールは 2 つの電話コンポーネントへの 2 つのルートと、
 空のパスのためのデフォルトのパスを持った `routes` オブジェクトを定義します。
 `routes` に残りのことを行うための `RouterModule.forRoot` メソッドを渡します。
 
-2つのの追加のプロバイダーを使うことでデフォルトの "push state" 方式の代わりに、
- `#!/phones` のような "ハッシュ" URL によるルーティングが可能となります。
+2 つのの追加のプロバイダーを使うことでデフォルトの "push state" 方式の代わりに、
+`#!/phones` のような "ハッシュ" URL によるルーティングが可能となります。
 
 `AppModule` をアップデートしてこの `AppRoutingModule` をインポートし、
 ルートの `AppComponent` をブートストラップのコンポーネントとして宣言しましょう。
@@ -1667,7 +1667,7 @@ Angular のセレクターも使うことができます。
 
 <div class="alert is-helpful">
 
-詳細は [ルーティング][AioGuideRouter] のページを参照してください。
+詳細は [ルーティング][aioguiderouter] のページを参照してください。
 
 </div>
 
@@ -1694,9 +1694,9 @@ Angular のルーターはルートパラメータを異なる方法で渡しま
 
 <code-example path="upgrade-phonecat-3-final/app/main.ts" header="main.ts"></code-example>
 
-もしまだしていなければ、AngularJS のサービスへのすべての[ファクトリプロバイダー][AioGuideUpgradeMakingAngularjsDependenciesInjectableToAngular] や、
+もしまだしていなければ、AngularJS のサービスへのすべての[ファクトリプロバイダー][aioguideupgrademakingangularjsdependenciesinjectabletoangular] や、
 `app/ajs-upgraded-providers.ts` と同じように、
-`UpgradeModule` へのすべての参照を  `app.module.ts` から削除してください。
+`UpgradeModule` へのすべての参照を `app.module.ts` から削除してください。
 
 すべての `downgradeInjectable()` や `downgradeComponent()` も
 関連する AngularJS のファクトリやディレクティブ宣言と一緒に削除してください。
@@ -1707,12 +1707,12 @@ Angular のルーターはルートパラメータを異なる方法で渡しま
 次のファイルも完全に削除できます。それらは AngularJS のモジュールの設定ファイルなので、
 Angular では必要ありません。
 
-* `app/app.module.ajs.ts`
-* `app/app.config.ts`
-* `app/core/core.module.ts`
-* `app/core/phone/phone.module.ts`
-* `app/phone-detail/phone-detail.module.ts`
-* `app/phone-list/phone-list.module.ts`
+- `app/app.module.ajs.ts`
+- `app/app.config.ts`
+- `app/core/core.module.ts`
+- `app/core/phone/phone.module.ts`
+- `app/phone-detail/phone-detail.module.ts`
+- `app/phone-list/phone-list.module.ts`
 
 AngularJS のための追加の型定義も同様にアンインストールできます.
 唯一必要なのは Jasmine と Angular のポリフィルです。
@@ -1741,10 +1741,10 @@ npm uninstall @types/angular @types/angular-animate @types/angular-cookies @type
 
 ### E2E テスト
 
-PhoneCat プロジェクトには Protractor による E2E テストと、Karma のユニットテストの両方があります。これら2つのうち、
+PhoneCat プロジェクトには Protractor による E2E テストと、Karma のユニットテストの両方があります。これら 2 つのうち、
 E2E テストはかなり簡単に扱うことができます。定義によると、
 E2E テストはアプリケーションがスクリーンに表示するさまざまな UI の要素に作用することで、
-アプリケーションへ *外部* からアクセスします。
+アプリケーションへ _外部_ からアクセスします。
 E2E テストはアプリケーションのコンポーネントの内部構造を考慮しません。
 それは、アップグレードの途中でプロジェクトを少しだけ修正したとしても、
 E2E テストは通るべきということを意味します。
@@ -1767,7 +1767,7 @@ ng12Hybrid: true
 PhoneCat に対しては、Angular で動作させるために次のような変更が必要です。
 
 | Previous code                                               | New code                  | Notes                                                |
-|:---                                                         |:---                       |:---                                                  |
+| :---------------------------------------------------------- | :------------------------ | :--------------------------------------------------- |
 | `by.repeater('phone in $ctrl.phones').column('phone.name')` | `by.css('.phones .name')` | The repeater matcher relies on AngularJS `ng-repeat` |
 | `by.repeater('phone in $ctrl.phones')`                      | `by.css('.phones li')`    | The repeater matcher relies on AngularJS `ng-repeat` |
 | `by.model('$ctrl.query')`                                   | `by.css('input')`         | The model matcher relies on AngularJS `ng-model`     |
@@ -1778,7 +1778,7 @@ PhoneCat に対しては、Angular で動作させるために次のような変
 AngularJS はページから完全に存在しなくなります。
 この時点で、Protractor が AngularJS のアプリケーションを、
 これ以上参照しないようにする必要があります。
-代わりに、*Angular apps* を参照させる必要があります。
+代わりに、_Angular apps_ を参照させる必要があります。
 
 `protractor-conf.js` で以前追加した `ng12Hybrid` を次のように置き換えてください。
 
@@ -1803,7 +1803,7 @@ WebDriver のジェネリック URL の API で置き換えてください。ひ
 ### Unit Tests
 
 一方、ユニットテストにはさらなる変換作業が必要です。
-本番用のコードと共に、効果的に *アップグレード* される必要があります。
+本番用のコードと共に、効果的に _アップグレード_ される必要があります。
 
 TypeScript への変換において、厳密には何も変更する必要はありません。
 しかし、ユニットテストのコードも同様に TypeScript に変換するとよいでしょう。
@@ -1829,7 +1829,7 @@ SystemJS ですべての新しい Angular のコードを読み込む必要が�
 <code-example path="upgrade-phonecat-2-hybrid/karma.conf.ajs.js" region="basepath" header="karma.conf.js"></code-example>
 
 やり終えたならば。SystemJS や他の依存を読み込むことができるようになります。そして、
-アプリケーションファイルの読み込み設定を切り替えることで、Karma がそれらを含め *ない* ようにします。
+アプリケーションファイルの読み込み設定を切り替えることで、Karma がそれらを含め _ない_ ようにします。
 シムファイルと SystemJS がそれらを読み込むようにします。
 
 <code-example path="upgrade-phonecat-2-hybrid/karma.conf.ajs.js" region="files" header="karma.conf.js"></code-example>
@@ -1870,67 +1870,54 @@ Angular のコンポーネントのユニットテスト API を両方のコン�
 
 <!-- links -->
 
-[AioApiCoreNgzone]: api/core/NgZone "NgZone | Core - API | Angular"
-[AioApiCoreOnchanges]: api/core/OnChanges "OnChanges | Core - API | Angular"
-
-[AioGuideAnimations]: guide/animations "Introduction to Angular animations | Angular"
-[AioGuideAotCompiler]: guide/aot-compiler "Ahead-of-time (AOT) compilation | Angular"
-[AioGuideBuiltInDirectives]: guide/built-in-directives "Built-in directives | Angular"
-[AioGuideDependencyInjection]: guide/dependency-injection "Dependency injection in Angular | Angular"
-[AioGuideDependencyInjectionProvidersFactoryProviders]: guide/dependency-injection-providers#factory-providers "Using factory providers - Dependency providers | Angular"
-[AioGuideGlossaryLazyLoading]: guide/glossary#lazy-loading "lazy loading - Glossary | Angular"
-[AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
-[AioGuideLifecycleHooks]: guide/lifecycle-hooks "Lifecycle hooks | Angular"
-[AioGuideNgmodules]: guide/ngmodules "NgModules | Angular"
-[AioGuideRouter]: guide/router "Common Routing Tasks | Angular"
-[AioGuideTypescriptConfiguration]: guide/typescript-configuration "TypeScript configuration | Angular"
-[AioGuideUpgradeBootstrappingHybridApplications]: guide/upgrade#bootstrapping-hybrid-applications "Bootstrapping hybrid applications - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradeFollowTheAngularjsStyleGuide]: guide/upgrade#follow-the-angularjs-style-guide "Follow the AngularJS Style Guide - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradeMakingAngularjsDependenciesInjectableToAngular]: guide/upgrade#making-angularjs-dependencies-injectable-to-angular "Making AngularJS Dependencies Injectable to Angular - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradePreparation]: guide/upgrade#preparation "Preparation - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradeUpgradingWithNgupgrade]: guide/upgrade#upgrading-with-ngupgrade "Upgrading with ngUpgrade - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradeUsingComponentDirectives]: guide/upgrade#using-component-directives "Using Component Directives - Upgrading from AngularJS to Angular | Angular"
-[AioGuideUpgradeSetup]: guide/upgrade-setup "Setup for upgrading from AngularJS | Angular"
+[aioapicorengzone]: api/core/NgZone 'NgZone | Core - API | Angular'
+[aioapicoreonchanges]: api/core/OnChanges 'OnChanges | Core - API | Angular'
+[aioguideanimations]: guide/animations 'Introduction to Angular animations | Angular'
+[aioguideaotcompiler]: guide/aot-compiler 'Ahead-of-time (AOT) compilation | Angular'
+[aioguidebuiltindirectives]: guide/built-in-directives 'Built-in directives | Angular'
+[aioguidedependencyinjection]: guide/dependency-injection 'Dependency injection in Angular | Angular'
+[aioguidedependencyinjectionprovidersfactoryproviders]: guide/dependency-injection-providers#factory-providers 'Using factory providers - Dependency providers | Angular'
+[aioguideglossarylazyloading]: guide/glossary#lazy-loading 'lazy loading - Glossary | Angular'
+[aioguidehierarchicaldependencyinjection]: guide/hierarchical-dependency-injection 'Hierarchical injectors | Angular'
+[aioguidelifecyclehooks]: guide/lifecycle-hooks 'Lifecycle hooks | Angular'
+[aioguidengmodules]: guide/ngmodules 'NgModules | Angular'
+[aioguiderouter]: guide/router 'Common Routing Tasks | Angular'
+[aioguidetypescriptconfiguration]: guide/typescript-configuration 'TypeScript configuration | Angular'
+[aioguideupgradebootstrappinghybridapplications]: guide/upgrade#bootstrapping-hybrid-applications 'Bootstrapping hybrid applications - Upgrading from AngularJS to Angular | Angular'
+[aioguideupgradefollowtheangularjsstyleguide]: guide/upgrade#follow-the-angularjs-style-guide 'Follow the AngularJS Style Guide - Upgrading from AngularJS to Angular | Angular'
+[aioguideupgrademakingangularjsdependenciesinjectabletoangular]: guide/upgrade#making-angularjs-dependencies-injectable-to-angular 'Making AngularJS Dependencies Injectable to Angular - Upgrading from AngularJS to Angular | Angular'
+[aioguideupgradepreparation]: guide/upgrade#preparation 'Preparation - Upgrading from AngularJS to Angular | Angular'
+[aioguideupgradeupgradingwithngupgrade]: guide/upgrade#upgrading-with-ngupgrade 'Upgrading with ngUpgrade - Upgrading from AngularJS to Angular | Angular'
+[aioguideupgradeusingcomponentdirectives]: guide/upgrade#using-component-directives 'Using Component Directives - Upgrading from AngularJS to Angular | Angular'
+[aioguideupgradesetup]: guide/upgrade-setup 'Setup for upgrading from AngularJS | Angular'
 
 <!-- external links -->
 
-[AngularBlogFindingAPathForwardWithAngularjs7e186fdd4429]: https://blog.angular.io/finding-a-path-forward-with-angularjs-7e186fdd4429 "Finding a Path Forward with AngularJS | Angular Blog"
-
-[AngularjsDocsApiNgFunctionAngularBootstrap]: https://docs.angularjs.org/api/ng/function/angular.bootstrap "angular.bootstrap | API | AngularJS"
-[AngularjsDocsApiNgTypeAngularModule]: https://docs.angularjs.org/api/ng/type/angular.Module "angular.Module | API | AngularJS"
-[AngularjsDocsApiNgTypeAngularModuleComponent]: https://docs.angularjs.org/api/ng/type/angular.Module#component "component(name, options); - angular.Module | API | AngularJS"
-[AngularjsDocsApiNgrouteDirectiveNgview]: https://docs.angularjs.org/api/ngRoute/directive/ngView "ngView | API | AngularJS"
-[AngularjsDocsApiNgrouteProviderRouteprovider]: https://docs.angularjs.org/api/ngRoute/provider/$routeProvider "$routeProvider | API | AngularJS"
-[AngularjsDocsApiNgServiceLocation]: https://docs.angularjs.org/api/ng/service/$location "$location | API | AngularJS"
-[AngularjsDocsTutorial]: https://docs.angularjs.org/tutorial "PhoneCat Tutorial App | Tutorial | AngularJS"
-
-[BrowserifyMain]: http://browserify.org "Browserify"
-
-[GithubAngularAngularIssues35989]: https://github.com/angular/angular/issues/35989 "Issue 35989: docs(upgrade): correctly document how to use AOT compilation for hybrid apps | angular/angular | GitHub"
-[GithubAngularAngularIssues38366]: https://github.com/angular/angular/issues/38366 " Issue 38366: RFC: Ivy Library Distribution| angular/angular | GitHub"
-
-[GithubAngularAngularPhonecat]: https://github.com/angular/angular-phonecat "angular/angular-phonecat | GitHub"
-[GithubAngularAngularPhonecatCommits15Snapshot]: https://github.com/angular/angular-phonecat/commits/1.5-snapshot "angular/angular-phonecat v1.5 | GitHub"
-
-[GithubAngularQuickstart]: https://github.com/angular/quickstart "angular/quickstart | GitHub"
-
-[GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMd]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md "Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub"
-[GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdFoldersByFeatureStructure]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#folders-by-feature-structure "Folders-by-Feature Structure - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub"
-[GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdModularity]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#modularity "Modularity - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub"
-[GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdOrganizingTests]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#organizing-tests "Organizing Tests - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub"
-[GithubJohnpapaAngularStyleguideBlobPrimaryA1ReadmeMdSingleResponsibility]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#single-responsibility "Single Responsibility - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub"
-
-[GithubMgechevAngularUmdBundle]: https://github.com/mgechev/angular-umd-bundle "UMD Angular bundle | mgechev/angular-umd-bundle | GitHub"
-
-[GithubMicrosoftTypescriptWikiWhatsNewInTypescriptSupportForUmdModuleDefinitions]: https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#support-for-umd-module-definitions "Support for UMD module definitions - What's new in TypeScript | microsoft/TypeScript | GitHub"
-
-[GithubSystemjsSystemjs]: https://github.com/systemjs/systemjs "systemjs/systemjs | GitHub"
-
-[GithubWebpackMain]: https://webpack.github.io "webpack module bundler | GitHub"
-
-[NpmjsPackageTypesAngular]: https://www.npmjs.com/package/@types/angular "@types/angular | npm"
-
-[RollupjsMain]: https://rollupjs.org "rollup.js"
+[angularblogfindingapathforwardwithangularjs7e186fdd4429]: https://blog.angular.io/finding-a-path-forward-with-angularjs-7e186fdd4429 'Finding a Path Forward with AngularJS | Angular Blog'
+[angularjsdocsapingfunctionangularbootstrap]: https://docs.angularjs.org/api/ng/function/angular.bootstrap 'angular.bootstrap | API | AngularJS'
+[angularjsdocsapingtypeangularmodule]: https://docs.angularjs.org/api/ng/type/angular.Module 'angular.Module | API | AngularJS'
+[angularjsdocsapingtypeangularmodulecomponent]: https://docs.angularjs.org/api/ng/type/angular.Module#component 'component(name, options); - angular.Module | API | AngularJS'
+[angularjsdocsapingroutedirectivengview]: https://docs.angularjs.org/api/ngRoute/directive/ngView 'ngView | API | AngularJS'
+[angularjsdocsapingrouteproviderrouteprovider]: https://docs.angularjs.org/api/ngRoute/provider/$routeProvider '$routeProvider | API | AngularJS'
+[angularjsdocsapingservicelocation]: https://docs.angularjs.org/api/ng/service/$location '$location | API | AngularJS'
+[angularjsdocstutorial]: https://docs.angularjs.org/tutorial 'PhoneCat Tutorial App | Tutorial | AngularJS'
+[browserifymain]: http://browserify.org 'Browserify'
+[githubangularangularissues35989]: https://github.com/angular/angular/issues/35989 'Issue 35989: docs(upgrade): correctly document how to use AOT compilation for hybrid apps | angular/angular | GitHub'
+[githubangularangularissues38366]: https://github.com/angular/angular/issues/38366 ' Issue 38366: RFC: Ivy Library Distribution| angular/angular | GitHub'
+[githubangularangularphonecat]: https://github.com/angular/angular-phonecat 'angular/angular-phonecat | GitHub'
+[githubangularangularphonecatcommits15snapshot]: https://github.com/angular/angular-phonecat/commits/1.5-snapshot 'angular/angular-phonecat v1.5 | GitHub'
+[githubangularquickstart]: https://github.com/angular/quickstart 'angular/quickstart | GitHub'
+[githubjohnpapaangularstyleguideblobprimarya1readmemd]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md 'Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub'
+[githubjohnpapaangularstyleguideblobprimarya1readmemdfoldersbyfeaturestructure]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#folders-by-feature-structure 'Folders-by-Feature Structure - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub'
+[githubjohnpapaangularstyleguideblobprimarya1readmemdmodularity]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#modularity 'Modularity - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub'
+[githubjohnpapaangularstyleguideblobprimarya1readmemdorganizingtests]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#organizing-tests 'Organizing Tests - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub'
+[githubjohnpapaangularstyleguideblobprimarya1readmemdsingleresponsibility]: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#single-responsibility 'Single Responsibility - Angular 1 Style Guide | johnpapa/angular-styleguide | GitHub'
+[githubmgechevangularumdbundle]: https://github.com/mgechev/angular-umd-bundle 'UMD Angular bundle | mgechev/angular-umd-bundle | GitHub'
+[githubmicrosofttypescriptwikiwhatsnewintypescriptsupportforumdmoduledefinitions]: https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#support-for-umd-module-definitions "Support for UMD module definitions - What's new in TypeScript | microsoft/TypeScript | GitHub"
+[githubsystemjssystemjs]: https://github.com/systemjs/systemjs 'systemjs/systemjs | GitHub'
+[githubwebpackmain]: https://webpack.github.io 'webpack module bundler | GitHub'
+[npmjspackagetypesangular]: https://www.npmjs.com/package/@types/angular '@types/angular | npm'
+[rollupjsmain]: https://rollupjs.org 'rollup.js'
 
 <!-- end links -->
 

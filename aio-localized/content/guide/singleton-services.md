@@ -3,31 +3,30 @@
 シングルトンサービスは、そのインスタンスがアプリケーションにひとつだけ存在するサービスです。
 
 この記事で説明されている、アプリケーション全体でシングルトンなサービスを使用したサンプルアプリケーションについては、
-すべてのドキュメント化されたNgModuleの機能を紹介している<live-example name="ngmodules"></live-example>を参照してください。
+すべてのドキュメント化された NgModule の機能を紹介している<live-example name="ngmodules"></live-example>を参照してください。
 
 ## シングルトンサービスを提供する
 
-Angularでシングルトンサービスを作成する方法は2種類あります:
+Angular でシングルトンサービスを作成する方法は 2 種類あります:
 
-* `@Injectable()`の`providedIn`プロパティに対して`root`をセットする。
-* `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
-
+- `@Injectable()`の`providedIn`プロパティに対して`root`をセットする。
+- `AppModule`か、`AppModule`によってのみインポートされるモジュールにサービスを含める。
 
 {@a providedIn}
 
 ### `providedIn` を使う
 
-Angular 6.0からは、シングルトンサービスを作成する推奨の方法は、サービスの`@Injectable()`デコレーターにおいて`providedIn`に`root`を設定することです。
-これは、Angularにそのサービスをアプリケーションルートで提供するように伝えています。 
+Angular 6.0 からは、シングルトンサービスを作成する推奨の方法は、サービスの`@Injectable()`デコレーターにおいて`providedIn`に`root`を設定することです。
+これは、Angular にそのサービスをアプリケーションルートで提供するように伝えています。
 
 <code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts"></code-example>
 
 サービスのさらに詳しい情報については
-[Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
+[Tour of Heroes チュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
 
 ### NgModule の `providers` 配列
 
-Angularのバージョン6.0未満で作成されたアプリケーションでは、サービスは次のようにNgModuleの`provider`配列に登録されます。
+Angular のバージョン 6.0 未満で作成されたアプリケーションでは、サービスは次のように NgModule の`provider`配列に登録されます。
 
 ```ts
 @NgModule({
@@ -38,8 +37,8 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 ```
 
-このNgModuleがルート(root)の`AppModule`だった場合、`UserService`はシングルトンになり、アプリケーション全体から利用可能です。
-上記のようなコードを見ることがあるかもしれませんが、Angular 6.0以降ではサービスがツリーシェイク可能になるため、サービス自身に`@Injectable()`デコレーターの`providedIn`プロパティを使用することが望ましいです。
+この NgModule がルート(root)の`AppModule`だった場合、`UserService`はシングルトンになり、アプリケーション全体から利用可能です。
+上記のようなコードを見ることがあるかもしれませんが、Angular 6.0 以降ではサービスがツリーシェイク可能になるため、サービス自身に`@Injectable()`デコレーターの`providedIn`プロパティを使用することが望ましいです。
 
 {@a forRoot}
 
@@ -47,14 +46,14 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 通常、サービスを提供するために必要なのは `providedIn` だけで、`forRoot()`/`forChild()`はルーティングのためにのみ使用されます。しかしながら、サービスがシングルトンであるために`forRoot()`がどのように動作するかを理解することは、技術に対する理解を深めることに繋がります。
 
-モジュールがprovidersとdeclarations（components、directives、pipes）の両方を定義している場合、
+モジュールが providers と declarations（components、directives、pipes）の両方を定義している場合、
 モジュールを複数のフィーチャーモジュールにロードすると、サービスの登録が重複します。その結果、複数のサービスのインスタンスが生成される可能性があり、サービスはシングルトンとして動作しなくなります。
 
 これを防ぐ方法は複数あります：
 
-* サービスをモジュールで登録するかわりに、[`providedIn`構文](guide/singleton-services#providedIn)を使用する。
-* サービスを独自のモジュールに分割する。
-* モジュール内で`forRoot()`と`forChild()`メソッドを定義する。
+- サービスをモジュールで登録するかわりに、[`providedIn`構文](guide/singleton-services#providedIn)を使用する。
+- サービスを独自のモジュールに分割する。
+- モジュール内で`forRoot()`と`forChild()`メソッドを定義する。
 
 <div class="alert is-helpful">
 
@@ -62,16 +61,14 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 </div>
 
-
 モジュールからプロバイダーを分離するには、`forRoot()`を利用します。
 これにより、`providers`をもつルートモジュールと、
 `providers`をもたない子モジュールにそのモジュールをインポートできます。
 
 1. モジュール上に静的メソッド`forRoot()`を作成します。
-2. `forRoot()`メソッド内にprovidersを配置します。
+2. `forRoot()`メソッド内に providers を配置します。
 
 <code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="for-root" header="src/app/greeting/greeting.module.ts"></code-example>
-
 
 {@a forRoot-router}
 
@@ -83,10 +80,10 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 
 <div class="alert is-helpful">
 
-**注:** providersとdeclarationsの両方をもつモジュールがある場合、
+**注:** providers と declarations の両方をもつモジュールがある場合、
 それらを分離するテクニックとして
 これを使うことが _可能_ で、レガシーアプリケーションでこのパターンが見られるかもしれません。
-しかしAngular 6.0以降では,サービス提供のベストプラクティスは
+しかし Angular 6.0 以降では,サービス提供のベストプラクティスは
 `@Injectable()` `providedIn` プロパティです。
 
 </div>
@@ -97,13 +94,13 @@ Angularのバージョン6.0未満で作成されたアプリケーションで�
 [ModuleWithProviders](api/core/ModuleWithProviders)を返します。
 これは次のようなプロパティをもつシンプルなオブジェクトです:
 
-* `ngModule`: この例では `GreetingModule` というクラスです。
-* `providers`: 設定するプロバイダー。
+- `ngModule`: この例では `GreetingModule` というクラスです。
+- `providers`: 設定するプロバイダー。
 
 <live-example name="ngmodules">live example</live-example>では、
 ルート(root)の`AppModule`は `GreetingModule` をインポートし、
 `providers`を`AppModule`プロバイダーに追加します。具体的には、
-Angularは`@NgModule.providers`にリストされている項目を追加する前に、
+Angular は`@NgModule.providers`にリストされている項目を追加する前に、
 すべてのインポートされるプロバイダーを蓄積してゆきます。
 このシーケンスは、
 あなたが明示的に`AppModule`プロバイダーに追加したプロバイダーが、
@@ -130,7 +127,7 @@ Angularは`@NgModule.providers`にリストされている項目を追加する�
 
 アプリケーションはデフォルトの "Sherlock Holmes"のかわりに、"Miss Marple"をユーザーとして表示します。
 
-ファイルの先頭にJavaScriptのインポートとして`GreetingModule`をインポートすることを忘れないでください。複数の`@NgModule`の`imports`リストに追加してはいけません。
+ファイルの先頭に JavaScript のインポートとして`GreetingModule`をインポートすることを忘れないでください。複数の`@NgModule`の`imports`リストに追加してはいけません。
 
 ## `GreetingModule` の再インポートを防ぐ
 
@@ -142,27 +139,27 @@ Angularは`@NgModule.providers`にリストされている項目を追加する�
 
 <code-example path="ngmodules/src/app/greeting/greeting.module.ts" region="ctor" header="src/app/greeting/greeting.module.ts"></code-example>
 
-コンストラクターは`GreetingModule`を自身へ注入するようAngularに指示します。
-もしもAngularが_現在_のインジェクター内の`GreetingModule`を参照した場合、
+コンストラクターは`GreetingModule`を自身へ注入するよう Angular に指示します。
+もしも Angular が*現在*のインジェクター内の`GreetingModule`を参照した場合、
 この注入は循環参照となりますが、
 `@SkipSelf()`デコレーターは"インジェクター階層の上にある先祖のインジェクター内の`GreetingModule`を参照する"
 という意味になります。
 
 デフォルトでは、
 インジェクターが要求したプロバイダーを見つけられなかったときはエラーをスローします。
-`@Optional()`デコレーターはサービスが見つからなくてもOKという意味になります。
-インジェクターは`null`を返し、`parentModule`パラメーターはnullになり、
+`@Optional()`デコレーターはサービスが見つからなくても OK という意味になります。
+インジェクターは`null`を返し、`parentModule`パラメーターは null になり、
 コンストラクターは無事終了します。
 
 `GreetingModule`を`CustomersModule`のような遅延ロードするモジュールに不適切にインポートするときは違います。
 
-Angularは、
+Angular は、
 遅延ロードするモジュールをルート(root)インジェクターの子供である、モジュール自身のインジェクターを使用して作成します。
-`@SkipSelf()`によって、Angularは親インジェクター(今回はルートインジェクターになります)の`GreetingModule`を参照します。
+`@SkipSelf()`によって、Angular は親インジェクター(今回はルートインジェクターになります)の`GreetingModule`を参照します。
 もちろん、ルート(root)の`AppModule`によってインポートされたインスタンスを参照します。
 今度は`parentModule`が存在するのでコンストラクターはエラーをスローします。
 
-ここでは、参考のために全体のなかの2つのファイルを紹介します:
+ここでは、参考のために全体のなかの 2 つのファイルを紹介します:
 
 <code-tabs>
  <code-pane header="app.module.ts" path="ngmodules/src/app/app.module.ts">
@@ -171,9 +168,10 @@ Angularは、
  </code-pane>
 </code-tabs>
 
-## NgModuleについてのさらに詳しい情報
+## NgModule についてのさらに詳しい情報
 
 あなたはこちらにも興味があるかもしれません:
-* [モジュールの共有](guide/sharing-ngmodules)ではこのページで取り上げられている概念を詳しく説明します。
-* [遅延ロードモジュール](guide/lazy-loading-ngmodules)
-* [NgModule FAQ](guide/ngmodule-faq)
+
+- [モジュールの共有](guide/sharing-ngmodules)ではこのページで取り上げられている概念を詳しく説明します。
+- [遅延ロードモジュール](guide/lazy-loading-ngmodules)
+- [NgModule FAQ](guide/ngmodule-faq)

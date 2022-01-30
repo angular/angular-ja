@@ -39,8 +39,7 @@ For those situations, you can use Angular's non-null assertion operator to preve
 
 The non-null assertion operator, `!`, is optional unless you turn on strict null checks.
 
-For more information, see TypeScript's [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript").
-
+For more information, see TypeScript's [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html 'Strict null checking in TypeScript').
 
 {@a any-type-cast-function}
 

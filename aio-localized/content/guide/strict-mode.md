@@ -1,4 +1,4 @@
-# strictモード
+# strict モード
 
 Angular CLI creates all new workspaces and projects with **strict mode** enabled.
 
@@ -7,9 +7,9 @@ Additionally, strict mode applications are easier to statically analyze and can 
 
 Specifically, strict mode affects newly generated applications in the following way:
 
-* [TypeScriptで`strict`モード](https://www.typescriptlang.org/tsconfig#strict)を有効にします。TypeScriptチームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
-* Angularコンパイラの厳密フラグをオンにします。[`strictTemplates`](guide/angular-compiler-options#stricttemplates)、[`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)、[`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors)です。
-* Reduces the [bundle size budgets](guide/build#configuring-size-budgets) for the `initial` and `anyComponentStyle` budget types by 75% compared to the previous defaults.
+- [TypeScript で`strict`モード](https://www.typescriptlang.org/tsconfig#strict)を有効にします。TypeScript チームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
+- Angular コンパイラの厳密フラグをオンにします。[`strictTemplates`](guide/angular-compiler-options#stricttemplates)、[`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)、[`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors)です。
+- Reduces the [bundle size budgets](guide/build#configuring-size-budgets) for the `initial` and `anyComponentStyle` budget types by 75% compared to the previous defaults.
 
 これらの設定は、ワークスペースおよびプロジェクトレベルで適用できます。
 
@@ -21,7 +21,7 @@ ng new [project-name]
 
 </code-example>
 
-既存のstrictではないワークスペース内にstrictモードで新しいアプリケーションを作成するには、次のコマンドを実行します:
+既存の strict ではないワークスペース内に strict モードで新しいアプリケーションを作成するには、次のコマンドを実行します:
 
 <code-example language="sh">
 

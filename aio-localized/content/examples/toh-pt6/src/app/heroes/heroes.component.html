@@ -6,7 +6,7 @@
   <input id="new-hero" #heroName />
 
   <!-- (click) 入力値をadd()に渡したあと、入力をクリアする -->
-  <button class="add-button" (click)="add(heroName.value); heroName.value=''">
+  <button class="add-button" (click)="add(heroName.value); heroName.value = ''">
     Add hero
   </button>
 </div>
@@ -15,12 +15,11 @@
 <!-- #docregion list -->
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
-    <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <a routerLink="/detail/{{ hero.id }}">
+      <span class="badge">{{ hero.id }}</span> {{ hero.name }}
     </a>
     <!-- #docregion delete -->
-    <button class="delete" title="delete hero"
-      (click)="delete(hero)">x</button>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
     <!-- #enddocregion delete -->
   </li>
 </ul>

@@ -13,54 +13,55 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from './hero';
 import { MessageService } from './message.service';
 
-
 @Injectable({ providedIn: 'root' })
 export class HeroService {
-
   // #docregion heroesUrl
-  private heroesUrl = 'api/heroes';  // Web APIのURL
+  private heroesUrl = 'api/heroes'; // Web APIのURL
   // #enddocregion heroesUrl
 
   // #docregion http-options
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
   // #enddocregion http-options
 
   // #docregion ctor
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService
+  ) {}
   // #enddocregion ctor
 
   // #docregion getHeroes, getHeroes-1
   /** サーバーからヒーローを取得する */
   // #docregion getHeroes-2
   getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroesUrl)
-  // #enddocregion getHeroes-1
-      .pipe(
-        // #enddocregion getHeroes-2
-        tap(heroes => this.log('fetched heroes')),
-        // #docregion getHeroes-2
-        catchError(this.handleError<Hero[]>('getHeroes', []))
-      );
-  // #docregion getHeroes-1
+    return (
+      this.http
+        .get<Hero[]>(this.heroesUrl)
+        // #enddocregion getHeroes-1
+        .pipe(
+          // #enddocregion getHeroes-2
+          tap((heroes) => this.log('fetched heroes')),
+          // #docregion getHeroes-2
+          catchError(this.handleError<Hero[]>('getHeroes', []))
+        )
+    );
+    // #docregion getHeroes-1
   }
   // #enddocregion getHeroes, getHeroes-1, getHeroes-2
 
   /** IDによりヒーローを取得する。idが見つからない場合は`undefined`を返す。 */
   getHeroNo404<Data>(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/?id=${id}`;
-    return this.http.get<Hero[]>(url)
-      .pipe(
-        map(heroes => heroes[0]), // {0|1} 要素の配列を返す
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
-          this.log(`${outcome} hero id=${id}`);
-        }),
-        catchError(this.handleError<Hero>(`getHero id=${id}`))
-      );
+    return this.http.get<Hero[]>(url).pipe(
+      map((heroes) => heroes[0]), // {0|1} 要素の配列を返す
+      tap((h) => {
+        const outcome = h ? `fetched` : `did not find`;
+        this.log(`${outcome} hero id=${id}`);
+      }),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
   }
 
   // #docregion getHero
@@ -68,7 +69,7 @@ export class HeroService {
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
+      tap((_) => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
@@ -82,7 +83,7 @@ export class HeroService {
       return of([]);
     }
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
+      tap((_) => this.log(`found heroes matching "${term}"`)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
@@ -106,7 +107,7 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
+      tap((_) => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
   }
@@ -116,7 +117,7 @@ export class HeroService {
   /** PUT: サーバー上でヒーローを更新 */
   updateHero(hero: Hero): Observable<any> {
     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      tap((_) => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }
@@ -131,7 +132,6 @@ export class HeroService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: リモート上のロギング基盤にエラーを送信する
       console.error(error); // かわりにconsoleに出力
 

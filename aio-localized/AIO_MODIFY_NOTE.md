@@ -1,6 +1,6 @@
-## AIO改変ノート
+## AIO 改変ノート
 
-### favicon.ico差し替え
+### favicon.ico 差し替え
 
 - aio-ja/src/favicon.ico
 

@@ -13,16 +13,16 @@ See the <live-example></live-example> for a working example containing the code 
 
 To get the most out of two-way binding, you should have a basic understanding of the following concepts:
 
-* [Property binding](guide/property-binding)
-* [Event binding](guide/event-binding)
-* [Inputs and Outputs](guide/inputs-outputs)
+- [Property binding](guide/property-binding)
+- [Event binding](guide/event-binding)
+- [Inputs and Outputs](guide/inputs-outputs)
 
 <hr>
 
 Two-way binding combines property binding with event binding:
 
-* [Property binding](guide/property-binding) sets a specific element property.
-* [Event binding](guide/event-binding) listens for an element change event.
+- [Property binding](guide/property-binding) sets a specific element property.
+- [Event binding](guide/event-binding) listens for an element change event.
 
 ## Adding two-way data binding
 
@@ -51,7 +51,6 @@ Both methods, `inc()` and `dec()`, call the `resize()` method with a `+1` or `-1
 
 <code-example path="two-way-binding/src/app/sizer/sizer.component.html" header="src/app/sizer.component.html"></code-example>
 
-
 In the `AppComponent` template, `fontSizePx` is two-way bound to the `SizerComponent`.
 
 <code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html" region="two-way-1"></code-example>
@@ -75,7 +74,7 @@ Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the use
 
   <header>Two-way binding in forms</header>
 
-  Because no built-in HTML element follows the `x` value and `xChange` event pattern, two-way binding with form elements requires `NgModel`.
-  For more information on how to use two-way binding in forms, see Angular [NgModel](guide/built-in-directives#ngModel).
+Because no built-in HTML element follows the `x` value and `xChange` event pattern, two-way binding with form elements requires `NgModel`.
+For more information on how to use two-way binding in forms, see Angular [NgModel](guide/built-in-directives#ngModel).
 
 </div>

@@ -1,35 +1,35 @@
-# Service Workerと通信する
+# Service Worker と通信する
 
-`AppModule`に`ServiceWorkerModule`をインポートしたら、Service Workerを登録するだけではなく、Service Workerと対話してアプリケーションのキャッシュを制御するためのサービスも使えるようになります。
+`AppModule`に`ServiceWorkerModule`をインポートしたら、Service Worker を登録するだけではなく、Service Worker と対話してアプリケーションのキャッシュを制御するためのサービスも使えるようになります。
 
 #### 前提条件
 
 次の基本的理解があること
-* [Service Workerを始める](guide/service-worker-getting-started)
 
+- [Service Worker を始める](guide/service-worker-getting-started)
 
 ## `SwUpdate`サービス
 
-`SwUpdate`サービスは、Service Workerがあなたのアプリケーションで利用可能なアップデートを発見したとき、またはそのアップデートをアクティブにしたときを示すイベントへのアクセスを提供します。
+`SwUpdate`サービスは、Service Worker があなたのアプリケーションで利用可能なアップデートを発見したとき、またはそのアップデートをアクティブにしたときを示すイベントへのアクセスを提供します。
 
-`SwUpdate`サービスは4つの操作をサポートします。
-* *利用可能*なアップデートの通知を受け取る。これらは、ページが更新されたときに読み込まれる新しいバージョンのアプリケーションです。
-* *アクティブ化*したアップデートの通知を受け取る。これは、Service Workerがすぐに新しいバージョンのアプリケーションのサービスを開始するときです。
-* 新しい更新のためにサーバーをチェックするようにService Workerに依頼する。
-* 現在のタブの最新バージョンのアプリケーションを有効にするようにService Workerに依頼する。
+`SwUpdate`サービスは 4 つの操作をサポートします。
+
+- *利用可能*なアップデートの通知を受け取る。これらは、ページが更新されたときに読み込まれる新しいバージョンのアプリケーションです。
+- *アクティブ化*したアップデートの通知を受け取る。これは、Service Worker がすぐに新しいバージョンのアプリケーションのサービスを開始するときです。
+- 新しい更新のためにサーバーをチェックするように Service Worker に依頼する。
+- 現在のタブの最新バージョンのアプリケーションを有効にするように Service Worker に依頼する。
 
 ### 利用可能でアクティブ化したアップデート
 
-`available`と`activated`の2つのアップデートイベントは、`SwUpdate`の`Observable`プロパティです。
+`available`と`activated`の 2 つのアップデートイベントは、`SwUpdate`の`Observable`プロパティです。
 
 <code-example path="service-worker-getting-started/src/app/log-update.service.ts" header="log-update.service.ts" region="sw-update"></code-example>
-
 
 これらのイベントを使用して、保留中のアップデートをユーザーに通知したり、実行中のコードが古い場合にページを更新したりすることができます。
 
 ### アップデートをチェックする
 
-Service Workerに、サーバーにデプロイされたアップデートがあるかどうかを確認させることができます。
+Service Worker に、サーバーにデプロイされたアップデートがあるかどうかを確認させることができます。
 The service worker checks for updates during initialization and on each navigation request&mdash;that is, when the user navigates from a different address to your app.
 However, you might choose to manually check for updates if you have a site that changes frequently or want updates to happen on a schedule.
 
@@ -71,6 +71,7 @@ Therefore, it is recommended to reload the page once the promise returned by `ac
 In some cases, the version of the app used by the service worker to serve a client might be in a broken state that cannot be recovered from without a full page reload.
 
 For example, imagine the following scenario:
+
 - A user opens the app for the first time and the service worker caches the latest version of the app.
   Assume the application's cached assets include `index.html`, `main.<main-hash-1>.js` and `lazy-chunk.<lazy-hash-1>.js`.
 - The user closes the app and does not open it for a while.
@@ -92,8 +93,8 @@ Subscribe to `SwUpdate#unrecoverable` to be notified and handle these errors.
 
 <code-example path="service-worker-getting-started/src/app/handle-unrecoverable-state.service.ts" header="handle-unrecoverable-state.service.ts" region="sw-unrecoverable-state"></code-example>
 
-
-## もっとAngular Service Workerを知りたい
+## もっと Angular Service Worker を知りたい
 
 次の記事がお勧めです。
-* [Service Workerの通知](guide/service-worker-devops).
+
+- [Service Worker の通知](guide/service-worker-devops).

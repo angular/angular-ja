@@ -2,8 +2,8 @@
 
 <div class="alert is-helpful">
 
-  _Angular_ is the name for the Angular of today and tomorrow.<br />
-  _AngularJS_ is the name for all 1.x versions of Angular.
+_Angular_ is the name for the Angular of today and tomorrow.<br />
+_AngularJS_ is the name for all 1.x versions of Angular.
 
 </div>
 
@@ -16,15 +16,12 @@ propagated between the two frameworks. It allows you to upgrade incrementally wh
 speed of your hybrid applications and leveraging the latest of Angular in AngularJS applications early in the
 process of upgrading.
 
-
-
 ## Preparation
 
 Before discussing how you can use `downgradeModule()` to create hybrid apps, there are things that
 you can do to ease the upgrade process even before you begin upgrading. Because the steps are the
 same regardless of how you upgrade, refer to the [Preparation](guide/upgrade#preparation) section of
 [Upgrading from AngularJS](guide/upgrade).
-
 
 ## Upgrading with `ngUpgrade`
 
@@ -33,7 +30,6 @@ building a hybrid app where you can run both frameworks side-by-side. In these h
 mix and match AngularJS and Angular components and services and have them interoperate seamlessly.
 That means you don't have to do the upgrade work all at once as there is a natural coexistence
 between the two frameworks during the transition period.
-
 
 ### How `ngUpgrade` Works
 
@@ -45,14 +41,13 @@ upgrade/static} utilities remain the same. For more information, see the
 
 <div class="alert is-helpful">
 
-  The [Change Detection](guide/upgrade#change-detection) section of
-  [Upgrading from AngularJS](guide/upgrade) only applies to applications that use `UpgradeModule`. Though
-  you handle change detection differently with `downgradeModule()`, which is the focus of this
-  guide, reading the [Change Detection](guide/upgrade#change-detection) section provides helpful
-  context for what follows.
+The [Change Detection](guide/upgrade#change-detection) section of
+[Upgrading from AngularJS](guide/upgrade) only applies to applications that use `UpgradeModule`. Though
+you handle change detection differently with `downgradeModule()`, which is the focus of this
+guide, reading the [Change Detection](guide/upgrade#change-detection) section provides helpful
+context for what follows.
 
 </div>
-
 
 #### Change Detection with `downgradeModule()`
 
@@ -85,7 +80,6 @@ change-detection-heavy applications they can have a noticeable impact. By giving
 control over the change detection propagation, `downgradeModule()` allows you to achieve better
 performance for your hybrid applications.
 
-
 ## Using `downgradeModule()`
 
 Both AngularJS and Angular have their own concept of modules to help organize an application into cohesive
@@ -106,12 +100,12 @@ other. This is known as "upgrading" and "downgrading".
 
 <div class="alert is-helpful">
 
-  <b>Definitions:</b>
+<b>Definitions:</b>
 
-  - _Upgrading_: The act of making an AngularJS asset, such as a component or service, available to
-    the Angular part of the application.
-  - _Downgrading_: The act of making an Angular asset, such as a component or service, available to
-    the AngularJS part of the application.
+- _Upgrading_: The act of making an AngularJS asset, such as a component or service, available to
+  the Angular part of the application.
+- _Downgrading_: The act of making an Angular asset, such as a component or service, available to
+  the AngularJS part of the application.
 
 </div>
 
@@ -138,11 +132,8 @@ import { downgradeModule } from '@angular/upgrade/static';
 const downgradedModule = downgradeModule(MainAngularModuleFactory);
 
 // Use the downgraded module as a dependency to the main AngularJS module.
-angular.module('mainAngularJsModule', [
-  downgradedModule
-]);
+angular.module('mainAngularJsModule', [downgradedModule]);
 ```
-
 
 #### Specifying a factory for the Angular module
 
@@ -182,7 +173,6 @@ Using an `NgModuleFactory` requires less boilerplate and is a good default optio
 out-of-the-box. Using a custom function requires slightly more code, but gives you greater
 flexibility.
 
-
 #### Instantiating the Angular module on-demand
 
 Another key difference between `downgradeModule()` and `UpgradeModule` is that the latter requires
@@ -196,7 +186,6 @@ You could go a step further and not even download the code for the Angular part 
 user's browser until it is needed. This is especially useful when you use Angular on parts of the
 hybrid application that are not necessary for the initial rendering or that the user doesn't reach.
 
-
 A few examples are:
 
 - You use Angular on specific routes only and you don't need it until/if a user visits such a route.
@@ -205,7 +194,6 @@ A few examples are:
   authenticated.
 - You use Angular for a feature that is not critical for the initial rendering of the application and you
   can afford a small delay in favor of better initial load performance.
-
 
 ### Bootstrapping with `downgradeModule()`
 
@@ -216,7 +204,7 @@ the recipe.
 
 In order to start using any `upgrade/static` APIs, you still need to load the Angular framework as
 you would in a normal Angular application. You can see how this can be done with SystemJS by following the
-instructions in the [Upgrade Setup](guide/upgrade-setup "Setup for Upgrading from AngularJS") guide, selectively copying code from the
+instructions in the [Upgrade Setup](guide/upgrade-setup 'Setup for Upgrading from AngularJS') guide, selectively copying code from the
 [QuickStart github repository](https://github.com/angular/quickstart).
 
 You also need to install the `@angular/upgrade` package using `npm install @angular/upgrade --save`
@@ -232,13 +220,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  imports: [
-    BrowserModule
-  ]
+imports: [
+BrowserModule
+]
 })
 export class MainAngularModule {
-  // Empty placeholder method to satisfy the `Compiler`.
-  ngDoBootstrap() {}
+// Empty placeholder method to satisfy the `Compiler`.
+ngDoBootstrap() {}
 }
 </code-example>
 
@@ -249,8 +237,8 @@ declaration on its `NgModule` decorator.
 
 <div class="alert is-important">
 
-  You do not add a `bootstrap` declaration to the `NgModule` decorator since AngularJS owns the root
-  template of the application and `ngUpgrade` bootstraps the necessary components.
+You do not add a `bootstrap` declaration to the `NgModule` decorator since AngularJS owns the root
+template of the application and `ngUpgrade` bootstraps the necessary components.
 
 </div>
 
@@ -261,18 +249,17 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { downgradeModule } from '@angular/upgrade/static';
 
 const bootstrapFn = (extraProviders: StaticProvider[]) => {
-  const platformRef = platformBrowserDynamic(extraProviders);
-  return platformRef.bootstrapModule(MainAngularModule);
+const platformRef = platformBrowserDynamic(extraProviders);
+return platformRef.bootstrapModule(MainAngularModule);
 };
 const downgradedModule = downgradeModule(bootstrapFn);
 
 angular.module('mainAngularJsModule', [
-  downgradedModule
+downgradedModule
 ]);
 </code-example>
 
 The existing AngularJS code works as before _and_ you are ready to start adding Angular code.
-
 
 ### Using Components and Injectables
 
@@ -293,18 +280,17 @@ See [Upgrading from AngularJS](guide/upgrade) to learn about:
 
 <div class="alert is-important">
 
-  While it is possible to downgrade injectables, downgraded injectables will not be available until
-  the Angular module that provides them is instantiated. In order to be safe, you need to ensure
-  that the downgraded injectables are not used anywhere _outside_ the part of the application where it is
-  guaranteed that their module has been instantiated.
+While it is possible to downgrade injectables, downgraded injectables will not be available until
+the Angular module that provides them is instantiated. In order to be safe, you need to ensure
+that the downgraded injectables are not used anywhere _outside_ the part of the application where it is
+guaranteed that their module has been instantiated.
 
-  For example, it is _OK_ to use a downgraded service in an upgraded component that is only used
-  from a downgraded Angular component provided by the same Angular module as the injectable, but it
-  is _not OK_ to use it in an AngularJS component that may be used independently of Angular or use
-  it in a downgraded Angular component from a different module.
+For example, it is _OK_ to use a downgraded service in an upgraded component that is only used
+from a downgraded Angular component provided by the same Angular module as the injectable, but it
+is _not OK_ to use it in an AngularJS component that may be used independently of Angular or use
+it in a downgraded Angular component from a different module.
 
 </div>
-
 
 ## Using ahead-of-time compilation with hybrid apps
 
@@ -326,12 +312,11 @@ import { MainAngularModuleNgFactory } from '../aot/app/app.module.ngfactory';
 const downgradedModule = downgradeModule(MainAngularModuleNgFactory);
 
 angular.module('mainAngularJsModule', [
-  downgradedModule
+downgradedModule
 ]);
 </code-example>
 
 And that is all you need to do to get the full benefit of AOT for hybrid Angular applications.
-
 
 ## Conclusion
 

@@ -10,7 +10,7 @@ Schematics を使用して、アーキテクチャのルールと規則を適用
 
 ## Angular CLI の Schematics
 
-Schematics は Angular エコシステムの一部です。 [Angular CLI](guide/glossary#cli)  は  Schematics を使用して Web アプリケーションプロジェクトを変換します。
+Schematics は Angular エコシステムの一部です。 [Angular CLI](guide/glossary#cli) は Schematics を使用して Web アプリケーションプロジェクトを変換します。
 Schematics を変更し、新たに定義して、たとえば、依存関係の重大な変更を修正するためにコードを更新したり、既存のプロジェクトに新しいオプションやフレームワークを追加したりすることができます。
 
 `@schematics/angular` コレクションに含まれる Schematics は、デフォルトでは `ng generate` および `ng add` コマンドによって実行されます。
@@ -40,15 +40,16 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 
 ライブラリ開発者は、カスタム Schematics の独自のコレクションを作成して、ライブラリを Angular CLI と統合できます。
 
-* *追加 Schematics* により、開発者は `ng add` を使用して Angular ワークスペースにライブラリをインストールできます。
+- _追加 Schematics_ により、開発者は `ng add` を使用して Angular ワークスペースにライブラリをインストールできます。
 
-* *生成 Schematics* は、`ng generate` サブコマンドに、プロジェクトを変更する方法、設定とスクリプトを追加する方法、およびライブラリで定義されているスキャフォールドアーティファクトを指示できます。
+- _生成 Schematics_ は、`ng generate` サブコマンドに、プロジェクトを変更する方法、設定とスクリプトを追加する方法、およびライブラリで定義されているスキャフォールドアーティファクトを指示できます。
 
-* *更新 Schematics* は、`ng update` コマンドにライブラリの依存関係を更新する方法を指示し、新しいバージョンをリリースするときに重大な変更に対する調整を行うことができます。
+- _更新 Schematics_ は、`ng update` コマンドにライブラリの依存関係を更新する方法を指示し、新しいバージョンをリリースするときに重大な変更に対する調整を行うことができます。
 
 これらの見え方と作成方法の詳細については、以下を参照してください。
-* [Authoring Schematics](guide/schematics-authoring)
-* [Schematics for Libraries](guide/schematics-for-libraries)
+
+- [Authoring Schematics](guide/schematics-authoring)
+- [Schematics for Libraries](guide/schematics-for-libraries)
 
 ### 追加 Schematics
 
@@ -58,7 +59,7 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 たとえば、[`@angular/material`](https://material.angular.io/guide/schematics) Schematic は、Angular Material とテーマをインストールおよび設定し、`ng generate` で作成できる新しいスターターコンポーネントを登録するように `add` コマンドに指示します。
 あなたはこれを、自身の追加 Schematic の例およびモデルとして見ることができます。
 
-パートナーライブラリとサードパーティライブラリも、追加 Schematics により Angular CLIをサポートしています。
+パートナーライブラリとサードパーティライブラリも、追加 Schematics により Angular CLI をサポートしています。
 たとえば、`@ng-bootstrap/schematics` はアプリケーションに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare から Clarity](https://vmware.github.io/clarity/documentation/v1.0/get-started) をインストールして設定します。
 
 また、追加 Schematic は設定の変更のためにプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
@@ -69,8 +70,8 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 生成 Schematics は、 `ng generate` コマンドの指示です。
 文書化されたサブコマンドは、デフォルトの Angular 生成 Schematics を使用しますが、（サブコマンドの代わりに）別の Schematic を指定して、ライブラリで定義されたアーティファクトを生成できます。
 
-たとえば、Angular Material は、それが定義するUIコンポーネントの生成 Schematics を提供します。
-次のコマンドは、これらの Schematics の1つを使用して、並べ替えとページネーションのためにデータソースで事前に設定された Angular Material `<mat-table>` をレンダリングします。
+たとえば、Angular Material は、それが定義する UI コンポーネントの生成 Schematics を提供します。
+次のコマンドは、これらの Schematics の 1 つを使用して、並べ替えとページネーションのためにデータソースで事前に設定された Angular Material `<mat-table>` をレンダリングします。
 
 <code-example language="bash">
 ng generate @angular/material:table <component-name>
@@ -95,6 +96,7 @@ ng update
 
     There might be additional packages that are outdated.
     Run "ng update --all" to try to update all at the same time.
+
 </code-example>
 
 更新するライブラリのセット（または `--all` フラグ）をコマンドに渡すと、それらのライブラリ、それらのピア依存関係、およびそれらに依存するピア依存関係が更新されます。
@@ -109,7 +111,7 @@ ng update
 
 </div>
 
-重大な変更を引き起こすような、ライブラリの新しいバージョンを作成する場合、*更新 Schematics* を提供して、`ng update` コマンドが更新中のプロジェクトのそのような変更を自動的に解決できるようにすることができます。
+重大な変更を引き起こすような、ライブラリの新しいバージョンを作成する場合、_更新 Schematics_ を提供して、`ng update` コマンドが更新中のプロジェクトのそのような変更を自動的に解決できるようにすることができます。
 
 たとえば、Angular Material ライブラリを更新するとします。
 
@@ -117,5 +119,5 @@ ng update
 ng update @angular/material
 </code-example>
 
-このコマンドは、ワークスペースの `package.json` 内の `@angular/material` とその依存関係  `@angular/cdk` の両方を更新します。
+このコマンドは、ワークスペースの `package.json` 内の `@angular/material` とその依存関係 `@angular/cdk` の両方を更新します。
 いずれかのパッケージに、既存のバージョンから新しいバージョンへの移行をカバーする更新 Schematic が含まれている場合、コマンドはワークスペースでその Schematic を実行します。

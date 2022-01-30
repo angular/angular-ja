@@ -12,18 +12,20 @@
     "prebuild": "rm -rf build-out && mkdir build-out",
     "build": "docker-compose run --rm build-aio",
     "build:docker": "docker-compose build --parallel",
-    "lint": "yarn ~~textlint",
-    "lint:fix": "yarn ~~textlint --fix",
+    "lint": "yarn prettier --check .",
+    "lint:fix": "yarn prettier --write .",
     "start": "docker-compose up --remove-orphans watch-aio",
     "test": "npm run lint && yarn test:patch",
     "test:patch": "git apply --check --directory origin ./scripts/git-patch/*.patch",
-    "~~textlint": "textlint 'aio-ja/**/!(*.en).md'"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "glob": "^7.1.2",
-    "prh-rules": "prh/rules",
-    "textlint": "^11.0.0",
-    "textlint-filter-rule-comments": "^1.2.2",
-    "textlint-rule-prh": "^5.0.1"
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.2",
+    "prettier": "2.5.1"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }

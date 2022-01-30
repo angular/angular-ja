@@ -1,7 +1,7 @@
 # セキュリティ
 
-このトピックでは、クロスサイトスクリプティングやその他一般的なWebアプリケーション脆弱性に対する
-Angularでの対応について説明します。認証や認可などアプリケーションレベルのセキュリティは
+このトピックでは、クロスサイトスクリプティングやその他一般的な Web アプリケーション脆弱性に対する
+Angular での対応について説明します。認証や認可などアプリケーションレベルのセキュリティは
 ここでは扱いません。
 
 この章で扱う内容に関するより詳細な情報は [OWASP Guide Project](https://www.owasp.org/index.php/Category:OWASP_Guide_Project) を参照してください。
@@ -14,7 +14,7 @@ Angularでの対応について説明します。認証や認可などアプリ�
 
 <header>脆弱性の報告</header>
 
-Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) へ報告をお願いします。
+Angular 自身の脆弱性は [security@angular.io](mailto:security@angular.io) へ報告をお願いします。
 
 セキュリティに関する問題を Google がどのように扱うかは
 [Google's security philosophy](https://www.google.com/about/appsecurity/) を
@@ -28,37 +28,37 @@ Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) �
 
 <header>ベストプラクティス</header>
 
-* **Angularを最新に保つ**
-Angularは定期的にアップデートされており、最新版には以前のバージョンで見つかった
-脆弱性の修正が含まれていることがあります。セキュリティ関連の更新については
-[change log](https://github.com/angular/angular/blob/master/CHANGELOG.md) を確認してください。
+- **Angular を最新に保つ**
+  Angular は定期的にアップデートされており、最新版には以前のバージョンで見つかった
+  脆弱性の修正が含まれていることがあります。セキュリティ関連の更新については
+  [change log](https://github.com/angular/angular/blob/master/CHANGELOG.md) を確認してください。
 
-* **独自のカスタマイズを行わない**
-独自のカスタマイズを行うと、アップデートによるセキュリティの修正や強化の恩恵を
-受けられなくなります。独自のカスタマイズを行うのではなく、その改善点をプルリクエストを通じて
-コミュニティと共有してください。
+- **独自のカスタマイズを行わない**
+  独自のカスタマイズを行うと、アップデートによるセキュリティの修正や強化の恩恵を
+  受けられなくなります。独自のカスタマイズを行うのではなく、その改善点をプルリクエストを通じて
+  コミュニティと共有してください。
 
-* **"_Security Risk_"と明記されたAPIの使用を避ける**
-この章の [Trusting safe values](guide/security#bypass-security-apis) を参照してください。
+- **"_Security Risk_"と明記された API の使用を避ける**
+  この章の [Trusting safe values](guide/security#bypass-security-apis) を参照してください。
 
 </div>
 
-##  クロスサイトスクリプティング（XSS）
+## クロスサイトスクリプティング（XSS）
 
 [クロスサイトスクリプティング](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%88%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0)により
-攻撃者は悪意のあるコードをWebページに注入することができます。
+攻撃者は悪意のあるコードを Web ページに注入することができます。
 そのようなコードはユーザーデータ（特にログインデータ）を盗み出したり
 ユーザーに成りすましたアクションを実行します。これはウェブ上でもっとも一般的な攻撃のひとつです。
 
-XSS攻撃を防ぐには悪意のあるコードがDOMに挿入されるのを防ぐ必要があります。たとえば、
-DOMに`<script>`タグを挿入された場合、攻撃者はそのWebサイトで任意のコードを実行できます。
-攻撃は`<script>`タグだけでなくDOMの多くの要素やプロパティがその対象となります。
+XSS 攻撃を防ぐには悪意のあるコードが DOM に挿入されるのを防ぐ必要があります。たとえば、
+DOM に`<script>`タグを挿入された場合、攻撃者はその Web サイトで任意のコードを実行できます。
+攻撃は`<script>`タグだけでなく DOM の多くの要素やプロパティがその対象となります。
 `<img onerror="...">`や`<a href="javascript:...">`など、
-攻撃者の制御するデータがDOMに注入されることで攻撃が成立します。
+攻撃者の制御するデータが DOM に注入されることで攻撃が成立します。
 
-### AngularによるXSS対策
+### Angular による XSS 対策
 
-XSSへの対策としてAngularはデフォルトですべての入力を信頼できない値として扱います。プロパティ、属性、スタイル、クラスバインド、テンプレート補間、これらを利用してテンプレートからDOMへ値を挿入する際、Angularは値のサニタイズとエスケープを行います。If a value was already sanitized outside of Angular and is considered safe, you can communicate this to Angular by marking the [value as trusted](#bypass-security-apis).
+XSS への対策として Angular はデフォルトですべての入力を信頼できない値として扱います。プロパティ、属性、スタイル、クラスバインド、テンプレート補間、これらを利用してテンプレートから DOM へ値を挿入する際、Angular は値のサニタイズとエスケープを行います。If a value was already sanitized outside of Angular and is considered safe, you can communicate this to Angular by marking the [value as trusted](#bypass-security-apis).
 
 Unlike values to be used for rendering, Angular templates are considered trusted by default, and should be treated as executable code. Never generate templates by concatenating user input and template syntax. Doing this would enable attackers to [inject arbitrary code](https://en.wikipedia.org/wiki/Code_injection) into your application. To prevent these vulnerabilities, always use the default [AOT template compiler](/guide/security#offline-template-compiler) in production deployments.
 
@@ -66,19 +66,19 @@ An additional layer of protection can be provided through the use of Content sec
 
 ### サニタイズとセキュリティコンテキスト {@a sanitization-and-security-contexts}
 
-_サニタイズ_とは、信頼できない値を検査しDOMに挿入できるような安全な値に無害化することです。
+*サニタイズ*とは、信頼できない値を検査し DOM に挿入できるような安全な値に無害化することです。
 多くの場合、サニタイズは値をまったく変更しません。
-サニタイズはコンテキストに依存します。たとえば、CSS内は安全な値がURL内でも安全であるとは限りません。
+サニタイズはコンテキストに依存します。たとえば、CSS 内は安全な値が URL 内でも安全であるとは限りません。
 
 Angular はサニタイズの際に次のいずれかのコンテキストを考慮します。
 
-* **HTML** HTMLコードとして解釈します。値を `innerHtml` プロパティにバインドする際などに用いられます。
-* **スタイル** 値を `style` プロパティにバインドする際に用いられます。
-* **URL** `<a href>` などのURLに用いられます。
-* **リソースURL** `<script src>` などのコードとして評価され実行されます。
+- **HTML** HTML コードとして解釈します。値を `innerHtml` プロパティにバインドする際などに用いられます。
+- **スタイル** 値を `style` プロパティにバインドする際に用いられます。
+- **URL** `<a href>` などの URL に用いられます。
+- **リソース URL** `<script src>` などのコードとして評価され実行されます。
 
-Angularは **HTML**、**スタイル**、**URL** の値をサニタイズします。
-**リソースURL**は任意のコードが含まれる可能性があるためサニタイズできません。
+Angular は **HTML**、**スタイル**、**URL** の値をサニタイズします。
+**リソース URL**は任意のコードが含まれる可能性があるためサニタイズできません。
 開発モードでは、サニタイズで値が変更されるとコンソールに警告が表示されます。
 
 ### サニタイズの例
@@ -89,10 +89,10 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 <code-example path="security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html"></code-example>
 
 テンプレート補間では値は常にエスケープされます。
-タグの開始文字と終了文字はそのまま表示されており、HTMLとしては解釈されていません。
+タグの開始文字と終了文字はそのまま表示されており、HTML としては解釈されていません。
 
-値をHTMLコードとして解釈するには`innerHtml`などのHTMLプロパティにバインドします。
-しかし値をそのままバインドするとXSS脆弱性を引き起こす可能性があります。
+値を HTML コードとして解釈するには`innerHtml`などの HTML プロパティにバインドします。
+しかし値をそのままバインドすると XSS 脆弱性を引き起こす可能性があります。
 For example, one could execute JavaScript in a following way:
 
 <code-example path="security/src/app/inner-html-binding.component.ts" header="src/app/inner-html-binding.component.ts (class)" region="class"></code-example>
@@ -103,15 +103,15 @@ Angular recognizes the value as unsafe and automatically sanitizes it, which rem
   <img src='generated/images/guide/security/binding-inner-html.png' alt='A screenshot showing interpolated and bound HTML values'>
 </div>
 
-### DOM APIの直接使用と、明示的なサニタイズ呼び出し
+### DOM API の直接使用と、明示的なサニタイズ呼び出し
 
-Trusted Typesを強制しない限り、ブラウザの提供する DOM API は脆弱性から自動的にはアプリケーションを保護してくれません。
-`document` オブジェクトや `ElementRef` クラスより参照可能なノード、多くのサードパーティAPIなどには
+Trusted Types を強制しない限り、ブラウザの提供する DOM API は脆弱性から自動的にはアプリケーションを保護してくれません。
+`document` オブジェクトや `ElementRef` クラスより参照可能なノード、多くのサードパーティ API などには
 潜在的に安全でないメソッドが含まれています。
-同様に、DOMを操作する他のライブラリとやりとりする場合、Angularの補間と同じような自動サニタイズはありません。
-DOMと直接対話するのではなく、可能であればAngularテンプレートを使用してください。
+同様に、DOM を操作する他のライブラリとやりとりする場合、Angular の補間と同じような自動サニタイズはありません。
+DOM と直接対話するのではなく、可能であれば Angular テンプレートを使用してください。
 
-避けられない場合は、組み込みのAngularのサニタイズ関数を使用してください。
+避けられない場合は、組み込みの Angular のサニタイズ関数を使用してください。
 信頼できない値を[DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)メソッドと適切な `SecurityContext`でサニタイズします。
 この関数は、[後述](#bypass-security-apis)のように、
 `bypassSecurityTrust` ...関数を使って信頼できるとマークされた値を受け取り、
@@ -121,31 +121,31 @@ DOMと直接対話するのではなく、可能であればAngularテンプレ�
 
 ### 安全な値を信頼する
 
-実行可能コードの注入や `<iframe>` による任意のURLの表示、潜在的な危険を伴うURLの構築、
+実行可能コードの注入や `<iframe>` による任意の URL の表示、潜在的な危険を伴う URL の構築、
 アプリケーションによっては、これらの処理が必要になることがあるかもしれません。
-これら処理のためサニタイズを一時的に無効にするには、対象の値が安全である旨をあらかじめAngularに伝える必要があります。
-ただし *注意してください*。悪意のある値を誤って信頼済としてマークしてしまった場合
+これら処理のためサニタイズを一時的に無効にするには、対象の値が安全である旨をあらかじめ Angular に伝える必要があります。
+ただし _注意してください_。悪意のある値を誤って信頼済としてマークしてしまった場合
 アプリケーションに脆弱性が混入します。
 必要に応じてセキュリティ専門家のレビューを受けてください。
 
 値を信頼済としてマークするには `DomSanitizer` を注入してコンテキストに応じ
 次のいずれかのメソッドを実行します。
 
-* `bypassSecurityTrustHtml`
-* `bypassSecurityTrustScript`
-* `bypassSecurityTrustStyle`
-* `bypassSecurityTrustUrl`
-* `bypassSecurityTrustResourceUrl`
+- `bypassSecurityTrustHtml`
+- `bypassSecurityTrustScript`
+- `bypassSecurityTrustStyle`
+- `bypassSecurityTrustUrl`
+- `bypassSecurityTrustResourceUrl`
 
 値が安全かどうかはコンテキストによって変わります。意図した値の用途に適したメソッドを使用してください。
 たとえば次のように、
-URLに` javascript：alert(...)` をバインドするとします。
+URL に` javascript：alert(...)` をバインドするとします。
 
 <code-example path="security/src/app/bypass-security.component.html" header="src/app/bypass-security.component.html (URL)" region="URL"></code-example>
 
-通常、Angularは自動的にURLをサニタイズし、危険なコードを無効にし、
+通常、Angular は自動的に URL をサニタイズし、危険なコードを無効にし、
 開発モードではこのアクションをコンソールに記録します。
-これを防ぐには、`bypassSecurityTrustUrl`を呼び出してURLの値を信頼できるURLとしてマークします。
+これを防ぐには、`bypassSecurityTrustUrl`を呼び出して URL の値を信頼できる URL としてマークします。
 
 <code-example path="security/src/app/bypass-security.component.ts" header="src/app/bypass-security.component.ts (trust-url)" region="trust-url"></code-example>
 
@@ -154,24 +154,24 @@ URLに` javascript：alert(...)` をバインドするとします。
 </div>
 
 ユーザー入力を信頼できる値に変換する必要がある場合は、コンポーネントメソッドを使用します。
-次のテンプレートでは、ユーザーはYouTubeの動画IDを入力し、対応する動画を`<iframe>`に読み込むことができます。
+次のテンプレートでは、ユーザーは YouTube の動画 ID を入力し、対応する動画を`<iframe>`に読み込むことができます。
 信頼できないソースは、たとえば、無防備なユーザーが実行する可能性があるファイルを密かにダウンロードする可能性があるため、
-`<iframe src>`属性はリソースURLのセキュリティコンテキストです。
-したがってコンポーネント上のメソッドを呼び出して信頼できるビデオURLを作成します。
-これにより、Angularは`<iframe src>`へのバインディングを許可します
-
+`<iframe src>`属性はリソース URL のセキュリティコンテキストです。
+したがってコンポーネント上のメソッドを呼び出して信頼できるビデオ URL を作成します。
+これにより、Angular は`<iframe src>`へのバインディングを許可します
 
 <code-example path="security/src/app/bypass-security.component.html" header="src/app/bypass-security.component.html (iframe)" region="iframe"></code-example>
 
 <code-example path="security/src/app/bypass-security.component.ts" header="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url"></code-example>
 
 {@a content-security-policy}
+
 ### Content Security Policy
 
-Content Security Policy (CSP) を用いることでより確実にXSSを防止することもできます。
+Content Security Policy (CSP) を用いることでより確実に XSS を防止することもできます。
 CSP を有効にするには、レスポンスヘッダ `Content-Security-Policy` が適切に返却されるよう
-Webサーバーを設定する必要があります。CSP に関するより詳細な情報は Google Developersサイトの
-[Web Fundamentals guide](https://developers.google.com/web/fundamentals/security/csp) 
+Web サーバーを設定する必要があります。CSP に関するより詳細な情報は Google Developers サイトの
+[Web Fundamentals guide](https://developers.google.com/web/fundamentals/security/csp)
 を参照してください。
 
 The minimal policy required for brand new Angular is:
@@ -180,15 +180,16 @@ The minimal policy required for brand new Angular is:
 default-src 'self'; style-src 'self' 'unsafe-inline';
 ```
 
-* The `default-src 'self';` section allows the page to load all its required resources from the same
+- The `default-src 'self';` section allows the page to load all its required resources from the same
   origin.
-* `style-src 'self' 'unsafe-inline';` allows the page to load global styles from the same origin
+- `style-src 'self' 'unsafe-inline';` allows the page to load global styles from the same origin
   (`'self'`) and enables components to load their styles (`'unsafe-inline'` - see
   [`angular/angular#6361`](https://github.com/angular/angular/issues/6361)).
 
 Angular itself requires only these settings to function correctly. As your project grows, however, you may need to expand your CSP settings beyond this minimum to accommodate additional features specific to your application.
 
 {@a trusted-types}
+
 ### Enforcing Trusted Types
 
 We recommend the use of [Trusted Types](https://w3c.github.io/webappsec-trusted-types/dist/spec/) as a way to help secure your applications from cross-site scripting attacks. Trusted Types is a [web platform](https://en.wikipedia.org/wiki/Web_platform)
@@ -203,15 +204,15 @@ Trusted Types might not yet be available in all browsers your application target
 
 To enforce Trusted Types for your application, you must configure your application's web server to emit HTTP headers with one of the following Angular policies:
 
-* `angular` - This policy is used in security-reviewed code that is internal to Angular, and is required for Angular to function when Trusted Types are enforced. Any inline template values or content sanitized by Angular is treated as safe by this policy.
-* `angular#unsafe-bypass` - This policy is used for applications that use any of the methods in Angular's [DomSanitizer](api/platform-browser/DomSanitizer) that bypass security, such as `bypassSecurityTrustHtml`. Any application that uses these methods must enable this policy.
-* `angular#unsafe-jit` - This policy is used by the [JIT compiler](api/core/Compiler). You must enable this policy if your application interacts directly with the JIT compiler or is running in JIT mode using the [platform browser dynamic](api/platform-browser-dynamic/platformBrowserDynamic).
+- `angular` - This policy is used in security-reviewed code that is internal to Angular, and is required for Angular to function when Trusted Types are enforced. Any inline template values or content sanitized by Angular is treated as safe by this policy.
+- `angular#unsafe-bypass` - This policy is used for applications that use any of the methods in Angular's [DomSanitizer](api/platform-browser/DomSanitizer) that bypass security, such as `bypassSecurityTrustHtml`. Any application that uses these methods must enable this policy.
+- `angular#unsafe-jit` - This policy is used by the [JIT compiler](api/core/Compiler). You must enable this policy if your application interacts directly with the JIT compiler or is running in JIT mode using the [platform browser dynamic](api/platform-browser-dynamic/platformBrowserDynamic).
 
 You should configure the HTTP headers for Trusted Types in the following locations:
 
-* Production serving infrastructure
-* Angular CLI (`ng serve`), using the `headers` property in the `angular.json` file, for local development and end-to-end testing
-* Karma (`ng test`), using the `customHeaders` property in the `karma.config.js` file, for unit testing
+- Production serving infrastructure
+- Angular CLI (`ng serve`), using the `headers` property in the `angular.json` file, for local development and end-to-end testing
+- Karma (`ng test`), using the `customHeaders` property in the `karma.config.js` file, for unit testing
 
 The following is an example of a header specifically configured for Trusted Types and Angular:
 
@@ -248,21 +249,24 @@ To learn more about troubleshooting Trusted Type configurations, the following r
 オフライン・テンプレート・コンパイラはテンプレートインジェクションと呼ばれる脆弱性を確実に防止し
 アプリケーションのパフォーマンスを大幅に向上させます。プロダクション環境ではオフラインテンプレートコンパイラを使い、
 
-An alternative to the AOT compiler is the JIT compiler which compiles templates to executable template code within the browser at runtime. Angularはテンプレートコードを信頼するので、テンプレート、特にユーザーデータを含むテンプレートを生成すると、Angularの組み込みの保護が回避されます。Angularはテンプレート文字列を全面的に信頼するため、動的なテンプレート生成は常にXSSの危険性を有します。フォームを安全に動的に構築する方法については[Dynamic Forms](guide/dynamic-form) のガイドを参照してください。
+An alternative to the AOT compiler is the JIT compiler which compiles templates to executable template code within the browser at runtime. Angular はテンプレートコードを信頼するので、テンプレート、特にユーザーデータを含むテンプレートを生成すると、Angular の組み込みの保護が回避されます。Angular はテンプレート文字列を全面的に信頼するため、動的なテンプレート生成は常に XSS の危険性を有します。フォームを安全に動的に構築する方法については[Dynamic Forms](guide/dynamic-form) のガイドを参照してください。
 
 {@a server-side-xss}
-### サーバーサイドXSSへの対策
 
-サーバーサイドで構築されたHTMLがXSS脆弱性を有することもあります。これらをテンプレートとしてAngularへ注入することはアプリケーションに実行可能コードを注入することを意味し、この場合アプリケーションは攻撃者によって完全に制御されてしまいます。サーバーサイドでHTMLを構築する際も値のエスケープは確実に行ってください。またサーバーサイドでAngularテンプレートを生成することは避けてください。これらの処理はテンプレートインジェクションの脆弱性が発生する危険性を高めます。
+### サーバーサイド XSS への対策
+
+サーバーサイドで構築された HTML が XSS 脆弱性を有することもあります。これらをテンプレートとして Angular へ注入することはアプリケーションに実行可能コードを注入することを意味し、この場合アプリケーションは攻撃者によって完全に制御されてしまいます。サーバーサイドで HTML を構築する際も値のエスケープは確実に行ってください。またサーバーサイドで Angular テンプレートを生成することは避けてください。これらの処理はテンプレートインジェクションの脆弱性が発生する危険性を高めます。
 
 {@a http}
-## HTTPレベルの脆弱性
 
-HTTPプロトコル上の脆弱性のうち代表的な2つ、クロスサイトリクエストフォージェリ（CSRF / XSRF）と
-クロスサイトスクリプトインクルージョン（XSSI）に対してはAngular側での対策がサポートされています。
-双方ともサーバー側での対策が必要すが、Angularはそれを容易にするようなクライアント側での機能を提供します。
+## HTTP レベルの脆弱性
+
+HTTP プロトコル上の脆弱性のうち代表的な 2 つ、クロスサイトリクエストフォージェリ（CSRF / XSRF）と
+クロスサイトスクリプトインクルージョン（XSSI）に対しては Angular 側での対策がサポートされています。
+双方ともサーバー側での対策が必要すが、Angular はそれを容易にするようなクライアント側での機能を提供します。
 
 {@a xsrf}
+
 ### クロスサイトリクエストフォージェリ
 
 クロスサイトリクエストフォージェリでは、攻撃者はまず攻撃対象とは別のサイト（`evil.com`とします）へ
@@ -274,56 +278,58 @@ HTTPプロトコル上の脆弱性のうち代表的な2つ、クロスサイト
 
 `evil.com` には、`example-bank.com` へ有害なリクエスト送らせるコードが仕込まれています。
 おそらくユーザーの口座から攻撃者の口座へ自動的に送金するような内容でしょう。
-この場合もブラウザは `example-bank.com` 上のCookie（認証情報）は自動的に付与します。
+この場合もブラウザは `example-bank.com` 上の Cookie（認証情報）は自動的に付与します。
 
-XSRF対策が行われていない場合 `example-bank.com` は送られてきたリクエストが
+XSRF 対策が行われていない場合 `example-bank.com` は送られてきたリクエストが
 自身による正当なものなのか `evil.com` によって偽装されたものなのか区別を付けられません。
 
 こういった状況を防ぐには、アプリケーションは受け取ったリクエストが
 自身によって生成された正当なものなのかそうでないのか確実に区別できなければなりません。
 この対策は、サーバー側、クライアント側、双方が協調し動作することではじめて実現します。
 
-一般的なXSRF対策では、アプリケーションサーバーは、ランダムに生成された認証トークンをCookieに送信します。
-クライアントコードはCookieを読み取り、その後のすべてのリクエストにトークンを含むカスタムリクエストヘッダを追加します。
-サーバーは、受信したCookieの値をリクエストヘッダの値と比較し、値がないか一致しない場合はリクエストを拒否します。
+一般的な XSRF 対策では、アプリケーションサーバーは、ランダムに生成された認証トークンを Cookie に送信します。
+クライアントコードは Cookie を読み取り、その後のすべてのリクエストにトークンを含むカスタムリクエストヘッダを追加します。
+サーバーは、受信した Cookie の値をリクエストヘッダの値と比較し、値がないか一致しない場合はリクエストを拒否します。
 
-この手法は、すべてのブラウザが_same origin policy_を実装しているため効果的です。
-Cookieが設定されているWebサイトのコードだけが、そのサイトからCookieを読み取り、そのサイトへのリクエストでカスタムヘッダーを設定することができます。
-つまり、アプリケーションだけがこのCookieトークンを読み取り、カスタムヘッダーを設定できます。
+この手法は、すべてのブラウザが*same origin policy*を実装しているため効果的です。
+Cookie が設定されている Web サイトのコードだけが、そのサイトから Cookie を読み取り、そのサイトへのリクエストでカスタムヘッダーを設定することができます。
+つまり、アプリケーションだけがこの Cookie トークンを読み取り、カスタムヘッダーを設定できます。
 `evil.com`の悪意のあるコードにはできません。
 
 Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClient guide](/guide/http#security-xsrf-protection) の章を参照してください。
 
-CSRFについてはオープンWebアプリケーションセキュリティプロジェクト（OWASP）の、
+CSRF についてはオープン Web アプリケーションセキュリティプロジェクト（OWASP）の、
 [Cross-Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf) および
 [Cross-Site Request Forgery (CSRF) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)を参照してください。
 スタンフォード大学の論文
 [Robust Defenses for Cross-Site Request Forgery](https://seclab.stanford.edu/websec/csrf/csrf.pdf) にも豊富な情報が掲載されています。
 
-Dave Smith氏による
-[AngularConnect 2016でのXSRFに関する発表](https://www.youtube.com/watch?v=9inczw6qtpY "Cross Site Request Funkery Securing Your Angular Apps From Evil Doers") も参照してください。
+Dave Smith 氏による
+[AngularConnect 2016 での XSRF に関する発表](https://www.youtube.com/watch?v=9inczw6qtpY 'Cross Site Request Funkery Securing Your Angular Apps From Evil Doers') も参照してください。
 
 {@a xssi}
+
 ### クロスサイトスクリプトインクルージョン (XSSI)
 
-JSON脆弱性とも呼ばれるクロスサイトスクリプトインクルージョンにより、攻撃者のWebサイトで
-JSON APIからデータを読み取ることができます。この攻撃は、ビルトインのJavaScriptオブジェクトコンストラクターを
-オーバーライドしてから、`<script>`タグを使用してAPI URLを含めることによって、古いブラウザで機能します。
+JSON 脆弱性とも呼ばれるクロスサイトスクリプトインクルージョンにより、攻撃者の Web サイトで
+JSON API からデータを読み取ることができます。この攻撃は、ビルトインの JavaScript オブジェクトコンストラクターを
+オーバーライドしてから、`<script>`タグを使用して API URL を含めることによって、古いブラウザで機能します。
 
-この攻撃は、返されたJSONがJavaScriptとして実行可能な場合にのみ成功します。
-サーバーはすべてのJSONレスポンスを実行不可能にするために接頭辞を付けて攻撃を防ぐことができます。
+この攻撃は、返された JSON が JavaScript として実行可能な場合にのみ成功します。
+サーバーはすべての JSON レスポンスを実行不可能にするために接頭辞を付けて攻撃を防ぐことができます。
 慣習的には、よく知られている文字列 `")]}',\n"` を使用します。
 
-Angularの`HttpClient`ライブラリはこの規約を認識し、
+Angular の`HttpClient`ライブラリはこの規約を認識し、
 解析前にすべてのレスポンスから文字列 `")]},\n"` を自動的に削除します。
 
 より詳細な情報は[Google web security blog post](https://security.googleblog.com/2011/05/website-security-for-webmasters.html)の
 クロスサイトスクリプトインクルージョンの項を参照してください。
 
 {@a code-review}
-## Angularアプリケーションの検査
 
-Angularアプリケーションは通常のWebアプリケーションと同等のセキュリティが求められます。
+## Angular アプリケーションの検査
+
+Angular アプリケーションは通常の Web アプリケーションと同等のセキュリティが求められます。
 [_bypassSecurityTrust_](guide/security#bypass-security-apis)メソッドなど、セキュリティレビューで
-監査する必要のあるAngular固有のAPIは、
+監査する必要のある Angular 固有の API は、
 ドキュメントにセキュリティの影響を受けやすいとマークされています。

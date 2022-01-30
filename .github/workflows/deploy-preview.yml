@@ -3,7 +3,7 @@
 
 name: Deploy preview version
 
-on: 
+on:
   pull_request_target:
     types: [labeled]
 
@@ -16,35 +16,34 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-      with: 
-        ref: ${{github.event.pull_request.head.ref}}
-        repository: ${{github.event.pull_request.head.repo.full_name}}
-        submodules: true
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          submodules: true
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install
-      run: yarn install
-    - name: Build
-      run: yarn build
-    - name: Deploy preview version
-      uses: FirebaseExtended/action-hosting-deploy@v0
-      with:
-        repoToken: "${{ secrets.GITHUB_TOKEN }}"
-        firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-        expires: 30d
-        projectId: documentation-angular-fr
-    - name: Remove Label
-      uses: actions/github-script@v5
-      with:
-        script: |
-          github.rest.issues.removeLabel({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            name: 'deploy preview version'
-          })
-      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Deploy preview version
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          expires: 30d
+          projectId: documentation-angular-fr
+      - name: Remove Label
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'deploy preview version'
+            })

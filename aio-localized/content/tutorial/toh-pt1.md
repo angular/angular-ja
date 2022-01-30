@@ -6,43 +6,43 @@
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+For the sample app that this page describes, see the <live-example></live-example>.
 
 </div>
 
 ## heroes コンポーネントを作成する {@a create-the-heroes-component}
 
-Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
+Angular CLI を使用して､`heroes`という名前の新しいコンポーネントを生成します 。
 
 <code-example language="sh">
   ng generate component heroes
 </code-example>
 
-CLIは`src/app/heroes/`という新しいフォルダを作成し、
-`HeroesComponent`に関する3つのファイルをテストファイルと一緒に生成します。
+CLI は`src/app/heroes/`という新しいフォルダを作成し、
+`HeroesComponent`に関する 3 つのファイルをテストファイルと一緒に生成します。
 
 `HeroesComponent`のクラスファイルは次のとおりです。
 
 <code-example path="toh-pt1/src/app/heroes/heroes.component.ts" region="v1" header="app/heroes/heroes.component.ts (initial version)"></code-example>
 
-常にAngularコアライブラリから`Component`シンボルをインポートし、
+常に Angular コアライブラリから`Component`シンボルをインポートし、
 コンポーネントクラスに`@Component`で注釈を付けます。
 
-`@Component`は、コンポーネントのAngularメタデータを指定するデコレーター関数です。
+`@Component`は、コンポーネントの Angular メタデータを指定するデコレーター関数です。
 
-CLIは3つのメタデータプロパティを生成しました:
+CLI は 3 つのメタデータプロパティを生成しました:
 
-1. `selector`&mdash; コンポーネントのCSS要素セレクター
+1. `selector`&mdash; コンポーネントの CSS 要素セレクター
 1. `templateUrl`&mdash; コンポーネントのテンプレートファイルの場所
-1. `styleUrls`&mdash; コンポーネントのプライベートCSSスタイルの場所
+1. `styleUrls`&mdash; コンポーネントのプライベート CSS スタイルの場所
 
 {@a selector}
 
-[CSS要素セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors)である
-`'app-heroes'`は、親コンポーネントのテンプレート内でこのコンポーネントを識別するHTML要素の名前と一致します。
+[CSS 要素セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors)である
+`'app-heroes'`は、親コンポーネントのテンプレート内でこのコンポーネントを識別する HTML 要素の名前と一致します。
 
 `ngOnInit()`は[ライフサイクルフック](guide/lifecycle-hooks#oninit)です。
-Angularは、コンポーネントの作成直後に`ngOnInit()`を呼び出します。
+Angular は、コンポーネントの作成直後に`ngOnInit()`を呼び出します。
 初期化ロジックを置くのに適しています。
 
 常にコンポーネントクラスを`export`するので、`AppModule`のようにいつでも他の場所に`import`できます。
@@ -56,7 +56,7 @@ Angularは、コンポーネントの作成直後に`ngOnInit()`を呼び出し�
 ### ヒーローを表示する {@a show-the-hero}
 
 `heroes.component.html`テンプレートファイルを開きます。
-Angular CLIで生成されたデフォルトのテキストを削除し、
+Angular CLI で生成されたデフォルトのテキストを削除し、
 それを新しい`hero`プロパティへのデータバインディングに置き換えてください。
 
 <code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" header="heroes.component.html" region="show-hero-1"></code-example>
@@ -70,7 +70,7 @@ Angular CLIで生成されたデフォルトのテキストを削除し、
 
 <code-example path="toh-pt1/src/app/app.component.html" header="src/app/app.component.html"></code-example>
 
-CLIの`ng serve`コマンドがまだ実行中であれば、
+CLI の`ng serve`コマンドがまだ実行中であれば、
 ブラウザが更新され、アプリケーションのタイトルとヒーローの名前が表示されます。
 
 ## Hero インターフェースを作成する {@a create-a-hero-interface}
@@ -81,7 +81,6 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 それに`id`プロパティと`name`プロパティを与えます。
 
 <code-example path="toh-pt1/src/app/hero.ts"  header="src/app/hero.ts"></code-example>
-
 
 `HeroesComponent`クラスに戻り、`Hero`インターフェースをインポートします。
 
@@ -115,9 +114,10 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 組み込みの`UppercasePipe`を起動します。
 
 [パイプ](guide/pipes)は、文字列、通貨金額、日付や、その他の表示データを書式設定するのに適しています。
-Angularは複数のビルトインパイプを備えており、あなた自身が独自のパイプを作ることもできます。
+Angular は複数のビルトインパイプを備えており、あなた自身が独自のパイプを作ることもできます。
 
 {@a edit-the-hero}
+
 ## ヒーローを編集する
 
 ユーザーは`<input>`テキストボックスでヒーローの名前を編集できるべきです。
@@ -135,9 +135,9 @@ Angularは複数のビルトインパイプを備えており、あなた自身�
 
 <code-example path="toh-pt1/src/app/heroes/heroes.component.1.html" region="name-input" header="src/app/heroes/heroes.component.html (HeroesComponent's template)"></code-example>
 
-**[(ngModel)]** は、Angularの双方向データバインディング構文です。
+**[(ngModel)]** は、Angular の双方向データバインディング構文です。
 
-これで`hero.name`プロパティをHTMLのテキストボックスにバインドするので、
+これで`hero.name`プロパティを HTML のテキストボックスにバインドするので、
 `hero.name`プロパティからテキストボックスへ、テキストボックスから`hero.name`プロパティへ、 _双方向に_ データを流すことができます。
 
 ### 見つからない _FormsModule_ {@a the-missing-formsmodule}
@@ -152,13 +152,13 @@ Template parse errors:
 Can't bind to 'ngModel' since it isn't a known property of 'input'.
 </code-example>
 
-`ngModel`は有効なAngularディレクティブですが、デフォルトでは使用できません。
+`ngModel`は有効な Angular ディレクティブですが、デフォルトでは使用できません。
 
 これはオプションの`FormsModule`に属しており、使用するにはそのモジュールをオプトインする必要があります。
 
 ## _AppModule_
 
-Angularでは、アプリケーションの部品がどのように合わさるかや、
+Angular では、アプリケーションの部品がどのように合わさるかや、
 アプリケーションが必要としている他のファイルやライブラリを知る必要があります。
 この情報を _メタデータ_ といいます。
 
@@ -189,9 +189,9 @@ region="ng-imports">
 
 ### `HeroesComponent` を宣言する {@a declare-heroescomponent}
 
-すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodules)で宣言されなければなりません。
+すべてのコンポーネントは、 _ただ 1 つの_ [NgModule](guide/ngmodules)で宣言されなければなりません。
 
-_あなたは_ `HeroesComponent`を宣言していません。
+*あなたは* `HeroesComponent`を宣言していません。
 では、なぜアプリケーションは動作したのでしょうか？
 
 アプリケーションが動作したのは、Angular CLI が`HeroesComponent`を生成したときに、`AppModule`でそのコンポーネントの宣言を行っていたからです。
@@ -206,7 +206,6 @@ region="ng-imports">
 
 `AppModule`は`AppComponent`と`HeroesComponent`の両方のアプリケーションコンポーネントを宣言しています。
 
-
 ## 最終的なコードレビュー {@a final-code-review}
 
 このページで解説したコードファイルは次のとおりです。
@@ -219,9 +218,9 @@ region="ng-imports">
   <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt1/src/app/heroes/heroes.component.html">
   </code-pane>
 
-  <code-pane header="src/app/app.module.ts" 
+<code-pane header="src/app/app.module.ts" 
   path="toh-pt1/src/app/app.module.ts">
-  </code-pane>
+</code-pane>
 
   <code-pane header="src/app/app.component.ts" path="toh-pt1/src/app/app.component.ts">
   </code-pane>
@@ -229,19 +228,20 @@ region="ng-imports">
   <code-pane header="src/app/app.component.html" path="toh-pt1/src/app/app.component.html">
   </code-pane>
 
-  <code-pane header="src/app/hero.ts" 
+<code-pane header="src/app/hero.ts" 
   path="toh-pt1/src/app/hero.ts">
-  </code-pane>
+</code-pane>
 
 </code-tabs>
 
 {@a summary}
+
 ## まとめ
 
-* CLIを使用して、2番目の `HeroesComponent` を作成しました。
-* `HeroesComponent` を `AppComponent` シェルに追加して表示しました。
-* 名前をフォーマットするために、 `UppercasePipe` を適用しました。
-* `ngModel` ディレクティブで双方向データバインディングを使用しました。
-* `AppModule` について学びました。
-* `AppModule` に `FormsModule` をインポートして、Angular `ngModel` ディレクティブを認識して適用するようにしました。
-* `AppModule` でコンポーネントを宣言することの重要性を学び、CLIがあなたのためにその宣言を行っていることを認識しました。
+- CLI を使用して、2 番目の `HeroesComponent` を作成しました。
+- `HeroesComponent` を `AppComponent` シェルに追加して表示しました。
+- 名前をフォーマットするために、 `UppercasePipe` を適用しました。
+- `ngModel` ディレクティブで双方向データバインディングを使用しました。
+- `AppModule` について学びました。
+- `AppModule` に `FormsModule` をインポートして、Angular `ngModel` ディレクティブを認識して適用するようにしました。
+- `AppModule` でコンポーネントを宣言することの重要性を学び、CLI があなたのためにその宣言を行っていることを認識しました。

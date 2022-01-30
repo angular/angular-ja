@@ -1,4 +1,4 @@
-# テスティングユーティリティAPI
+# テスティングユーティリティ API
 
 This page describes the most useful Angular testing features.
 
@@ -28,6 +28,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
     [waitForAsync](guide/testing-components-scenarios#waitForAsync)を参照してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -41,6 +42,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       [fakeAsync](guide/testing-components-scenarios#fake-async)を参照してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -66,6 +68,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       を参照してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -80,6 +83,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       [debugElement.injector](guide/testing-components-scenarios#get-injected-services)の説明を参照してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -97,6 +101,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       _タスク_キューをフラッシュするために`discardPeriodicTasks`を呼び出してエラーを回避してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -114,6 +119,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       _マイクロタスク_キューをフラッシュするために`flushMicrotasks`を呼び出してエラーを回避してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -126,6 +132,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       [自動変更検知](guide/testing-components-scenarios#automatic-change-detection)を有効にする、サービスのプロバイダートークン。
 
     </td>
+
   </tr>
 
   <tr>
@@ -141,16 +148,18 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       静的メソッドとしては使用できない(ほとんど使用されない)メンバーを公開します。
 
     </td>
+
   </tr>
 </table>
 
 {@a testbed-class-summary}
+
 #### _TestBed_ クラスの概要
 
-`TestBed`クラスは、主要なAngularテストユーティリティの1つです。
-そのAPIは巨大で、
+`TestBed`クラスは、主要な Angular テストユーティリティの 1 つです。
+その API は巨大で、
 あなたがそれを調べるまで少しの時間で圧倒されるかもしれません。
-完全なAPIを吸収しようとする前に、まずこのガイドの最初の部分を読んで基礎を理解してください。
+完全な API を吸収しようとする前に、まずこのガイドの最初の部分を読んで基礎を理解してください。
 
 `configureTestingModule`に渡されるモジュール定義は、
 `@NgModule`メタデータプロパティのサブセットです。
@@ -181,12 +190,12 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 {@a testbed-methods}
 {@a testbed-api-summary}
 
-`TestBed` APIは、`TestBed`の_グローバル_インスタンスを更新または参照する静的クラスメソッドで構成されています。
+`TestBed` API は、`TestBed`の*グローバル*インスタンスを更新または参照する静的クラスメソッドで構成されています。
 
 内部的には、すべての静的メソッドは、現在のランタイムの`TestBed`インスタンスのメソッドをカバーします。
 これは、`getTestBed()`関数によって返されます。
 
-`beforeEach()`_内_で`TestBed`メソッドを呼び出して、個々のテストの初期化を確実にしてください。
+`beforeEach()`*内*で`TestBed`メソッドを呼び出して、個々のテストの初期化を確実にしてください。
 
 役に立ちそうな順に、もっとも重要な静的メソッドを説明します。
 
@@ -215,6 +224,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       およびプロバイダーの追加と削除を行い、特定のテストセットのためにテストモジュールの構成を絞り込むことができます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -232,6 +242,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       `compileComponents`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズされます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -245,6 +256,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       `compileComponent`を呼び出した後、`TestBed`設定は現在のスペックの期間中フリーズされます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -258,6 +270,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       現在のテストモジュールに深くリーチすることができます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -271,6 +284,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       内部モジュールの深くネストしたコンポーネントでも可能です。
 
     </td>
+
   </tr>
 
   <tr>
@@ -284,6 +298,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       内部モジュールの深くネストしたディレクティブでも可能です。
 
     </td>
+
   </tr>
 
   <tr>
@@ -296,6 +311,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       内部モジュールの深くネストしたパイプでも可能です。
 
     </td>
+
   </tr>
 
   <tr>
@@ -322,6 +338,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       `TestBed.inject`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズします。
 
     </td>
+
   </tr>
 
   <tr>
@@ -344,6 +361,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       一般的な形式、`@angular/platform-<platform_name>/testing/<platform_name>`で利用できます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -355,6 +373,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       デフォルトテストモジュールを含む初期のテスト環境をリセットします。
 
     </td>
+
   </tr>
 </table>
 
@@ -369,8 +388,8 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 コンポーネント`T`のインスタンスを作成し、
 そのコンポーネントに対して強く型付けされた`ComponentFixture`を返します。
 
-`ComponentFixture`のプロパティとメソッドは、コンポーネント、そのDOM表現、
-およびAngularの環境側面へのアクセスを提供します。
+`ComponentFixture`のプロパティとメソッドは、コンポーネント、その DOM 表現、
+および Angular の環境側面へのアクセスを提供します。
 
 {@a component-fixture-properties}
 
@@ -398,6 +417,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       `TestBed.createComponent`によって作成されたコンポーネントクラスのインスタンスです。
 
     </td>
+
   </tr>
 
   <tr>
@@ -413,6 +433,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       これはテスターにとって重要な特性です。 最も興味深いメンバーは[以下](#debug-element-details)でカバーされています。
 
     </td>
+
   </tr>
 
   <tr>
@@ -425,6 +446,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       コンポーネントのルートにあるネイティブなDOM要素。
 
     </td>
+
   </tr>
 
   <tr>
@@ -441,6 +463,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
       コンポーネントの変更検知があなたのプログラマティックな制御下である場合に最も効果的です。
 
     </td>
+
   </tr>
 </table>
 
@@ -448,8 +471,8 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
 #### _ComponentFixture_ メソッド
 
-_フィクスチャー_のメソッドにより、Angularはコンポーネントツリー上で特定のタスクを実行します。
-シミュレートされたユーザーアクションに応答してAngularの動作をトリガーするためにこれらのメソッドを呼び出してください。
+*フィクスチャー*のメソッドにより、Angular はコンポーネントツリー上で特定のタスクを実行します。
+シミュレートされたユーザーアクションに応答して Angular の動作をトリガーするためにこれらのメソッドを呼び出してください。
 
 テスターにとってもっとも有用なメソッドは次のとおりです。
 
@@ -481,6 +504,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       循環更新を確認するためにあとで `checkNoChanges` を実行してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -502,6 +526,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       テストの動作を細かく制御することを好むテスターは、`false`のままにする傾向があります。
 
     </td>
+
   </tr>
 
   <tr>
@@ -514,6 +539,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       保留中の変更がないことを確認するために変更検知を実行します。 ある場合は例外をスローします。
 
     </td>
+
   </tr>
 
   <tr>
@@ -527,6 +553,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       完了していない非同期タスクがある場合は`false`を返します。
 
     </td>
+
   </tr>
 
   <tr>
@@ -543,6 +570,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       [whenStable](guide/testing-components-scenarios#when-stable)を参照してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -555,6 +583,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       コンポーネントの破棄をトリガーします。
 
     </td>
+
   </tr>
 </table>
 
@@ -562,7 +591,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
 
 #### _DebugElement_
 
-`DebugElement`は、コンポーネントのDOM表現を把握する重要な手がかりになります。
+`DebugElement`は、コンポーネントの DOM 表現を把握する重要な手がかりになります。
 
 `fixture.debugElement`によって返されたテストルートコンポーネントの`DebugElement`から、
 フィクスチャーの要素およびコンポーネントのサブツリー全体を走査（およびクエリ）することができます。
@@ -589,6 +618,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       ブラウザ内の対応するDOM要素（WebWorkersの場合はnull）。
 
     </td>
+
   </tr>
 
   <tr>
@@ -602,6 +632,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       サブツリー内の任意の深さの[predicate](#query-predicate)にマッチする最初の`DebugElement`を返します。
 
     </td>
+
   </tr>
 
   <tr>
@@ -615,6 +646,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       サブツリー内の任意の深さの[predicate](#query-predicate)にマッチするすべての`DebugElement`が返されます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -628,6 +660,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       たとえば、ルート要素のコンポーネントインスタンスインジェクターなどです。
 
     </td>
+
   </tr>
 
   <tr>
@@ -640,6 +673,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       要素自身のコンポーネントインスタンス（存在する場合）。
 
     </td>
+
   </tr>
 
   <tr>
@@ -657,6 +691,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       例えば、`*ngFor="let hero of heroes"`内の`hero`がそうです。
 
     </td>
+
   </tr>
 
   <tr>
@@ -676,6 +711,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
 
       </div>
     </td>
+
   </tr>
 
   <tr>
@@ -687,6 +723,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       `DebugElement`の親です。これがルート要素の場合はnullです。
 
     </td>
+
   </tr>
 
   <tr>
@@ -699,6 +736,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       要素タグ名（要素の場合）。
 
     </td>
+
   </tr>
 
   <tr>
@@ -716,6 +754,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       `nativeElement.dispatchEvent(eventObject)`を呼び出すことを検討してください。
 
     </td>
+
   </tr>
 
   <tr>
@@ -728,6 +767,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       コンポーネントの`@Output`プロパティおよび/または要素のイベントプロパティに関連付けられたコールバック。
 
     </td>
+
   </tr>
 
   <tr>
@@ -741,6 +781,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       コンポーネント自体とコンポーネントが持つ`providers`メタデータ内のトークンが含まれます。
 
     </td>
+
   </tr>
 
   <tr>
@@ -753,6 +794,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       ソースコンポーネントテンプレート内のこの要素を見つける場所。
 
     </td>
+
   </tr>
 
   <tr>
@@ -766,6 +808,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       ローカル変数名をキーとしています。
 
     </td>
+
   </tr>
 </table>
 
@@ -774,17 +817,17 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
 `DebugElement.query(predicate)` および`DebugElement.queryAll(predicate)`メソッドは、
 `DebugElement`とマッチするようにソース要素のサブツリーをフィルタする述語を受け取ります。
 
-述語は、`DebugElement`を受け取り、_truthy_な値を返す任意のメソッドです。
+述語は、`DebugElement`を受け取り、*truthy*な値を返す任意のメソッドです。
 次の例では、"content"という名前のテンプレートローカル変数への参照を含むすべての`DebugElement`
 が検索されます:
 
 <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate" header="app/demo/demo.testbed.spec.ts"></code-example>
 
-Angularの`By`クラスには、共通述語の静的メソッドが3つあります。
+Angular の`By`クラスには、共通述語の静的メソッドが 3 つあります。
 
 - `By.all` - すべての要素を返します。
-- `By.css(selector)` - マッチするCSSセレクターをもつ要素を返します。
-- `By.directive(directive)` - ディレクティブクラスのインスタンスにマッチするAngularの要素を返します。
+- `By.css(selector)` - マッチする CSS セレクターをもつ要素を返します。
+- `By.directive(directive)` - ディレクティブクラスのインスタンスにマッチする Angular の要素を返します。
 
 <code-example path="testing/src/app/hero/hero-list.component.spec.ts" region="by" header="app/hero/hero-list.component.spec.ts"></code-example>
 

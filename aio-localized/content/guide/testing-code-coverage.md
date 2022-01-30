@@ -2,15 +2,14 @@
 
 # テストしているコードの量を調べる
 
-CLIでユニットテストを実行し、コードカバレッジレポートを作成することができます。
+CLI でユニットテストを実行し、コードカバレッジレポートを作成することができます。
 コードカバレッジレポートは、ユニットテストで正しくテストされていないコードベースの部分を表示します。
 
 <div class="alert is-helpful">
 
-  If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
+If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
 
 </div>
-
 
 カバレッジレポートを生成するには、プロジェクト直下で次のコマンドを実行します。
 
@@ -20,7 +19,7 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 
 テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。
 
-テストするたびにコードカバレッジレポートを作成したい場合は、CLIの設定ファイル、`angular.json`で次のようなオプションを設定します:
+テストするたびにコードカバレッジレポートを作成したい場合は、CLI の設定ファイル、`angular.json`で次のようなオプションを設定します:
 
 ```
   "test": {
@@ -33,9 +32,9 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 ## コードカバレッジの適用
 
 コードカバレッジ率から、テストされたコードの量を見積もることができます。
-あなたのチームがユニットテストされている最低限の量を決定する場合、Angular CLIを使用して、この最小値を適用することができます。
+あなたのチームがユニットテストされている最低限の量を決定する場合、Angular CLI を使用して、この最小値を適用することができます。
 
-たとえば、コードベースに最低80％のコードカバレッジを設定するとします。
+たとえば、コードベースに最低 80％のコードカバレッジを設定するとします。
 To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the `check` property in the `coverageReporter:` key.
 
 ```js

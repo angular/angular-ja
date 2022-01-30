@@ -1,14 +1,13 @@
-
 {@a attribute-directive}
 
 # 属性ディレクティブのテスト
 
-_属性ディレクティブ_は、要素、コンポーネントまたは別のディレクティブの動作を変更します。
+*属性ディレクティブ*は、要素、コンポーネントまたは別のディレクティブの動作を変更します。
 その名前は、ディレクティブが適用されるホストエレメントの属性として反映されます。
 
 <div class="alert is-helpful">
 
-  If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
+If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
 
 </div>
 
@@ -34,9 +33,9 @@ Testing the specific use of the `HighlightDirective` within the `AboutComponent`
 しかし、単一のユースケースをテストすることは、ディレクティブの機能の全範囲を調査することにはなりません。
 このディレクティブを使用しているすべてのコンポーネントを見つけてテストするのは面倒で脆く、完全にカバーすることはほとんどありません。
 
-_クラスのみ_のテストは役に立ちますが、
-このような属性ディレクティブはDOMを操作する傾向があります。
-隔離されたユニットテストはDOMに触れることはないので、
+*クラスのみ*のテストは役に立ちますが、
+このような属性ディレクティブは DOM を操作する傾向があります。
+隔離されたユニットテストは DOM に触れることはないので、
 ディレクティブの効果に対する信頼を促すものではありません。
 
 よりよい解決策は、ディレクティブを適用するすべての方法を示す人工的なテストコンポーネントを作成することです。
@@ -60,7 +59,7 @@ _クラスのみ_のテストは役に立ちますが、
 
 いくつか注目に値するテクニックがあります:
 
-- `By.directive`述部は、_要素の型が不明な場合_にこのディレクティブをもつ要素を取得するための優れた方法です。
+- `By.directive`述部は、*要素の型が不明な場合*にこのディレクティブをもつ要素を取得するための優れた方法です。
 
 - `By.css('h2：not([highlight])')`内の<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not">`:not`疑似クラス</a>は、
   ディレクティブを持たない`<h2>`要素を見つけるのに役立ちます。
@@ -69,8 +68,8 @@ _クラスのみ_のテストは役に立ちますが、
 - `DebugElement.styles`は、`DebugElement`抽象化のおかげで、実際のブラウザがなくても要素のスタイルにアクセスできます。
   しかし、抽象化よりも簡単で明快な場合は、`nativeElement`の利用を遠慮しないでください。
 
-- Angularは、それが適用されている要素のインジェクターにディレクティブを追加します。
+- Angular は、それが適用されている要素のインジェクターにディレクティブを追加します。
   デフォルトカラーのテストでは、
-  `HighlightDirective`インスタンスの`defaultColor`を取得するために2番目の`<h2>`のインジェクターを使用しています。
+  `HighlightDirective`インスタンスの`defaultColor`を取得するために 2 番目の`<h2>`のインジェクターを使用しています。
 
 - `DebugElement.properties`は、ディレクティブによって設定された人工的なカスタムプロパティへのアクセスを提供します。

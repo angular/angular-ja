@@ -1,11 +1,11 @@
-# Angularを理解する
+# Angular を理解する
 
-Angularフレームワークの機能を理解するために、次のことを学ぶ必要があります。
+Angular フレームワークの機能を理解するために、次のことを学ぶ必要があります。
 
-* コンポーネント
-* テンプレート
-* ディレクティブ
-* 依存オブジェクト注入
+- コンポーネント
+- テンプレート
+- ディレクティブ
+- 依存オブジェクト注入
 
 このセクションのトピックでは、これらの機能と概念、およびそれらの使用方法について説明します。
 
@@ -13,10 +13,10 @@ Angularフレームワークの機能を理解するために、次のことを�
 
 これらの開発者ガイドを最大限に活用するために、次のトピックを確認する必要があります。
 
-* [Angularとは][AioGuideWhatIsAngular]。
-* [チュートリアルを始める][AioStart]。
+- [Angular とは][aioguidewhatisangular]。
+- [チュートリアルを始める][aiostart]。
 
-## Angularの基本を学ぶ
+## Angular の基本を学ぶ
 
 <div class="card-container">
   <a href="guide/component-overview" class="docs-card" title="コンポーネント">
@@ -48,9 +48,8 @@ Angularフレームワークの機能を理解するために、次のことを�
 
 <!-- links -->
 
-[AioGuideWhatIsAngular]: guide/what-is-angular "What is Angular\? | Angular"
-
-[AioStart]: start "Getting started with Angular | Angular"
+[aioguidewhatisangular]: guide/what-is-angular 'What is Angular? | Angular'
+[aiostart]: start 'Getting started with Angular | Angular'
 
 <!-- external links -->
 

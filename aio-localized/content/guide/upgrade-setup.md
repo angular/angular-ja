@@ -6,11 +6,10 @@ Question: Can we remove this file and instead direct readers to https://github.c
 
 <div class="alert is-critical">
 
-**Audience:** Use this guide **only** in the context of  [Upgrading from AngularJS](guide/upgrade "Upgrading from AngularJS to Angular") or [Upgrading for Performance](guide/upgrade-performance "Upgrading for Performance").
-Those Upgrade guides refer to this Setup guide for information about using the [deprecated QuickStart GitHub repository](https://github.com/angular/quickstart "Deprecated Angular QuickStart GitHub repository"), which was created prior to the current Angular [CLI](cli "CLI Overview").
+**Audience:** Use this guide **only** in the context of [Upgrading from AngularJS](guide/upgrade 'Upgrading from AngularJS to Angular') or [Upgrading for Performance](guide/upgrade-performance 'Upgrading for Performance').
+Those Upgrade guides refer to this Setup guide for information about using the [deprecated QuickStart GitHub repository](https://github.com/angular/quickstart 'Deprecated Angular QuickStart GitHub repository'), which was created prior to the current Angular [CLI](cli 'CLI Overview').
 
-**For all other scenarios,** see the current instructions in [Setting up the Local Environment and Workspace](guide/setup-local "Setting up for Local Development").
-
+**For all other scenarios,** see the current instructions in [Setting up the Local Environment and Workspace](guide/setup-local 'Setting up for Local Development').
 
 </div>
 
@@ -21,12 +20,12 @@ In particular, the QuickStart live-coding example shows just the AppComponent fi
 -->
 
 This guide describes how to develop locally on your own machine.
-Setting up a new project on your machine is quick and easy with the [QuickStart seed on github](https://github.com/angular/quickstart "Install the github QuickStart repo").
+Setting up a new project on your machine is quick and easy with the [QuickStart seed on github](https://github.com/angular/quickstart 'Install the github QuickStart repo').
 
-**Prerequisite:** Make sure you have [Node.js® and npm installed](guide/setup-local#prerequisites "Angular prerequisites").
-
+**Prerequisite:** Make sure you have [Node.js® and npm installed](guide/setup-local#prerequisites 'Angular prerequisites').
 
 {@a clone}
+
 ## Clone
 
 Perform the _clone-to-launch_ steps with these terminal commands.
@@ -37,10 +36,10 @@ Perform the _clone-to-launch_ steps with these terminal commands.
   npm install
 </code-example>
 
-
 {@a download}
 
 ## Download
+
 <a href="https://github.com/angular/quickstart/archive/master.zip" title="Download the QuickStart seed repository">Download the QuickStart seed</a>
 and unzip it into your project folder. Then perform the remaining steps with these terminal commands.
 
@@ -49,25 +48,18 @@ and unzip it into your project folder. Then perform the remaining steps with the
   npm install
 </code-example>
 
-
 {@a non-essential}
 
 ## Delete _non-essential_ files (optional)
 
 You can quickly delete the _non-essential_ files that concern testing and QuickStart repository maintenance
-(***including all git-related artifacts*** such as the `.git` folder and `.gitignore`!).
-
+(**_including all git-related artifacts_** such as the `.git` folder and `.gitignore`!).
 
 <div class="alert is-important">
 
-
-
 Do this only in the beginning to avoid accidentally deleting your own tests and git setup!
 
-
 </div>
-
-
 
 Open a terminal window in the project folder and enter the following commands for your environment:
 
@@ -80,8 +72,6 @@ Open a terminal window in the project folder and enter the following commands fo
 
 </code-example>
 
-
-
 ### Windows
 
 <code-example language="sh">
@@ -91,7 +81,6 @@ Open a terminal window in the project folder and enter the following commands fo
 
 </code-example>
 
-
 ## Update dependency versions
 
 Since the quickstart repository is deprecated, it is no longer updated and you need some additional steps to use the latest Angular.
@@ -99,75 +88,72 @@ Since the quickstart repository is deprecated, it is no longer updated and you n
 1. Remove the obsolete `@angular/http` package (both from `package.json > dependencies` and `src/systemjs.config.js > SystemJS.config() > map`).
 
 2. Install the latest versions of the Angular framework packages by running:
+
    ```sh
    npm install --save @angular/common@latest @angular/compiler@latest @angular/core@latest @angular/forms@latest @angular/platform-browser@latest @angular/platform-browser-dynamic@latest @angular/router@latest
    ```
 
 3. Install the latest versions of other packages used by Angular (RxJS, TypeScript, Zone.js) by running:
+
    ```sh
    npm install --save rxjs@latest zone.js@latest
    npm install --save-dev typescript@latest
    ```
 
 4. Install the `systemjs-plugin-babel` package. This will later be used to load the Angular framework files, which are in ES2015 format, using SystemJS.
+
    ```sh
    npm install --save systemjs-plugin-babel@latest
    ```
 
 5. In order to be able to load the latest Angular framework packages (in ES2015 format) correctly, replace the relevant entries in `src/systemjs.config.js`:
 
-    <code-examples
-        path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
-        region="angular-paths">
-    </code-example>
+   <code-examples
+       path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
+       region="angular-paths">
+   </code-example>
 
 6. In order to be able to load the latest RxJS package correctly, replace the relevant entries in `src/systemjs.config.js`:
 
-    <code-examples
-        path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
-        region="rxjs-paths">
-    </code-example>
+   <code-examples
+       path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
+       region="rxjs-paths">
+   </code-example>
 
 7. In order to be able to load the `tslib` package (which is required for files transpiled by TypeScript), add the following entry to `src/systemjs.config.js`:
 
-    <code-examples
-        path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
-        region="tslib-paths">
-    </code-example>
+   <code-examples
+       path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
+       region="tslib-paths">
+   </code-example>
 
 8. In order for SystemJS to be able to load the ES2015 Angular files correctly, add the following entries to `src/systemjs.config.js`:
 
-    <code-examples
-        path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
-        region="plugin-babel">
-    </code-example>
+   <code-examples
+       path="upgrade-phonecat-2-hybrid/systemjs.config.1.js"
+       region="plugin-babel">
+   </code-example>
 
 9. Finally, in order to prevent TypeScript typecheck errors for dependencies, add the following entry to `src/tsconfig.json`:
-    ```json
-    {
-      "compilerOptions": {
-        "skipLibCheck": true,
-        // ...
-      }
-    }
-    ```
+   ```json
+   {
+     "compilerOptions": {
+       "skipLibCheck": true
+       // ...
+     }
+   }
+   ```
 
 With that, you can now run `npm start` and have the application built and served.
 Once built, the application will be automatically opened in a new browser tab and it will be automatically reloaded when you make changes to the source code.
 
-
 {@a seed}
 
-
-
 ## What's in the QuickStart seed?
-
-
 
 The **QuickStart seed** provides a basic QuickStart playground application and other files necessary for local development.
 Consequently, there are many files in the project folder on your machine,
 most of which you can [learn about later](guide/file-structure).
-
 
 <div class="alert is-helpful">
 
@@ -177,9 +163,7 @@ most of which you can [learn about later](guide/file-structure).
 
 {@a app-files}
 
-
 Focus on the following three TypeScript (`.ts`) files in the **`/src`** folder.
-
 
 <div class='filetree'>
 
@@ -213,8 +197,6 @@ Focus on the following three TypeScript (`.ts`) files in the **`/src`** folder.
 
 </div>
 
-
-
 <code-tabs>
 
   <code-pane header="src/app/app.component.ts" path="setup/src/app/app.component.ts">
@@ -231,8 +213,6 @@ Focus on the following three TypeScript (`.ts`) files in the **`/src`** folder.
 
 </code-tabs>
 
-
-
 All guides and cookbooks have _at least these core files_.
 Each file has a distinct purpose and evolves independently as the application grows.
 
@@ -245,12 +225,9 @@ unless told to do otherwise.
 
 The following are all in `src/`
 
-
 <style>
   td, th {vertical-align: top}
 </style>
-
-
 
 <table width="100%">
 
@@ -327,7 +304,6 @@ The following are all in `src/`
   </tr>
 
 </table>
-
 
 ## Appendix: Test using `fakeAsync()/waitForAsync()`
 

@@ -16,20 +16,19 @@ Choose from the following modes:
 
 <div class="alert is-important">
 
-  `ViewEncapsulation.ShadowDom` only works on browsers that have built-in support
-  for the shadow DOM (see [Can I use - Shadow DOM v1](https://caniuse.com/shadowdomv1)).
-  Not all browsers support it, which is why the `ViewEncapsulation.Emulated` is the recommended and default mode.
+`ViewEncapsulation.ShadowDom` only works on browsers that have built-in support
+for the shadow DOM (see [Can I use - Shadow DOM v1](https://caniuse.com/shadowdomv1)).
+Not all browsers support it, which is why the `ViewEncapsulation.Emulated` is the recommended and default mode.
 
 </div>
 
-
 {@a inspect-generated-css}
 
-## 生成されたCSSの検査 {@a inspecting-generated-css}
+## 生成された CSS の検査 {@a inspecting-generated-css}
 
-エミュレートされたビューのカプセル化を使用する場合、Angularはすべてのコンポーネントのスタイルを事前に処理し、コンポーネントのビューにのみ適用されるようにします。
+エミュレートされたビューのカプセル化を使用する場合、Angular はすべてのコンポーネントのスタイルを事前に処理し、コンポーネントのビューにのみ適用されるようにします。
 
-実行中のAngularアプリケーションのDOMでは、エミュレートされたビューカプセル化を使用しているコンポーネントに属する要素には、いくつかの特別な属性が付加されています。
+実行中の Angular アプリケーションの DOM では、エミュレートされたビューカプセル化を使用しているコンポーネントに属する要素には、いくつかの特別な属性が付加されています。
 
 <code-example format="html" language="html">
   &lt;hero-details _nghost-pmm-5>
@@ -45,9 +44,9 @@ There are two kinds of such attributes:
 - `_nghost` attributes are added to elements that enclose a component's view and that would be ShadowRoots in a native Shadow DOM encapsulation. This is typically the case for components' host elements.
 - `_ngcontent` attributes are added to child element within a component's view, those are used to match the elements with their respective emulated ShadowRoots (host elements with a matching `_nghost` attribute).
 
-これらの属性の正確な値は、Angularのプライベートな実装の詳細です。これらは自動的に生成されるので、アプリケーションのコードで参照することはできません。
+これらの属性の正確な値は、Angular のプライベートな実装の詳細です。これらは自動的に生成されるので、アプリケーションのコードで参照することはできません。
 
-これらは、DOMの `<head>` セクションに注入される、生成されたコンポーネントスタイルによってターゲットにされます。
+これらは、DOM の `<head>` セクションに注入される、生成されたコンポーネントスタイルによってターゲットにされます。
 
 <code-example format="css" language="css">
   [_nghost-pmm-5] {
@@ -55,13 +54,13 @@ There are two kinds of such attributes:
     border: 1px solid black;
   }
 
-  h3[_ngcontent-pmm-6] {
-    background-color: white;
-    border: 1px solid #777;
-  }
+h3[_ngcontent-pmm-6] {
+background-color: white;
+border: 1px solid #777;
+}
 </code-example>
 
-これらのスタイルは、各CSSセレクターが適切な `_nghost` または `_ngcontent` 属性で修飾されるように、後処理が行われます。これらの修正されたセレクターは、コンポーネントのビューに適用されるスタイルが、分離され、ターゲット化された方法であることを確認します。
+これらのスタイルは、各 CSS セレクターが適切な `_nghost` または `_ngcontent` 属性で修飾されるように、後処理が行われます。これらの修正されたセレクターは、コンポーネントのビューに適用されるスタイルが、分離され、ターゲット化された方法であることを確認します。
 
 ## Mixing encapsulation modes
 
@@ -77,11 +76,11 @@ Although possible, this is not recommended. If it is really needed you should be
 
 <div class="alert is-helpful">
 
-  Styles of `ViewEncapsulation.Emulated` and `ViewEncapsulation.None` components are also added to the shadow DOM host of each `ViewEncapsulation.ShadowDom` component.
+Styles of `ViewEncapsulation.Emulated` and `ViewEncapsulation.None` components are also added to the shadow DOM host of each `ViewEncapsulation.ShadowDom` component.
 
-  This means that styles for components with `ViewEncapsulation.None` will affect matching elements within shadow DOMs.
+This means that styles for components with `ViewEncapsulation.None` will affect matching elements within shadow DOMs.
 
-  This approach may seem counter-intuitive at first, but without it a component with `ViewEncapsulation.None` would be rendered differently within a component using `ViewEncapsulation.ShadowDom`, since its styles would not be available.
+This approach may seem counter-intuitive at first, but without it a component with `ViewEncapsulation.None` would be rendered differently within a component using `ViewEncapsulation.ShadowDom`, since its styles would not be available.
 
 </div>
 
@@ -99,7 +98,7 @@ The first example shows a component that has `ViewEncapsulation.None`. This comp
 
 Angular adds the styles for this component as global styles to the `<head>` of the document.
 
-すでに述べたように、AngularはすべてのシャドウDOMホストにスタイルを追加します。したがって、スタイルはアプリケーション全体で利用可能です。
+すでに述べたように、Angular はすべてのシャドウ DOM ホストにスタイルを追加します。したがって、スタイルはアプリケーション全体で利用可能です。
 
 <img src="generated/images/guide/view-encapsulation/no-encapsulation.png" alt="component with no encapsulation">
 

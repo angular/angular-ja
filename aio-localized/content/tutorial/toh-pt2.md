@@ -5,10 +5,9 @@
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+For the sample app that this page describes, see the <live-example></live-example>.
 
 </div>
-
 
 ## ヒーローのモックを作成する
 
@@ -18,7 +17,7 @@
 ひとまず、サーバーからデータが返ってきたと仮定して _ヒーローのモック_ を作成しましょう。
 
 `mock-heroes.ts` と呼ばれるファイルを `src/app/` フォルダに作成してください。
-`HEROES` 定数を10人のヒーローの配列として定義し、エクスポートしてください。
+`HEROES` 定数を 10 人のヒーローの配列として定義し、エクスポートしてください。
 ファイルは次のようになるでしょう。
 
 <code-example path="toh-pt2/src/app/mock-heroes.ts" header="src/app/mock-heroes.ts"></code-example>
@@ -39,10 +38,10 @@
 
 `HeroesComponent` テンプレートを開き、次のように変更してください：
 
-* `<h2>` を先頭に追加してください
-* その下にHTMLの順不同リスト (`<ul>`) を追加してください
-* `<li>` を `hero` プロパティを表示する `<ul>` の内側に挿入してください
-* スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは間もなく追加します）
+- `<h2>` を先頭に追加してください
+- その下に HTML の順不同リスト (`<ul>`) を追加してください
+- `<li>` を `hero` プロパティを表示する `<ul>` の内側に挿入してください
+- スタイルを設定するためにいくつかの CSS のクラスを振ります（CSS のスタイルは間もなく追加します）
 
 このようになります：
 
@@ -57,13 +56,13 @@
 
 この例の構文は次のとおりです。
 
-* `<li>` はホスト要素です
-* `heroes` は モックのヒーローリストを保持する`HeroesComponent` クラスのリストです
-* `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持します
+- `<li>` はホスト要素です
+- `heroes` は モックのヒーローリストを保持する`HeroesComponent` クラスのリストです
+- `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持します
 
 <div class="alert is-important">
 
-`ngFor` の前のアスタリスク(*)を忘れないでください。これは構文において重要な部分です。
+`ngFor` の前のアスタリスク(\*)を忘れないでください。これは構文において重要な部分です。
 
 </div>
 
@@ -80,13 +79,13 @@
 
 `styles.css` にさらにスタイルを追加し、コンポーネントを追加するときにそのスタイルシートを拡大し続けることができます
 
-あなたは特定のコンポーネントのためにプライベートなスタイルを定義し、コンポーネントが必要とするすべて &mdash; コードや、HTML、CSS&mdash; を1箇所にまとめて管理することを好むかもしれません。
+あなたは特定のコンポーネントのためにプライベートなスタイルを定義し、コンポーネントが必要とするすべて &mdash; コードや、HTML、CSS&mdash; を 1 箇所にまとめて管理することを好むかもしれません。
 
 このアプローチは他の場所でコンポーネントを再利用することを容易にし、グローバルに適用されたスタイルが異なる場合であってもコンポーネントが意図した外観を提供します。
 
 プライベートなスタイルは `@Component.styles` 配列内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 配列の中で識別されるスタイルシートファイルとして定義します。
 
-CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
+CLI が `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
 `@Component.styleUrls` はこのように指し示されます。
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="metadata"
@@ -99,7 +98,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 <div class="alert is-important">
 
 `@Component` のメタデータで識別されたスタイルとスタイルシートは、特定のコンポーネントにスコープされます。
-`heroes.component.css` のスタイルは `HeroesComponent` にのみ適用され、他のHTMLや他のどのコンポーネント内のHTMLにも影響しません。
+`heroes.component.css` のスタイルは `HeroesComponent` にのみ適用され、他の HTML や他のどのコンポーネント内の HTML にも影響しません。
 
 </div>
 
@@ -115,14 +114,12 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" header="heroes.component.html (template excerpt)"></code-example>
 
-これはAngularの [イベントバインディング](guide/event-binding) シンタックスにおける1つの例です。
+これは Angular の [イベントバインディング](guide/event-binding) シンタックスにおける 1 つの例です。
 
-`click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
-ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
-
+`click` を囲っている括弧は Angular に `<li>` 要素の `click` イベントであることを伝えます。
+ユーザーが `<li>` をクリックすると、Angular は `onSelect(hero)` 式を実行します。
 
 次のセクションでは、 `HeroesComponent`で`onSelect()`メソッドを定義して、`*ngFor`式で定義されたヒーローを表示します。
-
 
 ### クリックイベントのハンドラーを追加する
 
@@ -155,17 +152,16 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 `selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
 
-### 修正しましょう - _*ngIf_ を使って空のdetailsを非表示にする
+### 修正しましょう - _\*ngIf_ を使って空の details を非表示にする
 
 コンポーネントは `selectedHero` が存在する場合のみ、選択されたヒーローの詳細を表示する必要があります。
 
-ヒーローの詳細をHTMLの `<div>` で囲ってください。
-Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHero` に設定してください。
-
+ヒーローの詳細を HTML の `<div>` で囲ってください。
+Angular の `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHero` に設定してください。
 
 <div class="alert is-important">
 
-`ngIf` の前のアスタリスク(*)を忘れないでください。これは構文において重要な部分です。
+`ngIf` の前のアスタリスク(\*)を忘れないでください。これは構文において重要な部分です。
 
 </div>
 
@@ -179,27 +175,27 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 ### なぜこれが動くのか
 
-`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。心配する `selectedHero` へのバインディングは存在しません。
+`selectedHero` が定義されていないとき、 `ngIf` は DOM からヒーローの詳細を削除します。心配する `selectedHero` へのバインディングは存在しません。
 
-ユーザーがヒーローを選択すると `selectedHero` は値を持ち `ngIf` はヒーローの詳細をDOMの中に挿入します。
+ユーザーがヒーローを選択すると `selectedHero` は値を持ち `ngIf` はヒーローの詳細を DOM の中に挿入します。
 
 ### 選択されたヒーローを装飾する
 
-選択されたヒーローを識別しやすくするために、[先に追加したスタイル](#styles)の中の`.selected`というCSSクラスを使用することができます。
+選択されたヒーローを識別しやすくするために、[先に追加したスタイル](#styles)の中の`.selected`という CSS クラスを使用することができます。
 ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するには、クラスバインディングを使用します。
 
 <div class="lightbox">
   <img src='generated/images/guide/toh/heroes-list-selected.png' alt="Selected hero with dark background and light text that differentiates it from unselected list items">
 </div>
 
-Angularの [クラスバインディング](guide/attribute-binding#class-binding) は条件に応じたCSSクラスの追加と削除ができます。
+Angular の [クラスバインディング](guide/attribute-binding#class-binding) は条件に応じた CSS クラスの追加と削除ができます。
 装飾したい要素に `[class.some-css-class]="some-condition"` を追加するだけです。
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
 
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" header="heroes.component.html (toggle the 'selected' CSS class)"></code-example>
 
-現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはそのクラスを削除します。
+現在の行のヒーローが `selectedHero` と同じ場合、Angular は `selected` の CSS クラスを追加します。2 つのヒーローが異なる場合には、Angular はそのクラスを削除します。
 
 完成した `<li>` はこのようになります：
 
@@ -227,8 +223,8 @@ Angularの [クラスバインディング](guide/attribute-binding#class-bindin
 
 ## まとめ
 
-* 「Tour of Heroes」アプリケーションはヒーローのリストと詳細ビューを表示します
-* ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
-* リストを表示するために `*ngFor` を使いました
-* HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました
-* CSSスタイルのclassを `クラス` バインディングで切り替えることができます
+- 「Tour of Heroes」アプリケーションはヒーローのリストと詳細ビューを表示します
+- ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
+- リストを表示するために `*ngFor` を使いました
+- HTML のブロックを条件付きで含める、または除外するために `*ngIf` を使いました
+- CSS スタイルの class を `クラス` バインディングで切り替えることができます

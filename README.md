@@ -19,7 +19,6 @@
 
 Made with [contributors-img](https://contrib.rocks).
 
-
 ## コントリビューション大歓迎！
 
 この翻訳プロジェクトにはみなさんの協力が必要です。
@@ -30,7 +29,6 @@ Made with [contributors-img](https://contrib.rocks).
 
 具体的なワークフローは [CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。
 
-
-## [For Maintainers] originの更新
+## [For Maintainers] origin の更新
 
 [UPDATE_ORIGIN.md](UPDATE_ORIGIN.md)

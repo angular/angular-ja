@@ -33,12 +33,12 @@ In addition, the template statements parser specifically supports both basic ass
 
 The following JavaScript and template expression syntax is not allowed:
 
-* `new`
-* <code>new</code>
-* `++` や `--` などの、インクリメント、デクリメント演算子
-* `+=` and `-=` などの代入演算子
-* ビット演算子 `|` や `&`
-* [パイプ演算子](guide/pipes)
+- `new`
+- <code>new</code>
+- `++` や `--` などの、インクリメント、デクリメント演算子
+- `+=` and `-=` などの代入演算子
+- ビット演算子 `|` や `&`
+- [パイプ演算子](guide/pipes)
 
 ## 文のコンテキスト
 
@@ -62,11 +62,11 @@ In this example, the context of the `$event` object, `hero`, and `#heroForm` is 
 
 ## Statement best practices
 
-* **Conciseness**
+- **Conciseness**
 
   Use method calls or basic property assignments to keep template statements minimal.
 
-* **Work within the context**
+- **Work within the context**
 
   The context of a template statement can be the component class instance or the template.
   Because of this, template statements cannot refer to anything in the global namespace such as `window` or `document`.

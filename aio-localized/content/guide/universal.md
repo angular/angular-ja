@@ -15,19 +15,20 @@ CLI の schematic `@nguniversal/express-engine` は、以下で説明するよ�
 
 <div class="alert is-helpful">
 
-  Angular Universal requires an [active LTS or maintenance LTS](https://nodejs.org/about/releases) version of Node.js.
-  See the `engines` property in the [package.json](https://unpkg.com/browse/@angular/platform-server/package.json) file to learn about the currently supported versions.
+Angular Universal requires an [active LTS or maintenance LTS](https://nodejs.org/about/releases) version of Node.js.
+See the `engines` property in the [package.json](https://unpkg.com/browse/@angular/platform-server/package.json) file to learn about the currently supported versions.
 
 </div>
 
 <div class="alert is-helpful">
 
-  **メモ:** [Node.js® Express](https://expressjs.com/) サーバーで実行される
-  <live-example downloadOnly>完成したサンプルコードをダウンロード</live-example>します。
+**メモ:** [Node.js® Express](https://expressjs.com/) サーバーで実行される
+<live-example downloadOnly>完成したサンプルコードをダウンロード</live-example>します。
 
 </div>
 
 {@a the-example}
+
 ## Universal チュートリアル
 
 [ツアー オブ ヒーローズ チュートリアル](tutorial) は、このチュートリアルの基礎です。
@@ -80,9 +81,10 @@ npm run dev:ssr
 
 クライアント側のスクリプトのダウンロードに時間がかかるように (次の手順) ネットワーク速度を調整する場合、
 次のことに気づくでしょう:
-* ヒーローを追加または削除することはできません。
-* ダッシュボードページの検索ボックスは無視されます。
-* 詳細ページの *戻る* ボタンと *保存* ボタンは機能しません。
+
+- ヒーローを追加または削除することはできません。
+- ダッシュボードページの検索ボックスは無視されます。
+- 詳細ページの _戻る_ ボタンと _保存_ ボタンは機能しません。
 
 `routerLink` クリック以外のユーザーイベントはサポートされていません。
 完全なクライアントアプリケーションがブートストラップして実行されるのを待つか、
@@ -95,15 +97,16 @@ npm run dev:ssr
 
 1. Chrome Dev Tools を開き、ネットワークタブに移動します。
 1. メニューバーの右端にある [Network Throttling](https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#throttling)
-ドロップダウンを見つけます。
+   ドロップダウンを見つけます。
 1. "3G" 速度のいずれかを試します。
 
 サーバーレンダリングされたアプリケーションは引き続き迅速に起動しますが、完全なクライアントアプリケーションの読み込みには数秒かかる場合があります。
 
 {@a why-do-it}
+
 ## サーバーサイドレンダリングを使用する理由
 
-アプリケーションの Universal バージョンを作成する主な理由は3つあります。
+アプリケーションの Universal バージョンを作成する主な理由は 3 つあります。
 
 1. [検索エンジン最適化 (SEO)](https://support.google.com/webmasters/answer/7451184?hl=ja)による Web クローラーの促進
 1. モバイルおよび非力なデバイスのパフォーマンスを改善する
@@ -111,6 +114,7 @@ npm run dev:ssr
 
 {@a seo}
 {@a web-crawlers}
+
 ### Web クローラーを促進する (SEO)
 
 Google、Bing、Facebook、Twitter、およびその他のソーシャルメディアサイトは、Web クローラーに依存してアプリケーションコンテンツのインデックスを作成し、
@@ -120,18 +124,20 @@ Google、Bing、Facebook、Twitter、およびその他のソーシャルメデ�
 Angular Universal は、JavaScript なしで簡単に検索、リンク、ナビゲートできるアプリケーションの静的バージョンを生成できます。また、Universal は、各 URL が完全にレンダリングされたページを返すため、サイトプレビューを利用可能にします。
 
 {@a no-javascript}
+
 ### モバイルおよび非力なデバイスのパフォーマンスを改善する
 
-一部のデバイスはJavaScriptをサポートしていないか、JavaScriptの実行が不十分であるため、
+一部のデバイスは JavaScript をサポートしていないか、JavaScript の実行が不十分であるため、
 そのユーザー体験は受け入れがたいものです。
-このような場合、サーバーレンダリングされたJavaScriptなしのアプリケーションが必要になる場合があります。
+このような場合、サーバーレンダリングされた JavaScript なしのアプリケーションが必要になる場合があります。
 このバージョンは、制限はありますが、アプリケーションをまったく使用できなかった場合の唯一の実用的な代替手段になる可能性があります。
 
 {@a startup-performance}
+
 ### 最初のページをすばやく表示する
 
 最初のページをすばやく表示することは、ユーザーエンゲージメントにとって重要です。
-読み込みが高速なページは、[100ミリ秒の小さな変更でも](https://web.dev/shopping-for-speed-on-ebay/)パフォーマンスが向上します。
+読み込みが高速なページは、[100 ミリ秒の小さな変更でも](https://web.dev/shopping-for-speed-on-ebay/)パフォーマンスが向上します。
 これらのユーザーが何か他のことをする前にエンゲージするには、アプリケーションの起動を高速化する必要があります。
 
 Angular Universal を使用すると、完全なアプリケーションのように見えるアプリケーションのランディングページを生成できます。
@@ -144,6 +150,7 @@ Angular Universal を使用すると、完全なアプリケーションのよ�
 アプリケーションが完全に読み込まれた後、完全なインタラクティブエクスペリエンスを取得します。
 
 {@a how-does-it-work}
+
 ## Universal Web サーバー
 
 Universal Web サーバーは、[Universal テンプレートエンジン](#universal-engine)によってレンダリングされた静的 HTML でアプリケーションページリクエストに応答します。
@@ -154,8 +161,8 @@ Universal Web サーバーは、[Universal テンプレートエンジン](#univ
 
 <div class="alert is-helpful">
 
-  **メモ:** Universal の `renderModule()` 関数を呼び出すことができる限り、_どの_ Web サーバーテクノロジーでも Universal アプリケーションを提供できます。
-  ここで説明する原則と決定事項は、すべての Web サーバーテクノロジーに適用されます。
+**メモ:** Universal の `renderModule()` 関数を呼び出すことができる限り、_どの_ Web サーバーテクノロジーでも Universal アプリケーションを提供できます。
+ここで説明する原則と決定事項は、すべての Web サーバーテクノロジーに適用されます。
 
 </div>
 
@@ -167,7 +174,7 @@ Universal Web サーバーは、[Universal テンプレートエンジン](#univ
 キャッシングやその他の有用なユーティリティを提供します。
 
 `renderModule()` 関数は、入力としてテンプレート HTML ページ (通常は `index.html`)、
-コンポーネントを含む Angular *モジュール*、および表示するコンポーネントを決定する *ルート* を受け取ります。
+コンポーネントを含む Angular _モジュール_、および表示するコンポーネントを決定する _ルート_ を受け取ります。
 ルートは、クライアントの要求からサーバーに到達します。
 
 各リクエストの結果、リクエストされたルートの適切なビューが表示されます。
@@ -191,8 +198,8 @@ Angular がそれを提供しない場合、ブラウザ内ではブラウザ AP
 アプリケーションは、受信するクライアントリクエストのみに基づいてレンダリングするものを決定する必要があります。
 これは、アプリケーションを[ルーティング可能](guide/router)にするためのよい議論です。
 
-
 {@a universal-engine}
+
 ### Universal テンプレートエンジン
 
 `server.ts` ファイルの重要な部分は `ngExpressEngine()` 関数です。
@@ -203,8 +210,8 @@ Angular がそれを提供しない場合、ブラウザ内ではブラウザ AP
 `ngExpressEngine()` 関数は、クライアントのリクエストをサーバーレンダリングされた HTML ページに変換する
 Universal の `renderModule()` 関数のラッパーです。次のプロパティをもつオブジェクトを受け入れます。
 
-* `bootstrap`: The root `NgModule` or `NgModule` factory to use for bootstraping the app when rendering on the server. For the example app, it is `AppServerModule`. It's the bridge between the Universal server-side renderer and the Angular application.
-* `extraProviders`: This is optional and lets you specify dependency providers that apply only when rendering the app on the server. You can do this when your app needs information that can only be determined by the currently running server instance.
+- `bootstrap`: The root `NgModule` or `NgModule` factory to use for bootstraping the app when rendering on the server. For the example app, it is `AppServerModule`. It's the bridge between the Universal server-side renderer and the Angular application.
+- `extraProviders`: This is optional and lets you specify dependency providers that apply only when rendering the app on the server. You can do this when your app needs information that can only be determined by the currently running server instance.
 
 `ngExpressEngine()` 関数は、レンダリングされたページに解決される `Promise` コールバックを返します。
 そのページをどう処理するかはエンジン次第です。
@@ -213,8 +220,8 @@ Web サーバーはそれを HTTP レスポンスでクライアントに転送�
 
 <div class="alert is-helpful">
 
-  **メモ:**  これらのラッパーは、`renderModule()` 関数の複雑さを隠すのに役立ちます。
-  [Universal リポジトリ](https://github.com/angular/universal)には、さまざまなバックエンドテクノロジー用のラッパーがさらにあります。
+**メモ:** これらのラッパーは、`renderModule()` 関数の複雑さを隠すのに役立ちます。
+[Universal リポジトリ](https://github.com/angular/universal)には、さまざまなバックエンドテクノロジー用のラッパーがさらにあります。
 
 </div>
 
@@ -234,7 +241,7 @@ Web サーバーは、_アプリのページのリクエスト_ を他の種類�
 (データリクエストにも拡張子はありませんが、常に `/api` で始まるため、簡単に認識できます。)
 すべての静的アセットリクエストには (`main.js` や `/node_modules/zone.js/bundles/zone.umd.js` など) ファイル拡張子があります。
 
-ルーティングを使用するため、3種類のリクエストを簡単に認識して、異なる方法で処理できます。
+ルーティングを使用するため、3 種類のリクエストを簡単に認識して、異なる方法で処理できます。
 
 1. **データリクエスト**: `/api` で始まるリクエスト URL
 1. **アプリケーションのナビゲーション**: ファイル拡張子のないリクエスト URL
@@ -247,11 +254,11 @@ Node.js Express サーバーパイプラインは、データリクエスト用�
 
 <div class="alert is-helpful">
 
-  **メモ:** このサンプルサーバーはデータリクエストを処理しません。
+**メモ:** このサンプルサーバーはデータリクエストを処理しません。
 
-  チュートリアルの「インメモリ Web API」モジュールであるデモおよび開発ツールは、
-  すべての HTTP 呼び出しをインターセプトし、リモートデータサーバーの動作をシミュレートします。
-  実際には、このモジュールを削除して、Web API ミドルウェアをサーバーに登録します。
+チュートリアルの「インメモリ Web API」モジュールであるデモおよび開発ツールは、
+すべての HTTP 呼び出しをインターセプトし、リモートデータサーバーの動作をシミュレートします。
+実際には、このモジュールを削除して、Web API ミドルウェアをサーバーに登録します。
 
 </div>
 

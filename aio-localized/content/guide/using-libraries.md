@@ -1,21 +1,21 @@
 # Usage of Angular libraries published to npm
 
 Angular アプリケーションを構築する際には、高度な自社製ライブラリや、サードパーティライブラリの豊富なエコシステムを活用できます。
-[Angular Material][AngularMaterialMain] is an example of a sophisticated first-party library.
-For links to the most popular libraries, see [Angular Resources][AioResources].
+[Angular Material][angularmaterialmain] is an example of a sophisticated first-party library.
+For links to the most popular libraries, see [Angular Resources][aioresources].
 
 ## ライブラリのインストール
 
-ライブラリは、通常それらを Angular CLI と統合するスキーマとともに、[npm パッケージ][AioGuideNpmPackages]として公開されます。
+ライブラリは、通常それらを Angular CLI と統合するスキーマとともに、[npm パッケージ][aioguidenpmpackages]として公開されます。
 再利用可能なライブラリコードをアプリケーションに統合するには、パッケージをインストールし、提供されている機能を使用する場所にインポートする必要があります。
-公開されているほとんどのAngularライブラリでは、Angular CLI の `ng add <lib_name>` コマンドを使用できます。
+公開されているほとんどの Angular ライブラリでは、Angular CLI の `ng add <lib_name>` コマンドを使用できます。
 
 The `ng add` Angular CLI command uses a package manager to install the library package and invokes schematics that are included in the package to other scaffolding within the project code.
-Examples of package managers include [npm][NpmjsMain] or [yarn][YarnpkgMain].
+Examples of package managers include [npm][npmjsmain] or [yarn][yarnpkgmain].
 Additional scaffolding within the project code includes import statements, fonts, and themes.
 
 公開ライブラリは通常、そのライブラリをアプリケーションに追加する方法についての `README` またはその他のドキュメントを提供します。
-For an example, see the [Angular Material][AngularMaterialMain] documentation.
+For an example, see the [Angular Material][angularmaterialmain] documentation.
 
 ### ライブラリの型定義
 
@@ -45,21 +45,21 @@ TypeScript はデフォルトで `node_modules/@types` ディレクトリで型�
     <code-example format="typescript" language="typescript">
 
     declare module 'host' {
-      export interface Host {
-        protocol?: string;
-        hostname?: string;
-        pathname?: string;
-      }
-      export function parse(url: string, queryString?: string): Host;
+    export interface Host {
+    protocol?: string;
+    hostname?: string;
+    pathname?: string;
+    }
+    export function parse(url: string, queryString?: string): Host;
     }
 
     </code-example>
 
-3. ライブラリを使用するコンポーネントまたはファイルに、次のコードを追加します。
+1.  ライブラリを使用するコンポーネントまたはファイルに、次のコードを追加します。
 
     <code-example format="typescript" language="typescript">
 
-    import * as host from 'host';
+    import \* as host from 'host';
     const parsedUrl = host.parse('https://angular.io');
     console.log(parsedUrl.hostname);
 
@@ -70,21 +70,21 @@ TypeScript はデフォルトで `node_modules/@types` ディレクトリで型�
 ## ライブラリを更新する
 
 ライブラリは、公開者が更新することができ、そしてまた最新に保つ必要がある自身の依存関係を持っています。
-To check for updates to your installed libraries, use the [`ng update`][AioCliUpdate] Angular CLI command.
+To check for updates to your installed libraries, use the [`ng update`][aiocliupdate] Angular CLI command.
 
 個々のライブラリのバージョンを更新するには、`ng update <lib_name>` を使用します。
 Angular CLI はライブラリの最新リリースをチェックし、最新バージョンがインストール済みバージョンより新しい場合はそれをダウンロードし、最新バージョンに一致するように `package.json` を更新します。
 
 Angular を新しいバージョンにアップデートするときは、使用しているライブラリが最新のものであることを確認する必要があります。
 ライブラリに相互依存関係がある場合は、それらを特定の順序で更新する必要があります。
-[Angular 更新ガイド][AngularUpdateMain] を参照してください。
+[Angular 更新ガイド][angularupdatemain] を参照してください。
 
 ## 実行時グローバルスコープへのライブラリの追加
 
 アプリケーションにインポートされていない従来の JavaScript ライブラリは、ランタイムグローバルスコープに追加して、あたかも script タグの中にあるかのように読み込むことができます。
-Configure the Angular CLI to do this at build time using the `scripts` and `styles` options of the build target in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file.
+Configure the Angular CLI to do this at build time using the `scripts` and `styles` options of the build target in the [`angular.json`][aioguideworkspaceconfig] workspace build configuration file.
 
-たとえば、 [Bootstrap 4][GetbootstrapDocs40GettingStartedIntroduction] ライブラリを使用するには、まず npm パッケージマネージャーを使用してライブラリとその依存関係をインストールします。
+たとえば、 [Bootstrap 4][getbootstrapdocs40gettingstartedintroduction] ライブラリを使用するには、まず npm パッケージマネージャーを使用してライブラリとその依存関係をインストールします。
 
 1.  Install the library and the associated dependencies using the npm package manager:
 
@@ -101,9 +101,9 @@ Configure the Angular CLI to do this at build time using the `scripts` and `styl
     <code-example format="json" language="json">
 
     "scripts": [
-      "node_modules/jquery/dist/jquery.slim.js",
-      "node_modules/popper.js/dist/umd/popper.js",
-      "node_modules/bootstrap/dist/js/bootstrap.js"
+    "node_modules/jquery/dist/jquery.slim.js",
+    "node_modules/popper.js/dist/umd/popper.js",
+    "node_modules/bootstrap/dist/js/bootstrap.js"
     ],
 
     </code-example>
@@ -113,8 +113,8 @@ Configure the Angular CLI to do this at build time using the `scripts` and `styl
     <code-example format="css" language="css">
 
     "styles": [
-      "node_modules/bootstrap/dist/css/bootstrap.css",
-      "src/styles.css"
+    "node_modules/bootstrap/dist/css/bootstrap.css",
+    "src/styles.css"
     ],
 
     </code-example>
@@ -128,7 +128,7 @@ The following code snippet is an example import statement.
 
 <code-example format="typescript" language="typescript">
 
-import * as $ from 'jquery';
+import \* as $ from 'jquery';
 
 </code-example>
 
@@ -164,7 +164,7 @@ $('.test').myPlugin();
 <code-example format="typescript" language="typescript">
 
 interface JQuery {
-  myPlugin(options?: any): any;
+myPlugin(options?: any): any;
 }
 
 </code-example>
@@ -173,30 +173,24 @@ interface JQuery {
 
 <code-example format="none" language="none">
 
-[TS][Error] Property 'myPlugin' does not exist on type 'JQuery'
+[TS][error] Property 'myPlugin' does not exist on type 'JQuery'
 
 </code-example>
 
 <!-- links -->
 
-[AioCliUpdate]: cli/update "ng update | CLI |Angular"
-
-[AioGuideNpmPackages]: guide/npm-packages "Workspace npm dependencies | Angular"
-[AioGuideWorkspaceConfig]: guide/workspace-config "Angular workspace configuration | Angular"
-
-[AioResources]: resources "Explore Angular Resources | Angular"
+[aiocliupdate]: cli/update 'ng update | CLI |Angular'
+[aioguidenpmpackages]: guide/npm-packages 'Workspace npm dependencies | Angular'
+[aioguideworkspaceconfig]: guide/workspace-config 'Angular workspace configuration | Angular'
+[aioresources]: resources 'Explore Angular Resources | Angular'
 
 <!-- external links -->
 
-[AngularMaterialMain]: https://material.angular.io "Angular Material | Angular"
-
-[AngularUpdateMain]: https://update.angular.io "Angular Update Guide | Angular"
-
-[GetbootstrapDocs40GettingStartedIntroduction]: https://getbootstrap.com/docs/4.0/getting-started/introduction "Introduction | Bootstrap"
-
-[NpmjsMain]: https://www.npmjs.com "npm"
-
-[YarnpkgMain]: https://yarnpkg.com " Yarn"
+[angularmaterialmain]: https://material.angular.io 'Angular Material | Angular'
+[angularupdatemain]: https://update.angular.io 'Angular Update Guide | Angular'
+[getbootstrapdocs40gettingstartedintroduction]: https://getbootstrap.com/docs/4.0/getting-started/introduction 'Introduction | Bootstrap'
+[npmjsmain]: https://www.npmjs.com 'npm'
+[yarnpkgmain]: https://yarnpkg.com ' Yarn'
 
 <!-- end links -->
 

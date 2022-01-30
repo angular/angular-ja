@@ -3,23 +3,23 @@
 import { watch } from 'chokidar';
 
 const contentsWatcher = watch('/aio-localized', {
-    cwd: '/aio-localized',
-    persistent: true
+  cwd: '/aio-localized',
+  persistent: true,
 });
 
 async function copyFile(path) {
-    cd('/');
-    await $`cp aio-localized/${path} origin/aio/${path}`;
+  cd('/');
+  await $`cp aio-localized/${path} origin/aio/${path}`;
 }
 
 contentsWatcher.on('change', (path) => {
-    console.log(`[watch] "${path}" has been changed.`);
-    copyFile(path);
+  console.log(`[watch] "${path}" has been changed.`);
+  copyFile(path);
 });
 
 cd('/origin/aio');
 try {
-    await $`yarn serve-and-sync --host=0.0.0.0 --disableHostCheck`;
+  await $`yarn serve-and-sync --host=0.0.0.0 --disableHostCheck`;
 } finally {
-    contentsWatcher.close();
+  contentsWatcher.close();
 }

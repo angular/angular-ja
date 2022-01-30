@@ -1,24 +1,23 @@
-# TypeScriptの設定
+# TypeScript の設定
 
-TypeScriptは、Angularアプリケーション開発の主要言語です。
-これはJavaScriptのスーパーセットで、型安全性とツールのための設計時サポートを備えています。
+TypeScript は、Angular アプリケーション開発の主要言語です。
+これは JavaScript のスーパーセットで、型安全性とツールのための設計時サポートを備えています。
 
-ブラウザはTypeScriptを直接実行できません。
-TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する必要があります。そのためにはいくつか設定が必要です。
+ブラウザは TypeScript を直接実行できません。
+TypeScript は、*tsc*コンパイラを使用して JavaScript に "変換"する必要があります。そのためにはいくつか設定が必要です。
 
-このページでは、Angular開発者にとって重要なTypeScriptの構成と環境について、
+このページでは、Angular 開発者にとって重要な TypeScript の構成と環境について、
 主に次のファイルの詳細を説明します。
 
-* [tsconfig.json](guide/typescript-configuration#tsconfig)&mdash;TypeScriptコンパイラの設定。
-* [typings](guide/typescript-configuration#typings)&mdash;TypesScriptの宣言ファイル。
-
+- [tsconfig.json](guide/typescript-configuration#tsconfig)&mdash;TypeScript コンパイラの設定。
+- [typings](guide/typescript-configuration#typings)&mdash;TypesScript の宣言ファイル。
 
 {@a tsconfig}
 
 ## 設定ファイル
 
-既定のAngularワークスペースには、いくつかのTypeScript設定ファイルが含まれています。
-ルートにある`tsconfig.json`は、ワークスペース内のすべてのプロジェクトが継承する基本となるTypeScriptとAngularコンパイラオプションを指定します。
+既定の Angular ワークスペースには、いくつかの TypeScript 設定ファイルが含まれています。
+ルートにある`tsconfig.json`は、ワークスペース内のすべてのプロジェクトが継承する基本となる TypeScript と Angular コンパイラオプションを指定します。
 
 <div class="alert is-helpful">
 
@@ -26,13 +25,13 @@ See the [Angular compiler options](guide/angular-compiler-options) guide for inf
 
 </div>
 
-TypeScriptとAngularには、型チェック機能と生成される出力を設定するために使用できる幅広いオプションがあります。
-詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
+TypeScript と Angular には、型チェック機能と生成される出力を設定するために使用できる幅広いオプションがあります。
+詳しくは TypeScript ドキュメントの[extends による設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
 
 <div class="alert is-helpful">
 
-TypeScript設定ファイルの詳細は、公式の[TypeScript wiki](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
-設定の継承について詳しくは、[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
+TypeScript 設定ファイルの詳細は、公式の[TypeScript wiki](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+設定の継承について詳しくは、[extends による設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
 
 </div>
 
@@ -60,12 +59,11 @@ Angular アプリケーションの最初の `tsconfig.json` は通常、次の�
 }
 </code-example>
 
-
 {@a noImplicitAny}
 
-### *noImplicitAny* と *suppressImplicitAnyIndexErrors*
+### _noImplicitAny_ と _suppressImplicitAnyIndexErrors_
 
-TypeScriptの開発者は、`noImplicitAny`フラグを`true`または`false`にするかどうかについては同意しません。
+TypeScript の開発者は、`noImplicitAny`フラグを`true`または`false`にするかどうかについては同意しません。
 この問題に正解はなく、あとでフラグを変更することができます。
 しかし、この選択は大規模プロジェクトにおいて大きな影響を与える可能性があるので、議論に値します。
 
@@ -73,8 +71,8 @@ TypeScriptの開発者は、`noImplicitAny`フラグを`true`または`false`に
 コンパイラが変数の型を自動推論できなかった場合は、
 型を`any`にデフォルト設定します。それは*暗黙の`any`*とみなされます。
 
-`noImplicitAny`フラグが`true`で、TypeScriptコンパイラが型を推論できない場合でも、
-JavaScriptファイルは生成されますが、**エラーも出力されます**。
+`noImplicitAny`フラグが`true`で、TypeScript コンパイラが型を推論できない場合でも、
+JavaScript ファイルは生成されますが、**エラーも出力されます**。
 これはより厳格な型チェックとなりますが、コンパイル時に型チェックが意図していないエラーをキャッチできるので、
 多くのベテラン開発者が好む傾向にあります。
 
@@ -86,47 +84,46 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 <code-example>
 
-  "suppressImplicitAnyIndexErrors": true
+"suppressImplicitAnyIndexErrors": true
 
 </code-example>
 
 <div class="alert is-helpful">
 
-TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [テンプレートの型チェック](guide/template-typecheck) を参照してください。
+TypeScript の構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [テンプレートの型チェック](guide/template-typecheck) を参照してください。
 
 </div>
 
-
 {@a typings}
 
-## TypeScriptの型定義
+## TypeScript の型定義
 
-jQuery・Jasmineテストライブラリ・Angularなどの多くのJavaScriptライブラリは、
-TypeScriptコンパイラが認識できない機能と構文を用いて
-JavaScript環境を拡張しています。
+jQuery・Jasmine テストライブラリ・Angular などの多くの JavaScript ライブラリは、
+TypeScript コンパイラが認識できない機能と構文を用いて
+JavaScript 環境を拡張しています。
 コンパイラが何かを認識できないと、エラーをスローします。
 
-TypeScriptの[型定義ファイル](https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html)（d.tsファイル）を用いて、読み込んだライブラリについてコンパイラに指示します。
+TypeScript の[型定義ファイル](https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html)（d.ts ファイル）を用いて、読み込んだライブラリについてコンパイラに指示します。
 
-TypeScript対応エディタは、これらの型定義ファイルを活用して、ライブラリ機能の型情報を表示します。
+TypeScript 対応エディタは、これらの型定義ファイルを活用して、ライブラリ機能の型情報を表示します。
 
-多くのライブラリには型定義ファイルが含まれており、TypeScriptコンパイラとエディタはそれらを見つけることができます。
-Angularはこのようなライブラリの1つです。
-Angularアプリケーションの `node_modules/@angular/core/`フォルダには、Angularのcore部分を記述するいくつかの `d.ts`ファイルが含まれています。
+多くのライブラリには型定義ファイルが含まれており、TypeScript コンパイラとエディタはそれらを見つけることができます。
+Angular はこのようなライブラリの 1 つです。
+Angular アプリケーションの `node_modules/@angular/core/`フォルダには、Angular の core 部分を記述するいくつかの `d.ts`ファイルが含まれています。
 
 <div class="alert is-helpful">
 
-`d.ts`ファイルを含む *typings* ファイルは、すでにAngularパッケージに含まれていますので、
+`d.ts`ファイルを含む _typings_ ファイルは、すでに Angular パッケージに含まれていますので、
 追加作業を行う必要はありません。
 
 </div>
 
 ### lib.d.ts
 
-TypeScriptには、 `lib.d.ts`という特別な型定義ファイルが含まれています。このファイルには、JavaScriptのランタイムとDOMに存在するさまざまな一般的なJavaScript構文のアンビエント宣言が含まれています。
+TypeScript には、 `lib.d.ts`という特別な型定義ファイルが含まれています。このファイルには、JavaScript のランタイムと DOM に存在するさまざまな一般的な JavaScript 構文のアンビエント宣言が含まれています。
 
-TypeScriptは`--target`の値に基づいて、ターゲットが`es6`なら`Promise`のような
-_追加の_アンビエント宣言を追加します。
+TypeScript は`--target`の値に基づいて、ターゲットが`es6`なら`Promise`のような
+*追加の*アンビエント宣言を追加します。
 
 デフォルトのターゲットは`es2015`です。もし`es5`をターゲットにしていれば、新しい型定義を宣言ファイルリストに含める必要があります。
 
@@ -134,7 +131,7 @@ _追加の_アンビエント宣言を追加します。
 
 ### 型定義ファイルのインストール
 
-多くのライブラリ（jQuery、Jasmine、Lodashなど）は、npmパッケージに`d.ts`ファイルが *含まれていません。*
+多くのライブラリ（jQuery、Jasmine、Lodash など）は、npm パッケージに`d.ts`ファイルが _含まれていません。_
 しかし幸いにも、著者やコミュニティのコントリビューターがこれらのライブラリ用の`d.ts`ファイルを作成し、
 公開しています。
 
@@ -155,9 +152,8 @@ declarations are only meant for testing, then only the `tsconfig.spec.json` file
 For instance, to install typings for `chai` you run `npm install @types/chai --save-dev` and then
 update `tsconfig.spec.json` to add `"chai"` to the list of `types`.
 
-
 {@a target}
 
-### *target*
+### _target_
 
 By default, the target is `es2017`, which is supported in modern browsers.

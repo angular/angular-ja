@@ -2,17 +2,17 @@
 
 # テスト
 
-Angularアプリケーションをテストすると、アプリケーションが期待どおりに動作していることを確認できます。
+Angular アプリケーションをテストすると、アプリケーションが期待どおりに動作していることを確認できます。
 
 ## Prerequisites
 
 Before writing tests for your Angular app, you should have a basic understanding of the following concepts:
 
-* Angular fundamentals
-* JavaScript
-* HTML
-* CSS
-* [Angular CLI](/cli)
+- Angular fundamentals
+- JavaScript
+- HTML
+- CSS
+- [Angular CLI](/cli)
 
 <hr>
 
@@ -21,7 +21,7 @@ This sample application is much like the one in the [_Tour of Heroes_ tutorial](
 
 <div class="alert is-helpful">
 
-  If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
+If you'd like to experiment with the application that this guide describes, you can <live-example name="testing" noDownload>run it in your browser</live-example> or <live-example name="testing" downloadOnly>download and run it locally</live-example>.
 
 </div>
 
@@ -29,17 +29,17 @@ This sample application is much like the one in the [_Tour of Heroes_ tutorial](
 
 ## セットアップ {@a set-up-testing}
 
-Angular CLIは[Jasmineテストフレームワーク](https://jasmine.github.io/) を使用してAngularアプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
+Angular CLI は[Jasmine テストフレームワーク](https://jasmine.github.io/) を使用して Angular アプリケーションのテストを行うために必要なものすべてをダウンロードしてインストールします。
 
-CLIで作成したプロジェクトは、すぐにテストする準備ができています。
-[`ng test`](cli/test)CLIコマンドを実行するだけです:
+CLI で作成したプロジェクトは、すぐにテストする準備ができています。
+[`ng test`](cli/test)CLI コマンドを実行するだけです:
 
 <code-example language="sh">
   ng test
 </code-example>
 
-`ng test`コマンドはアプリケーションを_ウォッチモード_でビルドし、
-[Karmaテストランナー](https://karma-runner.github.io)を起動します。
+`ng test`コマンドはアプリケーションを*ウォッチモード*でビルドし、
+[Karma テストランナー](https://karma-runner.github.io)を起動します。
 
 コンソールのアウトプットは次のようになります:
 
@@ -53,9 +53,9 @@ Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 </code-example>
 
 ログの最後の行がもっとも重要です。
-これはKarmaが3つのテストを走らせてすべてパスしたことを示します。
+これは Karma が 3 つのテストを走らせてすべてパスしたことを示します。
 
-Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内に次のようにテストのアウトプットを表示します。
+Chrome ブラウザも開きます。そして"Jasmine HTML Reporter"内に次のようにテストのアウトプットを表示します。
 
 <div class="lightbox">
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
@@ -71,39 +71,39 @@ Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内に次の
 
 ## 設定
 
-CLIはJasmineとKarmaの設定を引き受けてくれます。
+CLI は Jasmine と Karma の設定を引き受けてくれます。
 
 プロジェクトルートフォルダ内の`karma.conf.js`と`src/`フォルダ内の`test.ts`ファイルを編集することで
 多くのオプションの微調整ができます。
 
-`karma.conf.js`は部分的なKarma設定ファイルです。
-CLIは`angular.json`内で指定されたアプリケーション構造をベースとして、`karma.conf.js`で補完をして、メモリ内にすべてのランタイムの設定を構築します。
+`karma.conf.js`は部分的な Karma 設定ファイルです。
+CLI は`angular.json`内で指定されたアプリケーション構造をベースとして、`karma.conf.js`で補完をして、メモリ内にすべてのランタイムの設定を構築します。
 
-JasmineとKarmaの設定の詳細についてはWebで検索してください。
+Jasmine と Karma の設定の詳細については Web で検索してください。
 
 ### 他のテストフレームワーク
 
-他のテスティングライブラリとテストランナーでAngularアプリケーションのユニットテストを行うこともできます。
+他のテスティングライブラリとテストランナーで Angular アプリケーションのユニットテストを行うこともできます。
 各ライブラリとランナーはそれぞれ独自のインストール手順、設定、および構文を持ちます。
 
-詳細についてはWebで検索してください。
+詳細については Web で検索してください。
 
 ### テストファイルの名前と場所
 
 `src/app`フォルダ内部をみてください。
 
-CLIは`AppComponent`のテストとして`app.component.spec.ts`という名前のテストファイルを生成しました。
+CLI は`AppComponent`のテストとして`app.component.spec.ts`という名前のテストファイルを生成しました。
 
 <div class="alert is-important">
 
-ツールがテストに使用するファイル(または、_スペック_ファイル)だと識別できるように、テストファイルの拡張子は**`.spec.ts`でないといけません**。
+ツールがテストに使用するファイル(または、*スペック*ファイル)だと識別できるように、テストファイルの拡張子は**`.spec.ts`でないといけません**。
 
 </div>
 
 `app.component.ts`と`app.component.spec.ts`ファイルは同じフォルダ内に置きます。
 ルートのファイル名(`app.component`の部分)は双方のファイルで同じにします。
 
-あなた自身のプロジェクトの_すべての種類_のテストファイルにおいてこれら2つの慣習を採用してください。
+あなた自身のプロジェクトの*すべての種類*のテストファイルにおいてこれら 2 つの慣習を採用してください。
 
 {@a q-spec-file-location}
 
@@ -125,30 +125,28 @@ CLIは`AppComponent`のテストとして`app.component.spec.ts`という名前�
 アプリケーションの統合的なスペックでは、
 フォルダやモジュールに分散された複数のパーツの相互作用をテストできます。
 それらは本当に特にどの部分にも属していないので、
-1つのファイルの隣のような自然な置き場所がありません。
+1 つのファイルの隣のような自然な置き場所がありません。
 
 `tests`ディレクトリに適切なフォルダを作成する方がよい場合があります。
 
 もちろん、テストヘルパーをテストするスペックは、
 `test`フォルダ内の対応するヘルパーファイルの隣に置くほうがよいでしょう。
 
-
 {@a ci}
 
 ## 継続的インテグレーションのセットアップ
 
-プロジェクトのバグをなくす最善の方法の1つはテストスイートを通すことですが、いつもテストを実行するというのは簡単に忘れます。
+プロジェクトのバグをなくす最善の方法の 1 つはテストスイートを通すことですが、いつもテストを実行するというのは簡単に忘れます。
 継続的インテグレーション(CI)サーバーを使用すると、プロジェクトのリポジトリーでコミットおよびプルリクエストをするたびにテストを実行できるように設定できます。
 
-Circle CIやTravis CIのような有料のCIサービスを使用したり、Jenkinsなどを使って無料でホストすることもできます。
-Circle CIやTravis CIは有料のサービスですが、オープンソースプロジェクトには無料で提供されています。
-GitHubでパブリックなプロジェクトを作成し、無料でこれらのサービスを追加することができます。
-Angularのレポジトリへの貢献度はCircle CIとTravis CIの一連のテストを通じて自動的に実行されます。
+Circle CI や Travis CI のような有料の CI サービスを使用したり、Jenkins などを使って無料でホストすることもできます。
+Circle CI や Travis CI は有料のサービスですが、オープンソースプロジェクトには無料で提供されています。
+GitHub でパブリックなプロジェクトを作成し、無料でこれらのサービスを追加することができます。
+Angular のレポジトリへの貢献度は Circle CI と Travis CI の一連のテストを通じて自動的に実行されます。
 
-この記事では、Circle CIとTravis CIを実行するようにプロジェクトを設定する方法と、どちらの環境でもChromeブラウザでテストを実行できるようにテスト設定を更新する方法について説明します。
+この記事では、Circle CI と Travis CI を実行するようにプロジェクトを設定する方法と、どちらの環境でも Chrome ブラウザでテストを実行できるようにテスト設定を更新する方法について説明します。
 
-
-### Circle CIでプロジェクトを設定する
+### Circle CI でプロジェクトを設定する
 
 ステップ 1: プロジェクト直下に`.circleci`というフォルダを作成します。
 
@@ -173,17 +171,17 @@ jobs:
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 ```
 
-この設定は`node_modules/`をキャッシュして、CLIコマンドを実行するために[`npm run`](https://docs.npmjs.com/cli/run-script)を使用します(`@angular/cli`がグローバルにインストールされていないため)。
-2重ダッシュ(`--`)は`npm`スクリプトに引数を渡すのに必要です。
+この設定は`node_modules/`をキャッシュして、CLI コマンドを実行するために[`npm run`](https://docs.npmjs.com/cli/run-script)を使用します(`@angular/cli`がグローバルにインストールされていないため)。
+2 重ダッシュ(`--`)は`npm`スクリプトに引数を渡すのに必要です。
 
 ステップ 3: 変更をコミットし、リポジトリにプッシュします。
 
-Step 4: [Circle CIにサインアップ](https://circleci.com/docs/2.0/first-steps/)して、[あなたのプロジェクトを追加](https://circleci.com/add-projects)します。
+Step 4: [Circle CI にサインアップ](https://circleci.com/docs/2.0/first-steps/)して、[あなたのプロジェクトを追加](https://circleci.com/add-projects)します。
 プロジェクトのビルドが開始するはずです。
 
-* Circle CIの詳細については、[Circle CI documentation](https://circleci.com/docs/2.0/)を参照してください。
+- Circle CI の詳細については、[Circle CI documentation](https://circleci.com/docs/2.0/)を参照してください。
 
-### Travis CIでプロジェクトを設定する
+### Travis CI でプロジェクトを設定する
 
 ステップ 1: プロジェクト直下に次のような内容の`.travis.yml`を作成します:
 
@@ -206,14 +204,14 @@ script:
   - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 ```
 
-TravisではChromeが付属していないため、代わりにChromiumを使用していることを除いて、Circle CIの設定と同じものです。
+Travis では Chrome が付属していないため、代わりに Chromium を使用していることを除いて、Circle CI の設定と同じものです。
 
 ステップ 2: 変更をコミットし、リポジトリにプッシュします。
 
-ステップ 3: [Travis CIにサインアップ](https://travis-ci.org/auth)して、[あなたのプロジェクトを追加](https://travis-ci.org/profile)します。
+ステップ 3: [Travis CI にサインアップ](https://travis-ci.org/auth)して、[あなたのプロジェクトを追加](https://travis-ci.org/profile)します。
 ビルドをトリガーするために新しいコミットをプッシュする必要があるでしょう。
 
-* Travis CIでのテストの詳細については[Travis CI documentation](https://docs.travis-ci.com/)を参照してください。
+- Travis CI でのテストの詳細については[Travis CI documentation](https://docs.travis-ci.com/)を参照してください。
 
 ### Configure project for GitLab CI
 
@@ -265,7 +263,7 @@ You'll need to push a new commit to trigger a build.
 
 Step 3: Commit your changes and push them to your repository.
 
-* Learn more about GitLab CI testing from [GitLab CI/CD documentation](https://docs.gitlab.com/ee/ci/).
+- Learn more about GitLab CI testing from [GitLab CI/CD documentation](https://docs.gitlab.com/ee/ci/).
 
 ### Configure project for GitHub Actions
 
@@ -298,18 +296,19 @@ Step 3: [Sign up for GitHub](https://github.com/join) and [add your project](htt
 
 Step 4: Commit your changes and push them to your repository.
 
-* Learn more about GitHub Actions from [GitHub Actions documentation](https://docs.github.com/en/actions).
+- Learn more about GitHub Actions from [GitHub Actions documentation](https://docs.github.com/en/actions).
 
-### ChromeでのCIテスト用にCLIを設定する
+### Chrome での CI テスト用に CLI を設定する
 
-一般的にCLIコマンドの`ng test`があなたの環境でCIテストを実行している間、Chromeブラウザでのテストを実行するために設定を調整する必要があります。
+一般的に CLI コマンドの`ng test`があなたの環境で CI テストを実行している間、Chrome ブラウザでのテストを実行するために設定を調整する必要があります。
 
-[Karma JavaScriptテストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)の設定ファイルについて、
-サンドボックス化を使用せずにChromeを起動するように調整する必要があります。
+[Karma JavaScript テストランナー](https://karma-runner.github.io/latest/config/configuration-file.html)の設定ファイルについて、
+サンドボックス化を使用せずに Chrome を起動するように調整する必要があります。
 
-この例では[ヘッドレスChrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) を使用します。
+この例では[ヘッドレス Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome#cli) を使用します。
 
-* Karma設定ファイル、`karma.conf.js`のbrowsersの下にChromeHeadlessCIというカスタムランチャーを追加します:
+- Karma 設定ファイル、`karma.conf.js`の browsers の下に ChromeHeadlessCI というカスタムランチャーを追加します:
+
 ```
 browsers: ['ChromeHeadlessCI'],
 customLaunchers: {
@@ -328,20 +327,19 @@ customLaunchers: {
 
 <div class="alert is-helpful">
 
-   **Note:** 現時点では、Windows上で実行する場合は`--disable-gpu`フラグを含める必要があるでしょう。[crbug.com/737678](https://crbug.com/737678)を参照してください。
+**Note:** 現時点では、Windows 上で実行する場合は`--disable-gpu`フラグを含める必要があるでしょう。[crbug.com/737678](https://crbug.com/737678)を参照してください。
 
 </div>
 
-
 ## More info on testing
 
-After you've set up your app for testing, you may find the following testing  guides useful.
+After you've set up your app for testing, you may find the following testing guides useful.
 
-* [Code coverage](guide/testing-code-coverage)&mdash;find out how much of your app your tests are covering and how to specify required amounts.
-* [Testing services](guide/testing-services)&mdash;learn how to test the services your app uses.
-* [Basics of testing components](guide/testing-components-basics)&mdash;discover the basics of testing Angular components.
-* [Component testing scenarios](guide/testing-components-scenarios)&mdash;read about the various kinds of component testing scenarios and use cases.
-* [Testing attribute directives](guide/testing-attribute-directives)&mdash;learn about how to test your attribute directives.
-* [Testing pipes](guide/testing-pipes)&mdash;find out how to test pipes.
-* [Debugging tests](guide/test-debugging)&mdash;uncover common testing bugs.
-* [Testing utility APIs](guide/testing-utility-apis)&mdash;get familiar with Angular testing features.
+- [Code coverage](guide/testing-code-coverage)&mdash;find out how much of your app your tests are covering and how to specify required amounts.
+- [Testing services](guide/testing-services)&mdash;learn how to test the services your app uses.
+- [Basics of testing components](guide/testing-components-basics)&mdash;discover the basics of testing Angular components.
+- [Component testing scenarios](guide/testing-components-scenarios)&mdash;read about the various kinds of component testing scenarios and use cases.
+- [Testing attribute directives](guide/testing-attribute-directives)&mdash;learn about how to test your attribute directives.
+- [Testing pipes](guide/testing-pipes)&mdash;find out how to test pipes.
+- [Debugging tests](guide/test-debugging)&mdash;uncover common testing bugs.
+- [Testing utility APIs](guide/testing-utility-apis)&mdash;get familiar with Angular testing features.

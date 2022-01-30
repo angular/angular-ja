@@ -5,11 +5,11 @@
 
 テンプレート変数は以下を参照できます:
 
-* テンプレート内のDOM要素
-* ディレクティブ
-* 要素
-* [TemplateRef](api/core/TemplateRef)
-* <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" title="MDN: Web Components">web component</a>
+- テンプレート内の DOM 要素
+- ディレクティブ
+- 要素
+- [TemplateRef](api/core/TemplateRef)
+- <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" title="MDN: Web Components">web component</a>
 
 <div class="alert is-helpful">
 
@@ -29,38 +29,38 @@
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-phone" header="src/app/app.component.html"></code-example>
 
-## Angularがテンプレート変数に値を割り当てる方法 {@a how-angular-assigns-values-to-template-variables}
+## Angular がテンプレート変数に値を割り当てる方法 {@a how-angular-assigns-values-to-template-variables}
 
-Angularは、変数を宣言する場所に基づいてテンプレート変数に値を割り当てます:
+Angular は、変数を宣言する場所に基づいてテンプレート変数に値を割り当てます:
 
-* コンポーネントで変数を宣言すると、変数はそのコンポーネントのインスタンスを参照します。
-* 標準のHTMLタグで変数を宣言すると、変数はその要素を参照します。
-* `<ng-template>`要素で変数を宣言すると、変数はそのテンプレートを表す`TemplateRef`のインスタンスを参照します。
+- コンポーネントで変数を宣言すると、変数はそのコンポーネントのインスタンスを参照します。
+- 標準の HTML タグで変数を宣言すると、変数はその要素を参照します。
+- `<ng-template>`要素で変数を宣言すると、変数はそのテンプレートを表す`TemplateRef`のインスタンスを参照します。
   `<ng-template>`の詳細については、[構造ディレクティブ](guide/structural-directives)の[How Angular uses the asterisk, `*`, syntax](guide/structural-directives#asterisk)を参照してください。
-* 変数が`#var="ngModel"`のように右側に名前を指定すると、変数は要素において一致する`exportAs`名をもつディレクティブやコンポーネントを参照します。
+- 変数が`#var="ngModel"`のように右側に名前を指定すると、変数は要素において一致する`exportAs`名をもつディレクティブやコンポーネントを参照します。
 <!-- What does the second half of this mean?^^ Can we explain this more fully? Could I see a working example? -kw -->
 
 ### テンプレート変数を用いて`NgForm`を使う {@a using-ngform-with-template-variables}
 
-ほとんどの場合、Angularはテンプレート変数の値をそれが発生する要素に設定します。
+ほとんどの場合、Angular はテンプレート変数の値をそれが発生する要素に設定します。
 前の例では、`phone`は`<input>`の電話番号を参照しています。
 そのボタンのクリックハンドラーは、`<input>`の値をコンポーネントの`callPhone()`メソッドに渡しています。
 
 `NgForm`ディレクティブが、ディレクティブの`exportAs`名の参照によって、別の値への参照の取得を実演しています。
-次の例では、テンプレート変数の`itemForm`がHTMLで隔てられて3回現れています。
+次の例では、テンプレート変数の`itemForm`が HTML で隔てられて 3 回現れています。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ngForm" header="src/app/hero-form.component.html"></code-example>
 
 この`ngForm`属性値がないと、`itemForm`の参照値は、
 [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement)の`<form>`になります。
-ただし`Component`と`Directive`には違いがあり、Angularは属性値の指定なしに`Component`を参照し、`Directive`は暗黙の参照(要素)を変更しません。
+ただし`Component`と`Directive`には違いがあり、Angular は属性値の指定なしに`Component`を参照し、`Directive`は暗黙の参照(要素)を変更しません。
+
 <!-- What is the train of thought from talking about a form element to the difference between a component and a directive? Why is the component directive conversation relevant here?  -kw -->
 
-`NgForm`があると、`itemForm`はフォーム内のすべてのコントロールの値と妥当性を追跡する機能をもつ、[NgForm](api/forms/NgForm "API: NgForm")ディレクティブへの参照です。
+`NgForm`があると、`itemForm`はフォーム内のすべてのコントロールの値と妥当性を追跡する機能をもつ、[NgForm](api/forms/NgForm 'API: NgForm')ディレクティブへの参照です。
 
 ネイティブの`<form>`要素とは異なり、`NgForm`ディレクティブには`form`プロパティがあります。
 `NgForm`の`form`プロパティを使用して、`itemForm.form.valid`が妥当でないときに送信ボタンを無効にできます。
-
 
 ## テンプレート変数のスコープ {@a template-variable-scope}
 
@@ -70,7 +70,7 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
 
 <div class="alert is-helpful">
 
-実行時の値を予測可能にしておくために、1つの変数は1回だけテンプレートで定義します。
+実行時の値を予測可能にしておくために、1 つの変数は 1 回だけテンプレートで定義します。
 
 </div>
 
@@ -78,7 +78,7 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
 
 内側のテンプレートは、外側のテンプレートが定義するテンプレート変数にアクセスできます。
 
-次の例では、`<input>`におけるテキスト変更によって`<span>`における値が変化します。Angularがテンプレート変数の`ref1`を介して変化をすぐに更新するからです。
+次の例では、`<input>`におけるテキスト変更によって`<span>`における値が変化します。Angular がテンプレート変数の`ref1`を介して変化をすぐに更新するからです。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="template-ref-vars-scope1" header="src/app/app.component.html"></code-example>
 
@@ -88,7 +88,6 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
 上記のコードを、`<ng-template>`を明示的に表した詳細な形式で書き直します。
 
 ```html
-
 <input #ref1 type="text" [(ngModel)]="firstExample" />
 
 <!-- 新しいテンプレート -->
@@ -96,14 +95,14 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
   <!-- コンテキストが継承されるため、値は新しいテンプレートで有効です -->
   <span>Value: {{ ref1.value }}</span>
 </ng-template>
-
 ```
 
 しかしながら、親テンプレートの外部由来のテンプレート変数へのアクセスは、うまくいきません。
 
 ```html
-  <input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
-  <span>Value: {{ ref2?.value }}</span> <!-- うまくいきません -->
+<input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
+<span>Value: {{ ref2?.value }}</span>
+<!-- うまくいきません -->
 ```
 
 詳細な形式で示すと、`ref2`は親テンプレートの外部にあります。
@@ -127,12 +126,12 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
 ```
 
 ここでの、`ref.value`はうまくいきません。
-構造ディレクティブの`*ngFor`はテンプレートを2回インスタンス化します。`*ngFor`が配列内の2つのアイテムを反復処理するからです。
+構造ディレクティブの`*ngFor`はテンプレートを 2 回インスタンス化します。`*ngFor`が配列内の 2 つのアイテムを反復処理するからです。
 この`ref.value`の参照が何を意味するかを明示することは不可能です。
 
-`*ngFor`や`*ngIf`などの構造ディレクティブでは、テンプレートがインスタンス化されたかどうかをAngularが知る方法はありません。
+`*ngFor`や`*ngIf`などの構造ディレクティブでは、テンプレートがインスタンス化されたかどうかを Angular が知る方法はありません。
 
-その結果、Angularはその値にアクセスできずエラーを返します。
+その結果、Angular はその値にアクセスできずエラーを返します。
 
 ### `<ng-template>`内のテンプレート変数へのアクセス {@a accessing-a-template-variable-within-ng-template}
 
@@ -149,12 +148,13 @@ Angularは、変数を宣言する場所に基づいてテンプレート変数�
 
 &#9660; ƒ TemplateRef()
 name: "TemplateRef"
-__proto__: Function
+**proto**: Function
 
 </code-example>
 
 {@a template-input-variable}
 {@a template-input-variables}
+
 ## Template input variable
 
 A _template input variable_ is a variable to reference within a single instance of the template.

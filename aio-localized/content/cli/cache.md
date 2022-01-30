@@ -1,5 +1,5 @@
-
 # Persistent disk cache
+
 Angular CLI saves a number of cachable operations on disk by default.
 
 When you re-run the same build, the build system restores the state of the previous build and re-uses previously performed operations, which decreases the time taken to build and test your applications and libraries.
@@ -23,6 +23,7 @@ The object goes under `cli.cache` at the top level of the file, outside the `pro
 For more information, see [cache options](guide/workspace-config#cache-options).
 
 ### Enabling and disabling the cache
+
 Caching is enabled by default. To disable caching run the following command:
 
 ```bash
@@ -32,6 +33,7 @@ ng config cli.cache.enabled false
 To re-enable caching, set `cli.cache.enabled` to `true`.
 
 ### Cache environments
+
 By default, disk cache is only enabled for local environments.
 
 To enable caching for all environments, run the following command:

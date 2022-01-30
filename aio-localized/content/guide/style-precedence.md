@@ -5,80 +5,80 @@ These rules specify an order for which style and class related bindings have pri
 This styling precedence is as follows, from the most specific with the highest priority to least specific with the lowest priority:
 
 1. Template bindings are the most specific because they apply to the element directly and exclusively, so they have the highest precedence.
-  <table width="100%">
-    <col width="40%"></col>
-    <col width="60%"></col>
-    <thead>
-      <tr>
-        <th>Binding type</th>
-        <th>Example</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Property binding</td>
-        <td><code>&lt;div [class.foo]="hasFoo"&gt;</code><br><code>&lt;div [style.color]="color"&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Map binding</td>
-        <td><code>&lt;div [class]="classExpression"&gt;</code><br><code>&lt;div [style]="styleExpression"&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Static value</td>
-        <td><code>&lt;div class="foo"&gt;</code><br><code>&lt;div style="color: blue"&gt;</code></td>
-      </tr>
-    </tbody>
-  </table>
+<table width="100%">
+  <col width="40%"></col>
+  <col width="60%"></col>
+  <thead>
+    <tr>
+      <th>Binding type</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Property binding</td>
+      <td><code>&lt;div [class.foo]="hasFoo"&gt;</code><br><code>&lt;div [style.color]="color"&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Map binding</td>
+      <td><code>&lt;div [class]="classExpression"&gt;</code><br><code>&lt;div [style]="styleExpression"&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Static value</td>
+      <td><code>&lt;div class="foo"&gt;</code><br><code>&lt;div style="color: blue"&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
 1. Directive host bindings are less specific because you can use directives in multiple locations, so they have a lower precedence than template bindings.
-  <table width="100%">
-    <col width="40%"></col>
-    <col width="60%"></col>
-    <thead>
-      <tr>
-        <th>Binding type</th>
-        <th>Example</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Property binding</td>
-        <td><code>host: {'[class.foo]': 'hasFoo'}</code><br><code>host: {'[style.color]': 'color'}</code></td>
-      </tr>
-      <tr>
-        <td>Map binding</td>
-        <td><code>host: {'[class]': 'classExpr'}</code><br><code>host: {'[style]': 'styleExpr'}</code></td>
-      </tr>
-      <tr>
-        <td>Static value</td>
-        <td><code>host: {'class': 'foo'}</code><br><code>host: {'style': 'color: blue'}</code></td>
-      </tr>
-    </tbody>
-  </table>
+<table width="100%">
+  <col width="40%"></col>
+  <col width="60%"></col>
+  <thead>
+    <tr>
+      <th>Binding type</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Property binding</td>
+      <td><code>host: {'[class.foo]': 'hasFoo'}</code><br><code>host: {'[style.color]': 'color'}</code></td>
+    </tr>
+    <tr>
+      <td>Map binding</td>
+      <td><code>host: {'[class]': 'classExpr'}</code><br><code>host: {'[style]': 'styleExpr'}</code></td>
+    </tr>
+    <tr>
+      <td>Static value</td>
+      <td><code>host: {'class': 'foo'}</code><br><code>host: {'style': 'color: blue'}</code></td>
+    </tr>
+  </tbody>
+</table>
 1. Component host bindings have the lowest precedence.
-    <table width="100%">
-    <col width="40%"></col>
-    <col width="60%"></col>
-    <thead>
-      <tr>
-        <th>Binding type</th>
-        <th>Example</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Property binding</td>
-        <td><code>host: {'[class.foo]': 'hasFoo'}</code><br><code>host: {'[style.color]': 'color'}</code></td>
-      </tr>
-      <tr>
-        <td>Map binding</td>
-        <td><code>host: {'[class]': 'classExpression'}</code><br><code>host: {'[style]': 'styleExpression'}</code></td>
-      </tr>
-      <tr>
-        <td>Static value</td>
-        <td><code>host: {'class': 'foo'}</code><br><code>host: {'style': 'color: blue'}</code></td>
-      </tr>
-    </tbody>
-  </table>
+  <table width="100%">
+  <col width="40%"></col>
+  <col width="60%"></col>
+  <thead>
+    <tr>
+      <th>Binding type</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Property binding</td>
+      <td><code>host: {'[class.foo]': 'hasFoo'}</code><br><code>host: {'[style.color]': 'color'}</code></td>
+    </tr>
+    <tr>
+      <td>Map binding</td>
+      <td><code>host: {'[class]': 'classExpression'}</code><br><code>host: {'[style]': 'styleExpression'}</code></td>
+    </tr>
+    <tr>
+      <td>Static value</td>
+      <td><code>host: {'class': 'foo'}</code><br><code>host: {'style': 'color: blue'}</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Precedence and specificity
 
@@ -123,7 +123,7 @@ width = ''; // undefined
 
 <div class="alert is-helpful">
 
-  If `dirWithHostBinding` sets its binding to `null`, Angular removes the `width` property entirely.
+If `dirWithHostBinding` sets its binding to `null`, Angular removes the `width` property entirely.
 
   <code-example header="dirWithHostBinding">
   @HostBinding('style.width')

@@ -34,5 +34,5 @@ jobs:
       with:
         repoToken: "${{ secrets.GITHUB_TOKEN }}"
         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-        projectId: angular-ja
+        projectId: angular-fr-11426
         channelId: live

@@ -12,7 +12,7 @@
 
 ## heroes コンポーネントを作成する {@a create-the-heroes-component}
 
-Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
+Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
 
 <code-example language="sh">
   ng generate component heroes
@@ -191,7 +191,7 @@ region="ng-imports">
 
 すべてのコンポーネントは、 _ただ1つの_ [NgModule](guide/ngmodules)で宣言されなければなりません。
 
-_あなたは_ `HeroesComponent`を宣言していません。
+_あなたは_ `HeroesComponent`を宣言していません。
 では、なぜアプリケーションは動作したのでしょうか？
 
 アプリケーションが動作したのは、Angular CLI が`HeroesComponent`を生成したときに、`AppModule`でそのコンポーネントの宣言を行っていたからです。

@@ -1,6 +1,6 @@
 # RxJS ライブラリ
 
-リアクティブプログラミングは、データストリームと変更の伝播 ([Wikipedia](https://en.wikipedia.org/wiki/Reactive_programming)) に関する非同期プログラミングのパラダイムです。RxJS (Reactive Extensions for JavaScript) は、非同期またはコールバックベースのコード ([RxJS Docs](https://rxjs.dev/guide/overview)) の作成を容易にする observables を使用したリアクティブプログラミング用のライブラリです。
+リアクティブプログラミングは、データストリームと変更の伝播 ([Wikipedia](https://en.wikipedia.org/wiki/Reactive_programming)) に関する非同期プログラミングのパラダイムです。RxJS (Reactive Extensions for JavaScript) は、非同期またはコールバックベースのコード ([RxJS Docs](https://rxjs.dev/guide/overview)) の作成を容易にする observables を使用したリアクティブプログラミング用のライブラリです。
 
 RxJS は `Observable` 型の実装を提供します。Observable 型は、型が言語の一部となるまで、そしてブラウザがそれをサポートするまで必要です。ライブラリはまたobservablesを作成して作業するためのユーティリティ関数を提供します。これらのユーティリティ関数は、次の用途に使用できます。
 
@@ -16,7 +16,7 @@ RxJS には新しい observables を作成するために使用できるいく�
 
 <code-example path="rx-library/src/simple-creation.1.ts" region="promise" header="promise から observable を作成する"></code-example>
 
-<code-example path="rx-library/src/simple-creation.2.ts" region="interval" header="カウンターから observable を作成する"></code-example>
+<code-example path="rx-library/src/simple-creation.2.ts" region="interval" header="カウンターから observable を作成する"></code-example>
 
 <code-example path="rx-library/src/simple-creation.3.ts" region="event" header="イベントから observable を作成する"></code-example>
 
@@ -32,7 +32,7 @@ RxJS には新しい observables を作成するために使用できるいく�
 
 _パイプ_を使用するとオペレーターをリンクすることができます。パイプを使用すると、複数の機能を1つの機能にまとめることができます。`pipe()` 関数は、結合する関数を引数としてとり、実行時に順次関数を実行する新しい関数を返します。
 
-observable に適用されるオペレーターのセットは、レシピ、つまり関心のある値を生成するための一連の命令です。それだけではレシピは何もしません。レシピを通して結果を出すには  `subscribe()` を呼び出す必要があります。
+observable に適用されるオペレーターのセットは、レシピ、つまり関心のある値を生成するための一連の命令です。それだけではレシピは何もしません。レシピを通して結果を出すには  `subscribe()` を呼び出す必要があります。
 
 これはその例です:
 

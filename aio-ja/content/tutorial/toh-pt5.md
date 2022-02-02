@@ -112,7 +112,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 <div class="alert is-helpful">
 
 `RouterModule`をエクスポートした`AppRoutingModule`を`AppModule`がインポートしているので、
-この`RouterOutlet`は、この`AppComponent`で利用できるようになったルーターのディレクティブのひとつです。The `ng generate` command you ran at the start of this tutorial added this import because of the `--module=app` flag. If you manually created `app-routing.module.ts` or used a tool other than the CLI to do so, you'll need to import `AppRoutingModule` into `app.module.ts` and add it to the `imports` array of the `NgModule`.
+この`RouterOutlet`は、この`AppComponent`で利用できるようになったルーターのディレクティブのひとつです。このチュートリアルのはじめに実行した`ng generate`コマンドで`--module=app`フラグを指定したことで、このインポートが追加されました。`app-routing.module.ts`を手動で作成した場合やCLI以外のツールを使用して作成した場合は、`AppRoutingModule`を`app.module.ts`にインポートし、`NgModule`の`imports`配列に追加する必要があります。
 
 </div>
 

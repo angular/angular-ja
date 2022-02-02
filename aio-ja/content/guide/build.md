@@ -295,7 +295,7 @@ Angular CLI はブラウザアプリケーションが CommonJS モジュール�
 
 ## ブラウザ互換性の設定 {@a configuring-browser-compatibility}
 
-CLIは[Autoprefixer](https://github.com/postcss/autoprefixer)を使ってさまざまなブラウザやブラウザバージョンとの互換性を保証しています。
+CLIは[Autoprefixer](https://github.com/postcss/autoprefixer)を使ってさまざまなブラウザやブラウザバージョンとの互換性を保証しています。
 特定のブラウザをターゲットにしたり、特定のブラウザバージョンをビルドから除外したりする必要が出てくるかもしれません。
 
 内部的には、Autoprefixerは[Browserslist](https://github.com/browserslist/browserslist)というライブラリに頼り、どのブラウザを接頭辞付きでサポートするかを判断しています。

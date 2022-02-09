@@ -98,7 +98,7 @@
 <code-example path="toh-pt6/src/app/hero.service.ts" header="src/app/hero.service.ts" region="ctor" >
 </code-example>
 
-`MessageService`はインジェクトしたままですが、頻繁に呼び出すため、プライベートの `log()` メソッドでラップすることに注意してください。
+`MessageService`は注入したままですが、頻繁に呼び出すため、プライベートの `log()` メソッドでラップすることに注意してください。
 
 <code-example path="toh-pt6/src/app/hero.service.ts" header="src/app/hero.service.ts" region="log" >
 </code-example>
@@ -370,7 +370,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 ## 名前で検索する
 
-この最後のエクササイズでは、`Observable`オペレーターをチェーンを学んで、
+この最後のエクササイズでは、`Observable`オペレーターの連結を学んで、
 同じようなHTTPリクエストの数を減らし、
 効率よくネットワーク帯域を使えるようにします。
 
@@ -417,7 +417,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 <code-example path="toh-pt6/src/app/hero-search/hero-search.component.html" header="src/app/hero-search/hero-search.component.html"></code-example>
 
 下にある[final code review](#herosearchcomponent)にあるように
-プライベートCSSスタイルを`hero-search.component.css`を追加します。
+プライベートCSSスタイルを`hero-search.component.css`に追加します。
 
 ユーザーが検索ボックス内でタイプすると、inputイベントのバインディングが
 コンポーネントの`search()`メソッドを呼び出して、検索ボックス内の新しい値を渡します。

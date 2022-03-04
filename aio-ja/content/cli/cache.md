@@ -51,7 +51,7 @@ Angular CLI は、環境変数`CI`の存在と値を確認し、どの環境で�
 
 ### キャッシュパス
 
-デフォルトでは、キャッシュの結果を保存するためのベースディレクトリとして`.angular/cache`が使用されます。このパスを変更するには、以下のコマンドを実行します：
+デフォルトでは、キャッシュの結果を保存するためのベースディレクトリとして`.angular/cache`が使用されます。このパスを変更するには、次のコマンドを実行します：
 
 ```bash
 ng config cli.cache.path ".cache/ng"
@@ -73,4 +73,4 @@ Windowsでキャッシュをクリアする場合：
 rmdir /s /q .angular/cache
 ```
 
-詳しくは，[rmコマンド](https://man7.org/linux/man-pages/man1/rm.1.html)と[rmdirコマンド](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/rmdir)を参照してください．
+詳しくは、[rmコマンド](https://man7.org/linux/man-pages/man1/rm.1.html)と[rmdirコマンド](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/rmdir)を参照してください。

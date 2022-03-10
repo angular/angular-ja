@@ -40,7 +40,6 @@ ng config cli.cache.enabled false
 ng config cli.cache.environment all
 ```
 
-For more information, see `environment` in [cache options](guide/workspace-config#cache-options).
 詳細については、[キャッシュオプション](guide/workspace-config#cache-options)の`environment`を参照してください。
 
 <div class="alert is-helpful">

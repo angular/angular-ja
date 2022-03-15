@@ -877,8 +877,9 @@
         },
         {
           "url": "guide/update-to-latest-version",
-          "title": "Update to Version 13",
-          "tooltip": "Support to update your application to version 13"
+          "title": "バージョン13にアップデートする",
+          "tooltip": "あなたのアプリケーションをバージョン13にアップデートするためのサポート",
+          "translated": true
         },
         {
           "url": "guide/deprecations",

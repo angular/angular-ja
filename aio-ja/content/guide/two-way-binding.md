@@ -34,7 +34,7 @@ Angularの双方向バインディング構文は、角括弧と括弧を組み�
 ## 双方向バインディングのしくみ
 
 双方向のデータバインディングを行うには、`@Output()`プロパティに`inputChange`というパターンを使用する必要があります。`input`は`@Input()`プロパティの名前です。
-例えば、`@Input()`プロパティが`size`の場合、`@Output()`プロパティは`sizeChange`でなければなりません。
+たとえば、`@Input()`プロパティが`size`の場合、`@Output()`プロパティは`sizeChange`でなければなりません。
 
 次に示す`sizerComponent`は、`size`プロパティと`sizeChange`イベントを持ちます。
 `size`プロパティは`@Input()`で、データは`sizerComponent`に流れ込みます。

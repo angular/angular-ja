@@ -31,7 +31,7 @@ Angularの双方向バインディング構文は、角括弧と括弧を組み�
 
 <code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html" region="two-way-syntax"></code-example>
 
-## 双方向バインディングのしくみ
+## 双方向バインディングのしくみ {@a how-two-way-binding-works}
 
 双方向のデータバインディングを行うには、`@Output()`プロパティに`inputChange`というパターンを使用する必要があります。`input`は`@Input()`プロパティの名前です。
 たとえば、`@Input()`プロパティが`size`の場合、`@Output()`プロパティは`sizeChange`でなければなりません。

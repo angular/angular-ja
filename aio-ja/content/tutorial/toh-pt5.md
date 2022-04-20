@@ -16,7 +16,9 @@ Tour of Heroes アプリケーションには新しい要求があります：
 これらの変更が完了したら、ユーザーは図のようにアプリケーションを行き来できるようになるでしょう：
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
+
+<img alt="View navigations" src="generated/images/guide/toh/nav-diagram.png">
+
 </div>
 
 ## `AppRoutingModule`を追加する
@@ -29,25 +31,28 @@ Angularのベストプラクティスは、
 
 CLIを使って生成することができます。
 
-<code-example language="sh">
-  ng generate module app-routing --flat --module=app
+<code-example format="shell" language="shell">
+
+ng generate module app-routing --flat --module=app
+
 </code-example>
 
 <div class="alert is-helpful">
 
-`--flat`は、固有のフォルダの代わりに、`src/app`に生成したファイルを置きます。<br>
-`--module=app`は、`AppModule`の`imports`配列に、生成したモジュールを登録するようCLIに指示します。
+| Parameter      | Details |
+|:---            |:---     |
+| `--flat` | 固有のフォルダの代わりに、`src/app`に生成したファイルを置きます。|
+| `--module=app` | `AppModule`の`imports`配列に、生成したモジュールを登録するようCLIに指示します。 |
+
 </div>
 
 生成されたファイルはこのようになります：
 
-<code-example path="toh-pt5/src/app/app-routing.module.0.ts" header="src/app/app-routing.module.ts (generated)">
-</code-example>
+<code-example header="src/app/app-routing.module.ts (generated)" path="toh-pt5/src/app/app-routing.module.0.ts"></code-example>
 
 次のように置き換えます。
 
-<code-example path="toh-pt5/src/app/app-routing.module.1.ts" header="src/app/app-routing.module.ts (updated)">
-</code-example>
+<code-example header="src/app/app-routing.module.ts (updated)" path="toh-pt5/src/app/app-routing.module.1.ts"></code-example>
 
 最初に、 `app-routing.module.ts`ファイルはアプリケーションにルーティング機能を持たせることができる `RouterModule` と `Routes` をインポートします。次のインポートである `HeroesComponent`は、ルートを設定することでルーターに向かう場所を教えます。
 
@@ -62,14 +67,14 @@ CLIを使って生成することができます。
 
 `app-routing.module.ts` はすでに `HeroesComponent` をインポートしているため、 `routes` 配列で使用できます。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts"
-  region="heroes-route">
-</code-example>
+<code-example header="src/app/app-routing.module.ts" path="toh-pt5/src/app/app-routing.module.ts" region="heroes-route"></code-example>
 
 典型的なAngularの`Route`はふたつのプロパティを持っています：
 
-1. `path`：ブラウザのアドレスバーにある URL にマッチする文字列
-1. `component`：そのルートに遷移するときにルーターが作成すべきコンポーネント
+| Properties  | Details |
+|:---         |:---     |
+| `path` | ブラウザのアドレスバーにある URL にマッチする文字列 |
+| `component` | そのルートに遷移するときにルーターが作成すべきコンポーネント |
 
 これにより、ルーターはそのURLを `path: 'heroes'` に一致させ、
 URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponent`を表示します。
@@ -82,8 +87,7 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 `RouterModule.forRoot()`を呼び出すことにより、
 ワンステップで `routes` にそれを設定します:
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="ngmodule-imports">
-</code-example>
+<code-example header="src/app/app-routing.module.ts" path="toh-pt5/src/app/app-routing.module.ts" region="ngmodule-imports"></code-example>
 
 <div class="alert is-helpful">
 
@@ -95,15 +99,13 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 
 次に、`AppRoutingModule` は `RouterModule` をエクスポートし、アプリケーション全体で利用できるようにします。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts (exports array)" region="export-routermodule">
-</code-example>
+<code-example header="src/app/app-routing.module.ts (exports array)" path="toh-pt5/src/app/app-routing.module.ts" region="export-routermodule"></code-example>
 
 ## `RouterOutlet` を追加する
 
 `AppComponent`テンプレートを開き、`<app-heroes>`要素を`<router-outlet>`で置き換えます。
 
-<code-example path="toh-pt5/src/app/app.component.html" region="outlet" header="src/app/app.component.html (router-outlet)">
-</code-example>
+<code-example header="src/app/app.component.html (router-outlet)" path="toh-pt5/src/app/app.component.html" region="outlet"></code-example>
 
 ユーザーが遷移したときにアプリケーションは `HeroesComponent`のみを表示するため、`AppComponent`のテンプレートはもう `<app-heroes>`を必要としません。
 
@@ -120,8 +122,10 @@ URLが`localhost:4200/heroes`のようなものである場合に`HeroesComponen
 
 こちらのCLIコマンドを使用して実行する必要があります。
 
-<code-example language="sh">
-  ng serve
+<code-example format="shell" language="shell">
+
+ng serve
+
 </code-example>
 
 ブラウザを更新するとアプリケーションのタイトルは表示されますがヒーローのリストは表示されないはずです。
@@ -136,7 +140,7 @@ URLが`/`で終わっています。
 ブラウザのアドレスバーに表示されるURLから`/heroes`を削除します。
 ブラウザが更新され、アプリケーションのタイトルが表示されますが、ヒーローのリストは表示されません。
 
-{@a routerlink}
+<a id="routerlink"></a>
 
 ## ナビゲーションのリンクを追加する (`routerLink`)
 
@@ -146,8 +150,7 @@ URLが`/`で終わっています。
 `<nav>`要素を追加して、その中に、クリックされると`HeroesComponent`へ遷移するトリガーになるアンカー要素を追加します。
 修正された`AppComponent`テンプレートはこのようになります：
 
-<code-example path="toh-pt5/src/app/app.component.html" region="heroes" header="src/app/app.component.html (heroes RouterLink)">
-</code-example>
+<code-example header="src/app/app.component.html (heroes RouterLink)" path="toh-pt5/src/app/app.component.html" region="heroes"></code-example>
 
 [`routerLink`属性](#routerlink)は、ルーターが`HeroesComponent`へのルートとして一致する文字列である`"/heroes"`に設定されます。
 この`routerLink`は、ユーザーのクリックをルーターのナビゲーションへ変換する[`RouterLink`ディレクティブ](/api/router/RouterLink)のためのセレクターです。
@@ -164,7 +167,6 @@ URLが`/`で終わっています。
 
 </div>
 
-
 ## ダッシュボードビューを追加する
 
 ルーティングは、複数のビューがある場合にさらに意味を持ちます。
@@ -172,8 +174,10 @@ URLが`/`で終わっています。
 
 CLIを使って`DashboardComponent`を追加します：
 
-<code-example language="sh">
-  ng generate component dashboard
+<code-example format="shell" language="shell">
+
+ng generate component dashboard
+
 </code-example>
 
 CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`の中でそれを宣言します。
@@ -181,17 +185,9 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 これら3つのファイルのデフォルトの内容を次のように置き換えましょう：
 
 <code-tabs>
-  <code-pane 
-    header="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.1.html">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css">
-  </code-pane>
+    <code-pane header="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.1.html"></code-pane>
+    <code-pane header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts"></code-pane>
+    <code-pane header="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css"></code-pane>
 </code-tabs>
 
 この_template_には、ヒーロー名のリンクのグリッドが表示されます。
@@ -201,14 +197,14 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 * このリンクはまだどこにも行きませんが、[すぐにそうなります](#hero-details)。
 
 この_class_は`HeroesComponent`クラスに似ています。
+
 * `heroes`の配列のプロパティを定義します。
 * このコンストラクターは、Angular が`HeroService`をプライベートの`heroService`プロパティに注入することを期待しています。
 * この`ngOnInit()`ライフサイクル・フックは`getHeroes()`を呼び出します。
 
 この`getHeroes()`は、ヒーローの配列を1番目と5番目でスライスし、トップヒーローの4つだけ（2番目、3番目、4番目、5番目）を返します。
 
-<code-example path="toh-pt5/src/app/dashboard/dashboard.component.ts" header="src/app/dashboard/dashboard.component.ts" region="getHeroes">
-</code-example>
+<code-example header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts" region="getHeroes"></code-example>
 
 ### ダッシュボードのルートを追加する
 
@@ -216,13 +212,11 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 `app-routing.module.ts`で`DashboardComponent`をインポートします。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" region="import-dashboard" header="src/app/app-routing.module.ts (import DashboardComponent)">
-</code-example>
+<code-example header="src/app/app-routing.module.ts (import DashboardComponent)" path="toh-pt5/src/app/app-routing.module.ts" region="import-dashboard"></code-example>
 
 `routes`配列に、` DashboardComponent`へのパスにマッチするルートを追加します。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="dashboard-route">
-</code-example>
+<code-example header="src/app/app-routing.module.ts" path="toh-pt5/src/app/app-routing.module.ts" region="dashboard-route"></code-example>
 
 ### デフォルトルートを追加する
 
@@ -233,8 +227,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 アプリケーションをダッシュボードに自動的に遷移するには、次のルートを
 `routes`配列に追加します。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="redirect-route">
-</code-example>
+<code-example header="src/app/app-routing.module.ts" path="toh-pt5/src/app/app-routing.module.ts" region="redirect-route"></code-example>
 
 このルートは、空のパスと完全に一致するURLを、パスが`'/dashboard'`であるルートにリダイレクトします。
 
@@ -248,12 +241,12 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 *Heroes*リンクのすぐ上、`AppComponent`シェルテンプレートにダッシュボードのナビゲーションリンクを追加します。。
 
-<code-example path="toh-pt5/src/app/app.component.html" header="src/app/app.component.html">
-</code-example>
+<code-example header="src/app/app.component.html" path="toh-pt5/src/app/app.component.html"></code-example>
 
 ブラウザが更新されたら、リンクをクリックすることでふたつのビューの間を自由に遷移できるようになります。
 
-{@a hero-details}
+<a id="hero-details"></a>
+
 ## ヒーローの詳細へ遷移する
 
 `HeroDetailComponent`は選択されたヒーローの詳細を表示します。
@@ -287,20 +280,17 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 `app-routing.module.ts`を開き、`HeroDetailComponent`をインポートします。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" region="import-herodetail" header="src/app/app-routing.module.ts (import HeroDetailComponent)">
-</code-example>
+<code-example header="src/app/app-routing.module.ts (import HeroDetailComponent)" path="toh-pt5/src/app/app-routing.module.ts" region="import-herodetail"></code-example>
 
 次に、_ヒーロー詳細_ビューへのパスのパターンと一致する_パラメータ付き_ルートを`routes`配列に追加します。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" header="src/app/app-routing.module.ts" region="detail-route">
-</code-example>
+<code-example header="src/app/app-routing.module.ts" path="toh-pt5/src/app/app-routing.module.ts" region="detail-route"></code-example>
 
-`path`のコロン (:) は`:id`が特定のヒーローの`id`のプレースホルダーであることを表しています。
+`path`のコロン (`:`) は`:id`が特定のヒーローの`id`のプレースホルダーであることを表しています。
 
 この時点で、すべてのアプリケーションルートが配置されています。
 
-<code-example path="toh-pt5/src/app/app-routing.module.ts" region="routes" header="src/app/app-routing.module.ts (all routes)">
-</code-example>
+<code-example header="src/app/app-routing.module.ts (all routes)" path="toh-pt5/src/app/app-routing.module.ts" region="routes"></code-example>
 
 ### `DashboardComponent`ヒーローのリンク
 
@@ -309,30 +299,25 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 ルーターは `HeroDetailComponent`へのルートを持っているので、
 ダッシュボードのヒーローのリンクを修正して、_パラメータ付き_ダッシュボードのルート経由で遷移します。
 
-<code-example 
-  path="toh-pt5/src/app/dashboard/dashboard.component.html" 
-  region="click" 
-  header="src/app/dashboard/dashboard.component.html (hero links)">
-</code-example>
+<code-example header="src/app/dashboard/dashboard.component.html (hero links)" path="toh-pt5/src/app/dashboard/dashboard.component.html" region="click"></code-example>
 
 `*ngFor`リピーター内でAngularの[補間バインディング](guide/interpolation)を使用していて、
 現在の繰り返しの `hero.id`を個々の[`routerLink`](#routerlink)に挿入します。
 
-{@a heroes-component-links}
+<a id="heroes-component-links"></a>
+
 ### `HeroesComponent`ヒーローのリンク
 
 `HeroesComponent`のヒーローのアイテムは、
 コンポーネントの onSelect() メソッドにバインドされたクリック・イベントをもつ`<li>`要素です。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.html" region="list" header="src/app/heroes/heroes.component.html (list with onSelect)">
-</code-example>
+<code-example header="src/app/heroes/heroes.component.html (list with onSelect)" path="toh-pt4/src/app/heroes/heroes.component.html" region="list"></code-example>
 
 この`<li>`を`*ngFor`だけをもつように戻し、
 アンカー要素 (`<a>`) でバッジと名前を囲み、
 ダッシュボードのテンプレートと同じようにアンカーに`routerLink`要素を追加します。
 
-<code-example path="toh-pt5/src/app/heroes/heroes.component.html" region="list" header="src/app/heroes/heroes.component.html (list with links)">
-</code-example>
+<code-example header="src/app/heroes/heroes.component.html (list with links)" path="toh-pt5/src/app/heroes/heroes.component.html" region="list"></code-example>
 
 プライベートなスタイルシート (`heroes.component.css`) を修正して
 これまでと同じようにリストが見えるようにすべきです。
@@ -346,8 +331,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 きちんと整理するといいですし、あとで自分自身に感謝することでしょう。
 これが不要なコードを整理した後のクラスです。
 
-<code-example path="toh-pt5/src/app/heroes/heroes.component.ts" region="class" header="src/app/heroes/heroes.component.ts (cleaned up)">
-</code-example>
+<code-example header="src/app/heroes/heroes.component.ts (cleaned up)" path="toh-pt5/src/app/heroes/heroes.component.ts" region="class"></code-example>
 
 ## ルーティング可能な `HeroDetailComponent`
 
@@ -366,16 +350,14 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 
 次のインポートを追加します：
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="added-imports" header="src/app/hero-detail/hero-detail.component.ts">
-</code-example>
+<code-example header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="added-imports"></code-example>
 
-{@a hero-detail-ctor}
+<a id="hero-detail-ctor"></a>
 
 `ActivatedRoute`, ` HeroService`,  `Location`サービスをコンストラクターに注入し、
 それらの値をプライベートフィールドに保存します。
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" header="src/app/hero-detail/hero-detail.component.ts" region="ctor">
-</code-example>
+<code-example header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="ctor"></code-example>
 
 [`ActivatedRoute`](api/router/ActivatedRoute)は、この`HeroDetailComponent`のインスタンスへのルートに関する情報を保持します。
 このコンポーネントは、URLから抽出されたルートのパラメータに関心があります。
@@ -392,8 +374,7 @@ CLIは、`DashboardComponent`のためのファイルを生成し、`AppModule`�
 `ngOnInit()` [ライフサイクルフック](guide/lifecycle-hooks#oninit)で、
 `getHero()`を呼び出し、次のように定義します。
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" header="src/app/hero-detail/hero-detail.component.ts" region="ngOnInit">
-</code-example>
+<code-example header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="ngOnInit"></code-example>
 
 `route.snapshot`は、コンポーネントが作成された直後のルート情報の静的イメージです。
 
@@ -411,13 +392,14 @@ JavaScriptの `Number` 関数は文字列を数値に変換します。これが
 
 `HeroService`を開き、`getHeroes()`メソッドの後に`id`とともに次の`getHero()`メソッドを追加します。
 
-<code-example path="toh-pt5/src/app/hero.service.ts" region="getHero" header="src/app/hero.service.ts (getHero)">
-</code-example>
+<code-example header="src/app/hero.service.ts (getHero)" path="toh-pt5/src/app/hero.service.ts" region="getHero"></code-example>
 
 <div class="alert is-important">
 
+**IMPORTANT**: <br />
 `id` を埋め込むためのJavaScriptの[_テンプレートリテラル_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/template_strings)
-を定義するバッククオート ( &#96; ) に注意してください。
+を定義するバッククオート ( <code>&grave;</code> ) に注意してください。
+
 </div>
 
 [`getHeroes()`](tutorial/toh-pt4#observable-heroservice)と同様に、
@@ -436,7 +418,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 `localhost:4200/detail/11`をブラウザのアドレスバーに貼り付けると、
 ルーターは、`id:11`つまり "Dr. Nice" というヒーローの詳細ビューに遷移します。
 
-{@a goback}
+<a id="goback"></a>
 
 ### 戻る方法を探す
 
@@ -449,16 +431,12 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 コンポーネントのテンプレートの最後に*戻る*ボタンを追加し、
 コンポーネントの `goBack()`メソッドにバインドします。
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.html" region="back-button" header="src/app/hero-detail/hero-detail.component.html (back button)">
-</code-example>
+<code-example header="src/app/hero-detail/hero-detail.component.html (back button)" path="toh-pt5/src/app/hero-detail/hero-detail.component.html" region="back-button"></code-example>
 
 [先ほど注入した](#hero-detail-ctor)`Location`サービスを使用して、
 ブラウザの履歴のひとつ前にナビゲートする`goBack()`メソッドをコンポーネントのクラスに追加します。
 
-<code-example path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="goBack" header="src/app/hero-detail/hero-detail.component.ts (goBack)">
-
-</code-example>
-
+<code-example header="src/app/hero-detail/hero-detail.component.ts (goBack)" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts" region="goBack"></code-example>
 
 ブラウザを更新して、クリックしてみましょう。
 ユーザーは、ダッシュボードからヒーローの詳細に行って戻ったり、ヒーローリストから小さな詳細へ行き
@@ -470,91 +448,54 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 このページで解説したコードのファイルは次のとおりです。
 
-{@a approutingmodule}
-{@a appmodule}
+<a id="approutingmodule"></a>
+<a id="appmodule"></a>
+
 #### `AppRoutingModule`, `AppModule`, と `HeroService`
 
 <code-tabs>
-  <code-pane 
-    header="src/app/app-routing.module.ts" 
-    path="toh-pt5/src/app/app-routing.module.ts">
-  </code-pane>
-  <code-pane 
-    header="src/app/app.module.ts" 
-    path="toh-pt5/src/app/app.module.ts">
-  </code-pane>
-  <code-pane 
-    header="src/app/hero.service.ts" 
-    path="toh-pt5/src/app/hero.service.ts">
-  </code-pane>
+    <code-pane header="hero-search/hero-search.component.html" path="toh-pt6/src/app/hero-search/hero-search.component.html"></code-pane>
+    <code-pane header="src/app/app.module.ts" path="toh-pt5/src/app/app.module.ts"></code-pane>
+    <code-pane header="hero-search/hero-search.component.html" path="toh-pt6/src/app/hero-search/hero-search.component.html"></code-pane>
 </code-tabs>
 
-{@a appcomponent}
+<a id="appcomponent"></a>
+
 #### `AppComponent`
 
 <code-tabs>
-  <code-pane 
-    header="src/app/app.component.html"
-    path="toh-pt5/src/app/app.component.html">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/app.component.css"
-    path="toh-pt5/src/app/app.component.css">
-  </code-pane>
+    <code-pane header="hero-search/hero-search.component.html" path="toh-pt6/src/app/hero-search/hero-search.component.html"></code-pane>
+    <code-pane header="src/app/app.component.css" path="toh-pt5/src/app/app.component.css"></code-pane>
 </code-tabs>
 
-{@a dashboardcomponent}
+<a id="dashboardcomponent"></a>
+
 #### `DashboardComponent`
 
 <code-tabs>
-  <code-pane 
-    header="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.html">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css">
-  </code-pane>
+    <code-pane header="src/app/dashboard/dashboard.component.html" path="toh-pt5/src/app/dashboard/dashboard.component.html"></code-pane>
+    <code-pane header="src/app/dashboard/dashboard.component.ts" path="toh-pt5/src/app/dashboard/dashboard.component.ts"></code-pane>
+    <code-pane header="src/app/dashboard/dashboard.component.css" path="toh-pt5/src/app/dashboard/dashboard.component.css"></code-pane>
 </code-tabs>
 
-{@a heroescomponent}
+<a id="heroescomponent"></a>
+
 #### `HeroesComponent`
 
 <code-tabs>
-  <code-pane 
-    header="src/app/heroes/heroes.component.html" path="toh-pt5/src/app/heroes/heroes.component.html">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/heroes/heroes.component.ts" 
-    path="toh-pt5/src/app/heroes/heroes.component.ts">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/heroes/heroes.component.css" 
-    path="toh-pt5/src/app/heroes/heroes.component.css">
-  </code-pane>
+    <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt5/src/app/heroes/heroes.component.html"></code-pane>
+    <code-pane header="src/app/heroes/heroes.component.ts" path="toh-pt5/src/app/heroes/heroes.component.ts"></code-pane>
+    <code-pane header="src/app/heroes/heroes.component.css" path="toh-pt5/src/app/heroes/heroes.component.css"></code-pane>
 </code-tabs>
 
-{@a herodetailcomponent}
+<a id="herodetailcomponent"></a>
+
 #### `HeroDetailComponent`
 
 <code-tabs>
-  <code-pane 
-    header="src/app/hero-detail/hero-detail.component.html" path="toh-pt5/src/app/hero-detail/hero-detail.component.html">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts">
-  </code-pane>
-
-  <code-pane 
-    header="src/app/hero-detail/hero-detail.component.css" path="toh-pt5/src/app/hero-detail/hero-detail.component.css">
-  </code-pane>
+    <code-pane header="src/app/hero-detail/hero-detail.component.html" path="toh-pt5/src/app/hero-detail/hero-detail.component.html"></code-pane>
+    <code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts"></code-pane>
+    <code-pane header="src/app/hero-detail/hero-detail.component.css" path="toh-pt5/src/app/hero-detail/hero-detail.component.css"></code-pane>
 </code-tabs>
 
 ## まとめ
@@ -567,3 +508,5 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 * 密接に結合されたmaster/detailビューをルート化した詳細ビューにリファクタリングしました。
 * ユーザーが選択したヒーローの詳細ビューに移動するために、ルーターリンクのパラメータを使用しました。
 * 複数のコンポーネント間で`HeroService`を共有しました。
+
+@reviewed 2022-02-28

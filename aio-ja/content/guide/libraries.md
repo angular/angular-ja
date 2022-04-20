@@ -7,11 +7,13 @@
 Angular ライブラリは、単独では実行できないという点でアプリケーションとは異なる Angular [プロジェクト](guide/glossary#project)です。
 ライブラリをインポートしてアプリケーションで使用する必要があります。
 
-ライブラリは Angular の基本機能を拡張します。たとえば、[リアクティブフォーム](guide/reactive-forms)をアプリケーションに追加するには、`ng add @angular/forms` を使用してライブラリパッケージを追加し、アプリケーションコードの `@angular/forms` ライブラリから `ReactiveFormsModule` をインポートします。
-同様に、[service worker](guide/service-worker-intro) ライブラリを Angular アプリケーションに追加することは、アプリケーションを[プログレッシブ Web アプリケーション](https://developers.google.com/web/progressive-web-apps/) (PWA) に変えるためのステップの1つです。
+ライブラリは Angular の基本機能を拡張します。
+たとえば、[リアクティブフォーム](guide/reactive-forms)をアプリケーションに追加するには、`ng add @angular/forms` を使用してライブラリパッケージを追加し、アプリケーションコードの `@angular/forms` ライブラリから `ReactiveFormsModule` をインポートします。
+同様に、[service worker](guide/service-worker-intro) ライブラリを Angular アプリケーションに追加することは、アプリケーションを[プログレッシブ Web アプリケーション](https://developers.google.com/web/progressive-web-apps) \(PWA\)に変えるためのステップの1つです。
 [Angular Material](https://material.angular.io/) は、洗練された、再利用可能な、そして適応可能な UI コンポーネントを提供する大規模な汎用ライブラリの一例です。
 
-すべてのアプリケーション開発者は、Angular チームまたはサードパーティによって npm パッケージとして公開されているこれらおよびその他のライブラリを使用できます。[公開ライブラリの使用](guide/using-libraries)を参照してください。
+すべてのアプリケーション開発者は、Angular チームまたはサードパーティによって npm パッケージとして公開されているこれらおよびその他のライブラリを使用できます。
+[公開ライブラリの使用](guide/using-libraries)を参照してください。
 
 ## ライブラリを作成する
 
@@ -31,7 +33,16 @@ Angular ライブラリは、単独では実行できないという点でアプ
 
 <div class="alert is-helpful">
 
-ライブラリはAngularアプリケーションによって使用されることを意図していることに注意してください。
+**NOTE**: <br />
+ライブラリはAngularアプリケーションによって使用されることを意図しています。
 Angular以外のWebアプリケーションにAngular機能を追加するには、[Angularカスタム要素](guide/elements) を使用できます。
 
 </div>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

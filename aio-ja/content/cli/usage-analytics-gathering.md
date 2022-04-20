@@ -20,14 +20,18 @@ Angular開発グループの管理者として、Angular CLIのインスタン�
 説明的な文字列をキー値として使用することも、CLIコマンドを実行するときにランダムキーを割り当てることもできます。
 たとえば、次のコマンドは "tracking" という名前の設定キーを追加します。
 
-<code-example language="sh">
+<code-example format="shell" language="shell">
+
 ng config --global cli.analyticsSharing.tracking UA-123456-12
+
 </code-example>
 
 この機能を無効にするには、次のコマンドを実行します:
 
-<code-example language="sh">
+<code-example format="shell" language="shell">
+
 ng config --global cli.analyticsSharing undefined
+
 </code-example>
 
 ## ユーザーごとのトラッキング
@@ -35,13 +39,24 @@ ng config --global cli.analyticsSharing undefined
 コマンドとフラグの固有の使用法を識別するために、グローバル構成にカスタムユーザーIDを追加できます。
 そのユーザーが自分のプロジェクトに対してCLI分析を有効にした場合、分析表示には個々の使用状況が追跡およびラベル付けされます。
 
+<code-example format="shell" language="shell">
 
-<code-example language="sh">
 ng config --global cli.analyticsSharing.uuid SOME_USER_NAME
+
 </code-example>
 
 新しいランダムユーザーIDを生成するには、次のコマンドを実行します:
 
-<code-example language="sh">
+<code-example format="shell" language="shell">
+
 ng config --global cli.analyticsSharing.uuid ""
+
 </code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

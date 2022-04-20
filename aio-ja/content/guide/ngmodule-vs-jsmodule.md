@@ -10,22 +10,26 @@ JavaScriptモジュールはあなたの成果を多数のファイルに渡っ�
 
 <div class="alert is-helpful">
 
-JavaScriptモジュールの詳細を学ぶために、[ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)をご覧ください。
+JavaScriptモジュールの詳細を学ぶために、[ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules)をご覧ください。
 モジュール仕様については、[6th Edition of the ECMAScript standard](https://www.ecma-international.org/ecma-262/6.0/#sec-modules)をご覧ください。
 
 </div>
 
 JavaScriptモジュールにおけるコードを他のモジュールで有効にするには、次のように、そのモジュールにおいて関連するコードの最後で`export`文を使います。:
 
-```typescript
-export class AppComponent { ... }
-```
+<code-example format="typescript" language="typescript">
+
+export class AppComponent { &hellip; }
+
+</code-example>
 
 そのモジュールのコードをもう一方のモジュールで必要とするとき、次のように`import`文を使います。:
 
-```typescript
+<code-example format="typescript" language="typescript">
+
 import { AppComponent } from './app.component';
-```
+
+</code-example>
 
 各モジュールはそれ自身のトップレベルスコープを持ちます。
 すなわち、モジュールにおけるトップレベルの変数や関数は他のスクリプトやモジュールにおいて見えません。
@@ -58,25 +62,33 @@ NgModuleのメタデータのプロパティについての完全な説明は、
 
 新しいアプリケーションプロジェクトのために[Angular CLI](cli)によって生成されるルートNgModuleの`AppModule`は、両方の種類のモジュールをどのように使うかを実演します。:
 
-<code-example path="ngmodules/src/app/app.module.1.ts" header="src/app/app.module.ts (default AppModule)"></code-example>
+<code-example header="src/app/app.module.ts (default AppModule)" path="ngmodules/src/app/app.module.1.ts"></code-example>
 
 ルートNgModuleはJavaScriptモジュールをインポートするための`import`文から始まります。
 それから次の配列とともに`@NgModule`を設定します。:
 
-* `declarations`: このNgModuleに所属するコンポーネントとディレクティブ、パイプ。
+*   `declarations`: このNgModuleに所属するコンポーネントとディレクティブ、パイプ。
   新しいアプリケーションプロジェクトのルートNgModuleは`AppComponent`というただ1つのコンポーネントを持ちます。
 
-* `imports`: あなたが使用する他のNgModule。これによりそれらの宣言を使用できます。
+*   `imports`: あなたが使用する他のNgModule。これによりそれらの宣言を使用できます。
   新しく生成されるルートNgModuleは、ブラウザ特有の[DOM](https://www.w3.org/TR/DOM-Level-2-Core/introduction.html "Definition of Document Object Model")レンダリングやサニタイズ、ロケーションといったサービスを使用するために[`BrowserModule`](api/platform-browser/BrowserModule "BrowserModule NgModule")をインポートします。
 
-* `providers`: 他のNgModuleにおけるコンポーネントが使用できるサービスのプロバイダー。
+*   `providers`: 他のNgModuleにおけるコンポーネントが使用できるサービスのプロバイダー。
   新しく生成されるルートNgModuleにおいてプロバイダーはありません。
 
-* `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリケーションをブートストラップします。
+*   `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリケーションをブートストラップします。
   このエントリーコンポーネントの`AppComponent`は`declarations`と`bootstrap`の両方の配列に現れます。
 
 ## 次のステップ
 
-* NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")をご覧ください。
-* ルートNgModuleについてより学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")をご覧ください。
-* よく使用されるAngularのNgModuleとそれらをアプリケーションにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")をご覧ください。
+*   NgModuleの詳細は、[NgModuleでアプリをまとめる](guide/ngmodules "NgModuleでアプリをまとめる")をご覧ください。
+*   ルートNgModuleについてより学ぶには、[ルートNgModuleによるアプリの起動](guide/bootstrapping "ルートNgModuleによるアプリの起動")をご覧ください。
+*   よく使用されるAngularのNgModuleとそれらをアプリケーションにインポートする方法について学ぶには、[よく使用されるモジュール](guide/frequent-ngmodules "よく使用されるモジュール")をご覧ください。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

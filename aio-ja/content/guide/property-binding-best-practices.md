@@ -32,15 +32,15 @@ Angularはその変更を検出すると、エラーをスローします。
 
 次の例では、`ItemDetailComponent`の`childItem`プロパティは文字列を期待しています。
 
-<code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
+<code-example header="src/app/app.component.html" path="property-binding/src/app/app.component.html" region="model-property-binding"></code-example>
 
 `ItemDetailComponent`で`@Input()`の型が`string`のところを調べることで、この期待を確認できます:
 
-<code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)"></code-example>
+<code-example header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)" path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type"></code-example>
 
 `AppComponent`で`parentItem`は文字列です。つまり、`[childItem]="parentItem"`内の式である`parentItem`は、文字列に評価されます。
 
-<code-example path="property-binding/src/app/app.component.ts" region="parent-data-type" header="src/app/app.component.ts"></code-example>
+<code-example header="src/app/app.component.ts" path="property-binding/src/app/app.component.ts" region="parent-data-type"></code-example>
 
 `parentItem`が他の型の場合は、同様の型で`childItem`の`@Input()`を指定する必要があります。
 
@@ -48,18 +48,26 @@ Angularはその変更を検出すると、エラーをスローします。
 
 この例では、`ItemListComponent`は`AppComponent`の子コンポーネントであり、`items`プロパティはオブジェクトの配列を期待します。
 
-<code-example path="property-binding/src/app/app.component.html" region="pass-object" header="src/app/app.component.html"></code-example>
+<code-example header="src/app/app.component.html" path="property-binding/src/app/app.component.html" region="pass-object"></code-example>
 
 `ItemListComponent`では、`@Input()`の`items`は`Item[]`の型を持ちます。
 
-<code-example path="property-binding/src/app/item-list/item-list.component.ts" region="item-input" header="src/app/item-list.component.ts"></code-example>
+<code-example header="src/app/item-list.component.ts" path="property-binding/src/app/item-list/item-list.component.ts" region="item-input"></code-example>
 
 `Item`は`id`と`name`の2つのプロパティをもつオブジェクトであることに注意してください。
 
-<code-example path="property-binding/src/app/item.ts" region="item-class" header="src/app/item.ts"></code-example>
+<code-example header="src/app/item.ts" path="property-binding/src/app/item.ts" region="item-class"></code-example>
 
 `app.component.ts`では、`currentItems`は`item.ts`の`Item`オブジェクトと同じ形で`id`と`name`をもつオブジェクトの配列です。
 
-<code-example path="property-binding/src/app/app.component.ts" region="pass-object" header="src/app.component.ts"></code-example>
+<code-example header="src/app.component.ts" path="property-binding/src/app/app.component.ts" region="pass-object"></code-example>
 
 同じ形のオブジェクトを提供することで、Angularが式の`currentItems`を評価するときに`items`の期待を満たします。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

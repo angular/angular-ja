@@ -1,4 +1,5 @@
-{@a top}
+
+<a id="top"></a>
 
 # ドキュメントのタイトルの設定
 
@@ -7,12 +8,14 @@
 
 参照 <live-example name="set-document-title"></live-example> 。
 
-## *&lt;title&gt;* での問題
+## `<title>` での問題
 
 わかりやすい方法は、次のようにHTMLの`<title>`コンポーネントのプロパティをバインドする方法です。
 
-<code-example format=''>
-  &lt;title&gt;{{This_Does_Not_Work}}&lt;/title&gt;
+<code-example format="html" langauage="html">
+
+&lt;title&gt;{{This_Does_Not_Work}}&lt;/title&gt;
+
 </code-example>
 
 すみません、これは動作しません。
@@ -24,10 +27,9 @@ HTMLの `<title>`は、ドキュメントの`<head>`の中にあり、ボディ�
 
 <div class="alert is-helpful">
 
-  ブラウザの外でアプリケーションを実行すると、ほぼ瞬時に表示される初回のアプリケーションレンダリング時間と検索エンジン最適化のために、
-  サーバーサイドの事前レンダリングを利用できます。
-  つまり、Webワーカー内から実行して、マルチスレッドによってアプリケーションの応答性を向上させることができることを意味します。
-  また、デスクトップに届けるために、Electron.jsやWindows Universalの中でアプリケーションを実行できることを意味します。
+ブラウザの外でアプリケーションを実行すると、ほぼ瞬時に表示される初回のアプリケーションレンダリング時間と検索エンジン最適化のために、サーバーサイドの事前レンダリングを利用できます。
+つまり、Webワーカー内から実行して、マルチスレッドによってアプリケーションの応答性を向上させることができることを意味します。
+また、デスクトップに届けるために、Electron.jsやWindows Universalの中でアプリケーションを実行できることを意味します。
 
 </div>
 
@@ -36,18 +38,21 @@ HTMLの `<title>`は、ドキュメントの`<head>`の中にあり、ボディ�
 幸いなことに、Angularは *ブラウザプラットフォーム* の一部として `Title`サービスを提供することで隔たりを埋めます。
 その[Title](api/platform-browser/Title)サービスは、現在のHTMLドキュメントのタイトルを取得および設定するためのAPIを提供する単純なクラスです。
 
-* `getTitle() : string`&mdash;現在のHTMLドキュメントのタイトルを取得します。
-* `setTitle( newTitle : string )`&mdash;現在のHTMLドキュメントのタイトルを設定します。
+| Methods                         | Details |
+|:---                             |:---     |
+| `getTitle() : string`           | 現在のHTMLドキュメントのタイトルを取得します。 |
+| `setTitle( newTitle : string )` | 現在のHTMLドキュメントのタイトルを設定します。 |
 
 `Title`サービスをルートの`AppComponent`に入れ、それを呼び出すバインド可能な`setTitle`関数を公開することができます。
 
-
-<code-example path="set-document-title/src/app/app.component.ts" region="class" header="src/app/app.component.ts (class)"></code-example>
+<code-example header="src/app/app.component.ts (class)" path="set-document-title/src/app/app.component.ts" region="class"></code-example>
 
 この関数を3つのアンカータグにバインドしてください、すると、ほら！
 
 <div class="lightbox">
-  <img src="generated/images/guide/set-document-title/set-title-anim.gif" alt="Set title">
+
+<img alt="Set title" src="generated/images/guide/set-document-title/set-title-anim.gif">
+
 </div>
 
 これが完璧な解決策です。
@@ -68,3 +73,11 @@ HTMLの `<title>`は、ドキュメントの`<head>`の中にあり、ボディ�
 `Title`サービスはAngular *ブラウザプラットフォーム* の一部です。
 もし別のプラットフォームでアプリケーションを起動するのであれば、そのプラットフォーム用の「ドキュメントタイトル」の概念を理解している別の`Title`サービスを提供するべきでしょう。
 理想的には、アプリケーション自体はランタイム環境を知りませんし、気にしません。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

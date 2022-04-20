@@ -10,21 +10,27 @@ Schematics を使用して、アーキテクチャのルールと規則を適用
 
 ## Angular CLI の Schematics
 
-Schematics は Angular エコシステムの一部です。 [Angular CLI](guide/glossary#cli)  は  Schematics を使用して Web アプリケーションプロジェクトを変換します。
+Schematics は Angular エコシステムの一部です。 
+[Angular CLI](guide/glossary#cli)  は  Schematics を使用して Web アプリケーションプロジェクトを変換します。
 Schematics を変更し、新たに定義して、たとえば、依存関係の重大な変更を修正するためにコードを更新したり、既存のプロジェクトに新しいオプションやフレームワークを追加したりすることができます。
 
 `@schematics/angular` コレクションに含まれる Schematics は、デフォルトでは `ng generate` および `ng add` コマンドによって実行されます。
 パッケージには、`ng generate component` や `ng generate service` などの `ng generate` サブコマンドの CLI で使用可能なオプションを構成する名前付き Schematics が含まれています。
-`ng generate` のサブコマンドは、対応する Schematic の省略形です。長い形式を使用すると、特定の Schematic（または Schematics のコレクション）を指定して生成できます。
+`ng generate` のサブコマンドは、対応する Schematic の省略形です。
+長い形式を使用すると、特定の Schematic（または Schematics のコレクション）を指定して生成できます。
 
-<code-example language="bash">
+<code-example format="shell" language="shell">
+
 ng generate my-schematic-collection:my-schematic-name
+
 </code-example>
 
 または
 
-<code-example language="bash">
+<code-example format="shell" language="shell">
+
 ng generate my-schematic-name --collection collection-name
+
 </code-example>
 
 ### CLI Schematics 設定
@@ -40,15 +46,14 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 
 ライブラリ開発者は、カスタム Schematics の独自のコレクションを作成して、ライブラリを Angular CLI と統合できます。
 
-* *追加 Schematics* により、開発者は `ng add` を使用して Angular ワークスペースにライブラリをインストールできます。
-
-* *生成 Schematics* は、`ng generate` サブコマンドに、プロジェクトを変更する方法、設定とスクリプトを追加する方法、およびライブラリで定義されているスキャフォールドアーティファクトを指示できます。
-
-* *更新 Schematics* は、`ng update` コマンドにライブラリの依存関係を更新する方法を指示し、新しいバージョンをリリースするときに重大な変更に対する調整を行うことができます。
+*   *追加 Schematics* により、開発者は `ng add` を使用して Angular ワークスペースにライブラリをインストールできます。
+*   *生成 Schematics* は、`ng generate` サブコマンドに、プロジェクトを変更する方法、設定とスクリプトを追加する方法、およびライブラリで定義されているスキャフォールドアーティファクトを指示できます。
+*   *更新 Schematics* は、`ng update` コマンドにライブラリの依存関係を更新する方法を指示し、新しいバージョンをリリースするときに重大な変更に対する調整を行うことができます。
 
 これらの見え方と作成方法の詳細については、以下を参照してください。
-* [Authoring Schematics](guide/schematics-authoring)
-* [Schematics for Libraries](guide/schematics-for-libraries)
+
+*   [Authoring Schematics](guide/schematics-authoring)
+*   [Schematics for Libraries](guide/schematics-for-libraries)
 
 ### 追加 Schematics
 
@@ -72,29 +77,33 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 たとえば、Angular Material は、それが定義するUIコンポーネントの生成 Schematics を提供します。
 次のコマンドは、これらの Schematics の1つを使用して、並べ替えとページネーションのためにデータソースで事前に設定された Angular Material `<mat-table>` をレンダリングします。
 
-<code-example language="bash">
-ng generate @angular/material:table <component-name>
+<code-example format="shell" language="shell">
+
+ng generate &commat;angular/material:table &lt;component-name&gt;
+
 </code-example>
 
 ### 更新 Schematics
 
-`ng update` コマンドを使用して、ワークスペースのライブラリ依存関係を更新できます。オプションを指定しないか、help オプションを使用すると、コマンドはワークスペースを検査して、更新するライブラリを提案します。
+`ng update` コマンドを使用して、ワークスペースのライブラリ依存関係を更新できます。
+オプションを指定しないか、help オプションを使用すると、コマンドはワークスペースを検査して、更新するライブラリを提案します。
 
-<code-example language="bash">
+<code-example format="shell" language="shell">
+
 ng update
     We analyzed your package.json, there are some packages to update:
 
       Name                               Version                  Command to update
-     --------------------------------------------------------------------------------
-      @angular/cdk                       7.2.2 -> 7.3.1           ng update @angular/cdk
-      @angular/cli                       7.2.3 -> 7.3.0           ng update @angular/cli
-      @angular/core                      7.2.2 -> 7.2.3           ng update @angular/core
-      @angular/material                  7.2.2 -> 7.3.1           ng update @angular/material
-      rxjs                               6.3.3 -> 6.4.0           ng update rxjs
-
+     &hyphen;-------------------------------------------------------------------------------
+      &commat;angular/cdk                       7.2.2 -&gt; 7.3.1           ng update &commat;angular/cdk
+      &commat;angular/cli                       7.2.3 -&gt; 7.3.0           ng update &commat;angular/cli
+      &commat;angular/core                      7.2.2 -&gt; 7.2.3           ng update &commat;angular/core
+      &commat;angular/material                  7.2.2 -&gt; 7.3.1           ng update &commat;angular/material
+      rxjs                               6.3.3 -&gt; 6.4.0           ng update rxjs
 
     There might be additional packages that are outdated.
     Run "ng update --all" to try to update all at the same time.
+
 </code-example>
 
 更新するライブラリのセット（または `--all` フラグ）をコマンドに渡すと、それらのライブラリ、それらのピア依存関係、およびそれらに依存するピア依存関係が更新されます。
@@ -103,7 +112,8 @@ ng update
 
 不整合がある場合（たとえば、ピアの依存関係を単純な [semver](https://semver.io/) 範囲で照合できない場合）、コマンドはエラーを生成し、ワークスペース内の何も変更しません。
 
-デフォルトでは、すべての依存関係の更新を強制しないことをお勧めします。最初に特定の依存関係を更新してください。
+デフォルトでは、すべての依存関係の更新を強制しないことをお勧めします。
+最初に特定の依存関係を更新してください。
 
 `ng update` コマンドの動作の詳細については、[Update Command](https://github.com/angular/angular-cli/blob/master/docs/specifications/update.md) を参照してください。
 
@@ -113,9 +123,17 @@ ng update
 
 たとえば、Angular Material ライブラリを更新するとします。
 
-<code-example language="bash">
-ng update @angular/material
+<code-example format="shell" language="shell">
+ng update &commat;angular/material
 </code-example>
 
 このコマンドは、ワークスペースの `package.json` 内の `@angular/material` とその依存関係  `@angular/cdk` の両方を更新します。
 いずれかのパッケージに、既存のバージョンから新しいバージョンへの移行をカバーする更新 Schematic が含まれている場合、コマンドはワークスペースでその Schematic を実行します。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

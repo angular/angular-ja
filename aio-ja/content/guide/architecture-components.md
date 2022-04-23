@@ -219,7 +219,7 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 
 <code-example header="src/app/hero-detail.component.html (ngModel)" path="architecture/src/app/hero-detail.component.html" region="ngModel"></code-example>
 
-Angularには、レイアウト構造を変更する（たとえば、[ngSwitch](guide/built-in-directives#ngSwitch)）  、あるいはDOM要素とコンポーネントの様相を変更する（たとえば、[ngStyle](guide/built-in-directives#ngstyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
+Angularには、レイアウト構造を変更する（たとえば、[ngSwitch](guide/built-in-directives#ngSwitch)）  、あるいはDOM要素とコンポーネントの見た目を変更する（たとえば、[ngStyle](guide/built-in-directives#ngstyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
 
 <div class="alert is-helpful">
 

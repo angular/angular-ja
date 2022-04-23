@@ -107,7 +107,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 ### クリックイベントのバインディングを追加する
 
-以下のように `<li>` にクリックイベントをバインドした `<button>` を追加します。
+次のように `<li>` にクリックイベントをバインドした `<button>` を追加します。
 
 <code-example header="heroes.component.html (template excerpt)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click"></code-example>
 

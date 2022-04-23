@@ -1,38 +1,38 @@
-# Angular Internationalization
+# Angularの国際化
 
 {@searchKeywords i18n}
 
-*Internationalization*, sometimes referenced as i18n, is the process of designing and preparing your project for use in different locales around the world.
-*Localization* is the process of building versions of your project for different locales.
-The localization process includes the following actions.
+*国際化*とは、i18nと表記されることもあり、世界中の異なるロケールで使用できるようにプロジェクトを設計し、準備するプロセスのことです。
+*ローカライゼーション*とは、プロジェクトのバージョンを異なるロケール向けに構築するプロセスのことです。
+ローカライゼーションのプロセスには、次のような作業が含まれます。
 
-*   Extract text for translation into different languages
-*   Format data for a specific locale
+*   異なる言語へ翻訳するテキストを抽出する
+*   特定のロケール用にデータをフォーマットする
 
-A *locale* identifies a region in which people speak a particular language or language variant.
-Possible regions includes countries and geographical regions.
-A locale determines the formatting and parsing of the following details.
+*ロケール*は、人々が特定の言語または言語変種を話す地域を特定するものです。
+地域とは、国および地理的な地域を含みます。
+ロケールは、次の詳細のフォーマットとパースを決定します。
 
-*   Measurement units including date and time, numbers, and currencies
-*   Translated names including time zones, languages, and countries
+*   日付と時刻、数字、通貨を含む測定単位
+*   タイムゾーン、言語、国を含む翻訳された名前
 
-## Learn about Angular internationalization
+## Angularの国際化について学ぶ
 
 <div class="card-container">
     <a href="guide/i18n-common-overview" class="docs-card" title="Common internationalization tasks">
-        <section>Common tasks</section>
-        <p>Learn how to implement many of the common tasks associated with Angular internationalization.</p>
-        <p class="card-footer">Common internationalization tasks</p>
+        <section>共通タスク</section>
+        <p>Angularの国際化に関連する多くの共通タスクの実装方法について学びます。</p>
+        <p class="card-footer">国際化の共通タスク</p>
     </a>
     <a href="guide/i18n-optional-overview" class="docs-card" title="Optional internationalization tasks">
-        <section>Optional practices</section>
-        <p>Learn how to implement optional practices associated with Angular internationalization.</p>
-        <p class="card-footer">Optional internationalization practices</p>
+        <section>オプショナルプラクティス</section>
+        <p>Angularの国際化に関連するオプショナルプラクティスの実装方法について学びます。</p>
+        <p class="card-footer">国際化のオプショナルプラクティス</p>
     </a>
     <a href="guide/i18n-example" class="docs-card" title="Internationalization example">
-        <section>Internationalization example</section>
-        <p>Review an example of Angular internationalization.</p>
-        <p class="card-footer">Example Angular Internationalization application</p>
+        <section>国際化の例</section>
+        <p>Angularの国際化の例を確認します。</p>
+        <p class="card-footer">Angularの国際化アプリケーションの例</p>
     </a>
 </div>
 

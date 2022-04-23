@@ -109,7 +109,7 @@ Angularの[`state()`](api/animations/state)関数がCSSスタイル属性を設�
 次のコードスニペットでは、複数のスタイル属性が状態に対して同時に設定されています。
 `open`状態では、ボタンの高さは200ピクセル、不透明度は1、背景色は黄色になります。
 
-<code-example header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" region="state2"></code-example>
+<code-example header="src/app/open-close.component.ts" path="animations/src/app/open-close.component.ts" region="state1"></code-example>
 
 次の`closed`状態では、ボタンの高さは100ピクセル、不透明度は0.7、背景色は青になります。
 

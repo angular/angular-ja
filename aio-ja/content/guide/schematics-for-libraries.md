@@ -227,12 +227,6 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 
   コンテキストが存在することを確認し、適切なエラーをスローしてください。
 
-1. `workspace.extensions`プロパティには、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値が含まれています。
-   `ng generate` コマンドでプロジェクトが明示的に指定されていない場合は、その値をフォールバックとして使用します。
-
-<code-example header="projects/my-lib/schematics/my-service/index.ts (Default Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-fallback">
-</code-example>
-
 1. これでプロジェクト名がわかったので、それを使用してプロジェクト固有の設定情報を取得します。
 
 <code-example header="projects/my-lib/schematics/my-service/index.ts (Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-info">

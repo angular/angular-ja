@@ -86,7 +86,7 @@ Integrators can add builders to enable tools and workflows to run through the An
 For example, a custom builder can replace the third-party tools used by the built-in implementations for Angular CLI commands, such as `ng build` or `ng test`.
 
 
-## 属性ディレクティブ
+## 属性ディレクティブ {@a attribute-directive}
 
 [ディレクティブ][AioGuideGlossaryDirective]の一種。
 他のHTML要素、属性、プロパティ、コンポーネントの動作をリッスンし変更できます。
@@ -94,7 +94,7 @@ For example, a custom builder can replace the third-party tools used by the buil
 
 [属性ディレクティブ][AioGuideAttributeDirectives]でさらに学びましょう。
 
-## バインディング
+## バインディング {@a binding}
 
 一般に、変数やプロパティにデータの値を設定する方法。
 Angular内では通常、[データバインディング][AioGuideGlossaryDataBinding]のことを指し、
@@ -113,7 +113,7 @@ Angularでは、アプリケーションのルートNgModule(`AppModule`)には�
 
 詳細は[ブートストラップ][AioGuideBootstrapping]で学びましょう。
 
-## ビルダ
+## ビルダ {@a builder}
 
 A function that uses the [Architect](#architect) API to perform a complex process such as "build" or "test".
 The builder code is defined in an [npm package](#npm-package).

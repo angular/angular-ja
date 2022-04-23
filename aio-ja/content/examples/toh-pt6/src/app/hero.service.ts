@@ -56,7 +56,7 @@ export class HeroService {
       .pipe(
         map(heroes => heroes[0]), // {0|1} 要素の配列を返す
         tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
+          const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} hero id=${id}`);
         }),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
@@ -126,6 +126,7 @@ export class HeroService {
   /**
    * 失敗したHttp操作を処理します。
    * アプリを持続させます。
+   *
    * @param operation - 失敗した操作の名前
    * @param result - observableな結果として返す任意の値
    */

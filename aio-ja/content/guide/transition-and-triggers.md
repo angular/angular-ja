@@ -77,8 +77,6 @@ Angularでは、遷移の状態は<code>[state](api/animations/state)()</code> �
 
 <div class="alert is-helpful">
 
-**Note:** この例では、ビューに出入りする要素とは、DOMに挿入または削除される要素と同義です。
-
 </div>
 
 さて、新しい振る舞いを追加しましょう:
@@ -109,10 +107,16 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 
 `*ngIf`または`*ngFor`のビューがページに置かれたときに`:enter`の遷移が実行され、それらのビューがページから削除されたときに`:leave`が実行されます。
 
-この例では、`myInsertRemoveTrigger`という出入りするアニメーション用の特殊なトリガーを持ちます。HTMLテンプレートには次のコードが含まれています。
+**NOTE**: <br />
+Entering/leaving behaviors can sometime be confusing.
+As a rule of thumb consider that any element being added to the DOM by Angular passes via the `:enter` transition, but only elements being directly removed from the DOM by Angular pass via the `:leave` transition \(For example, an element's view is removed from the DOM because its parent is being removed from the DOM or the app's route has changed, then the element will not pass via the `:leave` transition\).
 
-<code-example path="animations/src/app/insert-remove.component.html" header="src/app/insert-remove.component.html" region="insert-remove" language="typescript">
-</code-example>
+</div>
+
+This example has a special trigger for the enter and leave animation called `myInsertRemoveTrigger`.
+The HTML template contains the following code.
+
+<code-example header="src/app/insert-remove.component.html" path="animations/src/app/insert-remove.component.html" region="insert-remove"></code-example>
 
 コンポーネントファイルでは、`:enter`の遷移は要素がビューに挿入されたとき、初期値として不透明度を0に設定し、不透明度が1になるまでアニメーションします。
 

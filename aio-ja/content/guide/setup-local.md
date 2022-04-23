@@ -58,8 +58,10 @@ Angular CLIを使用して、プロジェクトを作成し、アプリケーシ
 
 Angular CLIをインストールするには、ターミナルウィンドウを開き、次のコマンドを実行します:
 
-<code-example language="sh">
-  npm install -g @angular/cli<aio-angular-dist-tag class="pln"></aio-angular-dist-tag>
+<code-example format="shell" language="shell">
+
+npm install -g &commat;angular/cli<aio-angular-dist-tag></aio-angular-dist-tag>
+
 </code-example>
 
 {@a create-proj}

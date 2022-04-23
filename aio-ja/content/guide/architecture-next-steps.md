@@ -52,7 +52,9 @@ Angular は、ほとんどのロジックやデータがクライアント側に
 
 *   [ワークスペースとファイル構成](guide/file-structure): Angularワークスペースとプロジェクトフォルダの構造を理解する。
 *   [ビルドとサーブ](guide/build): 開発時、ステージング、およびプロダクションなど、プロジェクトのさまざまなビルドおよびプロキシサーバー構成を定義する方法を学びます。
-*   [npmパッケージ](guide/npm-packages): Angular フレームワーク、Angular CLI、Angularアプリケーションで使用されるコンポーネントは、[npm](https://docs.npmjs.com/)パッケージとしてパッケージ化され、npmレジストリを介して配布されます。 Angular CLIはデフォルトの `package.json`ファイルを作成します。このファイルは、うまく機能し、多くの一般的なアプリケーションシナリオを共同でサポートするパッケージのスターターセットを指定します。
+*   [npmパッケージ](guide/npm-packages): Angular フレームワーク、Angular CLI、Angularアプリケーションで使用されるコンポーネントは、[npm](https://docs.npmjs.com/)パッケージとしてパッケージ化され、npmレジストリを介して配布されます。 
+    Angular CLIはデフォルトの `package.json`ファイルを作成します。このファイルは、うまく機能し、多くの一般的なアプリケーションシナリオを共同でサポートするパッケージのスターターセットを指定します。
+
 *   [TypeScript の設定](guide/typescript-configuration): TypeScript は Angular アプリケーション開発における主要な言語です。
 *   [ブラウザのサポート](guide/browser-support): アプリケーションを幅広いブラウザに対応させます。
 
@@ -66,6 +68,8 @@ Angular は、ほとんどのロジックやデータがクライアント側に
 
 [AioGuideI18nOverview]: guide/i18n-overview "Angular Internationalization | Angular"
 
+<!-- external links -->
+
 <!-- end links -->
 
-@reviewed 2021-09-15
+@reviewed 2022-02-28

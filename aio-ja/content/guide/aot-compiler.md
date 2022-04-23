@@ -8,45 +8,35 @@ Angular の [ahead-of-time (AOT) コンパイラ](guide/glossary#aot) は、ブ�
 
 <div class="alert is-helpful">
 
-  <a href="https://www.youtube.com/watch?v=anphffaCZrQ">Watch Alex Rickabaugh explain the Angular compiler</a> at AngularConnect 2019.
+[Watch Alex Rickabaugh explain the Angular compiler](https://www.youtube.com/watch?v=anphffaCZrQ) at AngularConnect 2019.
 
 </div>
 
-{@a why-aot}
+<a id="why-aot"></a>
 
 AOTを使用する理由は次のとおりです。
 
-* *より速いレンダリング*
-   AOT では、ブラウザはコンパイル済みのアプリケーションをダウンロードします。
-   ブラウザは実行可能コードをロードするので、最初にアプリケーションをコンパイルするのを待たずにアプリケーションをすぐにレンダリングできます。
+| Reasons                                 | Details |
+|:---                                     |:---     |
+| Faster rendering                        | With AOT, the browser downloads a pre-compiled version of the application. The browser loads executable code so it can render the application immediately, without waiting to compile the application first.                                       |
+| Fewer asynchronous requests             | The compiler *inlines* external HTML templates and CSS style sheets within the application JavaScript, eliminating separate ajax requests for those source files.                                                                                  |
+| Smaller Angular framework download size | There's no need to download the Angular compiler if the application is already compiled. The compiler is roughly half of Angular itself, so omitting it dramatically reduces the application payload.                                              |
+| Detect template errors earlier          | The AOT compiler detects and reports template binding errors during the build step before users can see them.                                                                                                                                      |
+| Better security                         | AOT compiles HTML templates and components into JavaScript files long before they are served to the client. With no templates to read and no risky client-side HTML or JavaScript evaluation, there are fewer opportunities for injection attacks. |
 
-* *より少ない非同期リクエスト*
-   コンパイラは外部の HTML テンプレートと CSS スタイルシートをアプリケーションの JavaScript 内に _インライン化し_ 、
-   それらのソースファイルに対する別々の ajax リクエストを排除します。
-
-* *より小さい Angular フレームワークのダウンロードサイズ*
-   アプリケーションがすでにコンパイルされている場合は、Angular コンパイラをダウンロードする必要はありません。
-   コンパイラは Angular 自体の約半分なので、これを省略するとアプリケーションのペイロードが大幅に減少します。
-
-* *テンプレートエラーを早期に検出する*
-   AOT コンパイラは、ユーザーが目にする前にビルドステップ中にテンプレートバインディングエラーを検出して
-   報告します。
-
-* *より良いセキュリティ*
-   AOT は、HTML テンプレートとコンポーネントがクライアントに提供されるずっと前から JavaScript ファイルにコンパイルします。
-   読み取るテンプレートがなく、危険なクライアントサイドの HTML または JavaScript の評価もないため、
-   インジェクション攻撃の機会が少なくなります。
-
-{@a overview}
+<a id="overview"></a>
 
 ## コンパイラの選択
 
 Angular には、アプリケーションをコンパイルする2つの方法があります。
 
-* **_Just-in-Time_ (JIT)** は実行時にブラウザ内でアプリケーションをコンパイルします。This was the default until Angular 8.
-* **_Ahead-of-Time_ (AOT)** はビルド時にアプリケーションとライブラリをコンパイルします。This is the default since Angular 9.
+| Angular compile       | Details |
+|:---                   |:---     |
+| Just-in-Time \(JIT\)  | Compiles your application in the browser at runtime. This was the default until Angular 8.        |
+| Ahead-of-Time \(AOT\) | Compiles your application and libraries at build time. This is the default starting in Angular 9. |
 
-When you run the [`ng build`](cli/build) (build only) or [`ng serve`](cli/serve) (build and serve locally) CLI commands, the type of compilation (JIT or AOT) depends on the value of the `aot` property in your build configuration specified in `angular.json`. By default, `aot` is set to `true` for new CLI apps.
+When you run the [`ng build`](cli/build) \(build only\) or [`ng serve`](cli/serve) \(build and serve locally\) CLI commands, the type of compilation \(JIT or AOT\) depends on the value of the `aot` property in your build configuration specified in `angular.json`.
+By default, `aot` is set to `true` for new CLI applications.
 
 詳細については、[CLI コマンドリファレンス](cli) および [Angularアプリのビルドとサーブ](guide/build)を参照してください。
 
@@ -58,16 +48,18 @@ AngularのAOTコンパイラは、Angularが管理することになるアプリ
 
 次の例では、`@Component()` メタデータオブジェクトとクラスコンストラクターは Angular に `TypicalComponent` のインスタンスを作成し表示する方法を伝えます。
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'app-typical',
-  template: '<div>A typical component for {{data.name}}</div>'
+  template: '&lt;div&gt;A typical component for {{data.name}}&lt;/div&gt;'
 })
 export class TypicalComponent {
-  @Input() data: TypicalData;
-  constructor(private someService: SomeService) { ... }
+  &commat;Input() data: TypicalData;
+  constructor(private someService: SomeService) { &hellip; }
 }
-```
+
+</code-example>
 
 Angular コンパイラはメタデータを _1回_ 抽出し、 `TypicalComponent` に対して _ファクトリ_ を生成します。
 `TypicalComponent` インスタンスを作成する必要があるとき、Angular はファクトリを呼び出します。ファクトリは注入された依存関係をもつコンポーネントクラスの新しいインスタンスにバインドされた新しいビジュアル要素を生成します。
@@ -75,24 +67,21 @@ Angular コンパイラはメタデータを _1回_ 抽出し、 `TypicalCompone
 ### コンパイルフェーズ
 
 AOTコンパイルには三つのフェーズがあります。
-* フェーズ1は*コード解析*です。
-   このフェーズでは、TypeScriptコンパイラと*AOTコレクター*がソース表現を作ります。コレクターは収集したメタデータを解釈しようとはしません。それはメタデータをできる限りで表現し、メタデータの構文違反を見つけたらエラーを記録します。
 
-* フェーズ2は*コード生成*です。
-   このフェーズでは、コンパイラの`StaticReflector`がフェーズ1で収集したメタデータを解釈し、メタデータの追加の検証を実行して、メタデータの制約違反を見つけたらエラーを投げます。
-
-* フェーズ3は*テンプレート型チェック*です。
-   オプションであるこのフェーズでは、Angularの*テンプレートコンパイラ*がTypeScriptコンパイラを使用して、テンプレートにおけるバインディング式を検証します。このフェーズは明示的に設定オプションの`fullTemplateTypeCheck`を設定して有効にできます。[Angularコンパイラオプション](guide/angular-compiler-options)を参照してください。
-
+|     | Phase                  | Details |
+|:--- |:---                    |:---     |
+| 1   | code analysis          | In this phase, the TypeScript compiler and *AOT collector* create a representation of the source. The collector does not attempt to interpret the metadata it collects. It represents the metadata as best it can and records errors when it detects a metadata syntax violation.                        |
+| 2   | code generation        | In this phase, the compiler's `StaticReflector` interprets the metadata collected in phase 1, performs additional validation of the metadata, and throws an error if it detects a metadata restriction violation.                                                                                        |
+| 3   | template type checking | In this optional phase, the Angular *template compiler* uses the TypeScript compiler to validate the binding expressions in templates. You can enable this phase explicitly by setting the `fullTemplateTypeCheck` configuration option; see [Angular compiler options](guide/angular-compiler-options). |
 
 ### メタデータ制約
 
 TypeScript の _サブセット_ にメタデータを記述します。これは、次の一般的な制約に従う必要があります。
 
-* [式の構文](#expression-syntax) をサポートされている JavaScript のサブセットに制限します
-* [コード折りたたみ](#code-folding)の後、エクスポートされたシンボルだけを参照します
-* コンパイラによって[サポートされている関数](#supported-functions)だけを呼び出します
-* 修飾されデータバインドされたクラスメンバーはパブリックでなければなりません
+*   [式の構文](#expression-syntax) をサポートされている JavaScript のサブセットに制限します
+*   [コード折りたたみ](#code-folding)の後、エクスポートされたシンボルだけを参照します
+*   コンパイラによって[サポートされている関数](#supported-functions)だけを呼び出します
+*   修飾されデータバインドされたクラスメンバーはパブリックでなければなりません
 
 AOTコンパイル用のアプリケーションを準備するための追加のガイドラインと説明については、[Angular: Writing AOT-friendly applications](https://medium.com/sparkles-blog/angular-writing-aot-friendly-applications-7b64c8afbe3f)を参照してください。
 
@@ -121,90 +110,32 @@ Angular の [schema.ts](https://github.com/angular/angular/blob/master/packages/
 
 </div>
 
-{@a expression-syntax}
+<a id="expression-syntax"></a>
+
 ### 式の構文制約
 
 AOTコレクター は JavaScript のサブセットしか理解できません。
 次の限られた構文でメタデータオブジェクトを定義します。
 
-<style>
-  td, th {vertical-align: top}
-</style>
-
-<table>
-  <tr>
-    <th>構文</th>
-    <th>例</th>
-  </tr>
-  <tr>
-    <td>オブジェクトリテラル</td>
-    <td><code>{cherry: true, apple: true, mincemeat: false}</code></td>
-  </tr>
-  <tr>
-    <td>配列リテラル</td>
-    <td><code>['cherries', 'flour', 'sugar']</code></td>
-  </tr>
-  <tr>
-    <td>拡張配列リテラル</td>
-    <td><code>['apples', 'flour', ...the_rest]</code></td>
-  </tr>
-   <tr>
-    <td>コール</td>
-    <td><code>bake(ingredients)</code></td>
-  </tr>
-   <tr>
-    <td>New</td>
-    <td><code>new Oven()</code></td>
-  </tr>
-   <tr>
-    <td>プロパティアクセス</td>
-    <td><code>pie.slice</code></td>
-  </tr>
-   <tr>
-    <td>配列のインデックス</td>
-    <td><code>ingredients[0]</code></td>
-  </tr>
-   <tr>
-    <td>ID 参照</td>
-    <td><code>Component</code></td>
-  </tr>
-   <tr>
-    <td>テンプレート文字列</td>
-    <td><code>`pie is ${multiplier} times better than cake`</code></td>
-   <tr>
-    <td>文字列リテラル</td>
-    <td><code>'pi'</code></td>
-  </tr>
-   <tr>
-    <td>数値リテラル</td>
-    <td><code>3.14153265</code></td>
-  </tr>
-   <tr>
-    <td>真偽値リテラル</td>
-    <td><code>true</code></td>
-  </tr>
-   <tr>
-    <td>null リテラル</td>
-    <td><code>null</code></td>
-  </tr>
-   <tr>
-    <td>サポートされている接頭演算子</td>
-    <td><code>!cake</code></td>
-  </tr>
-   <tr>
-    <td>サポートされている二項演算子</td>
-    <td><code>a+b</code></td>
-  </tr>
-   <tr>
-    <td>条件演算子</td>
-    <td><code>a ? b : c</code></td>
-  </tr>
-   <tr>
-    <td>括弧</td>
-    <td><code>(a+b)</code></td>
-  </tr>
-</table>
-
+| Syntax                    | Example |
+|:---                       |:---     |
+| Literal object            | `{cherry: true, apple: true, mincemeat: false}`                        |
+| Literal array             | `['cherries', 'flour', 'sugar']`                                       |
+| Spread in literal array   | `['apples', 'flour', &hellip;the_rest]`                                |
+| Calls                     | `bake(ingredients)`                                                    |
+| New                       | `new Oven()`                                                           |
+| Property access           | `pie.slice`                                                            |
+| Array index               | `ingredients[0]`                                                       |
+| Identity reference        | `Component`                                                            |
+| A template string         | <code-example format="javascript" hideCopy language="javascript">&grave;pie is &dollar;{multiplier} times better than cake&grave; </code-example> |
+| Literal string            | `'pi'`                                                                 |
+| Literal number            | `3.14153265`                                                           |
+| Literal boolean           | `true`                                                                 |
+| Literal null              | `null`                                                                 |
+| Supported prefix operator | `!cake`                                                                |
+| Supported binary operator | `a+b`                                                                  |
+| Conditional operator      | `a ? b : c`                                                            |
+| Parentheses               | `(a+b)`                                                                |
 
 式がサポートされていない構文を使う場合、コレクターはエラーノードを `.metadata.json` ファイルに書き込みます。アプリケーションコードを生成するためにその部分のメタデータが必要な場合、
 コンパイラは後でエラーを報告します。
@@ -213,32 +144,37 @@ AOTコレクター は JavaScript のサブセットしか理解できません�
 
  エラーを伴う `.metadata.json` ファイルを生成せずに `ngc` に構文エラーを即座に報告させたい場合は、TypeScript設定ファイルの `strictMetadataEmit` オプションを設定してください。
 
-```
-  "angularCompilerOptions": {
-   ...
-   "strictMetadataEmit" : true
- }
- ```
+<code-example format="json" language="json">
+
+"angularCompilerOptions": {
+  &hellip;
+  "strictMetadataEmit" : true
+}
+
+</code-example>
 
 Angular ライブラリはすべての Angular の `.metadata.json` ファイルがクリーンであることを保証するためにこのオプションを持っています、そして自身のライブラリを構築するとき同じことをするのはベストプラクティスです。
 
 </div>
 
-{@a function-expression}
-{@a arrow-functions}
+<a id="function-expression"></a>
+<a id="arrow-functions"></a>
+
 ### アロー関数は使えません
 
-AOTコンパイラは[関数式](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/function)および
-_ラムダ_ 関数とも呼ばれる[アロー関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions)をサポートしていません。
+AOTコンパイラは[関数式](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/function)および
+_ラムダ_ 関数とも呼ばれる[アロー関数](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions)をサポートしていません。
 
 次のコンポーネントデコレーターを考えてみましょう。
 
-```typescript
-@Component({
-  ...
-  providers: [{provide: server, useFactory: () => new Server()}]
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
+  &hellip;
+  providers: [{provide: server, useFactory: () =&gt; new Server()}]
 })
-```
+
+</code-example>
 
 AOTコレクターはメタデータ式ではアロー関数 `() => new Server()` をサポートしません。
 関数の代わりにエラーノードを生成します。
@@ -246,21 +182,24 @@ AOTコレクターはメタデータ式ではアロー関数 `() => new Server()
 
 これを変換することでエラーを修正できます。
 
-```typescript
+<code-example format="typescript" language="typescript">
+
 export function serverFactory() {
   return new Server();
 }
 
-@Component({
-  ...
+&commat;Component({
+  &hellip;
   providers: [{provide: server, useFactory: serverFactory}]
 })
-```
+
+</code-example>
 
 バージョン 5 以降、コンパイラは `.js` ファイルを出力しながらこの書き換えを自動的に実行します。
 
-{@a exported-symbols}
-{@a code-folding}
+<a id="exported-symbols"></a>
+<a id="code-folding"></a>
+
 ### コードの折りたたみ
 
 コンパイラは **_エクスポートされた_** シンボルへの参照しか解決できません。
@@ -270,146 +209,92 @@ export function serverFactory() {
 たとえば、コレクターは式 `1 + 2 + 3 + 4` を評価し、それを結果 `10` で置き換えることができます。
 このプロセスは _折りたたみ_ と呼ばれます。この方法で縮小できる式は _折りたたみ可能_ です。
 
-{@a var-declaration}
+<a id="var-declaration"></a>
+
 コレクターはモジュールローカルな `const` 宣言と初期化された `var` と `let` 宣言への参照を評価することができ、事実上 `.metadata.json` ファイルからそれらを削除します。
 
 次のコンポーネント定義を考えてみてください。
 
-```typescript
-const template = '<div>{{hero.name}}</div>';
+<code-example format="typescript" language="typescript">
 
-@Component({
+const template = '&lt;div&gt;{{hero.name}}&lt;/div&gt;';
+
+&commat;Component({
   selector: 'app-hero',
   template: template
 })
 export class HeroComponent {
-  @Input() hero: Hero;
+  &commat;Input() hero: Hero;
 }
-```
+
+</code-example>
 
 エクスポートされていないので、コンパイラは `template` 定数を参照できませんでした。
 それでもコレクターは`template`定数をその内容をインラインにすることでメタデータ定義へ折りたたみできます。
 効果はあなたが書いた場合と同じです。
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'app-hero',
-  template: '<div>{{hero.name}}</div>'
+  template: '&lt;div&gt;{{hero.name}}&lt;/div&gt;'
 })
 export class HeroComponent {
-  @Input() hero: Hero;
+  &commat;Input() hero: Hero;
 }
-```
+
+</code-example>
 
 `template`への参照がなくなり、コンパイラが後で`.metadata.json`における_コレクターの_出力を解釈したときにコンパイラを煩わせることはなくなりました。
 
 別の式に `template` 定数を含めることでこの例をさらに一歩進めることができます。
 
-```typescript
-const template = '<div>{{hero.name}}</div>';
+<code-example format="typescript" language="typescript">
 
-@Component({
+const template = '&lt;div&gt;{{hero.name}}&lt;/div&gt;';
+
+&commat;Component({
   selector: 'app-hero',
-  template: template + '<div>{{hero.title}}</div>'
+  template: template + '&lt;div&gt;{{hero.title}}&lt;/div&gt;'
 })
 export class HeroComponent {
-  @Input() hero: Hero;
+  &commat;Input() hero: Hero;
 }
-```
+
+</code-example>
 
 コレクターはこの式をそれに相当する_折りたたんだ_文字列に変換します。
 
-```
-'<div>{{hero.name}}</div><div>{{hero.title}}</div>'
-```
+<code-example format="typescript" language="typescript">
+
+'&lt;div&gt;{{hero.name}}&lt;/div&gt;&lt;div&gt;{{hero.title}}&lt;/div&gt;'
+
+</code-example>
 
 #### 折りたたみ可能な構文
 
 次の表は、コレクターがどの式を折りたたむことができるかどうかを示しています。
 
-<style>
-  td, th {vertical-align: top}
-</style>
-
-<table>
-  <tr>
-    <th>構文</th>
-    <th>折りたたみ可能</th>
-  </tr>
-  <tr>
-    <td>オブジェクトリテラル</td>
-    <td>可能</td>
-  </tr>
-  <tr>
-    <td>配列リテラル</td>
-    <td>可能</td>
-  </tr>
-  <tr>
-    <td>拡張配列リテラル</td>
-    <td>不可</td>
-  </tr>
-   <tr>
-    <td>コール</td>
-    <td>不可</td>
-  </tr>
-   <tr>
-    <td>New</td>
-    <td>不可</td>
-  </tr>
-   <tr>
-    <td>プロパティアクセス</td>
-    <td>可能、ターゲットが折りたたみ可能の場合</td>
-  </tr>
-   <tr>
-    <td>配列のインデックス</td>
-    <td>可能、ターゲットとインデックスが折りたたみ可能の場合</td>
-  </tr>
-   <tr>
-    <td>ID 参照</td>
-    <td>可能、それがローカルへの参照であれば</td>
-  </tr>
-   <tr>
-    <td>置換のないテンプレート</td>
-    <td>可能</td>
-  </tr>
-   <tr>
-    <td>置換を含むテンプレート</td>
-    <td>可能、代入が折りたたみ可能の場合</td>
-  </tr>
-   <tr>
-    <td>文字列リテラル</td>
-    <td>可能</td>
-  </tr>
-   <tr>
-    <td>数値リテラル</td>
-    <td>可能</td>
-  </tr>
-   <tr>
-    <td>真偽値リテラル</td>
-    <td>可能</td>
-  </tr>
-   <tr>
-    <td>null リテラル</td>
-    <td>可能</td>
-  </tr>
-   <tr>
-    <td>サポートされている接頭演算子</td>
-    <td>可能、オペランドが折りたたみ可能の場合</td>
-  </tr>
-   <tr>
-    <td>サポートされている二項演算子</td>
-    <td>可能、左右両方が折りたたみ可能の場合</td>
-  </tr>
-   <tr>
-    <td>条件演算子</td>
-    <td>可能、条件が折りたたみ可能の場合</td>
-  </tr>
-   <tr>
-    <td>括弧</td>
-    <td>可能、式が折りたたみ可能の場合</td>
-  </tr>
-</table>
-
+| Syntax                           | Foldable |
+|:---                              |:---      |
+| Literal object                   | yes                                      |
+| Literal array                    | yes                                      |
+| Spread in literal array          | no                                       |
+| Calls                            | no                                       |
+| New                              | no                                       |
+| Property access                  | yes, if target is foldable               |
+| Array index                      | yes, if target and index are foldable    |
+| Identity reference               | yes, if it is a reference to a local     |
+| A template with no substitutions | yes                                      |
+| A template with substitutions    | yes, if the substitutions are foldable   |
+| Literal string                   | yes                                      |
+| Literal number                   | yes                                      |
+| Literal boolean                  | yes                                      |
+| Literal null                     | yes                                      |
+| Supported prefix operator        | yes, if operand is foldable              |
+| Supported binary operator        | yes, if both left and right are foldable |
+| Conditional operator             | yes, if condition is foldable            |
+| Parentheses                      | yes, if the expression is foldable       |
 
 式が折りたたみ可能ではない場合、コレクターはそれをコンパイラが解決するための [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) として `.metadata.json` に書き込みます。
 
@@ -426,21 +311,23 @@ export class HeroComponent {
 
 コンパイラは _エクスポートされたシンボル_ しか参照できません。
 
-* デコレートされたコンポーネントクラスメンバは公開されている必要があります。`@Input()` プロパティを非公開にしたり、保護することはできません。
-* データバインドプロパティも公開されている必要があります。
+*   デコレートされたコンポーネントクラスメンバは公開されている必要があります。`@Input()` プロパティを非公開にしたり、保護することはできません。
+*   データバインドプロパティも公開されている必要があります。
 
-```typescript
+<!--<code-example format="typescript" language="typescript">
+
 // BAD CODE - title is private
-@Component({
+&commat;Component({
   selector: 'app-root',
-  template: '<h1>{{title}}</h1>'
+  template: '&lt;h1&gt;{{title}}&lt;/h1&gt;'
 })
 export class AppComponent {
   private title = 'My App'; // Bad
 }
-```
 
-{@a supported-functions}
+</code-example>-->
+
+<a id="supported-functions"></a>
 
 ### サポートされるクラスと関数
 
@@ -448,20 +335,15 @@ export class AppComponent {
 ところがコンパイラは、_特殊な_関数の呼び出しや_特殊な_オブジェクトの作成について後で生成を拒否できます。
 
 コンパイラは、コアデコレーターのみをサポートする、そして式を戻すマクロ(関数や静的メソッド)の呼び出しのみをサポートする、特定のクラスのインスタンスのみを作成できます。
-* 新しいインスタンス
 
-   コンパイラは `@angular/core` から `InjectionToken` クラスのインスタンスを作成するメタデータのみを許可します。
+| Compiler action      | Details |
+|:---                  |:---     |
+| New instances        | The compiler only allows metadata that create instances of the class `InjectionToken` from `@angular/core`.                                            |
+| Supported decorators | The compiler only supports metadata for the [Angular decorators in the `@angular/core` module](api/core#decorators).                                   |
+| Function calls       | Factory functions must be exported, named functions. The AOT compiler does not support lambda expressions \("arrow functions"\) for factory functions. |
 
-* サポートされるデコレーター
+<a id="function-calls"></a>
 
-   コンパイラは[`@angular/core`モジュールのAngularデコレーター](api/core#decorators)のメタデータのみサポートします。
-
-* 関数呼び出し
-
-   ファクトリ関数はエクスポートされた名前付き関数である必要があります。
-   AOTコンパイラはファクトリ関数についてラムダ式("アロー関数")をサポートしません。
-
-{@a function-calls}
 ### 関数と静的メソッドの呼び出し
 
 コレクターは1つの`return`文を含むどんな関数や静的メソッドも受け入れます。
@@ -469,36 +351,43 @@ export class AppComponent {
 
 たとえば、次の関数を考えてください:
 
-```typescript
-export function wrapInArray<T>(value: T): T[] {
+<code-example format="typescript" language="typescript">
+
+export function wrapInArray&lt;T&gt;(value: T): T[] {
   return [value];
 }
-```
+
+</code-example>
 
 メタデータ定義の中で `wrapInArray` を呼び出すことができます。それはコンパイラの制限的な JavaScript サブセットに準拠する式の値を返すからです。
 
 このように `wrapInArray()` を使うかもしれません:
 
-```typescript
-@NgModule({
+<code-example format="typescript" language="typescript">
+
+&commat;NgModule({
   declarations: wrapInArray(TypicalComponent)
 })
 export class TypicalModule {}
-```
+
+</code-example>
 
 コンパイラはこの使用法を、あなたが書いたかのように扱います:
 
-```typescript
-@NgModule({
+<code-example format="typescript" language="typescript">
+
+&commat;NgModule({
   declarations: [TypicalComponent]
 })
 export class TypicalModule {}
-```
+
+</code-example>
+
 Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ルートを宣言するのに役立つように、2つのマクロ静的メソッド `forRoot` と `forChild` をエクスポートします。
 これらのメソッドの[ソースコード](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")を調べて、
 複雑な [NgModules](guide/ngmodules) の構成をマクロで簡単にする方法を確認してください。
 
-{@a metadata-rewriting}
+<a id="metadata-rewriting"></a>
 
 ### メタデータの書き換え
 
@@ -508,32 +397,36 @@ Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ル�
 
 あなたはこんな風に書くかもしれません:
 
-```typescript
+<code-example format="typescript" language="typescript">
+
 class TypicalServer {
 
 }
 
-@NgModule({
-  providers: [{provide: SERVER, useFactory: () => TypicalServer}]
+&commat;NgModule({
+  providers: [{provide: SERVER, useFactory: () =&gt; TypicalServer}]
 })
 export class TypicalModule {}
-```
+
+</code-example>
 
 書き換えなしでは、ラムダはサポートされておらず`TypicalServer`はエクスポートされていないため、これは不正になります。
 これを許可するため、コンパイラは自動でこんな風に書き換えます。
 
-```typescript
+<code-example format="typescript" language="typescript">
+
 class TypicalServer {
 
 }
 
-export const ɵ0 = () => new TypicalServer();
+export const &theta;0 = () =&gt; new TypicalServer();
 
-@NgModule({
-  providers: [{provide: SERVER, useFactory: ɵ0}]
+&commat;NgModule({
+  providers: [{provide: SERVER, useFactory: &theta;0}]
 })
 export class TypicalModule {}
-```
+
+</code-example>
 
 これにより、コンパイラは、`ɵ0` の値に何が含まれているのかを知らなくても、ファクトリー内で `ɵ0` への参照を生成できます。
 
@@ -541,7 +434,7 @@ export class TypicalModule {}
 ただし、これは `.d.ts` ファイルを書き換えないため、TypeScript はそれをエクスポートとして認識しません。したがって、それは ES モジュールのエクスポートされた API を汚染しません。
 
 
-{@a binding-expression-validation}
+<a id="binding-expression-validation"></a>
 
 ## フェーズ 3: テンプレート型チェック
 
@@ -557,21 +450,25 @@ Angularコンパイラのもっとも役立つ特徴の1つは、テンプレー
 
 たとえば、次のコンポーネントを考えてみましょう:
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'my-component',
   template: '{{person.addresss.street}}'
 })
 class MyComponent {
   person?: Person;
 }
-```
+
+</code-example>
 
 これにより次のエラーが発生します:
 
-```
+<code-example format="output" hideCopy language="shell">
+
 my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on type 'Person'. Did you mean 'address'?
-```
+
+</code-example>
 
 エラーメッセージで報告されたファイル名、つまり `my.component.ts.MyComponent.html` は、
 `MyComponent` クラステンプレートの内容を保持するテンプレートコンパイラによって生成された合成ファイルです。
@@ -594,15 +491,17 @@ my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on t
 これは、TypeScript で `if` 式が行うのと同じ方法です。
 たとえば、上のテンプレートで `Object is possibly 'undefined'` エラーになるのを避けるために、`person` の値が次のように初期化されている場合にのみ補間を実行するようにオブジェクトを修正します。
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'my-component',
   template: '<span *ngIf="person"> {{person.address.street}} </span>'
 })
 class MyComponent {
   person?: Person;
 }
-```
+
+</code-example>
 
 `*ngIf` を使用すると、TypeScript コンパイラは、バインディング式で使用されている `person` が `undefined` になることはないと推測できます。
 
@@ -615,10 +514,11 @@ For more information about input type narrowing, see [Improving template type ch
 次の例では、`person` プロパティと `address` プロパティは常に一緒に設定されているため、`person` が null 以外の場合、`address` は常に null 以外の値になります。
 TypeScript やテンプレートコンパイラにこの制約を記述するのに便利な方法はありませんが、この例では `address!.street` を使用してエラーを抑制しています。
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'my-component',
-  template: '<span *ngIf="person"> {{person.name}} lives on {{address!.street}} </span>'
+  template: '&lt;span *ngIf="person"&gt; {{person.name}} lives on {{address!.street}} &lt;/span&gt;'
 })
 class MyComponent {
   person?: Person;
@@ -629,16 +529,18 @@ class MyComponent {
     this.address = address;
   }
 }
-```
+
+</code-example>
 
 コンポーネントのリファクタリングはこの制約を破る可能性があるため、非 null アサーション演算子は控えめに使用してください。
 
 この例では、次に示すように`*ngIf` に `address` のチェックを含めることをお勧めします:
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'my-component',
-  template: '<span *ngIf="person && address"> {{person.name}} lives on {{address.street}} </span>'
+  template: '&lt;span &ast;ngIf="person &amp;&amp; address"&gt; {{person.name}} lives on {{address.street}} &lt;/span&gt;'
 })
 class MyComponent {
   person?: Person;
@@ -649,4 +551,14 @@ class MyComponent {
     this.address = address;
   }
 }
-```
+
+</code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28
+

@@ -216,7 +216,7 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 テンプレート型チェッカーに、より具体的なテンプレート内の型要件を提供することで、実行時の型エラーを回避できます。ディレクティブ定義でテンプレートガード関数を提供することにより、独自のディレクティブの入力型要件をできるだけ具体的にします。このガイドの [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks)を参照してください。
 
 
-### 厳密な null チェック
+### 厳密な null チェック {@a strict-null-checks}
 
 `strictTemplates` および TypeScript フラグ `strictNullChecks` を有効にすると、簡単に回避できない特定の状況で型チェックエラーが発生する場合があります。たとえば：
 

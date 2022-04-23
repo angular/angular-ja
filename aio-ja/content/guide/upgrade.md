@@ -148,7 +148,7 @@ Angular の ngUpgrade ライブラリは本当に小さいアプリケーショ�
 
 The [end of life of AngularJS][AngularBlogFindingAPathForwardWithAngularjs7e186fdd4429] is December 31st, 2021.
 With this event, ngUpgrade is now in a feature complete state.
-We will continue publishing security and bug fixes for ngUpgrade at least until December 31st, 2022.
+We will continue publishing security and bug fixes for ngUpgrade at least until December 31st, 2023.
 
 </div>
 

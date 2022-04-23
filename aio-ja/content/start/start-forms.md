@@ -14,14 +14,12 @@
 1. `@angular/forms` パッケージから `FormBuilder` サービスをインポートします。
   このサービスは、コントロールを生成するための便利な方法を提供します。
 
-  <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts" region="imports">
-  </code-example>
+  <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts" region="imports"></code-example>
 
 1. `FormBuilder` サービスを `CartComponent` の `constructor()` に注入します。
   このサービスは `ReactiveFormsModule` モジュールの一部で、すでにインポート済みです。
 
-  <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts" region="inject-form-builder">
-  </code-example>
+  <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts" region="inject-form-builder"></code-example>
 
 1. ユーザーの名前と住所を取得するために、`FormBuilder`の`group()`メソッドを使用して`name`と`address`フィールドを含む`checkoutForm` プロパティをフォームモデルに設定します。
 
@@ -33,8 +31,7 @@
 
   カートコンポーネントクラス全体は次のようになります。
 
-  <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts">
-  </code-example>
+  <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.ts"></code-example>
 
 ## チェックアウトフォームを作成する
 
@@ -44,24 +41,21 @@
 
 1. `formGroup` プロパティバインディングを使用して、 `checkoutForm` をテンプレート内の HTMLの`form` 要素にバインドします。
 
-  <code-example header="src/app/cart/cart.component.html" path="getting-started/src/app/cart/cart.component.3.html" region="checkout-form">
-  </code-example>
+  <code-example header="src/app/cart/cart.component.html" path="getting-started/src/app/cart/cart.component.3.html" region="checkout-form"></code-example>
 
 1. `form` タグで、 `ngSubmit` イベントバインディングを使用してフォーム送信を待機し、 `checkoutForm` のvalueを指定して `onSubmit()` メソッドを呼び出します。
 
-  <code-example path="getting-started/src/app/cart/cart.component.html" header="src/app/cart/cart.component.html (cart component template detail)" region="checkout-form-1">
-  </code-example>
+  <code-example header="src/app/cart/cart.component.html (cart component template detail)" path="getting-started/src/app/cart/cart.component.html" region="checkout-form-1"></code-example>
 
 1. `name`と`address`のそれぞれに`<input>`フィールドを追加し、それぞれに `formControlName` 属性を付加します。
   完全なコンポーネントは次のとおりです。
 
-  <code-example path="getting-started/src/app/cart/cart.component.html" header="src/app/cart/cart.component.html" region="checkout-form-2">
-  </code-example>
+  <code-example header="src/app/cart/cart.component.html" path="getting-started/src/app/cart/cart.component.html" region="checkout-form-2"></code-example>
 
 カートにいくつかの商品を入れた後、ユーザーは自分の商品を確認し、名前と住所を入力し、購入を送信することができます。
 
 <div class="lightbox">
-  <img src='generated/images/guide/start/cart-with-items-and-form.png' alt="Cart view with checkout form">
+  <img alt="Cart view with checkout form" src="generated/images/guide/start/cart-with-items-and-form.png">
 </div>
 
 送信を確認するには、送信した名前と住所を含むオブジェクトを見るためにコンソールを開きます。

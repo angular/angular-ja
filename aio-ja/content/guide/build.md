@@ -17,12 +17,22 @@
 
 例:
 
-```
-└──myProject/src/environments/
-                   └──environment.ts
-                   └──environment.prod.ts
-                   └──environment.stage.ts
-```
+<div class="filetree">
+    <div class="file">
+        myProject/src/environments
+    </div>
+    <div class="children">
+        <div class="file">
+          environment.ts
+        </div>
+        <div class="file">
+          environment.prod.ts
+        </div>
+        <div class="file">
+          environment.stage.ts
+        </div>
+    </div>
+</div>
 
 基本ファイル`environment.ts`には、デフォルトの環境設定が含まれています。例:
 
@@ -57,16 +67,38 @@ export const environment = {
 
 次のアプリケーション構造は本番環境およびステージング環境用のビルドターゲットを設定しています:
 
-```
-└── src
-    └── app
-        ├── app.component.html
-        └── app.component.ts
-    └── environments
-        ├── environment.prod.ts
-        ├── environment.staging.ts
-        └── environment.ts
-```
+<div class="filetree">
+    <div class="file">
+        src
+    </div>
+    <div class="children">
+        <div class="file">
+          app
+        </div>
+        <div class="children">
+            <div class="file">
+              app.component.html
+            </div>
+            <div class="file">
+              app.component.ts
+            </div>
+        </div>
+        <div class="file">
+          environments
+        </div>
+        <div class="children">
+            <div class="file">
+              environment.ts
+            </div>
+            <div class="file">
+              environment.prod.ts
+            </div>
+            <div class="file">
+              environment.prod.ts
+            </div>
+        </div>
+    </div>
+</div>
 
 定義した環境設定を使用するには、コンポーネントでオリジナルの環境ファイルをインポートしなければなりません:
 
@@ -190,78 +222,28 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 各予算エントリは、特定の種類の予算を設定します。
 次の形式でサイズ値を指定してください:
 
-* 123 or 123b: バイト単位のサイズ
-
-* 123kb: キロバイト単位のサイズ
-
-* 123mb: メガバイト単位のサイズ
-
-* 12%: ベースラインに対するサイズの割合。（ベースライン値には無効）
+| Size value      | Details |
+|:---             |:---     |
+| `123` or `123b` | バイト単位のサイズ |
+| `123kb`         | キロバイト単位のサイズ |
+| `123mb`         | メガバイト単位のサイズ |
+| `12%`           | ベースラインに対するサイズの割合。（ベースライン値には無効） |
 
 予算を設定した場合、アプリケーションの特定の部分が設定した境界サイズに達するか超えた際に、ビルドシステムによって警告または報告が行われ、エラーが発生します。
 
 各予算エントリは、次のプロパティをもつJSONオブジェクトです:
 
-<table>
-  <tr>
-    <th>プロパティ</th>
-    <th>値</th>
-  </tr>
-
-  <tr>
-    <td>type</td>
-    <td>
-    
-    予算の種類。次のうちどれか:
-
-* `bundle` - 特定のバンドルのサイズ。
-* `initial` - The size of JavaScript needed for bootstrapping the application. Defaults to warning @ 500kb and erroring at 1mb.
-* `allScript` - 全スクリプトのサイズ。
-* `all` - アプリケーション全体のサイズ。
-* `anyComponentStyle` - いずれか1つのコンポーネントのスタイルシートのサイズ。Defaults to warning at 2kb and erroring at 4kb.
-* `anyScript` - いずれか1つのスクリプトのサイズ。
-* `any` - いずれかのファイルのサイズ。
-
-    </td>
-  </tr>
-   <tr>
-    <td>name</td>
-    <td>
-    
-    バンドルの名前（`type=bundle`の場合）。
-    
-    </td>
-  </tr>
-  <tr>
-    <td>baseline</td>
-    <td>比較のためのベースラインサイズ。</td>
-  </tr>
-  <tr>
-    <td>maximumWarning</td>
-    <td>ベースラインに対する警告の最大しきい値。</td>
-  </tr>
-  <tr>
-    <td>maximumError</td>
-    <td>ベースラインに対するエラーの最大しきい値。</td>
-  </tr>
-  <tr>
-    <td>minimumWarning</td>
-    <td>ベースラインに対する警告の最小しきい値。</td>
-  </tr>
-  <tr>
-    <td>minimumError</td>
-    <td>ベースラインに対するエラーの最小しきい値。</td>
-  </tr>
-  <tr>
-    <td>warning</td>
-    <td>ベースラインに対する警告のしきい値（最小および最大）。</td>
-  </tr>
-  <tr>
-    <td>error</td>
-    <td>ベースラインに対するエラーのしきい値（最小および最大）。</td>
-  </tr>
-
- </table>
+| Property       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|:---            |:---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| type           | The type of budget. One of: <table> <thead> <tr> <th> Value </th> <th> Details </th> </tr> </thead> <tbody> <tr> <td> <code>bundle</code> </td> <td> The size of a specific bundle. </td> </tr> <tr> <td> <code>initial</code> </td> <td> The size of JavaScript needed for bootstrapping the application. Defaults to warning at 500kb and erroring at 1mb. </td> </tr> <tr> <td> <code>allScript</code> </td> <td> The size of all scripts. </td> </tr> <tr> <td> <code>all</code> </td> <td> The size of the entire application. </td> </tr> <tr> <td> <code>anyComponentStyle</code> </td> <td> This size of any one component stylesheet. Defaults to warning at 2kb and erroring at 4kb. </td> </tr> <tr> <td> <code>anyScript</code> </td> <td> The size of any one script. </td> </tr> <tr> <td> <code>any</code> </td> <td> The size of any file. </td> </tr> </tbody> </table> |
+| name           | The name of the bundle \(for `type=bundle`\).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| baseline       | The baseline size for comparison.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| maximumWarning | The maximum threshold for warning relative to the baseline.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| maximumError   | The maximum threshold for error relative to the baseline.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| minimumWarning | The minimum threshold for warning relative to the baseline.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| minimumError   | The minimum threshold for error relative to the baseline.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| warning        | The threshold for warning relative to the baseline \(min &amp max\).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| error          | The threshold for error relative to the baseline \(min &amp max\).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 {@a commonjs }
 ## CommonJS の依存関係の設定 {@a configuring-commonjs-dependencies}

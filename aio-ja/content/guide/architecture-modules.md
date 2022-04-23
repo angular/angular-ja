@@ -1,65 +1,84 @@
 # モジュールのイントロダクション
 
 Angularアプリケーションはモジュール型のアプリケーションで、 *NgModules* という独自のモジュール方式を備えています。
-NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。それは、コンポーネントと、サービスプロバイダーと、および、包含するNgModuleによってスコープが規定された他のコードファイルとを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
+NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。
+それは、コンポーネントと、サービスプロバイダーと、および、包含するNgModuleによってスコープが規定された他のコードファイルとを含めることができます。
+他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
 
-すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[*ルートモジュール*](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。ルートのNgModuleを*ブートストラップする*ことでアプリケーションを起動します。
+すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[*ルートモジュール*](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。
+ルートのNgModuleを*ブートストラップする*ことでアプリケーションを起動します。
 
-小さなアプリケーションには1つのNgModuleしかないかもしれませんが、ほとんどのアプリケーションにはより多くの *フィーチャーモジュール* があります。アプリケーションの *ルート* NgModuleは、任意の深さの階層に子NgModuleを含めることができるので、その名前が付けられています。
+小さなアプリケーションには1つのNgModuleしかないかもしれませんが、ほとんどのアプリケーションにはより多くの *フィーチャーモジュール* があります。
+アプリケーションの *ルート* NgModuleは、任意の深さの階層に子NgModuleを含めることができるので、その名前が付けられています。
 
 ## NgModule メタデータ
 
-NgModuleは`@NgModule`で装飾されたクラスとして定義されています。`@NgModule`デコレーターは、モジュールを記述するプロパティーをもつ単一のメタデータ・オブジェクトを取得する機能です。もっとも重要なプロパティは次のとおりです。
+NgModuleは`@NgModule`で装飾されたクラスとして定義されています。
+`@NgModule`デコレーターは、モジュールを記述するプロパティーをもつ単一のメタデータ・オブジェクトを取得する機能です。
+もっとも重要なプロパティは次のとおりです。
 
-* `declarations`: このNgModuleに属する[コンポーネント](guide/architecture-components)、*ディレクティブ*、および *パイプ*
-
-* `exports`: 他のNgModuleの *コンポーネントテンプレート* で可視で使用可能な宣言のサブセット。
-
-* `imports`: エクスポートされたクラスが *この* NgModuleで宣言されたコンポーネントテンプレートによって必要とされる他のモジュール。
-
-* `providers`: このNgModuleが[サービス](guide/architecture-services)のグローバルなコレクションに貢献するサービスの作成元。それらはアプリケーションのすべての部分でアクセス可能になります。 （コンポーネントレベルでプロバイダーを指定することもできます）
-
-* `bootstrap`:  *ルートコンポーネント* と呼ばれるメインアプリケーションビューで、他のすべてのアプリケーションビューをホストします。*ルートNgModule* だけがこの`bootstrap`プロパティを設定する必要があります。
+| Properties     | Details |
+|:---            |:---     |
+| `declarations`| このNgModuleに属する[コンポーネント](guide/architecture-components)、*ディレクティブ*、および *パイプ*|
+| `exports`| 他のNgModuleの *コンポーネントテンプレート* で可視で使用可能な宣言のサブセット。|
+| `imports`| エクスポートされたクラスが *この* NgModuleで宣言されたコンポーネントテンプレートによって必要とされる他のモジュール。|
+| `providers`| このNgModuleが[サービス](guide/architecture-services)のグローバルなコレクションに貢献するサービスの作成元。それらはアプリケーションのすべての部分でアクセス可能になります。 （コンポーネントレベルでプロバイダーを指定することもできます）|
+| `bootstrap`|  *ルートコンポーネント* と呼ばれるメインアプリケーションビューで、他のすべてのアプリケーションビューをホストします。*ルートNgModule* だけがこの`bootstrap`プロパティを設定する必要があります。|
 
 単純なルートNgModuleの定義は次のとおりです。
 
-<code-example path="architecture/src/app/mini-app.ts" region="module" header="src/app/app.module.ts"></code-example>
+<code-example header="src/app/app.module.ts" path="architecture/src/app/mini-app.ts" region="module"></code-example>
 
 <div class="alert is-helpful">
 
-  ここでは説明のために`AppComponent`が`exports`プロパティに含まれています。しかしこの例では実際には必要ありません。他のモジュールはルートNgModuleを *インポート* する必要がないため、ルートNgModuleは何も *エクスポート* する必要はありません。
+ここでは説明のために`AppComponent`が`exports`プロパティに含まれています。しかしこの例では実際には必要ありません。
+他のモジュールはルートNgModuleを *インポート* する必要がないため、ルートNgModuleは何も *エクスポート* する必要はありません。
 
 </div>
 
 ## NgModules とコンポーネント
 
-NgModuleは、そのコンポーネントの *コンパイルコンテキスト* を提供します。ルートNgModuleには常にブートストラップ時に作成されるルートコンポーネントがありますが、任意のNgModuleに追加のコンポーネントをいくつでも含めることができます。これらのコンポーネントは、ルーター経由でロードするか、テンプレートから作成することができます。NgModuleに属するコンポーネントは、コンパイルコンテキストを共有します。
+NgModuleは、そのコンポーネントの *コンパイルコンテキスト* を提供します。
+ルートNgModuleには常にブートストラップ時に作成されるルートコンポーネントがありますが、任意のNgModuleに追加のコンポーネントをいくつでも含めることができます。これらのコンポーネントは、ルーター経由でロードするか、テンプレートから作成することができます。
+NgModuleに属するコンポーネントは、コンパイルコンテキストを共有します。
 
 <div class="lightbox">
-  <img src="generated/images/guide/architecture/compilation-context.png" alt="Component compilation context" class="left">
+
+<img alt="Component compilation context" class="left" src="generated/images/guide/architecture/compilation-context.png">
+
 </div>
 
 <br class="clear">
 
-コンポーネントとそのテンプレートは一緒に *ビュー* を定義します。コンポーネントには、*ビュー階層* を含めることができます。これにより、画面の任意の複雑な領域を定義し、ユニットとして作成、変更、および破棄することができます。ビュー階層は、異なるNgModuleに属するコンポーネントで定義されたビューを混在させることができます。これは多くの場合、特にUIライブラリの場合に当てはまります。
+コンポーネントとそのテンプレートは一緒に *ビュー* を定義します。
+コンポーネントには、*ビュー階層* を含めることができます。これにより、画面の任意の複雑な領域を定義し、ユニットとして作成、変更、および破棄することができます。
+ビュー階層は、異なるNgModuleに属するコンポーネントで定義されたビューを混在させることができます。
+これは多くの場合、特にUIライブラリの場合に当てはまります。
 
 <div class="lightbox">
-  <img src="generated/images/guide/architecture/view-hierarchy.png" alt="View hierarchy" class="left">
+
+<img alt="View hierarchy" class="left" src="generated/images/guide/architecture/view-hierarchy.png">
+
 </div>
 
 <br class="clear">
 
-コンポーネントを作成すると、そのコンポーネントは *ホストビュー* という単一のビューに直接関連付けられます。ホストビューは、他のコンポーネントのホストビューである *埋め込みビュー* を含むことができるビュー階層のルートにすることができます。これらのコンポーネントは、同じNgModuleに存在することも、他のNgModuleからインポートすることもできます。 ツリー内のビューは、任意の深さにネストすることができます。
+コンポーネントを作成すると、そのコンポーネントは *ホストビュー* という単一のビューに直接関連付けられます。
+ホストビューは、他のコンポーネントのホストビューである *埋め込みビュー* を含むことができるビュー階層のルートにすることができます。
+これらのコンポーネントは、同じNgModuleに存在することも、他のNgModuleからインポートすることもできます。 
+ツリー内のビューは、任意の深さにネストすることができます。
 
 <div class="alert is-helpful">
 
-**注意:** ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
+**NOTE**: <br />
+ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
 
 </div>
 
 ## NgModules と JavaScript モジュール
 
-NgModuleシステムは、JavaScriptオブジェクトのコレクションを管理するJavaScript（ES2015）モジュールシステムとは異なり、関連しません。これら2つは、 *相補的な* モジュールシステムです。両方を使ってアプリケーションを書くことができます。
+NgModuleシステムは、JavaScriptオブジェクトのコレクションを管理するJavaScript（ES2015）モジュールシステムとは異なり、関連しません。
+これら2つは、 *相補的な* モジュールシステムです。両方を使ってアプリケーションを書くことができます。
 
 JavaScriptでは、各 *ファイル* はモジュールであり、ファイルに定義されているすべてのオブジェクトはそのモジュールに属します。
 モジュールは、いくつかのオブジェクトを`export`キーワードでマークすることによって、それらを公開することを宣言します。
@@ -70,14 +89,23 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 <code-example path="architecture/src/app/app.module.ts" region="export"></code-example>
 
 <div class="alert is-helpful">
-  <a href="https://exploringjs.com/es6/ch_modules.html">ウェブ上のJavaScriptモジュールシステムの詳細をご覧ください。</a>
+
+[Learn more about the JavaScript module system on the web](https://exploringjs.com/es6/ch_modules.html).
+
 </div>
 
 ## Angular ライブラリ
 
-<img src="generated/images/guide/architecture/library-module.png" alt="コンポーネント" class="left">
+<div class="lightbox">
 
-Angularは、JavaScriptモジュールのコレクションを読み込みます。それらをライブラリモジュールと考えることができるでしょう。Angularライブラリの各名前は、`@angular`接頭辞で始まります。それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
+<img alt="Component" class="left" src="generated/images/guide/architecture/library-module.png">
+
+</div>
+
+Angularは、JavaScriptモジュールのコレクションを読み込みます。
+それらをライブラリモジュールと考えることができるでしょう。
+Angularライブラリの各名前は、`@angular`接頭辞で始まります。
+それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
 
 <br class="clear">
 
@@ -91,14 +119,24 @@ Angularは、JavaScriptモジュールのコレクションを読み込みます
 <code-example path="architecture/src/app/mini-app.ts" region="import-browser-module"></code-example>
 
 上の単純なルートモジュールの例では、アプリケーションモジュールは `BrowserModule`内のものを必要とします。
-そのものにアクセスするには、このように`@NgModule`メタデータの`imports`に追加します。
+そのものにアクセスするには、
+このように`@NgModule`メタデータの`imports`に追加します。
 
 <code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports"></code-example>
 
-このように、AngularとJavaScriptのモジュールシステムを *共に* 使用しています。2つのシステムはいずれも"imports"と"exports"という語彙を共通して持っており混乱しやすいですが、使用するにつれてコンテキストの違いに慣れるでしょう。
+このように、AngularとJavaScriptのモジュールシステムを *共に* 使用しています。
+2つのシステムはいずれも"imports"と"exports"という語彙を共通して持っており混乱しやすいですが、使用するにつれてコンテキストの違いに慣れるでしょう。
 
 <div class="alert is-helpful">
 
   詳細については[NgModules](guide/ngmodules)ガイドから確認してください。
 
 </div>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

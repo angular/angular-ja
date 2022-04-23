@@ -7,12 +7,14 @@ Angular CLIは、Angularアプリケーションの初期化、開発、スキ�
 Angular CLIのメジャーバージョンは、サポートされているAngularのメジャーバージョンに従いますが、マイナーバージョンは個別にリリースできます。
 
 `npm` パッケージマネージャーを使用してCLIをインストールします:
-<code-example language="bash">
-npm install -g @angular/cli
+
+<code-example format="shell" language="shell">
+
+npm install -g &commat;angular/cli
+
 </code-example>
 
-バージョン間の変更、および以前のリリースからのアップデートに関する詳細については、
-GitHubのリリースタブを参照してください: https://github.com/angular/angular-cli/releases
+バージョン間の変更、および以前のリリースからのアップデートに関する詳細については、GitHubのリリースタブを参照してください: https://github.com/angular/angular-cli/releases
 
 ## 基本的なワークフロー
 
@@ -20,17 +22,21 @@ GitHubのリリースタブを参照してください: https://github.com/angul
 オンラインヘルプはコマンドラインで利用できます。
 特定のコマンド（ [generate](cli/generate) など）またはオプションを簡単な説明付きでリストするには、次のように入力します。
 
-<code-example language="bash">
+<code-example format="shell" language="shell">
+
 ng help
 ng generate --help
+
 </code-example>
 
 開発サーバーで新しい基本的なAngularプロジェクトを作成、構築、および提供するには、新しいワークスペースの親ディレクトリに移動し、次のコマンドを使用します:
 
-<code-example language="bash">
+<code-example format="shell" language="shell">
+
 ng new my-first-project
 cd my-first-project
 ng serve
+
 </code-example>
 
 ブラウザで http://localhost:4200/ を開き、新しいアプリケーションが実行されるのを確認します。
@@ -38,9 +44,10 @@ ng serve
 
 <div class="alert is-helpful">
 
-`ng new my-first-project`を実行すると、`my-first-project`という名前の新しいフォルダーが作業中のディレクトリに作成されます。このフォルダの中でファイルを作成することになるので、このコマンドを実行する前に作業ディレクトリに対する十分な権限があることを確認してください。
+`ng new my-first-project`を実行すると、`my-first-project`という名前の新しいフォルダーが作業中のディレクトリに作成されます。
+このフォルダの中でファイルを作成することになるので、このコマンドを実行する前に作業ディレクトリに対する十分な権限があることを確認してください。
 
-もし作業ディレクトリがプロジェクトの正しい場所でなければ、事前に`cd <path-to-other-directory>`コマンドで正しい場所に移動しましょう。
+もし作業ディレクトリがプロジェクトの正しい場所でなければ、`cd <path-to-other-directory>`コマンドで正しい場所に移動しましょう。
 
 </div>
 
@@ -58,7 +65,7 @@ ng serve
 [ng generate](cli/generate) コマンドを使用して、追加のコンポーネントやサービス用の新しいファイルを追加したり、新しいパイプやディレクティブなどのコードを追加したりします。
 アプリケーションやライブラリを作成または操作する [add](cli/add) や [generate](cli/generate) などのコマンドは、ワークスペースまたはプロジェクトフォルダー内から実行する必要があります。
 
-* [ワークスペースとプロジェクトのファイル構造](guide/file-structure) についての詳細を参照してください。
+*   [ワークスペースとプロジェクトのファイル構造](guide/file-structure) についての詳細を参照してください。
 
 ### ワークスペースとプロジェクト構成
 
@@ -66,10 +73,15 @@ ng serve
 ここで、CLIコマンドオプションにプロジェクトごとのデフォルトを設定し、CLIがさまざまなターゲット用にプロジェクトをビルドするときに使用する構成を指定できます。
 
 [ng config](cli/config) コマンドを使用すると、コマンドラインから設定値を設定および取得できます。または、 `angular.json` ファイルを直接編集できます。
-設定ファイルのオプション名には [camelCase](guide/glossary#case-types) を使用する必要がありますが、コマンドに指定するオプション名にはcamelCaseまたはダッシュケースを使用できます。
 
-* [ワークスペースの設定](guide/workspace-config) ワークスペース設定についての詳細を参照してください。
-* `angular.json`の [完全なスキーマ](https://github.com/angular/angular-cli/wiki/angular-workspace) を参照してください。
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+Option names in the configuration file must use [camelCase](guide/glossary#case-types), while option names supplied to commands must be dash-case.
+
+</div>
+
+*   [ワークスペースの設定](guide/workspace-config) ワークスペース設定についての詳細を参照してください。
 
 ## CLIコマンド言語構文
 
@@ -77,21 +89,24 @@ ng serve
 
 `ng` *commandNameOrAlias* *requiredArg* [*optionalArg*] `[options]`
 
-* ほとんどのコマンドと一部のオプションにはエイリアスがあります。別名は、各コマンドの構文ステートメントに示されています。
+*   ほとんどのコマンドと一部のオプションにはエイリアスがあります。
+    別名は、各コマンドの構文ステートメントに示されています。
 
-* オプション名の前には二重ダッシュ（--）が付きます。
-    オプションエイリアスの先頭には単一ダッシュ（ - ）が付きます。
+*   オプション名の前には二重ダッシュ（`--`）が付きます。
+    オプションエイリアスの先頭には単一ダッシュ（`-`）が付きます。
     引数は前に付けられません。
     たとえば: 
-    <code-example language="bash">
-        ng build my-app -c production
+    
+    <code-example format="shell" language="shell">
+
+    ng build my-app -c production
+
     </code-example>
 
-* 通常、生成された成果物の名前は、コマンドの引数として指定することも、--nameオプションで指定することもできます。
+*   通常、生成された成果物の名前は、コマンドの引数として指定することも、`--name`オプションで指定することもできます。
 
-* 引数とオプションの名前は
-[camelCaseかdash-case](guide/glossary#case-types)で指定できます。
-`--myOptionName` は `--my-option-name` と同じです。
+*   引数とオプションの名前は[camelCaseかdash-case](guide/glossary#case-types)で指定できます。
+    `--myOptionName` は `--my-option-name` と同じです。
 
 ### ブール値オプション
 
@@ -107,3 +122,11 @@ ng serve
 [ng generate](cli/generate) と [ng add](cli/add) コマンドは、アーティファクトやライブラリが生成されるか、現在のプロジェクトに追加する引数として取ります
 一般的なオプションに加えて、各アーティファクトまたはライブラリは、 *schematics* で独自のオプションを定義します。
 Schematicオプションは、即時コマンドオプションと同じ形式でコマンドに提供されます。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

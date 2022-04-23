@@ -1190,7 +1190,7 @@ URLによる照合では不十分な場合は、独自の照合機能を実装�
   region="404">
 </code-example>
 
-あるいは、`ErrorEvent`と共に`request.error()`を呼び出すこともできます。
+あるいは、`ProgressEvent`と共に`request.error()`を呼び出すこともできます。
 
 <code-example
   path="http/src/testing/http-client.spec.ts"

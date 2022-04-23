@@ -1,123 +1,119 @@
 # 用語集 {@a glossary}
 
 Angularには独自の用語があります。
-ほとんどのAngular用語は、
-Angularシステム内で特定の意味をもつ一般的な英単語やコンピュータ語句です。
+ほとんどのAngular用語は、Angularシステム内で特定の意味をもつ一般的な英単語やコンピュータ語句です。
 
-この用語集には、
-もっとも顕著な用語と、
-独特なまたは予期しない定義をもつあまり馴染みのない用語をリストしています。
+この用語集には、もっとも顕著な用語と、独特なまたは予期しない定義をもつあまり馴染みのない用語をリストしています。
 
-[A](#A) [B](#B) [C](#C) [D](#D) [E](#E) [F](#F) [G](#G) [H](#H) [I](#I)
-[J](#J) [K](#K) [L](#L) [M](#M) [N](#N) [O](#O) [P](#P) [Q](#Q) [R](#R)
-[S](#S) [T](#T) [U](#U) [V](#V) [W](#W) [X](#X) [Y](#Y) [Z](#Z)
+[A][AioGuideGlossaryA]
+[B][AioGuideGlossaryB]
+[C][AioGuideGlossaryC]
+[D][AioGuideGlossaryD]
+[E][AioGuideGlossaryE]
+[F][AioGuideGlossaryF]
+[G][AioGuideGlossaryG]
+[H][AioGuideGlossaryH]
+[I][AioGuideGlossaryI]
+[J][AioGuideGlossaryJ]
+[K][AioGuideGlossaryK]
+[L][AioGuideGlossaryL]
+[M][AioGuideGlossaryM]
+[N][AioGuideGlossaryN]
+[O][AioGuideGlossaryO]
+[P][AioGuideGlossaryP]
+[Q][AioGuideGlossaryQ]
+[R][AioGuideGlossaryR]
+[S][AioGuideGlossaryS]
+[T][AioGuideGlossaryT]
+[U][AioGuideGlossaryU]
+[V][AioGuideGlossaryV]
+[W][AioGuideGlossaryW]
+[X][AioGuideGlossaryX]
+[Y][AioGuideGlossaryY]
+[Z][AioGuideGlossaryZ]
 
-
-{@a A}
-{@a aot}
-
+<a id="aot"></a>
 
 ## 事前(AOT)コンパイル {@a ahead-of-time-aot-compilation}
 
 Angularの事前(AOT)コンパイラは、
 ブラウザがコードをダウンロードして実行する前のビルドフェーズ中に、
 AngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
-これは本番環境に最適なコンパイルモードであり、[実行時(JIT)コンパイル](#jit)と比較して、ロード時間が短縮され、パフォーマンスが向上します。
+これは本番環境に最適なコンパイルモードであり、[実行時(JIT)コンパイル][AioGuideGlossaryJustInTimeJitCompilation]と比較して、ロード時間が短縮され、パフォーマンスが向上します。
 
 `ngc`コマンドラインツールを使用してアプリケーションをコンパイルすることで、モジュールファクトリに直接ブートストラップできるため、JavaScriptバンドルにAngularコンパイラを含める必要はありません。
 
-{@a angular-element}
-
 ## Angular element
 
-[カスタム要素](#custom-element)としてパッケージされたAngular[コンポーネント](#component)です。
+[カスタム要素][AioGuideGlossaryCustomElement]としてパッケージされたAngular[コンポーネント][AioGuideGlossaryComponent]です。
 
-[Angular Elements概要](guide/elements)で詳しく学びましょう。
-
-{@a apf}
+[Angular Elements概要][AioGuideElements]で詳しく学びましょう。
 
 ## Angularパッケージ形式 (APF)
 
 すべてのファーストパーティのAngularパッケージと、ほとんどのサードパーティのAngularライブラリで使用される、npmパッケージのレイアウトに関するAngular固有の仕様です。
 
-詳しくは[Angular Package Format 仕様](guide/angular-package-format)をご覧ください。
-
-{@a annotation}
+詳しくは[Angular Package Format 仕様][AioGuideAngularPackageFormat]をご覧ください。
 
 ## アノテーション
 
-クラスに関するメタデータを提供する構造。[デコレーター](#decorator)を参照しましょう。
-
-{@a app-shell}
+クラスに関するメタデータを提供する構造。[デコレーター][AioGuideGlossaryDecoratorDecoration]を参照しましょう。
 
 ## app-shell
 
 App shell is a way to render a portion of your application via a route at build time.
 This gives users a meaningful first paint of your application that appears quickly because the browser can render static HTML and CSS without the need to initialize JavaScript.
 
-Learn more in [The App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell).
+Learn more in [The App Shell Model][GoogleDevelopersWebFundamentalsArchitectureAppShell].
 
-You can use the Angular CLI to [generate](cli/generate#app-shell) an app shell.
-This can improve the user experience by quickly launching a static rendered page (a skeleton common to all pages) while the browser downloads the full client version and switches to it automatically after the code loads.
-
-See also [Service Worker and PWA](guide/service-worker-intro).
-{@a architect}
+You can use the Angular CLI to [generate][AioCliGenerateAppShell] an app shell.
+This can improve the user experience by quickly launching a static rendered page while the browser downloads the full client version and switches to it automatically after the code loads.
+A static rendered page is a skeleton common to all pages.
+To learn more, see [Service Worker and PWA][AioGuideServiceWorkerIntro].
 
 ## Architect
 
-The tool that the CLI uses to perform complex tasks such as compilation and test running, according to a provided configuration.
-Architect is a shell that runs a [builder](#builder) (defined in an [npm package](#npm-package)) with a given [target configuration](#target).
+The tool that the Angular CLI uses to perform complex tasks such as compilation and test running, according to a provided configuration.
+Architect is a shell that runs a [builder][AioGuideGlossaryBuilder] with a given [target configuration][AioGuideGlossaryTarget].
+The [builder][AioGuideGlossaryBuilder] is defined in an [npm package][AioGuideGlossaryNpmPackage].
 
-In the [workspace configuration file](guide/workspace-config#project-tool-configuration-options), an "architect" section provides configuration options for Architect builders.
+In the [workspace configuration file][AioGuideWorkspaceConfigProjectToolConfigurationOptions], an "architect" section provides configuration options for Architect builders.
 
-For example, a built-in builder for linting is defined in the package `@angular-devkit/build_angular:tslint`, which uses the [TSLint](https://palantir.github.io/tslint/) tool to perform linting, with a configuration specified in a `tslint.json` file.
+For example, a built-in builder for linting is defined in the package `@angular-devkit/build_angular:tslint`, which uses the [TSLint][GithubPalantirTslint] tool to perform linting, with a configuration specified in a `tslint.json` file.
 
-Use the [CLI command `ng run`](cli/run) to invoke a builder by specifying a [target configuration](#target) associated with that builder.
-Integrators can add builders to enable tools and workflows to run through the Angular CLI. For example, a custom builder can replace the third-party tools used by the built-in implementations for CLI commands such as `ng build` or `ng test`.
-
-{@a attribute-directive}
-
-
-{@a attribute-directives}
+Use the [`ng run`][AioCliRun] Angular CLI command to invoke a builder by specifying a [target configuration][AioGuideGlossaryTarget] associated with that builder.
+Integrators can add builders to enable tools and workflows to run through the Angular CLI.
+For example, a custom builder can replace the third-party tools used by the built-in implementations for Angular CLI commands, such as `ng build` or `ng test`.
 
 
-## 属性ディレクティブ
+## 属性ディレクティブ {@a attribute-directive}
 
-[ディレクティブ](#directive)の一種。
+[ディレクティブ][AioGuideGlossaryDirective]の一種。
 他のHTML要素、属性、プロパティ、コンポーネントの動作をリッスンし変更できます。
 これらは通常、HTML属性として表されるため、この名前が付けられています。
 
-[属性ディレクティブ](guide/attribute-directives)でさらに学びましょう。
+[属性ディレクティブ][AioGuideAttributeDirectives]でさらに学びましょう。
 
-
-{@a B}
-
-{@a binding}
-
-## バインディング
+## バインディング {@a binding}
 
 一般に、変数やプロパティにデータの値を設定する方法。
-Angular内では通常、[データバインディング](#data-binding)のことを指し、
+Angular内では通常、[データバインディング][AioGuideGlossaryDataBinding]のことを指し、
 これは、DOMオブジェクトのプロパティをデータオブジェクトのプロパティと連携させます。
 
-ときには、[トークン](#token)と依存性[プロバイダー](#provider)の間の、
-[依存性の注入](#dependency-injection)のバインディングを意味します。
-
-{@a bootstrap}
+ときには、[トークン][AioGuideGlossaryToken]と依存性[プロバイダー][AioGuideGlossaryProvider]の間の、
+[依存オブジェクトの注入][AioGuideGlossaryDependencyInjectionDi]のバインディングを意味します。
 
 ## ブートストラップ
 
 アプリケーションやシステムを初期化して起動する方法。
 
-Angularでは、アプリケーションのルートNgModule(`AppModule`)には、アプリケーションのトップレベル[コンポーネント](#component)を識別する`bootstrap`プロパティがあります。
+Angularでは、アプリケーションのルートNgModule(`AppModule`)には、アプリケーションのトップレベル[コンポーネント][AioGuideGlossaryComponent]を識別する`bootstrap`プロパティがあります。
 ブートストラッププロセス中に、Angularはこれらのコンポーネントを作成してホストのWebページ`index.html`に挿入します。
 同じ`index.html`で複数のアプリケーションをブートストラップできます。各アプリケーションには独自のコンポーネントが含まれています。
 
-詳細は[ブートストラップ](guide/bootstrapping)で学びましょう。
+詳細は[ブートストラップ][AioGuideBootstrapping]で学びましょう。
 
-{@a builder}
-
-## ビルダ
+## ビルダ {@a builder}
 
 A function that uses the [Architect](#architect) API to perform a complex process such as "build" or "test".
 The builder code is defined in an [npm package](#npm-package).
@@ -164,7 +160,7 @@ AngularフレームワークがアプリケーションのUIの状態をデー�
 同様に、ユーザーはUIを操作して、データモデルの状態を変更するイベントを発生させることができます。
 これらのイベントは変更検知をトリガーできます。
 
-デフォルトの変更検知戦略を使うと、変更検知は、各VMのターンで[ビュー階層](#view-tree)を通過し、テンプレートで[データバインドされたプロパティ](#data-binding)をすべてチェックします。最初の段階では、依存データの現在の状態を前の状態と比較し、変更を収集します。
+デフォルトの変更検知戦略を使うと、変更検知は、各VMのターンで[ビュー階層](#view-tree)を通過し、テンプレートで[データバインドされたプロパティ][AioGuideGlossaryDataBinding]をすべてチェックします。最初の段階では、依存データの現在の状態を前の状態と比較し、変更を収集します。
 次の段階では、新しいデータ値を反映してページのDOMを更新します。
 
 `OnPush`の変更検知戦略を設定した場合、変更検知は、[明示的に呼び出される](api/core/ChangeDetectorRef)とき、または`Input`の参照変更やイベントハンドラーによってトリガーされるときのみ実行されます。これは通常、パフォーマンスが向上します。より詳しい情報は、[Angularの変更検知を最適化する](https://web.dev/faster-angular-change-detection/)を参照しましょう。
@@ -173,7 +169,7 @@ AngularフレームワークがアプリケーションのUIの状態をデー�
 
 ## クラスデコレーター
 
-クラス定義の直前に現れる[デコレーター](#decorator)。クラスが指定された型であることを宣言し、その型に適したメタデータを提供します。
+クラス定義の直前に現れる[デコレーター][AioGuideGlossaryDecoratorDecoration]。クラスが指定された型であることを宣言し、その型に適したメタデータを提供します。
 
 次のデコレーターはAngularのクラス型を宣言できます:
 * `@Component()`
@@ -187,7 +183,7 @@ AngularフレームワークがアプリケーションのUIの状態をデー�
 
 ## クラスフィールドデコレーター
 
-クラス定義においてフィールド直前の[デコレーター](#decorator)文であり、そのフィールドの型を宣言します。いくつかの例は`@Input`と`@Output`です。
+クラス定義においてフィールド直前の[デコレーター][AioGuideGlossaryDecoratorDecoration]文であり、そのフィールドの型を宣言します。いくつかの例は`@Input`と`@Output`です。
 
 {@a collection}
 
@@ -210,11 +206,11 @@ In Angular, a set of related [schematics](#schematic) collected in an [npm packa
 
 ## コンポーネント
 
-`@Component()`[デコレーター](#decorator)の付いたクラス。その対となる[テンプレート](#template)と関連付けます。コンポーネントのクラスとテンプレートが一緒になって、[ビュー](#view)を定義します。
-コンポーネントは、[ディレクティブ](#directive)の特別な型です。
+`@Component()`[デコレーター][AioGuideGlossaryDecoratorDecoration]の付いたクラス。その対となる[テンプレート](#template)と関連付けます。コンポーネントのクラスとテンプレートが一緒になって、[ビュー](#view)を定義します。
+コンポーネントは、[ディレクティブ][AioGuideGlossaryDirective]の特別な型です。
 `@Component()`デコレーターは、テンプレート指向の機能をもつ`@Directive()`デコレーターを継承します。
 
-Angularのコンポーネントクラスは、[データバインディング](#data-binding)を介して、データを公開し、ビューの表示とユーザーインタラクションのロジックのほとんどを処理する役割を果たします。
+Angularのコンポーネントクラスは、[データバインディング][AioGuideGlossaryDataBinding]を介して、データを公開し、ビューの表示とユーザーインタラクションのロジックのほとんどを処理する役割を果たします。
 
 コンポーネントクラスやテンプレート、ビューについて詳しくは、[Angularの概念の紹介](guide/architecture)を参照しましょう。
 
@@ -276,7 +272,7 @@ Angularコンポーネントを変換するAPIを使うことによって、そ�
 ## 宣言
 
 [NgModule](#ngmodule)の`declarations`リストに追加できるクラス型。
-[コンポーネント](#component)と[ディレクティブ](#directive)、[パイプ](#pipe)を宣言できます。
+[コンポーネント][AioGuideGlossaryComponent]と[ディレクティブ][AioGuideGlossaryDirective]、[パイプ](#pipe)を宣言できます。
 
 次のものは宣言しないでください:
 * 別のNgModuleですでに宣言されているクラス。
@@ -309,7 +305,7 @@ Angularは、メタデータをクラスやプロパティに付けるデコレ�
 アプリケーションのある部分(依存性)を作成して、それらを必要とするアプリケーションの他の部分に届けるための、デザインパターンとメカニズム。
 
 Angularでは、依存性は通常サービスですが、文字列や関数などの値にすることもできます。
-アプリケーションのための[インジェクター](#injector)(ブートストラップ中に自動的に作成される)は、サービスや値について設定した[プロバイダー](#provider)を使用して、必要に応じて依存性をインスタンス化します。
+アプリケーションのための[インジェクター](#injector)(ブートストラップ中に自動的に作成される)は、サービスや値について設定した[プロバイダー][AioGuideGlossaryProvider]を使用して、必要に応じて依存性をインスタンス化します。
 
 [依存性の注入](guide/dependency-injection)でさらに学びましょう。
 
@@ -317,19 +313,19 @@ Angularでは、依存性は通常サービスですが、文字列や関数な�
 
 ## DIトークン
 
-[依存性の注入](#di)システムで使用するための、依存性の[プロバイダー](#provider)に関連付けられた検索トークン。
+[依存性の注入](#di)システムで使用するための、依存性の[プロバイダー][AioGuideGlossaryProvider]に関連付けられた検索トークン。
 
 {@a directive}
 {@a directives}
 
 ## ディレクティブ
 
-1つのクラスです。DOMの構造を変更したり、DOMにおける属性とコンポーネントデータモデルを変更したりできます。ディレクティブのクラス定義の直前には、メタデータを提供する`@Directive()`[デコレーター](#decorator)があります。
+1つのクラスです。DOMの構造を変更したり、DOMにおける属性とコンポーネントデータモデルを変更したりできます。ディレクティブのクラス定義の直前には、メタデータを提供する`@Directive()`[デコレーター][AioGuideGlossaryDecoratorDecoration]があります。
 
 ディレクティブクラスは通常、HTML要素や属性に関連付けられており、この要素や属性は、しばしばそのディレクティブ自身を指し示します。AngularはHTML[テンプレート](#template)でディレクティブを見つけると、一致するディレクティブクラスのインスタンスを作成し、ブラウザDOMのその部分の制御をインスタンスに渡します。
 
 ディレクティブには3つの種類があります:
-* [コンポーネント](#component)は、`@Component()`(`@Directive()`の拡張)を使用して、テンプレートをクラスに関連付けます。
+* [コンポーネント][AioGuideGlossaryComponent]は、`@Component()`(`@Directive()`の拡張)を使用して、テンプレートをクラスに関連付けます。
 
 * [属性ディレクティブ](#attribute-directive)は、ページ要素の動作と外観を変更します。
 
@@ -358,7 +354,7 @@ Angular extends TypeScript with domain-specific languages for a number of domain
 
 実行時にコンポーネントをDOMに追加するための手法。コンポーネントをコンパイルから除外し、それをDOMに追加するときに、Angularの変更検知およびイベント処理フレームワークに接続する必要があります。
 
-同じ結果でより簡単な方法を提供する[カスタム要素](#custom-element)も参照してください。
+同じ結果でより簡単な方法を提供する[カスタム要素][AioGuideGlossaryCustomElement]も参照してください。
 
 
 {@a E}
@@ -394,7 +390,7 @@ Angularは、レンダリング固有のネイティブUI要素をラップす�
 ドキュメントでは通常は*要素*(`ElementRef`インスタンス)について言及しており、
 *DOM要素*(これは必要に応じて直接アクセスできます)とは異なります。
 
-[カスタム要素](#custom-element)と比較しましょう。
+[カスタム要素][AioGuideGlossaryCustomElement]と比較しましょう。
 
 {@a entry-point}
 
@@ -447,21 +443,21 @@ To learn more, see [Form Validation](guide/form-validation).
 ## 不変性
 
 The ability to alter the state of a value after its creation. [Reactive forms](#reactive-forms) perform immutable changes in that
-each change to the data model produces a new data model rather than modifying the existing one. [Template-driven forms](#template-driven-forms) perform mutable changes with `NgModel` and [two-way data binding](#data-binding) to modify the existing data model in place.
+each change to the data model produces a new data model rather than modifying the existing one. [Template-driven forms](#template-driven-forms) perform mutable changes with `NgModel` and [two-way data binding][AioGuideGlossaryDataBinding] to modify the existing data model in place.
 
 {@a injectable}
 
 ## injectable
 
-[依存性の注入](#di)のメカニズムを使用して依存性を提供するAngularクラスやその他の定義。injectableの[サービス](#service)クラスは、`@Injectable()`[デコレーター](#decorator)でマークする必要があります。定数値などの他のアイテムもinjectableにできます。
+[依存性の注入](#di)のメカニズムを使用して依存性を提供するAngularクラスやその他の定義。injectableの[サービス](#service)クラスは、`@Injectable()`[デコレーター][AioGuideGlossaryDecoratorDecoration]でマークする必要があります。定数値などの他のアイテムもinjectableにできます。
 
 {@a injector}
 
 ## インジェクター
 
-Angularの[依存性の注入](#dependency-injection)システムにおけるオブジェクトであり、
+Angularの[依存性の注入][AioGuideGlossaryDependencyInjectionDi]システムにおけるオブジェクトであり、
 そのキャッシュ内で名前のある依存性を検索したり、
-設定した[プロバイダー](#provider)を使用して依存性を作成したりできます。
+設定した[プロバイダー][AioGuideGlossaryProvider]を使用して依存性を作成したりできます。
 インジェクターは、ブートストラッププロセスの一環としてNgModuleのために自動的に作成され、
 コンポーネント階層を通じて継承されます。
 
@@ -477,7 +473,7 @@ Angularの[依存性の注入](#dependency-injection)システムにおけるオ
 
 ## Input
 
-[ディレクティブ](#directive)を定義する際、ディレクティブのプロパティについた`@Input()`デコレーターが、
+[ディレクティブ][AioGuideGlossaryDirective]を定義する際、ディレクティブのプロパティについた`@Input()`デコレーターが、
 そのプロパティを[プロパティバインディング](guide/property-binding)の*ターゲット*として利用できるようにします。
 データの値は、等号の右側の[テンプレート式](#template-expression)で認識されるデータソースから、
 inputのプロパティに流れ込みます。
@@ -488,7 +484,7 @@ inputのプロパティに流れ込みます。
 
 ## 補間
 
-A form of property [data binding](#data-binding) in which a [template expression](#template-expression) between double-curly braces renders as text.
+A form of property [data binding][AioGuideGlossaryDataBinding] in which a [template expression](#template-expression) between double-curly braces renders as text.
 That text can be concatenated with neighboring text before it is assigned to an element property
 or displayed between element tags, as in this example.
 
@@ -565,7 +561,7 @@ Angularにおいて、他のAngularアプリケーションに含めることが
 
 ## ライフサイクルフック
 
-[ディレクティブ](#directive)と[コンポーネント](#component)が作成・更新・破棄されるライフサイクルを活用できるようにするインターフェース。
+[ディレクティブ][AioGuideGlossaryDirective]と[コンポーネント][AioGuideGlossaryComponent]が作成・更新・破棄されるライフサイクルを活用できるようにするインターフェース。
 
 インターフェースごとに単一のフックメソッドがあり、その名前は`ng`で始まるインターフェース名です。
 たとえば、`OnInit`インターフェースには`ngOnInit`という名前のフックメソッドがあります。
@@ -612,7 +608,7 @@ Angular互換性コンパイラ。
 
 ## NgModule
 
-`@NgModule()`[デコレーター](#decorator)が前に付いたクラス定義。これはコードブロックのためのマニフェストとして宣言および機能し、アプリケーションドメインやワークフロー、密接に関連する一連の機能に専念します。
+`@NgModule()`[デコレーター][AioGuideGlossaryDecoratorDecoration]が前に付いたクラス定義。これはコードブロックのためのマニフェストとして宣言および機能し、アプリケーションドメインやワークフロー、密接に関連する一連の機能に専念します。
 
 [JavaScriptのモジュール](#module)のように、NgModuleは、他のNgModuleでの使用のために機能をエクスポートでき、他のNgModuleから公開の機能をインポートできます。
 NgModuleクラスのメタデータは、コンポーネント、ディレクティブ、パイプを集めます。それらを、アプリケーションがインポートとエクスポートのリストと一緒に使います。[宣言](#declarable)も参照してください。
@@ -662,7 +658,7 @@ An object passed to the `subscribe()` method for an [observable](#observable). T
 
 ## Output
 
-[ディレクティブ](#directive)を定義する際、ディレクティブのプロパティについた`@Output()`デコレーターが、
+[ディレクティブ][AioGuideGlossaryDirective]を定義する際、ディレクティブのプロパティについた`@Output()`デコレーターが、
 そのプロパティを[イベントバインディング](guide/event-binding)のターゲットとして利用できるようにします。
 イベントはこのプロパティ*から*、
 等号の右側の[テンプレート式](#template-expression)で認識される受信側へ流れます。
@@ -716,7 +712,7 @@ Angular CLIにおいて、スタンドアロンのアプリケーションや[�
 
 ## プロバイダー
 
-[`Provider`](api/core/Provider)インターフェースの1つを実装するオブジェクト。プロバイダーオブジェクトは、[DIトークン](#token)に関連付けられた注入可能な依存性を取得する方法を定義します。
+[`Provider`](api/core/Provider)インターフェースの1つを実装するオブジェクト。プロバイダーオブジェクトは、[DIトークン][AioGuideGlossaryToken]に関連付けられた注入可能な依存性を取得する方法を定義します。
 [インジェクター](#injector)はプロバイダーを使用して、
 必要とするクラスのために依存性の新しいインスタンスを作成します。
 
@@ -786,13 +782,13 @@ Angularアプリケーション内の状態と[ビュー](#view)間のナビゲ�
 
 ## ルーターアウトレット
 
-ルーティングコンポーネントのテンプレートでプレースホルダとして機能する[ディレクティブ](#directive)。Angularは、現在のルーターの状態に基づいてテンプレートを動的にレンダリングします。
+ルーティングコンポーネントのテンプレートでプレースホルダとして機能する[ディレクティブ][AioGuideGlossaryDirective]。Angularは、現在のルーターの状態に基づいてテンプレートを動的にレンダリングします。
 
 {@a router-component}
 
 ## ルーティングコンポーネント {@a routing-component}
 
-そのテンプレートに`RouterOutlet`ディレクティブをもつAngularの[コンポーネント](#component)。ルーターのナビゲーションに基づいてビューを表示します。
+そのテンプレートに`RouterOutlet`ディレクティブをもつAngularの[コンポーネント][AioGuideGlossaryComponent]。ルーターのナビゲーションに基づいてビューを表示します。
 
 詳しくは、[ルーティングとナビゲーション](guide/router)を参照してください。
 
@@ -867,7 +863,7 @@ Angularにおいて、[@Injectable()](#injectable)デコレーターの付いた
 Angularは、コンポーネントとサービスを区別して、モジュール性と再利用性を向上させます。
 
 `@Injectable()`メタデータによって、サービスクラスを[依存性の注入](#di)のメカニズムで使用できます。
-injectableクラスは[プロバイダー](#provider)によってインスタンス化されます。
+injectableクラスは[プロバイダー][AioGuideGlossaryProvider]によってインスタンス化されます。
 [インジェクター](#injector)はプロバイダーのリストを維持し、コンポーネントや他のサービスで必要なときにそれらを使用してサービスのインスタンスを提供します。
 
 もっと学ぶには、[サービスと依存性の注入のイントロダクション](guide/architecture-services)を参照してください。
@@ -877,7 +873,7 @@ injectableクラスは[プロバイダー](#provider)によってインスタン
 
 ## 構造ディレクティブ
 
-[ディレクティブ](#directive)の一種。DOMを変更してHTMLレイアウトを形成する役割です。つまり、要素とそれらの子を追加、削除、操作します。
+[ディレクティブ][AioGuideGlossaryDirective]の一種。DOMを変更してHTMLレイアウトを形成する役割です。つまり、要素とそれらの子を追加、削除、操作します。
 
 詳しく学ぶには、[構造ディレクティブ](guide/structural-directives)を参照しましょう。
 
@@ -917,11 +913,11 @@ You can also define a custom builder, and add a target to the project configurat
 
 コンポーネントの[ビュー](#view)をどのようにレンダリングするかを定義するコード。
 
-テンプレートは、そのままのHTMLとAngularの[データバインディング](#data-binding)構文や、
-[ディレクティブ](#directive)、[テンプレート式](#template-expression)を組み合わせたものです(論理構造)。
+テンプレートは、そのままのHTMLとAngularの[データバインディング][AioGuideGlossaryDataBinding]構文や、
+[ディレクティブ][AioGuideGlossaryDirective]、[テンプレート式](#template-expression)を組み合わせたものです(論理構造)。
 Angularの要素は、ページが表示される前にHTML要素を変更する値を挿入または計算します。Angularのテンプレート言語の詳細については、[テンプレート構文](guide/template-syntax)のガイドで学びましょう。
 
-テンプレートは、`@Component()`[デコレーター](#decorator)を介して[コンポーネントクラス](#component)と関連付けられます。テンプレートのコードは、`template`プロパティの値としてインラインで、もしくは`templateUrl`プロパティを介してリンクされる別個のHTMLファイルで提供できます。
+テンプレートは、`@Component()`[デコレーター][AioGuideGlossaryDecoratorDecoration]を介して[コンポーネントクラス][AioGuideGlossaryComponent]と関連付けられます。テンプレートのコードは、`template`プロパティの値としてインラインで、もしくは`templateUrl`プロパティを介してリンクされる別個のHTMLファイルで提供できます。
 
 `TemplateRef`オブジェクトで表される追加のテンプレートは、複数のコンポーネントから参照できる代替ビューや*埋め込み*ビューを定義できます。
 
@@ -935,7 +931,7 @@ The alternative format uses the [reactive forms](#reactive-forms) framework.
 When using template-driven forms:
 
 * The "source of truth" is the template. The validation is defined using attributes on the individual input elements.
-* [Two-way binding](#data-binding) with `ngModel` keeps the component model synchronized with the user's entry into the input elements.
+* [Two-way binding][AioGuideGlossaryDataBinding] with `ngModel` keeps the component model synchronized with the user's entry into the input elements.
 * Behind the scenes, Angular creates a new control for each input element, provided you have set up a `name` attribute and two-way binding for each input.
 * The associated Angular directives are prefixed with `ng` such as `ngForm`, `ngModel`, and `ngModelGroup`.
 
@@ -945,7 +941,7 @@ The alternative is a reactive form. For an introduction and comparison of both f
 
 ## テンプレート式
 
-TypeScriptのような構文であり、Angularが[データバインディング](#data-binding)内で評価します。
+TypeScriptのような構文であり、Angularが[データバインディング][AioGuideGlossaryDataBinding]内で評価します。
 
 テンプレート式の書き方については、[補間](guide/interpolation)ガイドの[テンプレート式](guide/interpolation#template-expressions)セクションを読みましょう。
 
@@ -987,7 +983,7 @@ TypeScriptのような構文であり、Angularが[データバインディン�
 
 ## トークン
 
-効率的なテーブル検索のために使用される不明瞭な識別子。Angularでは[DIトークン](#di-token)が、[依存性の注入](#di)システムにおいて依存性の[プロバイダー](#provider)を見つけるために使用されます。
+効率的なテーブル検索のために使用される不明瞭な識別子。Angularでは[DIトークン](#di-token)が、[依存性の注入](#di)システムにおいて依存性の[プロバイダー][AioGuideGlossaryProvider]を見つけるために使用されます。
 
 {@a transpile}
 
@@ -1051,9 +1047,9 @@ To learn more, see [Angular Universal: server-side rendering](guide/universal).
 ## ビュー
 
 一緒に作成および破棄できる表示要素の最小グループ。
-Angularは1つ以上の[ディレクティブ](#directive)の制御下でビューをレンダリングします。
+Angularは1つ以上の[ディレクティブ][AioGuideGlossaryDirective]の制御下でビューをレンダリングします。
 
-[コンポーネント](#component)クラスとそれに結び付けられた[テンプレート](#template)はビューを定義します。
+[コンポーネント][AioGuideGlossaryComponent]クラスとそれに結び付けられた[テンプレート](#template)はビューを定義します。
 ビューは具体的には、コンポーネントと結び付けられた`ViewRef`インスタンスによって表されます。
 コンポーネントに直接属するビューは*ホストビュー*と呼ばれます。
 ビューは通常、[ビュー階層](#view-tree)に収集されます。
@@ -1086,7 +1082,7 @@ A previous compilation and rendering pipeline used by Angular. It has since been
 
 ## web component
 
-[カスタム要素](#custom-element)を参照しましょう。
+[カスタム要素][AioGuideGlossaryCustomElement]を参照しましょう。
 
 {@a workspace}
 
@@ -1115,22 +1111,252 @@ Angularの[ワークスペース](#workspace)のルートレベルにある`angu
 
 詳しい情報は[ワークスペースとプロジェクトのファイル構造](guide/file-structure)を参照しましょう。
 
-{@a X}
-
-
-{@a Y}
-
-
-{@a Z}
-{@a zone}
-
 ## zone
 
 An execution context for a set of asynchronous tasks. Useful for debugging, profiling, and testing apps that include asynchronous operations such as event processing, promises, and calls to remote servers.
 
-An Angular app runs in a zone where it can respond to asynchronous events by checking for data changes and updating the information it displays by resolving [data bindings](#data-binding).
+An Angular app runs in a zone where it can respond to asynchronous events by checking for data changes and updating the information it displays by resolving [data bindings][AioGuideGlossaryDataBinding].
 
 A zone client can take action before and after an async operation completes.
 
 Learn more about zones in this
-[Brian Ford video](https://www.youtube.com/watch?v=3IqtmUscE_U).
+[Brian Ford video][YoutubeWatchV3iqtmusceU].
+
+<!-- links -->
+
+[AioApiCommonDatepipe]: api/common/DatePipe "DatePipe | @angular/common - API | Angular"
+
+[AioApiCoreChangedetectorref]: api/core/ChangeDetectorRef "ChangeDetectorRef | @angular/core - API | Angular"
+
+[AioApiCoreProvider]: api/core/Provider "Provider | @angular/core - API | Angular"
+
+[AioApiPlatformBrowserBrowsermodule]: api/platform-browser/BrowserModule "BrowserModule | @angular/platform-browser - API | Angular"
+
+[AioApiPlatformServer]: api/platform-server "@angular/platform-server | API | Angular"
+
+[AioApiRouterResolve]: api/router/Resolve "Resolve | @angular/router - API | Angular"
+
+[AioCliAdd]: cli/add "ng add | CLI | Angular"
+
+[AioCliGenerate]: cli/generate "ng generate | CLI | Angular"
+[AioCliGenerateApplication]: cli/generate#application "application - ng generate | CLI | Angular"
+[AioCliGenerateAppShell]: cli/generate#app-shell "app-shell - ng generate | CLI | Angular"
+[AioCliGenerateLibrary]: cli/generate#library "library - ng generate | CLI | Angular"
+
+[AioCliMain]: cli "CLI Overview and Command Reference | Angular"
+
+[AioCliNew]: cli/new "ng new | CLI | Angular"
+
+[AioCliRun]: cli/run "ng run | CLI | Angular"
+
+[AioGuideAngularPackageFormat]: guide/angular-package-format "Angular Package Format | Angular"
+
+[AioGuideAnimations]: guide/animations "Introduction to Angular animations | Angular"
+
+[AioGuideArchitecture]: guide/architecture "Introduction to Angular concepts | Angular"
+
+[AioGuideArchitectureServices]: guide/architecture-services "Introduction to services and dependency injection | Angular"
+
+[AioGuideAttributeBinding]: guide/attribute-binding "Attribute, class, and style bindings | Angular"
+[AioGuideAttributeBindingBindingToTheClassAttribute]: guide/attribute-binding#binding-to-the-class-attribute "Binding to the class attribute - Attribute, class, and style bindings | Angular"
+[AioGuideAttributeBindingBindingToTheStyleAttribute]: guide/attribute-binding#binding-to-the-style-attribute "Binding to the style attribute - Attribute, class, and style bindings | Angular"
+
+[AioGuideAttributeDirectives]: guide/attribute-directives "Attribute directives | Angular"
+
+[AioGuideBootstrapping]: guide/bootstrapping "Launching your app with a root module | Angular"
+
+[AioGuideBrowserSupport]: guide/browser-support "Browser support | Angular"
+
+[AioGuideBuiltInDirectivesDisplayingAndUpdatingPropertiesWithNgmodel]: guide/built-in-directives#displaying-and-updating-properties-with-ngmodel "Displaying and updating properties with ngModel - Built-in directives | Angular"
+
+[AioGuideLifecycleHooks]: guide/lifecycle-hooks "Lifecycle Hooks | Angular"
+
+[AioGuideLifecycleHooksRespondingToProjectedContentChanges]: guide/lifecycle-hooks#responding-to-projected-content-changes "Responding to projected content changes - Lifecycle Hooks | Angular"
+
+[AioGuideInputsOutputs]: guide/inputs-outputs "Sharing data between child and parent directives and components | Angular"
+
+[AioGuideCreatingLibrariesIntegratingWithTheCliUsingCodeGenerationSchematics]: guide/creating-libraries#integrating-with-the-cli-using-code-generation-schematics "Integrating with the CLI using code-generation schematics - Creating libraries | Angular"
+
+[AioGuideDependencyInjection]: guide/dependency-injection "Dependency injection in Angular | Angular"
+
+[AioGuideElements]: guide/elements "Angular elements overview | Angular"
+
+[AioGuideEventBinding]: guide/event-binding "Event binding | Angular"
+
+[AioGuideForms]: guide/forms "Building a template-driven form | Angular"
+
+[AioGuideFileStructure]: guide/file-structure "Workspace and project file structure | Angular"
+
+[AioGuideFormsOverview]: guide/forms-overview "Introduction to forms in Angular | Angular"
+
+[AioGuideFormValidation]: guide/form-validation "Validating form input | Angular"
+[AioGuideFormValidationAddingCustomValidatorsToReactiveForms]: guide/form-validation#adding-custom-validators-to-reactive-forms "Adding custom validators to reactive forms - Validating form input | Angular"
+[AioGuideFormValidationAddingCustomValidatorsToTemplateDrivenForms]: guide/form-validation#adding-custom-validators-to-template-driven-forms "Adding custom validators to template-driven forms - Validating form input | Angular"
+
+[AioGuideGlossaryA]: guide/glossary#ahead-of-time-aot-compilation "A - Glossary | Angular"
+[AioGuideGlossaryAheadOfTimeAotCompilation]: guide/glossary#ahead-of-time-aot-compilation "ahead-of-time (AOT) compilation - Glossary | Angular"
+[AioGuideGlossaryAngularElement]: guide/glossary#angular-element "Angular element - Glossary | Angular"
+[AioGuideGlossaryArchitect]: guide/glossary#architect "Architect - Glossary | Angular"
+[AioGuideGlossaryAttributeDirective]: guide/glossary#attribute-directive "attribute directive - Glossary | Angular"
+[AioGuideGlossaryB]: guide/glossary#binding "B - Glossary | Angular"
+[AioGuideGlossaryBuilder]: guide/glossary#builder "builder - Glossary | Angular"
+[AioGuideGlossaryC]: guide/glossary#case-types "C - Glossary | Angular"
+[AioGuideGlossaryChangeDetection]: guide/glossary#change-detection " change detection - Glossary | Angular"
+[AioGuideGlossaryClassDecorator]: guide/glossary#class-decorator "class decorator - Glossary | Angular"
+[AioGuideGlossaryClassFieldDecorator]: guide/glossary#class-field-decorator "class field decorator - Glossary | Angular"
+[AioGuideGlossaryCollection]: guide/glossary#collection "collection - Glossary | Angular"
+[AioGuideGlossaryCommandLineInterfaceCli]: guide/glossary#command-line-interface-cli "command-line interface (CLI) - Glossary | Angular"
+[AioGuideGlossaryComponent]: guide/glossary#component "component - Glossary | Angular"
+[AioGuideGlossaryConfiguration]: guide/glossary#configuration "configuration - Glossary | Angular"
+[AioGuideGlossaryCustomElement]: guide/glossary#custom-element "custom element - Glossary | Angular"
+[AioGuideGlossaryD]: guide/glossary#data-binding "D - Glossary | Angular"
+[AioGuideGlossaryDataBinding]: guide/glossary#data-binding "data binding - Glossary | Angular"
+[AioGuideGlossaryDeclarable]: guide/glossary#declarable "declarable - Glossary | Angular"
+[AioGuideGlossaryDecoratorDecoration]: guide/glossary#decorator--decoration "decorator | decoration - Glossary | Angular"
+[AioGuideGlossaryDependencyInjectionDi]: guide/glossary#dependency-injection-di "dependency injection (DI) - Glossary | Angular"
+[AioGuideGlossaryDirective]: guide/glossary#directive "directive - Glossary | Angular"
+[AioGuideGlossaryDiToken]: guide/glossary#di-token "DI token - Glossary | Angular"
+[AioGuideGlossaryDynamicComponentLoading]: guide/glossary#dynamic-component-loading "dynamic component loading - Glossary | Angular"
+[AioGuideGlossaryE]: guide/glossary#eager-loading "E - Glossary | Angular"
+[AioGuideGlossaryEagerLoading]: guide/glossary#eager-loading "eager loading - Glossary | Angular"
+[AioGuideGlossaryEcmascript]: guide/glossary#ecmascript "ECMAScript - Glossary | Angular"
+[AioGuideGlossaryF]: guide/glossary#form-control "F - Glossary | Angular"
+[AioGuideGlossaryG]: guide/glossary#immutability "G - Glossary | Angular"
+[AioGuideGlossaryH]: guide/glossary#immutability "H - Glossary | Angular"
+[AioGuideGlossaryI]: guide/glossary#immutability "I - Glossary | Angular"
+[AioGuideGlossaryInjectable]: guide/glossary#injectable "injectable - Glossary | Angular"
+[AioGuideGlossaryInjector]: guide/glossary#injector "injector - Glossary | Angular"
+[AioGuideGlossaryInput]: guide/glossary#input "input - Glossary | Angular"
+[AioGuideGlossaryIvy]: guide/glossary#ivy "Ivy - Glossary | Angular"
+[AioGuideGlossaryJ]: guide/glossary#javascript "J - Glossary | Angular"
+[AioGuideGlossaryJustInTimeJitCompilation]: guide/glossary#just-in-time-jit-compilation "just-in-time (JIT) compilation - Glossary | Angular"
+[AioGuideGlossaryK]: guide/glossary#lazy-loading "K - Glossary | Angular"
+[AioGuideGlossaryL]: guide/glossary#lazy-loading "L - Glossary | Angular"
+[AioGuideGlossaryLazyLoading]: guide/glossary#lazy-loading "lazy loading - Glossary | Angular"
+[AioGuideGlossaryLibrary]: guide/glossary#library "library - Glossary | Angular"
+[AioGuideGlossaryM]: guide/glossary#module "M - Glossary | Angular"
+[AioGuideGlossaryModule]: guide/glossary#module "module - Glossary | Angular"
+[AioGuideGlossaryN]: guide/glossary#ngcc "N - Glossary | Angular"
+[AioGuideGlossaryNgmodule]: guide/glossary#ngmodule "NgModule - Glossary | Angular"
+[AioGuideGlossaryNpmPackage]: guide/glossary#npm-package "npm package - Glossary | Angular"
+[AioGuideGlossaryO]: guide/glossary#observable "O - Glossary | Angular"
+[AioGuideGlossaryObservable]: guide/glossary#observable "observable - Glossary | Angular"
+[AioGuideGlossaryObserver]: guide/glossary#observer "observer - Glossary | Angular"
+[AioGuideGlossaryOutput]: guide/glossary#output "output - Glossary | Angular"
+[AioGuideGlossaryP]: guide/glossary#pipe "P - Glossary | Angular"
+[AioGuideGlossaryPipe]: guide/glossary#pipe "pipe - Glossary | Angular"
+[AioGuideGlossaryProject]: guide/glossary#project "project - Glossary | Angular"
+[AioGuideGlossaryProvider]: guide/glossary#provider "provider - Glossary | Angular"
+[AioGuideGlossaryQ]: guide/glossary#reactive-forms "Q - Glossary | Angular"
+[AioGuideGlossaryR]: guide/glossary#reactive-forms "R - Glossary | Angular"
+[AioGuideGlossaryReactiveForms]: guide/glossary#reactive-forms "reactive forms - Glossary | Angular"
+[AioGuideGlossaryRouteGuard]: guide/glossary#route-guard "route guard - Glossary | Angular"
+[AioGuideGlossaryRouter]: guide/glossary#router "router - Glossary | Angular"
+[AioGuideGlossaryRoutingComponent]: guide/glossary#routing-component "routing component - Glossary | Angular"
+[AioGuideGlossaryRule]: guide/glossary#rule "rule - Glossary | Angular"
+[AioGuideGlossaryS]: guide/glossary#schematic "S - Glossary | Angular"
+[AioGuideGlossarySchematic]: guide/glossary#schematic "schematic - Glossary | Angular"
+[AioGuideGlossarySchematicsCli]: guide/glossary#schematics-cli "Schematics CLI - Glossary | Angular"
+[AioGuideGlossaryScopedPackage]: guide/glossary#scoped-package "scoped package - Glossary | Angular"
+[AioGuideGlossaryServerSideRendering]: guide/glossary#server-side-rendering "server-side rendering - Glossary | Angular"
+[AioGuideGlossaryService]: guide/glossary#service "service - Glossary | Angular"
+[AioGuideGlossaryStructuralDirective]: guide/glossary#structural-directive "structural directive - Glossary | Angular"
+[AioGuideGlossarySubscriber]: guide/glossary#subscriber "subscriber - Glossary | Angular"
+[AioGuideGlossaryT]: guide/glossary#target "T - Glossary | Angular"
+[AioGuideGlossaryTarget]: guide/glossary#target "target - Glossary | Angular"
+[AioGuideGlossaryTemplate]: guide/glossary#template "template - Glossary | Angular"
+[AioGuideGlossaryTemplateDrivenForms]: guide/glossary#template-driven-forms "template-driven forms - Glossary | Angular"
+[AioGuideGlossaryTemplateExpression]: guide/glossary#template-expression "template expression - Glossary | Angular"
+[AioGuideGlossaryToken]: guide/glossary#token "token - Glossary | Angular"
+[AioGuideGlossaryTranspile]: guide/glossary#transpile "transpile - Glossary | Angular"
+[AioGuideGlossaryTree]: guide/glossary#tree "tree - Glossary | Angular"
+[AioGuideGlossaryTypescript]: guide/glossary#typescript "TypeScript - Glossary | Angular"
+[AioGuideGlossaryU]: guide/glossary#unidirectional-data-flow "U - Glossary | Angular"
+[AioGuideGlossaryUniversal]: guide/glossary#universal "Universal - Glossary | Angular"
+[AioGuideGlossaryV]: guide/glossary#view "V - Glossary | Angular"
+[AioGuideGlossaryView]: guide/glossary#view "view - Glossary | Angular"
+[AioGuideGlossaryViewHierarchy]: guide/glossary#view-hierarchy "view hierarchy - Glossary | Angular"
+[AioGuideGlossaryW]: guide/glossary#web-component "W - Glossary | Angular"
+[AioGuideGlossaryWorkspace]: guide/glossary#workspace "workspace - Glossary | Angular"
+[AioGuideGlossaryWorkspaceConfig]: guide/glossary#workspace-configuration "workspace configuration - Glossary | Angular"
+[AioGuideGlossaryX]: guide/glossary#zone "X - Glossary | Angular"
+[AioGuideGlossaryY]: guide/glossary#zone "Y - Glossary | Angular"
+[AioGuideGlossaryZ]: guide/glossary#zone "Z - Glossary | Angular"
+
+[AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
+
+[AioGuideInterpolation]: guide/interpolation "Text interpolation | Angular"
+[AioGuideInterpolationTemplateExpressions]: guide/interpolation#template-expressions "Template expressions - Text interpolation | Angular"
+
+[AioGuideNgmodules]: guide/ngmodules "NgModules | Angular"
+
+[AioGuideNpmPackages]: guide/npm-packages "Workspace npm dependencies | Angular"
+
+[AioGuideObservables]: guide/observables "Using observables to pass values | Angular"
+
+[AioGuidePipes]: guide/pipes "Transforming Data Using Pipes | Angular"
+
+[AioGuidePropertyBinding]: guide/property-binding "Property binding | Angular"
+
+[AioGuideRouter]: guide/router "Common Routing Tasks | Angular"
+[AioGuideRouterPreventingUnauthorizedAccess]: guide/router#preventing-unauthorized-access "Preventing unauthorized access - Common Routing Tasks | Angular"
+
+[AioGuideRouterTutorialTohResolvePreFetchingComponentData]: guide/router-tutorial-toh#resolve-pre-fetching-component-data "Resolve: pre-fetching component data - Router tutorial: tour of heroes | Angular"
+
+[AioGuideSchematics]: guide/schematics "Generating code using schematics | Angular"
+
+[AioGuideServiceWorkerIntro]: guide/service-worker-intro "Angular service worker introduction | Angular"
+
+[AioGuideSetupLocal]: guide/setup-local "Setting up the local environment and workspace | Angular"
+
+[AioGuideStructuralDirectives]: guide/structural-directives "Writing structural directives | Angular"
+
+[AioGuideStyleguide0201]: guide/styleguide#02-01 "Style 02-01 - Angular coding style guide | Angular"
+
+[AioGuideTemplateReferenceVariables]: guide/template-reference-variables "Template variables | Angular"
+[AioGuideTemplateReferenceVariablesTemplateInputVariable]: guide/template-reference-variables#template-input-variable "Template input variable - Template variables | Angular"
+
+[AioGuideTemplateSyntax]: guide/template-syntax "Template syntax | Angular"
+
+[AioGuideTypescriptConfiguration]: guide/typescript-configuration "TypeScript configuration | Angular"
+
+[AioGuideUniversal]: guide/universal "Server-side rendering (SSR) with Angular Universal | Angular"
+
+[AioGuideWorkspaceConfig]: guide/workspace-config "Angular workspace configuration | Angular"
+[AioGuideWorkspaceConfigProjectToolConfigurationOptions]: guide/workspace-config#project-tool-configuration-options "Project tool configuration options - Angular workspace configuration | Angular"
+
+<!-- external links -->
+
+[AngularBlogAPlanForVersion80AndIvyB3318dfc19f7]: https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7 "A plan for version 8.0 and Ivy | Angular Blog"
+
+[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersBrowser]: https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/builders/browser "packages/angular_devkit/build_angular/src/builders/browser | angular/angular-cli | GitHub"
+[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersKarma]: https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/builders/karma "packages/angular_devkit/build_angular/src/builders/karma | angular/angular-cli | GitHub"
+
+[GithubPalantirTslint]: https://palantir.github.io/tslint "TSLint | Palantir | GitHub"
+
+[GithubTC39ProposalDecorators]: https://github.com/tc39/proposal-decorators "tc39/proposal-decorators | GitHub"
+
+[GitScmMain]: https://git-scm.com "Git"
+
+[GoogleDevelopersWebFundamentalsArchitectureAppShell]: https://developers.google.com/web/fundamentals/architecture/app-shell "The App Shell Model | Web Fundamentals | Google Developers"
+
+[JsWebpackMain]: https://webpack.js.org "webpack | JS.ORG"
+
+[MdnDocsWebApiCustomelementregistry]: https://developer.mozilla.org/docs/Web/API/CustomElementRegistry "CustomElementRegistry | MDN"
+
+[NpmjsDocsAboutNpm]: https://docs.npmjs.com/about-npm "About npm | npm"
+
+[RxjsMain]: https://rxjs.dev "RxJS"
+
+[TypescriptlangMain]: https://www.typescriptlang.org "TypeScript"
+
+[WebDevFasterAngularChangeDetection]: https://web.dev/faster-angular-change-detection "Optimize Angular's change detection | web.dev"
+
+[WikipediaWikiDomainSpecificLanguage]: https://en.wikipedia.org/wiki/Domain-specific_language "Domain-specific language | Wikipedia"
+[WikipediaWikiEcmascript]: https://en.wikipedia.org/wiki/ECMAScript "ECMAScript | Wikipedia"
+
+[YoutubeWatchV3iqtmusceU]: https://www.youtube.com/watch?v=3IqtmUscE_U "Brian Ford - Zones - NG-Conf 2014 | YouTube"
+
+<!-- end links -->
+
+@reviewed 2022-02-28

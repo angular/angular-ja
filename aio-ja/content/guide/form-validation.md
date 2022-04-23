@@ -334,6 +334,32 @@ interface HeroesService {
 しばらくすると、observableチェーンが完了し、非同期検証が実行されます。
 `pending`フラグは`false`に設定され、フォームの有効性が更新されます。
 
+### Adding async validators to reactive forms
+
+To use an async validator in reactive forms, begin by injecting the validator into the constructor of the component class.
+
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.2.ts" region="async-validator-inject"></code-example>
+
+Then, pass the validator function directly to the `FormControl` to apply it.
+
+In the following example, the `validate` function of `UniqueAlterEgoValidator` is applied to `alterEgoControl` by passing it to the control's `asyncValidators` option and binding it to the instance of `UniqueAlterEgoValidator` that was injected into `HeroFormReactiveComponent`.
+The value of `asyncValidators` can be either a single async validator function, or an array of functions.
+To learn more about `FormControl` options, see the [AbstractControlOptions](api/forms/AbstractControlOptions) API reference.
+
+<code-example path="form-validation/src/app/reactive/hero-form-reactive.component.2.ts" region="async-validator-usage"></code-example>
+
+### Adding async validators to template-driven forms
+
+To use an async validator in template-driven forms, create a new directive and register the `NG_ASYNC_VALIDATORS` provider on it.
+
+In the example below, the directive injects the `UniqueAlterEgoValidator` class that contains the actual validation logic and invokes it in the `validate` function, triggered by Angular when validation should happen.
+
+<code-example path="form-validation/src/app/shared/alter-ego.directive.ts" region="async-validator-directive"></code-example>
+
+Then, as with synchronous validators, add the directive's selector to an input to activate it.
+
+<code-example header="template/hero-form-template.component.html (unique-alter-ego-input)" path="form-validation/src/app/template/hero-form-template.component.html" region="alterEgo-input"></code-example>
+
 ### 非同期バリデーターのパフォーマンスの最適化
 
 デフォルトでは、すべてのバリデーターはフォーム値が変更されるたびに実行されます。これは通常、同期バリデーターではアプリケーションのパフォーマンスに目立った影響を与えません。

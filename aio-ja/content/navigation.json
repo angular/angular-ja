@@ -221,7 +221,7 @@
               "url": "guide/attribute-binding",
               "title": "属性・クラス・スタイルバインディング",
               "tooltip": "Introductory guide to setting the value of HTML attributes.",
-              "translated": true
+              "translated": false
             },
             {
               "url": "guide/event-binding",
@@ -470,8 +470,8 @@
                 },
                 {
                   "url": "guide/i18n-common-prepare",
-                  "title": "Prepare templates for translations",
-                  "tooltip": "Prepare content for translation"
+                  "title": "Prepare component for translation",
+                  "tooltip": "Prepare component for translation"
                 },
                 {
                   "url": "guide/i18n-common-translation-files",
@@ -1184,6 +1184,17 @@
               "title": "概要",
               "url": "errors",
               "hidden": true
+            }
+          ]
+        },
+        {
+          "title": "Extended Diagnostic Reference",
+          "tooltip": "Details of extended diagnostics that can be emitted by the Angular compiler",
+          "children": [
+            {
+              "url": "extended-diagnostics",
+              "title": "Extended Diagnostics Overview",
+              "tooltip": "Overview of extended diagnostics, what they are, and how to configure them."
             }
           ]
         },

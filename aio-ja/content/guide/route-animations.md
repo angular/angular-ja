@@ -65,7 +65,7 @@ The `<router-outlet>` directive holds the custom data set for the currently acti
 
 `AppComponent`は、ビューがいつ変化するかを検出できるメソッドを定義します。 このメソッドでは、ルーティング設定の`data`プロパティ値に基づいて、アニメーショントリガー(`@routeAnimation`)にアニメーション状態の値を割り当てます。 次に、ルーティング変更が発生したことを検出する`AppComponent`のメソッド例を示します。
 
-<code-example path="animations/src/app/app.component.ts" header="src/app/app.component.ts" region="prepare-router-outlet" language="typescript"></code-example>
+<code-example header="src/app/app.component.ts" path="animations/src/app/app.component.ts" region="get-route-animations-data"></code-example>
 
 ここで、`prepareRoute()`メソッドはアウトレットディレクティブ(`#outlet="outlet"`によって確立されます)の値をとり、アクティブなルーティングのカスタムデータに基づいて、アニメーションの状態を表す文字列値を返します。 このデータを使用して、各ルーティングに対して実行する遷移を制御できます。
 

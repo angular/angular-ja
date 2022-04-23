@@ -2,92 +2,44 @@
 
 Angularアプリケーションにはルートモジュールとして機能するモジュールが少なくとも1つ必要です。
 アプリケーションに機能を追加するときはモジュールとして追加することができます。
-次は、
-よく使用されるAngularモジュールとその仕様例です:
+次は、よく使用されるAngularモジュールとその仕様例です:
 
-
-<table>
-
- <tr>
-   <th style="vertical-align: top">
-     NgModule
-   </th>
-
-   <th style="vertical-align: top">
-     インポート元
-   </th>
-
-   <th style="vertical-align: top">
-     使用する理由
-   </th>
- </tr>
-
- <tr>
-   <td><code>BrowserModule</code></td>
-   <td><code>@angular/platform-browser</code></td>
-   <td>アプリケーションをブラウザで実行したいとき</td>
- </tr>
-
- <tr>
-   <td><code>CommonModule</code></td>
-   <td><code>@angular/common</code></td>
-   <td><code>NgIf</code>、 <code>NgFor</code>を使用したいとき</td>
- </tr>
-
- <tr>
-   <td><code>FormsModule</code></td>
-   <td><code>@angular/forms</code></td>
-   <td>テンプレート駆動のフォームを作成したいとき (<code>NgModel</code>を含みます)</td>
- </tr>
-
- <tr>
-   <td><code>ReactiveFormsModule</code></td>
-   <td><code>@angular/forms</code></td>
-   <td>リアクティブフォームを作成したいとき</td>
- </tr>
-
- <tr>
-   <td><code>RouterModule</code></td>
-   <td><code>@angular/router</code></td>
-   <td><code>RouterLink</code>,<code>.forRoot()</code>, and <code>.forChild()</code>を使用したいとき</td>
- </tr>
-
- <tr>
-   <td><code>HttpClientModule</code></td>
-   <td><code>@angular/common/http</code></td>
-   <td>サーバーとHTTP通信したいとき</td>
- </tr>
-
-</table>
+| NgModule              | インポート元              | 使用する理由 |
+|:---                   |:---                         |:---            |
+| `BrowserModule`       | `@angular/platform-browser` | アプリケーションをブラウザで実行したいとき |
+| `CommonModule`        | `@angular/common`           | <code>NgIf</code>、 <code>NgFor</code>を使用したいとき |
+| `FormsModule`         | `@angular/forms`            | テンプレート駆動のフォームを作成したいとき (<code>NgModel</code>を含みます) |
+| `ReactiveFormsModule` | `@angular/forms`            | リアクティブフォームを作成したいとき |
+| `RouterModule`        | `@angular/router`           | <code>RouterLink</code>,<code>.forRoot()</code>, and <code>.forChild()</code>を使用したいとき  |
+| `HttpClientModule`    | `@angular/common/http`      | サーバーとHTTP通信したいとき  |
 
 ## モジュールをインポートする
 
-これらのAngularモジュールを使用するときは、
-必要に応じて`AppModule`かフィーチャーモジュールにインポートし、
-`@NgModule`の`imports`配列に追加します。
-たとえば、[Angular CLI](cli)によって生成された基本的なアプリケーションでは、
-`BrowserModule`は`app.module.ts`の`AppModule`のトップに最初のインポートとして登録されています。
+これらのAngularモジュールを使用するときは、必要に応じて`AppModule`かフィーチャーモジュールにインポートし、`@NgModule`の`imports`配列に追加します。
+たとえば、[Angular CLI](cli)によって生成された基本的なアプリケーションでは、`BrowserModule`は`app.module.ts`の`AppModule`のトップに最初のインポートとして登録されています。
 
 
-```typescript
-/* AppModuleがアクセスできるようにモジュールをインポートします */
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+<code-example format="typescript" language="typescript">
+
+/* import modules so that AppModule can access them */
+import { BrowserModule } from '&commat;angular/platform-browser';
+import { NgModule } from '&commat;angular/core';
 
 import { AppComponent } from './app.component';
 
-@NgModule({
+&commat;NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [ /* ここにモジュールを追加してAngularにそれらが使用されていることを知らせます */
+  imports: [ /* add modules here so Angular knows to use them */
     BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-```
+
+</code-example>
 
 1番上にあるインポートの列はJavaScriptのインポート文で、
 `@NgModule`内の`imports`配列はAngular固有のものです。
@@ -122,3 +74,11 @@ NgModuleについてのさらに詳しい情報については次の記事を参
 * [ブートストラップ](guide/bootstrapping)
 * [NgModule](guide/ngmodules)
 * [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

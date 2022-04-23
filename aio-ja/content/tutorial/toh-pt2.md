@@ -1,14 +1,12 @@
 # 選択リストを表示する
 
-このページでは「Tour of Heroes」アプリケーションを拡張してヒーローのリストを表示し、
-ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
+このページでは「Tour of Heroes」アプリケーションを拡張してヒーローのリストを表示し、ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
 <div class="alert is-helpful">
 
   For the sample app that this page describes, see the <live-example></live-example>.
 
 </div>
-
 
 ## ヒーローのモックを作成する
 
@@ -21,19 +19,17 @@
 `HEROES` 定数を10人のヒーローの配列として定義し、エクスポートしてください。
 ファイルは次のようになるでしょう。
 
-<code-example path="toh-pt2/src/app/mock-heroes.ts" header="src/app/mock-heroes.ts"></code-example>
+<code-example header="src/app/mock-heroes.ts" path="toh-pt2/src/app/mock-heroes.ts"></code-example>
 
 ## ヒーローを表示する
 
 `HeroesComponent` クラスのファイルを開いて `HEROES` モックをインポートしてください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes" header="src/app/heroes/heroes.component.ts (import HEROES)">
-</code-example>
+<code-example header="src/app/heroes/heroes.component.ts (import HEROES)" path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-heroes"></code-example>
 
 同じファイル（`HeroesComponent`クラス）で、`heroes`という名前のコンポーネントプロパティを定義して、バインディングのために `HEROES` 配列を公開してください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="component">
-</code-example>
+<code-example header="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts" region="component"></code-example>
 
 ### `*ngFor` でヒーローを一覧表示する
 
@@ -46,7 +42,7 @@
 
 このようになります：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list" header="heroes.component.html (heroes template)"></code-example>
+<code-example header="heroes.component.html (heroes template)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list"></code-example>
 
 これは一人のヒーローを示しています。それらをすべてリストするには、ヒーローのリストを反復処理するために、 `*ngFor*` を `<li>` に追加します。
 
@@ -57,9 +53,11 @@
 
 この例の構文は次のとおりです。
 
-* `<li>` はホスト要素です
-* `heroes` は モックのヒーローリストを保持する`HeroesComponent` クラスのリストです
-* `hero` は各ループ毎のリストに、現在のヒーローオブジェクトを保持します
+| Syntax   | Details |
+|:---      |:---     |
+|`<li>`  | ホスト要素です |
+|`heroes`  |  モックのヒーローリストを保持する`HeroesComponent` クラスのリストです |
+|`hero`  | 各ループ毎のリストに、現在のヒーローオブジェクトを保持します |
 
 <div class="alert is-important">
 
@@ -69,7 +67,7 @@
 
 ブラウザを更新すると、ヒーローのリストが表示されます。
 
-{@a styles}
+<a id="styles"></a>
 
 ### ヒーローを装飾する
 
@@ -89,9 +87,7 @@
 CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
 `@Component.styleUrls` はこのように指し示されます。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="metadata"
- header="src/app/heroes/heroes.component.ts (@Component)">
-</code-example>
+<code-example header="src/app/heroes/heroes.component.ts (@Component)" path="toh-pt2/src/app/heroes/heroes.component.ts" region="metadata"></code-example>
 
 `heroes.component.css` を開いて、 `HeroesComponent` のためのプライベートなスタイルを貼り付けます。
 これらは、このガイドの末尾にある [最終的なコードレビュー](#final-code-review) から見つけることができます。
@@ -111,15 +107,26 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 ### クリックイベントのバインディングを追加する
 
-クリックイベントのバインディングを `<li>` にこのように追加してください：
+次のように `<li>` にクリックイベントをバインドした `<button>` を追加します。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click" header="heroes.component.html (template excerpt)"></code-example>
+<code-example header="heroes.component.html (template excerpt)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click"></code-example>
 
 これはAngularの [イベントバインディング](guide/event-binding) シンタックスにおける1つの例です。
 
 `click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
 ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
 
+<div class="callout is-helpful">
+
+<header>Clickable elements</header>
+
+**NOTE**: <br />
+We added the click event binding on a new `<button>` element.
+While we could have added the event binding on the `<li>` element directly, it is better for accessibility purposes to use the native `<button>` element to handle clicks.
+
+For more details on accessibility, see [Accessibility in Angular](guide/accessibility).
+
+</div>
 
 次のセクションでは、 `HeroesComponent`で`onSelect()`メソッドを定義して、`*ngFor`式で定義されたヒーローを表示します。
 
@@ -131,7 +138,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select" header="src/app/heroes/heroes.component.ts (onSelect)"></code-example>
+<code-example header="src/app/heroes/heroes.component.ts (onSelect)" path="toh-pt2/src/app/heroes/heroes.component.ts" region="on-select"></code-example>
 
 ### 詳細セクションを追加する
 
@@ -139,14 +146,16 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 リストのヒーローをクリックして、そのヒーローの詳細を表示するには、それをテンプレートでレンダリングするための詳細セクションが必要です。
 `heroes.component.html`のリストセクションの下に以下を追加します。
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details" header="heroes.component.html (selected hero details)"></code-example>
+<code-example header="heroes.component.html (selected hero details)" path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details"></code-example>
 
 ブラウザを更新すると、アプリケーションは壊れてしまっています。
 
 ブラウザの開発者ツールを開いて、コンソールの中のこのようなエラーメッセージを探してください：
 
-<code-example language="sh">
-  HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
+<code-example format="output" hideCopy language="shell">
+
+HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
+
 </code-example>
 
 ### なにが起きたのか？
@@ -169,7 +178,7 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 </div>
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if" header="src/app/heroes/heroes.component.html (*ngIf)"></code-example>
+<code-example header="src/app/heroes/heroes.component.html (*ngIf)" path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if"></code-example>
 
 ブラウザを更新すると、名前の一覧が再度表示されます。
 詳細のエリアは空白になっています。
@@ -189,46 +198,48 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するには、クラスバインディングを使用します。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/heroes-list-selected.png' alt="Selected hero with dark background and light text that differentiates it from unselected list items">
+
+<img alt="Selected hero with dark background and light text that differentiates it from unselected list items" src="generated/images/guide/toh/heroes-list-selected.png">
+
 </div>
 
 Angularの [クラスバインディング](guide/attribute-binding#class-binding) は条件に応じたCSSクラスの追加と削除ができます。
 装飾したい要素に `[class.some-css-class]="some-condition"` を追加するだけです。
 
-`HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
+Add the following `[class.selected]` binding to the `<button>` in the `HeroesComponent` template:
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected" header="heroes.component.html (toggle the 'selected' CSS class)"></code-example>
+<code-example header="heroes.component.html (toggle the 'selected' CSS class)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="class-selected"></code-example>
 
 現在の行のヒーローが `selectedHero` と同じ場合、Angularは `selected` のCSSクラスを追加します。2つのヒーローが異なる場合には、Angularはそのクラスを削除します。
 
 完成した `<li>` はこのようになります：
 
-<code-example path="toh-pt2/src/app/heroes/heroes.component.html" region="li" header="heroes.component.html (list item hero)"></code-example>
-{@a final-code-review}
+<code-example header="heroes.component.html (list item hero)" path="toh-pt2/src/app/heroes/heroes.component.html" region="li"></code-example>
+
+<a id="final-code-review"></a>
 
 ## 最終的なコードレビュー
 
 こちらが `HeroesComponent` のスタイルを含んだ、このページで解説したコードファイルです。
 
 <code-tabs>
-
-  <code-pane header="src/app/mock-heroes.ts" path="toh-pt2/src/app/mock-heroes.ts">
-  </code-pane>
-  
-  <code-pane header="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts">
-  </code-pane>
-
-  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt2/src/app/heroes/heroes.component.html">
-  </code-pane>
-
-  <code-pane header="src/app/heroes/heroes.component.css" path="toh-pt2/src/app/heroes/heroes.component.css">
-  </code-pane>
+    <code-pane header="src/app/mock-heroes.ts" path="toh-pt2/src/app/mock-heroes.ts"></code-pane>
+    <code-pane header="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts"></code-pane>
+    <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt2/src/app/heroes/heroes.component.html"></code-pane>
+    <code-pane header="src/app/heroes/heroes.component.css" path="toh-pt2/src/app/heroes/heroes.component.css"></code-pane>
 </code-tabs>
 
 ## まとめ
 
-* 「Tour of Heroes」アプリケーションはヒーローのリストと詳細ビューを表示します
-* ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
-* リストを表示するために `*ngFor` を使いました
-* HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました
-* CSSスタイルのclassを `クラス` バインディングで切り替えることができます
+*   「Tour of Heroes」アプリケーションはヒーローのリストと詳細ビューを表示します
+*   ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
+*   リストを表示するために `*ngFor` を使いました
+*   HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました
+*   CSSスタイルのclassを `クラス` バインディングで切り替えることができます
+    <code-example format="typescript" language="typescript">
+
+    header="src/app/heroes/heroes.component.html (HeroesComponent's template)"
+
+    </code-example>
+
+@reviewed 2022-02-28

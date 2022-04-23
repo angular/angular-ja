@@ -1,4 +1,4 @@
-{@a code-coverage}
+<a id="code-coverage"></a>
 
 # テストしているコードの量を調べる
 
@@ -11,24 +11,28 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 
 </div>
 
-
 カバレッジレポートを生成するには、プロジェクト直下で次のコマンドを実行します。
 
-<code-example language="sh">
-  ng test --no-watch --code-coverage
+<code-example format="shell" language="shell">
+
+ng test --no-watch --code-coverage
+
 </code-example>
 
-テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。
+テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。
+ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。
 
 テストするたびにコードカバレッジレポートを作成したい場合は、CLIの設定ファイル、`angular.json`で次のようなオプションを設定します:
 
-```
-  "test": {
-    "options": {
-      "codeCoverage": true
-    }
+<code-example format="json" language="json">
+
+"test": {
+  "options": {
+    "codeCoverage": true
   }
-```
+}
+
+</code-example>
 
 ## コードカバレッジの適用
 
@@ -38,9 +42,10 @@ CLIでユニットテストを実行し、コードカバレッジレポート�
 たとえば、コードベースに最低80％のコードカバレッジを設定するとします。
 To enable this, open the [Karma](https://karma-runner.github.io) test platform configuration file, `karma.conf.js`, and add the `check` property in the `coverageReporter:` key.
 
-```js
+<code-example format="javascript" language="javascript">
+
 coverageReporter: {
-  dir: require('path').join(__dirname, './coverage/<project-name>'),
+  dir: require('path').join(__dirname, './coverage/&lt;project-name&gt;'),
   subdir: '.',
   reporters: [
     { type: 'html' },
@@ -55,8 +60,17 @@ coverageReporter: {
     }
   }
 }
-```
+
+</code-example>
 
 The `check` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
 
 You can find more info about the different coverage configuration options [here](https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md).
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

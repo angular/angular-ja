@@ -20,8 +20,10 @@
 
 Angular CLIを使用して､ `hero-detail` という名前の新しいコンポーネントを生成します。
 
-<code-example language="sh">
-  ng generate component hero-detail
+<code-example format="shell" language="shell">
+
+ng generate component hero-detail
+
 </code-example>
 
 このコマンドは `HeroDetailComponent` ファイルの雛形を生成して、`AppModule` でこのコンポーネントを宣言します。
@@ -49,7 +51,7 @@ Angular CLIを使用して､ `hero-detail` という名前の新しいコンポ
 
 完了したら、 `HeroDetailComponent` テンプレートは次のようになります。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.html" header="src/app/hero-detail/hero-detail.component.html"></code-example>
+<code-example header="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html"></code-example>
 
 ### `@Input()` heroプロパティを追加する
 
@@ -64,17 +66,15 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 `hero` プロパティは `@Input()` デコレーターで注釈された[ _Input_ プロパティでなければなりません](guide/inputs-outputs "Input and Output properties")。
 これは、_外部の_ `HeroesComponent` がこのようにバインドするためです。
 
-<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding">
-</code-example>
+<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding"></code-example>
 
 `Input` シンボルを含めるために、 `@angular/core` のimport文を修正してください。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input" header="src/app/hero-detail/hero-detail.component.ts (import Input)"></code-example>
+<code-example header="src/app/hero-detail/hero-detail.component.ts (import Input)" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="import-input"></code-example>
 
 `@Input()` デコレーターが前に付いた `hero` プロパティを追加します。
 
-<code-example path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" header="src/app/hero-detail/hero-detail.component.ts" region="input-hero"></code-example>
-
+<code-example header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts" region="input-hero"></code-example>
 これが `HeroDetailComponent` クラスに行うべき唯一の変更です。
 これ以上のプロパティも、表示のためのロジックも必要ありません。
 このコンポーネントは `hero` プロパティを通してheroオブジェクトを受け取り、それを表示するだけです。
@@ -90,7 +90,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 `HeroesComponent` _class_ は変更せず、_template_ を変更します。
 
-{@a heroes-component-template}
+<a id="heroes-component-template"></a>
 
 ### `HeroesComponent` テンプレートを更新する
 
@@ -100,9 +100,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 次のように `HeroesComponent.selectedHero` を、この要素の `hero` プロパティにバインドさせます。
 
-<code-example path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding" header="heroes.component.html (HeroDetail binding)">
-
-</code-example>
+<code-example header="heroes.component.html (HeroDetail binding)" path="toh-pt3/src/app/heroes/heroes.component.html" region="hero-detail-binding"></code-example>
 
 `[hero]="selectedHero"` は、Angularの[プロパティバインディング](guide/property-binding)です。
 
@@ -142,20 +140,15 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 <code-tabs>
 
-  <code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts">
-  </code-pane>
+  <code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts"></code-pane>
 
-  <code-pane header="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html">
-  </code-pane>
+  <code-pane header="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html"></code-pane>
 
-  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html">
-  </code-pane>
+  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html"></code-pane>
 
-  <code-pane header="src/app/app.module.ts" path="toh-pt3/src/app/app.module.ts">
-  </code-pane>
+  <code-pane header="src/app/app.module.ts" path="toh-pt3/src/app/app.module.ts"></code-pane>
 
 </code-tabs>
-
 ## まとめ
 
 * 独立し、再利用可能な `HeroDetailComponent` を作成しました。

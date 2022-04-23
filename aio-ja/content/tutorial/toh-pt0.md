@@ -1,13 +1,14 @@
 # 新規プロジェクトの作成
 
-まず、Angular CLIを使用して初期アプリケーションを作成します。このチュートリアルでは、スターターアプリケーションを修正して拡張し、Tour of Heroesアプリケーションを作成します。
+まず、Angular CLIを使用して初期アプリケーションを作成します。
+このチュートリアルでは、スターターアプリケーションを修正して拡張し、Tour of Heroesアプリケーションを作成します。
 
 チュートリアルのこの部分では、次のことを行います。
 
-1. 環境を設定します。
-2. 新しいワークスペースと初期アプリケーションプロジェクトを作成します。
-3. アプリケーションをサーブします。
-4. アプリケーションを変更します。
+1.  環境を設定します。
+1.  新しいワークスペースと初期アプリケーションプロジェクトを作成します。
+1.  アプリケーションをサーブします。
+1.  アプリケーションを変更します。
 
 <div class="alert is-helpful">
 
@@ -19,29 +20,37 @@
 
 開発環境をセットアップするには、[ローカル環境の構築](guide/setup-local "Setting up for Local Development") のインストラクションに従いましょう。
 
-
 ## 新しいワークスペースと初期アプリケーションリンクを作成する
 
-Angularワークスペースのコンテキストでアプリケーションを開発します。[ワークスペース](guide/glossary#workspace)には、1つ以上の[プロジェクト](guide/glossary#project)のファイルが含まれます。プロジェクトとは、アプリケーションまたはライブラリを構成する一連のファイルです。このチュートリアルでは、新しいワークスペースを作成します。
+Angularワークスペースのコンテキストでアプリケーションを開発します。
+[ワークスペース](guide/glossary#workspace)には、1つ以上の[プロジェクト](guide/glossary#project)のファイルが含まれます。
+プロジェクトとは、アプリケーションまたはライブラリを構成する一連のファイルです。
+このチュートリアルでは、新しいワークスペースを作成します。
 
 新しいワークスペースと初期のアプリケーションプロジェクトを作成するには：
 
- 1. Angularワークスペースフォルダにないことを確認します。たとえば、Getting Startedワークスペースを以前に作成した場合は、そのフォルダの親フォルダに変更します。
- 2. CLIコマンド `ng new` を実行し、次に示すように、`angular-tour-of-heroes` という名前を指定します。
+1.  Angularワークスペースフォルダにないことを確認します。
+    たとえば、Getting Startedワークスペースを以前に作成した場合は、そのフォルダの親フォルダに変更します。
 
-  <code-example language="sh">
+1.  CLIコマンド `ng new` を実行し、次に示すように、`angular-tour-of-heroes` という名前を指定します。
+
+    <code-example format="shell" language="shell">
+
     ng new angular-tour-of-heroes
-  </code-example>
 
-  3. `ng new` コマンドを実行すると、最初のアプリケーションプロジェクトに含める機能に関する情報が表示されます。 EnterキーまたはReturnキーを押してデフォルト値を受け入れます。
+    </code-example>
 
-Angular CLIは、必要なAngular npmパッケージおよびその他の依存関係をインストールします。これには数分かかることがあります。
+1.  `ng new` コマンドを実行すると、最初のアプリケーションプロジェクトに含める機能に関する情報が表示されます。 
+    EnterキーまたはReturnキーを押してデフォルト値を受け入れます。
+
+Angular CLIは、必要なAngular npmパッケージおよびその他の依存関係をインストールします。
+これには数分かかることがあります。
 
 また、次のワークスペースとスタータープロジェクトファイルも作成されます。
 
-  * `angular-tour-of-heroes`という名前のルートフォルダがある新しいワークスペース。 
-  * 初期スケルトンアプリケーションプロジェクト。（`src/app`サブフォルダ内） 
-  * 関連する設定ファイル。
+*   `angular-tour-of-heroes`という名前のルートフォルダがある新しいワークスペース。 
+*   初期スケルトンアプリケーションプロジェクト。（`src/app`サブフォルダ内） 
+*   関連する設定ファイル。
 
 最初のアプリケーションプロジェクトには、すぐに実行できる簡単なウェルカムアプリケーションが含まれています。
 
@@ -49,9 +58,11 @@ Angular CLIは、必要なAngular npmパッケージおよびその他の依存�
 
 ワークスペースディレクトリに移動し、アプリケーションを起動します。
 
-<code-example language="sh">
-  cd angular-tour-of-heroes
-  ng serve --open
+<code-example format="shell" language="shell">
+
+cd angular-tour-of-heroes
+ng serve --open
+
 </code-example>
 
 <div class="alert is-helpful">
@@ -79,29 +90,29 @@ _コンポーネント_ はAngularアプリケーションの基礎的な構成�
 
 次の3つのファイルに分割された、`AppComponent`シェルの実装が見つかります。
 
-1. `app.component.ts`&mdash; TypeScriptで書かれたコンポーネントクラスのコードです。
-1. `app.component.html`&mdash; HTMLで書かれたコンポーネントのテンプレートです。
-1. `app.component.css`&mdash; このコンポーネント専用のCSSです。
+| Files                | Details |
+|:---                  |:---     |
+| `app.component.ts` | TypeScriptで書かれたコンポーネントクラスのコードです。 |
+| `app.component.html` | HTMLで書かれたコンポーネントのテンプレートです。 |
+| `app.component.css` | このコンポーネント専用のCSSです。 |
 
 ### アプリケーションのタイトルを変更する
 
 コンポーネントクラスファイル(`app.component.ts`)を開き、`title`プロパティの値を`Tour of Heroes`に変更してください。
 
-<code-example path="toh-pt0/src/app/app.component.ts" region="set-title" header="app.component.ts (class title property)"></code-example>
+<code-example header="app.component.ts (class title property)" path="toh-pt0/src/app/app.component.ts" region="set-title"></code-example>
 
-コンポーネントのテンプレートファイル(`app.component.html`)を開き、
-Angular CLIにより生成されたデフォルトのテンプレートを削除してください。
+コンポーネントのテンプレートファイル(`app.component.html`)を開き、Angular CLIにより生成されたデフォルトのテンプレートを削除してください。
 代わりに次のHTMLを配置してください。
 
-<code-example path="toh-pt0/src/app/app.component.html"
-  header="app.component.html (template)"></code-example>
+<code-example header="app.component.html (template)" path="toh-pt0/src/app/app.component.html"></code-example>
 
 二重の波括弧はAngularの*補間バインディング*の構文です。
 この補間バインディングはコンポーネントの`title`プロパティの値を、HTMLのheaderタグの中に渡します。
 
 ブラウザがページを更新し、新しいアプリケーションのタイトルが表示されます。
 
-{@a app-wide-styles}
+<a id="app-wide-styles"></a>
 
 ### アプリケーションのスタイルを追加する
 
@@ -111,29 +122,22 @@ CLIはこの目的のために、空の`styles.css`を生成しました。
 
 `src/styles.css` を開き、次のコードをファイルに追加します。
 
-<code-example path="toh-pt0/src/styles.1.css" header="src/styles.css (excerpt)">
-</code-example>
+<code-example header="src/styles.css (excerpt)" path="toh-pt0/src/styles.1.css"></code-example>
 
 ## 最終的なコードのおさらい
 
 以下がこのページで述べられたコードのファイルです。
 
 <code-tabs>
-
-  <code-pane header="src/app/app.component.ts" path="toh-pt0/src/app/app.component.ts">
-  </code-pane>
-
-  <code-pane header="src/app/app.component.html" path="toh-pt0/src/app/app.component.html">
-  </code-pane>
-
-  <code-pane
-    header="src/styles.css (excerpt)"
-    path="toh-pt0/src/styles.1.css">
-  </code-pane>
+    <code-pane header="src/app/app.component.ts" path="toh-pt0/src/app/app.component.ts"></code-pane>
+    <code-pane header="src/app/app.component.html" path="toh-pt0/src/app/app.component.html"></code-pane>
+    <code-pane header="src/styles.css (excerpt)" path="toh-pt0/src/styles.1.css"></code-pane>
 </code-tabs>
 
 ## まとめ
 
-* Angular CLIを用いて初期アプリケーションの骨組みを作成しました。
-* Angularのコンポーネントがデータを表示することを学びました。
-* アプリケーションのタイトルを表示するために二重波カッコによる補間を使いました。
+*   Angular CLIを用いて初期アプリケーションの骨組みを作成しました。
+*   Angularのコンポーネントがデータを表示することを学びました。
+*   アプリケーションのタイトルを表示するために二重波カッコによる補間を使いました。
+
+@reviewed 2022-02-28

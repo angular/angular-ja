@@ -27,7 +27,7 @@ If the package of your library does not include typings and your IDE complains, 
 <code-example format="shell" language="shell">
 
 npm install d3 --save
-npm install @types/d3 --save-dev
+npm install &commat;types/d3 --save-dev
 
 </code-example>
 
@@ -128,7 +128,7 @@ The following code snippet is an example import statement.
 
 <code-example format="typescript" language="typescript">
 
-import * as $ from 'jquery';
+import * as &dollar; from 'jquery';
 
 </code-example>
 
@@ -154,7 +154,7 @@ declare var libraryName: any;
 
 <code-example format="typescript" language="typescript">
 
-$('.test').myPlugin();
+&dollar;('.test').myPlugin();
 
 </code-example>
 

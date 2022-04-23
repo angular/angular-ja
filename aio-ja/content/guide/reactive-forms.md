@@ -4,11 +4,11 @@
 
 <div class="alert is-helpful">
 
-Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-example</live-example>.
+Try this <live-example name="reactive-forms" title="Reactive Forms in Stackblitz">Reactive Forms live-example</live-example>.
 
 </div>
 
-**前提条件**
+## Prerequisites
 
 リアクティブフォームについてさらに詳しく説明する前に、次のことについて基本的な理解をしておく必要があります。
 

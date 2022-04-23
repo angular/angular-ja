@@ -1,4 +1,5 @@
-{@a router-tutorial}
+
+<a id="router-tutorial"></a>
 
 # ルーターチュートリアル：ツアーオブヒーローズ
 
@@ -7,7 +8,7 @@
 
 最終的なバージョンのアプリケーションのサンプルは、次を参照してください。<live-example name="router"></live-example>
 
-{@a router-tutorial-objectives}
+<a id="router-tutorial-objectives"></a>
 
 ## 目的
 
@@ -126,13 +127,33 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
   <img src='generated/images/guide/router/router-1-anim.gif' alt="Animated image of application with a Crisis Center button and a Heroes button. The pointer clicks each button to show a view for each.">
 </div>
 
-{@a import}
+<a id="import"></a>
 
-Angular CLI でサンプルアプリケーションを生成します。
+### Create a sample application
 
-<code-example language="sh">
-  ng new angular-router-sample
-</code-example>
+1. Create a new Angular project, _angular-router-tour-of-heroes_.
+
+   <code-example format="shell" language="shell">
+    ng new angular-router-tour-of-heroes
+   </code-example>
+
+   When prompted with `Would you like to add Angular routing?`, select `N`.
+
+   When prompted with `Which stylesheet format would you like to use?`, select `CSS`.
+
+   After a few moments, a new project, `angular-router-tour-of-heroes`, is ready.
+   
+1. From your terminal, navigate to the `angular-router-tour-of-heroes` directory.
+
+1. Verify that your new application runs as expected by running the `ng serve` command.
+
+   <code-example language="sh">
+    ng serve
+   </code-example>
+
+1. Open a browser to `http://localhost:4200`.
+
+   You should see the application running in your browser.
 
 ### Routes を定義する
 

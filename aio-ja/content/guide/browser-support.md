@@ -1,43 +1,20 @@
 # ブラウザサポート
 
-Angularは最新のブラウザをサポートしています。サポートしているブラウザは次の表のとおりです。
+Angularは最新のブラウザをサポートしています。
+サポートしているブラウザは次の表のとおりです。
 
-<table>
-  <tr>
-    <th>ブラウザ</th>
-    <th>サポートバージョン</th>
-  </tr>
-  <tr>
-    <td>Chrome</td>
-    <td>latest</td>
-  </tr>
-  <tr>
-    <td>Firefox</td>
-    <td>latest and extended support release (ESR)</td>
-  </tr>
-  <tr>
-    <td>Edge</td>
-    <td>2 most recent major versions</td>
-  </tr>
-  <tr>
-    <td>Safari</td>
-    <td>2 most recent major versions</td>
-  </tr>
-  <tr>
-    <td>iOS</td>
-    <td>2 most recent major versions</td>
-  </tr>
-  <tr>
-    <td>Android</td>
-    <td>2 most recent major versions</td>
-  </tr>
-</table>
-
+| Browser | Supported versions |
+|:---     |:---                |
+| Chrome  | latest                                      |
+| Firefox | latest and extended support release \(ESR\) |
+| Edge    | 2 most recent major versions                |
+| Safari  | 2 most recent major versions                |
+| iOS     | 2 most recent major versions                |
+| Android | 2 most recent major versions                |
 
 <div class="alert is-helpful">
 
-Angularの開発プロセスでは、各プルリクエストに対して、すべてのサポート対象ブラウザ上でユニットテストを実行しています。
-ユニットテスト実行には[Sauce Labs](https://saucelabs.com/)を使用しています。
+Angularの開発プロセスでは、各プルリクエストに対して、すべてのサポート対象ブラウザ上でユニットテストを実行しています。ユニットテスト実行には[Sauce Labs](https://saucelabs.com/)を使用しています。
 
 </div>
 
@@ -52,7 +29,13 @@ See instructions on how to include polyfills into your project below.
 
 推奨されるポリフィルはAngularアプリケーションを完全に動作させるためのものです。
 リストにない機能をサポートするために追加のポリフィルが必要になるかもしれません。
-ポリフィルでは、古く遅いブラウザを最新の早いブラウザに魔法のように変換できないことに注意しましょう。
+
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+Polyfills cannot magically transform an old, slow browser into a modern, fast one.
+
+</div>
 
 </div>
 
@@ -69,7 +52,7 @@ When you create a project with the `ng new` command, a `src/polyfills.ts` config
 * If you need an _optional_ polyfill, you must install its npm package, then uncomment or create the corresponding import statement in the `src/polyfills.ts` configuration file.
 
 
-{@a non-cli}
+<a id="non-cli"></a>
 
 ## CLI未使用の場合のポリフィル設定
 
@@ -78,24 +61,34 @@ When you create a project with the `ng new` command, a `src/polyfills.ts` config
 例:
 
 <code-example header="src/index.html" language="html">
-  &lt;!-- pre-zone polyfills -->
-  &lt;script src="node_modules/core-js/client/shim.min.js">&lt;/script>
-  &lt;script>
-    /**
-     * you can configure some zone flags which can disable zone interception for some
-     * asynchronous activities to improve startup performance - use these options only
-     * if you know what you are doing as it could result in hard to trace down bugs..
-     */
-    // __Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
-    // __Zone_disable_on_property = true; // disable patch onProperty such as onclick
-    // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
-    /*
-     * in Edge developer tools, the addEventListener will also be wrapped by zone.js
-     * with the following flag, it will bypass `zone.js` patch for Edge
-     */
-    // __Zone_enable_cross_context_check = true;
-  &lt;/script>
-  &lt;!-- zone.js required by Angular -->
-  &lt;script src="node_modules/zone.js/bundles/zone.umd.js">&lt;/script>
-  &lt;!-- application polyfills -->
+
+&lt;!-- pre-zone polyfills --&gt;
+&lt;script src="node_modules/core-js/client/shim.min.js"&gt;&lt;/script&gt;
+&lt;script>
+  /**
+   &ast; you can configure some zone flags which can disable zone interception for some
+   &ast; asynchronous activities to improve startup performance - use these options only
+   &ast; if you know what you are doing as it could result in hard to trace down bugs.
+   */
+  // &lowbar;&lowbar;Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
+  // &lowbar;&lowbar;Zone_disable_on_property = true; // disable patch onProperty such as onclick
+  // &lowbar;&lowbar;zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+  /*
+   &ast; in Edge developer tools, the addEventListener will also be wrapped by zone.js
+   &ast; with the following flag, it will bypass `zone.js` patch for Edge.
+   */
+  // &lowbar;&lowbar;Zone_enable_cross_context_check = true;
+&lt;/script&gt;
+&lt;!-- zone.js required by Angular --&gt;
+&lt;script src="node_modules/zone.js/bundles/zone.umd.js"&gt;&lt;/script&gt;
+&lt;!-- application polyfills --&gt;
+
 </code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

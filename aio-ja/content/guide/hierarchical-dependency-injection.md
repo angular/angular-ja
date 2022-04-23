@@ -5,6 +5,24 @@ Angularのインジェクターには、
 これらのルールを理解することにより、
 プロバイダーを宣言する必要があるNgModuleまたはコンポーネントを決定できます。
 
+<div class="alert is-helpful">
+
+**NOTE**:<br />
+This topic uses the following pictographs.
+
+| html entities | pictographs |
+|:---         |:--- |
+| <code>&#x1F33A;</code> | red hibiscus \(`🌺`\)  |
+| <code>&#x1F33B;</code> | sunflower \(`🌻`\)     |
+| <code>&#x1F33C;</code> | yellow flower \(`🌼`\) |
+| <code>&#x1F33F;</code> | fern \(`🌿`\)          |
+| <code>&#x1F341;</code> | maple leaf \(`🍁`\)    |
+| <code>&#x1F433;</code> | whale \(`🐳`\)         |
+| <code>&#x1F436;</code> | dog \(`🐶`\)           |
+| <code>&#x1F994;</code> | hedgehog \(`🦔`\)       |
+
+</div>
+
 ## ２つのインジェクター階層
 
 Angularには2つのインジェクター階層があります。

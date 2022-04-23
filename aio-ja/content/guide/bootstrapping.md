@@ -1,28 +1,27 @@
 # ルートモジュールによるアプリケーションの起動
 
-#### 前提条件
+## 前提条件
 
 次の基本的な理解
+
 * [JavaScriptモジュールとNgModule](guide/ngmodule-vs-jsmodule)
 
-<hr />
-
 NgModuleは、アプリケーションパーツがどのように組み合わされるかを記述します。
-すべてのアプリケーションには、少なくとも1つのAngularモジュール（_root_モジュール）があり、
-起動時にアプリケーションをブートストラップするために存在する必要があります。
+すべてのアプリケーションには、少なくとも1つのAngularモジュール（_root_モジュール）があり、起動時にアプリケーションをブートストラップするために存在する必要があります。
 慣例により、それは通常`AppModule`と呼ばれます。
 
 [Angular CLI](cli) の `ng new` コマンドを使用してアプリケーションを生成する場合、デフォルトのAppModuleは次のようになります。
 
-```typescript
+<code-example format="typescript" language="typescript">
+
 /* JavaScript imports */
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '&commat;angular/platform-browser';
+import { NgModule } from '&commat;angular/core';
 
 import { AppComponent } from './app.component';
 
-/* the AppModule class with the @NgModule decorator */
-@NgModule({
+/* the AppModule class with the &commat;NgModule decorator */
+&commat;NgModule({
   declarations: [
     AppComponent
   ],
@@ -34,24 +33,23 @@ import { AppComponent } from './app.component';
 })
 export class AppModule { }
 
-```
+</code-example>
 
-import文の後に、
-**`@NgModule`**[デコレータ](guide/glossary#decorator '"Decorator" の説明')をもつクラスがあります。
+import文の後に、**`@NgModule`**[デコレータ](guide/glossary#decorator '"Decorator" の説明')をもつクラスがあります。
 
 `@NgModule`デコレーターは`AppModule`を`NgModule`クラスとして識別します。
 `@NgModule`はアプリケーションのコンパイルと起動の方法をAngularに伝えるメタデータオブジェクトを受け取ります。
 
-* **_declarations_**&mdash;このアプリケーションの唯一のコンポーネントです。
-* **_imports_**&mdash;DOMレンダリング、サニタイズ、およびロケーションなどのブラウザ特定のサービスをもつ`BrowserModule`をインポートします。
-* **_providers_**&mdash;サービスプロバイダー
-* **_bootstrap_**&mdash;Angularが作成して
-ホストWebページである`index.html`に挿入する_ルート_コンポーネント。
+| metadata object | Details |
+|:---             |:---     |
+| declarations    | This application's lone component.                                                                          |
+| imports         | Import `BrowserModule` to have browser-specific services such as DOM rendering, sanitization, and location. |
+| providers       | The service providers.                                                                                      |
+| bootstrap       | The *root* component that Angular creates and inserts into the `index.html` host web page.                  |
 
-Angular CLIで作成されたデフォルトのアプリケーションにはコンポーネントが`AppComponent`1つしかなく、
-`declarations`と`bootstrap`配列の両方にあります。
+Angular CLIで作成されたデフォルトのアプリケーションにはコンポーネントが`AppComponent`1つしかなく、`declarations`と`bootstrap`配列の両方にあります。
 
-{@a declarations}
+<a id="declarations"></a>
 
 ## `declarations`配列 {@a the-declarations-array}
 
@@ -59,33 +57,28 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 追加のコンポーネントを作成したら、それらを`declarations`に追加します。
 
 すべてのコンポーネントを厳密に1つの`NgModule`クラスに宣言する必要があります。
-コンポーネントを宣言せずに使用すると、
-Angularはエラーメッセージを返します。
+コンポーネントを宣言せずに使用すると、Angularはエラーメッセージを返します。
 
-`declarations`配列は宣言を受け取ります。
-宣言とはコンポーネント、[ディレクティブ](guide/attribute-directives)および[パイプ](guide/pipes)です。
+`declarations`配列は宣言を受け取ります。宣言とはコンポーネント、[ディレクティブ](guide/attribute-directives)および[パイプ](guide/pipes)です。
 モジュールのすべての宣言は`declarations`配列内になければなりません。
-宣言は、正確に1つのモジュールに属していなければなりません。
-複数のモジュールで同じクラスを宣言しようとすると、コンパイラでエラーが発生します。
+宣言は、正確に1つのモジュールに属していなければなりません。複数のモジュールで同じクラスを宣言しようとすると、コンパイラでエラーが発生します。
 
-これらの宣言されたクラスはモジュール内からは見えますが、このモジュールからエクスポートされ、
-他のモジュールがこのモジュールをインポートしない限り、
-別のモジュール内のコンポーネントには表示されません。
+これらの宣言されたクラスはモジュール内からは見えますが、このモジュールからエクスポートされ、他のモジュールがこのモジュールをインポートしない限り、別のモジュール内のコンポーネントには表示されません。
 
 宣言の配列に入る例を次に示します。
 
-```typescript
-  declarations: [
-    YourComponent,
-    YourPipe,
-    YourDirective
-  ],
-```
+<code-example format="typescript" language="typescript">
 
-宣言は1つのモジュールにしか属せないので、
-1つの`@NgModule`だけに宣言します。
+declarations: [
+  YourComponent,
+  YourPipe,
+  YourDirective
+],
+
+</code-example>
+
+宣言は1つのモジュールにしか属せないので、1つの`@NgModule`だけに宣言します。
 必要なときは、必要な宣言をもつモジュールをインポートします。
-
 
 ### `@NgModule`とディレクティブの使用
 
@@ -116,18 +109,14 @@ Angularはエラーメッセージを返します。
 
 コンポーネント、ディレクティブ、およびパイプは、1つのモジュールにのみ属することを忘れないでください。必要なモジュールをインポートしてシェアするために、アプリケーション中で宣言しなければならないのは一度だけです。これにより時間が節約され、アプリケーションをリーンに保つのに役立ちます。
 
-{@a imports}
+<a id="imports"></a>
 
 ## `imports`配列
 
 モジュールの`imports`配列は、`@NgModule`メタデータオブジェクトの中にだけ現れます。
 このモジュールが適切に機能するために必要な他のNgModuleについてAngularに伝えます。
 
-<code-example
-    path="bootstrapping/src/app/app.module.ts"
-    region="imports"
-    header="src/app/app.module.ts (excerpt)">
-</code-example>
+<code-example header="src/app/app.module.ts (excerpt)" path="bootstrapping/src/app/app.module.ts" region="imports"></code-example>
 
 このモジュールのリストは、このモジュール内のコンポーネントのテンプレートが参照するコンポーネント、
 ディレクティブ、またはパイプをエクスポートするモジュールです。
@@ -137,9 +126,7 @@ Angularはエラーメッセージを返します。
 クラスが別のモジュールからインポートされたときに、
 別のコンポーネント、ディレクティブ、またはパイプを参照できます。
 
-
-
-{@a bootstrap-array}
+<a id="bootstrap-array"></a>
 
 ## `providers`配列
 
@@ -173,3 +160,11 @@ documentation.
 ## Angularモジュールについての詳細
 
 アプリケーション中でよく使われるAngularモジュールについては、[よく使用されるモジュール](guide/frequent-ngmodules)を参照してください。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

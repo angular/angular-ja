@@ -92,15 +92,14 @@ Angular ワークスペースにライブラリプロジェクト `my-lib` が�
 
   * `outDir` はライブラリの出力フォルダーにマップされます。デフォルトでは、これはワークスペースのルートにある `dist/my-lib` フォルダーです。
 
-1. Schematics ソースファイルがライブラリバンドルにコンパイルされるようにするには、ライブラリプロジェクトのルートフォルダー (`projects/my-lib`) の `package.json` ファイルに次のスクリプトを追加します。
+1.  Schematics ソースファイルがライブラリバンドルにコンパイルされるようにするには、ライブラリプロジェクトのルートフォルダー (`projects/my-lib`) の `package.json` ファイルに次のスクリプトを追加します。
 
-<code-example header="projects/my-lib/package.json (Build Scripts)" path="schematics-for-libraries/projects/my-lib/package.json">
-</code-example>
+    <code-example header="projects/my-lib/package.json (Build Scripts)" path="schematics-for-libraries/projects/my-lib/package.json"></code-example>
 
-  * `build` スクリプトは、カスタム `tsconfig.schematics.json` ファイルを使用して Schematic をコンパイルします。
-  * `build` スクリプトが完了すると、`postbuild` スクリプトが Schematic ファイルをコピーします。
-  * Both the `build` and the `postbuild` scripts require dependencies that are found in their parent directory.
-    They can be installed by running `npm install` prior to running the scripts.
+    * `build` スクリプトは、カスタム `tsconfig.schematics.json` ファイルを使用して Schematic をコンパイルします。
+    * `build` スクリプトが完了すると、`postbuild` スクリプトが Schematic ファイルをコピーします。
+    * Both the `build` and the `postbuild` scripts require the `copyfiles` and `typescript` dependencies.
+      To install them, navigate to their path defined in `devDependencies` and run `npm install` before running the scripts.
 
 ## 生成サポートの提供
 

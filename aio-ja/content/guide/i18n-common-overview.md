@@ -16,7 +16,7 @@
 
 <div class="alert is-helpful">
 
-言語ごとのスペーシングの違いを考慮し、すべてのターゲットロケールに適応するユーザーインターフェイスを作成します。
+言語ごとのスペーシングの違いを考慮し、すべてのターゲットロケールに適応するユーザーインターフェースを作成します。
 詳しくは、[国際化へのアプローチ][ThinkwithgoogleMarketfinderIntlEnUsGuideHowToApproachI18nOverview]をご覧ください。
 
 </div>

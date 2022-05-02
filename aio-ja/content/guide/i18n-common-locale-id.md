@@ -1,20 +1,20 @@
-# Refer to locales by ID
+# IDでロケールを参照
 
-Angular uses the Unicode *locale identifier* \(Unicode locale ID\) to find the correct locale data for internationalization of text strings.
+Angularは、テキスト文字列を国際化するのに必要な正しいロケールデータを見つけるために、Unicode*ロケール識別子* \(Unicode locale ID\)を使用します。
 
 <div class="callout is-helpful">
 
 <header>Unicode locale ID</header>
 
-*   A locale ID conforms to the [Unicode Common Locale Data Repository (CLDR) core specification][UnicodeCldrDevelopmentCoreSpecification].
-    For more information about locale IDs, see [Unicode Language and Locale Identifiers][UnicodeCldrDevelopmentCoreSpecificationHVgyyng33o798].
+*   ロケールIDは [Unicode Common Locale Data Repository (CLDR) core specification][UnicodeCldrDevelopmentCoreSpecification]に準拠する。
+    ロケールIDの詳細については、[Unicode言語とロケール識別子][UnicodeCldrDevelopmentCoreSpecificationHVgyyng33o798]を参照してください。
 
-*   CLDR and Angular use [BCP 47 tags][RfcEditorInfoBcp47] as the base for the locale ID
+*   CLDRとAngularは、ロケールIDのベースとして[BCP 47 タグ][RfcEditorInfoBcp47]を使用します。
 
 </div>
 
-A locale ID specifies the language, country, and an optional code for further variants or subdivisions.
-A locale ID consists of the language identifier, a hyphen \(`-`\) character, and the locale extension.
+ロケールIDは、言語、国、およびさらなる変種や細分化のためのオプショナルコードを指定します。
+ロケールIDは、言語識別子、ハイフン\(`-`\)文字、ロケール拡張子から構成されます。
 
 <code-example>
 
@@ -24,44 +24,43 @@ A locale ID consists of the language identifier, a hyphen \(`-`\) character, and
 
 <div class="alert is-helpful">
 
-To accurately translate your Angular project, you must decide which languages and locales you are targeting for internationalization.
+Angularプロジェクトを正確に翻訳するためには、国際化の対象となる言語とロケールを決定する必要があります。
 
-Many countries share the same language, but differ in usage.
-The differences include grammar, punctuation, formats for currency, decimal numbers, dates, and so on.
+多くの国では、同じ言語を共有していても、使い方が異なります。その違いは、文法、句読点、通貨、小数、日付の形式など多岐にわたります。
 
 </div>
 
-For the examples in this guide, use the following languages and locales.
+このガイドの例では、次の言語とロケールを使用します。
 
-| Language | Locale                   | Unicode locale ID |
+| 言語 | ロケール                   | Unicode locale ID |
 |:---      |:---                      |:---               |
-| English  | Canada                   | `en-CA`           |
-| English  | United States of America | `en-US`           |
-| French   | Canada                   | `fr-CA`           |
-| French   | France                   | `fr-FR`           |
+| 英語  | カナダ                   | `en-CA`           |
+| 英語  | アメリカ合衆国 | `en-US`           |
+| フランス語   | カナダ                   | `fr-CA`           |
+| フランス語   | フランス                   | `fr-FR`           |
 
-The [Angular repository][GithubAngularAngularTreeMasterPackagesCommonLocales] includes common locales.
+[Angularリポジトリ][GithubAngularAngularTreeMasterPackagesCommonLocales]には、一般的なロケールが含まれています。
 
 <div class="callout is-helpful">
 
-For a list of language codes, see [ISO 639-2][LocStandardsIso6392].
+言語コードの一覧は、[ISO 639-2][LocStandardsIso6392]を参照してください。
 
 </div>
 
-## Set the source locale ID
+## ソースロケールIDを設定する
 
-Use the Angular CLI to set the source language in which you are writing the component template and code.
+Angular CLIを使用して、コンポーネントのテンプレートとコードを記述するソース言語を設定します。
 
-By default, Angular uses `en-US` as the source locale of your project.
+デフォルトで、Angularはプロジェクトのソースロケールとして`en-US`を使用します。
 
-To change the source locale of your project for the build, complete the following actions.
+ビルドに使用するプロジェクトのソースロケールを変更するには、次の操作を実行します。
 
-1.  Open the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file.
-1.  Change the source locale in the `sourceLocale` field.
+1.  [`angular.json`][AioGuideWorkspaceConfig]ワークスペースのビルド設定ファイルを開いてください。
+1.  `sourceLocale`フィールドのソースロケールを変更してください。
 
-## What's next
+## 次のステップ
 
-*   [Format data based on locale][AioGuideI18nCommonFormatDataLocale]
+*   [ロケールに応じたデータフォーマット][AioGuideI18nCommonFormatDataLocale]
 
 <!-- links -->
 

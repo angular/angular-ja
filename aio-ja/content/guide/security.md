@@ -62,7 +62,7 @@ XSSへの対策としてAngularはデフォルトですべての入力を信頼�
 
 Angularテンプレートはレンダリングに使用される値とは異なり、デフォルトで信頼できると見なされ実行可能なコードとして扱われます。ユーザー入力とテンプレート構文を連結してテンプレートを生成してはいけません。これを行うと、攻撃者がアプリケーションに[任意のコードを挿入](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E6%94%BB%E6%92%83)できるようになります。この脆弱性を防ぐため、実稼働環境では常にデフォルトの[事前(AOT)コンパイラ](/guide/security#offline-template-compiler)を使用してください。
 
-Content Security Policy (CSP)とTrusted Typesによる追加の保護レイヤーを利用することもできます。Webプラットフォーム上のこれら機能はDOMレベルで動作するため他の低レベルAPIを使用しても迂回できず、したがってXSSを防ぐもっとも効果的な手段なります。[Content Security Policy (CSP)](#content-security-policy)の構成と[Trusted Typesの適用](#trusted-types)でこれらの保護機能を利用することを強く推奨します。
+Content Security Policy (CSP)とTrusted Typesによる追加の保護レイヤーを利用することもできます。Webプラットフォーム上のこれら機能はDOMレベルで動作するため他の低レベルAPIを使用しても迂回できず、したがってXSSを防ぐもっとも効果的な手段になります。[Content Security Policy (CSP)](#content-security-policy)の構成と[Trusted Typesの適用](#trusted-types)でこれらの保護機能を利用することを強く推奨します。
 
 ### サニタイズとセキュリティコンテキスト {@a sanitization-and-security-contexts}
 

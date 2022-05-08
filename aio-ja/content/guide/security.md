@@ -58,11 +58,11 @@ DOMに`<script>`タグを挿入された場合、攻撃者はそのWebサイト�
 
 ### AngularによるXSS対策
 
-XSSへの対策としてAngularはデフォルトですべての入力を信頼できない値として扱います。プロパティ、属性、スタイル、クラスバインド、テンプレート補間、これらを利用してテンプレートからDOMへ値を挿入する際、Angularは値のサニタイズとエスケープを行います。If a value was already sanitized outside of Angular and is considered safe, you can communicate this to Angular by marking the [value as trusted](#bypass-security-apis).
+XSSへの対策としてAngularはデフォルトですべての入力を信頼できない値として扱います。プロパティ、属性、スタイル、クラスバインド、テンプレート補間、これらを利用してテンプレートからDOMへ値を挿入する際、Angularは値のサニタイズとエスケープを行います。値がAngularの外部ですでにサニタイズされており安全と見なせる場合、[信頼された値](#bypass-security-apis)としてそれをマークしAngularに伝えることができます。
 
-Unlike values to be used for rendering, Angular templates are considered trusted by default, and should be treated as executable code. Never generate templates by concatenating user input and template syntax. Doing this would enable attackers to [inject arbitrary code](https://en.wikipedia.org/wiki/Code_injection) into your application. To prevent these vulnerabilities, always use the default [AOT template compiler](/guide/security#offline-template-compiler) in production deployments.
+Angularテンプレートはレンダリングに使用される値とは異なり、デフォルトで信頼できると見なされ実行可能なコードとして扱われます。ユーザー入力とテンプレート構文を連結してテンプレートを生成してはいけません。これを行うと、攻撃者がアプリケーションに[任意のコードを挿入](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E6%94%BB%E6%92%83)できるようになります。この脆弱性を防ぐため、実稼働環境では常にデフォルトの[事前(AOT)コンパイラ](/guide/security#offline-template-compiler)を使用してください。
 
-An additional layer of protection can be provided through the use of Content security policy and Trusted Types. These web platform features operate at the DOM level which is the most effective place to prevent XSS issues because they can't be bypassed using other, lower-level APIs. For this reason, we strongly encourage developers to take advantage of these features by configuring the [content security policy](#content-security-policy) for their application and enabling [trusted types enforcement](#trusted-types).
+Content Security Policy (CSP)とTrusted Typesによる追加の保護レイヤーを利用することもできます。Webプラットフォーム上のこれら機能はDOMレベルで動作するため他の低レベルAPIを使用しても迂回できず、したがってXSSを防ぐもっとも効果的な手段になります。[Content Security Policy (CSP)](#content-security-policy)の構成と[Trusted Typesの適用](#trusted-types)でこれらの保護機能を利用することを強く推奨します。
 
 ### サニタイズとセキュリティコンテキスト {@a sanitization-and-security-contexts}
 
@@ -93,11 +93,11 @@ Angularは **HTML**、**スタイル**、**URL** の値をサニタイズしま�
 
 値をHTMLコードとして解釈するには`innerHtml`などのHTMLプロパティにバインドします。
 しかし値をそのままバインドするとXSS脆弱性を引き起こす可能性があります。
-For example, one could execute JavaScript in a following way:
+たとえばJavaScriptを次のように実行できます。
 
 <code-example path="security/src/app/inner-html-binding.component.ts" header="src/app/inner-html-binding.component.ts (class)" region="class"></code-example>
 
-Angular recognizes the value as unsafe and automatically sanitizes it, which removes the `script` element but keeps safe content such as the `<b>` element.
+Angularは値を安全でないものとして認識し自動的にサニタイズします。これにより、`script`要素は削除されますが、`<b>`要素など安全なコンテンツは保持されます。
 
 <div class="lightbox">
   <img src='generated/images/guide/security/binding-inner-html.png' alt='A screenshot showing interpolated and bound HTML values'>
@@ -174,58 +174,55 @@ Webサーバーを設定する必要があります。CSP に関するより詳�
 [Web Fundamentals guide](https://developers.google.com/web/fundamentals/security/csp) 
 を参照してください。
 
-The minimal policy required for brand new Angular is:
+初期状態のAngularに必要な最小限のポリシーは次のとおりです。
 
 ```
 default-src 'self'; style-src 'self' 'unsafe-inline';
 ```
 
-* The `default-src 'self';` section allows the page to load all its required resources from the same
-  origin.
-* `style-src 'self' 'unsafe-inline';` allows the page to load global styles from the same origin
-  (`'self'`) and enables components to load their styles (`'unsafe-inline'` - see
-  [`angular/angular#6361`](https://github.com/angular/angular/issues/6361)).
+* `default-src 'self';` リソースの取得は取得元のページと同じオリジンからのみに制限されます。
+* `style-src 'self' 'unsafe-inline';` グローバルスタイルをページと同じオリジン（`'self'`）から取得できるようにし、コンポーネントには自身のスタイルを適用（`'unsafe-inline'` - [`angular/angular#6361`](https://github.com/angular/angular/issues/6361)を参照）できるようにします。
 
-Angular itself requires only these settings to function correctly. As your project grows, however, you may need to expand your CSP settings beyond this minimum to accommodate additional features specific to your application.
+Angular自体の動作にはこれら設定のみが必要です。ただし、プロジェクトが大きくなるにつれ、アプリケーション固有の追加機能に対応するために、この最小値を超えたCSP設定の拡張が必要になる場合があります。
 
 {@a trusted-types}
-### Enforcing Trusted Types
+### Trusted Typesの適用
 
-We recommend the use of [Trusted Types](https://w3c.github.io/webappsec-trusted-types/dist/spec/) as a way to help secure your applications from cross-site scripting attacks. Trusted Types is a [web platform](https://en.wikipedia.org/wiki/Web_platform)
-feature that can help you prevent cross-site scripting attacks by enforcing
-safer coding practices. Trusted Types can also help simplify the auditing of application code.
+クロスサイトスクリプティング攻撃からアプリケーションを守る方法として、[Trusted Types](https://w3c.github.io/webappsec-trusted-types/dist/spec/)を使用することをお勧めします。
+Trusted Typesは、より安全なコーディング方法を適用することにより、クロスサイトスクリプティング攻撃を防ぐのに役立つ[Webプラットフォーム](https://en.wikipedia.org/wiki/Web_platform)機能です。
+アプリケーションコードの監査をシンプルにするのにも役立ちます。
 
 <div class="callout is-helpful">
 
-Trusted Types might not yet be available in all browsers your application targets. In the case your Trusted-Types-enabled application runs in a browser that doesn't support Trusted Types, the functionality of the application will be preserved, and your application will be guarded against XSS by way of Angular's DomSanitizer. See [caniuse.com/trusted-types](https://caniuse.com/trusted-types) for the current browser support.
+Trusted Typesはアプリケーションが対応すべきすべてのブラウザでまだ利用できない可能性があります。Trusted Typesを使用したアプリケーションがTrusted Types未サポートのブラウザで実行された場合でも、アプリケーションの機能は維持され、AngularのDomSanitizerによってXSSからの保護が行われます。現在のブラウザサポートについては、[caniuse.com/trusted-types](https://caniuse.com/trusted-types)を参照してください。
 
 </div>
 
-To enforce Trusted Types for your application, you must configure your application's web server to emit HTTP headers with one of the following Angular policies:
+アプリケーションにTrusted Typesを適用するには、次のいずれかのAngularポリシーを使用してHTTPヘッダーを出力するようWebサーバーを設定する必要があります。
 
-* `angular` - This policy is used in security-reviewed code that is internal to Angular, and is required for Angular to function when Trusted Types are enforced. Any inline template values or content sanitized by Angular is treated as safe by this policy.
-* `angular#unsafe-bypass` - This policy is used for applications that use any of the methods in Angular's [DomSanitizer](api/platform-browser/DomSanitizer) that bypass security, such as `bypassSecurityTrustHtml`. Any application that uses these methods must enable this policy.
-* `angular#unsafe-jit` - This policy is used by the [JIT compiler](api/core/Compiler). You must enable this policy if your application interacts directly with the JIT compiler or is running in JIT mode using the [platform browser dynamic](api/platform-browser-dynamic/platformBrowserDynamic).
+* `angular` - このポリシーはAngularの内部にあるセキュリティレビュー済みのコードで使用され、Trusted Types適用下のAngularには必ず必要です。Angularによってサニタイズされたインラインテンプレート値またはコンテンツは、このポリシーにより安全なものとして扱われます。
+* `angular#unsafe-bypass` - このポリシーは、`bypassSecurityTrustHtml`などセキュリティをバイパスする、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドに使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。
+* `angular#unsafe-jit` - このポリシーは、[JITコンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。
 
-You should configure the HTTP headers for Trusted Types in the following locations:
+Trusted Typesに関するHTTPヘッダーは次の箇所で設定する必要があります。
 
-* Production serving infrastructure
-* Angular CLI (`ng serve`), using the `headers` property in the `angular.json` file, for local development and end-to-end testing
-* Karma (`ng test`), using the `customHeaders` property in the `karma.config.js` file, for unit testing
+* 本番環境上のインフラ
+* Angular CLI（`ng serve`）、`angular.json`ファイルの`headers`プロパティで設定、ローカル開発やE2Eテストに利用
+* Karma (`ng test`)、`karma.config.js`ファイルの`customHeaders`プロパティで設定、ユニットテストに利用
 
-The following is an example of a header specifically configured for Trusted Types and Angular:
+以下はAngular用に構成されたTrusted Types設定ヘッダーの例です。
 
 <code-example language="html">
 Content-Security-Policy: trusted-types angular; require-trusted-types-for 'script';
 </code-example>
 
-The following is an example of a header specifically configured for Trusted Types and Angular applications that use any of the methods in Angular's [DomSanitizer](api/platform-browser/DomSanitizer) that bypasses security.
+以下は、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドのいずれかを使用しセキュリティをバイパスする機能をもつAngularアプリケーション用のTrusted Types設定ヘッダーの例です。
 
 <code-example language="html">
 Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for 'script';
 </code-example>
 
-The following is an example of a header specifically configured for Trusted Types and Angular applications using JIT:
+以下は、JITコンパイルを使用したAngularアプリケーション用のTrustedTypes設定ヘッダーの例です。
 
 <code-example language="html">
 Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';
@@ -235,7 +232,7 @@ Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trust
 
 <header>Community contributions</header>
 
-To learn more about troubleshooting Trusted Type configurations, the following resource might be helpful:
+Trusted Typesの設定に関するトラブルシューティングの詳細は次の記事を参考にしてください。
 
 [Prevent DOM-based cross-site scripting vulnerabilities with Trusted Types](https://web.dev/trusted-types/#how-to-use-trusted-types)
 
@@ -243,12 +240,12 @@ To learn more about troubleshooting Trusted Type configurations, the following r
 
 {@a offline-template-compiler}
 
-### オフラインテンプレートコンパイラを使う
+### 事前(AOT)コンパイラを使う
 
-オフライン・テンプレート・コンパイラはテンプレートインジェクションと呼ばれる脆弱性を確実に防止し
-アプリケーションのパフォーマンスを大幅に向上させます。プロダクション環境ではオフラインテンプレートコンパイラを使い、
+事前(AOT)コンパイラはテンプレートインジェクションと呼ばれる脆弱性を確実に防止し
+アプリケーションのパフォーマンスを大幅に向上させます。プロダクション環境では事前(AOT)コンパイラを使い、
 
-An alternative to the AOT compiler is the JIT compiler which compiles templates to executable template code within the browser at runtime. Angularはテンプレートコードを信頼するので、テンプレート、特にユーザーデータを含むテンプレートを生成すると、Angularの組み込みの保護が回避されます。Angularはテンプレート文字列を全面的に信頼するため、動的なテンプレート生成は常にXSSの危険性を有します。フォームを安全に動的に構築する方法については[Dynamic Forms](guide/dynamic-form) のガイドを参照してください。
+事前(AOT)コンパイラの代わりに、実行時にブラウザ内でテンプレートを実行可能テンプレートコードにコンパイルするJITコンパイラがあります。Angularはテンプレートコードを信頼するので、テンプレート、特にユーザーデータを含むテンプレートを生成すると、Angularの組み込みの保護が回避されます。Angularはテンプレート文字列を全面的に信頼するため、動的なテンプレート生成は常にXSSの危険性を有します。フォームを安全に動的に構築する方法については[Dynamic Forms](guide/dynamic-form) のガイドを参照してください。
 
 {@a server-side-xss}
 ### サーバーサイドXSSへの対策

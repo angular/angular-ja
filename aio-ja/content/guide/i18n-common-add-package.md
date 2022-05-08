@@ -1,24 +1,24 @@
-# Add the localize package
+# ローカライズパッケージの追加
 
-To take advantage of the localization features of Angular, use the [Angular CLI][AioCliMain] to add the `@angular/localize` package to your project.
+Angularのローカライズ機能を利用するには、[Angular CLI][AioCliMain]を使用して`@angular/localize`パッケージをプロジェクトに追加します。
 
-To add the `@angular/localize` package, use the following command to update the `package.json` and `polyfills.ts` files in your project.
+`@angular/localize`パッケージを追加するには、次のコマンドを使用して、プロジェクト内の`package.json`と`polyfills.ts`を更新します。
 
 <code-example path="i18n/doc-files/commands.sh" region="add-localize"></code-example>
 
 <div class="alert is-helpful">
 
-For more information about `package.json` and `polyfill.ts` files, see [Workspace npm dependencies][AioGuideNpmPackages].
+`package.json`と`polyfill.ts`については、[ワークスペースのnpm依存関係][AioGuideNpmPackages]を参照してください。
 
 </div>
 
-If `@angular/localize` is not installed and you try to build a localized version of your project, the [Angular CLI][AioCliMain] generates an error.
+`@angular/localize`がインストールされていない状態で、プロジェクトのローカライズ版をビルドしようとすると、[Angular CLI][AioCliMain]はエラーを発生させます。
 
 <!--todo: add example error -->
 
-## What's next
+## 次のステップ
 
-*   [Refer to locales by ID][AioGuideI18nCommonLocaleId]
+*   [IDでロケールを参照][AioGuideI18nCommonLocaleId]
 
 <!-- links -->
 

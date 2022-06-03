@@ -75,7 +75,7 @@ i18n-{attribute_name}="{meaning}|{description}&commat;&commat;{id}"
 ### `i18n-title` の例
 
 画像のタイトルを翻訳するには、この例を確認してください。
-次の例では、`title`属性を持つ画像を表示しています。
+次の例では、`title`属性をもつ画像を表示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="i18n-title"></code-example>
 
@@ -89,7 +89,7 @@ title属性を翻訳対象としてマークするには、次の作業を行い
 
 ## コンポーネントコード内のテキストをマークする
 
-コンポーネントコードでは、翻訳原文とメタデータをバッククォート文字\(<code>&#96;</code>\)で囲みます。
+コンポーネントコードでは、翻訳原文とメタデータをバッククオート文字\(<code>&#96;</code>\)で囲みます。
 
 [`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列を使用して、コード内の文字列を翻訳用にマークします。
 
@@ -171,18 +171,18 @@ i18nメタデータはコロン\(`:`\)で囲まれ、翻訳元テキストの前
 
 </code-example>
 
-翻訳者は、同じ意味を持つ他のテキストと同じように翻訳するために、特定のアプリケーションコンテキストにおけるテキストメッセージの意味または意図を知る必要があります。
+翻訳者は、同じ意味をもつ他のテキストと同じように翻訳するために、特定のアプリケーションコンテキストにおけるテキストメッセージの意味または意図を知る必要があります。
 `i18n`属性値を*意味*から始め、*説明*と`｜`文字で区切ります。`{meaning}|{description}`
 
 #### `h1`の例
 
-例えば、`<h1>`タグはサイトのヘッダーであり、それがヘッダーとして使われても、他のセクションのテキストで参照されても、同じように翻訳する必要がある、と指定することができます。
+たとえば、`<h1>`タグはサイトのヘッダーであり、それがヘッダーとして使われても、他のセクションのテキストで参照されても、同じように翻訳する必要がある、と指定することができます。
 
 次の例では、`<h1>`タグをヘッダーとして翻訳するか、他の場所から参照するか指定する方法を示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="i18n-attribute-meaning"></code-example>
 
-その結果、`site header`でマークされたテキストは、*意味*が全く同じように翻訳されます。
+その結果、`site header`でマークされたテキストは、*意味*がまったく同じように翻訳されます。
 
 次のコード例では、[`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列の値を意味と説明で示しています。
 
@@ -210,7 +210,7 @@ Angularの抽出ツールの詳細については、[翻訳ファイルでの作
 </div>
 
 同じテキスト要素で*意味*の異なるものは、異なるIDで抽出されます。
-例えば、"right"という単語が次の2つの定義で2か所で使われている場合、その単語は異なる翻訳を行い、異なる翻訳エントリとしてアプリケーションにマージされます。
+たとえば、"right"という単語が次の2つの定義で2か所で使われている場合、その単語は異なる翻訳を行い、異なる翻訳エントリとしてアプリケーションにマージされます。
 
 *   `correct` as in "you are right"
 *   `direction` as in "turn right"
@@ -256,7 +256,7 @@ ICUの各節は、[CLDRの複数形規則][UnicodeCldrIndexCldrSpecPluralRules]�
 ### 複数形をマークする
 
 言語によって複数形のルールが異なるため、翻訳の難易度が高くなります。
-他のロケールでは基数の表現が異なるため、英語と一致しない複数形カテゴリを設定した方がよい場合があります。
+他のロケールでは基数の表現が異なるため、英語と一致しない複数形カテゴリーを設定した方がよい場合があります。
 一語一語の翻訳では意味をなさないような表現には、`plural`節を使用します。
 
 <!--todo: replace with code-example -->
@@ -267,7 +267,7 @@ ICUの各節は、[CLDRの複数形規則][UnicodeCldrIndexCldrSpecPluralRules]�
 
 </code-example>
 
-複数形カテゴリの後に、開中括弧\(`{`\)と閉中括弧\(`}`\)で囲まれたデフォルトテキスト\(English\)を入力します。
+複数形カテゴリーの後に、開中括弧\(`{`\)と閉中括弧\(`}`\)で囲まれたデフォルトテキスト\(English\)を入力します。
 
 <!--todo: replace with code-example -->
 
@@ -288,7 +288,7 @@ pluralization_category { }
 | `many`                 | 数量は大きな数字 | `many { }`                 |
 | `other`                | デフォルトの数量       | `other { }`                |
 
-複数形のカテゴリがどれも一致しない場合、Angularは`other`を使用して、カテゴリが見つからない場合の標準的なフォールバックに一致させます。
+複数形のカテゴリーがどれも一致しない場合、Angularは`other`を使用して、カテゴリーが見つからない場合の標準的なフォールバックに一致させます。
 
 <!--todo: replace with code-example -->
 
@@ -300,7 +300,7 @@ other { default_quantity }
 
 <div class="alert is-helpful">
 
-複数形カテゴリの詳細については、[CLDR - Unicode Common Locale Data Repository][UnicodeCldrMain]の[Choosing plural category names][UnicodeCldrIndexCldrSpecPluralRulesTocChoosingPluralCategoryNames]をご覧ください。
+複数形カテゴリーの詳細については、[CLDR - Unicode Common Locale Data Repository][UnicodeCldrMain]の[Choosing plural category names][UnicodeCldrIndexCldrSpecPluralRulesTocChoosingPluralCategoryNames]をご覧ください。
 
 </div>
 
@@ -310,15 +310,15 @@ other { default_quantity }
 
 <header>背景: ロケールはいくつかの複数形カテゴリをサポートしません</header>
 
-多くのロケールでは、複数形カテゴリのいくつかをサポートしていません。
-デフォルトのロケール \(`en-US`\)は非常に単純な`plural()`関数を使用しており、`few`複数形カテゴリをサポートしていません。
-単純な`plural()`関数を持つ別のロケールとして`es`があります。
+多くのロケールでは、複数形カテゴリーのいくつかをサポートしていません。
+デフォルトのロケール \(`en-US`\)は非常に単純な`plural()`関数を使用しており、`few`複数形カテゴリーをサポートしていません。
+単純な`plural()`関数をもつ別のロケールとして`es`があります。
 次のコード例では、[en-US `plural()`][GithubAngularAngularBlobEcffc3557fe1bff9718c01277498e877ca44588dPackagesCoreSrcI18nLocaleEnTsL14L18]関数を示しています。
 
 <code-example path="i18n/doc-files/locale_plural_function.ts" class="no-box" hideCopy></code-example>
 
 `plural()`関数は 1\(`one`\)か5\(`other`\)を返すだけです。
-`few`カテゴリは決してマッチしません。
+`few`カテゴリーは決してマッチしません。
 
 </div>
 
@@ -363,9 +363,9 @@ HTMLマークアップと[補間][AioGuideGlossaryInterpolation]を利用しま�
 |:---                               |:---    |
 | `minutes`                         | 最初のパラメータはコンポーネントプロパティに`minutes`を指定し、分数を決定します。               |
 | `plural`                          | 第2パラメータは、ICU節が`plural`であることを指定します。                                                            |
-| `=0 {just now}`                   | 0分の場合、複数形カテゴリは`=0`となります。 値は`just now`です。                                        |
-| `=1 {one minute}`                 | 1分の場合、複数形カテゴリは`=1`となります。 値は`one minute`です。                                        |
-| `other {{{minutes}} minutes ago}` | 基数が一致しない場合、デフォルトの複数形カテゴリは`other`となります。値は`{{minutes}} minutes ago`です。 |
+| `=0 {just now}`                   | 0分の場合、複数形カテゴリーは`=0`となります。 値は`just now`です。                                        |
+| `=1 {one minute}`                 | 1分の場合、複数形カテゴリーは`=1`となります。 値は`one minute`です。                                        |
+| `other {{{minutes}} minutes ago}` | 基数が一致しない場合、デフォルトの複数形カテゴリーは`other`となります。値は`{{minutes}} minutes ago`です。 |
 
 `{{minutes}}` は[補間][AioGuideGlossaryInterpolation]です。
 
@@ -383,7 +383,7 @@ HTMLマークアップと[補間][AioGuideGlossaryInterpolation]を利用しま�
 
 変数の値に基づいて代替テキストを表示するために、すべての選択肢を翻訳します。
 
-選択カテゴリの後に、開波括弧\(`{`\)と閉波括弧\(`}`\)で囲まれたテキスト（英語）を入力してください。
+選択カテゴリーの後に、開波括弧\(`{`\)と閉波括弧\(`}`\)で囲まれたテキスト（英語）を入力してください。
 
 <!--todo: replace with code-example -->
 
@@ -395,7 +395,7 @@ selection_category { text }
 
 ロケールが異なれば文法構造も異なるため、翻訳の難易度は高くなります。
 HTMLマークアップを使用してください.
-どの選択カテゴリも一致しない場合、Angularは欠落したカテゴリの標準的なフォールバックとして`other`を使用します。
+どの選択カテゴリーも一致しない場合、Angularは欠落したカテゴリーの標準的なフォールバックとして`other`を使用します。
 
 <!--todo: replace with code-example -->
 

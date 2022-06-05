@@ -279,10 +279,10 @@ CLIビルドプロセスは、適切なCSSプリプロセッサを実行しま�
 [Workspace configuration guide](guide/workspace-config#generation-schematics) 
 で説明されているように、CLIのデフォルトのプリプロセッサを設定することができます。
 
-<div class="alert is-important">
+<!-- links -->
 
-CLIはインラインスタイルにプリプロセッサを適用できないため、`@Component.styles` 配列に追加されたスタイル文字列は _CSSで記述する必要があります_ 。
+<!-- external links -->
 
-</div>
+<!-- end links -->
 
-@reviewed 2021-09-17
+@reviewed 2022-02-28

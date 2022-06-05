@@ -95,4 +95,4 @@ Angularを始めるためにAngularのことを十分に学び、Angularは必�
 
 </div>
 
-@reviewed 2022-02-28
+@reviewed 2022-05-16

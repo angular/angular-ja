@@ -51,7 +51,7 @@ HTTPクライアントサービスの主な機能は次のとおりです。
 このガイドを達成する<live-example></live-example>を実行できます。
 
 サンプルアプリケーションはデータサーバーを必要としません。
-[Angular _in-memory-web-api_](https://github.com/angular/in-memory-web-api/blob/master/README.md)
+[Angular _in-memory-web-api_](https://github.com/angular/angular/tree/main/packages/misc/angular-in-memory-web-api)
 に依存しています。
 これは、_HttpClient_モジュールの`HttpBackend`に取って代わります。
 この代わりのサービスはRESTのようなバックエンドの振る舞いをシミュレートしたものです。
@@ -181,7 +181,7 @@ options: {
 インターフェースで定義されているプロパティにアクセスするには、JSONから取得したプレーンオブジェクトを必要なレスポンスの型に明示的に変換する必要があります。
 たとえば、次の`subscribe`のコールバックは、`data`をObjectとして受け取り、プロパティにアクセスするためにそれを型キャストします。
 
-<code-example>
+<code-example format="typescript" language="typescript">
    .subscribe(data => this.config = {
      heroesUrl: (data as any).heroesUrl,
      textfile:  (data as any).textfile,
@@ -268,17 +268,19 @@ Observableを購読するためのパターンに従い、[asyncパイプ](api/c
 Angularでは、`NgModule`のインポートに`HttpClientJsonpModule`を含めることで、JSONPを使用します。
 次の例では、`searchHeroes()`メソッドはJSONPリクエストを使用して、名前に検索語が含まれているヒーローをクエリします。
 
-```ts
-/* 名前に検索語を含むヒーローを取得する */
+<code-example format="typescript" language="typescript">
+
+/* GET heroes whose name contains search term */
 searchHeroes(term: string): Observable {
   term = term.trim();
 
-  const heroesURL = `${this.heroesURL}?${term}`;
+  const heroesURL = `&dollar;{this.heroesURL}?&dollar;{term}`;
   return this.http.jsonp(heroesUrl, 'callback').pipe(
-      catchError(this.handleError('searchHeroes', [])) // エラーを処理する
+      catchError(this.handleError('searchHeroes', [])) // then handle the error
     );
 }
-```
+
+</code-example>
 
 このリクエストは、1つ目の引数として`heroesURL`を渡し、2つ目の引数としてコールバック関数名を渡します。
 レスポンスはコールバック関数でラップされます。そのコールバック関数は、JSONPメソッドによって返されたObservableを受け取って、パイプでエラーハンドラーに通します。

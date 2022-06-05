@@ -183,12 +183,14 @@ class MyDialog {
 
 正確な型を取得するもっとも簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。そのためには、 `NgElement` と `WithProperties` 型（どちらも `@angular/elements` からエクスポートされます）を使うことができます：
 
-```ts
-const aDialog = document.createElement('my-dialog') as NgElement & WithProperties<{content: string}>;
+<code-example format="typescript" language="typescript">
+
+const aDialog = document.createElement('my-dialog') as NgElement &amp; WithProperties&lt;{content: string}&gt;;
 aDialog.content = 'Hello, world!';
-aDialog.content = 123;  // <-- ERROR: TypeScript knows this should be a string.
-aDialog.body = 'News';  // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
-```
+aDialog.content = 123;  // &lt;-- ERROR: TypeScript knows this should be a string.
+aDialog.body = 'News';  // &lt;-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
+
+</code-example>
 
 これは型チェックやオートコンプリートサポートのような、カスタム要素のためのTypeScript機能をすぐに使うにはよい方法です。しかしいくつかの場所でそれを必要とするならば、面倒になる可能性があります。なぜならすべての発生時に戻り値の型をキャストする必要があるからです。
 

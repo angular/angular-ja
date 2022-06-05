@@ -12,7 +12,7 @@
 
 わかりやすい方法は、次のようにHTMLの`<title>`コンポーネントのプロパティをバインドする方法です。
 
-<code-example format="html" langauage="html">
+<code-example format="html" language="html">
 
 &lt;title&gt;{{This_Does_Not_Work}}&lt;/title&gt;
 

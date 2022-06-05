@@ -558,7 +558,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 
 {@a no-unidirectional-flow-worries}
 
-<div class="alert is-helpful">
+<div class="callout is-helpful">
 
 <header>コンテンツの更新を待つ必要はありません</header>
 
@@ -571,7 +571,7 @@ Angular はこのコンポーネントのビューの構成を完了する *前�
 
 </div>
 
-{@a docheck}
+<a id="docheck"></a>
 
 ## カスタム変更検知の定義 {@a defining-custom-change-detection}
 

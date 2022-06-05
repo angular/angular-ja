@@ -52,9 +52,7 @@ For some platforms and applications, you might also want to use the PWA \(Progre
 
 *   [Workspace and file structure](guide/file-structure): Understand the structure of Angular workspace and project folders.
 *   [Building and serving](guide/build): Learn to define different build and proxy server configurations for your project, such as development, staging, and production.
-*   [npm packages](guide/npm-packages): The Angular Framework, Angular CLI, and components used by Angular applications are packaged as [npm](https://docs.npmjs.com) packages and distributed using the npm registry.
-    The Angular CLI creates a default `package.json` file, which specifies a starter set of packages that work well together and jointly support many common application scenarios.
-
+*   [npm packages](guide/npm-packages): The Angular Framework, Angular CLI, and components used by Angular applications are packaged as [npm](https://docs.npmjs.com) packages and distributed using the npm registry. The Angular CLI creates a default `package.json` file, which specifies a starter set of packages that work well together and jointly support many common application scenarios.
 *   [TypeScript configuration](guide/typescript-configuration): TypeScript is the primary language for Angular application development.
 *   [Browser support](guide/browser-support): Make your applications compatible across a wide range of browsers.
 

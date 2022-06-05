@@ -25,7 +25,7 @@
 
 新着情報？何が変わったのか？Angularブログの[リリースアナウンス]( https://blog.angular.io/tagged/release%20notes "Angular blog - release announcements")では知る必要があるもっとも重要なことを共有します。
 
-バージョン別にまとめた変更の完全なリストを確認するには、[Angularのチェンジログ](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log")を参照してください。
+バージョン別にまとめた変更の完全なリストを確認するには、[Angularのチェンジログ](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angular change log")を参照してください。
 
 
 {@a checking-version-app}
@@ -60,7 +60,7 @@ Angularアップデートガイドでは、指定した現在のバージョン�
 
 * リリースアナウンス（旧版）: [Angular blog - announcements about releases prior to August 2017](https://blog.angularjs.org/search?q=available&by-date=true "Angular blog announcements about releases prior to August 2017")
 
-* リリース詳細: [Angularチェンジログ](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log")
+* リリース詳細: [Angularチェンジログ](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angular change log")
 
 * アップデート手順: [Angularアップデートガイド](https://update.angular.io/ "Angular Update Guide")
 

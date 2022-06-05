@@ -26,11 +26,7 @@
 
     <div class="lightbox">
 
-    <div class="lightbox">
-
-<img alt="Download the stackblitz project" src="generated/images/guide/start/download-project.png">
-
-</div>
+    <img alt="Download the stackblitz project" src="generated/images/guide/start/download-project.png">
 
     </div>
 

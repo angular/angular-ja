@@ -10,7 +10,7 @@
 基本的には `content`ディレクトリ内のMarkdownファイルに対して翻訳をおこないます。
 その他必要に応じて、アプリケーションのソースコードにも手を加えます。
 
-https://github.com/angular/angular/tree/master/aio
+https://github.com/angular/angular/tree/main/aio
 
 ```
 origin/aio/

@@ -259,13 +259,12 @@ Angularコンポーネントを変換するAPIを使うことによって、そ�
 
 次のバインディング形式について、Angularの[テンプレート構文](guide/template-syntax)で参照しましょう:
 
- * [補間](guide/interpolation)
- * [プロパティバインディング](guide/property-binding)
- * [イベントバインディング](guide/event-binding)
- * [属性バインディング](guide/attribute-binding)
- * [クラスバインディング](guide/attribute-binding#class-binding)
- * [スタイルバインディング](guide/attribute-binding#style-binding)
- * [ngModelで双方向のデータバインディング](guide/built-in-directives#ngModel)
+ *   [補間](guide/interpolation)
+ *   [プロパティバインディング](guide/property-binding)
+ *   [イベントバインディング](guide/event-binding)
+ *   [属性バインディング](guide/attribute-binding)
+ *   [Class and style binding][AioGuideAttributeBindingBindingToTheClassAttribute]
+ *   [ngModelで双方向のデータバインディング](guide/built-in-directives#ngModel)
 
 {@a declarable}
 
@@ -943,11 +942,10 @@ The alternative is a reactive form. For an introduction and comparison of both f
 
 TypeScriptのような構文であり、Angularが[データバインディング][AioGuideGlossaryDataBinding]内で評価します。
 
-テンプレート式の書き方については、[補間](guide/interpolation)ガイドの[テンプレート式](guide/interpolation#template-expressions)セクションを読みましょう。
+<!--todo: have Alex review this -->
+<!-- Read about how to write template expressions in the [template expressions][AioGuideInterpolationTemplateExpressions] section of the [Interpolation][AioGuideInterpolation] guide. -->
 
-{@a template-reference-variable}
-
-## テンプレート参照変数
+## テンプレート参照変数 {@a template-reference-variable}
 
 テンプレートにおいて定義される変数であり、要素と結び付けられたインスタンスを参照します。それはディレクティブのインスタンス、コンポーネントのインスタンス、`TemplateRef`におけるようなテンプレート、DOM要素などです。
 テンプレートにおいて要素上でテンプレート参照変数を宣言した後、
@@ -1157,9 +1155,8 @@ Learn more about zones in this
 
 [AioGuideArchitectureServices]: guide/architecture-services "Introduction to services and dependency injection | Angular"
 
-[AioGuideAttributeBinding]: guide/attribute-binding "Attribute, class, and style bindings | Angular"
-[AioGuideAttributeBindingBindingToTheClassAttribute]: guide/attribute-binding#binding-to-the-class-attribute "Binding to the class attribute - Attribute, class, and style bindings | Angular"
-[AioGuideAttributeBindingBindingToTheStyleAttribute]: guide/attribute-binding#binding-to-the-style-attribute "Binding to the style attribute - Attribute, class, and style bindings | Angular"
+[AioGuideAttributeBinding]: guide/attribute-binding "Attribute binding | Angular"
+[AioGuideAttributeBindingBindingToTheClassAttribute]: guide/class-binding "Class and style binding | Angular"
 
 [AioGuideAttributeDirectives]: guide/attribute-directives "Attribute directives | Angular"
 
@@ -1286,7 +1283,7 @@ Learn more about zones in this
 [AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
 
 [AioGuideInterpolation]: guide/interpolation "Text interpolation | Angular"
-[AioGuideInterpolationTemplateExpressions]: guide/interpolation#template-expressions "Template expressions - Text interpolation | Angular"
+<!-- [AioGuideInterpolationTemplateExpressions]: guide/interpolation#template-expressions "Template expressions - Text interpolation | Angular" -->
 
 [AioGuideNgmodules]: guide/ngmodules "NgModules | Angular"
 
@@ -1309,7 +1306,7 @@ Learn more about zones in this
 
 [AioGuideSetupLocal]: guide/setup-local "Setting up the local environment and workspace | Angular"
 
-[AioGuideStructuralDirectives]: guide/structural-directives "Writing structural directives | Angular"
+[AioGuideStructuralDirectives]: guide/structural-directives "Structural directives | Angular"
 
 [AioGuideStyleguide0201]: guide/styleguide#02-01 "Style 02-01 - Angular coding style guide | Angular"
 
@@ -1329,8 +1326,8 @@ Learn more about zones in this
 
 [AngularBlogAPlanForVersion80AndIvyB3318dfc19f7]: https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7 "A plan for version 8.0 and Ivy | Angular Blog"
 
-[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersBrowser]: https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/builders/browser "packages/angular_devkit/build_angular/src/builders/browser | angular/angular-cli | GitHub"
-[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersKarma]: https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/builders/karma "packages/angular_devkit/build_angular/src/builders/karma | angular/angular-cli | GitHub"
+[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersBrowser]: https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/builders/browser "packages/angular_devkit/build_angular/src/builders/browser | angular/angular-cli | GitHub"
+[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersKarma]: https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/builders/karma "packages/angular_devkit/build_angular/src/builders/karma | angular/angular-cli | GitHub"
 
 [GithubPalantirTslint]: https://palantir.github.io/tslint "TSLint | Palantir | GitHub"
 

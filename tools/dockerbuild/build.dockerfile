@@ -1,4 +1,4 @@
-FROM node:14.17
+FROM node:16.15.0
 
 # install dependencies
 RUN apt-get update

@@ -53,4 +53,4 @@ Angularドキュメントに貢献してください。
 [Angularへの貢献](https://github.com/angular/angular/blob/main/CONTRIBUTING.md "Contributing guide") を参照してください。
 
 私たちのコミュニティは、尊重、協力的なコミュニケーションを大切にしています。 
-[行動規範](https://github.com/angular/angular-ja/blob/master/CODE_OF_CONDUCT.md "Contributor code of conduct") を参照し、遵守してください。
+[行動規範](https://github.com/angular/angular-ja/blob/main/CODE_OF_CONDUCT.md "Contributor code of conduct") を参照し、遵守してください。

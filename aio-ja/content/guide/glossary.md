@@ -118,7 +118,7 @@ Angularでは、アプリケーションのルートNgModule(`AppModule`)には�
 A function that uses the [Architect](#architect) API to perform a complex process such as "build" or "test".
 The builder code is defined in an [npm package](#npm-package).
 
-For example, [BrowserBuilder](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/browser) runs a [webpack](https://webpack.js.org/) build for a browser target and [KarmaBuilder](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/karma) starts the Karma server and runs a webpack build for unit tests.
+For example, [BrowserBuilder](https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/browser) runs a [webpack](https://webpack.js.org/) build for a browser target and [KarmaBuilder](https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/karma) starts the Karma server and runs a webpack build for unit tests.
 
 The [CLI command `ng run`](cli/run) invokes a builder with a specific [target configuration](#target).
 The [workspace configuration](guide/workspace-config) file, `angular.json`, contains default configurations for built-in builders.

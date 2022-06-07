@@ -7,36 +7,63 @@
 * [Angularアニメーション・イントロダクション](guide/animations)
 * [アニメーションの遷移とトリガー](guide/transition-and-triggers)
 
-<hr>
-
-これまでは、単一のHTML要素の単純なアニメーションを学んできました。 Angularを使用すると、グリッド全体や要素リストなどの、シーケンスをもつ要素がページに出入りするときにアニメーションできます。 複数のアニメーションを並列に実行するか、個別にアニメーションを順次実行するかを選択できます。
+これまでは、単一のHTML要素の単純なアニメーションを学んできました。 
+Angularを使用すると、グリッド全体や要素リストなどの、シーケンスをもつ要素がページに出入りするときにアニメーションできます。 
+複数のアニメーションを並列に実行するか、個別にアニメーションを順次実行するかを選択できます。
 
 複雑なアニメーションシーケンスを制御する関数は次のとおりです。
 
-* `query()` 1つまたは複数の内部HTML要素を検索します。
-* `stagger()` 複数要素のアニメーションにカスケーディングディレイを適用します。
-* <code>[group](api/animations/group)()</code> 複数のアニメーションステップを並列に実行します。 
-* `sequence()` アニメーションステップを順次実行します。
+| Functions                         | Details |
+|:---                               |:---     |
+| `query()`                         | Finds one or more inner HTML elements. |
+| `stagger()`                       | Applies a cascading delay to animations for multiple elements. |
+| [`group()`](api/animations/group) | Runs multiple animation steps in parallel. |
+| `sequence()`                      | Runs animation steps one after another. |
 
-{@a complex-sequence}
+<a id="complex-sequence"></a>
 
-## query()関数とstagger()関数を使用して複数要素をアニメーションする
+## The query() function
 
-`query()`関数は、アニメーション化された要素内の要素を見つけることができます。 この関数は、親コンポーネント内の特定のHTML要素を対象とし、アニメーションを各要素に個別に適用します。 Angularは、ページ全体の要素を調整する際に、セットアップ、ティアダウン、クリーンアップをインテリジェントに処理します。
+Most complex animations rely on the `query()` function to find child elements and apply animations to them, basic examples of such are:
 
-`stagger()`関数は、クエリーされた各項目の間にタイミングギャップを定義することができ、要素のアニメーション間を遅延させます。
+| Examples                               | Details |
+|:---                                    |:---     |
+| `query()` followed by `animate()`      | Used to query simple HTML elements and directly apply animations to them.                                                                                                                            |
+| `query()` followed by `animateChild()` | Used to query child elements, which themselves have animations metadata applied to them and trigger such animation \(which would be otherwise be blocked by the current/parent element's animation\). |
 
-The following example demonstrates how to use the `query()` and `stagger()` functions to animate a list (of heroes) adding each in sequence, with a slight delay, from top to bottom.
+The first argument of `query()` is a [css selector](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors) string which can also contain the following Angular-specific tokens:
 
-* `query()`を使用し、ページに入ってくる特定の条件を満たす要素を探します。
+| Tokens                     | Details |
+|:---                        |:---     |
+| `:enter` <br /> `:leave`   | For entering/leaving elements.               |
+| `:animating`               | For elements currently animating.            |
+| `@*` <br /> `@triggerName` | For elements with any—or a specific—trigger. |
+| `:self`                    | The animating element itself.                |
 
-* `style()`を利用することで、同一の初期スタイルを要素のそれぞれに対して設定します。 透過させ、見えないようにし、`transform`で所定の位置にスライドできるようにします。
+<div class="callout is-helpful">
 
-* `stagger()`を使用し、個々のアニメーションを30ミリ秒遅延させます。
+<header>Entering and Leaving Elements</header>
 
-* 独自定義のイージングカーブを使用してスクリーン上の各要素を0.5秒間アニメーションし、同時にフェードインさせtransformを解除します。
+Not all child elements are actually considered as entering/leaving; this can, at times, be counterintuitive and confusing. Please see the [query api docs](api/animations/query#entering-and-leaving-elements) for more information.
 
-<code-example path="animations/src/app/hero-list-page.component.ts" header="src/app/hero-list-page.component.ts" region="page-animations" language="typescript"></code-example>
+You can also see an illustration of this in the animations live example \(introduced in the animations [introduction section](guide/animations#about-this-guide)\) under the Querying tab.
+
+</div>
+
+## Animate multiple elements using query() and stagger() functions
+
+After having queried child elements via `query()`, the `stagger()` function lets you define a timing gap between each queried item that is animated and thus animates elements with a delay between them.
+
+The following example demonstrates how to use the `query()` and `stagger()` functions to animate a list \(of heroes\) adding each in sequence, with a slight delay, from top to bottom.
+
+*   Use `query()` to look for an element entering the page that meets certain criteria
+*   For each of these elements, use `style()` to set the same initial style for the element.
+    Make it transparent and use `transform` to move it out of position so that it can slide into place.
+
+*   Use `stagger()` to delay each animation by 30 milliseconds
+*   Animate each element on screen for 0.5 seconds using a custom-defined easing curve, simultaneously fading it in and un-transforming it
+
+<code-example header="src/app/hero-list-page.component.ts" path="animations/src/app/hero-list-page.component.ts" region="page-animations"></code-example>
 
 ## group()関数を使用した並列アニメーション
 

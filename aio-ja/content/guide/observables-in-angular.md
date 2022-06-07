@@ -1,8 +1,10 @@
 # Angular での Observable
 
-Angular はさまざまな一般的な非同期操作を処理するためのインターフェースとして Observable を使用します。たとえば：
+Angular はさまざまな一般的な非同期操作を処理するためのインターフェースとして Observable を使用します。
+たとえば：
 
-* You can define [custom events](guide/event-binding#custom-events-with-eventemitter) that send observable output data from a child to a parent component.
+<!--todo: Have Alex review this -->
+<!-- *   You can define [custom events](guide/event-binding#custom-events-with-eventemitter) that send observable output data from a child to a parent component -->
 * HTTP モジュールは Observable を使用して AJAX リクエストとレスポンスを処理します。
 * Router と Form モジュールは、ユーザー入力イベントを待ち受けてレスポンスするために Observable を使用します。
 

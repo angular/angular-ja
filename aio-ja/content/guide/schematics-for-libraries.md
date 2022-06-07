@@ -59,7 +59,7 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 
 ### Define dependency type
 
-Use the `save` option of `ng-add` to configure if the library should be added to the `dependencies`, the `devDepedencies`, or not saved at all in the project's `package.json` configuration file.
+Use the `save` option of `ng-add` to configure if the library should be added to the `dependencies`, the `devDependencies`, or not saved at all in the project's `package.json` configuration file.
 
 <code-example header="projects/my-lib/package.json (ng-add Reference)" path="schematics-for-libraries/projects/my-lib/package.json" region="ng-add">
 </code-example>
@@ -183,7 +183,7 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 システムは、入力 `Tree` にロードされたファイルまたはパス内で定義されたプレースホルダーを操作します。
 `Rule` に渡された値を使用してこれらを埋めます。
 
-これらのデータ構造と構文の詳細については、[Schematics の README](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/schematics/README.md) を参照してください。
+これらのデータ構造と構文の詳細については、[Schematics の README](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/schematics/README.md) を参照してください。
 
 1. メインファイル `index.ts` を作成し、Schematic ファクトリ関数のソースコードを追加します。
 

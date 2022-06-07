@@ -106,7 +106,9 @@ Angularのルーターはオプションのサービスであり、指定され�
 アクティブなルートのリンクはルートツリーの各レベルを通じてカスケードされるため、親子のルーターのリンクは同時にアクティブにできます。
 この動作をオーバーライドするには、`{ exact: true }`式で入力バインディングの`[routerLinkActiveOptions]`にバインドできます。`{ exact: true }`を使用すると、指定の`RouterLink`は、そのURLが現在のURLと完全に一致する場合にのみアクティブになります。
 
-{@a basics-router-state}
+`RouterLinkActive` also allows you to easily apply the `aria-current` attribute to the active element, thus providing a more accessible experience for all users. For more information see the Accessibility Best Practices [Active links identification section](/guide/accessibility#active-links-identification).
+
+<a id="basics-router-state"></a>
 
 ### ルーターの状態 {@a router-state}
 
@@ -568,7 +570,7 @@ Angularのルーターはオプションのサービスであり、指定され�
     </td>
 
     <td>
-      要素上または要素内に含まれる結び付けられた<code>routerLink</code>がアクティブ/非アクティブになったとき、HTML要素からクラスを追加/削除するためのディレクティブ。
+      要素上または要素内に含まれる結び付けられた<code>routerLink</code>がアクティブ/非アクティブになったとき、HTML要素からクラスを追加/削除するためのディレクティブ。It can also set the `aria-current` of an active link for better accessibility.  
     </td>
 
   </tr>
@@ -623,3 +625,11 @@ Angularのルーターはオプションのサービスであり、指定され�
   </tr>
 
 </table>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

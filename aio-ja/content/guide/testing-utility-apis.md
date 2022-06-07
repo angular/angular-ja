@@ -242,7 +242,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
     <td>
 
       現在の`TestBed`構成に基づいて、タイプ`T`のコンポーネントのインスタンスを作成します。
-      `compileComponent`を呼び出した後、`TestBed`設定は現在のスペックの期間中フリーズされます。
+      `createComponent`を呼び出した後、`TestBed`設定は現在のスペックの期間中フリーズされます。
 
     </td>
   </tr>

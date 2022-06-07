@@ -148,7 +148,7 @@ Angular Language Serviceは、このコンテキストにおける`data.---`を�
 ## 詳細な情報
 
 * 実装のより深い詳細については、
-[Angular Language Service API](https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts)を参照してください。
+[Angular Language Service API](https://github.com/angular/angular/blob/main/packages/language-service/src/types.ts)を参照してください。
 
 * 設計上の考慮事項や意図の詳細については、[デザインドキュメント](https://github.com/angular/vscode-ng-language-service/wiki/Design)を参照してください。
 

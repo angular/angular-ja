@@ -105,7 +105,7 @@ TypeScriptコンパイラは最初のフェーズの解析的な仕事をいく�
 
 <div class="alert is-helpful">
 
-Angular の [schema.ts](https://github.com/angular/angular/blob/master/packages/compiler-cli/src/metadata/schema.ts)
+Angular の [schema.ts](https://github.com/angular/angular/blob/main/packages/compiler-cli/src/metadata/schema.ts)
 には、TypeScript インターフェースの集まりとして JSON 形式が記述されています。
 
 </div>
@@ -121,13 +121,13 @@ AOTコレクター は JavaScript のサブセットしか理解できません�
 |:---                       |:---     |
 | Literal object            | `{cherry: true, apple: true, mincemeat: false}`                        |
 | Literal array             | `['cherries', 'flour', 'sugar']`                                       |
-| Spread in literal array   | `['apples', 'flour', &hellip;the_rest]`                                |
+| Spread in literal array   | `['apples', 'flour', ...]`                                |
 | Calls                     | `bake(ingredients)`                                                    |
 | New                       | `new Oven()`                                                           |
 | Property access           | `pie.slice`                                                            |
 | Array index               | `ingredients[0]`                                                       |
 | Identity reference        | `Component`                                                            |
-| A template string         | <code-example format="javascript" hideCopy language="javascript">&grave;pie is &dollar;{multiplier} times better than cake&grave; </code-example> |
+| A template string         | <code>&grave;pie is &dollar;{multiplier} times better than cake&grave;</code> |
 | Literal string            | `'pi'`                                                                 |
 | Literal number            | `3.14153265`                                                           |
 | Literal boolean           | `true`                                                                 |
@@ -384,7 +384,7 @@ export class TypicalModule {}
 </code-example>
 
 Angular の [`RouterModule`](api/router/RouterModule) は、ルートと子ルートを宣言するのに役立つように、2つのマクロ静的メソッド `forRoot` と `forChild` をエクスポートします。
-これらのメソッドの[ソースコード](https://github.com/angular/angular/blob/master/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")を調べて、
+これらのメソッドの[ソースコード](https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts#L139 "RouterModule.forRoot source code")を調べて、
 複雑な [NgModules](guide/ngmodules) の構成をマクロで簡単にする方法を確認してください。
 
 <a id="metadata-rewriting"></a>

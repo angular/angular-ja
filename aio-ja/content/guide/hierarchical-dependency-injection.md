@@ -448,15 +448,13 @@ Angularのテンプレートの根本的な論理構造を理解すると、
 これらは実際のHTML属性ではありませんが、
 内部で何が行われているかを示すためにここにあります。
 
-- `@Inject(Token)=>Value`は、論理ツリーのこの場所に`Token`が挿入された場合、
-その値が`Value`であることを示しています。
-- `@Provide(Token=Value)`は、
-論理ツリーのこの場所に値`Value`をもつ`Token`プロバイダーの宣言があることを示しています。
-- `@NgModule(Token)`は、
-この場所でフォールバックの`NgModule`インジェクターを使用する必要があることを示しています。
+| Angular service attribute                                                                                          | Details |
+|:---                                                                                                                |:---     |
+| <code-example format="typescript" hideCopy language="typescript"> &commat;Inject(Token)=&gt;Value </code-example> | Demonstrates that if `Token` is injected at this location in the logical tree its value would be `Value`.             |
+| <code-example format="typescript" hideCopy language="typescript"> &commat;Provide(Token=Value) </code-example>    | Demonstrates that there is a declaration of `Token` provider with value `Value` at this location in the logical tree. |
+| <code-example format="typescript" hideCopy language="typescript"> &commat;NgModule(Token) </code-example>         | Demonstrates that a fallback `NgModule` injector should be used at this location.                                     |
 
 </div>
-
 
 ### アプリケーション構造の例
 

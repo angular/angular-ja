@@ -218,7 +218,7 @@ See [Browser support][AioGuideBrowserSupport].
 
 The custom element feature extends HTML by allowing you to define a tag whose content is created and controlled by JavaScript code.
 A custom element is recognized by a browser when it is added to the [CustomElementRegistry][MdnDocsWebApiCustomelementregistry].
-A custom element is also refernced as a *web component*.
+A custom element is also referenced as a *web component*.
 
 You can use the API to transform an Angular component so that it can be registered with the browser and used in any HTML that you add directly to the DOM within an Angular application.
 The custom element tag inserts the view of the component, with change-detection and data-binding functionality, into content that would otherwise be displayed without Angular processing.
@@ -239,8 +239,7 @@ Read about the following forms of binding of the [Template Syntax][AioGuideTempl
 *   [Property binding][AioGuidePropertyBinding]
 *   [Event binding][AioGuideEventBinding]
 *   [Attribute binding][AioGuideAttributeBinding]
-*   [Class binding][AioGuideAttributeBindingBindingToTheClassAttribute]
-*   [Style binding][AioGuideAttributeBindingBindingToTheStyleAttribute]
+*   [Class and style binding][AioGuideAttributeBindingBindingToTheClassAttribute]
 *   [Two-way data binding with ngModel][AioGuideBuiltInDirectivesDisplayingAndUpdatingPropertiesWithNgmodel]
 
 ## declarable
@@ -324,7 +323,7 @@ See also [custom element][AioGuideGlossaryCustomElement], which provides an easi
 
 ## eager loading
 
-NgModules or components that are loaded on launch are referenced as eager-loaded, to distinguish them from those that are loaded at run time that are refernced as lazy-loaded.
+NgModules or components that are loaded on launch are referenced as eager-loaded, to distinguish them from those that are loaded at run time that are referenced as lazy-loaded.
 See also [lazy loading][AioGuideGlossaryLazyLoading].
 
 ## ECMAScript
@@ -807,7 +806,8 @@ For an introduction and comparison of both forms approaches, see [Introduction t
 
 A TypeScript-like syntax that Angular evaluates within a [data binding][AioGuideGlossaryDataBinding].
 
-Read about how to write template expressions in the [template expressions][AioGuideInterpolationTemplateExpressions] section of the [Interpolation][AioGuideInterpolation] guide.
+<!--todo: have Alex review this -->
+<!-- Read about how to write template expressions in the [template expressions][AioGuideInterpolationTemplateExpressions] section of the [Interpolation][AioGuideInterpolation] guide. -->
 
 ## template reference variable
 
@@ -857,7 +857,7 @@ Schematic [rules][AioGuideGlossaryRule] take a tree object as input, operate on 
 
 A programming language based on JavaScript that is notable for its optional typing system.
 TypeScript provides compile-time type checking and strong tooling support
-The type checking and toooling support include code completion, refactoring, inline documentation, and intelligent search.
+The type checking and tooling support include code completion, refactoring, inline documentation, and intelligent search.
 Many code editors and IDEs support TypeScript either natively or with plug-ins.
 
 TypeScript is the preferred language for Angular development.
@@ -991,9 +991,8 @@ Learn more about zones in this [Brian Ford video][YoutubeWatchV3iqtmusceU].
 
 [AioGuideArchitectureServices]: guide/architecture-services "Introduction to services and dependency injection | Angular"
 
-[AioGuideAttributeBinding]: guide/attribute-binding "Attribute, class, and style bindings | Angular"
-[AioGuideAttributeBindingBindingToTheClassAttribute]: guide/attribute-binding#binding-to-the-class-attribute "Binding to the class attribute - Attribute, class, and style bindings | Angular"
-[AioGuideAttributeBindingBindingToTheStyleAttribute]: guide/attribute-binding#binding-to-the-style-attribute "Binding to the style attribute - Attribute, class, and style bindings | Angular"
+[AioGuideAttributeBinding]: guide/attribute-binding "Attribute binding | Angular"
+[AioGuideAttributeBindingBindingToTheClassAttribute]: guide/class-binding "Class and style binding | Angular"
 
 [AioGuideAttributeDirectives]: guide/attribute-directives "Attribute directives | Angular"
 
@@ -1120,7 +1119,7 @@ Learn more about zones in this [Brian Ford video][YoutubeWatchV3iqtmusceU].
 [AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
 
 [AioGuideInterpolation]: guide/interpolation "Text interpolation | Angular"
-[AioGuideInterpolationTemplateExpressions]: guide/interpolation#template-expressions "Template expressions - Text interpolation | Angular"
+<!-- [AioGuideInterpolationTemplateExpressions]: guide/interpolation#template-expressions "Template expressions - Text interpolation | Angular" -->
 
 [AioGuideNgmodules]: guide/ngmodules "NgModules | Angular"
 
@@ -1143,7 +1142,7 @@ Learn more about zones in this [Brian Ford video][YoutubeWatchV3iqtmusceU].
 
 [AioGuideSetupLocal]: guide/setup-local "Setting up the local environment and workspace | Angular"
 
-[AioGuideStructuralDirectives]: guide/structural-directives "Writing structural directives | Angular"
+[AioGuideStructuralDirectives]: guide/structural-directives "Structural directives | Angular"
 
 [AioGuideStyleguide0201]: guide/styleguide#02-01 "Style 02-01 - Angular coding style guide | Angular"
 
@@ -1163,8 +1162,8 @@ Learn more about zones in this [Brian Ford video][YoutubeWatchV3iqtmusceU].
 
 [AngularBlogAPlanForVersion80AndIvyB3318dfc19f7]: https://blog.angular.io/a-plan-for-version-8-0-and-ivy-b3318dfc19f7 "A plan for version 8.0 and Ivy | Angular Blog"
 
-[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersBrowser]: https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/builders/browser "packages/angular_devkit/build_angular/src/builders/browser | angular/angular-cli | GitHub"
-[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersKarma]: https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/build_angular/src/builders/karma "packages/angular_devkit/build_angular/src/builders/karma | angular/angular-cli | GitHub"
+[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersBrowser]: https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/builders/browser "packages/angular_devkit/build_angular/src/builders/browser | angular/angular-cli | GitHub"
+[GithubAngularAngularCliTreePrimaryPackagesAngularDevkitBuildAngularSrcBuildersKarma]: https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/builders/karma "packages/angular_devkit/build_angular/src/builders/karma | angular/angular-cli | GitHub"
 
 [GithubPalantirTslint]: https://palantir.github.io/tslint "TSLint | Palantir | GitHub"
 

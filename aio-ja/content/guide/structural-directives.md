@@ -2,13 +2,88 @@
 
 このトピックでは、構造ディレクティブを作成する方法を示し、ディレクティブがどのように機能するのか、Angularがどのように短縮表記を解釈するのか、テンプレートの型エラーをキャッチするためにテンプレートガードプロパティを追加する方法など、概念的な情報を説明します。
 
+Angularにビルトインされているディレクティブ(たとえば、`NgIf`, `NgForOf`, `NgSwitch` など)については、[組み込みディレクティブ](guide/built-in-directives) を参照してください。
+
 <div class="alert is-helpful">
 
 このトピックで使用されているサンプルコードを表示またはダウンロードするには、<live-example></live-example> を参照してください。
 
 </div>
 
-Angularにビルトインされているディレクティブ(たとえば、`NgIf`, `NgForOf`, `NgSwitch` など)については、[組み込みディレクティブ](guide/built-in-directives) を参照してください。
+<a id="shorthand"></a>
+<a id="asterisk"></a>
+
+## 構造ディレクティブの短縮表記 {@a structural-directive-shorthand}
+
+`*ngIf` などの構造ディレクティブのアスタリスク `*` 構文は、Angularがより長い形式に解釈するための短縮表記です。
+Angularは、構造ディレクティブの前のアスタリスクを、ホスト要素とその子孫を囲む `<ng-template>` に変換します。
+
+以下は、`hero` が存在する場合にヒーローの名前を表示する `*ngIf` の例です:
+
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (asterisk)" region="asterisk"></code-example>
+
+`*ngIf` ディレクティブは `<ng-template>` に移動し、角括弧 `[ngIf]` でバインドされたプロパティになります。
+クラス属性を含む残りの `<div>` は、`<ng-template>` 内に移動します。
+
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-template)" region="ngif-template"></code-example>
+
+Angularは実際の `<ng-template>`要素を作成せず、代わりに `<div>` とコメントノードプレースホルダーのみをDOMにレンダリングします。
+
+```html
+<!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}-->
+<div _ngcontent-c0>Mr. Nice</div>
+
+```
+
+次の例では、アスタリスクを使用する短縮記法の `*ngFor`形式と `<ng-template>`形式を比較しています:
+
+<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (inside-ngfor)" region="inside-ngfor"></code-example>
+
+ここでは、`ngFor`構造ディレクティブに関連するすべてのものが `<ng-template>` に適用されます。
+要素上の他のバインディングや属性はすべて、`<ng-template>`内の `<div>` 要素に適用されます。
+ホスト要素上の他の修飾子は、`ngFor` の文字列に加えて、要素が `<ng-template>`内を移動する際にもそのまま適用されます。
+この例では、`[class.odd]="odd"` は `<div>` に残ります。
+
+`let` キーワードは、テンプレート内で参照できるテンプレート入力変数を宣言します。
+この例の入力変数は、 `hero`、`i`、および `odd` です。
+パーサーは、 `let hero`、`let i`、および `let odd` を `let-hero`、`let-i`、および `let-odd` という名前の変数に変換します。
+`let-i`変数と `let-odd`変数は `let i = index` と `let odd = odd` になります。
+Angularは `i` と `odd` をコンテキストの `index` と `odd` プロパティを現在の値に設定します。
+
+パーサーはパスカルケース(PascalCase)をすべてのディレクティブに適用し、それらの前に `ngFor` などのディレクティブの属性名を付けます。
+たとえば、`ngFor` の入力プロパティである `of` と `trackBy` は、`ngForOf` と  `ngForTrackBy` にマッピングされます。
+`NgFor`ディレクティブがリストをループすると、独自のコンテキストオブジェクトのプロパティが設定およびリセットされます。
+これらのプロパティには、`index`、`odd`、および `$implicit` という名前の特別なプロパティを含めることができますが、
+これらに限定されません。
+
+Angularは `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
+
+詳細については [NgFor API](api/common/NgForOf "API: NgFor") と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
+
+<div class="alert is-helpful">
+
+  Note that Angular's `<ng-template>` element defines a template that doesn't render anything by default, if you just wrap elements in an `<ng-template>` without applying a structural directive those elements will not be rendered.
+
+  For more information, see the [ng-template API](api/core/ng-template) documentation.
+
+</div>
+
+<a id="one-per-element"></a>
+## One structural directive per element
+
+It's a quite common use-case to repeat a block of HTML but only when a particular condition is true. An intuitive way to do that is to put both an `*ngFor` and an `*ngIf` on the same element. However, since both `*ngFor` and `*ngIf` are structural directives, this would be treated as an error by the compiler. You may apply only one _structural_ directive to an element.
+
+The reason is simplicity. Structural directives can do complex things with the host element and its descendants.
+
+When two directives lay claim to the same host element, which one should take precedence?
+
+Which should go first, the `NgIf` or the `NgFor`? Can the `NgIf` cancel the effect of the `NgFor`?
+If so (and it seems like it should be so), how should Angular generalize the ability to cancel for other structural directives?
+
+There are no easy answers to these questions. Prohibiting multiple structural directives makes them moot.
+There's an easy solution for this use case: put the `*ngIf` on a container element that wraps the `*ngFor` element. One or both elements can be an `<ng-container>` so that no extra DOM elements are generated.
 
 {@a unless}
 
@@ -87,72 +162,6 @@ Angularにビルトインされているディレクティブ(たとえば、`Ng
     <img src='generated/images/guide/structural-directives/unless-anim.gif' alt="UnlessDirective in action">
   </div>
 
-
-{@a shorthand}
-{@a asterisk}
-
-## 構造ディレクティブの短縮表記 {@a structural-directive-shorthand}
-
-`*ngIf` などの構造ディレクティブのアスタリスク `*` 構文は、Angularがより長い形式に解釈するための短縮表記です。
-Angularは、構造ディレクティブの前のアスタリスクを、ホスト要素とその子孫を囲む `<ng-template>` に変換します。
-
-以下は、`hero` が存在する場合にヒーローの名前を表示する `*ngIf` の例です:
-
-<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (asterisk)" region="asterisk"></code-example>
-
-`*ngIf` ディレクティブは `<ng-template>` に移動し、角括弧 `[ngIf]` でバインドされたプロパティになります。
-クラス属性を含む残りの `<div>` は、`<ng-template>` 内に移動します。
-
-<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (ngif-template)" region="ngif-template"></code-example>
-
-Angularは実際の `<ng-template>`要素を作成せず、代わりに `<div>` とコメントノードプレースホルダーのみをDOMにレンダリングします。
-
-```html
-<!--bindings={
-  "ng-reflect-ng-if": "[object Object]"
-}-->
-<div _ngcontent-c0>Mr. Nice</div>
-
-```
-
-次の例では、アスタリスクを使用する短縮記法の `*ngFor`形式と `<ng-template>`形式を比較しています:
-
-<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (inside-ngfor)" region="inside-ngfor"></code-example>
-
-ここでは、`ngFor`構造ディレクティブに関連するすべてのものが `<ng-template>` に適用されます。
-要素上の他のバインディングや属性はすべて、`<ng-template>`内の `<div>` 要素に適用されます。
-ホスト要素上の他の修飾子は、`ngFor` の文字列に加えて、要素が `<ng-template>`内を移動する際にもそのまま適用されます。
-この例では、`[class.odd]="odd"` は `<div>` に残ります。
-
-`let` キーワードは、テンプレート内で参照できるテンプレート入力変数を宣言します。
-この例の入力変数は、 `hero`、`i`、および `odd` です。
-パーサーは、 `let hero`、`let i`、および `let odd` を `let-hero`、`let-i`、および `let-odd` という名前の変数に変換します。
-`let-i`変数と `let-odd`変数は `let i = index` と `let odd = odd` になります。
-Angularは `i` と `odd` をコンテキストの `index` と `odd` プロパティを現在の値に設定します。
-
-パーサーはパスカルケース(PascalCase)をすべてのディレクティブに適用し、それらの前に `ngFor` などのディレクティブの属性名を付けます。
-たとえば、`ngFor` の入力プロパティである `of` と `trackBy` は、`ngForOf` と  `ngForTrackBy` にマッピングされます。
-`NgFor`ディレクティブがリストをループすると、独自のコンテキストオブジェクトのプロパティが設定およびリセットされます。
-これらのプロパティには、`index`、`odd`、および `$implicit` という名前の特別なプロパティを含めることができますが、
-これらに限定されません。
-
-Angularは `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
-
-詳細については [NgFor API](api/common/NgForOf "API: NgFor") と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
-
-### `<ng-template>` を使用してテンプレートフラグメントを作成する
-
-Angularの `<ng-template>`要素は、デフォルトでは何もレンダリングしないテンプレートを定義します。
-`<ng-template>`を使用すると、コンテンツを手動でレンダリングして、コンテンツの表示方法を完全に制御できます。
-
-構造ディレクティブがない状態で、一部の要素を `<ng-template>`でラップすると、それらの要素は表示されなくなります。
-次の例では、Angularはフレーズの中の真ん中の "Hip!"をレンダリングしません。"Hip! Hip! Hooray!" の真ん中の "Hip!" は、`<ng-template>` で囲まれているためにレンダリングされません。
-
-<code-example path="structural-directives/src/app/app.component.html" header="src/app/app.component.html (template-tag)" region="template-tag"></code-example>
-
-<div class="lightbox">
-  <img src='generated/images/guide/structural-directives/template-rendering.png' alt="template tag rendering">
-</div>
 
 ## 構造ディレクティブの構文リファレンス
 
@@ -338,3 +347,11 @@ export class ExampleDirective {
     // …
 }
 </code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

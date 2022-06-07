@@ -19,13 +19,40 @@ Angular Service WorkerがキャッシュすべきファイルとデータのURL�
 設定ファイルはJSON形式を使用します。すべてのファイルパスは`/`で始まらなければなりません。
 これはCLIプロジェクトでの展開ディレクトリに対応し、通常は `dist/<project-name>`です。
 
-{@a glob-patterns}
-特に指定のない限り、パターンは制限されたglobフォーマットを使います。
+<a id="glob-patterns"></a>
+
+Unless otherwise commented, patterns use a **limited*** glob format that internally will be converted into regex:
 
 * `**`は、0個以上のパスセグメントに一致します。
 * `*`は、厳密に0個以上の`/`を除く文字に一致します。
 * `?` は、厳密に1個の`/`を除く文字に一致します。
 * `!`接頭辞は、パターンを否定的なものとしてマークします。つまり、パターンに一致しないファイルのみが含まれます。
+
+<div class="alert is-helpful">
+
+  **\*** Pay attention that some characters with a special meaning in a regular expression are not escaped and also the pattern is not wrapped in `^`/`$` in the internal glob to regex conversion.
+
+  *   `$` is a special character in regex that matches the end of the string and will not be automatically escaped when converting the glob pattern to a regular expression.
+      If you want to literally match the `$` character, you have to escape it yourself (with `\\$`).
+
+      <div class="alert is-important">
+
+        For example, the glob pattern `/foo/bar/$value` results in an unmatchable expression, because it is impossible to have a string that has any characters after it has ended.
+
+      </div>
+
+  *   The pattern will not be automatically wrapped in `^` and `$` when converting it to a regular expression.
+      Therefore, the patterns will partially match the request URLs.
+      If you want your patterns to match the beginning and/or end of URLs, you can add `^`/`$` yourself.
+
+      <div class="alert is-important">
+
+        For example, the glob pattern `/foo/bar/*.js` will match both `.js` and `.json` files.
+        If you want to only match `.js` files, use `/foo/bar/*.js$`.
+
+      </div>
+
+</div>
 
 パターン例
 

@@ -29,7 +29,7 @@
           environment.prod.ts
         </div>
         <div class="file">
-          environment.stage.ts
+          environment.staging.ts
         </div>
     </div>
 </div>
@@ -94,7 +94,7 @@ export const environment = {
               environment.prod.ts
             </div>
             <div class="file">
-              environment.prod.ts
+              environment.staging.ts
             </div>
         </div>
     </div>

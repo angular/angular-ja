@@ -4,6 +4,7 @@
 前提条件、CLI のインストール、初期ワークスペースとスターターアプリケーションの作成、セットアップを確認するためのそのアプリケーションのローカルでの実行に関する情報が含まれています。
 
 <div class="callout is-helpful">
+
 <header>ローカルセットアップなしでAngularを試す</header>
 
 Angular をはじめて使用する場合は、[入門](start)から始めるのがよいかもしれません。入門では変更可能な既成のオンラインストアアプリケーションを構築するなかで、Angularの基本事項をすぐに習得できます。 [StackBlitz](https://stackblitz.com/)オンライン開発環境を活用しているので、準備が整うまでローカル環境をセットアップする必要はありません。
@@ -60,11 +61,19 @@ Angular CLIをインストールするには、ターミナルウィンドウを
 
 <code-example format="shell" language="shell">
 
-npm install -g &commat;angular/cli<aio-angular-dist-tag></aio-angular-dist-tag>
+npm install -g &commat;angular/cli<aio-angular-dist-tag class="pln"></aio-angular-dist-tag>
 
 </code-example>
 
-{@a create-proj}
+<div class="alert is-helpful">
+  <p>On Windows client computers, the execution of PowerShell scripts is disabled by default. To allow the execution of PowerShell scripts, which is needed for npm global binaries, you must set the following <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies">execution policy</a>:</p>
+  <code-example language="sh">
+  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+  </code-example>
+  <p>Carefully read the message displayed after executing the command and follow the instructions. Make sure you understand the implications of setting an execution policy.</p>
+</div>
+
+<a id="create-proj"></a>
 
 ## ワークスペースと初期アプリケーションを作成する {@a create-a-workspace-and-initial-application}
 

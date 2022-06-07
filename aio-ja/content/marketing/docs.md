@@ -50,7 +50,7 @@ AngularのGithubリポジトリに
 [プルリクエスト](https://github.com/angular/angular/pulls "Angular Github pull requests") を作成して
 Angularドキュメントに貢献してください。
 提出ガイドラインについては、 
-[Angularへの貢献](https://github.com/angular/angular/blob/master/CONTRIBUTING.md "Contributing guide") を参照してください。
+[Angularへの貢献](https://github.com/angular/angular/blob/main/CONTRIBUTING.md "Contributing guide") を参照してください。
 
 私たちのコミュニティは、尊重、協力的なコミュニケーションを大切にしています。 
 [行動規範](https://github.com/angular/angular-ja/blob/master/CODE_OF_CONDUCT.md "Contributor code of conduct") を参照し、遵守してください。

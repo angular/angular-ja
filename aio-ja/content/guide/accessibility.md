@@ -23,7 +23,7 @@ ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依�
 
 <code-example format="html" language="html">
 
-&lt;!-- Use 'attr.' when binding to an ARIA attribute --&gt;
+&lt;!-- Use attr. when binding to an ARIA attribute --&gt;
 &lt;button [attr.aria-label]="myActionLabel"&gt;&hellip;&lt;/button&gt;
 
 </code-example>
@@ -98,7 +98,9 @@ Angular Material において上記のパターンのサンプルは
 
     <code-example header="src/app/app.component.html" path="accessibility/src/app/app.component.html" region="template"></code-example>
 
-## ルーティングとフォーカスの制御
+## Routing
+
+### Focus management after navigation
 
 UI の中で[フォーカス](https://developers.google.com/web/fundamentals/accessibility/focus/)を追跡し、制御することはアクセシビリティを設計する上で重要な検討事項です。
 Angular のルーティングを使う際は画面遷移時にページのフォーカスがどこに当たるかを決めておくべきです。
@@ -122,6 +124,34 @@ router.events.pipe(filter(e =&gt; e instanceof NavigationEnd)).subscribe(() =&gt
 実際のアプリケーションでは、フォーカスが当たる要素はアプリケーションの構造やレイアウトに依存します。
 フォーカスが当たった要素はビューにルーティングされたメインのコンテンツへ移ることのできる場所へユーザーを配置するべきです。
 ルートが変わった後にフォーカスが `body` 要素へ戻る状況は避けた方がよいでしょう。
+
+### Active links identification
+
+CSS classes applied to active `RouterLink` elements (usually via `RouterLinkActive`) provide a visual indication regarding as to which link is currently active. Such indication doesn't apply to blind or visually impaired users, in order to provide such information the `aria-current` attribute should be applied to the element as well (for more information see [MDN aria-current](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)).
+
+The `RouterLinkActive` directive provides the `ariaCurrentWhenActive` input which sets the `aria-current` to a specified value when the link becomes active.
+
+The following example shows how to apply the `active-page` class to active links as well as setting their `aria-current` attribute to `"page"` when they are active:
+
+```html
+    <nav>
+      <a routerLink="home"
+         routerLinkActive="active-page"
+         ariaCurrentWhenActive="page">
+        Home
+      </a>
+      <a routerLink="about"
+         routerLinkActive="active-page"
+         ariaCurrentWhenActive="page">
+        About
+      </a>
+      <a routerLink="shop"
+         routerLinkActive="active-page"
+         ariaCurrentWhenActive="page">
+        Shop
+      </a>
+    </nav>
+```
 
 ## 参考資料
 

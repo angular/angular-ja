@@ -1018,7 +1018,7 @@ The `ActivatedRoute.paramMap` property is an `Observable` map of route parameter
 The `paramMap` emits a new map of values that includes `id` when the user navigates to the component.
 In `ngOnInit()` you subscribe to those values, set the `selectedId`, and get the heroes.
 
-Update the template with a [class binding](guide/attribute-binding#class-binding).
+Update the template with a [class binding](guide/class-binding).
 The binding adds the `selected` CSS class when the comparison returns `true` and removes it when `false`.
 Look for it within the repeated `<li>` tag as shown here:
 
@@ -2254,13 +2254,6 @@ Then it adds the `AdminModule` routes to its current route configuration.
 Finally, it loads the requested route to the destination admin component.
 
 The lazy loading and re-configuration happen just once, when the route is first requested; the module and routes are available immediately for subsequent requests.
-
-<div class="alert is-helpful">
-
-Angular provides a built-in module loader that supports SystemJS to load modules asynchronously.
-If you were using another bundling tool, such as Webpack, you would use the Webpack mechanism for asynchronously loading modules.
-
-</div>
 
 Take the final step and detach the admin feature set from the main application.
 The root `AppModule` must neither load nor reference the `AdminModule` or its files.

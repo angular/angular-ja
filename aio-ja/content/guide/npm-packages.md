@@ -112,21 +112,29 @@ Package name                                      | Description
 
 次の`devDependencies`は新しいAngularワークスペース用のデフォルトの`package.json`ファイルで提供されています。
 
-
-パッケージ名                                                                                  | 説明
-----------------------------------------   | -----------------------------------
-[**@angular&#8209;devkit/<br />build&#8209;angular**](https://github.com/angular/angular-cli/) | Angularのビルドツール
-[**@angular/cli**](https://github.com/angular/angular-cli/)                                    | Angularのコマンドラインツール
-**@angular/<br />compiler&#8209;cli**                                                          | Angular CLIの `ng build` と `ng serve` コマンドから呼び出されるAngularのコンパイラ
-**@types/... **                                                                                | JasmineやNode.jsといったサードパーティライブラリのTypeScriptの型定義ファイルです。
-**jasmine/... **                                                                               | [Jasmine](https://jasmine.github.io/)テストライブラリをサポートするパッケージです。
-**karma/... **                                                                                 | [karma](https://www.npmjs.com/package/karma)テストランナーをサポートするパッケージです。
-[**typescript**](https://www.npmjs.com/package/typescript)                                     | *tsc*(TypeScript Compiler)を含むTypeScriptのランゲージサーバー
-
+| Package name                                                              | Details |
+|:---                                                                       |:---     |
+| [`@angular-devkit/build-angular`](https://github.com/angular/angular-cli) | The Angular build tools.                                                                        |
+| [`@angular/cli`](https://github.com/angular/angular-cli)                  | The Angular CLI tools.                                                                          |
+| `@angular/compiler-cli`                                                   | The Angular compiler, which is invoked by the Angular CLI's `ng build` and `ng serve` commands. |
+| `@types/... `                                                             | TypeScript definition files for 3rd party libraries such as Jasmine and Node.js.                |
+| `jasmine/... `                                                            | Packages to support the [Jasmine](https://jasmine.github.io) test library.                      |
+| `karma/... `                                                              | Packages to support the [karma](https://www.npmjs.com/package/karma) test runner.               |
+| [`typescript`](https://www.npmjs.com/package/typescript)                  | The TypeScript language server, including the *tsc* TypeScript compiler.                        |
 
 ## 関連情報
 
  Angular CLIがパッケージをどう扱うかについての情報は次のガイドを見てください。
  
- * [ビルドとサーブ](guide/build)ではパッケージを組み合わせて開発ビルドを作成する方法を説明します。
- * [デプロイ](guide/deployment)ではパッケージを組み合わせて本番ビルドを作成する方法を説明します。
+| Topics                              | Details |
+|:---                                 |:---     |
+| [Building and serving](guide/build) | How packages come together to create a development build |
+| [Deployment](guide/deployment)      | How packages come together to create a production build  |
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

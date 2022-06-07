@@ -42,7 +42,7 @@ These `ConfigService` imports are typical.
 You can run the <live-example></live-example> that accompanies this guide.
 
 The sample app does not require a data server.
-It relies on the [Angular *in-memory-web-api*](https://github.com/angular/angular/tree/master/packages/misc/angular-in-memory-web-api), which replaces the *HttpClient* module's `HttpBackend`.
+It relies on the [Angular *in-memory-web-api*](https://github.com/angular/angular/tree/main/packages/misc/angular-in-memory-web-api), which replaces the *HttpClient* module's `HttpBackend`.
 The replacement service simulates the behavior of a REST-like backend.
 
 Look at the `AppModule` *imports* to see how it is configured.
@@ -148,7 +148,7 @@ The callback in the updated component method receives a typed data object, which
 To access properties that are defined in an interface, you must explicitly convert the plain object you get from the JSON to the required response type.
 For example, the following `subscribe` callback receives `data` as an Object, and then type-casts it in order to access the properties.
 
-<code-example format="typescript" langauge="typescript">
+<code-example format="typescript" language="typescript">
 
 .subscribe(data =&gt; this.config = {
   heroesUrl: (data as any).heroesUrl,
@@ -246,7 +246,7 @@ In the following example, the `searchHeroes()` method uses a JSONP request to qu
 searchHeroes(term: string): Observable {
   term = term.trim();
 
-  const heroesURL = &grave;&dollar;{this.heroesURL}?&dollar;{term}&grave;;
+  const heroesURL = `&dollar;{this.heroesURL}?&dollar;{term}`;
   return this.http.jsonp(heroesUrl, 'callback').pipe(
       catchError(this.handleError('searchHeroes', [])) // then handle the error
     );

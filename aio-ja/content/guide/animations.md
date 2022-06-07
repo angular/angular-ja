@@ -16,7 +16,7 @@ AngularのアニメーションシステムはCSSの機能に基づいて構築�
 これには、位置、サイズ、変形、色、ボーダーなどが含まれます。
 W3Cは[CSS Transitions](https://www.w3.org/TR/css-transitions-1/)のページでアニメーション可能なプロパティのリストを管理しています。
 
-## このガイドについて
+## このガイドについて {@a about-this-guide}
 
 このガイドでは、Angularアニメーションをプロジェクトに追加して使い始めるために、Angularアニメーションの基本的な機能について説明します。
 
@@ -86,7 +86,7 @@ Let's create a new `open-close` component to animate with simple transitions.
 
 Run the following command in terminal to generate the component:
 
-<code-example format="shell" langauage="shell">
+<code-example format="shell" language="shell">
 
 ng g component open-close
 

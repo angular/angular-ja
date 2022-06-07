@@ -37,7 +37,8 @@ Open the `HeroesComponent` template file and make the following changes:
 
 1.  Add an `<h2>` at the top.
 1.  Below it add an HTML unordered list \(`<ul>`\) element.
-1.  Insert an `<li>` within the `<ul>` that displays properties of a `hero`.
+1.  Insert an `<li>` within the `<ul>`.
+1.  Place a `<button>` inside the `<li>` that displays properties of a `hero` inside `<span>` elements.
 1.  Sprinkle some CSS classes for styling \(you'll add the CSS styles shortly\).
 
 Make it look like this:
@@ -68,6 +69,17 @@ It's a critical part of the syntax.
 </div>
 
 After the browser refreshes, the list of heroes appears.
+
+<div class="callout is-helpful">
+
+<header>Interactive elements</header>
+
+**NOTE**: <br />
+Inside the `<li>` element, we've wrapped the hero's details in a `<button>` element. Later on we make the hero clickable, and it is better for accessibility purposes to use natively interactive HTML elements (e.g. `<button>`) instead of adding event listeners to non-interactive ones (e.g. `<li>`).
+
+For more details on accessibility, see [Accessibility in Angular](guide/accessibility).
+
+</div>
 
 <a id="styles"></a>
 
@@ -105,11 +117,11 @@ The `heroes.component.css` styles apply only to the `HeroesComponent` and don't 
 
 When the user clicks a hero in the list, the component should display the selected hero's details at the bottom of the page.
 
-In this section, you'll listen for the hero item click event and update the hero detail.
+In this section, you'll listen for the hero item click event and display/update the hero details.
 
 ### Add a click event binding
 
-Add a `<button>` with a click event binding in the `<li>` like this:
+Add a click event binding to the `<button>` in the `<li>` like this:
 
 <code-example header="heroes.component.html (template excerpt)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click"></code-example>
 
@@ -118,24 +130,11 @@ This is an example of Angular's [event binding](guide/event-binding) syntax.
 The parentheses around `click` tell Angular to listen for the `<button>` element's `click` event.
 When the user clicks in the `<button>`, Angular executes the `onSelect(hero)` expression.
 
-<div class="callout is-helpful">
-
-<header>Clickable elements</header>
-
-**NOTE**: <br />
-We added the click event binding on a new `<button>` element.
-While we could have added the event binding on the `<li>` element directly, it is better for accessibility purposes to use the native `<button>` element to handle clicks.
-
-For more details on accessibility, see [Accessibility in Angular](guide/accessibility).
-
-</div>
-
 In the next section, define an `onSelect()` method in `HeroesComponent` to display the hero that was defined in the `*ngFor` expression.
 
 ### Add the click event handler
 
-Rename the component's `hero` property to `selectedHero` but don't assign it.
-There is no *selected hero* when the application starts.
+Rename the component's `hero` property to `selectedHero` but don't assign any value to it since there is no *selected hero* when the application starts.
 
 Add the following `onSelect()` method, which assigns the clicked hero from the template to the component's `selectedHero`.
 
@@ -149,28 +148,7 @@ Add the following to `heroes.component.html` beneath the list section:
 
 <code-example header="heroes.component.html (selected hero details)" path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details"></code-example>
 
-After the browser refreshes, the application is broken.
-
-Open the browser developer tools and look in the console for an error message like this:
-
-<code-example format="output" hideCopy language="shell">
-
-HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
-
-</code-example>
-
-#### What happened?
-
-When the application starts, the `selectedHero` is `undefined` *by design*.
-
-Binding expressions in the template that refer to properties of `selectedHero` &mdash;expressions like `{{selectedHero.name}}`&mdash; *must fail* because there is no selected hero.
-
-#### The fix - hide empty details with `*ngIf`
-
-The component should only display the selected hero details if the `selectedHero` exists.
-
-Wrap the hero detail HTML in a `<div>`.
-Add Angular's `*ngIf` directive to the `<div>` and set it to `selectedHero`.
+The hero details should only be displayed when a hero is selected. When a component is created initially, there is no selected hero, so we add the `*ngIf` directive to the `<div>` that wraps the hero details, to instruct Angular to render the section only when the `selectedHero` is actually defined (after it has been selected by clicking on a hero).
 
 <div class="alert is-important">
 
@@ -178,21 +156,6 @@ Don't forget the asterisk \(`*`\) character in front of `ngIf`.
 It's a critical part of the syntax.
 
 </div>
-
-<code-example header="src/app/heroes/heroes.component.html (*ngIf)" path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if"></code-example>
-
-After the browser refreshes, the list of names reappears.
-The details area is blank.
-Click a hero in the list of heroes and its details appear.
-The application seems to be working again.
-The heroes appear in a list and details about the clicked hero appear at the bottom of the page.
-
-#### Why it works
-
-When `selectedHero` is undefined, the `ngIf` removes the hero detail from the DOM.
-There are no `selectedHero` bindings to consider.
-
-When the user picks a hero, `selectedHero` has a value and `ngIf` puts the hero detail into the DOM.
 
 ### Style the selected hero
 
@@ -205,7 +168,7 @@ To apply the `.selected` class to the `<li>` when the user clicks it, use class 
 
 </div>
 
-Angular's [class binding](guide/attribute-binding#class-binding) can add and remove a CSS class conditionally.
+Angular's [class binding](guide/class-binding) can add and remove a CSS class conditionally.
 Add `[class.some-css-class]="some-condition"` to the element you want to style.
 
 Add the following `[class.selected]` binding to the `<button>` in the `HeroesComponent` template:
@@ -240,10 +203,4 @@ Here are the code files discussed on this page, including the `HeroesComponent` 
 *   You used `*ngIf` to conditionally include or exclude a block of HTML
 *   You can toggle a CSS style class with a `class` binding.
 
-    <code-example format="typescript" language="typescript">
-
-    header="src/app/heroes/heroes.component.html (HeroesComponent's template)"
-
-    </code-example>
-
-@reviewed 2022-02-28
+@reviewed 2022-05-23

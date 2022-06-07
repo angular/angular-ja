@@ -35,10 +35,11 @@
 
 `HeroesComponent` テンプレートを開き、次のように変更してください：
 
-* `<h2>` を先頭に追加してください
-* その下にHTMLの順不同リスト (`<ul>`) を追加してください
-* `<li>` を `hero` プロパティを表示する `<ul>` の内側に挿入してください
-* スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは間もなく追加します）
+1. `<h2>` を先頭に追加してください
+1. その下にHTMLの順不同リスト (`<ul>`) を追加してください
+1. `<li>` を `<ul>` の内側に挿入してください
+1. `<span>` の中で `hero` のプロパティを表示する `<li>` の中に `<button>` を置いてください
+1. スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは間もなく追加します）
 
 このようになります：
 
@@ -66,6 +67,17 @@
 </div>
 
 ブラウザを更新すると、ヒーローのリストが表示されます。
+
+<div class="callout is-helpful">
+
+<header>Interactive elements</header>
+
+**NOTE**: <br />
+Inside the `<li>` element, we've wrapped the hero's details in a `<button>` element. Later on we make the hero clickable, and it is better for accessibility purposes to use natively interactive HTML elements (e.g. `<button>`) instead of adding event listeners to non-interactive ones (e.g. `<li>`).
+
+For more details on accessibility, see [Accessibility in Angular](guide/accessibility).
+
+</div>
 
 <a id="styles"></a>
 
@@ -107,7 +119,7 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 ### クリックイベントのバインディングを追加する
 
-次のように `<li>` にクリックイベントをバインドした `<button>` を追加します。
+Add a click event binding to the `<button>` in the `<li>` like this:
 
 <code-example header="heroes.component.html (template excerpt)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="selectedHero-click"></code-example>
 
@@ -116,25 +128,12 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 `click` を囲っている括弧はAngularに `<li>` 要素の `click` イベントであることを伝えます。
 ユーザーが `<li>` をクリックすると、Angularは `onSelect(hero)` 式を実行します。
 
-<div class="callout is-helpful">
-
-<header>Clickable elements</header>
-
-**NOTE**: <br />
-We added the click event binding on a new `<button>` element.
-While we could have added the event binding on the `<li>` element directly, it is better for accessibility purposes to use the native `<button>` element to handle clicks.
-
-For more details on accessibility, see [Accessibility in Angular](guide/accessibility).
-
-</div>
-
 次のセクションでは、 `HeroesComponent`で`onSelect()`メソッドを定義して、`*ngFor`式で定義されたヒーローを表示します。
 
 
 ### クリックイベントのハンドラーを追加する
 
-コンポーネントの `hero` プロパティを `selectedHero` にリネームしますが、まだ割り当てません。
-アプリケーション起動時に _選択されたヒーロー_ はありません。
+Rename the component's `hero` property to `selectedHero` but don't assign any value to it since there is no *selected hero* when the application starts.
 
 次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
@@ -148,49 +147,13 @@ For more details on accessibility, see [Accessibility in Angular](guide/accessib
 
 <code-example header="heroes.component.html (selected hero details)" path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details"></code-example>
 
-ブラウザを更新すると、アプリケーションは壊れてしまっています。
-
-ブラウザの開発者ツールを開いて、コンソールの中のこのようなエラーメッセージを探してください：
-
-<code-example format="output" hideCopy language="shell">
-
-HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
-
-</code-example>
-
-### なにが起きたのか？
-
-アプリケーションを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
-
-`selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
-
-### 修正しましょう - _*ngIf_ を使って空のdetailsを非表示にする
-
-コンポーネントは `selectedHero` が存在する場合のみ、選択されたヒーローの詳細を表示する必要があります。
-
-ヒーローの詳細をHTMLの `<div>` で囲ってください。
-Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHero` に設定してください。
-
+The hero details should only be displayed when a hero is selected. When a component is created initially, there is no selected hero, so we add the `*ngIf` directive to the `<div>` that wraps the hero details, to instruct Angular to render the section only when the `selectedHero` is actually defined (after it has been selected by clicking on a hero).
 
 <div class="alert is-important">
 
 `ngIf` の前のアスタリスク(*)を忘れないでください。これは構文において重要な部分です。
 
 </div>
-
-<code-example header="src/app/heroes/heroes.component.html (*ngIf)" path="toh-pt2/src/app/heroes/heroes.component.html" region="ng-if"></code-example>
-
-ブラウザを更新すると、名前の一覧が再度表示されます。
-詳細のエリアは空白になっています。
-ヒーローのリストの中からヒーローをクリックし、詳細を表示しましょう。
-アプリケーションは再び動き出しました。
-ヒーローたちはリストの中に表示され、クリックされたヒーローの詳細はページの下部に表示されます。
-
-### なぜこれが動くのか
-
-`selectedHero` が定義されていないとき、 `ngIf` はDOMからヒーローの詳細を削除します。心配する `selectedHero` へのバインディングは存在しません。
-
-ユーザーがヒーローを選択すると `selectedHero` は値を持ち `ngIf` はヒーローの詳細をDOMの中に挿入します。
 
 ### 選択されたヒーローを装飾する
 
@@ -203,7 +166,7 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 </div>
 
-Angularの [クラスバインディング](guide/attribute-binding#class-binding) は条件に応じたCSSクラスの追加と削除ができます。
+Angularの [クラスバインディング](guide/class-binding) は条件に応じたCSSクラスの追加と削除ができます。
 装飾したい要素に `[class.some-css-class]="some-condition"` を追加するだけです。
 
 Add the following `[class.selected]` binding to the `<button>` in the `HeroesComponent` template:
@@ -235,11 +198,6 @@ Add the following `[class.selected]` binding to the `<button>` in the `HeroesCom
 *   ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
 *   リストを表示するために `*ngFor` を使いました
 *   HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました
-*   CSSスタイルのclassを `クラス` バインディングで切り替えることができます
-    <code-example format="typescript" language="typescript">
+*   CSSスタイルのクラスを `class` バインディングで切り替えることができます
 
-    header="src/app/heroes/heroes.component.html (HeroesComponent's template)"
-
-    </code-example>
-
-@reviewed 2022-02-28
+@reviewed 2022-05-23

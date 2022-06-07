@@ -89,7 +89,7 @@ TypeScript インターフェースを使用して、スキーマの変数また
 </code-example>
 
 
-Angular CLI コマンド Schematics のスキーマファイルの例は、[`@schematics/angular`](https://github.com/angular/angular-cli/blob/master/packages/schematics/angular/application/schema.json) にあります。
+Angular CLI コマンド Schematics のスキーマファイルの例は、[`@schematics/angular`](https://github.com/angular/angular-cli/blob/main/packages/schematics/angular/application/schema.json) にあります。
 
 ### Schematic プロンプト
 

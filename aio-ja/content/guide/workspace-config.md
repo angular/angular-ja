@@ -48,14 +48,14 @@ At the top-level of `angular.json`, a few properties configure the workspace and
 
 The following configuration properties are a set of options that customize the Angular CLI.
 
-| Property            | Description                                                                                      | Value Type                                               |
-| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------------------------- |
-| `analytics`         | Share anonymous [usage data](cli/usage-analytics-gathering) with the Angular Team.               | `boolean` \| `ci`                                        |
-| `analyticsSharing`  | A set of analytics sharing options.                                                              | [Analytics sharing options](#analytics-sharing-options)  |
-| `cache`             | Control [persistent disk cache](cli/cache) used by [Angular CLI Builders](guide/cli-builder).    | [Cache options](#cache-options)                          |
-| `defaultCollection` | The default schematics collection to use.                                                        | `string`                                                 |
-| `packageManager`    | The preferred package manager tool to use.                                                        | `npm` \| `cnpm` \| `pnpm` \| `yarn`                      |
-| `warnings`          | Control CLI specific console warnings.                                                           | [Warnings options](#warnings-options)                    |
+| Property              | Details                                                                                       | Value type                                              |
+|:---                   |:---                                                                                           |:---                                                     |
+| `analytics`           | Share anonymous [usage data](cli/usage-analytics-gathering) with the Angular Team.            | `boolean` &verbar; `ci`                                 |
+| `analyticsSharing`    | A set of analytics sharing options.                                                           | [Analytics sharing options](#analytics-sharing-options) |
+| `cache`               | Control [persistent disk cache](cli/cache) used by [Angular CLI Builders](guide/cli-builder). | [Cache options](#cache-options)                         |
+| `schematicCollections`| A list of default schematics collections to use.                                              | `string[]`                                              |
+| `packageManager`      | The preferred package manager tool to use.                                                    | `npm` &verbar; `cnpm` &verbar; `pnpm` &verbar;`yarn`    |
+| `warnings`            | Control CLI specific console warnings.                                                        | [Warnings options](#warnings-options)                   |
 
 ### Analytics sharing options
 
@@ -113,7 +113,7 @@ Angularの生成 [schematics](guide/glossary#schematic) は、ファイルを追
 サブコマンドの schematic の名称を、`schematic-package:schematic-name` の形式で指定します;
 たとえば、コンポーネントを生成するための schematic は `@schematics/angular:component` です。
 
-プロジェクトおよびプロジェクトの一部を生成するために CLI によって使用されるデフォルトの schematics の JSON スキーマは、 [`@schematics/angular`](https://github.com/angular/angular-cli/blob/master/packages/schematics/angular/application/schema.json) パッケージに集められています。
+プロジェクトおよびプロジェクトの一部を生成するために CLI によって使用されるデフォルトの schematics の JSON スキーマは、 [`@schematics/angular`](https://github.com/angular/angular-cli/blob/main/packages/schematics/angular/application/schema.json) パッケージに集められています。
 スキーマは、`--help` の出力に示されているように、各 `ng generate` サブコマンドに対して CLI で使用可能なオプションを記述したものです。
 
 スキーマに示されているフィールドは、CLI サブコマンドオプションの許容される引数の値、およびデフォルトに対応しています。
@@ -133,15 +133,15 @@ Architect は、[ターゲット](guide/glossary#target)設定にしたがって
 ### デフォルトのArchitectビルダとターゲット {@a default-architect-builders-and-targets}
 
 Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使用するデフォルトのビルダを定義します。
-これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/builders.json) パッケージに収集されています。
+これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/builders.json) パッケージに収集されています。
 スキーマは、次のビルダについてオプションを構成します。
 
-* [app-shell](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
-* [browser](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
-* [dev-server](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
-* [extract-i18n](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
-* [karma](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
-* [server](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/builders/server/schema.json)
+* [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
+* [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
+* [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
+* [extract-i18n](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
+* [karma](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
+* [server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/server/schema.json)
 
 ### ビルダのターゲットの設定
 

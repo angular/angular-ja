@@ -31,7 +31,7 @@ Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) �
 * **Angularを最新に保つ**
 Angularは定期的にアップデートされており、最新版には以前のバージョンで見つかった
 脆弱性の修正が含まれていることがあります。セキュリティ関連の更新については
-[change log](https://github.com/angular/angular/blob/master/CHANGELOG.md) を確認してください。
+[change log](https://github.com/angular/angular/blob/main/CHANGELOG.md) を確認してください。
 
 * **独自のカスタマイズを行わない**
 独自のカスタマイズを行うと、アップデートによるセキュリティの修正や強化の恩恵を

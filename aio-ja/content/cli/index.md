@@ -10,7 +10,7 @@ Angular CLIのメジャーバージョンは、サポートされているAngula
 
 <code-example format="shell" language="shell">
 
-npm install -g &commat;angular/cli
+npm install -g &commat;angular/cli<aio-angular-dist-tag class="pln"></aio-angular-dist-tag>
 
 </code-example>
 

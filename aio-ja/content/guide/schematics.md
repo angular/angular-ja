@@ -115,7 +115,7 @@ ng update
 デフォルトでは、すべての依存関係の更新を強制しないことをお勧めします。
 最初に特定の依存関係を更新してください。
 
-`ng update` コマンドの動作の詳細については、[Update Command](https://github.com/angular/angular-cli/blob/master/docs/specifications/update.md) を参照してください。
+`ng update` コマンドの動作の詳細については、[Update Command](https://github.com/angular/angular-cli/blob/main/docs/specifications/update.md) を参照してください。
 
 </div>
 

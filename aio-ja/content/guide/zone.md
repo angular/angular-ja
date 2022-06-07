@@ -213,7 +213,7 @@ zone.run(() => {
 ```
 
 この新しいコンテキスト`zoneThis`は、`setTimeout()`コールバック関数から取得することができます。このコンテキストは、`setTimeout()`がスケジュールされているとき、同じものです。
-コンテキストを取得するには、[`Zone.current`](https://github.com/angular/angular/blob/master/packages/zone.js/lib/zone.ts)を呼び出すことができます。
+コンテキストを取得するには、[`Zone.current`](https://github.com/angular/angular/blob/main/packages/zone.js/lib/zone.ts)を呼び出すことができます。
 
 ## Zoneと非同期ライフサイクルフック
 
@@ -284,7 +284,7 @@ task state changed in the zone: { microTask: false,
   change: 'macroTask' }
 ```
 
-`Zone`のすべての機能は、[Zone.js](https://github.com/angular/angular/tree/master/packages/zone.js/README.md)というライブラリによって提供されています。
+`Zone`のすべての機能は、[Zone.js](https://github.com/angular/angular/tree/main/packages/zone.js/README.md)というライブラリによって提供されています。
 このライブラリは、モンキーパッチを介して非同期APIをインターセプトすることにより、それらの特徴を実装しています。
 モンキーパッチは、ソースコードを変更せずに、実行時に機能のデフォルトの動作を追加または変更するテクニックです。
 
@@ -299,7 +299,7 @@ Zone.jsは同期および非同期操作のすべての状態を監視できま�
 ### NgZone `run()` と `runOutsideOfAngular()`
 
 `Zone`は`setTimeout()`, `Promise.then()`, `addEventListener()`など、ほとんどの非同期APIを処理します。
-すべての一覧は、[Zone Module document](https://github.com/angular/angular/blob/master/packages/zone.js/MODULE.md)を参照してください。
+すべての一覧は、[Zone Module document](https://github.com/angular/angular/blob/main/packages/zone.js/MODULE.md)を参照してください。
 このため、これらの非同期APIについては、手動で変更検知をトリガーする必要はありません。
 
 Zoneが処理しないサードパーティのAPIもまだあります。
@@ -383,7 +383,7 @@ import `./zone-flags`;
 import 'zone.js';  // Included with Angular CLI.
 ```
 
-設定できるものの詳細については、[Zwone.js](https://github.com/angular/angular/tree/master/packages/zone.js)ドキュメントを参照してください。
+設定できるものの詳細については、[Zwone.js](https://github.com/angular/angular/tree/main/packages/zone.js)ドキュメントを参照してください。
 
 ### NoopZone
 

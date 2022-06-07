@@ -34,12 +34,14 @@ v10 - v13
 v11 - v14
 v12 - v15
 v13 - v16
+v14 - v17
 -->
 
 | Area                                | API or Feature                                                                                             | May be removed in        |
 |:---                                 |:---                                                                                                        |:---                      |
 | `@angular/common`                   | [`ReflectiveInjector`](#reflectiveinjector)                                                                | <!--  v8 --> v11         |
 | `@angular/common`                   | [`CurrencyPipe` - `DEFAULT_CURRENCY_CODE`](api/common/CurrencyPipe#currency-code-deprecation)              | <!--  v9 --> v11         |
+| `@angular/common`                   | [`NgComponentOutlet.ngComponentOutletNgModuleFactory`](#common)                                            | <!-- v14 --> v17         |
 | `@angular/common/http`              | [`XhrFactory`](api/common/http/XhrFactory)                                                                 | <!-- v12 --> v15         |
 | `@angular/common/http/testing`      | [`TestRequest` accepting `ErrorEvent` for error simulation](#testrequest-errorevent)                       | <!-- v13 --> v16         |
 | `@angular/core`                     | [`DefaultIterableDiffer`](#core)                                                                           | <!--  v7 --> v11         |
@@ -72,16 +74,17 @@ v13 - v16
 | `@angular/core`                     | [Factory-based signature of `ViewContainerRef.createComponent`](api/core/ViewContainerRef#createComponent) | <!-- v13 --> v15         |
 | `@angular/core/testing`             | [`TestBed.get`](#testing)                                                                                  | <!--  v9 --> v12         |
 | `@angular/core/testing`             | [`async`](#testing)                                                                                        | <!--  v9 --> v12         |
-| `@angular/core/testing`             | [`aotSummaries` argument in `TestBed.initTestEnvironment`](#testing)                                       | <!-- v13 --> v14         |
-| `@angular/core/testing`             | [`aotSummaries` field of the `TestModuleMetadata` type](#testing)                                          | <!-- v13 --> v14         |
 | `@angular/forms`                    | [`FormBuilder.group` legacy options parameter](api/forms/FormBuilder#group)                                | <!-- v11 --> v14         |
 | `@angular/platform-server`          | [`renderModuleFactory`](#platform-server)                                                                  | <!-- v13 --> v15         |
+| `@angular/router`                   | [`relativeLinkResolution`](#relativeLinkResolution)                                                        | <!-- v14 --> v16         |
+| `@angular/router`                     | [`resolver` argument in `RouterOutletContract.activateWith`](#router)                                                                        | <!-- v14 --> v16         |
+| `@angular/router`                     | [`resolver` field of the `OutletContext` class](#router)                                                                        | <!-- v14 --> v16         |
 | `@angular/service-worker`           | [`SwUpdate#activated`](api/service-worker/SwUpdate#activated)                                              | <!-- v13 --> v16         |
 | `@angular/service-worker`           | [`SwUpdate#available`](api/service-worker/SwUpdate#available)                                              | <!-- v13 --> v16         |
 | template syntax                     | [`/deep/`, `>>>`, and `::ng-deep`](#deep-component-style-selector)                                         | <!--  v7 --> unspecified |
 | template syntax                     | [`bind-`, `on-`, `bindon-`, and `ref-`](#bind-syntax)                                                      | <!-- v13 --> v15         |
 
-For information about Angular CDK and Angular Material deprecations, see the [changelog](https://github.com/angular/components/blob/master/CHANGELOG.md).
+For information about Angular CDK and Angular Material deprecations, see the [changelog](https://github.com/angular/components/blob/main/CHANGELOG.md).
 
 ## Deprecated APIs
 
@@ -145,8 +148,16 @@ In the [API reference section](api) of this site, deprecated APIs are indicated 
 |:---                                                                                                      |:---                                                 |:---                   |:---     |
 | [`TestBed.get`](api/core/testing/TestBed#get)                                                            | [`TestBed.inject`](api/core/testing/TestBed#inject) | v9                    | Same behavior, but type safe.                 |
 | [`async`](api/core/testing/async)                                                                        | [`waitForAsync`](api/core/testing/waitForAsync)     | v10                   | Same behavior, but rename to avoid confusion. |
-| [`aotSummaries` argument in `TestBed.initTestEnvironment`](api/core/testing/TestBed#inittestenvironment) | No replacement needed                               | v13                   | Summary files are unused in Ivy.              |
-| [`aotSummaries` field of the `TestModuleMetadata` type](api/core/testing/TestModuleMetadata)             | No replacement needed                               | v13                   | Summary files are unused in Ivy.              |
+
+<a id="router"></a>
+
+### &commat;angular/router
+
+| API                                        | Replacement                       | Deprecation announced | Details |
+|:---                                        |:---                               |:---                   |:---     |
+| [`resolver` argument in `RouterOutletContract.activateWith`](api/router/RouterOutletContract#activatewith) | No replacement needed | v14                   | Component factories are not required to create an instance of a component dynamically. Passing a factory resolver via `resolver` argument is no longer needed. |
+| [`resolver` field of the `OutletContext` class](api/router/OutletContext#resolver) | No replacement needed | v14                   | Component factories are not required to create an instance of a component dynamically. Passing a factory resolver via `resolver` class field is no longer needed. |
+
 
 <a id="platform-browser-dynamic"></a>
 
@@ -214,7 +225,7 @@ It also includes deprecated API usage scenarios or API combinations, to augment 
 
 Bazel builder and schematics were introduced in Angular Labs to let users try out Bazel without having to manage Bazel version and BUILD files.
 This feature has been deprecated.
-For more information, please refer to the [migration doc](https://github.com/angular/angular/blob/master/packages/bazel/docs/BAZEL_SCHEMATICS.md).
+For more information, please refer to the [migration doc](https://github.com/angular/angular/blob/main/packages/bazel/docs/BAZEL_SCHEMATICS.md).
 
 <a id="wtf"></a>
 
@@ -318,6 +329,8 @@ The `relativeLinkResolution` option is deprecated and being removed.
 In version 11, the default behavior was changed to the correct one.
 After `relativeLinkResolution` is removed, the correct behavior is always used without an option to use the broken behavior.
 
+A dev mode warning was added in v14 to warn if a created `UrlTree` relies on the `relativeLinkResolution: 'legacy'` option.
+
 <a id="loadChildren"></a>
 
 ### loadChildren string syntax
@@ -346,7 +359,7 @@ Prior to version 7, the `import()` syntax only works in JIT mode \(with view eng
 <div class="alert is-helpful">
 
 **Declaration syntax**: <br />
-It's important to follow the route declaration syntax `loadChildren: () => import('&hellip;').then(m => m.ModuleName)` to allow `ngc` to discover the lazy-loaded module and the associated `NgModule`.
+It's important to follow the route declaration syntax `loadChildren: () => import('...').then(m => m.ModuleName)` to allow `ngc` to discover the lazy-loaded module and the associated `NgModule`.
 You can find the complete list of allowed syntax constructs [here](https://github.com/angular/angular-cli/blob/a491b09800b493fe01301387fa9a025f7c7d4808/packages/ngtools/webpack/src/transformers/import_factory.ts#L104-L113).
 These restrictions will be relaxed with the release of Ivy since it'll no longer use `NgFactories`.
 
@@ -462,7 +475,7 @@ For full rationale and discussion behind this deprecation, see [RFC: Internet Ex
 
 <div class="alert is-helpful">
 
-**NOTE**: <br /> 
+**NOTE**: <br />
 IE11 will be supported in Angular v12 LTS releases through November 2022.
 
 </div>

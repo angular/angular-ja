@@ -109,13 +109,13 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 次の表は、サポート対象のAngularバージョンのステータスを示しています
 
 
-バージョン | 状態 | リリース     | アクティブの終了  | LTSの終了
-------- | ------ | ------------ | ------------ | ------------ 
-^13.0.0 | Active | Nov 04, 2021 | May 04, 2022 | May 04, 2023
-^12.0.0 | LTS    | May 12, 2021 | Nov 12, 2021 | Nov 12, 2022
-^11.0.0 | LTS    | Nov 11, 2020 | May 11, 2021 | May 11, 2022
+| バージョン | 状態 | リリース     | アクティブの終了  | LTSの終了|
+|:---     |:---    |:---        |:---         |:---        |
+| ^14.0.0 | Active | 2022-06-02 | 2022-12-02  | 2023-12-02 |
+| ^13.0.0 | Active | 2021-11-04 | 2022-06-02  | 2023-05-04 |
+| ^12.0.0 | LTS    | 2021-05-12 | 2021-11-12  | 2022-11-12 |
 
-Angularバージョン v2 から v10 のサポートは終了しました。
+Angularバージョン v2 から v11 のサポートは終了しました。
 
 ### LTS fixes
 
@@ -138,7 +138,7 @@ As a general rule, a fix is considered for an LTS version if it resolves one of:
 
 更新に十分な時間と明確なパスがあることを確認するための、非推奨化のポリシーはこちらです。
 
-* **告知:** [チェンジログ](https://github.com/angular/angular/blob/master/CHANGELOG.md "Angular change log") に廃止予定のAPIおよび機能をお知らせします。廃止予定のAPIは、 [ドキュメンテーション](api?status=deprecated) に取り消し線付きで記載されています。廃止予定を発表した場合は、推奨されるアップデートパスも発表します。便利になるように、 [非推奨リスト](guide/deprecations) には廃止予定のAPIと機能の要約が含まれています。
+* **告知:** [チェンジログ](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angular change log") に廃止予定のAPIおよび機能をお知らせします。廃止予定のAPIは、 [ドキュメンテーション](api?status=deprecated) に取り消し線付きで記載されています。廃止予定を発表した場合は、推奨されるアップデートパスも発表します。便利になるように、 [非推奨リスト](guide/deprecations) には廃止予定のAPIと機能の要約が含まれています。
 
 
 * **非推奨期間:** APIまたは機能が非推奨になっても、それは続く2つのメジャーリリースには引き続き存在します。その後、廃止予定のAPIおよび機能は削除の候補になります。廃止予定はどのリリースでも発表できますが、廃止予定のAPIまたは機能の削除はメジャーリリースでのみ発生します。廃止予定のAPIまたは機能が削除されるまで、LTSサポートポリシーにしたがって維持されます。つまり、重大な問題とセキュリティの問題のみが修正されます。
@@ -152,13 +152,24 @@ As a general rule, a fix is considered for an LTS version if it resolves one of:
 {@a public-api}
 ## パブリックAPI
 
-Angularは、多くのパッケージ、サブプロジェクト、ツールのコレクションです。プライベートAPIの偶発的な使用を防ぐために&mdash;ここで説明するプラクティスの対象を明確に理解できるように&mdash;私たちはパブリックAPIと見なされるものとそうでないものを明文化します。詳細については、[AngularのサポートされたパブリックAPI](https://github.com/angular/angular/blob/master/docs/PUBLIC_API.md "Supported Public API Surface of Angular")を参照してください。
+Angularは、多くのパッケージ、サブプロジェクト、ツールのコレクションです。プライベートAPIの偶発的な使用を防ぐために&mdash;ここで説明するプラクティスの対象を明確に理解できるように&mdash;私たちはパブリックAPIと見なされるものとそうでないものを明文化します。詳細については、[AngularのサポートされたパブリックAPI](https://github.com/angular/angular/blob/main/docs/PUBLIC_API.md "Supported Public API Surface of Angular")を参照してください。
 
 パブリックAPIのあらゆる変更は、上述ののバージョニング、サポート、および非推奨化ポリシーが適用されます。
 
-{@a labs}
-## Angular Labs
+<a id="developer-preview"></a>
 
-Angular Labsは、新機能を開発して迅速にイテレーションするためのイニシアチブです。Angular Labsは、Angularチームによる探索と実験のための安全な場所を提供します。
+## Developer Preview
 
-Angular Labsのプロジェクトはプロダクションで使用する準備ができておらず、プロダクションに持ち込むことを約束していません。このドキュメントで説明されているポリシーとプラクティスは、Angular Labsプロジェクトには適用されません。
+Occasionally we introduce new APIs under the label of "Developer Preview". These are APIs that are fully functional and polished, but that we are not ready to stabilize under our normal deprecation policy.
+
+This may be because we want to gather feedback from real applications before stabilization, or because the associated documentation or migration tooling is not fully complete.
+
+The policies and practices that are described in this document do not apply to APIs marked as Developer Preview. Such APIs can change at any time, even in new patch versions of the framework. Teams should decide for themselves whether the benefits of using Developer Preview APIs are worth the risk of breaking changes outside of our normal use of semantic versioning.
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

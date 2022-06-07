@@ -1,14 +1,14 @@
-# Prepare component for translation
+# 翻訳用コンポーネントの準備
 
-To prepare your project for translation, complete the following actions.
+プロジェクトを翻訳する準備には、次の作業を行います。
 
-*   Use the `i18n` attribute to mark text in component templates
-*   Use the `i18n-` attribute to mark attribute text strings in component templates
-*   Use the `$localize` tagged message string to mark text strings in component code
+*   `i18n`属性を使用して、コンポーネントテンプレート内のテキストをマークします。
+*   `i18n-`属性を使用して、コンポーネントテンプレート内の属性テキスト文字列をマークします。
+*   `$localize`タグ付きメッセージ文字列を使用して、コンポーネントコード内のテキスト文字列をマークします。
 
-## Mark text in component template
+## コンポーネントテンプレート内のテキストをマークする {@a mark-text-in-component-template}
 
-In a component template, the i18n metadata is the value of the `i18n` attribute.
+コンポーネントテンプレートでは、i18nメタデータは`i18n`属性の値となります。
 
 <code-example format="html" language="html">
 
@@ -16,42 +16,42 @@ In a component template, the i18n metadata is the value of the `i18n` attribute.
 
 </code-example>
 
-Use the `i18n` attribute to mark a static text message in your component templates for translation.
-Place it on every element tag that contains fixed text you want to translate.
+`i18n`属性を使用して、コンポーネントテンプレート内の静的テキストメッセージを翻訳用にマークします。
+翻訳したい固定テキストを含むすべての要素タグに配置してください。
 
 <div class="alert is-helpful">
 
-The `i18n` attribute is a custom attribute that the Angular tools and compilers recognize.
+`i18n`属性は、Angularのツールやコンパイラが認識するカスタム属性です。
 
 </div>
 
-### `i18n` example
+### `i18n` の例
 
-The following `<h1>` tag displays a simple English language greeting, "Hello i18n!".
+次の`<h1>`タグは、"Hello i18n！"という簡単な英語のあいさつを表示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="greeting"></code-example>
 
-To mark the greeting for translation, add the `i18n` attribute to the `<h1>` tag.
+あいさつを翻訳用にマークするには、`<h1>`タグに`i18n`属性を追加してください。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="i18n-attribute"></code-example>
 
-### Translate inline text without HTML element
+### HTML要素なしでインラインテキストを翻訳する
 
-Use the `<ng-container>` element to associate a translation behavior for specific text without changing the way text is displayed.
+`<ng-container>`要素を使うと、テキストの表示方法を変えずに、特定のテキストに翻訳動作を関連付けることができます。
 
 <div class="alert is-helpful">
 
-Each HTML element creates a new DOM element.
-To avoid creating a new DOM element, wrap the text in an `<ng-container>` element.
-The following example shows the `<ng-container>` element transformed into a non-displayed HTML comment.
+HTMLの各要素は、新しいDOM要素を作成します。
+新しいDOM要素を作らないためには、テキストを`<ng-container>`要素で囲みます。
+次の例では、`<ng-container>`要素が非表示のHTMLコメントに変換されています。
 
 <code-example path="i18n/src/app/app.component.html" region="i18n-ng-container"></code-example>
 
 </div>
 
-## Mark element attributes for translations
+## 要素の属性を翻訳用にマークする
 
-In a component template, the i18n metadata is the value of the `i18n-{attribute_name}` attribute.
+コンポーネントテンプレートでは、i18nメタデータは`i18n-{attribute_name}`属性の値です。
 
 <code-example format="html" language="html">
 
@@ -59,10 +59,10 @@ In a component template, the i18n metadata is the value of the `i18n-{attribute_
 
 </code-example>
 
-The attributes of HTML elements include text that should be translated along with the rest of the displayed text in the component template.
+HTML要素の属性には、コンポーネントテンプレートに表示されるテキストの残りと一緒に、翻訳されるべきテキストが含まれています。
 
-Use `i18n-{attribute_name}` with any attribute of any element and replace `{attribute_name}` with the name of the attribute.
-Use the following syntax to assign a meaning, description, and custom ID.
+`i18n-{attribute_name}`を任意の要素の任意の属性に使用し、`{attribute_name}`を属性名に置き換えます。
+意味、説明、カスタムID を割り当てるには、次の構文を使用します。
 
 <!--todo: replace with code-example -->
 
@@ -72,26 +72,26 @@ i18n-{attribute_name}="{meaning}|{description}&commat;&commat;{id}"
 
 </code-example>
 
-### `i18n-title` example
+### `i18n-title` の例
 
-To translate the title of an image, review this example.
-The following example displays an image with a `title` attribute.
+画像のタイトルを翻訳するには、この例を確認してください。
+次の例では、`title`属性をもつ画像を表示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="i18n-title"></code-example>
 
-To mark the title attribute for translation, complete the following action.
+title属性を翻訳対象としてマークするには、次の作業を行います。
 
-1.  Add the `i18n-title` attribute
+1.  `i18n-title`属性を追加する
 
-    The following example displays how to mark the `title` attribute on the `img` tag by adding `i18n-title`.
+    次の例は、`img`タグに`i18n-title`を付けて`title`属性をマークする方法を示しています。
 
     <code-example header="src/app/app.component.html" path="i18n/src/app/app.component.html" region="i18n-title-translate"></code-example>
 
-## Mark text in component code
+## コンポーネントコード内のテキストをマークする
 
-In component code, the translation source text and the metadata are surrounded by backtick \(<code>&#96;</code>\) characters.
+コンポーネントコードでは、翻訳原文とメタデータをバッククオート文字\(<code>&#96;</code>\)で囲みます。
 
-Use the [`$localize`][AioApiLocalizeInitLocalize] tagged message string to mark a string in your code for translation.
+[`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列を使用して、コード内の文字列を翻訳用にマークします。
 
 <!--todo: replace with code-example -->
 
@@ -101,7 +101,7 @@ Use the [`$localize`][AioApiLocalizeInitLocalize] tagged message string to mark 
 
 </code-example>
 
-The i18n metadata is surrounded by colon \(`:`\) characters and prepends the translation source text.
+i18nメタデータはコロン\(`:`\)で囲まれ、翻訳元テキストの前に付与されます。
 
 <!--todo: replace with code-example -->
 
@@ -111,9 +111,9 @@ The i18n metadata is surrounded by colon \(`:`\) characters and prepends the tra
 
 </code-example>
 
-### Include interpolated text
+### 補間テキストを含める
 
-Include [interpolations][AioGuideGlossaryInterpolation] in a [`$localize`][AioApiLocalizeInitLocalize] tagged message string.
+[`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列には[補間][AioGuideGlossaryInterpolation]を含むことができます。
 
 <!--todo: replace with code-example -->
 
@@ -123,7 +123,7 @@ Include [interpolations][AioGuideGlossaryInterpolation] in a [`$localize`][AioAp
 
 </code-example>
 
-### Name the interpolation placeholder
+### 補間プレースホルダーに名前をつける
 
 <code-example format="typescript" language="typescript">
 
@@ -131,7 +131,7 @@ Include [interpolations][AioGuideGlossaryInterpolation] in a [`$localize`][AioAp
 
 </code-example>
 
-## i18n metadata for translation
+## 翻訳用i18nメタデータ
 
 <!--todo: replace with code-example -->
 
@@ -141,27 +141,27 @@ Include [interpolations][AioGuideGlossaryInterpolation] in a [`$localize`][AioAp
 
 </code-example>
 
-The following parameters provide context and additional information to reduce confusion for your translator.
+次のパラメータは、コンテキストと追加情報を提供し、翻訳者の混乱を軽減します。
 
-| Metadata parameter | Details                                                               |
+| メタデータパラメータ | 詳細                                                               |
 |:---                |:---                                                                   |
-| Custom ID          | Provide a custom identifier                                           |
-| Description        | Provide additional information or context                             |
-| Meaning            | Provide the meaning or intent of the text within the specific context |
+| Custom ID          | カスタム識別子を提供します                                           |
+| Description        | 追加情報またはコンテキストを提供します                             |
+| Meaning            | 特定の文脈の中でテキストの意味や意図を提供します |
 
-For additional information about custom IDs, see [Manage marked text with custom IDs][AioGuideI18nOptionalManageMarkedText].
+カスタム識別子について詳しくは、[カスタム識別子でマークされたテキストを管理する][AioGuideI18nOptionalManageMarkedText]を参照してください。
 
-### Add helpful descriptions and meanings
+### 役立つ説明や意味を追加する {@a add-helpful-descriptions-and-meanings}
 
-To translate a text message accurately, provide additional information or context for the translator.
+テキストメッセージを正確に翻訳するためには、翻訳者へ追加情報や文脈を提供する必要があります。
 
-Add a *description* of the text message as the value of the `i18n` attribute or [`$localize`][AioApiLocalizeInitLocalize] tagged message string.
+`i18n`属性または[`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列の値として、テキストメッセージの*説明*を追加します。
 
-The following example shows the value of the `i18n` attribute.
+次の例は、`i18n`属性の値を示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="i18n-attribute-desc"></code-example>
 
-The following example shows the value of the [`$localize`][AioApiLocalizeInitLocalize] tagged message string with a description.
+次の例は、[`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列の値を説明とともに示しています。
 
 <!--todo: replace with code-example -->
 
@@ -171,20 +171,20 @@ The following example shows the value of the [`$localize`][AioApiLocalizeInitLoc
 
 </code-example>
 
-The translator may also need to know the meaning or intent of the text message within this particular application context, in order to translate it the same way as other text with the same meaning.
-Start the `i18n` attribute value with the *meaning* and separate it from the *description* with the `|` character: `{meaning}|{description}`.
+翻訳者は、同じ意味をもつ他のテキストと同じように翻訳するために、特定のアプリケーションコンテキストにおけるテキストメッセージの意味または意図を知る必要があります。
+`i18n`属性値を*意味*から始め、*説明*と`｜`文字で区切ります。`{meaning}|{description}`
 
-#### `h1` example
+#### `h1`の例
 
-For example, you may want to specify that the `<h1>` tag is a site header that you need translated the same way, whether it is used as a header or referenced in another section of text.
+たとえば、`<h1>`タグはサイトのヘッダーであり、それがヘッダーとして使われても、他のセクションのテキストで参照されても、同じように翻訳する必要がある、と指定することができます。
 
-The following example shows how to specify that the `<h1>` tag must be translated as a header or referenced elsewhere.
+次の例では、`<h1>`タグをヘッダーとして翻訳するか、他の場所から参照するか指定する方法を示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/doc-files/app.component.html" region="i18n-attribute-meaning"></code-example>
 
-The result is any text marked with `site header`, as the *meaning* is translated exactly the same way.
+その結果、`site header`でマークされたテキストは、*意味*がまったく同じように翻訳されます。
 
-The following code example shows the value of the [`$localize`][AioApiLocalizeInitLocalize] tagged message string with a meaning and a description.
+次のコード例では、[`$localize`][AioApiLocalizeInitLocalize]タグ付きのメッセージ文字列の値を意味と説明で示しています。
 
 <!--todo: replace with code-example -->
 
@@ -197,37 +197,37 @@ The following code example shows the value of the [`$localize`][AioApiLocalizeIn
 <div class="callout is-helpful">
 
 <header>
-<a name="how-meanings-control-text-extraction-and-merges"></a> How meanings control text extraction and merges
+<a name="how-meanings-control-text-extraction-and-merges"></a> テキスト抽出と結合を制御する方法
 </header>
 
-The Angular extraction tool generates a translation unit entry for each `i18n` attribute in a template.
-The Angular extraction tool assigns each translation unit a unique ID based on the *meaning* and *description*.
+Angularの抽出ツールは、テンプレート内の`i18n`属性ごとに翻訳単位エントリを生成します。
+Angularの抽出ツールは、*意味*と*説明*をもとに各翻訳ユニットに一意のIDを付与します。
 
 <div class="alert is-helpful">
 
-For more information about the Angular extraction tool, see [Work with translation files][AioGuideI18nCommonTranslationFiles].
+Angularの抽出ツールの詳細については、[翻訳ファイルでの作業][AioGuideI18nCommonTranslationFiles]を参照してください。
 
 </div>
 
-The same text elements with different *meanings* are extracted with different IDs.
-For example, if the word "right" uses the following two definitions in two different locations, the word is translated differently and merged back into the application as different translation entries.
+同じテキスト要素で*意味*の異なるものは、異なるIDで抽出されます。
+たとえば、"right"という単語が次の2つの定義で2か所で使われている場合、その単語は異なる翻訳を行い、異なる翻訳エントリとしてアプリケーションにマージされます。
 
 *   `correct` as in "you are right"
 *   `direction` as in "turn right"
 
-If the same text elements meet the following conditions, the text elements are extracted only once and use the same ID.
+同じテキスト要素が次の条件を満たす場合、テキスト要素は一度だけ抽出され、同じIDが使用されます。
 
-*   Same meaning or definition
-*   Different descriptions
+*   同じ意味または定義
+*   異なる説明
 
-That one translation entry is merged back into the application wherever the same text elements appear.
+1つの翻訳エントリは、同じテキスト要素が現れる場所であれば、アプリケーションに再びマージされます。
 
 </div>
 
-## ICU expressions
+## ICU式
 
-ICU expressions help you mark alternate text in component templates to meet conditions.
-An ICU expression includes a component property, an ICU clause, and the case statements surrounded by open curly brace \(`{`\) and close curly brace \(`}`\) characters.
+ICU式は、条件を満たすためにコンポーネントテンプレート内の代替テキストをマークするのに役立ちます。
+ICU式は、コンポーネントプロパティ、ICU節、および開中括弧\(`{`\)と閉中括弧\(`}`\)で囲まれたcase文からなります。
 
 <!--todo: replace with code-example -->
 
@@ -237,27 +237,27 @@ An ICU expression includes a component property, an ICU clause, and the case sta
 
 </code-example>
 
-The component property defines the variable
-An ICU clause defines the type of conditional text.
+コンポーネントプロパティは、変数を定義します。
+ICU節は、条件文のタイプを定義します。
 
-| ICU clause                                                              | Details                                                             |
+| ICU節                                                              | 詳細                                                            |
 |:---                                                                     |:---                                                                 |
-| [`plural`][AioGuideI18nCommonPrepareMarkPlurals]                        | Mark the use of plural numbers                                      |
-| [`select`][AioGuideI18nCommonPrepareMarkAlternatesAndNestedExpressions] | Mark choices for alternate text based on your defined string values |
+| [`plural`][AioGuideI18nCommonPrepareMarkPlurals]                        | 複数形の使用をマークします                                      |
+| [`select`][AioGuideI18nCommonPrepareMarkAlternatesAndNestedExpressions] | 定義された文字列値に基づいて、代替テキストの選択肢をマークします |
 
-To simplify translation, use International Components for Unicode clauses \(ICU clauses\) with regular expressions.
+翻訳を簡単にするためには、International Components for Unicode clauses \(ICU clauses\)を正規表現で使用します。
 
 <div class="alert is-helpful">
 
-The ICU clauses adhere to the [ICU Message Format][GithubUnicodeOrgIcuUserguideFormatParseMessages] specified in the [CLDR pluralization rules][UnicodeCldrIndexCldrSpecPluralRules].
+ICUの各節は、[CLDRの複数形規則][UnicodeCldrIndexCldrSpecPluralRules]で規定された[ICUメッセージフォーマット][GithubUnicodeOrgIcuUserguideFormatParseMessages]に準拠します。
 
 </div>
 
-### Mark plurals
+### 複数形をマークする {@a mark-plurals}
 
-Different languages have different pluralization rules that increase the difficulty of translation.
-Because other locales express cardinality differently, you may need to set pluralization categories that do not align with English.
-Use the `plural` clause to mark expressions that may not be meaningful if translated word-for-word.
+言語によって複数形のルールが異なるため、翻訳の難易度が高くなります。
+他のロケールでは基数の表現が異なるため、英語と一致しない複数形カテゴリーを設定した方がよい場合があります。
+一語一語の翻訳では意味をなさないような表現には、`plural`節を使用します。
 
 <!--todo: replace with code-example -->
 
@@ -267,7 +267,7 @@ Use the `plural` clause to mark expressions that may not be meaningful if transl
 
 </code-example>
 
-After the pluralization category, enter the default text \(English\) surrounded by open curly brace \(`{`\) and close curly brace \(`}`\) characters.
+複数形カテゴリーの後に、開中括弧\(`{`\)と閉中括弧\(`}`\)で囲まれたデフォルトテキスト\(English\)を入力します。
 
 <!--todo: replace with code-example -->
 
@@ -277,18 +277,18 @@ pluralization_category { }
 
 </code-example>
 
-The following pluralization categories are available for English and may change based on the locale.
+次の複数形カテゴリーは英語で利用可能であり、ロケールによって変更される場合があります。
 
-| Pluralization category | Details                    | Example                    |
+| 複数形カテゴリー | 詳細                    | 例                    |
 |:---                    |:---                        |:---                        |
-| `zero`                 | Quantity is zero           | `=0 { }` <br /> `zero { }` |
-| `one`                  | Quantity is 1              | `=1 { }` <br /> `one { }`  |
-| `two`                  | Quantity is 2              | `=2 { }` <br /> `two { }`  |
-| `few`                  | Quantity is 2 or more      | `few { }`                  |
-| `many`                 | Quantity is a large number | `many { }`                 |
-| `other`                | The default quantity       | `other { }`                |
+| `zero`                 | 数量はゼロ           | `=0 { }` <br /> `zero { }` |
+| `one`                  | 数量は1              | `=1 { }` <br /> `one { }`  |
+| `two`                  | 数量は2              | `=2 { }` <br /> `two { }`  |
+| `few`                  | 数量は2以上      | `few { }`                  |
+| `many`                 | 数量は大きな数字 | `many { }`                 |
+| `other`                | デフォルトの数量       | `other { }`                |
 
-If none of the pluralization categories match, Angular uses `other` to match the standard fallback for a missing category.
+複数形のカテゴリーがどれも一致しない場合、Angularは`other`を使用して、カテゴリーが見つからない場合の標準的なフォールバックに一致させます。
 
 <!--todo: replace with code-example -->
 
@@ -300,7 +300,7 @@ other { default_quantity }
 
 <div class="alert is-helpful">
 
-For more information about pluralization categories, see [Choosing plural category names][UnicodeCldrIndexCldrSpecPluralRulesTocChoosingPluralCategoryNames] in the [CLDR - Unicode Common Locale Data Repository][UnicodeCldrMain].
+複数形カテゴリーの詳細については、[CLDR - Unicode Common Locale Data Repository][UnicodeCldrMain]の[Choosing plural category names][UnicodeCldrIndexCldrSpecPluralRulesTocChoosingPluralCategoryNames]をご覧ください。
 
 </div>
 
@@ -308,23 +308,23 @@ For more information about pluralization categories, see [Choosing plural catego
 
 <a name="background-locales-may-not-support-some-pluralization-categories"></a>
 
-<header>Background: Locales may not support some pluralization categories</header>
+<header>背景: ロケールはいくつかの複数形カテゴリをサポートしません</header>
 
-Many locales don't support some of the pluralization categories.
-The default locale \(`en-US`\) uses a very simple `plural()` function that doesn't support the `few` pluralization category.
-Another locale with a simple `plural()` function is `es`.
-The following code example shows the [en-US `plural()`][GithubAngularAngularBlobEcffc3557fe1bff9718c01277498e877ca44588dPackagesCoreSrcI18nLocaleEnTsL14L18] function.
+多くのロケールでは、複数形カテゴリーのいくつかをサポートしていません。
+デフォルトのロケール \(`en-US`\)は非常に単純な`plural()`関数を使用しており、`few`複数形カテゴリーをサポートしていません。
+単純な`plural()`関数をもつ別のロケールとして`es`があります。
+次のコード例では、[en-US `plural()`][GithubAngularAngularBlobEcffc3557fe1bff9718c01277498e877ca44588dPackagesCoreSrcI18nLocaleEnTsL14L18]関数を示しています。
 
 <code-example path="i18n/doc-files/locale_plural_function.ts" class="no-box" hideCopy></code-example>
 
-The `plural()` function only returns 1 \(`one`\) or 5 \(`other`\).
-The `few` category never matches.
+`plural()`関数は 1\(`one`\)か5\(`other`\)を返すだけです。
+`few`カテゴリーは決してマッチしません。
 
 </div>
 
-#### `minutes` example
+#### `minutes` の例
 
-If you want to display the following phrase in English, where `x` is a number.
+`x`が数字の次のフレーズを英語で表示したい場合。
 
 <!--todo: replace output code-example with screen capture image --->
 
@@ -334,7 +334,7 @@ updated x minutes ago
 
 </code-example>
 
-And you also want to display the following phrases based on the cardinality of `x`.
+または、`x`の基数に応じて次のようなフレーズを表示させたい場合。
 
 <!--todo: replace output code-example with screen capture image --->
 
@@ -352,26 +352,26 @@ updated one minute ago
 
 </code-example>
 
-Use HTML markup and [interpolations][AioGuideGlossaryInterpolation].
-The following code example shows how to use the `plural` clause to express the previous three situations in a `<span>` element.
+HTMLマークアップと[補間][AioGuideGlossaryInterpolation]を利用します。
+次のコード例は、先の3つの状況を`<span>`要素で表現するために、`plural`節を使用する方法を示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/src/app/app.component.html" region="i18n-plural"></code-example>
 
-Review the following details in the previous code example.
+先ほどのコード例で、次の内容を確認してください。
 
-| Parameters                        | Details|
+| パラメータ                        | 詳細|
 |:---                               |:---    |
-| `minutes`                         | The first parameter specifies the component property is `minutes` and determines the number of minutes.               |
-| `plural`                          | The second parameter specifies the ICU clause is `plural`.                                                            |
-| `=0 {just now}`                   | For zero minutes, the pluralization category is `=0`. The value is `just now`.                                        |
-| `=1 {one minute}`                 | For one minute, the pluralization category is `=1`. The value is `one minute`.                                        |
-| `other {{{minutes}} minutes ago}` | For any unmatched cardinality, the default pluralization category is `other`. The value is `{{minutes}} minutes ago`. |
+| `minutes`                         | 最初のパラメータはコンポーネントプロパティに`minutes`を指定し、分数を決定します。               |
+| `plural`                          | 第2パラメータは、ICU節が`plural`であることを指定します。                                                            |
+| `=0 {just now}`                   | 0分の場合、複数形カテゴリーは`=0`となります。 値は`just now`です。                                        |
+| `=1 {one minute}`                 | 1分の場合、複数形カテゴリーは`=1`となります。 値は`one minute`です。                                        |
+| `other {{{minutes}} minutes ago}` | 基数が一致しない場合、デフォルトの複数形カテゴリーは`other`となります。値は`{{minutes}} minutes ago`です。 |
 
-`{{minutes}}` is an [interpolation][AioGuideGlossaryInterpolation].
+`{{minutes}}` は[補間][AioGuideGlossaryInterpolation]です。
 
-### Mark alternates and nested expressions
+### 選択肢とネストされた式をマークする {@a mark-alternates-and-nested-expressions}
 
-The `select` clause marks choices for alternate text based on your defined string values.
+`select`節は、定義した文字列値に基づいて代替テキストの選択肢をマークします。
 
 <!--todo: replace with code-example -->
 
@@ -381,9 +381,9 @@ The `select` clause marks choices for alternate text based on your defined strin
 
 </code-example>
 
-Translate all of the alternates to display alternate text based on the value of a variable.
+変数の値に基づいて代替テキストを表示するために、すべての選択肢を翻訳します。
 
-After the selection category, enter the text \(English\) surrounded by open curly brace \(`{`\) and close curly brace \(`}`\) characters.
+選択カテゴリーの後に、開波括弧\(`{`\)と閉波括弧\(`}`\)で囲まれたテキスト（英語）を入力してください。
 
 <!--todo: replace with code-example -->
 
@@ -393,9 +393,9 @@ selection_category { text }
 
 </code-example>
 
-Different locales have different grammatical constructions that increase the difficulty of translation.
-Use HTML markup.
-If none of the selection categories match, Angular uses `other` to match the standard fallback for a missing category.
+ロケールが異なれば文法構造も異なるため、翻訳の難易度は高くなります。
+HTMLマークアップを使用してください.
+どの選択カテゴリーも一致しない場合、Angularは欠落したカテゴリーの標準的なフォールバックとして`other`を使用します。
 
 <!--todo: replace with code-example -->
 
@@ -405,9 +405,9 @@ other { default_value }
 
 </code-example>
 
-#### `gender` example
+#### `gender`の例
 
-If you want to display the following phrase in English.
+次のフレーズを英語で表示したい場合。
 
 <!--todo: replace output code-example with screen capture image --->
 
@@ -417,7 +417,7 @@ The author is other
 
 </code-example>
 
-And you also want to display the following phrases based on the `gender` property of the component.
+そして、コンポーネントの`gender`プロパティに基づいて、次のフレーズも表示したい場合。
 
 <!--todo: replace output code-example with screen capture image --->
 
@@ -435,31 +435,31 @@ The author is male
 
 </code-example>
 
-The following code example shows how to bind the `gender` property of the component and use the `select` clause to express the previous three situations in a `<span>` element.
+次のコード例では、コンポーネントの`gender`プロパティをバインドし、`select`節を使用して、先の3つの状況を`<span>`要素で表現しています。
 
-The `gender` property binds the outputs to each of following string values.
+`gender`プロパティは、次のそれぞれの文字列と出力をバインドします。
 
-| Value  | English value |
+| 値  | 英語の値 |
 |:---    |:---           |
 | female | `female`      |
 | male   | `male`        |
 | other  | `other`       |
 
-The `select` clause maps the values to the appropriate translations.
-The following code example shows `gender` property used with the select clause.
+`select`節は、値を適切な翻訳にマッピングします。
+次のコード例は、`select`節で使用される`gender`プロパティを示しています。
 
 <code-example header="src/app/app.component.html" path="i18n/src/app/app.component.html" region="i18n-select"></code-example>
 
-#### `gender` and `minutes` example
+#### `gender`と`minutes`の例
 
-Combine different clauses together, such as the `plural` and `select` clauses.
-The following code example shows nested clauses based on the `gender` and `minutes` examples.
+`plural`節と`select`節など、異なる節を一緒に組み合わせてください。
+次のコード例では、`gender`と`minutes`の例に基づいた、ネストされた節を示します。
 
 <code-example header="src/app/app.component.html" path="i18n/src/app/app.component.html" region="i18n-nested"></code-example>
 
-## What's next
+## 次のステップ
 
-*   [Work with translation files][AioGuideI18nCommonTranslationFiles]
+*   [翻訳ファイルの作業][AioGuideI18nCommonTranslationFiles]
 
 <!-- links -->
 

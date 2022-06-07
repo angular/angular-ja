@@ -503,42 +503,48 @@
           ]
         },
         {
-          "title": "Internationalization",
+          "title": "国際化",
           "tooltip": "Translate the text of your application text into multiple languages",
           "children": [
             {
               "url": "guide/i18n-overview",
-              "title": "Overview",
-              "tooltip": "Introduces the Angular internationalization and lists topics that teach you how to localize your applications"
+              "title": "概要",
+              "tooltip": "Introduces the Angular internationalization and lists topics that teach you how to localize your applications",
+              "translated": true
             },
             {
-              "title": "Common internationalization tasks",
+              "title": "国際化の共通タスク",
               "tooltip": "Task-based content on many of the common tasks associated with Angular internationalization, such as adding the locale package and formatting data for a locale",
               "children": [
                 {
                   "url": "guide/i18n-common-overview",
-                  "title": "Overview",
-                  "tooltip": "Introduces the common Angular internationalization tasks and lists topics that teach you how to localize your applications"
+                  "title": "概要",
+                  "tooltip": "Introduces the common Angular internationalization tasks and lists topics that teach you how to localize your applications",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-add-package",
-                  "title": "Add the localize package",
-                  "tooltip": "Add the Angular localize package"
+                  "title": "ローカライズパッケージの追加",
+                  "tooltip": "Add the Angular localize package",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-locale-id",
-                  "title": "Refer to locales by ID",
-                  "tooltip": "Reference using locale IDs"
+                  "title": "IDでロケールを参照",
+                  "tooltip": "Reference using locale IDs",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-format-data-locale",
-                  "title": "Format data based on locale",
-                  "tooltip": "Format data based on locale"
+                  "title": "ロケールに応じたデータフォーマット",
+                  "tooltip": "Format data based on locale",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-prepare",
                   "title": "Prepare component for translation",
-                  "tooltip": "Prepare component for translation"
+                  "tooltip": "Prepare component for translation",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-translation-files",

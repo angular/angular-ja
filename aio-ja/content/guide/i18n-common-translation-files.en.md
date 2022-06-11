@@ -1,10 +1,10 @@
-# 翻訳ファイルの作業
+# Work with translation files
 
-翻訳用のコンポーネントを準備したら、[`extract-i18n`][AioCliExtractI18n] [Angular CLI][AioCliMain]を使用して、コンポーネント内のマークされたテキストを*ソース言語ファイル*に抽出します。
+After you prepare a component for translation, use the [`extract-i18n`][AioCliExtractI18n] [Angular CLI][AioCliMain] command to extract the marked text in the component into a *source language* file.
 
-マークされたテキストには、[翻訳用コンポーネントの準備][AioGuideI18nCommonPrepare]で説明したように、`i18n`でマークされたテキスト、`i18n`*属性*でマークされた属性、および`$localize`でタグ付けされたテキストが含まれます。
+The marked text includes text marked with `i18n`, attributes marked with `i18n-`*attribute*, and text tagged with `$localize` as described in [Prepare templates for translations][AioGuideI18nCommonPrepare].
 
-次の手順で、プロジェクトの翻訳ファイルを作成、更新します。
+Complete the following steps to create and update translation files for your project.
 
 1.  [Extract the source language file][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
     1.  Optionally, change the location, format, and name.

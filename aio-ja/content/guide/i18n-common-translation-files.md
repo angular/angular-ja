@@ -1,21 +1,21 @@
 # 翻訳ファイルの作業
 
-翻訳用のコンポーネントを準備したら、[`extract-i18n`][AioCliExtractI18n] [Angular CLI][AioCliMain]を使用して、コンポーネント内のマークされたテキストを*ソース言語ファイル*に抽出します。
+翻訳用のコンポーネントを準備したら、[`extract-i18n`][AioCliExtractI18n] [Angular CLI][AioCliMain]を使用して、コンポーネント内のマークされたテキストを*ソース言語*ファイルに抽出します。
 
 マークされたテキストには、[翻訳用コンポーネントの準備][AioGuideI18nCommonPrepare]で説明したように、`i18n`でマークされたテキスト、`i18n`*属性*でマークされた属性、および`$localize`でタグ付けされたテキストが含まれます。
 
 次の手順で、プロジェクトの翻訳ファイルを作成、更新します。
 
-1.  [Extract the source language file][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
-    1.  Optionally, change the location, format, and name.
-1.  Copy the source language file to [create a translation file for each language][AioGuideI18nCommonTranslationFilesCreateATranslationFileForEachLanguage].
+1.  [ソース言語ファイルを抽出する]。[AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
+    1.  オプションで、ロケーション、フォーマット、名前を変更します。
+1.  ソース言語ファイルをコピーして、[各言語の翻訳ファイルを作成する][AioGuideI18nCommonTranslationFilesCreateATranslationFileForEachLanguage]。
 1.  [Translate each translation file][AioGuideI18nCommonTranslationFilesTranslateEachTranslationFile].
 1.  Translate plurals and alternate expressions separately.
     1.  [Translate plurals][AioGuideI18nCommonTranslationFilesTranslatePlurals].
     1.  [Translate alternate expressions][AioGuideI18nCommonTranslationFilesTranslateAlternateExpressions].
     1.  [Translate nested expressions][AioGuideI18nCommonTranslationFilesTranslateNestedExpressions].
 
-## Extract the source language file
+## ソース言語ファイルを抽出する
 
 To extract the source language file, complete the following actions.
 
@@ -82,11 +82,11 @@ The following example demonstrates naming the output file.
 
 <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-out-file"></code-example>
 
-## Create a translation file for each language
+## 各言語の翻訳ファイルを作成する
 
 To create a translation file for a locale or language, complete the following actions.
 
-1.  [Extract the source language file][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
+1.  [ソース言語ファイルを抽出する][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
 1.  Make a copy of the source language file to create a *translation* file for each language.
 1.  Rename the *translation* file to add the locale.
 

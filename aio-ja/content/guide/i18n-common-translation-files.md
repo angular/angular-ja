@@ -6,14 +6,14 @@
 
 次の手順で、プロジェクトの翻訳ファイルを作成、更新します。
 
-1.  [ソース言語ファイルを抽出する]。[AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
+1.  [ソース言語ファイルを抽出する][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile]。
     1.  オプションで、ロケーション、フォーマット、名前を変更します。
 1.  ソース言語ファイルをコピーして、[各言語の翻訳ファイルを作成する][AioGuideI18nCommonTranslationFilesCreateATranslationFileForEachLanguage]。
-1.  [Translate each translation file][AioGuideI18nCommonTranslationFilesTranslateEachTranslationFile].
-1.  Translate plurals and alternate expressions separately.
-    1.  [Translate plurals][AioGuideI18nCommonTranslationFilesTranslatePlurals].
-    1.  [Translate alternate expressions][AioGuideI18nCommonTranslationFilesTranslateAlternateExpressions].
-    1.  [Translate nested expressions][AioGuideI18nCommonTranslationFilesTranslateNestedExpressions].
+1.  [各翻訳ファイルを翻訳する][AioGuideI18nCommonTranslationFilesTranslateEachTranslationFile]。
+1.  複数形と代替表現を別々に翻訳する。
+    1.  [複数形を翻訳する][AioGuideI18nCommonTranslationFilesTranslatePlurals]。
+    1.  [代替表現を翻訳する][AioGuideI18nCommonTranslationFilesTranslateAlternateExpressions]。
+    1.  [ネストされた式を翻訳する][AioGuideI18nCommonTranslationFilesTranslateNestedExpressions]。
 
 ## ソース言語ファイルを抽出する
 
@@ -118,7 +118,7 @@ For example, to create a French translation file, complete the following actions
 1.  Move the `fr` translation file to the `src/locale` directory.
 1.  Send the `fr` translation file to the translator.
 
-## Translate each translation file
+## 各翻訳ファイルを翻訳する
 
 Unless you are fluent in the language and have the time to edit translations, you will likely complete the following steps.
 
@@ -160,7 +160,7 @@ The following actions describe the translation process for French.
 
     </div>
 
-## Translate plurals
+## 複数形を翻訳する
 
 Add or remove plural cases as needed for each language.
 
@@ -182,7 +182,7 @@ The following example displays the way to translate.
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-plural"></code-example>
 
-## Translate alternate expressions
+## 代替表現を翻訳する
 
 Angular also extracts alternate `select` ICU expressions as separate translation units.
 
@@ -212,7 +212,7 @@ The following example displays both translation units after translation is compl
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-select"></code-example>
 
-## Translate nested expressions
+## ネストされた式を翻訳する
 
 Angular treats a nested expression in the same manner as an alternate expression.
 Angular extracts the expression into two translation units.

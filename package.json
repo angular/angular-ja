@@ -19,7 +19,7 @@
     "~~textlint": "textlint 'aio-ja/**/!(*.en).md'"
   },
   "devDependencies": {
-    "glob": "^7.1.2",
+    "glob": "^8.0.3",
     "prh-rules": "prh/rules",
     "textlint": "^11.0.0",
     "textlint-filter-rule-comments": "^1.2.2",

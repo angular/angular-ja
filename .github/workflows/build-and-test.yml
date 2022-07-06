@@ -5,6 +5,9 @@ name: build-and-test
 
 on: [pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest

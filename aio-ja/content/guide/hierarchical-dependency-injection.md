@@ -44,9 +44,9 @@ Angularには2つのインジェクター階層があります。
 `@NgModule()`、または`root`を参照します。
 * `@NgModule()`の`providers`配列を使用します。
 
-<div class="is-helpful alert">
+<div class="callout is-helpful">
 
-<h4>ツリーシェイキングと<code>@Injectable()</code></h4>
+<header>ツリーシェイキングと &commat;Injectable()</header>
 
 `@Injectable()`の`providedIn`プロパティを使用することは、
 `@NgModule()`の`providers`
@@ -139,9 +139,9 @@ Routerが、子`ModuleInjector`を作成するように、
 各自のサービスですべてのプロバイダーを`root`に登録したかにかかわらず、
 すべての要求はルートインジェクターに転送されます。
 
-<div class="alert is-helpful">
+<div class="callout is-helpful">
 
-<h4><code>@Injectable()</code> vs. <code>@NgModule()</code></h4>
+<header>&commat;Injectable() vs. &commat;NgModule()</header>
 
 `AppModule`の`@NgModule()`でアプリケーション全体のプロバイダーを設定すると、
 `@Injectable()`メタデータで`root`用に設定されたプロバイダーをオーバーライドします。
@@ -1100,8 +1100,7 @@ export class ChildComponent {
 たとえば、納税申告書アプリケーションでは、作成者は複数の納税申告書を作成し、
 1日を通して納税申告書を切り替えることができます。
 
-このガイドでは、そのシナリオを Tour of Heroes のテーマの例で説明します。
-スーパーヒーローのリストを表示する外側の`HeroListComponent`を想像してください。
+そのシナリオを実証するために、スーパーヒーローのリストを表示する外側の `HeroListComponent` を想像してみましょう。
 
 ヒーローの納税申告書を開くために、作成者はヒーローの名前をクリックします。これにより、その申告書を編集するためのコンポーネントが開きます。
 選択された各ヒーローの納税申告書は個々のコンポーネントで開き、かつ複数の申告書を同時に開くことができます。
@@ -1171,34 +1170,45 @@ _編集中の納税申告書_は、ゲッターとセッターで実装されて
 
 別のレベルでサービスを再提供するもう1つの理由は、コンポーネントツリーのより深いところでそのサービスを_より特殊化した_実装で置き換えることです。
 
-いくつかのサービスに依存する自動車コンポーネントについて考えてみましょう。
-ルートインジェクター(Aとマークされている)に`CarService`、
-`EngineService`、および`TiresService`という_汎用的_なプロバイダーを設定したとします。
+For example, consider a `Car` component that includes tire service information and depends on other services to provide more details about the car.
 
-この3つの汎用サービスから構築された、自動車を表示する自動車コンポーネント(A)を作成します。
+The root injector, marked as \(A\), uses *generic* providers for details about `CarService` and `EngineService`.
 
-それから、コンポーネント(B)で行われていることに適した特殊な機能をもつ、
-`CarService`と`EngineService`用の独自の_専用_プロバイダーを定義する子コンポーネント(B)を作成します。
+1. `Car` component \(A\).  Component \(A\) displays tire service data about a car and specifies generic services to provide more information about the car.
 
-コンポーネント(B)は、`CarService`の_さらに特殊化した_プロバイダーを定義する別のコンポーネント(C)の親でもあります。
+2. Child component \(B\). Component \(B\) defines its own, *specialized* providers for `CarService` and `EngineService` that have special capabilities suitable for what's going on in component \(B\).
+
+3. Child component \(C\) as a childe of Component \(B\). Component \(C\) defines its own, even *more specialized* provider for `CarService`.
 
 
 <div class="lightbox">
+
   <img src="generated/images/guide/dependency-injection/car-components.png" alt="car components">
+
 </div>
 
 舞台裏では、各コンポーネントは、そのコンポーネント自体に対して定義された0、1、または複数のプロバイダーを使用して各自のインジェクターを設定します。
 
-もっとも深いコンポーネント(C)で`Car`インスタンスを解決するとき、
-そのインジェクターは`Car`インスタンスをインジェクター(C)、`Engine`インスタンスをインジェクター(B)、
-`Tires`インスタンスをルートインジェクター(A)から解決し取り出します。
+When you resolve an instance of `Car` at the deepest component \(C\), its injector produces: 
 
+* An instance of `Car` resolved by injector \(C\)
+* An `Engine` resolved by injector \(B\)
+* Its `Tires` resolved by the root injector \(A\).
 
 <div class="lightbox">
-  <img src="generated/images/guide/dependency-injection/injector-tree.png" alt="car injector tree">
-</div>
 
+  <img src="generated/images/guide/dependency-injection/injector-tree.png" alt="car injector tree">
+
+</div>
 
 ## 依存性の注入の詳細について
 
 Angularの依存性の注入の詳細については、DIプロバイダー[DI プロバイダー](guide/dependency-injection-providers)および[DI イン・アクション](guide/dependency-injection-in-action)ガイドを参照してください。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

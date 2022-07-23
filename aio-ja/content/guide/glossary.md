@@ -266,7 +266,7 @@ Angularコンポーネントを変換するAPIを使うことによって、そ�
 ## 宣言
 
 [NgModule](#ngmodule)の`declarations`リストに追加できるクラス型。
-[コンポーネント][AioGuideGlossaryComponent]と[ディレクティブ][AioGuideGlossaryDirective]、[パイプ](#pipe)を宣言できますが、ただし、デコレータの `standalone` フラグが `true` に設定されている場合は、スタンドアロンになります。Note: standalone components/directives/pipes are **not** declarables. More info about standalone classes can be found [below][AioGuideGlossaryStandalone].
+[コンポーネント][AioGuideGlossaryComponent]と[ディレクティブ][AioGuideGlossaryDirective]、[パイプ](#pipe)を宣言できますが、ただし、デコレーターの `standalone` フラグが `true` に設定されている場合は、スタンドアロンになります。Note: standalone components/directives/pipes are **not** declarables. More info about standalone classes can be found [below][AioGuideGlossaryStandalone].
 
 次のものは宣言しないでください:
 

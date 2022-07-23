@@ -1930,7 +1930,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 <div class="alert is-helpful">
 
 **注意：** ガードは、ルーターに別の場所に移動するように指示することもでき、現在の移動を効果的にキャンセルします。
-ガードの中でそれを行う場合、ガードは `false` を返さなければなりません。
+ガードの中でそれを行う場合、ガードは `UrlTree` を返さなければなりません。
 
 </div>
 
@@ -1950,22 +1950,23 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 ルーターは複数のガードインターフェースをサポートしています：
 
-* [`CanActivate`](api/router/CanActivate) は、ルート*への*ナビゲーションを仲介します。
-
-* [`CanActivateChild`](api/router/CanActivateChild) は、子ルート*への*ナビゲーションを仲介します。
-
-* [`CanDeactivate`](api/router/CanDeactivate) は、現在のルートから*離れる*ためのナビゲーションを仲介します。
-
-* [`Resolve`](api/router/Resolve) は、ルートをアクティブにする*前に*、ルートデータの検索を行います。
-
-* [`CanLoad`](api/router/CanLoad) は、_非同期的に_ロードされたフィーチャーモジュール*への*ナビゲーションを仲介します。
-
+| Guard interfaces                                  | Details |
+|:---                                               |:---     |
+| [`CanActivate`](api/router/CanActivate)           | To mediate navigation *to* a route                                  |
+| [`CanActivateChild`](api/router/CanActivateChild) | To mediate navigation *to* a child route                            |
+| [`CanDeactivate`](api/router/CanDeactivate)       | To mediate navigation *away* from the current route                 |
+| [`Resolve`](api/router/Resolve)                   | To perform route data retrieval *before* route activation           |
+| [`CanLoad`](api/router/CanLoad)                   | To mediate navigation *to* a feature module loaded *asynchronously* |
+| [`CanMatch`](api/router/CanMatch)                 | To control whether a `Route` should be used at all, even if the `path` matches the URL segment. |
 
 ルーティング階層の各レベルで複数のガードをもつことができます。
 ルーターは、一番深い子ルートから上に向かって、最初に `CanDeactivate` ガードをチェックします。
 次に、`CanActivate` と `CanActivateChild` のガードを、一番上から一番下の子ルートまでチェックします。
 フィーチャーモジュールが非同期にロードされる場合は、モジュールがロードされる前に `CanLoad` ガードがチェックされます。
-もし、_いずれかの_ガードが false を返すと、完了していない保留中のガードがキャンセルされ、ナビゲーション全体がキャンセルされます。
+
+With the exception of `CanMatch`, if *any* guard returns false, pending guards that have not completed are canceled, and the entire navigation is canceled. If a `CanMatch` guard returns `false`, the `Router` continues
+processing the rest of the `Routes` to see if a different `Route` config matches the URL. You can think of this 
+as though the `Router` is pretending the `Route` with the `CanMatch` guard did not exist.
 
 次のいくつかのセクションでは、複数の例を紹介します。
 
@@ -2272,6 +2273,18 @@ The admin feature file structure looks like this:
 
 </code-tabs>
 
+<a id="can-match-guard"></a>
+
+### `CanMatch`: Controlling `Route` matching based on application conditions
+
+As an alternative to using a `CanActivate` guard which redirects the user to a new page if they do not have access, you can instead
+use a `CanMatch` guard to control whether the `Router` even attempts to activate a `Route`. This allows you to have
+multiple `Route` configurations which share the same `path` but are matched based on different conditions. In addition, this approach
+can allow the `Router` to match the wildcard `Route` instead.
+
+<code-example path="router/src/app/auth/auth.guard.2.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-match"></code-example>
+
+<code-example path="router/src/app/admin/admin-routing.module.2.ts" header="src/app/admin/admin-routing.module.ts (guarded admin route)" region="can-match"></code-example>
 
 {@a can-activate-child-guard}
 

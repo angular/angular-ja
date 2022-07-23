@@ -16,24 +16,23 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 コンポーネント内では直接データの取得や保存を行うべきではありません。もちろん、故意に仮のデータを渡してもいけません。
 コンポーネントはデータの受け渡しに集中し、その他の処理はサービスクラスへ委譲するべきです。
 
-このチュートリアルでは、アプリケーション全体でヒーローを取得できる `HeroService` を作成します。
-そのサービスは [`new` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) で生成するのではなく、
-Angular による [*依存性の注入*](guide/dependency-injection) で、 
-`HeroesComponent` コンストラクターに注入します。
+このチュートリアルでは、アプリケーション全体でヒーローを取得できる `HeroService` を作成します。そのサービスは [`new` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) で生成するのではなく、
+Angular による [*依存性の注入*](guide/dependency-injection) で、`HeroesComponent` コンストラクターに注入します。
 
 サービスは、_お互いを知らない_ クラスの間で情報を共有する最適な方法です。
 このチュートリアル後半でも `MessageService` を作成し、次の2クラスに注入します。
 
-1. メッセージを送信する`HeroService`への注入
-2. そのメッセージとユーザーがヒーローをクリックしたときにIDを表示する`MessagesComponent`への注入
-
+* メッセージを送信する`HeroService`への注入
+* そのメッセージとユーザーがヒーローをクリックしたときにIDを表示する`MessagesComponent`への注入
 
 ## `HeroService` の作成
 
-Angular CLI を使用して `HeroService` を作成しましょう。
+`ng generate` を実行して `HeroService` を作成しましょう。
 
 <code-example language="sh">
+
   ng generate service hero
+
 </code-example>
 
 このコマンドは `HeroService` のスケルトンファイルを `src/app/hero.service.ts` に次のように生成します。
@@ -44,7 +43,7 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 
 生成されたファイル内で Angular の Injectable シンボルがインポートされ、`@Injectable()` デコレーターとしてクラスを注釈していることに注目してください。
 これは、クラスを _依存関係注入システム_ に参加するものとしてマークします。 `HeroService`クラスは、注入可能なサービスを提供する予定であり、それ自身が依存関係をもつこともできます。
-まだ依存関係はありませんが、[間もなくそうなります](#inject-message-service)。
+まだ依存関係はありませんが、[すぐにそうなります](#inject-message-service)。
 
 `@Injectable()`デコレーターは、`@Component()`デコレーターがコンポーネントクラスに対して行ったのと同じ方法で、サービスのメタデータオブジェクトを受け入れます。
 
@@ -72,11 +71,9 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）よりも前に、
 _プロバイダ_ を登録することで`HeroService`が依存性の注入システムで利用できるようにする必要があります。プロバイダーとは、サービスを作成または提供できるものです。この場合、`HeroService`クラスをインスタンス化してサービスを提供します。
 
-`HeroService`を _インジェクター_ に登録することで、
-サービスが提供できるようになります。
-インジェクターとは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
+`HeroService`を *インジェクター* に登録することで、サービスが提供できるようになります。*インジェクター*とは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
 
-デフォルトでは、Angular CLIコマンド `ng generate service`は、プロバイダーのメタデータ、つまり` providedIn: 'root'`を `@Injectable()` デコレーターに含めることで、プロバイダーをサービスの _ルートインジェクター_ に登録します。
+デフォルトでは、`ng generate service`は、プロバイダーのメタデータ、つまり` providedIn: 'root'`を `@Injectable()` デコレーターに含めることで、プロバイダーをサービスの *ルートインジェクター* に登録します。
 
 <code-example format="typescript" language="typescript">
 
@@ -104,13 +101,6 @@ _プロバイダ_ を登録することで`HeroService`が依存性の注入シ�
 この時点で、コードは["最終的なコードレビュー"](#final-code-review)の`HeroService`とは異なります。
 
 </div>
-
-<div class="alert is-helpful">
-
-_providers_ についてより詳しく知りたい方は [Providers](guide/providers) を参照してください。
-
-</div>
-
 
 ## `HeroesComponent` の更新
 
@@ -159,28 +149,26 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 ### 実行の確認
 
-ブラウザの更新後、アプリケーションは以前と同じように実行されるはずです。
-ヒーローリストが表示され、ヒーロー名をクリックすると詳細が表示されるでしょう。
+ブラウザの更新後、アプリケーションは以前と同じように実行されるはずです。ヒーローリストが表示され、ヒーロー名をクリックすると詳細が表示されるでしょう。
 
 ## Observable データ
 
 `HeroService.getHeroes()` は同期的なメソッドであり、これは `HeroService` が即座にヒーローデータを取得できることを示しています。
-
 また `HeroesComponent` は、`getHeroes()` の返り値がまるで同期的に取得できるかのように扱っています。
 
 <code-example header="src/app/heroes/heroes.component.ts" path="toh-pt4/src/app/heroes/heroes.component.1.ts" region="get-heroes"></code-example>
 
-しかしこれは、実際のアプリケーションでは機能しません。
-現在のサービスはモックヒーローを返しているのでこれを免れていますが、
-リモートサーバーからヒーローデータを取得するにあたり、この処理は _非同期_ ということに気づくでしょう。
+この方法は、非同期呼び出しを使用する実際のアプリケーションではうまくいきません。
+今は、サービスが同期的に *モックヒーロー* を返すので、うまくいっています。
 
-`HeroService` はサーバーのレスポンスを待たなければならず、`getHeroes()` は即座にヒーローデータを返すことができません。
-そしてそのサービスが待機している間、ブラウザはブロックされないでしょう。
+もし `getHeroes()` がヒーローのデータをすぐに返すことができないのであれば、それは同期的であるべきではありません。
+なぜなら、データを返すのを待つ間にブラウザがブロックされてしまうからです。
 
 `HeroService.getHeroes()` は何らかの非同期処理を実装する必要があります。
 
 この章では、`HeroService.getHeroes()` は `Observable` を返します。
-なぜなら、後にヒーローデータの取得で利用する Angular の [`HttpClient.get()`](guide/http) メソッドが `Observable` を返すからです。
+なぜなら、後にヒーローデータの取得で利用する Angular の 
+[`HttpClient.get()`](guide/http) メソッドが `Observable` を返すからです。
 
 ### Observable `HeroService`
 
@@ -212,8 +200,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 そのため、これらの違いを修正する必要があるでしょう。
 
-`getHeroes` を開き、下記コードに変更しましょう。
-（比較のために以前のバージョンと横に並べられています）
+`getHeroes` を開き、下記コードに変更しましょう。比較のために以前のバージョンと横に並べられています。
 
 <code-tabs>
     <code-pane header="heroes.component.ts (Observable)" path="toh-pt4/src/app/heroes/heroes.component.ts" region="getHeroes"></code-pane>
@@ -252,7 +239,7 @@ ng generate component messages
 
 </code-example>
 
-Angular CLI は `src/app/messages` 配下にコンポーネントファイル群を生成し、`AppModule` 内に `MessagesComponent` を宣言します。
+`ng generate` は `src/app/messages` ディレクトリにコンポーネントファイル群を生成し、`AppModule` 内に `MessagesComponent` を宣言します。
 
 作成した `MessagesComponent` を表示するために、`AppComponent` のテンプレートを修正しましょう。
 
@@ -262,7 +249,7 @@ Angular CLI は `src/app/messages` 配下にコンポーネントファイル群
 
 ### `MessageService` の作成
 
-Angular CLI を使い、`src/app` 配下に `MessageService` を作成します。
+`ng generate` を使い `src/app` 内に `MessageService` を作成します。
 
 <code-example format="shell" language="shell">
 
@@ -274,8 +261,10 @@ ng generate service message
 
 <code-example header="src/app/message.service.ts" path="toh-pt4/src/app/message.service.ts"></code-example>
 
-このサービスは `messages` および `add()`、`clear()` メソッドを他のクラスから利用できるように公開しています。
-また、`add()` メソッドは新たなメッセージを `messages` へ追加し、`clear()` メソッドは `messages` の値を初期化します。
+このサービスは `messages` および 2つのメソッドを他のクラスから利用できるように公開しています。
+
+* `add()` メソッドは新たなメッセージを `messages` へ追加します
+* `clear()` メソッドは `messages` の値を初期化します
 
 <a id="inject-message-service"></a>
 
@@ -316,8 +305,7 @@ Angular は `MessagesComponent` を作成する際、シングルトンな `Mess
 
 <code-example header="src/app/messages/messages.component.ts" path="toh-pt4/src/app/messages/messages.component.ts" region="ctor"></code-example>
 
-今回、`messageService` はテンプレート内でバインドして使用するつもりです。
-そのため、`messageService` は **パブリックである必要があります**。
+今回、`messageService` はテンプレート内でバインドして使用するつもりです。そのため、`messageService` は **パブリックである必要があります**。
 
 <div class="alert is-important">
 
@@ -343,9 +331,8 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 ## `HeroService` にメッセージを追加する
 
-次の例は、ユーザーがヒーローをクリックするたびに、メッセージを送信、表示し、
-そしてユーザーの選択履歴を表示する方法を示します。
-これは、あなたが次のセクション[Routing](tutorial/toh-pt5)を見るときに助けになります。
+次の例は、ユーザーがヒーローをクリックするたびに履歴を表示する方法を示しています。
+これは、次の[ルーティング](tutorial/toh-pt5)のセクションに行くときに役に立ちます。
 
 <code-example header="src/app/heroes/heroes.component.ts" path="toh-pt4/src/app/heroes/heroes.component.ts"></code-example>
 
@@ -377,7 +364,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 * [Angular の依存性の注入](guide/dependency-injection) を使用して、それをコンポーネントに注入しました
 * `HeroService` の _データ取得_ メソッドを非同期化しました
 * `Observable` および、それを扱うために利用する RxJS ライブラリについて学びました
-* モックヒーローを Observable (`Observable<Hero[]>`) 型で返すために、RxJS の `of()` を使用しました
+* モックヒーローを `Observable<Hero[]>` 型で返すために、RxJS の `of()` を使用しました
 * コンポーネントのコンストラクター内ではなく、`ngOnInit` ライフサイクルフックで `HeroService` メソッドを呼び出しました
 * クラス間で疎結合な情報伝達を行うため、 `MessageService` を作成しました
 * コンポーネントに注入された `HeroService` は、もうひとつのサービスである `MessageService` とともに作成されます

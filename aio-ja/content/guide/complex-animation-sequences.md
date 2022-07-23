@@ -115,7 +115,29 @@ For each change:
 
 * If there are multiple elements entering or leaving the DOM, staggers each animation starting at the top of the page, with a 50-millisecond delay between each element.
 
-## まとめ
+## Animating the items of a reordering list
+
+Although Angular animates correctly `*ngFor` list items out of the box, it will not be able to do so if their ordering changes.
+This is because it will lose track of which element is which, resulting in broken animations.
+The only way to help Angular keep track of such elements is by assigning a `TrackByFunction` to the `NgForOf` directive.
+This makes sure that Angular always knows which element is which, thus allowing it to apply the correct animations to the correct elements all the time.
+
+<div class="alert is-important">
+
+**IMPORTANT**: <br />
+If you need to animate the items of an `*ngFor` list and there is a possibility that the order of such items will change during runtime, always use a `TrackByFunction`.
+
+</div>
+
+## Animations and Component View Encapsulation
+
+Angular animations are based on the components DOM structure and do not directly take [View Encapsulation](/guide/view-encapsulation) into account, this means that components using `ViewEncapsulation.Emulated` behave exactly as if they where using `ViewEncapsulation.None` (`ViewEncapsulation.ShadowDom` behaves differently as we'll discuss shortly).
+
+For example if the `query()` function (which you'll see more of in the rest of the Animations guide) were to be applied at the top of a tree of components using the emulated view encapsulation, such query would be able to identify (and thus animate) DOM elements on any depth of the tree.
+
+On the other hand the `ViewEncapsulation.ShadowDom` changes the component's DOM structure by "hiding" DOM elements inside [`ShadowRoot`](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) elements. Such DOM manipulations do prevent some of the animations implementation to work properly since it relies on simple DOM structures and doesn't take `ShadowRoot` elements into account. Therefore it is advised to avoid applying animations to views incorporating components using the ShadowDom view encapsulation.
+
+## アニメーションシーケンスのまとめ
 
 複数要素をアニメーションするためのAngular関数は、内部要素を見つけるために`query()`で始まります。 たとえば、`<div>`内のすべての画像を収集します。 残りの関数`stagger()`、<code>[group](api/animations/group)()</code>、`sequence()`はカスケードを適用したり、複数のアニメーションステップを適用する方法を制御することができます。
 
@@ -127,3 +149,11 @@ For each change:
 * [アニメーションの遷移とトリガー](guide/transition-and-triggers)
 * [再利用可能なアニメーション](guide/reusable-animations)
 * [ルーティング遷移のアニメーション](guide/route-animations)
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

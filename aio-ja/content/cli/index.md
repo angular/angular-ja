@@ -87,7 +87,7 @@ Option names in the configuration file must use [camelCase](guide/glossary#case-
 
 コマンド構文は次のとおりです:
 
-`ng` *commandNameOrAlias* *requiredArg* [*optionalArg*] `[options]`
+`ng` *<command-name>* *<required-arg>* [*optional-arg*] `[options]`
 
 *   ほとんどのコマンドと一部のオプションにはエイリアスがあります。
     別名は、各コマンドの構文ステートメントに示されています。
@@ -105,13 +105,17 @@ Option names in the configuration file must use [camelCase](guide/glossary#case-
 
 *   通常、生成された成果物の名前は、コマンドの引数として指定することも、`--name`オプションで指定することもできます。
 
-*   引数とオプションの名前は[camelCaseかdash-case](guide/glossary#case-types)で指定できます。
-    `--myOptionName` は `--my-option-name` と同じです。
+*   引数とオプションの名前は[dash-case](guide/glossary#case-types)で指定できます。
+    例: `--my-option-name`
 
 ### ブール値オプション
 
 ブール値オプションには2つの形式があります: `--this-option` はフラグを設定し、 `--no-this-option` はフラグをクリアします。
 どちらのオプションも指定されていない場合、フラグはリファレンスドキュメントに記載されているデフォルトのままになります。
+
+### Array options
+
+Array options can be provided in two forms: `--option value1 value2` or `--option value1 --option value2`.
 
 ### 相対パス
 

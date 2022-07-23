@@ -347,7 +347,7 @@ Since TypeScript 4.3, the setter could have been declared to accept `boolean|''`
 ```typescript
   @Component({
     selector: 'my-component',
-    template: '{{$any(person).addresss.street}}'
+    template: '{{$any(person).address.street}}'
   })
   class MyComponent {
     person?: Person;

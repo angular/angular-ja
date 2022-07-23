@@ -16,6 +16,14 @@
 *   日付と時刻、数字、通貨を含む測定単位
 *   タイムゾーン、言語、国を含む翻訳された名前
 
+For a quick introduction to localization and internationalization watch this video:
+
+<div class="video-container">
+
+<iframe allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/KNTN-nsbV7M"></iframe>
+
+</div>
+
 ## Angularの国際化について学ぶ
 
 <div class="card-container">
@@ -42,4 +50,4 @@
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2022-06-06

@@ -133,7 +133,46 @@ options: {
   header="app/config/config.component.ts (showConfig v.1)">
 </code-example>
 
-{@a typed-response}
+<a id="always-subscribe"></a>
+
+### Starting the request
+
+For all `HttpClient` methods, the method doesn't begin its HTTP request until you call `subscribe()` on the observable the method returns.
+
+This is true for *all* `HttpClient` *methods*.
+
+<div class="alert is-helpful">
+
+The [`AsyncPipe`](api/common/AsyncPipe) subscribes and unsubscribes for you automatically.
+
+</div>
+
+All observables returned from `HttpClient` methods are *cold* by design.
+Execution of the HTTP request is *deferred*, letting you extend the observable with additional operations such as  `tap` and `catchError` before anything actually happens.
+
+Calling `subscribe()` triggers execution of the observable and causes `HttpClient` to compose and send the HTTP request to the server.
+
+Think of these observables as *blueprints* for actual HTTP requests.
+
+<div class="alert is-helpful">
+
+In fact, each `subscribe()` initiates a separate, independent execution of the observable.
+Subscribing twice results in two HTTP requests.
+
+<code-example format="javascript" language="javascript">
+
+const req = http.get&lt;Heroes&gt;('/api/heroes');
+// 0 requests made - .subscribe() not called.
+req.subscribe();
+// 1 request made.
+req.subscribe();
+// 2 requests made.
+
+</code-example>
+
+</div>
+
+<a id="typed-response"></a>
 
 ### 型付けされたレスポンスをリクエストする
 
@@ -298,7 +337,7 @@ searchHeroes(term: string): Observable {
 
 `HttpClient.get()`は`responseType`オプションがあるため、デフォルトのJSONではなく文字列を返します。
 
-RxJSの（「wiretap（盗聴器）」のような）`tap`演算子により、Obervableを通過する正常値とエラー値の双方を、コードがそれらを妨害することなく検査できます。
+RxJSの `tap` オペレーターにより、Obervableを通過する正常値とエラー値の双方を、コードがそれらを妨害することなく検査できます。
 
 `DownloaderComponent`の`download()`メソッドは、サービスのメソッドを購読することでリクエストを開始します。
 
@@ -441,41 +480,6 @@ _subscribe()_を呼び出さなければ何も起こりません。`HeroesServic
   region="delete-hero-no-subscribe">
 </code-example>
 
-{@a always-subscribe}
-**常に_subscribe_!**
-
-`HttpClient`のメソッドは、そのメソッドが返すObservableに対し`subscribe()`を呼び出すまで、HTTPリクエストを開始しません。これは_すべての_`HttpClient`のメソッドに当てはまります。
-
-<div class="alert is-helpful">
-
-[`AsyncPipe`](api/common/AsyncPipe)は自動的にサブスクライブ（およびサブスクライブ解除）します。
-
-</div>
-
-`HttpClient`のメソッドから返されたすべてのObservableは、意図的に_コールド_になっています。
-HTTPリクエストは_遅延実行_され、
-実際に何かが起こる前に、`tap`や`catchError`などの追加のオペレーターでObservableを拡張できます。
-
-`subscribe(...)`を呼び出すと、Observableの実行がトリガーされ、
-`HttpClient`がHTTPリクエストを作成してサーバーに送信します。
-
-これらのObservableは、実際のHTTPリクエストの_設計図_と考えることができます。
-
-<div class="alert is-helpful">
-
-実際、各`subscribe()`により、Observableは個々で独立して実行を開始します。
-2回購読すると、2つのHTTPリクエストが発生します。
-
-```javascript
-const req = http.get<Heroes>('/api/heroes');
-// 0件のリクエストが実行される - .subscribe()が呼ばれていない
-req.subscribe();
-// 1件のリクエストが実行される
-req.subscribe();
-// 2件のリクエストが実行される
-```
-</div>
-
 ### PUTリクエストの作成
 
 アプリケーションは、HTTPクライアントサービスを使用してPUTリクエストを送信できます。
@@ -575,7 +579,7 @@ const params = new HttpParams({fromString: 'name=foo'});
 `intercept`メソッドは、リクエストを最終的にHTTPレスポンスを返す`Observable`に変換します。
 こういう意味では、各インターセプターは完全に単独でリクエストを処理することができます。
 
-ほとんどのインターセプターは、途中でリクエストを検査し、[`HttpHandler`](api/common/http/HttpHandler)インターフェースを実装する`next`オブジェクトの`handle()`メソッドに（おそらく変更された）リクエストを転送します。
+ほとんどのインターセプターは、途中でリクエストを検査し、[`HttpHandler`](api/common/http/HttpHandler)インターフェースを実装する`next`オブジェクトの`handle()`メソッドに変更された可能性のあるリクエストを転送します。
 
 ```javascript
 export abstract class HttpHandler {
@@ -603,8 +607,8 @@ export abstract class HttpHandler {
 `NoopInterceptor`は、Angularの[依存性の注入（DI）](guide/dependency-injection)システムによって管理されるサービスです。
 他のサービスと同様に、アプリケーションが使用する前にインターセプタークラスを提供する必要があります。
 
-インターセプターは`HttpClient`サービスの（任意の）依存であるため、
-`HttpClient`を提供しているのと同じインジェクター（またはインジェクターの親）にそれらを提供する必要があります。
+インターセプターは`HttpClient`サービスの依存オブジェクトであるため、
+`HttpClient`を提供しているのと同じインジェクター、または親インジェクターにそれらを提供する必要があります。
 DIが`HttpClient`を作成した_後に_提供されるインターセプターは無視されます。
 
 このアプリケーションは、`AppModule`で`HttpClientModule`をインポートする副作用として、アプリケーションのルートインジェクターに`HttpClient`を提供しています。
@@ -802,8 +806,7 @@ TypeScriptが、`HttpRequest`の読み取り専用プロパティを設定でき
 </code-example>
 
 RxJSの`tap`オペレーターは、リクエストが成功したか失敗したかを取得します。
-RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーとなったか、完了したとき（必ず起きる）に呼ばれ、
-その結果を`MessageService`に報告します。
+RxJSの`finalize`オペレーターは、レスポンスのObservableがエラーとなったか、完了したときに呼ばれ、その結果を`MessageService`に報告します。
 
 `tap`も`finalize`も、呼び出し元に返されるObservableのストリームの値には影響を及ぼしません。
 
@@ -864,7 +867,7 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 チェーン内の次のハンドラーに転送します。
 
 * キャッシング可能なリクエストがキャッシュ内に見つかった場合、インターセプターは
-キャッシュされたレスポンスを`of()`_Observable_で返し、`next`ハンドラー（および他のすべての下流のインターセプター）をバイパスします。
+キャッシュされたレスポンスを`of()`_Observable_で返し、`next`ハンドラーおよび他のすべての下流のインターセプターをバイパスします。
 
 * キャッシュ可能なリクエストがキャッシュにない場合、コードは`sendRequest()`を呼び出します。
 この関数はリクエストのクローンを`next.handle()`に転送し、最終的にサーバーを呼び出してサーバーのレスポンスを返します。
@@ -875,6 +878,8 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
   region="send-request">
 </code-example>
 
+<div class="alert is-helpful">
+
 `sendRequest()`がアプリケーションに返ってくる途中の_レスポンスをインターセプトする_方法に注意してください。
 `tap()`オペレーターによりレスポンスを_パイプ_して、そのコールバックでレスポンスをキャッシュに追加します。
 
@@ -884,7 +889,10 @@ RxJSの`finalize`オペレーターは、レスポンスのObservableがエラ�
 `PackageSearchService`のようなデータサービスは、
 `HttpClient`リクエストのいくつかは実際にはキャッシュされたレスポンスを返すものがあることを知りません。
 
-{@a cache-refresh}
+</div>
+
+<a id="cache-refresh"></a>
+
 ### インターセプターを使用して複数の値を要求する
 
 `HttpClient.get()`メソッドは通常、データまたはエラーのいずれかの単一の値を発行するObservableを返します。
@@ -916,12 +924,9 @@ _cache-then-refresh_オプションは、カスタムの`x-refresh`ヘッダー�
 `results$`Observableは、サブスクライブ時にリクエストを行います。
 
 * キャッシュされた値がない場合、インターセプターは`results$`を返します。
-
-* キャッシュされた値がある場合、コードはキャッシュされたレスポンスを`results$`に_パイプ_します。
-そして、最初に（ただちに）キャッシュされたレスポンスを発行し、
-その後にサーバーからのレスポンスを発行する、
-再構成されたObservableを作成します。
-サブスクライバーは、連続の2つのレスポンスを参照します。
+*   If there is a cached value, the code *pipes* the cached response onto `results$`. This produces a recomposed observable that emits two responses, so subscribers will see a sequence of these two responses:  
+  *   The cached response that's emitted immediately
+  *   The response from the server, that's emitted later
 
 {@a report-progress}
 

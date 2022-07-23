@@ -1,17 +1,22 @@
 # コンポーネントとテンプレートのイントロダクション
 
-*コンポーネント*は、[*ビュー*](guide/glossary#view "Definition of view")と呼ばれる画面のパッチを制御します。
+*コンポーネント*は、[*ビュー*](guide/glossary#view "Definition of view")と呼ばれる画面のパッチを制御します。It consists
+of a TypeScript class, an HTML template, and a CSS style sheet. The TypeScript class defines the interaction 
+of the HTML template and the rendered DOM structure, while the style sheet describes its appearance.
+
+An Angular application uses individual components to define and control different aspects of the application.
 たとえば、個々のコンポーネントは[Tour of Heroes チュートリアル](tutorial)の次のビューを定義して制御します。
 
 *   ナビゲーションリンクをもつアプリケーションのルート
 *   ヒーローのリスト
 *   ヒーローエディタ
 
-コンポーネントの—ビューをサポートするための—アプリケーションロジックをクラス内に定義します。
-クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
+In the following example, the `HeroListComponent` class includes:
 
-たとえば、`HeroListComponent`にはヒーローの配列を保持する`heroes`プロパティがあります。
-その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
+* A `heroes` property that holds an array of heroes.
+* A `selectedHero` property that holds the last hero selected by the user.
+* A `selectHero()` method sets a `selectedHero` property when the user clicks to choose a hero from that list.
+
 コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](https://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
@@ -71,11 +76,12 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 </div>
 
-ビュー階層には、同じNgModule内のコンポーネントからのビューを含めることができますが、異なるNgModuleで定義されたコンポーネントからのビューも含めることができます（しばしば含みます）。
+ビュー階層は、同じ NgModule 内のコンポーネントからのビューと、異なる NgModule 内のコンポーネントからのビューを含むことができます。
 
 ## テンプレート構文 {@a template-syntax}
 
 テンプレートは通常のHTMLと似ていますが、アプリケーションのロジックとアプリケーションとDOMデータの状態に基づいてHTMLを変更するAngular[テンプレート構文](guide/template-syntax)も含まれています。
+
 テンプレートは*データバインディング*を使用してアプリケーションとDOMデータを調整し、表示する前に*パイプ*でデータを変換し、*ディレクティブ*を使用して表示されるものにアプリケーションロジックを適用することができます。
 
 たとえば、チュートリアルの`HeroListComponent`のテンプレートは次のようになります。
@@ -90,7 +96,8 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
     次の[データバインディング](#data-binding)の詳細を参照してください。
 
 *   この例の `<app-hero-detail>` タグは新しいコンポーネント `HeroDetailComponent` を表す要素です。
-    `HeroDetailComponent`（コードは表示されません）は `HeroListComponent` のhero-detailの子ビューを定義します。
+    `HeroDetailComponent`（コードは表示されません）は `HeroListComponent` の`hero-detail`の子ビューを定義します。
+    
     このようなカスタムコンポーネントがどのように同じレイアウトのネイティブHTMLとシームレスに混在しているかに注目してください。
 
 ### データバインディング {@a data-binding}
@@ -219,7 +226,10 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 
 <code-example header="src/app/hero-detail.component.html (ngModel)" path="architecture/src/app/hero-detail.component.html" region="ngModel"></code-example>
 
-Angularには、レイアウト構造を変更する（たとえば、[ngSwitch](guide/built-in-directives#ngSwitch)）  、あるいはDOM要素とコンポーネントの見た目を変更する（たとえば、[ngStyle](guide/built-in-directives#ngstyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
+Angularには、定義済みのディレクティブが含まれています。
+
+* [ngSwitch](guide/built-in-directives#ngSwitch) のようなレイアウト構造を変更するディレクティブ
+* [ngStyle](guide/built-in-directives#ngstyle) や [ngClass](guide/built-in-directives#ngClass) などのDOM要素やコンポーネントのアスペクトを変更するディレクティブ
 
 <div class="alert is-helpful">
 

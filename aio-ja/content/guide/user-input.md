@@ -174,9 +174,7 @@ Angularの[**テンプレート参照変数**](guide/template-reference-variable
 
 
 
-<div class="alert is-helpful">
-
-
+<div class="callout is-helpful">
 
 **これは、イベントにバインドしない限り、まったく動作しません**
 
@@ -187,14 +185,10 @@ Angularは、アプリケーションがキーストロークなどの非同期�
 
 </div>
 
-
-
 `$event`オブジェクトを調べるよりも、テンプレート参照変数を使って入力ボックスに行く方が簡単です。
 テンプレート参照変数を使用してユーザーの入力を取得する、以前の`keyup`の例を書き直しました。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-2" header="src/app/keyup.components.ts (v2)"></code-example>
-
-
 
 このアプローチの素晴らしい点は、コンポーネントがビューからクリーンなデータ値を取得することです。 
 `$event`とその構造についての知識はもはや必要ありません。

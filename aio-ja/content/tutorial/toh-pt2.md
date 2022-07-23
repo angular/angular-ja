@@ -1,6 +1,9 @@
 # 選択リストを表示する
 
-このページでは「Tour of Heroes」アプリケーションを拡張してヒーローのリストを表示し、ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
+このチュートリアルでは、次の方法を説明します。
+
+* ヒーローのリストを表示するために Tour of Heroes アプリケーションを拡張する
+* ユーザーがヒーローを選択し、ヒーローの詳細を表示できるようにする
 
 <div class="alert is-helpful">
 
@@ -10,12 +13,9 @@
 
 ## ヒーローのモックを作成する
 
-まずは、表示するためのいくつかのヒーローが必要でしょう。
+まずは、表示するためのいくつかのヒーローを作成します。
 
-最終的には、リモートのデータサーバーからそれらのヒーローを取得します。
-ひとまず、サーバーからデータが返ってきたと仮定して _ヒーローのモック_ を作成しましょう。
-
-`mock-heroes.ts` と呼ばれるファイルを `src/app/` フォルダに作成してください。
+`mock-heroes.ts` と呼ばれるファイルを `src/app/` ディレクトリに作成してください。
 `HEROES` 定数を10人のヒーローの配列として定義し、エクスポートしてください。
 ファイルは次のようになるでしょう。
 
@@ -35,11 +35,11 @@
 
 `HeroesComponent` テンプレートを開き、次のように変更してください：
 
-1. `<h2>` を先頭に追加してください
-1. その下にHTMLの順不同リスト (`<ul>`) を追加してください
-1. `<li>` を `<ul>` の内側に挿入してください
-1. `<span>` の中で `hero` のプロパティを表示する `<li>` の中に `<button>` を置いてください
-1. スタイルを設定するためにいくつかのCSSのクラスを振ります（CSSのスタイルは間もなく追加します）
+1.  `<h2>` を先頭に追加する
+2.  `<h2>`の下に、`<ul>` 要素を追加する
+3.  `<ul>` 要素の中に、`<li>` を挿入する
+4.  `<span>`要素内の`hero`のプロパティを表示する`<li>`内に`<button>`を配置する
+5.  コンポーネントのスタイルを設定するためのCSSクラスを追加する
 
 このようになります：
 
@@ -50,7 +50,8 @@
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-プロパティ 'hero' が存在しないため、エラーが表示されます。個々のヒーローにアクセスしてすべてのヒーローをリストアップするには、`<li>` に `*ngFor` を追加してヒーローのリストを繰り返し表示します。
+[`*ngFor`](guide/built-in-directives#ngFor) はAngularの *反復* ディレクティブです。
+これは、リスト内の各要素に対してホスト要素を繰り返します。
 
 この例の構文は次のとおりです。
 
@@ -62,7 +63,8 @@
 
 <div class="alert is-important">
 
-`ngFor` の前のアスタリスク(*)を忘れないでください。これは構文において重要な部分です。
+`ngFor` の前のアスタリスク(*)を忘れないでください。
+これは構文において重要な部分です。
 
 </div>
 
@@ -72,8 +74,7 @@
 
 <header>Interactive elements</header>
 
-**NOTE**: <br />
-Inside the `<li>` element, we've wrapped the hero's details in a `<button>` element. Later on we make the hero clickable, and it is better for accessibility purposes to use natively interactive HTML elements (e.g. `<button>`) instead of adding event listeners to non-interactive ones (e.g. `<li>`).
+Inside the `<li>` element, add a `<button>` element to wrap the hero's details, and then make the hero clickable. To improve accessibility, use HTML elements that are inherently interactive instead of adding an event listeners to a non-interactive elements. In this case, the interactive  `<button>` element is instead of adding an event to the `<li>` element.
 
 For more details on accessibility, see [Accessibility in Angular](guide/accessibility).
 
@@ -83,7 +84,8 @@ For more details on accessibility, see [Accessibility in Angular](guide/accessib
 
 ### ヒーローを装飾する
 
-ユーザーがカーソルを置いてリストからヒーローを選択するとき、ヒーローのリストは魅力的で視覚的に目立たせる必要があります。
+ユーザーがカーソルを置いてリストからヒーローを選択するとき、
+ヒーローのリストは魅力的で視覚的に目立たせる必要があります。
 
 [最初のチュートリアル](tutorial/toh-pt0#app-wide-styles) では、アプリケーション全体の基本的なスタイルを `styles.css` に設定しました。
 このスタイルシートにはヒーローのリストのためのスタイルは含めていませんでした。
@@ -96,13 +98,11 @@ For more details on accessibility, see [Accessibility in Angular](guide/accessib
 
 プライベートなスタイルは `@Component.styles` 配列内にインラインで定義するか、スタイルシートファイルとして特定の `@Component.styleUrls` 配列の中で識別されるスタイルシートファイルとして定義します。
 
-CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され
-`@Component.styleUrls` はこのように指し示されます。
+`ng generate` が `HeroesComponent` を生成するとき、 `HeroesComponent` のために空の `heroes.component.css` が作成され、`@Component.styleUrls` はこのように指し示されます。
 
 <code-example header="src/app/heroes/heroes.component.ts (@Component)" path="toh-pt2/src/app/heroes/heroes.component.ts" region="metadata"></code-example>
 
-`heroes.component.css` を開いて、 `HeroesComponent` のためのプライベートなスタイルを貼り付けます。
-これらは、このガイドの末尾にある [最終的なコードレビュー](#final-code-review) から見つけることができます。
+`heroes.component.css` を開いて、 `HeroesComponent` のためのプライベートなスタイルを貼り付けます。これらは、このガイドの末尾にある [最終的なコードレビュー](#final-code-review) から見つけることができます。
 
 <div class="alert is-important">
 
@@ -130,7 +130,6 @@ Add a click event binding to the `<button>` in the `<li>` like this:
 
 次のセクションでは、 `HeroesComponent`で`onSelect()`メソッドを定義して、`*ngFor`式で定義されたヒーローを表示します。
 
-
 ### クリックイベントのハンドラーを追加する
 
 Rename the component's `hero` property to `selectedHero` but don't assign any value to it since there is no *selected hero* when the application starts.
@@ -142,7 +141,8 @@ Rename the component's `hero` property to `selectedHero` but don't assign any va
 ### 詳細セクションを追加する
 
 現在、コンポーネントテンプレートにはリストがあります。
-リストのヒーローをクリックして、そのヒーローの詳細を表示するには、それをテンプレートでレンダリングするための詳細セクションが必要です。
+リストのヒーローをクリックして、そのヒーローの詳細を表示するには、
+それをテンプレートでレンダリングするための詳細セクションが必要です。
 `heroes.component.html`のリストセクションの下に以下を追加します。
 
 <code-example header="heroes.component.html (selected hero details)" path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details"></code-example>

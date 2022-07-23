@@ -109,15 +109,13 @@ region="multi-slot"></code-example>
 
 1. テンプレートのために、カスタム属性に一致するセレクターをもつ[属性ディレクティブを作成](guide/attribute-directives#building-an-attribute-directive)します。このディレクティブにTemplateRefインスタンスを挿入します。
 
-   <code-example path="content-projection/src/app/app.component.ts" header="content-projection/src/app/app.component.ts" region="zippycontentdirective">
-   </code-example>
+   <code-example header="content-projection/src/app/example-zippy.component.ts" path="content-projection/src/app/example-zippy.component.ts" region="zippycontentdirective"></code-example>
 
    前の手順で、カスタム属性`appExampleZippyContent`をもつ`<ng-template>`要素を追加しました。このコードは、Angularがそのカスタム属性に遭遇したときに使うことになるロジックを提供します。この場合、そのロジックはAngularにテンプレート参照をインスタンス化するように指示します。
 
 1. コンテンツを投影したいコンポーネントで、`@ContentChild`を使って投影コンテンツのテンプレートを取得します。
 
-   <code-example path="content-projection/src/app/app.component.ts" header="content-projection/src/app/app.component.ts" region="contentchild">
-   </code-example>
+   <code-example header="content-projection/src/app/example-zippy.component.ts" path="content-projection/src/app/example-zippy.component.ts" region="contentchild"></code-example>
 
    このステップ以前に、アプリケーションには、特定の条件が満たされたときにテンプレートをインスタンス化するコンポーネントがあります。また、そのテンプレートへの参照を提供するディレクティブを作成しました。この最後のステップでは、`@ContentChild`デコレーターが、指定されたコンポーネントでテンプレートをインスタンス化するようにAngularに指示します。
 

@@ -393,12 +393,14 @@ XHR calls within a test are rare, but if you need to call XHR, see [`waitForAsyn
 
 #### _tick()_関数
 
-(仮想)クロックを進めるには、[tick()](api/core/testing/tick) を呼び出さなければなりません。
+仮想クロックを進めるには、[tick()](api/core/testing/tick) を呼び出さなければなりません。
 
 [tick()](api/core/testing/tick) を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
 このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-[tick()](api/core/testing/tick)関数は、パラメーターとしてミリ秒とtickOptionsを受け入れます。ミリ秒（指定されていない場合はデフォルトの0）パラメーターは、仮想クロックの進み具合を表します。たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、tick(100) を使用してfnコールバックをトリガーする必要があります。 tickOptionsは、processNewMacroTasksSynchronously（デフォルトはtrue）というプロパティをもつオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
+[tick()](api/core/testing/tick)関数は、パラメーターとして `mills` と`tickOptions` を受け入れます。`mills`（指定されていない場合はデフォルトの`0`）パラメーターは、仮想クロックの進み具合を表します。
+たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、`tick(100)` を使用してfnコールバックをトリガーする必要があります。
+`tickOptions`は、`processNewMacroTasksSynchronously`（デフォルトは`true`）というプロパティをもつオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
@@ -409,19 +411,19 @@ XHR calls within a test are rare, but if you need to call XHR, see [`waitForAsyn
 
 #### tickOptions
 
+In this example, you have a new macro task, the nested `setTimeout` function. By default, when the `tick` is setTimeout, `outside` and `nested` will both be triggered.
+
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
   region="fake-async-test-tick-new-macro-task-sync">
 </code-example>
 
-In this example, we have a new macro task (nested setTimeout), by default, when we `tick`, the setTimeout `outside` and `nested` will both be triggered.
+In some case, you don't want to trigger the new macro task when ticking. You can use `tick(millis, {processNewMacroTasksSynchronously: false})` to not invoke a new macro task.
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
   region="fake-async-test-tick-new-macro-task-async">
 </code-example>
-
-And in some case, we don't want to trigger the new maco task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new maco task.
 
 #### fakeAsync() 内部での日時の比較
 
@@ -834,7 +836,7 @@ Angularテストが[コンポーネントクラスのテスト](guide/testing-co
 
 </div>
 
-#### クリックする
+#### 要素のクリック
 
 ヒーローをクリックすると、ホストコンポーネント(おそらく`DashboardComponent`)
 が受け取ることができる`selected`イベントが発生するはずです:
@@ -870,15 +872,11 @@ Angularの`DebugElement.triggerEventHandler`は、
 <code-example
   path="testing/src/app/dashboard/dashboard-hero.component.spec.ts" region="trigger-event-handler"></code-example>
 
-テストで
-ランタイムのイベントハンドラー(コンポーネントの`click()`メソッド)
-がイベントオブジェクトを使用していないことを前提(まさにこのケース)としています。
+テストでランタイムのイベントハンドラー(コンポーネントの`click()`メソッド)がイベントオブジェクトを使用していないことを前提(まさにこのケース)としています。
 
 <div class="alert is-helpful">
 
-他のハンドラーはあまり寛容ではありません。
-たとえば、`RouterLink`ディレクティブは、
-クリック中にどのマウスボタン(ある場合)が押されたのかを識別する`button`プロパティをもつオブジェクトを想定しています。
+他のハンドラーはあまり寛容ではありません。たとえば、`RouterLink`ディレクティブは、クリック中にどのマウスボタン(ある場合)が押されたのかを識別する`button`プロパティをもつオブジェクトを想定しています。
 イベントオブジェクトがない場合、`RouterLink`ディレクティブはエラーをスローします。
 
 </div>
@@ -908,8 +906,8 @@ _クリックトリガー_プロセスを次のような`click()`関数などの
 
 最初のパラメータは_クリックする要素_です。
 必要に応じて、カスタムイベントオブジェクトを2番目のパラメータとして渡すことができます。
-デフォルトは、`RouterLink`ディレクティブを含む多くのハンドラーで受け入れられる(一部の)
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button">左ボタンマウスイベントオブジェクト</a>です。
+デフォルトは、`RouterLink`ディレクティブを含む多くのハンドラーで受け入れられる一部の
+[左ボタンマウスイベントオブジェクト](https://developer.mozilla.org/ja/docs/Web/API/MouseEvent/button)です。
 
 <div class="alert is-important">
 
@@ -1573,10 +1571,10 @@ CLIによって生成されたコンポーネントテストファイルは、
 `HeroDetailComponent`は、サイズが小さく簡単な構成にもかかわらず、多くの補助が必要です。
 デフォルトのテストモジュールの`CommonModule`から受け取るサポートに加えて、次のものが必要になります:
 
-- 双方向バインディングを有効にするための`FormsModule`内の`NgModel`とその仲間
-- `shared`フォルダ内の`TitleCasePipe`
-- ルーターサービス(これらのテストではスタブしています)
-- ヒーローデータアクセスサービス(これもスタブされています)
+*   双方向バインディングを有効にするための`FormsModule`内の`NgModel`とその仲間
+*   `shared`フォルダ内の`TitleCasePipe`
+*   ルーターサービス(これらのテストではスタブしています)
+*   ヒーローデータアクセスサービス(これもスタブされています)
 
 1つのアプローチは、次の例のように個々の部品からテストモジュールを構成することです:
 
@@ -1608,7 +1606,7 @@ CLIによって生成されたコンポーネントテストファイルは、
   region="setup-shared-module"
   header="app/hero/hero-detail.component.spec.ts (SharedModule setup)"></code-example>
 
-インポート文の数が少なくて済むようになります(表示はしません)。
+It's a bit tighter and smaller, with fewer import statements, which are not shown in this example.
 
 {@a feature-module-import}
 
@@ -1674,7 +1672,7 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-override" header="app/hero/hero-detail.component.spec.ts (Override setup)"></code-example>
 
-`TestBed.configureTestingModule`が(偽の)`HeroService`を提供しなくなったことに([不要](#spy-stub)であるため)注目してください。
+`TestBed.configureTestingModule`が偽の`HeroService`を提供しなくなったことに([不要](#spy-stub)であるため)注目してください。
 
 {@a override-component-method}
 

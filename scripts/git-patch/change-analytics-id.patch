@@ -1,61 +1,71 @@
 diff --git a/aio/src/environments/environment.archive.ts b/aio/src/environments/environment.archive.ts
-index d4ee596cc7..8111aca2e6 100644
+index 55d0a51195..09382a66ce 100644
 --- a/aio/src/environments/environment.archive.ts
 +++ b/aio/src/environments/environment.archive.ts
-@@ -1,6 +1,6 @@
+@@ -1,7 +1,7 @@
  // This is for archived sites, which are hosted at https://vX.angular.io/, where X is the major Angular version.
  export const environment = {
--  gaId: 'UA-8594346-15', // Production id (since it is linked from the main site)
-+  gaId: 'UA-59853299-3', // Production id (since it is linked from the main site)
+-  legacyUniversalAnalyticsId: 'UA-8594346-15', // Production id (since it is linked from the main site)
+-  googleAnalyticsId: 'G-BVV0RDSG7F', // Production id (since it is linked from the main site)
++  legacyUniversalAnalyticsId: 'UA-59853299-3', // Production id (since it is linked from the main site)
++  googleAnalyticsId: 'G-ZE76R447BW', // Production id (since it is linked from the main site)
+
    production: true,
    mode: 'archive',
- };
 diff --git a/aio/src/environments/environment.next.ts b/aio/src/environments/environment.next.ts
-index 902862c9c5..45b6a3d63b 100644
+index 55d0a51195..54b87536ce 100644
 --- a/aio/src/environments/environment.next.ts
 +++ b/aio/src/environments/environment.next.ts
-@@ -1,6 +1,6 @@
+@@ -1,7 +1,7 @@
  // This is for the staging site, which is hosted at https://next.angular.io/.
  export const environment = {
--  gaId: 'UA-8594346-15', // Production id (since it is linked from the main site)
-+  gaId: 'UA-59853299-3', // Production id (since it is linked from the main site)
+-  legacyUniversalAnalyticsId: 'UA-8594346-15', // Production id (since it is linked from the main site)
+-  googleAnalyticsId: 'G-BVV0RDSG7F', // Production id (since it is linked from the main site)
++  legacyUniversalAnalyticsId: 'UA-59853299-3', // Production id (since it is linked from the main site)
++  googleAnalyticsId: 'G-ZE76R447BW', // Production id (since it is linked from the main site)
+
    production: true,
    mode: 'next',
- };
 diff --git a/aio/src/environments/environment.rc.ts b/aio/src/environments/environment.rc.ts
-index b88b2a3ef9..cc7df656b6 100644
+index 55d0a51195..54b87536ce 100644
 --- a/aio/src/environments/environment.rc.ts
 +++ b/aio/src/environments/environment.rc.ts
-@@ -1,6 +1,6 @@
+@@ -1,7 +1,7 @@
  // This is for the release-candidate site, which is hosted at https://rc.angular.io/.
  export const environment = {
--  gaId: 'UA-8594346-15', // Production id (since it is linked from the main site)
-+  gaId: 'UA-59853299-3', // Production id (since it is linked from the main site)
+-  legacyUniversalAnalyticsId: 'UA-8594346-15', // Production id (since it is linked from the main site)
+-  googleAnalyticsId: 'G-BVV0RDSG7F', // Production id (since it is linked from the main site)
++  legacyUniversalAnalyticsId: 'UA-59853299-3', // Production id (since it is linked from the main site)
++  googleAnalyticsId: 'G-ZE76R447BW', // Production id (since it is linked from the main site)
+
    production: true,
    mode: 'rc',
- };
 diff --git a/aio/src/environments/environment.stable.ts b/aio/src/environments/environment.stable.ts
-index e75c13393c..c2d86fee83 100644
+index 55d0a51195..54b87536ce 100644
 --- a/aio/src/environments/environment.stable.ts
 +++ b/aio/src/environments/environment.stable.ts
-@@ -1,6 +1,6 @@
+@@ -1,7 +1,7 @@
  // This is for the production site, which is hosted at https://angular.io/.
  export const environment = {
--  gaId: 'UA-8594346-15', // Production id
-+  gaId: 'UA-59853299-3', // Production id
+-  legacyUniversalAnalyticsId: 'UA-8594346-15', // Production id
+-  googleAnalyticsId: 'G-BVV0RDSG7F', // Production id
++  legacyUniversalAnalyticsId: 'UA-59853299-3', // Production id
++  googleAnalyticsId: 'G-ZE76R447BW', // Production id
+
    production: true,
    mode: 'stable',
- };
 diff --git a/aio/src/environments/environment.ts b/aio/src/environments/environment.ts
-index c56434e8a6..01b06dcc60 100644
+index 55d0a51195..54b87536ce 100644
 --- a/aio/src/environments/environment.ts
 +++ b/aio/src/environments/environment.ts
-@@ -5,7 +5,7 @@
+@@ -5,8 +5,8 @@
  
  
  export const environment = {
--  gaId: 'UA-8594346-26', // Development id
-+  gaId: 'UA-59853299-3', // Development id
+-  legacyUniversalAnalyticsId: 'UA-8594346-26', // Development id
+-  googleAnalyticsId: 'G-Q8PB6PJ5CC', // Development id
++  legacyUniversalAnalyticsId: 'UA-59853299-3', // Production id
++  googleAnalyticsId: 'G-ZE76R447BW', // Production id
+
    production: false,
    mode: 'stable',
- };

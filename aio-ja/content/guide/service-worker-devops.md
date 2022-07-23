@@ -98,7 +98,7 @@ Angular Service Workerは、アプリケーションが最初に開かれたと�
 
 Angular Service Workerの最新情報は、アプリケーションにはわかりません。古いキャッシュは引き続き有効で、コンテンツは引き続き配信されます。ただし、Angular Service Workerのバグフィックスや機能では、古いキャッシュが無効になることがあります。この場合、アプリケーションはネットワークから透過的にリフレッシュされます。
 
-### Service Workerを回避する
+### Service Workerを回避する {@a bypassing-the-service-worker}
 
 ある場合では、Service Workerを完全に回避し代わりにブラウザでリクエストを処理したい
 ケースがあるかも知れません。たとえば、現在Service Workerでサポートされていない機能に依存している

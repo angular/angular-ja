@@ -380,8 +380,9 @@
             },
             {
               "url": "guide/router-tutorial",
-              "title": "Tutorial: Routing in Single-page Applications",
-              "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+              "title": "チュートリアル: シングルページアプリケーションでのルーティング",
+              "tooltip": "Angularのルーティングに関する様々なパターンをカバーしたチュートリアル",
+              "translated": true
             },
             {
               "url": "guide/routing-with-urlmatcher",
@@ -390,8 +391,9 @@
             },
             {
               "url": "guide/router-tutorial-toh",
-              "title": "Tutorial: Adding routing to Tour of Heroes",
-              "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
+              "title": "チュートリアル: Tour of Heroesにルーティングを追加",
+              "tooltip": "Tour of Heroesの例を使ってAngularのルーターの使い方を探索します",
+              "translated": true
             },
             {
               "url": "guide/router-reference",

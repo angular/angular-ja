@@ -20,7 +20,7 @@ contentsWatcher.on('change', (path) => {
 
 cd('/origin/aio');
 try {
-    await $`yarn serve-and-sync --host=0.0.0.0 --disableHostCheck`;
+    await $`export npm_execpath=$(yarn config get yarn-path); yarn serve-and-sync --host=0.0.0.0 --disable-host-check`;
 } finally {
     contentsWatcher.close();
 }

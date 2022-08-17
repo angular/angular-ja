@@ -1,8 +1,8 @@
-FROM node:16.16.0
+FROM node:16.16.0-alpine
 
 # install dependencies
-RUN apt-get update
-RUN apt-get install -y rsync
+RUN apk update
+RUN apk add rsync git
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 # copy source files

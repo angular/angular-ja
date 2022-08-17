@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
-import { copyFileSync } from 'node:fs';
 import { watch } from 'chokidar';
+import { copyFile } from 'node:fs';
 
 const contentsWatcher = watch('/aio-ja', {
     ignored: ['**/*.en.md', '**/*.old'],
@@ -9,14 +9,11 @@ const contentsWatcher = watch('/aio-ja', {
     persistent: true
 });
 
-async function copyFile(path) {
-    cd('/');
-    copyFileSync(`aio-ja/${path}`, `origin/aio/${path}`)
-}
-
 contentsWatcher.on('change', (path) => {
     console.log(`[watch] "${path}" has been changed.`);
-    copyFile(path);
+    copyFile(`/aio-ja/${path}`, `/origin/aio/${path}`, err => {
+      if (err) console.error(err.message, `(${path})`);
+    });
 });
 
 cd('/origin/aio');

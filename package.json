@@ -13,6 +13,7 @@
     "lint": "yarn ~~textlint",
     "lint:fix": "yarn ~~textlint --fix",
     "start": "which docker-compose >/dev/null && compose=docker-compose || compose='docker compose'; $compose up --remove-orphans watch-aio",
+    "build-watch-aio": "which docker-compose >/dev/null && compose=docker-compose || compose='docker compose'; $compose build --no-cache watch-aio",
     "test": "npm run lint && yarn test:patch",
     "test:patch": "git apply -v --check --directory origin ./scripts/git-patch/*.patch",
     "update-origin": "./update-origin.sh",

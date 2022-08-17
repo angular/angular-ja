@@ -1,5 +1,6 @@
 #!/usr/bin/env zx
 
+import { copyFileSync } from 'node:fs';
 import { watch } from 'chokidar';
 
 const contentsWatcher = watch('/aio-ja', {
@@ -10,7 +11,7 @@ const contentsWatcher = watch('/aio-ja', {
 
 async function copyFile(path) {
     cd('/');
-    await $`cp aio-ja/${path} origin/aio/${path}`;
+    copyFileSync(`aio-ja/${path}`, `origin/aio/${path}`)
 }
 
 contentsWatcher.on('change', (path) => {

@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { $, cd, glob, within } from 'zx';
 import { clearDir, cpRf, sed } from './fileutils.mjs';
 
-const rootDir = new URL('../', import.meta.url).pathname;
+const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 

@@ -60,9 +60,9 @@ export async function watchLocalizedFiles(signal) {
 }
 
 export async function applyPatches() {
-  const patches = await glob('scripts/git-patch/*.patch', { cwd: rootDir });
   await within(async () => {
     cd(outDir);
+    const patches = await glob('scripts/git-patch/*.patch', { cwd: rootDir });
     for (const patch of patches) {
       await $`git apply -p1 ${resolve(rootDir, patch)}`;
     }

@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
 import { chalk } from 'zx';
-import { applyPatches, copyLocalizedFiles, resetBuildDir, watchAIO, watchLocalizedFiles } from './common.mjs';
+import { applyPatches, copyLocalizedFiles, resetBuildDir, watchAIO, watchLocalizedFiles } from './lib/common.mjs';
 
 try {
   console.log(chalk.green('==== setup ===='));

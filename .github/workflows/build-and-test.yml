@@ -12,49 +12,50 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/setup-node@v3
-      with:
-        node-version-file: .node-version
-        cache: yarn
-    - run: yarn install
-    - run: yarn test
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+          cache: yarn
+      - run: yarn install
+      - run: yarn test
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/setup-node@v3
-      with:
-        node-version-file: .node-version
-        cache: yarn
-    - run: yarn install
-    - run: yarn build
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+          cache: yarn
+      - run: yarn install
+      - run: yarn build
   build-windows:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/setup-node@v3
-      with:
-        node-version-file: .node-version
-        cache: yarn
-    - run: yarn install
-    - run: yarn build
-      shell: pwsh
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+          cache: yarn
+      - run: yarn install
+      - run: yarn build
+        shell: pwsh
   build-macos:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/setup-node@v3
-      with:
-        node-version-file: .node-version
-        cache: yarn
-    - run: yarn install
-    - run: yarn build
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+          cache: yarn
+      - run: yarn install
+      - run: yarn build

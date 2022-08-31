@@ -17,7 +17,7 @@ try {
 
 async function setup() {
   console.log('');
-  console.log(chalk.yellow('変更監視の対象は、aio-ja 以下のファイル と build/aio 内のソースコードです。'));
+  console.log(chalk.yellow('変更監視の対象は、aio-ja 内のファイル と build/aio 内のソースコードです。'));
   console.log('');
   await resetBuildDir();
 }
@@ -33,10 +33,12 @@ async function preWatch() {
 }
 
 async function watch() {
-  const closeLocalizedFilesWatcher = await watchLocalizedFiles();
+  const ctrl = new AbortController();
+  await watchLocalizedFiles(ctrl.signal);
   try {
     await watchAIO();
   } finally {
-    closeLocalizedFilesWatcher();
+    console.log(chalk.cyan('Abort watching...'));
+    ctrl.abort();
   }
 }

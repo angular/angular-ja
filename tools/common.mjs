@@ -43,7 +43,11 @@ export async function copyLocalizedFiles() {
   }
 }
 
-export async function watchLocalizedFiles() {
+/**
+ *
+ * @param {AbortSignal} signal
+ */
+export async function watchLocalizedFiles(signal) {
   const watcher = watch(lozalizedFilePatterns, {
     cwd: aiojaDir,
   });
@@ -52,7 +56,7 @@ export async function watchLocalizedFiles() {
     const dest = resolve(outDir, 'aio', path);
     cpRf(src, dest);
   });
-  return () => watcher.close();
+  signal.addEventListener('abort', () => watcher.close());
 }
 
 export async function applyPatches() {

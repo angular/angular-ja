@@ -7,6 +7,10 @@ const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
+// default quote ($'...') is doesn't work on Windows.
+// https://github.com/google/zx/blob/main/src/util.ts#L31
+$.quote = (s) => s;
+
 export async function resetBuildDir() {
   await clearDir(outDir);
   await cpRf(resolve(rootDir, 'origin'), outDir);
@@ -64,7 +68,8 @@ export async function applyPatches() {
     cd(outDir);
     const patches = await glob('scripts/git-patch/*.patch', { cwd: rootDir });
     for (const patch of patches) {
-      await $`git apply -p1 ${resolve(rootDir, patch)}`;
+      const path = resolve(rootDir, patch);
+      await $`git apply -p1 --ignore-whitespace ${path}`;
     }
   });
 }

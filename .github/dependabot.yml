@@ -13,8 +13,3 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-  - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/tools/dockerbuild" # Location of package manifests
-    schedule:
-      interval: "daily"
-

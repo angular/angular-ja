@@ -23,7 +23,7 @@ Made with [contributors-img](https://contrib.rocks).
 ## コントリビューション大歓迎！
 
 この翻訳プロジェクトにはみなさんの協力が必要です。
-翻訳プロジェクトについての議論は [ng-japan slack](http://slack-invite.ngjapan.org)の `#translation` チャンネルで進行しています。
+翻訳プロジェクトについての議論は [Angular 日本ユーザー会 Discord](https://http://join-discord.angular.jp/)の `#翻訳` チャンネルで進行しています。
 
 - 翻訳済みドキュメントの修正・改善案
 - 未翻訳ドキュメントの翻訳

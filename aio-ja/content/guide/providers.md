@@ -46,9 +46,15 @@ ng generate service User
 
 <!-- KW--Make diagram here -->
 <!-- KW--per Misko: not clear if the lazy modules are siblings or grand-children. They are both depending on router structure. -->
-Angularルーターがモジュールを遅延ロードすると、新しいインジェクターが作成されます。このインジェクターは、ルートアプリケーションインジェクターの子供となります。インジェクターのツリーを想像してみてください。単一のルートインジェクターと、個々の遅延ロードされるモジュールのための子インジェクターがあります。ルーターはルートインジェクターから子インジェクターにすべてのプロバイダーを追加します。ルーターが遅延ロードされたモジュールのコンテキスト内でコンポーネントを作成するとき、Angularはルートインジェクターのサービスインスタンスよりも、それらのプロバイダーで作成されたサービスインスタンスを優先します。
 
-遅延ロードされたモジュールのコンテキスト内で作成されたコンポーネント(ルーターのナビゲーションなど)は、ルートアプリケーションインジェクターのインスタンスではなく、サービスのローカルインスタンスを取得します。外部モジュール内のコンポーネントは、アプリケーションルート用に作成されたインスタンスを受け取り続けます。
+Angularルーターがモジュールを遅延ロードすると、新しいインジェクターが作成されます。
+このインジェクターは、ルートアプリケーションインジェクターの子供となります。
+インジェクターのツリーを想像してみてください。単一のルートインジェクターと、個々の遅延ロードされるモジュールのための子インジェクターがあります。
+This child injector gets populated with all the module-specific providers, if any. 
+Look up resolution for every provider follows the [rules of dependency injection hierarchy](guide/hierarchical-dependency-injection#resolution-rules). 
+
+Any component created within a lazy loaded module's context, such as by router navigation, gets its own local instance of child provided services, not the instance in the root application injector.
+Components in external modules continue to receive the instances created for the application root injector.
 
 遅延ロードするモジュールでサービスを提供することはできますが、すべてのサービスを遅延ロードすることはできません。たとえば、ルーターなど、ルートモジュールでのみ機能するモジュールもあります。ルーターは、ブラウザ内のグローバルのlocationオブジェクトを使用して動作します。
 

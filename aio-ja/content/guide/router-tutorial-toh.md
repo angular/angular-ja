@@ -2774,12 +2774,12 @@ Guards
 
 {@a preload-canload}
 
-#### `CanLoad` ブロックのプリロード
+#### `CanLoad` で子ルートのプリロードをブロックする
 
 `PreloadAllModules` 戦略は、[CanLoad](#can-load-guard)ガードで保護されたフィーチャーエリアをロードしません。
 
 数ステップ前に `AdminModule` のルートに `CanLoad` ガードを追加して、ユーザーが認証されるまでそのモジュールのロードをブロックしました。
-この `CanLoad` ガードは、プリロード戦略よりも優先されます。
+この `CanLoad` ガードは、子ルートをロードするためのプリロード戦略よりも優先されます。
 
 モジュールをプリロードすると同時に不正なアクセスを防ぎたい場合は、`canLoad()`ガードメソッドを削除して、[canActivate()](#can-activate-guard)ガードだけ使用してください。
 

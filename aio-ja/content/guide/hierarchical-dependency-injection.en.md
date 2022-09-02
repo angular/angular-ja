@@ -21,7 +21,18 @@ This topic uses the following pictographs.
 
 </div>
 
-## Two injector hierarchies
+The applications you build with Angular can become quite large, and one way to manage this complexity is to split up the application into many small well-encapsulated modules, that are by themselves split up into a well-defined tree of components.
+
+There can be sections of your page that works in a completely independent way than the rest of the application, with its own local copies of the services and other dependencies that it needs. Some of the services that these sections of the application use might be shared with other parts of the application, or with parent components that are further up in the component tree, while other dependencies are meant to be private.
+
+With hierarchical dependency injection, you can isolate sections of the application and give them their own private dependencies not shared with the rest of the application, or have parent components share certain dependencies with its child components only but not with the rest of the component tree, and so on. Hierarchical dependency injection enables you to share dependencies between different parts of the application only when and if you need to.
+
+## Types of injector hierarchies
+
+Injectors in Angular have rules that you can leverage to
+achieve the desired visibility of injectables in your applications.
+By understanding these rules, you can determine in which
+NgModule, Component, or Directive you should declare a provider.
 
 Angular has two injector hierarchies:
 
@@ -173,7 +184,7 @@ If the component's injector lacks the provider, it passes the request up to its 
 
 The requests keep forwarding up until Angular finds an injector that can handle the request or runs out of ancestor `ElementInjector` hierarchies.
 
-If Angular doesn't find the provider in any `ElementInjector` hierarchiess, it goes back to the element where the request originated and looks in the `ModuleInjector` hierarchy.
+If Angular doesn't find the provider in any `ElementInjector` hierarchies, it goes back to the element where the request originated and looks in the `ModuleInjector` hierarchy.
 If Angular still doesn't find the provider, it throws an error.
 
 If you have registered a provider for the same DI token at different levels, the first one Angular encounters is the one it uses to resolve the dependency.
@@ -454,7 +465,7 @@ Emoji from FlowerService: &#x1F33B;
 
 </code-example>
 
-In the logical tree, this would be represented as follows:
+In the logical tree, this is represented as follows:
 
 <code-example format="html" language="html">
 

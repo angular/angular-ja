@@ -17,7 +17,7 @@ In the following example, the `HeroListComponent` class includes:
 * A `selectedHero` property that holds the last hero selected by the user.
 * A `selectHero()` method sets a `selectedHero` property when the user clicks to choose a hero from that list.
 
-コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](https://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
+コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
 <code-example header="src/app/hero-list.component.ts (class)" path="architecture/src/app/hero-list.component.ts" region="class"></code-example>

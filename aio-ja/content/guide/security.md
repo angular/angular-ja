@@ -14,7 +14,7 @@ Angularでの対応について説明します。認証や認可などアプリ�
 
 <header>脆弱性の報告</header>
 
-Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) へ報告をお願いします。
+Angular is part of Google [Open Source Software Vulnerability Reward Program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules), for vulnerabilities in Angular please submit your report [here](https://bughunters.google.com/report).
 
 セキュリティに関する問題を Google がどのように扱うかは
 [Google's security philosophy](https://www.google.com/about/appsecurity/) を

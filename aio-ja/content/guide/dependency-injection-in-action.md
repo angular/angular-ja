@@ -236,7 +236,7 @@ Angularは、コンストラクターの `el` パラメータに注入された 
 </div>
 
 その背後にあるコードでは、DIフレームワークが依存関係を提供する方法と場所をカスタマイズします。
-このユースケースでは、[*provide* オブジェクトリテラル](guide/dependency-injection-providers#provide)を使用して定義オブジェクトをDIトークンに関連付けるためのさまざまな方法を説明します。
+このユースケースでは、*provide* オブジェクトリテラルを使用して定義オブジェクトをDIトークンに関連付けるためのさまざまな方法を説明します。
 
 <code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="hero-of-the-month" header="hero-of-the-month.component.ts">
 
@@ -447,7 +447,7 @@ Angularの依存性の注入を使用するのがもっとも簡単です。
 
 このようにクラスを使用する場合、それは *クラスインターフェース* と呼ばれます。
 
-[DIプロバイダー](guide/dependency-injection-providers#di-and-interfaces)で説明されているように、
+[依存オブジェクトプロバイダーの設定](guide/dependency-injection-providers)で説明されているように、
 インターフェースは実行時には存在しないTypeScriptアーティファクトであるため、有効なDIトークンではありません。
 この抽象クラスインターフェースを使用することで、インターフェースの厳密な型を取得し、
 かつ通常のクラスと同じ方法でプロバイダートークンとしても使用できます。

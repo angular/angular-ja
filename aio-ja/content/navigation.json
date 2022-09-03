@@ -472,8 +472,8 @@
             },
             {
               "url": "guide/testing-code-coverage",
-              "title": "Code Coverage",
-              "tooltip": "Determine how much of your code is tested.",
+              "title": "コードカバレッジ",
+              "tooltip": "コードがどの程度テストされているかを把握します。",
               "translated": true
             },
             {

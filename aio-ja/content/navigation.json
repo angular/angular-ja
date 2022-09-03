@@ -287,12 +287,12 @@
         },
         {
           "title": "ディレクティブ",
-          "tooltip": "Control the behavior of elements and the layout of your pages with directives.",
+          "tooltip": "ディレクティブで要素の動作やページのレイアウトを制御できます。",
           "children": [
             {
               "url": "guide/built-in-directives",
               "title": "組み込みディレクティブ",
-              "tooltip": "Introductory guide to some of the most popular built-in directives.",
+              "tooltip": "最も一般的な組み込みディレクティブの入門ガイドです。",
               "translated": false
             },
             {
@@ -305,7 +305,7 @@
               "url": "guide/structural-directives",
               "title": "構造ディレクティブ",
               "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
-              "translated": false
+              "translated": true
             }
           ]
         },

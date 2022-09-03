@@ -211,8 +211,8 @@
               "translated": true
             },
             {
-              "title": "Binding",
-              "tooltip": "A binding connects a template and a component.",
+              "title": "バインディング",
+              "tooltip": "バインディングは、テンプレートとコンポーネントを接続するものです",
               "children": [
                 {
                   "url": "guide/binding-overview",
@@ -251,8 +251,8 @@
               ]
             },
             {
-              "title": "Pipes",
-              "tooltip": "Pipes transform displayed values within a template.",
+              "title": "パイプ",
+              "tooltip": "テンプレート内に表示される値をパイプで変換します",
               "children": [
                 {
                   "url": "guide/pipes-overview",

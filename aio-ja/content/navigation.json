@@ -275,7 +275,7 @@
               "url": "guide/template-reference-variables",
               "title": "テンプレート参照変数",
               "tooltip": "Introductory guide to referring to DOM elements within a template.",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/svg-in-templates",
@@ -1077,7 +1077,7 @@
                 },
                 {
                   "url": "guide/template-reference-variables",
-                  "title": "テンプレート変数",
+                  "title": "テンプレート参照変数",
                   "tooltip": "Introductory guide to referring to DOM elements within a template.",
                   "translated": true
                 }

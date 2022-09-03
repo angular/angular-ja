@@ -246,7 +246,7 @@
                   "url": "guide/two-way-binding",
                   "title": "双方向バインディング",
                   "tooltip": "Introductory guide to sharing data between a class and a template.",
-                  "translated": false
+                  "translated": true
                 }
               ]
             },

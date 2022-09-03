@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 
 export async function rmrf(path) {
   try {
@@ -6,7 +6,13 @@ export async function rmrf(path) {
   } catch {}
 }
 
-export async function clearDir(path) {
+export async function exists(path) {
+  return await access(path)
+    .then(() => true)
+    .catch(() => false);
+}
+
+export async function initDir(path) {
   await rmrf(path);
   await mkdir(path, { recursive: true });
 }

@@ -1,11 +1,13 @@
 #!/usr/bin/env zx
 
-import { chalk } from 'zx';
+import { argv, chalk } from 'zx';
 import { applyPatches, copyLocalizedFiles, resetBuildDir, watchAIO, watchLocalizedFiles } from './lib/common.mjs';
 
 try {
+  const { 'clear-cache': clearCache = false } = argv;
+
   console.log(chalk.green('==== setup ===='));
-  await setup();
+  await setup({ clearCache });
   console.log(chalk.green('==== preWatch ===='));
   await preWatch();
   console.log(chalk.green('==== watch ===='));
@@ -15,11 +17,16 @@ try {
   process.exit(1);
 }
 
-async function setup() {
+async function setup({ clearCache }) {
   console.log('');
   console.log(chalk.yellow('変更監視の対象は、aio-ja 内のファイル と build/aio 内のソースコードです。'));
+  if (clearCache) {
+    console.log(chalk.yellow('build ディレクトリを初期化し、キャッシュを破棄します。'));
+  } else {
+    console.log(chalk.yellow('build ディレクトリを初期化するには --clear-cache オプションを指定してください。'));
+  }
   console.log('');
-  await resetBuildDir();
+  await resetBuildDir({ clearCache });
 }
 
 async function preWatch() {

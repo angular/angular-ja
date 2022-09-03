@@ -26,7 +26,7 @@ async function setup({ clearCache }) {
     console.log(chalk.yellow('build ディレクトリを初期化するには --clear-cache オプションを指定してください。'));
   }
   console.log('');
-  await resetBuildDir({ clearCache });
+  await resetBuildDir({ removeExisting: clearCache });
 }
 
 async function preWatch() {

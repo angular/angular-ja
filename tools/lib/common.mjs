@@ -11,9 +11,9 @@ const outDir = resolve(rootDir, 'build');
 // https://github.com/google/zx/blob/main/src/util.ts#L31
 $.quote = (s) => s;
 
-export async function resetBuildDir({ clearCache }) {
+export async function resetBuildDir({ removeExisting = false }) {
   const buildDirExists = await exists(outDir);
-  if (clearCache || !buildDirExists) {
+  if (!buildDirExists || removeExisting) {
     await initDir(outDir);
   }
   await cpRf(resolve(rootDir, 'origin'), outDir);

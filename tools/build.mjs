@@ -18,7 +18,7 @@ try {
 }
 
 async function setup() {
-  await resetBuildDir();
+  await resetBuildDir({ removeExisting: true });
 }
 
 async function preBuild() {

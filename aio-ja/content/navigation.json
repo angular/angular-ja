@@ -314,15 +314,31 @@
           "tooltip": "依存性の注入:サービスの作成と注入",
           "children": [
             {
+              "url": "guide/dependency-injection-overview",
+              "title": "Dependency injection in Angular",
+              "tooltip": "Dependency injection is a design pattern in which a class requests dependencies from external sources."
+            },
+            {
               "url": "guide/dependency-injection",
-              "title": "依存性の注入",
+              "title": "Understanding dependency injection",
               "tooltip": "Angularの依存性の注入システムは、依存するサービスを \"ジャストインタイム\"で作成し、配信します。",
-              "translated": true
+              "translated": false
+            },
+            {
+              "url": "guide/creating-injectable-service",
+              "title": "Creating an injectable service",
+              "tooltip": "Example of creating an injectable service."
             },
             {
               "url": "guide/dependency-injection-providers",
-              "title": "依存性のプロバイダー",
+              "title": "Defining dependency providers",
               "tooltip": "様々な種類のプロバイダーについて",
+              "translated": false
+            },
+            {
+              "url": "guide/hierarchical-dependency-injection",
+              "title": "階層的インジェクター",
+              "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
               "translated": true
             }
           ]
@@ -698,6 +714,11 @@
           "title": "事前レンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
           "translated": true
+        },
+        {
+          "url": "guide/image-directive",
+          "title": "Image Directive",
+          "tooltip": "Performant images with the Angular image directive."
         }
       ]
     },
@@ -898,6 +919,11 @@
           "tooltip": "Create a template-driven form using directives and Angular template syntax."
         },
         {
+          "url": "guide/image-directive-setup",
+          "title": "Setting up NgOptimzedImage",
+          "tooltip": "Setup the Angular image directive"
+        },
+        {
           "title": "Angularライブラリ",
           "tooltip": "Extending Angular with shared libraries.",
           "children": [
@@ -1029,12 +1055,6 @@
                   "url": "guide/architecture-components",
                   "title": "Componentの紹介",
                   "tooltip": "コンポーネント、テンプレート、およびビューについて。",
-                  "translated": true
-                },
-                {
-                  "url": "guide/architecture-services",
-                  "title": "サービスとDIの紹介",
-                  "tooltip": "サービスと依存性の注入について。",
                   "translated": true
                 },
                 {
@@ -1219,12 +1239,6 @@
               "tooltip": "Using dependency injection in Angular.",
               "children": [
                 {
-                  "url": "guide/hierarchical-dependency-injection",
-                  "title": "階層的インジェクター",
-                  "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-                  "translated": true
-                },
-                {
                   "url": "guide/dependency-injection-in-action",
                   "title": "DIイン・アクション",
                   "tooltip": "依存性の注入のためのテクニック",
@@ -1307,48 +1321,53 @@
               "translated": true
             }
           ]
+        }
+      ]
+    },
+    {
+      "title": "Documentation contributor guide",
+      "tooltip": "Describes how to contribute to the Angular documentation.",
+      "children": [
+        {
+          "url": "guide/contributors-guide-overview",
+          "title": "Overview",
+          "tooltip": "Provides an overview of how to contribute to Angular's documentation."
         },
         {
-          "title": "Content Contributor's Guide",
-          "tooltip": "Describes how to contribute to the Angular documentation.",
-          "children": [
-            {
-              "url": "guide/contributors-guide-overview",
-              "title": "Overview",
-              "tooltip": "Provides an overview of how to contribute to Angular's documentation."
-            },
-            {
-              "url": "guide/reviewing-content",
-              "title": "Reviewing content",
-              "tooltip": "Keep Angular content up-to-date by reviewing topics for accuracy."
-            },
-            {
-              "url": "guide/updating-search-keywords",
-              "title": "Updating search keywords",
-              "tooltip": "Help users find the content they need by adding additional search keywords."
-            },
-            {
-              "url": "guide/updating-content-github-ui",
-              "title": "Updating content using GitHub UI",
-              "tooltip": "Update topics in the browser through the GitHub user interface."
-            },
-            {
-              "url": "guide/docs-style-guide",
-              "title": "Documentation Style Guide",
-              "tooltip": "Style guide for documentation authors"
-            },
-            {
-              "url": "guide/localizing-angular",
-              "title": "Angular doc localization guidelines",
-              "tooltip": "Learn about the guidelines for localizing Angular documentation."
-            },
-            {
-              "url": "guide/localized-documentation",
-              "title": "Localized documentation",
-              "tooltip": "A list of localized versions of the Angular documentation",
-              "hidden": true
-            }
-          ]
+          "url": "guide/reviewing-content",
+          "title": "Reviewing documentation",
+          "tooltip": "Keep Angular content up-to-date by reviewing topics for accuracy."
+        },
+        {
+          "url": "guide/updating-search-keywords",
+          "title": "Updating search keywords",
+          "tooltip": "Help users find the content they need by adding additional search keywords."
+        },
+        {
+          "url": "guide/updating-content-github-ui",
+          "title": "Updating content using GitHub UI",
+          "tooltip": "Update topics in the browser through the GitHub user interface."
+        },
+        {
+          "url": "guide/docs-style-guide",
+          "title": "Documentation Style Guide",
+          "tooltip": "Style guide for documentation authors"
+        },
+        {
+          "url": "guide/docs-lint-errors",
+          "title": "Resolving documentation linter messages",
+          "tooltip": "More information about documentation lint errors."
+        },
+        {
+          "url": "guide/localizing-angular",
+          "title": "Angular doc localization guidelines",
+          "tooltip": "Learn about the guidelines for localizing Angular documentation."
+        },
+        {
+          "url": "guide/localized-documentation",
+          "title": "Localized documentation",
+          "tooltip": "A list of localized versions of the Angular documentation",
+          "hidden": true
         }
       ]
     }

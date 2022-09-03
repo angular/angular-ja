@@ -101,6 +101,14 @@
     "bio": "SDE III @cisco | GDE for Angular | Microsoft MVP | Author | Speaker | Passionate Programmer",
     "groups": ["GDE"]
   },
+  "antoniocardenas": {
+    "name": "Antonio Cardenas",
+    "picture": "antonio-cardenas.jpg",
+    "twitter": "yeoudev",
+    "website": "https://yeou.dev",
+    "bio": "Antonio is a senior Angular developer from Honduras, focus on immersive experiences and Web Performance, He is a public Speaker, Mentor and Facilitator for entrepreneurship programs as Techstars Startup Weekend, Content Creator and tech writer Cofounder of non profit organization @Macaotech, Love to share knowledge Typescript Coffe and Cats 🐱.",
+    "groups": ["GDE"]
+  },
   "armenvardanyan95": {
     "name": "Armen Vardanyan",
     "picture": "armen-vardanyan.jpg",
@@ -160,6 +168,15 @@
     "website": "https://brianflove.com",
     "bio": "Brian is a software engineer and GDE in Angular with a passion for learning, writing, speaking, teaching and mentoring. Brian has been building web applications for over 20 years and has long been a fanboy of JavaScript. When not in front of his Macbook Pro Brian is in the Rocky Mountains skiing or hiking.",
     "groups": ["GDE"]
+  },
+  "bobwatson": {
+    "name": "Bob Watson",
+    "lead": "mgechev",
+    "picture": "bob-watson.jpg",
+    "twitter": "bobwatsonphd",
+    "website": "https://docsbydesign.com",
+    "bio": "Bob is the documentation lead for angular.io. When he's not obsessing over the i-dotting and t-crossing of documentation, he enjoys seeing the world from up in the air and below the sea.",
+    "groups": ["Angular"]
   },
   "brocco": {
     "name": "Mike Brocchi",
@@ -846,6 +863,15 @@
     "bio": "Siddharth is a Full Stack JavaScript Developer and a GDE in Angular. He's passionate about sharing his knowledge on Angular, Firebase and the Web in general. He's the organizer of WebStack, a local community of developers focused on Web, Mobile, Voice and Server related technologies in general. WebStack hosts free monthly meetups every 2nd or 3rd Saturday of the month. Siddharth is also an avid photographer and loves traveling. Find him anywhere on the Web with `SiddAjmera`.",
     "groups": ["GDE"]
   },
+	"simonaco": {
+    "name": "Simona Cotin",
+    "picture": "simonacotin.jpg",
+    "twitter": "simona_cotin",
+    "website": "https://github.com/simonaco",
+    "bio": "Engineering manager working on Angular Framework and Tooling",
+    "groups": ["Angular"],
+    "lead": "madleinas"
+  },
   "simpulton": {
     "name": "Lukas Ruebbelke",
     "picture": "lukas.jpg",
@@ -898,12 +924,6 @@
     "website": "https://thekiba.io",
     "bio": "Andrew is a software engineer using Angular and .NET. He spends most of his spare time staying up-to-date, helping other people, and experimenting with web tech.",
     "groups": ["GDE"]
-  },
-  "tmdavisgoogle": {
-    "name": "Tiffany Davis",
-    "bio": "Tiffany is an editor working on Angular documentation.",
-    "groups": ["Angular"],
-    "lead": "mgechev"
   },
   "toddmotto": {
     "name": "Todd Motto",

@@ -300,16 +300,6 @@ URLは変わりません。
 
 `heroService.delete()`が返却する`Observable`に対してはコンポーネント側で何もする必要はありません。**しかし、いずれにしろsubscribeはしなければなりません**
 
-<div class="alert is-important">
-
-もし`subscribe()`をし忘れると、サービスはDELETEリクエストをサーバーに送信しません！
-ルールとして、`Observable`はsubscribeされるまで_なにもしません_
-
-これを確認するためには、一時的に`subscribe()`を外して、**Dashboard**をクリックし、それから**Heroes**をクリックしてください。
-そうするとヒーローのフルリストが再び現れるはずです。
-
-</div>
-
 次に、このように`HeroService`にメソッド`deleteHero()`を追加しましょう。
 
 <code-example header="src/app/hero.service.ts (delete)" path="toh-pt6/src/app/hero.service.ts" region="deleteHero"></code-example>
@@ -322,6 +312,16 @@ URLは変わりません。
 * `httpOptions`は送信しています。
 
 ブラウザをリフレッシュして、新しい削除機能を試しましょう。
+
+<div class="alert is-important">
+
+もし`subscribe()`をし忘れると、サービスはDELETEリクエストをサーバーに送信しません！
+ルールとして、`Observable`はsubscribeされるまで_なにもしません_
+
+これを確認するためには、一時的に`subscribe()`を外して、**Dashboard**をクリックし、それから**Heroes**をクリックしてください。
+そうするとヒーローのリスト全体が再び現れるはずです。
+
+</div>
 
 ## 名前で検索する
 

@@ -1,9 +1,7 @@
 # 階層的インジェクター
 
-Angularのインジェクターには、
-アプリケーションで期待とおりのインジェクターブルの可視性を実現するために活用できるルールがあります。
-これらのルールを理解することにより、
-プロバイダーを宣言する必要があるNgModuleまたはコンポーネントを決定できます。
+Angularのインジェクターには、アプリケーションで期待とおりのインジェクターブルの可視性を実現するために活用できるルールがあります。
+これらのルールを理解することにより、プロバイダーを宣言する必要があるNgModuleまたはコンポーネントを決定できます。
 
 <div class="alert is-helpful">
 
@@ -23,7 +21,18 @@ This topic uses the following pictographs.
 
 </div>
 
-## ２つのインジェクター階層
+The applications you build with Angular can become quite large, and one way to manage this complexity is to split up the application into many small well-encapsulated modules, that are by themselves split up into a well-defined tree of components.
+
+There can be sections of your page that works in a completely independent way than the rest of the application, with its own local copies of the services and other dependencies that it needs. Some of the services that these sections of the application use might be shared with other parts of the application, or with parent components that are further up in the component tree, while other dependencies are meant to be private.
+
+With hierarchical dependency injection, you can isolate sections of the application and give them their own private dependencies not shared with the rest of the application, or have parent components share certain dependencies with its child components only but not with the rest of the component tree, and so on. Hierarchical dependency injection enables you to share dependencies between different parts of the application only when and if you need to.
+
+## Types of injector hierarchies
+
+Injectors in Angular have rules that you can leverage to
+achieve the desired visibility of injectables in your applications.
+By understanding these rules, you can determine in which
+NgModule, Component, or Directive you should declare a provider.
 
 Angularには2つのインジェクター階層があります。
 

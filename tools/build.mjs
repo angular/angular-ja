@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
 import { chalk } from 'zx';
-import { applyPatches, buildAIO, copyRobots, copyLocalizedFiles, modifySitemap, resetBuildDir, syncSubmodule } from './lib/common.mjs';
+import { applyPatches, buildAIO, copyLocalizedFiles, copyRobots, modifySitemap, resetBuildDir } from './lib/common.mjs';
 
 try {
   console.log(chalk.green('==== setup ===='));
@@ -18,6 +18,7 @@ try {
 }
 
 async function setup() {
+  // always reset build dir
   await resetBuildDir({ init: true });
 }
 

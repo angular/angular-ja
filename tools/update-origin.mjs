@@ -11,11 +11,10 @@ const copyTargets = [
   'content/start/**/*.md',
   'content/tutorial/**/*.md',
   'content/navigation.json',
-  // AIO source code files
+  // example code files
   'content/examples/toh-pt6/src/app/hero-search/hero-search.component.ts',
   'content/examples/toh-pt6/src/app/heroes/heroes.component.html',
   'content/examples/toh-pt6/src/app/hero.service.ts',
-  'tools/transforms/templates/error/error.template.html',
 ];
 
 try {

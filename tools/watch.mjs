@@ -19,11 +19,11 @@ try {
 
 async function setup({ init }) {
   console.log('');
-  console.log(chalk.yellow('変更監視の対象は、aio-ja 内のファイル と build/aio 内のソースコードです。'));
+  console.log(chalk.white('変更監視の対象は、aio-ja 内のファイル と build/aio 内のソースコードです。'));
   if (init) {
     console.log(chalk.yellow('build ディレクトリを初期化し、キャッシュを破棄します。'));
   } else {
-    console.log(chalk.yellow('build ディレクトリを初期化するには --init オプションを指定してください。'));
+    console.log(chalk.white('build ディレクトリを初期化するには --init オプションを指定してください。'));
   }
   console.log('');
   await resetBuildDir({ init });

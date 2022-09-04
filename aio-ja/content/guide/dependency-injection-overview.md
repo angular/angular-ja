@@ -1,43 +1,43 @@
-# Dependency injection in Angular
+# Angularにおける依存性の注入
 
-When you develop a smaller part of your system, like a module or a class, you may need to use features from other classes. For example, you may need an HTTP service to make backend calls. Dependency Injection, or DI, is a design pattern and mechanism for creating and delivering some parts of an application to other parts of an application that require them. Angular supports this design pattern and you can use it in your applications to increase flexibility and modularity. 
+モジュールやクラスなど、システムの小さな部分を開発する際には、 他のクラスの機能を使用する必要があるでしょう。たとえば、バックエンドを呼び出すためにHTTPサービスが必要になることがあります。依存性の注入（DI）は、アプリケーションのある部分を作成し、それを必要とするアプリケーションの他の部分に提供するためのデザインパターンとメカニズムです。Angularはこのデザインパターンをサポートしており、アプリケーションでこれを使用することで柔軟性とモジュール性を高めることができます。
 
-In Angular, dependencies are typically services, but they also can be values, such as strings or functions. An injector for an application (created automatically during bootstrap) instantiates dependencies when needed, using a configured provider of the service or value. 
+Angularでは依存オブジェクトは一般的にサービスですが、文字列や関数のような値であってもかまいません。アプリケーションのインジェクター（ブートストラップ中に自動的に作成される）は、必要なときに、設定されたサービスや値のプロバイダーを使用して依存オブジェクトをインスタンス化します。
 
 <div class="alert is-helpful">
 
-See the <live-example></live-example> for a working example containing the code snippets in this guide.
+このガイドのコードスニペットを含む動作例については、<live-example></live-example>をご覧ください。
 
 </div>
 
-## Prerequisites
+## 前提知識
 
-You should be familiar with the Angular apps in general, and have the fundamental knowledge of Components, Directives, and NgModules. It's highly recommended that you complete the following tutorial:
+Angularアプリケーション全般に慣れていて、コンポーネント、ディレクティブ、NgModuleの基本的な知識があることが必要です。次のチュートリアルを済ませておくことを強くお勧めします。
 
 [Tour of Heroes application and tutorial](tutorial)
 
-## Learn about Angular dependency injection
+## Angularの依存性の注入について学ぶ
 
 <div class="card-container">
-  <a href="guide/dependency-injection" class="docs-card" title="Understanding dependency injection">
-    <section>Understanding dependency injection</section>
-    <p>Learn basic principles of dependency injection in Angular.</p>
-    <p class="card-footer">Understanding dependency injection</p>
+  <a href="guide/dependency-injection" class="docs-card" title="依存性の注入を理解する">
+    <section>依存性の注入を理解する</section>
+    <p>Angularにおける依存性の注入の基本原理を学びます。</p>
+    <p class="card-footer">依存性の注入を理解する</p>
   </a>
-  <a href="guide/creating-injectable-service" class="docs-card" title="Creating and injecting service">
-    <section>Creating and injecting service</section>
-    <p>Describes how to create a service and inject it in other services and components.</p>
-    <p class="card-footer">Creating an injectable service</p>
+  <a href="guide/creating-injectable-service" class="docs-card" title="サービスの作成と注入">
+    <section>サービスの作成と注入</section>
+    <p>サービスを作成し、他のサービスやコンポーネントに注入する方法について説明します。</p>
+    <p class="card-footer">注入可能なサービスを作成する</p>
   </a>
-  <a href="guide/dependency-injection-providers" class="docs-card" title="Configuring dependency providers">
-    <section>Configuring dependency providers</section>
-    <p>Describes how to configure dependencies using the providers field on the @Component and @NgModule decorators. Also describes how to use InjectionToken to provide and inject values in DI, which can be helpful when you want to use a value other than classes as dependencies.</p>
-    <p class="card-footer">Configuring dependency providers</p>
+  <a href="guide/dependency-injection-providers" class="docs-card" title="依存性プロバイダーの設定">
+    <section>依存性プロバイダーの設定</section>
+    <p>@Componentデコレータと@NgModuleデコレータのprovidersフィールドを使用して依存オブジェクトを設定する方法について説明します。また、クラス以外の値を依存オブジェクトとして使用したい場合に役立つ、DIで値を提供し注入するためのInjectionTokenの使用方法について説明します。</p>
+    <p class="card-footer">依存性プロバイダーの設定</p>
   </a>
-  <a href="guide/hierarchical-dependency-injection" class="docs-card" title="Hierarchical injectors">
-    <section>Hierarchical injectors</section>
-    <p>Hierarchical DI enables you to share dependencies between different parts of the application only when and if you need to. This is an advanced topic.</p>
-    <p class="card-footer">Hierarchical injectors</p>
+  <a href="guide/hierarchical-dependency-injection" class="docs-card" title="階層化インジェクター">
+    <section>階層化インジェクター</section>
+    <p>階層化されたDIは、必要なときに必要なだけ、アプリケーションの異なる部分間で依存オブジェクトを共有することを可能にします。これは上級者向けのトピックです。</p>
+    <p class="card-footer">階層化インジェクター</p>
   </a>
 </div>
 

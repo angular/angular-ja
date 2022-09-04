@@ -1,6 +1,6 @@
 import { watch } from 'chokidar';
 import { resolve } from 'node:path';
-import { $, cd, glob, within } from 'zx';
+import { $, cd, chalk, glob, within } from 'zx';
 import { initDir, cpRf, exists, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
@@ -11,11 +11,19 @@ const outDir = resolve(rootDir, 'build');
 // https://github.com/google/zx/blob/main/src/util.ts#L31
 $.quote = (s) => s;
 
-export async function resetBuildDir({ removeExisting = false }) {
+export async function resetBuildDir({ init = false }) {
+  if (init) {
+    console.log(chalk.cyan('synchronizing git submodule...'));
+    await syncSubmodule();
+  }
+
   const buildDirExists = await exists(outDir);
-  if (!buildDirExists || removeExisting) {
+  if (init || !buildDirExists) {
+    console.log(chalk.cyan('removing build directory...'));
     await initDir(outDir);
   }
+
+  console.log(chalk.cyan('copying origin files to build directory...'));
   await cpRf(resolve(rootDir, 'origin'), outDir);
 }
 
@@ -74,6 +82,14 @@ export async function applyPatches() {
       const path = resolve(rootDir, patch);
       await $`git apply -p1 --ignore-whitespace ${path}`;
     }
+  });
+}
+
+export async function syncSubmodule() {
+  await within(async () => {
+    cd(rootDir);
+    await $`git submodule sync`;
+    await $`git submodule update --init`;
   });
 }
 

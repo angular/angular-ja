@@ -1,120 +1,120 @@
-# Configuring dependency providers
+# 依存性プロバイダーの設定
 
-The Creating and injecting services topic describes how to use classes as dependencies. Besides classes, you can also use other values such as Boolean, string, date, and objects as dependencies. Angular DI provides the necessary APIs to make the dependency configuration flexible, so you can make those values available in DI.
+「サービスの作成と注入」のトピックでは、依存オブジェクトとしてクラスを使用する方法について説明しました。クラス以外にも、ブール値、文字列、日付、オブジェクトなどの値を依存オブジェクトとして使用することもできます。AngularのDIは依存性の構成を柔軟にするために必要なAPIを提供しているので、DIでそれらの値を利用できます。
 
-## Specifying a provider token
+## プロバイダートークンの指定 {@a configuring-dependency-providers}
 
-If you specify the service class as the provider token, the default behavior is for the injector to instantiate that class using the `new` operator.
+プロバイダートークンにサービスクラスを指定した場合、インジェクターは `new` 演算子を用いてそのクラスをインスタンス化するのがデフォルトの動作となります。
 
-In the following example, the `Logger` class provides a `Logger` instance.
+次の例では、`Logger` クラスが `Logger` のインスタンスを提供します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-logger"></code-example>
 
-You can, however, configure a DI to use a different class or any other different value to associate with the `Logger` class. So when the `Logger` is injected, this new value is used instead.
+しかし、別のクラスや別の値を使用して、 `Logger` クラスと関連付けるように DI を設定することができます。そうすると、`Logger` が注入されたときに、この新しい値が代わりに使用されます。
 
-In fact, the class provider syntax is a shorthand expression that expands into a provider configuration, defined by the `Provider` interface.
+実際には、クラスプロバイダーの構文は、`Provider` インターフェースで定義されたプロバイダーの構成に展開される省略表現です。
 
-Angular expands the `providers` value in this case into a full provider object as follows:
+Angularはこの場合、`providers`の値を次のように完全なプロバイダーオブジェクトに展開します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-3" ></code-example>
 
-The expanded provider configuration is an object literal with two properties:
-- The `provide` property holds the token that serves as the key for both locating a dependency value and configuring the injector.
-- The second property is a provider definition object, which tells the injector how to create the dependency value. The provider-definition key can be one of the following:
-    - useClass - this option tells Angular DI to instantiate a provided class when a dependency is injected
-    - useExisting - allows you to alias a token and reference any existing one.
-    - useFactory - allows you to define a function that constructs a dependency.
-    - useValue - provides a static value that should be used as a dependency.
+展開されたプロバイダー構成は、2つのプロパティをもつオブジェクトリテラルです。
+- `provide` プロパティは、依存オブジェクトを見つけ、インジェクターを設定するためのキーとなるトークンを保持します。
+- 2番目のプロパティはプロバイダー定義オブジェクトで、依存オブジェクトの値の作成方法をインジェクターに指示します。プロバイダー定義のキーは、次のいずれかになります:
+    - useClass - このオプションは、依存オブジェクトが注入されたときに、提供されたクラスをインスタンス化するように Angularの DI に伝えます。
+    - useExisting - トークンのエイリアスを作成し、既存のトークンを参照することができます。
+    - useFactory - 依存オブジェクトを生成する関数を定義することができます。
+    - useValue - 依存オブジェクトとして使用されるべき静的な値を提供します。
 
-The section below describes how to use the mentioned provider definition keys.
+以下では、前述のプロバイダー定義キーの使用方法について説明します。
 
 <a id="token"></a>
 <a id="injection-token"></a>
 
-### Class providers: useClass
-The `useClass` provider key lets you create and return a new instance of the specified class.
-You can use this type of provider to substitute an alternative implementation for a common or default class. The alternative implementation can, for example, implement a different strategy, extend the default class, or emulate the behavior of the real class in a test case.
-In the following example, the `BetterLogger` class would be instantiated when the `Logger` dependency is requested in a component or any other class.
+### クラスプロバイダー: useClass
+`useClass` プロバイダーキーは、指定したクラスの新しいインスタンスを作成し、返すことができます。
+このタイプのプロバイダーを使用すると、代替の実装を一般的なクラスやデフォルトのクラスに置き換えることができます。代替の実装は、たとえば、異なるストラテジーを実装したり、デフォルトクラスを拡張したり、テストケースで実際のクラスの振る舞いをエミュレートするといった使い方ができます。
+次の例では、コンポーネントや他のクラスで `Logger` 依存が要求されたときに、 `BetterLogger` クラスがインスタンス化されるでしょう。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-4" ></code-example>
 
 <a id="class-provider-dependencies"></a>
 
-If the alternative class providers have their own dependencies, specify both providers in the providers metadata property of the parent module or component.
+代替のクラスプロバイダーが自身の依存性をもつ場合、親モジュールまたはコンポーネントのプロバイダーのメタデータプロパティで両方のプロバイダーを指定します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-5"></code-example>
 
-In this example, `EvenBetterLogger` displays the user name in the log message. This logger gets the user from an injected `UserService` instance.
+この例では、 `EvenBetterLogger` がログメッセージにユーザー名を表示します。このロガーは、注入された `UserService` インスタンスからユーザーを取得します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="EvenBetterLogger"></code-example>
 
-Angular DI knows how to construct the `UserService` dependency, since it has been configured above and is available in the injector.
+AngularのDI は `UserService` の依存オブジェクトを構築する方法を知っています。なぜなら、この依存オブジェクトは上で設定され、インジェクターで利用できるからです。
 
-### Alias providers: useExisting
+### エイリアスプロバイダー: useExisting
 
-The `useExisting` provider key lets you map one token to another. In effect, the first token is an alias for the service associated with the second token, creating two ways to access the same service object.
+`useExisting` プロバイダーキーにより、あるトークンを別のトークンに対応付けることができます。つまり、1つ目のトークンは2つ目のトークンに関連付けられたサービスのエイリアスであり、同じサービスオブジェクトにアクセスするための2つの方法を作成します。
 
-In the following example, the injector injects the singleton instance of `NewLogger` when the component asks for either the new or the old logger. In this way, `OldLogger` is an alias for `NewLogger`.
+次の例では、コンポーネントが新しいロガーまたは古いロガーを要求したときに、インジェクターは `NewLogger` のシングルトンインスタンスを注入します。この場合、 `OldLogger` は `NewLogger` のエイリアスです。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-6b"></code-example>
 
-Ensure you do not alias `OldLogger` to `NewLogger` with `useClass`, as this creates two different `NewLogger` instances.
+`useClass` で `OldLogger` と `NewLogger` のエイリアスを作らないように注意してください。
 
-### Factory providers: useFactory
-The `useFactory` provider key lets you create a dependency object by calling a factory function. With this approach you can create a dynamic value based on information available in the DI and elsewhere in the app.
+### ファクトリープロバイダー: useFactory
+`useFactory` プロバイダーキーにより、ファクトリ関数を呼び出して依存オブジェクトを作成することができます。この方法では、DI やアプリケーション内のどこかで利用可能な情報に基づいて動的な値を作成することができます。
 
-In the following example, only authorized users should see secret heroes in the `HeroService`.
-Authorization can change during the course of a single application session, as when a different user logs in .
+次の例では、許可されたユーザーだけが `HeroService` にあるシークレットヒーローを見ることができます。
+認証情報は、アプリケーションのセッション中に、別のユーザーがログインしたときなど、変更されることがあります。
 
-To keep security-sensitive information in `UserService` and out of `HeroService`, give the `HeroService` constructor a boolean flag to control display of secret heroes.
+セキュリティ上重要な情報を `UserService` に残し、 `HeroService` には残さないようにするには、 `HeroService` コンストラクターにブール値のフラグを与えて、秘密のヒーローの表示を制御してください。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.ts" region="internals" header="src/app/heroes/hero.service.ts (excerpt)"></code-example>
 
-To implement the `isAuthorized` flag, use a factory provider to create a new logger instance for `HeroService`.
+`isAuthorized` フラグを実装するために、ファクトリープロバイダーを使用して、 `HeroService` の新しいロガーインスタンスを作成します。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.provider.ts" region="factory" header="src/app/heroes/hero.service.provider.ts (excerpt)"></code-example>
 
-The factory function has access to `UserService`.
-You inject both `Logger` and `UserService` into the factory provider so the injector can pass them along to the factory function.
+ファクトリー関数は `UserService` にアクセスすることができます。
+ファクトリープロバイダーに `Logger` と `UserService` の両方を注入して、インジェクターがファクトリー関数にそれらを渡せるようにします。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.provider.ts" region="provider" header="src/app/heroes/hero.service.provider.ts (excerpt)"></code-example>
 
-* The `useFactory` field specifies that the provider is a factory function whose implementation is `heroServiceFactory`.
+* `useFactory` フィールドは、そのプロバイダーが `heroServiceFactory` という実装のファクトリ関数であることを指定します。
 
-* The `deps` property is an array of provider tokens.
-The `Logger` and `UserService` classes serve as tokens for their own class providers.
-The injector resolves these tokens and injects the corresponding services into the matching `heroServiceFactory` factory function parameters.
+* `deps` プロパティは、プロバイダートークンの配列です。
+`Logger` クラスと `UserService` クラスは、それぞれのクラスのプロバイダーを表すトークンとして機能します。
+インジェクターはこれらのトークンを解決して、対応するサービスをマッチする `heroServiceFactory` ファクトリ関数の引数に注入します。
 
-Capturing the factory provider in the exported variable, `heroServiceProvider`, makes the factory provider reusable.
+ファクトリープロバイダーをエクスポートされた変数 `heroServiceProvider` として保持することで、ファクトリープロバイダーを再利用できるようになります。
 
-### Value providers: useValue
+### 値プロバイダー: useValue
 
-The `useValue` key lets you associate a fixed value with a DI token. Use this technique to provide runtime configuration constants such as website base addresses and feature flags. You can also use a value provider in a unit test to provide mock data in place of a production data service. The next section provides more information about the `useValue` key.
+`useValue` キーを使用すると、DIトークンに固定値を関連付けることができます。このテクニックを使って、ウェブサイトのベースアドレスや フィーチャーフラグのような実行時の定数を提供することができます。また、ユニットテストの中で値プロバイダーを使用すると、本番データサービスの代わりにモックデータを提供することができます。次のセクションでは、`useValue` キーについて詳しく説明します。
 
-## Using an `InjectionToken` object
+## `InjectionToken` オブジェクトを使用する
 
-Define and use an `InjectionToken` object for choosing a provider token for non-class dependencies. The following example defines a token, `APP_CONFIG` of the type `InjectionToken`.
+クラス以外の依存オブジェクトのプロバイダートークンを選択するために `InjectionToken` オブジェクトを定義して使用します。次の例では、`InjectionToken` 型のトークンである `APP_CONFIG` を定義しています。
 
 <code-example path="dependency-injection/src/app/app.config.ts" region="token" header="src/app/app.config.ts"></code-example>
 
-The optional type parameter, `<AppConfig>`, and the token description, `app.config`, specify the token's purpose.
+任意指定の型パラメータ `<AppConfig>` とトークンの説明文 `app.config` で、トークンの用途を指定します。
 
-Next, register the dependency provider in the component using the `InjectionToken` object of `APP_CONFIG`.
+次に、`APP_CONFIG` の `InjectionToken` オブジェクトを使用して、依存性プロバイダーをコンポーネントに登録します。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" header="src/app/providers.component.ts" region="providers-9"></code-example>
 
-Now, inject the configuration object into the constructor with `@Inject()` parameter decorator.
+それでは、コンストラクターに `@Inject()` パラメータデコレーターを使って設定オブジェクトを注入してみましょう。
 
 <code-example path="dependency-injection/src/app/app.component.2.ts" region="ctor" header="src/app/app.component.ts"></code-example>
 
-### Interfaces and DI
+### インターフェースとDI
 
-Though the TypeScript `AppConfig` interface supports typing within the class, the `AppConfig` interface plays no role in DI.
-In TypeScript, an interface is a design-time artifact, and does not have a runtime representation, or token, that the DI framework can use.
+TypeScriptの `AppConfig` インターフェースはクラス中での型付けをサポートしていますが、`AppConfig` インターフェースはDIでは何の役にも立ちません。
+TypeScriptでは、インターフェースは設計時のものであり、DIフレームワークが使用できる実行時の表現、つまりトークンを持っていません。
 
-When the transpiler changes TypeScript to JavaScript, the interface disappears because JavaScript doesn't have interfaces.
+トランスパイラがTypeScriptをJavaScriptに変更すると、JavaScriptにはインターフェースがないので、インターフェースが消えてしまいます。
 
-Because there is no interface for Angular to find at runtime, the interface cannot be a token, nor can you inject it.
+Angularが実行時に見つけられるようなインターフェースは存在しないため、インターフェースをトークンにすることはできませんし、注入することもできません。
 
 <code-example path="dependency-injection/src/app/providers.component.ts" region="providers-9-interface"></code-example>
 

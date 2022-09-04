@@ -1,72 +1,72 @@
-# Creating an injectable service
+# 注入可能なサービスの作成
 
-Service is a broad category encompassing any value, function, or feature that an application needs. A service is typically a class with a narrow, well-defined purpose. A component is one type of class that can use DI.
+サービスとは、アプリケーションが必要とするあらゆる値、関数、または機能を含む広いカテゴリーです。サービスは通常、明確な目的を持った小さなクラスです。コンポーネントは、DIを使用できるクラスのひとつです。
 
-Angular distinguishes components from services to increase modularity and reusability. By separating a component's view-related features from other kinds of processing, you can make your component classes lean and efficient.
+Angularはモジュール性と再利用性を高めるために、コンポーネントとサービスを区別しています。コンポーネントのビューに関連する機能を他の種類の処理から分離することで、コンポーネントクラスを簡潔かつ効率的にすることができます。
 
-Ideally, a component's job is to enable the user experience and nothing more. A component should present properties and methods for data binding, to mediate between the view (rendered by the template) and the application logic (which often includes some notion of a model).
+理想的には、コンポーネントの仕事はユーザー体験を実現することだけです。コンポーネントは、データバインディングのためのプロパティとメソッドを提供し、（テンプレートによってレンダリングされる）ビューと（多くの場合、モデルの概念を含む）アプリケーションロジックとの間を仲介する必要があります。
 
-A component can delegate certain tasks to services, such as fetching data from the server, validating user input, or logging directly to the console. By defining such processing tasks in an injectable service class, you make those tasks available to any component. You can also make your application more adaptable by injecting different providers of the same kind of service, as appropriate in different circumstances.
+たとえば、サーバーからのデータの取得、ユーザー入力の検証、 コンソールへの直接のログ出力などのタスクを、コンポーネントから サービスに委譲することができます。このような処理タスクを注入するサービスクラスで定義すると、 どのコンポーネントでもそのタスクを利用できるようになります。また、同じ種類のサービスでも、状況に応じて異なるプロバイダーを注入することで、 アプリケーションの柔軟性を高めることもできます。
 
-Angular does not enforce these principles. Angular helps you follow these principles by making it easy to factor your application logic into services and make those services available to components through DI.
+Angularはこれらの原則を強制するものではありません。Angularは、アプリケーションロジックを簡単にサービス化し、そのサービスをDIを通してコンポーネントから利用できるようにすることで、これらの原則に沿うことを支援します。
 
-## Service examples
+## サービスの例
 
-Here's an example of a service class that logs to the browser console.
+以下は、ブラウザコンソールにログを記録するサービスクラスの例です。
 
 <code-example header="src/app/logger.service.ts (class)" path="architecture/src/app/logger.service.ts" region="class"></code-example>
 
-Services can depend on other services.
-For example, here's a `HeroService` that depends on the `Logger` service, and also uses `BackendService` to get heroes.
-That service in turn might depend on the `HttpClient` service to fetch heroes asynchronously from a server.
+サービスは他のサービスに依存することができます。
+たとえば、 `HeroService` は `Logger` サービスに依存し、ヒーローを取得するために `BackendService` を使用します。
+このサービスは、サーバーから非同期でヒーローを取得するために `HttpClient` サービスに依存することがあります。
 
 <code-example header="src/app/hero.service.ts (class)" path="architecture/src/app/hero.service.ts" region="class"></code-example>
 
-## Creating an injectable service
+## 注入可能なサービスの作成
 
-Angular CLI provides a command to create a new service. In the following example, you add a new service to your application, which was created earlier with the `ng new` command. 
+Angular CLIは新しいサービスを作成するコマンドを提供します。次の例では、`ng new`コマンドで作成したアプリケーションに新しいサービスを追加しています。
 
-To generate a new `HeroService` class in the `src/app/heroes` folder, follow these steps: 
+`src/app/heroes` フォルダに新しい `HeroService` クラスを生成するには、次のステップを実行します。
 
-1. Run this [Angular CLI](cli) command:
+1. この[Angular CLI](cli)コマンドを実行します:
 
 <code-example language="sh">
 ng generate service heroes/hero
 </code-example>
 
-This command creates the following default `HeroService`.
+このコマンドは、次のようなデフォルトの `HeroService` を作成します。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.0.ts" header="src/app/heroes/hero.service.ts (CLI-generated)">
 </code-example>
 
-The `@Injectable()` decorator specifies that Angular can use this class in the DI system.
-The metadata, `providedIn: 'root'`, means that the `HeroService` is visible throughout the application.
+`@Injectable()` デコレーターは、AngularがこのクラスをDIシステムで使用できるように指定するものです。
+`providedIn: 'root'`というメタデータは、`HeroService` がアプリケーション全体に公開されることを意味します。
 
-2. Add a `getHeroes()` method that returns the heroes from `mock.heroes.ts` to get the hero mock data:
+2. ヒーローのモックデータを取得するために `mock.heroes.ts` からヒーローを返す `getHeroes()` メソッドを追加します。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.3.ts" header="src/app/heroes/hero.service.ts">
 </code-example>
 
-For clarity and maintainability, it is recommended that you define components and services in separate files.
+明確さと保守性のために、コンポーネントとサービスを別々のファイルで定義することをお勧めします。
 
-## Injecting services
+## サービスを注入する
 
-To inject a service as a dependency into a component, you can use component's `constructor()` and supply a constructor argument with the dependency type. The following example specifies the `HeroService` in the `HeroListComponent` constructor. The type of the `heroService` is `HeroService`. Angular recognizes the `HeroService` as a dependency, since that class was previously annotated with the `@Injectable` decorator.
+サービスを依存オブジェクトとしてコンポーネントに注入するには、コンポーネントの `constructor()` を使用して、コンストラクターの引数に依存オブジェクトの型を与えます。次の例では、`HeroListComponent` のコンストラクターに `HeroService` を指定しています。`HeroService` の型は `HeroService` です。このクラスは以前に `@Injectable` デコレーターでアノテーションされていたため、Angular は `HeroService` を依存オブジェクトとして認識します。
 
 <code-example header="src/app/heroes/hero-list.component (constructor signature)" path="dependency-injection/src/app/heroes/hero-list.component.ts"
 region="ctor-signature">
 </code-example>
 
-## Injecting services in other services
+## サービスを他のサービスに注入する
 
-When a service depends on another service, follow the same pattern as injecting into a component.
-In the following example `HeroService` depends on a `Logger` service to report its activities.
+あるサービスが他のサービスに依存している場合、コンポーネントに注入するのと同じパターンに従います。
+次の例では、 `HeroService` は、そのアクティビティを報告するために `Logger` サービスに依存しています。
 
-First, import the `Logger` service. Next, inject the `Logger` service in the `HeroService` `constructor()` by specifying `private logger: Logger`.
+まず、`Logger` サービスをインポートします。次に、`HeroService` の `constructor()` に `private logger: Logger` を指定して、`Logger` サービスを注入します。 
 
-Here, the `constructor()` specifies a type of `Logger` and stores the instance of `Logger` in a private field called `logger`.
+ここでは、`constructor()` に `Logger` という型を指定して、`Logger` のインスタンスを `logger` というプライベートフィールドに格納しています。
 
-The following code tabs feature the `Logger` service and two versions of `HeroService`. The first version of `HeroService` does not depend on the `Logger` service. The revised second version does depend on `Logger` service.
+次のコードタブでは、`Logger` サービスと2 つのバージョンの `HeroService` を紹介します。最初のバージョンの `HeroService` は `Logger` サービスに依存していません。2番目のバージョンは `Logger` サービスに依存しています。
 
 <code-tabs>
 
@@ -82,7 +82,7 @@ The following code tabs feature the `Logger` service and two versions of `HeroSe
 
 </code-tabs>
 
-In this example, the `getHeroes()` method uses the `Logger` service by logging a message when fetching heroes.
+この例では、`getHeroes()` メソッドはヒーローを取得するときにメッセージを記録して `Logger` サービスを使用します。
 
 ## What's next
 

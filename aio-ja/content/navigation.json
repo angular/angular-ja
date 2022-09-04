@@ -327,14 +327,15 @@
             },
             {
               "url": "guide/creating-injectable-service",
-              "title": "Creating an injectable service",
-              "tooltip": "Example of creating an injectable service."
+              "title": "注入可能なサービスの作成",
+              "tooltip": "注入可能なサービスの作成例です。",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-providers",
-              "title": "Defining dependency providers",
+              "title": "依存性プロバイダーの定義",
               "tooltip": "様々な種類のプロバイダーについて",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/hierarchical-dependency-injection",

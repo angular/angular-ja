@@ -1,33 +1,33 @@
-# Displaying values with interpolation
+# 補間による値の表示
 
-## Prerequisites
+## 前提
 
-* [Basics of components](guide/architecture-components)
-* [Basics of templates](guide/glossary#template)
-* [Binding syntax](guide/binding-syntax)
+* [コンポーネントとテンプレートのイントロダクション](guide/architecture-components)
+* [テンプレート](guide/glossary#template)
+* [バインディング構文](guide/binding-syntax)
 
 <!--todo: needs a level 2 heading for info below -->
 
 補間では、マークアップされたテキストに埋め込まれた式を参照します。
 デフォルトでは、補間は二重中括弧 `{{` と `}}` を区切り文字として使います。
 
-To illustrate how interpolation works, consider an Angular component that contains a `currentCustomer` variable:
+補間がどのように機能するかを説明するために、`currentCustomer` 変数を含む Angular コンポーネントを考えてみましょう。
 
 <code-example path="interpolation/src/app/app.component.ts" region="customer"></code-example>
 
-Use interpolation to display the value of this variable in the corresponding component template:
+補間を使用して、対応するコンポーネントのテンプレートでこの変数の値を表示します。
 
 <code-example path="interpolation/src/app/app.component.html" region="interpolation-example1"></code-example>
 
-Angular replaces `currentCustomer` with the string value of the corresponding component property. In this case, the value is `Maria`.
+Angular は、`currentCustomer` を対応するコンポーネントのプロパティの文字列値に置き換えます。 この場合、値は `Maria` です。
 
-In the following example, Angular evaluates the `title` and `itemImageUrl` properties to display some title text and an image.
+次の例では、Angular は `title` プロパティと `itemImageUrl` プロパティを評価して、タイトルのテキストと画像を表示します。
 
 <code-example path="interpolation/src/app/app.component.html" region="component-property"></code-example>
 
-## What's Next
+## 次へ進む
 
-* [Property binding](guide/property-binding)
-* [Event binding](guide/event-binding)
+* [プロパティバインディング](guide/property-binding)
+* [イベントバインディング](guide/event-binding)
 
 @reviewed 2022-04-14

@@ -1,44 +1,44 @@
-# Setting up `NgOptimizedImage`
+# `NgOptimizedImage`の設定
 
-This tutorial explains how to setup the `NgOptimizedImage`. For information on using `NgOptimizedImage`, see [Getting Started with NgOptimizedImage](/guide/image-directive).
+このチュートリアルでは、`NgOptimizedImage` の設定方法について説明します。 `NgOptimizedImage` の使用に関する情報については、[NgOptimizedImageを始める](/guide/image-directive) を参照してください。
 
-## Import `NgOptimizedImage`
+## `NgOptimizedImage`のインポート
 
-You can import `NgOptimizedImage` from the `@angular/common` module. The directive is defined as a [standalone directive](/guide/standalone-components), so components should import it directly.
+`@angular/common` モジュールから `NgOptimizedImage` をインポートできます。ディレクティブは [スタンドアロンディレクティブ](/guide/standalone-components) として定義されているため、コンポーネントはそれを直接インポートする必要があります。
 
-## Configure an `ImageLoader`
+## `ImageLoader`を構成する
 
-A "loader" is a function that generates the [image transformation URL](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options) for a given image file. When appropriate, `NgOptimzedImage` sets the size, format, and image quality transformations for an image.
+「ローダー」は、特定の画像ファイルの [画像変換URL](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options) を生成する関数です。適切に実装されている場合、`NgOptimzedImage` は画像のサイズ、フォーマット、および画質変換を設定します。
 
-`NgOptimizedImage` provides a generic loader as well as loaders for various third-party image services; it also supports writing your own custom loader.
+`NgOptimizedImage` は、さまざまなサードパーティの画像サービス用のローダーだけでなく、汎用ローダーも提供します。また、独自のカスタムローダーの作成もサポートしています。
 
-| Loader type| Behavior |
+| ローダータイプ| 振る舞い |
 |:--- |:--- |
-| Generic loader | The URL returned by the generic loader will always match the value of `src`. In other words, this loader applies no transformations. Sites that use Angular to serve images are the primary intended use case for this loader.|
-| Loaders for third-party image services | The URL returned by the loaders for third-party image services will follow API conventions used by that particular image service. |
-| Custom loaders | A custom loader's behavior is defined by its developer. You should use a custom loader if your image service isn't supported by the loaders that come preconfigured with `NgOptimzedImage`.|
+| 汎用ローダー | 汎用ローダーによって返される URL は、常に `src` の値と一致します。つまり、このローダーは変換を適用しません。 Angular を使用して画像を提供するサイトは、このローダーの主な使用例です。|
+| サードパーティの画像サービスのローダー | サードパーティの画像サービスのローダーによって返される URL は、その特定の画像サービスで使用される API 規則に従います。 |
+| カスタムローダー | カスタムローダーの動作は、その開発者によって定義されます。 `NgOptimzedImage` で事前構成されたローダーが画像サービスでサポートされていない場合は、カスタムローダーを使用する必要があります。|
 
-Based on the image services commonly used with Angular applications, `NgOptimizedImage` provides loaders preconfigured to work with the following image services:
+Angular アプリケーションで一般的に使用される画像サービスに基づいて、`NgOptimizedImage` は、次の画像サービスで動作するように事前構成されたローダーを提供します。
 
-| Image Service | Angular API | Documentation |
+| 画像サービス | Angular API | ドキュメンテーション |
 |:--- |:--- |:--- |
-| Cloudflare Image Resizing | `provideCloudflareLoader` | [Documentation](https://developers.cloudflare.com/images/image-resizing/) |
-| Cloudinary | `provideCloudinaryLoader` | [Documentation](https://developers.cloudflare.com/images/image-resizing/) |  |
-| ImageKit | `provideImageKitLoader` | [Documentation](https://docs.imagekit.io/) |
-| Imgix | `provideImgixLoader` | [Documentation](https://docs.imgix.com/) |
+| Cloudflare Image Resizing | `provideCloudflareLoader` | [ドキュメンテーション](https://developers.cloudflare.com/images/image-resizing/) |
+| Cloudinary | `provideCloudinaryLoader` | [ドキュメンテーション](https://developers.cloudflare.com/images/image-resizing/) |  |
+| ImageKit | `provideImageKitLoader` | [ドキュメンテーション](https://docs.imagekit.io/) |
+| Imgix | `provideImgixLoader` | [ドキュメンテーション](https://docs.imgix.com/) |
 
-You must configure an image loader to use `NgOptimizedImage`.
+`NgOptimizedImage` を使用するには、画像ローダーを構成する必要があります。
 
-These instructions explain how to setup an image loader for use with the `NgOptimizedImage`. 
+これらの手順では、`NgOptimizedImage` で使用する画像ローダーをセットアップする方法について説明します。
 
-1. Import the `NgOptimizedImage` directive into the application by adding it to the `imports` section of an NgModule or a standalone Component.
+1. NgModule またはスタンドアロンコンポーネントの `imports` セクションに追加することで、`NgOptimizedImage` ディレクティブをアプリケーションにインポートします。
 
 <code-example format="typescript" language="typescript">
 import { NgOptimizedImage } from '@angular/common';
-// Include NgOptimizedImage in the appropriate NgModule
+// 適切な NgModule に NgOptimizedImage を含めます
 @NgModule({
   imports: [
-    // ... other imports
+    // ... その他のインポート
     NgOptimizedImage,
   ],
 })
@@ -50,7 +50,7 @@ class AppModule {}
 @Component({
   standalone: true,
   imports: [
-    // ... other imports
+    // ... その他のインポート
     NgOptimizedImage,
   ],
 })
@@ -58,11 +58,11 @@ class AppModule {}
 class MyStandaloneComponent {}
 </code-example>
 
-2. Configure a loader that you want to use.
+2. 使用するローダーを構成します。
 
-To use the **generic loader**: no additional code changes are necessary.
+**汎用ローダー**を使用する場合: 追加のコード変更は必要ありません。
 
-To use an existing loader for a **third-party image service**: add the provider factory for your chosen service to the `providers` array. In the example below, the Imgix loader is used:
+**サードパーティの画像サービス**に既存のローダーを使用する場合: 選択したサービスのプロバイダーファクトリーを `providers` 配列に追加します。次の例では、Imgix ローダーが使用されています。
 
 <code-example format="typescript" language="typescript">
 providers: [
@@ -70,15 +70,15 @@ providers: [
 ],
 </code-example>
 
-The base URL for your image assets should be passed to the provider factory as an argument. For most sites, this base URL should match one of the following patterns:
+画像アセットのベース URL は、引数としてプロバイダーファクトリーに渡す必要があります。ほとんどのサイトでは、このベース URL は次のパターンのいずれかに一致する必要があります。
 
 *   https://yoursite.yourcdn.com
 *   https://subdomain.yoursite.com
 *   https://subdomain.yourcdn.com/yoursite
 
-You can learn more about the base URL structure in the docs of a corresponding CDN provider.
+ベース URL 構造の詳細については、対応する CDN プロバイダーのドキュメントを参照してください。
 
-To use a **custom loader**: provide your loader function as a value for the `IMAGE_LOADER` DI token. In the example below, the custom loader function returns a URL starting with `https://example.com` that includes `src` and `width` as URL parameters.
+**カスタムローダー**を使用する場合: ローダー関数を `IMAGE_LOADER` DIトークンの値として指定します。次の例では、カスタムローダー関数は、URL パラメーターとして `src` と `width` を含み `https://example.com` で始まる URL を返します。
 
 <code-example format="typescript" language="typescript">
 providers: [
@@ -91,6 +91,6 @@ providers: [
 ],
 </code-example>
 
-A loader function for the `NgOptimizedImage` directive takes an object with the `ImageLoaderConfig` type (from `@angular/common`) as its argument and returns the absolute URL of the image asset. The `ImageLoaderConfig` object contains the `src`and `width` properties.
+`NgOptimizedImage` ディレクティブのローダー関数は、引数として (`@angular/common` の) `ImageLoaderConfig` 型をもつオブジェクトを取り、画像アセットの絶対 URL を返します。 `ImageLoaderConfig` オブジェクトには、`src` および `width` プロパティが含まれています。
 
-Note: a custom loader must support requesting images at various widths in order for `rawSrcset` to work properly.
+注: カスタムローダーは、`rawSrcset` が適切に機能するために、さまざまな幅の画像の要求をサポートする必要があります。

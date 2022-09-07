@@ -8,7 +8,7 @@
 
 ## `ImageLoader`を構成する
 
-「ローダー」は、特定の画像ファイルの [画像変換URL](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options) を生成する関数です。適切な場合、`NgOptimzedImage` は画像のサイズ、フォーマット、および画質変換を設定します。
+「ローダー」は、特定の画像ファイルの [画像変換URL](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options) を生成する関数です。適切に実装されている場合、`NgOptimzedImage` は画像のサイズ、フォーマット、および画質変換を設定します。
 
 `NgOptimizedImage` は、さまざまなサードパーティの画像サービス用のローダーだけでなく、汎用ローダーも提供します。また、独自のカスタムローダーの作成もサポートしています。
 
@@ -72,9 +72,9 @@ providers: [
 
 画像アセットのベース URL は、引数としてプロバイダーファクトリーに渡す必要があります。ほとんどのサイトでは、このベース URL は次のパターンのいずれかに一致する必要があります。
 
-*   [https://あなたのサイト.あなたのCDN.com](https://あなたのサイト.あなたのCDN.com)
-*   [https://サブドメイン.あなたのサイト.com](https://サブドメイン.あなたのサイト.com)
-*   [https://サブドメイン.あなたのCDN.com/あなたのサイト](https://サブドメイン.あなたのCDN.com/あなたのサイト)
+*   https://yoursite.yourcdn.com
+*   https://subdomain.yoursite.com
+*   https://subdomain.yourcdn.com/yoursite
 
 ベース URL 構造の詳細については、対応する CDN プロバイダーのドキュメントを参照してください。
 

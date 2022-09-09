@@ -1,12 +1,12 @@
-# Angular change detection and runtime optimization
+# Angular の変更検知と実行時の最適化
 
-**Change detection** is the process through which Angular checks to see whether your application state has changed, and if any DOM needs to be updated. At a high level, Angular walks your components from top to bottom, looking for changes. Angular runs its change detection mechanism periodically so that changes to the data model are reflected in an app’s view. Change detection can be triggered either manually or through an asynchronous event (for example, a user interaction or an XHR completion).
+**変更検知**は、Angular がアプリケーションの状態が変更されたかどうか、DOM を更新する必要があるかどうかを確認するプロセスです。簡単にいうと、Angular はコンポーネントを上から下へと走査し、変更を探します。Angular は定期的に変更検知メカニズムを実行し、データモデルへの変更がアプリケーションのビューに反映されるようにします。変更検知は手動または非同期イベント（たとえばユーザー操作や XHR の完了など）を通じてトリガーできます。
 
-Change detection is a highly optimized performant, but it can still cause slowdowns if the application runs it too frequently.
+変更検知は極めて効率よく最適化されていますが、アプリケーションが頻繁に実行すると速度低下の原因になることがあります。
 
-In this guide, you’ll learn how to control and optimize the change detection mechanism by skipping parts of your application and running change detection only when necessary.
+このガイドでは、アプリケーションの一部をスキップし、必要な場合にのみ変更検知を実行することで、変更検知メカニズムを制御および最適化する方法を学習します。
 
-Watch this video if you prefer to learn more about performance optimizations in a media format:
+メディア形式でパフォーマンスの最適化について詳しく知りたい場合は、このビデオをご覧ください。
 
 <div class="video-container">
 

@@ -362,8 +362,9 @@
           "children": [
             {
               "url": "guide/change-detection",
-              "title": "Overview",
-              "tooltip": "Introduces the basics of Angular's change detection"
+              "title": "概要",
+              "tooltip": "Angularの変更検知の基本を紹介します。",
+              "translated": false
             },
             {
               "url": "guide/change-detection-zone-pollution",
@@ -719,8 +720,9 @@
         },
         {
           "url": "guide/image-directive",
-          "title": "Image Directive",
-          "tooltip": "Performant images with the Angular image directive."
+          "title": "画像ディレクティブ",
+          "tooltip": "Angularの画像ディレクティブを使用したパフォーマンスの良い画像表示",
+          "translated": true
         }
       ]
     },
@@ -922,8 +924,9 @@
         },
         {
           "url": "guide/image-directive-setup",
-          "title": "Setting up NgOptimzedImage",
-          "tooltip": "Setup the Angular image directive"
+          "title": "NgOptimzedImageの設定",
+          "tooltip": "Angularの画像ディレクティブを設定します。",
+          "translated": true
         },
         {
           "title": "Angularライブラリ",

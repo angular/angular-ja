@@ -1,66 +1,66 @@
-# Getting started with NgOptimizedImage
+# NgOptimizedImageを始める
 
-Note: the `NgOptimizedImage` directive is currently in the [“Developer Preview” mode](https://angular.io/guide/releases#developer-preview). The Angular team will stabilize the APIs based on the feedback and will make an announcement once the APIs are fully stable.
+注: `NgOptimizedImage` ディレクティブは現在 [「開発者プレビュー」モード](https://angular.jp/guide/releases#developer-preview) になっています。 Angular チームはフィードバックに基づいて API を安定させ、API が完全に安定したら発表します。
 
-The `NgOptimizedImage` directive makes it easy to adopt performance best practices for loading images.
+`NgOptimizedImage` ディレクティブを使用すると、画像をロードするためのパフォーマンスのベストプラクティスを簡単に採用できます。
 
-The `NgOptimizedImage` directive ensures that the loading of the [Largest Contentful Paint](http://web.dev/lcp) image is prioritized by:
+`NgOptimizedImage` ディレクティブは、[LCP](http://web.dev/lcp) 画像の読み込みが次によって優先されることを保証します:
 
-*   Automatically setting the `fetchpriority` attribute on the `<img>` tag
-*   Lazy loading other images by default
-*   Asserting that there is a corresponding preconnect link tag in the document head
+*   `<img>` タグに `fetchpriority` 属性を自動的に設定する
+*   デフォルトで他の画像を遅延読み込みする
+*   ドキュメントのheadに、対応する preconnect リンクタグがあることを検証する
 
-In addition to optimizing the loading of the LCP image, `NgOptimizedImage` enforces a number of image best practices:
+LCP 画像の読み込みを最適化することに加えて、`NgOptimizedImage` は多くの画像のベストプラクティスを適用します。
 
-*   Using [image URLs to apply image optimizations](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options)
-*   Requires that `width` and `height` are set
-*   Warns if `width` or `height` have been set incorrectly
-*   Warns if the image will be visually distorted when rendered
+*   [画像 URL を使用して画像の最適化を適用](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options)
+*   `width` と `height` の設定を必須とします
+*   `width` または `height` が正しく設定されていない場合に警告します
+*   レンダリング時に画像が視覚的に歪む場合に警告します
 
-## Prerequisites
+## 前提
 
-You will need to import the directive into your application. In addition, you will need to setup an image loader. These steps are explained in the [Setting up `NgOptimizedImage`](/guide/image-directive-setup) tutorial.
+ディレクティブをアプリケーションにインポートする必要があります。さらに、画像ローダーをセットアップする必要があります。これらの手順は、[`NgOptimizedImage` の設定](/guide/image-directive-setup) チュートリアルで説明されています。
 
-## Usage in a template
+## テンプレートでの使用
 
-### Overview
+### 概要
 
-To activate the `NgOptimizedImage` directive, replace your image's `src` attribute with `rawSrc`.
+`NgOptimizedImage` ディレクティブを有効にするには、画像の `src` 属性を `rawSrc` に置き換えます。
 
 <code-example format="html" language="html">
   &lt;img rawSrc=”cat.jpg" width="400" height="200"&gt;
 </code-example>
 
-The built-in third-party loaders prepend a shared base URL to `src`. If you're using one of these loaders (or any other loader that does this), make sure to omit the shared base URL path from `src` to prevent unnecessary duplication.
+組み込みのサードパーティローダーは、共有ベース URL を `src` の先頭に追加します。これらのローダーのいずれか (またはこれを行う他のローダー) を使用している場合は、不要な重複を防ぐために、`src` から共有ベース URL パスを必ず省略してください。
 
-You must also set the `width` and `height` attributes. This is done to prevent [image-related layout shifts](https://web.dev/css-web-vitals/#images-and-layout-shifts).  The `width` and `height` attributes should reflect the [intrinsic size](https://developer.mozilla.org/en-US/docs/Glossary/Intrinsic_Size) of the image. During development, the `NgOptimizedImage` warns if it detects that the `width` and `height` attributes have been set incorrectly.
+`width` および `height` 属性も設定する必要があります。これは、[画像関連のレイアウトシフト](https://web.dev/css-web-vitals/#images-and-layout-shifts) を防ぐために行われます。`width` および `height` 属性は、画像の [固有のサイズ](https://developer.mozilla.org/en-US/docs/Glossary/Intrinsic_Size) を反映する必要があります。開発中、`NgOptimizedImage` は、`width` および `height` 属性が正しく設定されていないことを検出すると警告します。
 
-### Marking images as `priority`
+### 画像を `priority` としてマークする
 
-Always mark the [LCP image](https://web.dev/lcp/#what-elements-are-considered) on your page as `priority` to prioritize its loading.
+ページの [LCP 画像](https://web.dev/lcp/#what-elements-are-considered) を常に `priority` としてマークして、読み込みを優先してください。
 
 <code-example format="html" language="html">
   &lt;img rawSrc="cat.jpg" width="400" height="200" priority&gt;
 </code-example>
 
-Marking an image as `priority` applies the following optimizations:
+画像を `priority` としてマークすると、次の最適化が適用されます。
 
-*   Sets `fetchpriority=high` (read more about priority hints [here](https://web.dev/priority-hints/))
-*   Sets `loading=eager` (read more about native lazy loading [here](https://web.dev/browser-level-image-lazy-loading/))
+*   `fetchpriority=high` を設定します (優先度のヒントについて詳しくは [こちら](https://web.dev/priority-hints/) を参照してください)
+*   `loading=eager` を設定します (ネイティブの遅延読み込みについて詳しくは [こちら](https://web.dev/browser-level-image-lazy-loading/) をご覧ください)
 
-Angular displays a warning during development if the LCP element is an image that does not have the `priority` attribute. A page’s LCP element can vary based on a number of factors - such as the dimensions of a user's screen. A page may have multiple images that should be marked `priority`. See [CSS for Web Vitals](https://web.dev/css-web-vitals/#images-and-largest-contentful-paint-lcp) for more details.
+LCP 要素が `priority` 属性を持たない画像である場合、Angular は開発中に警告を表示します。ページの LCP 要素は、ユーザーの画面のサイズなど、さまざまな要因によって異なります。ページには、`priority` のマークを付ける必要がある複数の画像が含まれる場合があります。詳細については、[WebVitalsのCSS](https://web.dev/css-web-vitals/#images-and-largest-contentful-paint-lcp) を参照してください。
 
-### Adding resource hints
+### リソースヒントの追加
 
-You can add a [`preconnect` resource hint](https://web.dev/preconnect-and-dns-prefetch/) for your image origin to ensure that the LCP image loads as quickly as possible. Always put resource hints in the `<head>` of the document.
+LCP 画像ができるだけ早くロードされるように、画像のオリジンに [`preconnect` リソースヒント](https://web.dev/preconnect-and-dns-prefetch/) を追加できます。リソースヒントは常にドキュメントの `<head>` に配置します。
 
 <code-example format="html" language="html">
   &lt;link rel="preconnect" href="https://my.cdn.origin" &gt;
 </code-example>
 
-By default, if you use a loader for a third-party image service, the `NgOptimizedImage` directive will warn during development if it detects that there is no `preconnect` resource hint for the origin that serves the LCP image.
+デフォルトでは、サードパーティの画像サービスにローダーを使用する場合、開発中に `NgOptimizedImage` ディレクティブは、LCP 画像を提供するオリジンの `preconnect` リソースヒントが無いことを検出すると警告を発します。
 
-To disable these warnings, add `{ensurePreconnect: false}` to the arguments passed to the provider factory for your chosen image service:
+これらの警告を無効にするには、選択した画像サービスのプロバイダーファクトリーに渡される引数に `{ensurePreconnect: false}` を追加します。
 
 <code-example format="typescript" language="typescript">
 providers: [
@@ -68,31 +68,31 @@ providers: [
 ],
 </code-example>
 
-### Adjusting image styling
+### 画像スタイリングの調整
 
-Depending on the image's styling, adding `width` and `height` attributes may cause the image to render differently. `NgOptimizedImage` warns you if your image styling renders the image at a distorted aspect ratio.
+画像のスタイルによっては、`width` 属性と `height` 属性を追加することによって、画像のレンダリング結果が変化する場合があります。`NgOptimizedImage` は、画像のスタイリングによって画像が歪んだアスペクト比でレンダリングされる場合に警告します。
 
-You can typically fix this by adding `height: auto` or `width: auto` to your image styles. For more information, see the [web.dev article on the `<img>` tag](https://web.dev/patterns/web-vitals-patterns/images/img-tag/).
+これは通常、画像スタイルに `height: auto` または `width: auto` を追加することで修正できます。詳細については、[`<img>` タグに関する web.dev の記事](https://web.dev/patterns/web-vitals-patterns/images/img-tag/) を参照してください。
 
-### Handling `srcset` attributes
+### `srcset` 属性の処理
 
-If your `<img>` tag defines a `srcset` attribute, replace it with `rawSrcset`.
+`<img>` タグが `srcset` 属性を定義している場合は、それを `rawSrcset` に置き換えます。
 
 <code-example format="html" language="html">
   &lt;img rawSrc="hero.jpg" rawSrcset="100w, 200w, 300w"&gt;
 </code-example>
 
-If the `rawSrcset` attribute is present, `NgOptimizedImage` generates and sets the [`srcset` attribute](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset) using the configured image loader. Do not include image file names in `rawSrcset` - the directive infers this information from `rawSrc`. The directive supports both width descriptors (e.g. `100w`) and density descriptors (e.g. `1x`) are supported.
+`rawSrcset` 属性が存在する場合、`NgOptimizedImage` は構成された画像ローダーを使用して [`srcset` 属性](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset) を生成および設定します。`rawSrcset` に画像ファイル名を含めないでください。ディレクティブはこの情報を `rawSrc` から推測します。このディレクティブは、幅記述子 (例: `100w`) と密度記述子 (例: `1x`) の両方をサポートしています。
 
-You can also use `rawSrcset` with the standard image [`sizes` attribute](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes).
+また、標準の画像の [`sizes` 属性](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes) で `rawSrcset` を使用することもできます。
 
 <code-example format="html" language="html">
   &lt;img rawSrc="hero.jpg" rawSrcset="100w, 200w, 300w" sizes=”50vw”&gt;
 </code-example>
 
-### Disabling image lazy loading
+### 画像の遅延読み込みを無効にする
 
-By default, `NgOptimizedImage` sets `loading=lazy` for all images that are not marked `priority`. You can disable this behavior for non-priority images by setting the `loading` attribute. This attribute accepts values: `eager`, `auto`, and `lazy`. [See the documentation for the standard image `loading` attribute for details](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading#value).
+デフォルトでは、`NgOptimizedImage` は `priority` とマークされていないすべての画像に対して `loading=lazy` を設定します。`loading` 属性を設定することで、優先度の低い画像に対してこの動作を無効にすることができます。この属性は値として `eager`、`auto`、`lazy` を受け入れます。[詳細については、標準の画像の `loading` 属性のドキュメントを参照してください](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading#value)。
 
 <code-example format="html" language="html">
   &lt;img rawSrc="cat.jpg" width="400" height="200" loading="eager"&gt;

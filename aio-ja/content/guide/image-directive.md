@@ -4,11 +4,11 @@
 
 `NgOptimizedImage` ディレクティブを使用すると、画像をロードするためのパフォーマンスのベストプラクティスを簡単に採用できます。
 
-`NgOptimizedImage` ディレクティブは、[LCP 画像](http://web.dev/lcp) の読み込みが次によって優先されることを保証します:
+`NgOptimizedImage` ディレクティブは、[LCP](http://web.dev/lcp) 画像の読み込みが次によって優先されることを保証します:
 
 *   `<img>` タグに `fetchpriority` 属性を自動的に設定する
 *   デフォルトで他の画像を遅延読み込みする
-*   ドキュメントヘッドに、対応する preconnect リンクタグがあることを検証する
+*   ドキュメントのheadに、対応する preconnect リンクタグがあることを検証する
 
 LCP 画像の読み込みを最適化することに加えて、`NgOptimizedImage` は多くの画像のベストプラクティスを適用します。
 

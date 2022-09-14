@@ -831,7 +831,8 @@
         {
           "title": "DevTools",
           "tooltip": "DevTools",
-          "url": "guide/devtools"
+          "url": "guide/devtools",
+          "translated": true
         },
         {
           "title": "Schematics",

@@ -1,7 +1,7 @@
-# DevTools Overview
+# DevToolsの概要
 
-Angular DevTools is a browser extension that provides debugging and profiling capabilities for Angular applications.
-Angular DevTools supports Angular v12 and later.
+Angular DevTools は、Angular アプリケーションのデバッグおよびプロファイリング機能を提供するブラウザ拡張機能です。
+Angular DevTools は、Angular v12 以降をサポートしています。
 
 <div class="video-container">
 
@@ -9,9 +9,9 @@ Angular DevTools supports Angular v12 and later.
 
 </div>
 
-You can find Angular DevTools in the [Chrome Web Store](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh) and in [Firefox Addons](https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/).
+Angular DevTools は、[Chrome ウェブストア](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh) と [Firefox アドオン](https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/) で見つけられます。
 
-After installing Angular DevTools, find the extension under the Angular tab in your browser DevTools.
+Angular DevTools をインストールしたら、ブラウザの DevTools の Angular タブで拡張機能を見つけます。
 
 <div class="lightbox">
 
@@ -19,12 +19,12 @@ After installing Angular DevTools, find the extension under the Angular tab in y
 
 </div>
 
-When you open the extension, you'll see two additional tabs:
+拡張機能を開くと、2 つの追加のタブが表示されます。
 
-| Tabs                      | Details |
-|:---                       |:---     |
-| [Components](#components) | Lets you explore the components and directives in your application and preview or edit their state.                    |
-| [Profiler](#profiler)     | Lets you profile your application and understand what the performance bottleneck is during change detection execution. |
+| タブ                        | 詳細                                                         |
+|:--------------------------|:-----------------------------------------------------------|
+| [Components](#components) | アプリケーション内のコンポーネントとディレクティブを探索し、それらの状態をプレビューまたは編集できます。       |
+| [Profiler](#profiler)     | アプリケーションのプロファイリングを行い、変更検知の実行中にパフォーマンスのボトルネックが何であるかを理解できます。 |
 
 <div class="lightbox">
 
@@ -32,29 +32,29 @@ When you open the extension, you'll see two additional tabs:
 
 </div>
 
-In the top-right corner of Angular DevTools you'll find which version of Angular is running on the page as well as the latest commit hash for the extension.
+Angular DevTools の右上隅には、ページで実行されている Angular のバージョンと、拡張機能の最新のコミットハッシュが表示されます。
 
-## Bug reports
+## バグレポート
 
-Report issues and feature requests on [GitHub](https://github.com/angular/angular/issues).
+[GitHub](https://github.com/angular/angular/issues) で問題と機能のリクエストを報告してください。
 
-To report an issue with the Profiler, export the Profiler recording by clicking the **Save Profile** button, and then attaching that export as a file in the issue.
+プロファイラーの問題を報告するには、**Save Profile** ボタンをクリックしてプロファイラーの記録をエクスポートし、ファイルとしてイシューに添付します。
 
 <div class="alert is-helpful">
 
-Make sure that the Profiler recording does not contain any confidential information.
+プロファイラーの記録に機密情報が含まれていないことを確認してください。
 
 </div>
 
 <a id="components"></a>
 
-## Debug your application
+## アプリケーションをデバッグする
 
-The **Components** tab lets you explore the structure of your application.
-You can visualize and inspect the component and directive instances and preview or modify their state.
-In the next couple of sections we'll look into how to use this tab effectively to debug your application.
+**Components** タブでは、アプリケーションの構造を調べることができます。
+コンポーネントとディレクティブのインスタンスを視覚化して検査し、それらの状態をプレビューまたは変更できます。
+次のいくつかのセクションでは、このタブを効果的に使用してアプリケーションをデバッグする方法を検討します。
 
-### Explore the application structure
+### アプリケーションの構造を調べる
 
 <div class="lightbox">
 
@@ -62,26 +62,26 @@ In the next couple of sections we'll look into how to use this tab effectively t
 
 </div>
 
-In the preceding screenshot, you can see the component tree of an application.
+上のスクリーンショットでは、アプリケーションのコンポーネントツリーを確認できます。
 
-The component tree displays a hierarchical relationship of the *components and directives* within your application.
-When you select a component or a directive instance, Angular DevTools presents additional information about that instance.
+コンポーネントツリーには、アプリケーション内の *コンポーネントとディレクティブ* の階層関係が表示されます。
+コンポーネントまたはディレクティブインスタンスを選択すると、Angular DevTools はそのインスタンスに関する追加情報を表示します。
 
-### View properties
+### プロパティを見る
 
-Click the individual components or directives in the component explorer to select them and preview their properties.
-Angular DevTools displays their properties and metadata on the right-hand side of the component tree.
+コンポーネントエクスプローラーで個々のコンポーネントまたはディレクティブをクリックして選択し、それらのプロパティをプレビューします。
+Angular DevTools は、プロパティとメタデータをコンポーネントツリーの右側に表示します。
 
-Navigate in the component tree using the mouse or the following keyboard shortcuts:
+マウスまたは次のキーボードショートカットを使用して、コンポーネントツリー内を移動します。
 
-| Keyboard shortcut     | Details |
-|:---                   |:---     |
-| Up and down arrows    | Select the previous and next nodes |
-| Left and right arrows | Collapse and expand a node         |
+| キーボードショートカット     | 詳細                                 |
+|:---                   |:-----------------------------------|
+| 上下の矢印    | 前のノードと次のノードを選択する |
+| 左右の矢印 | ノードの折りたたみと展開         |
 
-To look up a component or directive by name use the search box above the component tree.
-To navigate to the next search match, press `Enter`.
-To navigate to the previous search match, press `Shift + Enter`.
+コンポーネントまたはディレクティブを名前で検索するには、コンポーネントツリーの上にある検索ボックスを使用します。
+次の検索結果に移動するには、`Enter` キーを押します。
+前の検索結果に移動するには、`Shift + Enter` キーを押します。
 
 <div class="lightbox">
 
@@ -89,15 +89,15 @@ To navigate to the previous search match, press `Shift + Enter`.
 
 </div>
 
-### Navigate to the host node
+### ホストノードに移動する
 
-To go to the host element of a particular component or directive, find it in the component explorer and double-click it.
-Browsers' DevTools opens the Elements tab in Chrome or the Inspector one in Firefox, and selects the associated DOM node.
+特定のコンポーネントまたはディレクティブのホスト要素に移動するには、コンポーネントエクスプローラーでそれらを見つけてダブルクリックします。
+ブラウザの DevTools は、Chrome の Elements タブまたは Firefox の Inspector タブを開き、関連する DOM ノードを選択します。
 
-### Navigate to source
+### ソースに移動する
 
-For components, Angular DevTools also lets you navigate to the component definition in the source tab.
-After you select a particular component, click the icon at the top-right of the properties view:
+コンポーネントの場合、Angular DevTools では、ソースタブのコンポーネント定義に移動することもできます。
+特定のコンポーネントを選択したら、プロパティビューの右上にあるアイコンをクリックします。
 
 <div class="lightbox">
 
@@ -105,12 +105,12 @@ After you select a particular component, click the icon at the top-right of the 
 
 </div>
 
-### Update property value
+### プロパティ値を更新する
 
-Like browsers' DevTools, the properties view lets you edit the value of an input, output, or another property.
-Right-click on the property value.
-If edit functionality is available for this value type, you'll see a text input.
-Type the new value and press `Enter`.
+ブラウザの DevTools と同様に、プロパティビューを使用すると、入力、出力、または別のプロパティの値を編集できます。
+プロパティ値を右クリックします。
+この値のタイプで編集機能が使用可能な場合は、テキスト入力が表示されます。
+新しい値を入力して `Enter` を押します。
 
 <div class="lightbox">
 
@@ -118,10 +118,10 @@ Type the new value and press `Enter`.
 
 </div>
 
-### Access selected component or directive in console
+### コンソールで選択したコンポーネントまたはディレクティブにアクセスする
 
-As a shortcut in the console, Angular DevTools provides you access to instances of the recently selected components or directives.
-Type `$ng0` to get a reference to the instance of the currently selected component or directive, and type `$ng1` for the previously selected instance.
+コンソールのショートカットとして、Angular DevTools は最近選択したコンポーネントまたはディレクティブのインスタンスへのアクセスを提供します。
+現在選択されているコンポーネントまたはディレクティブのインスタンスへの参照を取得するには `$ng0` と入力し、その前に選択したインスタンスの場合は `$ng1` と入力します。
 
 <div class="lightbox">
 
@@ -129,11 +129,11 @@ Type `$ng0` to get a reference to the instance of the currently selected compone
 
 </div>
 
-### Select a directive or component
+### ディレクティブまたはコンポーネントを選択する
 
-Similar to browsers' DevTools, you can inspect the page to select a particular component or directive.
-Click the ***Inspect element*** icon at the top left corner within Angular DevTools and hover over a DOM element on the page.
-The extension recognizes the associated directives and/or components and lets you select the corresponding element in the Component tree.
+ブラウザの DevTools と同様に、ページを調べて特定のコンポーネントまたはディレクティブを選択できます。
+Angular DevTools 内の左上隅にある ***Inspect element*** アイコンをクリックし、ページ上の DOM 要素にカーソルを合わせます。
+拡張機能は、関連するディレクティブやコンポーネントを認識し、コンポーネントツリーで対応する要素を選択できるようにします。
 
 <div class="lightbox">
 
@@ -143,9 +143,9 @@ The extension recognizes the associated directives and/or components and lets yo
 
 <a id="profiler"></a>
 
-## Profile your application
+## アプリケーションをプロファイリングする
 
-The **Profiler** tab lets you preview the execution of Angular's change detection.
+**Profiler** タブでは、Angular の変更検知の実行をプレビューできます。
 
 <div class="lightbox">
 
@@ -153,18 +153,18 @@ The **Profiler** tab lets you preview the execution of Angular's change detectio
 
 </div>
 
-The Profiler lets you start profiling or import an existing profile.
-To start profiling your application, hover over the circle at the top-left corner within the **Profiler** tab and click **Start recording**.
+プロファイラーを使用すると、プロファイリングを開始したり、既存のプロファイルをインポートしたりできます。
+アプリケーションのプロファイリングを開始するには、**Profiler** タブ内の左上隅にある円の上にカーソルを置き、**Start recording** をクリックします。
 
-During profiling, Angular DevTools captures execution events, such as change detection and lifecycle hook execution.
-To finish recording, click the circle again to **Stop recording**.
+プロファイリング中、Angular DevTools は変更検知やライフサイクルフックの実行などの実行イベントをキャプチャします。
+記録を終了するには、円をもう一度クリックして **記録を停止** します。
 
-You can also import an existing recording.
-Read more about this feature in the [Import recording](#) section.
+既存の記録をインポートすることもできます。
+この機能の詳細については、[記録をインポートする](#) セクションを参照してください。
 
-### Understand your application's execution
+### アプリケーションの実行を理解する
 
-In the following screenshot, find the default view of the Profiler after you complete recording.
+次のスクリーンショットは、記録が完了した後のプロファイラーの既定の表示内容の例です。
 
 <div class="lightbox">
 
@@ -172,9 +172,9 @@ In the following screenshot, find the default view of the Profiler after you com
 
 </div>
 
-Near the top of the view you can see a sequence of bars, each one of them symbolizing change detection cycles in your app.
-The taller a bar is, the longer your application has spent in this cycle.
-When you select a bar, DevTools renders a bar chart with all the components and directives that it captured during this cycle.
+ビューの上部近くに一連のバーが表示され、それぞれがアプリケーションの変更検知サイクルを象徴しています。
+バーが高いほど、アプリケーションがこのサイクルで費やした時間が長いことを意味します。
+バーを選択すると、DevTools は、このサイクル中にキャプチャしたすべてのコンポーネントとディレクティブを含む棒グラフをレンダリングします。
 
 <div class="lightbox">
 
@@ -182,14 +182,14 @@ When you select a bar, DevTools renders a bar chart with all the components and 
 
 </div>
 
-Earlier on the change detection timeline, you can find how much time Angular spent in this cycle.
-Angular DevTools attempts to estimate the frame drop at this point to indicate when the execution of your application might impact the user experience.
+変更検知タイムラインの早い段階で、Angular がこのサイクルに費やした時間を確認できます。
+Angular DevTools は、この時点でフレームの欠落を推定して、アプリケーションの実行がいつユーザー体験に影響を与える可能性があるかを示します。
 
-Angular DevTools also indicates what triggered the change detection \(that is, the change detection's source\).
+Angular DevTools は、何が変更検知をトリガーしたか \(つまり、変更検知のソース\) も示します。
 
-### Understand component execution
+### コンポーネントの実行を理解する
 
-When you click on a bar, you'll find a detailed view about how much time your application spent in the particular directive or component:
+バーをクリックすると、アプリケーションが特定のディレクティブまたはコンポーネントで費やした時間に関する詳細ビューが表示されます。
 
 <div class="lightbox">
 
@@ -197,10 +197,10 @@ When you click on a bar, you'll find a detailed view about how much time your ap
 
 </div>
 
-Figure shows the total time spent by NgforOf directive and which method was called in it.
-It also shows the parent hierarchy of the directive selected.
+この図は、NgforOf ディレクティブによって費やされた合計時間と、その中で呼び出されたメソッドを示しています。
+また、選択したディレクティブの親階層も表示されます。
 
-### Hierarchical views
+### 階層ビュー
 
 <div class="lightbox">
 
@@ -208,22 +208,22 @@ It also shows the parent hierarchy of the directive selected.
 
 </div>
 
-You can also preview the change detection execution in a flame graph-like view.
-Each tile in the graph represents an element on the screen at a specific position in the render tree.
+フレームグラフのようなビューで変更検知の実行をプレビューすることもできます。
+グラフ内の各タイルは、レンダーツリー内の特定の位置にある画面上の要素を表します。
 
-For example, if during one change detection cycle at a specific position in the component tree you had `ComponentA`, this component was removed and in its place Angular rendered `ComponentB`, you'll see both components at the same tile.
+たとえば、ある変更検知サイクル中にコンポーネントツリーの特定の位置に `ComponentA` があり、このコンポーネントが削除され、その代わりに Angular が `ComponentB` をレンダリングした場合、両方のコンポーネントが同じタイルに表示されます。
 
-Each tile is colored depending on how much time Angular spent there.
-DevTools determines the intensity of the color by the time spent relative to the tile where we've spent the most time in change detection.
+各タイルは、Angular がそこで費やした時間に応じて色付けされます。
+DevTools は、変更検知にもっとも時間をかけたタイルとの相対的な時間によって、色の濃さを決定します。
 
-When you click on a certain tile, you'll see details about it in the panel on the right.
-Double-clicking the tile zooms it in so you can preview the nested children.
+特定のタイルをクリックすると、右側のパネルに詳細が表示されます。
+タイルをダブルクリックすると拡大され、ネストされた子をプレビューできます。
 
-### Debug OnPush
+### OnPushをデバッグする
 
-To preview the components in which Angular did change detection, select the **Change detection** checkbox at the top, above the flame graph.
+Angular が変更を検知したコンポーネントをプレビューするには、フレームグラフの上にある **Change detection** チェックボックスを選択します。
 
-This view colors all the tiles in which Angular performed change detection in green, and the rest in gray:
+このビューは、Angular が変更検知を実行したすべてのタイルを緑色で、残りを灰色で色付けします。
 
 <div class="lightbox">
 
@@ -231,10 +231,10 @@ This view colors all the tiles in which Angular performed change detection in gr
 
 </div>
 
-### Import recording
+### 記録をインポートする
 
-Click the **Save Profile** button at the top-left of a recorded profiling session to export it as a JSON file and save it to the disk.
-Then, import the file in the initial view of the profiler by clicking the **Choose file** input:
+記録されたプロファイリングセッションの右上にある **Save Profile** ボタンをクリックして、JSON ファイルとしてエクスポートし、ディスクに保存します。
+次に、 **Choose file** をクリックして、プロファイラーの初期ビューでファイルをインポートします。
 
 <div class="lightbox">
 

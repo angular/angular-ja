@@ -9,7 +9,7 @@ Angular DevTools は、Angular v12 以降をサポートしています。
 
 </div>
 
-Angular DevTools は、[Chrome ウェブストア](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh) と [Firefox アドオン](https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/) にあります。
+Angular DevTools は、[Chrome ウェブストア](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh) と [Firefox アドオン](https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/) で見つけられます。
 
 Angular DevTools をインストールしたら、ブラウザの DevTools の Angular タブで拡張機能を見つけます。
 

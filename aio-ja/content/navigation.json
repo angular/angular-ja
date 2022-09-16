@@ -762,8 +762,9 @@
         },
         {
           "url": "guide/lightweight-injection-tokens",
-          "title": "Lightweight Injection Tokens for Libraries",
-          "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
+          "title": "軽量インジェクショントークン",
+          "tooltip": "軽量インジェクショントークンを使用したライブラリサービスの設計により、クライアントアプリのサイズを最適化します。",
+          "translated": true
         }
       ]
     },

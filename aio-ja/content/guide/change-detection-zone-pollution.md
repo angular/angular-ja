@@ -3,7 +3,6 @@
 **Zone.js** は、Angular がアプリケーションの状態が変更されたことを検知するために使用するシグナルメカニズムです。`setTimeout`、ネットワークリクエスト、イベントリスナーなどの非同期操作を捕捉します。Angular は Zone.js からのシグナルに基づいて変更検知をスケジュールします。
 
 スケジュールされた[タスク](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide#tasks)や[マイクロタスク](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide#microtasks)がデータモデルに変更を加えないため、変更検知の実行が不要になるケースがあります。一般的な例としては、
-
 - `requestAnimationFrame`、 `setTimeout` または `setInterval`
 - サードパーティライブラリによるタスクまたはマイクロタスクのスケジューリング
 
@@ -18,6 +17,7 @@ Angular DevTools を使用すると、不要な変更検知の呼び出しを見
 </div>
 
 上の画像では、ある要素に関連するイベントハンドラーによって引き起こされる一連の変更検知の呼び出しがあります。これは、`NgZone`のデフォルトの動作を変更しない、サードパーティの非ネイティブの Angular コンポーネントを使用する場合によくある課題です。
+
 
 ## NgZone の外でタスクを実行
 

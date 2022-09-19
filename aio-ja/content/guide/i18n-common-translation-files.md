@@ -15,7 +15,7 @@
     1.  [代替表現を翻訳する][AioGuideI18nCommonTranslationFilesTranslateAlternateExpressions]。
     1.  [ネストされた式を翻訳する][AioGuideI18nCommonTranslationFilesTranslateNestedExpressions]。
 
-## ソース言語ファイルを抽出する
+## ソース言語ファイルを抽出する {@a extract-the-source-language-file}
 
 To extract the source language file, complete the following actions.
 
@@ -82,7 +82,7 @@ The following example demonstrates naming the output file.
 
 <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-out-file"></code-example>
 
-## 各言語の翻訳ファイルを作成する
+## 各言語の翻訳ファイルを作成する {@a create-a-translation-file-for-each-language}
 
 To create a translation file for a locale or language, complete the following actions.
 
@@ -118,7 +118,7 @@ For example, to create a French translation file, complete the following actions
 1.  Move the `fr` translation file to the `src/locale` directory.
 1.  Send the `fr` translation file to the translator.
 
-## 各翻訳ファイルを翻訳する
+## 各翻訳ファイルを翻訳する {@a translate-each-translation-file}
 
 Unless you are fluent in the language and have the time to edit translations, you will likely complete the following steps.
 
@@ -160,7 +160,7 @@ The following actions describe the translation process for French.
 
     </div>
 
-## 複数形を翻訳する
+## 複数形を翻訳する {@a translate-plurals}
 
 Add or remove plural cases as needed for each language.
 
@@ -182,7 +182,7 @@ The following example displays the way to translate.
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-plural"></code-example>
 
-## 代替表現を翻訳する
+## 代替表現を翻訳する {@a translate-alternate-expressions}
 
 Angular also extracts alternate `select` ICU expressions as separate translation units.
 
@@ -212,7 +212,7 @@ The following example displays both translation units after translation is compl
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-select"></code-example>
 
-## ネストされた式を翻訳する
+## ネストされた式を翻訳する {@a translate-nested-expressions}
 
 Angular treats a nested expression in the same manner as an alternate expression.
 Angular extracts the expression into two translation units.

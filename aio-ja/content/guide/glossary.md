@@ -32,13 +32,14 @@ Angularには独自の用語があります。
 [Y][AioGuideGlossaryY]
 [Z][AioGuideGlossaryZ]
 
+<!-- vale Angular.Google_Headings = NO -->
+
 <a id="aot"></a>
 
 ## 事前(AOT)コンパイル {@a ahead-of-time-aot-compilation}
 
-Angularの事前(AOT)コンパイラは、
-ブラウザがコードをダウンロードして実行する前のビルドフェーズ中に、
-AngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
+Angularの事前(AOT)コンパイラはビルドフェーズ中に、
+AngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。ビルドフェーズは、ブラウザがレンダリングコードをダウンロードして実行する前に発生します。
 これは本番環境に最適なコンパイルモードであり、[実行時(JIT)コンパイル][AioGuideGlossaryJustInTimeJitCompilation]と比較して、ロード時間が短縮され、パフォーマンスが向上します。
 
 `ngc`コマンドラインツールを使用してアプリケーションをコンパイルすることで、モジュールファクトリに直接ブートストラップできるため、JavaScriptバンドルにAngularコンパイラを含める必要はありません。
@@ -115,7 +116,7 @@ Angularでは、アプリケーションのルートNgModule(`AppModule`)には�
 
 ## ビルダ {@a builder}
 
-A function that uses the [Architect](#architect) API to perform a complex process such as "build" or "test".
+A function that uses the [Architect][AioGuideGlossaryArchitect] API to perform a complex process such as `build` or `test`.
 The builder code is defined in an [npm package](#npm-package).
 
 For example, [BrowserBuilder](https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/browser) runs a [webpack](https://webpack.js.org/) build for a browser target and [KarmaBuilder](https://github.com/angular/angular-cli/tree/main/packages/angular_devkit/build_angular/src/karma) starts the Karma server and runs a webpack build for unit tests.
@@ -134,19 +135,13 @@ The [workspace configuration](guide/workspace-config) file, `angular.json`, cont
 
 Angularは、スタイルガイドの[命名ガイドラインのセクション](guide/styleguide#02-01)で説明されるように、大文字と小文字の慣例を使用してさまざまな型の名前を区別します。 ケースタイプの概要は次のとおりです:
 
-* camelCase : シンボル、プロパティ、メソッド、パイプの名前や、コンポーネントではないディレクティブのセレクター、定数。
-標準のまたはローワーキャメルケースは、項目の最初の文字に小文字を使用します。たとえば、"selectedHero"。
-
-* UpperCamelCase (またはPascalCase): クラス名。これはコンポーネント、インターフェース、NgModule、ディレクティブ、パイプを定義するクラスを含みます。
-アッパーキャメルケースは、項目の最初の文字に大文字を使用します。たとえば、"HeroListComponent"。
-
-* dash-case (または"kebab-case"): 説明部分でのファイル名、コンポーネントのセレクター。たとえば、"app-hero-list"。
-
-* underscore_case (または"snake_case"): 通常、Angularでは使用しません。スネークケースは、アンダースコアで繋げた単語を使用します。
-たとえば、"convert_link_mode"。
-
-* UPPER_UNDERSCORE_CASE (またはUPPER_SNAKE_CASE、SCREAMING_SNAKE_CASE): 従来の定数(許容されますが、camelCaseが好まれます)。
-アッパースネークケースは、アンダースコアで繋げたすべて大文字の単語を使用します。たとえば、"FIX_ME"。
+|                                                                           | Details                                                                                                                                                                      | example             |
+|:---                                                                       |:---                                                                                                                                                                          |:---                 |
+| camelCase                                                                 | Symbols, properties, methods, pipe names, non-component directive selectors, constants. <br /> Standard or lower camel case uses lowercase on the first letter of the item.  | `selectedHero`      |
+| UpperCamelCase <br /> PascalCase                                          | Class names, including classes that define components, interfaces, NgModules, directives, and pipes. <br /> Upper camel case uses uppercase on the first letter of the item. | `HeroComponent` |
+| dash-case <br /> kebab-case                                               | Descriptive part of file names, component selectors.                                                                                                                         | `app-hero-list`     |
+| underscore_case <br /> snake_case                                         | Not typically used in Angular. <br /> Snake case uses words connected with underscores.                                                                                      | `convert_link_mode` |
+| UPPER_UNDERSCORE_CASE <br /> UPPER_SNAKE_CASE <br /> SCREAMING_SNAKE_CASE | Traditional for constants. <br /> This case is acceptable, but camelCase is preferred. <br /> Upper snake case uses words in all capital letters connected with underscores. | `FIX_ME`            |
 
 {@a change-detection}
 
@@ -271,15 +266,19 @@ Angularコンポーネントを変換するAPIを使うことによって、そ�
 ## 宣言
 
 [NgModule](#ngmodule)の`declarations`リストに追加できるクラス型。
-[コンポーネント][AioGuideGlossaryComponent]と[ディレクティブ][AioGuideGlossaryDirective]、[パイプ](#pipe)を宣言できます。
+[コンポーネント][AioGuideGlossaryComponent]と[ディレクティブ][AioGuideGlossaryDirective]、[パイプ](#pipe)を宣言できますが、ただし、デコレーターの `standalone` フラグが `true` に設定されている場合は、スタンドアロンになります。Note: standalone components/directives/pipes are **not** declarables. More info about standalone classes can be found [below][AioGuideGlossaryStandalone].
 
 次のものは宣言しないでください:
-* 別のNgModuleですでに宣言されているクラス。
-* 別のパッケージからインポートされたディレクティブの配列。たとえば、`@angular/forms`由来の`FORMS_DIRECTIVES`を宣言しないでください。
-* NgModuleクラス。
-* サービスクラス。
-* Angularではないクラスとオブジェクト。たとえば文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなど。
 
+*   A class already declared as [standalone][AioGuideGlossaryStandalone].
+*   別のNgModuleですでに宣言されているクラス。
+*   別のパッケージからインポートされたディレクティブの配列。
+    たとえば、`@angular/forms`由来の`FORMS_DIRECTIVES`を宣言しないでください。
+*   NgModuleクラス。
+*   サービスクラス。
+*   Angularではないクラスとオブジェクト。たとえば文字列、数値、関数、エンティティモデル、設定、ビジネスロジック、ヘルパークラスなど。
+
+Note that declarables can also be declared as standalone and simply be imported inside other standalone components or existing NgModules, to learn more, see the [Standalone components guide][AioGuideStandalone].
 
 {@a decorator}
 
@@ -324,6 +323,7 @@ Angularでは、依存性は通常サービスですが、文字列や関数な�
 ディレクティブクラスは通常、HTML要素や属性に関連付けられており、この要素や属性は、しばしばそのディレクティブ自身を指し示します。AngularはHTML[テンプレート](#template)でディレクティブを見つけると、一致するディレクティブクラスのインスタンスを作成し、ブラウザDOMのその部分の制御をインスタンスに渡します。
 
 ディレクティブには3つの種類があります:
+
 * [コンポーネント][AioGuideGlossaryComponent]は、`@Component()`(`@Directive()`の拡張)を使用して、テンプレートをクラスに関連付けます。
 
 * [属性ディレクティブ](#attribute-directive)は、ページ要素の動作と外観を変更します。
@@ -867,6 +867,17 @@ injectableクラスは[プロバイダー][AioGuideGlossaryProvider]によって
 
 もっと学ぶには、[サービスと依存性の注入のイントロダクション](guide/architecture-services)を参照してください。
 
+## standalone
+
+A configuration of [components][AioGuideGlossaryComponent], [directives][AioGuideGlossaryDirective], and [pipes][AioGuideGlossaryPipe] to indicate that this class can be imported directly without declaring it in any [NgModule][AioGuideGlossaryNgmodule].
+
+Standalone components, directives and pipes mainly differ from non-standalone ones by:
+ - having the `standalone` field of their decorator set to `true`.
+ - allowing their direct importing without the need to pass through NgModules.
+ - specifying their dependencies directly in their decorator.
+
+To learn more, see the [Standalone components guide][AioGuideStandalone].
+
 {@a structural-directive}
 {@a structural-directives}
 
@@ -1120,6 +1131,8 @@ A zone client can take action before and after an async operation completes.
 Learn more about zones in this
 [Brian Ford video][YoutubeWatchV3iqtmusceU].
 
+<!-- vale Angular.Google_Headings = YES -->
+
 <!-- links -->
 
 [AioApiCommonDatepipe]: api/common/DatePipe "DatePipe | @angular/common - API | Angular"
@@ -1257,6 +1270,7 @@ Learn more about zones in this
 [AioGuideGlossaryScopedPackage]: guide/glossary#scoped-package "scoped package - Glossary | Angular"
 [AioGuideGlossaryServerSideRendering]: guide/glossary#server-side-rendering "server-side rendering - Glossary | Angular"
 [AioGuideGlossaryService]: guide/glossary#service "service - Glossary | Angular"
+[AioGuideGlossaryStandalone]: guide/glossary#standalone "standalone - Glossary | Angular"
 [AioGuideGlossaryStructuralDirective]: guide/glossary#structural-directive "structural directive - Glossary | Angular"
 [AioGuideGlossarySubscriber]: guide/glossary#subscriber "subscriber - Glossary | Angular"
 [AioGuideGlossaryT]: guide/glossary#target "T - Glossary | Angular"
@@ -1283,6 +1297,7 @@ Learn more about zones in this
 [AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
 
 [AioGuideInterpolation]: guide/interpolation "Text interpolation | Angular"
+
 <!-- [AioGuideInterpolationTemplateExpressions]: guide/interpolation#template-expressions "Template expressions - Text interpolation | Angular" -->
 
 [AioGuideNgmodules]: guide/ngmodules "NgModules | Angular"
@@ -1305,6 +1320,8 @@ Learn more about zones in this
 [AioGuideServiceWorkerIntro]: guide/service-worker-intro "Angular service worker introduction | Angular"
 
 [AioGuideSetupLocal]: guide/setup-local "Setting up the local environment and workspace | Angular"
+
+[AioGuideStandalone]: guide/standalone-components "Getting started with standalone components | Angular"
 
 [AioGuideStructuralDirectives]: guide/structural-directives "Structural directives | Angular"
 

@@ -1280,7 +1280,7 @@ AngularJS の　`ng-app` ディレクティブを使って、ブートストラ�
 AngularJS と Angular を両方同時に動かすようになりました。とてもエキサイティングです！
 Angular のコンポーネントはまだ動かしていません。それは次で行います。
 
-<div class="alert is-helpful">
+<div class="callout is-helpful">
 
 #### なぜ *angular* を *angular.IAngularStatic* として宣言するか
 
@@ -1298,7 +1298,7 @@ ES2015 のモジュールを使う必要があります。
 代わりに、`angular` を `angular.IAngularStatic` として宣言することで、
 グローバル変数ということを示し、すべての型サポートを得ることができます。
 
-<div class="alert is-important">
+<div class="callout is-important">
 
 <header>Manually create a UMD bundle for your Angular application</header>
 
@@ -1877,7 +1877,6 @@ Angular のコンポーネントのユニットテスト API を両方のコン�
 [AioGuideAotCompiler]: guide/aot-compiler "Ahead-of-time (AOT) compilation | Angular"
 [AioGuideBuiltInDirectives]: guide/built-in-directives "Built-in directives | Angular"
 [AioGuideDependencyInjection]: guide/dependency-injection "Dependency injection in Angular | Angular"
-[AioGuideDependencyInjectionProvidersFactoryProviders]: guide/dependency-injection-providers#factory-providers "Using factory providers - Dependency providers | Angular"
 [AioGuideGlossaryLazyLoading]: guide/glossary#lazy-loading "lazy loading - Glossary | Angular"
 [AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
 [AioGuideLifecycleHooks]: guide/lifecycle-hooks "Lifecycle hooks | Angular"

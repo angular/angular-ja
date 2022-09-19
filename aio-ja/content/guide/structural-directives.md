@@ -303,32 +303,27 @@ Angularは、構造ディレクティブの短縮表記を次のように通常�
 
 たとえば、テンプレート式の結果を入力として受け取る次の構造ディレクティブについて考えてみます:
 
-<code-example language="ts" header="IfLoadedDirective">
-export type Loaded<T> = { type: 'loaded', data: T };
-export type Loading = { type: 'loading' };
-export type LoadingState<T> = Loaded<T> | Loading;
-export class IfLoadedDirective<T> {
-    @Input('ifLoaded') set state(state: LoadingState<T>) {}
-    static ngTemplateGuard_state<T>(dir: IfLoadedDirective<T>, expr: LoadingState<T>): expr is Loaded<T> { return true; };
-}
+<code-tabs linenums="true">
+  <code-pane
+    header="src/app/if-loaded.directive.ts"
+    path="structural-directives/src/app/if-loaded.directive.ts">
+  </code-pane>
+  <code-pane
+    header="src/app/loading-state.ts"
+    path="structural-directives/src/app/loading-state.ts">
+  </code-pane>
+  <code-pane
+    header="src/app/hero.component.ts"
+    path="structural-directives/src/app/hero.component.ts">
+  </code-pane>
+</code-tabs>
 
-export interface Person {
-  name: string;
-}
+この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の2つの状態のいずれかを許可します。
+The expression used as the directive's `state` input (aliased as `appIfLoaded`) is of the umbrella type `LoadingState`, as it's unknown what the loading state is at that point.
 
-@Component({
-  template: `&lt;div *ifLoaded="state">{{ state.data }}&lt;/div>`,
-})
-export class AppComponent {
-  state: LoadingState<Person>;
-}
-</code-example>
-
-この例では、`LoadingState<T>` は、`Loaded<T>` または `Loading` の2つの状態のいずれかを許可します。ディレクティブの `state` を入力として使用される式は、その時点でのロード状態が不明であるため、包括的な `LoadingState` 型です。
-
-`ifLoadedDirective` の定義では、絞り込みの動作を表現する静的関数 `ngTemplateGuard_state` を宣言しています。
-`AppComponent` テンプレートの中で、`*ifLoaded` 構造ディレクティブは、`state` が実際に `Loaded<Person>` である場合にのみ、このテンプレートをレンダリングすべきです。
-型ガードにより、型チェッカーはテンプレート内の `state` の許容する型が `Loaded<T>` であることを推論し、さらに `T` が `Person` のインスタンスでなければならないことを推論します。
+`ifLoadedDirective` の定義では、絞り込みの動作を表現する静的関数 `ngTemplateGuard_appIfLoaded` を宣言しています。
+`AppComponent` テンプレートの中で、`*appIfLoaded` 構造ディレクティブは、`state` が実際に `Loaded<Hero>` である場合にのみ、このテンプレートをレンダリングすべきです。
+型ガードにより、型チェッカーはテンプレート内の `state` の許容する型が `Loaded<T>` であることを推論し、さらに `T` が `Hero` のインスタンスでなければならないことを推論します。
 
 {@a narrowing-context-type}
 
@@ -337,16 +332,17 @@ export class AppComponent {
 構造ディレクティブがインスタンス化されたテンプレートにコンテキストを提供している場合、静的な `ngTemplateContextGuard` 関数を用意することで、テンプレート内部で適切な型を参照し入力することができます。
 次のスニペットはそのような関数の例を示しています。
 
-<code-example language="ts" header="myDirective.ts">
-@Directive({…})
-export class ExampleDirective {
-    // テンプレートチェッカーが、このディレクティブのテンプレートが
-    // レンダリングされるコンテキストの型を認識していることを確認してください。
-    static ngTemplateContextGuard(dir: ExampleDirective, ctx: unknown): ctx is ExampleContext { return true; };
-
-    // …
-}
-</code-example>
+<code-tabs linenums="true">
+  <code-pane
+    header="src/app/trigonometry.directive.ts"
+    path="structural-directives/src/app/trigonometry.directive.ts">
+  </code-pane>
+  <code-pane
+    header="src/app/app.component.html (appTrigonometry)"
+    path="structural-directives/src/app/app.component.html"
+    region="appTrigonometry">
+  </code-pane>
+</code-tabs>
 
 <!-- links -->
 

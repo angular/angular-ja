@@ -2,10 +2,10 @@ diff --git a/aio/src/app/app.module.ts b/aio/src/app/app.module.ts
 index 08043a7599..e16e785915 100644
 --- a/aio/src/app/app.module.ts
 +++ b/aio/src/app/app.module.ts
-@@ -160,7 +160,7 @@ export const svgIconProviders = [
+@@ -157,7 +157,7 @@ export const svgIconProviders = [
      ServiceWorkerModule.register(
          // Make sure service worker is loaded with a TrustedScriptURL
-         unwrapScriptUrlForSink(scriptUrl`/ngsw-worker.js`),
+         unwrapResourceUrl(trustedResourceUrl`/ngsw-worker.js`) as string,
 -        {enabled: environment.production}),
 +        {enabled: false && environment.production}),
    ],

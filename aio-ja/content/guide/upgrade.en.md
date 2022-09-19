@@ -364,7 +364,7 @@ The result is an AngularJS *directive*, which you can then register in the Angul
 <div class="alert is-helpful">
 
 By default, Angular change detection will also run on the component for everyAngularJS `$digest` cycle.
-If you want to only have change detection run when the inputs change, you can set `propagateDigest` to `false` when calling`downgradeComponent()`.
+If you want to only have change detection run when the inputs change, you can set `propagateDigest` to `false` when calling `downgradeComponent()`.
 
 </div>
 
@@ -1171,7 +1171,7 @@ That is pretty exciting!
 You're not running any actual Angular components yet.
 That is next.
 
-<div class="alert is-helpful">
+<div class="callout is-helpful">
 
 <header>Why declare *angular* as *angular.IAngularStatic*?</header>
 
@@ -1183,7 +1183,7 @@ If you used `import * as angular from 'angular'` instead, you'd also have to loa
 This is a considerable effort and it often isn't worth it, especially since you are in the process of moving your code to Angular.
 Instead, declare `angular` as `angular.IAngularStatic` to indicate it is a global variable and still have full typing support.
 
-<div class="alert is-important">
+<div class="callout is-important">
 
 <header>Manually create a UMD bundle for your Angular application</header>
 
@@ -1687,7 +1687,6 @@ And for the phone list component, a few adjustments to the router make the `Rout
 [AioGuideAotCompiler]: guide/aot-compiler "Ahead-of-time (AOT) compilation | Angular"
 [AioGuideBuiltInDirectives]: guide/built-in-directives "Built-in directives | Angular"
 [AioGuideDependencyInjection]: guide/dependency-injection "Dependency injection in Angular | Angular"
-[AioGuideDependencyInjectionProvidersFactoryProviders]: guide/dependency-injection-providers#factory-providers "Using factory providers - Dependency providers | Angular"
 [AioGuideGlossaryLazyLoading]: guide/glossary#lazy-loading "lazy loading - Glossary | Angular"
 [AioGuideHierarchicalDependencyInjection]: guide/hierarchical-dependency-injection "Hierarchical injectors | Angular"
 [AioGuideLifecycleHooks]: guide/lifecycle-hooks "Lifecycle hooks | Angular"

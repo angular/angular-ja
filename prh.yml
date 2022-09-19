@@ -39,7 +39,9 @@ rules:
     pattern: インジェクトする
 
   - expected: 注入可能
-    pattern: インジェクト可能
+    pattern: 
+      - インジェクト可能
+      - インジェクタブル
 
   - expected: 参照してください
     pattern: ご参照ください
@@ -76,6 +78,9 @@ rules:
 
   - expected: プロバイダー
     pattern:  /プロバイダ(?!ー)/
+
+  - expected: コンシューマー
+    pattern:  /コンシューマ(?!ー)/
 
   - expected: サーバー
     pattern: /サーバ(?!ー)/

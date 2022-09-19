@@ -390,9 +390,9 @@ import 'zone.js';  // Included with Angular CLI.
 `Zone`は、Angularが変更検知をトリガーするタイミングを知るのを補助し、開発者がアプリケーション開発に集中できるようにします。
 デフォルトで`Zone`は読み込まれ、追加の設定をすることなく動作します。しかし、Angularを動作させるために`Zone`を使用する必要はなく、かわりに自分で変更検知をトリガーすることも選択できます。
 
-<div class="alert is-helpful">
+<div class="callout is-helpful">
 
-<h4><code>Zone</code>の無効化</h4>
+<header>Zoneの無効化</header>
 
 **`Zone`を無効化する場合、すべての変更検知を自分で適切なタイミングにトリガーする必要があり、変更検知に関する包括的な知識が必要です。**
 

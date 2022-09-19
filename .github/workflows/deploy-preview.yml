@@ -7,12 +7,14 @@ on:
   pull_request_target:
     types: [labeled]
 
+permissions: write-all
+
 jobs:
   build:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'deploy preview version')
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with: 
         ref: ${{github.event.pull_request.head.ref}}
         repository: ${{github.event.pull_request.head.repo.full_name}}
@@ -22,6 +24,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version-file: .node-version
+        cache: yarn
     - name: Install
       run: yarn install
     - name: Build
@@ -34,7 +37,7 @@ jobs:
         expires: 30d
         projectId: angular-ja
     - name: Remove Label
-      uses: actions/github-script@v5
+      uses: actions/github-script@v6
       with:
         script: |
           github.rest.issues.removeLabel({

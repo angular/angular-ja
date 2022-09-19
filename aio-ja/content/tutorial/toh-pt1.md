@@ -11,7 +11,7 @@
 
 ## heroes コンポーネントを作成する {@a create-the-heroes-component}
 
-Angular CLIを使用して､`heroes`という名前の新しいコンポーネントを生成します。
+`ng generate`を使用して､`heroes`という名前の新しいコンポーネントを生成します。
 
 <code-example format="shell" language="shell">
 
@@ -19,7 +19,7 @@ ng generate component heroes
 
 </code-example>
 
-CLIは`src/app/heroes/`という新しいフォルダを作成し、`HeroesComponent`に関する3つのファイルをテストファイルと一緒に生成します。
+`ng generate`は`src/app/heroes/`という新しいフォルダを作成し、`HeroesComponent`に関する3つのファイルをテストファイルと一緒に生成します。
 
 `HeroesComponent`のクラスファイルは次のとおりです。
 
@@ -29,7 +29,7 @@ CLIは`src/app/heroes/`という新しいフォルダを作成し、`HeroesCompo
 
 `@Component`は、コンポーネントのAngularメタデータを指定するデコレーター関数です。
 
-CLIは3つのメタデータプロパティを生成しました:
+`ng generate`は3つのメタデータプロパティを生成しました:
 
 | Properties    | Details |
 |:---           |:---     |
@@ -49,14 +49,14 @@ Angularは、コンポーネントの作成直後に`ngOnInit()`を呼び出し�
 
 ### `hero` プロパティを追加する {@a add-a-hero-property}
 
-"Windstorm"という名前のヒーローのために、`HeroesComponent`に`hero`プロパティを追加します。
+`Windstorm`という名前のヒーローのために、`HeroesComponent`に`hero`プロパティを追加します。
 
 <code-example header="heroes.component.ts (hero property)" path="toh-pt1/src/app/heroes/heroes.component.ts" region="add-hero"></code-example>
 
 ### ヒーローを表示する {@a show-the-hero}
 
 `heroes.component.html`テンプレートファイルを開きます。
-Angular CLIで生成されたデフォルトのテキストを削除し、それを新しい`hero`プロパティへのデータバインディングに置き換えてください。
+`ng generate`で生成されたデフォルトのテキストを削除し、それを新しい`hero`プロパティへのデータバインディングに置き換えてください。
 
 <code-example header="heroes.component.html" path="toh-pt1/src/app/heroes/heroes.component.1.html" region="show-hero-1"></code-example>
 
@@ -65,7 +65,7 @@ Angular CLIで生成されたデフォルトのテキストを削除し、それ
 `HeroesComponent`を表示するには、それをアプリケーションシェルの`AppComponent`のテンプレートに追加する必要があります。
 
 `app-heroes`は`HeroesComponent`の[要素セレクタ](#selector)であることを思い出してください。
-なので、`AppComponent`のテンプレートファイルで、タイトルの直下に`<app-heroes>`要素を追加してください。
+`AppComponent`のテンプレートファイルで、タイトルの直下に`<app-heroes>`要素を追加してください。
 
 <code-example header="src/app/app.component.html" path="toh-pt1/src/app/app.component.html"></code-example>
 
@@ -76,7 +76,7 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 
 本当のヒーローは名前だけではありません。
 
-`src/app`フォルダ内の独自のファイルに、`Hero`インターフェースを作成します。
+`src/app`ディレクトリ内の独自のファイルに、`Hero`インターフェースを作成します。
 それに`id`プロパティと`name`プロパティを与えます。
 
 <code-example path="toh-pt1/src/app/hero.ts"  header="src/app/hero.ts"></code-example>
@@ -96,19 +96,20 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 
 ヒーローの名前を知らせるためにテンプレートのバインディングを更新し、次のような詳細レイアウトで`id`と`name`の両方を表示します。
 
-<code-example header="heroes.component.html (HeroesComponent's template)" path="toh-pt1/src/app/heroes/heroes.component.1.html" region="show-hero-2"></code-example>
+<code-example header="heroes.component.html (HeroesComponent template)" path="toh-pt1/src/app/heroes/heroes.component.1.html" region="show-hero-2"></code-example>
+
 
 ブラウザが更新され、ヒーローの情報が表示されます。
 
 ## `UppercasePipe` で書式設定する {@a format-with-the-uppercasepipe}
 
-`hero.name`のバインディングをこのように修正してください。
+`hero.name`のバインディングをこのように編集してください。
 
 <code-example header="src/app/heroes/heroes.component.html" path="toh-pt1/src/app/heroes/heroes.component.html" region="pipe"></code-example>
 
 ブラウザが更新され、ヒーローの名前が大文字で表示されるようになります。
 
-補間バインディングの中、パイプ演算子 \(<code>&verbar;</code>\) の直後にある単語`uppercase`は、組み込みの`UppercasePipe`を起動します。
+補間バインディングの中、パイプ演算子 <code>&verbar;</code> の直後にある単語`uppercase`は、組み込みの`UppercasePipe`を起動します。
 
 [パイプ](guide/pipes)は、文字列、通貨金額、日付や、その他の表示データを書式設定するのに適しています。
 Angularは複数のビルトインパイプを備えており、あなた自身が独自のパイプを作ることもできます。
@@ -161,17 +162,17 @@ Angularでは、アプリケーションの部品がどのように合わさる�
 
 もっとも重要な`@NgModule`デコレーターは、トップレベルの **AppModule** クラスに注釈を付けます。
 
-Angular CLI は、プロジェクトを作成するときに`src/app/app.module.ts`に`AppModule`クラスを作成しました。
-ここで`FormsModule`をオプトインします。
+`ng new` は、プロジェクトを作成するときに`src/app/app.module.ts`に`AppModule`クラスを作成しました。
+ここで`FormsModule`を_オプトイン_します。
 
 ### `FormsModule` をインポートする {@a import-formsmodule}
 
-`AppModule` (`app.module.ts`) を開き、`@angular/forms`ライブラリから`FormsModule`シンボルをインポートします。
+`app.module.ts` を開き、`@angular/forms`ライブラリから`FormsModule`シンボルをインポートします。
 
 <code-example path="toh-pt1/src/app/app.module.ts" header="app.module.ts (FormsModule symbol import)"
  region="formsmodule-js-import"></code-example>
 
-それから、`FormsModule`を`@NgModule`メタデータの`imports`配列に追加します。この配列には、アプリケーションに必要な外部モジュールのリストが含まれています。
+それから、`FormsModule`を`@NgModule`の`imports`配列に追加します。この配列には、アプリケーションに必要な外部モジュールのリストが含まれています。
 
 <code-example header="app.module.ts (@NgModule imports)" path="toh-pt1/src/app/app.module.ts" region="ng-imports"></code-example>
 
@@ -185,7 +186,7 @@ Angular CLI は、プロジェクトを作成するときに`src/app/app.module.
 _あなたは_ `HeroesComponent`を宣言していません。
 では、なぜアプリケーションは動作したのでしょうか？
 
-アプリケーションが動作したのは、Angular CLI が`HeroesComponent`を生成したときに、`AppModule`でそのコンポーネントの宣言を行っていたからです。
+アプリケーションが動作したのは、`ng generate` が`HeroesComponent`を生成したときに、`AppModule`でそのコンポーネントの宣言を行っていたからです。
 
 `src/app/app.module.ts`を開き、先頭付近で`HeroesComponent`がインポートされているのを見つけてください。
 
@@ -197,7 +198,6 @@ _あなたは_ `HeroesComponent`を宣言していません。
 
 <div class="alert is-helpful">
 
-**NOTE**: <br />
 `AppModule`は`AppComponent`と`HeroesComponent`の両方のアプリケーションコンポーネントを宣言しています。
 
 </div>
@@ -217,7 +217,7 @@ _あなたは_ `HeroesComponent`を宣言していません。
 
 ## まとめ {@a summary}
 
-*   CLIを使用して、2番目の `HeroesComponent` を作成しました。
+*   `ng generate`を使用して、2番目の `HeroesComponent` を作成しました。
 *   `HeroesComponent` を `AppComponent` シェルに追加して表示しました。
 *   名前をフォーマットするために、 `UppercasePipe` を適用しました。
 *   `ngModel` ディレクティブで双方向データバインディングを使用しました。

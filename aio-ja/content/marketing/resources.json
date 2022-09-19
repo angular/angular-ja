@@ -84,6 +84,18 @@
             "title": "Angular Rocks",
             "url": "https://angularrocks.com"
           },
+          "angular-master-podcast": {
+            "desc": "Listen / Code / Repeat. Everything you need to fall in love with Angular for a long time.",
+            "logo": "https://ng-poland.pl/images/podcast/angular-master-podcast-logo.png",
+            "title": "Angular Master Podcast",
+            "url": "https://anchor.fm/angular-master/"
+          },
+          "javascript-master-podcast": {
+            "desc": "Listen / Code / Repeat. Everything you need to know to become an informed JavaScript developer.",
+            "logo": "https://ng-poland.pl/images/podcast/javascript-master-podcast-logo.png",
+            "title": "JavaScript Master Podcast",
+            "url": "https://anchor.fm/javascript-master/"
+          },
           "happy-angular": {
             "desc": "A weekly German podcast for Angular on the go",
             "logo": "",
@@ -128,7 +140,7 @@
             "desc": "NativeScript is how you build cross-platform, native iOS and Android apps with Angular and TypeScript. Get 100% access to native APIs via JavaScript and reuse of packages from NPM, CocoaPods and Gradle. Open source and backed by Telerik.​​​",
             "logo": "",
             "title": "NativeScript",
-            "url": "https://docs.nativescript.org/angular/start/introduction"
+            "url": "https://docs.nativescript.org/tutorial/angular.html"
           },
           "angular-miniprogram": {
             "desc": "MiniProgram Platform for Angular.",
@@ -232,7 +244,7 @@
           "amexio-canvas": {
             "desc": "Amexio Canvas is Drag and Drop Environment to create Fully Responsive Web and Smart Device HTML5/Angular Apps. Code will be auto generated and hot deployed by the Canvas for live testing. Out of the box 50+ Material Design Theme support. Commit your code to GitHub public or private repository.",
             "title": "Amexio Canvas Web Based Drag and Drop IDE by MetaMagic",
-            "url": "https://amexio.tech/"
+            "url": "https://api.amexio.org/"
           }
         }
       },
@@ -657,6 +669,11 @@
             "title": "Rangle’s Angular Training Book",
             "desc": "It's a free book, drawn from years of collective experience and aligned with the best practices of modern software development. The book covers the most important Angular topics, from getting started with the Angular toolchain to writing Angular applications in a scalable and maintainable manner.",
             "url": "https://angular-training-guide.rangle.io/"
+          },
+          "angular-from-scratch": {
+            "title": "Angular from Scratch",
+            "desc": "Learn Angular from Scratch, building a sales application",
+            "url": "https://leanpub.com/book-angular"
           }
         }
       },
@@ -785,6 +802,11 @@
             "desc": "Whether you're already an architect or you'd like to become one, come learn how to keep your apps clean and fast (especially at the enterprise level). Four weeks of training includes live office hours every week with an Angular GDE, diversity discounts, and scholarships available!",
             "title": "Angular Architect Training",
             "url": "https://www.angularnation.net/"
+          },
+          "platzi": {
+            "desc": "An online education platform with a complete path in Angular and TypeScript from zero to advanced. Platzi helps students from all over the world acquire new, in-demand skills.",
+            "title": "Platzi (Español)",
+            "url": "https://platzi.com/angular-io"
           }
         }
       },
@@ -805,6 +827,11 @@
             "desc": "A website to learn and keep up with the Angular ecosystem",
             "title": "Angular University",
             "url": "https://angular-university.io/"
+          },
+          "angular-master-dev": {
+            "desc": "Angular Architecture: Strategic Design with Nx - Online Video Course",
+            "title": "Angular Master",
+            "url": "https://angularmaster.dev/"
           },
           "-acceleb": {
             "desc": "Customized, Instructor-Led Angular Training",

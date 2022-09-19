@@ -1,15 +1,18 @@
 # プロダクションにおけるService Worker
 
-このページは、Angular Service Workerを使用するプロダクションアプリケーションのデプロイと運用についてのリファレンスです。Angular Service Workerが、より大きなプロダクション環境で、さまざまな条件下でのService Workerの振る舞い、利用可能な手段、およびフェイルセーフにどのように適合するかについて説明します。
+このページは、Angular Service Workerを使用するプロダクションアプリケーションのデプロイと運用についてのリファレンスです。
+Angular Service Workerが、より大きなプロダクション環境で、さまざまな条件下でのService Workerの振る舞い、利用可能な手段、およびフェイルセーフにどのように適合するかについて説明します。
 
-#### 前提条件
+## 前提条件
 
 次の基本的理解があること
 * [Service Workerと通信する](guide/service-worker-communications)
 
 ## Service Workerとアプリケーションリソースのキャッシュ
 
-概念的には、Angular Service Workerは、エンドユーザーのWebブラウザにインストールされているフォワードキャッシュまたはCDNエッジと考えることができます。Service Workerの仕事は、ネットワークを待つことなく、Angularアプリケーションがリソースまたはデータを要求したら、ローカルキャッシュからその要求を満たすことです。他のキャッシュと同様に、コンテンツの期限切れおよび更新方法に関するルールがあります。
+概念的には、Angular Service Workerは、エンドユーザーのWebブラウザにインストールされているフォワードキャッシュまたはCDNエッジと考えることができます。
+Service Workerの仕事は、ネットワークを待つことなく、Angularアプリケーションがリソースまたはデータを要求したら、ローカルキャッシュからその要求を満たすことです。
+他のキャッシュと同様に、コンテンツの期限切れおよび更新方法に関するルールがあります。
 
 {@a versions}
 
@@ -24,6 +27,12 @@ Angular Service Workerのコンテキストでは、"バージョン"はAngular�
 
 アプリケーションのバージョン識別子は、すべてのリソースのコンテンツによって決まります。リソースの何かが変更されれば変わります。実際には、バージョンは、すべての既知のコンテンツのハッシュを持っている`ngsw.json`ファイルの内容によって決まります。キャッシュされたファイルのいずれかが変更された場合、ファイルのハッシュは`ngsw.json`で変更され、Angular Service Workerは、アクティブなファイルセットを新しいバージョンとして扱います。
 
+<div class="alert is-helpful">
+
+The build process creates the manifest file, `ngsw.json`, using information from `ngsw-config.json`.
+
+</div>
+
 Angular Service Workerのバージョン管理動作により、アプリケーションサーバーが、Angularアプリケーションに常に一貫性のあるファイルセットを持たせることを保証できます。
 
 #### アップデートのチェック
@@ -33,6 +42,8 @@ Angular Service Workerのバージョン管理動作により、アプリケー�
 ### リソースの整合性
 
 長いキャッシングの潜在的な副作用の1つは、無効なリソースを誤ってキャッシュすることです。通常のHTTPキャッシュでは、ハードリフレッシュまたはキャッシュの有効期限が、無効なファイルをキャッシュしてしまうという負の影響を制限します。Service Workerはこのような制約を無視し、アプリケーション全体をキャッシュします。したがって、Service Workerが正しいコンテンツを入手することが不可欠です。
+
+#### Hashed content
 
 リソースの整合性を保証するために、Angular Service Workerは、ハッシュを持っているリソースならすべてのハッシュを検証します。通常、[Angular CLI](cli)で作られたアプリケーションの場合、これはユーザーの`src/ngsw-config.json`で設定されている`dist`ディレクトリのすべてが対象になります。
 
@@ -50,7 +61,7 @@ Angular Service Workerのバージョン管理動作により、アプリケー�
 
 Angular Service Workerが特定のリソースを検証するためのハッシュを持っていない場合でも、その内容はキャッシュされますが、"stale while revalidate"というポリシーを使用してHTTPキャッシュヘッダーを受け入れます。つまり、キャッシュされたリソースのHTTPキャッシュヘッダーがリソースの有効期限が切れたことを示す場合、Angular Service Workerはコンテンツの配信を続けつつ、バックグラウンドでリソースを更新しようとします。このように、ハッシュされていない壊れたリソースは、設定されたライフタイムを超えてキャッシュに残りません。
 
-{@a tabs}
+<a id="tabs"></a>
 
 ### タブ間のアプリケーション
 
@@ -87,7 +98,7 @@ Angular Service Workerは、アプリケーションが最初に開かれたと�
 
 Angular Service Workerの最新情報は、アプリケーションにはわかりません。古いキャッシュは引き続き有効で、コンテンツは引き続き配信されます。ただし、Angular Service Workerのバグフィックスや機能では、古いキャッシュが無効になることがあります。この場合、アプリケーションはネットワークから透過的にリフレッシュされます。
 
-### Service Workerを回避する
+### Service Workerを回避する {@a bypassing-the-service-worker}
 
 ある場合では、Service Workerを完全に回避し代わりにブラウザでリクエストを処理したい
 ケースがあるかも知れません。たとえば、現在Service Workerでサポートされていない機能に依存している
@@ -96,6 +107,15 @@ Angular Service Workerの最新情報は、アプリケーションにはわか�
 
 Service Workerを回避するために`ngsw-bypass`をリクエストヘッダーかクエリパラメータにセットすることもできます。
 (ヘッダーやクエリパラメータの値は無視され、空にするか省略することもできます)
+
+### Service worker requests when the server can't be reached
+
+The service worker processes all requests unless the [service worker is explicitly bypassed](#bypassing-the-service-worker).
+The service worker either returns a cached response or sends the request to the server, depending on the state and configuration of the cache. 
+The service worker only caches responses to non-mutating requests, such as `GET` and `HEAD`.
+
+If the service worker receives an error from the server or it doesn't receive a response, it returns an error status that indicates the result of the call.
+For example, if the service worker doesn't receive a response, it creates a [504 Gateway Timeout](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504) status to return. The `504` status in this example could be returned because the server is offline or the client is disconnected.
 
 ## Angular Service Workerのデバッグ
 
@@ -241,14 +261,22 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 
 ### Safety Worker {@a safety-worker}
 
+<!-- vale Angular.Google_Acronyms = NO -->
+
 `@angular/service-worker`NPMパッケージには`safety-worker.js`という小さなスクリプトも含まれています。
 このスクリプトは読み込まれるとブラウザから自身を登録解除し、and remove the service worker caches.
 クライアントページにすでにインストールされている
 不要なService Workerを取り除く最後の手段として使用できます。
 
-このワーカーを直接登録できないことに注意してください。
-キャッシュされた状態の古いクライアントは、
-別のワーカースクリプトをインストールする新しい`index.html`を見ないかもしれないからです。
+<!-- vale Angular.Google_Acronyms = YES -->
+
+<div class="alert is-important">
+
+**IMPORTANT**: <br />
+You cannot register this worker directly, as old clients with cached state might not see a new `index.html` which installs the different worker script.
+
+</div>
+
 代わりに、Service Workerスクリプトの登録を取り消そうとしているURLに
 `safety-worker.js`のスクリプト内容を供給しなければなりません。
 すべてのユーザーが古いワーカーを正常に登録解除したことが分かるまで、
@@ -282,3 +310,10 @@ Service Workerの `ngsw.json`に対する要求が`404`を返すと、Service Wo
 次の記事がお勧めです。
 * [Service Workerの設定](guide/service-worker-config).
 
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

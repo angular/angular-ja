@@ -354,8 +354,20 @@ Angular がフックを予想される順序で呼び出す方法を示すため
 </div>
 
 ログメッセージのシーケンスは、規定のフック呼び出し順序に従います:
-`OnChanges`, `OnInit`, `DoCheck` (3x), `AfterContentInit`, `AfterContentChecked` (3x),
-`AfterViewInit`, `AfterViewChecked` (3x), および `OnDestroy` 。
+
+| Hook order | Log message           |
+|:---        |:---                   |
+| 1          | `OnChanges`           |
+| 2          | `OnInit`              |
+| 3          | `DoCheck`             |
+| 4          | `AfterContentInit`    |
+| 5          | `AfterContentChecked` |
+| 6          | `AfterViewInit`       |
+| 7          | `AfterViewChecked`    |
+| 8          | `DoCheck`             |
+| 9          | `AfterContentChecked` |
+| 10         | `AfterViewChecked`    |
+| 11         | `OnDestroy`           |
 
 <div class="alert is-helpful">
 
@@ -380,8 +392,8 @@ Angular がフックを予想される順序で呼び出す方法を示すため
 ディレクティブ自体がインスタンス化されて破棄されたときを記録することにより、ビュー内の要素の出現と非表示を追跡するだけです。
 
 このようなスパイディレクティブは、直接変更できない DOM オブジェクトへの洞察を提供します。
-ビルトインの `<div>` の実装を変更したり、サードパーティのコンポーネントを変更したりすることはできません。
-ただし、ディレクティブを使用してこれらの要素を監視できます。
+You can't access the implementation of a built-in `<div>`, or modify a third party component.
+You do have the option to watch these elements with a directive.
 
 このディレクティブは、注入された `LoggerService` を介して親にメッセージを記録する
 `ngOnInit()` および `ngOnDestroy()` フックを定義します。

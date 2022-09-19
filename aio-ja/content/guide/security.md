@@ -14,7 +14,7 @@ Angularでの対応について説明します。認証や認可などアプリ�
 
 <header>脆弱性の報告</header>
 
-Angular自身の脆弱性は [security@angular.io](mailto:security@angular.io) へ報告をお願いします。
+Angular is part of Google [Open Source Software Vulnerability Reward Program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules), for vulnerabilities in Angular please submit your report [here](https://bughunters.google.com/report).
 
 セキュリティに関する問題を Google がどのように扱うかは
 [Google's security philosophy](https://www.google.com/about/appsecurity/) を
@@ -200,9 +200,12 @@ Trusted Typesはアプリケーションが対応すべきすべてのブラウ�
 
 アプリケーションにTrusted Typesを適用するには、次のいずれかのAngularポリシーを使用してHTTPヘッダーを出力するようWebサーバーを設定する必要があります。
 
-* `angular` - このポリシーはAngularの内部にあるセキュリティレビュー済みのコードで使用され、Trusted Types適用下のAngularには必ず必要です。Angularによってサニタイズされたインラインテンプレート値またはコンテンツは、このポリシーにより安全なものとして扱われます。
-* `angular#unsafe-bypass` - このポリシーは、`bypassSecurityTrustHtml`などセキュリティをバイパスする、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドに使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。
-* `angular#unsafe-jit` - このポリシーは、[JITコンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。
+| Policies                | Detail |
+|:---                     |:---    |
+| `angular` | このポリシーはAngularの内部にあるセキュリティレビュー済みのコードで使用され、Trusted Types適用下のAngularには必ず必要です。Angularによってサニタイズされたインラインテンプレート値またはコンテンツは、このポリシーにより安全なものとして扱われます。|
+| `angular#u|safe-bypass` - このポリシーは、`bypassSecurityTrustHtml`などセキュリティをバイパスする、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドに使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。|
+| `angular#u|safe-jit` - このポリシーは、[JITコンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。|
+| `angular#bundler`       | This policy is used by Angular CLI's bundler when creating lazy chunk files.                    |
 
 Trusted Typesに関するHTTPヘッダーは次の箇所で設定する必要があります。
 
@@ -227,6 +230,13 @@ Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-tr
 <code-example language="html">
 Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';
 </code-example>
+
+The following is an example of a header specifically configured for Trusted Types and Angular applications that use lazy loading of modules:
+
+<code-example language="html">
+Content-Security-Policy: trusted-types angular angular#bundler; require-trusted-types-for 'script';
+</code-example>
+
 
 <div class="callout is-helpful">
 

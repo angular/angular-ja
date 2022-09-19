@@ -137,7 +137,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.3.html"></code-example>
 
     アプリケーションは、リスト内の各製品の名前と説明を表示するようになりました。
-    最終的な製品には説明の段落がないことに注意してください。
+    最後の製品には説明の段落がないことに注意してください。
     商品の説明プロパティが空なので、Angularは `<p>` 要素を作成しません。
 
     <div class="lightbox">

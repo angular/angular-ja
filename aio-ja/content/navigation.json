@@ -211,8 +211,8 @@
               "translated": true
             },
             {
-              "title": "Binding",
-              "tooltip": "A binding connects a template and a component.",
+              "title": "バインディング",
+              "tooltip": "バインディングは、テンプレートとコンポーネントを接続するものです",
               "children": [
                 {
                   "url": "guide/binding-overview",
@@ -246,13 +246,13 @@
                   "url": "guide/two-way-binding",
                   "title": "双方向バインディング",
                   "tooltip": "Introductory guide to sharing data between a class and a template.",
-                  "translated": false
+                  "translated": true
                 }
               ]
             },
             {
-              "title": "Pipes",
-              "tooltip": "Pipes transform displayed values within a template.",
+              "title": "パイプ",
+              "tooltip": "テンプレート内に表示される値をパイプで変換します",
               "children": [
                 {
                   "url": "guide/pipes-overview",
@@ -275,7 +275,7 @@
               "url": "guide/template-reference-variables",
               "title": "テンプレート参照変数",
               "tooltip": "Introductory guide to referring to DOM elements within a template.",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/svg-in-templates",
@@ -287,12 +287,12 @@
         },
         {
           "title": "ディレクティブ",
-          "tooltip": "Control the behavior of elements and the layout of your pages with directives.",
+          "tooltip": "ディレクティブで要素の動作やページのレイアウトを制御できます。",
           "children": [
             {
               "url": "guide/built-in-directives",
               "title": "組み込みディレクティブ",
-              "tooltip": "Introductory guide to some of the most popular built-in directives.",
+              "tooltip": "最も一般的な組み込みディレクティブの入門ガイドです。",
               "translated": false
             },
             {
@@ -305,7 +305,7 @@
               "url": "guide/structural-directives",
               "title": "構造ディレクティブ",
               "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
-              "translated": false
+              "translated": true
             }
           ]
         },
@@ -314,15 +314,33 @@
           "tooltip": "依存性の注入:サービスの作成と注入",
           "children": [
             {
+              "url": "guide/dependency-injection-overview",
+              "title": "Angularにおける依存性の注入",
+              "tooltip": "依存性の注入は、クラスが外部にある依存オブジェクトを要求するデザインパターンです。",
+              "translated": true
+            },
+            {
               "url": "guide/dependency-injection",
-              "title": "依存性の注入",
+              "title": "依存性の注入を理解する",
               "tooltip": "Angularの依存性の注入システムは、依存するサービスを \"ジャストインタイム\"で作成し、配信します。",
               "translated": true
             },
             {
+              "url": "guide/creating-injectable-service",
+              "title": "注入可能なサービスの作成",
+              "tooltip": "注入可能なサービスの作成例です。",
+              "translated": true
+            },
+            {
               "url": "guide/dependency-injection-providers",
-              "title": "依存性のプロバイダー",
+              "title": "依存性プロバイダーの定義",
               "tooltip": "様々な種類のプロバイダーについて",
+              "translated": true
+            },
+            {
+              "url": "guide/hierarchical-dependency-injection",
+              "title": "階層化インジェクター",
+              "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
               "translated": true
             }
           ]
@@ -344,8 +362,9 @@
           "children": [
             {
               "url": "guide/change-detection",
-              "title": "Overview",
-              "tooltip": "Introduces the basics of Angular's change detection"
+              "title": "概要",
+              "tooltip": "Angularの変更検知の基本を紹介します。",
+              "translated": false
             },
             {
               "url": "guide/change-detection-zone-pollution",
@@ -380,8 +399,9 @@
             },
             {
               "url": "guide/router-tutorial",
-              "title": "Tutorial: Routing in Single-page Applications",
-              "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+              "title": "チュートリアル: シングルページアプリケーションでのルーティング",
+              "tooltip": "Angularのルーティングに関する様々なパターンをカバーしたチュートリアル",
+              "translated": true
             },
             {
               "url": "guide/routing-with-urlmatcher",
@@ -390,8 +410,9 @@
             },
             {
               "url": "guide/router-tutorial-toh",
-              "title": "Tutorial: Adding routing to Tour of Heroes",
-              "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
+              "title": "チュートリアル: Tour of Heroesにルーティングを追加",
+              "tooltip": "Tour of Heroesの例を使ってAngularのルーターの使い方を探索します",
+              "translated": true
             },
             {
               "url": "guide/router-reference",
@@ -454,8 +475,8 @@
             },
             {
               "url": "guide/testing-code-coverage",
-              "title": "Code Coverage",
-              "tooltip": "Determine how much of your code is tested.",
+              "title": "コードカバレッジ",
+              "tooltip": "コードがどの程度テストされているかを把握します。",
               "translated": true
             },
             {
@@ -696,6 +717,12 @@
           "title": "事前レンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
           "translated": true
+        },
+        {
+          "url": "guide/image-directive",
+          "title": "画像ディレクティブ",
+          "tooltip": "Angularの画像ディレクティブを使用したパフォーマンスの良い画像表示",
+          "translated": true
         }
       ]
     },
@@ -735,8 +762,9 @@
         },
         {
           "url": "guide/lightweight-injection-tokens",
-          "title": "Lightweight Injection Tokens for Libraries",
-          "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
+          "title": "軽量インジェクショントークン",
+          "tooltip": "軽量インジェクショントークンを使用したライブラリサービスの設計により、クライアントアプリのサイズを最適化します。",
+          "translated": true
         }
       ]
     },
@@ -804,7 +832,8 @@
         {
           "title": "DevTools",
           "tooltip": "DevTools",
-          "url": "guide/devtools"
+          "url": "guide/devtools",
+          "translated": true
         },
         {
           "title": "Schematics",
@@ -894,6 +923,12 @@
           "url": "guide/forms",
           "title": "Building a Template-driven Form",
           "tooltip": "Create a template-driven form using directives and Angular template syntax."
+        },
+        {
+          "url": "guide/image-directive-setup",
+          "title": "NgOptimzedImageの設定",
+          "tooltip": "Angularの画像ディレクティブを設定します。",
+          "translated": true
         },
         {
           "title": "Angularライブラリ",
@@ -1030,12 +1065,6 @@
                   "translated": true
                 },
                 {
-                  "url": "guide/architecture-services",
-                  "title": "サービスとDIの紹介",
-                  "tooltip": "サービスと依存性の注入について。",
-                  "translated": true
-                },
-                {
                   "url": "guide/architecture-next-steps",
                   "title": "次のステップ",
                   "tooltip": "基本のその先へ。",
@@ -1055,7 +1084,7 @@
                 },
                 {
                   "url": "guide/template-reference-variables",
-                  "title": "テンプレート変数",
+                  "title": "テンプレート参照変数",
                   "tooltip": "Introductory guide to referring to DOM elements within a template.",
                   "translated": true
                 }
@@ -1217,12 +1246,6 @@
               "tooltip": "Using dependency injection in Angular.",
               "children": [
                 {
-                  "url": "guide/hierarchical-dependency-injection",
-                  "title": "階層的インジェクター",
-                  "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-                  "translated": true
-                },
-                {
                   "url": "guide/dependency-injection-in-action",
                   "title": "DIイン・アクション",
                   "tooltip": "依存性の注入のためのテクニック",
@@ -1305,48 +1328,53 @@
               "translated": true
             }
           ]
+        }
+      ]
+    },
+    {
+      "title": "Documentation contributor guide",
+      "tooltip": "Describes how to contribute to the Angular documentation.",
+      "children": [
+        {
+          "url": "guide/contributors-guide-overview",
+          "title": "Overview",
+          "tooltip": "Provides an overview of how to contribute to Angular's documentation."
         },
         {
-          "title": "Content Contributor's Guide",
-          "tooltip": "Describes how to contribute to the Angular documentation.",
-          "children": [
-            {
-              "url": "guide/contributors-guide-overview",
-              "title": "Overview",
-              "tooltip": "Provides an overview of how to contribute to Angular's documentation."
-            },
-            {
-              "url": "guide/reviewing-content",
-              "title": "Reviewing content",
-              "tooltip": "Keep Angular content up-to-date by reviewing topics for accuracy."
-            },
-            {
-              "url": "guide/updating-search-keywords",
-              "title": "Updating search keywords",
-              "tooltip": "Help users find the content they need by adding additional search keywords."
-            },
-            {
-              "url": "guide/updating-content-github-ui",
-              "title": "Updating content using GitHub UI",
-              "tooltip": "Update topics in the browser through the GitHub user interface."
-            },
-            {
-              "url": "guide/docs-style-guide",
-              "title": "Documentation Style Guide",
-              "tooltip": "Style guide for documentation authors"
-            },
-            {
-              "url": "guide/localizing-angular",
-              "title": "Angular doc localization guidelines",
-              "tooltip": "Learn about the guidelines for localizing Angular documentation."
-            },
-            {
-              "url": "guide/localized-documentation",
-              "title": "Localized documentation",
-              "tooltip": "A list of localized versions of the Angular documentation",
-              "hidden": true
-            }
-          ]
+          "url": "guide/reviewing-content",
+          "title": "Reviewing documentation",
+          "tooltip": "Keep Angular content up-to-date by reviewing topics for accuracy."
+        },
+        {
+          "url": "guide/updating-search-keywords",
+          "title": "Updating search keywords",
+          "tooltip": "Help users find the content they need by adding additional search keywords."
+        },
+        {
+          "url": "guide/updating-content-github-ui",
+          "title": "Updating content using GitHub UI",
+          "tooltip": "Update topics in the browser through the GitHub user interface."
+        },
+        {
+          "url": "guide/docs-style-guide",
+          "title": "Documentation Style Guide",
+          "tooltip": "Style guide for documentation authors"
+        },
+        {
+          "url": "guide/docs-lint-errors",
+          "title": "Resolving documentation linter messages",
+          "tooltip": "More information about documentation lint errors."
+        },
+        {
+          "url": "guide/localizing-angular",
+          "title": "Angular doc localization guidelines",
+          "tooltip": "Learn about the guidelines for localizing Angular documentation."
+        },
+        {
+          "url": "guide/localized-documentation",
+          "title": "Localized documentation",
+          "tooltip": "A list of localized versions of the Angular documentation",
+          "hidden": true
         }
       ]
     }
@@ -1406,7 +1434,7 @@
           "tooltip": "Post issues and suggestions on github."
         },
         {
-          "url": "https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md",
+          "url": "https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md",
           "title": "Code of Conduct",
           "tooltip": "Treating each other with respect."
         }

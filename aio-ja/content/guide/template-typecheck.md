@@ -284,7 +284,7 @@ class SubmitButton {
 }
 ```
 
-ここでは、コンポーネントの `disabled` 入力がテンプレートの `<button>` に渡されています。`boolean` 値が入力にバインドされている限り、これはすべて期待どおりに機能します。ただし、コンシューマがテンプレートでこの入力を属性として使用すると仮定します。
+ここでは、コンポーネントの `disabled` 入力がテンプレートの `<button>` に渡されています。`boolean` 値が入力にバインドされている限り、これはすべて期待どおりに機能します。ただし、コンシューマーがテンプレートでこの入力を属性として使用すると仮定します。
 
 ```html
 <submit-button disabled></submit-button>
@@ -347,7 +347,7 @@ Since TypeScript 4.3, the setter could have been declared to accept `boolean|''`
 ```typescript
   @Component({
     selector: 'my-component',
-    template: '{{$any(person).addresss.street}}'
+    template: '{{$any(person).address.street}}'
   })
   class MyComponent {
     person?: Person;

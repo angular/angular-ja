@@ -5,7 +5,7 @@ index 0ec330e0b8..6aa94506cb 100644
 @@ -2,6 +2,7 @@
    <a href="{{node.url}}" [ngClass]="classes" title="{{node.tooltip}}"
      class="vertical-menu-item">
-     <span>{{node.title}}</span>
+     <span class="vertical-menu-item-text">{{node.title}}</span>
 +    <div *ngIf="node.translated">🇯🇵</div>
    </a>
  </div>

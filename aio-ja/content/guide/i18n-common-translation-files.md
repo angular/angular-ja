@@ -17,24 +17,24 @@
 
 ## ソース言語ファイルを抽出する {@a extract-the-source-language-file}
 
-To extract the source language file, complete the following actions.
+ソース言語ファイルを抽出するには、次の操作を行います。
 
-1.  Open a terminal window.
-1.  Change to the root directory of your project.
-1.  Run the following CLI command.
+1.  ターミナルウィンドウを開く。
+1.  プロジェクトのルートディレクトリに移動する。
+1.  次のCLIコマンドを実行する。
 
     <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-default"></code-example>
 
-The `extract-i18n` command creates a source language file named `messages.xlf` in the root directory of your project.
-For more information about the XML Localization Interchange File Format \(XLIFF, version 1.2\), see [XLIFF][WikipediaWikiXliff].
+`extract-i18n`コマンドは、プロジェクトのルートディレクトリに`messages.xlf`という名前のソース言語ファイルを作成します。
+XML Localization Interchange File Format \(XLIFF、バージョン1.2\)の詳細については、[XLIFF][WikipediaWikiXliff]を参照してください。
 
-Use the following [`extract-i18n`][AioCliExtractI18n] command options to change the source language file location, format, and file name.
+ソース言語ファイルの場所、フォーマット、ファイル名を変更するには、以下の[`extract-i18n`][AioCliExtractI18n]コマンドオプションを使用してください。
 
-| Command option  | Details |
+| コマンドオプション  | 詳細 |
 |:---             |:---     |
-| `--format`      | Set the format of the output file    |
-| `--outFile`     | Set the name of the output file      |
-| `--output-path` | Set the path of the output directory |
+| `--format`      | 出力ファイルのフォーマットを設定する    |
+| `--outFile`     | 出力ファイルのファイル名を設定する      |
+| `--output-path` | 出力先ディレクトリのパスを設定する      |
 
 ### Change the source language file location
 

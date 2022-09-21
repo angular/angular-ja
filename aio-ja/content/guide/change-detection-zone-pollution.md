@@ -53,7 +53,7 @@ class AppComponent implements OnInit {
 }
 ```
 
-`RunOutsideAngular` 内で `Plotly.newPlot('chart', data);` を実行すると、初期化ロジックによってスケジュールされたタスクの実行後に変更検知を実行しないようフレームワークに指示します。
+`runOutsideAngular` 内で `Plotly.newPlot('chart', data);` を実行すると、初期化ロジックによってスケジュールされたタスクの実行後に変更検知を実行しないようフレームワークに指示します。
 
 たとえば、 `Plotly.newPlot('chart', data)` が DOM 要素にイベントリスナーを追加した場合、Angular はそのハンドラーの実行後に変更検知を実行しません。
 

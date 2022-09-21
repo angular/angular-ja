@@ -10,7 +10,7 @@
 
 ## 不要な変更検知の呼び出しを特定
 
-Angular DevTools を使用すると、不要な変更検知の呼び出しを見つけることができます。多くの場合、それらはプロファイラのタイムライン上に、source `setTimeout`、`setInterval`、`requestAnimationFrame`、またはイベントハンドラーの連続したバーとして表示されます。
+Angular DevTools を使用すると、不要な変更検知の呼び出しを見つけることができます。多くの場合、それらはプロファイラのタイムライン上に、呼び出し元の `setTimeout`、`setInterval`、`requestAnimationFrame`、またはイベントハンドラーの連続したバーとして表示されます。
 
 <div class="lightbox">
   <img alt="Angular DevTools profiler preview showing Zone pollution" src="generated/images/guide/change-detection/zone-pollution.png">

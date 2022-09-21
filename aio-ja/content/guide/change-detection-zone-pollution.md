@@ -1,27 +1,27 @@
-# Resolving Zone Pollution
+# Zone 汚染の解消
 
-**Zone.js** is a signaling mechanism that Angular uses to detect when an application state might have changed. It captures asynchronous operations like `setTimeout`, network requests, and event listeners. Angular schedules change detection based on signals from Zone.js
+**Zone.js** は、Angular がアプリケーションの状態が変更されたことを検知するために使用するシグナルメカニズムです。`setTimeout`、ネットワークリクエスト、イベントリスナーなどの非同期操作を捕捉します。Angular は Zone.js からのシグナルに基づいて変更検知をスケジュールします。
 
-There are cases in which scheduled [tasks](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide#tasks) or [microtasks](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide#microtasks) don’t make any changes in the data model, which makes running change detection unnecessary. Common examples are:
-* `requestAnimationFrame`, `setTimeout` or `setInterval`
-* Task or microtask scheduling by third-party libraries
+スケジュールされた[タスク](https://developer.mozilla.org/ja/docs/Web/API/HTML_DOM_API/Microtask_guide#%E3%82%BF%E3%82%B9%E3%82%AF)や[マイクロタスク](https://developer.mozilla.org/ja/docs/Web/API/HTML_DOM_API/Microtask_guide#%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%82%BF%E3%82%B9%E3%82%AF)がデータモデルに変更を加えないため、変更検知の実行が不要になるケースがあります。一般的な例としては、
+- `requestAnimationFrame`、 `setTimeout` または `setInterval`
+- サードパーティライブラリによるタスクまたはマイクロタスクのスケジューリング
 
-This section covers how to identify such conditions, and how to run code outside the Angular zone to avoid unnecessary change detection calls.
+このセクションでは、そのような状態を特定する方法と、不要な変更検知の呼び出しを避けるために Angular zone の外でコードを実行する方法について説明します。
 
-## Identifying unnecessary change detection calls
+## 不要な変更検知の呼び出しを特定
 
-You can detect unnecessary change detection calls using Angular DevTools. Often they appear as consecutive bars in the profiler’s timeline with source `setTimeout`, `setInterval`, `requestAnimationFrame`, or an event handler. When you have limited calls within your application of these APIs, the change detection invocation is usually caused by a third-party library.
+Angular DevTools を使用すると、不要な変更検知の呼び出しを見つけることができます。多くの場合、それらはプロファイラのタイムライン上に、呼び出し元の `setTimeout`、`setInterval`、`requestAnimationFrame`、またはイベントハンドラーの連続したバーとして表示されます。
 
 <div class="lightbox">
   <img alt="Angular DevTools profiler preview showing Zone pollution" src="generated/images/guide/change-detection/zone-pollution.png">
 </div>
 
-In the image above, there is a series of change detection calls triggered by event handlers associated with an element. That’s a common challenge when using third-party, non-native Angular components, which do not alter the default behavior of `NgZone`.
+上の画像では、ある要素に関連するイベントハンドラーによって引き起こされる一連の変更検知の呼び出しがあります。これは、`NgZone`のデフォルトの動作を変更しない、サードパーティの非ネイティブの Angular コンポーネントを使用する場合によくある課題です。
 
 
-## Run tasks outside NgZone
+## NgZone の外でタスクを実行
 
-In such cases, we can instruct Angular to avoid calling change detection for tasks scheduled by a given piece of code using  [NgZone](https://angular.io/guide/zone).
+このような場合、[NgZone](https://angular.io/guide/zone) を使って、特定のコードによってスケジュールされたタスクの変更検知を呼び出さないよう Angular に指示することができます。
 
 ```ts
 import { Component, NgZone, OnInit } from '@angular/core';
@@ -34,9 +34,9 @@ class AppComponent implements OnInit {
 }
 ```
 
-The snippet above instructs Angular that it should execute the `setInterval` call outside the Angular Zone and skip running change detection after `pollForUpdates` runs.
+上記のスニペットは、Angular Zone の外で `setInterval` の呼び出しを実行し、`pollForUpdates` の実行後に変更検知をスキップするよう Angular に指示しています。
 
-Third-party libraries commonly trigger unnecessary change detection cycles because they weren't authored with Zone.js in mind. Avoid these extra cycles by calling library APIs outside the Angular zone:
+サードパーティライブラリは、Zone.js を考慮して作成されていないため、一般的に不要な変更検知サイクルを引き起こします。Angular zone の外でライブラリ API を呼び出すことで、これらの余分なサイクルを避けることができます。
 
 ```ts
 import { Component, NgZone, OnInit } from '@angular/core';
@@ -53,8 +53,8 @@ class AppComponent implements OnInit {
 }
 ```
 
-Running `Plotly.newPlot('chart', data);` within `runOutsideAngular` instructs the framework that it shouldn’t execute change detection after the execution of tasks scheduled by the initialization logic.
+`runOutsideAngular` 内で `Plotly.newPlot('chart', data);` を実行すると、初期化ロジックによってスケジュールされたタスクの実行後に変更検知を実行しないようフレームワークに指示します。
 
-For example, if `Plotly.newPlot('chart', data)` adds event listeners to a DOM element, Angular will not execute change detection after the execution of their handlers.
+たとえば、 `Plotly.newPlot('chart', data)` が DOM 要素にイベントリスナーを追加した場合、Angular はそのハンドラーの実行後に変更検知を実行しません。
 
 @reviewed 2022-05-04

@@ -228,9 +228,9 @@ export CAROUSEL_DIRECTIVES = [ImageCarouselComponent, ImageSlideComponent] as co
 Angular アプリケーションは、利用可能なプロバイダーのセットを指定することで依存性の注入を構成できます。一般的なアプリケーションでは、2つの異なるインジェクタータイプがあります:
 
 *   **モジュール インジェクター** これは `@NgModule.providers` または `@Injectable({providedIn: "..."})` で構成されたプロバイダーを持ちます。これらのアプリケーション全体のプロバイダーは、モジュールインジェクターで構成された他のサービスだけでなく、すべてのコンポーネントにも表示されます。
-*   **ノード インジェクター** これは`@Directive.providers` / `@Component.providers` または `@Component.viewProviders` で構成されています。これらのプロバイダーは、特定のコンポーネントとそのすべての子のみに表示されます。
+*   **ノード インジェクター** これは `@Directive.providers` / `@Component.providers` または `@Component.viewProviders` で構成されています。これらのプロバイダーは、特定のコンポーネントとそのすべての子のみに表示されます。
 
-#### 環境インジェクター
+#### 環境インジェクター {@a environment-injectors}
 
 `NgModule`s をオプションにすると、アプリケーション全体のプロバイダー ([HttpClient](https://angular.io/api/common/http/HttpClient) など) を使用して「モジュール」インジェクターを構成する新しい方法が必要になります。スタンドアロンアプリケーション (`bootstrapApplication` で作成されたアプリケーション) では、`providers` オプションで、ブートストラッププロセス中に「モジュール」プロバイダーを構成できます:
 

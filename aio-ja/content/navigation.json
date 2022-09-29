@@ -364,12 +364,13 @@
               "url": "guide/change-detection",
               "title": "概要",
               "tooltip": "Angularの変更検知の基本を紹介します。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/change-detection-zone-pollution",
-              "title": "Zone Pollution",
-              "tooltip": "Explains how Zone.js works and what are the common pitfalls that can slow an application down"
+              "title": "Zone 汚染",
+              "tooltip": "Zone.jsの仕組みと、アプリケーションを遅くしてしまう一般的な落とし穴について説明します。",
+              "translated": true
             },
             {
               "url": "guide/change-detection-slow-computations",

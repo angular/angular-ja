@@ -28,7 +28,7 @@
 `extract-i18n`コマンドは、プロジェクトのルートディレクトリに`messages.xlf`という名前のソース言語ファイルを作成します。
 XML Localization Interchange File Format \(XLIFF、バージョン1.2\)の詳細については、[XLIFF][WikipediaWikiXliff]を参照してください。
 
-ソース言語ファイルの場所、フォーマット、ファイル名を変更するには、以下の[`extract-i18n`][AioCliExtractI18n]コマンドオプションを使用してください。
+ソース言語ファイルの場所、フォーマット、ファイル名を変更するには、次の[`extract-i18n`][AioCliExtractI18n]コマンドオプションを使用してください。
 
 | コマンドオプション  | 詳細 |
 |:---             |:---     |

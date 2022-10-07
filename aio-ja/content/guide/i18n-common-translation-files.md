@@ -1,56 +1,56 @@
-# Work with translation files
+# 翻訳ファイルの作業
 
-After you prepare a component for translation, use the [`extract-i18n`][AioCliExtractI18n] [Angular CLI][AioCliMain] command to extract the marked text in the component into a *source language* file.
+翻訳用のコンポーネントを準備したら、[`extract-i18n`][AioCliExtractI18n] [Angular CLI][AioCliMain]を使用して、コンポーネント内のマークされたテキストを*ソース言語*ファイルに抽出します。
 
-The marked text includes text marked with `i18n`, attributes marked with `i18n-`*attribute*, and text tagged with `$localize` as described in [Prepare templates for translations][AioGuideI18nCommonPrepare].
+マークされたテキストには、[翻訳用コンポーネントの準備][AioGuideI18nCommonPrepare]で説明したように、`i18n`でマークされたテキスト、`i18n`*属性*でマークされた属性、および`$localize`でタグ付けされたテキストが含まれます。
 
-Complete the following steps to create and update translation files for your project.
+次の手順で、プロジェクトの翻訳ファイルを作成、更新します。
 
-1.  [Extract the source language file][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
-    1.  Optionally, change the location, format, and name.
-1.  Copy the source language file to [create a translation file for each language][AioGuideI18nCommonTranslationFilesCreateATranslationFileForEachLanguage].
-1.  [Translate each translation file][AioGuideI18nCommonTranslationFilesTranslateEachTranslationFile].
-1.  Translate plurals and alternate expressions separately.
-    1.  [Translate plurals][AioGuideI18nCommonTranslationFilesTranslatePlurals].
-    1.  [Translate alternate expressions][AioGuideI18nCommonTranslationFilesTranslateAlternateExpressions].
-    1.  [Translate nested expressions][AioGuideI18nCommonTranslationFilesTranslateNestedExpressions].
+1.  [ソース言語ファイルを抽出する][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile]。
+    1.  オプションで、ロケーション、フォーマット、名前を変更する。
+1.  ソース言語ファイルをコピーして、[各言語の翻訳ファイルを作成する][AioGuideI18nCommonTranslationFilesCreateATranslationFileForEachLanguage]。
+1.  [各翻訳ファイルを翻訳する][AioGuideI18nCommonTranslationFilesTranslateEachTranslationFile]。
+1.  複数形と代替表現を別々に翻訳する。
+    1.  [複数形を翻訳する][AioGuideI18nCommonTranslationFilesTranslatePlurals]。
+    1.  [代替表現を翻訳する][AioGuideI18nCommonTranslationFilesTranslateAlternateExpressions]。
+    1.  [ネストされた式を翻訳する][AioGuideI18nCommonTranslationFilesTranslateNestedExpressions]。
 
-## Extract the source language file
+## ソース言語ファイルを抽出する {@a extract-the-source-language-file}
 
-To extract the source language file, complete the following actions.
+ソース言語ファイルを抽出するには、次の操作を行います。
 
-1.  Open a terminal window.
-1.  Change to the root directory of your project.
-1.  Run the following CLI command.
+1.  ターミナルウィンドウを開く。
+1.  プロジェクトのルートディレクトリに移動する。
+1.  次のCLIコマンドを実行する。
 
     <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-default"></code-example>
 
-The `extract-i18n` command creates a source language file named `messages.xlf` in the root directory of your project.
-For more information about the XML Localization Interchange File Format \(XLIFF, version 1.2\), see [XLIFF][WikipediaWikiXliff].
+`extract-i18n`コマンドは、プロジェクトのルートディレクトリに`messages.xlf`という名前のソース言語ファイルを作成します。
+XML Localization Interchange File Format \(XLIFF、バージョン1.2\)の詳細については、[XLIFF][WikipediaWikiXliff]を参照してください。
 
-Use the following [`extract-i18n`][AioCliExtractI18n] command options to change the source language file location, format, and file name.
+ソース言語ファイルの場所、フォーマット、ファイル名を変更するには、次の[`extract-i18n`][AioCliExtractI18n]コマンドオプションを使用してください。
 
-| Command option  | Details |
+| コマンドオプション  | 詳細 |
 |:---             |:---     |
-| `--format`      | Set the format of the output file    |
-| `--outFile`     | Set the name of the output file      |
-| `--output-path` | Set the path of the output directory |
+| `--format`      | 出力ファイルのフォーマットを設定する    |
+| `--outFile`     | 出力ファイルのファイル名を設定する      |
+| `--output-path` | 出力先ディレクトリのパスを設定する      |
 
-### Change the source language file location
+### ソース言語ファイルの場所を変更する
 
-To create a file in the `src/locale` directory, specify the output path as an option.
+`src/locale`ディレクトリにファイルを作成する場合、オプションで出力パスを指定します。
 
-#### `extract-i18n --output-path` example
+#### `extract-i18n --output-path`の例
 
-The following example specifies the output path as an option.
+次の例では、オプションで出力パスを指定しています。
 
 <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-output-path"></code-example>
 
-### Change the source language file format
+### ソース言語ファイルのフォーマットを変更する {@a change-the-source-language-file-format}
 
-The `extract-i18n` command creates files in the following translation formats.
+`extract-i18n`コマンドは、次の翻訳形式のファイルを作成します。
 
-| Translation format | Details                                                                                                          | File extension |
+| 翻訳形式 | 詳細                                                                                                          | ファイル拡張子 |
 |:---                |:---                                                                                                              |:---            |
 | ARB                | [Application Resource Bundle][GithubGoogleAppResourceBundleWikiApplicationresourcebundlespecification]           | `.arb`            |
 | JSON               | [JavaScript Object Notation][JsonMain]                                                                           | `.json`           |
@@ -58,37 +58,37 @@ The `extract-i18n` command creates files in the following translation formats.
 | XLIFF 2            | [XML Localization Interchange File Format, version 2][OasisOpenDocsXliffXliffCoreV20Cos01XliffCoreV20Cose01Html] | `.xlf`            |
 | XMB                | [XML Message Bundle][UnicodeCldrDevelopmentDevelopmentProcessDesignProposalsXmb]                                 | `.xmb` \(`.xtb`\) |
 
-Specify the translation format explicitly with the `--format` command option.
+コマンドオプション`--format`を使って、翻訳形式を明示的に指定します。
 
 <div class="alert is-helpful">
 
-The XMB format generates `.xmb` source language files, but uses`.xtb` translation files.
+XMBフォーマットでは、ソース言語ファイルとして`.xmb`が生成されますが、翻訳ファイルとして`.xtb`が使用されます。
 
 </div>
 
-#### `extract-i18n --format` example
+#### `extract-i18n --format`の例
 
-The following example demonstrates several translation formats.
+次の例では、いくつかの翻訳形式を示しています。
 
 <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-formats"></code-example>
 
-### Change the source language file name
+### ソース言語ファイルのファイル名を変更する
 
-To change the name of the source language file generated by the extraction tool, use the `--outFile` command option.
+抽出ツールが生成するソース言語ファイルの名前を変更するには、`--outFile`コマンドオプションを使用します。
 
-#### `extract-i18n --out-file` example
+#### `extract-i18n --out-file`の例
 
-The following example demonstrates naming the output file.
+次の例では、出力ファイルの命名方法を示しています。
 
 <code-example path="i18n/doc-files/commands.sh" region="extract-i18n-out-file"></code-example>
 
-## Create a translation file for each language
+## 各言語の翻訳ファイルを作成する {@a create-a-translation-file-for-each-language}
 
-To create a translation file for a locale or language, complete the following actions.
+ロケールまたは言語の翻訳ファイルを作成するには、次の操作を行います。
 
-1.  [Extract the source language file][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile].
-1.  Make a copy of the source language file to create a *translation* file for each language.
-1.  Rename the *translation* file to add the locale.
+1.  [ソース言語ファイルを抽出する][AioGuideI18nCommonTranslationFilesExtractTheSourceLanguageFile]。
+1.  ソース言語ファイルをコピーして、各言語の*翻訳*ファイルを作成する。
+1.  *翻訳*ファイルの名前を変更して、ロケールを追加する。
 
     <code-example language="file">
 
@@ -96,7 +96,7 @@ To create a translation file for a locale or language, complete the following ac
 
     </code-example>
 
-1.  Create a new directory at your project root named `locale`.
+1.  プロジェクトルートに、`locale`という名前の新しいディレクトリを作成する。
 
     <code-example language="file">
 
@@ -104,136 +104,136 @@ To create a translation file for a locale or language, complete the following ac
 
     </code-example>
 
-1.  Move the *translation* file to the new directory.
-1.  Send the *translation* file to your translator.
-1.  Repeat the above steps for each language you want to add to your application.
+1.  *翻訳*ファイルを新しいディレクトリに移動する。
+1.  *翻訳*ファイルを翻訳者に送信する。
+1.  アプリケーションに追加したい各言語について、上記の手順を繰り返す。
 
-### `extract-i18n` example for French
+### フランス語の`extract-i18n`の例
 
-For example, to create a French translation file, complete the following actions.
+たとえば、フランス語の翻訳ファイルを作成する場合は、次の操作を行います。
 
-1.  Run the `extract-i18n` command.
-1.  Make a copy of the `messages.xlf` source language file.
-1.  Rename the copy to `messages.fr.xlf` for the French language \(`fr`\) translation.
-1.  Move the `fr` translation file to the `src/locale` directory.
-1.  Send the `fr` translation file to the translator.
+1.  `extract-i18n`コマンドを実行する。
+1.  ソース言語ファイル`messages.xlf`のコピーを作成する。
+1.  フランス語\(`fr`\)に翻訳するため、コピーしたファイルの名前を`messages.fr.xlf`に変更する。
+1.  `fr`翻訳ファイルを`src/locale`ディレクトリに移動する。
+1.  `fr`翻訳ファイルを翻訳者に送信する。
 
-## Translate each translation file
+## 各翻訳ファイルを翻訳する {@a translate-each-translation-file}
 
-Unless you are fluent in the language and have the time to edit translations, you will likely complete the following steps.
+あなたがその言語に堪能で、翻訳を編集する時間がある場合を除き、次のステップを行うことが多いでしょう。
 
-1.  Send each translation file to a translator.
-1.  The translator uses an XLIFF file editor complete the following actions.
-    1.  Create the translation.
-    1.  Edit the translation.
+1.  各翻訳ファイルを翻訳者に送信する。
+1.  翻訳者は、XLIFFファイルエディターを使って、次の操作を行います。
+    1.  翻訳を作成する。
+    1.  翻訳を編集する。
 
-### Translation process example for French
+### フランス語の翻訳プロセスの例
 
-To demonstrate the process, review the `messages.fr.xlf` file in the [Example Angular Internationalization application][AioGuideI18nExample].  The [Example Angular Internationalization application][AioGuideI18nExample] includes a French translation for you to edit without a special XLIFF editor or knowledge of French.
+このプロセスを示すのに、[Angular国際化アプリケーションの例][AioGuideI18nExample]の`messages.fr.xlf`ファイルを参照します。[Angular国際化アプリケーションの例][AioGuideI18nExample]では、特別なXLIFFエディターやフランス語の知識がなくても編集できるように、フランス語の翻訳が含まれています。
 
-The following actions describe the translation process for French.
+次にフランス語の翻訳プロセスを示します。
 
-1.  Open `messages.fr.xlf` and find the first `<trans-unit>` element.
-    This is a *translation unit*, also known as a *text node*, that represents the translation of the `<h1>` greeting tag that was previously marked with the `i18n` attribute.
+1.  `messages.fr.xlf`を開き、最初の`<trans-unit>`要素を見つけます。
+    これは*テキストノード*とも呼ばれる*翻訳ユニット*で、以前に`i18n`属性でマークされた`<h1>`挨拶タグの翻訳を表しています。
 
     <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-hello-before"></code-example>
 
-    The `id="introductionHeader"` is a [custom ID][AioGuideI18nOptionalManageMarkedText], but without the `@@` prefix required in the source HTML.
+    `id="introductionHeader` "は[カスタムID][AioGuideI18nOptionalManageMarkedText]ですが、ソースHTMLに必要な`@@`接頭辞はありません。
 
-1.  Duplicate the `<source>... </source>` element in the text node, rename it to `target`, and then replace the content with the French text.
+1.  テキストノード内の`<source>...</source>`要素を複製し、`target`に名前を変更し、内容をフランス語のテキストに置き換えます。
 
     <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;, after translation)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-hello"></code-example>
 
-    In a more complex translation, the information and context in the [description and meaning elements][AioGuideI18nCommonPrepareAddHelpfulDescriptionsAndMeanings] help you choose the right words for translation.
+    より複雑な翻訳では、[説明や意味の要素][AioGuideI18nCommonPrepareAddHelpfulDescriptionsAndMeanings]に含まれる情報や文脈が、翻訳に適した単語を選ぶのに役立ちます。
 
-1.  Translate the other text nodes.
-    The following example displays the way to translate.
+1.  他のテキストノードを翻訳します。
+    次の例に、翻訳する方法を示します。
 
     <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-other-nodes"></code-example>
 
     <div class="alert is-important">
 
-    Don't change the IDs for translation units.
-    Each `id` attribute is generated by Angular and depends on the content of the component text and the assigned meaning.
-    If you change either the text or the meaning, then the `id` attribute changes.
-    For more about managing text updates and IDs, see [custom IDs][AioGuideI18nOptionalManageMarkedText].
+    翻訳ユニットのIDを変更しないでください。
+    各`id`属性はAngularによって生成され、コンポーネントのテキストの内容と割り当てられた意味に依存します。
+    もしテキストか意味のどちらかを変更した場合、`id`属性も変更されます。
+    テキストの更新とIDの管理の詳細については、[カスタムID][AioGuideI18nOptionalManageMarkedText]を参照してください。
 
     </div>
 
-## Translate plurals
+## 複数形を翻訳する {@a translate-plurals}
 
-Add or remove plural cases as needed for each language.
+各言語の必要に応じて、複数形のケースを追加または削除してください。
 
 <div class="alert is-helpful">
 
-For language plural rules, see [CLDR plural rules][GithubUnicodeOrgCldrStagingChartsLatestSupplementalLanguagePluralRulesHtml].
+言語の複数形の規則については、[CLDRの複数形規則][GithubUnicodeOrgCldrStagingChartsLatestSupplementalLanguagePluralRulesHtml]を参照してください。
 
 </div>
 
-### `minute` `plural` example
+### `minute` `plural` の例
 
-To translate a `plural`, translate the ICU format match values.
+`plural`を翻訳するには, ICU形式のマッチした値を翻訳します。
 
 *   `just now`
 *   `one minute ago`
 *   `<x id="INTERPOLATION" equiv-text="{{minutes}}"/> minutes ago`
 
-The following example displays the way to translate.
+次の例に、翻訳方法を示します。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-plural"></code-example>
 
-## Translate alternate expressions
+## 代替表現を翻訳する {@a translate-alternate-expressions}
 
-Angular also extracts alternate `select` ICU expressions as separate translation units.
+また、Angularは代替`select`ICU式を個別の翻訳ユニットとして抽出します。
 
-### `gender` `select` example
+### `gender` `select` の例
 
-The following example displays a `select` ICU expression in the component template.
+次の例に、コンポーネントテンプレート内の`select`ICU式を示します。
 
 <code-example header="src/app/app.component.html" path="i18n/src/app/app.component.html" region="i18n-select"></code-example>
 
-In this example, Angular extracts the expression into two translation units.
-The first contains the text outside of the `select` clause, and uses a placeholder for `select` \(`<x id="ICU">`\):
+この例では、Angularは式を2つの翻訳ユニットに抽出しています。
+1つ目は`select`句の外側のテキストを含み、`select`のプレースホルダー\(`<x id="ICU">`\)を使用します。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translate-select-1"></code-example>
 
 <div class="alert is-important">
 
-When you translate the text, move the placeholder if necessary, but don't remove it.
-If you remove the placeholder, the ICU expression is removed from your translated application.
+テキストを翻訳する際、必要に応じてプレースホルダーを移動させますが、削除しないでください。
+プレースホルダーを削除すると、翻訳されたアプリケーションからICU式が削除されます。
 
 </div>
 
-The following example displays the second translation unit that contains the `select` clause.
+次の例では、`select`句を含む2つ目の翻訳ユニットを示しています。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translate-select-2"></code-example>
 
-The following example displays both translation units after translation is complete.
+次の例に、翻訳が完了した後の両方の翻訳ユニットを示します。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-select"></code-example>
 
-## Translate nested expressions
+## ネストされた式を翻訳する {@a translate-nested-expressions}
 
-Angular treats a nested expression in the same manner as an alternate expression.
-Angular extracts the expression into two translation units.
+Angularはネストされた式を代替式と同じように扱います。
+Angularは式を2つの翻訳ユニットに抽出します。
 
-### Nested `plural` example
+### ネストされた`plural`の例
 
-The following example displays the first translation unit that contains the text outside of the nested expression.
+次の例に、ネストした式の外側にあるテキストを含む1つ目の翻訳ユニットを示します。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translate-nested-1"></code-example>
 
-The following example displays the second translation unit that contains the complete nested expression.
+次の例に、完全な入れ子式を含む2つ目の翻訳ユニットを示します。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translate-nested-2"></code-example>
 
-The following example displays both translation units after translating.
+次の例に、翻訳後の両方の翻訳ユニットを示します。
 
 <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translate-nested"></code-example>
 
-## What's next
+## 次のステップ
 
-*   [Merge translations into the app][AioGuideI18nCommonMerge]
+*   [アプリケーションに翻訳をマージ][AioGuideI18nCommonMerge]
 
 <!-- links -->
 

@@ -441,8 +441,9 @@
             },
             {
               "url": "guide/typed-forms",
-              "title": "Strictly Typed Reactive Forms In Depth",
-              "tooltip": "A deep-dive into the reactive forms types."
+              "title": "厳格に型付けされたリアクティブフォームの詳解",
+              "tooltip": "リアクティブフォームの型を深く掘り下げましょう",
+              "translated": true
             },
             {
               "url": "guide/form-validation",
@@ -564,14 +565,15 @@
                 },
                 {
                   "url": "guide/i18n-common-prepare",
-                  "title": "Prepare component for translation",
-                  "tooltip": "Prepare component for translation",
+                  "title": "翻訳用コンポーネントの準備",
+                  "tooltip": "翻訳用コンポーネントの準備",
                   "translated": true
                 },
                 {
                   "url": "guide/i18n-common-translation-files",
-                  "title": "Work with translation files",
-                  "tooltip": "Work with translation files"
+                  "title": "翻訳ファイルの作業",
+                  "tooltip": "翻訳ファイルの作業",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-merge",

@@ -104,7 +104,7 @@ email.setValue('angularrox@gmail.com');
 
 ## `FormArray`: 動的で均一なコレクション
 
-`FormArray` には、制限のないコントロールのリストが含まれています。 type パラメーターは、各内部コントロールの型に対応します。
+`FormArray` には、可変長のコントロールのリストが含まれています。 type パラメーターは、各内部コントロールの型に対応します。
 
 ```ts
 const names = new FormArray([new FormControl('Alex')]);
@@ -162,7 +162,7 @@ login.removeControl('password');
 
 ### `FormRecord`
 
-キーが事前にわからないため、 `FormGroup` の使い方によっては上記のパターンに適合しません。 `FormRecord` クラスは、その場合のために設計されています。
+`FormGroup` の使い方によっては、キーが事前にわからないため上記のパターンに適合しません。 `FormRecord` クラスは、その場合のために設計されています。
 
 ```ts
 const addresses = new FormRecord<FormControl<string|null>>({});
@@ -171,7 +171,7 @@ addresses.addControl('Andrew', new FormControl('2340 Folsom St'));
 
 `string|null` 型の任意のコントロールをこの `FormRecord` に追加できます。
 
-動的 (無制限) かつ異種 (コントロールの型が異なる) の両方である `FormGroup` が必要な場合、型の安全性を向上させることはできないため、`UntypedFormGroup` を使用する必要があります。
+動的 (可変長) かつ異種 (コントロールの型が異なる) の両方である `FormGroup` が必要な場合、型の安全性を向上させることはできないため、`UntypedFormGroup` を使用する必要があります。
 
 `FormRecord` は `FormBuilder` を使用して構築することもできます。
 

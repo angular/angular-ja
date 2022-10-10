@@ -1,15 +1,17 @@
 # スタンドアロンコンポーネントを使い始める
 
-v14以降では、 **スタンドアロンコンポーネント** は Angular アプリケーションを構築するための簡略化された方法を提供します。スタンドアロンコンポーネント、ディレクティブ、パイプは、 `NgModule`s の必要性を減らすことでオーサリングエクスペリエンスを効率化することを目的としています。既存のアプリケーションは、破壊的な変更を行うことなく、新しいスタンドアロンスタイルをオプションで段階的に採用できます。
-
 <div class="alert is-important">
 
-スタンドアロンコンポーネント機能は、開発者向けプレビューで利用できます。
+スタンドアロンコンポーネント機能は、[開発者向けプレビュー](https://angular.io/guide/releases#developer-preview)で利用できます。
 試していただくことは可能ですが、安定するまでに変更される可能性があります。
 
 </div>
 
+v14以降では、 **スタンドアロンコンポーネント** は Angular アプリケーションを構築するための簡略化された方法を提供します。スタンドアロンコンポーネント、ディレクティブ、パイプは、 `NgModule`s の必要性を減らすことでオーサリングエクスペリエンスを効率化することを目的としています。既存のアプリケーションは、破壊的な変更を行うことなく、新しいスタンドアロンスタイルをオプションで段階的に採用できます。
+
 ## スタンドアロンコンポーネントの作成
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x5PZwb4XurU" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### `standalone` フラグとコンポーネントの `imports`
 
@@ -146,6 +148,25 @@ export const ADMIN_ROUTES: Route[] = [
 ];
 ```
 
+### 遅延読み込みとデフォルトエクスポート
+
+`loadChildren` と `loadComponent` を使用すると、ルーターは動的な `import()` 呼び出しを理解し、`default` エクスポートで自動的にアンラップします。 これを利用して、このような遅延読み込みオペレーションの `.then()` をスキップできます。
+
+```ts
+// メインアプリケーションでは:
+export const ROUTES: Route[] = [
+  {path: 'admin', loadChildren: () => import('./admin/routes')},
+  // ...
+];
+
+// admin/routes.ts では:
+export default [
+  {path: 'home', component: AdminHomeComponent},
+  {path: 'users', component: AdminUsersComponent},
+  // ...
+] as Route[];
+```
+
 ### ルートのサブセットへのサービスの提供
 
 `NgModule`s (`loadChildren`) の遅延ロード API は、ルートの遅延ロードされた子をロードするときに、新しい「モジュール」インジェクターを作成します。この機能は、アプリケーション内のルートのサブセットにのみサービスを提供するのに役立つことがよくありました。 たとえば、 `/admin` の下のすべてのルートが `loadChildren` 境界を使用して範囲指定されている場合、管理者専用サービスはそれらのルートにのみ提供できます。問題のルートの遅延読み込みが不要であったとしても、これを行うには `loadChildren` API を使用する必要がありました。
@@ -218,7 +239,7 @@ export class CarouselModule {}
 `NgModule` を発行する代わりに、ライブラリの作成者は協調するディレクティブの配列をエクスポートしたいと思うかもしれません:
 
 ```ts
-export CAROUSEL_DIRECTIVES = [ImageCarouselComponent, ImageSlideComponent] as const;
+export const CAROUSEL_DIRECTIVES = [ImageCarouselComponent, ImageSlideComponent] as const;
 ```
 
 このような配列は、 `NgModule`s を使用するアプリケーションによってインポートされ、 `@NgModule.imports` に追加されます。 TypeScript の `as const` コンストラクトの存在に注意してください。これは、適切なコンパイルに必要な追加情報を Angular コンパイラに提供し、推奨される方法です (これにより、エクスポートされた配列が TypeScript の観点からイミュータブルになるため)。

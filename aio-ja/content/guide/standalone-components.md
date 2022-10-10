@@ -2,7 +2,7 @@
 
 <div class="alert is-important">
 
-スタンドアロンコンポーネント機能は、[開発者向けプレビュー](https://angular.io/guide/releases#developer-preview)で利用できます。
+スタンドアロンコンポーネント機能は、[開発者向けプレビュー](https://angular.jp/guide/releases#developer-preview)で利用できます。
 試していただくことは可能ですが、安定するまでに変更される可能性があります。
 
 </div>

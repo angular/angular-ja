@@ -60,7 +60,7 @@ export class PhotoGalleryComponent {
 
 ## NgModule ベースのアプリケーションでスタンドアロンコンポーネントを使用する
 
-スタンドアロンコンポーネントは、既存の NgModules ベースのコンテキストにインポートすることもできます。 これにより、既存のアプリケーション (現在 NgModules を使用している) は、新しいスタンドアロン スタイルのコンポーネントを段階的に採用できます。
+スタンドアロンコンポーネントは、既存の NgModules ベースのコンテキストにインポートすることもできます。 これにより、既存のアプリケーション (現在 NgModules を使用している) は、新しいスタンドアロンスタイルのコンポーネントを段階的に採用できます。
 
 `NgModule.imports` を使用して、 `NgModule` と同じように、スタンドアロンコンポーネント (ディレクティブ、パイプ) をインポートできます。
 
@@ -114,7 +114,7 @@ bootstrapApplication(PhotoAppComponent, {
 
 ## ルーティングと遅延読み込み
 
-ルーターAPIは、スタンドアロンコンポーネントを利用するために更新および簡素化されました。多くの一般的な遅延読み込みシナリオでは、 `NgModule` は不要になりました。
+ルーターAPIは、スタンドアロンコンポーネントを利用するために更新および簡素化されました。多くの一般的な遅延読み込みのシナリオでは、 `NgModule` は不要になりました。
 
 ### スタンドアロンコンポーネントの遅延読み込み
 
@@ -146,25 +146,6 @@ export const ADMIN_ROUTES: Route[] = [
   {path: 'users', component: AdminUsersComponent},
   // ...
 ];
-```
-
-### 遅延読み込みとデフォルトエクスポート
-
-`loadChildren` と `loadComponent` を使用すると、ルーターは動的な `import()` 呼び出しを理解し、`default` エクスポートで自動的にアンラップします。 これを利用して、このような遅延読み込みオペレーションの `.then()` をスキップできます。
-
-```ts
-// メインアプリケーションでは:
-export const ROUTES: Route[] = [
-  {path: 'admin', loadChildren: () => import('./admin/routes')},
-  // ...
-];
-
-// admin/routes.ts では:
-export default [
-  {path: 'home', component: AdminHomeComponent},
-  {path: 'users', component: AdminUsersComponent},
-  // ...
-] as Route[];
 ```
 
 ### ルートのサブセットへのサービスの提供

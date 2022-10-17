@@ -29,7 +29,7 @@ export class MyComponent {}
 
 ## イベントがデフォルトの変更検知を備えたコンポーネントによって処理される場合
 
-Angular が `OnPush` 戦略なしでコンポーネント内のイベントを処理する場合、フレームワークはコンポーネントツリー全体で変更検知を実行します。 Angular は、新しい入力を受け取っていない `OnPush` を使用して、ルートをもつ子孫コンポーネントサブツリーをスキップします。
+Angular が `OnPush` 戦略なしでコンポーネント内のイベントを処理する場合、フレームワークはコンポーネントツリー全体で変更検知を実行します。 Angular は、 `OnPush` を使用し、新しい入力を受け取っていない親をもつ子孫コンポーネントサブツリーをスキップします。
 
 例として、`MainComponent` の変更検知戦略を `OnPush` に設定し、ユーザーがルートに `MainComponent` をもつサブツリーの外部のコンポーネントと対話する場合、Angular は次の図のすべての緑色のコンポーネント (`AppComponent`、`HeaderComponent`、`SearchComponent`、`ButtonComponent`) をチェックします。 `MainComponent` は新しい入力を受け取ります。
 
@@ -69,7 +69,7 @@ Angular は、テンプレートバインディングの結果として入力プ
 
 ## エッジケース
 
-* **TypeScript コードの入力プロパティを変更する場合**。 `@ViewChild` や `@ContentChild` などの API を使用して TypeScript のコンポーネントへの参照を取得し、`@Input` プロパティを手動で変更すると、Angular は OnPush コンポーネントの変更検知を自動的に実行しません。 Angular で変更検知を実行する必要がある場合は、コンポーネントに `ChangeDetectorRef` を注入し、`changeDetectorRef.markForCheck()` を呼び出すことで、変更検知をスケジュールするように Angular に指示できます。
+* **TypeScript コード中で入力プロパティを変更する場合**。 `@ViewChild` や `@ContentChild` などの API を使用して TypeScript 中でコンポーネントへの参照を取得し、`@Input` プロパティを手動で変更すると、Angular は OnPush コンポーネントの変更検知を自動的に実行しません。 Angular で変更検知を実行する必要がある場合は、コンポーネントに `ChangeDetectorRef` を注入し、`changeDetectorRef.markForCheck()` を呼び出すことで、変更検知をスケジュールするように Angular に指示できます。
 * **オブジェクトの参照を変更する場合**。 入力がミュータブルなオブジェクトを値として受け取り、オブジェクトを変更しても参照を保持する場合、Angular は変更検知を呼び出しません。 入力ポイントの以前の値と現在の値が同じ参照を指すことになるため、これは期待どおりの動作です。
 
 @reviewed 2022-05-04

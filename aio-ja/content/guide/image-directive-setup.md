@@ -1,5 +1,12 @@
 # `NgOptimizedImage`の設定
 
+<div class="alert is-important">
+
+`NgOptimizedImage` ディレクティブは [開発者プレビュー](https://angular.jp/guide/releases#developer-preview) で利用可能です。
+試すことはできますが、安定版となるまでに変更される可能性があります。
+
+</div>
+
 このチュートリアルでは、`NgOptimizedImage` の設定方法について説明します。 `NgOptimizedImage` の使用に関する情報については、[NgOptimizedImageを始める](/guide/image-directive) を参照してください。
 
 ## `NgOptimizedImage`のインポート
@@ -8,7 +15,7 @@
 
 ## `ImageLoader`を構成する
 
-「ローダー」は、特定の画像ファイルの [画像変換URL](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options) を生成する関数です。適切に実装されている場合、`NgOptimzedImage` は画像のサイズ、フォーマット、および画質変換を設定します。
+「ローダー」は、特定の画像ファイルの [画像変換URL](https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options) を生成する関数です。適切に実装されている場合、`NgOptimizedImage` は画像のサイズ、フォーマット、および画質変換を設定します。
 
 `NgOptimizedImage` は、さまざまなサードパーティの画像サービス用のローダーだけでなく、汎用ローダーも提供します。また、独自のカスタムローダーの作成もサポートしています。
 
@@ -16,14 +23,14 @@
 |:--- |:--- |
 | 汎用ローダー | 汎用ローダーによって返される URL は、常に `src` の値と一致します。つまり、このローダーは変換を適用しません。 Angular を使用して画像を提供するサイトは、このローダーの主な使用例です。|
 | サードパーティの画像サービスのローダー | サードパーティの画像サービスのローダーによって返される URL は、その特定の画像サービスで使用される API 規則に従います。 |
-| カスタムローダー | カスタムローダーの動作は、その開発者によって定義されます。 `NgOptimzedImage` で事前構成されたローダーが画像サービスでサポートされていない場合は、カスタムローダーを使用する必要があります。|
+| カスタムローダー | カスタムローダーの動作は、その開発者によって定義されます。 `NgOptimizedImage` で事前構成されたローダーが画像サービスでサポートされていない場合は、カスタムローダーを使用する必要があります。|
 
 Angular アプリケーションで一般的に使用される画像サービスに基づいて、`NgOptimizedImage` は、次の画像サービスで動作するように事前構成されたローダーを提供します。
 
 | 画像サービス | Angular API | ドキュメンテーション |
 |:--- |:--- |:--- |
 | Cloudflare Image Resizing | `provideCloudflareLoader` | [ドキュメンテーション](https://developers.cloudflare.com/images/image-resizing/) |
-| Cloudinary | `provideCloudinaryLoader` | [ドキュメンテーション](https://developers.cloudflare.com/images/image-resizing/) |  |
+| Cloudinary | `provideCloudinaryLoader` | [ドキュメンテーション](https://cloudinary.com/documentation/resizing_and_cropping) |  |
 | ImageKit | `provideImageKitLoader` | [ドキュメンテーション](https://docs.imagekit.io/) |
 | Imgix | `provideImgixLoader` | [ドキュメンテーション](https://docs.imgix.com/) |
 
@@ -93,4 +100,4 @@ providers: [
 
 `NgOptimizedImage` ディレクティブのローダー関数は、引数として (`@angular/common` の) `ImageLoaderConfig` 型をもつオブジェクトを取り、画像アセットの絶対 URL を返します。 `ImageLoaderConfig` オブジェクトには、`src` および `width` プロパティが含まれています。
 
-注: カスタムローダーは、`rawSrcset` が適切に機能するために、さまざまな幅の画像の要求をサポートする必要があります。
+注: カスタムローダーは、`ngSrcset` が適切に機能するために、さまざまな幅の画像の要求をサポートする必要があります。

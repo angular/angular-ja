@@ -163,7 +163,7 @@ Angularでは、アプリケーションの部品がどのように合わさる�
 もっとも重要な`@NgModule`デコレーターは、トップレベルの **AppModule** クラスに注釈を付けます。
 
 `ng new` は、プロジェクトを作成するときに`src/app/app.module.ts`に`AppModule`クラスを作成しました。
-ここで`FormsModule`を_オプトイン_します。
+ここで`FormsModule`を*オプトイン*します。
 
 ### `FormsModule` をインポートする {@a import-formsmodule}
 

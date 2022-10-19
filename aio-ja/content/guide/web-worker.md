@@ -1,11 +1,11 @@
 # Web workers を使用したバックグラウンド処理
 
 [Web Workers](https://developer.mozilla.org/ja/docs/Web/API/Web_Workers_API) を使用すると、CPU 集中型の計算をバックグラウンドスレッドで実行し、メインスレッドを解放してユーザーインターフェースを更新できます。
-アプリケーションが CAD 図面の生成や幾何学的な重い計算などの多くの計算を実行している場合、 Web Workers を使用すると、アプリケーションのパフォーマンスを向上させることができます。
+CAD図面や幾何学計算など、大量の計算を行うアプリケーションでは、Web Workerを利用することでパフォーマンスを向上させることができます。
 
 <div class="alert is-helpful">
 
-CLI は、Web worker での Angular 自体の実行をサポートしていません。
+Angular CLI は、Web worker での Angular 自体の実行をサポートしていません。
 
 </div>
 

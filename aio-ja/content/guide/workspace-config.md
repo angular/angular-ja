@@ -1,20 +1,24 @@
 # Angularワークスペースの設定
 
-Angular [ワークスペース](guide/glossary#workspace) のルート階層にある `angular.json` というファイルは、Angular CLIによって提供されるビルドおよび開発ツールに対して、ワークスペース全体およびプロジェクト固有のデフォルトの設定を提供します。
+Angular [ワークスペース](guide/glossary#workspace) のルート階層にある `angular.json` ファイルは、Angular CLIによって提供されるビルドおよび開発ツールに対して、ワークスペース全体およびプロジェクト固有のデフォルトの設定を提供します。
 設定の中で指定されたパスの値は、ルートであるワークスペースフォルダが基準となります。
 
-## 全体的なJSONの構造
+## 一般的なJSONの構造
 
-At the top-level of `angular.json`, a few properties configure the workspace and a `projects` section contains the remaining per-project configuration options. You can override CLI defaults set at the workspace level through defaults set at the project level. You can also override defaults set at the project level using the command line.
+At the top-level of `angular.json`, a few properties configure the workspace and a `projects` section contains the remaining per-project configuration options.
+You can override Angular CLI defaults set at the workspace level through defaults set at the project level.
+You can also override defaults set at the project level using the command line.
 
 ファイルの最上位にある次のプロパティは、ワークスペースを設定します。
 
-*   `version`: 設定ファイルのバージョン
-*   `newProjectRoot`: 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス
-*   `defaultProject`: 引数として与えられていない場合にコマンドで使われる、デフォルトのプロジェクト名。新しいワークスペースに新しいアプリケーションを `ng new` で作成したとき、ここの値が変更されるまで、そのアプリケーションはワークスペースのデフォルトプロジェクトになります
-*   `cli` : A set of options that customize the [Angular CLI](cli). See the [CLI configuration options](#cli-configuration-options) section.
-*   `schematics` : このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の[Generation schematics](#schematics) を参照してください。
-*   `projects` : ワークスペース内の各プロジェクト（ライブラリ、アプリケーション）のサブセクションと、プロジェクトごとの設定オプションが含まれます
+| Properties       | Details |
+|:---              |:---     |
+| `version`        | 設定ファイルのバージョン                                                                                                                                                                                                       |
+| `newProjectRoot` | 新しいプロジェクトが作成されるパス。ワークスペースフォルダからの絶対パスもしくは相対パス                                                                                                                                                   |
+| `cli`            | A set of options that customize the [Angular CLI](cli). See the [Angular CLI configuration options](#cli-configuration-options) section.                                                                                                      |
+| `schematics`     | このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。[Generation schematics](#schematics) を参照してください。                                               |
+| `projects`       | Contains a subsection for each library or application in the workspace, with the per-project configuration options.                                                                                                       |
+
 
 `ng new app_name` で作成した最初のアプリケーションは "projects" の配下にあります。
 
@@ -22,9 +26,9 @@ At the top-level of `angular.json`, a few properties configure the workspace and
 
 "projects": {
   "app_name": {
-    ...
+    &hellip;
   }
-  ...
+  &hellip;
 }
 
 </code-example>
@@ -42,9 +46,9 @@ At the top-level of `angular.json`, a few properties configure the workspace and
 
 </div>
 
-{@a cli-configuration-options}
+<a id="cli-configuration-options"></a>
 
-## CLI configuration options
+## Angular CLI configuration options
 
 The following configuration properties are a set of options that customize the Angular CLI.
 
@@ -55,14 +59,14 @@ The following configuration properties are a set of options that customize the A
 | `cache`               | Control [persistent disk cache](cli/cache) used by [Angular CLI Builders](guide/cli-builder). | [Cache options](#cache-options)                         |
 | `schematicCollections`| A list of default schematics collections to use.                                              | `string[]`                                              |
 | `packageManager`      | The preferred package manager tool to use.                                                    | `npm` &verbar; `cnpm` &verbar; `pnpm` &verbar;`yarn`    |
-| `warnings`            | Control CLI specific console warnings.                                                        | [Warnings options](#warnings-options)                   |
+| `warnings`            | Control Angular CLI specific console warnings.                                                        | [Warnings options](#warnings-options)                   |
 
 ### Analytics sharing options
 
 | Property   | Description                                                  | Value Type |
 | :--------- | :----------------------------------------------------------- | :--------- |
 | `tracking` | Analytics sharing info tracking ID.                          | `string`   |
-| `uuid`     | Analytics sharing info UUID (Universally Unique Identifier). | `string`   |
+| `uuid`     | Analytics sharing info Universally Unique Identifier (UUID).   | `string`   |
 
 ### Cache options
 
@@ -97,8 +101,8 @@ The following configuration properties are a set of options that customize the A
 
 | プロパティ | 説明 |
 | :-------------- | :---------------------------- |
-| `root`          | ワークスペースフォルダを基準とした、このプロジェクトのルートフォルダです。ワークスペースのトップ階層にある初期アプリケーションでは空です。 |
-| `sourceRoot`    | このプロジェクトのソースファイルのルートフォルダです。 |
+| `root`          | ワークスペースディレクトリを基準とした、このプロジェクトのルートディレクトリです。ワークスペースのトップ階層にある初期アプリケーションでは空です。 |
+| `sourceRoot`    | このプロジェクトのソースファイルのルートディレクトリです。 |
 | `projectType`   | "application" または "library" のいずれかです。application はブラウザ内で独立して実行できますが、libraryでは実行できません。 |
 | `prefix`        | Angular によって生成されたセレクターの先頭に追加される文字列です。アプリケーションや機能単位でのカスタマイズができます。 |
 | `schematics`    | このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。次の [Generation schematics](#schematics) を参照してください。 |
@@ -136,12 +140,16 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 これらのデフォルトの各ビルダについてオプションとデフォルトを定義するJSONスキーマは、[`@angular-devkit/build-angular`](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/builders.json) パッケージに収集されています。
 スキーマは、次のビルダについてオプションを構成します。
 
+<!-- vale Angular.Google_WordListWarnings = NO -->
+
 * [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
 * [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
 * [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
 * [extract-i18n](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
 * [karma](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
 * [server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/server/schema.json)
+
+<!-- vale Angular.Google_WordListWarnings = YES -->
 
 ### ビルダのターゲットの設定
 
@@ -168,17 +176,18 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 </code-example>
 
-*   `architect/build` セクションでは `ng build` コマンドのデフォルトオプションを設定します。
-詳細は [ビルドのターゲット](#build-target) を参照してください。
-*   `architect/serve` セクションでは、ビルドのデフォルトを上書きし、 `ng serve` コマンドの追加のデフォルトを提供します。`ng build` コマンドで利用可能なオプションに加えて、アプリケーションの提供に関連するオプションを提供します。
-*   `architect/e2e` セクションでは `ng e2e` コマンドを使用してエンドツーエンドテストアプリケーションをビルドするための追加のビルドオプションのデフォルトを上書きます。
-*   `architect/test` セクションでは、テストビルドのためのビルドオプションのデフォルトを上書きし、`ng test` コマンドの追加のデフォルトのテスト実行を提供します。
-*   `architect/lint` セクションでは、プロジェクトのソースファイルに対してコード解析を実行する `ng lint` コマンドのデフォルトオプションを設定します。
-*   `architect/extract-i18n` セクションでは `ng extract-i18n` コマンドが使用する `ng-xi18n` ツールのデフォルトオプションを設定します。このコマンドは、マークされたメッセージ文字列をソースコードから抽出し、翻訳ファイルを出力します。
-*   `architect/server` セクションでは `ng run <project>:server` コマンドを使用してサーバーサイドレンダリングでUniversalアプリケーションを作成する際のデフォルトを設定します。
-*   `architect/app-shell` セクションでは `ng run <project>:app-shell` コマンドを使用して progressive web app (PWA)のための App Shell を作成する際のデフォルトを設定します。
+| Sections                 | Details |
+|:---                      |:---     |
+| `architect/build`        | Configures defaults for options of the `ng build` command. See the [Build target](#build-target) section for more information.                                                                                   |
+| `architect/serve`        | Overrides build defaults and supplies extra serve defaults for the `ng serve` command. Besides the options available for the `ng build` command, it adds options related to serving the application. |
+| `architect/e2e`          | Overrides build-option defaults for building end-to-end testing applications using the `ng e2e` command.                                                                                                         |
+| `architect/test`         | Overrides build-option defaults for test builds and supplies extra test-running defaults for the `ng test` command.                                                                                         |
+| `architect/lint`         | Configures defaults for options of the `ng lint` command, which performs code analysis on project source files.                                                                                                  |
+| `architect/extract-i18n` | Configures defaults for options of the `ng extract-i18n` command, which extracts marked message strings from source code and outputs translation files.                                                          |
+| `architect/server`       | Configures defaults for creating a Universal application with server-side rendering, using the `ng run <project>:server` command.                                                                                |
+| `architect/app-shell`    | Configures defaults for creating an application shell for a progressive web application \(PWA\), using the `ng run <project>:app-shell` command.                                                                 |
 
-一般的に、デフォルトが設定できるアプションは、各コマンドの [CLIリファレンス](cli) にリストされているコマンドオプションに対応しています。
+一般的に、デフォルトが設定できるアプションは、各コマンドの [Angular CLIリファレンス](cli) にリストされているコマンドオプションに対応しています。
 **NOTE**: 設定ファイル内のすべてのオプションは、ダッシュケースではなく [キャメルケース](guide/glossary#case-conventions) を使用しなければならないことに注意してください。
 
 {@a build-target}
@@ -199,10 +208,10 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 Angular CLI comes with two build configurations: `production` and `development`. By default, the `ng build` command uses the `production` configuration, which applies a number of build optimizations, including:
 
-* Bundling files
-* Minimizing excess whitespace
-* Removing comments and dead code
-* Rewriting code to use short, mangled names (minification)
+*   Bundling files
+*   Minimizing excess whitespace
+*   Removing comments and dead code
+*   Rewriting code to use short, mangled names, also known as minification
 
 また、あなたの開発プロセスに適した追加の代替設定（インスタンスの `stage` など）を定義して名前を付けることもできます。さまざまな異なるビルド設定の例として、`stable` 、`archive` やAIO自体が使用する `next` 、ローカライズされたバージョンのアプリケーションを構築するために必要なロケーション固有の設定があります。詳細については [国際化 (i18n)][AioGuideI18nCommonMerge] を参照してください。
 
@@ -210,11 +219,11 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 複数の構成名をコンマ区切りリストとして渡すこともできます。たとえば、`stage` と `fr` の両方のビルド構成を適用するには、コマンド `ng build --configuration stage,fr` を使用します。この場合、コマンドは名前付き構成を左から右に解析します。複数の構成が同じ設定を変更する場合、最後に設定された値が最後の値となります。 So in this example, if both `stage` and `fr` configurations set the output path the value in `fr` would get used.
 
-{@a build-props}
+<a id="build-props"></a>
 
 ### 追加のビルドとテストのオプション
 
-デフォルトまたはターゲットビルドに設定可能なオプションは、[`ng build`](cli/build) 、[`ng serve`](cli/serve) および [`ng test`](cli/test) コマンドに対応しています。これらのオプションと設定可能な値の詳細については [CLIリファレンス](cli) を参照してください。
+デフォルトまたはターゲットビルドに設定可能なオプションは、[`ng build`](cli/build) 、[`ng serve`](cli/serve) および [`ng test`](cli/test) コマンドに対応しています。これらのオプションと設定可能な値の詳細については [Angular CLIリファレンス](cli) を参照してください。
 
 いくつかの追加のオプションは、直接編集もしくは [`ng config`](cli/config) コマンドを使用してのみ設定可能です。
 
@@ -227,20 +236,21 @@ Angular CLI comes with two build configurations: `production` and `development`.
 | `budgets`                  | 出力が閾値のサイズに達したり越えたりしたときに、警告やエラーを報告するようにビルダを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください (`test` セクションにはありません)。 |
 | `fileReplacements`         | オブジェクトとそのコンパイル時間を書き換えを含むオブジェクトです。詳しくは、[ターゲット固有のファイル置換の構成](guide/build#configure-target-specific-file-replacements)を参照してください。 |
 
-{@a complex-config}
+<a id="complex-config"></a>
 
 ## 複雑な設定値
 
 オプションの `assets`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
 `sourceMap` および `optimization` オプションは、コマンドフラグを使用して単純なブール値に設定できますが、設定ファイルを使用して複雑な値を指定することもできます。
+
 次のセクションでは、これらの複雑な値が各ケースでどのように使用されるかについて詳しく説明します。
 
-{@a asset-config}
+<a id="asset-config"></a>
 
 ### アセットの設定 {@a assets-configuration}
 
 各`build`ターゲット設定には、ファイルやフォルダをリストする`assets`配列を含めることができます。それらはプロジェクトのビルド時にそのままコピーされます。
-デフォルトでは、 `src/assets/` フォルダーと `src/favicon.ico` がコピーされます。
+デフォルトでは、 `src/assets/` ディレクトリと `src/favicon.ico` がコピーされます。
 
 <code-example language="json">
 
@@ -251,18 +261,24 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 </code-example>
 
+<!-- vale off -->
+
 アセットを除外するには、アセットの設定からそれを削除します。
 
 ワークスペースのルートを基準にした単純なパスとしてではなく、アセットをオブジェクトとして指定することで、アセットをコピーするように構成できます。
 アセットを指定したオブジェクトは、次のフィールドをもつことができます。
 
-*   `glob`: `input` をベースディレクトリとして使用する [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) 。
-*   `input`: ワークスペースのルートからの相対パス。
-*   `output`: `outDir` からの相対パス（デフォルトは`dist/`*project-name*）。 セキュリティへの影響のため、CLIはプロジェクトの出力パスの外側にファイルを書き込むことはありません。
-*   `ignore`: 除外するglobsのリスト。
-* ` followSymlinks`: Allow glob patterns to follow symlink directories. This allows subdirectories of the symlink to be searched. Defaults to `false`.
+| Fields           | Details |
+|:---              |:---     |
+| `glob`           | A [node-glob](https://github.com/isaacs/node-glob/blob/master/README.md) using `input` as base directory.                                                              |
+| `input`          | A path relative to the workspace root.                                                                                                                                 |
+| `output`         | A path relative to `outDir` \(default is `dist/project-name`\). Because of the security implications, the Angular CLI never writes files outside of the project output path. |
+| `ignore`         | A list of globs to exclude.                                                                                                                                            |
+| `followSymlinks` | Allow glob patterns to follow symlink directories. This allows subdirectories of the symlink to be searched. Defaults to `false`.                                      |
 
 たとえば、デフォルトのアセットのパスは、次のオブジェクトを使用してより詳細に表すことができます。
+
+<!-- vale on -->
 
 <code-example language="json">
 
@@ -296,7 +312,11 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 </code-example>
 
+<!-- vale Angular.Google_Will = NO -->
+
 `node_modules/some-package/images/` の内容は `dist/some-package/` にあります。
+
+<!-- vale Angular.Google_Will = YES -->
 
 次の例では、 `ignore` フィールドを使用して、アセットフォルダー内の特定のファイルをビルドへのコピーから除外します:
 
@@ -356,7 +376,7 @@ Angular CLI comes with two build configurations: `production` and `development`.
 
 </code-example>
 
-{@a style-preprocessor}
+<a id="style-preprocessor"></a>
 
 #### スタイルプリプロセッサオプション
 
@@ -374,7 +394,7 @@ Sassでは、コンポーネントスタイルとグローバルスタイルの�
 
 </code-example>
 
-`src/style-paths/_variables.scss` のようなそのフォルダ内のファイルは、相対パスを必要とせずにプロジェクトのどこからでもインポートできます:
+`src/style-paths/_variables.scss` のようなそのディレクトリ内のファイルは、相対パスを必要とせずにプロジェクトのどこからでもインポートできます:
 
 <code-example language="typescript">
 
@@ -387,11 +407,13 @@ Sassでは、コンポーネントスタイルとグローバルスタイルの�
 </code-example>
 
 **NOTE**: ユニットテストに必要な場合は、`test`ビルダにスタイルやスクリプトを追加する必要があることに注意してください。
-[アプリ内でのランタイムグローバルライブラリの使用](guide/using-libraries#using-runtime-global-libraries-inside-your-app)も参照してください。
+[アプリケーション内でのランタイムグローバルライブラリの使用](guide/using-libraries#using-runtime-global-libraries-inside-your-app)も参照してください。
 
 ### Optimization configuration
 
 The `optimization` browser builder option can be either a Boolean or an Object for more fine-tune configuration. This option enables various optimizations of the build output, including:
+
+<!-- vale Angular.Angular_Spelling = NO-->
 
 *   Minification of scripts and styles
 *   Tree-shaking
@@ -399,7 +421,9 @@ The `optimization` browser builder option can be either a Boolean or an Object f
 *   Inlining of critical CSS
 *   Fonts inlining
 
-There are several options that can be used to fine-tune the optimization of an application.
+<!-- vale Angular.Angular_Spelling = YES-->
+
+Several options can be used to fine-tune the optimization of an application.
 
 | Option    | Description                                                                     | Value Type                                                               | Default Value |
 |:---       |:---                                                                             |:---                                                                      |:---           |
@@ -409,9 +433,11 @@ There are several options that can be used to fine-tune the optimization of an a
 
 #### Styles optimization options
 
+<!-- vale Angular.Angular_Spelling = NO -->
+
 | Option           | Description                                                                                                              | Value Type | Default Value |
 |:---              |:---                                                                                                                      |:---        |:---           |
-| `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers and minimizing values.        | `boolean`  | `true`        |
+| `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers, and minimizing values.        | `boolean`  | `true`        |
 | `inlineCritical` | Extract and inline critical CSS definitions to improve [First Contentful Paint](https://web.dev/first-contentful-paint). | `boolean`  | `true`        |
 
 #### Fonts optimization options
@@ -420,18 +446,20 @@ There are several options that can be used to fine-tune the optimization of an a
 |:---      |:---                                                                                                                                                                                                                                  |:---        |:---           |
 | `inline` | Reduce [render blocking requests](https://web.dev/render-blocking-resources) by inlining external Google Fonts and Adobe Fonts CSS definitions in the application's HTML index file. <br /> **NOTE**: This requires internet access. | `boolean`  | `true`        |
 
+<!-- vale Angular.Angular_Spelling = YES -->
+
 You can supply a value such as the following to apply optimization to one or the other:
 
 <code-example language="json">
 
-  "optimization": {
-    "scripts": true,
-    "styles": {
-      "minify": true,
-      "inlineCritical": true
-    },
-    "fonts": true
-  }
+"optimization": {
+  "scripts": true,
+  "styles": {
+    "minify": true,
+    "inlineCritical": true
+  },
+  "fonts": true
+}
 
 </code-example>
 
@@ -456,12 +484,12 @@ The example below shows how to toggle one or more values to configure the source
 
 <code-example language="json">
 
-  "sourceMap": {
-    "scripts": true,
-    "styles": false,
-    "hidden": true,
-    "vendor": true
-  }
+"sourceMap": {
+  "scripts": true,
+  "styles": false,
+  "hidden": true,
+  "vendor": true
+}
 
 </code-example>
 
@@ -476,6 +504,8 @@ The example below shows how to toggle one or more values to configure the source
 
 [AioGuideI18nCommonMerge]: guide/i18n-common-merge "Common Internationalization task #6: Merge translations into the application | Angular"
 
+<!-- external links -->
+
 <!-- end links -->
 
-@reviewed 2021-10-14
+@reviewed 2022-02-28

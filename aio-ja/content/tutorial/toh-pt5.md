@@ -98,6 +98,8 @@ ng generate module app-routing --flat --module=app
 
 ## `RouterOutlet` を追加する
 
+<!-- markdownlint-disable MD001 -->
+
 `AppComponent`テンプレートを開き、`<app-heroes>`要素を`<router-outlet>`で置き換えます。
 
 <code-example header="src/app/app.component.html (router-outlet)" path="toh-pt5/src/app/app.component.html" region="outlet"></code-example>
@@ -114,6 +116,8 @@ ng generate module app-routing --flat --module=app
 
 </div>
 
+<!-- markdownlint-disable MD024 -->
+
 #### 試す
 
 まだアプリケーションを配信していない場合は、`ng serve`を実行して、ブラウザでアプリケーションを確認します。
@@ -129,6 +133,9 @@ URLが`/`で終わっています。
 
 ブラウザのアドレスバーに表示されるURLから`/heroes`を削除します。
 ブラウザが更新され、アプリケーションのタイトルが表示されますが、ヒーローのリストは表示されません。
+
+<!-- markdownlint-enable MD001 -->
+<!-- markdownlint-enable MD024 -->
 
 <a id="routerlink"></a>
 
@@ -380,12 +387,16 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 
 `getHero()`を呼び出す `HeroDetailComponent`を変更することなく、実際の`Http`リクエストとして `getHero()`を再実装することができます。
 
+<!-- markdownlint-disable MD024 -->
+
 #### 試してみよう
 
 ブラウザがリフレッシュされ、アプリケーションは再び動くようになります。
 ダッシュボードまたはヒーローリストでヒーローをクリックでき、そのヒーローの詳細ビューに移動することができます。
 
 `localhost:4200/detail/11`をブラウザのアドレスバーに貼り付けると、ルーターは、`id:11`つまり **Dr. Nice** というヒーローの詳細ビューに遷移します。
+
+<!-- markdownlint-enable MD024 -->
 
 <a id="goback"></a>
 
@@ -409,6 +420,8 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 次の ["最終コードのレビュー"](#final-code-review) タブのひとつに記載されてるように、独自のCSSスタイルを `hero-detail.component.css` に追加すると、詳細がより美しく表示されます。
 
 ## 最終コードのレビュー {@a final-code-review}
+
+<!-- markdownlint-disable MD001 -->
 
 このページで解説したコードのファイルは次のとおりです。
 
@@ -462,6 +475,8 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
     <code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt5/src/app/hero-detail/hero-detail.component.ts"></code-pane>
     <code-pane header="src/app/hero-detail/hero-detail.component.css" path="toh-pt5/src/app/hero-detail/hero-detail.component.css"></code-pane>
 </code-tabs>
+
+<!-- markdownlint-enable MD001 -->
 
 ## まとめ
 

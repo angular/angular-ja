@@ -120,7 +120,7 @@ Users should be able to edit the hero's name in an `<input>` text box.
 The text box should both *display* the hero's `name` property and *update* that property as the user types.
 That means data flows from the component class *out to the screen* and from the screen *back to the class*.
 
-To automate that data flow, setup a two-way data binding between the `<input>` form element and the `hero.name` property.
+To automate that data flow, set up a two-way data binding between the `<input>` form element and the `hero.name` property.
 
 ### Two-way binding
 
@@ -149,7 +149,7 @@ Can't bind to 'ngModel' since it isn't a known property of 'input'.
 
 Although `ngModel` is a valid Angular directive, it isn't available by default.
 
-It belongs to the optional `FormsModule` and you must *opt-in* to using it.
+It belongs to the optional `FormsModule` and you must *opt in* to using it.
 
 ## `AppModule`
 
@@ -162,7 +162,7 @@ Other critical metadata is in [`@NgModule`](guide/ngmodules) decorators.
 The most important `@NgModule` decorator annotates the top-level **AppModule** class.
 
 `ng new` created an `AppModule` class in `src/app/app.module.ts` when it created the project.
-This is where you _opt-in_ to the `FormsModule`.
+This is where you *opt in* to the `FormsModule`.
 
 ### Import `FormsModule`
 
@@ -171,7 +171,7 @@ Open `app.module.ts` and import the `FormsModule` symbol from the `@angular/form
 <code-example path="toh-pt1/src/app/app.module.ts" header="app.module.ts (FormsModule symbol import)"
  region="formsmodule-js-import"></code-example>
 
-Add `FormsModule` to the  `imports` array in `@NgModule`. 
+Add `FormsModule` to the  `imports` array in `@NgModule`.
 The `imports` array contains the list of external modules that the application needs.
 
 <code-example header="app.module.ts (@NgModule imports)" path="toh-pt1/src/app/app.module.ts" region="ng-imports"></code-example>

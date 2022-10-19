@@ -26,7 +26,7 @@ Angularはその変更を検出すると、エラーをスローします。
 ## 適切な型を返す {@a return-the-proper-type}
 
 テンプレート式は、ターゲットのプロパティが期待する値の型に評価する必要があります。
-例えば、次のように返します。
+たとえば、次のように返します。
 
 *   a `string`, if the target property expects a string
 *   a `number`, if it expects a number

@@ -147,7 +147,7 @@ Angular CLIは、Angularアプリケーションを開発するための、も�
 
 | Command                     | Details |
 |:---                         |:---     |
-| [ng build](cli/build)       | Angularアプリを出力ディレクトリにコンパイルします。                     |
+| [ng build](cli/build)       | Angularアプリケーションを出力ディレクトリにコンパイルします。                     |
 | [ng serve](cli/serve)       | アプリケーションをビルドして提供し、ファイルの変更時に再ビルドします。       |
 | [ng generate](cli/generate) | Schematicに基づいてファイルを生成または変更します。                     |
 | [ng test](cli/test)         | 特定のプロジェクトで単体テストを実行します。                                  |
@@ -174,7 +174,7 @@ Angular CLIの詳細については、[Angular CLIリファレンス](/cli)セ�
 | [Angular Forms](guide/forms-overview)     | フォームへの介入と検証のための統一されたシステム。                                                                                          |
 | [Angular HttpClient](guide/http)          | より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。                                                                   |
 | [Angular Animations](guide/animations)    | アプリケーションの状態に基づいてアニメーションを駆動するリッチなシステム。                                                                                 |
-| [Angular PWA](guide/service-worker-intro) | Service WorkerやWebアプリマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。                                      |
+| [Angular PWA](guide/service-worker-intro) | Service WorkerやWebアプリケーションマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。                                      |
 | [Angular Schematics](guide/schematics)    | A大規模な開発を簡素化する自動化されたスキャフォールディング、リファクタリング、および更新ツール。                                                 |
 
 <!-- vale Angular.Google_Acronyms = YES -->
@@ -191,7 +191,7 @@ Angular CLIの詳細については、[Angular CLIリファレンス](/cli)セ�
 Angularの動作を確認するには、[はじめに](start)のチュートリアルを参照してください。
 このチュートリアルでは[stackblitz.com](https://stackblitz.com/)を使い、インストールすることなくAngularの実用的な例を探索することができます。
 
-Angularの機能をさらに探求するために、以下のセクションをお勧めします。
+Angularの機能をさらに探求するために、次のセクションをお勧めします。
 
 *   [Understanding Angular](guide/understanding-angular-overview)
 *   [Angular Developer Guide](guide/developer-guide-overview)

@@ -1,21 +1,23 @@
-# Getting started with standalone components
-
-In v14 and higher, **standalone components** provide a simplified way to build Angular applications. Standalone components, directives, and pipes aim to streamline the authoring experience by reducing the need for `NgModule`s. Existing applications can optionally and incrementally adopt the new standalone style without any breaking changes.
+# スタンドアロンコンポーネントを使い始める
 
 <div class="alert is-important">
 
-The standalone component feature is available for developer preview. 
-It's ready for you to try; but it might change before it is stable.
+スタンドアロンコンポーネント機能は、[開発者向けプレビュー](https://angular.jp/guide/releases#developer-preview)で利用できます。
+試していただくことは可能ですが、安定するまでに変更される可能性があります。
 
 </div>
 
-## Creating standalone components
+v14以降では、 **スタンドアロンコンポーネント** は Angular アプリケーションを構築するための簡略化された方法を提供します。スタンドアロンコンポーネント、ディレクティブ、パイプは、 `NgModule` の必要性を減らすことでオーサリングエクスペリエンスを効率化することを目的としています。既存のアプリケーションは、破壊的な変更を行うことなく、新しいスタンドアロンスタイルをオプションで段階的に採用できます。
 
-### The `standalone` flag and component `imports`
+## スタンドアロンコンポーネントの作成
 
-Components, directives, and pipes can now be marked as `standalone: true`. Angular classes marked as standalone do not need to be declared in an `NgModule` (the Angular compiler will report an error if you try).
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x5PZwb4XurU" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Standalone components specify their dependencies directly instead of getting them through `NgModule`s. For example, if `PhotoGalleryComponent` is a standalone component, it can directly import another standalone component `ImageGridComponent`:
+### `standalone` フラグとコンポーネントの `imports`
+
+コンポーネント、ディレクティブ、パイプは `standalone: true` としてマークすることができるようになりました。スタンドアロンとマークされた Angular クラスは `NgModule` の中で宣言する必要はありません（宣言しようとすると Angular コンパイラはエラーを報告します）。
+
+スタンドアロンコンポーネントは `NgModule` を介して依存関係を取得する代わりに、直接依存関係を指定します。たとえば、 `PhotoGalleryComponent` がスタンドアロンコンポーネントであれば、別のスタンドアロンコンポーネントである `ImageGridComponent` を直接インポートすることができます。
 
 
 ```ts
@@ -28,21 +30,21 @@ Standalone components specify their dependencies directly instead of getting the
   `,
 })
 export class PhotoGalleryComponent {
-  // component logic
+  // コンポーネントのロジック
 }
 ```
 
-`imports` can also be used to reference standalone directives and pipes. In this way, standalone components can be written without the need to create an `NgModule` to manage template dependencies.
+また、 `imports` はスタンドアロンのディレクティブやパイプを参照するために使用できます。この方法では、テンプレートの依存関係を管理するために `NgModule` を作成することなく、スタンドアロンコンポーネントを作成できます。
 
-### Using existing NgModules in a standalone component
+### 既存の NgModule をスタンドアロンコンポーネントで使用する
 
-When writing a standalone component, you may want to use other components, directives, or pipes in the component's template. Some of those dependencies might not be marked as standalone, but instead declared and exported by an existing `NgModule`. In this case, you can import the `NgModule` directly into the standalone component:
+スタンドアロンコンポーネントを作成する場合、コンポーネントのテンプレートで他のコンポーネント、ディレクティブ、パイプを使用したい場合があります。これらの依存関係の一部はスタンドアロンとしてマークされていない可能性がありますが、代わりに既存の `NgModule` によって宣言およびエクスポートされます。この場合、 `NgModule` をスタンドアロンコンポーネントに直接インポートできます。
 
 ```ts
 @Component({
   standalone: true,
   selector: 'photo-gallery',
-  // an existing module is imported directly into a standalone component
+  // 既存のモジュールがスタンドアロンコンポーネントに直接インポートされる
   imports: [MatButtonModule],
   template: `
     ...
@@ -50,17 +52,17 @@ When writing a standalone component, you may want to use other components, direc
   `,
 })
 export class PhotoGalleryComponent {
-  // logic
+  // コンポーネントのロジック
 }
 ```
 
-You can use standalone components with existing `NgModule`-based libraries or dependencies in your template. Standalone components can take full advantage of the existing ecosystem of Angular libraries.
+テンプレート内の既存の `NgModule` ベースのライブラリや依存関係をもつスタンドアロンコンポーネントを使用できます。 スタンドアロンコンポーネントは、 Angular ライブラリの既存のエコシステムを最大限に活用できます。
 
-## Using standalone components in NgModule-based applications
+## NgModule ベースのアプリケーションでスタンドアロンコンポーネントを使用する
 
-Standalone components can also be imported into existing NgModules-based contexts. This allows existing applications (which are using NgModules today) to incrementally adopt the new, standalone style of component.
+スタンドアロンコンポーネントは、既存の NgModules ベースのコンテキストにインポートすることもできます。 これにより、既存のアプリケーション (現在 NgModules を使用している) は、新しいスタンドアロンスタイルのコンポーネントを段階的に採用できます。
 
-You can import a standalone component (or directive, or pipe) just like you would an `NgModule` - using `NgModule.imports`:
+`NgModule.imports` を使用して、 `NgModule` と同じように、スタンドアロンコンポーネント (ディレクティブ、パイプ) をインポートできます。
 
 ```ts
 @NgModule({
@@ -71,21 +73,21 @@ You can import a standalone component (or directive, or pipe) just like you woul
 export class AlbumModule {}
 ```
 
-## Bootstrapping an application using a standalone component
+## スタンドアロンコンポーネントを使用したアプリケーションのブートストラップ
 
-An Angular application can be bootstrapped without any `NgModule` by using a standalone component as the application's root component. This is done using the `bootstrapApplication` API:
+Angular アプリケーションは、スタンドアロンコンポーネントをアプリケーションのルートコンポーネントとして使用することで、`NgModule` なしでブートストラップできます。 これは `bootstrapApplication` API を使用して行われます。
 
 ```ts
-// in the main.ts file
+// main.ts ファイル内
 import {bootstrapApplication} from '@angular/platform-browser';
 import {PhotoAppComponent} from './app/photo.app.component';
 
 bootstrapApplication(PhotoAppComponent);
 ```
 
-### Configuring dependency injection
+### 依存性の注入の構成
 
-When bootstrapping an application, often you want to configure Angular’s dependency injection and provide configuration values or services for use throughout the application. You can pass these as providers to `bootstrapApplication`:
+アプリケーションをブートストラップするとき、 Angular の依存性の注入を構成し、アプリケーション全体で使用する設定値やサービスを提供したいことがよくあります。 これらをプロバイダーとして  `bootstrapApplication` に渡すことができます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {
@@ -96,27 +98,27 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-The standalone bootstrap operation is based on explicitly configuring a list of `Provider`s for dependency injection. However, existing libraries may rely on `NgModule`s for configuring DI. For example, Angular’s router uses the `RouterModule.forRoot()` helper to set up routing in an application. You can use these existing `NgModule`s in `bootstrapApplication` via the `importProvidersFrom` utility:
+スタンドアロンのブートストラップオペレーションは、依存性の注入のために `Provider` のリストを明示的に構成することに基づいています。 ただし、既存のライブラリは、DI を構成するために `NgModule` に依存している場合があります。たとえば、Angular のルーターは  `RouterModule.forRoot()` ヘルパーを使用して、アプリケーションでルーティングをセットアップします。 `importProvidersFrom` ユーティリティを介して `bootstrapApplication` でこれらの既存の `NgModule` を使用できます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {
   providers: [
     {provide: BACKEND_URL, useValue: 'https://photoapp.looknongmodules.com/api'},
     importProvidersFrom(
-      RouterModule.forRoot([/* app routes */]),
+      RouterModule.forRoot([/* ルーティング設定 */]),
     ),
     // ...
   ]
 });
 ```
 
-## Routing and lazy-loading
+## ルーティングと遅延読み込み
 
-The router APIs were updated and simplified to take advantage of the standalone components: an `NgModule` is no longer required in many common, lazy-loading scenarios.
+ルーターAPIは、スタンドアロンコンポーネントを利用するために更新および簡素化されました。多くの一般的な遅延読み込みのシナリオでは、 `NgModule` は不要になりました。
 
-### Lazy loading a standalone component
+### スタンドアロンコンポーネントの遅延読み込み
 
-Any route can lazily load its routed, standalone component by using `loadComponent`:
+どのルートも、 `loadComponent` を使用して、ルーティングされたスタンドアロンコンポーネントを遅延読み込みできます。
 
 ```ts
 export const ROUTES: Route[] = [
@@ -125,20 +127,20 @@ export const ROUTES: Route[] = [
 ];
 ```
 
-This works as long as the loaded component is standalone.
+これは、読み込まれたコンポーネントがスタンドアロンである限り機能します。
 
-### Lazy loading many routes at once
+### 一度に多くのルートを遅延読み込みする
 
-The `loadChildren` operation now supports loading a new set of child `Route`s without needing to write a lazy loaded `NgModule` that imports `RouterModule.forChild` to declare the routes. This works when every route loaded this way is using a standalone component.
+`loadChildren` オペレーションは、ルートを宣言するために `RouterModule.forChild` をインポートして遅延読み込みする `NgModule` を記述しなくても、子 `Route` の新しいセットの読み込みをサポートするようになりました。 これは、この方法で読み込まれたすべてのルートがスタンドアロンコンポーネントを使用している場合に機能します。
 
 ```ts
-// In the main application:
+// メインアプリケーションでは:
 export const ROUTES: Route[] = [
   {path: 'admin', loadChildren: () => import('./admin/routes').then(mod => mod.ADMIN_ROUTES)},
   // ...
 ];
 
-// In admin/routes.ts:
+// admin/routes.ts では:
 export const ADMIN_ROUTES: Route[] = [
   {path: 'home', component: AdminHomeComponent},
   {path: 'users', component: AdminUsersComponent},
@@ -146,11 +148,11 @@ export const ADMIN_ROUTES: Route[] = [
 ];
 ```
 
-### Providing services to a subset of routes
+### ルートのサブセットへのサービスの提供
 
-The lazy loading API for `NgModule`s (`loadChildren`) creates a new "module" injector when it loads the lazily loaded children of a route. This feature was often useful to provide services only to a subset of routes in the application. For example, if all routes under `/admin` were scoped using a `loadChildren` boundary, then admin-only services could be provided only to those routes. Doing this required using the `loadChildren` API, even if lazy loading of the routes in question was unnecessary.
+`NgModule` (`loadChildren`) の遅延読み込み API は、ルートの子を遅延読み込みするときに、新しい「モジュール」インジェクターを作成します。この機能は、アプリケーション内のルートのサブセットにのみサービスを提供するのに役立つことがよくありました。 たとえば、 `/admin` の下のすべてのルートが `loadChildren` の境界を使用して範囲指定されている場合、管理者専用サービスはそれらのルートにのみ提供できます。問題のルートの遅延読み込みが不要であったとしても、これを行うには `loadChildren` API を使用する必要がありました。
 
-The Router now supports explicitly specifying additional `providers` on a `Route`, which allows this same scoping without the need for either lazy loading or `NgModule`s. For example, scoped services within an `/admin` route structure would look like:
+ルーターは `Route` 上で追加の `providers` を明示的に指定することをサポートするようになり、遅延読み込みや `NgModule` を使用せずに同じスコープを指定できるようになりました。たとえば、 `/admin` のルート構造でスコープされたサービスは、次のようになります。
 
 ```ts
 export const ROUTES: Route[] = [
@@ -165,22 +167,22 @@ export const ROUTES: Route[] = [
       path: 'teams', component: AdminTeamsComponent,
     ],
   },
-  // ... other application routes that don't
-  //     have access to ADMIN_API_KEY or AdminService.
+  // ... その他のルーティング設定は
+  // ADMIN_API_KEY または AdminService へのアクセス権がありません。
 ];
 ```
 
-It's also possible to combine `providers` with `loadChildren` of additional routing configuration, to achieve the same effect of lazy loading an `NgModule` with additional routes and route-level providers. This example configures the same providers/child routes as above, but behind a lazy loaded boundary:
+`providers` を追加のルーティング設定の `loadChildren` と組み合わせて、`NgModule` を追加のルートとルートレベルのプロバイダーで遅延読み込みするのと同じ効果を達成することもできます。 この例では、上記と同じプロバイダー/子ルートを構成しますが、遅延読み込みされた境界の後ろにあります。
 
 ```ts
-// Main application:
+// メインアプリケーション:
 export const ROUTES: Route[] = {
-  // Lazy-load the admin routes.
+  // admin ルートを遅延読み込み
   {path: 'admin', loadChildren: () => import('./admin/routes').then(mod => mod.ADMIN_ROUTES)},
-  // ... rest of the routes
+  // ... 残りのルート
 }
 
-// In admin/routes.ts:
+// admin/routes.ts では:
 export const ADMIN_ROUTES: Route[] = [{
   path: '',
   pathMatch: 'prefix',
@@ -195,15 +197,15 @@ export const ADMIN_ROUTES: Route[] = [{
 }];
 ```
 
-Note the use of an empty-path route to host `providers` that are shared among all the child routes.
+すべての子ルート間で共有される `providers` をホストするためには、空のパスルートを使用することに注意してください。
 
-## Advanced topics
+## 上級者向けトピック
 
-This section goes into more details that are relevant only to more advanced usage patterns. You can safely skip this section when learning about standalone components, directives, and pipes for the first time. 
+このセクションでは、より高度な使用パターンにのみ関連する詳細について説明します。スタンドアロンコンポーネント、ディレクティブ、パイプについてはじめて学習する場合は、このセクションをスキップしても問題ありません。
 
-### Standalone components for library authors
+### ライブラリ作成者向けのスタンドアロンコンポーネント
 
-Standalone components, directives, and pipes can be exported from `NgModule`s that import them:
+スタンドアロンコンポーネント、ディレクティブ、パイプは、それらをインポートする `NgModule` からエクスポートできます。
 
 ```ts
 @NgModule({
@@ -213,26 +215,26 @@ Standalone components, directives, and pipes can be exported from `NgModule`s th
 export class CarouselModule {}
 ```
 
-This pattern is useful for Angular libraries that publish a set of cooperating directives. In the above example, both the `ImageCarouselComponent` and `ImageSlideComponent` need to be present in a template to build up one logical "carousel widget". 
+このパターンは、協調するディレクティブのセットを発行する Angular ライブラリに役立ちます。上記の例では、 `ImageCarouselComponent` と `ImageSlideComponent` の両方が、1つの論理的な「カルーセルウィジェット」を構築するためにテンプレートに存在する必要があります。
 
-As an alternative to publishing a `NgModule`, library authors might want to export an array of cooperating directives:
+`NgModule` を公開する代わりに、ライブラリの作成者は協調するディレクティブの配列をエクスポートしたいと思うかもしれません。
 
 ```ts
-export CAROUSEL_DIRECTIVES = [ImageCarouselComponent, ImageSlideComponent] as const;
+export const CAROUSEL_DIRECTIVES = [ImageCarouselComponent, ImageSlideComponent] as const;
 ```
 
-Such an array could be imported by applications using `NgModule`s and added to the `@NgModule.imports`. Please note the presence of the TypeScript’s `as const` construct: it gives Angular compiler additional information required for proper compilation and is a recommended practice (as it makes the exported array immutable from the TypeScript point of view).
+このような配列は、 `NgModule` を使用するアプリケーションによってインポートされ、 `@NgModule.imports` に追加されます。 TypeScript の `as const` 構成の存在に注意してください。これは、適切なコンパイルに必要な追加情報を Angular コンパイラに提供し、推奨される方法です (これにより、エクスポートされた配列が TypeScript の観点からイミュータブルになるため)。
 
-### Dependency injection and injectors hierarchy
+### 依存性の注入とインジェクターの階層
 
-Angular applications can configure dependency injection by specifying a set of available providers. In a typical application, there are two different injector types:
+Angular アプリケーションは、利用可能なプロバイダーのセットを指定することで依存性の注入を構成できます。一般的なアプリケーションでは、2つの異なるインジェクタータイプがあります。
 
-*   **module injector** with providers configured in `@NgModule.providers` or `@Injectable({providedIn: "..."})`. Those application-wide providers are visible to all components in as well as to other services configured in a module injector.
-*   **node injectors** configured in `@Directive.providers` / `@Component.providers` or `@Component.viewProviders`. Those providers are visible to a given component and all its children only.
+*   **モジュール インジェクター** これは `@NgModule.providers` または `@Injectable({providedIn: "..."})` で構成されたプロバイダーを持ちます。これらのアプリケーション全体のプロバイダーは、モジュールインジェクターで構成された他のサービスだけでなく、すべてのコンポーネントにも表示されます。
+*   **ノード インジェクター** これは `@Directive.providers` / `@Component.providers` または `@Component.viewProviders` で構成されています。これらのプロバイダーは、特定のコンポーネントとそのすべての子のみに表示されます。
 
-#### Environment injectors
+#### 環境インジェクター {@a environment-injectors}
 
-Making `NgModule`s optional will require new ways of configuring "module" injectors with application-wide providers (for example, [HttpClient](https://angular.io/api/common/http/HttpClient)). In the standalone application (one created with `bootstrapApplication`), “module” providers can be configured during the bootstrap process, in the `providers` option: 
+`NgModule` をオプショナルにすると、アプリケーション全体のプロバイダー ([HttpClient](https://angular.io/api/common/http/HttpClient) など) を使用して「モジュール」インジェクターを構成する新しい方法が必要になります。スタンドアロンアプリケーション (`bootstrapApplication` で作成されたアプリケーション) では、`providers` オプションで、ブートストラッププロセス中に「モジュール」プロバイダーを構成できます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {
@@ -244,25 +246,25 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-The new bootstrap API gives us back the means of configuring “module injectors” without using `NgModule`s. In this sense, the “module” part of the name is no longer relevant and we’ve decided to introduce a new term: “environment injectors”. 
+新しいブートストラップ API は、 `NgModule` を使用せずに「モジュールインジェクター」を構成する手段を提供します。この意味で、名前の「モジュール」部分はもはや関連性がなく、新しい用語を導入することにしました。それが、「環境インジェクター」です。
 
-Environment injectors can be configured using one of the following:
+環境インジェクターは、次のいずれかを使用して構成できます。
 
-*   `@NgModule.providers` (in applications bootstrapping through an `NgModule`);
-*   `@Injectable({provideIn: "..."})`(in both the NgModule-based as well as “standalone” applications);
-*   `providers` option in the `bootstrapApplication` call (in fully “standalone” applications);
-*   `providers` field in a `Route` configuration.
+*   `@NgModule.providers` (`NgModule` によるアプリケーションのブートストラップ)
+*   `@Injectable({provideIn: "..."})` (NgModule ベースのアプリケーションと「スタンドアロン」アプリケーションの両方)
+*   `bootstrapApplication` の呼び出しにおける `providers` オプション (完全な「スタンドアロン」アプリケーションの場合)
+*   `Route` 設定における `providers` フィールド
 
-Angular v14 introduces a new TypeScript type `EnvironmentInjector` to represent this new naming. The accompanying `createEnvironmentInjector` API makes it possible to create environment injectors programmatically: 
+Angular v14 では、この新しい命名を表す新しい TypeScript の型`EnvironmentInjector` が導入されています。付属の `createEnvironmentInjector` API を使用すると、環境インジェクターをプログラムで作成できます。
 
 ```ts
 import {createEnvironmentInjector} from '@angular/core';
 
-const parentInjector = … // existing environment injector
+const parentInjector = … // 既存の環境インジェクター
 const childInjector = createEnvironmentInjector([{provide: PhotosService, useClass: CustomPhotosService}], parentInjector);
 ```
 
-Environment injectors have one additional capability: they can execute initialization logic when an environment injector gets created (similar to the `NgModule` constructors that get executed when a module injector is created):
+環境インジェクターには追加機能が1つあります。環境インジェクターが作成されたときに初期化ロジックを実行できます (モジュールインジェクターが作成されたときに実行される `NgModule` コンストラクターに似ています)。
 
 ```ts
 import {createEnvironmentInjector, ENVIRONMENT_INITIALIZER} from '@angular/core';
@@ -275,12 +277,12 @@ createEnvironmentInjector([
 ]);
 ```
 
-#### Standalone injectors
+#### スタンドアロンインジェクター
 
-In reality, the dependency injectors hierarchy is slightly more elaborate in applications using standalone components. Let’s consider the following example:
+実際には、依存関係インジェクターの階層はスタンドアロンコンポーネントを使用するアプリケーションではもう少し複雑です。次の例を考えてみましょう。
 
 ```ts
-// an existing "datepicker" component with an NgModule
+// NgModule を持つ既存の「datepicker」コンポーネント
 @Component({
         selector: 'datepicker',
         template: '...',
@@ -307,8 +309,8 @@ class DateModalComponent {
 }
 ```
 
-In the above example, the component `DateModalComponent` is standalone - it can be consumed directly and has no NgModule which needs to be imported in order to use it. However, `DateModalComponent` has a dependency, the `DatePickerComponent,` which is imported via its NgModule (the `DatePickerModule`). This NgModule may declare providers (in this case: `CalendarService`) which are required for the `DatePickerComponent` to function correctly.
+上記の例では、コンポーネント `DateModalComponent` はスタンドアロンです。直接使用することができ、それを使用するためにインポートする必要がある NgModule はありません。ただし、`DateModalComponent` には、その NgModule (`DatePickerModule`) を介してインポートされる `DatePickerComponent` という依存関係があります。この NgModule は、`DatePickerComponent` が正しく機能するために必要なプロバイダー (この場合は `CalendarService`) を宣言しているかもしれません。
 
-When Angular creates a standalone component, it needs to know that the current injector has all of the necessary services for the standalone component's dependencies, including those based on NgModules. To guarantee that, in some cases Angular will create a new "standalone injector" as a child of the current environment injector. Today, this happens for all bootstrapped standalone components: it will be a child of the root environment injector. The same rule applies to the dynamically created (for example, by the router or the `ViewContainerRef` API) standalone components. 
+Angular がスタンドアロンコンポーネントを作成するとき、現在のインジェクターが、 NgModules に基づくものを含む、スタンドアロンコンポーネントの依存関係に必要なすべてのサービスを持っていることを知る必要があります。それを保証するために、場合によっては、 Angular は現在の環境インジェクターの子として新しい「スタンドアロンインジェクター」を作成します。現在、これはブートストラップされたすべてのスタンドアロンコンポーネントで発生します。それはルートの環境インジェクターの子になるでしょう。動的に作成された (たとえば、ルーターまたは `ViewContainerRef` API によって) スタンドアロンコンポーネントにも同じ規則が適用されます。
 
-A separate standalone injector is created to ensure that providers imported by a standalone component are “isolated” from the rest of the application. This lets us think of standalone components as truly self-contained pieces that can’t “leak” their implementation details to the rest of the application.
+スタンドアロンインジェクターは、スタンドアロンコンポーネントによってインポートされたプロバイダーがアプリケーションの残りの部分から「分離」されることを保証するために作成されます。これにより、スタンドアロンコンポーネントは、実装の詳細をアプリケーションの残りの部分に「漏らす」ことができない、真に自己完結した部分であると考えることができます。

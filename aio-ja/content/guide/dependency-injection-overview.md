@@ -6,7 +6,7 @@ Angularでは依存オブジェクトは一般的にサービスですが、文�
 
 <div class="alert is-helpful">
 
-このガイドのコードスニペットを含む動作例については、<live-example></live-example>をご覧ください。
+このガイドのコードスニペットを含む動作例については、<live-example name="dependency-injection"></live-example>をご覧ください。
 
 </div>
 

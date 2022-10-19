@@ -213,8 +213,8 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 
 | Directives                                  | Details |
 |:---                                         |:---     |
-| [`*ngFor`](guide/built-in-directives#ngFor) | An iterative; it tells Angular to stamp out one `<li>` per hero in the `heroes` list. |
-| [`*ngIf`](guide/built-in-directives#ngIf)   | A conditional; it includes the `HeroDetail` component only if a selected hero exists. |
+| [`*ngFor`](guide/built-in-directives#ngFor) | An *iterative*, which tells Angular to create one `<li>` per hero in the `heroes` list. |
+| [`*ngIf`](guide/built-in-directives#ngIf)   | A *conditional*, which includes the `HeroDetail` component only if a selected hero exists. |
 
 #### 属性ディレクティブ
 

@@ -167,8 +167,12 @@ The following example shows how to apply the `active-page` class to active links
 
 書籍
 
-*   "A Web for Everyone: Designing Accessible User Experiences", Sarah Horton and Whitney Quesenbery
-*   "Inclusive Design Patterns", Heydon Pickering
+<!-- vale Angular.Google_Quotes = NO -->
+
+*   "A Web for Everyone: Designing Accessible User Experiences," Sarah Horton and Whitney Quesenbery
+*   "Inclusive Design Patterns," Heydon Pickering
+
+<!-- vale Angular.Google_Quotes = YES -->
 
 <!-- links -->
 

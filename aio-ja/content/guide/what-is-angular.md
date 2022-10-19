@@ -43,16 +43,22 @@ Angularがこのコンポーネントをレンダリングすると、結果のD
 
 <code-example path="what-is-angular/src/app/hello-world-example.html" language="html"></code-example>
 
-Angularのコンポーネントモデルは、強力なカプセル化と直感的なアプリケーション構造を提供します。また、コンポーネントは、アプリケーションのユニットテストを容易にし、コード全体の読みやすさを向上させます。
+Angularのコンポーネントモデルは、強力なカプセル化と直感的なアプリケーション構造を提供します。また、コンポーネントは、アプリケーションのユニットテストを容易にし、コードの読みやすさを向上させます。
 
 コンポーネントでできることの詳細については、[コンポーネント](guide/component-overview)セクションを参照してください。
 
 {@a templates}
 ### テンプレート
 
+<!-- vale Angular.Google_WordListWarnings = NO -->
+
 すべてのコンポーネントには、そのコンポーネントのレンダリング方法を宣言するHTMLテンプレートがあります。このテンプレートは、インラインまたはファイルパスで定義します。
 
-Angularは、コンポーネントから動的な値を挿入できる追加の構文でHTMLを拡張します。コンポーネントの状態が変化すると、AngularはレンダリングされたDOMを自動的に更新します。次の例に示すように、この機能の応用例のひとつは動的なテキストの挿入です。
+<!-- vale Angular.Google_WordListWarnings = YES -->
+
+Angularは、コンポーネントから動的な値を挿入できる追加の構文でHTMLを拡張します。
+コンポーネントの状態が変化すると、AngularはレンダリングされたDOMを自動的に更新します。
+次の例に示すように、この機能の応用例のひとつは動的なテキストの挿入です。
 
 <code-example path="what-is-angular/src/app/hello-world-interpolation/hello-world-interpolation.component.html" region="say-hello"></code-example>
 
@@ -137,32 +143,21 @@ Angularの宣言型テンプレートを使えば、アプリケーションの�
 
 Angular CLIは、Angularアプリケーションを開発するための、もっとも速く、分かりやすく、お勧めの方法です。Angular CLIを使用すると、多くの作業をトラブルなく行うことができます。ここではその例を紹介します。
 
-<table>
-<tr>
-<td><a href="cli/build">ng build</a></td>
-<td>Angularアプリを出力ディレクトリにコンパイルします。</td>
-</tr>
-<tr>
-<td><a href="cli/serve">ng serve</a></td>
-<td>アプリケーションをビルドして提供し、ファイルの変更時に再ビルドします。</td>
-</tr>
-<tr>
-<td><a href="cli/generate">ng generate</a></td>
-<td>Schematicに基づいてファイルを生成または変更します。</td>
-</tr>
-<tr>
-<td><a href="cli/test">ng test</a></td>
-<td>特定のプロジェクトで単体テストを実行します。</td>
-</tr>
-<tr>
-<td><a href="cli/e2e">ng e2e</a></td>
-<td>Angularアプリケーションをビルドして提供し、エンドツーエンドのテストを実行します。</td>
-</tr>
-</table>
+<!-- vale Angular.Google_WordListSuggestions = NO -->
+
+| Command                     | Details |
+|:---                         |:---     |
+| [ng build](cli/build)       | Angularアプリケーションを出力ディレクトリにコンパイルします。                     |
+| [ng serve](cli/serve)       | アプリケーションをビルドして提供し、ファイルの変更時に再ビルドします。       |
+| [ng generate](cli/generate) | Schematicに基づいてファイルを生成または変更します。                     |
+| [ng test](cli/test)         | 特定のプロジェクトで単体テストを実行します。                                  |
+| [ng e2e](cli/e2e)           | Angularアプリケーションをビルドして提供し、エンドツーエンドのテストを実行します。 |
+
+<!-- vale Angular.Google_WordListSuggestions = YES -->
 
 Angular CLIは、アプリケーションを構築するための貴重なツールです。
 
-Angular CLIの詳細については、[CLIリファレンス](/cli)セクションを参照してください。
+Angular CLIの詳細については、[Angular CLIリファレンス](/cli)セクションを参照してください。
 
 {@a 1p-libraries}
 ## ファーストパーティライブラリ
@@ -170,42 +165,41 @@ Angular CLIの詳細については、[CLIリファレンス](/cli)セクショ�
 [Angularアプリケーション：基本事項](#essentials)では、Angularアプリケーションを構築するときに使用するいくつかの主要なアーキテクチャ要素の概要を説明しています。しかし、Angularの多くの利点は、アプリケーションが成長し、サイトナビゲーションやユーザー入力などの機能を追加したいときに実際に明らかになります。Angularプラットフォームを使用して、Angularが提供する多くのファーストパーティライブラリの1つを組み込みましょう。
 
 利用可能なライブラリには、次のものがあります。
-<table>
-<tr>
-<td><a href="guide/router">Angular Router</a></td>
-<td>Angularコンポーネントに基づく高度なクライアント側のナビゲーションとルーティング。遅延読み込み、ネストされたルート、カスタムパスマッチングなどをサポートします。</td>
-</tr>
-<tr>
-<td><a href="guide/forms-overview">Angular Forms</td>
-<td>フォームへの介入と検証のための統一されたシステム。</td>
-<tr>
-<td><a href="guide/http">Angular HttpClient</a></td>
-<td>より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。</td>
-</tr>
-<tr>
-<td><a href="guide/animations">Angular Animations</a></td>
-<td>アプリケーションの状態に基づいてアニメーションを駆動するリッチなシステム。</td>
-</tr>
-<tr>
-<td><a href="guide/service-worker-intro">Angular PWA</a>
-<td>Service WorkerやWebアプリマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。</td>
-</tr>
-<tr>
-<td><a href="guide/schematics">Angular Schematics</td>
-<td>大規模な開発を簡素化する自動化されたスキャフォールディング、リファクタリング、および更新ツール。</td>
-</tr>
-</table>
 
-これらのライブラリは、アプリケーションの機能を拡張すると同時に、アプリケーションを独自のものにする機能にさらに集中できるようにします。また、Angularフレームワークにシームレスに統合され、同時に更新されるように設計されていることを知りながら、これらのライブラリを追加しましょう。
+<!-- vale Angular.Google_Acronyms = NO -->
+
+| Library                                   | Details |
+|:---                                       |:---     |
+| [Angular Router](guide/router)            | Angularコンポーネントに基づく高度なクライアント側のナビゲーションとルーティング。遅延読み込み、ネストされたルート、カスタムパスマッチングなどをサポートします。 |
+| [Angular Forms](guide/forms-overview)     | フォームへの介入と検証のための統一されたシステム。                                                                                          |
+| [Angular HttpClient](guide/http)          | より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。                                                                   |
+| [Angular Animations](guide/animations)    | アプリケーションの状態に基づいてアニメーションを駆動するリッチなシステム。                                                                                 |
+| [Angular PWA](guide/service-worker-intro) | Service WorkerやWebアプリケーションマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。                                      |
+| [Angular Schematics](guide/schematics)    | A大規模な開発を簡素化する自動化されたスキャフォールディング、リファクタリング、および更新ツール。                                                 |
+
+<!-- vale Angular.Google_Acronyms = YES -->
+
+これらのライブラリは、アプリケーションの機能を拡張すると同時に、アプリケーションを独自のものにする機能にさらに集中できるようにします。
+また、Angularフレームワークにシームレスに統合され、同時に更新されるように設計されていることを知りながら、これらのライブラリを追加しましょう。
 
 これらのライブラリは、アプリケーションに機能を追加したり、特定の問題を解決したりするのに役立つ場合にのみ必要です。
 
 ## 次のステップ
 
-このトピックでは、Angularとは何か、Angularが提供する利点、そしてアプリケーションの構築を始める際に期待されることについて、簡単に説明することを目的としています。
+このトピックでは、Angularとは何か、Angularが提供する利点、そしてアプリケーションの構築を始める際に期待されることについて、簡単に説明しています。
 
-Angularの動作を確認するには、[はじめに](start)のチュートリアルを参照してください。このチュートリアルでは[stackblitz.com](https://stackblitz.com/)を使い、インストールすることなくAngularの実用的な例を探索することができます。
+Angularの動作を確認するには、[はじめに](start)のチュートリアルを参照してください。
+このチュートリアルでは[stackblitz.com](https://stackblitz.com/)を使い、インストールすることなくAngularの実用的な例を探索することができます。
 
-Angularの機能をさらに詳しく調べるには、[Angularを理解する](guide/component-overview)と[開発者ガイド](guide/router)のセクションを読むことをお勧めします。
+Angularの機能をさらに探求するために、次のセクションをお勧めします。
+
+*   [Understanding Angular](guide/understanding-angular-overview)
+*   [Angular Developer Guide](guide/developer-guide-overview)
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
 
 @reviewed 2021-10-28

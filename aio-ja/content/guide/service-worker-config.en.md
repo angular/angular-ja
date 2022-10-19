@@ -90,6 +90,12 @@ Usually this is `/index.html`.
 They can include resources loaded from the page's origin as well as third-party resources loaded from CDNs and other external URLs.
 As not all such external URLs might be known at build time, URL patterns can be matched.
 
+<div class="alert is-important">
+
+  For the service worker to handle resources that are loaded from different origins, make sure that [CORS][MozillaDeveloperDocsWebHttpCors] is correctly configured on each origin's server.
+
+</div>
+
 This field contains an array of asset groups, each of which defines a set of asset resources and the policy by which they are cached.
 
 <code-example format="json" language="json">
@@ -370,6 +376,7 @@ This optional section enables you to specify a custom list of URLs that will be 
 The ServiceWorker redirects navigation requests that don't match any `asset` or `data` group to the specified [index file](#index-file).
 A request is considered to be a navigation request if:
 
+*   Its [method](https://developer.mozilla.org/docs/Web/API/Request/method) is `GET`
 *   Its [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) is `navigation`
 *   It accepts a `text/html` response as determined by the value of the `Accept` header
 *   Its URL matches the following criteria:
@@ -439,6 +446,8 @@ It is recommended that you use the default performance strategy whenever possibl
 [GoogleDeveloperWebUpdates201503IntroductionToFetchResponseTypes]: https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types
 
 [WhatwgFetchSpecConceptFilteredResponseOpaque]: https://fetch.spec.whatwg.org#concept-filtered-response-opaque
+
+[MozillaDeveloperDocsWebHttpCors]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
 <!-- end links -->
 

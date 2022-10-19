@@ -577,7 +577,7 @@ Use `#docregion` in source files to mark code for use in `<code-example>` or `<c
 The `#docregion` comment begins a code snippet region.
 Every line of code after that comment belongs in the region until the code fragment processor encounters the end of the file or a closing `#enddocregion`.
 
-The following `src/main.ts` is a an example of a file with a single `#docregion` at the top of the file.
+The following `src/main.ts` is an example of a file with a single `#docregion` at the top of the file.
 
 <code-example header="src/main.ts" path="docs-style-guide/src/main.ts"></code-example>
 
@@ -1391,7 +1391,7 @@ A subsection with **Markdown** formatted text.
 
 For specific language and grammar usage, a word list, style, tone, and formatting recommendations, see the [Google Developer Documentation Style Guide](https://developers.google.com/style).
 
-If you have any questions that this style guide doesn't answer or you would like to discuss documentation styles visit the [Angular repo](https://github.com/angular/angular) and [file a documentation issue](https://github.com/angular/angular/issues/new/choose).
+If you have any questions that this style guide doesn't answer or you would like to discuss documentation styles, see the [Angular repo](https://github.com/angular/angular) and [file a documentation issue](https://github.com/angular/angular/issues/new/choose).
 
 <!-- links -->
 

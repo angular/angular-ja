@@ -37,7 +37,7 @@ Bazel ルールがファイルの依存関係を追跡する方法を単純化�
 
 ツリーシェーキングを改善するために、Angular 固有のアノテーションの出力方法を変更します。
 Angular 以外のアノテーションは影響を受けません。
-`static fields` (デフォルト) または `decorators` のいずれかです。
+One of `static fields` or `decorators`. The default value is `static fields`. 
 
 *   デフォルトでは、コンパイラーはデコレーターをクラスの静的フィールドに置き換えます。これにより、[Closure compiler](https://github.com/google/closure-compiler) などの高度なツリーシェーカーが未使用のクラスを削除できます。
 *   `decorators` の値はデコレーターをそのままにしておくため、コンパイルが高速になります。
@@ -47,14 +47,18 @@ Angular 以外のアノテーションは影響を受けません。
     <div class="alert is-helpful">
 
     **NOTE**: <br />
-    That the resulting code will not properly tree-shake.
+    That the resulting code cannot tree-shake properly.
 
     </div>
 
 ### `annotateForClosureCompiler`
 
+<!-- vale Angular.Angular_Spelling = NO -->
+
 `true` の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](https://jsdoc.app/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
 デフォルトは `false` です。
+
+<!-- vale Angular.Angular_Spelling = YES -->
 
 ### `compilationMode`
 
@@ -101,13 +105,13 @@ This allows `$localize` messages in application code to use the same id as ident
 
 有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
-CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
+For library projects created with the Angular CLI, the development configuration default is `true`.
 
 <a id="enablelegacytemplate"></a>
 
 ### `enableLegacyTemplate`
 
-`true` の場合 `<template>` 要素を有効にします。これは同じ名前の DOM の要素との衝突を避ける `<ng-template>` を優先するため、Angular 4.0 から 非推奨になりました。
+When `true`, enables the deprecated `<template>` element in place of `<ng-template>`.
 デフォルトでは `false` です。
 このオプションは、一部のサードパーティ Angular ライブラリで必要となる場合があります。
 
@@ -138,10 +142,10 @@ CLI で生成されたライブラリプロジェクトの場合、development �
 
 ### `fullTemplateTypeCheck`
 
-`true` (推奨) の場合、TypeScript を使用してバインディング式を検証するテンプレートコンパイラの[バインディング式の検証](guide/aot-compiler#binding-expression-validation)フェーズを有効にするようにコンパイラに指示します。 
-For more information, see [Template type checking](guide/template-typecheck).
+推奨値である `true` の場合、テンプレートコンパイラの [binding expression validation](guide/aot-compiler#binding-expression-validation) フェーズを有効にします。このフェーズでは、TypeScriptを使用してバインディング式を検証します。
+詳しくは、[テンプレート型チェック](guide/template-typecheck)をご覧ください。
 
-デフォルトは `false` ですが、CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
+デフォルトは `false` ですが、Angular CLI のコマンド `ng new --strict` を使うと、新しいプロジェクトの設定で `true` に設定されます。
 
 <div class="alert is-important">
 
@@ -151,7 +155,7 @@ The `fullTemplateTypeCheck` option has been deprecated in Angular 13 in favor of
 
 ### `generateCodeForLibraries`
 
-`true` (デフォルト) の場合、対応する `.metadata.json` ファイルとともに `.d.ts` ファイル用のファクトリファイル (`.ngfactory.js` および `.ngstyle.js`) を生成するようにテンプレートコンパイラに指示します。
+When `true`, creates factory files \(`.ngfactory.js` and `.ngstyle.js`\) for `.d.ts` files with a corresponding `.metadata.json` file. The default value is `true`.
 
 このオプションが `false` の場合、ファクトリーファイルは `.ts` ファイルに対してのみ生成されます。
 ファクトリーサマリーを使用する場合、このオプションは false に設定するべきです。
@@ -171,8 +175,8 @@ The `fullTemplateTypeCheck` option has been deprecated in Angular 13 in favor of
 
 ファクトリーサマリーには `.metadata.json` ファイルにある情報のコピーが含まれているため、ファクトリーサマリーを使用するときにもこのオプションを `true` に設定できます。
 
-TypeScript の `--outFile` オプションを使用している場合は、このオプションを `true` に設定してください。
-メタデータファイルはこのスタイルの TypeScript 出力には無効です。Angular で `--outFile` を使用することはお勧めできません。
+TypeScript の `--outFile` オプションを使用している場合は、このオプションを `true` に設定してください。メタデータファイルはこのスタイルの TypeScript 出力には無効です。
+The Angular community does not recommend using `--outFile` with Angular.
 代わりに、[webpack](https://webpack.js.org/) などのバンドラーを使用してください。
 
 ### `skipTemplateCodegen`
@@ -182,7 +186,7 @@ TypeScript の `--outFile` オプションを使用している場合は、こ�
 
 このオプションは、`npm` に配布できない `.ngfactory.js` および `.ngstyle.js` ファイルの作成を避けながら、`npm` パッケージで配布するための `.metadata.json` ファイルを作成するようにテンプレートコンパイラに指示するために使用できます。
 
-CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
+For library projects created with the Angular CLI, the development configuration default is `true`.
 
 ### `strictMetadataEmit`
 
@@ -199,26 +203,27 @@ CLI で生成されたライブラリプロジェクトの場合、development �
 メタデータコレクターは、アノテーションで使用するために設計されたシンボルを予測できないため、エクスポートされたシンボルのメタデータにエラーノードを優先的に含めます。
 これらのシンボルが使用されている場合、テンプレートコンパイラはエラーノードを使用してエラーを報告できます。
 
-ライブラリのクライアントがアノテーションでシンボルを使おうとする場合、テンプレートコンパイラは通常クライアントがシンボルを使うまでこれを報告しません。
+If the client of a library intends to use a symbol in an annotation, the template compiler does not normally report this. It gets reported after the client actually uses the symbol.
 このオプションはライブラリのビルド段階でこれらのエラーを検出することを可能にし、たとえば Angular ライブラリ自身を作成する際に使用されます。
 
-CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
+Angular CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 ### `strictInjectionParameters`
 
-`true` (推奨) に設定した場合、このオプションは、インジェクションタイプを判別できない指定されたパラメーターについてエラーを報告するようコンパイラーに指示します。
-このオプションが提供されていないか `false` (現在はデフォルト) の場合、型を解決できない `@Injectable` でマークされたクラスのコンストラクターパラメータは警告を生成します。
+When `true`, reports an error for a supplied parameter whose injection type cannot be determined.
+When `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved produce a warning.
+The recommended value is `true`, but the default value is `false`.
 
-CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
+Angular CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
 
 ### `strictTemplates`
 
 `true` の場合、[厳格なテンプレートタイプチェック](guide/template-typecheck#strict-mode) を有効にします。
 
-追加の厳密性フラグを使用すると、特定のタイプの厳密なテンプレートタイプチェックを有効または無効にできます。
+この厳密性フラグにより、特定のタイプの厳密なテンプレート型チェックをオンまたはオフにすることができます。
 [テンプレートエラーのトラブルシューティング](guide/template-typecheck#troubleshooting-template-errors) をご覧ください。
 
-CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
+Angular CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
 
 ### `trace`
 
@@ -227,14 +232,14 @@ CLI コマンド `ng new --strict` を使用すると、生成されたプロジ
 
 <a id="cli-options"></a>
 
-## Command Line Options
+## Command line options
 
-While most of the time you interact with the Angular Compiler indirectly using Angular CLI, when debugging certain issues, you might find it useful to invoke the Angular Compiler directly.
+Most of the time you interact with the Angular Compiler indirectly using Angular CLI. When debugging certain issues, you might find it useful to invoke the Angular Compiler directly.
 You can use the `ngc` command provided by the `@angular/compiler-cli` npm package to call the compiler from the command line.
 
 The `ngc` command is just a wrapper around TypeScript's `tsc` compiler command and is primarily configured via the `tsconfig.json` configuration options documented in [the previous sections](#angular-compiler-options).
 
-In addition to the configuration file, you can also use [`tsc` command line options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to configure `ngc`.
+Besides the configuration file, you can also use [`tsc` command line options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to configure `ngc`.
 
 <!-- links -->
 

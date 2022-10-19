@@ -4,7 +4,7 @@
 Angularでの対応について説明します。認証や認可などアプリケーションレベルのセキュリティは
 ここでは扱いません。
 
-この章で扱う内容に関するより詳細な情報は [OWASP Guide Project](https://www.owasp.org/index.php/Category:OWASP_Guide_Project) を参照してください。
+この章で扱う内容に関するより詳細な情報は [Open Web Application Security Project (OWASP) Guide](https://www.owasp.org/index.php/Category:OWASP_Guide_Project) を参照してください。
 
 この章に付属の <live-example></live-example> はその場で実行できます。
 
@@ -28,18 +28,11 @@ Angular is part of Google [Open Source Software Vulnerability Reward Program](ht
 
 <header>ベストプラクティス</header>
 
-* **Angularを最新に保つ**
-Angularは定期的にアップデートされており、最新版には以前のバージョンで見つかった
-脆弱性の修正が含まれていることがあります。セキュリティ関連の更新については
-[change log](https://github.com/angular/angular/blob/main/CHANGELOG.md) を確認してください。
-
-* **独自のカスタマイズを行わない**
-独自のカスタマイズを行うと、アップデートによるセキュリティの修正や強化の恩恵を
-受けられなくなります。独自のカスタマイズを行うのではなく、その改善点をプルリクエストを通じて
-コミュニティと共有してください。
-
-* **"_Security Risk_"と明記されたAPIの使用を避ける**
-この章の [Trusting safe values](guide/security#bypass-security-apis) を参照してください。
+| Practices                                                           | Details |
+|:---                                                                 |:---     |
+| Angularライブラリの最新リリースに対応する               | Angularは定期的にアップデートされており、最新版には以前のバージョンで見つかった脆弱性の修正が含まれていることがあります。セキュリティ関連の更新については[change log](https://github.com/angular/angular/blob/main/CHANGELOG.md) を確認してください。 |
+| Angularを複製改変しない                                   | 独自にカスタマイズされたバージョンのAngularは現行バージョンより遅れる場合があり、重要なセキュリティ修正と機能強化が含まれない場合があります。代わりに、コミュニティにあなたのAngularの改良点を共有し、プルリクエストを作成してください。              |
+| ドキュメントで "*セキュリティリスク*"とマークされたAngular APIを回避する | この章の [Trusting safe values](guide/security#bypass-security-apis) を参照してください。                                                                                                                                   |
 
 </div>
 
@@ -53,7 +46,7 @@ Angularは定期的にアップデートされており、最新版には以前�
 XSS攻撃を防ぐには悪意のあるコードがDOMに挿入されるのを防ぐ必要があります。たとえば、
 DOMに`<script>`タグを挿入された場合、攻撃者はそのWebサイトで任意のコードを実行できます。
 攻撃は`<script>`タグだけでなくDOMの多くの要素やプロパティがその対象となります。
-`<img onerror="...">`や`<a href="javascript:...">`など、
+`<img alt="" onerror="...">`や`<a href="javascript:...">`など、
 攻撃者の制御するデータがDOMに注入されることで攻撃が成立します。
 
 ### AngularによるXSS対策
@@ -185,8 +178,13 @@ default-src 'self'; style-src 'self' 'unsafe-inline';
 
 Angular自体の動作にはこれら設定のみが必要です。ただし、プロジェクトが大きくなるにつれ、アプリケーション固有の追加機能に対応するために、この最小値を超えたCSP設定の拡張が必要になる場合があります。
 
-{@a trusted-types}
+<a id="trusted-types"></a>
+
+<!-- vale Angular.Google_Headings = NO -->
+
 ### Trusted Typesの適用
+
+<!-- vale Angular.Google_Headings = YES -->
 
 クロスサイトスクリプティング攻撃からアプリケーションを守る方法として、[Trusted Types](https://w3c.github.io/webappsec-trusted-types/dist/spec/)を使用することをお勧めします。
 Trusted Typesは、より安全なコーディング方法を適用することにより、クロスサイトスクリプティング攻撃を防ぐのに役立つ[Webプラットフォーム](https://en.wikipedia.org/wiki/Web_platform)機能です。
@@ -204,7 +202,7 @@ Trusted Typesはアプリケーションが対応すべきすべてのブラウ�
 |:---                     |:---    |
 | `angular` | このポリシーはAngularの内部にあるセキュリティレビュー済みのコードで使用され、Trusted Types適用下のAngularには必ず必要です。Angularによってサニタイズされたインラインテンプレート値またはコンテンツは、このポリシーにより安全なものとして扱われます。|
 | `angular#u|safe-bypass` - このポリシーは、`bypassSecurityTrustHtml`などセキュリティをバイパスする、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドに使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。|
-| `angular#u|safe-jit` - このポリシーは、[JITコンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。|
+| `angular#u|safe-jit` - このポリシーは、[Just-In-Time (JIT)コンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。|
 | `angular#bundler`       | This policy is used by Angular CLI's bundler when creating lazy chunk files.                    |
 
 Trusted Typesに関するHTTPヘッダーは次の箇所で設定する必要があります。
@@ -216,25 +214,33 @@ Trusted Typesに関するHTTPヘッダーは次の箇所で設定する必要が
 以下はAngular用に構成されたTrusted Types設定ヘッダーの例です。
 
 <code-example language="html">
+
 Content-Security-Policy: trusted-types angular; require-trusted-types-for 'script';
+
 </code-example>
 
 以下は、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドのいずれかを使用しセキュリティをバイパスする機能をもつAngularアプリケーション用のTrusted Types設定ヘッダーの例です。
 
 <code-example language="html">
+
 Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for 'script';
+
 </code-example>
 
 以下は、JITコンパイルを使用したAngularアプリケーション用のTrustedTypes設定ヘッダーの例です。
 
 <code-example language="html">
+
 Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';
+
 </code-example>
 
 The following is an example of a header specifically configured for Trusted Types and Angular applications that use lazy loading of modules:
 
 <code-example language="html">
+
 Content-Security-Policy: trusted-types angular angular#bundler; require-trusted-types-for 'script';
+
 </code-example>
 
 
@@ -262,7 +268,10 @@ Trusted Typesの設定に関するトラブルシューティングの詳細は�
 
 サーバーサイドで構築されたHTMLがXSS脆弱性を有することもあります。これらをテンプレートとしてAngularへ注入することはアプリケーションに実行可能コードを注入することを意味し、この場合アプリケーションは攻撃者によって完全に制御されてしまいます。サーバーサイドでHTMLを構築する際も値のエスケープは確実に行ってください。またサーバーサイドでAngularテンプレートを生成することは避けてください。これらの処理はテンプレートインジェクションの脆弱性が発生する危険性を高めます。
 
-{@a http}
+<a id="http"></a>
+
+<!-- vale Angular.Google_Acronyms = NO -->
+
 ## HTTPレベルの脆弱性
 
 HTTPプロトコル上の脆弱性のうち代表的な2つ、クロスサイトリクエストフォージェリ（CSRF / XSRF）と
@@ -310,7 +319,10 @@ CSRFについてはオープンWebアプリケーションセキュリティプ�
 Dave Smith氏による
 [AngularConnect 2016でのXSRFに関する発表](https://www.youtube.com/watch?v=9inczw6qtpY "Cross Site Request Funkery Securing Your Angular Apps From Evil Doers") も参照してください。
 
-{@a xssi}
+<!-- vale Angular.Google_Acronyms = YES -->
+
+<a id="xssi"></a>
+
 ### クロスサイトスクリプトインクルージョン (XSSI)
 
 JSON脆弱性とも呼ばれるクロスサイトスクリプトインクルージョンにより、攻撃者のWebサイトで
@@ -334,3 +346,11 @@ Angularアプリケーションは通常のWebアプリケーションと同等�
 [_bypassSecurityTrust_](guide/security#bypass-security-apis)メソッドなど、セキュリティレビューで
 監査する必要のあるAngular固有のAPIは、
 ドキュメントにセキュリティの影響を受けやすいとマークされています。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

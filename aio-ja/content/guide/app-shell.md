@@ -9,7 +9,7 @@ App shell は、ビルド時にひとつの経路を介してアプリケーシ�
 
 ## ステップ 1: アプリケーションを準備する
 
-これを行うには、次の CLI コマンドを使用します。
+これを行うには、次の Angular CLI コマンドを使用します。
 
 <code-example format="shell" language="shell">
 
@@ -21,7 +21,7 @@ ng new my-app --routing
 
 ## ステップ 2: App shell を作成する
 
-CLI を使用して App shell を自動的に作成します。
+Angular CLI を使用して App shell を自動的に作成します。
 
 <code-example format="shell" language="shell">
 
@@ -82,7 +82,7 @@ For more information about this command see [App shell command](cli/generate#app
 
 ## ステップ 3: アプリケーションがシェルコンテンツで構築されていることを確認します
 
-CLI を使って `app-shell` ターゲットを構築します。
+Angular CLI を使って `app-shell` ターゲットを構築します。
 
 <code-example format="shell" language="shell">
 

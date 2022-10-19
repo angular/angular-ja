@@ -100,11 +100,23 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 
 </div>
 
+### Release schedule
+
+| Version | Date               |
+| :---    | :---               |
+| v14.1   | Week of 2022-07-18 |
+| v14.2   | Week of 2022-08-22 |
+| v15.0   | Week of 2022-11-18 |
+
+### Support window
+
 すべてのメジャーリリースは原則として18か月間サポートされます。
 
 * 上記の[リリース周期](#frequency "Release frequency")で説明したように、定期的にスケジュールされたアップデートとパッチがリリースされる、6ヶ月の*アクティブサポート*。
 
 * 12ヶ月の*長期サポート（LTS）*。LTS期間中は、[重要な修正とセキュリティパッチ](#lts-fixes)のみがリリースされます。
+
+### Actively supported versions
 
 次の表は、サポート対象のAngularバージョンのステータスを示しています
 

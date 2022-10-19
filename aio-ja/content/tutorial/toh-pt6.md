@@ -207,6 +207,8 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
 ## ヒーローを更新する
 
+<!-- markdownlint-disable MD001 -->
+
 ヒーロー詳細画面で、ヒーローの名前を編集します。
 タイプすると、ページ上部のヒーローの名前が更新されます。
 ですが、**Go back** をクリックすると、その変更は失われてしまいます。
@@ -440,7 +442,7 @@ ng generate component hero-search
 
 <div class="alert is-helpful">
 
-[switchMap operator](https://www.learnrxjs.io/learn-rxjs/operators/transformation/switchmap)によりすべての適格なキーイベントが`HttpClient.get`メソッドを呼び出すことができます。
+[`switchMap` operator](https://www.learnrxjs.io/learn-rxjs/operators/transformation/switchmap)によりすべての適格なキーイベントが`HttpClient.get`メソッドを呼び出すことができます。
 各リクエスト間の300msの休止により、複数のHTTPリクエストを送信できますが、それらは順序どおりに戻ってこないかもしれません。
 
 `swtichMap()`は元のリクエスト順を保持しますが、もっとも新しいHTTPメソッドコールからのobservableのみを返します。

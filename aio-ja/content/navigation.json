@@ -375,12 +375,14 @@
             {
               "url": "guide/change-detection-slow-computations",
               "title": "Slow Computations",
-              "tooltip": "Learn how to make your application faster by discovering and optimizing slow calculations"
+              "tooltip": "Learn how to make your application faster by discovering and optimizing slow calculations",
+              "translated": true
             },
             {
               "url": "guide/change-detection-skipping-subtrees",
               "title": "Skipping Component Subtrees",
-              "tooltip": "Learn how to skip change detection in component subtrees using OnPush change detection strategy"
+              "tooltip": "Learn how to skip change detection in component subtrees using OnPush change detection strategy",
+              "translated": true
             }
           ]
         },
@@ -971,7 +973,8 @@
         {
           "url": "guide/standalone-components",
           "title": "スタンドアロンコンポーネント",
-          "tooltip": "スタンドアロンコンポーネント、ディレクティブ、およびパイプ"
+          "tooltip": "スタンドアロンコンポーネント、ディレクティブ、およびパイプ",
+          "translated": true
         }
       ]
     },

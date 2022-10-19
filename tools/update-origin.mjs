@@ -1,5 +1,5 @@
-import { access, copyFile } from 'node:fs/promises';
-import { extname, resolve } from 'node:path';
+import { access, copyFile, mkdir } from 'node:fs/promises';
+import { extname, resolve, dirname } from 'node:path';
 import { $, argv, chalk, glob } from 'zx';
 
 const copyTargets = [
@@ -59,6 +59,7 @@ async function copyOriginFiles() {
     } catch {}
     const dest = resolve(aioJaDir, isTranslated ? enFilePath : file);
 
+    await mkdir(dirname(dest), { recursive: true });
     await copyFile(src, dest);
   }
 }

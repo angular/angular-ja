@@ -5,7 +5,7 @@ Angularフレームワークの機能を理解するために、次のことを�
 *   コンポーネント
 *   テンプレート
 *   ディレクティブ
-*   依存オブジェクト注入
+*   依存性の注入
 
 このセクションのトピックでは、これらの機能と概念、およびそれらの使用方法について説明します。
 
@@ -34,10 +34,10 @@ Angularフレームワークの機能を理解するために、次のことを�
     <p>Angularディレクティブについて学びます。ディレクティブは、Angularアプリケーションの要素に振る舞いを追加するクラスです。</p>
     <p class="card-footer">ディレクティブ</p>
   </a>
-  <a href="guide/dependency-injection" class="docs-card" title="依存オブジェクト注入">
-    <section>依存オブジェクト注入</section>
-    <p>依存オブジェクト注入について説明します。依存オブジェクトとは、クラスが特定の機能を実行するために必要なサービスまたはオブジェクトを指します。</p>
-    <p class="card-footer">依存オブジェクト注入</p>
+  <a href="guide/dependency-injection" class="docs-card" title="依存性の注入">
+    <section>依存性の注入</section>
+    <p>依存性の注入について説明します。依存性とは、クラスが特定の機能を実行するために必要なサービスまたはオブジェクトを指します。</p>
+    <p class="card-footer">依存性の注入</p>
   </a>
   <!-- <a href="guide/rendering-overview" class="docs-card" title="Angular service worker developer guide">
     <section>Rendering</section>

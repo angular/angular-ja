@@ -56,9 +56,9 @@
 ## 商品の詳細を見る
 
 `ProductDetailsComponent`は各商品の表示を処理する。
-Angular RouterはブラウザのURLと[定義したルート](#define-routes)に基づいてコンポーネントを表示します。
+AngularのルーターはブラウザのURLと[定義したルート](#define-routes)に基づいてコンポーネントを表示します。
 
-ここでは、Angular Routerを利用して `products` のデータとルート情報を組み合わせて、各商品の詳細を表示します。
+ここでは、ルーターを利用して `products` のデータとルート情報を組み合わせて、各商品の詳細を表示します。
 
 1.  `product-details.component.ts` で、`@angular/router` から `ActivatedRoute` を、`../products` から `products` の配列をインポートする。
 
@@ -72,7 +72,7 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
 
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="props-methods"></code-example>
 
-    `ActivatedRoute`は、Angular Routerがロードする各ルーティングコンポーネントごとに固有です。
+    `ActivatedRoute`は、ルーターがロードする各ルーティングコンポーネントごとに固有です。
     ルーティング、そのパラメータ、およびそのルーティングに関連する追加データに関する情報が含まれています。
 
     `ActivatedRoute` を注入することで、サービスを使用するようにコンポーネントを設定しています。
@@ -104,7 +104,7 @@ Angular RouterはブラウザのURLと[定義したルート](#define-routes)に
 
 </div>
 
-Angularルーターについての詳細は[ルーティングと画面遷移](guide/router "ルーティングと画面遷移ガイド")をご覧ください。
+Angularのルーターについての詳細は[ルーティングと画面遷移](guide/router "ルーティングと画面遷移ガイド")をご覧ください。
 
 ## 次は何をするの？
 
@@ -112,7 +112,7 @@ Angularルーターについての詳細は[ルーティングと画面遷移](g
 
 Angularの探索を続けるには。
 
-*   ショッピングカート機能を追加したり、カートデータを管理したり、配送価格の外部データを取得したりするには、[Managing Data](start/start-data "Try it: Managing Data")に進みます。
+*   ショッピングカート機能を追加したり、カートデータを管理したり、配送価格の外部データを取得したりするには、[データの管理](start/start-data "Try it: Managing Data")に進みます。
 *   アプリケーションをFirebaseにデプロイしたり、ローカル開発に移行したりするには、[デプロイ](start/start-deployment "Try it: Deployment")をスキップしてください。
 
 @reviewed 2022-02-28

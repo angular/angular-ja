@@ -4,7 +4,7 @@ Angularへようこそ！
 
 このチュートリアルでは、カタログ、ショッピングカート、チェックアウトフォームを備えたシンプルなeコマースサイトを順を追って説明し、Angularの要点を紹介します。
 
-すぐに始められるように、このガイドでは[StackBlitz](https://stackblitz.com/)上で（[ローカル環境のセットアップ](guide/setup-local "Setup guide")の必要なく）インタラクティブに調べて変更できる既製のシンプルなアプリケーションを使用します。
+すぐに始められるように、このガイドでは[StackBlitz](https://stackblitz.com/)上で（[ローカル環境のセットアップ](guide/setup-local "Setup guide")の必要なく）インタラクティブに調べたり変更したりできる既製のシンプルなアプリケーションを使用します。
 StackBlitzは、さまざまな技術を使ってプロジェクトを作成・保存・共有できるブラウザベースの開発環境です。
 
 ## 前提条件
@@ -20,24 +20,24 @@ StackBlitzは、さまざまな技術を使ってプロジェクトを作成・�
 ## サンプルアプリケーションの見学
 
 Angularアプリケーションはコンポーネントを使って構築します。
-コンポーネントはUIの中で責任のある領域を定義し、UIの機能を再利用できるようにします。
+コンポーネントはUI中での責任領域を定義し、UIの機能を再利用できるようにします。
 
-コンポーネントは3つの要素で構成されています。
+コンポーネントは次の3つの要素で構成されています。
 
-|                           | Details |
+|                           | 詳細 |
 |:---                       |:---     |
 | **コンポーネントクラス** | データと機能を扱う|
 | **HTML テンプレート** | UI を決定する |
-| **コンポーネント固有のスタイル** | ルックアンドフィールを定義する|
+| **コンポーネント固有のスタイル** | 見た目や装飾を定義する|
 
-このガイドでは、コンポーネントを使用してアプリケーションを構築する方法を説明します。
+このガイドでは、次のコンポーネントを使用してアプリケーションを構築します。
 
-| Components             | Details |
+| コンポーネント            | 詳細 |
 |:---                    |:---     |
-| `<app-root>` | 最初にロードするコンポーネントで、他のコンポーネントのためのコンテナ |
+| `<app-root>` | 最初にロードされ、他のコンポーネントのコンテナとなるコンポーネント |
 | `<app-top-bar>` | ストア名とチェックアウトボタン |
 | `<app-product-list>` | 商品リスト |
-| `<app-product-alerts>` | アプリケーションのアラートを含むコンポーネント |
+| `<app-product-alerts>` | アプリケーションのアラートを格納するコンポーネント |
 
 <div class="lightbox">
 
@@ -49,10 +49,10 @@ Angularアプリケーションはコンポーネントを使って構築しま�
 
 <a id="new-project"></a>
 
-## Create the sample project
+## サンプルプロジェクトを作成する
 
 サンプルプロジェクトを作成するには、<live-example name="getting-started-v0" noDownload>既製のサンプルプロジェクトをStackBlitz</live-example>で生成します。
-作業を保存するには
+次の手順で作業を保存することができます。
 
 1. StackBlitzにログインします。
 1. 生成したプロジェクトをフォークします。
@@ -64,11 +64,11 @@ Angularアプリケーションはコンポーネントを使って構築しま�
 
 </div>
 
-StackBlitzでは、右側のプレビューペインにサンプルアプリケーションの起動状態が表示されます。
+StackBlitzでは、右側のプレビューペインにサンプルアプリケーションの初期状態が表示されます。
 プレビューには2つの領域があります。
 
-* トップバーにはストア名が表示され、*My Store*とチェックアウトボタンがあります。
-* 製品リストのヘッダ、*Products*。
+* ストア名 *My Store*とチェックアウトボタンを表示するトップバー
+* 製品リストのヘッダ *Products*
 
 <div class="lightbox">
 
@@ -87,13 +87,13 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
 ## 商品リストを作成する
 
-このセクションでは、アプリケーションを更新して製品の一覧を表示するようにします。
+このセクションでは、製品の一覧を表示するようにアプリケーションを編集します。
 `product.ts`のファイルの定義済みの商品データと `product-list.component.ts` ファイルのメソッドを使用します。
 この節では、テンプレートとも呼ばれるHTMLの編集方法を説明します。
 
-1.  `product-list`フォルダ内のテンプレートファイル `product-list.component.html` を開く。
+1.  `product-list`フォルダ内のテンプレートファイル `product-list.component.html` を開きましょう。
 
-1.  次のように `<div>` に `*ngFor` 構造ディレクティブを追加する。
+1.  次のように `<div>` に `*ngFor` 構造ディレクティブを追加します。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.2.html" region="ngfor"></code-example>
 
@@ -102,7 +102,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     構造ディレクティブは、要素の追加、削除、操作によって DOM の構造を形成したり、再構築したりします。
     構造ディレクティブについての詳細は [構造ディレクティブ](guide/structural-directives)を参照してください。
 
-1.  `<div>` の中に `<h3>` と `{{ product.name }}` を追加する。
+1.  `<div>` の中に `<h3>` と `{{ product.name }}` を追加しましょう。
     この `{{ product.name }}` 文は Angular の補間構文の例です。
     補間 `{{{ }}` は、プロパティの値をテキストとしてレンダリングします。
 
@@ -116,7 +116,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
     </div>
 
-1.  各商品名を商品詳細へのリンクにするには、`{{ product.name }}` の周りに `<a>` 要素を追加します。
+1.  `{{ product.name }}` の周りに `<a>` 要素を追加して、各商品名を商品詳細へのリンクに変えます。
 
 1.  次のように、プロパティバインディング `[ ]` 構文を用いて、タイトルを商品名に設定します。
 
@@ -132,7 +132,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     </div>
 
 1.  製品の説明を追加します。
-    `<p>` 要素では、`*ngIf` ディレクティブを使用して、現在の商品に説明がある場合にのみ `<p>` 要素を作成するようにします。
+    `<p>` 要素に `*ngIf` ディレクティブを使用して、現在の商品に説明がある場合にのみ `<p>` 要素を作成するようにします。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.3.html"></code-example>
 
@@ -146,7 +146,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
     </div>
 
-1.  ユーザーが商品を共有できるようにボタンを追加する。
+1.  ユーザーが商品を共有できるようにボタンを追加しましょう。
     ボタンの `click` イベントを `product-list.component.ts` の `share()` メソッドにバインドします。
     イベントバインディングでは、`<button>` 要素の `(click)` イベントのように、イベントの周りに括弧 `( )` を使用します。
 
@@ -176,7 +176,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 ## 子コンポーネントにデータを渡す
 
 現在のところ、商品リストには各商品の名前と説明が表示されています。
-`ProductListComponent` はまた、`products.ts` の `products` 配列からインポートしたデータを含む `products` プロパティを定義しています。
+また、`ProductListComponent` は `products` プロパティを定義して、`products.ts` の `products` 配列からインポートしたデータを格納しています。
 
 次のステップは、`ProductListComponent`から商品データを利用する新しいアラート機能を作成することです。
 このアラートは商品の価格をチェックし、価格が700ドル以上の場合は、**Notify Me**ボタンを表示し、商品が販売されたときに通知を受けるために登録できるようにします。
@@ -191,7 +191,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
     </div>
 
-1.  新しいターミナルで、次のコマンドを実行して、`product-alerts`という名前の新しいコンポーネントを生成してください。
+1.  新しいターミナルで、次のコマンドを実行して、`product-alerts`という名前の新しいコンポーネントを生成しましょう。
 
     <code-example format="shell" language="shell">
 
@@ -199,19 +199,19 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
   
     </code-example>
 
-    ジェネレーターは、コンポーネントの3つの部分のスターターファイルを作成します。
+    ジェネレーターは、コンポーネントの3つの部分に対応した初期ファイルを作成します。
 
     *   `product-alerts.component.ts`
     *   `product-alerts.component.html`
     *   `product-alerts.component.css`
 
-1.  `product-alerts.component.ts` を開く。
-    `@Component()`デコレーターは、次のクラスがコンポーネントであることを示します。
-    また、`@Component()` は、セレクター、テンプレート、スタイルなど、コンポーネントに関するメタデータを提供します。
+1.  `product-alerts.component.ts` を開きましょう。
+    `@Component()`デコレーターは、続くクラスがコンポーネントであることを示しています。
+    また、`@Component()` はセレクター、テンプレート、スタイルなど、コンポーネントに関するメタデータを提供します。
 
     <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="as-generated"></code-example>
 
-    `Component()`の主な特徴は次のとおりである。
+    `Component()`の重要な機能は次のものです。
 
     *   `app-product-alerts`という`selector` はコンポーネントを識別します。
         慣例では、Angularのコンポーネントセレクターは接頭辞 `app-` で始まり、その後にコンポーネント名が続きます。
@@ -219,12 +219,12 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     *   テンプレートとスタイルのファイル名は、コンポーネントのHTMLとCSSを参照します。
     *   `@Component()`定義は、コンポーネントの機能を処理するクラス `ProductAlertsComponent`もエクスポートします。
 
-1.   商品データを受け取るために `ProductAlertsComponent` を設定するには、まず `@angular/core` から `Input` をインポートします。
+1.   `ProductAlertsComponent` が商品データを受け取るために、`@angular/core` から `Input` をインポートします。
 
     <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="imports"></code-example>
 
-1.  `ProductAlertsComponent` クラスの定義で、`product` という名前のプロパティに `@Input()` デコレーターを付けて定義します。
-    この `@Input()` デコレーターは、プロパティの値がコンポーネントの親である `ProductListComponent` から渡されることを示します。
+1.  `ProductAlertsComponent` クラスの定義の中で、`product` という名前のプロパティに `@Input()` デコレーターを付けて定義します。
+    この `@Input()` デコレーターは、プロパティの値が親コンポーネントである `ProductListComponent` から渡されることを示します。
 
     <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.1.ts" region="input-decorator"></code-example>
 
@@ -232,11 +232,11 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
     <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
-1.  ジェネレーターは自動的に `AppModule` に `ProductAlertsComponent` を追加し、アプリケーション内の他のコンポーネントが利用できるようにしました。
+1.  ジェネレーターは自動的に `AppModule` に `ProductAlertsComponent` を追加し、アプリケーション内の他のコンポーネントが利用できるようにしています。
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-product-alerts"></code-example>
   
-1.  `ProductListComponent` の子として `ProductAlertsComponent` を表示するには、`product-list.component.html` に `<app-product-alerts>` 要素を追加します。
+1.  `ProductAlertsComponent` を `ProductListComponent` の子として表示するために、`product-list.component.html` に `<app-product-alerts>` 要素を追加します。
     プロパティバインディングを使用して、現在の製品を入力としてコンポーネントに渡します。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.5.html" region="app-product-alerts"></code-example>
@@ -255,13 +255,13 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 
 ## 親コンポーネントにデータを渡す
 
-**Notify Me**ボタンを動作させるには、子コンポーネントが通知して親コンポーネントにデータを渡す必要があります。
-`ProductAlertsComponent`はユーザーが**Notify Me**をクリックしたときにイベントを発生させ、`ProductListComponent`はそのイベントに応答する必要があります。
+**Notify Me**ボタンを機能させるには、子コンポーネントが通知して親コンポーネントにデータを渡す必要があります。
+`ProductAlertsComponent`はユーザーが**Notify Me**をクリックしたときにイベントを発生させ、`ProductListComponent`はそのイベントに応答しなければなりません。
 
   <div class="alert is-helpful">
 
-  新しいコンポーネントには、Angular Generator が空の `constructor()`、`OnInit` インターフェース、`ngOnInit()` メソッドを含めます。
-  このステップではこれらを使用しないので、次のコード例では簡潔にするために省略しています。
+  新しいコンポーネントには、Angularジェネレーターが空の `constructor()`、`OnInit` インターフェース、`ngOnInit()` メソッドを含めています。
+  しかしこのステップでは使用しないので、次のコード例では簡潔にするために省略しています。
 
   </div>
 
@@ -270,23 +270,23 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
     <code-example header="src/app/product-alerts/product-alerts.component.ts" path="getting-started/src/app/product-alerts/product-alerts.component.ts" region="imports"></code-example>
 
 1.  コンポーネントクラスで、`notify` という名前のプロパティを `@Output()` デコレーターと `EventEmitter()` のインスタンスで定義します。
-    `ProductAlertsComponent`を `@Output()` で設定することで、`ProductAlertsComponent`が `notify` プロパティの値が変更されたときにイベントを発行することができます。
+    `ProductAlertsComponent`を `@Output()` で設定することで、`notify` プロパティの値が変更されたときに`ProductAlertsComponent`がイベントを発行できます。
 
     <code-example path="getting-started/src/app/product-alerts/product-alerts.component.ts" header="src/app/product-alerts/product-alerts.component.ts" region="input-output"></code-example>
 
-1.  `product-alerts.component.html`で、**Notify Me**ボタンをイベントバインディングで更新し、`notify.emit()`メソッドを呼び出すようにします。
+1.  `product-alerts.component.html`で、イベントバインディングで`notify.emit()`メソッドを呼び出すように**Notify Me**ボタンを編集します。
 
     <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.html"></code-example>
 
 1.  ユーザーがボタンをクリックしたときの動作を定義します。
-    親の `ProductListComponent`—`ProductAlertsComponent`ではなく—は、`ProductAlertsComponent`がイベントを発生させたときに動作します。
-    `product-list.component.ts` で `onNotify()` メソッドを定義します。
+    親の `ProductListComponent`（`ProductAlertsComponent`ではありません）は、`ProductAlertsComponent`がイベントを発生させたときに動作します。
+    `product-list.component.ts` で `onNotify()` メソッドを定義しましょう。
 
     <code-example header="src/app/product-list/product-list.component.ts" path="getting-started/src/app/product-list/product-list.component.ts" region="on-notify"></code-example>
 
-1.  `ProductAlertsComponent`からデータを受け取るように `ProductListComponent` を更新する。
+1.  `ProductListComponent` を編集して、`ProductAlertsComponent`からデータを受け取ります。
 
-    `product-list.component.html` で、`<app-product-alerts>` を製品リストコンポーネントの `onNotify()` メソッドにバインドする。
+    `product-list.component.html` で、`<app-product-alerts>` を製品リストコンポーネントの `onNotify()` メソッドにバインドしましょう。
     `<app-product-alerts>` は **Notify Me** ボタンを表示するものです。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.6.html" region="on-notify"></code-example>
@@ -299,7 +299,7 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 
     </div>
 
-コンポーネント間の通信については、[Component Interaction](guide/component-interaction "Component interaction")を参照してください。
+コンポーネント間の通信については、[コンポーネントの相互作用](guide/component-interaction "コンポーネントの相互作用")を参照してください。
 
 <a id="whats-next"></a>
 

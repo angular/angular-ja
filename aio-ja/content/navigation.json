@@ -256,8 +256,9 @@
               "children": [
                 {
                   "url": "guide/pipes-overview",
-                  "title": "Understanding pipes",
-                  "tooltip": "Introductory guide to pipes."
+                  "title": "パイプを理解する",
+                  "tooltip": "Introductory guide to pipes.",
+                  "translated": true
                 },
                 {
                   "url": "guide/pipe-template",

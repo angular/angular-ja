@@ -1,45 +1,45 @@
-# Understanding Pipes
+# パイプを理解する
 
-Use [pipes](guide/glossary#pipe "Definition of a pipe") to transform strings, currency amounts, dates, and other data for display.
+[パイプ](guide/glossary#pipe "パイプの定義")を使って、文字列、通貨金額、日付などのデータを表示用に変換します。
 
-## What is a pipe
+## パイプとは？
 
-Pipes are simple functions to use in [template expressions](/guide/glossary#template-expression "Definition of template expression") to accept an input value and return a transformed value. Pipes are useful because you can use them throughout your application, while only declaring each pipe once.
-For example, you would use a pipe to show a date as **April 15, 1988** rather than the raw string format.
-
-<div class="alert is-helpful">
-
-For the sample application used in this topic, see the <live-example name="pipes"></live-example>.
-
-</div>
-
-## Built-in pipes
-
-Angular provides built-in pipes for typical data transformations, including transformations for internationalization (i18n), which use locale information to format data.
-The following are commonly used built-in pipes for data formatting:
-
-*   [`DatePipe`](api/common/DatePipe): Formats a date value according to locale rules.
-*   [`UpperCasePipe`](api/common/UpperCasePipe): Transforms text to all upper case.
-*   [`LowerCasePipe`](api/common/LowerCasePipe): Transforms text to all lower case.
-*   [`CurrencyPipe`](api/common/CurrencyPipe): Transforms a number to a currency string, formatted according to locale rules.
-*   [`DecimalPipe`](/api/common/DecimalPipe): Transforms a number into a string with a decimal point, formatted according to locale rules.
-*   [`PercentPipe`](api/common/PercentPipe): Transforms a number to a percentage string, formatted according to locale rules.
+パイプは、[テンプレート式](/guide/glossary#template-expression "Definition of template expression") の中で使用する、入力値を受け取って変換された値を返すシンプルな関数です。パイプはそれぞれ一度だけの宣言で、アプリケーション全体で使用することができるため便利です。
+たとえば、ある日付を生の文字列形式ではなく、**April 15, 1988** として表示するためにパイプを使用します。
 
 <div class="alert is-helpful">
 
-*   For a complete list of built-in pipes, see the [pipes API documentation](/api/common#pipes "Pipes API reference summary").
-*   To learn more about using pipes for internationalization (i18n) efforts, see [formatting data based on locale][AioGuideI18nCommonFormatDataLocale].
+このトピックで使用するサンプルアプリケーションは、<live-example name="pipes"></live-example> をご覧ください。
 
 </div>
 
-Create pipes to encapsulate custom transformations and use your custom pipes in template expressions.
+## 組み込みパイプ
 
-## Pipes and precedence
+Angularは、ロケール情報を使ってデータを整形する国際化（i18n）のための変換を含む、典型的なデータ変換のための組み込みパイプを提供します。
+データの整形によく使われる組み込みパイプは次のとおりです。
 
-The pipe operator has a higher precedence than the ternary operator (`?:`), which means `a ? b : c | x` is parsed as `a ? b : (c | x)`.
-The pipe operator cannot be used without parentheses in the first and second operands of `?:`.
+*   [`DatePipe`](api/common/DatePipe): ロケールの規則にしたがって、日付の値を整形します。
+*   [`UpperCasePipe`](api/common/UpperCasePipe): テキストをすべて大文字に変換します。
+*   [`LowerCasePipe`](api/common/LowerCasePipe): テキストをすべて小文字に変換します。
+*   [`CurrencyPipe`](api/common/CurrencyPipe): 数値から通貨文字列に変換し、ロケールの規則にしたがって整形します。
+*   [`DecimalPipe`](/api/common/DecimalPipe): ロケールの規則にしたがって整形された、小数点を含む文字列に数値を変換します。
+*   [`PercentPipe`](api/common/PercentPipe): 数値をロケールの規則にしたがって整形されたパーセント文字列に変換します。
 
-Due to precedence, if you want a pipe to apply to the result of a ternary, wrap the entire expression in parentheses; for example, `(a ? b : c) | x`.
+<div class="alert is-helpful">
+
+* 組み込みパイプの一覧は、[パイプの API ドキュメント](/api/common#pipes "Pipes API reference summary")を参照してください。
+* 国際化 (i18n) のためのパイプの使い方については、[ロケールに応じたデータの整形][AioGuideI18nCommonFormatDataLocale]を参照してください。
+
+</div>
+
+独自の変換をカプセル化するパイプを作成し、テンプレート式でカスタムパイプを使用することができます。
+
+## パイプと優先順位
+
+パイプ演算子は三項演算子(`?:`)よりも優先順位が高く、`a ? b : c | x` は `a ? b : (c | x)`としてパースされます。
+パイプ演算子は `?:` の第1オペランドと第2オペランドに括弧をつけないで使用することはできません。
+
+優先順位の関係で、パイプを三項演算の結果に適用したい場合は、式全体を括弧で囲みます。たとえば、 `(a ? b : c) | x` です。
 
 <code-example path="pipes/src/app/precedence.component.html" region="precedence" header="src/app/precedence.component.html"></code-example>
 

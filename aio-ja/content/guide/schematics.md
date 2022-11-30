@@ -57,16 +57,16 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 
 ### 追加 Schematics
 
-追加 Schematics は通常、ライブラリに付属しているため、`ng add` を使用してライブラリを既存のプロジェクトに追加できます。
+*追加 Schematic* はライブラリに付属され、`ng add` を使用してライブラリを既存のプロジェクトに追加できます。
 `add` コマンドはパッケージマネージャーを使用して新しい依存関係をダウンロードし、Schematic として実装されているインストールスクリプトを呼び出します。
 
 たとえば、[`@angular/material`](https://material.angular.io/guide/schematics) Schematic は、Angular Material とテーマをインストールおよび設定し、`ng generate` で作成できる新しいスターターコンポーネントを登録するように `add` コマンドに指示します。
 あなたはこれを、自身の追加 Schematic の例およびモデルとして見ることができます。
 
 パートナーライブラリとサードパーティライブラリも、追加 Schematics により Angular CLIをサポートしています。
-たとえば、`@ng-bootstrap/schematics` はアプリケーションに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare から Clarity](https://vmware.github.io/clarity/documentation/v1.0/get-started) をインストールして設定します。
+たとえば、`@ng-bootstrap/schematics` はアプリケーションに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare の Clarity](https://clarity.design/documentation/get-started) をインストールして設定します。
 
-また、追加 Schematic は設定の変更のためにプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
+また、*追加 Schematic* は設定の変更のためにプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
 たとえば、`@angular/pwa` Schematic は、マニフェストとサービスワーカーを追加することでアプリケーションを PWA に変換します。
 
 ### 生成 Schematics
@@ -91,15 +91,15 @@ ng generate &commat;angular/material:table &lt;component-name&gt;
 <code-example format="shell" language="shell">
 
 ng update
-    We analyzed your package.json, there are some packages to update:
+We analyzed your package.json, there are some packages to update:
 
-      Name                               Version                  Command to update
-     &hyphen;-------------------------------------------------------------------------------
-      &commat;angular/cdk                       7.2.2 -&gt; 7.3.1           ng update &commat;angular/cdk
-      &commat;angular/cli                       7.2.3 -&gt; 7.3.0           ng update &commat;angular/cli
-      &commat;angular/core                      7.2.2 -&gt; 7.2.3           ng update &commat;angular/core
-      &commat;angular/material                  7.2.2 -&gt; 7.3.1           ng update &commat;angular/material
-      rxjs                               6.3.3 -&gt; 6.4.0           ng update rxjs
+    Name                                      Version                     Command to update
+    &hyphen;-------------------------------------------------------------------------------
+    &commat;angular/cdk                       7.2.2 -&gt; 7.3.1           ng update &commat;angular/cdk
+    &commat;angular/cli                       7.2.3 -&gt; 7.3.0           ng update &commat;angular/cli
+    &commat;angular/core                      7.2.2 -&gt; 7.2.3           ng update &commat;angular/core
+    &commat;angular/material                  7.2.2 -&gt; 7.3.1           ng update &commat;angular/material
+    rxjs                                      6.3.3 -&gt; 6.4.0           ng update rxjs
 
     There might be additional packages that are outdated.
     Run "ng update --all" to try to update all at the same time.

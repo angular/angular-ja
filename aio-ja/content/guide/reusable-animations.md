@@ -36,17 +36,11 @@ For example, the following code snippet imports the `transitionAnimation` variab
 
 ## Angularアニメーションの詳細
 
-あなたは次に興味があるかもしれません:
+あなたはこちらにも興味があるかもしれません:
 
 *   [Angularアニメーション・イントロダクション](guide/animations)
 *   [アニメーションの遷移とトリガー](guide/transition-and-triggers)
 *   [複雑なアニメーションシーケンス](guide/complex-animation-sequences)
 *   [ルーティング遷移のアニメーション](guide/route-animations)
 
-<!-- links -->
-
-<!-- external links -->
-
-<!-- end links -->
-
-@reviewed 2022-02-28
+@reviewed 2022-10-11

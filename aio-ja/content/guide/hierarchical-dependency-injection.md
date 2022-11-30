@@ -796,37 +796,40 @@ Emoji from AnimalService: 🐶
 
 論理ツリーの`AnimalService`は次のようになります:
 
-```
-<app-root @NgModule(AppModule)
-        @Inject(AnimalService) animal=>"🐳">
-  <#VIEW>
-    <app-child>
-      <#VIEW
-       @Provide(AnimalService="🐶")
-       @Inject(AnimalService=>"🐶")>
-       <!-- ^^using viewProviders means AnimalService is available in <#VIEW>-->
-       <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
-       <app-inspector>
-        <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
-       </app-inspector>
-      </#VIEW>
-      <app-inspector>
-        <#VIEW>
-          <p>Emoji from AnimalService: {{animal.emoji}} (🐳)</p>
-        </#VIEW>
-      </app-inspector>
-     </app-child>
-  </#VIEW>
-</app-root>
-```
+<code-example format="html" language="html">
 
-🐶(子犬)は`<app-child>`の`<#VIEW>`内にあるため、
-`<app-inspector>`の投影されたコンテンツには、
-🐶(子犬)ではなく🐳,(クジラ)が表示されます。
-`<app-inspector>`が`<#VIEW>`
-内部にある場合にのみ🐶(子犬)が表示されます。
+&lt;app-root &commat;NgModule(AppModule)
+         &commat;Inject(AnimalService) animal=&gt;"&#x1F433;"&gt;
+  &lt;#VIEW&gt;
+    &lt;app-child&gt;
+      &lt;#VIEW &commat;Provide(AnimalService="&#x1F436;")
+            &commat;Inject(AnimalService=&gt;"&#x1F436;")&gt;
+        &lt;!-- ^^using viewProviders means AnimalService is available in &lt;#VIEW&gt;--&gt;
+        &lt;p&gt;Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)&lt;/p&gt;
+  
+        &lt;div class="container"&gt;
+          &lt;h3&gt;Content projection&lt;/h3&gt;
+          &lt;app-inspector &commat;Inject(AnimalService) animal=&gt;"&#x1F433;"&gt;
+            &lt;p&gt;Emoji from AnimalService: {{animal.emoji}} (&#x1F433;)&lt;/p&gt;
+          &lt;/app-inspector&gt;
+        &lt;/div&gt;
+  
+      &lt;/#VIEW&gt;
+      &lt;app-inspector&gt;
+        &lt;#VIEW&gt;
+          &lt;p&gt;Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)&lt;/p&gt;
+        &lt;/#VIEW&gt;
+      &lt;/app-inspector&gt;
+    &lt;/app-child&gt;
+  &lt;/#VIEW&gt;
+&lt;/app-root&gt;
 
-{@a modify-visibility}
+</code-example>
+
+The projected content of `<app-inspector>` sees the whale <code>&#x1F433;</code>, not the dog <code>&#x1F436;</code>, because the dog <code>&#x1F436;</code> is inside the `<app-child>` `<#VIEW>`.
+The `<app-inspector>` can only see the dog <code>&#x1F436;</code> if it is also within the `<#VIEW>`.
+
+<a id="modify-visibility"></a>
 
 ## サービスの可視性を変更する {@a modifying-service-visibility}
 

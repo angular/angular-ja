@@ -30,6 +30,8 @@ See instructions on how to include polyfills into your project below.
 推奨されるポリフィルはAngularアプリケーションを完全に動作させるためのものです。
 リストにない機能をサポートするために追加のポリフィルが必要になるかもしれません。
 
+</div>
+
 <div class="alert is-helpful">
 
 **NOTE**: <br />
@@ -37,20 +39,31 @@ Polyfills cannot magically transform an old, slow browser into a modern, fast on
 
 </div>
 
-</div>
+## CLIプロジェクトでポリフィルを有効にする
 
-## Enabling polyfills with CLI projects
+[Angular CLI](cli)では、ポリフィルをサポートしています。
+CLIを使わずにプロジェクトを作成する場合は、[非CLIユーザーのためのポリフィル解説](#non-cli)をご覧ください。
 
-The [Angular CLI](cli) provides support for polyfills.
-If you are not using the CLI to create your projects, see [Polyfill instructions for non-CLI users](#non-cli).
+[browser](cli/build) と [test](cli/test) のビルダーの `polyfills` オプションには、ファイルへのフルパス(例: `src/polyfills.ts`)、
+現在のワークスペースからの相対パス、またはモジュール指定子(例: `zone.js`)を指定できます。
 
-When you create a project with the `ng new` command, a `src/polyfills.ts` configuration file is created as part of your project folder.
-このファイルには必須なポリフィルと多くのオプショナルなポリフィルがJavaScriptの`import`文で盛り込まれています。
+TypeScriptファイルを作成した場合は、必ず `tsconfig` ファイルの `files` プロパティに含めてください。
 
-* The npm packages for the mandatory polyfills (such as `zone.js`) are installed automatically for you when you create your project with `ng new`, and their corresponding `import` statements are already enabled in the `src/polyfills.ts` configuration file.
+<code-example language="jsonc" syntax="jsonc">
 
-* If you need an _optional_ polyfill, you must install its npm package, then uncomment or create the corresponding import statement in the `src/polyfills.ts` configuration file.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    ...
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ]
+  ...
+}
 
+</code-example>
 
 <a id="non-cli"></a>
 
@@ -91,4 +104,4 @@ When you create a project with the `ng new` command, a `src/polyfills.ts` config
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2022-11-04

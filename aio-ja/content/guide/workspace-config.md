@@ -54,7 +54,7 @@ The following configuration properties are a set of options that customize the A
 
 | Property              | Details                                                                                       | Value type                                              |
 |:---                   |:---                                                                                           |:---                                                     |
-| `analytics`           | Share anonymous [usage data](cli/usage-analytics-gathering) with the Angular Team.            | `boolean` &verbar; `ci`                                 |
+| `analytics`           | Share anonymous [usage data](cli/analytics) with the Angular Team.            | `boolean` &verbar; `ci`                                 |
 | `cache`               | Control [persistent disk cache](cli/cache) used by [Angular CLI Builders](guide/cli-builder). | [Cache options](#cache-options)                         |
 | `schematicCollections`| A list of default schematics collections to use.                                              | `string[]`                                              |
 | `packageManager`      | The preferred package manager tool to use.                                                    | `npm` &verbar; `cnpm` &verbar; `pnpm` &verbar;`yarn`    |

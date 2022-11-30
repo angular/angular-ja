@@ -1736,9 +1736,9 @@ _リンクパラメーター配列_ の後に、`ActivatedRoute` に `relativeTo
 パスは `../` 構文を使って1つ上の階層に上がっていることに注意してください。
 現在のクライシスの `id` が `3` であれば、クライシスリストに戻る結果のパスは `/crisis-center/;id=3;foo=foo` となります。
 
-{@a named-outlets}
+<a id="named-outlets"></a>
 
-### 名前付きアウトレットに複数のルートを表示する
+### 名前付きアウトレットに複数のルートを表示する {@a displaying-multiple-routes-in-named-outlets}
 
 クライシスセンターに連絡する手段をユーザーに提供することにしました。
 ユーザーが "Contact" ボタンをクリックすると、ポップアップビューにメッセージを表示します。

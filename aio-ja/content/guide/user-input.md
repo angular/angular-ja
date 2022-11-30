@@ -3,8 +3,7 @@
 <div class="callout is-critical">
 <header>Marked for archiving</header>
 
-To ensure that you have the best experience possible, this topic is marked for archiving until we determine
-that it clearly conveys the most accurate information possible.
+To ensure that you have the best experience possible, this topic is marked for archiving until it clearly conveys the most accurate information possible.
 
 In the meantime, this topic might be helpful: [Event binding](guide/event-binding).
 
@@ -32,7 +31,11 @@ DOMイベントにバインドするには、DOMイベント名をカッコで�
 
 次の例は、クリックハンドラーを実装するイベントバインディングを示しています。
 
-<code-example path="user-input/src/app/click-me.component.ts" region="click-me-button" header="src/app/click-me.component.ts"></code-example>
+<!-- vale Angular.Google_WordListWarnings = NO -->
+
+<code-example header="src/app/click-me.component.ts" path="user-input/src/app/click-me.component.ts" region="click-me-button"></code-example>
+
+<!-- vale Angular.Google_WordListWarnings = YES -->
 
 {@a click}
 
@@ -42,8 +45,7 @@ DOMイベントにバインドするには、DOMイベント名をカッコで�
 clickイベントに応答する**テンプレート文**です。
 
 バインディングを記述するときは、テンプレート文の**実行コンテキスト**に注意してください。
-テンプレート文中の識別子は、特定のコンテキストオブジェクトに属します。
-それは通常、テンプレートを制御するAngularコンポーネントです。 
+テンプレート文中の識別子は、特定のコンテキストオブジェクトに属します。それは通常、テンプレートを制御するAngularコンポーネントです。 
 上の例はHTMLの1行を示していますが、HTMLはより大きなコンポーネントに属しています。
 
 
@@ -63,14 +65,10 @@ DOMイベントは、コンポーネントにとって有益な情報のペイ�
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-template" header="src/app/keyup.components.ts (template v.1)"></code-example>
 
-
-
 ユーザーがキーを押して離すと、`keyup`イベントが発生し、
 Angularは対応するDOMイベントオブジェクトをコンポーネントの`onKey()`メソッドに渡される`$event`変数に提供します。
 
 <code-example path="user-input/src/app/keyup.components.ts" region="key-up-component-1-class-no-type" header="src/app/keyup.components.ts (class v.1)"></code-example>
-
-
 
 `$event`オブジェクトのプロパティは、DOMイベントのタイプによって異なります。
 たとえば、マウスイベントは、入力ボックス編集イベントとは異なる情報を含みます。
@@ -85,14 +83,18 @@ Angularは対応するDOMイベントオブジェクトをコンポーネント�
 その後に区切り文字（|）を続けます。
 [補間](guide/interpolation)は、`values`プロパティからの累積された入力ボックスの変更を表示します。
 
+<!-- vale Angular.Angular_Spelling = NO -->
+
 ユーザーが文字「abc」を入力した後、バックスペースで1つずつ削除するとします。 
 UIに表示される内容は次のとおりです。
 
+<!-- vale Angular.Angular_Spelling = YES -->
+
 <code-example>
-  a | ab | abc | ab | a | |
+
+a &verbar; ab &verbar; abc &verbar; ab &verbar; a &verbar; &verbar;
+
 </code-example>
-
-
 
 <div class="lightbox">
   <img src='generated/images/guide/user-input/keyup1-anim.gif' alt="key up 1">

@@ -138,7 +138,7 @@ XMBフォーマットでは、ソース言語ファイルとして`.xmb`が生�
 
     <code-example header="src/locale/messages.fr.xlf (&lt;trans-unit&gt;)" path="i18n/doc-files/messages.fr.xlf.html" region="translated-hello-before"></code-example>
 
-    `id="introductionHeader` "は[カスタムID][AioGuideI18nOptionalManageMarkedText]ですが、ソースHTMLに必要な`@@`接頭辞はありません。
+    `id="introductionHeader` "は[カスタムID][AioGuideI18nOptionalManageMarkedText]ですが、ソースHTMLに必要な`@@`プレフィックスはありません。
 
 1.  テキストノード内の`<source>...</source>`要素を複製し、`target`に名前を変更し、内容をフランス語のテキストに置き換えます。
 

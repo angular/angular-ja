@@ -277,29 +277,34 @@ Angular CLI はブラウザアプリケーションが CommonJS モジュール�
 
 ## ブラウザ互換性の設定 {@a configuring-browser-compatibility}
 
-CLIは[Autoprefixer](https://github.com/postcss/autoprefixer)を使ってさまざまなブラウザやブラウザバージョンとの互換性を保証しています。
-特定のブラウザをターゲットにしたり、特定のブラウザバージョンをビルドから除外したりする必要が出てくるかもしれません。
+Angular CLIでは、さまざまなブラウザバージョンとの互換性を確保するために[Browserslist](https://github.com/browserslist/browserslist)を使用しています。CSSのベンダープレフィックスには [Autoprefixer](https://github.com/postcss/autoprefixer) を、JavaScriptの構文変換には [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) を使用しています。
 
-内部的には、Autoprefixerは[Browserslist](https://github.com/browserslist/browserslist)というライブラリに頼り、どのブラウザを接頭辞付きでサポートするかを判断しています。
-Browserslistはパッケージ設定ファイルの`browserslist`プロパティ、または`.browserslistrc`という名前の設定ファイルから設定オプションを探します。
-AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探します。
+内部的には、Angular CLI は次の `browserslist` 設定を使用し、Angular が[サポートするブラウザ](guide/browser-support) にマッチするように設定します。
 
-* パッケージ設定ファイル`package.json`にbrowserslistプロパティを追加することで、どのブラウザをターゲットにするかをAutoprefixerに伝えることができます:
-```
- "browserslist": [
-   "> 1%",
-   "last 2 versions"
- ]
-```
+  <code-example format="none" language="text">
+  last 1 Chrome version
+  last 1 Firefox version
+  last 2 Edge major versions
+  last 2 Safari major versions
+  last 2 iOS major versions
+  Firefox ESR
+  </code-example>
 
-* あるいは、新しいファイル`.browserslistrc`をプロジェクトディレクトリに追加して、サポートしたいブラウザを指定することもできます:
-```
- ### Supported Browsers
- > 1%
- last 2 versions
-```
 
-特定のブラウザとバージョンをターゲットにする方法の例については[browserslistのリポジトリ](https://github.com/browserslist/browserslist)を参照してください。
+内部設定を上書きするには、`.browserslistrc`という名前の新しいファイルをプロジェクトディレクトリに追加して、サポートしたいブラウザを指定してください。
+
+  <code-example format="none" language="text">
+  last 1 Chrome version
+  last 1 Firefox version
+  </code-example>
+
+特定のブラウザやバージョンを対象にした例については、[browserslistのリポジトリ](https://github.com/browserslist/browserslist) を参照してください。
+
+<div class="alert is-helpful">
+
+[browsersl.ist](https://browsersl.ist) を使うと、`browserslist` クエリに対して互換性のあるブラウザを表示することができます。
+
+</div>
 
 {@a proxy}
 
@@ -311,27 +316,33 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 1. `proxy.conf.json` ファイルを、 `package.json` と同じディレクトリにある `src/` フォルダの中に作成します。
 
 2. 次のコンテンツを新しいプロキシファイルに追加します:
-    ```
+
+    <code-example format="json" language="json">
+
     {
       "/api": {
         "target": "http://localhost:3000",
         "secure": false
       }
     }
-    ```
+
+    </code-example>
 
 3. CLI設定ファイル`angular.json`の中で, `serve`ターゲットに`proxyConfig`オプションを追加します:
-    ```
-    ...
+
+    <code-example format="json" language="json">
+
+    &hellip;
     "architect": {
       "serve": {
-        "builder": "@angular-devkit/build-angular:dev-server",
+        "builder": "&commat;angular-devkit/build-angular:dev-server",
         "options": {
           "browserTarget": "your-application-name:build",
           "proxyConfig": "src/proxy.conf.json"
         },
-    ...
-    ```
+    &hellip;
+
+    </code-example>
 
 4. このプロキシ設定で開発サーバーを起動するには、`ng serve`を実行します。
 
@@ -345,7 +356,8 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 `pathRewrite`プロキシ設定オプションを使って実行時にURLパスを書き換えることができます。 
 たとえば、次の`pathRewrite`値をプロキシ設定に指定してパスの末尾から"api"を削除することができます。
 
-```
+<code-example format="json" language="json">
+
 {
   "/api": {
     "target": "http://localhost:3000",
@@ -355,11 +367,13 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
     }
   }
 }
-```
+
+</code-example>
 
 `localhost`上にないバックエンドにアクセスする必要がある場合は、`changeOrigin`オプションも設定してください。例：
 
-```
+<code-example format="json" language="json">
+
 {
   "/api": {
     "target": "http://npmjs.org",
@@ -370,11 +384,13 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
     "changeOrigin": true
   }
 }
-```
+
+</code-example>
 
 プロキシが意図したとおりに動作しているかどうかを判断しやすくするためには、`logLevel`オプションを設定してください。例:
 
-```
+<code-example format="json" language="json">
+
 {
   "/api": {
     "target": "http://localhost:3000",
@@ -385,7 +401,8 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
     "logLevel": "debug"
   }
 }
-```
+
+</code-example>
 
 プロキシのログレベルは`info`（デフォルト）、 `debug`、`warn`、`error`、そして`silent`です。
 
@@ -395,7 +412,8 @@ JavaScriptで設定を定義することで、同じターゲットに対して�
 
 （`proxy.conf.json`の代わりに）`proxy.conf.js`にプロキシ設定を用意し、次の例のように設定ファイルを指定してください。
 
-```
+<code-example format="javascript" language="javascript">
+
 const PROXY_CONFIG = [
     {
         context: [
@@ -413,27 +431,31 @@ const PROXY_CONFIG = [
 ]
 
 module.exports = PROXY_CONFIG;
-```
+
+</code-example>
 
 CLI設定ファイル`angular.json`で、JavaScriptプロキシ設定ファイルを指定してください。
 
-```
-...
+<code-example format="json" language="json">
+
+&hellip;
 "architect": {
   "serve": {
-    "builder": "@angular-devkit/build-angular:dev-server",
+    "builder": "&commat;angular-devkit/build-angular:dev-server",
     "options": {
       "browserTarget": "your-application-name:build",
       "proxyConfig": "src/proxy.conf.js"
     },
-...
-```
+&hellip;
+
+</code-example>
 
 ### プロキシのバイパス {@a bypass-the-proxy}
 
 必要に応じてプロキシをバイパスする必要がある場合、または送信前にリクエストを動的に変更する必要がある場合は、このJavaScriptの例に示すように、bypassオプションを追加してください。
 
-```
+<code-example format="javascript" language="javascript">
+
 const PROXY_CONFIG = {
     "/api/proxy": {
         "target": "http://localhost:3000",
@@ -449,22 +471,26 @@ const PROXY_CONFIG = {
 }
 
 module.exports = PROXY_CONFIG;
-```
+
+</code-example>
 
 ### コーポレートプロキシの使用 {@a using-corporate-proxy}
 
 もしコーポレートプロキシの背後で作業している場合は、ローカルネットワークの外部にあるURLへの要求はバックエンドが直接プロキシできません。
 この場合、エージェントを使用してコーポレートプロキシを介して要求をリダイレクトするようにバックエンドプロキシを設定することができます:
 
-<code-example language="sh">
+<code-example format="shell" language="shell">
+
 npm install --save-dev https-proxy-agent
+
 </code-example>
 
 環境変数`http_proxy`または`HTTP_PROXY`を定義した場合、`npm start`を実行した際にエージェントが自動的に追加されコーポレートプロキシを介して要求を渡します。
 
 JavaScript設定ファイルで次の内容を使用してください。
 
-```
+<code-example format="javascript" language="javascript">
+
 var HttpsProxyAgent = require('https-proxy-agent');
 var proxyConfig = [{
   context: '/api',
@@ -473,7 +499,7 @@ var proxyConfig = [{
 }];
 
 function setupForCorporateProxy(proxyConfig) {
-  var proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
+  var proxyServer = process.env.http_proxy &verbar;&verbar; process.env.HTTP_PROXY;
   if (proxyServer) {
     var agent = new HttpsProxyAgent(proxyServer);
     console.log('Using corporate proxy server: ' + proxyServer);
@@ -485,10 +511,13 @@ function setupForCorporateProxy(proxyConfig) {
 }
 
 module.exports = setupForCorporateProxy(proxyConfig);
-```
 
-{@a browser-compat}
+</code-example>
 
-## Configuring browser compatibility
+<!-- links -->
 
-See [browser support guide](guide/browser-support).
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-10-24

@@ -16,10 +16,10 @@ Web は視覚・運動障害をもつ方を含む、さまざまな方によっ�
 
 ## アクセシビリティのための属性
 
-Web 上でのアクセシビリティを構築するためには、セマンティックな意味情報が欠落しないように[ARIA 属性](https://developers.google.com/web/fundamentals/accessibility/semantics-aria)を設定します。
+Web 上でのアクセシビリティを構築するためには、セマンティックな意味情報が欠落しないように[Accessible Rich Internet Applications \(ARIA\) 属性](https://developers.google.com/web/fundamentals/accessibility/semantics-aria)を設定します。
 アクセシビリティ関連の属性の値を制御するためには [属性バインディング](guide/attribute-binding)テンプレート記法を使います。
 
-ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依存しています。Angular 内で ARIA 属性をバインドするためには接頭辞として `attr.` を使用してください。
+ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依存しています。Angular 内で ARIA 属性をバインドするためにはプレフィックスとして `attr.` を使用してください。
 
 <code-example format="html" language="html">
 
@@ -127,7 +127,10 @@ router.events.pipe(filter(e =&gt; e instanceof NavigationEnd)).subscribe(() =&gt
 
 ### Active links identification
 
-CSS classes applied to active `RouterLink` elements (usually via `RouterLinkActive`) provide a visual indication regarding as to which link is currently active. Such indication doesn't apply to blind or visually impaired users, in order to provide such information the `aria-current` attribute should be applied to the element as well (for more information see [MDN aria-current](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)).
+CSS classes applied to active `RouterLink` elements, such as `RouterLinkActive`, provide a visual cue to identify the active link.
+Unfortunately, a visual cue doesn't help blind or visually impaired users.
+Applying the `aria-current` attribute to the element can help identify the active link.
+For more information, see [Mozilla Developer Network \(MDN\) aria-current](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)).
 
 The `RouterLinkActive` directive provides the `ariaCurrentWhenActive` input which sets the `aria-current` to a specified value when the link becomes active.
 
@@ -153,7 +156,9 @@ The following example shows how to apply the `active-page` class to active links
     </nav>
 ```
 
-## 参考資料
+<!-- vale Angular.Angular_Spelling = NO -->
+
+## More information
 
 *   [Accessibility - Google Web Fundamentals](https://developers.google.com/web/fundamentals/accessibility)
 *   [ARIA specification and authoring practices](https://www.w3.org/TR/wai-aria/)
@@ -164,6 +169,8 @@ The following example shows how to apply the `active-page` class to active links
 *   [W3C - Web Accessibility Initiative](https://www.w3.org/WAI/people-use-web/)
 *   [Rob Dodson A11ycasts](https://www.youtube.com/watch?v=HtTyRajRuyY)
 *   [Angular ESLint](https://github.com/angular-eslint/angular-eslint#functionality) ではアクセシビリティ標準に適合しているかを確認するための助けとなる Lint のルールが提供されています。
+
+<!-- vale Angular.Angular_Spelling = YES -->
 
 書籍
 

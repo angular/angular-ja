@@ -1,6 +1,7 @@
 # リアクティブフォーム
 
-リアクティブフォームは、時間とともに値が変化するフォーム入力を処理するためのモデル駆動型アプローチを提供します。このガイドでは、基本的なフォームコントロールを作成および更新する方法、グループ内で複数のコントロールを使用する方法、フォームの値を検証する方法、実行時にコントロールを追加または削除できる動的フォームを作成する方法について説明します。
+リアクティブフォームは、時間とともに値が変化するフォーム入力を処理するためのモデル駆動型アプローチを提供します。
+このガイドでは、基本的なフォームコントロールを作成および更新する方法、グループ内で複数のコントロールを使用する方法、フォームの値を検証する方法、実行時にコントロールを追加または削除できる動的フォームを作成する方法について説明します。
 
 <div class="alert is-helpful">
 
@@ -492,176 +493,29 @@ _フォームバリデーション_は、ユーザーの入力が完全で正し
 
 #### クラス
 
-<table>
-
-  <tr>
-
-    <th>
-      クラス
-    </th>
-
-    <th>
-      詳細
-    </th>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>AbstractControl</code>
-    </td>
-
-    <td>
-
-      具象フォームコントロールクラスである`FormControl` と `FormGroup`、`FormArray`の抽象基底クラスです。共通のふるまいやプロパティを提供します。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormControl</code>
-    </td>
-
-    <td>
-
-      各フォームコントロールの値とステータスの有効性を管理します。`<input>` や `<select>`などのHTMLフォームコントロールに対応します。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormGroup</code>
-    </td>
-
-    <td>
-
-      `AbstractControl`インスタンスのグーループの値とステータスの有効性を管理します。グループのプロパティは子のコントロールを含んでいます。`FormGroup`がコンポーネントのトップレベルのフォームです。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormArray</code>
-    </td>
-
-    <td>
-
-    `AbstractControl`インスタンスをインデックスした配列の値とステータスの有効性を管理します。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormBuilder</code>
-    </td>
-
-    <td>
-
-      コントロールインスタンスを作成するファクトリーメソッドを提供するインジェクト可能なサービスです。
-
-    </td>
-
-  </tr>  
-
-</table>
+| クラス名             | 詳細 |
+|:---               |:---     |
+| `AbstractControl` | 具象フォームコントロールクラスである`FormControl` と `FormGroup`、`FormArray`の抽象基底クラスです。共通のふるまいやプロパティを提供します。                           |
+| `FormControl`     | 各フォームコントロールの値とステータスの有効性を管理します。`<input>` や `<select>`などのHTMLフォームコントロールに対応します。                                            |
+| `FormGroup`       | `AbstractControl`インスタンスのグーループの値とステータスの有効性を管理します。グループのプロパティは子のコントロールを含んでいます。`FormGroup`がコンポーネントのトップレベルのフォームです。 |
+| `FormArray`       | `AbstractControl`インスタンスをインデックスした配列の値とステータスの有効性を管理します。                                                                                     |
+| `FormBuilder`     | コントロールインスタンスを作成するファクトリーメソッドを提供する注入可能なサービスです。                                                                                                    |
+| `FormRecord`      | Tracks the value and validity state of a collection of `FormControl` instances, each of which has the same value type.                                                                  |
 
 #### ディレクティブ
 
-<table>
+| ディレクティブ名              | 詳細 |
+|:---                    |:---     |
+| `FormControlDirective` | スタンドアロンな`FormControl`インスタンスとフォームコントロール要素を同期させます。                       |
+| `FormControlName`      | `FormGroup`インスタンス内の`FormControl`とフォームコントロール要素を名前を使って同期させます。 |
+| `FormGroupDirective`   | `FormGroup`とDOM要素を同期させます。                                   |
+| `FormGroupName`        | ネストした`FormGroup`インスタンスとDOM要素と同期させます。                                      |
+| `FormArrayName`        | ネストした`FormArray`インスタンスとDOM要素を同期させます。                                      |
 
-  <tr>
+<!-- links -->
 
-    <th>
-      ディレクティブ
-    </th>
+<!-- external links -->
 
-    <th>
-      詳細
-    </th>
+<!-- end links -->
 
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormControlDirective</code>
-    </td>
-
-    <td>
-
-      スタンドアローンな`FormControl`インスタンスとフォームコントロール要素を同期させます。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormControlName</code>
-    </td>
-
-    <td>
-
-      `FormGroup`インスタンス内の`FormControl`とフォームコントロール要素を名前を使って同期させます。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormGroupDirective</code>
-    </td>
-
-    <td>
-
-      `FormGroup`とDOM要素を同期させます。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormGroupName</code>
-    </td>
-
-    <td>
-
-      ネストした`FormGroup`インスタンスとDOM要素と同期させます。
-
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td style="vertical-align: top">
-      <code>FormArrayName</code>
-    </td>
-
-    <td>
-
-      ネストした`FormArray`インスタンスとDOM要素を同期させます。
-
-    </td>
-
-  </tr>
-
-</table>
+@reviewed 2022-02-28

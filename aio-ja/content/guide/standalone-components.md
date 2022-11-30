@@ -1,13 +1,6 @@
-# スタンドアロンコンポーネントを使い始める
+# スタンドアロンコンポーネント入門
 
-<div class="alert is-important">
-
-スタンドアロンコンポーネント機能は、[開発者向けプレビュー](https://angular.jp/guide/releases#developer-preview)で利用できます。
-試していただくことは可能ですが、安定するまでに変更される可能性があります。
-
-</div>
-
-v14以降では、 **スタンドアロンコンポーネント** は Angular アプリケーションを構築するための簡略化された方法を提供します。スタンドアロンコンポーネント、ディレクティブ、パイプは、 `NgModule` の必要性を減らすことでオーサリングエクスペリエンスを効率化することを目的としています。既存のアプリケーションは、破壊的な変更を行うことなく、新しいスタンドアロンスタイルをオプションで段階的に採用できます。
+ **スタンドアロンコンポーネント** は Angular アプリケーションを構築するための簡略化された方法を提供します。スタンドアロンコンポーネント、ディレクティブ、パイプは、 `NgModule` の必要性を減らすことでオーサリングエクスペリエンスを効率化することを目的としています。既存のアプリケーションは、破壊的な変更を行うことなく、新しいスタンドアロンスタイルをオプションで段階的に採用できます。
 
 ## スタンドアロンコンポーネントの作成
 
@@ -98,16 +91,29 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-スタンドアロンのブートストラップオペレーションは、依存性の注入のために `Provider` のリストを明示的に構成することに基づいています。 ただし、既存のライブラリは、DI を構成するために `NgModule` に依存している場合があります。たとえば、Angular のルーターは  `RouterModule.forRoot()` ヘルパーを使用して、アプリケーションでルーティングをセットアップします。 `importProvidersFrom` ユーティリティを介して `bootstrapApplication` でこれらの既存の `NgModule` を使用できます。
+スタンドアロンのブートストラップオペレーションは、依存性の注入のために `Provider` のリストを明示的に構成することに基づいています。Angularが提供する `provide` プレフィックス付きの関数を使用すると、NgModuleをインポートせずに異なるシステムを構成することができます。たとえば、`provideRouter`はルーターを設定するために `RouterModule.forRoot` の代わりに使用されます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {
   providers: [
     {provide: BACKEND_URL, useValue: 'https://photoapp.looknongmodules.com/api'},
-    importProvidersFrom(
-      RouterModule.forRoot([/* ルーティング設定 */]),
-    ),
+    provideRouter([/* app routes */]),
     // ...
+  ]
+});
+```
+
+多くのサードパーティーライブラリも、この `provide` 機能の設定パターンをサポートするように更新されました。もし、ライブラリが DI 構成のために NgModule API だけを提供しているなら、 `importProvidersFrom` ユーティリティを使って、 `bootstrapApplication` や他のスタンドアロンコンテキストで使用することができます。
+
+```ts
+import {LibraryModule} from 'ngmodule-based-library';
+
+bootstrapApplication(PhotoAppComponent, {
+  providers: [
+    {provide: BACKEND_URL, useValue: 'https://photoapp.looknongmodules.com/api'},
+    importProvidersFrom(
+      LibraryModule.forRoot()
+    ),
   ]
 });
 ```
@@ -148,6 +154,26 @@ export const ADMIN_ROUTES: Route[] = [
 ];
 ```
 
+### Lazy loading and default exports
+
+When using `loadChildren` and `loadComponent`, the router understands and automatically unwraps dynamic `import()` calls with `default` exports. You can take advantage of this to skip the `.then()` for such lazy loading operations.
+
+```ts
+// In the main application:
+export const ROUTES: Route[] = [
+  {path: 'admin', loadChildren: () => import('./admin/routes')},
+  // ...
+];
+
+// In admin/routes.ts:
+export default [
+  {path: 'home', component: AdminHomeComponent},
+  {path: 'users', component: AdminUsersComponent},
+  // ...
+] as Route[];
+```
+
+
 ### ルートのサブセットへのサービスの提供
 
 `NgModule` (`loadChildren`) の遅延読み込み API は、ルートの子を遅延読み込みするときに、新しい「モジュール」インジェクターを作成します。この機能は、アプリケーション内のルートのサブセットにのみサービスを提供するのに役立つことがよくありました。 たとえば、 `/admin` の下のすべてのルートが `loadChildren` の境界を使用して範囲指定されている場合、管理者専用サービスはそれらのルートにのみ提供できます。問題のルートの遅延読み込みが不要であったとしても、これを行うには `loadChildren` API を使用する必要がありました。
@@ -163,8 +189,8 @@ export const ROUTES: Route[] = [
       {provide: ADMIN_API_KEY, useValue: '12345'},
     ],
     children: [
-      path: 'users', component: AdminUsersComponent,
-      path: 'teams', component: AdminTeamsComponent,
+      {path: 'users', component: AdminUsersComponent},
+      {path: 'teams', component: AdminTeamsComponent},
     ],
   },
   // ... その他のルーティング設定は
@@ -198,6 +224,8 @@ export const ADMIN_ROUTES: Route[] = [{
 ```
 
 すべての子ルート間で共有される `providers` をホストするためには、空のパスルートを使用することに注意してください。
+
+`importProvidersFrom` can be used to import existing NgModule-based DI configuration into route `providers` as well.
 
 ## 上級者向けトピック
 

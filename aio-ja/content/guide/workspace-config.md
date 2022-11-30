@@ -19,7 +19,6 @@ You can also override defaults set at the project level using the command line.
 | `schematics`     | このワークスペースの `ng generate` サブコマンドオプションのデフォルトをカスタマイズする [schematics](guide/glossary#schematic) のセット。[Generation schematics](#schematics) を参照してください。                                               |
 | `projects`       | Contains a subsection for each library or application in the workspace, with the per-project configuration options.                                                                                                       |
 
-
 `ng new app_name` で作成した最初のアプリケーションは "projects" の配下にあります。
 
 <code-example language="json">
@@ -37,7 +36,8 @@ You can also override defaults set at the project level using the command line.
 
 <div class="alert is-helpful">
 
-  **NOTE**: 設定ファイルの `projects` セクションは、ワークスペースの構成ファイルとは正確には対応していないことに注意してください。
+  **NOTE**: <br />
+  設定ファイルの `projects` セクションは、ワークスペースの構成ファイルとは正確には対応していないことに注意してください。
 
   *   `ng new` によって作成された最初のアプリケーションは、ワークスペースのファイル構造のトップレベルにあります。
   *   追加されたアプリケーション、そしてライブラリはワークスペース内の `projects` フォルダに入ります。
@@ -54,19 +54,12 @@ The following configuration properties are a set of options that customize the A
 
 | Property              | Details                                                                                       | Value type                                              |
 |:---                   |:---                                                                                           |:---                                                     |
-| `analytics`           | Share anonymous [usage data](cli/usage-analytics-gathering) with the Angular Team.            | `boolean` &verbar; `ci`                                 |
-| `analyticsSharing`    | A set of analytics sharing options.                                                           | [Analytics sharing options](#analytics-sharing-options) |
+| `analytics`           | Share anonymous [usage data](cli/analytics) with the Angular Team.            | `boolean` &verbar; `ci`                                 |
 | `cache`               | Control [persistent disk cache](cli/cache) used by [Angular CLI Builders](guide/cli-builder). | [Cache options](#cache-options)                         |
 | `schematicCollections`| A list of default schematics collections to use.                                              | `string[]`                                              |
 | `packageManager`      | The preferred package manager tool to use.                                                    | `npm` &verbar; `cnpm` &verbar; `pnpm` &verbar;`yarn`    |
 | `warnings`            | Control Angular CLI specific console warnings.                                                        | [Warnings options](#warnings-options)                   |
 
-### Analytics sharing options
-
-| Property   | Description                                                  | Value Type |
-| :--------- | :----------------------------------------------------------- | :--------- |
-| `tracking` | Analytics sharing info tracking ID.                          | `string`   |
-| `uuid`     | Analytics sharing info Universally Unique Identifier (UUID).   | `string`   |
 
 ### Cache options
 

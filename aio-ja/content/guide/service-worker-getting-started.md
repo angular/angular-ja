@@ -7,15 +7,17 @@
 
 [Angular Service Worker イントロダクション](guide/service-worker-intro)への基本的な理解があること
 
-
 ## アプリケーションにService Workerを追加する
 
 プロジェクトでAngular Service Workerを設定するには、CLIコマンド`ng add @angular/pwa`を使用します。
-必要なサポートファイルの設定とともに`@angular/service-worker`パッケージを追加することで、Service Workerを使用するようにアプリケーションを設定します。
+必要なサポートファイルの設定とともに`@angular/service-worker`パッケージを追加することで、
+Service Workerを使用するようにアプリケーションを設定します。
 
-```sh
-ng add @angular/pwa --project *project-name* 
-```
+<code-example format="shell" language="shell">
+
+ng add @angular/pwa --project &lt;project-name&gt;
+
+</code-example>
 
 上記のコマンドを実行すると、次の操作が完了します。
 
@@ -28,29 +30,20 @@ ng add @angular/pwa --project *project-name*
 5. インストール可能なプログレッシブウェブアプリケーション（PWA）をサポートするアイコンファイルをインストールします。 
 6. [`ngsw-config.json`](/guide/service-worker-config)というService Worker構成ファイルを作成します。このファイルは、キャッシュの動作やその他の設定を指定します。
 
-
 今度は、プロジェクトをビルドします。
 
-```sh
+<code-example format="shell" language="shell">
+
 ng build
-```
+
+</code-example>
 
 CLIプロジェクトはAngular Service Workerを使用するように設定されました。
 
-
 ## Service Workerを動かす: ツアー
 
-このセクションでは、サンプルアプリケーションを使用して、Service Workerを実際に動かします。
-
-### `http-server`を供給する
-
-`ng serve`はService Workerと連携しないので、プロジェクトをローカルでテストするためには、別のHTTPサーバーを使用する必要があります。任意のHTTPサーバーを使用できます。次の例では、npmから[http-server](https://www.npmjs.com/package/http-server)パッケージを使用しています。競合する可能性を減らし、古いコンテンツを配信することを避けるために、専用ポートでテストし、キャッシュを無効化してください。
-
-`http-server`でwebファイルを含むディレクトリを配信するために、次のコマンドを実行してください。
-
-```sh
-http-server -p 8080 -c-1 dist/<project-name>
-```
+このセクションでは、サンプルアプリケーションを使用して、
+Service Workerを実際に動かします。
 
 ### 最初の読み込み
 

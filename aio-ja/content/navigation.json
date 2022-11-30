@@ -307,6 +307,11 @@
               "title": "構造ディレクティブ",
               "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
               "translated": true
+            },
+            {
+              "url": "guide/directive-composition-api",
+              "title": "Directive composition API",
+              "tooltip": "Apply directive to host elements."
             }
           ]
         },
@@ -356,6 +361,12 @@
           "url": "guide/developer-guide-overview",
           "title": "概要",
           "tooltip": "Angularアプリケーションを構築するための開発者向けガイドの一覧です。"
+        },
+        {
+          "url": "guide/standalone-components",
+          "title": "スタンドアロンコンポーネント",
+          "tooltip": "Standalone components, directives, and pipes",
+          "translated": true
         },
         {
           "title": "変更検知",
@@ -466,6 +477,12 @@
           "url": "guide/http",
           "title": "HTTPクライアント",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
+          "translated": true
+        },
+        {
+          "url": "guide/image-directive",
+          "title": "画像の最適化",
+          "tooltip": "Performant images with the Angular image directive.",
           "translated": true
         },
         {
@@ -925,12 +942,6 @@
           "tooltip": "Create a template-driven form using directives and Angular template syntax."
         },
         {
-          "url": "guide/image-directive-setup",
-          "title": "NgOptimizedImageの設定",
-          "tooltip": "Angularの画像ディレクティブを設定します。",
-          "translated": true
-        },
-        {
           "title": "Angularライブラリ",
           "tooltip": "Extending Angular with shared libraries.",
           "children": [
@@ -962,32 +973,13 @@
       ]
     },
     {
-      "title": "機能プレビュー",
-      "tooltip": "Angularの機能プレビューとAPIs",
-      "children": [
-        {
-          "url": "guide/standalone-components",
-          "title": "スタンドアロンコンポーネント",
-          "tooltip": "スタンドアロンコンポーネント、ディレクティブ、およびパイプ",
-          "translated": true
-        },
-        {
-          "url": "guide/image-directive",
-          "title": "画像ディレクティブ",
-          "tooltip": "Angularの画像ディレクティブを使用したパフォーマンスの良い画像表示",
-          "translated": true
-        }
-      ]
-    },
-    {
-      "title": "リリース情報",
+      "title": "アップデートとリリース",
       "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
       "children": [
         {
-          "url": "guide/releases",
-          "title": "リリースプラクティス",
-          "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
-          "translated": true
+          "url": "guide/update-to-version-15",
+          "title": "Update Angular to the latest version",
+          "tooltip": "Update your Angular application to the latest version."
         },
         {
           "url": "guide/roadmap",
@@ -996,15 +988,15 @@
           "translated": true
         },
         {
-          "url": "guide/browser-support",
-          "title": "ブラウザサポート",
-          "tooltip": "ブラウザサポートとポリフィルのガイド",
+          "url": "guide/releases",
+          "title": "リリースプラクティス",
+          "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
           "translated": true
         },
         {
-          "url": "guide/update-to-latest-version",
-          "title": "バージョン14にアップデートする",
-          "tooltip": "あなたのアプリケーションをバージョン14にアップデートするためのサポート",
+          "url": "guide/browser-support",
+          "title": "ブラウザサポート",
+          "tooltip": "ブラウザサポートとポリフィルのガイド",
           "translated": true
         },
         {
@@ -1271,12 +1263,6 @@
               "tooltip": "CLIツール、コマンド、および構文の紹介",
               "url": "cli",
               "translated": true
-            },
-            {
-              "title": "利用状況の解析",
-              "tooltip": "管理者向けに、ユーザーから利用状況分析を収集するためのガイド。",
-              "url": "cli/usage-analytics-gathering",
-              "translated": true
             }
           ]
         },
@@ -1471,11 +1457,6 @@
           "url": "https://blog.angular.io/",
           "title": "Blog",
           "tooltip": "Angular Blog"
-        },
-        {
-          "url": "analytics",
-          "title": "Usage Analytics",
-          "tooltip": "Angular Usage Analytics"
         }
       ]
     },

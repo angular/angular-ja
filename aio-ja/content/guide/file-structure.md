@@ -68,13 +68,10 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | :--------------------- | :------------------------------------------|
 | `app/`                 | アプリケーションのロジックやデータが定義されているコンポーネントファイルが含まれています。詳しくは[後述](#app-src)を参照してください。|
 | `assets/`              | 画像ファイルやその他のアセットファイルなどアプリケーションをビルドした時にそのままコピーされるべきものが格納されます。 |
-| `environments/`        | 特定のターゲット環境向けのビルド設定を持ちます。デフォルトでは名前のない標準開発環境と本番("prod")環境が用意されています。追加でターゲット環境設定を定義することができます。 |
 | `favicon.ico`          | ブックマークバーで利用されるアプリケーションのアイコンです。|
 | `index.html`           | 誰かがサイトを訪れた際に表示されるメインのHTMLページです。アプリケーションをビルドする時にCLIは自動的にすべてのJavaScriptとCSSファイルを追加するため、基本的には`<script>`や`<link>`タグを手で足す必要はありません。 |
 | `main.ts`              | アプリケーションのメインエントリーポイントです。アプリケーションを[JIT compiler](guide/glossary#jit)でコンパイルし、アプリケーションのルートモジュール(AppModule)をブートストラップしてブラウザで走らせます。[AOT compiler](guide/aot-compiler)を使うこともできます。コードを変える必要はなく、CLIの`build`と`serve`コマンドに`--aot`フラグをつけるだけで利用できます。 |
-| `polyfills.ts`         | ブラウザサポートのためのpolyfillスクリプトを提供します。|
 | `styles.sass`          | プロジェクトに適用するスタイルをもつCSSファイルを記載します。拡張子はプロジェクトに設定したスタイルプロセッサーを反映します。|
-| `test.ts`              | Angular特有の設定をもつ単体テストのメインエントリーポイントです。基本的にこのファイルを編集する必要はありません。|
 
 <div class="alert is-helpful">
 
@@ -104,8 +101,6 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 
 | アプリケーション固有の設定ファイル    | 目的 |
 | :--------------------- | :------------------------------------------|
-| `.browserslistrc`         | ターゲットブラウザとさまざまなフロントエンドツールのNode.jsのバージョンの共有設定をします。詳しくは[Browserslist on GitHub](https://github.com/browserslist/browserslist) を参照してください。 |
-| `karma.conf.js`      | アプリケーション固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定。 |
 | `tsconfig.app.json`    | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、アプリケーション固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) と [Angular Compiler Options](guide/angular-compiler-options)を参照してください。 |
 | `tsconfig.spec.json`   | アプリケーションテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
 
@@ -122,7 +117,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 次のコマンドは、すべてのワークスペース全体の構成ファイルを使用してワークスペースを作成しますが、ルートレベルのアプリケーションは作成しません。
 
 <code-example language="bash">
-ng new my-workspace --create-application="false"
+ng new my-workspace --no-create-application
 </code-example>
 
 その後、ワークスペース内でユニークな名前でアプリケーションやライブラリを生成できます。
@@ -161,11 +156,17 @@ CLIを使用して（ `ng generate library my-lib` などのコマンドを使�
 | ライブラリソースファイル | 目的 |
 | :------------------- | :----------------------------------------------------------------------------|
 | `src/lib`            | ライブラリプロジェクトのロジックとデータが含まれています。 アプリケーションプロジェクトと同様に、ライブラリプロジェクトには、コンポーネント、サービス、モジュール、ディレクティブ、およびパイプを含めることができます。 |
-| `src/test.ts`        | 単体テストの主な入り口で、ライブラリ固有の設定がいくつかあります。通常このファイルを編集する必要はありません。 |
 | `src/public-api.ts`  | ライブラリからエクスポートされたすべてのファイルを指定します。 |
-| `karma.conf.js`      | ライブラリ固有の [Karma](https://karma-runner.github.io/2.0/config/configuration-file.html) の設定 |
 | `ng-package.json`    | ライブラリを構築するために [ng-packagr](https://github.com/ng-packagr/ng-packagr) によって使用される設定ファイル。 |
 | `package.json`       | このライブラリに必要な [npmパッケージの依存関係](guide/npm-packages) を設定します。 |
 | `tsconfig.lib.json`  | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、ライブラリ固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
 | `tsconfig.lib.prod.json`  | Library-specific [TypeScript](https://www.typescriptlang.org/) configuration that is used when building the library in production mode.              |
 | `tsconfig.spec.json` | ライブラリテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-10-24

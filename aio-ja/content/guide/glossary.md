@@ -588,7 +588,7 @@ Angularはこれらのフックメソッドを次の順序で呼び出します:
 
 JavaScript(ECMAScript)では、各ファイルはモジュールであり、ファイルで定義されたすべてのオブジェクトはそのモジュールに属します。オブジェクトを公開するようエクスポートし、公開のオブジェクトを他のモジュールで使うためにインポートできます。
 
-Angularは、JavaScriptモジュールのコレクション(ライブラリとも呼ばれます)として公開されます。Angularの各ライブラリ名は`@angular`の接頭辞で始まります。[npmパッケージマネージャー](https://docs.npmjs.com/getting-started/what-is-npm)でAngularライブラリをインストールし、JavaScriptの`import`宣言でそれらの一部をインポートします。
+Angularは、JavaScriptモジュールのコレクション(ライブラリとも呼ばれます)として公開されます。Angularの各ライブラリ名は`@angular`のプレフィックスで始まります。[npmパッケージマネージャー](https://docs.npmjs.com/getting-started/what-is-npm)でAngularライブラリをインストールし、JavaScriptの`import`宣言でそれらの一部をインポートします。
 
 [NgModule](#ngmodule)と比較しましょう。
 

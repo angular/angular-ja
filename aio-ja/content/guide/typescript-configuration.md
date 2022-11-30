@@ -31,35 +31,14 @@ TypeScriptとAngularには、型チェック機能と生成される出力を設
 
 <div class="alert is-helpful">
 
-TypeScript設定ファイルの詳細は、公式の[TypeScript wiki](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+TypeScript設定ファイルの詳細は、公式の[TypeScript ハンドブック](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
 設定の継承について詳しくは、[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
 
 </div>
 
 Angular アプリケーションの最初の `tsconfig.json` は通常、次の例のようになります：
 
-<code-example lang="json" header="tsconfig.json" linenums="false">
-{
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  }
-}
-</code-example>
-
+<code-example header="tsconfig.json" path="getting-started/tsconfig.0.json"></code-example>
 
 {@a noImplicitAny}
 
@@ -121,16 +100,12 @@ Angularアプリケーションの `node_modules/@angular/core/`フォルダに�
 
 </div>
 
-### lib.d.ts
+### `lib``
 
-TypeScriptには、 `lib.d.ts`という特別な型定義ファイルが含まれています。このファイルには、JavaScriptのランタイムとDOMに存在するさまざまな一般的なJavaScript構文のアンビエント宣言が含まれています。
+TypeScriptにはデフォルトで型宣言ファイルのセットが含まれています。
+これらのファイルには、JavaScriptのランタイムやDOMに存在する、さまざまな一般的なJavaScriptの構成要素のためのアンビエントな宣言が含まれています。
 
-TypeScriptは`--target`の値に基づいて、ターゲットが`es6`なら`Promise`のような
-_追加の_アンビエント宣言を追加します。
-
-デフォルトのターゲットは`es2015`です。もし`es5`をターゲットにしていれば、新しい型定義を宣言ファイルリストに含める必要があります。
-
-<code-example path="getting-started/tsconfig.0.json" header="tsconfig.json (lib excerpt)" region="lib"></code-example>
+詳細については、TypeScriptガイドの[lib](https://www.typescriptlang.org/tsconfig#lib)を参照してください。
 
 ### 型定義ファイルのインストール
 
@@ -155,9 +130,17 @@ declarations are only meant for testing, then only the `tsconfig.spec.json` file
 For instance, to install typings for `chai` you run `npm install @types/chai --save-dev` and then
 update `tsconfig.spec.json` to add `"chai"` to the list of `types`.
 
+<a id="target"></a>
 
-{@a target}
+### `target`
 
-### *target*
+デフォルトでは、ターゲットは `ES2022` です。ECMAの構文を制御するには、[Browserslist](https://github.com/browserslist/browserslist)設定ファイルを使います。
+詳しくは、[ブラウザ互換性の設定](/guide/build#configuring-browser-compatibility)ガイドを参照してください。
 
-By default, the target is `es2020`, which is supported in modern browsers.
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-10-24

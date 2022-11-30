@@ -1,9 +1,7 @@
 # アニメーションの遷移とトリガー
 
-あなたは[イントロダクション](guide/animations)ページでAngularアニメーションの基本について学びました。
-
-このガイドでは、`*`(ワイルドカード)や`void`などの特別な遷移状態についてより深く述べ、これらの特別な状態がビューに入る、またはビューから出る要素にどのように使用されるかを示します。
-この章では、複数のアニメーショントリガー、アニメーションコールバック、およびキーフレームを使用するシーケンスベースのアニメーションについても説明します。
+This guide goes into depth on special transition states such as the `*` wildcard and `void`. It shows how these special states are used for elements entering and leaving a view.
+This section also explores multiple animation triggers, animation callbacks, and sequence-based animation using keyframes.
 
 ## 定義済み状態とワイルドカードマッチング
 
@@ -103,13 +101,13 @@ transition ( ':leave', [ ... ] );  // alias for * => void
 ビューに入ろうとする要素はDOM内にまだ存在しないため、ターゲットにすることは難しくなります。
 したがって、ビューに挿入、削除されるHTML要素をターゲットにするには、エイリアス`:enter`と`:leave`を使用します。
 
-### \*ngIf と \*ngFor で :enter と :leave を使用する
+### `*ngIf` と `*ngFor` で :enter と :leave を使用する
 
 `*ngIf`または`*ngFor`のビューがページに置かれたときに`:enter`の遷移が実行され、それらのビューがページから削除されたときに`:leave`が実行されます。
 
 **NOTE**: <br />
 Entering/leaving behaviors can sometime be confusing.
-As a rule of thumb consider that any element being added to the DOM by Angular passes via the `:enter` transition, but only elements being directly removed from the DOM by Angular pass via the `:leave` transition \(For example, an element's view is removed from the DOM because its parent is being removed from the DOM or the app's route has changed, then the element will not pass via the `:leave` transition\).
+As a rule of thumb consider that any element being added to the DOM by Angular passes via the `:enter` transition. Only elements being directly removed from the DOM by Angular pass via the `:leave` transition. For example, an element's view is removed from the DOM because its parent is being removed from the DOM.
 
 </div>
 
@@ -146,7 +144,9 @@ The HTML template contains the following code.
 
 上記のコードスニペットでは、HTMLテンプレートは`<div>`要素を、`isOpen`のステータス式と、予想される値`true`と`false`をもつ`openClose`という名前のトリガーにバインドします。このパターンは、`open`と`close`のような2つの名前付き状態を作成する方法の代わりになります。
 
-コンポーネントのコード内、`animations:`プロパティの下の`@Component`メタデータにおいて、状態が`true`(ここでは "open"を意味する)と評価されるとき、関連するHTML要素の高さはワイルドカードのスタイルまたはデフォルトのものなります。この場合、アニメーションを開始する前に要素がすでに持っていた高さを使用します。要素が"closed"のときは、要素は高さ0までアニメーションして非表示になります。
+Inside the `@Component` metadata under the `animations:` property, when the state evaluates to `true`, the associated HTML element's height is a wildcard style or default.
+In this case, the animation uses whatever height the element already had before the animation started.
+When the element is `closed`, the element gets animated to a height of 0, which makes it invisible.
 
 <code-example path="animations/src/app/open-close.component.2.ts" header="src/app/open-close.component.ts" region="trigger-boolean" language="typescript">
 </code-example>
@@ -177,13 +177,14 @@ The HTML template contains the following code.
 
 `@.disabled`バインディングがtrueの場合、`@childAnimation`トリガーは実行されません。
 
-HTMLテンプレート内の要素が`@.disabled`ホストバインディングを使ってアニメーションを無効にすると、すべての内部の要素でもアニメーションは無効になります。
-1つの要素上の複数のアニメーションを選択的に無効にすることはできません。
+When an element within an HTML template has animations turned off using the `@.disabled` host binding, animations are turned off on all inner elements as well.
+You can't selectively turn off multiple animations on a single element.<!-- vale off -->
 
-ただし、次のいずれかの方法で、選択した子アニメーションを無効な親に対して実行することはできます:
+次のいずれかの方法で、選択した子アニメーションを無効な親に対して実行することはできます:
 
 * 親アニメーションは、[`query()`](api/animations/query)関数を使用して、HTMLテンプレートの無効な領域にある内部要素を集収することができます。
 これらの要素はまだアニメーションできます。
+<!-- vale on --> 
 
 * 子アニメーションは親によってクエリーされ、その後で`animateChild()`関数でアニメーション化できます。
 
@@ -210,14 +211,13 @@ HTMLテンプレートでは、`@triggerName.start`と`@triggerName.done`から`
 <code-example path="animations/src/app/open-close.component.3.html" header="src/app/open-close.component.html" region="callbacks">
 </code-example>
 
-アニメーションコールバックの潜在的用途は、データベースルックアップなどの低速API呼び出しをカバーすることです。
-たとえば、**InProgress**ボタンを設定して、バックエンドシステムの操作が終了するまで脈動、または他の視覚的な動きをする独自のループアニメーションを作成することができます。
+A potential use for animation callbacks could be to cover for a slow API call, such as a database lookup.
+For example, an **InProgress** button can be set up to have its own looping animation while the backend system operation finishes.
 
-そして、現在動作しているアニメーションが終了すると別のアニメーションを呼び出すことができます。
-たとえば、API呼び出しが完了すると、ボタンは `inProgress`状態から`closed`状態になります。
+Another animation can be called when the current animation finishes.
+For example, the button goes from the `inProgress` state to the `closed` state when the API call is completed.
 
-アニメーションは、それがないのと比べると操作がより速いとエンドユーザーに*知覚させる*ことができます。
-結果的に、サーバーコールのスピードを向上させたり、信頼性の低いネットワーク接続などの制御できない状況を補うよりもむしろ、シンプルなアニメーションはユーザーを幸せに保つための費用対効果の高い方法になります。
+An animation can influence an end user to *perceive* the operation as faster, even when it is not.
 
 コールバックはデバッグツールとして役立ちます。たとえば、`console.warn()`と組み合わせて、ブラウザの開発者JavaScriptコンソールでアプリケーションの進行状況を表示することができます。
 次のコードスニペットは、元の例(`open`と`closed`の2つの状態をもつボタン)のコンソールログ出力を作成します。
@@ -228,13 +228,15 @@ HTMLテンプレートでは、`@triggerName.start`と`@triggerName.done`から`
 
 ## キーフレーム
 
-さきほどのセクションでは、シンプルな2状態の遷移を解説しました。こんどは、*キーフレーム*を使用して複数のステップを順番に実行するアニメーションを作成します。
+To create an animation with multiple steps run in sequence, use *keyframes*.
 
-Angularの`keyframe()`関数は、CSSのキーフレームに似ています。キーフレームは1つのタイミングセグメント内でいくつかのスタイルの変更ができるようにします。
-たとえば、ボタンはフェードするかわりに、1回の2秒間のタイムスパンで色を数回変えることができます。
+Angular's `keyframe()` function allows several style changes within a single timing segment.
+For example, the button, instead of fading, could change color several times over a single 2-second time span.
 
 <div class="lightbox">
-  <img src="generated/images/guide/animations/keyframes-500.png" alt="keyframes">
+
+<img alt="keyframes" src="generated/images/guide/animations/keyframes-500.png">
+
 </div>
 
 この色の変化をコードにすると次のようになります。
@@ -285,14 +287,21 @@ Angularの`keyframe()`関数は、CSSのキーフレームに似ています。�
 Angularのアニメーションサポートは、Webアニメーション上に構築されているため、ブラウザがアニメーション化可能なすべてのプロパティをアニメートできます。
 これには、位置、サイズ、変形、色、ボーダーなどが含まれます。W3Cは、[CSS Transitions](https://www.w3.org/TR/css-transitions-1/)ページにアニメーション可能なプロパティのリストを保持しています。
 
-数値による位置プロパティの場合は、値を引用符で囲んだ文字列として適切な接尾辞で指定して単位を定義します:
+数値による位置プロパティの場合は、値を引用符で囲んだ文字列として適切なサフィックスで指定して単位を定義します:
 
 * 50ピクセル: `'50px'`
 * 相対的なフォントサイズ: `'3em'`
 * パーセント: `'100%'`
 
-You can also provide the value as a number (thus not providing a unit), in such cases Angular assumes a default unit of pixels, or `px`.
-Expressing 50 pixels as `50` is the same as saying `'50px'` (note that the string `"50"` would instead be considered invalid).
+You can also provide the value as a number. In such cases Angular assumes a default unit of pixels, or `px`.
+Expressing 50 pixels as `50` is the same as saying `'50px'`.
+
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+The string `"50"` would instead not be considered valid.
+
+</div>
 
 ### ワイルドカードを使用した自動的なプロパティの計算
 
@@ -319,3 +328,5 @@ Angulerの`keyframes()`関数では、単一のトランジション内に複数
 * [複雑なアニメーションシーケンス](guide/complex-animation-sequences)
 * [再利用可能なアニメーション](guide/reusable-animations)
 * [ルーティング遷移のアニメーション](guide/route-animations)
+
+@reviewed 2022-10-11

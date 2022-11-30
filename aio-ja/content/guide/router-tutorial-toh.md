@@ -19,12 +19,12 @@
 * コンポーネントへの移動する（*Heroes* は "Heroes List" にリンク）。
 * ルートパラメータを含む（"Hero Detail" へのルーティング中に Hero `id` を渡す）。
 * 子ルート（*Crisis Center* は独自のルートをもつ）。
-* `CanActivate` ガード（ルートアクセスのチェック）。
-* `CanActivateChild` ガード（子ルートアクセスのチェック）。
-* `CanDeactivate` ガード（保存されていない変更を破棄する許可を求める）。
-* `Resolve` ガード（ルートデータのプリフェッチ）。
+* `canActivate` ガード（ルートアクセスのチェック）。
+* `canActivateChild` ガード（子ルートアクセスのチェック）。
+* `canDeactivate` ガード（保存されていない変更を破棄する許可を求める）。
+* `resolve` ガード（ルートデータのプリフェッチ）。
 * `NgModule` の遅延読み込み。
-* `CanLoad` ガード（フィーチャーモジュールアセットをロードする前のチェック）。
+* `canLoad` ガード（フィーチャーモジュールアセットをロードする前のチェック）。
 
 このガイドは、アプリケーションを段階的に構築しているかのように一連のマイルストーンとして進行しますが、基本的な[Angularの概念](guide/architecture)に精通していることを前提としています。
 Angularの一般的な概要については、[はじめに](start)を参照してください。より詳細な概要については、[Tour of Heroes](tutorial)チュートリアルを参照してください。
@@ -110,7 +110,7 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
 
 "OK"をクリックして変更内容を失うか、"Cancel"をクリックして編集を続けることができます。
 
-この動作の背景には、ルーターの `CanDeactivate` ガードがあります。
+この動作の背景には、ルーターの `canDeactivate` ガードがあります。
 このガードは、現在のビューから離れる前に、クリアをしたりユーザーの許可を得たりする機会を与えてくれます。
 
 "Admin"と"Login"ボタンは、本ガイドで後述するルーターの他の機能を示しています。
@@ -318,7 +318,7 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
   技術的には、`pathMatch = 'full'` は、URLに*残っている*、マッチしていない部分が`''`にマッチした場合にルートヒットとなります。
   この例では、リダイレクトはトップレベルのルートにあるので、*残っている*URLと*全体*のURLは同じものになります。
 
-  他に設定可能な `pathMatch` の値は `'prefix'` で、これは、残りのURLがリダイレクトルートの接頭辞のパスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
+  他に設定可能な `pathMatch` の値は `'prefix'` で、これは、残りのURLがリダイレクトルートのプレフィックスのパスで始まる場合に、リダイレクトルートにマッチするようにルーターに指示します。
   `pathMatch` 値が `'prefix'` であれば、すべてのURLが `''` にマッチするので、このサンプルアプリケーションでは適用されません。
 
   `'prefix'` に設定して、`Go to sidekicks` ボタンをクリックしてみてください。
@@ -603,7 +603,7 @@ ng generate module my-module --routing
 
 ルーティングモジュールはしばしば `AppRoutingModule` と呼ばれ、ルートモジュールやフィーチャーモジュールのルーティング設定の代わりになります。
 
-ルーティングモジュールは、アプリケーションが成長したときや、特化したガードやリゾルバサービスを含む構成のときに役立ちます。
+ルーティングモジュールは、アプリケーションが成長したときや、特化したガードやリゾルバ関数を含む構成のときに役立ちます。
 
 開発者の中には、構成が最小限の場合にはルーティングモジュールをスキップして、ルーティング設定をコンパニオンモジュール (たとえば、`AppModule`) に直接マージする人もいます。
 
@@ -1736,9 +1736,9 @@ _リンクパラメーター配列_ の後に、`ActivatedRoute` に `relativeTo
 パスは `../` 構文を使って1つ上の階層に上がっていることに注意してください。
 現在のクライシスの `id` が `3` であれば、クライシスリストに戻る結果のパスは `/crisis-center/;id=3;foo=foo` となります。
 
-{@a named-outlets}
+<a id="named-outlets"></a>
 
-### 名前付きアウトレットに複数のルートを表示する
+### 名前付きアウトレットに複数のルートを表示する {@a displaying-multiple-routes-in-named-outlets}
 
 クライシスセンターに連絡する手段をユーザーに提供することにしました。
 ユーザーが "Contact" ボタンをクリックすると、ポップアップビューにメッセージを表示します。
@@ -1952,33 +1952,33 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 | Guard interfaces                                  | Details |
 |:---                                               |:---     |
-| [`CanActivate`](api/router/CanActivate)           | To mediate navigation *to* a route                                  |
-| [`CanActivateChild`](api/router/CanActivateChild) | To mediate navigation *to* a child route                            |
-| [`CanDeactivate`](api/router/CanDeactivate)       | To mediate navigation *away* from the current route                 |
-| [`Resolve`](api/router/Resolve)                   | To perform route data retrieval *before* route activation           |
-| [`CanLoad`](api/router/CanLoad)                   | To mediate navigation *to* a feature module loaded *asynchronously* |
-| [`CanMatch`](api/router/CanMatch)                 | To control whether a `Route` should be used at all, even if the `path` matches the URL segment. |
+| [`canActivate`](api/router/CanActivateFn)           | To mediate navigation *to* a route                                  |
+| [`canActivateChild`](api/router/CanActivateChildFn) | To mediate navigation *to* a child route                            |
+| [`canDeactivate`](api/router/CanDeactivateFn)       | To mediate navigation *away* from the current route                 |
+| [`resolve`](api/router/ResolveFn)                   | To perform route data retrieval *before* route activation           |
+| [`canLoad`](api/router/CanLoadFn)                   | To mediate navigation *to* a feature module loaded *asynchronously* |
+| [`canMatch`](api/router/CanMatchFn)                 | To control whether a `Route` should be used at all, even if the `path` matches the URL segment. |
 
 ルーティング階層の各レベルで複数のガードをもつことができます。
-ルーターは、一番深い子ルートから上に向かって、最初に `CanDeactivate` ガードをチェックします。
-次に、`CanActivate` と `CanActivateChild` のガードを、一番上から一番下の子ルートまでチェックします。
-フィーチャーモジュールが非同期にロードされる場合は、モジュールがロードされる前に `CanLoad` ガードがチェックされます。
+ルーターは、一番深い子ルートから上に向かって、最初に `canDeactivate` ガードをチェックします。
+次に、`canActivate` と `canActivateChild` のガードを、一番上から一番下の子ルートまでチェックします。
+フィーチャーモジュールが非同期にロードされる場合は、モジュールがロードされる前に `canLoad` ガードがチェックされます。
 
-With the exception of `CanMatch`, if *any* guard returns false, pending guards that have not completed are canceled, and the entire navigation is canceled. If a `CanMatch` guard returns `false`, the `Router` continues
+With the exception of `canMatch`, if *any* guard returns false, pending guards that have not completed are canceled, and the entire navigation is canceled. If a `canMatch` guard returns `false`, the `Router` continues
 processing the rest of the `Routes` to see if a different `Route` config matches the URL. You can think of this 
-as though the `Router` is pretending the `Route` with the `CanMatch` guard did not exist.
+as though the `Router` is pretending the `Route` with the `canMatch` guard did not exist.
 
 次のいくつかのセクションでは、複数の例を紹介します。
 
-{@a can-activate-guard}
+<a id="can-activate-guard"></a>
 
-### `CanActivate`: 認証を必要とする
+### `canActivate`: 認証を必要とする
 
 アプリケーションでは、ユーザーが誰であるかに基づいてフィーチャーエリアへのアクセスを制限することがよくあります。
 認証されたユーザーや特定の役割をもつユーザーにのみアクセスを許可することができます。
 また、ユーザーのアカウントが有効になるまで、アクセスをブロックしたり制限したりすることもあるでしょう。
 
-`CanActivate` ガードは、これらのナビゲーションビジネスルールを管理するツールです。
+`canActivate` ガードは、これらのナビゲーションビジネスルールを管理するツールです。
 
 #### アドミン機能モジュールの追加
 
@@ -2172,7 +2172,7 @@ The admin feature file structure looks like this:
 
 {@a guard-admin-feature}
 
-#### アドミンフィーチャーをガードする
+#### アドミン機能をガードする
 
 現在、クライシスセンター内のすべてのルートは誰でもアクセス可能です。
 新しいアドミンフィーチャーは、認証されたユーザーのみがアクセスできるようにする必要があります。
@@ -2180,18 +2180,22 @@ The admin feature file structure looks like this:
 匿名のユーザーがアドミンエリアに入ろうとしたときにログインページにリダイレクトするために、
 `canActivate()` ガードメソッドを書きます。
 
-`auth` フォルダに `AuthGuard` を生成します。
+Create a new file named `auth.guard.ts` function in the `auth` folder. The `auth.guard.ts` file will contain the `authGuard` function.
 
-<code-example language="sh">
-  ng generate guard auth/auth
+<!-- TODO(atscott): update schematics to generate functional guards
+<code-example format="shell" language="shell">
+
+ng generate guard auth/auth
+
 </code-example>
+ -->
 
 基本的なことを説明するために、この例ではコンソールにログを出力し、すぐに true を`返し`、ナビゲーションを続行できるようにしています：
 
 <code-example path="router/src/app/auth/auth.guard.1.ts" header="src/app/auth/auth.guard.ts (excerpt)"></code-example>
 
-次に、`admin-routing.module.ts` を開き、`AuthGuard` クラスをインポートします。
-それを参照する `canActivate` ガードプロパティで admin ルートを更新します：
+Next, open `admin-routing.module.ts`, import the `authGuard` function, and
+update the admin route with a `canActivate` guard property that references it:
 
 <code-example path="router/src/app/admin/admin-routing.module.2.ts" header="src/app/admin/admin-routing.module.ts (guarded admin route)" region="admin-route"></code-example>
 
@@ -2199,11 +2203,12 @@ The admin feature file structure looks like this:
 
 {@a teach-auth}
 
-#### `AuthGuard` で認証を行う
+#### Authenticate with `authGuard`
 
-`AuthGuard` に認証の真似ごとをさせます。
+Make the `authGuard` mimic authentication.
 
-`AuthGuard` はユーザーをログインさせ、現在のユーザーに関する情報を保持できるアプリケーションサービスを呼び出す必要があります。`auth` フォルダに新しい `AuthService` を作成します：
+The `authGuard` should call an application service that can log in a user and retain information about the current user.
+Generate a new `AuthService` in the `auth` folder:
 
 <code-example language="sh">
   ng generate service auth/auth
@@ -2223,7 +2228,7 @@ The admin feature file structure looks like this:
 
 </div>
 
-`AuthGuard` が `AuthService` を呼び出すように修正しました。
+`authGuard` が `AuthService` を呼び出すように修正しました。
 
 <code-example path="router/src/app/auth/auth.guard.2.ts" header="src/app/auth/auth.guard.ts (v2)"></code-example>
 
@@ -2275,46 +2280,42 @@ The admin feature file structure looks like this:
 
 <a id="can-match-guard"></a>
 
-### `CanMatch`: Controlling `Route` matching based on application conditions
+### `canMatch`: Controlling `Route` matching based on application conditions
 
-As an alternative to using a `CanActivate` guard which redirects the user to a new page if they do not have access, you can instead
-use a `CanMatch` guard to control whether the `Router` even attempts to activate a `Route`. This allows you to have
+As an alternative to using a `canActivate` guard which redirects the user to a new page if they do not have access, you can instead
+use a `canMatch` guard to control whether the `Router` even attempts to activate a `Route`. This allows you to have
 multiple `Route` configurations which share the same `path` but are matched based on different conditions. In addition, this approach
 can allow the `Router` to match the wildcard `Route` instead.
-
-<code-example path="router/src/app/auth/auth.guard.2.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-match"></code-example>
 
 <code-example path="router/src/app/admin/admin-routing.module.2.ts" header="src/app/admin/admin-routing.module.ts (guarded admin route)" region="can-match"></code-example>
 
 {@a can-activate-child-guard}
 
-### `CanActivateChild`: 子ルートのガード
+### `canActivateChild`: 子ルートのガード
 
-`CanActivateChild` ガードで子ルートを保護することもできます。
-`CanActivateChild` ガードは `CanActivate` ガードと似ています。
+`canActivateChild` ガードで子ルートを保護することもできます。
+`canActivateChild` ガードは `CanActivate` ガードと似ています。
 主な違いは、子ルートがアクティブになる前に実行されることです。
 
 アドミンフィーチャーモジュールを不正なアクセスから保護しました。
 また、フィーチャーモジュール_内_の子ルートも保護する必要があります。
 
-`AuthGuard` を拡張して、`admin` ルートの間を移動するときに保護するようにします。
-`auth.guard.ts` を開き、`CanActivateChild` インターフェースを、ルーターパッケージからインポートしたトークンに追加します。
+Extend the `authGuard` to protect when navigating between the `admin` routes.
+Open `auth.guard.ts` and add the `CanActivateChildFn` interface to the imported tokens from the router package.
 
-次に、`canActivate()` メソッドと同じ引数： `ActivatedRouteSnapshot` と `RouterStateSnapshot`を取る、`canActivateChild()` メソッドを実装します。
-`canActivateChild()` メソッドは、非同期のチェックでは `Observable<boolean|UrlTree>` や `Promise<boolean|UrlTree>` を、同期のチェックでは `boolean` や `UrlTree` を返すことができます。
-これは、ユーザーがアドミンフィーチャーモジュールにアクセスできるようにするためには `true` を、代わりにログインページにリダイレクトするためには `UrlTree` を返します：
+Next, indicate the method acts as a `canActivateChild` guard as well by adding `|CanActivateChildFn` to the type.
 
 <code-example path="router/src/app/auth/auth.guard.3.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-activate-child"></code-example>
 
-`AuthGuard` を各ルートに追加する代わりに、
-同じ `AuthGuard` を `component-less` の admin ルートに追加して、他のすべての子ルートを一度に保護します。
+`authGuard` を各ルートに追加する代わりに、
+同じ `authGuard` を `component-less` の admin ルートに追加して、他のすべての子ルートを一度に保護します。
 
 <code-example path="router/src/app/admin/admin-routing.module.3.ts" header="src/app/admin/admin-routing.module.ts (excerpt)" region="can-activate-child"></code-example>
 
 {@a can-deactivate-guard}
 
 
-### `CanDeactivate`: 保存されていない変更の処理
+### `canDeactivate`: 保存されていない変更の処理
 
 "Heroes" のワークフローに戻ると、アプリケーションはヒーローに対するすべての変更を検証なしですぐに受け入れます。
 
@@ -2329,7 +2330,7 @@ can allow the `Router` to match the wildcard `Route` instead.
 
 非同期的にサーバーが回答を返すのを待つ間、ナビゲーションを停止する必要があります。
 
-`CanDeactivate` ガードは、保存されていない変更をどうするか、どのように進めるかを決めるのに役立ちます。
+`canDeactivate` ガードは、保存されていない変更をどうするか、どのように進めるかを決めるのに役立ちます。
 
 {@a cancel-save}
 
@@ -2367,13 +2368,17 @@ can allow the `Router` to match the wildcard `Route` instead.
 
 これは、ユーザーが最終的に何をすべきかを決定するときに解決する `Observable` を返します。変更を破棄してナビゲートする（`true`）か、保留中の変更を保持してクライシス管理エディタに留まる（`false`）かのどちらかです。
 
-{@a CanDeactivate}
+<a id="canDeactivate"></a>
 
-コンポーネント&mdash;あらゆるコンポーネントに `canDeactivate()` メソッドがあるかどうかをチェックするガードを生成します。
+Create a guard that checks for the presence of a `canDeactivate()` method in a component —any component.
 
-<code-example language="sh">
-  ng generate guard can-deactivate
+<!-- TODO: Update CLI schematic for guards
+<code-example format="shell" language="shell">
+
+ng generate guard can-deactivate
+
 </code-example>
+-->
 
 次のコードをガードに貼り付けます。
 
@@ -2382,7 +2387,7 @@ can allow the `Router` to match the wildcard `Route` instead.
 ガードはどのコンポーネントが deactivate メソッドを持っているかを知る必要はありませんが、`CrisisDetailComponent` コンポーネントが `canDeactivate()` メソッドを持っていることを検出して、それを呼び出すことができます。
 ガードがどのコンポーネントの deactivate メソッドの詳細を知らないことで、ガードの再利用が可能になります。
 
-あるいは、`CrisisDetailComponent` のために、コンポーネント固有の `CanDeactivate` ガードを作ることもできます。
+あるいは、`CrisisDetailComponent` のために、コンポーネント固有の `canDeactivate` ガードを作ることもできます。
 `canDeactivate()` メソッドは、外部の情報にアクセスする必要がある場合に備えて、`component` の現在のインスタンス、現在の`ActivatedRoute`、`RouterStateSnapshot`を提供します。
 これは、このコンポーネントに対してのみこのガードを使用したい場合や、コンポーネントのプロパティを取得したり、ルーターがコンポーネントからのナビゲーションを許可するかどうかを確認する必要がある場合に便利です。
 
@@ -2429,22 +2434,26 @@ can allow the `Router` to match the wildcard `Route` instead.
 クライシスが見つからない場合、ルーターはクライシスリストビューに戻ってナビゲートします。
 
 ルートをアクティブにする前に、これらすべてが最初に処理されると、よりよい体験ができるかもしれません。
-`CrisisDetailResolver` サービスは、ルートをアクティブにして `CrisisDetailComponent` を作成する前に、`Crisis` を取得したり、`Crisis` が存在しない場合には離れた場所に移動したりすることができます。
+`crisisDetailResolver` サービスは、ルートをアクティブにして `CrisisDetailComponent` を作成する前に、`Crisis` を取得したり、`Crisis` が存在しない場合には離れた場所に移動したりすることができます。
 
-`Crisis Center` 機能エリア内に `CrisisDetailResolver` サービスファイルを生成します。
+Create a `crisis-detail-resolver.ts` file within the `Crisis Center` feature area. This file will contain the `crisisDetailResolver` function.
 
-<code-example language="sh">
-  ng generate service crisis-center/crisis-detail-resolver
+<!-- TODO: Update CLI schematic for resolvers
+<code-example format="shell" language="shell">
+
+ng generate service crisis-center/crisis-detail-resolver
+
 </code-example>
+ -->
 
-<code-example path="router/src/app/crisis-center/crisis-detail-resolver.service.1.ts" header="src/app/crisis-center/crisis-detail-resolver.service.ts (generated)"></code-example>
+<code-example header="src/app/crisis-center/crisis-detail-resolver.ts" path="router/src/app/crisis-center/crisis-detail-resolver.1.ts"></code-example>
 
-`CrisisDetailComponent.ngOnInit()` にあるクライシスの取得ロジックの関連部分を、`CrisisDetailResolverService` に移動します。
+`CrisisDetailComponent.ngOnInit()` にあるクライシスの取得ロジックの関連部分を、`crisisDetailResolver` に移動します。
 `Crisis` モデル、`CrisisService`、`Router` をインポートして、クライシスを取得できなかった場合に別の場所に移動できるようにします。
 
-明示的に、`Crisis` 型の `Resolve` インターフェースを実装してください。
+Be explicit and use the `ResolveFn` type with a type of `Crisis`.
 
-`CrisisService` と `Router` をインジェクトして、`resolve()` メソッドを実装します。
+Inject the `CrisisService` and `Router`.Inject the `CrisisService` and `Router`.
 このメソッドは `Promise`、`Observable`、または同期的な戻り値を返すことができます。
 
 `CrisisService.getCrisis()` メソッドは、データが取得されるまでルートがロードされないようにするために、observableを返します。
@@ -2453,9 +2462,9 @@ can allow the `Router` to match the wildcard `Route` instead.
 `getCrisis()` メソッドが返す Observable から最初の値を取得した後に `Observable` が完了するようにするには、引数に`1`を指定して`take` 演算子を使用します。
 
 有効な `Crisis` を返さない場合は、空の `Observable` を返し、`CrisisDetailComponent` への進行中のナビゲーションをキャンセルして、`CrisisListComponent` へとユーザーを戻します。
-更新されたリゾルバサービスは次のようになります：
+更新されたリゾルバ関数は次のようになります：
 
-<code-example path="router/src/app/crisis-center/crisis-detail-resolver.service.ts" header="src/app/crisis-center/crisis-detail-resolver.service.ts"></code-example>
+<code-example header="src/app/crisis-center/crisis-detail-resolver.ts" path="router/src/app/crisis-center/crisis-detail-resolver.ts"></code-example>
 
 このリゾルバを `crisis-center-routing.module.ts` でインポートし、`resolve` オブジェクトを `CrisisDetailComponent` のルート構成に追加します。
 
@@ -2469,10 +2478,7 @@ can allow the `Router` to match the wildcard `Route` instead.
 
 次の3つの重要なポイントに注意してください：
 
-1. ルーターの `Resolve` インターフェースはオプションです。
-`CrisisDetailResolverService` はbase classを継承していません。
-ルーターはそのメソッドを探し、見つかった場合はそれを呼び出します。
-
+1.  The router's `ResolveFn` is optional.
 1. ルーターは、ユーザーが離れてナビゲートする可能性があるあらゆるケースでリゾルバを呼び出すので、ユースケースごとにコーディングする必要はありません。
 
 1. 少なくとも1つのリゾルバで空の `Observable` を返すと、ナビゲーションがキャンセルされます。
@@ -2513,9 +2519,7 @@ can allow the `Router` to match the wildcard `Route` instead.
 
   </code-pane>
 
-  <code-pane header="crisis-detail-resolver.service.ts" path="router/src/app/crisis-center/crisis-detail-resolver.service.ts">
-
-  </code-pane>
+  <code-pane header="crisis-detail-resolver.ts" path="router/src/app/crisis-center/crisis-detail-resolver.ts"></code-pane>
 
   <code-pane header="crisis.service.ts" path="router/src/app/crisis-center/crisis.service.ts">
 
@@ -2553,7 +2557,7 @@ Guards
 [フラグメント](https://en.wikipedia.org/wiki/Fragment_identifier)は、ページ上の特定の要素を指し、
 `id` 属性で識別されます。
 
-`AuthGuard` を更新して、別のルートに移動した後も残る `session_id` クエリを提供します。
+`authGuard` を更新して、別のルートに移動した後も残る `session_id` クエリを提供します。
 
 `anchor` 要素を追加して、ページの特定のポイントにジャンプできるようにしました。
 
@@ -2656,9 +2660,9 @@ Guards
 
 {@a can-load-guard}
 
-### `CanLoad`: フィーチャーモジュールの不正な読み込みを防ぐ
+### `canLoad`: フィーチャーモジュールの不正な読み込みを防ぐ
 
-あなたはすでに `AdminModule` を `CanActivate` ガードで保護しており、権限のないユーザーがアドミン機能エリアにアクセスするのを防いでいます。
+あなたはすでに `AdminModule` を `canActivate` ガードで保護しており、権限のないユーザーがアドミン機能エリアにアクセスするのを防いでいます。
 ユーザーが認証されていない場合は、ログインページにリダイレクトされます。
 
 しかし、ユーザーがどのコンポーネントにもアクセスできない場合でも、ルーターは `AdminModule` をロードしています。
@@ -2666,25 +2670,19 @@ Guards
 
 `CanLoad` ガードを追加すると、ユーザーがログインしていて、_かつ_、アドミン機能エリアにアクセスしようとしたときにのみ、`AdminModule` をロードします。
 
-既存の `AuthGuard` には、`CanLoad` ガードをサポートするための必須ロジックが `checkLogin()` メソッドにすでに含まれています。
+既存の `authGuard` には、`canLoad` ガードをサポートするための必須ロジックが `checkLogin()` メソッドにすでに含まれています。
 
-`auth.guard.ts` を開きます。
-`CanLoad` インターフェースを `@angular/router` からインポートします。
-これを `AuthGuard` クラスの `implements` リストに追加します。
-そして、次のように `canLoad()` を実装します：
+1.  Open `auth.guard.ts`.
+1.  Import the `CanLoadFn` interface from `@angular/router`.
+1.  Add it to the `authGuard` function's type.
 
-<code-example path="router/src/app/auth/auth.guard.ts" header="src/app/auth/auth.guard.ts (CanLoad guard)" region="canLoad"></code-example>
+<code-example header="src/app/auth/auth.guard.ts (canLoad guard)" path="router/src/app/auth/auth.guard.ts" region="canLoad"></code-example>
 
-ルーターは、`canLoad()` メソッドの `route` パラメータに、意図した宛先のURLを設定します。
-`checkLogin()` メソッドは、ユーザーがログインしたらそのURLにリダイレクトします。
-
-では、`AuthGuard` を `AppRoutingModule` にインポートして、`AuthGuard` を `admin` ルートの `canLoad`
-配列プロパティに追加します。
-完成したadminルートは次のようになります：
-
+Now add the `authGuard` to the `canLoad` array property for the `admin` route.
+The completed admin route looks like this:
 <code-example path="router/src/app/app-routing.module.5.ts" region="admin" header="app-routing.module.ts (lazy admin route)"></code-example>
 
-{@a preloading}
+<a id="preloading"></a>
 
 ### Preloading: フィーチャーエリアのバックグラウンドローディング {@a preloading-background-loading-of-feature-areas}
 
@@ -2770,16 +2768,16 @@ Guards
 
 `http://localhost:4200` にアクセスすると、起動と同時に `/heroes` ルートがロードされ、`HeroesModule` がロードされた直後に、ルーターが `CrisisCenterModule` のロードを開始します。
 
-現在、`CanLoad` がブロックしているため、`AdminModule` はプリロードされません。
+現在、`canLoad` がブロックしているため、`AdminModule` はプリロードされません。
 
 {@a preload-canload}
 
-#### `CanLoad` で子ルートのプリロードをブロックする
+#### `canLoad` で子ルートのプリロードをブロックする
 
-`PreloadAllModules` 戦略は、[CanLoad](#can-load-guard)ガードで保護されたフィーチャーエリアをロードしません。
+`PreloadAllModules` 戦略は、[canLoad](#can-load-guard)ガードで保護されたフィーチャーエリアをロードしません。
 
-数ステップ前に `AdminModule` のルートに `CanLoad` ガードを追加して、ユーザーが認証されるまでそのモジュールのロードをブロックしました。
-この `CanLoad` ガードは、子ルートをロードするためのプリロード戦略よりも優先されます。
+数ステップ前に `AdminModule` のルートに `canLoad` ガードを追加して、ユーザーが認証されるまでそのモジュールのロードをブロックしました。
+この `canLoad` ガードは、子ルートをロードするためのプリロード戦略よりも優先されます。
 
 モジュールをプリロードすると同時に不正なアクセスを防ぎたい場合は、`canLoad()`ガードメソッドを削除して、[canActivate()](#can-activate-guard)ガードだけ使用してください。
 

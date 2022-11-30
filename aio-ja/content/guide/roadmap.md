@@ -1,6 +1,6 @@
 # Angularのロードマップ
 
-<p class="roadmap-last-updated">Last updated: 2022-05-23</p>
+<p class="roadmap-last-updated">Last updated: 2022-11-05</p>
 
 Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。
 同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 
@@ -14,69 +14,68 @@ Angularは、Google内からも、より広範なオープンソースコミュ�
 
 ## 進行中
 
-### Implement APIs for optional NgModules
+### ハイドレーションとサーバーサイドレンダリングのユーザービリティの向上に関する検討
 
-In the process of making Angular simpler, we are working on introducing APIs that allow developers to initialize applications, instantiate components, and use the router without NgModules.
-Angular v14 introduces developer preview of the APIs for standalone components, directives, and pipes. In the next few quarters we'll collect feedback from developers and finalize the project making the APIs stable. As the next step we will work on improving use cases such as `TestBed`, Angular elements, etc.
+このプロジェクトの最初のステップとして、非破壊的なハイドレーションを実装します。この技術により、サーバーサイドでレンダリングされたDOMを再利用し、再レンダリングではなく、イベントリスナーをアタッチし、Angularランタイムが必要とするデータ構造を作成するだけになります。次のステップとして、ダイナミックに発展中である部分的ハイドレーションとResumabilityに関する領域をさらに探求するつもりです。それぞれのアプローチにはトレードオフがあり、Angularにとってもっとも最適な長期的なソリューションが何であるか、情報に基づいた決断をしたいと思います。
 
-### Improve image performance
+### ランタイムパフォーマンスの改善とZone.jsのオプショナル化
 
-The [Aurora](https://web.dev/introducing-aurora/) and the Angular teams are working on the implementation of an image directive that aims to improve [Core Web Vitals](https://web.dev/vitals). Currently, the project is in a prototyping phase and the teams are validating the image directive with partners.
+この取り組みの一環として、Angularのリアクティブモデルを見直し、Zone.jsをオプションにして実行時のパフォーマンスを向上させることにしました。デフォルトでは、Angularはグローバルに変更検知を行い、コンポーネントツリー全体をトラバースしています。私たちは、影響を受けるコンポーネントにのみ変更検知を実行するオプションを検討しています。こうすることで、フレームワークをシンプルにし、デバッグを改善し、アプリケーションのバンドルサイズを小さくすることができます。さらに、現在Zone.jsがサポートしていない組み込みのasync/await構文を利用することができます。
 
-### Investigate micro frontend architecture for scalable development processes
+### スタンドアロン・コンポーネントのドキュメントとSchematicsの改善
 
-We conducted a series of 40 interviews to understand the requirements for micro-frontend architecture of the community. We followed up with a broader community survey. As the next step, we'll share analysis of the results publicly.
+スタンドアロンコンポーネントを使用して起動されたアプリケーションのための `ng new` コレクションの開発に取り組んでいます。さらに、簡略化されたスタンドアロンコンポーネントのAPIに関するドキュメントのギャップを埋めつつあります。
 
-### Investigate modern bundles
+### 依存性の注入のデバッグAPIを導入
 
-To improve development experience by speeding up build times research modern bundles.
-As part of the project experiment with [esbuild](https://esbuild.github.io) and other open source solutions, compare them with the state of the art tooling in Angular CLI, and report the findings. In Angular v14 we're releasing an [experimental support](https://github.com/angular/angular-cli/pull/22995) for esbuild. Next, the team will focus on validating the new prototype and implementing watch and Sass support.
+AngularとAngular DevToolsのデバッグユーティリティを改善するために、依存性の注入ランタイムにアクセスするためのAPIに取り組みます。プロジェクトの一部として、私たちは、インジェクター階層と、関連するプロバイダー間の依存オブジェクトを探索することを可能にするデバッグメソッドを公開する予定です。
 
-### Modern CSS
+### Language Serviceによるスタンドアロンインポートの効率化
 
-The Web ecosystem evolves constantly and we want to reflect the latest modern standards in Angular. In this project we aim to provide guidelines on using modern CSS features in Angular to ensure developers follow best practices for layout, styling, etc.
+この取り組みの一環として、テンプレートが依存するスタンドアロンコンポーネントの自動インポートを実装する予定です。また、より小さなアプリケーションバンドルを可能にするために、Language Serviceでは未使用のインポートの自動削除を提案します。
 
-### Support adding directives to host elements
+### モダンなバンドルの調査
 
-A [long-standing feature request](https://github.com/angular/angular/issues/8785) is to add the ability to add directives to host elements.
-The feature lets developers augment their own components with additional behaviors without using inheritance.
-The project requires substantial effort in terms of the definition of APIs, semantics, and implementation.
+ビルド時間を短縮して開発体験を向上させるために、Angular CLIで作成されるJavaScriptバンドルを改善するためのオプションを探索します。
+その一環として、[esbuild](https://esbuild.github.io)や他のオープンソースソリューションを試し、Angular CLIの最新ツールと比較し、その結果を報告する予定です。Angular v15では、実験的に `ng build` と `ng build --watch` でesbuildをサポートしています。安定版として自信を持ってリリースできるまで、ソリューションを検討し続けていきます。
 
-### Better stack traces
+### 新しいCDKプリミティブ
 
-The Angular and the Chrome DevTools are working together to enable more readable stack traces for error messages.
+[Combobox](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox)のWAI-ARIAデザインパターンに基づいたカスタムコンポーネントの作成を容易にするために、新しいCDKプリミティブの作成に取り組んでいます。Angular v14ではこのプロジェクトの一環として安定した[menu and dialog primitives](https://material.angular.io/cdk/categories) が導入され、v15では [Listbox](https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox) が導入されました。
 
-### New CDK primitives
+### Angularコンポーネントのアクセシビリティ
 
-We are working on new CDK primitives to facilitate creating custom components based on the WAI-ARIA design patterns for [Listbox](https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox) and [Combobox](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox). Angular v14 introduced stable [menu and dialog primitives](https://material.angular.io/cdk/categories) as part of this project.
-
-### Enhanced Angular Material components by integrating MDC Web
-
-[MDC Web](https://material.io/develop/web) is a library created by the Google Material Design team that provides reusable primitives for building Material Design components.
-The Angular team is incorporating these primitives into Angular Material.
-Using MDC Web aligns Angular Material more closely with the Material Design specification, expand accessibility, improve component quality, and improve the velocity of our team.
-
-### Angular component accessibility
-
-We are evaluating components in Angular Material against accessibility standards such as WCAG and working to fix any issues that arise from this process.
+Angular MaterialのコンポーネントをWCAGなどのアクセシビリティ基準に照らして評価し、そこから発生する問題の修正に取り組んでいます。
 
 ### Documentation refactoring
 
 Ensure all existing documentation fits into a consistent set of content types. Update excessive use of tutorial-style documentation into independent topics. We want to ensure the content outside the main tutorials is self-sufficient without being tightly coupled to a series of guides. In Q2 2022, we refactored the [template content](https://github.com/angular/angular/pull/45897). The next steps are to introduce better structure for components and dependency injection.
 
+### Investigate micro frontend architecture for scalable development processes
+
+For the past couple of quarters we understood and defined the problem space. We are going to follow up with a series of blog posts on best practices when developing applications at scale.
+
+### Update getting started tutorial
+
+We're working on updating the Angular getting started experience with standalone components. As part of this initiative, we'd like to create a new textual and video tutorials.
+
+### Improvements in the image directive
+
+We released the Angular [image directive](https://developer.chrome.com/blog/angular-image-directive/) as stable in v15. We introduced a new fill mode feature that enables images to fit within their parent container rather than having explicit dimensions. Currently, this feature is in [developer preview](https://angular.io/guide/releases#developer-preview). Next we'll be working on collecting feedback from developers before we promote fill mode as stable.
+
 ## 将来
 
-### Explore hydration and server-side rendering usability improvements
+### Token-based theming APIs
 
-As part of this effort we'll explore the problem space of hydration with server-side rendering, different approaches, and opportunities for Angular. As outcome of this project we'll have validation of the effort as well as a plan for action.
+To provide better customization of our Angular material components and enable Material 3 capabilities, we'll be collaborating with Google's Material Design team on defining token-based theming APIs.
+
+### Modernize Angular's unit testing experience
+
+In v12 we revisited the Angular end-to-end testing experience by replacing Protractor with modern alternatives such as Cypress, Nightwatch, and Webdriver.io. Next we'd like to tackle `ng test` to modernize Angular's unit testing experience.
 
 ### Revamp performance dashboards to detect regressions
 
 We have a set of benchmarks that we run against every code change to ensure Angular aligns with our performance standards. To ensure the framework’s runtime does not regress after a code change, we need to refine some of the existing infrastructure the dashboards step on.
-
-### Zone.jsのオプトアウトでのフレームワーク機能のフル活用
-
-Zone.jsをAngularアプリケーションからオプショナルにするための計画を設計して実装します。これにより、フレームワークを簡素化し、デバッグを改善し、アプリケーションバンドルのサイズを縮小します。さらに、これにより、現在Zone.jsでサポートされていないネイティブのasync/await構文を利用できるようになります。
 
 ### ngc を tsc プラグインディストリビューションとして使用することによるビルドのパフォーマンス向上
 
@@ -89,10 +88,6 @@ Webアプリケーションの一般的な問題は、初期ロード時間が�
 ### 将来のRxJSの変更（v7以降）にスムーズに対応できるようにする
 
 Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
-
-### Introduce dependency injection debugging APIs
-
-To improve the debugging utilities of Angular and Angular DevTools, we'll work on APIs that provide access the dependency injection runtime. As part of the project we'll expose debugging methods that allow us to explore the injector hierarchy and the dependencies across their associated providers.
 
 ### Support two-dimensional drag-and-drop
 
@@ -108,6 +103,44 @@ As part of this project we'd like to implement mixed orientation support for the
   </span>
 </summary>
 <div class="details-content">
+
+### Improve image performance
+
+*Completed Q4 2022*
+
+The [Aurora](https://web.dev/introducing-aurora/) and the Angular teams are working on the implementation of an image directive that aims to improve [Core Web Vitals](https://web.dev/vitals). We shipped a stable version of the image directive in v15.
+
+### Modern CSS
+
+*Completed Q4 2022*
+
+The Web ecosystem evolves constantly and we want to reflect the latest modern standards in Angular. In this project we aim to provide guidelines on using modern CSS features in Angular to ensure developers follow best practices for layout, styling, etc. We shared official guidelines for layout and as part of the initiative stopped publishing flex layout. Learn [more on our blog](https://blog.angular.io/modern-css-in-angular-layouts-4a259dca9127).
+
+### Support adding directives to host elements
+
+*Completed Q4 2022*
+
+A [long-standing feature request](https://github.com/angular/angular/issues/8785) is to add the ability to add directives to host elements. The feature lets developers augment their own components with additional behaviors without using inheritance. In v15 we shipped our directive composition API, which enables enhancing host elements with directives.
+
+### Better stack traces
+
+*Completed Q4 2022*
+
+The Angular and the Chrome DevTools are working together to enable more readable stack traces for error messages. In v15 we [released improved](https://twitter.com/angular/status/1578807563017392128) relevant and linked stack traces. As a lower priority initiative, we'll be exploring how to make the stack traces friendlier by providing more accurate call frame names for templates.
+
+### Enhanced Angular Material components by integrating MDC Web
+
+*Completed Q4 2022*
+
+[MDC Web](https://material.io/develop/web) is a library created by the Google Material Design team that provides reusable primitives for building Material Design components.
+The Angular team is incorporating these primitives into Angular Material.
+Using MDC Web aligns Angular Material more closely with the Material Design specification, expand accessibility, improve component quality, and improve the velocity of our team.
+
+### Implement APIs for optional NgModules
+
+*Completed Q4 2022*
+
+In the process of making Angular simpler, we are working on [introducing APIs](https://angular.io/guide/standalone-components) that allow developers to initialize applications, instantiate components, and use the router without NgModules. Angular v14 introduces developer preview of the APIs for standalone components, directives, and pipes. In the next few quarters we'll collect feedback from developers and finalize the project making the APIs stable. As the next step we will work on improving use cases such as `TestBed`, Angular elements, etc.
 
 ### Allow binding to protected fields in templates
 

@@ -41,30 +41,42 @@ index dfe430c705..888c07a3f2 100644
  
            // Skip if blank or in the ignored words list
 diff --git a/aio/package.json b/aio/package.json
-index 61c85c90d9..77a0c1948b 100644
+index a3b0fedf9a..73a3209536 100644
 --- a/aio/package.json
 +++ b/aio/package.json
-@@ -163,6 +163,7 @@
+@@ -143,6 +143,7 @@
      "lighthouse-logger": "^1.3.0",
      "lodash": "^4.17.21",
      "lunr": "^2.3.9",
-+    "lunr-languages": "1.4.0",
++    "lunr-languages": "1.10.0",
      "npm-run-all": "^4.1.5",
      "protractor": "~7.0.0",
-     "puppeteer": "10.2.0",
+     "puppeteer-core": "10.2.0",
 diff --git a/aio/yarn.lock b/aio/yarn.lock
-index 7350b27a42..e38e1e1e87 100644
+index 1c43d5b323..68e7f301ea 100644
 --- a/aio/yarn.lock
 +++ b/aio/yarn.lock
-@@ -8515,6 +8515,11 @@ lru_map@^0.3.3:
+@@ -9913,6 +9913,11 @@ lru_map@^0.3.3:
    resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.3.3.tgz#b5c8351b9464cbd750335a79650a0ec0e56118dd"
    integrity sha512-Pn9cox5CsMYngeDbmChANltQl+5pi6XmTrraMSzhPmMBbmgcxmqWry0U3PGapCU1yB4/LqCcom7qhHZiF/jGfQ==
  
-+lunr-languages@1.4.0:
-+  version "1.4.0"
-+  resolved "https://registry.yarnpkg.com/lunr-languages/-/lunr-languages-1.4.0.tgz#42abb12aa81447d1ece5aa35676adcdf40a3e8a8"
-+  integrity sha512-YWfZDExJN/MJEVE/DbM4AuVRLsqeHi+q3wmECMsWjGIOkd5mr9DUNos7fv8f5do9VLRMYXIzFjn+N4+KPI9pQA==
++lunr-languages@1.10.0:
++  version "1.10.0"
++  resolved "https://registry.yarnpkg.com/lunr-languages/-/lunr-languages-1.10.0.tgz#2afe9fff47b435d9bc74bd372fb923dbf8ee1990"
++  integrity sha512-BBjKKcwrieJlzwwc9M5H/MRXGJ2qyOSDx/NXYiwkuKjiLOOoouh0WsDzeqcLoUWcX31y7i8sb8IgsZKObdUCkw==
 +
  lunr@^2.3.9:
    version "2.3.9"
    resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
+diff --git a/aio/BUILD.bazel b/aio/BUILD.bazel
+index d67502afae..32972bf625 100644
+--- a/aio/BUILD.bazel
++++ b/aio/BUILD.bazel
+@@ -168,6 +168,7 @@ APPLICATION_DEPS = [
+     "@aio_npm//@types/lunr",
+     "@aio_npm//@types/trusted-types",
+     "@aio_npm//lunr",
++    "@aio_npm//lunr-languages",
+     "@aio_npm//rxjs",
+     "@aio_npm//safevalues",
+     "@aio_npm//tslib",

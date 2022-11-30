@@ -1,13 +1,6 @@
 # Getting started with standalone components
 
-<div class="alert is-important">
-
-The standalone component feature is available for [developer preview](https://angular.io/guide/releases#developer-preview).
-It's ready for you to try, but it might change before it is stable.
-
-</div>
-
-In v14 and higher, **standalone components** provide a simplified way to build Angular applications. Standalone components, directives, and pipes aim to streamline the authoring experience by reducing the need for `NgModule`s. Existing applications can optionally and incrementally adopt the new standalone style without any breaking changes.
+**Standalone components** provide a simplified way to build Angular applications. Standalone components, directives, and pipes aim to streamline the authoring experience by reducing the need for `NgModule`s. Existing applications can optionally and incrementally adopt the new standalone style without any breaking changes.
 
 ## Creating standalone components
 
@@ -98,16 +91,29 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-The standalone bootstrap operation is based on explicitly configuring a list of `Provider`s for dependency injection. However, existing libraries may rely on `NgModule`s for configuring DI. For example, Angular’s router uses the `RouterModule.forRoot()` helper to set up routing in an application. You can use these existing `NgModule`s in `bootstrapApplication` via the `importProvidersFrom` utility:
+The standalone bootstrap operation is based on explicitly configuring a list of `Provider`s for dependency injection. In Angular, `provide`-prefixed functions can be used to configure different systems without needing to import NgModules. For example, `provideRouter` is used in place of `RouterModule.forRoot` to configure the router:
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {
   providers: [
     {provide: BACKEND_URL, useValue: 'https://photoapp.looknongmodules.com/api'},
-    importProvidersFrom(
-      RouterModule.forRoot([/* app routes */]),
-    ),
+    provideRouter([/* app routes */]),
     // ...
+  ]
+});
+```
+
+Many third party libraries have also been updated to support this `provide`-function configuration pattern. If a library only offers an NgModule API for its DI configuration, you can use the `importProvidersFrom` utility to still use it with `bootstrapApplication` and other standalone contexts:
+
+```ts
+import {LibraryModule} from 'ngmodule-based-library';
+
+bootstrapApplication(PhotoAppComponent, {
+  providers: [
+    {provide: BACKEND_URL, useValue: 'https://photoapp.looknongmodules.com/api'},
+    importProvidersFrom(
+      LibraryModule.forRoot()
+    ),
   ]
 });
 ```
@@ -148,6 +154,25 @@ export const ADMIN_ROUTES: Route[] = [
 ];
 ```
 
+### Lazy loading and default exports
+
+When using `loadChildren` and `loadComponent`, the router understands and automatically unwraps dynamic `import()` calls with `default` exports. You can take advantage of this to skip the `.then()` for such lazy loading operations.
+
+```ts
+// In the main application:
+export const ROUTES: Route[] = [
+  {path: 'admin', loadChildren: () => import('./admin/routes')},
+  // ...
+];
+
+// In admin/routes.ts:
+export default [
+  {path: 'home', component: AdminHomeComponent},
+  {path: 'users', component: AdminUsersComponent},
+  // ...
+] as Route[];
+```
+
 ### Providing services to a subset of routes
 
 The lazy loading API for `NgModule`s (`loadChildren`) creates a new "module" injector when it loads the lazily loaded children of a route. This feature was often useful to provide services only to a subset of routes in the application. For example, if all routes under `/admin` were scoped using a `loadChildren` boundary, then admin-only services could be provided only to those routes. Doing this required using the `loadChildren` API, even if lazy loading of the routes in question was unnecessary.
@@ -163,8 +188,8 @@ export const ROUTES: Route[] = [
       {provide: ADMIN_API_KEY, useValue: '12345'},
     ],
     children: [
-      path: 'users', component: AdminUsersComponent,
-      path: 'teams', component: AdminTeamsComponent,
+      {path: 'users', component: AdminUsersComponent},
+      {path: 'teams', component: AdminTeamsComponent},
     ],
   },
   // ... other application routes that don't
@@ -198,6 +223,8 @@ export const ADMIN_ROUTES: Route[] = [{
 ```
 
 Note the use of an empty-path route to host `providers` that are shared among all the child routes.
+
+`importProvidersFrom` can be used to import existing NgModule-based DI configuration into route `providers` as well.
 
 ## Advanced topics
 

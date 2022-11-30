@@ -96,12 +96,12 @@ export async function syncSubmodule() {
 // copy robots.txt
 export async function copyRobots() {
   const src = resolve(aiojaDir, 'src/robots.txt');
-  const dest = resolve(outDir, 'aio/dist/robots.txt');
+  const dest = resolve(outDir, 'dist/bin/aio/build/robots.txt');
   await cpRf(src, dest);
 }
 
 // replace angular.io to angular.jp in sitemap.xml
 export async function modifySitemap() {
-  const sitemapPath = resolve(outDir, 'aio/dist/generated/sitemap.xml');
+  const sitemapPath = resolve(outDir, 'dist/bin/aio/build/generated/sitemap.xml');
   await sed(sitemapPath, 'angular.io', 'angular.jp');
 }

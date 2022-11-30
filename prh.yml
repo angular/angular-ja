@@ -160,10 +160,14 @@ rules:
   - expected: ユーザー体験
     pattern: ユーザーエクスペリエンス
 
-  - expected: 接頭辞
-    pattern: プレフィックス
+  - expected: プレフィックス
+    pattern: 接頭辞
 
-  - expected: 接尾辞
+  - expected: サフィックス
     pattern: 
-      - サフィックス
+      - 接尾辞
       - ポストフィックス
+
+  - expected: スタンドアロン
+    pattern:
+      - スタンドアローン

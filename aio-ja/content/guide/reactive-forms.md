@@ -499,14 +499,14 @@ _フォームバリデーション_は、ユーザーの入力が完全で正し
 | `FormControl`     | 各フォームコントロールの値とステータスの有効性を管理します。`<input>` や `<select>`などのHTMLフォームコントロールに対応します。                                            |
 | `FormGroup`       | `AbstractControl`インスタンスのグーループの値とステータスの有効性を管理します。グループのプロパティは子のコントロールを含んでいます。`FormGroup`がコンポーネントのトップレベルのフォームです。 |
 | `FormArray`       | `AbstractControl`インスタンスをインデックスした配列の値とステータスの有効性を管理します。                                                                                     |
-| `FormBuilder`     | コントロールインスタンスを作成するファクトリーメソッドを提供するインジェクト可能なサービスです。                                                                                                    |
+| `FormBuilder`     | コントロールインスタンスを作成するファクトリーメソッドを提供する注入可能なサービスです。                                                                                                    |
 | `FormRecord`      | Tracks the value and validity state of a collection of `FormControl` instances, each of which has the same value type.                                                                  |
 
 #### ディレクティブ
 
 | ディレクティブ名              | 詳細 |
 |:---                    |:---     |
-| `FormControlDirective` | スタンドアローンな`FormControl`インスタンスとフォームコントロール要素を同期させます。                       |
+| `FormControlDirective` | スタンドアロンな`FormControl`インスタンスとフォームコントロール要素を同期させます。                       |
 | `FormControlName`      | `FormGroup`インスタンス内の`FormControl`とフォームコントロール要素を名前を使って同期させます。 |
 | `FormGroupDirective`   | `FormGroup`とDOM要素を同期させます。                                   |
 | `FormGroupName`        | ネストした`FormGroup`インスタンスとDOM要素と同期させます。                                      |

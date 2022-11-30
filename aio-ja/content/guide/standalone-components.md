@@ -91,7 +91,7 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-スタンドアロンのブートストラップオペレーションは、依存性の注入のために `Provider` のリストを明示的に構成することに基づいています。Angularが提供する `provide` 接頭辞付きの関数を使用すると、NgModuleをインポートせずに異なるシステムを構成することができます。例えば、`provideRouter`はルーターを設定するために `RouterModule.forRoot` の代わりに使用されます。
+スタンドアロンのブートストラップオペレーションは、依存性の注入のために `Provider` のリストを明示的に構成することに基づいています。Angularが提供する `provide` プレフィックス付きの関数を使用すると、NgModuleをインポートせずに異なるシステムを構成することができます。たとえば、`provideRouter`はルーターを設定するために `RouterModule.forRoot` の代わりに使用されます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {

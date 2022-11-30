@@ -19,7 +19,7 @@ Web は視覚・運動障害をもつ方を含む、さまざまな方によっ�
 Web 上でのアクセシビリティを構築するためには、セマンティックな意味情報が欠落しないように[Accessible Rich Internet Applications \(ARIA\) 属性](https://developers.google.com/web/fundamentals/accessibility/semantics-aria)を設定します。
 アクセシビリティ関連の属性の値を制御するためには [属性バインディング](guide/attribute-binding)テンプレート記法を使います。
 
-ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依存しています。Angular 内で ARIA 属性をバインドするためには接頭辞として `attr.` を使用してください。
+ARIA の仕様は DOM 要素のプロパティよりも、HTML の属性に依存しています。Angular 内で ARIA 属性をバインドするためにはプレフィックスとして `attr.` を使用してください。
 
 <code-example format="html" language="html">
 

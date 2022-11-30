@@ -104,7 +104,7 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 
 Angularは、JavaScriptモジュールのコレクションを読み込みます。
 それらをライブラリモジュールと考えることができるでしょう。
-Angularライブラリの各名前は、`@angular`接頭辞で始まります。
+Angularライブラリの各名前は、`@angular`プレフィックスで始まります。
 それらをNodeパッケージマネージャー `npm` でインストールし、JavaScriptの`import`ステートメントでそれらの一部をインポートします。
 
 <br class="clear">

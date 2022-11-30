@@ -642,7 +642,7 @@ AOT コンパイラに処理させることも推奨します。
 
 **備考** ファクトリの中の 'heroes' という文字列は AngularJS の `HeroesService` を参照します。
 AnugularJS のアプリケーションではサービス名を、たとえば "heroes" のように、トークンとして使ったり、
-クラス名を作る時に "Service" 接尾辞をつけることは典型的です。
+クラス名を作る時に "Service" サフィックスをつけることは典型的です。
 
 </div>
 
@@ -789,7 +789,7 @@ export class AppModule {}
 
 </code-example>
 
-`LocationUpgradeModule.config()` メソッドに `useHash` プロパティ をもつ `LocationStrategy` や `hashPrefix` プロパティをもつ URL 接頭辞を含む、設定のオブジェクトを渡すことができます。
+`LocationUpgradeModule.config()` メソッドに `useHash` プロパティ をもつ `LocationStrategy` や `hashPrefix` プロパティをもつ URL プレフィックスを含む、設定のオブジェクトを渡すことができます。
 
 `useHash` プロパティの初期値は `false` で、 `hashPrefix` の初期値は空の `string` です。上書きするには設定オブジェクトを渡してください。
 
@@ -1523,7 +1523,7 @@ AngularJS のインジェクターは `PhoneDetails` が AngularJS のコント�
 
 いくつかの特筆すべき変更があります。
 
-* `$ctrl.` 接頭辞をすべての式から削除しました。
+* `$ctrl.` プレフィックスをすべての式から削除しました。
 
 * `ng-src` を標準の `src` プロパティへの
   プロパティバインディングで置き換えました。

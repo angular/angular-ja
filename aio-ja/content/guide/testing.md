@@ -206,7 +206,7 @@ Inside the `src/app` folder the Angular CLI generated a test file for the `AppCo
 
 継続的インテグレーション(CI)サーバーを使用すると、プロジェクトのリポジトリーでコミットおよびプルリクエストをするたびにテストを実行できるように設定できます。
 
-Angular CLIアプリケーションを継続的インテグレーションでテストするために、以下のコマンドを実行します。
+Angular CLIアプリケーションを継続的インテグレーションでテストするために、次のコマンドを実行します。
 
 <code-example format="shell" language="shell">
 

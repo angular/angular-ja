@@ -30,7 +30,7 @@ Unless otherwise commented, patterns use a **limited*** glob format that interna
 * `**`は、0個以上のパスセグメントに一致します。
 * `*`は、厳密に0個以上の`/`を除く文字に一致します。
 * `?` は、厳密に1個の`/`を除く文字に一致します。
-* `!`接頭辞は、パターンを否定的なものとしてマークします。つまり、パターンに一致しないファイルのみが含まれます。
+* `!`プレフィックスは、パターンを否定的なものとしてマークします。つまり、パターンに一致しないファイルのみが含まれます。
 
 <div class="alert is-helpful">
 
@@ -256,7 +256,7 @@ A list of URL patterns. URLs that match these patterns are cached according to t
 
 **Required**
 
-`maxAge`パラメータは、レスポンスが無効であるとみなされる前にキャッシュに残ることが許される期間を示します。`maxAge`は、次の単位接尾辞を使用した継続時間文字列です。
+`maxAge`パラメータは、レスポンスが無効であるとみなされる前にキャッシュに残ることが許される期間を示します。`maxAge`は、次の単位サフィックスを使用した継続時間文字列です。
 
 * `d`: days
 * `h`: hours
@@ -268,7 +268,7 @@ A list of URL patterns. URLs that match these patterns are cached according to t
 
 ##### `timeout`
 
-この継続時間文字列は、ネットワークタイムアウトを指定します。ネットワークのタイムアウトは、キャッシュされたレスポンスが構成されている場合に、キャッシュされたレスポンスを使用する前にAngular Service Workerがネットワークが応答するまで待機する時間です。`timeout`は期間文字列で、次の単位接尾辞を使います。
+この継続時間文字列は、ネットワークタイムアウトを指定します。ネットワークのタイムアウトは、キャッシュされたレスポンスが構成されている場合に、キャッシュされたレスポンスを使用する前にAngular Service Workerがネットワークが応答するまで待機する時間です。`timeout`は期間文字列で、次の単位サフィックスを使います。
 
 * `d`: 日
 * `h`: 時間

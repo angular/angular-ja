@@ -214,7 +214,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
     `Component()`の重要な機能は次のものです。
 
     *   `app-product-alerts`という`selector` はコンポーネントを識別します。
-        慣例では、Angularのコンポーネントセレクターは接頭辞 `app-` で始まり、その後にコンポーネント名が続きます。
+        慣例では、Angularのコンポーネントセレクターはプレフィックス `app-` で始まり、その後にコンポーネント名が続きます。
     
     *   テンプレートとスタイルのファイル名は、コンポーネントのHTMLとCSSを参照します。
     *   `@Component()`定義は、コンポーネントの機能を処理するクラス `ProductAlertsComponent`もエクスポートします。

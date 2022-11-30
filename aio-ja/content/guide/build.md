@@ -279,7 +279,7 @@ Angular CLI はブラウザアプリケーションが CommonJS モジュール�
 
 Angular CLIでは、さまざまなブラウザバージョンとの互換性を確保するために[Browserslist](https://github.com/browserslist/browserslist)を使用しています。CSSのベンダープレフィックスには [Autoprefixer](https://github.com/postcss/autoprefixer) を、JavaScriptの構文変換には [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env) を使用しています。
 
-内部的には、Angular CLI は以下の `browserslist` 設定を使用し、Angular が[サポートするブラウザ](guide/browser-support) にマッチするように設定します。
+内部的には、Angular CLI は次の `browserslist` 設定を使用し、Angular が[サポートするブラウザ](guide/browser-support) にマッチするように設定します。
 
   <code-example format="none" language="text">
   last 1 Chrome version

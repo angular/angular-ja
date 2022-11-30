@@ -49,6 +49,7 @@ For more information about the required software, see [Setting up the local envi
 
         Angular requires an [active long-term-support (LTS) or maintenance LTS version](https://nodejs.org/about/releases) of Node.js.
 
+    *   [nvm](https://github.com/nvm-sh/nvm#about)
     *   [Yarn](https://yarnpkg.com/getting-started/install)
     *   [Homebrew](https://brew.sh) for macOS or [Chocolatey](https://chocolatey.org/install) for Windows
     *   [Vale][GithubAngularAngularTreeMainAioToolsDocLinterInstallValeOnYourDevelopmentSystemReadmeMd] \(see note\)
@@ -277,15 +278,31 @@ After you clone the origin repo on your local computer, run these commands from 
 
         <code-example format="shell" language="shell">
 
-        cd personal/angular/aio
+        cd personal/angular
 
         </code-example>
 
-    1.  Run this command to install the npm modules.
+    1.  Run this command to install the Angular dependencies.
 
         <code-example format="shell" language="shell">
 
-        yarn install
+        yarn
+
+        </code-example>
+
+    1.  Run this command to navigate to the documentation project.
+
+        <code-example format="shell" language="shell">
+
+        cd aio
+
+        </code-example>
+
+    1.  Run this command to install the npm modules for the documentation.
+
+        <code-example format="shell" language="shell">
+
+        yarn
 
         </code-example>
 
@@ -365,7 +382,7 @@ Perform these steps from a command-line tool on your local computer.
 
         <code-example format="shell" language="shell">
 
-        yarn serve-and-sync
+        yarn start
 
         </code-example>
 
@@ -386,13 +403,14 @@ Perform these steps from a command-line tool on your local computer.
     </code-example>
 
 1.  If building the documentation returns one or more errors, fix those and build the documentation again before you continue.
-1.  From the documentation directory, run this command to start the automated tests that verify the docs are consistent.
+1.  From the documentation directory, run these commands to start the automated tests that verify the docs are consistent.
     These are most, but not all, of the tests that are performed after you open your pull request.
     Some tests can only be run in the automated testing environment.
 
     <code-example format="shell" language="shell">
 
     yarn e2e
+    yarn docs-test
 
     </code-example>
 

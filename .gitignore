@@ -1,3 +1,6 @@
 .tmp
 build
 node_modules
+.yarn
+.pnp.js
+.yarnrc.yml

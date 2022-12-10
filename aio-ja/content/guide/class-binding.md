@@ -98,7 +98,7 @@ Angular は、通常は文字列であるバインドされた式の値にプロ
 
 1 つの HTML 要素は、その CSS クラス リストとスタイル値を複数のソース (たとえば、複数のディレクティブからのホスト バインディング) にバインドできます。
 
-## 次のおすすめ
+## 次のお勧め
 
 * [コンポーネント スタイル](https://angular.io/guide/component-styles)
 * [Angular アニメーションの紹介](https://angular.io/guide/animations)

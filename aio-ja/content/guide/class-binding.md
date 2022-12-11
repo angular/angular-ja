@@ -1,106 +1,106 @@
-# Class and style binding
+# クラスとスタイルのバインディング
 
-Use class and style bindings to add and remove CSS class names from an element's `class` attribute and to set styles dynamically.
+クラスおよびスタイルバインディングを使用して、要素の `class` 属性から CSS クラス名を追加および削除し、スタイルを動的に設定します。
 
-## Prerequisites
+## 前提条件
 
-* [Property binding](guide/property-binding)
+* [プロパティバインディング](guide/property-binding)
 
-## Binding to a single CSS `class`
+## 単一の CSS`class`へのバインド
 
-To create a single class binding, type the following:
+単一のクラスバインディングを作成するには、次のように入力します:
 
 `[class.sale]="onSale"`
 
-Angular adds the class when the bound expression, `onSale` is truthy, and it removes the class when the expression is falsy&mdash;with the exception of `undefined`.  See [styling delegation](guide/style-precedence#styling-delegation) for more information.
+Angular は、バインドされた式 `onSale` が true の場合にクラスを追加し、式が偽の場合にクラスを削除します (`undefined` を除く)。  詳細については、[スタイル委任](guide/style-precedence#styling-delegation) を参照してください。
 
-## Binding to multiple CSS classes
+## 複数の CSS クラスへのバインド
 
-To bind to multiple classes, type the following:
+複数のクラスにバインドするには、次のように入力します:
 
 `[class]="classExpression"`
 
-The expression can be one of:
+式は次のいずれかです:
 
-* A space-delimited string of class names.
-* An object with class names as the keys and truthy or falsy expressions as the values.
-* An array of class names.
+* スペースで区切られたクラス名の文字列。
+* クラス名をキーとし、真または偽の式を値とするオブジェクト。
+* クラス名の配列。
 
-With the object format, Angular adds a class only if its associated value is truthy.
+オブジェクト形式では、関連付けられた値が真である場合にのみ、Angular はクラスを追加します。
 
 <div class="alert is-important">
 
-With any object-like expression&mdash;such as `object`, `Array`, `Map`, or `Set` &mdash;the identity of the object must change for Angular to update the class list.
-Updating the property without changing object identity has no effect.
+`object`、`Array`、`Map`、`Set` などのオブジェクトのような式では、Angular がクラスリストを更新するために、オブジェクトの ID を変更する必要があります。
+オブジェクト ID を変更せずにプロパティを更新しても効果はありません。
 
 </div>
 
-If there are multiple bindings to the same class name, Angular uses [styling precedence](guide/style-precedence) to determine which binding to use.
+同じクラス名に複数のバインディングがある場合、Angular は [スタイリングの優先順位](guide/style-precedence) を使用して、使用するバインディングを決定します。
 
-The following table summarizes class binding syntax.
+次の表は、クラスバインディングの構文をまとめたものです。
 
-| Binding Type         | Syntax                      | Input Type                                                                  | Example Input Values |
+| バインディング形式         | 構文                      | 入力方式                                                                  | 入力値の例 |
 |:---                  |:---                         |:---                                                                         |:---                  |
-| Single class binding | `[class.sale]="onSale"`     | <code>boolean &verbar; undefined &verbar; null</code>                       | `true`, `false`                      |
-| Multi-class binding  | `[class]="classExpression"` | `string`                                                                    | `"my-class-1 my-class-2 my-class-3"` |
-| Multi-class binding  | `[class]="classExpression"` | <code>Record&lt;string, boolean &verbar; undefined &verbar; null&gt;</code> | `{foo: true, bar: false}`            |
-| Multi-class binding  | `[class]="classExpression"` | <code>Array&lt;string&gt;</code>                                            | `['foo', 'bar']`                     |
+| 単一クラスバインディング | `[class.sale]="onSale"`     | <code>boolean &verbar; undefined &verbar; null</code>                       | `true`, `false`                      |
+| マルチクラスバインディング  | `[class]="classExpression"` | `string`                                                                    | `"my-class-1 my-class-2 my-class-3"` |
+| マルチクラスバインディング  | `[class]="classExpression"` | <code>Record&lt;string, boolean &verbar; undefined &verbar; null&gt;</code> | `{foo: true, bar: false}`            |
+| マルチクラスバインディング  | `[class]="classExpression"` | <code>Array&lt;string&gt;</code>                                            | `['foo', 'bar']`                     |
 
-## Binding to a single style
+## 単一のスタイルへのバインド
 
-To create a single style binding, use the prefix `style` followed by a dot and the name of the CSS style.
+単一のスタイルバインディングを作成するには、プレフィックス `style` の後にドットと CSS スタイルの名前を付けて使用します。
 
-For example, to set the `width` style, type the following:  `[style.width]="width"`
+たとえば、`width` スタイルを設定するには、次のように入力します:  `[style.width]="width"`
 
-Angular sets the property to the value of the bound expression, which is usually a string. Optionally, you can add a unit extension like `em` or `%`, which requires a number type.
+Angular は、通常は文字列であるバインドされた式の値にプロパティを設定します。 必要に応じて、数値型を必要とする`em`や`%`などの単位拡張を追加できます。
 
-1. To write a style in dash-case, type the following:
+1. dash-case でスタイルを記述するには、次のように入力します:
 
     <code-example language="html">&lt;nav [style.background-color]="expression"&gt;&lt;/nav&gt;</code-example>
 
-2. To write a style in camelCase, type the following:
+2. スタイルを camelCase で記述するには、次のように入力します:
 
     <code-example language="html">&lt;nav [style.backgroundColor]="expression"&gt;&lt;/nav&gt;</code-example>
 
-## Binding to multiple styles
+## 複数のスタイルへのバインド
 
-To toggle multiple styles, bind to the `[style]` attribute&mdash;for example, `[style]="styleExpression"`.  The `styleExpression` can be one of:
+複数のスタイルを切り替えるには、`[style]` 属性にバインドします (例: `[style]="styleExpression"`)。  `styleExpression` は次のいずれかです:
 
-* A string list of styles such as `"width: 100px; height: 100px; background-color: cornflowerblue;"`.
-* An object with style names as the keys and style values as the values, such as `{width: '100px', height: '100px', backgroundColor: 'cornflowerblue'}`.
+* `"width: 100px; height: 100px; background-color: cornflowerblue;"` などのスタイルの文字列リスト。
+* `{width: '100px', height: '100px', backgroundColor: 'cornflowerblue'}` のように、スタイル名をキーとし、スタイル値を値とするオブジェクト。
 
-Note that binding an array to `[style]` is not supported.
+`[style]` への配列のバインドはサポートされていないことに注意してください。
 
 <div class="alert is-important">
 
-When binding `[style]` to an object expression, the identity of the object must change for Angular to update the class list.
-Updating the property without changing object identity has no effect.
+`[style]` をオブジェクト式にバインドする場合、Angular がクラスリストを更新するには、オブジェクトの ID を変更する必要があります。
+オブジェクト ID を変更せずにプロパティを更新しても効果はありません。
 
 </div>
 
-### Single and multiple-style binding example
+### 単一および複数スタイルのバインディングの例
 
 <code-example path="attribute-binding/src/app/single-and-multiple-style-binding.component.ts" header="nav-bar.component.ts"></code-example>
 
-If there are multiple bindings to the same style attribute, Angular uses [styling precedence](guide/style-precedence) to determine which binding to use.
+同じスタイル属性に複数のバインディングがある場合、Angular は [スタイリングの優先順位](guide/style-precedence) を使用して、使用するバインディングを決定します。
 
-The following table summarizes style binding syntax.
+次の表は、スタイル バインディングの構文をまとめたものです。
 
-| Binding Type                    | Syntax                      | Input Type                                                                 | Example Input Values |
+| バインディング形式                    | 構文                      | 入力方式                                                                 | 入力値の例 |
 |:---                             |:---                         |:---                                                                        |:---                  |
-| Single style binding            | `[style.width]="width"`     | <code>string &verbar; undefined &verbar; null</code>                       | `"100px"`                           |
-| Single style binding with units | `[style.width.px]="width"`  | <code>number &verbar; undefined &verbar; null</code>                       | `100`                               |
-| Multi-style binding             | `[style]="styleExpression"` | `string`                                                                   | `"width: 100px; height: 100px"`     |
-| Multi-style binding             | `[style]="styleExpression"` | <code>Record&lt;string, string &verbar; undefined &verbar; null&gt;</code> | `{width: '100px', height: '100px'}` |
+| 単一スタイルバインディング            | `[style.width]="width"`     | <code>string &verbar; undefined &verbar; null</code>                       | `"100px"`                           |
+| 単位付きの単一スタイルバインディング | `[style.width.px]="width"`  | <code>number &verbar; undefined &verbar; null</code>                       | `100`                               |
+| マルチスタイルバインディング             | `[style]="styleExpression"` | `string`                                                                   | `"width: 100px; height: 100px"`     |
+| マルチスタイルバインディング             | `[style]="styleExpression"` | <code>Record&lt;string, string &verbar; undefined &verbar; null&gt;</code> | `{width: '100px', height: '100px'}` |
 
 {@a styling-precedence}
-## Styling precedence
+## スタイリングの優先順位
 
-A single HTML element can have its CSS class list and style values bound to multiple sources (for example, host bindings from multiple directives).
+1 つの HTML 要素は、その CSS クラス リストとスタイル値を複数のソース (たとえば、複数のディレクティブからのホスト バインディング) にバインドできます。
 
-## What’s next
+## 次のお勧め
 
-* [Component styles](https://angular.io/guide/component-styles)
-* [Introduction to Angular animations](https://angular.io/guide/animations)
+* [コンポーネント スタイル](https://angular.io/guide/component-styles)
+* [Angular アニメーションの紹介](https://angular.io/guide/animations)
 
 @reviewed 2022-05-09

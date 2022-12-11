@@ -7,9 +7,9 @@ const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
-// default quote ($'...') is doesn't work on Windows.
-// https://github.com/google/zx/blob/main/src/util.ts#L31
-$.quote = (s) => s;
+// // default quote ($'...') is doesn't work on Windows.
+// // https://github.com/google/zx/blob/main/src/util.ts#L31
+// $.quote = (s) => s;
 
 export async function resetBuildDir({ init = false }) {
   if (init) {

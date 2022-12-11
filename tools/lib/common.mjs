@@ -1,6 +1,6 @@
-import { watch } from 'chokidar';
 import { resolve } from 'node:path';
 import { $, cd, chalk, glob, within } from 'zx';
+import { watch } from 'chokidar';
 import { initDir, cpRf, exists, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
@@ -45,12 +45,10 @@ export async function watchAIO() {
 /**
  * glob patterns of localized files in aio-ja
  */
-const lozalizedFilePatterns = ['**/*', '!**/*.en.*', '!**/*.old'];
+const lozalizedFilePatterns = ['**/*', '!**/*.en.*', '!**/*.old'].map((pattern) => resolve(aiojaDir, pattern));
 
 export async function copyLocalizedFiles() {
-  const jaFiles = await glob(lozalizedFilePatterns, {
-    cwd: aiojaDir.replace(/\\/g, '/'),
-  });
+  const jaFiles = await glob(lozalizedFilePatterns);
   for (const file of jaFiles) {
     const src = resolve(aiojaDir, file);
     const dest = resolve(outDir, 'aio', file);
@@ -78,7 +76,7 @@ export async function applyPatches() {
   await within(async () => {
     cd(outDir);
 
-    const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir.replace(/\\/g, '/') });
+    const patches = await glob(resolve(rootDir, 'tools/git-patch/*.patch'));
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
       await $`git apply -p1 --ignore-whitespace ${path}`;

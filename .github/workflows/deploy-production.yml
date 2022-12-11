@@ -21,12 +21,10 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version-file: .node-version
-        cache: yarn
-    - name: Install
-      run: yarn install
-    - name: Build
-      run: yarn build
+        node-version-file: 'package.json'
+        cache: npm
+    - run: npm ci
+    - run: npm run build
     - name: Deploy to Production
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:

@@ -49,7 +49,7 @@ const lozalizedFilePatterns = ['**/*', '!**/*.en.*', '!**/*.old'];
 
 export async function copyLocalizedFiles() {
   const jaFiles = await glob(lozalizedFilePatterns, {
-    cwd: aiojaDir,
+    cwd: aiojaDir.replace(/\\/g, '/'),
   });
   for (const file of jaFiles) {
     const src = resolve(aiojaDir, file);
@@ -77,7 +77,8 @@ export async function watchLocalizedFiles(signal) {
 export async function applyPatches() {
   await within(async () => {
     cd(outDir);
-    const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir });
+
+    const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir.replace(/\\/g, '/') });
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
       await $`git apply -p1 --ignore-whitespace ${path}`;

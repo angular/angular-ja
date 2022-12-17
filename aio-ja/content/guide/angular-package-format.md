@@ -129,7 +129,7 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
 
 *   パッケージに[副作用](#side-effects)が含まれているかどうかを宣言します。
 
-### ESM declaration
+### ESM宣言
 
 最上位の `package.json` には次のキーが含まれています:
 
@@ -200,10 +200,10 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
 
 詳細については、[ライブラリ内のアセットの管理](guide/creating-libraries#managing-assets-in-a-library)を参照してください。
 
-### Legacy resolution keys
+### レガシー解決キー
 
-In addition to `"exports"`, the top-level `package.json` also defines legacy module resolution keys for resolvers that don't support `"exports"`.
-For `@angular/core` these are:
+`"exports"` に加えて、最上位の `package.json` は、`"exports"` をサポートしないリゾルバーのレガシー モジュール解決キーも定義します。
+`@angular/core` の場合:
 
 <code-example language="javascript">
 
@@ -218,19 +218,19 @@ For `@angular/core` these are:
 
 </code-example>
 
-As shown in the preceding code snippet, a module resolver can use these keys to load a specific code format.
+前のコード スニペットに示されているように、モジュール リゾルバーはこれらのキーを使用して、特定のコード形式を読み込むことができます。
 
 <div class="alert is-helpful">
 
-**NOTE**: <br />
-Instead of `"default"`, `"module"` selects the format both for Node as well as any tooling not configured to use a specific key.
-As with `"node"`, ES2015 code is selected due to the constraints of ZoneJS.
+**注意**: <br />
+`"default"` の代わりに、`"module"` はノードと、特定のキーを使用するように構成されていないツールの両方の形式を選択します。
+`"node"` と同様に、ZoneJS の制約により ES2015 コードが選択されます。
 
 </div>
 
-### Side effects
+### 副作用
 
-The last function of `package.json` is to declare whether the package has [side effects](#sideeffects-flag).
+`package.json` の最後の機能は、パッケージに[副作用](#sideeffects-flag)があるかどうかを宣言することです。
 
 <code-example language="javascript">
 
@@ -240,60 +240,60 @@ The last function of `package.json` is to declare whether the package has [side 
 
 </code-example>
 
-Most Angular packages should not depend on top-level side effects, and thus should include this declaration.
+ほとんどの Angular パッケージはトップレベルの副作用に依存すべきではないため、この宣言を含める必要があります。
 
-## Entrypoints and code splitting
+## エントリポイントとコード分割
 
-Packages in the Angular Package Format contain one primary entrypoint and zero or more secondary entrypoints \(for example, `@angular/common/http`\).
-Entrypoints serve several functions.
+Angular Package Format のパッケージには、1 つのプライマリ エントリポイントと 0 個以上のセカンダリ エントリポイントが含まれます \(たとえば、`@angular/common/http`\)。
+エントリポイントはいくつかの機能を果たします。
 
-1.  They define the module specifiers from which users import code \(for example, `@angular/core` and `@angular/core/testing`\).
+1.  これらは、ユーザーがコードをインポートするモジュール指定子を定義します \(たとえば、`@angular/core` および `@angular/core/testing`\)。
 
-    Users typically perceive these entrypoints as distinct groups of symbols, with different purposes or capability.
+    ユーザーは通常、これらのエントリポイントを、目的や機能が異なるシンボルの個別のグループとして認識します。
 
-    Specific entrypoints might only be used for special purposes, such as testing.
-    Such APIs can be separated out from the primary entrypoint to reduce the chance of them being used accidentally or incorrectly.
+    特定のエントリポイントは、テストなどの特別な目的にのみ使用できます。
+    このような API は、プライマリエントリポイントから分離して、誤ってまたは誤って使用される可能性を減らすことができます。
 
-1.  They define the granularity at which code can be lazily loaded.
+1.  これらは、コードを遅延ロードできる粒度を定義します。
 
-    Many modern build tools are only capable of "code splitting" \(aka lazy loading\) at the ES Module level.
-    The Angular Package Format uses primarily a single "flat" ES Module per entry point. This means that most build tooling is not able to split code with a single entry point into multiple output chunks.
+    最新のビルド ツールの多くは、ES モジュール レベルでの「コード分割」\(遅延読み込みとも呼ばれます) のみが可能です。
+    Angular Package Format は、主にエントリ ポイントごとに単一の「フラット」ES モジュールを使用します。 これは、ほとんどのビルド ツールが、単一のエントリ ポイントを持つコードを複数の出力チャンクに分割できないことを意味します。
 
-The general rule for APF packages is to use entrypoints for the smallest sets of logically connected code possible.
-For example, the Angular Material package publishes each logical component or set of components as a separate entrypoint - one for Button, one for Tabs, etc.
-This allows each Material component to be lazily loaded separately, if desired.
+APF パッケージの一般的な規則は、論理的に接続されたコードの可能な限り最小のセットにエントリポイントを使用することです。
+たとえば、Angular Material パッケージは、各論理コンポーネントまたはコンポーネントのセットを個別のエントリポイント (Button 用、Tabs 用など) として公開します。
+これにより、必要に応じて、各 Materiak コンポーネントを個別に遅延ロードできます。
 
-Not all libraries require such granularity.
-Most libraries with a single logical purpose should be published as a single entrypoint.
-`@angular/core` for example uses a single entrypoint for the runtime, because the Angular runtime is generally used as a single entity.
+すべてのライブラリがこのような粒度を必要とするわけではありません。
+単一の論理的な目的を持つほとんどのライブラリは、単一のエントリポイントとして公開する必要があります。
+たとえば、`@angular/core` は、ランタイムに単一のエントリポイントを使用します。これは、Angular ランタイムが一般に単一のエンティティとして使用されるためです。
 
-### Resolution of secondary entry points
+### 二次エントリ ポイントの解決
 
-Secondary entrypoints can be resolved via the `"exports"` field of the `package.json` for the package.
+セカンダリ エントリポイントは、パッケージの `package.json` の `exports` フィールドを介して解決できます。
 
 ## README.md
 
-The README file in the Markdown format that is used to display description of a package on npm and GitHub.
+npm および GitHub でパッケージの説明を表示するために使用される Markdown 形式の README ファイル。
 
-Example README content of &commat;angular/core package:
+&commat;angular/core パッケージの README コンテンツの例:
 
 <code-example language="html">
 
 Angular
 &equals;&equals;&equals;&equals;&equals;&equals;&equals;
 
-The sources for this package are in the main [Angular](https://github.com/angular/angular) repo.Please file issues and pull requests against that repo.
+このパッケージのソースはメインの [Angular](https://github.com/angular/angular) リポジトリにあります。 問題を提出し、そのレポに対してリクエストをプルしてください。
 
-License: MIT
+ライセンス: MIT
 
 </code-example>
 
-## Partial compilation
+## 部分コンパイル
 
-Libraries in the Angular Package Format must be published in "partial compilation" mode.
-This is a compilation mode for `ngc` which produces compiled Angular code that is not tied to a specific Angular runtime version, in contrast to the full compilation used for applications, where the Angular compiler and runtime versions must match exactly.
+Angular Package Format のライブラリは、「部分コンパイル」モードで公開する必要があります。
+これは、特定の Angular ランタイム バージョンに関連付けられていないコンパイル済み Angular コードを生成する `ngc` のコンパイル モードです。アプリケーションに使用される完全なコンパイルとは対照的に、Angular コンパイラとランタイム バージョンが正確に一致する必要があります。
 
-To partially compile Angular code, use the `compilationMode` flag in the `angularCompilerOptions` property of your `tsconfig.json`:
+Angular コードを部分的にコンパイルするには、`tsconfig.json` の `angularCompilerOptions` プロパティで `compilationMode` フラグを使用します。
 
 <code-example language="javascript">
 
@@ -306,28 +306,29 @@ To partially compile Angular code, use the `compilationMode` flag in the `angula
 
 </code-example>
 
-Partially compiled library code is then converted to fully compiled code during the application build process by the Angular CLI.
+部分的にコンパイルされたライブラリ コードは、アプリケーションのビルド プロセス中に Angular CLI によって完全にコンパイルされたコードに変換されます。
 
-If your build pipeline does not use the Angular CLI then refer to the [Consuming partial ivy code outside the Angular CLI](guide/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli) guide.
+If your build pipeline does not use the Angular CLI then refer to the [Consuming partial ivy code outside the Angular CLI] guide.
+ビルド パイプラインで Angular CLI を使用しない場合は、[Angular CLI 外で部分的な ivy コードを使用する](guide/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli) ガイドを参照してください。
 
-## Optimizations
+## 最適化
 
-### Flattening of ES modules
+### ES モジュールの平坦化
 
-The Angular Package Format specifies that code be published in "flattened" ES module format.
-This significantly reduces the build time of Angular applications as well as download and parse time of the final application bundle.
-Please check out the excellent post ["The cost of small modules"](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules) by Nolan Lawson.
+Angular Package Format は、コードが「フラット化された」ES モジュール形式で公開されることを指定します。
+これにより、Angular アプリケーションのビルド時間と、最終的なアプリケーション バンドルのダウンロードおよび解析時間が大幅に短縮されます。
+Nolan Lawson による優れた投稿 ["The cost of small modules"](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules) をチェックしてください。
 
-The Angular compiler can generate index ES module files. Tools like Rollup can use these files to generate flattened modules in a *Flattened ES Module* (FESM) file format.
+Angular コンパイラは、インデックス ES モジュール ファイルを生成できます。 Rollup などのツールは、これらのファイルを使用して、フラット化されたモジュールを *Flattened ES Module* (FESM) ファイル形式で生成できます。
 
-FESM is a file format created by flattening all ES Modules accessible from an entrypoint into a single ES Module.
-It's formed by following all imports from a package and copying that code into a single file while preserving all public ES exports and removing all private imports.
+FESM は、エントリポイントからアクセス可能なすべての ES モジュールを 1 つの ES モジュールにフラット化することによって作成されるファイル形式です。
+これは、パッケージからのすべてのインポートをたどり、そのコードを単一のファイルにコピーすることによって形成されますが、すべてのパブリック ES エクスポートを保持し、すべてのプライベート インポートを削除します。
 
-The abbreviated name, FESM, pronounced *phe-som*, can be followed by a number such as FESM5 or FESM2015.
-The number refers to the language level of the JavaScript inside the module.
-Accordingly a FESM5 file would be ESM+ES5 and include import/export statements and ES5 source code.
+*phe-som* と発音される省略名 FESM の後には、FESM5 や FESM2015 などの番号を付けることができます。
+数値は、モジュール内の JavaScript の言語レベルを表します。
+したがって、FESM5 ファイルは ESM+ES5 になり、インポート/エクスポート ステートメントと ES5 ソース コードが含まれます。
 
-To generate a flattened ES Module index file, use the following configuration options in your tsconfig.json file:
+フラット化された ES Module インデックス ファイルを生成するには、tsconfig.json ファイルで次の構成オプションを使用します。
 
 <code-example language="javascript">
 
@@ -347,50 +348,50 @@ To generate a flattened ES Module index file, use the following configuration op
 
 </code-example>
 
-Once the index file \(for example, `my-ui-lib.js`\) is generated by ngc, bundlers and optimizers like Rollup can be used to produce the flattened ESM file.
+インデックスファイル\(たとえば、`my-ui-lib.js`\)が ngc によって生成されると、Rollup などのバンドラーとオプティマイザーを使用して、フラット化された ESM ファイルを生成できます。
 
-#### Note about the defaults in package.json
+#### package.json のデフォルトに関する注意
 
-As of webpack v4, the flattening of ES modules optimization should not be necessary for webpack users. It should be possible to get better code-splitting without flattening of modules in webpack.
-In practice, size regressions can still be seen when using unflattened modules as input for webpack v4.
-This is why `module` and `es2020` package.json entries still point to FESM files.
-This issue is being investigated. It is expected to switch the `module` and `es2020` package.json entry points to unflattened files after the size regression issue is resolved.
-The APF currently includes unflattened ESM2020 code for the purpose of validating such a future change.
+webpack v4 の時点で、ES モジュールの最適化のフラット化は、webpack ユーザーには必要ありません。 webpack でモジュールをフラット化することなく、コード分割を改善できるはずです。
+実際には、フラット化されていないモジュールを webpack v4 の入力として使用すると、サイズの回帰が見られることがあります。
+これが、`module` および `es2020` package.json エントリがまだ FESM ファイルを指している理由です。
+この問題は調査中です。 サイズ回帰の問題が解決された後、「module」および「es2020」package.json エントリ ポイントをフラット化されていないファイルに切り替えることが期待されています。
+APF には現在、このような将来の変更を検証する目的で、フラット化されていない ESM2020 コードが含まれています。
 
-### "sideEffects" flag
+### "sideEffects" フラグ
 
-By default, EcmaScript Modules are side-effectful: importing from a module ensures that any code at the top level of that module should run.
-This is often undesirable, as most side-effectful code in typical modules is not truly side-effectful, but instead only affects specific symbols.
-If those symbols are not imported and used, it's often desirable to remove them in an optimization process known as tree-shaking, and the side-effectful code can prevent this.
+デフォルトでは、EcmaScript モジュールは副作用があります。モジュールからインポートすると、そのモジュールの最上位レベルにあるすべてのコードが実行されます。
+典型的なモジュールのほとんどの副作用のあるコードは真に副作用があるわけではなく、代わりに特定のシンボルにのみ影響するため、これはしばしば望ましくありません。
+これらのシンボルがインポートおよび使用されていない場合は、ツリー シェイキングと呼ばれる最適化プロセスでそれらを削除することが望ましいことが多く、副作用のあるコードによってこれを防ぐことができます。
 
-Build tools such as Webpack support a flag which allows packages to declare that they do not depend on side-effectful code at the top level of their modules, giving the tools more freedom to tree-shake code from the package.
-The end result of these optimizations should be smaller bundle size and better code distribution in bundle chunks after code-splitting.
-This optimization can break your code if it contains non-local side-effects - this is however not common in Angular applications and it's usually a sign of bad design.
-The recommendation is for all packages to claim the side-effect free status by setting the `sideEffects` property to `false`, and that developers follow the [Angular Style Guide](https://angular.io/guide/styleguide) which naturally results in code without non-local side-effects.
+Webpack などのビルド ツールは、モジュールの最上位レベルで副作用のあるコードに依存しないことをパッケージが宣言できるようにするフラグをサポートし、ツールがパッケージからコードをツリーシェイクする自由度を高めます。
+これらの最適化の最終結果は、バンドル サイズが小さくなり、コード分割後のバンドル チャンクでのコード分散が改善されるはずです。
+この最適化は、ローカルではない副作用が含まれている場合、コードを壊す可能性があります。ただし、これは Angular アプリケーションでは一般的ではなく、通常は設計が悪いことを示しています。
+`sideEffects` プロパティを `false` に設定することで、すべてのパッケージが副作用のないステータスを主張し、開発者が [Angular Style Guide](https://angular.io/guide/styleguide) に従うことをお勧めします。これにより、非ローカルな副作用のないコードが自然に得られます。
 
-More info: [webpack docs on side effects](https://github.com/webpack/webpack/tree/master/examples/side-effects)
+詳細: [副作用に関する webpack ドキュメント](https://github.com/webpack/webpack/tree/master/examples/side-effects)
 
-### ES2020 language level
+### ES2020 言語レベル
 
-ES2020 Language level is now the default language level that is consumed by Angular CLI and other tooling.
-The Angular CLI down-levels the bundle to a language level that is supported by all targeted browsers at application build time.
+ES2020 言語レベルは、Angular CLI やその他のツールで使用されるデフォルトの言語レベルになりました。
+Angular CLI は、アプリケーションのビルド時に対象となるすべてのブラウザーでサポートされる言語レベルにバンドルをダウンレベルします。
 
-### d.ts bundling / type definition flattening
+### d.ts バンドル / 型定義の平坦化
 
-As of APF v8 it is now preferred to run [API Extractor](https://api-extractor.com), to bundle TypeScript definitions so that the entire API appears in a single file.
+APF v8 の時点で、[API Extractor](https://api-extractor.com) を実行して TypeScript 定義をバンドルし、API 全体が 1 つのファイルに表示されるようにすることが推奨されるようになりました。
 
-In prior APF versions each entry point would have a `src` directory next to the .d.ts entry point and this directory contained individual d.ts files matching the structure of the original source code.
-While this distribution format is still allowed and supported, it is highly discouraged because it confuses tools like IDEs that then offer incorrect autocompletion, and allows users to depend on deep-import paths which are typically not considered to be public API of a library or a package.
+以前の APF バージョンでは、各エントリ ポイントには .d.ts エントリ ポイントの隣に「src」ディレクトリがあり、このディレクトリには元のソース コードの構造に一致する個々の d.ts ファイルが含まれていました。
+この配布形式は引き続き許可およびサポートされていますが、不適切なオートコンプリートを提供する IDE などのツールを混乱させ、通常はライブラリまたは パッケージ。
 
 ### Tslib
 
-As of APF v10, it is recommended to add tslib as a direct dependency of your primary entry-point.
-This is because the tslib version is tied to the TypeScript version used to compile your library.
+APF v10 では、プライマリ エントリ ポイントの直接の依存関係として tslib を追加することをお勧めします。
+これは、tslib のバージョンが、ライブラリのコンパイルに使用される TypeScript のバージョンに関連付けられているためです。
 
-## Examples
+## 例
 
-*   [@angular/core package](https://unpkg.com/browse/@angular/core@13.0.0-rc.0)
-*   [@angular/material package](https://unpkg.com/browse/@angular/material@13.0.0-rc.0)
+*   [@angular/core パッケージ](https://unpkg.com/browse/@angular/core@13.0.0-rc.0)
+*   [@angular/material パッケージ](https://unpkg.com/browse/@angular/material@13.0.0-rc.0)
 
 ## Definition of terms
 

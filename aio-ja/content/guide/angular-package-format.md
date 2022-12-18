@@ -393,98 +393,98 @@ APF v10 では、プライマリ エントリ ポイントの直接の依存関�
 *   [@angular/core パッケージ](https://unpkg.com/browse/@angular/core@13.0.0-rc.0)
 *   [@angular/material パッケージ](https://unpkg.com/browse/@angular/material@13.0.0-rc.0)
 
-## Definition of terms
+## 用語の定義
 
-The following terms are used throughout this document intentionally.
-In this section are the definitions of all of them to provide additional clarity.
+次の用語は、このドキュメント全体で意図的に使用されています。
+このセクションでは、さらに明確にするために、それらすべての定義を示します。
 
-#### Package
+#### パッケージ
 
-The smallest set of files that are published to NPM and installed together, for example `@angular/core`.
-This package includes a manifest called package.json, compiled source code, typescript definition files, source maps, metadata, etc.
-The package is installed with `npm install @angular/core`.
+NPM にパブリッシュされ、一緒にインストールされるファイルの最小セット (例: `@angular/core`)。
+このパッケージには、package.json と呼ばれるマニフェスト、コンパイルされたソース コード、typescript 定義ファイル、ソース マップ、メタデータなどが含まれます。
+パッケージは `npm install @angular/core` でインストールされます。
 
-#### Symbol
+#### シンボル
 
-A class, function, constant, or variable contained in a module and optionally made visible to the external world via a module export.
+モジュールに含まれるクラス、関数、定数、または変数であり、オプションでモジュール エクスポートを介して外部の世界に表示されます。
 
-#### Module
+#### モジュール
 
-Short for ECMAScript Modules.
-A file containing statements that import and export symbols.
-This is identical to the definition of modules in the ECMAScript spec.
+ECMAScript モジュールの略。
+シンボルをインポートおよびエクスポートするステートメントを含むファイル。
+これは、ECMAScript 仕様のモジュールの定義と同じです。
 
 #### ESM
 
-Short for ECMAScript Modules \(see above\).
+ECMAScript モジュールの略 \(上記参照\)。
 
 #### FESM
 
-Short for Flattened ES Modules and consists of a file format created by flattening all ES Modules accessible from an entry point into a single ES Module.
+Flattened ES Modules の略で、エントリ ポイントからアクセスできるすべての ES Module を 1 つの ES Module にフラット化することによって作成されたファイル形式で構成されます。
 
-#### Module ID
+#### モジュール ID
 
-The identifier of a module used in the import statements \(for example, `@angular/core`\).
-The ID often maps directly to a path on the filesystem, but this is not always the case due to various module resolution strategies.
+import ステートメントで使用されるモジュールの識別子 \(例: `@angular/core`\)。
+多くの場合、ID はファイルシステム上のパスに直接マップされますが、さまざまなモジュール解決戦略が原因で、常にそうとは限りません。
 
-#### Module specifier
+#### モジュール指定子
 
-A module identifier \(see above\).
+モジュール識別子 \(上記参照\)。
 
-#### Module resolution strategy
+#### モジュール解決戦略
 
-Algorithm used to convert Module IDs to paths on the filesystem.
-Node.js has one that is well specified and widely used, TypeScript supports several module resolution strategies, [Closure Compiler](https://developers.google.com/closure/compiler) has yet another strategy.
+モジュール ID をファイルシステム上のパスに変換するために使用されるアルゴリズム。
+Node.js には、明確に指定され、広く使用されているものがあります。 TypeScript は、いくつかのモジュール解決戦略をサポートしています。[Closure Compiler](https://developers.google.com/closure/compiler) にはさらに別の戦略があります。
 
-#### Module format
+#### モジュール形式
 
-Specification of the module syntax that covers at minimum the syntax for the importing and exporting from a file.
-Common module formats are CommonJS \(CJS, typically used for Node.js applications\) or ECMAScript Modules \(ESM\).
-The module format indicates only the packaging of the individual modules, but not the JavaScript language features used to make up the module content.
-Because of this, the Angular team often uses the language level specifier as a suffix to the module format, \(for example, ESM+ES2015 specifies that the module is in ESM format and contains code down-leveled to ES2015\).
+ファイルからインポートおよびエクスポートするための構文を少なくともカバーするモジュール構文の仕様。
+一般的なモジュール形式は、CommonJS \(通常は Node.js アプリケーションに使用される CJS\) または ECMAScript モジュール \(ESM\) です。
+モジュールの形式は、個々のモジュールのパッケージ化のみを示しており、モジュールのコンテンツを構成するために使用される JavaScript 言語の機能は示していません。
+このため、Angular チームは言語レベル指定子をモジュール形式の接尾辞として使用することがよくあります \(たとえば、ESM+ES2015 は、モジュールが ESM 形式であり、ES2015 にダウンレベルされたコードを含むことを指定します\)。
 
-#### Bundle
+#### バンドル
 
-An artifact in the form of a single JS file, produced by a build tool \(for example, [Webpack](https://webpack.js.org) or [Rollup](https://rollupjs.org)\) that contains symbols originating in one or more modules.
-Bundles are a browser-specific workaround that reduce network strain that would be caused if browsers were to start downloading hundreds if not tens of thousands of files.
-Node.js typically doesn't use bundles.
-Common bundle formats are UMD and System.register.
+ビルド ツール \([Webpack](https://webpack.js.org) や [Rollup](https://rollupjs.org) など\) によって生成される単一の JS ファイルの形式のアーティファクトで、1 つ以上のモジュールに由来するシンボルが含まれています。
+バンドルはブラウザ固有の回避策であり、ブラウザが数万ではないにしても数百のファイルのダウンロードを開始した場合に発生するネットワークの負荷を軽減します。
+通常、Node.js はバンドルを使用しません。
+一般的なバンドル形式は、UMD と System.register です。
 
-#### Language level
+#### 言語レベル
 
-The language of the code \(ES2015 or ES2020\).
-Independent of the module format.
+コードの言語 \(ES2015 または ES2020\)。
+モジュール形式に依存しません。
 
-#### Entry point
+#### エントリーポイント
 
-A module intended to be imported by the user.
-It is referenced by a unique module ID and exports the public API referenced by that module ID.
-An example is `@angular/core` or `@angular/core/testing`.
-Both entry points exist in the `@angular/core` package, but they export different symbols.
-A package can have many entry points.
+ユーザーがインポートすることを意図したモジュール。
+一意のモジュール ID によって参照され、そのモジュール ID によって参照されるパブリック API をエクスポートします。
+例は `@angular/core` または `@angular/core/testing` です。
+どちらのエントリ ポイントも `@angular/core` パッケージに存在しますが、異なるシンボルをエクスポートします。
+パッケージには、多数のエントリ ポイントを含めることができます。
 
-#### Deep import
+#### ディープ インポート
 
-A process of retrieving symbols from modules that are not Entry Points.
-These module IDs are usually considered to be private APIs that can change over the lifetime of the project or while the bundle for the given package is being created.
+エントリ ポイントではないモジュールからシンボルを取得するプロセス。
+これらのモジュール ID は、通常、プロジェクトの有効期間中、または特定のパッケージのバンドルの作成中に変更できるプライベート API と見なされます。
 
-#### Top-Level import
+#### トップレベルのインポート
 
-An import coming from an entry point.
-The available top-level imports are what define the public API and are exposed in "&commat;angular/name" modules, such as `@angular/core` or `@angular/common`.
+エントリ ポイントからのインポート。
+利用可能なトップレベルのインポートは、パブリック API を定義するものであり、 `@angular/core` や `@angular/common` などの「&commat;angular/name」モジュールで公開されます。
 
-#### Tree-shaking
+#### ツリーシェイク
 
-The process of identifying and removing code not used by an application - also known as dead code elimination.
-This is a global optimization performed at the application level using tools like [Rollup](https://rollupjs.org), [Closure Compiler](https://developers.google.com/closure/compiler), or [Terser](https://github.com/terser/terser).
+アプリケーションで使用されていないコードを特定して削除するプロセス。デッド コードの削除とも呼ばれます。
+これは、[Rollup](https://rollupjs.org)、[Closure Compiler](https://developers.google.com/closure/compiler)、または [Terser](https://github.com/terser/terser) などのツールを使用してアプリケーション レベルで実行されるグローバルな最適化です。
 
-#### AOT compiler
+#### AOT コンパイラ
 
-The Ahead of Time Compiler for Angular.
+Angular 用の Ahead of Time コンパイラ。
 
-#### Flattened type definitions
+#### フラット化された型の定義
 
-The bundled TypeScript definitions generated from [API Extractor](https://api-extractor.com).
+[API Extractor](https://api-extractor.com) から生成されたバンドルされた TypeScript 定義。
 
 <!-- links -->
 

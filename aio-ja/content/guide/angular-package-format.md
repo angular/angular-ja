@@ -282,9 +282,9 @@ npm および GitHub でパッケージの説明を表示するために使用�
 Angular
 &equals;&equals;&equals;&equals;&equals;&equals;&equals;
 
-このパッケージのソースはメインの [Angular](https://github.com/angular/angular) リポジトリにあります。 問題を提出し、そのレポに対してリクエストをプルしてください。
+The sources for this package are in the main [Angular](https://github.com/angular/angular) repo.Please file issues and pull requests against that repo.
 
-ライセンス: MIT
+License: MIT
 
 </code-example>
 
@@ -308,7 +308,6 @@ Angular コードを部分的にコンパイルするには、`tsconfig.json` �
 
 部分的にコンパイルされたライブラリ コードは、アプリケーションのビルド プロセス中に Angular CLI によって完全にコンパイルされたコードに変換されます。
 
-If your build pipeline does not use the Angular CLI then refer to the [Consuming partial ivy code outside the Angular CLI] guide.
 ビルドパイプラインで Angular CLI を使用しない場合は、[Angular CLI 外で部分的な ivy コードを使用する](guide/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli) ガイドを参照してください。
 
 ## 最適化

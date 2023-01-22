@@ -306,7 +306,7 @@ Angular コードを部分的にコンパイルするには、`tsconfig.json` �
 
 </code-example>
 
-部分的にコンパイルされたは、アライブラリコードプリケーションのビルドプロセス中に Angular CLI によって完全にコンパイルされたコードに変換されます。
+部分的にコンパイルされたライブラリコードは、アプリケーションのビルドプロセス中に Angular CLI によって完全にコンパイルされたコードに変換されます。
 
 ビルドパイプラインで Angular CLI を使用しない場合は、[Angular CLI 外で部分的な ivy コードを使用する](guide/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli) ガイドを参照してください。
 

@@ -200,7 +200,7 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
 
 詳細については、[ライブラリ内のアセットの管理](guide/creating-libraries#managing-assets-in-a-library)を参照してください。
 
-### レガシー解決キー {@a legacy-declaration-keys}
+### レガシー解決キー {@a legacy-resolution-keys}
 
 `"exports"` に加えて、最上位の `package.json` は、`"exports"` をサポートしないリゾルバーのレガシーモジュール解決キーも定義します。
 `@angular/core` の場合:

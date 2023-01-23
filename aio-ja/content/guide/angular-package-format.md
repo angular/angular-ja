@@ -1,32 +1,32 @@
-# Angular package format
+# Angular パッケージ形式
 
-This document describes the Angular Package Format \(APF\).
-APF is an Angular specific specification for the structure and format of npm packages that is used by all first-party Angular packages \(`@angular/core`, `@angular/material`, etc.\) and most third-party Angular libraries.
+このドキュメントでは、Angular Package Format (APF) について説明します。
+APF は、すべてのファーストパーティの Angular パッケージ \(`@angular/core`、`@angular/material` など\)とほとんどのサードパーティの Angular ライブラリで使用される、npm パッケージの構造と形式に関する Angular 固有の仕様です。
 
-APF enables a package to work seamlessly under most common scenarios that use Angular.
-Packages that use APF are compatible with the tooling offered by the Angular team as well as wider JavaScript ecosystem.
-It is recommended that third-party library developers follow the same npm package format.
+APF を使用すると、Angular を使用するもっとも一般的なシナリオでパッケージをシームレスに動作させることができます。
+APF を使用するパッケージは、Angular チームが提供するツールや、より広い JavaScript エコシステムと互換性があります。
+サードパーティのライブラリ開発者は、同じ npm パッケージ形式に従うことをお勧めします。
 
 <div class="alert is-helpful">
 
-APF is versioned along with the rest of Angular, and every major version improves the package format.
-You can find the versions of the specification prior to v13 in this [google doc](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview).
+APF は Angular の他の部分と一緒にバージョン管理されており、メジャーバージョンごとにパッケージ形式が改善されています。
+v13 より前の仕様のバージョンは、この [google doc](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview) で確認できます。
 
 </div>
 
-## Why specify a package format?
+## パッケージ形式を指定する理由
 
-In today's JavaScript landscape, developers consume packages in many different ways, using many different toolchains \(Webpack, rollup, esbuild, etc.\).
-These tools may understand and require different inputs - some tools may be able to process the latest ES language version, while others may benefit from directly consuming an older ES version.
+今日の JavaScript の状況では、開発者はさまざまなツールチェーン\(Webpack、ロールアップ、esbuild など\)を使用して、さまざまな方法でパッケージを使用しています。
+これらのツールは異なる入力を理解し、必要とする場合があります。ツールによっては、最新の ES 言語バージョンを処理できる場合もあれば、古い ES バージョンを直接使用することでメリットが得られる場合もあります。
 
-The Angular distribution format supports all of the commonly used development tools and workflows, and adds emphasis on optimizations that result either in smaller application payload size or faster development iteration cycle \(build time\).
+Angular 配布形式は、一般的に使用されるすべての開発ツールとワークフローをサポートし、最適化に重点を置いて、アプリケーションのペイロードサイズを小さくするか、開発反復サイクル(ビルド時間)を高速化します。
 
-Developers can rely on Angular CLI and [ng-packagr](https://github.com/ng-packagr/ng-packagr) \(a build tool Angular CLI uses\) to produce packages in the Angular package format.
-See the [Creating Libraries](guide/creating-libraries) guide for more details.
+開発者は、Angular CLI と [ng-packagr](https://github.com/ng-packagr/ng-packagr) (Angular CLI が使用するビルドツール)を利用して、Angular パッケージ形式でパッケージを作成できます。
+詳細については、[ライブラリの作成](guide/creating-libraries)ガイドを参照してください。
 
-## File layout
+## ファイルのレイアウト
 
-The following example shows a simplified version of the `@angular/core` package's file layout, with an explanation for each file in the package.
+次の例は、パッケージ内の各ファイルの説明とともに、`@angular/core` パッケージのファイルレイアウトの簡略化されたバージョンを示しています。
 
 <div class='filetree'>
     <div class='file'>
@@ -104,34 +104,34 @@ The following example shows a simplified version of the `@angular/core` package'
     </div>
 </div>
 
-This table describes the file layout under `node_modules/@angular/core` annotated to describe the purpose of files and directories:
+この表は、ファイルとディレクトリの目的を説明するために注釈が付けられた `node_modules/@angular/core` の下のファイルレイアウトを示しています。
 
-| Files                                                                                                                                                     | Purpose |
+| ファイル                                                                                                                                                     | 目的 |
 |:---                                                                                                                                                       |:---     |
-| `README.md`                                                                                                                                               | Package README, used by npmjs web UI.                                                                                                                                                                          |
-| `package.json`                                                                                                                                            | Primary `package.json`, describing the package itself as well as all available entrypoints and code formats. This file contains the "exports" mapping used by runtimes and tools to perform module resolution. |
-| `index.d.ts`                                                                                                                                               | Bundled `.d.ts` for the primary entrypoint `@angular/core`.                                                                                                                                                    |
-| `esm2020/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `index.mjs` <br /> &nbsp;&nbsp;─ `public_api.mjs`                                         | Tree of `@angular/core` sources in unflattened ES2020 format.                                                                                                                                                  |
-| `esm2020/testing/`                                                                                                                                        | Tree of the `@angular/core/testing` entrypoint in unflattened ES2020 format.                                                                                                                                   |
-| `fesm2015/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | Code for all entrypoints in a flattened \(FESM\) ES2015 format, along with source maps.                                                                                                                         |
-| `fesm2020/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | Code for all entrypoints in flattened \(FESM\) ES2020 format, along with source maps.                                                                                                                           |
-| `testing/`                                                                                                                                                | Directory representing the "testing" entrypoint.                                                                                                                                                               |
-| `testing/index.d.ts`                                                                                                                                    | Bundled `.d.ts` for the `@angular/core/testing` entrypoint.                                                                                                                                                     |
+| `README.md`                                                                                                                                               | npmjs Web UI で使用されるパッケージ README。                                                                                                                                                                          |
+| `package.json`                                                                                                                                            | パッケージ自体と、利用可能なすべてのエントリポイントとコード形式を記述するプライマリ `package.json`。 このファイルには、ランタイムとツールがモジュール解決を実行するために使用する「エクスポート」マッピングが含まれています。 |
+| `index.d.ts`                                                                                                                                               | プライマリエントリポイント `@angular/core` 用にバンドルされた `.d.ts`。                                                                                                                                                    |
+| `esm2020/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `index.mjs` <br /> &nbsp;&nbsp;─ `public_api.mjs`                                         | フラット化されていない ES2020 形式の `@angular/core` ソースのツリー。                                                                                                                                                  |
+| `esm2020/testing/`                                                                                                                                        | フラット化されていない ES2020 形式の `@angular/core/testing` エントリポイントのツリー。                                                                                                                                   |
+| `fesm2015/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | フラット化された \(FESM\) ES2015 形式のすべてのエントリポイントのコードとソースマップ。                                                                                                                         |
+| `fesm2020/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | フラット化された \(FESM\) ES2020 形式のすべてのエントリポイントのコードとソースマップ。                                                                                                                           |
+| `testing/`                                                                                                                                                | 「テスト」エントリポイントを表すディレクトリ。                                                                                                                                                               |
+| `testing/index.d.ts`                                                                                                                                    | `@angular/core/testing` エントリポイント用にバンドルされた `.d.ts`。                                                                                                                                                     |
 
 ## `package.json`
 
-The primary `package.json` contains important package metadata, including the following:
+プライマリ `package.json` には、次のような重要なパッケージメタデータが含まれています:
 
-*   It [declares](#esm-declaration) the package to be in EcmaScript Module \(ESM\) format
-*   It contains an [`"exports"` field](#exports) which defines the available source code formats of all entrypoints
-*   It contains [keys](#legacy-resolution-keys) which define the available source code formats of the primary `@angular/core` entrypoint, for tools which do not understand `"exports"`.
-    These keys are considered deprecated, and could be removed as the support for `"exports"` rolls out across the ecosystem.
+*   パッケージが EcmaScript モジュール \(ESM\) 形式であることを[宣言](#esm-declaration) します。
+*   すべてのエントリポイントで利用可能なソースコード形式を定義する [`"exports"` フィールド](#exports) が含まれています。
+*   `"exports"` を理解しないツールのために、プライマリ `@angular/core` エントリポイントの利用可能なソースコード形式を定義する[キー](#legacy-resolution-keys)が含まれています。
+    これらのキーは非推奨と見なされ、`"exports"` のサポートがエコシステム全体に展開されるにつれて削除される可能性があります。
 
-*   It declares whether the package contains [side effects](#side-effects)
+*   パッケージに[副作用](#side-effects)が含まれているかどうかを宣言します。
 
-### ESM declaration
+### ESM宣言 {@a esm-declaration}
 
-The top-level `package.json` contains the key:
+最上位の `package.json` には次のキーが含まれています:
 
 <code-example language="javascript">
 
@@ -141,11 +141,11 @@ The top-level `package.json` contains the key:
 
 </code-example>
 
-This informs resolvers that code within the package is using EcmaScript Modules as opposed to CommonJS modules.
+これにより、パッケージ内のコードが CommonJS モジュールではなく EcmaScript モジュールを使用していることをリゾルバーに通知します。
 
 ### `"exports"`
 
-The `"exports"` field has the following structure:
+`"exports"` フィールドの構造は次のとおりです。
 
 <code-example language="javascript">
 
@@ -176,34 +176,34 @@ The `"exports"` field has the following structure:
 
 </code-example>
 
-Of primary interest are the `"."` and the `"./testing"` keys, which define the available code formats for the `@angular/core` primary entrypoint and the `@angular/core/testing` secondary entrypoint, respectively.
-For each entrypoint, the available formats are:
+主な関心は `"."` と `"./testing"` キーで、`@angular/core` プライマリエントリポイントと `@angular/core/testing` セカンダリエントリポイントで使用可能なコード形式を定義します。 それぞれ。
+各エントリポイントで使用できる形式は次のとおりです。
 
-| Formats                   | Details |
+| フォーマット                   | 詳細 |
 |:---                       |:---     |
-| Typings \(`.d.ts` files\) | `.d.ts` files are used by TypeScript when depending on a given package.                                                                                                           |
-| `es2020`                  | ES2020 code flattened into a single source file.                                                                                                                                  |
-| `es2015`                  | ES2015 code flattened into a single source file.                                                                                                                                  |
-| `esm2020`                 | ES2020 code in unflattened source files \(this format is included for experimentation - see [this discussion of defaults](#note-about-the-defaults-in-packagejson) for details\). |
+| タイピング \(`.d.ts` ファイル\) | `.d.ts` ファイルは、特定のパッケージに依存するときに TypeScript によって使用されます。                                                                                                           |
+| `es2020`                  | ES2020 コードは 1 つのソースファイルにフラット化されています。                                                                                                                                  |
+| `es2015`                  | ES2015 コードは 1 つのソースファイルにフラット化されています。                                                                                                                                  |
+| `esm2020`                 | フラット化されていないソースファイル内の ES2020 コード(この形式は実験用に含まれています - 詳細については、[デフォルトに関するこの説明](#note-about-the-defaults-in-packagejson)を参照してください)。 |
 
-Tooling that is aware of these keys may preferentially select a desirable code format from `"exports"`.
-The remaining 2 keys control the default behavior of tooling:
+これらのキーを認識しているツールは、"exports" から望ましいコード形式を優先的に選択する場合があります。
+残りの 2 つのキーは、ツールのデフォルトの動作を制御します。
 
-*   `"node"` selects flattened ES2015 code when the package is loaded in Node.
+*   `"node"` は、パッケージが Node.js に読み込まれるときにフラット化された ES2015 コードを選択します。
 
-    This format is used due to the requirements of `zone.js`, which does not support native `async`/`await` ES2017 syntax.
-    Therefore, Node is instructed to use ES2015 code, where `async`/`await` structures have been downleveled into Promises.
+    この形式は、ネイティブの `async`/`await` ES2017 構文をサポートしない `zone.js`の要件により使用されます。
+    したがって、Node は ES2015 コードを使用するように指示されます。ここで、`async`/`await` 構造は Promises にダウンレベルされています。
 
-*   `"default"` selects flattened ES2020 code for all other consumers.
+*   `"default"` は、他のすべてのコンシューマーに対してフラット化された ES2020 コードを選択します。
 
-Libraries may want to expose additional static files which are not captured by the exports of the JavaScript-based entry-points such as Sass mixins or pre-compiled CSS.
+ライブラリは、Sass ミックスインやコンパイル済み CSS などの JavaScript ベースのエントリポイントのエクスポートによってキャプチャされない追加の静的ファイルを公開する必要がある場合があります。
 
-For more information, see [Managing assets in a library](guide/creating-libraries#managing-assets-in-a-library).
+詳細については、[ライブラリ内のアセットの管理](guide/creating-libraries#managing-assets-in-a-library)を参照してください。
 
-### Legacy resolution keys
+### レガシー解決キー {@a legacy-resolution-keys}
 
-In addition to `"exports"`, the top-level `package.json` also defines legacy module resolution keys for resolvers that don't support `"exports"`.
-For `@angular/core` these are:
+`"exports"` に加えて、最上位の `package.json` は、`"exports"` をサポートしないリゾルバーのレガシーモジュール解決キーも定義します。
+`@angular/core` の場合:
 
 <code-example language="javascript">
 
@@ -218,19 +218,19 @@ For `@angular/core` these are:
 
 </code-example>
 
-As shown in the preceding code snippet, a module resolver can use these keys to load a specific code format.
+前のコードスニペットに示されているように、モジュールリゾルバーはこれらのキーを使用して、特定のコード形式を読み込むことができます。
 
 <div class="alert is-helpful">
 
-**NOTE**: <br />
-Instead of `"default"`, `"module"` selects the format both for Node as well as any tooling not configured to use a specific key.
-As with `"node"`, ES2015 code is selected due to the constraints of ZoneJS.
+**注意**: <br />
+`"default"` の代わりに、`"module"` は Node.js と、特定のキーを使用するように構成されていないツールの両方のための形式を選択します。
+`"node"` と同様に、ZoneJS の制約により ES2015 コードが選択されます。
 
 </div>
 
-### Side effects
+### 副作用 {@a side-effects}
 
-The last function of `package.json` is to declare whether the package has [side effects](#sideeffects-flag).
+`package.json` の最後の機能は、パッケージに[副作用](#sideeffects-flag)があるかどうかを宣言することです。
 
 <code-example language="javascript">
 
@@ -240,42 +240,42 @@ The last function of `package.json` is to declare whether the package has [side 
 
 </code-example>
 
-Most Angular packages should not depend on top-level side effects, and thus should include this declaration.
+ほとんどの Angular パッケージはトップレベルの副作用に依存すべきではないため、この宣言を含める必要があります。
 
-## Entrypoints and code splitting
+## エントリポイントとコード分割
 
-Packages in the Angular Package Format contain one primary entrypoint and zero or more secondary entrypoints \(for example, `@angular/common/http`\).
-Entrypoints serve several functions.
+Angular Package Format のパッケージには、1つのプライマリエントリポイントと0個以上のセカンダリエントリポイントが含まれます\(たとえば、`@angular/common/http`\)。
+エントリポイントはいくつかの機能を果たします。
 
-1.  They define the module specifiers from which users import code \(for example, `@angular/core` and `@angular/core/testing`\).
+1.  これらは、ユーザーがコードをインポートするモジュール指定子を定義します\(たとえば、`@angular/core` および `@angular/core/testing`\)。
 
-    Users typically perceive these entrypoints as distinct groups of symbols, with different purposes or capability.
+    ユーザーは通常、これらのエントリポイントを、目的や機能が異なるシンボルの個別のグループとして認識します。
 
-    Specific entrypoints might only be used for special purposes, such as testing.
-    Such APIs can be separated out from the primary entrypoint to reduce the chance of them being used accidentally or incorrectly.
+    特定のエントリポイントは、テストなどの特別な目的にのみ使用できます。
+    このような API は、プライマリエントリポイントから分離して、誤ってまたは誤って使用される可能性を減らすことができます。
 
-1.  They define the granularity at which code can be lazily loaded.
+1.  これらは、コードを遅延ロードできる粒度を定義します。
 
-    Many modern build tools are only capable of "code splitting" \(aka lazy loading\) at the ES Module level.
-    The Angular Package Format uses primarily a single "flat" ES Module per entry point. This means that most build tooling is not able to split code with a single entry point into multiple output chunks.
+    最新のビルドツールの多くは、ES モジュールレベルでの「コード分割」\(遅延読み込みとも呼ばれます)のみが可能です。
+    Angular Package Format は、主にエントリポイントごとに単一の「フラット」ES モジュールを使用します。これは、ほとんどのビルドツールが、単一のエントリポイントをもつコードを複数の出力チャンクに分割できないことを意味します。
 
-The general rule for APF packages is to use entrypoints for the smallest sets of logically connected code possible.
-For example, the Angular Material package publishes each logical component or set of components as a separate entrypoint - one for Button, one for Tabs, etc.
-This allows each Material component to be lazily loaded separately, if desired.
+APF パッケージの一般的な規則は、論理的に接続されたコードの可能な限り最小のセットにエントリポイントを使用することです。
+たとえば、Angular Material パッケージは、各論理コンポーネントまたはコンポーネントのセットを個別のエントリポイント(Button 用、Tabs 用など)として公開します。
+これにより、必要に応じて、各 Material コンポーネントを個別に遅延ロードできます。
 
-Not all libraries require such granularity.
-Most libraries with a single logical purpose should be published as a single entrypoint.
-`@angular/core` for example uses a single entrypoint for the runtime, because the Angular runtime is generally used as a single entity.
+すべてのライブラリがこのような粒度を必要とするわけではありません。
+単一の論理的な目的をもつほとんどのライブラリは、単一のエントリポイントとして公開する必要があります。
+たとえば、`@angular/core` は、ランタイムに単一のエントリポイントを使用します。これは、Angular ランタイムが一般に単一のエンティティとして使用されるためです。
 
-### Resolution of secondary entry points
+### セカンダリエントリポイントの解決
 
-Secondary entrypoints can be resolved via the `"exports"` field of the `package.json` for the package.
+セカンダリエントリポイントは、パッケージの `package.json` の `"exports"` フィールドを介して解決できます。
 
 ## README.md
 
-The README file in the Markdown format that is used to display description of a package on npm and GitHub.
+npm および GitHub でパッケージの説明を表示するために使用される Markdown 形式の README ファイル。
 
-Example README content of &commat;angular/core package:
+&commat;angular/core パッケージの README コンテンツの例:
 
 <code-example language="html">
 
@@ -288,12 +288,12 @@ License: MIT
 
 </code-example>
 
-## Partial compilation
+## 部分コンパイル
 
-Libraries in the Angular Package Format must be published in "partial compilation" mode.
-This is a compilation mode for `ngc` which produces compiled Angular code that is not tied to a specific Angular runtime version, in contrast to the full compilation used for applications, where the Angular compiler and runtime versions must match exactly.
+Angular Package Format のライブラリは、「部分コンパイル」モードで公開する必要があります。
+これは、特定の Angular ランタイムバージョンに関連付けられていないコンパイル済み Angular コードを生成する `ngc` のコンパイルモードです。アプリケーションに使用される完全なコンパイルとは対照的に、Angular コンパイラとランタイムバージョンが正確に一致する必要があります。
 
-To partially compile Angular code, use the `compilationMode` flag in the `angularCompilerOptions` property of your `tsconfig.json`:
+Angular コードを部分的にコンパイルするには、`tsconfig.json` の `angularCompilerOptions` プロパティで `compilationMode` フラグを使用します。
 
 <code-example language="javascript">
 
@@ -306,28 +306,28 @@ To partially compile Angular code, use the `compilationMode` flag in the `angula
 
 </code-example>
 
-Partially compiled library code is then converted to fully compiled code during the application build process by the Angular CLI.
+部分的にコンパイルされたライブラリコードは、アプリケーションのビルドプロセス中に Angular CLI によって完全にコンパイルされたコードに変換されます。
 
-If your build pipeline does not use the Angular CLI then refer to the [Consuming partial ivy code outside the Angular CLI](guide/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli) guide.
+ビルドパイプラインで Angular CLI を使用しない場合は、[Angular CLI 外で部分的な ivy コードを使用する](guide/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli) ガイドを参照してください。
 
-## Optimizations
+## 最適化
 
-### Flattening of ES modules
+### ES モジュールの平坦化
 
-The Angular Package Format specifies that code be published in "flattened" ES module format.
-This significantly reduces the build time of Angular applications as well as download and parse time of the final application bundle.
-Please check out the excellent post ["The cost of small modules"](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules) by Nolan Lawson.
+Angular Package Format は、コードが「フラット化された」ES モジュール形式で公開されることを指定します。
+これにより、Angular アプリケーションのビルド時間と、最終的なアプリケーションバンドルのダウンロードおよび解析時間が大幅に短縮されます。
+Nolan Lawson による優れた投稿 ["The cost of small modules"](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules) をチェックしてください。
 
-The Angular compiler can generate index ES module files. Tools like Rollup can use these files to generate flattened modules in a *Flattened ES Module* (FESM) file format.
+Angular コンパイラは、インデックス ES モジュールファイルを生成できます。 Rollup などのツールは、これらのファイルを使用して、フラット化されたモジュールを *Flattened ES Module* (FESM) ファイル形式で生成できます。
 
-FESM is a file format created by flattening all ES Modules accessible from an entrypoint into a single ES Module.
-It's formed by following all imports from a package and copying that code into a single file while preserving all public ES exports and removing all private imports.
+FESM は、エントリポイントからアクセス可能なすべての ES モジュールを 1 つの ES モジュールにフラット化することによって作成されるファイル形式です。
+これは、パッケージからのすべてのインポートをたどり、そのコードを単一のファイルにコピーすることによって形成されますが、すべてのパブリック ES エクスポートを保持し、すべてのプライベートインポートを削除します。
 
-The abbreviated name, FESM, pronounced *phe-som*, can be followed by a number such as FESM5 or FESM2015.
-The number refers to the language level of the JavaScript inside the module.
-Accordingly a FESM5 file would be ESM+ES5 and include import/export statements and ES5 source code.
+*phe-som* と発音される省略名 FESM の後には、FESM5 や FESM2015 などの番号を付けることができます。
+数値は、モジュール内の JavaScript の言語レベルを表します。
+したがって、FESM5 ファイルは ESM+ES5 になり、インポート/エクスポート文と ES5 のソースコードが含まれます。
 
-To generate a flattened ES Module index file, use the following configuration options in your tsconfig.json file:
+フラット化された ES Module インデックスファイルを生成するには、tsconfig.json ファイルで次の構成オプションを使用します。
 
 <code-example language="javascript">
 
@@ -347,143 +347,143 @@ To generate a flattened ES Module index file, use the following configuration op
 
 </code-example>
 
-Once the index file \(for example, `my-ui-lib.js`\) is generated by ngc, bundlers and optimizers like Rollup can be used to produce the flattened ESM file.
+インデックスファイル\(たとえば、`my-ui-lib.js`\)が ngc によって生成されると、Rollup などのバンドラーとオプティマイザーを使用して、フラット化された ESM ファイルを生成できます。
 
-#### Note about the defaults in package.json
+#### package.json のデフォルトに関する注意 {@a note-about-the-defaults-in-packagejson}
 
-As of webpack v4, the flattening of ES modules optimization should not be necessary for webpack users. It should be possible to get better code-splitting without flattening of modules in webpack.
-In practice, size regressions can still be seen when using unflattened modules as input for webpack v4.
-This is why `module` and `es2020` package.json entries still point to FESM files.
-This issue is being investigated. It is expected to switch the `module` and `es2020` package.json entry points to unflattened files after the size regression issue is resolved.
-The APF currently includes unflattened ESM2020 code for the purpose of validating such a future change.
+webpack v4 の時点で、ES モジュールの最適化のフラット化は、webpack ユーザーには必要ありません。 webpack でモジュールをフラット化することなく、コード分割を改善できるはずです。
+実際には、フラット化されていないモジュールを webpack v4 の入力として使用すると、サイズの回帰が見られることがあります。
+これが、`module` および `es2020` package.json エントリがまだ FESM ファイルを指している理由です。
+この問題は調査中です。 サイズ回帰の問題が解決された後、`module`および`es2020`のpackage.json エントリポイントをフラット化されていないファイルに切り替えることが期待されています。
+APF には現在、このような将来の変更を検証する目的で、フラット化されていない ESM2020 コードが含まれています。
 
-### "sideEffects" flag
+### "sideEffects" フラグ {@a sideeffects-flag}
 
-By default, EcmaScript Modules are side-effectful: importing from a module ensures that any code at the top level of that module should run.
-This is often undesirable, as most side-effectful code in typical modules is not truly side-effectful, but instead only affects specific symbols.
-If those symbols are not imported and used, it's often desirable to remove them in an optimization process known as tree-shaking, and the side-effectful code can prevent this.
+デフォルトでは、EcmaScript モジュールは副作用があります。モジュールからインポートすると、そのモジュールの最上位レベルにあるすべてのコードが実行されます。
+典型的なモジュールのほとんどの副作用のあるコードは真に副作用があるわけではなく、代わりに特定のシンボルにのみ影響するため、これはしばしば望ましくありません。
+これらのシンボルがインポートおよび使用されていない場合は、ツリーシェイキングと呼ばれる最適化プロセスでそれらを削除することが望ましいことが多く、副作用のあるコードによってこれを防ぐことができます。
 
-Build tools such as Webpack support a flag which allows packages to declare that they do not depend on side-effectful code at the top level of their modules, giving the tools more freedom to tree-shake code from the package.
-The end result of these optimizations should be smaller bundle size and better code distribution in bundle chunks after code-splitting.
-This optimization can break your code if it contains non-local side-effects - this is however not common in Angular applications and it's usually a sign of bad design.
-The recommendation is for all packages to claim the side-effect free status by setting the `sideEffects` property to `false`, and that developers follow the [Angular Style Guide](https://angular.io/guide/styleguide) which naturally results in code without non-local side-effects.
+Webpack などのビルドツールは、モジュールの最上位レベルで副作用のあるコードに依存しないことをパッケージが宣言できるようにするフラグをサポートし、ツールがパッケージからコードをツリーシェイクする自由度を高めます。
+これらの最適化の最終結果は、バンドルサイズが小さくなり、コード分割後のバンドルチャンクでのコード分散が改善されるはずです。
+この最適化は、ローカルではない副作用が含まれている場合、コードを壊す可能性があります。ただし、これは Angular アプリケーションでは一般的ではなく、通常は設計が悪いことを示しています。
+`sideEffects` プロパティを `false` に設定することで、すべてのパッケージが副作用のないステータスを主張し、開発者が [Angular Style Guide](https://angular.io/guide/styleguide) に従うことをお勧めします。これにより、非ローカルな副作用のないコードが自然に得られます。
 
-More info: [webpack docs on side effects](https://github.com/webpack/webpack/tree/master/examples/side-effects)
+詳細: [副作用に関する webpack ドキュメント](https://github.com/webpack/webpack/tree/master/examples/side-effects)
 
-### ES2020 language level
+### ES2020 言語レベル
 
-ES2020 Language level is now the default language level that is consumed by Angular CLI and other tooling.
-The Angular CLI down-levels the bundle to a language level that is supported by all targeted browsers at application build time.
+ES2020 言語レベルは、Angular CLI やその他のツールで使用されるデフォルトの言語レベルになりました。
+Angular CLI は、アプリケーションのビルド時に対象となるすべてのブラウザでサポートされる言語レベルにバンドルをダウンレベルします。
 
-### d.ts bundling / type definition flattening
+### d.ts バンドル / 型定義の平坦化
 
-As of APF v8 it is now preferred to run [API Extractor](https://api-extractor.com), to bundle TypeScript definitions so that the entire API appears in a single file.
+APF v8 の時点で、[API Extractor](https://api-extractor.com) を実行して TypeScript 定義をバンドルし、API 全体が 1 つのファイルに表示されるようにすることが推奨されるようになりました。
 
-In prior APF versions each entry point would have a `src` directory next to the .d.ts entry point and this directory contained individual d.ts files matching the structure of the original source code.
-While this distribution format is still allowed and supported, it is highly discouraged because it confuses tools like IDEs that then offer incorrect autocompletion, and allows users to depend on deep-import paths which are typically not considered to be public API of a library or a package.
+以前の APF バージョンでは、各エントリポイントには .d.ts エントリポイントの隣に `src` ディレクトリがあり、このディレクトリには元のソースコードの構造に一致する個々の d.ts ファイルが含まれていました。
+この配布形式は引き続き許可およびサポートされていますが、不適切なオートコンプリートを提供する IDE などのツールを混乱させ、通常はライブラリまたはパッケージ。
 
 ### Tslib
 
-As of APF v10, it is recommended to add tslib as a direct dependency of your primary entry-point.
-This is because the tslib version is tied to the TypeScript version used to compile your library.
+APF v10 では、プライマリエントリポイントの直接の依存関係として tslib を追加することをお勧めします。
+これは、tslib のバージョンが、ライブラリのコンパイルに使用される TypeScript のバージョンに関連付けられているためです。
 
-## Examples
+## 例
 
-*   [@angular/core package](https://unpkg.com/browse/@angular/core@13.0.0-rc.0)
-*   [@angular/material package](https://unpkg.com/browse/@angular/material@13.0.0-rc.0)
+*   [@angular/core パッケージ](https://unpkg.com/browse/@angular/core@13.0.0-rc.0)
+*   [@angular/material パッケージ](https://unpkg.com/browse/@angular/material@13.0.0-rc.0)
 
-## Definition of terms
+## 用語の定義
 
-The following terms are used throughout this document intentionally.
-In this section are the definitions of all of them to provide additional clarity.
+次の用語は、このドキュメント全体で意図的に使用されています。
+このセクションでは、さらに明確にするために、それらすべての定義を示します。
 
-#### Package
+#### パッケージ
 
-The smallest set of files that are published to NPM and installed together, for example `@angular/core`.
-This package includes a manifest called package.json, compiled source code, typescript definition files, source maps, metadata, etc.
-The package is installed with `npm install @angular/core`.
+NPM にパブリッシュされ、一緒にインストールされるファイルの最小セット (例: `@angular/core`)。
+このパッケージには、package.json と呼ばれるマニフェスト、コンパイルされたソースコード、typescript 定義ファイル、ソースマップ、メタデータなどが含まれます。
+パッケージは `npm install @angular/core` でインストールされます。
 
-#### Symbol
+#### シンボル
 
-A class, function, constant, or variable contained in a module and optionally made visible to the external world via a module export.
+モジュールに含まれるクラス、関数、定数、または変数であり、オプションでモジュールエクスポートを介して外部の世界に表示されます。
 
-#### Module
+#### モジュール
 
-Short for ECMAScript Modules.
-A file containing statements that import and export symbols.
-This is identical to the definition of modules in the ECMAScript spec.
+ECMAScript モジュールの略。
+シンボルをインポートおよびエクスポートする文を含むファイル。
+これは、ECMAScript 仕様のモジュールの定義と同じです。
 
 #### ESM
 
-Short for ECMAScript Modules \(see above\).
+ECMAScript モジュールの略 \(上記参照\)。
 
 #### FESM
 
-Short for Flattened ES Modules and consists of a file format created by flattening all ES Modules accessible from an entry point into a single ES Module.
+Flattened ES Modules の略で、エントリポイントからアクセスできるすべての ES Module を 1 つの ES Module にフラット化することによって作成されたファイル形式で構成されます。
 
-#### Module ID
+#### モジュール ID
 
-The identifier of a module used in the import statements \(for example, `@angular/core`\).
-The ID often maps directly to a path on the filesystem, but this is not always the case due to various module resolution strategies.
+import ステートメントで使用されるモジュールの識別子 \(例: `@angular/core`\)。
+多くの場合、ID はファイルシステム上のパスに直接マップされますが、さまざまなモジュール解決戦略が原因で、常にそうとは限りません。
 
-#### Module specifier
+#### モジュール指定子
 
-A module identifier \(see above\).
+モジュール識別子 \(上記参照\)。
 
-#### Module resolution strategy
+#### モジュール解決戦略
 
-Algorithm used to convert Module IDs to paths on the filesystem.
-Node.js has one that is well specified and widely used, TypeScript supports several module resolution strategies, [Closure Compiler](https://developers.google.com/closure/compiler) has yet another strategy.
+モジュール ID をファイルシステム上のパスに変換するために使用されるアルゴリズム。
+Node.js には、明確に指定され、広く使用されているものがあります。 TypeScript は、いくつかのモジュール解決戦略をサポートしています。[Closure Compiler](https://developers.google.com/closure/compiler) にはさらに別の戦略があります。
 
-#### Module format
+#### モジュール形式
 
-Specification of the module syntax that covers at minimum the syntax for the importing and exporting from a file.
-Common module formats are CommonJS \(CJS, typically used for Node.js applications\) or ECMAScript Modules \(ESM\).
-The module format indicates only the packaging of the individual modules, but not the JavaScript language features used to make up the module content.
-Because of this, the Angular team often uses the language level specifier as a suffix to the module format, \(for example, ESM+ES2015 specifies that the module is in ESM format and contains code down-leveled to ES2015\).
+ファイルからインポートおよびエクスポートするための構文を少なくともカバーするモジュール構文の仕様。
+一般的なモジュール形式は、CommonJS \(通常は Node.js アプリケーションに使用される CJS\) または ECMAScript モジュール \(ESM\) です。
+モジュールの形式は、個々のモジュールのパッケージ化のみを示しており、モジュールのコンテンツを構成するために使用される JavaScript 言語の機能は示していません。
+このため、Angular チームは言語レベル指定子をモジュール形式のサフィックスとして使用することがよくあります \(たとえば、ESM+ES2015 は、モジュールが ESM 形式であり、ES2015 にダウンレベルされたコードを含むことを指定します\)。
 
-#### Bundle
+#### バンドル
 
-An artifact in the form of a single JS file, produced by a build tool \(for example, [Webpack](https://webpack.js.org) or [Rollup](https://rollupjs.org)\) that contains symbols originating in one or more modules.
-Bundles are a browser-specific workaround that reduce network strain that would be caused if browsers were to start downloading hundreds if not tens of thousands of files.
-Node.js typically doesn't use bundles.
-Common bundle formats are UMD and System.register.
+ビルドツール \([Webpack](https://webpack.js.org) や [Rollup](https://rollupjs.org) など\) によって生成される単一の JS ファイルの形式のアーティファクトで、1 つ以上のモジュールに由来するシンボルが含まれています。
+バンドルはブラウザ固有の回避策であり、ブラウザが数万ではないにしても数百のファイルのダウンロードを開始した場合に発生するネットワークの負荷を軽減します。
+通常、Node.js はバンドルを使用しません。
+一般的なバンドル形式は、UMD と System.register です。
 
-#### Language level
+#### 言語レベル
 
-The language of the code \(ES2015 or ES2020\).
-Independent of the module format.
+コードの言語 \(ES2015 または ES2020\)。
+モジュール形式に依存しません。
 
-#### Entry point
+#### エントリーポイント
 
-A module intended to be imported by the user.
-It is referenced by a unique module ID and exports the public API referenced by that module ID.
-An example is `@angular/core` or `@angular/core/testing`.
-Both entry points exist in the `@angular/core` package, but they export different symbols.
-A package can have many entry points.
+ユーザーがインポートすることを意図したモジュール。
+一意のモジュール ID によって参照され、そのモジュール ID によって参照されるパブリック API をエクスポートします。
+例は `@angular/core` または `@angular/core/testing` です。
+どちらのエントリポイントも `@angular/core` パッケージに存在しますが、異なるシンボルをエクスポートします。
+パッケージには、多数のエントリポイントを含めることができます。
 
-#### Deep import
+#### ディープインポート
 
-A process of retrieving symbols from modules that are not Entry Points.
-These module IDs are usually considered to be private APIs that can change over the lifetime of the project or while the bundle for the given package is being created.
+エントリポイントではないモジュールからシンボルを取得するプロセス。
+これらのモジュール ID は、通常、プロジェクトの有効期間中、または特定のパッケージのバンドルの作成中に変更できるプライベート API と見なされます。
 
-#### Top-Level import
+#### トップレベルのインポート
 
-An import coming from an entry point.
-The available top-level imports are what define the public API and are exposed in "&commat;angular/name" modules, such as `@angular/core` or `@angular/common`.
+エントリポイントからのインポート。
+利用可能なトップレベルのインポートは、パブリック API を定義するものであり、 `@angular/core` や `@angular/common` などの「&commat;angular/name」モジュールで公開されます。
 
-#### Tree-shaking
+#### ツリーシェイク
 
-The process of identifying and removing code not used by an application - also known as dead code elimination.
-This is a global optimization performed at the application level using tools like [Rollup](https://rollupjs.org), [Closure Compiler](https://developers.google.com/closure/compiler), or [Terser](https://github.com/terser/terser).
+アプリケーションで使用されていないコードを特定して削除するプロセス。デッドコードの削除とも呼ばれます。
+これは、[Rollup](https://rollupjs.org)、[Closure Compiler](https://developers.google.com/closure/compiler)、または [Terser](https://github.com/terser/terser) などのツールを使用してアプリケーションレベルで実行されるグローバルな最適化です。
 
-#### AOT compiler
+#### AOT コンパイラ
 
-The Ahead of Time Compiler for Angular.
+Angular 用の Ahead of Time コンパイラ。
 
-#### Flattened type definitions
+#### フラット化された型の定義
 
-The bundled TypeScript definitions generated from [API Extractor](https://api-extractor.com).
+[API Extractor](https://api-extractor.com) から生成されたバンドルされた TypeScript 定義。
 
 <!-- links -->
 

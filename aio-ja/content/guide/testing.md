@@ -71,7 +71,7 @@ The test output is displayed in the browser using [Karma Jasmine HTML Reporter](
 このアクションを確認するために`app.component.ts`に小さな変更を加えて保存してみましょう。
 テストが再び実行され、ブラウザが更新されます。そして新しいテストの結果が表示されます。
 
-## 設定
+## 設定 {@a configuration}
 
 The Angular CLI takes care of Jasmine and Karma configuration for you. It constructs the full configuration in memory, based on options specified in the `angular.json` file.
 

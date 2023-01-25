@@ -1,20 +1,12 @@
 {
   "TopBar": [
     {
-      "url": "features",
-      "title": "特徴"
-    },
-    {
       "url": "docs",
       "title": "ドキュメント"
     },
     {
       "url": "resources",
-      "title": "資料集"
-    },
-    {
-      "url": "events",
-      "title": "イベント"
+      "title": "コミュニティ"
     },
     {
       "url": "https://blog.angular.io/",
@@ -740,6 +732,35 @@
           "title": "事前レンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
           "translated": true
+        },
+        {
+          "title": "Angularライブラリ",
+          "tooltip": "Extending Angular with shared libraries.",
+          "children": [
+            {
+              "url": "guide/libraries",
+              "title": "ライブラリの概要",
+              "tooltip": "ライブラリを使用または作成する方法と時期を理解します。",
+              "translated": true
+            },
+            {
+              "url": "guide/using-libraries",
+              "title": "公開ライブラリの使用",
+              "tooltip": "公開ライブラリをアプリに統合します。",
+              "translated": true
+            },
+            {
+              "url": "guide/creating-libraries",
+              "title": "ライブラリの作成",
+              "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
+              "translated": true
+            },
+            {
+              "url": "guide/angular-package-format",
+              "title": "Angular Package Format",
+              "tooltip": "Information about the Angular Package Format."
+            }
+          ]
         }
       ]
     },
@@ -893,43 +914,43 @@
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt0",
+              "url": "tutorial/tour-of-heroes/toh-pt0",
               "title": "プロジェクトの作成",
               "tooltip": "アプリケーションシェルを作成します",
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt1",
+              "url": "tutorial/tour-of-heroes/toh-pt1",
               "title": "1. ヒーローエディター",
               "tooltip": "Part 1: シンプルなエディターを組み立てます",
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt2",
+              "url": "tutorial/tour-of-heroes/toh-pt2",
               "title": "2. リストの表示",
               "tooltip": "Part 2: ヒーローのリストを備えたmaster/detailページを組み立てます",
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt3",
+              "url": "tutorial/tour-of-heroes/toh-pt3",
               "title": "3. フィーチャーコンポーネントの作成",
               "tooltip": "Part 3: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt4",
+              "url": "tutorial/tour-of-heroes/toh-pt4",
               "title": "4. サービスの追加",
               "tooltip": "Part 4: ヒーローのデータを管理するための再利用可能なサービスを作ります",
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt5",
+              "url": "tutorial/tour-of-heroes/toh-pt5",
               "title": "5. ナビゲーションの追加",
               "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
               "translated": true
             },
             {
-              "url": "tutorial/toh-pt6",
+              "url": "tutorial/tour-of-heroes/toh-pt6",
               "title": "6. サーバーからデータの取得",
               "tooltip": "Part 6: HTTPを使ってヒーローのデータを取得・保存します",
               "translated": true
@@ -940,35 +961,6 @@
           "url": "guide/forms",
           "title": "Building a Template-driven Form",
           "tooltip": "Create a template-driven form using directives and Angular template syntax."
-        },
-        {
-          "title": "Angularライブラリ",
-          "tooltip": "Extending Angular with shared libraries.",
-          "children": [
-            {
-              "url": "guide/libraries",
-              "title": "ライブラリの概要",
-              "tooltip": "ライブラリを使用または作成する方法と時期を理解します。",
-              "translated": true
-            },
-            {
-              "url": "guide/using-libraries",
-              "title": "公開ライブラリの使用",
-              "tooltip": "公開ライブラリをアプリに統合します。",
-              "translated": true
-            },
-            {
-              "url": "guide/creating-libraries",
-              "title": "ライブラリの作成",
-              "tooltip": "独自のライブラリを作成、公開、および使用することでAngularを拡張します。",
-              "translated": true
-            },
-            {
-              "url": "guide/angular-package-format",
-              "title": "Angular Package Format",
-              "tooltip": "Information about the Angular Package Format."
-            }
-          ]
         }
       ]
     },

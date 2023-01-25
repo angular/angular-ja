@@ -6,14 +6,22 @@
 
 ## アプリケーション環境の設定 {@a configuring-application-environments}
 
-*stage*や*production*など、さまざまなデフォルト設定を持ったさまざまな名前付きビルド設定をプロジェクトに定義することができます。
+`development`や`staging`など、異なるデフォルト設定を持ったさまざまな名前付きビルド設定をプロジェクトに定義することができます。
 
 それぞれの名前付き設定は、`build`、`serve`や`test`など、さまざまな[builderターゲット](guide/glossary#target)に適用されるオプションすべてについてデフォルト設定をもつことができます。[Angular CLI](cli)の`build`、`serve`、そして`test`コマンドは、ファイルを目的のターゲット環境に適したバージョンに置き換えることができます。
 
 ### 環境固有のデフォルトの設定 {@a configure-environment-specific-defaults}
 
-プロジェクトの`src/environment/`フォルダにはデフォルト環境を提供する基本設定ファイル`environment.ts`が含まれています。
-ターゲット固有の設定ファイルを追加すれば、本番やステージングなどの環境用にデフォルト設定をオーバーライドすることができます。
+Using the Angular CLI, start by running the [generate environments command](cli/generate#environments-command) shown here to create the `src/environments/` directory and configure the project to use these files.
+
+<code-example format="shell" language="shell">
+
+ng generate environments
+
+</code-example>
+
+The project's `src/environments/` directory contains the base configuration file, `environment.ts`, which provides configuration for `production`, the default environment.
+You can override default values for additional environments, such as `development` and `staging`, in target-specific configuration files.
 
 例:
 
@@ -26,7 +34,7 @@
           environment.ts
         </div>
         <div class="file">
-          environment.prod.ts
+          environment.development.ts
         </div>
         <div class="file">
           environment.staging.ts
@@ -36,36 +44,42 @@
 
 基本ファイル`environment.ts`には、デフォルトの環境設定が含まれています。例:
 
-```
+<code-example format="typescript" language="typescript">
+
 export const environment = {
-  production: false
+  production: true
 };
-```
+
+</code-example>
 
 環境が指定されない場合、`build`コマンドはこれをビルドターゲットとして使用します。
 環境オブジェクトの追加プロパティとして、あるいは個別のオブジェクトとして、さらに変数を追加することができます。
 たとえば、次はデフォルト環境に変数のデフォルト値を追加しています:
 
-```
-export const environment = {
-  production: false,
-  apiUrl: 'http://my-api-url'
-};
-```
+<code-example format="typescript" language="typescript">
 
-`environment.prod.ts`のようなターゲット固有の設定ファイルを追加することができます。
-次の内容は本番ビルドターゲットのデフォルト値を設定しています:
-
-```
 export const environment = {
   production: true,
   apiUrl: 'http://my-prod-url'
 };
-```
+
+</code-example>
+
+`environment.development.ts`のようなターゲット固有の設定ファイルを追加することができます。
+次の内容は開発ビルドターゲットのデフォルト値を設定しています:
+
+<code-example format="typescript" language="typescript">
+
+export const environment = {
+  production: false,
+  apiUrl: 'http://my-api-url'
+};
+
+</code-example>
 
 ### アプリケーションでの環境固有の変数の使用 {@a using-environment-specific-variables-in-your-app}
 
-次のアプリケーション構造は本番環境およびステージング環境用のビルドターゲットを設定しています:
+次のアプリケーション構造は`development`環境および`staging`環境用のビルドターゲットを設定しています:
 
 <div class="filetree">
     <div class="file">
@@ -91,7 +105,7 @@ export const environment = {
               environment.ts
             </div>
             <div class="file">
-              environment.prod.ts
+              environment.development.ts
             </div>
             <div class="file">
               environment.staging.ts
@@ -102,32 +116,37 @@ export const environment = {
 
 定義した環境設定を使用するには、コンポーネントでオリジナルの環境ファイルをインポートしなければなりません:
 
-```
+<code-example format="typescript" language="typescript">
+
 import { environment } from './../environments/environment';
-```
+
+</code-example>
 
 これによりbuildコマンドとserveコマンドが特定のビルドターゲット用の設定を見つけることができるようになります。
 
 次のコンポーネントファイル(`app.component.ts`)の中のコードは設定ファイルで定義された環境変数を使用しています。
 
-```
-import { Component } from '@angular/core';
-import { environment } from './../environments/environment';
+<code-example format="typescript" language="typescript">
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  constructor() {
-    console.log(environment.production); // Logs false for default environment
+  import { Component } from '&commat;angular/core';
+  import { environment } from './../environments/environment';
+
+  &commat;Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
+  })
+  export class AppComponent {
+    constructor() {
+      console.log(environment.production); // Logs false for development environment
+    }
+
+    title = 'app works!';
   }
-  title = 'app works!';
-}
-```
 
-{@a file-replacement}
+</code-example>
+
+<a id="file-replacement"></a>
 
 ## ターゲット固有ファイルの置換の設定 {@a configure-target-specific-file-replacements}
 
@@ -138,35 +157,40 @@ export class AppComponent {
 固有のビルドターゲット用のファイルの置き換えを追加することができます。
 例:
 
-```
-"configurations": {
-  "production": {
-    "fileReplacements": [
-      {
-        "replace": "src/environments/environment.ts",
-        "with": "src/environments/environment.prod.ts"
-      }
-    ],
-    ...
-```
+<code-example format="json" language="json">
 
-これは `ng build --configuration production` を使って本番設定をビルドするとき、`src/environment/environment.ts`ファイルはターゲット固有バージョンの`src/environment/environment.prod.ts`ファイルに置き換えられることを意味します。
+  "configurations": {
+    "development": {
+      "fileReplacements": [
+          {
+            "replace": "src/environments/environment.ts",
+            "with": "src/environments/environment.development.ts"
+          }
+        ],
+        &hellip;
+
+</code-example>
+
+これは `ng build --configuration development` を使って開発設定でビルドするとき、`src/environment/environment.ts`ファイルはターゲット固有バージョンの`src/environment/environment.development.ts`ファイルに置き換えられることを意味します。
 
 必要に応じてさらに設定を追加することができます。ステージング環境を追加するには、`src/environments/environment.ts`をコピーして`src/environments/environment.staging.ts`を作り、それから`staging`設定を`angular.json`に追加してください:
 
-```
-"configurations": {
-  "production": { ... },
-  "staging": {
-    "fileReplacements": [
-      {
-        "replace": "src/environments/environment.ts",
-        "with": "src/environments/environment.staging.ts"
-      }
-    ]
+<code-example format="json" language="json">
+
+  "configurations": {
+    "development": { &hellip; },
+    "production": { &hellip; },
+    "staging": {
+      "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.staging.ts"
+        }
+      ]
+    }
   }
-}
-```
+
+</code-example>
 
 このターゲット環境にもさらに設定オプションを追加することができます。
 ビルドでサポートされているオプションはすべてビルドターゲット設定でオーバーライドすることができます。
@@ -179,25 +203,30 @@ export class AppComponent {
 
 もし`angular.json`の"serve:configurations"セクションにターゲットとなるビルド設定を追加すれば、それを使用するように`serve`コマンドを設定することもできます:
 
-```
-"serve": {
-  "builder": "@angular-devkit/build-angular:dev-server",
-  "options": {
-    "browserTarget": "your-project-name:build"
-  },
-  "configurations": {
-    "production": {
-      "browserTarget": "your-project-name:build:production"
-    },
-    "staging": {
-      "browserTarget": "your-project-name:build:staging"
-    }
-  }
-},
-```
+<code-example format="json" language="json">
 
-{@a size-budgets}
-{@a configure-size-budgets}
+  "serve": {
+    "builder": "&commat;angular-devkit/build-angular:dev-server",
+    "options": {
+      "browserTarget": "your-project-name:build"
+    },
+    "configurations": {
+      "development": {
+        "browserTarget": "your-project-name:build:development"
+      },
+      "production": {
+        "browserTarget": "your-project-name:build:production"
+      },
+      "staging": {
+        "browserTarget": "your-project-name:build:staging"
+      }
+    }
+  },
+
+</code-example>
+
+<a id="size-budgets"></a>
+<a id="configure-size-budgets"></a>
 
 ## サイズ予算の設定 {@a configuring-size-budgets}
 
@@ -206,24 +235,26 @@ CLIを使用すると、サイズにしきい値を設定してアプリケー�
 
 CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environments)用の`budgets`セクションで、サイズの境界を定義してください。
 
-```
+<code-example format="json" language="json">
+
 {
-  ...
+  &hellip;
   "configurations": {
     "production": {
-      ...
-      budgets: []
+      &hellip;
+      "budgets": []
     }
   }
 }
-```
+
+</code-example>
 
 アプリケーション全体、および特定の部分に対して、サイズ予算を指定することができます。
 各予算エントリは、特定の種類の予算を設定します。
 次の形式でサイズ値を指定してください:
 
-| Size value      | Details |
-|:---             |:---     |
+| Size value      | Details                                                                     |
+| :-------------- | :-------------------------------------------------------------------------- |
 | `123` or `123b` | バイト単位のサイズ |
 | `123kb`         | キロバイト単位のサイズ |
 | `123mb`         | メガバイト単位のサイズ |
@@ -234,7 +265,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
 各予算エントリは、次のプロパティをもつJSONオブジェクトです:
 
 | Property       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|:---            |:---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | type           | The type of budget. One of: <table> <thead> <tr> <th> Value </th> <th> Details </th> </tr> </thead> <tbody> <tr> <td> <code>bundle</code> </td> <td> The size of a specific bundle. </td> </tr> <tr> <td> <code>initial</code> </td> <td> The size of JavaScript needed for bootstrapping the application. Defaults to warning at 500kb and erroring at 1mb. </td> </tr> <tr> <td> <code>allScript</code> </td> <td> The size of all scripts. </td> </tr> <tr> <td> <code>all</code> </td> <td> The size of the entire application. </td> </tr> <tr> <td> <code>anyComponentStyle</code> </td> <td> This size of any one component stylesheet. Defaults to warning at 2kb and erroring at 4kb. </td> </tr> <tr> <td> <code>anyScript</code> </td> <td> The size of any one script. </td> </tr> <tr> <td> <code>any</code> </td> <td> The size of any file. </td> </tr> </tbody> </table> |
 | name           | The name of the bundle \(for `type=bundle`\).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | baseline       | The baseline size for comparison.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -282,7 +313,7 @@ Angular CLIでは、さまざまなブラウザバージョンとの互換性を
 内部的には、Angular CLI は次の `browserslist` 設定を使用し、Angular が[サポートするブラウザ](guide/browser-support) にマッチするように設定します。
 
   <code-example format="none" language="text">
-  last 1 Chrome version
+  last 2 Chrome versions
   last 1 Firefox version
   last 2 Edge major versions
   last 2 Safari major versions
@@ -291,7 +322,7 @@ Angular CLIでは、さまざまなブラウザバージョンとの互換性を
   </code-example>
 
 
-内部設定を上書きするには、`.browserslistrc`という名前の新しいファイルをプロジェクトディレクトリに追加して、サポートしたいブラウザを指定してください。
+To override the internal configuration, run [`ng generate browserslist`](cli/generate#config-command), which generates a `.browserslistrc` configuration file in the the project directory.
 
   <code-example format="none" language="text">
   last 1 Chrome version
@@ -332,9 +363,9 @@ Angular CLIでは、さまざまなブラウザバージョンとの互換性を
 
     <code-example format="json" language="json">
 
-    &hellip;
-    "architect": {
-      "serve": {
+      &hellip;
+      "architect": {
+        "serve": {
         "builder": "&commat;angular-devkit/build-angular:dev-server",
         "options": {
           "browserTarget": "your-application-name:build",
@@ -410,27 +441,25 @@ Angular CLIでは、さまざまなブラウザバージョンとの互換性を
 
 JavaScriptで設定を定義することで、同じターゲットに対して複数のエントリをプロキシすることができます。
 
-（`proxy.conf.json`の代わりに）`proxy.conf.js`にプロキシ設定を用意し、次の例のように設定ファイルを指定してください。
+（`proxy.conf.json`の代わりに）`proxy.conf.mjs`にプロキシ設定を用意し、次の例のように設定ファイルを指定してください。
 
 <code-example format="javascript" language="javascript">
 
-const PROXY_CONFIG = [
-    {
-        context: [
-            "/my",
-            "/many",
-            "/endpoints",
-            "/i",
-            "/need",
-            "/to",
-            "/proxy"
-        ],
-        target: "http://localhost:3000",
-        secure: false
-    }
-]
-
-module.exports = PROXY_CONFIG;
+export default [
+  {
+    context: [
+        '/my',
+        '/many',
+        '/endpoints',
+        '/i',
+        '/need',
+        '/to',
+        '/proxy'
+    ],
+    target: 'http://localhost:3000',
+    secure: false
+  }
+];
 
 </code-example>
 
@@ -444,7 +473,7 @@ CLI設定ファイル`angular.json`で、JavaScriptプロキシ設定ファイ�
     "builder": "&commat;angular-devkit/build-angular:dev-server",
     "options": {
       "browserTarget": "your-application-name:build",
-      "proxyConfig": "src/proxy.conf.js"
+      "proxyConfig": "src/proxy.conf.mjs"
     },
 &hellip;
 
@@ -456,21 +485,19 @@ CLI設定ファイル`angular.json`で、JavaScriptプロキシ設定ファイ�
 
 <code-example format="javascript" language="javascript">
 
-const PROXY_CONFIG = {
-    "/api/proxy": {
-        "target": "http://localhost:3000",
-        "secure": false,
-        "bypass": function (req, res, proxyOptions) {
-            if (req.headers.accept.indexOf("html") !== -1) {
-                console.log("Skipping proxy for browser request.");
-                return "/index.html";
-            }
-            req.headers["X-Custom-Header"] = "yes";
+export default {
+  '/api/proxy': {
+    "target": 'http://localhost:3000',
+    "secure": false,
+    "bypass": function (req, res, proxyOptions) {
+        if (req.headers.accept.includes('html')) {
+            console.log('Skipping proxy for browser request.');
+            return '/index.html';
         }
+        req.headers['X-Custom-Header'] = 'yes';
     }
-}
-
-module.exports = PROXY_CONFIG;
+  }
+};
 
 </code-example>
 
@@ -491,26 +518,27 @@ JavaScript設定ファイルで次の内容を使用してください。
 
 <code-example format="javascript" language="javascript">
 
-var HttpsProxyAgent = require('https-proxy-agent');
-var proxyConfig = [{
+import HttpsProxyAgent from 'https-proxy-agent';
+
+const proxyConfig = [{
   context: '/api',
   target: 'http://your-remote-server.com:3000',
   secure: false
 }];
 
-function setupForCorporateProxy(proxyConfig) {
-  var proxyServer = process.env.http_proxy &verbar;&verbar; process.env.HTTP_PROXY;
+export default (proxyConfig) => {
+  const proxyServer = process.env.http_proxy &verbar;&verbar; process.env.HTTP_PROXY;
   if (proxyServer) {
-    var agent = new HttpsProxyAgent(proxyServer);
+    const agent = new HttpsProxyAgent(proxyServer);
     console.log('Using corporate proxy server: ' + proxyServer);
-    proxyConfig.forEach(function(entry) {
-      entry.agent = agent;
-    });
-  }
-  return proxyConfig;
-}
 
-module.exports = setupForCorporateProxy(proxyConfig);
+    for (const entry of proxyConfig) {
+      entry.agent = agent;
+    }
+  }
+
+  return proxyConfig;
+};
 
 </code-example>
 
@@ -520,4 +548,4 @@ module.exports = setupForCorporateProxy(proxyConfig);
 
 <!-- end links -->
 
-@reviewed 2022-10-24
+@reviewed 2023-01-17

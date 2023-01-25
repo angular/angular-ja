@@ -24,11 +24,11 @@ Along the way, it highlights key features of the router such as:
 *   The `canDeactivate` guard \(ask permission to discard unsaved changes\)
 *   The `resolve` guard \(pre-fetching route data\)
 *   Lazy loading an `NgModule`
-*   The `canLoad` guard \(check before loading feature module assets\)
+*   The `canMatch` guard \(check before loading feature module assets\)
 
 This guide proceeds as a sequence of milestones as if you were building the application step-by-step, but assumes you are familiar with basic [Angular concepts](guide/architecture).
 For a general introduction to angular, see the [Getting Started](start).
-For a more in-depth overview, see the [Tour of Heroes](tutorial) tutorial.
+For a more in-depth overview, see the [Tour of Heroes](tutorial/tour-of-heroes) tutorial.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ To complete this tutorial, you should have a basic understanding of the followin
 *   CSS
 *   [Angular CLI](cli)
 
-You might find the [Tour of Heroes tutorial](tutorial) helpful, but it is not required.
+You might find the [Tour of Heroes tutorial](tutorial/tour-of-heroes) helpful, but it is not required.
 
 ## The sample application in action
 
@@ -547,7 +547,7 @@ This milestone covers the following:
 *   Navigating imperatively from one component to another
 *   Passing required and optional information in route parameters
 
-This sample application recreates the heroes feature in the "Services" section of the [Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services"), and reuses much of the code from the <live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>.
+This sample application recreates the heroes feature in the "Services" section of the [Tour of Heroes tutorial](tutorial/tour-of-heroes/toh-pt4 "Tour of Heroes: Services"), and reuses much of the code from the <live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>.
 
 A typical application has multiple feature areas, each dedicated to a particular business purpose with its own folder.
 
@@ -1647,7 +1647,7 @@ A guard's return value controls the router's behavior:
 <div class="alert is-helpful">
 
 **Note:** The guard can also tell the router to navigate elsewhere, effectively canceling the current navigation.
-When doing so inside a guard, the guard should return `UrlTree`;
+When doing so inside a guard, the guard should return `UrlTree`.
 
 </div>
 
@@ -1656,7 +1656,7 @@ But in many cases, the guard can't produce an answer synchronously.
 The guard could ask the user a question, save changes to the server, or fetch fresh data.
 These are all asynchronous operations.
 
-Accordingly, a routing guard can return an `Observable<boolean>` or a `Promise<boolean>` and the router will wait for the observable to resolve to `true` or `false`.
+Accordingly, a routing guard can return an `Observable<boolean>` or a `Promise<boolean>` and the router will wait for the observable or the promise to resolve to `true` or `false`.
 
 <div class="alert is-helpful">
 
@@ -1665,7 +1665,7 @@ The observable provided to the `Router` automatically completes after it retriev
 
 </div>
 
-The router supports multiple guard interfaces:
+The router supports multiple guard methods:
 
 | Guard interfaces                                  | Details |
 |:---                                               |:---     |
@@ -1673,13 +1673,12 @@ The router supports multiple guard interfaces:
 | [`canActivateChild`](api/router/CanActivateChildFn) | To mediate navigation *to* a child route                            |
 | [`canDeactivate`](api/router/CanDeactivateFn)       | To mediate navigation *away* from the current route                 |
 | [`resolve`](api/router/ResolveFn)                   | To perform route data retrieval *before* route activation           |
-| [`canLoad`](api/router/CanLoadFn)                   | To mediate navigation *to* a feature module loaded *asynchronously* |
-| [`canMatch`](api/router/CanMatchFn)                 | To control whether a `Route` should be used at all, even if the `path` matches the URL segment. |
+| [`canMatch`](api/router/CanMatchFn)                 | To control whether a `Route` should be used at all, even if the `path` matches the URL segment |
 
 You can have multiple guards at every level of a routing hierarchy.
 The router checks the `canDeactivate` guards first, from the deepest child route to the top.
 Then it checks the `canActivate` and `canActivateChild` guards from the top down to the deepest child route.
-If the feature module is loaded asynchronously, the `canLoad` guard is checked before the module is loaded.
+If the feature module is loaded asynchronously, the `canMatch` guard is checked before the module is loaded.
 
 With the exception of `canMatch`, if *any* guard returns false, pending guards that have not completed are canceled, and the entire navigation is canceled. If a `canMatch` guard returns `false`, the `Router` continues
 processing the rest of the `Routes` to see if a different `Route` config matches the URL. You can think of this 
@@ -1857,7 +1856,7 @@ The new admin feature should be accessible only to authenticated users.
 
 Write a `canActivate()` guard method to redirect anonymous users to the login page when they try to enter the admin area.
 
-Create a new file named `auth.guard.ts` function in the `auth` folder. The `auth.guard.ts` file will contain the `authGuard` function.
+Create a new file named `auth.guard.ts` in the `auth` folder. The `auth.guard.ts` file will contain the `authGuard` function.
 
 <!-- TODO(atscott): update schematics to generate functional guards
 <code-example format="shell" language="shell">
@@ -1867,7 +1866,7 @@ ng generate guard auth/auth
 </code-example>
  -->
 
-To demonstrate the fundamentals, this example only logs to the console, `returns` true immediately, and lets navigation proceed:
+To demonstrate the fundamentals, this example only logs to the console, returns `true` immediately, and lets navigation proceed:
 
 <code-example header="src/app/auth/auth.guard.ts (excerpt)" path="router/src/app/auth/auth.guard.1.ts"></code-example>
 
@@ -1911,15 +1910,9 @@ Revise the `authGuard` to call the `AuthService`.
 
 <code-example header="src/app/auth/auth.guard.ts (v2)" path="router/src/app/auth/auth.guard.2.ts"></code-example>
 
-Notice that you inject the `AuthService` and the `Router` in the constructor.
-You haven't provided the `AuthService` yet but it's good to know that you can inject helpful services into routing guards.
-
-This guard returns a synchronous boolean result.
-If the user is logged in, it returns true and the navigation continues.
-
-The `ActivatedRouteSnapshot` contains the *future* route that will be activated and the `RouterStateSnapshot` contains the *future* `RouterState` of the application, should you pass through the guard check.
-
-If the user is not logged in, you store the attempted URL the user came from using the `RouterStateSnapshot.url` and tell the router to redirect to a login page &mdash; a page you haven't created yet.
+This guard returns a synchronous boolean result or a `UrlTree`.
+If the user is logged in, it returns `true` and the navigation continues.
+Otherwise, it redirects to a login page; a page you haven't created yet.
 Returning a `UrlTree` tells the `Router` to cancel the current navigation and schedule a new one to redirect the user.
 
 <a id="add-login-component"></a>
@@ -1936,8 +1929,8 @@ ng generate component auth/login
 
 </code-example>
 
-Register a `/login` route in the `auth/auth-routing.module.ts`.
-In `app.module.ts`, import and add the `AuthModule` to the `AppModule` imports.
+Register a `/login` route in the `auth/auth-routing.module.ts` file.
+In `app.module.ts`, import and add `AuthModule` to the `AppModule` imports array.
 
 <code-tabs>
     <code-pane header="src/app/app.module.ts" path="router/src/app/app.module.ts" region="auth"></code-pane>
@@ -1946,16 +1939,6 @@ In `app.module.ts`, import and add the `AuthModule` to the `AppModule` imports.
     <code-pane header="src/app/auth/auth.module.ts" path="router/src/app/auth/auth.module.ts"></code-pane>
 </code-tabs>
 
-<a id="can-match-guard"></a>
-
-### `canMatch`: Controlling `Route` matching based on application conditions
-
-As an alternative to using a `canActivate` guard which redirects the user to a new page if they do not have access, you can instead
-use a `canMatch` guard to control whether the `Router` even attempts to activate a `Route`. This allows you to have
-multiple `Route` configurations which share the same `path` but are matched based on different conditions. In addition, this approach
-can allow the `Router` to match the wildcard `Route` instead.
-
-<code-example path="router/src/app/admin/admin-routing.module.2.ts" header="src/app/admin/admin-routing.module.ts (guarded admin route)" region="can-match"></code-example>
 
 <a id="can-activate-child-guard"></a>
 
@@ -1967,13 +1950,6 @@ The key difference is that it runs before any child route is activated.
 
 You protected the admin feature module from unauthorized access.
 You should also protect child routes *within* the feature module.
-
-Extend the `authGuard` to protect when navigating between the `admin` routes.
-Open `auth.guard.ts` and add the `CanActivateChildFn` interface to the imported tokens from the router package.
-
-Next, indicate the method acts as a `canActivateChild` guard as well by adding `|CanActivateChildFn` to the type.
-
-<code-example header="src/app/auth/auth.guard.ts (excerpt)" path="router/src/app/auth/auth.guard.3.ts" region="can-activate-child"></code-example>
 
 Add the same `authGuard` to the `component-less` admin route to protect all other child routes at one time
 instead of adding the `authGuard` to each route individually.
@@ -2053,7 +2029,7 @@ Paste the following code into your guard.
 
 <code-example header="src/app/can-deactivate.guard.ts" path="router/src/app/can-deactivate.guard.ts"></code-example>
 
-While the guard doesn't have to know which component has a deactivate method, it can detect that the `CrisisDetailComponent` component has the `canDeactivate()` method and call it.
+While the guard doesn't have to know which component has a `deactivate` method, it can detect that the `CrisisDetailComponent` component has the `canDeactivate()` method and call it.
 The guard not knowing the details of any component's deactivation method makes the guard reusable.
 
 Alternatively, you could make a component-specific `canDeactivate` guard for the `CrisisDetailComponent`.
@@ -2275,9 +2251,9 @@ The root `AppModule` must neither load nor reference the `AdminModule` or its fi
 
 In `app.module.ts`, remove the `AdminModule` import statement from the top of the file and remove the `AdminModule` from the NgModule's `imports` array.
 
-<a id="can-load-guard"></a>
+<a id="can-match-guard"></a>
 
-### `canLoad`: guarding unauthorized loading of feature modules
+### `canMatch`: guarding unauthorized access of feature modules
 
 You're already protecting the `AdminModule` with a `canActivate` guard that prevents unauthorized users from accessing the admin feature area.
 It redirects to the login page if the user is not authorized.
@@ -2285,17 +2261,13 @@ It redirects to the login page if the user is not authorized.
 But the router is still loading the `AdminModule` even if the user can't visit any of its components.
 Ideally, you'd only load the `AdminModule` if the user is logged in.
 
-Add a `canLoad` guard that only loads the `AdminModule` once the user is logged in *and* attempts to access the admin feature area.
+A `canMatch` guard controls whether the `Router` attempts to match a `Route`. This lets you have
+multiple `Route` configurations that share the same `path` but are matched based on different conditions. This approach
+allows the `Router` to match the wildcard `Route` instead.
 
-The existing `authGuard` already has the essential logic to support the `canLoad` guard.
+The existing `authGuard` contains the logic to support the `canMatch` guard.
 
-1.  Open `auth.guard.ts`.
-1.  Import the `CanLoadFn` interface from `@angular/router`.
-1.  Add it to the `authGuard` function's type.
-
-<code-example header="src/app/auth/auth.guard.ts (canLoad guard)" path="router/src/app/auth/auth.guard.ts" region="canLoad"></code-example>
-
-Now add the `authGuard` to the `canLoad` array property for the `admin` route.
+Finally, add the `authGuard` to the `canMatch` array property for the `admin` route.
 The completed admin route looks like this:
 
 <code-example header="app-routing.module.ts (lazy admin route)" path="router/src/app/app-routing.module.5.ts" region="admin"></code-example>
@@ -2373,19 +2345,6 @@ This configures the `Router` preloader to immediately load all lazy loaded route
 
 When you visit `http://localhost:4200`, the `/heroes` route loads immediately upon launch and the router starts loading the `CrisisCenterModule` right after the `HeroesModule` loads.
 
-Currently, the `AdminModule` does not preload because `canLoad` is blocking it.
-
-<a id="preload-canload"></a>
-
-#### `canLoad` blocks preload of children
-
-The `PreloadAllModules` strategy does not load feature areas protected by a [canLoad](#can-load-guard) guard.
-
-You added a `canLoad` guard to the route in the `AdminModule` a few steps back to block loading of that module until the user is authorized.
-That `canLoad` guard takes precedence over the preload strategy for loading children routes.
-
-If you want to preload a module as well as guard against unauthorized access, remove the `canLoad()` guard method and rely on the [canActivate()](#can-activate-guard) guard alone.
-
 <a id="custom-preloading"></a>
 
 ### Custom Preloading Strategy
@@ -2423,7 +2382,9 @@ An implementation of `preload` must return an `Observable`.
 If the route does preload, it returns the observable returned by calling the loader function.
 If the route does not preload, it returns an `Observable` of `null`.
 
-In this sample, the  `preload()` method loads the route if the route's `data.preload` flag is truthy.
+In this sample, the  `preload()` method loads the route if the route's `data.preload` flag is truthy. We also skip loading the
+`Route` if there is a `canMatch` guard because the user might
+not have access to it.
 
 As a side effect, `SelectivePreloadingStrategyService` logs the `path` of a selected route in its public `preloadedModules` array.
 

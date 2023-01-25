@@ -87,7 +87,7 @@ For more details on accessibility, see [Accessibility in Angular](guide/accessib
 ユーザーがカーソルを置いてリストからヒーローを選択するとき、
 ヒーローのリストは魅力的で視覚的に目立たせる必要があります。
 
-[最初のチュートリアル](tutorial/toh-pt0#app-wide-styles) では、アプリケーション全体の基本的なスタイルを `styles.css` に設定しました。
+[最初のチュートリアル](tutorial/tour-of-heroes/toh-pt0#app-wide-styles) では、アプリケーション全体の基本的なスタイルを `styles.css` に設定しました。
 このスタイルシートにはヒーローのリストのためのスタイルは含めていませんでした。
 
 `styles.css` にさらにスタイルを追加し、コンポーネントを追加するときにそのスタイルシートを拡大し続けることができます

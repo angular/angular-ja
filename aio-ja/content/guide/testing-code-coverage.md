@@ -2,7 +2,7 @@
 
 # テストしているコードの量を調べる
 
-CLIでユニットテストを実行し、コードカバレッジレポートを作成することができます。
+Angular CLIでユニットテストを実行し、コードカバレッジレポートを作成することができます。
 コードカバレッジレポートは、ユニットテストで正しくテストされていないコードベースの部分を表示します。
 
 <div class="alert is-helpful">
@@ -19,10 +19,10 @@ ng test --no-watch --code-coverage
 
 </code-example>
 
-テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`フォルダを作成します。
+テストが完了すると、コマンドはプロジェクト内に新しく`/coverage`ディレクトリを作成します。
 ソースコードとコードカバレッジ値のレポートを見るためには`index.html`ファイルを開きます。
 
-テストするたびにコードカバレッジレポートを作成したい場合は、CLIの設定ファイル、`angular.json`で次のようなオプションを設定します:
+テストするたびにコードカバレッジレポートを作成したい場合は、Angular CLIの設定ファイル、`angular.json`で次のようなオプションを設定します:
 
 <code-example format="json" language="json">
 
@@ -63,9 +63,17 @@ coverageReporter: {
 
 </code-example>
 
+
+<div class="alert is-helpful">
+
+Read more about creating and fine tunning Karma configuration in the [testing guide](guide/testing#configuration).
+
+</div>
+
+
 The `check` property causes the tool to enforce a minimum of 80% code coverage when the unit tests are run in the project.
 
-You can find more info about the different coverage configuration options [here](https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md).
+Read more on coverage configuration options in the [karma coverage documentation](https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md).
 
 <!-- links -->
 
@@ -73,4 +81,4 @@ You can find more info about the different coverage configuration options [here]
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-01-17

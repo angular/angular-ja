@@ -244,7 +244,7 @@ Angularは式を2つの翻訳ユニットに抽出します。
 
 [AioGuideI18nCommonMerge]: guide/i18n-common-merge "Merge translations into the application | Angular"
 
-[AioGuideI18nCommonPrepare]: guide/i18n-common-prepare "Prepare templates for translations | Angular"
+[AioGuideI18nCommonPrepare]: guide/i18n-common-prepare "Prepare component for translation | Angular"
 [AioGuideI18nCommonPrepareAddHelpfulDescriptionsAndMeanings]: guide/i18n-common-prepare#add-helpful-descriptions-and-meanings "Add helpful descriptions and meanings - Prepare component for translation | Angular"
 
 [AioGuideI18nCommonTranslationFilesCreateATranslationFileForEachLanguage]: guide/i18n-common-translation-files#create-a-translation-file-for-each-language "Create a translation file for each language - Work with translation files | Angular"

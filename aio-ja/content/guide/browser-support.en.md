@@ -5,7 +5,7 @@ This includes the following specific versions:
 
 | Browser | Supported versions |
 |:---     |:---                |
-| Chrome  | latest                                      |
+| Chrome  | 2 most recent versions                      |
 | Firefox | latest and extended support release \(ESR\) |
 | Edge    | 2 most recent major versions                |
 | Safari  | 2 most recent major versions                |
@@ -45,7 +45,7 @@ The [Angular CLI](cli) provides support for polyfills.
 If you are not using the CLI to create your projects, see [Polyfill instructions for non-CLI users](#non-cli).
 
 The `polyfills` options of the [browser](cli/build) and [test](cli/test) builder can be a full path for a file \(Example: `src/polyfills.ts`\) or,
-relative to the current workspace or module specifier \.(Example: `zone.js`\)
+relative to the current workspace or module specifier \(Example: `zone.js`\).
 
 If you create a TypeScript file, make sure to include it in the `files` property of your `tsconfig` file.
 

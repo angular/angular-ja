@@ -2,8 +2,8 @@
 
 Angularは、効率的で洗練されたシングルページアプリケーションを作成するためのアプリケーション設計フレームワークおよび開発プラットフォームです。
 
-これらのAngularドキュメントは、最初のアプリケーションから複雑なエンタープライズアプリケーションの最適化まで、Angularのプラットフォームとフレームワークの学習と使用に役立ちます。
-チュートリアルとガイドには、プロジェクトを加速するためのダウンロード可能なサンプルが含まれています。
+これらのAngularドキュメントは、はじめてのアプリケーションからエンタープライズ向けの複雑なシングルページアプリケーションの最適化まで、Angularフレームワークと開発プラットフォームの学習と使用に役立ちます。
+チュートリアルとガイドには、プロジェクトを始めるのに役立つダウンロード可能なサンプルが含まれています。
 
 <div class="card-container">
   <a href="guide/what-is-angular" class="docs-card" title="Angular Platform Overview">
@@ -42,7 +42,7 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
 
 ## フィードバック
 
-<h3>わたしたちは誰でも歓迎します！</h3>
+<!-- vale Angular.Google_We = NO -->
 
 声を聞かせてください。 [問題を報告するか、将来のドキュメンテーションに関する提案を提出してください](https://github.com/angular/angular/issues/new/choose "Angular GitHub repository new issue form") 。
 
@@ -54,3 +54,5 @@ Angularドキュメントに貢献してください。
 
 私たちのコミュニティは、尊重、協力的なコミュニケーションを大切にしています。 
 [行動規範](https://github.com/angular/angular-ja/blob/main/CODE_OF_CONDUCT.md "Contributor code of conduct") を参照し、遵守してください。
+
+<!-- vale Angular.Google_We = YES -->

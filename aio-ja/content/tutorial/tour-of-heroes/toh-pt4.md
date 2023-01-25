@@ -174,7 +174,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 `Observable` は [RxJS ライブラリ](https://rxjs.dev/) で重要なクラスのひとつです。
 
-[HTTP に関する後の章](tutorial/toh-pt6), でも Angular の `HttpClient` メソッドが `Observable` を返すことに触れるでしょう。
+[HTTP に関する後の章](tutorial/tour-of-heroes/toh-pt6), でも Angular の `HttpClient` メソッドが `Observable` を返すことに触れるでしょう。
 この章ではRxJSの `of()` 関数を使ってサーバーからのデータの取得をシミュレートします。
 
 `HeroService` を開き、`Observable` および `of` を `RxJS` からインポートします。
@@ -189,7 +189,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 <div class="l-sub-section">
 
-[HTTP のチュートリアル](tutorial/toh-pt6) では、_ひとつの値_、すなわちHTTPレスポンスボディ由来のヒーローの配列を出力する `Observable<Hero[]>` を同じように返す `HttpClient.get<Hero[]>()` を呼び出します。
+[HTTP のチュートリアル](tutorial/tour-of-heroes/toh-pt6) では、_ひとつの値_、すなわちHTTPレスポンスボディ由来のヒーローの配列を出力する `Observable<Hero[]>` を同じように返す `HttpClient.get<Hero[]>()` を呼び出します。
 
 </div>
 
@@ -332,7 +332,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 ## `HeroService` にメッセージを追加する
 
 次の例は、ユーザーがヒーローをクリックするたびに履歴を表示する方法を示しています。
-これは、次の[ルーティング](tutorial/toh-pt5)のセクションに行くときに役に立ちます。
+これは、次の[ルーティング](tutorial/tour-of-heroes/toh-pt5)のセクションに行くときに役に立ちます。
 
 <code-example header="src/app/heroes/heroes.component.ts" path="toh-pt4/src/app/heroes/heroes.component.ts"></code-example>
 

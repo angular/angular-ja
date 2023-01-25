@@ -192,7 +192,7 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
 ほとんどのWeb APIは、 `：baseURL/:id`の形式で_idによる取得する_リクエストをサポートしています。
 
-ここで *base URL* は[Heroes and HTTP](tutorial/toh-pt6#heroes-and-http)セクションで定義された `heroesURL` （`api/heroes`）であり、 *id* は取得したいヒーローの番号です。
+ここで *base URL* は[Heroes and HTTP](tutorial/tour-of-heroes/toh-pt6#heroes-and-http)セクションで定義された `heroesURL` （`api/heroes`）であり、 *id* は取得したいヒーローの番号です。
 たとえば、 `api/heroes/11` のようになります。
 
 `HeroService`の `getHero()` メソッドを次のように更新して、そのリクエストを行います:

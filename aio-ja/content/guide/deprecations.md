@@ -115,6 +115,8 @@ v15 - v18
 | `@angular/common`                   | [`DatePipe` - `DATE_PIPE_DEFAULT_TIMEZONE`](api/common/DATE_PIPE_DEFAULT_TIMEZONE)                         | v15           | v17         |
 | `@angular/core`                     | NgModule and `'any'` options for [`providedIn`](#core)                                                     | v15           | v17         |
 | `@angular/router`                   | [`RouterLinkWithHref` directive](#router)                                                                  | v15           | v17         |
+| `@angular/router`                   | [Router writeable properties](#router-writable-properties)                                                 | v15.1         | v17         |
+| `@angular/router`                   | [Router CanLoad guards](#router-can-load)                                                 | v15.1         | v17         |
 
 ### Deprecated features with no planned removal version
 
@@ -200,6 +202,7 @@ In the [API reference section](api) of this site, deprecated APIs are indicated 
 | [`resolver` field of the `OutletContext` class](api/router/OutletContext#resolver) | No replacement needed | v14                   | Component factories are not required to create an instance of a component dynamically. Passing a factory resolver via `resolver` class field is no longer needed. |
 | [`RouterLinkWithHref` directive](api/router/RouterLinkWithHref) | Use `RouterLink` instead. | v15                   | The `RouterLinkWithHref` directive code was merged into `RouterLink`. Now the `RouterLink` directive can be used for all elements that have `routerLink` attribute. |
 | [`provideRoutes` function](api/router/provideRoutes) | Use `ROUTES` `InjectionToken` instead. | v15                   | The `provideRoutes` helper function is minimally useful and can be unintentionally used instead of `provideRouter` due to similar spelling. |
+| [`setupTestingRouter` function](api/router/testing/setupTestingRouter) | Use `provideRouter` or `RouterTestingModule` instead. | v15.1                   | The `setupTestingRouter` function is not necessary. The `Router` is initialized based on the DI configuration in tests as it would be in production. |
 
 <a id="platform-browser"></a>
 
@@ -373,6 +376,45 @@ The injector no longer requires the Reflect polyfill, reducing application size 
 **After**:
 
 <code-example path="deprecation-guide/src/app/app.component.ts" language="typescript" region="static-injector-example"></code-example>
+
+<a id="router-writable-properties"></a>
+
+### Public `Router` properties
+
+None of the public properties of the `Router` are meant to be writeable.
+They should all be configured using other methods, all of which have been
+documented.
+
+The following strategies are meant to be configured by registering the
+application strategy in DI via the `providers` in the root `NgModule` or
+`bootstrapApplication`:
+* `routeReuseStrategy`
+* `titleStrategy`
+* `urlHandlingStrategy`
+
+The following options are meant to be configured using the options
+available in `RouterModule.forRoot` or `provideRouter` and `withRouterConfig`.
+* `onSameUrlNavigation`
+* `paramsInheritanceStrategy`
+* `urlUpdateStrategy`
+* `canceledNavigationResolution`
+
+The following options are available in `RouterModule.forRoot` but not
+available in `provideRouter`:
+* `malformedUriErrorHandler` - This was not found to be used by anyone.
+  There are currently no plans to make this available in `provideRouter`.
+* `errorHandler` - Developers should instead subscribe to `Router.events`
+  and filter for `NavigationError`.
+
+<a id="router-can-load"></a>
+
+### `CanLoad` guards
+
+`CanLoad` guards in the Router are deprecated in favor of `CanMatch`. These guards execute at the same time
+in the lifecycle of a navigation. A `CanMatch` guard which returns false will prevent the `Route` from being
+matched at all and also prevent loading the children of the `Route`. `CanMatch` guards can accomplish the same
+goals as `CanLoad` but with the addition of allowing the navigation to match other routes when they reject
+(such as a wildcard route). There is no need to have both types of guards in the API surface.
 
 <a id="relativeLinkResolution"></a>
 

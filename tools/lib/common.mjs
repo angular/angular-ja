@@ -1,17 +1,32 @@
 import { watch } from 'chokidar';
 import { resolve } from 'node:path';
-import { $, cd, chalk, glob, within, which, quotePowerShell } from 'zx';
+import { $, cd, chalk, glob, within, which, quotePowerShell, quote } from 'zx';
 import { initDir, cpRf, exists, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
-console.log(process.platform)
-if (process.platform === 'win32') {
-  $.shell = which.sync('powershell.exe');
-  $.quote = quotePowerShell;
-  $.prefix = '';
+export function usePlatformShell(callback) {
+  return within(() => {
+    if (process.platform === 'win32') {
+      $.shell = which.sync('powershell.exe');
+      $.quote = quotePowerShell;
+      $.prefix = '';
+      return callback();
+    } else {
+      return useBash(callback);
+    }
+  });
+}
+
+export function useBash(callback) {
+  return within(() => {
+    $.shell = which.sync('bash');
+    $.quote = quote;
+    $.prefix = 'set -euo pipefail;';
+    return callback();
+  });
 }
 
 export async function resetBuildDir({ init = false }) {
@@ -31,14 +46,14 @@ export async function resetBuildDir({ init = false }) {
 }
 
 export async function buildAIO() {
-  await within(async () => {
+  await useBash(async () => {
     cd(`${outDir}/aio`);
     await $`yarn build`;
   });
 }
 
 export async function watchAIO() {
-  await within(async () => {
+  await useBash(async () => {
     cd(`${outDir}/aio`);
     await $`yarn setup`;
     await $`yarn serve-and-sync --open`;
@@ -78,7 +93,7 @@ export async function watchLocalizedFiles(signal) {
 }
 
 export async function applyPatches() {
-  await within(async () => {
+  await usePlatformShell(async () => {
     cd(outDir);
     const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir });
     console.log(patches);
@@ -90,7 +105,7 @@ export async function applyPatches() {
 }
 
 export async function syncSubmodule() {
-  await within(async () => {
+  await usePlatformShell(async () => {
     cd(rootDir);
     await $`git submodule sync`;
     await $`git submodule update --init`;
@@ -99,15 +114,19 @@ export async function syncSubmodule() {
 
 // copy robots.txt
 export async function copyRobots() {
-  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
-  const src = resolve(aiojaDir, 'src/robots.txt');
-  const dest = resolve(outDir, 'dist/bin/aio/build/robots.txt');
-  await cpRf(src, dest);
+  await usePlatformShell(async () => {
+    await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
+    const src = resolve(aiojaDir, 'src/robots.txt');
+    const dest = resolve(outDir, 'dist/bin/aio/build/robots.txt');
+    await cpRf(src, dest);
+  });
 }
 
 // replace angular.io to angular.jp in sitemap.xml
 export async function modifySitemap() {
-  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
-  const sitemapPath = resolve(outDir, 'dist/bin/aio/build/generated/sitemap.xml');
-  await sed(sitemapPath, 'angular.io', 'angular.jp');
+  await usePlatformShell(async () => {
+    await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
+    const sitemapPath = resolve(outDir, 'dist/bin/aio/build/generated/sitemap.xml');
+    await sed(sitemapPath, 'angular.io', 'angular.jp');
+  });
 }

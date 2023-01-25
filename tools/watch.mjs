@@ -9,7 +9,7 @@ try {
   console.log(chalk.green('==== setup ===='));
   await setup({ init });
   console.log(chalk.green('==== preWatch ===='));
-  await preWatch();
+  await preWatch({ init });
   console.log(chalk.green('==== watch ===='));
   await watch();
 } catch (e) {
@@ -29,14 +29,16 @@ async function setup({ init }) {
   await resetBuildDir({ init });
 }
 
-async function preWatch() {
-  // copy translated files
-  console.log(chalk.cyan('Copy localized files...'));
-  await copyLocalizedFiles();
+async function preWatch({ init }) {
+  if (init) {
+    // copy translated files
+    console.log(chalk.cyan('Copy localized files...'));
+    await copyLocalizedFiles();
 
-  // apply patches
-  console.log(chalk.cyan('Apply patches...'));
-  await applyPatches();
+    // apply patches
+    console.log(chalk.cyan('Apply patches...'));
+    await applyPatches();
+  }
 }
 
 async function watch() {

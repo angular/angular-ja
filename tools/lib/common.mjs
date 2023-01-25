@@ -17,10 +17,9 @@ export async function resetBuildDir({ init = false }) {
   if (init || !buildDirExists) {
     console.log(chalk.cyan('removing build directory...'));
     await initDir(outDir);
+    console.log(chalk.cyan('copying origin files to build directory...'));
+    await cpRf(resolve(rootDir, 'origin'), outDir);
   }
-
-  console.log(chalk.cyan('copying origin files to build directory...'));
-  await cpRf(resolve(rootDir, 'origin'), outDir);
 }
 
 export async function buildAIO() {
@@ -34,7 +33,7 @@ export async function watchAIO() {
   await within(async () => {
     cd(`${outDir}/aio`);
     await $`yarn setup`;
-    await $`yarn serve-and-sync --open`;
+    await $`yarn start`;
   });
 }
 

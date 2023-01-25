@@ -45,7 +45,7 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn build
-        # shell: pwsh
+        shell: bash
   build-macos:
     runs-on: macos-latest
     steps:

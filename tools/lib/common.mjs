@@ -7,17 +7,12 @@ const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
-// default quote ($'...') is doesn't work on Windows.
-// https://github.com/google/zx/blob/main/src/util.ts#L31
-// $.quote = (s) => s;
 console.log(process.platform)
 if (process.platform === 'win32') {
   $.shell = which.sync('powershell.exe');
   $.quote = quotePowerShell;
   $.prefix = '';
 }
-console.log($.shell)
-console.log($.quote.toString())
 
 export async function resetBuildDir({ init = false }) {
   if (init) {
@@ -89,7 +84,6 @@ export async function applyPatches() {
     console.log(patches);
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
-      console.log(chalk.gray(`applying ${path}...`));
       await $`git apply -p1 --ignore-whitespace ${path}`;
     }
   });

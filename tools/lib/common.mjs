@@ -81,6 +81,7 @@ export async function applyPatches() {
   await within(async () => {
     cd(outDir);
     const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir });
+    console.log(patches);
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
       console.log(chalk.gray(`applying ${path}...`));

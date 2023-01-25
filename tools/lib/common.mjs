@@ -47,14 +47,14 @@ export async function resetBuildDir({ init = false }) {
 
 export async function buildAIO() {
   await useBash(async () => {
-    cd(`${outDir}/aio`);
+    cd(`${resolve(outDir, 'aio')}`);
     await $`yarn build`;
   });
 }
 
 export async function watchAIO() {
   await useBash(async () => {
-    cd(`${outDir}/aio`);
+    cd(`${resolve(outDir, 'aio')}`);
     await $`yarn setup`;
     await $`yarn serve-and-sync --open`;
   });

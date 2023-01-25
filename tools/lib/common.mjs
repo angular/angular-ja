@@ -14,6 +14,7 @@ console.log(process.platform)
 if (process.platform === 'win32') {
   $.shell = which.sync('powershell.exe');
   $.quote = quotePowerShell;
+  $.prefix = '';
 }
 console.log($.shell)
 console.log($.quote.toString())

@@ -45,6 +45,7 @@ class HeroListModule {}
 </code-example>
 
 特定のNgModuleにプロバイダーを登録すると、そのNgModule内のすべてのコンポーネントでサービスの同じインスタンスが利用できます。
+To understand all edge-cases, see [Hierarchical injectors](guide/hierarchical-dependency-injection).
 
 * アプリケーションのルートレベルでは、アプリケーション内の他のクラスへのインジェクトが可能になります。これは、 `@Injectable` デコレーターに `providedIn: 'root'` フィールドを追加することによって行います。
 

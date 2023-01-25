@@ -32,7 +32,7 @@ routes を追加すると、ユーザーがアプリケーションのある箇�
 *   CSS
 *   [Angular CLI](cli)
 
-[Tour of Heroes tutorial](/tutorial) は役に立つかもしれませんが、必須ではありません。
+[Tour of Heroes チュートリアル](tutorial/tour-of-heroes) は役に立つかもしれませんが、必須ではありません。
 
 ## サンプル・アプリケーションを作成する
 

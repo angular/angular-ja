@@ -1253,7 +1253,7 @@ _この_例のスタブは空ですが、
   region="mixed-setup"
   header="app/app.component.spec.ts (mixed setup)"></code-example>
 
-Angularコンパイラは、`<app-banner>`要素の`BannerComponentStub`を作成し、
+Angularコンパイラは、`<app-banner>`要素の`BannerStubComponent`を作成し、
 `routerLink`属性をもつアンカーに`RouterLinkStubDirective`を適用しますが、
 `<app-welcome>`タグと`<router-outlet>`タグは無視します。
 

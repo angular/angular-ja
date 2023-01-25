@@ -57,7 +57,7 @@ Angularは次の組み込みデータ変換[パイプ][AioGuideGlossaryPipe]を�
 
 [AioGuideGlossaryPipe]: guide/glossary#pipe "pipe - Glossary | Angular"
 
-[AioGuideI18nCommonPrepare]: guide/i18n-common-prepare "Prepare templates for translations | Angular"
+[AioGuideI18nCommonPrepare]: guide/i18n-common-prepare "Prepare component for translation | Angular"
 
 <!-- external links -->
 

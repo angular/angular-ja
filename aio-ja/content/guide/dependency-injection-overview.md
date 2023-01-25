@@ -14,7 +14,7 @@ Angularでは依存オブジェクトは一般的にサービスですが、文�
 
 Angularアプリケーション全般に慣れていて、コンポーネント、ディレクティブ、NgModuleの基本的な知識があることが必要です。次のチュートリアルを済ませておくことを強くお勧めします。
 
-[Tour of Heroes application and tutorial](tutorial)
+[Tour of Heroes アプリケーションとチュートリアル](tutorial/tour-of-heroes)
 
 ## Angularの依存性の注入について学ぶ
 

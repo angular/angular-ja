@@ -1360,7 +1360,7 @@ Now you'll learn the following:
 * Pass required and optional information in route parameters.
 
 This example recreates the heroes feature in the "Services" episode of the
-[Tour of Heroes tutorial](tutorial/toh-pt4 "Tour of Heroes: Services"),
+[Tour of Heroes tutorial](tutorial/tour-of-heroes/toh-pt4 "Tour of Heroes: Services"),
 and you'll be copying much of the code
 from the <live-example name="toh-pt4" title="Tour of Heroes: Services example code"></live-example>.
 

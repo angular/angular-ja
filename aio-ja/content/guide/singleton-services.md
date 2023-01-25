@@ -23,7 +23,7 @@ Angular 6.0からは、シングルトンサービスを作成する推奨の方
 <code-example path="providers/src/app/user.service.0.ts"  header="src/app/user.service.ts"></code-example>
 
 サービスのさらに詳しい情報については
-[Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/toh-pt4)の章を参照してください。
+[Tour of Heroesチュートリアル](tutorial)の[サービス](tutorial/tour-of-heroes/toh-pt4)の章を参照してください。
 
 ### NgModule の `providers` 配列
 

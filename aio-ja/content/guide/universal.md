@@ -4,11 +4,9 @@
 
 通常の Angular アプリケーションは _ブラウザ_ で実行され、ユーザーのアクションに応じて DOM にページをレンダリングします。
 Angular Universal は _サーバー_ 上で実行され、あとでクライアント上でブートストラップされる _静的_ アプリケーションページを生成します。
-これは通常、アプリケーションがより高速にレンダリングされ、
-ユーザーが完全にインタラクティブになる前にアプリケーションのレイアウトを表示する機会を与えることを意味します。
+これは通常、アプリケーションがより高速にレンダリングされ、ユーザーが完全にインタラクティブになる前にアプリケーションのレイアウトを表示する機会を与えることを意味します。
 
-SSR を取り巻くさまざまな手法と概念の詳細については、
-この[記事](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)をご覧ください。
+SSR を取り巻くさまざまな手法と概念の詳細については、この[記事](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)をご覧ください。
 
 [Angular CLI](guide/glossary#cli) を使用して、サーバーサイドレンダリング用のアプリケーションを簡単に準備できます。
 CLI の schematic `@nguniversal/express-engine` は、以下で説明するように、必要な手順を実行します。
@@ -27,10 +25,11 @@ CLI の schematic `@nguniversal/express-engine` は、以下で説明するよ�
 
 </div>
 
-{@a the-example}
+<a id="the-example"></a>
+
 ## Universal チュートリアル
 
-[ツアー オブ ヒーローズ チュートリアル](tutorial) は、このチュートリアルの基礎です。
+[Tour of Heroes チュートリアル](tutorial/tour-of-heroes) は、このチュートリアルの基礎です。
 
 この例では、Angular CLI は [Ahead-of-Time (AOT) コンパイラー](guide/aot-compiler)を使用して
 アプリケーションの Universal バージョンをコンパイルおよびバンドルします。

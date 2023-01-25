@@ -1,109 +1,109 @@
-# Understanding binding
+# バインディングを理解する
 
-In an Angular template, a binding creates a live connection between a part of the UI created from a template (a DOM element, directive, or component) and the model (the component instance to which the template belongs). This connection can be used to synchronize the view with the model, to notify the model when an event or user action takes place in the view, or both. Angular's [Change Detection](guide/change-detection) algorithm is responsible for keeping the view and the model in sync.
+Angularテンプレートでは、バインディングはテンプレートから作成されたUIの一部(DOM要素、ディレクティブ、またはコンポーネント)とモデル(テンプレートが属するコンポーネントインスタンス)の間のライブ接続を作成します。この接続は、ビューとモデルを同期させたり、ビューでイベントやユーザーアクションが発生した時にモデルに通知したり、あるいはその両方に使用することができます。Angularの[変更検知](guide/change-detection)アルゴリズムはビューとモデルの同期を維持する役割を担っています。
 
-Examples of binding include:
+次のものがバインディングの例に挙げられます:
 
-* text interpolations
-* property binding
-* event binding
-* two-way binding
+* 文字列補間
+* プロパティバインディング
+* イベントバインディング
+* 双方向バインディング
 
-Bindings always have two parts: a _target_ which will receive the bound value, and a _template expression_ which produces a value from the model.
+バインディングはふたつの部分からなります。バインドされた値を受け取る_ターゲット_と、モデルから値を生成する_テンプレート式_です。
 
 
-## Syntax
+## 構文
 
-Template expressions are similar to JavaScript expressions.
-Many JavaScript expressions are legal template expressions, with the following exceptions.
+テンプレート式は、JavaScriptの式と似ています。
+多くのJavaScriptの式のうち、次の例外を除いたものがテンプレートで有効です。
 
-You can't use JavaScript expressions that have or promote side effects, including:
+次のような副作用をもつ、もしくは副作用を促進させるJavaScriptの式は利用できません:
 
-* Assignments (`=`, `+=`, `-=`, `...`)
-* Operators such as `new`, `typeof`, or `instanceof`
-* Chaining expressions with <code>;</code> or <code>,</code>
-* The increment and decrement operators `++` and `--`
-* Some of the ES2015+ operators
+* 代入 (`=`, `+=`, `-=`, `...`)
+* `new`、`typeof`、`instanceof`などの演算子
+* <code>;</code>と<code>,</code>による式のチェイン
+* `++`と`--`のインクリメント演算子とデクリメント演算子
+* ES2015より新しく導入されたいくつかのオペレーター
 
-Other notable differences from JavaScript syntax include:
+他にも、JavaScriptの構文との顕著な違いとして、次のようなものがあります:
 
-* No support for the bitwise operators such as `|` and `&`
-* New [template expression operators](guide/template-expression-operators), such as `|`
+* `|`や`&`などのビット演算子はサポートされない
+* `|`のような[新しいテンプレート式演算子](guide/template-expression-operators)
 
-## Expression context
+## 式のコンテキスト
 
-Interpolated expressions have a context&mdash;a particular part of the application to which the expression belongs.  Typically, this context is the component instance.
+補間式にはコンテキストがあります&mdash;それはその式が属するアプリケーションの特定の部分です。一般的に、このコンテキストはコンポーネントのインスタンスです。
 
-In the following snippet, the expression `recommended` and the expression `itemImageUrl2` refer to properties of the `AppComponent`.
+次のスニペットでは、`recommended`式と`itemImageUrl2`式が、`AppComponent`のプロパティを参照しています。
 
 <code-example path="interpolation/src/app/app.component.html" region="component-context" header="src/app/app.component.html"></code-example>
 
-An expression can also refer to properties of the _template's_ context such as a [template input variable](guide/structural-directives#shorthand) or a [template reference variable](guide/template-reference-variables).
+式は、[テンプレート入力変数](guide/structural-directives#shorthand)や[テンプレート参照変数](guide/template-reference-variables)など、_テンプレート_のコンテキストのプロパティを参照することもできます。
 
-The following example uses a template input variable of `customer`.
+次の例では、`customer`というテンプレート入力変数を使用しています。
 
-<code-example path="interpolation/src/app/app.component.html" region="template-input-variable" header="src/app/app.component.html (template input variable)"></code-example>
+<code-example path="interpolation/src/app/app.component.html" region="template-input-variable" header="src/app/app.component.html (テンプレート入力変数)"></code-example>
 
-This next example features a template reference variable, `#customerInput`.
+次の例では、テンプレート参照変数である`#customerInput`をあらわしています。
 
-<code-example path="interpolation/src/app/app.component.html" region="template-reference-variable" header="src/app/app.component.html (template reference variable)"></code-example>
+<code-example path="interpolation/src/app/app.component.html" region="template-reference-variable" header="src/app/app.component.html (テンプレート参照変数)"></code-example>
 
 <div class="alert is-helpful">
 
-Template expressions cannot refer to anything in the global namespace, except `undefined`.  They can't refer to `window` or `document`.  Additionally, they can't call `console.log()` or `Math.max()` and are restricted to referencing members of the expression context.
+テンプレート式は`undefined`を除き、グローバル名前空間からは何も参照することができません。また、`window`や`document`を参照することもできません。そして、`console.log()`や`Math.max()`を直接呼び出すこともできず、式コンテキストのメンバー変数の参照に制限されます。
 
 </div>
 
-### Preventing name collisions
+### 名前の衝突を防ぐ
 
-The context against which an expression evaluates is the union of the template variables, the directive's context object&mdash;if it has one&mdash;and the component's members.
-If you reference a name that belongs to more than one of these namespaces, Angular applies the following precedence logic to determine the context:
+式が評価されるコンテキストは、テンプレート変数とディレクティブのコンテキストオブジェクト&mdash;それらが存在する場合&mdash;、そして、コンポーネントのメンバー変数からなります。
+これらの中で衝突する名前空間を参照した場合、Angularは次の優先順位のロジックを適用してコンテキストを決定します:
 
-1. The template variable name.
-1. A name in the directive's context.
-1. The component's member names.
+1. テンプレート変数名
+1. ディレクティブのコンテキスト中の名前
+1. コンポーネントのメンバー変数名
 
-To avoid variables shadowing variables in another context, keep variable names unique.
-In the following example, the `AppComponent` template greets the `customer`, Padma.
+変数が別のコンテキストの変数をシャドーイングする(隠蔽する)のを避けるため、変数名は一意に保つようにします。
+次の例では、`AppComponent`テンプレートが`customer`であるPadmaに挨拶しています。
 
-An `ngFor` then lists each `customer` in the `customers` array.
+`ngFor`は、`customers`配列内の各`customer`を一覧します。
 
 <code-example path="interpolation/src/app/app.component.1.ts" region="var-collision" header="src/app/app.component.ts"></code-example>
 
-The `customer` within the `ngFor` is in the context of an `<ng-template>` and so refers to the `customer` in the `customers` array, in this case Ebony and Chiho.
-This list does not feature Padma because `customer` outside of the `ngFor` is in a different context.
-Conversely, `customer` in the `<h1>` doesn't include Ebony or Chiho because the context for this `customer` is the class and the class value for `customer` is Padma.
+`ngFor`内の`customer`は`<ng-template>`のコンテキストにあるので、`customers`配列内の`customer`、この場合はEbonyとChihoを参照しています。
+`ngFor`の外の`customer`は別のコンテキストにあるので、このリストにはPadmaはありません。
+逆に、`<h1>`の`customer`はEbonyやChihoを含んでいません。この`customer`のコンテキストはコンポーネントのクラスで、`customer`のクラスの値はPadmaだからです。
 
-## Expression best practices
+## 式のベストプラクティス
 
-When using a template expression, follow these best practices:
+テンプレート式を使用する場合は、次のベストプラクティスにしたがってください:
 
-* **Use short expressions**
+* **短い式を使う**
 
-Use property names or method calls whenever possible.  Keep application and business logic in the component, where it is accessible to develop and test.
+可能な限り複雑な式は書かずに、プロパティ名またはメソッドの呼び出しを使用してください。ビジネスロジックをコンポーネントに保持することで、開発とテストがしやすくなります。
 
-* **Quick execution**
+* **実行速度に気をつける**
 
-Angular executes a template expression after every [change detection](guide/glossary#change-detection) cycle.  Many asynchronous activities trigger change detection cycles, such as promise resolutions, HTTP results, timer events, key presses, and mouse moves.
+Angularは[変更検知](guide/glossary#change-detection)サイクルのたびにテンプレート式を実行します。Promiseの解決、HTTPの結果、タイマーイベント、キーの押下、マウスの動きなど、多くの非同期アクションが変更検知サイクルのトリガーになります。
 
-An expression should finish quickly to keep the user experience as efficient as possible, especially on slower devices.  Consider caching values when their computation requires greater resources.
+特に低速のデバイスでは、UXを可能な限り効率的に保つために、式は迅速に終了する必要があります。計算がより多くのリソースを必要とする場合は、値のキャッシュを検討してください。
 
-## No visible side effects
+## 目に見えない副作用を生まない
 
-According to Angular's [unidirectional data flow model](guide/glossary#unidirectional-data-flow), a template expression should not change any application state other than the value of the target property.  Reading a component value should not change some other displayed value.  The view should be stable throughout a single rendering pass.
+Angularの[単方向データフローモデル](guide/glossary#unidirectional-data-flow)によると、テンプレート式はターゲットプロパティの値以外のアプリケーションの状態を変更すべきではありません。コンポーネントの値を読み取っても、他の表示された値を変更してはいけません。ビューは1回のレンダリングパスを通して安定している状態でなければなりません。
 
   <div class="callout is-important">
-    <header>Idempotent expressions reduce side effects</header>
+    <header>冪等式は副作用を軽減する</header>
 
-An [idempotent](https://en.wikipedia.org/wiki/Idempotence) expression is free of side effects and improves Angular's change detection performance.  In Angular terms, an idempotent expression always returns *exactly the same thing* until one of its dependent values changes.
+[冪等](https://ja.wikipedia.org/wiki/%E5%86%AA%E7%AD%89)式は副作用がなく、Angularの変更検知のパフォーマンスを向上させます。Angularにおいての冪等式は、依存する値のいずれかが変更されるまで、常に*全く同じもの*を返します。
 
-Dependent values should not change during a single turn of the event loop.  If an idempotent expression returns a string or a number, it returns the same string or number if you call it twice consecutively.  If the expression returns an object, including an `array`, it returns the same object *reference* if you call it twice consecutively.
+依存する値はイベントループが1回まわる間に変化するべきではありません。冪等式が文字列や数値を返す場合、2回連続で呼び出すと同じ文字列や数値が返されます。式がオブジェクトを返す場合、2回連続で呼び出すと同じオブジェクト参照を返します。
 
   </div>
 
- ## What's next
+ ## 次のステップ
 
-* [Property binding](guide/property-binding)
-* [Event binding](guide/event-binding)
+* [プロパティバインディング](guide/property-binding)
+* [イベントバインディング](guide/event-binding)
 
 @reviewed 2022-05-12

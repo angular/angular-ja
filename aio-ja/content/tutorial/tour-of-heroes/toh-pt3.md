@@ -120,7 +120,7 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 ## 何が変わったのか？
 
-[以前](tutorial/toh-pt2)は、ユーザーがヒーロー名をクリックするたびに、
+[以前](tutorial/tour-of-heroes/toh-pt2)は、ユーザーがヒーロー名をクリックするたびに、
 ヒーローのリストの下にヒーローの詳細が表示されていました。
 今では `HeroDetailComponent` が `HeroesComponent` の代わりにそれらの詳細を表示しています。
 

@@ -345,7 +345,7 @@ ng generate component dashboard
 このコンポーネントは、URLから抽出されたルートのパラメータに関心があります。
 "id"パラメータは、表示するヒーローの`id`です。
 
-[`HeroService`](tutorial/toh-pt4)は、リモートサーバーからヒーローのデータを取得し、このコンポーネントはそれを使用して表示するヒーローを取得します。
+[`HeroService`](tutorial/tour-of-heroes/toh-pt4)は、リモートサーバーからヒーローのデータを取得し、このコンポーネントはそれを使用して表示するヒーローを取得します。
 
 [`location`](api/common/Location)は、ブラウザと対話するためのAngularサービスです。
 これは前のビューに戻ることができるサービスです。
@@ -382,7 +382,7 @@ JavaScriptの `Number` 関数は文字列を数値に変換します。
 
 </div>
 
-[`getHeroes()`](tutorial/toh-pt4#observable-heroservice)と同様に、`getHero()`には非同期のシグネチャーがあります。
+[`getHeroes()`](tutorial/tour-of-heroes/toh-pt4#observable-heroservice)と同様に、`getHero()`には非同期のシグネチャーがあります。
 RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`として返します。
 
 `getHero()`を呼び出す `HeroDetailComponent`を変更することなく、実際の`Http`リクエストとして `getHero()`を再実装することができます。

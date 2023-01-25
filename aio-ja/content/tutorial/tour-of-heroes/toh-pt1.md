@@ -41,10 +41,6 @@ ng generate component heroes
 
 [CSS要素セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors)である`'app-heroes'`は、親コンポーネントのテンプレート内でこのコンポーネントを識別するHTML要素の名前と一致します。
 
-`ngOnInit()`は[ライフサイクルフック](guide/lifecycle-hooks#oninit)です。
-Angularは、コンポーネントの作成直後に`ngOnInit()`を呼び出します。
-初期化ロジックを置くのに適しています。
-
 常にコンポーネントクラスを`export`するので、`AppModule`のようにいつでも他の場所に`import`できます。
 
 ### `hero` プロパティを追加する {@a add-a-hero-property}

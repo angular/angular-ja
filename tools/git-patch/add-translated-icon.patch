@@ -3,7 +3,7 @@ index 0ec330e0b8..6aa94506cb 100644
 --- a/aio/src/app/layout/nav-item/nav-item.component.html
 +++ b/aio/src/app/layout/nav-item/nav-item.component.html
 @@ -2,6 +2,7 @@
-   <a href="{{node.url}}" [ngClass]="classes" title="{{node.tooltip}}"
+   <a href="{{node.url}}" [class]="classes" title="{{node.tooltip}}"
      class="vertical-menu-item">
      <span class="vertical-menu-item-text">{{node.title}}</span>
 +    <div *ngIf="node.translated">🇯🇵</div>

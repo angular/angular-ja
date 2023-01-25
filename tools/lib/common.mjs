@@ -1,6 +1,6 @@
 import { watch } from 'chokidar';
 import { resolve } from 'node:path';
-import { $, cd, chalk, glob, within } from 'zx';
+import { $, cd, chalk, glob, within, which, quotePowerShell } from 'zx';
 import { initDir, cpRf, exists, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
@@ -11,6 +11,10 @@ const outDir = resolve(rootDir, 'build');
 // https://github.com/google/zx/blob/main/src/util.ts#L31
 // $.quote = (s) => s;
 console.log(process.platform)
+if (process.platform === 'win32') {
+  $.shell = which.sync('powershell.exe');
+  $.quote = quotePowerShell;
+}
 console.log($.shell)
 console.log($.quote.toString())
 

@@ -44,7 +44,7 @@ jobs:
           node-version-file: .node-version
           cache: yarn
       - run: yarn install
-      - run: yarn global add @bazel/bazelisk
+      - run: yarn global add @bazel/bazelisk@1.7.5
       - run: yarn build
         shell: bash
   build-macos:

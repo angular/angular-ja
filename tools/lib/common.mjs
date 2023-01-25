@@ -10,6 +10,9 @@ const outDir = resolve(rootDir, 'build');
 // default quote ($'...') is doesn't work on Windows.
 // https://github.com/google/zx/blob/main/src/util.ts#L31
 // $.quote = (s) => s;
+console.log(process.platform)
+console.log($.shell)
+console.log($.quote.toString())
 
 export async function resetBuildDir({ init = false }) {
   if (init) {

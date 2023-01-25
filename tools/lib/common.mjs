@@ -78,6 +78,8 @@ export async function applyPatches() {
   await within(async () => {
     cd(outDir);
     const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir });
+    console.log(chalk.gray(`applying the following patches:`));
+    console.log(chalk.gray(patches.join('\n')));
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
       await $`git apply -p1 --ignore-whitespace ${path}`;

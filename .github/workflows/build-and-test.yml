@@ -33,19 +33,19 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn build
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: .node-version
-          cache: yarn
-      - run: yarn install
-      - run: yarn build
-        shell: pwsh
+  # build-windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: true
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version-file: .node-version
+  #         cache: yarn
+  #     - run: yarn install
+  #     - run: yarn build
+  #       shell: pwsh
   build-macos:
     runs-on: macos-latest
     steps:

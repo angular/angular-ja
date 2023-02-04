@@ -38,7 +38,7 @@ export async function watchAIO() {
   await within(async () => {
     cd(`${outDir}/aio`);
     await $`yarn setup`;
-    await $`yarn serve-and-sync --open`;
+    await $`yarn start`;
   });
 }
 

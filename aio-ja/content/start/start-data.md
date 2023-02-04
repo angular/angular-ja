@@ -259,12 +259,12 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
 
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="imports"></code-example>
 
-1.  `shippingCosts` プロパティを定義します。
+1.  `ShippingComponent` の `constructor()` にカートサービスを注入します。
 
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="inject-cart-service"></code-example>
 
 1.  `shippingCosts`プロパティを定義して、`CartService` の `getShippingPrices()` メソッドを用いて `shippingCosts` プロパティを設定する。
-    Initialize the `shippingCosts` property inside `ngOnInit()` method.
+    `ngOnInit()` メソッド内で `shippingCosts` プロパティを初期化します。
 
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="props"></code-example>
 

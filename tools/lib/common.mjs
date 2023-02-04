@@ -7,10 +7,6 @@ const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
-// default quote ($'...') is doesn't work on Windows.
-// https://github.com/google/zx/blob/main/src/util.ts#L31
-$.quote = (s) => s;
-
 export async function resetBuildDir({ init = false }) {
   if (init) {
     console.log(chalk.cyan('synchronizing git submodule...'));
@@ -21,10 +17,9 @@ export async function resetBuildDir({ init = false }) {
   if (init || !buildDirExists) {
     console.log(chalk.cyan('removing build directory...'));
     await initDir(outDir);
+    console.log(chalk.cyan('copying origin files to build directory...'));
+    await cpRf(resolve(rootDir, 'origin'), outDir);
   }
-
-  console.log(chalk.cyan('copying origin files to build directory...'));
-  await cpRf(resolve(rootDir, 'origin'), outDir);
 }
 
 export async function buildAIO() {

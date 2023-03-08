@@ -329,7 +329,7 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 ["最終的なコードレビュー"](#final-code-review) タブ内に記載されている `messages.component.css` をコンポーネントのスタイルに追加すると、このメッセージUIの外観はよりよいものになるでしょう。
 
-## `HeroService` にメッセージを追加する
+## HeroesComponent に MessageService を追加する
 
 次の例は、ユーザーがヒーローをクリックするたびに履歴を表示する方法を示しています。
 これは、次の[ルーティング](tutorial/tour-of-heroes/toh-pt5)のセクションに行くときに役に立ちます。

@@ -299,7 +299,7 @@ ng generate component dashboard
 
 <code-example header="src/app/heroes/heroes.component.html (list with onSelect)" path="toh-pt4/src/app/heroes/heroes.component.html" region="list"></code-example>
 
-この`<li>`を`*ngFor`だけをもつように戻し、
+`<li>`の内側のHTMLを削除します。
 アンカー要素 (`<a>`) でバッジと名前を囲み、
 ダッシュボードのテンプレートと同じようにアンカーに`routerLink`要素を追加します。
 

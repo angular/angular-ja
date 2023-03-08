@@ -17,79 +17,44 @@ Try this <live-example name="reactive-forms" title="Reactive Forms in Stackblitz
 * [Angularの概念](guide/architecture "Introduction to Angular concepts.")に記載されている、Angularアプリケーション設計の基礎知識
 * [フォームのイントロダクション](guide/forms-overview "Overview of Angular forms.")で紹介されているフォーム設計の概念
 
-{@a intro}
+<a id="intro"></a>
 
 ## リアクティブフォームの概要
 
-リアクティブフォームは明示的でイミュータブルなアプローチを用い、特定の時点におけるフォームの状態を管理します。フォームの状態への変更の度に、変更間でのモデルの整合性を維持する新しい状態を返します。リアクティブフォームは[Observable](guide/glossary#observable "Observable definition.")ストリームを中心に構築されており、フォーム入力や値は入力値のストリームとして提供され、同期的にアクセスができます。
+リアクティブフォームは明示的でイミュータブルなアプローチを用い、特定の時点におけるフォームの状態を管理します。
+フォームの状態への変更の度に、変更間でのモデルの整合性を維持する新しい状態を返します。
+リアクティブフォームは[Observable](guide/glossary#observable "Observable definition.")ストリームを中心に構築されており、フォーム入力や値は入力値のストリームとして提供され、同期的にアクセスができます。
 
-またリアクティブフォームでは、リクエストのデータには一貫性があり予測性が保証されているので、テストが簡単に行えます。すべてのストリームの利用者は、データに安全にアクセスし操作することができます。
+またリアクティブフォームでは、リクエストのデータには一貫性があり予測性が保証されているので、テストが簡単に行えます。
+すべてのストリームの利用者は、データに安全にアクセスし操作することができます。
 
-リアクティブフォームには、[テンプレート駆動フォーム](guide/forms "Template-driven forms guide")とは異なる点があります。リアクティブフォームは、データモデルへの同期アクセス、Observableオペレーターによるイミュータビリティ、Observableストリームによる変更の追跡などを提供します。
+リアクティブフォームには、[テンプレート駆動フォーム](guide/forms "Template-driven forms guide")とは異なる点があります。
+リアクティブフォームは、データモデルへの同期アクセス、Observableオペレーターによるイミュータビリティ、Observableストリームによる変更の追跡などを提供します。
 
-テンプレート駆動フォームでは、テンプレート内のデータを変更するために直接アクセスすることができますが、テンプレートに埋め込まれたディレクティブと、非同期に変更を追跡するためのミュータブルなデータに依存しているため、リアクティブフォームよりも明示的ではありません。この2つのパラダイムの詳細な比較については、[フォームの概要](guide/forms-overview "Overview of Angular forms.")を参照してください。
+テンプレート駆動フォームでは、テンプレート内のデータを変更するために直接アクセスすることができますが、テンプレートに埋め込まれたディレクティブと、非同期に変更を追跡するためのミュータブルなデータに依存しているため、リアクティブフォームよりも明示的ではありません。
+この2つのパラダイムの詳細な比較については、[フォームの概要](guide/forms-overview "Overview of Angular forms.")を参照してください。
 
 ## 基本的なフォームコントロールの追加
 
 フォームコントロールを使うには3つのステップがあります。
 
 1. リアクティブフォームモジュールをアプリケーションに登録します。このモジュールは、リアクティブフォームを使用するために必要なリアクティブフォームディレクティブを宣言します。
-2. 新しい`FormControl`インスタンスを生成し、コンポーネントに保存します。
+2. 新しい`FormControl`インスタンスを生成し、初期化します。
 3. テンプレートに`FormControl`を登録します。
 
 そして、テンプレートにコンポーネントを追加することで、フォームを表示することができます。
 
-次の例では、ひとつのフォームコントロールを追加する方法を示しています。この例では、ユーザーが入力フィールドに自分の名前を入力し、その入力値を取得して、フォームコントロール要素の現在の値を表示しています。
+次の例では、ひとつのフォームコントロールを追加する方法を示しています。
+この例では、ユーザーが入力フィールドに自分の名前を入力し、その入力値を取得して、フォームコントロール要素の現在の値を表示しています。
 
-**リアクティブフォームモジュールの登録**
+| Action                               | Details |
+|:---                                  |:---     |
+| Register the reactive forms module   | To use reactive form controls, import `ReactiveFormsModule` from the `@angular/forms` package and add it to your NgModule's `imports` array. <code-example header="src/app/app.module.ts (excerpt)" path="reactive-forms/src/app/app.module.ts" region="imports"></code-example>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Generate a new `FormControl`         | Use the [CLI command](cli/generate#component-command "Using the Angular command-line interface") `ng generate` to generate a component in your project to host the control. <code-example header="src/app/name-editor/name-editor.component.ts" path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="create-control"></code-example> Use the constructor of `FormControl` to set its initial value, which in this case is an empty string. By creating these controls in your component class, you get immediate access to listen for, update, and validate the state of the form input.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Register the control in the template | After you create the control in the component class, you must associate it with a form control element in the template. Update the template with the form control using the `formControl` binding provided by `FormControlDirective`, which is also included in the `ReactiveFormsModule`. <code-example header="src/app/name-editor/name-editor.component.html" path="reactive-forms/src/app/name-editor/name-editor.component.html" region="control-binding"></code-example> <div class="alert is-helpful"> <ul> <li> For a summary of the classes and directives provided by `ReactiveFormsModule`, see the following [Reactive forms API](#reactive-forms-api "API summary") section </li> <li> For complete syntax details of these classes and directives, see the API reference documentation for the [Forms package](api/forms "API reference") </li> </ul> </div> Using the template binding syntax, the form control is now registered to the `name` input element in the template. The form control and DOM element communicate with each other: the view reflects changes in the model, and the model reflects changes in the view. |
+| Display the component                | The `FormControl` assigned to the `name` property is displayed when the property's host component is added to a template. <code-example header="src/app/app.component.html (name editor)" path="reactive-forms/src/app/app.component.1.html" region="app-name-editor"></code-example> <div class="lightbox"> <img alt="Name Editor, which has a name label and an input so the user can enter a name" src="generated/images/guide/reactive-forms/name-editor-1.png"> </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
-リアクティブフォームコントロールを使用するには、`@angular/forms`パッケージから`ReactiveFormsModule`をインポートして、NgModuleの`imports`配列に追加します。
-
-<code-example path="reactive-forms/src/app/app.module.ts" region="imports" header="src/app/app.module.ts (excerpt)"></code-example>
-
-**新しい`FormControl`の生成**
-
-[CLIコマンド](cli "Using the Angular command-line interface.")`ng generate`を使ってコントロールをホストするコンポーネントをプロジェクトに生成します。
-
-<code-example language="sh">
-
-  ng generate component NameEditor
-
-</code-example>
-
-単一のフォームコントロールを登録するには、`FormControl`クラスをインポートして、`FormControl`の新しいインスタンスを作成し、クラスのプロパティとして保存します。
-
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.ts" region="create-control" header="src/app/name-editor/name-editor.component.ts"></code-example>
-
-`FormControl`のコンストラクターを使い、初期値を設定します。この場合は空文字を設定しています。このコントロールをコンポーネントクラスに作ることで、フォーム入力の状態の監視、更新、バリデーションを行うことができます。
-
-**テンプレートへのコントロールの登録**
-
-コンポーネントクラスにコントロールを作成した後は、テンプレート内のフォームコントロール要素へ紐付ける必要があります。 `ReactiveFormsModule`内の`FormControlDirective`が提供する`formControl`バインディングを使い、フォームコントロールとともにテンプレートを更新します。
-
-<code-example path="reactive-forms/src/app/name-editor/name-editor.component.html" region="control-binding" header="src/app/name-editor/name-editor.component.html"></code-example>
-
-<div class="alert is-helpful">
-
-* `ReactiveFormsModule`が提供するクラスやディレクティブの概要は、[リアクティブフォームAPI](#reactive-forms-api "API summary.")を参照してください。
-
-* これらのクラスやディレクティブの完全な構文の詳細については、[Forms package](api/forms "API reference.")のAPIリファレンスドキュメントを参照してください。
-
-</div>
-
-テンプレートバインディング構文を使うことで、フォームコントロールはテンプレート内の`name`入力要素に登録されました。フォームコントロールとDOM要素は相互に作用します。画面にモデルの変更を反映し、画面での変更をモデルに反映します。
-
-**コンポーネントの表示**
-
-`name`が割り当てられたフォームコントロールは、コンポーネントがテンプレートに追加すると表示されます。
-
-<code-example path="reactive-forms/src/app/app.component.1.html" region="app-name-editor" header="src/app/app.component.html (name editor)"></code-example>
-
-<div class="lightbox">
-  <img src="generated/images/guide/reactive-forms/name-editor-1.png" alt="Name Editor, which has a name label and an input so the user can enter a name">
-</div>
-
-{@a display-value}
+<a id="display-value"></a>
 
 ### フォームコントロール値の表示
 

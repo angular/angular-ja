@@ -208,30 +208,30 @@
               "children": [
                 {
                   "url": "guide/binding-overview",
-                  "title": "Understanding binding",
+                  "title": "バインディングを理解する",
                   "tooltip": "Introductory guide to binding."
                 },
                 {
+                  "url": "guide/property-binding",
+                  "title": "プロパティバインディング",
+                  "tooltip": "Introductory guide to setting element or input properties.",
+                  "translated": false
+                },
+                {
                   "url": "guide/attribute-binding",
-                  "title": "属性・クラス・スタイルバインディング",
+                  "title": "属性バインディング",
                   "tooltip": "Introductory guide to setting the value of HTML attributes.",
                   "translated": false
                 },
                 {
                   "url": "guide/class-binding",
-                  "title": "Class and style binding",
+                  "title": "クラス・スタイルバインディング",
                   "tooltip": "Learn how to use class and style binding."
                 },
                 {
                   "url": "guide/event-binding",
                   "title": "イベントバインディング",
                   "tooltip": "Introductory guide to listening for user interaction.",
-                  "translated": false
-                },
-                {
-                  "url": "guide/property-binding",
-                  "title": "プロパティバインディング",
-                  "tooltip": "Introductory guide to setting element or input properties.",
                   "translated": false
                 },
                 {
@@ -355,10 +355,21 @@
           "tooltip": "Angularアプリケーションを構築するための開発者向けガイドの一覧です。"
         },
         {
-          "url": "guide/standalone-components",
-          "title": "スタンドアロンコンポーネント",
-          "tooltip": "Standalone components, directives, and pipes",
-          "translated": true
+          "title": "スタンドアロンAPI",
+          "tooltip": "AngularのスタンドアロンAPIについて、またアプリケーションを変換する方法について学びます。",
+          "children": [
+            {
+              "url": "guide/standalone-components",
+              "title": "スタンドアロンコンポーネント",
+              "tooltip": "Standalone components, directives, and pipes",
+              "translated": true
+            },
+            {
+              "url": "guide/standalone-migration",
+              "title": "スタンドアロンAPIへの移行",
+              "tooltip": "Migrate your application to Angular's standalone APIs"
+            }
+          ]
         },
         {
           "title": "変更検知",

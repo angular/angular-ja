@@ -186,7 +186,7 @@ Angular自体の動作にはこれら設定のみが必要です。ただし、�
 
 <!-- vale Angular.Google_Headings = YES -->
 
-クロスサイトスクリプティング攻撃からアプリケーションを守る方法として、[Trusted Types](https://w3c.github.io/webappsec-trusted-types/dist/spec/)を使用することをお勧めします。
+クロスサイトスクリプティング攻撃からアプリケーションを守る方法として、[Trusted Types](https://w3c.github.io/trusted-types/dist/spec/)を使用することをお勧めします。
 Trusted Typesは、より安全なコーディング方法を適用することにより、クロスサイトスクリプティング攻撃を防ぐのに役立つ[Webプラットフォーム](https://en.wikipedia.org/wiki/Web_platform)機能です。
 アプリケーションコードの監査をシンプルにするのにも役立ちます。
 

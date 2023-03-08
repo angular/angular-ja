@@ -251,7 +251,7 @@ The user should be able to get to these details in three ways.
 1.  By clicking a hero in the heroes list.
 1.  By pasting a "deep link" URL into the browser address bar that identifies the hero to display.
 
-This section enables navigation to the `HeroDetailComponent` and liberate it from the `HeroesComponent`.
+This section enables navigation to the `HeroDetailComponent` and liberates it from the `HeroesComponent`.
 
 ### Delete *hero details* from `HeroesComponent`
 
@@ -299,7 +299,7 @@ The hero items in the `HeroesComponent` are `<li>` elements whose click events a
 
 <code-example header="src/app/heroes/heroes.component.html (list with onSelect)" path="toh-pt4/src/app/heroes/heroes.component.html" region="list"></code-example>
 
-Remove the `<li>` back to just its `*ngFor`.
+Remove the inner HTML of `<li>`.
 Wrap the badge and name in an anchor `<a>` element.
 Add a `routerLink` attribute to the anchor that's the same as in the dashboard template.
 

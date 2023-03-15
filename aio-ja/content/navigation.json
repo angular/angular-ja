@@ -232,7 +232,7 @@
                   "url": "guide/event-binding",
                   "title": "イベントバインディング",
                   "tooltip": "Introductory guide to listening for user interaction.",
-                  "translated": false
+                  "translated": true
                 },
                 {
                   "url": "guide/two-way-binding",

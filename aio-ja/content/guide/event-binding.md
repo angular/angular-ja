@@ -1,91 +1,91 @@
 # イベントバインディング
 
-イベントバインディングを使えば、キー操作、マウス移動、クリック、タッチなどのイベントをリッスンし、応答することができます。
+イベントバインディングを使えば、キー操作やマウス移動、クリック、タッチなどのイベントをリッスンし、応答することができます。
 
 <div class="alert is-helpful">
 
-See the <live-example></live-example> for a working example containing the code snippets in this guide.
+このガイドのコードスニペットを含む動作例については、<live-example></live-example>を参照してください。
 
 </div>
 
-## Prerequisites
+## 前提知識
 
-* [Basics of components](guide/architecture-components)
-* [Basics of templates](guide/glossary#template)
-* [Binding syntax](guide/binding-syntax)
-* [Template statements](guide/template-statements)
+* [コンポーネントの基礎知識](guide/architecture-components)
+* [テンプレートの基礎知識](guide/glossary#template)
+* [バインディング構文](guide/binding-syntax)
+* [テンプレート文](guide/template-statements)
 
-## Binding to events
+## イベントへのバインディング
 
-To bind to an event you use the Angular event binding syntax.
-This syntax consists of a target event name within parentheses to the left of an equal sign, and a quoted template statement to the right.
+イベントにバインドするには、Angularのイベントバインディング構文を使用します。
+この構文は、等号の左側のカッコ内にターゲットイベント名、右側にクオートで囲まれたテンプレート文で構成されます。
 
-Create the following example; the target event name is `click` and the template statement is `onSave()`.
+次の例を作成しましょう。ターゲットイベント名は `click` で、テンプレート文は `onSave()` です。
 
-<code-example language="html" header="Event binding syntax">
+<code-example language="html" header="イベントバインディングの構文">
 &lt;button (click)="onSave()"&gt;Save&lt;/button&gt;
 </code-example>
 
-The event binding listens for the button's click events and calls the component's `onSave()` method whenever a click occurs.
+イベントバインディングは、ボタンのクリックイベントをリッスンして、クリックが発生するたびにコンポーネントの `onSave()` メソッドを呼び出します。
 
 <div class="lightbox">
   <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </div>
 
-### Determining an event target
+### イベントターゲットの決定
 
-To determine an event target, Angular checks if the name of the target event matches an event property of a known directive.
+イベントターゲットを決定するために、Angularはターゲットイベントの名前が既知のディレクティブのイベントプロパティと一致するかどうかをチェックします。
 
-Create the following example: (Angular checks to see if `myClick` is an event on the custom `ClickDirective`)
+次の例を作成しましょう。（Angular は `myClick` が独自の `ClickDirective` のイベントであるかどうかを確認します）
 
 <code-example path="event-binding/src/app/app.component.html" region="custom-directive" header="src/app/app.component.html"></code-example>
 
-If the target event name, `myClick` fails to match an output property of `ClickDirective`, Angular will instead bind to the `myClick` event on the underlying DOM element.
+ターゲットイベント名である `myClick` が `ClickDirective` の Output プロパティにマッチしない場合、Angular は代わりにベースとなる DOM 要素の `myClick` イベントにバインドします。
 
-## Binding to passive events
+## パッシブイベントへのバインディング
 
-This is an advanced technique that is not necessary for most applications. You may find this useful if you want to optimize frequently occurring events that are causing performance problems.
+これは高度なテクニックであり、ほとんどのアプリケーションでは必要ありません。パフォーマンスの問題を引き起こしている頻繁に発生するイベントを最適化したい場合に、この方法が役に立つかもしれません。
 
-Angular also supports passive event listeners. For example, use the following steps to make a scroll event passive.
+Angularはパッシブイベントリスナーもサポートしています。たとえば、次の手順でスクロールイベントをパッシブにします。
 
-1. Create a file `zone-flags.ts` under `src` directory.
+1. `src` ディレクトリの下に `zone-flags.ts` というファイルを作成します。
+2. このファイルに次の行を追加します。
    ```typescript
    (window as any)['__zone_symbol__PASSIVE_EVENTS'] = ['scroll'];
    ```
-2. Add the following line into this file.
-3. In the `src/polyfills.ts` file, before importing zone.js, import the newly created `zone-flags`.
+3. `src/polyfills.ts` ファイルで、zone.js をインポートする前に、新しく作成した `zone-flags` をインポートします。
    ```typescript
    import './zone-flags';
    import 'zone.js';  // Included with Angular CLI.
    ```
 
-After those steps, if you add event listeners for the `scroll` event, the listeners will be `passive`.
+これらの手順の後、`scroll`イベントのイベントリスナーを追加すると、リスナーは`passive`になります。
 
-## Binding to keyboard events
+## キーボードイベントへのバインディング
 
-You can bind to keyboard events using Angular's binding syntax. You can specify the key or code that you would like to bind to keyboard events. They `key` and `code` fields are a native part of the browser keyboard event object. By default, event binding assumes you want to use the `key` field on the keyboard event. You can also use the `code` field.
+Angularのバインディング構文を使って、キーボードイベントにバインドすることができます。キーボードイベントにバインドしたいキーやコードを指定することができます。これらの `key` と `code` フィールドは、ブラウザのキーボードイベントオブジェクトのネイティブな部分です。デフォルトでは、イベントバインディングはキーボードイベントの `key` フィールドを使用することを想定しています。また、`code`フィールドを使用することもできます。
 
-Combinations of keys can be separated by a `.` (period). For example, `keydown.enter` will allow you to bind events to the `enter` key. You can also use modifier keys, such as `shift`, `alt`, `control`, and the `command` keys from Mac. The following example shows how to bind a keyboard event to `keydown.shift.t`.
+キーのコンビネーションは `.`（ピリオド）で区切ることができます。たとえば、`keydown.enter`とすると、`enter`キーにイベントをバインドすることができます。また、`shift`、`alt`、`control`などの修飾キーや、Macの`command`キーも使用することができます。次の例は、キーボードイベントを `keydown.shift.t` にバインドする方法を示しています。
 
    ```typescript
    <input (keydown.shift.t)="onKeydown($event)" />
    ```
 
-Depending on the operating system, some key combinations might create special characters instead of the key combination that you expect. MacOS, for example, creates special characters when you use the option and shift keys together. If you bind to `keydown.shift.alt.t`, on MacOS, that combination produces a `ˇ` character instead of a `t`, which doesn't match the binding and won't trigger your event handler. To bind to `keydown.shift.alt.t` on MacOS, use the `code` keyboard event field to get the correct behavior, such as `keydown.code.shiftleft.altleft.keyt` shown in this example.
+オペレーティングシステムによっては、期待したキーコンビネーションではなく、特殊な文字が作成される場合があります。たとえばMacOSでは、optionキーとshiftキーを一緒に使うと、特殊な文字が生成されます。macOSで `keydown.shift.alt.t` にバインドすると、この組み合わせでは `t` の代わりに `ˇ` という文字が生成されますが、これはバインドと一致しないためイベントハンドラーは起動しません。macOSで `keydown.shift.alt.t` にバインドするには、`code` キーボードイベントフィールドを使用して、この例に示す `keydown.code.shiftleft.altleft.keyt` のように正しい振る舞いを実現します。
    
    ```typescript
    <input (keydown.code.shiftleft.altleft.keyt)="onKeydown($event)" />
    ```
 
-The `code` field is more specific than the `key` field. The `key` field always reports `shift`, whereas the `code` field will specify `leftshift` or `rightshift`. When using the `code` field, you might need to add separate bindings to catch all the behaviors you want. Using the `code` field avoids the need to handle OS specific behaviors such as the `shift + option` behavior on MacOS.
+`code` フィールドは `key` フィールドよりも具体的です。`key` フィールドは常に `shift` を報告しますが、`code` フィールドは `leftshift` または `rightshift` を指定します。`code` フィールドを使用する場合、必要な動作をすべてキャッチするために別のバインディングを追加する必要がある場合があります。`code` フィールドを使用すると、MacOS の `shift + option` 動作のような OS 固有の挙動を避けることができます。
 
-For more information, visit the full reference for [key](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) and [code](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values) to help build out your event strings.
+詳しくは、[key](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)と[code](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values)のフルリファレンスを参照すると、イベント文字列を構築するのに役立つでしょう。
 
-## What's next
+## 次のステップ
 
-* For more information on how event binding works, see [How event binding works](guide/event-binding-concepts).
-* [Property binding](guide/property-binding)
-* [Text interpolation](guide/interpolation)
-* [Two-way binding](guide/two-way-binding)
+* イベントバインディングの仕組みの詳細については、[イベントバインディングの仕組み](guide/event-binding-concepts)を参照してください。
+* [プロパティバインディング](guide/property-binding)
+* [テキスト補間](guide/interpolation)
+* [双方向バインディング](guide/two-way-binding)
 
 @reviewed 2022-05-10

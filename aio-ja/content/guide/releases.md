@@ -100,7 +100,7 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 
 </div>
 
-### Release schedule
+### リリーススケジュール {@a release-schedule}
 
 | Version | Date               |
 | :---    | :---               |
@@ -108,7 +108,7 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 | v15.2   | Week of 2023-02-20 |
 | v16.0   | Week of 2023-05-01 |
 
-### Support window
+### サポート期間 {@a support-window}
 
 すべてのメジャーリリースは原則として18か月間サポートされます。
 
@@ -116,7 +116,7 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 
 * 12ヶ月の*長期サポート（LTS）*。LTS期間中は、[重要な修正とセキュリティパッチ](#lts-fixes)のみがリリースされます。
 
-### Actively supported versions
+### 現在サポート中のバージョン {@a actively-supported-versions}
 
 次の表は、サポート対象のAngularバージョンのステータスを示しています
 
@@ -129,12 +129,12 @@ Angularプロジェクトを最新バージョンにアップデートする方�
 
 Angularバージョン v2 から v12 のサポートは終了しました。
 
-### LTS fixes
+### LTS の修正 {@a lts-fixes}
 
-As a general rule, a fix is considered for an LTS version if it resolves one of:
+原則として、LTSバージョンでは次のいずれかを解決するものが修正とみなされます。
 
-* a newly identified security vulnerability,
-* a regression, since the start of LTS, caused by a 3rd party change, such as a new browser version.
+* 新たに確認されたセキュリティ上の脆弱性
+* LTS開始以降、ブラウザの新バージョンなどサードパーティの変更に起因して発生したリグレッション
 
 {@a deprecation}
 ## 廃止のプラクティス {@a deprecation-practices}
@@ -162,21 +162,21 @@ As a general rule, a fix is considered for an LTS version if it resolves one of:
 
 
 {@a public-api}
-## パブリックAPI
+## 公開API
 
-Angularは、多くのパッケージ、サブプロジェクト、ツールのコレクションです。プライベートAPIの偶発的な使用を防ぐために&mdash;ここで説明するプラクティスの対象を明確に理解できるように&mdash;私たちはパブリックAPIと見なされるものとそうでないものを明文化します。詳細については、[AngularのサポートされたパブリックAPI](https://github.com/angular/angular/blob/main/docs/PUBLIC_API.md "Supported Public API Surface of Angular")を参照してください。
+Angularは、多くのパッケージ、サブプロジェクト、ツールのコレクションです。プライベートAPIの偶発的な使用を防ぐために（ここで説明するプラクティスの対象を明確に理解できるように）私たちは公開APIと見なされるものとそうでないものを明文化します。詳細については、[Angularでサポートされている公開API](https://github.com/angular/angular/blob/main/docs/PUBLIC_API.md "Supported Public API Surface of Angular")を参照してください。
 
-パブリックAPIのあらゆる変更は、上述ののバージョニング、サポート、および非推奨化ポリシーが適用されます。
+公開APIのあらゆる変更は、上述のバージョニング、サポート、および非推奨化ポリシーが適用されます。
 
 <a id="developer-preview"></a>
 
-## Developer Preview
+## 開発者プレビュー（Developer Preview）
 
-Occasionally we introduce new APIs under the label of "Developer Preview". These are APIs that are fully functional and polished, but that we are not ready to stabilize under our normal deprecation policy.
+たまに、「Developer Preview」というラベルで新しいAPIを紹介することがあります。これらは、十分に機能し、洗練されたAPIですが、私たちの通常の非推奨化ポリシーで安定化する準備ができていません。
 
-This may be because we want to gather feedback from real applications before stabilization, or because the associated documentation or migration tooling is not fully complete.
+これは、安定化する前に実際のアプリケーションからフィードバックを集めたい、あるいは関連するドキュメントや移行ツールが完全に完成していないのが理由です。
 
-The policies and practices that are described in this document do not apply to APIs marked as Developer Preview. Such APIs can change at any time, even in new patch versions of the framework. Teams should decide for themselves whether the benefits of using Developer Preview APIs are worth the risk of breaking changes outside of our normal use of semantic versioning.
+このドキュメントで説明されているポリシーとプラクティスは、Developer PreviewとマークされたAPIには適用されません。そのようなAPIは、フレームワークの新しいパッチバージョンであっても、いつでも変更されます。Developer Preview APIを使用する利点が、通常のセマンティック・バージョニングの利用から外れた破壊的変更のリスクに見合うかどうかは、チームで自己判断する必要があります。
 
 <!-- links -->
 

@@ -131,7 +131,6 @@ Angularバージョン v2 から v12 のサポートは終了しました。
 
 ### LTS の修正 {@a lts-fixes}
 
-As a general rule, a fix is considered for an LTS version if it resolves one of:
 原則として、LTSバージョンでは以下のいずれかを解決するものが修正とみなされます。
 
 * 新たに確認されたセキュリティ上の脆弱性

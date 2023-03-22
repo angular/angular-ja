@@ -177,7 +177,6 @@ Angularは、多くのパッケージ、サブプロジェクト、ツールの�
 
 これは、安定化する前に実際のアプリケーションからフィードバックを集めたい、あるいは関連するドキュメントや移行ツールが完全に完成していないのが理由です。
 
-The policies and practices that are described in this document do not apply to APIs marked as Developer Preview. Such APIs can change at any time, even in new patch versions of the framework. Teams should decide for themselves whether the benefits of using Developer Preview APIs are worth the risk of breaking changes outside of our normal use of semantic versioning.
 このドキュメントで説明されているポリシーとプラクティスは、Developer PreviewとマークされたAPIには適用されません。そのようなAPIは、フレームワークの新しいパッチバージョンであっても、いつでも変更されます。Developer Preview APIを使用する利点が、通常のセマンティック・バージョニングの利用から外れた破壊的変更のリスクに見合うかどうかは、チームで自己判断する必要があります。
 
 <!-- links -->

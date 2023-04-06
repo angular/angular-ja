@@ -104,7 +104,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
 1.  `<div>` の中に `<h3>` と `{{ product.name }}` を追加しましょう。
     この `{{ product.name }}` 文は Angular の補間構文の例です。
-    補間 `{{{ }}` は、プロパティの値をテキストとしてレンダリングします。
+    補間 `{{ }}` は、プロパティの値をテキストとしてレンダリングします。
 
     <code-example header="src/app/product-list/product-list.component.html" path="getting-started/src/app/product-list/product-list.component.2.html" region="interpolation"></code-example>
 

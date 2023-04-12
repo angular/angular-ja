@@ -407,8 +407,9 @@
           "children": [
             {
               "url": "guide/routing-overview",
-              "title": "Overview",
-              "tooltip": "Introduces the Angular Router and lists topics that teach you how to add the router to your applications."
+              "title": "概要",
+              "tooltip": "Angular ルーターの紹介と、アプリケーションにルーターを追加する方法を学ぶトピックの一覧です。",
+              "translated": true
             },
             {
               "url": "guide/router",
@@ -423,12 +424,12 @@
             },
             {
               "url": "guide/routing-with-urlmatcher",
-              "title": "Tutorial: Creating custom route matches",
+              "title": "チュートリアル: カスタムルートマッチの作成",
               "tooltip": "Learn how to create a custom URL matcher with the Angular router."
             },
             {
               "url": "guide/router-tutorial-toh",
-              "title": "チュートリアル: Tour of Heroesにルーティングを追加",
+              "title": "チュートリアル: Tour of Heroes へのルーティング追加",
               "tooltip": "Tour of Heroesの例を使ってAngularのルーターの使い方を探索します",
               "translated": true
             },

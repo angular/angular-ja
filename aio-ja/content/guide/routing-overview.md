@@ -1,48 +1,48 @@
-# Angular Routing
+# Angular ルーティング
 
-In a single-page app, you change what the user sees by showing or hiding portions of the display that correspond to particular components, rather than going out to the server to get a new page.
-As users perform application tasks, they need to move between the different [views](guide/glossary#view "Definition of view") that you have defined.
+シングルページアプリケーションでは、サーバーにアクセスして新しいページを取得するのではなく、特定のコンポーネントに対応した画面の一部を出したり消したりして、ユーザーへの表示を切り替えます。
+ユーザーがアプリケーションのタスクを実行すると、定義したさまざまな[ビュー](guide/glossary#view "Definition of view") の間を移動する必要があります。
 
-To handle the navigation from one [view](guide/glossary#view) to the next, you use the Angular **`Router`**.
-The **`Router`** enables navigation by interpreting a browser URL as an instruction to change the view.
+ある[ビュー](guide/glossary#view)から次のビューへの移動を処理するために、Angularの**`Router`**を使用します。
+**`Router`**は、ブラウザのURLをビューを変更する命令として解釈することでナビゲーションします。
 
-To explore a sample app featuring the router's primary features, see the <live-example name="router"></live-example>.
+ルーターの主な機能を紹介するサンプルアプリケーションは、<live-example name="router"></live-example> を参照してください。
 
-## Prerequisites
+## 前提知識
 
-Before creating a route, you should be familiar with the following:
+ルートを作成する前に、次のことをよく理解しておく必要があります:
 
-*   [Basics of components](guide/architecture-components)
-*   [Basics of templates](guide/glossary#template)
-*   An Angular app &mdash;you can generate a basic Angular application using the [Angular CLI](cli).
+*   [コンポーネントの基本](guide/architecture-components)
+*   [テンプレートの基本](guide/glossary#template)
+*   Angularアプリケーション（基本的なAngularアプリケーションは[Angular CLI](cli)を使って生成できます。）
 
-## Learn about Angular routing
+## Angularのルーティングを学ぶ
 
 <div class="card-container">
   <a href="guide/router" class="docs-card" title="Common routing tasks">
-    <section>Common routing tasks</section>
-    <p>Learn how to implement many of the common tasks associated with Angular routing.</p>
-    <p class="card-footer">Common routing tasks</p>
+    <section>一般的なルーティングのタスク</section>
+    <p>Angularルーティングに関連する一般的なタスクの多くを実装する方法を学びます。</p>
+    <p class="card-footer">一般的なルーティングのタスク</p>
   </a>
   <a href="guide/router-tutorial" class="docs-card" title="Routing SPA tutorial">
-    <section>Single-page applications (SPAs) routing tutorial</section>
-    <p>A tutorial that covers patterns associated with Angular routing.</p>
-    <p class="card-footer">Routing SPA tutorial</p>
+    <section>シングルページアプリケーション（SPA）のルーティングチュートリアル</section>
+    <p>Angularのルーティングに関連するパターンを網羅したチュートリアルです。</p>
+    <p class="card-footer">ルーティングチュートリアル</p>
   </a>
   <a href="guide/router-tutorial-toh" class="docs-card" title="Routing Tour of Heroes">
-    <section>Tour of Heroes expanded routing tutorial</section>
-    <p>Add more routing features to the Tour of Heroes tutorial.</p>
-    <p class="card-footer">Routing Tour of Heroes</p>
+    <section>Tour of Heroes のルーティングチュートリアル</section>
+    <p>Tour of Heroes チュートリアルにルーティング機能を追加します。</p>
+    <p class="card-footer">Tour of Heroes のルーティング</p>
   </a>
   <a href="guide/routing-with-urlmatcher" class="docs-card" title="Creating custom route matches tutorial">
-    <section>Creating custom route matches tutorial</section>
-    <p>A tutorial that covers how to use custom matching strategy patterns with Angular routing.</p>
-    <p class="card-footer">Custom route matches tutorial</p>
+    <section>カスタムのルートマッチの作成チュートリアル</section>
+    <p>Angularルーティングでカスタムマッチのストラテジーパターンを使用する方法を説明するチュートリアルです。</p>
+    <p class="card-footer">カスタムのルートマッチのチュートリアル</p>
   </a>
   <a href="guide/router-reference" class="docs-card" title="Router reference">
-    <section>Router reference</section>
-    <p>Describes some core router API concepts.</p>
-    <p class="card-footer">Router reference</p>
+    <section>ルーターリファレンス</section>
+    <p>ルーターAPIのコアとなる概念を説明します。</p>
+    <p class="card-footer">ルーターリファレンス</p>
   </a>
 </div>
 

@@ -1,41 +1,41 @@
 # Deploy multiple locales
 
-If `myapp` is the directory that contains the distributable files of your project, you typically make different versions available for different locales in locale directories.
-For example, your French version is located in the `myapp/fr` directory and the Spanish version is located in the `myapp/es` directory.
+もし`myapp`があなたのプロジェクトの配布可能なファイルを含むディレクトリであれば、通常、ロケールディレクトリで異なるロケール用に異なるバージョンを利用できるようにします。
+例えば、フランス語版は`myapp/fr`ディレクトリに、スペイン語版は`myapp/es`ディレクトリに配置されます。
 
-The HTML `base` tag with the `href` attribute specifies the base URI, or URL, for relative links.
-If you set the `"localize"` option in [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file to `true` or to an array of locale IDs, the CLI adjusts the base `href` for each version of the application.
-To adjust the base `href` for each version of the application, the CLI adds the locale to the configured `"baseHref"`.
-Specify the `"baseHref"` for each locale in your [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file.
-The following example displays `"baseHref"` set to an empty string.
+HTMLの`base`タグと`href`属性は、相対リンクのベースとなるURI（URL）を指定します。
+ワークスペースのビルド設定ファイル[`angular.json`][AioGuideWorkspaceConfig]の`"localize"`オプションに`true`またはロケール ID の配列を指定すると、CLI はアプリケーションのバージョンごとにベース`href`を調整する。
+アプリケーションの各バージョンでベースとなる `href` を調整するために、CLIは設定した `"baseHref"` にロケールを追加します。
+ワークスペース構築設定ファイル [`angular.json`][AioGuideWorkspaceConfig] に、各ロケールの `"baseHref"` を指定する。
+以下の例では、`"baseHref"`に空文字列を指定しています。
 
 <code-example header="angular.json" path="i18n/angular.json" region="i18n-baseHref"></code-example>
 
-Also, to declare the base `href` at compile time, use the CLI `--baseHref` option with [`ng build`][AioCliBuild].
+また、コンパイル時にベースとなる `href` を宣言するには、[`ng build`][AioCliBuild] で CLI `--baseHref` オプションを使用します。
 
-## Configure a server
+## サーバーを設定する
 
-Typical deployment of multiple languages serve each language from a different subdirectory.
-Users are redirected to the preferred language defined in the browser using the `Accept-Language` HTTP header.
-If the user has not defined a preferred language, or if the preferred language is not available, then the server falls back to the default language.
-To change the language, change your current location to another subdirectory.
-The change of subdirectory often occurs using a menu implemented in the application.
+複数言語の典型的な展開では、各言語を異なるサブディレクトリから提供します。
+ユーザーは、`Accept-Language` HTTPヘッダを使用してブラウザで定義された優先言語へリダイレクトされます。
+ユーザーが優先言語を定義していない場合、または優先言語が利用できない場合、サーバーはデフォルトの言語にフォールバックします。
+言語を変更するには、現在の場所を別のサブディレクトリに変更します。
+サブディレクトリの変更は、多くの場合、アプリケーションに実装されているメニューを使って行われます。
 
 <div class="alert is-helpful">
 
-For more information on how to deploy apps to a remote server, see [Deployment][AioGuideDeployment].
+リモートサーバーにアプリを展開する方法については、[展開][AioGuideDeployment]を参照してください。
 
 </div>
 
-### Nginx example
+### Nginxの例
 
-The following example displays an Nginx configuration.
+次の例は、Nginxの設定を表示します。
 
 <code-example path="i18n/doc-files/nginx.conf" language="nginx"></code-example>
 
-### Apache example
+### Apacheの例
 
-The following example displays an Apache configuration.
+次の例は、Apacheの設定を表示します。
 
 <code-example path="i18n/doc-files/apache2.conf" language="apache"></code-example>
 

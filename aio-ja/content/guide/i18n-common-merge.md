@@ -109,26 +109,26 @@ CLIは、ビルド構成で定義されたすべてのロケールをビルド�
 
 ## 1つのロケールだけに特定のビルドオプションを適用する {@a apply-specific-build-options-for-just-one-locale}
 
-To apply specific build options to only one locale, specify a single locale to create a custom locale-specific configuration.
+特定のビルドオプションを1つのロケールのみに適用するには、1つのロケールを指定して、ロケール固有のカスタム設定を作成します。
 
 <div class="alert is-important">
 
-Use the [Angular CLI][AioCliMain] development server \(`ng serve`\) with only a single locale.
+ [Angular CLI][AioCliMain]の開発サーバー \(`ng serve`\) を単一のロケールのみで使用します。
 
 </div>
 
-### build for French example
+### フランス語のビルドの例
 
-The following example displays a custom locale-specific configuration using a single locale.
+単一のロケールを使用したカスタムロケール固有の設定を次の例に示します。
 
 <code-example header="angular.json" path="i18n/angular.json" region="build-single-locale"></code-example>
 
-Pass this configuration to the `ng serve` or `ng build` commands.
-The following code example displays how to serve the French language file.
+この設定を`ng serve`コマンドや`ng build`コマンドに渡します。
+次のコード例は、フランス語の言語ファイルを提供する方法を示しています。
 
 <code-example path="i18n/doc-files/commands.sh" region="serve-french"></code-example>
 
-For production builds, use configuration composition to run both configurations.
+プロダクションビルドの場合は、コンフィギュレーション・コンポジションを使用して両方の構成を実行します。
 
 <code-example path="i18n/doc-files/commands.sh" region="build-production-french"></code-example>
 

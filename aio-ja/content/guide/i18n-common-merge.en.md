@@ -1,43 +1,43 @@
-# アプリケーションに翻訳をマージ
+# Merge translations into the application
 
-完成した翻訳をプロジェクトに統合するには、次の操作を行います
+To merge the completed translations into your project, complete the following actions
 
-1.  [Angular CLI][AioCliMain]を使用して、プロジェクトの配布可能なファイルのコピーをビルドします。
-1.  `"localize"`オプションを使って、すべての国際化メッセージを有効な翻訳に置き換え、ローカライズされた variant アプリケーションをビルドします。
-    variant アプリケーションは、一つのロケール用に翻訳された、あなたのアプリケーションの配布可能なファイルの完全なコピーとなります。
+1.  Use the [Angular CLI][AioCliMain] to build a copy of the distributable files of your project
+1.  Use the `"localize"` option to replace all of the i18n messages with the valid translations and build a localized variant application.
+    A variant application is a complete a copy of the distributable files of your application translated for a single locale.
 
-翻訳をマージした後、サーバーサイドの言語検出または異なるサブディレクトリを使用して、アプリケーションの各配布可能なコピーにサービスを提供します。
-
-<div class="alert is-helpful">
-
-各配布可能なアプリケーションのコピーを提供する方法の詳細については、[複数ロケールのデプロイ][AioGuideI18nCommonDeploy]を参照してください。
-
-</div>
-
-アプリケーションの翻訳のコンパイル時、ビルドプロセスは[事前(AOT)コンパイル][AioGuideGlossaryAheadOfTimeAotCompilation]を使用し、小さく高速ですぐに実行できるアプリケーションを作成します。
+After you merge the translations, serve each distributable copy of the application using server-side language detection or different subdirectories.
 
 <div class="alert is-helpful">
 
-ビルドプロセスの詳細な説明については、[Angularアプリケーションのビルドとサーブ][AioGuideBuild]を参照してください。
-ビルドプロセスは、`.xlf`形式の翻訳ファイル、または`.xtb`などAngularが理解できる別の形式の翻訳ファイルに対して機能します。
-Angularで使用される翻訳ファイル形式の詳細については、[ソース言語ファイルのフォーマットを変更する][AioGuideI18nCommonTranslationFilesChangeTheSourceLanguageFileFormat]を参照してください。
+For more information about how to serve each distributable copy of the application, see [deploying multiple locales][AioGuideI18nCommonDeploy].
 
 </div>
 
-各ロケールに対応した配布可能なアプリケーションのコピーを個別にビルドするには、プロジェクトの[`angular.json`][AioGuideWorkspaceConfig]ワークスペースの[ビルド構成ファイルでロケールを定義します][AioGuideI18nCommonMergeDefineLocalesInTheBuildConfiguration]。
-
-この方法では、ロケールごとにアプリケーションの完全なビルドを実行する必要がないため、ビルドプロセスが短縮されます。
-
-[ロケールごとに異なるアプリケーションを生成する][AioGuideI18nCommonMergeGenerateApplicationVariantsForEachLocale]には、[`angular.json`][AioGuideWorkspaceConfig]で`"localize"`オプションを使用します。
-また、[コマンドラインからビルドする][AioGuideI18nCommonMergeBuildFromTheCommandLine]には、[`build`][AioCliBuild] [Angular CLI][AioCliMain]コマンドに`--localize`オプションを付けて使用します。
+For a compile-time translation of the application, the build process uses [ahead-of-time (AOT) compilation][AioGuideGlossaryAheadOfTimeAotCompilation] to produce a small, fast, ready-to-run application.
 
 <div class="alert is-helpful">
 
-オプションで、カスタムロケール設定のために、[1つのロケールだけに特定のビルドオプションを適用する][AioGuideI18nCommonMergeApplySpecificBuildOptionsForJustOneLocale]ことができます。
+For a detailed explanation of the build process, see [Building and serving Angular apps][AioGuideBuild].
+The build process works for translation files in the `.xlf` format or in another format that Angular understands, such as `.xtb`.
+For more information about translation file formats used by Angular, see [Change the source language file format][AioGuideI18nCommonTranslationFilesChangeTheSourceLanguageFileFormat]
 
 </div>
 
-## ビルド構成ファイルでロケールを定義する {@a define-locales-in-the-build-configuration}
+To build a separate distributable copy of the application for each locale, [define the locales in the build configuration][AioGuideI18nCommonMergeDefineLocalesInTheBuildConfiguration] in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file of your project.
+
+This method shortens the build process by removing the requirement to perform a full application build for each locale.
+
+To [generate application variants for each locale][AioGuideI18nCommonMergeGenerateApplicationVariantsForEachLocale], use the `"localize"` option in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file.
+Also, to [build from the command line][AioGuideI18nCommonMergeBuildFromTheCommandLine], use the [`build`][AioCliBuild] [Angular CLI][AioCliMain] command with the `--localize` option.
+
+<div class="alert is-helpful">
+
+Optionally, [apply specific build options for just one locale][AioGuideI18nCommonMergeApplySpecificBuildOptionsForJustOneLocale] for a custom locale configuration.
+
+</div>
+
+## Define locales in the build configuration
 
 Use the `i18n` project option in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file of your project to define locales for a project.
 
@@ -54,7 +54,7 @@ For example, the following excerpt of an [`angular.json`][AioGuideWorkspaceConfi
 
 <code-example header="angular.json" path="i18n/angular.json" region="locale-config"></code-example>
 
-## ロケールごとに異なるアプリケーションを生成する {@a generate-application-variants-for-each-locale}
+## Generate application variants for each locale
 
 To use your locale definition in the build configuration, use the `"localize"` option in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file to tell the CLI which locales to generate for the build configuration.
 
@@ -93,7 +93,7 @@ The following example displays the `"localize"` option set to `true` in the [`an
 
 <code-example header="angular.json" path="i18n/angular.json" region="build-localize-true"></code-example>
 
-## コマンドラインからビルドする {@a build-from-the-command-line}
+## Build from the command line
 
 Also, use the `--localize` option with the [`ng build`][AioCliBuild] command and your existing `production` configuration.
 The CLI builds all locales defined in the build configuration.
@@ -107,7 +107,7 @@ For more information about how to set the locales, see [Generate application var
 
 <code-example path="i18n/doc-files/commands.sh" region="build-localize"></code-example>
 
-## 1つのロケールだけに特定のビルドオプションを適用する {@a apply-specific-build-options-for-just-one-locale}
+## Apply specific build options for just one locale
 
 To apply specific build options to only one locale, specify a single locale to create a custom locale-specific configuration.
 

@@ -95,13 +95,13 @@ CLIはロケールデータをロードして登録し、生成された各バ�
 
 ## コマンドラインからビルドする {@a build-from-the-command-line}
 
-Also, use the `--localize` option with the [`ng build`][AioCliBuild] command and your existing `production` configuration.
-The CLI builds all locales defined in the build configuration.
-If you set the locales in build configuration, it is similar to when you set the `"localize"` option to `true`.
+また、[`ng build`][AioCliBuild]コマンドと既存のプロダクション構成で`--localize`オプションを使用します。
+CLIは、ビルド構成で定義されたすべてのロケールをビルドします。
+ビルド構成でロケールを設定した場合は、`"localize"`オプションを`true`に設定したときと同様です。
 
 <div class="alert is-helpful">
 
-For more information about how to set the locales, see [Generate application variants for each locale][AioGuideI18nCommonMergeGenerateApplicationVariantsForEachLocale].
+ロケールの設定方法については、[ロケールごとに異なるアプリケーションを生成する][AioGuideI18nCommonMergeGenerateApplicationVariantsForEachLocale]を参照してください。
 
 </div>
 

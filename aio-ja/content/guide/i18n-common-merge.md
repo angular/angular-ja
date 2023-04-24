@@ -56,40 +56,40 @@ Angularで使用される翻訳ファイル形式の詳細については、[ソ
 
 ## ロケールごとに異なるアプリケーションを生成する {@a generate-application-variants-for-each-locale}
 
-To use your locale definition in the build configuration, use the `"localize"` option in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file to tell the CLI which locales to generate for the build configuration.
+ビルド構成でロケール定義を使用するには、[`angular.json`][AioGuideWorkspaceConfig]で`"localize"`オプションを使用し、ビルド構成用に生成するロケールをCLIに指示します。
 
-*   Set `"localize"` to `true` for all the locales previously defined in the build configuration.
-*   Set `"localize"` to an array of a subset of the previously defined locale identifiers to build only those locale versions.
-*   Set `"localize"` to `false` to disable localization and not generate any locale-specific versions.
+*   ビルド構成であらかじめ定義されたすべてのロケールに対して、`"localize"`を`true`に設定します。
+*   `"localize"`に、先に定義したロケール識別子のサブセットの配列を設定し、それらのロケールバージョンだけをビルドするようにします。
+*   `"localize"`を`false`に設定すると、ローカライズが無効になり、ロケールに特化したバージョンを生成しません。
 
 <div class="alert is-helpful">
 
 **NOTE**: <br />
-[Ahead-of-time (AOT) compilation][AioGuideGlossaryAheadOfTimeAotCompilation] is required to localize component templates.
+コンポーネントテンプレートのローカライズには、[事前(AOT)コンパイル][AioGuideGlossaryAheadOfTimeAotCompilation]が必要です。
 
-If you changed this setting, set `"aot"` to `true` in order to use AOT.
+この設定を変更した場合は、AOTを使用するために `"aot"`を`true`に設定してください。
 
 </div>
 
 <div class="alert is-helpful">
 
-Due to the deployment complexities of i18n and the need to minimize rebuild time, the development server only supports localizing a single locale at a time.
-If you set the `"localize"` option to `true`, define more than one locale, and use `ng serve`; then an error occurs.
-If you want to develop against a specific locale, set the `"localize"` option to a specific locale.
-For example, for French \(`fr`\), specify `"localize": ["fr"]`.
+国際化の展開が複雑で、再構築にかかる時間を最小限に抑える必要があるため、開発サーバーは一度に1つのロケールのローカライズのみをサポートしています。
+`"localize"`オプションを`true`に設定し、複数のロケールを定義し、`ng serve`を使用すると、エラーが発生します。
+特定のロケールに対して開発したい場合は、`"localize"`オプションに特定のロケールを設定します。
+例えば、フランス語\(`fr`\)の場合、`"localize": ["fr"]`と指定します。
 
 </div>
 
-The CLI loads and registers the locale data, places each generated version in a locale-specific directory to keep it separate from other locale versions, and puts the directories within the configured `outputPath` for the project.
-For each application variant the `lang` attribute of the `html` element is set to the locale.
-The CLI also adjusts the HTML base HREF for each version of the application by adding the locale to the configured `baseHref`.
+CLIはロケールデータをロードして登録し、生成された各バージョンを他のロケールバージョンと区別するためにロケール固有のディレクトリに置き、そのディレクトリをプロジェクトの設定された`outputPath`内に置きます。
+各アプリケーションでは、`html`要素の`lang`属性がロケールに設定されます。
+またCLIは、設定された`baseHref`にロケールを追加することで、アプリケーションの各バージョンのHTML base HREFを調整します。
 
-Set the `"localize"` property as a shared configuration to effectively inherit for all the configurations.
-Also, set the property to override other configurations.
+`"localize"`プロパティを共有設定として、すべての設定に対して効果的に継承するように設定します。
+また、他のコンフィギュレーションをオーバーライドするようにプロパティを設定します。
 
-### `angular.json` include all locales from build example
+### すべてのロケールのビルドを含む`angular.json`　の例
 
-The following example displays the `"localize"` option set to `true` in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file, so that all locales defined in the build configuration are built.
+次の例では、[`angular.json`][AioGuideWorkspaceConfig]で`"localize"`オプションを`true`に設定し、ビルド構成で定義されたすべてのロケールがビルドされます。
 
 <code-example header="angular.json" path="i18n/angular.json" region="build-localize-true"></code-example>
 

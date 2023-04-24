@@ -39,18 +39,18 @@ Angularで使用される翻訳ファイル形式の詳細については、[ソ
 
 ## ビルド構成ファイルでロケールを定義する {@a define-locales-in-the-build-configuration}
 
-Use the `i18n` project option in the [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file of your project to define locales for a project.
+プロジェクトのロケールを定義するには、プロジェクトの[`angular.json`][AioGuideWorkspaceConfig]の`i18n`プロジェクトオプションを使用します。
 
-The following sub-options identify the source language and tell the compiler where to find supported translations for the project.
+以下のサブオプションは、ソース言語を特定し、プロジェクトでサポートされている翻訳をどこで見つけるかをコンパイラに指示します。
 
-| Suboption      | Details |
+| サブオプション      | 詳細 |
 |:---            |:--- |
-| `sourceLocale` | The locale you use within the application source code \(`en-US` by default\) |
-| `locales`      | A map of locale identifiers to translation files                             |
+| `sourceLocale` | アプリケーションのソースコード内で使用するロケール \(デフォルトは`en-US` \) |
+| `locales`      | ロケール識別子と翻訳ファイルとの対応表                             |
 
-### `angular.json` for `en-US` and `fr` example
+### `angular.json`の`en-US`と`fr`の例
 
-For example, the following excerpt of an [`angular.json`][AioGuideWorkspaceConfig] workspace build configuration file sets the source locale to `en-US` and provides the path to the French \(`fr`\) locale translation file.
+例えば、[`angular.json`][AioGuideWorkspaceConfig]の以下の抜粋は、ソースロケールを`en-US`に設定し、フランス語\(`fr`\)ロケールの翻訳ファイルへのパスを提供します。
 
 <code-example header="angular.json" path="i18n/angular.json" region="locale-config"></code-example>
 

@@ -4,7 +4,7 @@
 
 <div class="alert is-helpful">
 
-[Angular Internationalization](AioGuideI18nOverview)ガイドで使用したフランス語のトランスラティモンがあるサンプルアプリケーションを調べるには、<live-example name="i18n" title="live example"></live-example>を参照してください。
+[Angular Internationalization][AioGuideI18nOverview]ガイドで使用しているフランス語翻訳付きサンプルアプリケーションを調べるには、<live-example name="i18n" title="live example"></live-example>を参照してください。
 
 </div>
 

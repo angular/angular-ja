@@ -128,7 +128,7 @@ CLIは、ビルド構成で定義されたすべてのロケールをビルド�
 
 <code-example path="i18n/doc-files/commands.sh" region="serve-french"></code-example>
 
-プロダクションビルドの場合は、コンフィギュレーション・コンポジションを使用して両方の構成を実行します。
+プロダクションビルドの場合は、設定の合成を使用して両方の構成を実行します。
 
 <code-example path="i18n/doc-files/commands.sh" region="build-production-french"></code-example>
 

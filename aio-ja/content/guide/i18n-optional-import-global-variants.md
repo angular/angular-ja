@@ -1,6 +1,6 @@
-# Import global variants of the locale data
+# ロケールデータのグローバル設定をインポートする
 
-The [Angular CLI][AioCliMain] automatically includes locale data if you run the [`ng build`][AioCliBuild] command with the `--localize` option.
+[`ng build`][AioCliBuild]コマンドに`--localize`オプションを付けて実行すると、[Angular CLI][AioCliMain]は自動的にロケールデータを含めます。
 
 <!--todo: replace with code-example -->
 
@@ -10,12 +10,12 @@ ng build --localize
 
 </code-example>
 
-The `@angular/common` package on npm contains the locale data files.
-Global variants of the locale data are available in [`@angular/common/locales/global`][UnpkgBrowseAngularCommonLocalesGlobal].
+npmの`@angular/common`パッケージには、ロケールデータファイルが含まれています。
+[`@angular/common/locales/global`][UnpkgBrowseAngularCommonLocalesGlobal]のロケールデータのグローバル設定が利用できます。
 
-## `import` example for French
+## フランス語を`import`する例
 
-The following example imports the global variants for French \(`fr`\).
+次の例では、フランス語\(`fr`\)のグローバル設定をインポートしています。
 
 <code-example header="src/app/app.module.ts" path="i18n/doc-files/app.module.ts" region="global-locale"></code-example>
 

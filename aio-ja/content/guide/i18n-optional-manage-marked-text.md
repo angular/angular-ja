@@ -76,7 +76,7 @@ variableText3 = &dollar;localize `:site header|An introduction header for this s
 
 </code-example>
 
-#### ユニークなカスタムIDを定義する
+#### ユニークなカスタムIDを定義しましょう
 
 必ずユニークなカスタムIDを定義してください。
 2つの異なるテキスト要素に同じIDを使用すると、抽出ツールは最初の1つだけを抽出し、Angularは両方の元のテキスト要素の代わりに翻訳を使用します。

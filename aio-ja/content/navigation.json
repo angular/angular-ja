@@ -478,10 +478,20 @@
           ]
         },
         {
+          "url": "guide/esbuild",
+          "title": "esbuild-based Builds",
+          "tooltip": "Getting started with the CLI's esbuild-based build system."
+        },
+        {
           "url": "guide/http",
           "title": "HTTPクライアント",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
           "translated": true
+        },
+        {
+          "url": "guide/hydration",
+          "title": "Hydration",
+          "tooltip": "How to enable hydration on your server rendered applications."
         },
         {
           "url": "guide/image-directive",
@@ -601,8 +611,9 @@
                 },
                 {
                   "url": "guide/i18n-common-merge",
-                  "title": "Merge translations into the app",
-                  "tooltip": "Merge translations into your app"
+                  "title": "アプリケーションに翻訳をマージする",
+                  "tooltip": "Merge translations into your app",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-deploy",
@@ -613,32 +624,36 @@
             },
             {
               "url": "guide/i18n-example",
-              "title": "Example Angular application",
+              "title": "サンプルアプリケーション",
               "tooltip": "Example of a translated Angular application"
             },
             {
-              "title": "Optional internationalization practices",
+              "title": "国際化のオプショナルプラクティス",
               "tooltip": "Task-based content on many of the optional pratices associated with Angular internationalization",
               "children": [
                 {
                   "url": "guide/i18n-optional-overview",
-                  "title": "Overview",
-                  "tooltip": "Introduces the optional Angular internationalization tasks and lists topics that teach you how to manually configure localization settings for your applications"
+                  "title": "概要",
+                  "tooltip": "Introduces the optional Angular internationalization tasks and lists topics that teach you how to manually configure localization settings for your applications",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-optional-manual-runtime-locale",
-                  "title": "Set the runtime locale manually",
-                  "tooltip": "Set the runtime locale manually"
+                  "title": "ランタイムロケールを手動で設定する",
+                  "tooltip": "Set the runtime locale manually",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-optional-import-global-variants",
-                  "title": "Import global variants of the locale data",
-                  "tooltip": "Import global variants of the locale data"
+                  "title": "ロケールデータのグローバル設定をインポートする",
+                  "tooltip": "Import global variants of the locale data",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-optional-manage-marked-text",
-                  "title": "Manage marked text with custom IDs",
-                  "tooltip": "Manage marked text with custom IDs"
+                  "title": "カスタムIDでマークされたテキストを管理する",
+                  "tooltip": "Manage marked text with custom IDs",
+                  "translated": true
                 }
               ]
             }
@@ -771,6 +786,22 @@
               "url": "guide/angular-package-format",
               "title": "Angular Package Format",
               "tooltip": "Information about the Angular Package Format."
+            }
+          ]
+        },
+        {
+          "title": "機能プレビュー",
+          "tooltip": "Angular preview features and APIs",
+          "children": [
+            {
+              "url": "guide/signals",
+              "title": "Signals",
+              "tooltip": "Angular signals for optimized change detection"
+            },
+            {
+              "url": "guide/rxjs-interop",
+              "title": "RxJS Interop for Signals",
+              "tooltip": "Angular signals and Observable interop"
             }
           ]
         }
@@ -916,6 +947,87 @@
       "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
       "children": [
         {
+          "title": "Tutorial: はじめての Angular アプリ",
+          "tooltip": "Learn how to get started in Angular by building an Angular app",
+          "children": [
+            {
+              "url": "tutorial/first-app",
+              "title": "Introduction",
+              "tooltip": "Introduction to the first Angular app and tutorial"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-01",
+              "title": "Hello world",
+              "tooltip": "Start coding in Angular with Hello World"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-02",
+              "title": "Create home component",
+              "tooltip": "Create the app's HomeComponent"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-03",
+              "title": "Create housing location component",
+              "tooltip": "Create the app's HousingLocation"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-04",
+              "title": "Create an interface",
+              "tooltip": "Create an interface for your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-05",
+              "title": "Add inputs to components",
+              "tooltip": "Add inputs to components in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-06",
+              "title": "Add property binding to components",
+              "tooltip": "Add property binding to components in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-07",
+              "title": "Add dynamic values to templates",
+              "tooltip": "Add dynamic values to your templates in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-08",
+              "title": "Use *ngFor in templates",
+              "tooltip": "Use *ngFor in your templates in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-09",
+              "title": "Angular services",
+              "tooltip": "Add an Angular service to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-10",
+              "title": "Add routing",
+              "tooltip": "Add routing to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-11",
+              "title": "Customize the details page",
+              "tooltip": "Add styles, links and more to the details page"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-12",
+              "title": "Integrate Angular forms",
+              "tooltip": "Add an Angular form to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-13",
+              "title": "Add search functionality",
+              "tooltip": "Add search functionality to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-14",
+              "title": "Add HTTP communication",
+              "tooltip": "Add HTTP communication to your app"
+            }
+          ]
+        },
+        {
           "title": "チュートリアル: Tour of Heroes",
           "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
           "children": [
@@ -981,7 +1093,7 @@
       "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
       "children": [
         {
-          "url": "guide/update-to-version-15",
+          "url": "guide/update-to-version-16",
           "title": "Update Angular to the latest version",
           "tooltip": "Update your Angular application to the latest version."
         },
@@ -996,6 +1108,11 @@
           "title": "リリースプラクティス",
           "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
           "translated": true
+        },
+        {
+          "url": "guide/versions",
+          "title": "バージョン互換性",
+          "tooltip": "Angular, Node.js, TypeScript, and RxJS version compatibility."
         },
         {
           "url": "guide/browser-support",
@@ -1162,12 +1279,6 @@
                   "url": "guide/module-types",
                   "title": "フィーチャーモジュールの種類",
                   "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
-                  "translated": true
-                },
-                {
-                  "url": "guide/entry-components",
-                  "title": "エントリーコンポーネント",
-                  "tooltip": "Angularのエントリコンポーネントに関するすべて。",
                   "translated": true
                 },
                 {

@@ -1,4 +1,4 @@
-# シングルページアプリケーションにおける Angular routes の使用
+# シングルページアプリケーションにおける Angular routes の使用 {@a using-angular-routes-in-a-single-page-application}
 
 このチュートリアルでは、複数の Angular routes を使用する単一ページのアプリケーションである SPA を構築する方法について説明します。
 

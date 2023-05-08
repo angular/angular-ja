@@ -228,12 +228,13 @@ Angular CLI comes with two build configurations: `production` and `development`.
 | `scripts`                  | プロジェクトのグローバルコンテキストに追加する、JavaScript のスクリプトファイルを含むオブジェクトです。スクリプトはあたかもそれらが、`index.html` の中の `<script>` タグに記述されたかのように正確にロードします。 詳細については、次の [スタイルとスクリプトの構成](#style-script-config) を参照してください。 |
 | `budgets`                  | 出力が閾値のサイズに達したり越えたりしたときに、警告やエラーを報告するようにビルダを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください (`test` セクションにはありません)。 |
 | `fileReplacements`         | オブジェクトとそのコンパイル時間を書き換えを含むオブジェクトです。詳しくは、[ターゲット固有のファイル置換の構成](guide/build#configure-target-specific-file-replacements)を参照してください。 |
+`index`                    | Configures the generation of the application's HTML index. See more in [Index configuration](#index-config). \(Only available in `browser` section.\)                                                                                                         |                                                                                                        |                                                                                                      
 
 <a id="complex-config"></a>
 
 ## 複雑な設定値
 
-オプションの `assets`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
+オプションの `assets`、`index`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
 `sourceMap` および `optimization` オプションは、コマンドフラグを使用して単純なブール値に設定できますが、設定ファイルを使用して複雑な値を指定することもできます。
 
 次のセクションでは、これらの複雑な値が各ケースでどのように使用されるかについて詳しく説明します。
@@ -492,6 +493,23 @@ The example below shows how to toggle one or more values to configure the source
    これらは、ソースマップでエラー報告ツールのエラースタックトレースのみをマッピングするが、ブラウザ開発者ツールでソースマップを公開したくない場合に役立ちます。
 
 </div>
+
+<a id="index-config"></a>
+
+### Index configuration
+
+Configures the generation of the application's HTML index.
+
+The `index` option can be either a String or an Object for more fine-tune configuration.
+
+When supplying the value as a String the filename of the specified path will be used for the generated file and will be created in the root of the application's configured output path.
+
+#### Index options
+| Options  | Details                                                                                                                                                                          | Value type | Default value |
+|:---      |:---                                                                                                                                                                              |:---        |:---           |
+| `input`  | The path of a file to use for the application's generated HTML index.                                                                                                            | `string`   |               |
+| `output` | The output path of the application's generated HTML index file. The full provided path will be used and will be considered relative to the application's configured output path. | `string`   | `index.html`  |
+
 
 <!-- links -->
 

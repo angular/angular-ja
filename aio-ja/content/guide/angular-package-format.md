@@ -43,7 +43,7 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
           index.d.ts &nbsp; <!-- // &lt;-- Bundled .d.ts for the primary entrypoint &commat;angular/core. -->
         </div>
         <div class='file'>
-          esm2020 &nbsp; <!-- // &lt;-- Tree of &commat;angular/core sources in unflattened ES2020 format. -->
+          esm2022 &nbsp; <!-- // &lt;-- Tree of &commat;angular/core sources in unflattened ES2022 format. -->
         </div>
         <div class='children'>
             <div class='file'>
@@ -60,24 +60,7 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
             </div>
         </div>
         <div class='file'>
-          fesm2015 &nbsp; <!-- // &lt;-- Code for all entrypoints in a flattened \(FESM\) ES2015 format, along with sourcemaps. -->
-        </div>
-        <div class='children'>
-            <div class='file'>
-              core.mjs
-            </div>
-            <div class='file'>
-              core.mjs.map
-            </div>
-            <div class='file'>
-              testing.mjs
-            </div>
-            <div class='file'>
-              testing.mjs.map
-            </div>
-        </div>
-        <div class='file'>
-          fesm2020 &nbsp; <!-- // &lt;-- Code for all entrypoints in flattened \(FESM\) ES2020 format, along with sourcemaps. -->
+          fesm2022 &nbsp; <!-- // &lt;-- Code for all entrypoints in flattened \(FESM\) ES2022 format, along with sourcemaps. -->
         </div>
         <div class='children'>
             <div class='file'>
@@ -111,10 +94,9 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
 | `README.md`                                                                                                                                               | npmjs Web UI で使用されるパッケージ README。                                                                                                                                                                          |
 | `package.json`                                                                                                                                            | パッケージ自体と、利用可能なすべてのエントリポイントとコード形式を記述するプライマリ `package.json`。 このファイルには、ランタイムとツールがモジュール解決を実行するために使用する「エクスポート」マッピングが含まれています。 |
 | `index.d.ts`                                                                                                                                               | プライマリエントリポイント `@angular/core` 用にバンドルされた `.d.ts`。                                                                                                                                                    |
-| `esm2020/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `index.mjs` <br /> &nbsp;&nbsp;─ `public_api.mjs`                                         | フラット化されていない ES2020 形式の `@angular/core` ソースのツリー。                                                                                                                                                  |
-| `esm2020/testing/`                                                                                                                                        | フラット化されていない ES2020 形式の `@angular/core/testing` エントリポイントのツリー。                                                                                                                                   |
-| `fesm2015/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | フラット化された \(FESM\) ES2015 形式のすべてのエントリポイントのコードとソースマップ。                                                                                                                         |
-| `fesm2020/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | フラット化された \(FESM\) ES2020 形式のすべてのエントリポイントのコードとソースマップ。                                                                                                                           |
+| `esm2022/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `index.mjs` <br /> &nbsp;&nbsp;─ `public_api.mjs`                                         | フラット化されていない ES2022 形式の `@angular/core` ソースのツリー。                                                                                                                                                  |
+| `esm2022/testing/`                                                                                                                                        | フラット化されていない ES2022 形式の `@angular/core/testing` エントリポイントのツリー。                                                                                                                                   |
+| `fesm2022/` <br /> &nbsp;&nbsp;─ `core.mjs` <br /> &nbsp;&nbsp;─ `core.mjs.map` <br /> &nbsp;&nbsp;─ `testing.mjs` <br /> &nbsp;&nbsp;─ `testing.mjs.map` | フラット化された \(FESM\) ES2022 形式のすべてのエントリポイントのコードとソースマップ。                                                                                                                           |
 | `testing/`                                                                                                                                                | 「テスト」エントリポイントを表すディレクトリ。                                                                                                                                                               |
 | `testing/index.d.ts`                                                                                                                                    | `@angular/core/testing` エントリポイント用にバンドルされた `.d.ts`。                                                                                                                                                     |
 
@@ -158,19 +140,15 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
   },
   ".": {
     "types": "./core.d.ts",
-    "esm2020": "./esm2020/core.mjs",
-    "es2020": "./fesm2020/core.mjs",
-    "es2015": "./fesm2015/core.mjs",
-    "node": "./fesm2015/core.mjs",
-    "default": "./fesm2020/core.mjs"
+    "esm": "./esm2022/core.mjs",
+    "esm2022": "./esm2022/core.mjs",
+    "default": "./fesm2022/core.mjs"
   },
   "./testing": {
     "types": "./testing/testing.d.ts",
-    "esm2020": "./esm2020/testing/testing.mjs",
-    "es2020": "./fesm2020/testing.mjs",
-    "es2015": "./fesm2015/testing.mjs",
-    "node": "./fesm2015/testing.mjs",
-    "default": "./fesm2020/testing.mjs"
+    "esm": "./esm2022/testing/testing.mjs",
+    "esm2022": "./esm2022/testing/testing.mjs",
+    "default": "./fesm2022/testing.mjs"
   }
 }
 
@@ -182,19 +160,11 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
 | フォーマット                   | 詳細 |
 |:---                       |:---     |
 | タイピング \(`.d.ts` ファイル\) | `.d.ts` ファイルは、特定のパッケージに依存するときに TypeScript によって使用されます。                                                                                                           |
-| `es2020`                  | ES2020 コードは 1 つのソースファイルにフラット化されています。                                                                                                                                  |
-| `es2015`                  | ES2015 コードは 1 つのソースファイルにフラット化されています。                                                                                                                                  |
-| `esm2020`                 | フラット化されていないソースファイル内の ES2020 コード(この形式は実験用に含まれています - 詳細については、[デフォルトに関するこの説明](#note-about-the-defaults-in-packagejson)を参照してください)。 |
+| `es2022`                  | ES2022 コードは 1 つのソースファイルにフラット化されています。                                                                                                                                  |
+| `esm2022`                 | フラット化されていないソースファイル内の ES2022 コード(この形式は実験用に含まれています - 詳細については、[デフォルトに関するこの説明](#note-about-the-defaults-in-packagejson)を参照してください)。 |
+| `default`               | ES2022 code flattened into a single source.
 
 これらのキーを認識しているツールは、"exports" から望ましいコード形式を優先的に選択する場合があります。
-残りの 2 つのキーは、ツールのデフォルトの動作を制御します。
-
-*   `"node"` は、パッケージが Node.js に読み込まれるときにフラット化された ES2015 コードを選択します。
-
-    この形式は、ネイティブの `async`/`await` ES2017 構文をサポートしない `zone.js`の要件により使用されます。
-    したがって、Node は ES2015 コードを使用するように指示されます。ここで、`async`/`await` 構造は Promises にダウンレベルされています。
-
-*   `"default"` は、他のすべてのコンシューマーに対してフラット化された ES2020 コードを選択します。
 
 ライブラリは、Sass ミックスインやコンパイル済み CSS などの JavaScript ベースのエントリポイントのエクスポートによってキャプチャされない追加の静的ファイルを公開する必要がある場合があります。
 
@@ -208,25 +178,13 @@ Angular 配布形式は、一般的に使用されるすべての開発ツール
 <code-example language="javascript">
 
 {
-  "fesm2020": "./fesm2020/core.mjs",
-  "fesm2015": "./fesm2015/core.mjs",
-  "esm2020": "./esm2020/core.mjs",
+  "module": "./fesm2022/core.mjs",
   "typings": "./core.d.ts",
-  "module": "./fesm2015/core.mjs",
-  "es2020": "./fesm2020/core.mjs",
 }
 
 </code-example>
 
 前のコードスニペットに示されているように、モジュールリゾルバーはこれらのキーを使用して、特定のコード形式を読み込むことができます。
-
-<div class="alert is-helpful">
-
-**注意**: <br />
-`"default"` の代わりに、`"module"` は Node.js と、特定のキーを使用するように構成されていないツールの両方のための形式を選択します。
-`"node"` と同様に、ZoneJS の制約により ES2015 コードが選択されます。
-
-</div>
 
 ### 副作用 {@a side-effects}
 
@@ -323,9 +281,9 @@ Angular コンパイラは、インデックス ES モジュールファイル�
 FESM は、エントリポイントからアクセス可能なすべての ES モジュールを 1 つの ES モジュールにフラット化することによって作成されるファイル形式です。
 これは、パッケージからのすべてのインポートをたどり、そのコードを単一のファイルにコピーすることによって形成されますが、すべてのパブリック ES エクスポートを保持し、すべてのプライベートインポートを削除します。
 
-*phe-som* と発音される省略名 FESM の後には、FESM5 や FESM2015 などの番号を付けることができます。
+*phe-som* と発音される省略名 FESM の後には、FESM2022 などの番号を付けることができます。
 数値は、モジュール内の JavaScript の言語レベルを表します。
-したがって、FESM5 ファイルは ESM+ES5 になり、インポート/エクスポート文と ES5 のソースコードが含まれます。
+したがって、FESM2022 ファイルは ESM+ES2022 になり、インポート/エクスポート文と ES2022 のソースコードが含まれます。
 
 フラット化された ES Module インデックスファイルを生成するには、tsconfig.json ファイルで次の構成オプションを使用します。
 
@@ -335,7 +293,7 @@ FESM は、エントリポイントからアクセス可能なすべての ES �
   "compilerOptions": {
     &hellip;
     "module": "esnext",
-    "target": "es2020",
+    "target": "es2022",
     &hellip;
   },
   "angularCompilerOptions": {
@@ -353,8 +311,8 @@ FESM は、エントリポイントからアクセス可能なすべての ES �
 
 webpack v4 の時点で、ES モジュールの最適化のフラット化は、webpack ユーザーには必要ありません。 webpack でモジュールをフラット化することなく、コード分割を改善できるはずです。
 実際には、フラット化されていないモジュールを webpack v4 の入力として使用すると、サイズの回帰が見られることがあります。
-これが、`module` および `es2020` package.json エントリがまだ FESM ファイルを指している理由です。
-この問題は調査中です。 サイズ回帰の問題が解決された後、`module`および`es2020`のpackage.json エントリポイントをフラット化されていないファイルに切り替えることが期待されています。
+これが、`module` および `es2022` package.json エントリがまだ FESM ファイルを指している理由です。
+この問題は調査中です。 サイズ回帰の問題が解決された後、`module`および`es2022`のpackage.json エントリポイントをフラット化されていないファイルに切り替えることが期待されています。
 APF には現在、このような将来の変更を検証する目的で、フラット化されていない ESM2020 コードが含まれています。
 
 ### "sideEffects" フラグ {@a sideeffects-flag}
@@ -366,13 +324,13 @@ APF には現在、このような将来の変更を検証する目的で、フ�
 Webpack などのビルドツールは、モジュールの最上位レベルで副作用のあるコードに依存しないことをパッケージが宣言できるようにするフラグをサポートし、ツールがパッケージからコードをツリーシェイクする自由度を高めます。
 これらの最適化の最終結果は、バンドルサイズが小さくなり、コード分割後のバンドルチャンクでのコード分散が改善されるはずです。
 この最適化は、ローカルではない副作用が含まれている場合、コードを壊す可能性があります。ただし、これは Angular アプリケーションでは一般的ではなく、通常は設計が悪いことを示しています。
-`sideEffects` プロパティを `false` に設定することで、すべてのパッケージが副作用のないステータスを主張し、開発者が [Angular Style Guide](https://angular.io/guide/styleguide) に従うことをお勧めします。これにより、非ローカルな副作用のないコードが自然に得られます。
+`sideEffects` プロパティを `false` に設定することで、すべてのパッケージが副作用のないステータスを主張し、開発者が [Angular Style Guide](/guide/styleguide) に従うことをお勧めします。これにより、非ローカルな副作用のないコードが自然に得られます。
 
 詳細: [副作用に関する webpack ドキュメント](https://github.com/webpack/webpack/tree/master/examples/side-effects)
 
-### ES2020 言語レベル
+### ES2022 言語レベル
 
-ES2020 言語レベルは、Angular CLI やその他のツールで使用されるデフォルトの言語レベルになりました。
+ES2022 言語レベルは、Angular CLI やその他のツールで使用されるデフォルトの言語レベルになりました。
 Angular CLI は、アプリケーションのビルド時に対象となるすべてのブラウザでサポートされる言語レベルにバンドルをダウンレベルします。
 
 ### d.ts バンドル / 型定義の平坦化
@@ -440,7 +398,7 @@ Node.js には、明確に指定され、広く使用されているものがあ
 ファイルからインポートおよびエクスポートするための構文を少なくともカバーするモジュール構文の仕様。
 一般的なモジュール形式は、CommonJS \(通常は Node.js アプリケーションに使用される CJS\) または ECMAScript モジュール \(ESM\) です。
 モジュールの形式は、個々のモジュールのパッケージ化のみを示しており、モジュールのコンテンツを構成するために使用される JavaScript 言語の機能は示していません。
-このため、Angular チームは言語レベル指定子をモジュール形式のサフィックスとして使用することがよくあります \(たとえば、ESM+ES2015 は、モジュールが ESM 形式であり、ES2015 にダウンレベルされたコードを含むことを指定します\)。
+このため、Angular チームは言語レベル指定子をモジュール形式のサフィックスとして使用することがよくあります \(たとえば、ESM+ES2022 は、モジュールが ESM 形式であり、ES2022 コードを含むことを指定します\)。
 
 #### バンドル
 
@@ -451,7 +409,7 @@ Node.js には、明確に指定され、広く使用されているものがあ
 
 #### 言語レベル
 
-コードの言語 \(ES2015 または ES2020\)。
+コードの言語 \(ES2022\)。
 モジュール形式に依存しません。
 
 #### エントリーポイント
@@ -491,4 +449,4 @@ Angular 用の Ahead of Time コンパイラ。
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-03-06

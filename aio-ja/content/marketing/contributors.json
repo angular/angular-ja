@@ -116,6 +116,13 @@
     "twitter": "armandotrue",
     "bio": "Armen is a senior Angular developer from Armenia, tech writer, speaker, mentor and a Google Developer Expert for Angular."
   },
+  "arturovt": {
+    "name": "Artur Androsovych",
+    "picture": "artur-androsovych.jpg",
+    "groups": ["GDE"],
+    "website": "https://ng-guru.io",
+    "bio": "Artur is an Angular expert and OSS core developer of various projects as NGXS, NG-ZORRO, single-spa, ngneat, and RxAngular. He focuses on runtime performance and has taught teams about Angular internals for the past few years."
+  },
   "atscott": {
     "name": "Andrew Scott",
     "picture": "andrewscott.jpg",
@@ -390,15 +397,6 @@
     "bio": "Gerard is very excited about the future of the Web and JavaScript. Always happy Computer Science Engineer and humble Google Developer Expert. He loves to share his learnings by giving talks, trainings and writing about cool technologies. He loves running AngularZone and GraphQL London, mentoring students and giving back to the community.",
     "groups": ["GDE"]
   },
-  "gkalpak": {
-    "name": "Georgios Kalpakas",
-    "picture": "gkalpak.jpg",
-    "twitter": "gkalpakas",
-    "website": "https://github.com/gkalpak",
-    "bio": "George is a Software Engineer with a passion for chess, robotics and automating stuff. He has a strong need to know how things work (so if you already know, he'd love to have a talk with you). He has been a member of the AngularJS team since 2014. When not doing geeky stuff, he is probably trying to convince his wife and kids to apply programming principles in real life. (Or is it the other way around?)",
-    "groups": ["Angular"],
-    "lead": "jelbourn"
-  },
   "jbedard": {
     "name": "Jason Bedard",
     "groups": ["Collaborators"],
@@ -507,13 +505,6 @@
     "bio": "Josh is a Software Engineer, Google Developer Expert for Angular, and Ionic Developer Expert. He is a consultant and content creator focused on advancing the skills of Angular and Ionic developers. He is the author of multiple books and courses including Ionic Start and Modern Angular.",
     "groups": ["GDE"]
   },
-  "josmar-crwdstffng": {
-    "name": "Joe Martin",
-    "picture": "josephmmartin.jpg",
-    "bio": "Joe is a technical writer working on the Angular docs.",
-    "groups": ["Angular"],
-    "lead": "mgechev"
-  },
   "jschwarty": {
     "name": "Justin Schwartzenberger",
     "picture": "justinschwartzenberger.jpg",
@@ -599,6 +590,14 @@
     "twitter": "laco2net",
     "website": "https://lacolaco.net",
     "bio": "Suguru is a community-loving Frontend developer and a lead of Angular Japan User Group. He organizes the largest Angular event in Japan (ng-japan). And he is a contributor to Angular by sending patches, writing, speaking, and localizing resources in Japanese.",
+    "groups": ["GDE"]
+  },
+  "laranewsom": {
+    "name": "Lara Newsom",
+    "picture": "laranewsom.jpg",
+    "twitter": "laranerdsom",
+    "website": "https://www.linkedin.com/in/lara-newsom",
+    "bio": "Lara is a Software Engineering Technical Leader on the Customer Experience Angular Team at Cisco. She is based in Des Moines, Iowa. In addition to speaking at conferences and talking about Angular and related technologies on the Angular Plus Show Podcast, Lara loves traveling with her husband and two teens. Much to the disappointment of her own two cats, Lara also enjoys fostering orphaned kittens. ",
     "groups": ["GDE"]
   },
   "leonardozizzamia": {
@@ -722,15 +721,6 @@
     "website": "https://github.com/BioPhoton",
     "bio": "Michael is a self employed trainer, consultant and developer with the focus on Angular, and located in Vienna, Austria. He gives workshops on Angular, RxJS and Ionic. As Google Developer Expert, founder of Angular-Austria-Association and Angular-Vienna meetup, and speaker he is an active part of the community.",
     "groups": ["GDE"]
-  },
-  "michaelprentice": {
-    "name": "Michael Prentice",
-    "picture": "michaelprentice.jpg",
-    "twitter": "splaktar",
-    "website": "https://www.DevIntent.com",
-    "bio": "Lead for AngularJS Material. Owner and consultant at DevIntent. Ex-Angular GDE. Founder of the Google Developers Group (GDG) community on the Space Coast of Florida, USA.",
-    "groups": ["Angular"],
-    "lead": "jelbourn"
   },
   "mira": {
     "name": "Stanimira Vlaeva",
@@ -950,13 +940,6 @@
     "bio": "Thierry is a senior consultant and trainer, specialized on Angular, and a Google Developer Expert.",
     "groups": ["GDE"]
   },
-  "teriglover": {
-    "name": "Teri Glover",
-    "picture": "teriglover.png",
-    "bio": "Teri is a technical editor working on the Angular docs team.",
-    "groups": ["Angular"],
-    "lead": "mgechev"
-  },
   "thekiba": {
     "name": "Andrew Grekov",
     "picture": "thekiba.jpg",
@@ -964,6 +947,13 @@
     "website": "https://thekiba.io",
     "bio": "Andrew is a software engineer using Angular and .NET. He spends most of his spare time staying up-to-date, helping other people, and experimenting with web tech.",
     "groups": ["GDE"]
+  },
+  "thesmiler": {
+    "name": "Jens Kuehlers",
+    "picture": "thesmiler.jpg",
+    "twitter": "cloudjens",
+    "groups": ["Angular"],
+    "bio": "Technical Program Manager for the Angular team. Previously Networking and Cloud @ Google. Loves coffee, injera and travel."
   },
   "toddmotto": {
     "name": "Todd Motto",

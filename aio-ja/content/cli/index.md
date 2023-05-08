@@ -20,12 +20,12 @@ npm install -g &commat;angular/cli<aio-angular-dist-tag class="pln"></aio-angula
 
 コマンドラインから実行可能な `ng` を介してツールを起動します。
 オンラインヘルプはコマンドラインで利用できます。
-特定のコマンド（ [generate](cli/generate) など）またはオプションを簡単な説明付きでリストするには、次のように入力します。
+特定のコマンド（ [new](cli/new) など）またはオプションを簡単な説明付きでリストするには、次のように入力します。
 
 <code-example format="shell" language="shell">
 
-ng help
-ng generate --help
+ng --help
+ng new --help
 
 </code-example>
 

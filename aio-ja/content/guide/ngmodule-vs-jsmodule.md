@@ -76,8 +76,8 @@ NgModuleのメタデータのプロパティについての完全な説明は、
 *   `providers`: 他のNgModuleにおけるコンポーネントが使用できるサービスのプロバイダー。
   新しく生成されるルートNgModuleにおいてプロバイダーはありません。
 
-*   `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入する[エントリーコンポーネント](guide/entry-components "エントリーコンポーネントを指定する")。それによりアプリケーションをブートストラップします。
-  このエントリーコンポーネントの`AppComponent`は`declarations`と`bootstrap`の両方の配列に現れます。
+*   `bootstrap`: Angularが作成しホストウェブページの`index.html`へ挿入するコンポーネント。それによりアプリケーションをブートストラップします。
+  このコンポーネント（`AppComponent`）は`declarations`と`bootstrap`の両方の配列に現れます。
 
 ## 次のステップ
 

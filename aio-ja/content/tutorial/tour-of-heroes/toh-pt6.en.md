@@ -179,10 +179,10 @@ Because each service method returns a different kind of `Observable` result, `ha
 
 ### Tap into the Observable
 
-The `HeroService` methods taps into the flow of observable values and send a message, using the `log()` method, to the message area at the bottom of the page.
+The `getHero()` method taps into the flow of observable values and sends a message, using the `log()` method, to the message area at the bottom of the page.
 
 The RxJS `tap()` operator enables this ability by looking at the observable values, doing something with those values, and passing them along.
-The `tap()` call back doesn't access the values themselves.
+The `tap()` callback doesn't access the values themselves.
 
 Here is the final version of `getHeroes()` with the `tap()` that logs the operation.
 
@@ -422,7 +422,7 @@ The `searchTerms` becomes an `Observable` emitting a steady stream of search ter
 
 ### Chaining RxJS operators
 
-Passing a new search term directly to the `searchHeroes()` after every user keystroke creates excessive HTTP requests, which taxes server resources and burning through data plans.
+Passing a new search term directly to the `searchHeroes()` after every user keystroke creates excessive HTTP requests, which taxes server resources and burns through data plans.
 
 Instead, the `ngOnInit()` method pipes the `searchTerms` observable through a sequence of RxJS operators that reduce the number of calls to the `searchHeroes()`. Ultimately, this returns an observable of timely hero search results where each one is a `Hero[]`.
 

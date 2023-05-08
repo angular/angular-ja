@@ -592,20 +592,7 @@ Angularは、JavaScriptモジュールのコレクション(ライブラリと�
 
 [NgModule](#ngmodule)と比較しましょう。
 
-
-{@a N}
-
-{@a ngcc}
-
-## ngcc
-
-Angular互換性コンパイラ。
-[Ivy](#ivy)を使ってアプリケーションをビルドするが、それがIvyでコンパイルされていないライブラリに依存している場合、CLIは`ngcc`を使用して、依存ライブラリをIvyを使うように自動的に更新します。
-
-
-{@a ngmodule}
-
-## NgModule
+## NgModule {@a ngmodule}
 
 `@NgModule()`[デコレーター][AioGuideGlossaryDecoratorDecoration]が前に付いたクラス定義。これはコードブロックのためのマニフェストとして宣言および機能し、アプリケーションドメインやワークフロー、密接に関連する一連の機能に専念します。
 
@@ -1246,7 +1233,6 @@ Learn more about zones in this
 [AioGuideGlossaryLibrary]: guide/glossary#library "library - Glossary | Angular"
 [AioGuideGlossaryM]: guide/glossary#module "M - Glossary | Angular"
 [AioGuideGlossaryModule]: guide/glossary#module "module - Glossary | Angular"
-[AioGuideGlossaryN]: guide/glossary#ngcc "N - Glossary | Angular"
 [AioGuideGlossaryNgmodule]: guide/glossary#ngmodule "NgModule - Glossary | Angular"
 [AioGuideGlossaryNpmPackage]: guide/glossary#npm-package "npm package - Glossary | Angular"
 [AioGuideGlossaryO]: guide/glossary#observable "O - Glossary | Angular"
@@ -1373,4 +1359,4 @@ Learn more about zones in this
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-02-16

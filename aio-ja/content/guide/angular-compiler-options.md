@@ -165,6 +165,12 @@ When `true`, creates factory files \(`.ngfactory.js` and `.ngstyle.js`\) for `.d
 `false` (デフォルト) の場合、コンパイルされたテンプレートから空白のテキストノードを削除するようにコンパイラに指示します。これにより、出力されるテンプレートファクトリモジュールが小さくなります。
 空白のテキストノードを保持するには、 `true` に設定します。
 
+<div class="alert is-helpful">
+
+When using hydration, it is recommended that you use `preserveWhitespaces: false`, which is the default value. If you choose to enable preserving whitespaces by adding `preserveWhitespaces: true` to your tsconfig, it is possible you may encounter issues with hydration. This is not yet a fully supported configuration. Ensure this is also consistently set between the server and client tsconfig files. See the [hydration guide](guide/hydration#preserve-whitespaces) for more details.
+
+</div>
+
 ### `skipMetadataEmit`
 
 このオプションが `true` の場合、`.metadata.json` ファイルを生成しないようにコンパイラーに指示します。
@@ -247,4 +253,4 @@ Besides the configuration file, you can also use [`tsc` command line options](ht
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-04-19

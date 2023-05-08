@@ -1,8 +1,7 @@
 # セキュリティ
 
 このトピックでは、クロスサイトスクリプティングやその他一般的なWebアプリケーション脆弱性に対する
-Angularでの対応について説明します。認証や認可などアプリケーションレベルのセキュリティは
-ここでは扱いません。
+Angularでの対応について説明します。認証や認可などアプリケーションレベルのセキュリティはここでは扱いません。
 
 この章で扱う内容に関するより詳細な情報は [Open Web Application Security Project (OWASP) Guide](https://www.owasp.org/index.php/Category:OWASP_Guide_Project) を参照してください。
 
@@ -16,13 +15,11 @@ Angularでの対応について説明します。認証や認可などアプリ�
 
 Angular is part of Google [Open Source Software Vulnerability Reward Program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules), for vulnerabilities in Angular please submit your report [here](https://bughunters.google.com/report).
 
-セキュリティに関する問題を Google がどのように扱うかは
-[Google's security philosophy](https://www.google.com/about/appsecurity/) を
-参照してください。
+セキュリティに関する問題を Google がどのように扱うかは[Google's security philosophy](https://www.google.com/about/appsecurity/) を参照してください。
 
 </div>
 
-{@a best-practices}
+<a id="best-practices"></a>
 
 <div class="callout is-helpful">
 
@@ -158,7 +155,8 @@ URLに` javascript：alert(...)` をバインドするとします。
 
 <code-example path="security/src/app/bypass-security.component.ts" header="src/app/bypass-security.component.ts (trust-video-url)" region="trust-video-url"></code-example>
 
-{@a content-security-policy}
+<a id="content-security-policy"></a>
+
 ### Content Security Policy
 
 Content Security Policy (CSP) を用いることでより確実にXSSを防止することもできます。
@@ -169,12 +167,47 @@ Webサーバーを設定する必要があります。CSP に関するより詳�
 
 初期状態のAngularに必要な最小限のポリシーは次のとおりです。
 
-```
-default-src 'self'; style-src 'self' 'unsafe-inline';
-```
+<code-example format="none" language="none">
 
-* `default-src 'self';` リソースの取得は取得元のページと同じオリジンからのみに制限されます。
-* `style-src 'self' 'unsafe-inline';` グローバルスタイルをページと同じオリジン（`'self'`）から取得できるようにし、コンポーネントには自身のスタイルを適用（`'unsafe-inline'` - [`angular/angular#6361`](https://github.com/angular/angular/issues/6361)を参照）できるようにします。
+default-src 'self'; style-src 'self' 'nonce-randomNonceGoesHere'; script-src 'self' 'nonce-randomNonceGoesHere';
+
+</code-example>
+
+When serving your Angular application, the server should include a  randomly-generated nonce in the HTTP header for each request.
+You must provide this nonce to Angular so that the framework can render `<style>` elements.
+You can set the nonce for Angular in one of two ways:
+
+1. Set the `ngCspNonce` attribute on the root application element as `<app ngCspNonce="randomNonceGoesHere"></app>`. Use this approach if you have access to server-side templating that can add the nonce both to the header and the `index.html` when constructing the response.
+2. Provide the nonce using the `CSP_NONCE` injection token. Use this approach if you have access to the nonce at runtime and you want to be able to cache the `index.html`.
+
+<code-example format="typescript" language="typescript">
+
+import {bootstrapApplication, CSP_NONCE} from '&commat;angular/core';
+import {AppComponent} from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [{
+    provide: CSP_NONCE,
+    useValue: globalThis.myRandomNonceValue
+  }]
+});
+
+</code-example>
+
+<div class="callout is-helpful">
+
+Always ensure that the nonces you provide are <strong>unique per request</strong> and that they are not predictable or guessable.
+If an attacker can predict future nonces, they can circumvent the protections offered by CSP.
+
+</div>
+
+If you cannot generate nones in your project, you can allow inline styles by adding `'unsafe-inline'` to the `style-src` section of the CSP header.
+
+| Sections                | Details |
+|:---                     |:---     |
+| `default-src 'self';`   | Allows the page to load all its required resources from the same origin. |
+| `style-src 'self' 'nonce-randomNonceGoesHere';`     | Allows the page to load global styles from the same origin \(`'self'`\) and styles inserted by Angular with the `nonce-randomNonceGoesHere`. |
+| `script-src 'self' 'nonce-randomNonceGoesHere';`     | Allows the page to load JavaScript from the same origin \(`'self'`\) and scripts inserted by the Angular CLI with the `nonce-randomNonceGoesHere`. This is only required if you're using critical CSS inlining. |
 
 Angular自体の動作にはこれら設定のみが必要です。ただし、プロジェクトが大きくなるにつれ、アプリケーション固有の追加機能に対応するために、この最小値を超えたCSP設定の拡張が必要になる場合があります。
 

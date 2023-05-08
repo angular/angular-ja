@@ -60,7 +60,7 @@ Angularは `i` と `odd` をコンテキストの `index` と `odd` プロパテ
 
 Angularは `let-hero` をコンテキストの `$implicit` プロパティの値に設定します。これは `NgFor` が現在のイテレーション中に `hero` で初期化したものです。
 
-詳細については [NgFor API](api/common/NgForOf "API: NgFor") と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
+詳細については [NgFor API](api/common/NgFor "API: NgFor") と [NgForOf API](api/common/NgForOf) のドキュメントを参照してください。
 
 <div class="alert is-helpful">
 

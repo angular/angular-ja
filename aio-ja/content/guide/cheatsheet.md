@@ -64,7 +64,6 @@
 
 | コンポーネントの設定 <br /> `@Component` extends `@Directive`, so the `@Directive` configuration applies to components as well                            | Details |
 |:---                                                                                                                                                          |:---     |
-| <code-example format="typescript" hideCopy language="typescript"> moduleId: module.id </code-example>                                                        | 設定されている場合、<code>templateUrl</code>と<code>styleUrl</code>はコンポーネントに対して相対パスとして解決されます。        |
 | <code-example format="typescript" hideCopy language="typescript"> viewProviders: [MyService, { provide: &hellip; }] </code-example>                          | このコンポーネントのビューにスコープされた依存性の注入プロバイダーのリスト。                 |
 | <code-example format="typescript" hideCopy language="typescript"> template: 'Hello {{name}}' &NewLine;templateUrl: 'my-component.html' </code-example>       | コンポーネントのビューのインラインテンプレートまたは外部テンプレートURL。                       |
 | <code-example format="typescript" hideCopy language="typescript"> styles: ['.primary {color: red}'] &NewLine;styleUrls: ['my-component.css'] </code-example> | コンポーネントのビューをスタイリングするためのインラインCSSスタイルまたは外部スタイルシートURLのリスト。 |

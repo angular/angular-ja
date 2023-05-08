@@ -262,7 +262,7 @@ Angular アプリケーションは、利用可能なプロバイダーのセッ
 
 #### 環境インジェクター {@a environment-injectors}
 
-`NgModule` をオプショナルにすると、アプリケーション全体のプロバイダー ([HttpClient](https://angular.io/api/common/http/HttpClient) など) を使用して「モジュール」インジェクターを構成する新しい方法が必要になります。スタンドアロンアプリケーション (`bootstrapApplication` で作成されたアプリケーション) では、`providers` オプションで、ブートストラッププロセス中に「モジュール」プロバイダーを構成できます。
+`NgModule` をオプショナルにすると、アプリケーション全体のプロバイダー ([HttpClient](/api/common/http/HttpClient) など) を使用して「モジュール」インジェクターを構成する新しい方法が必要になります。スタンドアロンアプリケーション (`bootstrapApplication` で作成されたアプリケーション) では、`providers` オプションで、ブートストラッププロセス中に「モジュール」プロバイダーを構成できます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {

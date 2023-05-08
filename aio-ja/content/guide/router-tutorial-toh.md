@@ -2181,13 +2181,11 @@ The admin feature file structure looks like this:
 
 Create a new file named `auth.guard.ts` in the `auth` folder. The `auth.guard.ts` file will contain the `authGuard` function.
 
-<!-- TODO(atscott): update schematics to generate functional guards
 <code-example format="shell" language="shell">
 
 ng generate guard auth/auth
 
 </code-example>
- -->
 
 基本的なことを説明するために、この例ではコンソールにログを出力し、すぐに `true` を返し、ナビゲーションを続行できるようにしています：
 
@@ -2346,13 +2344,11 @@ In `app.module.ts`, import and add `AuthModule` to the `AppModule` imports array
 
 Create a guard that checks for the presence of a `canDeactivate()` method in a component —any component.
 
-<!-- TODO: Update CLI schematic for guards
 <code-example format="shell" language="shell">
 
 ng generate guard can-deactivate
 
 </code-example>
--->
 
 次のコードをガードに貼り付けます。
 
@@ -2412,13 +2408,11 @@ ng generate guard can-deactivate
 
 Create a `crisis-detail-resolver.ts` file within the `Crisis Center` feature area. This file will contain the `crisisDetailResolver` function.
 
-<!-- TODO: Update CLI schematic for resolvers
 <code-example format="shell" language="shell">
 
-ng generate service crisis-center/crisis-detail-resolver
+ng generate resolver crisis-center/crisis-detail-resolver
 
 </code-example>
- -->
 
 <code-example header="src/app/crisis-center/crisis-detail-resolver.ts" path="router/src/app/crisis-center/crisis-detail-resolver.1.ts"></code-example>
 

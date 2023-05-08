@@ -1,4 +1,4 @@
-# ライフサイクルフック
+# コンポーネントのライフサイクル
 
 コンポーネントインスタンスには、 Angular がコンポーネントクラスをインスタンス化してコンポーネントビューとその子ビューをレンダリングするときに開始するライフサイクルがあります。
 Angular はデータバインドプロパティがいつ変更されたかを確認し、必要に応じてビューとコンポーネントインスタンスの両方を更新するため、ライフサイクルは変更の検出を続けます。
@@ -319,11 +319,15 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
   </div>
 
-{@a ondestroy}
+<a id="ondestroy"></a>
 
 ## インスタンス破棄時のクリーンアップ
 
-クリーンアップロジックを `ngOnDestroy()` に配置します。これは、 Angular がディレクティブを破棄する前に実行する必要があるロジックです。
+Angular provides several ways to clean up when an instance is destroyed.
+
+### `ngOnDestroy`
+
+クリーンアップロジックを `ngOnDestroy()` に配置できます。これは、 Angular がディレクティブを破棄する前に実行する必要があるロジックです。
 
 これは、自動的にガベージコレクションされないリソースを解放する場所です。
 怠ると、メモリリークのリスクがあります。
@@ -334,6 +338,44 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
 `ngOnDestroy()` メソッドは、コンポーネントがなくなることをアプリケーションの別の部分に通知する時間でもあります。
 
+### DestroyRef
+
+In addition to to `ngOnDestroy()`, you can inject Angular's `DestroyRef` and register callback functions to be called when the enclosing context is destroyed. This can be useful for building reusable utilities that require cleanup.
+
+Register a callback with the `DestroyRef`:
+
+```ts
+@Component(...)
+class Counter {
+  count = 0;
+  constructor() {
+		// Start a timer to increment the counter every second.
+		const id = setInterval(() => this.count++, 1000);
+
+		// Stop the timer when the component is destroyed.
+		const destroyRef = inject(DestroyRef);
+		destroyRef.onDestroy(() => clearInterval(id));
+	}
+}
+```
+
+Like `ngOnDestroy`, `DestroyRef` works in any Angular service, directive, component, or pipe.
+
+### `takeUntilDestroyed`
+
+<div class="alert is-important">
+
+`takeUntilDestroyed` is available for [developer preview](/guide/releases#developer-preview). It's ready for you to try, but it might change before it is stable.
+
+</div>
+
+When using RxJS Observables in components or directives, you may want to complete any observables when the component or directive is destroyed. Angular's `@angular/core/rxjs-interop` package provides an operator, `takeUntilDestroyed`, to simplify this common task:
+
+```ts
+data$ = http.get('...').pipe(takeUntilDestroyed());
+```
+
+By default, `takeUntilDestroyed` must be called in an injection context so that it can access `DestroyRef`. If an injection context isn't available, you can explicitly provide a `DestroyRef`.
 
 ## 一般的な例
 

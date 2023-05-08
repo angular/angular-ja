@@ -92,7 +92,7 @@ XMBフォーマットでは、ソース言語ファイルとして`.xmb`が生�
 
     <code-example language="file">
 
-    messages.xlf --&gt; message.{locale}.xlf
+    messages.xlf --&gt; messages.{locale}.xlf
 
     </code-example>
 

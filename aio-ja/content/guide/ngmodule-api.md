@@ -190,6 +190,5 @@ NgModuleはAngularアプリケーションを整理する方法で、
 
 あなたはこちらにも興味があるかもしれません:
 * [フィーチャーモジュール](guide/feature-modules)
-* [エントリーコンポーネント](guide/entry-components)
 * [プロバイダー](guide/providers)
 * [フィーチャーモジュールの種類](guide/module-types)

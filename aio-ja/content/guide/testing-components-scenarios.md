@@ -1000,30 +1000,16 @@ _ルーティングコンポーネント_です。
   region="ctor"
   header="app/dashboard/dashboard.component.ts (constructor)"></code-example>
 
-`HeroService`をスパイでモックするのは[おなじみの話](#component-with-async-service)です。
-しかし、`Router`には複雑なAPIがあり、他のサービスやアプリケーションの前提条件と絡み合っています。モックするのは難しいかもしれないでしょうか?
-
-幸いなことに、このケースでは、`DashboardComponent`が`Router`をあまり使用していないのでそうでもないです。
-
 <code-example
   path="testing/src/app/dashboard/dashboard.component.ts"
   region="goto-detail"
   header="app/dashboard/dashboard.component.ts (goToDetail)"></code-example>
 
-これは_ルーティングコンポーネント_でよくあるケースです。
-原則として、ルーターではなくコンポーネントをテストし、
-指定された条件の下でコンポーネントが正しいアドレスでナビゲートする場合にのみ注意してください。
+Angular provides test helpers to reduce boilerplate and more effectively test code which depends on the Router and HttpClient.
 
-_このコンポーネント_のテストスイートのためのルータースパイを提供することは、
-`HeroService`スパイを提供するのと同じくらい簡単です。
+<code-example header="app/dashboard/dashboard.component.spec.ts" path="testing/src/app/dashboard/dashboard.component.spec.ts" region="router-harness"></code-example>
 
-<code-example
-  path="testing/src/app/dashboard/dashboard.component.spec.ts"
-  region="router-spy"
-  header="app/dashboard/dashboard.component.spec.ts (spies)"></code-example>
-
-次のテストでは、表示されたヒーローをクリックし、
-`Router.navigateByUrl`が期待されるURLで呼び出されたことを確認します。
+The following test clicks the displayed hero and confirms that we navigate to the expected URL.
 
 <code-example
   path="testing/src/app/dashboard/dashboard.component.spec.ts"
@@ -1067,42 +1053,9 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 
 </div>
 
-テストでは、コンポーネントのコンストラクターに注入された`ActivatedRoute`を操作することによって、
-`HeroDetailComponent`が異なる`id`パラメータ値にどのように応答するかを調べることができます。
+Tests can explore how the `HeroDetailComponent` responds to different `id` parameter values by navigating to different routes.
 
-あなたは`Router`とデータサービスをスパイする方法を知っています。
-
-あなたは次の理由で`ActivatedRoute`とは異なるアプローチをとるでしょう。
-
-- `paramMap`は、
-  テスト中に複数の値を出力できる`Observable`を返します。
-- `ParamMap`を作成するためのルーターヘルパー関数`convertToParamMap()`が必要です。
-- 他の_ルーテッドコンポーネント_のテストでは、`ActivatedRoute`のテストダブルが必要です。
-
-これらの違いは、再利用可能なスタブクラスが必要だと言っています。
-
-#### _ActivatedRouteStub_
-
-次の`ActivatedRouteStub`クラスは、`ActivatedRoute`のテストダブルとして機能します。
-
-<code-example
-  path="testing/src/testing/activated-route-stub.ts"
-  region="activated-route-stub"
-  header="testing/activated-route-stub.ts (ActivatedRouteStub)"></code-example>
-
-このようなヘルパーを`app`フォルダと同一階層の`testing`フォルダに配置することを検討してください。
-このサンプルでは`ActivatedRouteStub`を`testing/activated-route-stub.ts`に置きます。
-
-<div class="alert is-helpful">
-
-  [_マーブルテストライブラリ_](#marble-testing)
-  でこのスタブクラスのより能力の高いバージョンを書くことを検討してください。
-
-</div>
-
-{@a tests-w-test-double}
-
-#### _ActivatedRouteStub_ を使用したテスト
+#### Testing with the `RouterTestingHarness`
 
 Observableより取得した`id`が既存のヒーローを参照しているときのコンポーネントの動作を示すテストは次のようになります:
 
@@ -1117,26 +1070,13 @@ In the following section, the `createComponent()` method and `page` object are d
 
 `id`が見つからない場合、コンポーネントは`HeroListComponent`にルーティングし直す必要があります。
 
-テストスイートのセットアップは、実際にナビゲートせずにルーターをスパイしている[上記](#routing-component)と同じルータースパイを提供しました。
+The test suite setup provided the same router harness [described above](#routing-component).
 
 次のテストでは、コンポーネントが`HeroListComponent`にナビゲートしようとします。
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="route-bad-id" header="app/hero/hero-detail.component.spec.ts (bad id)"></code-example>
 
-このアプリケーションは`id`パラメータを省略した`HeroDetailComponent`へのルーティングを持っていませんが、いつかそのようなルーティングを追加するかもしれません。
-コンポーネントは、`id`がないときに妥当な何かを行うべきです。
-
-この実装では、コンポーネントは新しいヒーローを作成して表示する必要があります。
-新しいヒーローは`id=0`と空の`name`を持ちます。次のテストではコンポーネントが期待どおりに動作することを確認します:
-
-<code-example
-  path="testing/src/app/hero/hero-detail.component.spec.ts"
-  region="route-no-id"
-  header="app/hero/hero-detail.component.spec.ts (no id)"></code-example>
-
-{@a nested-component-tests}
-
-## ネストしたコンポーネントのテスト
+## ネストしたコンポーネントのテスト {@a nested-component-tests}
 
 コンポーネントテンプレートはネストしたコンポーネントをもつことが多いです。
 そのテンプレートにはさらにコンポーネントが含まれるているでしょう。
@@ -1149,10 +1089,6 @@ In the following section, the `createComponent()` method and `page` object are d
 <code-example
   path="testing/src/app/app.component.html"
   header="app/app.component.html"></code-example>
-
-`AppComponent`_クラス_は空ですが、
-おそらく[以下の理由](#why-stubbed-routerlink-tests)で、
-リンクが`RouterLink`ディレクティブに正しく配線されているかどうかを確認するためのユニットテストを書きたいかもしれません。
 
 リンクを検証するには、ナビゲートするための`Router`は必要ではありませんし、
 `Router`が_ルーテッドコンポーネント_を挿入する場所をマークするための`<router-outlet>`も必要ありません。
@@ -1201,9 +1137,6 @@ Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、
 
 `AppComponent`はテスト対象ですので、もちろん実際のバージョンを宣言してください。
 
-[後述](#routerlink)する`RouterLinkDirectiveStub`は、
-リンクのテストに役立つ、実際の`RouterLink`のテストバージョンです。
-
 残りはスタブです。
 
 {@a no-errors-schema}
@@ -1219,9 +1152,7 @@ Angularコンパイラは`AppComponent`テンプレート内の`<app-banner>`、
 
 `NO_ERRORS_SCHEMA`は、認識できない要素と属性を無視するようにAngularコンパイラに指示します。
 
-コンパイラは、
-`TestBed`の設定で対応する`AppComponent`と`RouterLinkDirectiveStub`を宣言したため、
-`<app-root>`要素と`routerLink`属性を認識します。
+The compiler recognizes the `<app-root>` element and the `routerLink` attribute because you declared a corresponding `AppComponent` and `RouterLink` in the `TestBed` configuration.
 
 しかし、`<app-banner>`、`<app-welcome>`、または`<router-outlet>`が見つかった場合、コンパイラはエラーを投げません。
 単に空のタグとしてレンダリングし、ブラウザはそれらを無視します。
@@ -1253,42 +1184,7 @@ _この_例のスタブは空ですが、
   region="mixed-setup"
   header="app/app.component.spec.ts (mixed setup)"></code-example>
 
-Angularコンパイラは、`<app-banner>`要素の`BannerStubComponent`を作成し、
-`routerLink`属性をもつアンカーに`RouterLinkStubDirective`を適用しますが、
-`<app-welcome>`タグと`<router-outlet>`タグは無視します。
-
-{@a routerlink}
-## _RouterLink_を使用したコンポーネント
-
-実際の`RouterLinkDirective`はかなり複雑で、
-他のコンポーネントや`RouterModule`のディレクティブと絡み合っています。
-テストでモックして使用するには、頑張ったセットアップが必要です。
-
-このサンプルコードの`RouterLinkDirectiveStub`は、
-実際のディレクティブを、
-`AppComponent`テンプレートに見られるアンカータグ配線の種類を検証するために設計された代替バージョンに置き換えます。
-
-<code-example
-  path="testing/src/testing/router-link-directive-stub.ts"
-  region="router-link"
-  header="testing/router-link-directive-stub.ts (RouterLinkDirectiveStub)"></code-example>
-
-`[routerLink]`属性にバインドされたURLは、ディレクティブの`linkParams`プロパティに流れます。
-
-`HostListener`メタデータプロパティは、
-ホスト要素のクリックイベント(`AppComponent`の`<a>`アンカー要素)をスタブディレクティブの`onClick`メソッドに紐づけます。
-
-アンカーをクリックすると、
-`onClick()`メソッドをトリガーして、スタブに露出した`navigatedTo`プロパティが設定されます。
-テストでは、
-アンカーをクリックしたときに期待どおりのルート定義が設定されていることを確認するために`navigatedTo`を検証します。
-
-<div class="alert is-helpful">
-
-ルーターがそのルーティング定義でナビゲートするように正しく設定されているかどうかは、
-別のテストセットで考えることです。
-
-</div>
+The Angular compiler creates the `BannerStubComponent` for the `<app-banner>` element and applies the `RouterLink` to the anchors with the `routerLink` attribute, but it ignores the `<app-welcome>` and `<router-outlet>` tags.
 
 {@a by-directive}
 {@a inject-directive}
@@ -1324,47 +1220,9 @@ Angularコンパイラは、`<app-banner>`要素の`BannerStubComponent`を作�
 
 <code-example path="testing/src/app/app.component.spec.ts" region="tests" header="app/app.component.spec.ts (selected tests)"></code-example>
 
-<div class="alert is-helpful">
+<a id="page-object"></a>
 
-_この例_の"click"テストは誤解を招きます。
-これは、_コンポーネント_ではなく、`RouterLinkDirectiveStub`をテストします。
-これは、ディレクティブスタブの一般的な失敗です。
-
-このガイドには正当な目的があります。
-ルーターの全機能を使用することなく、`RouterLink`要素を見つけてクリックし、結果を検証する方法を示します。
-これは、ユーザーがリンクをクリックしたときに、
-表示を変更したり、パラメータを再計算したり、
-ナビゲーションオプションを並べ替えたりする、
-より洗練されたコンポーネントをテストするために必要なスキルです。
-
-</div>
-
-{@a why-stubbed-routerlink-tests}
-
-#### それらのテストは何がよいのですか?
-
-スタブした`RouterLink`テストでは、リンクとアウトレットをもつコンポーネントが適切に設定されていること、
-コンポーネントが必要なリンクを持っていること、そしてそれらすべてが期待される行き先になっていることを確認できます。
-これらのテストは、ユーザーがリンクをクリックしたときにアプリケーションが対象のコンポーネントにナビゲートすることに成功するかどうかには関係ありません。
-
-このような制限されたテストを達成するためには、`RouterLink`と`RouterOutlet`をスタブすることが最良の選択肢です。
-実際のルーターに依存すると、それらは脆弱になります。
-コンポーネントと無関係の理由で失敗する可能性があります。
-たとえば、ナビゲーションガードによって、権限のないユーザーが`HeroListComponent`にアクセスするのを防ぐかもしれません。
-これは`AppComponent`の落ち度ではなく、そのコンポーネントへの変更は失敗したテストを修正することはできません。
-
-_別_の総合テストでは、ユーザーが認証され、許可されているかどうかなどの、
-ガードに影響する条件が存在する場合にアプリケーションが期待どおりにナビゲートするかどうかを調べることができます。
-
-<div class="alert is-helpful">
-
-将来のガイドアップデートでは、
-`RouterTestingModule`でこのようなテストを書く方法を説明します。
-
-</div>
-
-{@a page-object}
-## _page_ オブジェクトを使用する
+## `page` オブジェクトを使用する
 
 `HeroDetailComponent`は、タイトル、2つのヒーローのフィールド、2つのボタンをもつシンプルなビューです。
 
@@ -1405,10 +1263,6 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
   path="testing/src/app/hero/hero-detail.component.spec.ts"
   region="create-component"
   header="app/hero/hero-detail.component.spec.ts (createComponent)"></code-example>
-
-上のセクションの[_HeroDetailComponent_のテスト](#tests-w-test-double)では、
-`createComponent`と`page`がテストの短さと_方針_を保つ方法を示しています。
-注意を払う必要はありません。Promiseを待つことはなく、比較する要素値のDOMを検索する必要もありません。
 
 次は、この点を補強する`HeroDetailComponent`テストです。
 
@@ -1573,8 +1427,8 @@ CLIによって生成されたコンポーネントテストファイルは、
 
 *   双方向バインディングを有効にするための`FormsModule`内の`NgModel`とその仲間
 *   `shared`フォルダ内の`TitleCasePipe`
-*   ルーターサービス(これらのテストではスタブしています)
-*   ヒーローデータアクセスサービス(これもスタブされています)
+*   Router サービス
+*   ヒーローデータアクセスサービス
 
 1つのアプローチは、次の例のように個々の部品からテストモジュールを構成することです:
 
@@ -1618,7 +1472,8 @@ It's a bit tighter and smaller, with fewer import statements, which are not show
 
 <code-example path="testing/src/app/hero/hero-detail.component.spec.ts" region="setup-hero-module" header="app/hero/hero-detail.component.spec.ts (HeroModule setup)"></code-example>
 
-これは_本当_に簡潔です。`providers`のテストダブルが残っているだけです。`HeroDetailComponent`の宣言さえもなくなりました。
+`providers`のテストダブルが残っているだけです。
+`HeroDetailComponent`の宣言さえもなくなりました。
 
 実際に`HeroDetailComponent`を宣言しようとすると、
 `HeroDetailComponent`が`TestBed`によって作成された`HeroModule`と`DynamicTestModule`の両方で宣言されるため、

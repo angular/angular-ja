@@ -2,23 +2,32 @@
 
 Angularのローカライズ機能を利用するには、[Angular CLI][AioCliMain]を使用して`@angular/localize`パッケージをプロジェクトに追加します。
 
-`@angular/localize`パッケージを追加するには、次のコマンドを使用して、プロジェクト内の`package.json`と`polyfills.ts`を更新します。
+`@angular/localize`パッケージを追加するには、次のコマンドを使用して、プロジェクト内の`package.json`と TypeScript 設定ファイルを更新します。
 
 <code-example path="i18n/doc-files/commands.sh" region="add-localize"></code-example>
 
+It adds `types: ["@angular/localize"]` in the TypeScript configuration files as well as the reference to the type definition of `@angular/localize` at the top of the `main.ts` file.
+
 <div class="alert is-helpful">
 
-`package.json`と`polyfill.ts`については、[ワークスペースのnpm依存関係][AioGuideNpmPackages]を参照してください。
+`package.json`と`tsconfig.json`については、[ワークスペースのnpm依存関係][AioGuideNpmPackages]と[TypeScript 設定][AioGuideTsConfig]を参照してください。
 
 </div>
 
-`@angular/localize`がインストールされていない状態で、プロジェクトのローカライズ版をビルドしようとすると、[Angular CLI][AioCliMain]はエラーを発生させます。
+If `@angular/localize` is not installed and you try to build a localized version of your project (for example, while using the `i18n` attributes in templates), the [Angular CLI][AioCliMain] will generate an error, which would contain the steps that you can take to enable i18n for your project.
 
-<!--todo: add example error -->
+## Options
 
-## 次のステップ
+| OPTION           | DESCRIPTION | VALUE TYPE | DEFAULT VALUE
+|:---              |:---    |:------     |:------
+| `--project`      | The name of the project. | `string` |
+| `--use-at-runtime` | If set, then `$localize` can be used at runtime. Also `@angular/localize` gets included in the `dependencies` section of `package.json`, rather than `devDependencies`, which is the default.  | `boolean` | `false`
 
-*   [IDでロケールを参照][AioGuideI18nCommonLocaleId]
+For more available options, see [ng add][AioCliAdd] in [Angular CLI][AioCliMain].
+## What's next
+
+*   [@angular/localize API][AioApiLocalize]
+*   [Refer to locales by ID][AioGuideI18nCommonLocaleId]
 
 <!-- links -->
 
@@ -28,8 +37,14 @@ Angularのローカライズ機能を利用するには、[Angular CLI][AioCliMa
 
 [AioGuideNpmPackages]: guide/npm-packages "Workspace npm dependencies | Angular"
 
+[AioGuideTsConfig]: guide/typescript-configuration "TypeScript Configuration | Angular"
+
+[AioCliAdd]: cli/add "ng add | CLI | Angular"
+
+[AioApiLocalize]: api/localize "$localize | @angular/localize - API | Angular"
+
 <!-- external links -->
 
 <!-- end links -->
 
-@reviewed 2021-10-07
+@reviewed 2023-03-10

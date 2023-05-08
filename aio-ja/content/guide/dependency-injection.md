@@ -34,7 +34,7 @@ class HeroListComponent {}
 
 コンポーネントレベルでプロバイダーを登録すると、そのコンポーネントの新しいインスタンスごとに、サービスの新しいインスタンスを取得します。
 
-* NgModule レベルでは、`@NgModule` デコレーターの `providers` フィールドを使用します。このシナリオでは、`HeroService`は、この NgModule またはこの NgModule に適用可能な同じ ModuleInjector 内にある他の NgModule で宣言されたすべてのコンポーネント、ディレクティブ、パイプで利用できます。特定の NgModule にプロバイダを登録すると、該当するすべてのコンポーネント、ディレクティブ、パイプで同じサービスのインスタンスが利用可能になります。
+* NgModule レベルでは、`@NgModule` デコレーターの `providers` フィールドを使用します。このシナリオでは、`HeroService`は、この NgModule またはこの NgModule に適用可能な同じ ModuleInjector 内にある他の NgModule で宣言されたすべてのコンポーネント、ディレクティブ、パイプで利用できます。特定の NgModule にプロバイダーを登録すると、該当するすべてのコンポーネント、ディレクティブ、パイプで同じサービスのインスタンスが利用可能になります。
 すべてのエッジケースを理解するには、[階層的インジェクター](guide/hierarchical-dependency-injection) を参照してください。たとえば:
 
 

@@ -1,8 +1,8 @@
 diff --git a/aio/tools/transforms/templates/error/error.template.html b/aio/tools/transforms/templates/error/error.template.html
-index 0f06500b26..d055009d69 100644
+index 29fc85edd2..accc3619c7 100644
 --- a/aio/tools/transforms/templates/error/error.template.html
 +++ b/aio/tools/transforms/templates/error/error.template.html
-@@ -20,14 +20,14 @@
+@@ -20,7 +20,7 @@
    {% if doc.videoCaption %}{$ doc.videoCaption | marked $}{% endif%}
  
    <div class="error-description">
@@ -11,6 +11,7 @@ index 0f06500b26..d055009d69 100644
      {$ doc.description | marked $}
    </div>
  
+@@ -29,7 +29,7 @@
    <br>
  
    <div class="debugging">
@@ -18,4 +19,4 @@ index 0f06500b26..d055009d69 100644
 +    <h2>エラーのデバッグ</h2>
      {$ doc.debugging | marked $}
    </div>
- 
+   {% endif%}

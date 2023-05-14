@@ -97,11 +97,11 @@ Angular アプリケーションの構築には好みのツールを自由にお
 
 ## 次のステップ
 
-- [First Angular app lesson 1 - Hello world](tutorial/first-app/first-app-lesson-01)
+* [First Angular app lesson 1 - Hello world](tutorial/first-app/first-app-lesson-01)
 
 ## より詳しい情報
 
 このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
-- [What is Angular](https://angular.io/guide/what-is-angular)
-- [Angular CLI Reference](https://angular.io/cli)
+* [What is Angular](https://angular.io/guide/what-is-angular)
+* [Angular CLI Reference](https://angular.io/cli)

@@ -8,7 +8,7 @@
 
 このレッスンでは、本チュートリアルで作成するアプリケーションのベースラインとなる事前に構築されたアプリケーションから始めます。スターターコードを用意したので、次のことができます。
 
-- このレッスンを開始するには次のコードサンプルから始めます。<live-example name="first-app-lesson-00"></live-example> から選んでください:
+* コードサンプルを使ってこのレッスンを開始できます。<live-example name="first-app-lesson-00"></live-example> から選んでください:
   * StackBlitz の _live example_ を使用すると、StackBlitz インターフェースが IDE になります。
   * _download example_ を使用して、`first-app` という名前のディレクトリに解凍します.IDE でそのディレクトリを開きます。
 

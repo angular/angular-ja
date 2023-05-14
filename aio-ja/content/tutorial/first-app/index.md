@@ -1,107 +1,107 @@
-# Introduction to Angular tutorial - the First Angular app
+# Angular 入門チュートリアル - はじめての Angular
 
-This tutorial consists of lessons that introduce the Angular concepts you need to know to start coding in Angular.
+このチュートリアルは、Angular でコーディングを始めるために知っておくべき Angular の概念を紹介するレッスンで構成されています。
 
-If you're just starting out with Angular, completing the lessons in sequence provides the best learning experience, because each lesson builds on the previous lessons.
-After you're familiar with Angular, you can come back into any lesson for a refresher.
+Angular を始めたばかりであれば、レッスンを順番にこなしていくのがもっともよい学習体験となります。なぜなら、各レッスンは前のレッスンの上に成り立っているからです。
+Angular に慣れた後は、復習のためにどのレッスンにも戻ってくることができます。
 
-If you're more experienced, the lessons in this tutorial can be completed individually.
-You can do as many or as few as you would like and you can do them in any order.
+経験豊富な方は、このチュートリアルのレッスンを個別にこなすことができます。
+いくつでも、またどのような順番でやっても構いません。
 
-## Before you start
+## 始める前に
 
-For the best experience with this tutorial, review these requirements to make sure you have what you need to be successful.
+このチュートリアルを最大限に活用するには、これらの要件を確認して成功するために必要なものがあることを確認してください。
 
 <!-- markdownLint-disable MD001 -->
 
-### Your experience
+### 経験
 
-The lessons in this tutorial assume that you have done the following:
+このチュートリアルのレッスンは、次のことを行っていることを前提としています。
 
-1.  **Created an HTML web page by editing the HTML directly.**
-        This tutorial makes references to HTML elements and the Document Object Model (DOM). If these terms are not familiar, review HTML programming before you start this tutorial.
-1.  **Programmed web site content in JavaScript.**
-        This tutorial has many examples of TypeScript programming, which is based on JavaScript. TypeScript-specific feature are explained, but familiarity with JavaScript programming is necessary to understand the lessons in this tutorial.
-1.  **Read Cascading Style Sheet (CSS) content and understand how selectors are used.**
-        This tutorial does not require any CSS coding, but if these terms are not familiar, review CSS and selectors before you start this tutorial.
-1.  **Used command-line instructions to perform tasks on your computer.**
-        Angular uses the Angular CLI to perform many tasks. This tutorial provides the commands to use and assumes that you know how to open the command line tool or terminal interface in which to use them. If you aren't sure how to use a command line tool or terminal interface, review that before starting this tutorial.
+1.  **HTML を直接編集して、HTML の Web ページを作成していること。**
+    このチュートリアルでは、HTML 要素や Document Object Model (DOM) についても言及します。これらの用語に馴染みがない場合は、このチュートリアルを始める前に、HTML プログラミングを復習してください。
+1.  **JavaScript で Web サイトのコンテンツをプログラミングしていること。**
+    このチュートリアルでは、JavaScript をベースとした TypeScript プログラミングの例を多く紹介しています。TypeScript 固有の機能についても解説していますが、このチュートリアルのレッスンを理解するためには、JavaScript のプログラミングに慣れている必要があります。
+1.  **Cascading Style Sheet （CSS） の内容を読み、セレクターの使い方を理解していること。**
+    このチュートリアルでは、CSS のコーディングは必要ありませんが、これらの用語に馴染みがない場合は、このチュートリアルを始める前に、CSS とセレクターを復習してください。
+1.  **コンピュータでタスクを実行するためのコマンドライン命令を使用していること。**
+    Angular は多くのタスクを実行するために Angular CLI を使用します。このチュートリアルでは、使用するコマンドを提供し、それらを使用するコマンドラインツールまたはターミナルインターフェースの開き方を知っていることを前提にしています。コマンドラインツールやターミナルインターフェースの使い方がよくわからない場合は、このチュートリアルを始める前にそれを確認してください。
 
-### Your equipment
+### 使用するもの
 
-These lessons can be completed by using a local installation of the Angular tools or by using StackBlitz in a web browser. Local Angular development can be completed on Windows, MacOS or Linux based systems.
+これらのレッスンは、Angular ツールのローカルインストールを使用するか、ウェブブラウザで StackBlitz を使用して完了することができます。ローカルでの Angular 開発は、Windows、MacOS、Linux ベースのシステムで完了できます。
 
-Working on your own computer has the advantage of being able to save your work locally for future reference. Working in StackBlitz allows you to work through the lessons without loading any software on your own computer.
+自分のコンピュータで作業することで、作業内容をローカルに保存し、将来参照することができるという利点があります。StackBlitz で作業することで、自分のコンピュータにソフトウェアをロードすることなく、レッスンに取り組むことができます。
 
-## Conceptual preview of your first Angular app
+## はじめての Angular アプリケーションのコンセプトプレビュー
 
-The lessons in this tutorial create a simple Angular app that lists houses for rent and show the details of individual houses.
-This app uses features that are common to many Angular apps.
+このチュートリアルのレッスンでは、賃貸住宅をリストアップし、個々の住宅の詳細を表示するシンプルな Angular アプリケーションを作成します。
+このアプリケーションは、多くの Angular アプリケーションに共通する機能を使用しています。
 <section class="lightbox">
   <img alt="Output of heroes dashboard" src="generated/images/guide/faa/homes-app-landing-page.png">
 </section>
 
-## Development environment
+## 開発環境
 
-If you plan to complete this tutorial on your local computer, you must install the required software.
-If you have already installed some of the required software, you must verify that it is the correct version.
+このチュートリアルをローカルコンピュータで行う場合は、必要なソフトウェアをインストールする必要があります。
+すでに必要なソフトウェアの一部をインストールしている場合は、それが正しいバージョンであることを確認する必要があります。
 
-Perform these steps in a command-line tool on the computer you want to use for this tutorial.
+このチュートリアルに使用するコンピュータのコマンドラインツールで、次の手順を実行します。
 
 <section class="alert is-important">
 
-**IMPORTANT:**
-If you plan to use StackBlitz to do the lessons, you can proceed to the first lesson.
-You don't need to install any software.
+**重要:**
+StackBlitz を使用してレッスンを行う予定の方は、最初のレッスンに進んでください。
+ソフトウェアをインストールする必要はありません。
 
 </section>
 
-### Step 1 - Identify the version of `node.js` that Angular requires
+### ステップ 1 - Angular が必要とする `node.js` のバージョンの特定
 <section class="alert is-important">
 
-**IMPORTANT:**
-This step is only required if you have a version of node installed, otherwise, proceed to step 2 below.
+**重要:**
+このステップは、node のバージョンがインストールされている場合のみ必要です。そうでない場合は、次のステップ 2 に進みます。
 
 </section>
 
-Angular requires an active LTS or maintenance LTS version of Node. Let's confirm your version of `node.js`. For information about specific version requirements, see the engines property in the [package.json file](https://unpkg.com/browse/@angular/core@15.1.5/package.json).
+Angular は Node のアクティブ LTS 版またはメンテナンス LTS 版が必要です。`node.js` のバージョンを確認しましょう。特定のバージョンの要件については、[package.json ファイル](https://unpkg.com/browse/@angular/core@15.1.5/package.json)の engines プロパティを参照してください。
 
-From a **Terminal** window:
-1. Run the following command: `node --version`
-1. Confirm that the version number displayed meets the requirements.
+**ターミナル**ウィンドウから:
+1. 次のコマンドを実行: `node --version`
+1. 表示されたバージョン番号が条件を満たしていることを確認
 
-### Step 2 - Install the correct version of `node.js` for Angular
+### ステップ 2 - Angular 用の正しいバージョンの node.js をインストール
 
-If you do not have a version of `node.js` installed, please follow the [directions for installation on nodejs.org](https://nodejs.org/en/download/)
+`node.js` のバージョンがインストールされていない場合は、[nodejs.org のインストール方法](https://nodejs.org/en/download/)にしたがってください。
 
 
-### Step 3 - Install the latest version of Angular
+### ステップ 3 - Angular の最新版をインストール
 
-With `node.js` and `npm` installed, the next step is to install the [Angular CLI](https://angular.io/cli) which provides tooling for effective Angular development.
+`node.js` と `npm` がインストールされたら、次は Angular を効果的に開発するためのツールを提供する[Angular CLI](https://angular.io/cli)をインストールします。
 
-From a **Terminal** window:
+**ターミナル**ウィンドウから:
 
-1. Run the following command: `npm install -g @angular/cli`
-1. Once the installation completes, the terminal window will display details of the Angular CLI version installed on your local computer.
+1. 次のコマンドを実行: `npm install -g @angular/cli`
+1. インストールが完了すると、ターミナルウィンドウにローカルコンピュータにインストールされた Angular CLI バージョンの詳細が表示されます。
 
-### Step 4 - Install integrated development environment (IDE)
+### ステップ 4 - 統合開発環境(IDE)のインストール
 
-You are free to use any tool you prefer to build apps with Angular. We recommend the following:
+Angular アプリケーションの構築には好みのツールを自由にお使いください。私たちは以下を推奨しています
 
 1. [Visual Studio Code](https://code.visualstudio.com/)
-2. As an optional, but recommended step you can further improve your developer experience by installing the [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
+2. オプションですが、推奨されるステップとして、[Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)をインストールすることで、開発者体験をさらに向上させることができます。
 
-## Lesson review
+## レッスンの復習
 
-In this lesson, you learned about the app that you build in this tutorial and prepared your local computer to develop Angular apps.
+このレッスンでは、このチュートリアルで構築するアプリケーションについて学び、Angular アプリケーションを開発するためにローカルコンピュータを準備しました。
 
-## Next steps
+## 次のステップ
 
-*  [First Angular app lesson 1 - Hello world](tutorial/first-app/first-app-lesson-01)
+* [First Angular app lesson 1 - Hello world](tutorial/first-app/first-app-lesson-01)
 
-## More information
+## より詳しい情報
 
-For more information about the topics covered in this lesson, visit:
+このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
 * [What is Angular](https://angular.io/guide/what-is-angular)
 * [Angular CLI Reference](https://angular.io/cli)

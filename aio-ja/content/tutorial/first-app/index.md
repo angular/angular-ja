@@ -88,7 +88,7 @@ Angular は Node のアクティブ LTS 版またはメンテナンス LTS 版�
 
 ### ステップ 4 - 統合開発環境(IDE)のインストール
 
-Angular アプリケーションを構築には、お好きなツールを自由にお使いください。私たちは以下を推奨しています
+Angular アプリケーションの構築には好みのツールを自由にお使いください。私たちは以下を推奨しています
 
 1. [Visual Studio Code](https://code.visualstudio.com/)
 2. オプションですが、推奨されるステップとして、[Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)をインストールすることで、開発者体験をさらに向上させることができます。

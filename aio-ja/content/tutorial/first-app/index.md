@@ -37,7 +37,6 @@ Angular に慣れた後は、復習のためにどのレッスンにも戻って
 
 このチュートリアルのレッスンでは、賃貸住宅をリストアップし、個々の住宅の詳細を表示するシンプルな Angular アプリケーションを作成します。
 このアプリケーションは、多くの Angular アプリケーションに共通する機能を使用しています。
-
 <section class="lightbox">
   <img alt="Output of heroes dashboard" src="generated/images/guide/faa/homes-app-landing-page.png">
 </section>
@@ -58,7 +57,6 @@ StackBlitz を使用してレッスンを行う予定の方は、最初のレッ
 </section>
 
 ### ステップ 1 - Angular が必要とする `node.js` のバージョンの特定
-
 <section class="alert is-important">
 
 **重要:**
@@ -69,13 +67,13 @@ StackBlitz を使用してレッスンを行う予定の方は、最初のレッ
 Angular は Node のアクティブ LTS 版またはメンテナンス LTS 版が必要です。`node.js` のバージョンを確認しましょう。特定のバージョンの要件については、[package.json ファイル](https://unpkg.com/browse/@angular/core@15.1.5/package.json)の engines プロパティを参照してください。
 
 **ターミナル**ウィンドウから:
-
 1. 次のコマンドを実行: `node --version`
 1. 表示されたバージョン番号が条件を満たしていることを確認
 
 ### ステップ 2 - Angular 用の正しいバージョンの node.js をインストール
 
 `node.js` のバージョンがインストールされていない場合は、[nodejs.org のインストール方法](https://nodejs.org/en/download/)にしたがってください。
+
 
 ### ステップ 3 - Angular の最新版をインストール
 

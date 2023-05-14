@@ -9,8 +9,8 @@
 このレッスンでは、本チュートリアルで作成するアプリケーションのベースラインとなる事前に構築されたアプリケーションから始めます。スターターコードを用意したので、次のことができます。
 
 - このレッスンを開始するには次のコードサンプルから始めます。<live-example name="first-app-lesson-00"></live-example> から選んでください:
-  - StackBlitz の _live example_ を使用すると、StackBlitz インターフェースが IDE になります。
-  - _download example_ を使用して、`first-app` という名前のディレクトリに解凍します.IDE でそのディレクトリを開きます。
+  * StackBlitz の _live example_ を使用すると、StackBlitz インターフェースが IDE になります。
+  * _download example_ を使用して、`first-app` という名前のディレクトリに解凍します.IDE でそのディレクトリを開きます。
 
 イントロダクションをまだ確認していない場合は、[チュートリアルの概要ページ](tutorial/first-app)で、このレッスンを完了するために必要なものがすべて揃っていることを確認してください。
 
@@ -130,6 +130,6 @@ IDE で:
 
 このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
-- [Angular Components](https://angular.jp/guide/component-overview)
-- [Creating applications with the Angular CLI](https://angular.io/cli)
+* [Angular Components](https://angular.jp/guide/component-overview)
+* [Creating applications with the Angular CLI](https://angular.io/cli)
 

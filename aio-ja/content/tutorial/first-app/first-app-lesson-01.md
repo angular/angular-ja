@@ -1,46 +1,46 @@
-# First Angular app lesson 1 - Hello world
+# はじめての Angular アプリケーション レッスン 1 - Hello world
 
-This first lesson serves as the starting point from which each lesson in this tutorial adds new features to build a complete Angular app. In this lesson, we'll update the application to display the famous text, "Hello World".
+この最初のレッスンは、本チュートリアルの各レッスンで新機能を追加し、完全な Angular アプリケーションを構築するための出発点として機能します。このレッスンでは、有名なテキスト"Hello World" を表示するようにアプリケーションを更新します。
 
-**Time required:** expect to spend about 15 minutes to complete this lesson.
+**所要時間:** このレッスンは 15 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts from a pre-built app that will serve as a baseline for the application you'll be building in this tutorial. We've provided starter code so you can:
+このレッスンでは、本チュートリアルで作成するアプリケーションのベースラインとなる事前に構築されたアプリケーションから始めます。スターターコードを用意したので、次のことができます。
 
-*   Start with the code example for the beginning of this lesson. Choose from the <live-example name="first-app-lesson-00"></live-example> to:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and unzip it into a directory named: `first-app`. Open that directory in your IDE.
+* コードサンプルを使ってこのレッスンを開始できます。<live-example name="first-app-lesson-00"></live-example> から選んでください:
+  * StackBlitz の _live example_ を使用すると、StackBlitz インターフェースが IDE になります。
+  * _download example_ を使用して、`first-app` という名前のディレクトリに解凍します.IDE でそのディレクトリを開きます。
 
-If you haven't reviewed the introduction, visit the [tutorial overview page](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[チュートリアルの概要ページ](tutorial/first-app)で、このレッスンを完了するために必要なものがすべて揃っていることを確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
+## 終わったあと
 
-* The updated app you have after this lesson confirms that you and your IDE are ready to begin creating an Angular app.
+- このレッスン後に更新されたアプリケーションにより、あなたと IDE が Angular アプリケーションの作成を開始する準備ができていることが確認されます。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your chosen IDE (locallly or using the StackBlitz).
+選択した IDE（ローカルまたは StackBlitz を使用）で、アプリケーションコードに対して次のステップを実行します。
 
-### Step 1 - Test the default app
+### ステップ 1 - デフォルトアプリケーションのテスト
 
-In this step, after you download the default starting app, you build the default Angular app.
-This confirms that your development environment has what you need to continue the tutorial.
+このステップでは、デフォルトのスタートアプリケーションをダウンロードした後、デフォルトの Angular アプリケーションをビルドします。
+これにより、開発環境にチュートリアルを続けるために必要なものが揃っていることを確認します。
 
-In the **Terminal** pane of your IDE:
+IDE の **ターミナル** ペインで:
 
-1.  In your project directory, navigate to the `first-app` directory.
-1.  Run this command to install the dependencies needed to run the app.
-    
+1.  プロジェクトディレクトリで、`first-app` ディレクトリに移動します。
+1.  アプリケーションの実行に必要な依存関係をインストールするために、次のコマンドを実行します。
+
     <code-example format="shell" language="shell">
 
     npm install
 
     </code-example>
 
-1.  Run this command to build and serve the default app.
+1.  デフォルトアプリケーションのビルドとサーブをするために、次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
 
@@ -48,87 +48,88 @@ In the **Terminal** pane of your IDE:
 
     </code-example>
 
-    The app should build without errors.
+    アプリケーションはエラーなくビルドされるはずです。
 
-1.  In a web browser on your development computer, open `http://localhost:4200`.
-1.  Confirm that the default web site appears in the browser.
-1.  You can leave `ng serve` running for as you complete the next steps.
+1.  開発用コンピュータの web ブラウザで `http://localhost:4200` を開きます。
+1.  ブラウザにデフォルトの web サイトが表示されることを確認します。
+1.  次のステップを完了するまで、`ng serve` を実行したままにできます。
 
-### Step 2 - Review the files in the project
+### ステップ 2 - プロジェクト内のファイルを確認
 
-In this step, you get to know the files that make up a default Angular app.
+このステップでは、デフォルトの Angular アプリケーションを構成するファイルについて知ることができます。
 
-In the **Explorer** pane of your IDE:
+IDE の **Explorer** ペインで:
 
-1.  In your project directory, navigate to the `first-app` directory.
-1.  Open the `src` directory to see these files.
-    1.  In the file explorer, find the Angular app files (`/src`).
-        1.  `index.html` is the app's top level HTML template.
-        1.  `style.css` is the app's top level style sheet.
-        1.  `main.ts` is where the app start running.
-        1.  `favicon.ico` is the app's icon, just as you would find in web site.
-    1.  In the file explorer, find the Angular app's component files (`/app`).
-        1.  `app.component.ts` is the source file that describes the `app-root` component.
-            This is the top-level Angular component in the app. A component is the basic building block of an Angular application.
-            The component description includes the component's code, HTML template, and styles, which can be described in this file, or in separate files.
+1.  プロジェクトディレクトリで、`first-app` ディレクトリに移動します。
+1.  `src` ディレクトリを開くと、これらのファイル表示されます。
+    1.  ファイルエクスプローラーで、Angular アプリケーションファイル (`/src`) を見つけます。
+        1.  `index.html` はアプリケーショントップレベルの HTML テンプレートです。
+        1.  `style.css` はアプリケーショントップレベルのスタイルシートです。
+        1.  `main.ts` はアプリケーションの実行を開始する場所です。
+        1.  `favicon.ico` はウェブサイトにあるようなアプリケーションのアイコンです。
+    1.  ファイルエクスプローラーで、Angular アプリケーションのコンポーネントファイル (`/app`) を見つけます。
+        1.  `app.component.ts` は `app-root` コンポーネントを記述するためのソースファイルです。
+            これは、アプリケーションのトップレベルの Angular コンポーネントです。コンポーネントは、Angular アプリケーションの基本的な構成要素です。
+            コンポーネントの記述には、コンポーネントのコード、HTML テンプレート、スタイルが含まれており、このファイルに記述することも、別のファイルに記述することもできます。
 
-            In this app, the styles are in a separate file while the component's code and HTML template are in this file.
-        1.  `app.component.css` is the style sheet for this component.
-        1.  New components are added to this directory.
-    1.  In the file explorer, find the image directory (`/assets`) contains images used by the app.
-    1.  In the file explorer, find the support files are files and directories that an Angular app needs to build and run, but they are not files that you normally interact with.
-        1.  `.angular` has files required to build the Angular app.
-        1.  `.e2e` has files used to test the app.
-        1.  `.node_modules` has the node.js packages that the app uses.
-        1.  `angular.json` describes the Angular app to the app building tools.
-        1.  `package.json` is used by `npm` (the node package manager) to run the finished app.
-        1.  `tsconfig.*` are the files that describe the app's configuration to the TypeScript compiler.
+            このアプリケーションでは、スタイルは別のファイルに、コンポーネントのコードと HTML テンプレートはこのファイルに入っています。
+        1.  `app.component.css` はこのコンポーネントのスタイルシートです。
+        1.  このディレクトリに新しいコンポーネントが追加されます。
+    1.  ファイルエクスプローラーで、,アプリケーションで使用する画像を含む画像ディレクトリ (`/assets`) を見つけます。
+    1.  ファイルエクスプローラーで、Angular アプリケーションのビルドや実行のために必要なサポートファイルを見つけますが、これらは通常操作するファイルではありません。
+        1.  `.angular` は Angular アプリケーションをビルドするために必要なファイルがあります。
+        1.  `.e2e` はアプリケーションのテストに使用されるファイルがあります。
+        1.  `.node_modules` はアプリケーションが使用する node.js のパッケージがあります。
+        1.  `angular.json` はアプリケーションビルドツールのために Angular アプリケーションを記述します。
+        1.  `package.json` は完成したアプリケーションを実行するために `npm` (node パッケージマネージャー) によって使用されます。
+        1.  `tsconfig.*` は TypeScript コンパイラに対するアプリケーションの設定を記述するファイルです。
 
-After you have reviewed the files that make up an Angular app project, continue to the next step.
+Angular アプリケーションのプロジェクトを構成するファイルを確認したら、次のステップに進みます。
 
-### Step 3 - Create `Hello World`
+### ステップ 3 - `Hello World` の作成
 
-In this step, you update the Angular project files to change the displayed content.
+このステップでは、表示するコンテンツを変更するために、Angular のプロジェクトファイルを更新します。
 
-In your IDE:
+IDE で:
 
-1.  Open `first-app/src/index.html`.
-1.  In `index.html`, replace the `<title>` element with this code to update the title of the app.
+1.  `first-app/src/index.html` を開きます。
+1.  `index.html` の `<title>` 要素を次のコードに置き換えて、アプリケーションのタイトルを更新します。
 
     <code-example header="Replace in src/index.html" path="first-app-lesson-01/src/index.html" region="app-title"></code-example>
 
-    Then, save the changes you just made to `index.html`.
+    そして、`index.html` に加えた変更を保存します。
 
-1.  Next, open  `first-app/src/app/app.component.ts`.
-1.  In `app.component.ts`, in the `@Component` definition, replace the `template` line with this code to change the text in the app component.
+1.  次に `first-app/src/app/app.component.ts` を開きます。
+1.  `app.component.ts` の `@Component` 定義で, `template` 行を次のコードに置き換えて app コンポーネントのテキストを更新します。
 
     <code-example header="Replace in src/app/app.component.ts" path="first-app-lesson-01/src/app/app.component.ts" region="app-comp-template"></code-example>
 
-1.  In `app.component.ts`, in the `AppComponent` class definition, replace the `title` line with this code to change the component title.
+1.  `app.component.ts` の `AppComponent` クラス定義で、`title` 行を次のコードに置き換えて、コンポーネントのタイトルを変更します。
 
     <code-example header="Replace in src/app/app.component.ts" path="first-app-lesson-01/src/app/app.component.ts" region="app-comp-title"></code-example>
 
-    Then, save the changes you made to `app.component.ts`.
+    そして、 `app.component.ts`　に加えた変更を保存します。
 
-1.  If you stopped the `ng serve` command from step 1, in the **Terminal** window of your IDE, run `ng serve` again.
-1.  Open your browser and navigate to `localhost:4200` and confirm that the app builds without error and displays *Hello world* in the title and body of your app:
+1.  ステップ 1 の `ng serve` コマンドを停止した場合は、IDE の**ターミナル**ウィンドウで、再度 `ng serve` を実行します。
+1.  ブラウザを開いて `localhost:4200` に移動し、アプリケーションがエラーなくビルドされ、title と body に _Hello world_ が表示されることを確認します。
 <section class="lightbox">
 <img alt="browser frame of page displaying the text 'Hello World'" src="generated/images/guide/faa/homes-app-lesson-01-browser.png">
 </section>
-## Lesson review
+## レッスンの復習
 
-In this lesson, you updated a default Angualar app to display *Hello world*.
-In the process, you learned about the `ng serve` command to serve your app locally for testing.
+このレッスンでは、デフォルトの Angualar アプリケーションを更新して _Hello world_ を表示させました。
+その過程で、テスト用のローカルアプリケーションをサーブするための `ng serve` コマンドについて学びました。
 
-If have any trouble with this lesson, review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、 <live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 [First Angular app lesson 2 - Creating Components](tutorial/first-app/first-app-lesson-02)
 
-## More information
+## より詳しい情報
 
-For more information about the topics covered in this lesson, visit:
+このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
-* [Angular Components](https://angular.io/guide/component-overview)
+* [Angular Components](https://angular.jp/guide/component-overview)
 * [Creating applications with the Angular CLI](https://angular.io/cli)
+

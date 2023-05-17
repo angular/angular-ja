@@ -1,59 +1,59 @@
-# First Angular app lesson 2 - Create Home component
+# はじめての Angular アプリケーション レッスン 2 - Home コンポーネントの作成
 
-This tutorial lesson demonstrates how to create a new [component](https://angular.io/guide/component-overview) for your Angular app.
+このチュートリアルレッスンでは、Angular アプリケーションに新しい[コンポーネント](https://angular.jp/guide/component-overview)を作成する方法を説明します。
 
-**Time required:** expect to spend about 10 minutes to complete this lesson.
+**所要時間**: このレッスンは 10 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts with the code from the previous lesson, so you can:
+このレッスンは前のレッスンのコードから始まります。次のことができます。
 
-*   Use the code that you created in Lesson 1 in your integrated development environment (IDE).
-*   Start with the code example from the previous lesson. Choose the <live-example name="first-app-lesson-01"></live-example> from Lesson 1 where you can:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and open it in your IDE.
+*   レッスン 1 で作成したコードを、統合開発環境（IDE）で使用します。
+*   前のレッスンのコードサンプルから開始できます。レッスン 1 から <live-example name="first-app-lesson-01"></live-example> を選んでください。
+    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
+    *   *download example* を使い IDE で開きます。
 
-If you haven't reviewed the introduction, visit the [Introduction to Angular tutorial](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
+## 終わったあと
 
-* Your app has a new component: `HomeComponent`.
+* アプリケーションに新しいコンポーネント `HomeComponent` があります。
 
-## Conceptual preview of Angular components
+## Angular コンポーネントのコンセプトプレビュー
 
-Angular apps are built around components, which are Angular's building blocks.
-Components contain the code, HTML layout, and CSS style information that provide the function and appearance of an element in the app.
-In Angular, components can contain other components. An app's functions and appearance can divided and partitioned into components.
+Angular のアプリケーションは、Angular の構成要素であるコンポーネントを中心に構築されます。
+コンポーネントには、アプリケーション内の要素の機能と外観を提供する HTML レイアウト、および CSS スタイル情報のコードが含まれています。
+Angular では、コンポーネントは他のコンポーネントを含むことができます。アプリケーションの機能や外観は、コンポーネントに分割して仕切ることができます。
 
-In [Lesson 1](tutorial/first-app/first-app-lesson-01), you updated the `AppComponent`, whose function is to contain all the other components.
-In this lesson, you create a `HomeComponent` to display the home page of the app.
-In later lessons, you create more components to provide more features to the app.
+[レッスン 1](tutorial/first-app/first-app-lesson-01)では、`AppComponent` を更新しましたが、その機能は他のすべてのコンポーネントを含みます。
+このレッスンでは、アプリケーションのホームページを表示するための `HomeComponent` を作成します。
+この後のレッスンでは、より多くのコンポーネントを作成し、アプリケーションに多くの機能を提供します。
 
-In Angular, components have metadata that define its properties.
-When you create your `HomeComponent`, you use these properties:
+Angular では、コンポーネントはそのプロパティを定義するメタデータを持っています。
+`HomeComponent` を作成する際には、次のプロパティを使用します。
 
-*   `selector`: to describe how Angular refers to the component in templates.
-*   `standalone`: to describe whether the component requires a `ngModule`.
-*   `imports`: to describe the component's dependencies.
-*   `template`: to describe the component's HTML markup and layout.
-*   `styleUrls`: to list the URLs of the CSS files that the component users in an array.
+*   `selector`: Angular がテンプレート内のコンポーネントを参照する方法を記述します。
+*   `standalone`: コンポーネントが `ngModule` を必要とするかどうかを記述します。
+*   `imports`: コンポーネントの依存関係を記述します。
+*   `template`: コンポーネントの HTML マークアップとレイアウトを記述します。
+*   `styleUrls`: コンポーネントが使用する CSS ファイルの URL を配列で列挙します。
 
-Components have other [properties](https://angular.io/api/core/Component), but these are the ones used by `HomeComponent`.
+コンポーネントは他にも[プロパティ](https://angular.jp/api/core/Component)を持ちますが、これらは `HomeComponent` で使用するものです。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your IDE.
+IDE でアプリケーションのコードに対して、次のステップを実行します。
 
-### Step 1 - Create the `HomeComponent`
+### ステップ 1 - `HomeComponent` の作成
 
-In this step, you create a new component for your app.
+このステップでは、アプリケーションに新しいコンポーネントを作成します。
 
-In the **Terminal** pane of your IDE:
+IDE の **ターミナル** ペインで
 
-1.  In your project directory, navigate to the `first-app` directory.
-1.  Run this command to create a new `HomeComponent`
+1.  プロジェクトディレクトリで、`first-app` ディレクトリに移動します。
+1.  新しい `HomeComponent` を作成するために次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
 
@@ -61,7 +61,7 @@ In the **Terminal** pane of your IDE:
 
     </code-example>
 
-1.  Run this command to build and serve your app.
+1.  アプリケーションをビルドとサーブするために、次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
 
@@ -69,80 +69,80 @@ In the **Terminal** pane of your IDE:
 
     </code-example>
 
-1.  Open a browser and navigate to `http://localhost:4200` to find the application.
-1.  Confirm that the app builds without error.
+1.  ブラウザを開き `http://localhost:4200` に移動し、アプリケーションを見つけます。
+1.  アプリケーションがエラーなく、ビルドされることを確認します。
 
-    *Note: It should render the same as it did in the previous lesson because even though you added a new component, you haven't included it in any of the app's templates, yet.*
-1.  Leave `ng serve` running as you complete the next steps.
+    *注： 新しいコンポーネントを追加しても、アプリケーションのテンプレートにはまだ含まれていないため、前のレッスンと同じように表示されるはずです。*
+1.  次のステップを完了するまで `ng serve` を起動したままにします。
 
-### Step 2 - Add the new component to your app's layout
+### ステップ 2 - アプリケーションのレイアウトに新しいコンポーネントを追加
 
-In this step, you add the new component, `HomeComponent` to your app's root component, `AppComponent`, so that it displays in your app's layout.
+このステップでは、新しいコンポーネント `HomeComponent` をアプリケーションのルートコンポーネント `AppComponent` に追加して、アプリケーションのレイアウトに表示します。
 
-In the **Edit** pane of your IDE:
+IDE の **編集** ペインで
 
-1.  Open `app.component.ts` in the editor.
-1.  In `app.component.ts`, import `HomeComponent` by adding this line to the file level imports.
+1.  エディタで `app.component.ts` を開きます。
+1.  `app.component.ts` で、ファイルレベルの import に次の行を追加して `HomeComponent` をインポートします。
 
     <code-example header="Import HomeComponent in src/app/app.component.ts" path="first-app-lesson-02/src/app/app.component.ts" region="import-home"></code-example>
 
-1.  In `app.component.ts`, in `@Component`, update the `imports` array property and add `HomeComponent`.
+1.  `app.component.ts` の `@Component` で `imports` の配列プロパティを更新して、`HomeComponent` を追加します。
 
     <code-example header="Replace in src/app/app.component.ts" path="first-app-lesson-02/src/app/app.component.ts" region="app-metadata-imports"></code-example>
-1.  In `app.component.ts`, in `@Component`, update the `template` property to include the following HTML code.
+1.  `app.component.ts` の `@Component` で、`template` プロパティを更新して、次の HTML コードを記述します。
 
     <code-example header="Replace in src/app/app.component.ts" path="first-app-lesson-02/src/app/app.component.ts" region="app-metadata-template"></code-example>
-1.  Save your changes to  `app.component.ts`.
-1.  If `ng serve` is running, the app should update.
-    If `ng serve` is not running, start it again.
-    *Hello world* in your app should change to *home works!* from the `HomeComponent`.
-1.  Check the running app in the browser and confirm that the app has been updated.
+1.  `app.component.ts` の変更を保存します。
+1.  `ng serve` が実行されている場合、アプリケーションが更新されるはずです。
+    `ng serve` を実行していない場合は、再度起動してください。
+    アプリケーションは *Hello world* から `HomeComponent` の *home works!* に変更されるはずです。
+1.  ブラウザで起動中のアプリケーションを確認し、アプリケーションが更新されていることを確認します。
 
 <section class="lightbox">
 <img alt="browser frame of page displaying the text 'home works!'" src="generated/images/guide/faa/homes-app-lesson-02-step-2.png">
 </section>
 
-### Step 3 - Add features to `HomeComponent`
+### ステップ 3 - `HomeComponent` に機能を追加
 
-In this step you add features to `HomeComponent`.
+このステップでは `HomeComponent` に機能を追加します。
 
-In the previous step, you added the default `HomeComponent` to your app's template so its default HTML appeared in the app.
-In this step, you add a search filter and button that is used in a later lesson.
-For now, that's all that `HomeComponent` has.
-Note that, this step just adds the search elements to the layout without any function, yet.
+前のステップでは、アプリケーションのテンプレートにデフォルトの `HomeComponent` を追加して、そのデフォルトの HTML がアプリケーションに表示しました。
+このステップでは、後のレッスンで使用する検索フィルタとボタンを追加します。
+今のところ、`HomeComponent` にあるのはこれだけです。
+このステップでは、検索要素をレイアウトに追加するだけで、まだ何の機能もないことに注意してください。
 
-In the **Edit** pane of your IDE:
+IDE の **編集** ペインで
 
-1.  In the `first-app` directory, open `home.component.ts` in the editor.
-1.  In `app.component.ts`, in `@Component`, update the `template` property with this code.
+1.  `first-app` ディレクトリで、`home.component.ts` をエディタで開く。
+1.  `app.component.ts` の `@Component` の `template` プロパティを次のコードで更新します。
 
     <code-example header="Replace in src/app/home/home.component.ts" path="first-app-lesson-02/src/app/home/home.component.ts" region="home-template"></code-example>
 
-1.  Next, open `home.component.css` in the editor and update the content with these styles.
+1.  次に、エディタで `home.component.css` を開き、次のスタイルでコンテンツを更新します。
 
     <code-example header="Replace in src/app/home/home.component.css" path="first-app-lesson-02/src/app/home/home.component.css"></code-example>
 
-1.  Confirm that the app builds without error.
-    You should find the filter query box and button in your app and they should be styled.
-    Correct any errors before you continue to the next step.
+1.  アプリケーションがエラーなく、ビルドされることを確認します。
+    アプリケーション内にフィルタークエリボックスとボタンが表示され、スタイルが設定されているはずです。
+    次のステップに進む前に、エラーをしてください。
 
 <section class="lightbox">
 <img alt="browser frame of homes-app displaying logo, filter text input box and search button" src="generated/images/guide/faa/homes-app-lesson-02-step-3.png">
 </section>
 
-## Lesson review
+## レッスンの復習
 
-In this lesson, you created a new component for your app and gave it a filter edit control and button.
+このレッスンでは、アプリケーションに新しいコンポーネントを作成し、そのコンポーネントにフィルタ編集コントロールとボタンを追加しました。
 
-If you are having any trouble with this lesson, you can review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、<live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 * [First Angular app lesson 3 - Create the application’s HousingLocation component](tutorial/first-app/first-app-lesson-03)
 
-## More information
+## より詳しい情報
 
-For more information about the topics covered in this lesson, visit:
+このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
 *  [`ng generate component`](cli/generate#component-command)
 *  [`Component` reference](api/core/Component)

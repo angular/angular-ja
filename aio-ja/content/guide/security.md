@@ -233,9 +233,9 @@ Trusted Typesはアプリケーションが対応すべきすべてのブラウ�
 
 | Policies                | Detail |
 |:---                     |:---    |
-| `angular` | このポリシーはAngularの内部にあるセキュリティレビュー済みのコードで使用され、Trusted Types適用下のAngularには必ず必要です。Angularによってサニタイズされたインラインテンプレート値またはコンテンツは、このポリシーにより安全なものとして扱われます。|
-| `angular#u|safe-bypass` - このポリシーは、`bypassSecurityTrustHtml`などセキュリティをバイパスする、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドに使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。|
-| `angular#u|safe-jit` - このポリシーは、[Just-In-Time (JIT)コンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。|
+| `angular`               | このポリシーはAngularの内部にあるセキュリティレビュー済みのコードで使用され、Trusted Types適用下のAngularには必ず必要です。Angularによってサニタイズされたインラインテンプレート値またはコンテンツは、このポリシーにより安全なものとして扱われます。|
+| `angular#usafe-bypass`  | - このポリシーは、`bypassSecurityTrustHtml`などセキュリティをバイパスする、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)クラスのメソッドに使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。|
+| `angular#usafe-jit`     |- このポリシーは、[Just-In-Time (JIT)コンパイラー](api/core/Compiler)によって使用されます。アプリケーションがJITコンパイラを直接利用する場合や[platformBrowserDynamic](api/platform-browser-dynamic/platformBrowserDynamic)でJITモードで実行されている場合、このポリシーを有効にする必要があります。|
 | `angular#bundler`       | This policy is used by Angular CLI's bundler when creating lazy chunk files.                    |
 
 Trusted Typesに関するHTTPヘッダーは次の箇所で設定する必要があります。

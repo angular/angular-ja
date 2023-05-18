@@ -4,9 +4,9 @@
 たとえば、フランス語版は`myapp/fr`ディレクトリに、スペイン語版は`myapp/es`ディレクトリに配置されます。
 
 HTMLの`base`タグと`href`属性は、相対リンクのベースとなるURI（URL）を指定します。
-ワークスペースのビルド設定ファイル[`angular.json`][AioGuideWorkspaceConfig]の`"localize"`オプションに`true`またはロケール ID の配列を指定すると、CLI はアプリケーションのバージョンごとにベース`href`を調整する。
+ワークスペースのビルド設定ファイル[`angular.json`][AioGuideWorkspaceConfig]の`"localize"`オプションに`true`またはロケール ID の配列を指定すると、CLI はアプリケーションのバージョンごとにベース`href`を調整します。
 アプリケーションの各バージョンでベースとなる `href` を調整するために、CLIは設定した `"baseHref"` にロケールを追加します。
-ワークスペース構築設定ファイル [`angular.json`][AioGuideWorkspaceConfig] に、各ロケールの `"baseHref"` を指定する。
+ワークスペース構築設定ファイル [`angular.json`][AioGuideWorkspaceConfig] に、各ロケールの `"baseHref"` を指定しましょう。
 次の例では、`"baseHref"`に空文字列を指定しています。
 
 <code-example header="angular.json" path="i18n/angular.json" region="i18n-baseHref"></code-example>
@@ -23,7 +23,7 @@ HTMLの`base`タグと`href`属性は、相対リンクのベースとなるURI�
 
 <div class="alert is-helpful">
 
-リモートサーバーにアプリケーションを展開する方法については、[展開][AioGuideDeployment]を参照してください。
+リモートサーバーにアプリケーションをデプロイする方法については、[デプロイ][AioGuideDeployment]を参照してください。
 
 </div>
 

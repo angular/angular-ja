@@ -1,16 +1,16 @@
-# Angular国際化アプリケーションの例
+# Example Angular Internationalization application
 
-## 翻訳されたサンプルアプリケーションの探索
+## Explore the translated example application
 
 <div class="alert is-helpful">
 
-[Angular Internationalization][AioGuideI18nOverview]ガイドで使用しているフランス語翻訳付きサンプルアプリケーションを調べるには、<live-example name="i18n" title="live example"></live-example>を参照してください。
+To explore the sample application with French translations used in the [Angular Internationalization][AioGuideI18nOverview] guide, see <live-example name="i18n" title="live example"></live-example>.
 
 </div>
 
-## `fr-CA`と`en-US`の例。
+## `fr-CA` and `en-US` example
 
-次のタブには、サンプルアプリケーションと関連する翻訳ファイルが表示されます。
+The following tabs display the example application and the associated translation files.
 
 <code-tabs>
     <code-pane header="src/app/app.component.html" path="i18n/src/app/app.component.html"></code-pane>

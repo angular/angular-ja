@@ -1,42 +1,42 @@
-# First Angular app lesson 3 - Create the application’s HousingLocation component
+# はじめての Angular アプリケーション レッスン 3 - HousingLocation コンポーネントの作成
 
-This tutorial lesson demonstrates how to add the `HousingLocation` component to your Angular app.
+このチュートリアルレッスンでは、`HousingLocation` コンポーネントを Angular アプリケーションに追加する方法を説明します。
 
-**Time required:** expect to spend about 10 minutes to complete this lesson.
+**所要時間**: このレッスンは 10 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts with the code from the previous lesson, so you can:
+このレッスンは前のレッスンのコードから始まります。次のことができます。
 
-*   Use the code that you created in Lesson 2 in your integrated development environment (IDE).
-*   Start with the code example from the previous lesson. Choose the <live-example name="first-app-lesson-02"></live-example> from Lesson 1 where you can:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and open it in your IDE.
+*   レッスン 2 で作成したコードを、統合開発環境（IDE）で使用します。
+*   前のレッスンのコードサンプルから開始できます。レッスン 2 から <live-example name="first-app-lesson-02"></live-example> を選んでください。
+    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
+    *   *download example* を使い IDE で開きます。
 
-If you haven't reviewed the introduction, visit the [Introduction to Angular tutorial](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
-* Your app has a new component: `HousingLocationComponent` and it displays a message confirming that the component was added to your application.
+## 終わったあと
+* アプリケーションに新しいコンポーネント `HomeComponent` があり、コンポーネントがアプリケーションに追加されたことを確認するメッセージが表示されます。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your IDE.
+IDE でアプリケーションのコードに対して、次のステップを実行します。
 
-### Step 1 - Create the `HousingLocationComponent`
+### ステップ 1 - `HousingLocationComponent` の作成
 
-In this step, you create a new component for your app.
+このステップでは、アプリケーションに新しいコンポーネントを作成します。
 
-In the **Terminal** pane of your IDE:
+IDE の **ターミナル** ペインで
 
-1. Run this command to create a new `HousingLocationComponent`
+1. 新しい `HousingLocationComponent` を作成するために次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
     ng generate component HousingLocation --standalone --inline-template --skip-tests
     </code-example>
 
-1. Run this command to build and serve your app.
+1. アプリケーションのビルドとサーブをするために、次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
 
@@ -44,52 +44,52 @@ In the **Terminal** pane of your IDE:
 
     </code-example>
 
-1.  Open a browser and navigate to `http://localhost:4200` to find the application.
-1.  Confirm that the app builds without error.
+1.  ブラウザを開き `http://localhost:4200` に移動し、アプリケーションを見つけます。
+1.  アプリケーションがエラーなく、ビルドされることを確認します。
 
-    *Note: It should render the same as it did in the previous lesson because even though you added a new component, you haven't included it in any of the app's templates, yet.*
-1.  Leave `ng serve` running as you complete the next steps.
+    *注： 新しいコンポーネントを追加しても、アプリケーションのテンプレートにはまだ含まれていないため、前のレッスンと同じように表示されるはずです。*
+1.  次のステップを完了するまで `ng serve` を起動したままにします。
 
-### Step 2 - Add the new component to your app's layout
+### ステップ 2 - アプリケーションのレイアウトに新しいコンポーネントを追加
 
-In this step, you add the new component, `HousingLocationComponent` to your app's `HomeComponent`, so that it displays in your app's layout.
+このステップでは、新しいコンポーネント `HousingLocationComponent` をアプリケーションの `HomeComponent` に追加して、アプリケーションのレイアウトに表示します。
 
-In the **Edit** pane of your IDE:
+IDE の **編集** ペインで
 
-1.  Open `home.component.ts` in the editor.
-1.  In `app.component.ts`, import `HousingLocationComponent` by adding this line to the file level imports.
+1.  エディタで `home.component.ts` を開きます。
+1.  `home.component.ts` で、ファイルレベルの import に次の行を追加して `HousingLocationComponent` をインポートします。
 
     <code-example header="Import HousingLocationComponent in src/app/home/home.component.ts" path="first-app-lesson-03/src/app/home/home.component.ts" region="import-housingLocation"></code-example>
 
-1.  Next update the `imports` property of the `@Component` metadata by adding `HousingLocationComponent` to the array.
+1.  次に、`@Component` メタデータの `imports` プロパティを更新し、`HousingLocationComponent` を配列に追加します。
 
     <code-example header="Add HousingLocationComponent to imports array in src/app/home/home.component.ts" path="first-app-lesson-03/src/app/home/home.component.ts" region="add-housingLocation-to-array"></code-example>
 
-1.  Now the component is ready for use in the template for the `HomeComponent`. Update the `template` property of the `@Component` metatdata to include a reference to the `<app-housing-location>` tag.
+1.  これで、`HomeComponent` のテンプレートでコンポーネントを使用する準備ができました。`<app-housing-location>` タグへの参照が含まれるように `@Component` メタデータの `template` プロパティを更新します。
 
     <code-example header="Add housing location to the component template in src/app/home/home.component.ts" path="first-app-lesson-03/src/app/home/home.component.ts" region="add-housingLocation-to-template"></code-example>
 
-### Step 3 - Add the styles for the component
+### ステップ 3 - コンポーネントのスタイルを追加
 
-In this step, you will copy over the pre-written styles for the `HousingLocationComponent` to your app so that the app renders properly.
+このステップでは、`HousingLocationComponent` にあらかじめ書かれているスタイルをコピーして、アプリケーションが正しくレンダリングされるようにします。
 
-1. Open `src/app/housing-location/housing-location.css`, and paste the styles below into the file:
-        
+1. `src/app/housing-location/housing-location.css` を開き、次のスタイルを貼り付けます。
+
     <code-example header="Add CSS styles to housing location to the component in src/app/housing-location/housing-location.component.css" path="first-app-lesson-03/src/app/housing-location/housing-location.component.css"></code-example>
 
-1.  Save your code, return to the browser and confirm that the app builds without error. You should find the message "housing-location works!" rendered to the screen.Correct any errors before you continue to the next step.
+1.  コードを保存し、ブラウザに戻り、アプリケーションがエラーなくビルドされることを確認します。画面に "housing-location works!" というメッセージが表示されるはずです。次のステップに進む前に、エラーを修正してください。
 
     <section class="lightbox">
     <img alt="browser frame of homes-app displaying logo, filter text input box and search button and the message 'housing-location works!" src="generated/images/guide/faa/homes-app-lesson-03-step-2.png">
     </section>
 
 
-## Lesson review
+## レッスンの復習
 
-In this lesson, you created a new component for your app and added it to the app's layout.
+このレッスンでは、アプリケーションに新しいコンポーネントを作成し、それをアプリケーションのレイアウトに追加しました。
 
-If you are having any trouble with this lesson, you can review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、<live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 * [First Angular app lesson 4 -  Add a housing location interface to the application](tutorial/first-app/first-app-lesson-04)

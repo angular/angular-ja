@@ -1,49 +1,49 @@
-# First Angular app lesson 4 - Creating an interface
+# はじめての Angular アプリケーション レッスン 4 - インターフェースの作成
 
-This tutorial lesson demonstrates how to create an interface and include it in a component of your app.
+このチュートリアルレッスンでは、インターフェースを作成し、アプリケーションのコンポーネントに含める方法を説明します。
 
-**Time required:** expect to spend about 10 minutes to complete this lesson.
+**所要時間**: このレッスンは 10 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts with the code from the previous lesson, so you can:
+このレッスンは前のレッスンのコードから始まります。次のことができます。
 
-*   Use the code that you created in Lesson 3 in your integrated development environment (IDE).
-*   Start with the code example from the previous lesson. Choose the <live-example name="first-app-lesson-03"></live-example> from Lesson 3 where you can:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and open it in your IDE.
+*   レッスン 3 で作成したコードを、統合開発環境（IDE）で使用します。
+*   前のレッスンのコードサンプルから開始できます。レッスン 3 から <live-example name="first-app-lesson-03"></live-example> を選んでください。
+    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
+    *   *download example* を使い IDE で開きます。
 
-If you haven't reviewed the introduction, visit the [Introduction to Angular tutorial](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
+## 終わったあと
 
-*  Your app has a new interface that it can use as a data type.
-*  Your app has an instance of the new interface with sample data.
+*  アプリケーションにデータ型として使用できる新しいインターフェースがあります。
+*  アプリケーションにサンプルデータをもつ新しいインターフェースのインスタンスがあります。
 
-## Conceptual preview of interfaces
+## インターフェースのコンセプトプレビュー
 
-[Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) are custom data types for your app.
+[Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) はアプリケーションのカスタムデータ型です。 
 
-Angular uses TypeScript to take advantage of working in a strongly typed programming environment.
-Strong type checking reduces the likelihood of one element in your app sending incorrectly formatted data to another.
-Such type-mismatch errors are caught by the TypeScript compiler and many such errors can also be caught in your IDE.
+Angular は、強く型付けされたプログラミング環境での作業を活用するため、TypeScript を使用しています。
+強力な型チェックにより、アプリケーション内のある要素が不正なフォーマットのデータを別の要素に送信する可能性が低くなります。
+このような型の不一致エラーは TypeScript コンパイラによってキャッチされますが、IDE でもそのようなエラーの多くはキャッチすることができます。
 
-In this lesson, you'll create an interface to define properties that represent data about a single housing location.
+このレッスンでは、1 つの住宅地に関するデータを表すプロパティを定義するためのインターフェースを作成します。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your IDE.
+IDE でアプリケーションのコードに対して、次のステップを実行します。
 
-### Step 1 - Create a new Angular interface
+### ステップ 1 - 新しい Angular インターフェースを作成
 
-This step creates a new interface in your app.
+このステップではアプリケーションに新しいインターフェースを作成します。
 
-In the **Terminal** pane of your IDE:
+IDE の **ターミナル** ペインで
 
-1.  In your project directory, navigate to the `first-app` directory.
-1.  In the `first-app` directory, run this command to create the new interface.
+1.  プロジェクトディレクトリで、`first-app` ディレクトリに移動します。
+1.  `first-app` ディレクトリで、新しいインターフェースを作成するために次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
 
@@ -51,73 +51,73 @@ In the **Terminal** pane of your IDE:
 
     </code-example>
 
-1.  Run `ng serve` to build the app and serve it to `http://localhost:4200`.
-1.  In a browser, open `http://localhost:4200` to see your app.
-1.  Confirm that the app builds without error.
-    Correct any errors before you continue to the next step.
+1.  アプリケーションをビルドし `http://localhost:4200` へサーブするために `ng serve` を実行します。
+1.  ブラウザで `http://localhost:4200` を開き、アプリケーションを見つけます。
+1.  アプリケーションがエラーなく、ビルドされることを確認します。
+    次のステップに進む前に、エラーを修正してください。
 
-### Step 2 - Add properties to the new interface
+### ステップ 2 - 新しいインターフェースへプロパティを追加
 
-This step adds the properties to the interface that your app needs to represent a housing location.
+このステップでは、アプリケーションが住宅地を表現するために必要なプロパティをインターフェースに追加します。
 
-1.  In the **Terminal** pane of your IDE, start the `ng serve` command, if it isn't already running, to build the app and serve it to `http://localhost:4200`.
-1.  In the **Edit** pane of your IDE, open the `src/app/housinglocation.ts` file.
-1.  In `housinglocation.ts`, replace the default content with the following code to make your new interface to match this example.
+1.  もし、まだ実行していない場合は、IDE の **ターミナル** ペインで `ng serve` コマンドを開始し、アプリケーションをビルドして `http://localhost:4200` へサーブします。
+1.  IDE の **編集** ペインで `src/app/housinglocation.ts` ファイルを開きます。
+1.  `housinglocation.ts` でデフォルトの内容を次のコードに置き換えて、この例と同じように新しいインターフェースを作成します。
 
     <code-example header="Update src/app/housinglocation.ts to match this code" path="first-app-lesson-04/src/app/housinglocation.ts"></code-example>
 
-1.  Save your changes and confirm the app does not display any errors. Correct any errors before you continue to the next step.
+1.  変更を保存して、アプリケーションにエラーが表示されないことを確認します。次のステップに進む前に、エラーを修正してください。
 
-At this point, you've defined an inteface that represents data about a housing location including an id, name, and location information.
+この時点で、id、name、位置情報など、住宅の位置に関するデータを表現するインターフェースが定義されました。
 
-### Step 3 - Create a test house for your app
+### ステップ 3 - アプリケーションにテスト用の家を作成
 
-You have an interface, but you aren't using it yet.
+インターフェースはありますが、まだ使っていません。
 
-In this step, you create an instance of the interface and assign some sample data to it.
-You won't see this sample data appear in your app yet.
-There are a few more lessons to complete before that happens.
+このステップでは、インターフェースのインスタンスを作成し、そこへサンプルデータを割り当てます。
+このサンプルデータがアプリケーションに表示されるのはまだ先です。
+その前にあと数回、レッスンがあります。
 
-1.  In the **Terminal** pane of your IDE, run the `ng serve` command, if it isn't already running, to build the app and serve your app to `http://localhost:4200`.
-1.  In the **Edit** pane of your IDE, open `src/app/home/home.component.ts`.
-1.  In `src/app/home/home.component.ts`, add this import statement after the existing `import` statements so that `HomeComponent` can use the new interface.
+1.  もし、まだ実行していない場合は、IDE の **ターミナル** ペインで `ng serve` コマンドを開始し、アプリケーションをビルドして `http://localhost:4200` へサーブします。
+1.  IDE の **編集** ペインで `src/app/home/home.component.ts` を開きます。
+1.  `src/app/home/home.component.ts` の `HomeComponent` で新しいインターフェースを使用できるように、既存の import 文の後に次の `import` 文を追加します。
 
     <code-example header="Import HomeComponent in src/app/home/home.component.ts" path="first-app-lesson-04/src/app/home/home.component.ts" region="housing-location-import"></code-example>
 
-1.  In `src/app/home/home.component.ts`, replace the empty `export class HomeComponent {}` definition with this code to create a single instance of the new interface in the component.
+1.  `src/app/home/home.component.ts` で空の `export class HomeComponent {}` を次のコードに置き換えて、コンポーネント内に新しいインターフェースのインスタンスをひとつ作成します。
 
     <code-example header="Add sample data to src/app/home/home.component.ts" path="first-app-lesson-04/src/app/home/home.component.ts" region="only-house"></code-example>
 
-1.  Confirm that your `home.component.ts` file matches like this example.
+1.  `home.component.ts` ファイルがこの例のようになっていることを確認してください。
 
     <code-example header="src/app/home/home.component.ts" path="first-app-lesson-04/src/app/home/home.component.ts"></code-example>
 
-    By adding the `housingLocation` property of type `HousingLocation` to the `HomeComponent` class, we're able to confirm that the data matches the description of the interface. If the data didn't satisfy the description of the if the IDE has enough information to give us helpful errors.
+    `HomeComponent` クラスに `HousingLocation` 型のプロパティ `housingLocation` を追加することで、データがインターフェースの記述と一致することを確認することができます。IDE が十分な情報を持っており、データがその記述を満たしていなかった場合、役に立つエラーを出すことができます。
 
-1.  Save your changes and confirm the app does not have any errors. Open the browser and confirm that your application still displays the message "housing-location works!"
+1.  変更を保存して、アプリケーションにエラーがないことを確認します。ブラウザを開き、アプリケーションに "housing-location works!" と表示されたままであることを確認します。
 
     <section class="lightbox">
     <img alt="browser frame of homes-app displaying logo, filter text input box and search button and the message 'housing-location works!'" src="generated/images/guide/faa/homes-app-lesson-03-step-2.png">
     </section>
 
-1.  Correct any errors before you continue to the next step.
+1.  次のステップに進む前に、エラーを修正してください。
 
-## Lesson review
+## レッスンの復習
 
-In this lesson, you created an interface that created a new data type for your app.
-This new data type makes it possible for you to specify where `HousingLocation` data is required.
-This new data type also makes it possible for your IDE and the TypeScript compiler can ensure that `HousingLocation` data is used where it's required.
+このレッスンでは、アプリケーションの新しいデータ型を作成するインターフェースを作成しました。
+この新しいデータ型により、`HousingLocation` データが必要な場所を指定することができるようになりました。
+この新しいデータ型により、IDE と TypeScript コンパイラは、`HousingLocation` データが必要な場所で使用されることを義務づけます。
 
-If you are having any trouble with this lesson, you can review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、<live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 * [Lesson 5 - Add an input parameter to the component](tutorial/first-app/first-app-lesson-05)
 
 
-## More information
+## より詳しい情報
 
-For more information about the topics covered in this lesson, visit:
+このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 

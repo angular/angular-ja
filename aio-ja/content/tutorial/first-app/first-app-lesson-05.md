@@ -49,7 +49,7 @@ IDE でアプリケーションのコードに対して、次のステップを�
 
     <code-example header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts" path="first-app-lesson-05/src/app/housing-location/housing-location.component.ts" region="add-housing-location-property"></code-example>
 
-    `!` を付ける必要があるのは、入力に値が渡されることを期待しているためです。この場合、デフォルト値はありません。このアプリケーション例では、値が渡されることがわかっています。これは仕様です。感嘆符は非 null アサーション演算子と呼ばれ、このプロパティの値が null または undefined にならないことを TypeScript コンパイラに伝えます。
+    `!` を付ける必要があるのは、入力に値が渡されることを期待しているためです。この場合、デフォルト値はありません。このアプリケーション例では、値が渡されることがわかっているため、これは仕様です。感嘆符は非 null アサーション演算子と呼ばれ、このプロパティの値が null または undefined にならないことを TypeScript コンパイラに伝えます。
 
 1.  変更を保存し、アプリケーションにエラーがないことを確認します。
 

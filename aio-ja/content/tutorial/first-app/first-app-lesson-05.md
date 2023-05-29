@@ -1,69 +1,69 @@
-# Lesson 5 - Add an input parameter to the component
+# レッスン 5 - コンポーネントに入力パラメータを追加
 
-This tutorial lesson demonstrates how to create a component `@Input()`, use it to pass data to a component for customization.
+このチュートリアル・レッスンでは、コンポーネント `@Input()` を作成し、それを使用してカスタマイズのためにデータをコンポーネントに渡す方法を示します。
 
-**Time required:** expect to spend about 10 minutes to complete this lesson.
+**所要時間**: このレッスンは 10 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts with the code from the previous lesson, so you can:
+このレッスンは前のレッスンのコードから始まります。次のことができます。
 
-*   Use the code that you created in Lesson 4 in your integrated development environment (IDE).
-*   Start with the code example from the previous lesson. Choose the <live-example name="first-app-lesson-04"></live-example> from Lesson 4 where you can:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and open it in your IDE.
+*   レッスン 4 で作成したコードを、統合開発環境（IDE）で使用します。
+*   前のレッスンのコードサンプルから開始できます。レッスン 4 から <live-example name="first-app-lesson-04"></live-example> を選んでください。
+    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
+    *   *download example* を使い IDE で開きます。
 
-If you haven't reviewed the introduction, visit the [Introduction to Angular tutorial](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
+## 終わったあと
 
-*  Your app has a new interface that it can use as a data type.
-*  Your app has an instance of the new interface with sample data.
+*  アプリケーションにデータ型として使用できる新しいインターフェースがあります。
+*  アプリケーションにサンプルデータをもつ新しいインターフェースのインスタンスがあります。
 
-## Conceptual preview of Inputs
-[Inputs](api/core/Input) allow components to share data. The direction of the data sharing is from parent component to child component.
+## Input のコンセプトプレビュー
+[Input](api/core/Input) により、コンポーネントはデータを共有することができます。データ共有の方向は親コンポーネントから子コンポーネントになります。
 
-To receive data from a parent component, a child component must mark a class property with the `@Input()` decorator. This decorator can be used in components and directives.
+親コンポーネントからデータを受け取るには、子コンポーネントがクラスプロパティに `@Input()` デコレーターを付ける必要があります。このデコレーターはコンポーネントやディレクティブで使用できます。
 
-For a more in depth explanation, please refer to the [Sharing data between child and parent directives and components](guide/inputs-outputs) guide.
+さらに詳しい説明については、[ディレクティブとコンポーネントの親子間でのデータ共有](guide/inputs-outputs)ガイドを参照してください。
 
-In this lesson, you'll define `@Input()` properties in the `HousingLocationComponent` component which will enable you to customize the data displayed in the component.
+このレッスンでは、`HousingLocationComponent` コンポーネントで `@Input()` プロパティを定義し、コンポーネントに表示されるデータをカスタマイズできるようになります。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your IDE.
+IDE でアプリケーションのコードに対して、次のステップを実行します。
 
-### Step 1 - Import the Input decorator
-This step imports the `Input` decorator into the class.
+### ステップ 1 - Input デコレーターをインポート
+このステップでは、`Input` デコレーターをクラスにインポートします。
 
-In the code editor:
-1.  Navigate to `src/app/housing-location/housing-location.component.ts`
-1.  Update the file imports to include `Input` and `HousingLocation`:
+コードエディタで
+1.  `src/app/housing-location/housing-location.component.ts` に移動します。
+1.  `Input` と `HousingLocation` を含むように、ファイルのインポートを更新します。
 
     <code-example header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts" path="first-app-lesson-05/src/app/housing-location/housing-location.component.ts" region="add-imports"></code-example>
 
-### Step 2 - Add the Input property
-1.  In the same file, add a property called `housingLocation` of type `HousingLocation` to the `HousingLocationComponent` class. Add an `!` after the property name and prefix it with the `@Input()` decorator:
+### ステップ 2 - Input プロパティを追加
+1.  同じファイルの `HousingLocationComponent` クラスに `HousingLocation` 型の `housingLocation` プロパティを追加します。プロパティ名の後に `!` を付け `@Input()` デコレーターでプレフィックスを付けます。
 
     <code-example header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts" path="first-app-lesson-05/src/app/housing-location/housing-location.component.ts" region="add-housing-location-property"></code-example>
 
-    You have to add the `!` because the input is expecting the value to be passed. In this case, there is no default value. In our example application case we know that the value will be passed in - this is by design. The exclamation point is called the non-null assertion operator and it tells the TypeScript compiler that the value of this property won't be null or undefined.
+    `!` を付ける必要があるのは、入力に値が渡されることを期待しているためです。この場合、デフォルト値はありません。このアプリケーション例では、値が渡されることがわかっているため、これは仕様です。感嘆符は非 null アサーション演算子と呼ばれ、このプロパティの値が null または undefined にならないことを TypeScript コンパイラに伝えます。
 
-1.  Save your changes and confirm the app does not have any errors.
+1.  変更を保存し、アプリケーションにエラーがないことを確認します。
 
-1.  Correct any errors before you continue to the next step.
+1.  次のステップに進む前に、エラーを修正してください。
 
-## Lesson review
+## レッスンの復習
 
-In this lesson, you created a new property decorated with the `@Input()` decorator. You also used the non-null assertion operator to notify the compiler that the value of the new property won't be `null` or `undefined`.
+このレッスンでは、`@Input()` デコレーターで装飾された新しいプロパティを作成しました。また、非 null アサーション演算子を使用して、新しいプロパティの値が `null` または `undefined` にならないことをコンパイラに通知しました。
 
-If you are having any trouble with this lesson, you can review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、<live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 * [Lesson 6 - Add a property binding to an component’s template](tutorial/first-app/first-app-lesson-06)
 
-## For more information about the topics covered in this lesson, visit:
-* [Sharing data between child and parent directives and components](guide/inputs-outputs)
+## このレッスンで取り上げるトピックの詳細については、次を参照
+* [ディレクティブとコンポーネントの親子間でのデータ共有](guide/inputs-outputs)

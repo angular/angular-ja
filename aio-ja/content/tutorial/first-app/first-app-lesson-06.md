@@ -59,5 +59,5 @@ IDE でアプリケーションのコードに対して、次のステップを�
 
 * [Lesson 7 - Add an interpolation to a component’s template](tutorial/first-app/first-app-lesson-07)
 
-## このレッスンで取り上げるトピックの詳細については、次を参照
+## このレッスンで取り上げたトピックの詳細について
 * [Property binding](guide/property-binding)

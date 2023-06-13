@@ -85,7 +85,7 @@ If there is a mismatch between server and client DOM tree structures, the hydrat
 
 ### Direct DOM Manipulation
 
-If you have components that manipulate the DOM using native DOM APIs, the hydration process will encounter errors. Specific cases where DOM manipulation is a problem are situations like accessing the `document`, querying for specific elements, and injecting additional nodes using `appendChild`. Detaching DOM nodes and moving them to other locations will also result in errors.
+If you have components that manipulate the DOM using native DOM APIs or use `innerHTML` or `outerHTML`, the hydration process will encounter errors. Specific cases where DOM manipulation is a problem are situations like accessing the `document`, querying for specific elements, and injecting additional nodes using `appendChild`. Detaching DOM nodes and moving them to other locations will also result in errors.
 
 This is because Angular is unaware of these DOM changes and cannot resolve them during the hydration process. Angular will expect a certain structure, but it will encounter a different structure when attempting to hydrate. This mismatch will result in hydration failure and throw a DOM mismatch error ([see below](#errors)).
 
@@ -107,7 +107,7 @@ If you are uncertain about whether your HTML is valid, you can use a [syntax val
 <a id="preserve-whitespaces"></a>
 ### Preserve Whitespaces Configuration
 
-When using the hydration feature, we recommend using the default setting of `false` for `preserveWhitespaces`. If this setting is not in your tsconfig, the value will be `false` and no changes are required. If you choose to enable preserving whitespaces by adding `preserveWhitespaces: true` to you tsconfig, it is possible you may encounter issues with hydration. This is not yet a fully supported configuration.
+When using the hydration feature, we recommend using the default setting of `false` for `preserveWhitespaces`. If this setting is not in your tsconfig, the value will be `false` and no changes are required. If you choose to enable preserving whitespaces by adding `preserveWhitespaces: true` to your tsconfig, it is possible you may encounter issues with hydration. This is not yet a fully supported configuration.
 
 <div class="alert is-helpful">
 

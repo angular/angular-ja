@@ -7,6 +7,14 @@
     "bio": "Alain Chautard is a Google Developer Expert in Web Technologies / Angular. He started working with Angular JS in 2011. Since then he has worked with all Angular versions on a daily basis, both as a developer and as a technical trainer. He is the organizer of the Sacramento Angular Meetup group, co-organizer of the Google Developer Group chapter in Sacramento, California, and published author of the Packt video course 'Getting Started with Angular'",
     "groups": ["GDE"]
   },
+  "adyngom": {
+    "name": "Ady Ngom",
+    "picture": "angom.jpg",
+    "twitter": "adyngom",
+    "website": "https://adyngom.com",
+    "bio": "Ady is a Google Developer Expert in Angular. His first interaction with a computer was playing PacMan but he was more interested in knowing how it was built than how much fun it was to play it. For the past 20 years, Ady has strived in building simple, engaging and very intuitive consumer facing products. As a JavaScript Teach Lead and UI Architect, he spends a bulk of his time producing intuitive systems that are easy to scale and maintain. When away from the keyboard, he enjoys the Georgia outdoors with his wife and three children. To him, the unpredictable weather is a known issue that simply adds to the overall charm and he would not have it otherwise.",
+    "groups": ["GDE"]
+  },
   "ahasall": {
     "name": "Amadou Sall",
     "picture": "ahasall.jpg",
@@ -359,6 +367,14 @@
     "bio": "Eliran is an Experienced FE developer, located in Tel Aviv, Israel. He is a developer, trainer, and consultant with a focus on Angular and the eco-system around it. He gives talks and workshops on Angular, RXJS, NGRX, and related technologies. As an active part of the community, he is constantly involved in growing it and interacting with the members. Eliran is one of the Organisers of AngularUP Annual Conference in Tel Aviv and also an organizer and leading the Angular meetup & community in Israel. He often speaks at conferences and meetups and also writes for AngualrInDepth.com.",
     "groups": ["GDE"]
   },
+  "eneajahollari": {
+    "name": "Enea Jahollari",
+    "picture": "eneajahollari.jpeg",
+    "twitter": "enea_jahollari",
+    "website": "https://eneajaho.me",
+    "bio": "Software Engineer working with Angular every day. Having developed, audited, and optimized multiple kinds of Angular applications has made me appreciate Angular as a framework for its capabilities! I speak at conferences and meetups and enjoy participating in the dev community and OSS. I also blog and tweet a lot about Angular's latest news, updates, pull requests, best practices, and much more.",
+    "groups": ["GDE"]
+  },
   "eusoj": {
     "name": "Josue Gutierrez",
     "picture": "josue.jpg",
@@ -402,6 +418,13 @@
     "groups": ["Collaborators"],
     "mentor": "dgp1130",
     "picture": "jbedard.jpg"
+  },
+  "jeanmeche": {
+    "name": "Matthieu Riegler",
+    "picture":"jeanmeche.jpg",
+    "twitter": "jean__meche",
+    "bio": "Software engineer from the french Alps. Matthieu was born and raised with the web and now he love's building it! He currently works for Viseo.",
+    "groups": ["Collaborators"]
   },
   "jecelynyeen": {
     "name": "Jecelyn Yeen",

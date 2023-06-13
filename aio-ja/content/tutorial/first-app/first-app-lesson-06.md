@@ -1,63 +1,63 @@
-# Lesson 6 - Add a property binding to an component’s template
+# レッスン 6 - コンポーネントのテンプレートにプロパティバインディングを追加
 
-This tutorial lesson demonstrates how to add property binding to a template and use it to pass dynamic data to components.
+このチュートリアルレッスンでは、テンプレートにプロパティバインディングを追加し、それを使ってコンポーネントに動的なデータを渡す方法を説明します。
 
-**Time required:** expect to spend about 5 minutes to complete this lesson.
+**所要時間**: このレッスンは 5 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts with the code from the previous lesson, so you can:
+このレッスンは前のレッスンのコードから始まります。次のことができます。
 
-*   Use the code that you created in Lesson 5 in your integrated development environment (IDE).
-*   Start with the code example from the previous lesson. Choose the <live-example name="first-app-lesson-05"></live-example> from Lesson 5 where you can:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and open it in your IDE.
+*   レッスン 5 で作成したコードを、統合開発環境（IDE）で使用します。
+*   前のレッスンのコードサンプルから開始できます。レッスン 5 から <live-example name="first-app-lesson-05"></live-example> を選んでください。
+    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
+    *   *download example* を使い IDE で開きます。
 
-If you haven't reviewed the introduction, visit the [Introduction to Angular tutorial](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
+## 終わったあと
 
-*  Your app has data bindings in the `HomeComponent` template.
-*  Your app sends data from the `HomeComponent` to the `HousingLocationComponent`.
+*  アプリケーションの `HomeComponent` テンプレートにデータバインディングがあります。
+*  アプリケーションは `HomeComponent` から `HousingLocationComponent` にデータを送信します。
 
-## Conceptual preview of Inputs
-In lesson 5, you added `@Input` decorators to properties in the `HousingLocationComponent` allow the component to receive data. In this lesson, you'll continue the process of sharing data from the parent component to the child component by binding data to those properties in the template. There are several forms of data binding in Angular, in this lesson you'll use property binding.
+## Input のコンセプトプレビュー
+レッスン 5 では、`HousingLocationComponent` のプロパティに `@Input` デコレーターを追加して、コンポーネントがデータを受信できるようにしました。このレッスンでは、テンプレート内のこれらのプロパティにデータをバインドすることで、親コンポーネントから子コンポーネントにデータを共有するプロセスを続けます。Angular にはデータバインディングの形式がいくつかありますが、このレッスンではプロパティバインディングを使用します。
 
-Property binding enables you to connect a variable to an `Input` in an Angular template. The data is then dynamically bound to the `Input`.
+プロパティバインディングは、変数を Angular テンプレートの `Input` に接続できます。データは動的に `Input` にバインドされます。
 
-For a more in depth explanation, please refer to the [Property binding](guide/property-binding) guide.
+より詳細な説明については、[Property binding](guide/property-binding) ガイドを確認してください。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your IDE.
+IDE でアプリケーションのコードに対して、次のステップを実行します。
 
-### Step 1 - Update <app-housing-location> tag in the `HomeComponent` tempalte
-This step adds property binding to the `<app-housing-location>` tag.
+### ステップ 1 - `HomeComponent` テンプレートの <app-housing-location> タグを更新
+このステップでは、`<app-housing-location>` タグにプロパティバインディングを追加します。
 
-In the code editor:
-1.  Navigate to `src/app/home/home.component.ts`
-1.  In the template property of the `@Component` decorator, update the code to match the code below:
+コードエディタで
+1.  `src/app/home/home.component.ts` に移動します。
+1.  `@Component` デコレーターのテンプレートプロパティで、次のコードと一致するようにコードを更新します。
     <code-example header="Add housingLocation property binding" path="first-app-lesson-06/src/app/home/home.component.ts" region="add-property-binding"></code-example>
 
-    When adding a property binding to a component tag, we use the `[attribute] = "value"` syntax to notify Angular that the assigned value should be treated as a property from the component class and not a string value. 
+    コンポーネントタグにプロパティバインディングを追加するときは、`[attribute] = "value"` 構文を使って、割り当てられた値を文字列値ではなくコンポーネントクラスのプロパティとして扱うことを Angular に通知します。
 
-    The value on the right handside is the name of the property from the `HomeComponent`.
+    右側の値は、`HomeComponent` のプロパティ名です。
 
-### Step 2 - Confirm the code still works
-1.  Save your changes and confirm the app does not have any errors.
-1.  Correct any errors before you continue to the next step.
+### ステップ 2 - コードが引き続き機能することを確認
+1.  変更を保存し、アプリケーションにエラーがないことを確認します。
+1.  次のステップに進む前に、エラーを修正してください。
 
-## Lesson review
+## レッスンの復習
 
-In this lesson, you added a new property binding and passed in a reference to a class property. Now, the `HousingLocationComponent` has access to data that it can use to customize the the component's display.
+このレッスンでは、新しいプロパティバインディングを追加し、クラスプロパティへの参照を渡しました。これで、`HousingLocationComponent` は、コンポーネントの表示をカスタマイズするために使用できるデータにアクセスできるようになりました。
 
-If you are having any trouble with this lesson, you can review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、<live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 * [Lesson 7 - Add an interpolation to a component’s template](tutorial/first-app/first-app-lesson-07)
 
-## For more information about the topics covered in this lesson, visit:
+## このレッスンで取り上げたトピックの詳細について
 * [Property binding](guide/property-binding)

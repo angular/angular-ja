@@ -81,4 +81,4 @@ Angularはコンポーネントがあるサービスに依存していること�
 * [Creating and injecting services](guide/creating-injectable-service)
 * [Dependency Injection in Action](guide/dependency-injection-in-action)
 
-@reviewed 2022-08-02
+@reviewed 2023-05-16

@@ -1233,6 +1233,7 @@ Learn more about zones in this
 [AioGuideGlossaryLibrary]: guide/glossary#library "library - Glossary | Angular"
 [AioGuideGlossaryM]: guide/glossary#module "M - Glossary | Angular"
 [AioGuideGlossaryModule]: guide/glossary#module "module - Glossary | Angular"
+[AioGuideGlossaryN]: guide/glossary#ngmodule "N - Glossary | Angular"
 [AioGuideGlossaryNgmodule]: guide/glossary#ngmodule "NgModule - Glossary | Angular"
 [AioGuideGlossaryNpmPackage]: guide/glossary#npm-package "npm package - Glossary | Angular"
 [AioGuideGlossaryO]: guide/glossary#observable "O - Glossary | Angular"

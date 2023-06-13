@@ -342,3 +342,42 @@ class DateModalComponent {
 Angular がスタンドアロンコンポーネントを作成するとき、現在のインジェクターが、 NgModules に基づくものを含む、スタンドアロンコンポーネントの依存関係に必要なすべてのサービスを持っていることを知る必要があります。それを保証するために、場合によっては、 Angular は現在の環境インジェクターの子として新しい「スタンドアロンインジェクター」を作成します。現在、これはブートストラップされたすべてのスタンドアロンコンポーネントで発生します。それはルートの環境インジェクターの子になるでしょう。動的に作成された (たとえば、ルーターまたは `ViewContainerRef` API によって) スタンドアロンコンポーネントにも同じ規則が適用されます。
 
 スタンドアロンインジェクターは、スタンドアロンコンポーネントによってインポートされたプロバイダーがアプリケーションの残りの部分から「分離」されることを保証するために作成されます。これにより、スタンドアロンコンポーネントは、実装の詳細をアプリケーションの残りの部分に「漏らす」ことができない、真に自己完結した部分であると考えることができます。
+
+#### Resolve circular dependencies with a forward class reference
+
+The order of class declaration matters in TypeScript. You can't refer directly to a class until it's been defined.
+
+This isn't usually a problem but sometimes circular references are unavoidable. For example, when class 'A' refers to class 'B' and 'B' refers to 'A'. One of them has to be defined first.
+
+The Angular `forwardRef()` function creates an indirect reference that Angular can resolve later. 
+
+For example, this situation happens when a standalone parent component imports a standalone child component and vice-versa. You can resolve this circular dependency issue by using the `forwardRef` function.
+
+```ts
+@Component({
+  standalone: true, 
+  imports: [ChildComponent],
+  selector: 'app-parent',
+  template: `<app-child [hideParent]="hideParent"></app-child>`,
+})
+export class ParentComponent {
+  @Input() hideParent: boolean;
+}
+
+
+@Component({
+  standalone: true,
+  imports: [CommonModule, forwardRef(() => ParentComponent)],
+  selector: 'app-child',
+  template: `<app-parent *ngIf="!hideParent"></app-parent>`,
+})
+export class ChildComponent {
+  @Input() hideParent: boolean;
+}
+```
+
+<div class="alert is-important">
+
+This kind of imports may result in an infinite recursion during component instantiation. Make sure that this recursion has an exit condition that stops it at some point.
+
+</div>

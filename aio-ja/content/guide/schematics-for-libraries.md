@@ -14,12 +14,9 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 次の手順は、プロジェクトファイルを変更せずに初期サポートを追加する方法を示しています。
 
 1. ライブラリのルートフォルダーに、`schematics/` フォルダーを作成します。
-
-2. `schematics/` フォルダーに、最初の Schematic 用の `ng-add/` フォルダーを作成します。
-
-3. `schematics/` フォルダーのルートレベルで、`collection.json` ファイルを作成します。
-
-4. `collection.json` ファイルを編集して、コレクションの初期スキーマを定義します。
+1. `schematics/` フォルダーに、最初の Schematic 用の `ng-add/` フォルダーを作成します。
+1. `schematics/` フォルダーのルートレベルで、`collection.json` ファイルを作成します。
+1. `collection.json` ファイルを編集して、コレクションの初期スキーマを定義します。
 
 <code-example header="projects/my-lib/schematics/collection.json (Schematics Collection)" path="schematics-for-libraries/projects/my-lib/schematics/collection.1.json">
 </code-example>
@@ -31,8 +28,7 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 1. ライブラリプロジェクトの `package.json` ファイルに、スキーマファイルへのパスを含む "schematics" エントリを追加します。
    Angular CLI はこのエントリを使用して、コマンドを実行するときにコレクション内の名前付き Schematics を検索します。
 
-<code-example header="projects/my-lib/package.json (Schematics Collection Reference)" path="schematics-for-libraries/projects/my-lib/package.json" region="collection">
-</code-example>
+<code-example header="projects/my-lib/package.json (Schematics Collection Reference)" path="schematics-for-libraries/projects/my-lib/package.json" region="collection"></code-example>
 
 作成した最初のスキーマは、`ng add` コマンドをサポートする Schematic の場所を CLI に通知します。
 これで、その Schematic を作成する準備が整いました。
@@ -43,19 +39,12 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 次の手順では、このタイプの Schematic を定義します。
 
 1. `<lib-root>/schematics/ng-add/` フォルダーに移動します。
+1. メインファイル `index.ts` を作成します。
+1. `index.ts` を開き、Schematic ファクトリ関数のソースコードを追加します。
 
-2. メインファイル `index.ts` を作成します。
+<code-example header="projects/my-lib/schematics/ng-add/index.ts (ng-add Rule Factory)" path="schematics-for-libraries/projects/my-lib/schematics/ng-add/index.ts"></code-example>
 
-3. `index.ts` を開き、Schematic ファクトリ関数のソースコードを追加します。
-
-<code-example header="projects/my-lib/schematics/ng-add/index.ts (ng-add Rule Factory)" path="schematics-for-libraries/projects/my-lib/schematics/ng-add/index.ts">
-</code-example>
-
-最初の `ng add` サポートを提供するために必要な唯一の手順は、`SchematicContext` を使用してインストールタスクをトリガーすることです。
-タスクは、ユーザーの優先パッケージマネージャーを使用して、ライブラリをプロジェクトの `package.json` 設定ファイルに追加し、それをプロジェクトの `node_modules` ディレクトリにインストールします。
-
-この例では、関数は現在の `Tree` を受け取り、変更せずにそれを返します。
-必要に応じて、パッケージのインストール時に、ファイルの生成、設定の更新、またはライブラリに必要なその他の初期設定などの追加設定を行うことができます。
+The Angular CLI will install the latest version of the library automatically, and this example is taking it a step further by adding the `MyLibModule` to the root of the application. The `addRootImport` function accepts a callback that needs to return a code block. You can write any code inside of the string tagged with the `code` function and any external symbol have to be wrapped with the `external` function to ensure that the appropriate import statements are generated.
 
 ### Define dependency type
 

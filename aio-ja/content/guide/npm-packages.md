@@ -29,8 +29,10 @@ CLIコマンドの `ng new` は新しいワークスペースを作成すると�
 
 `package.json` は2つのグループのパッケージで構成されています。
 
-* [Dependencies](guide/npm-packages#dependencies) はアプリケーションを*実行するため*に不可欠です。
-* [DevDependencies](guide/npm-packages#dev-dependencies) はアプリケーションを*開発するため* だけに必要です。
+| Packages                                               | Details |
+|:---                                                    |:---     |
+| [Dependencies](guide/npm-packages#dependencies)        | Essential to *running* applications.      |
+| [DevDependencies](guide/npm-packages#dev-dependencies) | Only necessary to *develop* and *build* applications. |
 
 <div class="alert is-helpful">
 

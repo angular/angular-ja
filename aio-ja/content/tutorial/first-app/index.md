@@ -77,7 +77,7 @@ Angular は Node のアクティブ LTS 版またはメンテナンス LTS 版�
 
 ### ステップ 3 - Angular の最新版をインストール
 
-`node.js` と `npm` がインストールされたら、次は Angular を効果的に開発するためのツールを提供する[Angular CLI](https://angular.io/cli)をインストールします。
+`node.js` と `npm` がインストールされたら、次は Angular を効果的に開発するためのツールを提供する[Angular CLI](/cli)をインストールします。
 
 **ターミナル**ウィンドウから:
 
@@ -103,5 +103,5 @@ Angular アプリケーションの構築には好みのツールを自由にお
 
 このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
-* [What is Angular](https://angular.io/guide/what-is-angular)
-* [Angular CLI Reference](https://angular.io/cli)
+* [What is Angular](/guide/what-is-angular)
+* [Angular CLI Reference](/cli)

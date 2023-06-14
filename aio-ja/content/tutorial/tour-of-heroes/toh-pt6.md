@@ -51,16 +51,6 @@ npm install angular-in-memory-web-api --save
 
 </code-example>
 
-`AppModule` で、`HttpClientInMemoryWebApiModule`と、次に作成する`InMemoryDataService`クラスをインポートします
-
-<code-example header="src/app/app.module.ts (In-memory Web API imports)" path="toh-pt6/src/app/app.module.ts" region="import-in-mem-stuff"></code-example>
-
-`HttpClientModule`の後に、`HttpClientInMemoryWebApiModule`を `AppModule`の`imports`配列に追加し、 `InMemoryDataService`を使って設定します。
-
-<code-example header="src/app/app.module.ts (imports array excerpt)" path="toh-pt6/src/app/app.module.ts" region="in-mem-web-api-imports"></code-example>
-
-`forRoot()` 設定メソッドは、インメモリデータベースを準備する `InMemoryDataService`クラスを取ります。
-
 次のコマンドで `src/app/in-memory-data.service.ts` クラスを生成します:
 
 <code-example format="shell" language="shell">
@@ -72,6 +62,16 @@ ng generate service InMemoryData
 `in-memory-data.service.ts`のデフォルトの内容を次のものに置き換えます:
 
 <code-example header="src/app/in-memory-data.service.ts" path="toh-pt6/src/app/in-memory-data.service.ts" region="init"></code-example>
+
+`AppModule` で、`HttpClientInMemoryWebApiModule`と、次に作成する`InMemoryDataService`クラスをインポートします
+
+<code-example header="src/app/app.module.ts (In-memory Web API imports)" path="toh-pt6/src/app/app.module.ts" region="import-in-mem-stuff"></code-example>
+
+`HttpClientModule`の後に、`HttpClientInMemoryWebApiModule`を `AppModule`の`imports`配列に追加し、 `InMemoryDataService`を使って設定します。
+
+<code-example header="src/app/app.module.ts (imports array excerpt)" path="toh-pt6/src/app/app.module.ts" region="in-mem-web-api-imports"></code-example>
+
+`forRoot()` 設定メソッドは、インメモリデータベースを準備する `InMemoryDataService`クラスを取ります。
 
 `in-memory-data.service.ts`ファイルは` mock-heroes.ts`の機能を引き継ぎます。
 ただし、このチュートリアルのいくつかのステップで必要になるため、まだ `mock-heroes.ts`を削除しないでください。
@@ -179,7 +179,7 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 
 ### `Observable`に侵入
 
-`getHero()` メソッドはObservableな値の流れに入り込んで、`log()`メソッドを通してページ下部にメッセージを送信します。
+`getHeroes()` メソッドはObservableな値の流れに入り込んで、`log()`メソッドを通してページ下部にメッセージを送信します。
 
 これはRxJSの`tap()`オペレーターを使って行います。これはObservableな値を見て、その値に何か処理を行い、それらを渡します。
 `tap()`コールバックは、値そのものには触れません。

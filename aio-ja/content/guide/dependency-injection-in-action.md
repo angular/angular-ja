@@ -23,7 +23,7 @@ See the <live-example></live-example> for a working example containing the code 
 
 次の例では、 `HeroBiosComponent` は3つの `HeroBioComponent` インスタンスを持ちます。
 
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="simple" header="ap/hero-bios.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="simple" header="hero-bios.component.ts">
 
 </code-example>
 
@@ -105,7 +105,7 @@ Angularがクラスをインスタンス化する必要があるとき、DIフ�
 
 テンプレートに注目してください:
 
-<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="template" header="dependency-injection-in-action/src/app/hero-bios.component.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/hero-bios.component.ts" region="template" header="src/app/hero-bios.component.ts"></code-example>
 
 `<hero-bio>` タグの間に新しい `<hero-contact>` 要素が追加されました。
 Angularは、`HeroBioComponent` ビュー内に対応する `HeroContactComponent` を *投影* または *トランスクルード* して、
@@ -256,7 +256,7 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 
 次の `HeroOfTheMonthComponent` の例は、2つの値プロバイダーを持ちます。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-value" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-value" header="src/app/hero-of-the-month.component.ts"></code-example>
 
 * 1つ目は、 `new` を使用して新しく `Hero` クラスのインスタンスを作成したり、自身のキャッシュされたインスタンスを使用するのではなく、
 `Hero` トークンで使用するための既存の `Hero` クラスのインスタンスを提供します。
@@ -275,7 +275,7 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 この例の `someHero` 変数は、次のようにファイルの前の方で設定されています。
 後の方で定義される変数は使用できません。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="some-hero" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="some-hero" header="src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
@@ -295,7 +295,7 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 
 次のコードで、 `HeroOfTheMonthComponent` の2つの例を説明します。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-class" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-class" header="src/app/hero-of-the-month.component.ts"></code-example>
 
 1つ目のプロバイダーは、
 もっとも一般的なケースであるDIトークンで作成されるクラス(`HeroService`)を展開した形式、つまり *デシュガー* したものです。
@@ -324,7 +324,7 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 実際には、1つ目のトークンは2つ目のトークンに関連付けられているサービスの
 *エイリアス* であり、同じサービスオブジェクトにアクセスする2つの方法を作成していることになります。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" header="src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
@@ -369,7 +369,7 @@ Webサイトのベースアドレスや機能のフラグなどの *実行時設
 次の例のように、 `useFactory`
 プロバイダーキーを使用すると、ファクトリー関数を呼び出して依存オブジェクトを作成できます。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-factory" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-factory" header="src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
@@ -430,13 +430,13 @@ Angularの依存性の注入を使用するのがもっとも簡単です。
 前の *Hero of the Month* の例では、 `MinimalLogger` クラスを `LoggerService`
 のプロバイダートークンとして使用していました。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts">
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="use-existing" header="src/app/hero-of-the-month.component.ts">
 
 </code-example>
 
 `MinimalLogger` は抽象クラスです。
 
-<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" header="dependency-injection-in-action/src/app/minimal-logger.service.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" header="src/app/minimal-logger.service.ts"></code-example>
 
 抽象クラスは通常、拡張できるベースクラスです。
 しかし、このアプリケーションでは、 `MinimalLogger` を継承するクラスはありません。
@@ -462,7 +462,7 @@ Angularの依存性の注入を使用するのがもっとも簡単です。
 ただし、メモリコストを最小限に抑えるために、このクラスは　*実装を持つべきではありません* 。
 `MinimalLogger` は次のような、最適化されていない、事前にミニファイされたコンストラクター関数のJavaScriptに変換されます。
 
-<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" region="minimal-logger-transpiled" header="dependency-injection-in-action/src/app/minimal-logger.service.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/minimal-logger.service.ts" region="minimal-logger-transpiled" header="src/app/minimal-logger.service.ts"></code-example>
 
 クラスにメンバーがないことに注目してください。
 追加したメンバーの数に関係なく、それらが実装されていない限りクラスが肥大することはありません。
@@ -489,11 +489,11 @@ TypeScriptの `MinimalLogger` クラスをもう一度見て、実装がない�
 *Hero of the Month* の例、*title* の値プロバイダー、および
 *runnersUp* ファクトリープロバイダーで2回それらに遭遇しました。
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="provide-injection-token" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="provide-injection-token" header="src/app/hero-of-the-month.component.ts"></code-example>
 
 `TITLE` トークンは次のように作られました:
 
-<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="injection-token" header="dependency-injection-in-action/src/app/hero-of-the-month.component.ts"></code-example>
+<code-example path="dependency-injection-in-action/src/app/hero-of-the-month.component.ts" region="injection-token" header="src/app/hero-of-the-month.component.ts"></code-example>
 
 型パラメータはオプショナルですが、依存する型を開発者やツールに伝えます。
 トークンの説明はもう1つの開発者向けの補助です。
@@ -584,3 +584,11 @@ Angularの `forwardRef()` 関数は、Angularが遅延して解決できる *間
 `forwardRef` で循環参照を解消しましょう。
 
 <code-example path="dependency-injection-in-action/src/app/parent-finder.component.ts" region="alex-providers" header="parent-finder.component.ts (AlexComponent providers)"></code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

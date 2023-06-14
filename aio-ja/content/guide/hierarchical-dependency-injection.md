@@ -12,7 +12,7 @@ This topic uses the following pictographs.
 |:---         |:--- |
 | <code>&#x1F33A;</code> | red hibiscus \(`🌺`\)  |
 | <code>&#x1F33B;</code> | sunflower \(`🌻`\)     |
-| <code>&#x1F33C;</code> | yellow flower \(`🌼`\) |
+| <code>&#x1F337;</code> | tulip \(`🌷`\)         |
 | <code>&#x1F33F;</code> | fern \(`🌿`\)          |
 | <code>&#x1F341;</code> | maple leaf \(`🍁`\)    |
 | <code>&#x1F433;</code> | whale \(`🐳`\)         |
@@ -283,7 +283,7 @@ Angularは注入するサービスをオプショナルと見なすことがで�
 `@NgModule()`、またはコンポーネントクラスで提供されていないため、
 アプリケーションのどこからも利用できません。
 
-<code-example path="resolution-modifiers/src/app/optional/optional.component.ts" header="resolution-modifiers/src/app/optional/optional.component.ts" region="optional-component">
+<code-example path="resolution-modifiers/src/app/optional/optional.component.ts" header="src/app/optional/optional.component.ts" region="optional-component">
 
 </code-example>
 
@@ -300,7 +300,7 @@ Angularは注入するサービスをオプショナルと見なすことがで�
 コンストラクターに注入された
 `LeafService`に注目してください。
 
-<code-example path="resolution-modifiers/src/app/self-no-data/self-no-data.component.ts" header="resolution-modifiers/src/app/self-no-data/self-no-data.component.ts" region="self-no-data-component">
+<code-example path="resolution-modifiers/src/app/self-no-data/self-no-data.component.ts" header="src/app/self-no-data/self-no-data.component.ts" region="self-no-data-component">
 
 </code-example>
 
@@ -311,11 +311,10 @@ Angularは注入するサービスをオプショナルと見なすことがで�
 `null`を返します。
 
 もう1つの例、`FlowerService`のプロバイダーをもつコンポーネントクラスを見てみます。
-この場合インジェクターは、`FlowerService`を見つけて黄色の花🌼を返すため、
-現在の`ElementInjector`よりも先を探しません。
+この場合インジェクターは、`FlowerService`を見つけてチューリップ <code>&#x1F337;</code>を返すため、現在の`ElementInjector`よりも先を探しません。
 
 
-<code-example path="resolution-modifiers/src/app/self/self.component.ts" header="resolution-modifiers/src/app/self/self.component.ts" region="self-component">
+<code-example path="resolution-modifiers/src/app/self/self.component.ts" header="src/app/self/self.component.ts" region="self-component">
 
 </code-example>
 
@@ -329,13 +328,13 @@ Angularは`🍁`(カエデの葉)を無視して`🌿`(シダ)を使用します
 
 これをコードで確認するために、次のような`emoji`の値のサービスを親コンポーネントが使用していたものと想定します:
 
-<code-example path="resolution-modifiers/src/app/leaf.service.ts" header="resolution-modifiers/src/app/leaf.service.ts" region="leafservice">
+<code-example path="resolution-modifiers/src/app/leaf.service.ts" header="src/app/leaf.service.ts" region="leafservice">
 
 </code-example>
 
 子コンポーネントで別の値`🍁`(カエデの葉)を持っているが、代わりに親の値を使用したいとします。`@SkipSelf()`を使用するときです:
 
-<code-example path="resolution-modifiers/src/app/skipself/skipself.component.ts" header="resolution-modifiers/src/app/skipself/skipself.component.ts" region="skipself-component">
+<code-example path="resolution-modifiers/src/app/skipself/skipself.component.ts" header="src/app/skipself/skipself.component.ts" region="skipself-component">
 
 </code-example>
 
@@ -355,15 +354,14 @@ class Person {
 
 `@Host()`を使用すると、プロバイダーを検索するときに、コンポーネントをインジェクターツリーの終点として指定できます。ツリーのさらに上にサービスインスタンスがあっても、Angularは検索を続行しません。`@Host()`の使用例は次のようになります:
 
-<code-example path="resolution-modifiers/src/app/host/host.component.ts" header="resolution-modifiers/src/app/host/host.component.ts" region="host-component">
+<code-example path="resolution-modifiers/src/app/host/host.component.ts" header="src/app/host/host.component.ts" region="host-component">
 
 </code-example>
 
 
 `HostComponent`のコンストラクターに`@Host()`があるため、
 `HostComponent`の親が`flower.emoji`値として何を持っているかに関係なく、
-`HostComponent`は
-`🌼`(黄色の花)を使用します。
+`HostComponent`はチューリップ<code>&#x1F337;</code>を使用します。
 
 
 ## テンプレートの論理構造
@@ -470,7 +468,7 @@ Angularのテンプレートの根本的な論理構造を理解すると、
 サンプルアプリケーションでは、`🌺`(赤いハイビスカス)
 が値の`emoji`をもつ`FlowerService`が`root`で提供されます。
 
-<code-example path="providers-viewproviders/src/app/flower.service.ts" header="providers-viewproviders/src/app/flower.service.ts" region="flowerservice">
+<code-example path="providers-viewproviders/src/app/flower.service.ts" header="src/app/flower.service.ts" region="flowerservice">
 
 </code-example>
 
@@ -508,13 +506,13 @@ Angularは注入のリクエストを解決するときに次のように論理�
 ここで、`<app-root>`が単に`FlowerService`を注入することを考えてください:
 
 
-<code-example path="providers-viewproviders/src/app/app.component.1.ts" header="providers-viewproviders/src/app/app.component.ts" region="injection">
+<code-example path="providers-viewproviders/src/app/app.component.1.ts" header="src/app/app.component.ts" region="injection">
 
 </code-example>
 
 `<app-root>`テンプレートにバインディングを追加して、結果を表示します:
 
-<code-example path="providers-viewproviders/src/app/app.component.html" header="providers-viewproviders/src/app/app.component.html" region="binding-flower">
+<code-example path="providers-viewproviders/src/app/app.component.html" header="src/app/app.component.html" region="binding-flower">
 
 </code-example>
 
@@ -571,7 +569,7 @@ Emoji from FlowerService: 🌺
 次に、`ChildComponent`クラス内で、
 今後のセクションでより複雑な解決ルールを説明するために`FlowerService`のプロバイダーを追加します:
 
-<code-example path="providers-viewproviders/src/app/child/child.component.1.ts" header="providers-viewproviders/src/app/child.component.ts" region="flowerservice">
+<code-example path="providers-viewproviders/src/app/child/child.component.1.ts" header="src/app/child.component.ts" region="flowerservice">
 
 </code-example>
 
@@ -582,7 +580,7 @@ Emoji from FlowerService: 🌺
 
 次のステップでは、`ChildComponent`テンプレートにバインディングを追加します。
 
-<code-example path="providers-viewproviders/src/app/child/child.component.html" header="providers-viewproviders/src/app/child.component.html" region="flower-binding">
+<code-example path="providers-viewproviders/src/app/child/child.component.html" header="src/app/child.component.html" region="flower-binding">
 
 </code-example>
 
@@ -645,7 +643,7 @@ Emoji from FlowerService: 🌻
 
 最初に、クジラの`emoji`🐳プロパティをもつ`AnimalService`を作成します :
 
-<code-example path="providers-viewproviders/src/app/animal.service.ts" header="providers-viewproviders/src/app/animal.service.ts" region="animal-service">
+<code-example path="providers-viewproviders/src/app/animal.service.ts" header="src/app/animal.service.ts" region="animal-service">
 
 </code-example>
 
@@ -653,7 +651,7 @@ Emoji from FlowerService: 🌻
 `FlowerService`と同じパターンにしたがって、
 `AppComponent`クラスに`AnimalService`を注入します:
 
-<code-example path="providers-viewproviders/src/app/app.component.ts" header="providers-viewproviders/src/app/app.component.ts" region="inject-animal-service">
+<code-example path="providers-viewproviders/src/app/app.component.ts" header="src/app/app.component.ts" region="inject-animal-service">
 
 </code-example>
 
@@ -669,20 +667,20 @@ Emoji from FlowerService: 🌻
 ここでは、値は🐶(子犬)です。
 
 
-<code-example path="providers-viewproviders/src/app/child/child.component.ts" header="providers-viewproviders/src/app/child.component.ts" region="provide-animal-service">
+<code-example path="providers-viewproviders/src/app/child/child.component.ts" header="src/app/child.component.ts" region="provide-animal-service">
 
 </code-example>
 
 `ChildComponent`および`AppComponent`テンプレートにバインディングを追加します。
 `ChildComponent`テンプレートで、次のバインディングを追加します:
 
-<code-example path="providers-viewproviders/src/app/child/child.component.html" header="providers-viewproviders/src/app/child.component.html" region="animal-binding">
+<code-example path="providers-viewproviders/src/app/child/child.component.html" header="src/app/child.component.html" region="animal-binding">
 
 </code-example>
 
 さらに、同じものを`AppComponent`テンプレートに追加します:
 
-<code-example path="providers-viewproviders/src/app/app.component.html" header="providers-viewproviders/src/app/app.component.html" region="binding-animal">
+<code-example path="providers-viewproviders/src/app/app.component.html" header="src/app/app.component.html" region="binding-animal">
 
 </code-example>
 
@@ -731,27 +729,27 @@ Emoji from AnimalService: 🐶
 `FlowerService`と`AnimalService`を注入します。
 
 
-<code-example path="providers-viewproviders/src/app/inspector/inspector.component.ts" header="providers-viewproviders/src/app/inspector/inspector.component.ts" region="injection">
+<code-example path="providers-viewproviders/src/app/inspector/inspector.component.ts" header="src/app/inspector/inspector.component.ts" region="injection">
 
 </code-example>
 
 `providers`または`viewProviders`配列は必要ありません。
  次に、`inspector.component.html`で、さきほどのコンポーネントから同じマークアップを追加します
 
-<code-example path="providers-viewproviders/src/app/inspector/inspector.component.html" header="providers-viewproviders/src/app/inspector/inspector.component.html" region="binding">
+<code-example path="providers-viewproviders/src/app/inspector/inspector.component.html" header="src/app/inspector/inspector.component.html" region="binding">
 
 </code-example>
 
 `InspectorComponent`を`AppModule`の`declarations`配列に忘れずに追加してください。
 
-<code-example path="providers-viewproviders/src/app/app.module.ts" header="providers-viewproviders/src/app/app.module.ts" region="appmodule">
+<code-example path="providers-viewproviders/src/app/app.module.ts" header="src/app/app.module.ts" region="appmodule">
 
 </code-example>
 
 
 次に、`child.component.html`に次のものが含まれていることを確認します:
 
-<code-example path="providers-viewproviders/src/app/child/child.component.html" header="providers-viewproviders/src/app/child/child.component.html" region="child-component">
+<code-example path="providers-viewproviders/src/app/child/child.component.html" header="src/app/child/child.component.html" region="child-component">
 
 </code-example>
 
@@ -763,7 +761,7 @@ Emoji from AnimalService: 🐶
 
 次に、コンテンツの投影を利用するために`app.component.html`に次のものを追加します。
 
-<code-example path="providers-viewproviders/src/app/app.component.html" header="providers-viewproviders/src/app/app.component.html" region="content-projection">
+<code-example path="providers-viewproviders/src/app/app.component.html" header="src/app/app.component.html" region="content-projection">
 
 </code-example>
 

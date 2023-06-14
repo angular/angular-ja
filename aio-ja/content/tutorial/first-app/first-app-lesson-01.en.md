@@ -22,7 +22,7 @@ If you have any trouble during this lesson, you can review the completed code fo
 
 ## Lesson steps
 
-Perform these steps on the app code in your chosen IDE (locallly or using the StackBlitz).
+Perform these steps on the app code in your chosen IDE (locally or using the StackBlitz).
 
 ### Step 1 - Test the default app
 
@@ -117,7 +117,7 @@ In your IDE:
 </section>
 ## Lesson review
 
-In this lesson, you updated a default Angualar app to display *Hello world*.
+In this lesson, you updated a default Angular app to display *Hello world*.
 In the process, you learned about the `ng serve` command to serve your app locally for testing.
 
 If have any trouble with this lesson, review the completed code for it in the <live-example></live-example>.
@@ -130,5 +130,5 @@ If have any trouble with this lesson, review the completed code for it in the <l
 
 For more information about the topics covered in this lesson, visit:
 
-* [Angular Components](https://angular.io/guide/component-overview)
-* [Creating applications with the Angular CLI](https://angular.io/cli)
+* [Angular Components](/guide/component-overview)
+* [Creating applications with the Angular CLI](/cli)

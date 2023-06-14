@@ -1,6 +1,6 @@
 # First Angular app lesson 2 - Create Home component
 
-This tutorial lesson demonstrates how to create a new [component](https://angular.io/guide/component-overview) for your Angular app.
+This tutorial lesson demonstrates how to create a new [component](/guide/component-overview) for your Angular app.
 
 **Time required:** expect to spend about 10 minutes to complete this lesson.
 
@@ -40,7 +40,7 @@ When you create your `HomeComponent`, you use these properties:
 *   `template`: to describe the component's HTML markup and layout.
 *   `styleUrls`: to list the URLs of the CSS files that the component users in an array.
 
-Components have other [properties](https://angular.io/api/core/Component), but these are the ones used by `HomeComponent`.
+Components have other [properties](/api/core/Component), but these are the ones used by `HomeComponent`.
 
 ## Lesson steps
 
@@ -114,7 +114,7 @@ Note that, this step just adds the search elements to the layout without any fun
 In the **Edit** pane of your IDE:
 
 1.  In the `first-app` directory, open `home.component.ts` in the editor.
-1.  In `app.component.ts`, in `@Component`, update the `template` property with this code.
+1.  In `home.component.ts`, in `@Component`, update the `template` property with this code.
 
     <code-example header="Replace in src/app/home/home.component.ts" path="first-app-lesson-02/src/app/home/home.component.ts" region="home-template"></code-example>
 

@@ -1,91 +1,91 @@
 # Angular Signals
 
-**Angular Signals** is a system that granularly tracks how and where your state is used throughout an application, allowing the framework to optimize
-rendering updates.
+**Angular Signals**は、アプリケーションのどこでどのように状態が使用されているかを細かく追跡するシステムで、
+フレームワークがレンダリングの更新を最適化できるようにします。
 
 <div class="alert is-important">
 
-Angular signals are available for [developer preview](/guide/releases#developer-preview). They're ready for you to try, but may change before they are stable.
+Angular Signals は[開発者向けプレビュー](/guide/releases#developer-preview)で利用できます。試すことはできますが、安定版になる前に変更される可能性があります。
 
 </div>
 
-## What are signals?
+## Signal とは何か？
 
-A **signal** is a wrapper around a value that can notify interested consumers when that value changes. Signals can contain any value, from simple primitives to complex data structures.
+**Signal** は、値が変化したときに関心をもつ利用者に対して通知できる、値のラッパーです。
 
-A signal's value is always read through a getter function, which allows Angular to track where the signal is used.
+Signalの値は常にgetter関数を通して読み取られるため、AngularはSignalがどこで使用されたかを追跡できます。
 
-Signals may be either _writable_ or _read-only_.
+Signalは、_書き込み可能_または_読み取り専用_のいずれかになります。
 
-### Writable signals
+### 書き込み可能Signal
 
-Writable signals provide an API for updating their values directly. You create writable signals by calling the `signal` function with the signal's initial value:
+書き込み可能Signalは、その値を直接更新するためのAPIを提供します。書き込み可能Signalを作成するには、初期値を指定して `signal` 関数を呼び出します：
 
 ```ts
 const count = signal(0);
 
-// Signals are getter functions - calling them reads their value.
+// Signalはgetter関数で、これを呼び出すと値が読み取られます。
 console.log('The count is: ' + count());
 ```
 
-To change the value of a writable signal, you can either `.set()` it directly:
+直接 `.set()` することで、書き込み可能Signalの値を変更できます。
 
 ```ts
 count.set(3);
 ```
 
-or use the `.update()` operation to compute a new value from the previous one:
+あるいは、`.update()` 使用して、前の値から新しい値を計算します。
 
 ```ts
-// Increment the count by 1.
+// カウントを1だけ増加させます。
 count.update(value => value + 1);
 ```
 
-When working with signals that contain objects, it's sometimes useful to mutate that object directly. For example, if the object is an array, you may want to push a new value without replacing the array entirely. To make an internal change like this, use the `.mutate` method:
+オブジェクトを含むSignalを扱う場合、そのオブジェクトを直接変更するのが便利な場合があります。このような変更を内部で行うには、`.mutate`メソッドを使用します：
 
 ```ts
 const todos = signal([{title: 'Learn signals', done: false}]);
 
 todos.mutate(value => {
-  // Change the first TODO in the array to 'done: true' without replacing it.
+  // 配列の最初のTODOを置換せずに'done: true'に変更します。
   value[0].done = true;
 });
 ```
 
-Writable signals have the type `WritableSignal`.
+書き込み可能Signalは `WritableSignal` という型を持っています。
 
-### Computed signals
+### 算出Signal
 
-A **computed signal** derives its value from other signals. Define one using `computed` and specifying a derivation function:
+**算出Signal**は、他のSignalから派生する値を持ちます。`computed` を使用して、生成関数を指定して定義します。
 
 ```typescript
 const count: WritableSignal<number> = signal(0);
 const doubleCount: Signal<number> = computed(() => count() * 2);
 ```
 
-The `doubleCount` signal depends on `count`. Whenever `count` updates, Angular knows that anything which depends on either `count` or `doubleCount` needs to update as well.
+`doubleCount` Signalは `count` に依存します。`count` が更新されるたびに、Angular は `count` と `doubleCount` のいずれかに依存するものも更新する必要があることを知ります。
 
-#### Computeds are both lazily evaluated and memoized
+#### 算出Signalは遅延評価とメモ化の両方を行う
 
-`doubleCount`'s derivation function does not run to calculate its value until the first time `doubleCount` is read. Once calculated, this value is cached, and future reads of `doubleCount` will return the cached value without recalculating.
+`doubleCount`の生成関数は、`doubleCount`がはじめて読み取られるまで実行されません。計算されたらこの値はキャッシュされ、その後の`doubleCount`の読み取りは、再計算せずにキャッシュされた値を返します。
 
-When `count` changes, it tells `doubleCount` that its cached value is no longer valid, and the value is only recalculated on the next read of `doubleCount`.
+`count`が変更されると、`doubleCount`にキャッシュされた値が無効であることを伝え、`doubleCount`の次の読み取り時に値が再計算されます。
 
-As a result, it's safe to perform computationally expensive derivations in computed signals, such as filtering arrays.
+結果として、配列のフィルタリングなど、計算コストの高い処理を算出Signalで安全に実行できます。
 
-#### Computed signals are not writable signals
+#### 算出Signalは書き込み可能Signalではない
 
-You cannot directly assign values to a computed signal. That is,
+算出Signalに値を直接割り当てることはできません。
 
 ```ts
 doubleCount.set(3);
 ```
 
-produces a compilation error, because `doubleCount` is not a `WritableSignal`.
+これは、`doubleCount`が `WritableSignal` ではないため、コンパイルエラーになります。
 
-#### Computed signal dependencies are dynamic
+#### 算出Signalの依存関係は動的である
 
-Only the signals actually read during the derivation are tracked. For example, in this computed the `count` signal is only read conditionally:
+算出時に実際に読み込まれたSignalのみが追跡されます。たとえば、この計算では `count` Signalは条件付きでしか読み込まれていません:
 
 ```ts
 const showCount = signal(false);
@@ -99,19 +99,19 @@ const conditionalCount = computed(() => {
 });
 ```
 
-When reading `conditionalCount`, if `showCount` is `false` the "Nothing to see here!" message is returned _without_ reading the `count` signal. This means that updates to `count` will not result in a recomputation.
+`conditionalCount`を読み込む際、`showCount`が`false`の場合、`count`シグナルを読み込まずに "Nothing to see here!"というメッセージを返します。つまり、`count`を更新しても再計算されることはありません。
 
-If `showCount` is later set to `true` and `conditionalCount` is read again, the derivation will re-execute and take the branch where `showCount` is `true`, returning the message which shows the value of `count`. Changes to `count` will then invalidate `conditionalCount`'s cached value.
+その後 `showCount` を `true` に設定して `conditionalCount` を再度読み込むと算出処理は再実行され、 `showCount` が `true` である分岐をとり、`count` の値を示すメッセージを返します。`count`を変更すると、`conditionalCount`のキャッシュされた値は無効化されます。
 
-Note that dependencies can be removed as well as added. If `showCount` is later set to `false` again, then `count` will no longer be considered a dependency of `conditionalCount`.
+依存関係は追加だけでなく、削除も可能であることに注意してください。後に `showCount` が再び `false` に設定された場合、`count` はもはや `conditionalCount` の依存関係とみなされません。
 
-## Reading signals in `OnPush` components
+## `OnPush` コンポーネントでシグナルを読み取る
 
-When an `OnPush` component uses a signal's value in its template, Angular will track the signal as a dependency of that component. When that signal is updated, Angular automatically [marks](/api/core/ChangeDetectorRef#markforcheck) the component to ensure it gets updated the next time change detection runs. Refer to the [Skipping component subtrees](/guide/change-detection-skipping-subtrees) guide for more information about `OnPush` components.
+`OnPush`コンポーネントがテンプレートでSignalの値を使用すると、Angularはそのコンポーネントの依存関係としてSignalを追跡します。`OnPush`コンポーネントの詳細については、[Skipping component subtrees](/guide/change-detection-skipping-subtrees) ガイドを参照してください。
 
-## Effects
+## Effect
 
-Signals are useful because they can notify interested consumers when they change. An **effect** is an operation that runs whenever one or more signal values change. You can create an effect with the `effect` function:
+Signalが役立つのは、それが変化したときに関心のある利用者に対して通知できるためです。 **Effect** は、1つまたは複数のSignalの値が変化するたびに実行される操作です。`effect`関数で Effect を作成します:
 
 ```ts
 effect(() => {
@@ -119,28 +119,28 @@ effect(() => {
 });
 ```
 
-Effects always run **at least once.** When an effect runs, it tracks any signal value reads. Whenever any of these signal values change, the effect runs again. Similar to computed signals, effects keep track of their dependencies dynamically, and only track signals which were read in the most recent execution.
+Effectは**少なくとも1回は**必ず実行される。Effect が実行されると、読み取った任意の Signal の値を追跡します。これらのSignalの値が変化するたびに、Effectが再度実行されます。算出Signalと同様に、Effectは依存関係を動的に追跡し、直近の実行で読み込まれたSignalのみを追跡します。
 
-Effects always execute **asynchronously**, during the change detection process.
+Effectは常に**非同期的**に、変更検知のプロセス中に実行されます。
 
-### Uses for effects
+### Effectの用途
 
-Effects are rarely needed in most application code, but may be useful in specific circumstances. Here are some examples of situations where an `effect` might be a good solution:
+Effect は、大部分のアプリケーションコードではほとんど必要とされませんが、特定の状況下では役に立つことがあります。以下は、`effect`がよい解決策となるような状況の例です：
 
-* Logging data being displayed and when it changes, either for analytics or as a debugging tool
-* Keeping data in sync with `window.localStorage`
-* Adding custom DOM behavior that can't be expressed with template syntax
-* Performing custom rendering to a `<canvas>`, charting library, or other third party UI library
+* 表示されているデータと、それが変化したときのログを、解析やデバッグのために記録する。
+* `window.localStorage`とデータを同期させる。
+* テンプレート構文で表現できない独自の DOM の振る舞いを追加する。
+* `<canvas>`、チャートライブラリ、その他のサードパーティ製UIライブラリへのカスタムレンダリングを実行する。
 
-#### When not to use effects
+#### Effectを使用すべきでない状況
 
-Avoid using effects for propagation of state changes. This can result in `ExpressionChangedAfterItHasBeenChecked` errors, infinite circular updates, or unnecessary change detection cycles.
+状態変化の伝達に Effect を使用しないでください。その結果、`ExpressionChangedAfterItHasBeenChecked`エラー、無限の循環更新、または不必要な変更検知サイクルが発生することがあります。
 
-Because of these risks, setting signals is disallowed by default in effects, but can be enabled if absolutely necessary.
+このようなリスクがあるため、EffectではSignalの書き込みはデフォルトで禁止されていますが、どうしても必要な場合は有効にすることができます。
 
-### Injection context
+### インジェクションコンテキスト
 
-By default, registering a new effect with the `effect()` function requires an "injection context" (access to the `inject` function). The easiest way to provide this is to call `effect` within a component, directive, or service `constructor`:
+デフォルトでは、`effect()`関数で新しいエフェクトを登録するには、「インジェクションコンテキスト」（`inject`関数へのアクセス）が必要です。これを提供するもっとも簡単な方法は、コンポーネント、ディレクティブ、またはサービスの `constructor` の中で `effect` を呼び出すことです：
 
 ```ts
 @Component({...})
@@ -155,7 +155,7 @@ export class EffectiveCounterCmp {
 }
 ```
 
-Alternatively, the effect can be assigned to a field (which also gives it a descriptive name).
+また、Effectをフィールドに割り当てることもできます（この場合、Effectに説明的な名前を付けることもできます）。
 
 ```ts
 @Component({...})
@@ -168,7 +168,7 @@ export class EffectiveCounterCmp {
 }
 ```
 
-To create an effect outside of the constructor, you can pass an `Injector` to `effect` via its options:
+コンストラクターの外で Effect を作成するには、`Injector` をオプションで `effect` に渡します：
 
 ```ts
 @Component({...})
@@ -184,17 +184,17 @@ export class EffectiveCounterCmp {
 }
 ```
 
-### Destroying effects
+### Effect の破棄
 
-When you create an effect, it is automatically destroyed when its enclosing context is destroyed. This means that effects created within components are destroyed when the component is destroyed. The same goes for effects within directives, services, etc.
+Effect を作成すると、それを包含するコンテキストが破棄されたときに、自動的に破棄されます。つまり、コンポーネント内で作成されたEffectは、コンポーネントが破棄された時点で破棄されます。ディレクティブやサービスなどの中のEffectも同様です。
 
-Effects return an `EffectRef` that can be used to destroy them manually, via the `.destroy()` operation. This can also be combined with the `manualCleanup` option to create an effect that lasts until it is manually destroyed. Be careful to actually clean up such effects when they're no longer required.
+Effectは `EffectRef` を返し、それを使って `.destroy()` 操作によって手動でエフェクトを破棄することもできます。また、`manualCleanup`オプションと組み合わせることで、手動で破壊するまで持続するEffectを作成することもできます。このようなEffectが不要になった場合は、必ずクリーンアップするように注意してください。
 
-## Advanced topics
+## 高度なトピック
 
-### Signal equality functions
+### Signal の等価関数
 
-When creating a signal, you can optionally provide an equality function, which will be used to check whether the new value is actually different than the previous one.
+Signal を作成する際、オプションで等価関数を指定することができ、この関数は新しい値が前の値と実際に異なるかどうかをチェックするために使用されます。
 
 ```ts
 import _ from 'lodash';
@@ -207,15 +207,15 @@ const data = signal(['test'], {equal: _.isEqual});
 data.set(['test']);
 ```
 
-Equality functions can be provided to both writable and computed signals.
+書き込み可能Signal と算出Signalの両方に対して等価関数を設定できます。
 
-For writable signals, `.mutate()` does not check for equality because it mutates the current value without producing a new reference.
+書き込み可能Signalの場合、`.mutate()`は新しい参照を生成せずに現在の値を変更するため、等価性をチェックしません。
 
-### Reading without tracking dependencies
+### 依存関係を追跡せずに読み取る
 
-Rarely, you may want to execute code which may read signals in a reactive function such as `computed` or `effect` _without_ creating a dependency.
+まれに、`computed`や`effect`のようなリアクティブ関数でSignalを読み込むようなコードを、依存関係を作成せずに実行したいことがあります。
 
-For example, suppose that when `currentUser` changes, the value of a `counter` should be logged. Creating an `effect` which reads both signals:
+たとえば、`currentUser`が変化したときに、`counter`の値をログに記録する必要があるとします。両方のSignalを読み取る `effect` を作成します:
 
 ```ts
 effect(() => {
@@ -223,9 +223,9 @@ effect(() => {
 });
 ```
 
-This example logs a message when _either_ `currentUser` or `counter` changes. However, if the effect should only run when `currentUser` changes, then the read of `counter` is only incidental and changes to `counter` shouldn't log a new message.
+この例では、`currentUser`または`counter`のどちらかが変更されたときにメッセージをログに記録します。しかし、もし `currentUser` が変更されたときだけ実行されるのであれば、`counter` の読み取りは付随的なものに過ぎず、`counter` の変更によって新しいメッセージが記録されるべきではありません。
 
-You can prevent a signal read from being tracked by calling its getter with `untracked`:
+Signal の getter を `untracked` で呼び出すことで、読み込んだ Signal が追跡されないようにできます：
 
 ```ts
 effect(() => {
@@ -233,7 +233,7 @@ effect(() => {
 });
 ```
 
-`untracked` is also useful when an effect needs to invoke some external code which shouldn't be treated as a dependency:
+`untracked`は、Effectが依存関係として扱われるべきでない外部コードを呼び出す必要がある場合にも便利です：
 
 ```ts
 effect(() => {
@@ -246,9 +246,9 @@ effect(() => {
 });
 ```
 
-### Effect cleanup functions
+### Effectのクリーンアップ関数
 
-Effects might start long-running operations, which should be cancelled if the effect is destroyed or runs again before the first operation finished. When you create an effect, your function can optionally accept an `onCleanup` function as its first parameter. This `onCleanup` function lets you register a callback that is invoked before the next run of the effect begins, or when the effect is destroyed.
+Effect は長時間実行されるオペレーションを開始する可能性があり、最初のオペレーションが終了する前に Effect が破棄されたり、再度実行された場合にキャンセルされることがあります。Effect を作成するとき、その関数はオプションで `onCleanup` 関数を第一引数として受け取ることができます。この `onCleanup` 関数は、Effectの次の実行が始まる前、またはエフェクトが破棄されたときに呼び出されるコールバックを登録できます。
 
 ```ts
 effect((onCleanup) => {

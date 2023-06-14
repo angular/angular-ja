@@ -117,7 +117,7 @@ IDE で:
 </section>
 ## レッスンの復習
 
-このレッスンでは、デフォルトの Angualar アプリケーションを更新して _Hello world_ を表示させました。
+このレッスンでは、デフォルトの Angular アプリケーションを更新して _Hello world_ を表示させました。
 その過程で、テスト用のローカルアプリケーションをサーブするための `ng serve` コマンドについて学びました。
 
 このレッスンに問題がある場合は、 <live-example></live-example> の完成したコードを確認してください。
@@ -130,6 +130,6 @@ IDE で:
 
 このレッスンで扱うトピックの詳細については、こちらをご覧ください
 
-* [Angular Components](https://angular.jp/guide/component-overview)
-* [Creating applications with the Angular CLI](https://angular.io/cli)
+* [Angular Components](/guide/component-overview)
+* [Creating applications with the Angular CLI](/cli)
 

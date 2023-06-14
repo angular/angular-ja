@@ -2,7 +2,7 @@
 
 <div class="alert is-important">
 
-The RxJS Interop package is available for [developer preview](https://angular.io/guide/releases#developer-preview). It's ready for you to try, but it might change before it is stable.
+The RxJS Interop package is available for [developer preview](/guide/releases#developer-preview). It's ready for you to try, but it might change before it is stable.
 
 </div>
 
@@ -29,7 +29,7 @@ export class Ticker {
 ```
 
 Like the `async` pipe, `toSignal` subscribes to the Observable immediately, which may trigger side effects. The subscription created by
-`toSignal` automatically unsubscribes from the given Observable upon destruction of the the component in which `toSignal` is called.
+`toSignal` automatically unsubscribes from the given Observable upon destruction of the component in which `toSignal` is called.
 
 ### Initial values
 
@@ -92,7 +92,7 @@ As the `query` signal changes, the `query$` Observable emits the latest query an
 Unlike Observables, signals never provide a synchronous notification of changes. Even if your code updates a signal's value multiple times, effects which depend on its value run only after the signal has "settled".
 
 ```ts
-const obs = toObservable(mySignal);
+const obs$ = toObservable(mySignal);
 obs$.subscribe(value => console.log(value));
 
 mySignal.set(1);

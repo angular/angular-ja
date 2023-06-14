@@ -1,6 +1,6 @@
 # はじめての Angular アプリケーション レッスン 2 - Home コンポーネントの作成
 
-このチュートリアルレッスンでは、Angular アプリケーションに新しい[コンポーネント](https://angular.jp/guide/component-overview)を作成する方法を説明します。
+このチュートリアルレッスンでは、Angular アプリケーションに新しい[コンポーネント](/guide/component-overview)を作成する方法を説明します。
 
 **所要時間**: このレッスンは 10 分程度で終了します。
 
@@ -40,7 +40,7 @@ Angular では、コンポーネントはそのプロパティを定義するメ
 *   `template`: コンポーネントの HTML マークアップとレイアウトを記述します。
 *   `styleUrls`: コンポーネントが使用する CSS ファイルの URL を配列で列挙します。
 
-コンポーネントは他にも[プロパティ](https://angular.jp/api/core/Component)を持ちますが、これらは `HomeComponent` で使用するものです。
+コンポーネントは他にも[プロパティ](/api/core/Component)を持ちますが、これらは `HomeComponent` で使用するものです。
 
 ## レッスンのステップ
 
@@ -114,7 +114,7 @@ IDE の **編集** ペインで
 IDE の **編集** ペインで
 
 1.  `first-app` ディレクトリで、`home.component.ts` をエディタで開く。
-1.  `app.component.ts` の `@Component` の `template` プロパティを次のコードで更新します。
+1.  `home.component.ts` の `@Component` の `template` プロパティを次のコードで更新します。
 
     <code-example header="Replace in src/app/home/home.component.ts" path="first-app-lesson-02/src/app/home/home.component.ts" region="home-template"></code-example>
 

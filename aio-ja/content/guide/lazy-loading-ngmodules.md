@@ -253,11 +253,13 @@ Angular CLIは、フィーチャールーティングモジュールにも`Route
 プリロードは、アプリケーションの一部をバックグラウンドでロードすることでUXを向上させます。
 モジュールまたはコンポーネントデータをプリロードできます。
 
-### モジュールをプリロードする {@a preloading-modules}
+### モジュールとスタンドアロンコンポーネントのプリロード {@a preloading-modules-and-standalone-components}
 
-モジュールのプリロードはアプリケーションの一部をバックグラウンドでロードすることでUXを向上させるため、ユーザーはルートをアクティブ化するときにその要素がダウンロードされるのを待つ必要がありません。
+Preloading modules and standalone components improves UX by loading parts of your application in the background. By doing this, users don't have to wait for the elements to download when they activate a route.
 
-遅延ロードされたモジュールすべてのプリロードを有効にするには、Angularの`router`から`PreloadAllModules`トークンをインポートします。
+To enable preloading of all lazy loaded modules and standalone components, import the `PreloadAllModules` token from the Angular `router`.
+
+### Module based application
 
 <code-example header="AppRoutingModule (excerpt)">
 
@@ -275,6 +277,32 @@ RouterModule.forRoot(
     preloadingStrategy: PreloadAllModules
   }
 )
+
+</code-example>
+
+### Standalone application
+
+For standalone applications configure preloading strategies by adding `withPreloading` to  `provideRouter`s RouterFeatures in `app.config.ts`
+
+<code-example header="`app.config.ts`">
+
+import { ApplicationConfig } from '@angular/core';
+import {
+  PreloadAllModules,
+  provideRouter
+  withPreloading,
+} from '@angular/router';
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules)
+    ),
+  ],
+};
 
 </code-example>
 
@@ -402,4 +430,4 @@ For more information on Angular Modules, see [NgModules](guide/ngmodules).
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2022-05-07

@@ -790,13 +790,14 @@
           ]
         },
         {
-          "title": "機能プレビュー",
+          "title": "開発者プレビュー",
           "tooltip": "Angular preview features and APIs",
           "children": [
             {
               "url": "guide/signals",
-              "title": "Signals",
-              "tooltip": "Angular signals for optimized change detection"
+              "title": "Signal",
+              "tooltip": "変更検出を最適化するためのAngular Signal",
+              "translated": true
             },
             {
               "url": "guide/rxjs-interop",

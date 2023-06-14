@@ -19,7 +19,7 @@
 
 ## 終わったあと
 
-* アプリの `HousingLocationComponent` テンプレートには、入力を受け取るための `HousingLocation` プロパティがあります。
+* アプリケーションの `HousingLocationComponent` テンプレートには、入力を受け取るための `HousingLocation` プロパティがあります。
 
 ## Input のコンセプトプレビュー
 [Input](api/core/Input) により、コンポーネントはデータを共有することができます。データ共有の方向は親コンポーネントから子コンポーネントになります。

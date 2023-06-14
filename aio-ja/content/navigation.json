@@ -947,7 +947,7 @@
       "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
       "children": [
         {
-          "title": "Tutorial: はじめての Angular アプリ",
+          "title": "はじめての Angular アプリ",
           "tooltip": "Learn how to get started in Angular by building an Angular app",
           "children": [
             {
@@ -1183,6 +1183,11 @@
                   "title": "Componentの紹介",
                   "tooltip": "コンポーネント、テンプレート、およびビューについて。",
                   "translated": true
+                },
+                {
+                  "url": "guide/architecture-services",
+                  "title": "サービスと依存性の注入の紹介",
+                  "tooltip": "About services and dependency injection."
                 },
                 {
                   "url": "guide/architecture-next-steps",

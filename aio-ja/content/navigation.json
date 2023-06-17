@@ -795,8 +795,8 @@
           "children": [
             {
               "url": "guide/signals",
-              "title": "Signal",
-              "tooltip": "変更検出を最適化するためのAngular Signal",
+              "title": "シグナル",
+              "tooltip": "変更検出を最適化するためのAngularシグナル",
               "translated": true
             },
             {

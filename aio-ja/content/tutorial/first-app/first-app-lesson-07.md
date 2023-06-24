@@ -1,73 +1,73 @@
-# Lesson 7 - Add an interpolation to a component’s template
+# レッスン 7 - コンポーネントのテンプレートに補間を追加
 
-This tutorial lesson demonstrates how to add interpolation to Angular templates in order to display dynamic data in a template.
+このチュートリアルレッスンでは、テンプレートに動的なデータを表示するために、Angular テンプレートに補間を追加する方法を示します。
 
-**Time required:** expect to spend about 10 minutes to complete this lesson.
+**所要時間**: このレッスンは 10 分程度で終了します。
 
-## Before you start
+## 始める前に
 
-This lesson starts with the code from the previous lesson, so you can:
+このレッスンは前のレッスンのコードから始まります。次のことができます。
 
-*   Use the code that you created in Lesson 6 in your integrated development environment (IDE).
-*   Start with the code example from the previous lesson. Choose the <live-example name="first-app-lesson-06"></live-example> from Lesson 6 where you can:
-    *   Use the *live example* in StackBlitz, where the StackBlitz interface is your IDE.
-    *   Use the *download example* and open it in your IDE.
+*   レッスン 6 で作成したコードを、統合開発環境（IDE）で使用します。
+*   前のレッスンのコードサンプルから開始できます。レッスン 6 から <live-example name="first-app-lesson-06"></live-example> を選んでください。
+    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
+    *   *download example* を使い IDE で開きます。
 
-If you haven't reviewed the introduction, visit the [Introduction to Angular tutorial](tutorial/first-app) to make sure you have everything you need to complete this lesson.
+イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
 
-If you have any trouble during this lesson, you can review the completed code for this lesson, in the <live-example></live-example> for this lesson.
+このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
 
-## After you finish
+## 終わったあと
 
-*  Your app will display interpolated values in the `HousingLocationComponent` template.
-*  Your app will render a housing location data to the browser.
+*  アプリケーションは `HousingLocationComponent` テンプレートに補間された値を表示します。
+*  アプリケーションは住宅の位置データをブラウザにレンダリングします。
 
-## Conceptual preview of interpolation
-In lesson 6, you added data binding to the template to enable developers to pass data from the `HomeComponent` to the `HousingLocationComponent`. The next step is to display values (properties and `Input` values) in a template. In order to accomplish this task you have to use interpolation.
+## 補間のコンセプトプレビュー
+レッスン6では、開発者が `HomeComponent` から `HousingLocationComponent` にデータを渡すために、テンプレートにデータバインディングを追加しました。次のステップは、テンプレートに値（プロパティと `Input` 値）を表示することです。このタスクを達成するためには、補間を使用する必要があります。
 
-The [Angular template syntax](guide/template-syntax) supports mixing static template content with dynamic values and expressions.
+[テンプレート構文](guide/template-syntax) は静的なテンプレートコンテンツと動的な値や式を混ぜることをサポートしています。
 
-Using the `{{ expression }}` in Angular templates, you can render values from properties, `Inputs` and valid JavaScript expressions.
+Angular テンプレートで `{{ 式 }}` を使用すると、プロパティ、`Inputs`、有効な JavaScript 式から値を表示できます。
 
-For a more in depth explanation, please refer to the [Displaying values with interpolation](guide/interpolation) guide.
+さらに詳しい説明については [補間による値の表示](guide/interpolation) ガイドを参照してください。
 
-## Lesson steps
+## レッスンのステップ
 
-Perform these steps on the app code in your IDE.
+IDE でアプリケーションのコードに対して、次のステップを実行します。
 
-### Step 1 - Update `HousingLocationComponent` template to include interpolated values
-This step adds new HTML structure and interpolated values in the `HousingLocationComponent` template.
+### ステップ 1 - 補間値を含めるために `HousingLocationComponent` テンプレートを更新
+このステップでは、`HousingLocationComponent` テンプレートに新しい HTML 構造と補間値を追加します。
 
-In the code editor:
-1.  Navigate to `src/app/housing-location/housing-location.component.ts`
-1.  In the template property of the `@Component` decorator, replace the existing HTML markup with the following code:
+コードエディタで
+1.  `src/app/housing-location/housing-location.component.ts` に移動します。
+1.  `@Component` デコレーターのテンプレートプロパティで、既存の HTML マークアップを次のコードに置き換えます。
 
     <code-example header="Update HousingLocationComponent template" path="first-app-lesson-07/src/app/housing-location/housing-location.component.ts" region="add-listing-details"></code-example>
 
-    In this updated template code you have used property binding to bind the `housingLocation.photo` to the `src` attribute. The `alt` attribute uses interpolation to give more context to the alt text of the image.
+    この更新されたテンプレートコードでは、`src` 属性に `housingLocation.photo` を バインドするためにプロパティバインディングを使用します。`alt` 属性は画像の alt テキストにより多くの文脈を与えるために補間を使用します。
 
-    You use interpolation to include the values for name, city and state of the `housingLocation` property.
+    `housingLocation` プロパティの名前、都市、州の値を含めるために補間を使用します。
 
-### Step 2 - Confirm the changes render in the browser
-1.  Save all changes.
-1.  Open the browser can confirm that the app renders the photo, city and state sample data.
+### ステップ 2 - 変更がブラウザに表示されることを確認
+1.  すべての変更を保存します。
+1.  ブラウザを開くと、アプリケーションが写真、都市、州のサンプルデータを表示していることを確認できます。
     <section class="lightbox">
     <img alt="browser frame of homes-app displaying logo, filter text input box, search button and the same housing location UI card" src="generated/images/guide/faa/homes-app-lesson-07-step-2.png">
     </section>
 
-## Lesson review
-In this lesson, you added a new HTML structure and used Angular template syntax to render values in the `HousingLocation` template. Now, you have two important skills:
-* passing data to components
-* Interpolating values into a template
+## レッスンの復習
+このレッスンでは、`HousingLocation` テンプレートに値を表示するために新しい HTML 構造を追加し、 Angular テンプレート構文を使用しました。これで、2 つの重要なスキルが得られました。
+* コンポーネントにデータを渡すこと
+* テンプレートへの値の補間
 
-With these skills, your app can now share data and display dynamic values in the browser. Great work so far.
+これらのスキルにより、アプリケーションはデータを共有し、ブラウザで動的な値を表示できるようになりました。素晴らしい仕事です。
 
-If you are having any trouble with this lesson, you can review the completed code for it in the <live-example></live-example>.
+このレッスンに問題がある場合は、<live-example></live-example> の完成したコードを確認してください。
 
-## Next steps
+## 次のステップ
 
 * [Lesson 8 - Use *ngFor to list objects in component](tutorial/first-app/first-app-lesson-08)
 
-## For more information about the topics covered in this lesson, visit:
-* [Displaying values with interpolation](/guide/interpolation)
-* [Template syntax](guide/template-syntax)
+## このレッスンで取り上げたトピックの詳細について
+* [補間による値の表示](/guide/interpolation)
+* [テンプレート構文](guide/template-syntax)

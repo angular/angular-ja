@@ -146,7 +146,7 @@ Angular's own `BrowserModule` exports a couple of NgModules like this:
 
 <code-example format="typescript" language="typescript">
 
-exports: [CommonModule, ApplicationModule]
+exports: [CommonModule, ApplicationModule];
 
 </code-example>
 

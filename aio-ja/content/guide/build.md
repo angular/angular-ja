@@ -322,7 +322,7 @@ Angular CLIでは、さまざまなブラウザバージョンとの互換性を
   </code-example>
 
 
-To override the internal configuration, run [`ng generate config browserslist`](cli/generate#config-command), which generates a `.browserslistrc` configuration file in the the project directory.
+To override the internal configuration, run [`ng generate config browserslist`](cli/generate#config-command), which generates a `.browserslistrc` configuration file in the project directory.
 
   <code-example format="none" language="text">
   last 1 Chrome version

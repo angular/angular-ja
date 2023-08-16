@@ -434,6 +434,12 @@ Several options can be used to fine-tune the optimization of an application.
 | `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers, and minimizing values.        | `boolean`  | `true`        |
 | `inlineCritical` | Extract and inline critical CSS definitions to improve [First Contentful Paint](https://web.dev/first-contentful-paint). | `boolean`  | `true`        |
 
+<div class="alert is-helpful">
+
+[Angular CLI](cli "CLI command reference") uses `Critters` to perform critical CSS inlining. For more information about this package see the [Critters README](https://github.com/GoogleChromeLabs/critters#readme).
+
+</div>
+
 #### Fonts optimization options
 
 | Option   | Description                                                                                                                                                                                                                          | Value Type | Default Value |

@@ -8,7 +8,7 @@
 
 また、SSRをめぐるさまざまなテクニックやコンセプトについては、こちらの[記事](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)をご覧ください。
 
-次のように、`@nguniversal/express-engine` schematicsを使用して、Angularアプリケーションでサーバーサイドレンダリングを有効にすることができます。
+次のように、`@nguniversal/express-engine` パッケージを使用して、Angularアプリケーションでサーバーサイドレンダリングを有効にすることができます。
 
 <div class="alert is-helpful">
 
@@ -66,10 +66,10 @@ The command updates the application code to enable SSR and adds extra files to t
         </div>
         <div class='children'>
             <div class='file'>
-              app.config.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // &lt; client-side application configuration (standalone app only)
+              app.config.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // &lt;-- client-side application configuration (standalone app only)
             </div>
             <div class='file'>
-              app.module.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // &lt; client-side application module (NgModule app only)
+              app.module.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // &lt;-- client-side application module (NgModule app only)
             </div>
         </div>
         <div class='children'>
@@ -226,9 +226,9 @@ Universal Web サーバーは、[Universal テンプレートエンジン](#univ
 これは、DOM、`XMLHttpRequest`、およびブラウザに依存しないその他の低レベル機能のサーバー実装を提供します。
 
 サーバー (このガイドの例では [Node.js Express](https://expressjs.com/)) は、アプリケーションページのクライアントリクエストを NgUniversal の `ngExpressEngine` に渡します。
-Under the hood, the render functions, while providing caching and other helpful utilities.
+裏側では、このエンジンがアプリをレンダリングし、キャッシュやその他の便利なユーティリティも提供します。
 
-The render functions takes as inputs a *template* HTML page \(usually `index.html`\), and Angular *module* containing components or a function that when invoked returns a `Promise` that resolves to an `ApplicationRef`, and a *route* that determines which components to display. The route comes from the client's request to the server.
+render関数は、*テンプレート*となるHTMLページ(通常は`index.html`)と、コンポーネントを含むAngularの*モジュール*を入力として受け取ります。あるいは、呼び出されたときに `ApplicationRef` に解決される`Promise`を返す関数と、どのコンポーネントを表示するかを決定する*ルート*を受け取ることもできます。ルートはクライアントからサーバへのリクエストに基づきます。
 
 各リクエストの結果、リクエストされたルートの適切なビューが表示されます。
 render 関数は、テンプレートの `<app>` タグ内でビューをレンダリングし、
@@ -278,8 +278,13 @@ The `ngExpressEngine()` function is a wrapper around the Angular `platform-serve
 
 ### リクエスト URL のフィルタリング
 
-メモ: NgUniversal Express schematic を使用すると、次に説明する基本的な動作が自動的に処理されます。
-これは、基本的な動作を理解したり、schematic を使用せずに複製したりするときに役立ちます。
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+メモ: NgUniversal Expressパッケージを使用すると、次に説明する基本的な動作が自動的に処理されます。
+これは、基本的な動作を理解したり、パッケージを使用せずに複製したりするときに役立ちます。
+
+</div>
 
 Web サーバーは、_アプリのページのリクエスト_ を他の種類のリクエストと区別する必要があります。
 
@@ -355,7 +360,7 @@ Now, on every HTTP request made as part of rendering the app on the server, Angu
 |:---                                                                                                        |:---     |
 | <code-example format="shell" language="shell"> npm run dev:ssr </code-example>                            | Similar to [`ng serve`](cli/serve), which offers live reload during development, but uses server-side rendering. The application runs in watch mode and refreshes the browser after every change. This command is slower than the actual `ng serve` command.                                                                                                                                                  |
 | <code-example format="shell" language="shell"> ng build &amp;&amp; ng run app-name:server </code-example> | Builds both the server script and the application in production mode. Use this command when you want to build the project for deployment.                                                                                                                                                                                                                                                                     |
-| <code-example format="shell" language="shell"> npm run serve:ssr </code-example>                          | Starts the server script for serving the application locally with server-side rendering. It uses the build artifacts created by `ng run build:ssr`, so make sure you have run that command as well. <div class="alert is-helpful"> **NOTE**: <br /> `serve:ssr` is not intended to be used to serve your application in production, but only for testing the server-side rendered application locally. </div> |
+| <code-example format="shell" language="shell"> npm run serve:ssr </code-example>                          | Starts the server script for serving the application locally with server-side rendering. It uses the build artifacts created by `npm run build:ssr`, so make sure you have run that command as well. <div class="alert is-helpful"> **NOTE**: <br /> `serve:ssr` is not intended to be used to serve your application in production, but only for testing the server-side rendered application locally. </div> |
 | <code-example format="shell" language="shell"> npm run prerender </code-example>                          | Used to prerender an application's pages. Read more about prerendering [here](guide/prerendering).                                                                                                                                                                                                                                                                                                            |
 
 <!-- links -->
@@ -364,4 +369,4 @@ Now, on every HTTP request made as part of rendering the app on the server, Angu
 
 <!-- end links -->
 
-@reviewed 2023-04-25
+@reviewed 2023-06-21

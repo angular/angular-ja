@@ -178,8 +178,8 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 現在のところ、商品リストには各商品の名前と説明が表示されています。
 また、`ProductListComponent` は `products` プロパティを定義して、`products.ts` の `products` 配列からインポートしたデータを格納しています。
 
-次のステップは、`ProductListComponent`から商品データを利用する新しいアラート機能を作成することです。
-このアラートは商品の価格をチェックし、価格が700ドル以上の場合は、**Notify Me**ボタンを表示し、商品が販売されたときに通知を受けるために登録できるようにします。
+次のステップは、`ProductListComponent`の商品データを使用する新しいアラート機能を作成することです。
+アラートは商品の価格をチェックします。もしそれが&dollar;700より大きいことがわかったら、Notify Meボタンを表示します。ユーザーがこのボタンをクリックすると、その商品がセールになったときに通知されるように登録できるようにします。
 
 このセクションでは、親コンポーネントである `ProductListComponent` からデータを受け取ることができる子コンポーネント `ProductAlertsComponent` を作成する方法を説明します。
 
@@ -257,13 +257,6 @@ Phone XL の価格は 700 ドル以上なので、**Notify Me** ボタンはそ�
 
 **Notify Me**ボタンを機能させるには、子コンポーネントが通知して親コンポーネントにデータを渡す必要があります。
 `ProductAlertsComponent`はユーザーが**Notify Me**をクリックしたときにイベントを発生させ、`ProductListComponent`はそのイベントに応答しなければなりません。
-
-  <div class="alert is-helpful">
-
-  新しいコンポーネントには、Angularジェネレーターが空の `constructor()`、`OnInit` インターフェース、`ngOnInit()` メソッドを含めています。
-  しかしこのステップでは使用しないので、次のコード例では簡潔にするために省略しています。
-
-  </div>
 
 1.  `product-alerts.component.ts` で、`@angular/core` から `Output` と `EventEmitter` をインポートします。
 

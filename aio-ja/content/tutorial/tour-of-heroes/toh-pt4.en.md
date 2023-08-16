@@ -13,7 +13,7 @@ For the sample application that this page describes, see the <live-example></liv
 
 ## Why services
 
-Components shouldn't fetch or save data directly and they certainly shouldn't knowingly present fake data.
+Components shouldn't fetch or save data directly, and they certainly shouldn't knowingly present fake data.
 They should focus on presenting data and delegate data access to a service.
 
 This tutorial creates a `HeroService` that all application classes can use to get heroes.
@@ -168,7 +168,7 @@ synchronous, because that would block the browser as it waits to return data.
 
 In this tutorial, `HeroService.getHeroes()` returns an `Observable` so that it can
 use the Angular `HttpClient.get` method to fetch the heroes
-and have [`HttpClient.get()`](guide/http) return an `Observable`.
+and have [`HttpClient.get()`](guide/understanding-communicating-with-http) return an `Observable`.
 
 ### Observable `HeroService`
 

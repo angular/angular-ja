@@ -1,52 +1,34 @@
-# はじめての Angular アプリケーション レッスン 2 - Home コンポーネントの作成
-
+# レッスン 2: Home コンポーネントの作成
 このチュートリアルレッスンでは、Angular アプリケーションに新しい[コンポーネント](/guide/component-overview)を作成する方法を説明します。
 
-**所要時間**: このレッスンは 10 分程度で終了します。
+**所要時間**: 〜10分
 
-## 始める前に
+**開始時のコード:** <live-example name="first-app-lesson-01"></live-example>
 
-このレッスンは前のレッスンのコードから始まります。次のことができます。
+**完了時のコード:** <live-example name="first-app-lesson-02"></live-example>
 
-*   レッスン 1 で作成したコードを、統合開発環境（IDE）で使用します。
-*   前のレッスンのコードサンプルから開始できます。レッスン 1 から <live-example name="first-app-lesson-01"></live-example> を選んでください。
-    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
-    *   *download example* を使い IDE で開きます。
+## ここで学べること
 
-イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
-
-このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
-
-## 終わったあと
-
-* アプリケーションに新しいコンポーネント `HomeComponent` があります。
+あなたのアプリには新しいコンポーネント `HomeComponent` が追加されます。
 
 ## Angular コンポーネントのコンセプトプレビュー
 
 Angular のアプリケーションは、Angular の構成要素であるコンポーネントを中心に構築されます。
 コンポーネントには、アプリケーション内の要素の機能と外観を提供する HTML レイアウト、および CSS スタイル情報のコードが含まれています。
-Angular では、コンポーネントは他のコンポーネントを含むことができます。アプリケーションの機能や外観は、コンポーネントに分割して仕切ることができます。
-
-[レッスン 1](tutorial/first-app/first-app-lesson-01)では、`AppComponent` を更新しましたが、その機能は他のすべてのコンポーネントを含みます。
-このレッスンでは、アプリケーションのホームページを表示するための `HomeComponent` を作成します。
-この後のレッスンでは、より多くのコンポーネントを作成し、アプリケーションに多くの機能を提供します。
+Angularでは、コンポーネントは他のコンポーネントを含むことができます。アプリの機能や外観は、コンポーネント単位で分割・分離することができます。
 
 Angular では、コンポーネントはそのプロパティを定義するメタデータを持っています。
 `HomeComponent` を作成する際には、次のプロパティを使用します。
 
 *   `selector`: Angular がテンプレート内のコンポーネントを参照する方法を記述します。
-*   `standalone`: コンポーネントが `ngModule` を必要とするかどうかを記述します。
+*   `standalone`: コンポーネントが NgModule` を必要とするかどうかを記述します。
 *   `imports`: コンポーネントの依存関係を記述します。
 *   `template`: コンポーネントの HTML マークアップとレイアウトを記述します。
 *   `styleUrls`: コンポーネントが使用する CSS ファイルの URL を配列で列挙します。
 
-コンポーネントは他にも[プロパティ](/api/core/Component)を持ちますが、これらは `HomeComponent` で使用するものです。
+[コンポーネントの詳細はこちら。](/api/core/Component)
 
-## レッスンのステップ
-
-IDE でアプリケーションのコードに対して、次のステップを実行します。
-
-### ステップ 1 - `HomeComponent` の作成
+## ステップ 1 - `HomeComponent` の作成
 
 このステップでは、アプリケーションに新しいコンポーネントを作成します。
 
@@ -57,7 +39,7 @@ IDE の **ターミナル** ペインで
 
     <code-example format="shell" language="shell">
 
-    ng generate component Home --standalone --inline-template --skip-tests
+    ng generate component home --standalone --inline-template --skip-tests
 
     </code-example>
 
@@ -72,10 +54,12 @@ IDE の **ターミナル** ペインで
 1.  ブラウザを開き `http://localhost:4200` に移動し、アプリケーションを見つけます。
 1.  アプリケーションがエラーなく、ビルドされることを確認します。
 
-    *注： 新しいコンポーネントを追加しても、アプリケーションのテンプレートにはまだ含まれていないため、前のレッスンと同じように表示されるはずです。*
+    <div class="callout is-helpful">
+      新しいコンポーネントを追加しても、アプリケーションのテンプレートにはまだ含まれていないので、前のレッスンと同じように表示されるはずです。
+    </div>
 1.  次のステップを完了するまで `ng serve` を起動したままにします。
 
-### ステップ 2 - アプリケーションのレイアウトに新しいコンポーネントを追加
+## ステップ 2 - アプリケーションのレイアウトに新しいコンポーネントを追加
 
 このステップでは、新しいコンポーネント `HomeComponent` をアプリケーションのルートコンポーネント `AppComponent` に追加して、アプリケーションのレイアウトに表示します。
 
@@ -102,7 +86,7 @@ IDE の **編集** ペインで
 <img alt="browser frame of page displaying the text 'home works!'" src="generated/images/guide/faa/homes-app-lesson-02-step-2.png">
 </section>
 
-### ステップ 3 - `HomeComponent` に機能を追加
+## ステップ 3 - `HomeComponent` に機能を追加
 
 このステップでは `HomeComponent` に機能を追加します。
 
@@ -147,3 +131,5 @@ IDE の **編集** ペインで
 *  [`ng generate component`](cli/generate#component-command)
 *  [`Component` reference](api/core/Component)
 *  [Angular components overview](guide/component-overview)
+
+@reviewed 2023-07-10

@@ -26,3 +26,8 @@ export async function sed(path, pattern, replacement) {
   const newContent = content.replaceAll(pattern, replacement);
   await writeFile(path, newContent, 'utf-8');
 }
+
+export async function rename(oldPath, newPath) {
+  await cp(oldPath, newPath);
+  await rm(oldPath);
+}

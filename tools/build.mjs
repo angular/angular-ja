@@ -5,7 +5,7 @@ import {
   applyPatches,
   buildAIO,
   copyLocalizedFiles,
-  copyRedirects,
+  remove404HTML,
   copyRobots,
   modifySitemap,
   resetBuildDir,
@@ -46,6 +46,6 @@ async function build() {
 
 async function postBuild() {
   await copyRobots();
-  await copyRedirects();
+  await remove404HTML();
   await modifySitemap();
 }

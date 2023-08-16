@@ -733,7 +733,7 @@ _マーブルフレーム_とは、テスト時間の仮想的な単位です。
 {@a cold-observable}
 _コールド_ Observableはサブスクライブされるまで値を発行しません。
 アプリケーションのObservableのほとんどはコールドです。
-すべての[_HttpClient_](guide/http)メソッドはコールドObservableを返します。
+すべての[_HttpClient_](guide/understanding-communicating-with-http)メソッドはコールドObservableを返します。
 
 _ホット_ Observableは購読する_前_にすでに値を発行しています。
 ルーターアクティビティを報告する[_Router.events_](api/router/Router#events)Observable、

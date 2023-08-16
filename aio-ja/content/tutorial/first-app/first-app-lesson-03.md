@@ -1,39 +1,28 @@
-# はじめての Angular アプリケーション レッスン 3 - HousingLocation コンポーネントの作成
+# レッスン 3: HousingLocation コンポーネントの作成
 
 このチュートリアルレッスンでは、`HousingLocation` コンポーネントを Angular アプリケーションに追加する方法を説明します。
 
-**所要時間**: このレッスンは 10 分程度で終了します。
+**所要時間**: 〜10分
 
-## 始める前に
+**開始時のコード:** <live-example name="first-app-lesson-02"></live-example>
 
-このレッスンは前のレッスンのコードから始まります。次のことができます。
+**完了時のコード:** <live-example name="first-app-lesson-03"></live-example>
 
-*   レッスン 2 で作成したコードを、統合開発環境（IDE）で使用します。
-*   前のレッスンのコードサンプルから開始できます。レッスン 2 から <live-example name="first-app-lesson-02"></live-example> を選んでください。
-    *   StackBlitz の *live example* を使用すると、StackBlitz インターフェースが IDE になります。
-    *   *download example* を使い IDE で開きます。
+## ここで学べること
+* アプリケーションに新しいコンポーネント `HousingLocationComponent` が追加され、コンポーネントがアプリケーションに追加されたことを確認するメッセージが表示されます。
 
-イントロダクションをまだ確認していない場合は、[Angular チュートリアルのイントロダクション](tutorial/first-app)を参照して、このレッスンを完了するために必要なものがすべて揃っているかどうか確認してください。
-
-このレッスンで問題が発生した場合は、このレッスンの <live-example></live-example> から完成したコードを確認することができます。
-
-## 終わったあと
-* アプリケーションに新しいコンポーネント `HousingLocationComponent` があり、コンポーネントがアプリケーションに追加されたことを確認するメッセージが表示されます。
-
-## レッスンのステップ
-
-IDE でアプリケーションのコードに対して、次のステップを実行します。
-
-### ステップ 1 - `HousingLocationComponent` の作成
+## ステップ 1 - `HousingLocationComponent` の作成
 
 このステップでは、アプリケーションに新しいコンポーネントを作成します。
 
-IDE の **ターミナル** ペインで
+IDE の **ターミナル** ペインで:
+
+1. プロジェクトのディレクトリで、`first-app`ディレクトリに移動します。
 
 1. 新しい `HousingLocationComponent` を作成するために次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
-    ng generate component HousingLocation --standalone --inline-template --skip-tests
+    ng generate component housingLocation --standalone --inline-template --skip-tests
     </code-example>
 
 1. アプリケーションのビルドとサーブをするために、次のコマンドを実行します。
@@ -46,11 +35,12 @@ IDE の **ターミナル** ペインで
 
 1.  ブラウザを開き `http://localhost:4200` に移動し、アプリケーションを見つけます。
 1.  アプリケーションがエラーなく、ビルドされることを確認します。
-
-    *注： 新しいコンポーネントを追加しても、アプリケーションのテンプレートにはまだ含まれていないため、前のレッスンと同じように表示されるはずです。*
+    <div class="callout is-helpful">
+      新しいコンポーネントを追加しても、アプリケーションのテンプレートにはまだ含まれていないので、前のレッスンと同じように表示されるはずです。
+    </div>
 1.  次のステップを完了するまで `ng serve` を起動したままにします。
 
-### ステップ 2 - アプリケーションのレイアウトに新しいコンポーネントを追加
+## ステップ 2 - アプリケーションのレイアウトに新しいコンポーネントを追加
 
 このステップでは、新しいコンポーネント `HousingLocationComponent` をアプリケーションの `HomeComponent` に追加して、アプリケーションのレイアウトに表示します。
 
@@ -69,7 +59,7 @@ IDE の **編集** ペインで
 
     <code-example header="Add housing location to the component template in src/app/home/home.component.ts" path="first-app-lesson-03/src/app/home/home.component.ts" region="add-housingLocation-to-template"></code-example>
 
-### ステップ 3 - コンポーネントのスタイルを追加
+## ステップ 3 - コンポーネントのスタイルを追加
 
 このステップでは、`HousingLocationComponent` にあらかじめ書かれているスタイルをコピーして、アプリケーションが正しくレンダリングされるようにします。
 
@@ -93,3 +83,5 @@ IDE の **編集** ペインで
 ## 次のステップ
 
 * [First Angular app lesson 4 -  Add a housing location interface to the application](tutorial/first-app/first-app-lesson-04)
+
+@reviewed 2023-07-11

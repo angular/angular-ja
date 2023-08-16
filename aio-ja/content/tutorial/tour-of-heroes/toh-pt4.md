@@ -168,7 +168,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 この章では、`HeroService.getHeroes()` は `Observable` を返します。
 なぜなら、後にヒーローデータの取得で利用する Angular の 
-[`HttpClient.get()`](guide/http) メソッドが `Observable` を返すからです。
+[`HttpClient.get()`](guide/understanding-communicating-with-http) メソッドが `Observable` を返すからです。
 
 ### Observable `HeroService`
 

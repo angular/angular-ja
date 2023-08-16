@@ -91,7 +91,7 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 | `app/app.component.html`    | ルート `AppComponent` に関連付けられているHTMLテンプレートを定義します。 |
 | `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
 | `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
-| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリケーションにコンポーネントを追加すると、それらをここで宣言する必要があります。<br><br>_Only generated when using the `--standalone` option._ |
+| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリケーションにコンポーネントを追加すると、それらをここで宣言する必要があります。<br><br>_このファイルは `--standalone` オプションを使用した場合には生成されません。_ |
 
 ### アプリケーション設定ファイル {@a application-configuration-files}
 

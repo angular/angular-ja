@@ -654,6 +654,8 @@ ng generate module my-module --routing
 
   * コンポーネントのクラス名を `HeroListComponent` に変更します。
   * `selector` を `app-hero-list` に変更します。
+  * `templateUrl`を`./hero-list.component.html`に変更します。
+  * `styleUrls`を`./hero-list.component.css`に変更します。
 
 <div class="alert is-helpful">
 

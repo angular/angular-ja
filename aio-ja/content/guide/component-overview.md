@@ -1,6 +1,7 @@
 # Angular コンポーネントの概要 {@a angular-components-overview}
 
-コンポーネントは Angular アプリケーションの主な構成要素です。各コンポーネントは次のように構成されています。
+コンポーネントは Angular アプリケーションの主な構成要素です。
+各コンポーネントは次のように構成されています。
 
 * ページに表示するものを宣言する HTML テンプレート
 * 振る舞いを定義する Typescript クラス
@@ -25,7 +26,8 @@
 
 ## コンポーネントの作成 {@a creating-a-component}
 
-コンポーネントを作成するもっとも簡単な方法は Angular CLI です。手動でコンポーネントを作成することもできます。
+コンポーネントを作成するもっとも簡単な方法は Angular CLI です。
+手動でコンポーネントを作成することもできます。
 
 ### Angular CLI を使ったコンポーネントの作成 {@a creating-a-component-using-the-angular-cli}
 
@@ -112,7 +114,7 @@ Angular CLI は Angular コンポーネントを作成するもっとも簡単�
 
 すべてのコンポーネントには CSS _セレクタ_ が必要です。セレクターは HTML テンプレートの中で対応するタグを見つけたらどこでも、そのコンポーネントをインスタンス化するように Angular に指示します。たとえば、`hello-world.component.ts` が `app-hello-world` というセレクターを定義しているコンポーネントを考えてみましょう。このセレクターは、テンプレートに `<app-hello-world>` タグが現れるたびに、このコンポーネントのインスタンスを作成するように Angular に指示します。
 
-コンポーネントのセレクターを指定するには、`@Component` デコレーターに `selector` 文を追加します。
+コンポーネントのセレクターを指定するには、`@Component` デコレーターに `selector` プロパティを追加します。
 
 <code-example
     path="component-overview/src/app/component-overview/component-overview.component.ts"
@@ -148,7 +150,7 @@ Angular CLI は Angular コンポーネントを作成するもっとも簡単�
 
 <div class="alert is-helpful">
 
-Angular コンポーネントは、`template` または `templateUrl` で定義されたテンプレートを必要とします。コンポーネントの中で両方の記述をもつことはできません。
+Angular コンポーネントは、`template` または `templateUrl` で定義されたテンプレートを必要とします。コンポーネントの中で両方のプロパティをもつことはできません。
 
 </div>
 
@@ -180,4 +182,4 @@ Angular コンポーネントは、`template` または `templateUrl` で定義�
 * コンポーネントのスタイルについては、[コンポーネントスタイル](guide/component-styles)を参照してください
 * テンプレートの詳細については、[テンプレート構文](guide/template-syntax)を参照してください
 
-@reviewed 2021-03-18
+@reviewed 2023-07-29

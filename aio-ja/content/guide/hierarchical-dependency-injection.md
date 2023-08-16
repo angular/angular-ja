@@ -50,7 +50,7 @@ Angularには2つのインジェクター階層があります。
 `ModuleInjector`は、次の2ついずれかの方法で設定できます:
 
 * `@Injectable()`の`providedIn`プロパティを使用して、
-`@NgModule()`、または`root`を参照します。
+`root`、または`platform`を参照します。
 * `@NgModule()`の`providers`配列を使用します。
 
 <div class="callout is-helpful">
@@ -602,7 +602,7 @@ Emoji from FlowerService: 🌻
     <app-child @Provide(FlowerService="🌻")
                @Inject(FlowerService)=>"🌻"> <!-- search ends here -->
       <#VIEW> <!-- search starts here -->
-        <h2>Parent Component</h2>
+        <h2>Child Component</h2>
         <p>Emoji from FlowerService: {{flower.emoji}} (🌻)</p>
       </#VIEW>
      </app-child>
@@ -811,13 +811,13 @@ Emoji from AnimalService: 🐶
             &lt;p&gt;Emoji from AnimalService: {{animal.emoji}} (&#x1F433;)&lt;/p&gt;
           &lt;/app-inspector&gt;
         &lt;/div&gt;
-  
+
+        &lt;app-inspector&gt;
+          &lt;#VIEW &commat;Inject(AnimalService) animal=&gt;"&#x1F436;"&gt;
+            &lt;p&gt;Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)&lt;/p&gt;
+          &lt;/#VIEW&gt;
+        &lt;/app-inspector&gt;
       &lt;/#VIEW&gt;
-      &lt;app-inspector&gt;
-        &lt;#VIEW&gt;
-          &lt;p&gt;Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)&lt;/p&gt;
-        &lt;/#VIEW&gt;
-      &lt;/app-inspector&gt;
     &lt;/app-child&gt;
   &lt;/#VIEW&gt;
 &lt;/app-root&gt;
@@ -1029,12 +1029,8 @@ export class ChildComponent {
 }
 ```
 
-`@Host()`と`@SkipSelf()`が`providers`
-配列にある`AnimalService`に適用された場合、
-`@SkipSelf()`は`<app-child>`インジェクターで検索を開始しますが、
-`@Host()`は検索を`<#VIEW>`(には`AnimalService`がありません)で停止するため、結果は`null`になります。
-論理ツリーでは、
-`AnimalService`が`<#VIEW>`ではなく`<app-child>`内で可視化されていることがわかります。
+`@Host()`と`@SkipSelf()`が`providers`配列にある`AnimalService`に適用された場合、`@SkipSelf()`は`<app-child>`インジェクターで検索を開始しますが、`@Host()`は検索を`<#VIEW>`(には`AnimalService`がありません)で停止するため、結果は`null`になります。
+論理ツリーでは、`AnimalService`が`<#VIEW>`ではなく`<app-child>`内で可視化されていることがわかります。
 
 ただし、`AppComponent`の`viewProviders`
 配列で提供される`AnimalService`は可視化されます。

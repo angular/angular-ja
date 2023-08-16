@@ -225,7 +225,7 @@ Angularの `HttpClientModule` はアプリケーション全体で `HttpClient` 
 
     <code-example header="src/app/cart.service.ts" path="getting-started/src/app/cart.service.ts" region="get-shipping"></code-example>
 
-Angularの`HttpClient`の詳細については、 [クライアント・サーバーインタラクション](guide/http "Server interaction through HTTP")ガイド を参照してください。
+Angularの`HttpClient`の詳細については、 [クライアント・サーバーインタラクション](guide/understanding-communicating-with-http "Server interaction through HTTP")ガイド を参照してください。
 
 ## 配送コンポーネントを作成する
 

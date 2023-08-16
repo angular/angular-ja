@@ -321,7 +321,7 @@ class DatePickerComponent {
 
 @NgModule({
         declarations: [DatePickerComponent],
-        exports: [DatePickerComponent]
+        exports: [DatePickerComponent],
         providers: [CalendarService],
 })
 class DatePickerModule {

@@ -68,6 +68,15 @@ class HeroListComponent {
 }
 </code-example>
 
+もうひとつは、[inject](api/core/inject) を使う方法です:
+
+<code-example language="typescript">
+@Component({ … })
+class HeroListComponent {
+  private service = inject(HeroService);
+}
+</code-example>
+
 Angularはコンポーネントがあるサービスに依存していることを検出すると、まずインジェクターにそのサービスの既存のインスタンスがあるかどうかをチェックします。要求されたサービスのインスタンスがまだ存在しない場合、 インジェクターは登録されたプロバイダーを使ってインスタンスを作成し、 それをインジェクターに追加してから Angular にサービスを返します。
 
 要求されたサービスがすべて解決されて返されると、Angularはそれらのサービスを引数としてコンポーネントのコンストラクターを呼び出すことができます。

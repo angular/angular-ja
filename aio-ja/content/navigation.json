@@ -6,15 +6,15 @@
     },
     {
       "url": "resources",
-      "title": "コミュニティ"
+      "title": "リソース"
     },
     {
       "url": "https://blog.angular.io/",
-      "title": "公式ブログ"
+      "title": "ブログ"
     },
     {
       "url": "https://github.com/angular/angular-ja",
-      "title": "日本語化プロジェクト"
+      "title": "翻訳に参加する"
     },
     {
       "url": "https://community.angular.jp",

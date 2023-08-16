@@ -25,7 +25,7 @@ export async function resetBuildDir({ init = false }) {
 export async function buildAIO() {
   await within(async () => {
     cd(`${outDir}/aio`);
-    await $`yarn build`;
+    await $`yarn build-local`;
   });
 }
 

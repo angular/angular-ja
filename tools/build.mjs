@@ -1,7 +1,15 @@
 #!/usr/bin/env zx
 
 import { chalk } from 'zx';
-import { applyPatches, buildAIO, copyLocalizedFiles, copyRobots, modifySitemap, resetBuildDir } from './lib/common.mjs';
+import {
+  applyPatches,
+  buildAIO,
+  copyLocalizedFiles,
+  copyRedirects,
+  copyRobots,
+  modifySitemap,
+  resetBuildDir,
+} from './lib/common.mjs';
 
 try {
   console.log(chalk.green('==== setup ===='));
@@ -38,5 +46,6 @@ async function build() {
 
 async function postBuild() {
   await copyRobots();
+  await copyRedirects();
   await modifySitemap();
 }

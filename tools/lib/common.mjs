@@ -102,3 +102,11 @@ export async function modifySitemap() {
   const sitemapPath = resolve(outDir, 'dist/bin/aio/build/generated/sitemap.xml');
   await sed(sitemapPath, 'angular.io', 'angular.jp');
 }
+
+// copy _redirect
+export async function copyRedirects() {
+  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
+  const src = resolve(aiojaDir, 'src/_redirect');
+  const dest = resolve(outDir, 'dist/bin/aio/build/_redirect');
+  await cpRf(src, dest);
+}

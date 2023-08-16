@@ -1,7 +1,7 @@
 import { watch } from 'chokidar';
 import { resolve } from 'node:path';
 import { $, cd, chalk, glob, within } from 'zx';
-import { initDir, cpRf, exists, sed } from './fileutils.mjs';
+import { initDir, cpRf, exists, sed, rmrf, rename } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
@@ -101,4 +101,12 @@ export async function modifySitemap() {
   await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
   const sitemapPath = resolve(outDir, 'dist/bin/aio/build/generated/sitemap.xml');
   await sed(sitemapPath, 'angular.io', 'angular.jp');
+}
+
+// copy _redirects
+export async function remove404HTML() {
+  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
+  const from = resolve(outDir, 'dist/bin/aio/build/404.html');
+  const to = resolve(outDir, 'dist/bin/aio/build/_404.html');
+  await rename(from, to);
 }

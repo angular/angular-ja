@@ -170,7 +170,7 @@ _この代替アプローチ_を自身のプロジェクト内で採用するこ
 #### HTTPサービスをテストする
 
 リモートサーバーに対してHTTP呼び出しをするデータサービスは、通常、
-XHR呼び出しのためのAngularの[`HttpClient`](guide/http)サービスを注入して委譲します。
+XHR呼び出しのためのAngularの[`HttpClient`](guide/http-test-requests)サービスを注入して委譲します。
 
 依存関係をもつ任意のサービスをテストするために、注入された`HttpClient`のスパイを使用して
 データサービスのテストができます。
@@ -201,4 +201,12 @@ Observableを_サブスクライブ_する必要があります。
 
 このガイドに付属する_コードサンプル_では`HttpClientTestingModule`のデモをしますが、
 このページでは`HttpClientTestingModule`を使用したテストの詳細をカバーをしている
-[Httpガイド](guide/http#testing-http-requests)に先送りします。
+[Httpガイド](guide/http-test-requests)に先送りします。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

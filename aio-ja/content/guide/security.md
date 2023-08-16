@@ -13,7 +13,7 @@ Angularでの対応について説明します。認証や認可などアプリ�
 
 <header>脆弱性の報告</header>
 
-Angular is part of Google [Open Source Software Vulnerability Reward Program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules), for vulnerabilities in Angular please submit your report [here](https://bughunters.google.com/report).
+AngularはGoogleの [Open Source Software Vulnerability Reward Program](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)の対象です。[Angularの脆弱性については、https://bughunters.google.com からレポートを提出してください](https://bughunters.google.com/report)。
 
 セキュリティに関する問題を Google がどのように扱うかは[Google's security philosophy](https://www.google.com/about/appsecurity/) を参照してください。
 
@@ -341,7 +341,7 @@ Cookieが設定されているWebサイトのコードだけが、そのサイ�
 つまり、アプリケーションだけがこのCookieトークンを読み取り、カスタムヘッダーを設定できます。
 `evil.com`の悪意のあるコードにはできません。
 
-Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClient guide](/guide/http#security-xsrf-protection) の章を参照してください。
+Angular の `HttpClient` モジュールはこれらのクライアント側の処理をサポートしています。詳しくは [HttpClientガイド](/guide/http-security-xsrf-protection) の章を参照してください。
 
 CSRFについてはオープンWebアプリケーションセキュリティプロジェクト（OWASP）の、
 [Cross-Site Request Forgery (CSRF)](https://owasp.org/www-community/attacks/csrf) および

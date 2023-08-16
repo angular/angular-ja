@@ -33,7 +33,7 @@ Angular は、ほとんどのロジックやデータがクライアント側に
 ほとんどのアプリケーションはデータを取得、保存するために `HttpClient` を使ってサーバーにアクセスする必要があります。
 いくつかのプラットフォームやアプリケーションでは、PWA (Progressive Web App) モデルによってユーザー体験を改善させたいかもしれません。
 
-*   [HTTP](guide/http): HTTP クライアントを使用してサーバーと通信してデータを取得、保存し、サーバー側のアクションを呼び出します。
+*   [HTTP](guide/understanding-communicating-with-http): HTTP クライアントを使用してサーバーと通信してデータを取得、保存し、サーバー側のアクションを呼び出します。
 *   [サーバーサイドレンダリング](guide/universal): Angular Universal は、サーバーサイドレンダリング(SSR)によってサーバー上に静的アプリケーションページを生成します。これにより、パフォーマンスを向上させ、モバイルデバイスや低パワーのデバイスで最初のページをすばやく表示し、Webクローラを手助けするために、Angular アプリケーションをサーバー上で実行できます。
 *   [Service WorkersとPWA](guide/service-worker-intro): service worker を使用してネットワークへの依存を減らしユーザー体験を大幅に改善します。
 *   [Web workers](guide/web-worker): CPU を使う処理をバックグラウンドスレッドで走らせる方法について学びます。

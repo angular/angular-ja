@@ -172,7 +172,7 @@ Angular CLIの詳細については、[Angular CLIリファレンス](/cli)セ�
 |:---                                       |:---     |
 | [Angular Router](guide/router)            | Angularコンポーネントに基づく高度なクライアント側のナビゲーションとルーティング。遅延読み込み、ネストされたルート、カスタムパスマッチングなどをサポートします。 |
 | [Angular Forms](guide/forms-overview)     | フォームへの介入と検証のための統一されたシステム。                                                                                          |
-| [Angular HttpClient](guide/http)          | より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。                                                                   |
+| [Angular HttpClient](guide/understanding-communicating-with-http)          | より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。                                                                   |
 | [Angular Animations](guide/animations)    | アプリケーションの状態に基づいてアニメーションを駆動するリッチなシステム。                                                                                 |
 | [Angular PWA](guide/service-worker-intro) | Service WorkerやWebアプリケーションマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。                                      |
 | [Angular Schematics](guide/schematics)    | A大規模な開発を簡素化する自動化されたスキャフォールディング、リファクタリング、および更新ツール。                                                 |

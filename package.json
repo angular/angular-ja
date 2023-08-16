@@ -15,6 +15,10 @@
     "test:patch": "git apply -v --check --directory origin ./tools/git-patch/*.patch",
     "update-origin": "zx tools/update-origin.mjs"
   },
+  "packageManager": "yarn@1.22.10",
+  "engines": {
+    "node": "^18.16.0"
+  },
   "devDependencies": {
     "chokidar": "3.5.3",
     "prh-rules": "prh/rules",

@@ -7,7 +7,7 @@ index 26c0528a84..9958b6fc81 100644
        }
  
 -      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular');
-+      this.titleService.setTitle(title ? `Angular 日本語ドキュメンテーション - ${title}` : 'Angular 日本語ドキュメンテーション');
++      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular 日本語版');
      };
    }
  
@@ -26,9 +26,9 @@ index d8c7b34674..0e8ec69909 100644
 -  <meta name="Description" content="Angular is a platform for building mobile and desktop web applications.
 -    Join the community of millions of developers who build compelling user interfaces with Angular.">
 +  <meta name="google-site-verification" content="VDsUl97MN_iK9s7BAQia_MH6bjYsQDTOAdU_psUEzZg" />
-+  <title>Angular 日本語ドキュメンテーション</title>
++  <title>Angular 日本語版</title>
 +  <meta name="Description" content="Angularは、モバイルおよびデスクトップWebアプリケーションを構築するためのプラットフォームです。
-+    Angularを使用して魅力的なユーザーインターフェースを構築する何百万もの開発者のコ​​ミュニティに参加してください。">
++    Angularを使用して魅力的なユーザーインターフェースを構築する何百万もの開発者のコミュニティに参加してください。">
    <base href="/">
  
    <link rel="preconnect" href="https://www.google-analytics.com">
@@ -62,7 +62,7 @@ index 12f667f483..3d535da1b1 100644
  {
 -  "name": "Angular Documentation",
 -  "short_name": "angular.io",
-+  "name": "Angular 日本語ドキュメンテーション",
++  "name": "Angular 日本語版",
 +  "short_name": "angular.jp",
    "background_color": "#1976d2",
    "theme_color": "#1976d2",

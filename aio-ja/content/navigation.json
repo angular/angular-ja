@@ -485,8 +485,9 @@
         },
         {
           "url": "guide/esbuild",
-          "title": "esbuild-based Builds",
-          "tooltip": "Getting started with the CLI's esbuild-based build system."
+          "title": "esbuildベースのビルド",
+          "tooltip": "CLIのesbuildベースビルドシステムを使い始める。",
+          "translated": true
         },
         {
           "title": "HTTPクライアント",

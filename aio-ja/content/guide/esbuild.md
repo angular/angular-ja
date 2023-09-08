@@ -1,4 +1,4 @@
-# CLIのesbuildベースビルドシステム入門
+# CLIのesbuildベースビルドシステム
 
 <div class="alert is-important">
 

@@ -135,7 +135,7 @@
               "url": "guide/view-encapsulation",
               "title": "ビューのカプセル化",
               "tooltip": "コンポーネントのCSSスタイルがコンポーネントのビューにカプセル化される方法について説明します。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/component-interaction",

@@ -572,8 +572,9 @@
         },
         {
           "url": "guide/hydration",
-          "title": "Hydration",
-          "tooltip": "How to enable hydration on your server rendered applications."
+          "title": "ハイドレーション",
+          "tooltip": "サーバーレンダリングされたアプリケーションでハイドレーションを有効にする方法。",
+          "translated": true
         },
         {
           "url": "guide/image-directive",

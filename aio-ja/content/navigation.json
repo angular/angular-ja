@@ -181,8 +181,9 @@
           "children": [
             {
               "url": "guide/template-overview",
-              "title": "Overview",
-              "tooltip": "Introduction to templates."
+              "title": "概要",
+              "tooltip": "テンプレートの紹介。",
+              "translated": true
             },
             {
               "url": "guide/template-syntax",

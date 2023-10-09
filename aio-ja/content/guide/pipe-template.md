@@ -1,17 +1,17 @@
-# Using a pipe in a template
+# テンプレートでパイプを使う
 
-To apply a pipe, use the pipe operator (`|`) within a template expression as shown in the following code example, along with the *name* of the pipe, which is `date` for the built-in [`DatePipe`](api/common/DatePipe).
+パイプを適用するには、次のコード例に示すように、パイプ演算子 (`|`) をテンプレート式内で使用します。パイプの*名前*は、組み込みの [`DatePipe`](api/common/DatePipe) の場合は `date` です。
 
-The tabs in the example show the following:
+次のように表示されます。
 
-*   `app.component.html` uses `date` in a separate template to display a birthday.
-*   `hero-birthday1.component.ts` uses the same pipe as part of an in-line template in a component that also sets the birthday value.
+*   `app.component.html` は誕生日を表示するために別のテンプレートで `date`を使っている。
+*   `hero-birthday1.component.ts`は、誕生日の値を設定するコンポーネントの*インラインテンプレート*の一部として、同じパイプを使用している。
 
 <code-tabs>
     <code-pane header="src/app/app.component.html" region="hero-birthday-template" path="pipes/src/app/app.component.html"></code-pane>
     <code-pane header="src/app/hero-birthday1.component.ts" path="pipes/src/app/hero-birthday1.component.ts"></code-pane>
 </code-tabs>
 
-The component's `birthday` value flows through the pipe operator, `|` to the [`date`](api/common/DatePipe) function.
+コンポーネントの `birthday` の値は、パイプ演算子 `|` を通して [`date`](api/common/DatePipe) 関数に渡されます。
 
-@reviewed 2022-04-07
+@reviewed 2023-10-09

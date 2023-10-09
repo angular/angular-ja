@@ -1,11 +1,3 @@
-# Creating pipes for custom data transformations
-
-Create custom pipes to encapsulate transformations that are not provided with the built-in pipes.
-Then, use your custom pipe in template expressions, the same way you use built-in pipes—to transform input values to output values for display.
-
-## Marking a class as a pipe
-
-To mark a class as a pipe and supply configuration metadata, apply the [`@Pipe`](/api/core/Pipe "API reference for Pipe") [decorator](/guide/glossary#decorator--decoration "Definition for decorator") to the class.
 # カスタムデータ変換のためのパイプの作成
 
 組み込みのパイプでは提供されていない変換をカプセル化するためのカスタムパイプを作成します。

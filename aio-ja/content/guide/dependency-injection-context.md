@@ -1,38 +1,38 @@
-# Injection context
+# インジェクションコンテキスト
 
-The dependency injection (DI) system relies internaly on a runtime context where the current injector is available. 
-This means that injectors can only work when code is executed in this context. 
+依存性の注入 (DI) システムは、現在のインジェクターが使用可能なランタイムコンテキストに、内部的に依存します。
+つまり、インジェクターはこのコンテキストでコードが実行される場合にのみ、機能します。
 
-The injection context is available in these situations: 
+インジェクションコンテキストは、次のような場合に利用可能です。
 
-* Construction (via the `constructor`) of a class being instantiated by the DI system, such as an `@Injectable` or `@Component`.
-* In the initializer for fields of such classes.
-* In the factory function specified for `useFactory` of a `Provider` or an `@Injectable`.
-* In the `factory` function specified for an `InjectionToken`.
-* Within a stack frame that is run in a injection context.
+* `@Injectable`や`@Component`など、DIシステムによってインスタンス化されるクラスの（`constructor`を介した）構築
+* このようなクラスのフィールドの初期化子内
+* `Provider`または`@Injectable`の`useFactory`に指定されたファクトリ関数内
+* `InjectionToken`に指定された`factory`関数内
+* インジェクションコンテキストで実行されるスタックフレーム内
 
-Knowing when your are in an injection context, will allow you to use the [`inject`](api/core/inject) function to inject instances.
+どのような時にインジェクションコンテキスト内にいるかを知ることで、[`inject`](api/core/inject)関数を使用してインスタンスを注入できるようになります。
 
-## Class constructors
+## クラスコンストラクター
 
-Everytime the DI system instantiates a class, this is done in an injection context. This is being handled by the framework itself. The constructor of the class is executed in that runtime context thus allowing to inject a token using the [`inject`](api/core/inject) function. 
+DIシステムはクラスをインスタンス化するたびに、インジェクションコンテキストでインスタンス化を行います。これはフレームワーク自体によって処理されます。クラスのコンストラクターはそのランタイムコンテキストで実行されるため、[`inject`](api/core/inject)関数を使用してトークンを注入できます。
 
 <code-example language="typescript">
 class MyComponent  {
   private service1: Service1;
-  private service2: Service2 = inject(Service2); // In context
+  private service2: Service2 = inject(Service2); // コンテキスト内
 
   constructor() {
-    this.service1 = inject(HeroService) // In context
+    this.service1 = inject(HeroService) // コンテキスト内
   }
 }
 </code-example>
 
-## Stack frame in context
+## コンテキスト内のスタックフレーム
 
-Some APIs are designed to be run in an injection context. This is the case, for example, of the router guards. It allows the use of [`inject`](api/core/inject) to access a service within the guard function. 
+一部のAPIは、インジェクションコンテキストで実行されるように設計されています。これは、たとえばルーターガードの場合に当てはまります。これにより、[`inject`](api/core/inject)関数を使用して、ガード関数内でサービスにアクセスできるようになります。
 
-Here is an example for `CanActivateFn`
+`CanActivateFn`の場合の例
 <code-example format="typescript" language="typescript">
 const canActivateTeam: CanActivateFn =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
@@ -40,24 +40,22 @@ const canActivateTeam: CanActivateFn =
     };
 </code-example>
 
-## Run within an injection context
+## インジェクションコンテキスト内で実行する
 
-When you want to run a given function in an injection context without being in one, you can do it with `runInInjectionContext`. 
-This requires to have access to a given injector like the `EnvironmentInjector` for example.  
+インジェクションコンテキストに属さない特定の関数を、インジェクションコンテキスト内で実行したい場合は、`runInInjectionContext`を使用して実行できます。
+これには、たとえば`EnvironmentInjector`などの特定のインジェクターにアクセスできる必要があります。
 
 <code-example path="dependency-injection/src/app/heroes/hero.service.5.ts" region="run-in-context" header="src/app/heroes/hero.service.ts">
 </code-example>
 
-Note that `inject` will return an instance only if the injector can resolve the required token. 
+`inject`は、インジェクターが必要なトークンを解決できる場合にのみインスタンスを返すことに注意してください。
 
-## Asserts the context 
+## コンテキストの検証
 
-Angular provides `assertInInjectionContext` helper function to assert that the current context is an injection context.
+Angularは、現在のコンテキストがインジェクションコンテキストであることを検証するための`assertInInjectionContext`ヘルパー関数を提供します。
 
-## Using DI outside of a context
+## コンテキスト外でのDIの使用
 
-Calling [`inject`](api/core/inject) or calling `assertInInjectionContext` outside of an injection context will throw [error NG0203](/errors/NG0203).
-
-
+インジェクションコンテキストの外で、[`inject`](api/core/inject)や`assertInInjectionContext`を呼び出した場合、[error NG0203](/errors/NG0203)がスローされます。
 
 @reviewed 2023-04-11

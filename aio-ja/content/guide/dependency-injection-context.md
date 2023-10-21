@@ -50,9 +50,9 @@ const canActivateTeam: CanActivateFn =
 
 `inject`は、インジェクターが必要なトークンを解決できる場合にのみインスタンスを返すことに注意してください。
 
-## コンテキストのアサート
+## コンテキストの検証
 
-Angularは、現在のコンテキストがインジェクションコンテキストであることをアサートするための`assertInInjectionContext`ヘルパー関数を提供します。
+Angularは、現在のコンテキストがインジェクションコンテキストであることを検証するための`assertInInjectionContext`ヘルパー関数を提供します。
 
 ## コンテキスト外でのDIの使用
 

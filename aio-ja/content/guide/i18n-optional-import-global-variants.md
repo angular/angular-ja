@@ -22,7 +22,7 @@ npmの`@angular/common`パッケージには、ロケールデータファイル
 
 ## フランス語を`import`する例
 
-例えば、アプリケーションをブートストラップする `main.ts` で、フランス語のグローバルバリアントをインポートできます。
+たとえば、アプリケーションをブートストラップする `main.ts` で、フランス語のグローバルバリアントをインポートできます。
 
 <code-example header="src/main.ts (import locale)" path="i18n/src/main.ts" region="global-locale"></code-example>
 

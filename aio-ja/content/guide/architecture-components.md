@@ -51,8 +51,10 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 
 | Configuration options | Details |
 |:---                   |:---     |
+| `standalone`          | `true`の場合は、["スタンドアロン"](guide/standalone-components) コンポーネントとして自己宣言します。 `false`または未指定の場合、コンポーネントは[ngModule](guide/ngmodules)で宣言する必要があります。できる限り `true` が好ましいです。|
 | `selector`            | A CSS selector that tells Angular to create and insert an instance of this component wherever it finds the corresponding tag in template HTML. For example, if an application's HTML contains `<app-hero-list></app-hero-list>`, then Angular inserts an instance of the `HeroListComponent` view between those tags. |
-| `templateUrl`         | The module-relative address of this component's HTML template. Alternatively, you can provide the HTML template inline, as the value of the `template` property.  This template defines the component's *host view*.                                                                                                  |
+| `templateUrl`         | The relative address of this component's HTML template. Alternatively, you can provide the HTML template inline, as the value of the `template` property.  This template defines the component's *host view*.                                                                                                  |
+| `imports`             | An array of the components, directives, and packages that your template references. Essential for "Standalone" components.                                                                  |
 | `providers`           | An array of [providers](guide/glossary#provider) for services that the component requires. In the example, this tells Angular how to provide the `HeroService` instance that the component's constructor uses to get the list of heroes to display.                                                                   |
 
 ## テンプレートとビュー {@a templates-and-views}
@@ -75,8 +77,6 @@ Angularは、ユーザーがアプリケーションを移動するときにコ�
 <img alt="Component tree" class="left" src="generated/images/guide/architecture/component-tree.png">
 
 </div>
-
-ビュー階層は、同じ NgModule 内のコンポーネントからのビューと、異なる NgModule 内のコンポーネントからのビューを含むことができます。
 
 ## テンプレート構文 {@a template-syntax}
 
@@ -160,7 +160,7 @@ Angular のパイプを使用すると、テンプレートHTMLの表示値変�
 Angular は、[date](api/common/DatePipe)パイプや[currency](api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](api?type=pipe)を参照してください。
 新しいパイプを定義することもできます。
 
-HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/pipes)を使用します。
+HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/pipes-overview)を使用します。
 
 <code-example format="html" language="html">
 
@@ -243,4 +243,4 @@ Angularには、定義済みのディレクティブが含まれています。
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-25

@@ -6,7 +6,7 @@
 
 [Angular Internationalization][AioGuideI18nOverview]ガイドで使用しているフランス語翻訳付きサンプルアプリケーションを調べるには、<live-example name="i18n" title="live example"></live-example>を参照してください。
 
-サンプルアプリを英語またはフランス語で実行する方法については、`readme.md`を参照してください。
+サンプルアプリケーションを英語またはフランス語で実行する方法については、`readme.md`を参照してください。
 
 </div>
 

@@ -116,7 +116,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 1. コンポーネントクラスで、プロパティを`@Output()`でデコレートします。
   次の例の`newItemEvent`は`@Output()`が`EventEmitter`の型をもっていて、それがイベントであることを意味します。
 
-  <code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output" header="src/app/item-output/item-output.component.ts"></code-example>
+  <code-example header="src/app/item-output.component.ts" path="inputs-outputs/src/app/item-output.component.ts" region="item-output-class"></code-example>
 
   この宣言のそれぞれの部分を説明するとこうなります:
 
@@ -139,7 +139,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 1つ目は、[テンプレート参照変数](guide/template-reference-variables)の`#newItem`をもつHTMLの`<input>`で、そこにユーザーはアイテム名を入力します。
 `#newItem`変数の`value`プロパティは、ユーザーが`<input>`に入力した内容を格納します。
 
-<code-example path="inputs-outputs/src/app/item-output/item-output.component.html" region="child-output" header="src/app/item-output/item-output.component.html"></code-example>
+<code-example header="src/app/item-output.component.html" path="inputs-outputs/src/app/item-output.component.html" region="child-output"></code-example>
 
 2つ目の要素は、[イベントバインディング](guide/event-binding)の`click`をもつ`<button>`です。
 
@@ -205,13 +205,13 @@ banana-in-a-box 構文 `[()]` を使うことで、プロパティとイベン�
 
 To make `Input` property as required for a child component while passing values from parent component. first import `Input` and then decorate the property with `@Input({ required: true })`, as in the following example.
 
-<code-example header="src/app/item-details-metadata/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata/item-details-metadata.component.ts" region="use-input-metadata-required"></code-example>
+<code-example header="src/app/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata.component.ts" region="use-input-metadata-required"></code-example>
 
 Next, in the parent template add the following: 
 
 <code-example header="src/app/app.component.html" path="inputs-outputs/src/app/app.component.html" region="input-parent-metadata"></code-example>
 
-If required inputs `property binding` in a child component are not specified in the parent component template will result a compile time error : 
+If required inputs in a child component are not specified in the parent component template will result a compile time error: 
 
 <div class="alert is-helpful">
 NG8008: Required input item from component ItemDetailMetadataComponent must be specified.
@@ -221,11 +221,11 @@ NG8008: Required input item from component ItemDetailMetadataComponent must be s
 
 To transform an `Input` property from string to boolean to a child component while passing values from parent component. first import `booleanAttribute` and then decorate the property with `@Input({ transform: booleanAttribute })`, as in the following example.
 
-<code-example header="src/app/item-details-metadata/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata/item-details-metadata.component.ts" region="use-input-metadata-boolean-transform"></code-example>
+<code-example header="src/app/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata.component.ts" region="use-input-metadata-boolean-transform"></code-example>
 
 <code-example header="src/app/app.component.html" path="inputs-outputs/src/app/app.component.html" region="input-parent-metadata"></code-example>
 
-Similarly, you can use predefined functions from angular/core library to convert string to number as well, see `numberAttribute`.
+Similarly, you can use predefined functions from the `angular/core` library to convert string to number as well, see `numberAttribute`.
 
 <!-- links -->
 
@@ -233,4 +233,4 @@ Similarly, you can use predefined functions from angular/core library to convert
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-01

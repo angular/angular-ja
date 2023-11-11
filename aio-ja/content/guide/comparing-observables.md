@@ -1,318 +1,137 @@
-# Observable と 他の技術の比較
+# Observables compared to other techniques
 
-Promise の代わりに Observable を使用して、値を非同期に配信することができます。 同様に、Observable はイベントハンドラーと置き換えることができます。最後に、Observable は複数の値を提供するため、配列でビルドして操作する可能性のある場所で使用することができます。
+You can often use observables instead of promises to deliver values asynchronously.
+Similarly, observables can take the place of event handlers.
+Finally, because observables deliver multiple values, you can use them where you might otherwise build and operate on arrays.
 
-Observable は、これらの状況の個々の代替技術とは多少異なる動作をしますが、いくつか重要な利点があります。違いの詳細な比較を次に示します。
+Observables behave somewhat differently from the alternative techniques in each of these situations, but offer some significant advantages.
+Here are detailed comparisons of the differences.
 
-## Observable と Promise の比較
+## Observables compared to promises
 
-Observable はしばしば Promise と比較されます。主な違いは次のとおりです。
+Observables are often compared to promises.
+Here are some key differences:
 
-* Observable は宣言型です。購読するまで処理が開始されません。Promise は作成時に直ちに実行されます。これにより、結果が必要なときにいつでも実行できるレシピを定義するために、Observable が役立ちます。
+*   Observable execution is deferred; computation does not start until subscription.
+    Promises execute immediately on creation.
+    This makes observables useful for defining recipes that can be run whenever you need the result.
 
-* Observable は多くの値を提供します。Promise は1つです。これは、時間の経過とともに複数の値を取得するのには Observable が有効だということです。
+*   Observables provide many values.
+    Promises provide one.
+    This makes observables useful for getting multiple values over time.
 
-* Observable は、連鎖とサブスクリプションを区別します。Promise は `.then()` 句しかありません。これにより、作業を実行させることなく、システムの他の部分で使用される複雑な変換レシピを作成するのに便利です。
+*   Observable values can be transformed with operators as well as in the subscription.  The rich variety of RxJS operators observables enables complex transformations that can be passed around to other parts of the system, without causing the work to be executed prematurely.
+    
+    Promises have `.then()` clauses which can transform values but only after the work is done.
 
-* Observable の `subscribe()` はエラーを処理します。Promise は子の Promise にエラーをプッシュします。これにより、Observable は集中管理され、予測可能なエラー処理に役立ちます。
+*   Observables and Promises handle errors differently with roughly comparable efficacy.
 
+The following sections explore these points in greater detail.
+### Creation and subscription
 
-### 作成とサブスクリプション
+*   Observables are not executed until a consumer subscribes.
+    
+    The `subscribe()` initiates the observable's behavior which may execute synchronously or asynchronously and could produce one, many or no values over time.
 
-* Observable は、消費者が購読するまで実行されません。`subscribe()` は定義された振る舞いを一度実行し、再び呼び出すことができます。各サブスクリプションには独自の計算機能があります。再購読によって値の再計算が行われます。
+    For "unicast" observables, if you call `subscribe` again, you get a new observable execution with its own production of values.
+    Calling `subscribe` on a "multicast" observable (e.g., `Subject` or an observable with the `shareReplay` operator) simply adds another *subscriber* to the already running observable.
 
-  <code-example 
-    path="comparing-observables/src/observables.ts" 
-    header="src/observables.ts (observable)" 
-    region="observable">
-  </code-example>
+    The `subscribe` call is the end-of-the-line. You cannot continue to manipulate values after `subscribe(...)`.
 
-* Promise はすぐに、一度だけ実行されます。結果の計算は Promise が作成されたときに開始されます。作業を再開する方法はありません。 すべての `then` 句 (サブスクリプション) は同じ計算を共有します。
+    <code-example header="src/observables.ts (observable)" path="comparing-observables/src/observables.ts" region="observable"></code-example>
 
-  <code-example 
-    path="comparing-observables/src/promises.ts" 
-    header="src/promises.ts (promise)"
-    region="promise">
-  </code-example>
+*   Promises execute immediately when they are created. There is no deferred execution and, therefore, no equivalent to `subscribe()`.
 
-### チェーンにする
+    A promise is always asynchronous and can produce at most one value.
+    
+    There is no way to restart a promise and it retains its result value for the life of the promise.
 
-* Observable は map やサブスクリプションなどの変換機能を区別します。サブスクリプションだけがサブスクライバー機能をアクティブにして値の計算を開始します。
+    You can chain additional `then` clauses to a promise.
 
-  <code-example 
-    path="comparing-observables/src/observables.ts" 
-    header="src/observables.ts (chain)" 
-    region="chain">
-  </code-example>
+    <code-example header="src/promises.ts (promise)" path="comparing-observables/src/promises.ts" region="promise"></code-example>
 
-* Promise は最後の `.then` 節 (サブスクリプションに相当) と中間の `.then` 節 (mapに相当) を区別しません。
+<a id="chaining"></a>
+### Transformations
 
-  <code-example
-    path="comparing-observables/src/promises.ts"
-    header="src/promises.ts (chain)"
-    region="chain">
-  </code-example>
+*   Developers can transform values both in the *subscription* and in piped *operators*. There are large number of RxJS operators to suit many complex scenarios, including numerous ways to combine and split observables.
 
-### キャンセル処理
+    <code-example header="src/observables.ts (operators and multiple values)" path="comparing-observables/src/observables.ts" region="operators"></code-example>
 
-* Observable のサブスクリプションはキャンセル可能です。サブスクライブ解除は、リスナーがそれ以上の値を受け取らないようにし、サブスクライバー関数に作業を取り消すよう通知します。
+*   Promises do not have an equivalent to `subscribe()`. You can transform the emitted value of a promise through one or more `.then` clauses. Promises have a small set of combiners (e.g., `all`, `any`, `race`).
 
-  <code-example 
-    path="comparing-observables/src/observables.ts" 
-    header="src/observables.ts (unsubsribe)" 
-    region="unsubscribe">
-  </code-example>
+    <code-example header="src/promises.ts (chained .then)" path="comparing-observables/src/promises.ts" region="chain"></code-example>
 
-* Promise はキャンセルできません。
+### Cancellation
 
-### エラーハンドリング
+*   Observable subscriptions are cancellable.
+    Unsubscribing removes the listener from receiving further values, and notifies the subscriber function to cancel work.
 
-* Observable の実行エラーはサブスクライバーのエラーハンドラーに渡され、サブスクライバーは Observable から自動的にサブスクライブを解除します。
+    <code-example header="src/observables.ts (unsubscribe)" path="comparing-observables/src/observables.ts" region="unsubscribe"></code-example>
 
-  <code-example 
-    path="comparing-observables/src/observables.ts" 
-    header="src/observables.ts (error)"
-    region="error">
-  </code-example>
+*   Promises are not cancellable.
 
-* Promise は子の Promise にエラーをプッシュします。
+### Error handling
 
-  <code-example 
-    path="comparing-observables/src/promises.ts" 
-    header="src/promises.ts (error)"
-    region="error">
-  </code-example>
+*   Observable execution errors can be handled with the `catchError()` operator or in the `subscribe`.
 
-### チートシート
+    `catchError` can put the observable back on the normal path where it continues to produce values or it can rethrow the error. An uncaught error unsubscribes all subscribers.
 
-次のコードスニペットは、Observable と Promise を使用して同じ種類の操作を定義する方法を示しています。
+    <code-example header="src/observables.ts (error)" path="comparing-observables/src/observables.ts" region="error"></code-example>
 
-<table>
-  <thead>
-    <tr>
-      <th>処理</th>
-      <th>Observable</th>
-      <th>Promise</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>作成</td>
-      <td>
-        <pre>
-new Observable((observer) => {
-  observer.next(123);
-  });</pre>
-      </td>
-      <td>
-        <pre>
-new Promise((resolve, reject) => {
-  resolve(123);
-});</pre>
-      </td>
-    </tr>
-    <tr>
-      <td>変換</td>
-      <td><pre>obs.pipe(map((value) => value * 2));</pre></td>
-      <td><pre>promise.then((value) => value * 2);</pre></td>
-    </tr>
-    <tr>
-      <td>サブスクライブ</td>
-      <td>
-        <pre>
-sub = obs.subscribe((value) => {
-  console.log(value)
-});</pre>
-      </td>
-      <td>
-        <pre>
-promise.then((value) => {
-  console.log(value);
-});</pre>
-      </td>
-    </tr>
-    <tr>
-      <td>サブスクライブ解除</td>
-      <td><pre>sub.unsubscribe();</pre></td>
-      <td>暗黙的に Promise が決定します。</td>
-    </tr>
-  </tbody>
-</table>
+*   Promise errors can be handled with a `.catch()` or in the second argument of a `.then()`.
 
-## events API と Observable の比較
+    <code-example header="src/promises.ts (error)" path="comparing-observables/src/promises.ts" region="error"></code-example>
 
-Observable は events API を使用するイベントハンドラーと非常によく似ています。どちらの手法も通知ハンドラーを定義し、それらを使用して複数の値を処理します。Observable を登録することは、イベントリスナーを追加することと同じです。重要な違いの1つは、イベントをハンドラーに渡す前に、イベントを変換する Observable を構成できることです。
+### Cheat sheet
 
-Observable を使用してイベントや非同期操作を処理すると、HTTP リクエストなどのコンテキストの一貫性が向上するという利点があります。
+The following code snippets illustrate how the same kind of operation is defined using observables and promises.
 
-Observable と events API を使用して同じ種類の操作を定義する方法を示すコードサンプルをいくつか示します。
+| Operation   | Observable                                                                                                                                                           | Promise |
+|:---         |:---                                                                                                                                                                  |:---     |
+| Creation    | <code-example format="typescript" hideCopy language="typescript"> new Observable((observer) =&gt; { &NewLine;&nbsp; observer.next(123); &NewLine;}); </code-example> | <code-example format="typescript" hideCopy language="typescript"> new Promise((resolve, reject) =&gt; { &NewLine;&nbsp; resolve(123); &NewLine;}); </code-example> |
+| Transform   | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(map((value) =&gt; value &ast; 2));</pre>                                                  | <code-example format="typescript" hideCopy language="typescript"> promise.then((value) =&gt; value &ast; 2);</code-example>                                        |
+| Subscribe   | <code-example format="typescript" hideCopy language="typescript"> sub = obs.subscribe((value) =&gt; { &NewLine;&nbsp; console.log(value) &NewLine;});</code-example> | <code-example format="typescript" hideCopy language="typescript"> promise.then((value) =&gt; { &NewLine;&nbsp; console.log(value); &NewLine;}); </code-example>    |
+| Unsubscribe | <code-example format="typescript" hideCopy language="typescript"> sub.unsubscribe();</code-example>                                                                  | Implied by promise resolution.                                                                                                                                     |
 
-<table>
-  <tr>
-    <th></th>
-    <th>Observable</th>
-    <th>Events API</th>
-  </tr>
-  <tr>
-    <td>作成 & キャンセル</td>
-    <td>
-<pre>// Setup
-const clicks$ = fromEvent(buttonEl, ‘click’);
-// Begin listening
-const subscription = clicks$
-  .subscribe(e => console.log(‘Clicked’, e))
-// Stop listening
-subscription.unsubscribe();</pre>
-   </td>
-   <td>
-<pre>function handler(e) {
-  console.log(‘Clicked’, e);
-}
-// Setup & begin listening
-button.addEventListener(‘click’, handler);
-// Stop listening
-button.removeEventListener(‘click’, handler);
-</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>サブスクリプション</td>
-    <td>
-<pre>observable.subscribe(() => {
-  // notification handlers here
-});</pre>
-    </td>
-    <td>
-<pre>element.addEventListener(eventName, (event) => {
-  // notification handler here
-});</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>設定</td>
-    <td>Listen for keystrokes, but provide a stream representing the value in the input.
-<pre>fromEvent(inputEl, 'keydown').pipe(
-  map(e => e.target.value)
-);</pre>
-    </td>
-    <td>Does not support configuration.
-<pre>element.addEventListener(eventName, (event) => {
-  // Cannot change the passed Event into another
-  // value before it gets to the handler
-});</pre>
-    </td>
-  </tr>
-</table>
+## Observables compared to events API
 
+Observables are very similar to event handlers that use the events API.
+Both techniques define notification handlers, and use them to process multiple values delivered over time.
+Subscribing to an observable is equivalent to adding an event listener.
+One significant difference is that you can configure an observable to transform an event before passing the event to the handler.
 
-## Observable と 配列の比較
+Using observables to handle events and asynchronous operations can have the advantage of greater consistency in contexts such as HTTP requests.
 
-Observable は時間とともに値を生成します。配列は静的な値のセットとして作成されます。ある意味では、配列が同期であるところで Observable は非同期です。次の例では、➞ は非同期の値の配信を意味します。
+Here are some code samples that illustrate how the same kind of operation is defined using observables and the events API.
 
-<table>
-  <tr>
-    <th></th>
-    <th>Observable</th>
-    <th>Array</th>
-  </tr>
-  <tr>
-    <td>Given</td>
-    <td>
-      <pre>obs: ➞1➞2➞3➞5➞7</pre>
-      <pre>obsB: ➞'a'➞'b'➞'c'</pre>
-    </td>
-    <td>
-      <pre>arr: [1, 2, 3, 5, 7]</pre>
-      <pre>arrB: ['a', 'b', 'c']</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>concat()</pre></td>
-    <td>
-      <pre>concat(obs, obsB)</pre>
-      <pre>➞1➞2➞3➞5➞7➞'a'➞'b'➞'c'</pre>
-    </td>
-    <td>
-      <pre>arr.concat(arrB)</pre>
-      <pre>[1,2,3,5,7,'a','b','c']</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>filter()</pre></td>
-    <td>
-      <pre>obs.pipe(filter((v) => v>3))</pre>
-      <pre>➞5➞7</pre>
-    </td>
-    <td>
-      <pre>arr.filter((v) => v>3)</pre>
-      <pre>[5, 7]</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>find()</pre></td>
-    <td>
-      <pre>obs.pipe(find((v) => v>3))</pre>
-      <pre>➞5</pre>
-    </td>
-    <td>
-      <pre>arr.find((v) => v>3)</pre>
-      <pre>5</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>findIndex()</pre></td>
-    <td>
-      <pre>obs.pipe(findIndex((v) => v>3))</pre>
-      <pre>➞3</pre>
-    </td>
-    <td>
-      <pre>arr.findIndex((v) => v>3)</pre>
-      <pre>3</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>forEach()</pre></td>
-    <td>
-      <pre>obs.pipe(tap((v) => {
-  console.log(v);
-}))
-1
-2
-3
-5
-7</pre>
-    </td>
-    <td>
-      <pre>arr.forEach((v) => {
-  console.log(v);
-})
-1
-2
-3
-5
-7</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>map()</pre></td>
-    <td>
-      <pre>obs.pipe(map((v) => -v))</pre>
-      <pre>➞-1➞-2➞-3➞-5➞-7</pre>
-    </td>
-    <td>
-      <pre>arr.map((v) => -v)</pre>
-      <pre>[-1, -2, -3, -5, -7]</pre>
-    </td>
-  </tr>
-  <tr>
-    <td><pre>reduce()</pre></td>
-    <td>
-      <pre>obs.pipe(reduce((s,v)=> s+v, 0))</pre>
-      <pre>➞18</pre>
-    </td>
-    <td>
-      <pre>arr.reduce((s,v) => s+v, 0)</pre>
-      <pre>18</pre>
-    </td>
-  </tr>
-</table>
+|                             | Observable                                                                                                                                                                                                                                                                                                                                                      | Events API |
+|:---                         |:---                                                                                                                                                                                                                                                                                                                                                             |:---        |
+| Creation &amp; cancellation | <code-example format="typescript" hideCopy language="typescript"> // Setup &NewLine;const clicks&dollar; = fromEvent(buttonEl, 'click'); &NewLine;// Begin listening &NewLine;const subscription = clicks&dollar; &NewLine;&nbsp; .subscribe(e =&gt; console.log('Clicked', e)) &NewLine;// Stop listening &NewLine;subscription.unsubscribe(); </code-example> | <code-example format="typescript" hideCopy language="typescript">function handler(e) { &NewLine;&nbsp; console.log('Clicked', e); &NewLine;} &NewLine;// Setup &amp; begin listening &NewLine;button.addEventListener('click', handler); &NewLine;// Stop listening &NewLine;button.removeEventListener('click', handler); </code-example> |
+| Subscription                | <code-example format="typescript" hideCopy language="typescript">observable.subscribe(() =&gt; { &NewLine;&nbsp; // notification handlers here &NewLine;});</code-example>                                                                                                                                                                                      | <code-example format="typescript" hideCopy language="typescript">element.addEventListener(eventName, (event) =&gt; { &NewLine;&nbsp; // notification handler here &NewLine;}); </code-example>                                                                                                                                             |
+| Configuration               | Listen for keystrokes, but provide a stream representing the value in the input. <code-example format="typescript" hideCopy language="typescript"> fromEvent(inputEl, 'keydown').pipe( &NewLine;&nbsp; map(e =&gt; e.target.value) &NewLine;); </code-example>                                                                                                  | Does not support configuration. <code-example format="typescript" hideCopy language="typescript"> element.addEventListener(eventName, (event) =&gt; { &NewLine;&nbsp; // Cannot change the passed Event into another &NewLine;&nbsp; // value before it gets to the handler &NewLine;}); </code-example>                                   |
+
+## Observables compared to arrays
+
+An observable produces values over time.
+An array is created as a static set of values.
+In a sense, observables are asynchronous where arrays are synchronous.
+In the following examples, <code>&rarr;</code> implies asynchronous value delivery.
+
+| Values        | Observable                                                                                                                                                                                                                                           | Array                                                                                                                                                                                                                |
+|:---           |:---                                                                                                                                                                                                                                                  |:---                                                                                                                                                                                                                 |
+| Given         | <code-example format="typescript" hideCopy language="typescript"> obs: &rarr;1&rarr;2&rarr;3&rarr;5&rarr;7 </code-example> <code-example format="typescript" hideCopy language="typescript"> obsB: &rarr;'a'&rarr;'b'&rarr;'c' </code-example>       | <code-example format="typescript" hideCopy language="typescript"> arr: [1, 2, 3, 5, 7] </code-example> <code-example format="typescript" hideCopy language="typescript"> arrB: ['a', 'b', 'c'] </code-example>      |
+| `concat()`    | <code-example format="typescript" hideCopy language="typescript"> concat(obs, obsB) </code-example> <code-example format="typescript" hideCopy language="typescript"> &rarr;1&rarr;2&rarr;3&rarr;5&rarr;7&rarr;'a'&rarr;'b'&rarr;'c' </code-example> | <code-example format="typescript" hideCopy language="typescript"> arr.concat(arrB) </code-example> <code-example format="typescript" hideCopy language="typescript"> [1,2,3,5,7,'a','b','c'] </code-example>        |
+| `filter()`    | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(filter((v) =&gt; v&gt;3)) </code-example> <code-example format="typescript" hideCopy language="typescript"> &rarr;5&rarr;7 </code-example>                                | <code-example format="typescript" hideCopy language="typescript"> arr.filter((v) =&gt; v&gt;3) </code-example> <code-example format="typescript" hideCopy language="typescript"> [5, 7] </code-example>             |
+| `find()`      | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(find((v) =&gt; v&gt;3)) </code-example> <code-example format="typescript" hideCopy language="typescript"> &rarr;5 </code-example>                                         | <code-example format="typescript" hideCopy language="typescript"> arr.find((v) =&gt; v&gt;3) </code-example> <code-example format="typescript" hideCopy language="typescript"> 5 </code-example>                    |
+| `findIndex()` | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(findIndex((v) =&gt; v&gt;3)) </code-example> <code-example format="typescript" hideCopy language="typescript"> &rarr;3 </code-example>                                    | <code-example format="typescript" hideCopy language="typescript"> arr.findIndex((v) =&gt; v&gt;3) </code-example> <code-example format="typescript" hideCopy language="typescript"> 3 </code-example>               |
+| `forEach()`   | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(tap((v) =&gt; { &NewLine; &nbsp; console.log(v); &NewLine; })) &NewLine; 1 &NewLine; 2 &NewLine; 3 &NewLine; 5 &NewLine; 7 </code-example>                                | <code-example format="typescript" hideCopy language="typescript"> arr.forEach((v) =&gt; { &NewLine; &nbsp; console.log(v); &NewLine; }) &NewLine; 1 &NewLine; 2 &NewLine; 3 &NewLine; 5 &NewLine; 7 </code-example> |
+| `map()`       | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(map((v) =&gt; -v)) </code-example> <code-example format="typescript" hideCopy language="typescript"> &rarr;-1&rarr;-2&rarr;-3&rarr;-5&rarr;-7 </code-example>             | <code-example format="typescript" hideCopy language="typescript"> arr.map((v) =&gt; -v) </code-example> <code-example format="typescript" hideCopy language="typescript"> [-1, -2, -3, -5, -7] </code-example>      |
+| `reduce()`    | <code-example format="typescript" hideCopy language="typescript"> obs.pipe(reduce((s,v)=&gt; s+v, 0)) </code-example> <code-example format="typescript" hideCopy language="typescript"> &rarr;18 </code-example>                                     | <code-example format="typescript" hideCopy language="typescript"> arr.reduce((s,v) =&gt; s+v, 0) </code-example> <code-example format="typescript" hideCopy language="typescript"> 18 </code-example>               |
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2023-08-25

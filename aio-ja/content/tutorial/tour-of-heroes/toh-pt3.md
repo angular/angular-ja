@@ -12,7 +12,7 @@
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+For the sample application that this page describes, see the <live-example></live-example>.
 
 </div>
 
@@ -28,14 +28,14 @@ ng generate component hero-detail
 
 このコマンドは次の雛形を生成します:
 
-* `src/app/hero-detail` ディレクトリの作成
+- `src/app/hero-detail` ディレクトリの作成
 
 このディレクトリの中に4つのファイルを生成します:
 
-* コンポーネントスタイルのためのCSSファイル
-* コンポーネントテンプレートのためのHTMLファイル
-* `HeroDetailComponent` と名付けられたコンポーネントクラスのTypeScriptファイル
-* `HeroDetailComponent` クラスのテストファイル
+- コンポーネントスタイルのためのCSSファイル
+- コンポーネントテンプレートのためのHTMLファイル
+- `HeroDetailComponent` と名付けられたコンポーネントクラスのTypeScriptファイル
+- `HeroDetailComponent` クラスのテストファイル
 
 また、このコマンドは `src/app/app.module.ts` ファイルの `@NgModule` デコレーター中に `declarations` として `HeroDetailComponent` を追加します。
 
@@ -141,13 +141,11 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 
 <code-tabs>
 
-  <code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts"></code-pane>
+<code-pane header="src/app/hero-detail/hero-detail.component.ts" path="toh-pt3/src/app/hero-detail/hero-detail.component.ts"></code-pane>
 
-  <code-pane header="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html"></code-pane>
+<code-pane header="src/app/hero-detail/hero-detail.component.html" path="toh-pt3/src/app/hero-detail/hero-detail.component.html"></code-pane>
 
-  <code-pane header="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html"></code-pane>
-
-  <code-pane header="src/app/app.module.ts" path="toh-pt3/src/app/app.module.ts"></code-pane>
+<code-pane header="src/app/heroes/heroes.component.html" path="toh-pt3/src/app/heroes/heroes.component.html"></code-pane>
 
 </code-tabs>
 
@@ -160,3 +158,9 @@ region="import-hero" header="src/app/hero-detail/hero-detail.component.ts (impor
 * 外部の `HeroesComponent` によるバインディングが
 `hero` プロパティを利用できるように
 [`@Input` デコレータ](guide/inputs-outputs)を使用しました。
+
+## Next steps
+
+*  [4. Add services](tutorial/tour-of-heroes/toh-pt4)
+
+@reviewed 2023-08-30

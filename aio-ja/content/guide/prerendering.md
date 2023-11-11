@@ -1,63 +1,65 @@
-# 静的ページの事前レンダリング
+# Prerendering (SSG)
 
-Angular Universalを使用すると、アプリケーションのページを事前にレンダリングできます。
-事前レンダリングとは、動的なページをビルド時に処理して静的なHTMLを生成するプロセスです。
+Prerendering, commonly referred to as Static Site Generation (SSG), represents the method by which pages are rendered to static HTML files during the build process.
 
-## ページを事前レンダリングする方法
+Prerendering maintains the same performance benefits of [server-side rendering (SSR)](/guide/ssr/#why-use-ssr). But achieves a reduced Time to First Byte (TTFB), ultimately enhancing user experience. The key distinction lies in its approach that pages are served as static content, and there is no request-based rendering.
 
-静的ページを事前レンダリングするには、アプリケーションにServer-Side Rendering (SSR)機能を追加する必要があります。
-詳細については、[Universalガイド](guide/universal)を参照してください。 
-SSR機能を追加したら、次のコマンドを実行します。
+When the data necessary for server-side rendering remains consistent across all users, the strategy of prerendering emerges as a valuable alternative. Rather than dynamically rendering pages for each user request, prerendering takes a proactive approach by rendering them in advance.
 
-<code-example format="shell" language="shell">
+## How to prerender a page
 
-npm run prerender
-
-</code-example>
-
-### 事前レンダリングのビルドオプション
-
-アプリケーションに事前レンダリングを追加すると、次のビルドオプションが利用可能になります。
-
-| Options         | Details |
-|:---             |:---     |
-| `browserTarget` | ビルドするターゲットを指定します。                                                                                                       |
-| `serverTarget`  | アプリケーションの事前レンダリングに使用するサーバーターゲットを指定します。                                                                          |
-| `routes`        | 事前レンダリングする追加ルートの配列を定義します。                                                                                                 |
-| `guessRoutes`   | ビルダーがルートを抽出し、レンダリングするパスを推測する必要があるかどうか。デフォルトは、`true`です。                                                          |
-| `routesFile`    | 改行で区切られた、事前レンダリングするすべてのルートのリストを含むファイルを指定します。このオプションは、ルートが多数ある場合に役立ちます。 |
-| `numProcesses`  | 事前レンダリングコマンドの実行中に使用するCPUの数を指定します。                                                                      |
-
-### 動的ルートの事前レンダリング
-
-動的ルートを事前レンダリングできます。
-動的ルートの例としては、`product/:id`です。ここでの`id`は動的に提供されます。
-
-動的ルートを事前レンダリングするには、次のオプションから1つを選択します。
-
-*   コマンドラインで追加のルートを指定する
-*   ファイルを使用してルートを指定する
-*   特定のルートを事前レンダリングする
-
-#### コマンドラインで追加のルートを指定する
-
-事前レンダリングコマンドの実行中に、追加のルートを指定できます。
-これがその例です。
+To prerender a static page, add SSR capabilities to your application with the following Angular CLI command:
 
 <code-example format="shell" language="shell">
 
-ng run &lt;app-name&gt;:prerender --routes /product/1 /product/2
+ng add &commat;angular/ssr
 
 </code-example>
 
-#### ファイルを使用して追加ルートを指定する
+<div class="alert is-helpful">
 
-ファイルを使用してルートを指定し、静的ページを生成できます。
-この方法は、データベースやContent Management System (CMS)のような外部ソースから取得される可能性のある、eコマースアプリケーションの製品詳細など、生成するルートが多数ある場合に役立ちます。
+To create an application with prerendering capabilities from the beginning use the [ng new --ssr](cli/new) command.
 
-ファイルを使用してルートを指定するには、`--routes-file`オプションを使用し、ルートを含む`.txt`ファイルの名前を指定します。
+</div>
 
-たとえば、スクリプトを使用してデータベースからIDを抽出し、それらを`routes.txt`ファイルに保存することで、このファイルを生成できます。
+Once SSR is added, you can generate the static pages by running the build command:
+
+<code-example format="shell" language="shell">
+
+ng build
+
+</code-example>
+
+### Build options for prerender
+
+The application builder `prerender` option can be either a Boolean or an Object for more fine-tuned configuration.
+When the option is `false`, no prerendering is done. When it's is `true`, all options use the default value. When it's is an Object, each option can be individually configured.
+
+| Options          | Details                                                                                                                                                                   | Default Value |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
+| `discoverRoutes` | Whether the builder should process the Angular Router configuration to find all unparameterized routes and prerender them.                                                | `true`        |
+| `routesFile`     | The path to a file that contains a list of all routes to prerender, separated by newlines. This option is useful if you want to prerender routes with parameterized URLs. |               |
+
+<code-example format="json" language="json">
+
+&hellip;
+"architect": {
+  "build": {
+    "builder": "&commat;angular-devkit/build-angular:application",
+      "options": {
+        "prerender": {
+          "discoverRoutes": false
+        },
+       },
+&hellip;
+
+</code-example>
+
+### Prerendering parameterized routes
+
+You can prerender parameterized routes using the `routesFile` option. An example of a parameterized route is `product/:id`, where `id` is dynamically provided. To specify these routes, they should be listed in a text file, with each route on a separate line.
+
+For an app with a large number of parameterized routes, consider generating this file using a script before running `ng build`.
 
 <code-example language="none" header="routes.txt">
 
@@ -66,24 +68,24 @@ ng run &lt;app-name&gt;:prerender --routes /product/1 /product/2
 
 </code-example>
 
-`.txt`ファイルの準備ができたら、次のコマンドを実行して、静的ファイルを動的な値で事前レンダリングします。
+With routes specified in the `routes.txt` file, use the `routesFile` option to configure the builder to prerender the product routes.
 
-<code-example format="shell" language="shell">
+<code-example format="json" language="json">
 
-ng run &lt;app-name&gt;:prerender --routes-file routes.txt
-
-</code-example>
-
-#### 特定のルートを事前レンダリングする
-
-コマンドに特定のルートを渡すこともできます。
-このオプションを選択する場合は、必ず`guessRoutes`オプションを無効にしてください。
-
-<code-example format="shell" language="shell">
-
-ng run &lt;app-name&gt;:prerender --no-guess-routes --routes /product/1 /product/2
+&hellip;
+"architect": {
+  "build": {
+    "builder": "&commat;angular-devkit/build-angular:application",
+      "options": {
+        "prerender": {
+          "routesFile": "routes.txt"
+        },
+      },
+&hellip;
 
 </code-example>
+
+This configures `ng build` to prerender `/products/1` and `/products/555` at build time.
 
 <!-- links -->
 
@@ -91,4 +93,4 @@ ng run &lt;app-name&gt;:prerender --no-guess-routes --routes /product/1 /product
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-23

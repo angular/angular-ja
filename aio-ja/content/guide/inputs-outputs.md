@@ -48,23 +48,22 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 次に、子コンポーネントのテンプレートにこのように追記します:
 
-<code-example path="inputs-outputs/src/app/item-detail/item-detail.component.html" region="property-in-template" header="src/app/item-detail/item-detail.component.html"></code-example>
+<code-example header="src/app/item-detail.component.html" path="inputs-outputs/src/app/item-detail.component.html" region="property-in-template"></code-example>
 
 ### 親コンポーネントの設定 {@a configuring-the-parent-component}
 
 次のステップでは、親コンポーネントのテンプレートでプロパティをバインドします。
 この例では親コンポーネントのテンプレートは `app.component.html` です。
 
-1. 子のセレクター（ここでは `<app-item-detail>`）を
+1.  子のセレクター（ここでは `<app-item-detail>`）を
 親コンポーネントのテンプレートでのディレクティブとして使います。
+1.  [プロパティバインディング](guide/property-binding)を使い、子の`item`プロパティを親の`currentItem`プロパティにバインドします。
 
-2. [プロパティバインディング](guide/property-binding)を使い、子の`item`プロパティを親の`currentItem`プロパティにバインドします。
+    <code-example header="src/app/app.component.html" path="inputs-outputs/src/app/app.component.html" region="input-parent"></code-example>
 
-<code-example path="inputs-outputs/src/app/app.component.html" region="input-parent" header="src/app/app.component.html"></code-example>
+1.  親コンポーネントのクラスで `currentItem` の値を与えます:
 
-3. 親コンポーネントのクラスで `currentItem` の値を与えます:
-
-<code-example path="inputs-outputs/src/app/app.component.ts" region="parent-property" header="src/app/app.component.ts"></code-example>
+    <code-example header="src/app/app.component.ts" path="inputs-outputs/src/app/app.component.ts" region="parent-property"></code-example>
 
 `@Input()` を使うことで Angular は `currentItem` の値を子に渡すので、`item` は `Television` を表示します。
 
@@ -115,7 +114,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 1. コンポーネントクラスで、プロパティを`@Output()`でデコレートします。
   次の例の`newItemEvent`は`@Output()`が`EventEmitter`の型をもっていて、それがイベントであることを意味します。
 
-  <code-example header="src/app/item-output.component.ts" path="inputs-outputs/src/app/item-output.component.ts" region="item-output-class"></code-example>
+  <code-example header="src/app/item-output.component.ts" path="inputs-outputs/src/app/item-output.component.ts" region="item-output"></code-example>
 
   この宣言のそれぞれの部分を説明するとこうなります:
 
@@ -128,7 +127,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 1. 同じコンポーネントクラス内に `addNewItem()` メソッドを作ります:
 
-  <code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output-class" header="src/app/item-output/item-output.component.ts"></code-example>
+  <code-example header="src/app/item-output.component.ts" path="inputs-outputs/src/app/item-output.component.ts" region="item-output-class"></code-example>
 
   `addNewItem()`関数は、`@Output()`の`newItemEvent`を使用して、ユーザーが`<input>`に入力した値をもつイベントを発生させます。
 

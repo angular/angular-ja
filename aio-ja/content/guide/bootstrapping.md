@@ -59,7 +59,7 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 すべてのコンポーネントを厳密に1つの`NgModule`クラスに宣言する必要があります。
 コンポーネントを宣言せずに使用すると、Angularはエラーメッセージを返します。
 
-`declarations`配列は宣言を受け取ります。宣言とはコンポーネント、[ディレクティブ](guide/attribute-directives)および[パイプ](guide/pipes)です。
+`declarations`配列は宣言を受け取ります。宣言とはコンポーネント、[ディレクティブ](guide/attribute-directives)および[パイプ](guide/pipes-overview)です。
 モジュールのすべての宣言は`declarations`配列内になければなりません。
 宣言は、正確に1つのモジュールに属していなければなりません。複数のモジュールで同じクラスを宣言しようとすると、コンパイラでエラーが発生します。
 
@@ -105,7 +105,7 @@ declarations: [
 <code-example path="bootstrapping/src/app/app.module.ts" region="declarations" header="src/app/app.module.ts"></code-example>
 
 
-これで`ItemDirective`をコンポーネントで使えるようになりました。この例では`AppModule`を使いましたが、フィーチャーモジュールでも同じようにできます。ディレクティブの詳細については、[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)を参照してください。また、[パイプ](guide/pipes)やコンポーネントにも同じテクニックを使用します。
+これで`ItemDirective`をコンポーネントで使えるようになりました。この例では`AppModule`を使いましたが、フィーチャーモジュールでも同じようにできます。ディレクティブの詳細については、[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)を参照してください。また、[パイプ](guide/pipes-overview)やコンポーネントにも同じテクニックを使用します。
 
 コンポーネント、ディレクティブ、およびパイプは、1つのモジュールにのみ属することを忘れないでください。必要なモジュールをインポートしてシェアするために、アプリケーション中で宣言しなければならないのは一度だけです。これにより時間が節約され、アプリケーションをリーンに保つのに役立ちます。
 
@@ -167,4 +167,4 @@ documentation.
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-08-14

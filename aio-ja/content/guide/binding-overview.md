@@ -70,9 +70,9 @@ Angularテンプレートでは、バインディングはテンプレートか�
 
 <code-example path="interpolation/src/app/app.component.1.ts" region="var-collision" header="src/app/app.component.ts"></code-example>
 
-`ngFor`内の`customer`は`<ng-template>`のコンテキストにあるので、`customers`配列内の`customer`、この場合はEbonyとChihoを参照しています。
-`ngFor`の外の`customer`は別のコンテキストにあるので、このリストにはPadmaはありません。
-逆に、`<h1>`の`customer`はEbonyやChihoを含んでいません。この`customer`のコンテキストはコンポーネントのクラスで、`customer`のクラスの値はPadmaだからです。
+`ngFor` 内の `customer` は _ngFor_ で定義された暗黙の `<ng-template>` のコンテキストにあります。 これは `customers` 配列の各 `customer` を参照し、"Ebony" と "Chiho" を表示します。 "Padma" は配列にないので表示されません。
+
+一方、`<h1>` はコンポーネントクラスの `customer` プロパティの値にバインドされている "Padma" を表示します。
 
 ## 式のベストプラクティス
 
@@ -106,4 +106,4 @@ Angularの[単方向データフローモデル](guide/glossary#unidirectional-d
 * [プロパティバインディング](guide/property-binding)
 * [イベントバインディング](guide/event-binding)
 
-@reviewed 2022-05-12
+@reviewed 2023-09-01

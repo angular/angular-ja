@@ -40,7 +40,7 @@ Angularはその変更を検出すると、エラーをスローします。
 
 `ItemDetailComponent`で`@Input()`の型が`string`のところを調べることで、この期待を確認できます:
 
-<code-example header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)" path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type"></code-example>
+<code-example header="src/app/item-detail.component.ts (setting the @Input() type)" path="property-binding/src/app/item-detail.component.ts" region="input-type"></code-example>
 
 `AppComponent`で`parentItem`は文字列です。つまり、`[childItem]="parentItem"`内の式である`parentItem`は、文字列に評価されます。
 
@@ -56,7 +56,7 @@ Angularはその変更を検出すると、エラーをスローします。
 
 `ItemListComponent`では、`@Input()`の`items`は`Item[]`の型を持ちます。
 
-<code-example header="src/app/item-list.component.ts" path="property-binding/src/app/item-list/item-list.component.ts" region="item-input"></code-example>
+<code-example header="src/app/item-list.component.ts" path="property-binding/src/app/item-list.component.ts" region="item-input"></code-example>
 
 `Item`は`id`と`name`の2つのプロパティをもつオブジェクトであることに注意してください。
 
@@ -74,4 +74,4 @@ Angularはその変更を検出すると、エラーをスローします。
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-01

@@ -95,7 +95,7 @@ AngularのDI は `UserService` の依存オブジェクトを構築する方法�
 
 クラス以外の依存オブジェクトのプロバイダートークンを選択するために `InjectionToken` オブジェクトを定義して使用します。次の例では、`InjectionToken` 型のトークンである `APP_CONFIG` を定義しています。
 
-<code-example path="dependency-injection/src/app/app.config.ts" region="token" header="src/app/app.config.ts"></code-example>
+<code-example path="dependency-injection/src/app/injection.config.ts" region="token" header="src/app/app.config.ts"></code-example>
 
 任意指定の型パラメータ `<AppConfig>` とトークンの説明文 `app.config` で、トークンの用途を指定します。
 
@@ -125,4 +125,4 @@ Angularが実行時に見つけられるようなインターフェースは存�
 
 * [Dependency Injection in Action](guide/dependency-injection-in-action)
 
-@reviewed 2022-08-02
+@reviewed 2023-09-06

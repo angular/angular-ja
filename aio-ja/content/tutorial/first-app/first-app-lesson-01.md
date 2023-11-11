@@ -120,4 +120,4 @@ IDE で:
 * [Angular Components](/guide/component-overview)
 * [Creating applications with the Angular CLI](/cli)
 
-@reviewed 2023-07-10
+@reviewed 2023-10-24

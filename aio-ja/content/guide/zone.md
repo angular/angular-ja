@@ -4,7 +4,8 @@
 
 <!-- vale Angular.Google_Headings = YES -->
 
-Zoneは非同期タスクにまたがって持続する実行コンテキストです。JavaScript VMの[スレッドローカル ストレージ](https://en.wikipedia.org/wiki/Thread-local_storage)と考えることができます。
+Zoneは非同期タスクにまたがって持続する実行コンテキストです。
+これはJavaScript VMの[スレッドローカル ストレージ](https://en.wikipedia.org/wiki/Thread-local_storage)だと考えることができます。
 このガイドでは、AngularのNgZoneを使用して、コンポーネントの変更を自動的に検出してHTMLを更新する方法を説明します。
 
 ## 変更検知の基礎
@@ -13,9 +14,13 @@ Zoneは非同期タスクにまたがって持続する実行コンテキスト�
 
 ### Angularにおけるデータ更新と表示
 
-Angularでは、HTMLテンプレートのコントロールをAngularコンポーネントのプロパティにバインドすることにより、データを表示できます。
+Angularでは、Angularコンポーネントのプロパティの値をHTMLテンプレートに投影してデータを表示できます。
 
-<code-example path="displaying-data/src/app/app.component.1.ts" header="src/app/app.component.ts"></code-example>
+<code-example format="html" language="html">
+
+&lt;label&gt;My favorite hero is {{hero.name}}&lt;/label&gt;
+
+</code-example>
 
 さらに、DOMイベントをAngularコンポーネントのメソッドにバインドできます。イベントをバインドしたメソッドでは、Angularコンポーネントのプロパティを更新することもできます。これにより、テンプレートに表示される対応するデータが更新されます。
 
@@ -76,7 +81,7 @@ HTMLも自動的に更新されます。
       value = 'timeout update value';
       // 手動で detectChange を呼び出す
       detectChange();
-    }, 100);
+    });
 
     // 例 4: Promise.then
     Promise.resolve('promise resolved a value').then(v => {
@@ -486,4 +491,4 @@ Zone.jsを削除するには、次のように変更します。
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-26

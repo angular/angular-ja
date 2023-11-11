@@ -779,12 +779,20 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
 
 <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate" header="app/demo/demo.testbed.spec.ts"></code-example>
 
-Angularの`By`クラスには、共通述語の静的メソッドが3つあります。
+The Angular `By` class has three static methods for common predicates:
 
-- `By.all` - すべての要素を返します。
-- `By.css(selector)` - マッチするCSSセレクターをもつ要素を返します。
-- `By.directive(directive)` - ディレクティブクラスのインスタンスにマッチするAngularの要素を返します。
+| Static method             | Details |
+|:---                       |:---     |
+| `By.all`                  | Return all elements                                                        |
+| `By.css(selector)`        | Return elements with matching CSS selectors                                |
+| `By.directive(directive)` | Return elements that Angular matched to an instance of the directive class |
 
 <code-example path="testing/src/app/hero/hero-list.component.spec.ts" region="by" header="app/hero/hero-list.component.spec.ts"></code-example>
 
-<hr>
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2023-09-07

@@ -364,7 +364,7 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 #### _fakeAsync()_を使用した非同期テスト
 
 `fakeAsync()`機能を使うためには、 `zone.js/testing` をテストセットアップファイルでインポートする必要があります。
-Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでにインポートされています。
 
 次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
 
@@ -569,7 +569,7 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 #### _waitForAsync()_を使用した非同期テスト
 
 `waitForAsync()`機能を使うためには、 `zone.js/testing` をテストセットアップファイルでインポートする必要があります。
-Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでにインポートされています。
 
 次は、さきほどの`fakeAsync()`テストを`waitForAsync()`ユーティリティで書き直したものです。
 
@@ -1596,3 +1596,11 @@ Angularは最初からずっと本物の`HeroDetailService`のインスタンス
 および`overridePipe`メソッドを提供します。
 
 あなた自身のオプションと組み合わせを探しましょう。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2023-09-07

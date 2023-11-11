@@ -2,8 +2,8 @@
 
 このチュートリアルでは、次の方法を説明します。
 
-* ヒーローのリストを表示するために Tour of Heroes アプリケーションを拡張する
-* ユーザーがヒーローを選択し、ヒーローの詳細を表示できるようにする
+- ヒーローのリストを表示するために Tour of Heroes アプリケーションを拡張する
+- ユーザーがヒーローを選択し、ヒーローの詳細を表示できるようにする
 
 <div class="alert is-helpful">
 
@@ -33,6 +33,10 @@
 
 ### `*ngFor` でヒーローを一覧表示する
 
+In the `HeroesComponent` component file, import the `NgFor` directive and add it to the imports array.
+
+<code-example header="src/app/heroes/heroes.component.ts" path="toh-pt2/src/app/heroes/heroes.component.ts" region="import-ngfor"></code-example>
+
 `HeroesComponent` テンプレートを開き、次のように変更してください：
 
 1.  `<h2>` を先頭に追加する
@@ -41,7 +45,7 @@
 4.  `<span>`要素内の`hero`のプロパティを表示する`<li>`内に`<button>`を配置する
 5.  コンポーネントのスタイルを設定するためのCSSクラスを追加する
 
-このようになります：
+It should look similar to the following:
 
 <code-example header="heroes.component.html (heroes template)" path="toh-pt2/src/app/heroes/heroes.component.1.html" region="list"></code-example>
 
@@ -50,13 +54,13 @@
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-[`*ngFor`](guide/built-in-directives#ngFor) はAngularの *反復* ディレクティブです。
+[`*ngFor`](guide/built-in-directives#ngFor) はAngularの _反復_ ディレクティブです。
 これは、リスト内の各要素に対してホスト要素を繰り返します。
 
 この例の構文は次のとおりです。
 
 | Syntax   | Details |
-|:---      |:---     |
+| :------- | :--------------------------------------------------------------------------------- |
 |`<li>`  | ホスト要素です |
 |`heroes`  |  モックのヒーローリストを保持する`HeroesComponent` クラスのリストです |
 |`hero`  | 各ループ毎のリストに、現在のヒーローオブジェクトを保持します |
@@ -132,7 +136,7 @@ Add a click event binding to the `<button>` in the `<li>` like this:
 
 ### クリックイベントのハンドラーを追加する
 
-Rename the component's `hero` property to `selectedHero` but don't assign any value to it since there is no *selected hero* when the application starts.
+Rename the component's `hero` property to `selectedHero` but don't assign any value to it since there is no _selected hero_ when the application starts.
 
 次のようにして `onSelect()` メソッドを追加し、クリックされたヒーローをテンプレートからコンポーネントの `selectedHero` に割り当ててください。
 
@@ -147,7 +151,7 @@ Rename the component's `hero` property to `selectedHero` but don't assign any va
 
 <code-example header="heroes.component.html (selected hero details)" path="toh-pt2/src/app/heroes/heroes.component.html" region="selectedHero-details"></code-example>
 
-The hero details should only be displayed when a hero is selected. When a component is created initially, there is no selected hero, so we add the `*ngIf` directive to the `<div>` that wraps the hero details, to instruct Angular to render the section only when the `selectedHero` is actually defined (after it has been selected by clicking on a hero).
+The hero details should only be displayed when a hero is selected. When a component is created initially, there is no selected hero. Import the `NgIf` directive in your component (similar to `NgFor`) and add the `*ngIf` directive to the `<div>` that wraps the hero details. This directive tells Angular to render the section only when the `selectedHero` is defined after it has been selected by clicking on a hero.
 
 <div class="alert is-important">
 
@@ -200,4 +204,8 @@ Add the following `[class.selected]` binding to the `<button>` in the `HeroesCom
 *   HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました
 *   CSSスタイルのクラスを `class` バインディングで切り替えることができます
 
-@reviewed 2022-05-23
+## Next steps
+
+*  [3. Create a feature component](tutorial/tour-of-heroes/toh-pt3)
+
+@reviewed 2023-08-30

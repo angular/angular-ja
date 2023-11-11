@@ -295,3 +295,11 @@ The next example performs the following steps to verify the model-to-view data f
 * [Building a template-driven form](guide/forms) tutorial
 * [フォームバリデーション](guide/form-validation#template-driven-validation)
 * `NgForm` directive API reference
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2023-09-07

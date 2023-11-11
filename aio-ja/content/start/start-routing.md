@@ -60,11 +60,11 @@ AngularのルーターはブラウザのURLと[定義したルート](#define-ro
 
 ここでは、ルーターを利用して `products` のデータとルート情報を組み合わせて、各商品の詳細を表示します。
 
-1.  `product-details.component.ts` で、`@angular/router` から `ActivatedRoute` を、`../products` から `products` の配列をインポートする。
+1.  `product-details.component.ts`で、`@angular/router` から `ActivatedRoute` を、`@angular/core` から `OnInit` を、`../products` から `products` 配列をインポートします。
 
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="imports"></code-example>
 
-1.  `product` プロパティを定義する。
+1.  `product` プロパティを定義する。`implements OnInit` という文は、クラスが `OnInit` インターフェースを実装していることを示し、コンポーネントが作成されたときの初期化タスクに `ngOnInit` メソッドの実装が必要になります。
 
     <code-example header="src/app/product-details/product-details.component.ts" path="getting-started/src/app/product-details/product-details.component.1.ts" region="product-prop"></code-example>
 
@@ -94,7 +94,7 @@ AngularのルーターはブラウザのURLと[定義したルート](#define-ro
 
     この行 `<h4>{{ product.price | currency }}</h4>` は、`currency` パイプを使用して `product.price` を数値から通貨文字列に変換しています。
     パイプとは、HTML テンプレート内のデータを変換する方法です。
-    Angularのパイプについての詳細は、[パイプ](guide/pipes "Pipes")を参照してください。
+    Angularのパイプについての詳細は、[パイプ](guide/pipes-overview "Pipes")を参照してください。
 
 ユーザーが製品リストの名前をクリックすると、ルーターは製品の別個のURLに移動し、`ProductDetailsComponent`を表示し、製品の詳細を表示します。
 

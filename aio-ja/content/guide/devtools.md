@@ -5,7 +5,7 @@ Angular DevToolsは、[最適化設定オプション](guide/workspace-config#op
 
 <div class="video-container">
 
-<iframe allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/bavWOHZM6zE"></iframe>
+<iframe allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" title="DevToolsの概要" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/bavWOHZM6zE"></iframe>
 
 </div>
 

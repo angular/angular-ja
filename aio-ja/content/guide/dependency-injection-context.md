@@ -58,4 +58,6 @@ Angularは、現在のコンテキストがインジェクションコンテキ�
 
 インジェクションコンテキストの外で、[`inject`](api/core/inject)や`assertInInjectionContext`を呼び出した場合、[error NG0203](/errors/NG0203)がスローされます。
 
+
+
 @reviewed 2023-04-11

@@ -1906,10 +1906,31 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 これはルートではありませんが、正当な値です。
 ポップアップの `RouterOutlet` を `null` に設定すると、アウトレットがクリアされ、現在のURLからセカンダリのポップアップルートが削除されます。
 
-{@a guards}
+<div class="alert is-critical">
 
-{@a milestone-5-route-guards}
+**Note:** All commands in the array passed to `Router.navigate()` target a _specific segment_ in the `UrlTree`. 
+We specify the parent of the `ActivatedRoute` as the `relativeTo` option because we want to remove `'popup'` from the segment which holds its reference.
+It's important to always be aware of which segments the commands will be applied to.
 
+</div>
+
+<div class="alert is-helpful">
+
+When `relativeTo` is not provided to the `Router.navigate()` method, the commands are processed starting at the root.
+We could omit the `relativeTo` option in this particular example because the `'popup'` outlet appears at the root level of the configuration.
+  
+</div>
+
+<div class="alert is-helpful">
+
+If you want to close an outlet which appears at any segment depth, you could accomplish
+this by creating a `UrlTree` from the current URL, recursively clearing segment `children` matching the outlet name, and finally 
+calling `Router.navigateByUrl()` with the `root` segment of the current `UrlTree`.
+
+</div>
+
+<a id="guards"></a>
+<a id="milestone-5-route-guards"></a>
 
 ## マイルストーン 5: ルートガード
 

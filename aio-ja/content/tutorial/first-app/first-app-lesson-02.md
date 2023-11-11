@@ -39,7 +39,7 @@ IDE の **ターミナル** ペインで
 
     <code-example format="shell" language="shell">
 
-    ng generate component home --standalone --inline-template --skip-tests
+    ng generate component home --inline-template --skip-tests
 
     </code-example>
 
@@ -132,4 +132,4 @@ IDE の **編集** ペインで
 *  [`Component` reference](api/core/Component)
 *  [Angular components overview](guide/component-overview)
 
-@reviewed 2023-07-10
+@reviewed 2023-10-24

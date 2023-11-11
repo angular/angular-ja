@@ -15,11 +15,13 @@
 ## Angular国際化オプショナルプラクティスについて学ぶ
 
 <div class="card-container">
+    <!-- Page removed; contents relocated to `i18n-optional-import-global-variants.md`
     <a href="guide/i18n-optional-manual-runtime-locale" class="docs-card" title="ランタイムロケールを手動で設定">
         <section>ランタイムロケールを手動で設定</section>
         <p>プロジェクトのランタイムロケールを変更する方法を学びます</p>
         <p class="card-footer">ランタイムロケールを手動で設定</p>
     </a>
+    -->
     <a href="guide/i18n-optional-import-global-variants" class="docs-card" title="ロケールデータのグローバル設定をインポート">
         <section>ロケールデータのグローバル設定をインポート</section>
         <p>ロケールデータの言語設定をインポートする方法を学びます</p>
@@ -50,4 +52,4 @@
 
 <!-- end links -->
 
-@reviewed 2021-10-28
+@reviewed 2023-08-31

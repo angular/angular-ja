@@ -21,7 +21,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 ルーティング遷移アニメーションを有効にするには、次の手順を実行します:
 
-1.  アプリケーションにルーティングモジュールをインポートし、ルーティング設定を有効にします。
+1.  可能な経路を定義するルーティング設定を作成します。NgModule ベースのアプリケーションでは、`RouterModule` を作成してメインの `AppModule` に追加します。
 2.  ルーターアウトレットを追加して、アクティブ化されたコンポーネントをDOMのどこに配置するのか、Angularルーターに指示します。
 3.  アニメーションを定義します。
 
@@ -37,8 +37,23 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 ## ルーティング設定
 
-まず、`RouterModule`クラスのメソッドを使用してルーティングを設定します。 
-このルーティング設定は、ルーターにナビゲーションする方法を指示します。
+まず始めに、一連のルートを設定します。このルート設定はルーターにナビゲートする経路を指示します。
+
+- `app.routes.ts`に `routes` という配列を作成し、ルートセットを定義します。
+- `app.config.ts` のプロバイダー配列の中で `provideRouter` 関数にルートを追加する。
+
+```ts
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes)
+  ]
+};
+```
+
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+For `NgModule` based applications:
 
 `RouterModule.forRoot`メソッドを使用してルーティングを定義します。 
 また、この`RouterModule`をメインモジュールである`AppModule`の`imports`配列に追加します。
@@ -53,7 +68,7 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 
 次の設定では、アプリケーションのルーティングを定義します。
 
-<code-example path="animations/src/app/app.module.ts" header="src/app/app.module.ts" region="route-animation-data" language="typescript"></code-example>
+<code-example header="src/app/app.routes.ts" path="animations/src/app/app.routes.ts" region="route-animation-data"></code-example>
 
 `home`および`about`パスは、`HomeComponent`および`AboutComponent`ビューに関連付けられます。 
 ルーティング設定は、ナビゲーションが対応するパスと一致したときに、`HomeComponent`ビューと`AboutComponent`ビューをインスタンス化するようにAngularルーターに指示します。
@@ -61,9 +76,6 @@ Angularルーターには、ルーティングが変更されたときにビュ�
 The `data` property of each route defines the key animation-specific configuration associated with a route.
 ルーティングが変更されると、`data`プロパティの値が`AppComponent`に渡されます。 
 
-<div class="alert is-helpful">
-
-**NOTE**: <br />
 使用する `data`プロパティの名前は任意です。 
 たとえば、前の例で使用されている名前*animation*は任意の選択肢です。
 

@@ -41,8 +41,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 子コンポーネントクラスで`@Input()`デコレーターを使用するには、次の例のように、最初に`Input`をインポートしてから、プロパティを`@Input()`でデコレートします。
 
-<code-example path="inputs-outputs/src/app/item-detail/item-detail.component.ts" region="use-input" header="src/app/item-detail/item-detail.component.ts"></code-example>
-
+<code-example header="src/app/item-detail.component.ts" path="inputs-outputs/src/app/item-detail.component.ts" region="use-input"></code-example>
 
 ここで `@Input()` が装飾しているのは `string` 型の <code class="no-auto-link">item</code> プロパティですが、`@Input()` プロパティは `number`, `string`, `boolean`, `object` など、どんな型であっても構いません。
 `item` の値は親コンポーネントから来ます。

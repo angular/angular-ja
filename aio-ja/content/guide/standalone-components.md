@@ -122,7 +122,7 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-## ルーティングと遅延読み込み
+## ルーティングと遅延読み込み {@a routing-and-lazy-loading}
 
 ルーターAPIは、スタンドアロンコンポーネントを利用するために更新および簡素化されました。多くの一般的な遅延読み込みのシナリオでは、 `NgModule` は不要になりました。
 

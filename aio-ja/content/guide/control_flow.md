@@ -1,18 +1,18 @@
-# Built-in control flow
+# 組み込みのフロー制御
 
-Angular templates support *control flow blocks* that let you conditionally show, hide, and repeat
-elements.
+Angularテンプレートは*フロー制御ブロック*をサポートしており、
+条件付きの要素の表示、非表示、および要素の繰り返しを行うことができます。
 
 <div class="alert is-important">
 
-Angular built-in control flow is in [developer preview](/guide/releases#developer-preview). It is
-ready to try, but may change before becoming stable.
+Angular の組み込みのフロー制御は[developer preview](/guide/releases#developer-preview)に含まれています。
+試してみることはできますが、安定する前に変更される可能性があります。 
 
 </div>
 
-## `@if` block conditionals
+## `@if` ブロック: 条件による分岐
 
-The `@if` block conditionally displays its content when its condition expression is truthy:
+`@if`ブロックは、その条件式が真であるとき、その内容を条件付きで表示します：
 
 ```html
 @if (a > b) {
@@ -20,8 +20,8 @@ The `@if` block conditionally displays its content when its condition expression
 }
 ```
 
-The `@if` block might have one or more associated branches. Immediately after an `@if` block,
-you can optionally specify any number of `@else if` blocks and one `@else` block:
+`@if`ブロックは、1つ以上の関連するブランチをもつことができます。
+`@if`ブロックの直後には、任意の数の`@else if`ブロックと1つの`@else`ブロックを指定できます:
 
 ```html
 @if (a > b) {
@@ -33,10 +33,10 @@ you can optionally specify any number of `@else if` blocks and one `@else` block
 }
 ```
 
-### Referencing the conditional expression's result
+### 条件式の結果を参照する
 
-You can create a reference to the result of an `@if` block's conditional expression and use that
-reference inside the block's content.
+`@if`ブロックの条件式の結果への参照を作成し、
+その参照をブロックの内容の中で使用することができます。
 
 ```html
 @if (users$ | async; as users) {
@@ -44,9 +44,9 @@ reference inside the block's content.
 }
 ```
 
-## `@for` block - repeaters
+## `@for` ブロック: 繰り返し
 
-The `@for` block renders its content for each item in a collection.
+`@for` ブロックは、コレクション内の各アイテムに対してその内容を表示します。
 
 ```html
 @for (item of items; track item.id) {
@@ -54,32 +54,32 @@ The `@for` block renders its content for each item in a collection.
 }
 ```
 
-The collection can be any
-JavaScript [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols),
-but standard JavaScript `Array` values offer performance advantages.
+コレクションは任意の
+JavaScript [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) であることができますが、
+標準の JavaScript `Array` がパフォーマンス上で有利です。
 
-### `track` for calculating difference of two collections
+### 2つのコレクションの差分を計算するための `track`
 
-The `@for` block requires a `track` expression. Angular uses the value of this expression
-as a unique identity for each item. This identity allows the framework to perform the minimal
-set of DOM operations necessary after items are added, removed, or reordered.
+`@for` ブロックは `track` 式を必要とします。
+Angular はこの式の値を各アイテムの一意の識別子として使用します。
+この識別子により、フレームワークはアイテムが追加、削除、または並べ替えられた後に必要な最小限の DOM 操作を実行できます。
 
-For simple cases, you can use `track $index` as a reasonable default.
+シンプルなケースでは、`track $index` を合理的なデフォルトとして使用できます。
 
-### `$index` and other contextual variables
+### `$index` およびその他のコンテキスト変数
 
-Inside `@for` contents, several implicit variables are always available:
+`@for` 内のコンテンツでは、いくつかの暗黙的な変数が常に利用可能です:
 
-| Variable | Meaning                                       |
+| 変数 | 意味                                       |
 |----------|-----------------------------------------------|
-| `$count` | Number of items in a collection iterated over |
-| `$index` | Index of the current row                      |
-| `$first` | Whether the current row is the first row      |
-| `$last`  | Whether the current row is the last row       |
-| `$even`  | Whether the current row index is even         |
-| `$odd`   | Whether the current row index is odd          |
+| `$count` | 繰り返し処理されるコレクションのアイテム数 |
+| `$index` | 現在の行のインデックス                      |
+| `$first` | 現在の行が最初の行であるかどうか            |
+| `$last`  | 現在の行が最後の行であるかどうか            |
+| `$even`  | 現在の行のインデックスが偶数であるかどうか  |
+| `$odd`   | 現在の行のインデックスが奇数であるかどうか  |
 
-These variables are always available with these names, but can be aliased via a `let` segment:
+これらの変数は常にこの名前で利用可能ですが、`let` セグメントによって別名を付けることができます:
 
 ```html
 @for (item of items; track item.id; let idx = $index, e = $even) {
@@ -87,13 +87,13 @@ These variables are always available with these names, but can be aliased via a 
 }
 ```
 
-Aliasing is useful when nesting `@for` blocks so that you can reference these variable values in
-deeper blocks.
+エイリアスは、これらの変数の値をより深いブロックで参照できるようにするため、
+`@for` ブロックをネストするときに便利です。
 
-### `empty` block
+### `empty` ブロック
 
-You can optionally include an `@empty` section immediately after the `@for` block content. The
-content of the `@empty` block displays when there are no items:
+`@for` ブロックの直後に `@empty` セクションをオプションで指定できます。
+`@empty` ブロックの内容は、コレクションが空の場合に表示されます:
 
 ```html
 @for (item of items; track item.name) {
@@ -103,9 +103,9 @@ content of the `@empty` block displays when there are no items:
 }
 ```
 
-## `@switch` block - selection
+## `@switch` ブロック: 場合分け
 
-The syntax for `switch` is similar to `if`, inspired by the JavaScript `switch` statement:
+`switch` の構文は、JavaScript の `switch` 文に着想を得ており、`if` に似ています:
 
 ```html
 @switch (condition) {
@@ -121,39 +121,39 @@ The syntax for `switch` is similar to `if`, inspired by the JavaScript `switch` 
 }
 ```
 
-The value of the conditional expression is compared to the case expression using the `===` operator.
+条件式の値は、`===` 演算子を使用してケース式と比較されます。
 
-**`@switch` does not have fallthrough**, so you do not need an equivalent to a `break` or `return`
-statement.
+**`@switch` には fallthrough がありません** そのため、
+`break` や `return` に相当するものは必要ありません。
 
-The `@default` block is optional and can be omitted. If no `@case` matches the expression and there
-is no `@default` block, nothing is shown.
+`@default` ブロックはオプションで、省略することができます。
+`@case` が式にマッチせず、`@default` ブロックがない場合、何も表示されません。
 
-## Comparing built-in control flow to `NgIf`, `NgSwitch` and `NgFor`
+## 組み込みのフロー制御と `NgIf`、`NgSwitch`、`NgFor` の比較
 
-The `@if` block replaces `*ngIf` for expressing conditional parts of the UI.
+`@if` ブロックは`*ngIf` を置き換え、UI の条件による分岐を表現します。
 
-The `@switch` block replaces `ngSwitch` with major benefits:
+`@switch` ブロックは `ngSwitch` を置き換え、大きな利点があります:
 
-* The `@switch` block does not require a container element for the condition expression or each
-  conditional template.
-* The `@switch` block supports template type-checking, including type narrowing within each branch.
+* `@switch` ブロックは、
+  条件式または各条件付きテンプレートのコンテナ要素を必要としません。
+* `@switch` ブロックは、テンプレートの型チェックをサポートしており、各ブランチ内での型の狭まりを含みます。
 
-The `@for` block replaces `*ngFor` for iteration, and has several differences compared to its
-structural directive `NgFor` predecessor:
+`@for` ブロックは、繰り返しのための `*ngFor` を置き換え、
+前身であるその構造ディレクティブの `NgFor` と比較していくつかの違いがあります:
 
-* The `@for` block requires a tracking expression to uniquely identify items in the collection.
-  While `NgFor` requires a `trackBy` _method_, however, the `@for` block simplifies tracking by
-  accepting a `track` _expression_.
-* You can specify content to show when the collection is empty with the `@empty` block.
-* The `@for` block uses an optimized algorithm for determining a minimal number of DOM operations 
-  necessary after a collection is modified. While `NgFor` allowed developers to provide a custom
-  `IterableDiffer` implementation, the `@for` block does not support custom differs.
+* `@for` ブロックは、コレクション内の各アイテムを一意に識別するためのトラッキング式を必要とします。
+  `NgFor` は `trackBy` _メソッド_ を必要としますが、
+  `@for` ブロックは `track` _式_ を受け入れることで、トラッキングを簡素化します。
+* コレクションが空の場合に表示するコンテンツを指定できます。
+* `@for` ブロックは、コレクションが変更された後に必要な最小限の DOM 操作を決定するための最適化されたアルゴリズムを使用します。
+  `NgFor` は開発者がカスタムの `IterableDiffer` 実装を提供できるようにしていましたが、
+  `@for` ブロックはカスタムの differ をサポートしていません。
 
-The `track` setting replaces `NgFor`'s concept of a `trackBy` function. Because `@for` is built-in,
-we can provide a better experience than passing a `trackBy` function, and directly use an expression
-representing the key instead. Migrating from `trackBy` to `track` is possible by invoking
-the `trackBy` function:
+`track` の設定は `NgFor` の `trackBy` 関数の概念を置き換えます。
+`@for` は組み込みなので、`trackBy` 関数を渡すよりも優れた体験を提供し、代わりにキーを表す式を直接使用できます。
+`trackBy` から `track` への移行は、
+`trackBy` 関数を呼び出すことで可能です:
 
 ```html
 @for (item of items; track itemId($index, item)) {
@@ -161,5 +161,5 @@ the `trackBy` function:
 }
 ```
 
-With `NgFor`, loops over immutable data without `trackBy` are the most common cause of performance
-bugs across Angular applications.
+`NgFor` では、`trackBy` を指定しない不変データのループは、
+Angular アプリケーション全体でもっとも一般的なパフォーマンスの原因となります。

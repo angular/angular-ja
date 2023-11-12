@@ -878,8 +878,9 @@
           "children": [
             {
               "url": "guide/control_flow",
-              "title": "Built-in control flow",
-              "tooltip": "Angular built-in control flow: if, for and switch"
+              "title": "組み込みのフロー制御",
+              "tooltip": "Angular組み込みのフロー制御: if、for、switch",
+              "translated": true
             },
             {
               "url": "guide/signals",

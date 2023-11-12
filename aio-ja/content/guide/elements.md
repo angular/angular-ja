@@ -1,4 +1,4 @@
-# Angular Elements概要
+# Angular Elementsの概要
 
 _Angular Elements_ は、 _Custom Elements_ （Web Componentsとも呼ばれます）としてパッケージ化される Angular コンポーネントです。Custom Elements は、フレームワークに依存しない形で新たな HTML 要素を定義するウェブ標準技術です。
 
@@ -29,13 +29,10 @@ Custom Elements は簡単に作成することができ、Angular の機能を�
 
 Custom Elements は自分自身をブートストラップします。つまり、DOM に追加されたタイミングで自動的にブートストラップを開始し、DOM から取り除かれたタイミングで自動的に破棄します。Custom Elements は一度 DOM に追加されると、通常の HTML 要素と同じように表示され、振る舞います。特別な Angular の専門用語や使用方法などは一切必要ありません。
 
-- <b>Angularアプリケーション内の簡単な動的コンテンツ</b>
-
-  コンテンツを Custom Elements に変換すると、Angular アプリケーション内にダイナミック HTML コンテンツを容易に作成することができるようになります。Angular アプリケーション内の DOM に直接追加した HTML コンテンツは、通常 Angular の処理なしで表示されます。もっとも、ご自身で _動的コンポーネント_ を定義して、HTML タグをアプリケーションのデータに結びつけ、変更検知の対象となるようにコードを追加した場合、話は別ですが。Custom Elements を使用すると、これらのすべての処理は自動的に行われるようになります。
-
-- <b>コンテンツリッチなアプリケーション</b>
-
-  もしこのドキュメントのような豊富なコンテンツを持った Angular アプリケーションをお持ちであれば、Custom Elements を使うことで、Angular の知識を必要とすることなく、洗練された Angular の機能をコンテンツに持たせることができます。たとえば、この Angular ガイドは、Angular ナビゲーションツールによって直接 DOM に追加されています。しかしながら、複雑な操作が可能な `<code-snippet>` のような特別な要素を含めることができます。必要なのは、コンテンツプロバイダーにCustom Elements の構文を伝えることだけです。Angular や、コンポーネントのデータ構造、実装ついての知識などは必要ありません。
+|                                                | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :--------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Easy dynamic content in an Angular application | Transforming a component to a custom element provides a straightforward path to creating dynamic HTML content in your Angular application. HTML content that you add directly to the DOM in an Angular application is normally displayed without Angular processing, unless you define a _dynamic component_, adding your own code to connect the HTML tag to your application data, and participate in change detection. With a custom element, all of that wiring is taken care of automatically.                                                                                                                                        |
+| Content-rich applications                      | If you have a content-rich application, such as the Angular app that presents this documentation, custom elements let you give your content providers sophisticated Angular functionality without requiring knowledge of Angular. For example, an Angular guide like this one is added directly to the DOM by the Angular navigation tools, but can include special elements like `<code-snippet>` that perform complex operations. All you need to tell your content provider is the syntax of your custom element. They don't need to know anything about Angular, or anything about your component's data structures or implementation. |
 
 ### 仕組みについて
 
@@ -94,32 +91,13 @@ Custom Elements は Angular コンポーネントを _ホスト_ し、 コン�
 
 最近開発された [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) のWebプラットフォーム機能は、現在多くのブラウザでネイティブにサポートされています。
 
-<table>
-<tr>
-  <th>ブラウザ</th>
-  <th>Custom Elements のサポート状況</th>
-</tr>
-<tr>
-  <td>Chrome</td>
-  <td>ネイティブサポート済み</td>
-</tr>
-<tr>
-  <td>Edge (Chromium-based)</td>
-  <td>ネイティブサポート済み</td>
-</tr>
-<tr>
-  <td>Firefox</td>
-  <td>ネイティブサポート済み</td>
-</tr>
-<tr>
-  <td>Opera</td>
-  <td>ネイティブサポート済み</td>
-</tr>
-<tr>
-  <td>Safari</td>
-  <td>ネイティブサポート済み</td>
-</tr>
-</table>
+| Browser                 | Custom Element Support |
+| :---------------------- | :--------------------- |
+| Chrome                  | Supported natively.    |
+| Edge \(Chromium-based\) | Supported natively.    |
+| Firefox                 | Supported natively.    |
+| Opera                   | Supported natively.    |
+| Safari                  | Supported natively.    |
 
 ワークスペースに `@angular/elements` パッケージを追加するには、次のコマンドを実行します。
 
@@ -133,36 +111,27 @@ npm install @angular/elements --save
 
 以前は、実行時にコンポーネントをアプリケーションに追加する場合、_動的コンポーネント_ を定義し、そして [動的コンポーネントローダー](guide/dynamic-component-loader) で説明されているように、ロードしてDOMの要素にアタッチし、依存関係、変更検知、およびイベント処理について記述する必要がありました。
 
-Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。&mdash; つまり、必要なイベントハンドリングを定義するだけでよくなります（アプリケーションで使用しない場合は、コンポーネントをコンパイルから除外する必要があります）。
+Angular の Custom Elements を使用すれば、自動的にインフラストラクチャとフレームワークのすべてが提供されるようになり、処理がよりシンプルで、よりわかりやすくなります。&mdash; つまり、必要なイベントハンドリングを定義するだけでよくなります。
+
+<div class="alert is-helpful">
+  You do still have to exclude the component from compilation, if you are not going to use it in your application.
+</div>
 
 サンプルアプリケーション（下記）のポップアップ・サービスでは、自動的にロードすることも、Custom Elements に変換することも可能です。
 
-- `popup.component.ts` は、シンプルな pop-up 要素をアニメーションとスタイルとともに定義しています。
-- `popup.service.ts` は、動的コンポーネントまたは Custom Elements として `PopupComponent` を実行する2つの異なる方法を提供する注入可能なサービスを作成しています。動的読み込みの手法のために、どれだけ多くの設定が必要となるかご注意ください。
-- `app.module.ts` は、`PopupComponent` をモジュールの `declarations` のリストに追加します。
-- `app.component.ts` は、アプリケーションのルートコンポーネントを定義しています。このコンポーネントは、`PopupService` を使用して、実行時に pop-up を DOM に追加します。アプリケーションが起動すると、ルートコンポーネントのコンストラクターは `PopupComponent` を Custom Elements に変換します。
+| Files                | Details                                                                                                                                                                                                                      |
+| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `popup.component.ts` | Defines a simple pop-up element that displays an input message, with some animation and styling.                                                                                                                             |
+| `popup.service.ts`   | Creates an injectable service that provides two different ways to invoke the `PopupComponent`; as a dynamic component, or as a custom element Notice how much more setup is required for the dynamic-loading method.         |
+| `app.component.ts`   | Defines the application's root component, which uses the `PopupService` to add the pop-up to the DOM at run time. When the application runs, the root component's constructor converts `PopupComponent` to a custom element. |
 
 比較のため、デモでは、両方の手法を使っています。ひとつは動的読み込みの手法を使ってポップアップを追加するボタンです。もうひとつは Custom Elements を使って popup を追加するボタンです。準備の方法が異なるだけで、結果は同じだということが分かるでしょう。
 
 <code-tabs>
-
-  <code-pane header="popup.component.ts" path="elements/src/app/popup.component.ts">
-
-  </code-pane>
-
-  <code-pane header="popup.service.ts" path="elements/src/app/popup.service.ts">
-
-  </code-pane>
-
-  <code-pane header="app.module.ts" path="elements/src/app/app.module.ts">
-
-  </code-pane>
-
-  <code-pane header="app.component.ts" path="elements/src/app/app.component.ts">
-
-  </code-pane>
+    <code-pane header="popup.component.ts" path="elements/src/app/popup.component.ts"></code-pane>
+    <code-pane header="popup.service.ts" path="elements/src/app/popup.service.ts"></code-pane>
+    <code-pane header="app.component.ts" path="elements/src/app/app.component.ts"></code-pane>
 </code-tabs>
-
 
 ## Custom Elementsの型指定
 
@@ -208,9 +177,19 @@ declare global {
 
 これで、TypeScript は組み込み要素と同じように正しい型を推論できます：
 
-```ts
-document.createElement('div')               //--> HTMLDivElement (built-in element)
-document.querySelector('foo')               //--> Element        (unknown element)
-document.createElement('my-dialog')         //--> NgElement & WithProperties<{content: string}> (custom element)
-document.querySelector('my-other-element')  //--> NgElement & WithProperties<{foo: 'bar'}>      (custom element)
-```
+<code-example format="typescript" language="typescript">
+
+document.createElement('div') //--&gt; HTMLDivElement (built-in element)
+document.querySelector('foo') //--&gt; Element (unknown element)
+document.createElement('my-dialog') //--&gt; NgElement &amp; WithProperties&lt;{content: string}&gt; (custom element)
+document.querySelector('my-other-element') //--&gt; NgElement &amp; WithProperties&lt;{foo: 'bar'}&gt; (custom element)
+
+</code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2023-08-30

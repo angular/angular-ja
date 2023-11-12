@@ -1,6 +1,6 @@
-# Service Workerの設定
+# サービスワーカーの設定
 
-This topic describes the properties of the service worker configuration file.
+このトピックでは、サービスワーカー設定ファイルのプロパティについて説明します。
 
 #### 前提条件
 
@@ -9,24 +9,29 @@ This topic describes the properties of the service worker configuration file.
 *   [Service worker overview](https://developer.chrome.com/docs/workbox/service-worker-overview/)
 *   [プロダクションにおけるService Worker](guide/service-worker-devops)
 
-<hr />
+## Modifying the configuration
 
-`ngsw-config.json`設定ファイルは、
-Angular Service WorkerがキャッシュすべきファイルとデータのURLと、
-キャッシュされたファイルとデータをどのように更新すべきかを指定します。[Angular CLI](cli)は`ng build`中に設定ファイルを作成します。
-手動で`ngsw-config`ツールで作成することもできます。(`<project-name>` にはビルドしているプロジェクトの名前が入ります)
+`ngsw-config.json` JSON設定ファイルは、AngularサービスワーカーがキャッシュするファイルやデータのURL、キャッシュしたファイルやデータの更新方法を指定します。
+[Angular CLI](cli) はこの設定ファイルを `ng build` 時に処理します。
 
-<code-example language="sh">
+<!-- Does the following ngsw-config tool still work? Does not seem to. Not even clear what it does.
+
+Manually, process it with the `ngsw-config` tool \(where `<project-name>` is the name of the project being built\):
+
+<code-example format="shell" language="shell">
+
 ./node_modules/.bin/ngsw-config ./dist/&lt;project-name&gt; ./ngsw-config.json [/base/href]
+
 </code-example>
 
-設定ファイルはJSON形式を使用します。すべてのファイルパスは`/`で始まらなければなりません。
+設定ファイルはJSON形式を使用します。
+-->
+すべてのファイルパスは`/`で始まらなければなりません。
 これはCLIプロジェクトでの展開ディレクトリに対応し、通常は `dist/<project-name>`です。
 
 <a id="glob-patterns"></a>
 
 Unless otherwise commented, patterns use a **limited*** glob format that internally will be converted into regex:
-
 * `**`は、0個以上のパスセグメントに一致します。
 * `*`は、厳密に0個以上の`/`を除く文字に一致します。
 * `?` は、厳密に1個の`/`を除く文字に一致します。
@@ -409,4 +414,4 @@ It is recommended that you use the default performance strategy whenever possibl
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-06

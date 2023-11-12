@@ -94,17 +94,6 @@ Angular CLI を使用して、新しいアプリケーション *angular-router-
 
     タイトルと 2 つのコンポーネントからなる HTML で構成される単一の Web ページが表示されます。
 
-## `@angular/router` から `RouterModule` をインポートする
-
-ルーティングを使用すると、URL のパスに応じてアプリケーションの特定のビューを表示できます。
-この機能をサンプル・アプリケーションに追加するには、`app.module.ts` を更新して `RouterModule` を利用できるようにする必要があります。
-このモジュールは `@angular/router` からインポートします。
-
-1.  コードエディタで `app.module.ts` を開きます。
-1.  次の `import` 文を追加します。
-
-    <code-example header="src/app/app.module.ts" path="router-tutorial/src/app/app.module.ts" region="router-import"></code-example>
-
 ## 独自に routes を定義する
 
 このセクションでは、次の 2 つの routes を定義します。
@@ -117,17 +106,44 @@ routes の定義は JavaScript のオブジェクトです。
 最初のプロパティ `path` は routes の URL パスを指定する文字列です。
 2 番目のプロパティ `component` は、そのパスに対してアプリケーションが表示するコンポーネントです。
 
-1.  コードエディタで `app.module.ts` を開きます。
-1.  `@NgModule ()` のセクションを探します。
-1.  そのセクションの `imports` の配列を次のように置き換えます。
+1. From your code editor, create and open the `app.routes.ts` file.
+1. Create and export a routes list for your application:
 
-    <code-example header="src/app/app.module.ts" path="router-tutorial/src/app/app.module.ts" region="import-basic"></code-example>
+```
+import {Routes} from '@angular/router';
 
-このコードは `RouterModule` を `imports` の配列に追加します。
-次に、コードは `RouterModule` の `forRoot()` メソッドを使用して 2 つの routes を定義します。
-このメソッドは JavaScript のオブジェクトの配列をとり、各オブジェクトは routes のプロパティを定義します。
-`forRoot()` メソッドは、アプリケーションが 1 つの `RouterModule` のみをインスタンス化することを保証します。
-詳細は [Singleton Services](guide/singleton-services#forroot-and-the-router) を参照してください。
+export const routes = [];
+```
+1. Add two routes for your first two components:
+
+```
+  {path: 'crisis-list', component: CrisisListComponent},
+  {path: 'heroes-list', component: HeroesListComponent},
+```
+
+This routes list is an array of JavaScript objects, with each object defining the properties of a route.
+
+## Import `provideRouter` from `@angular/router`
+
+Routing lets you display specific views of your application depending on the URL path.
+To add this functionality to your sample application, you need to update the `app.config.ts` file to use the router providers function, `provideRouter`.
+You import this provider function from `@angular/router`.
+
+1.  From your code editor, open the `app.config.ts` file.
+1.  Add the following import statements:
+
+```
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+```
+
+2. Update the providers in the `appConfig`:
+
+```
+providers: [provideRouter(routes)]
+```
+
+For `NgModule` based applications, put the `provideRouter` in the `providers` list of the `AppModule`, or whichever module is passed to `bootstrapModule` in the application.
 
 ## コンポーネントを `router-outlet` で更新する
 
@@ -145,6 +161,13 @@ routes が正しく動作するには、テンプレートを更新して、URL 
 1.  `router-outlet` ディレクティブを追加します。
 
     <code-example header="src/app/app.component.html" path="router-tutorial/src/app/app.component.html" region="router-outlet"></code-example>
+
+1. Add `RouterOutlet` to the imports of the `AppComponent` in `app.component.ts`
+
+```
+imports: [RouterOutlet],
+```
+
 
 更新したアプリケーションをブラウザで表示します。
 アプリケーションのタイトルのみが表示されます。
@@ -183,6 +206,8 @@ http://localhost:4200/heroes-list
    この HTML は Angular ディレクティブ `routerLink` を使用しています。
    このディレクティブは、定義した routes をテンプレートファイルに結びつけます。
 
+1. Add the `RouterLink` directive to the imports list of `AppComponent` in `app.component.ts`.
+
 1.  `app.component.css` を開いて、次のスタイルを追加します。
 
     <code-example header="src/app/app.component.css" path="router-tutorial/src/app/app.component.css"></code-example>
@@ -199,6 +224,7 @@ http://localhost:4200/heroes-list
 1.  アンカータグを更新して、`routerLinkActive` ディレクティブを入力します。
 
     <code-example header="src/app/app.component.html" path="router-tutorial/src/app/app.component.html" region="routeractivelink"></code-example>
+1. Add the `RouterLinkActive` directive to the `imports` list of `AppComponent` in `app.component.ts`.
 
 アプリケーションを再度表示します。
 いずれかのボタンをクリックすると、そのボタンのスタイルが自動的に更新され、アクティブなコンポーネントがユーザーに示されます。
@@ -210,10 +236,12 @@ Note that we are also specifying a value for the `routerLinkActive`'s `ariaCurre
 
 チュートリアルの手順では、`/heroes-list` コンポーネントを表示するようにユーザーをリダイレクトする routes を追加します。
 
-1.  コードエディタで `app.module.ts` を開きます。
-1.  `imports` 配列の `RouterModule` セクションを次のように更新します。
+1.  From your code editor, open the `app.routes.ts` file.
+1.  Update the `routes` section as follows.
 
-    <code-example header="src/app/app.module.ts" path="router-tutorial/src/app/app.module.ts" region="import-redirect"></code-example>
+```
+  {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
+```
 
     この新しい route は、パスとして空の文字列を使用することに注意してください。
     さらに、 `component` プロパティを 2 つの新しいプロパティに置き換えます。
@@ -243,10 +271,11 @@ Note that we are also specifying a value for the `routerLinkActive`'s `ariaCurre
 
     <code-example header="src/app/page-not-found/page-not-found.component.html" path="router-tutorial/src/app/page-not-found/page-not-found.component.html"></code-example>
 
-1.  `app.module.ts` を開きます。
-    `imports` 配列の `RouterModule` セクションを次のように更新します。
+1.  Open the `app.routes.ts` file and add the following route to the routes list:
 
-    <code-example header="src/app/app.module.ts" path="router-tutorial/src/app/app.module.ts" region="import-wildcard"></code-example>
+```
+  {path: '**', component: PageNotFoundComponent}
+```
 
     新しいルートはパス `**` を使用します。
     このパスは Angular がワイルドカードルートを識別する方法です。
@@ -260,7 +289,7 @@ Note that we are also specifying a value for the `routerLinkActive`'s `ariaCurre
     </div>
 
 アプリケーション上の存在しないルート (`http://localhost:4200/powers` 等) に移動してみてください。
-このルートは `app.module.ts` に定義されているものと一致しません。
+このルートは `app.routes.ts` に定義されているものと一致しません。
 しかし、あなたがワイルドカードルートを定義すると、アプリケーションは自動的に `PageNotFound` コンポーネントを表示します。
 
 ## 次のステップ
@@ -279,4 +308,4 @@ Note that we are also specifying a value for the `routerLinkActive`'s `ariaCurre
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

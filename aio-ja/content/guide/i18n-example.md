@@ -6,6 +6,8 @@
 
 [Angular Internationalization][AioGuideI18nOverview]ガイドで使用しているフランス語翻訳付きサンプルアプリケーションを調べるには、<live-example name="i18n" title="live example"></live-example>を参照してください。
 
+サンプルアプリケーションを英語またはフランス語で実行する方法については、`readme.md`を参照してください。
+
 </div>
 
 ## `fr-CA`と`en-US`の例。
@@ -15,7 +17,6 @@
 <code-tabs>
     <code-pane header="src/app/app.component.html" path="i18n/src/app/app.component.html"></code-pane>
     <code-pane header="src/app/app.component.ts" path="i18n/src/app/app.component.ts"></code-pane>
-    <code-pane header="src/app/app.module.ts" path="i18n/src/app/app.module.ts"></code-pane>
     <code-pane header="src/main.ts" path="i18n/doc-files/main.1.ts"></code-pane>
     <code-pane header="src/locale/messages.fr.xlf" path="i18n/doc-files/messages.fr.xlf.html"></code-pane>
 </code-tabs>
@@ -28,4 +29,4 @@
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-05

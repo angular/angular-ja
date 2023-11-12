@@ -3,12 +3,6 @@
 **Angular Signals**は、アプリケーションのどこでどのように状態が使用されているかを細かく追跡するシステムで、
 フレームワークがレンダリングの更新を最適化できるようにします。
 
-<div class="alert is-important">
-
-Angular Signals は[開発者向けプレビュー](/guide/releases#developer-preview)で利用できます。試すことはできますが、安定版になる前に変更される可能性があります。
-
-</div>
-
 ## Signal とは何か？
 
 **Signal** は、値が変化したときに関心をもつ利用者に対して通知できる、値のラッパーです。
@@ -39,17 +33,6 @@ count.set(3);
 ```ts
 // カウントを1だけ増加させます。
 count.update(value => value + 1);
-```
-
-オブジェクトを含むSignalを扱う場合、そのオブジェクトを直接変更するのが便利な場合があります。このような変更を内部で行うには、`.mutate`メソッドを使用します：
-
-```ts
-const todos = signal([{title: 'Learn signals', done: false}]);
-
-todos.mutate(value => {
-  // 配列の最初のTODOを置換せずに'done: true'に変更します。
-  value[0].done = true;
-});
 ```
 
 書き込み可能Signalは `WritableSignal` という型を持っています。
@@ -122,6 +105,8 @@ effect(() => {
 Effectは**少なくとも1回は**必ず実行される。Effect が実行されると、読み取った任意の Signal の値を追跡します。これらのSignalの値が変化するたびに、Effectが再度実行されます。算出Signalと同様に、Effectは依存関係を動的に追跡し、直近の実行で読み込まれたSignalのみを追跡します。
 
 Effectは常に**非同期的**に、変更検知のプロセス中に実行されます。
+
+Note: `effect()`APIはまだ[開発者プレビュー](/guide/releases#developer-preview)であり、シグナルベースのリアクティビティをコアフレームワークに統合するための作業中です。
 
 ### Effectのユースケース
 
@@ -208,8 +193,6 @@ data.set(['test']);
 ```
 
 書き込み可能Signal と算出Signalの両方に対して等価関数を設定できます。
-
-書き込み可能Signalの場合、`.mutate()`は新しい参照を生成せずに現在の値を変更するため、等価性をチェックしません。
 
 ### 依存関係を追跡せずに読み取る
 

@@ -153,4 +153,9 @@ Angularのテストについてもっと知りたい方は、[Testing](guide/tes
 *   Angularのコンポーネントがデータを表示することを学びました。
 *   アプリケーションのタイトルを表示するために二重波カッコによる補間を使いました。
 
-@reviewed 2022-02-28
+## Next steps
+
+*  [1. The hero editor](tutorial/tour-of-heroes/toh-pt1)
+
+@reviewed 2023-08-30
+

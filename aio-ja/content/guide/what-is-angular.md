@@ -1,205 +1,403 @@
-# Angularとは何か？
+# What is Angular?
 
-このトピックはAngularを理解するのに役立ちます。Angularとは何であるか、Angularが提供する利点、そしてあなたがアプリケーションを作るときに何が期待できるのか、といったことです。
+Angular is a development platform, built on [TypeScript](https://www.typescriptlang.org).
 
-Angularは[TypeScript](https://www.typescriptlang.org/)上に作られた開発プラットフォームです。プラットフォームとしてAngularには次のことが含まれます：
+As a platform, Angular includes:
 
-* スケーラブルなウェブアプリケーションを構築するためのコンポーネントベースのフレームワーク
-* ルーティング、フォーム管理、クライアントとサーバー間の通信など、さまざまな機能をカバーする、十分に統合されたライブラリのコレクション
-* コードの開発、ビルド、テスト、更新を支援する一連の開発者ツール
+- A component-based framework for building scalable web applications
+- A collection of well-integrated libraries that cover a wide variety of features, including routing, forms management, client-server communication, and more
+- A suite of developer tools to help you develop, build, test, and update your code
 
-Angularを使用すると、ひとりの開発者によるプロジェクトからエンタープライズレベルのアプリケーションまで拡張できるプラットフォームを利用できます。Angularは、更新を可能な限り簡単にするように設計されているため、最小限の労力で最新の開発を利用できます。何よりも、Angularエコシステムは、170万人を超える開発者、ライブラリ作成者、コンテンツ作成者からなる多様なグループで構成されています。
+With Angular, you're taking advantage of a platform that can scale from single-developer projects to enterprise-level applications. Best of all, the Angular ecosystem consists of a diverse group of over 1.7 million developers, library authors, and content creators.
 
-<div class="alert is-helpful">
+<a id="essentials"></a>
 
-このガイドのコードスニペットを含む実用的な例については <live-example name="what-is-angular"></live-example> を参照してください。
+## Prerequisites
 
-</div>
+Like most modern frameworks, Angular expects you to be familiar with HTML, CSS and JavaScript. In addition, it’s recommended to have familiarity with the following concepts and tools:
 
-{@a essentials}
-## Angularアプリケーション：基本事項
+<a id="concepts"></a>
 
-このセクションでは、Angularの背後にある中心的なアイデアについて説明します。これらのアイデアを理解すると、アプリケーションをより効果的に設計および構築するのに役立ちます。
+### Concepts
 
-{@a components}
-### コンポーネント
+- [JavaScript Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+- [TypeScript fundamentals](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+- [TypeScript Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html)
 
-コンポーネントは、アプリケーションを組み立てる構成要素です。コンポーネントには、`@Component()`デコレーターを付けたTypeScriptのクラス、HTMLテンプレート、およびスタイルが含まれます。`@Component()`デコレーターには、次のAngular固有の情報を指定します。
+<a id="tools"></a>
 
-* コンポーネントがテンプレートでどのように使用されるかを定義するCSSセレクター。このセレクターに一致するテンプレート内のHTML要素は、コンポーネントのインスタンスになります。
-* コンポーネントのレンダリング方法をAngularに指示するHTMLテンプレート。
-* テンプレートのHTML要素の外観を定義するCSSスタイルのオプションのセット。
+### Tools
 
-以下は最小限のAngularコンポーネントです。
+- **TypeScript** - This is shipped by default with every Angular app to provide improved tooling and enhanced maintainability for a better developer experience.
+- **Command Line Interface (CLI)** - Angular uses a compiler in order to abstract tooling complexity and optimize your code so you can focus on building your app.
 
-<code-example
-  path="what-is-angular/src/app/hello-world/hello-world.component.ts"></code-example>
+<a id="components"></a>
 
-このコンポーネントを使用するには、テンプレートに次のように記述します。
+## Components
 
-<code-example path="what-is-angular/src/app/app.component.html" region="hello-world-selector"></code-example>
+Components are the fundamental building block for creating applications in Angular. By leveraging component architecture, Angular aims to provide structure for organizing your project into manageable, well organized parts with clear responsibilities so that your code is maintainable and scalable.
 
-Angularがこのコンポーネントをレンダリングすると、結果のDOMは次のようになります。
+An Angular component can be identified by the `component` suffix (e.g., `my-custom-name.component.ts` and has the following:
 
-<code-example path="what-is-angular/src/app/hello-world-example.html" language="html"></code-example>
+- A decorator to define configuration options for things like:
+  - A selector that defines what the tag name is when referring a component in a template
+  - An HTML template that controls what is rendered to the browser
+- A TypeScript class that defines the behavior of the component. Examples include handling user input, managing state, defining methods, etc.
 
-Angularのコンポーネントモデルは、強力なカプセル化と直感的なアプリケーション構造を提供します。また、コンポーネントは、アプリケーションのユニットテストを容易にし、コードの読みやすさを向上させます。
+Here is a simplified example of a TodoListItem component.
 
-コンポーネントでできることの詳細については、[コンポーネント](guide/component-overview)セクションを参照してください。
+```ts
+// 📄 todo-list-item.component.ts
+@Component({
+  standalone: true,
+  selector: 'todo-list-item',
+  template: ` <li>(TODO) Read cup of coffee introduction</li> `,
+  styles: ['li { color: papayawhip; }'],
+})
+export class TodoListItem {
+  /* Component behavior is defined in here */
+}
+```
 
-{@a templates}
-### テンプレート
+<a id="behavior"></a>
 
-<!-- vale Angular.Google_WordListWarnings = NO -->
+### Behavior
 
-すべてのコンポーネントには、そのコンポーネントのレンダリング方法を宣言するHTMLテンプレートがあります。このテンプレートは、インラインまたはファイルパスで定義します。
+Now that we have the basic structure for the component, let’s learn more about how you define the component’s behavior.
 
-<!-- vale Angular.Google_WordListWarnings = YES -->
+#### State
 
-Angularは、コンポーネントから動的な値を挿入できる追加の構文でHTMLを拡張します。
-コンポーネントの状態が変化すると、AngularはレンダリングされたDOMを自動的に更新します。
-次の例に示すように、この機能の応用例のひとつは動的なテキストの挿入です。
+When defining data that you want the component to manage, this can be accomplished by declaring it by defining [class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields).
 
-<code-example path="what-is-angular/src/app/hello-world-interpolation/hello-world-interpolation.component.html" region="say-hello"></code-example>
+In the example of a `todo-list-item.component.ts`, there are two properties we want to track: `taskTitle` and `isComplete`. Using the [class field syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields), they can be defined as follows:
 
-メッセージの値は、コンポーネントクラスから取得されます。
+```ts
+// 📄 todo-list-item.component.ts
+@Component({ ... })
+export class TodoList {
+  taskTitle = '';
+  isComplete = false;
+}
+```
 
-<code-example path="what-is-angular/src/app/hello-world-interpolation/hello-world-interpolation.component.ts"></code-example>
+#### Methods
 
-アプリケーションがコンポーネントとそのテンプレートをロードすると、ユーザーには次のように表示されます。
+You can define functions for a component by declaring methods within the component class.
 
-<code-example language="html">
-&lt;p&gt;Hello, World!&lt;/p&gt;
-</code-example>
+```ts
+// 📄 todo-list-item.component.ts
+@Component({ ... })
+export class TodoList {
+  taskTitle = '';
+  isComplete = false;
 
-二重中括弧の使用に注意してください。二重中括弧はAngularにそれらの中の内容を補間するように指示します。
+  updateTitle(newTitle: string) {
+    this.taskTitle = newTitle;
+  }
 
-Angularはプロパティバインディングもサポートしており、HTML要素のプロパティと属性の値を設定し、アプリケーションのプレゼンテーションロジックに値を渡すのに役立ちます。
+  completeTask() {
+    this.isComplete = true;
+  }
+}
+```
 
-<code-example path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.html" region="bindings"></code-example>
+<a id="templates"></a>
 
-角かっこが使用されていることに注意してください。この構文は、プロパティまたは属性をコンポーネントクラスの値にバインドしていることを示しています。
+### Templates
 
-キーストローク、マウスの動き、クリック、タッチなどのユーザーアクションを待ち受けて応答するためにイベントリスナーを宣言します。括弧内にイベント名を指定して、イベントリスナーを宣言します。
+Every component has an HTML template that defines what that component renders to the DOM.
 
-<code-example path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.html" region="event-binding"></code-example>
+HTML templates can be defined as an inline template within the TypeScript class, or in separate files with the `templateUrl` property. To learn more, check out [the docs on defining component templates](guide/component-overview#defining-a-components-template).
 
-前の例では、コンポーネントクラスで定義されているメソッドを呼び出しています。
+Within this document, the examples will use inline templates for more concise code snippets.
 
-<code-example path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.ts" region="method"></code-example>
+#### Rendering Dynamic Data
 
-以下は、Angularのテンプレート内での補間、プロパティバインディング、イベントバインディングの組み合わせ例です。
+When you need to display dynamic content in your template, Angular uses the double curly brace syntax in order to distinguish between static and dynamic content.
 
-<code-tabs linenums="true">
-  <code-pane
-    header="hello-world-bindings.component.ts"
-    path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.ts">
-  </code-pane>
-  <code-pane
-    header="hello-world-bindings.component.html"
-    path="what-is-angular/src/app/hello-world-bindings/hello-world-bindings.component.html"
-    linenums="false">
-  </code-pane>
-</code-tabs>
+```ts
+@Component({
+  template: ` <p>Title: {{ taskTitle }}</p> `,
+})
+export class TodoListItem {
+  taskTitle = 'Read cup of coffee';
+}
+```
 
-[ディレクティブ](guide/built-in-directives)を使用して、テンプレートに機能を追加します。Angularでもっとも人気のあるディレクティブは`*ngIf`と`*ngFor`です。ディレクティブを使用して、DOM構造を動的に変更するなど、さまざまな作業を実行します。また、独自のカスタムディレクティブを作成して、優れたユーザー体験を作成します。
+This is how it renders to the page.
 
-次のコードは、`*ngIf`ディレクティブの例です。
+```html
+<p>Title: Read cup of coffee</p>
+```
 
-<code-tabs linenums="true">
-  <code-pane
-    header="hello-world-ngif.component.ts"
-    path="what-is-angular/src/app/hello-world-ngif/hello-world-ngif.component.ts">
-  </code-pane>
-  <code-pane
-    header="hello-world-ngif.component.html"
-    path="what-is-angular/src/app/hello-world-ngif/hello-world-ngif.component.html"
-    linenums="false">
-  </code-pane>
-</code-tabs>
+This syntax declares an **interpolation** between the dynamic data property inside of the HTML. As a result, whenever the data changes, Angular will automatically update the DOM reflecting the new value of the property.
 
-Angularの宣言型テンプレートを使えば、アプリケーションのロジックとプレゼンテーションをきれいに分けることができます。テンプレートは標準的なHTMLをベースにしており、構築、維持、更新が容易です。
+#### Dynamic Properties and Attributes
 
-テンプレートの詳細については、[テンプレート](guide/template-syntax)セクションを参照してください。
+When you need to dynamically set the value of attributes in an HTML element, the target property is wrapped in square brackets. This binds the attribute with the desired dynamic data by informing Angular that the declared value should be interpreted as a JavaScript-like statement ([with some Angular enhancements](guide/understanding-template-expr-overview)) instead of a plain string.
 
-{@a di}
-### 依存性の注入
+```html
+<button [disabled]="hasPendingChanges"></button>
+```
 
-依存性の注入を使用すると、インスタンス化を行わなくても、TypeScriptクラスの依存性を宣言できます。代わりに、Angularがインスタンス化を処理します。このデザインパターンにより、よりテスト可能で柔軟なコードを記述できます。依存性の注入を理解することはAngularの使用を開始するために必須ではありませんが、ベストプラクティスとしてAngularの多くの側面である程度使用しているので、理解しておくことを強くお勧めします。
+In this example, the disabled property is tied to the `hasPendingChanges` variable that Angular would expect to find within the component’s state.
 
-依存性の注入がどのように機能するかを説明するために、次の例を考えてください。最初のファイル`logger.service.ts`は`Logger`クラスを定義しています。このクラスには、コンソールに数値を記録する`writeCount`関数が含まれています。
+#### Event Handling
 
-<code-example path="what-is-angular/src/app/logger.service.ts"></code-example>
+You can bind event listeners by specifying the event name in parenthesis and invoking a method on the right-hand-side of the equals sign:
 
-次に、`hello-world-di.component.ts`ファイルはAngularコンポーネントを定義しています。このコンポーネントには、`Logger`クラスの`writeCount`関数を使用するボタンが含まれています。その関数にアクセスするために、コンストラクターに`private logger: Logger`を追加することにより、`Logger`サービスが`HelloWorldDI`クラスに注入されます。
+```html
+<button (click)="saveChanges()">Save Changes</button>
+```
 
-<code-example path="what-is-angular/src/app/hello-world-di/hello-world-di.component.ts"></code-example>
+If you need to pass the event object to your event listener, Angular provides an implicit `$event` variable that can be used inside the function call:
 
-依存性の注入とAngularの詳細については、[Angularの依存性の注入](guide/dependency-injection)セクションを参照してください。
+```html
+<button (click)="saveChanges($event)">Save Changes</button>
+```
 
-{@a cli}
+<a id="styles"></a>
 
-## Angular CLI
+### Styles
 
-Angular CLIは、Angularアプリケーションを開発するための、もっとも速く、分かりやすく、お勧めの方法です。Angular CLIを使用すると、多くの作業をトラブルなく行うことができます。ここではその例を紹介します。
+When you need to style a component, there are two optional properties that you can configure inside of the `@Component` decorator.
+
+Similar to component templates, you can manage a component's styles in the same file as the TypeScript class, or in separate files with the `styleUrls` properties.
+
+Components can optionally include a list of CSS styles that apply to that component's DOM:
+
+```ts
+@Component({
+  selector: 'profile-pic',
+  template: `<img src="profile-photo.jpg" alt="Your profile photo" />`,
+  styles: [
+    `
+      img {
+        border-radius: 50%;
+      }
+    `,
+  ],
+})
+export class ProfilePic {
+  /* Your code goes here */
+}
+```
+
+By default, a component's style will only apply to elements in that component's template in order to limit the side effects.
+
+To learn more, check out [the docs on component styling](guide/component-styles).
+
+<a id="directives"></a>
+
+## Directives
+
+When building applications, developers often need to extend on the behavior of an HTML element or Angular directives/components. Examples of this include: displaying content based on a certain condition, rendering a list of items based on application data, changing the styles on an element based on user interaction, etc.
+
+To solve this problem, Angular uses the concept of directives, which allow you to add new behaviors to an element in a declarative and reusable way.
+
+### Conditional rendering
+
+One of the most common scenarios that developers encounter is the desire to show or hide content in templates based on a condition.
+
+Similar to JavaScript's `if` control block, Angular provides a built-in `ngIf` directive to control whether an element will render if the expression returns a truthy value.
+
+```html
+<section class="admin-controls" *ngIf="hasAdminPrivileges">
+  The content you are looking for is here.
+</section>
+```
+
+If `hasAdminPrivileges` is true, the application will display the content to the user, otherwise, the element is removed from the DOM entirely.
+
+### Rendering a list
+
+Another common scenario is to render a list of items based on dynamic data.
+
+Similar to JavaScript’s `for` loop, Angular provides another built-in directive called `ngFor`, The following code will render one `<li>` element for each item in `taskList`.
+
+```html
+<ul class="ingredient-list">
+  <li *ngFor="let task of taskList">{{ task }}</li>
+</ul>
+```
+
+### Custom directives
+
+While built-in directives help to solve common problems that developers encounter, there are situations where developers require custom behavior that’s specific to their application. In these cases, Angular provides a way for you to create custom directives.
+
+Custom Angular directives can be identified by the `directive` suffix (e.g., `my-custom-name.directive.ts`).
+
+Similar to defining a component, directives are comprised of the following:
+
+- A TypeScript decorator to define configuration options for things like:
+  - A selector that defines the tag name is when the component is called
+- A TypeScript class that defines the extended behavior the directive will add to the respective HTML element.
+
+For example, here’s what a custom directive for highlighting an element:
+
+```ts
+@Directive({
+  selector: '[appHighlight]',
+})
+export class HighlightDirective {
+  private el = inject(ElementRef);
+  constructor() {
+    this.el.nativeElement.style.backgroundColor = 'yellow';
+  }
+}
+```
+
+To apply this to an element, the directive is called by adding it as an attribute.
+
+```html
+<p appHighlight>Look at me!</p>
+```
+
+Directives can also leverage user events, take input for additional customization, but this goes beyond the scope of this article. To learn more, check out [the docs on creating custom directives](guide/attribute-directives).
+
+<a id="services"></a>
+
+## Services
+
+When you need to share logic between components, Angular allows you to create a “service” which allows you to inject code into components while managing it from a single source of truth.
+
+Angular services can be identified by the `service` suffix (e.g., `my-custom-name.service.ts`).
+
+Similar to defining a component, services are comprised of the following:
+
+- A TypeScript decorator to define configuration options for things like:
+  - [`providedIn`](api/core/Injectable#providedIn) - This allows you to define what parts of the application can access the service. For example, ‘root’ will allow a service to be accessed anywhere within the application.
+- A TypeScript class that defines the desired code that will be accessible when the service is injected
+
+Here is an example of a `Calculator` service.
+
+```ts
+import {Injectable} from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+class CalculatorService {
+  add(x: number, y: number) {
+    return x + y;
+  }
+}
+```
+
+If we wanted to call the service in a Receipt component for example, here’s what it might look like:
+
+```ts
+import { Component } from '@angular/core';
+import { CalculatorService } from './calculator.service';
+
+@Component({
+  selector: 'app-receipt’,
+  template: `<p>The total is {{ totalCost }}</h1>`,
+})
+export class Receipt {
+  private calculatorService = inject(CalculatorService);
+  totalCost = this.calculatorService.add(50, 25);
+}
+```
+
+In this example, the `CalculatorService` is being used by calling the Angular function `inject` and passing in the service to it.
+
+<a id="organization"></a>
+
+## Organization
+
+Standalone components are a new organizational pattern that were introduced in Angular v15 and is the recommended place to start. In contrast to [NgModules](guide/ngmodules), it allows developers to organize code and manage dependencies through components rather than feature modules.
+
+For example, in the traditional NgModule pattern, you would need to create a TodoModule and manage all of its dependencies through this module.
+
+```ts (Todo.module.ts)
+import {FormsModule} from '@angular/forms';
+import {TodoList} from '../todo/todo-list.component';
+
+@NgModule({
+  declarations: [TodoList],
+  imports: [FormsModule],
+  exports: [TodoList, FormsModule],
+})
+export class TodoModule {}
+```
+
+However, you can now achieve something similar with a standalone component without the need for a module file:
+
+```ts (Todo.component.ts)
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {TodoList} from '../todo/todo-list.component';
+
+@Component({
+  standalone: true,
+  selector: 'todo-app',
+  imports: [FormsModule, TodoList],
+  template: ` ... <todo-list [tasks]="taskList"></todo-list> `,
+})
+export class PhotoGalleryComponent {
+  // component logic
+}
+```
+
+While most of this should be familiar (from the Components section), two things that are unique to this new pattern are the `standalone` flag and the `imports` key.
+
+- `standalone` - When provided the value `true`, this tells Angular that the component does not need to be declared in an NgModule
+- `imports` - Allows developers to declare what dependencies will be used in the component
+
+In other words, rather than having to define a specific context in which code should be organized, developers are able to specify the dependencies directly within the component context itself.
+
+<a id="cli"></a>
+
+## Command Line Interface (CLI)
+
+The Angular CLI is the recommended way to develop Angular applications and can make some tasks trouble-free.
+
+Some examples of common Angular CLI commands include:
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 
-| Command                     | Details |
-|:---                         |:---     |
-| [ng build](cli/build)       | Angularアプリケーションを出力ディレクトリにコンパイルします。                     |
-| [ng serve](cli/serve)       | アプリケーションをビルドして提供し、ファイルの変更時に再ビルドします。       |
-| [ng generate](cli/generate) | Schematicに基づいてファイルを生成または変更します。                     |
-| [ng test](cli/test)         | 特定のプロジェクトで単体テストを実行します。                                  |
-| [ng e2e](cli/e2e)           | Angularアプリケーションをビルドして提供し、エンドツーエンドのテストを実行します。 |
+| Command                     | Details                                                               |
+| :-------------------------- | :-------------------------------------------------------------------- |
+| [ng build](cli/build)       | Compiles an Angular application into an output directory.             |
+| [ng serve](cli/serve)       | Builds and serves your application, rebuilding on file changes.       |
+| [ng generate](cli/generate) | Generates or modifies files based on a schematic.                     |
+| [ng test](cli/test)         | Runs unit tests on a given project.                                   |
+| [ng e2e](cli/e2e)           | Builds and serves an Angular application, then runs end-to-end tests. |
 
 <!-- vale Angular.Google_WordListSuggestions = YES -->
 
-Angular CLIは、アプリケーションを構築するための貴重なツールです。
+For more information about the Angular CLI, see the [Angular CLI Reference](cli) section.
 
-Angular CLIの詳細については、[Angular CLIリファレンス](/cli)セクションを参照してください。
+<a id="1p-libraries"></a>
 
-{@a 1p-libraries}
-## ファーストパーティライブラリ
+## First-party libraries
 
-[Angularアプリケーション：基本事項](#essentials)では、Angularアプリケーションを構築するときに使用するいくつかの主要なアーキテクチャ要素の概要を説明しています。しかし、Angularの多くの利点は、アプリケーションが成長し、サイトナビゲーションやユーザー入力などの機能を追加したいときに実際に明らかになります。Angularプラットフォームを使用して、Angularが提供する多くのファーストパーティライブラリの1つを組み込みましょう。
+Angular provides many first-party libraries to support common functionality that developers often encounter when building their apps.
 
-利用可能なライブラリには、次のものがあります。
+Some of the popular libraries available in the ecosystem include:
 
 <!-- vale Angular.Google_Acronyms = NO -->
 
-| Library                                   | Details |
-|:---                                       |:---     |
-| [Angular Router](guide/router)            | Angularコンポーネントに基づく高度なクライアント側のナビゲーションとルーティング。遅延読み込み、ネストされたルート、カスタムパスマッチングなどをサポートします。 |
-| [Angular Forms](guide/forms-overview)     | フォームへの介入と検証のための統一されたシステム。                                                                                          |
-| [Angular HttpClient](guide/understanding-communicating-with-http)          | より高度なクライアント/サーバー通信を強化できる堅牢なHTTPクライアント。                                                                   |
-| [Angular Animations](guide/animations)    | アプリケーションの状態に基づいてアニメーションを駆動するリッチなシステム。                                                                                 |
-| [Angular PWA](guide/service-worker-intro) | Service WorkerやWebアプリケーションマニフェストを含むプログレッシブWebアプリケーション（PWA）を構築するためのツール。                                      |
-| [Angular Schematics](guide/schematics)    | A大規模な開発を簡素化する自動化されたスキャフォールディング、リファクタリング、および更新ツール。                                                 |
+| Library                                                           | Details                                                                                                                                        |
+| :---------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Angular Router](guide/router)                                    | Advanced client-side navigation and routing based on Angular components. Supports lazy-loading, nested routes, custom path matching, and more. |
+| [Angular Forms](guide/forms-overview)                             | Uniform system for form participation and validation.                                                                                          |
+| [Angular HttpClient](guide/understanding-communicating-with-http) | Robust HTTP client that can power more advanced client-server communication.                                                                   |
+| [Angular Animations](guide/animations)                            | Rich system for driving animations based on application state.                                                                                 |
+| [Angular PWA](guide/service-worker-intro)                         | Tools for building Progressive Web Applications \(PWA\) including a service worker and Web application manifest.                               |
+| [Angular Schematics](guide/schematics)                            | Automated scaffolding, refactoring, and update tools that simplify development at large scale.                                                 |
 
 <!-- vale Angular.Google_Acronyms = YES -->
 
-これらのライブラリは、アプリケーションの機能を拡張すると同時に、アプリケーションを独自のものにする機能にさらに集中できるようにします。
-また、Angularフレームワークにシームレスに統合され、同時に更新されるように設計されていることを知りながら、これらのライブラリを追加しましょう。
+## Next steps
 
-これらのライブラリは、アプリケーションに機能を追加したり、特定の問題を解決したりするのに役立つ場合にのみ必要です。
+To see Angular in action, see the [Getting Started](start) tutorial.
+This tutorial uses [stackblitz.com](https://stackblitz.com), for you to explore a working example of Angular without any installation requirements.
 
-## 次のステップ
+If you’re interested in learning more about how you can build apps with Angular, check out the following resources:
 
-このトピックでは、Angularとは何か、Angularが提供する利点、そしてアプリケーションの構築を始める際に期待されることについて、簡単に説明しています。
+- [Tutorials](tutorial/first-app)
+- [In-Depth Guides](guide/developer-guide-overview)
 
-Angularの動作を確認するには、[はじめに](start)のチュートリアルを参照してください。
-このチュートリアルでは[stackblitz.com](https://stackblitz.com/)を使い、インストールすることなくAngularの実用的な例を探索することができます。
-
-Angularの機能をさらに探求するために、次のセクションをお勧めします。
-
-*   [Understanding Angular](guide/understanding-angular-overview)
-*   [Angular Developer Guide](guide/developer-guide-overview)
-
-<!-- links -->
-
-<!-- external links -->
-
-<!-- end links -->
-
-@reviewed 2021-10-28
+@reviewed 2023-08-15

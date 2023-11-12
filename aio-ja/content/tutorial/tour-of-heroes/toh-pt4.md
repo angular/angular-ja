@@ -19,11 +19,8 @@ Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ�
 このチュートリアルでは、アプリケーション全体でヒーローを取得できる `HeroService` を作成します。そのサービスは [`new` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) で生成するのではなく、
 Angular による [*依存性の注入*](guide/dependency-injection) で、`HeroesComponent` コンストラクターに注入します。
 
-サービスは、_お互いを知らない_ クラスの間で情報を共有する最適な方法です。
-このチュートリアル後半でも `MessageService` を作成し、次の2クラスに注入します。
-
-* メッセージを送信する`HeroService`への注入
-* そのメッセージとユーザーがヒーローをクリックしたときにIDを表示する`MessagesComponent`への注入
+サービスは、*お互いを知らない* クラスの間で情報を共有する最適な方法です。
+次に `HeroService` を作成し、ヒーローデータを提供するために `HeroesComponent` に注入します。
 
 ## `HeroService` の作成
 
@@ -368,5 +365,9 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 * コンポーネントのコンストラクター内ではなく、`ngOnInit` ライフサイクルフックで `HeroService` メソッドを呼び出しました
 * クラス間で疎結合な情報伝達を行うため、 `MessageService` を作成しました
 * コンポーネントに注入された `HeroService` は、もうひとつのサービスである `MessageService` とともに作成されます
+
+## Next steps
+
+*  [5. Add navigation](tutorial/tour-of-heroes/toh-pt5)
 
 @reviewed 2022-02-28

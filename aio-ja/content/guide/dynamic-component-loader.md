@@ -1,170 +1,66 @@
 # 動的コンポーネントローダー
 
-コンポーネントテンプレートは常に固定ではありません。 アプリケーションは、実行時に新しいコンポーネントをロードする必要があるかもしれません。このクックブックではコンポーネントを動的に追加する方法を説明します。
+コンポーネントテンプレートは常に固定ではありません。 
+アプリケーションは、実行時に新しいコンポーネントをロードする必要があるかもしれません。
+このクックブックではコンポーネントを動的に追加する方法を説明します。
 
-このcookbookのコードの <live-example name="dynamic-component-loader"></live-example>
-を参照してください。
+このcookbookのコードの <live-example name="dynamic-component-loader"></live-example>を参照してください。
 
-{@a dynamic-loading}
+<a id="dynamic-loading"></a>
 
 ## 動的コンポーネント読み込み
 
-次の例は、動的広告バナーを作成する方法を示しています。
+The following example shows how to build a dynamic ad banner.
 
-ヒーローエージェンシーは、いくつかの異なる広告がバナーを循環する広告キャンペーンを計画しています。
-新しい広告コンポーネントは、いくつかの異なるチームによって頻繁に追加されます。
-このため、静的なコンポーネント構造をもつテンプレートを使用することは
-現実的ではありません。
+The hero agency is planning an ad campaign with several different ads cycling through the banner.
+New ad components are added frequently by several different teams.
+This makes it impractical to use a template with a static component structure.
 
-代わりに、広告バナーのテンプレート内のコンポーネントへの固定参照なしに
-新しいコンポーネントを読み込む方法が必要です。
+Instead, you need a way to load a new component without a fixed reference to the component in the ad banner's template.
 
-Angularにはコンポーネントを動的にロードする独自のAPIが付属しています。
+The `NgComponentOutlet` directive can be used to instantiate components and insert them into the current view. This directive allows you to provide a component class that should be rendered, as well as component inputs to be used during initialization.
 
+<code-example header="src/app/ad-banner.component.ts" path="dynamic-component-loader/src/app/ad-banner.component.ts" region="component"></code-example>
 
-{@a directive}
+The `AdBannerComponent` class injects the `AdService` service and requests a list of ads. 
+The "current ad" index is set to `0` initially to indicate that the first ad should be displayed. 
+When a user clicks the "Next" button, the index is increased by one. 
+Once the index reaches the length of the ads array, the index is reset back to `0`.
 
-## アンカーディレクティブ
+In the template, the `currentAd` getter is used to retrieve a current ad. 
+If the value changes, Angular picks it up and reflects the changes in the UI.
 
-コンポーネントを追加する前に、アンカーポイントを定義して、
-Angularにコンポーネントを挿入する場所を指定する必要があります。
+## Different components from the service
 
-広告バナーは、テンプレート内の有効な挿入ポイントをマークするために、
-`AdDirective` と呼ばれるヘルパー・ディレクティブを使用します。
-
-
-<code-example path="dynamic-component-loader/src/app/ad.directive.ts" header="src/app/ad.directive.ts"></code-example>
-
-
-
-`AdDirective` は動的に追加されたコンポーネントをホストする要素の
-ビューコンテナへのアクセスを得るために `ViewContainerRef` を挿入します。
-
-`@Directive` デコレーターでは、セレクター名 `adHost` に注目してください；
-これは、要素にディレクティブを適用するために使用します。
-次のセクションでは、その方法について説明します。
-
-{@a loading-components}
-
-## コンポーネントのロード
-
-広告バナーの実装のほとんどは `ad-banner.component.ts` です。
-この例では、HTMLを `@Component` デコレーターの `template` プロパティに
-テンプレート文字列として入れています。
-
-`<ng-template>` 要素はあなたが作成したディレクティブを適用する場所です。
-`AdDirective` を適用するには、セレクターを `ad.directive.ts` 、 `[adHost]` から呼び出します。
-それを大括弧なしで `<ng-template>` に適用してください。
-これで、Angularはコンポーネントを動的にロードする場所を認識しています。
-
-
-<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="ad-host" header="src/app/ad-banner.component.ts (template)"></code-example>
-
-
-
-`<ng-template>` 要素は、追加の出力を表示しないため、
-動的コンポーネントに適しています。
-
-
-{@a resolving-components}
-
-
-## コンポーネントの解決
-
-`ad-banner.component.ts` のメソッドを詳しく見てみましょう。
-
-`AdBannerComponent` は `AdItem` オブジェクトの配列を入力として受け取ります。
-これは最終的に `AdService` から来ます。
-`AdItem` オブジェクトは、ロードするコンポーネントのタイプと、そのコンポーネントにバインドするデータを指定します。
-`AdService` は、広告キャンペーンを構成する実際の広告を返します。
-
-コンポーネントの配列を `AdBannerComponent` に渡すことで、
-テンプレート内の静的要素のない広告の動的リストが可能になります。
-
-`AdBannerComponent` は `getAds()` メソッドを使って、 
-`AdItems` の配列を循環し、 `loadComponent()` を呼び出すことで3秒ごとに新しいコンポーネントを読み込みます。
-
-
-<code-example path="dynamic-component-loader/src/app/ad-banner.component.ts" region="class" header="src/app/ad-banner.component.ts (excerpt)"></code-example>
-
-
-
-`loadComponent()` メソッドは、ここで、沢山の 重要な持ち上げ(heavy lifting) を行なっています。
-ステップバイステップで、それを取ります。最初に、広告を選びます。
-
-
-<div class="alert is-helpful">
-
-
-
-**どのように _loadComponent()_ ひとつの広告を選ぶのか**
-
-`loadComponent()` メソッドは、数式を使って広告を選択します。
-
-まず、 `currentAdIndex` を設定します。これは、現在の値+1をプラスし、
-それを `AdItem` 配列の長さで割って、
-新しい `currentAdIndex` 値として _remainder_　を使います。
-次に、その値を使用して配列から `adItem` を選択します。
-
-
-</div>
-
-
-
-次に、このコンポーネントのインスタンスに存在する `viewContainerRef` をターゲットにします。
-この特定のインスタンスがどうして分かるのでしょうか？
-なぜならそれが `adHost` を指していて、 `adHost` は以前に設定した、
-Angularに動的コンポーネントをどこに挿入するのかを指示するためのディレクティブだからです。
-
-あなたが思い出しているように、 `AdDirective` はコンストラクターに `ViewContainerRef` を挿入します。
-これは、ディレクティブが、動的コンポーネントをホストするために使用する要素にアクセスする方法です。
-
-コンポーネントをテンプレートに追加するには、 `ViewContainerRef` に対して `createComponent()` を呼び出します。
-
-`createComponent()` メソッドはロードされたコンポーネントへの参照を返します。
-その参照を使用して、そのプロパティに割り当てたり、そのメソッドを呼び出したりして、コンポーネントとやり取りします。
-
-
-
-{@a common-interface}
-
-
-## _AdComponent_ インターフェース
-
-広告バナーでは、すべてのコンポーネントが共通の `AdComponent` インターフェースを実装して、
-コンポーネントにデータを渡すためのAPIを標準化します。
+Components returned from the `AdService` service and used in `NgComponentOutlet` in the `AdBannerComponent` template can be different. 
+Angular detects if a component class has changed and updates the UI accordingly.
 
 次の2つのサンプルコンポーネントと、参照のための `AdComponent` インターフェースがあります：
 
-
 <code-tabs>
-
-  <code-pane header="hero-job-ad.component.ts" path="dynamic-component-loader/src/app/hero-job-ad.component.ts">
-
-  </code-pane>
-
-  <code-pane header="hero-profile.component.ts" path="dynamic-component-loader/src/app/hero-profile.component.ts">
-
-  </code-pane>
-
-  <code-pane header="ad.component.ts" path="dynamic-component-loader/src/app/ad.component.ts">
-
-  </code-pane>
-
+    <code-pane header="hero-job-ad.component.ts" path="dynamic-component-loader/src/app/hero-job-ad.component.ts"></code-pane>
+    <code-pane header="hero-profile.component.ts" path="dynamic-component-loader/src/app/hero-profile.component.ts"></code-pane>
+    <code-pane header="ad.service.ts" path="dynamic-component-loader/src/app/ad.service.ts"></code-pane>
 </code-tabs>
 
-
-
-{@a final-ad-baner}
-
+<a id="final-ad-baner"></a>
 
 ## 最終的な広告バナー
- 最終的な広告バナーは次のようになります。
+
+最終的な広告バナーは次のようになります。
 
 <div class="lightbox">
-  <img src="generated/images/guide/dynamic-component-loader/ads-example.gif" alt="Ads">
+
+<img alt="Ads" src="generated/images/guide/dynamic-component-loader/ads-example.gif">
+
 </div>
 
 <live-example name="dynamic-component-loader"></live-example>を参照してください。
 
-@reviewed 2021-09-17
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2023-04-18

@@ -7,17 +7,17 @@ App shell は、ビルド時にひとつの経路を介してアプリケーシ�
 
 [App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell) でもっと学びましょう。
 
-## ステップ 1: アプリケーションを準備する
+## ステップ 1: アプリケーションを作成する
 
 これを行うには、次の Angular CLI コマンドを使用します。
 
 <code-example format="shell" language="shell">
 
-ng new my-app --routing
+ng new my-app
 
 </code-example>
 
-既存のアプリケーションでは、手動で `RouterModule` を追加して、アプリケーション内で `<router-outlet>` を定義する必要があります。
+既存のアプリケーションでは、手動で `Router` を追加して、アプリケーション内で `<router-outlet>` を定義する必要があります。
 
 ## ステップ 2: App shell を作成する
 
@@ -31,62 +31,28 @@ ng generate app-shell
 
 For more information about this command see [App shell command](cli/generate#app-shell-command). 
 
-このコマンドを実行した後、`angular.json` 設定ファイルが更新されて、他にいくつかの変更が加わり2つの新しいターゲットが追加されていることに気付くでしょう。
+このコマンドはアプリケーション・コードを更新し、プロジェクト構造に追加ファイルを追加します。
 
-<code-example language="json">
+<code-example language="text">
 
-"server": {
-  "builder": "&commat;angular-devkit/build-angular:server",
-  "defaultConfiguration": "production",
-  "options": {
-    "outputPath": "dist/my-app/server",
-    "main": "src/main.server.ts",
-    "tsConfig": "tsconfig.server.json"
-  },
-  "configurations": {
-    "development": {
-      "outputHashing": "none",
-    },
-    "production": {
-      "outputHashing": "media",
-      "fileReplacements": [
-        {
-          "replace": "src/environments/environment.ts",
-          "with": "src/environments/environment.prod.ts"
-        }
-      ],
-      "sourceMap": false,
-      "optimization": true
-    }
-  }
-},
-"app-shell": {
-  "builder": "&commat;angular-devkit/build-angular:app-shell",
-  "defaultConfiguration": "production",
-  "options": {
-    "route": "shell"
-  },
-  "configurations": {
-    "development": {
-      "browserTarget": "my-app:build:development",
-      "serverTarget": "my-app:server:development",
-    },
-    "production": {
-      "browserTarget": "my-app:build:production",
-      "serverTarget": "my-app:server:production"
-    }
-  }
-}
+  src
+  ├── app
+  │   ├── app.config.server.ts               # server application configuration
+  │   └── app-shell                          # app-shell component
+  │       ├── app-shell.component.html
+  │       ├── app-shell.component.scss
+  │       ├── app-shell.component.spec.ts
+  │       └── app-shell.component.ts
+  └── main.server.ts                         # main server application bootstrapping
 
 </code-example>
 
-## ステップ 3: アプリケーションがシェルコンテンツで構築されていることを確認します
 
-Angular CLI を使って `app-shell` ターゲットを構築します。
+## ステップ 3: アプリケーションがシェルコンテンツで構築されていることを確認します
 
 <code-example format="shell" language="shell">
 
-ng run my-app:app-shell:development
+ng build --configuration=development
 
 </code-example>
 
@@ -94,7 +60,7 @@ ng run my-app:app-shell:development
 
 <code-example format="shell" language="shell">
 
-ng run my-app:app-shell:production
+ng build
 
 </code-example>
 
@@ -107,4 +73,4 @@ ng run my-app:app-shell:production
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-20

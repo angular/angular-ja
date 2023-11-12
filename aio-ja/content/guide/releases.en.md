@@ -131,11 +131,11 @@ The following table provides the status for Angular versions under support.
 
 | Version | Status | Released   | Active ends | LTS ends   |
 |:--------|:-------|:-----------|:------------|:-----------|
-| ^16.0.0 | Active | 2023-05-03 | 2023-11-03  | 2024-11-08 |
+| ^17.0.0 | Active | 2023-11-08 | 2024-05-08  | 2025-05-15 |
+| ^16.0.0 | LTS    | 2023-05-03 | 2023-11-08  | 2024-11-08 |
 | ^15.0.0 | LTS    | 2022-11-18 | 2023-05-03  | 2024-05-18 |
-| ^14.0.0 | LTS    | 2022-06-02 | 2022-11-18  | 2023-11-18 |
 
-Angular versions v2 to v13 are no longer supported.
+Angular versions v2 to v14 are no longer supported.
 
 ### LTS fixes
 
@@ -182,6 +182,12 @@ Occasionally we introduce new APIs under the label of "Developer Preview". These
 This may be because we want to gather feedback from real applications before stabilization, or because the associated documentation or migration tooling is not fully complete.
 
 The policies and practices that are described in this document do not apply to APIs marked as Developer Preview. Such APIs can change at any time, even in new patch versions of the framework. Teams should decide for themselves whether the benefits of using Developer Preview APIs are worth the risk of breaking changes outside of our normal use of semantic versioning.
+
+## Experimental
+
+These are APIs might not become stable at all or have significant changes before becoming stable.
+
+The policies and practices that are described in this document do not apply to APIs marked as experimental. Such APIs can change at any time, even in new patch versions of the framework. Teams should decide for themselves whether the benefits of using experimental APIs are worth the risk of breaking changes outside of our normal use of semantic versioning.
 
 <!-- links -->
 

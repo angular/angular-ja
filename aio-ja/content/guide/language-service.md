@@ -127,6 +127,30 @@ npm install --save-dev @angular/language-service
 
 Either directly install the "Eclipse IDE for Web and JavaScript developers" package which comes with the Angular Language Server included, or from other Eclipse IDE packages, use Help > Eclipse Marketplace to find and install [Eclipse Wild Web Developer](https://marketplace.eclipse.org/content/wild-web-developer-html-css-javascript-typescript-nodejs-angular-json-yaml-kubernetes-xml).
 
+### Neovim
+
+1. [Setup coc.nvim](https://github.com/neoclide/coc.nvim)
+
+2. [Configure the Angular Language Service](https://github.com/iamcco/coc-angular/issues/70#issuecomment-1616340751)
+
+```
+{
+  "languageserver": {
+    "angular": {
+      "command": "ngserver",
+      "args": [
+        "--stdio",
+        "--tsProbeLocations",
+        "/usr/local/lib/node_modules/typescript/lib",
+        "--ngProbeLocations",
+        "/usr/local/lib/node_modules/@angular/language-server/bin"
+      ],
+      "filetypes": ["ts", "typescript", "html"],
+      "trace.server.verbosity": "verbose"
+    }
+  }
+}
+```
 
 ## Language Serviceの仕組み
 
@@ -153,3 +177,11 @@ Angular Language Serviceは、このコンテキストにおける`data.---`を�
 * 設計上の考慮事項や意図の詳細については、[デザインドキュメント](https://github.com/angular/vscode-ng-language-service/wiki/Design)を参照してください。
 
 * [ng-conf](https://www.ng-conf.org/) 2017のAngular Language Serviceに関する[Chuck Jazdzewskiのプレゼンテーション](https://www.youtube.com/watch?v=ez3R0Gi4z5A&t=368s)も参照してください。
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

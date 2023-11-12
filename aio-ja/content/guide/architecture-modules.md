@@ -1,12 +1,19 @@
 # モジュールのイントロダクション
 
 Angularアプリケーションはモジュール型のアプリケーションで、 *NgModules* という独自のモジュール方式を備えています。
+
+<div class="alert is-critical">
+
+古いAngularアプリケーションは `NgModules` でビルドされています。
+これはもはや望ましいアプローチではありませんが、既存のアプリケーションの多くはまだ `NgModules` でビルドされています。
+
+このページではそのコンセプトの概要を説明します; [詳しくはこちら](guide/ngmodules)。
+
+</div>
+
 NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。
 それは、コンポーネントと、サービスプロバイダーと、および、包含するNgModuleによってスコープが規定された他のコードファイルとを含めることができます。
 他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
-
-すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[*ルートモジュール*](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。
-ルートのNgModuleを*ブートストラップする*ことでアプリケーションを起動します。
 
 小さなアプリケーションには1つのNgModuleしかないかもしれませんが、ほとんどのアプリケーションにはより多くの *フィーチャーモジュール* があります。
 アプリケーションの *ルート* NgModuleは、任意の深さの階層に子NgModuleを含めることができるので、その名前が付けられています。
@@ -84,9 +91,9 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 モジュールは、いくつかのオブジェクトを`export`キーワードでマークすることによって、それらを公開することを宣言します。
 他のJavaScriptモジュールはimportステートメントを使用して、他のモジュールのパブリックオブジェクトにアクセスします。
 
-<code-example path="architecture/src/app/app.module.ts" region="imports"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="imports"></code-example>
 
-<code-example path="architecture/src/app/app.module.ts" region="export"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="export"></code-example>
 
 <div class="alert is-helpful">
 

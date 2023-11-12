@@ -4,7 +4,11 @@
 
 ## スタンドアロンコンポーネントの作成
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x5PZwb4XurU" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-container">
+
+<iframe src="https://www.youtube.com/embed/x5PZwb4XurU" title="スタンドアロンコンポーネント入門" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</div>
 
 ### `standalone` フラグとコンポーネントの `imports`
 
@@ -118,7 +122,7 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-## ルーティングと遅延読み込み
+## ルーティングと遅延読み込み {@a routing-and-lazy-loading}
 
 ルーターAPIは、スタンドアロンコンポーネントを利用するために更新および簡素化されました。多くの一般的な遅延読み込みのシナリオでは、 `NgModule` は不要になりました。
 
@@ -170,7 +174,7 @@ export default [
   {path: 'home', component: AdminHomeComponent},
   {path: 'users', component: AdminUsersComponent},
   // ...
-] as Route[];
+] satisfies Route[];
 ```
 
 

@@ -1,12 +1,11 @@
-# Service Workerと通信する
+# サービスワーカーとの通信
 
-`AppModule`に`ServiceWorkerModule`をインポートしたら、Service Workerを登録するだけではなく、Service Workerと対話してアプリケーションのキャッシュを制御するためのサービスも使えるようになります。
+サービスワーカーのサポートを有効にすると、単にサービスワーカーを登録するだけでなく、サービスワーカーとやりとりしたり、アプリケーションのキャッシュを制御したりするためのサービスも提供されます。1
 
 #### 前提条件
 
 次の基本的理解があること
 * [Service Workerを始める](guide/service-worker-getting-started)
-
 
 ## `SwUpdate`サービス
 
@@ -42,7 +41,7 @@ The check might fail, which will cause a rejection of the `Promise`.
 
 <div class="alert is-important">
 
-In order to avoid negatively affecting the initial rendering of the page, `ServiceWorkerModule` waits for up to 30 seconds by default for the app to stabilize, before registering the Service Worker script.
+In order to avoid negatively affecting the initial rendering of the page, by default the Angular service worker service waits for up to 30 seconds for the application to stabilize before registering the Service Worker script.
 Constantly polling for updates, for example, with [setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) or RxJS' [interval()](https://rxjs.dev/api/index/function/interval), prevents the application from stabilizing and the Service Worker script is not registered with the browser until the 30 seconds upper limit is reached.
 
 Note that this is true for any kind of polling done by your application.

@@ -149,7 +149,7 @@ Angular CLIアプリケーションを継続的インテグレーションでテ
 
 <code-example format="shell" language="shell">
 
-ng test --no-watch --no-progress
+ng test --no-watch --no-progress --browsers=ChromeHeadless
 
 </code-example>
 

@@ -1,15 +1,16 @@
 diff --git a/aio/src/app/layout/doc-viewer/doc-viewer.component.ts b/aio/src/app/layout/doc-viewer/doc-viewer.component.ts
-index 26c0528a84..9958b6fc81 100644
+index f2eda35975..8791cbced5 100644
 --- a/aio/src/app/layout/doc-viewer/doc-viewer.component.ts
 +++ b/aio/src/app/layout/doc-viewer/doc-viewer.component.ts
-@@ -121,7 +121,7 @@ export class DocViewerComponent implements OnDestroy {
+@@ -122,7 +122,7 @@ export class DocViewerComponent implements OnDestroy {
          }
        }
  
 -      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular');
 +      this.titleService.setTitle(title ? `Angular - ${title}` : 'Angular 日本語版');
-     };
-   }
+ 
+       // Set the page description via the existing `<meta name="Description">` tag.
+       // Updating the page description provides information for internet search indexers.
  
 diff --git a/aio/src/index.html b/aio/src/index.html
 index d8c7b34674..0e8ec69909 100644

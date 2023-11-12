@@ -138,7 +138,7 @@ When `true`, enables the deprecated `<template>` element in place of `<ng-templa
 推奨値である `true` の場合、テンプレートコンパイラの [binding expression validation](guide/aot-compiler#binding-expression-validation) フェーズを有効にします。このフェーズでは、TypeScriptを使用してバインディング式を検証します。
 詳しくは、[テンプレート型チェック](guide/template-typecheck)をご覧ください。
 
-デフォルトは `false` ですが、Angular CLI のコマンド `ng new --strict` を使うと、新しいプロジェクトの設定で `true` に設定されます。
+デフォルトは `false` です。ただし、Angular CLI を使ってプロジェクトを作成する場合は、作成したワークスペースの設定で `true` に設定されています。
 
 <div class="alert is-important">
 
@@ -213,7 +213,7 @@ When `true`, reports an error for a supplied parameter whose injection type cann
 When `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved produce a warning.
 The recommended value is `true`, but the default value is `false`.
 
-Angular CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
+Angular CLIを使ってプロジェクトを作成する場合、作成したワークスペースの設定で`true`に設定されます。
 
 ### `strictTemplates`
 
@@ -222,7 +222,7 @@ Angular CLI コマンド `ng new --strict` を使用すると、生成された�
 この厳密性フラグにより、特定のタイプの厳密なテンプレート型チェックをオンまたはオフにすることができます。
 [テンプレートエラーのトラブルシューティング](guide/template-typecheck#troubleshooting-template-errors) をご覧ください。
 
-Angular CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
+Angular CLIを使ってプロジェクトを作成する場合、作成したワークスペースの設定で`true`に設定されます。
 
 ### `trace`
 
@@ -246,4 +246,4 @@ Besides the configuration file, you can also use [`tsc` command line options](ht
 
 <!-- end links -->
 
-@reviewed 2023-04-19
+@reviewed 2023-10-24

@@ -59,7 +59,7 @@
         {
           "url": "guide/what-is-angular",
           "title": "Angularとは？",
-          "tooltip": "A brief description of the Angular platform."
+          "tooltip": "A brief description 1of the Angular platform."
         },
         {
           "title": "試してみよう",
@@ -262,6 +262,11 @@
                   "url": "guide/pipes-transform-data",
                   "title": "Transforming data with parameters and chained pipes",
                   "tooltip": "Learn how to use a pipe transform data."
+                },
+                {
+                  "url": "guide/pipe-precedence",
+                  "title": "Pipe precedence in template expressions",
+                  "tooltip": "How to use pipes within a ternary operator expression."
                 }
               ]
             },
@@ -346,7 +351,7 @@
               "url": "guide/hierarchical-dependency-injection",
               "title": "階層化インジェクター",
               "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-              "translated": true
+              "translated": false
             }
           ]
         }
@@ -488,7 +493,7 @@
           "url": "guide/esbuild",
           "title": "esbuildベースのビルド",
           "tooltip": "CLIのesbuildベースビルドシステムを使い始める。",
-          "translated": true
+          "translated": false
         },
         {
           "title": "HTTPクライアント",
@@ -503,11 +508,6 @@
               "url": "guide/http-setup-server-communication",
               "title": "Setup for server communication",
               "tooltip": "Setup a server communication for HTTP"
-            },
-            {
-              "url": "guide/http-server-communication",
-              "title": "Communicating with backend services",
-              "tooltip": "Understanding communicating with backend services using HTTP"
             },
             {
               "url": "guide/http-request-data-from-server",
@@ -576,6 +576,11 @@
           "title": "ハイドレーション",
           "tooltip": "サーバーレンダリングされたアプリケーションでハイドレーションを有効にする方法。",
           "translated": true
+        },
+        {
+          "url": "guide/defer",
+          "title": "Deferrable views",
+          "tooltip": "How to defer load components, directives, and pipes."
         },
         {
           "url": "guide/image-directive",
@@ -722,12 +727,6 @@
                   "translated": true
                 },
                 {
-                  "url": "guide/i18n-optional-manual-runtime-locale",
-                  "title": "ランタイムロケールを手動で設定する",
-                  "tooltip": "Set the runtime locale manually",
-                  "translated": true
-                },
-                {
                   "url": "guide/i18n-optional-import-global-variants",
                   "title": "ロケールデータのグローバル設定をインポートする",
                   "tooltip": "Import global variants of the locale data",
@@ -796,12 +795,6 @@
               "translated": true
             },
             {
-              "url": "guide/app-shell",
-              "title": "App Shell",
-              "tooltip": "Render a portion of your app quickly to improve the startup experience.",
-              "translated": true
-            },
-            {
               "url": "guide/service-worker-communications",
               "title": "Service Workerとの通信",
               "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
@@ -823,6 +816,12 @@
               "title": "Service Workerの設定",
               "tooltip": "Service Workerのキャッシュの振る舞いを設定します。",
               "translated": true
+            },
+            {
+              "url": "guide/app-shell",
+              "title": "App Shell",
+              "tooltip": "Render a portion of your app quickly to improve the startup experience.",
+              "translated": true
             }
           ]
         },
@@ -833,16 +832,16 @@
           "translated": true
         },
         {
-          "url": "guide/universal",
+          "url": "guide/ssr",
           "title": "サーバーサイドレンダリング",
-          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "tooltip": "サーバーサイドでHTMLをレンダリングしましょう。",
           "translated": true
         },
         {
           "url": "guide/prerendering",
           "title": "事前レンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
-          "translated": true
+          "translated": false
         },
         {
           "title": "Angularライブラリ",
@@ -877,6 +876,11 @@
           "title": "開発者プレビュー",
           "tooltip": "Angular preview features and APIs",
           "children": [
+            {
+              "url": "guide/control_flow",
+              "title": "Built-in control flow",
+              "tooltip": "Angular built-in control flow: if, for and switch"
+            },
             {
               "url": "guide/signals",
               "title": "Signal",
@@ -1258,12 +1262,6 @@
                   "translated": true
                 },
                 {
-                  "url": "guide/architecture-modules",
-                  "title": "モジュールの紹介",
-                  "tooltip": "NgModuleについて",
-                  "translated": true
-                },
-                {
                   "url": "guide/architecture-components",
                   "title": "Componentの紹介",
                   "tooltip": "コンポーネント、テンプレート、およびビューについて。",
@@ -1273,12 +1271,6 @@
                   "url": "guide/architecture-services",
                   "title": "サービスと依存性の注入の紹介",
                   "tooltip": "About services and dependency injection."
-                },
-                {
-                  "url": "guide/architecture-next-steps",
-                  "title": "次のステップ",
-                  "tooltip": "基本のその先へ。",
-                  "translated": true
                 },
                 {
                   "url": "guide/binding-syntax",
@@ -1296,6 +1288,12 @@
                   "url": "guide/template-reference-variables",
                   "title": "テンプレート参照変数",
                   "tooltip": "Introductory guide to referring to DOM elements within a template.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/architecture-next-steps",
+                  "title": "次のステップ",
+                  "tooltip": "基本のその先へ。",
                   "translated": true
                 }
               ]
@@ -1417,13 +1415,13 @@
                   "url": "guide/observables",
                   "title": "Observableの概要",
                   "tooltip": "Observableを使用して、同期または非同期で値を渡します。",
-                  "translated": true
+                  "translated": false
                 },
                 {
                   "url": "guide/rx-library",
                   "title": "RxJSライブラリ",
                   "tooltip": "A library for reactive programming using observables to compose asynchronous or callback-based code.",
-                  "translated": true
+                  "translated": false
                 },
                 {
                   "url": "guide/observables-in-angular",
@@ -1441,7 +1439,7 @@
                   "url": "guide/comparing-observables",
                   "title": "他の技術との比較",
                   "tooltip": "ObservableとPromiseや他のメッセージパッシングテクニックとの比較。",
-                  "translated": true
+                  "translated": false
                 }
               ]
             },
@@ -1701,7 +1699,7 @@
         {
           "url": "events",
           "title": "Events",
-          "tooltip": "Post issues and suggestions on github."
+          "tooltip": "Post issues and suggestions on GitHub."
         },
         {
           "url": "https://www.meetup.com/topics/angularjs/",

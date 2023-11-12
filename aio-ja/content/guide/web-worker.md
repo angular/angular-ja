@@ -64,7 +64,7 @@ ng generate web-worker app
 
 <div class="alert is-important">
 
-[サーバサイドレンダリング](guide/universal) で使用される `@angular/platform-server` などの一部の環境またはプラットフォームは、 Web workers をサポートしていません。 
+[サーバサイドレンダリング](guide/ssr) で使用される `@angular/platform-server` などの一部の環境またはプラットフォームは、 Web workers をサポートしていません。 
 アプリケーションがこれらの環境で確実に機能するようにするには、 worker が実行するはずの計算を実行するフォールバックメカニズムを提供する必要があります。
 
 </div>

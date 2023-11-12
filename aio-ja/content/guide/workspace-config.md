@@ -135,12 +135,13 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 <!-- vale Angular.Google_WordListWarnings = NO -->
 
-* [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
-* [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
-* [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
-* [extract-i18n](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
-* [karma](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
-* [server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/server/schema.json)
+*   [application](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/application/schema.json)
+*   [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
+*   [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
+*   [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
+*   [extract-i18n](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
+*   [karma](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
+*   [server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/server/schema.json)
 
 <!-- vale Angular.Google_WordListWarnings = YES -->
 
@@ -191,7 +192,7 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 | プロパティ | 説明 |
 | :-------------- | :---------------------------- |
-| `builder`       | このターゲットの作成に使用されたビルドツールのnpmパッケージです。アプリケーションのデフォルトのビルダ (`ng build myApp`) は <code class="no-auto-link">@angular-devkit/build-angular:browser</code> で、[webpack](https://webpack.js.org/) パッケージバンドラーを使用します。**NOTE**: ライブラリの構築 (`ng build myLib`) には別のビルダが使用されることに注意してください。 |
+| `builder`       | このターゲットを作成するために使用されるビルドツールの npm パッケージ。アプリケーションのデフォルトのビルダー(`ng build myApp`) は `@angular-devkit/build-angular:application` で、[esbuild](https://esbuild.github.io/) パッケージ bundler を使用します。 <div class="alert is-helpful"> **NOTE**: A different builder is used for building a library \(`ng build myLib`\). </div> |
 | `options`       | このセクションには、名前付けされた設定が指定されていない場合に使用される、デフォルトのビルドオプションが含まれています。詳しくは [デフォルトのビルドターゲット](#default-build-targets) をご覧ください。 |
 | `configurations`| このセクションには、異なる目的のための設定を定義して名前を付けます。それはそれぞれ名前付けされた、特定の環境のためのデフォルトオプションを設定するためのセクションを含みます。詳しくは [代替ビルドの構成](#build-configs) をご覧ください。 |
 
@@ -465,7 +466,7 @@ You can supply a value such as the following to apply optimization to one or the
 
 <div class="alert is-helpful">
 
-   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
+   [SSR](guide/glossary#server-side-rendering) では、スタイルの最適化を `true` に、スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
 
 </div>
 
@@ -525,4 +526,4 @@ When supplying the value as a String the filename of the specified path will be 
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

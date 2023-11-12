@@ -41,31 +41,29 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 子コンポーネントクラスで`@Input()`デコレーターを使用するには、次の例のように、最初に`Input`をインポートしてから、プロパティを`@Input()`でデコレートします。
 
-<code-example path="inputs-outputs/src/app/item-detail/item-detail.component.ts" region="use-input" header="src/app/item-detail/item-detail.component.ts"></code-example>
-
+<code-example header="src/app/item-detail.component.ts" path="inputs-outputs/src/app/item-detail.component.ts" region="use-input"></code-example>
 
 ここで `@Input()` が装飾しているのは `string` 型の <code class="no-auto-link">item</code> プロパティですが、`@Input()` プロパティは `number`, `string`, `boolean`, `object` など、どんな型であっても構いません。
 `item` の値は親コンポーネントから来ます。
 
 次に、子コンポーネントのテンプレートにこのように追記します:
 
-<code-example path="inputs-outputs/src/app/item-detail/item-detail.component.html" region="property-in-template" header="src/app/item-detail/item-detail.component.html"></code-example>
+<code-example header="src/app/item-detail.component.html" path="inputs-outputs/src/app/item-detail.component.html" region="property-in-template"></code-example>
 
 ### 親コンポーネントの設定 {@a configuring-the-parent-component}
 
 次のステップでは、親コンポーネントのテンプレートでプロパティをバインドします。
 この例では親コンポーネントのテンプレートは `app.component.html` です。
 
-1. 子のセレクター（ここでは `<app-item-detail>`）を
+1.  子のセレクター（ここでは `<app-item-detail>`）を
 親コンポーネントのテンプレートでのディレクティブとして使います。
+1.  [プロパティバインディング](guide/property-binding)を使い、子の`item`プロパティを親の`currentItem`プロパティにバインドします。
 
-2. [プロパティバインディング](guide/property-binding)を使い、子の`item`プロパティを親の`currentItem`プロパティにバインドします。
+    <code-example header="src/app/app.component.html" path="inputs-outputs/src/app/app.component.html" region="input-parent"></code-example>
 
-<code-example path="inputs-outputs/src/app/app.component.html" region="input-parent" header="src/app/app.component.html"></code-example>
+1.  親コンポーネントのクラスで `currentItem` の値を与えます:
 
-3. 親コンポーネントのクラスで `currentItem` の値を与えます:
-
-<code-example path="inputs-outputs/src/app/app.component.ts" region="parent-property" header="src/app/app.component.ts"></code-example>
+    <code-example header="src/app/app.component.ts" path="inputs-outputs/src/app/app.component.ts" region="parent-property"></code-example>
 
 `@Input()` を使うことで Angular は `currentItem` の値を子に渡すので、`item` は `Television` を表示します。
 
@@ -116,7 +114,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 1. コンポーネントクラスで、プロパティを`@Output()`でデコレートします。
   次の例の`newItemEvent`は`@Output()`が`EventEmitter`の型をもっていて、それがイベントであることを意味します。
 
-  <code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output" header="src/app/item-output/item-output.component.ts"></code-example>
+  <code-example header="src/app/item-output.component.ts" path="inputs-outputs/src/app/item-output.component.ts" region="item-output"></code-example>
 
   この宣言のそれぞれの部分を説明するとこうなります:
 
@@ -129,7 +127,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 
 1. 同じコンポーネントクラス内に `addNewItem()` メソッドを作ります:
 
-  <code-example path="inputs-outputs/src/app/item-output/item-output.component.ts" region="item-output-class" header="src/app/item-output/item-output.component.ts"></code-example>
+  <code-example header="src/app/item-output.component.ts" path="inputs-outputs/src/app/item-output.component.ts" region="item-output-class"></code-example>
 
   `addNewItem()`関数は、`@Output()`の`newItemEvent`を使用して、ユーザーが`<input>`に入力した値をもつイベントを発生させます。
 
@@ -139,7 +137,7 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 1つ目は、[テンプレート参照変数](guide/template-reference-variables)の`#newItem`をもつHTMLの`<input>`で、そこにユーザーはアイテム名を入力します。
 `#newItem`変数の`value`プロパティは、ユーザーが`<input>`に入力した内容を格納します。
 
-<code-example path="inputs-outputs/src/app/item-output/item-output.component.html" region="child-output" header="src/app/item-output/item-output.component.html"></code-example>
+<code-example header="src/app/item-output.component.html" path="inputs-outputs/src/app/item-output.component.html" region="child-output"></code-example>
 
 2つ目の要素は、[イベントバインディング](guide/event-binding)の`click`をもつ`<button>`です。
 
@@ -205,13 +203,13 @@ banana-in-a-box 構文 `[()]` を使うことで、プロパティとイベン�
 
 To make `Input` property as required for a child component while passing values from parent component. first import `Input` and then decorate the property with `@Input({ required: true })`, as in the following example.
 
-<code-example header="src/app/item-details-metadata/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata/item-details-metadata.component.ts" region="use-input-metadata-required"></code-example>
+<code-example header="src/app/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata.component.ts" region="use-input-metadata-required"></code-example>
 
 Next, in the parent template add the following: 
 
 <code-example header="src/app/app.component.html" path="inputs-outputs/src/app/app.component.html" region="input-parent-metadata"></code-example>
 
-If required inputs `property binding` in a child component are not specified in the parent component template will result a compile time error : 
+If required inputs in a child component are not specified in the parent component template will result a compile time error: 
 
 <div class="alert is-helpful">
 NG8008: Required input item from component ItemDetailMetadataComponent must be specified.
@@ -221,11 +219,11 @@ NG8008: Required input item from component ItemDetailMetadataComponent must be s
 
 To transform an `Input` property from string to boolean to a child component while passing values from parent component. first import `booleanAttribute` and then decorate the property with `@Input({ transform: booleanAttribute })`, as in the following example.
 
-<code-example header="src/app/item-details-metadata/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata/item-details-metadata.component.ts" region="use-input-metadata-boolean-transform"></code-example>
+<code-example header="src/app/item-details-metadata.component.ts" path="inputs-outputs/src/app/item-details-metadata.component.ts" region="use-input-metadata-boolean-transform"></code-example>
 
 <code-example header="src/app/app.component.html" path="inputs-outputs/src/app/app.component.html" region="input-parent-metadata"></code-example>
 
-Similarly, you can use predefined functions from angular/core library to convert string to number as well, see `numberAttribute`.
+Similarly, you can use predefined functions from the `angular/core` library to convert string to number as well, see `numberAttribute`.
 
 <!-- links -->
 
@@ -233,4 +231,4 @@ Similarly, you can use predefined functions from angular/core library to convert
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-01

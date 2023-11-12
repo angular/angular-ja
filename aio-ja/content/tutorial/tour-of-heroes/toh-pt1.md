@@ -107,7 +107,7 @@ CLIの`ng serve`コマンドがまだ実行中であれば、
 
 補間バインディングの中、パイプ演算子 <code>&verbar;</code> の直後にある単語`uppercase`は、組み込みの`UppercasePipe`を起動します。
 
-[パイプ](guide/pipes)は、文字列、通貨金額、日付や、その他の表示データを書式設定するのに適しています。
+[パイプ](guide/pipes-overview)は、文字列、通貨金額、日付や、その他の表示データを書式設定するのに適しています。
 Angularは複数のビルトインパイプを備えており、あなた自身が独自のパイプを作ることもできます。
 
 ## ヒーローを編集する {@a edit-the-hero}
@@ -220,5 +220,9 @@ _あなたは_ `HeroesComponent`を宣言していません。
 *   `AppModule` について学びました。
 *   `AppModule` に `FormsModule` をインポートして、Angular `ngModel` ディレクティブを認識して適用するようにしました。
 *   `AppModule` でコンポーネントを宣言することの重要性を学び、CLIがあなたのためにその宣言を行っていることを認識しました。
+
+## Next steps
+
+*  [2. Display a list](tutorial/tour-of-heroes/toh-pt2)
 
 @reviewed 2022-02-28

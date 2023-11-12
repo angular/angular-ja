@@ -380,7 +380,25 @@ To override the internal configuration, run [`ng generate config browserslist`](
 プロキシ設定ファイルを編集して設定オプションを追加することができます。次にいくつか例を示します。
 すべてのオプションの説明については、[webpack DevServer ドキュメンテーション](https://webpack.js.org/configuration/dev-server/#devserverproxy)を参照してください。
 
-プロキシ設定ファイルを編集した場合、変更を有効にするために`ng serve`プロセスを再起動する必要があることに注意してください。
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+If you edit the proxy configuration file, you must relaunch the `ng serve` process to make your changes effective.
+
+</div>
+
+<div class="alert is-important">
+
+As of Node version 17, Node will not always resolve `http://localhost:<port>` to `http://127.0.0.1:<port>`
+depending on each machine's configuration.
+
+If you get an `ECONNREFUSED` error using a proxy targeting a `localhost` URL,
+you can fix this issue by updating the target from `http://localhost:<port>` to `http://127.0.0.1:<port>`.
+
+See [the http proxy middleware documentation](https://github.com/chimurai/http-proxy-middleware#nodejs-17-econnrefused-issue-with-ipv6-and-localhost-705)
+for more information.
+
+</div>
 
 ### URL パスの書き換え {@a rewrite-the-url-path}
 

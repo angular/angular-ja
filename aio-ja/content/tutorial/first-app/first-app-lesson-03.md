@@ -22,7 +22,7 @@ IDE の **ターミナル** ペインで:
 1. 新しい `HousingLocationComponent` を作成するために次のコマンドを実行します。
 
     <code-example format="shell" language="shell">
-    ng generate component housingLocation --standalone --inline-template --skip-tests
+    ng generate component housingLocation --inline-template --skip-tests
     </code-example>
 
 1. アプリケーションのビルドとサーブをするために、次のコマンドを実行します。
@@ -84,4 +84,4 @@ IDE の **編集** ペインで
 
 * [First Angular app lesson 4 -  Add a housing location interface to the application](tutorial/first-app/first-app-lesson-04)
 
-@reviewed 2023-07-11
+@reviewed 2023-10-24

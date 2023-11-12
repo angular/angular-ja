@@ -12,7 +12,11 @@ Angular 14 の時点で、リアクティブフォームはデフォルトで厳
 
 ## Typed Formsの概要
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/L-odCf4MfJc" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-container">
+
+<iframe src="https://www.youtube.com/embed/L-odCf4MfJc" title="Angular Typed Forms" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</div>
 
 Angular リアクティブフォームでは、*フォームモデル* を明示的に指定します。 簡単な例として、次の基本的なユーザーログインフォームを考えてみましょう。
 

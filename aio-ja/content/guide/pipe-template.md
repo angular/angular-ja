@@ -1,16 +1,16 @@
-# Using a pipe in a template
+# テンプレート内でのパイプの使用
 
-To apply a pipe, use the pipe operator (`|`) within a template expression as shown in the following code example.
+パイプを適用するために、次のコードの例に示されるように、テンプレート式内部でパイプ演算子(`|`)を使用します。
 
 <code-example header="birthday.component.html (template)" path="pipes/src/app/birthday.component.html"></code-example>
 
-The component's `birthday` value flows through the pipe operator (`|`) to the [`DatePipe`](api/common/DatePipe) whose pipe name is `date`.
-The pipe renders the date in the default format as **Apr 15, 1988**.
+`birthday`の値はパイプ演算子(`|`)を通じてnameが`date`の[`DatePipe`](api/common/DatePipe)に流れます。
+パイプはdateをデフォルトフォーマットの**Apr 15, 1988**に変換します。
 
-Look at the component class.
+コンポーネントクラスを見てください。
 
 <code-example header="birthday.component.ts (class)" path="pipes/src/app/birthday.component.ts"></code-example>
 
-Because this is a [standalone component](guide/standalone-components), it imports the `DatePipe` from `@angular/common`, the source of all built-in pipes.
+これは[スタンドアロンコンポーネント](guide/standalone-components)のため、すべての組み込みパイプの源である`@angular/common`から`DatePipe`をインポートします。
 
 @reviewed 2023-08-14

@@ -29,8 +29,10 @@ CLIコマンドの `ng new` は新しいワークスペースを作成すると�
 
 `package.json` は2つのグループのパッケージで構成されています。
 
-* [Dependencies](guide/npm-packages#dependencies) はアプリケーションを*実行するため*に不可欠です。
-* [DevDependencies](guide/npm-packages#dev-dependencies) はアプリケーションを*開発するため* だけに必要です。
+| Packages                                               | Details |
+|:---                                                    |:---     |
+| [Dependencies](guide/npm-packages#dependencies)        | Essential to *running* applications.      |
+| [DevDependencies](guide/npm-packages#dev-dependencies) | Only necessary to *develop* and *build* applications. |
 
 <div class="alert is-helpful">
 
@@ -64,7 +66,7 @@ Angularのパッケージの完全な一覧は、[API reference](api?type=packag
 パッケージ名                                                                            | 説明
 ----------------------------------------   | --------------------------------------------------
 [**@angular/animations**](api/animations)                                               | Angularのアニメーションライブラリを使用すると、ページやリストのトランジションといったアニメーション効果を簡単に定義して適用できます。詳しくは [Animations guide](guide/animations) を見てください。.
-[**@angular/common**](api/common)                                                       | 一般的に必要なサービスやパイプ、ディレクティブがAngularチームによって提供されています。 [`HttpClientModule`](api/common/http/HttpClientModule) もここの [`@angular/common/http`](api/common/http) というサブフォルダにあります。詳しくは [HttpClient guide](guide/http) を見てください。
+[**@angular/common**](api/common)                                                       | 一般的に必要なサービスやパイプ、ディレクティブがAngularチームによって提供されています。 [`HttpClientModule`](api/common/http/HttpClientModule) もここの [`@angular/common/http`](api/common/http) というサブフォルダにあります。詳しくは [HttpClient guide](guide/understanding-communicating-with-http) を見てください。
 **@angular/compiler**                                                                   | Angularのテンプレートのコンパイラです。テンプレートを解釈し、アプリケーションが実行・表示可能なコードに変換します。 通常はコンパイラに直接触れないでください。そうではなくブラウザ上でJITコンパイルするときに `platform-browser-dynamic` を通して間接的に使用します。詳しくは [Ahead-of-time Compilation guide](guide/aot-compiler)を見てください。
 [**@angular/core**](api/core)                                                           | すべてのアプリケーションに必要とされるフレームワークの重要なランタイム部分です。すべてのメタデータデコレーター、`Component` 、 `Directive `、依存性の注入、コンポーネントのライフサイクルフックを含みます。
 [**@angular/forms**](api/forms)                                                         | [テンプレート駆動のフォーム](guide/forms)と[リアクティブフォーム](guide/reactive-forms)の両方をサポートします。アプリケーションに最適なフォームアプローチの選択についての情報は [Introduction to forms](guide/forms-overview) を見てください。

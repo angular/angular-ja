@@ -228,6 +228,11 @@
                   "url": "guide/pipes-transform-data",
                   "title": "Transforming data with parameters and chained pipes",
                   "tooltip": "Learn how to use a pipe transform data."
+                },
+                {
+                  "url": "guide/pipe-precedence",
+                  "title": "Pipe precedence in template expressions",
+                  "tooltip": "How to use pipes within a ternary operator expression."
                 }
               ]
             },
@@ -292,6 +297,11 @@
               "url": "guide/dependency-injection-providers",
               "title": "Defining dependency providers",
               "tooltip": "A provider factory function is a plain function that Angular can call to create a dependency."
+            },
+            {
+              "url": "guide/dependency-injection-context",
+              "title": "Injection context",
+              "tooltip": "Dependency injection depends on a runtime context to work."
             },
             {
               "url": "guide/hierarchical-dependency-injection",
@@ -421,9 +431,95 @@
           ]
         },
         {
-          "url": "guide/http",
+          "url": "guide/esbuild",
+          "title": "esbuild-based Builds",
+          "tooltip": "Getting started with the CLI's esbuild-based build system."
+        },
+        {
           "title": "HTTP client",
-          "tooltip": "Use HTTP to talk to a remote server."
+          "tooltip": "Use HTTP to talk to a remote server.",
+          "children": [
+            {
+              "url": "guide/understanding-communicating-with-http",
+              "title": "Understanding HTTP",
+              "tooltip": "Understanding communicating with backend services using HTTP"
+            },
+            {
+              "url": "guide/http-setup-server-communication",
+              "title": "Setup for server communication",
+              "tooltip": "Setup a server communication for HTTP"
+            },
+            {
+              "url": "guide/http-request-data-from-server",
+              "title": "Request data from a server",
+              "tooltip": "Learn how to request data from the server via the HTTP client"
+            },
+            {
+              "url": "guide/http-make-jsonp-request",
+              "title": "Make a JSONP request",
+              "tooltip": "Make a cross-origin request via JSONP"
+            },
+            {
+              "url": "guide/http-handle-request-errors",
+              "title": "Handle request errors",
+              "tooltip": "Error handling"
+            },
+            {
+              "url": "guide/http-send-data-to-server",
+              "title": "Send data to a server",
+              "tooltip": "Learn how to send data to a server via the HTTP client"
+            },
+            {
+              "url": "guide/http-configure-http-url-parameters",
+              "title": "Configure URL parameters",
+              "tooltip": "Learn how to configure parameters of the URL when sending requests over HTTP"
+            },
+            {
+              "url": "guide/http-intercept-requests-and-responses",
+              "title": "Intercept requests and responses",
+              "tooltip": "Learn how to use HTTP interceptors to transform requests and responses"
+            },
+            {
+              "url": "guide/http-interceptor-use-cases",
+              "title": "Interceptor use-cases",
+              "tooltip": "Learn when to use HTTP interceptors"
+            },
+            {
+              "url": "guide/http-pass-metadata-to-interceptors",
+              "title": "Pass metadata to interceptors",
+              "tooltip": "Learn how to pass metadata to interceptors"
+            },
+            {
+              "url": "guide/http-track-show-request-progress",
+              "title": "Track and show request progress",
+              "tooltip": "Learn how to track and show progress when sending HTTP requests"
+            },
+            {
+              "url": "guide/http-optimize-server-interaction",
+              "title": "Optimize server communication",
+              "tooltip": "Learn how to use debouncing to optimize server interaction"
+            },
+            {
+              "url": "guide/http-security-xsrf-protection",
+              "title": "Cross-Site Request Forgery (XSRF) protection",
+              "tooltip": "Learn how to secure your website against Cross-Site Request Forgery"
+            },
+            {
+              "url": "guide/http-test-requests",
+              "title": "Test requests",
+              "tooltip": "Learn how to test logic that uses the HTTP client"
+            }
+          ]
+        },
+        {
+          "url": "guide/hydration",
+          "title": "Hydration",
+          "tooltip": "How to enable hydration on your server rendered applications."
+        },
+        {
+          "url": "guide/defer",
+          "title": "Deferrable views",
+          "tooltip": "How to defer load components, directives, and pipes."
         },
         {
           "url": "guide/image-directive",
@@ -551,11 +647,6 @@
                   "tooltip": "Introduces the optional Angular internationalization tasks and lists topics that teach you how to manually configure localization settings for your applications"
                 },
                 {
-                  "url": "guide/i18n-optional-manual-runtime-locale",
-                  "title": "Set the runtime locale manually",
-                  "tooltip": "Set the runtime locale manually"
-                },
-                {
                   "url": "guide/i18n-optional-import-global-variants",
                   "title": "Import global variants of the locale data",
                   "tooltip": "Import global variants of the locale data"
@@ -615,11 +706,6 @@
               "tooltip": "Enabling the service worker in a CLI project and observing behavior in the browser."
             },
             {
-              "url": "guide/app-shell",
-              "title": "App shell",
-              "tooltip": "Render a portion of your app quickly to improve the startup experience."
-            },
-            {
               "url": "guide/service-worker-communications",
               "title": "Service worker communication",
               "tooltip": "Services that enable you to interact with an Angular service worker."
@@ -638,6 +724,11 @@
               "url": "guide/service-worker-config",
               "title": "Service worker configuration",
               "tooltip": "Configuring service worker caching behavior."
+            },
+            {
+              "url": "guide/app-shell",
+              "title": "App shell",
+              "tooltip": "Render a portion of your app quickly to improve the startup experience."
             }
           ]
         },
@@ -647,9 +738,9 @@
           "tooltip": "Using web workers for background processing."
         },
         {
-          "url": "guide/universal",
+          "url": "guide/ssr",
           "title": "Server-side rendering",
-          "tooltip": "Render HTML server-side with Angular Universal."
+          "tooltip": "Render HTML server-side."
         },
         {
           "url": "guide/prerendering",
@@ -679,6 +770,27 @@
               "url": "guide/angular-package-format",
               "title": "Angular package format",
               "tooltip": "Information about the Angular Package Format."
+            }
+          ]
+        },
+        {
+          "title": "Feature preview",
+          "tooltip": "Angular preview features and APIs",
+          "children": [
+            {
+              "url": "guide/control_flow",
+              "title": "Built-in control flow",
+              "tooltip": "Angular built-in control flow: if, for and switch"
+            },
+            {
+              "url": "guide/signals",
+              "title": "Signals",
+              "tooltip": "Angular signals for optimized change detection"
+            },
+            {
+              "url": "guide/rxjs-interop",
+              "title": "RxJS Interop for Signals",
+              "tooltip": "Angular signals and Observable interop"
             }
           ]
         }
@@ -809,6 +921,87 @@
       "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
       "children": [
         {
+          "title": "Tutorial: Your first Angular app",
+          "tooltip": "Learn how to get started in Angular by building an Angular app",
+          "children": [
+            {
+              "url": "tutorial/first-app",
+              "title": "Introduction",
+              "tooltip": "Introduction to the first Angular app and tutorial"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-01",
+              "title": "Hello world",
+              "tooltip": "Start coding in Angular with Hello World"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-02",
+              "title": "Create home component",
+              "tooltip": "Create the app's HomeComponent"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-03",
+              "title": "Create housing location component",
+              "tooltip": "Create the app's HousingLocation"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-04",
+              "title": "Create an interface",
+              "tooltip": "Create an interface for your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-05",
+              "title": "Add inputs to components",
+              "tooltip": "Add inputs to components in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-06",
+              "title": "Add property binding to components",
+              "tooltip": "Add property binding to components in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-07",
+              "title": "Add dynamic values to templates",
+              "tooltip": "Add dynamic values to your templates in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-08",
+              "title": "Use *ngFor in templates",
+              "tooltip": "Use *ngFor in your templates in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-09",
+              "title": "Angular services",
+              "tooltip": "Add an Angular service to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-10",
+              "title": "Add routing",
+              "tooltip": "Add routing to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-11",
+              "title": "Customize the details page",
+              "tooltip": "Add styles, links and more to the details page"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-12",
+              "title": "Integrate Angular forms",
+              "tooltip": "Add an Angular form to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-13",
+              "title": "Add search functionality",
+              "tooltip": "Add search functionality to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-14",
+              "title": "Add HTTP communication",
+              "tooltip": "Add HTTP communication to your app"
+            }
+          ]
+        },
+        {
           "title": "Tutorial: Tour of Heroes",
           "tooltip": "The Tour of Heroes app is used as a reference point in many Angular examples.",
           "children": [
@@ -866,7 +1059,7 @@
       "tooltip": "Angular release practices, updating, and upgrading.",
       "children": [
         {
-          "url": "guide/update-to-version-15",
+          "url": "guide/update-to-version-16",
           "title": "Update Angular to the latest version",
           "tooltip": "Update your Angular application to the latest version."
         },
@@ -879,6 +1072,11 @@
           "url": "guide/releases",
           "title": "Release practices",
           "tooltip": "Angular versioning, release, support, and deprecation policies and practices."
+        },
+        {
+          "url": "guide/versions",
+          "title": "Version compatibility",
+          "tooltip": "Angular, Node.js, TypeScript, and RxJS version compatibility."
         },
         {
           "url": "guide/browser-support",
@@ -936,19 +1134,14 @@
                   "tooltip": "Basic building blocks of Angular applications."
                 },
                 {
-                  "url": "guide/architecture-modules",
-                  "title": "Intro to modules",
-                  "tooltip": "About NgModules."
-                },
-                {
                   "url": "guide/architecture-components",
                   "title": "Intro to components",
                   "tooltip": "About Components, Templates, and Views."
                 },
                 {
-                  "url": "guide/architecture-next-steps",
-                  "title": "Next steps",
-                  "tooltip": "Beyond the basics."
+                  "url": "guide/architecture-services",
+                  "title": "Intro to services and DI",
+                  "tooltip": "About services and dependency injection."
                 },
                 {
                   "url": "guide/binding-syntax",
@@ -964,6 +1157,11 @@
                   "url": "guide/template-reference-variables",
                   "title": "Template variables",
                   "tooltip": "Introductory guide to referring to DOM elements within a template."
+                },
+                {
+                  "url": "guide/architecture-next-steps",
+                  "title": "Next steps",
+                  "tooltip": "Beyond the basics."
                 }
               ]
             },
@@ -1027,11 +1225,6 @@
                   "url": "guide/module-types",
                   "title": "Types of feature modules",
                   "tooltip": "Description of the different types of feature modules."
-                },
-                {
-                  "url": "guide/entry-components",
-                  "title": "Entry components",
-                  "tooltip": "All about entry components in Angular."
                 },
                 {
                   "url": "guide/feature-modules",
@@ -1332,12 +1525,17 @@
         {
           "url": "https://github.com/angular/angular/issues",
           "title": "Report Issues",
-          "tooltip": "Post issues and suggestions on github."
+          "tooltip": "Post issues and suggestions on GitHub."
         },
         {
           "url": "https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md",
           "title": "Code of Conduct",
           "tooltip": "Treating each other with respect."
+        },
+        {
+          "url": "https://policies.google.com/privacy",
+          "title": "Privacy Policy",
+          "tooltip": "Learn about Google's privacy policy."
         }
       ]
     },
@@ -1374,10 +1572,6 @@
     {
       "title": "Languages",
       "children": [
-        {
-          "title": "Español",
-          "url": "http://docs.angular.lat/"
-        },
         {
           "title": "简体中文版",
           "url": "https://angular.cn/"

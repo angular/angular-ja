@@ -12,34 +12,34 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: 'package.json'
           cache: yarn
       - run: yarn install
       - run: yarn test
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: 'package.json'
           cache: yarn
       - run: yarn install
       - run: yarn build
   # build-windows:
   #   runs-on: windows-latest
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v4
   #       with:
   #         submodules: true
-  #     - uses: actions/setup-node@v3
+  #     - uses: actions/setup-node@v4
   #       with:
   #         node-version-file: .node-version
   #         cache: yarn
@@ -49,12 +49,12 @@ jobs:
   build-macos:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: 'package.json'
           cache: yarn
       - run: yarn install
       - run: yarn build

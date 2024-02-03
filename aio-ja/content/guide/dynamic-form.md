@@ -1,8 +1,7 @@
 # ダイナミックフォームの構築
 
 アンケートなどの多くの形式は、形式と意図が互いに非常に似ている場合があります。
-このようなフォームのさまざまなバージョンをより速く簡単に生成するために、
-ビジネスオブジェクトモデルを記述するメタデータに基づいて *動的フォームテンプレート* を作成できます。
+このようなフォームのさまざまなバージョンをより速く簡単に生成するために、ビジネスオブジェクトモデルを記述するメタデータに基づいて _動的フォームテンプレート_ を作成できます。
 その後、テンプレートを使用して、データモデルの変更に応じて新しいフォームを自動的に生成できます。
 
 この手法は、急速に変化するビジネス要件や規制要件を満たすために
@@ -37,29 +36,23 @@
 
 このチュートリアルを実行する前に、次のことを基本的に理解しておく必要があります。
 
-* [TypeScript](https://www.typescriptlang.org/ "The TypeScript language") および HTML5 プログラミング。
-
-* [Angular アプリケーション設計](guide/architecture "Introduction to Angular app-design concepts") の基本的な概念。
-
-* [リアクティブフォーム](guide/reactive-forms "Reactive forms guide") の基本的な知識。
+* [TypeScript](https://www.typescriptlang.org/ 'The TypeScript language') および HTML5 プログラミング。
+* [Angular アプリケーション設計](guide/architecture 'Introduction to Angular app-design concepts') の基本的な概念。
+* [リアクティブフォーム](guide/reactive-forms 'Reactive forms guide') の基本的な知識。
 
 ## プロジェクトのリアクティブフォームを有効にする
 
-ダイナミックフォームはリアクティブフォームに基づいています。 アプリケーションがリアクティブフォームディレクティブにアクセスできるようにするには、 [ルートモジュール](guide/bootstrapping "Learn about bootstrapping an app from the root module.") が `@angular/forms` ライブラリから `ReactiveFormsModule` をインポートします。
+ダイナミックフォームはリアクティブフォームに基づいています。 
+
+To give the application access reactive forms directives, import `ReactiveFormsModule` from the `@angular/forms` library into the necessary components.
 
 この例の次のコードは、ルートモジュールの設定を示しています。
 
 <code-tabs>
-
-  <code-pane header="app.module.ts" path="dynamic-form/src/app/app.module.ts">
-
-  </code-pane>
-
-  <code-pane header="main.ts" path="dynamic-form/src/main.ts">
-
-  </code-pane>
-
+    <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts"></code-pane>
+    <code-pane header="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts"></code-pane>
 </code-tabs>
+
 
 {@a object-model}
 
@@ -79,20 +72,13 @@
 
 ### コントロールクラスを定義する
 
-この例では、このベースから、異なるコントロールタイプを表す
-2 つの新しいクラス `TextboxQuestion` と `DropdownQuestion` を派生させます。
+この例では、このベースから、異なるコントロールタイプを表す 2 つの新しいクラス `TextboxQuestion` と `DropdownQuestion` を派生させます。
 次のステップでフォームテンプレートを作成するとき、適切なコントロールを動的にレンダリングするために、これらの特定の質問タイプをインスタンス化します。
 
-* `TextboxQuestion` コントロールタイプは質問を提示し、ユーザーが入力できるようにします。
-
-   <code-example path="dynamic-form/src/app/question-textbox.ts" header="src/app/question-textbox.ts"></code-example>
-
-   `TextboxQuestion` コントロールタイプは、フォームテンプレートで `<input>` 要素を使用して表されます。
-   要素の `type` 属性は、 `options` 引数で指定されたタイプフィールド（`text`、`email`、`url` など）に基づいて定義されます。
-
-* `DropdownQuestion` コントロールは、セレクトボックスに選択肢のリストを表示します。
-
-   <code-example path="dynamic-form/src/app/question-dropdown.ts" header="src/app/question-dropdown.ts"></code-example>
+| Control type                    | Details                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TextboxQuestion` control type  | Presents a question and lets users enter input. <code-example header="src/app/question-textbox.ts" path="dynamic-form/src/app/question-textbox.ts"></code-example> The `TextboxQuestion` control type is represented in a form template using an `<input>` element. The `type` attribute of the element is defined based on the `type` field specified in the `options` argument \(for example `text`, `email`, `url`\). |
+| `DropdownQuestion` control type | Presents a list of choices in a select box. <code-example header="src/app/question-dropdown.ts" path="dynamic-form/src/app/question-dropdown.ts"></code-example>                                                                                                                                                                                                                                                         |
 
 ### フォームグループを作成する
 
@@ -109,25 +95,19 @@
 それぞれの質問は、 `DynamicFormQuestionComponent` のインスタンスと一致する `<app-question>` タグによってフォームコンポーネントのテンプレートで表されます。
 
 `DynamicFormQuestionComponent` は、データにバインドされた質問オブジェクトの値に基づいて個々の質問の詳細をレンダリングする責任があります。
-フォームは [`[formGroup]` ディレクティブ](api/forms/FormGroupDirective "API reference") に依存して、テンプレート HTML を基礎となるコントロールオブジェクトに接続します。
+フォームは [`[formGroup]` ディレクティブ](api/forms/FormGroupDirective 'API reference') に依存して、テンプレート HTML を基礎となるコントロールオブジェクトに接続します。
 `DynamicFormQuestionComponent` はフォームグループを作成し、表示および検証ルールを指定して、質問モデルで定義されたコントロールをそれらに追加します。
 
 <code-tabs>
-
-  <code-pane header="dynamic-form-question.component.html" path="dynamic-form/src/app/dynamic-form-question.component.html">
-
-  </code-pane>
-
-  <code-pane header="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts">
-
-  </code-pane>
-
+    <code-pane header="dynamic-form-question.component.html" path="dynamic-form/src/app/dynamic-form-question.component.html"></code-pane>
+    <code-pane header="dynamic-form-question.component.ts" path="dynamic-form/src/app/dynamic-form-question.component.ts"></code-pane>
 </code-tabs>
+
 
 `DynamicFormQuestionComponent` の目的は、モデルで定義された質問タイプを提示することです。
 この時点では 2 種類の質問しかありませんが、さらに多くなることを想像できます。
 テンプレートの `ngSwitch` ステートメントは、表示する質問のタイプを決定します。
-スイッチは、 [`formControlName`](api/forms/FormControlName "FormControlName directive API reference") および [`formGroup`](api/forms/FormGroupDirective "FormGroupDirective API reference") セレクターでディレクティブを使用します。 どちらのディレクティブも `ReactiveFormsModule` で定義されています。
+スイッチは、 [`formControlName`](api/forms/FormControlName 'FormControlName directive API reference') および [`formGroup`](api/forms/FormGroupDirective 'FormGroupDirective API reference') セレクターでディレクティブを使用します。 どちらのディレクティブも `ReactiveFormsModule` で定義されています。
 
 {@a questionnaire-data}
 
@@ -146,8 +126,7 @@
 
 </code-example>
 
-
-{@a dynamic-template}
+<a id="dynamic-template"></a>
 
 ## ダイナミックフォームテンプレートを作成する
 
@@ -156,15 +135,8 @@
 `DynamicFormComponent` コンポーネントは、各質問を `DynamicFormQuestionComponent` と一致する `<app-question>` 要素にバインドすることで質問のリストを提示します。
 
 <code-tabs>
-
-  <code-pane header="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html">
-
-  </code-pane>
-
-  <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts">
-
-  </code-pane>
-
+    <code-pane header="dynamic-form.component.html" path="dynamic-form/src/app/dynamic-form.component.html"></code-pane>
+    <code-pane header="dynamic-form.component.ts" path="dynamic-form/src/app/dynamic-form.component.ts"></code-pane>
 </code-tabs>
 
 ### フォームを表示する
@@ -177,7 +149,7 @@
 
 この例では、ヒーローの求人アプリケーションのモデルを提供しますが、
 `QuestionService` によって返されるオブジェクト以外の特定のヒーローの質問への参照はありません。
-このモデルとデータの分離により、 *質問* オブジェクトモデルと互換性がある限り、
+このモデルとデータの分離により、 _質問_ オブジェクトモデルと互換性がある限り、
 コンポーネントをあらゆる種類の調査に再利用できます。
 
 ### 有効なデータの確保
@@ -186,8 +158,8 @@
 特定の質問についてハードコードされた想定を行わずにフォームをレンダリングします。
 制御メタデータとバリデーション基準の両方を動的に追加します。
 
-有効な入力を確実にするために、フォームが有効な状態になるまで *保存* ボタンは無効になります。
-フォームが有効な場合、 *保存* をクリックすると、アプリケーションが現在のフォームの値を JSON としてレンダリングします。
+有効な入力を確実にするために、フォームが有効な状態になるまで _保存_ ボタンは無効になります。
+フォームが有効な場合、 _保存_ をクリックすると、アプリケーションが現在のフォームの値を JSON としてレンダリングします。
 
 次の図は、最終的なフォームを示しています。
 
@@ -197,15 +169,15 @@
 
 ## 次のステップ
 
-* **さまざまな種類のフォームとコントロールコレクション**
+| Steps                                           | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Different types of forms and control collection | This tutorial shows how to build a questionnaire, which is just one kind of dynamic form. The example uses `FormGroup` to collect a set of controls. For an example of a different type of dynamic form, see the section [Creating dynamic forms](guide/reactive-forms#creating-dynamic-forms 'Create dynamic forms with arrays') in the Reactive Forms guide. That example also shows how to use `FormArray` instead of `FormGroup` to collect a set of controls. |
+| Validating user input                           | The section [Validating form input](guide/reactive-forms#validating-form-input 'Basic input validation') introduces the basics of how input validation works in reactive forms. <br /> The [Form validation guide](guide/form-validation 'Form validation guide') covers the topic in more depth.                                                                                                                                                                  |
 
-   このチュートリアルでは、ダイナミックフォームの一種であるアンケートを作成する方法を示します。
-   この例では、 `FormGroup` を使用して一連のコントロールを収集します。
-   別のタイプの動的フォームの例については、リアクティブフォームの説明の [動的フォームの作成](guide/reactive-forms#creating-dynamic-forms "Create dynamic forms with arrays") セクションを参照してください。
-   この例では、 `FormGroup` ではなく `FormArray` を使用してコントロールのセットを収集する方法も示しています。
+<!-- links -->
 
-* **ユーザー入力の検証**
+<!-- external links -->
 
-   [フォーム入力の検証](guide/reactive-forms#validating-form-input "Basic input validation") のセクションでは、リアクティブフォームで入力検証がどのように機能するかの基本を紹介しています。
+<!-- end links -->
 
-   [フォーム検証ガイド](guide/form-validation "Form validation guide") では、このトピックについてさらに詳しく説明しています。
+@reviewed 2023-08-30

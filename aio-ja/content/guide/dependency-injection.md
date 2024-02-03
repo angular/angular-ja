@@ -25,6 +25,7 @@ class HeroService {}
 
 <code-example language="typescript">
 @Component({
+  standalone: true,
   selector: 'hero-list',
   template: '...',
   providers: [HeroService]
@@ -34,18 +35,27 @@ class HeroListComponent {}
 
 コンポーネントレベルでプロバイダーを登録すると、そのコンポーネントの新しいインスタンスごとに、サービスの新しいインスタンスを取得します。
 
-* NgModule レベルでは、`@NgModule` デコレーターの `providers` フィールドを使用します。このシナリオでは、`HeroService` はこの NgModule で宣言されたすべてのコンポーネント、ディレクティブ、パイプで利用することができます。たとえば:
+
+* `bootstrapApplication`関数に渡される `ApplicationConfig` オブジェクトの `providers` フィールドを使用して、アプリケーションレベルでサービスなどの `Injectable` を提供します。このシナリオでは、`HeroService` はこの NgModule またはこの NgModule に適用可能な同じ ModuleInjector 内にある他の NgModule で宣言されたすべてのコンポーネント、ディレクティブ、パイプで利用できます。`ApplicationConfig` にプロバイダーを登録すると、該当するすべてのコンポーネント、ディレクティブ、パイプで同じサービスのインスタンスを利用できるようになります。
+
+* `NgModule` ベースのアプリケーションでは、`@NgModule` デコレーターの `providers` フィールドを使用して、アプリケーションレベルで利用可能なサービスなどの `Injectable` を提供します。
+
+すべてのエッジケースを理解するには、[階層的インジェクター](guide/hierarchical-dependency-injection) を参照してください。たとえば:
 
 <code-example language="typescript">
-@NgModule({
-  declarations: [HeroListComponent]
-  providers: [HeroService]
-})
-class HeroListModule {}
+export const appConfig: ApplicationConfig = {
+    providers: [
+      { provide: HeroService },
+    ]
+};
 </code-example>
 
-特定のNgModuleにプロバイダーを登録すると、そのNgModule内のすべてのコンポーネントでサービスの同じインスタンスが利用できます。
-To understand all edge-cases, see [Hierarchical injectors](guide/hierarchical-dependency-injection).
+次に、`main.ts` で次のように記述します：
+<code-example language="typescript">
+bootstrapApplication(AppComponent, appConfig)
+</code-example>
+
+
 
 * アプリケーションのルートレベルでは、アプリケーション内の他のクラスへのインジェクトが可能になります。これは、 `@Injectable` デコレーターに `providedIn: 'root'` フィールドを追加することによって行います。
 
@@ -69,6 +79,15 @@ class HeroListComponent {
 }
 </code-example>
 
+もうひとつは、[inject](api/core/inject) を使う方法です:
+
+<code-example language="typescript">
+@Component({ … })
+class HeroListComponent {
+  private service = inject(HeroService);
+}
+</code-example>
+
 Angularはコンポーネントがあるサービスに依存していることを検出すると、まずインジェクターにそのサービスの既存のインスタンスがあるかどうかをチェックします。要求されたサービスのインスタンスがまだ存在しない場合、 インジェクターは登録されたプロバイダーを使ってインスタンスを作成し、 それをインジェクターに追加してから Angular にサービスを返します。
 
 要求されたサービスがすべて解決されて返されると、Angularはそれらのサービスを引数としてコンポーネントのコンストラクターを呼び出すことができます。
@@ -82,4 +101,4 @@ Angularはコンポーネントがあるサービスに依存していること�
 * [Creating and injecting services](guide/creating-injectable-service)
 * [Dependency Injection in Action](guide/dependency-injection-in-action)
 
-@reviewed 2022-08-02
+@reviewed 2023-08-29

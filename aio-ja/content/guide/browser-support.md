@@ -20,34 +20,13 @@ Angularの開発プロセスでは、各プルリクエストに対して、す�
 
 ## ポリフィル {@a polyfills}
 
-AngularはWEBプラットフォームの最新標準に基づいて構築されています。
-先述したような広範囲のブラウザをターゲットにすることは困難です。なぜならそれらがモダンブラウザの機能すべてをサポートしているわけではないからです。
-サポート必須なブラウザのために、ポリフィルを適用して補うことができます。
-See instructions on how to include polyfills into your project below.
-
-<div class="alert is-important">
-
-推奨されるポリフィルはAngularアプリケーションを完全に動作させるためのものです。
-リストにない機能をサポートするために追加のポリフィルが必要になるかもしれません。
-
-</div>
-
-<div class="alert is-helpful">
-
-**NOTE**: <br />
-Polyfills cannot magically transform an old, slow browser into a modern, fast one.
-
-</div>
-
-## CLIプロジェクトでポリフィルを有効にする
-
 [Angular CLI](cli)では、ポリフィルをサポートしています。
-CLIを使わずにプロジェクトを作成する場合は、[非CLIユーザーのためのポリフィル解説](#non-cli)をご覧ください。
+新しいプロジェクトが作成されると、CLI は `src/polyfills.ts` ファイルも作成します。
+アプリケーションがポリフィルを必要とする場合は、`src/polyfills.ts` ファイルに追加してください。
 
-[browser](cli/build) と [test](cli/test) のビルダーの `polyfills` オプションには、ファイルへのフルパス(例: `src/polyfills.ts`)、
-現在のワークスペースからの相対パス、またはモジュール指定子(例: `zone.js`)を指定できます。
+CLIを使ってプロジェクトを作成しない場合は、[CLI非使用の場合のポリフィル設定](#non-cli) セクションを参照してください。
 
-TypeScriptファイルを作成した場合は、必ず `tsconfig` ファイルの `files` プロパティに含めてください。
+カスタムポリフィル用のTypeScriptファイルを作成する場合は、必ず`tsconfig`ファイルの`files`プロパティにインクルードしてください。
 
 <code-example language="jsonc" syntax="jsonc">
 
@@ -67,7 +46,7 @@ TypeScriptファイルを作成した場合は、必ず `tsconfig` ファイル�
 
 <a id="non-cli"></a>
 
-## CLI未使用の場合のポリフィル設定
+## CLI非使用の場合のポリフィル設定
 
 もしCLIを使用していない場合、自身で必要なポリフィルを直接WEBページ(`index.html`)に追加してください。
 

@@ -654,6 +654,8 @@ ng generate module my-module --routing
 
   * コンポーネントのクラス名を `HeroListComponent` に変更します。
   * `selector` を `app-hero-list` に変更します。
+  * `templateUrl`を`./hero-list.component.html`に変更します。
+  * `styleUrls`を`./hero-list.component.css`に変更します。
 
 <div class="alert is-helpful">
 
@@ -1904,10 +1906,31 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 これはルートではありませんが、正当な値です。
 ポップアップの `RouterOutlet` を `null` に設定すると、アウトレットがクリアされ、現在のURLからセカンダリのポップアップルートが削除されます。
 
-{@a guards}
+<div class="alert is-critical">
 
-{@a milestone-5-route-guards}
+**Note:** All commands in the array passed to `Router.navigate()` target a _specific segment_ in the `UrlTree`. 
+We specify the parent of the `ActivatedRoute` as the `relativeTo` option because we want to remove `'popup'` from the segment which holds its reference.
+It's important to always be aware of which segments the commands will be applied to.
 
+</div>
+
+<div class="alert is-helpful">
+
+When `relativeTo` is not provided to the `Router.navigate()` method, the commands are processed starting at the root.
+We could omit the `relativeTo` option in this particular example because the `'popup'` outlet appears at the root level of the configuration.
+  
+</div>
+
+<div class="alert is-helpful">
+
+If you want to close an outlet which appears at any segment depth, you could accomplish
+this by creating a `UrlTree` from the current URL, recursively clearing segment `children` matching the outlet name, and finally 
+calling `Router.navigateByUrl()` with the `root` segment of the current `UrlTree`.
+
+</div>
+
+<a id="guards"></a>
+<a id="milestone-5-route-guards"></a>
 
 ## マイルストーン 5: ルートガード
 
@@ -2181,13 +2204,11 @@ The admin feature file structure looks like this:
 
 Create a new file named `auth.guard.ts` in the `auth` folder. The `auth.guard.ts` file will contain the `authGuard` function.
 
-<!-- TODO(atscott): update schematics to generate functional guards
 <code-example format="shell" language="shell">
 
 ng generate guard auth/auth
 
 </code-example>
- -->
 
 基本的なことを説明するために、この例ではコンソールにログを出力し、すぐに `true` を返し、ナビゲーションを続行できるようにしています：
 
@@ -2346,13 +2367,11 @@ In `app.module.ts`, import and add `AuthModule` to the `AppModule` imports array
 
 Create a guard that checks for the presence of a `canDeactivate()` method in a component —any component.
 
-<!-- TODO: Update CLI schematic for guards
 <code-example format="shell" language="shell">
 
 ng generate guard can-deactivate
 
 </code-example>
--->
 
 次のコードをガードに貼り付けます。
 
@@ -2412,13 +2431,11 @@ ng generate guard can-deactivate
 
 Create a `crisis-detail-resolver.ts` file within the `Crisis Center` feature area. This file will contain the `crisisDetailResolver` function.
 
-<!-- TODO: Update CLI schematic for resolvers
 <code-example format="shell" language="shell">
 
-ng generate service crisis-center/crisis-detail-resolver
+ng generate resolver crisis-center/crisis-detail-resolver
 
 </code-example>
- -->
 
 <code-example header="src/app/crisis-center/crisis-detail-resolver.ts" path="router/src/app/crisis-center/crisis-detail-resolver.1.ts"></code-example>
 

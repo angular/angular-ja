@@ -201,7 +201,7 @@ The list is by no means exhaustive, but should provide you with a good starting 
 
 | Servers                                                      | Details |
 |:---                                                          |:---     |
-| [Apache](https://httpd.apache.org)                           | Add a [rewrite rule](https://httpd.apache.org/docs/current/mod/mod_rewrite.html) to the `.htaccess` file as shown \([ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess](https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess)\): <code-example format="apache" language="apache"> RewriteEngine On &NewLine;&nbsp; &num; If an existing asset or directory is requested go to it as it is &NewLine;&nbsp; RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR] &NewLine;&nbsp; RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d &NewLine;&nbsp; RewriteRule ^ - [L] &NewLine; &NewLine;&nbsp; &num; If the requested resource doesn't exist, use index.html &NewLine;&nbsp; RewriteRule ^ /index.html </code-example>                                                                                                                                                                                                                                                                                                                                                                                                          |
+| [Apache](https://httpd.apache.org)                           | Add a [rewrite rule](https://httpd.apache.org/docs/current/mod/mod_rewrite.html) to the `.htaccess` file as shown \([ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess](https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess)\): <code-example format="apache" language="apache"> RewriteEngine On&NewLine; &num; If an existing asset or directory is requested go to it as it is&NewLine; RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]&NewLine; RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d&NewLine; RewriteRule ^ - [L]&NewLine;&NewLine; &num; If the requested resource doesn't exist, use index.html&NewLine; RewriteRule ^ /index.html </code-example>                                                                                                                                                                                                                                                                                                                                                                                                          |
 | [Nginx](https://nginx.org)                                   | Use `try_files`, as described in [Front Controller Pattern Web Apps](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps), modified to serve `index.html`: <code-example format="nginx" language="nginx"> try_files &dollar;uri &dollar;uri/ /index.html; </code-example>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | [Ruby](https://www.ruby-lang.org)                            | Create a Ruby server using \([sinatra](http://sinatrarb.com)\) with a basic Ruby file that configures the server `server.rb`: <code-example format="ruby" language="ruby"> require 'sinatra' &NewLine; &NewLine;&num; Folder structure &NewLine;&num; . &NewLine;&num; -- server.rb &NewLine;&num; -- public &NewLine;&num; &nbsp;&nbsp; &verbar;-- project-name &NewLine;&num; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &verbar;-- index.html &NewLine; &NewLine;get '/' do &NewLine;&nbsp; folderDir = settings.public_folder + '/project-name'  &num; ng build output folder &NewLine;&nbsp; send_file File.join(folderDir, 'index.html') &NewLine;end </code-example>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | [IIS](https://www.iis.net)                                   | Add a rewrite rule to `web.config`, similar to the one shown [here](https://stackoverflow.com/a/26152011): <code-example format="xml" language="xml"> &lt;system.webServer&gt; &NewLine;&nbsp; &lt;rewrite&gt; &NewLine;&nbsp;&nbsp;&nbsp; &lt;rules&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rule name="Angular Routes" stopProcessing="true"&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;match url=".*" /&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;conditions logicalGrouping="MatchAll"&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" /&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" /&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/conditions&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;action type="Rewrite" url="/index.html" /&gt; &NewLine;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rule&gt; &NewLine;&nbsp;&nbsp;&nbsp; &lt;/rules&gt; &NewLine;&nbsp; &lt;/rewrite&gt; &NewLine;&lt;/system.webServer&gt; </code-example> |
@@ -247,7 +247,7 @@ The `production` configuration engages the following build optimization features
 | Features                                              | Details |
 |:---                                                   |:---     |
 | [Ahead-of-Time (AOT) Compilation](guide/aot-compiler) | Pre-compiles Angular component templates.                                |
-| [Production mode](#enable-prod-mode)                  | Deploys the production environment which enables *production mode*.      |
+| [Production mode](#prod-mode)                         | Optimizes the application for the best runtime performance |
 | Bundling                                              | Concatenates your many application and library files into a few bundles. |
 | Minification                                          | Removes excess whitespace, comments, and optional tokens.                |
 | Uglification                                          | Rewrites code to use short, cryptic variable and function names.         |
@@ -255,23 +255,20 @@ The `production` configuration engages the following build optimization features
 
 See [`ng build`](cli/build) for more about CLI build options and what they do.
 
-<a id="enable-prod-mode"></a>
+<a id="prod-mode"></a>
 
-### Enable runtime production mode
+### Production mode at runtime
 
-In addition to build optimizations, Angular also has a runtime production mode.
-Angular applications run in development mode by default, as you can see by the following message on the browser console:
+When you run an application locally using `ng serve`, Angular uses the development mode configuration
+at runtime. The development mode at runtime enables extra safety checks, more detailed error messages
+and debugging utilities, such as the [expression-changed-after-checked](errors/NG0100) detection. Angular outputs
+a message in the browser console to indicate that the development mode is enabled.
 
-<code-example format="output" hideCopy language="shell">
+Those extra checks are helpful during the development, but they require an extra code in a bundle, which is
+undesirable in production. To ensure that there are no implications on the bundle size, the build optimizer
+removes the development-only code from the bundle when building in production mode.
 
-Angular is running in development mode.
-Call `enableProdMode()` to enable production mode.
-
-</code-example>
-
-*Production mode* improves application performance by disabling development-only safety checks and debugging utilities, such as the expression-changed-after-checked detection.
 Building your application with the production configuration automatically enables Angular's runtime production mode.
-
 <a id="lazy-loading"></a>
 
 ### Lazy loading

@@ -1,11 +1,11 @@
 # DevToolsの概要
 
 Angular DevTools は、Angular アプリケーションのデバッグおよびプロファイリング機能を提供するブラウザ拡張機能です。
-Angular DevTools は、Angular v12 以降をサポートしています。
+Angular DevToolsは、[最適化設定オプション](guide/workspace-config#optimization-configuration)を無効にしてコンパイルされた (<code>{optimization:false}</code>) v12以降の Angular をサポートします。
 
 <div class="video-container">
 
-<iframe allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/bavWOHZM6zE"></iframe>
+<iframe allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" title="DevToolsの概要" allowfullscreen frameborder="0" src="https://www.youtube.com/embed/bavWOHZM6zE"></iframe>
 
 </div>
 

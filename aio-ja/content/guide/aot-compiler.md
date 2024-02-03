@@ -72,7 +72,7 @@ AOTコンパイルには三つのフェーズがあります。
 |:--- |:---                    |:---     |
 | 1   | code analysis          | In this phase, the TypeScript compiler and *AOT collector* create a representation of the source. The collector does not attempt to interpret the metadata it collects. It represents the metadata as best it can and records errors when it detects a metadata syntax violation.                        |
 | 2   | code generation        | In this phase, the compiler's `StaticReflector` interprets the metadata collected in phase 1, performs additional validation of the metadata, and throws an error if it detects a metadata restriction violation.                                                                                        |
-| 3   | template type checking | In this optional phase, the Angular *template compiler* uses the TypeScript compiler to validate the binding expressions in templates. You can enable this phase explicitly by setting the `fullTemplateTypeCheck` configuration option; see [Angular compiler options](guide/angular-compiler-options). |
+| 3   | template type checking | In this optional phase, the Angular *template compiler* uses the TypeScript compiler to validate the binding expressions in templates. You can enable this phase explicitly by setting the `strictTemplates` configuration option; see [Angular compiler options](guide/angular-compiler-options). |
 
 ### メタデータ制約
 
@@ -81,7 +81,7 @@ TypeScript の _サブセット_ にメタデータを記述します。これ�
 *   [式の構文](#expression-syntax) をサポートされている JavaScript のサブセットに制限します
 *   [コード折りたたみ](#code-folding)の後、エクスポートされたシンボルだけを参照します
 *   コンパイラによって[サポートされている関数](#supported-functions)だけを呼び出します
-*   修飾されデータバインドされたクラスメンバーはパブリックでなければなりません
+*   Input/Output、データバインドされたクラスメンバーはパブリックでなければなりません
 
 AOTコンパイル用のアプリケーションを準備するための追加のガイドラインと説明については、[Angular: Writing AOT-friendly applications](https://medium.com/sparkles-blog/angular-writing-aot-friendly-applications-7b64c8afbe3f)を参照してください。
 
@@ -307,25 +307,13 @@ export class HeroComponent {
 
 コンパイラはコレクターがサポートするすべての構文形式を理解しますが、_セマンティックス_ がコンパイラの規則に違反している場合は、_構文として_ 正しいメタデータを拒否することがあります。
 
-### 公開されたシンボル
+### publicまたはprotectedなシンボル
 
 コンパイラは _エクスポートされたシンボル_ しか参照できません。
 
-*   デコレートされたコンポーネントクラスメンバは公開されている必要があります。`@Input()` プロパティを非公開にしたり、保護することはできません。
-*   データバインドプロパティも公開されている必要があります。
+*   デコレートされたコンポーネントクラスメンバはpublicまたはprotectedにされている必要があります。`@Input()` プロパティを非公開にすることはできません。
 
-<!--<code-example format="typescript" language="typescript">
-
-// BAD CODE - title is private
-&commat;Component({
-  selector: 'app-root',
-  template: '&lt;h1&gt;{{title}}&lt;/h1&gt;'
-})
-export class AppComponent {
-  private title = 'My App'; // Bad
-}
-
-</code-example>-->
+*   データバインドプロパティもpublicまたはprotectedにされている必要があります。
 
 <a id="supported-functions"></a>
 

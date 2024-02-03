@@ -17,6 +17,13 @@
 
 ## イベントへのバインディング
 
+
+<div class="alert is-helpful">
+
+プロパティへのバインディングについては、[イベントバインディング](guide/property-binding)を参照してください。
+
+</div>
+
 イベントにバインドするには、Angularのイベントバインディング構文を使用します。
 この構文は、等号の左側のカッコ内にターゲットイベント名、右側にクオートで囲まれたテンプレート文で構成されます。
 
@@ -42,25 +49,6 @@
 
 ターゲットイベント名である `myClick` が `ClickDirective` の Output プロパティにマッチしない場合、Angular は代わりにベースとなる DOM 要素の `myClick` イベントにバインドします。
 
-## パッシブイベントへのバインディング
-
-これは高度なテクニックであり、ほとんどのアプリケーションでは必要ありません。パフォーマンスの問題を引き起こしている頻繁に発生するイベントを最適化したい場合に、この方法が役に立つかもしれません。
-
-Angularはパッシブイベントリスナーもサポートしています。たとえば、次の手順でスクロールイベントをパッシブにします。
-
-1. `src` ディレクトリの下に `zone-flags.ts` というファイルを作成します。
-2. このファイルに次の行を追加します。
-   ```typescript
-   (window as any)['__zone_symbol__PASSIVE_EVENTS'] = ['scroll'];
-   ```
-3. `src/polyfills.ts` ファイルで、zone.js をインポートする前に、新しく作成した `zone-flags` をインポートします。
-   ```typescript
-   import './zone-flags';
-   import 'zone.js';  // Included with Angular CLI.
-   ```
-
-これらの手順の後、`scroll`イベントのイベントリスナーを追加すると、リスナーは`passive`になります。
-
 ## キーボードイベントへのバインディング
 
 Angularのバインディング構文を使って、キーボードイベントにバインドすることができます。キーボードイベントにバインドしたいキーやコードを指定することができます。これらの `key` と `code` フィールドは、ブラウザのキーボードイベントオブジェクトのネイティブな部分です。デフォルトでは、イベントバインディングはキーボードイベントの `key` フィールドを使用することを想定しています。また、`code`フィールドを使用することもできます。
@@ -81,6 +69,28 @@ Angularのバインディング構文を使って、キーボードイベント�
 
 詳しくは、[key](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)と[code](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values)のフルリファレンスを参照すると、イベント文字列を構築するのに役立つでしょう。
 
+
+## パッシブイベントへのバインディング
+
+Angularは[passive event](https://developer.chrome.com/en/docs/lighthouse/best-practices/uses-passive-event-listeners/)リスナーもサポートしています。 
+
+これは高度なテクニックであり、ほとんどのアプリケーションでは必要ありません。パフォーマンスの問題を引き起こしている頻繁に発生するイベントを最適化したい場合に、この方法が役に立つかもしれません。
+
+Angularはパッシブイベントリスナーもサポートしています。たとえば、次の手順でスクロールイベントをパッシブにします。
+
+1. `src` ディレクトリの下に `zone-flags.ts` というファイルを作成します。
+2. このファイルに次の行を追加します。
+   ```typescript
+   (window as any)['__zone_symbol__PASSIVE_EVENTS'] = ['scroll'];
+   ```
+3. `src/polyfills.ts` ファイルで、zone.js をインポートする前に、新しく作成した `zone-flags` をインポートします。
+   ```typescript
+   import './zone-flags';
+   import 'zone.js';  // Included with Angular CLI.
+   ```
+
+これらの手順の後、`scroll`イベントのイベントリスナーを追加すると、リスナーは`passive`になります。
+
 ## 次のステップ
 
 * イベントバインディングの仕組みの詳細については、[イベントバインディングの仕組み](guide/event-binding-concepts)を参照してください。
@@ -88,4 +98,4 @@ Angularのバインディング構文を使って、キーボードイベント�
 * [テキスト補間](guide/interpolation)
 * [双方向バインディング](guide/two-way-binding)
 
-@reviewed 2022-05-10
+@reviewed 2023-09-01

@@ -329,7 +329,7 @@ Internally, the Angular CLI uses the below `browserslist` configuration which ma
   Firefox ESR
   </code-example>
 
-To override the internal configuration, run [`ng generate config browserslist`](cli/generate#config-command), which generates a `.browserslistrc` configuration file in the the project directory.
+To override the internal configuration, run [`ng generate config browserslist`](cli/generate#config-command), which generates a `.browserslistrc` configuration file in the project directory.
 
 See the [browserslist repository](https://github.com/browserslist/browserslist) for more examples of how to target specific browsers and versions.
 
@@ -385,6 +385,19 @@ For a description of all options, see [webpack DevServer documentation](https://
 
 **NOTE**: <br />
 If you edit the proxy configuration file, you must relaunch the `ng serve` process to make your changes effective.
+
+</div>
+
+<div class="alert is-important">
+
+As of Node version 17, Node will not always resolve `http://localhost:<port>` to `http://127.0.0.1:<port>`
+depending on each machine's configuration.
+
+If you get an `ECONNREFUSED` error using a proxy targeting a `localhost` URL,
+you can fix this issue by updating the target from `http://localhost:<port>` to `http://127.0.0.1:<port>`.
+
+See [the http proxy middleware documentation](https://github.com/chimurai/http-proxy-middleware#nodejs-17-econnrefused-issue-with-ipv6-and-localhost-705)
+for more information.
 
 </div>
 

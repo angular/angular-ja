@@ -18,7 +18,7 @@ You can edit the application in StackBlitz and see the results in real time.
 This *Tour of Heroes* tutorial provides an introduction to the fundamentals of Angular and shows you how to:
 
 * Set up your local Angular development environment.
-* Use the [Angular CLI](cli "CLI command reference") to develop an application
+* Use the [Angular CLI](cli "CLI command reference") to develop an application.
 
 The *Tour of Heroes* application that you build helps a staffing agency manage its stable of heroes.
 The application has many of the features that you'd expect to find in any data-driven application.
@@ -101,5 +101,9 @@ Here's the application in action:
 <img alt="Tour of Heroes in Action" src="generated/images/guide/toh/toh-anim.gif">
 
 </div>
+
+## Next steps
+
+*  [Create a new project](tutorial/tour-of-heroes/toh-pt0)
 
 @reviewed 2022-05-16

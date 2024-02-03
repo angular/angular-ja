@@ -1,4 +1,4 @@
-# ライフサイクルフック
+# コンポーネントのライフサイクル
 
 コンポーネントインスタンスには、 Angular がコンポーネントクラスをインスタンス化してコンポーネントビューとその子ビューをレンダリングするときに開始するライフサイクルがあります。
 Angular はデータバインドプロパティがいつ変更されたかを確認し、必要に応じてビューとコンポーネントインスタンスの両方を更新するため、ライフサイクルは変更の検出を続けます。
@@ -14,7 +14,7 @@ Angular は実行中にインスタンスを作成、更新、破棄するため
 * [TypeScript プログラミング](https://www.typescriptlang.org/)
 * [Angularの概念](guide/architecture "Introduction to fundamental app-design concepts") で説明されている Angular アプリケーションの設計の基礎。
 
-{@a hooks-overview}
+<a id="hooks-overview"></a>
 
 ## ライフサイクルイベントへの応答
 
@@ -30,7 +30,7 @@ Angular の `core` ライブラリ中の 1 つ以上の *ライフサイクル�
 
 {@a hooks-purpose-timing}
 
-### ライフサイクルイベントシーケンス
+### ライフサイクルイベントシーケンス {@a lifecycle-event-sequence}
 
 アプリケーションがそのコンストラクターを呼び出してコンポーネントまたはディレクティブをインスタンス化した後、 Angular はそのインスタンスのライフサイクルの適切な時点で実装したフックメソッドを呼び出します。
 
@@ -319,11 +319,15 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
   </div>
 
-{@a ondestroy}
+<a id="ondestroy"></a>
 
 ## インスタンス破棄時のクリーンアップ
 
-クリーンアップロジックを `ngOnDestroy()` に配置します。これは、 Angular がディレクティブを破棄する前に実行する必要があるロジックです。
+Angular provides several ways to clean up when an instance is destroyed.
+
+### `ngOnDestroy`
+
+クリーンアップロジックを `ngOnDestroy()` に配置できます。これは、 Angular がディレクティブを破棄する前に実行する必要があるロジックです。
 
 これは、自動的にガベージコレクションされないリソースを解放する場所です。
 怠ると、メモリリークのリスクがあります。
@@ -334,6 +338,135 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
 `ngOnDestroy()` メソッドは、コンポーネントがなくなることをアプリケーションの別の部分に通知する時間でもあります。
 
+### DestroyRef
+
+In addition to to `ngOnDestroy()`, you can inject Angular's `DestroyRef` and register callback functions to be called when the enclosing context is destroyed. This can be useful for building reusable utilities that require cleanup.
+
+Register a callback with the `DestroyRef`:
+
+```ts
+@Component(...)
+class Counter {
+  count = 0;
+  constructor() {
+    // Start a timer to increment the counter every second.
+    const id = setInterval(() => this.count++, 1000);
+
+    // Stop the timer when the component is destroyed.
+    const destroyRef = inject(DestroyRef);
+    destroyRef.onDestroy(() => clearInterval(id));
+  }
+}
+```
+
+Like `ngOnDestroy`, `DestroyRef` works in any Angular service, directive, component, or pipe.
+
+### `takeUntilDestroyed`
+
+<div class="alert is-important">
+
+`takeUntilDestroyed` is available for [developer preview](/guide/releases#developer-preview). It's ready for you to try, but it might change before it is stable.
+
+</div>
+
+When using RxJS Observables in components or directives, you may want to complete any observables when the component or directive is destroyed. Angular's `@angular/core/rxjs-interop` package provides an operator, `takeUntilDestroyed`, to simplify this common task:
+
+```ts
+data$ = http.get('...').pipe(takeUntilDestroyed());
+```
+
+By default, `takeUntilDestroyed` must be called in an [injection context](/guide/dependency-injection-context) so that it can access `DestroyRef`. If an injection context isn't available, you can explicitly provide a `DestroyRef`.
+
+## Reading and writing the DOM
+
+Sometimes it's necessary to use browser-only APIs to manually read or write the DOM. This can be challenging to do with the [lifecycle events](#lifecycle-event-sequence) above, as they will also run during [server-side rendering and pre-rendering](guide/glossary#server-side-rendering). For this purpose, Angular provides `afterRender` and `afterNextRender`. These functions can be used unconditionally, but will only have an effect on the browser. Both functions accept a callback that will run after the next [change detection](/guide/glossary#change-detection) cycle (including any nested cycles) has completed.
+
+<div class="alert is-important">
+
+`afterRender` and `afterNextRender` are available for [developer preview](/guide/releases#developer-preview). They are ready for you to try, but they might change before they are stable.
+
+</div>
+
+| Function | Purpose | Timing |
+| ------ | ------- | ------ |
+| `afterNextRender` | Perform one-time initialization, or observe a single, specific change to the DOM. <br /> <div class="alert is-helpful">As a rule of thumb, you should use `afterRender` instead if you need to manually read or write any layout data such as size or location.</div> See details in [One-time initialization](#one-time-initialization) in this document. | _Once_ after the next change detection cycle. |
+| `afterRender` | Synchronize state with the DOM.  See details in [Handling synchronization](#handling-synchronization) in this document. | After _every_ change detection cycle that follows. |
+
+### One-time initialization
+
+Generally, you will want to use `afterNextRender` to perform any one-time initialization, such as for a third-party library, or for browser-only APIs.
+
+```ts
+@Component({
+  selector: 'my-chart-cmp',
+  template: `<div #chart>{{ ... }}</div>`,
+})
+export class MyChartCmp {
+  @ViewChild('chart') chartRef: ElementRef;
+  chart: MyChart|null;
+
+  constructor() {
+    afterNextRender(() => {
+      this.chart = new MyChart(this.chartRef.nativeElement);
+    }, {phase: AfterRenderPhase.Write});
+  }
+}
+```
+
+Instead of attempting to recreate their behaviors with `afterRender`, you should prefer to use built-in browser APIs like `ResizeObserver` and `IntersectionObserver` wherever possible. You can use `afterNextRender` to safely initialize such APIs on the browser only.
+
+```ts
+@Component({
+  selector: 'my-cmp',
+  template: `<span #content>{{ ... }}</span>`,
+})
+export class MyComponent {
+  resizeObserver: ResizeObserver|null = null;
+  @ViewChild('content') contentRef: ElementRef;
+
+  constructor() {
+    afterNextRender(() => {
+      this.resizeObserver = new ResizeObserver(() => {
+        console.log('Content was resized');
+      });
+
+      this.resizeObserver.observe(this.contentRef.nativeElement);
+    }, {phase: AfterRenderPhase.Write});
+  }
+
+  ngOnDestroy() {
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = null;
+  }
+}
+```
+
+<div class="alert is-important">
+
+As a rule of thumb, `afterNextRender` should be used to observe _discrete_ changes to the DOM, such as element creation or deletion. For manually reading or writing data that tends to change frequently, such as size or location, you should generally prefer to use `afterRender` instead.
+
+</div>
+
+### Handling synchronization
+
+As an escape hatch for when the browser does not provide a better API to do so, you can use `afterRender` to perform any additional read or writes to the DOM every time Angular finishes mutating it.
+
+```ts
+@Component({
+  selector: 'my-cmp',
+  template: `<span #content>{{ ... }}</span>`,
+})
+export class MyComponent {
+  @ViewChild('content') contentRef: ElementRef;
+
+  constructor() {
+    afterRender(() => {
+      const elem = this.contentRef.nativeElement;
+      console.log(`content position: (${elem.offsetLeft}, ${elem.offsetTop})`);
+    }, {phase: AfterRenderPhase.Read});
+  }
+}
+```
 
 ## 一般的な例
 

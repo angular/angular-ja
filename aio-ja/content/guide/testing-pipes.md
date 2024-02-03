@@ -1,6 +1,6 @@
 # パイプのテスト
 
-[パイプ](guide/pipes)は Angular のテストユーティリティなしで簡単にテストできます。
+[パイプ](guide/pipes-overview)は Angular のテストユーティリティなしで簡単にテストできます。
 
 <div class="alert is-helpful">
 
@@ -41,4 +41,4 @@ If you'd like to experiment with the application that this guide describes, you 
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-07

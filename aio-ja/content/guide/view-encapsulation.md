@@ -1,28 +1,28 @@
-# View encapsulation
+# ビューのカプセル化
 
-In Angular, a component's styles can be encapsulated within the component's host element so that they don't affect the rest of the application.
+Angularでは、コンポーネントのスタイルをコンポーネントのホスト要素内にカプセル化し、アプリケーションの他の部分に影響を与えないようにすることができます。
 
-The `Component` decorator provides the [`encapsulation`](api/core/Component#encapsulation) option which can be used to control how the encapsulation is applied on a *per component* basis.
+`Component` デコレーターは [`encapsulation`](api/core/Component#encapsulation) オプションを提供し、コンポーネント単位でカプセル化の適用方法を制御することができます。
 
-Choose from the following modes:
+次のモードから選択できます:
 
 <!-- vale off -->
 
-| Modes                         | Details |
+| モード                         | 詳細 |
 |:---                           |:---     |
-| `ViewEncapsulation.ShadowDom` | Angular uses the browser's built-in [Shadow DOM API](https://developer.mozilla.org/docs/Web/Web_Components/Shadow_DOM) to enclose the component's view inside a ShadowRoot, used as the component's host element, and apply the provided styles in an isolated manner. <div class="alert is-important"> `ViewEncapsulation.ShadowDom` only works on browsers that have built-in support for the shadow DOM \(see [Can I use - Shadow DOM v1](https://caniuse.com/shadowdomv1)\). Not all browsers support it, which is why the `ViewEncapsulation.Emulated` is the recommended and default mode. </div> |
-| `ViewEncapsulation.Emulated`  | Angular modifies the component's CSS selectors so that they are only applied to the component's view and do not affect other elements in the application, *emulating* Shadow DOM behavior. For more details, see [Inspecting generated CSS](guide/view-encapsulation#inspect-generated-css).                                                                                                                                                                                                                                                                                                           |
-| `ViewEncapsulation.None`      | Angular does not apply any sort of view encapsulation meaning that any styles specified for the component are actually globally applied and can affect any HTML element present within the application. This mode is essentially the same as including the styles into the HTML itself.                                                                                                                                                                                                                                                                                                                   |
+| `ViewEncapsulation.ShadowDom` | Angularはブラウザ組込みの[Shadow DOM API](https://developer.mozilla.org/docs/Web/Web_Components/Shadow_DOM)を使用して、コンポーネントのホスト要素として使用されるShadowRoot内にコンポーネントのビューを閉じ込め、提供されたスタイルを分離された方法で適用します。 |
+| `ViewEncapsulation.Emulated`  | AngularはコンポーネントのCSSセレクターを変更し、コンポーネントのビューにのみ適用され、アプリケーション内の他の要素には影響しないようにします。詳細は[生成されたCSSの検証](guide/view-encapsulation#inspect-generated-css)を参照してください。 |
+| `ViewEncapsulation.None`      | Angularはいかなるビューのカプセル化も適用しません。つまり、コンポーネントに指定されたスタイルは実際にグローバルに適用され、アプリケーション内に存在するあらゆるHTML要素に影響を与える可能性があります。このモードは本質的に、スタイルをHTML自体に含めるのと同じです。 |
 
 <a id="inspect-generated-css"></a>
 
-## Inspecting generated CSS
+## 生成されたCSSの検証
 
 <!-- vale on -->
 
-When using the emulated view encapsulation, Angular pre-processes all the component's styles so that they are only applied to the component's view.
+エミュレートされたビューのカプセル化を使用する場合、Angularはすべてのコンポーネントのスタイルを事前処理し、コンポーネントのビューにのみ適用されるようにします。
 
-In the DOM of a running Angular application, elements belonging to components using emulated view encapsulation have some extra attributes attached to them:
+実行中のAngularアプリケーションのDOMでは、エミュレートされたビューのカプセル化を使用しているコンポーネントに属する要素には、いくつかの特別な属性が付加されています:
 
 <code-example language="html">
 
@@ -35,17 +35,17 @@ In the DOM of a running Angular application, elements belonging to components us
 
 </code-example>
 
-Two kinds of these attributes exist:
+これらの属性には2種類あります:
 
-| Attributes   | Details |
+| 属性   | 詳細 |
 |:---          |:---     |
-| `_nghost`    | Are added to elements that enclose a component's view and that would be ShadowRoots in a native Shadow DOM encapsulation. This is typically the case for components' host elements.          |
-| `_ngcontent` | Are added to child element within a component's view, those are used to match the elements with their respective emulated ShadowRoots \(host elements with a matching `_nghost` attribute\). |
+| `_nghost`    | コンポーネントのビューを含む要素に追加され、ネイティブの Shadow DOM カプセル化では ShadowRoots に該当します。これは通常、コンポーネントのホスト要素で見られます。          |
+| `_ngcontent` | コンポーネントのビュー内の子要素に追加され、それらがそれぞれのエミュレートされた ShadowRoots 内の要素(一致する `_nghost` 属性をもつホスト要素)と照合するために使用されます。 |
 
-The exact values of these attributes are a private implementation detail of Angular.
-They are automatically created and you should never refer to them in application code.
+これらの属性の正確な値は、Angularのプライベートな実装の詳細です。
+これらは自動的に生成されるので、アプリケーションコードでは決して参照しないでください。
 
-They are targeted by the created component styles, which are injected in the `<head>` section of the DOM:
+生成されたコンポーネントスタイルは、DOMの`<head>`セクションに注入されます:
 
 <code-example format="css" language="css">
 
@@ -60,48 +60,48 @@ h3[_ngcontent-pmm-6] {
 
 </code-example>
 
-These styles are post-processed so that each CSS selector is augmented with the appropriate `_nghost` or `_ngcontent` attribute.
-These modified selectors make sure the styles to be applied to components' views in an isolated and targeted fashion.
+これらのスタイルは、各CSSセレクターが適切な `_nghost` または `_ngcontent` 属性で補完されるように後処理されます。
+変更されたセレクターによって、コンポーネントビューに適用されるスタイルが分離され、的を絞ったものになります。
 
-## Mixing encapsulation modes
+## カプセル化モードの混在
 
-As mentioned earlier, you specify the encapsulation mode in the Component's decorator on a *per component* basis. This means that within your application you can have different components using different encapsulation strategies.
+前述したように、カプセル化モードはコンポーネントのデコレーターでコンポーネントごとに指定します。つまり、アプリケーション内で、異なるカプセル化方式を使用するコンポーネントをもつことができるということです。
 
-Although possible, this is not recommended.
-If it is really needed, you should be aware of how the styles of components using different encapsulation modes interact with each other:
+可能ではありますが、これはお勧めできません。
+もし本当に必要であれば、異なるカプセル化モードを使用するコンポーネントのスタイルが互いにどのように影響しあうかを意識する必要があります:
 
-| Modes                         | Details |
+| モード                         | 詳細 |
 |:---                           |:---     |
-| `ViewEncapsulation.Emulated`  | The styles of components are added to the `<head>` of the document, making them available throughout the application, but their selectors only affect elements within their respective components' templates. |
-| `ViewEncapsulation.None`      | The styles of components are added to the `<head>` of the document, making them available throughout the application, so are completely global and affect any matching elements within the document.          |
-| `ViewEncapsulation.ShadowDom` | The styles of components are only added to the shadow DOM host, ensuring that they only affect elements within their respective components' views.                                                            |
+| `ViewEncapsulation.Emulated`  | コンポーネントのスタイルはドキュメントの `<head>` に追加され、アプリケーション全体で利用できるようになりますが、そのセレクターはそれぞれのコンポーネントのテンプレート内の要素にのみ影響します。 |
+| `ViewEncapsulation.None`      | コンポーネントのスタイルはドキュメントの `<head>` に追加され、アプリケーション全体で利用できるようになるため、完全にグローバルなものとなり、ドキュメント内の一致するすべての要素に影響を与えます。         |
+| `ViewEncapsulation.ShadowDom` | コンポーネントのスタイルはShadow DOMホストにのみ追加され、それぞれのコンポーネントのビュー内の要素にのみ影響することを保証します。                                                           |
 
 <div class="alert is-helpful">
 
-Styles of `ViewEncapsulation.Emulated` and `ViewEncapsulation.None` components are also added to the shadow DOM host of each `ViewEncapsulation.ShadowDom` component.
+ViewEncapsulation.Emulated` コンポーネントと `ViewEncapsulation.None` コンポーネントのスタイルは、それぞれ `ViewEncapsulation.ShadowDom` コンポーネントの Shadow DOM ホストにも追加されます。
 
-This means that styles for components with `ViewEncapsulation.None` affect matching elements within the shadow DOM.
+これは、`ViewEncapsulation.None`をもつコンポーネントのスタイルは、Shadow DOM内のマッチする要素に影響を与えることを意味します。
 
-This approach may seem counter-intuitive at first. But without it a component with `ViewEncapsulation.None` would be rendered differently within a component using `ViewEncapsulation.ShadowDom`, since its styles would not be available.
+このアプローチは、最初は直感に反するように見えるかもしれません。しかし、これがなければ、`ViewEncapsulation.None`を使用するコンポーネントは、`ViewEncapsulation.ShadowDom`を使用するコンポーネント内で、そのスタイルが使用できないため、異なるレンダリングになってしまいます。
 
 </div>
 
-### Examples
+### 使用例
 
-This section shows examples of how the styling of components with different `ViewEncapsulation` interact.
+このセクションでは、異なる `ViewEncapsulation` をもつコンポーネントのスタイリングがどのように相互作用するかの例を示します。
 
-See the <live-example noDownload></live-example> to try out these components yourself.
+<live-example noDownload></live-example> を参照して、これらのコンポーネントを自分で試してみてください。
 
-#### No encapsulation
+#### カプセル化なし
 
-The first example shows a component that has `ViewEncapsulation.None`.
-This component colors its template elements red.
+最初の例では、`ViewEncapsulation.None`をもつコンポーネントを示します。
+このコンポーネントはテンプレート要素を赤色に着色します。
 
 <code-example header="src/app/no-encapsulation.component.ts" path="view-encapsulation/src/app/no-encapsulation.component.ts"></code-example>
 
-Angular adds the styles for this component as global styles to the `<head>` of the document.
+Angularはこのコンポーネントのスタイルをグローバルスタイルとしてドキュメントの`<head>`に追加します。
 
-As already mentioned, Angular also adds the styles to all shadow DOM hosts, making the styles available throughout the whole application.
+すでに述べたように、AngularはすべてのShadow DOMホストにもスタイルを追加し、アプリケーション全体でスタイルを利用できるようにします。
 
 <div class="lightbox">
 
@@ -109,19 +109,19 @@ As already mentioned, Angular also adds the styles to all shadow DOM hosts, maki
 
 </div>
 
-#### Emulated encapsulation
+#### エミュレートされたカプセル化
 
-The second example shows a component that has `ViewEncapsulation.Emulated`.
-This component colors its template elements green.
+2つ目の例では、`ViewEncapsulation.Emulated`をもつコンポーネントを示します。
+このコンポーネントはテンプレート要素を緑色に着色します。
 
 <code-example header="src/app/emulated-encapsulation.component.ts" path="view-encapsulation/src/app/emulated-encapsulation.component.ts"></code-example>
 
-Comparable to `ViewEncapsulation.None`, Angular adds the styles for this component to the `<head>` of the document, but with "scoped" styles.
+`ViewEncapsulation.None`と同様に、Angularはこのコンポーネントのスタイルをドキュメントの`<head>`に追加しますが、「スコープ化された」スタイルを使用します。
 
-Only the elements directly within this component's template are going to match its styles.
-Since the "scoped" styles from the `EmulatedEncapsulationComponent` are specific, they override the global styles from the `NoEncapsulationComponent`.
+このコンポーネントのテンプレートに直接含まれる要素だけが、このコンポーネントのスタイルと対応します。
+`EmulatedEncapsulationComponent`の「スコープ化された」スタイルは詳細度が高いので、`NoEncapsulationComponent`のグローバルスタイルを上書きします。
 
-In this example, the `EmulatedEncapsulationComponent` contains a `NoEncapsulationComponent`, but `NoEncapsulationComponent` is still styled as expected since the `EmulatedEncapsulationComponent` 's "scoped" styles do not match elements in its template.
+この例では、 `EmulatedEncapsulationComponent` は `NoEncapsulationComponent` を含んでいますが、 `EmulatedEncapsulationComponent` の「スコープ化された」スタイルはそのテンプレートの要素にマッチしないため、 `NoEncapsulationComponent` は期待どおりにスタイリングされます。
 
 <div class="lightbox">
 
@@ -129,30 +129,30 @@ In this example, the `EmulatedEncapsulationComponent` contains a `NoEncapsulatio
 
 </div>
 
-#### Shadow DOM encapsulation
+#### Shadow DOMカプセル化
 
-The third example shows a component that has `ViewEncapsulation.ShadowDom`.
-This component colors its template elements blue.
+3つ目の例は、`ViewEncapsulation.ShadowDom`をもつコンポーネントです。
+このコンポーネントはテンプレート要素を青く着色します。
 
 <code-example header="src/app/shadow-dom-encapsulation.component.ts" path="view-encapsulation/src/app/shadow-dom-encapsulation.component.ts"></code-example>
 
-Angular adds styles for this component only to the shadow DOM host, so they are not visible outside the shadow DOM.
+AngularはこのコンポーネントのスタイルをShadow DOMホストのみに追加するので、Shadow DOMの外には表示されません。
 
 <div class="alert is-helpful">
 
-**NOTE**: <br />
-Angular also adds the global styles from the `NoEncapsulationComponent` and `EmulatedEncapsulationComponent` to the shadow DOM host. Those styles are still available to the elements in the template of this component.
+**注意**: <br />
+Angularはまた、`NoEncapsulationComponent`と`EmulatedEncapsulationComponent`のグローバルスタイルをShadow DOMホストに追加します。これらのスタイルは、このコンポーネントのテンプレート内の要素でも使用できます。
 
 </div>
 
-In this example, the `ShadowDomEncapsulationComponent` contains both a `NoEncapsulationComponent` and `EmulatedEncapsulationComponent`.
+この例では、`ShadowDomEncapsulationComponent` は `NoEncapsulationComponent` と `EmulatedEncapsulationComponent` の両方を含んでいます。
 
-The styles added by the `ShadowDomEncapsulationComponent` component are available throughout the shadow DOM of this component, and so to both the `NoEncapsulationComponent` and `EmulatedEncapsulationComponent`.
+`ShadowDomEncapsulationComponent` コンポーネントによって追加されたスタイルは、このコンポーネントの Shadow DOM 全体で有効であり、`NoEncapsulationComponent` と `EmulatedEncapsulationComponent` の両方でも有効です。
 
-The `EmulatedEncapsulationComponent` has specific "scoped" styles, so the styling of this component's template is unaffected.
+`EmulatedEncapsulationComponent`は詳細度の高い 「スコープ化された」スタイルを持っているので、このコンポーネントのテンプレートのスタイリングに影響されることはありません。
 
-Since styles from `ShadowDomEncapsulationComponent` are added to the shadow host after the global styles, the `h2` style overrides the style from the `NoEncapsulationComponent`.
-The result is that the `<h2>` element in the `NoEncapsulationComponent` is colored blue rather than red, which may not be what the component's author intended.
+`ShadowDomEncapsulationComponent` のスタイルはグローバルスタイルの後に Shadow ホストに追加されるため、`h2` のスタイルは `NoEncapsulationComponent` のスタイルを上書きします。
+その結果、`NoEncapsulationComponent` の `<h2>` 要素は赤ではなく青に着色されます。
 
 <div class="lightbox">
 
@@ -166,4 +166,4 @@ The result is that the `<h2>` element in the `NoEncapsulationComponent` is color
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-04-21

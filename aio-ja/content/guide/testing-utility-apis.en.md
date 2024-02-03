@@ -135,7 +135,7 @@ Here are the most useful `DebugElement` members for testers, in approximate orde
 
 | Members               | Details |
 |:---                   |:---     |
-| `nativeElement`       | The corresponding DOM element in the browser \(null for WebWorkers\).                                                                                                                                                                                                                                                                                                                                   |
+| `nativeElement`       | The corresponding DOM element in the browser                                                                                                                                                                                                                                                                        |
 | `query`               | Calling `query(predicate: Predicate<DebugElement>)` returns the first `DebugElement` that matches the [predicate](#query-predicate) at any depth in the subtree.                                                                                                                                                                                                                                        |
 | `queryAll`            | Calling `queryAll(predicate: Predicate<DebugElement>)` returns all `DebugElements` that matches the [predicate](#query-predicate) at any depth in subtree.                                                                                                                                                                                                                                              |
 | `injector`            | The host dependency injector. For example, the root element's component instance injector.                                                                                                                                                                                                                                                                                                              |
@@ -175,4 +175,4 @@ The Angular `By` class has three static methods for common predicates:
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-07

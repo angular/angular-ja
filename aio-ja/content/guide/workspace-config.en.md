@@ -135,6 +135,7 @@ The schemas configure options for the following builders.
 
 <!-- vale Angular.Google_WordListWarnings = NO -->
 
+*   [application](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/application/schema.json)
 *   [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
 *   [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
 *   [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
@@ -198,7 +199,7 @@ It has the following top-level properties.
 
 | PROPERTY        | Details                                                                                                                                                                                                                                                                                                              |
 |:---             |:---                                                                                                                                                                                                                                                                                                                      |
-| `builder`       | The npm package for the build tool used to create this target. The default builder for an application \(`ng build myApp`\) is `@angular-devkit/build-angular:browser`, which uses the [webpack](https://webpack.js.org) package bundler. <div class="alert is-helpful"> **NOTE**: A different builder is used for building a library \(`ng build myLib`\). </div> |
+| `builder`       | The npm package for the build tool used to create this target. The default builder for an application \(`ng build myApp`\) is `@angular-devkit/build-angular:application`, which uses the [esbuild](https://esbuild.github.io/) package bundler. <div class="alert is-helpful"> **NOTE**: A different builder is used for building a library \(`ng build myLib`\). </div> |
 | `options`       | This section contains default build target options, used when no named alternative configuration is specified. See the [Default build targets](#default-build-targets) section.                                                                                                                                                |
 | `configurations`| This section defines and names alternative configurations for different intended destinations. It contains a section for each named configuration, which sets the default options for that intended environment. See the [Alternate build configurations](#build-configs) section.                                             |
 
@@ -235,20 +236,22 @@ For details of those options and their possible values, see the [Angular CLI Ref
 
 Some extra options can only be set through the configuration file, either by direct editing or with the [`ng config`](cli/config) command.
 
-| Options properties         | Details |
-|:---                        |:---     |
-| `assets`                   | An object containing paths to static assets to add to the global context of the project. The default paths point to the project's icon file and its `assets` directory. See more in the [Assets configuration](#asset-config) section.                                                                     |
-| `styles`                   | An array of style files to add to the global context of the project. Angular CLI supports CSS imports and all major CSS preprocessors: [sass/scss](https://sass-lang.com) and [less](http://lesscss.org). See more in the [Styles and scripts configuration](#style-script-config) section.             |
+| Options properties         | Details                                                                                                                                                                                                                                                                                                 |
+|:---                        |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `assets`                   | An object containing paths to static assets to add to the global context of the project. The default paths point to the project's icon file and its `assets` directory. See more in the [Assets configuration](#asset-config) section.                                                                  |
+| `styles`                   | An array of style files to add to the global context of the project. Angular CLI supports CSS imports and all major CSS preprocessors: [sass/scss](https://sass-lang.com) and [less](https://lesscss.org). See more in the [Styles and scripts configuration](#style-script-config) section.            |
 | `stylePreprocessorOptions` | An object containing option-value pairs to pass to style preprocessors. See more in the [Styles and scripts configuration](#style-script-config) section.                                                                                                                                               |
 | `scripts`                  | An object containing JavaScript script files to add to the global context of the project. The scripts are loaded exactly as if you had added them in a `<script>` tag inside `index.html`. See more in the [Styles and scripts configuration](#style-script-config) section.                            |
 | `budgets`                  | Default size-budget type and thresholds for all or parts of your application. You can configure the builder to report a warning or an error when the output reaches or exceeds a threshold size. See [Configure size budgets](guide/build#configure-size-budgets). \(Not available in `test` section.\) |
 | `fileReplacements`         | An object containing files and their compile-time replacements. See more in [Configure target-specific file replacements](guide/build#configure-target-specific-file-replacements).                                                                                                                     |
+`index`                    | Configures the generation of the application's HTML index. See more in [Index configuration](#index-config). \(Only available in `browser` section.\)                                                                                                                                                   |                                                                                                        |
+
 
 <a id="complex-config"></a>
 
 ## Complex configuration values
 
-The `assets`, `styles`, and `scripts` options can have either simple path string values, or object values with specific fields.
+The `assets`, `index`, `styles`, and `scripts` options can have either simple path string values, or object values with specific fields.
 The `sourceMap` and `optimization` options can be set to a simple Boolean value with a command flag. They can also be given a complex value using the configuration file.
 
 The following sections provide more details of how these complex values are used in each case.
@@ -388,7 +391,7 @@ You can mix simple and complex file references for styles and scripts.
 
 #### Style preprocessor options
 
-In Sass you can make use of the `includePaths` feature for both component and global styles. This allows you to add extra base paths that are checked for imports.
+In Sass, you can make use of the `includePaths` feature for both component and global styles. This allows you to add extra base paths that are checked for imports.
 
 To add paths, use the `stylePreprocessorOptions` option:
 
@@ -454,6 +457,12 @@ Several options can be used to fine-tune the optimization of an application.
 | `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers, and minimizing values.        | `boolean`  | `true`        |
 | `inlineCritical` | Extract and inline critical CSS definitions to improve [First Contentful Paint](https://web.dev/first-contentful-paint). | `boolean`  | `true`        |
 
+<div class="alert is-helpful">
+
+[Angular CLI](cli "CLI command reference") uses `Critters` to perform critical CSS inlining. For more information about this package see the [Critters README](https://github.com/GoogleChromeLabs/critters#readme).
+
+</div>
+
 #### Fonts optimization options
 
 | Options  | Details                                                                                                                                                                                                                                                                    | Value type | Default value |
@@ -479,7 +488,7 @@ You can supply a value such as the following to apply optimization to one or the
 
 <div class="alert is-helpful">
 
-For [Universal](guide/glossary#universal), you can reduce the code rendered in the HTML page by setting styles optimization to `true`.
+For [SSR](guide/glossary#server-side-rendering), you can reduce the code rendered in the HTML page by setting styles optimization to `true`.
 
 </div>
 
@@ -514,6 +523,23 @@ These are useful if you only want source maps to map error stack traces in error
 
 </div>
 
+<a id="index-config"></a>
+
+### Index configuration
+
+Configures the generation of the application's HTML index.
+
+The `index` option can be either a String or an Object for more fine-tune configuration.
+
+When supplying the value as a String the filename of the specified path will be used for the generated file and will be created in the root of the application's configured output path.
+
+#### Index options
+| Options  | Details                                                                                                                                                                          | Value type | Default value |
+|:---      |:---                                                                                                                                                                              |:---        |:---           |
+| `input`  | The path of a file to use for the application's generated HTML index.                                                                                                            | `string`   |               |
+| `output` | The output path of the application's generated HTML index file. The full provided path will be used and will be considered relative to the application's configured output path. | `string`   | `index.html`  |
+
+
 <!-- links -->
 
 [AioGuideI18nCommonMerge]: guide/i18n-common-merge "Common Internationalization task #6: Merge translations into the application | Angular"
@@ -522,4 +548,4 @@ These are useful if you only want source maps to map error stack traces in error
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

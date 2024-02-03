@@ -8,7 +8,7 @@
 
 *   `<img>` タグに `fetchpriority` 属性を自動的に設定する
 *   デフォルトで他の画像を遅延読み込みする
-*   ドキュメントのheadに、対応する preconnect リンクタグがあることを検証する
+*   ドキュメントの head に preconnect link タグを自動生成する。
 *   `srcset` 属性の自動生成
 *   SSR を使用している場合、[preload hint](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload)を生成する
 
@@ -18,6 +18,8 @@ LCP 画像の読み込みを最適化することに加えて、`NgOptimizedImag
 *   `width` と `height` を必須とすることでレイアウトのずれを防ぐ
 *   `width` または `height` が正しく設定されていない場合に警告する
 *   レンダリング時に画像が視覚的に歪む場合に警告する
+
+**Note: Although the `NgOptimizedImage` directive was made a stable feature in Angular version 15, it has been backported and is available as a stable feature in versions 13.4.0 and 14.3.0 as well. **
 
 ## Getting Started
 
@@ -63,9 +65,9 @@ If you're using a [built-in third-party loader](#built-in-loaders), make sure to
 
 *   `fetchpriority=high` を設定します (優先度のヒントについて詳しくは [こちら](https://web.dev/priority-hints) を参照してください)
 *   `loading=eager` を設定します (ネイティブの遅延読み込みについて詳しくは [こちら](https://web.dev/browser-level-image-lazy-loading) をご覧ください)
-*   Automatically generates a [preload link element](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload) if [rendering on the server](/guide/universal).
+*   Automatically generates a [preload link element](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload) if [rendering on the server](/guide/ssr).
 
-Angular displays a warning during development if the LCP element is an image that does not have the `priority` attribute. A page’s LCP element can vary based on a number of factors - such as the dimensions of a user's screen, so a page may have multiple images that should be marked `priority`. See [CSS for Web Vitals](https://web.dev/css-web-vitals/#images-and-largest-contentful-paint-lcp) for more details.
+Angular logs an error during development if the LCP element is an image that does not have the `priority` attribute, as this can hurt loading performance significantly. A page’s LCP element can vary based on a number of factors - such as the dimensions of a user's screen, so a page may have multiple images that should be marked `priority`. See [CSS for Web Vitals](https://web.dev/css-web-vitals/#images-and-largest-contentful-paint-lcp) for more details.
 
 #### Step 5: Include Height and Width
 
@@ -77,7 +79,7 @@ In order to prevent [image-related layout shifts](https://web.dev/css-web-vitals
 
 </code-example>
 
-For **responsive images** (images which you've styled to grow and shrink relative to the viewport), the `width` and `height` attributes should be the instrinsic size of the image file.
+For **responsive images** (images which you've styled to grow and shrink relative to the viewport), the `width` and `height` attributes should be the instrinsic size of the image file. For responsive images it's also important to [set a value for `sizes`.](#responsive-images)
 
 For **fixed size images**, the `width` and `height` attributes should reflect the desired rendered size of the image. The aspect ratio of these attributes should always match the intrinsic aspect ratio of the image.
 
@@ -115,9 +117,11 @@ If the `height` and `width` attribute on the image are preventing you from sizin
 
 NgOptimizedImage includes a number of features designed to improve loading performance in your app. These features are described in this section.
 
-### リソースヒントの追加
+### Resource hints
 
-LCP 画像ができるだけ早くロードされるように、画像のオリジンに [`preconnect` リソースヒント](https://web.dev/preconnect-and-dns-prefetch) を追加できます。リソースヒントは常にドキュメントの `<head>` に配置します。
+A [`preconnect` resource hint](https://web.dev/preconnect-and-dns-prefetch) for your image origin ensures that the LCP image loads as quickly as possible.
+
+Preconnect links are automatically generated for domains provided as an argument to a [loader](#configuring-an-image-loader-for-ngoptimizedimage). If an image origin cannot be automatically identified, and no preconnect link is detected for the LCP image, `NgOptimizedImage` will warn during development. In that case, you should manually add a resource hint to `index.html`. Within the `<head>` of the document, add a `link` tag with `rel="preload"`, as shown below:
 
 <code-example format="html" language="html">
 
@@ -127,12 +131,15 @@ LCP 画像ができるだけ早くロードされるように、画像のオリ�
 
 デフォルトでは、サードパーティの画像サービスにローダーを使用する場合、開発中に `NgOptimizedImage` ディレクティブは、LCP 画像を提供するオリジンの `preconnect` リソースヒントが無いことを検出すると警告を発します。
 
-To disable these warnings, inject the `PRECONNECT_CHECK_BLOCKLIST` token:
+To disable preconnect warnings, inject the `PRECONNECT_CHECK_BLOCKLIST` token:
+
 <code-example format="typescript" language="typescript">
 
 providers: [
   {provide: PRECONNECT_CHECK_BLOCKLIST, useValue: 'https://your-domain.com'}
 ],
+
+See more information on automatic preconnect generation [here](#why-is-a-preconnect-element-not-being-generated-for-my-image-domain).
 
 </code-example>
 
@@ -313,10 +320,44 @@ Note that in the above example, we've invented the 'roundedCorners' property nam
 
 </code-example>
 
+## Frequently Asked Questions
+
+### Does NgOptimizedImage support the `background-image` css property?
+The NgOptimizedImage does not directly support the `background-image` css property, but it is designed to easily accommodate the use case of having an image as the background of another element.
+
+Here's a simple step-by-step process for migrating from `background-image` to `NgOptimizedImage`. For these steps, we'll refer to the element that has an image background as the "containing element":
+
+1) Remove the `background-image` style from the containing element.
+2) Ensure that the containing element has `position: "relative"`, `position: "fixed"`, or `position: "absolute"`.
+3) Create a new image element as a child of the containing element, using `ngSrc` to enable the `NgOptimizedImage` directive.
+4) Give that element the `fill` attribute. Do not include a `height` and `width`.
+5) If you believe this image might be your [LCP element](https://web.dev/lcp/), add the `priority` attribute to the image element.
+
+You can adjust how the background image fills the container as described in the [Using fill mode](#using-fill-mode) section.
+
+### Why can't I use `src` with `NgOptimizedImage`?
+The `ngSrc` attribute was chosen as the trigger for NgOptimizedImage due to technical considerations around how images are loaded by the browser. NgOptimizedImage makes programmatic changes to the `loading` attribute--if the browser sees the `src` attribute before those changes are made, it will begin eagerly downloading the image file, and the loading changes will be ignored. 
+
+### Can I use two different image domains in the same page?
+The [image loaders](#configuring-an-image-loader-for-ngoptimizedimage) provider pattern is designed to be as simple as possible for the common use case of having only a single image CDN used within a component. However, it's still very possible to manage multiple image CDNs using a single provider.
+
+To do this, we recommend writing a [custom image loader](#custom-loaders) which uses the [`loaderParams` property](#the-loaderparams-property) to pass a flag that specifies which image CDN should be used, and then invokes the appropriate loader based on that flag.
+
+### Why is a preconnect element not being generated for my image domain?
+Preconnect generation is performed based on static analysis of your application. That means that the image domain must be directly included in the loader parameter, as in the following example:
+
+<code-example format="typescript" language="typescript">
+providers: [
+  provideImgixLoader('https://my.base.url/'),
+],
+</code-example>
+
+If you use a variable to pass the domain string to the loader, or you're not using a loader, the static analysis will not be able to identify the domain, and no preconnect link will be generated. In this case you should manually add a preconnect link to the document head, as [described above.](#resource-hints).
+
 <!-- links -->
 
 <!-- external links -->
 
 <!--end links -->
 
-@reviewed 2022-11-07
+@reviewed 2023-07-18

@@ -38,22 +38,20 @@ Angularはこれらの原則を*強制*しません。
 依存オブジェクトの注入（DI）はAngularフレームワークの一部で、コンポーネントにサービスや他のリソースへのアクセスを提供するものです。
 Angularはサービスをコンポーネントに *注入* して、そのコンポーネントがサービスにアクセスできるようにする機能を提供します。
 
-`Injectable()` デコレーターはクラスを Angular のサービスとして定義し、Angular がそのクラスを *依存オブジェクト* としてコンポーネントに注入することを可能にします。
-同様に、`@Injectable()`デコレーターは、コンポーネント、クラス、パイプ、NgModuleがサービスに *依存* していることを表します。
+Add the `@Injectable()` decorator to a service class so that Angular can inject it into a component as a *dependency*; the optional argument tells Angular where to register this class by default.
 
-*  *インジェクター* は主なメカニズムです。
-   Angular はブートストラップ処理中にアプリケーション全体のインジェクターを作成し、必要に応じて追加のインジェクターを作成します。
-   インジェクターを作成する必要はありません。
+   <code-example path="architecture/src/app/hero.service.ts" region="provide">
+   </code-example>
 
-*  インジェクターは依存関係を作成し、可能であれば再利用する依存関係インスタンスの*コンテナ*を保持します。
-*  *プロバイダー* は、インジェクターに依存性を取得または作成する方法を伝えるオブジェクトです。
+* Something *injectable* must be registered with an *injector* before it can be created and used. 
 
-あなたのアプリケーションで必要な依存関係がある場合は、アプリケーションのインジェクターにプロバイダーを登録しなければならず、その結果インジェクターはプロバイダーを使用して新しいインスタンスを作成できます。
-サービスの場合、プロバイダーは通常、サービスクラスそのものです。
+* Register an injectable with a *provider*, an object that tells an injector how to obtain or create a dependency. For a service class, the provider is typically the class itself.
+
+* You don't have to create injectors. Under the hood Angular creates an application-wide *root injector* for you during the bootstrap process. It creates additional child injectors as needed.
 
 <div class="alert is-helpful">
 
-依存関係はサービスである必要はありません。たとえば、関数や値などです。
+An injectable dependency doesn't have to be a class &mdash; it could be a function, for example, or a value.
 
 </div>
 
@@ -77,40 +75,20 @@ Angular はコンポーネントがサービスに依存していることを検
 
 ### サービスの提供 {@a providing-services}
 
-あなたは、使用しようとしているサービスの*プロバイダー*を少なくとも1つ登録する必要があります。
-プロバイダーはサービスをどこからでも利用できるようにサービス自体のメタデータの一部にできるし、もしくは、プロバイダーを特定のモジュールまたはコンポーネントに登録できます。
-サービスのメタデータ(`@Injectable()` デコレーター内) または`@NgModule()` や `@Component()` メタデータにプロバイダーを登録します。
+You must register at least one *provider* of any service you are going to use.
+The provider can be part of the service's own metadata, making that service available everywhere, or you can register providers with specific components.
+You register providers in the metadata of the service \(in the `@Injectable()` decorator\) or `@Component()` metadata
 
 *  デフォルトでは Angular CLI コマンド [ng generate service](cli/generate) はプロバイダーのメタデータを `@Injectable()` デコレーターに含めることによって、あなたのサービスのためにプロバイダーをルートインジェクターに登録します。
-   このチュートリアルでは、この方法を使用して HeroService クラス定義のプロバイダーを登録します。
+   このチュートリアルでは、この方法を使用して `HeroService` クラス定義のプロバイダーを登録します。
 
-   <code-example format="typescript" language="typescript">
-
-   &commat;Injectable({
-    providedIn: 'root',
-   })
-
+   <code-example header="hero.service.ts (provide in root)" path="architecture/src/app/hero.service.ts" region="provide">
    </code-example>
 
    ルートレベルでサービスを提供すると、Angularは `HeroService` の共有インスタンスを1つ作成し、
    それを求めるクラスに注入します。
    `@Injectable()` メタデータにプロバイダーを登録することは、サービスが使用されない場合にコンパイルされるアプリケーションからサービスを削除してアプリケーションを最適化することを、
    Angularに許可することにもなります。これは *Tree-Shaking* として知られるプロセスです。
-
-*  プロバイダーを[特定の NgModule](guide/architecture-modules) に登録すると、そのNgModule内のすべてのコンポーネントで同じサービスのインスタンスを使用できます。
-   このレベルで登録するには、`@NgModule()` デコレーターの `providers` プロパティを使用します。
-
-    <code-example format="typescript" language="typescript">
-
-    &commat;NgModule({
-      providers: [
-      BackendService,
-      Logger
-     ],
-     &hellip;
-    })
-
-    </code-example>
 
 *  コンポーネントレベルでプロバイダーを登録すると、そのコンポーネントの新しいインスタンスごとに新しいサービスインスタンスが取得されます。
    コンポーネントレベルで `@Component()` メタデータの `providers` プロパティにサービスプロバイダーを登録します。
@@ -125,4 +103,4 @@ Angular はコンポーネントがサービスに依存していることを検
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-09-25

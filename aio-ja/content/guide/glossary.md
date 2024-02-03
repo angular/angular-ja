@@ -592,20 +592,7 @@ Angularは、JavaScriptモジュールのコレクション(ライブラリと�
 
 [NgModule](#ngmodule)と比較しましょう。
 
-
-{@a N}
-
-{@a ngcc}
-
-## ngcc
-
-Angular互換性コンパイラ。
-[Ivy](#ivy)を使ってアプリケーションをビルドするが、それがIvyでコンパイルされていないライブラリに依存している場合、CLIは`ngcc`を使用して、依存ライブラリをIvyを使うように自動的に更新します。
-
-
-{@a ngmodule}
-
-## NgModule
+## NgModule {@a ngmodule}
 
 `@NgModule()`[デコレーター][AioGuideGlossaryDecoratorDecoration]が前に付いたクラス定義。これはコードブロックのためのマニフェストとして宣言および機能し、アプリケーションドメインやワークフロー、密接に関連する一連の機能に専念します。
 
@@ -833,7 +820,8 @@ This installs the `schematics` executable, which you can use to create a new sch
 ## スコープパッケージ
 
 A way to group related [npm packages](guide/npm-packages).
-NgModules are delivered within scoped packages whose names begin with the Angular *scope name* `@angular`. For example, `@angular/core`, `@angular/common`, `@angular/forms`, and `@angular/router`.
+Angular objects are delivered from npm packages whose names begin with the Angular *scope name* `@angular`.
+For example, `@angular/core`, `@angular/common`, `@angular/forms`, and `@angular/router`.
 
 Import a scoped package in the same way that you import a normal package.
 
@@ -851,8 +839,7 @@ It can also pre-generate pages as HTML files that you serve later.
 This technique can improve performance on mobile and low-powered devices and improve the user experience by showing a static first page quickly while the client-side app is loading.
 The static version can also make your app more visible to web crawlers.
 
-You can easily prepare an app for server-side rendering by using the [CLI](#cli) to run the [Angular Universal](#universal) tool, using the `@nguniversal/express-engine` [schematic](#schematic).
-
+You can easily prepare an application for server-side rendering by using the [Angular CLI][AioGuideGlossaryCommandLineInterfaceCli]  `ng add @angular/ssr` command.
 
 {@a service}
 
@@ -1039,21 +1026,15 @@ TypeScriptプロジェクトをコンパイルするために必要なルート�
 
 このエラーを回避するには、そのような変更の実行を探し出す[ライフサイクルフック](guide/lifecycle-hooks)メソッドが、新しい変更検知の実行をトリガーする必要があります。その新しい実行は以前と同じ方向へ進みますが、新しい値を取得することに成功します。
 
-{@a universal}
-
-## Universal
+## Server-side rendering {@a server-side-rendering}
 
 A tool for implementing [server-side rendering](#server-side-rendering) of an Angular application.
 When integrated with an app, Universal generates and serves static pages on the server in response to requests from browsers.
 The initial static page serves as a fast-loading placeholder while the full application is being prepared for normal execution in the browser.
 
-To learn more, see [Angular Universal: server-side rendering](guide/universal).
+To learn more, see [Angular server-side rendering][AioGuideSSR].
 
-{@a V}
-
-{@a view}
-
-## ビュー
+## ビュー {@a view}
 
 一緒に作成および破棄できる表示要素の最小グループ。
 Angularは1つ以上の[ディレクティブ][AioGuideGlossaryDirective]の制御下でビューをレンダリングします。
@@ -1069,7 +1050,7 @@ Angularは1つ以上の[ディレクティブ][AioGuideGlossaryDirective]の制�
 
 ビュー階層は、ユーザーがアプリケーション内を移動するときに、通常は[ルーター](#router)の制御下で、動的にロードおよびアンロードできます。
 
-{@a ve}
+<a id="ve"></a>
 
 ## ビューエンジン {@a view-engine}
 
@@ -1246,7 +1227,7 @@ Learn more about zones in this
 [AioGuideGlossaryLibrary]: guide/glossary#library "library - Glossary | Angular"
 [AioGuideGlossaryM]: guide/glossary#module "M - Glossary | Angular"
 [AioGuideGlossaryModule]: guide/glossary#module "module - Glossary | Angular"
-[AioGuideGlossaryN]: guide/glossary#ngcc "N - Glossary | Angular"
+[AioGuideGlossaryN]: guide/glossary#ngmodule "N - Glossary | Angular"
 [AioGuideGlossaryNgmodule]: guide/glossary#ngmodule "NgModule - Glossary | Angular"
 [AioGuideGlossaryNpmPackage]: guide/glossary#npm-package "npm package - Glossary | Angular"
 [AioGuideGlossaryO]: guide/glossary#observable "O - Glossary | Angular"
@@ -1283,7 +1264,7 @@ Learn more about zones in this
 [AioGuideGlossaryTree]: guide/glossary#tree "tree - Glossary | Angular"
 [AioGuideGlossaryTypescript]: guide/glossary#typescript "TypeScript - Glossary | Angular"
 [AioGuideGlossaryU]: guide/glossary#unidirectional-data-flow "U - Glossary | Angular"
-[AioGuideGlossaryUniversal]: guide/glossary#universal "Universal - Glossary | Angular"
+[AioGuideGlossarySSR]: guide/glossary#server-side-rendering "Server-side rendering - Glossary | Angular"
 [AioGuideGlossaryV]: guide/glossary#view "V - Glossary | Angular"
 [AioGuideGlossaryView]: guide/glossary#view "view - Glossary | Angular"
 [AioGuideGlossaryViewHierarchy]: guide/glossary#view-hierarchy "view hierarchy - Glossary | Angular"
@@ -1306,7 +1287,7 @@ Learn more about zones in this
 
 [AioGuideObservables]: guide/observables "Using observables to pass values | Angular"
 
-[AioGuidePipes]: guide/pipes "Transforming Data Using Pipes | Angular"
+[AioGuidePipes]: guide/pipes-overview "Transforming Data Using Pipes | Angular"
 
 [AioGuidePropertyBinding]: guide/property-binding "Property binding | Angular"
 
@@ -1334,7 +1315,7 @@ Learn more about zones in this
 
 [AioGuideTypescriptConfiguration]: guide/typescript-configuration "TypeScript configuration | Angular"
 
-[AioGuideUniversal]: guide/universal "Server-side rendering (SSR) with Angular Universal | Angular"
+[AioGuideSSR]: guide/ssr "Server-side rendering (SSR) with Angular | Angular"
 
 [AioGuideWorkspaceConfig]: guide/workspace-config "Angular workspace configuration | Angular"
 [AioGuideWorkspaceConfigProjectToolConfigurationOptions]: guide/workspace-config#project-tool-configuration-options "Project tool configuration options - Angular workspace configuration | Angular"
@@ -1373,4 +1354,4 @@ Learn more about zones in this
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-08-14

@@ -206,7 +206,7 @@ This `getHeroes()` returns the sliced list of heroes at positions 1 and 5, retur
 
 To navigate to the dashboard, the router needs an appropriate route.
 
-Import the `DashboardComponent` in the `app-routing-module.ts` file.
+Import the `DashboardComponent` in the `app-routing.module.ts` file.
 
 <code-example header="src/app/app-routing.module.ts (import DashboardComponent)" path="toh-pt5/src/app/app-routing.module.ts" region="import-dashboard"></code-example>
 
@@ -489,5 +489,9 @@ Here are the code files discussed on this page.
 *   You refactored a tightly coupled main/detail view into a routed detail view
 *   You used router link parameters to navigate to the detail view of a user-selected hero
 *   You shared the `HeroService` with other components
+
+## Next steps
+
+*  [6. Get data from a server](tutorial/tour-of-heroes/toh-pt6)
 
 @reviewed 2022-02-28

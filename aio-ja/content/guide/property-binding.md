@@ -1,6 +1,6 @@
 # プロパティバインディング
 
-Angularのプロパティバインディングは、HTML要素やディレクティブのプロパティに値を設定するのに役立ちます。プロパティバインディングを使用すると、ボタン機能の切り替え、プログラムによるパスの設定、コンポーネント間の値の共有などを行うことができます。
+Angular のプロパティバインディングは、HTML 要素やディレクティブのプロパティに値を設定するのに役立ちます。プロパティバインディングを使用すると、ボタン機能の切り替え、プログラムによるパスの設定、コンポーネント間の値の共有などを行うことができます。
 
 <div class="alert is-helpful">
 
@@ -10,9 +10,9 @@ Angularのプロパティバインディングは、HTML要素やディレクテ
 
 ## 前提知識
 
-* [コンポーネントの基礎知識](guide/architecture-components)
-* [テンプレートの基礎知識](guide/glossary#template)
-* [バインディング構文](guide/binding-syntax)
+- [コンポーネントの基礎知識](guide/architecture-components)
+- [テンプレートの基礎知識](guide/glossary#template)
+- [バインディング構文](guide/binding-syntax)
 
 ## データの流れを理解する
 
@@ -24,13 +24,13 @@ Angularのプロパティバインディングは、HTML要素やディレクテ
 
 </div>
 
-ターゲット要素のプロパティを読み取ったり、そのメソッドを呼び出したりするには、[ViewChild](api/core/ViewChild)と[ContentChild](api/core/ContentChild)のAPIリファレンスを参照してください。
+ターゲット要素のプロパティを読み取ったり、そのメソッドを呼び出したりするには、[ViewChild](api/core/ViewChild)と[ContentChild](api/core/ContentChild)の API リファレンスを参照してください。
 
 ## プロパティのバインディング
 
 要素のプロパティにバインドするには、ターゲットプロパティを角括弧`[]`で囲みます。
 
-ターゲットプロパティは、値を割り当てたいDOMプロパティです。
+ターゲットプロパティは、値を割り当てたい DOM プロパティです。
 
 ターゲットプロパティを`<img>`要素の`src`プロパティとして、値を割り当てるには、次のコードを使います。
 
@@ -42,11 +42,11 @@ Angularのプロパティバインディングは、HTML要素やディレクテ
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 
-角括弧`[]`をつけると、Angularは代入の右辺を動的な式として評価します。
+角括弧`[]`をつけると、Angular は代入の右辺を動的な式として評価します。
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 
-角括弧がない場合、Angularは右辺を文字列リテラルとして扱い、その静的な値をプロパティに設定します。
+角括弧がない場合、Angular は右辺を文字列リテラルとして扱い、その静的な値をプロパティに設定します。
 
 文字列をプロパティに割り当てるには、次のコードを使います。
 
@@ -70,7 +70,7 @@ Angularのプロパティバインディングは、HTML要素やディレクテ
 
 #### `colspan`と`colSpan`
 
-属性`colspan`とプロパティ`colSpan`は別のものです。名前が1文字だけ異なることに留意してください。
+属性`colspan`とプロパティ`colSpan`は別のものです。名前が 1 文字だけ異なることに留意してください。
 
 `colSpan`を使ってプロパティを設定するには、次のコードを使います。
 
@@ -92,22 +92,22 @@ Angularのプロパティバインディングは、HTML要素やディレクテ
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 
-ボタンを無効化するには、`disabled`DOM属性をコンポーネントクラスのBoolean型のプロパティにバインドします。
+ボタンを無効化するには、`disabled`DOM 属性をコンポーネントクラスの Boolean 型のプロパティにバインドします。
 
 <!-- vale Angular.Google_WordListSuggestions = YES -->
 
 <code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
 
-`AppComponent`クラスで定義されている`isUnchanged`プロパティが`true`なので、Angularはボタンを無効にします。
+`AppComponent`クラスで定義されている`isUnchanged`プロパティが`true`なので、Angular はボタンを無効にします。
 
 <code-example path="property-binding/src/app/app.component.ts" region="boolean" header="src/app/app.component.ts"></code-example>
 
 ## 次のステップ
 
-* [プロパティバインディング ベストプラクティス](guide/property-binding-best-practices)
-* [イベントバインディング](guide/event-binding)
-* [補間による値の表示](guide/interpolation)
-* [クラスとスタイルのバインディング](guide/class-binding)
-* [属性バインディング](guide/attribute-binding)
+- [プロパティバインディング ベストプラクティス](guide/property-binding-best-practices)
+- [イベントバインディング](guide/event-binding)
+- [補間による値の表示](guide/interpolation)
+- [クラスとスタイルのバインディング](guide/class-binding)
+- [属性バインディング](guide/attribute-binding)
 
-@reviewed 2022-04-14
+@reviewed 2023-09-01

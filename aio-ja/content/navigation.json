@@ -6,15 +6,15 @@
     },
     {
       "url": "resources",
-      "title": "コミュニティ"
+      "title": "リソース"
     },
     {
       "url": "https://blog.angular.io/",
-      "title": "公式ブログ"
+      "title": "ブログ"
     },
     {
       "url": "https://github.com/angular/angular-ja",
-      "title": "日本語化プロジェクト"
+      "title": "翻訳に参加する"
     },
     {
       "url": "https://community.angular.jp",
@@ -59,7 +59,7 @@
         {
           "url": "guide/what-is-angular",
           "title": "Angularとは？",
-          "tooltip": "A brief description of the Angular platform."
+          "tooltip": "A brief description 1of the Angular platform."
         },
         {
           "title": "試してみよう",
@@ -135,7 +135,7 @@
               "url": "guide/view-encapsulation",
               "title": "ビューのカプセル化",
               "tooltip": "コンポーネントのCSSスタイルがコンポーネントのビューにカプセル化される方法について説明します。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/component-interaction",
@@ -181,8 +181,9 @@
           "children": [
             {
               "url": "guide/template-overview",
-              "title": "Overview",
-              "tooltip": "Introduction to templates."
+              "title": "概要",
+              "tooltip": "テンプレートの紹介。",
+              "translated": true
             },
             {
               "url": "guide/template-syntax",
@@ -261,6 +262,11 @@
                   "url": "guide/pipes-transform-data",
                   "title": "Transforming data with parameters and chained pipes",
                   "tooltip": "Learn how to use a pipe transform data."
+                },
+                {
+                  "url": "guide/pipe-precedence",
+                  "title": "Pipe precedence in template expressions",
+                  "tooltip": "How to use pipes within a ternary operator expression."
                 }
               ]
             },
@@ -336,10 +342,16 @@
               "translated": true
             },
             {
+              "url": "guide/dependency-injection-context",
+              "title": "インジェクションコンテキスト",
+              "tooltip": "依存性の注入は、実行時のコンテキストに依存して動作する。",
+              "translated": false
+            },
+            {
               "url": "guide/hierarchical-dependency-injection",
               "title": "階層化インジェクター",
               "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-              "translated": true
+              "translated": false
             }
           ]
         }
@@ -478,10 +490,97 @@
           ]
         },
         {
-          "url": "guide/http",
+          "url": "guide/esbuild",
+          "title": "esbuildベースのビルド",
+          "tooltip": "CLIのesbuildベースビルドシステムを使い始める。",
+          "translated": false
+        },
+        {
           "title": "HTTPクライアント",
-          "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
+          "tooltip": "HTTPを使ってリモートサーバーと通信する",
+          "children": [
+            {
+              "url": "guide/understanding-communicating-with-http",
+              "title": "Understanding HTTP",
+              "tooltip": "Understanding communicating with backend services using HTTP"
+            },
+            {
+              "url": "guide/http-setup-server-communication",
+              "title": "Setup for server communication",
+              "tooltip": "Setup a server communication for HTTP"
+            },
+            {
+              "url": "guide/http-request-data-from-server",
+              "title": "Request data from a server",
+              "tooltip": "Learn how to request data from the server via the HTTP client"
+            },
+            {
+              "url": "guide/http-make-jsonp-request",
+              "title": "Make a JSONP request",
+              "tooltip": "Make a cross-origin request via JSONP"
+            },
+            {
+              "url": "guide/http-handle-request-errors",
+              "title": "Handle request errors",
+              "tooltip": "Error handling"
+            },
+            {
+              "url": "guide/http-send-data-to-server",
+              "title": "Send data to a server",
+              "tooltip": "Learn how to send data to a server via the HTTP client"
+            },
+            {
+              "url": "guide/http-configure-http-url-parameters",
+              "title": "Configure URL parameters",
+              "tooltip": "Learn how to configure parameters of the URL when sending requests over HTTP"
+            },
+            {
+              "url": "guide/http-intercept-requests-and-responses",
+              "title": "Intercept requests and responses",
+              "tooltip": "Learn how to use HTTP interceptors to transform requests and responses"
+            },
+            {
+              "url": "guide/http-interceptor-use-cases",
+              "title": "Interceptor use-cases",
+              "tooltip": "Learn when to use HTTP interceptors"
+            },
+            {
+              "url": "guide/http-pass-metadata-to-interceptors",
+              "title": "Pass metadata to interceptors",
+              "tooltip": "Learn how to pass metadata to interceptors"
+            },
+            {
+              "url": "guide/http-track-show-request-progress",
+              "title": "Track and show request progress",
+              "tooltip": "Learn how to track and show progress when sending HTTP requests"
+            },
+            {
+              "url": "guide/http-optimize-server-interaction",
+              "title": "Optimize server communication",
+              "tooltip": "Learn how to use debouncing to optimize server interaction"
+            },
+            {
+              "url": "guide/http-security-xsrf-protection",
+              "title": "Cross-Site Request Forgery (XSRF) protection",
+              "tooltip": "Learn how to secure your website against Cross-Site Request Forgery"
+            },
+            {
+              "url": "guide/http-test-requests",
+              "title": "Test requests",
+              "tooltip": "Learn how to test logic that uses the HTTP client"
+            }
+          ]
+        },
+        {
+          "url": "guide/hydration",
+          "title": "ハイドレーション",
+          "tooltip": "サーバーレンダリングされたアプリケーションでハイドレーションを有効にする方法。",
           "translated": true
+        },
+        {
+          "url": "guide/defer",
+          "title": "Deferrable views",
+          "tooltip": "How to defer load components, directives, and pipes."
         },
         {
           "url": "guide/image-directive",
@@ -601,8 +700,9 @@
                 },
                 {
                   "url": "guide/i18n-common-merge",
-                  "title": "Merge translations into the app",
-                  "tooltip": "Merge translations into your app"
+                  "title": "アプリケーションに翻訳をマージする",
+                  "tooltip": "Merge translations into your app",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-common-deploy",
@@ -613,32 +713,30 @@
             },
             {
               "url": "guide/i18n-example",
-              "title": "Example Angular application",
+              "title": "サンプルアプリケーション",
               "tooltip": "Example of a translated Angular application"
             },
             {
-              "title": "Optional internationalization practices",
+              "title": "国際化のオプショナルプラクティス",
               "tooltip": "Task-based content on many of the optional pratices associated with Angular internationalization",
               "children": [
                 {
                   "url": "guide/i18n-optional-overview",
-                  "title": "Overview",
-                  "tooltip": "Introduces the optional Angular internationalization tasks and lists topics that teach you how to manually configure localization settings for your applications"
-                },
-                {
-                  "url": "guide/i18n-optional-manual-runtime-locale",
-                  "title": "Set the runtime locale manually",
-                  "tooltip": "Set the runtime locale manually"
+                  "title": "概要",
+                  "tooltip": "Introduces the optional Angular internationalization tasks and lists topics that teach you how to manually configure localization settings for your applications",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-optional-import-global-variants",
-                  "title": "Import global variants of the locale data",
-                  "tooltip": "Import global variants of the locale data"
+                  "title": "ロケールデータのグローバル設定をインポートする",
+                  "tooltip": "Import global variants of the locale data",
+                  "translated": true
                 },
                 {
                   "url": "guide/i18n-optional-manage-marked-text",
-                  "title": "Manage marked text with custom IDs",
-                  "tooltip": "Manage marked text with custom IDs"
+                  "title": "カスタムIDでマークされたテキストを管理する",
+                  "tooltip": "Manage marked text with custom IDs",
+                  "translated": true
                 }
               ]
             }
@@ -697,12 +795,6 @@
               "translated": true
             },
             {
-              "url": "guide/app-shell",
-              "title": "App Shell",
-              "tooltip": "Render a portion of your app quickly to improve the startup experience.",
-              "translated": true
-            },
-            {
               "url": "guide/service-worker-communications",
               "title": "Service Workerとの通信",
               "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
@@ -724,6 +816,12 @@
               "title": "Service Workerの設定",
               "tooltip": "Service Workerのキャッシュの振る舞いを設定します。",
               "translated": true
+            },
+            {
+              "url": "guide/app-shell",
+              "title": "App Shell",
+              "tooltip": "Render a portion of your app quickly to improve the startup experience.",
+              "translated": true
             }
           ]
         },
@@ -734,16 +832,16 @@
           "translated": true
         },
         {
-          "url": "guide/universal",
+          "url": "guide/ssr",
           "title": "サーバーサイドレンダリング",
-          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "tooltip": "サーバーサイドでHTMLをレンダリングしましょう。",
           "translated": true
         },
         {
           "url": "guide/prerendering",
           "title": "事前レンダリング",
           "tooltip": "Angular Universalを使ってサーバーサイドでHTMLを事前レンダリングしましょう。",
-          "translated": true
+          "translated": false
         },
         {
           "title": "Angularライブラリ",
@@ -771,6 +869,29 @@
               "url": "guide/angular-package-format",
               "title": "Angular Package Format",
               "tooltip": "Information about the Angular Package Format."
+            }
+          ]
+        },
+        {
+          "title": "開発者プレビュー",
+          "tooltip": "Angular preview features and APIs",
+          "children": [
+            {
+              "url": "guide/control_flow",
+              "title": "組み込みのフロー制御",
+              "tooltip": "Angular組み込みのフロー制御: if、for、switch",
+              "translated": true
+            },
+            {
+              "url": "guide/signals",
+              "title": "Signal",
+              "tooltip": "変更検出を最適化するためのAngular Signal",
+              "translated": true
+            },
+            {
+              "url": "guide/rxjs-interop",
+              "title": "RxJS Interop for Signals",
+              "tooltip": "Angular signals and Observable interop"
             }
           ]
         }
@@ -916,6 +1037,87 @@
       "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
       "children": [
         {
+          "title": "はじめての Angular アプリ",
+          "tooltip": "Learn how to get started in Angular by building an Angular app",
+          "children": [
+            {
+              "url": "tutorial/first-app",
+              "title": "Introduction",
+              "tooltip": "Introduction to the first Angular app and tutorial"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-01",
+              "title": "Hello world",
+              "tooltip": "Start coding in Angular with Hello World"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-02",
+              "title": "Create home component",
+              "tooltip": "Create the app's HomeComponent"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-03",
+              "title": "Create housing location component",
+              "tooltip": "Create the app's HousingLocation"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-04",
+              "title": "Create an interface",
+              "tooltip": "Create an interface for your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-05",
+              "title": "Add inputs to components",
+              "tooltip": "Add inputs to components in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-06",
+              "title": "Add property binding to components",
+              "tooltip": "Add property binding to components in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-07",
+              "title": "Add dynamic values to templates",
+              "tooltip": "Add dynamic values to your templates in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-08",
+              "title": "Use *ngFor in templates",
+              "tooltip": "Use *ngFor in your templates in your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-09",
+              "title": "Angular services",
+              "tooltip": "Add an Angular service to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-10",
+              "title": "Add routing",
+              "tooltip": "Add routing to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-11",
+              "title": "Customize the details page",
+              "tooltip": "Add styles, links and more to the details page"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-12",
+              "title": "Integrate Angular forms",
+              "tooltip": "Add an Angular form to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-13",
+              "title": "Add search functionality",
+              "tooltip": "Add search functionality to your app"
+            },
+            {
+              "url": "tutorial/first-app/first-app-lesson-14",
+              "title": "Add HTTP communication",
+              "tooltip": "Add HTTP communication to your app"
+            }
+          ]
+        },
+        {
           "title": "チュートリアル: Tour of Heroes",
           "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
           "children": [
@@ -981,7 +1183,7 @@
       "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
       "children": [
         {
-          "url": "guide/update-to-version-15",
+          "url": "guide/update-to-version-16",
           "title": "Update Angular to the latest version",
           "tooltip": "Update your Angular application to the latest version."
         },
@@ -996,6 +1198,11 @@
           "title": "リリースプラクティス",
           "tooltip": "Angularのバージョニング、リリース、サポート、および廃止のポリシーとプラクティス",
           "translated": true
+        },
+        {
+          "url": "guide/versions",
+          "title": "バージョン互換性",
+          "tooltip": "Angular, Node.js, TypeScript, and RxJS version compatibility."
         },
         {
           "url": "guide/browser-support",
@@ -1056,22 +1263,15 @@
                   "translated": true
                 },
                 {
-                  "url": "guide/architecture-modules",
-                  "title": "モジュールの紹介",
-                  "tooltip": "NgModuleについて",
-                  "translated": true
-                },
-                {
                   "url": "guide/architecture-components",
                   "title": "Componentの紹介",
                   "tooltip": "コンポーネント、テンプレート、およびビューについて。",
                   "translated": true
                 },
                 {
-                  "url": "guide/architecture-next-steps",
-                  "title": "次のステップ",
-                  "tooltip": "基本のその先へ。",
-                  "translated": true
+                  "url": "guide/architecture-services",
+                  "title": "サービスと依存性の注入の紹介",
+                  "tooltip": "About services and dependency injection."
                 },
                 {
                   "url": "guide/binding-syntax",
@@ -1089,6 +1289,12 @@
                   "url": "guide/template-reference-variables",
                   "title": "テンプレート参照変数",
                   "tooltip": "Introductory guide to referring to DOM elements within a template.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/architecture-next-steps",
+                  "title": "次のステップ",
+                  "tooltip": "基本のその先へ。",
                   "translated": true
                 }
               ]
@@ -1165,12 +1371,6 @@
                   "translated": true
                 },
                 {
-                  "url": "guide/entry-components",
-                  "title": "エントリーコンポーネント",
-                  "tooltip": "Angularのエントリコンポーネントに関するすべて。",
-                  "translated": true
-                },
-                {
                   "url": "guide/feature-modules",
                   "title": "フィーチャーモジュール",
                   "tooltip": "コードを整理するためのフィーチャーモジュールを作成します。",
@@ -1216,13 +1416,13 @@
                   "url": "guide/observables",
                   "title": "Observableの概要",
                   "tooltip": "Observableを使用して、同期または非同期で値を渡します。",
-                  "translated": true
+                  "translated": false
                 },
                 {
                   "url": "guide/rx-library",
                   "title": "RxJSライブラリ",
                   "tooltip": "A library for reactive programming using observables to compose asynchronous or callback-based code.",
-                  "translated": true
+                  "translated": false
                 },
                 {
                   "url": "guide/observables-in-angular",
@@ -1240,7 +1440,7 @@
                   "url": "guide/comparing-observables",
                   "title": "他の技術との比較",
                   "tooltip": "ObservableとPromiseや他のメッセージパッシングテクニックとの比較。",
-                  "translated": true
+                  "translated": false
                 }
               ]
             },
@@ -1500,7 +1700,7 @@
         {
           "url": "events",
           "title": "Events",
-          "tooltip": "Post issues and suggestions on github."
+          "tooltip": "Post issues and suggestions on GitHub."
         },
         {
           "url": "https://www.meetup.com/topics/angularjs/",
@@ -1533,7 +1733,7 @@
         },
         {
           "title": "Español",
-          "url": "http://docs.angular.lat/"
+          "url": "https://docs.angular.lat/"
         },
         {
           "title": "简体中文版",

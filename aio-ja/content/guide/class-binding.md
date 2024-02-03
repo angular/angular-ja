@@ -100,7 +100,7 @@ Angular は、通常は文字列であるバインドされた式の値にプロ
 
 ## 次のお勧め
 
-* [コンポーネント スタイル](https://angular.io/guide/component-styles)
-* [Angular アニメーションの紹介](https://angular.io/guide/animations)
+* [コンポーネント スタイル](/guide/component-styles)
+* [Angular アニメーションの紹介](/guide/animations)
 
 @reviewed 2022-05-09

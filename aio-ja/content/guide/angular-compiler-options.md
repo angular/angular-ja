@@ -26,13 +26,6 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 次のオプションは、AOT テンプレートコンパイラの構成に使用できます。
 
-### `allowEmptyCodegenFiles`
-
-`true` の場合、空であってもすべての可能なファイルを生成します。
-デフォルトは `false` です。 
-Bazel ルールがファイルの依存関係を追跡する方法を単純化するために、Bazel ビルドルールで使用されます。
-このオプションは、Bazel ルール以外では使用しないでください。
-
 ### `annotationsAs`
 
 ツリーシェーキングを改善するために、Angular 固有のアノテーションの出力方法を変更します。
@@ -145,7 +138,7 @@ When `true`, enables the deprecated `<template>` element in place of `<ng-templa
 推奨値である `true` の場合、テンプレートコンパイラの [binding expression validation](guide/aot-compiler#binding-expression-validation) フェーズを有効にします。このフェーズでは、TypeScriptを使用してバインディング式を検証します。
 詳しくは、[テンプレート型チェック](guide/template-typecheck)をご覧ください。
 
-デフォルトは `false` ですが、Angular CLI のコマンド `ng new --strict` を使うと、新しいプロジェクトの設定で `true` に設定されます。
+デフォルトは `false` です。ただし、Angular CLI を使ってプロジェクトを作成する場合は、作成したワークスペースの設定で `true` に設定されています。
 
 <div class="alert is-important">
 
@@ -164,6 +157,12 @@ When `true`, creates factory files \(`.ngfactory.js` and `.ngstyle.js`\) for `.d
 
 `false` (デフォルト) の場合、コンパイルされたテンプレートから空白のテキストノードを削除するようにコンパイラに指示します。これにより、出力されるテンプレートファクトリモジュールが小さくなります。
 空白のテキストノードを保持するには、 `true` に設定します。
+
+<div class="alert is-helpful">
+
+When using hydration, it is recommended that you use `preserveWhitespaces: false`, which is the default value. If you choose to enable preserving whitespaces by adding `preserveWhitespaces: true` to your tsconfig, it is possible you may encounter issues with hydration. This is not yet a fully supported configuration. Ensure this is also consistently set between the server and client tsconfig files. See the [hydration guide](guide/hydration#preserve-whitespaces) for more details.
+
+</div>
 
 ### `skipMetadataEmit`
 
@@ -214,7 +213,7 @@ When `true`, reports an error for a supplied parameter whose injection type cann
 When `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved produce a warning.
 The recommended value is `true`, but the default value is `false`.
 
-Angular CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
+Angular CLIを使ってプロジェクトを作成する場合、作成したワークスペースの設定で`true`に設定されます。
 
 ### `strictTemplates`
 
@@ -223,7 +222,7 @@ Angular CLI コマンド `ng new --strict` を使用すると、生成された�
 この厳密性フラグにより、特定のタイプの厳密なテンプレート型チェックをオンまたはオフにすることができます。
 [テンプレートエラーのトラブルシューティング](guide/template-typecheck#troubleshooting-template-errors) をご覧ください。
 
-Angular CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定で `true` に設定されます。
+Angular CLIを使ってプロジェクトを作成する場合、作成したワークスペースの設定で`true`に設定されます。
 
 ### `trace`
 
@@ -247,4 +246,4 @@ Besides the configuration file, you can also use [`tsc` command line options](ht
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

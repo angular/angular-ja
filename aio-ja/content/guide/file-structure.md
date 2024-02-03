@@ -71,7 +71,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `favicon.ico`          | ブックマークバーで利用されるアプリケーションのアイコンです。|
 | `index.html`           | 誰かがサイトを訪れた際に表示されるメインのHTMLページです。アプリケーションをビルドする時にCLIは自動的にすべてのJavaScriptとCSSファイルを追加するため、基本的には`<script>`や`<link>`タグを手で足す必要はありません。 |
 | `main.ts`              | アプリケーションのメインエントリーポイントです。アプリケーションを[JIT compiler](guide/glossary#jit)でコンパイルし、アプリケーションのルートモジュール(AppModule)をブートストラップしてブラウザで走らせます。[AOT compiler](guide/aot-compiler)を使うこともできます。コードを変える必要はなく、CLIの`build`と`serve`コマンドに`--aot`フラグをつけるだけで利用できます。 |
-| `styles.sass`          | プロジェクトに適用するスタイルをもつCSSファイルを記載します。拡張子はプロジェクトに設定したスタイルプロセッサーを反映します。|
+| `styles.css`          | プロジェクトに適用するスタイルをもつCSSファイルを記載します。拡張子はプロジェクトに設定したスタイルプロセッサーを反映します。|
 
 <div class="alert is-helpful">
 
@@ -86,11 +86,12 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 
 | `src/app/` ファイル          | 目的 |
 | :-------------------------- | :------------------------------------------|
+| `app/app.config.ts` | Defines the application config logic that tells Angular how to assemble the application. As you add more providers to the app, they must be declared here. |
 | `app/app.component.ts`      | `AppComponent` という名前のアプリケーションのルートコンポーネントのロジックを定義します。 このルートコンポーネントに関連付けられたビューは、コンポーネントやサービスをアプリケーションに追加したときに [ビュー階層](guide/glossary#view-hierarchy) のルートになります。 |
 | `app/app.component.html`    | ルート `AppComponent` に関連付けられているHTMLテンプレートを定義します。 |
 | `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
 | `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
-| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリケーションにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
+| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリケーションにコンポーネントを追加すると、それらをここで宣言する必要があります。<br><br>_このファイルは `--no-standalone` オプションを使用した場合にのみ生成されます。_ |
 
 ### アプリケーション設定ファイル {@a application-configuration-files}
 
@@ -133,17 +134,43 @@ ng generate application my-first-app
 新しく生成されたライブラリも `projects/` の下に追加されています。
 この方法でプロジェクトを作成すると、ワークスペースのファイル構造は、 [ワークスペース構成ファイル](guide/workspace-config) 、 `angular.json` の構造と完全に一致します。
 
-<code-example language="none">
-my-workspace/
-  ...             (ワークスペース全体の設定ファイル)
-  projects/       (生成されたアプリケーションとライブラリ)
-    my-first-app/ --(明示的に生成されたアプリケーション)
-      ...         --(アプリケーション固有の設定)
-      src/        --(アプリケーションのソースファイルとサポートファイル)
-    my-lib/       --(生成されたライブラリ)
-      ...         --(ライブラリ固有の設定)
-      src/        --(ライブラリのソースファイルとサポートファイル)
-</code-example>
+<div class="filetree">
+    <div class="file">
+        my-workspace
+    </div>
+    <div class="children">
+        <div class="file">
+          &hellip; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (workspace-wide config files)
+        </div>
+        <div class="file">
+          projects &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (generated applications and libraries)
+        </div>
+        <div class="children">
+            <div class="file">
+              my-first-app &nbsp; --(an explicitly generated application)
+            </div>
+            <div class="children">
+                <div class="file">
+                  &hellip; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --(application-specific config)
+                </div>
+                <div class="file">
+                  src &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --(source and support files for application)
+                </div>
+            </div>
+            <div class="file">
+              my-lib &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --(a generated library)
+            </div>
+            <div class="children">
+                <div class="file">
+                  &hellip; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --(library-specific config)
+                </div>
+                <div class="file">
+                  src &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --(source and support files for library)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 ## ライブラリプロジェクトファイル {@a library-project-files}
 
@@ -169,4 +196,4 @@ CLIを使用して（ `ng generate library my-lib` などのコマンドを使�
 
 <!-- end links -->
 
-@reviewed 2022-10-24
+@reviewed 2023-10-24

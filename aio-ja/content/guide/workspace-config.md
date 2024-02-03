@@ -135,12 +135,13 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 <!-- vale Angular.Google_WordListWarnings = NO -->
 
-* [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
-* [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
-* [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
-* [extract-i18n](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
-* [karma](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
-* [server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/server/schema.json)
+*   [application](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/application/schema.json)
+*   [app-shell](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/app-shell/schema.json)
+*   [browser](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/browser/schema.json)
+*   [dev-server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/dev-server/schema.json)
+*   [extract-i18n](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/extract-i18n/schema.json)
+*   [karma](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/karma/schema.json)
+*   [server](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/build_angular/src/builders/server/schema.json)
 
 <!-- vale Angular.Google_WordListWarnings = YES -->
 
@@ -191,7 +192,7 @@ Angularは、特定のCLIコマンドや一般的な`ng run`コマンドで使�
 
 | プロパティ | 説明 |
 | :-------------- | :---------------------------- |
-| `builder`       | このターゲットの作成に使用されたビルドツールのnpmパッケージです。アプリケーションのデフォルトのビルダ (`ng build myApp`) は <code class="no-auto-link">@angular-devkit/build-angular:browser</code> で、[webpack](https://webpack.js.org/) パッケージバンドラーを使用します。**NOTE**: ライブラリの構築 (`ng build myLib`) には別のビルダが使用されることに注意してください。 |
+| `builder`       | このターゲットを作成するために使用されるビルドツールの npm パッケージ。アプリケーションのデフォルトのビルダー(`ng build myApp`) は `@angular-devkit/build-angular:application` で、[esbuild](https://esbuild.github.io/) パッケージ bundler を使用します。 <div class="alert is-helpful"> **NOTE**: A different builder is used for building a library \(`ng build myLib`\). </div> |
 | `options`       | このセクションには、名前付けされた設定が指定されていない場合に使用される、デフォルトのビルドオプションが含まれています。詳しくは [デフォルトのビルドターゲット](#default-build-targets) をご覧ください。 |
 | `configurations`| このセクションには、異なる目的のための設定を定義して名前を付けます。それはそれぞれ名前付けされた、特定の環境のためのデフォルトオプションを設定するためのセクションを含みます。詳しくは [代替ビルドの構成](#build-configs) をご覧ください。 |
 
@@ -228,12 +229,13 @@ Angular CLI comes with two build configurations: `production` and `development`.
 | `scripts`                  | プロジェクトのグローバルコンテキストに追加する、JavaScript のスクリプトファイルを含むオブジェクトです。スクリプトはあたかもそれらが、`index.html` の中の `<script>` タグに記述されたかのように正確にロードします。 詳細については、次の [スタイルとスクリプトの構成](#style-script-config) を参照してください。 |
 | `budgets`                  | 出力が閾値のサイズに達したり越えたりしたときに、警告やエラーを報告するようにビルダを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください (`test` セクションにはありません)。 |
 | `fileReplacements`         | オブジェクトとそのコンパイル時間を書き換えを含むオブジェクトです。詳しくは、[ターゲット固有のファイル置換の構成](guide/build#configure-target-specific-file-replacements)を参照してください。 |
+`index`                    | Configures the generation of the application's HTML index. See more in [Index configuration](#index-config). \(Only available in `browser` section.\)                                                                                                         |                                                                                                        |                                                                                                      
 
 <a id="complex-config"></a>
 
 ## 複雑な設定値
 
-オプションの `assets`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
+オプションの `assets`、`index`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
 `sourceMap` および `optimization` オプションは、コマンドフラグを使用して単純なブール値に設定できますが、設定ファイルを使用して複雑な値を指定することもできます。
 
 次のセクションでは、これらの複雑な値が各ケースでどのように使用されるかについて詳しく説明します。
@@ -433,6 +435,12 @@ Several options can be used to fine-tune the optimization of an application.
 | `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers, and minimizing values.        | `boolean`  | `true`        |
 | `inlineCritical` | Extract and inline critical CSS definitions to improve [First Contentful Paint](https://web.dev/first-contentful-paint). | `boolean`  | `true`        |
 
+<div class="alert is-helpful">
+
+[Angular CLI](cli "CLI command reference") uses `Critters` to perform critical CSS inlining. For more information about this package see the [Critters README](https://github.com/GoogleChromeLabs/critters#readme).
+
+</div>
+
 #### Fonts optimization options
 
 | Option   | Description                                                                                                                                                                                                                          | Value Type | Default Value |
@@ -458,7 +466,7 @@ You can supply a value such as the following to apply optimization to one or the
 
 <div class="alert is-helpful">
 
-   [Universal](guide/glossary#universal) では、スタイルの最適化を `true` に、スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
+   [SSR](guide/glossary#server-side-rendering) では、スタイルの最適化を `true` に、スタイルのソースマップを `false` に設定することにより、HTML ページに表示されるコードを削減できます。
 
 </div>
 
@@ -493,6 +501,23 @@ The example below shows how to toggle one or more values to configure the source
 
 </div>
 
+<a id="index-config"></a>
+
+### Index configuration
+
+Configures the generation of the application's HTML index.
+
+The `index` option can be either a String or an Object for more fine-tune configuration.
+
+When supplying the value as a String the filename of the specified path will be used for the generated file and will be created in the root of the application's configured output path.
+
+#### Index options
+| Options  | Details                                                                                                                                                                          | Value type | Default value |
+|:---      |:---                                                                                                                                                                              |:---        |:---           |
+| `input`  | The path of a file to use for the application's generated HTML index.                                                                                                            | `string`   |               |
+| `output` | The output path of the application's generated HTML index file. The full provided path will be used and will be considered relative to the application's configured output path. | `string`   | `index.html`  |
+
+
 <!-- links -->
 
 [AioGuideI18nCommonMerge]: guide/i18n-common-merge "Common Internationalization task #6: Merge translations into the application | Angular"
@@ -501,4 +526,4 @@ The example below shows how to toggle one or more values to configure the source
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

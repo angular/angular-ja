@@ -1,6 +1,6 @@
 # Angularのロードマップ
 
-<p class="roadmap-last-updated">Last updated: 2022-11-05</p>
+<p class="roadmap-last-updated">Last updated: 2023-10-24</p>
 
 Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。
 同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 
@@ -14,95 +14,151 @@ Angularは、Google内からも、より広範なオープンソースコミュ�
 
 ## 進行中
 
-### ハイドレーションとサーバーサイドレンダリングのユーザービリティの向上に関する検討
+### 新しいリアクティビティモデルによる、ランタイムパフォーマンスとデベロッパーエクスペリエンスの改善
 
-このプロジェクトの最初のステップとして、非破壊的なハイドレーションを実装します。この技術により、サーバーサイドでレンダリングされたDOMを再利用し、再レンダリングではなく、イベントリスナーをアタッチし、Angularランタイムが必要とするデータ構造を作成するだけになります。次のステップとして、ダイナミックに発展中である部分的ハイドレーションとResumabilityに関する領域をさらに探求するつもりです。それぞれのアプローチにはトレードオフがあり、Angularにとってもっとも最適な長期的なソリューションが何であるか、情報に基づいた決断をしたいと思います。
+This project rethinks the Angular reactivity model by introducing Signals as a reactivity primitive.
+Fully implemented the project will make Zone.js optional. The initial planning resulted in hundreds of discussions, conversations with developers, feedback sessions, user experience studies, and a series of [RFCs](https://github.com/angular/angular/discussions/49685), which received over 1,000 comments.
 
-### ランタイムパフォーマンスの改善とZone.jsのオプショナル化
+As part of the v17 release, we graduated the Angular Signals library from developer preview. Next we’ll continue implementing the proposals from the RFC. The first steps will be introducing signal-based inputs and queries.
 
-この取り組みの一環として、Angularのリアクティブモデルを見直し、Zone.jsをオプションにして実行時のパフォーマンスを向上させることにしました。デフォルトでは、Angularはグローバルに変更検知を行い、コンポーネントツリー全体をトラバースしています。私たちは、影響を受けるコンポーネントにのみ変更検知を実行するオプションを検討しています。こうすることで、フレームワークをシンプルにし、デバッグを改善し、アプリケーションのバンドルサイズを小さくすることができます。さらに、現在Zone.jsがサポートしていない組み込みのasync/await構文を利用することができます。
+### Ergonomic deferred loading
 
-### スタンドアロン・コンポーネントのドキュメントとSchematicsの改善
+In v17 we shipped deferrable views in developer preview, which provide an ergonomic API for deferred code loading. As the next step we'll be iterating on community feedback before officially making this feature stable.
 
-スタンドアロンコンポーネントを使用して起動されたアプリケーションのための `ng new` コレクションの開発に取り組んでいます。さらに、簡略化されたスタンドアロンコンポーネントのAPIに関するドキュメントのギャップを埋めつつあります。
+### Built-in control flow
 
-### 依存性の注入のデバッグAPIを導入
+In v17 we shipped a developer preview version of a new control flow. It brings significant performance improvements and better ergonomics for template authoring. We also provided a migration of existing `*ngIf`, `*ngFor`, and `*ngSwitch` which you can run to move your project to the new implementation. As the next steps we'll be working on addressing community feedback before officially completing this project and graduating it from developer preview.
 
-AngularとAngular DevToolsのデバッグユーティリティを改善するために、依存性の注入ランタイムにアクセスするためのAPIに取り組みます。プロジェクトの一部として、私たちは、インジェクター階層と、関連するプロバイダー間の依存オブジェクトを探索することを可能にするデバッグメソッドを公開する予定です。
+### iframe support in Angular DevTools
 
-### Language Serviceによるスタンドアロンインポートの効率化
+We are working on making it possible to debug and profile Angular apps embedded within an iframe on the page. This feature will allow you to select an iframe and inspect it directly within Angular DevTools.
 
-この取り組みの一環として、テンプレートが依存するスタンドアロンコンポーネントの自動インポートを実装する予定です。また、より小さなアプリケーションバンドルを可能にするために、Language Serviceでは未使用のインポートの自動削除を提案します。
+### Enabling hybrid rendering by default
 
-### モダンなバンドルの調査
+We are working on more developer experience improvements which will allow us to enable hybrid (server-side rendering and static site generation) rendering by default for new projects. In particular, we're focused on route-level rendering strategy configuration and improving developer experience for i18n support.
 
-ビルド時間を短縮して開発体験を向上させるために、Angular CLIで作成されるJavaScriptバンドルを改善するためのオプションを探索します。
-その一環として、[esbuild](https://esbuild.github.io)や他のオープンソースソリューションを試し、Angular CLIの最新ツールと比較し、その結果を報告する予定です。Angular v15では、実験的に `ng build` と `ng build --watch` でesbuildをサポートしています。安定版として自信を持ってリリースできるまで、ソリューションを検討し続けていきます。
+### Automation for transition of existing hybrid rendering projects to esbuild and vite
+
+In v17 we shipped a vite and esbuild-based application builder and enabled it for new projects by default. It improves build time for projects using hybrid rendering with up to 87%. Next, we'll be working on developing schematics that migrate existing projects using hybrid rendering to the new build pipeline.
+
+### Language Service によるスタンドアロンインポートの効率化
+
+この取り組みの一環として、スタンドアロンおよびNgModuleベースのアプリケーションにおいて、Language Service がコンポーネントとパイプを自動的にインポートするようにします。さらに、より小さなアプリケーションバンドルが可能になるように、Language Service が未使用のインポートの自動削除を提案できるように取り組みます。
 
 ### 新しいCDKプリミティブ
 
-[Combobox](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox)のWAI-ARIAデザインパターンに基づいたカスタムコンポーネントの作成を容易にするために、新しいCDKプリミティブの作成に取り組んでいます。Angular v14ではこのプロジェクトの一環として安定した[menu and dialog primitives](https://material.angular.io/cdk/categories) が導入され、v15では [Listbox](https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox) が導入されました。
+We are working on new CDK primitives to facilitate creating custom components based on the WAI-ARIA design patterns for [Combobox](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox). Angular v14 introduced stable [menu and dialog primitives](https://material.angular.io/cdk/categories) as part of this project, and in v15 [Listbox](https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox).
 
 ### Angularコンポーネントのアクセシビリティ
 
 Angular MaterialのコンポーネントをWCAGなどのアクセシビリティ基準に照らして評価し、そこから発生する問題の修正に取り組んでいます。
 
-### Documentation refactoring
-
-Ensure all existing documentation fits into a consistent set of content types. Update excessive use of tutorial-style documentation into independent topics. We want to ensure the content outside the main tutorials is self-sufficient without being tightly coupled to a series of guides. In Q2 2022, we refactored the [template content](https://github.com/angular/angular/pull/45897). The next steps are to introduce better structure for components and dependency injection.
-
 ### Investigate micro frontend architecture for scalable development processes
 
-For the past couple of quarters we understood and defined the problem space. We are going to follow up with a series of blog posts on best practices when developing applications at scale.
-
-### Update getting started tutorial
-
-We're working on updating the Angular getting started experience with standalone components. As part of this initiative, we'd like to create a new textual and video tutorials.
-
-### Improvements in the image directive
-
-We released the Angular [image directive](https://developer.chrome.com/blog/angular-image-directive/) as stable in v15. We introduced a new fill mode feature that enables images to fit within their parent container rather than having explicit dimensions. Currently, this feature is in [developer preview](https://angular.io/guide/releases#developer-preview). Next we'll be working on collecting feedback from developers before we promote fill mode as stable.
-
-## 将来
+We understood and defined the problem space for the past couple of quarters. As the most widely adopted solution we identified is module federation and we suggest it as an option in the rare cases when micro frontend architecture is a feasible solution. Currently, we're working with the community on providing a third-party extension for the Angular CLI via import maps that work with the new application builder, enabling a solution comparable to module federation in webpack.
 
 ### Token-based theming APIs
 
-To provide better customization of our Angular material components and enable Material 3 capabilities, we'll be collaborating with Google's Material Design team on defining token-based theming APIs.
+To provide better customization of our Angular material components and enable Material 3 capabilities, we'll be collaborating with Google's Material Design team on defining token-based theming APIs. As of Q2 2023, we're refactoring components to use the new API, finalizing the comprehensive set of tokens, and updating the Sass API based on the new tokens.
 
-### Modernize Angular's unit testing experience
+### Modernize Angular's unit testing tooling
 
-In v12 we revisited the Angular end-to-end testing experience by replacing Protractor with modern alternatives such as Cypress, Nightwatch, and Webdriver.io. Next we'd like to tackle `ng test` to modernize Angular's unit testing experience.
+In v12, we revisited the Angular end-to-end testing experience by replacing Protractor with modern alternatives such as Cypress, Nightwatch, and Webdriver.io. Next, we'd like to tackle `ng test` to modernize Angular's unit testing experience. In Q2, we introduced experimental [Jest](https://jestjs.io/) support and [announced](https://blog.angular.io/moving-angular-cli-to-jest-and-web-test-runner-ef85ef69ceca) the transition from Karma to the [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/).
 
-### Revamp performance dashboards to detect regressions
+## 将来
 
-We have a set of benchmarks that we run against every code change to ensure Angular aligns with our performance standards. To ensure the framework’s runtime does not regress after a code change, we need to refine some of the existing infrastructure the dashboards step on.
+### Signal debugging in Angular DevTools
 
-### ngc を tsc プラグインディストリビューションとして使用することによるビルドのパフォーマンス向上
+With the evolution of Signals in Angular, we'll be also working on a better tooling for debugging them. High on the priority list is a UI for inspecting and debugging Signal-based components.
 
-Angular コンパイラを TypeScript コンパイラのプラグインとして配布することで、開発者のビルドパフォーマンスを大幅に向上させ、メンテナンスコストを削減することができます。
+### Improved hot-module replacement support (HMR)
 
-### 使いやすいコンポーネントレベルのコード分割API
+In v11 we launched initial support for HMR in Angular. Having the new implementation of `ng serve` based on vite and esbuild, we'll explore more advanced HMR for templates, styles, and TypeScript code.
 
-Webアプリケーションの一般的な問題は、初期ロード時間が遅いことです。それを改善するひとつの方法は、コンポーネントレベルでより細かいコード分割を適用することです。このプラクティスを促進するために、より使いやすいコード分割APIに取り組みます。
+### Exploration of streamed server-side rendering
 
-### 将来のRxJSの変更（v7以降）にスムーズに対応できるようにする
+Over the past few releases we've been working on making Angular's server-side rendering story more robust. On our priority list is to explore streamed server-side rendering for zoneless application.
 
-Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
+### Exploration of partial hydration
+
+In v17 we graduated hydration from developer preview and we've been consistently observing 40-50% improvements in LCP. As the next step, we'll explore how we can partially hydrate applications using deferrable views.
+
+As part of this effort, we'll be also evaluating the trade-offs of more fine-grained hydration and resumability. We'll share updates as we progress.
+
+### Investigation for authoring format improvements
+
+Based on our developer surveys' results we saw there are opportunities for improving the ergonomics of the component authoring format. The first step of the process will be to gather requirements and understand the problem space in advanced to an RFC. We'll share updates as we make progress. High priority in the future work will be backward compatibility and interoperability.
+
+### Ensure smooth adoption for future RxJS changes (version 8 and beyond)
+
+We want to ensure Angular developers are taking advantage of the latest capabilities of RxJS and have a smooth transition to the subsequent major releases of the framework.
+For this purpose, we will explore and document the scope of the changes in v7 and beyond RxJS and plan an update strategy.
 
 ### Support two-dimensional drag-and-drop
 
-As part of this project we'd like to implement mixed orientation support for the Angular CDK drag and drop. This is one of the most highly [requested features](https://github.com/angular/components/issues/13372) in the repository.
+As part of this project, we'd like to implement mixed orientation support for the Angular CDK drag and drop. This is one of the repository's most highly [requested features](https://github.com/angular/components/issues/13372).
 
 <details class="completed-details" open="true">
-<summary>
-  <h2>Completed</h2>
-  <span class="actions">
-    <span class="action-expand">Show all</span>
-    <span class="action-collapse">Hide all</span>
-    <i class="material-icons expand">expand_more</i>
-  </span>
-</summary>
-<div class="details-content">
+ <summary>
+   <h2>Completed</h2>
+   <span class="actions">
+     <span class="action-expand">Show all</span>
+     <span class="action-collapse">Hide all</span>
+     <i class="material-icons expand">expand_more</i>
+   </span>
+ </summary>
+ <div class="details-content">
+
+### Update getting started tutorial
+
+*Completed Q4 2023*
+
+Over the past two quarters, we developed a new video and textual tutorial based on standalone components. They are now launched and available on https://angular.io/start.
+
+### Investigate modern bundlers
+
+*Completed Q4 2023*
+
+In Angular v16, we released a developer preview of an esbuild-based builder with support for `ng build` and `ng serve`. The `ng serve` development server uses Vite and a multi-file compilation by esbuild and the Angular compiler. In v17 we graduated the build tooling from developer preview and enabled it by default for new projects.
+
+### Introduce dependency injection debugging APIs
+
+*Completed Q4 2023*
+
+To improve the debugging utilities of Angular and Angular DevTools, we'll work on APIs that provide access to the dependency injection runtime. As part of the project, we'll expose debugging methods that allow us to explore the injector hierarchy and the dependencies across their associated providers. As of v17, we shipped a feature that enables us to plug into the dependency injection life-cycle. We also launched a visualization of the injector tree and inspection of the providers declared inside each individual node,
+
+### Improve documentation and schematics for standalone components
+
+*Completed Q4 2023*
+
+We released a developer preview of the `ng new --standalone` schematics collection, allowing you to create apps free of NgModules. In v17 we switched the new application authoring format to standalone APIs and changed the documentation to reflect the recommendation. Additionally, we shipped schematics which support updating existing applications to standalone components, directives, and pipes. Even though NgModules will stick around for foreseeable future, we recommend you to explore the benefits of the new APIs to improve developer experience and benefit from the new features we build for them.
+
+### Explore hydration and server-side rendering improvements
+
+*Completed Q4 2023*
+
+In v16, we released a developer preview of non-destructive full hydration, see the [hydration guide](guide/hydration) and the [blog post](https://blog.angular.io/whats-next-for-server-side-rendering-in-angular-2a6f27662b67) for additional information. We're already seeing significant improvements to Core Web Vitals, including [LCP](https://web.dev/lcp) and [CLS](https://web.dev/cls). In lab tests, we consistently observed 45% better LCP of a real-world app.
+
+In v17 we launched hydration outside developer preview and did a series of improvements in the server-side rendering story, including: route discovery at runtime for SSG, up to 87% faster build times for hybrid rendered applications, prompt that enables hybrid rendering for new projects.
+
+### Non-destructive full app hydration
+
+*Completed Q2 2023*
+
+In v16, we released a developer preview of non-destructive full hydration, which allows Angular to reuse existing DOM nodes on a server-side rendered page, instead of re-creating an app from scratch. See additional information in the [hydration guide](guide/hydration).
+
+### Improvements in the image directive
+
+*Completed Q1 2023*
+
+We released the Angular [image directive](https://developer.chrome.com/blog/angular-image-directive/) as stable in v15. We introduced a new fill mode feature that enables images to fit within their parent container rather than having explicit dimensions. Over the past two months, the Chrome Aurora team backported the directive to v12 and newer.
+
+### Documentation refactoring
+
+*Completed Q1 2023*
+
+Ensure all existing documentation fits into a consistent set of content types. Update excessive use of tutorial-style documentation into independent topics. We want to ensure the content outside the main tutorials is self-sufficient without being tightly coupled to a series of guides. In Q2 2022, we refactored the [template content](https://github.com/angular/angular/pull/45897) and dependency injection. In Q1 2023, we improved the HTTP guides, and with this, we're putting the documentation refactoring project on hold.
+
 
 ### Improve image performance
 
@@ -134,13 +190,13 @@ The Angular and the Chrome DevTools are working together to enable more readable
 
 [MDC Web](https://material.io/develop/web) is a library created by the Google Material Design team that provides reusable primitives for building Material Design components.
 The Angular team is incorporating these primitives into Angular Material.
-Using MDC Web aligns Angular Material more closely with the Material Design specification, expand accessibility, improve component quality, and improve the velocity of our team.
+Using MDC Web aligns Angular Material more closely with the Material Design specification, expands accessibility, improves component quality, and improves the velocity of our team.
 
 ### Implement APIs for optional NgModules
 
 *Completed Q4 2022*
 
-In the process of making Angular simpler, we are working on [introducing APIs](https://angular.io/guide/standalone-components) that allow developers to initialize applications, instantiate components, and use the router without NgModules. Angular v14 introduces developer preview of the APIs for standalone components, directives, and pipes. In the next few quarters we'll collect feedback from developers and finalize the project making the APIs stable. As the next step we will work on improving use cases such as `TestBed`, Angular elements, etc.
+In the process of making Angular simpler, we are working on [introducing APIs](/guide/standalone-components) that allow developers to initialize apps, instantiate components, and use the router without NgModules. Angular v14 introduces developer preview of the APIs for standalone components, directives, and pipes. In the next few quarters we'll collect feedback from developers and finalize the project making the APIs stable. As the next step we will work on improving use cases such as `TestBed`, Angular elements, etc.
 
 ### Allow binding to protected fields in templates
 
@@ -153,7 +209,7 @@ To improve the encapsulation of Angular components we enabled binding to protect
 *Completed Q2 2022*
 
 Develop and publish an in-depth guide on change detection.
-Develop content for performance profiling of Angular applications.
+Develop content for performance profiling of Angular apps.
 Cover how change detection interacts with Zone.js and explain when it gets triggered, how to profile its duration, as well as common practices for performance optimization.
 
 ### Rollout strict typings for `@angular/forms`
@@ -203,8 +259,8 @@ Introduce other correctness and conformance checks to further guarantee correctn
 
 ### Ivyを利用したAngularライブラリ
 
-2020年の初め、私たちはIvyライブラリ配布のための[RFC](https://github.com/angular/angular/issues/38366)を共有しました。コミュニティからの貴重なフィードバックの後、私たちはプロジェクトのデザインを開発しました。現在、Ivyコンパイルを利用するためのライブラリパッケージフォーマットの更新、View Engineライブラリフォーマットの非推奨のブロック解除、[ngcc](guide/glossary#ngcc)など、Ivyライブラリ配布の開発に投資しています。
-
+2020年の初め、私たちはIvyライブラリ配布のための[RFC](https://github.com/angular/angular/issues/38366)を共有しました。コミュニティからの貴重なフィードバックの後、私たちはプロジェクトのデザインを開発しました。
+We are now investing in the development of Ivy library distribution, including an update of the library package format to use Ivy compilation, unblock the deprecation of the View Engine library format, and ngcc.
 
 ### テスト環境の自動ティアダウンによるテスト時間とデバッグの改善
 
@@ -226,9 +282,10 @@ Supporting modern browsers will allow us to leverage the more compact, expressiv
 
 ### Accelerated debugging and performance profiling with Angular DevTools
 
-_Completed Q2 2021_
+*Completed Q2 2021*
 
-デバッグやパフォーマンスプロファイリングのためのユーティリティを提供するAngularの開発ツールに取り組んでいます。このプロジェクトでは、Angularアプリケーションのコンポーネント構造や変更検知を開発者が理解できるようにすることを目的としています。
+We are working on development tooling for Angular that provides utilities for debugging and performance profiling.
+This project aims to help developers understand the component structure and the change detection in an Angular app.
 
 ### 統合されたAngularのバージョニングとブランチでリリースを効率化
 
@@ -302,7 +359,7 @@ _Completed Q4 2020_
 
 We are actively investing up to 50% of our engineering capacity on triaging issues and PRs until we have a clear understanding of broader community needs. After that, we'll commit up to 20% of our engineering capacity to keep up with new submissions promptly.
 
-</div>
+ </div>
 </details>
 
 <!-- links -->
@@ -311,4 +368,4 @@ We are actively investing up to 50% of our engineering capacity on triaging issu
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-05-03

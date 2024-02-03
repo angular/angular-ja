@@ -68,21 +68,12 @@ const routes: Routes = [
 
 <code-example format="shell" language="shell">
 
-ng new customer-app --routing
+ng new customer-app --no-standalone
 
 </code-example>
 
-これにより、`customer-app`というアプリケーションが作成され、さらに`--routing`フラグによって
-`app-routing.module.ts`というファイルが生成されます。
-このファイルはフィーチャーモジュールの遅延ロードをセットアップするために必要なファイルの1つです。
+This creates an application called `customer-app` with a file called `app-routing.module.ts`. This is one of the files you need for setting up lazy loading for your feature module.
 コマンド`cd customer-app`を実行してプロジェクトに移動してください。
-
-<div class="alert is-helpful">
-
-`--routing`オプションはAngular CLI 8.1以上で有効です。
-[プロジェクトの更新](guide/updating)を参照してください。
-
-</div>
 
 ### ルーティングをもつフィーチャーモジュールを作成する
 
@@ -109,7 +100,7 @@ ng generate module customers --route customers --module app.module
 
 <header>文字列ベースの遅延ロード</header>
 
-Angularバージョン8では、`loadChildren`のルート指定のための文字列構文は、`import()`構文の推奨によって[非推奨に](guide/deprecations#loadchildren-string-syntax)なりました。
+Angularバージョン8では、`loadChildren`のルート指定のための文字列構文は、`import()`構文の推奨によって[非推奨になりました](guide/deprecations#loadChildren)。
 `tsconfig`ファイルに遅延ロードされるルートを含めることで、文字列ベースの遅延ロード(`loadChildren: './path/to/module#Module'`)の使用を選択できます。それらはコンパイルで遅延ロードされるファイルを含みます。
 
 デフォルトでAngular CLIは、`import()`構文で使用することを意図したより厳密なファイル構成のプロジェクトを生成します。
@@ -253,11 +244,13 @@ Angular CLIは、フィーチャールーティングモジュールにも`Route
 プリロードは、アプリケーションの一部をバックグラウンドでロードすることでUXを向上させます。
 モジュールまたはコンポーネントデータをプリロードできます。
 
-### モジュールをプリロードする {@a preloading-modules}
+### モジュールとスタンドアロンコンポーネントのプリロード {@a preloading-modules-and-standalone-components}
 
-モジュールのプリロードはアプリケーションの一部をバックグラウンドでロードすることでUXを向上させるため、ユーザーはルートをアクティブ化するときにその要素がダウンロードされるのを待つ必要がありません。
+Preloading modules and standalone components improves UX by loading parts of your application in the background. By doing this, users don't have to wait for the elements to download when they activate a route.
 
-遅延ロードされたモジュールすべてのプリロードを有効にするには、Angularの`router`から`PreloadAllModules`トークンをインポートします。
+To enable preloading of all lazy loaded modules and standalone components, import the `PreloadAllModules` token from the Angular `router`.
+
+### Module based application
 
 <code-example header="AppRoutingModule (excerpt)">
 
@@ -278,6 +271,32 @@ RouterModule.forRoot(
 
 </code-example>
 
+### Standalone application
+
+For standalone applications configure preloading strategies by adding `withPreloading` to  `provideRouter`s RouterFeatures in `app.config.ts`
+
+<code-example header="`app.config.ts`">
+
+import { ApplicationConfig } from '@angular/core';
+import {
+  PreloadAllModules,
+  provideRouter
+  withPreloading,
+} from '@angular/router';
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules)
+    ),
+  ],
+};
+
+</code-example>
+
 ### コンポーネントデータをプリロードする {@a preloading-component-data}
 
 コンポーネントデータをプリロードするために、`resolver`を使用できます。
@@ -294,7 +313,7 @@ ng generate service &lt;service-name&gt;
 
 </code-example>
 
-In the newly created service, implement the `Resolve` interface provided by the `&commat;angular/router` package:
+In the newly created service, implement the `Resolve` interface provided by the `@angular/router` package:
 
 <code-example header="Resolver service (excerpt)">
 
@@ -402,4 +421,4 @@ For more information on Angular Modules, see [NgModules](guide/ngmodules).
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

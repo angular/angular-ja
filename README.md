@@ -1,6 +1,5 @@
 # angular-ja
 
-![Deploy to Production](https://github.com/angular/angular-ja/actions/workflows/deploy-production.yml/badge.svg)
 ![CI](https://github.com/angular/angular-ja/workflows/build-and-test/badge.svg)
 
 このリポジトリは[Angular](https://github.com/angular/angular)の公式サイト [angular.io](https://angular.io) を日本語に翻訳するためのものです。

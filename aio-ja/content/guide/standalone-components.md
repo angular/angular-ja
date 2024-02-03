@@ -4,7 +4,11 @@
 
 ## スタンドアロンコンポーネントの作成
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x5PZwb4XurU" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-container">
+
+<iframe src="https://www.youtube.com/embed/x5PZwb4XurU" title="スタンドアロンコンポーネント入門" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</div>
 
 ### `standalone` フラグとコンポーネントの `imports`
 
@@ -118,7 +122,7 @@ bootstrapApplication(PhotoAppComponent, {
 });
 ```
 
-## ルーティングと遅延読み込み
+## ルーティングと遅延読み込み {@a routing-and-lazy-loading}
 
 ルーターAPIは、スタンドアロンコンポーネントを利用するために更新および簡素化されました。多くの一般的な遅延読み込みのシナリオでは、 `NgModule` は不要になりました。
 
@@ -170,7 +174,7 @@ export default [
   {path: 'home', component: AdminHomeComponent},
   {path: 'users', component: AdminUsersComponent},
   // ...
-] as Route[];
+] satisfies Route[];
 ```
 
 
@@ -262,7 +266,7 @@ Angular アプリケーションは、利用可能なプロバイダーのセッ
 
 #### 環境インジェクター {@a environment-injectors}
 
-`NgModule` をオプショナルにすると、アプリケーション全体のプロバイダー ([HttpClient](https://angular.io/api/common/http/HttpClient) など) を使用して「モジュール」インジェクターを構成する新しい方法が必要になります。スタンドアロンアプリケーション (`bootstrapApplication` で作成されたアプリケーション) では、`providers` オプションで、ブートストラッププロセス中に「モジュール」プロバイダーを構成できます。
+`NgModule` をオプショナルにすると、アプリケーション全体のプロバイダー ([HttpClient](/api/common/http/HttpClient) など) を使用して「モジュール」インジェクターを構成する新しい方法が必要になります。スタンドアロンアプリケーション (`bootstrapApplication` で作成されたアプリケーション) では、`providers` オプションで、ブートストラッププロセス中に「モジュール」プロバイダーを構成できます。
 
 ```ts
 bootstrapApplication(PhotoAppComponent, {
@@ -321,7 +325,7 @@ class DatePickerComponent {
 
 @NgModule({
         declarations: [DatePickerComponent],
-        exports: [DatePickerComponent]
+        exports: [DatePickerComponent],
         providers: [CalendarService],
 })
 class DatePickerModule {
@@ -342,3 +346,42 @@ class DateModalComponent {
 Angular がスタンドアロンコンポーネントを作成するとき、現在のインジェクターが、 NgModules に基づくものを含む、スタンドアロンコンポーネントの依存関係に必要なすべてのサービスを持っていることを知る必要があります。それを保証するために、場合によっては、 Angular は現在の環境インジェクターの子として新しい「スタンドアロンインジェクター」を作成します。現在、これはブートストラップされたすべてのスタンドアロンコンポーネントで発生します。それはルートの環境インジェクターの子になるでしょう。動的に作成された (たとえば、ルーターまたは `ViewContainerRef` API によって) スタンドアロンコンポーネントにも同じ規則が適用されます。
 
 スタンドアロンインジェクターは、スタンドアロンコンポーネントによってインポートされたプロバイダーがアプリケーションの残りの部分から「分離」されることを保証するために作成されます。これにより、スタンドアロンコンポーネントは、実装の詳細をアプリケーションの残りの部分に「漏らす」ことができない、真に自己完結した部分であると考えることができます。
+
+#### Resolve circular dependencies with a forward class reference
+
+The order of class declaration matters in TypeScript. You can't refer directly to a class until it's been defined.
+
+This isn't usually a problem but sometimes circular references are unavoidable. For example, when class 'A' refers to class 'B' and 'B' refers to 'A'. One of them has to be defined first.
+
+The Angular `forwardRef()` function creates an indirect reference that Angular can resolve later. 
+
+For example, this situation happens when a standalone parent component imports a standalone child component and vice-versa. You can resolve this circular dependency issue by using the `forwardRef` function.
+
+```ts
+@Component({
+  standalone: true, 
+  imports: [ChildComponent],
+  selector: 'app-parent',
+  template: `<app-child [hideParent]="hideParent"></app-child>`,
+})
+export class ParentComponent {
+  @Input() hideParent: boolean;
+}
+
+
+@Component({
+  standalone: true,
+  imports: [CommonModule, forwardRef(() => ParentComponent)],
+  selector: 'app-child',
+  template: `<app-parent *ngIf="!hideParent"></app-parent>`,
+})
+export class ChildComponent {
+  @Input() hideParent: boolean;
+}
+```
+
+<div class="alert is-important">
+
+This kind of imports may result in an infinite recursion during component instantiation. Make sure that this recursion has an exit condition that stops it at some point.
+
+</div>

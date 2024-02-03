@@ -57,7 +57,6 @@ NgModule のメタデータでは次のようなことを行います:
 あなたは次の記事に興味があるかもしれません:
 
 *   [フィーチャーモジュール](guide/feature-modules)
-*   [エントリーコンポーネント](guide/entry-components)
 *   [プロバイダー](guide/providers)
 *   [NgModule の種類](guide/module-types)
   

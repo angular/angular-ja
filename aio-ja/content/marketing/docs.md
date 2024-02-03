@@ -6,15 +6,15 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
 チュートリアルとガイドには、プロジェクトを始めるのに役立つダウンロード可能なサンプルが含まれています。
 
 <div class="card-container">
+  <a href="tutorial/first-app" class="docs-card" title="Work through a full tutorial">
+    <section>はじめてのAngularアプリを作る</section>
+    <p>本格的なチュートリアルに沿って、はじめてのアプリケーションを作成しましょう。</p>
+    <p class="card-footer">ホームズアプリチュートリアル</p>
+  </a>
   <a href="guide/what-is-angular" class="docs-card" title="Angular Platform Overview">
       <section>Angularとは何か</section>
       <p>Angularプラットフォームの概要を知ることができます。</p>
       <p class="card-footer">プラットフォームの概要</p>
-  </a>
-  <a href="start" class="docs-card" title="Getting started">
-    <section>はじめよう</section>
-    <p>小さな既製のAngularアプリで実験し、作業することができます。セットアップは不要です</p>
-    <p class="card-footer">今すぐ試してみよう</p>
   </a>
   <a href="guide/architecture" class="docs-card" title="Angular Concepts">
       <section>学習と探検</section>
@@ -25,11 +25,6 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
     <section>開発環境のセットアップ</section>
     <p>Angular CLIを使った開発のローカル環境を整えましょう。</p>
     <p class="card-footer">ローカルセットアップ</p>
-  </a>
-  <a href="tutorial" class="docs-card" title="Work through a full tutorial">
-      <section>Hello World</section>
-      <p>完全なチュートリアルを実行して、最初のアプリを作成します。</p>
-      <p class="card-footer">Tour of Heroesチュートリアル</p>
   </a>
 </div>
 

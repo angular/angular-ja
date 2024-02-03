@@ -26,18 +26,11 @@ For more information, see the [TypeScript Handbook](https://www.typescriptlang.o
 
 The following options are available for configuring the AOT template compiler.
 
-### `allowEmptyCodegenFiles`
-
-When `true`, create all possible files even if they are empty.
-Default is `false`.
-Used by the Bazel build rules to simplify how Bazel rules track file dependencies.
-Do not use this option outside of the Bazel rules.
-
 ### `annotationsAs`
 
 Modifies how Angular-specific annotations are emitted to improve tree-shaking.
 Non-Angular annotations are not affected.
-One of `static fields` or `decorators`. The default value is `static fields`. 
+One of `static fields` or `decorators`. The default value is `static fields`.
 
 *   By default, the compiler replaces decorators with a static field in the class, which allows advanced tree-shakers like [Closure compiler](https://github.com/google/closure-compiler) to remove unused classes
 *   The `decorators` value leaves the decorators in place, which makes compilation faster.
@@ -128,9 +121,9 @@ Use to create flat modules that are packaged similarly to `@angular/core` and `@
 When this option is used, the `package.json` for the library should refer to the created flat module index instead of the library index file.
 
 Produces only one `.metadata.json` file, which contains all the metadata necessary for symbols exported from the library index.
-In the created `.ngfactory.js` files, the flat module index is used to import symbols. Symbols that include both the public API from the library index as well as shrouded internal symbols.
+In the created `.ngfactory.js` files, the flat module index is used to import symbols. Symbols that include both the public API from the library index and shrouded internal symbols.
 
-By default the `.ts` file supplied in the `files` field is assumed to be the library index.
+By default, the `.ts` file supplied in the `files` field is assumed to be the library index.
 If more than one `.ts` file is specified, `libraryIndex` is used to select the file to use.
 If more than one `.ts` file is supplied without a `libraryIndex`, an error is produced.
 
@@ -145,7 +138,7 @@ The `module` field of the library's `package.json` would be `"index.js"` and the
 When `true`, the recommended value, enables the [binding expression validation](guide/aot-compiler#binding-expression-validation) phase of the template compiler. This phase uses TypeScript to verify binding expressions.
 For more information, see [Template type checking](guide/template-typecheck).
 
-Default is `false`, but when you use the Angular CLI command `ng new --strict`, it is set to `true` in the new project's configuration.
+Default is `false`, but set to `true` in the created workspace configuration when creating a project using the Angular CLI.
 
 <div class="alert is-important">
 
@@ -164,6 +157,12 @@ Do this when using factory summaries.
 
 When `false`, the default, removes blank text nodes from compiled templates, which results in smaller emitted template factory modules.
 Set to `true` to preserve blank text nodes.
+
+<div class="alert is-helpful">
+
+When using hydration, it is recommended that you use `preserveWhitespaces: false`, which is the default value. If you choose to enable preserving whitespaces by adding `preserveWhitespaces: true` to your tsconfig, it is possible you may encounter issues with hydration. This is not yet a fully supported configuration. Ensure this is also consistently set between the server and client tsconfig files. See the [hydration guide](guide/hydration#preserve-whitespaces) for more details.
+
+</div>
 
 ### `skipMetadataEmit`
 
@@ -214,7 +213,7 @@ When `true`, reports an error for a supplied parameter whose injection type cann
 When `false`, constructor parameters of classes marked with `@Injectable` whose type cannot be resolved produce a warning.
 The recommended value is `true`, but the default value is `false`.
 
-When you use the Angular CLI command `ng new --strict`, it is set to `true` in the created project's configuration.
+Set to `true` in the created workspace configuration when creating a project using the Angular CLI.
 
 ### `strictTemplates`
 
@@ -223,7 +222,7 @@ When `true`, enables [strict template type checking](guide/template-typecheck#st
 The strictness flags that this option enables allow you to turn on and off specific types of strict template type checking.
 See [troubleshooting template errors](guide/template-typecheck#troubleshooting-template-errors).
 
-When you use the Angular CLI command `ng new --strict`, it is set to `true` in the new project's configuration.
+Set to `true` in the created workspace configuration when creating a project using the Angular CLI.
 
 ### `trace`
 
@@ -247,4 +246,4 @@ Besides the configuration file, you can also use [`tsc` command line options](ht
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-10-24

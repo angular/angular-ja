@@ -11,8 +11,9 @@ Angularのルーターはオプションのサービスであり、指定され�
 
 他のAngularパッケージと同じく、そこから必要なものをインポートします。
 
-<code-example path="router/src/app/app.module.1.ts" header="src/app/app.module.ts (import)" region="import-router"></code-example>
-
+```
+import { provideRouter } from '@angular/router';
+```
 
 <div class="alert is-helpful">
 
@@ -28,14 +29,35 @@ Angularのルーターはオプションのサービスであり、指定され�
 ブラウザのURLが変わると、そのルーターは対応する`Route`を探します。そのルートから表示するコンポーネントを決定できます。
 
 ルーターは設定するまではルートをもちません。
-次の例では、5つのルート定義を作成し、`RouterModule.forRoot()`メソッドを介してルーターを設定し、その結果を`AppModule`の`imports`配列に追加しています。
+次の例では、5つのルート定義を作成し、`provideRouter` メソッドでルーターを設定し、その結果を `ApplicationConfig` の `providers` 配列に追加しています。
+
+```
+const appRoutes: Routes = [
+  { path: 'crisis-center', component: CrisisListComponent },
+  { path: 'hero/:id',      component: HeroDetailComponent },
+  {
+    path: 'heroes',
+    component: HeroListComponent,
+    data: { title: 'Heroes List' }
+  },
+  { path: '',
+    redirectTo: '/heroes',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PageNotFoundComponent }
+];
+
+export const appConfig: ApplicationConfig = {
+    providers: [provideRouter(routes, withDebugTracing())]
+}
+```
 
 <code-example path="router/src/app/app.module.0.ts" header="src/app/app.module.ts (excerpt)"></code-example>
 
 {@a example-config}
 
-ルートの`appRoutes`配列は、どのようにナビゲートするかを記述しています。
-これをモジュールの`imports`にある`RouterModule.forRoot()`メソッドに渡してルーターを設定します。
+The `routes` array of routes describes how to navigate.
+Pass it to the `provideRouter` method in the `ApplicationConfig` `providers` to configure the router.
 
 各`Route`はURLの`path`をコンポーネントにマップしています。
 パスに先頭のスラッシュはありません。
@@ -53,10 +75,10 @@ Angularのルーターはオプションのサービスであり、指定され�
 4番目のルートにある空のパスは、アプリケーションのデフォルトパスを表しています &mdash; URLのパスが空のときに移動する場所で、通常は先頭にあります。
 このデフォルトルートは`/Heroes`というURLのルートにリダイレクトしており、そのため`HeroesListComponent`を表示します。
 
-ナビゲーションライフサイクル中に何のイベントが発生しているかを確認する必要がある場合は、ルーターのデフォルト設定の一部として`enableTracing`オプションがあります。
+If you need to see what events are happening during the navigation lifecycle, there is the `withDebugTracing` feature.
 これは、各ナビゲーションライフサイクル中に発生した各ルーターイベントをブラウザコンソールに出力します。
-`enableTracing`はデバッグ目的でのみ使用しましょう。
-`RouterModule.forRoot()`メソッドへの2番目の引数として渡されるオブジェクトにおいて、`enableTracing: true`オプションを設定します。
+Use `withDebugTracing` only for debugging purposes.
+You set the `withDebugTracing` option in the object passed as the second argument to the `provideRouter` method.
 
 {@a basics-router-outlet}
 
@@ -467,164 +489,27 @@ Angularのルーターはオプションのサービスであり、指定され�
   </tr>
 </table>
 
-`enableTracing`オプションを有効にすると、Angularはこれらのイベントをコンソールにログします。
+When you enable the `withDebugTracing` feature, Angular logs these events to the console.
 ルーターのナビゲーションイベントをフィルタリングする例については、[AngularでのObservable](guide/observables-in-angular)の[ルーターのセクション](guide/observables-in-angular#router)を参照しましょう。
 
 ### ルーター用語 {@a router-terminology}
 
 主な`Router`用語とその意味は次のとおりです:
 
-<table>
-
-  <tr>
-
-    <th>
-      ルーター部分
-    </th>
-
-    <th>
-      意味
-    </th>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>Router</code>
-    </td>
-
-    <td>
-      アクティブなURLのアプリケーションコンポーネントを表示します。
-      あるコンポーネントから次のコンポーネントへのナビゲーションを管理します。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterModule</code>
-    </td>
-
-    <td>
-      アプリケーションビューをナビゲートするために必要なサービスプロバイダーとディレクティブを提供する、
-      別個のNgModuleです。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>Routes</code>
-    </td>
-
-    <td>
-      ルートの配列を定義します。それぞれがURLパスをコンポーネントにマッピングしています。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>Route</code>
-    </td>
-
-    <td>
-      ルーターがURLパターンに基づいてコンポーネントにナビゲートする方法を定義します。
-      ほとんどのルートは、パスとコンポーネントの型で構成されます。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterOutlet</code>
-    </td>
-
-    <td>
-      ルーターがビューを表示する場所をマークするディレクティブ(<code>&lt;router-outlet></code>)。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterLink</code>
-    </td>
-
-    <td>
-      クリック可能なHTML要素をルートにバインドするためのディレクティブ。<i>文字列</i>や<i>リンクパラメータ配列</i>にバインドされている<code>routerLink</code>ディレクティブをもつ要素をクリックすると、ナビゲーションがトリガーされます。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterLinkActive</code>
-    </td>
-
-    <td>
-      要素上または要素内に含まれる結び付けられた<code>routerLink</code>がアクティブ/非アクティブになったとき、HTML要素からクラスを追加/削除するためのディレクティブ。It can also set the `aria-current` of an active link for better accessibility.  
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>ActivatedRoute</code>
-    </td>
-
-    <td>
-      各ルートのコンポーネントに提供されるサービス。ルートパラメータ、静的データ、解決データ、グローバルクエリパラメータ、グローバルフラグメントなどのルート固有の情報を含みます。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <code>RouterState</code>
-    </td>
-
-    <td>
-      ルーターの現在の状態で、現在アクティブ化されたルートのツリーとともにルートツリーをトラバースするための便利なメソッドを含みます。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <b><i>リンクパラメータ配列</i></b>
-    </td>
-
-    <td>
-      ルーターがルーティングの指示として解釈する配列。
-      その配列を<code>RouterLink</code>にバインドするか、<code>Router.navigate</code>メソッドの引数として渡すことができます。
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-      <b><i>ルーティングコンポーネント</i></b>
-    </td>
-
-    <td>
-      <code>RouterOutlet</code>をもつAngularのコンポーネントで、ルーターのナビゲーションに基づいてビューを表示します。
-    </td>
-
-  </tr>
-
-</table>
+| Router part           | Details |
+|:---                   |:---     |
+| `Router`              | Displays the application component for the active URL. Manages navigation from one component to the next.                                                                                        |
+| `provideRouter`       | provides the necessary service providers for navigating through application views.                                                                                        |
+| `RouterModule`        | A separate NgModule that provides the necessary service providers and directives for navigating through application views.                                                                       |
+| `Routes`              | Defines an array of Routes, each mapping a URL path to a component.                                                                                                                              |
+| `Route`               | Defines how the router should navigate to a component based on a URL pattern. Most routes consist of a path and a component type.                                                                |
+| `RouterOutlet`        | The directive \(`<router-outlet>`\) that marks where the router displays a view.                                                                                                                 |
+| `RouterLink`          | The directive for binding a clickable HTML element to a route. Clicking an element with a `routerLink` directive that's bound to a *string* or a *link parameters array* triggers a navigation. |
+| `RouterLinkActive`    | The directive for adding/removing classes from an HTML element when an associated `routerLink` contained on or inside the element becomes active/inactive. It can also set the `aria-current` of an active link for better accessibility.                                       |
+| `ActivatedRoute`      | A service that's provided to each route component that contains route specific information such as route parameters, static data, resolve data, global query parameters, and the global fragment.   |
+| `RouterState`         | The current state of the router including a tree of the currently activated routes together with convenience methods for traversing the route tree.                                              |
+| Link parameters array | An array that the router interprets as a routing instruction. You can bind that array to a `RouterLink` or pass the array as an argument to the `Router.navigate` method.                        |
+| Routing component     | An Angular component with a `RouterOutlet` that displays views based on router navigations.                                                                                                      |
 
 <!-- links -->
 
@@ -632,4 +517,4 @@ Angularのルーターはオプションのサービスであり、指定され�
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-08-29

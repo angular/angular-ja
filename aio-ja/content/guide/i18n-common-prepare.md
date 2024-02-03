@@ -196,8 +196,8 @@ i18nメタデータはコロン\(`:`\)で囲まれ、翻訳元テキストの前
 
 <div class="callout is-helpful">
 
-<header>
-<a name="how-meanings-control-text-extraction-and-merges"></a> テキスト抽出と結合を制御する方法
+<header id="how-meanings-control-text-extraction-and-merges">
+テキスト抽出と結合を制御する方法
 </header>
 
 Angularの抽出ツールは、テンプレート内の`i18n`属性ごとに翻訳単位エントリを生成します。
@@ -306,9 +306,7 @@ other { default_quantity }
 
 <div class="callout is-important">
 
-<a name="background-locales-may-not-support-some-pluralization-categories"></a>
-
-<header>背景: ロケールはいくつかの複数形カテゴリをサポートしません</header>
+<header id="background-locales-may-not-support-some-pluralization-categories">背景: ロケールはいくつかの複数形カテゴリをサポートしません</header>
 
 多くのロケールでは、複数形カテゴリーのいくつかをサポートしていません。
 デフォルトのロケール \(`en-US`\)は非常に単純な`plural()`関数を使用しており、`few`複数形カテゴリーをサポートしていません。

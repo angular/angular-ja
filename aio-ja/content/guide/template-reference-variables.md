@@ -97,7 +97,7 @@ JavaScriptやTypeScriptのコードの変数と同じように、テンプレー
 {@a template-input-variables}
 ## テンプレート入力変数
 
-_テンプレート入力変数_は、そのテンプレートのインスタンスが作成されたときに設定される値をもつ変数です。[構造ディレクティブの書き方](https://angular.io/guide/structural-directives)を参照してください。
+_テンプレート入力変数_は、そのテンプレートのインスタンスが作成されたときに設定される値をもつ変数です。[構造ディレクティブの書き方](/guide/structural-directives)を参照してください。
 
 テンプレート入力変数は `NgFor` の長い形式の使い方の中で動作しているのを見ることができます。
 
@@ -125,6 +125,6 @@ _テンプレート入力変数_は、そのテンプレートのインスタン
 
 ## What’s next
 
-[Writing structural directives](https://angular.io/guide/structural-directives)
+[Writing structural directives](/guide/structural-directives)
 
 @reviewed 2022-05-12

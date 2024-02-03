@@ -32,13 +32,21 @@ W3Cは[CSS Transitions](https://www.w3.org/TR/css-transitions-1/)のページで
 ## はじめよう
 
 アニメーションのための主なAngularモジュールは、`@angular/animations`と`@angular/platform-browser`です。
-CLIを使用して新しいプロジェクトを作成すると、これらの依存関係がプロジェクトに自動的に追加されます。
 
 Angularアニメーションをプロジェクトに追加するには、標準のAngularの機能と一緒にアニメーション固有のモジュールをインポートしてください。
 
 ### ステップ1: アニメーションモジュールを有効にする
 
-`BrowserAnimationsModule`をインポートしてください。これによってアニメーション機能をAngularのルートアプリケーションモジュールに取り込みます。
+`angular/platform-browser/animations`から `provideAnimations` をインポートして、`bootstrapApplication` 関数呼び出しのプロバイダーリストに追加します。
+```ts
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations(),
+  ]
+});
+```
+
+`NgModule` ベースのアプリケーションでは `BrowserAnimationsModule` をインポートします。
 
 <code-example header="src/app/app.module.ts" path="animations/src/app/app.module.1.ts"></code-example>
 
@@ -313,4 +321,4 @@ Angularアニメーションの高度な機能については、アニメーシ�
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-08-16

@@ -72,6 +72,12 @@ _selected_ `@Output`プロパティを通して発生したイベントをリッ
 
 次の`WelcomeComponent`は、挨拶するユーザーの名前を知っている`UserService`に依存します。
 
+<div class="alert is-important">
+
+テストしたい各スタンドアロンコンポーネントを*インポート*するか*提供*することを忘れないでください。
+
+</div>
+
 <code-example
   path="testing/src/app/welcome/welcome.component.ts"
   region="class"

@@ -36,7 +36,7 @@ The following JavaScript and template expression syntax is not allowed:
 *   `++` や `--` などの、インクリメント、デクリメント演算子
 *   `+=` and `-=` などの代入演算子
 *   ビット演算子 `|` や `&`
-*   [パイプ演算子](guide/pipes)
+*   [パイプ演算子](guide/pipes-overview)
 
 ## 文のコンテキスト
 
@@ -71,4 +71,4 @@ In this example, the context of the `$event` object, `hero`, and `#heroForm` is 
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-08-14

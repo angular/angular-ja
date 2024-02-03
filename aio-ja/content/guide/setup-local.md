@@ -7,13 +7,15 @@
 
 <header>ローカルセットアップなしでAngularを試す</header>
 
-Angular をはじめて使用する場合は、[入門](start)から始めるのがよいかもしれません。入門では変更可能な既成のオンラインストアアプリケーションを構築するなかで、Angularの基本事項をすぐに習得できます。 [StackBlitz](https://stackblitz.com/)オンライン開発環境を活用しているので、準備が整うまでローカル環境をセットアップする必要はありません。
+Angular をはじめて使用する場合は、[入門](start)から始めるのがよいかもしれません。
+この入門では変更可能な既成のオンラインストアアプリケーションを構築するなかで、Angularの基本事項をすぐに習得できます。
+[StackBlitz](https://stackblitz.com/)オンライン開発環境を活用しているので、準備が整うまでローカル環境をセットアップする必要はありません。
 
 </div>
 
+<a id="devenv"></a>
+<a id="prerequisites"></a>
 
-{@a devenv}
-{@a prerequisites}
 ## 前提条件
 
 Angularフレームワークを使用するには、次の知識が必要です。
@@ -26,32 +28,12 @@ Angularフレームワークを使用するには、次の知識が必要です�
 
 ローカルシステムにAngularをインストールするには、次のものが必要です:
 
-{@a nodejs}
+| Requirements                         | Details |
+|:---                                  |:---     |
+| Node.js <a id="nodejs"></a>          | Angular requires an [active LTS or maintenance LTS](https://nodejs.org/about/releases) version of Node.js. <div class="alert is-helpful">For information see the [version compatibility](guide/versions) guide.</div> For more information on installing Node.js, see [nodejs.org](https://nodejs.org "Nodejs.org"). If you are unsure what version of Node.js runs on your system, run `node -v` in a terminal window. |
+| npm package manager <a id="npm"></a> | Angular, the Angular CLI, and Angular applications depend on [npm packages](https://docs.npmjs.com/getting-started/what-is-npm) for many features and functions. To download and install npm packages, you need an npm package manager. This guide uses the [npm client](https://docs.npmjs.com/cli/install) command line interface, which is installed with `Node.js` by default. To check that you have the npm client installed, run `npm -v` in a terminal window.                                          |
 
-* **Node.js**
-
-  Angular は `Node.js` の[アクティブLTS、メンテナンスLTS](https://nodejs.org/about/releases/) バージョンを必要とします。
-
-  <div class="alert is-helpful">
-
-  特定バージョンの要件については、[package.json](https://unpkg.com/browse/@angular/core/package.json)ファイルの`engines`キーを参照してください。
-
-  </div>
-
-  Node.jsのインストールの詳細については、[nodejs.org](https://nodejs.org "Nodejs.org")を参照してください。
-  システムで実行のNode.jsのバージョンがわからない場合は、ターミナルウィンドウで`node -v`を実行しましょう。
-
-{@a npm}
-
-* **npmパッケージマネージャー**
-
-  AngularとAngular CLI、Angularアプリケーションは、多くの機能と関数を[npmパッケージ](https://docs.npmjs.com/getting-started/what-is-npm)に依存しています。
-  npmパッケージをダウンロードしてインストールするには、npmパッケージマネージャーが必要です。
-  このガイドでは、[npmクライアント](https://docs.npmjs.com/cli/install)のコマンドラインインターフェースを使用します。これはデフォルトで`Node.js`とともにインストールされます。
-  npmクライアントがインストールされていることを確認するには、ターミナルウィンドウで`npm -v`を実行します。
-
-
-{@a install-cli}
+<a id="install-cli"></a>
 
 ## Angular CLIをインストールする {@a install-the-angular-cli}
 

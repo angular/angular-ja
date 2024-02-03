@@ -489,4 +489,8 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 * ユーザーが選択したヒーローの詳細ビューに移動するために、ルーターリンクのパラメータを使用しました。
 * 複数のコンポーネント間で`HeroService`を共有しました。
 
+## Next steps
+
+*  [6. Get data from a server](tutorial/tour-of-heroes/toh-pt6)
+
 @reviewed 2022-02-28

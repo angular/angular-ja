@@ -20,7 +20,7 @@
     "node": "^18.16.0"
   },
   "devDependencies": {
-    "chokidar": "3.5.3",
+    "chokidar": "3.6.0",
     "prh-rules": "prh/rules",
     "textlint": "^13.4.1",
     "textlint-filter-rule-comments": "^1.2.2",

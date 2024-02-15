@@ -24,15 +24,15 @@
     <code-pane header="birthday-formatting.component.ts (class)" path="pipes/src/app/birthday-formatting.component.ts"></code-pane>
 </code-tabs>
 
-テンプレートでは、最初の表現では誕生日を_リテラルな_日付フォーマットのパラメーターである"shortDate"を用いて`DatePipe`に渡しています。出力は**04/15/88**です。
+テンプレートでは、最初の式では_リテラルの_日付フォーマットのパラメーターである"shortDate"を用いて誕生日を`DatePipe`に渡しています。出力は**04/15/88**です。
 
 2つ目の式では誕生日を_コンポーネントのプロパティーにバインドされた_日付フォーマットパラメーター(`format`)を用いてDatePipeに渡しています。
 
-"Toggle"ボタンをクリックすることで[沢山の事前に定義されたフォーマット](api/common/DatePipe#pre-defined-format-options)のうち2つである`'mediumDate'`と`'fullDate'`を切り替えることができます。出力は**April 15, 1988**か**Friday, April 15, 1988**です。
+"Toggle"ボタンをクリックすることで[たくさんの事前に定義されたフォーマット](api/common/DatePipe#pre-defined-format-options)のうち2つである`'mediumDate'`と`'fullDate'`を切り替えることができます。出力は**April 15, 1988**か**Friday, April 15, 1988**です。
 
 ページは指定されたフォーマットで誕生日を表示します。
 
-## 例: 2つのパイプを一緒に変更
+## 例: 2つのパイプを連結する
 
 １つのパイプの出力が次のパイプの入力になるように、「パイプ連鎖文法」を使うことで複数のパイプをつなぎます。
 
@@ -45,6 +45,6 @@
     <code-pane header="birthday-pipe-chaining.component.ts (class)" path="pipes/src/app/birthday-pipe-chaining.component.ts"></code-pane>
 </code-tabs>
 
-これが[スタンドアロンコポーネント](guide/standalone-components)であることを確認するためにクラスファイルに切り替えてください。すべての組み込みパイプの源である`@angular/common`から2つのパイプをインポートしています。
+これが[スタンドアロンコンポーネント](guide/standalone-components)であることを確認するためにクラスファイルに切り替えてください。すべての組み込みパイプの源である`@angular/common`から2つのパイプをインポートしています。
 
 @reviewed 2023-08-14

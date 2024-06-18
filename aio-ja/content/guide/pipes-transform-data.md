@@ -1,50 +1,50 @@
-# Transforming data with parameters and chained pipes
+# パラメーターと連鎖されたパイプによるデータの変換
 
-Some pipes have _optional_ parameters to fine-tune the pipe's output.
+パイプの中には出力を微調整するために_オプショナル_パラメーターをもつものがあります。
 
-For example, the [`CurrencyPipe`](api/common/CurrencyPipe 'API reference') accepts a country code as a parameter.
-To specify the parameter, follow the pipe name (`currency`) with a colon (`:`) and the parameter value (a country code).
+たとえば、[`CurrencyPipe`](api/common/CurrencyPipe 'API reference')はパラメータとして国コードを受け取ります。
+パラメーターを指定するために、パイプ名(`currency`)の後にコロン(`:`)を置き、続けてパラメーターの値(国コード)を書きます。
 
-The template expression `{{ amount | currency:'EUR' }}` displays the amount, prefixed with the Euros symbol (€).
+テンプレート式`{{ amount | currency:'EUR' }}`はamountを表示しますが、ユーロ記号(€)がプリフィクスになります。
 
-Some pipes accept multiple _optional_ parameters. Pass each parameter to the pipe, separated by colons.
+パイプの中には_オプショナル_パラメーターを複数受け取るものもあります。パイプにそれぞれのパラメーターを渡すのですが、コロンで区切ります。
 
-For example, `{{ amount | currency:'EUR':'Euros '}}` displays the amount with the label "Euros" (the second parameter) instead of the Euros symbol.
+たとえば、`{{ amount | currency:'EUR':'Euros '}}`はユーロ記号の代わりにラベル"Euros"(2つ目のパラメーター)でamountを表示します。
 
-Some pipes, such as [`SlicePipe`](/api/common/SlicePipe 'API reference for SlicePipe'), _require_ at least one parameter and may allow more _optional_ parameters.
+[`SlicePipe`](/api/common/SlicePipe 'API reference for SlicePipe')のように、パイプの中には少なくとも1つのパラメーターを_必須とする_と同時に_オプショナル_ パラメーターを受け取るものがあります。
 
-The expression `{{ anArray | slice:1:5 }}` displays a new string containing a subset of the elements starting with element `1` and ending with element `5`.
+式`{{ anArray | slice:1:5 }}`は要素`1`で始まり要素`5`で終わる部分集合を含む新しい文字列を表示します。
 
-## Example: Formatting a date
+## 例： 日付の書式を整える
 
-The following example demonstrates two ways to format a hero's birthdate with the [`DatePipe`](api/common/DatePipe 'API reference').
+次の例は[`DatePipe`](api/common/DatePipe 'API reference')でヒーローの誕生日の書記を整える方法をデモンストレーションします。
 
 <code-tabs>
     <code-pane header="birthday-formatting.component.html (template)" path="pipes/src/app/birthday-formatting.component.html"></code-pane>
     <code-pane header="birthday-formatting.component.ts (class)" path="pipes/src/app/birthday-formatting.component.ts"></code-pane>
 </code-tabs>
 
-In the template, the first expression passes the birthdate to the `DatePipe` _with a literal_ date format parameter, "shortDate". The output is **04/15/88**.
+テンプレートでは、最初の式では_リテラルの_日付フォーマットのパラメーターである"shortDate"を用いて誕生日を`DatePipe`に渡しています。出力は**04/15/88**です。
 
-The second expression passes the birthdate to the `DatePipe` with a date format parameter _bound to a component property_ (`format`).
+2つ目の式では誕生日を_コンポーネントのプロパティーにバインドされた_日付フォーマットパラメーター(`format`)を用いてDatePipeに渡しています。
 
-Clicking the "Toggle" button switches that property value between two of the [many possible pre-defined formats](api/common/DatePipe#pre-defined-format-options), `'mediumDate'` and `'fullDate'`. The output is either **April 15, 1988** or **Friday, April 15, 1988**.
+"Toggle"ボタンをクリックすることで[たくさんの事前に定義されたフォーマット](api/common/DatePipe#pre-defined-format-options)のうち2つである`'mediumDate'`と`'fullDate'`を切り替えることができます。出力は**April 15, 1988**か**Friday, April 15, 1988**です。
 
-The page displays the birthdate in the specified format.
+ページは指定されたフォーマットで誕生日を表示します。
 
-## Example: Chaining two pipes together
+## 例: 2つのパイプを連結する
 
-Connect multiple pipes, using "pipe chaining syntax", so that the output of one pipe becomes the input to the next.
+１つのパイプの出力が次のパイプの入力になるように、「パイプ連鎖文法」を使うことで複数のパイプをつなぎます。
 
-The following example passes the birthdate to the `DatePipe` and then forwards the result to the [`UpperCasePipe`](api/common/UpperCasePipe 'API reference') pipe, using "pipe chaining syntax".
+次の例は誕生日を`DatePipe`に渡してから[`UpperCasePipe`](api/common/UpperCasePipe 'API reference')パイプに「パイプ連鎖文法」を使うことでその結果を送ります。
 
-Once again, it demonstrates the `DatePipe` both _with_ and _without_ a format parameter. Note that both results (**APR 15, 1988** and **FRIDAY, APRIL 15, 1988**) are in uppercase.
+前回同様、フォーマットパラメーターを_伴う_および_伴わない_場合の両者において`DatePipe`のデモンストレーションをします。両者の結果(**APR 15, 1988**および**FRIDAY, APRIL 15, 1988**)は大文字になることを注意してください。
 
 <code-tabs>
     <code-pane header="birthday-pipe-chaining.component.html (template)" path="pipes/src/app/birthday-pipe-chaining.component.html"></code-pane>
     <code-pane header="birthday-pipe-chaining.component.ts (class)" path="pipes/src/app/birthday-pipe-chaining.component.ts"></code-pane>
 </code-tabs>
 
-Switch to the class file to see that this is a [standalone component](guide/standalone-components); it imports the two pipes from `@angular/common`, the source of all built-in pipes.
+これが[スタンドアロンコンポーネント](guide/standalone-components)であることを確認するためにクラスファイルに切り替えてください。すべての組み込みパイプの源である`@angular/common`から2つのパイプをインポートしています。
 
 @reviewed 2023-08-14

@@ -18,21 +18,21 @@ Angular のプロパティバインディングは、HTML 要素やディレク�
 
 プロパティバインディングは、コンポーネントのプロパティからターゲット要素のプロパティへ、単方向に値を設定します。
 
+ターゲット要素のプロパティを読み取ったり、そのメソッドを呼び出したりするには、[ViewChild](api/core/ViewChild)と[ContentChild](api/core/ContentChild)の API リファレンスを参照してください。
+
+## プロパティのバインディング
+
 <div class="alert is-helpful">
 
 イベントをリッスンする方法については、[イベントバインディング](guide/event-binding)を参照してください。
 
 </div>
 
-ターゲット要素のプロパティを読み取ったり、そのメソッドを呼び出したりするには、[ViewChild](api/core/ViewChild)と[ContentChild](api/core/ContentChild)の API リファレンスを参照してください。
-
-## プロパティのバインディング
-
 要素のプロパティにバインドするには、ターゲットプロパティを角括弧`[]`で囲みます。
 
 ターゲットプロパティは、値を割り当てたい DOM プロパティです。
 
-ターゲットプロパティを`<img>`要素の`src`プロパティとして、値を割り当てるには、次のコードを使います。
+`<img>`要素の`src`プロパティをターゲットにして値を割り当てるには、次のコードを使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
@@ -48,11 +48,9 @@ Angular のプロパティバインディングは、HTML 要素やディレク�
 
 角括弧がない場合、Angular は右辺を文字列リテラルとして扱い、その静的な値をプロパティに設定します。
 
-文字列をプロパティに割り当てるには、次のコードを使います。
+文字列をコンポーネントのプロパティ (たとえば`ItemDetailComponent`の`childItem`) に割り当てるには、同じ括弧の記法を使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="no-evaluation" header="src/app.component.html"></code-example>
-
-角括弧をつけないと、`parentItem`の値ではなく、`parentItem`という文字列が設定されます。
 
 ## 要素のプロパティをコンポーネントのプロパティ値に設定する
 

@@ -1,111 +1,111 @@
-# Property binding
+# プロパティバインディング
 
-Property binding in Angular helps you set values for properties of HTML elements or directives. Use property binding to do things such as toggle button features, set paths programmatically, and share values between components.
-
-<div class="alert is-helpful">
-
-See the <live-example></live-example> for a working example containing the code snippets in this guide.
-
-</div>
-
-## Prerequisites
-
-* [Basics of components](guide/architecture-components)
-* [Basics of templates](guide/glossary#template)
-* [Binding syntax](guide/binding-syntax)
-
-## Understanding the flow of data
-
-Property binding moves a value in one direction, from a component's property into a target element property.
-
-To read a target element property or call one of its methods, see the API reference for [ViewChild](api/core/ViewChild) and [ContentChild](api/core/ContentChild).
-
-## Binding to a property
+Angular のプロパティバインディングは、HTML 要素やディレクティブのプロパティに値を設定するのに役立ちます。プロパティバインディングを使用すると、ボタン機能の切り替え、プログラムによるパスの設定、コンポーネント間の値の共有などを行うことができます。
 
 <div class="alert is-helpful">
 
-For information on listening for events, see [Event binding](guide/event-binding).
+このガイドのコードスニペットを含む動作例については、<live-example></live-example>を参照してください。
 
 </div>
 
-To bind to an element's property, enclose it in square brackets, `[]`, which identifies the property as a target property.
+## 前提知識
 
-A target property is the DOM property to which you want to assign a value.
+- [コンポーネントの基礎知識](guide/architecture-components)
+- [テンプレートの基礎知識](guide/glossary#template)
+- [バインディング構文](guide/binding-syntax)
 
-To assign a value to a target property for the image element's `src` property, type the following code:
+## データの流れを理解する
+
+プロパティバインディングは、コンポーネントのプロパティからターゲット要素のプロパティへ、単方向に値を設定します。
+
+ターゲット要素のプロパティを読み取ったり、そのメソッドを呼び出したりするには、[ViewChild](api/core/ViewChild)と[ContentChild](api/core/ContentChild)の API リファレンスを参照してください。
+
+## プロパティのバインディング
+
+<div class="alert is-helpful">
+
+イベントをリッスンする方法については、[イベントバインディング](guide/event-binding)を参照してください。
+
+</div>
+
+要素のプロパティにバインドするには、ターゲットプロパティを角括弧`[]`で囲みます。
+
+ターゲットプロパティは、値を割り当てたい DOM プロパティです。
+
+`<img>`要素の`src`プロパティをターゲットにして値を割り当てるには、次のコードを使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
-In most cases, the target name is the name of a property, even when it appears to be the name of an attribute.
+ほとんどの場合、ターゲット名はプロパティの名前です。属性の名前のように見える場合でも、プロパティの名前です。
 
-In this example, `src` is the name of the `<img>` element property.
-
-<!-- vale Angular.Google_WordListSuggestions = NO -->
-
-The brackets, `[]`, cause Angular to evaluate the right-hand side of the assignment as a dynamic expression.
+この例では、`src`は`<img>`要素のプロパティ名です。
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 
-Without the brackets, Angular treats the right-hand side as a string literal and sets the property to that static value.
+角括弧`[]`をつけると、Angular は代入の右辺を動的な式として評価します。
 
-To assign a string to a component's property (such as the `childItem` of the `ItemDetailComponent`), you use the same bracket assignment notation:
+<!-- vale Angular.Google_WordListSuggestions = NO -->
+
+角括弧がない場合、Angular は右辺を文字列リテラルとして扱い、その静的な値をプロパティに設定します。
+
+文字列をコンポーネントのプロパティ (たとえば`ItemDetailComponent`の`childItem`) に割り当てるには、同じ括弧の記法を使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="no-evaluation" header="src/app.component.html"></code-example>
 
-## Setting an element property to a component property value
+## 要素のプロパティをコンポーネントのプロパティ値に設定する
 
-To bind the `src` property of an `<img>` element to a component's property, place `src` in square brackets followed by an equal sign and then the property.
+`<img>`要素の`src`プロパティをコンポーネントのプロパティにバインドするには、角括弧の中に`src`を入力し、イコール記号に続けてプロパティを入力します。
 
-Using the property `itemImageUrl`, type the following code:
+`itemImageUrl`プロパティを使って、次のコードを入力します。
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
-Declare the `itemImageUrl` property in the class, in this case `AppComponent`.
+コンポーネントクラス、この場合は`AppComponent`クラスで`itemImageUrl`プロパティを宣言します。
 
 <code-example path="property-binding/src/app/app.component.ts" region="item-image" header="src/app/app.component.ts"></code-example>
 
 {@a colspan}
 
-#### `colspan` and `colSpan`
+#### `colspan`と`colSpan`
 
-A common point of confusion is between the attribute, `colspan`, and the property, `colSpan`.  Notice that these two names differ by only a single letter.
+属性`colspan`とプロパティ`colSpan`は別のものです。名前が 1 文字だけ異なることに留意してください。
 
-To use property binding using `colSpan`, type the following:
+`colSpan`を使ってプロパティを設定するには、次のコードを使います。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
 
-To disable a button while the component's `isUnchanged` property is `true`, type the following:
+コンポーネントの`isUnchanged`プロパティが`true`の間、ボタンを無効にするには、次のコードを使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
 
-To set a property of a directive, type the following:
+ディレクティブのプロパティを設定するには、次のコードを使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
 
-To set the model property of a custom component for parent and child components to communicate with each other, type the following:
+親子コンポーネント間で通信するために、カスタムコンポーネントのモデルプロパティを設定するには、次のコードを使います。
 
 <code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
 
-## Toggling button features
+## ボタンの状態を切り替える
 
 <!-- vale Angular.Google_WordListSuggestions = NO -->
 
-To use a Boolean value to disable a button's features, bind the `disabled` DOM attribute to a Boolean property in the class.
+ボタンを無効化するには、`disabled`DOM 属性をコンポーネントクラスの Boolean 型のプロパティにバインドします。
 
 <!-- vale Angular.Google_WordListSuggestions = YES -->
 
 <code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
 
-Because the value of the property `isUnchanged` is `true` in the `AppComponent`, Angular disables the button.
+`AppComponent`クラスで定義されている`isUnchanged`プロパティが`true`なので、Angular はボタンを無効にします。
 
 <code-example path="property-binding/src/app/app.component.ts" region="boolean" header="src/app/app.component.ts"></code-example>
 
-## What's next
+## 次のステップ
 
-* [Property binding best practices](guide/property-binding-best-practices)
-* [Event binding](guide/event-binding)
-* [Text Interpolation](guide/interpolation)
-* [Class & Style Binding](guide/class-binding)
-* [Attribute Binding](guide/attribute-binding)
+- [プロパティバインディング ベストプラクティス](guide/property-binding-best-practices)
+- [イベントバインディング](guide/event-binding)
+- [補間による値の表示](guide/interpolation)
+- [クラスとスタイルのバインディング](guide/class-binding)
+- [属性バインディング](guide/attribute-binding)
 
 @reviewed 2023-09-01

@@ -22,7 +22,7 @@
   "devDependencies": {
     "chokidar": "3.6.0",
     "prh-rules": "prh/rules",
-    "textlint": "^13.4.1",
+    "textlint": "^14.0.4",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-prh": "^6.0.0",
     "zx": "8.1.2"

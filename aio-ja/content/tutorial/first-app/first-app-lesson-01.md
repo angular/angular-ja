@@ -62,7 +62,7 @@ IDE の **Explorer** ペインで:
             このアプリケーションでは、スタイルは別のファイルに、コンポーネントのコードと HTML テンプレートはこのファイルに入っています。
         1.  `app.component.css` はこのコンポーネントのスタイルシートです。
         1.  このディレクトリに新しいコンポーネントが追加されます。
-    1.  ファイルエクスプローラーで、,アプリケーションで使用する画像を含む画像ディレクトリ (`/assets`) を見つけます。
+    1.  ファイルエクスプローラーで、アプリケーションで使用する画像を含む画像ディレクトリ (`/assets`) を見つけます。
     1.  ファイルエクスプローラーで、Angular アプリケーションのビルドや実行のために必要なサポートファイルを見つけますが、これらは通常操作するファイルではありません。
         1.  `.angular` は Angular アプリケーションをビルドするために必要なファイルがあります。
         1.  `.e2e` はアプリケーションのテストに使用されるファイルがあります。
@@ -87,7 +87,7 @@ IDE で:
     そして、`index.html` に加えた変更を保存します。
 
 1.  次に `first-app/src/app/app.component.ts` を開きます。
-1.  `app.component.ts` の `@Component` 定義で, `template` 行を次のコードに置き換えて app コンポーネントのテキストを更新します。
+1.  `app.component.ts` の `@Component` 定義で、`template` 行を次のコードに置き換えて app コンポーネントのテキストを更新します。
 
     <code-example header="Replace in src/app/app.component.ts" path="first-app-lesson-01/src/app/app.component.ts" region="app-comp-template"></code-example>
 

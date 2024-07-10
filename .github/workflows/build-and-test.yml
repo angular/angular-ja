@@ -17,7 +17,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
+          node-version-file: '.node-version'
           cache: yarn
       - run: yarn install
       - run: yarn test
@@ -29,7 +29,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
+          node-version-file: '.node-version'
           cache: yarn
       - run: yarn install
       - run: yarn build
@@ -54,7 +54,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
+          node-version-file: '.node-version'
           cache: yarn
       - run: yarn install
       - run: yarn build

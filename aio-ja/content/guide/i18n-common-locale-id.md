@@ -7,7 +7,7 @@ Angularは、テキスト文字列を国際化するのに必要な正しいロ�
 <header>Unicode locale ID</header>
 
 *   ロケールIDは [Unicode Common Locale Data Repository (CLDR) core specification][UnicodeCldrDevelopmentCoreSpecification]に準拠する。
-    ロケールIDの詳細については、[Unicode言語とロケール識別子][UnicodeCldrDevelopmentCoreSpecificationHVgyyng33o798]を参照してください。
+    ロケールIDの詳細については、[Unicode言語とロケール識別子][UnicodeCldrDevelopmentCoreSpecificationLocaleIDs]を参照してください。
 
 *   CLDRとAngularは、ロケールIDのベースとして[BCP 47 タグ][RfcEditorInfoBcp47]を使用します。
 
@@ -77,8 +77,8 @@ Angular CLIを使用して、コンポーネントのテンプレートとコー
 
 [RfcEditorInfoBcp47]: https://www.rfc-editor.org/info/bcp47 "BCP 47 | RFC Editor"
 
-[UnicodeCldrDevelopmentCoreSpecification]: https://cldr.unicode.org/development/core-specification "Core Specification | Unicode CLDR Project"
-[UnicodeCldrDevelopmentCoreSpecificationHVgyyng33o798]: https://cldr.unicode.org/development/core-specification#h.vgyyng33o798 "Unicode Language and Locale Identifiers - Core Specification | Unicode CLDR Project"
+[UnicodeCldrDevelopmentCoreSpecification]: https://cldr.unicode.org/index/cldr-spec "Core Specification | Unicode CLDR Project"
+[UnicodeCldrDevelopmentCoreSpecificationLocaleID]: https://cldr.unicode.org/index/cldr-spec/picking-the-right-language-code "Unicode Language and Locale Identifiers - Core Specification | Unicode CLDR Project"
 
 <!-- end links -->
 

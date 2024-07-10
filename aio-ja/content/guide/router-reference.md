@@ -21,7 +21,7 @@ import { provideRouter } from '@angular/router';
 
 </div>
 
-{@a basics-config}
+<a id="basics-config"></a>
 
 ### 設定 {@a configuration}
 
@@ -52,11 +52,9 @@ export const appConfig: ApplicationConfig = {
 }
 ```
 
-<code-example path="router/src/app/app.module.0.ts" header="src/app/app.module.ts (excerpt)"></code-example>
+<a id="example-config"></a>
 
-{@a example-config}
-
-The `routes` array of routes describes how to navigate.
+The `appRoutes` array of routes describes how to navigate.
 Pass it to the `provideRouter` method in the `ApplicationConfig` `providers` to configure the router.
 
 各`Route`はURLの`path`をコンポーネントにマップしています。

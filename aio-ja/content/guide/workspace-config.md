@@ -230,12 +230,11 @@ Angular CLI comes with two build configurations: `production` and `development`.
 | `budgets`                  | 出力が閾値のサイズに達したり越えたりしたときに、警告やエラーを報告するようにビルダを設定することができます。[サイズ予算を設定する](guide/build#configure-size-budgets) を参照してください (`test` セクションにはありません)。 |
 | `fileReplacements`         | オブジェクトとそのコンパイル時間を書き換えを含むオブジェクトです。詳しくは、[ターゲット固有のファイル置換の構成](guide/build#configure-target-specific-file-replacements)を参照してください。 |
 `index`                    | Configures the generation of the application's HTML index. See more in [Index configuration](#index-config). \(Only available in `browser` section.\)                                                                                                         |                                                                                                        |                                                                                                      
-
 <a id="complex-config"></a>
 
 ## 複雑な設定値
 
-オプションの `assets`、`index`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
+オプションの `assets`、`index`、`outputPath`、`styles`、および `scripts` には、単純なパス文字列値、または特定のフィールドをもつオブジェクト値を指定できます。
 `sourceMap` および `optimization` オプションは、コマンドフラグを使用して単純なブール値に設定できますが、設定ファイルを使用して複雑な値を指定することもできます。
 
 次のセクションでは、これらの複雑な値が各ケースでどのように使用されるかについて詳しく説明します。
@@ -406,7 +405,8 @@ Sassでは、コンポーネントスタイルとグローバルスタイルの�
 
 ### Optimization configuration
 
-The `optimization` browser builder option can be either a Boolean or an Object for more fine-tune configuration. This option enables various optimizations of the build output, including:
+The `optimization` option can be either a Boolean or an Object for more fine-tune configuration.
+This option enables various optimizations of the build output, including:
 
 <!-- vale Angular.Angular_Spelling = NO-->
 
@@ -434,6 +434,7 @@ Several options can be used to fine-tune the optimization of an application.
 |:---              |:---                                                                                                                      |:---        |:---           |
 | `minify`         | Minify CSS definitions by removing extraneous whitespace and comments, merging identifiers, and minimizing values.        | `boolean`  | `true`        |
 | `inlineCritical` | Extract and inline critical CSS definitions to improve [First Contentful Paint](https://web.dev/first-contentful-paint). | `boolean`  | `true`        |
+| `removeSpecialComments` | Remove comments in global CSS that contains `@license` or `@preserve` or that starts with `//!` or `/*!`.         | `boolean`  | `true`        |
 
 <div class="alert is-helpful">
 
@@ -517,6 +518,18 @@ When supplying the value as a String the filename of the specified path will be 
 | `input`  | The path of a file to use for the application's generated HTML index.                                                                                                            | `string`   |               |
 | `output` | The output path of the application's generated HTML index file. The full provided path will be used and will be considered relative to the application's configured output path. | `string`   | `index.html`  |
 
+### Output path configuration
+
+The `outputPath` option can be either a String which will be used as the `base` value or an Object for more fine-tune configuration.
+
+Several options can be used to fine-tune the output structure of an application.
+
+| Options   | Details                                                                            | Value type | Default value |
+|:---       |:---                                                                                |:---        |:---           |
+| `base`    | Specify the output path relative to workspace root.                                | `string`   |               |
+| `browser` | The output directory name for your browser build is within the base output path. This can be safely served to users.       | `string`   | `browser`     |
+| `server`  | The output directory name of your server build within the output path base.        | `string`   | `server`      |
+| `media`   | The output directory name for your media files located within the output browser directory. These media files are commonly referred to as resources in CSS files. | `string`   | `media`       |
 
 <!-- links -->
 

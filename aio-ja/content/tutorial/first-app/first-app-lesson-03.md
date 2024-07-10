@@ -63,7 +63,7 @@ IDE の **編集** ペインで
 
 このステップでは、`HousingLocationComponent` にあらかじめ書かれているスタイルをコピーして、アプリケーションが正しくレンダリングされるようにします。
 
-1. `src/app/housing-location/housing-location.css` を開き、次のスタイルを貼り付けます。
+1. `src/app/housing-location/housing-location.component.css` を開き、次のスタイルを貼り付けます。
 
     <code-example header="Add CSS styles to housing location to the component in src/app/housing-location/housing-location.component.css" path="first-app-lesson-03/src/app/housing-location/housing-location.component.css"></code-example>
 

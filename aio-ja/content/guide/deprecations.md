@@ -13,7 +13,7 @@ comprehensive details on deprecations and breaking changes.
 <div class="alert is-helpful">
 
 Features and APIs that were deprecated in v6 or earlier are candidates for removal in version 9 or any later major version.
-For information about Angular's deprecation and removal practices, see [Angular Release Practices](guide/releases#deprecation-practices "Angular Release Practices: Deprecation practices").
+For information about Angular's deprecation and removal practices, see [Angular Release Practices](guide/releases#deprecation-policy "Angular Release Practices: Deprecation policy").
 
 For step-by-step instructions on how to update to the latest Angular release, use the interactive update guide at [update.angular.io](https://update.angular.io).
 
@@ -372,7 +372,12 @@ be converted to functions by instead using `inject` to get dependencies.
 
 For testing a function `canActivate` guard, using `TestBed` and `TestBed.runInInjectionContext` is recommended.
 Test mocks and stubs can be provided through DI with `{provide: X, useValue: StubX}`.
-Functional guards can also be written in a way that's either testable with
+
+You can also continue to use your class-based guards and pass in the mock dependencies.
+When used in the route definition, you can map these guards to functions using the helper
+functions in the router package `mapToCanMatch`, `mapToCanActivate`, etc.
+
+Finally, functional guards can be written in a way that's either testable with
 `runInInjectionContext` or by passing mock implementations of dependencies.
 For example:
 
@@ -385,7 +390,7 @@ export function myGuardWithMockableDeps(
 
 const route = {
   path: 'admin',
-  canActivate: [myGuardWithMockableDeps]
+  canActivate: [() => myGuardWithMockableDeps()]
 }
 ```
 

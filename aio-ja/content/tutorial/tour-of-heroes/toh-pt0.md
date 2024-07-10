@@ -1,6 +1,7 @@
 # 新規プロジェクトの作成
 
-`ng new`コマンドを使用して、**Tour of Heroes**のアプリケーションの作成を開始します。
+`ng new`コマンドを使用して、**Tour of Heroes**のアプリケーションの作成を開始します。 <br>
+<b>Please note:</b> Starting in Angular version 17 new projects will be [standalone by default](https://angular.io/guide/standalone-components). To create a project with `NgModule` use the option `ng new --no-standalone`
 
 チュートリアルのこの部分では、次のことを行います。
 

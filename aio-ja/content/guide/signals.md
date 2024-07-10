@@ -37,7 +37,7 @@ count.update(value => value + 1);
 
 書き込み可能Signalは `WritableSignal` という型を持っています。
 
-### 算出Signal
+### 算出Signal {@a computed-signals}
 
 **算出Signal**は、他のSignalから派生する値を持ちます。`computed` を使用して、生成関数を指定して定義します。
 

@@ -355,17 +355,10 @@ Angular extends TypeScript with domain-specific languages for a number of domain
 
 同じ結果でより簡単な方法を提供する[カスタム要素][AioGuideGlossaryCustomElement]も参照してください。
 
+## 即時ロード {@a eager-loading}
 
-{@a E}
-
-{@a eager-loading}
-
-## 即時ロード
-
-起動時にロードされるNgModuleやコンポーネントは、
-実行時にロード(遅延ロード)されるものと区別するために、即時ロードと呼ばれます。
-[遅延ロード](#lazy-load)を参照してください。
-
+起動時にロードされるNgModuleやコンポーネントは、実行時にロード(遅延ロード)されるものと区別するために、即時ロードと呼ばれます。
+[遅延ロード][AioGuideGlossaryLazyLoading]を参照してください。
 
 {@a ecma}
 
@@ -511,28 +504,16 @@ It is now the only supported engine, so everything uses Ivy.
 
 [ECMAScript](#ecma)と[TypeScript](#typescript)を参照しましょう。
 
-
-{@a jit}
-
+<a id="jit"></a>
 
 ## 実行時(JIT)コンパイル {@a just-in-time-jit-compilation}
 
-Angularの実行時(JIT)コンパイラは、ブートストラップの一部として、
-実行時にAngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
+Angularの実行時(JIT)コンパイラは、ブートストラップの一部として、実行時にAngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
 
-JITコンパイルは、Angularの`ng build`と`ng serve`CLIコマンドを実行するときのデフォルトであり(AOTコンパイルとは対照的に)、開発時のよい選択です。
-JITモードは本番環境での使用は強くお勧めしません。
-ブートストラップのパフォーマンスを妨げる大きなアプリケーションペイロードをもたらすためです。
+JITはAngular 8までデフォルトのコンパイルモードでした（詳しくは[Choosing a compiler](https://angular.io/guide/aot-compiler#choosing-a-compiler)をご覧ください）。
+JITモードは本番環境での使用は強くお勧めしません。ブートストラップのパフォーマンスを妨げる大きなアプリケーションペイロードをもたらすためです。
 
 [事前(AOT)コンパイル](#aot)と比較しましょう。
-
-
-{@a K}
-
-
-{@a L}
-
-{@a lazy-load}
 
 ## 遅延ロード {@a lazy-loading}
 
@@ -760,7 +741,7 @@ Angularアプリケーション内の状態と[ビュー](#view)間のナビゲ�
 
 `Router`モジュールは[NgModule](#ngmodule)であり、アプリケーションビューをナビゲートするために必要なサービスプロバイダーとディレクティブを提供します。[ルーティングコンポーネント](#routing-component)は`Router`モジュールをインポートするコンポーネントです。そのテンプレートには`RouterOutlet`要素が含まれており、ルーターによって生成されたビューをそこに表示できます。
 
-ルーターはページ間のナビゲーションではなく、シングルページ上のビュー間のナビゲーションを定義します。URLのようなリンクを解釈して、どのビューを作成または破棄するか、どのコンポーネントをロードまたはアンロードするかを決定します。これにより、あなたのAngularアプリケーションで[遅延ロード](#lazy-load)を利用できます。
+ルーターはページ間のナビゲーションではなく、シングルページ上のビュー間のナビゲーションを定義します。URLのようなリンクを解釈して、どのビューを作成または破棄するか、どのコンポーネントをロードまたはアンロードするかを決定します。これにより、あなたのAngularアプリケーションで[遅延ロード][AioGuideGlossaryLazyLoading]を利用できます。
 
 詳しく学ぶには、[ルーティングとナビゲーション](guide/router)を参照してください。
 

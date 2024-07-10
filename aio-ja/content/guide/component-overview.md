@@ -174,6 +174,19 @@ Angular コンポーネントは、`template` または `templateUrl` で定義�
 
 `styles` プロパティは、CSS ルールの宣言を含む文字列の配列を取ります。
 
+### 手動でコンポーネントを作成する
+
+お勧めは、`@Component` デコレーターの `standalone: true` フラグを使ってコンポーネントをスタンドアロンにすることです。
+
+<code-example path="component-overview/src/app/component-overview/component-overview.component.4.ts" region="standalonedeclaration"></code-example>
+
+しかし、`NgModule` ベースのアプリケーションを扱う場合は、コンポーネントを適切な `@NgModule` に追加する必要があります。
+コンポーネントをモジュールに組み込むには、`@NgModule` デコレーターの宣言配列にコンポーネントを追加します。
+
+<code-example path="component-overview/src/app/component-overview/component-overview.module.ts" region="componentmoduledeclaration"></code-example>
+
+これらの手順が完了すれば、Angularコンポーネントをアプリケーションに統合して使用する準備が整います。
+
 
 ## 次のステップ {@a next-steps}
 

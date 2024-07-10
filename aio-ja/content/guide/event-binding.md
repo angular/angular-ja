@@ -55,13 +55,13 @@ Angularのバインディング構文を使って、キーボードイベント�
 
 キーのコンビネーションは `.`（ピリオド）で区切ることができます。たとえば、`keydown.enter`とすると、`enter`キーにイベントをバインドすることができます。また、`shift`、`alt`、`control`などの修飾キーや、Macの`command`キーも使用することができます。次の例は、キーボードイベントを `keydown.shift.t` にバインドする方法を示しています。
 
-   ```typescript
+   ```html
    <input (keydown.shift.t)="onKeydown($event)" />
    ```
 
 オペレーティングシステムによっては、期待したキーコンビネーションではなく、特殊な文字が作成される場合があります。たとえばMacOSでは、optionキーとshiftキーを一緒に使うと、特殊な文字が生成されます。macOSで `keydown.shift.alt.t` にバインドすると、この組み合わせでは `t` の代わりに `ˇ` という文字が生成されますが、これはバインドと一致しないためイベントハンドラーは起動しません。macOSで `keydown.shift.alt.t` にバインドするには、`code` キーボードイベントフィールドを使用して、この例に示す `keydown.code.shiftleft.altleft.keyt` のように正しい振る舞いを実現します。
    
-   ```typescript
+   ```html
    <input (keydown.code.shiftleft.altleft.keyt)="onKeydown($event)" />
    ```
 

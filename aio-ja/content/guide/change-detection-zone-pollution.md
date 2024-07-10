@@ -21,7 +21,7 @@ Angular DevTools を使用すると、不要な変更検知の呼び出しを見
 
 ## NgZone の外でタスクを実行
 
-このような場合、[NgZone](/guide/zone) を使って、特定のコードによってスケジュールされたタスクの変更検知を呼び出さないよう Angular に指示することができます。
+このような場合、[NgZone](/api/core/NgZone) を使って、特定のコードによってスケジュールされたタスクの変更検知を呼び出さないよう Angular に指示することができます。
 
 ```ts
 import { Component, NgZone, OnInit } from '@angular/core';

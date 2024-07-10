@@ -16,9 +16,6 @@
     "update-origin": "zx tools/update-origin.mjs"
   },
   "packageManager": "yarn@1.22.10",
-  "engines": {
-    "node": "20"
-  },
   "devDependencies": {
     "chokidar": "3.6.0",
     "prh-rules": "prh/rules",

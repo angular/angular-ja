@@ -358,7 +358,7 @@ Angular extends TypeScript with domain-specific languages for a number of domain
 ## 即時ロード {@a eager-loading}
 
 起動時にロードされるNgModuleやコンポーネントは、実行時にロード(遅延ロード)されるものと区別するために、即時ロードと呼ばれます。
-[遅延ロード](AioGuideGlossaryLazyLoading)を参照してください。
+[遅延ロード][AioGuideGlossaryLazyLoading]を参照してください。
 
 {@a ecma}
 
@@ -741,7 +741,7 @@ Angularアプリケーション内の状態と[ビュー](#view)間のナビゲ�
 
 `Router`モジュールは[NgModule](#ngmodule)であり、アプリケーションビューをナビゲートするために必要なサービスプロバイダーとディレクティブを提供します。[ルーティングコンポーネント](#routing-component)は`Router`モジュールをインポートするコンポーネントです。そのテンプレートには`RouterOutlet`要素が含まれており、ルーターによって生成されたビューをそこに表示できます。
 
-ルーターはページ間のナビゲーションではなく、シングルページ上のビュー間のナビゲーションを定義します。URLのようなリンクを解釈して、どのビューを作成または破棄するか、どのコンポーネントをロードまたはアンロードするかを決定します。これにより、あなたのAngularアプリケーションで[遅延ロード](AioGuideGlossaryLazyLoading)を利用できます。
+ルーターはページ間のナビゲーションではなく、シングルページ上のビュー間のナビゲーションを定義します。URLのようなリンクを解釈して、どのビューを作成または破棄するか、どのコンポーネントをロードまたはアンロードするかを決定します。これにより、あなたのAngularアプリケーションで[遅延ロード][AioGuideGlossaryLazyLoading]を利用できます。
 
 詳しく学ぶには、[ルーティングとナビゲーション](guide/router)を参照してください。
 

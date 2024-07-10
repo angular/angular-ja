@@ -17,7 +17,7 @@
   },
   "packageManager": "yarn@1.22.10",
   "engines": {
-    "node": "^18.16.0"
+    "node": "20"
   },
   "devDependencies": {
     "chokidar": "3.6.0",

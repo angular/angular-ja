@@ -23,10 +23,10 @@ index f1c44bc30b..131f976a08 100644
      this.ref('path');
      this.field('topics', {boost: 15});
 diff --git a/aio/tools/transforms/angular-base-package/processors/generateKeywords.js b/aio/tools/transforms/angular-base-package/processors/generateKeywords.js
-index dfe430c705..888c07a3f2 100644
+index cc43bc7190..c293046a13 100644
 --- a/aio/tools/transforms/angular-base-package/processors/generateKeywords.js
 +++ b/aio/tools/transforms/angular-base-package/processors/generateKeywords.js
-@@ -126,11 +126,11 @@ module.exports = function generateKeywordsProcessor(log) {
+@@ -128,11 +128,11 @@ module.exports = function generateKeywordsProcessor(log) {
            token = token.trim();
  
            // Trim unwanted trivia characters from the start and end of the token
@@ -49,21 +49,21 @@ index 7fdc4d6de6..56615939ed 100644
 +    "lunr-languages": "1.10.0",
      "lunr": "^2.3.9",
 diff --git a/aio/yarn.lock b/aio/yarn.lock
-index 2125832bcf..3cd0bc7c11 100644
+index 2e5e277227..f51db2eb3a 100644
 --- a/aio/yarn.lock
 +++ b/aio/yarn.lock
-@@ -9995,6 +9995,11 @@ lru_map@^0.3.3:
-   resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.3.3.tgz#b5c8351b9464cbd750335a79650a0ec0e56118dd"
-   integrity sha512-Pn9cox5CsMYngeDbmChANltQl+5pi6XmTrraMSzhPmMBbmgcxmqWry0U3PGapCU1yB4/LqCcom7qhHZiF/jGfQ==
+@@ -10881,6 +10881,11 @@ lunr@^2.3.9:
+   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
+   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
  
 +lunr-languages@1.10.0:
 +  version "1.10.0"
 +  resolved "https://registry.yarnpkg.com/lunr-languages/-/lunr-languages-1.10.0.tgz#2afe9fff47b435d9bc74bd372fb923dbf8ee1990"
 +  integrity sha512-BBjKKcwrieJlzwwc9M5H/MRXGJ2qyOSDx/NXYiwkuKjiLOOoouh0WsDzeqcLoUWcX31y7i8sb8IgsZKObdUCkw==
 +
- lunr@^2.3.9:
-   version "2.3.9"
-   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
+ magic-string@0.30.5:
+   version "0.30.5"
+   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.5.tgz#1994d980bd1c8835dc6e78db7cbd4ae4f24746f9"
 diff --git a/aio/BUILD.bazel b/aio/BUILD.bazel
 index d67502afae..32972bf625 100644
 --- a/aio/BUILD.bazel

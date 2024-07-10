@@ -255,7 +255,7 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
 
 このセクションでは、`ShippingComponent`を変更して、`shipping.json`ファイルからHTTP経由で配送データを取得する方法を説明します。
 
-1.  `shipping.component.ts` で、`CartService` をインポートする。
+1.  `shipping.component.ts` で、`OnInit`と`Observable`、`CartService` をインポートする。
 
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="imports"></code-example>
 

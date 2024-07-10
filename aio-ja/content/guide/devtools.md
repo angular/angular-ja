@@ -105,6 +105,17 @@ Angular DevTools は、プロパティとメタデータをコンポーネント
 
 </div>
 
+### コンポーネントに注入されるサービスを見る
+Angular 17から、コンポーネントやディレクティブコンテキストに注入されるサービスはプロパティビューアで見ることができるようになりました。特定のコンポーネントを選択した後、そのコンポーネントに依存性の注入がある場合、*"Injected Services"* バーの下に表示されます。
+
+サービスをクリックすると、そのサービスを解決するためにAngularが使用した解決パスを視覚化する拡張パネルが表示されます。
+
+<div class="lightbox">
+
+<img alt="A screenshot of Angular DevTools components tab showing injected services for a selected component." src="generated/images/guide/devtools/di-component-deps.png">
+
+</div>
+
 ### プロパティ値を更新する
 
 ブラウザの DevTools と同様に、プロパティビューを使用すると、入力、出力、または別のプロパティの値を編集できます。
@@ -242,10 +253,43 @@ Angular が変更を検知したコンポーネントをプレビューするに
 
 </div>
 
+## Inspect your injectors
+
+*Note: The Injector Tree is available for Angular Applications built with version 17 or higher.*
+
+### View the injector hierarchy of your application
+
+The **Injector Tree** tab lets you explore the structure of the Injectors configured in your application. Here you will see two trees representing the [injector hiearchy](guide/hierarchical-dependency-injection) of your application. One tree is your environment hierarchy, the other is your element hierachy.
+
+<div class="lightbox">
+
+<img alt="A screenshot showing the injector tree tab in Angular Devtools visualizing the injector graph for an example application." src="generated/images/guide/devtools/di-injector-tree.png">
+
+</div>
+
+### Visualize resolution paths
+
+When a specific injector is selected, the path that Angular's depenedency injection algorithm traverses from that injector to the root is highlighted. For element injectors, this includes highlighting the environment injectors that the dependency injection algorithm jumps to when a dependency cannot be resolved in the element hierarchy. See [resolution rules](guide/hierarchical-dependency-injection#resolution-rules) for more details about how Angular resolves resolution paths.
+
+<div class="lightbox">
+
+<img alt="A screenshot showing how the injector tree visualize highlights resolution paths when an injector is selected." src="generated/images/guide/devtools/di-injector-tree-selected.png">
+
+</div>
+
+### View injector providers
+
+Clicking an injector that has configured providers will display those providers in a list on the right of the injector tree view. Here you can view the provided token and it's type.
+
+<div class="lightbox">
+
+<img alt="A screenshot showing how providers are made visible when an injector is selected." src="generated/images/guide/devtools/di-injector-tree-providers.png">
+
+</div>
 <!-- links -->
 
 <!-- external links -->
 
 <!-- end links -->
 
-@reviewed 2022-02-28
+@reviewed 2023-11-08

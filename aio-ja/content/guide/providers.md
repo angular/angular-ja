@@ -28,16 +28,6 @@ ng generate service User
 
 利用者が特定の`@NgModule`をインポートした場合にのみサービスを利用できるようにしたい場合を除いて、ルートインジェクターでサービスを提供すべきです。
 
-## `providedIn` と NgModule
-
-特定の`@NgModule`内でサービスを提供するように指定することもできます。たとえば、あなたが作成した`UserModule`をインポートしない限り`UserService`をアプリケーションで利用できないようにモジュール内でサービスを提供するように指定できます:
-
-<code-example path="providers/src/app/user.service.1.ts"  header="src/app/user.service.ts"></code-example>
-
-上記の例では、モジュールにサービスを提供する推奨の方法を示しています。この方法を使用すると、サービスがどこからも注入されないときに、ツリーシェイキングの対象にできるので推奨されます。どのモジュールがサービスを提供すべきかをそのサービス内で指定できない場合は、モジュール内でそのサービスのプロバイダーを宣言することもできます:
-
-<code-example path="providers/src/app/user.module.ts"  header="src/app/user.module.ts"></code-example>
-
 ## 遅延ロードモジュールでプロバイダーのスコープを制限する {@a limiting-provider-scope-by-lazy-loading-modules}
 
 基本的に、CLIで生成されたアプリケーションでは、モジュールは即時ロードされます(つまり、アプリケーションの起動時にすべてロードされます)。Angularはインジェクターシステムを使用してモジュール間でのやりとりを可能にします。即時ロードされたアプリケーションでは、ルートアプリケーションインジェクターは、すべてのモジュールのすべてのプロバイダーをアプリケーション全体で利用可能にします。

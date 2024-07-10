@@ -399,18 +399,17 @@ export class AppComponent implements OnInit {
 <!-- vale Angular.Google_Headings = YES -->
 
 Zone.jsをAngularで利用できるようにするには、`zone.js`パッケージをインポートする必要があります。
-Angular CLIを使用している場合はこのステップは自動で行われ、`src/polyfills.ts`に次の行が表示されます。
+Angular CLIを使用している場合はこのステップは自動で行われ、`angular.json`に次の行が表示されます。
 
-<code-example format="typescript" language="typescript">
+<code-example format="json" language="json">
 
-/***************************************************************************************************
- &ast; Zone JS is required by default for Angular itself.
- */
-import 'zone.js';  // Included with Angular CLI.
+"polyfills": [
+  "zone.js"
+]
 
 </code-example>
 
-`zone.js`パッケージをインポートする前に、次の構成をセットすることができます。
+いくつかの`zone.js`の設定は次のように変更できます：：
 
 *   Disabling some asynchronous API monkey patching for better performance.
     For example, disabling the `requestAnimationFrame()` monkey patch, so the callback of `requestAnimationFrame()` does not trigger change detection.
@@ -418,7 +417,6 @@ import 'zone.js';  // Included with Angular CLI.
 
 *   Specify that certain DOM events do not run inside the Angular zone. For example, to prevent a `mousemove` or `scroll` event to trigger change detection
 
-変更できる設定は他にもいくつかあります。
 これらの変更を行うには、次のような`zone-flags.ts`ファイルを作成する必要があります。
 
 <code-example format="typescript" language="typescript">
@@ -431,19 +429,29 @@ import 'zone.js';  // Included with Angular CLI.
 
 </code-example>
 
-次に、`polyfills.ts`で`zone.js`をインポートする前に`zone-flags`をインポートします。
+次に、`angular.json` ファイルの `zone.js` の前に `zone-flags` を追加します:
 
-<code-example format="typescript" language="typescript">
+<code-example format="json" language="json">
 
-/***************************************************************************************************
- &ast; Zone JS is required by default for Angular.
- */
-import `./zone-flags`;
-import 'zone.js';  // Included with Angular CLI.
+"polyfills": [
+  "src/zone-flags.ts",
+  "zone.js"
+]
 
 </code-example>
 
-設定できるものの詳細については、[Zwone.js](https://github.com/angular/angular/tree/main/packages/zone.js)ドキュメントを参照してください。
+最後に、`tsconfig.app.json` ファイルの `include` 配列に `zone-flags` を追加します:
+
+<code-example format="json" language="json">
+
+"include": [
+  "src/**/*.d.ts",
+  "src/zone-flags.ts"
+]
+
+</code-example>
+
+設定できるものの詳細については、[Zone.js](https://github.com/angular/angular/tree/main/packages/zone.js)ドキュメントを参照してください。
 
 <!-- vale Angular.Google_Headings = NO -->
 

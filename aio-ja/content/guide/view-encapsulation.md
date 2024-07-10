@@ -10,7 +10,7 @@ Angularでは、コンポーネントのスタイルをコンポーネントの�
 
 | モード                         | 詳細 |
 |:---                           |:---     |
-| `ViewEncapsulation.ShadowDom` | Angularはブラウザ組込みの[Shadow DOM API](https://developer.mozilla.org/docs/Web/Web_Components/Shadow_DOM)を使用して、コンポーネントのホスト要素として使用されるShadowRoot内にコンポーネントのビューを閉じ込め、提供されたスタイルを分離された方法で適用します。 |
+| `ViewEncapsulation.ShadowDom` | Angularはブラウザ組込みの[Shadow DOM API](https://developer.mozilla.org/ja/docs/Web/API/Web_components/Using_shadow_DOM)を使用して、コンポーネントのホスト要素として使用されるShadowRoot内にコンポーネントのビューを閉じ込め、提供されたスタイルを分離された方法で適用します。 |
 | `ViewEncapsulation.Emulated`  | AngularはコンポーネントのCSSセレクターを変更し、コンポーネントのビューにのみ適用され、アプリケーション内の他の要素には影響しないようにします。詳細は[生成されたCSSの検証](guide/view-encapsulation#inspect-generated-css)を参照してください。 |
 | `ViewEncapsulation.None`      | Angularはいかなるビューのカプセル化も適用しません。つまり、コンポーネントに指定されたスタイルは実際にグローバルに適用され、アプリケーション内に存在するあらゆるHTML要素に影響を与える可能性があります。このモードは本質的に、スタイルをHTML自体に含めるのと同じです。 |
 

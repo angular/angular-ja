@@ -36,7 +36,7 @@ Angularフレームワークの機能を理解するために、次のことを�
   </a>
   <a href="guide/dependency-injection" class="docs-card" title="依存性の注入">
     <section>依存性の注入</section>
-    <p>依存性の注入について説明します。依存性とは、クラスが特定の機能を実行するために必要なサービスまたはオブジェクトを指します。</p>
+    <p>依存性の注入について学びましょう。依存性の注入とは、クラスが特定の機能を実行するために必要なサービスやオブジェクトを作成して提供するためにAngularが使用するパターンのことです。</p>
     <p class="card-footer">依存性の注入</p>
   </a>
   <!-- <a href="guide/rendering-overview" class="docs-card" title="Angular service worker developer guide">

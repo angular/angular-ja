@@ -511,28 +511,16 @@ It is now the only supported engine, so everything uses Ivy.
 
 [ECMAScript](#ecma)と[TypeScript](#typescript)を参照しましょう。
 
-
-{@a jit}
-
+<a id="jit"></a>
 
 ## 実行時(JIT)コンパイル {@a just-in-time-jit-compilation}
 
-Angularの実行時(JIT)コンパイラは、ブートストラップの一部として、
-実行時にAngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
+Angularの実行時(JIT)コンパイラは、ブートストラップの一部として、実行時にAngularのHTMLとTypeScriptコードを効率的なJavaScriptコードに変換します。
 
-JITコンパイルは、Angularの`ng build`と`ng serve`CLIコマンドを実行するときのデフォルトであり(AOTコンパイルとは対照的に)、開発時のよい選択です。
-JITモードは本番環境での使用は強くお勧めしません。
-ブートストラップのパフォーマンスを妨げる大きなアプリケーションペイロードをもたらすためです。
+JITはAngular 8までデフォルトのコンパイルモードでした（詳しくは[Choosing a compiler](https://angular.io/guide/aot-compiler#choosing-a-compiler)をご覧ください）。
+JITモードは本番環境での使用は強くお勧めしません。ブートストラップのパフォーマンスを妨げる大きなアプリケーションペイロードをもたらすためです。
 
 [事前(AOT)コンパイル](#aot)と比較しましょう。
-
-
-{@a K}
-
-
-{@a L}
-
-{@a lazy-load}
 
 ## 遅延ロード {@a lazy-loading}
 

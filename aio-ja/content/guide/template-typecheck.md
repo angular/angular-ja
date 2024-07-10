@@ -252,7 +252,7 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 さらに、テンプレート型チェッカーに固有の型ヒントを提供することもできます。 次の [カスタムディレクティブのテンプレート型チェックの改善](guide/structural-directives#directive-type-checks) と [入力セッターの強制](#input-setter-coercion) を参照してください。
 
 
-{@a input-setter-coercion}
+<a id="input-setter-coercion"></a>
 
 ## 入力セッターの強制
 
@@ -261,28 +261,30 @@ TypeScript は、アプリケーションで設定されている `strictNullChe
 
 次のディレクティブを検討してください。
 
-```typescript
-@Component({
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
   selector: 'submit-button',
-  template: `
-    <div class="wrapper">
-      <button [disabled]="disabled">Submit</button>
-    </div>
-  `,
+  template: &grave;
+    &lt;div class="wrapper"&gt;
+      &lt;button [disabled]="disabled"&gt;Submit&lt;/button&gt;
+    &lt;/div&gt;
+  &grave;,
 })
 class SubmitButton {
   private _disabled: boolean;
 
-  @Input()
   get disabled(): boolean {
     return this._disabled;
   }
 
+  &commat;Input()
   set disabled(value: boolean) {
     this._disabled = value;
   }
 }
-```
+
+</code-example>
 
 ここでは、コンポーネントの `disabled` 入力がテンプレートの `<button>` に渡されています。`boolean` 値が入力にバインドされている限り、これはすべて期待どおりに機能します。ただし、コンシューマーがテンプレートでこの入力を属性として使用すると仮定します。
 
@@ -311,7 +313,8 @@ set disabled(value: boolean) {
 
 この問題の回避策として、Angular は `@Input()` に対して、入力フィールド自体に対して宣言されているよりも広くより寛容な型のチェックをサポートしています。これを有効にするには、`ngAcceptInputType_` プレフィックスを含む静的プロパティをコンポーネントクラスに追加します。
 
-```typescript
+<code-example format="typescript" language="typescript">
+
 class SubmitButton {
   private _disabled: boolean;
 
@@ -319,13 +322,15 @@ class SubmitButton {
     return this._disabled;
   }
 
+  &commat;Input()
   set disabled(value: boolean) {
-    this._disabled = (value === '') || value;
+    this._disabled = (value === '') &verbar;&verbar; value;
   }
 
-  static ngAcceptInputType_disabled: boolean|'';
+  static ngAcceptInputType_disabled: boolean&verbar;'';
 }
-```
+
+</code-example>
 
 <div class="alert is-important">
 
@@ -333,7 +338,8 @@ Since TypeScript 4.3, the setter could have been declared to accept `boolean|''`
 
 </div>
 
-このフィールドに値を入力する必要はありません。その存在は、Angular 型チェッカーと通信して、`disabled` 入力は型 `boolean|''` に一致するバインディングを受け入れると見なされるべきであることを伝えます。サフィックスは `@Input` _field_ の名前にする必要があります。
+このフィールドに値を入力する必要はありません。
+その存在は、Angular 型チェッカーと通信して、`disabled` 入力は型 `boolean|''` に一致するバインディングを受け入れると見なされるべきであることを伝えます。サフィックスは `@Input` _field_ の名前にする必要があります。
 
 `ngAcceptInputType_` オーバーライドが与えられた入力に存在する場合、セッターはオーバーライドされた型の値を処理できるように注意する必要があります。
 
@@ -344,12 +350,22 @@ Since TypeScript 4.3, the setter could have been declared to accept `boolean|''`
 
 次の例では、`person` を `any` 型にキャストすると、`Property address does not exist` エラーが抑制されます。
 
-```typescript
-  @Component({
-    selector: 'my-component',
-    template: '{{$any(person).address.street}}'
-  })
-  class MyComponent {
-    person?: Person;
-  }
-```
+<code-example format="typescript" language="typescript">
+
+&commat;Component({
+  selector: 'my-component',
+  template: '{{&dollar;any(person).address.street}}'
+})
+class MyComponent {
+  person?: Person;
+}
+
+</code-example>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

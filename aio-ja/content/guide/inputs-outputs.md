@@ -24,8 +24,14 @@ Angularでよくあるパターンは、親コンポーネントと1つ以上の
 `@Input()`を使用して、親コンポーネントは子コンポーネントのデータを更新できます。
 逆に、`@Output()`を使用して、子は親コンポーネントにデータを送信できます。
 
+<div class="alert is-helpful">
 
-{@a input}
+Signal-based inputs are available in developer preview and may be a better fit for some use cases as an alternative to `@Input`.
+Learn more in the [signal inputs guide](/guide/signal-inputs).
+
+</div>
+
+<a id="input"></a>
 
 ## 子コンポーネントへのデータの送信
 

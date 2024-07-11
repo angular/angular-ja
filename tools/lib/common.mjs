@@ -22,18 +22,18 @@ export async function resetBuildDir({ init = false }) {
   }
 }
 
-export async function buildAIO() {
+export async function buildAdev() {
   await within(async () => {
-    cd(`${outDir}/aio`);
-    await $`yarn build`;
+    cd(`${outDir}`);
+    await $`yarn install --frozen-lockfile`;
+    await $`yarn bazel build //adev:build`;
   });
 }
 
 export async function watchAIO() {
   await within(async () => {
-    cd(`${outDir}/aio`);
-    await $`yarn setup`;
-    await $`yarn start`;
+    cd(`${outDir}`);
+    await $`yarn docs`;
   });
 }
 

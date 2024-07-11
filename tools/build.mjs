@@ -3,7 +3,7 @@
 import { chalk } from 'zx';
 import {
   applyPatches,
-  buildAIO,
+  buildAdev,
   copyLocalizedFiles,
   remove404HTML,
   copyRobots,
@@ -15,11 +15,11 @@ try {
   console.log(chalk.green('==== setup ===='));
   await setup();
   console.log(chalk.green('==== preBuild ===='));
-  await preBuild();
+  // await preBuild();
   console.log(chalk.green('==== build ===='));
   await build();
   console.log(chalk.green('==== postBuild ===='));
-  await postBuild();
+  // await postBuild();
 } catch (e) {
   console.error(chalk.red(e));
   process.exit(1);
@@ -41,7 +41,7 @@ async function preBuild() {
 }
 
 async function build() {
-  await buildAIO();
+  await buildAdev();
 }
 
 async function postBuild() {

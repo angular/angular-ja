@@ -15,7 +15,7 @@ try {
   console.log(chalk.green('==== setup ===='));
   await setup();
   console.log(chalk.green('==== preBuild ===='));
-  // await preBuild();
+  await preBuild();
   console.log(chalk.green('==== build ===='));
   await build();
   console.log(chalk.green('==== postBuild ===='));
@@ -32,8 +32,8 @@ async function setup() {
 
 async function preBuild() {
   // copy translated files
-  console.log(chalk.cyan('Copy localized files...'));
-  await copyLocalizedFiles();
+  // console.log(chalk.cyan('Copy localized files...'));
+  // await copyLocalizedFiles();
 
   // apply patches
   console.log(chalk.cyan('Apply patches...'));

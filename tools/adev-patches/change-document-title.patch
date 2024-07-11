@@ -1,0 +1,79 @@
+diff --git a/adev/src/app/core/services/a-dev-title-strategy.ts b/adev/src/app/core/services/a-dev-title-strategy.ts
+index 75a1daa0e9..6acf3ec62f 100644
+--- a/adev/src/app/core/services/a-dev-title-strategy.ts
++++ b/adev/src/app/core/services/a-dev-title-strategy.ts
+@@ -13,7 +13,7 @@ import {ActivatedRouteSnapshot, RouterStateSnapshot, TitleStrategy} from '@angul
+ 
+ export const ROUTE_TITLE_PROPERTY = 'label';
+ export const ROUTE_PARENT_PROPERTY = 'parent';
+-export const TITLE_SUFFIX = 'Angular';
++export const TITLE_SUFFIX = 'Angular 日本語版';
+ export const TITLE_SEPARATOR = ' • ';
+ export const DEFAULT_PAGE_TITLE = 'Overview';
+ 
+diff --git a/adev/src/index.html b/adev/src/index.html
+index f6d4c0eb48..292608d443 100644
+--- a/adev/src/index.html
++++ b/adev/src/index.html
+@@ -1,6 +1,6 @@
+ <!doctype html>
+ <!-- We set all theme classes to allow critters to inline the theme styles and prevent flickering -->
+-<html lang="en" class="docs-dark-mode docs-light-mode">
++<html lang="ja" class="docs-dark-mode docs-light-mode">
+   <head>
+     <script>
+       // This logic must execute early, so that we set the necessary
+@@ -42,13 +42,13 @@
+     </style>
+ 
+     <meta charset="utf-8" />
+-    <title>Angular</title>
++    <title>Angular 日本語版</title>
+     <base href="/" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+     <!-- Primary Meta Tags -->
+-    <meta name="title" content="Angular" />
+-    <meta name="description" content="The web development framework for building modern apps." />
++    <meta name="title" content="Angular 日本語版" />
++    <meta name="description" content="モダンなアプリを構築するためのウェブ開発フレームワーク" />
+ 
+     <!-- Favicons -->
+     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+@@ -58,7 +58,7 @@
+     <link rel="manifest" href="/assets/icons/site.webmanifest" />
+     <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#e90464" />
+     <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
+-    <link rel="canonical" href="https://angular.dev">
++    <link rel="canonical" href="https://angular.jp">
+ 
+     <meta name="apple-mobile-web-app-title" content="Angular" />
+     <meta name="application-name" content="Angular" />
+@@ -68,21 +68,21 @@
+ 
+     <!-- Open Graph / Facebook -->
+     <meta property="og:type" content="website" />
+-    <meta property="og:url" content="https://angular.dev/" />
+-    <meta property="og:title" content="Angular" />
++    <meta property="og:url" content="https://angular.jp/" />
++    <meta property="og:title" content="Angular 日本語版" />
+     <meta
+       property="og:description"
+-      content="The web development framework for building modern apps."
++      content="モダンなアプリを構築するためのウェブ開発フレームワーク"
+     />
+     <meta property="og:image" content="https://angular.dev/assets/images/ng-image.jpg" />
+ 
+     <!-- Twitter -->
+     <meta property="twitter:card" content="summary_large_image" />
+-    <meta property="twitter:url" content="https://angular.dev/" />
+-    <meta property="twitter:title" content="Angular" />
++    <meta property="twitter:url" content="https://angular.jp/" />
++    <meta property="twitter:title" content="Angular 日本語版" />
+     <meta
+       property="twitter:description"
+-      content="The web development framework for building modern apps."
++      content="モダンなアプリを構築するためのウェブ開発フレームワーク"
+     />
+     <meta property="twitter:image" content="https://angular.dev/assets/images/ng-image.jpg" />
+ 

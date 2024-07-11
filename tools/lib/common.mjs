@@ -72,7 +72,7 @@ export async function watchLocalizedFiles(signal) {
 export async function applyPatches() {
   await within(async () => {
     cd(outDir);
-    const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir });
+    const patches = await glob('tools/adev-patches/*.patch', { cwd: rootDir });
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
       await $`git apply -p1 --ignore-whitespace ${path}`;

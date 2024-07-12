@@ -1,0 +1,34 @@
+# This workflow runs whenever the ADEV build workflow has completed. Deployment happens
+# as part of a dedicated second workflow to avoid security issues where the building would
+# otherwise occur in an authorized context where secrets could be leaked.
+#
+# More details can be found here:
+# https://securitylab.github.com/research/github-actions-preventing-pwn-requests/.
+
+name: Deploying adev preview to Firebase
+
+on:
+  workflow_run:
+    workflows: ['Build adev for preview deployment']
+    types: [completed]
+
+permissions:
+  # Needed in order to be able to comment on the pull request.
+  pull-requests: write
+  # Needed in order to checkout the repository
+  contents: read
+  # Needed in order to retrieve the artifacts from the previous job
+  actions: read
+
+env:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: '${{secrets.GITHUB_TOKEN}}'
+          name: adev-preview
+      - run: ls -R

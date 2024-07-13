@@ -5,7 +5,7 @@
 # More details can be found here:
 # https://securitylab.github.com/research/github-actions-preventing-pwn-requests/.
 
-name: Deploying adev preview to Firebase
+name: Deploying adev preview
 
 on:
   workflow_run:
@@ -32,3 +32,9 @@ jobs:
           github-token: '${{secrets.GITHUB_TOKEN}}'
           name: adev-preview
       - run: ls -R
+      - name: Extract pull request number
+        run: |
+          PR_NUMBER=$(cat build/dist/bin/adev/build/browser/__metadata__pull_number.txt)
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+        working-directory: build/dist/bin/adev/build/browser
+      - run: echo $PR_NUMBER

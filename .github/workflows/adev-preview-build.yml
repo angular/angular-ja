@@ -29,9 +29,10 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn build
-      - uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: "adev-preview/${{github.event.pull_request.number}}"
-          FOLDER: "./build/dist/bin/adev/build/browser"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: inject pull request number
+        run: echo "${{ github.event.pull_request.number }}" >> __metadata__pull_number.txt
+        working-directory: build/dist/bin/adev/build/browser
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adev-preview
+          path: build/dist/bin/adev/build/browser

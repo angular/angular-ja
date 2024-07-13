@@ -1,9 +1,9 @@
 #!/usr/bin/env zx
 
-import { chalk } from 'zx';
+import { chalk, argv } from 'zx';
 import {
   applyPatches,
-  buildAIO,
+  buildAdev,
   copyLocalizedFiles,
   remove404HTML,
   copyRobots,
@@ -11,11 +11,14 @@ import {
   resetBuildDir,
 } from './lib/common.mjs';
 
+// `init` is true by default, use `--no-init` flag to skip initialization.
+const { init = true } = argv;
+
 try {
   console.log(chalk.green('==== setup ===='));
-  await setup();
+  await setup({ init });
   console.log(chalk.green('==== preBuild ===='));
-  await preBuild();
+  await preBuild({ init });
   console.log(chalk.green('==== build ===='));
   await build();
   console.log(chalk.green('==== postBuild ===='));
@@ -25,27 +28,28 @@ try {
   process.exit(1);
 }
 
-async function setup() {
-  // always reset build dir
-  await resetBuildDir({ init: true });
+async function setup({ init }) {
+  await resetBuildDir({ init });
 }
 
-async function preBuild() {
-  // copy translated files
-  console.log(chalk.cyan('Copy localized files...'));
-  await copyLocalizedFiles();
+async function preBuild({ init }) {
+  if (init) {
+    // copy translated files
+    // console.log(chalk.cyan('Copy localized files...'));
+    // await copyLocalizedFiles();
 
-  // apply patches
-  console.log(chalk.cyan('Apply patches...'));
-  await applyPatches();
+    // apply patches
+    console.log(chalk.cyan('Apply patches...'));
+    await applyPatches();
+  }
 }
 
 async function build() {
-  await buildAIO();
+  await buildAdev();
 }
 
 async function postBuild() {
-  await copyRobots();
-  await remove404HTML();
-  await modifySitemap();
+  // await copyRobots();
+  // await remove404HTML();
+  // await modifySitemap();
 }

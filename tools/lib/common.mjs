@@ -1,7 +1,7 @@
 import { watch } from 'chokidar';
 import { resolve } from 'node:path';
 import { $, cd, chalk, glob, within } from 'zx';
-import { initDir, cpRf, exists, sed, rmrf, rename } from './fileutils.mjs';
+import { cpRf, exists, initDir, rename, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
@@ -22,18 +22,18 @@ export async function resetBuildDir({ init = false }) {
   }
 }
 
-export async function buildAIO() {
+export async function buildAdev() {
   await within(async () => {
-    cd(`${outDir}/aio`);
-    await $`yarn build`;
+    cd(`${outDir}`);
+    await $`yarn install --frozen-lockfile`;
+    await $`yarn bazel build //adev:build`;
   });
 }
 
 export async function watchAIO() {
   await within(async () => {
-    cd(`${outDir}/aio`);
-    await $`yarn setup`;
-    await $`yarn start`;
+    cd(`${outDir}`);
+    await $`yarn docs`;
   });
 }
 
@@ -72,7 +72,7 @@ export async function watchLocalizedFiles(signal) {
 export async function applyPatches() {
   await within(async () => {
     cd(outDir);
-    const patches = await glob('tools/git-patch/*.patch', { cwd: rootDir });
+    const patches = await glob('tools/adev-patches/*.patch', { cwd: rootDir });
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
       await $`git apply -p1 --ignore-whitespace ${path}`;

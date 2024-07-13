@@ -1,0 +1,11 @@
+diff --git a/adev/src/app/environment.ts b/adev/src/app/environment.ts
+index 30f0d78db3..c6c18b5183 100644
+--- a/adev/src/app/environment.ts
++++ b/adev/src/app/environment.ts
+@@ -15,5 +15,5 @@ export default {
+     apiKey: 'dfca7ed184db27927a512e5c6668b968',
+     indexName: 'angular_v17',
+   },
+-  googleAnalyticsId: 'G-XB6NEVW32B',
++  googleAnalyticsId: 'G-ZE76R447BW',
+ };

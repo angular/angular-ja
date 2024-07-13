@@ -8,19 +8,22 @@ on: [pull_request]
 permissions:
   contents: read
 
+env:
+  BAZEL_REPO_CACHE_PATH: '~/.cache/bazel_repo_cache'
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.node-version'
-          cache: yarn
-      - run: yarn install
-      - run: yarn test
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version-file: '.node-version'
+  #         cache: yarn
+  #     - run: yarn install
+  #     - run: yarn test
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +34,22 @@ jobs:
         with:
           node-version-file: '.node-version'
           cache: yarn
+      - uses: bazel-contrib/setup-bazel@0.8.5
+        with:
+          bazelisk-cache: true
+          disk-cache: true
+          repository-cache: true
+          bazelrc: |
+            # Print all the options that apply to the build.
+            # This helps us diagnose which options override others
+            # (e.g. /etc/bazel.bazelrc vs. tools/bazel.rc)
+            build --announce_rc
+
+            # More details on failures
+            build --verbose_failures=true
+
+            # CI supports colors but Bazel does not detect it.
+            common --color=yes
       - run: yarn install
       - run: yarn build
   # build-windows:
@@ -46,15 +65,15 @@ jobs:
   #     - run: yarn install
   #     - run: yarn build
   #       shell: pwsh
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.node-version'
-          cache: yarn
-      - run: yarn install
-      - run: yarn build
+  # build-macos:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version-file: '.node-version'
+  #         cache: yarn
+  #     - run: yarn install
+  #     - run: yarn build

@@ -47,6 +47,7 @@ jobs:
         run: npx wrangler publish ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_PAGES_PROJECT: ${{ var.CLOUDFLARE_PAGES_PROJECT }}
       - name: Comment on pull request
         uses: actions/github-script@v4

@@ -1,0 +1,26 @@
+name: Build adev and deploy to production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  adev-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install
+      - run: yarn build
+      - name: Deploy to cloudflare pages
+        run: npx wrangler pages deploy $OUTPUT_DIR --project-name $CLOUDFLARE_PAGES_PROJECT
+        env:
+          OUTPUT_DIR: build/dist/bin/adev/build/browser
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}

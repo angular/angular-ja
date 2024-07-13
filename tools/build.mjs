@@ -1,6 +1,6 @@
 #!/usr/bin/env zx
 
-import { chalk } from 'zx';
+import { chalk, argv } from 'zx';
 import {
   applyPatches,
   buildAdev,
@@ -11,9 +11,12 @@ import {
   resetBuildDir,
 } from './lib/common.mjs';
 
+// `init` is true by default, use `--no-init` flag to skip initialization.
+const { init = true } = argv;
+
 try {
   console.log(chalk.green('==== setup ===='));
-  await setup();
+  await setup(init);
   console.log(chalk.green('==== preBuild ===='));
   await preBuild();
   console.log(chalk.green('==== build ===='));
@@ -25,9 +28,8 @@ try {
   process.exit(1);
 }
 
-async function setup() {
-  // always reset build dir
-  await resetBuildDir({ init: true });
+async function setup(init) {
+  await resetBuildDir({ init });
 }
 
 async function preBuild() {

@@ -13,6 +13,9 @@ on:
 
 permissions: read-all
 
+env:
+  BAZEL_REPO_CACHE_PATH: '~/.cache/bazel_repo_cache'
+
 jobs:
   adev-build:
     runs-on: ubuntu-latest
@@ -27,6 +30,12 @@ jobs:
         with:
           node-version-file: '.node-version'
           cache: yarn
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.BAZEL_REPO_CACHE_PATH }}
+          key: bazel-repo-cache-${{ runner.os }}-${{ hashFiles('origin/WORKSPACE') }}
+          restore-keys: |
+            bazel-repo-cache-${{ runner.os }}-
       - run: yarn install
       - run: yarn build
       - run: chmod 755 build/dist/bin/adev/build/browser

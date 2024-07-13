@@ -1,7 +1,8 @@
 import { watch } from 'chokidar';
+import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { $, cd, chalk, glob, within } from 'zx';
-import { initDir, cpRf, exists, sed, rmrf, rename } from './fileutils.mjs';
+import { $, cd, chalk, glob, os, within } from 'zx';
+import { cpRf, exists, initDir, rename, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
 const aiojaDir = resolve(rootDir, 'aio-ja');
@@ -20,6 +21,31 @@ export async function resetBuildDir({ init = false }) {
     console.log(chalk.cyan('copying origin files to build directory...'));
     await cpRf(resolve(rootDir, 'origin'), outDir);
   }
+}
+
+export async function setupBazelrc() {
+  await within(async () => {
+    const cachePath = process.env.BAZEL_REPO_CACHE_PATH || resolve(os.homedir(), '.cache/bazel_repo_cache');
+    const escapedCachePath = cachePath.replace(/\\/g, '\\\\');
+
+    cd(`${outDir}`);
+    const bazelrcContent = `
+  # Print all the options that apply to the build.
+  # This helps us diagnose which options override others
+  # (e.g. /etc/bazel.bazelrc vs. tools/bazel.rc)
+  build --announce_rc
+
+  # Avoids re-downloading NodeJS/browsers all the time.
+  build --repository_cache=${escapedCachePath}
+
+  # More details on failures
+  build --verbose_failures=true
+
+  # CI supports colors but Bazel does not detect it.
+  common --color=yes
+`;
+    await writeFile('.bazelrc.user', bazelrcContent);
+  });
 }
 
 export async function buildAdev() {

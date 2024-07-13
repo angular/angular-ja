@@ -43,3 +43,21 @@ jobs:
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
         working-directory: build/dist/bin/adev/build/browser
       - run: echo $PR_NUMBER $COMMIT_HASH
+      - name: Deploy to cloudflare pages
+        run: npx wrangler publish ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ var.CLOUDFLARE_PAGES_PROJECT }}
+      - name: Comment on pull request
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = process.env.PR_NUMBER;
+            github.issues.createComment({
+              issue_number: ${{ github.event.workflow_run.head_branch }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Preview deployed to [Cloudflare Pages](https://pr-${prNumber}.dev-angular-jp.pages.dev)'
+            })
+

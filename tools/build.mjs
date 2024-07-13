@@ -4,7 +4,6 @@ import { chalk, argv } from 'zx';
 import {
   applyPatches,
   buildAdev,
-  setupBazelrc,
   copyLocalizedFiles,
   remove404HTML,
   copyRobots,
@@ -31,7 +30,6 @@ try {
 
 async function setup({ init }) {
   await resetBuildDir({ init });
-  await setupBazelrc();
 }
 
 async function preBuild({ init }) {

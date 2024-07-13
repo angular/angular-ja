@@ -22,7 +22,7 @@ try {
   console.log(chalk.green('==== build ===='));
   await build();
   console.log(chalk.green('==== postBuild ===='));
-  // await postBuild();
+  await postBuild();
 } catch (e) {
   console.error(chalk.red(e));
   process.exit(1);
@@ -47,7 +47,7 @@ async function build() {
 }
 
 async function postBuild() {
-  await copyRobots();
-  await remove404HTML();
-  await modifySitemap();
+  // await copyRobots();
+  // await remove404HTML();
+  // await modifySitemap();
 }

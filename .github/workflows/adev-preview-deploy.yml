@@ -55,7 +55,7 @@ jobs:
           script: |
             const prNumber = process.env.PR_NUMBER;
             github.issues.createComment({
-              issue_number: ${{ github.event.workflow_run.head_branch }},
+              issue_number: Number(prNumber),
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Preview deployed to https://pr-${prNumber}.dev-angular-jp.pages.dev'

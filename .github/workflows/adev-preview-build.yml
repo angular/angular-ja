@@ -29,6 +29,7 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn build
+      - run: chmod 755 build/dist/bin/adev/build/browser
       - name: Inject pull request number
         run: echo "${{ github.event.pull_request.number }}" >> __metadata__pull_number.txt
         working-directory: build/dist/bin/adev/build/browser

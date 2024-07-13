@@ -30,7 +30,14 @@ jobs:
         with:
           node-version-file: '.node-version'
           cache: yarn
-      - uses: actions/cache@v4
+      - uses: bazelbuild/setup-bazelisk@v3
+      - name: Use Bazel build cache
+        uses: actions/cache@v4
+        with:
+          path: "~/.cache/bazel"
+          key: bazel
+      - name: Use Bazel repo cache
+        uses: actions/cache@v4
         with:
           path: ${{ env.BAZEL_REPO_CACHE_PATH }}
           key: bazel-repo-cache-${{ runner.os }}-${{ hashFiles('origin/WORKSPACE') }}

@@ -29,8 +29,11 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn build
-      - name: inject pull request number
+      - name: Inject pull request number
         run: echo "${{ github.event.pull_request.number }}" >> __metadata__pull_number.txt
+        working-directory: build/dist/bin/adev/build/browser
+      - name: Inject commit hash
+        run: echo "${{ github.sha }}" >> __metadata__commit_hash.txt
         working-directory: build/dist/bin/adev/build/browser
       - uses: actions/upload-artifact@v4
         with:

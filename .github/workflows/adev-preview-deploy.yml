@@ -37,4 +37,9 @@ jobs:
           PR_NUMBER=$(cat build/dist/bin/adev/build/browser/__metadata__pull_number.txt)
           echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
         working-directory: build/dist/bin/adev/build/browser
-      - run: echo $PR_NUMBER
+      - name: Extract commit hash
+        run: |
+          COMMIT_HASH=$(cat build/dist/bin/adev/build/browser/__metadata__commit_hash.txt)
+          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
+        working-directory: build/dist/bin/adev/build/browser
+      - run: echo $PR_NUMBER $COMMIT_HASH

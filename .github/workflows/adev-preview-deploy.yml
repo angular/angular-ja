@@ -42,7 +42,7 @@ jobs:
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
       - run: echo $PR_NUMBER $COMMIT_HASH
       - name: Deploy to cloudflare pages
-        run: npx wrangler publish ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
+        run: npx wrangler pages deploy ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}

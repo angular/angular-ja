@@ -63,6 +63,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.pr-number.outputs.value }}
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           edit-mode: replace
           body: |

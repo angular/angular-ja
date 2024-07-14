@@ -109,7 +109,10 @@ export async function copyLocalizedFiles() {
  * @param {() => () => void} onChangeCallback
  */
 export function watchLocalizedFiles(onChangeCallback) {
-  const watcher = watch(localizedFilePatterns, { cwd: adevJaDir });
+  const watcher = watch(localizedFilePatterns, {
+    cwd: adevJaDir,
+    awaitWriteFinish: true,
+  });
   watcher.on('change', async (path) => {
     const changed = await copyLocalizedFile(path);
     if (changed) {

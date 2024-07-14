@@ -25,10 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download adev preview artifact from previous workflow run
+        uses: actions/download-artifact@v4
         with:
-          github-token: '${{secrets.GITHUB_TOKEN}}'
           name: adev-preview
+          github-token: '${{secrets.GITHUB_TOKEN}}'
+          run-id: ${{ github.event.workflow_run.id }}
       - run: ls -R
       - name: Extract pull request number
         run: |

@@ -57,6 +57,6 @@ jobs:
               issue_number: Number(prNumber),
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Preview deployed to https://pr-${prNumber}.dev-angular-jp.pages.dev'
+              body: `Preview deployed to https://pr-${prNumber}.dev-angular-jp.pages.dev`
             })
 

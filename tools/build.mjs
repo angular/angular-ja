@@ -9,6 +9,8 @@ import {
   copyRobots,
   modifySitemap,
   resetBuildDir,
+  copyStaticFiles,
+  replaceAdevGitHubEditLinks,
 } from './lib/common.mjs';
 
 // `init` is true by default, use `--no-init` flag to skip initialization.
@@ -34,9 +36,8 @@ async function setup({ init }) {
 
 async function preBuild({ init }) {
   if (init) {
-    // copy translated files
-    // console.log(chalk.cyan('Copy localized files...'));
-    // await copyLocalizedFiles();
+    console.log(chalk.cyan('Copy localized files...'));
+    await copyLocalizedFiles();
 
     // apply patches
     console.log(chalk.cyan('Apply patches...'));
@@ -49,7 +50,10 @@ async function build() {
 }
 
 async function postBuild() {
-  // await copyRobots();
+  console.log(chalk.cyan('Copy static files...'));
+  await copyStaticFiles();
+  console.log(chalk.cyan('Replace GitHub edit links...'));
+  await replaceAdevGitHubEditLinks();
   // await remove404HTML();
   // await modifySitemap();
 }

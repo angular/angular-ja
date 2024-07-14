@@ -34,14 +34,12 @@ jobs:
       - run: ls -R
       - name: Extract pull request number
         run: |
-          PR_NUMBER=$(cat build/dist/bin/adev/build/browser/__metadata__pull_number.txt)
+          PR_NUMBER=$(cat __metadata__pull_number.txt)
           echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
-        working-directory: build/dist/bin/adev/build/browser
       - name: Extract commit hash
         run: |
-          COMMIT_HASH=$(cat build/dist/bin/adev/build/browser/__metadata__commit_hash.txt)
+          COMMIT_HASH=$(cat __metadata__commit_hash.txt)
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
-        working-directory: build/dist/bin/adev/build/browser
       - run: echo $PR_NUMBER $COMMIT_HASH
       - name: Deploy to cloudflare pages
         run: npx wrangler publish ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH

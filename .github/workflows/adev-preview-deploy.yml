@@ -20,8 +20,6 @@ permissions:
   # Needed in order to retrieve the artifacts from the previous job
   actions: read
 
-env:
-
 jobs:
   deploy:
     runs-on: ubuntu-latest

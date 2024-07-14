@@ -1,10 +1,20 @@
 import { watch } from 'chokidar';
 import { resolve } from 'node:path';
+import { execa } from 'execa';
+// TODO: replace $ to execa
 import { $, cd, chalk, glob, within } from 'zx';
+import kill from 'tree-kill';
 import { cpRf, exists, initDir, rename, sed } from './fileutils.mjs';
 
+const $$ = execa({
+  stdin: 'inherit',
+  stdout: 'inherit',
+  stderr: 'inherit',
+  preferLocal: true,
+});
+
 const rootDir = resolve(__dirname, '../');
-const adevDir = resolve(rootDir, 'adev-ja');
+const adevJaDir = resolve(rootDir, 'adev-ja');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
@@ -20,6 +30,8 @@ export async function resetBuildDir({ init = false }) {
     await initDir(outDir);
     console.log(chalk.cyan('copying origin files to build directory...'));
     await cpRf(resolve(rootDir, 'origin'), outDir);
+    console.log(chalk.cyan('copying .bazelrc to build directory...'));
+    await cpRf(resolve(rootDir, '.bazelrc'), resolve(outDir, '.bazelrc.user'));
   }
 }
 
@@ -31,11 +43,22 @@ export async function buildAdev() {
   });
 }
 
-export async function watchAIO() {
-  await within(async () => {
-    cd(`${outDir}`);
-    await $`yarn docs`;
+export function serveAdev() {
+  const p = $$({
+    cwd: outDir,
+    reject: false,
+  })`npx bazel run //adev:serve --fast_adev`;
+  console.debug(chalk.gray('adev process started.', p.pid));
+  const abort = () => kill(p.pid);
+  p.finally(() => {
+    console.debug(chalk.gray('adev process exited.', p.pid));
   });
+  return {
+    cancel: async () => {
+      abort();
+      return await p;
+    },
+  };
 }
 
 /**
@@ -45,29 +68,32 @@ const lozalizedFilePatterns = ['**/*', '!**/*.en.*', '!**/*.old'];
 
 export async function copyLocalizedFiles() {
   const jaFiles = await glob(lozalizedFilePatterns, {
-    cwd: aiojaDir,
+    cwd: adevJaDir,
   });
   for (const file of jaFiles) {
-    const src = resolve(aiojaDir, file);
-    const dest = resolve(outDir, 'aio', file);
+    const src = resolve(adevJaDir, file);
+    const dest = resolve(outDir, 'adev', file);
     await cpRf(src, dest);
   }
 }
 
 /**
- *
- * @param {AbortSignal} signal
+ * @param {() => () => void} onChangeCallback
  */
-export async function watchLocalizedFiles(signal) {
-  const watcher = watch(lozalizedFilePatterns, {
-    cwd: aiojaDir,
+export function watchLocalizedFiles(onChangeCallback) {
+  const watcher = watch(lozalizedFilePatterns, { cwd: adevJaDir });
+  watcher.on('change', async (path) => {
+    console.log(chalk.cyan(`File changed: ${path}`));
+    const src = resolve(adevJaDir, path);
+    const dest = resolve(outDir, 'adev', path);
+    await cpRf(src, dest);
+    onChangeCallback();
   });
-  watcher.on('change', (path) => {
-    const src = resolve(aiojaDir, path);
-    const dest = resolve(outDir, 'aio', path);
-    cpRf(src, dest);
-  });
-  signal.addEventListener('abort', () => watcher.close());
+  return {
+    cancel: () => {
+      watcher.close();
+    },
+  };
 }
 
 export async function applyPatches() {
@@ -100,11 +126,9 @@ export async function copyRobots() {
 // Copy static files into build output directory
 export async function copyStaticFiles() {
   await $`chmod -R +w ${resolve(outDir, 'dist/bin/adev/build/browser')}`;
-  const files = [
-    '_headers',
-  ];
+  const files = ['_headers'];
   for (const file of files) {
-    const src = resolve(adevDir, file);
+    const src = resolve(adevJaDir, file);
     const dest = resolve(outDir, 'dist/bin/adev/build/browser', file);
     await cpRf(src, dest);
   }
@@ -113,7 +137,10 @@ export async function copyStaticFiles() {
 // replace angular.io to angular.jp in sitemap.xml
 export async function modifySitemap() {
   await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
-  const sitemapPath = resolve(outDir, 'dist/bin/aio/build/generated/sitemap.xml');
+  const sitemapPath = resolve(
+    outDir,
+    'dist/bin/aio/build/generated/sitemap.xml'
+  );
   await sed(sitemapPath, 'angular.io', 'angular.jp');
 }
 

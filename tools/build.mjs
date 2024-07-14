@@ -9,6 +9,7 @@ import {
   copyRobots,
   modifySitemap,
   resetBuildDir,
+  copyStaticFiles,
 } from './lib/common.mjs';
 
 // `init` is true by default, use `--no-init` flag to skip initialization.
@@ -49,7 +50,7 @@ async function build() {
 }
 
 async function postBuild() {
-  // await copyRobots();
+  await copyStaticFiles();
   // await remove404HTML();
   // await modifySitemap();
 }

@@ -4,6 +4,7 @@ import { $, cd, chalk, glob, within } from 'zx';
 import { cpRf, exists, initDir, rename, sed } from './fileutils.mjs';
 
 const rootDir = resolve(__dirname, '../');
+const adevDir = resolve(rootDir, 'adev-ja');
 const aiojaDir = resolve(rootDir, 'aio-ja');
 const outDir = resolve(rootDir, 'build');
 
@@ -94,6 +95,19 @@ export async function copyRobots() {
   const src = resolve(aiojaDir, 'src/robots.txt');
   const dest = resolve(outDir, 'dist/bin/aio/build/robots.txt');
   await cpRf(src, dest);
+}
+
+// Copy static files into build output directory
+export async function copyStaticFiles() {
+  await $`chmod -R +w ${resolve(outDir, 'dist/bin/adev/build/browser')}`;
+  const files = [
+    '_headers',
+  ];
+  for (const file of files) {
+    const src = resolve(adevDir, file);
+    const dest = resolve(outDir, 'dist/bin/adev/build/browser', file);
+    await cpRf(src, dest);
+  }
 }
 
 // replace angular.io to angular.jp in sitemap.xml

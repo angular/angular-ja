@@ -33,30 +33,38 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
       - run: ls -R
       - name: Extract pull request number
+        id: pr-number
         run: |
           PR_NUMBER=$(cat __metadata__pull_number.txt)
-          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          echo "value=$PR_NUMBER" >> $GITHUB_OUTPUT
       - name: Extract commit hash
+        id: commit-hash
         run: |
           COMMIT_HASH=$(cat __metadata__commit_hash.txt)
-          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
-      - run: echo $PR_NUMBER $COMMIT_HASH
+          echo "value=$COMMIT_HASH" >> $GITHUB_OUTPUT
+      - run: echo ${{ steps.pr-number.outputs.value }} ${{ steps.commit-hash.outputs.value }}
       - name: Deploy to cloudflare pages
         run: npx wrangler pages deploy ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
         env:
+          PR_NUMBER: ${{ steps.pr-number.outputs.value }}
+          COMMIT_HASH: ${{ steps.commit-hash.outputs.value }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
-      - name: Comment on pull request
-        uses: actions/github-script@v4
+      - name: Find Comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = process.env.PR_NUMBER;
-            github.issues.createComment({
-              issue_number: Number(prNumber),
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Preview deployed to https://pr-${prNumber}.dev-angular-jp.pages.dev`
-            })
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.pr-number.outputs.value }}
+          comment-author: 'github-actions[bot]'
+          body-includes: 'Preview deployed'
+      - name: Comment on pull request
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            Preview deployed to https://pr-${{ steps.pr-number.outputs.value }}.dev-angular-jp.pages.dev (commit: ${{ steps.commit-hash.outputs.value }})
 

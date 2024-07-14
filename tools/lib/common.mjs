@@ -1,5 +1,5 @@
 import { watch } from 'chokidar';
-import { resolve } from 'node:path';
+import { resolve, basename } from 'node:path';
 import { execa } from 'execa';
 // TODO: replace $ to execa
 import { $, cd, chalk, glob, within } from 'zx';
@@ -62,18 +62,46 @@ export function serveAdev() {
 }
 
 /**
- * glob patterns of localized files in aio-ja
+ * 翻訳用ファイルのパターン
+ * このパターンに一致するファイルがビルドディレクトリにコピーされます。
  */
-const lozalizedFilePatterns = ['**/*', '!**/*.en.*', '!**/*.old'];
+const localizedFilePatterns = ['**/*', '!**/*.old'];
+
+/**
+ * 翻訳用ファイルをビルドディレクトリにコピーします。
+ *
+ * ファイルの拡張子が `.ja.xxx` である場合は、`.ja.xxx` を `.xxx` に変換してコピーします。
+ * 例: `foo.ja.md` は `foo.md` としてコピーされます。
+ *
+ * 変更されたファイルに対応する翻訳済みのファイルが同じディレクトリに存在する場合、コピーされません。
+ * 例: `guide/foo.md` が変更されても、`guide/foo.ja.md` が存在している場合はコピーされません。
+ *
+ * @param {string} file
+ * @returns {Promise<boolean>} ファイルがコピーされた場合は `true`、コピーされなかった場合は `false`
+ */
+async function copyLocalizedFile(file) {
+  const src = resolve(adevJaDir, file);
+  // ファイル名が `.ja.xxx` である場合は、`.ja` を削除してコピーする
+  if (basename(file).match(/\.ja\.[^.]+$/)) {
+    const dest = resolve(outDir, 'adev', file.replace(/\.ja\./, '.'));
+    return cpRf(src, dest).then(() => true);
+  }
+  // ファイル名が `.xxx` であり、同じディレクトリに `.ja.xxx` が存在する場合はコピーしない
+  const jaFile = resolve(adevJaDir, file.replace(/(\.[^.]+)$/, '.ja$1'));
+  if (await exists(jaFile)) {
+    return false;
+  }
+  // その他のファイルはそのままコピーする
+  const dest = resolve(outDir, 'adev', file);
+  return cpRf(src, dest).then(() => true);
+}
 
 export async function copyLocalizedFiles() {
-  const jaFiles = await glob(lozalizedFilePatterns, {
+  const jaFiles = await glob(localizedFilePatterns, {
     cwd: adevJaDir,
   });
   for (const file of jaFiles) {
-    const src = resolve(adevJaDir, file);
-    const dest = resolve(outDir, 'adev', file);
-    await cpRf(src, dest);
+    await copyLocalizedFile(file);
   }
 }
 
@@ -81,13 +109,13 @@ export async function copyLocalizedFiles() {
  * @param {() => () => void} onChangeCallback
  */
 export function watchLocalizedFiles(onChangeCallback) {
-  const watcher = watch(lozalizedFilePatterns, { cwd: adevJaDir });
+  const watcher = watch(localizedFilePatterns, { cwd: adevJaDir });
   watcher.on('change', async (path) => {
-    console.log(chalk.cyan(`File changed: ${path}`));
-    const src = resolve(adevJaDir, path);
-    const dest = resolve(outDir, 'adev', path);
-    await cpRf(src, dest);
-    onChangeCallback();
+    const changed = await copyLocalizedFile(path);
+    if (changed) {
+      console.debug(chalk.gray(`File changed: ${path}`));
+      onChangeCallback();
+    }
   });
   return {
     cancel: () => {

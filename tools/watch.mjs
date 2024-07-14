@@ -42,11 +42,9 @@ async function setup({ init }) {
 
 async function preWatch({ init }) {
   if (init) {
-    // copy translated files
-    // console.log(chalk.cyan('Copy localized files...'));
-    // await copyLocalizedFiles();
+    console.log(chalk.cyan('Copy localized files...'));
+    await copyLocalizedFiles();
 
-    // apply patches
     console.log(chalk.cyan('Apply patches...'));
     await applyPatches();
   }

@@ -10,6 +10,7 @@ import {
   modifySitemap,
   resetBuildDir,
   copyStaticFiles,
+  replaceAdevGitHubEditLinks,
 } from './lib/common.mjs';
 
 // `init` is true by default, use `--no-init` flag to skip initialization.
@@ -49,7 +50,10 @@ async function build() {
 }
 
 async function postBuild() {
+  console.log(chalk.cyan('Copy static files...'));
   await copyStaticFiles();
+  console.log(chalk.cyan('Replace GitHub edit links...'));
+  await replaceAdevGitHubEditLinks();
   // await remove404HTML();
   // await modifySitemap();
 }

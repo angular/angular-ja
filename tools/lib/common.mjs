@@ -11,12 +11,14 @@ const $$ = execa({
   stdout: 'inherit',
   stderr: 'inherit',
   preferLocal: true,
+  verbose: 'short',
 });
 
 const rootDir = resolve(__dirname, '../');
 const adevJaDir = resolve(rootDir, 'adev-ja');
 const aiojaDir = resolve(rootDir, 'aio-ja');
-const outDir = resolve(rootDir, 'build');
+const buildDir = resolve(rootDir, 'build');
+const buildOutputDir = resolve(buildDir, 'dist/bin/adev/build/browser');
 
 export async function resetBuildDir({ init = false }) {
   if (init) {
@@ -24,28 +26,28 @@ export async function resetBuildDir({ init = false }) {
     await syncSubmodule();
   }
 
-  const buildDirExists = await exists(outDir);
+  const buildDirExists = await exists(buildDir);
   if (init || !buildDirExists) {
     console.log(chalk.cyan('removing build directory...'));
-    await initDir(outDir);
+    await initDir(buildDir);
     console.log(chalk.cyan('copying origin files to build directory...'));
-    await cpRf(resolve(rootDir, 'origin'), outDir);
+    await cpRf(resolve(rootDir, 'origin'), buildDir);
     console.log(chalk.cyan('copying .bazelrc to build directory...'));
-    await cpRf(resolve(rootDir, '.bazelrc'), resolve(outDir, '.bazelrc.user'));
+    await cpRf(
+      resolve(rootDir, '.bazelrc'),
+      resolve(buildDir, '.bazelrc.user')
+    );
   }
 }
 
 export async function buildAdev() {
-  await within(async () => {
-    cd(`${outDir}`);
-    await $`yarn install --frozen-lockfile`;
-    await $`yarn bazel build //adev:build`;
-  });
+  await $$({ cwd: buildDir })`yarn install --frozen-lockfile`;
+  await $$({ cwd: buildDir })`yarn bazel build //adev:build`;
 }
 
 export function serveAdev() {
   const p = $$({
-    cwd: outDir,
+    cwd: buildDir,
     reject: false,
   })`npx bazel run //adev:serve --fast_adev`;
   console.debug(chalk.gray('adev process started.', p.pid));
@@ -65,44 +67,24 @@ export function serveAdev() {
  * 翻訳用ファイルのパターン
  * このパターンに一致するファイルがビルドディレクトリにコピーされます。
  */
-const localizedFilePatterns = ['**/*', '!**/*.old'];
+const localizedFilePatterns = ['**/*', '!**/*.en.*', '!**/*.old'];
 
 /**
  * 翻訳用ファイルをビルドディレクトリにコピーします。
  *
- * ファイルの拡張子が `.ja.xxx` である場合は、`.ja.xxx` を `.xxx` に変換してコピーします。
- * 例: `foo.ja.md` は `foo.md` としてコピーされます。
- *
- * 変更されたファイルに対応する翻訳済みのファイルが同じディレクトリに存在する場合、コピーされません。
- * 例: `guide/foo.md` が変更されても、`guide/foo.ja.md` が存在している場合はコピーされません。
- *
  * @param {string} file
- * @returns {Promise<boolean>} ファイルがコピーされた場合は `true`、コピーされなかった場合は `false`
  */
 async function copyLocalizedFile(file) {
   const src = resolve(adevJaDir, file);
-  // ファイル名が `.ja.xxx` である場合は、`.ja` を削除してコピーする
-  if (basename(file).match(/\.ja\.[^.]+$/)) {
-    const dest = resolve(outDir, 'adev', file.replace(/\.ja\./, '.'));
-    return cpRf(src, dest).then(() => true);
-  }
-  // ファイル名が `.xxx` であり、同じディレクトリに `.ja.xxx` が存在する場合はコピーしない
-  const jaFile = resolve(adevJaDir, file.replace(/(\.[^.]+)$/, '.ja$1'));
-  if (await exists(jaFile)) {
-    return false;
-  }
-  // その他のファイルはそのままコピーする
-  const dest = resolve(outDir, 'adev', file);
-  return cpRf(src, dest).then(() => true);
+  const dest = resolve(buildDir, 'adev', file);
+  return cpRf(src, dest);
 }
 
 export async function copyLocalizedFiles() {
   const jaFiles = await glob(localizedFilePatterns, {
     cwd: adevJaDir,
   });
-  for (const file of jaFiles) {
-    await copyLocalizedFile(file);
-  }
+  await Promise.all(jaFiles.map(copyLocalizedFile));
 }
 
 /**
@@ -113,12 +95,10 @@ export function watchLocalizedFiles(onChangeCallback) {
     cwd: adevJaDir,
     awaitWriteFinish: true,
   });
-  watcher.on('change', async (path) => {
-    const changed = await copyLocalizedFile(path);
-    if (changed) {
-      console.debug(chalk.gray(`File changed: ${path}`));
-      onChangeCallback();
-    }
+  watcher.on('change', async (file) => {
+    console.debug(chalk.gray(`File changed: ${file}`));
+    await copyLocalizedFile(file);
+    onChangeCallback();
   });
   return {
     cancel: () => {
@@ -129,7 +109,7 @@ export function watchLocalizedFiles(onChangeCallback) {
 
 export async function applyPatches() {
   await within(async () => {
-    cd(outDir);
+    cd(buildDir);
     const patches = await glob('tools/adev-patches/*.patch', { cwd: rootDir });
     for (const patch of patches) {
       const path = resolve(rootDir, patch);
@@ -148,28 +128,42 @@ export async function syncSubmodule() {
 
 // copy robots.txt
 export async function copyRobots() {
-  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
+  await $`chmod -R +w ${resolve(buildDir, 'dist/bin/aio/build')}`;
   const src = resolve(aiojaDir, 'src/robots.txt');
-  const dest = resolve(outDir, 'dist/bin/aio/build/robots.txt');
+  const dest = resolve(buildDir, 'dist/bin/aio/build/robots.txt');
   await cpRf(src, dest);
 }
 
 // Copy static files into build output directory
 export async function copyStaticFiles() {
-  await $`chmod -R +w ${resolve(outDir, 'dist/bin/adev/build/browser')}`;
+  await $`chmod -R +w ${buildOutputDir}`;
   const files = ['_headers'];
   for (const file of files) {
     const src = resolve(adevJaDir, file);
-    const dest = resolve(outDir, 'dist/bin/adev/build/browser', file);
+    const dest = resolve(buildOutputDir, file);
     await cpRf(src, dest);
   }
 }
 
+// Replace all links to GitHub edit page for adev contents.
+export async function replaceAdevGitHubEditLinks() {
+  await $`chmod -R +w ${buildOutputDir}`;
+  const contentFiles = await glob(['**/*.html'], { cwd: buildOutputDir });
+  const from = 'https://github.com/angular/angular/edit/main/adev/';
+  const to = 'https://github.com/angular/angular-ja/edit/main/adev-ja/';
+  await Promise.all(
+    contentFiles.map(async (file) => {
+      const path = resolve(buildOutputDir, file);
+      await sed(path, from, to);
+    })
+  );
+}
+
 // replace angular.io to angular.jp in sitemap.xml
 export async function modifySitemap() {
-  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
+  await $`chmod -R +w ${resolve(buildDir, 'dist/bin/aio/build')}`;
   const sitemapPath = resolve(
-    outDir,
+    buildDir,
     'dist/bin/aio/build/generated/sitemap.xml'
   );
   await sed(sitemapPath, 'angular.io', 'angular.jp');
@@ -177,8 +171,8 @@ export async function modifySitemap() {
 
 // copy _redirects
 export async function remove404HTML() {
-  await $`chmod -R +w ${resolve(outDir, 'dist/bin/aio/build')}`;
-  const from = resolve(outDir, 'dist/bin/aio/build/404.html');
-  const to = resolve(outDir, 'dist/bin/aio/build/_404.html');
+  await $`chmod -R +w ${resolve(buildDir, 'dist/bin/aio/build')}`;
+  const from = resolve(buildDir, 'dist/bin/aio/build/404.html');
+  const to = resolve(buildDir, 'dist/bin/aio/build/_404.html');
   await rename(from, to);
 }

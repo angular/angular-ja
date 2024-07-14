@@ -24,15 +24,15 @@ interface SubNavigationData {
 
 const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   {
-    label: '入門',
+    label: 'Introduction',
     children: [
       {
-        label: 'Angularとは？',
+        label: 'What is Angular?',
         path: 'overview',
         contentPath: 'introduction/what-is-angular',
       },
       {
-        label: '基本要素',
+        label: 'Essentials',
         children: [
           {
             label: 'Overview',
@@ -77,7 +77,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         ],
       },
       {
-        label: '作ってみよう! 🚀',
+        label: 'Start coding! 🚀',
         path: 'tutorials/learn-angular',
       },
     ],

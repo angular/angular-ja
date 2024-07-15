@@ -13,15 +13,15 @@
       "ja-space-after-exclamation": false
     },
     "preset-ja-technical-writing": {
-      "sentence-length": {
-        "skipPatterns": [
-          "Angular",
-          "NgOptimizedImage",
-          "Core Web Vitals"
-        ]
-      },
+      "sentence-length": false,
+      "max-comma": false,
       "no-mix-dearu-desumasu": {
         "preferInList": ""
+      },
+      "no-doubled-joshi": {
+        "allow": [
+          "の"
+        ]
       },
       "no-exclamation-question-mark": false,
       "ja-no-weak-phrase": false,
@@ -29,7 +29,8 @@
         "allow": [
           "二重中括弧構文"
         ]
-      }
+      },
+      "ja-no-mixed-period": false
     }
   }
 }

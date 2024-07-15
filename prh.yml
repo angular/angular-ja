@@ -164,3 +164,8 @@ rules:
   - expected: スタンドアロン
     pattern:
       - スタンドアローン
+
+  - expected: 括弧
+    pattern:
+      - かっこ
+      - カッコ

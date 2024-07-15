@@ -1,0 +1,47 @@
+diff --git a/adev/src/app/features/tutorial/tutorial.component.ts b/adev/src/app/features/tutorial/tutorial.component.ts
+index a254df6d80..4ff592b981 100644
+--- a/adev/src/app/features/tutorial/tutorial.component.ts
++++ b/adev/src/app/features/tutorial/tutorial.component.ts
+@@ -44,7 +44,7 @@ import {SplitResizerHandler} from './split-resizer-handler.service';
+ import {TutorialType} from '@angular/docs';
+ import {TutorialNavigationData, TutorialNavigationItem} from '@angular/docs';
+ 
+-const INTRODUCTION_LABEL = 'Introduction';
++const INTRODUCTION_LABEL = 'イントロダクション';
+ 
+ @Component({
+   selector: 'adev-tutorial',
+diff --git a/adev/src/app/features/tutorial/tutorial.component.html b/adev/src/app/features/tutorial/tutorial.component.html
+index 31c1932aa1..ef362147ae 100644
+--- a/adev/src/app/features/tutorial/tutorial.component.html
++++ b/adev/src/app/features/tutorial/tutorial.component.html
+@@ -60,11 +60,11 @@
+           (click)="answerRevealed() ? handleResetAnswer() : handleRevealAnswer()"
+           [disabled]="!canRevealAnswer()"
+           class="docs-reveal-answer-button adev-reveal-desktop-button docs-primary-btn"
+-          [attr.text]="answerRevealed() ? 'Reset' : 'Reveal Answer'"
+-          [attr.aria-label]="answerRevealed() ? 'Reset' : 'Reveal Answer'"
++          [attr.text]="answerRevealed() ? 'リセット' : '解答を表示'"
++          [attr.aria-label]="answerRevealed() ? 'リセット' : '解答を表示'"
+           [class.adev-reset-answer-button]="answerRevealed()"
+         >
+-          {{ answerRevealed() ? 'Reset' : 'Reveal Answer' }}
++          {{ answerRevealed() ? 'リセット' : '解答を表示' }}
+         </button>
+       }
+ 
+@@ -116,11 +116,11 @@
+             (click)="answerRevealed() ? handleResetAnswer() : handleRevealAnswer()"
+             [disabled]="!canRevealAnswer()"
+             class="docs-reveal-answer-button adev-reveal-mobile-button docs-primary-btn"
+-            [attr.text]="answerRevealed() ? 'Reset' : 'Reveal Answer'"
+-            [attr.aria-label]="answerRevealed() ? 'Reset' : 'Reveal Answer'"
++            [attr.text]="answerRevealed() ? 'リセット' : '解答を表示'"
++            [attr.aria-label]="answerRevealed() ? 'リセット' : '解答を表示'"
+             [class.adev-reset-answer-button]="answerRevealed()"
+           >
+-            {{ answerRevealed() ? 'Reset' : 'Reveal Answer' }}
++            {{ answerRevealed() ? 'リセット' : '解答を表示' }}
+           </button>
+         }
+       </div>

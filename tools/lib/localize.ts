@@ -37,7 +37,10 @@ export async function copyLocalizedFiles() {
   await Promise.all(jaFiles.map(copyLocalizedFile));
 }
 
-export function watchLocalizedFiles(onChange: () => unknown) {
+export function watchLocalizedFiles(
+  onChange: () => unknown,
+  onCancel: () => unknown
+) {
   const watcher = watch(localizedFilePatterns, {
     cwd: adevJaDir,
     awaitWriteFinish: true,
@@ -48,8 +51,9 @@ export function watchLocalizedFiles(onChange: () => unknown) {
     onChange();
   });
   return {
-    cancel: () => {
+    cancel: async () => {
       watcher.close();
+      await onCancel();
     },
   };
 }

@@ -38,13 +38,23 @@ async function watch() {
   let adevProcess = serveAdev();
   console.log(chalk.cyan('Start watching adev-ja files...'));
 
-  watchLocalizedFiles(async () => {
-    if (adevProcess != null) {
-      await adevProcess.cancel();
+  const watcher = watchLocalizedFiles(
+    async () => {
+      if (adevProcess != null) {
+        await adevProcess.cancel();
+      }
+      console.log(chalk.cyan('Restarting adev...'));
+      adevProcess = serveAdev();
+    },
+    async () => {
+      if (adevProcess != null) {
+        await adevProcess.cancel();
+      }
     }
-    console.log(chalk.cyan('Restarting adev...'));
-    adevProcess = serveAdev();
-  });
+  );
+
+  process.on('SIGINT', watcher.cancel);
+  process.on('SIGTERM', watcher.cancel);
 }
 
 main().catch((error) => {

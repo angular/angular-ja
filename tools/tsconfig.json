@@ -6,5 +6,5 @@
     "types": ["node"],
     "allowSyntheticDefaultImports": true
   },
-  "include": ["lib", "build.ts", "watch.ts", "update-origin.ts"]
+  "include": ["lib", "build.ts", "watch.ts", "update-origin.ts", "translate.ts"]
 }

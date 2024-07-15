@@ -9,10 +9,9 @@
   "scripts": {
     "start": "tsx tools/watch.ts",
     "build": "tsx tools/build.ts",
-    "lint": "yarn ~textlint",
-    "~textlint": "textlint 'aio-ja/**/!(*.en).md'",
-    "test": "npm run lint && yarn test:patch",
-    "test:patch": "git apply -v --check --directory origin ./tools/git-patch/*.patch",
+    "lint": "yarn textlint 'adev-ja/**/*.md'",
+    "test": "yarn test:patch",
+    "test:patch": "git apply -v --check --directory origin ./tools/adev-patches/*.patch",
     "update-origin": "tsx tools/update-origin.ts",
     "translate": "tsx tools/translate.ts"
   },
@@ -27,6 +26,8 @@
     "prh-rules": "prh/rules",
     "textlint": "^14.0.4",
     "textlint-filter-rule-comments": "^1.2.2",
+    "textlint-rule-preset-ja-spacing": "2.4.3",
+    "textlint-rule-preset-ja-technical-writing": "10.0.1",
     "textlint-rule-prh": "^6.0.0",
     "tree-kill": "^1.2.2",
     "tsx": "^4.16.2"

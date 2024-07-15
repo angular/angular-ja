@@ -1,7 +1,7 @@
 <docs-decorative-header title="次のステップ" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-Angular の基本概念について学んだので、学んだことをインタラクティブなチュートリアルで実践し、詳細なガイドでさらに学びましょう。
+Angularの基本概念について学んだので、学んだことをインタラクティブなチュートリアルで実践し、詳細なガイドでさらに学びましょう。
 
 ## プレイグラウンド
 

@@ -4,7 +4,32 @@
   },
   "rules": {
     "prh": {
-      "rulePaths": ["prh.yml"]
+      "rulePaths": [
+        "./prh.yml"
+      ]
+    },
+    "preset-ja-spacing": {
+      "ja-space-after-question": false,
+      "ja-space-after-exclamation": false
+    },
+    "preset-ja-technical-writing": {
+      "sentence-length": {
+        "skipPatterns": [
+          "Angular",
+          "NgOptimizedImage",
+          "Core Web Vitals"
+        ]
+      },
+      "no-mix-dearu-desumasu": {
+        "preferInList": ""
+      },
+      "no-exclamation-question-mark": false,
+      "ja-no-weak-phrase": false,
+      "max-kanji-continuous-len": {
+        "allow": [
+          "二重中括弧構文"
+        ]
+      }
     }
   }
 }

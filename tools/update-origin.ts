@@ -10,6 +10,8 @@ const localizedFilePatterns = [
   // Text contents
   'src/content/**/*.md',
   '!src/content/**/license.md',
+  // Tutorial config files
+  'src/content/tutorials/**/config.json',
   // Application files
   'src/app/sub-navigation-data.ts',
 ];

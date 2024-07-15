@@ -1,29 +1,29 @@
-<docs-decorative-header title="Next Steps" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
+<docs-decorative-header title="次のステップ" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-Now that you have been introduced to core concepts of Angular - you're ready to put what you learned into practices with our interactive tutorials and learn more with our in-depth guides.
+Angular の基本概念について学んだので、学んだことをインタラクティブなチュートリアルで実践し、詳細なガイドでさらに学びましょう。
 
-## Playground
-
-<docs-pill-row>
-  <docs-pill title="Play with Angular!" href="playground" />
-</docs-pill-row>
-
-## Tutorials
+## プレイグラウンド
 
 <docs-pill-row>
-  <docs-pill title="Learn Angular's fundamentals" href="tutorials/learn-angular" />
-  <docs-pill title="Build your first Angular app" href="tutorials/first-app" />
+  <docs-pill title="Angular で遊んでみよう！" href="playground" />
 </docs-pill-row>
 
-## In-depth Guides
-
-Here are some in-depth guides you might be interested in reading:
+## チュートリアル
 
 <docs-pill-row>
-  <docs-pill title="Components In-depth Guide" href="guide/components/importing" />
-  <docs-pill title="Template In-depth Guide" href="guide/templates" />
-  <docs-pill title="Forms In-depth Guide" href="/guide/forms" />
+  <docs-pill title="Angular の基礎を学ぶ" href="tutorials/learn-angular" />
+  <docs-pill title="最初の Angular アプリを構築する" href="tutorials/first-app" />
 </docs-pill-row>
 
-To see the rest of our in-depth guides, check out the main navigation.
+## 詳細なガイド
+
+興味のある詳細なガイドを以下に示します。
+
+<docs-pill-row>
+  <docs-pill title="コンポーネントの詳細ガイド" href="guide/components/importing" />
+  <docs-pill title="テンプレートの詳細ガイド" href="guide/templates" />
+  <docs-pill title="フォームの詳細ガイド" href="/guide/forms" />
+</docs-pill-row>
+
+詳細なガイドの残りの部分については、メインナビゲーションをご覧ください。

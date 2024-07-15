@@ -1,19 +1,19 @@
-<docs-decorative-header title="Sharing Code" imgSrc="adev/src/assets/images/dependency_injection.svg"> <!-- markdownlint-disable-line -->
-Dependency injection allows you to share code.
+<docs-decorative-header title="コードの共有" imgSrc="adev/src/assets/images/dependency_injection.svg"> <!-- markdownlint-disable-line -->
+依存性の注入を使用するとコードを共有できます。
 </docs-decorative-header>
 
-When you need to share logic between components, Angular leverages the design pattern of [dependency injection](guide/di) that allows you to create a “service” which allows you to inject code into components while managing it from a single source of truth.
+コンポーネント間でロジックを共有する必要がある場合、Angular は[依存性の注入](guide/di)の設計パターンを活用します。これにより、「サービス」を作成できます。サービスを使用すると、コードをコンポーネントに注入しながら、信頼できる唯一の情報源から管理できます。
 
-## What are services?
+## サービスとは
 
-Services are reusable pieces of code that can be injected
+サービスは、注入できる再利用可能なコードの断片です。
 
-Similar to defining a component, services are comprised of the following:
+コンポーネントの定義と同様に、サービスは以下で構成されます。
 
-- A **TypeScript decorator** that declares the class as an Angular service via `@Injectable` and allows you to define what part of the application can access the service via the `providedIn` property (which is typically `'root'`) to allow a service to be accessed anywhere within the application.
-- A **TypeScript class** that defines the desired code that will be accessible when the service is injected
+- `@Injectable`を使用してクラスをAngularサービスとして宣言する**TypeScriptデコレータ**。`providedIn`プロパティ（通常は`'root'`）を使用して、サービスにアクセスできるアプリケーションのどの部分かを定義できます。これにより、サービスをアプリケーション内のどこからでもアクセスできます。
+- サービスが注入されたときにアクセスできる目的のコードを定義する**TypeScriptクラス**
 
-Here is an example of a `Calculator` service.
+以下は、`Calculator`サービスの例です。
 
 ```ts
 import {Injectable} from '@angular/core';
@@ -28,14 +28,14 @@ export class CalculatorService {
 }
 ```
 
-## How to use a service
+## サービスの使用方法
 
-When you want to use a service in a component, you need to:
+コンポーネントでサービスを使用する場合は、次の手順を実行する必要があります。
 
-1. Import the service
-2. Declare a class field where the service is injected. Assign the class field to the result of the call of the built-in function `inject` which creates the service
+1. サービスをインポートする
+2. サービスが注入されるクラスフィールドを宣言します。クラスフィールドを、サービスを作成する組み込み関数`inject`の呼び出しの結果に割り当てます。
 
-Here’s what it might look like in the `Receipt` component:
+以下は、`Receipt`コンポーネントでの例です。
 
 ```ts
 import { Component } from '@angular/core';
@@ -43,7 +43,7 @@ import { CalculatorService } from './calculator.service';
 
 @Component({
   selector: 'app-receipt',
-  template: `<h1>The total is {{ totalCost }}</h1>`,
+  template: `<h1>合計金額は {{ totalCost }}</h1>`,
 })
 
 export class Receipt {
@@ -52,10 +52,10 @@ export class Receipt {
 }
 ```
 
-In this example, the `CalculatorService` is being used by calling the Angular function `inject` and passing in the service to it.
+この例では、`CalculatorService`は、Angular関数`inject`を呼び出してサービスを渡すことによって使用されています。
 
-## Next Step
+## 次のステップ
 
 <docs-pill-row>
-  <docs-pill title="Next Steps After Essentials" href="essentials/next-steps" />
+  <docs-pill title="基本要素の次のステップ" href="essentials/next-steps" />
 </docs-pill-row>

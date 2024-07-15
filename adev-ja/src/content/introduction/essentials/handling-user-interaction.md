@@ -1,21 +1,21 @@
-<docs-decorative-header title="Handling User Interaction" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
-Handle user interaction in your application.
+<docs-decorative-header title="ユーザーインタラクションの処理" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
+アプリケーション中でユーザーインタラクションを処理します。
 </docs-decorative-header>
 
-The ability to handle user interaction and then work with - it is one of the key aspects of building dynamic applications. In this guide, we'll take a look at simple user interaction - event handling.
+ユーザーインタラクションを処理し、それを使って作業することは、動的なアプリケーションを構築する上で重要な側面の1つです。このガイドでは、単純なユーザーインタラクションであるイベント処理について説明します。
 
-## Event Handling
+## イベント処理
 
-You can add an event handler to an element by:
+要素にイベントハンドラーを追加するには、次の手順に従います。
 
-1. Adding an attribute with the events name inside of parentheses
-2. Specify what JavaScript statement you want to run when it fires
+1. イベント名を含む属性を括弧内に追加します。
+2. イベントが発生したときに実行するJavaScript文を指定します。
 
 ```html
-<button (click)="save()">Save</button>
+<button (click)="save()">保存</button>
 ```
 
-For example, if we wanted to create a button that would run a `transformText` function when the `click` event is fired, it would look like the following:
+たとえば、`click`イベントが発生したときに`transformText`関数を呼び出すボタンを作成する場合は、次のようになります。
 
 ```ts
 // text-transformer.component.ts
@@ -24,7 +24,7 @@ For example, if we wanted to create a button that would run a `transformText` fu
   selector: 'text-transformer',
   template: `
     <p>{{ announcement }}</p>
-    <button (click)="transformText()">Abracadabra!</button>
+    <button (click)="transformText()">アブラカダブラ！</button>
   `,
 })
 export class TextTransformer {
@@ -36,21 +36,21 @@ export class TextTransformer {
 }
 ```
 
-Other common examples of event listeners include:
+その他の一般的なイベントリスナーの例を次に示します。
 
 - `<input (keyup)="validateInput()" />`
 - `<input (keydown)="updateInput()" />`
 
 ### $event
 
-If you need to access the [event](https://developer.mozilla.org/docs/Web/API/Event) object, Angular provides an implicit `$event` variable that you can pass to a function:
+[イベント](https://developer.mozilla.org/ja/docs/Web/API/Event)オブジェクトにアクセスする必要がある場合、Angularは関数に渡すことができる暗黙の`$event`変数を提供します。
 
 ```html
-<button (click)="createUser($event)">Submit</button>
+<button (click)="createUser($event)">送信</button>
 ```
 
-## Next Step
+## 次のステップ
 
 <docs-pill-row>
-  <docs-pill title="Sharing Logic" href="essentials/sharing-logic" />
+  <docs-pill title="ロジックの共通化" href="essentials/sharing-logic" />
 </docs-pill-row>

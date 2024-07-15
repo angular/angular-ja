@@ -3,7 +3,9 @@
     "module": "ES2022",
     "moduleResolution": "node",
     "strict": true,
-    "lib": ["ES2022"]
+    "lib": ["ES2022"],
+    "skipDefaultLibCheck": true
   },
-  "references": [{ "path": "tools" }]
+  "exclude": ["origin", "build"],
+  "references": [{ "path": "./tools/tsconfig.json" }]
 }

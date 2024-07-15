@@ -1,10 +1,10 @@
-<docs-decorative-header title="Components" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
-The fundamental building block for creating applications in Angular.
+<docs-decorative-header title="コンポーネント" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
+Angular でアプリケーションを作成するための基本的な構成要素。
 </docs-decorative-header>
 
-Components provide structure for organizing your project into easy-to-understand parts with clear responsibilities so that your code is maintainable and scalable.
+コンポーネントは、プロジェクトを理解しやすい部品に分割し、明確な責任を持たせることで、コードの保守性とスケーラビリティを向上させます。
 
-Here is an example of how a Todo application could be broken down into a tree of components.
+Todo アプリケーションをコンポーネントのツリーに分解する例を示します。
 
 ```mermaid
 flowchart TD
@@ -15,18 +15,18 @@ flowchart TD
     D[TodoListItem]
 ```
 
-In this guide, we'll take a look at how to create and use components in Angular.
+このガイドでは、Angular でコンポーネントを作成および使用する方法について説明します。
 
-## Defining a Component
+## コンポーネントの定義
 
-Every component has the following core properties:
+すべてのコンポーネントには、核となる次のプロパティがあります。
 
-1. A `@Component`[decorator](https://www.typescriptlang.org/docs/handbook/decorators.html) that contains some configuration
-2. An HTML template that controls what renders into the DOM
-3. A [CSS selector](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) that defines how the component is used in HTML
-4. A TypeScript class with behaviors such as managing state, handling user input, or fetching data from a server.
+1. いくつかの設定を含む `@Component`[デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)
+2. DOM にレンダリングされる内容を制御する HTMLテンプレート
+3. HTML でコンポーネントがどのように使用されるかを定義する [CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)
+4. 状態管理、ユーザー入力処理、サーバーからのデータフェッチなどの動作を持つ TypeScriptクラス
 
-Here is a simplified example of a TodoListItem component.
+TodoListItem コンポーネントの簡略化された例を次に示します。
 
 ```ts
 // todo-list-item.component.ts
@@ -37,16 +37,16 @@ Here is a simplified example of a TodoListItem component.
   `,
 })
 export class TodoListItem {
-  /* Component behavior is defined in here */
+  /* コンポーネントの動作はここで定義します。 */
 }
 ```
 
-Other common metadata that you'll also see in components include:
+コンポーネントでよく見られるその他のメタデータには次のものがあります。
 
-- `standalone: true` — The recommended approach of streamlining the authoring experience of components
-- `styles` — A string or array of strings that contains any CSS styles you want applied to the component
+- `standalone: true` — コンポーネントの作成を簡素化する推奨アプローチ
+- `styles` — コンポーネントに適用する CSSスタイルを含む文字列または文字列の配列
 
-Knowing this, here is an updated version of our `TodoListItem` component.
+これを踏まえて、`TodoListItem` コンポーネントの更新バージョンを示します。
 
 ```ts
 // todo-list-item.component.ts
@@ -64,15 +64,15 @@ Knowing this, here is an updated version of our `TodoListItem` component.
   `,
 })
 export class TodoListItem {
-  /* Component behavior is defined in here */
+  /* コンポーネントの動作はここで定義します。 */
 }
 ```
 
-### Separating HTML and CSS into separate files
+### HTMLとCSSを別ファイルに分離する
 
-For teams that prefer managing their HTML and/or CSS in separate files, Angular provides two additional properties: `templateUrl` and `styleUrl`.
+HTMLやCSSを別ファイルで管理することを好むチーム向けに、Angular は `templateUrl` と `styleUrl` の2つの追加プロパティを提供します。
 
-Using the previous `TodoListItem` component, the alternative approach looks like:
+前の `TodoListItem` コンポーネントを使用して、代替アプローチは次のようになります。
 
 ```ts
 // todo-list-item.component.ts
@@ -83,7 +83,7 @@ Using the previous `TodoListItem` component, the alternative approach looks like
   styleUrl: './todo-list-item.component.css',
 })
 export class TodoListItem {
-  /* Component behavior is defined in here */
+  /* コンポーネントの動作はここで定義します。 */
 }
 ```
 
@@ -100,17 +100,17 @@ li {
 }
 ```
 
-## Using a Component
+## コンポーネントの使用
 
-One advantage of component architecture is that your application is modular. In other words, components can be used in other components.
+コンポーネントアーキテクチャの利点の1つは、アプリケーションがモジュール化されることです。つまり、コンポーネントは他のコンポーネントの中で使用できます。
 
-To use a component, you need to:
+コンポーネントを使用するには、次の手順を実行します。
 
-1. Import the component into the file
-2. Add it to the component's `imports` array
-3. Use the component's selector in the `template`
+1. ファイルにコンポーネントをインポートする
+2. コンポーネントの `imports` 配列に追加する
+3. テンプレートでコンポーネントのセレクターを使用する
 
-Here's an example of a `TodoList` component importing the `TodoListItem` component from before:
+前の `TodoListItem` コンポーネントをインポートする `TodoList` コンポーネントの例を次に示します。
 
 ```ts
 // todo-list.component.ts
@@ -128,10 +128,10 @@ import {TodoListItem} from './todo-list-item.component.ts';
 export class TodoList {}
 ```
 
-## Next Step
+## 次のステップ
 
-Now that you know how components work in Angular, it's time to learn how we add and manage dynamic data in our application.
+Angularのコンポーネントの仕組みがわかったところで、アプリケーションに動的なデータを追加して管理する方法について学びましょう。
 
 <docs-pill-row>
-  <docs-pill title="Managing Dynamic Data" href="essentials/managing-dynamic-data" />
+  <docs-pill title="動的なデータの管理" href="essentials/managing-dynamic-data" />
 </docs-pill-row>

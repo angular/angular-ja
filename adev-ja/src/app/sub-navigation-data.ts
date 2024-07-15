@@ -32,45 +32,45 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'introduction/what-is-angular',
       },
       {
-        label: '基本要素',
+        label: '基本概念',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'essentials',
             contentPath: 'introduction/essentials/overview',
           },
           {
-            label: 'Composing with Components',
+            label: 'コンポーネントによる構築',
             path: 'essentials/components',
             contentPath: 'introduction/essentials/components',
           },
           {
-            label: 'Managing Dynamic Data',
+            label: '動的なデータの管理',
             path: 'essentials/managing-dynamic-data',
             contentPath: 'introduction/essentials/managing-dynamic-data',
           },
           {
-            label: 'Rendering Dynamic Templates',
+            label: '動的なテンプレート',
             path: 'essentials/rendering-dynamic-templates',
             contentPath: 'introduction/essentials/rendering-dynamic-templates',
           },
           {
-            label: 'Conditionals and Loops',
+            label: '条件分岐とループ',
             path: 'essentials/conditionals-and-loops',
             contentPath: 'introduction/essentials/conditionals-and-loops',
           },
           {
-            label: 'Handling User Interaction',
+            label: 'ユーザーインタラクションの処理',
             path: 'essentials/handling-user-interaction',
             contentPath: 'introduction/essentials/handling-user-interaction',
           },
           {
-            label: 'Sharing Logic',
+            label: 'ロジックの共有',
             path: 'essentials/sharing-logic',
             contentPath: 'introduction/essentials/sharing-logic',
           },
           {
-            label: 'Next Steps',
+            label: '次のステップ',
             path: 'essentials/next-steps',
             contentPath: 'introduction/essentials/next-steps',
           },

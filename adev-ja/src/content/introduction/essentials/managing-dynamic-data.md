@@ -1,21 +1,21 @@
-<docs-decorative-header title="Managing Dynamic Data" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
-Define component state and behavior to manage dynamic data.
+<docs-decorative-header title="動的なデータの管理" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
+コンポーネントの状態と動作を定義して、動的なデータを管理します。
 </docs-decorative-header>
 
-Now that we have learned the basic structure for a component, let’s learn how you can define the component’s data (i.e., state) and behavior.
+コンポーネントの基本構造を学んだので、コンポーネントのデータ（つまり状態）と動作を定義する方法を学びましょう。
 
-## What is state?
+## 状態とは？
 
-Components let you neatly encapsulate responsibility for discrete parts of your application. For example, a `SignUpForm` component might need to keep track of whether the form is valid or not before allowing users to take a specific action. As a result, the various properties that a component needs to track is often referred to as "state."
+コンポーネントを使用すると、アプリケーションの個別部分の責任をきれいにカプセル化できます。たとえば、`SignUpForm`コンポーネントは、ユーザーが特定の操作を実行できるようにする前に、フォームが有効かどうかを追跡する必要がある場合があります。その結果、コンポーネントが追跡する必要があるさまざまなプロパティは、しばしば「状態」と呼ばれます。
 
-## Defining state
+## 状態の定義
 
-To define state, you use [class fields syntax](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes/Public_class_fields) inside of your component.
+状態を定義するには、コンポーネント内で[クラスフィールド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Public_class_fields)を使用します。
 
-For example, using the `TodoListItem` component, create two properties that you want to track:
+たとえば、`TodoListItem`コンポーネントを使用して、追跡する2つのプロパティを作成します。
 
-1. `taskTitle` — What the title of the task is
-2. `isComplete` — Whether or not the task is complete
+1. `taskTitle` — タスクのタイトル
+2. `isComplete` — タスクが完了しているかどうか
 
 ```ts
 // todo-list-item.component.ts
@@ -26,9 +26,9 @@ export class TodoListItem {
 }
 ```
 
-## Updating state
+## 状態の更新
 
-When you want to update state, this is typically accomplished by defining methods in the component class that can access the various class fields with the `this` keyword.
+状態を更新する場合は、通常、コンポーネントクラスでメソッドを定義して、`this`キーワードを使用してさまざまなクラスフィールドにアクセスします。
 
 ```ts
 // todo-list-item.component.ts
@@ -47,10 +47,10 @@ export class TodoListItem {
 }
 ```
 
-## Next Step
+## 次のステップ
 
-Now that you have learned how to declare and manage dynamic data, it's time to learn how to use that data inside of templates.
+動的なデータの宣言と管理方法を学んだので、テンプレート内でそのデータを使用する方法を学ぶ時です。
 
 <docs-pill-row>
-  <docs-pill title="Rendering Dynamic Templates" href="essentials/rendering-dynamic-templates" />
+  <docs-pill title="動的なテンプレートのレンダリング" href="essentials/rendering-dynamic-templates" />
 </docs-pill-row>

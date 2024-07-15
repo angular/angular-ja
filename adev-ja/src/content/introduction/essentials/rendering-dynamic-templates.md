@@ -1,14 +1,14 @@
-<docs-decorative-header title="Rendering Dynamic Templates" imgSrc="adev/src/assets/images/templates.svg"> <!-- markdownlint-disable-line -->
-Use Angular's template syntax to create dynamic HTML.
+<docs-decorative-header title="動的なテンプレートのレンダリング" imgSrc="adev/src/assets/images/templates.svg"> <!-- markdownlint-disable-line -->
+Angularのテンプレート構文を使用して、動的なHTMLを作成します。
 </docs-decorative-header>
 
-What you've learned so far enables you to break an application up into components of HTML, but this limits you to static templates (i.e., content that doesn't change). The next step is to learn how to make use of Angular's template syntax to create dynamic HTML.
+これまで学んできたことは、アプリケーションをHTMLのコンポーネントに分割することを可能にしますが、これらは静的なテンプレート（つまり、変化しないコンテンツ）に限定されます。次のステップは、Angularのテンプレート構文を使用して動的なHTMLを作成する方法を学ぶことです。
 
-## Rendering Dynamic Data
+## 動的なデータのレンダリング
 
-When you need to display dynamic content in your template, Angular uses the double curly brace syntax in order to distinguish between static and dynamic content.
+テンプレートに動的なコンテンツを表示する必要がある場合、Angularは二重中括弧構文を使用して、静的なコンテンツと動的なコンテンツを区別します。
 
-Here is a simplified example from a `TodoListItem` component.
+以下は、`TodoListItem`コンポーネントの簡略化された例です。
 
 ```ts
 @Component({
@@ -22,21 +22,21 @@ export class TodoListItem {
 }
 ```
 
-When Angular renders the component you'll see the output:
+Angularがコンポーネントをレンダリングすると、次の出力が見られます。
 
 ```html
 <p>Title: Read cup of coffee</p>
 ```
 
-This syntax declares an **interpolation** between the dynamic data property inside of the HTML. As a result, whenever the data changes, Angular will automatically update the DOM reflecting the new value of the property.
+この構文は、HTML内の動的データプロパティ間の**補間**を宣言します。その結果、データが変更されるたびに、Angularは自動的にDOMを更新してプロパティの新しい値を反映します。
 
-## Dynamic Properties
+## 動的なプロパティ
 
-When you need to dynamically set the value of standard DOM properties on an HTML element, the property is wrapped in square brackets to inform Angular that the declared value should be interpreted as a JavaScript-like statement ([with some Angular enhancements](guide/templates/interpolation)) instead of a plain string.
+HTML要素の標準DOMプロパティの値を動的に設定する必要がある場合、そのプロパティは角括弧で囲まれます。これにより、Angularに宣言された値が、プレーンな文字列ではなく、JavaScriptのようなステートメント（[Angularの拡張機能付き](guide/templates/interpolation)）として解釈されるべきであることを伝えます。
 
-For example, a common example of dynamically updating properties in your HTML is determining whether the form submit button should be disabled based on whether the form is valid or not.
+たとえば、HTMLでプロパティを動的に更新する一般的な例は、フォームが有効かどうかによって、フォーム送信ボタンを無効にするかどうかを決定することです。
 
-Wrap the desired property in square brackets to tell Angular that the assigned value is dynamic (i.e., not a static string).
+目的のプロパティを角括弧で囲むことで、Angularに割り当てられた値が動的である（つまり、静的な文字列ではない）ことを伝えます。
 
 ```ts
 @Component({
@@ -50,15 +50,15 @@ export class SignUpForm {
 }
 ```
 
-In this example, because `formIsInvalid` is true, the rendered HTML would be:
+この例では、`formIsInvalid`がtrueであるため、レンダリングされたHTMLは次のようになります。
 
 ```html
 <button type="submit" disabled>Submit</button>
 ```
 
-## Dynamic Attributes
+## 動的な属性
 
-In the event you want to dynamically bind custom HTML attributes (e.g., `aria-`, `data-`, etc.), you might be inclined to wrap the custom attributes with the same square brackets.
+カスタムHTML属性（例：`aria-`、`data-`など）を動的にバインドしたい場合、カスタム属性を同じ角括弧で囲むことを試みるかもしれません。
 
 ```ts
 @Component({
@@ -72,7 +72,7 @@ export class AppBanner {
 }
 ```
 
-Unfortunately, this will not work because custom HTML attributes are not standard DOM properties. In order for this to work as intended, we need to prepend the custom HTML attribute with the `attr.` prefix.
+残念ながら、これは機能しません。なぜなら、カスタムHTML属性は標準DOMプロパティではないからです。これを意図したとおりに機能させるには、カスタムHTML属性の前に`attr.`プレフィックスを追加する必要があります。
 
 ```ts
 @Component({
@@ -86,10 +86,10 @@ export class AppBanner {
 }
 ```
 
-## Next Step
+## 次のステップ
 
-Now that you have dynamic data and templates in the application, it's time to learn how to enhance templates by conditionally hiding or showing certain elements, looping over elements, and more.
+アプリケーションに動的なデータとテンプレートができたので、条件付きで特定の要素を非表示または表示したり、要素をループ処理したりするなど、テンプレートを強化する方法を学ぶ時がきました。
 
 <docs-pill-row>
-  <docs-pill title="Conditionals and Loops" href="essentials/conditionals-and-loops" />
+  <docs-pill title="条件分岐とループ" href="essentials/conditionals-and-loops" />
 </docs-pill-row>

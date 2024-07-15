@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import { watch } from 'chokidar';
+import { consola } from 'consola';
 import { $ } from 'execa';
 import { globby as glob } from 'globby';
 import { resolve } from 'node:path';
@@ -46,7 +46,7 @@ export function watchLocalizedFiles(
     awaitWriteFinish: true,
   });
   watcher.on('change', async (file) => {
-    console.debug(chalk.gray(`File changed: ${file}`));
+    consola.info(`File changed: ${file}`);
     await copyLocalizedFile(file);
     onChange();
   });
@@ -64,9 +64,9 @@ export function watchLocalizedFiles(
 export async function modifyBuildOutput() {
   await $`chmod -R +w ${buildOutputDir}`;
 
-  console.log(chalk.cyan('Copy static files...'));
+  consola.start('Copy static files...');
   await copyStaticFiles();
-  console.log(chalk.cyan('Replace GitHub edit links...'));
+  consola.start('Replace GitHub edit links...');
   await replaceAdevGitHubEditLinks();
   // await remove404HTML();
   // await modifySitemap();

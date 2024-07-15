@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { consola } from 'consola';
 import { $ } from 'execa';
 import kill from 'tree-kill';
 import { buildDir } from './workspace';
@@ -20,10 +20,10 @@ export function serveAdev() {
   const sh = $$({ cwd: buildDir, reject: false });
   const p = sh`npx bazel run //adev:serve --fast_adev`;
   const pid = p.pid!;
-  console.debug(chalk.gray('adev process started.', pid));
+  consola.debug(`adev process started: ${pid}`);
   const abort = () => kill(pid!);
   p.finally(() => {
-    console.debug(chalk.gray('adev process exited.', pid));
+    consola.debug(`adev process exited: ${pid}`);
   });
   return {
     cancel: async () => {

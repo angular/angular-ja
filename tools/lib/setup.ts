@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { consola } from 'consola';
 import { $ } from 'execa';
 import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -7,16 +7,16 @@ import { applyPatches, copyLocalizedFiles } from './localize';
 import { buildDir, rootDir } from './workspace';
 
 export default async function () {
-  console.log(chalk.cyan('Synchronize git submodule...'));
+  consola.start('Synchronize git submodule...');
   await syncSubmodule();
 
-  console.log(chalk.cyan('Initialize build directory...'));
+  consola.start('Initialize build directory...');
   await initBuildDir();
 
-  console.log(chalk.cyan('Copy localized files...'));
+  consola.start('Copy localized files...');
   await copyLocalizedFiles();
 
-  console.log(chalk.cyan('Apply patches...'));
+  consola.start('Apply patches...');
   await applyPatches();
 }
 

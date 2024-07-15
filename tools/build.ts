@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { consola } from 'consola';
 import { parseArgs } from 'node:util';
 import { buildAdev } from './lib/adev';
 import { modifyBuildOutput } from './lib/localize';
@@ -16,14 +16,14 @@ async function main() {
   const { 'no-init': noInit } = args.values;
   const init = !noInit;
 
-  console.log(chalk.green('==== setup ===='));
+  consola.start('==== setup ====');
   if (init) {
     await setup();
   } else {
-    console.log(chalk.gray('Skip initialization.'));
+    consola.ready('Skip initialization.');
   }
 
-  console.log(chalk.green('==== build ===='));
+  consola.start('==== build ====');
   await build();
 }
 
@@ -33,6 +33,6 @@ async function build() {
 }
 
 main().catch((error) => {
-  console.error(chalk.red(error));
+  consola.error(error);
   process.exit(1);
 });

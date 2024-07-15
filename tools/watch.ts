@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { consola } from 'consola';
 import { parseArgs } from 'node:util';
 import { serveAdev } from './lib/adev';
 import { watchLocalizedFiles } from './lib/localize';
@@ -12,38 +12,34 @@ async function main() {
     },
   });
 
-  console.log({ ...args.values });
+  consola.debug({ ...args.values });
   const { init = false } = args.values;
 
-  console.log(chalk.green('==== setup ===='));
+  consola.start('==== setup ====');
   if (init) {
-    console.log(
-      chalk.yellow('build ディレクトリを初期化し、キャッシュを破棄します。')
-    );
+    consola.info('build ディレクトリを初期化し、キャッシュを破棄します。');
     await setup();
   } else {
-    console.log(chalk.grey('Skip initialization.'));
-    console.log(
-      chalk.white(
-        'build ディレクトリを初期化するには --init オプションを指定してください。'
-      )
+    consola.ready('Skip initialization.');
+    consola.info(
+      'build ディレクトリを初期化するには --init オプションを指定してください。'
     );
   }
 
-  console.log(chalk.green('==== watch ===='));
+  consola.start('==== watch ====');
   await watch();
 }
 
 async function watch() {
   let adevProcess = serveAdev();
-  console.log(chalk.cyan('Start watching adev-ja files...'));
+  consola.start('Start watching adev-ja files...');
 
   const watcher = watchLocalizedFiles(
     async () => {
       if (adevProcess != null) {
         await adevProcess.cancel();
       }
-      console.log(chalk.cyan('Restarting adev...'));
+      consola.start('Restarting adev...');
       adevProcess = serveAdev();
     },
     async () => {
@@ -58,6 +54,6 @@ async function watch() {
 }
 
 main().catch((error) => {
-  console.error(chalk.red(error));
+  consola.error(error);
   process.exit(1);
 });

@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { consola } from 'consola';
 import { $ } from 'execa';
 import { globby as glob } from 'globby';
 import { extname, resolve } from 'node:path';
@@ -15,19 +15,20 @@ const localizedFilePatterns = [
 ];
 
 async function main() {
-  const args = parseArgs({});
+  const args = parseArgs({ allowPositionals: true });
   const [originHash] = args.positionals;
 
   if (originHash == null) {
-    console.log(chalk.cyan('No origin SHA is provided.'));
-    console.log(chalk.cyan('Use the current origin HEAD.'));
+    consola.info(
+      'origin SHAが指定されていません。現在の origin のHEADを参照します。'
+    );
   } else {
-    console.log(chalk.green('origin SHA: ' + originHash));
-    console.log(chalk.cyan('Reset origin...'));
+    consola.ready('origin SHA: ' + originHash);
+    consola.start('Reset origin...');
     await resetOrigin(originHash);
   }
 
-  console.log(chalk.cyan('Copy origin files to adev-ja...'));
+  consola.start('Copy origin files to adev-ja...');
   await copyOriginFiles();
 }
 
@@ -55,6 +56,6 @@ async function copyOriginFiles() {
 }
 
 main().catch((error) => {
-  console.error(chalk.red(error));
+  consola.error(error);
   process.exit(1);
 });

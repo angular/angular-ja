@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "strict": true,
+    "lib": ["ES2022"]
+  },
+  "references": [{ "path": "tools" }]
+}

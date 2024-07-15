@@ -7,20 +7,20 @@
 
 ## Workflow
 
-1. `update-origin.sh` を編集する
+1. 同期する `angular/angular` のコミットハッシュを確認します
 
-`aioHash` を最新の angular.io のフッターから取得します。
+GitHub上で `angular/angular` リポジトリのコミットハッシュを入手します。
 
-![image](./docs/aio-origin-hash.png)
+
+2. `update-origin` コマンドを実行します
+
+1で入手したコミットハッシュを指定して、`angular/angular` リポジトリを更新します。
 
 ```sh
-aioHash="4bc0084"
+$ yarn update-origin <commit-hash>
 ```
 
-2. `update-origin.sh` を実行します
-
-3. 変更をマイグレーションします
-
+コミットハッシュを指定しない場合は、originの更新は行わず、現在のsubmoduleからファイルのコピーを再度実行します。
 
 ## マイグレーション
 
@@ -46,14 +46,3 @@ aioHash="4bc0084"
 
 1. 未翻訳状態のまま、翻訳済みファイルの該当箇所へオリジナルのテキストをコピーし、日英混在の状態にします。
 2. 未翻訳の部分について翻訳を募集するIssueを作成します。
-
-### Pattern 3. aio アプリケーションコード
-
-angular.io のアプリケーションを改変するためにいくつかのファイルが変更されていますが、gitの更新によってその変更が消されてしまいます。
-
-- `navigation.model.ts`
-- `nav-item.component.html`
-- `doc-viewer.component.ts`
-- `githubLinks.html`
-
-これらのファイルについては、必要な変更はそのままにし、それ以外の変更があれば手動でマージします。

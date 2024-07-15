@@ -35,12 +35,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: '基本要素',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'essentials',
             contentPath: 'introduction/essentials/overview',
           },
           {
-            label: 'Composing with Components',
+            label: 'コンポーネントによる構築',
             path: 'essentials/components',
             contentPath: 'introduction/essentials/components',
           },

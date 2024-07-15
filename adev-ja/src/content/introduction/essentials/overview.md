@@ -1,20 +1,20 @@
-<docs-decorative-header title="Overview" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
+<docs-decorative-header title="概要" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-## Before you start
+## 始める前に
 
-Like most modern frameworks, Angular expects you to be familiar with HTML, CSS and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step. Grasp the basics and then come back! Prior experience with other frameworks helps, but is not required.
+ほとんどのモダンなフレームワークと同様に、Angular では HTML、CSS、JavaScript についての知識が必要です。フロントエンド開発が完全に初めての場合は、最初のステップとしてフレームワークに飛び込むのはあまり良い考えではありません。基本を理解してから戻ってきてください！他のフレームワークの経験は役に立ちますが、必須ではありません。
 
-In addition, you should be familiar with the following concepts:
+さらに、次の概念についても理解しておく必要があります。
 
-- [JavaScript Classes](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes)
-- [TypeScript fundamentals](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-- [TypeScript Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html)
+- [JavaScript クラス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes)
+- [TypeScript の基礎](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+- [TypeScript デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)
 
-## Next Step
+## 次のステップ
 
-Ready to jump in? It's time to learn about components in Angular!
+飛び込む準備はできましたか？ Angular のコンポーネントについて学ぶ時です！
 
 <docs-pill-row>
-  <docs-pill title="Composing with Components" href="essentials/components" />
+  <docs-pill title="コンポーネントによる構築" href="essentials/components" />
 </docs-pill-row>

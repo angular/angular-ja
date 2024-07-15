@@ -36,7 +36,7 @@ async function main() {
     },
   ]);
   const translatedContent = result.response.text();
-  consola.debug(translatedContent);
+  consola.log(translatedContent);
 
   const save = await consola.prompt('翻訳結果を保存しますか？(y/N)', {
     type: 'confirm',

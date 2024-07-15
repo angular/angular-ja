@@ -20,10 +20,10 @@ export function serveAdev() {
   const sh = $$({ cwd: buildDir, reject: false });
   const p = sh`npx bazel run //adev:serve --fast_adev`;
   const pid = p.pid!;
-  consola.debug(`adev process started: ${pid}`);
+  consola.log(`adev process started: ${pid}`);
   const abort = () => kill(pid!);
   p.finally(() => {
-    consola.debug(`adev process exited: ${pid}`);
+    consola.log(`adev process exited: ${pid}`);
   });
   return {
     cancel: async () => {

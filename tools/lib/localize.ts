@@ -3,6 +3,7 @@ import { consola } from 'consola';
 import { $ } from 'execa';
 import { globby as glob } from 'globby';
 import { resolve } from 'node:path';
+import { debounceTime, from, mergeMap, Observable } from 'rxjs';
 import { cpRf, replaceAllInFile } from './fsutils';
 import { adevJaDir, buildDir, buildOutputDir, rootDir } from './workspace';
 
@@ -37,25 +38,26 @@ export async function copyLocalizedFiles() {
   await Promise.all(jaFiles.map(copyLocalizedFile));
 }
 
-export function watchLocalizedFiles(
-  onChange: () => unknown,
-  onCancel: () => unknown
-) {
-  const watcher = watch(localizedFilePatterns, {
-    cwd: adevJaDir,
-    awaitWriteFinish: true,
-  });
-  watcher.on('change', async (file) => {
-    consola.info(`File changed: ${file}`);
-    await copyLocalizedFile(file);
-    onChange();
-  });
-  return {
-    cancel: async () => {
-      watcher.close();
-      await onCancel();
-    },
-  };
+export function watchLocalizedFiles() {
+  return new Observable<string>((subscriber) => {
+    const watcher = watch(localizedFilePatterns, {
+      cwd: adevJaDir,
+      awaitWriteFinish: true,
+    });
+    watcher.on('change', (file) => {
+      consola.info(`File changed: ${file}`);
+      subscriber.next(file);
+    });
+
+    return async () => {
+      await watcher.close();
+    };
+  }).pipe(
+    // 変更があったファイルをビルドディレクトリにコピーする
+    mergeMap((file) => from(copyLocalizedFile(file))),
+    // 1秒間の変更をまとめる
+    debounceTime(1000)
+  );
 }
 
 /**

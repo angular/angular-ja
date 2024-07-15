@@ -27,7 +27,7 @@ async function main() {
   const fileContent = await readFile(file, 'utf-8');
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
   const result = await model.generateContent([
-    '技術文書のHTMLファイルです。元のファイルの構造は保ったまま、本文中の英語を日本語に翻訳してください。内容の説明は出力せず、翻訳後のHTMLだけをそのまま出力してください。',
+    '技術文書のMarkdownファイルです。元のファイルの構造は保ったまま、本文中の英語を日本語に翻訳してください。内容の説明は出力せず、翻訳後のファイルだけをそのまま出力してください。',
     {
       inlineData: {
         data: Buffer.from(fileContent).toString('base64'),

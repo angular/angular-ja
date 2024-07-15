@@ -21,20 +21,14 @@ export default async function () {
 }
 
 async function syncSubmodule() {
-  const sh = $({ cwd: rootDir });
+  const sh = $({ cwd: rootDir, verbose: 'short' });
   await sh`git submodule sync`;
   await sh`git submodule update --init`;
 }
 
 async function initBuildDir() {
-  const buildDirExists = await exists(buildDir);
-  if (!buildDirExists) {
-    await rmrf(buildDir);
-    await mkdir(buildDir, { recursive: true });
-    await cpRf(resolve(rootDir, 'origin'), buildDir);
-    await cpRf(
-      resolve(rootDir, '.bazelrc'),
-      resolve(buildDir, '.bazelrc.user')
-    );
-  }
+  await rmrf(buildDir);
+  await mkdir(buildDir, { recursive: true });
+  await cpRf(resolve(rootDir, 'origin'), buildDir);
+  await cpRf(resolve(rootDir, '.bazelrc'), resolve(buildDir, '.bazelrc.user'));
 }

@@ -1,29 +1,23 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: build-and-test
+name: ci
 
 on: [pull_request]
 
 permissions:
   contents: read
 
-env:
-  BAZEL_REPO_CACHE_PATH: '~/.cache/bazel_repo_cache'
-
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         submodules: true
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version-file: '.node-version'
-  #         cache: yarn
-  #     - run: yarn install
-  #     - run: yarn test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: yarn
+      - run: yarn install
+      - run: yarn test
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -39,17 +33,6 @@ jobs:
           bazelisk-cache: true
           disk-cache: true
           repository-cache: true
-          bazelrc: |
-            # Print all the options that apply to the build.
-            # This helps us diagnose which options override others
-            # (e.g. /etc/bazel.bazelrc vs. tools/bazel.rc)
-            build --announce_rc
-
-            # More details on failures
-            build --verbose_failures=true
-
-            # CI supports colors but Bazel does not detect it.
-            common --color=yes
       - run: yarn install
       - run: yarn build
   # build-windows:

@@ -1,13 +1,7 @@
 version: 1
 imports:
   - path: ./node_modules/prh-rules/files/markdown.yml
-  - path: ./node_modules/prh-rules/media/techbooster.yml
-    disableImports: true
-    ignoreRules:
-      # 日本語以外のファイルでは半角カッコを使うため
-      - expected: （$1）
 rules:
-
 # 言い換え
 
   - expected: 依存性の注入
@@ -27,7 +21,6 @@ rules:
 
   - expected: Service Worker
     pattern:
-      - ServiceWorker
       - サービスワーカー
     options:
       wordBoundary: true

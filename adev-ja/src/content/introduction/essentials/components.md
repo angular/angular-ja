@@ -1,10 +1,10 @@
 <docs-decorative-header title="コンポーネント" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
-Angular でアプリケーションを作成するための基本的な構成要素。
+Angularでアプリケーションを作成するための基本的な構成要素。
 </docs-decorative-header>
 
 コンポーネントは、プロジェクトを理解しやすい部品に分割し、明確な責任を持たせることで、コードの保守性とスケーラビリティを向上させます。
 
-Todo アプリケーションをコンポーネントのツリーに分解する例を示します。
+Todoアプリケーションをコンポーネントのツリーに分解する例を示します。
 
 ```mermaid
 flowchart TD
@@ -15,18 +15,18 @@ flowchart TD
     D[TodoListItem]
 ```
 
-このガイドでは、Angular でコンポーネントを作成および使用する方法について説明します。
+このガイドでは、Angularでコンポーネントを作成および使用する方法について説明します。
 
 ## コンポーネントの定義
 
 すべてのコンポーネントには、核となる次のプロパティがあります。
 
 1. いくつかの設定を含む `@Component`[デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)
-2. DOM にレンダリングされる内容を制御する HTMLテンプレート
-3. HTML でコンポーネントがどのように使用されるかを定義する [CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)
-4. 状態管理、ユーザー入力処理、サーバーからのデータフェッチなどの動作を持つ TypeScriptクラス
+2. DOMにレンダリングされる内容を制御するHTMLテンプレート
+3. HTMLでコンポーネントがどのように使用されるかを定義する [CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)
+4. 状態管理、ユーザー入力処理、サーバーからのデータフェッチなどの動作を持つTypeScriptクラス
 
-TodoListItem コンポーネントの簡略化された例を次に示します。
+TodoListItemコンポーネントの簡略化された例を次に示します。
 
 ```ts
 // todo-list-item.component.ts
@@ -44,7 +44,7 @@ export class TodoListItem {
 コンポーネントでよく見られるその他のメタデータには次のものがあります。
 
 - `standalone: true` — コンポーネントの作成を簡素化する推奨アプローチ
-- `styles` — コンポーネントに適用する CSSスタイルを含む文字列または文字列の配列
+- `styles` — コンポーネントに適用するCSSスタイルを含む文字列または文字列の配列
 
 これを踏まえて、`TodoListItem` コンポーネントの更新バージョンを示します。
 
@@ -70,7 +70,7 @@ export class TodoListItem {
 
 ### HTMLとCSSを別ファイルに分離する
 
-HTMLやCSSを別ファイルで管理することを好むチーム向けに、Angular は `templateUrl` と `styleUrl` の2つの追加プロパティを提供します。
+HTMLやCSSを別ファイルで管理することを好むチーム向けに、Angularは `templateUrl` と `styleUrl` の2つの追加プロパティを提供します。
 
 前の `TodoListItem` コンポーネントを使用して、代替アプローチは次のようになります。
 

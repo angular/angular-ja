@@ -83,570 +83,570 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
-    label: 'In-depth Guides',
+    label: '詳細ガイド',
     children: [
       {
-        label: 'Components',
+        label: 'コンポーネント',
         children: [
           {
-            label: 'Anatomy of components',
+            label: 'コンポーネントの構造',
             path: 'guide/components',
             contentPath: 'guide/components/anatomy-of-components',
           },
           {
-            label: 'Importing and using components',
+            label: 'コンポーネントのインポートと使用',
             path: 'guide/components/importing',
             contentPath: 'guide/components/importing',
           },
           {
-            label: 'Selectors',
+            label: 'セレクター',
             path: 'guide/components/selectors',
             contentPath: 'guide/components/selectors',
           },
           {
-            label: 'Styling',
+            label: 'スタイリング',
             path: 'guide/components/styling',
             contentPath: 'guide/components/styling',
           },
           {
-            label: 'Accepting data with input properties',
+            label: '入力プロパティによるデータ受け入れ',
             path: 'guide/components/inputs',
             contentPath: 'guide/components/inputs',
           },
           {
-            label: 'Custom events with outputs',
+            label: '出力によるカスタムイベント',
             path: 'guide/components/outputs',
             contentPath: 'guide/components/outputs',
           },
           {
-            label: 'output() function',
+            label: 'output()関数',
             path: 'guide/components/output-fn',
             contentPath: 'guide/components/output-function',
           },
           {
-            label: 'Content projection with ng-content',
+            label: 'ng-contentによるコンテンツ投影',
             path: 'guide/components/content-projection',
             contentPath: 'guide/components/content-projection',
           },
           {
-            label: 'Host elements',
+            label: 'ホスト要素',
             path: 'guide/components/host-elements',
             contentPath: 'guide/components/host-elements',
           },
           {
-            label: 'Lifecycle',
+            label: 'ライフサイクル',
             path: 'guide/components/lifecycle',
             contentPath: 'guide/components/lifecycle',
           },
           {
-            label: 'Referencing component children with queries',
+            label: 'クエリによるコンポーネントの子への参照',
             path: 'guide/components/queries',
             contentPath: 'guide/components/queries',
           },
           {
-            label: 'Using DOM APIs',
+            label: 'DOM APIの使用',
             path: 'guide/components/dom-apis',
             contentPath: 'guide/components/dom-apis',
           },
           {
-            label: 'Inheritance',
+            label: '継承',
             path: 'guide/components/inheritance',
             contentPath: 'guide/components/inheritance',
           },
           {
-            label: 'Programmatically rendering components',
+            label: 'プログラムによるコンポーネントレンダリング',
             path: 'guide/components/programmatic-rendering',
             contentPath: 'guide/components/programmatic-rendering',
           },
           {
-            label: 'Advanced configuration',
+            label: '高度な設定',
             path: 'guide/components/advanced-configuration',
             contentPath: 'guide/components/advanced-configuration',
           },
           {
-            label: 'Custom Elements',
+            label: 'カスタム要素',
             path: 'guide/elements',
             contentPath: 'guide/elements',
           },
         ],
       },
       {
-        label: 'Template Syntax',
+        label: 'テンプレート構文',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/templates',
             contentPath: 'guide/templates/overview',
           },
           {
-            label: 'Text interpolation',
+            label: 'テキスト補間',
             path: 'guide/templates/interpolation',
             contentPath: 'guide/templates/interpolation',
           },
           {
-            label: 'Template statements',
+            label: 'テンプレートステートメント',
             path: 'guide/templates/template-statements',
             contentPath: 'guide/templates/template-statements',
           },
           {
-            label: 'Understanding binding',
+            label: 'バインディングを理解する',
             path: 'guide/templates/binding',
             contentPath: 'guide/templates/binding',
           },
           {
-            label: 'Property binding',
+            label: 'プロパティバインディング',
             path: 'guide/templates/property-binding',
             contentPath: 'guide/templates/property-binding',
           },
           {
-            label: 'Property binding best practices',
+            label: 'プロパティバインディングのベストプラクティス',
             path: 'guide/templates/property-binding-best-practices',
             contentPath: 'guide/templates/property-binding-best-practices',
           },
           {
-            label: 'Attribute binding',
+            label: '属性バインディング',
             path: 'guide/templates/attribute-binding',
             contentPath: 'guide/templates/attribute-binding',
           },
           {
-            label: 'Class and style binding',
+            label: 'クラスとスタイルのバインディング',
             path: 'guide/templates/class-binding',
             contentPath: 'guide/templates/class-binding',
           },
           {
-            label: 'Event binding',
+            label: 'イベントバインディング',
             path: 'guide/templates/event-binding',
             contentPath: 'guide/templates/event-binding',
           },
           {
-            label: 'Two-way binding',
+            label: '双方向バインディング',
             path: 'guide/templates/two-way-binding',
             contentPath: 'guide/templates/two-way-binding',
           },
           {
-            label: 'Control flow',
+            label: '制御フロー',
             path: 'guide/templates/control-flow',
             contentPath: 'guide/templates/control-flow',
           },
           {
-            label: 'Local template variables with @let',
+            label: '@letによるローカルテンプレート変数',
             path: 'guide/templates/let-template-variables',
             contentPath: 'guide/templates/let-template-variables',
           },
           {
-            label: 'Pipes',
+            label: 'パイプ',
             children: [
               {
-                label: 'Overview',
+                label: '概要',
                 path: 'guide/pipes',
                 contentPath: 'guide/pipes/overview',
               },
               {
-                label: 'Using a pipe in a template',
+                label: 'テンプレートでのパイプの使用',
                 path: 'guide/pipes/template',
                 contentPath: 'guide/pipes/template',
               },
               {
-                label: 'Custom pipes',
+                label: 'カスタムパイプ',
                 path: 'guide/pipes/transform-data',
                 contentPath: 'guide/pipes/transform-data',
               },
               {
-                label: 'Pipe precedence in expressions',
+                label: '式におけるパイプの優先順位',
                 path: 'guide/pipes/precedence',
                 contentPath: 'guide/pipes/precedence',
               },
               {
-                label: 'Change detection with pipes',
+                label: 'パイプによる変更検出',
                 path: 'guide/pipes/change-detection',
                 contentPath: 'guide/pipes/change-detection',
               },
               {
-                label: 'Unwrapping data from an observable',
+                label: 'Observableからのデータのアンラップ',
                 path: 'guide/pipes/unwrapping-data-observables',
                 contentPath: 'guide/pipes/unwrapping-data-observables',
               },
             ],
           },
           {
-            label: 'Template reference variables',
+            label: 'テンプレート参照変数',
             path: 'guide/templates/reference-variables',
             contentPath: 'guide/templates/reference-variables',
           },
           {
-            label: 'SVG as templates',
+            label: 'テンプレートとしてのSVG',
             path: 'guide/templates/svg-in-templates',
             contentPath: 'guide/templates/svg-in-templates',
           },
         ],
       },
       {
-        label: 'Directives',
+        label: 'ディレクティブ',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/directives',
             contentPath: 'guide/directives/overview',
           },
           {
-            label: 'Attribute directives',
+            label: '属性ディレクティブ',
             path: 'guide/directives/attribute-directives',
             contentPath: 'guide/directives/attribute-directives',
           },
           {
-            label: 'Structural directives',
+            label: '構造ディレクティブ',
             path: 'guide/directives/structural-directives',
             contentPath: 'guide/directives/structural-directives',
           },
           {
-            label: 'Directive composition API',
+            label: 'ディレクティブコンポジションAPI',
             path: 'guide/directives/directive-composition-api',
             contentPath: 'guide/directives/directive-composition-api',
           },
         ],
       },
       {
-        label: 'Dependency Injection',
+        label: '依存性の注入',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/di',
             contentPath: 'guide/di/overview',
           },
           {
-            label: 'Understanding dependency injection',
+            label: '依存性の注入を理解する',
             path: 'guide/di/dependency-injection',
             contentPath: 'guide/di/dependency-injection',
           },
           {
-            label: 'Creating an injectable service',
+            label: '注入可能なサービスの作成',
             path: 'guide/di/creating-injectable-service',
             contentPath: 'guide/di/creating-injectable-service',
           },
           {
-            label: 'Defining dependency providers',
+            label: '依存性プロバイダーの定義',
             path: 'guide/di/dependency-injection-providers',
             contentPath: 'guide/di/dependency-injection-providers',
           },
           {
-            label: 'Injection context',
+            label: 'インジェクションコンテキスト',
             path: 'guide/di/dependency-injection-context',
             contentPath: 'guide/di/dependency-injection-context',
           },
           {
-            label: 'Hierarchical injectors',
+            label: '階層的なインジェクター',
             path: 'guide/di/hierarchical-dependency-injection',
             contentPath: 'guide/di/hierarchical-dependency-injection',
           },
           {
-            label: 'Optimizing injection tokens',
+            label: 'インジェクショントークンの最適化',
             path: 'guide/di/lightweight-injection-tokens',
             contentPath: 'guide/di/lightweight-injection-tokens',
           },
           {
-            label: 'DI in action',
+            label: 'DIの動作',
             path: 'guide/di/di-in-action',
             contentPath: 'guide/di/di-in-action',
           },
         ],
       },
       {
-        label: 'Signals',
+        label: 'シグナル',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/signals',
             contentPath: 'guide/signals/overview',
           },
           {
-            label: 'RxJS Interop',
+            label: 'RxJSとの相互運用',
             path: 'guide/signals/rxjs-interop',
             contentPath: 'guide/signals/rxjs-interop',
           },
           {
-            label: 'Inputs as signals',
+            label: '入力としてのシグナル',
             path: 'guide/signals/inputs',
             contentPath: 'guide/signals/inputs',
           },
           {
-            label: 'Model inputs',
+            label: 'モデル入力',
             path: 'guide/signals/model',
             contentPath: 'guide/signals/model',
           },
           {
-            label: 'Queries as signals',
+            label: 'シグナルによるクエリ',
             path: 'guide/signals/queries',
             contentPath: 'guide/signals/queries',
           },
         ],
       },
       {
-        label: 'Routing',
+        label: 'ルーティング',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/routing',
             contentPath: 'guide/routing/overview',
           },
           {
-            label: 'Common routing tasks',
+            label: '一般的なルーティングタスク',
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
           },
           {
-            label: 'Routing in single-page applications',
+            label: 'シングルページアプリケーションでのルーティング',
             path: 'guide/routing/router-tutorial',
             contentPath: 'guide/routing/router-tutorial',
           },
           {
-            label: 'Creating custom route matches',
+            label: 'カスタムルートマッチの作成',
             path: 'guide/routing/routing-with-urlmatcher',
             contentPath: 'guide/routing/routing-with-urlmatcher',
           },
           {
-            label: 'Router reference',
+            label: 'ルーターリファレンス',
             path: 'guide/routing/router-reference',
             contentPath: 'guide/routing/router-reference',
           },
         ],
       },
       {
-        label: 'Forms',
+        label: 'フォーム',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/forms',
             contentPath: 'guide/forms/overview',
           },
           {
-            label: 'Reactive forms',
+            label: 'リアクティブフォーム',
             path: 'guide/forms/reactive-forms',
             contentPath: 'guide/forms/reactive-forms',
           },
           {
-            label: 'Strictly typed reactive forms',
+            label: '厳密に型付けされたリアクティブフォーム',
             path: 'guide/forms/typed-forms',
             contentPath: 'guide/forms/typed-forms',
           },
           {
-            label: 'Template-driven forms',
+            label: 'テンプレート駆動型フォーム',
             path: 'guide/forms/template-driven-forms',
             contentPath: 'guide/forms/template-driven-forms',
           },
           {
-            label: 'Validate form input',
+            label: 'フォーム入力の検証',
             path: 'guide/forms/form-validation',
             contentPath: 'guide/forms/form-validation',
           },
           {
-            label: 'Building dynamic forms',
+            label: '動的フォームの構築',
             path: 'guide/forms/dynamic-forms',
             contentPath: 'guide/forms/dynamic-forms',
           },
         ],
       },
       {
-        label: 'HTTP Client',
+        label: 'HTTPクライアント',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/http',
             contentPath: 'guide/http/overview',
           },
           {
-            label: 'Setting up HttpClient',
+            label: 'HttpClientの設定',
             path: 'guide/http/setup',
             contentPath: 'guide/http/setup',
           },
           {
-            label: 'Making requests',
+            label: 'リクエストの実行',
             path: 'guide/http/making-requests',
             contentPath: 'guide/http/making-requests',
           },
           {
-            label: 'Intercepting requests and responses',
+            label: 'リクエストとレスポンスへの介入',
             path: 'guide/http/interceptors',
             contentPath: 'guide/http/interceptors',
           },
           {
-            label: 'Testing',
+            label: 'テスト',
             path: 'guide/http/testing',
             contentPath: 'guide/http/testing',
           },
         ],
       },
       {
-        label: 'Performance',
+        label: 'パフォーマンス',
         children: [
           {
-            label: 'Deferrable views',
+            label: '遅延ビュー',
             path: 'guide/defer',
             contentPath: 'guide/defer',
           },
           {
-            label: 'Image Optimization',
+            label: '画像最適化',
             path: 'guide/image-optimization',
             contentPath: 'guide/image-optimization',
           },
           {
-            label: 'Server-side Rendering',
+            label: 'サーバーサイドレンダリング',
             path: 'guide/ssr',
             contentPath: 'guide/ssr',
           },
           {
-            label: 'Build-time prerendering',
+            label: 'ビルド時の事前レンダリング',
             path: 'guide/prerendering',
             contentPath: 'guide/prerendering',
           },
           {
-            label: 'Hydration',
+            label: 'ハイドレーション',
             path: 'guide/hydration',
             contentPath: 'guide/hydration',
           },
         ],
       },
       {
-        label: 'Testing',
+        label: 'テスト',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/testing',
             contentPath: 'guide/testing/overview',
           },
           {
-            label: 'Code coverage',
+            label: 'コードカバレッジ',
             path: 'guide/testing/code-coverage',
             contentPath: 'guide/testing/code-coverage',
           },
           {
-            label: 'Testing services',
+            label: 'サービスのテスト',
             path: 'guide/testing/services',
             contentPath: 'guide/testing/services',
           },
           {
-            label: 'Basics of testing components',
+            label: 'コンポーネントのテストの基本',
             path: 'guide/testing/components-basics',
             contentPath: 'guide/testing/components-basics',
           },
           {
-            label: 'Component testing scenarios',
+            label: 'コンポーネントのテストシナリオ',
             path: 'guide/testing/components-scenarios',
             contentPath: 'guide/testing/components-scenarios',
           },
           {
-            label: 'Testing attribute directives',
+            label: '属性ディレクティブのテスト',
             path: 'guide/testing/attribute-directives',
             contentPath: 'guide/testing/attribute-directives',
           },
           {
-            label: 'Testing pipes',
+            label: 'パイプのテスト',
             path: 'guide/testing/pipes',
             contentPath: 'guide/testing/pipes',
           },
           {
-            label: 'Debugging tests',
+            label: 'テストのデバッグ',
             path: 'guide/testing/debugging',
             contentPath: 'guide/testing/debugging',
           },
           {
-            label: 'Testing utility APIs',
+            label: 'テストユーティリティAPI',
             path: 'guide/testing/utility-apis',
             contentPath: 'guide/testing/utility-apis',
           },
         ],
       },
       {
-        label: 'Internationalization',
+        label: '国際化',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/i18n',
             contentPath: 'guide/i18n/overview',
           },
           {
-            label: 'Add the localize package',
+            label: 'localizeパッケージの追加',
             path: 'guide/i18n/add-package',
             contentPath: 'guide/i18n/add-package',
           },
           {
-            label: 'Refer to locales by ID',
+            label: 'IDによるロケールの参照',
             path: 'guide/i18n/locale-id',
             contentPath: 'guide/i18n/locale-id',
           },
           {
-            label: 'Format data based on locale',
+            label: 'ロケールに基づいたデータのフォーマット',
             path: 'guide/i18n/format-data-locale',
             contentPath: 'guide/i18n/format-data-locale',
           },
           {
-            label: 'Prepare component for translation',
+            label: '翻訳のためのコンポーネントの準備',
             path: 'guide/i18n/prepare',
             contentPath: 'guide/i18n/prepare',
           },
           {
-            label: 'Work with translation files',
+            label: '翻訳ファイルの操作',
             path: 'guide/i18n/translation-files',
             contentPath: 'guide/i18n/translation-files',
           },
           {
-            label: 'Merge translations into the app',
+            label: 'アプリへの翻訳の統合',
             path: 'guide/i18n/merge',
             contentPath: 'guide/i18n/merge',
           },
           {
-            label: 'Deploy multiple locales',
+            label: '複数のロケールのデプロイ',
             path: 'guide/i18n/deploy',
             contentPath: 'guide/i18n/deploy',
           },
           {
-            label: 'Import global variants of the locale data',
+            label: 'ロケールデータのグローバルバリアントのインポート',
             path: 'guide/i18n/import-global-variants',
             contentPath: 'guide/i18n/import-global-variants',
           },
           {
-            label: 'Manage marked text with custom IDs',
+            label: 'カスタムIDによるマークされたテキストの管理',
             path: 'guide/i18n/manage-marked-text',
             contentPath: 'guide/i18n/manage-marked-text',
           },
           {
-            label: 'Example Angular application',
+            label: 'Angularアプリケーションの例',
             path: 'guide/i18n/example',
             contentPath: 'guide/i18n/example',
           },
         ],
       },
       {
-        label: 'Animations',
+        label: 'アニメーション',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/animations',
             contentPath: 'guide/animations/overview',
           },
           {
-            label: 'Transition and Triggers',
+            label: 'トランジションとトリガー',
             path: 'guide/animations/transition-and-triggers',
             contentPath: 'guide/animations/transition-and-triggers',
           },
           {
-            label: 'Complex Sequences',
+            label: '複雑なシーケンス',
             path: 'guide/animations/complex-sequences',
             contentPath: 'guide/animations/complex-sequences',
           },
           {
-            label: 'Reusable Animations',
+            label: '再利用可能なアニメーション',
             path: 'guide/animations/reusable-animations',
             contentPath: 'guide/animations/reusable-animations',
           },
           {
-            label: 'Route transition animations',
+            label: 'ルート遷移アニメーション',
             path: 'guide/animations/route-animations',
             contentPath: 'guide/animations/route-animations',
           },
         ],
       },
       {
-        label: 'Experimental features',
+        label: '実験的機能',
         children: [
           {label: 'Zoneless', path: 'guide/experimental/zoneless', contentPath: 'guide/zoneless'},
         ],
@@ -654,108 +654,108 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
-    label: 'Developer Tools',
+    label: '開発者ツール',
     children: [
       {
         label: 'Angular CLI',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'tools/cli',
             contentPath: 'tools/cli/overview',
           },
           {
-            label: 'Local set-up',
+            label: 'ローカル設定',
             path: 'tools/cli/setup-local',
             contentPath: 'tools/cli/setup-local',
           },
           {
-            label: 'Building Angular apps',
+            label: 'Angularアプリのビルド',
             path: 'tools/cli/build',
             contentPath: 'tools/cli/build',
           },
           {
-            label: 'Serving Angular apps for development',
+            label: '開発用ローカルサーバー',
             path: 'tools/cli/serve',
             contentPath: 'tools/cli/serve',
           },
           {
-            label: 'Deployment',
+            label: 'デプロイメント',
             path: 'tools/cli/deployment',
             contentPath: 'tools/cli/deployment',
           },
           {
-            label: 'End-to-End Testing',
+            label: 'エンドツーエンドテスト',
             path: 'tools/cli/end-to-end',
             contentPath: 'tools/cli/end-to-end',
           },
           {
-            label: 'Migrating to new build system',
+            label: '新しいビルドシステムへの移行',
             path: 'tools/cli/build-system-migration',
             contentPath: 'tools/cli/build-system-migration',
           },
           {
-            label: 'Build environments',
+            label: 'ビルド環境',
             path: 'tools/cli/environments',
             contentPath: 'tools/cli/environments',
           },
           {
-            label: 'Angular CLI builders',
+            label: 'Angular CLIビルダー',
             path: 'tools/cli/cli-builder',
             contentPath: 'tools/cli/cli-builder',
           },
           {
-            label: 'Generating code using schematics',
+            label: 'Schematicsによるコードの生成',
             path: 'tools/cli/schematics',
             contentPath: 'tools/cli/schematics',
           },
           {
-            label: 'Authoring schematics',
+            label: 'Schematicsの作成',
             path: 'tools/cli/schematics-authoring',
             contentPath: 'tools/cli/schematics-authoring',
           },
           {
-            label: 'Schematics for libraries',
+            label: 'ライブラリのSchematics',
             path: 'tools/cli/schematics-for-libraries',
             contentPath: 'tools/cli/schematics-for-libraries',
           },
           {
-            label: 'Template type checking',
+            label: 'テンプレート型チェック',
             path: 'tools/cli/template-typecheck',
             contentPath: 'tools/cli/template-typecheck',
           },
           {
-            label: 'Ahead-of-time (AOT) compilation',
+            label: '事前コンパイル (AOT) コンパイル',
             path: 'tools/cli/aot-compiler',
             contentPath: 'tools/cli/aot-compiler',
           },
           {
-            label: 'AOT metadata errors',
+            label: 'AOTメタデータエラー',
             path: 'tools/cli/aot-metadata-errors',
             contentPath: 'tools/cli/aot-metadata-errors',
           },
         ],
       },
       {
-        label: 'Libraries',
+        label: 'ライブラリ',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'tools/libraries',
             contentPath: 'tools/libraries/overview',
           },
           {
-            label: 'Creating Libraries',
+            label: 'ライブラリの作成',
             path: 'tools/libraries/creating-libraries',
             contentPath: 'tools/libraries/creating-libraries',
           },
           {
-            label: 'Using Libraries',
+            label: 'ライブラリの使用',
             path: 'tools/libraries/using-libraries',
             contentPath: 'tools/libraries/using-libraries',
           },
           {
-            label: 'Angular Package Format',
+            label: 'Angularパッケージフォーマット',
             path: 'tools/libraries/angular-package-format',
             contentPath: 'tools/libraries/angular-package-format',
           },
@@ -767,107 +767,107 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'tools/devtools',
       },
       {
-        label: 'Language Service',
+        label: '言語サービス',
         path: 'tools/language-service',
         contentPath: 'tools/language-service',
       },
     ],
   },
   {
-    label: 'Best Practices',
+    label: 'ベストプラクティス',
     children: [
       {
-        label: 'Style Guide',
+        label: 'スタイルガイド',
         path: 'style-guide',
         contentPath: 'best-practices/style-guide',
       },
       {
-        label: 'Security',
+        label: 'セキュリティ',
         path: 'best-practices/security',
         contentPath: 'guide/security', // Have not refactored due to build issues
       },
       {
-        label: 'Accessibility',
+        label: 'アクセシビリティ',
         path: 'best-practices/a11y',
         contentPath: 'best-practices/a11y',
       },
       {
-        label: 'Performance',
+        label: 'パフォーマンス',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'best-practices/runtime-performance',
             contentPath: 'best-practices/runtime-performance/overview',
           },
           {
-            label: 'Zone pollution',
+            label: 'ゾーンの汚染',
             path: 'best-practices/zone-pollution',
             contentPath: 'best-practices/runtime-performance/zone-pollution',
           },
           {
-            label: 'Slow computations',
+            label: '遅い計算',
             path: 'best-practices/slow-computations',
             contentPath: 'best-practices/runtime-performance/slow-computations',
           },
           {
-            label: 'Skipping component subtrees',
+            label: 'コンポーネントサブツリーのスキップ',
             path: 'best-practices/skipping-subtrees',
             contentPath: 'best-practices/runtime-performance/skipping-subtrees',
           },
         ],
       },
       {
-        label: 'Keeping up-to-date',
+        label: 'アップデートに追従する',
         path: 'update',
         contentPath: 'best-practices/update',
       },
     ],
   },
   {
-    label: 'Extended Ecosystem',
+    label: '拡張されたエコシステム',
     children: [
       {
-        label: 'Service Workers & PWAs',
+        label: 'Service WorkerとPWA',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'ecosystem/service-workers',
             contentPath: 'ecosystem/service-workers/overview',
           },
           {
-            label: 'Getting started',
+            label: 'はじめに',
             path: 'ecosystem/service-workers/getting-started',
             contentPath: 'ecosystem/service-workers/getting-started',
           },
           {
-            label: 'Configuration file',
+            label: '設定ファイル',
             path: 'ecosystem/service-workers/config',
             contentPath: 'ecosystem/service-workers/config',
           },
           {
-            label: 'Communicating with the service worker',
+            label: 'Service Workerとの通信',
             path: 'ecosystem/service-workers/communications',
             contentPath: 'ecosystem/service-workers/communications',
           },
           {
-            label: 'Push notifications',
+            label: 'プッシュ通知',
             path: 'ecosystem/service-workers/push-notifications',
             contentPath: 'ecosystem/service-workers/push-notifications',
           },
           {
-            label: 'Service worker devops',
+            label: 'Service WorkerのDevOps',
             path: 'ecosystem/service-workers/devops',
             contentPath: 'ecosystem/service-workers/devops',
           },
           {
-            label: 'App shell pattern',
+            label: 'App Shellパターン',
             path: 'ecosystem/service-workers/app-shell',
             contentPath: 'ecosystem/service-workers/app-shell',
           },
         ],
       },
       {
-        label: 'Web workers',
+        label: 'Web Worker',
         path: 'ecosystem/web-workers',
         contentPath: 'ecosystem/web-workers',
       },
@@ -884,7 +884,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'https://github.com/google-pay/google-pay-button#angular',
       },
       {
-        label: 'YouTube player',
+        label: 'YouTubeプレーヤー',
         path: 'https://github.com/angular/components/blob/main/src/youtube-player/README.md',
       },
       {
@@ -905,35 +905,35 @@ export const TUTORIALS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   {
     path: DefaultPage.TUTORIALS,
     contentPath: 'tutorials/home',
-    label: 'Tutorials',
+    label: 'チュートリアル',
   },
 ];
 
 const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
   {
-    label: 'Roadmap',
+    label: 'ロードマップ',
     path: 'roadmap',
     contentPath: 'reference/roadmap',
   },
   {
-    label: 'Get involved',
+    label: '開発に参加する',
     path: 'https://github.com/angular/angular/blob/main/CONTRIBUTING.md',
   },
   {
-    label: 'API Reference',
+    label: 'APIリファレンス',
     children: [
       {
-        label: 'Overview',
+        label: '概要',
         path: 'api',
       },
       ...getApiNavigationItems(),
     ],
   },
   {
-    label: 'CLI Reference',
+    label: 'CLIリファレンス',
     children: [
       {
-        label: 'Overview',
+        label: '概要',
         path: 'cli',
         contentPath: 'reference/cli',
       },
@@ -945,7 +945,7 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'ng analytics',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'cli/analytics',
           },
           {
@@ -974,7 +974,7 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'ng cache',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'cli/cache',
           },
           {
@@ -999,7 +999,7 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'ng completion',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'cli/completion',
           },
           {
@@ -1028,7 +1028,7 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'ng generate',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'cli/generate',
           },
           {
@@ -1136,10 +1136,10 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
-    label: 'Error Encyclopedia',
+    label: 'エラー百科辞典',
     children: [
       {
-        label: 'Overview',
+        label: '概要',
         path: 'errors',
         contentPath: 'reference/errors/overview',
       },
@@ -1401,54 +1401,54 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
-    label: 'Versioning and releases',
+    label: 'バージョニングとリリース',
     path: 'reference/releases',
     contentPath: 'reference/releases',
   },
   {
-    label: 'Version compatibility',
+    label: 'バージョン互換性',
     path: 'reference/versions',
     contentPath: 'reference/versions',
   },
   {
-    label: 'Update guide',
+    label: 'アップデートガイド',
     path: 'update-guide',
   },
   {
-    label: 'Configurations',
+    label: '設定',
     children: [
       {
-        label: 'File structure',
+        label: 'ファイル構造',
         path: 'reference/configs/file-structure',
         contentPath: 'reference/configs/file-structure',
       },
       {
-        label: 'Workspace configuration',
+        label: 'ワークスペース設定',
         path: 'reference/configs/workspace-config',
         contentPath: 'reference/configs/workspace-config',
       },
       {
-        label: 'Angular compiler options',
+        label: 'Angularコンパイラオプション',
         path: 'reference/configs/angular-compiler-options',
         contentPath: 'reference/configs/angular-compiler-options',
       },
       {
-        label: 'npm dependencies',
+        label: 'npmの依存関係',
         path: 'reference/configs/npm-packages',
         contentPath: 'reference/configs/npm-packages',
       },
     ],
   },
   {
-    label: 'Migrations',
+    label: 'マイグレーション',
     children: [
       {
-        label: 'Overview',
+        label: '概要',
         path: 'reference/migrations',
         contentPath: 'reference/migrations/overview',
       },
       {
-        label: 'Standalone',
+        label: 'スタンドアロン',
         path: 'reference/migrations/standalone',
         contentPath: 'reference/migrations/standalone',
       },
@@ -1458,22 +1458,22 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'reference/migrations/module-with-providers',
       },
       {
-        label: 'Typed Forms',
+        label: '型付けされたフォーム',
         path: 'reference/migrations/typed-forms',
         contentPath: 'reference/migrations/typed-forms',
       },
       {
-        label: 'Control Flow Syntax',
+        label: '制御フロー構文',
         path: 'reference/migrations/control-flow',
         contentPath: 'reference/migrations/control-flow',
       },
     ],
   },
   {
-    label: 'Concepts',
+    label: 'コンセプト',
     children: [
       {
-        label: 'Overview',
+        label: '概要',
         path: 'reference/concepts',
         contentPath: 'reference/concepts/overview',
       },
@@ -1481,7 +1481,7 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'NgModule',
         children: [
           {
-            label: 'Overview',
+            label: '概要',
             path: 'guide/ngmodules',
             contentPath: 'guide/ngmodules/overview',
           },
@@ -1548,12 +1548,12 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
 
 const FOOTER_NAVIGATION_DATA: NavigationItem[] = [
   {
-    label: 'Press Kit',
+    label: 'プレスキット',
     path: 'press-kit',
     contentPath: 'reference/press-kit',
   },
   {
-    label: 'License',
+    label: 'ライセンス',
     path: 'license',
     contentPath: 'reference/license',
   },

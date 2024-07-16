@@ -38,9 +38,12 @@ async function main() {
   // Execute translation
   const model = genAI.getGenerativeModel({
     model: 'gemini-1.5-flash',
-    systemInstruction: `あなたはWebフロントエンド技術に関するドキュメントの翻訳者です。英語を含むテキストファイルを受け取り、日本語に翻訳します。
-    翻訳を行う際は元のテキストの構造を維持してください。レスポンスは翻訳後のファイルだけを出力してください。
-    `,
+    systemInstruction: `
+あなたはWebフロントエンドに関する技術文書の翻訳アシスタントです。
+翻訳を行う際は元のテキストの形式や構造を維持してください。初心者にもわかりやすく平易な日本語に翻訳してください。
+入力: 英語を含むテキストファイル
+出力: 翻訳後のテキスト
+  `.trim(),
   });
   const result = await model.generateContentStream([
     {
@@ -75,10 +78,7 @@ async function main() {
   const outFilePath = file.replace(/\.en\.([^.]+)$/, '.$1');
   const save = await consola.prompt(
     `翻訳結果を保存しますか？\n保存先: ${outFilePath}`,
-    {
-      type: 'confirm',
-      initial: false,
-    }
+    { type: 'confirm', initial: false }
   );
   if (!save) {
     return;

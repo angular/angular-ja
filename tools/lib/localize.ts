@@ -100,29 +100,3 @@ async function replaceAdevGitHubEditLinks() {
     })
   );
 }
-
-// // copy robots.txt
-// async function copyRobots() {
-//   await $`chmod -R +w ${resolve(buildDir, 'dist/bin/aio/build')}`;
-//   const src = resolve(aiojaDir, 'src/robots.txt');
-//   const dest = resolve(buildDir, 'dist/bin/aio/build/robots.txt');
-//   await cpRf(src, dest);
-// }
-
-// // replace angular.io to angular.jp in sitemap.xml
-// async function modifySitemap() {
-//   await $`chmod -R +w ${resolve(buildDir, 'dist/bin/aio/build')}`;
-//   const sitemapPath = resolve(
-//     buildDir,
-//     'dist/bin/aio/build/generated/sitemap.xml'
-//   );
-//   await replaceAllInFile(sitemapPath, 'angular.io', 'angular.jp');
-// }
-
-// // copy _redirects
-// async function remove404HTML() {
-//   await $`chmod -R +w ${resolve(buildDir, 'dist/bin/aio/build')}`;
-//   const from = resolve(buildDir, 'dist/bin/aio/build/404.html');
-//   const to = resolve(buildDir, 'dist/bin/aio/build/_404.html');
-//   await rename(from, to);
-// }

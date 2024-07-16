@@ -7,11 +7,10 @@
  */
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import chalk from 'chalk';
+import { consola } from 'consola';
 import assert from 'node:assert';
 import { readFile, writeFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
-import { consola } from 'consola';
 
 async function main() {
   const apiKey = process.env.GOOGLE_API_KEY;
@@ -22,7 +21,7 @@ async function main() {
   const [file] = args.positionals;
   assert(file, 'ファイルを指定してください。');
 
-  console.log(chalk.green(`次のファイルを翻訳します: ${file}`));
+  consola.start(`次のファイルを翻訳します: ${file}`);
 
   const fileContent = await readFile(file, 'utf-8');
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -38,13 +37,18 @@ async function main() {
   const translatedContent = result.response.text();
   consola.log(translatedContent);
 
+  // 元のファイル拡張子が .en.* の場合は .* として保存する
+  const outFilePath = file.replace(/\.en\.([^.]+)$/, '.$1');
+  consola.ready(`翻訳結果の保存先: ${outFilePath}`);
   const save = await consola.prompt('翻訳結果を保存しますか？(y/N)', {
     type: 'confirm',
     initial: false,
   });
-  if (save) {
-    await writeFile(file, translatedContent);
+  if (!save) {
+    return;
   }
+  await writeFile(outFilePath, translatedContent);
+  consola.success(`保存しました`);
 }
 
 main().catch((error) => {

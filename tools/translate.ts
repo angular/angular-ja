@@ -7,43 +7,79 @@
  */
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleAIFileManager } from '@google/generative-ai/server';
 import { consola } from 'consola';
 import assert from 'node:assert';
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
+import { rootDir } from './lib/workspace';
 
 async function main() {
   const apiKey = process.env.GOOGLE_API_KEY;
   assert(apiKey, 'GOOGLE_API_KEY 環境変数が設定されていません。');
   const genAI = new GoogleGenerativeAI(apiKey);
+  const fileManager = new GoogleAIFileManager(apiKey);
 
   const args = parseArgs({ allowPositionals: true });
   const [file] = args.positionals;
   assert(file, 'ファイルを指定してください。');
 
-  consola.start(`次のファイルを翻訳します: ${file}`);
-
-  const fileContent = await readFile(file, 'utf-8');
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-  const result = await model.generateContent([
-    '技術文書のMarkdownファイルです。元のファイルの構造は保ったまま、本文中の英語を日本語に翻訳してください。内容の説明は出力せず、翻訳後のファイルだけをそのまま出力してください。',
+  consola.start(`ファイルを翻訳します: ${file}`);
+  // Upload files for translation
+  const prhFile = await fileManager.uploadFile(resolve(rootDir, 'prh.yml'), {
+    mimeType: 'text/plain',
+    displayName: 'prh.yml',
+  });
+  const contentFile = await fileManager.uploadFile(file, {
+    mimeType: 'text/markdown',
+    displayName: `content.md`,
+  });
+  // Execute translation
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-1.5-flash',
+    systemInstruction: `あなたはWebフロントエンド技術に関するドキュメントの翻訳者です。英語を含むテキストファイルを受け取り、日本語に翻訳します。
+    翻訳を行う際は元のテキストの構造を維持してください。レスポンスは翻訳後のファイルだけを出力してください。
+    `,
+  });
+  const result = await model.generateContentStream([
     {
-      inlineData: {
-        data: Buffer.from(fileContent).toString('base64'),
-        mimeType: 'text/markdown',
+      fileData: {
+        mimeType: contentFile.file.mimeType,
+        fileUri: contentFile.file.uri,
       },
     },
+    {
+      fileData: {
+        mimeType: prhFile.file.mimeType,
+        fileUri: prhFile.file.uri,
+      },
+    },
+    `content.md を日本語に翻訳してください。`,
+    `prh.yml は日本語の校正ルールが書かれたYAMLファイルです。ルールに従って翻訳後のテキストを修正してください。`,
   ]);
-  const translatedContent = result.response.text();
-  consola.log(translatedContent);
+  // Show translation result
+  process.stdout.write('\n----\n');
+  const chunks: string[] = [];
+  for await (const chunk of result.stream) {
+    const text = chunk.text();
+    chunks.push(text);
+    process.stdout.write(text);
+  }
+  process.stdout.write('\n----\n');
+
+  consola.success('翻訳完了');
+  const translatedContent = chunks.join('');
 
   // 元のファイル拡張子が .en.* の場合は .* として保存する
   const outFilePath = file.replace(/\.en\.([^.]+)$/, '.$1');
-  consola.ready(`翻訳結果の保存先: ${outFilePath}`);
-  const save = await consola.prompt('翻訳結果を保存しますか？(y/N)', {
-    type: 'confirm',
-    initial: false,
-  });
+  const save = await consola.prompt(
+    `翻訳結果を保存しますか？\n保存先: ${outFilePath}`,
+    {
+      type: 'confirm',
+      initial: false,
+    }
+  );
   if (!save) {
     return;
   }

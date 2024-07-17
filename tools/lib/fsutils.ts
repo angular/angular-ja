@@ -1,4 +1,7 @@
+import { globby } from 'globby';
 import { access, cp, readFile, rm, writeFile } from 'node:fs/promises';
+
+export const glob = globby;
 
 export async function rmrf(path: string) {
   try {

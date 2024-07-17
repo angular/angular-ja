@@ -1,0 +1,18 @@
+diff --git a/adev/src/app/environment.ts b/adev/src/app/environment.ts
+index 30f0d78db3..ed6d52c14a 100644
+--- a/adev/src/app/environment.ts
++++ b/adev/src/app/environment.ts
+@@ -11,9 +11,9 @@ export default {
+   // Those values are publicly visible in the search request headers, and presents search-only keys.
+   // https://www.algolia.com/doc/guides/security/api-keys/#search-only-api-key
+   algolia: {
+-    appId: 'L1XWT2UJ7F',
+-    apiKey: 'dfca7ed184db27927a512e5c6668b968',
+-    indexName: 'angular_v17',
++    appId: 'D4RZISVST0',
++    apiKey: '77e5a0684280325e2e1f313e0fcc11b8',
++    indexName: 'angular_jp_v18',
+   },
+-  googleAnalyticsId: 'G-XB6NEVW32B',
++  googleAnalyticsId: 'G-ZE76R447BW',
+ };

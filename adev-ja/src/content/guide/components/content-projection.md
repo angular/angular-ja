@@ -1,6 +1,6 @@
 # `ng-content` を使ったコンテンツの投影
 
-ヒント: このガイドは、すでに [基本概念のガイド](essentials) を読んだことを前提としています。Angularを初めて使う場合は、まずそちらを読んでください。
+Tip: このガイドは、すでに [基本概念のガイド](essentials) を読んだことを前提としています。Angularを初めて使う場合は、まずそちらを読んでください。
 
 多くの場合、さまざまな種類のコンテンツを格納するコンポーネントを作成する必要があります。
 例えば、カスタムカードコンポーネントを作成したいとします。
@@ -23,7 +23,7 @@ export class CustomCard {/* ... */}
 export class CustomCard {/* ... */}
 ```
 
-ヒント: `<ng-content>` は、
+Tip: `<ng-content>` は、
 [ネイティブの `<slot>` 要素](https://developer.mozilla.org/docs/Web/HTML/Element/slot) と似ていますが、
 Angular固有の機能も備えています。
 

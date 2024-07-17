@@ -1,6 +1,6 @@
 # RxJSとの相互運用
 
-**重要:** RxJS Interopパッケージは [開発者プレビュー](reference/releases#developer-preview) で利用可能です。お試しいただけますが、安定版になるまでは変更される可能性があります。
+IMPORTANT: RxJS Interopパッケージは [開発者プレビュー](reference/releases#developer-preview) で利用可能です。お試しいただけますが、安定版になるまでは変更される可能性があります。
 
 Angularの `@angular/core/rxjs-interop` パッケージは、[Angularシグナル](guide/signals) とRxJSのObservablesを統合するための便利なユーティリティを提供します。
 
@@ -27,7 +27,7 @@ export class Ticker {
 
 `async` パイプと同様に、`toSignal` はObservableをすぐに購読します。これにより副作用が発生する可能性があります。`toSignal` によって作成された購読は、`toSignal` を呼び出すコンポーネントまたはサービスが破棄されると、指定されたObservableから自動的に購読解除されます。
 
-**重要:** `toSignal` は購読を作成します。同じObservableに対して繰り返し呼び出すことは避け、代わりに返されたシグナルを再利用してください。
+IMPORTANT: `toSignal` は購読を作成します。同じObservableに対して繰り返し呼び出すことは避け、代わりに返されたシグナルを再利用してください。
 
 ### 注入コンテキスト
 

@@ -3,7 +3,7 @@
 シグナル入力を使用すると、親コンポーネントから値をバインドできます。
 これらの値は `Signal` を使用して公開され、コンポーネントのライフサイクル中に変化する可能性があります。
 
-役に立つ情報: シグナル入力は現在、[開発者プレビュー](/reference/releases#developer-preview)にあります。
+HELPFUL: シグナル入力は現在、[開発者プレビュー](/reference/releases#developer-preview)にあります。
 
 Angularは、2種類の入力をサポートしています。
 
@@ -130,7 +130,7 @@ class MyComp {
 <my-custom-comp disabled>
 ```
 
-重要: 入力の意味を変更する場合、または[不純な](https://en.wikipedia.org/wiki/Pure_function#Impure_functions)関数の場合は、変換を使用しないでください。
+IMPORTANT: 入力の意味を変更する場合、または[不純な](https://en.wikipedia.org/wiki/Pure_function#Impure_functions)関数の場合は、変換を使用しないでください。
 代わりに、意味が異なる変換には `computed` を、入力が変更されるたびに実行されるべき不純なコードには `effect` を使用してください。
 
 ## なぜシグナル入力を使用すべきなのか、`@Input()` を使用すべきではないのか

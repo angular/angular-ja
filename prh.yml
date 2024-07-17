@@ -175,6 +175,10 @@ rules:
       - かっこ
       - カッコ
 
+  - expected: 基本概念
+    pattern:
+      - エッセンシャル
+
   - expected: シグナル
     pattern:
       - Signals

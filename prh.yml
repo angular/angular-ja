@@ -2,7 +2,7 @@ version: 1
 imports:
   - path: ./node_modules/prh-rules/files/markdown.yml
 rules:
-# 言い換え
+  # 言い換え
 
   - expected: 依存性の注入
     pattern: 依存性注入
@@ -32,9 +32,14 @@ rules:
     pattern: インジェクトする
 
   - expected: 注入可能
-    pattern: 
+    pattern:
       - インジェクト可能
       - インジェクタブル
+
+  - expected: 注入コンテキスト
+    pattern: 
+      - インジェクトコンテキスト
+      - インジェクションコンテキスト
 
   - expected: 参照してください
     pattern: ご参照ください
@@ -47,7 +52,7 @@ rules:
 
   - expected: 静的な
     pattern: staticな
-  
+
   - expected: しやすく
     pattern: し易く
 
@@ -56,12 +61,12 @@ rules:
 
   - expected: 購読する
     pattern: サブスクライブする
-  
+
   - expected: ため
     pattern: /(行|作)?為(?!替)/
     regexpMustEmpty: $1
 
-# カタカナ語
+  # カタカナ語
 
   - expected: アプリケーション
     pattern: /アプリ(?!ケーション)/
@@ -70,10 +75,10 @@ rules:
     pattern: /オブザーバ(?!ー)/
 
   - expected: プロバイダー
-    pattern:  /プロバイダ(?!ー)/
+    pattern: /プロバイダ(?!ー)/
 
   - expected: コンシューマー
-    pattern:  /コンシューマ(?!ー)/
+    pattern: /コンシューマ(?!ー)/
 
   - expected: サーバー
     pattern: /サーバ(?!ー)/
@@ -86,7 +91,7 @@ rules:
 
   - expected: ルーター
     pattern: /ルータ(?!ー)/
-  
+
   - expected: デコレーター
     pattern: /デコレータ(?!ー)/
 
@@ -116,7 +121,7 @@ rules:
 
   - expected: トリガー
     pattern: /トリガ(?!ー)/
-  
+
   - expected: ハンドラー
     pattern: /ハンドラ(?!ー)/
 
@@ -157,7 +162,7 @@ rules:
     pattern: 接頭辞
 
   - expected: サフィックス
-    pattern: 
+    pattern:
       - 接尾辞
       - ポストフィックス
 
@@ -169,3 +174,17 @@ rules:
     pattern:
       - かっこ
       - カッコ
+
+  - expected: シグナル
+    pattern:
+      - Signals
+      - Signal
+
+  - expected: 算出シグナル
+    pattern:
+      - 計算されたシグナル
+
+  - expected: エフェクト
+    pattern:
+      - Effects
+      - Effect

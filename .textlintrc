@@ -1,6 +1,11 @@
 {
   "filters": {
-    "comments": true
+    "comments": true,
+    "allowlist": {
+      "allow": [
+        "/<docs-code[\\s\\S]*?</docs-code>/m"
+      ]
+    }
   },
   "rules": {
     "prh": {

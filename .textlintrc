@@ -20,7 +20,9 @@
       },
       "no-doubled-joshi": {
         "allow": [
-          "の"
+          "の",
+          "が",
+          "に"
         ]
       },
       "no-exclamation-question-mark": false,

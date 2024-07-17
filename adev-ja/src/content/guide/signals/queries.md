@@ -8,7 +8,7 @@
 
 シグナルクエリは、クエリ結果をリアクティブなシグナルプリミティブとして提供します。クエリ結果を `computed` や `effect` で使用し、これらの結果を他のシグナルと組み合わせることができます。
 
-**重要:** シグナルクエリは [開発者プレビュー](reference/releases#developer-preview) です。APIは、Angularの非推奨サイクルを経ることなく、フィードバックに基づいて変更される可能性があります。
+IMPORTANT: シグナルクエリは [開発者プレビュー](reference/releases#developer-preview) です。APIは、Angularの非推奨サイクルを経ることなく、フィードバックに基づいて変更される可能性があります。
 
 Angularのクエリに既に詳しい場合は、[シグナルベースのクエリとデコレーターベースのクエリの比較](#comparing-signal-based-queries-to-decorator-based-queries) に直接進むことができます。
 

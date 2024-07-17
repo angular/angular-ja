@@ -3,7 +3,7 @@
 `output()` 関数は、ディレクティブまたはコンポーネントで出力を宣言します。
 出力を使用すると、親コンポーネントに出力を送信できます。
 
-役に立つ情報: `output()` 関数は現在、[開発プレビュー](/reference/releases#developer-preview)です。
+HELPFUL: `output()` 関数は現在、[開発プレビュー](/reference/releases#developer-preview)です。
 
 <docs-code language="ts" highlight="[[5], [8]]">
 import {Component, output} from '@angular/core';
@@ -75,7 +75,7 @@ class MyDir {
 AngularはObservableへの購読を転送しますが、所有するディレクティブが破棄されると値の転送を停止します。
 上記の例では、`MyDir` が破棄されると、`nameChange` は値を送信しなくなります。
 
-役に立つ情報: ほとんどの場合、`output()` を使用すれば十分で、値を命令的に送信できます。
+HELPFUL: ほとんどの場合、`output()` を使用すれば十分で、値を命令的に送信できます。
 
 ## 出力をObservableに変換する
 

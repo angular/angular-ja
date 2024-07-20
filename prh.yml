@@ -195,3 +195,8 @@ rules:
     pattern:
       - Effects
       - Effect
+
+  - expected: ハイドレーション
+    pattern:
+      - hydration
+      - Hydration

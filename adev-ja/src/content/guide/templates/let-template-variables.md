@@ -1,14 +1,14 @@
-# Local template variables
+# ローカルテンプレート変数
 
-Angular's `@let` syntax allows you to define a local variable and re-use it across the template.
+Angularの `@let` 構文を使用すると、ローカル変数を定義してテンプレート全体で再利用できます。
 
-IMPORTANT: the `@let` syntax is currently in [Developer Preview](/reference/releases#developer-preview).
+IMPORTANT: `@let` 構文は現在 [開発者プレビュー](/reference/releases#developer-preview) です。
 
-## Syntax
+## 構文
 
-`@let` declarations are similar to [JavaScript's `let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) and
-their values can be any valid Angular expression. The expressions will be re-evaluated any time the
-template is executed.
+`@let` 宣言は [JavaScript の `let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) に似ており、
+その値は有効なAngular式であれば何でもかまいません。
+式はテンプレートが実行されるたびに再評価されます。
 
 ```html
 @let name = user.name;
@@ -21,9 +21,9 @@ template is executed.
                       'Ut enim ad minim veniam...';
 ```
 
-### Referencing the value of `@let`
+### `@let` の値を参照する
 
-Once you've declared the `@let`, you can reuse it anywhere in the template:
+`@let` を宣言したら、テンプレートのどこでも再利用できます。
 
 ```html
 @let user = user$ | async;
@@ -38,26 +38,26 @@ Once you've declared the `@let`, you can reuse it anywhere in the template:
     }
   </ul>
 
-  <button (click)="update(user)">Update profile</button>
+  <button (click)="update(user)">プロファイルの更新</button>
 }
 ```
 
-## Assignability
+## 代入可能性
 
-A key difference between `@let` and JavaScript's `let` is that `@let` cannot be re-assigned
-within the template, however its value will be recomputed when Angular runs change detection.
+`@let` とJavaScriptの `let` の主な違いは、`@let` はテンプレート内で再代入できないことです。
+ただし、Angularが変更検知を実行するときに値が再計算されます。
 
 ```html
 @let value = 1;
 
-<!-- Invalid -->
-<button (click)="value = value + 1">Increment the value</button>
+<!-- 無効 -->
+<button (click)="value = value + 1">値を増やす</button>
 ```
 
-## Scope
+## スコープ
 
-`@let` declarations are scoped to the current view and its descendants. Since they are not
-hoisted, they **cannot** be accessed by parent views or siblings:
+`@let` 宣言は、現在のビューとその子孫にスコープされます。
+ホイストされないため、親ビューや兄弟ビューからアクセスできません。
 
 ```html
 @let topLevel = value;
@@ -66,39 +66,39 @@ hoisted, they **cannot** be accessed by parent views or siblings:
   @let insideDiv = value;
 </div>
 
-{{topLevel}} <!-- Valid -->
-{{insideDiv}} <!-- Valid -->
+{{topLevel}} <!-- 有効 -->
+{{insideDiv}} <!-- 有効 -->
 
 @if (condition) {
-  {{topLevel + insideDiv}} <!-- Valid -->
+  {{topLevel + insideDiv}} <!-- 有効 -->
 
   @let nested = value;
 
   @if (condition) {
-    {{topLevel + insideDiv + nested}} <!-- Valid -->
+    {{topLevel + insideDiv + nested}} <!-- 有効 -->
   }
 }
 
 <div *ngIf="condition">
-  {{topLevel + insideDiv}} <!-- Valid -->
+  {{topLevel + insideDiv}} <!-- 有効 -->
 
   @let nestedNgIf = value;
 
   <div *ngIf="condition">
-     {{topLevel + insideDiv + nestedNgIf}} <!-- Valid -->
+     {{topLevel + insideDiv + nestedNgIf}} <!-- 有効 -->
   </div>
 </div>
 
-{{nested}} <!-- Error, not hoisted from @if -->
-{{nestedNgIf}} <!-- Error, not hoisted from *ngIf -->
+{{nested}} <!-- エラー、@if からホイストされていない -->
+{{nestedNgIf}} <!-- エラー、*ngIf からホイストされていない -->
 ```
 
-## Syntax definition
+## 構文の定義
 
-The `@let` syntax is formally defined as:
-* The `@let` keyword.
-* Followed by one or more whitespaces, not including new lines.
-* Followed by a valid JavaScript name and zero or more whitespaces.
-* Followed by the = symbol and zero or more whitespaces.
-* Followed by an Angular expression which can be multi-line.
-* Terminated by the `;` symbol.
+`@let` 構文は正式には次のように定義されています。
+* `@let` キーワード。
+* それに続く1つ以上の空白 (改行は含まない)。
+* それに続く有効なJavaScript名と0個以上の空白。
+* それに続く `=` 記号と0個以上の空白。
+* それに続くAngular式 (複数行にすることも可能)。
+* それに続く `;` 記号。

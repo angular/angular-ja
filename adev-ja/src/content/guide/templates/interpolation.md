@@ -1,24 +1,24 @@
-# Displaying values with interpolation
+# 補間による値の表示
 
-Interpolation refers to embedding expressions into marked up text. By default, interpolation uses the double curly braces `{{` and `}}` as delimiters.
+補間とは、マークアップされたテキストに式を埋め込むことを指します。デフォルトでは、補間は二重中括弧 `{{` と `}}` を区切り文字として使用します。
 
-To illustrate how interpolation works, consider an Angular component that contains a `currentCustomer` variable:
+補間がどのように機能するかを説明するために、`currentCustomer` 変数を含むAngularコンポーネントを考えてみましょう。
 
 <docs-code path="adev/src/content/examples/interpolation/src/app/app.component.ts" visibleLines="13"/>
 
-Use interpolation to display the value of this variable in the corresponding component template:
+対応するコンポーネントテンプレートで、この変数の値を表示するために補間を使用します。
 
 <docs-code path="adev/src/content/examples/interpolation/src/app/app.component.html" visibleRegion="interpolation-example1"/>
 
-Angular replaces `currentCustomer` with the string value of the corresponding component property. In this case, the value is `Maria`.
+Angularは `currentCustomer` を対応するコンポーネントプロパティの文字列値に置き換えます。この場合、値は `Maria` です。
 
-In the following example, Angular evaluates the `title` and `itemImageUrl` properties to display some title text and an image.
+次の例では、Angularは `title` と `itemImageUrl` プロパティを評価して、タイトルテキストと画像を表示します。
 
 <docs-code path="adev/src/content/examples/interpolation/src/app/app.component.html" visibleRegion="component-property"/>
 
-## What's Next
+## 次へ
 
 <docs-pill-row>
-  <docs-pill href="guide/templates/property-binding" title="Property binding"/>
-  <docs-pill href="guide/templates/event-binding" title="Event binding"/>
+  <docs-pill href="guide/templates/property-binding" title="プロパティバインディング"/>
+  <docs-pill href="guide/templates/event-binding" title="イベントバインディング"/>
 </docs-pill-row>

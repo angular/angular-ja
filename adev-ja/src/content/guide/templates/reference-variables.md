@@ -1,89 +1,89 @@
-# Understanding template variables
+# テンプレート変数を理解する
 
-Template variables help you use data from one part of a template in another part of the template.
-Use template variables to perform tasks such as respond to user input or finely tune your application's forms.
+テンプレート変数は、テンプレートの1つの部分から別の部分にデータを使用するのに役立ちます。
+テンプレート変数を使用して、ユーザー入力に応答したり、アプリケーションのフォームを微調整したりなどのタスクを実行します。
 
-A template variable can refer to the following:
+テンプレート変数は、以下を参照できます。
 
-* a DOM element within a template
-* a directive or component
-* a [TemplateRef](api/core/TemplateRef) from an [ng-template](api/core/ng-template)
-* a <a href="https://developer.mozilla.org/docs/Web/Web_Components" title="MDN: Web Components">web component</a>
+* テンプレート内のDOM要素
+* 指令またはコンポーネント
+* [ng-template](api/core/ng-template)からの[TemplateRef](api/core/TemplateRef)
+* <a href="https://developer.mozilla.org/docs/Web/Web_Components" title="MDN: Web Components">ウェブコンポーネント</a>
 
-## Syntax
+## 構文
 
-In the template, you use the hash symbol, `#`, to declare a template variable.
-The following template variable, `#phone`, declares a `phone` variable with the `<input>` element as its value.
+テンプレートでは、ハッシュ記号 `#` を使用してテンプレート変数を宣言します。
+次のテンプレート変数 `#phone` は、`<input>` 要素を値とする `phone` 変数を宣言します。
 
 <docs-code path="adev/src/content/examples/template-reference-variables/src/app/app.component.html" visibleRegion="ref-var" header="src/app/app.component.html"/>
 
-Refer to a template variable anywhere in the component's template.
-Here, a `<button>` further down the template refers to the `phone` variable.
+コンポーネントのテンプレートのどこでもテンプレート変数を参照します。
+ここでは、テンプレートの下にある `<button>` が `phone` 変数を参照しています。
 
 <docs-code path="adev/src/content/examples/template-reference-variables/src/app/app.component.html" visibleRegion="ref-phone" header="src/app/app.component.html"/>
 
-## How Angular assigns values to template variables
+## Angularがテンプレート変数に値を割り当てる方法
 
-Angular assigns a template variable a value based on where you declare the variable:
+Angularは、テンプレート変数を宣言した場所に基づいて、テンプレート変数に値を割り当てます。
 
-* If you declare the variable on a component, the variable refers to the component instance.
-* If you declare the variable on a standard HTML tag, the variable refers to the element.
-* If you declare the variable on an `<ng-template>` element, the variable refers to a `TemplateRef` instance which represents the template.
-  For more information on `<ng-template>`, see [How Angular uses the asterisk, `*`, syntax](guide/directives/structural-directives#asterisk) in [Structural directives](guide/directives/structural-directives).
+* コンポーネントで変数を宣言した場合、変数はコンポーネントインスタンスを参照します。
+* 標準のHTMLタグで変数を宣言した場合、変数は要素を参照します。
+* `<ng-template>` 要素で変数を宣言した場合、変数はテンプレートを表す `TemplateRef` インスタンスを参照します。
+  `<ng-template>` の詳細については、[構造ディレクティブ](guide/directives/structural-directives)の[Angularがアスタリスク `*` 構文を使用する方法](guide/directives/structural-directives#asterisk)を参照してください。
 
-## Variable specifying a name
+## 名前を指定する変数
 
-If the variable specifies a name on the right-hand side, such as `#var="ngModel"`, the variable refers to the directive or component on the element with a matching `exportAs` name.
-<!-- What does the second half of this mean?^^ Can we explain this more fully? Could I see a working example? -kw -->
+変数が `#var="ngModel"` のように右側に名前を指定している場合、変数は `exportAs` 名が一致する要素の指令またはコンポーネントを参照します。
+<!-- この後半の意味は？^^ もっと詳しく説明できますか？ 実行可能な例を見ることができますか？ -kw -->
 
-### Using `NgForm` with template variables
+### テンプレート変数と `NgForm` の使用
 
-In most cases, Angular sets the template variable's value to the element on which it occurs.
-In the previous example, `phone` refers to the phone number `<input>`.
-The button's click handler passes the `<input>` value to the component's `callPhone()` method.
+ほとんどの場合、Angularはテンプレート変数の値を、その変数が発生した要素に設定します。
+前の例では、`phone` は電話番号 `<input>` を参照します。
+ボタンのクリックハンドラーは、`<input>` の値をコンポーネントの `callPhone()` メソッドに渡します。
 
-The `NgForm` directive demonstrates getting a reference to a different value by referencing a directive's `exportAs` name.
-In the following example, the template variable, `itemForm`, appears three times separated by HTML.
+`NgForm` 指令は、指令の `exportAs` 名を参照することで、別の値への参照を取得する方法を示しています。
+次の例では、テンプレート変数 `itemForm` は、HTMLで区切られた3回表示されます。
 
 <docs-code path="adev/src/content/examples/template-reference-variables/src/app/app.component.html" visibleRegion="ngForm" header="src/app/hero-form.component.html"/>
 
-Without the `ngForm` attribute value, the reference value of `itemForm` would be
-the [HTMLFormElement](https://developer.mozilla.org/docs/Web/API/HTMLFormElement), `<form>`.
-If an element is an Angular Component, a reference with no attribute value will automatically reference the component instance. Otherwise, a reference with no value will reference the DOM element, even if the element has one or more directives applied to it.
+`ngForm` 属性値がなければ、`itemForm` の参照値は
+[HTMLFormElement](https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement)、`<form>` になります。
+要素がAngularコンポーネントの場合、属性値のない参照は自動的にコンポーネントインスタンスを参照します。それ以外の場合は、属性値のない参照はDOM要素を参照します。これは、要素に1つ以上の指令が適用されていても同じです。
 <!-- What is the train of thought from talking about a form element to the difference between a component and a directive? Why is the component directive conversation relevant here?  -kw I agree -alex -->
 
-## Template variable scope
+## テンプレート変数のスコープ
 
-Just like variables in JavaScript or TypeScript code, template variables are scoped to the template that declares them.
+JavaScriptまたはTypeScriptコードの変数と同様に、テンプレート変数は、その変数を宣言したテンプレートにスコープされています。
 
-Similarly, [Structural directives](guide/directives) such as `*ngIf` and `*ngFor`, or `<ng-template>` declarations create a new nested template scope, much like JavaScript's control flow statements like `if` and `for` create new lexical scopes. You cannot access template variables within one of these structural directives from outside of its boundaries.
+同様に、`*ngIf` や `*ngFor` などの[構造ディレクティブ](guide/directives)、または `<ng-template>` 宣言はJavaScriptの `if` や `for` などの制御フロー文が新しい字句スコープを作成するのと同じように新しいネストされたテンプレートスコープを作成します。これらの構造ディレクティブのいずれか内にあるテンプレート変数には、境界の外からアクセスできません。
 
-HELPFUL: Define a variable only once in the template so the runtime value remains predictable.
+HELPFUL: テンプレート内で変数を1回だけ定義してください。これにより、実行時の値が予測可能になります。
 
-### Accessing in a nested template
+### ネストされたテンプレートへのアクセス
 
-An inner template can access template variables that the outer template defines.
+内部テンプレートは、外部テンプレートが定義したテンプレート変数にアクセスできます。
 
-In the following example, changing the text in the `<input>` changes the value in the `<span>` because Angular immediately updates changes through the template variable, `ref1`.
+次の例では、`<input>` 内のテキストを変更すると、`<span>` 内の値も変更されます。これは、Angularがテンプレート変数 `ref1` を通じて変更をすぐに更新するためです。
 
 <docs-code path="adev/src/content/examples/template-reference-variables/src/app/app.component.html" visibleRegion="template-ref-vars-scope1" header="src/app/app.component.html"/>
 
-In this case, the `*ngIf` on `<span>` creates a new template scope, which includes the `ref1` variable from its parent scope.
+この場合、`<span>` の `*ngIf` は新しいテンプレートスコープを作成し、そのスコープには親スコープの `ref1` 変数が含まれます。
 
-However, accessing a template variable from a child scope in the parent template doesn't work:
+ただし、親テンプレートから子スコープのテンプレート変数にはアクセスできません。
 
 ```html
   <input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
-  <span>Value: {{ ref2?.value }}</span> <!-- doesn't work -->
+  <span>Value: {{ ref2?.value }}</span> <!-- 機能しません -->
 ```
 
-Here, `ref2` is declared in the child scope created by `*ngIf`, and is not accessible from the parent template.
+ここでは、`ref2` は `*ngIf` によって作成された子スコープで宣言されており、親テンプレートからはアクセスできません。
 
-## Template input variables
+## テンプレート入力変数
 
-A _template input variable_ is a variable with a value that is set when an instance of that template is created. See: [Writing structural directives](guide/directives/structural-directives)
+_テンプレート入力変数_ は、そのテンプレートのインスタンスが作成されるときに値が設定される変数です。[構造ディレクティブの記述](guide/directives/structural-directives) を参照してください。
 
-Template input variables can be seen in action in the long-form usage of `NgFor`:
+テンプレート入力変数は、`NgFor` の長形式の使用で確認できます。
 
 ```html
 <ul>
@@ -93,11 +93,11 @@ Template input variables can be seen in action in the long-form usage of `NgFor`
 </ul>
 ```
 
-The `NgFor` directive will instantiate this <ng-template> once for each hero in the `heroes` array, and will set the `hero` variable for each instance accordingly.
+`NgFor` 指令は、`heroes` 配列内の各ヒーローに対してこの `<ng-template>` を1回インスタンス化し、各インスタンスに対して `hero` 変数を適切に設定します。
 
-When an `<ng-template>` is instantiated, multiple named values can be passed which can be bound to different template input variables. The right-hand side of the `let-` declaration of an input variable can specify which value should be used for that variable.
+`<ng-template>` がインスタンス化されると、複数の名前付き値を渡すことができ、これらは異なるテンプレート入力変数にバインドできます。入力変数の `let-` 宣言の右側は、その変数にどの値を使用するかを指定できます。
 
-`NgFor` for example also provides access to the `index` of each hero in the array:
+たとえば、`NgFor` は配列内の各ヒーローの `index` にもアクセスできます。
 
 ```html
 <ul>
@@ -107,8 +107,8 @@ When an `<ng-template>` is instantiated, multiple named values can be passed whi
 </ul>
 ```
 
-## What’s next
+## 次へ
 
 <docs-pill-row>
-  <docs-pill href="guide/directives/structural-directives" title="Writing structural directives"/>
+  <docs-pill href="guide/directives/structural-directives" title="構造ディレクティブを作る"/>
 </docs-pill-row>

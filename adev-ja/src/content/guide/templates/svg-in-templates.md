@@ -1,17 +1,17 @@
-# SVG as templates
+# SVG をテンプレートとして使用
 
-You can use SVG files as templates in your Angular applications.
-When you use an SVG as the template, you are able to use directives and bindings just like with HTML templates.
-Use these features to dynamically generate interactive graphics.
+AngularアプリケーションでSVGファイルをテンプレートとして使用できます。
+SVGをテンプレートとして使用する場合、HTMLテンプレートと同様にディレクティブとバインディングを使用できます。
+これらの機能を使用して、動的にインタラクティブなグラフィックを生成します。
 
-## SVG syntax example
+## SVG 構文例
 
-The following example shows the syntax for using an SVG as a template.
+次の例は、SVGをテンプレートとして使用するための構文を示しています。
 
 <docs-code header="src/app/svg.component.ts" path="adev/src/content/examples/template-syntax/src/app/svg.component.ts"/>
 
-To see property and event binding in action, add the following code to your `svg.component.svg` file:
+プロパティとイベントのバインディングを実際に確認するために、次のコードを `svg.component.svg` ファイルに追加します。
 
 <docs-code header="src/app/svg.component.svg" path="adev/src/content/examples/template-syntax/src/app/svg.component.svg"/>
 
-The example given uses a `click()` event binding and the property binding syntax \(`[attr.fill]="fillColor"`\).
+この例では、`click()` イベントバインディングとプロパティバインディング構文 `[attr.fill]="fillColor"` を使用しています。

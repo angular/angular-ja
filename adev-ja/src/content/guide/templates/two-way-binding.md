@@ -1,64 +1,64 @@
-# Two-way binding
+# 双方向バインディング
 
-Two-way binding gives components in your application a way to share data.
-Use two-way binding to listen for events and update values simultaneously between parent and child components.
+双方向バインディングは、アプリケーションのコンポーネントにデータを共有する方法を提供します。
+親コンポーネントと子コンポーネントの間でイベントをリスンし、値を同時に更新するには、双方向バインディングを使用します。
 
-Two-way binding combines [property binding](guide/templates/property-binding) with event binding:
+双方向バインディングは、[プロパティバインディング](guide/templates/property-binding)とイベントバインディングを組み合わせたものです。
 
-| Bindings                                   | Details |
-|:---                                        |:---     |
-| [Property binding](guide/templates/property-binding) | Sets a specific element property.    |
-| [Event binding](guide/templates/event-binding)       | Listens for an element change event. |
+| バインディング                              | 詳細     |
+|:---                                          |:---     |
+| [プロパティバインディング](guide/templates/property-binding) | 特定の要素のプロパティを設定します。 |
+| [イベントバインディング](guide/templates/event-binding)       | 要素の変更イベントをリスンします。  |
 
-## Adding two-way data binding
+## 双方向データバインディングの追加
 
-Angular's two-way binding syntax is a combination of square brackets and parentheses, `[()]`.
-The `[()]` syntax combines the brackets of property binding, `[]`, with the parentheses of event binding, `()`, as follows.
+Angularの双方向バインディング構文は、角括弧と丸括弧を組み合わせた `[()]` です。
+`[()]` 構文は、プロパティバインディングの角括弧 `[]` とイベントバインディングの丸括弧 `()` を以下のように組み合わせます。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-syntax"/>
 
-## How two-way binding works
+## 双方向バインディングの仕組み
 
-For two-way data binding to work, the `@Output()` property must use the pattern, `inputChange`, where `input` is the name of the `@Input()` property.
-For example, if the `@Input()` property is `size`, the `@Output()` property must be `sizeChange`.
+双方向バインディングが機能するためには、`@Output()` プロパティは `inputChange` というパターンを使用する必要があります。ここで、`input` は `@Input()` プロパティの名前です。
+たとえば、`@Input()` プロパティが `size` の場合、`@Output()` プロパティは `sizeChange` でなければなりません。
 
-The following `sizerComponent` has a `size` value property and a `sizeChange` event.
-The `size` property is an `@Input()`, so data can flow into the `sizerComponent`.
-The `sizeChange` event is an `@Output()`, which lets data flow out of the `sizerComponent` to the parent component.
+次の `sizerComponent` には、`size` 値プロパティと `sizeChange` イベントがあります。
+`size` プロパティは `@Input()` なので、データは `sizerComponent` に流入できます。
+`sizeChange` イベントは `@Output()` で、データが `sizerComponent` から親コンポーネントに流出することを可能にします。
 
-Next, there are two methods, `dec()` to decrease the font size and `inc()` to increase the font size.
-These two methods use `resize()` to change the value of the `size` property within min/max value constraints, and to emit an event that conveys the new `size` value.
+次に、フォントサイズを小さくする `dec()` メソッドと、フォントサイズを大きくする `inc()` メソッドの2つのメソッドがあります。
+これらの2つのメソッドは、`resize()` を使用して `size` プロパティの値を最小値/最大値の制約内で変更し、新しい `size` 値を伝えるイベントを発行します。
 
 <docs-code header="src/app/sizer.component.ts" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.ts" visibleRegion="sizer-component"/>
 
-The `sizerComponent` template has two buttons that each bind the click event to the `inc()` and `dec()` methods.
-When the user clicks one of the buttons, the `sizerComponent` calls the corresponding method.
-Both methods, `inc()` and `dec()`, call the `resize()` method with a `+1` or `-1`, which in turn raises the `sizeChange` event with the new size value.
+`sizerComponent` テンプレートには、それぞれクリックイベントを `inc()` メソッドと `dec()` メソッドにバインドする2つのボタンがあります。
+ユーザーがボタンのいずれかをクリックすると、`sizerComponent` は対応するメソッドを呼び出します。
+`inc()` メソッドと `dec()` メソッドの両方が、`+1` または `-1` で `resize()` メソッドを呼び出し、それは新しいサイズ値で `sizeChange` イベントを発生させます。
 
 <docs-code header="src/app/sizer.component.html" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.html"/>
 
-In the `AppComponent` template, `fontSizePx` is two-way bound to the `SizerComponent`.
+`AppComponent` テンプレートでは、`fontSizePx` は `SizerComponent` に双方向にバインドされます。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-1"/>
 
-In the `AppComponent`, `fontSizePx` establishes the initial `SizerComponent.size` value by setting the value to `16`.
+`AppComponent` では、`fontSizePx` は `SizerComponent.size` の初期値を `16` に設定することで確立します。
 
 <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/two-way-binding/src/app/app.component.ts" visibleRegion="font-size"/>
 
-Clicking the buttons updates the `AppComponent.fontSizePx`.
-The revised `AppComponent.fontSizePx` value updates the style binding, which makes the displayed text bigger or smaller.
+ボタンをクリックすると、`AppComponent.fontSizePx` が更新されます。
+修正された `AppComponent.fontSizePx` 値はスタイルバインディングを更新し、表示されているテキストが大きくなったり小さくなったりします。
 
-The two-way binding syntax is shorthand for a combination of property binding and event binding.
-The `SizerComponent` binding as separate property binding and event binding is as follows.
+双方向バインディング構文は、プロパティバインディングとイベントバインディングの組み合わせの省略形です。
+`SizerComponent` のバインディングを別々のプロパティバインディングとイベントバインディングとして示すと、次のようになります。
 
 <docs-code header="src/app/app.component.html (expanded)" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-2"/>
 
-The `$event` variable contains the data of the `SizerComponent.sizeChange` event.
-Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
+`$event` 変数には `SizerComponent.sizeChange` イベントのデータが含まれます。
+ユーザーがボタンをクリックすると、Angularは `$event` 値を `AppComponent.fontSizePx` に割り当てます。
 
-<docs-callout title="Two-way binding in forms">
+<docs-callout title="フォームでの双方向バインディング">
 
-Because no built-in HTML element follows the `x` value and `xChange` event pattern, two-way binding with form elements requires `NgModel`.
-For more information on how to use two-way binding in forms, see Angular [NgModel](guide/directives#displaying-and-updating-properties-with-ngmodel).
+組み込みのHTML要素は `x` 値と `xChange` イベントのパターンに従わないため、フォーム要素での双方向バインディングには `NgModel` が必要です。
+フォームでの双方向バインディングの使用方法の詳細については、Angularの [NgModel](guide/directives#displaying-and-updating-properties-with-ngmodel) を参照してください。
 
 </docs-callout>

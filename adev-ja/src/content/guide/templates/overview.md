@@ -1,50 +1,50 @@
-<docs-decorative-header title="Template syntax" imgSrc="adev/src/assets/images/templates.svg"> <!-- markdownlint-disable-line -->
-In Angular, a *template* is a chunk of HTML.
-Use special syntax within a template to build on many of Angular's features.
+<docs-decorative-header title="テンプレート構文" imgSrc="adev/src/assets/images/templates.svg"> <!-- markdownlint-disable-line -->
+Angularの *テンプレート* はHTMLの断片です。
+テンプレート内で特別な構文を使用すると、Angularの多くの機能を活用できます。
 </docs-decorative-header>
 
-Tip: Check out Angular's [Essentials](essentials/rendering-dynamic-templates) before diving into this comprehensive guide.
+Tip: この包括的なガイドに進む前に、Angularの[基本概念](essentials/rendering-dynamic-templates) を確認してください。
 
-<!--todo: Do we still need the following section? It seems more relevant to those coming from AngularJS, which is now 7 versions ago. -->
-<!-- You may be familiar with the component/template duality from your experience with model-view-controller (MVC) or model-view-viewmodel (MVVM).
-In Angular, the component plays the part of the controller/viewmodel, and the template represents the view. -->
+<!--todo: 以下のセクションは、まだ必要ですか？これは、AngularJS から来た人にとってはより関連性があるように思えます。AngularJS は、今では 7 バージョンも前のものです。 -->
+<!-- コンポーネント/テンプレートのデュアルリティは、モデル-ビュー-コントローラー (MVC) またはモデル-ビュー-ビューモデル (MVVM) の経験からご存知かもしれません。
+Angular では、コンポーネントはコントローラー/ビューモデルの役割を果たし、テンプレートはビューを表します。 -->
 
-Each Angular template in your application is a section of HTML to include as a part of the page that the browser displays.
-An Angular HTML template renders a view, or user interface, in the browser, just like regular HTML, but with a lot more functionality.
+アプリケーション内の各Angularテンプレートは、ブラウザに表示されるページの一部として含めるHTMLセクションです。
+Angular HTMLテンプレートは通常のHTMLと同様に、ブラウザでビュー、つまりユーザーインターフェースをレンダリングしますが、はるかに多くの機能を備えています。
 
-When you generate an Angular application with the Angular CLI, the `app.component.html` file is the default template containing placeholder HTML.
+Angular CLIを使用してAngularアプリケーションを生成すると、`app.component.html` ファイルは、プレースホルダーのHTMLを含むデフォルトのテンプレートになります。
 
-The template syntax guides show you how to control the UX/UI by coordinating data between the class and the template.
+テンプレート構文ガイドでは、クラスとテンプレート間のデータを調整することで、UX/UIを制御する方法を示します。
 
-## Empower your HTML
+## HTMLを強化する
 
-Extend the HTML vocabulary of your applications with special Angular syntax in your templates.
-For example, Angular helps you get and set DOM \(Document Object Model\) values dynamically with features such as built-in template functions, variables, event listening, and data binding.
+テンプレート内で特別なAngular構文を使用して、アプリケーションのHTMLボキャブラリを拡張します。
+たとえば、Angularは、組み込みのテンプレート関数、変数、イベントリスニング、データバインディングなどの機能を使用して、DOM (Document Object Model) の値を動的に取得および設定するのに役立ちます。
 
-Almost all HTML syntax is valid template syntax.
-However, because an Angular template is part of an overall webpage, and not the entire page, you don't need to include elements such as `<html>`, `<body>`, or `<base>`, and can focus exclusively on the part of the page you are developing.
+ほぼすべてのHTML構文は有効なテンプレート構文です。
+ただし、Angularテンプレートは、全体的なWebページの一部であり、ページ全体ではないため、`<html>`、`<body>`、または `<base>` などの要素を含める必要はありません。開発中のページの特定の部分に集中できます。
 
-IMPORTANT: To eliminate the risk of script injection attacks, Angular does not support the `<script>` element in templates.
-Angular ignores the `<script>` tag and outputs a warning to the browser console.
-For more information, see the [Security](best-practices/security) page.
+IMPORTANT: スクリプトインジェクション攻撃のリスクを排除するために、Angularはテンプレートでの `<script>` 要素をサポートしていません。
+Angularは `<script>` タグを無視し、ブラウザコンソールに警告を出力します。
+詳細については、[セキュリティ](best-practices/security) ページを参照してください。
 
-## More on template syntax
+## テンプレート構文についてさらに詳しく
 
-You might also be interested in the following:
+次の項目にも興味があるかもしれません。
 
-| Topics                                                                    | Details                                                                       |
+| トピック                                                                    | 詳細                                                                       |
 | :------------------------------------------------------------------------ | :---------------------------------------------------------------------------- |
-| [Interpolation](guide/templates/interpolation)                            | Learn how to use interpolation and expressions in HTML.                       |
-| [Template statements](guide/templates/template-statements)                | Respond to events in your templates.                                          |
-| [Binding syntax](guide/templates/binding)                                 | Use binding to coordinate values in your application.                         |
-| [Property binding](guide/templates/property-binding)                      | Set properties of target elements or directive `@Input()` decorators.         |
-| [Attribute, class, and style bindings](guide/templates/attribute-binding) | Set the value of attributes, classes, and styles.                             |
-| [Event binding](guide/templates/event-binding)                            | Listen for events and your HTML.                                              |
-| [Two-way binding](guide/templates/two-way-binding)                        | Share data between a class and its template.                                  |
-| [Control flow](guide/templates/control-flow)                              | Angular's syntax for conditionally showing, hiding, and repeating elements.   |
-| [Local template variables](guide/templates/let-template-variables)        | Define and reuse variables in your template.                                  |
-| [Built-in directives](guide/directives)                                   | Listen to and modify the behavior and layout of HTML.                         |
-| [Template reference variables](guide/templates/reference-variables)       | Use special variables to reference a DOM element within a template.           |
-| [Inputs](guide/components/inputs)                                         | Accepting data with input properties                                          |
-| [Outputs](guide/components/outputs)                                       | Custom events with outputs                                                    |
-| [SVG in templates](guide/templates/svg-in-templates)                      | Dynamically generate interactive graphics.                                    |
+| [補間](guide/templates/interpolation)                            | HTML で補間と式を使用する方法を学ぶ。                       |
+| [テンプレートステートメント](guide/templates/template-statements)                | テンプレートでイベントに応答する。                                          |
+| [バインディング構文](guide/templates/binding)                                 | バインディングを使用してアプリケーション内の値を調整する。                         |
+| [プロパティバインディング](guide/templates/property-binding)                      | ターゲット要素のプロパティまたはディレクティブ `@Input()` デコレーターを設定する。         |
+| [属性、クラス、スタイルバインディング](guide/templates/attribute-binding) | 属性、クラス、スタイルの値を設定する。                             |
+| [イベントバインディング](guide/templates/event-binding)                            | HTML でイベントをリスンする。                                              |
+| [双方向バインディング](guide/templates/two-way-binding)                        | クラスとそのテンプレート間でデータを共有する。                                  |
+| [制御フロー](guide/templates/control-flow)                              | 要素を条件付きで表示、非表示、繰り返しするための Angular の構文。   |
+| [ローカルテンプレート変数](guide/templates/let-template-variables)        | テンプレート内で変数を定義して再利用する。                                  |
+| [組み込みディレクティブ](guide/directives)                                   | HTML の動作とレイアウトをリスンして変更する。                         |
+| [テンプレート参照変数](guide/templates/reference-variables)       | 特殊な変数を使用して、テンプレート内の DOM 要素を参照する。           |
+| [入力](guide/components/inputs)                                         | 入力プロパティを使用してデータを受け入れる。                                          |
+| [出力](guide/components/outputs)                                       | 出力を使用してカスタムイベントを発生させる。                                                    |
+| [テンプレート内のSVG](guide/templates/svg-in-templates)                      | 動的にインタラクティブなグラフィックを生成する。                                    |

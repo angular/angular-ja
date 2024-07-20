@@ -1,12 +1,12 @@
-# Attribute binding
+# 属性バインディング
 
-Attribute binding in Angular helps you set values for attributes directly.
-With attribute binding, you can improve accessibility, style your application dynamically, and manage multiple CSS classes or styles simultaneously.
+Angularの属性バインディングを使用すると、属性の値を直接設定できます。
+属性バインディングを使用すると、アクセシビリティを向上させ、アプリケーションを動的にスタイル設定し、複数のCSSクラスまたはスタイルを同時に管理できます。
 
-## Syntax
+## 構文
 
-Attribute binding syntax resembles [property binding](guide/templates/property-binding), but instead of an element property between brackets, you precede the name of the attribute with the prefix `attr`, followed by a dot.
-Then, you set the attribute value with an expression that resolves to a string.
+属性バインディングの構文は [プロパティバインディング](guide/templates/property-binding) に似ていますが、角括弧で囲まれた要素プロパティの代わりに、属性名の前に `attr` プレフィックスとドットを付けます。
+次に、属性値を文字列に変換される式で設定します。
 
 <docs-code language="html">
 
@@ -14,40 +14,40 @@ Then, you set the attribute value with an expression that resolves to a string.
 
 </docs-code>
 
-HELPFUL: When the expression resolves to `null` or `undefined`, Angular removes the attribute altogether.
+HELPFUL: 式が `null` または `undefined` に解決されると、Angularは属性を完全に削除します。
 
-## Binding ARIA attributes
+## ARIA 属性のバインディング
 
-One of the primary use cases for attribute binding is to set ARIA attributes.
+属性バインディングの主なユースケースの1つは、ARIA属性を設定することです。
 
-To bind to an ARIA attribute, type the following:
+ARIA属性にバインドするには、次のように入力します。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/attribute-binding/src/app/app.component.html" visibleRegion="attrib-binding-aria"/>
 
-## Binding to `colspan`
+## `colspan` へのバインディング
 
-Another common use case for attribute binding is with the `colspan` attribute in tables.  Binding to the `colspan` attribute helps you to keep your tables programmatically dynamic.  Depending on the amount of data that your application populates a table with, the number of columns that a row spans could change.
+属性バインディングのもう1つの一般的なユースケースは、テーブルの `colspan` 属性です。 `colspan` 属性にバインディングすると、テーブルをプログラムで動的に保つことができます。 アプリケーションがテーブルに表示するデータの量に応じて、行がまたがる列の数は変わる可能性があります。
 
-To use attribute binding with the `<td>` attribute `colspan`
+`<td>` 属性 `colspan` で属性バインディングを使用するには
 
-1. Specify the `colspan` attribute by using the following syntax: `[attr.colspan]`.
-1. Set `[attr.colspan]` equal to an expression.
+1. 次の構文を使用して `colspan` 属性を指定します。 `[attr.colspan]`。
+1. `[attr.colspan]` を式に等しく設定します。
 
-In the following example, you bind the `colspan` attribute to the expression `1 + 1`.
+次の例では、`colspan` 属性を式 `1 + 1` にバインドしています。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/attribute-binding/src/app/app.component.html" visibleRegion="colspan"/>
 
-This binding causes the `<tr>` to span two columns.
+このバインディングにより、`<tr>` は2つの列にまたがります。
 
-HELPFUL: Sometimes there are differences between the name of property and an attribute.
+HELPFUL: プロパティ名と属性名の間に違いがある場合があります。
 
-`colspan` is an attribute of `<td>`, while `colSpan`  with a capital "S" is a property.
-When using attribute binding, use `colspan` with a lowercase "s".
+`colspan` は `<td>` の属性ですが、大文字の "S" を使った `colSpan` はプロパティです。
+属性バインディングを使用する場合は、小文字の "s" を使った `colspan` を使用してください。
 
-For more information on how to bind to the `colSpan` property, see the [`colspan` and `colSpan`](guide/templates/property-binding#colspan-and-colspan) section of [Property Binding](guide/templates/property-binding).
+`colSpan` プロパティへのバインディング方法の詳細については、[プロパティバインディング](guide/templates/property-binding) の [`colspan` と `colSpan`](guide/templates/property-binding#colspan-and-colspan) セクションを参照してください。
 
-## What’s next
+## 次へ
 
 <docs-pill-row>
-  <docs-pill href="guide/templates/class-binding" title="Class & Style Binding"/>
+  <docs-pill href="guide/templates/class-binding" title="クラスとスタイルのバインディング"/>
 </docs-pill-row>

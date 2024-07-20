@@ -13,7 +13,7 @@ import assert from 'node:assert';
 import { stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { glob } from './lib/fsutils';
+import { getLineCount, glob } from './lib/fsutils';
 import { rootDir } from './lib/workspace';
 
 const apiKey = process.env.GOOGLE_API_KEY;
@@ -23,13 +23,13 @@ const fileManager = new GoogleAIFileManager(apiKey);
 const model = genAI.getGenerativeModel({
   model: 'gemini-1.5-flash',
   systemInstruction: `
-あなたはWebフロントエンドに関する技術文書の翻訳アシスタントです。
-Markdownファイルを受け取り、英語を日本語に翻訳した結果を出力してください。
-翻訳作業は以下のルールを遵守してください。
-- 元のMarkdownの文書構造を維持してください。
+あなたは技術文書の翻訳アシスタントです。
+Markdown形式のテキストを受け取り、日本語に翻訳してください。以下のルールを遵守してください。
+- 元のMarkdownの改行やインデントの構造を維持してください。
 - 内容の説明は含めず、翻訳結果のみを出力してください。
 - コードブロックの中身は翻訳しないでください。
-- "TIP: ", "HELPFUL: ", "IMPORTANT: "など、ヒントや注意書きを示すプレフィックスは変更しないでください。
+- 行頭の特別なプレフィックス [TIP,HELPFUL,IMPORTANT,NOTE,QUESTION,TLDR,CRITICAL] は翻訳しないでください。
+- prh.yml は日本語の校正ルールが書かれたYAMLファイルです。このルールに従って翻訳してください。
 `.trim(),
 });
 
@@ -81,35 +81,82 @@ async function translateFile(file: string, forceWrite = false) {
     displayName: `content.md`,
   });
   // Execute translation
-  const result = await model.generateContentStream([
-    {
-      fileData: {
-        mimeType: contentFile.file.mimeType,
-        fileUri: contentFile.file.uri,
-      },
-    },
-    {
-      fileData: {
-        mimeType: prhFile.file.mimeType,
-        fileUri: prhFile.file.uri,
-      },
-    },
-    `content.md を日本語に翻訳してください。`,
-    `prh.yml は日本語の校正ルールが書かれたYAMLファイルです。ルールに従って翻訳後のテキストを修正してください。`,
-  ]);
-  // Show translation result
-  process.stdout.write('\n----\n');
-  const chunks: string[] = [];
-  for await (const chunk of result.stream) {
-    const text = chunk.text();
-    chunks.push(text);
-    process.stdout.write(text);
+  consola.info(`翻訳中...`);
+  const lineCount = await getLineCount(file);
+  if (lineCount < 500) {
+    const translatedContent = await model
+      .generateContent([
+        {
+          fileData: {
+            mimeType: prhFile.file.mimeType,
+            fileUri: prhFile.file.uri,
+          },
+        },
+        {
+          fileData: {
+            mimeType: contentFile.file.mimeType,
+            fileUri: contentFile.file.uri,
+          },
+        },
+        `content.md を日本語に翻訳してください。`,
+      ])
+      .then(({ response }) => response.text());
+    await writeTranslatedContent(file, translatedContent, forceWrite);
+  } else {
+    consola.warn(
+      `ファイルが大きいため、いくつかの断片に分割して翻訳されます。翻訳後の整合性に注意してください。`
+    );
+    const translationChunks: string[] = [];
+    const chat = await model.startChat({ history: [] });
+    let count = 1;
+    const maxCount = Math.ceil(lineCount / 100); // 100行ごとに分割した回数より多くなった場合はエラー
+    let lastTranslationChunk = await chat
+      .sendMessage([
+        {
+          fileData: {
+            mimeType: prhFile.file.mimeType,
+            fileUri: prhFile.file.uri,
+          },
+        },
+        {
+          fileData: {
+            mimeType: contentFile.file.mimeType,
+            fileUri: contentFile.file.uri,
+          },
+        },
+        `content.md を日本語に翻訳してください。翻訳結果のテキストを100行ずつに分割して。その1番目の部分を出力してください。`,
+      ])
+      .then(({ response }) => response.text().trim());
+    while (count < maxCount) {
+      consola.log(`\n---- 翻訳結果 (${count}) ----\n`);
+      consola.log(lastTranslationChunk);
+      translationChunks.push(lastTranslationChunk);
+      translationChunks.push(`<!-- TRANSLATION_CHUNK -->`);
+
+      // Continue translation
+      count++;
+      const chunk = await chat
+        .sendMessage(
+          `続けて、翻訳結果の${count}番目の部分を出力してください。${count}番目が存在しなければ「EOF」と出力してください`
+        )
+        .then(({ response }) => response.text().trim());
+      // Abort if infinite loop detected
+      if (chunk === 'EOF' || lastTranslationChunk === chunk) {
+        break;
+      }
+      lastTranslationChunk = chunk;
+    }
+    consola.success('翻訳完了');
+    const translatedContent = translationChunks.join('\n');
+    await writeTranslatedContent(file, translatedContent, forceWrite);
   }
-  process.stdout.write('\n----\n');
+}
 
-  consola.success('翻訳完了');
-  const translatedContent = chunks.join('');
-
+async function writeTranslatedContent(
+  file: string,
+  content: string,
+  forceWrite = false
+) {
   // 元のファイル拡張子が .en.* の場合は .* として保存する
   const outFilePath = file.replace(/\.en\.([^.]+)$/, '.$1');
   const save =
@@ -121,7 +168,7 @@ async function translateFile(file: string, forceWrite = false) {
   if (!save) {
     return;
   }
-  await writeFile(outFilePath, translatedContent);
+  await writeFile(outFilePath, content);
   consola.success(`保存しました`);
 }
 

@@ -35,8 +35,8 @@ export async function rename(oldPath: string, newPath: string) {
   await rm(oldPath);
 }
 
-export async function getLineCount(path: string) {
-  return $`wc -l ${path}`.then(({ stdout }) => {
+export async function getWordCount(path: string) {
+  return $`wc -c ${path}`.then(({ stdout }) => {
     return parseInt(stdout.trim().split(' ')[0]);
   });
 }

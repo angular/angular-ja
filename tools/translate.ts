@@ -13,7 +13,7 @@ import assert from 'node:assert';
 import { stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { getLineCount, glob } from './lib/fsutils';
+import { getWordCount, glob } from './lib/fsutils';
 import { rootDir } from './lib/workspace';
 
 const apiKey = process.env.GOOGLE_API_KEY;
@@ -28,6 +28,7 @@ Markdown形式のテキストを受け取り、日本語に翻訳してくださ
 - 元のMarkdownの改行やインデントの構造を維持してください。
 - 内容の説明は含めず、翻訳結果のみを出力してください。
 - コードブロックの中身は翻訳しないでください。
+- 英単語の前後にスペースを入れないでください。
 - 行頭の特別なプレフィックス [TIP,HELPFUL,IMPORTANT,NOTE,QUESTION,TLDR,CRITICAL] は翻訳しないでください。
 - prh.yml は日本語の校正ルールが書かれたYAMLファイルです。このルールに従って翻訳してください。
 `.trim(),
@@ -82,8 +83,8 @@ async function translateFile(file: string, forceWrite = false) {
   });
   // Execute translation
   consola.info(`翻訳中...`);
-  const lineCount = await getLineCount(file);
-  if (lineCount < 500) {
+  const wordCound = await getWordCount(file);
+  if (wordCound < 10000) {
     const translatedContent = await model
       .generateContent([
         {
@@ -109,7 +110,7 @@ async function translateFile(file: string, forceWrite = false) {
     const translationChunks: string[] = [];
     const chat = await model.startChat({ history: [] });
     let count = 1;
-    const maxCount = Math.ceil(lineCount / 100); // 100行ごとに分割した回数より多くなった場合はエラー
+    const maxCount = 20;
     let lastTranslationChunk = await chat
       .sendMessage([
         {

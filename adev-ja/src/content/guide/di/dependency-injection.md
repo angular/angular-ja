@@ -62,7 +62,7 @@ class HeroListComponent {}
 
 コンポーネントレベルでプロバイダーを登録すると、そのコンポーネントの新しいインスタンスごとに、サービスの新しいインスタンスが取得されます。
 
-注：このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
+Note: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
 
 ### `ApplicationConfig` を使用してアプリケーションのルートレベルで提供する
 
@@ -84,7 +84,7 @@ export const appConfig: ApplicationConfig = {
 bootstrapApplication(AppComponent, appConfig)
 </docs-code>
 
-注：このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
+Note: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
 
 ### `NgModule` ベースのアプリケーション
 

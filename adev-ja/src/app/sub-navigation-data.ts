@@ -329,7 +329,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/di/dependency-injection-providers',
           },
           {
-            label: 'インジェクションコンテキスト',
+            label: '注入コンテキスト',
             path: 'guide/di/dependency-injection-context',
             contentPath: 'guide/di/dependency-injection-context',
           },
@@ -344,7 +344,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/di/lightweight-injection-tokens',
           },
           {
-            label: 'DIの動作',
+            label: 'DIの実践',
             path: 'guide/di/di-in-action',
             contentPath: 'guide/di/di-in-action',
           },

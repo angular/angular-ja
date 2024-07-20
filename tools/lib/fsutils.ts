@@ -1,3 +1,4 @@
+import { $ } from 'execa';
 import { globby } from 'globby';
 import { access, cp, readFile, rm, writeFile } from 'node:fs/promises';
 
@@ -32,4 +33,10 @@ export async function replaceAllInFile(
 export async function rename(oldPath: string, newPath: string) {
   await cp(oldPath, newPath);
   await rm(oldPath);
+}
+
+export async function getLineCount(path: string) {
+  return $`wc -l ${path}`.then(({ stdout }) => {
+    return parseInt(stdout.trim().split(' ')[0]);
+  });
 }

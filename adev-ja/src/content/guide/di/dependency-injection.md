@@ -93,7 +93,7 @@ bootstrapApplication(AppComponent, appConfig)
 モジュールで提供されたサービスは、モジュールのすべての宣言または同じ `ModuleInjector` を共有する他のモジュールで使用できます。
 すべてのエッジケースを理解するには、[階層型インジェクター](guide/di/hierarchical-dependency-injection) を参照してください。
 
-注：`providers` を使用してサービスを宣言すると、サービスが使用されていなくても、サービスはアプリケーションに含まれます。
+Note: `providers` を使用してサービスを宣言すると、サービスが使用されていなくても、サービスはアプリケーションに含まれます。
 
 ## 依存関係を注入する/消費する
 
@@ -121,14 +121,14 @@ Angularがコンポーネントがサービスに依存していることを発�
 
 ```mermaid
 graph TD;
-subgraph インジェクター
-serviceA[サービス A]
+subgraph Injector
+serviceA[Service A]
 heroService[HeroService]
-serviceC[サービス C]
-serviceD[サービス D]
+serviceC[Service C]
+serviceD[Service D]
 end
 direction TB
-componentConstructor["コンポーネント\nコンストラクター(HeroService)"]
+componentConstructor["Component\nconstructor(HeroService)"]
 heroService-->componentConstructor
 style componentConstructor text-align: left
 ```

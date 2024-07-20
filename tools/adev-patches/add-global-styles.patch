@@ -1,0 +1,23 @@
+diff --git a/adev/src/local-styles.scss b/adev/src/local-styles.scss
+index 4dcf2e82aa..ba311a65f9 100644
+--- a/adev/src/local-styles.scss
++++ b/adev/src/local-styles.scss
+@@ -1 +1,15 @@
+-@import './styles/xterm'; 
+\ No newline at end of file
++@import './styles/xterm'; 
++
++// adev-ja overrides
++docs-viewer {
++    // `balance` is not good for Japanese headings.
++    h1,
++    h2,
++    h3,
++    h4,
++    h5,
++    h6 {
++      text-wrap: pretty;
++    }
++  }
++  
+\ No newline at end of file

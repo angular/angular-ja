@@ -26,18 +26,25 @@ https://github.com/angular/angular/tree/main/adev
 
 ## 翻訳の追加
 
-未翻訳のドキュメントをあらたに翻訳するには、翻訳時点での原文ファイルを `xxx.en.md` として複製し、その原文に対する翻訳を `xxx.md` として作成します。
-その2つのファイルを追加するプルリクエストを提出してください。
+未翻訳のドキュメントをあらたに翻訳するには、翻訳時点での原文ファイル `xxx.en.md` に対する翻訳を `xxx.md` として作成します。以下のステップで翻訳を進めてください。
 
-### ローカル環境のセットアップ
+- `xxx.en.md` ファイルをコピーして `xxx.md` ファイルを作成する
+- `xxx.md` ファイルを翻訳する
 
-#### 1. リポジトリのクローン
+まとまった量のテキストの翻訳を省力化するため、Googleの[Gemini API](https://ai.google.dev/gemini-api?hl=ja)を使ったAI翻訳を導入しています。詳細は[TRANSLATION_WITH_AI.md](./docs/TRANSLATION_WITH_AI.md)を参照してください。
+
+
+## ローカル環境のセットアップ
+
+翻訳作業中にローカル環境でサイトを確認するためには、次の手順でセットアップを行います。
+
+### 1. リポジトリのクローン
 
 ```
 $ git clone git@github.com:angular/angular-ja.git
 ```
 
-#### 2. 初回のビルド
+### 2. 初回のビルド
 
 このリポジトリではsubmoduleを使って翻訳元リポジトリと統合しています。初回のビルド時にsubmoduleの同期やビルドディレクトリの初期化が行われます。15分ほどかかることがあるため、気長にお待ちください。
 
@@ -45,7 +52,8 @@ $ git clone git@github.com:angular/angular-ja.git
 $ yarn install
 $ yarn build
 ```
-#### 開発用サーバーを使った作業
+
+### 開発用サーバーを使った作業
 
 開発用ローカルサーバーを起動すると、ビルド結果を確認しながら翻訳作業ができます。
 
@@ -53,10 +61,25 @@ $ yarn build
 $ yarn start
 ```
 
-- ローカルサーバーの準備ができると自動的にブラウザが起動します
+- デフォルトでは `http://localhost:4200` でサーバーが立ち上がります
 - `adev-ja` ディレクトリ内のファイルを変更すると自動的に再ビルドされます
 
-#### ビルド
+`start` コマンドでは、翻訳用にパッチが適用されたアプリケーションコードを含む `build` ディレクトリを初期化せずに再利用します。初期化して開始したい場合は、 `--init` オプションを指定してください。
+
+```
+$ yarn start --init
+```
+
+### 文体チェック・自動修正
+
+textlintを使って文体チェックを行うことができます。次のコマンドで文体チェックを行い、自動修正を行うことができます。
+
+```
+$ yarn lint [--fix]
+```
+
+
+### ビルド
 
 次のコマンドでデプロイ可能な生成物をビルドします。
 
@@ -97,13 +120,9 @@ angular/angular-jaをフォークしたリポジトリに変更をプッシュ�
 
 日本語への翻訳は、以下のガイドラインに従ってください。
 
-### 原文を `.en.md` ファイルとして保存する
-
-originを更新したあとの原文自体のdiffを管理するために、翻訳した時点の原文を `xxx.en.md` ファイルとして保存します。
-新たに翻訳する場合は、英語で書かれた `xxx.md` ファイルを `xxx.en.md` ファイルにコピーし、コピー元の `xxx.md` ファイルを上書き編集します。
-
 ### 改行位置を原文と揃える
 
+originの変更に追従しやすくするため、翻訳した時点の原文を `xxx.en.md` ファイルとして保存しています。
 可能な限り、原文と翻訳文の行数を揃え、更新時のdiffチェックが楽になるように協力してください。
 
 ### textlintに従う
@@ -134,31 +153,12 @@ originを更新したあとの原文自体のdiffを管理するために、翻�
 
 参考: [箇条書きでの句点「。」の有無 – 小山特許事務所](https://www.koyamapat.jp/2019/06/11/itemize/)
 
-### `Dangling Links Found` について: アンカーの追加
+### 明示的な見出しIDの追加
 
-ビルドすると次のようなエラーが発生することがあります。
-
-```
-warn:    Dangling Links Found in "guide/deployment.json":
- - guide/browser-support#polyfills
-warn:    Dangling Links Found in "guide/deprecations.json":
- - guide/releases#deprecation-practices,
- - guide/component-styles#deprecated-deep--and-ng-deep
-warn:    Dangling Links Found in "guide/glossary.json":
- - guide/workspace-config#project-tool-configuration-options,
- - guide/workspace-config#project-tool-configuration-options
-warn:    Dangling Links Found in "api/common/NgForOf.json":
- - guide/template-syntax#template-reference-variables--var-
-error:   Error: 6 unmatched links
-```
-
-このエラーは、ドキュメンテーション内の相対リンクで、リンク先が見つからないことを警告しているものです。
-上記の1番上の例では、 `guide/deployment` の中から `guide/browser-support#polyfills` へリンクしているにもかかわらず、 `guide/browser-support` ページに `#polyfills` という見出しが存在しないことを警告しています。
-
-このエラーは `#` で始まる見出し部分を翻訳したときにしばしば発生します。リンクの参照を解決するために、翻訳文の中にアンカーを追加する必要があります。次のように、翻訳後の見出しに `{@a xxxxxx}` という形式のディレクティブを付与してください。
+ページ内の見出しにはリンク用のIDが付与されますが、ページ内・ページ外からのリンクには英語版の見出しIDが使われることがあります。未翻訳のガイドからのリンクを維持するために、見出しを翻訳した際には明示的なIDを追加してください。見出しIDは以下のように追加します。
 
 ```md
 
-## ポリフィル {@a polyfills}
+## ポリフィル {#polyfills}
 
 ```

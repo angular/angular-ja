@@ -16,7 +16,7 @@ index 4dcf2e82aa..ba311a65f9 100644
 +    h4,
 +    h5,
 +    h6 {
-+      text-wrap: pretty;
++      word-break: auto-phrase;
 +    }
 +  }
 +  

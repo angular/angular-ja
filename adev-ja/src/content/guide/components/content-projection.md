@@ -43,14 +43,14 @@ Angular固有の機能も備えています。
 export class CustomCard {/* ... */}
 ```
 
-```html
+```angular-html
 <!-- コンポーネントの利用 -->
 <custom-card>
   <p>これは投影されたコンテンツです</p>
 </custom-card>
 ```
 
-```html
+```angular-html
 <!-- レンダリングされたDOM -->
 <custom-card>
   <div class="card-shadow">
@@ -78,7 +78,7 @@ Angularのコンパイラは、ビルド時にすべての `<ng-content>` 要素
 Angularは、CSSセレクターに基づいて、複数の異なる要素を異なる `<ng-content>` プレースホルダーへの投影をサポートしています。
 上記のカードの例を拡張して、`select` 属性を使用して、カードのタイトルと本文の2つのプレースホルダーを作成できます。
 
-```html
+```angular-html
 <!-- コンポーネントテンプレート -->
 <div class="card-shadow">
   <ng-content select="card-title"></ng-content>
@@ -87,7 +87,7 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 </div>
 ```
 
-```html
+```angular-html
 <!-- コンポーネントの利用 -->
 <custom-card>
   <card-title>こんにちは</card-title>
@@ -95,7 +95,7 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 </custom-card>
 ```
 
-```html
+```angular-html
 <!-- レンダリングされたDOM -->
 <custom-card>
   <div class="card-shadow">
@@ -113,7 +113,7 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 `select` 属性を持たない `<ng-content>` プレースホルダーを1つ含める場合、
 後者は `select` 属性に一致しなかったすべての要素をキャプチャします。
 
-```html
+```angular-html
 <!-- コンポーネントテンプレート -->
 <div class="card-shadow">
   <ng-content select="card-title"></ng-content>
@@ -123,7 +123,7 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 </div>
 ```
 
-```html
+```angular-html
 <!-- コンポーネントの利用 -->
 <custom-card>
   <card-title>こんにちは</card-title>
@@ -132,7 +132,7 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 </custom-card>
 ```
 
-```html
+```angular-html
 <!-- レンダリングされたDOM -->
 <custom-card>
   <div class="card-shadow">
@@ -153,7 +153,7 @@ Angularは、任意の要素にCSSセレクターを指定できる特殊な属�
 `ngProjectAs` を持つ要素が `<ng-content>` プレースホルダーに対してチェックされると、
 Angularは要素のIDではなく `ngProjectAs` の値と比較します。
 
-```html
+```angular-html
 <!-- コンポーネントテンプレート -->
 <div class="card-shadow">
   <ng-content select="card-title"></ng-content>
@@ -162,7 +162,7 @@ Angularは要素のIDではなく `ngProjectAs` の値と比較します。
 </div>
 ```
 
-```html
+```angular-html
 <!-- コンポーネントの利用 -->
 <custom-card>
   <h3 ngProjectAs="card-title">こんにちは</h3>
@@ -171,7 +171,7 @@ Angularは要素のIDではなく `ngProjectAs` の値と比較します。
 </custom-card>
 ```
 
-```html
+```angular-html
 <!-- レンダリングされたDOM -->
 <custom-card>
   <div class="card-shadow">

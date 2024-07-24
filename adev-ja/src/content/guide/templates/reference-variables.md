@@ -72,7 +72,7 @@ HELPFUL: テンプレート内で変数を1回だけ定義してください。�
 
 ただし、親テンプレートから子スコープのテンプレート変数にはアクセスできません。
 
-```html
+```angular-html
   <input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
   <span>Value: {{ ref2?.value }}</span> <!-- 機能しません -->
 ```
@@ -85,7 +85,7 @@ _テンプレート入力変数_ は、そのテンプレートのインスタ�
 
 テンプレート入力変数は、`NgFor` の長形式の使用で確認できます。
 
-```html
+```angular-html
 <ul>
   <ng-template ngFor let-hero [ngForOf]="heroes">
     <li>{{hero.name}}
@@ -99,7 +99,7 @@ _テンプレート入力変数_ は、そのテンプレートのインスタ�
 
 たとえば、`NgFor` は配列内の各ヒーローの `index` にもアクセスできます。
 
-```html
+```angular-html
 <ul>
   <ng-template ngFor let-hero let-i="index" [ngForOf]="heroes">
     <li>Hero number {{i}}: {{hero.name}}

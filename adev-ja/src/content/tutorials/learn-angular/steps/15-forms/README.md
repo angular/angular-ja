@@ -14,7 +14,7 @@ Angularには、テンプレート駆動型フォームとリアクティブフ�
 
 `user.component.ts`で、`id`が`framework`に設定され、`type`が`text`に設定されたテキスト入力を使用してテンプレートを更新します。
 
-```html
+```angular-html
 <label for="framework">
   好きなフレームワーク:
   <input id="framework" type="text" />

@@ -11,7 +11,7 @@ export class ExpandablePanel {
 }
 </docs-code>
 
-```html
+```angular-html
 <expandable-panel (panelClosed)="savePanelState()" />
 ```
 
@@ -46,7 +46,7 @@ this.thumbDropped.emit({
 
 テンプレートでイベントリスナーを定義する場合、`$event` 変数からイベントデータにアクセスできます。
 
-```html
+```angular-html
 <custom-slider (valueChanged)="logValue($event)" />
 ```
 
@@ -61,7 +61,7 @@ export class CustomSlider {
 }
 </docs-code>
 
-```html
+```angular-html
 <custom-slider (valueChanged)="saveVolume()" />
 ```
 

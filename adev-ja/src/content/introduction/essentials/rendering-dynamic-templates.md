@@ -24,7 +24,7 @@ export class TodoListItem {
 
 Angularがコンポーネントをレンダリングすると、次の出力が見られます。
 
-```html
+```angular-html
 <p>Title: Read cup of coffee</p>
 ```
 
@@ -52,7 +52,7 @@ export class SignUpForm {
 
 この例では、`formIsInvalid`がtrueであるため、レンダリングされたHTMLは次のようになります。
 
-```html
+```angular-html
 <button type="submit" disabled>Submit</button>
 ```
 

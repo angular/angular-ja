@@ -11,7 +11,7 @@
 1. イベント名を含む属性を括弧内に追加する。
 2. イベントが発生したときに実行するJavaScript文を指定する。
 
-```html
+```angular-html
 <button (click)="save()">保存</button>
 ```
 
@@ -45,7 +45,7 @@ export class TextTransformer {
 
 [イベント](https://developer.mozilla.org/ja/docs/Web/API/Event)オブジェクトにアクセスする必要がある場合、Angularは関数に渡すことができる暗黙の`$event`変数を提供します。
 
-```html
+```angular-html
 <button (click)="createUser($event)">送信</button>
 ```
 

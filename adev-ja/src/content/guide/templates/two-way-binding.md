@@ -15,7 +15,7 @@
 Angularの双方向バインディング構文は、角括弧と丸括弧を組み合わせた `[()]` です。
 `[()]` 構文は、プロパティバインディングの角括弧 `[]` とイベントバインディングの丸括弧 `()` を以下のように組み合わせます。
 
-<docs-code header="src/app/app.component.html" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-syntax"/>
+<docs-code header="src/app/app.component.html" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-syntax" language="angular-html"/>
 
 ## 双方向バインディングの仕組み
 
@@ -29,7 +29,7 @@ Angularの双方向バインディング構文は、角括弧と丸括弧を組�
 次に、フォントサイズを小さくする `dec()` メソッドと、フォントサイズを大きくする `inc()` メソッドの2つのメソッドがあります。
 これらの2つのメソッドは、`resize()` を使用して `size` プロパティの値を最小値/最大値の制約内で変更し、新しい `size` 値を伝えるイベントを発行します。
 
-<docs-code header="src/app/sizer.component.ts" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.ts" visibleRegion="sizer-component"/>
+<docs-code header="src/app/sizer.component.ts" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.ts" visibleRegion="sizer-component" language="angular-ts"/>
 
 `sizerComponent` テンプレートには、それぞれクリックイベントを `inc()` メソッドと `dec()` メソッドにバインドする2つのボタンがあります。
 ユーザーがボタンのいずれかをクリックすると、`sizerComponent` は対応するメソッドを呼び出します。

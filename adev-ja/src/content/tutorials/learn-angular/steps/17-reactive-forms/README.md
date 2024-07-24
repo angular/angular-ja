@@ -60,7 +60,7 @@ export class AppComponent {
 
 さらに、各`FormControl`は`formControlName`ディレクティブでアタッチし、対応するプロパティに割り当てることができます。次のフォームコードを使用してテンプレートを更新します。
 
-```html
+```angular-html
 <form [formGroup]="profileForm">
   <label>
     Name
@@ -80,7 +80,7 @@ export class AppComponent {
 
 `FormGroup`からデータにアクセスする必要がある場合は、`FormGroup`の値にアクセスすることで行うことができます。テンプレートを更新してフォームの値を表示します。
 
-```html
+```angular-html
 ...
 <h2>Profile Form</h2>
 <p>Name: {{ profileForm.value.name }}</p>

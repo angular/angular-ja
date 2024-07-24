@@ -32,6 +32,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'introduction/what-is-angular',
       },
       {
+        label: 'インストール',
+        path: 'installation',
+        contentPath: 'introduction/installation',
+      },
+      {
         label: '基本概念',
         children: [
           {

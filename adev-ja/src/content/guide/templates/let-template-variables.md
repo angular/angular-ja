@@ -10,7 +10,7 @@ IMPORTANT: `@let` 構文は現在 [開発者プレビュー](/reference/releases
 その値は有効なAngular式であれば何でもかまいません。
 式はテンプレートが実行されるたびに再評価されます。
 
-```html
+```angular-html
 @let name = user.name;
 @let greeting = 'Hello, ' + name;
 @let data = data$ | async;
@@ -25,7 +25,7 @@ IMPORTANT: `@let` 構文は現在 [開発者プレビュー](/reference/releases
 
 `@let` を宣言したら、テンプレートのどこでも再利用できます。
 
-```html
+```angular-html
 @let user = user$ | async;
 
 @if (user) {
@@ -47,7 +47,7 @@ IMPORTANT: `@let` 構文は現在 [開発者プレビュー](/reference/releases
 `@let` とJavaScriptの `let` の主な違いは、`@let` はテンプレート内で再代入できないことです。
 ただし、Angularが変更検知を実行するときに値が再計算されます。
 
-```html
+```angular-html
 @let value = 1;
 
 <!-- 無効 -->
@@ -59,7 +59,7 @@ IMPORTANT: `@let` 構文は現在 [開発者プレビュー](/reference/releases
 `@let` 宣言は、現在のビューとその子孫にスコープされます。
 ホイストされないため、親ビューや兄弟ビューからアクセスできません。
 
-```html
+```angular-html
 @let topLevel = value;
 
 <div>

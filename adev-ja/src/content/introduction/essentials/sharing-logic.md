@@ -38,7 +38,7 @@ export class CalculatorService {
 以下は、`Receipt`コンポーネントでの例です。
 
 ```ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CalculatorService } from './calculator.service';
 
 @Component({

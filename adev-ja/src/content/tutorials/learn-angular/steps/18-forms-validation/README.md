@@ -41,7 +41,7 @@ profileForm = new FormGroup({
 フォームが有効かどうかを判断するには、`FormGroup` クラスには `valid` プロパティがあります。
 このプロパティを使用して属性を動的にバインドできます。フォームの有効性に基づいて、送信 `button` を有効にするように更新します。
 
-```html
+```angular-html
 <button type="submit" [disabled]="!profileForm.valid">送信</button>
 ```
 

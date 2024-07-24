@@ -6,7 +6,7 @@ Angularテンプレートは、要素の条件付き表示、非表示、およ�
 
 `@if` ブロックは、条件式が真の場合に、そのコンテンツを条件付きで表示します。
 
-```html
+```angular-html
 @if (a > b) {
   {{a}} is greater than {{b}}
 }
@@ -15,7 +15,7 @@ Angularテンプレートは、要素の条件付き表示、非表示、およ�
 `@if` ブロックには、1つ以上の関連付けられた`@else` ブロックを含めることができます。
 `@if` ブロックの直後には、任意の数の`@else if` ブロックと1つの`@else` ブロックをオプションで指定できます。
 
-```html
+```angular-html
 @if (a > b) {
   {{a}} is greater than {{b}}
 } @else if (b > a) {
@@ -30,7 +30,7 @@ Angularテンプレートは、要素の条件付き表示、非表示、およ�
 新しい組み込みの`@if` 条件式は、式の結果への参照をサポートしており、
 一般的なコーディングパターンの解決策を提供します。
 
-```html
+```angular-html
 @if (users$ | async; as users) {
   {{ users.length }}
 }
@@ -42,7 +42,7 @@ Angularテンプレートは、要素の条件付き表示、非表示、およ�
 コレクションは、任意のJavaScript [反復可能](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols)として表現できますが、
 通常の`Array`を使用するとパフォーマンス上の利点があります。基本的な`@for` ループは次のようになります。
 
-```html
+```angular-html
 @for (item of items; track item.id) {
   {{ item.name }}
 }
@@ -79,7 +79,7 @@ DOM操作の最小限のセットを実行できます。
 
 これらの変数は常にこれらの名前で使用できますが、`let` セグメントを使用して別名をつけることができます。
 
-```html
+```angular-html
 @for (item of items; track item.id; let idx = $index, e = $even) {
 Item #{{ idx }}: {{ item.name }}
 }
@@ -92,7 +92,7 @@ Item #{{ idx }}: {{ item.name }}
 `@for` ブロックコンテンツの直後に、オプションで`@empty` セクションを含めることができます。
 `@empty` ブロックのコンテンツは、アイテムがない場合に表示されます。
 
-```html
+```angular-html
 @for (item of items; track item.name) {
   <li> {{ item.name }}</li>
 } @empty {
@@ -104,7 +104,7 @@ Item #{{ idx }}: {{ item.name }}
 
 `switch` の構文は`if` と非常によく似ており、JavaScriptの`switch` 文を元にしています。
 
-```html
+```angular-html
 @switch (condition) {
   @case (caseA) {
     Case A.
@@ -147,7 +147,7 @@ Item #{{ idx }}: {{ item.name }}
 `@for` は組み込みなので、`trackBy` 関数を渡すよりも優れたエクスペリエンスを提供でき、キーを表す式を直接使用できます。
 `trackBy` から`track` への移行は、`trackBy` 関数を呼び出すことで可能です。
 
-```html
+```angular-html
 @for (item of items; track itemId($index, item)) {
   {{ item.name }}
 }

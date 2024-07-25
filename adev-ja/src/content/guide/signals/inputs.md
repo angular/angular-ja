@@ -49,7 +49,7 @@ class StudentDirective {
 シグナル入力は、読み取り専用のシグナルです。
 `signal()` を使用して宣言されたシグナルと同様に、入力シグナルを呼び出すことで、入力の現在の値にアクセスできます。
 
-```html
+```angular-html
 <p>First name: {{firstName()}}</p>
 <p>Last name: {{lastName()}}</p>
 ```
@@ -126,7 +126,7 @@ class MyComp {
 
 このように、`this.disabled()` を呼び出す際に、コンポーネント内では `boolean` のみを使用できます。一方、コンポーネントのユーザーは、空の文字列を省略記号として渡して、コンポーネントを無効にできます。
 
-```html
+```angular-html
 <my-custom-comp disabled>
 ```
 

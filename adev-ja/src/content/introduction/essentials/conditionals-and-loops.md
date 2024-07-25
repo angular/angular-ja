@@ -68,7 +68,7 @@ export class UserControls {
 
 JavaScriptの`for...of`ループと同様に、Angularは繰り返される要素をレンダリングするための`@for`ブロックを提供します。
 
-```html
+```angular-html
 <!-- ingredient-list.component.html -->
 <ul>
   @for (ingredient of ingredientList; track ingredient.name) {

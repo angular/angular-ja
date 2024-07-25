@@ -32,6 +32,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'introduction/what-is-angular',
       },
       {
+        label: 'インストール',
+        path: 'installation',
+        contentPath: 'introduction/installation',
+      },
+      {
         label: '基本概念',
         children: [
           {
@@ -478,6 +483,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       {
         label: 'パフォーマンス',
         children: [
+          {
+            label: '概要',
+            path: 'guide/performance',
+            contentPath: 'guide/performance/overview',
+          },
           {
             label: '遅延ビュー',
             path: 'guide/defer',

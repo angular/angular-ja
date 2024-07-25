@@ -55,7 +55,7 @@ addItem() {
 <docs-step title="`AppComponent`テンプレートを更新する">
 `app.component.ts`でテンプレートを更新して、次のようなコードを追加することで、発生したイベントを購読します。
 
-```html
+```angular-html
 <app-child (addItemEvent)="addItem($event)" />
 ```
 

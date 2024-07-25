@@ -16,7 +16,7 @@
 
 `@defer` ブロックでコメントコンポーネントをラップして、ロードを遅延させます。
 
-```html
+```angular-html
 @defer {
   <comments />
 }

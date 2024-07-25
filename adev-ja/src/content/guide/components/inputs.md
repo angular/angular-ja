@@ -15,7 +15,7 @@ export class CustomSlider {
 
 これにより、テンプレートでプロパティにバインドできます。
 
-```html
+```angular-html
 <custom-slider [value]="50" />
 ```
 
@@ -62,7 +62,7 @@ function trimString(value: string | undefined) {
 }
 </docs-code>
 
-```html
+```angular-html
 <custom-slider [label]="systemVolume" />
 ```
 
@@ -121,7 +121,7 @@ export class CustomSlider {
 }
 </docs-code>
 
-```html
+```angular-html
 <custom-slider [sliderValue]="50" />
 ```
 

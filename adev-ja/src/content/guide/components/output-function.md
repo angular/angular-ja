@@ -21,7 +21,7 @@ export class MyComp {
 出力は、`output` 関数をクラスメンバーのイニシャライザーとして使用すると、Angularによって自動的に認識されます。
 親コンポーネントは、イベントバインディング構文を使用して、テンプレート内の出力を購読できます。
 
-```html
+```angular-html
 <my-comp (onNameChange)="showNewName($event)" />
 ```
 

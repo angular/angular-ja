@@ -17,14 +17,14 @@ Angularは、コンポーネントのセレクターに一致するすべてのH
 export class ProfilePhoto {}
 ```
 
-```html
+```angular-html
 <!-- コンポーネントの使用 -->
 <h3>Your profile photo</h3>
 <profile-photo />
 <button>Upload a new profile photo</button>
 ```
 
-```html
+```angular-html
 <!-- レンダリングされたDOM -->
 <h3>Your profile photo</h3>
 <profile-photo>
@@ -116,7 +116,7 @@ export class CustomSlider {
 export class ProfilePhoto { /* ... */ }
 ```
 
-```html
+```angular-html
 <profile-photo role="group" [id]="otherId" />
 ```
 

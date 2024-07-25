@@ -82,7 +82,7 @@ export class InnerItem {
 
 上記の例では、「コンテンツの読み込み」ボタンをクリックすると、次のDOM構造が生成されます。
 
-```html
+```angular-html
 <outer-container>
   <p>This is the start of the outer container</p>
   <inner-item>

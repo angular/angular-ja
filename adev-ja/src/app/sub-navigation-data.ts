@@ -484,6 +484,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'パフォーマンス',
         children: [
           {
+            label: '概要',
+            path: 'guide/performance',
+            contentPath: 'guide/performance/overview',
+          },
+          {
             label: '遅延ビュー',
             path: 'guide/defer',
             contentPath: 'guide/defer',

@@ -1,5 +1,5 @@
 diff --git a/package.json b/package.json
-index 40e3b1d878..618c39319e 100644
+index 40e3b1d878..607fe76761 100644
 --- a/package.json
 +++ b/package.json
 @@ -159,7 +159,7 @@
@@ -7,12 +7,12 @@ index 40e3b1d878..618c39319e 100644
      "@angular/animations": "^18.1.0-next",
      "@angular/build-tooling": "https://github.com/angular/dev-infra-private-build-tooling-builds.git#f924f27af2bb902b05fcd47028a4c13f8d03ab33",
 -    "@angular/docs": "https://github.com/angular/dev-infra-private-docs-builds.git#d2e11dd11b6925282606d413bb4dcfab664837d2",
-+    "@angular/docs": "https://github.com/angular/dev-infra-private-docs-builds.git#6a6f9639adcad1b56129b4ecf874f1955cc9ffca",
++    "@angular/docs": "https://github.com/angular/dev-infra-private-docs-builds.git#f5ebef8ec0b86ff6ad7a28e844be8944b8c9e4a7",
      "@angular/ng-dev": "https://github.com/angular/dev-infra-private-ng-dev-builds.git#806cbfc987d0df61f2ed90a24e2d4176e8a50a5b",
      "@babel/plugin-proposal-async-generator-functions": "^7.20.7",
      "@bazel/bazelisk": "^1.7.5",
 diff --git a/yarn.lock b/yarn.lock
-index cef3578aad..b948fdb85d 100644
+index cef3578aad..d78c1c4d03 100644
 --- a/yarn.lock
 +++ b/yarn.lock
 @@ -492,9 +492,9 @@
@@ -22,9 +22,9 @@ index cef3578aad..b948fdb85d 100644
 -"@angular/docs@https://github.com/angular/dev-infra-private-docs-builds.git#d2e11dd11b6925282606d413bb4dcfab664837d2":
 -  version "0.0.0-12a4be9d5194c938d76efa5b651c39d571ff0749"
 -  resolved "https://github.com/angular/dev-infra-private-docs-builds.git#d2e11dd11b6925282606d413bb4dcfab664837d2"
-+"@angular/docs@https://github.com/angular/dev-infra-private-docs-builds.git#6a6f9639adcad1b56129b4ecf874f1955cc9ffca":
-+  version "0.0.0-cf5026f584ec745e123d7546f2eb06b7a3e1abc1"
-+  resolved "https://github.com/angular/dev-infra-private-docs-builds.git#6a6f9639adcad1b56129b4ecf874f1955cc9ffca"
++"@angular/docs@https://github.com/angular/dev-infra-private-docs-builds.git#f5ebef8ec0b86ff6ad7a28e844be8944b8c9e4a7":
++  version "0.0.0-722ce5b647ec89797633452dd293e1dbac776ff1"
++  resolved "https://github.com/angular/dev-infra-private-docs-builds.git#f5ebef8ec0b86ff6ad7a28e844be8944b8c9e4a7"
    dependencies:
      "@webcontainer/api" "^1.1.8"
      diff "~5.2.0"

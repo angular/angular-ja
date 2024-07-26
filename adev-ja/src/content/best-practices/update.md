@@ -1,64 +1,64 @@
-# Keeping your Angular projects up-to-date
+# Angular プロジェクトを最新の状態に保つ
 
-Just like Web and the entire web ecosystem, Angular is continuously improving.
-Angular balances continuous improvement with a strong focus on stability and making updates straightforward.
-Keeping your Angular application up-to-date enables you to take advantage of leading-edge new features, as well as optimizations and bug fixes.
+WebやWebエコシステム全体と同様に、Angularも継続的に改善されています。
+Angularは、継続的な改善と、安定性とアップデートの容易さに重点を置いてバランスを取っています。
+Angularアプリケーションを最新の状態に保つことで、最先端の新しい機能、最適化、バグ修正を活用できます。
 
-This document contains information and resources to help you keep your Angular applications and libraries up-to-date.
+このドキュメントには、Angularアプリケーションとライブラリを最新の状態に保つための情報とリソースが含まれています。
 
-For information about our versioning policy and practices —including support and deprecation practices, as well as the release schedule— see [Angular versioning and releases](reference/releases "Angular versioning and releases").
+バージョン管理ポリシーとプラクティス（サポートと非推奨のプラクティス、リリーススケジュールを含む）については、[Angular バージョン管理とリリース](reference/releases "Angular バージョン管理とリリース")をご覧ください。
 
-HELPFUL: If you are currently using AngularJS, see [Upgrading from AngularJS](https://angular.io/guide/upgrade "Upgrading from Angular JS").
-*AngularJS* is the name for all v1.x versions of Angular.
+HELPFUL: 現在AngularJSを使用している場合は、[AngularJS からのアップグレード](https://angular.io/guide/upgrade "Angular JS からのアップグレード")をご覧ください。
+*AngularJS* は、Angularのすべてのv1.xバージョンを表します。
 
-## Getting notified of new releases
+## 新しいリリースの通知を受け取る
 
-To be notified when new releases are available, follow [@angular](https://twitter.com/angular "@angular on Twitter") on Twitter or subscribe to the [Angular blog](https://blog.angular.dev "Angular blog").
+新しいリリースが利用可能になったときに通知を受け取るには、Twitterで [@angular](https://twitter.com/angular "@angular on Twitter") をフォローするか、[Angular ブログ](https://blog.angular.dev "Angular ブログ")を購読してください。
 
-## Learning about new features
+## 新しい機能について学ぶ
 
-What's new? What's changed? We share the most important things you need to know on the Angular blog in [release announcements]( https://blog.angular.dev/ "Angular blog - release announcements").
+何が新しくなったのか？何が変わったのか？最新のリリースに関する最も重要な情報をAngularブログの[リリースアナウンスメント]( https://blog.angular.dev/ "Angular ブログ - リリースアナウンスメント")で共有しています。
 
-To review a complete list of changes, organized by version, see the [Angular change log](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angular change log").
+バージョン別に整理された変更の完全なリストを確認するには、[Angularの変更履歴](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angularの変更履歴")をご覧ください。
 
-## Checking your version of Angular
+## Angular のバージョンを確認する
 
-To check your application's version of Angular use the `ng version` command from within your project directory.
+アプリケーションのAngularバージョンを確認するには、プロジェクトディレクトリ内で `ng version` コマンドを使用します。
 
-## Finding the current version of Angular
+## Angular の最新バージョンを見つける
 
-The most recent stable released version of Angular appears [on npm](https://www.npmjs.com/package/@angular/core "Angular on npm") under "Version." For example, `16.2.4`.
+Angularの最新の安定したリリースバージョンは、"Version"の下にある[npm](https://www.npmjs.com/package/@angular/core "Angular on npm")に表示されます。たとえば、`16.2.4`です。
 
-You can also find the most current version of Angular by using the CLI command [`ng update`](cli/update).
-By default, [`ng update`](cli/update)(without additional arguments) lists the updates that are available to you.
+また、CLIコマンド [`ng update`](cli/update) を使用して、Angularの最新バージョンを見つけることもできます。
+デフォルトでは、[`ng update`](cli/update)（追加の引数なし）は、使用可能なアップデートをリストします。
 
-## Updating your environment and apps
+## 環境とアプリケーションを更新する
 
-To make updating uncomplicated, we provide complete instructions in the interactive [Angular Update Guide](update-guide).
+アップデートを簡単に行うために、対話型の[Angularアップデートガイド](update-guide)に完全な手順を記載しています。
 
-The Angular Update Guide provides customized update instructions, based on the current and target versions that you specify.
-It includes basic and advanced update paths, to match the complexity of your applications.
-It also includes troubleshooting information and any recommended manual changes to help you get the most out of the new release.
+Angularアップデートガイドは、指定した現在のバージョンとターゲットバージョンに基づいて、カスタマイズされたアップデート手順を提供します。
+アプリケーションの複雑さに合わせて、基本的なアップデートパスと高度なアップデートパスが用意されています。
+また、新しいリリースを最大限に活用するためのトラブルシューティング情報と、推奨される手動変更も含まれています。
 
-For simple updates, the CLI command [`ng update`](cli/update) is all you need.
-Without additional arguments, [`ng update`](cli/update) lists the updates that are available to you and provides recommended steps to update your application to the most current version.
+簡単なアップデートの場合は、CLIコマンド [`ng update`](cli/update) で十分です。
+追加の引数なしで、[`ng update`](cli/update)は、使用可能なアップデートをリストし、アプリケーションを最新バージョンにアップデートするための推奨される手順を提供します。
 
-[Angular Versioning and Releases](reference/releases#versioning "Angular Release Practices, Versioning") describes the level of change that you can expect based on a release's version number.
-It also describes supported update paths.
+[Angularのバージョン管理とリリース](reference/releases#versioning "Angular リリースプラクティス、バージョン管理")では、リリースのバージョン番号に基づいて期待できる変更レベルについて説明しています。
+また、サポートされているアップデートパスについても説明しています。
 
-## Resource summary
+## リソースの概要
 
-* Release announcements:
-    [Angular blog - release announcements](https://blog.angular.dev/ "Angular blog announcements about recent releases")
+* リリースアナウンスメント:
+    [Angular ブログ - リリースに関する最近のアナウンスメント](https://blog.angular.dev/ "Angular ブログの最近のリリースに関するアナウンスメント")
 
-* Release details:
-    [Angular change log](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angular change log")
+* リリースの詳細:
+    [Angularの変更履歴](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angularの変更履歴")
 
-* Update instructions:
-    [Angular Update Guide](update-guide)
+* アップデート手順:
+    [Angular アップデートガイド](update-guide)
 
-* Update command reference:
-    [Angular CLI `ng update` command reference](cli/update)
+* アップデートコマンドリファレンス:
+    [Angular CLI `ng update` コマンドリファレンス](cli/update)
 
-* Versioning, release, support, and deprecation practices:
-    [Angular versioning and releases](reference/releases "Angular versioning and releases")
+* バージョン管理、リリース、サポート、および非推奨のプラクティス:
+    [Angular バージョン管理とリリース](reference/releases "Angular バージョン管理とリリース")

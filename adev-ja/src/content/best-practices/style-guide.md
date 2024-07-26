@@ -1,70 +1,70 @@
-# Angular coding style guide
+# Angular コーディングスタイルガイド
 
-Looking for an opinionated guide to Angular syntax, conventions, and application structure?
-Step right in.
-This style guide presents preferred conventions and, as importantly, explains why.
+Angularの構文、慣習、およびアプリケーション構造に関する意見のあるガイドを探していますか？
+さあ、中へどうぞ。
+このスタイルガイドでは、推奨される慣習、そして同様に重要なこととして、その理由について説明します。
 
-## Style vocabulary
+## スタイル用語
 
-Each guideline describes either a good or bad practice, and all have a consistent presentation.
+各ガイドラインは、良い慣行または悪い慣行のいずれかを説明し、すべて一貫した形式で提示されます。
 
-The wording of each guideline indicates how strong the recommendation is.
+各ガイドラインの表現は、推奨の強さを示しています。
 
-**Do** is one that should always be followed.
-*Always* might be a bit too strong of a word.
-Guidelines that literally should always be followed are extremely rare.
-On the other hand, you need a really unusual case for breaking a *Do* guideline.
+**Do** は、常に従うべきものです。
+*常に* は少し強すぎる言葉かもしれません。
+文字通り常に従うべきガイドラインは非常にまれです。
+一方、*Do* ガイドラインを破るための非常に珍しいケースが必要になります。
 
-**Consider** guidelines should generally be followed.
-If you fully understand the meaning behind the guideline and have a good reason to deviate, then do so.
-Aim to be consistent.
+**Consider** ガイドラインは、一般的に従うべきです。
+ガイドラインの背後にある意味を完全に理解しており、逸脱する正当な理由がある場合は、そうしてください。
+一貫性を目指しましょう。
 
-**Avoid** indicates something you should almost never do.
-Code examples to *avoid* have an unmistakable red header.
-
-**Why**? <br />
-Gives reasons for following the previous recommendations.
-
-## File structure conventions
-
-Some code examples display a file that has one or more similarly named companion files.
-For example, `hero.component.ts` and `hero.component.html`.
-
-The guideline uses the shortcut `hero.component.ts|html|css|spec` to represent those various files.
-Using this shortcut makes this guide's file structures easier to read and more terse.
-
-## Single responsibility
-
-Apply the [*single responsibility principle (SRP)*](https://wikipedia.org/wiki/Single_responsibility_principle) to all components, services, and other symbols.
-This helps make the application cleaner, easier to read and maintain, and more testable.
-
-### Rule of One
-
-#### Style 01-01
-
-**Do** define one thing, such as a service or component, per file.
-
-**Consider** limiting files to 400 lines of code.
+**Avoid** は、ほとんど決して行うべきではないことを示しています。
+*避けるべき* コード例には、見間違えようのない赤いヘッダーが付いています。
 
 **Why**? <br />
-One component per file makes it far easier to read, maintain, and avoid collisions with teams in source control.
+前の推奨に従う理由を示します。
+
+## ファイル構造の慣習
+
+いくつかのコード例には、1つ以上の類似の名前の付いた付属ファイルを持つファイルが表示されています。
+たとえば、`hero.component.ts` と `hero.component.html` です。
+
+このガイドラインでは、これらのさまざまなファイルを表現するために、`hero.component.ts|html|css|spec` という省略記法を使用します。
+このショートカットを使用することで、このガイドのファイル構造は読みやすく、簡潔になります。
+
+## 単一責任
+
+[*単一責任の原則 (SRP)*](https://wikipedia.org/wiki/Single_responsibility_principle) をすべてのコンポーネント、サービス、およびその他のシンボルに適用します。
+これにより、アプリケーションがよりクリーンになり、読みやすく保守しやすくテストしやすくなります。
+
+### ルール・オブ・ワン
+
+#### スタイル 01-01
+
+**Do** ファイルごとに、サービスやコンポーネントなど、1つのものだけを定義します。
+
+**Consider** ファイルを400行のコードに制限します。
 
 **Why**? <br />
-One component per file avoids hidden bugs that often arise when combining components in a file where they may share variables, create unwanted closures, or unwanted coupling with dependencies.
+ファイルごとに1つのコンポーネントにすることで、読みやすく、保守しやすく、ソース管理でチームとの衝突を回避できます。
 
 **Why**? <br />
-A single component can be the default export for its file which facilitates lazy loading with the router.
+ファイルごとに1つのコンポーネントにすることで、コンポーネントを1つのファイルにまとめた場合に発生する可能性のある変数を共有したり、不要なクロージャや依存関係との不要な結合を作成したりする隠れたバグを回避できます。
 
-The key is to make the code more reusable, easier to read, and less mistake-prone.
+**Why**? <br />
+単一のコンポーネントは、そのファイルのデフォルトのエクスポートにでき、これによりルーターを使用した遅延ロードが容易になります。
 
-The following *negative* example defines the `AppComponent`, bootstraps the app,
-defines the `Hero` model object, and loads heroes from the server all in the same file.
-*Don't do this*.
+重要なのは、コードをより再利用可能にし、読みやすく、エラーが発生しにくくすることです。
+
+次の*ネガティブ*な例では `AppComponent` を定義し、アプリケーションをブートストラップし、
+`Hero` モデルオブジェクトを定義し、すべて同じファイルでサーバーからヒーローを読み込んでいます。
+*これは行わないでください*。
 
 <docs-code path="adev/src/content/examples/styleguide/src/01-01/app/heroes/hero.component.avoid.ts" language="typescript" header="app/heroes/hero.component.ts"/>
 
-It is a better practice to redistribute the component and its
-supporting classes into their own, dedicated files.
+コンポーネントとそのサポートするクラスを、
+それぞれ専用のファイルに歳配置することをお勧めします。
 
 <docs-code-multifile>
     <docs-code header="main.ts" path="adev/src/content/examples/styleguide/src/01-01/main.ts"/>
@@ -76,80 +76,80 @@ supporting classes into their own, dedicated files.
     <docs-code header="app/heroes/shared/mock-heroes.ts" path="adev/src/content/examples/styleguide/src/01-01/app/heroes/shared/mock-heroes.ts"/>
 </docs-code-multifile>
 
-As the application grows, this rule becomes even more important.
+アプリケーションが成長するにつれて、このルールはさらに重要になります。
 
-## Naming
+## 命名
 
-Naming conventions are hugely important to maintainability and readability.
-This guide recommends naming conventions for the file name and the symbol name.
+命名規則は、保守性と可読性に非常に重要です。
+このガイドでは、ファイル名とシンボル名の命名規則を推奨しています。
 
-### General Naming Guidelines
+### 一般的な命名ガイドライン
 
-#### Style 02-01
+#### スタイル 02-01
 
-**Do** use consistent names for all symbols.
+**Do** すべてのシンボルに一貫性のある名前を使用します。
 
-**Do** follow a pattern that describes the symbol's feature then its type.
-The recommended pattern is `feature.type.ts`.
-
-**Why**? <br />
-Naming conventions help provide a consistent way to find content at a glance.
-Consistency within the project is vital.
-Consistency with a team is important.
-Consistency across a company provides tremendous efficiency.
+**Do** シンボルの機能を最初に、次にタイプを記述するパターンに従います。
+推奨されるパターンは `feature.type.ts` です。
 
 **Why**? <br />
-The naming conventions should help find desired code faster and make it easier to understand.
+命名規則は、一目でコンテンツを見つけるための方法を提供します。
+プロジェクト内の一貫性が重要です。
+チーム内の一貫性が重要です。
+会社全体で一貫性を持たせることで、効率が大幅に向上します。
 
 **Why**? <br />
-Names of folders and files should clearly convey their intent.
-For example, `app/heroes/hero-list.component.ts` may contain a component that manages a list of heroes.
-
-### Separate file names with dots and dashes
-
-#### Style 02-02
-
-**Do** use dashes to separate words in the descriptive name.
-
-**Do** use dots to separate the descriptive name from the type.
-
-**Do** use consistent type names for all components following a pattern that describes the component's feature then its type.
-A recommended pattern is `feature.type.ts`.
-
-**Do** use conventional type names including `.service`, `.component`, `.pipe`, `.module`, and `.directive`.
-Invent additional type names if you must but take care not to create too many.
+命名規則は、目的のコードをすばやく見つけ、理解しやすくするのに役立ちます。
 
 **Why**? <br />
-Type names provide a consistent way to quickly identify what is in the file.
+フォルダーとファイルの名前は、その意図を明確に伝える必要があります。
+たとえば、`app/heroes/hero-list.component.ts` には、ヒーローのリストを管理するコンポーネントが含まれている場合があります。
+
+### ドットとダッシュでファイル名を区切る
+
+#### スタイル 02-02
+
+**Do** ダッシュを使用して、記述的な名前の単語を区切ります。
+
+**Do** ドットを使用して、記述的な名前をタイプと区切ります。
+
+**Do** 機能を最初に、次にタイプを記述するパターンに従い、すべてのコンポーネントに一貫性のあるタイプ名を使用します。
+推奨されるパターンは `feature.type.ts` です。
+
+**Do** `.service`、`.component`、`.pipe`、`.module`、`.directive` などの従来のタイプ名を使用します。
+必要に応じて追加のタイプ名を考案しますが、あまりにも多くのタイプ名を考案しないように注意してください。
 
 **Why**? <br />
-Type names make it easy to find a specific file type using an editor or IDE's fuzzy search techniques.
+タイプ名は、ファイルの内容をすばやく識別するための方法を提供します。
 
 **Why**? <br />
-Unabbreviated type names such as `.service` are descriptive and unambiguous.
-Abbreviations such as `.srv`, `.svc`, and `.serv` can be confusing.
+タイプ名は、エディターや IDE のあいまい検索テクニックを使用して、特定のファイルタイプを簡単に見つけることができます。
 
 **Why**? <br />
-Type names provide pattern matching for any automated tasks.
-
-### Symbols and file names
-
-#### Style 02-03
-
-**Do** use consistent names for all assets named after what they represent.
-
-**Do** use upper camel case for class names.
-
-**Do** match the name of the symbol to the name of the file.
-
-**Do** append the symbol name with the conventional suffix \(such as `Component`, `Directive`, `Module`, `Pipe`, or `Service`\) for a thing of that type.
-
-**Do** give the filename the conventional suffix \(such as `.component.ts`, `.directive.ts`, `.module.ts`, `.pipe.ts`, or `.service.ts`\) for a file of that type.
+`.service` などの省略されていないタイプ名は、記述的であり、あいまいではありません。
+`.srv`、`.svc`、`.serv` などの省略形は、混乱する可能性があります。
 
 **Why**? <br />
-Consistent conventions make it easy to quickly identify and reference assets of different types.
+タイプ名は、自動化されたタスクのすべてのパターンマッチングを提供します。
 
-| Symbol name                                                                                                                                                                          | File name |
+### シンボルとファイル名
+
+#### スタイル 02-03
+
+**Do** 表現するものを基に名前が付けられたすべての資産に一貫性のある名前を使用します。
+
+**Do** クラス名にはアッパーキャメルケースを使用します。
+
+**Do** シンボルの名前をファイルの名前と一致させます。
+
+**Do** シンボルの名前に、従来のサフィックス（`Component`、`Directive`、`Module`、`Pipe`、`Service` など）を追加して、そのタイプのものを表します。
+
+**Do** ファイル名に、従来のサフィックス（`.component.ts`、`.directive.ts`、`.module.ts`、`.pipe.ts`、`.service.ts` など）を追加して、そのタイプのファイルを表します。
+
+**Why**? <br />
+一貫性のある規則により、さまざまなタイプの資産をすばやく識別して参照することが容易になります。
+
+| シンボル名                                                                                                                                                                          | ファイル名 |
 |:---                                                                                                                                                                                  |:---       |
 | <docs-code hideCopy language="typescript"> @Component({ … }) <br>export class AppComponent { } </docs-code>                             | app.component.ts |
 | <docs-code hideCopy language="typescript"> @Component({ … }) <br>export class HeroesComponent { } </docs-code>                          | heroes.component.ts |
@@ -160,63 +160,63 @@ Consistent conventions make it easy to quickly identify and reference assets of 
 | <docs-code hideCopy language="typescript"> @Pipe({ name: 'initCaps' }) <br>export class InitCapsPipe implements PipeTransform { } </docs-code> | init-caps.pipe.ts |
 | <docs-code hideCopy language="typescript"> @Injectable() <br>export class UserProfileService { } </docs-code>                                  | user-profile.service.ts |
 
-### Service names
+### サービス名
 
-#### Style 02-04
+#### スタイル 02-04
 
-**Do** use consistent names for all services named after their feature.
+**Do** すべてのサービスに一貫性のある名前を使用し、機能を基に名前を付けます。
 
-**Do** suffix a service class name with `Service`.
-For example, something that gets data or heroes should be called a `DataService` or a `HeroService`.
+**Do** サービスのクラス名に `Service` を追加します。
+たとえば、データまたはヒーローを取得するものは、`DataService` または `HeroService` と呼ばれる必要があります。
 
-A few terms are unambiguously services.
-They typically indicate agency by ending in "-er".
-You may prefer to name a service that logs messages `Logger` rather than `LoggerService`.
-Decide if this exception is agreeable in your project.
-As always, strive for consistency.
-
-**Why**? <br />
-Provides a consistent way to quickly identify and reference services.
+いくつかの用語は、紛れもなくサービスです。
+これらは通常、"-er" で終わることにより行為を表します。
+メッセージをログに記録するサービスを `LoggerService` ではなく `Logger` と呼ぶ方が良い場合があります。
+この例外がプロジェクトで受け入れられるかどうかを判断してください。
+常に一貫性を目指します。
 
 **Why**? <br />
-Clear service names such as `Logger` do not require a suffix.
+サービスをすばやく識別して参照するための方法を提供します。
 
 **Why**? <br />
-Service names such as `Credit` are nouns and require a suffix and should be named with a suffix when it is not obvious if it is a service or something else.
+`Logger` などの明確なサービス名は、サフィックスを必要としません。
 
-| Symbol name                                                                                                                                      | File name |
+**Why**? <br />
+`Credit` などのサービス名は名詞であり、サフィックスを必要とし、サービスかどうか明らかでない場合は、サフィックスを付けて名前を付ける必要があります。
+
+| シンボル名                                                                                                                                      | ファイル名 |
 |:---                                                                                                                                              |:---       |
 | <docs-code hideCopy language="typescript"> @Injectable() <br>export class HeroDataService { } </docs-code> | hero-data.service.ts |
 | <docs-code hideCopy language="typescript"> @Injectable() <br>export class CreditService { } </docs-code>   | credit.service.ts    |
 | <docs-code hideCopy language="typescript"> @Injectable() <br>export class Logger { } </docs-code>          | logger.service.ts    |
 
-### Bootstrapping
+### ブートストラップ
 
-#### Style 02-05
+#### スタイル 02-05
 
-**Do** put bootstrapping and platform logic for the application in a file named `main.ts`.
+**Do** アプリケーションのブートストラップとプラットフォームロジックを `main.ts` という名前のファイルに配置します。
 
-**Do** include error handling in the bootstrapping logic.
+**Do** ブートストラップロジックにエラー処理を含めます。
 
-**Avoid** putting application logic in `main.ts`.
-Instead, consider placing it in a component or service.
-
-**Why**? <br />
-Follows a consistent convention for the startup logic of an app.
+**Avoid** アプリケーションロジックを `main.ts` に配置します。
+代わりに、コンポーネントまたはサービスに配置することを検討してください。
 
 **Why**? <br />
-Follows a familiar convention from other technology platforms.
+アプリケーションのスタートアップロジックに対する一貫性のある規則に従います。
+
+**Why**? <br />
+他のテクノロジープラットフォームの一般的な規則に従います。
 
 <docs-code header="main.ts" path="adev/src/content/examples/styleguide/src/02-05/main.ts"/>
 
-### Component selectors
+### コンポーネントセレクター
 
-#### Style 05-02
+#### スタイル 05-02
 
-**Do** use *dashed-case* or *kebab-case* for naming the element selectors of components.
+**Do** コンポーネントの要素セレクターに名前を付ける場合、*ダッシュケース*または*ケバブケース*を使用します。
 
 **Why**? <br />
-Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements).
+要素名を、[カスタム要素](https://www.w3.org/TR/custom-elements) の仕様と一貫性を持たせます。
 
 <docs-code header="app/heroes/shared/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visibleRegion="example"/>
 
@@ -225,22 +225,22 @@ Keeps the element names consistent with the specification for [Custom Elements](
     <docs-code header="app/app.component.html" path="adev/src/content/examples/styleguide/src/05-02/app/app.component.html"/>
 </docs-code-multifile>
 
-### Component custom prefix
+### コンポーネントのカスタムプレフィックス
 
-#### Style 02-07
+#### スタイル 02-07
 
-**Do** use a hyphenated, lowercase element selector value; for example, `admin-users`.
+**Do** ハイフンで区切られた、小文字の要素セレクター値を使用します。たとえば、`admin-users` です。
 
-**Do** use a prefix that identifies the feature area or the application itself.
-
-**Why**? <br />
-Prevents element name collisions with components in other applications and with native HTML elements.
+**Do** 機能領域またはアプリケーション自体を識別するプレフィックスを使用します。
 
 **Why**? <br />
-Makes it easier to promote and share the component in other applications.
+他のアプリケーションのコンポーネントやネイティブの HTML 要素との要素名の衝突を防ぎます。
 
 **Why**? <br />
-Components are easy to identify in the DOM.
+コンポーネントを他のアプリケーションで簡単にプロモートして共有できます。
+
+**Why**? <br />
+コンポーネントは DOM で簡単に識別できます。
 
 <docs-code header="app/heroes/hero.component.ts" path="adev/src/content/examples/styleguide/src/02-07/app/heroes/hero.component.avoid.ts" visibleRegion="example"/>
 
@@ -250,107 +250,107 @@ Components are easy to identify in the DOM.
 
 <docs-code header="app/users/users.component.ts" path="adev/src/content/examples/styleguide/src/02-07/app/users/users.component.ts" visibleRegion="example"/>
 
-### Directive selectors
+### ディレクティブセレクター
 
-#### Style 02-06
+#### スタイル 02-06
 
-**Do** Use lower camel case for naming the selectors of directives.
-
-**Why**? <br />
-Keeps the names of the properties defined in the directives that are bound to the view consistent with the attribute names.
+**Do** ディレクティブのセレクターに名前を付ける場合、アッパーキャメルケースを使用します。
 
 **Why**? <br />
-The Angular HTML parser is case-sensitive and recognizes lower camel case.
-
-### Directive custom prefix
-
-#### Style 02-08
-
-**Do** spell non-element selectors in lower camel case unless the selector is meant to match a native HTML attribute.
-
-**Don't** prefix a directive name with `ng` because that prefix is reserved for Angular and using it could cause bugs that are difficult to diagnose.
+ビューにバインドされているディレクティブで定義されているプロパティの名前を、属性名と一貫性を持たせます。
 
 **Why**? <br />
-Prevents name collisions.
+Angular の HTML パーサーは大文字小文字を区別し、アッパーキャメルケースを認識します。
+
+### ディレクティブのカスタムプレフィックス
+
+#### スタイル 02-08
+
+**Do** ネイティブの HTML 属性と一致するセレクターでない限り、要素以外のセレクターをアッパーキャメルケースで記述します。
+
+**Don't** ディレクティブ名を `ng` で始めないでください。このプレフィックスは Angular に予約されており、使用すると、診断が難しいバグが発生する可能性があります。
 
 **Why**? <br />
-Directives are easily identified.
+名前の衝突を防ぎます。
+
+**Why**? <br />
+ディレクティブは簡単に識別できます。
 
 <docs-code header="app/shared/validate.directive.ts" path="adev/src/content/examples/styleguide/src/02-08/app/shared/validate.directive.avoid.ts" visibleRegion="example"/>
 
 <docs-code header="app/shared/validate.directive.ts" path="adev/src/content/examples/styleguide/src/02-08/app/shared/validate.directive.ts" visibleRegion="example"/>
 
-### Pipe names
+### パイプ名
 
-#### Style 02-09
+#### スタイル 02-09
 
-**Do** use consistent names for all pipes, named after their feature.
-The pipe class name should use `UpperCamelCase` \(the general convention for class names\), and the corresponding `name` string should use *lowerCamelCase*.
-The `name` string cannot use hyphens \("dash-case" or "kebab-case"\).
+**Do** すべてのパイプに一貫性のある名前を使用し、機能を基に名前を付けます。
+パイプのクラス名は `UpperCamelCase`（クラス名の一般的な規則）を使用し、対応する `name` 文字列は *lowerCamelCase* を使用する必要があります。
+`name` 文字列は、ハイフン（"ダッシュケース" または "ケバブケース"）を使用できません。
 
 **Why**? <br />
-Provides a consistent way to quickly identify and reference pipes.
+パイプをすばやく識別して参照するための方法を提供します。
 
-| Symbol name                                                                                                                                                                          | File name |
+| シンボル名                                                                                                                                                                          | ファイル名 |
 |:---                                                                                                                                                                                  |:---       |
 | <docs-code hideCopy language="typescript"> @Pipe({ standalone: true, name: 'ellipsis' }) <br>export class EllipsisPipe implements PipeTransform { } </docs-code> | ellipsis.pipe.ts  |
 | <docs-code hideCopy language="typescript"> @Pipe({ standalone: true, name: 'initCaps' }) <br>export class InitCapsPipe implements PipeTransform { } </docs-code> | init-caps.pipe.ts |
 
-### Unit test file names
+### ユニットテストファイル名
 
-#### Style 02-10
+#### スタイル 02-10
 
-**Do** name test specification files the same as the component they test.
+**Do** テスト仕様ファイルに、テストするコンポーネントと同じ名前を付けます。
 
-**Do** name test specification files with a suffix of `.spec`.
-
-**Why**? <br />
-Provides a consistent way to quickly identify tests.
+**Do** テスト仕様ファイルに `.spec` のサフィックスを付けます。
 
 **Why**? <br />
-Provides pattern matching for [karma](https://karma-runner.github.io) or other test runners.
+テストをすばやく識別するための方法を提供します。
 
-| Test type  | File names |
+**Why**? <br />
+[karma](https://karma-runner.github.io) やその他のテストランナーのパターンマッチングを提供します。
+
+| テストタイプ | ファイル名 |
 |:---        |:---        |
-| Components | heroes.component.spec.ts <br /> hero-list.component.spec.ts <br /> hero-detail.component.spec.ts |
-| Services   | logger.service.spec.ts <br /> hero.service.spec.ts <br /> filter-text.service.spec.ts            |
-| Pipes      | ellipsis.pipe.spec.ts <br /> init-caps.pipe.spec.ts                                              |
+| コンポーネント | heroes.component.spec.ts <br /> hero-list.component.spec.ts <br /> hero-detail.component.spec.ts |
+| サービス  | logger.service.spec.ts <br /> hero.service.spec.ts <br /> filter-text.service.spec.ts            |
+| パイプ     | ellipsis.pipe.spec.ts <br /> init-caps.pipe.spec.ts                                              |
 
-## Application structure and NgModules
+## アプリケーション構造と NgModules
 
-Have a near-term view of implementation and a long-term vision.
-Start small but keep in mind where the application is heading.
+実装の短期的な視点と長期的なビジョンを持ちます。
+小さく始めて、アプリケーションの進む方向を念頭に置いておきましょう。
 
-All of the application's code goes in a folder named `src`.
-All feature areas are in their own folder.
+アプリケーションのすべてのコードは `src` という名前のフォルダーに格納されます。
+すべての機能領域は、それぞれのフォルダーにあります。
 
-All content is one asset per file.
-Each component, service, and pipe is in its own file.
-All third party vendor scripts are stored in another folder and not in the `src` folder.
-Use the naming conventions for files in this guide.
+すべてのコンテンツは、ファイルごとに1つの資産です。
+各コンポーネント、サービス、およびパイプは、それぞれのファイルにあります。
+すべてのサードパーティベンダーのスクリプトは、別のフォルダーに格納され、`src` フォルダーには格納されません。
+このガイドのファイルの命名規則を使用します。
 
-### Overall structural guidelines
+### 全体的な構造ガイドライン
 
-#### Style 04-06
+#### スタイル 04-06
 
-**Do** start small but keep in mind where the application is heading down the road.
+**Do** 小さく始めて、アプリケーションが将来どのように進むかを念頭に置いておきましょう。
 
-**Do** have a near term view of implementation and a long term vision.
+**Do** 実装の短期的な視点と長期的なビジョンを持ちます。
 
-**Do** put all of the application's code in a folder named `src`.
+**Do** アプリケーションのすべてのコードを `src` という名前のフォルダーに格納します。
 
-**Consider** creating a folder for a component when it has multiple accompanying files \(`.ts`, `.html`, `.css`, and `.spec`\).
-
-**Why**? <br />
-Helps keep the application structure small and easy to maintain in the early stages, while being easy to evolve as the application grows.
+**Consider** コンポーネントに複数の付属ファイル（`.ts`、`.html`、`.css`、`.spec`）がある場合、コンポーネント用のフォルダーを作成します。
 
 **Why**? <br />
-Components often have four files \(for example, `*.html`, `*.css`, `*.ts`, and `*.spec.ts`\) and can clutter a folder quickly.
+初期段階では、アプリケーションの構造を小さく、保守しやすい状態に保つのに役立ち、アプリケーションが成長しても進化が容易になります。
 
-Here is a compliant folder and file structure:
+**Why**? <br />
+コンポーネントには、多くの場合4つのファイル（たとえば、`*.html`、`*.css`、`*.ts`、`*.spec.ts`）があり、フォルダーをすぐに乱雑にする可能性があります。
+
+以下は、準拠するフォルダーとファイルの構造です。
 
 ```markdown
-project root
+プロジェクトルート
 ├── src
 │ ├── app
 │ │ ├── core
@@ -390,118 +390,118 @@ project root
 └── …
 ```
 
-HELPFUL: While components in dedicated folders are widely preferred, another option for small applications is to keep components flat \(not in a dedicated folder\).
-This adds up to four files to the existing folder, but also reduces the folder nesting.
-Whatever you choose, be consistent.
+HELPFUL: 専用フォルダーにあるコンポーネントは広く推奨されていますが、小規模なアプリケーションでは、コンポーネントをフラットに（専用フォルダーに置かないで）保持することも別の選択肢です。
+これにより、既存のフォルダーに4つのファイルが追加されますが、フォルダーのネストも減少します。
+いずれを選択する場合でも、一貫性を保ってください。
 
-### *Folders-by-feature* structure
+### *機能別フォルダー* 構造
 
-#### Style 04-07
+#### スタイル 04-07
 
-**Do** create folders named for the feature area they represent.
-
-**Why**? <br />
-A developer can locate the code and identify what each file represents at a glance.
-The structure is as flat as it can be and there are no repetitive or redundant names.
+**Do** 表現する機能領域の名前を付けたフォルダーを作成します。
 
 **Why**? <br />
-Helps reduce the application from becoming cluttered through organizing the content.
+開発者は、コードを見つけて、各ファイルが何を表しているかを一目で識別できます。
+構造は可能な限りフラットで、重複または冗長な名前はありません。
 
 **Why**? <br />
-When there are a lot of files, for example 10+, locating them is easier with a consistent folder structure and more difficult in a flat structure.
-
-For more information, refer to [this folder and file structure example](#overall-structural-guidelines).
-
-### App *root module*
-
-IMPORTANT: The following style guide recommendations are for applications based on `NgModule`. New applications should use standalone components, directives, and pipes instead.
-
-#### Style 04-08
-
-**Do** create an NgModule in the application's root folder, for example, in `/src/app` if creating a `NgModule` based app.
+コンテンツを整理することで、アプリケーションが乱雑になるのを防ぐのに役立ちます。
 
 **Why**? <br />
-Every `NgModule` based application requires at least one root NgModule.
+たとえば10個以上のファイルがある場合、一貫性のあるフォルダー構造があれば、ファイルを簡単に見つけることができますが、フラットな構造では難しくなります。
 
-**Consider** naming the root module `app.module.ts`.
+詳細については、[このフォルダーとファイルの構造の例](#全体的な構造ガイドライン) を参照してください。
+
+### アプリケーションの*ルートモジュール*
+
+IMPORTANT: 以下のスタイルガイドの推奨事項は、`NgModule` をベースにしたアプリケーションを対象としています。新しいアプリケーションでは、スタンドアロンコンポーネント、ディレクティブ、およびパイプを使用する必要があります。
+
+#### スタイル 04-08
+
+**Do** アプリケーションのルートフォルダーにNgModuleを作成します。たとえば、`NgModule` ベースのアプリケーションを作成する場合は、`/src/app` に作成します。
 
 **Why**? <br />
-Makes it easier to locate and identify the root module.
+すべての `NgModule` ベースのアプリケーションには、少なくとも1つのルートNgModuleが必要です。
+
+**Consider** ルートモジュールに `app.module.ts` という名前を付けます。
+
+**Why**? <br />
+ルートモジュールを簡単に特定して識別できます。
 
 <docs-code path="adev/src/content/examples/styleguide/src/04-08/app/app.module.ts" language="typescript" visibleRegion="example" header="app/app.module.ts"/>
 
-### Feature modules
+### 機能モジュール
 
-#### Style 04-09
+#### スタイル 04-09
 
-**Do** create an NgModule for all distinct features in an application; for example, a `Heroes` feature.
+**Do** アプリケーションのすべての異なる機能にNgModuleを作成します。たとえば、`Heroes` 機能です。
 
-**Do** place the feature module in the same named folder as the feature area; for example, in `app/heroes`.
+**Do** 機能モジュールを、機能領域と同じ名前のフォルダーに配置します。たとえば、`app/heroes` です。
 
-**Do** name the feature module file reflecting the name of the feature area and folder; for example, `app/heroes/heroes.module.ts`.
+**Do** 機能モジュールのファイルに、機能領域、フォルダー、ファイルの名前を反映した名前を付けます。たとえば、`app/heroes/heroes.module.ts` は `HeroesModule` を定義します。
 
-**Do** name the feature module symbol reflecting the name of the feature area, folder, and file; for example, `app/heroes/heroes.module.ts` defines `HeroesModule`.
-
-**Why**? <br />
-A feature module can expose or hide its implementation from other modules.
+**Do** 機能モジュールのシンボルに、機能領域、フォルダー、ファイルの名前を反映した名前を付けます。たとえば、`app/heroes/heroes.module.ts` は `HeroesModule` を定義します。
 
 **Why**? <br />
-A feature module identifies distinct sets of related components that comprise the feature area.
+機能モジュールは、その実装を他のモジュールに対して公開または非公開にできます。
 
 **Why**? <br />
-A feature module can easily be routed to both eagerly and lazily.
+機能モジュールは、機能領域を構成する関連するコンポーネントの異なるセットを識別します。
 
 **Why**? <br />
-A feature module defines clear boundaries between specific functionality and other application features.
+機能モジュールは、eagerにもlazyにも簡単にルーティングできます。
 
 **Why**? <br />
-A feature module helps clarify and make it easier to assign development responsibilities to different teams.
+機能モジュールは、特定の機能と他のアプリケーション機能の間に明確な境界を定義します。
 
 **Why**? <br />
-A feature module can easily be isolated for testing.
-
-### Shared feature module
-
-#### Style 04-10
-
-**Do** create a feature module named `SharedModule` in a `shared` folder; for example, `app/shared/shared.module.ts` defines `SharedModule`.
-
-**Do** declare components, directives, and pipes in a shared module when those items will be re-used and referenced by the components declared in other feature modules.
-
-**Consider** using the name SharedModule when the contents of a shared
-module are referenced across the entire application.
-
-**Consider** *not* providing services in shared modules.
-Services are usually singletons that are provided once for the entire application or in a particular feature module.
-There are exceptions, however.
-For example, in the sample code that follows, notice that the `SharedModule` provides `FilterTextService`.
-This is acceptable here because the service is stateless;that is, the consumers of the service aren't impacted by new instances.
-
-**Do** import all modules required by the assets in the `SharedModule`; for example, `CommonModule` and `FormsModule`.
+機能モジュールにより、開発の責任を異なるチームに割り当てるのが容易になります。
 
 **Why**? <br />
-`SharedModule` will contain components, directives, and pipes that may need features from another common module; for example, `ngFor` in `CommonModule`.
+機能モジュールは、テスト用に簡単に分離できます。
 
-**Do** declare all components, directives, and pipes in the `SharedModule`.
+### 共有機能モジュール
 
-**Do** export all symbols from the `SharedModule` that other feature modules need to use.
+#### スタイル 04-10
+
+**Do** `shared` フォルダーに `SharedModule` という名前の機能モジュールを作成します。たとえば、`app/shared/shared.module.ts` は `SharedModule` を定義します。
+
+**Do** コンポーネント、ディレクティブ、およびパイプを、他の機能モジュールで宣言されているコンポーネントによって参照される場合、共有モジュールで宣言します。
+
+**Consider** 共有モジュールのコンテンツがアプリケーション全体で参照される場合は、
+`SharedModule` という名前を使用します。
+
+**Consider** サービスを共有モジュールに提供しないようにします。
+サービスは、通常、アプリケーション全体または特定の機能モジュールで1回提供されるシングルトンです。
+ただし、例外もあります。
+たとえば、次のサンプルコードでは、`SharedModule` が `FilterTextService` を提供していることに注意してください。
+これは、サービスがステートレスであるため、ここでは許容されます。つまり、サービスのコンシューマーは、新しいインスタンスによって影響を受けません。
+
+**Do** `SharedModule` の資産に必要なすべてのモジュール（たとえば、`CommonModule` と `FormsModule`）をインポートします。
 
 **Why**? <br />
-`SharedModule` exists to make commonly used components, directives, and pipes available for use in the templates of components in many other modules.
+`SharedModule` には、他の共通モジュールの機能を必要とする可能性のあるコンポーネント、ディレクティブ、およびパイプが含まれています。たとえば、`CommonModule` の `ngFor` です。
 
-**Avoid** specifying app-wide singleton providers in a `SharedModule`.
-Intentional singletons are OK.
-Take care.
+**Do** すべてのコンポーネント、ディレクティブ、およびパイプを `SharedModule` で宣言します。
 
-**Why**? <br />
-A lazy loaded feature module that imports that shared module will make its own copy of the service and likely have undesirable results.
+**Do** 他の機能モジュールで使用するために必要なすべてのシンボルを `SharedModule` からエクスポートします。
 
 **Why**? <br />
-You don't want each module to have its own separate instance of singleton services.
-Yet there is a real danger of that happening if the `SharedModule` provides a service.
+`SharedModule` は、多くの他のモジュールのコンポーネントのテンプレートで使用できる、共通のコンポーネント、ディレクティブ、およびパイプを公開するために存在します。
+
+**Avoid** `SharedModule` で、アプリケーション全体のシングルトンプロバイダーを指定します。
+意図的なシングルトンは問題ありません。
+注意してください。
+
+**Why**? <br />
+その共有モジュールをインポートする遅延ロードされた機能モジュールは、サービスの独自の複製を作成し、望ましくない結果を招く可能性があります。
+
+**Why**? <br />
+各モジュールに、シングルトンサービスの独自の独立したインスタンスを持たせたくありません。
+しかし、`SharedModule` がサービスを提供する場合、それは実際に発生する可能性があります。
 
 ```markdown
-project root
+プロジェクトルート
 ├──src
 ├──├──app
 ├──├──├── shared
@@ -526,37 +526,37 @@ project root
     <docs-code header="app/heroes/heroes.component.html" path="adev/src/content/examples/styleguide/src/04-10/app/heroes/heroes.component.html"/>
 </docs-code-multifile>
 
-### Lazy Loaded folders
+### 遅延ロードされたフォルダー
 
-#### Style 04-11
+#### スタイル 04-11
 
-A distinct application feature or workflow may be *lazy loaded* or *loaded on demand* rather than when the application starts.
+異なるアプリケーション機能またはワークフローは、アプリケーションの開始時にではなく、*オンデマンド*で*遅延ロード*できます。
 
-**Do** put the contents of lazy loaded features in a *lazy loaded folder*.
-A typical *lazy loaded folder* contains a *routing component*, its child components, and their related assets.
-
-**Why**? <br />
-The folder makes it easy to identify and isolate the feature content.
-
-## Components
-
-### Components as elements
-
-#### Style 05-03
-
-**Consider** giving components an *element* selector, as opposed to *attribute* or *class* selectors.
+**Do** 遅延ロードされた機能のコンテンツを*遅延ロードされたフォルダー*に配置します。
+一般的な*遅延ロードされたフォルダー*には、*ルーティングコンポーネント*、その子コンポーネント、および関連する資産が含まれています。
 
 **Why**? <br />
-Components have templates containing HTML and optional Angular template syntax.
-They display content.
-Developers place components on the page as they would native HTML elements and web components.
+フォルダーにより、機能のコンテンツを簡単に識別して分離できます。
+
+## コンポーネント
+
+### コンポーネントを要素として
+
+#### スタイル 05-03
+
+**Consider** コンポーネントに*属性*または*クラス*セレクターではなく*要素*セレクターを付与します。
 
 **Why**? <br />
-It is easier to recognize that a symbol is a component by looking at the template's html.
+コンポーネントは、HTMLとオプションのAngularテンプレート構文を含むテンプレートを持っています。
+コンテンツを表示します。
+開発者は、ネイティブのHTML要素やWebコンポーネントと同じように、コンポーネントをページに配置します。
 
-HELPFUL: There are a few cases where you give a component an attribute, such as when you want to augment a built-in element.
-For example, [Material Design](https://material.angular.io/components/button/overview) uses this technique with `<button mat-button>`.
-However, you wouldn't use this technique on a custom element.
+**Why**? <br />
+テンプレートのhtmlを見ると、シンボルがコンポーネントであることを認識しやすくなります。
+
+HELPFUL: 属性をコンポーネントに付与する必要があるケースはいくつかあります。たとえば、組み込みの要素を拡張する場合です。
+[Material Design](https://material.angular.io/components/button/overview) では、`<button mat-button>` でこのテクニックを使用しています。
+ただし、カスタム要素ではこのテクニックを使用しません。
 
 <docs-code header="app/heroes/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visibleRegion="example"/>
 
@@ -567,30 +567,30 @@ However, you wouldn't use this technique on a custom element.
     <docs-code header="app/app.component.html" path="adev/src/content/examples/styleguide/src/05-03/app/app.component.html"/>
 </docs-code-multifile>
 
-### Extract templates and styles to their own files
+### テンプレートとスタイルをそれぞれのファイルに抽出する
 
-#### Style 05-04
+#### スタイル 05-04
 
-**Do** extract templates and styles into a separate file, when more than 3 lines.
+**Do** テンプレートとスタイルを、3行を超える場合、別のファイルに抽出します。
 
-**Do** name the template file `[component-name].component.html`, where [component-name] is the component name.
+**Do** テンプレートファイルに `[component-name].component.html` という名前を付けます。ここで、[component-name]はコンポーネント名です。
 
-**Do** name the style file `[component-name].component.css`, where [component-name] is the component name.
+**Do** スタイルファイルに `[component-name].component.css` という名前を付けます。ここで、[component-name]はコンポーネント名です。
 
-**Do** specify *component-relative* URLs, prefixed with `./`.
-
-**Why**? <br />
-Large, inline templates and styles obscure the component's purpose and implementation, reducing readability and maintainability.
+**Do** `./` で始まる*コンポーネント相対* URLを指定します。
 
 **Why**? <br />
-In most editors, syntax hints and code snippets aren't available when developing inline templates and styles.
-The Angular TypeScript Language Service \(forthcoming\) promises to overcome this deficiency for HTML templates in those editors that support it; it won't help with CSS styles.
+大きく、インライン化されたテンプレートとスタイルは、コンポーネントの目的と実装を隠蔽し、可読性と保守性を低下させます。
 
 **Why**? <br />
-A *component relative* URL requires no change when you move the component files, as long as the files stay together.
+ほとんどのエディターでは、インライン化されたテンプレートとスタイルを開発する場合、構文ヒントやコードスニペットは使用できません。
+Angular TypeScript Language Serviceは、それをサポートするエディターでは、これらの欠陥をHTMLテンプレートで克服することを約束しています。CSSスタイルには役立ちません。
 
 **Why**? <br />
-The `./` prefix is standard syntax for relative URLs; don't depend on Angular's current ability to do without that prefix.
+*コンポーネント相対* URLは、ファイルが一緒に残っている限り、コンポーネントファイルを移動しても変更する必要はありません。
+
+**Why**? <br />
+`./` プレフィックスは、相対URLの標準的な構文です。Angularが現在、そのプレフィックスなしで動作することを期待しないでください。
 
 <docs-code header="app/heroes/heroes.component.ts" path="adev/src/content/examples/styleguide/src/05-04/app/heroes/heroes.component.avoid.ts" visibleRegion="example"/>
 
@@ -600,43 +600,43 @@ The `./` prefix is standard syntax for relative URLs; don't depend on Angular's 
     <docs-code header="app/heroes/heroes.component.css" path="adev/src/content/examples/styleguide/src/05-04/app/heroes/heroes.component.css"/>
 </docs-code-multifile>
 
-### Decorate `input` and `output` properties
+### `input` と `output` プロパティを装飾する
 
-#### Style 05-12
+#### スタイル 05-12
 
-**Do** use the `@Input()` and `@Output()` class decorators instead of the `inputs` and `outputs` properties of the `@Directive` and `@Component` metadata:
+**Do** `@Directive` と `@Component` メタデータの `inputs` と `outputs` プロパティではなく、`@Input()` と `@Output()` クラスデコレーターを使用します。
 
-**Consider** placing `@Input()` or `@Output()` on the same line as the property it decorates.
-
-**Why**? <br />
-It is easier and more readable to identify which properties in a class are inputs or outputs.
+**Consider** `@Input()` または `@Output()` を装飾するプロパティと同じ行に配置します。
 
 **Why**? <br />
-If you ever need to rename the property or event name associated with `@Input()` or `@Output()`, you can modify it in a single place.
+クラスのプロパティのいずれがインプットまたはアウトプットかを簡単に判別できます。
 
 **Why**? <br />
-The metadata declaration attached to the directive is shorter and thus more readable.
+`@Input()` または `@Output()` に関連付けられているプロパティ名やイベント名を変更する必要がある場合は、1か所で変更できます。
 
 **Why**? <br />
-Placing the decorator on the same line *usually* makes for shorter code and still easily identifies the property as an input or output.
-Put it on the line above when doing so is clearly more readable.
+ディレクティブに付加されたメタデータ宣言は短くなり、可読性が高まります。
+
+**Why**? <br />
+デコレーターを同じ行に配置すると、通常はコードが短くなり、プロパティがインプットまたはアウトプットとして簡単に識別できます。
+明らかに可読性が向上する場合、上の行に配置します。
 
 <docs-code header="app/heroes/shared/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visibleRegion="example"/>
 
 <docs-code header="app/heroes/shared/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.ts" visibleRegion="example"/>
 
-### Avoid aliasing `inputs` and `outputs`
+### `inputs` と `outputs` のエイリアスを避ける
 
-#### Style 05-13
+#### スタイル 05-13
 
-**Avoid** `input` and `output` aliases except when it serves an important purpose.
-
-**Why**? <br />
-Two names for the same property \(one private, one public\) is inherently confusing.
+**Avoid** 重要な目的を果たす場合を除き、`input` と `output` のエイリアスを使用します。
 
 **Why**? <br />
-You should use an alias when the directive name is also an `input` property,
-and the directive name doesn't describe the property.
+同じプロパティに対する2つの名前（1つはプライベート、もう1つはパブリック）は、本質的に混乱を招きます。
+
+**Why**? <br />
+ディレクティブ名が `input` プロパティでもある場合、エイリアスを使用する必要があります。
+また、ディレクティブ名はプロパティを記述していません。
 
 <docs-code header="app/heroes/shared/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visibleRegion="example"/>
 
@@ -648,45 +648,45 @@ and the directive name doesn't describe the property.
     <docs-code header="app/app.component.html" path="adev/src/content/examples/styleguide/src/05-13/app/app.component.html"/>
 </docs-code-multifile>
 
-### Delegate complex component logic to services
+### 複雑なコンポーネントロジックをサービスに委任する
 
-#### Style 05-15
+#### スタイル 05-15
 
-**Do** limit logic in a component to only that required for the view.
-All other logic should be delegated to services.
+**Do** コンポーネントのロジックを、ビューに必要なものだけに制限します。
+その他のすべてのロジックは、サービスに委任する必要があります。
 
-**Do** move reusable logic to services and keep components simple and focused on their intended purpose.
-
-**Why**? <br />
-Logic may be reused by multiple components when placed within a service and exposed as a function.
+**Do** 再利用可能なロジックをサービスに移動し、コンポーネントをシンプルで、目的のみに集中させます。
 
 **Why**? <br />
-Logic in a service can more easily be isolated in a unit test, while the calling logic in the component can be easily mocked.
+ロジックは、サービス内に配置され、関数として公開されている場合、複数のコンポーネントで再利用できます。
 
 **Why**? <br />
-Removes dependencies and hides implementation details from the component.
+サービス内のロジックは、ユニットテストで簡単に分離できます。一方、コンポーネント内の呼び出し側のロジックは、簡単にモック化できます。
 
 **Why**? <br />
-Keeps the component slim, trim, and focused.
+依存関係を削除し、コンポーネントから実装の詳細を隠蔽します。
+
+**Why**? <br />
+コンポーネントをスリムで、トリミングして、目的のみに集中させます。
 
 <docs-code header="app/heroes/hero-list/hero-list.component.ts" path="adev/src/content/examples/styleguide/src/05-15/app/heroes/hero-list/hero-list.component.avoid.ts"/>
 
 <docs-code header="app/heroes/hero-list/hero-list.component.ts" path="adev/src/content/examples/styleguide/src/05-15/app/heroes/hero-list/hero-list.component.ts" visibleRegion="example"/>
 
-### Don't prefix `output` properties
+### `output` プロパティにプレフィックスを付けない
 
-#### Style 05-16
+#### スタイル 05-16
 
-**Do** name events without the prefix `on`.
+**Do** `on` プレフィックスなしでイベントに名前を付けます。
 
-**Do** name event handler methods with the prefix `on` followed by the event name.
-
-**Why**? <br />
-This is consistent with built-in events such as button clicks.
+**Do** イベントハンドラーメソッドに、`on` プレフィックスに続いてイベント名を付けた名前を付けます。
 
 **Why**? <br />
-Angular allows for an [alternative syntax](guide/templates/binding) `on-*`.
-If the event itself was prefixed with `on` this would result in an `on-onEvent` binding expression.
+これは、ボタンクリックなどの組み込みのイベントと一貫性があります。
+
+**Why**? <br />
+Angularは、[代替構文](guide/templates/binding) `on-*` を許可しています。
+イベント自体に `on` プレフィックスが付いていた場合、`on-onEvent` バインド式になります。
 
 <docs-code header="app/heroes/hero.component.ts" path="adev/src/content/examples/styleguide/src/05-16/app/heroes/hero.component.avoid.ts" visibleRegion="example"/>
 
@@ -697,197 +697,197 @@ If the event itself was prefixed with `on` this would result in an `on-onEvent` 
     <docs-code header="app/app.component.html" path="adev/src/content/examples/styleguide/src/05-16/app/app.component.html"/>
 </docs-code-multifile>
 
-### Put presentation logic in the component class
+### プレゼンテーションロジックをコンポーネントクラスに配置する
 
-#### Style 05-17
+#### スタイル 05-17
 
-**Do** put presentation logic in the component class, and not in the template.
-
-**Why**? <br />
-Logic will be contained in one place \(the component class\) instead of being spread in two places.
+**Do** プレゼンテーションロジックを、テンプレートではなく、コンポーネントクラスに配置します。
 
 **Why**? <br />
-Keeping the component's presentation logic in the class instead of the template improves testability, maintainability, and reusability.
+ロジックは、テンプレートに分散されるのではなく、1か所（コンポーネントクラス）に含まれます。
+
+**Why**? <br />
+コンポーネントのプレゼンテーションロジックをテンプレートではなくクラスに保持することで、テスト容易性、保守性、および再利用性を向上させます。
 
 <docs-code header="app/heroes/hero-list/hero-list.component.ts" path="adev/src/content/examples/styleguide/src/05-17/app/heroes/hero-list/hero-list.component.avoid.ts" visibleRegion="example"/>
 
 <docs-code header="app/heroes/hero-list/hero-list.component.ts" path="adev/src/content/examples/styleguide/src/05-17/app/heroes/hero-list/hero-list.component.ts" visibleRegion="example"/>
-### Initialize inputs
+### インプットを初期化する
 
-#### Style 05-18
+#### スタイル 05-18
 
-TypeScript's `--strictPropertyInitialization` compiler option ensures that a class initializes its properties during construction.
-When enabled, this option causes the TypeScript compiler to report an error if the class does not set a value to any property that is not explicitly marked as optional.
+TypeScriptの `--strictPropertyInitialization` コンパイラオプションは、クラスがコンストラクション中にプロパティを初期化するようにします。
+有効にすると、このオプションにより、クラスがオプションとして明示的にマークされていないプロパティに値を設定しない場合、TypeScriptコンパイラはエラーを報告します。
 
-By design, Angular treats all `@Input` properties as optional.
-When possible, you should satisfy `--strictPropertyInitialization` by providing a default value.
+設計上、Angularはすべての `@Input` プロパティをオプションとして扱います。
+可能な場合は、デフォルト値を提供することで、`--strictPropertyInitialization` を満たす必要があります。
 
 <docs-code header="app/heroes/hero/hero.component.ts" path="adev/src/content/examples/styleguide/src/05-18/app/heroes/hero/hero.component.ts" visibleRegion="example"/>
 
-If the property is hard to construct a default value for, use `?` to explicitly mark the property as optional.
+プロパティにデフォルト値を作成するのが難しい場合は、`?` を使用して、プロパティをオプションとして明示的にマークします。
 
 <docs-code header="app/heroes/hero/hero.component.ts" path="adev/src/content/examples/styleguide/src/05-18/app/heroes/hero/hero.component.optional.ts" visibleRegion="example"/>
 
-You may want to have a required `@Input` field, meaning all your component users are required to pass that attribute.
-In such cases, use a default value.
-Just suppressing the TypeScript error with `!` is insufficient and should be avoided because it will prevent the type checker from ensuring the input value is provided.
+必要な `@Input` フィールドが必要になる場合があります。つまり、すべてのコンポーネントユーザーは、その属性を渡す必要があります。
+このような場合は、デフォルト値を使用します。
+`!` を使用してTypeScriptエラーを抑制するだけでは不十分であり、避けるべきです。これは、入力値が提供されていることを型チェッカーが確認できなくなるためです。
 
 <docs-code header="app/heroes/hero/hero.component.ts" path="adev/src/content/examples/styleguide/src/05-18/app/heroes/hero/hero.component.avoid.ts" visibleRegion="example"/>
 
-## Directives
+## ディレクティブ
 
-### Use directives to enhance an element
+### ディレクティブを使用して要素を拡張する
 
-#### Style 06-01
+#### スタイル 06-01
 
-**Do** use attribute directives when you have presentation logic without a template.
-
-**Why**? <br />
-Attribute directives don't have an associated template.
+**Do** テンプレートのないプレゼンテーションロジックがある場合、属性ディレクティブを使用します。
 
 **Why**? <br />
-An element may have more than one attribute directive applied.
+属性ディレクティブには、関連付けられたテンプレートがありません。
+
+**Why**? <br />
+要素には、複数の属性ディレクティブを適用できます。
 
 <docs-code header="app/shared/highlight.directive.ts" path="adev/src/content/examples/styleguide/src/06-01/app/shared/highlight.directive.ts" visibleRegion="example"/>
 
 <docs-code header="app/app.component.html" path="adev/src/content/examples/styleguide/src/06-01/app/app.component.html"/>
 
-### `HostListener`/`HostBinding` decorators versus `host` metadata
+### `HostListener`/`HostBinding` デコレーターと `host` メタデータ
 
-#### Style 06-03
+#### スタイル 06-03
 
-**Consider** preferring the `@HostListener` and `@HostBinding` to the `host` property of the `@Directive` and `@Component` decorators.
+**Consider** `@Directive` と `@Component` デコレーターの `host` プロパティよりも、`@HostListener` と `@HostBinding` を優先します。
 
-**Do** be consistent in your choice.
+**Do** 選択肢を常に一貫性を持たせてください。
 
 **Why**? <br />
-The property associated with `@HostBinding` or the method associated with `@HostListener` can be modified only in a single place —in the directive's class.
-If you use the `host` metadata property, you must modify both the property/method declaration in the directive's class and the metadata in the decorator associated with the directive.
+`@HostBinding` に関連付けられているプロパティまたは `@HostListener` に関連付けられているメソッドは、ディレクティブのクラス内のみで変更できます。
+`host` メタデータプロパティを使用する場合は、ディレクティブのクラス内のプロパティ/メソッドの宣言と、ディレクティブに関連付けられているデコレーター内のメタデータを両方とも変更する必要があります。
 
 <docs-code header="app/shared/validator.directive.ts" path="adev/src/content/examples/styleguide/src/06-03/app/shared/validator.directive.ts"/>
 
-Compare with the less preferred `host` metadata alternative.
+推奨される `host` メタデータの代替方法と比較してください。
 
 **Why**? <br />
-The `host` metadata is only one term to remember and doesn't require extra ES imports.
+`host` メタデータは、覚えるべき用語が1つだけであり、追加のESインポートは必要ありません。
 
 <docs-code header="app/shared/validator2.directive.ts" path="adev/src/content/examples/styleguide/src/06-03/app/shared/validator2.directive.ts"/>
-## Services
+## サービス
 
-### Services are singletons
+### サービスはシングルトンです
 
-#### Style 07-01
+#### スタイル 07-01
 
-**Do** use services as singletons within the same injector.
-Use them for sharing data and functionality.
-
-**Why**? <br />
-Services are ideal for sharing methods across a feature area or an app.
+**Do** サービスを、同じインジェクター内ではシングルトンとして使用します。
+データと機能を共有するために使用します。
 
 **Why**? <br />
-Services are ideal for sharing stateful in-memory data.
+サービスは、機能領域またはアプリケーション全体でメソッドを共有するのに最適です。
+
+**Why**? <br />
+サービスは、ステートフルなメモリ内データを共有するのに最適です。
 
 <docs-code header="app/heroes/shared/hero.service.ts" path="adev/src/content/examples/styleguide/src/07-01/app/heroes/shared/hero.service.ts" visibleRegion="example"/>
 
-### Providing a service
+### サービスを提供する
 
-#### Style 07-03
+#### スタイル 07-03
 
-**Do** provide a service with the application root injector in the `@Injectable` decorator of the service.
-
-**Why**? <br />
-The Angular injector is hierarchical.
+**Do** サービスを、サービスの `@Injectable` デコレーター内のアプリケーションルートインジェクターで提供します。
 
 **Why**? <br />
-When you provide the service to a root injector, that instance of the service is shared and available in every class that needs the service.
-This is ideal when a service is sharing methods or state.
+Angularインジェクターは階層構造になっています。
 
 **Why**? <br />
-When you register a service in the `@Injectable` decorator of the service, optimization tools such as those used by the [Angular CLI's](cli) production builds can perform tree shaking and remove services that aren't used by your app.
+サービスをルートインジェクターに提供すると、そのサービスのインスタンスは共有され、サービスを必要とするすべてのクラスで利用できます。
+これは、サービスがメソッドまたは状態を共有している場合に最適です。
 
 **Why**? <br />
-This is not ideal when two different components need different instances of a service.
-In this scenario it would be better to provide the service at the component level that needs the new and separate instance.
+サービスをサービスの `@Injectable` デコレーターに登録すると、[Angular CLI](cli) の本番ビルドで使用されるものなどの最適化ツールは、ツリーシェイクを実行し、アプリケーションで使用されていないサービスを削除できます。
+
+**Why**? <br />
+これは、2つの異なるコンポーネントがサービスの異なるインスタンスを必要とする場合に最適ではありません。
+このシナリオでは、新しい個別のインスタンスを必要とするコンポーネントレベルでサービスを提供する方が良いでしょう。
 
 <docs-code header="src/app/treeshaking/service.ts" path="adev/src/content/examples/dependency-injection/src/app/tree-shaking/service.ts"/>
 
-### Use the @Injectable() class decorator
+### `@Injectable()` クラスデコレーターを使用する
 
-#### Style 07-04
+#### スタイル 07-04
 
-**Do** use the `@Injectable()` class decorator instead of the `@Inject` parameter decorator when using types as tokens for the dependencies of a service.
-
-**Why**? <br />
-The Angular Dependency Injection \(DI\) mechanism resolves a service's own
-dependencies based on the declared types of that service's constructor parameters.
+**Do** サービスの依存関係のトークンとしてタイプを使用する場合、`@Inject` パラメータデコレーターではなく、`@Injectable()` クラスデコレーターを使用します。
 
 **Why**? <br />
-When a service accepts only dependencies associated with type tokens, the `@Injectable()` syntax is much less verbose compared to using `@Inject()` on each individual constructor parameter.
+Angular Dependency Injection（DI）メカニズムは、
+サービスのコンストラクターパラメーターの宣言されたタイプに基づいて、サービス自身の依存関係を解決します。
+
+**Why**? <br />
+サービスがタイプトークンに関連付けられた依存関係のみを受け入れる場合、`@Injectable()` 構文は、各コンストラクターパラメーターに `@Inject()` を使用するよりもはるかに簡潔です。
 
 <docs-code header="app/heroes/shared/hero-arena.service.ts" path="adev/src/content/examples/styleguide/src/07-04/app/heroes/shared/hero-arena.service.avoid.ts" visibleRegion="example"/>
 
 <docs-code header="app/heroes/shared/hero-arena.service.ts" path="adev/src/content/examples/styleguide/src/07-04/app/heroes/shared/hero-arena.service.ts" visibleRegion="example"/>
-## Data Services
+## データサービス
 
-### Talk to the server through a service
+### サービスを通じてサーバーにアクセスする
 
-#### Style 08-01
+#### スタイル 08-01
 
-**Do** refactor logic for making data operations and interacting with data to a service.
+**Do** データ操作やデータと対話するロジックをサービスにリファクタリングします。
 
-**Do** make data services responsible for XHR calls, local storage, stashing in memory, or any other data operations.
-
-**Why**? <br />
-The component's responsibility is for the presentation and gathering of information for the view.
-It should not care how it gets the data, just that it knows who to ask for it.
-Separating the data services moves the logic on how to get it to the data service, and lets the component be simpler and more focused on the view.
+**Do** データサービスを、XHR呼び出し、ローカルストレージ、メモリへのスタッシュ、またはその他のデータ操作の責任にします。
 
 **Why**? <br />
-This makes it easier to test \(mock or real\) the data calls when testing a component that uses a data service.
+コンポーネントの責任は、プレゼンテーションと、ビューの情報を収集することです。
+データの取得方法を気にする必要はありません。誰に尋ねればいいかだけわかっていれば十分です。
+データサービスを分離すると、データの取得方法に関するロジックがデータサービスに移され、コンポーネントはよりシンプルになり、ビューに集中できます。
 
 **Why**? <br />
-The details of data management, such as headers, HTTP methods, caching, error handling, and retry logic, are irrelevant to components and other data consumers.
-
-A data service encapsulates these details.
-It's easier to evolve these details inside the service without affecting its consumers.
-And it's easier to test the consumers with mock service implementations.
-
-## Lifecycle hooks
-
-Use Lifecycle hooks to tap into important events exposed by Angular.
-
-### Implement lifecycle hook interfaces
-
-#### Style 09-01
-
-**Do** implement the lifecycle hook interfaces.
+これにより、データサービスを使用するコンポーネントをテストする際に、データ呼び出しを（モックまたは本物で）簡単にテストできます。
 
 **Why**? <br />
-Lifecycle interfaces prescribe typed method signatures.
-Use those signatures to flag spelling and syntax mistakes.
+ヘッダー、HTTPメソッド、キャッシュ、エラー処理、再試行ロジックなどのデータ管理の詳細情報は、コンポーネントやその他のデータコンシューマーにとって無関係です。
+
+データサービスは、これらの詳細をカプセル化します。
+サービス内でこれらの詳細を簡単に進化させることができ、コンシューマーに影響を与えることはありません。
+また、モックサービスの実装を使用して、コンシューマーを簡単にテストできます。
+
+## ライフサイクルフック
+
+ライフサイクルフックを使用して、Angularで公開されている重要なイベントを活用します。
+
+### ライフサイクルフックインターフェースを実装する
+
+#### スタイル 09-01
+
+**Do** ライフサイクルフックインターフェースを実装します。
+
+**Why**? <br />
+ライフサイクルインターフェースは、型指定されたメソッドシグネチャを規定しています。
+これらのシグネチャを使用して、スペルミスや構文ミスを検出します。
 
 <docs-code header="app/heroes/shared/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visibleRegion="example"/>
 
 <docs-code header="app/heroes/shared/hero-button/hero-button.component.ts" path="adev/src/content/examples/styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.ts" visibleRegion="example"/>
-## Appendix
+## 付録
 
-Useful tools and tips for Angular.
+Angularに役立つツールとヒント。
 
-### File templates and snippets
+### ファイルテンプレートとスニペット
 
-#### Style A-02
+#### スタイル A-02
 
-**Do** use file templates or snippets to help follow consistent styles and patterns.
-Here are templates and/or snippets for some of the web development editors and IDEs.
+**Do** ファイルテンプレートやスニペットを使用して、一貫性のあるスタイルとパターンに従うようにします。
+以下は、いくつかのWeb開発エディターとIDE用のテンプレートまたはスニペットです。
 
-**Consider** using [snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2) for [Visual Studio Code](https://code.visualstudio.com) that follow these styles and guidelines.
+**Consider** これらのスタイルとガイドラインに従う、[Visual Studio Code](https://code.visualstudio.com) 用の[スニペット](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2) を使用します。
 
 <a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2">
 
-<img alt="Use Extension" src="assets/images/guide/styleguide/use-extension.gif">
+<img alt="拡張機能を使用する" src="assets/images/guide/styleguide/use-extension.gif">
 
 </a>
 
-**Consider** using [snippets](https://github.com/orizens/sublime-angular2-snippets) for [Sublime Text](https://www.sublimetext.com) that follow these styles and guidelines.
+**Consider** これらのスタイルとガイドラインに従う、[Sublime Text](https://www.sublimetext.com) 用の[スニペット](https://github.com/orizens/sublime-angular2-snippets) を使用します。
 
-**Consider** using [snippets](https://github.com/mhartington/vim-angular2-snippets) for [Vim](https://www.vim.org) that follow these styles and guidelines.
+**Consider** これらのスタイルとガイドラインに従う、[Vim](https://www.vim.org) 用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使用します。

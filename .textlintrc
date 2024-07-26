@@ -27,7 +27,8 @@
         "allow": [
           "の",
           "が",
-          "に"
+          "に",
+          "にも"
         ]
       },
       "no-exclamation-question-mark": false,

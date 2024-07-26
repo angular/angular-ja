@@ -9,7 +9,7 @@
   "scripts": {
     "start": "tsx tools/watch.ts",
     "build": "tsx tools/build.ts",
-    "lint": "yarn textlint 'adev-ja/**/*.md'",
+    "lint": "tsx tools/lint.ts",
     "test": "yarn test:patch",
     "test:patch": "git apply -v --check --directory origin ./tools/adev-patches/*.patch",
     "update-origin": "tsx tools/update-origin.ts",

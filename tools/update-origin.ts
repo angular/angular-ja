@@ -3,7 +3,7 @@ import { $ } from 'execa';
 import { globby as glob } from 'globby';
 import { extname, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { cpRf } from './lib/fsutils';
+import { cpRf, exists } from './lib/fsutils';
 import { adevJaDir, rootDir } from './lib/workspace';
 
 const localizedFilePatterns = [
@@ -46,12 +46,14 @@ async function copyOriginFiles() {
     caseSensitiveMatch: true,
   });
 
-  // adev-ja 内に .en.* とリネームしてコピーする
+  // adev-ja 内に同名ファイルの .en.xxx がある場合はそちらを上書きする
+  // .en.xxx がない場合はそのままコピーする
   for (const file of adevFiles) {
     const src = resolve(adevDir, file);
     const ext = extname(file);
     const enFilePath = file.replace(`${ext}`, `.en${ext}`);
-    const dest = resolve(adevJaDir, enFilePath);
+    const isTranslated = await exists(resolve(adevJaDir, enFilePath));
+    const dest = resolve(adevJaDir, isTranslated ? enFilePath : file);
     await cpRf(src, dest);
   }
 }

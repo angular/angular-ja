@@ -1,6 +1,7 @@
 import { $ } from 'execa';
 import { globby } from 'globby';
 import { access, cp, readFile, rm, writeFile } from 'node:fs/promises';
+import { extname } from 'node:path';
 
 export const glob = globby;
 
@@ -39,4 +40,20 @@ export async function getWordCount(path: string) {
   return $`wc -c ${path}`.then(({ stdout }) => {
     return parseInt(stdout.trim().split(' ')[0]);
   });
+}
+
+export function getEnFilePath(file: string) {
+  const ext = extname(file);
+  if (file.endsWith(`.en${ext}`)) {
+    return file;
+  }
+  return file.replace(ext, `.en${ext}`);
+}
+
+export function getLocalizedFilePath(file: string) {
+  const ext = extname(file);
+  if (file.endsWith(`.en${ext}`)) {
+    return file.replace(`.en${ext}`, ext);
+  }
+  return file;
 }

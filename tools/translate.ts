@@ -13,7 +13,14 @@ import assert from 'node:assert';
 import { stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { getWordCount, glob } from './lib/fsutils';
+import {
+  cpRf,
+  exists,
+  getEnFilePath,
+  getLocalizedFilePath,
+  getWordCount,
+  glob,
+} from './lib/fsutils';
 import { rootDir } from './lib/workspace';
 
 const apiKey = process.env.GOOGLE_API_KEY;
@@ -158,18 +165,26 @@ async function writeTranslatedContent(
   content: string,
   forceWrite = false
 ) {
-  // 元のファイル拡張子が .en.* の場合は .* として保存する
-  const outFilePath = file.replace(/\.en\.([^.]+)$/, '.$1');
+  const outputFile = getLocalizedFilePath(file);
   const save =
     forceWrite ||
-    (await consola.prompt(`翻訳結果を保存しますか？\n保存先: ${outFilePath}`, {
+    (await consola.prompt(`翻訳結果を保存しますか？\n保存先: ${outputFile}`, {
       type: 'confirm',
       initial: false,
     }));
   if (!save) {
     return;
   }
-  await writeFile(outFilePath, content);
+
+  const enFile = getEnFilePath(file);
+  // .en.* が存在しない場合は原文コピーを忘れているため、.en.md に元ファイルをコピーする
+  if (!(await exists(enFile))) {
+    consola.warn(
+      `原文ファイルが見つかりません。入力ファイルを ${enFile} にコピーします。`
+    );
+    await cpRf(file, enFile);
+  }
+  await writeFile(outputFile, content);
   consola.success(`保存しました`);
 }
 

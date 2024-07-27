@@ -1,18 +1,18 @@
-# Directive composition API
+## ディレクティブ合成API
 
-Angular directives offer a great way to encapsulate reusable behaviors— directives can apply
-attributes, CSS classes, and event listeners to an element.
+Angularディレクティブは、再利用可能な動作をカプセル化する素晴らしい方法を提供します。
+ディレクティブは、属性、CSSクラス、およびイベントリスナーを要素に適用できます。
 
-The *directive composition API* lets you apply directives to a component's host element from
-*within* the component TypeScript class.
+*ディレクティブ合成API* を使用すると、
+コンポーネントのTypeScriptクラスの*内部*からコンポーネントのホスト要素にディレクティブを適用できます。
 
-## Adding directives to a component
+## コンポーネントにディレクティブを追加する
 
-You apply directives to a component by adding a `hostDirectives` property to a component's
-decorator. We call such directives *host directives*.
+コンポーネントにディレクティブを適用するには、コンポーネントのデコレーターに `hostDirectives` プロパティを追加します。
+このようなディレクティブを*ホストディレクティブ*と呼びます。
 
-In this example, we apply the directive `MenuBehavior` to the host element of `AdminMenu`. This
-works similarly to applying the `MenuBehavior` to the `<admin-menu>` element in a template.
+この例では、`MenuBehavior` ディレクティブを `AdminMenu` のホスト要素に適用します。
+これは、テンプレートの `<admin-menu>` 要素に `MenuBehavior` を適用するのと同じように機能します。
 
 ```typescript
 @Component({
@@ -24,23 +24,23 @@ works similarly to applying the `MenuBehavior` to the `<admin-menu>` element in 
 export class AdminMenu { }
 ```
 
-When the framework renders a component, Angular also creates an instance of each host directive. The
-directives' host bindings apply to the component's host element. By default, host directive inputs
-and outputs are not exposed as part of the component's public API. See
-[Including inputs and outputs](#including-inputs-and-outputs) below for more information.
+フレームワークがコンポーネントをレンダリングすると、Angularは各ホストディレクティブのインスタンスも作成します。
+ディレクティブのホストバインディングは、コンポーネントのホスト要素に適用されます。
+デフォルトでは、ホストディレクティブの入力と出力は、コンポーネントの公開APIの一部として公開されません。
+詳細については、以下の[入力と出力を含める](#including-inputs-and-outputs)を参照してください。
 
-**Angular applies host directives statically at compile time.** You cannot dynamically add
-directives at runtime.
+**Angularはコンパイル時に静的にホストディレクティブを適用します。** 
+ランタイム時には動的にディレクティブを追加できません。
 
-**Directives used in `hostDirectives` must be `standalone: true`.**
+**`hostDirectives` で使用されるディレクティブは `standalone: true` でなければなりません。**
 
-**Angular ignores the `selector` of directives applied in the `hostDirectives` property.**
+**Angularは `hostDirectives` プロパティで適用されたディレクティブの `selector` を無視します。**
 
-## Including inputs and outputs
+## 入力と出力を含める {#including-inputs-and-outputs}
 
-When you apply `hostDirectives` to your component, the inputs and outputs from the host directives
-are not included in your component's API by default. You can explicitly include inputs and outputs
-in your component's API by expanding the entry in `hostDirectives`:
+コンポーネントに `hostDirectives` を適用すると、
+ホストディレクティブからの入力と出力は、デフォルトではコンポーネントのAPIには含まれません。
+`hostDirectives` のエントリを拡張することで、コンポーネントのAPIに入力と出力を明示的に含めることができます。
 
 ```typescript
 @Component({
@@ -56,16 +56,16 @@ in your component's API by expanding the entry in `hostDirectives`:
 export class AdminMenu { }
 ```
 
-By explicitly specifying the inputs and outputs, consumers of the component with `hostDirective` can
-bind them in a template:
+入力と出力を明示的に指定することで、`hostDirective` を持つコンポーネントのコンシューマーは
+テンプレートでそれらにバインドできます。
 
 ```angular-html
 
 <admin-menu menuId="top-menu" (menuClosed)="logMenuClosed()">
 ```
 
-Furthermore, you can alias inputs and outputs from `hostDirective` to customize the API of your
-component:
+さらに、`hostDirective` から入力と出力をエイリアスして、
+コンポーネントのAPIをカスタマイズできます。
 
 ```typescript
 @Component({
@@ -86,18 +86,18 @@ export class AdminMenu { }
 <admin-menu id="top-menu" (closed)="logMenuClosed()">
 ```
 
-## Adding directives to another directive
+## 別のディレクティブにディレクティブを追加する
 
-You can also add `hostDirectives` to other directives, in addition to components. This enables the
-transitive aggregation of multiple behaviors.
+コンポーネントに加えて、他のディレクティブにも `hostDirectives` を追加できます。
+これにより、複数の動作を推移的に集約できます。
 
-In the following example, we define two directives, `Menu` and `Tooltip`. We then compose the behavior
-of these two directives in `MenuWithTooltip`. Finally, we apply `MenuWithTooltip`
-to `SpecializedMenuWithTooltip`.
+次の例では、`Menu` と `Tooltip` の2つのディレクティブを定義しています。
+次に、`MenuWithTooltip` でこれらの2つのディレクティブの動作を構成します。
+最後に、`SpecializedMenuWithTooltip` に `MenuWithTooltip` を適用します。
 
-When `SpecializedMenuWithTooltip` is used in a template, it creates instances of all of `Menu`
-, `Tooltip`, and `MenuWithTooltip`. Each of these directives' host bindings apply to the host
-element of `SpecializedMenuWithTooltip`.
+`SpecializedMenuWithTooltip` がテンプレートで使用されると、
+`Menu`、`Tooltip`、`MenuWithTooltip` のすべてをインスタンス化します。
+これらのディレクティブの各ホストバインディングは、`SpecializedMenuWithTooltip` のホスト要素に適用されます。
 
 ```typescript
 @Directive({...})
@@ -106,14 +106,14 @@ export class Menu { }
 @Directive({...})
 export class Tooltip { }
 
-// MenuWithTooltip can compose behaviors from multiple other directives
+// MenuWithTooltip は、他の複数のディレクティブから動作を構成できます
 @Directive({
   standalone: true,
   hostDirectives: [Tooltip, Menu],
 })
 export class MenuWithTooltip { }
 
-// CustomWidget can apply the already-composed behaviors from MenuWithTooltip
+// CustomWidget は、すでに構成されている MenuWithTooltip からの動作を適用できます
 @Directive({
   standalone: true,
   hostDirectives: [MenuWithTooltip],
@@ -121,14 +121,14 @@ export class MenuWithTooltip { }
 export class SpecializedMenuWithTooltip { }
 ```
 
-## Host directive semantics
+## ホストディレクティブのセマンティクス
 
-### Directive execution order
+### ディレクティブの実行順序
 
-Host directives go through the same lifecycle as components and directives used directly in a
-template. However, host directives always execute their constructor, lifecycle hooks, and bindings _before_ the component or directive on which they are applied.
+ホストディレクティブは、テンプレートで直接使用されるコンポーネントやディレクティブと同じライフサイクルを経ます。
+ただし、ホストディレクティブは常に適用されているコンポーネントまたはディレクティブの*前*に、コンストラクターやライフサイクルフックおよびバインディングを実行します。
 
-The following example shows minimal use of a host directive:
+次の例は、ホストディレクティブの最小限の使用を示しています。
 
 ```typescript
 @Component({
@@ -140,20 +140,20 @@ The following example shows minimal use of a host directive:
 export class AdminMenu { }
 ```
 
-The order of execution here is:
+ここでの実行順序は次のとおりです。
 
-1. `MenuBehavior` instantiated
-2. `AdminMenu` instantiated
-3. `MenuBehavior` receives inputs (`ngOnInit`)
-4. `AdminMenu` receives inputs (`ngOnInit`)
-5. `MenuBehavior` applies host bindings
-6. `AdminMenu` applies host bindings
+1. `MenuBehavior` がインスタンス化される
+2. `AdminMenu` がインスタンス化される
+3. `MenuBehavior` が入力を受信する (`ngOnInit`)
+4. `AdminMenu` が入力を受信する (`ngOnInit`)
+5. `MenuBehavior` がホストバインディングを適用する
+6. `AdminMenu` がホストバインディングを適用する
 
-This order of operations means that components with `hostDirectives` can override any host bindings
-specified by a host directive.
+この動作順序により、`hostDirectives` を持つコンポーネントは、
+ホストディレクティブで指定されたホストバインディングをオーバーライドできます。
 
-This order of operations extends to nested chains of host directives, as shown in the following
-example.
+この動作順序は次の例のように、
+ホストディレクティブのネストされたチェーンにも適用されます。
 
 ```typescript
 @Directive({...})
@@ -172,26 +172,26 @@ export class CustomTooltip { }
 export class EvenMoreCustomTooltip { }
 ```
 
-In the example above, the order of execution is:
+上記の例では、実行順序は次のとおりです。
 
-1. `Tooltip` instantiated
-2. `CustomTooltip` instantiated
-3. `EvenMoreCustomTooltip` instantiated
-4. `Tooltip` receives inputs (`ngOnInit`)
-5. `CustomTooltip` receives inputs (`ngOnInit`)
-6. `EvenMoreCustomTooltip` receives inputs (`ngOnInit`)
-7. `Tooltip` applies host bindings
-8. `CustomTooltip` applies host bindings
-9. `EvenMoreCustomTooltip` applies host bindings
+1. `Tooltip` がインスタンス化される
+2. `CustomTooltip` がインスタンス化される
+3. `EvenMoreCustomTooltip` がインスタンス化される
+4. `Tooltip` が入力を受信する (`ngOnInit`)
+5. `CustomTooltip` が入力を受信する (`ngOnInit`)
+6. `EvenMoreCustomTooltip` が入力を受信する (`ngOnInit`)
+7. `Tooltip` がホストバインディングを適用する
+8. `CustomTooltip` がホストバインディングを適用する
+9. `EvenMoreCustomTooltip` がホストバインディングを適用する
 
-### Dependency injection
+### 依存性の注入
 
-A component or directive that specifies `hostDirectives` can inject the instances of those host
-directives and vice versa.
+`hostDirectives` を指定するコンポーネントまたはディレクティブは、
+それらのホストディレクティブのインスタンスを注入でき、その逆も可能です。
 
-When applying host directives to a component, both the component and host directives can define
-providers.
+ホストディレクティブをコンポーネントに適用する場合、
+コンポーネントとホストディレクティブの両方でプロバイダーを定義できます。
 
-If a component or directive with `hostDirectives` and those host directives both provide the same
-injection token, the providers defined by class with `hostDirectives` take precedence over providers
-defined by the host directives.
+`hostDirectives` を持つコンポーネントと、それらのホストディレクティブの両方が同じ注入トークンを提供する場合、
+`hostDirectives` を持つクラスで定義されたプロバイダーは
+ホストディレクティブで定義されたプロバイダーよりも優先されます。

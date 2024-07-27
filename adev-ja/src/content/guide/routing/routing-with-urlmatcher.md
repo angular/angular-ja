@@ -1,56 +1,56 @@
-# Creating custom route matches
+# カスタムルートマッチの作成
 
-The Angular Router supports a powerful matching strategy that you can use to help users navigate your application.
-This matching strategy supports static routes, variable routes with parameters, wildcard routes, and so on.
-Also, build your own custom pattern matching for situations in which the URLs are more complicated.
+Angular Routerは、アプリケーションのナビゲーションを支援するために使用できる強力なマッチング戦略をサポートしています。
+このマッチング戦略は、パラメーター付きの静的ルート、可変ルート、ワイルドカードルートなどをサポートしています。
+また、URLがより複雑な状況で独自のカスタムパターンマッチを作成できます。
 
-In this tutorial, you'll build a custom route matcher using Angular's `UrlMatcher`.
-This matcher looks for a Twitter handle in the URL.
+このチュートリアルでは、Angularの`UrlMatcher`を使用してカスタムルートマッチャーを作成します。
+このマッチャーは、URL内のTwitterハンドルを検索します。
 
-## Objectives
+## 目標
 
-Implement Angular's `UrlMatcher` to create a custom route matcher.
+Angularの`UrlMatcher`を実装してカスタムルートマッチャーを作成します。
 
-## Create a sample application
+## サンプルアプリケーションの作成
 
-Using the Angular CLI, create a new application, *angular-custom-route-match*.
-In addition to the default Angular application framework, you will also create a *profile* component.
+Angular CLIを使用して、新しいアプリケーション*angular-custom-route-match*を作成します。
+デフォルトのAngularアプリケーションフレームワークに加えて、*profile*コンポーネントも作成します。
 
-1. Create a new Angular project, *angular-custom-route-match*.
+1. 新しいAngularプロジェクト、*angular-custom-route-match*を作成します。
 
     ```shell
     ng new angular-custom-route-match
     ```
 
-    When prompted with `Would you like to add Angular routing?`, select `Y`.
+    `Angular routingを追加しますか？`と表示されたら、`Y`を選択します。
 
-    When prompted with `Which stylesheet format would you like to use?`, select `CSS`.
+    `どのスタイルシート形式を使用しますか？`と表示されたら、`CSS`を選択します。
 
-    After a few moments, a new project, `angular-custom-route-match`, is ready.
+    しばらくすると、新しいプロジェクト`angular-custom-route-match`の準備が整います。
 
-1. From your terminal, navigate to the `angular-custom-route-match` directory.
-1. Create a component, *profile*.
+1. ターミナルから`angular-custom-route-match`ディレクトリに移動します。
+1. コンポーネント、*profile*を作成します。
 
     ```shell
     ng generate component profile
     ```
 
-1. In your code editor, locate the file, `profile.component.html` and replace the placeholder content with the following HTML.
+1. コードエディタで`profile.component.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
 
     <docs-code header="src/app/profile/profile.component.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/profile/profile.component.html"/>
 
-1. In your code editor, locate the file, `app.component.html` and replace the placeholder content with the following HTML.
+1. コードエディタで`app.component.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.component.html"/>
 
-## Configure your routes for your application
+## アプリケーションのルートを構成する
 
-With your application framework in place, you next need to add routing capabilities to the `app.config.ts` file.
-As a part of this process, you will create a custom URL matcher that looks for a Twitter handle in the URL.
-This handle is identified by a preceding `@` symbol.
+アプリケーションフレームワークが整ったら、次に`app.config.ts`ファイルにルーティング機能を追加する必要があります。
+このプロセスの一環として、URL内のTwitterハンドルを検索するカスタムURLマッチャーを作成します。
+このハンドルは、先行する`@`シンボルによって識別されます。
 
-1. In your code editor, open your `app.config.ts` file.
-1. Add an `import` statement for Angular's `provideRouter` and `withComponentInputBinding` as well as the application routes.
+1. コードエディタで`app.config.ts`ファイルを開きます。
+1. Angularの`provideRouter`と`withComponentInputBinding`、およびアプリケーションルートの`import`ステートメントを追加します。
 
     ```ts
     import {provideRouter, withComponentInputBinding} from '@angular/router';
@@ -58,59 +58,59 @@ This handle is identified by a preceding `@` symbol.
     import {routes} from './app.routes';
     ```
 
-1. In the providers array, add a `provideRouter(routes, withComponentInputBinding())` statement.
+1. プロバイダー配列に`provideRouter(routes, withComponentInputBinding())`ステートメントを追加します。
 
-1. Define the custom route matcher by adding the following code to the application routes.
+1. アプリケーションルートに次のコードを追加して、カスタムルートマッチャーを定義します。
 
     <docs-code header="src/app/app.routes.ts" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.routes.ts" visibleRegion="matcher"/>
 
-This custom matcher is a function that performs the following tasks:
+このカスタムマッチャーは、次のタスクを実行する関数です。
 
-* The matcher verifies that the array contains only one segment
-* The matcher employs a regular expression to ensure that the format of the username is a match
-* If there is a match, the function returns the entire URL, defining a `username` route parameter as a substring of the path
-* If there isn't a match, the function returns null and the router continues to look for other routes that match the URL
+* マッチャーは、配列にセグメントが1つしかないことを確認します
+* マッチャーは正規表現を使用して、ユーザー名の形式が一致することを確認します
+* 一致があれば、関数は完全なURLを返し、`username`ルートパラメーターをパスのサブストリングとして定義します
+* 一致しなければ、関数はnullを返し、ルーターはURLと一致する他のルートを探し続けます
 
-HELPFUL: A custom URL matcher behaves like any other route definition. Define child routes or lazy loaded routes as you would with any other route.
+HELPFUL: カスタムURLマッチャーは、他のルート定義と同じように動作します。他のルートと同じように、子ルートまたは遅延読み込みルートを定義します。
 
-## Reading the route parameters
+## ルートパラメーターの読み取り
 
-With the custom matcher in place, you can now bind the route parameter in the `profile` component.
+カスタムマッチャーが設定されたので、`profile`コンポーネントでルートパラメーターをバインドできます。
 
-In your code editor, open your `profile.component.ts` file and create an `Input` matching the `username` parameter.
-We added the `withComponentInputBinding` feature earlier
-in `provideRouter`. This allows the `Router` to bind information directly to the route components.
+コードエディタで`profile.component.ts`ファイルを開き、`username`パラメーターと一致する`Input`を作成します。
+以前、`provideRouter`で`withComponentInputBinding`機能を追加しました。
+これにより、`Router`はルートコンポーネントに直接情報をバインドできます。
 
 ```ts
 @Input() username!: string;
 ```
 
-## Test your custom URL matcher
+## カスタムURLマッチャーをテストする
 
-With your code in place, you can now test your custom URL matcher.
+コードが設定されたので、カスタムURLマッチャーをテストできます。
 
-1. From a terminal window, run the `ng serve` command.
+1. ターミナルウィンドウから`ng serve`コマンドを実行します。
 
     <docs-code language="shell">
     ng serve
     </docs-code>
 
-1. Open a browser to `http://localhost:4200`.
+1. ブラウザを`http://localhost:4200`に開きます。
 
-    You should see a single web page, consisting of a sentence that reads `Navigate to my profile`.
+    `私のプロフィールに移動`という文章を含む単一のWebページが表示されます。
 
-1. Click the **my profile** hyperlink.
+1. **私のプロフィール**ハイパーリンクをクリックします。
 
-    A new sentence, reading `Hello, Angular!` appears on the page.
+    `こんにちは、Angular！`という新しい文章がページに表示されます。
 
-## Next steps
+## 次のステップ
 
-Pattern matching with the Angular Router provides you with a lot of flexibility when you have dynamic URLs in your application.
-To learn more about the Angular Router, see the following topics:
+Angular Routerのパターンマッチングを使用すると、アプリケーションで動的なURLがある場合に、多くの柔軟性を得られます。
+Angular Routerの詳細については、以下のトピックを参照してください。
 
 <docs-pill-row>
-  <docs-pill href="guide/routing/common-router-tasks" title="In-app Routing and Navigation"/>
+  <docs-pill href="guide/routing/common-router-tasks" title="アプリ内ルーティングとナビゲーション"/>
   <docs-pill href="api/router/Router" title="Router API"/>
 </docs-pill-row>
 
-HELPFUL: This content is based on [Custom Route Matching with the Angular Router](https://medium.com/@brandontroberts/custom-route-matching-with-the-angular-router-fbdd48665483), by [Brandon Roberts](https://twitter.com/brandontroberts).
+HELPFUL: このコンテンツは、[Brandon Roberts](https://twitter.com/brandontroberts)による[Angular Routerを使用したカスタムルートマッチング](https://medium.com/@brandontroberts/custom-route-matching-with-the-angular-router-fbdd48665483)に基づいています。

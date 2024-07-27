@@ -1,92 +1,92 @@
-# Using Angular routes in a single-page application
+# シングルページアプリケーションでの Angular ルートの使用
 
-This tutorial describes how to build a single-page application, SPA that uses multiple Angular routes.
+このチュートリアルでは、複数のAngularルートを使用するシングルページアプリケーション (SPA) を構築する方法について説明します。
 
-In a Single Page Application \(SPA\), all of your application's functions exist in a single HTML page.
-As users access your application's features, the browser needs to render only the parts that matter to the user, instead of loading a new page.
-This pattern can significantly improve your application's user experience.
+シングルページアプリケーション (SPA) では、アプリケーションのすべての機能が1つのHTMLページに存在します。
+ユーザーがアプリケーションの機能にアクセスすると、ブラウザはユーザーにとって重要な部分のみをレンダリングする必要があり、新しいページをロードする必要はありません。
+このパターンは、アプリケーションのユーザー体験を大幅に改善できます。
 
-To define how users navigate through your application, you use routes.
-Add routes to define how users navigate from one part of your application to another.
-You can also configure routes to guard against unexpected or unauthorized behavior.
+ユーザーがアプリケーション内をどのように移動するかを定義するために、ルートを使用します。
+ルートを追加して、ユーザーがアプリケーションの1つの部分から別の部分にどのように移動するかを定義します。
+ルートを構成して、予期しない動作や不正な動作を防止できます。
 
-## Objectives
+## 目標
 
-* Organize a sample application's features into modules.
-* Define how to navigate to a component.
-* Pass information to a component using a parameter.
-* Structure routes by nesting several routes.
-* Check whether users can access a route.
-* Control whether the application can discard unsaved changes.
-* Improve performance by pre-fetching route data and lazy loading feature modules.
-* Require specific criteria to load components.
+* サンプルアプリケーションの機能をモジュールに整理する。
+* コンポーネントへのナビゲーション方法を定義する。
+* パラメータを使用してコンポーネントに情報を渡す。
+* 複数のルートをネストしてルートを構造化する。
+* ユーザーがルートにアクセスできるかどうかを確認する。
+* アプリケーションが保存されていない変更を破棄できるかどうかを制御する。
+* ルートデータの事前取得と機能モジュールの遅延読み込みによってパフォーマンスを向上させる。
+* コンポーネントの読み込みに特定の基準を必要とする。
 
-## Create a sample application
+## サンプルアプリケーションの作成
 
-Using the Angular CLI, create a new application, *angular-router-sample*.
-This application will have two components: *crisis-list* and *heroes-list*.
+Angular CLIを使用して、新しいアプリケーション *angular-router-sample* を作成します。
+このアプリケーションには、*crisis-list* と *heroes-list* の2つのコンポーネントが含まれます。
 
-1. Create a new Angular project, *angular-router-sample*.
+1. 新しいAngularプロジェクト *angular-router-sample* を作成します。
 
     <docs-code language="shell">
     ng new angular-router-sample
     </docs-code>
 
-    When prompted with `Would you like to add Angular routing?`, select `N`.
+    `Angular routing を追加しますか?` と表示されたら、`N` を選択します。
 
-    When prompted with `Which stylesheet format would you like to use?`, select `CSS`.
+    `どのスタイルシート形式を使用しますか?` と表示されたら、`CSS` を選択します。
 
-    After a few moments, a new project, `angular-router-sample`, is ready.
+    しばらくすると、新しいプロジェクト `angular-router-sample` が準備完了します。
 
-1. From your terminal, navigate to the `angular-router-sample` directory.
-1. Create a component, *crisis-list*.
+1. ターミナルから、`angular-router-sample` ディレクトリに移動します。
+1. *crisis-list* コンポーネントを作成します。
 
     <docs-code language="shell">
     ng generate component crisis-list
     </docs-code>
 
-1. In your code editor, locate the file, `crisis-list.component.html` and replace the placeholder content with the following HTML.
+1. コードエディタで、`crisis-list.component.html` ファイルを見つけて、プレースホルダーのコンテンツを次のHTMLに置き換えます。
 
     <docs-code header="src/app/crisis-list/crisis-list.component.html" path="adev/src/content/examples/router-tutorial/src/app/crisis-list/crisis-list.component.html"/>
 
-1. Create a second component, *heroes-list*.
+1. 2 番目のコンポーネント *heroes-list* を作成します。
 
     <docs-code language="shell">
     ng generate component heroes-list
     </docs-code>
 
-1. In your code editor, locate the file, `heroes-list.component.html` and replace the placeholder content with the following HTML.
+1. コードエディタで、`heroes-list.component.html` ファイルを見つけて、プレースホルダーのコンテンツを次のHTMLに置き換えます。
 
     <docs-code header="src/app/heroes-list/heroes-list.component.html" path="adev/src/content/examples/router-tutorial/src/app/heroes-list/heroes-list.component.html"/>
 
-1. In your code editor, open the file, `app.component.html` and replace its contents with the following HTML.
+1. コードエディタで、`app.component.html` ファイルを開き、その内容を次の HTML に置き換えます。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="setup"/>
 
-1. Verify that your new application runs as expected by running the `ng serve` command.
+1. `ng serve` コマンドを実行して、新しいアプリケーションが期待通りに動作することを確認します。
 
     <docs-code language="shell">
     ng serve
     </docs-code>
 
-1. Open a browser to `http://localhost:4200`.
+1. ブラウザで `http://localhost:4200` を開きます。
 
-    You should see a single web page, consisting of a title and the HTML of your two components.
+    タイトルと2つのコンポーネントのHTMLで構成される単一のWebページが表示されます。
 
-## Define your routes
+## ルートの定義
 
-In this section, you'll define two routes:
+このセクションでは、次の2つのルートを定義します。
 
-* The route `/crisis-center` opens the `crisis-center` component.
-* The route `/heroes-list` opens the `heroes-list` component.
+* `/crisis-center` ルートは、`crisis-center` コンポーネントを開きます。
+* `/heroes-list` ルートは、`heroes-list` コンポーネントを開きます。
 
-A route definition is a JavaScript object.
-Each route typically has two properties.
-The first property, `path`, is a string that specifies the URL path for the route.
-The second property, `component`, is a string that specifies what component your application should display for that path.
+ルート定義はJavaScriptオブジェクトです。
+各ルートには、通常2つのプロパティがあります。
+最初のプロパティ `path` は、ルートのURLパスを指定する文字列です。
+2番目のプロパティ `component` は、そのパスに対してアプリケーションに表示するコンポーネントを指定する文字列です。
 
-1. From your code editor, create and open the `app.routes.ts` file.
-1. Create and export a routes list for your application:
+1. コードエディタから、`app.routes.ts` ファイルを作成して開きます。
+1. アプリケーションのルートリストを作成してエクスポートします。
 
     ```ts
     import {Routes} from '@angular/router';
@@ -94,182 +94,182 @@ The second property, `component`, is a string that specifies what component your
     export const routes = [];
     ```
 
-1. Add two routes for your first two components:
+1. 最初の2つのコンポーネントのルートを2つ追加します。
 
     ```ts
     {path: 'crisis-list', component: CrisisListComponent},
     {path: 'heroes-list', component: HeroesListComponent},
     ```
 
-This routes list is an array of JavaScript objects, with each object defining the properties of a route.
+このルートリストは、JavaScriptオブジェクトの配列であり、各オブジェクトはルートのプロパティを定義します。
 
-## Import `provideRouter` from `@angular/router`
+## `@angular/router` から `provideRouter` をインポートする
 
-Routing lets you display specific views of your application depending on the URL path.
-To add this functionality to your sample application, you need to update the `app.config.ts` file to use the router providers function, `provideRouter`.
-You import this provider function from `@angular/router`.
+ルーティングを使用すると、URLパスに応じてアプリケーションの特定のビューを表示できます。
+この機能をサンプルアプリケーションに追加するには、`app.config.ts` ファイルを更新して、ルータープロバイダー関数の `provideRouter` を使用します。
+このプロバイダー関数は `@angular/router` からインポートします。
 
-1. From your code editor, open the `app.config.ts` file.
-1. Add the following import statements:
+1. コードエディタから、`app.config.ts` ファイルを開きます。
+1. 次のインポートステートメントを追加します。
 
     ```ts
     import { provideRouter } from '@angular/router';
     import { routes } from './app.routes';
     ```
 
-1. Update the providers in the `appConfig`:
+1. `appConfig` のプロバイダーを更新します。
 
     ```ts
     providers: [provideRouter(routes)]
     ```
 
-For `NgModule` based applications, put the `provideRouter` in the `providers` list of the `AppModule`, or whichever module is passed to `bootstrapModule` in the application.
+`NgModule` ベースのアプリケーションの場合、`provideRouter` を `AppModule` の `providers` リスト、またはアプリケーションの `bootstrapModule` に渡されるモジュールに入れます。
 
-## Update your component with `router-outlet`
+## `router-outlet` を使用してコンポーネントを更新する
 
-At this point, you have defined two routes for your application.
-However, your application still has both the `crisis-list` and `heroes-list` components hard-coded in your `app.component.html` template.
-For your routes to work, you need to update your template to dynamically load a component based on the URL path.
+この時点で、アプリケーションのルートを2つ定義しました。
+ただし、アプリケーションは `crisis-list` コンポーネントと `heroes-list` コンポーネントの両方を `app.component.html` テンプレートにハードコードしたままです。
+ルートが機能するためには、テンプレートを更新して、URLパスに基づいてコンポーネントを動的にロードする必要があります。
 
-To implement this functionality, you add the `router-outlet` directive to your template file.
+この機能を実装するには、テンプレートファイルに `router-outlet` ディレクティブを追加します。
 
-1. From your code editor, open the `app.component.html` file.
-1. Delete the following lines.
+1. コードエディタから、`app.component.html` ファイルを開きます。
+1. 次の行を削除します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="components"/>
 
-1. Add the `router-outlet` directive.
+1. `router-outlet` ディレクティブを追加します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="router-outlet"/>
 
-1. Add `RouterOutlet` to the imports of the `AppComponent` in `app.component.ts`
+1. `app.component.ts` の `AppComponent` のインポートに `RouterOutlet` を追加します
 
     ```ts
     imports: [RouterOutlet],
     ```
 
-View your updated application in your browser.
-You should see only the application title.
-To view the `crisis-list` component, add `crisis-list` to the end of the path in your browser's address bar.
-For example:
+ブラウザで更新されたアプリケーションを表示します。
+アプリケーションタイトルのみが表示されます。
+`crisis-list` コンポーネントを表示するには、ブラウザのアドレスバーのパス末尾に `crisis-list` を追加します。
+たとえば、次のとおりです。
 
 <docs-code language="text">
 http://localhost:4200/crisis-list
 </docs-code>
 
-Notice that the `crisis-list` component displays.
-Angular is using the route you defined to dynamically load the component.
-You can load the `heroes-list` component the same way:
+`crisis-list` コンポーネントが表示されることに注意してください。
+Angularは、定義したルートを使用してコンポーネントを動的にロードしています。
+同じ方法で `heroes-list` コンポーネントをロードできます。
 
 <docs-code language="text">
 http://localhost:4200/heroes-list
 </docs-code>
 
-## Control navigation with UI elements
+## UI 要素を使用したナビゲーションの制御
 
-Currently, your application supports two routes.
-However, the only way to use those routes is for the user to manually type the path in the browser's address bar.
-In this section, you'll add two links that users can click to navigate between the `heroes-list` and `crisis-list` components.
-You'll also add some CSS styles.
-While these styles are not required, they make it easier to identify the link for the currently-displayed component.
-You'll add that functionality in the next section.
+現在、アプリケーションは2つのルートをサポートしています。
+ただし、これらのルートを使用できる唯一の方法は、ユーザーがブラウザのアドレスバーにパスを手動で入力することです。
+このセクションでは、ユーザーが `heroes-list` コンポーネントと `crisis-list` コンポーネント間を移動するためにクリックできる2つのリンクを追加します。
+また、CSSスタイルも追加します。
+これらのスタイルは必須とされませんが、現在表示されているコンポーネントのリンクを識別しやすくします。
+その機能は次のセクションで追加します。
 
-1. Open the `app.component.html` file and add the following HTML below the title.
+1. `app.component.html` ファイルを開き、タイトルの下に次のHTMLを追加します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="nav"/>
 
-    This HTML uses an Angular directive, `routerLink`.
-    This directive connects the routes you defined to your template files.
+    この HTML は、Angular ディレクティブ `routerLink` を使用しています。
+    このディレクティブは、定義したルートをテンプレートファイルに接続します。
 
-1. Add the `RouterLink` directive to the imports list of `AppComponent` in `app.component.ts`.
+1. `AppComponent` のインポートリストに `RouterLink` ディレクティブを追加します。
 
-1. Open the `app.component.css` file and add the following styles.
+1. `app.component.css` ファイルを開き、次のスタイルを追加します。
 
     <docs-code header="src/app/app.component.css" path="adev/src/content/examples/router-tutorial/src/app/app.component.css"/>
 
-If you view your application in the browser, you should see these two links.
-When you click on a link, the corresponding component appears.
+ブラウザでアプリケーションを表示すると、これらのリンクが 2 つ表示されます。
+リンクをクリックすると、対応するコンポーネントが表示されます。
 
-## Identify the active route
+## アクティブなルートの識別
 
-While users can navigate your application using the links you added in the previous section, they don't have a straightforward way to identify what the active route is.
-Add this functionality using Angular's `routerLinkActive` directive.
+ユーザーは前のセクションで追加したリンクを使用してアプリケーションを移動できますが、アクティブなルートを簡単に識別する方法はありません。
+Angular の `routerLinkActive` ディレクティブを使用して、この機能を追加します。
 
-1. From your code editor, open the `app.component.html` file.
-1. Update the anchor tags to include the `routerLinkActive` directive.
+1. コードエディタから、`app.component.html` ファイルを開きます。
+1. `routerLinkActive` ディレクティブを含むアンカータグを更新します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="routeractivelink"/>
-1. Add the `RouterLinkActive` directive to the `imports` list of `AppComponent` in `app.component.ts`.
+1. `AppComponent` の `imports` リストに `RouterLinkActive` ディレクティブを追加します。
 
-View your application again.
-As you click one of the buttons, the style for that button updates automatically, identifying the active component to the user.
-By adding the `routerLinkActive` directive, you inform your application to apply a specific CSS class to the active route.
-In this tutorial, that CSS class is `activebutton`, but you could use any class that you want.
+アプリケーションを再度表示します。
+ボタンのいずれかをクリックすると、そのボタンのスタイルが自動的に更新され、ユーザーにアクティブなコンポーネントが示されます。
+`routerLinkActive` ディレクティブを追加すると、アプリケーションにアクティブなルートに特定の CSS クラスを適用するように指示します。
+このチュートリアルでは、その CSS クラスは `activebutton` ですが、任意のクラスを使用できます。
 
-Note that we are also specifying a value for the `routerLinkActive`'s `ariaCurrentWhenActive`. This makes sure that visually impaired users (which may not perceive the different styling being applied) can also identify the active button. For more information see the Accessibility Best Practices [Active links identification section](/best-practices/a11y#active-links-identification).
+`routerLinkActive` の `ariaCurrentWhenActive` に値を指定していることにも注意してください。これにより、視覚障碍のあるユーザー（異なるスタイリングの変化を認識できない可能性があります）も、アクティブなボタンを識別できるようになります。詳細については、アクセシビリティのベストプラクティス [アクティブなリンクの識別のセクション](/best-practices/a11y#active-links-identification) を参照してください。
 
-## Adding a redirect
+## リダイレクトの追加
 
-In this step of the tutorial, you add a route that redirects the user to display the `/heroes-list` component.
+このチュートリアルのステップでは、ユーザーをリダイレクトして `/heroes-list` コンポーネントを表示するルートを追加します。
 
-1. From your code editor, open the `app.routes.ts` file.
-1. Update the `routes` section as follows.
+1. コードエディタから、`app.routes.ts` ファイルを開きます。
+1. `routes` セクションを次のように更新します。
 
     ```ts
     {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
     ```
 
-    Notice that this new route uses an empty string as its path.
-    In addition, it replaces the `component` property with two new ones:
+    この新しいルートは、パスとして空の文字列を使用していることに注意してください。
+    さらに、`component` プロパティを 2 つの新しいプロパティに置き換えています。
 
-    | Properties   | Details |
-    |:---        |:---    |
-    | `redirectTo` | This property instructs Angular to redirect from an empty path to the `heroes-list` path.                                                                                                                                                       |
-    | `pathMatch`  | This property instructs Angular on how much of the URL to match. For this tutorial, you should set this property to `full`. This strategy is recommended when you have an empty string for a path. For more information about this property, see the [Route API documentation](api/router/Route). |
+    | プロパティ      | 詳細 |
+    |:---            |:---   |
+    | `redirectTo`    | このプロパティは、Angular に空のパスから `heroes-list` パスにリダイレクトするように指示します。                                                                                                                                                       |
+    | `pathMatch`      | このプロパティは、Angular に URL のどの部分を一致させるかを指示します。このチュートリアルでは、このプロパティを `full` に設定する必要があります。この戦略は、パスとして空の文字列を使用する場合に推奨されます。このプロパティの詳細については、[ルート API ドキュメント](api/router/Route) を参照してください。 |
 
-Now when you open your application, it displays the `heroes-list` component by default.
+これで、アプリケーションを開くと、デフォルトで `heroes-list` コンポーネントが表示されます。
 
-## Adding a 404 page
+## 404 ページの追加
 
-It is possible for a user to try to access a route that you have not defined.
-To account for this behavior, the best practice is to display a 404 page.
-In this section, you'll create a 404 page and update your route configuration to show that page for any unspecified routes.
+ユーザーが定義していないルートにアクセスしようとする可能性があります。
+この動作に対処するために、404 ページを表示するのがベストプラクティスです。
+このセクションでは、404 ページを作成し、ルート構成を更新して、指定されていないルートにそのページを表示します。
 
-1. From the terminal, create a new component, `PageNotFound`.
+1. ターミナルから、新しいコンポーネント `PageNotFound` を作成します。
 
     <docs-code language="shell">
     ng generate component page-not-found
     </docs-code>
 
-1. From your code editor, open the `page-not-found.component.html` file and replace its contents with the following HTML.
+1. コードエディタから、`page-not-found.component.html` ファイルを開き、その内容を次のHTMLに置き換えます。
 
     <docs-code header="src/app/page-not-found/page-not-found.component.html" path="adev/src/content/examples/router-tutorial/src/app/page-not-found/page-not-found.component.html"/>
 
-1. Open the `app.routes.ts` file and add the following route to the routes list:
+1. `app.routes.ts` ファイルを開き、次のルートをルートリストに追加します。
 
     ```ts
     {path: '**', component: PageNotFoundComponent}
     ```
 
-    The new route uses a path, `**`.
-    This path is how Angular identifies a wildcard route.
-    Any route that does not match an existing route in your configuration will use this route.
+    新しいルートは、`**` というパスを使用しています。
+    このパスは、Angularがワイルドカードルートを識別する方法です。
+    構成に存在しないルートは、すべてこのルートを使用します。
 
-IMPORTANT: Notice that the wildcard route is placed at the end of the array.
-The order of your routes is important, as Angular applies routes in order and uses the first match it finds.
+IMPORTANT: ワイルドカードルートは、配列の最後に配置されていることに注意してください。
+ルートの順序は重要です。Angularはルートを順番に適用し、最初に一致したものを取得します。
 
-Try navigating to a non-existing route on your application, such as `http://localhost:4200/powers`.
-This route doesn't match anything defined in your `app.routes.ts` file.
-However, because you defined a wildcard route, the application automatically displays your `PageNotFound` component.
+`http://localhost:4200/powers` などの存在しないルートに移動してみてください。
+このルートは、`app.routes.ts` ファイルで定義されているものと一致しません。
+ただし、ワイルドカードルートを定義したため、アプリケーションは自動的に `PageNotFound` コンポーネントを表示します。
 
-## Next steps
+## 次のステップ
 
-At this point, you have a basic application that uses Angular's routing feature to change what components the user can see based on the URL address.
-You have extended these features to include a redirect, as well as a wildcard route to display a custom 404 page.
+この時点で、Angularのルーティング機能を使用して、URLアドレスに基づいてユーザーに表示されるコンポーネントを変更する基本的なアプリケーションができました。
+リダイレクトや、カスタム404ページを表示するワイルドカードルートなど、これらの機能を拡張しました。
 
-For more information about routing, see the following topics:
+ルーティングの詳細については、次のトピックを参照してください。
 
 <docs-pill-row>
-  <docs-pill href="guide/routing/common-router-tasks" title="In-app Routing and Navigation"/>
+  <docs-pill href="guide/routing/common-router-tasks" title="アプリ内ルーティングとナビゲーション"/>
   <docs-pill href="api/router/Router" title="Router API"/>
 </docs-pill-row>

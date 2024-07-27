@@ -1,7 +1,7 @@
 <docs-decorative-header title="インストール" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-オンラインスターターを使ってAngularをすぐに始めましょう。または、ターミナルを使ってローカルに開始することもできます。
+オンラインスターターを使ってAngularをすぐに始めましょう。または、ターミナルを使ってローカルでも開始できます。
 
 ## オンラインで試す
 

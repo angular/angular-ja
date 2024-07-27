@@ -1,346 +1,346 @@
-<docs-decorative-header title="Built-in directives" imgSrc="adev/src/assets/images/directives.svg"> <!-- markdownlint-disable-line -->
-Directives are classes that add additional behavior to elements in your Angular applications.
+<docs-decorative-header title="組み込みディレクティブ" imgSrc="adev/src/assets/images/directives.svg"> <!-- markdownlint-disable-line -->
+ディレクティブは、Angularアプリケーションの要素に追加の動作を追加するクラスです。
 </docs-decorative-header>
 
-Use Angular's built-in directives to manage forms, lists, styles, and what users see.
+Angularの組み込みディレクティブを使用して、フォームやリスト、スタイルおよびユーザーに見えるものを管理します。
 
-The different types of Angular directives are as follows:
+Angularディレクティブの種類は以下のとおりです。
 
-| Directive Types                                          | Details                                                                           |
+| ディレクティブの種類                                          | 詳細                                                                           |
 | :------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| [Components](guide/components)                           | Used with a template. This type of directive is the most common directive type.   |
-| [Attribute directives](#built-in-attribute-directives)   | Change the appearance or behavior of an element, component, or another directive. |
-| [Structural directives](#built-in-structural-directives) | Change the DOM layout by adding and removing DOM elements.                        |
+| [コンポーネント](guide/components)                           | テンプレートで使用されます。このタイプのディレクティブは、最も一般的なディレクティブタイプです。   |
+| [属性ディレクティブ](#built-in-attribute-directives)   | 要素、コンポーネント、または他のディレクティブの外観や動作を変更します。 |
+| [構造ディレクティブ](#built-in-structural-directives) | DOM レイアウトを、DOM 要素の追加と削除によって変更します。                        |
 
-This guide covers built-in [attribute directives](#built-in-attribute-directives) and [structural directives](#built-in-structural-directives).
+このガイドでは、組み込みの [属性ディレクティブ](#built-in-attribute-directives) と [構造ディレクティブ](#built-in-structural-directives) を取り上げます。
 
-## Built-in attribute directives
+## 組み込み属性ディレクティブ {#built-in-attribute-directives}
 
-Attribute directives listen to and modify the behavior of other HTML elements, attributes, properties, and components.
+属性ディレクティブは、他のHTML要素、属性、プロパティ、およびコンポーネントの動作を監視して変更します。
 
-The most common attribute directives are as follows:
+最も一般的な属性ディレクティブは以下のとおりです。
 
-| Common directives                                             | Details                                            |
+| 一般的なディレクティブ                                             | 詳細                                            |
 | :------------------------------------------------------------ | :------------------------------------------------- |
-| [`NgClass`](#adding-and-removing-classes-with-ngclass)        | Adds and removes a set of CSS classes.             |
-| [`NgStyle`](#setting-inline-styles-with-ngstyle)              | Adds and removes a set of HTML styles.             |
-| [`NgModel`](#displaying-and-updating-properties-with-ngmodel) | Adds two-way data binding to an HTML form element. |
+| [`NgClass`](#adding-and-removing-classes-with-ngclass)        | CSS クラスのセットを追加および削除します。             |
+| [`NgStyle`](#setting-inline-styles-with-ngstyle)              | HTML スタイルのセットを追加および削除します。             |
+| [`NgModel`](#displaying-and-updating-properties-with-ngmodel) | HTML フォーム要素に双方向データバインディングを追加します。 |
 
-HELPFUL: Built-in directives use only public APIs. They do not have special access to any private APIs that other directives can't access.
+HELPFUL: 組み込みディレクティブは、公開APIのみを使用します。他のディレクティブがアクセスできないプライベートAPIには、特別なアクセス権がありません。
 
-## Adding and removing classes with `NgClass`
+## `NgClass` を使用してクラスを追加および削除する
 
-Add or remove multiple CSS classes simultaneously with `ngClass`.
+`ngClass` を使用して、複数のCSSクラスを同時に追加または削除します。
 
-HELPFUL: To add or remove a _single_ class, use [class binding](guide/templates/class-binding) rather than `NgClass`.
+HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` ではなく [クラスバインディング](guide/templates/class-binding) を使用します。
 
-### Import `NgClass` in the component
+### コンポーネントに `NgClass` をインポートする
 
-To use `NgClass`, add it to the component's `imports` list.
+`NgClass` を使用するには、コンポーネントの `imports` リストに追加します。
 
-<docs-code header="src/app/app.component.ts (NgClass import)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-class"/>
+<docs-code header="src/app/app.component.ts (NgClass インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-class"/>
 
-### Using `NgClass` with an expression
+### 式を使用して `NgClass` を使用
 
-On the element you'd like to style, add `[ngClass]` and set it equal to an expression.
-In this case, `isSpecial` is a boolean set to `true` in `app.component.ts`.
-Because `isSpecial` is true, `ngClass` applies the class of `special` to the `<div>`.
+スタイルを設定する要素に、`[ngClass]` を追加して、式に等しく設定します。
+この場合、`isSpecial` はブール値であり、`app.component.ts` で `true` に設定されています。
+`isSpecial` がtrueのため、`ngClass` は `<div>` に `special` というクラスを適用します。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="special-div"/>
 
-### Using `NgClass` with a method
+### メソッドを使用して `NgClass` を使用
 
-1. To use `NgClass` with a method, add the method to the component class.
-    In the following example, `setCurrentClasses()` sets the property `currentClasses` with an object that adds or removes three classes based on the `true` or `false` state of three other component properties.
+1. メソッドを使用して `NgClass` を使用するには、メソッドをコンポーネントクラスに追加します。
+    次の例では、`setCurrentClasses()` は3つの他のコンポーネントプロパティの `true` または `false` 状態に基づいて、3つのクラスを追加または削除するオブジェクトを使用して`currentClasses` プロパティを設定します。
 
-    Each key of the object is a CSS class name.
-    If a key is `true`, `ngClass` adds the class.
-    If a key is `false`, `ngClass` removes the class.
+    オブジェクトの各キーは、CSSクラス名です。
+    キーが `true` の場合、`ngClass` はクラスを追加します。
+    キーが `false` の場合、`ngClass` はクラスを削除します。
 
     <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="setClasses"/>
 
-1. In the template, add the `ngClass` property binding to `currentClasses` to set the element's classes:
+1. テンプレートで、要素のクラスを設定するために、`currentClasses` に対する `ngClass` プロパティバインディングを追加します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgClass-1"/>
 
-For this use case, Angular applies the classes on initialization and in case of changes caused by reassigning the `currentClasses` object.
-The full example calls `setCurrentClasses()` initially with `ngOnInit()` when the user clicks on the `Refresh currentClasses` button.
-These steps are not necessary to implement `ngClass`.
+このユースケースでは、Angularは初期化時に、および `currentClasses` オブジェクトの再代入によって発生した変更が発生した場合に、クラスを適用します。
+完全な例では、ユーザーが `Refresh currentClasses` ボタンをクリックしたときに、`ngOnInit()` を使用して最初に `setCurrentClasses()` を呼び出します。
+これらの手順は、`ngClass` を実装するために必要ではありません。
 
-## Setting inline styles with `NgStyle`
+## `NgStyle` を使用してインラインスタイルを設定する
 
-### Import `NgStyle` in the component
+### コンポーネントに `NgStyle` をインポートする
 
-To use `NgStyle`, add it to the component's `imports` list.
+`NgStyle` を使用するには、コンポーネントの `imports` リストに追加します。
 
-<docs-code header="src/app/app.component.ts (NgStyle import)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-style"/>
+<docs-code header="src/app/app.component.ts (NgStyle インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-style"/>
 
-Use `NgStyle` to set multiple inline styles simultaneously, based on the state of the component.
+`NgStyle` を使用して、コンポーネントの状態に基づいて、複数のインラインスタイルを同時に設定します。
 
-1. To use `NgStyle`, add a method to the component class.
+1. `NgStyle` を使用するには、コンポーネントクラスにメソッドを追加します。
 
-    In the following example, `setCurrentStyles()` sets the property `currentStyles` with an object that defines three styles, based on the state of three other component properties.
+    次の例では、`setCurrentStyles()` は3つの他のコンポーネントプロパティの状態に基づいて、3つのスタイルを定義するオブジェクトを使用して `currentStyles` プロパティを設定します。
 
     <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="setStyles"/>
 
-1. To set the element's styles, add an `ngStyle` property binding to `currentStyles`.
+1. 要素のスタイルを設定するには、`currentStyles` に対する `ngStyle` プロパティバインディングを追加します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgStyle-2"/>
 
-For this use case, Angular applies the styles upon initialization and in case of changes.
-To do this, the full example calls `setCurrentStyles()` initially with `ngOnInit()` and when the dependent properties change through a button click.
-However, these steps are not necessary to implement `ngStyle` on its own.
+このユースケースでは、Angularは初期化時と、変更が発生した場合にスタイルを適用します。
+これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
+ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
 
-## Displaying and updating properties with `ngModel`
+## `ngModel` を使用してプロパティを表示および更新する
 
-Use the `NgModel` directive to display a data property and update that property when the user makes changes.
+`NgModel` ディレクティブを使用して、データプロパティを表示し、ユーザーが変更を加えたときにそのプロパティを更新します。
 
-1. Import `FormsModule` and add it to the AppComponent's `imports` list.
+1. `FormsModule` をインポートし、AppComponentの `imports` リストに追加します。
 
-    <docs-code header="src/app/app.component.ts (FormsModule import)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-forms-module" />
+    <docs-code header="src/app/app.component.ts (FormsModule インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-forms-module" />
 
-1. Add an `[(ngModel)]` binding on an HTML `<form>` element and set it equal to the property, here `name`.
+1. HTML `<form>` 要素に `[(ngModel)]` バインディングを追加して、プロパティ（ここでは `name`）に等しく設定します。
 
-    <docs-code header="src/app/app.component.html (NgModel example)" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgModel-1"/>
+    <docs-code header="src/app/app.component.html (NgModel の例)" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgModel-1"/>
 
-    This `[(ngModel)]` syntax can only set a data-bound property.
+    この `[(ngModel)]` 構文は、データバインドプロパティのみを設定できます。
 
-To customize your configuration, write the expanded form, which separates the property and event binding.
-Use [property binding](guide/templates/property-binding) to set the property and [event binding](guide/templates/event-binding) to respond to changes.
-The following example changes the `<input>` value to uppercase:
+構成をカスタマイズするには、拡張フォームを記述します。これにより、プロパティとイベントバインディングが分離されます。
+[プロパティバインディング](guide/templates/property-binding) を使用してプロパティを設定し、[イベントバインディング](guide/templates/event-binding) を使用して変更に応答します。
+次の例では、`<input>` 値を大文字に変更します。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="uppercase"/>
 
-Here are all variations in action, including the uppercase version:
+以下は、大文字バージョンを含む、すべてのバリエーションが動作している様子です。
 
-<img alt="NgModel variations" src="assets/images/guide/built-in-directives/ng-model-anim.gif">
+<img alt="NgModel のバリエーション" src="assets/images/guide/built-in-directives/ng-model-anim.gif">
 
-### `NgModel` and value accessors
+### `NgModel` と値アクセサー
 
-The `NgModel` directive works for an element supported by a [ControlValueAccessor](api/forms/ControlValueAccessor).
-Angular provides _value accessors_ for all of the basic HTML form elements.
-For more information, see [Forms](guide/forms).
+`NgModel` ディレクティブは、[ControlValueAccessor](api/forms/ControlValueAccessor) によってサポートされている要素で機能します。
+Angularは、すべての基本的なHTMLフォーム要素に対して _値アクセサー_ を提供します。
+詳細については、[フォーム](guide/forms) を参照してください。
 
-To apply `[(ngModel)]` to a non-form built-in element or a third-party custom component, you have to write a value accessor.
-For more information, see the API documentation on [DefaultValueAccessor](api/forms/DefaultValueAccessor).
+`[(ngModel)]` を非フォームの組み込み要素またはサードパーティのカスタムコンポーネントに適用するには、値アクセサーを作成する必要があります。
+詳細については、[DefaultValueAccessor](api/forms/DefaultValueAccessor) に関するAPIドキュメントを参照してください。
 
-HELPFUL: When you write an Angular component, you don't need a value accessor or `NgModel` if you name the value and event properties according to Angular's [two-way binding syntax](guide/templates/two-way-binding#how-two-way-binding-works).
+HELPFUL: Angularコンポーネントを作成する際、Angularの [双方向バインディング構文](guide/templates/two-way-binding#how-two-way-binding-works) に従って値とイベントプロパティに名前を付ければ、値アクセサーや `NgModel` は必要ありません。
 
-## Built-in structural directives
+## 組み込み構造ディレクティブ {#built-in-structural-directives}
 
-Structural directives are responsible for HTML layout.
-They shape or reshape the DOM's structure, typically by adding, removing, and manipulating the host elements to which they are attached.
+構造ディレクティブは、HTMLレイアウトを担当します。
+これらは、通常、付加されているホスト要素を追加、削除、および操作することによって、DOMの構造を形成または再形成します。
 
-This section introduces the most common built-in structural directives:
+このセクションでは、最も一般的な組み込み構造ディレクティブを紹介します。
 
-| Common built-in structural directives              | Details                                                          |
+| 一般的な組み込み構造ディレクティブ              | 詳細                                                          |
 | :------------------------------------------------- | :--------------------------------------------------------------- |
-| [`NgIf`](#adding-or-removing-an-element-with-ngif) | Conditionally creates or disposes of subviews from the template. |
-| [`NgFor`](#listing-items-with-ngfor)               | Repeat a node for each item in a list.                           |
-| [`NgSwitch`](#switching-cases-with-ngswitch)       | A set of directives that switch among alternative views.         |
+| [`NgIf`](#adding-or-removing-an-element-with-ngif) | テンプレートからサブビューを条件付きで作成または破棄します。 |
+| [`NgFor`](#listing-items-with-ngfor)               | リスト内の各アイテムに対してノードを繰り返します。                           |
+| [`NgSwitch`](#switching-cases-with-ngswitch)       | 代替ビューを切り替えるディレクティブのセットです。         |
 
-For more information, see [Structural Directives](guide/directives/structural-directives).
+詳細については、[構造ディレクティブ](guide/directives/structural-directives) を参照してください。
 
-## Adding or removing an element with `NgIf`
+## `NgIf` を使用して要素を追加または削除する {#adding-or-removing-an-element-with-ngif}
 
-Add or remove an element by applying an `NgIf` directive to a host element.
+ホスト要素に `NgIf` ディレクティブを適用することによって、要素を追加または削除します。
 
-When `NgIf` is `false`, Angular removes an element and its descendants from the DOM.
-Angular then disposes of their components, which frees up memory and resources.
+`NgIf` が `false` の場合、Angularは要素とその子孫をDOMから削除します。
+次に、Angularはそれらのコンポーネントを破棄し、メモリとリソースを解放します。
 
-### Import `NgIf` in the component
+### コンポーネントに `NgIf` をインポートする
 
-To use `NgIf`, add it to the component's `imports` list.
+`NgIf` を使用するには、コンポーネントの `imports` リストに追加します。
 
-<docs-code header="src/app/app.component.ts (NgIf import)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-if"/>
+<docs-code header="src/app/app.component.ts (NgIf インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-if"/>
 
-### Using `NgIf`
+### `NgIf` を使用
 
-To add or remove an element, bind `*ngIf` to a condition expression such as `isActive` in the following example.
+要素を追加または削除するには、次の例のように、`*ngIf` を条件式（例: `isActive`）にバインドします。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgIf-1"/>
 
-When the `isActive` expression returns a truthy value, `NgIf` adds the `ItemDetailComponent` to the DOM.
-When the expression is falsy, `NgIf` removes the `ItemDetailComponent` from the DOM and disposes of the component and all of its subcomponents.
+`isActive` 式が真の値を返す場合、`NgIf` は `ItemDetailComponent` をDOMに追加します。
+式が偽の場合、`NgIf` は `ItemDetailComponent` をDOMから削除し、コンポーネントとそのすべてのサブコンポーネントを破棄します。
 
-For more information on `NgIf` and `NgIfElse`, see the [NgIf API documentation](api/common/NgIf).
+`NgIf` と `NgIfElse` の詳細については、[NgIf API ドキュメント](api/common/NgIf) を参照してください。
 
-### Guarding against `null`
+### `null` に対する保護
 
-By default, `NgIf` prevents display of an element bound to a null value.
+デフォルトでは、`NgIf` は `null` 値にバインドされた要素の表示を防ぎます。
 
-To use `NgIf` to guard a `<div>`, add `*ngIf="yourProperty"` to the `<div>`.
-In the following example, the `currentCustomer` name appears because there is a `currentCustomer`.
+`NgIf` を使用して `<div>` を保護するには、`<div>` に `*ngIf="yourProperty"` を追加します。
+次の例では、`currentCustomer` が存在するため、`currentCustomer` の名前が表示されます。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgIf-2"/>
 
-However, if the property is `null`, Angular does not display the `<div>`.
-In this example, Angular does not display the `nullCustomer` because it is `null`.
+ただし、プロパティが `null` の場合、Angularは `<div>` を表示しません。
+この例では、`nullCustomer` は `null` であるため、Angularは `nullCustomer` を表示しません。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgIf-2b"/>
 
-## Listing items with `NgFor`
+## `NgFor` を使用してアイテムを一覧表示する {#listing-items-with-ngfor}
 
-Use the `NgFor` directive to present a list of items.
+`NgFor` ディレクティブを使用して、アイテムのリストを表示します。
 
-### Import `NgFor` in the component
+### コンポーネントに `NgFor` をインポートする
 
-To use `NgFor`, add it to the component's `imports` list.
+`NgFor` を使用するには、コンポーネントの `imports` リストに追加します。
 
-<docs-code header="src/app/app.component.ts (NgFor import)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-for"/>
+<docs-code header="src/app/app.component.ts (NgFor インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-for"/>
 
-### Using `NgFor`
+### `NgFor` を使用
 
-To use `NgFor`, you have to:
+`NgFor` を使用するには、以下を行う必要があります。
 
-1. Define a block of HTML that determines how Angular renders a single item.
-1. To list your items, assign the shorthand `let item of items` to `*ngFor`.
+1. Angularが単一のアイテムをどのようにレンダリングするかを決定するHTMLブロックを定義します。
+1. アイテムを一覧表示するには、`*ngFor` に `let item of items` という省略記号を割り当てます。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgFor-1"/>
 
-The string `"let item of items"` instructs Angular to do the following:
+文字列 `"let item of items"` は、Angularに以下のことを指示します。
 
-- Store each item in the `items` array in the local `item` looping variable
-- Make each item available to the templated HTML for each iteration
-- Translate `"let item of items"` into an `<ng-template>` around the host element
-- Repeat the `<ng-template>` for each `item` in the list
+- `items` 配列の各アイテムを、ローカルの `item` ループ変数に格納します
+- 各アイテムを、各反復のテンプレート化されたHTMLで使用できるようにします
+- `"let item of items"` を、ホスト要素の周りの `<ng-template>` に変換します
+- リストの各 `item` に対して、`<ng-template>` を繰り返します
 
-For more information see the [Structural directive shorthand](guide/directives/structural-directives#structural-directive-shorthand) section of [Structural directives](guide/directives/structural-directives).
+詳細については、[構造ディレクティブの省略記号](guide/directives/structural-directives#structural-directive-shorthand) セクションの [構造ディレクティブ](guide/directives/structural-directives) を参照してください。
 
-### Repeating a component view
+### コンポーネントビューを繰り返す
 
-To repeat a component element, apply `*ngFor` to the selector.
-In the following example, the selector is `<app-item-detail>`.
+コンポーネント要素を繰り返すには、セレクターに `*ngFor` を適用します。
+次の例では、セレクターは `<app-item-detail>` です。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgFor-2"/>
 
-Reference a template input variable, such as `item`, in the following locations:
+次の場所で、テンプレート入力変数（例: `item`）を参照します。
 
-- Within the `ngFor` host element
-- Within the host element descendants to access the item's properties
+- `ngFor` ホスト要素内
+- アイテムのプロパティにアクセスするために、ホスト要素の子孫内
 
-The following example references `item` first in an interpolation and then passes in a binding to the `item` property of the `<app-item-detail>` component.
+次の例では、最初に補間で `item` を参照し、次に `<app-item-detail>` コンポーネントの `item` プロパティにバインディングを渡します。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgFor-1-2"/>
 
-For more information about template input variables, see [Structural directive shorthand](guide/directives/structural-directives#structural-directive-shorthand).
+テンプレート入力変数の詳細については、[構造ディレクティブの省略記号](guide/directives/structural-directives#structural-directive-shorthand) を参照してください。
 
-### Getting the `index` of `*ngFor`
+### `*ngFor` の `index` を取得する
 
-Get the `index` of `*ngFor` in a template input variable and use it in the template.
+テンプレート入力変数で `*ngFor` の `index` を取得し、テンプレート内で使用します。
 
-In the `*ngFor`, add a semicolon and `let i=index` to the shorthand.
-The following example gets the `index` in a variable named `i` and displays it with the item name.
+`*ngFor` の省略記号に、セミコロンと `let i=index` を追加します。
+次の例では、`i` という名前の変数に `index` を取得し、アイテム名とともに表示します。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgFor-3"/>
 
-The index property of the `NgFor` directive context returns the zero-based index of the item in each iteration.
+`NgFor` ディレクティブコンテキストのindexプロパティは、各反復におけるアイテムの0ベースのインデックスを返します。
 
-Angular translates this instruction into an `<ng-template>` around the host element,
-then uses this template repeatedly to create a new set of elements and bindings for each `item`
-in the list.
-For more information about shorthand, see the [Structural Directives](guide/directives/structural-directives#structural-directive-shorthand) guide.
+Angularはこの命令をホスト要素の周りの `<ng-template>` に変換し、
+次にこのテンプレートを繰り返し使用して、
+リストの各 `item` に対して新しい要素とバインディングのセットを作成します。
+省略記号の詳細については、[構造ディレクティブ](guide/directives/structural-directives#structural-directive-shorthand) ガイドを参照してください。
 
-## Repeating elements when a condition is true
+## 条件が真の場合に要素を繰り返す
 
-To repeat a block of HTML when a particular condition is true, put the `*ngIf` on a container element that wraps an `*ngFor` element.
+特定の条件が真の場合にHTMLブロックを繰り返すには、`*ngFor` 要素をラップするコンテナ要素に `*ngIf` を置きます。
 
-For more information see [one structural directive per element](guide/directives/structural-directives#one-structural-directive-per-element).
+詳細については、[要素ごとの構造ディレクティブ](guide/directives/structural-directives#one-structural-directive-per-element) を参照してください。
 
-### Tracking items with `*ngFor` `trackBy`
+### `*ngFor` `trackBy` を使用してアイテムを追跡する
 
-Reduce the number of calls your application makes to the server by tracking changes to an item list.
-With the `*ngFor` `trackBy` property, Angular can change and re-render only those items that have changed, rather than reloading the entire list of items.
+アプリケーションがサーバーに送信する呼び出しの数を減らすには、アイテムリストへの変更を追跡します。
+`*ngFor` の `trackBy` プロパティを使用すると、Angularは、アイテムリスト全体をリロードするのではなく、変更されたアイテムのみを変更して再レンダリングできます。
 
-1. Add a method to the component that returns the value `NgFor` should track.
-    In this example, the value to track is the item's `id`.
-    If the browser has already rendered `id`, Angular keeps track of it and doesn't re-query the server for the same `id`.
+1. `NgFor` が追跡する必要がある値を返すメソッドをコンポーネントに追加します。
+    この例では、追跡する必要がある値はアイテムの `id` です。
+    ブラウザがすでに `id` をレンダリングしている場合、Angularはそれを追跡し、同じ `id` についてサーバーに再クエリすることはありません。
 
     <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="trackByItems"/>
 
-1. In the shorthand expression, set `trackBy` to the `trackByItems()` method.
+1. 省略記号式で、`trackBy` を `trackByItems()` メソッドに設定します。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="trackBy"/>
 
-**Change ids** creates new items with new `item.id`s.
-In the following illustration of the `trackBy` effect, **Reset items** creates new items with the same `item.id`s.
+**Change ids** は、新しい `item.id` を持つ新しいアイテムを作成します。
+`trackBy` の効果の次の図では、**Reset items** は、同じ `item.id` を持つ新しいアイテムを作成します。
 
-- With no `trackBy`, both buttons trigger complete DOM element replacement.
-- With `trackBy`, only changing the `id` triggers element replacement.
+- `trackBy` がない場合、両方のボタンがDOM要素の完全な置き換えをトリガーします。
+- `trackBy` がある場合、`id` の変更のみが要素の置き換えをトリガーします。
 
-<img alt="Animation of trackBy" src="assets/images/guide/built-in-directives/ngfor-trackby.gif">
+<img alt="trackBy のアニメーション" src="assets/images/guide/built-in-directives/ngfor-trackby.gif">
 
-## Hosting a directive without a DOM element
+## DOM 要素のないディレクティブをホストする
 
-The Angular `<ng-container>` is a grouping element that doesn't interfere with styles or layout because Angular doesn't put it in the DOM.
+Angularの `<ng-container>` は、AngularがDOMに配置しないため、スタイルやレイアウトに影響を与えないグループ化要素です。
 
-Use `<ng-container>` when there's no single element to host the directive.
+ディレクティブをホストする単一の要素がない場合は、`<ng-container>` を使用します。
 
-Here's a conditional paragraph using `<ng-container>`.
+以下は、`<ng-container>` を使用した条件付きのパラグラフです。
 
 <docs-code header="src/app/app.component.html (ngif-ngcontainer)" path="adev/src/content/examples/structural-directives/src/app/app.component.html" visibleRegion="ngif-ngcontainer"/>
 
-<img alt="ngcontainer paragraph with proper style" src="assets/images/guide/structural-directives/good-paragraph.png">
+<img alt="適切なスタイルが適用された ngcontainer パラグラフ" src="assets/images/guide/structural-directives/good-paragraph.png">
 
-1. Import the `ngModel` directive from `FormsModule`.
+1. `FormsModule` から `ngModel` ディレクティブをインポートします。
 
-1. Add `FormsModule` to the imports section of the relevant Angular module.
+1. `FormsModule` を、関連するAngularモジュールのインポートセクションに追加します。
 
-1. To conditionally exclude an `<option>`, wrap the `<option>` in an `<ng-container>`.
+1. `<option>` を条件付きで除外するには、`<option>` を `<ng-container>` でラップします。
 
     <docs-code header="src/app/app.component.html (select-ngcontainer)" path="adev/src/content/examples/structural-directives/src/app/app.component.html" visibleRegion="select-ngcontainer"/>
 
-    <img alt="ngcontainer options work properly" src="assets/images/guide/structural-directives/select-ngcontainer-anim.gif">
+    <img alt="ngcontainer オプションは正しく機能します" src="assets/images/guide/structural-directives/select-ngcontainer-anim.gif">
 
-## Switching cases with `NgSwitch`
+## `NgSwitch` を使用してケースを切り替える {#switching-cases-with-ngswitch}
 
-Like the JavaScript `switch` statement, `NgSwitch` displays one element from among several possible elements, based on a switch condition.
-Angular puts only the selected element into the DOM.
+JavaScriptの `switch` ステートメントと同様に、`NgSwitch` は、スイッチ条件に基づいて、いくつかの可能な要素の中から1つの要素を表示します。
+Angularは、選択された要素のみをDOMに配置します。
 
 <!--todo: API Flagged -->
 
-`NgSwitch` is a set of three directives:
+`NgSwitch` は、3つのディレクティブのセットです。
 
-| `NgSwitch` directives | Details                                                                                                                                                                |
+| `NgSwitch` ディレクティブ | 詳細                                                                                                                                                                |
 | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NgSwitch`            | An attribute directive that changes the behavior of its companion directives.                                                                                          |
-| `NgSwitchCase`        | Structural directive that adds its element to the DOM when its bound value equals the switch value and removes its bound value when it doesn't equal the switch value. |
-| `NgSwitchDefault`     | Structural directive that adds its element to the DOM when there is no selected `NgSwitchCase`.                                                                        |
+| `NgSwitch`            | 仲間のディレクティブの動作を変更する属性ディレクティブ。                                                                                          |
+| `NgSwitchCase`        | バインドされた値がスイッチ値と等しい場合に、その要素を DOM に追加し、バインドされた値がスイッチ値と等しくない場合に、その要素を DOM から削除する構造ディレクティブ。 |
+| `NgSwitchDefault`     | 選択された `NgSwitchCase` がない場合に、その要素を DOM に追加する構造ディレクティブ。                                                                        |
 
-To use the directives, add the `NgSwitch`, `NgSwitchCase` and `NgSwitchDefault` to the component's `imports` list.
+ディレクティブを使用するには、`NgSwitch`、`NgSwitchCase`、および `NgSwitchDefault` をコンポーネントの `imports` リストに追加します。
 
-<docs-code header="src/app/app.component.ts (NgSwitch imports)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-switch"/>
+<docs-code header="src/app/app.component.ts (NgSwitch インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-ng-switch"/>
 
-### Using `NgSwitch`
+### `NgSwitch` を使用
 
-1. On an element, such as a `<div>`, add `[ngSwitch]` bound to an expression that returns the switch value, such as `feature`.
-    Though the `feature` value in this example is a string, the switch value can be of any type.
+1. `<div>` などの要素に、`[ngSwitch]` を追加し、スイッチ値を返す式（例: `feature`）にバインドします。
+    この例の `feature` 値は文字列ですが、スイッチ値は任意の型にできます。
 
-1. Bind to `*ngSwitchCase` and `*ngSwitchDefault` on the elements for the cases.
+1. ケースの要素に、`*ngSwitchCase` と `*ngSwitchDefault` にバインドします。
 
     <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgSwitch"/>
 
-1. In the parent component, define `currentItem`, to use it in the `[ngSwitch]` expression.
+1. 親コンポーネントで、`[ngSwitch]` 式で使用する `currentItem` を定義します。
 
     <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="item"/>
 
-1. In each child component, add an `item` [input property](guide/components/inputs) which is bound to the `currentItem` of the parent component.
-    The following two snippets show the parent component and one of the child components.
-    The other child components are identical to `StoutItemComponent`.
+1. 各子コンポーネントで、親コンポーネントの `currentItem` にバインドされた `item` [入力プロパティ](guide/components/inputs) を追加します。
+    次の2つのスニペットは、親コンポーネントと子コンポーネントの1つを示しています。
+    他の子コンポーネントは、`StoutItemComponent` と同じです。
 
-    <docs-code header="In each child component, here StoutItemComponent" path="adev/src/content/examples/built-in-directives/src/app/item-switch.component.ts" visibleRegion="input"/>
+    <docs-code header="各子コンポーネント（ここでは StoutItemComponent）" path="adev/src/content/examples/built-in-directives/src/app/item-switch.component.ts" visibleRegion="input"/>
 
-    <img alt="Animation of NgSwitch" src="assets/images/guide/built-in-directives/ngswitch.gif">
+    <img alt="NgSwitch のアニメーション" src="assets/images/guide/built-in-directives/ngswitch.gif">
 
-Switch directives also work with built-in HTML elements and web components.
-For example, you could replace the `<app-best-item>` switch case with a `<div>` as follows.
+スイッチディレクティブは、組み込みのHTML要素とWebコンポーネントでも機能します。
+たとえば、`<app-best-item>` スイッチケースを `<div>` に置き換えることができます。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgSwitch-div"/>
 
-## What's next
+## 次のステップ
 
 <docs-pill-row>
-  <docs-pill href="guide/directives/attribute-directives" title="Attribute Directives"/>
-  <docs-pill href="guide/directives/structural-directives" title="Structural Directives"/>
-  <docs-pill href="guide/directives/directive-composition-api" title="Directive composition API"/>
+  <docs-pill href="guide/directives/attribute-directives" title="属性ディレクティブ"/>
+  <docs-pill href="guide/directives/structural-directives" title="構造ディレクティブ"/>
+  <docs-pill href="guide/directives/directive-composition-api" title="ディレクティブ合成API"/>
 </docs-pill-row>

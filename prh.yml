@@ -200,3 +200,7 @@ rules:
     pattern:
       - hydration
       - Hydration
+
+  - expected: シングルページアプリケーション
+    pattern:
+      - 単一ページアプリケーション

@@ -1,111 +1,111 @@
-<docs-decorative-header title="Forms in Angular" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
-Handling user input with forms is the cornerstone of many common applications.
+<docs-decorative-header title="Angularのフォーム" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
+フォームを使ったユーザー入力の処理は、多くの一般的なアプリケーションの基盤となっています。
 </docs-decorative-header>
 
-Applications use forms to enable users to log in, to update a profile, to enter sensitive information, and to perform many other data-entry tasks.
+アプリケーションは、ユーザーのログインやプロフィールの更新、機密情報を入力したりその他多くのデータ入力タスクを実行できるようにするために、フォームを使用します。
 
-Angular provides two different approaches to handling user input through forms: reactive and template-driven.
-Both capture user input events from the view, validate the user input, create a form model and data model to update, and provide a way to track changes.
+Angularは、フォームを通じてユーザー入力を処理するために、リアクティブとテンプレート駆動の2つの異なるアプローチを提供します。
+どちらもビューからのユーザー入力イベントをキャプチャし、ユーザー入力を検証してフォームモデルとデータモデルを作成して更新し、変更を追跡する方法を提供します。
 
-This guide provides information to help you decide which type of form works best for your situation.
-It introduces the common building blocks used by both approaches.
-It also summarizes the key differences between the two approaches, and demonstrates those differences in the context of setup, data flow, and testing.
+このガイドは、状況に合わせてどちらのタイプのフォームが最適か判断するのに役立つ情報を提供します。
+両方のアプローチで使用される一般的なビルディングブロックを紹介します。
+また、2つのアプローチの主な違いをまとめ、セットアップ、データフロー、テストというコンテキストにおけるそれらの違いを示します。
 
-## Choosing an approach
+## アプローチの選択 {#choosing-an-approach}
 
-Reactive forms and template-driven forms process and manage form data differently.
-Each approach offers different advantages.
+リアクティブフォームとテンプレート駆動フォームは、フォームデータを処理および管理する方法が異なります。
+それぞれのアプローチは、異なる利点を提供します。
 
-| Forms                 | Details |
+| フォーム               | 詳細 |
 |:---                   |:---     |
-| Reactive forms        | Provide direct, explicit access to the underlying form's object model. Compared to template-driven forms, they are more robust: they're more scalable, reusable, and testable. If forms are a key part of your application, or you're already using reactive patterns for building your application, use reactive forms.                                                                                             |
-| Template-driven forms | Rely on directives in the template to create and manipulate the underlying object model. They are useful for adding a simple form to an app, such as an email list signup form. They're straightforward to add to an app, but they don't scale as well as reactive forms. If you have very basic form requirements and logic that can be managed solely in the template, template-driven forms could be a good fit. |
+| リアクティブフォーム        | フォームの基礎となるオブジェクトモデルに直接的で明示的なアクセスを提供します。テンプレート駆動フォームと比較して、より堅牢です。スケーラビリティ、再利用性、テスト性が向上します。フォームがアプリケーションの重要な部分である場合、またはアプリケーションの構築にリアクティブパターンをすでに使用している場合は、リアクティブフォームを使用します。                                                                                             |
+| テンプレート駆動フォーム | テンプレート内のディレクティブに依存して、基礎となるオブジェクトモデルを作成および操作します。メールリスト登録フォームなどの、アプリケーションに簡単なフォームを追加するのに役立ちます。アプリケーションへの追加は簡単ですが、リアクティブフォームほどスケーラブルではありません。非常に基本的なフォーム要件と、テンプレートだけで管理できるロジックがある場合は、テンプレート駆動フォームが適している可能性があります。 |
 
-### Key differences
+### 主要な違い
 
-The following table summarizes the key differences between reactive and template-driven forms.
+次の表は、リアクティブフォームとテンプレート駆動フォームの主な違いをまとめたものです。
 
-|                                                    | Reactive                             | Template-driven                 |
-|:---                                                |:---                                  |:---                             |
-| [Setup of form model](#setting-up-the-form-model)  | Explicit, created in component class | Implicit, created by directives |
-| [Data model](#mutability-of-the-data-model)        | Structured and immutable             | Unstructured and mutable        |
-| [Data flow](#data-flow-in-forms)                     | Synchronous                          | Asynchronous                    |
-| [Form validation](#form-validation)                | Functions                            | Directives                      |
+|                                                    | リアクティブ                         | テンプレート駆動                 |
+|:---                                                |:---                                 |:---                             |
+| [フォームモデルのセットアップ](#setting-up-the-form-model)  | 明示的、コンポーネントクラスで作成 | 黙示的、ディレクティブによって作成 |
+| [データモデル](#mutability-of-the-data-model)        | 構造化され、不変                      | 構造化されていない、可変        |
+| [データフロー](#data-flow-in-forms)                     | 同期                            | 非同期                          |
+| [フォームバリデーション](#form-validation)                | 関数                             | ディレクティブ                    |
 
-### Scalability
+### スケーラビリティ
 
-If forms are a central part of your application, scalability is very important.
-Being able to reuse form models across components is critical.
+フォームがアプリケーションの中心的な部分である場合は、スケーラビリティが非常に重要です。
+フォームモデルをコンポーネント間で再利用できることは不可欠です。
 
-Reactive forms are more scalable than template-driven forms.
-They provide direct access to the underlying form API, and use [synchronous data flow](#data-flow-in-reactive-forms) between the view and the data model, which makes creating large-scale forms easier.
-Reactive forms require less setup for testing, and testing does not require deep understanding of change detection to properly test form updates and validation.
+リアクティブフォームは、テンプレート駆動フォームよりもスケーラブルです。
+フォームの基礎となるAPIに直接アクセスでき、[同期データフロー](#data-flow-in-reactive-forms) をビューとデータモデルの間で使用するため、大規模なフォームの作成が容易になります。
+リアクティブフォームは、テストのためのセットアップが少なく、テストにはフォームの更新とバリデーションを適切にテストするために変更検知の深い理解は必要ありません。
 
-Template-driven forms focus on simple scenarios and are not as reusable.
-They abstract away the underlying form API, and use [asynchronous data flow](#data-flow-in-template-driven-forms) between the view and the data model.
-The abstraction of template-driven forms also affects testing.
-Tests are deeply reliant on manual change detection execution to run properly, and require more setup.
+テンプレート駆動フォームは、単純なシナリオに焦点を当て、再利用性がそれほど高くありません。
+フォームの基礎となるAPIを抽象化し、[非同期データフロー](#data-flow-in-template-driven-forms) をビューとデータモデルの間で使用します。
+テンプレート駆動フォームの抽象化は、テストにも影響を与えます。
+テストは、適切に実行するために手動で変更検知を実行することに大きく依存し、より多くのセットアップが必要です。
 
-## Setting up the form model
+## フォームモデルのセットアップ {#setting-up-the-form-model}
 
-Both reactive and template-driven forms track value changes between the form input elements that users interact with and the form data in your component model.
-The two approaches share underlying building blocks, but differ in how you create and manage the common form-control instances.
+リアクティブフォームとテンプレート駆動フォームの両方とも、ユーザーが対話するフォーム入力要素と、コンポーネントモデル内のフォームデータの間の値の変更を追跡します。
+2つのアプローチは、基礎となるビルディングブロックを共有しますが、共通のフォームコントロールインスタンスの作成と管理方法が異なります。
 
-### Common form foundation classes
+### 共通のフォーム基盤クラス
 
-Both reactive and template-driven forms are built on the following base classes.
+リアクティブフォームとテンプレート駆動フォームの両方は、次のベースクラスに基づいて構築されています。
 
-| Base classes           | Details |
+| ベースクラス           | 詳細 |
 |:---                    |:---     |
-| `FormControl`          | Tracks the value and validation status of an individual form control.               |
-| `FormGroup`            | Tracks the same values and status for a collection of form controls.                |
-| `FormArray`            | Tracks the same values and status for an array of form controls.                    |
-| `ControlValueAccessor` | Creates a bridge between Angular `FormControl` instances and built-in DOM elements. |
+| `FormControl`          | 個々のフォームコントロールの値と検証ステータスを追跡します。               |
+| `FormGroup`            | フォームコントロールのコレクションの値とステータスを追跡します。                |
+| `FormArray`            | フォームコントロールの配列の値とステータスを追跡します。                    |
+| `ControlValueAccessor` | Angular の `FormControl` インスタンスと組み込みの DOM 要素の橋渡しを作成します。 |
 
-### Setup in reactive forms
+### リアクティブフォームでのセットアップ
 
-With reactive forms, you define the form model directly in the component class.
-The `[formControl]` directive links the explicitly created `FormControl` instance to a specific form element in the view, using an internal value accessor.
+リアクティブフォームでは、フォームモデルをコンポーネントクラスに直接定義します。
+`[formControl]` ディレクティブは、明示的に作成された `FormControl` インスタンスを、内部の値アクセサーを使用して、ビュー内の特定のフォーム要素にリンクします。
 
-The following component implements an input field for a single control, using reactive forms.
-In this example, the form model is the `FormControl` instance.
+次のコンポーネントは、リアクティブフォームを使用して、単一コントロールの入力フィールドを実装しています。
+この例では、フォームモデルは `FormControl` インスタンスです。
 
 <docs-code path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.ts"/>
 
-IMPORTANT: In reactive forms, the form model is the source of truth; it provides the value and status of the form element at any given point in time, through the `[formControl]` directive on the `<input>` element.
+IMPORTANT: リアクティブフォームでは、フォームモデルが真実の源です。`<input>` 要素の `[formControl]` ディレクティブを通じて、特定の時点におけるフォーム要素の値とステータスを提供します。
 
-### Setup in template-driven forms
+### テンプレート駆動フォームでのセットアップ
 
-In template-driven forms, the form model is implicit, rather than explicit.
-The directive `NgModel` creates and manages a `FormControl` instance for a given form element.
+テンプレート駆動フォームにおいてフォームモデルは暗黙的であり、明示的ではありません。
+`NgModel` ディレクティブは、特定のフォーム要素の `FormControl` インスタンスを作成および管理します。
 
-The following component implements the same input field for a single control, using template-driven forms.
+次のコンポーネントは、テンプレート駆動フォームを使用して、単一コントロールの同じ入力フィールドを実装しています。
 
 <docs-code path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts"/>
 
-IMPORTANT: In a template-driven form the source of truth is the template. The `NgModel` directive automatically manages the `FormControl` instance for you.
+IMPORTANT: テンプレート駆動フォームでは、真実の源はテンプレートです。`NgModel` ディレクティブは、`FormControl` インスタンスを自動的に管理します。
 
-## Data flow in forms
+## フォーム内のデータフロー {#data-flow-in-forms}
 
-When an application contains a form, Angular must keep the view in sync with the component model and the component model in sync with the view.
-As users change values and make selections through the view, the new values must be reflected in the data model.
-Similarly, when the program logic changes values in the data model, those values must be reflected in the view.
+アプリケーションにフォームが含まれている場合、Angularはビューをコンポーネントモデルと同期させ、コンポーネントモデルをビューと同期させる必要があります。
+ユーザーがビューを通じて値を変更したり選択したりすると、新しい値はデータモデルに反映される必要があります。
+同様に、プログラムロジックがデータモデルの値を変更すると、これらの値はビューに反映される必要があります。
 
-Reactive and template-driven forms differ in how they handle data flowing from the user or from programmatic changes.
-The following diagrams illustrate both kinds of data flow for each type of form, using the favorite-color input field defined above.
+リアクティブフォームとテンプレート駆動フォームは、ユーザーからの変更またはプログラムによる変更からデータが流れる方法が異なります。
+次の図は、上記で定義されたお気に入りの色の入力フィールドを使用して、各タイプのフォームの両方のデータフローを示しています。
 
-### Data flow in reactive forms
+### リアクティブフォームのデータフロー
 
-In reactive forms each form element in the view is directly linked to the form model (a `FormControl` instance).
-Updates from the view to the model and from the model to the view are synchronous and do not depend on how the UI is rendered.
+リアクティブフォームでは、ビュー内の各フォーム要素は、フォームモデル（`FormControl` インスタンス）に直接リンクされています。
+ビューからモデルへの更新、およびモデルからビューへの更新は同期であり、UIのレンダリング方法に依存しません。
 
-The view-to-model diagram shows how data flows when an input field's value is changed from the view through the following steps.
+ビューからモデルへの図は、入力フィールドの値がビューから変更された場合にデータがどのように流れるかを示しています。
 
-1. The user types a value into the input element, in this case the favorite color *Blue*.
-1. The form input element emits an "input" event with the latest value.
-1. The `ControlValueAccessor` listening for events on the form input element immediately relays the new value to the `FormControl` instance.
-1. The `FormControl` instance emits the new value through the `valueChanges` observable.
-1. Any subscribers to the `valueChanges` observable receive the new value.
+1. ユーザーは入力要素にお気に入りの色 *Blue* を入力します。
+1. フォーム入力要素は、最新の値を伴う "input" イベントを発行します。
+1. フォーム入力要素のイベントをリッスンしている `ControlValueAccessor` は、新しい値を `FormControl` インスタンスにすぐに中継します。
+1. `FormControl` インスタンスは、`valueChanges` Observableを通じて新しい値を発行します。
+1. `valueChanges` Observableのサブスクライバーは、新しい値を受け取ります。
 
 ```mermaid
 flowchart TB
@@ -120,12 +120,12 @@ flowchart TB
     FC-.->|Fires a 'valueChanges' event to observers|O
 ```
 
-The model-to-view diagram shows how a programmatic change to the model is propagated to the view through the following steps.
+モデルからビューへの図は、モデルに対するプログラムによる変更がどのようにビューに伝播されるかを示しています。
 
-1. The user calls the `favoriteColorControl.setValue()` method, which updates the `FormControl` value.
-1. The `FormControl` instance emits the new value through the `valueChanges` observable.
-1. Any subscribers to the `valueChanges` observable receive the new value.
-1. The control value accessor on the form input element updates the element with the new value.
+1. ユーザーは `favoriteColorControl.setValue()` メソッドを呼び出し、`FormControl` の値を更新します。
+1. `FormControl` インスタンスは、`valueChanges` Observableを通じて新しい値を発行します。
+1. `valueChanges` Observableのサブスクライバーは、新しい値を受け取ります。
+1. フォーム入力要素の制御値アクセサーは、新しい値で要素を更新します。
 
 ```mermaid
 flowchart TB
@@ -140,19 +140,19 @@ flowchart TB
     CVA-->|"Updates the value of the <input>"|I
 ```
 
-### Data flow in template-driven forms
+### テンプレート駆動フォームのデータフロー
 
-In template-driven forms, each form element is linked to a directive that manages the form model internally.
+テンプレート駆動フォームでは、各フォーム要素は、フォームモデルを内部的に管理するディレクティブにリンクされています。
 
-The view-to-model diagram shows how data flows when an input field's value is changed from the view through the following steps.
+ビューからモデルへの図は、入力フィールドの値がビューから変更された場合にデータがどのように流れるかを示しています。
 
-1. The user types *Blue* into the input element.
-1. The input element emits an "input" event with the value *Blue*.
-1. The control value accessor attached to the input triggers the `setValue()` method on the `FormControl` instance.
-1. The `FormControl` instance emits the new value through the `valueChanges` observable.
-1. Any subscribers to the `valueChanges` observable receive the new value.
-1. The control value accessor also calls the `NgModel.viewToModelUpdate()` method which emits an `ngModelChange` event.
-1. Because the component template uses two-way data binding for the `favoriteColor` property, the `favoriteColor` property in the component is updated to the value emitted by the `ngModelChange` event \(*Blue*\).
+1. ユーザーは入力要素に *Blue* を入力します。
+1. 入力要素は、値 *Blue* を伴う "input" イベントを発行します。
+1. 入力に接続された制御値アクセサーは、`FormControl` インスタンスの `setValue()` メソッドをトリガーします。
+1. `FormControl` インスタンスは、`valueChanges` Observableを通じて新しい値を発行します。
+1. `valueChanges` Observableのサブスクライバーは、新しい値を受け取ります。
+1. 制御値アクセサーは、`ngModelChange` イベントを発行する `NgModel.viewToModelUpdate()` メソッドも呼び出します。
+1. コンポーネントテンプレートが `favoriteColor` プロパティに対して双方向バインディングを使用しているため、コンポーネントの `favoriteColor` プロパティは、`ngModelChange` イベント（*Blue*）によって発行された値に更新されます。
 
 ```mermaid
 flowchart TB
@@ -173,17 +173,17 @@ flowchart TB
     C-->|Updates the value of the two-way bound property|P
 ```
 
-The model-to-view diagram shows how data flows from model to view when the `favoriteColor` changes from *Blue* to *Red*, through the following steps
+モデルからビューへの図は、`favoriteColor` が *Blue* から *Red* に変更された場合に、データがモデルからビューにどのように流れるかを示しています。
 
-1. The `favoriteColor` value is updated in the component.
-1. Change detection begins.
-1. During change detection, the `ngOnChanges` lifecycle hook is called on the `NgModel` directive instance because the value of one of its inputs has changed.
-1. The `ngOnChanges()` method queues an async task to set the value for the internal `FormControl` instance.
-1. Change detection completes.
-1. On the next tick, the task to set the `FormControl` instance value is executed.
-1. The `FormControl` instance emits the latest value through the `valueChanges` observable.
-1. Any subscribers to the `valueChanges` observable receive the new value.
-1. The control value accessor updates the form input element in the view with the latest `favoriteColor` value.
+1. コンポーネントで `favoriteColor` 値が更新されます。
+1. 変更検知が開始されます。
+1. 変更検知中に、`NgModel` ディレクティブインスタンスの入力の1つが変更されたため、`ngOnChanges` ライフサイクルフックが呼び出されます。
+1. `ngOnChanges()` メソッドは、内部 `FormControl` インスタンスの値を設定するための非同期タスクをキューに入れます。
+1. 変更検知が完了します。
+1. 次のティックで、`FormControl` インスタンスの値を設定するタスクが実行されます。
+1. `FormControl` インスタンスは、`valueChanges` Observableを通じて最新の値を発行します。
+1. `valueChanges` Observableのサブスクライバーは、新しい値を受け取ります。
+1. 制御値アクセサーは、ビュー内のフォーム入力要素を、最新の `favoriteColor` 値で更新します。
 
 ```mermaid
 flowchart TB
@@ -214,111 +214,111 @@ flowchart TB
     end
 ```
 
-Note: `NgModel` triggers a second change detection to avoid `ExpressionChangedAfterItHasBeenChecked` errors, because the value change originates in an input binding.
+Note: `NgModel` は、値の変更が入力バインディングから発生するため、`ExpressionChangedAfterItHasBeenChecked` エラーを回避するために2回目の変更検知をトリガーします。
 
-### Mutability of the data model
+### データモデルの可変性 {#mutability-of-the-data-model}
 
-The change-tracking method plays a role in the efficiency of your application.
+変更追跡の方法は、アプリケーションの効率に影響を与えます。
 
-| Forms                 | Details |
+| フォーム               | 詳細 |
 |:---                   |:---     |
-| Reactive forms        | Keep the data model pure by providing it as an immutable data structure. Each time a change is triggered on the data model, the `FormControl` instance returns a new data model rather than updating the existing data model. This gives you the ability to track unique changes to the data model through the control's observable. Change detection is more efficient because it only needs to update on unique changes. Because data updates follow reactive patterns, you can integrate with observable operators to transform data. |
-| Template-driven forms | Rely on mutability with two-way data binding to update the data model in the component as changes are made in the template. Because there are no unique changes to track on the data model when using two-way data binding, change detection is less efficient at determining when updates are required.                                                                                                                                                                                                                                 |
+| リアクティブフォーム        | データモデルを、不変のデータ構造として提供することで、データモデルを純粋に保ちます。データモデルで変更がトリガーされるたびに、`FormControl` インスタンスは、既存のデータモデルを更新するのではなく、新しいデータモデルを返します。これにより、コントロールのObservableを通じて、データモデルに対する一意の変更を追跡できます。変更検知は、一意の変更でのみ更新する必要があるため、より効率的です。データの更新はリアクティブパターンに従うため、Observableオペレーターと統合してデータを変更できます。 |
+| テンプレート駆動フォーム | テンプレートでの変更が行われると、コンポーネント内のデータモデルを更新するために、双方向バインディングを使用して可変性を活用します。双方向バインディングを使用する場合は、データモデルに対する一意の変更を追跡できないため、変更検知は、更新が必要なときに判断する効率が低くなります。                                                                                                                                                                                                                                 |
 
-The difference is demonstrated in the previous examples that use the favorite-color input element.
+この違いは、お気に入りの色の入力要素を使用する前の例で示されています。
 
-* With reactive forms, the **`FormControl` instance** always returns a new value when the control's value is updated
-* With template-driven forms, the **favorite color property** is always modified to its new value
+* リアクティブフォームの場合、**`FormControl` インスタンス** は、コントロールの値が更新されると常に新しい値を返します
+* テンプレート駆動フォームの場合、**お気に入りの色のプロパティ** は、常にその新しい値に変更されます
 
-## Form validation
+## フォームバリデーション {#form-validation}
 
-Validation is an integral part of managing any set of forms.
-Whether you're checking for required fields or querying an external API for an existing username, Angular provides a set of built-in validators as well as the ability to create custom validators.
+バリデーションは、フォームのセットを管理する上で不可欠な部分です。
+必須フィールドを確認しているか、外部APIに既存のユーザー名を確認しているかにかかわらず、Angularは一連の組み込みバリデーターと、カスタムバリデーターを作成する機能を提供します。
 
-| Forms                 | Details |
+| フォーム               | 詳細 |
 |:---                   |:---     |
-| Reactive forms        | Define custom validators as **functions** that receive a control to validate                                 |
-| Template-driven forms | Tied to template **directives**, and must provide custom validator directives that wrap validation functions |
+| リアクティブフォーム        | バリデートするコントロールを受け取る**関数**として、カスタムバリデーターを定義します                                 |
+| テンプレート駆動フォーム | テンプレート**ディレクティブ**に結び付けられ、バリデーション関数をラップするカスタムバリデーターディレクティブを提供する必要があります |
 
-For more information, see [Form Validation](guide/forms/form-validation#validating-input-in-reactive-forms).
+詳細については、[フォームバリデーション](guide/forms/form-validation#validating-input-in-reactive-forms) を参照してください。
 
-## Testing
+## テスト
 
-Testing plays a large part in complex applications.
-A simpler testing strategy is useful when validating that your forms function correctly.
-Reactive forms and template-driven forms have different levels of reliance on rendering the UI to perform assertions based on form control and form field changes.
-The following examples demonstrate the process of testing forms with reactive and template-driven forms.
+テストは、複雑なアプリケーションで重要な役割を果たします。
+フォームが正しく機能することを検証する際に、より簡単なテスト戦略が役立ちます。
+リアクティブフォームとテンプレート駆動フォームは、UIをレンダリングすることに対して異なるレベルの依存関係があり、フォームコントロールとフォームフィールドの変更に基づいてアサーションを実行します。
+次の例は、リアクティブフォームとテンプレート駆動フォームを使用してフォームをテストするプロセスを示しています。
 
-### Testing reactive forms
+### リアクティブフォームのテスト
 
-Reactive forms provide a relatively straightforward testing strategy because they provide synchronous access to the form and data models, and they can be tested without rendering the UI.
-In these tests, status and data are queried and manipulated through the control without interacting with the change detection cycle.
+リアクティブフォームは、フォームとデータモデルに同期的にアクセスできるため、比較的簡単なテスト戦略を提供し、UIをレンダリングせずにテストできます。
+これらのテストでは、ステータスとデータは、変更検知サイクルと対話せずに、コントロールを通じてクエリおよび操作されます。
 
-The following tests use the favorite-color components from previous examples to verify the view-to-model and model-to-view data flows for a reactive form.
+次のテストは、前の例にあるお気に入りの色のコンポーネントを使用して、リアクティブフォームのビューからモデルへのデータフロー、およびモデルからビューへのデータフローを確認します。
 
 <!--todo: make consistent with other topics -->
 
-#### Verifying view-to-model data flow
+#### ビューからモデルへのデータフローを確認する
 
-The first example performs the following steps to verify the view-to-model data flow.
+最初の例は、ビューからモデルへのデータフローを確認するために、次の手順を実行します。
 
-1. Query the view for the form input element, and create a custom "input" event for the test.
-1. Set the new value for the input to *Red*, and dispatch the "input" event on the form input element.
-1. Assert that the component's `favoriteColorControl` value matches the value from the input.
+1. ビューからフォーム入力要素をクエリし、テスト用のカスタム "input" イベントを作成します。
+1. 入力の新しい値を *Red* に設定し、フォーム入力要素で "input" イベントをディスパッチします。
+1. コンポーネントの `favoriteColorControl` 値が入力からの値と一致することをアサートします。
 
-<docs-code header="Favorite color test - view to model" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" visibleRegion="view-to-model"/>
+<docs-code header="お気に入りの色のテスト - ビューからモデルへ" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" visibleRegion="view-to-model"/>
 
-The next example performs the following steps to verify the model-to-view data flow.
+次の例は、モデルからビューへのデータフローを確認するために、次の手順を実行します。
 
-1. Use the `favoriteColorControl`, a `FormControl` instance, to set the new value.
-1. Query the view for the form input element.
-1. Assert that the new value set on the control matches the value in the input.
+1. `favoriteColorControl`（`FormControl` インスタンス）を使用して、新しい値を設定します。
+1. ビューからフォーム入力要素をクエリします。
+1. コントロールに設定された新しい値が入力内の値と一致することをアサートします。
 
-<docs-code header="Favorite color test - model to view" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" visibleRegion="model-to-view"/>
+<docs-code header="お気に入りの色のテスト - モデルからビューへ" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" visibleRegion="model-to-view"/>
 
-### Testing template-driven forms
+### テンプレート駆動フォームのテスト
 
-Writing tests with template-driven forms requires a detailed knowledge of the change detection process and an understanding of how directives run on each cycle to ensure that elements are queried, tested, or changed at the correct time.
+テンプレート駆動フォームでテストを作成するには、変更検知プロセスの詳細な知識と、各サイクルでディレクティブがどのように実行されるかを理解する必要があり、要素が適切なタイミングでクエリ、テスト、変更されることを保証します。
 
-The following tests use the favorite color components mentioned earlier to verify the data flows from view to model and model to view for a template-driven form.
+次のテストは、先に述べたお気に入りの色のコンポーネントを使用して、テンプレート駆動フォームのビューからモデルへのデータフロー、およびモデルからビューへのデータフローを確認します。
 
-The following test verifies the data flow from view to model.
+次のテストは、ビューからモデルへのデータフローを確認します。
 
-<docs-code header="Favorite color test - view to model" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" visibleRegion="view-to-model"/>
+<docs-code header="お気に入りの色のテスト - ビューからモデルへ" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" visibleRegion="view-to-model"/>
 
-Here are the steps performed in the view to model test.
+ビューからモデルへのテストで実行される手順を以下に示します。
 
-1. Query the view for the form input element, and create a custom "input" event for the test.
-1. Set the new value for the input to *Red*, and dispatch the "input" event on the form input element.
-1. Run change detection through the test fixture.
-1. Assert that the component `favoriteColor` property value matches the value from the input.
+1. ビューからフォーム入力要素をクエリし、テスト用のカスタム "input" イベントを作成します。
+1. 入力の新しい値を *Red* に設定し、フォーム入力要素で "input" イベントをディスパッチします。
+1. テストフィクスチャを通じて変更検知を実行します。
+1. コンポーネントの `favoriteColor` プロパティ値が入力からの値と一致することをアサートします。
 
-The following test verifies the data flow from model to view.
+次のテストは、モデルからビューへのデータフローを確認します。
 
-<docs-code header="Favorite color test - model to view" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" visibleRegion="model-to-view"/>
+<docs-code header="お気に入りの色のテスト - モデルからビューへ" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" visibleRegion="model-to-view"/>
 
-Here are the steps performed in the model to view test.
+モデルからビューへのテストで実行される手順を以下に示します。
 
-1. Use the component instance to set the value of the `favoriteColor` property.
-1. Run change detection through the test fixture.
-1. Use the `tick()` method to simulate the passage of time within the `fakeAsync()` task.
-1. Query the view for the form input element.
-1. Assert that the input value matches the value of the `favoriteColor` property in the component instance.
+1. コンポーネントインスタンスを使用して、`favoriteColor` プロパティの値を設定します。
+1. テストフィクスチャを通じて変更検知を実行します。
+1. `fakeAsync()` タスク内で、`tick()` メソッドを使用して時間の経過をシミュレートします。
+1. ビューからフォーム入力要素をクエリします。
+1. 入力の値が、コンポーネントインスタンスの `favoriteColor` プロパティの値と一致することをアサートします。
 
-## Next steps
+## 次のステップ
 
-To learn more about reactive forms, see the following guides:
+リアクティブフォームの詳細については、次のガイドを参照してください。
 
 <docs-pill-row>
-  <docs-pill href="guide/forms/reactive-forms" title="Reactive forms"/>
-  <docs-pill href="guide/forms/form-validation#validating-input-in-reactive-forms" title="Form validation"/>
-  <docs-pill href="guide/forms/dynamic-forms" title="Dynamic forms"/>
+  <docs-pill href="guide/forms/reactive-forms" title="リアクティブフォーム"/>
+  <docs-pill href="guide/forms/form-validation#validating-input-in-reactive-forms" title="フォームバリデーション"/>
+  <docs-pill href="guide/forms/dynamic-forms" title="動的フォーム"/>
 </docs-pill-row>
 
-To learn more about template-driven forms, see the following guides:
+テンプレート駆動フォームの詳細については、次のガイドを参照してください。
 
 <docs-pill-row>
-  <docs-pill href="guide/forms/template-driven-forms" title="Template Driven Forms tutorial" />
-  <docs-pill href="guide/forms/form-validation#validating-input-in-template-driven-forms" title="Form validation" />
-  <docs-pill href="api/forms/NgForm" title="NgForm directive API reference" />
+  <docs-pill href="guide/forms/template-driven-forms" title="テンプレート駆動フォームチュートリアル" />
+  <docs-pill href="guide/forms/form-validation#validating-input-in-template-driven-forms" title="フォームバリデーション" />
+  <docs-pill href="api/forms/NgForm" title="NgForm ディレクティブAPIリファレンス" />
 </docs-pill-row>

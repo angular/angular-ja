@@ -1,19 +1,19 @@
-# Test requests
+# リクエストのテスト
 
-As for any external dependency, you must mock the HTTP backend so your tests can simulate interaction with a remote server. The `@angular/common/http/testing` library provides tools to capture requests made by the application, make assertions about them, and mock the responses to emulate your backend's behavior.
+外部へ依存する場合、テストでリモートサーバーとのやり取りをシミュレートできるように、HTTPバックエンドをモックする必要があります。`@angular/common/http/testing` ライブラリは、アプリケーションによって行われたリクエストをキャプチャし、それらについてアサーションを行い、バックエンドの動作をエミュレートするためにレスポンスをモックするためのツールを提供します。
 
-The testing library is designed for a pattern in which the app executes code and makes requests first. The test then expects that certain requests have or have not been made, performs assertions against those requests, and finally provides responses by "flushing" each expected request.
+テストライブラリは、アプリケーションがコードを実行して最初にリクエストを行うというパターン用に設計されています。その後、テストは特定のリクエストが行われたか、行われなかったかを期待し、それらのリクエストに対してアサーションを行い、最後に各期待されるリクエストにレスポンスを提供することによってそれらを「フラッシュ」します。
 
-At the end, tests can verify that the app made no unexpected requests.
+最後に、テストはアプリケーションが予期しないリクエストを行わなかったことを検証できます。
 
-## Setup for testing
+## テストの設定
 
-To begin testing usage of `HttpClient`, configure `TestBed` and include `provideHttpClient()` and `provideHttpClientTesting` in your test's setup. This configures `HttpClient` to use a test backend instead of the real network. It also provides `HttpTestingController`, which you'll use to interact with the test backend, set expectations about which requests have been made, and flush responses to those requests. `HttpTestingController` can be injected from `TestBed` once configured.
+`HttpClient` の使用のテストを開始するには、`TestBed` を構成してテストの設定に `provideHttpClient()` と `provideHttpClientTesting` を含めます。これにより、`HttpClient` が実際のネットワークではなくテストバックエンドを使用するように構成されます。また、`HttpTestingController` も提供され、これを使用してテストバックエンドとやり取ります。そして、どのリクエストが行われたかについての期待を設定し、それらのリクエストに対するレスポンスを流します。`HttpTestingController` は、構成されたら `TestBed` から注入できます。
 
 <docs-code language="ts">
 TestBed.configureTestingModule({
   providers: [
-    // ... other test providers
+    // ...その他のテストプロバイダー
     provideHttpClient(),
     provideHttpClientTesting(),
   ],
@@ -22,11 +22,11 @@ TestBed.configureTestingModule({
 const httpTesting = TestBed.inject(HttpTestingController);
 </docs-code>
 
-Now when your tests make requests, they will hit the testing backend instead of the normal one. You can use `httpTesting` to make assertions about those requests.
+これで、テストでリクエストを行うと、通常のバックエンドではなくテストバックエンドにヒットするようになります。`httpTesting` を使用して、それらのリクエストについてアサーションを行うことができます。
 
-## Expecting and answering requests
+## リクエストの期待と応答
 
-For example, you can write a test that expects a GET request to occur and provides a mock response:
+たとえば、GETリクエストが発生することを期待し、モックレスポンスを提供するテストを作成できます。
 
 <docs-code language="ts">
 TestBed.configureTestingModule({
@@ -39,102 +39,102 @@ TestBed.configureTestingModule({
 
 const httpTesting = TestBed.inject(HttpTestingController);
 
-// Load `ConfigService` and request the current configuration.
+// `ConfigService` をロードして現在の構成を要求します。
 const service = TestBed.inject(ConfigService);
 const config$ = this.configService.getConfig<Config>();
 
-// `firstValueFrom` subscribes to the `Observable`, which makes the HTTP request,
-// and creates a `Promise` of the response.
+// `firstValueFrom` は `Observable` を購読し、HTTP リクエストを行い、
+// レスポンスの `Promise` を作成します。
 const configPromise = firstValueFrom(config$);
 
-// At this point, the request is pending, and we can assert it was made
-// via the `HttpTestingController`:
-const req = httpTesting.expectOne('/api/config', 'Request to load the configuration');
+// この時点で、リクエストは保留中であり、
+// `HttpTestingController` を介して作成されたことをアサートできます。
+const req = httpTesting.expectOne('/api/config', '構成をロードするリクエスト');
 
-// We can assert various properties of the request if desired.
+// 必要に応じて、リクエストのさまざまなプロパティをアサートできます。
 expect(req.request.method).toBe('GET');
 
-// Flushing the request causes it to complete, delivering the result.
+// リクエストをフラッシュすると、リクエストが完了し、結果が配信されます。
 req.flush(DEFAULT_CONFIG);
 
-// We can then assert that the response was successfully delivered by the `ConfigService`:
+// その後、`ConfigService` によってレスポンスが正常に配信されたことをアサートできます。
 expect(await configPromise).toEqual(DEFAULT_CONFIG);
 
-// Finally, we can assert that no other requests were made.
+// 最後に、他のリクエストが行われていないことをアサートできます。
 httpTesting.verify();
 </docs-code>
 
-Note: `expectOne` will fail if the test has made more than one request which matches the given criteria.
+Note: `expectOne` は、テストが指定された基準に一致するリクエストを2つ以上行った場合に失敗します。
 
-As an alternative to asserting on `req.method`, you could instead use an expanded form of `expectOne` to also match the request method:
+`req.method` についてアサートする代わりに、`expectOne` の拡張形式を使用してリクエストメソッドも一致させることができます。
 
 <docs-code language="ts">
 const req = httpTesting.expectOne({
   method: 'GET',
   url: '/api/config',
-}, 'Request to load the configuration');
+}, '構成をロードするリクエスト');
 </docs-code>
 
-HELPFUL: The expectation APIs match against the full URL of requests, including any query parameters.
+HELPFUL: 期待APIは、クエリパラメータを含むリクエストの完全なURLと一致します。
 
-The last step, verifying that no requests remain outstanding, is common enough for you to move it into an `afterEach()` step:
+最後のステップである、保留中のリクエストがないことを検証する操作は十分に一般的なので、`afterEach()` ステップに移動できます。
 
 <docs-code language="ts">
 afterEach(() => {
-  // Verify that none of the tests make any extra HTTP requests.
+  // テストが追加の HTTP リクエストを行わないことを確認します。
   TestBed.inject(HttpTestingController).verify();
 });
 </docs-code>
 
-## Handling more than one request at once
+## 複数のリクエストを一度に処理する
 
-If you need to respond to duplicate requests in your test, use the `match()` API instead of `expectOne()`. It takes the same arguments but returns an array of matching requests. Once returned, these requests are removed from future matching and you are responsible for flushing and verifying them.
+テストで重複するリクエストに応答する必要がある場合は、`expectOne()` ではなく `match()` APIを使用します。これは同じ引数を受け取りますが、一致するリクエストの配列を返します。返された後、これらのリクエストは今後のマッチングから削除され、それらをフラッシュして検証する責任はあなたにあります。
 
 <docs-code language="ts">
 const allGetRequests = httpTesting.match({method: 'GET'});
 foreach (const req of allGetRequests) {
-  // Handle responding to each request.
+  // 各リクエストへの応答処理。
 }
 </docs-code>
 
-## Advanced matching
+## 高度なマッチング
 
-All matching functions accept a predicate function for custom matching logic:
+すべてのマッチング関数は、カスタムマッチングロジックの述語関数を受け取ります。
 
 <docs-code language="ts">
-// Look for one request that has a request body.
+// リクエストボディを持つリクエストを 1 つ探します。
 const requestsWithBody = httpTesting.expectOne(req => req.body !== null);
 </docs-code>
 
-The `expectNone` function asserts that no requests match the given criteria.
+`expectNone` 関数は、指定された基準に一致するリクエストがないことをアサートします。
 
 <docs-code language="ts">
-// Assert that no mutation requests have been issued.
+// 突然変異リクエストが発行されていないことをアサートします。
 httpTesting.expectNone(req => req.method !== 'GET');
 </docs-code>
 
-## Testing error handling
+## エラー処理のテスト
 
-You should test your app's responses when HTTP requests fail.
+HTTPリクエストが失敗した場合のアプリケーションのレスポンスをテストする必要があります。
 
-### Backend errors
+### バックエンドエラー
 
-To test handling of backend errors (when the server returns a non-successful status code), flush requests with an error response that emulates what your backend would return when a request fails.
+バックエンドエラー（サーバーが成功ではないステータスコードを返す場合）の処理をテストするには、リクエストが失敗した場合にバックエンドが返すものとエミュレートしたエラーレスポンスを使用して、リクエストをフラッシュします。
 
 <docs-code language="ts">
 const req = httpTesting.expectOne('/api/config');
 req.flush('Failed!', {status: 500, statusText: 'Internal Server Error'});
 
-// Assert that the application successfully handled the backend error.
+// アプリケーションがバックエンドエラーを正常に処理したことをアサートします。
 </docs-code>
 
-### Network errors
+### ネットワークエラー
 
-Requests can also fail due to network errors, which surface as `ProgressEvent` errors. These can be delivered with the `error()` method:
+リクエストは、ネットワークエラーが原因で失敗することもあり、`ProgressEvent` エラーとして現れます。これらは、`error()` メソッドを使用して配信できます。
 
 <docs-code language="ts">
 const req = httpTesting.expectOne('/api/config');
 req.error(new ProgressEvent('network error!'));
 
-// Assert that the application successfully handled the network error.
+// アプリケーションがネットワークエラーを正常に処理したことをアサートします。
 </docs-code>

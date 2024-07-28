@@ -1,84 +1,84 @@
-# Making HTTP requests
+## HTTP リクエストを行う
 
-`HttpClient` has methods corresponding to the different HTTP verbs used to make requests, both to load data and to apply mutations on the server. Each method returns an [RxJS `Observable`](https://rxjs.dev/guide/observable) which, when subscribed, sends the request and then emits the results when the server responds.
+`HttpClient` には、データの読み込みとサーバーへの変更の適用に使用されるさまざまなHTTP動詞に対応するメソッドがあります。各メソッドは[RxJS `Observable`](https://rxjs.dev/guide/observable) を返し、これはサブスクライブされるとリクエストを送信し、サーバーが応答すると結果を発行します。
 
-Note: `Observable`s created by `HttpClient` may be subscribed any number of times and will make a new backend request for each subscription.
+Note: `HttpClient` によって作成された `Observable` は、何度でもサブスクライブでき、各サブスクライブごとに新しいバックエンドリクエストが行われます。
 
-Through an options object passed to the request method, various properties of the request and the returned response type can be adjusted.
+リクエストメソッドに渡されるオプションオブジェクトを通じて、リクエストのさまざまなプロパティと返されるレスポンスタイプを調整できます。
 
-## Fetching JSON data
+## JSON データの取得 {#fetching-json-data}
 
-Fetching data from a backend often requires making a GET request using the [`HttpClient.get()`](api/common/http/HttpClient#get) method. This method takes two arguments: the string endpoint URL from which to fetch, and an *optional options* object to configure the request.
+バックエンドからデータを取得するには、多くの場合、[`HttpClient.get()`](api/common/http/HttpClient#get) メソッドを使用してGETリクエストを行う必要があります。このメソッドは、2つの引数を取ります。1つ目は、フェッチする文字列のエンドポイントURL、2つ目はリクエストを構成するための*オプション*オブジェクトです（省略可能）。
 
-For example, to fetch configuration data from a hypothetical API using the `HttpClient.get()` method:
+たとえば、`HttpClient.get()` メソッドを使用して、仮説上のAPIから構成データを取得するには、次のようになります。
 
 <docs-code language="ts">
 http.get<Config>('/api/config').subscribe(config => {
-  // process the configuration.
+  // 構成を処理します。
 });
 </docs-code>
 
-Note the generic type argument which specifies that the data returned by the server will be of type `Config`. This argument is optional, and if you omit it then the returned data will have type `any`.
+サーバーによって返されるデータが `Config` 型であることを指定するジェネリック型引数に注意してください。この引数は省略可能であり、省略すると、返されるデータは `any` 型になります。
 
-Tip: If the data has an unknown shape, then a safer alternative to `any` is to use the `unknown` type as the response type.
+Tip: データの形が不明な場合は、`any` 型よりも安全な代替手段として、`unknown` 型をレスポンス型として使用します。
 
-CRITICAL: The generic type of request methods is a type **assertion** about the data returned by the server. `HttpClient` does not verify that the actual return data matches this type.
+CTIRICAL: リクエストメソッドのジェネリック型は、サーバーによって返されるデータに関する**アサーション**です。`HttpClient` は、実際の戻り値データがこの型と一致することを検証しません。
 
-## Fetching other types of data
+## 他のタイプのデータの取得
 
-By default, `HttpClient` assumes that servers will return JSON data. When interacting with a non-JSON API, you can tell `HttpClient` what response type to expect and return when making the request. This is done with the `responseType` option.
+デフォルトでは、`HttpClient` はサーバーがJSONデータを返すことを想定しています。JSON以外のAPIと対話する場合、`HttpClient` にリクエストを行うときに期待されるレスポンス型と返す型を伝えることができます。これは、`responseType` オプションを使用して行います。
 
-| **`responseType` value** | **Returned response type** |
+| **`responseType` 値** | **返されるレスポンス型** |
 | - | - |
-| `'json'` (default) | JSON data of the given generic type |
-| `'text'` | string data |
-| `'arraybuffer'` | [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) containing the raw response bytes |
-| `'blob'` | [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob) instance |
+| `'json'` (デフォルト) | 指定されたジェネリック型の JSON データ |
+| `'text'` | 文字列データ |
+| `'arraybuffer'` | 応答バイトの生のデータを格納した [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) |
+| `'blob'` | [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob) インスタンス |
 
-For example, you can ask `HttpClient` to download the raw bytes of a `.jpeg` image into an `ArrayBuffer`:
+たとえば、`HttpClient` に `.jpeg` イメージの生のバイトを `ArrayBuffer` にダウンロードするように依頼できます。
 
 <docs-code language="ts">
 http.get('/images/dog.jpg', {responseType: 'arraybuffer'}).subscribe(buffer => {
-  console.log('The image is ' + buffer.byteLength + ' bytes large');
+  console.log('画像は ' + buffer.byteLength + ' バイトです');
 });
 </docs-code>
 
-<docs-callout important title="Literal value for `responseType`">
-Because the value of `responseType` affects the type returned by `HttpClient`, it must have a literal type and not a `string` type.
+<docs-callout important title="`responseType` のリテラル値">
+`responseType` の値は、`HttpClient` によって返される型に影響を与えるため、`string` 型ではなく、リテラル型である必要があります。
 
-This happens automatically if the options object passed to the request method is a literal object, but if you're extracting the request options out into a variable or helper method you might need to explicitly specify it as a literal, such as `responseType: 'text' as const`.
+これは、リクエストメソッドに渡されるオプションオブジェクトがリテラルオブジェクトの場合に自動的に発生しますが、リクエストオプションを変数やヘルパーメソッドに抽出している場合は、`responseType: 'text' as const` のように明示的にリテラルとして指定する必要があるかもしれません。
 </docs-callout>
 
-## Mutating server state
+## サーバーの状態を変更する
 
-Server APIs which perform mutations often require making POST requests with a request body specifying the new state or the change to be made.
+変更を伴うサーバーAPIは多くの場合、新しい状態または行うべき変更を指定したリクエストボディを使用してPOSTリクエストを行う必要があります。
 
-The [`HttpClient.post()`](api/common/http/HttpClient#post) method behaves similarly to `get()`, and accepts an additional `body` argument before its options:
+[`HttpClient.post()`](api/common/http/HttpClient#post) メソッドは `get()` と同様に動作し、オプションの前に `body` 引数を追加で受け取ります。
 
 <docs-code language="ts">
 http.post<Config>('/api/config', newConfig).subscribe(config => {
-  console.log('Updated config:', config);
+  console.log('更新された構成:', config);
 });
 </docs-code>
 
-Many different types of values can be provided as the request's `body`, and `HttpClient` will serialize them accordingly:
+さまざまなタイプの値をリクエストの `body` として提供でき、`HttpClient` はそれに応じてシリアル化します。
 
-| **`body` type** | **Serialized as** |
+| **`body` 型** | **シリアル化されるもの** |
 | - | - |
-| string | Plain text |
-| number, boolean, array, or plain object | JSON |
-| [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) | raw data from the buffer |
-| [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob) | raw data with the `Blob`'s content type |
-| [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData) | `multipart/form-data` encoded data |
-| [`HttpParams`](api/common/http/HttpParams) or [`URLSearchParams`](https://developer.mozilla.org/docs/Web/API/URLSearchParams) | `application/x-www-form-urlencoded` formatted string |
+| 文字列 | プレーンテキスト |
+| 数値、ブール値、配列、またはプレーンオブジェクト | JSON |
+| [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) | バッファーからの生データ |
+| [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob) | `Blob` のコンテンツタイプを使用した生データ |
+| [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData) | `multipart/form-data` エンコードされたデータ |
+| [`HttpParams`](api/common/http/HttpParams) または [`URLSearchParams`](https://developer.mozilla.org/docs/Web/API/URLSearchParams) | `application/x-www-form-urlencoded` 形式の文字列 |
 
-IMPORTANT: Remember to `.subscribe()` to mutation request `Observable`s in order to actually fire the request.
+IMPORTANT: 変更リクエスト `Observable` を `.subscribe()` することを忘れないでください。そうしないと、リクエストは実際に発行されません。
 
-## Setting URL parameters
+## URL パラメータの設定
 
-Specify request parameters that should be included in the request URL using the `params` option.
+リクエストURLに含めるべきリクエストパラメータは、`params` オプションを使用して指定します。
 
-Passing an object literal is the simplest way of configuring URL parameters:
+オブジェクトリテラルを渡すことは、URLパラメータを構成するための最も簡単な方法です。
 
 <docs-code language="ts">
 http.get('/api/config', {
@@ -88,9 +88,9 @@ http.get('/api/config', {
 });
 </docs-code>
 
-Alternatively, pass an instance of `HttpParams` if you need more control over the construction or serialization of the parameters.
+あるいは、パラメータの構築やシリアル化をより細かく制御する必要がある場合は、`HttpParams` のインスタンスを渡します。
 
-IMPORTANT: Instances of `HttpParams` are _immutable_ and cannot be directly changed. Instead, mutation methods such as `append()` return a new instance of `HttpParams` with the mutation applied.
+IMPORTANT: `HttpParams` のインスタンスは*変更不可能*であり、直接変更できません。代わりに、`append()` などの変更メソッドは、変更が適用された新しい `HttpParams` のインスタンスを返します。
 
 <docs-code language="ts">
 const baseParams = new HttpParams().set('filter', 'all');
@@ -102,13 +102,13 @@ http.get('/api/config', {
 });
 </docs-code>
 
-You can instantiate `HttpParams` with a custom `HttpParameterCodec` that determines how `HttpClient` will encode the parameters into the URL.
+`HttpParams` を、`HttpClient` がパラメータをURLにエンコードする方法を決定するカスタム `HttpParameterCodec` でインスタンス化できます。
 
-## Setting request headers
+## リクエストヘッダーの設定
 
-Specify request headers that should be included in the request using the `headers` option.
+リクエストに含めるべきリクエストヘッダーは、`headers` オプションを使用して指定します。
 
-Passing an object literal is the simplest way of configuring request headers:
+オブジェクトリテラルを渡すことは、リクエストヘッダーを構成するための最も簡単な方法です。
 
 <docs-code language="ts">
 http.get('/api/config', {
@@ -120,9 +120,9 @@ http.get('/api/config', {
 });
 </docs-code>
 
-Alternatively, pass an instance of `HttpHeaders` if you need more control over the construction of headers
+あるいは、ヘッダーの構築をより細かく制御する必要がある場合は、`HttpHeaders` のインスタンスを渡します。
 
-IMPORTANT: Instances of `HttpHeaders` are _immutable_ and cannot be directly changed. Instead, mutation methods such as `append()` return a new instance of `HttpHeaders` with the mutation applied.
+IMPORTANT: `HttpHeaders` のインスタンスは*変更不可能*であり、直接変更できません。代わりに、`append()` などの変更メソッドは、変更が適用された新しい `HttpHeaders` のインスタンスを返します。
 
 <docs-code language="ts">
 const baseHeaders = new HttpHeaders().set('X-Debug-Level', 'minimal');
@@ -134,34 +134,34 @@ http.get<Config>('/api/config', {
 });
 </docs-code>
 
-## Interacting with the server response events
+## サーバーレスポンスイベントとの対話
 
-For convenience, `HttpClient` by default returns an `Observable` of the data returned by the server (the response body). Occasionally it's desirable to examine the actual response, for example to retrieve specific response headers.
+便宜上、`HttpClient` はデフォルトでサーバーによって返されるデータ（レスポンスボディ）の `Observable` を返します。場合によっては、特定のレスポンスヘッダーを取得するなど、実際のレスポンスを調べる必要がある場合もあります。
 
-To access the entire response, set the `observe` option to `'response'`:
+レスポンス全体にアクセスするには、`observe` オプションを `'response'` に設定します。
 
 <docs-code language="ts">
 http.get<Config>('/api/config', {observe: 'response'}).subscribe(res => {
-  console.log('Response status:', res.status);
-  console.log('Body:', res.body);
+  console.log('レスポンスステータス:', res.status);
+  console.log('ボディ:', res.body);
 });
 </docs-code>
 
-<docs-callout important title="Literal value for `observe`">
-Because the value of `observe` affects the type returned by `HttpClient`, it must have a literal type and not a `string` type.
+<docs-callout important title="`observe` のリテラル値">
+`observe` の値は、`HttpClient` によって返される型に影響を与えるため、`string` 型ではなく、リテラル型である必要があります。
 
-This happens automatically if the options object passed to the request method is a literal object, but if you're extracting the request options out into a variable or helper method you might need to explicitly specify it as a literal, such as `observe: 'response' as const`.
+これは、リクエストメソッドに渡されるオプションオブジェクトがリテラルオブジェクトの場合に自動的に発生しますが、リクエストオプションを変数やヘルパーメソッドに抽出している場合は、`observe: 'response' as const` のように明示的にリテラルとして指定する必要があるかもしれません。
 </docs-callout>
 
-## Receiving raw progress events
+## 生の進捗イベントを受信する
 
-In addition to the response body or response object, `HttpClient` can also return a stream of raw _events_ corresponding to specific moments in the request lifecycle. These events include when the request is sent, when the response header is returned, and when the body is complete. These events can also include _progress events_ which report upload and download status for large request or response bodies.
+`HttpClient` は、レスポンスボディとレスポンスオブジェクトに加えて、リクエストライフサイクルの特定の時点に対応する生の*イベント*のストリームを返せます。これらのイベントには、リクエストが送信されたとき、レスポンスヘッダーが返されたとき、ボディが完了したときなどが含まれます。これらのイベントには、大きなリクエストボディとレスポンスボディのアップロードとダウンロードの状態を報告する*進捗イベント*も含まれる場合があります。
 
-Progress events are disabled by default (as they have a performance cost) but can be enabled with the `reportProgress` option.
+進捗イベントは、デフォルトでは無効になっています（パフォーマンス上のコストがかかるため）が、`reportProgress` オプションを使用して有効にできます。
 
-Note: The optional `fetch` implementation of `HttpClient` does not report _upload_ progress events.
+Note: `HttpClient` のオプションの `fetch` 実装は、*アップロード*の進捗イベントを報告しません。
 
-To observe the event stream, set the `observe` option to `'events'`:
+イベントストリームを観察するには、`observe` オプションを `'events'` に設定します。
 
 <docs-code language="ts">
 http.post('/api/upload', myData, {
@@ -179,57 +179,57 @@ http.post('/api/upload', myData, {
 });
 </docs-code>
 
-<docs-callout important title="Literal value for `observe`">
-Because the value of `observe` affects the type returned by `HttpClient`, it must have a literal type and not a `string` type.
+<docs-callout important title="`observe` のリテラル値">
+`observe` の値は、`HttpClient` によって返される型に影響を与えるため、`string` 型ではなく、リテラル型である必要があります。
 
-This happens automatically if the options object passed to the request method is a literal object, but if you're extracting the request options out into a variable or helper method you might need to explicitly specify it as a literal, such as `observe: 'events' as const`.
+これは、リクエストメソッドに渡されるオプションオブジェクトがリテラルオブジェクトの場合に自動的に発生しますが、リクエストオプションを変数やヘルパーメソッドに抽出している場合は、`observe: 'events' as const` のように明示的にリテラルとして指定する必要があるかもしれません。
 </docs-callout>
 
-Each `HttpEvent` reported in the event stream has a `type` which distinguishes what the event represents:
+イベントストリームで報告される各 `HttpEvent` には、イベントを表す `type` があります。
 
-| **`type` value** | **Event meaning** |
+| **`type` 値** | **イベントの意味** |
 | - | - |
-| `HttpEventType.Sent` | The request has been dispatched to the server |
-| `HttpEventType.UploadProgress` | An `HttpUploadProgressEvent` reporting progress on uploading the request body |
-| `HttpEventType.ResponseHeader` | The head of the response has been received, including status and headers |
-| `HttpEventType.DownloadProgress` | An `HttpDownloadProgressEvent` reporting progress on downloading the response body |
-| `HttpEventType.Response` | The entire response has been received, including the response body |
-| `HttpEventType.User` | A custom event from an Http interceptor.
+| `HttpEventType.Sent` | リクエストがサーバーに送信されました |
+| `HttpEventType.UploadProgress` | リクエストボディのアップロードの進捗状況を報告する `HttpUploadProgressEvent` |
+| `HttpEventType.ResponseHeader` | レスポンスのヘッダーが受信されました。ステータスとヘッダーが含まれています |
+| `HttpEventType.DownloadProgress` | レスポンスボディのダウンロードの進捗状況を報告する `HttpDownloadProgressEvent` |
+| `HttpEventType.Response` | レスポンス全体が受信されました。レスポンスボディが含まれています |
+| `HttpEventType.User` | Http インターセプターからのカスタムイベント |
 
-## Handling request failure
+## リクエスト失敗の処理 {#handling-request-failure}
 
-There are two ways an HTTP request can fail:
+HTTPリクエストは、次の2つの方法で失敗する可能性があります。
 
-* A network or connection error can prevent the request from reaching the backend server.
-* The backend can receive the request but fail to process it, and return an error response.
+* ネットワークエラーまたは接続エラーにより、リクエストがバックエンドサーバーに到達できない場合があります。
+* バックエンドがリクエストを受け取りますが、処理に失敗し、エラーレスポンスを返す場合があります。
 
-`HttpClient` captures both kinds of errors in an `HttpErrorResponse` which it returns through the `Observable`'s error channel. Network errors have a `status` code of `0` and an `error` which is an instance of [`ProgressEvent`](https://developer.mozilla.org/docs/Web/API/ProgressEvent). Backend errors have the failing `status` code returned by the backend, and the error response as the `error`. Inspect the response to identify the error's cause and the appropriate action to handle the error.
+`HttpClient` は、`HttpErrorResponse` に両方の種類のエラーを捕捉し、`Observable` のエラーチャネルを通じて返します。ネットワークエラーの `status` コードは `0` で、`error` は [`ProgressEvent`](https://developer.mozilla.org/docs/Web/API/ProgressEvent) のインスタンスです。バックエンドエラーの `status` コードは、バックエンドによって返された失敗したコードであり、`error` はエラーレスポンスです。レスポンスを調べて、エラーの原因とエラーを処理するための適切なアクションを特定します。
 
-The [RxJS library](https://rxjs.dev/) offers several operators which can be useful for error handling.
+[RxJS ライブラリ](https://rxjs.dev/) は、エラー処理に役立つ演算子をいくつか提供しています。
 
-You can use the `catchError` operator to transform an error response into a value for the UI. This value can tell the UI to display an error page or value, and capture the error's cause if necessary.
+`catchError` 演算子を使用して、エラーレスポンスをUI用の値に変換できます。この値は、UIにエラーページまたは値を表示し、必要に応じてエラーの原因を捕捉します。
 
-Sometimes transient errors such as network interruptions can cause a request to fail unexpectedly, and simply retrying the request will allow it to succeed. RxJS provides several *retry* operators which automatically re-subscribe to a failed `Observable` under certain conditions. For example, the `retry()` operator will automatically attempt to re-subscribe a specified number of times.
+ネットワークの中断など、一時的なエラーにより、予期せずリクエストが失敗することがあります。リクエストを再試行するだけで成功する場合があります。RxJSは、特定の条件下で失敗した `Observable` に自動的に再購読する、複数の*再試行*演算子を提供しています。たとえば、`retry()` 演算子は、指定された回数だけ自動的に再サブスクライブを試みます。
 
-## Http `Observable`s
+## Http `Observable`
 
-Each request method on `HttpClient` constructs and returns an `Observable` of the requested response type. Understanding how these `Observable`s work is important when using `HttpClient`.
+`HttpClient` の各リクエストメソッドは、要求されたレスポンス型の `Observable` を構築して返します。これらの `Observable` の仕組みを理解することは、`HttpClient` を使用する場合に重要です。
 
-`HttpClient` produces what RxJS calls "cold" `Observable`s, meaning that no actual request happens until the `Observable` is subscribed. Only then is the request actually dispatched to the server. Subscribing to the same `Observable` multiple times will trigger multiple backend requests. Each subscription is independent.
+`HttpClient` は、RxJSが「コールド」と呼ぶ `Observable` を生成します。つまり、`Observable` がサブスクライブされるまでは、実際のリクエストは行われません。リクエストが実際にサーバーに送信されるのは、そのときだけです。同じ `Observable` を複数回購読すると、複数のバックエンドリクエストがトリガーされます。各サブスクライブは独立しています。
 
-TIP: You can think of `HttpClient` `Observable`s as _blueprints_ for actual server requests.
+TIP: `HttpClient` の `Observable` は、実際のリクエストの*ブループリント*と考えることができます。
 
-Once subscribed, unsubscribing will abort the in-progress request. This is very useful if the `Observable` is subscribed via the `async` pipe, as it will automatically cancel the request if the user navigates away from the current page. Additionally, if you use the `Observable` with an RxJS combinator like `switchMap`, this cancellation will clean up any stale requests.
+いったんサブスクライブされると、アン購読すると、進行中のリクエストが中止されます。これは、`Observable` が `async` パイプを使用してサブスクライブされている場合に非常に便利です。ユーザーが現在のページから移動すると、リクエストが自動的にキャンセルされます。さらに、`Observable` を `switchMap` などのRxJSコンビネータと使用する場合、このキャンセルによって、古いリクエストがすべてクリーンアップされます。
 
-Once the response returns, `Observable`s from `HttpClient` usually complete (although interceptors can influence this).
+レスポンスが返されると、`HttpClient` からの `Observable` は通常完了します（ただし、インターセプターがこれに影響を与える可能性があります）。
 
-Because of the automatic completion, there is usually no risk of memory leaks if `HttpClient` subscriptions are not cleaned up. However, as with any async operation, we strongly recommend that you clean up subscriptions when the component using them is destroyed, as the subscription callback may otherwise run and encounter errors when it attempts to interact with the destroyed component.
+自動完了のため、`HttpClient` のサブスクライブがクリーンアップされなくても、通常はメモリリークのリスクはありません。ただし、他の非同期操作と同様に、サブスクライブを使用しているコンポーネントが破棄されたときにサブスクライブをクリーンアップすることを強くお勧めします。そうしないと、サブスクライブコールバックが実行され、破棄されたコンポーネントと対話するときにエラーが発生する可能性があります。
 
-TIP: Using the `async` pipe or the `toSignal` operation to subscribe to `Observable`s ensures that subscriptions are disposed properly.
+TIP: `async` パイプまたは `toSignal` 演算子を使用して `Observable` に購読すると、サブスクライブが適切に破棄されます。
 
-## Best practices
+## ベストプラクティス
 
-While `HttpClient` can be injected and used directly from components, generally we recommend you create reusable, injectable services which isolate and encapsulate data access logic. For example, this `UserService` encapsulates the logic to request data for a user by their id:
+`HttpClient` はコンポーネントから直接注入して使用できますが、一般的にはデータアクセスロジックを分離してカプセル化する、再利用できる注入可能なサービスを作成することをお勧めします。たとえば、この `UserService` は、IDでユーザーのデータをリクエストするロジックをカプセル化しています。
 
 <docs-code language="ts">
 @Injectable({providedIn: 'root'})
@@ -242,7 +242,7 @@ export class UserService {
 }
 </docs-code>
 
-Within a component, you can combine `@if` with the `async` pipe to render the UI for the data only after it's finished loading:
+コンポーネント内で、`@if` を `async` パイプと組み合わせて、データの読み込みが完了した後にのみ、データのUIをレンダリングできます。
 
 <docs-code language="ts">
 import { AsyncPipe } from '@angular/common';
@@ -251,8 +251,8 @@ import { AsyncPipe } from '@angular/common';
   imports: [AsyncPipe],
   template: `
     @if (user$ | async; as user) {
-      <p>Name: {{ user.name }}</p>
-      <p>Biography: {{ user.biography }}</p>
+      <p>名前: {{ user.name }}</p>
+      <p>経歴: {{ user.biography }}</p>
     }
   `,
 })

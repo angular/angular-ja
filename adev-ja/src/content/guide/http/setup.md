@@ -1,10 +1,10 @@
-# Setting up `HttpClient`
+# `HttpClient` の設定
 
-Before you can use `HttpClient` in your app, you must configure it using [dependency injection](guide/di).
+`HttpClient` をアプリケーションで使用するには、まず [依存性の注入](guide/di) を使って設定する必要があります。
 
-## Providing `HttpClient` through dependency injection
+## 依存性の注入による `HttpClient` の提供
 
-`HttpClient` is provided using the `provideHttpClient` helper function, which most apps include in the application `providers` in `app.config.ts`.
+`HttpClient` は `provideHttpClient` ヘルパー関数を使って提供されます。ほとんどのアプリケーションは、`app.config.ts` のアプリケーション `providers` にこれを含めます。
 
 <docs-code language="ts">
 export const appConfig: ApplicationConfig = {
@@ -14,32 +14,32 @@ export const appConfig: ApplicationConfig = {
 };
 </docs-code>
 
-If your app is using NgModule-based bootstrap instead, you can include `provideHttpClient` in the providers of your app's NgModule:
+アプリケーションがNgModuleベースのブートストラップを使用している場合は、アプリケーションのNgModuleのプロバイダーに `provideHttpClient` を含めることができます。
 
 <docs-code language="ts">
 @NgModule({
   providers: [
     provideHttpClient(),
   ],
-  // ... other application configuration
+  // ...その他のアプリケーション設定
 })
 export class AppModule {}
 </docs-code>
 
-You can then inject the `HttpClient` service as a dependency of your components, services, or other classes:
+その後、`HttpClient` サービスを、コンポーネント、サービス、またはその他のクラスの依存関係として注入できます。
 
 <docs-code language="ts">
 @Injectable({providedIn: 'root'})
 export class ConfigService {
   constructor(private http: HttpClient) {
-    // This service can now make HTTP requests via `this.http`.
+    // このサービスは、`this.http` を介して HTTP リクエストを実行できるようになりました。
   }
 }
 </docs-code>
 
-## Configuring features of `HttpClient`
+## `HttpClient` の機能の設定
 
-`provideHttpClient` accepts a list of optional feature configurations, to enable or configure the behavior of different aspects of the client. This section details the optional features and their usages.
+`provideHttpClient` は、クライアントのさまざまな側面の動作を有効化または設定するための、オプションの機能設定のリストを受け取ります。このセクションでは、オプションの機能とその使用方法について詳しく説明します。
 
 ### `withFetch`
 
@@ -53,57 +53,57 @@ export const appConfig: ApplicationConfig = {
 };
 </docs-code>
 
-By default, `HttpClient` uses the [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) API to make requests. The `withFetch` feature switches the client to use the [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API) API instead.
+デフォルトでは、`HttpClient` は [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) APIを使ってリクエストを行います。`withFetch` 機能は、クライアントを [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API) APIを代わりに使うように切り替えます。
 
-`fetch` is a more modern API and is available in a few environments where `XMLHttpRequest` is not supported. It does have a few limitations, such as not producing upload progress events.
+`fetch` はより新しいAPIであり、`XMLHttpRequest` がサポートされていないいくつかの環境で使用できます。アップロードの進行状況イベントを生成しないなど、いくつかの制限があります。
 
 ### `withInterceptors(...)`
 
-`withInterceptors` configures the set of interceptor functions which will process requests made through `HttpClient`. See the [interceptor guide](guide/http/interceptors) for more information.
+`withInterceptors` は、`HttpClient` を介して行われたリクエストを処理する、インターセプター関数のセットを設定します。詳細については、[インターセプターガイド](guide/http/interceptors) を参照してください。
 
 ### `withInterceptorsFromDi()`
 
-`withInterceptorsFromDi` includes the older style of class-based interceptors in the `HttpClient` configuration. See the [interceptor guide](guide/http/interceptors) for more information.
+`withInterceptorsFromDi` は、`HttpClient` 設定に、古いスタイルのクラスベースのインターセプターを含めます。詳細については、[インターセプターガイド](guide/http/interceptors) を参照してください。
 
-HELPFUL: Functional interceptors (through `withInterceptors`) have more predictable ordering and we recommend them over DI-based interceptors.
+HELPFUL: 関数インターセプター（`withInterceptors` を介して）は、より予測可能な順序を持ち、DIベースのインターセプターよりも推奨されます。
 
 ### `withRequestsMadeViaParent()`
 
-By default, when you configure `HttpClient` using `provideHttpClient` within a given injector, this configuration overrides any configuration for `HttpClient` which may be present in the parent injector.
+デフォルトでは、`provideHttpClient` を使って特定のインジェクター内で `HttpClient` を設定すると、この設定は、親インジェクターに存在する可能性のある `HttpClient` の設定を上書きします。
 
-When you add `withRequestsMadeViaParent()`, `HttpClient` is configured to instead pass requests up to the `HttpClient` instance in the parent injector, once they've passed through any configured interceptors at this level. This is useful if you want to _add_ interceptors in a child injector, while still sending the request through the parent injector's interceptors as well.
+`withRequestsMadeViaParent()` を追加すると、`HttpClient` は、このレベルで設定されたインターセプターを通過した後、親インジェクターの `HttpClient` インスタンスにリクエストを渡すように設定されます。これは、親インジェクターのインターセプターも通過しながら、子インジェクターにインターセプターを追加したい場合に役立ちます。
 
-CRITICAL: You must configure an instance of `HttpClient` above the current injector, or this option is not valid and you'll get a runtime error when you try to use it.
+CRITICAL: 現在のインジェクターよりも上の `HttpClient` のインスタンスを設定する必要があります。そうしないと、このオプションは無効となり、使用しようとすると実行時エラーが発生します。
 
 ### `withJsonpSupport()`
 
-Including `withJsonpSupport` enables the `.jsonp()` method on `HttpClient`, which makes a GET request via the [JSONP convention](https://en.wikipedia.org/wiki/JSONP) for cross-domain loading of data.
+`withJsonpSupport` を含めると、`HttpClient` の `.jsonp()` メソッドが有効になり、[JSONP 規約](https://en.wikipedia.org/wiki/JSONP) を介してGETリクエストを行い、データのクロスドメインロードを行います。
 
-HELPFUL: Prefer using [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) to make cross-domain requests instead of JSONP when possible.
+HELPFUL: 可能であれば、JSONPの代わりに [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) を使ってクロスドメインリクエストを行うことをお勧めします。
 
 ### `withXsrfConfiguration(...)`
 
-Including this option allows for customization of `HttpClient`'s built-in XSRF security functionality. See the [security guide](best-practices/security) for more information.
+このオプションを含めると、`HttpClient` の組み込みのXSRFセキュリティ機能をカスタマイズできます。詳細については、[セキュリティガイド](best-practices/security) を参照してください。
 
 ### `withNoXsrfProtection()`
 
-Including this option disables `HttpClient`'s built-in XSRF security functionality. See the [security guide](best-practices/security) for more information.
+このオプションを含めると、`HttpClient` の組み込みのXSRFセキュリティ機能が無効になります。詳細については、[セキュリティガイド](best-practices/security) を参照してください。
 
-## `HttpClientModule`-based configuration
+## `HttpClientModule` ベースの設定
 
-Some applications may configure `HttpClient` using the older API based on NgModules.
+一部のアプリケーションでは、NgModuleベースの古いAPIを使って `HttpClient` を設定している場合があります。
 
-This table lists the NgModules available from `@angular/common/http` and how they relate to the provider configuration functions above.
+この表は、`@angular/common/http` から使用できるNgModuleと、上記のプロバイダー設定関数との関係を示しています。
 
-| **NgModule**                            | `provideHttpClient()` equivalent              |
+| **NgModule**                            | `provideHttpClient()` に相当する               |
 | --------------------------------------- | --------------------------------------------- |
 | `HttpClientModule`                      | `provideHttpClient(withInterceptorsFromDi())` |
 | `HttpClientJsonpModule`                 | `withJsonpSupport()`                          |
 | `HttpClientXsrfModule.withOptions(...)` | `withXsrfConfiguration(...)`                  |
 | `HttpClientXsrfModule.disable()`        | `withNoXsrfProtection()`                      |
 
-<docs-callout important title="Use caution when using HttpClientModule in multiple injectors">
-When `HttpClientModule` is present in multiple injectors, the behavior of interceptors is poorly defined and depends on the exact options and provider/import ordering.
+<docs-callout important title="複数のインジェクターで HttpClientModule を使用する場合、注意してください。">
+`HttpClientModule` が複数のインジェクターに存在する場合、インターセプターの動作は明確に定義されておらず、オプションやプロバイダー/インポートの順序に依存します。
 
-Prefer `provideHttpClient` for multi-injector configurations, as it has more stable behavior. See the `withRequestsMadeViaParent` feature above.
+マルチインジェクター構成には、`provideHttpClient` を使用することをお勧めします。これは、より安定した動作をします。上記の `withRequestsMadeViaParent` 機能を参照してください。
 </docs-callout>

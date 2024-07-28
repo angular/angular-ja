@@ -204,3 +204,12 @@ rules:
   - expected: シングルページアプリケーション
     pattern:
       - 単一ページアプリケーション
+
+  - expected: 原始状態
+    pattern:
+      - プリスティン
+
+  - expected: バリデーター
+    pattern: 
+      - /バリデータ(?!ー)/
+      - 検証子

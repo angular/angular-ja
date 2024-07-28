@@ -1,14 +1,14 @@
-# Typed Forms
+## 型付きフォーム
 
-As of Angular 14, reactive forms are strictly typed by default.
+Angular 14から、リアクティブフォームはデフォルトで厳密に型付けされるようになりました。
 
-As background for this guide, you should already be familiar with [Angular Reactive Forms](guide/forms/reactive-forms).
+このガイドの背景として、[Angular リアクティブフォーム](guide/forms/reactive-forms) に既に精通している必要があります。
 
-## Overview of Typed Forms
+## 型付きフォームの概要
 
-<docs-video src="https://www.youtube.com/embed/L-odCf4MfJc" alt="Typed Forms in Angular" />
+<docs-video src="https://www.youtube.com/embed/L-odCf4MfJc" alt="Angular の型付きフォーム" />
 
-With Angular reactive forms, you explicitly specify a *form model*. As a simple example, consider this basic user login form:
+Angularリアクティブフォームでは、*フォームモデル* を明示的に指定します。単純な例として、この基本的なユーザーログインフォームを考えてみましょう。
 
 ```ts
 const login = new FormGroup({
@@ -17,23 +17,23 @@ const login = new FormGroup({
 });
 ```
 
-Angular provides many APIs for interacting with this `FormGroup`. For example, you may call `login.value`, `login.controls`, `login.patchValue`, etc. (For a full API reference, see the [API documentation](api/forms/FormGroup).)
+Angularは、この `FormGroup` と対話するための多くのAPIを提供しています。たとえば `login.value` や `login.controls`、`login.patchValue` などを呼び出せます。（完全なAPIリファレンスについては、[API ドキュメント](api/forms/FormGroup) を参照してください。）
 
-In previous Angular versions, most of these APIs included `any` somewhere in their types, and interacting with the structure of the controls, or the values themselves, was not type-safe. For example: you could write the following invalid code:
+以前のバージョンのAngularでは、これらのAPIのほとんどは、その型の中にどこかで `any` を含んでおり、コントロールの構造や値そのものと対話することが型安全ではありませんでした。たとえば、次のような無効なコードを書けてしまいます。
 
 ```ts
 const emailDomain = login.value.email.domain;
 ```
 
-With strictly typed reactive forms, the above code does not compile, because there is no `domain` property on `email`.
+厳密に型付けされたリアクティブフォームでは、上記のコードはコンパイルされません。なぜなら、`email` には `domain` プロパティがないからです。
 
-In addition to the added safety, the types enable a variety of other improvements, such as better autocomplete in IDEs, and an explicit way to specify form structure.
+追加された安全性に加えて、型はIDEでのより良いオートコンプリートや、フォーム構造を明示的に指定する方法など、さまざまな他の改善を可能にします。
 
-These improvements currently apply only to *reactive* forms (not [*template-driven* forms](guide/forms/template-driven-forms)).
+これらの改善は、現時点では *リアクティブ* フォーム（[*テンプレート駆動* フォーム](guide/forms/template-driven-forms) ではありません）のみに適用されます。
 
-## Untyped Forms
+## 型なしフォーム
 
-Non-typed forms are still supported, and will continue to work as before. To use them, you must import the `Untyped` symbols from `@angular/forms`:
+型なしフォームは引き続きサポートされており、これまでどおり動作します。それらを使用するには、`@angular/forms` から `Untyped` シンボルをインポートする必要があります。
 
 ```ts
 const login = new UntypedFormGroup({
@@ -42,21 +42,21 @@ const login = new UntypedFormGroup({
 });
 ```
 
-Each `Untyped` symbol has exactly the same semantics as in previous Angular version. By removing the `Untyped` prefixes, you can incrementally enable the types.
+各 `Untyped` シンボルは、以前のバージョンのAngularとまったく同じ意味を持ちます。`Untyped` プレフィックスを削除することで、段階的に型を有効にできます。
 
-## `FormControl`: Getting Started
+## `FormControl`: はじめに
 
-The simplest possible form consists of a single control:
+最も単純なフォームは、単一のコントロールで構成されます。
 
 ```ts
 const email = new FormControl('angularrox@gmail.com');
 ```
 
-This control will be automatically inferred to have the type `FormControl<string|null>`. TypeScript will automatically enforce this type throughout the [`FormControl` API](api/forms/FormControl), such as `email.value`, `email.valueChanges`, `email.setValue(...)`, etc.
+このコントロールは、自動的に `FormControl<string|null>` 型であると推測されます。TypeScriptは、`email.value`、`email.valueChanges`、`email.setValue(...)` など、[`FormControl` API](api/forms/FormControl) 全体にわたってこの型を自動的に強制します。
 
-### Nullability
+### ヌラビリティ
 
-You might wonder: why does the type of this control include `null`?  This is because the control can become `null` at any time, by calling reset:
+疑問に思うかもしれません。なぜこのコントロールの型には `null` が含まれているのでしょうか？これは、コントロールがいつでも `reset` を呼び出すことで `null` になる可能性があるためです。
 
 ```ts
 const email = new FormControl('angularrox@gmail.com');
@@ -64,7 +64,7 @@ email.reset();
 console.log(email.value); // null
 ```
 
-TypeScript will enforce that you always handle the possibility that the control has become `null`. If you want to make this control non-nullable, you may use the `nonNullable` option. This will cause the control to reset to its initial value, instead of `null`:
+TypeScriptは、コントロールが `null` になっている可能性を常に処理するように強制します。このコントロールをヌラブルでないものにする場合は、`nonNullable` オプションを使用できます。これにより、コントロールは `null` ではなく、初期値にリセットされます。
 
 ```ts
 const email = new FormControl('angularrox@gmail.com', {nonNullable: true});
@@ -72,44 +72,44 @@ email.reset();
 console.log(email.value); // angularrox@gmail.com
 ```
 
-To reiterate, this option affects the runtime behavior of your form when `.reset()` is called, and should be flipped with care.
+繰り返しますが、このオプションは `.reset()` が呼び出されたときのフォームのランタイム動作に影響を与え、注意深く切り替える必要があります。
 
-### Specifying an Explicit Type
+### 明示的な型の指定
 
-It is possible to specify the type, instead of relying on inference. Consider a control that is initialized to `null`. Because the initial value is `null`, TypeScript will infer `FormControl<null>`, which is narrower than we want.
+推測に頼るのではなく、型を指定できます。初期値が `null` であるコントロールを考えてみましょう。初期値が `null` であるため、TypeScriptは `FormControl<null>` を推測し、これは私たちが望むよりも狭いです。
 
 ```ts
 const email = new FormControl(null);
-email.setValue('angularrox@gmail.com'); // Error!
+email.setValue('angularrox@gmail.com'); // エラー！
 ```
 
-To prevent this, we explicitly specify the type as `string|null`:
+これを防ぐために、型を `string|null` として明示的に指定します。
 
 ```ts
 const email = new FormControl<string|null>(null);
 email.setValue('angularrox@gmail.com');
 ```
 
-## `FormArray`: Dynamic, Homogenous Collections
+## `FormArray`: 動的な同種コレクション
 
-A `FormArray` contains an open-ended list of controls. The type parameter corresponds to the type of each inner control:
+`FormArray` は、コントロールのオープンエンドリストを含んでいます。型パラメーターは、各内部コントロールの型に対応します。
 
 ```ts
 const names = new FormArray([new FormControl('Alex')]);
 names.push(new FormControl('Jess'));
 ```
 
-This `FormArray` will have the inner controls type `FormControl<string|null>`.
+この `FormArray` は、内部コントロール型 `FormControl<string|null>` を持つことになります。
 
-If you want to have multiple different element types inside the array, you must use `UntypedFormArray`, because TypeScript cannot infer which element type will occur at which position.
+配列内に複数の異なる要素型を含めたい場合は、`UntypedFormArray` を使用する必要があります。なぜなら、TypeScriptはどの要素型がどの位置に発生するかを推測できないからです。
 
-## `FormGroup` and `FormRecord`
+## `FormGroup` と `FormRecord`
 
-Angular provides the `FormGroup` type for forms with an enumerated set of keys, and a type called `FormRecord`, for open-ended or dynamic groups.
+Angularは、列挙されたキーセットを持つフォームに `FormGroup` 型を提供し、オープンエンドまたは動的なグループに `FormRecord` という型を提供します。
 
-### Partial Values
+### 部分的な値
 
-Consider again a login form:
+再びログインフォームを考えてみましょう。
 
 ```ts
 const login = new FormGroup({
@@ -118,17 +118,17 @@ const login = new FormGroup({
 });
 ```
 
-On any `FormGroup`, it is [possible to disable controls](api/forms/FormGroup). Any disabled control will not appear in the group's value.
+すべての `FormGroup` では、[コントロールを無効にすることができます](api/forms/FormGroup)。無効なコントロールは、グループの値に表示されません。
 
-As a consequence, the type of `login.value` is `Partial<{email: string, password: string}>`. The `Partial` in this type means that each member might be undefined.
+その結果、`login.value` の型は `Partial<{email: string, password: string}>` になります。この型における `Partial` は、各メンバーが `undefined` である可能性があることを意味します。
 
-More specifically, the type of `login.value.email` is `string|undefined`, and TypeScript will enforce that you handle the possibly `undefined` value (if you have `strictNullChecks` enabled).
+より具体的には、`login.value.email` の型は `string|undefined` であり、TypeScriptは、`undefined` である可能性のある値を処理するように強制します（`strictNullChecks` を有効にしている場合）。
 
-If you want to access the value *including* disabled controls, and thus bypass possible `undefined` fields, you can use `login.getRawValue()`.
+無効なコントロールを含む値にアクセスしたい場合、つまり `undefined` である可能性のあるフィールドをバイパスしたい場合は、`login.getRawValue()` を使用できます。
 
-### Optional Controls and Dynamic Groups
+### オプションのコントロールと動的グループ
 
-Some forms have controls that may or may not be present, which can be added and removed at runtime. You can represent these controls using *optional fields*:
+一部のフォームには、存在する可能性がある場合とない場合があるコントロールが含まれており、実行時に追加または削除できます。これらのコントロールは、*オプションフィールド* を使用して表すことができます。
 
 ```ts
 interface LoginForm {
@@ -144,32 +144,32 @@ const login = new FormGroup<LoginForm>({
 login.removeControl('password');
 ```
 
-In this form, we explicitly specify the type, which allows us to make the `password` control optional. TypeScript will enforce that only optional controls can be added or removed.
+このフォームでは、型を明示的に指定しているため、`password` コントロールをオプションにできます。TypeScriptは、オプションのコントロールのみを追加または削除できるように強制します。
 
 ### `FormRecord`
 
-Some `FormGroup` usages do not fit the above pattern because the keys are not known ahead of time. The `FormRecord` class is designed for that case:
+一部の `FormGroup` の使用方法は、上記の例に当てはまりません。なぜなら、キーが事前にわからないからです。`FormRecord` クラスは、そのケース用に設計されています。
 
 ```ts
 const addresses = new FormRecord<FormControl<string|null>>({});
 addresses.addControl('Andrew', new FormControl('2340 Folsom St'));
 ```
 
-Any control of type `string|null` can be added to this `FormRecord`.
+`string|null` 型の任意のコントロールを、この `FormRecord` に追加できます。
 
-If you need a `FormGroup` that is both dynamic (open-ended) and heterogeneous (the controls are different types), no improved type safety is possible, and you should use `UntypedFormGroup`.
+動的（オープンエンド）でかつ異種（コントロールが異なる型である）な `FormGroup` が必要な場合、型安全性の向上は不可能であり、`UntypedFormGroup` を使用する必要があります。
 
-A `FormRecord` can also be built with the `FormBuilder`:
+`FormRecord` は、`FormBuilder` を使用して構築もできます。
 
 ```ts
 const addresses = fb.record({'Andrew': '2340 Folsom St'});
 ```
 
-## `FormBuilder` and `NonNullableFormBuilder`
+## `FormBuilder` と `NonNullableFormBuilder`
 
-The `FormBuilder` class has been upgraded to support the new types as well, in the same manner as the above examples.
+`FormBuilder` クラスは、上記の例と同じように、新しい型をサポートするようにアップグレードされました。
 
-Additionally, an additional builder is available: `NonNullableFormBuilder`. This type is shorthand for specifying `{nonNullable: true}` on every control, and can eliminate significant boilerplate from large non-nullable forms. You can access it using the `nonNullable` property on a `FormBuilder`:
+さらに、追加のビルダー `NonNullableFormBuilder` が使用できます。この型は、すべてのコントロールに `nonNullable: true}` を指定するための省略記号であり、大きなヌラブルでないフォームからかなりのボイラープレートを排除できます。`FormBuilder` の `nonNullable` プロパティを使用してアクセスできます。
 
 ```ts
 const fb = new FormBuilder();
@@ -179,6 +179,6 @@ const login = fb.nonNullable.group({
 });
 ```
 
-On the above example, both inner controls will be non-nullable (i.e. `nonNullable` will be set).
+上記の例では、両方の内部コントロールはヌラブルではありません（つまり、`nonNullable` が設定されます）。
 
-You can also inject it using the name `NonNullableFormBuilder`.
+`NonNullableFormBuilder` という名前を使用した注入もできます。

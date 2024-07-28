@@ -1,143 +1,143 @@
-# Validating form input
+# フォーム入力の検証
 
-You can improve overall data quality by validating user input for accuracy and completeness.
-This page shows how to validate user input from the UI and display useful validation messages, in both reactive and template-driven forms.
+正確性と完全性を確保するために、ユーザー入力を検証することで、データ品質を全体的に向上させることができます。
+このページでは、UIからのユーザー入力を検証し、リアクティブフォームとテンプレート駆動フォームの両方で、役立つ検証メッセージを表示する方法について説明します。
 
-## Validating input in template-driven forms
+## テンプレート駆動フォームでの入力検証
 
-To add validation to a template-driven form, you add the same validation attributes as you would with [native HTML form validation](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation).
-Angular uses directives to match these attributes with validator functions in the framework.
+テンプレート駆動フォームに検証を追加するには、[ネイティブHTMLフォーム検証](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation)の場合と同じように、検証属性を追加します。
+Angularは、これらの属性をフレームワーク内のバリデーター関数と一致させるためにディレクティブを使用します。
 
-Every time the value of a form control changes, Angular runs validation and generates either a list of validation errors that results in an `INVALID` status, or null, which results in a VALID status.
+フォームコントロールの値が変更されるたびに、Angularは検証し、検証エラーのリスト（`INVALID`ステータスをもたらす）または`null`（`VALID`ステータスをもたらす）を生成します。
 
-You can then inspect the control's state by exporting `ngModel` to a local template variable.
-The following example exports `NgModel` into a variable called `name`:
+その後、`ngModel`をローカルテンプレート変数にエクスポートすることで、コントロールの状態を調べることができます。
+次の例では、`NgModel`を`name`という変数にエクスポートします。
 
 <docs-code header="template/actor-form-template.component.html (name)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-with-error-msg"/>
 
-Notice the following features illustrated by the example.
+例で示されている次の機能に注目してください。
 
-* The `<input>` element carries the HTML validation attributes: `required` and `minlength`.
-    It also carries a custom validator directive, `forbiddenName`.
-    For more information, see the [Custom validators](#defining-custom-validators) section.
+* `<input>`要素には、HTML検証属性(`required`と`minlength`)があります。
+    また、カスタムバリデーターディレクティブ`forbiddenName`もあります。
+    詳細については、[カスタムバリデーター](#defining-custom-validators)セクションを参照してください。
 
-* `#name="ngModel"` exports `NgModel` into a local variable called `name`.
-    `NgModel` mirrors many of the properties of its underlying `FormControl` instance, so you can use this in the template to check for control states such as `valid` and `dirty`.
-    For a full list of control properties, see the [AbstractControl](api/forms/AbstractControl) API reference.
+* `#name="ngModel"`は、`NgModel`を`name`というローカル変数にエクスポートします。
+    `NgModel`は、基になる`FormControl`インスタンスの多くのプロパティをミラーリングしているため、テンプレート内でこれを使用して、`valid`や`dirty`などのコントロールの状態を確認できます。
+    コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
 
-  * The `*ngIf` on the `<div>` element reveals a set of nested message `divs` but only if the `name` is invalid and the control is either `dirty` or `touched`.
+  * `<div>`要素の`*ngIf`は、入れ子になったメッセージの`div`のセットを明らかにしますが、`name`が無効で、コントロールが`dirty`または`touched`の場合のみです。
 
-  * Each nested `<div>` can present a custom message for one of the possible validation errors.
-        There are messages for `required`, `minlength`, and `forbiddenName`.
+  * 各入れ子になった`<div>`は、考えられる検証エラーのいずれかについて、カスタムメッセージを表示できます。
+        `required`、`minlength`、`forbiddenName`のメッセージがあります。
 
-HELPFUL: To prevent the validator from displaying errors before the user has a chance to edit the form, you should check for either the `dirty` or `touched` states in a control.
+HELPFUL: ユーザーがフォームを編集する機会がある前に、バリデーターがエラーを表示しないようにするには、コントロールの`dirty`または`touched`状態のいずれかをチェックする必要があります。
 
-* When the user changes the value in the watched field, the control is marked as "dirty"
-* When the user blurs the form control element, the control is marked as "touched"
+* ユーザーが監視対象のフィールドの値を変更すると、コントロールは「dirty」としてマークされます。
+* ユーザーがフォームコントロール要素からフォーカスを外すと、コントロールは「touched」としてマークされます。
 
-## Validating input in reactive forms
+## リアクティブフォームでの入力検証
 
-In a reactive form, the source of truth is the component class.
-Instead of adding validators through attributes in the template, you add validator functions directly to the form control model in the component class.
-Angular then calls these functions whenever the value of the control changes.
+リアクティブフォームでは、真実の源はコンポーネントクラスです。
+テンプレートで属性を通じてバリデーターを追加する代わりに、コンポーネントクラスのフォームコントロールモデルに直接バリデーター関数を追加します。
+その後、Angularは、コントロールの値が変更されるたびにこれらの関数を呼び出します。
 
-### Validator functions
+### バリデーター関数
 
-Validator functions can be either synchronous or asynchronous.
+バリデーター関数は、同期または非同期にすることができます。
 
-| Validator type   | Details |
+| バリデーターの種類   | 詳細 |
 |:---              |:---     |
-| Sync validators  | Synchronous functions that take a control instance and immediately return either a set of validation errors or `null`. Pass these in as the second argument when you instantiate a `FormControl`.                       |
-| Async validators | Asynchronous functions that take a control instance and return a Promise or Observable that later emits a set of validation errors or `null`. Pass these in as the third argument when you instantiate a `FormControl`. |
+| 同期バリデーター  | コントロールインスタンスを受け取り、検証エラーのセットまたは`null`をすぐに返す同期関数。`FormControl`をインスタンス化する際に、第2引数として渡します。                       |
+| 非同期バリデーター | コントロールインスタンスを受け取り、後で検証エラーのセットまたは`null`を発行するPromiseまたはObservableを返す非同期関数。`FormControl`をインスタンス化する際に、第3引数として渡します。 |
 
-For performance reasons, Angular only runs async validators if all sync validators pass.
-Each must complete before errors are set.
+パフォーマンス上の理由から、Angularは、すべての同期バリデーターが合格した場合にのみ非同期バリデーターを実行します。
+各バリデーターは、エラーが設定される前に完了する必要があります。
 
-### Built-in validator functions
+### 組み込みのバリデーター関数
 
-You can choose to [write your own validator functions](#defining-custom-validators), or you can use some of Angular's built-in validators.
+[独自のバリデーター関数](#defining-custom-validators)を作成することも、Angularの組み込みのバリデーターのいくつかを使用することもできます。
 
-The same built-in validators that are available as attributes in template-driven forms, such as `required` and `minlength`, are all available to use as functions from the `Validators` class.
-For a full list of built-in validators, see the [Validators](api/forms/Validators) API reference.
+`required`や`minlength`など、テンプレート駆動フォームで属性として使用できるものと同じ組み込みバリデーターはすべて、`Validators`クラスから関数として使用できます。
+組み込みのバリデーターの完全なリストについては、[Validators](api/forms/Validators) APIリファレンスを参照してください。
 
-To update the actor form to be a reactive form, use some of the same
-built-in validators —this time, in function form, as in the following example.
+アクターフォームをリアクティブフォームに更新するには、いくつかの組み込みバリデーターを使用します。
+今回は、関数形式で、次の例のようにします。
 
 <docs-code header="reactive/actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="form-group"/>
 
-In this example, the `name` control sets up two built-in validators —`Validators.required` and `Validators.minLength(4)`— and one custom validator, `forbiddenNameValidator`.
+この例では、`name`コントロールは、2つの組み込みバリデーター(`Validators.required`と`Validators.minLength(4)`)と、1つのカスタムバリデーター`forbiddenNameValidator`を設定しています。
 
-All of these validators are synchronous, so they are passed as the second argument.
-Notice that you can support multiple validators by passing the functions in as an array.
+これらすべてのバリデーターは同期であるため、第2引数として渡されます。
+関数を配列として渡すことで、複数のバリデーターをサポートできることに注意してください。
 
-This example also adds a few getter methods.
-In a reactive form, you can always access any form control through the `get` method on its parent group, but sometimes it's useful to define getters as shorthand for the template.
+この例では、いくつかのゲッターメソッドも追加されています。
+リアクティブフォームでは、常に親グループの`get`メソッドを通じて任意のフォームコントロールにアクセスできますが、テンプレートの省略形としてゲッターを定義することが便利な場合があります。
 
-If you look at the template for the `name` input again, it is fairly similar to the template-driven example.
+`name`入力のテンプレートをもう一度見ると、テンプレート駆動の例とかなり似ています。
 
 <docs-code header="reactive/actor-form-reactive.component.html (name with error msg)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="name-with-error-msg"/>
 
-This form differs from the template-driven version in that it no longer exports any directives. Instead, it uses the `name` getter defined in  the component class.
+このフォームは、テンプレート駆動バージョンとは、ディレクティブをエクスポートしなくなった点が異なります。代わりに、コンポーネントクラスで定義された`name`ゲッターを使用します。
 
-Notice that the `required` attribute is still present in the template. Although it's not necessary for validation, it should be retained for accessibility purposes.
+`required`属性は、テンプレートにまだ存在することに注意してください。検証には必要ありませんが、アクセシビリティの目的で保持する必要があります。
 
-## Defining custom validators
+## カスタムバリデーターの定義 {#defining-custom-validators}
 
-The built-in validators don't always match the exact use case of your application, so you sometimes need to create a custom validator.
+組み込みのバリデーターは、アプリケーションのユースケースに常に一致するわけではありません。そのため、カスタムバリデーターを作成する必要がある場合があります。
 
-Consider the `forbiddenNameValidator` function from the previous example.
-Here's what the definition of that function looks like.
+前の例の`forbiddenNameValidator`関数を考えてみてください。
+その関数の定義は次のようになります。
 
 <docs-code header="shared/forbidden-name.directive.ts (forbiddenNameValidator)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="custom-validator"/>
 
-The function is a factory that takes a regular expression to detect a *specific* forbidden name and returns a validator function.
+関数は、*特定の*禁止されている名前を検出するための正規表現を受け取り、バリデーター関数を返すファクトリです。
 
-In this sample, the forbidden name is "bob", so the validator rejects any actor name containing "bob".
-Elsewhere it could reject "alice" or any name that the configuring regular expression matches.
+このサンプルでは、禁止されている名前は「bob」なので、バリデーターは「bob」を含むアクター名をすべて拒否します。
+他の場所では、「alice」や、構成された正規表現に一致する名前を拒否することもできます。
 
-The `forbiddenNameValidator` factory returns the configured validator function.
-That function takes an Angular control object and returns *either* null if the control value is valid *or* a validation error object.
-The validation error object typically has a property whose name is the validation key, `'forbiddenName'`, and whose value is an arbitrary dictionary of values that you could insert into an error message, `{name}`.
+`forbiddenNameValidator`ファクトリは、構成されたバリデーター関数を返します。
+その関数はAngularコントロールオブジェクトを受け取り、コントロール値が有効な場合は`null`を返し、無効な場合は検証エラーオブジェクトを返します。
+検証エラーオブジェクトには通常、検証キーの名前である`'forbiddenName'`というプロパティと、エラーメッセージに挿入できる任意の値の辞書である`{name}`という値を持つプロパティがあります。
 
-Custom async validators are similar to sync validators, but they must instead return a Promise or observable that later emits null or a validation error object.
-In the case of an observable, the observable must complete, at which point the form uses the last value emitted for validation.
+カスタム非同期バリデーターは同期バリデーターに似ていますが、代わりに後で`null`または検証エラーオブジェクトを発行するPromiseまたはオブザーバブルを返す必要があります。
+オブザーバブルの場合、オブザーバブルは完了する必要があります。その時点で、フォームは最後の発行された値を検証に使用します。
 
-### Adding custom validators to reactive forms
+### カスタムバリデーターをリアクティブフォームに追加する
 
-In reactive forms, add a custom validator by passing the function directly to the `FormControl`.
+リアクティブフォームでは、`FormControl`に直接関数を渡すことで、カスタムバリデーターを追加します。
 
 <docs-code header="reactive/actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="custom-validator"/>
 
-### Adding custom validators to template-driven forms
+### カスタムバリデーターをテンプレート駆動フォームに追加する
 
-In template-driven forms, add a directive to the template, where the directive wraps the validator function.
-For example, the corresponding `ForbiddenValidatorDirective` serves as a wrapper around the `forbiddenNameValidator`.
+テンプレート駆動フォームでは、テンプレートにディレクティブを追加します。ディレクティブは、バリデーター関数をラップします。
+たとえば、対応する`ForbiddenValidatorDirective`は、`forbiddenNameValidator`のラッパーとして機能します。
 
-Angular recognizes the directive's role in the validation process because the directive registers itself with the `NG_VALIDATORS` provider, as shown in the following example.
-`NG_VALIDATORS` is a predefined provider with an extensible collection of validators.
+Angularは、ディレクティブが`NG_VALIDATORS`プロバイダーに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。次の例に示すように。
+`NG_VALIDATORS`は、拡張可能なバリデーターのコレクションを持つ、定義済みのプロバイダーです。
 
 <docs-code header="shared/forbidden-name.directive.ts (providers)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="directive-providers"/>
 
-The directive class then implements the `Validator` interface, so that it can easily integrate with Angular forms.
-Here is the rest of the directive to help you get an idea of how it all comes together.
+その後、ディレクティブクラスは`Validator`インターフェースを実装するため、Angularフォームと簡単に統合できます。
+以下は、ディレクティブ全体の概要です。
 
 <docs-code header="shared/forbidden-name.directive.ts (directive)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="directive"/>
 
-Once the `ForbiddenValidatorDirective` is ready, you can add its selector, `appForbiddenName`, to any input element to activate it.
-For example:
+`ForbiddenValidatorDirective`の準備ができたら、セレクター`appForbiddenName`を入力要素に追加して、アクティブ化できます。
+たとえば、次のとおりです。
 
 <docs-code header="template/actor-form-template.component.html (forbidden-name-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-input"/>
 
-HELPFUL: Notice that the custom validation directive is instantiated with `useExisting` rather than `useClass`.
-The registered validator must be *this instance* of the `ForbiddenValidatorDirective` —the instance in the form with its `forbiddenName` property bound to "bob".
+HELPFUL: カスタム検証ディレクティブが`useExisting`ではなく`useClass`でインスタンス化されていることに注意してください。
+登録されたバリデーターは、`ForbiddenValidatorDirective`の*このインスタンス*である必要があります。フォーム内のインスタンスで、`forbiddenName`プロパティが「bob」にバインドされています。
 
-If you were to replace `useExisting` with `useClass`, then you'd be registering a new class instance, one that doesn't have a `forbiddenName`.
+`useExisting`を`useClass`に置き換えると、`forbiddenName`を持たない新しいクラスインスタンスを登録することになります。
 
-## Control status CSS classes
+## コントロールステータスCSSクラス {#control-status-css-classes}
 
-Angular automatically mirrors many control properties onto the form control element as CSS classes.
-Use these classes to style form control elements according to the state of the form.
-The following classes are currently supported.
+Angularは、多くのコントロールプロパティをフォームコントロール要素にCSSクラスとして自動的にミラーリングします。
+これらのクラスを使用して、フォームの状態に応じてフォームコントロール要素のスタイルを設定します。
+現在サポートされているクラスは次のとおりです。
 
 * `.ng-valid`
 * `.ng-invalid`
@@ -146,30 +146,30 @@ The following classes are currently supported.
 * `.ng-dirty`
 * `.ng-untouched`
 * `.ng-touched`
-* `.ng-submitted` \(enclosing form element only\)
+* `.ng-submitted` （囲んでいるフォーム要素のみ）
 
-In the following example, the actor form uses the `.ng-valid` and `.ng-invalid` classes to
-set the color of each form control's border.
+次の例では、アクターフォームは`.ng-valid`と`.ng-invalid`クラスを使用して、
+各フォームコントロールの境界線の色を設定しています。
 
 <docs-code header="forms.css (status classes)" path="adev/src/content/examples/form-validation/src/assets/forms.css"/>
 
-## Cross-field validation
+## クロスフィールド検証
 
-A cross-field validator is a [custom validator](#defining-custom-validators "Read about custom validators") that compares the values of different fields in a form and accepts or rejects them in combination.
-For example, you might have a form that offers mutually incompatible options, so that if the user can choose A or B, but not both.
-Some field values might also depend on others; a user might be allowed to choose B only if A is also chosen.
+クロスフィールドバリデーターは、フォーム内の異なるフィールドの値を比較し、組み合わせで受け入れるか拒否する[カスタムバリデーター](#defining-custom-validators "カスタムバリデーターについて読む")です。
+たとえば、互いに非互換なオプションを提供するフォームがある場合、ユーザーはAまたはBを選択できますが、両方は選択できません。
+フィールドの値によっては、他の値に依存する場合もあります。ユーザーは、Aを選択した場合にのみBを選択できます。
 
-The following cross validation examples show how to do the following:
+次のクロス検証の例は、次の方法を示しています。
 
-* Validate reactive or template-based form input based on the values of two sibling controls,
-* Show a descriptive error message after the user interacted with the form and the validation failed.
+* 2つの兄弟コントロールの値に基づいて、リアクティブまたはテンプレートベースのフォーム入力を検証する
+* ユーザーがフォームとやり取りし、検証に失敗した場合に、説明的なエラーメッセージを表示する
 
-The examples use cross-validation to ensure that actors do not reuse the same name in their role by filling out the Actor Form.
-The validators do this by checking that the actor names and roles do not match.
+これらの例では、クロス検証を使用して、アクターがアクターフォームに記入することで、役割で同じ名前を再利用しないようにしています。
+バリデーターは、アクター名と役割が一致しないことを確認することで、これを実現します。
 
-### Adding cross-validation to reactive forms
+### クロス検証をリアクティブフォームに追加する
 
-The form has the following structure:
+フォームは、次の構造になっています。
 
 <docs-code language="javascript">
 
@@ -181,11 +181,11 @@ const actorForm = new FormGroup({
 
 </docs-code>
 
-Notice that the `name` and `role` are sibling controls.
-To evaluate both controls in a single custom validator, you must perform the validation in a common ancestor control: the `FormGroup`.
-You query the `FormGroup` for its child controls so that you can compare their values.
+`name`と`role`は兄弟コントロールであることに注意してください。
+1つのカスタムバリデーターで両方のコントロールを評価するには、共通の祖先コントロールである`FormGroup`で検証する必要があります。
+子コントロールを取得するために`FormGroup`をクエリして、値を比較します。
 
-To add a validator to the `FormGroup`, pass the new validator in as the second argument on creation.
+`FormGroup`にバリデーターを追加するには、作成時に第2引数として新しいバリデーターを渡します。
 
 <docs-code language="javascript">
 
@@ -197,59 +197,59 @@ const actorForm = new FormGroup({
 
 </docs-code>
 
-The validator code is as follows.
+バリデーターのコードは次のとおりです。
 
 <docs-code header="shared/unambiguous-role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/unambiguous-role.directive.ts" visibleRegion="cross-validation-validator"/>
 
-The `unambiguousRoleValidator` validator implements the `ValidatorFn` interface.
-It takes an Angular control object as an argument and returns either null if the form is valid, or `ValidationErrors` otherwise.
+`unambiguousRoleValidator`バリデーターは、`ValidatorFn`インターフェースを実装しています。
+これはAngularコントロールオブジェクトを引数として受け取り、フォームが有効な場合は`null`を返し、無効な場合は`ValidationErrors`を返します。
 
-The validator retrieves the child controls by calling the `FormGroup`'s [get](api/forms/AbstractControl#get) method, then compares the values of the `name` and `role` controls.
+バリデーターは、`FormGroup`の[get](api/forms/AbstractControl#get)メソッドを呼び出して子コントロールを取得し、`name`コントロールと`role`コントロールの値を比較します。
 
-If the values do not match, the role is unambiguous, both are valid, and the validator returns null.
-If they do match, the actor's role is ambiguous and the validator must mark the form as invalid by returning an error object.
+値が一致しない場合、役割は曖昧ではなく、両方が有効で、バリデーターは`null`を返します。
+値が一致する場合、アクターの役割は曖昧で、バリデーターはエラーオブジェクトを返すことでフォームを無効にする必要があります。
 
-To provide better user experience, the template shows an appropriate error message when the form is invalid.
+より良いユーザーエクスペリエンスを提供するために、フォームが無効な場合、テンプレートに適切なエラーメッセージが表示されます。
 
 <docs-code header="reactive/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="cross-validation-error-message"/>
 
-This `*ngIf` displays the error if the `FormGroup` has the cross validation error returned by the `unambiguousRoleValidator` validator, but only if the user finished [interacting with the form](#control-status-css-classes).
+この`*ngIf`は、`FormGroup`に`unambiguousRoleValidator`バリデーターが返したクロス検証エラーがある場合に、エラーを表示しますが、ユーザーが[フォームとやり取りを完了](#control-status-css-classes)した場合のみです。
 
-### Adding cross-validation to template-driven forms
+### クロス検証をテンプレート駆動フォームに追加する
 
-For a template-driven form, you must create a directive to wrap the validator function.
-You provide that directive as the validator using the [`NG_VALIDATORS` token](/api/forms/NG_VALIDATORS), as shown in the following example.
+テンプレート駆動フォームの場合、バリデーター関数をラップするディレクティブを作成する必要があります。
+次の例に示すように、[`NG_VALIDATORS`トークン](/api/forms/NG_VALIDATORS)を使用して、そのディレクティブをバリデーターとして提供します。
 
 <docs-code header="shared/unambiguous-role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/unambiguous-role.directive.ts" visibleRegion="cross-validation-directive"/>
 
-You must add the new directive to the HTML template.
-Because the validator must be registered at the highest level in the form, the following template puts the directive on the `form` tag.
+新しいディレクティブをHTMLテンプレートに追加する必要があります。
+バリデーターはフォームの最上位レベルで登録する必要があるため、次のテンプレートは`form`タグにディレクティブを配置しています。
 
 <docs-code header="template/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-register-validator"/>
 
-To provide better user experience, an appropriate error message appears when the form is invalid.
+より良いユーザーエクスペリエンスを提供するために、フォームが無効な場合、適切なエラーメッセージが表示されます。
 
 <docs-code header="template/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-error-message"/>
 
-This is the same in both template-driven and reactive forms.
+これは、テンプレート駆動フォームとリアクティブフォームの両方で同じです。
 
-## Creating asynchronous validators
+## 非同期バリデーターの作成
 
-Asynchronous validators implement the `AsyncValidatorFn` and `AsyncValidator` interfaces.
-These are very similar to their synchronous counterparts, with the following differences.
+非同期バリデーターは、`AsyncValidatorFn`と`AsyncValidator`インターフェースを実装します。
+これらは、同期バリデーターと非常に似ており、次の点が異なります。
 
-* The `validate()` functions must return a Promise or an observable,
-* The observable returned must be finite, meaning it must complete at some point.
-    To convert an infinite observable into a finite one, pipe the observable through a filtering operator such as `first`, `last`, `take`, or `takeUntil`.
+* `validate()`関数はPromiseまたはオブザーバブルを返す必要があります。
+* 返されるオブザーバブルは有限である必要があります。つまり、ある時点で完了する必要があります。
+    無限のオブザーバブルを有限のオブザーバブルに変換するには、オブザーバブルを`first`、`last`、`take`、`takeUntil`などのフィルタリング演算子でパイプします。
 
-Asynchronous validation happens after the synchronous validation, and is performed only if the synchronous validation is successful.
-This check lets forms avoid potentially expensive async validation processes \(such as an HTTP request\) if the more basic validation methods have already found invalid input.
+非同期検証は、同期検証の後に実行され、同期検証が成功した場合にのみ実行されます。
+このチェックにより、フォームは、基本的な検証方法がすでに無効な入力を検出している場合、潜在的にコストのかかる非同期検証プロセス（HTTPリクエストなど）を回避できます。
 
-After asynchronous validation begins, the form control enters a `pending` state.
-Inspect the control's `pending` property and use it to give visual feedback about the ongoing validation operation.
+非同期検証が開始されると、フォームコントロールは`pending`状態になります。
+コントロールの`pending`プロパティを調べ、それを利用して、進行中の検証操作に関する視覚的なフィードバックを提供します。
 
-A common UI pattern is to show a spinner while the async validation is being performed.
-The following example shows how to achieve this in a template-driven form.
+一般的なUIパターンは、非同期検証の実行中にスピナーを表示することです。
+次の例は、テンプレート駆動フォームでこれを実現する方法を示しています。
 
 <docs-code language="html">
 
@@ -258,17 +258,17 @@ The following example shows how to achieve this in a template-driven form.
 
 </docs-code>
 
-### Implementing a custom async validator
+### カスタム非同期バリデーターの実装
 
-In the following example, an async validator ensures that actors are cast for a role that is not already taken.
-New actors are constantly auditioning and old actors are retiring, so the list of available roles cannot be retrieved ahead of time.
-To validate the potential role entry, the validator must initiate an asynchronous operation to consult a central database of all currently cast actors.
+次の例では、非同期バリデーターは、アクターがすでに割り当てられている役割にキャストされないようにします。
+新しいアクターは常にオーディションを受けており、古いアクターは引退しているため、利用可能な役割のリストを事前に取得はできません。
+潜在的な役割のエントリを検証するために、バリデーターは、現在キャストされているすべてのアクターの中央データベースを照会する非同期操作を開始する必要があります。
 
-The following code creates the validator class, `UniqueRoleValidator`, which implements the `AsyncValidator` interface.
+次のコードは、`AsyncValidator`インターフェースを実装するバリデータークラス`UniqueRoleValidator`を作成します。
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator"/>
 
-The constructor injects the `ActorsService`, which defines the following interface.
+コンストラクターは、次のインターフェースを定義する`ActorsService`を注入します。
 
 <docs-code language="typescript">
 interface ActorsService {
@@ -276,72 +276,72 @@ interface ActorsService {
 }
 </docs-code>
 
-In a real world application, the `ActorsService` would be responsible for making an HTTP request to the actor database to check if the role is available.
-From the validator's point of view, the actual implementation of the service is not important, so the example can just code against the `ActorsService` interface.
+実際のアプリケーションでは、`ActorsService`は、アクターデータベースにHTTPリクエストを送信して役割が利用可能かどうかを確認する役割を担います。
+バリデーターの観点から、サービスの実際の実装は重要でないため、例では`ActorsService`インターフェースに対してのみコードを作成できます。
 
-As the validation begins, the `UnambiguousRoleValidator` delegates to the `ActorsService` `isRoleTaken()` method with the current control value.
-At this point the control is marked as `pending` and remains in this state until the observable chain returned from the `validate()` method completes.
+検証が始まると、`UnambiguousRoleValidator`は、現在のコントロール値で`ActorsService`の`isRoleTaken()`メソッドに委任します。
+この時点で、コントロールは`pending`としてマークされ、`validate()`メソッドから返されるObservableチェーンが完了するまで、この状態を維持します。
 
-The `isRoleTaken()` method dispatches an HTTP request that checks if the role is available, and returns `Observable<boolean>` as the result.
-The `validate()` method pipes the response through the `map` operator and transforms it into a validation result.
+`isRoleTaken()`メソッドは、役割が利用可能かどうかを確認するHTTPリクエストをディスパッチし、結果として`Observable<boolean>`を返します。
+`validate()`メソッドは、応答を`map`演算子でパイプし、検証結果に変換します。
 
-The method then, like any validator, returns `null` if the form is valid, and `ValidationErrors` if it is not.
-This validator handles any potential errors with the `catchError` operator.
-In this case, the validator treats the `isRoleTaken()` error as a successful validation, because failure to make a validation request does not necessarily mean that the role is invalid.
-You could handle the error differently and return the `ValidationError` object instead.
+その後、メソッドは、他のバリデーターと同様に、フォームが有効な場合は`null`を返し、無効な場合は`ValidationErrors`を返します。
+このバリデーターは、`catchError`演算子を使用して、潜在的なエラーを処理します。
+この場合、バリデーターは`isRoleTaken()`エラーを正常な検証として扱います。検証リクエストの実行に失敗したとしても、役割が無効であるとは限りません。
+エラーを異なる方法で処理し、代わりに`ValidationError`オブジェクトを返すこともできます。
 
-After some time passes, the observable chain completes and the asynchronous validation is done.
-The `pending` flag is set to `false`, and the form validity is updated.
+しばらくすると、Observableチェーンが完了し、非同期検証が完了します。
+`pending`フラグは`false`に設定され、フォームの有効性が更新されます。
 
-### Adding async validators to reactive forms
+### 非同期バリデーターをリアクティブフォームに追加する
 
-To use an async validator in reactive forms, begin by injecting the validator into the constructor of the component class.
+リアクティブフォームで非同期バリデーターを使用するには、最初にバリデーターをコンポーネントクラスのコンストラクターに注入します。
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-inject"/>
 
-Then, pass the validator function directly to the `FormControl` to apply it.
+次に、バリデーター関数を`FormControl`に直接渡して、適用します。
 
-In the following example, the `validate` function of `UnambiguousRoleValidator` is applied to `roleControl` by passing it to the control's `asyncValidators` option and binding it to the instance of `UnambiguousRoleValidator` that was injected into `ActorFormReactiveComponent`.
-The value of `asyncValidators` can be either a single async validator function, or an array of functions.
-To learn more about `FormControl` options, see the [AbstractControlOptions](api/forms/AbstractControlOptions) API reference.
+次の例では、`UnambiguousRoleValidator`の`validate`関数が、`roleControl`に適用されています。この関数をコントロールの`asyncValidators`オプションに渡し、`ActorFormReactiveComponent`に注入された`UnambiguousRoleValidator`のインスタンスにバインドしています。
+`asyncValidators`の値は、単一の非同期バリデーター関数、または関数の配列にすることができます。
+`FormControl`オプションの詳細については、[AbstractControlOptions](api/forms/AbstractControlOptions) APIリファレンスを参照してください。
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-usage"/>
 
-### Adding async validators to template-driven forms
+### 非同期バリデーターをテンプレート駆動フォームに追加する
 
-To use an async validator in template-driven forms, create a new directive and register the `NG_ASYNC_VALIDATORS` provider on it.
+テンプレート駆動フォームで非同期バリデーターを使用するには、新しいディレクティブを作成し、そのディレクティブに`NG_ASYNC_VALIDATORS`プロバイダーを登録します。
 
-In the example below, the directive injects the `UniqueRoleValidator` class that contains the actual validation logic and invokes it in the `validate` function, triggered by Angular when validation should happen.
+次の例では、ディレクティブは、実際の検証ロジックを含む`UniqueRoleValidator`クラスを注入し、検証を実行する必要があるときにAngularによってトリガーされる`validate`関数でそれを呼び出します。
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator-directive"/>
 
-Then, as with synchronous validators, add the directive's selector to an input to activate it.
+その後、同期バリデーターと同様に、ディレクティブのセレクターを入力に追加して、アクティブ化します。
 
 <docs-code header="template/actor-form-template.component.html (unique-unambiguous-role-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="role-input"/>
 
-### Optimizing performance of async validators
+### 非同期バリデーターのパフォーマンスの最適化
 
-By default, all validators run after every form value change.
-With synchronous validators, this does not normally have a noticeable impact on application performance.
-Async validators, however, commonly perform some kind of HTTP request to validate the control.
-Dispatching an HTTP request after every keystroke could put a strain on the backend API, and should be avoided if possible.
+デフォルトでは、すべてのバリデーターは、フォームの値が変更されるたびに実行されます。
+同期バリデーターの場合、これは通常、アプリケーションのパフォーマンスに目立った影響を与えません。
+ただし、非同期バリデーターは通常、コントロールを検証するために何らかのHTTPリクエストを実行します。
+キーストロークごとにHTTPリクエストをディスパッチすると、バックエンドAPIに負担がかかる可能性があり、可能な限り回避する必要があります。
 
-You can delay updating the form validity by changing the `updateOn` property from `change` (default) to `submit` or `blur`.
+`updateOn`プロパティを`change`（デフォルト）から`submit`または`blur`に変更することで、フォームの有効性の更新を遅らせることができます。
 
-With template-driven forms, set the property in the template.
+テンプレート駆動フォームでは、テンプレートでプロパティを設定します。
 
 <docs-code language="html">
 <input [(ngModel)]="name" [ngModelOptions]="{updateOn: 'blur'}">
 </docs-code>
 
-With reactive forms, set the property in the `FormControl` instance.
+リアクティブフォームでは、`FormControl`インスタンスでプロパティを設定します。
 
 <docs-code language="typescript">
 new FormControl('', {updateOn: 'blur'});
 </docs-code>
 
-## Interaction with native HTML form validation
+## ネイティブHTMLフォーム検証との相互作用
 
-By default, Angular disables [native HTML form validation](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation) by adding the `novalidate` attribute on the enclosing `<form>` and uses directives to match these attributes with validator functions in the framework.
-If you want to use native validation **in combination** with Angular-based validation, you can re-enable it with the `ngNativeValidate` directive.
-See the [API docs](api/forms/NgForm#native-dom-validation-ui) for details.
+デフォルトでは、Angularは囲んでいる`<form>`に`novalidate`属性を追加することで[ネイティブHTMLフォーム検証](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation)を無効にし、これらの属性をフレームワーク内のバリデーター関数と一致させるためにディレクティブを使用します。
+ネイティブ検証を**組み合わせて**Angularベースの検証を使用したい場合は、`ngNativeValidate`ディレクティブを使用して、ネイティブ検証を再び有効にできます。
+詳細については、[APIドキュメント](api/forms/NgForm#native-dom-validation-ui)を参照してください。

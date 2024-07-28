@@ -1,19 +1,19 @@
-# Understanding communicating with backend services using HTTP
+# バックエンドサービスとのHTTP通信を理解する
 
-Most front-end applications need to communicate with a server over the HTTP protocol, to download or upload data and access other back-end services. Angular provides a client HTTP API for Angular applications, the `HttpClient` service class in `@angular/common/http`.
+ほとんどのフロントエンドアプリケーションは、HTTPプロトコルでサーバーと通信して、データのダウンロードやアップロード、その他のバックエンドサービスへのアクセスを行う必要があります。Angularは、Angularアプリケーション用のクライアントHTTP API、`@angular/common/http`にある`HttpClient`サービスクラスを提供しています。
 
-## HTTP client service features
+## HTTPクライアントサービスの機能
 
-The HTTP client service offers the following major features:
+HTTPクライアントサービスは、以下の主要な機能を提供します。
 
-* The ability to request [typed response values](guide/http/making-requests#fetching-json-data)
-* Streamlined [error handling](guide/http/making-requests#handling-request-failure)
-* Request and response [interception](guide/http/interceptors)
-* Robust [testing utilities](guide/http/testing)
+* [型付きの応答値](guide/http/making-requests#fetching-json-data)をリクエストする機能
+* 簡素化された[エラー処理](guide/http/making-requests#handling-request-failure)
+* リクエストとレスポンスの[インターセプション](guide/http/interceptors)
+* 強力な[テストユーティリティ](guide/http/testing)
 
-## What's next
+## 次に何をするか
 
 <docs-pill-row>
-  <docs-pill href="guide/http/setup" title="Setting up HttpClient"/>
-  <docs-pill href="guide/http/making-requests" title="Making HTTP requests"/>
+  <docs-pill href="guide/http/setup" title="HttpClientの設定"/>
+  <docs-pill href="guide/http/making-requests" title="HTTPリクエストの実行"/>
 </docs-pill-row>

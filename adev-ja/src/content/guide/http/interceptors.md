@@ -1,32 +1,32 @@
-# Interceptors
+# インターセプター
 
-`HttpClient` supports a form of middleware known as _interceptors_.
+`HttpClient` は、_インターセプター_ と呼ばれるミドルウェアの一種をサポートしています。
 
-TLDR: Interceptors are middleware that allows common patterns around retrying, caching, logging, and authentication to be abstracted away from individual requests.
+TLDR: インターセプターは、再試行、キャッシュ、ロギング、認証など、一般的なパターンを個々のリクエストから抽象化できるミドルウェアです。
 
-`HttpClient` supports two kinds of interceptors: functional and DI-based. Our recommendation is to use functional interceptors because they have more predictable behavior, especially in complex setups. Our examples in this guide use functional interceptors, and we cover [DI-based interceptors](#di-based-interceptors) in their own section at the end.
+`HttpClient` は、関数型インターセプターとDIベースのインターセプターの2種類のインターセプターをサポートしています。複雑な設定では特に、関数型インターセプターの方が動作が予測しやすいので、関数型インターセプターの使用をお勧めします。このガイドの例では、関数型インターセプターを使用しており、[DI ベースのインターセプター](#di-based-interceptors)については、最後に別のセクションで説明します。
 
-## Interceptors
+## インターセプター
 
-Interceptors are generally functions which you can run for each request, and have broad capabilities to affect the contents and overall flow of requests and responses. You can install multiple interceptors, which form an interceptor chain where each interceptor processes the request or response before forwarding it to the next interceptor in the chain.
+インターセプターは、一般的には各リクエストに対して実行できる関数であり、リクエストとレスポンスの内容と全体的なフローに影響を与える幅広い機能を持っています。複数のインターセプターをインストールできます。インストールしたインターセプターはインターセプターチェーンを形成します。各インターセプターは、リクエストまたはレスポンスをチェーン内の次のインターセプターに転送する前に処理します。
 
-You can use interceptors to implement a variety of common patterns, such as:
+インターセプターを使用して、さまざまな一般的なパターンを実装できます。たとえば、以下のようなものがあります。
 
-* Adding authentication headers to outgoing requests to a particular API.
-* Retrying failed requests with exponential backoff.
-* Caching responses for a period of time, or until invalidated by mutations.
-* Customizing the parsing of responses.
-* Measuring server response times and log them.
-* Driving UI elements such as a loading spinner while network operations are in progress.
-* Collecting and batch requests made within a certain timeframe.
-* Automatically failing requests after a configurable deadline or timeout.
-* Regularly polling the server and refreshing results.
+* 特定のAPIへの送信リクエストに認証ヘッダーを追加する。
+* 失敗したリクエストを指数関数的バックオフで再試行する。
+* レスポンスを一定時間キャッシュするか、変更によって無効になるまでキャッシュする。
+* レスポンスの解析をカスタマイズする。
+* サーバーの応答時間を測定してログに記録する。
+* ネットワーク操作が進行中の間、ローディングスピナーなどのUI要素を制御する。
+* 特定のタイムフレーム内で作成されたリクエストを収集してバッチ処理する。
+* 設定可能な期限またはタイムアウト後にリクエストを自動的に失敗させる。
+* サーバーを定期的にポーリングして結果を更新する。
 
-## Defining an interceptor
+## インターセプターの定義
 
-The basic form of an interceptor is a function which receives the outgoing `HttpRequest` and a `next` function representing the next processing step in the interceptor chain.
+インターセプターの基本的な形式は、送信される `HttpRequest` と、インターセプターチェーン内の次の処理ステップを表す `next` 関数を受け取る関数です。
 
-For example, this `loggingInterceptor` will log the outgoing request URL to `console.log` before forwarding the request:
+たとえば、この `loggingInterceptor` は、リクエストを転送する前に、送信されるリクエストのURLを `console.log` にログに記録します。
 
 <docs-code language="ts">
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
@@ -35,11 +35,11 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
 }
 </docs-code>
 
-In order for this interceptor to actually intercept requests, you must configure `HttpClient` to use it.
+このインターセプターが実際にリクエストをインターセプトするためには、`HttpClient` がインターセプターを使用するように構成する必要があります。
 
-## Configuring interceptors
+## インターセプターの構成
 
-You declare the set of interceptors to use when configuring `HttpClient` through dependency injection, by using the `withInterceptors` feature:
+`HttpClient` を構成するときに使用するインターセプターのセットは、`withInterceptors` 機能を使用して、依存性の注入によって宣言します。
 
 <docs-code language="ts">
 bootstrapApplication(AppComponent, {providers: [
@@ -49,11 +49,11 @@ bootstrapApplication(AppComponent, {providers: [
 ]});
 </docs-code>
 
-The interceptors you configure are chained together in the order that you've listed them in the providers. In the above example, the `loggingInterceptor` would process the request and then forward it to the `cachingInterceptor`.
+構成したインターセプターは、プロバイダーにリストした順序でチェーンされます。上記の例では、`loggingInterceptor` がリクエストを処理し、`cachingInterceptor` に転送します。
 
-### Intercepting response events
+### レスポンスイベントのインターセプト
 
-An interceptor may transform the `Observable` stream of `HttpEvent`s returned by `next` in order to access or manipulate the response. Because this stream includes all response events, inspecting the `.type` of each event may be necessary in order to identify the final response object.
+インターセプターは、`next` から返される `HttpEvent` の `Observable` ストリームを変換して、レスポンスにアクセスしたり、レスポンスを操作したりできます。このストリームにはすべてのレスポンスイベントが含まれているため、最終的なレスポンスオブジェクトを識別するためには、各イベントの `.type` を調べる必要がある場合があります。
 
 <docs-code language="ts">
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
@@ -65,13 +65,13 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
 }
 </docs-code>
 
-Tip: Interceptors naturally associate responses with their outgoing requests, because they transform the response stream in a closure that captures the request object.
+Tip: インターセプターは、レスポンスストリームをリクエストオブジェクトをキャプチャするクロージャー内で変換するため、レスポンスを送信リクエストに自然に関連付けます。
 
-## Modifying requests
+## リクエストの変更
 
-Most aspects of `HttpRequest` and `HttpResponse` instances are _immutable_, and interceptors cannot directly modify them. Instead, interceptors apply mutations by cloning these objects using the `.clone()` operation, and specifying which properties should be mutated in the new instance. This might involve performing immutable updates on the value itself (like `HttpHeaders` or `HttpParams`).
+`HttpRequest` と `HttpResponse` インスタンスのほとんどの側面は _変更不可能_ であり、インターセプターは直接変更できません。代わりに、インターセプターは `.clone()` 操作を使用してこれらのオブジェクトを複製し、新しいインスタンスでどのプロパティを変更するべきかを指定することによって、変更を適用します。これには、値自体（`HttpHeaders` や `HttpParams` など）に対しては変更不可能な更新が含まれる場合があります。
 
-For example, to add a header to a request:
+たとえば、リクエストにヘッダーを追加するには、次のようにします。
 
 <docs-code language="ts">
 const reqWithHeader = req.clone({
@@ -79,22 +79,22 @@ const reqWithHeader = req.clone({
 });
 </docs-code>
 
-This immutability allows most interceptors to be idempotent if the same `HttpRequest` is submitted to the interceptor chain multiple times. This can happen for a few reasons, including when a request is retried after failure.
+この変更不能性により、ほとんどのインターセプターは、同じ `HttpRequest` がインターセプターチェーンに複数回送信された場合でも、べき等性を持つことができます。これは、リクエストが失敗後に再試行された場合など、いくつかの理由で発生する可能性があります。
 
-CRITICAL: The body of a request or response is **not** protected from deep mutations. If an interceptor must mutate the body, take care to handle running multiple times on the same request.
+CRITICAL: リクエストまたはレスポンスの本文は、深い変更から **保護されません**。インターセプターが本文を変更する必要がある場合は、同じリクエストに対して複数回実行される場合の処理に注意してください。
 
-## Dependency injection in interceptors
+## インターセプターでの依存性の注入
 
-Interceptors are run in the _injection context_ of the injector which registered them, and can use  Angular's `inject` API to retrieve dependencies.
+インターセプターは、インターセプターを登録したインジェクターの _注入コンテキスト_ で実行され、Angularの `inject` APIを使用して依存関係を取得できます。
 
-For example, suppose an application has a service called `AuthService`, which creates authentication tokens for outgoing requests. An interceptor can inject and use this service:
+たとえば、アプリケーションに `AuthService` というサービスがあり、このサービスが送信リクエストの認証トークンを作成するとします。インターセプターは、このサービスを注入して使用できます。
 
 <docs-code language="ts">
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
-  // Inject the current `AuthService` and use it to get an authentication token:
+  // 現在の `AuthService` を注入して、認証トークンを取得します。
   const authToken = inject(AuthService).getAuthToken();
 
-  // Clone the request to add the authentication header.
+  // 認証ヘッダーを追加するようにリクエストを複製します。
   const newReq = req.clone({headers: {
     req.headers.append('X-Authentication-Token', authToken),
   }});
@@ -102,41 +102,41 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) 
 }
 </docs-code>
 
-## Request and response metadata
+## リクエストとレスポンスのメタデータ
 
-Often it's useful to include information in a request that's not sent to the backend, but is specifically meant for interceptors. `HttpRequest`s have a `.context` object which stores this kind of metadata as an instance of `HttpContext`. This object functions as a typed map, with keys of type `HttpContextToken`.
+多くの場合、バックエンドに送信されないリクエストに情報を含めたり、インターセプター専用の情報をリクエストに含めたりすると便利です。`HttpRequest` には、`.context` オブジェクトがあり、このオブジェクトは、この種のメタデータを `HttpContext` のインスタンスとして格納します。このオブジェクトは型付きマップとして機能し、キーは `HttpContextToken` 型です。
 
-To illustrate how this system works, let's use metadata to control whether a caching interceptor is enabled for a given request.
+このシステムの動作を説明するために、メタデータを使用して、特定のリクエストに対してキャッシュインターセプターを有効にするかどうかを制御します。
 
-### Defining context tokens
+### コンテキストトークンの定義
 
-To store whether the caching interceptor should cache a particular request in that request's `.context` map, define a new `HttpContextToken` to act as a key:
+特定のリクエストの `.context` マップに、キャッシュインターセプターがリクエストをキャッシュするかどうかを格納するには、キーとして機能する新しい `HttpContextToken` を定義します。
 
 <docs-code language="ts">
 export const CACHING_ENABLED = new HttpContextToken<boolean>(() => true);
 </docs-code>
 
-The provided function creates the default value for the token for requests that haven't explicitly set a value for it. Using a function ensures that if the token's value is an object or array, each request gets its own instance.
+提供される関数は、明示的に値が設定されていないリクエストのトークンのデフォルト値を作成します。関数を用いることで、トークンの値がオブジェクトまたは配列である場合、各リクエストが独自のインスタンスを取得することが保証されます。
 
-### Reading the token in an interceptor
+### インターセプターでのトークンの読み込み
 
-An interceptor can then read the token and choose to apply caching logic or not based on its value:
+インターセプターは、トークンを読み取り、その値に基づいてキャッシュロジックを適用するかどうかを選択できます。
 
 <docs-code language="ts">
 export function cachingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   if (req.context.get(CACHING_ENABLED)) {
-    // apply caching logic
+    // キャッシュロジックを適用する
     return ...;
   } else {
-    // caching has been disabled for this request
+    // このリクエストに対してキャッシュが無効になっている
     return next(req);
   }
 }
 </docs-code>
 
-### Setting context tokens when making a request
+### リクエストの作成時のコンテキストトークンの設定
 
-When making a request via the `HttpClient` API, you can provide values for `HttpContextToken`s:
+`HttpClient` APIを介してリクエストを作成する際には、`HttpContextToken` の値を指定できます。
 
 <docs-code language="ts">
 const data$ = http.get('/sensitive/data', {
@@ -144,19 +144,19 @@ const data$ = http.get('/sensitive/data', {
 });
 </docs-code>
 
-Interceptors can read these values from the `HttpContext` of the request.
+インターセプターは、リクエストの `HttpContext` からこれらの値を読み取ることができます。
 
-### The request context is mutable
+### リクエストコンテキストは変更可能
 
-Unlike other properties of `HttpRequest`s, the associated `HttpContext` is _mutable_. If an interceptor changes the context of a request that is later retried, the same interceptor will observe the context mutation when it runs again. This is useful for passing state across multiple retries if needed.
+`HttpRequest` の他のプロパティとは異なり、関連付けられた `HttpContext` は _変更可能_ です。インターセプターが後で再試行されるリクエストのコンテキストを変更した場合、同じインターセプターは、再度実行されるときに、コンテキストの変更を認識します。これは、必要に応じて、複数回の再試行にわたって状態を渡す場合に便利です。
 
-## Synthetic responses
+## 合成レスポンス
 
-Most interceptors will simply invoke the `next` handler while transforming either the request or the response, but this is not strictly a requirement. This section discusses several of the ways in which an interceptor may incorporate more advanced behavior.
+ほとんどのインターセプターは、リクエストまたはレスポンスを変換しながら、単に `next` ハンドラーを呼び出すだけです。しかし、これは厳密には必須ではありません。このセクションでは、インターセプターがより高度な動作を組み込むことができるいくつかの方法について説明します。
 
-Interceptors are not required to invoke `next`. They may instead choose to construct responses through some other mechanism, such as from a cache or by sending the request through an alternate mechanism.
+インターセプターは `next` を呼び出す必要はありません。代わりに、キャッシュからレスポンスを作成したり、別の手法でリクエストを送信したりするなど、別の方法でもレスポンスを作成できます。
 
-Constructing a response is possible using the `HttpResponse` constructor:
+`HttpResponse` コンストラクターを使用して、レスポンスを作成できます。
 
 <docs-code language="ts">
 const resp = new HttpResponse({
@@ -164,11 +164,11 @@ const resp = new HttpResponse({
 });
 </docs-code>
 
-## DI-based interceptors
+## DI ベースのインターセプター {#di-based-interceptors}
 
-`HttpClient` also supports interceptors which are defined as injectable classes and configured through the DI system. The capabilities of DI-based interceptors are identical to those of functional interceptors, but the configuration mechanism is different.
+`HttpClient` は、注入可能なクラスとして定義され、DIシステムによって構成されるインターセプターもサポートしています。DIベースのインターセプターの機能は、関数型インターセプターと同じですが、構成方法が異なります。
 
-A DI-based interceptor is an injectable class which implements the `HttpInterceptor` interface:
+DIベースのインターセプターは、`HttpInterceptor` インターフェースを実装する、注入可能なクラスです。
 
 <docs-code language="ts">
 @Injectable()
@@ -180,12 +180,12 @@ export class LoggingInterceptor implements HttpInterceptor {
 }
 </docs-code>
 
-DI-based interceptors are configured through a dependency injection multi-provider:
+DIベースのインターセプターは、依存性の注入のマルチプロバイダーによって構成されます。
 
 <docs-code language="ts">
 bootstrapApplication(AppComponent, {providers: [
   provideHttpClient(
-    // DI-based interceptors must be explicitly enabled.
+    // DI ベースのインターセプターは明示的に有効にする必要があります。
     withInterceptorsFromDi(),
   ),
 
@@ -193,4 +193,4 @@ bootstrapApplication(AppComponent, {providers: [
 ]});
 </docs-code>
 
-DI-based interceptors run in the order that their providers are registered. In an app with an extensive and hierarchical DI configuration, this order can be very hard to predict.
+DIベースのインターセプターは、プロバイダーが登録された順序で実行されます。DI構成が複雑で階層的なアプリケーションでは、この順序を予測することは非常に難しい場合があります。

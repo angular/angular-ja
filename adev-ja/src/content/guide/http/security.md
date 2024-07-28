@@ -1,42 +1,42 @@
-# `HttpClient` security
+# `HttpClient`のセキュリティ
 
-`HttpClient` includes built-in support for two common HTTP security mechanisms: XSSI protection and XSRF/CSRF protection.
+`HttpClient` は、一般的な2つのHTTPセキュリティメカニズム (XSSI保護とXSRF/CSRF保護) のための組み込みサポートを提供します。
 
-Tip: Also consider adopting a [Content Security Policy](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) for your APIs.
+Tip: APIに [Content Security Policy](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) を導入することも検討してください。
 
-## XSSI protection
+## XSSI 保護
 
-Cross-Site Script Inclusion (XSSI) is a form of [Cross-Site Scripting](https://en.wikipedia.org/wiki/Cross-site_scripting) attack where an attacker loads JSON data from your API endpoints as `<script>`s on a page they control. Different JavaScript techniques can then be used to access this data.
+クロスサイトスクリプトインクルージョン (XSSI) は、攻撃者がAPIエンドポイントからJSONデータを攻撃者が制御するページの `<script>` として読み込む [クロスサイトスクリプト](https://en.wikipedia.org/wiki/Cross-site_scripting) 攻撃の一種です。その後、さまざまなJavaScriptテクニックを使用してこのデータにアクセスできます。
 
-A common technique to prevent XSSI is to serve JSON responses with a "non-executable prefix", commonly `)]}',\n`. This prefix prevents the JSON response from being interpreted as valid executable JavaScript. When the API is loaded as data, the prefix can be stripped before JSON parsing.
+XSSIを防ぐための一般的なテクニックは、JSONレスポンスを "非実行可能なプレフィックス" (通常は `)]}',\n`) で提供することです。このプレフィックスにより、JSONレスポンスが有効な実行可能なJavaScriptとして解釈されるのを防ぎます。APIがデータとして読み込まれる場合、JSONパースの前にプレフィックスを削除できます。
 
-`HttpClient` automatically strips this XSSI prefix (if present) when parsing JSON from a response.
+`HttpClient` は、レスポンスからJSONをパースする際に、このXSSIプレフィックス (存在する場合) を自動的に削除します。
 
-## XSRF/CSRF protection
+## XSRF/CSRF 保護
 
-[Cross-Site Request Forgery (XSRF or CSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery) is an attack technique by which the attacker can trick an authenticated user into unknowingly executing actions on your website.
+[クロスサイトリクエストフォージェリ (XSRF または CSRF)](https://en.wikipedia.org/wiki/Cross-site_request_forgery) は、攻撃者が認証されたユーザーをだまして、ユーザーが知らずにWebサイトでアクションを実行させる攻撃手法です。
 
-`HttpClient` supports a [common mechanism](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token) used to prevent XSRF attacks. When performing HTTP requests, an interceptor reads a token from a cookie, by default `XSRF-TOKEN`, and sets it as an HTTP header, `X-XSRF-TOKEN`. Because only code that runs on your domain could read the cookie, the backend can be certain that the HTTP request came from your client application and not an attacker.
+`HttpClient` は、XSRF攻撃を防ぐために使用される [一般的なメカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token) をサポートしています。HTTPリクエストを実行すると、インターセプターはデフォルトで `XSRF-TOKEN` という名前のCookieからトークンを読み取り、`X-XSRF-TOKEN` というHTTPヘッダーに設定します。ドメイン上で実行されるコードのみがCookieを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションから来たものであると確信できます。
 
-By default, an interceptor sends this header on all mutating requests (such as `POST`) to relative URLs, but not on GET/HEAD requests or on requests with an absolute URL.
+デフォルトでは、インターセプターは、相対URLへのすべての変更要求 (例: `POST`) にこのヘッダーを送信しますが、GET/HEADリクエストまたは絶対URLを持つリクエストには送信しません。
 
-<docs-callout helpful title="Why not protect GET requests?">
-CSRF protection is only needed for requests that can change state on the backend. By their nature, CSRF attacks cross domain boundaries, and the web's [same-origin policy](https://developer.mozilla.org/docs/Web/Security/Same-origin_policy) will prevent an attacking page from retrieving the results of authenticated GET requests.
+<docs-callout helpful title="なぜ GET リクエストは保護しないのですか?">
+CSRF 保護は、バックエンドの状態を変更できるリクエストでのみ必要です。本質的に、CSRF 攻撃はドメイン境界を超えて実行され、Web の [same-origin ポリシー](https://developer.mozilla.org/docs/Web/Security/Same-origin_policy) は、攻撃するページが認証された GET リクエストの結果を取得するのを防ぎます。
 </docs-callout>
 
-To take advantage of this, your server needs to set a token in a JavaScript readable session cookie called `XSRF-TOKEN` on either the page load or the first GET request. On subsequent requests the server can verify that the cookie matches the `X-XSRF-TOKEN` HTTP header, and therefore be sure that only code running on your domain could have sent the request. The token must be unique for each user and must be verifiable by the server; this prevents the client from making up its own tokens. Set the token to a digest of your site's authentication cookie with a salt for added security.
+この機能を利用するには、サーバーはページの読み込み時または最初のGETリクエスト時に、`XSRF-TOKEN` というJavaScriptで読み取り可能なセッションCookieにトークンを設定する必要があります。その後のリクエストでは、サーバーはCookieが `X-XSRF-TOKEN` HTTPヘッダーと一致することを確認し、ドメイン上で実行されているコードのみがリクエストを送信できたことを確認できます。トークンはユーザーごとに一意である必要があり、サーバーで検証可能である必要があります。これにより、クライアントが独自のトークンを作成することが防止されます。セキュリティを高めるために、トークンをサイトの認証Cookieのダイジェストに設定し、塩で設定します。
 
-To prevent collisions in environments where multiple Angular apps share the same domain or subdomain, give each application a unique cookie name.
+複数のAngularアプリケーションが同じドメインまたはサブドメインを共有する環境で衝突を防ぐには、各アプリケーションに一意のCookie名を指定します。
 
-<docs-callout important title="HttpClient supports only the client half of the XSRF protection scheme">
-  Your backend service must be configured to set the cookie for your page, and to verify that the header is present on all eligible requests. Failing to do so renders Angular's default protection ineffective.
+<docs-callout important title="HttpClient は XSRF 保護スキームのクライアント側の半分のみをサポートしています">
+  バックエンドサービスは、ページの Cookie を設定し、すべての適格なリクエストにヘッダーが存在することを確認するように構成する必要があります。これを実行しないと、Angular のデフォルトの保護が無効になります。
 </docs-callout>
 
-### Configure custom cookie/header names
+### カスタム Cookie/ヘッダー名の構成
 
-If your backend service uses different names for the XSRF token cookie or header, use `withXsrfConfiguration` to override the defaults.
+バックエンドサービスがXSRFトークンCookieまたはヘッダーに異なる名前を使用している場合は、`withXsrfConfiguration` を使用してデフォルト値をオーバーライドします。
 
-Add it to the `provideHttpClient` call as follows:
+以下のように `provideHttpClient` コールに追加します。
 
 <docs-code language="ts">
 export const appConfig: ApplicationConfig = {
@@ -51,9 +51,9 @@ export const appConfig: ApplicationConfig = {
 };
 </docs-code>
 
-### Disabling XSRF protection
+### XSRF 保護の無効化
 
-If the built-in XSRF protection mechanism doesn't work for your application, you can disable it using the `withNoXsrfProtection` feature:
+組み込みのXSRF保護メカニズムがアプリケーションで機能しない場合は、`withNoXsrfProtection` 機能を使用して無効にできます。
 
 <docs-code language="ts">
 export const appConfig: ApplicationConfig = {

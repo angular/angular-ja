@@ -25,6 +25,7 @@
     "globby": "14.0.2",
     "prh-rules": "prh/rules",
     "rxjs": "7.8.1",
+    "sitemap": "8.0.0",
     "textlint": "^14.0.4",
     "textlint-filter-rule-allowlist": "4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",

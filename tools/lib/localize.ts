@@ -5,6 +5,7 @@ import { globby as glob } from 'globby';
 import { resolve } from 'node:path';
 import { debounceTime, from, mergeMap, Observable } from 'rxjs';
 import { cpRf, replaceAllInFile } from './fsutils';
+import { generateSitemap } from './sitemap';
 import { adevJaDir, buildDir, buildOutputDir, rootDir } from './workspace';
 
 export async function applyPatches() {
@@ -70,8 +71,7 @@ export async function modifyBuildOutput() {
   await copyStaticFiles();
   consola.start('Replace GitHub edit links...');
   await replaceAdevGitHubEditLinks();
-  // await remove404HTML();
-  // await modifySitemap();
+  await generateSitemap(resolve(buildOutputDir, 'sitemap.xml'));
 }
 
 /**

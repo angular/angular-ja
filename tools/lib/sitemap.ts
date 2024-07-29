@@ -4,9 +4,12 @@ import { glob } from './fsutils';
 import { buildOutputDir } from './workspace';
 
 export async function generateSitemap(distPath: string) {
-  const htmlFiles = await glob(['**/*.html', '!index.csr.html'], {
-    cwd: buildOutputDir,
-  });
+  const htmlFiles = await glob(
+    ['**/*.html', '!index.csr.html', '!assets/**/*'],
+    {
+      cwd: buildOutputDir,
+    }
+  );
 
   const stream = new SitemapStream({
     hostname: 'https://angular.jp',

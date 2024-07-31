@@ -1,13 +1,13 @@
-# Testing
+# テスト
 
-Testing your Angular application helps you check that your application is working as you expect.
+Angularアプリケーションをテストすると、アプリケーションが期待どおりに動作していることを確認できます。
 
-## Set up testing
+## テストの設定
 
-The Angular CLI downloads and installs everything you need to test an Angular application with [Jasmine testing framework](https://jasmine.github.io).
+Angular CLIは、[Jasmineテストフレームワーク](https://jasmine.github.io)を使用してAngularアプリケーションをテストするために必要なものをすべてダウンロードしてインストールします。
 
-The project you create with the CLI is immediately ready to test.
-Just run the [`ng test`](cli/test) CLI command:
+CLIで作成したプロジェクトは、すぐにテストできます。
+[`ng test`](cli/test) CLIコマンドを実行するだけです。
 
 <docs-code language="shell">
 
@@ -15,10 +15,10 @@ ng test
 
 </docs-code>
 
-The `ng test` command builds the application in *watch mode*,
-and launches the [Karma test runner](https://karma-runner.github.io).
+`ng test`コマンドはアプリケーションを*監視モード*でビルドし、
+[Karmaテストランナー](https://karma-runner.github.io)を起動します。
 
-The console output looks like below:
+コンソールの出力は次のようになります。
 
 <docs-code language="shell">
 
@@ -31,24 +31,24 @@ TOTAL: 3 SUCCESS
 
 </docs-code>
 
-The last line of the log shows that Karma ran three tests that all passed.
+ログの最後の行は、Karmaが3つのテストを実行し、すべてが合格したことを示しています。
 
-The test output is displayed in the browser using [Karma Jasmine HTML Reporter](https://github.com/dfederm/karma-jasmine-html-reporter).
+テスト出力は、[Karma Jasmine HTMLレポーター](https://github.com/dfederm/karma-jasmine-html-reporter)を使用してブラウザに表示されます。
 
 <img alt="Jasmine HTML Reporter in the browser" src="assets/images/guide/testing/initial-jasmine-html-reporter.png">
 
-Click on a test row to re-run just that test or click on a description to re-run the tests in the selected test group \("test suite"\).
+テスト行をクリックしてそのテストのみを再実行するか、説明をクリックして選択したテストグループ（「テストスイート」）のテストを再実行します。
 
-Meanwhile, the `ng test` command is watching for changes.
+一方、`ng test`コマンドは変更を監視しています。
 
-To see this in action, make a small change to `app.component.ts` and save.
-The tests run again, the browser refreshes, and the new test results appear.
+これが実際にどのように機能するかを確認するには、`app.component.ts`を少し変更して保存します。
+テストが再び実行され、ブラウザが更新され、新しいテスト結果が表示されます。
 
-## Configuration
+## 設定
 
-The Angular CLI takes care of Jasmine and Karma configuration for you. It constructs the full configuration in memory, based on options specified in the `angular.json` file.
+Angular CLIは、JasmineとKarmaの設定を処理します。Angular CLIは、`angular.json`ファイルで指定されたオプションに基づいて、メモリ内に完全な設定を構築します。
 
-If you want to customize Karma, you can create a `karma.conf.js` by running the following command:
+Karmaをカスタマイズする場合は、次のコマンドを実行して`karma.conf.js`を作成できます。
 
 <docs-code language="shell">
 
@@ -56,70 +56,70 @@ ng generate config karma
 
 </docs-code>
 
-HELPFUL: Read more about Karma configuration in the [Karma configuration guide](http://karma-runner.github.io/6.4/config/configuration-file.html).
+HELPFUL: [Karma設定ガイド](http://karma-runner.github.io/6.4/config/configuration-file.html)でKarmaの設定について詳しく知ることができます。
 
-### Other test frameworks
+### その他のテストフレームワーク
 
-You can also unit test an Angular application with other testing libraries and test runners.
-Each library and runner has its own distinctive installation procedures, configuration, and syntax.
+Angularアプリケーションは、他のテストライブラリとテストランナーでもユニットテストできます。
+各ライブラリとランナーには、それぞれ独自のインストール手順、構成、構文があります。
 
-### Test file name and location
+### テストファイル名と場所
 
-Inside the `src/app` folder the Angular CLI generated a test file for the `AppComponent` named `app.component.spec.ts`.
+Angular CLIは、`src/app`フォルダ内に`AppComponent`のテストファイルを`app.component.spec.ts`という名前で生成しました。
 
-IMPORTANT: The test file extension **must be `.spec.ts`** so that tooling can identify it as a file with tests \(also known as a *spec* file\).
+IMPORTANT: テストファイル拡張子は**`.spec.ts`でなければなりません**。これにより、ツールはファイルをテストを含むファイル（*spec*ファイルとも呼ばれる）として識別できます。
 
-The `app.component.ts` and `app.component.spec.ts` files are siblings in the same folder.
-The root file names \(`app.component`\) are the same for both files.
+`app.component.ts`と`app.component.spec.ts`ファイルは、同じフォルダ内の兄弟です。
+ルートファイル名（`app.component`）は、両方のファイルで同じです。
 
-Adopt these two conventions in your own projects for *every kind* of test file.
+あらゆる種類のテストファイルに対して、これらの2つの規則を独自のプロジェクトで採用してください。
 
-#### Place your spec file next to the file it tests
+#### テストするファイルの横にspecファイルを配置する
 
-It's a good idea to put unit test spec files in the same folder
-as the application source code files that they test:
+ユニットテストのspecファイルを、
+テストするアプリケーションソースコードファイルと同じフォルダに入れることをお勧めします。
 
-* Such tests are painless to find
-* You see at a glance if a part of your application lacks tests
-* Nearby tests can reveal how a part works in context
-* When you move the source \(inevitable\), you remember to move the test
-* When you rename the source file \(inevitable\), you remember to rename the test file
+* このようなテストは簡単に検索できます。
+* アプリケーションの一部にテストがないかどうかをひと目で確認できます。
+* 近くのテストは、一部がコンテキストでどのように機能するかを示すことができます。
+* ソースを移動すると（不可避ですが）、テストも移動することを思い出します。
+* ソースファイルを名前変更すると（不可避ですが）、テストファイルの名前も変更することを思い出します。
 
-#### Place your spec files in a test folder
+#### specファイルをテストフォルダに配置する
 
-Application integration specs can test the interactions of multiple parts
-spread across folders and modules.
-They don't really belong to any part in particular, so they don't have a
-natural home next to any one file.
+アプリケーションの統合specは、
+フォルダとモジュールにまたがる複数の部分の相互作用をテストできます。
+それらは、特にどの部分にも属していないため、
+特定のファイルの横に自然な場所がありません。
 
-It's often better to create an appropriate folder for them in the `tests` directory.
+多くの場合、それらに対して`tests`ディレクトリに適切なフォルダを作成する方が良いでしょう。
 
-Of course specs that test the test helpers belong in the `test` folder,
-next to their corresponding helper files.
+もちろん、テストヘルパーをテストするspecは、
+対応するヘルパーファイルの隣の`test`フォルダに入ります。
 
-## Testing in continuous integration
+## 継続的インテグレーションでのテスト
 
-One of the best ways to keep your project bug-free is through a test suite, but you might forget to run tests all the time.
+プロジェクトをバグなしに保つ最良の方法の1つは、テストスイートを使用することですが、常にテストを実行することを忘れてしまうかもしれません。
 
-Continuous integration \(CI\) servers let you set up your project repository so that your tests run on every commit and pull request.
+継続的インテグレーション（CI）サーバーを使用すると、プロジェクトリポジトリを設定して、すべてのコミットとプルリクエストでテストを実行できます。
 
-To test your Angular CLI application in Continuous integration \(CI\) run the following command:
+Angular CLIアプリケーションを継続的インテグレーション（CI）でテストするには、次のコマンドを実行します。
 
 <docs-code language="shell">
 ng test --no-watch --no-progress --browsers=ChromeHeadless
 </docs-code>
 
-## More information on testing
+## テストに関する追加情報
 
-After you've set up your application for testing, you might find the following testing guides useful.
+アプリケーションのテストを設定したら、次のテストガイドが役立つ場合があります。
 
-|                                                                    | Details |
+|                                                                    | 詳細 |
 |:---                                                                |:---     |
-| [Code coverage](guide/testing/code-coverage)                       | How much of your app your tests are covering and how to specify required amounts. |
-| [Testing services](guide/testing/services)                         | How to test the services your application uses.                                   |
-| [Basics of testing components](guide/testing/components-basics)    | Basics of testing Angular components.                                             |
-| [Component testing scenarios](guide/testing/components-scenarios)  | Various kinds of component testing scenarios and use cases.                       |
-| [Testing attribute directives](guide/testing/attribute-directives) | How to test your attribute directives.                                            |
-| [Testing pipes](guide/testing/pipes)                               | How to test pipes.                                                                |
-| [Debugging tests](guide/testing/debugging)                            | Common testing bugs.                                                              |
-| [Testing utility APIs](guide/testing/utility-apis)                 | Angular testing features.                                                         |
+| [コードカバレッジ](guide/testing/code-coverage)                       | テストがアプリケーションのどの部分をカバーしているか、および必要な量の指定方法。 |
+| [サービスのテスト](guide/testing/services)                         | アプリケーションで使用しているサービスのテスト方法。                                   |
+| [コンポーネントのテストの基本](guide/testing/components-basics)    | Angularコンポーネントのテストの基本。                                             |
+| [コンポーネントテストシナリオ](guide/testing/components-scenarios)  | さまざまな種類のコンポーネントテストシナリオとユースケース。                       |
+| [属性ディレクティブのテスト](guide/testing/attribute-directives) | 属性ディレクティブのテスト方法。                                            |
+| [パイプのテスト](guide/testing/pipes)                               | パイプのテスト方法。                                                                |
+| [テストのデバッグ](guide/testing/debugging)                            | 一般的なテストのバグ。                                                              |
+| [ユーティリティAPIのテスト](guide/testing/utility-apis)                 | Angularのテスト機能。                                                         |

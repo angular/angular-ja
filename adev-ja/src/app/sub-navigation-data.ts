@@ -489,7 +489,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/performance/overview',
           },
           {
-            label: '遅延ビュー',
+            label: '遅延可能なビュー',
             path: 'guide/defer',
             contentPath: 'guide/defer',
           },

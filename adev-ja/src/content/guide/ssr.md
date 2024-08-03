@@ -1,18 +1,18 @@
-# Server-side rendering
+# サーバーサイドレンダリング
 
-Server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. Once the HTML content is delivered to a browser, Angular initializes the application and utilizes the data contained within the HTML.
+サーバーサイドレンダリング (SSR) は、サーバーでページをレンダリングするプロセスです。これにより、初期のページ状態を含む初期HTMLコンテンツが生成されます。HTMLコンテンツがブラウザに配信されると、Angularはアプリケーションを初期化し、HTMLに含まれるデータを利用します。
 
-## Why use SSR?
+## SSR を使用する理由 {#why-use-server-side-rendering}
 
-The main advantages of SSR as compared to client-side rendering (CSR) are:
+SSRはクライアントサイドレンダリング (CSR) に比べて、主に以下の利点があります。
 
-- **Improved performance**: SSR can improve the performance of web applications by delivering fully rendered HTML to the client, which the browser can parse and display even before it downloads the application JavaScript. This can be especially beneficial for users on low-bandwidth connections or mobile devices.
-- **Improved Core Web Vitals**: SSR results in performance improvements that can be measured using [Core Web Vitals (CWV)](https://web.dev/learn-core-web-vitals/) statistics, such as reduced First Contentful Paint ([FCP](https://developer.chrome.com/en/docs/lighthouse/performance/first-contentful-paint/)) and Largest Contentful Paint ([LCP](https://web.dev/lcp/)), as well as Cumulative Layout Shift ([CLS](https://web.dev/cls/)).
-- **Better SEO**: SSR can improve the search engine optimization (SEO) of web applications by making it easier for search engines to crawl and index the content of the application.
+- **パフォーマンスの向上**: SSRは、完全にレンダリングされたHTMLをクライアントに配信することで、Webアプリケーションのパフォーマンスを向上させることができます。これにより、ブラウザはアプリケーションのJavaScriptをダウンロードする前に、HTMLを解析して表示できます。これは、帯域幅の狭い接続やモバイルデバイスのユーザーにとって特に有利です。
+- **Core Web Vitals の向上**: SSRは、[Core Web Vitals (CWV)](https://web.dev/learn-core-web-vitals/) 統計を使用して測定できるパフォーマンスの向上をもたらします。これには、最初のコンテンツフルペイント ([FCP](https://developer.chrome.com/en/docs/lighthouse/performance/first-contentful-paint/)) や最大のコンテンツフルペイント ([LCP](https://web.dev/lcp/))、累積レイアウトシフト ([CLS](https://web.dev/cls/)) などの指標の改善が含まれます。
+- **SEO の向上**: SSRは、検索エンジンがアプリケーションのコンテンツをクロールしてインデックス付けしやすくすることで、Webアプリケーションの検索エンジン最適化 (SEO) を向上させることができます。
 
-## Enable server-side rendering
+## サーバーサイドレンダリングを有効にする
 
-To create a **new** project with SSR, run:
+SSRを使用して**新規**プロジェクトを作成するには、次のコマンドを実行します。
 
 <docs-code language="shell">
 
@@ -20,7 +20,7 @@ ng new --ssr
 
 </docs-code>
 
-To add SSR to an **existing** project, use the Angular CLI `ng add` command.
+**既存**のプロジェクトにSSRを追加するには、Angular CLIの `ng add` コマンドを使用します。
 
 <docs-code language="shell">
 
@@ -28,50 +28,50 @@ ng add @angular/ssr
 
 </docs-code>
 
-These commands create and update application code to enable SSR and adds extra files to the project structure.
+これらのコマンドは、SSRを有効にするためのアプリケーションコードを作成および更新し、プロジェクト構造に余分なファイルを追加します。
 
 <docs-code language="text">
 
 my-app
-|-- server.ts                       # application server
+|-- server.ts                       # アプリケーションサーバー
 └── src
     |-- app
-    |   └── app.config.server.ts    # server application configuration
-    └── main.server.ts              # main server application bootstrapping
+    |   └── app.config.server.ts    # サーバーアプリケーション構成
+    └── main.server.ts              # メインサーバーアプリケーションのブートストラップ
 
 </docs-code>
 
-To verify that the application is server-side rendered, run it locally with `ng serve`. The initial HTML request should contain application content.
+アプリケーションがサーバーサイドでレンダリングされていることを確認するには、`ng serve` でローカルに実行します。最初のHTMLリクエストには、アプリケーションのコンテンツが含まれている必要があります。
 
-## Configure server-side rendering
+## サーバーサイドレンダリングの構成
 
-The `server.ts` file configures a Node.js Express server and Angular server-side rendering. `CommonEngine` is used to render an Angular application.
+`server.ts` ファイルは、Node.js ExpressサーバーとAngularサーバーサイドレンダリングを構成します。`CommonEngine` はAngularアプリケーションをレンダリングするために使用されます。
 
 <docs-code path="adev/src/content/examples/ssr/server.ts" visibleLines="[31,45]"></docs-code>
 
-The `render` method of `CommonEngine` accepts an object with the following properties:
+`CommonEngine` の `render` メソッドは、以下のプロパティを持つオブジェクトを受け取ります。
 
-| Properties          | Details                                                                                  | Default Value |
+| プロパティ          | 詳細                                                                                  | デフォルト値 |
 | ------------------- | ---------------------------------------------------------------------------------------- | ------------- |
-| `bootstrap`         | A method which returns an `NgModule` or a promise which resolves to an `ApplicationRef`. |               |
-| `providers`         | An array of platform level providers for the current request.                            |               |
-| `url`               | The url of the page to render.                                                           |               |
-| `inlineCriticalCss` | Whether to reduce render blocking requests by inlining critical CSS.                     | `true`        |
-| `publicPath`        | Base path for browser files and assets.                                                  |               |
-| `document`          | The initial DOM to use for bootstrapping the server application.                         |               |
-| `documentFilePath`  | File path of the initial DOM to use to bootstrap the server application.                 |               |
+| `bootstrap`         | `NgModule` を返すメソッド、または `ApplicationRef` に解決されるPromise。                 |               |
+| `providers`         | 現在のリクエストに対するプラットフォームレベルのプロバイダーの配列。                          |               |
+| `url`               | レンダリングするページの URL。                                                           |               |
+| `inlineCriticalCss` | レンダリングブロッキングリクエストを減らすために、重要な CSS をインライン化するかどうかのフラグ。 | `true`        |
+| `publicPath`        | ブラウザファイルとアセットのベースパス。                                                  |               |
+| `document`          | サーバーアプリケーションのブートストラップに使用する最初の DOM。                        |               |
+| `documentFilePath`  | サーバーアプリケーションのブートストラップに使用する最初の DOM のファイルパス。              |               |
 
-Angular CLI will scaffold an initial server implementation focused on server-side rendering your Angular application. This server can be extended to support other features such as API routes, redirects, static assets, and more. See [Express documentation](https://expressjs.com/) for more details.
+Angular CLIは、Angularアプリケーションのサーバーサイドレンダリングに焦点を当てた、初期のサーバー実装をスキャフォールディングします。このサーバーは、APIルート、リダイレクト、静的アセットなど、他の機能をサポートするように拡張できます。詳細については、[Express ドキュメント](https://expressjs.com/) を参照してください。
 
-## Hydration
+## ハイドレーション
 
-Hydration is the process that restores the server side rendered application on the client. This includes things like reusing the server rendered DOM structures, persisting the application state, transferring application data that was retrieved already by the server, and other processes. Hydration is enabled by default when you use SSR. You can find more info in [the hydration guide](guide/hydration).
+ハイドレーションは、クライアント上でサーバーサイドレンダリングされたアプリケーションを復元するプロセスです。これには、サーバーでレンダリングされたDOM構造の再利用、アプリケーション状態の永続化、サーバーが既に取得したアプリケーションデータの転送、その他のプロセスが含まれます。ハイドレーションは、SSRを使用する場合、デフォルトで有効になります。ハイドレーションの詳細については、[ハイドレーションガイド](guide/hydration) を参照してください。
 
-## Caching data when using HttpClient
+## HttpClient を使用する場合のデータキャッシュ
 
-[`HttpClient`](api/common/http/HttpClient) cached outgoing network requests when running on the server. This information is serialized and transferred to the browser as part of the initial HTML sent from the server. In the browser, `HttpClient` checks whether it has data in the cache and if so, reuses it instead of making a new HTTP request during initial application rendering. `HttpClient` stops using the cache once an application becomes [stable](api/core/ApplicationRef#isStable) while running in a browser.
+[`HttpClient`](api/common/http/HttpClient) は、サーバーで実行されているときに、送信されるネットワークリクエストをキャッシュします。この情報はシリアル化され、サーバーから送信される最初のHTMLの一部としてブラウザに転送されます。ブラウザでは、`HttpClient` はキャッシュにデータが存在するかどうかをチェックし、存在する場合は初期アプリケーションレンダリング中に新しいHTTPリクエストを行う代わりに、キャッシュされたデータを使用します。`HttpClient` は、ブラウザで実行されているアプリケーションが[安定](api/core/ApplicationRef#isStable)すると、キャッシュの使用を停止します。
 
-By default, `HttpClient` caches all `HEAD` and `GET` requests which don't contain `Authorization` or `Proxy-Authorization` headers. You can override those settings by using [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) when providing hydration.
+デフォルトでは、`HttpClient` は、`Authorization` または `Proxy-Authorization` ヘッダーが含まれていないすべての `HEAD` および `GET` リクエストをキャッシュします。これらの設定は、ハイドレーションを提供するときに [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) を使用することでオーバーライドできます。
 
 <docs-code language="typescript">
 
@@ -85,11 +85,11 @@ bootstrapApplication(AppComponent, {
 
 </docs-code>
 
-## Authoring server-compatible components
+## サーバー対応コンポーネントのオーサリング
 
-Some common browser APIs and capabilities might not be available on the server. Applications cannot make use of browser-specific global objects like `window`, `document`, `navigator`, or `location` as well as certain properties of `HTMLElement`.
+一部の一般的なブラウザAPIや機能は、サーバーでは使用できない場合があります。アプリケーションは、`window`、`document`、`navigator`、`location` などのブラウザ固有のグローバルオブジェクト、および `HTMLElement` の特定のプロパティを使用できません。
 
-In general, code which relies on browser-specific symbols should only be executed in the browser, not on the server. This can be enforced through the [`afterRender`](api/core/afterRender) and [`afterNextRender`](api/core/afterNextRender) lifecycle hooks. These are only executed on the browser and skipped on the server.
+一般的に、ブラウザ固有のシンボルに依存するコードは、サーバーではなく、ブラウザでのみ実行する必要があります。これは、[`afterRender`](api/core/afterRender) および [`afterNextRender`](api/core/afterNextRender) ライフサイクルフックを使用して強制できます。これらは、ブラウザでのみ実行され、サーバーではスキップされます。
 
 <docs-code language="typescript">
 
@@ -104,7 +104,7 @@ export class MyComponent {
 
   constructor() {
     afterNextRender(() => {
-      // Safe to check `scrollHeight` because this will only run in the browser, not the server.
+      // `scrollHeight` をチェックしても安全です。これはブラウザでのみ実行され、サーバーでは実行されないためです。
       console.log('content height: ' + this.contentRef.nativeElement.scrollHeight);
     });
   }
@@ -112,6 +112,6 @@ export class MyComponent {
 
 </docs-code>
 
-## Using Angular Service Worker
+## Angular Service Worker の使用
 
-If you are using Angular on the server in combination with the Angular service worker, the behavior deviates from the normal server-side rendering behavior. The initial server request will be rendered on the server as expected. However, after that initial request, subsequent requests are handled by the service worker and always client-side rendered.
+サーバーでAngularをAngular Service Workerと組み合わせて使用している場合、動作は通常のサーバーサイドレンダリングの動作とは異なります。最初のサーバーリクエストは、期待どおりにサーバーでレンダリングされます。ただし、その最初のリクエストの後、後続のリクエストはService Workerによって処理され、常にクライアントサイドでレンダリングされます。

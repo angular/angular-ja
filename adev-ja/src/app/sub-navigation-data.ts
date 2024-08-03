@@ -504,7 +504,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/ssr',
           },
           {
-            label: 'ビルド時の事前レンダリング',
+            label: 'ビルド時のプリレンダリング',
             path: 'guide/prerendering',
             contentPath: 'guide/prerendering',
           },

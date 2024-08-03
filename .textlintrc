@@ -3,7 +3,8 @@
     "comments": true,
     "allowlist": {
       "allow": [
-        "/<docs-code[\\s\\S]*?</docs-code>/m"
+        "/<docs-code[\\s\\S]*?</docs-code>/m",
+        "/\\{#.*\\}/m"
       ]
     }
   },

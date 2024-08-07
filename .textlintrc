@@ -36,7 +36,8 @@
       "ja-no-weak-phrase": false,
       "max-kanji-continuous-len": {
         "allow": [
-          "二重中括弧構文"
+          "二重中括弧構文",
+          "変更検知戦略"
         ]
       },
       "ja-no-mixed-period": false

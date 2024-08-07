@@ -1,14 +1,14 @@
-# Unwrapping data from an observable
+# Observable からデータを取り出す
 
-Observables let you pass messages between parts of your application.
-You can use observables for event handling, asynchronous programming, and handling multiple values.
-Observables can deliver single or multiple values of any type, either synchronously (as a function delivers a value to its caller) or asynchronously on a schedule.
+Observableを使用すると、アプリケーションの各部分間でメッセージを渡すことができます。
+Observableは、イベント処理、非同期プログラミング、複数値の処理に使用できます。
+Observableは、同期的に（関数が呼び出し元に値を渡すように）、またはスケジュールに従って非同期的に、任意の型の単一値または複数値を提供できます。
 
-Use the built-in [`AsyncPipe`](api/common/AsyncPipe "API description of AsyncPipe") to accept an observable as input and subscribe to the input automatically.
-Without this pipe, your component code would have to subscribe to the observable to consume its values, extract the resolved values, expose them for binding, and unsubscribe when the observable is destroyed in order to prevent memory leaks.
-`AsyncPipe` is a pipe that saves boilerplate code in your component to maintain the subscription and keep delivering values from that observable as they arrive.
+組み込みの [`AsyncPipe`](api/common/AsyncPipe "API description of AsyncPipe") を使用して、Observableを入力として受け取り、入力に自動的にサブスクライブします。
+このパイプがない場合、コンポーネントコードはObservableの値を使用するためにObservableにサブスクライブし、解決された値を抽出してバインディングのために公開し、Observableが破棄されたときにサブスクライブを解除してメモリリークを防ぐ必要があります。
+`AsyncPipe` は、Observableから値が到着するたびにサブスクリプションを維持し、そのObservableから値を提供し続けるためにコンポーネントの定型コードを節約するパイプです。
 
-The following code example binds an observable of message strings (`message$`) to a view with the `async` pipe.
+次のコード例では、メッセージ文字列 (`message$`) のObservableを、`async` パイプを使用してビューにバインドしています。
 
 <!-- TODO: Enable preview if this example does not depend on Zone/ or if we run the example with Zone. -->
 <docs-code header="src/app/hero-async-message.component.ts"

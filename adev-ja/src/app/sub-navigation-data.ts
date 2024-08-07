@@ -257,7 +257,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
                 contentPath: 'guide/pipes/transform-data',
               },
               {
-                label: '式におけるパイプの優先順位',
+                label: 'パイプの優先順位',
                 path: 'guide/pipes/precedence',
                 contentPath: 'guide/pipes/precedence',
               },

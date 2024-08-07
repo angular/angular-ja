@@ -1,13 +1,13 @@
-# Using a pipe in a template
+# テンプレートでパイプを使用する
 
-To apply a pipe, use the pipe operator (`|`) within a template expression as shown in the following code example.
+パイプを適用するには、次のコード例に示すように、テンプレート式内でパイプ演算子（`|`）を使用します。
 
 <docs-code header="app.component.html">
-<p>The hero's birthday is {{ birthday | date }}</p>
+<p>ヒーローの誕生日は {{ birthday | date }}</p>
 </docs-code>
 
-The component's `birthday` value flows through the pipe operator (`|`) to the [`DatePipe`](api/common/DatePipe) whose pipe name is `date`.
-The pipe renders the date in the default format like **Apr 07, 2023**.
+コンポーネントの `birthday` 値は、パイプ演算子（`|`）を介して、パイプ名が `date` である [`DatePipe`](api/common/DatePipe) に渡されます。
+パイプは、**Apr 07, 2023** のようなデフォルト形式で日付をレンダリングします。
 
 <docs-code header="app.component.ts" preview>
 import { Component } from '@angular/core';
@@ -23,33 +23,33 @@ export class AppComponent {
 }
 </docs-code>
 
-## Additional parameters for pipes
+## パイプの追加パラメータ
 
-Pipes can take additional parameters that configure the transformation. Parameters can be optional or required.
+パイプは、変換を構成する追加パラメータを受け取ることができます。パラメータはオプションまたは必須にできます。
 
-For example, the `date` pipe takes optional parameters that control the date's display format.
-To specify the parameter, follow the pipe name with a colon (`:`) and the parameter value (the format).
+たとえば、`date` パイプは、日付の表示形式を制御するオプションのパラメータを受け取ります。
+パラメータを指定するには、パイプ名にコロン（`:`）とパラメータ値（形式）を続けます。
 
 <docs-code header="app.component.html">
-<p>The hero's birthday is in {{ birthday | date:'yyyy' }}</p>
+<p>ヒーローの誕生日は {{ birthday | date:'yyyy' }}</p>
 </docs-code>
 
-Pipes can also take multiple parameters. You can pass multiple parameters by separating these via colons (`:`).
-For example, the `date` pipe accepts a second optional parameter for controlling the timezone.
+パイプは、複数のパラメータを受け取ることができます。コロン（`:`）で区切ることで、複数のパラメータを渡すことができます。
+たとえば、`date` パイプは、タイムゾーンを制御するための2つ目のオプションのパラメータを受け取ります。
 
 <docs-code header="app.component.html">
-<p>The current time is: {{ currentTime | date:'hh:mm':'UTC' }}</p>
+<p>現在の時刻は: {{ currentTime | date:'hh:mm':'UTC' }}</p>
 </docs-code>
 
-This will display the current time (like `10:53`) in the `UTC` timezone.
+これにより、`UTC` タイムゾーンの現在時刻（例: `10:53`）が表示されます。
 
-## Chaining pipes
+## パイプの連結
 
-You can connect multiple pipes so that the output of one pipe becomes the input to the next.
+複数のパイプを接続して、1つのパイプの出力を出力して、次のパイプの入力にできます。
 
-The following example passes a date to the `DatePipe` and then forwards the result to the [`UpperCasePipe`](api/common/UpperCasePipe 'API reference') pipe.
+次の例では、日付を `DatePipe` に渡し、その結果を [`UpperCasePipe`](api/common/UpperCasePipe 'API reference') パイプに転送します。
 
 <docs-code header="app.component.html">
-<p>The hero's birthday is {{ birthday | date }}</p>
-<p>The hero's birthday is in {{ birthday | date:'yyyy' | uppercase }}</p>
+<p>ヒーローの誕生日は {{ birthday | date }}</p>
+<p>ヒーローの誕生日は {{ birthday | date:'yyyy' | uppercase }}</p>
 </docs-code>

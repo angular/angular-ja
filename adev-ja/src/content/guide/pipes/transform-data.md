@@ -1,18 +1,18 @@
-# Custom pipes for new transforms
+# カスタムパイプ
 
-Create custom pipes to encapsulate transformations that are not provided with the built-in pipes.
-Then, use your custom pipe in template expressions, the same way you use built-in pipes—to transform input values to output values for display.
+組み込みのパイプで提供されていない変換をカプセル化するカスタムパイプを作成します。
+その後、組み込みのパイプと同じように、カスタムパイプをテンプレート式で使用して、表示のために入力値を出力値に変換します。
 
-## Marking a class as a pipe
+## クラスをパイプとしてマークする
 
-To mark a class as a pipe and supply configuration metadata, apply the `@Pipe` to the class.
+クラスをパイプとしてマークし、構成メタデータを供給するには、クラスに `@Pipe` を適用します。
 
-Use UpperCamelCase (the general convention for class names) for the pipe class name, and camelCase for the corresponding `name` string.
-Do not use hyphens in the `name`.
+パイプクラス名にはアッパーキャメルケース（クラス名の一般的な慣例）、対応する `name` 文字列にはキャメルケースを使用します。
+`name` にはハイフンを使用しないでください。
 
-For details and more examples, see [Pipe names](/style-guide#pipe-names "Pipe names in the Angular coding style guide").
+詳細とその他の例については、[パイプ名](/style-guide#pipe-names "Angular コーディングスタイルガイドのパイプ名")を参照してください。
 
-Use `name` in template expressions as you would for a built-in pipe.
+テンプレート式では、組み込みパイプと同様に `name` を使用します。
 
 ```ts
 import { Pipe } from '@angular/core';
@@ -24,11 +24,11 @@ import { Pipe } from '@angular/core';
 export class GreetPipe {}
 ```
 
-## Using the PipeTransform interface
+## PipeTransform インターフェースを使用する
 
-Implement the [`PipeTransform`](/api/core/PipeTransform "API reference for PipeTransform") interface in your custom pipe class to perform the transformation.
+カスタムパイプクラスで [`PipeTransform`](/api/core/PipeTransform "PipeTransform の API リファレンス") インターフェースを実装して変換します。
 
-Angular invokes the `transform` method with the value of a binding as the first argument, and any parameters as the second argument in list form, and returns the transformed value.
+Angularは、バインディングの値を最初の引数として、パラメータを2番目の引数としてリスト形式で `transform` メソッドを呼び出し、変換された値を返します。
 
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
@@ -44,18 +44,18 @@ export class GreetPipe implements PipeTransform {
 }
 ```
 
-## Example: Transforming a value exponentially
+## 例：値を指数関数的に変換する
 
-In a game, you might want to implement a transformation that raises a value exponentially to increase a hero's power.
-For example, if the hero's score is 2, boosting the hero's power exponentially by 10 produces a score of 1024 (`2**10`).
-Use a custom pipe for this transformation.
+ゲームでは、ヒーローのパワーを上げるために値を指数関数的に上げる変換を実装したい場合があります。
+たとえば、ヒーローのスコアが2の場合、ヒーローのパワーを10で指数関数的にブーストすると、スコアは1024 (`2**10`) になります。
+この変換にはカスタムパイプを使用します。
 
-The following code example shows two component definitions:
+次のコード例は、2つのコンポーネント定義を示しています。
 
-| Files                          | Details |
+| ファイル                          | 詳細 |
 |:---                            |:---     |
-| `exponential-strength.pipe.ts` | Defines a custom pipe named `exponentialStrength` with the `transform` method that performs the transformation. It defines an argument to the `transform` method \(`exponent`\) for a parameter passed to the pipe. |
-| `power-booster.component.ts`   | Demonstrates how to use the pipe, specifying a value \(`2`\) and the exponent parameter \(`10`\).                                                                                                                   |
+| `exponential-strength.pipe.ts` | `transform` メソッドを持つ `exponentialStrength` という名前のカスタムパイプを定義します。このメソッドは変換を実行します。パイプに渡されるパラメータのために、`transform` メソッドに引数（`exponent`）を定義しています。 |
+| `power-booster.component.ts`   | パイプの使用方法を示し、値（`2`）と指数パラメータ（`10`）を指定しています。                                                                                                                   |
 
 <docs-code-multifile>
   <docs-code header="src/app/exponential-strength.pipe.ts" language="ts" path="adev/src/content/examples/pipes/src/app/exponential-strength.pipe.ts"/>

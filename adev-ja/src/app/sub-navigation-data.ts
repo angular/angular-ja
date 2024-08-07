@@ -257,7 +257,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
                 contentPath: 'guide/pipes/transform-data',
               },
               {
-                label: 'パイプの優先順位',
+                label: '式におけるパイプの優先順位',
                 path: 'guide/pipes/precedence',
                 contentPath: 'guide/pipes/precedence',
               },
@@ -928,6 +928,14 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
   {
     label: '開発に参加する',
     path: 'https://github.com/angular/angular/blob/main/CONTRIBUTING.md',
+  },
+  {
+    label: 'コミュニティに参加する',
+    path: 'https://community.angular.jp/',
+  },
+  {
+    label: '日本語化プロジェクト',
+    path: 'https://github.com/angular/angular-ja',
   },
   {
     label: 'APIリファレンス',

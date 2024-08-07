@@ -23,5 +23,5 @@ Angularは、国際化（i18n）のための変換を含む、一般的なデー
 - [`AsyncPipe`](api/common/AsyncPipe): Observableなどの非同期ソースを購読および購読解除します。
 - [`JsonPipe`](api/common/JsonPipe): デバッグのために、コンポーネントオブジェクトのプロパティをJSONとして画面に表示します。
 
-注: 組み込みパイプの完全なリストについては、[パイプAPIドキュメント](/api?type=pipe "パイプAPIリファレンスサマリー")を参照してください。
+Note: 組み込みパイプの完全なリストについては、[パイプAPIドキュメント](/api?type=pipe "パイプAPIリファレンスサマリー")を参照してください。
 国際化（i18n）におけるパイプの使用の詳細については、[ロケールに基づくデータのフォーマット](guide/i18n/format-data-locale)を参照してください。

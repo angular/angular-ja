@@ -32,12 +32,13 @@ const model = genAI.getGenerativeModel({
   systemInstruction: `
 あなたは技術文書の翻訳アシスタントです。
 Markdown形式のテキストを受け取り、日本語に翻訳してください。以下のルールを遵守してください。
-- 元のMarkdownの改行やインデントの構造を維持してください。
-- 内容の説明は含めず、翻訳結果のみを出力してください。
+- 出力するのは翻訳結果だけです。それ以外の説明や補足は不要です。
+- # から始まる見出しレベルを変更しないでください。
+- 改行やインデントは元のMarkdownの構造をそのまま保持してください。
 - コードブロックの中身は翻訳しないでください。
 - 英単語の前後にスペースを入れないでください。
-- 行頭の特別なプレフィックス [TIP,HELPFUL,IMPORTANT,NOTE,QUESTION,TLDR,CRITICAL] は翻訳しないでください。
-- prh.yml は日本語の校正ルールが書かれたYAMLファイルです。このルールに従って翻訳してください。
+- TIP/HELPFUL/IMPORTANT/NOTE/QUESTION/TLDR/CRITICAL から始まるプレフィックスは翻訳せず、そのまま出力してください。
+- prh.yml に書かれた日本語の校正ルールに従って翻訳してください。出力に prh.yml は不要です。
 `.trim(),
 });
 
@@ -106,7 +107,7 @@ async function translateFile(file: string, forceWrite = false) {
             fileUri: contentFile.file.uri,
           },
         },
-        `content.md を日本語に翻訳してください。`,
+        `content.md を日本語に翻訳した結果を出力してください。`,
       ])
       .then(({ response }) => response.text());
     await writeTranslatedContent(file, translatedContent, forceWrite);

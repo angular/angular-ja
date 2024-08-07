@@ -1,27 +1,27 @@
-# Understanding Pipes
+# パイプを理解する
 
-Use pipes to transform strings, currency amounts, dates, and other data for display.
+パイプを使用して、文字列、通貨額、日付、その他のデータを画面表示用に変換します。
 
-## What is a pipe
+## パイプとは
 
-Pipes are simple functions to use in templates to accept an input value and return a transformed value. Pipes are useful because you can use them throughout your application, while only declaring each pipe once.
-For example, you would use a pipe to show a date as **April 15, 1988** rather than the raw string format.
+パイプは、テンプレートで使用されるシンプルな関数であり、入力値を受け取って変換された値を返します。パイプは、パイプを一度だけ宣言するだけでアプリケーション全体でパイプを使用できるため、便利です。
+たとえば、パイプを使用して、生の文字列ではなく、**1988年4月15日**のように日付を表示します。
 
-You can create your own custom pipes to expose reusable transformations in templates.
+独自のパイプを作成して、テンプレートで再利用可能な変換を公開できます。
 
-## Built-in pipes
+## 組み込みパイプ
 
-Angular provides built-in pipes for typical data transformations, including transformations for internationalization (i18n), which use locale information to format data.
-The following are commonly used built-in pipes for data formatting:
+Angularは、国際化（i18n）のための変換を含む、一般的なデータ変換のための組み込みパイプを提供しています。これは、ロケール情報を用いてデータをフォーマットします。
+以下は、データフォーマットによく使用される組み込みパイプです。
 
-- [`DatePipe`](api/common/DatePipe): Formats a date value according to locale rules.
-- [`UpperCasePipe`](api/common/UpperCasePipe): Transforms text to all upper case.
-- [`LowerCasePipe`](api/common/LowerCasePipe): Transforms text to all lower case.
-- [`CurrencyPipe`](api/common/CurrencyPipe): Transforms a number to a currency string, formatted according to locale rules.
-- [`DecimalPipe`](/api/common/DecimalPipe): Transforms a number into a string with a decimal point, formatted according to locale rules.
-- [`PercentPipe`](api/common/PercentPipe): Transforms a number to a percentage string, formatted according to locale rules.
-- [`AsyncPipe`](api/common/AsyncPipe): Subscribe and unsubscribe to an asynchronous source such as an observable.
-- [`JsonPipe`](api/common/JsonPipe): Display a component object property to the screen as JSON for debugging.
+- [`DatePipe`](api/common/DatePipe): ロケールルールに従って日付値をフォーマットします。
+- [`UpperCasePipe`](api/common/UpperCasePipe): テキストをすべて大文字に変換します。
+- [`LowerCasePipe`](api/common/LowerCasePipe): テキストをすべて小文字に変換します。
+- [`CurrencyPipe`](api/common/CurrencyPipe): ロケールルールに従って、数値を通貨文字列に変換します。
+- [`DecimalPipe`](/api/common/DecimalPipe): ロケールルールに従って、数値を小数点付きの文字列に変換します。
+- [`PercentPipe`](api/common/PercentPipe): ロケールルールに従って、数値をパーセンテージ文字列に変換します。
+- [`AsyncPipe`](api/common/AsyncPipe): Observableなどの非同期ソースを購読および購読解除します。
+- [`JsonPipe`](api/common/JsonPipe): デバッグのために、コンポーネントオブジェクトのプロパティをJSONとして画面に表示します。
 
-Note: For a complete list of built-in pipes, see the [pipes API documentation](/api?type=pipe "Pipes API reference summary").
-To learn more about using pipes for internationalization (i18n) efforts, see [formatting data based on locale](guide/i18n/format-data-locale).
+Note: 組み込みパイプの完全なリストについては、[パイプAPIドキュメント](/api?type=pipe "パイプAPIリファレンスサマリー")を参照してください。
+国際化（i18n）におけるパイプの使用の詳細については、[ロケールに基づくデータのフォーマット](guide/i18n/format-data-locale)を参照してください。

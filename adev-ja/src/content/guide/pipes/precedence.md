@@ -1,28 +1,28 @@
-# Pipe precedence in template expressions
+# テンプレート式におけるパイプの優先順位
 
-Sometimes you want to choose between two values, based on some condition, before passing the choice to the pipe.
-You could use the JavaScript ternary operator (`?:`) in the template to make that choice.
+条件に基づいて2つの値から選択し、その選択結果をパイプに渡したい場合があります。
+テンプレートでJavaScriptの三項演算子(`?:`)を使用して選択できます。
 
-Beware! The pipe operator has a higher precedence than the JavaScript ternary operator (`?:`).
+注意してください！パイプ演算子はJavaScriptの三項演算子(`?:`)よりも優先順位が高いです。
 
-If you simply write the expression as if it were evaluated left-to-right, you might be surprised by the result. For example,
+左から右に評価されるかのように式を記述した場合、結果は予想外になる可能性があります。例えば、
 
 ```ts
 condition ? a : b | pipe
 ```
 
-is parsed as
+これは次のように解析されます。
 
 ```ts
 condition ? a : (b | pipe)
 ```
 
-The value of `b` passes through `pipe`; the value of `a` *will not*.
+`b`の値は`pipe`を通過しますが、`a`の値は**通過しません**。
 
-If you want the pipe to apply to the result of the ternary expression, wrap the entire expression in parentheses. For example,
+パイプが三項演算子の結果に適用されるようにするには、式全体を括弧で囲みます。例えば、
 
 ```ts
 (condition ? a : b) | pipe
 ```
 
-In general, you should always use parentheses to be sure Angular evaluates the expression as you intend.
+一般的に、Angularが意図したとおりに式を評価するように、常に括弧を使用する必要があります。

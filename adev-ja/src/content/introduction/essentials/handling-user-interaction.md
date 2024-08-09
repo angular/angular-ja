@@ -17,7 +17,7 @@
 
 たとえば、`click`イベントが発生したときに`transformText`関数を呼び出すボタンを作成する場合は、次のようになります。
 
-```ts
+```angular-ts
 // text-transformer.component.ts
 @Component({
   standalone: true,
@@ -38,8 +38,10 @@ export class TextTransformer {
 
 その他の一般的なイベントリスナーの例を次に示します。
 
-- `<input (keyup)="validateInput()" />`
-- `<input (keydown)="updateInput()" />`
+```angular-html
+<input (keyup)="validateInput()" />
+<input (keydown)="updateInput()" />
+```
 
 ### $event
 

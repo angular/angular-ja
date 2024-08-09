@@ -10,7 +10,7 @@ Angularのテンプレート構文を使用して、動的なHTMLを作成しま
 
 以下は、`TodoListItem`コンポーネントの簡略化された例です。
 
-```ts
+```angular-ts
 @Component({
   selector: 'todo-list-item',
   template: `
@@ -38,7 +38,7 @@ HTML要素の標準DOMプロパティの値を動的に設定する必要があ�
 
 目的のプロパティを角括弧で囲むことで、Angularに割り当てられた値が動的である（つまり、静的な文字列ではない）ことを伝えます。
 
-```ts
+```angular-ts
 @Component({
   selector: 'sign-up-form',
   template: `
@@ -60,7 +60,7 @@ export class SignUpForm {
 
 カスタムHTML属性（例：`aria-`、`data-`など）を動的にバインドしたい場合、カスタム属性を同じ角括弧で囲むことを試みるかもしれません。
 
-```ts
+```angular-ts
 @Component({
   standalone: true,
   template: `
@@ -74,7 +74,7 @@ export class AppBanner {
 
 残念ながら、これは機能しません。なぜなら、カスタムHTML属性は標準DOMプロパティではないからです。これを意図したとおりに機能させるには、カスタムHTML属性の前に`attr.`プレフィックスを追加する必要があります。
 
-```ts
+```angular-ts
 @Component({
   standalone: true,
   template: `

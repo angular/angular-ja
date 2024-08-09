@@ -29,7 +29,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
 `RouterLink`ディレクティブを使用するには、`href`属性を`routerLink`に置き換えます。この変更をテンプレートに適用してください。
 
-```ts
+```angular-ts
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({

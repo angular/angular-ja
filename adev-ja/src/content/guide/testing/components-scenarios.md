@@ -515,20 +515,12 @@ IMPORTANT: `click()`ヘルパー関数は、Angularのテストユーティリ�
 
 <docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="click-test-3"/>
 
-<!-- TODO(atscott): ガイドの上記は、06/11/2024に更新されました。以下のセクションの更新を続けてください。 -->
 ## テストホスト内のコンポーネント
 
 前のテストは、ホスト`DashboardComponent`の役割を自身で演じていました。
 しかし、`DashboardHeroComponent`は、ホストコンポーネントに適切にデータバインドされている場合、正しく動作するでしょうか？
 
-実際の`DashboardComponent`でテストすることもできます。
-しかし、そうすると、特にテンプレートに`*ngFor`リピーター、他のコンポーネント、レイアウトHTML、追加のバインディング、複数のサービスを注入するコンストラクター、そしてそのサービスとすぐにやり取りを開始するコンストラクターが含まれている場合、多くのセットアップが必要になる可能性があります。
-
-このような邪魔なものをすべて無効にする労力を想像してみてください。それは、単に次のような*テストホスト*で十分に説明できるポイントを証明するためだけです。
-
 <docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test host)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host"/>
-
-このテストホストは、`DashboardComponent`が行うように`DashboardHeroComponent`にバインドしますが、`Router`、`HeroService`、または`*ngFor`リピーターのノイズはありません。
 
 テストホストは、コンポーネントの`hero`入力プロパティをテストヒーローで設定します。
 これは、コンポーネントの`selected`イベントを`onSelected`ハンドラーにバインドし、これは`selectedHero`プロパティに発行されたヒーローを記録します。
@@ -541,7 +533,7 @@ IMPORTANT: `click()`ヘルパー関数は、Angularのテストユーティリ�
 
 このテストモジュール設定は、3つの重要な違いを示しています。
 
-* `DashboardHeroComponent`と`TestHostComponent`の両方を*宣言*します
+* `DashboardHeroComponent`と`TestHostComponent`の両方を*インポート*します
 * `DashboardHeroComponent`ではなく`TestHostComponent`を*作成*します
 * `TestHostComponent`は、バインディングで`DashboardHeroComponent.hero`を設定します
 
@@ -562,14 +554,7 @@ IMPORTANT: `click()`ヘルパー関数は、Angularのテストユーティリ�
 *ルーティングコンポーネント*は、`Router`に別のコンポーネントにナビゲートするように指示するコンポーネントです。
 `DashboardComponent`は、ユーザーがダッシュボードの*ヒーローボタン*の1つをクリックすることで`HeroDetailComponent`にナビゲートできるため、*ルーティングコンポーネント*です。
 
-ルーティングは非常に複雑です。
-`DashboardComponent`をテストするのは、`Router`を注入し、`HeroService`と組み合わせて注入するため、困難でした。
-
-<docs-code header="app/dashboard/dashboard.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.ts" visibleRegion="ctor"/>
-
-<docs-code header="app/dashboard/dashboard.component.ts (goToDetail)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.ts" visibleRegion="goto-detail" />
-
-Angularは、ルーターとHttpClientに依存するコードをより効果的にテストするために、テストヘルパーを提供しています。
+Angularは、ルーターに依存するコードをより効果的にテストするために、テストヘルパーを提供しています。`provideRouter`関数はテストモジュール内でも直接使えます。
 
 <docs-code header="app/dashboard/dashboard.component.spec.ts" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="router-harness"/>
 
@@ -624,13 +609,13 @@ HELPFUL: 後のセクションでは、`createComponent()`メソッドと`page`�
 
 コンポーネントテンプレートには、多くの場合、ネストされたコンポーネントが含まれています。そのテンプレートには、さらに多くのコンポーネントが含まれている場合があります。
 
-コンポーネントツリーは非常に深くなる可能性があり、ほとんどの場合、ネストされたコンポーネントはツリーの先頭に配置されたコンポーネントをテストする際に役割を果たしません。
+コンポーネントツリーは非常に深くなる可能性があり、ネストされたコンポーネントはツリーの先頭に配置されたコンポーネントをテストする際に役割を果たさないことがあります。
 
 たとえば、`AppComponent`は、アンカーと`RouterLink`ディレクティブを持つナビゲーションバーを表示します。
 
 <docs-code header="app/app.component.html" path="adev/src/content/examples/testing/src/app/app.component.html"/>
 
-リンクを検証するために、`Router`がナビゲートする必要はなく、`Router`が*ルーティングされたコンポーネント*を挿入する場所を示す`<router-outlet>`も必要ありません。
+ナビゲーションではなくリンクを検証するために、`Router`が*ルーティングされたコンポーネント*を挿入する場所を示す`<router-outlet>`も必要ありません。
 
 `BannerComponent`と`WelcomeComponent`（`<app-banner>`と`<app-welcome>`で示されています）も関係ありません。
 
@@ -639,8 +624,6 @@ HELPFUL: 後のセクションでは、`createComponent()`メソッドと`page`�
 それらを宣言することを怠ると、Angularコンパイラーは`AppComponent`テンプレートの`<app-banner>`、`<app-welcome>`、および`<router-outlet>`タグを認識せず、エラーをスローします。
 
 実際のコンポーネントを宣言すると、*それら*のネストされたコンポーネントも宣言し、ツリー内の*任意の*コンポーネントに注入された*すべての*サービスを提供する必要があります。
-
-それは、リンクに関する簡単な質問に答えるために、あまりにも多くの労力が必要です。
 
 このセクションでは、セットアップを最小限にするための2つのテクニックについて説明します。
 これらを単独で、または組み合わせて使用して、主要なコンポーネントのテストに集中してください。
@@ -719,8 +702,6 @@ Angularコンパイラーは、`<app-banner>`要素に対して`BannerStubCompon
 
 `HeroDetailComponent`は、タイトル、2つのヒーローフィールド、2つのボタンを持つ単純なビューです。
 
-<img alt="HeroDetailComponent in action" src="assets/images/guide/testing/hero-detail.component.png">
-
 しかし、この単純な形式でも、テンプレートの複雑さはたくさんあります。
 
 <docs-code
@@ -732,7 +713,6 @@ Angularコンパイラーは、`<app-banner>`要素に対して`BannerStubCompon
 * タイトルテキストへの参照
 * 検査および設定するための名前入力ボックスへの参照
 * クリックできる2つのボタンへの参照
-* コンポーネントとルーターのメソッドのスパイ
 
 このような小さなフォームでも、むち打ちの条件付きセットアップとCSS要素の選択の混乱を招く可能性があります。
 

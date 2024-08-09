@@ -73,8 +73,8 @@ HELPFUL: テンプレート内で変数を1回だけ定義してください。�
 ただし、親テンプレートから子スコープのテンプレート変数にはアクセスできません。
 
 ```angular-html
-  <input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
-  <span>Value: {{ ref2?.value }}</span> <!-- 機能しません -->
+<input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
+<span>Value: {{ ref2?.value }}</span> <!-- 機能しません -->
 ```
 
 ここでは、`ref2` は `*ngIf` によって作成された子スコープで宣言されており、親テンプレートからはアクセスできません。

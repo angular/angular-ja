@@ -565,16 +565,19 @@ export const yourGuardFunction: CanActivateFn = (
 
 また、`AppComponent`テンプレートを危機センターのルート専用に再定義できます：
 
-```ts
-template: `
-  <h1 class="title">Angular Router</h1>
-  <nav>
-    <a [routerLink]="['/crisis-center']">Crisis Center</a>
-    <a [routerLink]="['/crisis-center/1', { foo: 'foo' }]">Dragon Crisis</a>
-    <a [routerLink]="['/crisis-center/2']">Shark Crisis</a>
-  </nav>
-  <router-outlet></router-outlet>
-`
+```angular-ts
+@Component({
+  template: `
+    <h1 class="title">Angular Router</h1>
+    <nav>
+      <a [routerLink]="['/crisis-center']">Crisis Center</a>
+      <a [routerLink]="['/crisis-center/1', { foo: 'foo' }]">Dragon Crisis</a>
+      <a [routerLink]="['/crisis-center/2']">Shark Crisis</a>
+    </nav>
+    <router-outlet></router-outlet>
+  `
+})
+export class AppComponent {}
 ```
 
 要約すると、ルーティングが1レベル、2レベル、または複数レベルのアプリケーションを作成できます。

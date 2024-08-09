@@ -12,7 +12,7 @@ Angularでフォームをセットアップしたら、次のステップはフ�
 
 テンプレートに入力値を表示するには、コンポーネントの他のクラスプロパティと同様に、補間構文 `{{}}` を使用できます。
 
-<docs-code language="ts" highlight="[5]">
+<docs-code language="angular-ts" highlight="[5]">
 @Component({
   selector: 'app-user',
   template: `
@@ -35,7 +35,7 @@ export class UserComponent {
 
 コンポーネントクラスで入力フィールド値を参照する必要がある場合は、`this` 構文を使用してクラスプロパティにアクセスできます。
 
-<docs-code language="ts" highlight="[15]">
+<docs-code language="angular-ts" highlight="[15]">
 ...
 @Component({
   selector: 'app-user',

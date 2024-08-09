@@ -49,7 +49,7 @@ export const appConfig: ApplicationConfig = {
 
 `AppComponent` のテンプレートを更新し、`<router-outlet />` を追加します。
 
-<docs-code language="ts" highlight="[11]">
+<docs-code language="angular-ts" highlight="[11]">
 import {RouterOutlet} from '@angular/router';
 
 @Component({

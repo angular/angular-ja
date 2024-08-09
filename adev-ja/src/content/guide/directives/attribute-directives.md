@@ -143,12 +143,12 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 次の例では、式`{{ 1 + 1 }}`はコードエディタと同じようにレンダリングされ、`2`は表示されません。
 
-<docs-code header="src/app/app.component.html" linenums="false" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="ngNonBindable"/>
+<docs-code header="src/app/app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="ngNonBindable"/>
 
 `ngNonBindable`を要素に適用すると、その要素の子要素のバインディングが停止します。
 ただし、`ngNonBindable`は、`ngNonBindable`を適用した要素に対しては、ディレクティブを動作させます。
 次の例では、`appHighlight`ディレクティブはアクティブですが、Angularは式`{{ 1 + 1 }}`を評価しません。
 
-<docs-code header="src/app/app.component.html" linenums="false" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="ngNonBindable-with-directive"/>
+<docs-code header="src/app/app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="ngNonBindable-with-directive"/>
 
 `ngNonBindable`を親要素に適用すると、Angularは要素の子要素に対して、プロパティバインディングやイベントバインディングなどあらゆる種類の補間とバインディングを無効にします。

@@ -24,7 +24,7 @@ export class CustomListbox extends ListboxBase {
 これには、セレクター、テンプレート、スタイル、ホストバインディング、入力、出力、ライフサイクルメソッド、
 およびその他の設定が含まれます。
 
-```ts
+```angular-ts
 @Component({
   selector: 'base-listbox',
   template: `

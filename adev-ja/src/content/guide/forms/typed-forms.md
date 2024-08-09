@@ -12,8 +12,8 @@ Angularリアクティブフォームでは、*フォームモデル* を明示�
 
 ```ts
 const login = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+  email: new FormControl(''),
+  password: new FormControl(''),
 });
 ```
 
@@ -37,8 +37,8 @@ const emailDomain = login.value.email.domain;
 
 ```ts
 const login = new UntypedFormGroup({
-    email: new UntypedFormControl(''),
-    password: new UntypedFormControl(''),
+  email: new UntypedFormControl(''),
+  password: new UntypedFormControl(''),
 });
 ```
 
@@ -132,13 +132,13 @@ const login = new FormGroup({
 
 ```ts
 interface LoginForm {
-    email: FormControl<string>;
-    password?: FormControl<string>;
+  email: FormControl<string>;
+  password?: FormControl<string>;
 }
 
 const login = new FormGroup<LoginForm>({
-    email: new FormControl('', {nonNullable: true}),
-    password: new FormControl('', {nonNullable: true}),
+  email: new FormControl('', {nonNullable: true}),
+  password: new FormControl('', {nonNullable: true}),
 });
 
 login.removeControl('password');
@@ -174,8 +174,8 @@ const addresses = fb.record({'Andrew': '2340 Folsom St'});
 ```ts
 const fb = new FormBuilder();
 const login = fb.nonNullable.group({
-    email: '',
-    password: '',
+  email: '',
+  password: '',
 });
 ```
 

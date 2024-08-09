@@ -6,7 +6,7 @@ Angularは、コンポーネントのセレクターに一致するすべてのH
 コンポーネントのセレクターに一致するDOM要素は、そのコンポーネントの**ホスト要素**です。
 コンポーネントのテンプレートの内容は、ホスト要素内にレンダリングされます。
 
-```ts
+```angular-ts
 // コンポーネントソース
 @Component({
   selector: 'profile-photo',
@@ -41,7 +41,7 @@ export class ProfilePhoto {}
 これは、コンポーネントのテンプレート内の要素のバインディングと同じように動作しますが、
 `@Component`デコレーターの`host`プロパティで定義されます。
 
-```ts
+```angular-ts
 @Component({
   ...,
   host: {
@@ -68,7 +68,7 @@ export class CustomSlider {
 
 `@HostBinding`を使用すると、ホストのプロパティと属性を、プロパティとメソッドにバインドできます。
 
-```ts
+```angular-ts
 @Component({
   /* ... */
 })
@@ -105,7 +105,7 @@ export class CustomSlider {
 テンプレートでコンポーネントを使用する場合、そのコンポーネントインスタンスの要素にバインディングを追加できます。
 コンポーネントは、同じプロパティまたは属性に対するホストバインディングを定義することもあります。
 
-```ts
+```angular-ts
 @Component({
   ...,
   host: {

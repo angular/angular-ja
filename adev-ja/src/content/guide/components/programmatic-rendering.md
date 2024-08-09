@@ -11,7 +11,7 @@ Tip: このガイドでは、[基本概念のガイド](essentials)をすでに�
 `NgComponentOutlet`は、
 テンプレートで指定されたコンポーネントを動的にレンダリングする構造ディレクティブです。
 
-```ts
+```angular-ts
 @Component({ ... })
 export class AdminBio { /* ... */ }
 
@@ -46,7 +46,7 @@ DOM内のそのコンポーネントまたはディレクティブの場所に�
 `ViewContainerRef`で新しいコンポーネントを作成すると、
 Angularはそのコンポーネントを、`ViewContainerRef`を注入したコンポーネントまたはディレクティブの次の兄弟としてDOMに追加します。
 
-```ts
+```angular-ts
 @Component({
   selector: 'leaf-content',
   template: `
@@ -99,7 +99,7 @@ export class InnerItem {
 標準のJavaScript [動的インポート](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import)で
 遅延読み込みされるコンポーネントをレンダリングできます。
 
-```ts
+```angular-ts
 @Component({
   ...,
   template: `
@@ -113,7 +113,8 @@ export class InnerItem {
         Load advanced settings
       </button>
       <ng-container *ngComponentOutlet="advancedSettings" />
-    </section>`
+    </section>
+  `
 })
 export class AdminSettings {
   advancedSettings: {new(): AdminSettings} | undefined;

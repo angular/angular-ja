@@ -71,7 +71,7 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
 
 <docs-card-container>
   <docs-card title="ng testでユニットテストツールを最新化する" href="">
-  v12では、ProtractorをCypress、Nightwatch、WebDriver.ioなどの最新の代替手段に置き換えることで、Angularのエンドツーエンドテストエクスペリエンスを再検討しました。次に、Angularのユニットテストエクスペリエンスを最新化するために、`ng test`に取り組みたいと思います。2023年第2四半期に、実験的な[Jest](https://jestjs.io/)サポートを導入し、[発表](https://blog.angular.io/moving-angular-cli-to-jest-and-web-test-runner-ef85ef69ceca)したように、Karmaから[Web Test Runner](https://modern-web.dev/docs/test-runner/overview/)への移行を発表しました。
+  v12では、ProtractorをCypress、Nightwatch、WebDriver.ioなどの最新の代替手段に置き換えることで、Angularのエンドツーエンドテストエクスペリエンスを再検討しました。次に、Angularのユニットテストエクスペリエンスを最新化するために、`ng test`に取り組みたいと思います。2023年第2四半期に、実験的な[Jest](https://jestjs.io/)サポートを導入し、[発表](https://blog.angular.dev/moving-angular-cli-to-jest-and-web-test-runner-ef85ef69ceca)したように、Karmaから[Web Test Runner](https://modern-web.dev/docs/test-runner/overview/)への移行を発表しました。
 
   今年後半には、Web Test RunnerをKarmaの代替として導入するために進捗を続け、Karmaを廃止していく予定です。
   </docs-card>
@@ -164,7 +164,7 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
   `ng new --standalone`シェーマティックコレクションの開発者プレビューをリリースしました。これにより、NgModuleを使用せずにアプリケーションを作成できます。v17では、新しいアプリケーションのオーサリング形式をスタンドアロンAPIに変更し、ドキュメントを反映するように変更しました。さらに、既存のアプリケーションをスタンドアロンコンポーネント、ディレクティブ、およびパイプに更新するシェーマティックを提供しました。NgModuleは当面の間残りますが、新しいAPIの利点を活用して開発者エクスペリエンスを向上させ、構築した新機能を活用することをお勧めします。
   </docs-card>
   <docs-card title="ハイドレーションとサーバーサイドレンダリングの改善を調査する" link="2023年第4四半期に完了">
-  v16では、非破壊的な完全なハイドレーションの開発者プレビューをリリースしました。[hydrationガイド](guide/hydration)と[ブログ投稿](https://blog.angular.io/whats-next-for-server-side-rendering-in-angular-2a6f27662b67)で詳細を確認してください。[LCP](https://web.dev/lcp)と[CLS](https://web.dev/cls)など、Core Web Vitalsに大きな改善が見られています。ラボテストでは、実世界のアプリケーションでLCPが常に45％向上していることが観察されました。
+  v16では、非破壊的な完全なハイドレーションの開発者プレビューをリリースしました。[hydrationガイド](guide/hydration)と[ブログ投稿](https://blog.angular.dev/whats-next-for-server-side-rendering-in-angular-2a6f27662b67)で詳細を確認してください。[LCP](https://web.dev/lcp)と[CLS](https://web.dev/cls)など、Core Web Vitalsに大きな改善が見られています。ラボテストでは、実世界のアプリケーションでLCPが常に45％向上していることが観察されました。
 
   v17では、開発者プレビュー外のハイドレーションを開始し、サーバーサイドレンダリングのストーリーで一連の改善をしました。これには、SSGのランタイムでのルート検出、ハイブリッドレンダリングされたアプリケーションのビルド時間の最大87％の高速化、新しいプロジェクトのハイブリッドレンダリングを有効にするプロンプトが含まれます。
   </docs-card>
@@ -180,7 +180,7 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
   <docs-card title="画像のパフォーマンスを向上させる" link="2022年第4四半期に完了" href="guide/image-optimization">
   AuroraチームとAngularチームは、Core Web Vitalsを改善することを目的とした画像ディレクティブの実装に取り組んでいます。v15で画像ディレクティブの安定版をリリースしました。
   </docs-card>
-  <docs-card title="最新のCSS" link="2022年第4四半期に完了" href="https://blog.angular.io/modern-css-in-angular-layouts-4a259dca9127">
+  <docs-card title="最新のCSS" link="2022年第4四半期に完了" href="https://blog.angular.dev/modern-css-in-angular-layouts-4a259dca9127">
   ウェブエコシステムは常に進化しており、Angularに最新の標準を反映させたいと考えています。このプロジェクトでは、開発者がレイアウト、スタイリングなど、ベストプラクティスに従うように、Angularで最新のCSS機能を使用するためのガイドラインを提供することを目指しています。レイアウトの公式ガイドラインを共有し、このイニシアチブの一環として、フレックスレイアウトの公開を停止しました。
   </docs-card>
   <docs-card title="ホスト要素へのディレクティブの追加をサポートする" link="2022年第4四半期に完了" href="guide/directives/directive-composition-api">
@@ -192,7 +192,7 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
   <docs-card title="MDC Webを統合することでAngular Materialコンポーネントを強化" link="2022年第4四半期に完了" href="https://material.angular.io/guide/mdc-migration">
   MDC Webは、GoogleのMaterial Designチームが作成したライブラリであり、Material Designコンポーネントを構築するための再利用可能なプリミティブを提供します。Angularチームは、これらのプリミティブをAngular Materialに組み込んでいます。MDC Webを使用すると、Angular MaterialはMaterial Design仕様にさらに準拠し、アクセシビリティが向上し、コンポーネントの品質が向上し、チームの速度が向上します。
   </docs-card>
-  <docs-card title="オプションのNgModuleのAPIを実装する" link="2022年第4四半期に完了" href="https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8">
+  <docs-card title="オプションのNgModuleのAPIを実装する" link="2022年第4四半期に完了" href="https://blog.angular.dev/angular-v15-is-now-available-df7be7f2f4c8">
   Angularを簡素化する過程で、開発者がNgModuleを使用せずにアプリケーションを初期化し、コンポーネントをインスタンス化し、ルーターを使用できるAPIを導入しています。Angular v14では、スタンドアロンコンポーネントやディレクティブおよびパイプのAPIの開発者プレビューを導入しました。今後の数四半期で、開発者からのフィードバックを収集し、プロジェクトを最終化してAPIを安定版にします。次のステップとして、TestBed、Angular要素など、ユースケースを改善していきます。
   </docs-card>
   <docs-card title="テンプレートで保護されたフィールドへのバインドを許可する" link="2022年第2四半期に完了" href="guide/templates/binding">
@@ -204,10 +204,10 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
   <docs-card title="@angular/formsの厳密な型付けを展開する" link="2022年第2四半期に完了" href="guide/forms/typed-forms">
   2021年第4四半期に、フォームの厳密な型付けを導入するためのソリューションを設計し、2022年第1四半期に関連するRFCを終了しました。現在、既存のプロジェクトの改善を可能にする自動移行ステップを備えた展開戦略を実装しています。まず、Googleの2,500を超えるプロジェクトでソリューションをテストして、外部コミュニティの円滑な移行パスを確保します。
   </docs-card>
-  <docs-card title="レガシーのView Engineを削除する" link="2022年第1四半期に完了" href="https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8">
+  <docs-card title="レガシーのView Engineを削除する" link="2022年第1四半期に完了" href="https://blog.angular.dev/angular-v15-is-now-available-df7be7f2f4c8">
   すべての社内ツールをIvyに移行したら、レガシーのView Engineを削除します。これにより、Angularの概念上のオーバーヘッドが削減され、パッケージサイズが小さくなり、メンテナンスコストが削減され、コードベースの複雑さが軽減されます。
   </docs-card>
-  <docs-card title="オプションのNgModuleを使用してAngularのメンタルモデルを簡素化する" link="2022年第1四半期に完了" href="https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8">
+  <docs-card title="オプションのNgModuleを使用してAngularのメンタルモデルを簡素化する" link="2022年第1四半期に完了" href="https://blog.angular.dev/angular-v15-is-now-available-df7be7f2f4c8">
   Angularのメンタルモデルと学習プロセスを簡素化するために、NgModuleをオプションにする取り組みを進めています。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。このプロジェクトは、RFCにまとめたハイレベルな設計の議論から開始されました。
   </docs-card>
   <docs-card title="@angular/formsの厳密な型付けを設計する" link="2022年第1四半期に完了" href="guide/forms/typed-forms">

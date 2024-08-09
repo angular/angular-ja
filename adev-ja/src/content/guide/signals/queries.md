@@ -20,18 +20,18 @@ Angularのクエリに既に詳しい場合は、[シグナルベースのクエ
 
 `viewChild` 関数を使って、単一の結果をターゲットとするクエリを宣言できます。
 
-```ts
+```angular-ts
 @Component({
-    template: `
-        <div #el></div>
-        <my-component />
-    `
+  template: `
+    <div #el></div>
+    <my-component />
+  `
 })
 export class TestComponent {
-    // 文字列述語による単一結果のクエリ
-    divEl = viewChild<ElementRef>('el');       // Signal<ElementRef|undefined>
-    // 型述語による単一結果のクエリ
-    cmp = viewChild(MyComponent);              // Signal<MyComponent|undefined>
+  // query for a single result by a string predicate  
+  divEl = viewChild<ElementRef>('el')  // Signal<ElementRef|undefined>
+  // query for a single result by a type predicate
+  cmp = viewChild(MyComponent);        // Signal<MyComponent|undefined>
 }
 ```
 
@@ -39,20 +39,20 @@ export class TestComponent {
 
 `viewChildren` 関数を使って、複数の結果をクエリできます。
 
-```ts
- @Component({
-    template: `
-        <div #el></div>
-        @if (show) {
-            <div #el></div>
-        }
-    `
+```angular-ts
+@Component({
+  template: `
+    <div #el></div>
+    @if (show) {
+      <div #el></div>
+    }
+  `
 })
 export class TestComponent {
-    show = true;
+  show = true;
 
-    // 複数の結果に対するクエリ
-    divEls = viewChildren<ElementRef>('el');        // Signal<ReadonlyArray<ElementRef>>
+  // query for multiple results
+  divEls = viewChildren<ElementRef>('el');    // Signal<ReadonlyArray<ElementRef>>
 }
 ```
 
@@ -65,13 +65,13 @@ export class TestComponent {
 
 シグナルベースのビュークエリは、`read` という1つのオプションのみを受け付けます。`read` オプションは、一致したノードから注入して最終結果で返す結果の型を示します。
 
-```ts
+```angular-ts
 @Component({
-    template: `<my-component/>`
+  template: `<my-component/>`
 })
 export class TestComponent {
-    // オプション付きの単一結果に対するクエリ
-    cmp = viewChild(MyComponent, {read: ElementRef});   // Signal<ElementRef|undefined>
+  // query for a single result with options
+  cmp = viewChild(MyComponent, {read: ElementRef});   // Signal<ElementRef|undefined>
 }
 ```
 
@@ -85,12 +85,12 @@ export class TestComponent {
 
 ```ts
 @Component({...})
-    export class TestComponent {
-    // 文字列述語によるクエリ
-    headerEl = contentChild<ElementRef>('h');   // Signal<ElementRef|undefined>
+  export class TestComponent {
+  // query by a string predicate  
+  headerEl = contentChild<ElementRef>('h');   // Signal<ElementRef|undefined>
 
-    // 型述語によるクエリ
-    header = contentChild(MyHeader);            // Signal<MyHeader|undefined>
+  // query by a type predicate
+  header = contentChild(MyHeader);            // Signal<MyHeader|undefined>
 }
 ```
 
@@ -99,11 +99,11 @@ export class TestComponent {
 `contentChildren` 関数を使って、複数の結果をクエリできます。
 
 ```ts
-    @Component({...})
-    export class TestComponent {
-    // 複数の結果に対するクエリ
-    divEls = contentChildren<ElementRef>('h');  // Signal<ReadonlyArray<ElementRef>>
-    }
+@Component({...})
+export class TestComponent {
+  // query for multiple results
+  divEls = contentChildren<ElementRef>('h');  // Signal<ReadonlyArray<ElementRef>>
+}
 ```
 
 ### コンテンツクエリオプション
@@ -128,7 +128,7 @@ export class TestComponent {
 
 このような場合、子クエリを `required` とマークすることで、少なくとも1つのマッチする結果の存在を強制できます。これにより、結果型シグネチャから `undefined` が削除されます。`required` クエリが結果を見つけられない場合、Angularはエラーをスローします。
 
-```ts
+```angular-ts
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -137,12 +137,12 @@ export class TestComponent {
   `,
 })
 export class App {
-  existingEl = viewChild.required('requiredEl');     // 必須で存在する結果
-  missingEl = viewChild.required('notInATemplate'); // 必須だが存在しない結果
+  existingEl = viewChild.required('requiredEl');     // required and existing result
+  missingEl = viewChild.required('notInATemplate');  // required but NOT existing result
   
   ngAfterViewInit() {
     console.log(this.existingEl()); // OK :-)
-    console.log(this.missingEl());  // ランタイムエラー: 結果は必須とマークされているが、利用できません! 
+    console.log(this.missingEl());  // Runtime error: result marked as required by not available! 
   }
 }
 ```
@@ -161,7 +161,7 @@ Angularは、シグナルベースのクエリ結果を必要に応じて遅延�
 
 `viewChild`、`contentChild`、`viewChildren`、`contentChildren` 関数は、Angularコンパイラによって認識される特別な関数です。これらの関数を使って、コンポーネントまたはディレクティブプロパティを初期化することでクエリを宣言できます。これらの関数をコンポーネントとディレクティブのプロパティイニシャライザー以外で呼び出すことはできません。
 
-```ts
+```angular-ts
 @Component({
   selector: 'app-root',
   standalone: true,

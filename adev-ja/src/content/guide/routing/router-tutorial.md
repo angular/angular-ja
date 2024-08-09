@@ -153,7 +153,7 @@ Angular CLIを使用して、新しいアプリケーション *angular-router-s
 `crisis-list` コンポーネントを表示するには、ブラウザのアドレスバーのパス末尾に `crisis-list` を追加します。
 たとえば、次のとおりです。
 
-<docs-code language="text">
+<docs-code language="http">
 http://localhost:4200/crisis-list
 </docs-code>
 
@@ -161,7 +161,7 @@ http://localhost:4200/crisis-list
 Angularは、定義したルートを使用してコンポーネントを動的にロードしています。
 同じ方法で `heroes-list` コンポーネントをロードできます。
 
-<docs-code language="text">
+<docs-code language="http">
 http://localhost:4200/heroes-list
 </docs-code>
 

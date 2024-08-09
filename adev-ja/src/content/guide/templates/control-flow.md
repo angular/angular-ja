@@ -81,7 +81,7 @@ DOM操作の最小限のセットを実行できます。
 
 ```angular-html
 @for (item of items; track item.id; let idx = $index, e = $even) {
-Item #{{ idx }}: {{ item.name }}
+  Item #{{ idx }}: {{ item.name }}
 }
 ```
 

@@ -8,7 +8,7 @@ HELPFUL: モデル入力は現在 [開発者プレビュー](/reference/releases
 コンポーネントを作成するときは、普通の入力を作成する方法と同様に、
 モデル入力を定義できます。
 
-```typescript
+```angular-ts
 import {Component, model, input} from '@angular/core';
 
 @Component({...})
@@ -27,7 +27,7 @@ export class CustomCheckbox {
 その他の点では、モデル入力を普通の入力と同じように使用できます。
 `computed` や `effect` などのリアクティブコンテキストを含め、シグナル関数を呼び出して値を読み取ることができます。
 
-```typescript
+```angular-ts
 import {Component, model, input} from '@angular/core';
 
 @Component({
@@ -53,7 +53,7 @@ Angularはその入力に値をバインドしているコンポーネントに�
 
 書き込み可能なシグナルをモデル入力にバインドできます。
 
-```typescript
+```angular-ts
 @Component({
   ...,
   // `checked` はモデル入力です。
@@ -74,7 +74,7 @@ export class UserProfile {
 
 プレーンなJavaScriptプロパティをモデル入力にバインドできます。
 
-```typescript
+```angular-ts
 @Component({
   ...,
   // `checked` はモデル入力です。
@@ -96,7 +96,7 @@ export class UserProfile {
 Angularはそのモデルに対応する [出力](guide/components/outputs) を自動的に作成します。
 出力の名前は、モデル入力の名前の後に「Change」が付加されたものです。
 
-```typescript
+```angular-ts
 @Directive({...})
 export class CustomCheckbox {
   // これは、自動的に「checkedChange」という名前の出力を作成します。

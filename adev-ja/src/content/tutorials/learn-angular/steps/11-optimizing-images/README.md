@@ -28,7 +28,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 `NgOptimizedImage` ディレクティブを有効にするには、`src` 属性を `ngSrc` に置き換えます。これは、静的画像ソース（`src`）と動的画像ソース（`[src]`）の両方で適用されます。
 
-<docs-code language="ts" highlight="[[9], [13]]">
+<docs-code language="angular-ts" highlight="[[9], [13]]">
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -57,7 +57,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 画像に対して静的な `height` と `width` を指定できない場合、または指定したくない場合は、[fill 属性](https://web.dev/articles/cls)を使用します。画像を「背景画像」のように動作させ、そのコンテナ要素を塗りつぶすようにできます。
 
-```ts
+```angular-html
 <div class="image-container"> // コンテナ div は 'position: "relative"'
   <img ngSrc="www.example.com/image.png" fill />
 </div>
@@ -85,9 +85,10 @@ import { NgOptimizedImage } from '@angular/common';
 providers: [
   provideImgixLoader('https://my.base.url/'),
 ]
+```
 
-// ...
-// 最終的な URL は 'https://my.base.url/image.png' になります。
+最終的な URL は 'https://my.base.url/image.png' になります。
+```angular-html
 <img ngSrc="image.png" height="600" width="800" />
 ```
 

@@ -10,7 +10,7 @@ Angularのプロパティバインディングを使用すると、HTML要素、
 
 要素の属性にバインドするには、属性名を角括弧で囲みます。例を以下に示します。
 
-```ts
+```angular-html
 <img alt="photo" [src]="imageURL">
 ```
 
@@ -31,7 +31,7 @@ export class AppComponent {
 <docs-step title="`contentEditable`にバインドする" header="app.component.ts" language="ts">
 次に、`div`の`contentEditable`属性を`isEditable`プロパティにバインドします。 <code aria-label="角括弧">[]</code>構文を使用します。
 
-<docs-code highlight="[3]">
+<docs-code highlight="[3]" language="angular-ts">
 @Component({
     ...
     template: `<div [contentEditable]="isEditable"></div>`,

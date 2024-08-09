@@ -5,7 +5,7 @@ Tip: このガイドは、すでに [基本概念のガイド](essentials) を�
 多くの場合、さまざまな種類のコンテンツを格納するコンポーネントを作成する必要があります。
 例えば、カスタムカードコンポーネントを作成したいとします。
 
-```ts
+```angular-ts
 @Component({
   selector: 'custom-card',
   template: '<div class="card-shadow"> <!-- card content goes here --> </div>',
@@ -15,7 +15,7 @@ export class CustomCard {/* ... */}
 
 **`<ng-content>` 要素は、コンテンツを配置する場所を示すプレースホルダーとして使用できます。**:
 
-```ts
+```angular-ts
 @Component({
   selector: 'custom-card',
   template: '<div class="card-shadow"> <ng-content></ng-content> </div>',
@@ -30,7 +30,7 @@ Angular固有の機能も備えています。
 `<ng-content>` を使用したコンポーネントを使用する場合、
 コンポーネントホスト要素の子要素はすべて、その `<ng-content>` の場所にレンダリング、あるいは **投影されます**:
 
-```ts
+```angular-ts
 // コンポーネントソース
 @Component({
   selector: 'custom-card',

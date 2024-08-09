@@ -12,7 +12,7 @@ Tip: このガイドでは、[基本概念のガイド](essentials)を読んで�
 
 ビュークエリは、コンポーネントの*ビュー*（コンポーネント自身のテンプレートで定義されている要素）にある要素から結果を取得します。`@ViewChild` デコレーターを使用して、単一の結果をクエリできます。
 
-<docs-code language="ts" highlight="[14, 16, 17, 18]">
+<docs-code language="angular-ts" highlight="[14, 16, 17, 18]">
 @Component({
   selector: 'custom-card-header',
   ...
@@ -42,7 +42,7 @@ export class CustomCard {
 
 `@ViewChildren` デコレーターを使用して、複数の結果をクエリできます。
 
-<docs-code language="ts" highlight="[17, 19, 20, 21, 22, 23]">
+<docs-code language="angular-ts" highlight="[17, 19, 20, 21, 22, 23]">
 @Component({
   selector: 'custom-card-action',
   ...,
@@ -77,7 +77,7 @@ export class CustomCard {
 
 コンテンツクエリは、コンポーネントの_コンテンツ_（コンポーネントが使用されているテンプレート内でコンポーネントにネストされた要素）にある要素から結果を取得します。`@ContentChild` デコレーターを使用して、単一の結果をクエリできます。
 
-<docs-code language="ts" highlight="[14, 16, 17, 18, 25]">
+<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 25]">
 @Component({
   selector: 'custom-toggle',
   ...
@@ -106,6 +106,7 @@ export class CustomExpando {
     </custom-expando>
   `
 })
+export class UserProfile { }
 </docs-code>
 
 この例では、`CustomExpando`コンポーネントは子要素の`CustomToggle`をクエリし、`ngAfterContentInit`で結果にアクセスしています。
@@ -118,7 +119,7 @@ export class CustomExpando {
 
 `@ContentChildren` デコレーターを使用して、複数の結果をクエリできます。
 
-<docs-code language="ts" highlight="[14, 16, 17, 18, 19, 20]">
+<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 19, 20]">
 @Component({
   selector: 'custom-menu-item',
   ...
@@ -150,6 +151,7 @@ export class CustomMenu {
     </custom-menu>
   `
 })
+export class UserProfile { }
 </docs-code>
 
 `@ContentChildren`は、クエリの結果を含む`QueryList`オブジェクトを作成します。`changes`プロパティを使用して、クエリの結果が時間とともに変化した場合に購読できます。
@@ -165,7 +167,7 @@ export class CustomMenu {
 代わりに、[テンプレート参照変数](guide/templates/reference-variables)
 に対応する文字列ロケーターを指定できます。
 
-```ts
+```angular-ts
 @Component({
   ...,
   template: `
@@ -188,7 +190,7 @@ Tip: プロバイダーとAngularのインジェクションツリーの詳細�
 
 より高度なケースでは、`ProviderToken`をロケーターとして使用できます。これにより、コンポーネントとディレクティブのプロバイダーに基づいて要素を特定できます。
 
-```ts
+```angular-ts
 const SUB_ITEM = new InjectionToken<string>('sub-item');
 
 @Component({
@@ -213,7 +215,7 @@ export class CustomList {
 
 `@ViewChild`および`@ContentChild`クエリは、`static`オプションを受け取ります。
 
-```ts
+```angular-ts
 @Component({
   selector: 'custom-card',
   template: '<custom-card-header>Visit sunny California!</custom-card-header>',
@@ -237,7 +239,7 @@ export class CustomCard {
 
 デフォルトでは、コンテンツクエリはコンポーネントの_直接_の子要素のみを見つけ、子孫にトラバースすることはありません。
 
-<docs-code language="ts" highlight="[13, 14, 15, 16]">
+<docs-code language="angular-ts" highlight="[13, 14, 15, 16]">
 @Component({
   selector: 'custom-expando',
   ...
@@ -257,6 +259,7 @@ export class CustomExpando {
     </custom-expando>
   `
 })
+export class UserProfile { }
 </docs-code>
 
 上記の例では、`CustomExpando`は、`<custom-toggle>`が`<custom-expando>`の直接の子要素ではないため、`<custom-toggle>`を見つけることができません。`descendants: true`を設定することで、クエリが同じテンプレート内のすべての子孫をトラバースするように構成できます。ただし、クエリは、_決して_コンポーネントに侵入して他のテンプレート内の要素をトラバースすることはありません。

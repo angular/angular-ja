@@ -8,7 +8,7 @@ Angularの属性バインディングを使用すると、属性の値を直接�
 属性バインディングの構文は [プロパティバインディング](guide/templates/property-binding) に似ていますが、角括弧で囲まれた要素プロパティの代わりに、属性名の前に `attr` プレフィックスとドットを付けます。
 次に、属性値を文字列に変換される式で設定します。
 
-<docs-code language="html">
+<docs-code language="angular-html">
 
 <p [attr.attribute-you-are-targeting]="expression"></p>
 

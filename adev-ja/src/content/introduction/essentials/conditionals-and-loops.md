@@ -16,7 +16,7 @@ Angularのようなフレームワークを使用することの利点の1つは
 
 JavaScriptの`if`ステートメントと同様に、Angularは`@if`制御フローブロックを使用して、テンプレートとそのコンテンツの一部を条件付きで非表示にし、表示します。
 
-```ts
+```angular-ts
 // user-controls.component.ts
 @Component({
   standalone: true,
@@ -42,7 +42,7 @@ export class UserControls {
 
 フォールバックが必要な場合は、JavaScriptの`else`句と同様に、`@else`ブロックを追加して同じ効果を実現します。
 
-```ts
+```angular-ts
 // user-controls.component.ts
 @Component({
   standalone: true,
@@ -77,7 +77,7 @@ JavaScriptの`for...of`ループと同様に、Angularは繰り返される要�
 </ul>
 ```
 
-```ts
+```angular-ts
 // ingredient-list.component.ts
 @Component({
   standalone: true,

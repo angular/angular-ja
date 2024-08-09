@@ -9,7 +9,7 @@
 
 コンポーネントで `@for` 構文を使用する方法の例を以下に示します。
 
-```ts
+```angular-ts
 @Component({
   ...
   template: `
@@ -42,7 +42,7 @@ export class AppComponent {
 <docs-step title="テンプレートを更新">
 `@for` テンプレート構文を使用して、各ユーザー名を `p` 要素で表示するようにテンプレートを更新します。
 
-```ts
+```angular-html
 @for (user of users; track user.id) {
   <p>{{ user.name }}</p>
 }

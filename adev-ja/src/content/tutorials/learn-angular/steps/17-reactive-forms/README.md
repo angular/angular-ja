@@ -12,7 +12,7 @@
 
 `app.component.ts`で、`@angular/forms`から`ReactiveFormsModule`をインポートし、コンポーネントの`imports`配列に追加します。
 
-```ts
+```angular-ts
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -108,7 +108,7 @@ handleSubmit() {
 フォームの値にアクセスできるようになりました。次は、送信イベントを処理し、`handleSubmit`メソッドを使用します。
 Angularには、`ngSubmit`というこの特定の目的に合わせたイベントハンドラーがあります。フォーム要素を更新して、フォームが送信されたときに`handleSubmit`メソッドを呼び出します。
 
-<docs-code language="html" highlight="[3]">
+<docs-code language="angular-html" highlight="[3]">
 <form
   [formGroup]="profileForm"
   (ngSubmit)="handleSubmit()">

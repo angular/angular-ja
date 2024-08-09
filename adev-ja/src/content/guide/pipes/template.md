@@ -2,7 +2,7 @@
 
 パイプを適用するには、次のコード例に示すように、テンプレート式内でパイプ演算子（`|`）を使用します。
 
-<docs-code header="app.component.html">
+<docs-code language="angular-html" header="app.component.html">
 <p>ヒーローの誕生日は {{ birthday | date }}</p>
 </docs-code>
 
@@ -30,7 +30,7 @@ export class AppComponent {
 たとえば、`date` パイプは、日付の表示形式を制御するオプションのパラメータを受け取ります。
 パラメータを指定するには、パイプ名にコロン（`:`）とパラメータ値（形式）を続けます。
 
-<docs-code header="app.component.html">
+<docs-code language="angular-html" header="app.component.html">
 <p>ヒーローの誕生日は {{ birthday | date:'yyyy' }}</p>
 </docs-code>
 
@@ -49,7 +49,7 @@ export class AppComponent {
 
 次の例では、日付を `DatePipe` に渡し、その結果を [`UpperCasePipe`](api/common/UpperCasePipe 'API reference') パイプに転送します。
 
-<docs-code header="app.component.html">
+<docs-code language="angular-html" header="app.component.html">
 <p>ヒーローの誕生日は {{ birthday | date }}</p>
 <p>ヒーローの誕生日は {{ birthday | date:'yyyy' | uppercase }}</p>
 </docs-code>

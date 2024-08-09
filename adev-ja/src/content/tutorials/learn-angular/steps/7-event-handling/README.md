@@ -8,7 +8,7 @@
 
 Angularでは、`()`という構文を使ってイベントにバインドします。特定の要素に対して、バインドしたいイベントを括弧で囲み、イベントハンドラーを設定します。この`button`の例を見てください。
 
-```ts
+```angular-ts
 @Component({
     ...
     template: `<button (click)="greet()">`
@@ -40,7 +40,7 @@ onMouseOver() {
 <docs-step title="テンプレートイベントにバインド">
 `app.component.ts`のテンプレートコードを更新し、`section`要素の`mouseover`イベントにバインドします。
 
-```ts
+```angular-html
 <section (mouseover)="onMouseOver()">
 ```
 

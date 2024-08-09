@@ -17,7 +17,7 @@
 1. `taskTitle` — タスクのタイトル
 2. `isComplete` — タスクが完了しているかどうか
 
-```ts
+```angular-ts
 // todo-list-item.component.ts
 @Component({ ... })
 export class TodoListItem {
@@ -30,7 +30,7 @@ export class TodoListItem {
 
 状態を更新する場合は、通常、コンポーネントクラスでメソッドを定義して、`this`キーワードを使用してさまざまなクラスフィールドにアクセスします。
 
-```ts
+```angular-ts
 // todo-list-item.component.ts
 @Component({ ... })
 export class TodoListItem {

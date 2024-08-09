@@ -18,7 +18,7 @@ class UserComponent {
 
 `Input` を通じて値を渡す準備ができたら、属性構文を使用してテンプレートで値を設定できます。以下は例です。
 
-<docs-code header="app.component.ts" language="ts" highlight="[3]">
+<docs-code header="app.component.ts" language="angular-ts" highlight="[3]">
 @Component({
   ...
   template: `<app-user occupation="Angular Developer"><app-user/>`
@@ -28,7 +28,7 @@ class AppComponent {}
 
 `UserComponent` で `occupation`プロパティをバインドしていることを確認してください。
 
-<docs-code header="user.component.ts" language="ts">
+<docs-code header="user.component.ts" language="angular-ts">
 @Component({
   ...
   template: `<p>ユーザーの名前は {{occupation}} です。</p>`

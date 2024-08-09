@@ -15,7 +15,7 @@
 
 以下は、`Calculator`サービスの例です。
 
-```ts
+```angular-ts
 import {Injectable} from '@angular/core';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class CalculatorService {
 
 以下は、`Receipt`コンポーネントでの例です。
 
-```ts
+```angular-ts
 import { Component, inject } from '@angular/core';
 import { CalculatorService } from './calculator.service';
 

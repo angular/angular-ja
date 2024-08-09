@@ -34,7 +34,7 @@ Angularはアプリケーションツリーを上向きにたどりながら、�
 コンポーネントのメタデータの `schemas` プロパティに
 `CUSTOM_ELEMENTS_SCHEMA` を含めることで、この動作を無効にできます。
 
-```ts
+```angular-ts
 import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 @Component({

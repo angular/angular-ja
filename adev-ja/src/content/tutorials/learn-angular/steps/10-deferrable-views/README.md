@@ -30,7 +30,7 @@
 
 `@defer` ブロックに `@placeholder` ブロックを追加します。`@placeholder` ブロックは、遅延ロードが開始される前に表示されるHTMLを配置する場所です。`@placeholder` ブロック内のコンテンツは即時にロードされます。
 
-<docs-code language="html" highlight="[3,4,5]">
+<docs-code language="angular-html" highlight="[3,4,5]">
 @defer {
   <comments />
 } @placeholder {
@@ -44,7 +44,7 @@
 
 `@defer` ブロックに `@loading` ブロックを追加します。`@loading` ブロックは、遅延コンテンツがアクティブにフェッチされているが、まだ完了していない間に表示されるHTMLを配置する場所です。`@loading` ブロック内のコンテンツは即時にロードされます。
 
-<docs-code language="html" highlight="[5,6,7]">
+<docs-code language="angular-html" highlight="[5,6,7]">
 @defer {
   <comments />
 } @placeholder {
@@ -60,7 +60,7 @@
 
 `@placeholder` と `@loading` の両方のセクションには、ロードが速く行われたときにちらつきが発生するのを防ぐためのオプションのパラメータがあります。`@placeholder` には `minimum` があり、`@loading` には `minimum` と `after` があります。`@loading` ブロックに `minimum` 期間を追加して、少なくとも2秒間レンダリングされるようにします。
 
-<docs-code language="html" highlight="[5]">
+<docs-code language="angular-html" highlight="[5]">
 @defer {
   <comments />
 } @placeholder {
@@ -76,7 +76,7 @@
 
 遅延ビューには、多くのトリガーオプションがあります。コンテンツがビューポートに入ると遅延ロードされるように、ビューポートトリガーを追加します。
 
-<docs-code language="html" highlight="[1]">
+<docs-code language="angular-html" highlight="[1]">
 @defer (on viewport) {
   <comments />
 }

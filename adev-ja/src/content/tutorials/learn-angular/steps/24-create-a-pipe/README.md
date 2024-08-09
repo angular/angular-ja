@@ -68,7 +68,7 @@ export class ReversePipe implements PipeTransform {
 <docs-step title="テンプレートで `ReversePipe` を使用する"></docs-step>
 パイプロジックを実装したら、最後のステップとしてテンプレートで使用します。`app.component.ts` でテンプレートにパイプを含め、コンポーネントのインポートに追加します。
 
-<docs-code language="ts" highlight="[3,4]">
+<docs-code language="angular-ts" highlight="[3,4]">
 @Component({
     ...
     template: `Reverse Machine: {{ word | reverse }}`

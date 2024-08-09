@@ -8,7 +8,7 @@
 
 テンプレートでパイプを使用するには、補間の式に含めます。次の例をご覧ください。
 
-<docs-code language="ts" highlight="[1,5,6]">
+<docs-code language="angular-ts" highlight="[1,5,6]">
 import {UpperCasePipe} from '@angular/common';
 
 @Component({

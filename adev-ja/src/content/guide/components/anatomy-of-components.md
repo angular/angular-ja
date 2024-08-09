@@ -11,7 +11,7 @@ Tip: このガイドでは、すでに[基本概念のガイド](essentials)を�
 
 TypeScriptクラスの上部に `@Component` [デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html) を追加することで、コンポーネントにAngular固有の情報を与えます。
 
-<docs-code language="ts" highlight="[1, 2, 3, 4]">
+<docs-code language="angular-ts" highlight="[1, 2, 3, 4]">
 @Component({
   selector: 'profile-photo',
   template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
@@ -25,7 +25,7 @@ Angularテンプレートの書き方については、[テンプレートガイ
 
 コンポーネントには、オプションでそのコンポーネントのDOMに適用されるCSSスタイルのリストを含めることができます。
 
-<docs-code language="ts" highlight="[4]">
+<docs-code language="angular-ts" highlight="[4]">
 @Component({
   selector: 'profile-photo',
   template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
@@ -38,7 +38,7 @@ export class ProfilePhoto { }
 
 代わりに、テンプレートとスタイルを別々のファイルに書くこともできます。
 
-<docs-code language="ts" highlight="[3, 4]">
+<docs-code language="angular-ts" highlight="[3, 4]">
 @Component({
   selector: 'profile-photo',
   templateUrl: 'profile-photo.html',
@@ -55,7 +55,7 @@ export class ProfilePhoto { }
 
 すべてのコンポーネントは[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)を定義します。
 
-<docs-code language="ts" highlight="[2]">
+<docs-code language="angular-ts" highlight="[2]">
 @Component({
   selector: 'profile-photo',
   ...
@@ -67,7 +67,7 @@ Angularがサポートするセレクターの種類と、セレクターを選�
 
 他のコンポーネントのテンプレートに一致するHTML要素を作成することで、コンポーネントを使用します。
 
-<docs-code language="ts" highlight="[4]">
+<docs-code language="angular-ts" highlight="[4]">
 @Component({
   selector: 'user-profile',
   template: `

@@ -10,7 +10,7 @@ Angularでは、他のコンポーネントでコンポーネントを使用可�
 スタンドアロンコンポーネントは、テンプレートで使用されている他のコンポーネント、
 ディレクティブ、パイプを直接インポートします。
 
-<docs-code language="ts" highlight="[2, [8, 9]]">
+<docs-code language="angular-ts" highlight="[2, [8, 9]]">
 @Component({
   standalone: true,
   selector: 'profile-photo',

@@ -28,7 +28,7 @@ flowchart TD
 
 TodoListItemコンポーネントの簡略化された例を次に示します。
 
-```ts
+```angular-ts
 // todo-list-item.component.ts
 @Component({
   selector: 'todo-list-item',
@@ -48,7 +48,7 @@ export class TodoListItem {
 
 これを踏まえて、`TodoListItem` コンポーネントの更新バージョンを示します。
 
-```ts
+```angular-ts
 // todo-list-item.component.ts
 @Component({
   standalone: true,
@@ -74,7 +74,7 @@ HTMLやCSSを別ファイルで管理することを好むチーム向けに、A
 
 前の `TodoListItem` コンポーネントを使用して、代替アプローチは次のようになります。
 
-```ts
+```angular-ts
 // todo-list-item.component.ts
 @Component({
   standalone: true,
@@ -93,7 +93,7 @@ export class TodoListItem {
 ```
 
 ```css
-// todo-list-item.component.css
+/* todo-list-item.component.css */
 li {
   color: red;
   font-weight: 300;
@@ -112,7 +112,7 @@ li {
 
 前の `TodoListItem` コンポーネントをインポートする `TodoList` コンポーネントの例を次に示します。
 
-```ts
+```angular-ts
 // todo-list.component.ts
 import {TodoListItem} from './todo-list-item.component.ts';
 

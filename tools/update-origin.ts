@@ -14,6 +14,7 @@ const localizedFilePatterns = [
   'src/content/tutorials/**/config.json',
   // Application files
   'src/app/sub-navigation-data.ts',
+  'shared-docs/components/table-of-contents/table-of-contents.component.html',
 ];
 
 async function main() {

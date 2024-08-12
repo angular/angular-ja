@@ -87,7 +87,7 @@ providers: [
 ]
 ```
 
-最終的な URL は 'https://my.base.url/image.png' になります。
+最終的なURLは 'https://my.base.url/image.png' になります。
 ```angular-html
 <img ngSrc="image.png" height="600" width="800" />
 ```

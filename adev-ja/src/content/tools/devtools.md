@@ -1,196 +1,196 @@
-# DevTools Overview
+# DevToolsの概要
 
-Angular DevTools is a browser extension that provides debugging and profiling capabilities for Angular applications.
+Angular DevToolsは、Angularアプリケーションのデバッグとプロファイリング機能を提供するブラウザ拡張機能です。
 
 <docs-video src="https://www.youtube.com/embed/bavWOHZM6zE"/>
 
-Install Angular DevTools from the [Chrome Web Store](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh) or from [Firefox Addons](https://addons.mozilla.org/firefox/addon/angular-devtools/).
+Angular DevToolsは、[Chrome Web Store](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh)または[Firefox Addons](https://addons.mozilla.org/firefox/addon/angular-devtools/)からインストールできます。
 
-You can open Chrome or Firefox DevTools on any web page by pressing <kbd>F12</kbd> or <kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd></kbd> (Windows or Linux) and <kbd><kbd>Fn</kbd>+<kbd>F12</kbd></kbd> or <kbd><kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd></kbd> (Mac).
-Once browser DevTools is open and Angular DevTools is installed, you can find it under the "Angular" tab.
+<kbd>F12</kbd>または<kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd></kbd>（WindowsまたはLinux）および<kbd><kbd>Fn</kbd>+<kbd>F12</kbd></kbd>または<kbd><kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd></kbd>（Mac）を押して、任意のWebページでChromeまたはFirefoxのDevToolsを開くことができます。
+ブラウザのDevToolsが開いていてAngular DevToolsがインストールされている場合は、「Angular」タブで見つけることができます。
 
-HELPFUL: Chrome's new tab page does not run installed extensions, so the Angular tab will not appear in DevTools. Visit any other page to see it.
+HELPFUL: Chromeの新しいタブページではインストールされている拡張機能は実行されないため、DevToolsに「Angular」タブは表示されません。表示するには、他のページにアクセスしてください。
 
-<img src="assets/images/guide/devtools/devtools.png" alt="An overview of Angular DevTools showing a tree of components for an application.">
+<img src="assets/images/guide/devtools/devtools.png" alt="アプリケーションのコンポーネントツリーを示すAngular DevToolsの概要。">
 
-## Open your application
+## アプリケーションを開く
 
-When you open the extension, you'll see two additional tabs:
+拡張機能を開くと、次の2つの追加タブが表示されます。
 
-| Tabs                                     | Details |
+| タブ                                     | 詳細 |
 |:---                                      |:---     |
-| [Components](tools/devtools#debug-your-application) | Lets you explore the components and directives in your application and preview or edit their state.                    |
-| [Profiler](tools/devtools#profile-your-application)     | Lets you profile your application and understand what the performance bottleneck is during change detection execution. |
+| [Components](tools/devtools#debug-your-application) | アプリケーション内のコンポーネントとディレクティブを探索し、それらの状態をプレビューまたは編集できます。                    |
+| [Profiler](tools/devtools#profile-your-application)     | アプリケーションをプロファイルし、変更検知の実行中のパフォーマンスのボトルネックがどこにあるかを理解できます。 |
 
-<img src="assets/images/guide/devtools/devtools-tabs.png" alt="A screenshot of the top of Angular DevTools illustrating two tabs in the upper-left corner, one labeled 'Components' and another labeled 'Profiler'.">
+<img src="assets/images/guide/devtools/devtools-tabs.png" alt="Angular DevToolsの上部を示すスクリーンショットで、左上の角に2つのタブが表示されています。1つは「Components」とラベル付けされ、もう1つは「Profiler」とラベル付けされています。">
 
-In the top-right corner of Angular DevTools you'll find which version of Angular is running on the page as well as the latest commit hash for the extension.
+Angular DevToolsの右上隅には、ページで実行されているAngularのバージョンと、拡張機能の最新のコミットハッシュが表示されます。
 
-### Angular application not detected
+### Angularアプリケーションが検出されません
 
-If you see an error message "Angular application not detected" when opening Angular DevTools, this means it is not able to communicate with an Angular app on the page.
-The most common reason for this is because the web page you are inspecting does not contain an Angular application.
-Double check that you are inspecting the right web page and that the Angular app is running.
+Angular DevToolsを開くと、「Angularアプリケーションが検出されませんでした」というエラーメッセージが表示される場合、これはページ上のAngularアプリケーションと通信できないことを意味します。
+これは、検査しているWebページにAngularアプリケーションが含まれていないためです。
+適切なWebページを検査していること、およびAngularアプリケーションが実行されていることを確認してください。
 
-### We detected an application built with production configuration
+### プロダクション構成でビルドされたアプリケーションが検出されました
 
-If you see an error message "We detected an application built with production configuration. Angular DevTools only supports development builds.", this means that an Angular application was found on the page, but it was compiled with production optimizations.
-When compiling for production, Angular CLI removes various debug features to minimize the amount of the JavaScript on the page to improve performance. This includes features needed to communicate with DevTools.
+「プロダクション構成でビルドされたアプリケーションが検出されました。Angular DevToolsは開発ビルドのみサポートしています。」というエラーメッセージが表示される場合、ページにAngularアプリケーションが見つかりましたが、プロダクション最適化でコンパイルされたことを意味します。
+プロダクション用にコンパイルすると、Angular CLIはパフォーマンスを向上させるために、ページ上のJavaScriptの量を最小限に抑えるために、さまざまなデバッグ機能を削除します。これには、DevToolsと通信するために必要な機能も含まれます。
 
-To run DevTools, you need to compile your application with optimizations disabled. `ng serve` does this by default.
-If you need to debug a deployed application, disable optimizations in your build with the [`optimization` configuration option](reference/configs/workspace-config#optimization-configuration) (`{"optimization": false}`).
+DevToolsを実行するには、最適化を無効にしてアプリケーションをコンパイルする必要があります。`ng serve`は、デフォルトでこれを実行します。
+デプロイされたアプリケーションをデバッグする必要がある場合は、[`optimization`構成オプション](reference/configs/workspace-config#optimization-configuration) (`{"optimization": false}`)を使用して、ビルドの最適化を無効にします。
 
-## Debug your application
+## アプリケーションのデバッグ {#debug-your-application}
 
-The **Components** tab lets you explore the structure of your application.
-You can visualize the component and directive instances in the DOM and inspect or modify their state.
+**Components**タブでは、アプリケーションの構造を探索できます。
+DOM内のコンポーネントとディレクティブのインスタンスを視覚化し、それらの状態を検査または変更できます。
 
-### Explore the application structure
+### アプリケーション構造の探索
 
-The component tree displays a hierarchical relationship of the *components and directives* within your application.
+コンポーネントツリーは、アプリケーション内の*コンポーネントとディレクティブ*の階層的な関係を表示します。
 
-<img src="assets/images/guide/devtools/component-explorer.png" alt="A screenshot of the 'Components' tab showing a tree of Angular components and directives starting the root of the application.">
+<img src="assets/images/guide/devtools/component-explorer.png" alt="アプリケーションのルートから始まるAngularコンポーネントとディレクティブのツリーを示す「Components」タブのスクリーンショット。">
 
-Click the individual components or directives in the component explorer to select them and preview their properties.
-Angular DevTools displays properties and metadata on the right side of the component tree.
+コンポーネントエクスプローラ内の個々のコンポーネントまたはディレクティブをクリックして選択し、それらのプロパティをプレビューします。
+Angular DevToolsは、コンポーネントツリーの右側で、プロパティとメタデータを表示します。
 
-To look up a component or directive by name use the search box above the component tree.
+コンポーネントツリーの上にある検索ボックスを使用して、名前でコンポーネントまたはディレクティブを検索します。
 
-<img src="assets/images/guide/devtools/search.png" alt="A screenshot of the 'Components' tab. The filter bar immediately underneath the tab is searching for 'todo' and all components with 'todo' in the name are highlighted in the tree. `app-todos` is currently selected and a sidebar to the right displays information about the component's properties. This includes a section of `@Output` fields and another section for other properties.">
+<img src="assets/images/guide/devtools/search.png" alt="「Components」タブのスクリーンショット。タブのすぐ下にあるフィルタバーは「todo」を検索しており、「todo」が名前にあるすべてのコンポーネントがツリー内で強調表示されています。 `app-todos`が現在選択されており、右側のサイドバーにコンポーネントのプロパティに関する情報が表示されます。これには、`@Output`フィールドのセクションと、他のプロパティのセクションが含まれます。">
 
-### Navigate to the host node
+### ホストノードに移動
 
-To go to the host element of a particular component or directive, double-click it in the component explorer.
-Angular DevTools will open the Elements tab in Chrome or the Inspector tab in Firefox, and select the associated DOM node.
+特定のコンポーネントやディレクティブのホスト要素に移動するには、コンポーネントエクスプローラでダブルクリックします。
+Angular DevToolsはChromeのElementsタブまたはFirefoxのInspectorタブを開き、関連するDOMノードを選択します。
 
-### Navigate to source
+### ソースに移動
 
-For components, Angular DevTools lets you navigate to the component definition in the Sources tab (Chrome) and Debugger tab (Firefox).
-After you select a particular component, click the icon at the top-right of the properties view:
+コンポーネントの場合、Angular DevToolsはSourcesタブ（Chrome）とDebuggerタブ（Firefox）でコンポーネント定義に移動できます。
+特定のコンポーネントを選択したら、プロパティビューの右上にあるアイコンをクリックします。
 
-<img src="assets/images/guide/devtools/navigate-source.png" alt="A screenshot of the 'Components' tab. The properties view on the right is visible for a component and the mouse rests in the upper right corner of that view on top of a `<>` icon. An adjacent tooltip reads 'Open component source'.">
+<img src="assets/images/guide/devtools/navigate-source.png" alt="「Components」タブのスクリーンショット。右側にコンポーネントのプロパティビューが表示され、マウスがビューの右上隅にある`<>`アイコンの上にあります。隣接するツールチップには「Open component source」と表示されます。">
 
-### Update property value
+### プロパティ値の更新
 
-Like browsers' DevTools, the properties view lets you edit the value of an input, output, or other properties.
-Right-click on the property value and if edit functionality is available for this value type, a text input will appear.
-Type the new value and press `Enter` to apply this value to the property.
+ブラウザのDevToolsと同様に、プロパティビューでは入力と出力、またはその他のプロパティの値を編集できます。
+プロパティ値を右クリックし、この値の種類で編集機能が利用可能な場合は、テキスト入力フィールドが表示されます。
+新しい値を入力して`Enter`キーを押すと、この値がプロパティに適用されます。
 
-<img src="assets/images/guide/devtools/update-property.png" alt="A screenshot of the 'Components' tab with the properties view open for a component. An `@Input` named `todo` contains a `label` property which is currently selected and has been manually updated to the value 'Buy milk'.">
+<img src="assets/images/guide/devtools/update-property.png" alt="コンポーネントのプロパティビューが開いている「Components」タブのスクリーンショット。`todo`という`@Input`には、現在選択されており、値が「牛乳を買う」に手動で更新されている`label`プロパティが含まれています。">
 
-### Access selected component or directive in console
+### コンソールで選択したコンポーネントまたはディレクティブにアクセス
 
-As a shortcut in the console, Angular DevTools provides access to instances of recently selected components or directives.
-Type `$ng0` to get a reference to the instance of the currently selected component or directive, and type `$ng1` for the previously selected instance, `$ng2` for the instance selected before that, and so on.
+コンソールのショートカットとして、Angular DevToolsは、最近選択したコンポーネントやディレクティブのインスタンスへのアクセスを提供します。
+現在選択されているコンポーネントやディレクティブのインスタンスを参照するには`$ng0`と入力し、以前に選択したインスタンスを参照するには`$ng1`と入力し、さらに前に選択したインスタンスを参照するには`$ng2`と入力するなどします。
 
-<img src="assets/images/guide/devtools/access-console.png" alt="A screenshot of the 'Components' tab with the browser console underneath. In the console, the user has typed three commands, `$ng0`, `$ng1`, and `$ng2` to view the three most recently selected elements. After each statement, the console prints a different component reference.">
+<img src="assets/images/guide/devtools/access-console.png" alt="ブラウザコンソールの下にある「Components」タブのスクリーンショット。コンソールで、ユーザーは3つのコマンド、`$ng0`、`$ng1`、`$ng2`を入力して、最近選択した3つの要素を表示しています。各ステートメントの後、コンソールは異なるコンポーネント参照を出力します。">
 
-### Select a directive or component
+### ディレクティブまたはコンポーネントの選択
 
-Similar to browsers' DevTools, you can inspect the page to select a particular component or directive.
-Click the ***Inspect element*** icon in the top left corner within Angular DevTools and hover over a DOM element on the page.
-The extension recognizes the associated directives and/or components and lets you select the corresponding element in the Component tree.
+ブラウザのDevToolsと同様にページを検査して、特定のコンポーネントやディレクティブを選択できます。
+Angular DevToolsの左上隅にある ***Inspect element*** アイコンをクリックし、ページ上のDOM要素の上にマウスを置きます。
+拡張機能は関連するディレクティブやコンポーネントを認識し、コンポーネントツリーで対応する要素を選択できます。
 
-<img src="assets/images/guide/devtools/inspect-element.png" alt="A screenshot of the 'Components' tab with an Angular todo application visible. In the very top-left corner of Angular DevTools, an icon of a screen with a mouse icon inside it is selected. The mouse rests on a todo element in the Angular application UI. The element is highlighted with a `<TodoComponent>` label displayed in an adjacent tooltip.">
+<img src="assets/images/guide/devtools/inspect-element.png" alt="Angular todoアプリケーションが表示されている「Components」タブのスクリーンショット。Angular DevToolsの左上隅にある画面にマウスアイコンが表示されたアイコンが選択されています。マウスはAngularアプリケーションのUIのtodo要素の上にあります。要素は`<TodoComponent>`ラベルで強調表示され、隣接するツールチップに表示されます。">
 
-## Profile your application
+## アプリケーションのプロファイリング {#profile-your-application}
 
-The **Profiler** tab lets you visualize the execution of Angular's change detection.
-This is useful for determining when and how change detection impacts your application's performance.
+**Profiler**タブでは、Angularの変更検知の実行を視覚化できます。
+これは、変更検知がいつどのようにアプリケーションのパフォーマンスに影響を与えるかを判断するのに役立ちます。
 
-<img src="assets/images/guide/devtools/profiler.png" alt="A screenshot of the 'Profiler' tab which reads 'Click the play button to start a new recording, or upload a json file containing profiler data.' Next to this is a record button to being recording a new profile as well as a file picker to select an existing profile.">
+<img src="assets/images/guide/devtools/profiler.png" alt="「Profiler」タブのスクリーンショットで、「再生ボタンをクリックして新しい記録を開始するか、プロファイラデータを含むjsonファイルをアップロードします。」と表示されています。その横に、新しいプロファイルを記録を開始する記録ボタンと、既存のプロファイルを選択するファイルピッカーがあります。">
 
-The Profiler tab lets you start profiling the current application or import an existing profile from a previous run.
-To start profiling your application, hover over the circle in the top-left corner within the **Profiler** tab and click **Start recording**.
+プロファイラタブでは、現在のアプリケーションのプロファイリングを開始したり、以前の実行からの既存のプロファイルをインポートしたりできます。
+アプリケーションのプロファイリングを開始するには、**Profiler**タブの左上隅にある丸の上にマウスを置いて、**Start recording**をクリックします。
 
-During profiling, Angular DevTools captures execution events, such as change detection and lifecycle hook execution.
-Interact with your application to trigger change detection and generate data Angular DevTools can use.
-To finish recording, click the circle again to **Stop recording**.
+プロファイリング中は、Angular DevToolsは、変更検知やライフサイクルフックの実行などの実行イベントをキャプチャします。
+変更検知をトリガーしてAngular DevToolsが使用できるデータを作成するために、アプリケーションと対話してください。
+記録を終了するには、丸を再びクリックして**Stop recording**します。
 
-You can also import an existing recording.
-Read more about this feature in the [Import recording](tools/devtools#import-and-export-recordings) section.
+既存の記録のインポートもできます。
+この機能の詳細については、[記録のインポート](tools/devtools#import-and-export-recordings)セクションをご覧ください。
 
-### Understand your application's execution
+### アプリケーションの実行の理解
 
-After recording or importing a profile, Angular DevTools displays a visualization of change detection cycles.
+プロファイルを記録またはインポートした後、Angular DevToolsは変更検知サイクルの視覚化を表示します。
 
-<img src="assets/images/guide/devtools/default-profiler-view.png" alt="A screenshot of the 'Profiler' tab after a profile has been recorded or uploaded. It displays a bar chart illustrating various change detection cycles with some text which reads 'Select a bar to preview a particular change detection cycle'.">
+<img src="assets/images/guide/devtools/default-profiler-view.png" alt="記録またはアップロードされたプロファイル後の「Profiler」タブのスクリーンショット。いくつかのテキストが表示され、「特定の変更検出サイクルをプレビューするには、バーを選択します」と表示されています。">
 
-Each bar in the sequence represents a change detection cycle in your app.
-The taller a bar is, the longer the application spent running change detection in this cycle.
-When you select a bar, DevTools displays useful information about it including:
+シーケンスの各バーは、アプリケーションの変更検知サイクルを表しています。
+バーが高いほど、アプリケーションは変更検知をこのサイクルで実行するのに時間がかかっています。
+バーを選択すると、DevToolsは次のような役立つ情報を表示します。
 
-* A bar chart with all the components and directives that it captured during this cycle
-* How much time Angular spent running change detection in this cycle.
-* An estimated frame rate as experienced by the user.
-* The source which triggered change detection.
+* このサイクルでキャプチャされたすべてのコンポーネントとディレクティブを含むバーチャート
+* Angularが変更検知をこのサイクルで実行するのにかかった時間。
+* ユーザーが経験した推定フレームレート。
+* 変更検知をトリガーしたソース。
 
-<img src="assets/images/guide/devtools/profiler-selected-bar.png" alt="A screenshot of the 'Profiler' tab. A single bar has been selected by the user and a nearby dropdown menu displays 'Bar chart`, showing a second bar chart underneath it. The new chart has two bars which take up the majority of the space, one labeled `TodosComponent` and the other labeled `NgForOf`. The other bars are small enough to be negligible in comparison.">
+<img src="assets/images/guide/devtools/profiler-selected-bar.png" alt="「Profiler」タブのスクリーンショット。ユーザーによって単一のバーが選択されており、近くのドロップダウンメニューに「バーチャート」が表示され、その下に2番目のバーチャートが表示されています。新しいチャートには、大部分のスペースを占める2つのバーがあり、1つは「TodosComponent」とラベル付けされ、もう1つは「NgForOf」とラベル付けされています。他のバーは、これらに比べて小さいため、無視できます。">
 
-### Understand component execution
+### コンポーネント実行の理解
 
-The bar chart displayed after clicking on a change detection cycle displays a detailed view about how much time your application spent running change detection in that particular component or directive.
+変更検知サイクルをクリックすると表示されるバーチャートは、アプリケーションがその特定のコンポーネントまたはディレクティブで変更検知を実行するのにどれだけ時間がかかったかを示す詳細ビューを表示します。
 
-This example shows the total time spent by the `NgForOf` directive and which method was called on it.
+この例では、`NgForOf`ディレクティブでかかった合計時間と、そのディレクティブで呼び出されたメソッドが表示されています。
 
-<img src="assets/images/guide/devtools/directive-details.png" alt="A screenshot of the 'Profiler' tab where the `NgForOf` bar is selected. A detailed view of `NgForOf` is visible to the right where it lists 'Total time spent: 1.76 ms'. It includes a with exactly one row, listing `NgForOf` as a directives with an `ngDoCheck` method which took 1.76 ms. It also includes a list labeled 'Parent Hierarchy' containing the parent components of this directive.">
+<img src="assets/images/guide/devtools/directive-details.png" alt="「Profiler」タブのスクリーンショットで、`NgForOf`バーが選択されています。右側に`NgForOf`の詳細ビューが表示され、「かかった合計時間: 1.76 ms」と表示されています。`NgForOf`を1.76 msかかった`ngDoCheck`メソッドを持つディレクティブとしてリストした行が1つだけ含まれています。また、「親階層」というラベルの付いたリストも含まれており、このディレクティブの親コンポーネントが含まれています。">
 
-### Hierarchical views
+### 階層ビュー
 
-<img src="assets/images/guide/devtools/flame-graph-view.png" alt="A screenshot of the 'Profiler' tab. A single bar has been selected by the user and a nearby dropdown menu now displays 'Flame graph', showing a flame graph underneath it. The flame graph starts with a row called 'Entire application' and another row called 'AppComponent'. Beneath those, the rows start to break up into multiple items, starting with `[RouterOutlet]` and `DemoAppComponent` on the third row. A few layers deep, one cell is highlighted red.">
+<img src="assets/images/guide/devtools/flame-graph-view.png" alt="「Profiler」タブのスクリーンショット。ユーザーによって単一のバーが選択されており、近くのドロップダウンメニューに「フレームグラフ」が表示され、その下にフレームグラフが表示されています。フレームグラフは、「Entire application」という行と「AppComponent」という行から始まります。その下は、3行目で「[RouterOutlet]」と「DemoAppComponent」から始まり、複数のアイテムに分割され始めます。数層深く、1つのセルが赤で強調表示されています。">
 
-You can also visualize the change detection execution in a flame graph-like view.
+変更検知の実行をフレームグラフのようなビューで視覚化できます。
 
-Each tile in the graph represents an element on the screen at a specific position in the render tree.
-For example, consider a change detection cycle where a `LoggedOutUserComponent` is removed and in its place Angular rendered a `LoggedInUserComponent`. In this scenario both components will be displayed in the same tile.
+グラフの各タイルは、レンダリングツリーの特定の位置にある画面上の要素を表します。
+たとえば、`LoggedOutUserComponent`が削除され、その代わりにAngularが`LoggedInUserComponent`をレンダリングした変更検知サイクルを考えます。このシナリオでは、両方のコンポーネントは同じタイルに表示されます。
 
-The x-axis represents the full time it took to render this change detection cycle.
-The y-axis represents the element hierarchy. Running change detection for an element requires render its directives and child components.
-Together, this graph visualizes which components are taking the longest time to render and where that time is going.
+X軸は、この変更検知サイクルのレンダリングにかかった合計時間を表します。
+Y軸は要素階層を表します。要素の変更検知を実行するには、そのディレクティブと子コンポーネントをレンダリングする必要があります。
+これらを組み合わせると、どのコンポーネントのレンダリングに時間がかかっているのか、その時間がどこに使われているのかが視覚化されます。
 
-Each tile is colored depending on how much time Angular spent there.
-Angular DevTools determines the intensity of the color by the time spent relative to the tile where rendering took the most time.
+各タイルは、Angularがそこでかかった時間に依存して色が付けられます。
+Angular DevToolsは、レンダリングに最も時間がかかったタイルに対するかかった時間によって、色の濃淡を決定します。
 
-When you click on a certain tile, you'll see details about it in the panel on the right.
-Double-clicking the tile zooms it in so you can more easily view its nested children.
+特定のタイルをクリックすると、右側のパネルにそのタイルに関する詳細が表示されます。
+タイルをダブルクリックすると、タイルが拡大され、ネストされた子要素をより簡単に表示できます。
 
-### Debug change detection and `OnPush` components
+### 変更検知と`OnPush`コンポーネントのデバッグ
 
-Normally, the graph visualizes the time it takes to *render* an application, for any given change detection frame. However some components such as `OnPush` components will only re-render if their input properties change. It can be useful to visualize the flame graph without these components for particular frames.
+通常、グラフは、特定の変更検知フレームの、アプリケーションの*レンダリング*にかかる時間を視覚化します。しかし、`OnPush`コンポーネントなど、入力プロパティが変更された場合にのみ再レンダリングされるコンポーネントもあります。特定のフレームのこれらのコンポーネントなしでフレームグラフを視覚化すると役立つ場合があります。
 
-To visualize only the components in a change detection frame that went through the change detection process, select the **Change detection** checkbox at the top, above the flame graph.
+変更検知フレーム内で変更検知プロセスを経たコンポーネントのみを視覚化するには、フレームグラフの上部にある**変更検知**チェックボックスをオンにします。
 
-This view highlights all the components that went through change detection and displays those that did not in gray, such as `OnPush` components that did not re-render.
+このビューでは、変更検知を経たすべてのコンポーネントが強調表示され、再レンダリングされなかった`OnPush`コンポーネントなど、変更検知を経なかったコンポーネントが灰色で表示されます。
 
-<img src="assets/images/guide/devtools/debugging-onpush.png" alt="A screenshot of the 'Profiler' tab displaying a flame chart visualization of a change detection cycle. A checkbox labeled 'Show only change detection' is now checked. The flame graph looks very similar to before, however the color of components has changed from orange to blue. Several tiles labeled `[RouterOutlet]` are no longer highlighted with any color.">
+<img src="assets/images/guide/devtools/debugging-onpush.png" alt="変更検出サイクルのフレームチャート視覚化を表示する「Profiler」タブのスクリーンショット。「Show only change detection」というラベルの付いたチェックボックスがオンになっています。フレームグラフは以前と非常によく似ていますが、コンポーネントの色がオレンジから青に変わっています。`[RouterOutlet]`というラベルの付いたいくつかのタイルは、もうどの色でも強調表示されていません。">
 
-### Import and export recordings
+### 記録のインポートとエクスポート {#import-and-export-recordings}
 
-Click the **Save Profile** button at the top-right of a recorded profiling session to export it as a JSON file and save it to the disk.
-Later, import the file in the initial view of the profiler by clicking the **Choose file** input.
+記録されたプロファイリングセッションの右上にある**Save Profile**ボタンをクリックして、JSONファイルとしてエクスポートし、ディスクに保存します。
+後で、プロファイラの初期ビューで、**Choose file**入力をクリックしてファイルをインポートします。
 
-<img src="assets/images/guide/devtools/save-profile.png" alt="A screenshot of the 'Profiler' tab displaying change detection cycles. On the right side a 'Save Profile' button is visible.">
+<img src="assets/images/guide/devtools/save-profile.png" alt="変更検出サイクルを表示する「Profiler」タブのスクリーンショット。右側に「プロファイルの保存」ボタンが表示されています。">
 
- ## Inspect your injectors
+ ## インジェクターの検査
 
- Note: The Injector Tree is available for Angular Applications built with version 17 or higher.
+Note: インジェクターツリーは、バージョン17以降を使ってビルドされたAngularアプリケーションで使用できます。
 
-### View the injector hierarchy of your application
+### アプリケーションのインジェクター階層を表示
 
- The **Injector Tree** tab lets you explore the structure of the Injectors configured in your application. Here you will see two trees representing the [injector hierarchy](guide/di/hierarchical-dependency-injection) of your application. One tree is your environment hierarchy, the other is your element hierarchy.
+ **Injector Tree**タブでは、アプリケーションに構成されたインジェクターの構造を探索できます。ここでは、アプリケーションの[インジェクタ階層](guide/di/hierarchical-dependency-injection)を表す2つのツリーが表示されます。1つのツリーは環境階層、もう1つのツリーは要素階層です。
 
-<img src="assets/images/guide/devtools/di-injector-tree.png" alt="A screenshot of the 'Profiler' tab displaying the injector tree tab in Angular Devtools visualizing the injector graph for an example application.">
+<img src="assets/images/guide/devtools/di-injector-tree.png" alt="例となるアプリケーションのインジェクタグラフを視覚化しているAngular Devtoolsの「Profiler」タブのスクリーンショットで、インジェクタツリータブが表示されています。">
 
- ### Visualize resolution paths
+ ### 解決パスを視覚化する
 
- When a specific injector is selected, the path that Angular's dependency injection algorithm traverses from that injector to the root is highlighted. For element injectors, this includes highlighting the environment injectors that the dependency injection algorithm jumps to when a dependency cannot be resolved in the element hierarchy.
+ 特定のインジェクターが選択されると、そのインジェクターからルートへのAngularの依存性の注入アルゴリズムがたどるパスが強調表示されます。要素インジェクターの場合、これには、依存関係が要素階層で解決できない場合に依存性の注入アルゴリズムがジャンプする環境インジェクターの強調表示も含まれます。
 
-See [resolution rules](guide/di/hierarchical-dependency-injection#resolution-rules) for more details about how Angular resolves resolution paths. 
+Angularが解決パスをどのように解決するかについての詳細は、[解決ルール](guide/di/hierarchical-dependency-injection#resolution-rules)を参照してください。 
 
-<img src="assets/images/guide/devtools/di-injector-tree-selected.png" alt="A screenshot of the 'Profiler' tab displaying how the injector tree visualize highlights resolution paths when an injector is selected.">
+<img src="assets/images/guide/devtools/di-injector-tree-selected.png" alt="インジェクタツリーがインジェクタが選択されたときに解決パスをどのように強調表示するかを示す「Profiler」タブのスクリーンショット。">
 
- ### View injector providers
+ ### インジェクタープロバイダーを表示
 
- Clicking an injector that has configured providers will display those providers in a list on the right of the injector tree view. Here you can view the provided token and it's type.
+ プロバイダーが構成されているインジェクターをクリックすると、右側にあるインジェクターツリービューにプロバイダーのリストが表示されます。ここでは、提供されたトークンとそのタイプを表示できます。
 
-<img src="assets/images/guide/devtools/di-injector-tree-providers.png" alt="A screenshot of the 'Profiler' tab displaying how providers are made visible when an injector is selected.">
+<img src="assets/images/guide/devtools/di-injector-tree-providers.png" alt="インジェクタが選択されたときにプロバイダがどのように表示されるかを示す「Profiler」タブのスクリーンショット。">

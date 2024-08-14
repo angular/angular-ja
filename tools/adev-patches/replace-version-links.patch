@@ -17,23 +17,25 @@ index fcb60cbd77..f59ab93291 100644
      {
        version: 'v16',
 diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
-index 4b0fcce335..eb93692be2 100644
+index 3da3517a8f..a2d80ea740 100644
 --- a/adev/src/app/core/services/version-manager.service.ts
 +++ b/adev/src/app/core/services/version-manager.service.ts
-@@ -56,11 +56,11 @@ export class VersionManager {
-   // List of Angular Docs versions which includes current version, next and rc.
+@@ -57,7 +57,7 @@ export class VersionManager {
    private getRecentVersions(): Version[] {
      return [
--      {
+       {
 -        url: this.getAdevDocsUrl('next'),
--        displayName: `next`,
--        version: 'next',
--      },
-+      // {
-+      //   url: this.getAdevDocsUrl('next'),
-+      //   displayName: `next`,
-+      //   version: 'next',
-+      // },
-       // Note: 'rc' should not be visible for now
-       // {
-       //   url: this.getAdevDocsUrl('rc'),
++        url: 'https://next.angular.dev/',
+         displayName: `next`,
+         version: 'next',
+       },
+@@ -68,7 +68,7 @@ export class VersionManager {
+       //   version: 'rc',
+       // },
+       {
+-        url: 'https://angular.dev/',
++        url: 'https://angular.jp/',
+         displayName: this.getVersion(this.currentMajorVersion),
+         version: this.currentVersionMode,
+       },
+

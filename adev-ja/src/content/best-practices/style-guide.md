@@ -209,7 +209,7 @@ Angularの構文、慣習、およびアプリケーション構造に関する�
 
 <docs-code header="main.ts" path="adev/src/content/examples/styleguide/src/02-05/main.ts"/>
 
-### コンポーネントセレクター
+### コンポーネントセレクター {#component-selectors}
 
 #### スタイル 05-02
 

@@ -1,14 +1,14 @@
 <div class="page docs-viewer">
-  <h1 tabindex="-1">アップデートガイド</h1>
+  <h1 tabindex="-1">Update Guide</h1>
   <div class="wizard">
     <div>
-      <h2>アップデートに一致するオプションを選択してください</h2>
+      <h2>Select the options that match your update</h2>
 
-      <h3>Angularバージョン</h3>
+      <h3>Angular versions</h3>
 
       <div class="adev-version-selector">
         <span class="adev-template-select">
-          v.
+          From v.
 
           <button [cdkMenuTriggerFor]="templatesMenuFrom">
             <span>{{ from.name }}</span>
@@ -30,7 +30,7 @@
 
         <span>
           <span class="adev-template-select">
-            から v.
+            To v.
             <button [cdkMenuTriggerFor]="templatesMenuTo">
               <span>{{ to.name }}</span>
               <docs-icon>expand_more</docs-icon>
@@ -54,9 +54,9 @@
       @if (from.number >= futureVersion || to.number >= futureVersion) {
         <div class="docs-alert docs-alert-critical">
           <p>
-            <strong>警告:</strong>
-            現在のメジャーリリース以降のリリースの計画は確定しておらず、変更される可能性があります。
-            これらの推奨事項は、予定されている非推奨化に基づいています。
+            <strong>Warning:</strong>
+            Plans for releases after the current major release are not finalized and may change.
+            These recommendations are based on scheduled deprecations.
           </p>
         </div>
       }
@@ -64,8 +64,8 @@
       @if (from.number > to.number) {
         <div class="docs-alert docs-alert-critical">
           <p>
-            <strong>警告:</strong>
-            Angularのバージョンダウングレードはサポートされていません。
+            <strong>Warning:</strong>
+            We do not support downgrading versions of Angular.
           </p>
         </div>
       }
@@ -73,46 +73,46 @@
       @if ((to.number - from.number > 150) && from.number > 240) {
         <div class="docs-alert docs-alert-critical">
           <p>
-            <strong>警告:</strong>
-            以下のガイドに従ってアプリケーションを新しいバージョンに移行してください。
+            <strong>Warning:</strong>
+            Be sure to follow the guide below to migrate your application to the new version. You
+            can't run
             <code>ng update</code>
-            を使用して、
-            Angularアプリケーションを一度に複数のメジャーバージョンをアップデートすることはできません。
+            to update Angular applications more than one major version at a time.
           </p>
         </div>
       }
 
-      <h3>アプリケーションの複雑さ</h3>
+      <h3>Application complexity</h3>
       <mat-button-toggle-group
         (change)="level = $event.value;"
         [value]="level"
         style="margin-bottom:16px;"
       >
-        <mat-button-toggle [value]="1">基本</mat-button-toggle>
-        <mat-button-toggle [value]="2">中級</mat-button-toggle>
-        <mat-button-toggle [value]="3">上級</mat-button-toggle>
+        <mat-button-toggle [value]="1">Basic</mat-button-toggle>
+        <mat-button-toggle [value]="2">Medium</mat-button-toggle>
+        <mat-button-toggle [value]="3">Advanced</mat-button-toggle>
       </mat-button-toggle-group>
       @if (level === 1) {
-        <p>すべてのAngular開発者向けの情報を表示します。</p>
+        <p>Shows information for all Angular developers.</p>
       } @else if (level === 2) {
-        <p>より上級のAngular開発者向けの情報を表示します。</p>
+        <p>Shows information that's of interest to more advanced Angular developers.</p>
       } @else if (level === 3) {
-        <p>このアップデートに関するすべての情報を表示します。</p>
+        <p>Shows all the information we have about this update.</p>
       }
 
-      <h3>その他の依存関係</h3>
+      <h3>Other dependencies</h3>
       @for (option of optionList; track $index) {
         <div>
           <mat-checkbox
             (change)="options[option.id] = $event.checked; showUpdatePath()"
             [checked]="options[option.id]"
-            >{{option.name}} {{option.description}}を使用しています</mat-checkbox
+            >I use {{option.name}} {{option.description}}</mat-checkbox
           >
         </div>
       }
 
       @if (from.number < 600) {
-        <h4>パッケージマネージャー</h4>
+        <h4>Package Manager</h4>
         <mat-button-toggle-group
           (change)="packageManager = $event.value; showUpdatePath()"
           [value]="packageManager"
@@ -126,9 +126,9 @@
         type="button"
         (click)="showUpdatePath()"
         class="docs-primary-btn show-button"
-        [attr.text]="'アップデート方法を表示！'"
+        [attr.text]="'Show me how to update!'"
       >
-        アップデート方法を表示！
+        Show me how to update!
       </button>
     </div>
   </div>
@@ -142,7 +142,7 @@
     <div class="recommendations">
       <h2>{{title}}</h2>
 
-      <h3>アップデート前</h3>
+      <h3>Before you update</h3>
       @for (r  of beforeRecommendations; track $index) {
         <div class="adev-recommentation-item">
           <mat-checkbox></mat-checkbox>
@@ -151,14 +151,14 @@
       }
       @if (beforeRecommendations.length <= 0) {
         <div>
-          <em>バージョン移行する前に、何もする必要はありません。</em>
+          <em>You don't need to do anything before moving between these versions.</em>
         </div>
       }
 
-      <h3>新しいバージョンにアップデートする</h3>
+      <h3>Update to the new version</h3>
       @if (duringRecommendations.length > 0) {
         <div>
-          <em>これらの変更を確認し、アプリケーションをアップデートするための操作を実行してください。</em>
+          <em>Review these changes and perform the actions to update your application.</em>
         </div>
       }
 
@@ -170,11 +170,11 @@
       }
       @if (duringRecommendations.length <= 0) {
         <div>
-          <em>バージョン移行するための推奨事項はありません。</em>
+          <em>There aren't any recommendations for moving between these versions.</em>
         </div>
       }
 
-      <h3>アップデート後</h3>
+      <h3>After you update</h3>
       @for (r of afterRecommendations; track $index) {
         <div class="adev-recommentation-item">
           <mat-checkbox></mat-checkbox>
@@ -183,7 +183,7 @@
       }
       @if (afterRecommendations.length <= 0) {
         <div>
-          <em>バージョン移行した後、何もする必要はありません。</em>
+          <em>You don't need to do anything after moving between these versions.</em>
         </div>
       }
     </div>

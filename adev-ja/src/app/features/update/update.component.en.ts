@@ -44,7 +44,7 @@ export default class AppComponent {
   };
 
   protected readonly optionList: Option[] = [
-    {id: 'ngUpgrade', name: 'ngUpgrade', description: 'によるAngularJSとAngularの統合'},
+    {id: 'ngUpgrade', name: 'ngUpgrade', description: 'to combine AngularJS & Angular'},
     {id: 'material', name: 'Angular Material', description: ''},
     {id: 'windows', name: 'Windows', description: ''},
   ];
@@ -135,14 +135,14 @@ export default class AppComponent {
       return;
     }
 
-    const labelTitle = 'アップデートガイド';
-    const labelBasic = '基本';
-    const labelMedium = '中級';
-    const labelAdvanced = '上級';
+    const labelTitle = 'Guide to update your Angular application';
+    const labelBasic = 'basic applications';
+    const labelMedium = 'medium applications';
+    const labelAdvanced = 'advanced applications';
 
     this.title = `${labelTitle} v${this.from.name} -> v${this.to.name}
-    
-    （${this.level < 2 ? labelBasic : this.level < 3 ? labelMedium : labelAdvanced}）`;
+    for
+    ${this.level < 2 ? labelBasic : this.level < 3 ? labelMedium : labelAdvanced}`;
 
     // Find applicable steps and organize them into before, during, and after upgrade
     for (const step of this.steps) {
@@ -233,7 +233,7 @@ export default class AppComponent {
 
     // Provide npm/yarn instructions for versions before 6
     if (this.to.number < 600) {
-      const actionMessage = `依存関係をすべて最新のAngularと適切なバージョンのTypeScriptにあわせてアップデートします。`;
+      const actionMessage = `Update all of your dependencies to the latest Angular and the right version of TypeScript.`;
 
       if (isWindows()) {
         const packages =
@@ -246,7 +246,7 @@ export default class AppComponent {
         upgradeStep = {
           step: 'General Update',
           action: `${actionMessage}
-          Windowsの場合は次のコマンドを使用できます:
+          If you are using Windows, you can use:
 
 \`${this.packageManager} ${packages}\``,
         } as Step;
@@ -255,7 +255,7 @@ export default class AppComponent {
         upgradeStep = {
           step: 'General update',
           action: `${actionMessage}
-          Linux/Macの場合は次のコマンドを使用できます:
+          If you are using Linux/Mac, you can use:
 
 \`${this.packageManager} ${packages}\``,
         } as Step;

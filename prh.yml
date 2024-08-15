@@ -196,11 +196,6 @@ rules:
       - Effects
       - Effect
 
-  - expected: ハイドレーション
-    pattern:
-      - hydration
-      - Hydration
-
   - expected: シングルページアプリケーション
     pattern:
       - 単一ページアプリケーション

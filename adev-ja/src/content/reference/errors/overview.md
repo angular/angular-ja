@@ -1,8 +1,8 @@
-# Error Encyclopedia
+# エラー百科事典
 
-## Runtime errors
+## ランタイムエラー
 
-| Code      | Name                                                                                 |
+| コード      | 名前                                                                                 |
 | :-------- | :----------------------------------------------------------------------------------- |
 | `NG0100`  | [Expression Changed After Checked](errors/NG0100)                                    |
 | `NG0200`  | [Circular Dependency in DI](errors/NG0200)                                           |
@@ -32,9 +32,9 @@
 | `NG05000`  | [Hydration with unsupported Zone.js instance.](errors/NG05000)                      |
 | `NG05104` | [Root element was not found.](errors/NG05104)                                        |
 
-## Compiler errors
+## コンパイラエラー
 
-| Code     | Name                                                       |
+| コード     | 名前                                                       |
 | :------- | :--------------------------------------------------------- |
 | `NG1001` | [Argument Not Literal](errors/NG1001)                      |
 | `NG2003` | [Missing Token](errors/NG2003)                             |

@@ -2207,7 +2207,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v18 node support',
     action:
-      'アプリケーションをアップグレードする前に、サポートされているバージョンのnode.jsを使用していることを確認してください。Angular v18はnode.jsのv18.19.0以降のバージョンをサポートしています。',
+      'Make sure that you are using a supported version of node.js before you upgrade your application. Angular v18 supports node.js versions: v18.19.0 and newer',
   },
   {
     possibleIn: 1800,
@@ -2215,7 +2215,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v18 ng update',
     action:
-      "アプリケーションのプロジェクトディレクトリで、`ng update @angular/core@18 @angular/cli@18` を実行して、アプリケーションをAngular v18にアップデートします。",
+      "In the application's project directory, run `ng update @angular/core@18 @angular/cli@18` to update your application to Angular v18.",
   },
   {
     possibleIn: 1800,
@@ -2223,28 +2223,28 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: 'update @angular/material',
-    action: '`ng update @angular/material@18` を実行します。',
+    action: 'Run `ng update @angular/material@18`.',
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Basic,
     step: '18.0.0 Upgrade TypeScript',
-    action: 'TypeScriptをバージョン5.4以降にアップデートしてください。',
+    action: 'Update TypeScript to versions 5.4 or newer.',
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: async has been removed, use `waitForAsync` instead',
-    action: '`angular/core`の `async` を `waitForAsync` に置き換えてください。',
+    action: 'Replace `async` from `@angular/core` with `waitForAsync`.',
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: Deprecated matchesElement method removed from AnimationDriver',
-    action: "`matchesElement` の呼び出しを削除してください。これは `AnimationDriver` の一部ではなく なりました。",
+    action: "Remove calls to `matchesElement` because it's now not part of `AnimationDriver`.",
   },
   {
     possibleIn: 1800,
@@ -2252,7 +2252,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0. Use `@angular/core` StateKey and TransferState',
     action:
-      '`StateKey` と `TransferState` を `@angular/platform-browser` ではなく `@angular/core` からインポートしてください。',
+      'Import `StateKey` and `TransferState` from `@angular/core` instead of `@angular/platform-browser`.',
   },
   {
     possibleIn: 1800,
@@ -2260,7 +2260,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0. Opt-out of caching for HTTP requests with auth headers',
     action:
-      '`withHttpTransferCache` で `includeRequestsWithAuthHeaders: true` を使用すると、認証が必要な HTTP リクエストのキャッシュをオプトアウトすることができます。',
+      'Use `includeRequestsWithAuthHeaders: true` in `withHttpTransferCache` to opt-out of caching for HTTP requests that require authorization.',
   },
   {
     possibleIn: 1800,
@@ -2268,7 +2268,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0.REMOVE_OBSOLETE_IS_WORKER',
     action:
-      '`isPlatformWorkerUi`と`isPlatformWorkerApp`はWebWorkerプラットフォームの一部であり、現在はAngularの一部ではないため、アプリケーションを更新して削除してください。',
+      'Update the application to remove `isPlatformWorkerUi` and `isPlatformWorkerApp` since they were part of platform WebWorker which is now not part of Angular.',
   },
   {
     possibleIn: 1800,
@@ -2276,14 +2276,14 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0.FORCE_ZONE_CHANGE_DETECTION',
     action:
-      'テストは、テストの状態を DOM に完全に反映させるために、追加の変更検出を実行するかもしれません。最後の手段として、以前の挙動に戻すには、TestBed プロバイダに `provideZoneChangeDetection({ignoreChangesOutsideZone: true})` を追加します。',
+      'Tests may run additional rounds of change detection to fully reflect test state in the DOM. As a last resort, revert to the old behavior by adding `provideZoneChangeDetection({ignoreChangesOutsideZone: true})` to the TestBed providers.',
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: '18.0.0: Remove two-way binding expressions in writable bindings',
-    action: 'テンプレート内で `[(ngModel)]` を使ってプロパティに書き込む式を削除してください。',
+    action: 'Remove expressions that write to properties in templates that use `[(ngModel)]`',
   },
   {
     possibleIn: 1800,
@@ -2291,7 +2291,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: Use zones to track pending requests',
     action:
-      '`Testability` のメソッド `increasePendingRequestCount`、`decreasePendingRequestCount`、`getPendingRequestCount` の呼出しを削除してください。この情報は ZoneJS によって追跡されます。',
+      'Remove calls to `Testability` methods `increasePendingRequestCount`, `decreasePendingRequestCount`, and `getPendingRequestCount`. This information is tracked by ZoneJS.',
   },
   {
     possibleIn: 1800,
@@ -2299,7 +2299,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0: Move shared providers to the routed component',
     action:
-      '`RouterOutlet` を定義するコンポーネントから `bootstrapApplication` または `Route` config のプロバイダーに、ルーティングされたコンポーネントが利用できる環境プロバイダーを移動させてください。',
+      'Move any environment providers that should be available to routed components from the component that defines the `RouterOutlet` to the providers of `bootstrapApplication` or the `Route` config.',
   },
   {
     possibleIn: 1800,
@@ -2307,7 +2307,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0 Use RedirectCommand or new NavigationBehaviorOptions',
     action:
-      'ガードが `UrlTree` をリダイレクトとして返すとき、最初のナビゲーションが `replaceUrl` オプションも使用していた場合、リダイレクト先のナビゲーションは `replaceUrl` を使用するようになりました。以前の動作を好む場合は、新しい `NavigationBehaviorOptions` を使用してリダイレクトを設定し、`UrlTree` の代わりに必要なオプションを指定して `RedirectCommand` を返してください。',
+      'When a guard returns a `UrlTree` as a redirect, the redirecting navigation will now use `replaceUrl` if the initial navigation was also using the `replaceUrl` option. If you prefer the previous behavior, configure the redirect using the new `NavigationBehaviorOptions` by returning a `RedirectCommand` with the desired options instead of `UrlTree`.',
   },
   {
     possibleIn: 1800,
@@ -2315,7 +2315,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: Remove deprecated resource cache providers',
     action:
-      "`RESOURCE_CACHE_PROVIDER`の依存オブジェクトを削除しました。これは Angular ランタイムの一部ではなくなったためです。",
+      "Remove dependencies of `RESOURCE_CACHE_PROVIDER` since it's no longer part of the Angular runtime.",
   },
   {
     possibleIn: 1800,
@@ -2323,7 +2323,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: Update Node.js URL parsing in `ServerPlatformLocation`',
     action:
-      '`angular/platform-server`では、パス名の末尾に常に `/` が付くようになり、http: と https: のデフォルトポートはそれぞれ 80 と 443 になりました。',
+      'In `@angular/platform-server` now `pathname` is always suffixed with `/` and the default ports for http: and https: respectively are 80 and 443.',
   },
   {
     possibleIn: 1800,
@@ -2331,7 +2331,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0. Use absolute URLs',
     action:
-      '`PlatformConfig` から `useAbsoluteUrl` と `baseUrl` を使用する代わりに、絶対 `url` を提供しましょう。',
+      'Provide an absolute `url` instead of using `useAbsoluteUrl` and `baseUrl` from `PlatformConfig`.',
   },
   {
     possibleIn: 1800,
@@ -2339,7 +2339,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0. Switch from `platformDynamicServer` to `platformServer`.',
     action:
-      '`platformDynamicServer` の使い方を `platformServer` に置き換えてください。また、`import @angular/compiler` を追加してください。',
+      'Replace the usage of `platformDynamicServer` with `platformServer`. Also, add an `import @angular/compiler`.',
   },
   {
     possibleIn: 1800,
@@ -2347,7 +2347,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0. Remove `ServerTransferStateModule` from app imports',
     action:
-      'アプリケーションから `ServerTransferStateModule` のインポートをすべて削除します。これはもう必要ありません。',
+      'Remove all imports of `ServerTransferStateModule` from your application. It is no longer needed.',
   },
   {
     possibleIn: 1800,
@@ -2355,7 +2355,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0. Update `Route.redirectTo` to accept functions',
     action:
-      '`Route.redirectTo`に文字列の他に関数を含めることができるようになりました。`Route` オブジェクトを直接読み込み、`redirectTo` が文字列であることを期待するコードは、関数にも対応するように更新する必要があるかもしれません。',
+      '`Route.redirectTo` can now include a function in addition to a string. Any code which reads `Route` objects directly and expects `redirectTo` to be a string may need to update to account for functions as well.',
   },
   {
     possibleIn: 1800,
@@ -2363,7 +2363,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: Guards can return `RedirectCommand`',
     action:
-      '`Route` ガードとリゾルバは `UrlTree` と `boolean` に加えて `RedirectCommand` オブジェクトを返すことができるようになりました。`Route` オブジェクトを直接読み込んで `boolean` または `UrlTree` だけを期待するコードは、`RedirectCommand` も考慮するように更新する必要があるかもしれません。',
+      '`Route` guards and resolvers can now return a `RedirectCommand` object in addition to a `UrlTree` and `boolean`. Any code which reads `Route` objects directly and expects only `boolean` or `UrlTree` may need to update to account for `RedirectCommand` as well.',
   },
   {
     possibleIn: 1800,
@@ -2371,7 +2371,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '18.0.0: Mark `OnPush` views dirty',
     action:
-      '`OnPush` 変更検出を使用しているコンポーネントについては、ホストバインディングの更新を有効にするために、適切にダーティマークされていることを確認してください。',
+      'For any components using `OnPush` change detection, ensure they are properly marked dirty to enable host binding updates.',
   },
   {
     possibleIn: 1800,
@@ -2379,7 +2379,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0-Refresh-Newly-Created-Views',
     action:
-      '新しく作成されたビューや、変更検出中にチェックマークが付けられ、再度アタッチされたビューは、同じ変更検出サイクルでリフレッシュされることが保証されるようになりました。',
+      'Be aware that newly created views or views marked for check and reattached during change detection are now guaranteed to be refreshed in that same change detection cycle.',
   },
   {
     possibleIn: 1800,
@@ -2387,7 +2387,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0: `ComponentFixture.whenStable` matches `ApplicationRef.isStable`',
     action:
-      '`ComponentFixture.whenStable` と `ApplicationRef.isStable` のセマンティクスを調整した結果、`whenStable` を使用するとテストの待ち時間が長くなることがあります。',
+      'After aligning the semantics of `ComponentFixture.whenStable` and `ApplicationRef.isStable`, your tests may wait longer when using `whenStable`.',
   },
   {
     possibleIn: 1800,
@@ -2395,6 +2395,6 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: '18.0.0. `ComponentFixture.autoDetect` behavior more closely matches Application behavior',
     action:
-      '`ComponentFixture.autoDetect` が `ApplicationRef.tick` 内のフィクスチャの変更検出を実行するようになったため、`ComponentFixture.autoDetect` を使用しているときに変更検出の実行順序に依存しているテストがあると、テストに失敗することがあります。たとえば、これによってテストフィクスチャは、これまではその逆であったかもしれませんが、作成するダイアログの前にリフレッシュされます。',
+      'You may experience tests failures if you have tests that rely on change detection execution order when using `ComponentFixture.autoDetect` because it now executes change detection for fixtures within `ApplicationRef.tick`. For example, this will cause test fixture to refresh before any dialogs that it creates whereas this may have been the other way around in the past.',
   },
 ];

@@ -26,7 +26,7 @@
     "prh-rules": "prh/rules",
     "rxjs": "7.8.1",
     "sitemap": "8.0.0",
-    "textlint": "^14.0.4",
+    "textlint": "^14.2.0",
     "textlint-filter-rule-allowlist": "4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-ja-spacing": "2.4.3",

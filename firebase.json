@@ -23,7 +23,7 @@
         ]
       },
       {
-        "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+        "source": "*.[0-9A-Z]{8}.+(css|js)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -36,7 +36,7 @@
         ]
       },
       {
-        "source": "/[0-9a-f][0-9a-f][0-9a-f].[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].js",
+        "source": "/*.js",
         "headers": [
           {
             "key": "Cross-Origin-Embedder-Policy",

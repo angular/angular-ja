@@ -78,7 +78,7 @@ export async function modifyBuildOutput() {
  * Copy static files into build output directory
  */
 async function copyStaticFiles() {
-  const files = ['_headers'];
+  const files: string[] = [];
   for (const file of files) {
     const src = resolve(adevJaDir, file);
     const dest = resolve(buildOutputDir, file);

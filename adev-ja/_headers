@@ -1,7 +1,0 @@
-# Headers for Cloudflare Pages
-# https://developers.cloudflare.com/pages/configuration/headers/ 
-
-# Enable site isolation for all resources
-/*
-  Cross-Origin-Embedder-Policy: require-corp
-  Cross-Origin-Opener-Policy: same-origin

@@ -20,6 +20,9 @@ permissions:
   # Needed in order to retrieve the artifacts from the previous job
   actions: read
 
+env:
+  BUILD_DIR: build/dist/bin/adev/build/browser
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -30,22 +33,23 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: adev-preview
+          path: ${{ env.BUILD_DIR }}
           github-token: '${{secrets.GITHUB_TOKEN}}'
           run-id: ${{ github.event.workflow_run.id }}
       - run: ls -R
       - name: Extract pull request number
         id: pr-number
         run: |
-          PR_NUMBER=$(cat __metadata__pull_number.txt)
+          PR_NUMBER=$(cat ./$BUILD_DIR/__metadata__pull_number.txt)
           echo "value=$PR_NUMBER" >> $GITHUB_OUTPUT
       - name: Extract commit hash
         id: commit-hash
         run: |
-          COMMIT_HASH=$(cat __metadata__commit_hash.txt)
+          COMMIT_HASH=$(cat ./$BUILD_DIR/browser__metadata__commit_hash.txt)
           echo "value=$COMMIT_HASH" >> $GITHUB_OUTPUT
       - run: echo ${{ steps.pr-number.outputs.value }} ${{ steps.commit-hash.outputs.value }}
       - name: Deploy to cloudflare pages
-        run: npx wrangler pages deploy ./ --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
+        run: npx wrangler pages deploy $BUILD_DIR --project-name $CLOUDFLARE_PAGES_PROJECT --branch pr-$PR_NUMBER --commit-hash $COMMIT_HASH
         env:
           PR_NUMBER: ${{ steps.pr-number.outputs.value }}
           COMMIT_HASH: ${{ steps.commit-hash.outputs.value }}

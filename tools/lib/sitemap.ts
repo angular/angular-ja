@@ -16,7 +16,7 @@ export async function generateSitemap(distPath: string) {
   });
 
   for (const file of htmlFiles) {
-    stream.write({ url: file.replace(/index\.html$/, '') });
+    stream.write({ url: file.replace(/\/index\.html$/, '') });
   }
   stream.end();
 

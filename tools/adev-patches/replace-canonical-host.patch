@@ -11,17 +11,7 @@ index ee21c0a837..afe9b7819c 100644
  
  /**
   * Information about the deployment of this application.
-@@ -20,7 +20,9 @@ export class HeaderService {
-   setCanonical(absolutePath: string): void {
-     const pathWithoutFragment = this.normalizePath(absolutePath).split('#')[0];
-     const fullPath = `${ANGULAR_DEV}/${pathWithoutFragment}`;
--    this.document.querySelector('link[rel=canonical]')?.setAttribute('href', fullPath);
-+    // Cloudflare Pages redirects /foo to /foo/
-+    const fullPathWithSlash = fullPath.endsWith('/') ? fullPath : `${fullPath}/`;
-+    this.document.querySelector('link[rel=canonical]')?.setAttribute('href', fullPathWithSlash);
-   }
- 
-   private normalizePath(path: string): string {
+
 diff --git a/adev/src/index.html b/adev/src/index.html
 index f6d4c0eb48..d0087eaf2a 100644
 --- a/adev/src/index.html

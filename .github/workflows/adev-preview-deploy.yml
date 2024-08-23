@@ -45,7 +45,7 @@ jobs:
       - name: Extract commit hash
         id: commit-hash
         run: |
-          COMMIT_HASH=$(cat ./$BUILD_DIR/browser__metadata__commit_hash.txt)
+          COMMIT_HASH=$(cat ./$BUILD_DIR/__metadata__commit_hash.txt)
           echo "value=$COMMIT_HASH" >> $GITHUB_OUTPUT
       - run: echo ${{ steps.pr-number.outputs.value }} ${{ steps.commit-hash.outputs.value }}
       - name: Deploy to cloudflare pages

@@ -23,11 +23,24 @@
         ]
       },
       {
-        "source": "*.[0-9A-Z]{8}.+(css|js)",
+        "source": "*-[0-9A-Z]{8}.+(css|js)",
         "headers": [
           {
             "key": "Cache-Control",
             "value": "public,max-age=31536000,immutable"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "/**/*.(png|jpg|jpeg|gif|webp|svg)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public,max-age=43200"
           },
           {
             "key": "Access-Control-Allow-Origin",

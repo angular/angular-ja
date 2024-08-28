@@ -13,7 +13,7 @@ const $$ = $({
 export async function buildAdev() {
   const sh = $$({ cwd: buildDir });
   await sh`yarn install --frozen-lockfile`;
-  await sh`yarn bazel build //adev:build`;
+  await sh`yarn bazel build //adev:build --prerender_adev`;
 }
 
 export function serveAdev() {

@@ -1,6 +1,5 @@
 import { consola } from 'consola';
 import { parseArgs } from 'node:util';
-import { Observable, startWith, switchMap } from 'rxjs';
 import { serveAdev } from './lib/adev';
 import { watchLocalizedFiles } from './lib/localize';
 import setup from './lib/setup';
@@ -33,28 +32,19 @@ async function main() {
 
 async function watch() {
   consola.start('Start watching adev-ja files...');
+  const fileWatcher = watchLocalizedFiles();
 
-  const watcher = watchLocalizedFiles()
-    .pipe(
-      // 初回実行時に adev を起動する
-      startWith(void 0),
-      switchMap(
-        () =>
-          new Observable((subscriber) => {
-            consola.start('Restarting adev...');
-            const adevProcess = serveAdev();
-            subscriber.next();
+  consola.start('Start adev server...');
+  const adevServer = serveAdev();
 
-            return async () => {
-              await adevProcess.cancel();
-            };
-          })
-      )
-    )
-    .subscribe();
+  const shutdown = () => {
+    consola.info('Shutting down...');
+    fileWatcher.cancel();
+    adevServer.cancel();
+  };
 
-  process.on('SIGINT', watcher.unsubscribe);
-  process.on('SIGTERM', watcher.unsubscribe);
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
 }
 
 main().catch((error) => {

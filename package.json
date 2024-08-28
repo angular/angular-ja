@@ -32,7 +32,6 @@
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-ja-technical-writing": "10.0.1",
     "textlint-rule-prh": "^6.0.0",
-    "tree-kill": "^1.2.2",
     "tsx": "^4.16.2"
   }
 }

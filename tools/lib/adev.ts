@@ -1,6 +1,5 @@
 import { consola } from 'consola';
 import { $ } from 'execa';
-import kill from 'tree-kill';
 import { buildDir } from './workspace';
 
 const $$ = $({
@@ -18,10 +17,10 @@ export async function buildAdev() {
 
 export function serveAdev() {
   const sh = $$({ cwd: buildDir, reject: false });
-  const p = sh`npx bazel run //adev:serve --fast_adev`;
+  const p = sh`yarn ibazel run //adev:serve`;
   const pid = p.pid!;
   consola.log(`adev process started: ${pid}`);
-  const abort = () => kill(pid!);
+  const abort = () => process.kill(pid!);
   p.finally(() => {
     consola.log(`adev process exited: ${pid}`);
   });

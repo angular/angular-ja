@@ -40,7 +40,7 @@ export async function copyLocalizedFiles() {
 }
 
 export function watchLocalizedFiles() {
-  return new Observable<string>((subscriber) => {
+  const sub = new Observable<string>((subscriber) => {
     const watcher = watch(localizedFilePatterns, {
       cwd: adevJaDir,
       awaitWriteFinish: true,
@@ -53,12 +53,17 @@ export function watchLocalizedFiles() {
     return async () => {
       await watcher.close();
     };
-  }).pipe(
-    // 変更があったファイルをビルドディレクトリにコピーする
-    mergeMap((file) => from(copyLocalizedFile(file))),
-    // 1秒間の変更をまとめる
-    debounceTime(1000)
-  );
+  })
+    .pipe(
+      // 変更があったファイルをビルドディレクトリにコピーする
+      mergeMap((file) => from(copyLocalizedFile(file))),
+      // 1秒間の変更をまとめる
+      debounceTime(1000)
+    )
+    .subscribe();
+  return {
+    cancel: () => sub.unsubscribe(),
+  };
 }
 
 /**

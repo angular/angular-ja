@@ -71,6 +71,7 @@ export async function modifyBuildOutput() {
   await copyStaticFiles();
   consola.start('Replace GitHub edit links...');
   await replaceAdevGitHubEditLinks();
+  consola.start('Generate sitemap...');
   await generateSitemap(resolve(buildOutputDir, 'sitemap.xml'));
 }
 

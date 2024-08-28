@@ -51,20 +51,20 @@ Angularアプリケーション全体に関連するライフサイクルフッ�
       <td>このコンポーネントが変更のためにチェックされるたびに実行されます。</td>
     </tr>
     <tr>
-      <td><code>ngAfterViewInit</code></td>
-      <td>コンポーネントの<em>ビュー</em>が初期化された後に1回実行されます。</td>
-    </tr>
-    <tr>
       <td><code>ngAfterContentInit</code></td>
       <td>コンポーネントの<em>コンテンツ</em>が初期化された後に1回実行されます。</td>
     </tr>
     <tr>
-      <td><code>ngAfterViewChecked</code></td>
-      <td>コンポーネントのビューが変更のためにチェックされるたびに実行されます。</td>
-    </tr>
-    <tr>
       <td><code>ngAfterContentChecked</code></td>
       <td>このコンポーネントのコンテンツが変更のためにチェックされるたびに実行されます。</td>
+    </tr>
+    <tr>
+      <td><code>ngAfterViewInit</code></td>
+      <td>コンポーネントの<em>ビュー</em>が初期化された後に1回実行されます。</td>
+    </tr>
+    <tr>
+      <td><code>ngAfterViewChecked</code></td>
+      <td>コンポーネントのビューが変更のためにチェックされるたびに実行されます。</td>
     </tr>
     <tr>
       <td rowspan="2">レンダリング</td>
@@ -173,16 +173,6 @@ Angularがコンポーネントのテンプレートの変更をチェックす�
 
 初期化中は、最初の `ngDoCheck` は `ngOnInit` の後に実行されます。
 
-### ngAfterViewInit
-
-`ngAfterViewInit` メソッドは、
-コンポーネントのテンプレート（その*ビュー*）内のすべての子が初期化された後に1回だけ実行されます。
-
-このライフサイクルフックを使用して、
-[ビュークエリ](guide/components/queries#view-queries) の結果を読み取ることができます。
-これらのクエリの初期化された状態にアクセスできますが、このメソッドで状態を変更しようとすると、
-[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
-
 ### ngAfterContentInit
 
 `ngAfterContentInit` メソッドは、
@@ -190,6 +180,29 @@ Angularがコンポーネントのテンプレートの変更をチェックす�
 
 このライフサイクルフックを使用して、
 [コンテンツクエリ](guide/components/queries#content-queries) の結果を読み取ることができます。
+これらのクエリの初期化された状態にアクセスできますが、このメソッドで状態を変更しようとすると、
+[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
+
+### ngAfterContentChecked
+
+`ngAfterContentChecked` メソッドは、
+コンポーネント（その*コンテンツ*）内にネストされたすべての子が変更のためにチェックされるたびに実行されます。
+
+このメソッドは非常に頻繁に実行され、ページのパフォーマンスに大きく影響する可能性があります。
+可能な限り、このフックの定義を避け、代替手段がない場合にのみ使用してください。
+
+[コンテンツクエリ](guide/components/queries#content-queries)
+の更新された状態にアクセスできますが、
+このメソッドで状態を変更しようとすると、
+[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
+
+### ngAfterViewInit
+
+`ngAfterViewInit` メソッドは、
+コンポーネントのテンプレート（その*ビュー*）内のすべての子が初期化された後に1回だけ実行されます。
+
+このライフサイクルフックを使用して、
+[ビュークエリ](guide/components/queries#view-queries) の結果を読み取ることができます。
 これらのクエリの初期化された状態にアクセスできますが、このメソッドで状態を変更しようとすると、
 [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
 
@@ -202,19 +215,6 @@ Angularがコンポーネントのテンプレートの変更をチェックす�
 可能な限り、このフックの定義を避け、代替手段がない場合にのみ使用してください。
 
 [ビュークエリ](guide/components/queries#view-queries) 
-の更新された状態にアクセスできますが、
-このメソッドで状態を変更しようとすると、
-[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
-
-### ngAfterContentChecked
-
-`ngAfterContentChecked` メソッドは、
-コンポーネント（その*コンテンツ*）内にネストされたすべての子が変更のためにチェックされるたびに実行されます。
-
-このメソッドは非常に頻繁に実行され、ページのパフォーマンスに大きく影響する可能性があります。
-可能な限り、このフックの定義を避け、代替手段がない場合にのみ使用してください。
-
-[コンテンツクエリ](guide/components/queries#content-queries)
 の更新された状態にアクセスできますが、
 このメソッドで状態を変更しようとすると、
 [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。

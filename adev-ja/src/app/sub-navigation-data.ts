@@ -1471,16 +1471,6 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'reference/migrations/standalone',
       },
       {
-        label: 'ModuleWithProviders',
-        path: 'reference/migrations/module-with-providers',
-        contentPath: 'reference/migrations/module-with-providers',
-      },
-      {
-        label: '型付けされたフォーム',
-        path: 'reference/migrations/typed-forms',
-        contentPath: 'reference/migrations/typed-forms',
-      },
-      {
         label: '制御フロー構文',
         path: 'reference/migrations/control-flow',
         contentPath: 'reference/migrations/control-flow',
@@ -1489,6 +1479,11 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'inject() 関数',
         path: 'reference/migrations/inject-function',
         contentPath: 'reference/migrations/inject-function',
+      },
+      {
+        label: 'Lazy-loaded routes',
+        path: 'reference/migrations/route-lazy-loading',
+        contentPath: 'reference/migrations/route-lazy-loading',
       },
     ],
   },

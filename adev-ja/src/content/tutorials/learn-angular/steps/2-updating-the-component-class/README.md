@@ -2,7 +2,7 @@
 
 Angularでは、コンポーネントのロジックと動作は、コンポーネントのTypeScriptクラスで定義されます。
 
-このアクティビティでは、コンポーネントクラスの更新方法と、[補間](/guide/templates/interpolation)の使用方法について学習します。
+このアクティビティでは、コンポーネントクラスの更新方法と、[補間](/guide/templates/binding#render-dynamic-text-with-text-interpolation)の使用方法について学習します。
 
 <hr />
 

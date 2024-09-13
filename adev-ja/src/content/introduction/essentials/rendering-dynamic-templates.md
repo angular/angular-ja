@@ -32,7 +32,7 @@ Angularがコンポーネントをレンダリングすると、次の出力が�
 
 ## 動的なプロパティ
 
-HTML要素の標準DOMプロパティの値を動的に設定する必要がある場合、そのプロパティは角括弧で囲まれます。これにより、Angularに宣言された値が、プレーンな文字列ではなく、JavaScriptのようなステートメント（[Angularの拡張機能付き](guide/templates/interpolation)）として解釈されるべきであることを伝えます。
+HTML要素の標準DOMプロパティの値を動的に設定する必要がある場合、そのプロパティは角括弧で囲まれます。これにより、Angularに宣言された値が、プレーンな文字列ではなく、JavaScriptのようなステートメント（[Angularの拡張機能付き](guide/templates/binding#render-dynamic-text-with-text-interpolation)）として解釈されるべきであることを伝えます。
 
 たとえば、HTMLでプロパティを動的に更新する一般的な例は、フォームが有効かどうかによって、フォーム送信ボタンを無効にするかどうかを決定することです。
 

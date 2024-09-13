@@ -204,9 +204,10 @@ Trusted Types対応のアプリケーションがTrusted Typesをサポートし
 | ポリシー                | 詳細                                                                                                                                                                                                                                                                                     |
 | :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `angular`               | このポリシーは、Angular内部のセキュリティレビュー済みコードで使用され、Trusted Typesが強制されたときにAngularが機能するために必要です。Angularによってサニタイズされた、インラインテンプレート値またはコンテンツは、このポリシーによって安全なものとして扱われます。                                          |
+| `angular#bundler`       | このポリシーは、Angular CLIバンドラーが、遅延チャンクファイルを生成する場合に使用されます。                                                                                                                                                                                                             |
 | `angular#unsafe-bypass` | このポリシーは、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)でセキュリティをバイパスするメソッド（`bypassSecurityTrustHtml`など）を使用するアプリケーションで使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。                                  |
 | `angular#unsafe-jit`    | このポリシーは、[Just-In-Time (JIT) コンパイラ](api/core/Compiler)で使用されます。アプリケーションがJITコンパイラと直接対話するか、[プラットフォームブラウザダイナミック](api/platform-browser-dynamic/platformBrowserDynamic)を使用してJITモードで実行されている場合は、このポリシーを有効にする必要があります。 |
-| `angular#bundler`       | このポリシーは、Angular CLIバンドラーが、遅延チャンクファイルを生成する場合に使用されます。                                                                                                                                                                                                             |
+| `angular#unsafe-upgrade` | このポリシーは[@angular/upgrade](api/upgrade/static/UpgradeModule)パッケージで使用されます。アプリケーションが AngularJS ハイブリッドの場合、このポリシーを有効にする必要があります。 |
 
 Trusted TypesのHTTPヘッダーは、次の場所で構成する必要があります。
 

@@ -18,18 +18,18 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 
 このチュートリアルでは、次の方法について学びます。
 
-* コンポーネントとテンプレートを使用してAngularフォームを構築する
-* `ngModel`を使用して、入力コントロールの値を読み書きするための双方向データバインディングを作成する
-* コントロールの状態を追跡する特別なCSSクラスを使用して、視覚的なフィードバックを提供する
-* ユーザーに検証エラーを表示し、フォームの状態に基づいてフォームコントロールからの入力を条件付きで許可する
-* [テンプレート参照変数](guide/templates/reference-variables)を使用して、HTML要素間で情報を共有する
+- コンポーネントとテンプレートを使用してAngularフォームを構築する
+- `ngModel`を使用して、入力コントロールの値を読み書きするための双方向データバインディングを作成する
+- コントロールの状態を追跡する特別なCSSクラスを使用して、視覚的なフィードバックを提供する
+- ユーザーに検証エラーを表示し、フォームの状態に基づいてフォームコントロールからの入力を条件付きで許可する
+- [テンプレート参照変数](guide/templates/reference-variables)を使用して、HTML要素間で情報を共有する
 
 ## テンプレート駆動型フォームの構築
 
 テンプレート駆動型フォームは、`FormsModule`で定義されたディレクティブに依存します。
 
 | ディレクティブ     | 詳細 |
-|:---            |:---     |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `NgModel`      | アタッチされたフォーム要素の値の変更とデータモデルの変更を調整し、入力検証やエラー処理を使用してユーザー入力に対応できるようにします。                                                                                                           |
 | `NgForm`       | トップレベルの`FormGroup`インスタンスを作成し、`<form>`要素にバインドして、集計されたフォームの値と検証の状態を追跡します。`FormsModule`をインポートすると、このディレクティブはすべての`<form>`タグでデフォルトでアクティブになります。特別なセレクターを追加する必要はありません。 |
 | `NgModelGroup` | DOM要素に`FormGroup`インスタンスを作成してバインドします。                                                                                                                                                                                                                      |
@@ -39,18 +39,18 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 このチュートリアルでは、次の手順を使用して、サンプルフォームをデータにバインドし、ユーザー入力を処理します。
 
 1. 基本的なフォームを構築する。
-    * サンプルデータモデルを定義する
-    * `FormsModule`など、必要なインフラストラクチャを含める
+   - サンプルデータモデルを定義する
+   - `FormsModule`など、必要なインフラストラクチャを含める
 1. `ngModel`ディレクティブと双方向データバインディング構文を使用して、フォームコントロールをデータプロパティにバインドする。
-    * `ngModel`がCSSクラスを使用してコントロールの状態を報告する方法を調べる
-    * コントロールに名前を付けて、`ngModel`からアクセスできるようにする
+   - `ngModel`がCSSクラスを使用してコントロールの状態を報告する方法を調べる
+   - コントロールに名前を付けて、`ngModel`からアクセスできるようにする
 1. `ngModel`を使用して、入力の有効性とコントロールの状態を追跡する。
-    * 状態に基づいて視覚的なフィードバックを提供するためのカスタムCSSを追加する
-    * 検証エラーメッセージを表示および非表示にする
+   - 状態に基づいて視覚的なフィードバックを提供するためのカスタムCSSを追加する
+   - 検証エラーメッセージを表示および非表示にする
 1. モデルデータに追加することで、ネイティブHTMLボタンのクリックイベントに対応する。
 1. フォームの[`ngSubmit`](api/forms/NgForm#properties)出力プロパティを使用して、フォームの送信を処理する。
-    * フォームが有効になるまで、**Submit**ボタンを無効にする
-    * 送信後、ページ上の異なるコンテンツに、完了したフォームを交換する
+   - フォームが有効になるまで、**Submit**ボタンを無効にする
+   - 送信後、ページ上の異なるコンテンツに、完了したフォームを交換する
 
 ## フォームの構築
 
@@ -59,48 +59,48 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 
 1. 提供されたサンプルアプリケーションは、フォームに反映されるデータモデルを定義する`Actor`クラスを作成します。
 
-    <docs-code header="src/app/actor.ts" language="typescript" path="adev/src/content/examples/forms/src/app/actor.ts"/>
+   <docs-code header="src/app/actor.ts" language="typescript" path="adev/src/content/examples/forms/src/app/actor.ts"/>
 
 1. フォームのレイアウトと詳細は、`ActorFormComponent`クラスで定義されます。
 
-    <docs-code header="src/app/actor-form/actor-form.component.ts (v1)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="v1"/>
+   <docs-code header="src/app/actor-form/actor-form.component.ts (v1)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="v1"/>
 
-    コンポーネントの`selector`値は"app-actor-form"であるため、このフォームを`<app-actor-form>`タグを使用して親テンプレートにドロップできます。
+   コンポーネントの`selector`値は"app-actor-form"であるため、このフォームを`<app-actor-form>`タグを使用して親テンプレートにドロップできます。
 
 1. 次のコードは、新しいアクターインスタンスを作成し、初期フォームにサンプルアクターを表示します。
 
-    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="Marilyn"/>
+   <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="Marilyn"/>
 
-    このデモでは、`model`と`skills`のダミーデータを使用しています。
-    実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
+   このデモでは、`model`と`skills`のダミーデータを使用しています。
+   実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
 1. アプリケーションは、フォーム機能を有効にし、作成されたフォームコンポーネントを登録します。
 
-    <docs-code header="src/app/app.module.ts" language="typescript" path="adev/src/content/examples/forms/src/app/app.module.ts"/>
+   <docs-code header="src/app/app.module.ts" language="typescript" path="adev/src/content/examples/forms/src/app/app.module.ts"/>
 
 1. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
 
-    <docs-code header="src/app/app.component.html" language="html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
+   <docs-code header="src/app/app.component.html" language="html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
 
-    初期テンプレートは、2つのフォームグループと送信ボタンを持つフォームのレイアウトを定義します。
-    フォームグループは、Actorデータモデルの2つのプロパティ（名前とスタジオ）に対応します。
-    各グループには、ラベルとユーザー入力を得るためのボックスがあります。
+   初期テンプレートは、2つのフォームグループと送信ボタンを持つフォームのレイアウトを定義します。
+   フォームグループは、Actorデータモデルの2つのプロパティ（名前とスタジオ）に対応します。
+   各グループには、ラベルとユーザー入力を得るためのボックスがあります。
 
-    * **名前**`<input>`コントロール要素には、HTML5の`required`属性があります
-    * **スタジオ**`<input>`コントロール要素には、`studio`はオプションであるため、属性がありません
+   - **名前**`<input>`コントロール要素には、HTML5の`required`属性があります
+   - **スタジオ**`<input>`コントロール要素には、`studio`はオプションであるため、属性がありません
 
-    **Submit**ボタンには、スタイリングのためのいくつかのクラスがあります。
-    現時点では、フォームのレイアウトはすべてプレーンなHTML5で、バインディングやディレクティブはありません。
+   **Submit**ボタンには、スタイリングのためのいくつかのクラスがあります。
+   現時点では、フォームのレイアウトはすべてプレーンなHTML5で、バインディングやディレクティブはありません。
 
 1. サンプルフォームは、[Twitter Bootstrap](https://getbootstrap.com/css)の`container`、`form-group`、`form-control`、`btn`といったスタイルクラスを使用しています。
-    これらのスタイルを使用するには、アプリケーションのスタイルシートでライブラリをインポートします。
+   これらのスタイルを使用するには、アプリケーションのスタイルシートでライブラリをインポートします。
 
-    <docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
+   <docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
 
 1. フォームでは、アクターのスキルを、`ActorFormComponent`で内部的に維持されている事前定義された`skills`リストから選択する必要があります。
-    Angularの[NgForOfディレクティブ](api/common/NgForOf "APIリファレンス")は、データ値を反復処理して、`<select>`要素に値を埋め込みます。
+   Angularの[NgForOfディレクティブ](api/common/NgForOf "APIリファレンス")は、データ値を反復処理して、`<select>`要素に値を埋め込みます。
 
-    <docs-code header="src/app/actor-form/actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
+   <docs-code header="src/app/actor-form/actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
 
 アプリケーションを今すぐ実行すると、選択コントロールにスキルのリストが表示されます。
 入力要素は、まだデータ値やイベントにバインドされていないため、空欄であり、動作しません。
@@ -129,14 +129,14 @@ HELPFUL: この例では、各入力タグの後に一時的な診断用補間`{
 1. テンプレートファイル`actor-form.component.html`を編集します。
 1. テンプレート参照変数`#actorForm`を付けて`<form>`タグを更新し、次の値を設定します。
 
-    <docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="template-variable"/>
+   <docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="template-variable"/>
 
-    `actorForm`テンプレート変数は、フォーム全体を管理する`NgForm`ディレクティブインスタンスへの参照になります。
+   `actorForm`テンプレート変数は、フォーム全体を管理する`NgForm`ディレクティブインスタンスへの参照になります。
 
 1. アプリケーションを実行します。
 1. **名前**入力ボックスに入力し始めます。
 
-    文字を追加したり削除したりすると、データモデルにも表示および非表示されます。
+   文字を追加したり削除したりすると、データモデルにも表示および非表示されます。
 
 補間された値を表示する診断用行は、値が実際に入力ボックスからモデルに、そしてモデルから入力ボックスに戻っていることを示しています。
 
@@ -158,11 +158,11 @@ Angularは、割り当てられた名前を使用して、親`<form>`要素に�
 
 次のことに注意してください。
 
-* 各`<input>`要素には`id`プロパティがあります。
-    これは、`<label>`要素の`for`属性によって使用され、ラベルを入力コントロールに一致させます。
-    これは[標準的なHTML機能](https://developer.mozilla.org/docs/Web/HTML/Element/label)です。
+- 各`<input>`要素には`id`プロパティがあります。
+   これは、`<label>`要素の`for`属性によって使用され、ラベルを入力コントロールに一致させます。
+   これは[標準的なHTML機能](https://developer.mozilla.org/docs/Web/HTML/Element/label)です。
 
-* 各`<input>`要素には、Angularがフォームにコントロールを登録するために使用する必要な`name`プロパティもあります。
+- 各`<input>`要素には、Angularがフォームにコントロールを登録するために使用する必要な`name`プロパティもあります。
 
 効果を確認したら、`{{ model | json }}`テキストバインディングを削除できます。
 
@@ -178,7 +178,7 @@ Angularは、フォームが送信された後に`form`要素に`ng-submitted`�
 次の表は、コントロールの状態に基づいてAngularが適用するクラス名を説明しています。
 
 | 状態                           | クラス（真の場合） | クラス（偽の場合） |
-|:---                              |:---           |:---            |
+| :------------------------------- | :------------ | :------------- |
 | コントロールが訪問された。    | `ng-touched`  | `ng-untouched` |
 | コントロールの値が変更された。 | `ng-dirty`    | `ng-pristine`  |
 | コントロールの値が有効。    | `ng-valid`    | `ng-invalid`   |
@@ -193,28 +193,28 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 フレームワークによるクラスの追加と削除を確認するには、ブラウザの開発者ツールを開き、アクターの名前を表す`<input>`要素を調べます。
 
 1. ブラウザの開発者ツールを使用して、**Name**入力ボックスに対応する`<input>`要素を探します。
-    要素には、"form-control"に加えて、複数のCSSクラスがあることがわかります。
+   要素には、"form-control"に加えて、複数のCSSクラスがあることがわかります。
 
 1. 最初に表示すると、クラスは、値が有効であり、初期化またはリセット以降値が変更されていないこと、初期化またはリセット以降コントロールが訪問されていないことを示しています。
 
-    <docs-code language="html">
+   <docs-code language="html">
 
-    <input class="form-control ng-untouched ng-pristine ng-valid">;
+   <input class="form-control ng-untouched ng-pristine ng-valid">;
 
-    </docs-code>
+   </docs-code>
 
 1. **Name** `<input>`ボックスで次のように操作し、表示されるクラスを観察します。
-    * 見るだけで触れずにいます。
-        クラスは触られていないか、原始状態または有効であることを示しています。
+   - 見るだけで触れずにいます。
+     クラスは触られていないか、原始状態または有効であることを示しています。
 
-    * 名前のボックスをクリックし、外をクリックします。
-        コントロールは訪問されたため、要素には`ng-untouched`クラスではなく`ng-touched`クラスがあります。
+   - 名前のボックスをクリックし、外をクリックします。
+     コントロールは訪問されたため、要素には`ng-untouched`クラスではなく`ng-touched`クラスがあります。
 
-    * 名前の最後にスラッシュを追加します。
-        これで触れられて、汚れています。
+   - 名前の最後にスラッシュを追加します。
+     これで触れられて、汚れています。
 
-    * 名前を消去します。
-        これにより値が無効になるため、`ng-invalid`クラスが`ng-valid`クラスに置き換えられます。
+   - 名前を消去します。
+     これにより値が無効になるため、`ng-invalid`クラスが`ng-valid`クラスに置き換えられます。
 
 ### 状態の視覚的なフィードバックを作成する
 
@@ -273,7 +273,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 
 <docs-callout title=' "原始"状態の例'>
 
-この例では、コントロールが有効あるいは*原始状態*のいずれかの場合にメッセージを非表示にします。
+この例では、コントロールが有効あるいは_原始状態_のいずれかの場合にメッセージを非表示にします。
 原始状態とは、ユーザーがこのフォームに表示されてから値を変更していないことを意味します。
 `pristine`状態を無視すると、値が有効な場合にのみメッセージを非表示にします。
 新しい空白のアクターか無効なアクターがこのコンポーネントに表示されると、何も操作する前にエラーメッセージがすぐに表示されます。
@@ -292,28 +292,28 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 1. テンプレートで、フォームの下部に"New Actor"`<button>`要素を配置します。
 1. コンポーネントファイルで、アクターデータモデルにアクター作成メソッドを追加します。
 
-    <docs-code header="src/app/actor-form/actor-form.component.ts (New Actor method)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="new-actor"/>
+   <docs-code header="src/app/actor-form/actor-form.component.ts (New Actor method)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="new-actor"/>
 
 1. ボタンのクリックイベントを、アクター作成メソッド`newActor()`にバインドします。
 
-    <docs-code header="src/app/actor-form/actor-form.component.html (New Actor button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-no-reset"/>
+   <docs-code header="src/app/actor-form/actor-form.component.html (New Actor button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-no-reset"/>
 
 1. アプリケーションを再度実行し、**New Actor**ボタンをクリックします。
 
-    フォームがクリアされ、入力ボックスの左側の*必須*バーが赤くなり、`name`と`skill`プロパティが無効であることを示しています。
-    エラーメッセージは非表示になっていることに注意してください。
-    これは、フォームが原始状態であるためです。まだ何も変更していません。
+   フォームがクリアされ、入力ボックスの左側の_必須_バーが赤くなり、`name`と`skill`プロパティが無効であることを示しています。
+   エラーメッセージは非表示になっていることに注意してください。
+   これは、フォームが原始状態であるためです。まだ何も変更していません。
 
 1. 名前を入力し、**New Actor**を再度クリックします。
 
-    入力ボックスはもはや原始状態ではないため、`名前は必須です`というエラーメッセージが表示されます。
-    フォームは、**New Actor**をクリックする前に名前を入力したことを覚えています。
+   入力ボックスはもはや原始状態ではないため、`名前は必須です`というエラーメッセージが表示されます。
+   フォームは、**New Actor**をクリックする前に名前を入力したことを覚えています。
 
 1. フォームコントロールの原始状態を復元するには、`newActor()`メソッドを呼び出した後に、フォームの`reset()`メソッドを呼び出してすべてのフラグを強制的にクリアします。
 
-    <docs-code header="src/app/actor-form/actor-form.component.html (Reset the form)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-form-reset"/>
+   <docs-code header="src/app/actor-form/actor-form.component.html (Reset the form)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-form-reset"/>
 
-    これで、**New Actor**をクリックすると、フォームとそのコントロールフラグの両方がリセットされます。
+   これで、**New Actor**をクリックすると、フォームとそのコントロールフラグの両方がリセットされます。
 
 ## `ngSubmit`でフォームを送信する
 
@@ -374,7 +374,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 
 この`<div>`は、補間バインディングで読み取り専用の俳優を表示します。これは、コンポーネントが送信された状態の間にのみ表示されます。
 
-代替表示には、*編集*ボタンが含まれます。このボタンのクリックイベントは、`submitted`フラグをクリアする式にバインドされています。
+代替表示には、_編集_ボタンが含まれます。このボタンのクリックイベントは、`submitted`フラグをクリアする式にバインドされています。
 </docs-step>
 
 <docs-step title="編集ボタンをテストする">
@@ -387,15 +387,15 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 このページで説明したAngularフォームは、データの修正や検証などをサポートするために、
 次のフレームワーク機能を活用しています。
 
-* Angular HTMLフォームテンプレート
-* `@Component`デコレーターを含むフォームコンポーネントクラス
-* `NgForm.ngSubmit`イベントプロパティにバインドすることで、フォーム送信を処理する
-* `#actorForm`や`#name`などのテンプレート参照変数
-* 双方向データバインディングのための`[(ngModel)]`構文
-* 検証とフォーム要素の変更追跡のための`name`属性の使用
-* 入力コントロールの参照変数の`valid`プロパティは、コントロールが有効であるか、エラーメッセージを表示する必要があるかを示します
-* `NgForm`の有効性にバインドすることで、**Submit**ボタンの有効状態を制御する
-* 有効でないコントロールについてユーザーに視覚的なフィードバックを提供するカスタムCSSクラス
+- Angular HTMLフォームテンプレート
+- `@Component`デコレーターを含むフォームコンポーネントクラス
+- `NgForm.ngSubmit`イベントプロパティにバインドすることで、フォーム送信を処理する
+- `#actorForm`や`#name`などのテンプレート参照変数
+- 双方向データバインディングのための`[(ngModel)]`構文
+- 検証とフォーム要素の変更追跡のための`name`属性の使用
+- 入力コントロールの参照変数の`valid`プロパティは、コントロールが有効であるか、エラーメッセージを表示する必要があるかを示します
+- `NgForm`の有効性にバインドすることで、**Submit**ボタンの有効状態を制御する
+- 有効でないコントロールについてユーザーに視覚的なフィードバックを提供するカスタムCSSクラス
 
 アプリケーションの最終バージョンを示すコードを次に示します。
 

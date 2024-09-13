@@ -29,7 +29,7 @@ export class CustomCard {
   @ViewChild(CustomCardHeader) header: CustomCardHeader;
 
   ngAfterViewInit() {
-   console.log(this.header.text);
+    console.log(this.header.text);
   }
 }
 </docs-code>
@@ -164,7 +164,7 @@ export class UserProfile { }
 
 ほとんどの場合、コンポーネントまたはディレクティブをロケーターとして使用します。
 
-代わりに、[テンプレート参照変数](guide/templates/reference-variables)
+代わりに、[テンプレート参照変数](guide/templates/variables#template-reference-variables)
 に対応する文字列ロケーターを指定できます。
 
 ```angular-ts

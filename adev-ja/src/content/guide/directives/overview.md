@@ -51,17 +51,17 @@ HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` �
 ### メソッドを使用して `NgClass` を使用
 
 1. メソッドを使用して `NgClass` を使用するには、メソッドをコンポーネントクラスに追加します。
-    次の例では、`setCurrentClasses()` は3つの他のコンポーネントプロパティの `true` または `false` 状態に基づいて、3つのクラスを追加または削除するオブジェクトを使用して`currentClasses` プロパティを設定します。
+   次の例では、`setCurrentClasses()` は3つの他のコンポーネントプロパティの `true` または `false` 状態に基づいて、3つのクラスを追加または削除するオブジェクトを使用して`currentClasses` プロパティを設定します。
 
-    オブジェクトの各キーは、CSSクラス名です。
-    キーが `true` の場合、`ngClass` はクラスを追加します。
-    キーが `false` の場合、`ngClass` はクラスを削除します。
+   オブジェクトの各キーは、CSSクラス名です。
+   キーが `true` の場合、`ngClass` はクラスを追加します。
+   キーが `false` の場合、`ngClass` はクラスを削除します。
 
-    <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="setClasses"/>
+   <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="setClasses"/>
 
 1. テンプレートで、要素のクラスを設定するために、`currentClasses` に対する `ngClass` プロパティバインディングを追加します。
 
-    <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgClass-1"/>
+   <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgClass-1"/>
 
 このユースケースでは、Angularは初期化時に、および `currentClasses` オブジェクトの再代入によって発生した変更が発生した場合に、クラスを適用します。
 完全な例では、ユーザーが `Refresh currentClasses` ボタンをクリックしたときに、`ngOnInit()` を使用して最初に `setCurrentClasses()` を呼び出します。
@@ -79,34 +79,34 @@ HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` �
 
 1. `NgStyle` を使用するには、コンポーネントクラスにメソッドを追加します。
 
-    次の例では、`setCurrentStyles()` は3つの他のコンポーネントプロパティの状態に基づいて、3つのスタイルを定義するオブジェクトを使用して `currentStyles` プロパティを設定します。
+   次の例では、`setCurrentStyles()` は3つの他のコンポーネントプロパティの状態に基づいて、3つのスタイルを定義するオブジェクトを使用して `currentStyles` プロパティを設定します。
 
-    <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="setStyles"/>
+   <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="setStyles"/>
 
 1. 要素のスタイルを設定するには、`currentStyles` に対する `ngStyle` プロパティバインディングを追加します。
 
-    <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgStyle-2"/>
+   <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgStyle-2"/>
 
 このユースケースでは、Angularは初期化時と、変更が発生した場合にスタイルを適用します。
 これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
 ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
 
-## `ngModel` を使用してプロパティを表示および更新する
+## `ngModel` を使用してプロパティを表示および更新する {#displaying-and-updating-properties-with-ngmodel}
 
 `NgModel` ディレクティブを使用して、データプロパティを表示し、ユーザーが変更を加えたときにそのプロパティを更新します。
 
 1. `FormsModule` をインポートし、AppComponentの `imports` リストに追加します。
 
-    <docs-code header="src/app/app.component.ts (FormsModule インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-forms-module" />
+   <docs-code header="src/app/app.component.ts (FormsModule インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-forms-module" />
 
 1. HTML `<form>` 要素に `[(ngModel)]` バインディングを追加して、プロパティ（ここでは `name`）に等しく設定します。
 
-    <docs-code header="src/app/app.component.html (NgModel の例)" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgModel-1"/>
+   <docs-code header="src/app/app.component.html (NgModel の例)" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgModel-1"/>
 
     この `[(ngModel)]` 構文は、データバインドプロパティのみを設定できます。
 
 構成をカスタマイズするには、拡張フォームを記述します。これにより、プロパティとイベントバインディングが分離されます。
-[プロパティバインディング](guide/templates/property-binding) を使用してプロパティを設定し、[イベントバインディング](guide/templates/event-binding) を使用して変更に応答します。
+[プロパティバインディング](guide/templates/property-binding) を使用してプロパティを設定し、[イベントバインディング](guide/templates/event-listeners) を使用して変更に応答します。
 次の例では、`<input>` 値を大文字に変更します。
 
 <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="uppercase"/>
@@ -253,14 +253,14 @@ Angularはこの命令をホスト要素の周りの `<ng-template>` に変換�
 `*ngFor` の `trackBy` プロパティを使用すると、Angularは、アイテムリスト全体をリロードするのではなく、変更されたアイテムのみを変更して再レンダリングできます。
 
 1. `NgFor` が追跡する必要がある値を返すメソッドをコンポーネントに追加します。
-    この例では、追跡する必要がある値はアイテムの `id` です。
-    ブラウザがすでに `id` をレンダリングしている場合、Angularはそれを追跡し、同じ `id` についてサーバーに再クエリすることはありません。
+   この例では、追跡する必要がある値はアイテムの `id` です。
+   ブラウザがすでに `id` をレンダリングしている場合、Angularはそれを追跡し、同じ `id` についてサーバーに再クエリすることはありません。
 
-    <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="trackByItems"/>
+   <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="trackByItems"/>
 
 1. 省略記号式で、`trackBy` を `trackByItems()` メソッドに設定します。
 
-    <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="trackBy"/>
+   <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="trackBy"/>
 
 **Change ids** は、新しい `item.id` を持つ新しいアイテムを作成します。
 `trackBy` の効果の次の図では、**Reset items** は、同じ `item.id` を持つ新しいアイテムを作成します。
@@ -288,9 +288,9 @@ Angularの `<ng-container>` は、AngularがDOMに配置しないため、スタ
 
 1. `<option>` を条件付きで除外するには、`<option>` を `<ng-container>` でラップします。
 
-    <docs-code header="src/app/app.component.html (select-ngcontainer)" path="adev/src/content/examples/structural-directives/src/app/app.component.html" visibleRegion="select-ngcontainer"/>
+   <docs-code header="src/app/app.component.html (select-ngcontainer)" path="adev/src/content/examples/structural-directives/src/app/app.component.html" visibleRegion="select-ngcontainer"/>
 
-    <img alt="ngcontainer オプションは正しく機能します" src="assets/images/guide/structural-directives/select-ngcontainer-anim.gif">
+   <img alt="ngcontainer オプションは正しく機能します" src="assets/images/guide/structural-directives/select-ngcontainer-anim.gif">
 
 ## `NgSwitch` を使用してケースを切り替える {#switching-cases-with-ngswitch}
 
@@ -314,23 +314,23 @@ Angularは、選択された要素のみをDOMに配置します。
 ### `NgSwitch` を使用
 
 1. `<div>` などの要素に、`[ngSwitch]` を追加し、スイッチ値を返す式（例: `feature`）にバインドします。
-    この例の `feature` 値は文字列ですが、スイッチ値は任意の型にできます。
+   この例の `feature` 値は文字列ですが、スイッチ値は任意の型にできます。
 
 1. ケースの要素に、`*ngSwitchCase` と `*ngSwitchDefault` にバインドします。
 
-    <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgSwitch"/>
+   <docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgSwitch"/>
 
 1. 親コンポーネントで、`[ngSwitch]` 式で使用する `currentItem` を定義します。
 
-    <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="item"/>
+   <docs-code header="src/app/app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="item"/>
 
 1. 各子コンポーネントで、親コンポーネントの `currentItem` にバインドされた `item` [入力プロパティ](guide/components/inputs) を追加します。
-    次の2つのスニペットは、親コンポーネントと子コンポーネントの1つを示しています。
-    他の子コンポーネントは、`StoutItemComponent` と同じです。
+   次の2つのスニペットは、親コンポーネントと子コンポーネントの1つを示しています。
+   他の子コンポーネントは、`StoutItemComponent` と同じです。
 
-    <docs-code header="各子コンポーネント（ここでは StoutItemComponent）" path="adev/src/content/examples/built-in-directives/src/app/item-switch.component.ts" visibleRegion="input"/>
+   <docs-code header="各子コンポーネント（ここでは StoutItemComponent）" path="adev/src/content/examples/built-in-directives/src/app/item-switch.component.ts" visibleRegion="input"/>
 
-    <img alt="NgSwitch のアニメーション" src="assets/images/guide/built-in-directives/ngswitch.gif">
+   <img alt="NgSwitch のアニメーション" src="assets/images/guide/built-in-directives/ngswitch.gif">
 
 スイッチディレクティブは、組み込みのHTML要素とWebコンポーネントでも機能します。
 たとえば、`<app-best-item>` スイッチケースを `<div>` に置き換えることができます。

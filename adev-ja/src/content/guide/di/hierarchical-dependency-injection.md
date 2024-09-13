@@ -16,7 +16,7 @@ Angularには、次の2つのインジェクター階層があります。
 
 | インジェクター階層        | 詳細 |
 |:---                         |:---     |
-| `EnvironmentInjector` 階層 | `@Injectable()` または `ApplicationConfig` の `providers` 配列を使用して、この階層で `ElementInjector` を構成します。 |
+| `EnvironmentInjector` 階層 | `@Injectable()` または `ApplicationConfig` の `providers` 配列を使用して、この階層で `EnvironmentInjector` を構成します。 |
 | `ElementInjector` 階層 | 各 DOM 要素で暗黙的に作成されます。 `ElementInjector` は、 `@Directive()` または `@Component()` の `providers` プロパティで構成しない限り、デフォルトでは空です。 |
 
 <docs-callout title="NgModule ベースのアプリケーション">

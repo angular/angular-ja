@@ -8,7 +8,7 @@
 
 <docs-workflow>
 
-<docs-step title="app.route.ts ファイルの作成">
+<docs-step title="app.routes.ts ファイルの作成">
 
 `app.routes.ts` 内で、以下のように変更します。
 

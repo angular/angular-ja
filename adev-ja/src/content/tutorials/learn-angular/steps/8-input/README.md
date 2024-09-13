@@ -31,7 +31,7 @@ class AppComponent {}
 <docs-code header="user.component.ts" language="angular-ts">
 @Component({
   ...
-  template: `<p>ユーザーの名前は {{occupation}} です。</p>`
+  template: `<p>ユーザーの職業は {{occupation}} です。</p>`
 })
 </docs-code>
 

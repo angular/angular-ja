@@ -1,64 +1,148 @@
 # 双方向バインディング
 
-双方向バインディングは、アプリケーションのコンポーネントにデータを共有する方法を提供します。
-親コンポーネントと子コンポーネントの間でイベントをリスンし、値を同時に更新するには、双方向バインディングを使用します。
+**双方向バインディング**は、要素に値をバインドすると同時に、その要素が変更をバインディングを通じて伝播できるようにする、簡潔な方法です。
 
-双方向バインディングは、[プロパティバインディング](guide/templates/property-binding)とイベントバインディングを組み合わせたものです。
+## 構文
 
-| バインディング                              | 詳細     |
-|:---                                          |:---     |
-| [プロパティバインディング](guide/templates/property-binding) | 特定の要素のプロパティを設定します。 |
-| [イベントバインディング](guide/templates/event-binding)       | 要素の変更イベントをリスンします。  |
+双方向バインディングの構文は、角括弧 `[]` と丸括弧 `()` を組み合わせた `[()]` です。これはプロパティバインディングの構文 `[]` とイベントバインディングの構文 `()` を組み合わせたものです。Angularコミュニティでは、この構文を非公式に「バナナインボックス」と呼んでいます。
 
-## 双方向データバインディングの追加
+## フォームコントロールでの双方向バインディング
 
-Angularの双方向バインディング構文は、角括弧と丸括弧を組み合わせた `[()]` です。
-`[()]` 構文は、プロパティバインディングの角括弧 `[]` とイベントバインディングの丸括弧 `()` を以下のように組み合わせます。
+開発者は、ユーザーがコントロールを操作したときに、コンポーネントデータとフォームコントロールを同期させるために、双方向バインディングを頻繁に使用します。たとえば、ユーザーがテキスト入力に入力すると、コンポーネントの状態が更新されます。
 
-<docs-code header="src/app/app.component.html" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-syntax" language="angular-html"/>
+次の例では、ページの `firstName` 属性が動的に更新されます。
 
-## 双方向バインディングの仕組み
+```angular-ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-双方向バインディングが機能するためには、`@Output()` プロパティは `inputChange` というパターンを使用する必要があります。ここで、`input` は `@Input()` プロパティの名前です。
-たとえば、`@Input()` プロパティが `size` の場合、`@Output()` プロパティは `sizeChange` でなければなりません。
+@Component({
+  standalone: true,
+  imports: [FormsModule],
+  template: `
+    <main>
+      <h2>Hello {{ firstName }}!</h2>
+      <input type="text" [(ngModel)]="firstName" />
+    </main>
+  `
+})
+export class AppComponent {
+  firstName = 'Ada';
+}
+```
 
-次の `sizerComponent` には、`size` 値プロパティと `sizeChange` イベントがあります。
-`size` プロパティは `@Input()` なので、データは `sizerComponent` に流入できます。
-`sizeChange` イベントは `@Output()` で、データが `sizerComponent` から親コンポーネントに流出することを可能にします。
+ネイティブフォームコントロールで双方向バインディングを使用するには、次の手順を実行する必要があります。
 
-次に、フォントサイズを小さくする `dec()` メソッドと、フォントサイズを大きくする `inc()` メソッドの2つのメソッドがあります。
-これらの2つのメソッドは、`resize()` を使用して `size` プロパティの値を最小値/最大値の制約内で変更し、新しい `size` 値を伝えるイベントを発行します。
+1. `@angular/forms` から `FormsModule` をインポートする
+1. 双方向バインディング構文（例：`[(ngModel)]`）で `ngModel` ディレクティブを使用する
+1. 更新する状態（例：`firstName`）を割り当てる
 
-<docs-code header="src/app/sizer.component.ts" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.ts" visibleRegion="sizer-component" language="angular-ts"/>
+これらが設定されると、Angularはテキスト入力の更新がコンポーネントの状態に正しく反映されるようにします。
 
-`sizerComponent` テンプレートには、それぞれクリックイベントを `inc()` メソッドと `dec()` メソッドにバインドする2つのボタンがあります。
-ユーザーがボタンのいずれかをクリックすると、`sizerComponent` は対応するメソッドを呼び出します。
-`inc()` メソッドと `dec()` メソッドの両方が、`+1` または `-1` で `resize()` メソッドを呼び出し、それは新しいサイズ値で `sizeChange` イベントを発生させます。
+[`NgModel`](guide/directives#displaying-and-updating-properties-with-ngmodel)の詳細については、公式ドキュメントを参照してください。
 
-<docs-code header="src/app/sizer.component.html" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.html"/>
+## コンポーネント間の双方向バインディング
 
-`AppComponent` テンプレートでは、`fontSizePx` は `SizerComponent` に双方向にバインドされます。
+親コンポーネントと子コンポーネント間の双方向バインディングを活用するには、フォーム要素と比較して、より多くの構成が必要です。
 
-<docs-code header="src/app/app.component.html" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-1"/>
+ここでは、`AppComponent` が初期カウント状態を設定しますが、カウンターのUIを更新およびレンダリングするためのロジックは、主にその子である `CounterComponent` にある例を示します。
 
-`AppComponent` では、`fontSizePx` は `SizerComponent.size` の初期値を `16` に設定することで確立します。
+```angular-ts
+// ./app.component.ts
+import { Component } from '@angular/core';
+import { CounterComponent } from './counter/counter.component';
 
-<docs-code header="src/app/app.component.ts" path="adev/src/content/examples/two-way-binding/src/app/app.component.ts" visibleRegion="font-size"/>
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CounterComponent],
+  template: `
+    <main>
+      <h1>Counter: {{ initialCount }}</h1>
+      <app-counter [(count)]="initialCount"></app-counter>
+    </main>
+  `,
+})
+export class AppComponent {
+  initialCount = 18;
+}
+```
 
-ボタンをクリックすると、`AppComponent.fontSizePx` が更新されます。
-修正された `AppComponent.fontSizePx` 値はスタイルバインディングを更新し、表示されているテキストが大きくなったり小さくなったりします。
+```angular-ts
+// './counter/counter.component.ts';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-双方向バインディング構文は、プロパティバインディングとイベントバインディングの組み合わせの省略形です。
-`SizerComponent` のバインディングを別々のプロパティバインディングとイベントバインディングとして示すと、次のようになります。
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  template: `
+    <button (click)="updateCount(-1)">-</button>
+    <span>{{ count }}</span>
+    <button (click)="updateCount(+1)">+</button>
+  `,
+})
+export class CounterComponent {
+  @Input() count: number;
+  @Output() countChange = new EventEmitter<number>();
 
-<docs-code header="src/app/app.component.html (expanded)" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visibleRegion="two-way-2"/>
+  updateCount(amount: number): void {
+    this.count += amount;
+    this.countChange.emit(this.count);
+  }
+}
+```
 
-`$event` 変数には `SizerComponent.sizeChange` イベントのデータが含まれます。
-ユーザーがボタンをクリックすると、Angularは `$event` 値を `AppComponent.fontSizePx` に割り当てます。
+### コンポーネント間の双方向バインディングを有効にする
 
-<docs-callout title="フォームでの双方向バインディング">
+上記の例をコアに分解すると、コンポーネントの双方向バインディングごとに、次のものが必要です。
 
-組み込みのHTML要素は `x` 値と `xChange` イベントのパターンに従わないため、フォーム要素での双方向バインディングには `NgModel` が必要です。
-フォームでの双方向バインディングの使用方法の詳細については、Angularの [NgModel](guide/directives#displaying-and-updating-properties-with-ngmodel) を参照してください。
+子コンポーネントには、次のものが必要です。
 
-</docs-callout>
+1. `@Input()` プロパティ
+1. `@Input()` プロパティと同じ名前で、最後に「Change」が追加された対応する `@Output()` イベントエミッター。エミッターは、`@Input()` プロパティと同じ型をエミットする必要があります。
+1. `@Input()` の更新された値をイベントエミッターにエミットするメソッド
+
+これは簡略化された例です。
+
+```angular-ts
+// './counter/counter.component.ts';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({ // 省略 })
+export class CounterComponent {
+  @Input() count: number;
+  @Output() countChange = new EventEmitter<number>();
+
+  updateCount(amount: number): void {
+    this.count += amount;
+    this.countChange.emit(this.count);
+  }
+}
+```
+
+親コンポーネントには、次のものが必要です。
+
+1. `@Input()` プロパティ名を双方向バインディング構文で囲む。
+1. 更新された値が割り当てられる対応するプロパティを指定する
+
+これは簡略化された例です。
+
+```angular-ts
+// ./app.component.ts
+import { Component } from '@angular/core';
+import { CounterComponent } from './counter/counter.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CounterComponent],
+  template: `
+    <main>
+      <app-counter [(count)]="initialCount"></app-counter>
+    </main>
+  `,
+})
+export class AppComponent {
+  initialCount = 18;
+}
+```

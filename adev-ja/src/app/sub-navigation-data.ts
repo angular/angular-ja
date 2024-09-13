@@ -176,7 +176,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         ],
       },
       {
-        label: 'テンプレート構文',
+        label: 'テンプレート',
         children: [
           {
             label: '概要',
@@ -184,44 +184,14 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/templates/overview',
           },
           {
-            label: 'テキスト補間',
-            path: 'guide/templates/interpolation',
-            contentPath: 'guide/templates/interpolation',
-          },
-          {
-            label: 'テンプレートステートメント',
-            path: 'guide/templates/template-statements',
-            contentPath: 'guide/templates/template-statements',
-          },
-          {
-            label: 'バインディングを理解する',
+            label: '動的テキスト、プロパティ、属性のバインディング',
             path: 'guide/templates/binding',
             contentPath: 'guide/templates/binding',
           },
           {
-            label: 'プロパティバインディング',
-            path: 'guide/templates/property-binding',
-            contentPath: 'guide/templates/property-binding',
-          },
-          {
-            label: 'プロパティバインディングのベストプラクティス',
-            path: 'guide/templates/property-binding-best-practices',
-            contentPath: 'guide/templates/property-binding-best-practices',
-          },
-          {
-            label: '属性バインディング',
-            path: 'guide/templates/attribute-binding',
-            contentPath: 'guide/templates/attribute-binding',
-          },
-          {
-            label: 'クラスとスタイルのバインディング',
-            path: 'guide/templates/class-binding',
-            contentPath: 'guide/templates/class-binding',
-          },
-          {
-            label: 'イベントバインディング',
-            path: 'guide/templates/event-binding',
-            contentPath: 'guide/templates/event-binding',
+            label: 'イベントリスナーの追加',
+            path: 'guide/templates/event-listeners',
+            contentPath: 'guide/templates/event-listeners',
           },
           {
             label: '双方向バインディング',
@@ -234,54 +204,44 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/templates/control-flow',
           },
           {
-            label: '@letによるローカルテンプレート変数',
-            path: 'guide/templates/let-template-variables',
-            contentPath: 'guide/templates/let-template-variables',
-          },
-          {
             label: 'パイプ',
-            children: [
-              {
-                label: '概要',
-                path: 'guide/pipes',
-                contentPath: 'guide/pipes/overview',
-              },
-              {
-                label: 'テンプレートでのパイプの使用',
-                path: 'guide/pipes/template',
-                contentPath: 'guide/pipes/template',
-              },
-              {
-                label: 'カスタムパイプ',
-                path: 'guide/pipes/transform-data',
-                contentPath: 'guide/pipes/transform-data',
-              },
-              {
-                label: '式におけるパイプの優先順位',
-                path: 'guide/pipes/precedence',
-                contentPath: 'guide/pipes/precedence',
-              },
-              {
-                label: 'パイプによる変更検出',
-                path: 'guide/pipes/change-detection',
-                contentPath: 'guide/pipes/change-detection',
-              },
-              {
-                label: 'Observableからのデータのアンラップ',
-                path: 'guide/pipes/unwrapping-data-observables',
-                contentPath: 'guide/pipes/unwrapping-data-observables',
-              },
-            ],
+            path: 'guide/templates/pipes',
+            contentPath: 'guide/templates/pipes',
           },
           {
-            label: 'テンプレート参照変数',
-            path: 'guide/templates/reference-variables',
-            contentPath: 'guide/templates/reference-variables',
+            label: 'ng-contentによる子コンテンツのスロット化',
+            path: 'guide/templates/ng-content',
+            contentPath: 'guide/templates/ng-content',
           },
           {
-            label: 'テンプレートとしてのSVG',
-            path: 'guide/templates/svg-in-templates',
-            contentPath: 'guide/templates/svg-in-templates',
+            label: 'ng-templateによるテンプレートフラグメントの作成',
+            path: 'guide/templates/ng-template',
+            contentPath: 'guide/templates/ng-template',
+          },
+          {
+            label: 'ng-containerによる要素のグループ化',
+            path: 'guide/templates/ng-container',
+            contentPath: 'guide/templates/ng-container',
+          },
+          {
+            label: 'テンプレート内の変数',
+            path: 'guide/templates/variables',
+            contentPath: 'guide/templates/variables',
+          },
+          {
+            label: '@deferによる遅延読み込み',
+            path: 'guide/templates/defer',
+            contentPath: 'guide/templates/defer',
+          },
+          {
+            label: '式の構文',
+            path: 'guide/templates/expression-syntax',
+            contentPath: 'guide/templates/expression-syntax',
+          },
+          {
+            label: 'テンプレート内の空白',
+            path: 'guide/templates/whitespace',
+            contentPath: 'guide/templates/whitespace',
           },
         ],
       },

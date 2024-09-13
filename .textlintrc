@@ -38,7 +38,9 @@
       "max-kanji-continuous-len": {
         "allow": [
           "二重中括弧構文",
-          "変更検知戦略"
+          "変更検知戦略",
+          "推移的依存関係",
+          "三重等号演算子"
         ]
       },
       "ja-no-mixed-period": false

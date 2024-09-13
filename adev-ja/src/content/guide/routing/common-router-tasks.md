@@ -186,7 +186,7 @@ Angularルーターは、要求されたURLがルーターパスと一致しな�
 
 <docs-code>
 
-{ path: '\*\*', component: <component-name> }
+{ path: '**', component: <component-name> }
 
 </docs-code>
 
@@ -392,8 +392,21 @@ goToItems() {
 ## クエリパラメータとフラグメントへのアクセス
 
 場合によっては、アプリケーションの機能で、ルートの一部、たとえばクエリパラメータやフラグメントにアクセスする必要があります。
-この段階のTour of Heroesアプリケーションでは、リストビューが使用され、ヒーローをクリックすると詳細が表示されます。
-ルーターは、`id` を使用して、正しいヒーローの詳細を表示します。
+この例では、ルートに `id` パラメータが含まれており、特定のヒーローページをターゲットにできます。
+
+```ts
+import {ApplicationConfig} from "@angular/core";
+import {Routes} from '@angular/router';
+import {HeroListComponent} from './hero-list.component';
+
+export const routes: Routes = [
+  {path: 'hero/:id', component: HeroDetailComponent}
+];
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes)],
+};
+```
 
 まず、ナビゲート元のコンポーネントで、次のメンバーをインポートします。
 

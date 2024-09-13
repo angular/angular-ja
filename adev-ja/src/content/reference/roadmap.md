@@ -142,7 +142,7 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
   <docs-card title="Angular DevToolsのiframeサポート" link="2024年第2四半期に完了" href="">
   ページ内に埋め込まれたiframe内のAngularアプリケーションのデバッグとプロファイリングを有効にしました。
   </docs-card>
-  <docs-card title="esbuildとviteへの既存のハイブリッドレンダリングプロジェクトの移行の自動化" link="2024年第2四半期に完了" href="tools/cli/esbuild">
+  <docs-card title="esbuildとviteへの既存のハイブリッドレンダリングプロジェクトの移行の自動化" link="2024年第2四半期に完了" href="tools/cli/build-system-migration">
   v17では、viteとesbuildベースのアプリケーションビルダーを提供し、新しいプロジェクトでデフォルトで有効にしました。これは、ハイブリッドレンダリングを使用するプロジェクトのビルド時間を最大87％向上させます。v18の一環として、ハイブリッドレンダリングを使用する既存のプロジェクトを新しいビルドパイプラインに移行するシェーマティックとガイドを提供しました。NgModuleは当面の間残りますが、新しいAPIの利点を活用して開発者エクスペリエンスを向上させ、構築した新機能を活用することをお勧めします。
   </docs-card>
   <docs-card title="Angular.devをAngular開発者の公式のホームにする" link="2024年第2四半期に完了" href="https://goo.gle/angular-dot-dev">

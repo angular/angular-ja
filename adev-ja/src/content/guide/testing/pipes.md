@@ -1,6 +1,6 @@
 # パイプのテスト
 
-Angularのテストユーティリティを使わずに[パイプ](guide/pipes)をテストできます。
+Angularのテストユーティリティを使わずに[パイプ](guide/templates/pipes)をテストできます。
 
 ## `TitleCasePipe`のテスト
 

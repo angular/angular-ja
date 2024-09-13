@@ -45,6 +45,8 @@ my-app
 
 ## サーバーサイドレンダリングの構成
 
+Note: In Angular v17 and later, `server.ts` is no longer used by `ng serve`. The dev server will use `main.server.ts` directly to perfom server side rendering.
+
 `server.ts` ファイルは、Node.js ExpressサーバーとAngularサーバーサイドレンダリングを構成します。`CommonEngine` はAngularアプリケーションをレンダリングするために使用されます。
 
 <docs-code path="adev/src/content/examples/ssr/server.ts" visibleLines="[31,45]"></docs-code>

@@ -52,7 +52,7 @@ Note:  最良のユーザー体験を実現するためには、常に `@placeho
 }
 ```
 
-Note:  特定のトリガーでは、[テンプレート参照変数](guide/templates/reference-variables)のいずれか、または `@placeholder` のいずれかの存在が必要な場合があります。詳細については、[トリガー](guide/defer#triggers)セクションを参照してください。
+Note:  特定のトリガーでは、[テンプレート参照変数](guide/templates/variables#template-reference-variables)のいずれか、または `@placeholder` のいずれかの存在が必要な場合があります。詳細については、[トリガー](guide/defer#triggers)セクションを参照してください。
 
 ### `@loading`
 
@@ -140,7 +140,7 @@ Note:  `when` 条件が `false` に戻った場合、遅延ブロックはプレ
 }
 ```
 
-または、`@defer` ブロックと同じテンプレート内の[テンプレート参照変数](guide/templates/reference-variables)を、ビューポートに入るために監視される要素として指定できます。この変数は、ビューポートトリガーのパラメーターとして渡されます。
+または、`@defer` ブロックと同じテンプレート内の[テンプレート参照変数](guide/templates/variables#template-reference-variables)を、ビューポートに入るために監視される要素として指定できます。この変数は、ビューポートトリガーのパラメーターとして渡されます。
 
 ```angular-html
 <div #greeting>こんにちは！</div>
@@ -164,7 +164,7 @@ Note:  `when` 条件が `false` に戻った場合、遅延ブロックはプレ
 }
 ```
 
-または、[テンプレート参照変数](guide/templates/reference-variables)をインタラクションをトリガーする要素として指定できます。この変数は、インタラクショントリガーのパラメーターとして渡されます。
+または、[テンプレート参照変数](guide/templates/variables#template-reference-variables)をインタラクションをトリガーする要素として指定できます。この変数は、インタラクショントリガーのパラメーターとして渡されます。
 
 ```angular-html
 <button type="button" #greeting>こんにちは！</button>
@@ -190,7 +190,7 @@ Note:  `when` 条件が `false` に戻った場合、遅延ブロックはプレ
 }
 ```
 
-または、[テンプレート参照変数](guide/templates/reference-variables)をホバー要素として指定できます。この変数は、ホバートリガーのパラメーターとして渡されます。
+または、[テンプレート参照変数](guide/templates/variables#template-reference-variables)をホバー要素として指定できます。この変数は、ホバートリガーのパラメーターとして渡されます。
 
 ```angular-html
 <div #greeting>こんにちは！</div>

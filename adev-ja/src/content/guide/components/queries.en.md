@@ -29,7 +29,7 @@ export class CustomCard {
   @ViewChild(CustomCardHeader) header: CustomCardHeader;
 
   ngAfterViewInit() {
-   console.log(this.header.text);
+    console.log(this.header.text);
   }
 }
 </docs-code>
@@ -156,7 +156,7 @@ export class UserProfile { }
 
 `@ContentChildren` creates a `QueryList` object that contains the query results. You can subscribe to changes to the query results over time via the `changes` property.
 
-**Queries never piece through component boundaries.** Content queries can only retrieve results from the same template as the component itself.
+**Queries never pierce through component boundaries.** Content queries can only retrieve results from the same template as the component itself.
 
 ## Query locators
 
@@ -165,7 +165,7 @@ This first parameter for each query decorator is its **locator**.
 Most of the time, you want to use a component or directive as your locator.
 
 You can alternatively specify a string locator corresponding to
-a [template reference variable](guide/templates/reference-variables).
+a [template reference variable](guide/templates/variables#template-reference-variables).
 
 ```angular-ts
 @Component({

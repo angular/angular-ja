@@ -36,18 +36,11 @@ jobs:
           path: ${{ env.BUILD_DIR }}
           github-token: '${{secrets.GITHUB_TOKEN}}'
           run-id: ${{ github.event.workflow_run.id }}
-      - run: ls -R
       - name: Extract pull request number
         id: pr-number
         run: |
           PR_NUMBER=$(cat ./$BUILD_DIR/__metadata__pull_number.txt)
-          echo "value=$PR_NUMBER" >> $GITHUB_OUTPUT
-      - name: Extract commit hash
-        id: commit-hash
-        run: |
-          COMMIT_HASH=$(cat ./$BUILD_DIR/__metadata__commit_hash.txt)
-          echo "value=$COMMIT_HASH" >> $GITHUB_OUTPUT
-      - run: echo ${{ steps.pr-number.outputs.value }} ${{ steps.commit-hash.outputs.value }}
+          echo 'value=$PR_NUMBER' >> $GITHUB_OUTPUT
       - name: Deploy to Firebase Hosting Preview
         id: firebase-deploy
         uses: FirebaseExtended/action-hosting-deploy@v0.9.0
@@ -74,5 +67,5 @@ jobs:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
-            Preview deployed: ${{ steps.firebase-deploy.outputs.details_url }} (commit: ${{ steps.commit-hash.outputs.value }})
+            Preview deployed: ${{ steps.firebase-deploy.outputs.details_url }} (commit: ${{ github.event.workflow_run.head_sha }})
             

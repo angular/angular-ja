@@ -49,9 +49,6 @@ jobs:
       - name: Inject pull request number
         run: echo "${{ github.event.pull_request.number }}" >> __metadata__pull_number.txt
         working-directory: build/dist/bin/adev/build/browser
-      - name: Inject commit hash
-        run: echo "${{ github.event.pull_request.head.sha }}" >> __metadata__commit_hash.txt
-        working-directory: build/dist/bin/adev/build/browser
       - uses: actions/upload-artifact@v4
         with:
           name: adev-preview

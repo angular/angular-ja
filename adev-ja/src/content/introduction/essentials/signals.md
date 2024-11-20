@@ -1,33 +1,33 @@
 <docs-decorative-header title="Signals" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
-Create and manage dynamic data.
+動的なデータを生成して管理します。
 </docs-decorative-header>
 
-In Angular, you use *signals* to create and manage state. A signal is a lightweight wrapper around a value.
+Angularでは、*シグナル*を使用して状態を作成および管理します。シグナルは、値をラップする軽量なラッパーです。
 
-Use the `signal` function to create a signal for holding local state:
+`signal`関数を用いて、ローカル状態を保持するためのシグナルを作成します。
 
 ```typescript
 import {signal} from '@angular/core';
 
-// Create a signal with the `signal` function.
+// `signal` 関数でシグナルを作成します。
 const firstName = signal('Morgan');
 
-// Read a signal value by calling it— signals are functions.
+// シグナルの値を読み取るには、それを呼び出します。シグナルは関数です。
 console.log(firstName());
 
-// Change the value of this signal by calling its `set` method with a new value.
+// 新しい値を指定して `set` メソッドを呼び出すことで、このシグナルの値を変更します。
 firstName.set('Jaime');
 
-// You can also use the `update` method to change the value
-// based on the previous value.
+// `update` メソッドを使用して、
+// 前の値に基づいて値を変更することもできます。
 firstName.update(name => name.toUpperCase()); 
 ```
 
-Angular tracks where signals are read and when they're updated. The framework uses this information to do additional work, such as updating the DOM with new state. This ability to respond to changing signal values over time is known as *reactivity*.
+Angularは、シグナルがどこで読み取られ、いつ更新されたかを追跡します。フレームワークはこの情報を使用して、新しい状態をDOMに更新するなど、追加の作業を行います。時間の経過とともに変化するシグナル値に応答するこの機能は、*リアクティビティ*として知られています。
 
-## Computed expressions
+## 算出式
 
-A `computed` is a signal that produces its value based on other signals.
+`computed`は、他のシグナルに基づいて値を生成するシグナルです。
 
 ```typescript
 import {signal, computed} from '@angular/core';
@@ -38,7 +38,7 @@ const firstNameCapitalized = computed(() => firstName().toUpperCase());
 console.log(firstNameCapitalized()); // MORGAN
 ``` 
 
-A `computed` signal is read-only; it does not have a `set` or an `update` method. Instead, the value of the `computed` signal automatically changes when any of the signals it reads change:
+`computed`シグナルは読み取り専用です。`set`メソッドまたは`update`メソッドはありません。代わりに、`computed`シグナルの値は、読み取るシグナルのいずれかが変更されると自動的に変更されます。
 
 ```typescript
 import {signal, computed} from '@angular/core';
@@ -51,9 +51,9 @@ firstName.set('Jaime');
 console.log(firstNameCapitalized()); // JAIME
 ```
 
-## Using signals in components
+## コンポーネントでシグナルを使う
 
-Use `signal` and `computed` inside your components to create and manage state:
+`signal`と`computed`をコンポーネント内で使用して、状態を作成および管理します。
 
 ```typescript
 @Component({/* ... */})
@@ -68,13 +68,13 @@ export class UserProfile {
 }
 ```
 
-Tip: Want to know more about Angular Signals? See the [In-depth Signals guide](guide/signals) for the full details.
+TIP: Angularのシグナルについてもっと知りたいですか？[詳細なシグナルガイド](guide/signals)を参照してください。
 
-## Next Step
+## 次の手順
 
-Now that you have learned how to declare and manage dynamic data, it's time to learn how to use that data inside of templates.
+動的なデータの宣言と管理方法を学習したので、テンプレート内でそのデータを使用する方法を学習する時間です。
 
 <docs-pill-row>
-  <docs-pill title="Dynamic interfaces with templates" href="essentials/templates" />
-  <docs-pill title="In-depth signals guide" href="guide/signals" />
+  <docs-pill title="テンプレートによる動的なインターフェース" href="essentials/templates" />
+  <docs-pill title="詳細なシグナルガイド" href="guide/signals" />
 </docs-pill-row>

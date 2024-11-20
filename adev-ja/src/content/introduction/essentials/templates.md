@@ -1,14 +1,14 @@
-<docs-decorative-header title="Templates" imgSrc="adev/src/assets/images/templates.svg"> <!-- markdownlint-disable-line -->
-Use Angular's template syntax to create dynamic user interfaces.
+<docs-decorative-header title="テンプレート" imgSrc="adev/src/assets/images/templates.svg"> <!-- markdownlint-disable-line -->
+Angularのテンプレート構文を使用して、動的なユーザーインターフェースを作成します。
 </docs-decorative-header>
 
-Component templates aren't just static HTML— they can use data from your component class and set up handlers for user interaction.
+コンポーネントテンプレートは静的なHTMLだけではありません。コンポーネントクラスのデータを使用し、ユーザーインタラクションのハンドラーを設定できます。
 
-## Showing dynamic text
+## 動的なテキストの表示
 
-In Angular, a *binding* creates a dynamic connection between a component's template and its data. This connection ensures that changes to the component's data automatically update the rendered template.
+Angularでは、*バインディング*によって、コンポーネントのテンプレートとそのデータ間に動的な接続が作成されます。この接続により、コンポーネントのデータの変更がレンダリングされたテンプレートに自動的に反映されます。
 
-You can create a binding to show some dynamic text in a template by using double curly-braces:
+二重中括弧を使用して、テンプレートに動的なテキストを表示するバインディングを作成できます。
 
 ```angular-ts
 @Component({
@@ -20,33 +20,33 @@ export class TodoListItem {
 }
 ```
 
-When Angular renders the component, you see:
+Angularがコンポーネントをレンダリングすると、以下が表示されます。
 
 ```html
 <h1>Profile file pro_programmer_123</h1>
 ```
 
-Angular automatically keeps the binding up-to-date when the value of the signal changes. Building on
-the example above, if we update the value of the `userName` signal:
+シグナルの値が変更されると、Angularはバインディングを自動的に最新の状態に保ちます。
+上記の例を基に、`userName`シグナルの値を更新する場合:
 
 ```typescript
 this.userName.set('cool_coder_789');
 ```
 
-The rendered page updates to reflect the new value:
+レンダリングされたページは新しい値を反映して更新されます。
 
 ```html
 <h1>Profile file cool_coder_789</h1>
 ```
 
-## Setting dynamic properties and attributes
+## 動的なプロパティと属性の設定
 
-Angular supports binding dynamic values into DOM properties with square brackets:
+Angularは、角括弧を使用して動的な値をDOMプロパティにバインドすることをサポートしています。
 
 ```angular-ts
 @Component({
   /*...*/
-  // Set the `disabled` property of the button based on the value of `isAccountDisabled`.
+  // `isAccountDisabled`の値に基づいて、ボタンの`disabled`プロパティを設定します。
   template: `<button [disabled]="isValidUserId()">Save changes</button>`,
 })
 export class UserProfile {
@@ -54,50 +54,50 @@ export class UserProfile {
 }
 ```
 
-You can also bind to HTML _attributes_ by prefixing the attribute name with `attr.`:
+属性名に`attr.`をプレフィックスとして付けることで、HTMLの_属性_にもバインドできます。
 
 ```angular-html
-<!-- Bind the `role` attribute on the `<ul>` element to value of `listRole`. -->
+<!-- `<ul>`要素の`role`属性を`listRole`の値にバインドします。 -->
 <ul [attr.role]="listRole()">
 ```
 
-Angular automatically updates DOM properties and attribute when the bound value changes.
+バインドされた値が変更されると、AngularはDOMプロパティと属性を自動的に更新します。
 
-## Handling user interaction
+## ユーザーインタラクションの処理
 
-Angular lets you add event listeners to an element in your template with parentheses:
+Angularを使用すると、括弧を使用してテンプレート内の要素にイベントリスナーを追加できます。
 
 ```angular-ts
 @Component({
   /*...*/
-  // Add an 'click' event handler that calls the `cancelSubscription` method. 
+  // `cancelSubscription`メソッドを呼び出す'click'イベントハンドラーを追加します。
   template: `<button (click)="cancelSubscription()">Cancel subscription</button>`,
 })
 export class UserProfile {
   /* ... */
-  
-  cancelSubscription() { /* Your event handling code goes here. */  }
+
+  cancelSubscription() { /* イベント処理コードをここに記述します。 */  }
 }
 ```
 
-If you need to pass the [event](https://developer.mozilla.org/docs/Web/API/Event) object to your listener, you can use Angular's built-in `$event` variable inside the function call:
+[イベント](https://developer.mozilla.org/docs/Web/API/Event)オブジェクトをリスナーに渡す必要がある場合は、関数呼び出し内でAngularの組み込み`$event`変数を使用できます。
 
 ```angular-ts
 @Component({
   /*...*/
-  // Add an 'click' event handler that calls the `cancelSubscription` method. 
+  // `cancelSubscription`メソッドを呼び出す'click'イベントハンドラーを追加します。
   template: `<button (click)="cancelSubscription($event)">Cancel subscription</button>`,
 })
 export class UserProfile {
   /* ... */
-  
-  cancelSubscription(event: Event) { /* Your event handling code goes here. */  }
+
+  cancelSubscription(event: Event) { /* イベント処理コードをここに記述します。 */  }
 }
 ```
 
-## Control flow with `@if` and `@for`
+## `@if`と`@for`による制御フロー
 
-You can conditionally hide and show parts of a template with Angular's `@if` block:
+Angularの`@if`ブロックを使用して、テンプレートの一部を条件付きで非表示および表示できます。
 
 ```angular-html
 <h1>User profile</h1>
@@ -108,7 +108,7 @@ You can conditionally hide and show parts of a template with Angular's `@if` blo
 }
 ```
 
-The `@if` block also supports an optional `@else` block:
+`@if`ブロックは、オプションの`@else`ブロックもサポートしています。
 
 ```angular-html
 <h1>User profile</h1>
@@ -118,11 +118,11 @@ The `@if` block also supports an optional `@else` block:
   <!-- ... -->
 } @else {
   <h2>User settings</h2>
-  <!-- ... -->  
+  <!-- ... -->
 }
 ```
 
-You can repeat part of a template multiple times with Angular's `@for` block:
+Angularの`@for`ブロックを使用して、テンプレートの一部を複数回繰り返すことができます。
 
 ```angular-html
 <h1>User profile</h1>
@@ -134,15 +134,15 @@ You can repeat part of a template multiple times with Angular's `@for` block:
 </ul>
 ```
 
-Angular's uses the `track` keyword, shown in the example above, to associate data with the DOM elements created by `@for`. See [_Why is track in @for blocks important?_](guide/templates/control-flow#why-is-track-in-for-blocks-important) for more info.
+Angularは、上記の例に示すように`track`キーワードを使用して、`@for`によって作成されたDOM要素にデータを関連付けます。詳細については、[_なぜ@forブロック内のtrackは重要ですか？_](guide/templates/control-flow#why-is-track-in-for-blocks-important)を参照してください。
 
-Tip: Want to know more about Angular templates? See the [In-depth Templates guide](guide/templates) for the full details.
+Tip: Angularテンプレートの詳細を知りたい場合は、[詳細なテンプレートガイド](guide/templates)を参照してください。
 
-## Next Step
+## 次の手順
 
-Now that you have dynamic data and templates in the application, it's time to learn how to enhance templates by conditionally hiding or showing certain elements, looping over elements, and more.
+アプリケーションに動的なデータとテンプレートが用意できたので、次は、特定の要素を条件付きで非表示または表示したり、要素をループ処理したりするなど、テンプレートを強化する方法を学習します。
 
 <docs-pill-row>
-  <docs-pill title="Modular design with dependency injection" href="essentials/dependency-injection" />
-  <docs-pill title="In-depth template guide" href="guide/templates" />
+  <docs-pill title="依存性の注入によるモジュール設計" href="essentials/dependency-injection" />
+  <docs-pill title="詳細なテンプレートガイド" href="guide/templates" />
 </docs-pill-row>

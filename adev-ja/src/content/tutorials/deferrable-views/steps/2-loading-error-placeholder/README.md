@@ -1,43 +1,43 @@
-# @loading, @error and @placeholder blocks
+# @loading, @error と @placeholder ブロック
 
-Deferrable views let you define content to be shown in different loading states.
+遅延可能ビューを使用すると、さまざまな読み込み状態に表示するコンテンツを定義できます。
 
 <div class="docs-table docs-scroll-track-transparent">
   <table>
     <tr>
       <td><code>@placeholder</code></td>
       <td>
-        By default, defer blocks do not render any content before they are triggered. The <code>@placeholder</code> is an optional block that declares content to show before the deferred content loads. Angular replaces the placeholder with the deferred content after loading completes. While this block is optional, the Angular team recommends always including a placeholder.
+        デフォルトでは、遅延ブロックはトリガーされる前にコンテンツをレンダリングしません。<code>@placeholder</code>は、遅延コンテンツの読み込み前に表示するコンテンツを宣言するオプションのブロックです。Angularは読み込みが完了した後、プレースホルダーを遅延コンテンツに置き換えます。このブロックはオプションですが、Angularチームは常にプレースホルダーを含めることを推奨しています。
         <a href="https://angular.dev/guide/defer#triggers" target="_blank">
-          Learn more in the full deferrable views documentation
+          遅延可能ビューの完全なドキュメントで詳細を確認してください
         </a>
       </td>
     </tr>
     <tr>
       <td><code>@loading</code></td>
       <td>
-        This optional block allows you to declare content to be shown during the loading of any deferred dependencies.
+        このオプションのブロックを使用すると、遅延した依存関係の読み込み中に表示するコンテンツを宣言できます。
       </td>
     </tr>
     <tr>
       <td><code>@error</code></td>
       <td>
-        This block allows you to declare content which is shown if deferred loading fails.
+        このブロックを使用すると、遅延読み込みが失敗した場合に表示されるコンテンツを宣言できます。
       </td>
     </tr>
   </table>
 </div>
 
-The contents of all the above sub-blocks are eagerly loaded. Additionally, some features require a `@placeholder` block.
+上記のすべてのサブブロックの内容は、事前に読み込まれます。さらに、いくつかの機能には<code>@placeholder</code>ブロックが必要です。
 
-In this activity, you'll learn how to use the `@loading`, `@error` and `@placeholder` blocks to manage the states of deferrable views.
+このアクティビティでは、<code>@loading</code>、<code>@error</code>、<code>@placeholder</code>ブロックを使用して遅延可能ビューの状態を管理する方法を学習します。
 
 <hr>
 
 <docs-workflow>
 
-<docs-step title="Add `@placeholder` block">
-In your `app.component.ts`, add a `@placeholder` block to the `@defer` block.
+<docs-step title="`@placeholder`ブロックの追加">
+`app.component.ts`で、`@defer`ブロックに`@placeholder`ブロックを追加します。
 
 <docs-code language="angular-html" highlight="[3,4,5]">
 @defer {
@@ -48,8 +48,8 @@ In your `app.component.ts`, add a `@placeholder` block to the `@defer` block.
 </docs-code>
 </docs-step>
 
-<docs-step title="Configure the `@placeholder` block">
-The `@placeholder` block accepts an optional parameter to specify the `minimum` amount of time that this placeholder should be shown. This `minimum` parameter is specified in time increments of milliseconds (ms) or seconds (s). This parameter exists to prevent fast flickering of placeholder content in the case that the deferred dependencies are fetched quickly.
+<docs-step title="`@placeholder`ブロックの構成">
+`@placeholder`ブロックは、このプレースホルダーを表示する最小時間を指定するオプションのパラメーターを受け入れます。この`minimum`パラメーターは、ミリ秒(ms)または秒(s)の時間単位で指定されます。このパラメーターは、遅延した依存関係が迅速に取得された場合のプレースホルダーコンテンツの高速なちらつきを防ぐために存在します。
 
 <docs-code language="angular-html" highlight="[3,4,5]">
 @defer {
@@ -60,17 +60,17 @@ The `@placeholder` block accepts an optional parameter to specify the `minimum` 
 </docs-code>
 </docs-step>
 
-<docs-step title="Add `@loading` block">
-Next add a `@loading` block to the component template.
+<docs-step title="`@loading`ブロックの追加">
+次に、コンポーネントテンプレートに`@loading`ブロックを追加します。
 
-The `@loading` block accepts two optional parameters:
+`@loading`ブロックは、2つのオプションパラメーターを受け入れます。
 
-* `minimum`: the amount of time that this block should be shown
-* `after`: the amount of time to wait after loading begins before showing the loading template
+* `minimum`：このブロックを表示する時間
+* `after`：読み込み開始後、読み込みテンプレートを表示するまでの待ち時間
 
-Both parameters are specified in time increments of milliseconds (ms) or seconds (s).
+どちらのパラメーターも、ミリ秒(ms)または秒(s)の時間単位で指定されます。
 
-Update `app.component.ts` to include a `@loading` block with a minimum parameter of `1s` as well as an after parameter with the value 500ms  to the @loading block.
+`@loading`ブロックに`minimum`パラメーターを`1s`、`after`パラメーターを`500ms`として含めるように`app.component.ts`を更新します。
 
 <docs-code language="angular-html" highlight="[5,6,7]">
 @defer {
@@ -82,12 +82,12 @@ Update `app.component.ts` to include a `@loading` block with a minimum parameter
 }
 </docs-code>
 
-Note: this example uses two parameters, separated by the ; character.
+NOTE: この例では、;文字で区切られた2つのパラメーターを使用しています。
 
 </docs-step>
 
-<docs-step title="Add `@error` block">
-Finally, add an `@error` block to the `@defer` block.
+<docs-step title="`@error`ブロックの追加">
+最後に、`@defer`ブロックに`@error`ブロックを追加します。
 
 <docs-code language="angular-html" highlight="[7,8,9]">
 @defer {
@@ -103,4 +103,4 @@ Finally, add an `@error` block to the `@defer` block.
 </docs-step>
 </docs-workflow>
 
-Congratulations! At this point, you have a good understanding about deferrable views. Keep up the great work and let's learn about triggers next.
+おめでとうございます！この時点で、遅延可能ビューについて十分に理解できたはずです。素晴らしい仕事を続け、次にトリガーについて学びましょう。

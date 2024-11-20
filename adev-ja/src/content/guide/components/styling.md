@@ -27,7 +27,7 @@ export class ProfilePhoto { }
 Angularがコンポーネントをコンパイルすると、これらのスタイルはコンポーネントのJavaScript出力と共に発行されます。
 つまり、コンポーネントのスタイルはJavaScriptモジュールシステムに参加します。
 Angularコンポーネントをレンダリングすると、フレームワークはコンポーネントの関連するスタイルを自動的に含めます。
-これは、コンポーネントを遅延ロードする場合でも同様です。
+これは、コンポーネントを遅延読み込みする場合でも同様です。
 
 Angularは、[Sass](https://sass-lang.com)、
 [less](https://lesscss.org)、[stylus](https://stylus-lang.com)など、

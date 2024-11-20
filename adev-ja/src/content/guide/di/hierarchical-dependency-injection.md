@@ -66,7 +66,7 @@ export class ItemService {
 
 `ModuleInjector` は、 `@NgModule.providers` および `NgModule.imports` プロパティによって構成されます。 `ModuleInjector` は、 `NgModule.imports` を再帰的にたどることによって到達できるすべてのプロバイダー配列をフラット化したものです。
 
-子 `ModuleInjector` 階層は、他の `@NgModules` を遅延ロードするときに作成されます。
+子 `ModuleInjector` 階層は、他の `@NgModules` を遅延読み込みするときに作成されます。
 
 ### プラットフォームインジェクター
 

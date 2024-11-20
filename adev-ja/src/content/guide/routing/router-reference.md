@@ -158,8 +158,8 @@ routerLinkActive="..."
 | ルーターイベント                                              | 詳細 |
 |:---                                                       |:---     |
 | [`NavigationStart`](api/router/NavigationStart)           | ナビゲーションが開始されたときにトリガーされます。                                                                                                                                                     |
-| [`RouteConfigLoadStart`](api/router/RouteConfigLoadStart) | ルーターがルート構成を遅延ロードする前にトリガーされます。                                                                     |
-| [`RouteConfigLoadEnd`](api/router/RouteConfigLoadEnd)     | ルートが遅延ロードされた後にトリガーされます。                                                                                                                                         |
+| [`RouteConfigLoadStart`](api/router/RouteConfigLoadStart) | ルーターがルート構成を遅延読み込みする前にトリガーされます。                                                                     |
+| [`RouteConfigLoadEnd`](api/router/RouteConfigLoadEnd)     | ルートが遅延読み込みされた後にトリガーされます。                                                                                                                                         |
 | [`RoutesRecognized`](api/router/RoutesRecognized)         | ルーターが URL を解析し、ルートが認識されたときにトリガーされます。                                                                                                               |
 | [`GuardsCheckStart`](api/router/GuardsCheckStart)         | ルーターがルーティングのガードフェーズを開始したときにトリガーされます。                                                                                                                         |
 | [`ChildActivationStart`](api/router/ChildActivationStart) | ルーターがルートの子のアクティブ化を開始したときにトリガーされます。                                                                                                                       |

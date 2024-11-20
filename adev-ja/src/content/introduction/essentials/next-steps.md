@@ -1,15 +1,19 @@
 <docs-decorative-header title="次のステップ" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-Angularの基本概念について学んだので、学んだことをインタラクティブなチュートリアルで実践し、詳細なガイドでさらに学びましょう。
+Angularの主要なコンセプトに入門できました。学んだことをインタラクティブなチュートリアルで実践し、詳細なガイドでさらに学びましょう。
 
 ## プレイグラウンド
+
+インタラクティブなコードエディターでAngularを試し、学んだコンセプトをさらに探求しましょう。
 
 <docs-pill-row>
   <docs-pill title="Angular で遊んでみよう！" href="playground" />
 </docs-pill-row>
 
 ## チュートリアル
+
+ブラウザ内のチュートリアルでこれらの主なコンセプトを実践、またはAngular CLIを使ってローカルで最初のアプリケーションを作成しましょう。
 
 <docs-pill-row>
   <docs-pill title="Angular の基礎を学ぶ" href="tutorials/learn-angular" />

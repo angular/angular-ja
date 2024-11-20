@@ -19,7 +19,7 @@ TypeScriptクラスの上部に `@Component` [デコレーター](https://www.ty
 export class ProfilePhoto { }
 </docs-code>
 
-Angularテンプレートの書き方については、[テンプレートガイド](guide/templates)を参照してください。
+データバインディング、イベント処理、制御フローなど、Angularテンプレート作成に関する詳細は、[テンプレートガイド](guide/templates)を参照してください。
 
 `@Component` デコレーターに渡されるオブジェクトは、コンポーネントの**メタデータ**と呼ばれます。これには、このガイドで説明されている `selector`、`template`、その他のプロパティが含まれています。
 
@@ -36,7 +36,7 @@ export class ProfilePhoto { }
 
 デフォルトでは、コンポーネントのスタイルは、そのコンポーネントのテンプレートで定義された要素にのみ影響を与えます。Angularのスタイリングアプローチの詳細については、[コンポーネントのスタイリング](guide/components/styling)を参照してください。
 
-代わりに、テンプレートとスタイルを別々のファイルに書くこともできます。
+テンプレートとスタイルを別々のファイルに記述することもできます。
 
 <docs-code language="angular-ts" highlight="[3, 4]">
 @Component({
@@ -47,11 +47,34 @@ export class ProfilePhoto { }
 export class ProfilePhoto { }
 </docs-code>
 
-これにより、プロジェクト内の*プレゼンテーション*と*動作*の懸念を分離できます。プロジェクト全体で一貫したアプローチを選択することも、コンポーネントごとに使用するものを決定できます。
+これにより、プロジェクト内の_表示_と_動作_の懸念事項を分離できます。プロジェクト全体に対して1つのアプローチを選択するか、コンポーネントごとにどちらを使用するかを決定できます。
 
-`templateUrl` と `styleUrl` はどちらも、コンポーネントが存在するディレクトリを基準とした相対パスです。
+`templateUrl`と`styleUrl`の両方は、コンポーネントが存在するディレクトリを基準とした相対パスです。
 
 ## コンポーネントの使用
+
+### `@Component`デコレーターでのインポート
+
+コンポーネント、[ディレクティブ](guide/directives)、または[パイプ](guide/templates/pipes)を使用するには、
+`@Component`デコレーターの`imports`配列に追加する必要があります。
+
+```angular-ts
+import {ProfilePhoto} from './profile-photo';
+
+@Component({
+  // このコンポーネントのテンプレートで使用するために、
+  // `ProfilePhoto`コンポーネントをインポートします。
+  imports: [ProfilePhoto],
+  /* ... */
+})
+export class UserProfile { }
+```
+
+デフォルトでは、Angularコンポーネントは*スタンドアロン*です。つまり、他のコンポーネントの`imports`配列に直接追加できます。以前のバージョンのAngularで作成されたコンポーネントは、代わりに`@Component`デコレーターで`standalone: false`を指定している場合があります。これらのコンポーネントの場合、代わりにコンポーネントが定義されている`NgModule`をインポートします。詳細は、完全な[`NgModule`ガイド](guide/ngmodules)を参照してください。
+
+IMPORTANT: 19.0.0より前のAngularバージョンでは、`standalone`オプションはデフォルトで`false`です。
+
+### テンプレートでのコンポーネントの表示
 
 すべてのコンポーネントは[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)を定義します。
 
@@ -63,29 +86,29 @@ export class ProfilePhoto { }
 export class ProfilePhoto { }
 </docs-code>
 
-Angularがサポートするセレクターの種類と、セレクターを選択する際のガイダンスについては、[コンポーネントセレクター](guide/components/selectors)を参照してください。
+Angularがサポートするセレクターの種類と、セレクターの選択に関するガイダンスについては、[コンポーネントセレクター](guide/components/selectors)を参照してください。
 
-他のコンポーネントのテンプレートに一致するHTML要素を作成することで、コンポーネントを使用します。
+_他の_コンポーネントのテンプレートで一致するHTML要素を作成することで、コンポーネントを表示します。
 
-<docs-code language="angular-ts" highlight="[4]">
+<docs-code language="angular-ts" highlight="[8]">
 @Component({
-  selector: 'user-profile',
-  template: `
-    <profile-photo />
-    <button>Upload a new profile photo</button>`,
-  ...,
+  selector: 'profile-photo',
+})
+export class ProfilePhoto { }
+
+@Component({
+  imports: [ProfilePhoto],
+  template: `<profile-photo />`
 })
 export class UserProfile { }
 </docs-code>
 
-テンプレートで他のコンポーネントを参照して使用する方法は、[コンポーネントのインポートと使用](guide/components/importing)を参照してください。
+Angularは、遭遇する一致するHTML要素ごとにコンポーネントのインスタンスを作成します。コンポーネントのセレクターと一致するDOM要素は、そのコンポーネントの**ホスト要素**と呼ばれます。コンポーネントのテンプレートの内容はそのホスト要素内にレンダリングされます。
 
-Angularは、遭遇した一致するHTML要素ごとに、コンポーネントのインスタンスを作成します。コンポーネントのセレクターに一致するDOM要素は、そのコンポーネントの**ホスト要素**と呼ばれます。コンポーネントのテンプレートの内容は、そのホスト要素内にレンダリングされます。
-
-コンポーネントによってレンダリングされたDOM (コンポーネントのテンプレートに対応)は、
+コンポーネントによってレンダリングされるDOM（コンポーネントのテンプレートに対応）は、
 そのコンポーネントの**ビュー**と呼ばれます。
 
-このようにコンポーネントを組み合わせることで、**Angular アプリケーションはコンポーネントのツリーとして考えることができます**。
+このようにコンポーネントを構成することで、**Angularアプリケーションをコンポーネントのツリーと考えることができます**。
 
 ```mermaid
 flowchart TD
@@ -99,4 +122,4 @@ flowchart TD
 ```
 
 
-このツリー構造は、[依存性の注入](guide/di)や[子クエリ](guide/components/queries)など、その他のAngularの概念を理解する上で重要です。
+このツリー構造は、[依存性の注入](guide/di)や[子クエリ](guide/components/queries)など、他のいくつかのAngularの概念を理解する上で重要です。

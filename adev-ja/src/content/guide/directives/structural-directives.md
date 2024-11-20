@@ -79,7 +79,6 @@ Angularは、ディレクティブクラスを作成し、テンプレートで�
 import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
 
 @Directive({
-  standalone: true,
   selector: '[select]',
 })
 export class SelectDirective {

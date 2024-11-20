@@ -2,12 +2,12 @@
 
 Tip: このガイドは、[基本概念のガイド](essentials) を既読していることを前提としています。Angularを初めて使用する場合は、まずそちらをお読みください。
 
-Angularコンポーネントは、新しい `EventEmitter` にプロパティを割り当てて `@Output` デコレーターを追加することで、カスタムイベントを定義できます。
+Angularコンポーネントは、`output`関数にプロパティを割り当てることでカスタムイベントを定義できます。
 
-<docs-code language="ts" highlight="">
-@Component({...})
+<docs-code language="ts" highlight="3">
+@Component({/*...*/})
 export class ExpandablePanel {
-  @Output() panelClosed = new EventEmitter<void>();
+  panelClosed = output<void>();
 }
 </docs-code>
 
@@ -15,36 +15,38 @@ export class ExpandablePanel {
 <expandable-panel (panelClosed)="savePanelState()" />
 ```
 
-`EventEmitter` の `emit` メソッドを呼び出すことで、イベントを送信できます。
+`output`関数は`OutputEmitterRef`を返します。`OutputEmitterRef`の`emit`メソッドを呼び出すことで、イベントを発生させることができます。
 
 <docs-code language="ts" highlight="">
   this.panelClosed.emit();
 </docs-code>
 
-Angularは、`@Output` デコレーターでマークされたプロパティを**出力**と呼びます。出力を使用して、`click` のようなネイティブブラウザイベントと同様に、他のコンポーネントにデータを渡すことができます。
+Angularでは、`output`関数で初期化されたプロパティを**出力**と呼びます。出力を使用すると、`click`などのネイティブブラウザイベントと同様に、カスタムイベントを発生させることができます。
 
 **Angular カスタムイベントは DOM を伝播しません。**
 
 **出力名は、大文字と小文字が区別されます。**
 
-コンポーネントクラスを拡張する場合、**出力は子クラスによって継承されます。**
+コンポーネントクラスを拡張する場合、**outputsは子クラスによって継承されます。**
 
-## イベントデータの送信
+`output`関数は、Angularコンパイラにとって特別な意味を持ちます。**`output`は、コンポーネントとディレクティブのプロパティ初期化子でのみ呼び出すことができます。**
 
-`emit` を呼び出す際にイベントデータを渡すことができます。
+## イベントデータの送出
+
+`emit`を呼び出す際に、イベントデータを渡すことができます。
 
 <docs-code language="ts" highlight="">
-// プリミティブ値を送信できます。
+// プリミティブ値を送出できます。
 this.valueChanged.emit(7);
 
-// カスタムイベントオブジェクトを送信できます
+// カスタムイベントオブジェクトを送出できます
 this.thumbDropped.emit({
   pointerX: 123,
   pointerY: 456,
 })
 </docs-code>
 
-テンプレートでイベントリスナーを定義する場合、`$event` 変数からイベントデータにアクセスできます。
+テンプレートでイベントリスナーを定義する場合、`$event`変数からイベントデータにアクセスできます。
 
 ```angular-html
 <custom-slider (valueChanged)="logValue($event)" />
@@ -52,10 +54,82 @@ this.thumbDropped.emit({
 
 ## 出力名のカスタマイズ
 
-`@Output` デコレーターは、テンプレートでイベントに異なる名前を指定できるパラメータを受け取ります。
+`output`関数は、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
 <docs-code language="ts" highlight="">
-@Component({...})
+@Component({/*...*/})
+export class CustomSlider {
+  changed = output({alias: 'valueChanged'});
+}
+</docs-code>
+
+```angular-html
+<custom-slider (valueChanged)="saveVolume()" />
+```
+
+このエイリアスは、TypeScriptコードでのプロパティの使用には影響しません。
+
+一般的に、コンポーネントの出力のエイリアスは避けるべきですが、この機能は元の名前のエイリアスを保持しながらプロパティの名前を変更する場合や、ネイティブDOMイベントの名前との衝突を避ける場合に役立ちます。
+
+## プログラムによる出力の購読
+
+コンポーネントを動的に作成する場合は、コンポーネントインスタンスから出力イベントをプログラムで購読できます。
+`OutputRef`型には`subscribe`メソッドが含まれています。
+
+```ts
+const someComponentRef: ComponentRef<SomeComponent> = viewContainerRef.createComponent(/*...*/);
+
+someComponentRef.instance.someEventProperty.subscribe(eventData => {
+  console.log(eventData);
+});
+```
+
+Angularは、サブスクライバーを持つコンポーネントを破棄するときに、イベントサブスクリプションを自動的にクリーンアップします。または、イベントから手動で購読解除できます。`subscribe`関数は、`unsubscribe`メソッドを持つ`OutputRefSubscription`を返します。
+
+```typescript
+const eventSubscription = someComponent.someEventProperty.subscribe(eventData => {
+  console.log(eventData);
+});
+
+// ...
+
+eventSubscription.unsubscribe();
+```
+
+## イベント名の選択
+
+HTMLElementなどのDOM要素のイベントと衝突する出力名を選択することは避けてください。名前の衝突は、バインドされたプロパティがコンポーネントのものであるか、DOM要素のものであるかについて混乱を招きます。
+
+コンポーネントセレクターのように、コンポーネント出力にプレフィックスを追加することは避けてください。特定の要素は1つのコンポーネントしかホストできないため、カスタムプロパティはすべてコンポーネントに属すると見なすことができます。
+
+常に[camelCase](https://en.wikipedia.org/wiki/Camel_case)出力名を使用してください。「on」で始まる出力名は避けてください。
+
+## RxJSを使用したoutputs
+
+outputsとRxJSの相互運用性については、[RxJS interop with component and directive outputs](ecosystem/rxjs-interop/output-interop)を参照してください。
+
+## `@Output`デコレーターを使用した出力の宣言
+
+Tip: Angularチームは新規プロジェクトでは`output`関数の使用を推奨していますが、
+元のデコレーターベースの`@Output`APIは引き続き完全にサポートされています。
+
+代替として、新しい`EventEmitter`にプロパティを割り当て、`@Output`デコレーターを追加することで、カスタムイベントを定義できます。
+
+<docs-code language="ts" highlight="">
+@Component({/*...*/})
+export class ExpandablePanel {
+  @Output() panelClosed = new EventEmitter<void>();
+}
+</docs-code>
+
+`EventEmitter`の`emit`メソッドを呼び出すことで、イベントを発生させることができます。
+
+### `@Output`デコレーターを使用したエイリアス
+
+`@Output`デコレーターは、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
+
+<docs-code language="ts" highlight="">
+@Component({/*...*/})
 export class CustomSlider {
   @Output('valueChanged') changed = new EventEmitter<number>();
 }
@@ -67,36 +141,26 @@ export class CustomSlider {
 
 このエイリアスは、TypeScriptコードでのプロパティの使用には影響しません。
 
-コンポーネントの出力のエイリアスは一般的に避けるべきですが、この機能は、元の名前のエイリアスを保持しながらプロパティの名前を変更したり、ネイティブDOMイベントの名前との衝突を回避したりするのに役立ちます。
+## `@Component`デコレーターでの出力の指定
 
-## `@Component` デコレーターで出力名を指定する
-
-`@Output` デコレーターに加えて、`@Component` デコレーターの `outputs` プロパティを使用して、コンポーネントの出力名を指定できます。これは、コンポーネントが基本クラスからプロパティを継承する場合に役立ちます。
+`@Output`デコレーターに加えて、`@Component`デコレーターの`outputs`プロパティを使用して、コンポーネントの出力を指定できます。これは、コンポーネントが基底クラスからプロパティを継承する場合に役立ちます。
 
 <docs-code language="ts" highlight="">
-// `CustomSlider` は、`BaseSlider` から `valueChanged` プロパティを継承します。
+// `CustomSlider`は`BaseSlider`から`valueChanged`プロパティを継承します。
 @Component({
-  ...,
+  /*...*/
   outputs: ['valueChanged'],
 })
 export class CustomSlider extends BaseSlider {}
 </docs-code>
 
-さらに、`outputs` リストでコロンの後にエイリアスを置くことで、出力のエイリアスを指定できます。
+`outputs`リストにエイリアスも指定できます。エイリアスは文字列の後にコロンを付けて記述します。
 
 <docs-code language="ts" highlight="">
-// `CustomSlider` は、`BaseSlider` から `valueChanged` プロパティを継承します。
+// `CustomSlider`は`BaseSlider`から`valueChanged`プロパティを継承します。
 @Component({
-  ...,
+  /*...*/
   outputs: ['valueChanged: volumeChanged'],
 })
 export class CustomSlider extends BaseSlider {}
 </docs-code>
-
-## イベント名の選択
-
-`HTMLElement` などのDOM要素のイベントと衝突する出力名を選ぶことは避けてください。名前が衝突すると、バインドされているプロパティがコンポーネントに属しているのか、DOM要素に属しているのかがわかりにくくなります。
-
-コンポーネントセレクターのように、コンポーネント出力にプレフィックスを追加することは避けてください。特定の要素には、1つのコンポーネントしかホストできないため、カスタムプロパティはすべてコンポーネントに属していると見なすことができます。
-
-出力名には常に[キャメルケース](https://en.wikipedia.org/wiki/Camel_case)を使用してください。出力名の前に「on」を付けることは避けてください。

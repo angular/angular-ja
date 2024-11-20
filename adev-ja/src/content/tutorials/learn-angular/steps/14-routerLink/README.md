@@ -17,7 +17,6 @@
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  standalone: true,
   imports: [RouterLink, RouterOutlet],
   ...
 })
@@ -34,7 +33,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   ...
-  standalone: true,
   template: `
     ...
     <a routerLink="/">Home</a>

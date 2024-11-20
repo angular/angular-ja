@@ -1,58 +1,69 @@
-<docs-decorative-header title="Angularのロードマップ" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
-Angularチームがウェブ上でどのように勢いを増しているかをご覧ください。
+<docs-decorative-header title="Angularロードマップ" imgSrc="adev/src/assets/images/roadmap.svg"> <!-- markdownlint-disable-line -->
+ウェブにおけるAngularチームの勢いの増し方を学びましょう。
 </docs-decorative-header>
 
-オープンソースプロジェクトとして、Angularの日々のコミット、PR、勢いはすべてGitHubで追跡可能です。この日々の作業がフレームワークの将来にどのようにつながるかをより透明にするために、ロードマップはチームの現在および将来の計画されたビジョンをまとめたものです。
+オープンソースプロジェクトとして、Angularの日々のコミット、PR、勢いはすべてGitHubで追跡できます。この日々の作業がフレームワークの将来とどのように関係しているかについての透明性を高めるために、私たちのロードマップはチームの現在および将来計画されているビジョンをまとめています。
 
-以下のプロジェクトは、特定のAngularバージョンには関連付けられていません。完成したらリリースし、セマンティックバージョン管理に従ってリリーススケジュールに基づいて特定のバージョンの一部になります。たとえば、破壊的変更を含む場合は、完了後の次のマイナーバージョン、または次のメジャーバージョンで機能をリリースします。
+以下のプロジェクトは、特定のAngularバージョンには関連付けられていません。完成次第リリースし、リリーススケジュールに従ってセマンティックバージョニングに基づいて特定のバージョンに含まれます。例えば、破壊的変更を含む場合は次のメジャー、そうでない場合は次のマイナーで機能をリリースします。
 
-現在、Angularにはフレームワークについて2つの目標があります。
+現在、Angularはフレームワークに2つの目標を持っています。
 
-1. [Angular開発者エクスペリエンス](#improving-the-angular-developer-experience)を向上させること、および
-2. [フレームワークのパフォーマンス](#fast-by-default)を向上させること。
+1. [Angular開発者体験の改善](#improving-the-angular-developer-experience)と
+2. [フレームワークのパフォーマンスの向上](#fast-by-default)。
 
-これらの目標を特定のプロジェクト作業でどのように達成するのか、詳細を読み進めてください。
+具体的なプロジェクト作業でこれらの目標をどのように達成する予定かについて、読み進めてください。
 
-## 最新のAngularを探検する
+## 最新のAngularを探る
 
-ロードマップから最新のAngular機能で開発を始めましょう。このリストは、ロードマップの新機能の現在のステータスを表しています。
+ロードマップからAngularの最新機能を使用して開発を始めましょう。このリストは、ロードマップから生まれた新機能の現在の状況を表しています。
 
-### 実験可能なもの
+### 実験的に利用可能
 
-* [Angularシグナルを試す](guide/signals)
-* [SSRでのイベントリプレイ](https://angular.dev/api/platform-browser/withEventReplay)
-* [Zoneless変更検出](https://angular.dev/guide/experimental/zoneless)
-* [i18nブロックのハイドレーションサポート](https://angular.dev/api/platform-browser/withI18nSupport)
+* [インクリメンタルハイドレーション](/guide/incremental-hydration)
+* [Zoneless変更検知](/guide/experimental/zoneless)
+* [i18nブロックのハイドレーションサポート](/api/platform-browser/withI18nSupport)
+* [Resource API](/guide/signals/resource)
+* [Effect API](/api/core/effect)
+* [Linked Signal API](/guide/signals/linked-signal)
+* [ルートレベルのレンダリングモード](/guide/hybrid-rendering)
 
-### 本番環境で使用可能
+### 本番環境向け
 
-* [hydration](guide/hydration)
-* [遅延表示](https://angular.dev/guide/defer)
-* [組み込みの制御フロー](https://angular.dev/guide/templates/control-flow)
-* [Angular MaterialをMDCに移行する](https://material.angular.io/guide/mdc-migration)
-* [Angular Material 3](https://material.angular.io/guide/theming)
-* [スタンドアロンAPIに移行する](reference/migrations/standalone)
-* [NgOptimizedImageで画像のパフォーマンスを向上させる](guide/image-optimization)
-* [Injectを試す](/tutorials/learn-angular/20-inject-based-di)
-* [新しいCDKディレクティブ](https://material.angular.io/cdk/categories)
+* [Angular Signalsの探索](/guide/signals)
+* [SSRでのイベントリプレイ](/api/platform-browser/withEventReplay)
+* [遅延可能ビュー](/guide/defer)
+* [ビルトイン制御フロー](/guide/templates/control-flow)
+* [ローカル変数宣言](/guide/templates/variables)
+* [シグナル入力](/guide/signals/inputs)
+* [モデル入力](/guide/signals/model)
+* [シグナルクエリ](/guide/signals/queries)
+* [関数ベースの出力](/guide/components/output-fn)
 
-## Angular開発者エクスペリエンスの向上
+## Angular開発者体験の改善
 
 ### 開発速度
 
 <docs-card-container>
-  <docs-card title="Angularシグナルを提供する" href="https://github.com/angular/angular/discussions/49685">
-  このプロジェクトは、シグナルをリアクティビティプリミティブとして導入することで、Angularのリアクティビティモデルを再考しています。初期の計画は、数百の議論、開発者との会話、フィードバックセッション、ユーザーエクスペリエンス調査、および1,000件以上のコメントを受け取った一連のRFCを生み出しました。
+  <docs-card title="Angularシグナルの提供" href="https://github.com/angular/angular/discussions/49685">
+  このプロジェクトでは、シグナルをリアクティビティプリミティブとして導入することにより、Angularのリアクティビティモデルを再考しています。初期計画では、数百件の議論と開発者との会話、フィードバックセッションやユーザー体験の調査、1,000件以上のコメントを受け取った一連のRFCが行われました。
 
-  v17リリースの一環として、Angularシグナルライブラリは開発者プレビューから卒業しました。v18では、開発者プレビューで信号ベースのクエリ、入力、およびモデル入力を使用できるようになりました。次に、これらのAPIを安定版に卒業し、Angularの変更検知メカニズムに信号をより深く統合する前に、コミュニティからのフィードバックに対処し続けます。
+  v17リリースの一環として、Angularシグナルライブラリを開発者プレビューから卒業しました。v19では、シグナルベースのクエリ、入力、モデル入力を安定版に移行しました。次に、このプロジェクトを完了する前に、エフェクトを最終化する必要があります。
   </docs-card>
   <docs-card title="Zoneless Angular" href="">
-  v18では、Angularに実験的なzonelessサポートを提供しました。これにより、開発者はzone.jsをバンドルに含めることなくフレームワークを使用できるようになり、パフォーマンス、デバッグエクスペリエンス、および相互運用性が向上します。初期リリースの一環として、Angular CDKとAngular Materialにもzonelessサポートを導入しました。
+  v18では、Angularに実験的なZonelessサポートを提供しました。これにより、バンドルにzone.jsを含めずにフレームワークを使用できるようになり、パフォーマンス、デバッグエクスペリエンス、相互運用性が向上します。初期リリースの一環として、Angular CDKとAngular MaterialにもZonelessサポートを導入しました。
 
-  次のステップとして、開発者エクスペリエンスを向上させるために、APIを改善し続けます。
+  v19では、サーバーサイドレンダリングでのZonelessサポートを導入し、いくつかのエッジケースに対処し、Zonelessプロジェクトを足場するためのスキーマを作成しました。  <a href="https://fonts.google.com/">Googleフォント</a>をZonelessに移行したことで、パフォーマンスと開発者エクスペリエンスが向上し、この機能を開発者プレビューに移行する前に対処する必要があるギャップを特定できました。今後数ヶ月でさらにアップデートを予定しています。
   </docs-card>
-  <docs-card title="ローカルテンプレート変数" href="https://github.com/angular/angular/issues/15280">
-  ローカルテンプレート変数は、Angularのイシュー追跡システムで最も多くの票を集めた機能の1つです。2024年第2四半期に、初期設計とプロトタイピングを開始しました。2024年後半に更新情報を期待してください。
+  <docs-card title="シグナルとの統合" href="">
+  フォーム、HTTP、ルーターなど、基本的なAngularパッケージとシグナルの統合を改善することに取り組んでいます。このプロジェクトの一環として、包括的な開発者エクスペリエンスを向上させるために、便利なシグナルベースのAPIまたはラッパーを導入する機会を探ります。
+  </docs-card>
+  <docs-card title="Angular DevToolsでのシグナルのデバッグ" href="">
+  Angularでのシグナルの進化に伴い、それらをデバッグするためのより良いツールに取り組んでいます。優先度の高いリストには、シグナルを検査およびデバッグするためのUIがあります。
+  </docs-card>
+  <docs-card title="HMR（ホットモジュールリプレースメント）の改善" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306">
+  ホットモジュールリプレースメントを有効にすることで、より高速な編集/更新サイクルを目指しています。
+
+  Angular v19では、CSSとテンプレートのHMRの初期サポートを提供しました。このプロジェクトを完了する前に、開発者のニーズに対応していることを確認するために、フィードバックの収集を続けます。
   </docs-card>
 </docs-card-container>
 
@@ -60,77 +71,92 @@ Angularチームがウェブ上でどのように勢いを増しているかを�
 
 <docs-card-container>
   <docs-card title="新しいCDKプリミティブ" href="">
-  [Combobox](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox)のWAI-ARIAデザインパターンに基づいてカスタムコンポーネントを作成することを容易にするために、新しいCDKプリミティブに取り組んでいます。Angular v14では、このプロジェクトの一環として、安定した[メニューとダイアログプリミティブ](https://material.angular.io/cdk/categories)が導入され、v15ではリストボックスが導入されました。
+  [コンボボックス](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox)のWAI-ARIAデザインパターンに基づいてカスタムコンポーネントを作成しやすくするために、新しいCDKプリミティブに取り組んでいます。Angular v14では、このプロジェクトの一環として、安定した[メニューとダイアログプリミティブ](https://material.angular.io/cdk/categories)を、v15ではリストボックスを導入しました。
   </docs-card>
   <docs-card title="Angularコンポーネントのアクセシビリティ" href="">
-  WCAGなどのアクセシビリティ標準に照らし合わせて、Angular Materialのコンポーネントを評価し、このプロセスから生じる問題を解決しています。
+  WCAGなどのアクセシビリティ基準に対してAngular Materialのコンポーネントを評価し、このプロセスから生じる問題を修正することに取り組んでいます。
   </docs-card>
 </docs-card-container>
 
 ### ツールの改善
 
 <docs-card-container>
-  <docs-card title="ng testでユニットテストツールを最新化する" href="">
-  v12では、ProtractorをCypress、Nightwatch、WebDriver.ioなどの最新の代替手段に置き換えることで、Angularのエンドツーエンドテストエクスペリエンスを再検討しました。次に、Angularのユニットテストエクスペリエンスを最新化するために、`ng test`に取り組みたいと思います。2023年第2四半期に、実験的な[Jest](https://jestjs.io/)サポートを導入し、[発表](https://blog.angular.dev/moving-angular-cli-to-jest-and-web-test-runner-ef85ef69ceca)したように、Karmaから[Web Test Runner](https://modern-web.dev/docs/test-runner/overview/)への移行を発表しました。
+  <docs-card title="`ng test`によるユニットテストツールの近代化" href="">
+  v12では、ProtractorをCypress、Nightwatch、Puppeteer、Playwright、Webdriver.ioなどの最新の代替手段に置き換えることで、Angularのエンドツーエンドテストエクスペリエンスを見直しました。次に、Angularのユニットテストエクスペリエンスを近代化するために`ng test`に取り組みたいと考えています。
 
-  今年後半には、Web Test RunnerをKarmaの代替として導入するために進捗を続け、Karmaを廃止していく予定です。
+  現在、既存のテストを壊さないようにJasmineをアサーションライブラリとして維持しながら、Angularプロジェクトの新しいテストランナーとして、Web Test Runner, Vitest, Jestを候補として検討しています。
   </docs-card>
-  <docs-card title="言語サービスでスタンドアロンインポートを合理化する" href="">
-  このイニシアチブの一環として、言語サービスは、スタンドアロンアプリケーションとNgModuleベースのアプリケーションでコンポーネントとパイプを自動的にインポートします。さらに、アプリケーションバンドルを小さくするために、言語サービスで未使用のインポートを自動的に削除することを提案できるように取り組んでいます。
+  <docs-card title="Angular CLIでのNitroサポートの評価" href="https://nitro.unjs.io/">
+  Nitroが提供する、より多くのデプロイオプション、さまざまなランタイムとファイルベースのルーティングとのサーバーサイドレンダリングの互換性の向上などの機能に興奮しています。2025年には、Angularのサーバーサイドレンダリングモデルにどのように適合するかを評価します。
+
+  調査の進捗状況については、随時更新をお知らせします。
   </docs-card>
 </docs-card-container>
 
 ## デフォルトで高速
 
 <docs-card-container>
-  <docs-card title="部分的ハイドレーションの調査" href="">
-  v17ではハイドレーションを開発者プレビューから卒業させ、LCPで一貫して40〜50％の改善が見られました。その後、部分的なハイドレーションのプロトタイプを作成し、ng-confのステージでデモを共有しました。2024年に実験的なサポートを期待してください。
-  </docs-card>
-  <docs-card title="SSRおよび事前レンダリングでのイベントリプレイ" href="https://angular.dev/api/platform-browser/withEventReplay">
-  v18では、サーバーサイドレンダリングまたは事前レンダリングを使用する場合のイベントリプレイ機能を導入しました。この機能は、Google.comで実行されているイベントディスパッチプリミティブ（以前はjsactionと呼ばれていました）に依存しています。
+  <docs-card title="インクリメンタルハイドレーションを有効にする" href="">
+  v17では、ハイドレーションを開発者プレビューから卒業し、LCPで一貫して40〜50％の改善が見られました。それ以来、インクリメンタルハイドレーションのプロトタイプを作成し、ng-confでデモを公開しました。
 
-  今後数か月で、この機能に関するコミュニティからのフィードバックを収集し、安定版に卒業させる取り組みを進めます。
+  v19では、`@defer`ブロックによって実現されたインクリメンタルハイドレーションを開発者プレビューモードで提供しました。試してみて、<a href="https://github.com/angular/angular/issues">フィードバックを共有してください</a>！
   </docs-card>
-  <docs-card title="サーバールート構成" href="">
-  サーバーでより人間工学的なルート構成を可能にするために取り組んでいます。サーバーサイドレンダリング、事前レンダリング、またはクライアントサイドレンダリングを行うルートを簡単に宣言できるようにしたいと考えています。
+  <docs-card title="サーバールート設定" href="">
+  サーバーでより人間工学的なルート設定を可能にすることに取り組んでいます。どのルートをサーバーサイドレンダリング、プリレンダリング、クライアントサイドレンダリングするべきかを簡単に宣言できるようにしたいと考えています。
 
-  現時点では、初期設計とプロトタイピング段階です。2024年後半に更新情報を期待してください。
+  Angular v19では、ルートレベルのレンダリングモードの開発者プレビューを提供しました。これにより、Angularでプリレンダリング、サーバーサイドレンダリング、クライアントサイドレンダリングを行うルートを細かく設定できます。
   </docs-card>
 </docs-card-container>
 
 ## 将来の作業、調査、プロトタイピング
 
-このセクションは、将来の潜在的なプロジェクトの調査とプロトタイピングを表しています。妥当な結果は、現在のソリューションが最適なオプションであると判断することです。他のプロジェクトはウェブとフレームワークの革新が続くにつれてRFCを生み出し、進行中のプロジェクトに卒業するか優先順位が下げられる可能性があります。
+このセクションは、将来の潜在的なプロジェクトの調査とプロトタイピングを表しています。妥当な結果は、現在のソリューションが最適なオプションであると判断することです。他のプロジェクトは、ウェブがフレームワークとともに革新を続けるにつれて、RFC、進行中のプロジェクトへの昇格、または優先順位の低下につながる可能性があります。
 
 <docs-card-container>
-  <docs-card title="Angular DevToolsでの信号デバッグ" href="">
-  Angularシグナルの進化に伴い、シグナルをデバッグするためのより優れたツールにも取り組んでいます。優先度の高いリストの1つは、シグナルベースのコンポーネントを検査およびデバッグするためのUIです。
+  <docs-card title="シグナルフォーム" href="">
+  Angularフォームに関する既存のフィードバックを分析し、開発者の要件に対応し、リアクティブな状態管理にシグナルを使用するソリューションを設計する予定です。
   </docs-card>
-  <docs-card title="HMR（ホットモジュールリロード）を改善する" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306">
-  Angular CLIは現在、`ng serve --hmr`を使用してHMRをサポートしています。裏側では、これは主にAngularアプリケーションを最初から再レンダリングしますが、完全なページのリロードよりも優れていますが、間違いなく改善できます。最も重要なのは、この戦略は、その種の変更の頻度に合わせてスケールされた、任意の変更のターンアラウンド時間を最適化する必要があることです。将来的には、チームでHMRを改善するためのいくつかの機会を探求します。これには以下が含まれます。
+  <docs-card title="セレクターレス" href="">
+  ボイラープレートを削減し、スタンドアロンコンポーネントの使い勝手を向上させるために、セレクターをオプションにするソリューションを設計しています。コンポーネントまたはディレクティブを使用するには、それをインポートして、コンポーネントのテンプレートで直接使用できます。
 
-- CSSのみの変更を高速化し、ページ上の既存のコンポーネントに適用します。
-- Angularテンプレートのみの変更を高速化し、ページ上の既存のコンポーネントに適用します。
+  セレクターレスはまだ計画の初期段階です。初期設計が整い、次のステップの準備ができたら、RFCを共有します。
   </docs-card>
   <docs-card title="ストリーミングサーバーサイドレンダリングの調査" href="">
-  過去数回のリリースでは、Angularのサーバーサイドレンダリングをより堅牢にするために取り組んできました。優先度の高いリストには、zonelessアプリケーションのストリーミングサーバーサイドレンダリングを調査することが含まれます。
+  過去数回のリリースで、Angularのサーバーサイドレンダリングのストーリーをより堅牢にする取り組んできました。優先事項には、Zonelessアプリケーションのストリーミングサーバーサイドレンダリングの調査があります。
   </docs-card>
-  <docs-card title="記述フォーマットの改善のための調査" href="">
-  開発者調査の結果に基づいて、コンポーネント記述フォーマットの使いやすさを改善する機会があることがわかりました。プロセスの最初のステップは、要件を収集し、RFCに進む前に問題領域を理解することです。進捗状況に応じて更新情報を共有します。将来の作業における高い優先度は、下位互換性と相互運用性です。
+  <docs-card title="記述形式の改善の調査" href="">
+  開発者調査の結果に基づいて、コンポーネント記述形式の使い勝手を改善する機会があることがわかりました。このプロセスの最初のステップは、RFCの前に要件を収集し、問題領域を理解することです。進捗状況については、随時更新をお知らせします。将来の作業では、下位互換性と相互運用性が最優先されます。
   </docs-card>
-  <docs-card title="2次元ドラッグアンドドロップをサポートする" href="https://github.com/angular/components/issues/13372">
-  このプロジェクトの一環として、Angular CDKのドラッグアンドドロップに混合方向のサポートを実装したいと思います。これは、リポジトリで最も多く要求されている機能の1つです。
+  <docs-card title="TestBedの改善" href="">
+  長年にわたるフィードバックとAngularランタイムの最近の更新に基づいて、TestBedを評価し、ユニットテストを開発する際の開発者エクスペリエンスを向上させ、ボイラープレートを削減する機会を特定します。
   </docs-card>
-  <docs-card title="Angular CLIでのNitroサポートの評価" href="https://nitro.unjs.io/">
-  ポータビリティ、最小限の設計、ファイルベースのルーティングなど、Nitroが提供する機能セットに興奮しています。今年後半には、それがAngularのサーバーサイドレンダリングモデルにどのように適合するかを評価します。
+  <docs-card title="インクリメンタルな採用" href="">
+  Angularには、マルチページアプリケーションにインタラクティブ性を追加したり、異なるフレームワークで構築された既存のアプリケーション内にAngularコンポーネントを埋め込んだりするツールと柔軟性が不足していました。
 
-  調査の進捗状況に応じて更新情報を共有します。
+  このプロジェクトの一環として、クロスフレームワークの相互運用性の要件空間と、このユースケースを可能にするためのビルドツールの提供について調査します。
   </docs-card>
 </docs-card-container>
 
 ## 完了したプロジェクト
 
 <docs-card-container>
+  <docs-card title="Support two-dimensional drag-and-drop" link="Completed in Q2 2024" href="https://github.com/angular/components/issues/13372">
+  As part of this project, we implemented mixed orientation support for the Angular CDK drag and drop. This is one of the repository's most highly requested features.
+  </docs-card>
+  <docs-card title="Event replay with SSR and prerendering" link="Completed in Q4 2024" href="https://angular.dev/api/platform-browser/withEventReplay">
+  In v18 we introduced an event replay functionality when using server-side rendering or prerendering. For this feature we depend on the event dispatch primitive (previously known as jsaction) that is running on Google.com.
+
+  In Angular v19 we graduated event replay to stable and enabled it by default for all new projects.
+  </docs-card>
+  <docs-card title="Integrate Angular Language Service with Schematics" link="Completed in Q4 2024" href="">
+  To make it easier for developers to use modern Angular APIs, we enabled integration between the Angular language service and schematics which allows you to refactor your app with a single click.
+  </docs-card>
+  <docs-card title="Streamline standalone imports with Language Service" link="Completed in Q4 2024" href="">
+  As part of this initiative, the language service automatically imports components and pipes in standalone and NgModule-based apps. Additionally, we've added a template diagnostic to highlight unused imports in standalone components, which should help make application bundles smaller.
+  </docs-card>
+  <docs-card title="Local template variables" link="Completed in Q3 2024" href="https://github.com/angular/angular/issues/15280">
+  We've released the support for local template variables in Angular, see [`@let` docs](https://angular.dev/api/core/@let) for additional information.
+  </docs-card>
   <docs-card title="Angular Materialのカスタマイズを拡張する" link="2024年第2四半期に完了" href="https://material.angular.io/guide/theming">
   Angular Materialコンポーネントのカスタマイズを向上させ、Material 3機能を有効にするために、トークンベースのテーマAPIを定義するためにGoogleのMaterial Designチームと協力しています。
 

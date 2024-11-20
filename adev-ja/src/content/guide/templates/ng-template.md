@@ -136,6 +136,11 @@ export class MyDirective {
 
 `@angular/common` の `NgTemplateOutlet` ディレクティブは、`TemplateRef` を受け取り、アウトレットに要素を持つ要素の**兄弟**としてフラグメントをレンダリングします。通常、`NgTemplateOutlet` は [`<ng-container>` 要素](/guide/templates/ng-container) で使用する必要があります。
 
+まず、`NgTemplateOutlet` をインポートします:
+```typescript
+import { NgTemplateOutlet } from '@angular/common';
+```
+
 次の例では、テンプレートフラグメントを宣言し、そのフラグメントを `NgTemplateOutlet` を使用して `<ng-container>` 要素にレンダリングします。
 
 ```angular-html
@@ -145,7 +150,7 @@ export class MyDirective {
   <p>これはフラグメントです</p>
 </ng-template>
 
-<ng-container [ngTemplateOutlet]="myFragment" />
+<ng-container *ngTemplateOutlet="myFragment"></ng-container>
 ```
 
 この例では、次のレンダリングされたDOMが生成されます。

@@ -12,7 +12,6 @@ Angularでデータ変換のニーズに合わせてカスタムパイプを作�
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  standalone: true,
   name: 'star',
 })
 export class StarPipe implements PipeTransform {
@@ -37,7 +36,6 @@ export class StarPipe implements PipeTransform {
 
 ```ts
 @Pipe({
-    standalone: true,
     name: 'reverse'
 })
 ```

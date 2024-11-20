@@ -816,9 +816,8 @@ Emoji from FlowerService: &#x1F33A;
 `FlowerService` の例と同様に、コンストラクターに `@SkipSelf()` を追加すると、インジェクターは現在の `<app-child>` の `ElementInjector` を `AnimalService` について検索しません。
 代わりに、インジェクターは `<app-root>` の `ElementInjector` で検索を開始します。
 
-<docs-code language="typescript" highlight="[6]">
+<docs-code language="typescript" highlight="[5]">
 @Component({
-  standalone: true,
   selector: 'app-child',
   …
   viewProviders: [
@@ -853,9 +852,8 @@ Emoji from FlowerService: &#x1F33A;
 `ChildComponent` は、 `viewProviders` を構成して、犬の絵文字が `AnimalService` 値として提供されるようにします。
 また、コンストラクターに `@Host()` があることもわかります。
 
-<docs-code language="typescript" highlight="[[6],[10]]">
+<docs-code language="typescript" highlight="[[5],[9]]">
 @Component({
-  standalone: true
   selector: 'app-child',
   …
   viewProviders: [
@@ -886,9 +884,8 @@ export class ChildComponent {
 
 3番目の動物、ハリネズミ <code>&#x1F994;</code> を含む `viewProviders` 配列を、 `app.component.ts` の `@Component()` メタデータに追加します。
 
-<docs-code language="typescript" highlight="[7]">
+<docs-code language="typescript" highlight="[6]">
 @Component({
-  standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ],

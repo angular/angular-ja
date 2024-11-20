@@ -1,11 +1,18 @@
 <docs-decorative-header title="概要" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
+Angularの主要なコンセプトを簡単に紹介します
 </docs-decorative-header>
 
-## 始める前に
+## Angularに興味がありますか？
 
-ほとんどのモダンなフレームワークと同様に、AngularではHTML、CSS、JavaScriptについての知識が必要です。フロントエンド開発が完全に初めての場合は、最初のステップとしてフレームワークに飛び込むのはあまり良い考えではありません。基本を理解してから戻ってきてください！他のフレームワークの経験は役に立ちますが、必須ではありません。
+ようこそ！この_基本概念_ガイドでは、Angularの主要なコンセプトのいくつかを説明し、フレームワークの使い方を理解する手助けをします。このガイドは短い入門編として、いくつかのビルディングブロックに焦点を当てています。深く包括的なドキュメントをお探しの場合は、[ドキュメントランディングページ](概要)から特定の_詳細ガイド_に移動できます。
 
-さらに、次の概念についても理解しておく必要があります。
+すぐにコードを書き始めたい場合は、[ハンズオンチュートリアルまでスキップする](tutorials/learn-angular)ことができます。
+
+### はじめに
+
+このサイトは、あなたがHTML、CSS、TypeScriptに精通していることを前提としています。ウェブ開発の全くの初心者の方は、ここに戻ってくる前に、もっと入門的なコンテンツを探してみてください。
+
+特に、次の概念についても理解しておく必要があります。
 
 - [JavaScript クラス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes)
 - [TypeScript の基礎](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)

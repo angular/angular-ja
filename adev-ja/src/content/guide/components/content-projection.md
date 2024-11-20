@@ -13,7 +13,7 @@ Tip: このガイドは、すでに [基本概念のガイド](essentials) を�
 export class CustomCard {/* ... */}
 ```
 
-**`<ng-content>` 要素は、コンテンツを配置する場所を示すプレースホルダーとして使用できます。**:
+**`<ng-content>`要素は、コンテンツを配置する場所を示すプレースホルダーとして使用できます。**:
 
 ```angular-ts
 @Component({
@@ -23,12 +23,12 @@ export class CustomCard {/* ... */}
 export class CustomCard {/* ... */}
 ```
 
-Tip: `<ng-content>` は、
-[ネイティブの `<slot>` 要素](https://developer.mozilla.org/docs/Web/HTML/Element/slot) と似ていますが、
+Tip: `<ng-content>`は、
+[ネイティブの`<slot>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/slot)と似ていますが、
 Angular固有の機能も備えています。
 
-`<ng-content>` を使用したコンポーネントを使用する場合、
-コンポーネントホスト要素の子要素はすべて、その `<ng-content>` の場所にレンダリング、あるいは **投影されます**:
+`<ng-content>`を使用したコンポーネントを使用する場合、
+コンポーネントホスト要素の子要素はすべて、その`<ng-content>`の場所にレンダリング、あるいは**投影されます**:
 
 ```angular-ts
 // コンポーネントソース
@@ -59,24 +59,25 @@ export class CustomCard {/* ... */}
 </custom-card>
 ```
 
-Angularは、このように渡されるコンポーネントの子要素を、そのコンポーネントの **コンテンツ** と呼びます。
-これはコンポーネントの **ビュー** とは異なります。
+Angularは、このように渡されるコンポーネントの子要素を、そのコンポーネントの**コンテンツ**と呼びます。
+これはコンポーネントの**ビュー**とは異なります。
 ビューは、コンポーネントのテンプレートで定義された要素を指します。
 
-**`<ng-content>` 要素は、コンポーネントでも DOM 要素でもありません。** 
+**`<ng-content>`要素は、コンポーネントでもDOM要素でもありません。**
 代わりに、コンテンツをレンダリングする場所をAngularに伝える特別なプレースホルダーです。
-Angularのコンパイラは、ビルド時にすべての `<ng-content>` 要素を処理します。
-実行時に `<ng-content>` を挿入、削除、または変更できません。ディレクティブ、スタイル、または任意の属性を `<ng-content>` に追加できません。
+Angularのコンパイラは、ビルド時にすべての`<ng-content>`要素を処理します。
+実行時に`<ng-content>`の挿入や削除、変更はできません。ディレクティブやスタイル、任意の属性も`<ng-content>`には追加できません。
 
-`<ng-content>` を `@if`、`@for`、または `@switch` で条件付きで含めるべきではありません。
-Angularは常ににレンダリングされたコンテンツのDOMノードをインスタンス化して作成します。
-その `<ng-content>` プレースホルダが非表示であってもです。コンポーネントコンテンツの条件付きレンダリングについては
-[テンプレートフラグメント](api/core/ng-template) を参照してください。
+`<ng-content>`を`@if`、`@for`、または`@switch`によって条件付きで含めるべきではありません。
+Angularは常にレンダリングされたコンテンツのDOMノードをインスタンス化して作成します。
+その`<ng-content>`プレースホルダが非表示であってもです。コンポーネントコンテンツの条件付きレンダリングについては
+[テンプレートフラグメント](api/core/ng-template)を参照してください。
 
 ## 複数のコンテンツプレースホルダー
 
-Angularは、CSSセレクターに基づいて、複数の異なる要素を異なる `<ng-content>` プレースホルダーへの投影をサポートしています。
-上記のカードの例を拡張して、`select` 属性を使用して、カードのタイトルと本文の2つのプレースホルダーを作成できます。
+Angularは、CSSセレクターに基づいて、複数の異なる要素を異なる`<ng-content>`プレースホルダーへの投影をサポートしています。
+上記のカードの例を拡張して、`select`属性を使用して、
+カードのタイトルと本文の2つのプレースホルダーを作成できます。
 
 ```angular-html
 <!-- コンポーネントテンプレート -->
@@ -106,19 +107,19 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 </custom-card>
 ```
 
-`<ng-content>` プレースホルダーは、
-[コンポーネントセレクター](guide/components/selectors) と同じCSSセレクターをサポートしています。
+`<ng-content>`プレースホルダーは、
+[コンポーネントセレクター](guide/components/selectors)と同じCSSセレクターをサポートしています。
 
-`select` 属性を持つ `<ng-content>` プレースホルダーを1つ以上、
-`select` 属性を持たない `<ng-content>` プレースホルダーを1つ含める場合、
-後者は `select` 属性に一致しなかったすべての要素をキャプチャします。
+`select`属性を持つ`<ng-content>`プレースホルダーを1つ以上、
+`select`属性を持たない`<ng-content>`プレースホルダーを1つ含める場合、
+後者は`select`属性に一致しなかったすべての要素をキャプチャします。
 
 ```angular-html
 <!-- コンポーネントテンプレート -->
 <div class="card-shadow">
   <ng-content select="card-title"></ng-content>
   <div class="card-divider"></div>
-  <!-- "card-title" 以外をすべてキャプチャ -->
+  <!-- "card-title"以外をすべてキャプチャ -->
   <ng-content></ng-content>
 </div>
 ```
@@ -144,14 +145,46 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 </custom-card>
 ```
 
-コンポーネントに `select` 属性を持たない `<ng-content>` プレースホルダーが含まれていない場合、
+コンポーネントに`select`属性を持たない`<ng-content>`プレースホルダーが含まれていない場合、
 コンポーネントのいずれかのプレースホルダーに一致しない要素はDOMにレンダリングされません。
+
+## フォールバックコンテンツ
+
+Angularは、コンポーネントの`<ng-content>`プレースホルダーに一致する子コンテンツがない場合、コンポーネントの`<ng-content>`プレースホルダーに*フォールバックコンテンツ*を表示できます。`<ng-content>`要素自体に子コンテンツを追加することで、フォールバックコンテンツを指定できます。
+
+```angular-html
+<!-- コンポーネントテンプレート -->
+<div class="card-shadow">
+  <ng-content select="card-title">Default Title</ng-content>
+  <div class="card-divider"></div>
+  <ng-content select="card-body">Default Body</ng-content>
+</div>
+```
+
+```angular-html
+<!-- コンポーネントの利用 -->
+<custom-card>
+  <card-title>Hello</card-title>
+  <!-- No card-body provided -->
+</custom-card>
+```
+
+```angular-html
+<!-- レンダリングされたDOM -->
+<custom-card>
+  <div class="card-shadow">
+    Hello
+    <div class="card-divider"></div>
+    Default Body
+  </div>
+</custom-card>
+```
 
 ## 投影のためのコンテンツのエイリアシング
 
-Angularは、任意の要素にCSSセレクターを指定できる特殊な属性 `ngProjectAs` をサポートしています。
-`ngProjectAs` を持つ要素が `<ng-content>` プレースホルダーに対してチェックされると、
-Angularは要素のIDではなく `ngProjectAs` の値と比較します。
+Angularは、任意の要素にCSSセレクターを指定できる特殊な属性`ngProjectAs`をサポートしています。
+`ngProjectAs`を持つ要素が`<ng-content>`プレースホルダーに対してチェックされると、
+Angularは要素のIDではなく`ngProjectAs`の値と比較します。
 
 ```angular-html
 <!-- コンポーネントテンプレート -->
@@ -182,4 +215,4 @@ Angularは要素のIDではなく `ngProjectAs` の値と比較します。
 </custom-card>
 ```
 
-`ngProjectAs` は静的な値のみをサポートし、動的な式にはバインドできません。
+`ngProjectAs`は静的な値のみをサポートし、動的な式にはバインドできません。

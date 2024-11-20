@@ -1,10 +1,10 @@
-<docs-decorative-header title="コードの共有" imgSrc="adev/src/assets/images/dependency_injection.svg"> <!-- markdownlint-disable-line -->
-依存性の注入を使用するとコードを共有できます。
+<docs-decorative-header title="依存性の注入" imgSrc="adev/src/assets/images/dependency_injection.svg"> <!-- markdownlint-disable-line -->
+コードを再利用し、アプリケーションとテストの振る舞いを制御します。
 </docs-decorative-header>
 
 コンポーネント間でロジックを共有する必要がある場合、Angularは[依存性の注入](guide/di)の設計パターンを活用します。これにより、「サービス」を作成できます。サービスを使用すると、コードをコンポーネントに注入しながら、信頼できる唯一の情報源から管理できます。
 
-## サービスとは
+## サービスとは？
 
 サービスは、注入できる再利用可能なコードの断片です。
 
@@ -18,10 +18,8 @@
 ```angular-ts
 import {Injectable} from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class CalculatorService {
+@Injectable({providedIn: 'root'})
+export class Calculator {
   add(x: number, y: number) {
     return x + y;
   }
@@ -39,23 +37,24 @@ export class CalculatorService {
 
 ```angular-ts
 import { Component, inject } from '@angular/core';
-import { CalculatorService } from './calculator.service';
+import { Calculator } from './calculator';
 
 @Component({
   selector: 'app-receipt',
-  template: `<h1>合計金額は {{ totalCost }}</h1>`,
+  template: `<h1>The total is {{ totalCost }}</h1>`,
 })
 
 export class Receipt {
-  private calculatorService = inject(CalculatorService);
-  totalCost = this.calculatorService.add(50, 25);
+  private calculator = inject(Calculator);
+  totalCost = this.calculator.add(50, 25);
 }
 ```
 
-この例では、`CalculatorService`は、Angular関数`inject`を呼び出してサービスを渡すことによって使用されています。
+この例では、`Calculator`は、Angularの関数`inject`を呼び出してサービスを渡すことによって使用されています。
 
 ## 次のステップ
 
 <docs-pill-row>
-  <docs-pill title="基本要素の次のステップ" href="essentials/next-steps" />
+  <docs-pill title="基本概念の次のステップ" href="essentials/next-steps" />
+  <docs-pill title="依存性の注入の詳細ガイド" href="guide/di" />
 </docs-pill-row>

@@ -14,32 +14,28 @@ SSRはクライアントサイドレンダリング (CSR) に比べて、主に�
 
 SSRを使用して**新規**プロジェクトを作成するには、次のコマンドを実行します。
 
-<docs-code language="shell">
-
+```shell
 ng new --ssr
-
-</docs-code>
+```
 
 **既存**のプロジェクトにSSRを追加するには、Angular CLIの `ng add` コマンドを使用します。
 
-<docs-code language="shell">
-
+```shell
 ng add @angular/ssr
+```
 
-</docs-code>
+Note: Angularにおける最新のSSRの進化に興味がありますか？開発者プレビューの[ハイブリッドレンダリングAPI](guide/hybrid-rendering)を覗いてみてください。
 
 これらのコマンドは、SSRを有効にするためのアプリケーションコードを作成および更新し、プロジェクト構造に余分なファイルを追加します。
 
-<docs-code language="text">
-
+```
 my-app
 |-- server.ts                       # アプリケーションサーバー
 └── src
     |-- app
     |   └── app.config.server.ts    # サーバーアプリケーション構成
     └── main.server.ts              # メインサーバーアプリケーションのブートストラップ
-
-</docs-code>
+```
 
 アプリケーションがサーバーサイドでレンダリングされていることを確認するには、`ng serve` でローカルに実行します。最初のHTMLリクエストには、アプリケーションのコンテンツが含まれている必要があります。
 
@@ -51,19 +47,9 @@ Note: In Angular v17 and later, `server.ts` is no longer used by `ng serve`. The
 
 <docs-code path="adev/src/content/examples/ssr/server.ts" visibleLines="[31,45]"></docs-code>
 
-`CommonEngine` の `render` メソッドは、以下のプロパティを持つオブジェクトを受け取ります。
-
-| プロパティ          | 詳細                                                                                  | デフォルト値 |
-| ------------------- | ---------------------------------------------------------------------------------------- | ------------- |
-| `bootstrap`         | `NgModule` を返すメソッド、または `ApplicationRef` に解決されるPromise。                 |               |
-| `providers`         | 現在のリクエストに対するプラットフォームレベルのプロバイダーの配列。                          |               |
-| `url`               | レンダリングするページの URL。                                                           |               |
-| `inlineCriticalCss` | レンダリングブロッキングリクエストを減らすために、重要な CSS をインライン化するかどうかのフラグ。 | `true`        |
-| `publicPath`        | ブラウザファイルとアセットのベースパス。                                                  |               |
-| `document`          | サーバーアプリケーションのブートストラップに使用する最初の DOM。                        |               |
-| `documentFilePath`  | サーバーアプリケーションのブートストラップに使用する最初の DOM のファイルパス。              |               |
-
 Angular CLIは、Angularアプリケーションのサーバーサイドレンダリングに焦点を当てた、初期のサーバー実装をスキャフォールディングします。このサーバーは、APIルート、リダイレクト、静的アセットなど、他の機能をサポートするように拡張できます。詳細については、[Express ドキュメント](https://expressjs.com/) を参照してください。
+
+APIの詳細については、[`CommonEngine` APIリファレンス](api/ssr/node/CommonEngineRenderOptions)を参照してください。
 
 ## ハイドレーション
 
@@ -75,8 +61,7 @@ Angular CLIは、Angularアプリケーションのサーバーサイドレン�
 
 デフォルトでは、`HttpClient` は、`Authorization` または `Proxy-Authorization` ヘッダーが含まれていないすべての `HEAD` および `GET` リクエストをキャッシュします。これらの設定は、ハイドレーションを提供するときに [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) を使用することでオーバーライドできます。
 
-<docs-code language="typescript">
-
+```typescript
 bootstrapApplication(AppComponent, {
   providers: [
     provideClientHydration(withHttpTransferCacheOptions({
@@ -84,8 +69,7 @@ bootstrapApplication(AppComponent, {
     }))
   ]
 });
-
-</docs-code>
+```
 
 ## サーバー対応コンポーネントのオーサリング
 
@@ -93,8 +77,7 @@ bootstrapApplication(AppComponent, {
 
 一般的に、ブラウザ固有のシンボルに依存するコードは、サーバーではなく、ブラウザでのみ実行する必要があります。これは、[`afterRender`](api/core/afterRender) および [`afterNextRender`](api/core/afterNextRender) ライフサイクルフックを使用して強制できます。これらは、ブラウザでのみ実行され、サーバーではスキップされます。
 
-<docs-code language="typescript">
-
+```angular-ts
 import { Component, ViewChild, afterNextRender } from '@angular/core';
 
 @Component({
@@ -111,8 +94,7 @@ export class MyComponent {
     });
   }
 }
-
-</docs-code>
+```
 
 ## Angular Service Worker の使用
 

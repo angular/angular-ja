@@ -16,7 +16,6 @@
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  standalone: true,
   imports: [NgOptimizedImage],
   ...
 })
@@ -32,7 +31,6 @@ import { NgOptimizedImage } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  standalone: true,
   template: `
     ...
     <li>

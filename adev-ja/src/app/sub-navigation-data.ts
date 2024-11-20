@@ -11,6 +11,7 @@ import {NavigationItem} from '@angular/docs';
 // These 2 imports are expected to be red because they are generated a build time
 import FIRST_APP_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/first-app/routes.json';
 import LEARN_ANGULAR_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/learn-angular/routes.json';
+import DEFERRABLE_VIEWS_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/deferrable-views/routes.json';
 
 import {DefaultPage} from './core/enums/pages';
 import {getApiNavigationItems} from './features/references/helpers/manifest.helper';
@@ -50,29 +51,19 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'introduction/essentials/components',
           },
           {
-            label: '動的なデータの管理',
-            path: 'essentials/managing-dynamic-data',
-            contentPath: 'introduction/essentials/managing-dynamic-data',
+            label: 'リアクティビティとシグナル',
+            path: 'essentials/signals',
+            contentPath: 'introduction/essentials/signals',
           },
           {
-            label: '動的なテンプレート',
-            path: 'essentials/rendering-dynamic-templates',
-            contentPath: 'introduction/essentials/rendering-dynamic-templates',
+            label: 'テンプレートによる動的なインターフェース',
+            path: 'essentials/templates',
+            contentPath: 'introduction/essentials/templates',
           },
           {
-            label: '条件分岐とループ',
-            path: 'essentials/conditionals-and-loops',
-            contentPath: 'introduction/essentials/conditionals-and-loops',
-          },
-          {
-            label: 'ユーザーインタラクションの処理',
-            path: 'essentials/handling-user-interaction',
-            contentPath: 'introduction/essentials/handling-user-interaction',
-          },
-          {
-            label: 'ロジックの共有',
-            path: 'essentials/sharing-logic',
-            contentPath: 'introduction/essentials/sharing-logic',
+            label: '依存性の注入によるモジュール設計',
+            path: 'essentials/dependency-injection',
+            contentPath: 'introduction/essentials/dependency-injection',
           },
           {
             label: '次のステップ',
@@ -91,17 +82,32 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     label: '詳細ガイド',
     children: [
       {
+        label: 'シグナル',
+        children: [
+          {
+            label: '概要',
+            path: 'guide/signals',
+            contentPath: 'guide/signals/overview',
+          },
+          {
+            label: 'linkedSignal',
+            path: 'guide/signals/linked-signal',
+            contentPath: 'guide/signals/linked-signal',
+          },
+          {
+            label: 'Resource',
+            path: 'guide/signals/resource',
+            contentPath: 'guide/signals/resource',
+          },
+        ],
+      },
+      {
         label: 'コンポーネント',
         children: [
           {
             label: 'コンポーネントの構造',
             path: 'guide/components',
             contentPath: 'guide/components/anatomy-of-components',
-          },
-          {
-            label: 'コンポーネントのインポートと使用',
-            path: 'guide/components/importing',
-            contentPath: 'guide/components/importing',
           },
           {
             label: 'セレクター',
@@ -122,11 +128,6 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: '出力によるカスタムイベント',
             path: 'guide/components/outputs',
             contentPath: 'guide/components/outputs',
-          },
-          {
-            label: 'output()関数',
-            path: 'guide/components/output-fn',
-            contentPath: 'guide/components/output-function',
           },
           {
             label: 'ng-contentによるコンテンツ投影',
@@ -268,6 +269,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'guide/directives/directive-composition-api',
             contentPath: 'guide/directives/directive-composition-api',
           },
+          {
+            label: 'NgOptimizedImageによる画像の最適化',
+            path: 'guide/image-optimization',
+            contentPath: 'guide/image-optimization',
+          },
         ],
       },
       {
@@ -312,36 +318,6 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'DIの実践',
             path: 'guide/di/di-in-action',
             contentPath: 'guide/di/di-in-action',
-          },
-        ],
-      },
-      {
-        label: 'シグナル',
-        children: [
-          {
-            label: '概要',
-            path: 'guide/signals',
-            contentPath: 'guide/signals/overview',
-          },
-          {
-            label: 'RxJSとの相互運用',
-            path: 'guide/signals/rxjs-interop',
-            contentPath: 'guide/signals/rxjs-interop',
-          },
-          {
-            label: '入力としてのシグナル',
-            path: 'guide/signals/inputs',
-            contentPath: 'guide/signals/inputs',
-          },
-          {
-            label: 'モデル入力',
-            path: 'guide/signals/model',
-            contentPath: 'guide/signals/model',
-          },
-          {
-            label: 'シグナルによるクエリ',
-            path: 'guide/signals/queries',
-            contentPath: 'guide/signals/queries',
           },
         ],
       },
@@ -441,22 +417,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         ],
       },
       {
-        label: 'パフォーマンス',
+        label: 'サーバーサイドとハイブリッドレンダリング',
         children: [
           {
             label: '概要',
             path: 'guide/performance',
             contentPath: 'guide/performance/overview',
-          },
-          {
-            label: '遅延可能なビュー',
-            path: 'guide/defer',
-            contentPath: 'guide/defer',
-          },
-          {
-            label: '画像最適化',
-            path: 'guide/image-optimization',
-            contentPath: 'guide/image-optimization',
           },
           {
             label: 'サーバーサイドレンダリング',
@@ -469,9 +435,19 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/prerendering',
           },
           {
+            label: 'サーバールーティングによるハイブリッドレンダリング',
+            path: 'guide/hybrid-rendering',
+            contentPath: 'guide/hybrid-rendering',
+          },
+          {
             label: 'ハイドレーション',
             path: 'guide/hydration',
             contentPath: 'guide/hydration',
+          },
+          {
+            label: 'インクリメンタルハイドレーション',
+            path: 'guide/incremental-hydration',
+            contentPath: 'guide/incremental-hydration',
           },
         ],
       },
@@ -582,36 +558,6 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'Angularアプリケーションの例',
             path: 'guide/i18n/example',
             contentPath: 'guide/i18n/example',
-          },
-        ],
-      },
-      {
-        label: 'アニメーション',
-        children: [
-          {
-            label: '概要',
-            path: 'guide/animations',
-            contentPath: 'guide/animations/overview',
-          },
-          {
-            label: 'トランジションとトリガー',
-            path: 'guide/animations/transition-and-triggers',
-            contentPath: 'guide/animations/transition-and-triggers',
-          },
-          {
-            label: '複雑なシーケンス',
-            path: 'guide/animations/complex-sequences',
-            contentPath: 'guide/animations/complex-sequences',
-          },
-          {
-            label: '再利用可能なアニメーション',
-            path: 'guide/animations/reusable-animations',
-            contentPath: 'guide/animations/reusable-animations',
-          },
-          {
-            label: 'ルート遷移アニメーション',
-            path: 'guide/animations/route-animations',
-            contentPath: 'guide/animations/route-animations',
           },
         ],
       },
@@ -794,8 +740,58 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
-    label: '拡張されたエコシステム',
+    label: '拡張エコシステム',
     children: [
+      {
+        label: 'NgModule',
+        path: 'guide/ngmodules/overview',
+        contentPath: 'guide/ngmodules/overview',
+      },
+      {
+        label: 'アニメーション',
+        children: [
+          {
+            label: '概要',
+            path: 'guide/animations',
+            contentPath: 'guide/animations/overview',
+          },
+          {
+            label: 'トランジションとトリガー',
+            path: 'guide/animations/transition-and-triggers',
+            contentPath: 'guide/animations/transition-and-triggers',
+          },
+          {
+            label: '複雑なシーケンス',
+            path: 'guide/animations/complex-sequences',
+            contentPath: 'guide/animations/complex-sequences',
+          },
+          {
+            label: '再利用可能なアニメーション',
+            path: 'guide/animations/reusable-animations',
+            contentPath: 'guide/animations/reusable-animations',
+          },
+          {
+            label: 'ルート遷移アニメーション',
+            path: 'guide/animations/route-animations',
+            contentPath: 'guide/animations/route-animations',
+          },
+        ],
+      },
+      {
+        label: 'RxJSとの併用',
+        children: [
+          {
+            label: 'Signalとの相互運用',
+            path: 'ecosystem/rxjs-interop',
+            contentPath: 'ecosystem/rxjs-interop/signals-interop',
+          },
+          {
+            label: 'コンポーネント出力との相互接続',
+            path: 'ecosystem/rxjs-interop/output-interop',
+            contentPath: 'ecosystem/rxjs-interop/output-interop',
+          },
+        ],
+      },
       {
         label: 'Service WorkerとPWA',
         children: [
@@ -872,6 +868,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
 export const TUTORIALS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   FIRST_APP_TUTORIAL_NAV_DATA,
   LEARN_ANGULAR_TUTORIAL_NAV_DATA,
+  DEFERRABLE_VIEWS_TUTORIAL_NAV_DATA,
   {
     path: DefaultPage.TUTORIALS,
     contentPath: 'tutorials/home',
@@ -1376,6 +1373,11 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'extended-diagnostics/NG8111',
         contentPath: 'reference/extended-diagnostics/NG8111',
       },
+      {
+        label: 'NG8113: Unused Standalone Imports',
+        path: 'extended-diagnostics/NG8113',
+        contentPath: 'reference/extended-diagnostics/NG8113',
+      },
     ],
   },
   {
@@ -1445,80 +1447,15 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'reference/migrations/route-lazy-loading',
         contentPath: 'reference/migrations/route-lazy-loading',
       },
-    ],
-  },
-  {
-    label: 'コンセプト',
-    children: [
       {
-        label: '概要',
-        path: 'reference/concepts',
-        contentPath: 'reference/concepts/overview',
+        label: 'Signal inputs',
+        path: 'reference/migrations/signal-inputs',
+        contentPath: 'reference/migrations/signal-inputs',
       },
       {
-        label: 'NgModule',
-        children: [
-          {
-            label: '概要',
-            path: 'guide/ngmodules',
-            contentPath: 'guide/ngmodules/overview',
-          },
-          {
-            label: 'JS Modules vs NgModules',
-            path: 'guide/ngmodules/vs-jsmodule',
-            contentPath: 'guide/ngmodules/vs-jsmodule',
-          },
-          {
-            label: 'Launching your app with a root module',
-            path: 'guide/ngmodules/bootstrapping',
-            contentPath: 'guide/ngmodules/bootstrapping',
-          },
-          {
-            label: 'Sharing NgModules',
-            path: 'guide/ngmodules/sharing',
-            contentPath: 'guide/ngmodules/sharing',
-          },
-          {
-            label: 'Frequently used NgModules',
-            path: 'guide/ngmodules/frequent',
-            contentPath: 'guide/ngmodules/frequent',
-          },
-          {
-            label: 'Feature modules',
-            path: 'guide/ngmodules/feature-modules',
-            contentPath: 'guide/ngmodules/feature-modules',
-          },
-          {
-            label: 'Types of feature modules',
-            path: 'guide/ngmodules/module-types',
-            contentPath: 'guide/ngmodules/module-types',
-          },
-          {
-            label: 'Providing dependencies',
-            path: 'guide/ngmodules/providers',
-            contentPath: 'guide/ngmodules/providers',
-          },
-          {
-            label: 'Singleton services',
-            path: 'guide/ngmodules/singleton-services',
-            contentPath: 'guide/ngmodules/singleton-services',
-          },
-          {
-            label: 'Lazy-loading feature modules',
-            path: 'guide/ngmodules/lazy-loading',
-            contentPath: 'guide/ngmodules/lazy-loading',
-          },
-          {
-            label: 'NgModule API',
-            path: 'guide/ngmodules/api',
-            contentPath: 'guide/ngmodules/api',
-          },
-          {
-            label: 'NgModule FAQs',
-            path: 'guide/ngmodules/faq',
-            contentPath: 'guide/ngmodules/faq',
-          },
-        ],
+        label: 'Signal queries',
+        path: 'reference/migrations/signal-queries',
+        contentPath: 'reference/migrations/signal-queries',
       },
     ],
   },

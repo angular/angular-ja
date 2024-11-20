@@ -2,7 +2,7 @@
 Angularシグナルは、アプリケーション全体で状態がどのように使用されているかを細かく追跡するシステムであり、フレームワークがレンダリングの更新を最適化することを可能にします。
 </docs-decorative-header>
 
-Tip: この包括的なガイドを読む前に、Angularの[基本概念](essentials/managing-dynamic-data)をご覧ください。
+Tip: この包括的なガイドを読む前に、Angularの[基本概念](essentials/signals)をご覧ください。
 
 ## シグナルとは何か？
 
@@ -118,8 +118,6 @@ effect(() => {
 
 <docs-callout critical title="エフェクトを使用しない場合">
 状態変更の伝播にエフェクトを使用することは避けてください。これは、`ExpressionChangedAfterItHasBeenChecked`エラー、無限の循環更新、または不要な変更検知サイクルが発生する可能性があります。
-
-これらのリスクのため、Angularはデフォルトで、エフェクト内でシグナルを設定することを防ぎます。これは、エフェクトを作成する際に`allowSignalWrites`フラグを設定することで有効にできます。
 
 代わりに、`computed` シグナルを使用して、他の状態に依存する状態をモデル化してください。
 </docs-callout>
@@ -249,3 +247,7 @@ effect((onCleanup) => {
   });
 });
 ```
+
+## RxJSとシグナルを併用する
+
+シグナルとRxJSの相互運用性の詳細については、[RxJSとAngularシグナルの相互運用](ecosystem/rxjs-interop) を参照してください。

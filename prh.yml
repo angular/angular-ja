@@ -208,3 +208,7 @@ rules:
     pattern: 
       - /バリデータ(?!ー)/
       - 検証子
+
+  - expected: リアクティビティ
+    pattern: 
+      - 反応性

@@ -50,9 +50,8 @@ class HeroService {}
 
 例：
 
-<docs-code language="typescript" highlight="[5]">
+<docs-code language="typescript" highlight="[4]">
 @Component({
-  standalone: true,
   selector: 'hero-list',
   template: '...',
   providers: [HeroService]

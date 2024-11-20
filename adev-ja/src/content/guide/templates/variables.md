@@ -6,8 +6,6 @@ Angularには、テンプレート内で2種類の変数宣言があります。
 
 Angularの `@let` 構文を使用すると、ローカル変数を定義し、テンプレート全体で再利用できます。これは、[JavaScriptの`let`構文](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)に似ています。
 
-IMPORTANT: `@let`構文は現在、[Developer Preview](/reference/releases#developer-preview)にあります。
-
 ### `@let` の使用方法
 
 `@let` を使用して、テンプレート式の結果に基づいた値を持つ変数を宣言します。 Angularは、[バインディング](./bindings)と同様に、指定された式を使用して変数の値を自動的に最新の状態に保ちます。

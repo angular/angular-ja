@@ -1,0 +1,12 @@
+diff --git a/adev/src/app/app.component.html b/adev/src/app/app.component.html
+index 07ffbaf51b..19e4798fac 100644
+--- a/adev/src/app/app.component.html
++++ b/adev/src/app/app.component.html
+@@ -1,6 +1,6 @@
+ @defer (when isBrowser) {
+   <adev-progress-bar />
+-  <docs-top-level-banner expiry="2024-12-06" id="state-of-js-2024" link="https://survey.devographics.com/en-US/survey/state-of-js/2024?source=angular_homepage" text="Share your experience with Angular in The State of JavaScript 2024 survey"  />
++  <docs-top-level-banner expiry="2024-12-06" id="state-of-js-2024" link="https://survey.devographics.com/en-US/survey/state-of-js/2024?source=angular_homepage" text="State of JavaScript 2024 アンケートであなたの経験を共有しましょう!"  />
+ }
+ <button (click)="focusFirstHeading()" class="adev-skip">Skip to main content</button>
+ 

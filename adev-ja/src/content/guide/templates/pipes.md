@@ -203,7 +203,7 @@ import { Pipe } from '@angular/core';
 export class MyCustomTransformationPipe {}
 ```
 
-`@Pipe` デコレータは `name` を必要とします。この `name` は、テンプレート内でパイプをどのように使用するかを制御します。
+`@Pipe` デコレーターは `name` を必要とします。この `name` は、テンプレート内でパイプをどのように使用するかを制御します。
 
 ### カスタムパイプの名前付け規則
 

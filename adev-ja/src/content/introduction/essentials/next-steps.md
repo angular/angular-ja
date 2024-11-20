@@ -13,7 +13,7 @@ Angularの主要なコンセプトに入門できました。学んだことを�
 
 ## チュートリアル
 
-ブラウザ内のチュートリアルでこれらの主なコンセプトを実践、またはAngular CLIを使ってローカルで最初のアプリを作成しましょう。
+ブラウザ内のチュートリアルでこれらの主なコンセプトを実践、またはAngular CLIを使ってローカルで最初のアプリケーションを作成しましょう。
 
 <docs-pill-row>
   <docs-pill title="Angular の基礎を学ぶ" href="tutorials/learn-angular" />

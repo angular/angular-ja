@@ -45,7 +45,7 @@ export class CustomSlider {
 }
 ```
 
-**Angularはコンパイル時に静的に入力を記録します。**実行時に入力を追加または削除することはできません。
+**Angularはコンパイル時に静的に入力を記録します。**実行時に入力の追加や削除はできません。
 
 `input`関数は、Angularコンパイラにとって特別な意味を持ちます。**`input`は、コンポーネントとディレクティブのプロパティ初期化子でのみ呼び出すことができます。**
 
@@ -118,7 +118,7 @@ function trimString(value: string | undefined): string {
 
 入力変換の最も一般的なユースケースは、テンプレートでより広い範囲の値型を受け入れることであり、多くの場合`null`と`undefined`を含みます。
 
-**入力変換関数は、ビルド時に静的に分析可能でなければなりません。**条件付きで、または式の評価の結果として、変換関数を設定することはできません。
+**入力変換関数は、ビルド時に静的に分析可能でなければなりません。**条件付きで、または式の評価の結果として、変換関数は設定できません。
 
 **入力変換関数は常に[純粋関数](https://en.wikipedia.org/wiki/Pure_function)でなければなりません。**変換関数外の状態に依存すると、予期せぬ動作につながる可能性があります。
 
@@ -271,7 +271,7 @@ DOM要素のプロパティ（HTMLElementなど）と競合する入力名を選
 
 TIP: Angularチームは新しいプロジェクトにはシグナルベースの`input`関数の使用を推奨していますが、元のデコレーターベースの`@Input` APIは引き続き完全にサポートされています。
 
-コンポーネント入力を宣言する代わりに、プロパティに`@Input`デコレーターを追加することもできます。
+コンポーネント入力を宣言する代わりに、プロパティに`@Input`デコレーターを追加できます。
 
 <docs-code language="ts" highlight="[3]">
 @Component({...})
@@ -340,7 +340,7 @@ export class CustomSlider {
 
 ### ゲッターとセッターを持つ入力
 
-デコレーターベースの入力を使用する場合、ゲッターとセッターで実装されたプロパティを入力にすることができます。
+デコレーターベースの入力を使用する場合、ゲッターとセッターで実装されたプロパティを入力にできます。
 
 <docs-code language="ts">
 export class CustomSlider {
@@ -354,7 +354,7 @@ set value(newValue: number) { this.internalValue = newValue; }
 private internalValue = 0; }
 </docs-code>
 
-パブリックセッターのみを定義することで、_書き込み専用_の入力を作成することもできます。
+パブリックセッターのみを定義することで、_書き込み専用_の入力を作成できます。
 
 <docs-code language="ts">
 export class CustomSlider {
@@ -368,11 +368,11 @@ private internalValue = 0; }
 
 可能な場合は、**ゲッターとセッターの代わりに入力変換を使用することをお勧めします。**
 
-複雑なゲッターとセッター、またはコストの高いゲッターとセッターは避けてください。Angularは入力のセッターを複数回呼び出す可能性があり、セッターがDOM操作などのコストの高い動作を実行する場合、アプリケーションのパフォーマンスに悪影響を与える可能性があります。
+複雑なゲッターとセッター、またはコストの高いゲッターとセッターは避けてください。Angularは入力のセッターを複数回呼び出す可能性があり、セッターがDOM操作などのコストの高い処理を実行する場合、アプリケーションのパフォーマンスに悪影響を与える可能性があります。
 
 ## `@Component`デコレーターでの入力の指定
 
-`@Input`デコレーターに加えて、`@Component`デコレーターの`inputs`プロパティを使用して、コンポーネントの入力を指定することもできます。これは、コンポーネントが基本クラスからプロパティを継承する場合に役立ちます。
+`@Input`デコレーターに加えて、`@Component`デコレーターの`inputs`プロパティを使用して、コンポーネントの入力を指定できます。これは、コンポーネントが基本クラスからプロパティを継承する場合に役立ちます。
 
 <docs-code language="ts" highlight="[4]">
 // `CustomSlider` inherits the `disabled` property from `BaseSlider`.
@@ -383,7 +383,7 @@ private internalValue = 0; }
 export class CustomSlider extends BaseSlider { }
 </docs-code>
 
-文字列の後にコロンを付けてエイリアスを`inputs`リストに指定することもできます。
+文字列の後にコロンを付けてエイリアスを`inputs`リストに指定できます。
 
 <docs-code language="ts" highlight="[4]">
 // `CustomSlider` inherits the `disabled` property from `BaseSlider`.

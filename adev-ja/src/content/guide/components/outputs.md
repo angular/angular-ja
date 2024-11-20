@@ -69,7 +69,7 @@ export class CustomSlider {
 
 このエイリアスは、TypeScriptコードでのプロパティの使用には影響しません。
 
-一般的に、コンポーネントの出力のエイリアスは避けるべきですが、この機能は、元の名前のエイリアスを保持しながらプロパティの名前を変更する場合や、ネイティブDOMイベントの名前との衝突を避ける場合に役立ちます。
+一般的に、コンポーネントの出力のエイリアスは避けるべきですが、この機能は元の名前のエイリアスを保持しながらプロパティの名前を変更する場合や、ネイティブDOMイベントの名前との衝突を避ける場合に役立ちます。
 
 ## プログラムによる出力の購読
 
@@ -84,7 +84,7 @@ someComponentRef.instance.someEventProperty.subscribe(eventData => {
 });
 ```
 
-Angularは、サブスクライバーを持つコンポーネントを破棄するときに、イベントサブスクリプションを自動的にクリーンアップします。または、イベントから手動で購読解除することもできます。`subscribe`関数は、`unsubscribe`メソッドを持つ`OutputRefSubscription`を返します。
+Angularは、サブスクライバーを持つコンポーネントを破棄するときに、イベントサブスクリプションを自動的にクリーンアップします。または、イベントから手動で購読解除できます。`subscribe`関数は、`unsubscribe`メソッドを持つ`OutputRefSubscription`を返します。
 
 ```typescript
 const eventSubscription = someComponent.someEventProperty.subscribe(eventData => {
@@ -108,12 +108,12 @@ HTMLElementなどのDOM要素のイベントと衝突する出力名を選択す
 
 outputsとRxJSの相互運用性については、[RxJS interop with component and directive outputs](ecosystem/rxjs-interop/output-interop)を参照してください。
 
-## `@Output`デコレータを使用した出力の宣言
+## `@Output`デコレーターを使用した出力の宣言
 
 Tip: Angularチームは新規プロジェクトでは`output`関数の使用を推奨していますが、
-元のデコレータベースの`@Output`APIは引き続き完全にサポートされています。
+元のデコレーターベースの`@Output`APIは引き続き完全にサポートされています。
 
-代替として、新しい`EventEmitter`にプロパティを割り当て、`@Output`デコレータを追加することで、カスタムイベントを定義できます。
+代替として、新しい`EventEmitter`にプロパティを割り当て、`@Output`デコレーターを追加することで、カスタムイベントを定義できます。
 
 <docs-code language="ts" highlight="">
 @Component({/*...*/})
@@ -124,9 +124,9 @@ export class ExpandablePanel {
 
 `EventEmitter`の`emit`メソッドを呼び出すことで、イベントを発生させることができます。
 
-### `@Output`デコレータを使用したエイリアス
+### `@Output`デコレーターを使用したエイリアス
 
-`@Output`デコレータは、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
+`@Output`デコレーターは、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
 <docs-code language="ts" highlight="">
 @Component({/*...*/})
@@ -141,9 +141,9 @@ export class CustomSlider {
 
 このエイリアスは、TypeScriptコードでのプロパティの使用には影響しません。
 
-## `@Component`デコレータでの出力の指定
+## `@Component`デコレーターでの出力の指定
 
-`@Output`デコレータに加えて、`@Component`デコレータの`outputs`プロパティを使用して、コンポーネントの出力を指定することもできます。これは、コンポーネントが基底クラスからプロパティを継承する場合に役立ちます。
+`@Output`デコレーターに加えて、`@Component`デコレーターの`outputs`プロパティを使用して、コンポーネントの出力を指定できます。これは、コンポーネントが基底クラスからプロパティを継承する場合に役立ちます。
 
 <docs-code language="ts" highlight="">
 // `CustomSlider`は`BaseSlider`から`valueChanged`プロパティを継承します。
@@ -154,7 +154,7 @@ export class CustomSlider {
 export class CustomSlider extends BaseSlider {}
 </docs-code>
 
-`outputs`リストにエイリアスを指定することもできます。エイリアスは文字列の後にコロンを付けて記述します。
+`outputs`リストにエイリアスも指定できます。エイリアスは文字列の後にコロンを付けて記述します。
 
 <docs-code language="ts" highlight="">
 // `CustomSlider`は`BaseSlider`から`valueChanged`プロパティを継承します。

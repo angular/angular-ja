@@ -1,137 +1,123 @@
 <docs-decorative-header title="コンポーネント" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
-Angularでアプリケーションを作成するための基本的な構成要素。
+Angularでアプリケーションを作成するための基本的な構成要素
 </docs-decorative-header>
 
-コンポーネントは、プロジェクトを理解しやすい部品に分割し、明確な責任を持たせることで、コードの保守性とスケーラビリティを向上させます。
-
-Todoアプリケーションをコンポーネントのツリーに分解する例を示します。
-
-```mermaid
-flowchart TD
-    A[TodoApp]-->B
-    A-->C
-    B[TodoList]-->D
-    C[TodoMetrics]
-    D[TodoListItem]
-```
-
-このガイドでは、Angularでコンポーネントを作成および使用する方法について説明します。
+コンポーネントは、Angularアプリケーションの主要な構成要素です。各コンポーネントは、より大きなウェブページの一部を表します。アプリケーションをコンポーネントに整理することで、プロジェクトに構造が与えられ、コードが特定の部分に明確に分割されるため、保守と拡張が容易になります。
 
 ## コンポーネントの定義
 
-すべてのコンポーネントには、核となる次のプロパティがあります。
+すべてのコンポーネントには、いくつかの主要な部分があります。
 
-1. いくつかの設定を含む `@Component`[デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)
-2. DOMにレンダリングされる内容を制御するHTMLテンプレート
-3. HTMLでコンポーネントがどのように使用されるかを定義する [CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)
-4. 状態管理、ユーザー入力処理、サーバーからのデータフェッチなどの動作を持つTypeScriptクラス
+1. Angularによって使用されるいくつかの設定を含む`@Component`[デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)。
+2. DOMにレンダリングされる内容を制御するHTMLテンプレート。
+3. HTMLでコンポーネントがどのように使用されるかを定義する[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)。
+4. ユーザー入力の処理やサーバーへのリクエストの実行など、動作を定義するTypeScriptクラス。
 
-TodoListItemコンポーネントの簡略化された例を次に示します。
+`UserProfile`コンポーネントの簡略化された例を以下に示します。
 
 ```angular-ts
-// todo-list-item.component.ts
+// user-profile.ts
 @Component({
-  selector: 'todo-list-item',
+  selector: 'user-profile',
   template: `
-    <li>(TODO) Read Angular Essentials Guide</li>
+    <h1>User profile</h1>
+    <p>This is the user profile page</p>
   `,
 })
-export class TodoListItem {
-  /* コンポーネントの動作はここで定義します。 */
-}
+export class UserProfile { /* Your component code goes here */ }
 ```
 
-コンポーネントでよく見られるその他のメタデータには次のものがあります。
-
-- `standalone: true` — コンポーネントの作成を簡素化する推奨アプローチ
-- `styles` — コンポーネントに適用するCSSスタイルを含む文字列または文字列の配列
-
-これを踏まえて、`TodoListItem` コンポーネントの更新バージョンを示します。
+`@Component`デコレーターは、テンプレートに適用するCSSを指定するために、オプションで`styles`プロパティも受け付けます。
 
 ```angular-ts
-// todo-list-item.component.ts
+// user-profile.ts
 @Component({
-  standalone: true,
-  selector: 'todo-list-item',
+  selector: 'user-profile',
   template: `
-    <li>(TODO) Read Angular Essentials Guide</li>
+    <h1>User profile</h1>
+    <p>This is the user profile page</p>
   `,
-  styles: `
-    li {
-      color: red;
-      font-weight: 300;
-    }
-  `,
+  styles: `h1 { font-size: 3em; } `,
 })
-export class TodoListItem {
-  /* コンポーネントの動作はここで定義します。 */
-}
+export class UserProfile { /* Your component code goes here */ }
 ```
 
-### HTMLとCSSを別ファイルに分離する
+### HTMLとCSSを別々のファイルに分離する
 
-HTMLやCSSを別ファイルで管理することを好むチーム向けに、Angularは `templateUrl` と `styleUrl` の2つの追加プロパティを提供します。
-
-前の `TodoListItem` コンポーネントを使用して、代替アプローチは次のようになります。
+`templateUrl`と`styleUrl`を使用して、コンポーネントのHTMLとCSSを別々のファイルで定義できます。
 
 ```angular-ts
-// todo-list-item.component.ts
+// user-profile.ts
 @Component({
-  standalone: true,
-  selector: 'todo-list-item',
-  templateUrl: './todo-list-item.component.html',
-  styleUrl: './todo-list-item.component.css',
+  selector: 'user-profile',
+  templateUrl: 'user-profile.html',
+  styleUrl: 'user-profile.css',
 })
-export class TodoListItem {
-  /* コンポーネントの動作はここで定義します。 */
+export class UserProfile {
+  // コンポーネントの動作はここに定義されます
 }
 ```
 
 ```angular-html
-<!-- todo-list-item.component.html -->
-<li>(TODO) Read Angular Essentials Guide</li>
+<!-- user-profile.html -->
+<h1>Use profile</h1>
+<p>This is the user profile page</p>
 ```
 
 ```css
-/* todo-list-item.component.css */
-li {
-  color: red;
-  font-weight: 300;
+/* user-profile.css */
+h1 {
+  font-size: 3em;
 }
 ```
 
 ## コンポーネントの使用
 
-コンポーネントアーキテクチャの利点の1つは、アプリケーションがモジュール化されることです。つまり、コンポーネントは他のコンポーネントの中で使用できます。
+複数のコンポーネントを組み合わせてアプリケーションを構築します。例えば、ユーザープロフィールページを構築する場合、ページを次のような複数のコンポーネントに分割できます。
 
-コンポーネントを使用するには、次の手順を実行します。
-
-1. ファイルにコンポーネントをインポートする
-2. コンポーネントの `imports` 配列に追加する
-3. テンプレートでコンポーネントのセレクターを使用する
-
-前の `TodoListItem` コンポーネントをインポートする `TodoList` コンポーネントの例を次に示します。
-
-```angular-ts
-// todo-list.component.ts
-import {TodoListItem} from './todo-list-item.component.ts';
-
-@Component({
-  standalone: true,
-  imports: [TodoListItem],
-  template: `
-    <ul>
-      <todo-list-item></todo-list-item>
-    </ul>
-  `,
-})
-export class TodoList {}
+```mermaid
+flowchart TD
+    A[UserProfile]-->B
+    A-->C
+    B[UserBiography]-->D
+    C[ProfilePhoto]
+    D[UserAddress]
 ```
 
-## 次のステップ
+ここでは、`UserProfile`コンポーネントは他のいくつかのコンポーネントを使用して最終的なページを作成します。
 
-Angularのコンポーネントの仕組みがわかったところで、アプリケーションに動的なデータを追加して管理する方法について学びましょう。
+コンポーネントをインポートして使用するには、次の手順が必要です。
+1. コンポーネントのTypeScriptファイルで、使用するコンポーネントの`import`文を追加します。
+2. `@Component`デコレーターで、使用するコンポーネントの`imports`配列にエントリを追加します。
+3. コンポーネントのテンプレートで、使用するコンポーネントのセレクターと一致する要素を追加します。
+
+`UserProfile`コンポーネントが`ProfilePhoto`コンポーネントをインポートする例を以下に示します。
+
+```angular-ts
+// user-profile.ts
+import {ProfilePhoto} from 'profile-photo.ts';
+
+@Component({
+  selector: 'user-profile',
+  imports: [ProfilePhoto],
+  template: `
+    <h1>User profile</h1>
+    <profile-photo />
+    <p>This is the user profile page</p>
+  `,
+})
+export class UserProfile {
+  // コンポーネントの動作はここに定義されます
+}
+```
+
+Tip: Angularコンポーネントについてもっと知りたいですか？ 詳細については、[詳細なコンポーネントガイド](guide/components)を参照してください。
+
+## 次の手順
+
+Angularでのコンポーネントの動作が分かったところで、アプリケーションに動的なデータをどのように追加して管理するかを学ぶ時です。
 
 <docs-pill-row>
-  <docs-pill title="動的なデータの管理" href="essentials/managing-dynamic-data" />
+  <docs-pill title="シグナルによるリアクティビティ" href="essentials/signals" />
+  <docs-pill title="詳細なコンポーネントガイド" href="guide/components" />
 </docs-pill-row>

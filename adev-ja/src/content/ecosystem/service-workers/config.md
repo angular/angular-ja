@@ -197,6 +197,7 @@ export interface DataGroup {
     maxSize: number;
     maxAge: string;
     timeout?: string;
+    refreshAhead?: string;
     strategy?: 'freshness' | 'performance';
   };
   cacheQueryOptions?: {
@@ -270,6 +271,22 @@ The network timeout is how long the Angular service worker waits for the network
 
 For example, the string `5s30u` translates to five seconds and 30 milliseconds of network timeout.
 
+
+##### `refreshAhead`
+
+This duration string specifies the time ahead of the expiration of a cached resource when the Angular service worker should proactively attempt to refresh the resource from the network.
+The `refreshAhead` duration is an optional configuration that determines how much time before the expiration of a cached response the service worker should initiate a request to refresh the resource from the network.
+
+| Suffixes | Details |
+|:---      |:---     |
+| `d`      | Days         |
+| `h`      | Hours        |
+| `m`      | Minutes      |
+| `s`      | Seconds      |
+| `u`      | Milliseconds |
+
+For example, the string `1h30m` translates to one hour and 30 minutes ahead of the expiration time.
+
 ##### `strategy`
 
 The Angular service worker can use either of two caching strategies for data resources.
@@ -330,7 +347,7 @@ A request is considered to be a navigation request if:
   * The URL must not contain a file extension (that is, a `.`) in the last path segment
   * The URL must not contain `__`
 
-HELPFUL: To configure whether navigation requests are sent through to the network or not, see the [navigationRequestStrategy](#navigationrequeststrategy) section.
+HELPFUL: To configure whether navigation requests are sent through to the network or not, see the [navigationRequestStrategy](#navigationrequeststrategy) section and [applicationMaxAge](#application-max-age) sections.
 
 #### Matching navigation request URLs
 
@@ -374,3 +391,7 @@ This optional property enables you to configure how the service worker handles n
 | `'freshness'`   | Passes the requests through to the network and falls back to the `performance` behavior when offline. This value is useful when the server redirects the navigation requests elsewhere using a `3xx` HTTP redirect status code. Reasons for using this value include: <ul> <li> Redirecting to an authentication website when authentication is not handled by the application </li> <li> Redirecting specific URLs to avoid breaking existing links/bookmarks after a website redesign </li> <li> Redirecting to a different website, such as a server-status page, while a page is temporarily down </li> </ul> |
 
 IMPORTANT: The `freshness` strategy usually results in more requests sent to the server, which can increase response latency. It is recommended that you use the default performance strategy whenever possible.
+
+### `applicationMaxAge`
+
+This optional property enables you to configure how long the service worker will cache any requests. Within the `maxAge`, files will be served from cache. Beyond it, all requests will only be served from the network, including asset and data requests.

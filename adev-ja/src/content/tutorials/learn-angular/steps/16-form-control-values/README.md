@@ -61,4 +61,4 @@ export class UserComponent {
 
 テンプレートに入力値を表示し、プログラムでアクセスする方法を学ぶことができました。
 
-Angularを使用したフォーム管理の次の方法、リアクティブフォームに進む時が来ました。テンプレート駆動フォームの詳細については、[Angular フォームドキュメント](guide/forms/reactive-forms) を参照してください。
+Angularを使用したフォーム管理の次の方法、リアクティブフォームに進む時が来ました。テンプレート駆動フォームの詳細については、[Angular フォームドキュメント](guide/forms/template-driven-forms) を参照してください。

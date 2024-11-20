@@ -21,7 +21,7 @@ class UserComponent {
 <docs-code header="app.component.ts" language="angular-ts" highlight="[3]">
 @Component({
   ...
-  template: `<app-user occupation="Angular Developer"><app-user/>`
+  template: `<app-user occupation="Angular Developer"></app-user>`
 })
 class AppComponent {}
 </docs-code>

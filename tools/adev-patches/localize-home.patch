@@ -5,11 +5,11 @@ index 53d930d66d..732d40ec53 100644
 @@ -3,8 +3,8 @@
      <div class="adev-top-content">
        <!-- Banner(s) can be edited here! -->
-       <a href="https://goo.gle/angular-v18" class="adev-banner" target="_blank">
--        <h1 tabindex="-1">Angular v18 is now available!</h1>
--        <p class="adev-banner-cta">Read about our newest release</p>
-+        <h1 tabindex="-1">Angular v18 が利用可能です！</h1>
-+        <p class="adev-banner-cta">最新リリースについて読む</p>
+       <a href="https://goo.gle/angular-v19" class="adev-banner" target="_blank">
+-        <h1 tabindex="-1">Angular v19 is here!</h1>
+-        <p class="adev-banner-cta">Watch the all-new developer event now.</p>
++        <h1 tabindex="-1">Angular v19 が利用可能です！</h1>
++        <p class="adev-banner-cta">今すぐ開発者向けイベントを見よう!</p>
        </a>
      </div>
    </div>

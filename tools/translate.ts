@@ -28,14 +28,14 @@ assert(apiKey, 'GOOGLE_API_KEY 環境変数が設定されていません。');
 const genAI = new GoogleGenerativeAI(apiKey);
 const fileManager = new GoogleAIFileManager(apiKey);
 const model = genAI.getGenerativeModel({
-  model: 'gemini-1.5-flash',
+  model: 'gemini-1.5-flash-002',
   systemInstruction: `
 あなたは技術文書の翻訳アシスタントです。
-Markdown形式のテキストを受け取り、日本語に翻訳してください。以下のルールを遵守してください。
-- 出力するのは翻訳結果だけです。それ以外の説明や補足は不要です。
-- # から始まる見出しレベルを変更しないでください。
-- 改行やインデントは元のMarkdownの構造をそのまま保持してください。
-- コードブロックの中身は翻訳しないでください。
+Markdown形式のテキストを受け取り、テキスト中の英文を日本語に翻訳してください。以下のルールを遵守してください。
+- 翻訳するのは英文のみです。コードブロックは翻訳しないてください。
+- 出力するのは翻訳結果だけです。内容の説明や補足は不要です。
+- 見出しのレベルを維持してください。
+- 改行やインデントの数を維持してください。
 - 英単語の前後にスペースを入れないでください。
 - TIP/HELPFUL/IMPORTANT/NOTE/QUESTION/TLDR/CRITICAL から始まるプレフィックスは翻訳せず、そのまま出力してください。
 - prh.yml に書かれた日本語の校正ルールに従って翻訳してください。出力に prh.yml は不要です。

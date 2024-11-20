@@ -22,6 +22,7 @@ permissions:
 
 env:
   BUILD_DIR: build/dist/bin/adev/build/browser
+  PREVIEW_PROJECT: angular-ja
 
 jobs:
   deploy:
@@ -29,43 +30,11 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
-      - name: Download adev preview artifact from previous workflow run
-        uses: actions/download-artifact@v4
+      - uses: angular/dev-infra/github-actions/previews/upload-artifacts-to-firebase@53fb7c37cf14343f14ed79e2fefbbb2489ead4ee
         with:
-          name: adev-preview
-          path: ${{ env.BUILD_DIR }}
           github-token: '${{secrets.GITHUB_TOKEN}}'
-          run-id: ${{ github.event.workflow_run.id }}
-      - name: Extract pull request number
-        id: pr-number
-        run: |
-          PR_NUMBER=$(cat ./$BUILD_DIR/__metadata__pull_number.txt)
-          echo 'value=$PR_NUMBER' >> $GITHUB_OUTPUT
-      - name: Deploy to Firebase Hosting Preview
-        id: firebase-deploy
-        uses: FirebaseExtended/action-hosting-deploy@v0.9.0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          projectId: angular-ja
-          channelId: pr-${{ steps.pr-number.outputs.value }}
-          expires: 7d
-          disableComment: true
-      - name: Find Comment
-        uses: peter-evans/find-comment@v3
-        id: find-comment
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ steps.pr-number.outputs.value }}
-          comment-author: 'github-actions[bot]'
-          body-includes: 'Preview deployed'
-      - name: Comment on pull request
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ steps.pr-number.outputs.value }}
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
-          edit-mode: replace
-          body: |
-            Preview deployed: ${{ steps.firebase-deploy.outputs.details_url }} (commit: ${{ github.event.workflow_run.head_sha }})
-            
+          workflow-artifact-name: 'adev-preview'
+          firebase-config-dir: './'
+          firebase-public-dir: './adev/build/browser'
+          firebase-project-id: '${{env.PREVIEW_PROJECT}}'
+          firebase-service-key: '${{secrets.FIREBASE_SERVICE_ACCOUNT}}'            

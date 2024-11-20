@@ -93,7 +93,7 @@ Note: これらは、以前は\*ngIf、\*ngFor、\*ngSwitchディレクティブ
 @for (item of items; track item.name) {
   <li> {{ item.name }}</li>
 } @empty {
-  <li> There are no items.</li>
+  <li aria-hidden="true"> There are no items.</li>
 }
 ```
 

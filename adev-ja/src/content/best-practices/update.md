@@ -13,7 +13,7 @@ HELPFUL: 現在AngularJSを使用している場合は、[AngularJS からのア
 
 ## 新しいリリースの通知を受け取る
 
-新しいリリースが利用可能になったときに通知を受け取るには、Twitterで [@angular](https://twitter.com/angular "@angular on Twitter") をフォローするか、[Angular ブログ](https://blog.angular.dev "Angular ブログ")を購読してください。
+新しいリリースが利用可能になったときに通知を受け取るには、Twitterで [@angular](https://x.com/angular "@angular on X (formerly Twitter)") をフォローするか、[Angular ブログ](https://blog.angular.dev "Angular ブログ")を購読してください。
 
 ## 新しい機能について学ぶ
 

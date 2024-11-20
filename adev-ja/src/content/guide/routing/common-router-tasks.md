@@ -474,6 +474,20 @@ gotoItems(hero: Hero) {
 必要に応じてモジュールを遅延読み込みするようにルートを構成できます。つまり、アプリケーションが起動したときにすべてのモジュールを読み込むのではなく、必要に応じてモジュールを読み込みます。
 さらに、アプリケーションの一部をバックグラウンドでプリロードして、ユーザー体験を向上させることができます。
 
+どのルートでも、`loadComponent:` を使用することで、ルーティングされるスタンドアロンコンポーネントを遅延読込できます。
+
+<docs-code header="Lazy loading a standalone component" language="typescript">
+
+const routes: Routes = [
+  {
+    path: 'lazy',
+    loadComponent: () => import('./lazy.component').then(c => c.LazyComponent)
+  }
+];
+</docs-code>
+これは、ロードされたコンポーネントがスタンドアロンである限り機能します。
+
+
 遅延読み込みとプリロードの詳細については、専用のガイド [遅延読み込み](guide/ngmodules/lazy-loading) を参照してください。
 
 ## 権限のないアクセスの防止

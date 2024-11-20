@@ -10,10 +10,10 @@ import {Component, output} from '@angular/core';
 
 @Component({...})
 export class MyComp {
-  onNameChange = output<string>()    // OutputEmitterRef<string>
+  nameChange = output<string>()    // OutputEmitterRef<string>
 
   setNewName(newName: string) {
-    this.onNameChange.emit(newName);
+    this.nameChange.emit(newName);
   }
 }
 </docs-code>
@@ -22,7 +22,7 @@ export class MyComp {
 親コンポーネントは、イベントバインディング構文を使用して、テンプレート内の出力を購読できます。
 
 ```angular-html
-<my-comp (onNameChange)="showNewName($event)" />
+<my-comp (nameChange)="showNewName($event)" />
 ```
 
 ## 出力のエイリアス
@@ -32,11 +32,11 @@ Angularは、クラスメンバーの名前を出力の名前として使用し�
 
 ```typescript
 class MyComp {
-  onNameChange = output({alias: 'ngxNameChange'});
+  nameChange = output({alias: 'ngxNameChange'});
 }
 ```
 
-これにより、ユーザーは `(ngxNameChange)` を使用して出力にバインドできます。コンポーネント内では、`this.onNameChange` を使用して出力エミッターにアクセスできます。
+これにより、ユーザーは `(ngxNameChange)` を使用して出力にバインドできます。コンポーネント内では、`this.nameChange` を使用して出力エミッターにアクセスできます。
 
 ## プログラムによる購読
 
@@ -46,7 +46,7 @@ class MyComp {
 ```ts
 const myComp = viewContainerRef.createComponent(...);
 
-myComp.instance.onNameChange.subscribe(newName => {
+myComp.instance.nameChange.subscribe(newName => {
   console.log(newName);
 });
 ```
@@ -87,13 +87,13 @@ import {outputToObservable} from '@angular/core/rxjs-interop';
 
 @Component(...)
 class MyComp {
-  onNameChange = output<string>();
+  nameChange = output<string>();
 }
 
 // `MyComp` へのインスタンス参照。
 const myComp: MyComp;
 
-outputToObservable(this.myComp.instance.onNameChange) // Observable<string>
+outputToObservable(this.myComp.instance.nameChange) // Observable<string>
   .pipe(...)
   .subscribe(...);
 </docs-code>

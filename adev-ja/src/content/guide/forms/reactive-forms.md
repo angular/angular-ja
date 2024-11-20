@@ -259,7 +259,7 @@ ng generate component ProfileEditor
 </docs-step>
 
 <docs-step title="FormBuilder サービスの注入">
-`FormBuilder` サービスは、リアクティブフォームモジュールで提供される、注入可能なプロバイダーです。コンポーネントコンストラクターに追加することで、この依存関係を注入します。
+`FormBuilder` サービスは、リアクティブフォームモジュールで提供される、注入可能なプロバイダーです。`inject()`関数を使ってこの依存関係を注入します。
 
 <docs-code header="src/app/profile-editor/profile-editor.component.ts (コンストラクター)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="inject-form-builder"/>
 

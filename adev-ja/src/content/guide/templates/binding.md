@@ -155,7 +155,7 @@ Angularは、有効なCSSクラス名ではない文字列値を無視します�
 
 ```angular-ts
 @Component({
-  template: `<ul class="list" [class]="listType " [class.expanded]="isExpanded"> ...`,
+  template: `<ul class="list" [class]="listType" [class.expanded]="isExpanded"> ...`,
   ...
 })
 export class Listbox {
@@ -203,7 +203,7 @@ Angularは、レンダリングされた要素のCSSクラスの特定の順序�
 @Component({
   template: `
     <ul [style]="listStyles"> ... </ul>
-    <section [class]="sectionStyles"> ... </section>
+    <section [style]="sectionStyles"> ... </section>
   `,
   ...
 })
@@ -211,7 +211,7 @@ export class UserProfile {
   listStyles = 'display: flex; padding: 8px';
   sectionStyles = {
     border: '1px solid black',
-    font-weight: 'bold',
+    'font-weight': 'bold',
   };
 }
 ```

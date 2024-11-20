@@ -2400,7 +2400,7 @@ export const RECOMMENDATIONS: Step[] = [
 
   {
     action:
-      'Angular directives, components and pipes are now standalone by default. Specify "standalone: false" for declarations that are currently declared in an NgModule. The Angular CLI will automatically update your code to reflect that.',
+      'Angularディレクティブ、コンポーネント、パイプはデフォルトでスタンドアロンになりました。現在NgModuleで宣言されている宣言には "standalone: false" を指定してください。Angular CLIは自動的にコードを更新します。',
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2408,7 +2408,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'Remove `this.` prefix when accessing template reference variables. For example, refactor `<div #foo></div>{{ this.foo }}` to `<div #foo></div>{{ foo }}`',
+      'テンプレート参照変数にアクセスする際にthis.プレフィックスを削除してください。例えば、`<div #foo></div>{{ this.foo }}`を`<div #foo></div>{{ foo }}`にリファクタリングしてください。',
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2416,14 +2416,14 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'Replace usages of `BrowserModule.withServerTransition()` with injection of the `APP_ID` token to set the application `id` instead.',
+      '`BrowserModule.withServerTransition()`の使用を、アプリケーションの`id`を設定するための`APP_ID`トークンの注入に置き換えてください。',
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: '19.0.0-remove-browser-module-with-server-transition',
   },
   {
-    action: 'The `factories` property in `KeyValueDiffers` has been removed.',
+    action: '`KeyValueDiffers`の`factories`プロパティは削除されました。',
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2431,14 +2431,14 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'In angular.json, replace the "name" option with "project" for the `@angular/localize` builder.',
+      'angular.jsonで、`@angular/localize`ビルダーの"name"オプションを"project"に置き換えてください。',
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: '19.0.0_localize_builder_project_option',
   },
   {
-    action: 'Rename `ExperimentalPendingTasks` to `PendingTasks`.',
+    action: '`ExperimentalPendingTasks`を`PendingTasks`に名前変更します。',
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2446,14 +2446,14 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      "Update tests that relied on the `Promise` timing of effects to use `await whenStable()` or call `.detectChanges()` to trigger effects. For effects triggered during change detection, ensure they don't depend on the application being fully rendered or consider using `afterRenderEffect()`. Tests using faked clocks may need to fast-forward/flush the clock.",
+      "`Promise` のタイミングに依存していたエフェクトのテストを更新し、`await whenStable()` を使用するか、`.detectChanges()` を呼び出してエフェクトをトリガーするようにします。変更検出中にトリガーされるエフェクトについては、アプリケーションが完全にレンダリングされることに依存していないことを確認するか、`afterRenderEffect()` の使用を検討してください。フェイククロックを使用するテストでは、クロックを高速化/フラッシュする必要がある場合があります。",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: '19.0.0.1',
   },
   {
-    action: 'Upgrade to TypeScript version 5.5 or later.',
+    action: 'TypeScriptバージョン5.5以降にアップグレードしてください。',
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2461,7 +2461,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'Update tests using `fakeAsync` that rely on specific timing of zone coalescing and scheduling when a change happens outside the Angular zone (hybrid mode scheduling) as these timers are now affected by `tick` and `flush`.',
+      '`fakeAsync` を使用したテストを更新します。変更がAngularゾーン外で発生した場合（ハイブリッドモードのスケジュール）、ゾーンの連結とスケジュールの特定のタイミングに依存するテストは、これらのタイマーが現在`tick`と`flush`の影響を受けるためです。',
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2469,7 +2469,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      "When using `createComponent` API and not passing content for the first `ng-content`, provide `document.createTextNode('')` as a `projectableNode` to prevent rendering the default fallback content.",
+      "`createComponent` API を使用し、最初の `ng-content` にコンテンツを渡さない場合、デフォルトのフォールバックコンテンツのレンダリングを防ぐために、`projectableNode` として `document.createTextNode('')` を指定してください。",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2477,7 +2477,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'Update tests that rely on specific timing or ordering of change detection around custom elements, as the timing may have changed due to the switch to the hybrid scheduler.',
+      'カスタム要素周辺の変更検知の特定のタイミングまたは順序に依存するテストを更新します。ハイブリッドスケジューラへの切り替えにより、タイミングが変更されている可能性があるためです。',
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2485,7 +2485,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'Migrate from using `Router.errorHandler` to `withNavigationErrorHandler` from `provideRouter` or `errorHandler` from `RouterModule.forRoot`.',
+      '`Router.errorHandler`から`provideRouter`の`withNavigationErrorHandler`または`RouterModule.forRoot`の`errorHandler`へ移行します。',
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2493,14 +2493,14 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      'Update tests to handle errors thrown during `ApplicationRef.tick` by either triggering change detection synchronously or rejecting outstanding `ComponentFixture.whenStable` promises.',
+      '`ApplicationRef.tick`実行中に発生したエラーを、変更検知を同期的にトリガーするか、未処理の`ComponentFixture.whenStable` のPromiseを拒否することで処理するように、テストを更新します。',
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: '19.0.0-testbed-error-handling',
   },
   {
-    action: 'Update usages of `Resolve` interface to include `RedirectCommand` in its return type.',
+    action: '`Resolve`インターフェースの使用を更新して、戻り値の型に`RedirectCommand`を含めます。',
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2508,7 +2508,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      '`fakeAsync` will flush pending timers by default. For tests that require the previous behavior, explicitly pass `{flush: false}` in the options parameter.',
+      '`fakeAsync`はデフォルトで保留中のタイマーをフラッシュします。以前の動作が必要なテストでは、オプションパラメーターに明示的に`{flush: false}`を渡してください。',
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,

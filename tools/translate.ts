@@ -44,19 +44,49 @@ Markdown形式のテキストを受け取り、テキスト中の英文を日本
 
 async function main() {
   const args = parseArgs({
-    options: { write: { type: 'boolean', default: false } },
+    options: {
+      text: { type: 'string', default: '', short: 't' },
+      write: { type: 'boolean', default: false, short: 'w' },
+    },
     allowPositionals: true,
   });
-  const { write } = args.values;
+  const { write, text } = args.values;
   const [target] = args.positionals;
-  assert(target, 'ファイルまたはディレクトリを指定してください。');
 
-  const stats = await stat(target);
-  if (stats.isFile()) {
-    await translateFile(target, write);
-  } else if (stats.isDirectory()) {
-    await translateDir(target, write);
+  if (text) {
+    await translateText(text);
+  } else {
+    assert(target, 'ファイルまたはディレクトリを指定してください。');
+
+    const stats = await stat(target);
+    if (stats.isFile()) {
+      await translateFile(target, write);
+    } else if (stats.isDirectory()) {
+      await translateDir(target, write);
+    }
   }
+}
+
+async function translateText(text: string) {
+  // Upload files for translation
+  const prhFile = await fileManager.uploadFile(resolve(rootDir, 'prh.yml'), {
+    mimeType: 'text/plain',
+    displayName: 'prh.yml',
+  });
+  const translatedContent = await model
+    .generateContent([
+      {
+        fileData: {
+          mimeType: prhFile.file.mimeType,
+          fileUri: prhFile.file.uri,
+        },
+      },
+      `次のテキストを日本語に翻訳した結果を出力してください。\n`,
+      text,
+    ])
+    .then(({ response }) => response.text());
+
+  process.stdout.write(translatedContent);
 }
 
 async function translateDir(dir: string, forceWrite = false) {

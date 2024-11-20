@@ -247,7 +247,6 @@ export class UserService {
 <docs-code language="ts">
 import { AsyncPipe } from '@angular/common';
 @Component({
-  standalone: true,
   imports: [AsyncPipe],
   template: `
     @if (user$ | async; as user) {

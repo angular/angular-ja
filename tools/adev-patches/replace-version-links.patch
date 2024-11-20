@@ -11,8 +11,7 @@ index fcb60cbd77..f59ab93291 100644
    aioVersions: [
      {
        version: 'v17',
--      url: 'https://v17.angular.io/docs',
-+      url: 'https://v17.angular.jp/docs',
+       url: 'https://v17.angular.io/docs',
      },
      {
        version: 'v16',

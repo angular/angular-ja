@@ -293,8 +293,8 @@ Angular の HTML パーサーは大文字小文字を区別し、アッパーキ
 
 | シンボル名                                                                                                                                                                          | ファイル名 |
 |:---                                                                                                                                                                                  |:---       |
-| <docs-code hideCopy language="typescript"> @Pipe({ standalone: true, name: 'ellipsis' }) <br>export class EllipsisPipe implements PipeTransform { } </docs-code> | ellipsis.pipe.ts  |
-| <docs-code hideCopy language="typescript"> @Pipe({ standalone: true, name: 'initCaps' }) <br>export class InitCapsPipe implements PipeTransform { } </docs-code> | init-caps.pipe.ts |
+| <docs-code hideCopy language="typescript"> @Pipe({ name: 'ellipsis' }) <br>export class EllipsisPipe implements PipeTransform { } </docs-code> | ellipsis.pipe.ts  |
+| <docs-code hideCopy language="typescript"> @Pipe({ name: 'initCaps' }) <br>export class InitCapsPipe implements PipeTransform { } </docs-code> | init-caps.pipe.ts |
 
 ### ユニットテストファイル名
 

@@ -37,7 +37,7 @@ Markdown形式のテキストを受け取り、テキスト中の英文を日本
 - 見出しのレベルを維持してください。
 - 改行やインデントの数を維持してください。
 - 英単語の前後にスペースを入れないでください。
-- TIP/HELPFUL/IMPORTANT/NOTE/QUESTION/TLDR/CRITICAL から始まるプレフィックスは翻訳せず、そのまま出力してください。
+- Note/Tip/HELPFUL/IMPORTANT/QUESTION/TLDR/CRITICAL から始まるプレフィックスは翻訳せず、そのまま出力してください。
 - prh.yml に書かれた日本語の校正ルールに従って翻訳してください。出力に prh.yml は不要です。
 `.trim(),
 });

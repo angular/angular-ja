@@ -68,7 +68,7 @@ export class UserProfile {
 }
 ```
 
-TIP: Angularのシグナルについてもっと知りたいですか？[詳細なシグナルガイド](guide/signals)を参照してください。
+Tip: Angularのシグナルについてもっと知りたいですか？[詳細なシグナルガイド](guide/signals)を参照してください。
 
 ## 次の手順
 

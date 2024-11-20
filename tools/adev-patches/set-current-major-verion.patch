@@ -7,7 +7,7 @@ index 1bc572a030..40345f5292 100644
      {
        provide: CURRENT_MAJOR_VERSION,
 -      useValue: Number(VERSION.major),
-+      useValue: 18,
++      useValue: 19,
      },
      {provide: ENVIRONMENT, useValue: environment},
      {

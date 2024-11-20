@@ -36,7 +36,7 @@ export class ProfilePhoto { }
 
 デフォルトでは、コンポーネントのスタイルは、そのコンポーネントのテンプレートで定義された要素にのみ影響を与えます。Angularのスタイリングアプローチの詳細については、[コンポーネントのスタイリング](guide/components/styling)を参照してください。
 
-テンプレートとスタイルを別々のファイルに記述することもできます。
+テンプレートとスタイルを別々のファイルにも記述できます。
 
 <docs-code language="angular-ts" highlight="[3, 4]">
 @Component({

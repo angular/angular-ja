@@ -1,11 +1,11 @@
-# Deferrable views tutorial
+# 遅延可能ビューのチュートリアル
 
-This interactive tutorial consists of lessons that introduce the Angular deferrable views concepts.
+このインタラクティブなチュートリアルは、Angularの遅延可能ビューの概念を紹介するレッスンで構成されています。
 
-## How to use this tutorial
+## このチュートリアルの使用方法
 
-Each step represents a concept in Angular deferrable views. You can do one, or all of them.
+各ステップは、Angularの遅延可能ビューにおける概念を表しています。1つでも、すべてでも実行できます。
 
-If you get stuck, click "Reveal answer" at the top.
+行き詰まったら、上部の「解答を表示」をクリックしてください。
 
-Alright, let's [get started](/tutorials/deferrable-views/1-what-are-deferrable-views).
+さあ、[始めましょう](/tutorials/deferrable-views/1-what-are-deferrable-views)。

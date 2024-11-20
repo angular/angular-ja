@@ -1,16 +1,16 @@
-# What are deferrable views?
+# 遅延可能ビューとは？
 
-A fully rendered Angular page may contain many different components, directives, and pipes. While certain parts of the page should be shown to the user immediately, there may be portions that can wait to display until later.
-Angular's *deferrable views*, using the `@defer` syntax, can help you speed up your application by telling Angular to wait to download the JavaScript for the parts of the page that don't need to be shown right away.
+完全にレンダリングされたAngularページには、多くの異なるコンポーネント、ディレクティブ、パイプが含まれている場合があります。ページの特定の部分はユーザーにすぐに表示する必要がありますが、後で表示されるまで待つことができる部分もあります。
+Angularの*遅延可能ビュー*は`@defer`構文を使用して、すぐに表示する必要のないページの部分のJavaScriptのダウンロードをAngularに待たせることで、アプリケーションの高速化に役立ちます。
 
-In this activity, you'll learn how to use deferrable views to defer load a section of your component template.
+このアクティビティでは、遅延可能ビューを使用してコンポーネントテンプレートのセクションのロードを遅延させる方法を学習します。
 
 <hr>
 
 <docs-workflow>
 
-<docs-step title="Add a `@defer` block to a section of a template">
-In your `app.component.ts`, wrap the `article-comments` component with a `@defer` block to defer load it.
+<docs-step title="`@defer`ブロックをテンプレートの一部分に追加する。">
+`app.component.ts`で、`@defer`ブロックで`article-comments`コンポーネントをラップして、ロードを遅延させます。
 
 <docs-code language="angular-html">
 @defer {
@@ -18,9 +18,9 @@ In your `app.component.ts`, wrap the `article-comments` component with a `@defer
 }
 </docs-code>
 
-By default, `@defer` loads the `article-comments` component when the browser is idle.
+デフォルトでは、`@defer`はブラウザがアイドル状態のときに`article-comments`コンポーネントをロードします。
 
-In your browser's developer console, you can see that the `article-comments-component` lazy chunk file is loaded separately (The specific file names may change from run to run):
+ブラウザの開発者コンソールで、`article-comments-component`の遅延チャンクファイルが個別にロードされていることがわかります（ファイル名は実行ごとに変わる可能性があります）。
 
 <docs-code language="markdown">
 Initial chunk files | Names                      |  Raw size
@@ -35,4 +35,4 @@ chunk-T5UYXUSI.js   | article-comments-component |   1.84 kB |
 </docs-workflow>
 
 
-Great work! You’ve learned the basics of deferrable views.
+よくできました！あなたは遅延可能ビューの基本を学びました。

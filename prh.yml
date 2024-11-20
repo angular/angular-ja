@@ -69,6 +69,16 @@ rules:
     pattern: /(行|作)?為(?!替)/
     regexpMustEmpty: $1
 
+  - expected: 遅延可能ビュー
+    patterns:
+      - 遅延ビュー
+      - 遅延可能なビュー
+
+  - expected: 遅延読み込み
+    patterns:
+      - 遅延ロード
+      - 遅延読込
+
   # カタカナ語
 
   - expected: アプリケーション

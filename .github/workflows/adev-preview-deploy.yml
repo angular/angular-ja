@@ -21,7 +21,6 @@ permissions:
   actions: read
 
 env:
-  BUILD_DIR: build/dist/bin/adev/build/browser
   PREVIEW_PROJECT: angular-ja
 
 jobs:
@@ -35,6 +34,6 @@ jobs:
           github-token: '${{secrets.GITHUB_TOKEN}}'
           workflow-artifact-name: 'adev-preview'
           firebase-config-dir: './'
-          firebase-public-dir: './adev/build/browser'
+          firebase-public-dir: './build/dist/bin/adev/build/browser'
           firebase-project-id: '${{env.PREVIEW_PROJECT}}'
           firebase-service-key: '${{secrets.FIREBASE_SERVICE_ACCOUNT}}'            

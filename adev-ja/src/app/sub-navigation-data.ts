@@ -417,7 +417,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         ],
       },
       {
-        label: 'サーバーサイドとハイブリッドレンダリング',
+        label: 'サーバーサイド・ハイブリッドレンダリング',
         children: [
           {
             label: '概要',

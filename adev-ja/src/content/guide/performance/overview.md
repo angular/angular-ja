@@ -1,4 +1,4 @@
-<docs-decorative-header title="サーバーサイド & ハイブリッドレンダリング" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
+<docs-decorative-header title="サーバーサイド・ハイブリッドレンダリング" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
 さまざまなレンダリング戦略でアプリケーションのパフォーマンスを最適化する方法について学びましょう。
 </docs-decorative-header>
 

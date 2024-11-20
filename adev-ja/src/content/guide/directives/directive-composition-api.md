@@ -16,7 +16,6 @@ Angularディレクティブは、再利用可能な動作をカプセル化す�
 
 ```typescript
 @Component({
-  standalone: true,
   selector: 'admin-menu',
   template: 'admin-menu.html',
   hostDirectives: [MenuBehavior],
@@ -32,7 +31,7 @@ export class AdminMenu { }
 **Angularはコンパイル時に静的にホストディレクティブを適用します。** 
 ランタイム時には動的にディレクティブを追加できません。
 
-**`hostDirectives` で使用されるディレクティブは `standalone: true` でなければなりません。**
+**`hostDirectives` で使用されるディレクティブは `standalone: false` を指定できません。**
 
 **Angularは `hostDirectives` プロパティで適用されたディレクティブの `selector` を無視します。**
 
@@ -44,7 +43,6 @@ export class AdminMenu { }
 
 ```typescript
 @Component({
-  standalone: true,
   selector: 'admin-menu',
   template: 'admin-menu.html',
   hostDirectives: [{
@@ -69,7 +67,6 @@ export class AdminMenu { }
 
 ```typescript
 @Component({
-  standalone: true,
   selector: 'admin-menu',
   template: 'admin-menu.html',
   hostDirectives: [{
@@ -108,14 +105,12 @@ export class Tooltip { }
 
 // MenuWithTooltip は、他の複数のディレクティブから動作を構成できます
 @Directive({
-  standalone: true,
   hostDirectives: [Tooltip, Menu],
 })
 export class MenuWithTooltip { }
 
 // CustomWidget は、すでに構成されている MenuWithTooltip からの動作を適用できます
 @Directive({
-  standalone: true,
   hostDirectives: [MenuWithTooltip],
 })
 export class SpecializedMenuWithTooltip { }
@@ -132,7 +127,6 @@ export class SpecializedMenuWithTooltip { }
 
 ```typescript
 @Component({
-  standalone: true,
   selector: 'admin-menu',
   template: 'admin-menu.html',
   hostDirectives: [MenuBehavior],
@@ -160,13 +154,11 @@ export class AdminMenu { }
 export class Tooltip { }
 
 @Directive({
-  standalone: true,
   hostDirectives: [Tooltip],
 })
 export class CustomTooltip { }
 
 @Directive({
-  standalone: true,
   hostDirectives: [CustomTooltip],
 })
 export class EvenMoreCustomTooltip { }

@@ -161,6 +161,10 @@ export const heroServiceProvider = {
 <docs-code header="src/app/app.config.ts" language="typescript" highlight="[3]">
 import { InjectionToken } from '@angular/core';
 
+export interface AppConfig {
+  title: string;
+}
+
 export const APP_CONFIG = new InjectionToken<AppConfig>('app.config description');
 </docs-code>
 
@@ -169,6 +173,10 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('app.config description'
 次に、`APP_CONFIG`の`InjectionToken`オブジェクトを使用して、コンポーネントに依存関係プロバイダーを登録します。
 
 <docs-code header="src/app/app.component.ts" language="typescript">
+const MY_APP_CONFIG_VARIABLE: AppConfig = {
+  title: 'Hello',
+};
+
 providers: [{ provide: APP_CONFIG, useValue: MY_APP_CONFIG_VARIABLE }]
 </docs-code>
 

@@ -19,7 +19,7 @@
 
 ### 前提条件
 
-- **Node.js** - v[^18.9.1以降](/reference/versions)
+- **Node.js** - v[^18.19.1以降](/reference/versions)
 - **テキストエディタ** - [Visual Studio Code](https://code.visualstudio.com/)を推奨
 - **ターミナル** - Angular CLIコマンドを実行するために必要
 

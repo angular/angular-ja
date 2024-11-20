@@ -5,6 +5,8 @@
 
 以下で説明する攻撃と対策の詳細については、[Open Web Application Security Project (OWASP) ガイド](https://www.owasp.org/index.php/Category:OWASP_Guide_Project)を参照してください。
 
+<a id="report-issues"></a>
+
 <docs-callout title="脆弱性の報告">
 
 Angularは、Google [オープンソースソフトウェア脆弱性報酬プログラム](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)の一部です。[Angularの脆弱性については、https://bughunters.google.comで報告してください](https://bughunters.google.com/report)。

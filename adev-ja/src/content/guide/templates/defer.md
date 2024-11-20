@@ -216,7 +216,7 @@ Angularは、読み込みが完了すると、プレースホルダーコンテ�
 
 ```angular-html
 <div #greeting>こんにちは！</div>
-@defer (on interaction(greeting)) {
+@defer (on hover(greeting)) {
   <greetings-cmp />
 }
 ```

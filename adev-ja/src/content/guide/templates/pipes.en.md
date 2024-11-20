@@ -70,7 +70,7 @@ Angular includes a set of built-in pipes in the `@angular/common` package:
 Angular's pipe operator uses the vertical bar character (`|`), within a template expression. The pipe operator is a binary operator– the left-hand operand is the value passed to the transformation function, and the right side operand is the name of the pipe and any additional arguments (described below).
 
 ```angular-html
-<p>The event will occur on {{ scheduledOn | date }}.</p>
+<p>Total: {{ amount | currency }}</p>
 ```
 
 In this example, the value of `amount` is passed into the `CurrencyPipe` where the pipe name is `currency`. It then renders the default currency for the user’s locale.
@@ -138,7 +138,7 @@ The pipe operator has lower precedence than other binary operators, including `+
 
 ```angular-html
 <!-- firstName and lastName are concatenated before the result is passed to the uppercase pipe -->
-{{ (firstName + lastName | uppercase }}
+{{ firstName + lastName | uppercase }}
 ```
 
 The pipe operator has higher precedence than the conditional (ternary) operator.

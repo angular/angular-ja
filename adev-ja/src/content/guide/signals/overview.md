@@ -195,7 +195,7 @@ data.set(['test']);
 
 等価関数は、書き込み可能なシグナルと算出シグナルの両方に指定できます。
 
-HELPFUL: デフォルトでは、シグナルは参照の等価性（`===`比較）を使用します。
+HELPFUL: デフォルトでは、シグナルは参照の等価性（[`Object.is()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 比較）を使用します。
 
 ### 依存関係を追跡せずに読み取る
 

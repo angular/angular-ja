@@ -215,7 +215,7 @@ export class OptionalComponent {
 `@Self()` の良いユースケースは、サービスを注入することですが、現在のホスト要素で使用可能な場合のみです。
 この状況でエラーを回避するには、 `@Self()` と `@Optional()` を組み合わせます。
 
-たとえば、次の `SelfComponent` では、コンストラクターで注入された `LeafService` に注目してください。
+たとえば、次の `SelfNoDataComponent` では、コンストラクターで注入された `LeafService` に注目してください。
 
 <docs-code header="src/app/self-no-data/self-no-data.component.ts" language="typescript"
            highlight="[7]">
@@ -466,7 +466,7 @@ Emoji from FlowerService: &#x1F33A;
         これは、同じ場所に一致するディレクティブでは発生しません。
     * 終了位置は、コンポーネント自体と同じになります。なぜなら、これはこのアプリケーションの最上位コンポーネントだからです。
 
-1. `ApplicationConfig` によって提供される `ElementInjector` は、インジェクショントークンが `ElementInjector` 階層で見つからない場合のフォールバックインジェクターとして機能します。
+1. `ApplicationConfig` によって提供される `EnvironmentInjector` は、インジェクショントークンが `ElementInjector` 階層で見つからない場合のフォールバックインジェクターとして機能します。
 
 ### `providers` 配列を使用する
 

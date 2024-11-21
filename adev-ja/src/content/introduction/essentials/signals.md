@@ -1,4 +1,4 @@
-<docs-decorative-header title="Signals" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
+<docs-decorative-header title="シグナル" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
 動的なデータを生成して管理します。
 </docs-decorative-header>
 

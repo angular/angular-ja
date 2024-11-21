@@ -1,12 +1,12 @@
-# Async reactivity with resources
+# 非同期リアクティビティとリソース
 
-IMPORTANT: `resource` is [experimental](reference/releases#experimental). It's ready for you to try, but it might change before it is stable.
+IMPORTANT: `resource`は[実験的](reference/releases#experimental)です。お試しいただけますが、安定版になる前に変更される可能性があります。
 
-Most signal APIs are synchronous— `signal`, `computed`, `input`, etc. However, applications often need to deal with data that is available asynchronously. A `Resource` gives you a way to incorporate async data into your application's signal-based code.
+ほとんどのシグナルAPIは同期的です（`signal`、`computed`、`input`など）。しかし、アプリケーションは多くの場合、非同期的に利用可能なデータを処理する必要があります。`Resource`を使用すると、非同期データをアプリケーションのシグナルベースのコードに組み込むことができます。
 
-You can use a `Resource` to perform any kind of async operation, but the most common use-case for `Resource` is fetching data from a server. The following creates a resource to fetch some user data.
+`Resource`を使用してあらゆる種類の非同期処理を実行できますが、`Resource`の最も一般的なユースケースはサーバーからデータを取得することです。以下は、ユーザーデータを取得するためのリソースを作成する例です。
 
-The easiest way to create a `Resource` is the `resource` function.
+`Resource`を作成する最も簡単な方法は、`resource`関数を使用することです。
 
 ```typescript
 import {resource, Signal} from '@angular/core';
@@ -14,44 +14,44 @@ import {resource, Signal} from '@angular/core';
 const userId: Signal<string> = getUserId();
 
 const userResource = resource({
-  // Define a reactive request computation.
-  // The request value recomputes whenever any read signals change.
+  // リアクティブなリクエスト計算を定義します。
+  // リクエスト値は、読み取りシグナルが変更されるたびに再計算されます。
   request: () => ({id: userId()}),
 
-  // Define an async loader that retrieves data.
-  // The resource calls this function every time the `request` value changes.
+  // データを取得する非同期ローダーを定義します。
+  // リソースは、`request`値が変更されるたびにこの関数を呼び出します。
   loader: ({request}) => fetchUser(request),
 });
 
-// Created a computed based on the result of the resource's loader function.
+// リソースのローダー関数の結果に基づいてcomputedを作成します。
 const firstName = computed(() => userResource.value().firstName);
 ```
 
-The `resource` function accepts a `ResourceOptions` object with two main properties: `request` and `loader`.
+`resource`関数は、2つの主なプロパティである`request`と`loader`を持つ`ResourceOptions`オブジェクトを受け入れます。
 
-The `request` property defines a reactive computation that produce a request value. Whenever signals read in this computation change, the resource produces a new request value, similar to `computed`.
+`request`プロパティは、リクエスト値を生成するリアクティブな計算を定義します。この計算で読み取られるシグナルが変更されるたびに、リソースは新しいリクエスト値を生成します。これは`computed`と同様です。
 
-The `loader` property defines a `ResourceLoader`— an async function that retrieves some state. The resource calls the loader every time the `request` computation produces a new value, passing that value to the loader. See [Resource loaders](#resource-loaders) below for more details.
+`loader`プロパティは`ResourceLoader`を定義します。これは、状態を取得する非同期関数です。リソースは、`request`計算が新しい値を生成するたびにローダーを呼び出し、その値をローダーに渡します。詳細は下記の[Resourceローダー](#resource-loaders)を参照してください。
 
-`Resource` has a `value` signal that contains the results of the loader.
+`Resource`には、ローダーの結果を含む`value`シグナルがあります。
 
-## Resource loaders
+## リソースローダー {#resource-loaders}
 
-When creating a resource, you specify a `ResourceLoader`. This loader is an async function that accepts a single parameter— a `ResourceLoaderParams` object— and returns a value.
+リソースを作成する際には、`ResourceLoader`を指定します。このローダーは、単一のパラメーター（`ResourceLoaderParams`オブジェクト）を受け入れ、値を返す非同期関数です。
 
-The `ResourceLoaderParams` object contains three properties: `request`, `previous`, and `abortSignal`.
+`ResourceLoaderParams`オブジェクトには、`request`、`previous`、`abortSignal`の3つのプロパティが含まれています。
 
-| Property      | Description                                                                                                                                      |
+| プロパティ      | 説明                                                                                                                                      |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`     | The value of the resource's `request` computation.                                                                                               |
-| `previous`    | An object with a `status` property, containing the previous `ResourceStatus`.                                                                    |
-| `abortSignal` | An [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal). See [Aborting requests](#aborting-requests) below for details. |
+| `request`     | リソースの`request`計算の値。                                                                                               |
+| `previous`    | `status`プロパティを含む、前の`ResourceStatus`を持つオブジェクト。                                                                    |
+| `abortSignal` | [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)。詳細は下記の[リクエストの中断](#aborting-requests)を参照してください。 |
 
-### Aborting requests
+### リクエストの中断 {#aborting-requests}
 
-A resource aborts an outstanding request if the `request` computation changes while the resource is loading.
+リソースが読み込み中の場合に`request`計算が変更されると、リソースは未処理のリクエストを中断します。
 
-You can use the `abortSignal` in `ResourceLoaderParams` to respond to aborted requests. For example, the native `fetch` function accepts an `AbortSignal`:
+`ResourceLoaderParams`内の`abortSignal`を使用して、中断されたリクエストに応答できます。例えば、ネイティブの`fetch`関数は`AbortSignal`を受け入れます。
 
 ```typescript
 const userId: Signal<string> = getUserId();
@@ -59,18 +59,18 @@ const userId: Signal<string> = getUserId();
 const userResource = resource({
   request: () => ({id: userId()}),
   loader: ({request, abortSignal}): Promise<User> => {
-    // fetch cancels any outstanding HTTP requests when the given `AbortSignal`
-    // indicates that the request has been aborted.
+    // 与えられた`AbortSignal`がリクエストの中断を示している場合、
+    // fetchは未処理のHTTPリクエストをキャンセルします。
     return fetch(`users/${request.id}`, {signal: abortSignal});
   },
 });
 ```
 
-See [`AbortSignal` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) for more details on request cancellation with `AbortSignal`.
+`AbortSignal`によるリクエストのキャンセルについては、[`AbortSignal` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)を参照してください。
 
-### Reloading
+### 再読み込み {#reloading}
 
-You can programmatically trigger a resource's `loader` by calling the `reload` method.
+`reload`メソッドを呼び出すことで、プログラム的にリソースの`loader`をトリガーできます。
 
 ```typescript
 const userId: Signal<string> = getUserId();
@@ -85,31 +85,31 @@ const userResource = resource({
 userResource.reload();
 ```
 
-### `undefined` requests
+### `undefined` リクエスト {#undefined-requests}
 
-A request value of `undefined` prevents the resource from running its loader, and will put the resource into an `Idle` state.
+`undefined`のリクエスト値は、リソースがローダーを実行するのを防ぎ、リソースを`Idle`状態にします。
 
-## Resource status
+## リソースの状態
 
-The resource object has several signal properties for reading the status of the asynchronous loader.
+リソースオブジェクトには、非同期ローダーの状態を読み取るためのいくつかのシグナルプロパティがあります。
 
-| Property    | Description                                                                                                     |
+| プロパティ    | 説明                                                                                                     |
 | ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `value`     | The most recent value of the resource, or `undefined` if no value has been recieved.                            |
-| `hasValue`  | Whether the resource has a value.                                                                               |
-| `error`     | The most recent error encountered while running the resource's loader, or `undefined` if no error has occurred. |
-| `isLoading` | Whether the resource loader is currently running.                                                               |
-| `status`    | The resource's specific `ResourceStatus`, as described below.                                                   |
+| `value`     | リソースの最新の値、または値が受信されていない場合は`undefined`。                            |
+| `hasValue`  | リソースが値を持っているかどうか。                                                                               |
+| `error`     | リソースのローダーの実行中に発生した最新のエラー、またはエラーが発生していない場合は`undefined`。 |
+| `isLoading` | リソースローダーが現在実行中かどうか。                                                               |
+| `status`    | 後述のリソースの特定の`ResourceStatus`。                                                   |
 
-The `status` signal provides a specific `ResourceStatus` that describes the state of the resource.
+`status`シグナルは、リソースの状態を示す特定の`ResourceStatus`を提供します。
 
-| Status      | `value()`         | Description                                                                  |
+| ステータス      | `value()`         | 説明                                                                  |
 | ----------- | :---------------- | ---------------------------------------------------------------------------- |
-| `Idle`      | `undefined`       | The resource has no valid request and the loader has not run.                |
-| `Error`     | `undefined`       | The loader has encountered an error.                                         |
-| `Loading`   | `undefined`       | The loader is running as a result of the `request` value changing.           |
-| `Reloading` | Previous value    | The loader is running as a result calling of the resource's `reload` method. |
-| `Resolved`  | Resolved value    | The loader has completed.                                                    |
-| `Local`     | Locally set value | The resource's value has been set locally via `.set()` or `.update()`        |
+| `Idle`      | `undefined`       | リソースには有効なリクエストがなく、ローダーは実行されていません。                |
+| `Error`     | `undefined`       | ローダーでエラーが発生しました。                                         |
+| `Loading`   | `undefined`       | `request`値の変更の結果としてローダーが実行されています。           |
+| `Reloading` | 以前の値    | リソースの`reload`メソッドの呼び出しの結果としてローダーが実行されています。 |
+| `Resolved`  | 解決された値    | ローダーが完了しました。                                                    |
+| `Local`     | ローカルに設定された値 | リソースの値は、`.set()`または`.update()`を介してローカルに設定されました。        |
 
-You can use this status information to conditionally display user interface elements, such loading indicators and error messages.
+この状態情報を使用して、ローディングインジケーターやエラーメッセージなどのユーザーインターフェース要素を条件付きで表示できます。

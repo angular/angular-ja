@@ -45,7 +45,7 @@ jobs:
             common --color=yes
       - run: yarn install
       - run: yarn build
-      - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@06f921f45143638238432a624ff7bc14497be1ec
+      - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@53fb7c37cf14343f14ed79e2fefbbb2489ead4ee
         with:
           workflow-artifact-name: 'adev-preview'
           pull-number: '${{ github.event.pull_request.number }}'

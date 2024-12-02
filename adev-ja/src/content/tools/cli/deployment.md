@@ -1,17 +1,17 @@
-# Deployment
+# デプロイ
 
-When you are ready to deploy your Angular application to a remote server, you have various options.
+Angularアプリケーションをリモートサーバーにデプロイする用意をする場合、様々なオプションがあります。
 
-## Automatic deployment with the CLI
+## CLIによる自動デプロイ
 
-The Angular CLI command `ng deploy` executes the `deploy` [CLI builder](tools/cli/cli-builder) associated with your project.
-A number of third-party builders implement deployment capabilities to different platforms.
-You can add any of them to your project with `ng add`.
+AngularのCLIコマンドである`ng deploy`はあなたのプロジェクトに紐づいた`deploy` [CLI builder](guide/cli-builder)を実行します。
+多数のサードパーティのビルダーが異なるプラットフォームで機能するよう実装しています。
+`ng add`によって、それらのいずれかをあなたのプロジェクトに追加することが可能です。
 
-When you add a package with deployment capability, it will automatically update your workspace configuration (`angular.json` file) with a `deploy` section for the selected project.
-You can then use the `ng deploy` command to deploy that project.
+デプロイ機能が入ったパッケージを追加すると、選択されたプロジェクトに対する`deploy`セクションを伴うワークスペースの設定(`angular.json`ファイル)が自動的に更新されます。
+その後、そのプロジェクトにデプロイするために`ng deploy`コマンドを使うことが可能です。
 
-For example, the following command automatically deploys a project to [Firebase](https://firebase.google.com/).
+例えば、以下のコマンドは[Firebase](https://firebase.google.com/)にプロジェクトを自動的にデプロイすることが可能です。
 
 <docs-code language="shell">
 
@@ -20,15 +20,15 @@ ng deploy
 
 </docs-code>
 
-The command is interactive.
-In this case, you must have or create a Firebase account and authenticate using it.
-The command prompts you to select a Firebase project for deployment before building your application and uploading the production assets to Firebase.
+コマンドは対話的です。
+このケースでは、Firebaseアカウントを持っているか作成しなくてはならず、それを使用して認証しなくてはなりません。
+あなたのアプリケーションをビルドし、プロダクションの資材をFirebaseにアップロードする前に、デプロイするFirebaseプロジェクトを選択するよう、本コマンドはあなたを指示します。
 
-The table below lists tools which implement deployment functionality to different platforms.
-The `deploy` command for each package may require different command line options.
-You can read more by following the links associated with the package names below:
+以下の表では異なるプラットフォームのデプロイ機能を実装するツールをリストアップしています。
+各パッケージの`deploy`コマンドは異なるコマンドラインオプションを要求します。
+以下のパッケージ名に関連付けられたリンクをたどることで、より詳細を読むことができます。
 
-| Deployment to                                                     | Setup Command                                                                              |
+| デプロイ先                                                        | セットアップコマンド                                                                       |
 |:---                                                               |:---                                                                                  |
 | [Firebase hosting](https://firebase.google.com/docs/hosting)      | [`ng add @angular/fire`](https://npmjs.org/package/@angular/fire)                           |
 | [Vercel](https://vercel.com/solutions/angular)                    | [`vercel init angular`](https://github.com/vercel/vercel/tree/main/examples/angular) |
@@ -36,91 +36,91 @@ You can read more by following the links associated with the package names below
 | [GitHub pages](https://pages.github.com)                          | [`ng add angular-cli-ghpages`](https://npmjs.org/package/angular-cli-ghpages)               |
 | [Amazon Cloud S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_st_s3) | [`ng add @jefiozie/ngx-aws-deploy`](https://www.npmjs.com/package/@jefiozie/ngx-aws-deploy) |
 
-If you're deploying to a self-managed server or there's no builder for your favorite cloud platform, you can either [create a builder](tools/cli/cli-builder) that allows you to use the `ng deploy` command, or read through this guide to learn how to manually deploy your application.
+もし自己管理されたサーバーにデプロイする場合や、お気に入りのクラウドプラットフォームのビルダーがない場合、`ng deploy`コマンドを使うことを許容する[ビルダーを作成する](tools/cli/cli-builder)か、アプリケーションを手動でデプロイする方法を学ぶためのこのガイドを読み通すかのどちらかの方法を取る事が可能です。
 
-## Manual deployment to a remote server
+## リモートサーバーへの手動デプロイ
 
-To manually deploy your application, create a production build and copy the output directory to a web server or content delivery network (CDN).
-By default, `ng build` uses the `production` configuration.
-If you have customized your build configurations, you may want to confirm [production optimizations](tools/cli/deployment#production-optimizations) are being applied before deploying.
+あなたのアプリケーションを手動でデプロイする場合、プロダクションビルドを作成し、出力ディレクトリをwebサーバーかコンテンツデリバリネットワーク(CDN)にコピーしてください。
+デフォルトでは、`ng build`は`production`設定を使用します。
+ビルド設定をカスタマイズする場合、[プロダクション最適化](tools/cli/deployment#production-optimizations)がデプロイの前に適用されていることを確認したいかもしれません。
 
-`ng build` outputs the built artifacts to `dist/my-app/` by default, however this path can be configured with the `outputPath` option in the `@angular-devkit/build-angular:browser` builder.
-Copy this directory to the server and configure it to serve the directory.
+`ng build`はデフォルトで`dist/my-app/`にビルドの中間生成物を出力しますが、このパスは`@angular-devkit/build-angular:browser`ビルダーの`outputPath`で設定可能です。
+このディレクトリをサーバーにコピーし、そのディレクトリでサービスを動かすよう設定してください。
 
-While this is a minimal deployment solution, there are a few requirements for the server to serve your Angular application correctly.
+これは最小限のデプロイの解決法ですが、あなたのアプリケーションをサーバーで正しくサービス提供するためには少数の必要条件があります。
 
-## Server configuration
+## サーバーの設定
 
-This section covers changes you may need to configure on the server to run your Angular application.
+このセクションはサーバーであなたのAngularアプリケーションを実行するのに必要かもしれない設定の変更について取り上げます。
 
-### Routed apps must fall back to `index.html`
+### ルーティングされたアプリケーションは`index.html`にフォールバックしなければなりません。
 
-Client-side rendered Angular applications are perfect candidates for serving with a static HTML server because all the content is static and generated at build time.
+クライアントサイドレンダリングのAngularアプリケーションはすべてのコンテンツが静的でビルド時に生成されるため、静的HTMLサーバーによるサービス提供のための候補としては完璧です。
 
-If the application uses the Angular router, you must configure the server to return the application's host page (`index.html`) when asked for a file that it does not have.
+もしアプリケーションがAngularのルーターを使っているならば、持っていないファイルを要求した時、アプリケーションのホストページ(`index.html`)を返すよう設定しなければなりません。
 
-A routed application should support "deep links".
-A *deep link* is a URL that specifies a path to a component inside the application.
-For example, `http://my-app.test/users/42` is a *deep link* to the user detail page that displays the user with `id` 42.
+ルーティングされたアプリケーションは「ディープリンク」をサポートするべきです。
+*ディープリンク*はアプリケーションの中のコンポーネントへの経路を指定したURLです。
+例えば、`http://my-app.test/users/42`は`id`42のユーザーを表示するユーザー詳細ページへの*ディープリンク*です。
 
-There is no issue when the user initially loads the index page and then navigates to that URL from within a running client.
-The Angular router performs the navigation *client-side* and does not request a new HTML page.
+ユーザーが最初にindexページをロードし、それから起動中のクライアント内からそのURLに移動するのは問題ありません。
+Angularのルーターは*クライアントサイド*でナビゲーションを実行し、新しいHTMLを要求しません。
 
-But clicking a deep link in an email, entering it in the browser address bar, or even refreshing the browser while already on the deep linked page will all be handled by the browser itself, *outside* the running application.
-The browser makes a direct request to the server for `/users/42`, bypassing Angular's router.
+しかし、電子メール内のディープリンクをクリックしたり、ブラウザのアドレスバーにディープリンクを入力したり、既にディープリンクに紐づけられたページをブラウザでリフレッシュするときさえも、実行しているアプリケーションの*外部*ですべてブラウザ自身によって処理されます。
+Angularのルーターを迂回して、ブラウザは`/users/42`に対するサーバーへの直接のリクエストを作成します。
 
-A static server routinely returns `index.html` when it receives a request for `http://my-app.test/`.
-But most servers by default will reject `http://my-app.test/users/42` and returns a `404 - Not Found` error *unless* it is configured to return `index.html` instead.
-Configure the fallback route or 404 page to `index.html` for your server, so Angular is served for deep links and can display the correct route.
-Some servers call this fallback behavior "Single-Page Application" (SPA) mode.
+静的なサーバーは`http://my-app.test/`に対するリクエストを受け取ると決まって`index.html`を返します。
+しかし、デフォルトでほとんどサーバーは`index.html`を代わりに返すよう設定されて*いないかぎり*`http://my-app.test/users/42`を拒否して`404 - Not Found`エラーを返します。
+フォールバックルートを設定するか、サーバー上で404ページを`index.html`にする設定することで、Angularはディープリンクに関するサービスを提供し、正しいルートを表示することができます。
+いくつかのサーバーはこのフォールバックの挙動を"Single-Page Application"(SPA)モードと呼びます。
 
-Once the browser loads the application, Angular router will read the URL to determine which page it is on and display `/users/42` correctly.
+一度ブラウザがアプリケーションをロードすると、Angularのルーターはどのページにあるのかを判断するためにURLを読み込み、`/users/42`を正しく表示しようとします。
 
-For "real" 404 pages such as `http://my-app.test/does-not-exist`, the server does not require any additional configuration.
-[404 pages implemented in the Angular router](guide/routing/common-router-tasks#displaying-a-404-page) will be displayed correctly.
+`http://my-app.test/does-not-exist`のような"本当の"404ページについて、サーバーはいかなる追加の設定も必要としません。
+[Angularのルーターで実装された404ページ](guide/routing/common-router-tasks#displaying-a-404-page)は正しく表示されるでしょう。
 
-### Requesting data from a different server (CORS)
+### 異なるサーバーからデータをリクエストする(CORS)
 
-Web developers may encounter a [*cross-origin resource sharing*](https://developer.mozilla.org/docs/Web/HTTP/CORS "Cross-origin resource sharing") error when making a network request to a server other than the application's own host server.
-Browsers forbid such requests unless the server explicitly permits them.
+アプリケーション自身のホストサーバー以外のサーバーにネットワークリクエストを行う際、Web開発者は[*クロスオリジンリソース共有*](https://developer.mozilla.org/docs/Web/HTTP/CORS "クロスオリジンリソース共有")エラーに遭遇するかもしれません。
+ブラウザはサーバーが明示的に許可していない限りそのようなリクエストを禁止します。
 
-There isn't anything Angular or the client application can do about these errors.
-The _server_ must be configured to accept the application's requests.
-Read about how to enable CORS for specific servers at [enable-cors.org](https://enable-cors.org/server.html "Enabling CORS server").
+これらのエラーに関してAngularまたはクライアントアプリケーションでできることは何もありません。
+*サーバー*はアプリケーションのリクエストを受け付けるよう設定されていなければなりません。
+特定のサーバーでCORSを有効にする方法は[enable-cors.org](https://enable-cors.org/server.html "CORSサーバーの有効化")を読んでください。
 
-## Production optimizations
+## プロダクションの最適化
 
-`ng build` uses the `production` configuration unless configured otherwise. This configuration enables the following build optimization features.
+`ng build`は特に設定を行わない限り`production`設定を使います。この設定はビルド最適化機能を有効にします。
 
-| Features                                                           | Details                                                                                       |
-|:---                                                                |:---                                                                                           |
-| [Ahead-of-Time (AOT) Compilation](tools/cli/aot-compiler)          | Pre-compiles Angular component templates.                                                     |
-| [Production mode](tools/cli/deployment#development-only-features) | Optimizes the application for the best runtime performance                                    |
-| Bundling                                                           | Concatenates your many application and library files into a minimum number of deployed files. |
-| Minification                                                       | Removes excess whitespace, comments, and optional tokens.                                     |
-| Mangling                                                           | Renames functions, classes, and variables to use shorter, arbitrary identifiers.              |
-| Dead code elimination                                              | Removes unreferenced modules and unused code.                                                 |
+| 機能                                                                  | 詳細                                                                                          |
+|:---                                                                   |:---                                                                                           |
+| [事前(AOT)コンパイル](guide/aot-compiler)                             | Angularコンポーネントのテンプレートの事前コンパイル。                                         |
+| [プロダクションモード](tools/cli/deployment#development-only-features)| 実行時のパフォーマンスを最高にするためのアプリケーションの最適化                              |
+| バンドル                                                              | 多数のアプリケーションおよびライブラリを連結してデプロイされるファイルを最小限の数にする。    |
+| 最小化                                                                | 余分なホワイトスペース、コメントおよびオプショナルなトークンを取り除く。                      |
+| マングリング                                                          | 関数、クラスおよび変数の名前を変更し、短い任意の識別子を使用する。                            |
+| デッドコード削除                                                      | 参照されないモジュールおよび未使用コードを削除する。                                          |
 
-See [`ng build`](cli/build) for more about CLI build options and their effects.
+CLIのビルドオプションとそれらの効果についてより多く知るために[`ng build`](cli/build)を参照してください。
 
-### Development-only features
+### 開発時のみの機能
 
-When you run an application locally using `ng serve`, Angular uses the development configuration
-at runtime which enables:
+`ng serve`を使ってローカルでアプリケーションを起動するとき、Angularは開発用の設定を使用することで、
+実行時に以下が使用可能になります:
 
-* Extra safety checks such as [`expression-changed-after-checked`](errors/NG0100) detection.
-* More detailed error messages.
-* Additional debugging utilities such as the global `ng` variable with [debugging functions](api#core-global) and [Angular DevTools](tools/devtools) support.
+* [`expression-changed-after-checked`](errors/NG0100)の検出のような安全な追加のチェック。
+* より詳細なエラーメッセージ。
+* [デバッグ関数](api#core-global)および[Angular DevTools](tools/devtools)をサポートするグローバルな`ng`変数のような追加のデバッグユーティリティ。
 
-These features are helpful during development, but they require extra code in the app, which is
-undesirable in production. To ensure these features do not negatively impact bundle size for end users, Angular CLI
-removes development-only code from the bundle when building for production.
+これらの機能は開発中は便利ですが、アプリに追加のコードが必要で、プロダクションでは望まれません。
+エンドユーザーのためのバンドルサイズにネガティブな影響を与えないよう、これらの機能を安全に使うために、Angular CLIは
+プロダクションをバンドリングする際のバンドルから開発時のみのコードを削除します。
 
-Building your application with `ng build` by default uses the `production` configuration which removes these features from the output for optimal bundle size.
+`ng build`によるアプリケーションのビルドでは最適なバンドルサイズにするために出力からこれらの機能を取り除く`production`をデフォルトで用います。
 
 ## `--deploy-url`
 
-`--deploy-url` is a command line option used to specify the base path for resolving relative URLs for assets such as images, scripts, and style sheets at *compile* time.
+`--deploy-url`は画像、スクリプト、スタイルシートといった資材のための関連するURLを解決するためのベースとなるパスを*コンパイル*時に指定するのに使われるコマンドラインオプションです。
 
 <docs-code language="shell">
 
@@ -128,7 +128,7 @@ ng build --deploy-url /my/assets
 
 </docs-code>
 
-The effect and purpose of `--deploy-url` overlaps with [`<base href>`](guide/routing/common-router-tasks). Both can be used for initial scripts, stylesheets, lazy scripts, and css resources.
+`--deploy-url`の効果と目的は[`<base href>`](guide/routing/common-router-tasks)と重なります。両者とも初期のスクリプト、スタイルシート、遅延して読み込まれるスクリプト、cssリソースのために使用できます。
 
-Unlike `<base href>` which can be defined in a single place at runtime, the `--deploy-url` needs to be hard-coded into an application at build time.
-Prefer `<base href>` where possible.
+`<base href>`実行時に一か所で定義することができる`<base href>`とは違い、`--deploy-url`はビルド時にアプリケーションでハードコーディングされる必要があります。
+可能であれば`<base href>`の方が好ましいです。

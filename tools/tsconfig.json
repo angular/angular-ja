@@ -11,7 +11,7 @@
     "build.ts",
     "watch.ts",
     "update-origin.ts",
-    "translate.ts",
+    "translator",
     "lint.ts"
   ]
 }

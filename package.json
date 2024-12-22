@@ -13,11 +13,11 @@
     "test": "yarn test:patch",
     "test:patch": "git apply -v --check --directory origin ./tools/adev-patches/*.patch",
     "update-origin": "tsx tools/update-origin.ts",
-    "translate": "tsx tools/translate.ts"
+    "translate": "tsx --env-file=.env tools/translator/main.ts"
   },
   "packageManager": "yarn@1.22.10",
   "devDependencies": {
-    "@google/generative-ai": "0.14.1",
+    "@google/generative-ai": "0.21.0",
     "@types/node": "20.14.10",
     "chokidar": "3.6.0",
     "consola": "3.2.3",
@@ -32,6 +32,6 @@
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-ja-technical-writing": "10.0.1",
     "textlint-rule-prh": "^6.0.0",
-    "tsx": "^4.16.2"
+    "tsx": "4.19.2"
   }
 }

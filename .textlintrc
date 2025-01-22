@@ -21,6 +21,7 @@
     "preset-ja-technical-writing": {
       "sentence-length": false,
       "max-comma": false,
+      "max-ten": false,
       "no-mix-dearu-desumasu": {
         "preferInList": ""
       },
@@ -42,7 +43,8 @@
           "変更検知戦略",
           "推移的依存関係",
           "三重等号演算子",
-          "入力変換関数"
+          "入力変換関数",
+          "等価比較関数"
         ]
       },
       "ja-no-mixed-period": false

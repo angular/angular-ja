@@ -272,7 +272,7 @@ IMPORTANT: 上記のトークンは、次のシナリオでは`null`になりま
 
 ## Node.js以外のサーバーの設定
 
-`@angular/ssr`は、Node.js以外のプラットフォームでAngularアプリケーションをサーバーサイドレンダリングするための重要なAPIを提供します。Web APIの標準的な[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request)と[`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response)オブジェクトを活用することで、さまざまなサーバー環境にAngular SSRを統合できます。詳細情報と例については、[`@angular/ssr` APIリファレンス](api/ssr/node/AngularAppEngine)を参照してください。
+`@angular/ssr`は、Node.js以外のプラットフォームでAngularアプリケーションをサーバーサイドレンダリングするための重要なAPIを提供します。Web APIの標準的な[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request)と[`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response)オブジェクトを活用することで、さまざまなサーバー環境にAngular SSRを統合できます。詳細情報と例については、[`@angular/ssr` APIリファレンス](api/ssr/AngularAppEngine)を参照してください。
 
 ```typescript
 // server.ts
@@ -302,7 +302,7 @@ import express from 'express';
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.get('*', (req, res, next) =>
+app.use('*', (req, res, next) => {
   angularApp
     .handle(req)
     .then(response => {

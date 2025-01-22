@@ -37,7 +37,7 @@
 * [シグナル入力](/guide/signals/inputs)
 * [モデル入力](/guide/signals/model)
 * [シグナルクエリ](/guide/signals/queries)
-* [関数ベースの出力](/guide/components/output-fn)
+* [関数ベースの出力](/guide/components/output)
 
 ## Angular開発者体験の改善
 
@@ -154,7 +154,7 @@
   <docs-card title="Streamline standalone imports with Language Service" link="Completed in Q4 2024" href="">
   As part of this initiative, the language service automatically imports components and pipes in standalone and NgModule-based apps. Additionally, we've added a template diagnostic to highlight unused imports in standalone components, which should help make application bundles smaller.
   </docs-card>
-  <docs-card title="Local template variables" link="Completed in Q3 2024" href="https://github.com/angular/angular/issues/15280">
+  <docs-card title="Local template variables" link="Completed in Q3 2024">
   We've released the support for local template variables in Angular, see [`@let` docs](https://angular.dev/api/core/@let) for additional information.
   </docs-card>
   <docs-card title="Angular Materialのカスタマイズを拡張する" link="2024年第2四半期に完了" href="https://material.angular.io/guide/theming">

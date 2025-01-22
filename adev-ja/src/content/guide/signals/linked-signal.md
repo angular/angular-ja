@@ -1,8 +1,8 @@
-# `linkedSignal`
+# `linkedSignal`による依存状態
 
 IMPORTANT: `linkedSignal`は[開発者プレビュー](reference/releases#developer-preview)です。試用できますが、安定版になる前に変更される可能性があります。
 
-`signal`関数は、Angularコードで状態を保持するために使用できます。この状態は、他の状態に依存することがあります。たとえば、ユーザーが注文の配送方法を選択できるコンポーネントを考えてみましょう。
+`signal`関数は、Angularコードで状態を保持するために使用できます。この状態は、他の状態に依存することがあります。例えば、ユーザーが注文の配送方法を選択できるコンポーネントを考えてみましょう。
 
 ```typescript
 @Component({/* ... */})
@@ -45,7 +45,7 @@ const shippingOptions = signal(['Ground', 'Air', 'Sea']);
 const selectedOption = linkedSignal(() => shippingOptions()[0]);
 console.log(selectedOption()); // 'Ground'
 
-selectedOption.set(shippingOptions[2]);
+selectedOption.set(shippingOptions()[2]);
 console.log(selectedOption()); // 'Sea'
 
 shippingOptions.set(['Email', 'Will Call', 'Postal service']);
@@ -56,21 +56,21 @@ console.log(selectedOption()); // 'Email'
 
 場合によっては、`linkedSignal`の計算で`linkedSignal`の以前の値を考慮する必要があります。
 
-上記の例では、`shippingOptions`が変更されると、`selectedOption`は常に最初のオプションに戻って更新されます。ただし、選択したオプションがリスト内にまだ存在する場合は、ユーザーの選択を維持したい場合があります。これを実現するには、別々の*ソース*と*算出*を使用して`linkedSignal`を作成できます。
+上記の例では、`shippingOptions`が変更されると、`selectedOption`は常に最初のオプションに戻って更新されます。しかし、選択したオプションがリスト内にまだ存在する場合は、ユーザーの選択を維持したい場合があります。これを実現するには、別々の*ソース*と*算出*を使用して`linkedSignal`を作成できます。
 
 ```typescript
 @Component({/* ... */})
 export class ShippingMethodPicker {
   shippingOptions: Signal<ShippingMethod[]> = getShippingOptions();
-  
-  selectedOption = linkedSignal({
-    // この`source`が変更されるたびに、`selectedOption`は`computation`の結果に設定されます。
-    source: shippingOptions,
+
+  selectedOption = linkedSignal<ShippingMethod[], ShippingMethod>({
+    // `selectedOption` is set to the `computation` result whenever this `source` changes.
+    source: this.shippingOptions,
     computation: (newOptions, previous) => {
-      // newOptionsに以前選択したオプションが含まれている場合、その選択を保持します。
-      // そうでない場合は、最初のオプションをデフォルトとします。
-      return newOptions.find(opt => opt.id === previous?.value) ?? newOptions[0];
-    } 
+      // If the newOptions contain the previously selected option, preserve that selection.
+      // Otherwise, default to the first option.
+      return newOptions.find(opt => opt.id === previous?.value?.id) ?? newOptions[0];
+    }
   });
 
   changeShipping(newOptionIndex: number) {
@@ -79,7 +79,7 @@ export class ShippingMethodPicker {
 }
 ```
 
-`linkedSignal`を作成する際には、算出だけを提供する代わりに、個別の`source`プロパティと`computation`プロパティを持つオブジェクトを渡すことができます。
+`linkedSignal`を作成する際には、算出関数だけを提供する代わりに、個別の`source`プロパティと`computation`プロパティを持つオブジェクトを渡すことができます。
 
 `source`は、`computed`やコンポーネントの`input`などの任意のシグナルにできます。`source`の値が変更されると、`linkedSignal`は提供された`computation`の結果にその値を更新します。
 
@@ -87,23 +87,20 @@ export class ShippingMethodPicker {
 
 ## カスタムの等価比較
 
-`linkedSignal`は、リンクされた状態が変更されるたびに算出の結果に更新されます。デフォルトでは、Angularは参照の等価性を使用して、リンクされた状態が変更されたかどうかを判断します。代わりに、カスタムの等価関数の指定ができます。
+`linkedSignal`は他のシグナルと同様に、カスタムの等価比較関数を設定できます。この関数は、下流の依存関係によって`linkedSignal`の値（計算結果）が変更されたかどうかを判断するために使用されます。
 
 ```typescript
-const activeUser = signal({id: 123, name: 'Morgan'});
-const email = linkedSignal(() => `${activeUser().name}@example.com`, {
+const activeUser = signal({id: 123, name: 'Morgan', isAdmin: true});
+
+const activeUserEditCopy = linkedSignal(() => activeUser(), {
   // `id`が同じであれば、ユーザーは同じとみなします。
   equal: (a, b) => a.id === b.id,
 });
 
-// または、`source`と`computation`を分離する場合
-const alternateEmail = linkedSignal({
+// または、`source`と`computation`を分ける場合
+const activeUserEditCopy = linkedSignal({
   source: activeUser,
-  computation: user => `${user.name}@example.com`,
+  computation: user => user,
   equal: (a, b) => a.id === b.id,
 });
-
-// `activeUser`へのこの更新は、`id`が同じであるため、
-// `email`または`alternateEmail`を更新しません。
-activeUser.set({id: 123, name: 'Morgan', isAdmin: false});
 ```

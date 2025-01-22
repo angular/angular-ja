@@ -232,7 +232,7 @@ export class MediaControls {
 }
 ```
 
-上記の例では、`CustomSlider`は`checked`モデル入力に値を書き込むことができ、それによって`UserProfile`の`isAdmin`プロパティに値が伝播します。このバインディングにより、`checked`と`isAdmin`の値が同期します。
+上記の例では、`CustomSlider`は`value`モデル入力に値を書き込むことができ、それによって`MediaControls`の`volume`プロパティに値が伝播します。このバインディングにより、`value`と`volume`の値が同期します。
 
 ### 暗黙的な`change`イベント
 
@@ -366,7 +366,7 @@ export class CustomSlider {
 private internalValue = 0; }
 </docs-code>
 
-可能な場合は、**ゲッターとセッターの代わりに入力変換を使用することをお勧めします。**
+可能な場合は、**ゲッターとセッターの代わりに、入力変換を使用することをお勧めします。**
 
 複雑なゲッターとセッター、またはコストの高いゲッターとセッターは避けてください。Angularは入力のセッターを複数回呼び出す可能性があり、セッターがDOM操作などのコストの高い処理を実行する場合、アプリケーションのパフォーマンスに悪影響を与える可能性があります。
 

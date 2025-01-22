@@ -50,6 +50,8 @@ Note: これらは、以前は\*ngIf、\*ngFor、\*ngSwitchディレクティブ
 }
 ```
 
+Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のようなフロー変更のステートメントをサポートしていません。
+
 ### なぜ `@for` ブロックの `track` は重要なのか？
 
 `track` 式を使用すると、Angularはデータとページ上のDOMノードの関係を維持できます。 これにより、Angularはデータが変更されたときに、必要なDOM操作を最小限に抑えてパフォーマンスを最適化できます。

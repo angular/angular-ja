@@ -45,7 +45,7 @@ Note: Angular v17以降 `server.ts` は `ng serve` では使用されていま�
 
 `server.ts` ファイルは、Node.js ExpressサーバーとAngularサーバーサイドレンダリングを構成します。`CommonEngine` はAngularアプリケーションをレンダリングするために使用されます。
 
-<docs-code path="adev/src/content/examples/ssr/server.ts" visibleLines="[31,45]"></docs-code>
+<docs-code path="adev/src/content/examples/ssr/server.ts" visibleLines="[33,47]"></docs-code>
 
 Angular CLIは、Angularアプリケーションのサーバーサイドレンダリングに焦点を当てた、初期のサーバー実装をスキャフォールディングします。このサーバーは、APIルート、リダイレクト、静的アセットなど、他の機能をサポートするように拡張できます。詳細については、[Express ドキュメント](https://expressjs.com/) を参照してください。
 

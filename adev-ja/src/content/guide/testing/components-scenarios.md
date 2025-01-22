@@ -554,7 +554,7 @@ IMPORTANT: `click()`ヘルパー関数は、Angularのテストユーティリ�
 *ルーティングコンポーネント*は、`Router`に別のコンポーネントにナビゲートするように指示するコンポーネントです。
 `DashboardComponent`は、ユーザーがダッシュボードの*ヒーローボタン*の1つをクリックすることで`HeroDetailComponent`にナビゲートできるため、*ルーティングコンポーネント*です。
 
-Angularは、ルーターに依存するコードをより効果的にテストするために、テストヘルパーを提供しています。`provideRouter`関数はテストモジュール内でも直接使えます。
+Angularは、`HttpClient`に依存するコードをより効果的にテストするために、テストヘルパーを提供しています。`provideRouter`関数はテストモジュール内でも直接使えます。
 
 <docs-code header="app/dashboard/dashboard.component.spec.ts" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="router-harness"/>
 

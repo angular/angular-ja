@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.dev/license
+ */
+
 export enum ApplicationComplexity {
   Basic = 1,
   Medium = 2,
@@ -2397,7 +2405,22 @@ export const RECOMMENDATIONS: Step[] = [
     action:
       '`ComponentFixture.autoDetect` が `ApplicationRef.tick` 内のフィクスチャの変更検出を実行するようになったため、`ComponentFixture.autoDetect` を使用しているときに変更検出の実行順序に依存しているテストがあると、テストに失敗することがあります。たとえば、これによってテストフィクスチャは、これまではその逆であったかもしれませんが、作成するダイアログの前にリフレッシュされます。',
   },
-
+  {
+    action:
+      "アプリケーションのプロジェクトディレクトリで、`ng update @angular/core@19 @angular/cli@19` を実行し、アプリケーションをAngular v19にアップデートしてください。",
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0_ng_update',
+  },
+  {
+    possibleIn: 1900,
+    necessaryAsOf: 1900,
+    level: ApplicationComplexity.Basic,
+    material: true,
+    step: '@angular/material をアップデートしてください。',
+    action: 'Run `ng update @angular/material@19`.',
+  },
   {
     action:
       'Angularディレクティブ、コンポーネント、パイプはデフォルトでスタンドアロンになりました。現在NgModuleで宣言されている宣言には "standalone: false" を指定してください。Angular CLIは自動的にコードを更新します。',

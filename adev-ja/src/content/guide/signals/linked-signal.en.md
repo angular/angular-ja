@@ -1,4 +1,4 @@
-# `linkedSignal`
+# Dependent state with `linkedSignal`
 
 IMPORTANT: `linkedSignal` is [developer preview](reference/releases#developer-preview). It's ready for you to try, but it might change before it is stable.
 
@@ -16,7 +16,7 @@ export class ShippingMethodPicker {
     this.selectedOption.set(this.shippingOptions()[newOptionIndex]);
   }
 }
-``` 
+```
 
 In this example, the `selectedOption` defaults to the first option, but changes if the user selects another option. But `shippingOptions` is a signal— its value may change! If `shippingOptions` changes, `selectedOption` may contain a value that is no longer a valid option.
 
@@ -45,7 +45,7 @@ const shippingOptions = signal(['Ground', 'Air', 'Sea']);
 const selectedOption = linkedSignal(() => shippingOptions()[0]);
 console.log(selectedOption()); // 'Ground'
 
-selectedOption.set(shippingOptions[2]);
+selectedOption.set(shippingOptions()[2]);
 console.log(selectedOption()); // 'Sea'
 
 shippingOptions.set(['Email', 'Will Call', 'Postal service']);
@@ -62,15 +62,15 @@ In the example above, `selectedOption` always updates back to the first option w
 @Component({/* ... */})
 export class ShippingMethodPicker {
   shippingOptions: Signal<ShippingMethod[]> = getShippingOptions();
-  
-  selectedOption = linkedSignal({
+
+  selectedOption = linkedSignal<ShippingMethod[], ShippingMethod>({
     // `selectedOption` is set to the `computation` result whenever this `source` changes.
-    source: shippingOptions,
+    source: this.shippingOptions,
     computation: (newOptions, previous) => {
       // If the newOptions contain the previously selected option, preserve that selection.
       // Otherwise, default to the first option.
-      return newOptions.find(opt => opt.id === previous?.value) ?? newOptions[0];
-    } 
+      return newOptions.find(opt => opt.id === previous?.value?.id) ?? newOptions[0];
+    }
   });
 
   changeShipping(newOptionIndex: number) {
@@ -87,23 +87,20 @@ The `computation` is a function that receives the new value of `source` and a `p
 
 ## Custom equality comparison
 
-`linkedSignal` updates to the result of the computation every time its linked state changes. By default, Angular uses referential equality to determine if the linked state has changed. You can alternatively provide a custom equality function.
+`linkedSignal`, as any other signal, can be configured with a custom equality function. This function is used by downstream dependencies to determine if that value of the `linkedSignal` (result of a computation) changed:
 
 ```typescript
-const activeUser = signal({id: 123, name: 'Morgan'});
-const email = linkedSignal(() => `${activeUser().name}@example.com`, {
+const activeUser = signal({id: 123, name: 'Morgan', isAdmin: true});
+
+const activeUserEditCopy = linkedSignal(() => activeUser()), {
   // Consider the user as the same if it's the same `id`.
   equal: (a, b) => a.id === b.id,
 });
 
 // Or, if separating `source` and `computation`
-const alternateEmail = linkedSignal({
+const activeUserEditCopy = linkedSignal({
   source: activeUser,
-  computation: user => `${user.name}@example.com`,
+  computation: user => user,
   equal: (a, b) => a.id === b.id,
 });
-
-// This update to `activeUser` does not cause `email` or `alternateEmail`
-// to update because the `id` is the same.
-activeUser.set({id: 123, name: 'Morgan', isAdmin: false});
 ```

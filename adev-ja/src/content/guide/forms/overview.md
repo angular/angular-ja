@@ -110,7 +110,7 @@ IMPORTANT: テンプレート駆動フォームでは、真実の源はテンプ
 ```mermaid
 flowchart TB
     U{User}
-    I("<input>")
+    I("&lt;input&gt;")
     CVA(ControlValueAccessor)
     FC(FormControl)
     O(Observers)
@@ -130,14 +130,14 @@ flowchart TB
 ```mermaid
 flowchart TB
     U{User}
-    I(<input>)
+    I("&lt;input&gt;")
     CVA(ControlValueAccessor)
     FC(FormControl)
     O(Observers)
     U-->|"Calls setValue() on the FormControl"|FC
     FC-->|Notifies the ControlValueAccessor|CVA
     FC-.->|Fires a 'valueChanges' event to observers|O
-    CVA-->|"Updates the value of the <input>"|I
+    CVA-->|"Updates the value of the &lt;input&gt;"|I
 ```
 
 ### テンプレート駆動フォームのデータフロー
@@ -157,7 +157,7 @@ flowchart TB
 ```mermaid
 flowchart TB
     U{User}
-    I(<input>)
+    I("&lt;input&gt;")
     CVA(ControlValueAccessor)
     FC(FormControl)
     M(NgModel)
@@ -207,7 +207,7 @@ flowchart TB
         FC2(FormControl)
         O(Observers)
         CVA(ControlValueAccessor)
-        I("<input>")
+        I("&lt;input&gt;")
         FC2-.->|Fires a 'valueChanges' event to observers|O
         O-->|ControlValueAccessor receives valueChanges event|CVA
         CVA-->|Sets the value in the control|I

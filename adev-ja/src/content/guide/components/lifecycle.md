@@ -261,7 +261,7 @@ export class UserProfile {
       // `Write` フェーズを使用して、ジオメトリのプロパティに書き込みます。
       write: () => {
         const padding = computePadding();
-        const changed = padding !== prevPadding;
+        const changed = padding !== this.prevPadding;
         if (changed) {
           nativeElement.style.padding = padding;
         }

@@ -1,8 +1,8 @@
 diff --git a/adev/src/app/core/services/header.service.ts b/adev/src/app/core/services/header.service.ts
-index ee21c0a837..afe9b7819c 100644
+index ac27b818c4..9b34429ee9 100644
 --- a/adev/src/app/core/services/header.service.ts
 +++ b/adev/src/app/core/services/header.service.ts
-@@ -1,7 +1,7 @@
+@@ -9,7 +9,7 @@
  import {DOCUMENT} from '@angular/common';
  import {Injectable, inject} from '@angular/core';
  

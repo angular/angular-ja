@@ -1,10 +1,10 @@
 diff --git a/adev/src/app/features/tutorial/tutorial.component.ts b/adev/src/app/features/tutorial/tutorial.component.ts
-index a254df6d80..4ff592b981 100644
+index 5ed9051ae2..bb24ca4242 100644
 --- a/adev/src/app/features/tutorial/tutorial.component.ts
 +++ b/adev/src/app/features/tutorial/tutorial.component.ts
-@@ -44,7 +44,7 @@ import {SplitResizerHandler} from './split-resizer-handler.service';
- import {TutorialType} from '@angular/docs';
- import {TutorialNavigationData, TutorialNavigationItem} from '@angular/docs';
+@@ -46,7 +46,7 @@ import {
+ } from '../../editor/index';
+ import {SplitResizerHandler} from './split-resizer-handler.service';
  
 -const INTRODUCTION_LABEL = 'Introduction';
 +const INTRODUCTION_LABEL = 'イントロダクション';

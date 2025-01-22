@@ -1,13 +1,13 @@
 diff --git a/adev/src/local-styles.scss b/adev/src/local-styles.scss
-index 4dcf2e82aa..ba311a65f9 100644
+index 2c83a2ad4a..9d9b28112a 100644
 --- a/adev/src/local-styles.scss
 +++ b/adev/src/local-styles.scss
-@@ -1 +1,15 @@
--@import './styles/xterm'; 
-\ No newline at end of file
-+@import './styles/xterm'; 
-+
+@@ -1,3 +1,17 @@
+ @use './styles/xterm';
+ 
+ @include xterm.xterm();
 +// adev-ja overrides
++
 +docs-viewer {
 +    // `balance` is not good for Japanese headings.
 +    h1,
@@ -16,8 +16,8 @@ index 4dcf2e82aa..ba311a65f9 100644
 +    h4,
 +    h5,
 +    h6 {
-+      word-break: auto-phrase;
++        word-break: auto-phrase;
 +    }
-+  }
-+  
++}
++      
 \ No newline at end of file

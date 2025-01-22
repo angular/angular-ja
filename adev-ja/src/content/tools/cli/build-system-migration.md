@@ -12,7 +12,7 @@ This new build system is stable and fully supported for use with Angular applica
 You can migrate to the new build system with applications that use the `browser` builder.
 If using a custom builder, please refer to the documentation for that builder on possible migration options.
 
-IMPORTANT: The existing Webpack-based build system is still considered stable and fully supported.
+IMPORTANT: The existing webpack-based build system is still considered stable and fully supported.
 Applications can continue to use the `browser` builder and projects can opt-out of migrating during an update.
 
 ## For new applications
@@ -29,7 +29,7 @@ HELPFUL: Remember to remove any CommonJS assumptions in the application server c
 
 ### Automated migration (Recommended)
 
-The automated migration will adjust both the application configuration within `angular.json` as well as code and stylesheets to remove previous Webpack-specific feature usage.
+The automated migration will adjust both the application configuration within `angular.json` as well as code and stylesheets to remove previous webpack-specific feature usage.
 While many changes can be automated and most applications will not require any further changes, each application is unique and there may be some manual changes required.
 After the migration, please attempt a build of the application as there could be new errors that will require adjustments within the code.
 The errors will attempt to provide solutions to the problem when possible and the later sections of this guide describe some of the more common situations that you may encounter.
@@ -49,7 +49,7 @@ The migration does the following:
 * Updates configuration accordingly.
 * Merges `tsconfig.server.json` with `tsconfig.app.json` and adds the TypeScript option `"esModuleInterop": true` to ensure `express` imports are [ESM compliant](#esm-default-imports-vs-namespace-imports).
 * Updates application server code to use new bootstrapping and output directory structure.
-* Removes any Webpack-specific builder stylesheet usage such as the tilde or caret in `@import`/`url()` and updates the configuration to provide equivalent behavior
+* Removes any webpack-specific builder stylesheet usage such as the tilde or caret in `@import`/`url()` and updates the configuration to provide equivalent behavior
 * Converts to use the new lower dependency `@angular/build` Node.js package if no other `@angular-devkit/build-angular` usage is found.
 
 ### Manual migration
@@ -134,7 +134,7 @@ The following list discusses all the `browser` builder options that will need to
 - `ngswConfigPath` should be renamed to `serviceWorker`.
 
 If the application is not using SSR currently, this should be the final step to allow `ng build` to function.
-After executing `ng build` for the first time, there may be new warnings or errors based on behavioral differences or application usage of Webpack-specific features.
+After executing `ng build` for the first time, there may be new warnings or errors based on behavioral differences or application usage of webpack-specific features.
 Many of the warnings will provide suggestions on how to remedy that problem.
 If it appears that a warning is incorrect or the solution is not apparent, please open an issue on [GitHub](https://github.com/angular/angular-cli/issues).
 Also, the later sections of this guide provide additional information on several specific cases as well as current known issues.
@@ -179,19 +179,22 @@ ng serve
 
 You can continue to use the [command line options](/cli/serve) you have used in the past with the development server.
 
+HELPFUL: With the development server, you may see a small Flash of Unstyled Content (FOUC) on startup as the server initializes.
+The development server attempts to defer processing of stylesheets until first use to improve rebuild times.
+This will not occur in builds outside the development server.
+
 ### Hot module replacement
 
 Hot Module Replacement (HMR) is a technique used by development servers to avoid reloading the entire page when only part of an application is changed.
 The changes in many cases can be immediately shown in the browser which allows for an improved edit/refresh cycle while developing an application.
 While general JavaScript-based hot module replacement (HMR) is currently not supported, several more specific forms of HMR are available:
-- **global stylesheets** (default)
-- **component stylesheet** (default)
-- **component template** (experimental opt-in)
+- **global stylesheet** (`styles` build option)
+- **component stylesheet** (inline and file-based)
+- **component template** (inline and file-based)
 
-The stylesheet HMR capabilities are automatically enabled and require no code or configuration changes to use.
-Angular provides HMR support for both file-based (`styleUrl`/`styleUrls`) and inline (`styles`) component styles.
+The HMR capabilities are automatically enabled and require no code or configuration changes to use.
+Angular provides HMR support for both file-based (`templateUrl`/`styleUrl`/`styleUrls`) and inline (`template`/`styles`) component styles and templates.
 The build system will attempt to compile and process the minimal amount of application code when it detects a stylesheet only change.
-In many cases, no JavaScript/TypeScript processing will be required.
 
 If preferred, the HMR capabilities can be disabled by setting the `hmr` development server option to `false`.
 This can also be changed on the command line via:
@@ -201,14 +204,6 @@ This can also be changed on the command line via:
 ng serve --no-hmr
 
 </docs-code>
-
-In addition to fully supported component stylesheet HMR, Angular provides **experimental** support for component template HMR.
-Template HMR also requires no application code changes but currently requires the use of the `NG_HMR_TEMPLATES=1` environment variable to enable.
-
-IMPORTANT: Component **template** HMR is experimental and is not enabled by default.
-Currently, only file-based (`styleUrl`) templates are supported and any inline template changes will cause a full page reload.
-When manually enabled, there may be cases where the browser is not fully synchronized with the application code and a restart of the development server may be required.
-If you encounter an issue while using this feature, please [report the bug](https://github.com/angular/angular-cli/issues) to help the Angular team stabilize the feature.
 
 ### Vite as a development server
 
@@ -279,7 +274,7 @@ An example is as follows:
       ...
       "define": {
           "SOME_NUMBER": "5",
-          "ANOTHER": "''this is a string literal, note the extra single quotes'",
+          "ANOTHER": "'this is a string literal, note the extra single quotes'",
           "REFERENCE": "globalThis.someValue.noteTheAbsentSingleQuotes"
       }
     }

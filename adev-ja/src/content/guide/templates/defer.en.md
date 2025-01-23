@@ -10,7 +10,7 @@ To use this feature, you can declaratively wrap a section of your template in a 
 }
 ```
 
-The code for any components, directives, and pipes inside of the `@defer` block is split into a separate JavaScript file and loaded only when necessary, after the rest of the template has been rendered.
+The code for any components, directives, and pipes inside the `@defer` block is split into a separate JavaScript file and loaded only when necessary, after the rest of the template has been rendered.
 
 Deferrable views support a variety of triggers, prefetching options, and sub-blocks for placeholder, loading, and error state management.
 
@@ -20,10 +20,12 @@ Components, directives, pipes, and any component CSS styles can be deferred when
 
 In order for the dependencies within a `@defer` block to be deferred, they need to meet two conditions:
 
-1. **They must be standalone.** Non-stadalone dependencies cannot be deferred and are still eagerly loaded, even if they are inside of `@defer` blocks.
-1. **They cannot be referenced outside of `@defer` blocks within the same file.** If they are referenced outside of the `@defer` block or referenced within ViewChild queries, the dependencies will be eagerly loaded.
+1. **They must be standalone.** Non-standalone dependencies cannot be deferred and are still eagerly loaded, even if they are inside of `@defer` blocks.
+1. **They cannot be referenced outside of `@defer` blocks within the same file.** If they are referenced outside the `@defer` block or referenced within ViewChild queries, the dependencies will be eagerly loaded.
 
 The _transitive_ dependencies of the components, directives and pipes used in the `@defer` block do not strictly need to be standalone; transitive dependencies can still be declared in an `NgModule` and participate in deferred loading.
+
+Angular's compiler produces a [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) statement for each component, directive, and pipe used in the `@defer` block. The main content of the block renders after all the imports resolve. Angular does not guarantee any particular order for these imports.
 
 ## How to manage different stages of deferred loading
 
@@ -189,7 +191,7 @@ By default, the placeholder acts as the interaction element. Placeholders used t
 }
 ```
 
-Alternatively, you can specify a [template reference variable](/guide/templates/variables) in the same template as the `@defer` block as the element that is watched to enter the viewport. This variable is passed in as a parameter on the viewport trigger.Z
+Alternatively, you can specify a [template reference variable](/guide/templates/variables) in the same template as the `@defer` block as the element that is watched to enter the viewport. This variable is passed in as a parameter on the viewport trigger.
 
 ```angular-html
 <div #greeting>Hello!</div>
@@ -321,9 +323,9 @@ it('should render a defer block in different states', async () => {
 
 ## How does `@defer` work with server-side rendering (SSR) and static-site generation (SSG)?
 
-When rendering an application on the server (either using SSR or SSG), defer blocks always render their `@placeholder` (or nothing if a placeholder is not specified).
+By default, when rendering an application on the server (either using SSR or SSG), defer blocks always render their `@placeholder` (or nothing if a placeholder is not specified) and triggers are not invoked. On the client, the content of the `@placeholder` is hydrated and triggers are activated.
 
-Triggers are ignored on the server.
+To render the main content of `@defer` blocks on the server (both SSR and SSG), you can enable [the Incremental Hydration feature](/guide/incremental-hydration) and configure `hydrate` triggers for the necessary blocks.
 
 ## Best practices for deferring views
 

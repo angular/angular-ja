@@ -263,8 +263,7 @@ export class MyComponent {
 }
 ```
 
-IMPORTANT: The above tokens will be `null` in the following scenarios:<br><br>
-
+IMPORTANT: The above tokens will be `null` in the following scenarios:
 - During the build processes.
 - When the application is rendered in the browser (client-side rendering).
 - When performing static site generation (SSG).
@@ -272,7 +271,7 @@ IMPORTANT: The above tokens will be `null` in the following scenarios:<br><br>
 
 ## Configuring a non-Node.js Server
 
-The `@angular/ssr` provides essential APIs for server-side rendering your Angular application on platforms other than Node.js. It leverages the standard [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects from the Web API, enabling you to integrate Angular SSR into various server environments. For detailed information and examples, refer to the [`@angular/ssr` API reference](api/ssr/node/AngularAppEngine).
+The `@angular/ssr` provides essential APIs for server-side rendering your Angular application on platforms other than Node.js. It leverages the standard [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects from the Web API, enabling you to integrate Angular SSR into various server environments. For detailed information and examples, refer to the [`@angular/ssr` API reference](api/ssr/AngularAppEngine).
 
 ```typescript
 // server.ts
@@ -302,7 +301,7 @@ import express from 'express';
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.get('*', (req, res, next) =>
+app.use('*', (req, res, next) => {
   angularApp
     .handle(req)
     .then(response => {
@@ -319,4 +318,4 @@ app.get('*', (req, res, next) =>
  * The request handler used by the Angular CLI (dev-server and during build).
  */
 export const reqHandler = createNodeRequestHandler(app);
-```v
+```

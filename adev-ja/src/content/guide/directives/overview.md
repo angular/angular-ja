@@ -69,6 +69,8 @@ HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` �
 
 ## `NgStyle` を使用してインラインスタイルを設定する
 
+HELPFUL: To add or remove a _single_ style, use [style bindings](guide/templates/binding#css-class-and-style-property-bindings) rather than `NgStyle`.
+
 ### コンポーネントに `NgStyle` をインポートする
 
 `NgStyle` を使用するには、コンポーネントの `imports` リストに追加します。

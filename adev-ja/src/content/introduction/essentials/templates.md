@@ -23,7 +23,7 @@ export class TodoListItem {
 Angularがコンポーネントをレンダリングすると、以下が表示されます。
 
 ```html
-<h1>Profile file pro_programmer_123</h1>
+<h1>Profile for pro_programmer_123</h1>
 ```
 
 シグナルの値が変更されると、Angularはバインディングを自動的に最新の状態に保ちます。
@@ -36,7 +36,7 @@ this.userName.set('cool_coder_789');
 レンダリングされたページは新しい値を反映して更新されます。
 
 ```html
-<h1>Profile file cool_coder_789</h1>
+<h1>Profile for cool_coder_789</h1>
 ```
 
 ## 動的なプロパティと属性の設定
@@ -46,7 +46,7 @@ Angularは、角括弧を使用して動的な値をDOMプロパティにバイ�
 ```angular-ts
 @Component({
   /*...*/
-  // `isAccountDisabled`の値に基づいて、ボタンの`disabled`プロパティを設定します。
+  // `isValidUserId`の値に基づいて、ボタンの`disabled`プロパティを設定します。
   template: `<button [disabled]="isValidUserId()">Save changes</button>`,
 })
 export class UserProfile {

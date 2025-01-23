@@ -102,7 +102,7 @@ const routes: Routes = [
   </ul>
 </nav>
 <!-- The routed views render in the <router-outlet>-->
-<router-outlet></router-outlet>
+<router-outlet />
 ```
 
 `AppComponent` の `imports` 配列に `RouterLink`、`RouterLinkActive`、`RouterOutlet` を追加する必要もあります。
@@ -110,7 +110,7 @@ const routes: Routes = [
 ```ts
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -269,7 +269,7 @@ const routes: Routes = [
   </ul>
 </nav>
 
-<router-outlet></router-outlet>
+<router-outlet />
 ```
 
 子ルートは、`path` と `component` の両方を持つ必要があるという点で、他のルートと同じです。
@@ -328,7 +328,7 @@ HELPFUL: `title` プロパティは、静的なルート `data` や、`ResolveFn
 `TitleStrategy` を拡張して、カスタムタイトル戦略を提供できます。
 
 ```ts
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TemplatePageTitleStrategy extends TitleStrategy {
   constructor(private readonly title: Title) {
     super();
@@ -345,7 +345,7 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    {provide: TitleStrategy, useClass: TemplatePageTitleStrategy},
+    { provide: TitleStrategy, useClass: TemplatePageTitleStrategy },
   ]
 };
 ```
@@ -365,7 +365,7 @@ export const appConfig: ApplicationConfig = {
     <li><a routerLink="../second-component">Relative Route to second component</a></li>
   </ul>
 </nav>
-<router-outlet></router-outlet>
+<router-outlet />
 ```
 
 `../` に加えて、`./` または先頭にスラッシュがないものを、現在のレベルを指定するために使用します。
@@ -394,12 +394,12 @@ goToItems() {
 この例では、ルートに `id` パラメータが含まれており、特定のヒーローページをターゲットにできます。
 
 ```ts
-import {ApplicationConfig} from "@angular/core";
-import {Routes} from '@angular/router';
-import {HeroListComponent} from './hero-list.component';
+import { ApplicationConfig } from "@angular/core";
+import { Routes } from '@angular/router';
+import { HeroListComponent } from './hero-list.component';
 
 export const routes: Routes = [
-  {path: 'hero/:id', component: HeroDetailComponent}
+  { path: 'hero/:id', component: HeroDetailComponent }
 ];
 
 export const appConfig: ApplicationConfig = {
@@ -410,15 +410,15 @@ export const appConfig: ApplicationConfig = {
 まず、ナビゲート元のコンポーネントで、次のメンバーをインポートします。
 
 ```ts
+import { inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, switchMap } from 'rxjs';
 ```
 
 次に、アクティブなルートサービスを注入します。
 
 ```ts
-constructor(private route: ActivatedRoute) {}
+private readonly route = inject(ActivatedRoute);
 ```
 
 クラスを構成して、`heroes$` というObservable、ヒーローの `id` 番号を保持する `selectedId`、および `ngOnInit()` 内のヒーローを取得できるようにします。次のコードを追加して、選択したヒーローの `id` を取得します。
@@ -449,11 +449,10 @@ import { Observable } from 'rxjs';
 コンポーネントクラスのコンストラクターに `ActivatedRoute` と `Router` を注入して、このコンポーネントで使用できるようにします。
 
 ```ts
-hero$: Observable<Hero>;
+private readonly route = inject(ActivatedRoute);
+private readonly router = inject(Router);
 
-constructor(
-  private route: ActivatedRoute,
-  private router: Router  ) {}
+hero$: Observable<Hero>;
 
 ngOnInit() {
   const heroId = this.route.snapshot.paramMap.get('id');
@@ -516,10 +515,11 @@ ng generate guard your-guard
 
 ```ts
 export const yourGuardFunction: CanActivateFn = (
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot) => {
-      // your  logic goes here
-  }
+  next: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  // your  logic goes here
+}
 ```
 
 ルーティングモジュールで、`routes` 構成の適切なプロパティを使用します。
@@ -600,7 +600,7 @@ export const yourGuardFunction: CanActivateFn = (
       <a [routerLink]="['/crisis-center/1', { foo: 'foo' }]">Dragon Crisis</a>
       <a [routerLink]="['/crisis-center/2']">Shark Crisis</a>
     </nav>
-    <router-outlet></router-outlet>
+    <router-outlet />
   `
 })
 export class AppComponent {}

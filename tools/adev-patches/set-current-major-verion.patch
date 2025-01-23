@@ -1,13 +1,13 @@
 diff --git a/adev/src/app/app.config.ts b/adev/src/app/app.config.ts
-index 1bc572a030..40345f5292 100644
+index 52ab0a523c..6cf5be631c 100644
 --- a/adev/src/app/app.config.ts
 +++ b/adev/src/app/app.config.ts
-@@ -77,7 +77,7 @@ export const appConfig: ApplicationConfig = {
-     provideAnimationsAsync(),
+@@ -80,7 +80,7 @@ export const appConfig: ApplicationConfig = {
+     provideEnvironmentInitializer(() => inject(AnalyticsService)),
      {
        provide: CURRENT_MAJOR_VERSION,
 -      useValue: Number(VERSION.major),
 +      useValue: 19,
      },
      {provide: ENVIRONMENT, useValue: environment},
-     {
+     {provide: ErrorHandler, useClass: CustomErrorHandler},

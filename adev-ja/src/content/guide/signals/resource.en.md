@@ -4,7 +4,7 @@ IMPORTANT: `resource` is [experimental](reference/releases#experimental). It's r
 
 Most signal APIs are synchronous— `signal`, `computed`, `input`, etc. However, applications often need to deal with data that is available asynchronously. A `Resource` gives you a way to incorporate async data into your application's signal-based code.
 
-You can use a `Resource` to perform any kind of async operation, but the most common use-case for `Resource` is fetching data from a server. The following creates a resource to fetch some user data.
+You can use a `Resource` to perform any kind of async operation, but the most common use-case for `Resource` is fetching data from a server. The following example creates a resource to fetch some user data.
 
 The easiest way to create a `Resource` is the `resource` function.
 
@@ -23,7 +23,7 @@ const userResource = resource({
   loader: ({request}) => fetchUser(request),
 });
 
-// Created a computed based on the result of the resource's loader function.
+// Create a computed signal based on the result of the resource's loader function.
 const firstName = computed(() => userResource.value().firstName);
 ```
 
@@ -46,6 +46,9 @@ The `ResourceLoaderParams` object contains three properties: `request`, `previou
 | `request`     | The value of the resource's `request` computation.                                                                                               |
 | `previous`    | An object with a `status` property, containing the previous `ResourceStatus`.                                                                    |
 | `abortSignal` | An [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal). See [Aborting requests](#aborting-requests) below for details. |
+
+
+If the `request` computation returns `undefined`, the loader function does not run and the resource status becomes `Idle`.
 
 ### Aborting requests
 
@@ -85,17 +88,13 @@ const userResource = resource({
 userResource.reload();
 ```
 
-### `undefined` requests
-
-A request value of `undefined` prevents the resource from running its loader, and will put the resource into an `Idle` state.
-
 ## Resource status
 
 The resource object has several signal properties for reading the status of the asynchronous loader.
 
 | Property    | Description                                                                                                     |
 | ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `value`     | The most recent value of the resource, or `undefined` if no value has been recieved.                            |
+| `value`     | The most recent value of the resource, or `undefined` if no value has been received.                            |
 | `hasValue`  | Whether the resource has a value.                                                                               |
 | `error`     | The most recent error encountered while running the resource's loader, or `undefined` if no error has occurred. |
 | `isLoading` | Whether the resource loader is currently running.                                                               |

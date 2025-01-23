@@ -16,7 +16,7 @@ ng add @angular/ssr
 
 </docs-code>
 
-<div class="alert is-helpful">
+<div class="docs-alert docs-alert-helpful">
 
 最初からプリレンダリング機能を持つアプリケーションを作成するには、[`ng new --ssr`](tools/cli/setup-local) コマンドを使用します。
 

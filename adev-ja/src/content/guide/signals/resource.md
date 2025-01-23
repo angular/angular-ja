@@ -23,7 +23,7 @@ const userResource = resource({
   loader: ({request}) => fetchUser(request),
 });
 
-// リソースのローダー関数の結果に基づいてcomputedを作成します。
+// リソースのローダー関数の結果に基づいて算出シグナルを作成します。
 const firstName = computed(() => userResource.value().firstName);
 ```
 
@@ -46,6 +46,9 @@ const firstName = computed(() => userResource.value().firstName);
 | `request`     | リソースの`request`計算の値。                                                                                               |
 | `previous`    | `status`プロパティを含む、前の`ResourceStatus`を持つオブジェクト。                                                                    |
 | `abortSignal` | [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)。詳細は下記の[リクエストの中断](#aborting-requests)を参照してください。 |
+
+
+`request`の計算が`undefined`を返す場合、ローダー関数は実行されず、リソースの状態は`Idle`になります。
 
 ### リクエストの中断 {#aborting-requests}
 
@@ -84,10 +87,6 @@ const userResource = resource({
 
 userResource.reload();
 ```
-
-### `undefined` リクエスト {#undefined-requests}
-
-`undefined`のリクエスト値は、リソースがローダーを実行するのを防ぎ、リソースを`Idle`状態にします。
 
 ## リソースの状態
 

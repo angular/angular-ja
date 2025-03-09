@@ -10,11 +10,11 @@ index fcb60cbd77..f59ab93291 100644
 +  aDevVersionsLinkPattern: 'https://{{prefix}}{{version}}angular.jp',
    aioVersions: [
      {
-       version: 'v17',
-       url: 'https://v17.angular.io/docs',
+       version: 'v18',
+       url: 'https://v18.angular.dev/overview',
      },
      {
-       version: 'v16',
+       version: 'v17',
 diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
 index 3da3517a8f..a2d80ea740 100644
 --- a/adev/src/app/core/services/version-manager.service.ts

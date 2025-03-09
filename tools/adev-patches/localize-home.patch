@@ -13,8 +13,9 @@ index a599d9eefa..75a23c7b6e 100644
      </a>
      <div class="learn-angular">
        <a [routerLink]="ctaLink" class="adev-cta">
-         <button class="docs-primary-btn" [attr.text]="'Learn Angular'" aria-label="Learn Angular">
+-        <button class="docs-primary-btn" [attr.text]="'Learn Angular'" aria-label="Learn Angular">
 -          Learn Angular
++        <button class="docs-primary-btn" [attr.text]="'Angular を学ぶ'" aria-label="Angular を学ぶ">
 +          Angular を学ぶ
          </button>
        </a>

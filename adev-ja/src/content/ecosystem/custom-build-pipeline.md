@@ -1,33 +1,33 @@
-# Custom build pipeline
+# カスタムビルドパイプライン
 
-When building an Angular app we strongly recommend you to use the Angular CLI to leverage its structure-dependent update functionality and build system abstraction. This way your projects benefit from the latest security, performance, and API improvements and transparent build improvements.
+Angularアプリケーションを構築する際、Angular CLIを使用して、その構造に依存した更新機能とビルドシステムの抽象化を活用することを強くおすすめします。これにより、プロジェクトは最新のセキュリティ、パフォーマンス、APIの改善、および透過的なビルドの改善の恩恵を受けることができます。
 
-This page explores the **rare use cases** when you need a custom build pipeline that does not use the Angular CLI. All listed tools below are open source build plugins that are maintained by members of the Angular community. To learn more about their support model and maintenance status look at their documentation and GitHub repository URLs.
+このページでは、Angular CLIを使用しないカスタムビルドパイプラインが必要となる**まれなユースケース**について説明します。以下にリストされているすべてのツールは、Angularコミュニティのメンバーによってメンテナンスされているオープンソースのビルドプラグインです。サポートモデルとメンテナンス状況の詳細については、ドキュメントとGitHubリポジトリのURLを参照してください。
 
-## When should you use a custom build pipeline?
+## カスタムビルドパイプラインはいつ使用すべきですか？
 
-There are some niche use cases when you may want to maintain a custom build pipeline. For example:
+カスタムビルドパイプラインを維持したいニッチなユースケースがいくつかあります。次に例を示します。
 
-* You have an existing app using a different toolchain and you’d like to add Angular to it
-* You’re strongly coupled to [module federation](https://module-federation.io/) and unable to adopt bundler-agnostic [native federation](https://www.npmjs.com/package/@angular-architects/native-federation)
-* You’d like to create an short-lived experiment using your favorite build tool
+* 異なるツールチェーンを使用している既存のアプリケーションがあり、それにAngularを追加したい場合
+* [モジュールフェデレーション](https://module-federation.io/)に強く結びついており、バンドラーに依存しない[ネイティブフェデレーション](https://www.npmjs.com/package/@angular-architects/native-federation)を採用できない場合
+* お気に入りのビルドツールを使用して、短期間の実験を作成したい場合
 
-## What are the options?
+## どのような選択肢がありますか？
 
-Currently, there are two well supported community tools that enable you to create a custom build pipeline with a [Vite plugin](https://www.npmjs.com/package/@analogjs/vite-plugin-angular) and [Rspack plugin](https://www.npmjs.com/package/@ng-rspack/build). Both of them use underlying abstractions that power the Angular CLI. They allow you to create a flexible build pipeline and require manual maintenance and no automated update experience.
+現在、[Vite プラグイン](https://www.npmjs.com/package/@analogjs/vite-plugin-angular)と[Rspack プラグイン](https://www.npmjs.com/package/@ng-rspack/build)を使用してカスタムビルドパイプラインを作成できる、十分にサポートされた2つのコミュニティツールがあります。どちらも、Angular CLIを強化する基盤となる抽象レイヤを使用しています。これらにより、柔軟なビルドパイプラインを作成できますが、手動でのメンテナンスが必要であり、自動化された更新の体験は得られません。
 
 ### Rspack
 
-Rspack is a Rust-based bundler that aims to provide compatibility with the webpack plugin ecosystem.
+Rspackは、webpackプラグインエコシステムとの互換性を提供することを目的としたRustベースのバンドラーです。
 
-If your project is tightly coupled to the webpack ecosystem, heavily relying on a custom webpack configuration you can leverage Rspack to improve your build times.
+プロジェクトがwebpackエコシステムに密接に結合されており、カスタムwebpack構成に大きく依存している場合は、Rspackを活用してビルド時間を改善できます。
 
-You can find more about Angular Rspack on the project’s [documentation website](https://angular-rspack.dev/guide/migration/from-webpack).
+Angular Rspackの詳細については、プロジェクトの[ドキュメントWebサイト](https://angular-rspack.dev/guide/migration/from-webpack)を参照してください。
 
 ### Vite
 
-Vite is a frontend build tool that aims to provide a faster and leaner development experience for modern web projects. Vite is also extensible through its plugin system that allows ecosystems to build integrations with Vite, such as Vitest for unit and browser testing, Storybook for authoring components in isolation, and more. The Angular CLI also uses Vite as its development server.
+Viteは、最新のWebプロジェクト向けに、より高速で無駄のない開発エクスペリエンスを提供することを目的としたフロントエンドビルドツールです。Viteはプラグインシステムを通じて拡張可能で、エコシステムは、ユニットテストおよびブラウザテスト用のVitest、コンポーネントを分離して作成するためのStorybookなど、Viteとの統合を構築できます。Angular CLIは、Viteを開発サーバーとしても使用します。
 
-The [AnalogJS Vite plugin for Angular](https://www.npmjs.com/package/@analogjs/vite-plugin-angular) enables the adoption of Angular with a project or framework that uses or is built on top of Vite. This can consist of developing and building an Angular project with Vite directly, or adding Angular to an existing project or pipeline. One example is integrating Angular UI components into a documentation website using [Astro and Starlight](https://analogjs.org/docs/packages/astro-angular/overview).
+[Angular用AnalogJS Viteプラグイン](https://www.npmjs.com/package/@analogjs/vite-plugin-angular)を使用すると、Viteを使用または上に構築されたプロジェクトまたはフレームワークでAngularを採用できます。これには、Viteを使用してAngularプロジェクトを直接開発および構築したり、既存のプロジェクトまたはパイプラインにAngularを追加したりすることが含まれます。1つの例は、[Astro and Starlight](https://analogjs.org/docs/packages/astro-angular/overview)を使用して、Angular UIコンポーネントをドキュメントWebサイトに統合することです。
 
-You can learn more about AnalogJS and how to use the plugin through its [documentation page](https://analogjs.org/docs/packages/vite-plugin-angular/overview).
+AnalogJSの詳細とプラグインの使用方法については、[ドキュメントページ](https://analogjs.org/docs/packages/vite-plugin-angular/overview)を参照してください。

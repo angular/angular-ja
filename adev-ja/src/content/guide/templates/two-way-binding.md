@@ -4,13 +4,13 @@
 
 ## 構文
 
-双方向バインディングの構文は、角括弧 `[]` と丸括弧 `()` を組み合わせた `[()]` です。これはプロパティバインディングの構文 `[]` とイベントバインディングの構文 `()` を組み合わせたものです。Angularコミュニティでは、この構文を非公式に「バナナインボックス」と呼んでいます。
+双方向バインディングの構文は、角括弧`[]`と丸括弧`()`を組み合わせた`[()]`です。これはプロパティバインディングの構文`[]`とイベントバインディングの構文`()`を組み合わせたものです。Angularコミュニティでは、この構文を非公式に「バナナインボックス」と呼んでいます。
 
 ## フォームコントロールでの双方向バインディング
 
-開発者は、ユーザーがコントロールを操作したときに、コンポーネントデータとフォームコントロールを同期させるために、双方向バインディングを頻繁に使用します。たとえば、ユーザーがテキスト入力に入力すると、コンポーネントの状態が更新されます。
+開発者は、ユーザーがコントロールを操作したときに、コンポーネントデータとフォームコントロールを同期させるため、双方向バインディングを頻繁に使用します。例えば、ユーザーがテキスト入力に入力すると、コンポーネントの状態が更新されます。
 
-次の例では、ページの `firstName` 属性が動的に更新されます。
+次の例では、ページの`firstName`属性が動的に更新されます。
 
 ```angular-ts
 import { Component } from '@angular/core';
@@ -32,9 +32,9 @@ export class AppComponent {
 
 ネイティブフォームコントロールで双方向バインディングを使用するには、次の手順を実行する必要があります。
 
-1. `@angular/forms` から `FormsModule` をインポートする
-1. 双方向バインディング構文（例：`[(ngModel)]`）で `ngModel` ディレクティブを使用する
-1. 更新する状態（例：`firstName`）を割り当てる
+1. `@angular/forms`から`FormsModule`をインポートする
+2. 双方向バインディング構文（例：`[(ngModel)]`）で`ngModel`ディレクティブを使用する
+3. 更新する状態（例：`firstName`）を割り当てる
 
 これらが設定されると、Angularはテキスト入力の更新がコンポーネントの状態に正しく反映されるようにします。
 
@@ -42,9 +42,9 @@ export class AppComponent {
 
 ## コンポーネント間の双方向バインディング
 
-親コンポーネントと子コンポーネント間の双方向バインディングを活用するには、フォーム要素と比較して、より多くの構成が必要です。
+親コンポーネントと子コンポーネント間の双方向バインディングを活用するには、フォーム要素と比較して、より多くの設定が必要です。
 
-ここでは、`AppComponent` が初期カウント状態を設定しますが、カウンターのUIを更新およびレンダリングするためのロジックは、主にその子である `CounterComponent` にある例を示します。
+ここでは、`AppComponent`が初期カウント状態を設定しますが、カウンターのUIを更新およびレンダリングするためのロジックは、主にその子である`CounterComponent`にある例を示します。
 
 ```angular-ts
 // ./app.component.ts
@@ -68,23 +68,21 @@ export class AppComponent {
 
 ```angular-ts
 // './counter/counter.component.ts';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
   template: `
     <button (click)="updateCount(-1)">-</button>
-    <span>{{ count }}</span>
+    <span>{{ count() }}</span>
     <button (click)="updateCount(+1)">+</button>
   `,
 })
 export class CounterComponent {
-  @Input() count: number;
-  @Output() countChange = new EventEmitter<number>();
+  count = model<number>(0);
 
   updateCount(amount: number): void {
-    this.count += amount;
-    this.countChange.emit(this.count);
+    this.count.update(currentCount => currentCount + amount);
   }
 }
 ```
@@ -93,34 +91,28 @@ export class CounterComponent {
 
 上記の例をコアに分解すると、コンポーネントの双方向バインディングごとに、次のものが必要です。
 
-子コンポーネントには、次のものが必要です。
-
-1. `@Input()` プロパティ
-1. `@Input()` プロパティと同じ名前で、最後に「Change」が追加された対応する `@Output()` イベントエミッター。エミッターは、`@Input()` プロパティと同じ型をエミットする必要があります。
-1. `@Input()` の更新された値をイベントエミッターにエミットするメソッド
+子コンポーネントは`model`プロパティを含んでいる必要があります。
 
 これは簡略化された例です。
 
 ```angular-ts
 // './counter/counter.component.ts';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model } from '@angular/core';
 
-@Component({ // 省略 })
+@Component({ // Omitted for brevity })
 export class CounterComponent {
-  @Input() count: number;
-  @Output() countChange = new EventEmitter<number>();
+  count = model<number>(0);
 
   updateCount(amount: number): void {
-    this.count += amount;
-    this.countChange.emit(this.count);
+    this.count.update(currentCount => currentCount + amount);
   }
 }
 ```
 
 親コンポーネントには、次のものが必要です。
 
-1. `@Input()` プロパティ名を双方向バインディング構文で囲む。
-1. 更新された値が割り当てられる対応するプロパティを指定する
+1. `model`プロパティ名を双方向バインディング構文で囲む。
+2. プロパティまたはシグナルを`model`プロパティに割り当てる。
 
 これは簡略化された例です。
 

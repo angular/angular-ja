@@ -9,7 +9,7 @@
 
 <docs-callout title="脆弱性の報告">
 
-Angularは、Google [オープンソースソフトウェア脆弱性報酬プログラム](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)の一部です。[Angularの脆弱性については、https://bughunters.google.comで報告してください](https://bughunters.google.com/report)。
+Angularは、Google [オープンソースソフトウェア脆弱性報酬プログラム](https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules)の一部です。Angularの脆弱性については、[https://bughunters.google.com で報告してください](https://bughunters.google.com/report)。
 
 Googleがセキュリティ上の問題をどのように処理するかについては、[Googleのセキュリティポリシー](https://www.google.com/about/appsecurity)を参照してください。
 
@@ -54,7 +54,7 @@ Angularは、XSSのバグを体系的に阻止するために、すべての値�
 *サニタイズ*とは、信頼されていない値を検査して、DOMに挿入しても安全な値に変換することです。
 多くの場合、サニタイズは値をまったく変更しません。
 サニタイズはコンテキストに依存します。
-CSSでは無害な値も、URLでは危険な可能性があります。
+例えば、CSSでは無害な値も、URLでは危険な可能性があります。
 
 Angularは、次のセキュリティコンテキストを定義しています。
 
@@ -95,7 +95,7 @@ Angularは、値を安全ではないと認識し、自動的にサニタイズ�
 
 避けられない場合、組み込みのAngularサニタイズ関数を使用してください。
 [DomSanitizer.sanitize](api/platform-browser/DomSanitizer#sanitize)メソッドと適切な`SecurityContext`を使用して、信頼されていない値をサニタイズします。
-その関数は、[以下で説明するように](#trusting-safe-values)、`bypassSecurityTrust`…関数を使用して信頼済みとしてマークされた値も受け取り、サニタイズしません。
+その関数は、[以下で説明するように](#trusting-safe-values)、`bypassSecurityTrust` 関数を使用して信頼済みとしてマークされた値も受け取り、サニタイズしません。
 
 ### 安全な値を信頼する {#trusting-safe-values}
 

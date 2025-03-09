@@ -1,82 +1,57 @@
-diff --git a/adev/src/app/features/home/home.component.html b/adev/src/app/features/home/home.component.html
-index 53d930d66d..732d40ec53 100644
---- a/adev/src/app/features/home/home.component.html
-+++ b/adev/src/app/features/home/home.component.html
-@@ -3,8 +3,8 @@
-     <div class="adev-top-content">
-       <!-- Banner(s) can be edited here! -->
-       <a href="https://blog.angular.dev/meet-angular-v19-7b29dfd05b84" class="adev-banner" target="_blank">
--        <h1 tabindex="-1">Angular v19 is here!</h1>
--        <p class="adev-banner-cta">Read about our newest release.</p>
-+        <h1 tabindex="-1">Angular v19 が利用可能です！</h1>
-+        <p class="adev-banner-cta">今すぐ開発者向けイベントを見よう!</p>
+diff --git a/adev/src/app/features/home/components/home-animation/home-animation.component.html b/adev/src/app/features/home/components/home-animation/home-animation.component.html
+index a599d9eefa..75a23c7b6e 100644
+--- a/adev/src/app/features/home/components/home-animation/home-animation.component.html
++++ b/adev/src/app/features/home/components/home-animation/home-animation.component.html
+@@ -6,13 +6,13 @@
+       class="adev-banner"
+       target="_blank"
+     >
+-      <h1 tabindex="-1">Angular v19 is here!</h1>
+-      <p class="adev-banner-cta">Read about our newest release.</p>
++      <h1 tabindex="-1">Angular v19 が利用可能です！</h1>
++      <p class="adev-banner-cta">最新リリースについて読む</p>
+     </a>
+     <div class="learn-angular">
+       <a [routerLink]="ctaLink" class="adev-cta">
+         <button class="docs-primary-btn" [attr.text]="'Learn Angular'" aria-label="Learn Angular">
+-          Learn Angular
++          Angular を学ぶ
+         </button>
        </a>
-     </div>
+       <div class="adev-arrow"></div>
+@@ -99,9 +99,9 @@
+ 
+   <!-- Works at any scale -->
+   <div adevAnimationLayer layerId="works-at-any-scale" class="works-at-any-scale-layer layer">
+-    <h2>Works at any scale</h2>
++    <h2>あらゆる規模で機能する</h2>
+     <p>
+-      Angular lets you start small on a well-lit path and supports you as your team and apps grow.
++      Angularなら見通しのいい道から小さくスタート。チームやアプリの成長に合わせてサポートします。
+     </p>
    </div>
-@@ -72,10 +72,10 @@
-     <div class="adev-scale-text">
-       <div class="adev-scale-container">
-         <div class="adev-scale-wrapper">
--          <h2>Works at any scale</h2>
-+          <h2>あらゆる規模で機能する</h2>
-           <p>
--            Angular lets you start small on a well-lit path and supports you as your team and apps
--            grow.
-+            Angularなら見通しのいい道から小さくスタート。
-+            チームやアプリの成長に合わせてサポートします。
-           </p>
-         </div>
-       </div>
-@@ -85,10 +85,9 @@
-     <div class="adev-lines-text">
-       <div class="adev-lines-container">
-         <div class="adev-lines-wrapper">
--          <h2>Loved by millions</h2>
-+          <h2>数百万人に愛される</h2>
-           <p>
--            Join the millions of developers all over the world building with Angular in a thriving
--            and friendly&nbsp;community.
-+            世界中の数百万人のAngular開発者たちと活発でフレンドリーなコミュニティに参加しよう。
-           </p>
-         </div>
-       </div>
-@@ -99,12 +98,11 @@
-       <div class="adev-build-container">
-         <div class="adev-build-wrapper">
-           <h2>
--            Build for everyone
--            <div class="adev-gradient" aria-hidden="true">Build for everyone</div>
-+            すべての人のために
-+            <div class="adev-gradient" aria-hidden="true">すべての人のために</div>
-           </h2>
-           <p>
--            Rely on Angular's built-in hydration, internationalization, security, and accessibility
--            support to build for everyone around the world.
-+            Angularに組み込まれたハイドレーション、国際化、セキュリティ、アクセシビリティのサポートを利用して、世界中すべての人のための開発を。
-           </p>
-         </div>
-       </div>
-@@ -112,10 +110,9 @@
-     <div class="adev-build-webgl-text" aria-hidden="true">
-       <div class="adev-build-container">
-         <div class="adev-build-wrapper">
--          <h2>Build for everyone</h2>
-+          <h2>すべての人のために</h2>
-           <p>
--            Rely on Angular's built-in hydration, internationalization, security, and accessibility
--            support to build for everyone around the world.
-+            Angularに組み込まれたハイドレーション、国際化、セキュリティ、アクセシビリティのサポートを利用して、世界中すべての人のための開発を。
-           </p>
-         </div>
-       </div>
-@@ -133,8 +130,8 @@
+ 
+@@ -124,19 +124,17 @@
+ 
+   <!-- Loved by millions -->
+   <div adevAnimationLayer layerId="loved-by-millions" class="loved-by-millions-layer layer">
+-    <h2>Loved by millions</h2>
++    <h2>数百万人に愛される</h2>
+     <p>
+-      Join the millions of developers all over the world building with Angular in a thriving and
+-      friendly community.
++      世界中の数百万人のAngular開発者たちと活発でフレンドリーなコミュニティに参加しよう。
+     </p>
    </div>
-   <div class="adev-arrow"></div>
-   <a routerLink="{{ctaLink}}" class="adev-cta">
--    <button class="docs-primary-btn" [attr.text]="'Learn Angular'" aria-label="Learn Angular">
--      Learn Angular
-+    <button class="docs-primary-btn" [attr.text]="'Angularを学びましょう'" aria-label="Angularを学びましょう">
-+      Angularを学びましょう
-     </button>
-   </a>
+ 
+   <!-- Build for everyone -->
+   <div adevAnimationLayer layerId="build-for-everyone" class="build-for-everyone-layer layer">
+-    <h2 class="title">Build for everyone</h2>
++    <h2 class="title">すべての人のために</h2>
+     <p>
+-      Rely on Angular's built-in hydration, internationalization, security, and accessibility
+-      support to build for everyone around the world.
++      Angularに組み込まれたハイドレーション、国際化、セキュリティ、アクセシビリティのサポートを利用して、世界中すべての人のための開発を。
+     </p>
+   </div>
  </div>

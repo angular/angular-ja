@@ -44,7 +44,7 @@ ${prh}
 `.trim();
 
     const model = this.#genAI.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.0-flash',
       generationConfig: {
         responseMimeType: 'application/json',
         temperature: 0.2,
@@ -60,7 +60,7 @@ ${prh}
     for (const block of blocks) {
       const { response } = await chatSession.sendMessage([
         {
-          text: '次の段落を翻訳してください。\n\n',
+          text: '次のテキストに含まれる英語を日本語に翻訳してください。\n\n',
         },
         {
           text: JSON.stringify({ text: block }),

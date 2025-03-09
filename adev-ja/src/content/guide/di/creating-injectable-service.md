@@ -33,14 +33,15 @@ export class Logger {
 たとえば、次の`HeroService`は`Logger`サービスに依存し、`BackendService`を使用してヒーローを取得します。
 そのサービスは、さらに`HttpClient`サービスに依存して、サーバーからヒーローを非同期に取得する場合があります。
 
-<docs-code header="src/app/hero.service.ts (class)" language="typescript"
-           highlight="[5,6,10,12]">
+<docs-code header="src/app/hero.service.ts" language="typescript"
+           highlight="[7,8,12,13]">
+import { inject } from "@angular/core";
+
 export class HeroService {
   private heroes: Hero[] = [];
 
-  constructor(
-    private backend: BackendService,
-    private logger: Logger) {}
+  private backend = inject(BackendService);
+  private logger = inject(Logger);
 
   async getHeroes() {
     // Fetch
@@ -100,15 +101,27 @@ export class HeroService {
 
 ## サービスの注入
 
-コンポーネントにサービスを依存性として注入するには、コンポーネントの`constructor()`を使用し、依存性の型を持つコンストラクター引数を指定します。
+コンポーネントに依存性としてサービスを注入するには、依存性を表すクラスフィールドを宣言し、Angularの`inject`関数を使用して初期化できます。
 
-次の例では、`HeroListComponent`コンストラクターに`HeroService`を指定しています。
+次の例では、`HeroListComponent`内で`HeroService`を指定しています。
 `heroService`の型は`HeroService`です。
 `HeroService`クラスはすでに`@Injectable`デコレーターで修飾されているため、Angularは`HeroService`型を依存性として認識します。
 
-<docs-code header="src/app/heroes/hero-list.component (constructor signature)" language="typescript">
-  constructor(heroService: HeroService)
+<docs-code header="src/app/heroes/hero-list.component.ts" language="typescript">
+import { inject } from "@angular/core";
+
+export class HeroListComponent {
+  private heroService = inject(HeroService);
+}
 </docs-code>
+
+コンポーネントのコンストラクターを使用しても同様に、サービスをコンポーネントに注入できます:
+
+<docs-code header="src/app/heroes/hero-list.component.ts (constructor signature)" language="typescript">
+  constructor(private heroService: HeroService)
+</docs-code>
+
+`inject`メソッドはクラスと関数の両方で使用できますが、コンストラクターメソッドは当然ながらクラスコンストラクターでのみ使用できます。ただし、いずれの場合も、依存性は通常コンポーネントの構築または初期化において、有効な[注入コンテキスト](guide/di/dependency-injection-context)でのみ注入できます。
 
 ## 他のサービスでのサービスの注入
 
@@ -117,7 +130,7 @@ export class HeroService {
 
 <docs-code header="src/app/heroes/hero.service.ts" language="typescript"
            highlight="[3,9,12]">
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HEROES } from './mock-heroes';
 import { Logger } from '../logger.service';
 
@@ -125,7 +138,7 @@ import { Logger } from '../logger.service';
   providedIn: 'root',
 })
 export class HeroService {
-  constructor(private logger: Logger) {}
+  private logger = inject(Logger);
 
   getHeroes() {
     this.logger.log('Getting heroes.');

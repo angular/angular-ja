@@ -65,28 +65,31 @@ export const serverRoutes: ServerRoute[] = [
 ];
 ```
 
-[`provideServerRoutesConfig`](api/ssr/provideServerRoutesConfig 'API reference')関数を使用して、この設定をアプリケーションに追加できます。
+[`provideServerRouting`](api/ssr/provideServerRouting 'API reference')関数を使用して、この設定をアプリケーションに追加できます。
 
 ```typescript
-import { provideServerRoutesConfig } from '@angular/ssr';
+import { provideServerRouting } from '@angular/ssr';
 import { serverRoutes } from './app.routes.server';
 
 // app.config.server.ts
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(),
-    provideServerRoutesConfig(serverRoutes),
+    provideServerRouting(serverRoutes),
     // ... other providers ...
   ]
 };
 ```
 
-[App Shellパターン](ecosystem/service-workers/app-shell)を使用する場合は、クライアントサイドでレンダリングされたルートのアプリケーションシェルとして使用するルートを指定する必要があります。これを行うには、`appShellRoute`プロパティを持つオプションオブジェクトを`provideServerRoutesConfig`に提供します。
+[App Shellパターン](ecosystem/service-workers/app-shell)を使用する場合は、クライアントサイドでレンダリングされたルートのアプリケーションシェルとして使用するルートを指定する必要があります。これを行うには、`appShellRoute`プロパティを持つオプションオブジェクトを[`provideServerRouting`](api/ssr/provideServerRouting 'API reference')に提供します。
 
 ```typescript
+import { provideServerRouting, withAppShell } from '@angular/ssr';
+import { AppShellComponent } from './app-shell/app-shell.component';
+
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRoutesConfig(serverRoutes, { appShellRoute: 'shell' }),
+    provideServerRouting(serverRoutes, withAppShell(AppShellComponent)),
     // ... other providers ...
   ]
 };

@@ -22,6 +22,7 @@
 - **Node.js** - v[^18.19.1以降](/reference/versions)
 - **テキストエディタ** - [Visual Studio Code](https://code.visualstudio.com/)を推奨
 - **ターミナル** - Angular CLIコマンドを実行するために必要
+- **開発ツール** - 開発ワークフローを改善するために、[Angular Language Service](/tools/language-service) をおすすめします
 
 ### 手順
 
@@ -31,11 +32,29 @@
 
 ターミナルを開き（[Visual Studio Code](https://code.visualstudio.com/)を使用している場合は、[統合ターミナル](https://code.visualstudio.com/docs/editor/integrated-terminal)を開くことができます）、次のコマンドを実行します。
 
-<docs-code language="shell">
+<docs-code-multifile>
+  <docs-code
+    header="npm"
+    >
+    npm install -g @angular/cli
+    </docs-code>
+  <docs-code
+    header="pnpm"
+    >
+    pnpm install -g @angular/cli
+    </docs-code>
+  <docs-code
+    header="yarn"
+    >
+    yarn global add @angular/cli
+    </docs-code>
+  <docs-code
+    header="bun"
+    >
+    bun install -g @angular/cli
+    </docs-code>
 
-npm install -g @angular/cli
-
-</docs-code>
+</docs-code-multifile>
 
 WindowsまたはUnixでこのコマンドを実行する際に問題が発生した場合は、[CLIドキュメント](/tools/cli/setup-local#install-the-angular-cli)を参照してください。
 

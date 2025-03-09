@@ -13,15 +13,15 @@ index ac27b818c4..9b34429ee9 100644
   * Information about the deployment of this application.
 
 diff --git a/adev/src/index.html b/adev/src/index.html
-index f6d4c0eb48..d0087eaf2a 100644
+index 4b15ccb87c..923c9e1799 100644
 --- a/adev/src/index.html
 +++ b/adev/src/index.html
 @@ -58,7 +58,7 @@
      <link rel="manifest" href="/assets/icons/site.webmanifest" />
      <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#e90464" />
      <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
--    <link rel="canonical" href="https://angular.dev">
-+    <link rel="canonical" href="https://angular.jp">
+-    <link rel="canonical" href="https://angular.dev" />
++    <link rel="canonical" href="https://angular.jp" />
  
      <meta name="apple-mobile-web-app-title" content="Angular" />
      <meta name="application-name" content="Angular" />

@@ -83,7 +83,7 @@ The first test shows the benefit of automatic change detection.
 
 The second and third test reveal an important limitation.
 The Angular testing environment does not run change detection synchronously when updates happen inside the test case that changed the component's `title`.
-The test must call `await fixture.whenStable` to wait for another of change detection.
+The test must call `await fixture.whenStable` to wait for another round of change detection.
 
 HELPFUL: Angular does not know about direct updates to values that are not signals. The easiest way to ensure that
 change detection will be scheduled is to use signals for values read in the template.
@@ -554,7 +554,7 @@ It confirms that the selected `DashboardHeroComponent` hero really does find its
 A *routing component* is a component that tells the `Router` to navigate to another component.
 The `DashboardComponent` is a *routing component* because the user can navigate to the `HeroDetailComponent` by clicking on one of the *hero buttons* on the dashboard.
 
-Angular provides test helpers to reduce boilerplate and more effectively test code which depends `HttpClient`. The `provideRouter` function can be used directly in the test module as well.
+Angular provides test helpers to reduce boilerplate and more effectively test code which depends on `HttpClient`. The `provideRouter` function can be used directly in the test module as well.
 
 <docs-code header="app/dashboard/dashboard.component.spec.ts" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="router-harness"/>
 

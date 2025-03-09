@@ -16,13 +16,14 @@ Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary
 | オブジェクト   | `{name: 'Alice'}`               |
 | 配列        | `['Onion', 'Cheese', 'Garlic']` |
 | null         | `null`                          |
+| テンプレートリテラル  | `` `Hello ${name}` ``           |
 
 ### サポートされていないリテラル
 
 | リテラルタイプ    | 例       |
 | --------------- | ------------------- |
-| テンプレート文字列 | `` `Hello ${name}` `` |
 | 正規表現          | `/\d+/`             |
+| タグ付きテンプレートリテラル   | `` tag`Hello ${name}` ``  |
 
 ## グローバル
 

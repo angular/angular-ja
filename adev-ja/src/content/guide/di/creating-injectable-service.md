@@ -115,7 +115,7 @@ export class HeroListComponent {
 }
 </docs-code>
 
-コンポーネントのコンストラクターを使用して、サービスをコンポーネントに注入することもできます:
+コンポーネントのコンストラクターを使用しても同様に、サービスをコンポーネントに注入できます:
 
 <docs-code header="src/app/heroes/hero-list.component.ts (constructor signature)" language="typescript">
   constructor(private heroService: HeroService)

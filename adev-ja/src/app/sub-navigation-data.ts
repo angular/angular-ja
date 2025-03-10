@@ -97,7 +97,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/signals/linked-signal',
           },
           {
-            label: 'resourceによる非同期りアクティビティ',
+            label: 'resourceによる非同期リアクティビティ',
             path: 'guide/signals/resource',
             contentPath: 'guide/signals/resource',
           },

@@ -125,7 +125,8 @@ Angularが状態を同期するタイミングを処理できるようにする�
 ### 更新が検出されることを確認するためのデバッグモードチェック
 
 Angularは、アプリケーションがZoneless互換の方法で状態を更新していることを
-確認するのに役立つ追加のツールも提供しています。`provideExperimentalCheckNoChangesForDebug`を 使用すると、
-通知なしにバインディングが更新されていないことを
-定期的に確認できます。Zoneless変更検知によって更新されなかった更新されたバインディングがある場合、 Angularは`ExpressionChangedAfterItHasBeenCheckedError`を
+確認するのに役立つ追加のツールも提供しています。`provideExperimentalCheckNoChangesForDebug`を使用すると、
+通知なしにバインディングが更新されていないことを 定期的に確認できます。
+Zoneless変更検知によってリフレッシュされない更新済みバインディングがある場合、
+Angularは`ExpressionChangedAfterItHasBeenCheckedError`を
 スローします。

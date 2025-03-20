@@ -26,12 +26,13 @@ https://github.com/angular/angular/tree/main/adev
 
 ## 翻訳の追加
 
+> [!NOTE]
+> まとまった量のテキストの翻訳を省力化するため、Googleの[Gemini API](https://ai.google.dev/gemini-api?hl=ja)を使ったAI翻訳を導入しています。詳細は[TRANSLATION_WITH_AI.md](./docs/TRANSLATION_WITH_AI.md)を参照してください。
+
 未翻訳のドキュメントをあらたに翻訳するには、翻訳時点での原文を `xxx.en.md` ファイルとして保存し、`xxx.md` を翻訳します。以下のステップで翻訳を進めてください。
 
 - `xxx.md` ファイルをコピーして `xxx.en.md` ファイルを作成する
 - `xxx.md` ファイルを翻訳する
-
-まとまった量のテキストの翻訳を省力化するため、Googleの[Gemini API](https://ai.google.dev/gemini-api?hl=ja)を使ったAI翻訳を導入しています。詳細は[TRANSLATION_WITH_AI.md](./docs/TRANSLATION_WITH_AI.md)を参照してください。
 
 
 ## ローカル環境のセットアップ

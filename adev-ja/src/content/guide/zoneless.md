@@ -62,7 +62,13 @@ Angularは、変更検知をいつ、どのビューで実行するかを判断�
 アプリケーションがZoneless変更検知を有効にすると、これらのObservableは発行されません。
 同様に、`NgZone.isStable`は常に`true`になり、コード実行の条件として使用できません。
 
-`NgZone.onMicrotaskEmpty`および`NgZone.onStable`のObservableは、多くの場合、タスクを実行する前にAngularが変更検知を完了するのを待つために最もよく使用されます。代わりに、単一の変更検知を待つ必要がある場合は`afterNextRender`、またはいくつかの変更検知ラウンドにまたがる可能性のある条件がある場合は`afterRender`に置き換えることができます。それ以外の場合、これらのObservableは、使い慣れてお理、必要なタイミングと似ているため使用されました。コードが特定のDOM状態を待つ必要がある場合（Angularのレンダリングフックを介して間接的に待つのではなく）、`MutationObserver`など、より簡単または直接的なDOM APIを代わりに使用できます。
+`NgZone.onMicrotaskEmpty`および`NgZone.onStable`のObservableは、多くの場合、タスクを実行する前にAngularが
+変更検知を完了するのを待つために最もよく使用されます。代わりに、単一の変更検知を
+待つ必要がある場合は`afterNextRender`、 またはいくつかの変更検知ラウンドにまたがる可能性のある
+条件がある場合は`afterRender`に置き換えることができます。 他のケースでは、これらのObservableは
+たまたま馴染みがあり、必要なものと似たタイミングであったために使用されています。 
+コードが特定のDOM状態を待つ必要がある場合（Angularのレンダリングフックを介して間接的に待つのではなく）、
+`MutationObserver`など、より簡単または直接的なDOM APIを代わりに使用できます。
 
 <docs-callout title="NgZone.run and NgZone.runOutsideAngular are compatible with Zoneless">
 `NgZone.run`と`NgZone.runOutsideAngular`は、コードをZonelessアプリケーションと互換性を持たせるために削除する必要はありません。実際、これらの呼び出しを削除すると、ZoneJSに依然として依存しているアプリケーションで使用されるライブラリのパフォーマンスが低下する可能性があります。

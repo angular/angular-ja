@@ -64,7 +64,7 @@ Angularは、変更検知をいつ、どのビューで実行するかを判断�
 `NgZone.onMicrotaskEmpty`および`NgZone.onStable`のObservableは、多くの場合、タスクを実行する前にAngularが変更検知を完了するのを待つために最もよく使用されます。代わりに、単一の変更検知を待つ必要がある場合は`afterNextRender`、またはいくつかの変更検知ラウンドにまたがる可能性のある条件がある場合は`afterRender`に置き換えることができます。それ以外の場合、これらのObservableは、使い慣れてお理、必要なタイミングと似ているため使用されました。コードが特定のDOM状態を待つ必要がある場合（Angularのレンダリングフックを介して間接的に待つのではなく）、`MutationObserver`など、より簡単または直接的なDOM APIを代わりに使用できます。
 
 <docs-callout title="NgZone.run and NgZone.runOutsideAngular are compatible with Zoneless">
-`NgZone.run`と`NgZone.runOutsideAngular`は、コードがZonelessアプリケーションと互換性があるために削除する必要はありません。実際、これらの呼び出しを削除すると、ZoneJSに依然として依存しているアプリケーションで使用されるライブラリのパフォーマンスが低下する可能性があります。
+`NgZone.run`と`NgZone.runOutsideAngular`は、コードをZonelessアプリケーションと互換性を持たせるために削除する必要はありません。実際、これらの呼び出しを削除すると、ZoneJSに依然として依存しているアプリケーションで使用されるライブラリのパフォーマンスが低下する可能性があります。
 </docs-callout>
 
 ### サーバーサイドレンダリング（SSR）の`PendingTasks`

@@ -24,8 +24,12 @@ async function main() {
   process.env.FORCE_COLOR = '1';
 
   const files = await getTranslatedFiles();
-  const { stdout } = await $$`textlint ${fix ? ['--fix'] : []} ${files}`;
+  const { stdout, failed } = await $$`textlint ${fix ? ['--fix'] : []} ${files}`;
   consola.log(stdout.replace('textlint --fix [file]', 'yarn lint --fix'));
+
+  if (failed) {
+    process.exit(1);
+  }
 }
 
 /**

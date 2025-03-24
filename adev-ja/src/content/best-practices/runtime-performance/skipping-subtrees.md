@@ -105,7 +105,7 @@ class event eventNode
 
 Angularは、テンプレートバインディングの結果としてinputプロパティを設定するときに、`OnPush`を持つ子コンポーネント内で変更検知を実行します。
 
-例えば、下の図では、`AppComponent`は`OnPush`を持つ`MainComponent`に新しいinputを渡します。Angularは`MainComponent`で変更検知を実行しますが、`LoginComponent`も`OnPush`を持っている場合でも、新しいinputを受け取らない限り、`LoginComponent`では変更検知を実行しません。
+例えば、下の図では、`AppComponent`が`OnPush`を持つ`MainComponent`に新しいinputを渡します。Angularは`MainComponent`で変更検知を実行しますが、`LoginComponent`も`OnPush`を持っている場合でも、新しいinputを受け取らない限り、`LoginComponent`では変更検知を実行しません。
 
 ```mermaid
 graph TD;

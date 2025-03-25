@@ -54,7 +54,7 @@ class event eventNode
 
 AngularがOnPush戦略を持つコンポーネント内でイベントを処理する場合、フレームワークはコンポーネントツリー全体で変更検知を実行します。Angularは、新しいインプットを受け取っておらず、イベントを処理したコンポーネントの外部にある、OnPushを使用しているルートを持つコンポーネントのサブツリーを無視します。
 
-例として、Angularが`MainComponent`内でイベントを処理する場合、フレームワークはコンポーネントツリー全体で変更検知を実行します。Angularは、ルートである`LoginComponent`を持つサブツリーを無視します。これは、`LoginComponent`が`OnPush`を持ち、イベントがそのスコープ外で発生したためです。
+例として、Angularが`MainComponent`内でイベントを処理する場合、フレームワークはコンポーネントツリー全体で変更検知を実行します。Angularは、`LoginComponent`をルートとするサブツリーを無視します。これは、`LoginComponent`が`OnPush`を持ち、イベントがそのスコープ外で発生したためです。
 
 ```mermaid
 graph TD;

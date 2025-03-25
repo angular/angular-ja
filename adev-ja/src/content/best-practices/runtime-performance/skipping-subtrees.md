@@ -31,7 +31,7 @@ export class MyComponent {}
 
 Angularが`OnPush`戦略なしでコンポーネント内でイベントを処理する場合、フレームワークはコンポーネントツリー全体で変更検知を実行します。Angularは、新しいインプットを受け取っていない、`OnPush`を使用しているルートを持つ子孫コンポーネントのサブツリーをスキップします。
 
-例として、`MainComponent`の変更検知戦略を`OnPush`に設定し、ユーザーがルート`MainComponent`を持つサブツリーの外部のコンポーネントとやり取りする場合、`MainComponent`が新しいinputを受け取らない限り、Angularは下の図のすべてのピンク色のコンポーネント（`AppComponent`、`HeaderComponent`、`SearchComponent`、`ButtonComponent`）をチェックします:
+例として、`MainComponent`の変更検知戦略を`OnPush`に設定し、ユーザーが`MainComponent`をルートとするサブツリーの外部のコンポーネントとやり取りする場合、`MainComponent`が新しいインプットを受け取らない限り、Angularは下の図のすべてのピンク色のコンポーネント（`AppComponent`、`HeaderComponent`、`SearchComponent`、`ButtonComponent`）をチェックします:
 
 ```mermaid
 graph TD;

@@ -101,7 +101,7 @@ class details checkedNode
 class event eventNode
 ```
 
-## OnPushを持つコンポーネントへの新しいinput
+## OnPushを持つコンポーネントへの新しいインプット
 
 Angularは、テンプレートバインディングの結果としてinputプロパティを設定するときに、`OnPush`を持つ子コンポーネント内で変更検知を実行します。
 

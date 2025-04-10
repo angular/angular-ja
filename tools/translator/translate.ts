@@ -6,18 +6,15 @@
  * 発行した API キーは環境変数 GOOGLE_API_KEY に設定してください。
  */
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GoogleAIFileManager } from '@google/generative-ai/server';
+import { GoogleGenAI } from '@google/genai';
 import { setTimeout } from 'node:timers/promises';
 import { renderMarkdown, splitMarkdown } from './markdown';
 
 export class GeminiTranslator {
-  readonly #genAI: GoogleGenerativeAI;
-  readonly #fileManager: GoogleAIFileManager;
+  readonly #client: GoogleGenAI;
 
   constructor(apiKey: string) {
-    this.#genAI = new GoogleGenerativeAI(apiKey);
-    this.#fileManager = new GoogleAIFileManager(apiKey);
+    this.#client = new GoogleGenAI({ apiKey });
   }
 
   async translate(content: string, prh: string): Promise<string> {
@@ -30,7 +27,6 @@ ${content}
 あなたはこのMarkdownファイルを段落ごとに分割したテキストを受け取ります。
 次のルールに従って、受け取ったテキストを翻訳してください。
 
-- 入出力の形式 入力: { text: "## Hello" } 出力: { text: "## こんにちは" }
 - 見出しのレベルを維持する。
 - 改行やインデントの数を維持する。
 - 英単語の前後にスペースを入れない。
@@ -43,32 +39,32 @@ ${prh}
 
 `.trim();
 
-    const model = this.#genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash',
-      generationConfig: {
-        responseMimeType: 'application/json',
-        temperature: 0.2,
-      },
-      systemInstruction,
-    });
-
-    const chatSession = model.startChat({});
-
     const blocks = splitMarkdown(content);
     const translated = [];
 
     for (const block of blocks) {
-      const { response } = await chatSession.sendMessage([
-        {
-          text: '次のテキストに含まれる英語を日本語に翻訳してください。\n\n',
+      const prompt = `
+次のテキストに含まれる英語を日本語に翻訳してください。
+
+${block}
+`.trim();
+
+      const response = await this.#client.models.generateContent({
+        model: 'gemini-2.0-flash',
+        contents: [prompt],
+        config: {
+          systemInstruction,
+          temperature: 0.1,
         },
-        {
-          text: JSON.stringify({ text: block }),
-        },
-      ]);
-      const { text: translatedText } = JSON.parse(response.text());
-      translated.push(translatedText);
-      await setTimeout(3000);
+      });
+
+      if (response.text) {
+        translated.push(response.text);
+      } else {
+        translated.push(''); // Fallback in case of no response
+      }
+
+      await setTimeout(3000); // Rate limiting
     }
     return renderMarkdown(translated);
   }

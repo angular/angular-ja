@@ -1,15 +1,15 @@
 diff --git a/adev/src/app/features/home/components/home-animation/home-animation.component.html b/adev/src/app/features/home/components/home-animation/home-animation.component.html
-index a599d9eefa..75a23c7b6e 100644
+index 255de76efe..4d3d3bdede 100644
 --- a/adev/src/app/features/home/components/home-animation/home-animation.component.html
 +++ b/adev/src/app/features/home/components/home-animation/home-animation.component.html
 @@ -6,13 +6,13 @@
        class="adev-banner"
        target="_blank"
      >
--      <h1 tabindex="-1">Angular v19 is here!</h1>
--      <p class="adev-banner-cta">Read about our newest release.</p>
-+      <h1 tabindex="-1">Angular v19 が利用可能です！</h1>
-+      <p class="adev-banner-cta">最新リリースについて読む</p>
+-      <h1 tabindex="-1">Angular v20 is here!</h1>
+-      <p class="adev-banner-cta">Watch the developer event on May 29th.</p>
++      <h1 tabindex="-1">Angular v20 がリリースされました！</h1>
++      <p class="adev-banner-cta">5月29日の開発者イベントをお見逃しなく</p>
      </a>
      <div class="learn-angular">
        <a [routerLink]="ctaLink" class="adev-cta">
@@ -32,7 +32,7 @@ index a599d9eefa..75a23c7b6e 100644
      </p>
    </div>
  
-@@ -124,19 +124,17 @@
+@@ -124,19 +124,19 @@
  
    <!-- Loved by millions -->
    <div adevAnimationLayer layerId="loved-by-millions" class="loved-by-millions-layer layer">
@@ -41,7 +41,8 @@ index a599d9eefa..75a23c7b6e 100644
      <p>
 -      Join the millions of developers all over the world building with Angular in a thriving and
 -      friendly community.
-+      世界中の数百万人のAngular開発者たちと活発でフレンドリーなコミュニティに参加しよう。
++      世界中の数百万人のAngular開発者たちと活発で
++      フレンドリーなコミュニティに参加しよう。
      </p>
    </div>
  
@@ -52,7 +53,8 @@ index a599d9eefa..75a23c7b6e 100644
      <p>
 -      Rely on Angular's built-in hydration, internationalization, security, and accessibility
 -      support to build for everyone around the world.
-+      Angularに組み込まれたハイドレーション、国際化、セキュリティ、アクセシビリティのサポートを利用して、世界中すべての人のための開発を。
++      Angularに組み込まれたハイドレーション、国際化、セキュリティ、
++      アクセシビリティのサポートを利用して、世界中すべての人のための開発を。
      </p>
    </div>
  </div>

@@ -1,15 +1,13 @@
 diff --git a/adev/src/assets/others/versions.json b/adev/src/assets/others/versions.json
-index 55d286141c..610fdab042 100644
+index 44dad0e1ef..610fdab042 100644
 --- a/adev/src/assets/others/versions.json
 +++ b/adev/src/assets/others/versions.json
-@@ -3,6 +3,10 @@
-     "version": "next",
-     "url": "https://next.angular.dev/overview"
+@@ -5,7 +5,7 @@
    },
-+  {
-+    "version": "v20",
+   {
+     "version": "v20",
+-    "url": "https://v20.angular.dev/overview"
 +    "url": "https://angular.jp/overview"
-+  },
+   },
    {
      "version": "v19",
-     "url": "https://v19.angular.dev/overview"

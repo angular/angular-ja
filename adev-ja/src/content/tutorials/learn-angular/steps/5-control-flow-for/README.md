@@ -2,7 +2,10 @@
 
 ウェブアプリケーションを構築する際には、特定の回数だけコードを繰り返したい場合があります。たとえば、名前の配列が与えられた場合、それぞれの名前を `<p>` タグで表示したい場合があります。
 
+NOTE: [エッセンシャルガイドの制御フロー](/essentials/templates#control-flow-with-if-and-for) もあわせてご覧ください。
+
 このアクティビティでは、`@for` を使用してテンプレートで要素を繰り返す方法について説明します。
+
 <hr/>
 
 テンプレートで要素を繰り返す機能を提供する構文は `@for` です。
@@ -18,20 +21,20 @@
     }
   `,
 })
-export class AppComponent {
+export class App {
   operatingSystems = [{id: 'win', name: 'Windows'}, {id: 'osx', name: 'MacOS'}, {id: 'linux', name: 'Linux'}];
 }
 ```
 
 注意すべき点が2つあります。
 
-* `for` に `@` プレフィックスが付いているのは、[Angular テンプレート構文](guide/templates)と呼ばれる特殊な構文であるためです。
-* v16以前のアプリケーションを使用している場合は、[NgFor の Angular ドキュメント](guide/directives/structural-directives)を参照してください。
+- `for` に `@` プレフィックスが付いているのは、[Angular テンプレート構文](guide/templates)と呼ばれる特殊な構文であるためです。
+- v16以前のアプリケーションを使用している場合は、[NgFor の Angular ドキュメント](guide/directives/structural-directives)を参照してください。
 
 <docs-workflow>
 
 <docs-step title="`users`プロパティを追加">
-`AppComponent` クラスで、ユーザーとその名前を含む `users` というプロパティを追加します。
+`App` クラスで、ユーザーとその名前を含む `users` というプロパティを追加します。
 
 ```ts
 [{id: 0, name: 'Sarah'}, {id: 1, name: 'Amy'}, {id: 2, name: 'Rachel'}, {id: 3, name: 'Jessica'}, {id: 4, name: 'Poornima'}]
@@ -48,7 +51,7 @@ export class AppComponent {
 }
 ```
 
-注: `track` の使用は必須です。`id` またはその他のユニークな識別子を使用できます。
+NOTE: `track` の使用は必須です。`id` またはその他のユニークな識別子を使用できます。
 
 </docs-step>
 

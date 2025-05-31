@@ -2,6 +2,8 @@
 
 ほとんどのアプリケーションでは、アプリケーションに複数のページが必要になる時が来ます。その時は必ず、ルーティングがユーザーにとってのパフォーマンスの重要な部分になります。
 
+NOTE: 詳しくは、[ルーティングの詳細ガイド](/guide/routing)をご覧ください。
+
 このアクティビティでは、Angular Routerを使用してアプリケーションを設定および構成する方法を学びます。
 
 <hr>
@@ -13,7 +15,7 @@
 `app.routes.ts` 内で、以下のように変更します。
 
 1. `@angular/router` パッケージから `Routes` をインポートします。
-1. `Routes` 型の `routes` という名前の定数をエクスポートし、値として `[]` を割り当てます。
+2. `Routes` 型の `routes` という名前の定数をエクスポートし、値として `[]` を割り当てます。
 
 ```ts
 import {Routes} from '@angular/router';
@@ -47,7 +49,7 @@ export const appConfig: ApplicationConfig = {
 
 最後に、アプリケーションがAngular Routerを使用できる状態にするには、ルーターが目的のコンテンツを表示する場所をアプリケーションに伝える必要があります。これは、`@angular/router` から `RouterOutlet` ディレクティブを使用することで実現します。
 
-`AppComponent` のテンプレートを更新し、`<router-outlet />` を追加します。
+`App` のテンプレートを更新し、`<router-outlet />` を追加します。
 
 <docs-code language="angular-ts" highlight="[11]">
 import {RouterOutlet} from '@angular/router';
@@ -64,7 +66,7 @@ import {RouterOutlet} from '@angular/router';
   `,
   imports:[RouterOutlet],
 })
-export class AppComponent {}
+export class App {}
 </docs-code>
 
 </docs-step>

@@ -4,27 +4,29 @@
 
 コンポーネント設定の `selector` プロパティを使用すると、別のテンプレートでコンポーネントを参照する際に使用する名前が得られます。`selector` はHTMLタグのように使用します。たとえば、`app-user` はテンプレートでは `<app-user />` になります。
 
+NOTE: [エッセンシャルガイドのコンポーネントの使用方法](/essentials/components#using-components)もご覧ください。
+
 このアクティビティでは、コンポーネントの構成方法を学びます。
 
 <hr/>
 
-この例では、`UserComponent` と `AppComponent` の2つのコンポーネントがあります。
+この例では、`User` と `App` の2つのコンポーネントがあります。
 
 <docs-workflow>
 
-<docs-step title="`UserComponent`への参照を追加">
-`AppComponent` テンプレートを更新して、`app-user`セレクターを使用する `UserComponent` への参照を含めます。`AppComponent` のインポート配列に `UserComponent` を追加してください。これにより、`AppComponent` テンプレートで使用できるようになります。
+<docs-step title="`User`への参照を追加">
+`App` テンプレートを更新して、`app-user`セレクターを使用する `User` への参照を含めます。`App` のインポート配列に `User` を追加してください。これにより、`App` テンプレートで使用できるようになります。
 
 ```ts
 template: `<app-user />`,
-imports: [UserComponent]
+imports: [User]
 ```
 
 コンポーネントは、`Username: youngTech` というメッセージを表示するようになりました。テンプレートコードを更新して、さらにマークアップを含めることができます。
 </docs-step>
 
 <docs-step title="さらにマークアップを追加">
-テンプレートでは任意のHTMLマークアップを使用できるため、`AppComponent`のテンプレートを更新して、さらにHTML要素を含めてみてください。この例では、`<app-user>` 要素の親として `<section>` 要素を追加します。
+テンプレートでは任意のHTMLマークアップを使用できるため、`App`のテンプレートを更新して、さらにHTML要素を含めてみてください。この例では、`<app-user>` 要素の親として `<section>` 要素を追加します。
 
 ```ts
 template: `<section><app-user /></section>`,

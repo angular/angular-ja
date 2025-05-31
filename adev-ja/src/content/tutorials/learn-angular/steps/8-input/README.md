@@ -4,31 +4,33 @@
 
 Angularは、`Input` と呼ばれる概念を使用しています。これは、他のフレームワークの `props` と似ています。`Input` プロパティを作成するには、`@Input` デコレーターを使用します。
 
+NOTE: 詳しくは、[Inputプロパティでデータを受け取る方法についてのガイド](/guide/components/inputs)をご覧ください。
+
 このアクティビティでは、`@Input` デコレーターを使用してコンポーネントに情報を送信する方法を学びます。
 
 <hr>
 
 `Input` プロパティを作成するには、コンポーネントクラスのプロパティに `@Input` デコレーターを追加します。
 
-<docs-code header="user.component.ts" language="ts">
-class UserComponent {
+<docs-code header="user.ts" language="ts">
+class User {
   @Input() occupation = '';
 }
 </docs-code>
 
 `Input` を通じて値を渡す準備ができたら、属性構文を使用してテンプレートで値を設定できます。以下は例です。
 
-<docs-code header="app.component.ts" language="angular-ts" highlight="[3]">
+<docs-code header="app.ts" language="angular-ts" highlight="[3]">
 @Component({
   ...
   template: `<app-user occupation="Angular Developer"></app-user>`
 })
-class AppComponent {}
+class App {}
 </docs-code>
 
-`UserComponent` で `occupation`プロパティをバインドしていることを確認してください。
+`User` で `occupation`プロパティをバインドしていることを確認してください。
 
-<docs-code header="user.component.ts" language="angular-ts">
+<docs-code header="user.ts" language="angular-ts">
 @Component({
   ...
   template: `<p>ユーザーの職業は {{occupation}} です。</p>`
@@ -38,11 +40,11 @@ class AppComponent {}
 <docs-workflow>
 
 <docs-step title="`@Input` プロパティを定義する">
-`user.component.ts` のコードを更新して、`UserComponent` に `name` という `Input` プロパティを定義します。今のところ、初期値を `空文字列` に設定します。テンプレートを更新して、文末に `name` プロパティを補間することを忘れないでください。
+`user.ts` のコードを更新して、`User` に `name` という `Input` プロパティを定義します。今のところ、初期値を `空文字列` に設定します。テンプレートを更新して、文末に `name` プロパティを補間することを忘れないでください。
 </docs-step>
 
 <docs-step title="`@Input` プロパティに値を渡す">
-`app.component.ts` のコードを更新して、`name` プロパティに `"Simran"` の値を送信します。
+`app.ts` のコードを更新して、`name` プロパティに `"Simran"` の値を送信します。
 <br>
 
 コードが正常に更新されると、アプリケーションに `The user's name is Simran` と表示されます。

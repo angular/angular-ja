@@ -3,7 +3,9 @@
 以前のアクティビティでは、`inject()`関数を用いてリソースをコンポーネントに「提供」することで、リソースをコンポーネントで使用できるようにしていました。`inject()`関数は、依存性の注入のパターンの1つです。コンストラクターベースの依存性の注入という別の注入パターンも存在することを知っておくことは重要です。
 
 コンストラクターベースの依存性の注入では、コンポーネントの`constructor`関数にパラメータとしてリソースを指定します。Angularは、これらのリソースをコンポーネントで使用できるようにします。
-<br><br>
+
+NOTE: 詳しくは、[サービスの注入に関する詳細ガイド](/guide/di/creating-injectable-service#injecting-services)をご覧ください。
+
 このアクティビティでは、コンストラクターベースの依存性の注入の使い方を学びます。
 
 <hr>
@@ -12,7 +14,7 @@
 
 <docs-code language="ts" highlight="[3]">
 @Component({...})
-class PetCarDashboardComponent {
+class PetCarDashboard {
     constructor(private petCareService: PetCareService) {
         ...
     }
@@ -31,9 +33,9 @@ class PetCarDashboardComponent {
 
 <docs-step title="コンストラクタベースのDIを使用するようにコードを更新する">
 
-`app.component.ts`で、以下のコードに合わせてコンストラクターコードを更新します。
+`app.ts`で、以下のコードに合わせてコンストラクターコードを更新します。
 
-ヒント：詰まってしまった場合は、この演習ページの例を参照してください。
+TIP: 詰まってしまった場合は、この演習ページの例を参照してください。
 
 ```ts
 constructor(private carService: CarService) {

@@ -4,6 +4,8 @@ Angularの依存性の注入（DI）は、フレームワークの最も強力�
 
 [Angularドキュメントで依存性の注入](guide/di)について詳しく知ることができます。ここでは、`注入可能な`リソースの作成を練習します。
 
+NOTE: [エッセンシャルガイドの依存性の注入](/essentials/dependency-injection)で詳しく学ぶことができます。
+
 このアクティビティでは、注入可能なサービスを作成する方法を学びます。
 
 <hr>
@@ -36,7 +38,7 @@ class UserService {
 <br>
 `car.service.ts`の`@Injectable`デコレーターを更新して、`providedIn: 'root'`の構成を含めます。
 
-ヒント：上記の例を使用して、正しい構文を確認してください。
+TIP: 上記の例を使用して、正しい構文を確認してください。
 
 </docs-step>
 

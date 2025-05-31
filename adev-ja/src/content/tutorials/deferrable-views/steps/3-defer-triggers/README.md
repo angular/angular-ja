@@ -39,7 +39,7 @@
 <docs-workflow>
 
 <docs-step title="`on hover`トリガーを追加する">
-`app.component.ts`で、`@defer`ブロックに`on hover`トリガーを追加します。
+`app.ts`で、`@defer`ブロックに`on hover`トリガーを追加します。
 
 <docs-code language="angular-html" hightlight="[1]">
 @defer (on hover) {
@@ -73,7 +73,7 @@
 }
 </docs-code>
 
-Note：[テンプレート変数に関する詳細については、ドキュメントを参照してください](https://angular.dev/guide/templates/reference-variables#)。
+NOTE: [テンプレート変数に関する詳細については、ドキュメントを参照してください](https://angular.dev/guide/templates/reference-variables#)。
 
 </docs-step>
 

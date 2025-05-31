@@ -4,6 +4,8 @@ Angularのプロパティバインディングを使用すると、HTML要素、
 
 プロパティバインディングを使用して、プロパティや属性の値を動的に設定できます。ボタン機能の切り替え、画像パスのプログラムによる設定、コンポーネント間の値の共有などを行うことができます。
 
+NOTE: 詳しくは、[エッセンシャルガイドの動的なプロパティや属性の設定](/essentials/templates#setting-dynamic-properties-and-attributes)もご覧ください。
+
 このアクティビティでは、テンプレートでプロパティバインディングを使用する方法を学びます。
 
 <hr />
@@ -18,17 +20,17 @@ Angularのプロパティバインディングを使用すると、HTML要素、
 
 <docs-workflow>
 
-<docs-step title="`isEditable`というプロパティを追加する" header="app.component.ts" language="ts">
-`app.component.ts`のコードを更新し、`AppComponent`クラスに`isEditable`というプロパティを追加します。初期値は`true`に設定します。
+<docs-step title="`isEditable`というプロパティを追加する" header="app.ts" language="ts">
+`app.ts`のコードを更新し、`App`クラスに`isEditable`というプロパティを追加します。初期値は`true`に設定します。
 
 <docs-code highlight="[2]">
-export class AppComponent {
+export class App {
     isEditable = true;
 }
 </docs-code>
 </docs-step>
 
-<docs-step title="`contentEditable`にバインドする" header="app.component.ts" language="ts">
+<docs-step title="`contentEditable`にバインドする" header="app.ts" language="ts">
 次に、`div`の`contentEditable`属性を`isEditable`プロパティにバインドします。 <code aria-label="角括弧">[]</code>構文を使用します。
 
 <docs-code highlight="[3]" language="angular-ts">

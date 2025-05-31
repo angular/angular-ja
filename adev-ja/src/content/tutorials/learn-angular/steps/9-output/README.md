@@ -4,23 +4,25 @@
 
 Angularは、`@Output`デコレーターを使用してこのタイプの動作を可能にします。
 
+NOTE: 詳しくは[アウトプットガイドのカスタムイベント](/guide/components/outputs)をご覧ください。
+
 このアクティビティでは、`@Output`デコレーターと`EventEmitter`を使用してコンポーネント間で通信する方法を学びます。
 
 <hr />
 
 子コンポーネントから親コンポーネントへの通信パスを作成するには、クラスプロパティに`@Output`デコレーターを使用し、`EventEmitter`タイプの値を割り当てます。
 
-<docs-code header="child.component.ts" language="ts">
+<docs-code header="child.ts" language="ts">
 @Component({...})
-class ChildComponent {
+class Child {
     @Output() incrementCountEvent = new EventEmitter<number>();
 }
 </docs-code>
 
 これで、コンポーネントは、親コンポーネントがリスンできるイベントを生成できます。`emit`メソッドを呼び出すことでイベントをトリガーします。
 
-<docs-code header="child.component.ts" language="ts">
-class ChildComponent {
+<docs-code header="child.ts" language="ts">
+class Child {
     ...
 
     onClick() {
@@ -38,13 +40,13 @@ emit関数は、`EventEmitter`インスタンスと同じタイプのイベン�
 <docs-workflow>
 
 <docs-step title="`@Output`プロパティを追加する">
-`addItemEvent`という出力プロパティを追加することで`child.component.ts`を更新します。`EventEmitter`のタイプを`string`に設定してください。
+`addItemEvent`という出力プロパティを追加することで`child.ts`を更新します。`EventEmitter`のタイプを`string`に設定してください。
 </docs-step>
 
 <docs-step title="`addItem`メソッドを完成させる">
-`child.component.ts`で`addItem`メソッドを更新します。次のコードをロジックとして使用してください。
+`child.ts`で`addItem`メソッドを更新します。次のコードをロジックとして使用してください。
 
-<docs-code header="child.component.ts" highlight="[2]" language="ts">
+<docs-code header="child.ts" highlight="[2]" language="ts">
 addItem() {
   this.addItemEvent.emit('🐢');
 }
@@ -52,8 +54,8 @@ addItem() {
 
 </docs-step>
 
-<docs-step title="`AppComponent`テンプレートを更新する">
-`app.component.ts`でテンプレートを更新して、次のようなコードを追加することで、発生したイベントを購読します。
+<docs-step title="`App`テンプレートを更新する">
+`app.ts`でテンプレートを更新して、次のようなコードを追加することで、発生したイベントを購読します。
 
 ```angular-html
 <app-child (addItemEvent)="addItem($event)" />

@@ -10,7 +10,7 @@ Angularの*遅延可能ビュー*は`@defer`構文を使用して、すぐに表
 <docs-workflow>
 
 <docs-step title="`@defer`ブロックをテンプレートの一部分に追加する。">
-`app.component.ts`で、`@defer`ブロックで`article-comments`コンポーネントをラップして、ロードを遅延させます。
+`app.ts`で、`@defer`ブロックで`article-comments`コンポーネントをラップして、ロードを遅延させます。
 
 <docs-code language="angular-html">
 @defer {

@@ -4,6 +4,8 @@
 
 テンプレートで条件付き表示を表現するために、Angularは`@if`テンプレート構文を使用します。
 
+NOTE: [エッセンシャルガイドの制御フロー](/essentials/templates#control-flow-with-if-and-for)も参照してください。
+
 このアクティビティでは、テンプレートで条件式を使用する方法を学びます。
 
 <hr/>
@@ -21,7 +23,7 @@
     }
   `,
 })
-class AppComponent {
+class App {
   isLoggedIn = true;
 }
 ```
@@ -34,7 +36,7 @@ class AppComponent {
 <docs-workflow>
 
 <docs-step title="`isServerRunning`というプロパティを作成する">
-`AppComponent`クラスに、`isServerRunning`という`boolean`型のプロパティを追加し、初期値を`true`に設定します。
+`App`クラスに、`isServerRunning`という`boolean`型のプロパティを追加し、初期値を`true`に設定します。
 </docs-step>
 
 <docs-step title="テンプレートで`@if`を使用する">

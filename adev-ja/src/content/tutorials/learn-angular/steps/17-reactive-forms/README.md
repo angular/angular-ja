@@ -2,6 +2,8 @@
 
 テンプレートに頼らずフォームをプログラムで管理する場合、リアクティブフォームが答えとなります。
 
+NOTE: 詳しくは、[リアクティブフォームの詳細ガイド](/guide/forms/reactive-forms)をご覧ください。
+
 このアクティビティでは、リアクティブフォームの設定方法を学びます。
 
 <hr>
@@ -10,7 +12,7 @@
 
 <docs-step title="`ReactiveForms`モジュールのインポート">
 
-`app.component.ts`で、`@angular/forms`から`ReactiveFormsModule`をインポートし、コンポーネントの`imports`配列に追加します。
+`app.ts`で、`@angular/forms`から`ReactiveFormsModule`をインポートし、コンポーネントの`imports`配列に追加します。
 
 ```angular-ts
 import { ReactiveFormsModule } from '@angular/forms';
@@ -43,7 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 ```ts
 import {ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 ...
-export class AppComponent {
+export class App {
   profileForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),

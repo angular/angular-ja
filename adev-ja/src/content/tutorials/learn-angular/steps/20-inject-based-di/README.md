@@ -2,7 +2,7 @@
 
 注入可能なサービスを作成することは、Angularの依存性の注入 (DI) システムの最初の部分です。サービスをコンポーネントにどのように注入するか？Angularには、適切なコンテキストで使用できる便利な関数 `inject()` があります。
 
-注: 注入コンテキストはこのチュートリアルでは扱いませんが、詳細については [Angular ドキュメント](guide/di/dependency-injection-context) を参照してください。
+NOTE: 注入コンテキストの詳細はこのチュートリアルの範囲外ですが、詳しくは [依存性の注入 (DI) の基本ガイド](/essentials/dependency-injection) や [DI コンテキストガイド](guide/di/dependency-injection-context) を参照してください。
 
 このアクティビティでは、サービスを注入してコンポーネントで使用する方法を学びます。
 
@@ -12,7 +12,7 @@ DIシステムから提供される値でクラスのプロパティを初期化
 
 <docs-code language="ts" highlight="[3]">
 @Component({...})
-class PetCareDashboardComponent {
+class PetCareDashboard {
     petRosterService = inject(PetRosterService);
 }
 </docs-code>
@@ -21,9 +21,9 @@ class PetCareDashboardComponent {
 
 <docs-step title="`CarService` を注入する">
 
-`app.component.ts` で、`inject()` 関数を使用して `CarService` を注入し、`carService` という名前のプロパティに割り当てます。
+`app.ts` で、`inject()` 関数を使用して `CarService` を注入し、`carService` という名前のプロパティに割り当てます。
 
-注: プロパティ `carService` とクラス `CarService` の違いに注意してください。
+NOTE: プロパティ `carService` とクラス `CarService` の違いに注意してください。
 
 </docs-step>
 
@@ -31,7 +31,7 @@ class PetCareDashboardComponent {
 
 `inject(CarService)` を呼び出すと、アプリケーションで使用できる `CarService` のインスタンスが得られます。このインスタンスは `carService` プロパティに格納されます。
 
-`AppComponent` の `constructor` 関数に、次の実装を追加します。
+`App` の `constructor` 関数に、次の実装を追加します。
 
 ```ts
 constructor() {
@@ -41,9 +41,9 @@ constructor() {
 
 </docs-step>
 
-<docs-step title="`AppComponent` テンプレートを更新する">
+<docs-step title="`App` テンプレートを更新する">
 
-`app.component.ts` のコンポーネントテンプレートを次のコードで更新します。
+`app.ts` のコンポーネントテンプレートを次のコードで更新します。
 
 ```ts
 template: `<p>Car Listing: {{ display }}</p>`,

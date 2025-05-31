@@ -2,6 +2,8 @@
 
 フォームを扱う際のもう1つの一般的なシナリオは、正しいデータが送信されるように、入力値を検証する必要があることです。
 
+NOTE: 詳しくは、[フォーム入力の検証についての詳細ガイド](/guide/forms/reactive-forms#validating-form-input) をご覧ください。
+
 このアクティビティでは、リアクティブフォームを使用してフォームを検証する方法を学びます。
 
 <hr>
@@ -16,7 +18,7 @@ Angularは、一連の検証ツールを提供しています。これらを使�
 import {ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({...})
-export class AppComponent {}
+export class App {}
 </docs-code>
 
 </docs-step>

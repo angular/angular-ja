@@ -2,6 +2,8 @@
 
 Angularでは、コンポーネントのロジックと動作は、コンポーネントのTypeScriptクラスで定義されます。
 
+NOTE: [エッセンシャルガイドの動的テキストの表示](/essentials/templates#showing-dynamic-text)でさらに詳しく学べます。
+
 このアクティビティでは、コンポーネントクラスの更新方法と、[補間](/guide/templates/binding#render-dynamic-text-with-text-interpolation)の使用方法について学習します。
 
 <hr />
@@ -9,15 +11,15 @@ Angularでは、コンポーネントのロジックと動作は、コンポー�
 <docs-workflow>
 
 <docs-step title="`city`というプロパティを追加">
-`AppComponent`クラスに`city`というプロパティを追加することで、コンポーネントクラスを更新します。
+`App`クラスに`city`というプロパティを追加することで、コンポーネントクラスを更新します。
 
 ```ts
-export class AppComponent {
+export class App {
   city = 'San Francisco';
 }
 ```
 
-`city`プロパティは`string`型ですが、[TypeScriptでの型推論](https://www.typescriptlang.org/docs/handbook/type-inference.html)により、型を省略できます。`city`プロパティは`AppComponent`クラスで使用でき、コンポーネントテンプレートで参照できます。
+`city`プロパティは`string`型ですが、[TypeScriptでの型推論](https://www.typescriptlang.org/docs/handbook/type-inference.html)により、型を省略できます。`city`プロパティは`App`クラスで使用でき、コンポーネントテンプレートで参照できます。
 
 <br>
 

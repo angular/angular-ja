@@ -73,17 +73,17 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
     <docs-code header="src/app/highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="imports"/>
 
-1. `appHighlight` `@Input()`プロパティを追加します。
+1. `appHighlight` `input`プロパティを追加します。
 
     <docs-code header="src/app/highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="input"/>
 
-    `@Input()`デコレーターは、ディレクティブの`appHighlight`プロパティをバインディングで使用できるようにするメタデータをクラスに追加します。
+    `input`関数は、ディレクティブの`appHighlight`プロパティをバインディングで使用できるようにするメタデータをクラスに追加します。
 
-1. `app.component.ts`で、`AppComponent`に`color`プロパティを追加します。
+2. `app.component.ts`で、`AppComponent`に`color`プロパティを追加します。
 
     <docs-code header="src/app/app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.ts" visibleRegion="class"/>
 
-1. ディレクティブと色を同時に適用するには、`appHighlight`ディレクティブセレクターを使用してプロパティバインディングを使用し、それを`color`に設定します。
+3. ディレクティブと色を同時に適用するには、`appHighlight`ディレクティブセレクターを使用してプロパティバインディングを使用し、それを`color`に設定します。
 
     <docs-code header="src/app/app.component.html (color)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="color"/>
 

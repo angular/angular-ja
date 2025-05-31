@@ -31,13 +31,11 @@ providers: [
 
 <docs-step title="コンポーネントに `Input` を追加する">
 
-パラメータの名前と一致する `Input` を持つようにコンポーネントを更新します。
+パラメータの名前と一致する `input()` プロパティを持つようにコンポーネントを更新します。
 
 ```ts
-@Input()
-set id(heroId: string) {
-  this.hero$ = this.service.getHero(heroId);
-}
+id = input.required<string>()
+hero = computed(() => this.service.getHero(heroId));
 ```
 
 NOTE: すべてのルートデータを、キーと値のペアでコンポーネントの入力にバインドできます。静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータです。

@@ -375,7 +375,7 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 <docs-code header="src/app/profile-editor/profile-editor.component.html (aliases フォーム配列テンプレート)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" visibleRegion="formarrayname"/>
 
-`*ngFor` ディレクティブは、エイリアスのフォーム配列インスタンスによって提供される各フォームコントロールインスタンスを反復処理します。フォーム配列要素は名前がないため、インデックスを `i` 変数に割り当て、`formControlName` 入力に渡して、各コントロールをバインドします。
+`@for` ブロックは、エイリアスのフォーム配列インスタンスによって提供される各フォームコントロールインスタンスを反復処理します。フォーム配列要素は名前がないため、インデックスを `i` 変数に割り当て、`formControlName` 入力に渡して、各コントロールをバインドします。
 
 新しいエイリアスインスタンスが追加されるたびに、新しいフォーム配列インスタンスに、インデックスに基づいてコントロールが提供されます。これにより、ルートコントロールのステータスと値を計算する際に、各個別のコントロールを追跡できます。
 

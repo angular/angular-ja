@@ -191,7 +191,7 @@ Angularは、読み込みが完了すると、プレースホルダーコンテ�
 }
 ```
 
-または、`@defer`ブロックと同じテンプレート内に、ビューポートに入っているかどうかが監視される要素として[テンプレート参照変数](/guide/templates/variables)を指定できます。この変数は、ビューポートトリガーのパラメータとして渡されます。
+Alternatively, you can specify a [template reference variable](/guide/templates/variables) in the same template as the `@defer` block as the element that is watched for interactions. This variable is passed in as a parameter on the viewport trigger.
 
 ```angular-html
 <div #greeting>こんにちは！</div>

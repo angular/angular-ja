@@ -19,50 +19,48 @@
 
 ### 実験的に利用可能
 
-* [インクリメンタルハイドレーション](/guide/incremental-hydration)
-* [Zoneless変更検知](/guide/zoneless)
-* [i18nブロックのハイドレーションサポート](/api/platform-browser/withI18nSupport)
+* [Zoneless change detection](/guide/zoneless)
 * [Resource API](/guide/signals/resource)
-* [Effect API](/api/core/effect)
-* [Linked Signal API](/guide/signals/linked-signal)
+* [httpResource](/api/common/http/httpResource)
 
 ### 本番環境向け
 
-* [Angular Signalsの探索](/guide/signals)
-* [SSRでのイベントリプレイ](/api/platform-browser/withEventReplay)
-* [遅延可能ビュー](/guide/defer)
-* [ビルトイン制御フロー](/guide/templates/control-flow)
-* [ローカル変数宣言](/guide/templates/variables)
-* [シグナル入力](/guide/signals/inputs)
-* [モデル入力](/guide/signals/model)
-* [シグナルクエリ](/guide/signals/queries)
-* [関数ベースの出力](/guide/components/output)
-* [ルートレベルのレンダリングモード](/guide/hybrid-rendering)
+* [Linked Signal API](/guide/signals/linked-signal)
+* [Incremental hydration](/guide/incremental-hydration)
+* [Effect API](/api/core/effect)
+* [Event replay with SSR](/api/platform-browser/withEventReplay)
+* [Route-level render mode](/guide/ssr)
 
 ## Angular開発者体験の改善
 
 ### 開発速度
 
 <docs-card-container>
-  <docs-card title="Angularシグナルの提供" href="https://github.com/angular/angular/discussions/49685">
-  このプロジェクトでは、シグナルをリアクティビティプリミティブとして導入することにより、Angularのリアクティビティモデルを再考しています。初期計画では、数百件の議論と開発者との会話、フィードバックセッションやユーザー体験の調査、1,000件以上のコメントを受け取った一連のRFCが行われました。
+  <docs-card title="Selectorless" href="">
+  To reduce boilerplate and improve the ergonomics of standalone components we are now designing a solution that will make selectors optional. To use a component or directive you'll be able to import it and directly use it in a component's template.
 
-  v17リリースの一環として、Angularシグナルライブラリを開発者プレビューから卒業しました。v19では、シグナルベースのクエリ、入力、モデル入力を安定版に移行しました。次に、このプロジェクトを完了する前に、エフェクトを最終化する必要があります。
+  We kicked off early prototyping of selectorless and we're still in early stages of planning. We'll share a request for comments when we have a design and we're ready for next steps.
+  </docs-card>
+  <docs-card title="Signal Forms" href="">
+  We plan to analyze existing feedback about Angular forms and design a solution which addresses developers' requirements and uses Signals for management of reactive state.
+  </docs-card>
+  <docs-card title="Asynchronous reactivity" href="https://github.com/angular/angular/discussions/60121">
+  To enable developers to handle asynchronous data flow with signals we developed the `resource` async primitive. Building on top of it, we introduced `httpResource` which allows you to send HTTP requests and receive your response as a signal.
+
+  We're still actively collecting feedback for these new experimental APIs. Please give them a try and share your feedback with us on GitHub!
   </docs-card>
   <docs-card title="Zoneless Angular" href="">
   v18では、Angularに実験的なZonelessサポートを提供しました。これにより、バンドルにzone.jsを含めずにフレームワークを使用できるようになり、パフォーマンス、デバッグエクスペリエンス、相互運用性が向上します。初期リリースの一環として、Angular CDKとAngular MaterialにもZonelessサポートを導入しました。
 
-  v19では、サーバーサイドレンダリングでのZonelessサポートを導入し、いくつかのエッジケースに対処し、Zonelessプロジェクトを足場するためのスキーマを作成しました。  <a href="https://fonts.google.com/">Googleフォント</a>をZonelessに移行したことで、パフォーマンスと開発者エクスペリエンスが向上し、この機能を開発者プレビューに移行する前に対処する必要があるギャップを特定できました。今後数ヶ月でさらにアップデートを予定しています。
+  In v19 we introduced zoneless support in server-side rendering, addressed some edge cases, and created a schematic to scaffold zoneless projects. We transitioned <a href="https://fonts.google.com/">Google Fonts</a> to zoneless which improved performance, developer experience, and allowed us to identify gaps that we need to address before moving this feature to developer preview.
+
+  As of Angular v20, Zoneless Angular is now in developer preview and includes improvements in error handling and server-side rendering.
   </docs-card>
   <docs-card title="シグナルとの統合" href="">
   フォーム、HTTP、ルーターなど、基本的なAngularパッケージとシグナルの統合を改善することに取り組んでいます。このプロジェクトの一環として、包括的な開発者エクスペリエンスを向上させるために、便利なシグナルベースのAPIまたはラッパーを導入する機会を探ります。
   </docs-card>
-  <docs-card title="Angular DevToolsでのシグナルのデバッグ" href="">
-  Angularでのシグナルの進化に伴い、それらをデバッグするためのより良いツールに取り組んでいます。優先度の高いリストには、シグナルを検査およびデバッグするためのUIがあります。
-  </docs-card>
   <docs-card title="HMR（ホットモジュールリプレースメント）の改善" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306">
-  ホットモジュールリプレースメントを有効にすることで、より高速な編集/更新サイクルを目指しています。
-  Angular v19では、CSSとテンプレートのHMRの初期サポートを提供しました。このプロジェクトを完了する前に、開発者のニーズに対応していることを確認するために、フィードバックの収集を続けます。
+  In Angular v19 we shipped initial support for CSS and template HMR and in v20 we graduated template HMR to stable. We'll continue collecting feedback to make sure we're addressing developers' needs before we mark this project as complete.
   </docs-card>
 </docs-card-container>
 
@@ -83,26 +81,15 @@
   <docs-card title="`ng test`によるユニットテストツールの近代化" href="">
   v12では、ProtractorをCypress、Nightwatch、Puppeteer、Playwright、Webdriver.ioなどの最新の代替手段に置き換えることで、Angularのエンドツーエンドテストエクスペリエンスを見直しました。次に、Angularのユニットテストエクスペリエンスを近代化するために`ng test`に取り組みたいと考えています。
 
-  現在、既存のテストを壊さないようにJasmineをアサーションライブラリとして維持しながら、Angularプロジェクトの新しいテストランナーとして、Web Test Runner, Vitest, Jestを候補として検討しています。
+  In Angular v20 we introduced experimental support for vitest. Make sure you give it a try and share your feedback with us!
   </docs-card>
   <docs-card title="Angular CLIでのNitroサポートの評価" href="https://nitro.unjs.io/">
   Nitroが提供する、より多くのデプロイオプション、さまざまなランタイムとファイルベースのルーティングとのサーバーサイドレンダリングの互換性の向上などの機能に興奮しています。2025年には、Angularのサーバーサイドレンダリングモデルにどのように適合するかを評価します。
 
   調査の進捗状況については、随時更新をお知らせします。
   </docs-card>
-</docs-card-container>
-
-## デフォルトで高速
-
-<docs-card-container>
-  <docs-card title="インクリメンタルハイドレーションを有効にする" href="">
-  v17では、ハイドレーションを開発者プレビューから卒業し、LCPで一貫して40〜50％の改善が見られました。それ以来、インクリメンタルハイドレーションのプロトタイプを作成し、ng-confでデモを公開しました。
-  v19では、`@defer`ブロックによって実現されたインクリメンタルハイドレーションを開発者プレビューモードで提供しました。試してみて、<a href="https://github.com/angular/angular/issues">フィードバックを共有してください</a>！
-  </docs-card>
-  <docs-card title="サーバールート設定" href="">
-  サーバーでより人間工学的なルート設定を可能にすることに取り組んでいます。どのルートをサーバーサイドレンダリング、プリレンダリング、クライアントサイドレンダリングするべきかを簡単に宣言できるようにしたいと考えています。
-
-  Angular v19では、ルートレベルのレンダリングモードの開発者プレビューを提供しました。これにより、Angularでプリレンダリング、サーバーサイドレンダリング、クライアントサイドレンダリングを行うルートを細かく設定できます。
+  <docs-card title="Signal debugging in Angular DevTools" href="">
+  With the evolution of Signals in Angular, we are working on a better tooling for debugging them. High on the priority list is a UI for inspecting and debugging signals.
   </docs-card>
 </docs-card-container>
 
@@ -111,14 +98,6 @@
 このセクションは、将来の潜在的なプロジェクトの調査とプロトタイピングを表しています。妥当な結果は、現在のソリューションが最適なオプションであると判断することです。他のプロジェクトは、ウェブがフレームワークとともに革新を続けるにつれて、RFC、進行中のプロジェクトへの昇格、または優先順位の低下につながる可能性があります。
 
 <docs-card-container>
-  <docs-card title="シグナルフォーム" href="">
-  Angularフォームに関する既存のフィードバックを分析し、開発者の要件に対応し、リアクティブな状態管理にシグナルを使用するソリューションを設計する予定です。
-  </docs-card>
-  <docs-card title="セレクターレス" href="">
-  ボイラープレートを削減し、スタンドアロンコンポーネントの使い勝手を向上させるために、セレクターをオプションにするソリューションを設計しています。コンポーネントまたはディレクティブを使用するには、それをインポートして、コンポーネントのテンプレートで直接使用できます。
-
-  セレクターレスはまだ計画の初期段階です。初期設計が整い、次のステップの準備ができたら、RFCを共有します。
-  </docs-card>
   <docs-card title="ストリーミングサーバーサイドレンダリングの調査" href="">
   過去数回のリリースで、Angularのサーバーサイドレンダリングのストーリーをより堅牢にする取り組んできました。優先事項には、Zonelessアプリケーションのストリーミングサーバーサイドレンダリングの調査があります。
   </docs-card>
@@ -138,6 +117,21 @@
 ## 完了したプロジェクト
 
 <docs-card-container>
+  <docs-card title="Server route configuration" link="Completed in Q2 2025" href="">
+  We're working towards enabling a more ergonomic route configuration on the server. We want to make it trivial to declare which routes should be server-side rendered, prerendered or client-side rendered.
+
+  In Angular v19 we shipped developer preview of route-level render mode which allows you to granularly configure which routes you want Angular to prerender, server-side render or client-side render. In Angular v20 we graduated it to stable.
+  </docs-card>
+  <docs-card title="Enable incremental hydration" link="Completed in Q2 2025" href="">
+  In v17 we graduated hydration from developer preview and we've been consistently observing 40-50% improvements in LCP. Since then we started prototyping incremental hydration and shared a demo on stage at ng-conf.
+
+  In v19 we shipped the incremental hydration in developer preview mode, powered by `@defer` blocks. In Angular v20 we graduated it to stable!
+  </docs-card>
+  <docs-card title="Deliver Angular Signals" link="Completed in Q2 2025" href="https://github.com/angular/angular/discussions/49685">
+  This project rethinks the Angular reactivity model by introducing Signals as a reactivity primitive. The initial planning resulted in hundreds of discussions, conversations with developers, feedback sessions, user experience studies, and a series of RFCs, which received over 1,000 comments.
+
+  In Angular v20 we graduated all the fundamental reactivity primitives to stable including signal, effect, linkedSignal, signal-based queries, and inputs.
+  </docs-card>
   <docs-card title="Support two-dimensional drag-and-drop" link="Completed in Q2 2024" href="https://github.com/angular/components/issues/13372">
   As part of this project, we implemented mixed orientation support for the Angular CDK drag and drop. This is one of the repository's most highly requested features.
   </docs-card>

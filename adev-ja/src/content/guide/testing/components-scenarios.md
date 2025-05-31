@@ -425,7 +425,7 @@ Observableから最初の引用をフラッシュするには、[tick()](api/cor
 
 <docs-code header="app/dashboard/dashboard.component.html (excerpt)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.html" visibleRegion="dashboard-hero"/>
 
-`DashboardHeroComponent`は`*ngFor`リピーター内に表示され、各コンポーネントの`hero`入力プロパティはループする値に設定され、コンポーネントの`selected`イベントをリスンします。
+`DashboardHeroComponent`は`@for`ブロック内に表示され、各コンポーネントの`hero`入力プロパティはループする値に設定され、コンポーネントの`selected`イベントをリスンします。
 
 コンポーネントの完全な定義を次に示します。
 

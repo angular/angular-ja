@@ -356,6 +356,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
           },
+           {
+            label: 'カスタムルートマッチの作成',
+            path: 'guide/routing/routing-with-urlmatcher',
+            contentPath: 'guide/routing/routing-with-urlmatcher',
+          },
           {
             label: 'ルーターリファレンス',
             path: 'guide/routing/router-reference',

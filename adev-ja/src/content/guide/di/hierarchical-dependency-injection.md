@@ -1040,7 +1040,7 @@ export class HeroTaxReturnService {
 以下は、 `HeroTaxReturnService` を使用する `HeroTaxReturnComponent` です。
 
 <docs-code header="src/app/hero-tax-return.component.ts" language="typescript">
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, output } from '@angular/core';
 import { HeroTaxReturn } from './hero';
 import { HeroTaxReturnService } from './hero-tax-return.service';
 
@@ -1053,15 +1053,18 @@ import { HeroTaxReturnService } from './hero-tax-return.service';
 export class HeroTaxReturnComponent {
   message = '';
 
-  @Output() close = new EventEmitter<void>();
+  close = output<void>();
 
   get taxReturn(): HeroTaxReturn {
     return this.heroTaxReturnService.taxReturn;
   }
 
-  @Input()
-  set taxReturn(htr: HeroTaxReturn) {
-    this.heroTaxReturnService.taxReturn = htr;
+  taxReturn = input.required<HeroTaxReturn>();
+
+  constructor() {
+    effect(() => {
+      this.heroTaxReturnService.taxReturn = this.taxReturn();
+    })
   }
 
   private heroTaxReturnService = inject(HeroTaxReturnService);
@@ -1085,7 +1088,7 @@ export class HeroTaxReturnComponent {
 }
 </docs-code>
 
-_編集対象の税務申告_ は、 `@Input()` プロパティを介して到着します。これは、ゲッターとセッターで実装されています。
+_編集対象の税務申告_ は、 `input` プロパティを介して到着します。これは、ゲッターとセッターで実装されています。
 セッターは、コンポーネント自身の `HeroTaxReturnService` インスタンスを、受信した申告で初期化します。
 ゲッターは常に、そのサービスがヒーローの現在の状態であると判断したものを返します。
 コンポーネントは、この税務申告を保存および復元することもサービスに要求します。

@@ -31,12 +31,10 @@ NOTE: プロパティ `carService` とクラス `CarService` の違いに注意�
 
 `inject(CarService)` を呼び出すと、アプリケーションで使用できる `CarService` のインスタンスが得られます。このインスタンスは `carService` プロパティに格納されます。
 
-`App` の `constructor` 関数に、次の実装を追加します。
+`display` プロパティを次の実装で初期化します。
 
 ```ts
-constructor() {
-    this.display = this.carService.getCars().join(' ⭐️ ');
-}
+display = this.carService.getCars().join(' ⭐️ ');
 ```
 
 </docs-step>
@@ -53,4 +51,4 @@ template: `<p>Car Listing: {{ display }}</p>`,
 
 </docs-workflow>
 
-これで、最初のサービスをコンポーネントに注入しました。素晴らしい成果です。このDIに関するセクションを終了する前に、コンポーネントにリソースを注入する別の構文を学びます。
+初めてサービスをコンポーネントに注入できました。素晴らしい取り組みです。

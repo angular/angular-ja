@@ -254,7 +254,9 @@ const actorForm = new FormGroup({
 <docs-code language="html">
 
 <input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator>
-<app-spinner *ngIf="model.pending"></app-spinner>
+@if(model.pending) {
+  <app-spinner />
+}
 
 </docs-code>
 

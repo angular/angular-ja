@@ -81,18 +81,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
   }
 }
 
-<div *ngIf="condition">
-  {{topLevel + insideDiv}} <!-- Valid -->
-
-  @let nestedNgIf = value;
-
-  <div *ngIf="condition">
-     {{topLevel + insideDiv + nestedNgIf}} <!-- Valid -->
-  </div>
-</div>
-
 {{nested}} <!-- Error, not hoisted from @if -->
-{{nestedNgIf}} <!-- Error, not hoisted from *ngIf -->
 ```
 
 ### 構文全体

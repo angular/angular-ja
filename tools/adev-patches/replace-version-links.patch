@@ -11,3 +11,16 @@ index 44dad0e1ef..610fdab042 100644
    },
    {
      "version": "v19",
+diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
+index 3e409a67e4..402879e788 100644
+--- a/adev/src/app/core/services/version-manager.service.ts
++++ b/adev/src/app/core/services/version-manager.service.ts
+@@ -56,7 +56,7 @@ export class VersionManager {
+     return this.remoteVersions.hasValue() ? this.remoteVersions.value() : this.localVersions;
+   });
+ 
+-  remoteVersions = httpResource(() => 'https://angular.dev/assets/others/versions.json', {
++  remoteVersions = httpResource(() => 'https://angular.jp/assets/others/versions.json', {
+     parse: (json) => {
+       if (!Array.isArray(json)) {
+         throw new Error('Invalid version data');

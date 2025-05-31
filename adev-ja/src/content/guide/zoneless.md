@@ -17,13 +17,13 @@ Zonelessを有効にするためのAPIは現在、実験的機能です。その
 ```typescript
 // スタンドアロン ブートストラップ
 bootstrapApplication(MyApp, {providers: [
-  provideExperimentalZonelessChangeDetection(),
+  provideZonelessChangeDetection(),
 ]});
 
 // NgModule ブートストラップ
 platformBrowser().bootstrapModule(AppModule);
 @NgModule({
-  providers: [provideExperimentalZonelessChangeDetection()]
+  providers: [provideZonelessChangeDetection()]
 })
 export class AppModule {}
 ```
@@ -88,11 +88,36 @@ ZoneJSに依存していることをご存知かもしれません。シリア�
 ZoneJSを使用していないアプリケーションは、`PendingTasks`サービスを使用してAngularにこれらを認識させる必要があります。シリアライズは、
 保留中のすべてのタスクが削除された最初の瞬間まで待機します。
 
+
+The two most straightforward uses of pending tasks are the `run` method:
+
+```typescript
+const taskService = inject(PendingTasks);
+taskService.run(async () => {
+  const someResult = await doSomeWorkThatNeedsToBeRendered();
+  this.someState.set(someResult);
+});
+```
+
+For more complicated use-cases, you can manuall add and remove a pending tasks:
+
 ```typescript
 const taskService = inject(PendingTasks);
 const taskCleanup = taskService.add();
-await doSomeWorkThatNeedsToBeRendered();
-taskCleanup();
+try {
+  await doSomeWorkThatNeedsToBeRendered();
+} catch {
+  // handle error
+} finally {
+  taskCleanup();
+}
+```
+
+In addition, the [pendingUntilEvent](/api/core/rxjs-interop/pendingUntilEvent#) helper in `rxjs-interop` ensures
+the application remains unstable until the observable emits, complets, errors, or is unsubscribed.
+
+```typescript
+readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 ```
 
 フレームワークは、非同期タスクが完了するまでシリアライズを防ぐために、このサービスを内部的にも使用します。これには、
@@ -108,7 +133,7 @@ Zonelessプロバイダー関数は、`TestBed`でも使用して、
 
 ```typescript
 TestBed.configureTestingModule({
-  providers: [provideExperimentalZonelessChangeDetection()]
+  providers: [provideZonelessChangeDetection()]
 });
 
 const fixture = TestBed.createComponent(MyComponent);

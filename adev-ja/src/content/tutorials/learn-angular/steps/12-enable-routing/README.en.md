@@ -2,6 +2,8 @@
 
 For most apps, there comes a point where the app requires more than a single page. When that time inevitably comes, routing becomes a big part of the performance story for users.
 
+Note: Learn more about [routing in the in-depth guide](/guide/routing).
+
 In this activity, you'll learn how to set up and configure your app to use Angular Router.
 
 <hr>
@@ -13,7 +15,7 @@ In this activity, you'll learn how to set up and configure your app to use Angul
 Inside `app.routes.ts`, make the following changes:
 
 1. Import `Routes` from the `@angular/router` package.
-1. Export a constant called `routes` of type `Routes`, assign it `[]` as the value.
+2. Export a constant called `routes` of type `Routes`, assign it `[]` as the value.
 
 ```ts
 import {Routes} from '@angular/router';
@@ -37,7 +39,7 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)],
+providers: [provideRouter(routes)],
 };
 </docs-code>
 
@@ -47,24 +49,23 @@ export const appConfig: ApplicationConfig = {
 
 Finally, to make sure your app is ready to use the Angular Router, you need to tell the app where you expect the router to display the desired content. Accomplish that by using the `RouterOutlet` directive from `@angular/router`.
 
-Update the template for `AppComponent` by adding `<router-outlet />`
+Update the template for `App` by adding `<router-outlet />`
 
 <docs-code language="angular-ts" highlight="[11]">
 import {RouterOutlet} from '@angular/router';
 
 @Component({
-  ...
-  template: `
-    <nav>
+...
+template: `     <nav>
       <a href="/">Home</a>
       |
       <a href="/user">User</a>
     </nav>
     <router-outlet />
   `,
-  imports: [RouterOutlet],
+imports: [RouterOutlet],
 })
-export class AppComponent {}
+export class App {}
 </docs-code>
 
 </docs-step>

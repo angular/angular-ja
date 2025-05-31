@@ -136,7 +136,7 @@ Angularの`@for`ブロックを使用して、テンプレートの一部を複�
 
 Angularは、上記の例に示すように`track`キーワードを使用して、`@for`によって作成されたDOM要素にデータを関連付けます。詳細については、[_なぜ@forブロック内のtrackは重要ですか？_](guide/templates/control-flow#why-is-track-in-for-blocks-important)を参照してください。
 
-Tip: Angularテンプレートの詳細を知りたい場合は、[詳細なテンプレートガイド](guide/templates)を参照してください。
+TIP: Angularテンプレートの詳細を知りたい場合は、[詳細なテンプレートガイド](guide/templates)を参照してください。
 
 ## 次の手順
 

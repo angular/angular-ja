@@ -1,48 +1,50 @@
-# `@Input` を使ったコンポーネント間の通信
+# コンポーネント入力プロパティ
 
 アプリケーション開発では、コンポーネントにデータを送信しなければならない場合があります。このデータは、コンポーネントをカスタマイズしたり、親コンポーネントから子コンポーネントに情報を送信したりするために使用できます。
 
-Angularは、`Input` と呼ばれる概念を使用しています。これは、他のフレームワークの `props` と似ています。`Input` プロパティを作成するには、`@Input` デコレーターを使用します。
+Angularは、`input` と呼ばれる概念を使用しています。これは、他のフレームワークの `props` と似ています。`input` プロパティを作成するには、`input()` 関数を使用します。
 
-このアクティビティでは、`@Input` デコレーターを使用してコンポーネントに情報を送信する方法を学びます。
+NOTE: 詳しくは、[入力プロパティでデータを受け取る方法についてのガイド](/guide/components/inputs)をご覧ください。
+
+このアクティビティでは、`input()` 関数を使用してコンポーネントに情報を送信する方法を学びます。
 
 <hr>
 
-`Input` プロパティを作成するには、コンポーネントクラスのプロパティに `@Input` デコレーターを追加します。
+`Input` プロパティを作成するには、コンポーネントクラスのプロパティを `input()` 関数で初期化します。
 
-<docs-code header="user.component.ts" language="ts">
-class UserComponent {
-  @Input() occupation = '';
+<docs-code header="user.ts" language="ts">
+class User {
+  occupation = input<string>();
 }
 </docs-code>
 
-`Input` を通じて値を渡す準備ができたら、属性構文を使用してテンプレートで値を設定できます。以下は例です。
+`input` を通じて値を渡す準備ができたら、属性構文を使用してテンプレートで値を設定できます。以下は例です。
 
-<docs-code header="app.component.ts" language="angular-ts" highlight="[3]">
+<docs-code header="app.ts" language="angular-ts" highlight="[3]">
 @Component({
   ...
   template: `<app-user occupation="Angular Developer"></app-user>`
 })
-class AppComponent {}
+class App {}
 </docs-code>
 
-`UserComponent` で `occupation`プロパティをバインドしていることを確認してください。
+`input` 関数は `InputSignal` を返します。値を読み取るには、そのシグナルを関数として呼び出します。
 
-<docs-code header="user.component.ts" language="angular-ts">
+<docs-code header="user.ts" language="angular-ts">
 @Component({
   ...
-  template: `<p>ユーザーの職業は {{occupation}} です。</p>`
+  template: `<p>ユーザーの職業は {{occupation()}} です。</p>`
 })
 </docs-code>
 
 <docs-workflow>
 
-<docs-step title="`@Input` プロパティを定義する">
-`user.component.ts` のコードを更新して、`UserComponent` に `name` という `Input` プロパティを定義します。今のところ、初期値を `空文字列` に設定します。テンプレートを更新して、文末に `name` プロパティを補間することを忘れないでください。
+<docs-step title="`input()` プロパティを定義する">
+`user.ts` の `User` クラスに `name` という `input` プロパティを定義しましょう。型は `string` で、初期値は設定せず、`input()` を引数なしで呼び出します。また、テンプレートを更新して、文の最後で `name` プロパティを呼び出して補間しましょう。
 </docs-step>
 
-<docs-step title="`@Input` プロパティに値を渡す">
-`app.component.ts` のコードを更新して、`name` プロパティに `"Simran"` の値を送信します。
+<docs-step title="`input` プロパティに値を渡す">
+`app.ts` のコードを更新して、`name` プロパティに `"Simran"` の値を送信します。
 <br>
 
 コードが正常に更新されると、アプリケーションに `The user's name is Simran` と表示されます。

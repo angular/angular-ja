@@ -13,11 +13,11 @@ HTML要素にイベントリスナーを追加する場合は、イベントを�
   `,
   ...
 })
-export class AppComponent({
+export class AppComponent{
   updateField(): void {
     console.log('Field is updated!');
   }
-})
+}
 ```
 
 この例では、Angularは `<input>` 要素が `keyup` イベントを発行するたびに `updateField` を呼び出します。
@@ -71,11 +71,11 @@ export class AppComponent {
   `,
   ...
 })
-export class AppComponent({
+export class AppComponent{
   updateField(event: KeyboardEvent): void {
     console.log('The user pressed enter in the text field.');
   }
-})
+}
 ```
 
 追加のキー修飾子を追加できます。
@@ -93,7 +93,28 @@ Angularでは、組み込みの `code` サフィックスを提供すること�
 
 ```angular-html
 <!-- Matches alt and left shift -->
-<input type="text" (keydown.code.alt.leftshift)="updateField($event)" />
+<input type="text" (keydown.code.alt.shiftleft)="updateField($event)" />
 ```
 
 これは、異なるオペレーティングシステム間でキーボードイベントを一貫して処理する場合に役立ちます。たとえば、MacOSデバイスでAltキーを使用する場合、`key` プロパティはAltキーで既に修飾された文字に基づいてキーを報告します。これは、Alt + Sのような組み合わせが `'ß'` の `key` 値を報告することを意味します。ただし、`code` プロパティは、生成された文字ではなく、押された物理的なまたは仮想的なボタンに対応します。
+
+## Preventing event default behavior
+
+If your event handler should replace the native browser behavior, you can use the event object's [`preventDefault` method](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault):
+
+```angular-ts
+@Component({
+  template: `
+    <a href="#overlay" (click)="showOverlay($event)">
+  `,
+  ...
+})
+export class AppComponent{
+  showOverlay(event: PointerEvent): void {
+    event.preventDefault();
+    console.log('Show overlay without updating the URL!');
+  }
+}
+```
+
+If the event handler statement evaluates to `false`, Angular automatically calls `preventDefault()`, similar to [native event handler attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes#event_handler_attributes). *Always prefer explicitly calling `preventDefault`*, as this approach makes the code's intent obvious.

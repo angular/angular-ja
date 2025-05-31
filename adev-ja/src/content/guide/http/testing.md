@@ -66,7 +66,7 @@ expect(await configPromise).toEqual(DEFAULT_CONFIG);
 httpTesting.verify();
 </docs-code>
 
-Note: `expectOne` は、テストが指定された基準に一致するリクエストを2つ以上行った場合に失敗します。
+NOTE: `expectOne` は、テストが指定された基準に一致するリクエストを2つ以上行った場合に失敗します。
 
 `req.method` についてアサートする代わりに、`expectOne` の拡張形式を使用してリクエストメソッドも一致させることができます。
 

@@ -1,26 +1,26 @@
-# ハイドレーション
+# Hydration
 
-## ハイドレーションとは
+## What is hydration
 
-ハイドレーションとは、サーバーサイドでレンダリングされたアプリケーションをクライアントサイドで復元するプロセスです。これには、サーバーでレンダリングされたDOM構造の再利用、アプリケーション状態の永続化、サーバーですでに取得されたアプリケーションデータの転送などが含まれます。
+Hydration is the process that restores the server-side rendered application on the client. This includes things like reusing the server rendered DOM structures, persisting the application state, transferring application data that was retrieved already by the server, and other processes.
 
-## なぜハイドレーションが重要なのか
+## Why is hydration important?
 
-ハイドレーションは、DOMノードの再作成に伴う余計な作業を避けることで、アプリケーションのパフォーマンスを向上させます。Angularは、実行時に既存のDOM要素をアプリケーションの構造に一致させ、可能な限りDOMノードを再利用しようとします。これにより、[Core Web Vitals (CWV)](https://web.dev/learn-core-web-vitals/)統計を使用して測定できるパフォーマンスの向上をもたらします。例えば、First Input Delay ([FID](https://web.dev/fid/))やLargest Contentful Paint ([LCP](https://web.dev/lcp/))を削減したり、Cumulative Layout Shift ([CLS](https://web.dev/cls/))を減らしたりできます。これらの数値を改善することで、SEOのパフォーマンスにも影響します。
+Hydration improves application performance by avoiding extra work to re-create DOM nodes. Instead, Angular tries to match existing DOM elements to the applications structure at runtime and reuses DOM nodes when possible. This results in a performance improvement that can be measured using [Core Web Vitals (CWV)](https://web.dev/learn-core-web-vitals/) statistics, such as reducing the First Input Delay ([FID](https://web.dev/fid/)) and Largest Contentful Paint ([LCP](https://web.dev/lcp/)), as well as Cumulative Layout Shift ([CLS](https://web.dev/cls/)). Improving these numbers also affects things like SEO performance.
 
-ハイドレーションを有効にしないと、サーバーサイドでレンダリングされたAngularアプリケーションはアプリケーションのDOMを破棄して再レンダリングするため、UIのちらつきが目に見える可能性があります。この再レンダリングは、[LCP](https://web.dev/lcp/)などの[Core Web Vitals](https://web.dev/learn-core-web-vitals/)に悪影響を与え、レイアウトのずれを引き起こす可能性があります。ハイドレーションを有効にすると、既存のDOMを再利用できるため、ちらつきを防ぐことができます。
+Without hydration enabled, server-side rendered Angular applications will destroy and re-render the application's DOM, which may result in a visible UI flicker. This re-rendering can negatively impact [Core Web Vitals](https://web.dev/learn-core-web-vitals/) like [LCP](https://web.dev/lcp/) and cause a layout shift. Enabling hydration allows the existing DOM to be re-used and prevents a flicker.
 
-## Angularでハイドレーションを有効にする方法
+## How do you enable hydration in Angular
 
-ハイドレーションは、サーバーサイドでレンダリングされた（SSR）アプリケーションでのみ有効にできます。サーバーサイドレンダリングを有効にするには、まず[Angular SSRガイド](guide/ssr)を参照してください。
+Hydration can be enabled for server-side rendered (SSR) applications only. Follow the [Angular SSR Guide](guide/ssr) to enable server-side rendering first.
 
-### Angular CLIを使用する
+### Using Angular CLI
 
-Angular CLIを使用してSSRを有効にした場合（アプリケーション作成時に有効にしたか、後で`ng add @angular/ssr`を使用して有効にしたかのどちらか）、ハイドレーションを有効にするコードは、すでにアプリケーションに含まれています。
+If you've used Angular CLI to enable SSR (either by enabling it during application creation or later via `ng add @angular/ssr`), the code that enables hydration should already be included into your application.
 
-### 手動で設定する
+### Manual setup
 
-カスタム設定を使用していて、Angular CLIを使用してSSRを有効にしていない場合は、メインのアプリケーションコンポーネントまたはモジュールにアクセスし`@angular/platform-browser`から`provideClientHydration`をインポートすることで、手動でハイドレーションを有効にできます。その後、そのプロバイダーをアプリケーションのブートストラッププロバイダーリストに追加します。
+If you have a custom setup and didn't use Angular CLI to enable SSR, you can enable hydration manually by visiting your main application component or module and importing `provideClientHydration` from `@angular/platform-browser`. You'll then add that provider to your app's bootstrapping providers list.
 
 ```typescript
 import {
@@ -34,7 +34,7 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-あるいは、NgModuleを使用している場合は、`provideClientHydration`をルートアプリケーションモジュールのプロバイダーリストに追加します。
+Alternatively if you are using NgModules, you would add `provideClientHydration` to your root app module's provider list.
 
 ```typescript
 import {provideClientHydration} from '@angular/platform-browser';
@@ -49,21 +49,21 @@ import {NgModule} from '@angular/core';
 export class AppModule {}
 ```
 
-IMPORTANT: `provideClientHydration()`呼び出しは、**サーバー**上でアプリケーションをブートストラップするために使用されるプロバイダーのセットにも含まれていることを確認してください。デフォルトのプロジェクト構造（`ng new`コマンドで生成された）のアプリケーションでは、ルート`AppModule`に呼び出しを追加するだけで十分です。これは、このモジュールがサーバーモジュールによってインポートされているためです。カスタム設定を使用している場合は、サーバーのブートストラップ構成のプロバイダーリストに`provideClientHydration()`呼び出しを追加してください。
+IMPORTANT: Make sure that the `provideClientHydration()` call is also included into a set of providers that is used to bootstrap an application on the **server**. In applications with the default project structure (generated by the `ng new` command), adding a call to the root `AppModule` should be sufficient, since this module is imported by the server module. If you use a custom setup, add the `provideClientHydration()` call to the providers list in the server bootstrap configuration.
 
-### ハイドレーションが有効になっていることを確認する
+### Verify that hydration is enabled
 
-ハイドレーションを構成してサーバーを起動したら、ブラウザでアプリケーションをロードしてください。
+After you've configured hydration and have started up your server, load your application in the browser.
 
-HELPFUL: ハイドレーションが完全に機能するためには、直接DOM操作のインスタンスを修正する必要がある場合があります。これは、Angularの構造に切り替えるか、`ngSkipHydration`を使用することで実現できます。詳細については、[制約](#constraints)、[直接DOM操作](#direct-dom-manipulation)、および[特定のコンポーネントのハイドレーションをスキップする方法](#how-to-skip-hydration-for-particular-components)を参照してください。
+HELPFUL: You will likely need to fix instances of Direct DOM Manipulation before hydration will fully work either by switching to Angular constructs or by using `ngSkipHydration`. See [Constraints](#constraints), [Direct DOM Manipulation](#direct-dom-manipulation), and [How to skip hydration for particular components](#how-to-skip-hydration-for-particular-components) for more details.
 
-アプリケーションを開発モードで実行している間は、ブラウザの開発者ツールを開いてコンソールを表示することで、ハイドレーションが有効になっていることを確認できます。ハイドレーション関連の統計を含むメッセージが表示されます。例えば、ハイドレーションされたコンポーネントやノードの数などです。Angularは、サードパーティライブラリから来たコンポーネントを含む、ページにレンダリングされたすべてのコンポーネントに基づいて統計を計算します。
+While running an application in dev mode, you can confirm hydration is enabled by opening the Developer Tools in your browser and viewing the console. You should see a message that includes hydration-related stats, such as the number of components and nodes hydrated. Angular calculates the stats based on all components rendered on a page, including those that come from third-party libraries.
 
-[Angular DevToolsブラウザ拡張機能](tools/devtools)を使用して、ページのコンポーネントのハイドレーションステータスを確認できます。Angular DevToolsでは、ページのどの部分がハイドレーションされたかを示すオーバーレイを有効にできます。ハイドレーションのミスマッチエラーが発生した場合は、DevToolsによってエラーの原因となったコンポーネントも強調表示されます。
+You can also use [Angular DevTools browser extension](tools/devtools) to see hydration status of components on a page. Angular DevTools also allows to enable an overlay to indicate which parts of the page were hydrated. If there is a hydration mismatch error - DevTools would also highlight a component that caused the error.
 
-## イベントのキャプチャと再生
+## Capturing and replaying events
 
-アプリケーションがサーバーでレンダリングされると、生成されたHTMLはロードされるとすぐにブラウザに表示されます。ユーザーはページと対話できると想定するかもしれませんが、イベントリスナーはハイドレーションが完了するまでアタッチされません。v18以降、ハイドレーションの前に発生したすべてのイベントをキャプチャし、ハイドレーションが完了したらそれらのイベントを再生できるイベント再生機能を有効にできます。例えば、`withEventReplay()`関数を使用して有効にできます。
+When an application is rendered on the server, it is visible in a browser as soon as produced HTML loads. Users may assume that they can interact with the page, but event listeners are not attached until hydration completes. Starting from v18, you can enable the Event Replay feature that allows to capture all events that happen before hydration and replay those events once hydration has completed. You can enable it using the `withEventReplay()` function, for example:
 
 ```typescript
 import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
@@ -75,65 +75,85 @@ bootstrapApplication(App, {
 });
 ```
 
-## 制約 {#constraints}
+### How event replay works
+Event Replay is a feature that improves user experience by capturing user events that were triggered before the hydration process is complete. Then those events are replayed, ensuring none of that interaction was lost.
 
-ハイドレーションは、ハイドレーションが無効な場合に存在しない、アプリケーションにいくつかの制約を課します。アプリケーションは、サーバーとクライアントの両方で同じDOM構造を生成する必要があります。ハイドレーションのプロセスは、DOMツリーが両方の場所で同じ構造を持つことを期待します。これには、Angularがサーバーでのレンダリング中に生成する空白やコメントノードも含まれます。これらの空白とノードは、サーバーサイドレンダリングプロセスによって生成されたHTMLに存在する必要があります。
+The Event Replay is divided into three main phases:
 
-IMPORTANT: サーバーサイドレンダリング操作によって生成されたHTMLは、**サーバーとクライアントの間で**変更されては**なりません**。
+- **Capturing user interactions**<br>
+Prior to **Hydration**, Event Replay captures and stores all interactions that the user may perform, such as clicks and other browser native events.
 
-サーバーとクライアントのDOMツリー構造にミスマッチがあると、ハイドレーションプロセスは、期待される内容と、DOMに実際に存在する内容を一致させる際に問題が発生します。ネイティブDOM APIを使用して直接DOM操作するコンポーネントが最も一般的な原因です。
+- **Storing events**<br>
+The **Event Contract** keeps in memory all the interactions recorded in the previous step, ensuring that they are not lost for later replay.
 
-### 直接DOM操作 {#direct-dom-manipulation}
+- **Relaunch of events**<br>
+Once **Hydration** is complete, Angular re-invokes the captured events.
 
-ネイティブDOM APIを使用してDOMを操作するか、`innerHTML`または`outerHTML`を使用するコンポーネントがある場合、ハイドレーションプロセスでエラーが発生します。DOM操作が問題となる具体的なケースは、`document`にアクセスしたり、特定の要素をクエリしたり、`appendChild`を使用して追加のノードを挿入したりする場合です。DOMノードをデタッチして別の場所に移動しても、エラーが発生します。
+Event replay supports _native browser events_, for example `click`, `mouseover`, and `focusin`. If you'd like to learn more about JSAction, the library that powers event replay, you can read more [on the readme](https://github.com/angular/angular/tree/main/packages/core/primitives/event-dispatch#readme).
 
-これは、AngularがこれらのDOM変更を認識しておらず、ハイドレーションプロセス中に解決できないためです。Angularは特定の構造を期待していますが、ハイドレーションを試みる際に別の構造に出くわします。このミスマッチは、ハイドレーションの失敗につながり、DOMミスマッチエラーが発生します([下記の](#errors)を参照してください)。
+---
 
-この種のDOM操作を避けるため、コンポーネントをリファクタリングするのが最適です。可能な場合は、Angular APIを使用して作業するようにしてください。この動作をリファクタリングできない場合は、リファクタリング可能なソリューションになるまで、`ngSkipHydration`属性([下記の](#how-to-skip-hydration-for-particular-components)で説明)を使用してください。
+This feature ensures a consistent user experience, preventing user actions performed before Hydration from being ignored. NOTE: if you have [incremental hydration](guide/incremental-hydration) enabled, event replay is automatically enabled under the hood.
 
-### 有効なHTML構造 {#valid-html-structure}
+## Constraints
 
-コンポーネントテンプレートに有効なHTML構造がない場合、ハイドレーション中にDOMミスマッチエラーが発生する可能性があります。
+Hydration imposes a few constraints on your application that are not present without hydration enabled. Your application must have the same generated DOM structure on both the server and the client. The process of hydration expects the DOM tree to have the same structure in both places. This also includes whitespaces and comment nodes that Angular produces during the rendering on the server. Those whitespaces and nodes must be present in the HTML generated by the server-side rendering process.
 
-例えば、以下は、この問題の最も一般的なケースです。
+IMPORTANT: The HTML produced by the server side rendering operation **must not** be altered between the server and the client.
 
-- `<tbody>`なしの`<table>`
-- `<p>`内の`<div>`
-- 別の`<a>`内の`<a>`
+If there is a mismatch between server and client DOM tree structures, the hydration process will encounter problems attempting to match up what was expected to what is actually present in the DOM. Components that do direct DOM manipulation using native DOM APIs are the most common culprit.
 
-HTMLの有効性について不確かであれば、[構文バリデーター](https://validator.w3.org/)を使用して確認できます。
+### Direct DOM Manipulation
 
-Note: HTML標準では、テーブル内に `<tbody>` 要素を含めることは必須ではありませんが、モダンブラウザは `<tbody>` 要素を宣言していないテーブルに自動的に `<tbody>` 要素を作成します。この不一致を避けるために、ハイドレーションエラーを防ぐために常にテーブル内に `<tbody>` 要素を明示的に宣言してください。
+If you have components that manipulate the DOM using native DOM APIs or use `innerHTML` or `outerHTML`, the hydration process will encounter errors. Specific cases where DOM manipulation is a problem are situations like accessing the `document`, querying for specific elements, and injecting additional nodes using `appendChild`. Detaching DOM nodes and moving them to other locations will also result in errors.
 
-### 空白の保持構成
+This is because Angular is unaware of these DOM changes and cannot resolve them during the hydration process. Angular will expect a certain structure, but it will encounter a different structure when attempting to hydrate. This mismatch will result in hydration failure and throw a DOM mismatch error ([see below](#errors)).
 
-ハイドレーション機能を使用する場合は、`preserveWhitespaces`のデフォルト設定`false`を使用することをお勧めします。この設定が`tsconfig`にない場合、値は`false`となり、変更は必要ありません。`tsconfig`に`preserveWhitespaces: true`を追加して空白の保持を有効にする場合、ハイドレーションに問題が発生する可能性があります。これはまだ完全にサポートされている構成ではありません。
+It is best to refactor your component to avoid this sort of DOM manipulation. Try to use Angular APIs to do this work, if you can. If you cannot refactor this behavior, use the `ngSkipHydration` attribute ([described below](#how-to-skip-hydration-for-particular-components)) until you can refactor into a hydration friendly solution.
 
-HELPFUL: この設定が、サーバーの`tsconfig.server.json`とブラウザビルドの`tsconfig.app.json`で**一貫して**設定されていることを確認してください。値が一致しないと、ハイドレーションが壊れます。
+### Valid HTML structure
 
-この設定を`tsconfig`に設定する場合は、デフォルトで`tsconfig.server.json`が継承する`tsconfig.app.json`のみに設定することをお勧めします。
+There are a few cases where if you have a component template that does not have valid HTML structure, this could result in a DOM mismatch error during hydration.
 
-### カスタムまたはNoop Zone.jsは、まだサポートされていません
+As an example, here are some of the most common cases of this issue.
 
-ハイドレーションは、Zone.jsからのシグナルに依存しています。アプリケーション内部が安定すると、Angularはサーバーでシリアライゼーションプロセスを開始するかクライアントでハイドレーション後のクリーンアップを実行して、主張されていないままのDOMノードを削除できます。
+- `<table>` without a `<tbody>`
+- `<div>` inside a `<p>`
+- `<a>` inside another `<a>`
 
-カスタムまたは"noop"のZone.js実装を提供すると、"安定"イベントのタイミングが異なり、シリアライゼーションまたはクリーンアップが早すぎるか遅すぎるタイミングでトリガーされる可能性があります。これはまだ完全にサポートされている構成ではなく、カスタムZone.js実装の`onStable`イベントのタイミングを調整する必要があるかもしれません。
+If you are uncertain about whether your HTML is valid, you can use a [syntax validator](https://validator.w3.org/) to check it.
 
-## エラー {#errors}
+NOTE: While the HTML standard does not require the `<tbody>` element inside tables, modern browsers automatically create a `<tbody>` element in tables that do not declare one. Because of this inconsistency, always explicitly declare a `<tbody>` element in tables to avoid hydration errors.
 
-ノードのミスマッチから、`ngSkipHydration`が有効なホストノードで使用された場合まで、様々なハイドレーション関連のエラーが発生する可能性があります。最も一般的なエラーケースは、ネイティブAPIを使用して直接DOM操作したため、ハイドレーションがサーバーでレンダリングされたクライアントの期待されるDOMツリー構造を見つけられないか、一致させることができない場合です。この種のエラーが発生する可能性のあるもう1つのケースは、前の[有効なHTML構造](#valid-html-structure)セクションで述べたものです。そのため、テンプレートのHTMLが有効な構造を使用していることを確認してください。そうすれば、そのエラーケースを回避できます。
+### Preserve Whitespaces Configuration
 
-ハイドレーション関連のエラーに関する完全なリファレンスについては、[エラーリファレンスガイド](/errors)を参照してください。
+When using the hydration feature, we recommend using the default setting of `false` for `preserveWhitespaces`. If this setting is not in your tsconfig, the value will be `false` and no changes are required. If you choose to enable preserving whitespaces by adding `preserveWhitespaces: true` to your tsconfig, it is possible you may encounter issues with hydration. This is not yet a fully supported configuration.
 
-## 特定のコンポーネントのハイドレーションをスキップする方法 {#how-to-skip-hydration-for-particular-components}
+HELPFUL: Make sure that this setting is set **consistently** in `tsconfig.server.json` for your server and `tsconfig.app.json` for your browser builds. A mismatched value will cause hydration to break.
 
-[直接DOM操作](#direct-dom-manipulation)などの問題により、一部のコンポーネントはハイドレーションを有効にしても正常に動作しない場合があります。回避策として、`ngSkipHydration`属性をコンポーネントのタグに追加することで、コンポーネント全体をハイドレーションしないようにできます。
+If you choose to set this setting in your tsconfig, we recommend to set it only in `tsconfig.app.json` which by default the `tsconfig.server.json` will inherit it from.
+
+### Custom or Noop Zone.js are not yet supported
+
+Hydration relies on a signal from Zone.js when it becomes stable inside an application, so that Angular can start the serialization process on the server or post-hydration cleanup on the client to remove DOM nodes that remained unclaimed.
+
+Providing a custom or a "noop" Zone.js implementation may lead to a different timing of the "stable" event, thus triggering the serialization or the cleanup too early or too late. This is not yet a fully supported configuration and you may need to adjust the timing of the `onStable` event in the custom Zone.js implementation.
+
+## Errors
+
+There are several hydration related errors you may encounter ranging from node mismatches to cases when the `ngSkipHydration` was used on an invalid host node. The most common error case that may occur is due to direct DOM manipulation using native APIs that results in hydration being unable to find or match the expected DOM tree structure on the client that was rendered by the server. The other case you may encounter this type of error was mentioned in the [Valid HTML structure](#valid-html-structure) section earlier. So, make sure the HTML in your templates are using valid structure, and you'll avoid that error case.
+
+For a full reference on hydration related errors, visit the [Errors Reference Guide](/errors).
+
+## How to skip hydration for particular components
+
+Some components may not work properly with hydration enabled due to some of the aforementioned issues, like [Direct DOM Manipulation](#direct-dom-manipulation). As a workaround, you can add the `ngSkipHydration` attribute to a component's tag in order to skip hydrating the entire component.
 
 ```angular-html
 <app-example ngSkipHydration />
 ```
 
-あるいは、`ngSkipHydration`をホストバインディングとして設定できます。
+Alternatively you can set `ngSkipHydration` as a host binding.
 
 ```typescript
 @Component({
@@ -143,23 +163,23 @@ HELPFUL: この設定が、サーバーの`tsconfig.server.json`とブラウザ�
 class ExampleComponent {}
 ```
 
-`ngSkipHydration`属性は、Angularにコンポーネント全体とその子孫をハイドレーションしないように指示します。この属性を使用すると、コンポーネントはハイドレーションが無効な場合と同じように動作します。つまり、コンポーネントは破棄され、再レンダリングされます。
+The `ngSkipHydration` attribute will force Angular to skip hydrating the entire component and its children. Using this attribute means that the component will behave as if hydration is not enabled, meaning it will destroy and re-render itself.
 
-HELPFUL: これによりレンダリングの問題は解決されますが、このコンポーネント（とその子孫）については、ハイドレーションの利点は得られません。ハイドレーションを壊すパターン（直接DOM操作など）を避けるため、コンポーネントの実装を調整する必要があります。そうすれば、ハイドレーションをスキップする注釈を削除できます。
+HELPFUL: This will fix rendering issues, but it means that for this component (and its children), you don't get the benefits of hydration. You will need to adjust your component's implementation to avoid hydration-breaking patterns (i.e. Direct DOM Manipulation) to be able to remove the skip hydration annotation.
 
-`ngSkipHydration`属性は、コンポーネントのホストノードでのみ使用できます。この属性を他のノードに追加すると、Angularはエラーをスローします。
+The `ngSkipHydration` attribute can only be used on component host nodes. Angular throws an error if this attribute is added to other nodes.
 
-ルートアプリケーションコンポーネントに`ngSkipHydration`属性を追加すると、事実上、アプリケーション全体でハイドレーションが無効になることに注意してください。この属性を使用する際は注意深く考えてください。これは、最後の手段としての回避策として意図されています。ハイドレーションを壊すコンポーネントは、修正する必要があるバグと見なされるべきです。
+Keep in mind that adding the `ngSkipHydration` attribute to your root application component would effectively disable hydration for your entire application. Be careful and thoughtful about using this attribute. It is intended as a last resort workaround. Components that break hydration should be considered bugs that need to be fixed.
 
-## ハイドレーションのタイミングとアプリケーションの安定性
+## Hydration Timing and Application Stability
 
-アプリケーションの安定性は、ハイドレーションプロセスの重要な部分です。ハイドレーションとハイドレーション後のプロセスは、アプリケーションが安定状態を報告した後にのみ実行されます。安定性が遅れる原因はいくつかあります。例としては、タイムアウトや間隔の設定、未解決のPromise、保留中のマイクロタスクなどがあります。これらの場合、[アプリケーションは不安定なままです](errors/NG0506)というエラーが発生する可能性があり、これはアプリケーションが10秒後も安定状態に達していないことを示しています。アプリケーションがすぐにハイドレーションされない場合は、アプリケーションの安定性に影響を与える要因を調べ、リファクタリングして遅延を防いでください。
+Application stability is an important part of the hydration process. Hydration and any post-hydration processes only occur once the application has reported stability. There are a number of ways that stability can be delayed. Examples include setting timeouts and intervals, unresolved promises, and pending microtasks. In those cases, you may encounter the [Application remains unstable](errors/NG0506) error, which indicates that your app has not yet reached the stable state after 10 seconds. If you're finding that your application is not hydrating right away, take a look at what is impacting application stability and refactor to avoid causing these delays.
 
 ## I18N
 
-HELPFUL: ハイドレーションを使用した国際化のサポートは現在[開発者プレビュー](/reference/releases#developer-preview)です。デフォルトでは、Angularはi18nブロックを使用するコンポーネントのハイドレーションをスキップし、事実上、それらのコンポーネントを最初から再レンダリングします。
+HELPFUL: Support for internationalization with hydration is currently in [developer preview](/reference/releases#developer-preview). By default, Angular will skip hydration for components that use i18n blocks, effectively re-rendering those components from scratch.
 
-i18nブロックのハイドレーションを有効にするには、`provideClientHydration`呼び出しに[`withI18nSupport`](/api/platform-browser/withI18nSupport)を追加できます。
+To enable hydration for i18n blocks, you can add [`withI18nSupport`](/api/platform-browser/withI18nSupport) to your `provideClientHydration` call.
 
 ```typescript
 import {
@@ -174,17 +194,17 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-## サーバーサイドとクライアントサイドでのレンダリングの一貫性
-`@if`ブロックや、サーバーサイドレンダリング時とクライアントサイドレンダリング時で異なるコンテンツを表示するその他の条件分岐（Angularの`isPlatformBrowser`関数を使用する`@if`ブロックなど）は使用しないでください。これらのレンダリングの違いはレイアウトのずれを引き起こし、ユーザー体験とCore Web Vitalsに悪影響を与えます。
+## Consistent rendering across server-side and client-side
+Avoid introducing `@if` blocks and other conditionals that display different content when server-side rendering than client-side rendering, such as using an `@if` block with Angular's `isPlatformBrowser` function. These rendering differences cause layout shifts, negatively impacting end-user experience and core web vitals.
 
-## DOM操作を行うサードパーティライブラリ
+## Third Party Libraries with DOM Manipulation
 
-DOM操作に依存してレンダリングを行うサードパーティライブラリがいくつかあります。D3チャートが代表的な例です。これらのライブラリはハイドレーションなしで動作していましたが、ハイドレーションが有効になっているとDOMミスマッチエラーが発生する可能性があります。現時点では、これらのライブラリのいずれかを使用してDOMミスマッチエラーが発生した場合は、そのライブラリを使用してレンダリングを行うコンポーネントに`ngSkipHydration`属性を追加できます。
+There are a number of third party libraries that depend on DOM manipulation to be able to render. D3 charts is a prime example. These libraries worked without hydration, but they may cause DOM mismatch errors when hydration is enabled. For now, if you encounter DOM mismatch errors using one of these libraries, you can add the `ngSkipHydration` attribute to the component that renders using that library.
 
-## DOM操作を行うサードパーティスクリプト
+## Third Party Scripts with DOM Manipulation
 
-多くのサードパーティスクリプト（広告トラッカーや分析ツールなど）は、ハイドレーションが発生する前にDOMを変更します。これらのスクリプトは、ページがAngularが期待する構造と一致しなくなるため、ハイドレーションエラーを引き起こす可能性があります。可能な限り、この種のスクリプトはハイドレーション後まで遅延させることをお勧めします。ハイドレーション後のプロセスが完了するまでスクリプトを遅延させるために、[`AfterNextRender`](api/core/afterNextRender)の使用を検討してください。
+Many third party scripts, such as ad trackers and analytics, modify the DOM before hydration can occur. These scripts may cause hydration errors because the page no longer matches the structure expected by Angular. Prefer deferring this type of script until after hydration whenever possible. Consider using [`AfterNextRender`](api/core/afterNextRender) to delay the script until post-hydration processes have occured.
 
-## インクリメンタルハイドレーション
+## Incremental Hydration
 
-インクリメンタルハイドレーションは、ハイドレーションの高度な形態であり、ハイドレーションが発生するタイミングをより細かく制御できます。詳しくは[インクリメンタルハイドレーションのガイド](guide/incremental-hydration)を参照してください。
+Incremental hydration is an advanced form of hydration that allows for more granular control over when hydration happens. See the [incremental hydration guide](guide/incremental-hydration) for more information.

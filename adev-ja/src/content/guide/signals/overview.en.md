@@ -2,7 +2,7 @@
 Angular Signals is a system that granularly tracks how and where your state is used throughout an application, allowing the framework to optimize rendering updates.
 </docs-decorative-header>
 
-Tip: Check out Angular's [Essentials](essentials/signals) before diving into this comprehensive guide.
+TIP: Check out Angular's [Essentials](essentials/signals) before diving into this comprehensive guide.
 
 ## What are signals?
 
@@ -111,10 +111,10 @@ Effects always execute **asynchronously**, during the change detection process.
 
 Effects are rarely needed in most application code, but may be useful in specific circumstances. Here are some examples of situations where an `effect` might be a good solution:
 
-* Logging data being displayed and when it changes, either for analytics or as a debugging tool.
-* Keeping data in sync with `window.localStorage`.
-* Adding custom DOM behavior that can't be expressed with template syntax.
-* Performing custom rendering to a `<canvas>`, charting library, or other third party UI library.
+- Logging data being displayed and when it changes, either for analytics or as a debugging tool.
+- Keeping data in sync with `window.localStorage`.
+- Adding custom DOM behavior that can't be expressed with template syntax.
+- Performing custom rendering to a `<canvas>`, charting library, or other third party UI library.
 
 <docs-callout critical title="When not to use effects">
 Avoid using effects for propagation of state changes. This can result in `ExpressionChangedAfterItHasBeenChecked` errors, infinite circular updates, or unnecessary change detection cycles.
@@ -158,7 +158,7 @@ To create an effect outside the constructor, you can pass an `Injector` to `effe
 @Component({...})
 export class EffectiveCounterComponent {
   readonly count = signal(0);
-  constructor(private injector: Injector) {}
+  private injector = inject(Injector);
 
   initializeLogging(): void {
     effect(() => {
@@ -199,7 +199,7 @@ HELPFUL: By default, signals use referential equality ([`Object.is()`](https://d
 
 Rarely, you may want to execute code which may read signals within a reactive function such as `computed` or `effect` _without_ creating a dependency.
 
-For example, suppose that when `currentUser` changes, the value of a `counter` should be logged. you could create an `effect` which reads both signals:
+For example, suppose that when `currentUser` changes, the value of a `counter` should be logged. You could create an `effect` which reads both signals:
 
 ```ts
 effect(() => {

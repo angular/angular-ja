@@ -4,7 +4,9 @@
 
 Angularには、テンプレート駆動型フォームとリアクティブフォームの2つのタイプのフォームがあります。次のいくつかの活動で、両方のフォームについて学びます。
 
-この活動では、テンプレート駆動型アプローチを使用してフォームを設定する方法を学びます。
+NOTE: 詳しくは、[Angularのフォームに関する詳細ガイド](/guide/forms)をご覧ください。
+
+このアクティビティでは、テンプレート駆動型アプローチを使用してフォームを設定する方法を学びます。
 
 <hr>
 
@@ -12,7 +14,7 @@ Angularには、テンプレート駆動型フォームとリアクティブフ�
 
 <docs-step title="入力フィールドの作成">
 
-`user.component.ts`で、`id`が`framework`に設定され、`type`が`text`に設定されたテキスト入力を使用してテンプレートを更新します。
+`user.ts`で、`id`が`framework`に設定され、`type`が`text`に設定されたテキスト入力を使用してテンプレートを更新します。
 
 ```angular-html
 <label for="framework">
@@ -27,7 +29,7 @@ Angularには、テンプレート駆動型フォームとリアクティブフ�
 
 このフォームでフォームにデータバインディングを可能にするAngularの機能を使用するには、`FormsModule`をインポートする必要があります。
 
-`@angular/forms`から`FormsModule`をインポートし、`UserComponent`の`imports`配列に追加します。
+`@angular/forms`から`FormsModule`をインポートし、`User`の`imports`配列に追加します。
 
 <docs-code language="ts" highlight="[2, 7]">
 import {Component} from '@angular/core';
@@ -37,7 +39,7 @@ import {FormsModule} from '@angular/forms';
   ...
   imports:[FormsModule],
 })
-export class UserComponent {}
+export class User {}
 </docs-code>
 
 </docs-step>
@@ -57,7 +59,7 @@ export class UserComponent {}
 
 変更を加えたら、入力フィールドに値を入力してみてください。画面上でどのように更新されるかを確認してください（はい、非常にクールです）。
 
-注: `[()]`という構文は、「バナナインボックス」として知られていますが、プロパティバインディングとイベントバインディングの2つのバインディングを表します。[Angularのドキュメントの双方向データバインディング](guide/templates/two-way-binding)の詳細については、こちらをご覧ください。
+NOTE: `[()]`という構文は、「バナナインボックス」として知られていますが、プロパティバインディングとイベントバインディングの2つのバインディングを表します。[Angularのドキュメントの双方向データバインディング](guide/templates/two-way-binding)の詳細については、こちらをご覧ください。
 
 </docs-step>
 

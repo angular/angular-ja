@@ -2,6 +2,8 @@
 
 Angular Routerを使用するようにアプリケーションを設定したので、次にルートを定義する必要があります。
 
+NOTE: [基本的なルートの定義方法についての詳細ガイド](/guide/routing/common-router-tasks#defining-a-basic-route)もご覧ください。
+
 このアクティビティでは、アプリケーションにルートを追加して構成する方法について学びます。
 
 <hr>
@@ -20,19 +22,19 @@ Angular Routerを使用するようにアプリケーションを設定したの
 ```ts
 import {Routes} from '@angular/router';
 
-import {HomeComponent} from './home/home.component';
+import {Home} from './home/home';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: Home,
   },
 ];
 ```
 
-上記のコードは、`HomeComponent` をルートとして追加する方法の例です。これで、プレイグラウンドで `UserComponent` とともに実装できます。
+上記のコードは、`Home` をルートとして追加する方法の例です。これで、プレイグラウンドで `User` とともに実装できます。
 
-`UserComponent` のパスには `'user'` を使用してください。
+`User` のパスには `'user'` を使用してください。
 
 </docs-step>
 
@@ -45,13 +47,13 @@ export const routes: Routes = [
 <docs-code language="ts" highlight="[8]">
 import {Routes} from '@angular/router';
 
-import {HomeComponent} from './home/home.component';
+import {Home} from './home/home';
 
 export const routes: Routes =[
   {
     path: '',
     title: 'App Home Page',
-    component: HomeComponent,
+    component: Home,
   },
 ];
 </docs-code>

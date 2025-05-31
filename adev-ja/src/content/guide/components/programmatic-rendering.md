@@ -1,6 +1,6 @@
 # プログラムでコンポーネントをレンダリングする
 
-Tip: このガイドでは、[基本概念のガイド](essentials)をすでに読んでいることを前提としています。Angularを初めて使用する場合は、まずこのガイドを読んでください。
+TIP: このガイドでは、[基本概念のガイド](essentials)をすでに読んでいることを前提としています。Angularを初めて使用する場合は、まずこのガイドを読んでください。
 
 コンポーネントはテンプレートで直接使用できるだけでなく、動的にもレンダリングできます。
 コンポーネントを動的にレンダリングする主な方法は2つあります。
@@ -25,7 +25,7 @@ export class StandardBio { /* ... */ }
     <ng-container *ngComponentOutlet="getBioComponent()" /> `
 })
 export class CustomDialog {
-  @Input() user: User;
+  user = input.required<User>();
 
   getBioComponent() {
     return this.user.isAdmin ? AdminBio : StandardBio;
@@ -72,7 +72,7 @@ export class OuterContainer {}
   `,
 })
 export class InnerItem {
-  constructor(private viewContainer: ViewContainerRef) {}
+  private viewContainer = inject(ViewContainerRef);
 
   loadContent() {
     this.viewContainer.createComponent(LeafContent);

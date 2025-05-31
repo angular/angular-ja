@@ -73,7 +73,7 @@ ng generate directive select
 Angular creates the directive class and specifies the CSS selector, `[select]`, that identifies the directive in a template.
 </docs-step>
 <docs-step title="Make the directive structural">
-Import `TemplateRef`, and `ViewContainerRef`. Inject `TemplateRef` and `ViewContainerRef` in the directive constructor as private variables.
+Import `TemplateRef`, and `ViewContainerRef`. Inject `TemplateRef` and `ViewContainerRef` in the directive as private properties.
 
 ```ts
 import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
@@ -82,7 +82,8 @@ import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
   selector: '[select]',
 })
 export class SelectDirective {
-  constructor(private templateRef: TemplateRef, private ViewContainerRef: ViewContainerRef) {}
+  private templateRef = inject(TemplateRef);
+  private viewContainerRef = inject(ViewContainerRef);
 }
 
 ```
@@ -165,10 +166,11 @@ The following table provides shorthand examples:
 
 | Shorthand | How Angular interprets the syntax |
 |:--- |:--- |
-| `*ngFor="let item of [1,2,3]"` | `<ng-template ngFor let-item [ngForOf]="[1, 2, 3]">` |
-| `*ngFor="let item of [1,2,3] as items; trackBy: myTrack; index as i"` | `<ng-template ngFor let-item [ngForOf]="[1,2,3]" let-items="ngForOf" [ngForTrackBy]="myTrack" let-i="index">` |
-| `*ngIf="exp"`| `<ng-template [ngIf]="exp">` |
-| `*ngIf="exp as value"` | `<ng-template [ngIf]="exp" let-value="ngIf">` |
+| `*myDir="let item of [1,2,3]"` | `<ng-template myDir let-item [myDirOf]="[1, 2, 3]">` |
+| `*myDir="let item of [1,2,3] as items; trackBy: myTrack; index as i"` | `<ng-template myDir let-item [myDirOf]="[1,2,3]" let-items="myDirOf" [myDirTrackBy]="myTrack" let-i="index">` |
+| `*ngComponentOutlet="componentClass";` | `<ng-template [ngComponentOutlet]="componentClass">` |
+| `*ngComponentOutlet="componentClass; inputs: myInputs";` | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">` |
+| `*myDir="exp as value"` | `<ng-template [myDir]="exp" let-value="myDir">` |
 
 ## Improving template type checking for custom directives
 

@@ -2,6 +2,8 @@
 
 パイプはオプションを渡すことで、さらに使い道を広げることができます。
 
+NOTE: 詳しくは、[パイプによるデータのフォーマットに関する詳細ガイド](/guide/templates/pipes)をご覧ください。
+
 このアクティビティでは、いくつかのパイプとパイプパラメーターについて学びます。
 
 <hr>
@@ -20,7 +22,7 @@ template: `{{ date | date:'medium' }}`;
 
 <docs-step title="`DecimalPipe` を使用して数値をフォーマットする">
 
-`app.component.ts` のテンプレートを更新して、`decimal` パイプのパラメーターを含めます。
+`app.ts` のテンプレートを更新して、`decimal` パイプのパラメーターを含めます。
 
 <docs-code language="ts" highlight="[3]">
 template: `
@@ -29,7 +31,7 @@ template: `
 `
 </docs-code>
 
-注: このフォーマットは何でしょう？`DecimalPipe` のパラメーターは `digitsInfo` と呼ばれ、`{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}` のフォーマットを使用します。
+NOTE: このフォーマットは何でしょう？`DecimalPipe` のパラメーターは `digitsInfo` と呼ばれ、`{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}` のフォーマットを使用します。
 
 </docs-step>
 

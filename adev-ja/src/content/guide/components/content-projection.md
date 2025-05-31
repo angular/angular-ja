@@ -1,6 +1,6 @@
 # `ng-content` を使ったコンテンツの投影
 
-Tip: このガイドは、すでに [基本概念のガイド](essentials) を読んだことを前提としています。Angularを初めて使う場合は、まずそちらを読んでください。
+TIP: このガイドは、すでに [基本概念のガイド](essentials) を読んだことを前提としています。Angularを初めて使う場合は、まずそちらを読んでください。
 
 多くの場合、さまざまな種類のコンテンツを格納するコンポーネントを作成する必要があります。
 例えば、カスタムカードコンポーネントを作成したいとします。
@@ -23,7 +23,7 @@ export class CustomCard {/* ... */}
 export class CustomCard {/* ... */}
 ```
 
-Tip: `<ng-content>`は、
+TIP: `<ng-content>`は、
 [ネイティブの`<slot>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/slot)と似ていますが、
 Angular固有の機能も備えています。
 
@@ -140,7 +140,7 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
     <card-title>こんにちは</card-title>
     <div class="card-divider"></div>
     <img src="..." />
-    <p>例へようこそ></p>
+    <p>例へようこそ</p>
   </div>
 </custom-card>
 ```
@@ -173,7 +173,7 @@ Angularは、コンポーネントの`<ng-content>`プレースホルダーに�
 <!-- レンダリングされたDOM -->
 <custom-card>
   <div class="card-shadow">
-    Hello
+    <card-title>Hello</card-title>
     <div class="card-divider"></div>
     Default Body
   </div>
@@ -210,7 +210,7 @@ Angularは要素のIDではなく`ngProjectAs`の値と比較します。
   <div class="card-shadow">
     <h3>こんにちは</h3>
     <div class="card-divider"></div>
-    <p>例へようこそ></p>
+    <p>例へようこそ</p>
   </div>
 </custom-card>
 ```

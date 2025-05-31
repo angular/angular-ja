@@ -32,8 +32,6 @@
 
 アプリケーションにリアクティブフォームディレクティブへのアクセス権を与えるには、必要なコンポーネントに `@angular/forms` ライブラリから `ReactiveFormsModule` をインポートします。
 
-例からの次のコードは、ルートモジュールでのセットアップを示しています。
-
 <docs-code-multifile>
     <docs-code header="dynamic-form.component.ts" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form.component.ts"/>
     <docs-code header="dynamic-form-question.component.ts" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form-question.component.ts"/>
@@ -88,7 +86,7 @@
 
 `DynamicFormQuestionComponent` の目標は、モデルで定義された質問タイプを提示することです。
 現時点では質問タイプが2つしかありませんが、さらに多くのタイプが考えられます。
-テンプレートの `ngSwitch` ステートメントは、表示する質問タイプを決定します。
+テンプレートの `@switch` ブロックは、表示する質問タイプを決定します。
 スイッチは、[`formControlName`](api/forms/FormControlName "FormControlName ディレクティブ API リファレンス") と [`formGroup`](api/forms/FormGroupDirective "FormGroupDirective API リファレンス") セレクターを持つディレクティブを使用します。
 両方のディレクティブは `ReactiveFormsModule` で定義されています。
 
@@ -100,7 +98,7 @@
 ただし、重要な点は、ヒーローの求人質問を `QuestionService` から返されるオブジェクトを通じて完全に制御できることです。
 要件が変更された場合にアンケートを維持するには、`questions` 配列からオブジェクトを追加、更新、削除するだけです。
 
-`QuestionService` は、`@Input()` questionsにバインドされた配列の形式で、質問セットを供給します。
+`QuestionService` は、`input()` questionsにバインドされた配列の形式で、質問セットを供給します。
 
 <docs-code header="src/app/question.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question.service.ts"/>
 

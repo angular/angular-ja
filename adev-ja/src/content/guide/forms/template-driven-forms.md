@@ -74,9 +74,9 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    このデモでは、`model`と`skills`のダミーデータを使用しています。
    実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
-1. アプリケーションは、フォーム機能を有効にし、作成されたフォームコンポーネントを登録します。
+1. The component enables the Forms feature by importing the `FormsModule` module.
 
-   <docs-code header="src/app/app.module.ts" language="typescript" path="adev/src/content/examples/forms/src/app/app.module.ts"/>
+   <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="imports"/>
 
 1. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
 
@@ -98,7 +98,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    <docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
 
 1. フォームでは、アクターのスキルを、`ActorFormComponent`で内部的に維持されている事前定義された`skills`リストから選択する必要があります。
-   Angularの[NgForOfディレクティブ](api/common/NgForOf "APIリファレンス")は、データ値を反復処理して、`<select>`要素に値を埋め込みます。
+   The Angular `@for` loop iterates over the data values to populate the `<select>` element.
 
    <docs-code header="src/app/actor-form/actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
 
@@ -204,6 +204,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
    </docs-code>
 
 1. **Name** `<input>`ボックスで次のように操作し、表示されるクラスを観察します。
+
    - 見るだけで触れずにいます。
      クラスは触られていないか、原始状態または有効であることを示しています。
 
@@ -222,7 +223,8 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 なぜなら、値が無効な場合に明確な視覚的な信号を送信したいからです。
 また、必須フィールドをマークすることも必要です。
 
-入力ボックスの左側に色の付いたバーを使用して、必須フィールドと無効なデータを同時にマークできます。
+入力ボックスの左側に色の付いたバーを使用して、
+必須フィールドと無効なデータを同時にマークできます。
 
 この方法で外観を変更するには、次の手順を実行します。
 
@@ -239,8 +241,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 ### 検証エラーメッセージの表示と非表示
 
 **名前**入力ボックスは必須であり、クリアするとバーが赤くなります。
-これは何かが間違っていることを示していますが、ユーザーは何が間違っているのか、
-どうすればいいのかわかりません。
+これは何かが間違っていることを示していますが、ユーザーは何が間違っているのか、どうすればいいのかわかりません。
 コントロールの状態をチェックして対応することで、役立つメッセージを提供できます。
 
 **スキル**選択ボックスも必須ですが、この種のエラー処理は必要ありません。なぜなら、選択ボックスはすでに選択を有効な値に制限しているからです。
@@ -403,7 +404,6 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
     <docs-code header="actor-form/actor-form.component.ts" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="final"/>
     <docs-code header="actor-form/actor-form.component.html" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="final"/>
     <docs-code header="actor.ts" path="adev/src/content/examples/forms/src/app/actor.ts"/>
-    <docs-code header="app.module.ts" path="adev/src/content/examples/forms/src/app/app.module.ts"/>
     <docs-code header="app.component.html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
     <docs-code header="app.component.ts" path="adev/src/content/examples/forms/src/app/app.component.ts"/>
     <docs-code header="main.ts" path="adev/src/content/examples/forms/src/main.ts"/>

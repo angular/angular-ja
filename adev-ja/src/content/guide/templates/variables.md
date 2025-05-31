@@ -8,7 +8,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 
 ### `@let` の使用方法
 
-`@let` を使用して、テンプレート式の結果に基づいた値を持つ変数を宣言します。 Angularは、[バインディング](./bindings)と同様に、指定された式を使用して変数の値を自動的に最新の状態に保ちます。
+`@let` を使用して、テンプレート式の結果に基づいた値を持つ変数を宣言します。 Angularは、[バインディング](./templates/bindings)と同様に、指定された式を使用して変数の値を自動的に最新の状態に保ちます。
 
 ```angular-html
 @let name = user.name;
@@ -81,18 +81,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
   }
 }
 
-<div *ngIf="condition">
-  {{topLevel + insideDiv}} <!-- Valid -->
-
-  @let nestedNgIf = value;
-
-  <div *ngIf="condition">
-     {{topLevel + insideDiv + nestedNgIf}} <!-- Valid -->
-  </div>
-</div>
-
 {{nested}} <!-- Error, not hoisted from @if -->
-{{nestedNgIf}} <!-- Error, not hoisted from *ngIf -->
 ```
 
 ### 構文全体
@@ -138,7 +127,7 @@ Angularは、変数が宣言されている要素に基づいて、テンプレ�
 <my-datepicker #startDate />
 ```
 
-変数を `<ng-template>` 要素に宣言した場合、変数はテンプレートを表すTemplateRefインスタンスを参照します。詳細については、[構造ディレクティブ](/guide/directives/structural-directives)の[Angularがアスタリスク、\*、構文を使用する方法](/guide/directives/structural-directives#asterisk)を参照してください。
+変数を `<ng-template>` 要素に宣言した場合、変数はテンプレートを表すTemplateRefインスタンスを参照します。詳細については、[構造ディレクティブ](/guide/directives/structural-directives)の[Angularがアスタリスク、\*、構文を使用する方法](/guide/directives/structural-directives#structural-directive-shorthand)を参照してください。
 
 ```angular-html
 <!-- `myFragment` 変数は、このテンプレートフラグメントに対応する `TemplateRef` インスタンスに代入されます。 -->

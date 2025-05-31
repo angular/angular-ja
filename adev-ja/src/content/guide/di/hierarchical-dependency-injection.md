@@ -177,45 +177,45 @@ HELPFUL: `NgModule` ベースのアプリケーションの場合、Angularは `
 
 ## 解決修飾子
 
-Angularの解決動作は、 `@Optional()`と`@Self()`、`@SkipSelf()`および`@Host()`で変更できます。
-これらのそれぞれを `@angular/core` からインポートし、コンポーネントクラスコンストラクターまたはサービスを注入するときの `inject` 構成でそれぞれを使用します。
+Angular's resolution behavior can be modified with `optional`, `self`, `skipSelf` and `host`.
+Import each of them from `@angular/core` and use each in the `inject` configuration when you inject your service.
 
 ### 修飾子の種類
 
 解決修飾子は、次の3つのカテゴリーに分類されます。
 
-* Angularが探しているものが見つからない場合の処理、つまり `@Optional()`
-* 検索を開始する場所、つまり `@SkipSelf()`
-* 検索を停止する場所、 `@Host()` と `@Self()`
+* What to do if Angular doesn't find what you're looking for, that is `optional`
+* Where to start looking, that is `skipSelf`
+* Where to stop looking, `host` and `self`
 
 デフォルトでは、Angularは常に現在の `Injector` から始めて、すべてを上に検索し続けます。
 修飾子を使用すると、開始位置（または _self_ 位置）と終了位置を変更できます。
 
 さらに、次の修飾子をすべて組み合わせることができます。
 
-* `@Host()` と `@Self()`
-* `@SkipSelf()` と `@Self()`
+* `host` and `self`
+* `skipSelf` and `self`.
 
-### `@Optional()`
+### `optional`
 
-`@Optional()` を使用すると、注入するサービスをオプションとして扱うことができます。
+`optional` allows Angular to consider a service you inject to be optional.
 そのため、実行時に解決できない場合、Angularはサービスをエラーをスローするのではなく、 `null` として解決します。
 次の例では、サービス `OptionalService` はサービス `ApplicationConfig`や`@NgModule()`、コンポーネントクラスで提供されていないため、アプリケーションのどこにも使用できません。
 
 <docs-code header="src/app/optional/optional.component.ts" language="typescript">
 export class OptionalComponent {
-  constructor(@Optional() public optional?: OptionalService) {}
+  public optional? = inject(OptionalService, {optional: true});
 }
 </docs-code>
 
-### `@Self()`
+### `self`
 
-`@Self()` を使用すると、Angularは現在のコンポーネントまたはディレクティブの `ElementInjector` のみを調べます。
+Use `self` so that Angular will only look at the `ElementInjector` for the current component or directive.
 
-`@Self()` の良いユースケースは、サービスを注入することですが、現在のホスト要素で使用可能な場合のみです。
-この状況でエラーを回避するには、 `@Self()` と `@Optional()` を組み合わせます。
+A good use case for `self` is to inject a service but only if it is available on the current host element.
+To avoid errors in this situation, combine `self` with `optional`.
 
-たとえば、次の `SelfNoDataComponent` では、コンストラクターで注入された `LeafService` に注目してください。
+For example, in the following `SelfNoDataComponent`, notice the injected `LeafService` as a property.
 
 <docs-code header="src/app/self-no-data/self-no-data.component.ts" language="typescript"
            highlight="[7]">
@@ -225,21 +225,21 @@ export class OptionalComponent {
   styleUrls: ['./self-no-data.component.css']
 })
 export class SelfNoDataComponent {
-  constructor(@Self() @Optional() public leaf?: LeafService) { }
+  public leaf = inject(LeafService, {optional: true, self: true});
 }
 </docs-code>
 
-この例では親プロバイダーがあり、サービスを注入すると値が返されます。しかし `@Self()` と `@Optional()` を使用してサービスを注入すると、 `null` が返されます。これは、 `@Self()` がインジェクターに現在のホスト要素の検索を停止するように指示するためです。
+In this example, there is a parent provider and injecting the service will return the value, however, injecting the service with `self` and `optional` will return `null` because `self` tells the injector to stop searching in the current host element.
 
 別の例では、 `FlowerService` のプロバイダーを備えたコンポーネントクラスを示しています。
 この場合、インジェクターは現在の `ElementInjector` より先を見ずに、 `FlowerService` を見つけて、チューリップ <code>&#x1F337;</code> を返します。
 
 <docs-code header="src/app/self/self.component.ts" path="adev/src/content/examples/resolution-modifiers/src/app/self/self.component.ts" visibleRegion="self-component"/>
 
-### `@SkipSelf()`
+### `skipSelf`
 
-`@SkipSelf()` は `@Self()` の逆です。
-`@SkipSelf()` を使用すると、Angular は現在のインジェクターではなく、親 `ElementInjector` でサービスの検索を開始します。
+`skipSelf` is the opposite of `self`.
+With `skipSelf`, Angular starts its search for a service in the parent `ElementInjector`, rather than in the current one.
 そのため、親 `ElementInjector` が `emoji` にシダ <code>&#x1F33F;</code> 値を使用していたが、コンポーネントの `providers` 配列にカエデの葉 <code>&#x1F341;</code> が含まれている場合、Angular はカエデの葉 <code>&#x1F341;</code> を無視して、シダ <code>&#x1F33F;</code> を使用します。
 
 これをコードで確認するために、親コンポーネントが使用する `emoji` の次の値を想定します。これは、このサービスと同じです。
@@ -251,7 +251,7 @@ export class LeafService {
 </docs-code>
 
 子コンポーネントに、異なる値、カエデの葉 <code>&#x1F341;</code> が含まれていると想像してください。ただし、親の値を使用したいとします。
-これが、 `@SkipSelf()` を使用するタイミングです。
+This is when you'd use `skipSelf`:
 
 <docs-code header="src/app/skipself/skipself.component.ts" language="typescript"
            highlight="[[6],[10]]">
@@ -263,34 +263,34 @@ export class LeafService {
   providers: [{ provide: LeafService, useValue: { emoji: '🍁' } }]
 })
 export class SkipselfComponent {
-  // コンストラクターで @SkipSelf() を使用します
-  constructor(@SkipSelf() public leaf: LeafService) { }
+  // Use skipSelf as inject option
+  public leaf = inject(LeafService, {skipSelf: true});
 }
 </docs-code>
 
 この場合、 `emoji` に対して取得する値は、カエデの葉 <code>&#x1F341;</code> ではなく、シダ <code>&#x1F33F;</code> になります。
 
-#### `@SkipSelf()` と `@Optional()`
+#### `skipSelf` option with `optional`
 
-`@SkipSelf()` と `@Optional()` を使用すると、値が `null` の場合にエラーを防ぐことができます。
+Use the `skipSelf` option with `optional` to prevent an error if the value is `null`.
 
-次の例では、 `Person` サービスがコンストラクターで注入されています。
-`@SkipSelf()` は、Angularに現在のインジェクターをスキップするように指示し、 `@Optional()` は `Person` サービスが `null` の場合にエラーを防ぎます。
+In the following example, the `Person` service is injected during property initialization.
+`skipSelf` tells Angular to skip the current injector and `optional` will prevent an error should the `Person` service be `null`.
 
 <docs-code language="typescript">
 class Person {
-  constructor(@Optional() @SkipSelf() parent?: Person) {}
+  parent = inject(Person, {optional: true, skipSelf: true})
 }
 </docs-code>
 
-### `@Host()`
+### `host`
 
-<!-- TODO: @Host と @Self のあいまいさを解消する。 -->
+<!-- TODO: Remove ambiguity between host and self. -->
 
-`@Host()` を使用すると、インジェクターツリーでプロバイダーを検索する際の終点としてコンポーネントを指定できます。
+`host` lets you designate a component as the last stop in the injector tree when searching for providers.
 
-ツリーの上位にサービスインスタンスがある場合でも、Angularは検索を続行しません。
-`@Host()` は次のように使用します。
+Even if there is a service instance further up the tree, Angular won't continue looking.
+Use `host` as follows:
 
 <docs-code header="src/app/host/host.component.ts" language="typescript"
            highlight="[[6],[10]]">
@@ -298,16 +298,28 @@ class Person {
   selector: 'app-host',
   templateUrl: './host.component.html',
   styleUrls: ['./host.component.css'],
-  // サービスを提供します
+  //  provide the service
   providers: [{ provide: FlowerService, useValue: { emoji: '🌷' } }]
 })
 export class HostComponent {
-  // サービスを注入するときにコンストラクターで @Host() を使用します
-  constructor(@Host() @Optional() public flower?: FlowerService) { }
+  // use host when injecting the service
+  flower = inject(FlowerService, {host: true, optional: true});
 }
 </docs-code>
 
-`HostComponent` に `@Host()` があるため、 `HostComponent` の親が `flower.emoji` 値として何を使用しているかに関係なく、 `HostComponent` はチューリップ <code>&#x1F337;</code> を使用します。
+Since `HostComponent` has the `host` option , no matter what the parent of `HostComponent` might have as a `flower.emoji` value, the `HostComponent` will use tulip <code>&#x1F337;</code>.
+
+### Modifiers with constructor injection  
+
+Similarly as presented before, the behavior of constructor injection can be modified with `@Optional()`, `@Self()`, `@SkipSelf()` and `@Host()`.
+
+Import each of them from `@angular/core` and use each in the component class constructor when you inject your service.
+
+<docs-code header="src/app/self-no-data/self-no-data.component.ts" language="typescript" highlight="[3]">
+export class SelfNoDataComponent {
+  constructor(@Self() @Optional() public leaf?: LeafService) { }
+}
+</docs-code>
 
 ## テンプレートの論理構造
 
@@ -347,7 +359,7 @@ HELPFUL: 通常、コンポーネントとそのテンプレートは別々の�
 ## 例： `@Component()` でサービスを提供する
 
 `@Component()`（または `@Directive()`）デコレーターを使用してサービスを提供する方法は、サービスの可視性を決めます。
-次のセクションでは`providers`と`viewProviders`、`@SkipSelf()`および`@Host()`を使用してサービスの可視性を変更する方法について説明します。
+The following sections demonstrate `providers` and `viewProviders` along with ways to modify service visibility with `skipSelf` and `host`.
 
 コンポーネントクラスでは、次の2つの方法でサービスを提供できます。
 
@@ -416,7 +428,7 @@ export class FlowerService {
 
 <docs-code header="src/app/app.component.ts" language="typescript">
 export class AppComponent  {
-  constructor(public flower: FlowerService) {}
+  flower = inject(FlowerService);
 }
 </docs-code>
 
@@ -483,7 +495,7 @@ Emoji from FlowerService: &#x1F33A;
 })
 export class ChildComponent {
   // サービスを注入します
-  constructor( public flower: FlowerService) { }
+  flower = inject(FlowerService);
 }
 </docs-code>
 
@@ -556,9 +568,8 @@ export class AnimalService {
 
 <docs-code header="src/app/app.component.ts" language="typescript" highlight="[4]">
 export class AppComponent {
-  constructor(
-    public flower: FlowerService,
-    public animal: AnimalService) {}
+    public flower = inject(FlowerService);
+    public animal = inject(AnimalService);
 }
 </docs-code>
 
@@ -579,7 +590,8 @@ HELPFUL: `FlowerService` に関連するコードはすべてそのままにし�
 })
 export class ChildComponent {
   // サービスを注入します
-  constructor( public flower: FlowerService, public animal: AnimalService) { }
+  flower = inject(FlowerService); 
+  animal = inject(AnimalService)
 ...
 }
 </docs-code>
@@ -639,11 +651,12 @@ Emoji from AnimalService: &#x1F436;
 
 `providers` と `viewProviders` の違いを確認するために、別のコンポーネントを例に追加して、 `InspectorComponent` と呼びます。
 `InspectorComponent` は、 `ChildComponent` の子になります。
-`inspector.component.ts` で、コンストラクターに `FlowerService` と `AnimalService` を注入します。
+In `inspector.component.ts`, inject the `FlowerService` and `AnimalService` during property initialization:
 
 <docs-code header="src/app/inspector/inspector.component.ts" language="typescript">
 export class InspectorComponent {
-  constructor(public flower: FlowerService, public animal: AnimalService) { }
+  flower = inject(FlowerService);
+  animal = inject(AnimalService);
 }
 </docs-code>
 
@@ -749,16 +762,16 @@ Emoji from AnimalService: &#x1F436;
 ### 提供されたトークンの可視性
 
 可視性デコレーターは、論理ツリー内でインジェクショントークンの検索を開始する場所と終了する場所を制御します。
-これを行うには、可視性デコレーターを注入ポイント、つまり `constructor()` に配置し、宣言ポイントに配置しないでください。
+To do this, place visibility configuration at the point of injection, that is, when invoking `inject()`, rather than at a point of declaration.
 
-インジェクターが `FlowerService` の検索を開始する場所を変更するには、 `<app-child>` の `@Inject` 宣言に `@SkipSelf()` を追加します。
-この宣言は、 `child.component.ts` に示すように、 `<app-child>` のコンストラクターにあります。
+To alter where the injector starts looking for `FlowerService`, add `skipSelf` to the `<app-child>` `inject()` invocation where `FlowerService` is injected.
+This invocation is a property initializer the `<app-child>` as shown in `child.component.ts`:
 
 <docs-code language="typescript">
-constructor(@SkipSelf() public flower: FlowerService) { }
+flower = inject(FlowerService, { skipSelf: true })
 </docs-code>
 
-`@SkipSelf()` を使用すると、 `<app-child>` インジェクターは、 `FlowerService` を自身で検索しません。
+With `skipSelf`, the `<app-child>` injector doesn't look to itself for the `FlowerService`.
 代わりに、インジェクターは `<app-root>` の `ElementInjector` で `FlowerService` の検索を開始し、何も見つかりません。
 次に、 `<app-child>` の `ModuleInjector` に戻り、 `<app-child>` と `<app-root>` が同じ `ModuleInjector` を共有しているため、赤いハイビスカス <code>&#x1F33A;</code> 値が見つかります。
 UIには次のように表示されます。
@@ -786,10 +799,10 @@ Emoji from FlowerService: &#x1F33A;
 
 </docs-code>
 
-`<app-child>` はひまわり <code>&#x1F33B;</code> を提供しますが、アプリケーションは赤いハイビスカス <code>&#x1F33A;</code> をレンダリングします。これは、 `@SkipSelf()` によって現在のインジェクター（`app-child`）が自身をスキップして親を調べるためです。
+Though `<app-child>` provides the sunflower <code>&#x1F33B;</code>, the application renders the red hibiscus <code>&#x1F33A;</code> because `skipSelf` causes the current injector (`app-child`) to skip itself and look to its parent.
 
-`@Host()` を追加すると（`@SkipSelf()` に加えて）、結果は `null` になります。
-これは、 `@Host()` が検索の上限を `<app-child>` の `<#VIEW>` に制限するためです。
+If you now add `host` (in addition to the `skipSelf`), the result will be `null`.
+This is because `host` limits the upper bound of the search to the `app-child` `<#VIEW>`.
 論理ツリーでの考え方は次のとおりです。
 
 <docs-code language="html">
@@ -798,7 +811,7 @@ Emoji from FlowerService: &#x1F33A;
         @Inject(FlowerService) flower=>"&#x1F33A;">
   <#VIEW> <!-- ここで検索を終了して null を返します-->
     <app-child @Provide(FlowerService="&#x1F33B;")> <!-- ここで検索を開始します -->
-      <#VIEW @Inject(FlowerService, @SkipSelf, @Host, @Optional)=>null>
+      <#VIEW inject(FlowerService, {skipSelf: true, host: true, optional:true})=>null>
       </#VIEW>
       </app-parent>
   </#VIEW>
@@ -806,14 +819,14 @@ Emoji from FlowerService: &#x1F33A;
 
 </docs-code>
 
-ここではサービスとその値は同じですが、 `@Host()` によってインジェクターは `<#VIEW>` より先を `FlowerService` について検索できなくなるため、見つからずに `null` を返します。
+Here, the services and their values are the same, but `host` stops the injector from looking any further than the `<#VIEW>` for `FlowerService`, so it doesn't find it and returns `null`.
 
-### `@SkipSelf()` と `viewProviders`
+### `skipSelf` and `viewProviders`
 
 覚えておいてください。 `<app-child>` は、 `viewProviders` 配列で `AnimalService` を提供し、その値は犬 <code>&#x1F436;</code> です。
 インジェクターは、 `<app-child>` の `ElementInjector` を `AnimalService` について調べるだけなので、クジラ <code>&#x1F433;</code> は見えません。
 
-`FlowerService` の例と同様に、コンストラクターに `@SkipSelf()` を追加すると、インジェクターは現在の `<app-child>` の `ElementInjector` を `AnimalService` について検索しません。
+As in the `FlowerService` example, if you add `skipSelf` to the `inject()` of `AnimalService`, the injector won't look in the  `ElementInjector` of the current `<app-child>` for the `AnimalService`.
 代わりに、インジェクターは `<app-root>` の `ElementInjector` で検索を開始します。
 
 <docs-code language="typescript" highlight="[5]">
@@ -826,7 +839,7 @@ Emoji from FlowerService: &#x1F33A;
 })
 </docs-code>
 
-論理ツリーは、 `<app-child>` に `@SkipSelf()` がある場合、次のようになります。
+The logical tree looks like this with `skipSelf` in `<app-child>`:
 
 <docs-code language="html">
 
@@ -836,7 +849,7 @@ Emoji from FlowerService: &#x1F33A;
     <app-child>
       <#VIEW @Provide(AnimalService="&#x1F436;")
              @Inject(AnimalService, SkipSelf=>"&#x1F433;")>
-        <!--@SkipSelf を追加します -->
+        <!--Add skipSelf -->
       </#VIEW>
     </app-child>
   </#VIEW>
@@ -844,13 +857,13 @@ Emoji from FlowerService: &#x1F33A;
 
 </docs-code>
 
-`<app-child>` に `@SkipSelf()` があると、インジェクターは `<app-root>` の `ElementInjector` で `AnimalService` の検索を開始し、クジラ <code>&#x1F433;</code> を見つけます。
+With `skipSelf` in the `<app-child>`, the injector begins its search for the `AnimalService` in the `<app-root>` `ElementInjector` and finds whale <code>&#x1F433;</code>.
 
-### `@Host()` と `viewProviders`
+### `host` and `viewProviders`
 
-`@Host()` を単独で使用した場合、結果は犬 <code>&#x1F436;</code> になります。なぜなら、インジェクターは `<app-child>` の `<#VIEW>` 自体で `AnimalService` を見つけるためです。
-`ChildComponent` は、 `viewProviders` を構成して、犬の絵文字が `AnimalService` 値として提供されるようにします。
-また、コンストラクターに `@Host()` があることもわかります。
+If you just use `host` for the injection of `AnimalService`, the result is dog <code>&#x1F436;</code> because the injector finds the `AnimalService` in the `<app-child>` `<#VIEW>` itself.
+The `ChildComponent` configures the `viewProviders` so that the dog emoji is provided as `AnimalService` value.
+You can also see `host` the `inject()`:
 
 <docs-code language="typescript" highlight="[[5],[9]]">
 @Component({
@@ -861,11 +874,11 @@ Emoji from FlowerService: &#x1F33A;
   ]
 })
 export class ChildComponent {
-  constructor(@Host() public animal: AnimalService) { }
+  animal = inject(AnimalService, { host: true })
 }
 </docs-code>
 
-`@Host()` によって、インジェクターは `<#VIEW>` の端に出会うまで検索します。
+`host: true` causes the injector to look until it encounters the edge of the `<#VIEW>`.
 
 <docs-code language="html">
 
@@ -874,7 +887,7 @@ export class ChildComponent {
   <#VIEW>
     <app-child>
       <#VIEW @Provide(AnimalService="&#x1F436;")
-             @Inject(AnimalService, @Host=>"&#x1F436;")> <!-- @Host はここで検索を停止します -->
+             inject(AnimalService, {host: true}=>"&#x1F436;")> <!-- host stops search here -->
       </#VIEW>
     </app-child>
   </#VIEW>
@@ -896,23 +909,21 @@ export class ChildComponent {
 
 </docs-code>
 
-次に、 `child.component.ts` で `AnimalService` の注入のコンストラクターに `@SkipSelf()` と `@Host()` を追加します。
-以下は、 `<app-child>` のコンストラクターにある `@Host()` と `@SkipSelf()` です。
+Next, add `skipSelf` along with `host` to the `inject()` for the `AnimalService` injection in `child.component.ts`.
+Here are `host` and `skipSelf` in the `animal` property initialization:
 
 <docs-code language="typescript" highlight="[4]">
 export class ChildComponent {
-
-  constructor(
-    @Host() @SkipSelf() public animal: AnimalService) { }
+  animal = inject(AnimalService, { host: true, skipSelf: true });
 }
 
 </docs-code>
 
-<!-- TODO: これは作り直す必要があります。
-  ここで `viewProviders`/`injectors` と `@Host()` の仕組みが十分に説明されていないようです。
-  -->
+<!-- TODO: This requires a rework. It seems not well explained what `viewProviders`/`injectors` is here
+  and how `host` works.
+ -->
 
-`@Host()` と `@SkipSelf()` が `providers` 配列にある `FlowerService` に適用された場合、結果は `null` になりました。これは、 `@SkipSelf()` が `<app-child>` インジェクターで検索を開始しますが、 `@Host()` は `<#VIEW>` での検索を停止するためです。そこには `FlowerService` はありません。
+When `host` and `skipSelf` were applied to the `FlowerService`, which is in the `providers` array, the result was `null` because `skipSelf` starts its search in the `<app-child>` injector, but `host` stops searching at `<#VIEW>` —where there is no `FlowerService`
 論理ツリーでは、 `FlowerService` は `<app-child>` で可視であり、 `<#VIEW>` では可視ではないことがわかります。
 
 ただし、 `AppComponent` の `viewProviders` 配列で提供されている `AnimalService` は可視です。
@@ -925,11 +936,11 @@ export class ChildComponent {
         @Inject(AnimalService=>"&#x1F433;")>
   <#VIEW @Provide(AnimalService="&#x1F994;")
          @Inject(AnimalService, @Optional)=>"&#x1F994;">
-    <!-- ^^@SkipSelf() はここで開始し、 @Host() はここで停止します^^ -->
+    <!-- ^^skipSelf starts here,  host stops here^^ -->
     <app-child>
       <#VIEW @Provide(AnimalService="&#x1F436;")
-             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"&#x1F994;">
-               <!-- @SkipSelf を追加します ^^-->
+             inject(AnimalService, {skipSelf:true, host: true, optional: true})=>"&#x1F994;">
+               <!-- Add skipSelf ^^-->
       </#VIEW>
       </app-child>
   </#VIEW>
@@ -937,7 +948,7 @@ export class ChildComponent {
 
 </docs-code>
 
-`@SkipSelf()` は、インジェクターが `AnimalService` の検索を要求が発生した `<app-child>` ではなく、 `<app-root>` で開始するように指示し、 `@Host()` は `<app-root>` の `<#VIEW>` で検索を停止します。
+`skipSelf`, causes the injector to start its search for the `AnimalService` at the `<app-root>`, not the `<app-child>`, where the request originates, and `host` stops the search at the `<app-root>` `<#VIEW>`.
 `AnimalService` は `viewProviders` 配列を介して提供されるため、インジェクターは `<#VIEW>` でハリネズミ <code>&#x1F994;</code> を見つけます。
 
 ## 例： `ElementInjector` のユースケース
@@ -1004,7 +1015,7 @@ export class HeroTaxReturnService {
   private currentTaxReturn!: HeroTaxReturn;
   private originalTaxReturn!: HeroTaxReturn;
 
-  constructor(private heroService: HeroesService) {}
+  private heroService = inject(HeroesService);
 
   set taxReturn(htr: HeroTaxReturn) {
     this.originalTaxReturn = htr;
@@ -1029,7 +1040,7 @@ export class HeroTaxReturnService {
 以下は、 `HeroTaxReturnService` を使用する `HeroTaxReturnComponent` です。
 
 <docs-code header="src/app/hero-tax-return.component.ts" language="typescript">
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, output } from '@angular/core';
 import { HeroTaxReturn } from './hero';
 import { HeroTaxReturnService } from './hero-tax-return.service';
 
@@ -1042,18 +1053,21 @@ import { HeroTaxReturnService } from './hero-tax-return.service';
 export class HeroTaxReturnComponent {
   message = '';
 
-  @Output() close = new EventEmitter<void>();
+  close = output<void>();
 
   get taxReturn(): HeroTaxReturn {
     return this.heroTaxReturnService.taxReturn;
   }
 
-  @Input()
-  set taxReturn(htr: HeroTaxReturn) {
-    this.heroTaxReturnService.taxReturn = htr;
+  taxReturn = input.required<HeroTaxReturn>();
+
+  constructor() {
+    effect(() => {
+      this.heroTaxReturnService.taxReturn = this.taxReturn();
+    })
   }
 
-  constructor(private heroTaxReturnService: HeroTaxReturnService) {}
+  private heroTaxReturnService = inject(HeroTaxReturnService);
 
   onCanceled()  {
     this.flashMessage('Canceled');
@@ -1074,7 +1088,7 @@ export class HeroTaxReturnComponent {
 }
 </docs-code>
 
-_編集対象の税務申告_ は、 `@Input()` プロパティを介して到着します。これは、ゲッターとセッターで実装されています。
+_編集対象の税務申告_ は、 `input` プロパティを介して到着します。これは、ゲッターとセッターで実装されています。
 セッターは、コンポーネント自身の `HeroTaxReturnService` インスタンスを、受信した申告で初期化します。
 ゲッターは常に、そのサービスがヒーローの現在の状態であると判断したものを返します。
 コンポーネントは、この税務申告を保存および復元することもサービスに要求します。

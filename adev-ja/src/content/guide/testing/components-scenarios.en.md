@@ -73,7 +73,7 @@ Then add it to the `providers` array of the testing module configuration:
 
 HELPFUL: You can also use the `fixture.autoDetectChanges()` function instead if you only want to enable automatic change detection
 after making updates to the state of the fixture's component. In addition, automatic change detection is on by default
-when using `provideExperimentalZonelessChangeDetection` and turning it off is not recommended.
+when using `provideZonelessChangeDetection` and turning it off is not recommended.
 
 Here are three tests that illustrate how automatic change detection works.
 
@@ -425,7 +425,7 @@ The `DashboardHeroComponent` is embedded in the `DashboardComponent` template li
 
 <docs-code header="app/dashboard/dashboard.component.html (excerpt)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.html" visibleRegion="dashboard-hero"/>
 
-The `DashboardHeroComponent` appears in an `*ngFor` repeater, which sets each component's `hero` input property to the looping value and listens for the component's `selected` event.
+The `DashboardHeroComponent` appears in an `@for` block, which sets each component's `hero` input property to the looping value and listens for the component's `selected` event.
 
 Here's the component's full definition:
 
@@ -574,9 +574,9 @@ The `:id` is a route parameter whose value is the `id` of the hero to edit.
 The `Router` matches that URL to a route to the `HeroDetailComponent`.
 It creates an `ActivatedRoute` object with the routing information and injects it into a new instance of the `HeroDetailComponent`.
 
-Here's the `HeroDetailComponent` constructor:
+Here are the services injected into `HeroDetailComponent`:
 
-<docs-code header="app/hero/hero-detail.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ctor"/>
+<docs-code header="app/hero/hero-detail.component.ts (inject)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="inject"/>
 
 The `HeroDetail` component needs the `id` parameter so it can fetch the corresponding hero using the `HeroDetailService`.
 The component has to get the `id` from the `ActivatedRoute.paramMap` property which is an `Observable`.
@@ -584,7 +584,7 @@ The component has to get the `id` from the `ActivatedRoute.paramMap` property wh
 It can't just reference the `id` property of the `ActivatedRoute.paramMap`.
 The component has to *subscribe* to the `ActivatedRoute.paramMap` observable and be prepared for the `id` to change during its lifetime.
 
-<docs-code header="app/hero/hero-detail.component.ts (ngOnInit)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ng-on-init"/>
+<docs-code header="app/hero/hero-detail.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ctor"/>
 
 Tests can explore how the `HeroDetailComponent` responds to different `id` parameter values by navigating to different routes.
 

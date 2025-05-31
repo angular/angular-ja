@@ -2,6 +2,8 @@
 
 Angularでデータ変換のニーズに合わせてカスタムパイプを作成できます。
 
+NOTE: 詳しくは、[カスタムパイプの作成についての詳細ガイド](/guide/templates/pipes#creating-custom-pipes)をご覧ください。
+
 このアクティビティでは、カスタムパイプを作成してテンプレートで使用します。
 
 <hr>
@@ -64,7 +66,7 @@ export class ReversePipe implements PipeTransform {
 </docs-step>
 
 <docs-step title="テンプレートで `ReversePipe` を使用する"></docs-step>
-パイプロジックを実装したら、最後のステップとしてテンプレートで使用します。`app.component.ts` でテンプレートにパイプを含め、コンポーネントのインポートに追加します。
+パイプロジックを実装したら、最後のステップとしてテンプレートで使用します。`app.ts` でテンプレートにパイプを含め、コンポーネントのインポートに追加します。
 
 <docs-code language="angular-ts" highlight="[3,4]">
 @Component({

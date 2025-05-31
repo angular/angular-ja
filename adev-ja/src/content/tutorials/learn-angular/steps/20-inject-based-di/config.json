@@ -1,5 +1,5 @@
 {
-  "openFiles": ["src/app/car.service.ts", "src/app/app.component.ts"],
-  "title": "インジェクトベースの依存性の注入",
+  "openFiles": ["src/app/app.ts", "src/app/car.service.ts"],
+  "title": "依存性の注入",
   "type": "editor"
 }

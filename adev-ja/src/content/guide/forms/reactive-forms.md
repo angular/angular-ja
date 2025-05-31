@@ -22,10 +22,8 @@
 
 フォームコントロールを使用するには、次の3つの手順があります。
 
-1. アプリケーションにリアクティブフォームモジュールを登録します。
-    このモジュールは、リアクティブフォームを使用するために必要なリアクティブフォームディレクティブを宣言します。
-
-1. 新しいコンポーネントを生成し、新しい `FormControl` をインスタンス化します。
+1. Generate a new component and register the reactive forms module. This module declares the reactive-form directives that you need to use reactive forms.
+1. Instantiate a new `FormControl`.
 1. テンプレートに `FormControl` を登録します。
 
 次に、コンポーネントをテンプレートに追加することで、フォームを表示できます。
@@ -35,18 +33,16 @@
 
 <docs-workflow>
 
-<docs-step title="ReactiveFormsModule をインポート">
-リアクティブフォームコントロールを使用するには、`@angular/forms` パッケージから `ReactiveFormsModule` をインポートし、NgModuleの `imports` 配列に追加します。
+<docs-step title="Generate a new component and import the ReactiveFormsModule">
+Use the CLI command `ng generate component` to generate a component in your project and import `ReactiveFormsModule` from the `@angular/forms` package and add it to your Component's `imports` array.
 
-<docs-code header="src/app/app.module.ts (抜粋)" path="adev/src/content/examples/reactive-forms/src/app/app.module.ts" visibleRegion="imports" />
+<docs-code header="src/app/name-editor/name-editor.component.ts (excerpt)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" visibleRegion="imports" />
 </docs-step>
 
-<docs-step title="FormControl を含む新しいコンポーネントを生成">
-CLI コマンド `ng generate component` を使用して、プロジェクトにコントロールをホストするコンポーネントを生成します。
+<docs-step title="Declare a FormControl instance">
+Use the constructor of `FormControl` to set its initial value, which in this case is an empty string. By creating these controls in your component class, you get immediate access to listen for, update, and validate the state of the form input.
 
 <docs-code header="src/app/name-editor/name-editor.component.ts" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" visibleRegion="create-control"/>
-
-`FormControl` のコンストラクターを使用して、初期値を設定します。この場合は、空の文字列です。これらのコントロールをコンポーネントクラスで作成することで、フォーム入力の状態をリッスン、更新、検証するためのアクセス権をすぐに得られます。
 </docs-step>
 
 <docs-step title="テンプレートにコントロールを登録">
@@ -68,8 +64,8 @@ CLI コマンド `ng generate component` を使用して、プロジェクトに
 
 値は、次の方法で表示できます。
 
-* `valueChanges` オブザーバブルを介して、`AsyncPipe` を使用してテンプレートで、または `subscribe()` メソッドを使用してコンポーネントクラスで、フォームの値の変更をリッスンできます。
-* `value` プロパティを使用すると、現在の値のスナップショットを取得できます。
+- `valueChanges` オブザーバブルを介して、`AsyncPipe` を使用してテンプレートで、または `subscribe()` メソッドを使用してコンポーネントクラスで、フォームの値の変更をリッスンできます。
+- `value` プロパティを使用すると、現在の値のスナップショットを取得できます。
 
 次の例では、テンプレートの補間を使用して、現在の値を表示する方法を示します。
 
@@ -88,7 +84,7 @@ CLI コマンド `ng generate component` を使用して、プロジェクトに
 フォームコントロールインスタンスは、フォームコントロールの値を更新し、提供された値の構造をコントロールの構造に対して検証する `setValue()` メソッドを提供します。
 たとえば、バックエンドAPIまたはサービスからフォームデータを取得する場合は、`setValue()` メソッドを使用してコントロールを新しい値に更新し、古い値を完全に置き換えます。
 
-次の例では、`setValue()` メソッドを使用してコントロールの値を *Nancy* に更新するメソッドをコンポーネントクラスに追加します。
+次の例では、`setValue()` メソッドを使用してコントロールの値を _Nancy_ に更新するメソッドをコンポーネントクラスに追加します。
 
 <docs-code header="src/app/name-editor/name-editor.component.ts (値の更新)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" visibleRegion="update-value"/>
 
@@ -147,7 +143,7 @@ ng generate component ProfileEditor
 
 <docs-code header="src/app/profile-editor/profile-editor.component.html (テンプレートフォームグループ)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" visibleRegion="formgroup"/>
 
-フォームグループがコントロールのグループを含んでいるのと同じように、*profileForm* `FormGroup` は、`FormGroup` ディレクティブを使用して `form` 要素にバインドされ、モデルと入力を含むフォーム間の通信レイヤーを作成します。`FormControlName` ディレクティブによって提供される `formControlName` 入力により、各個別の入力が `FormGroup` で定義されたフォームコントロールにバインドされます。フォームコントロールは、それぞれの要素と通信します。また、モデル値の真実の源を提供するフォームグループインスタンスに変更を伝達します。
+Just as a form group contains a group of controls, the _profileForm_ `FormGroup` is bound to the `form` element with the `FormGroup` directive, creating a communication layer between the model and the form containing the inputs. The `formControlName` input provided by the `FormControlName` directive binds each individual input to the form control defined in `FormGroup`. The form controls communicate with their respective elements. They also communicate changes to the form group instance, which provides the source of truth for the model value.
 </docs-step>
 
 <docs-step title="フォームデータの保存">
@@ -261,7 +257,7 @@ ng generate component ProfileEditor
 <docs-step title="FormBuilder サービスの注入">
 `FormBuilder` サービスは、リアクティブフォームモジュールで提供される、注入可能なプロバイダーです。`inject()`関数を使ってこの依存関係を注入します。
 
-<docs-code header="src/app/profile-editor/profile-editor.component.ts (コンストラクター)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="inject-form-builder"/>
+<docs-code header="src/app/profile-editor/profile-editor.component.ts (property init)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="inject-form-builder"/>
 
 </docs-step>
 <docs-step title="フォームコントロールの生成">
@@ -271,7 +267,7 @@ ng generate component ProfileEditor
 
 前の例では、モデルのプロパティを定義するために、同じオブジェクトを使用して `group()` メソッドを使用しています。各コントロール名の値は、配列に含まれ、初期値を配列の最初の項目として含みます。
 
-Tip: コントロールを初期値だけで定義できますが、コントロールに同期または非同期検証が必要な場合は、配列の2番目と3番目の項目として同期バリデーターと非同期バリデーターを追加します。フォームビルダーの使用を、手動でインスタンスを作成する方法と比較します。
+TIP: コントロールを初期値だけで定義できますが、コントロールに同期または非同期検証が必要な場合は、配列の2番目と3番目の項目として同期バリデーターと非同期バリデーターを追加します。フォームビルダーの使用を、手動でインスタンスを作成する方法と比較します。
 
   <docs-code-multifile>
     <docs-code header="src/app/profile-editor/profile-editor.component.ts (インスタンス)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" visibleRegion="formgroup-compare"/>
@@ -283,7 +279,7 @@ Tip: コントロールを初期値だけで定義できますが、コントロ
 
 ## フォーム入力の検証 {#validating-form-input}
 
-*フォーム検証* は、ユーザー入力が完全で正しいことを確認するために使用されます。
+_フォーム検証_ は、ユーザー入力が完全で正しいことを確認するために使用されます。
 このセクションでは、フォームコントロールに単一のバリデーターを追加し、フォーム全体のステータスを表示する方法について説明します。
 フォーム検証については、[フォーム検証](guide/forms/form-validation) ガイドで、より詳しく説明しています。
 
@@ -337,7 +333,7 @@ Tip: コントロールを初期値だけで定義できますが、コントロ
 1. ゲッターメソッドを使用して、`FormArray` コントロールにアクセスします。
 1. テンプレートにフォーム配列を表示します。
 
-次の例では、`ProfileEditor` で *エイリアス* の配列を管理する方法を示します。
+次の例では、`ProfileEditor` で _エイリアス_ の配列を管理する方法を示します。
 
 <docs-workflow>
 <docs-step title="`FormArray` クラスのインポート">
@@ -379,7 +375,7 @@ Tip: コントロールを初期値だけで定義できますが、コントロ
 
 <docs-code header="src/app/profile-editor/profile-editor.component.html (aliases フォーム配列テンプレート)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" visibleRegion="formarrayname"/>
 
-`*ngFor` ディレクティブは、エイリアスのフォーム配列インスタンスによって提供される各フォームコントロールインスタンスを反復処理します。フォーム配列要素は名前がないため、インデックスを `i` 変数に割り当て、`formControlName` 入力に渡して、各コントロールをバインドします。
+`@for` ブロックは、エイリアスのフォーム配列インスタンスによって提供される各フォームコントロールインスタンスを反復処理します。フォーム配列要素は名前がないため、インデックスを `i` 変数に割り当て、`formControlName` 入力に渡して、各コントロールをバインドします。
 
 新しいエイリアスインスタンスが追加されるたびに、新しいフォーム配列インスタンスに、インデックスに基づいてコントロールが提供されます。これにより、ルートコントロールのステータスと値を計算する際に、各個別のコントロールを追跡できます。
 

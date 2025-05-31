@@ -1,7 +1,7 @@
 <docs-decorative-header title="コンポーネントの構造" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-Tip: このガイドでは、すでに[基本概念のガイド](essentials)を読んでいることを前提としています。Angularを初めて使う場合は、まずそちらをお読みください。
+TIP: このガイドでは、すでに[基本概念のガイド](essentials)を読んでいることを前提としています。Angularを初めて使う場合は、まずそちらをお読みください。
 
 すべてのコンポーネントには次のものが必要です。
 

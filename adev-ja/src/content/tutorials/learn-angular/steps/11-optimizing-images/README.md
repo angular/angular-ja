@@ -2,7 +2,11 @@
 
 画像は多くのアプリケーションにおいて大きな部分を占め、低い [Core Web Vitals](https://web.dev/explore/learn-core-web-vitals) スコアなど、アプリケーションのパフォーマンス問題の大きな原因となる可能性があります。
 
-画像の最適化は複雑なトピックになる可能性がありますが、Angularは `NgOptimizedImage` ディレクティブを使用して、ほとんどの処理を代行してくれます。このアクティビティでは、`NgOptimizedImage` を使用して画像を効率的に読み込む方法について学びます。
+画像の最適化は複雑なトピックになる可能性がありますが、Angularは `NgOptimizedImage` ディレクティブを使用して、ほとんどの処理を代行してくれます。
+
+NOTE: 詳しくは、[NgOptimizedImage を使った画像最適化の詳細ガイド](/guide/image-optimization) をご覧ください。
+
+このアクティビティでは、`NgOptimizedImage` を使用して画像を効率的に読み込む方法について学びます。
 
 <hr>
 
@@ -61,7 +65,7 @@ import { NgOptimizedImage } from '@angular/common';
 </div>
 ```
 
-注：`fill` 画像が正しくレンダリングされるためには、その親要素は `position: "relative"`、`position: "fixed"`、または `position: "absolute"` でスタイル設定する必要があります。
+NOTE: `fill` 画像が正しくレンダリングされるためには、その親要素は `position: "relative"`、`position: "fixed"`、または `position: "absolute"` でスタイル設定する必要があります。
 
 </docs-step>
 
@@ -86,6 +90,7 @@ providers: [
 ```
 
 最終的なURLは 'https://my.base.url/image.png' になります。
+
 ```angular-html
 <img ngSrc="image.png" height="600" width="800" />
 ```

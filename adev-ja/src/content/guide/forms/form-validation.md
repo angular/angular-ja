@@ -25,9 +25,9 @@ Angularは、これらの属性をフレームワーク内のバリデーター�
     `NgModel`は、基になる`FormControl`インスタンスの多くのプロパティをミラーリングしているため、テンプレート内でこれを使用して、`valid`や`dirty`などのコントロールの状態を確認できます。
     コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
 
-  * `<div>`要素の`*ngIf`は、入れ子になったメッセージの`div`のセットを明らかにしますが、`name`が無効で、コントロールが`dirty`または`touched`の場合のみです。
+  * The outermost `@if` reveals a set of nested messages but only if the `name` is invalid and the control is either `dirty` or `touched`.
 
-  * 各入れ子になった`<div>`は、考えられる検証エラーのいずれかについて、カスタムメッセージを表示できます。
+  * Each nested `@if` can present a custom message for one of the possible validation errors.
         `required`、`minlength`、`forbiddenName`のメッセージがあります。
 
 HELPFUL: ユーザーがフォームを編集する機会がある前に、バリデーターがエラーを表示しないようにするには、コントロールの`dirty`または`touched`状態のいずれかをチェックする必要があります。
@@ -213,7 +213,7 @@ const actorForm = new FormGroup({
 
 <docs-code header="reactive/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="cross-validation-error-message"/>
 
-この`*ngIf`は、`FormGroup`に`unambiguousRoleValidator`バリデーターが返したクロス検証エラーがある場合に、エラーを表示しますが、ユーザーが[フォームとやり取りを完了](#control-status-css-classes)した場合のみです。
+この`@if`は、`FormGroup`に`unambiguousRoleValidator`バリデーターが返したクロス検証エラーがある場合に、エラーを表示しますが、ユーザーが[フォームとやり取りを完了](#control-status-css-classes)した場合のみです。
 
 ### クロス検証をテンプレート駆動フォームに追加する
 
@@ -254,7 +254,9 @@ const actorForm = new FormGroup({
 <docs-code language="html">
 
 <input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator>
-<app-spinner *ngIf="model.pending"></app-spinner>
+@if(model.pending) {
+  <app-spinner />
+}
 
 </docs-code>
 
@@ -268,7 +270,7 @@ const actorForm = new FormGroup({
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator"/>
 
-コンストラクターは、次のインターフェースを定義する`ActorsService`を注入します。
+The `actorsService` property is initialized with an instance of the `ActorsService` token, which defines the following interface.
 
 <docs-code language="typescript">
 interface ActorsService {
@@ -295,7 +297,7 @@ interface ActorsService {
 
 ### 非同期バリデーターをリアクティブフォームに追加する
 
-リアクティブフォームで非同期バリデーターを使用するには、最初にバリデーターをコンポーネントクラスのコンストラクターに注入します。
+リアクティブフォームで非同期バリデーターを使用するには、最初にバリデーターをコンポーネントクラスのプロパティに注入します。
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-inject"/>
 

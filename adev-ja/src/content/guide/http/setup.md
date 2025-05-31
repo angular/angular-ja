@@ -31,9 +31,8 @@ export class AppModule {}
 <docs-code language="ts">
 @Injectable({providedIn: 'root'})
 export class ConfigService {
-  constructor(private http: HttpClient) {
-    // このサービスは、`this.http` を介して HTTP リクエストを実行できるようになりました。
-  }
+  private http = inject(HttpClient);
+  // このサービスは、`this.http` を介して HTTP リクエストを実行できるようになりました。
 }
 </docs-code>
 

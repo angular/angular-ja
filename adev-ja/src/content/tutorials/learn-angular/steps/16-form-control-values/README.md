@@ -2,6 +2,8 @@
 
 Angularでフォームをセットアップしたら、次のステップはフォームコントロールから値にアクセスすることです。
 
+NOTE: 詳しくは、[フォームコントロールの追加方法についてのガイド](/guide/forms/reactive-forms#adding-a-basic-form-control) を参照してください。
+
 このアクティビティでは、フォーム入力から値を取得する方法を学びます。
 
 <hr>
@@ -24,7 +26,7 @@ Angularでフォームをセットアップしたら、次のステップはフ�
     </label>
   `,
 })
-export class UserComponent {
+export class User {
   favoriteFramework = '';
 }
 </docs-code>
@@ -45,7 +47,7 @@ export class UserComponent {
   `,
   ...
 })
-export class UserComponent {
+export class User {
   favoriteFramework = '';
   ...
 

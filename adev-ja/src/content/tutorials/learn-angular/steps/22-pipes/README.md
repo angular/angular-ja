@@ -2,6 +2,8 @@
 
 パイプは、テンプレート内のデータを変換するために使用される関数です。一般的に、パイプは副作用を引き起こさない「純粋な」関数です。Angularには、コンポーネントでインポートして使用できる、役立つ組み込みパイプがいくつかあります。カスタムパイプの作成もできます。
 
+NOTE: 詳しくは、[パイプの詳細ガイド](/guide/templates/pipes)をご覧ください。
+
 このアクティビティでは、パイプをインポートしてテンプレートで使用します。
 
 <hr>
@@ -16,7 +18,7 @@ import {UpperCasePipe} from '@angular/common';
     template: `{{ loudMessage | uppercase }}`,
     imports:[UpperCasePipe],
 })
-class AppComponent {
+class App {
     loudMessage = 'we think you are doing great!'
 }
 </docs-code>
@@ -26,7 +28,7 @@ class AppComponent {
 <docs-workflow>
 
 <docs-step title="`LowerCase` パイプをインポートする">
-まず、`@angular/common` から `LowerCasePipe` のファイルレベルのインポートを追加して、`app.component.ts` を更新します。
+まず、`@angular/common` から `LowerCasePipe` のファイルレベルのインポートを追加して、`app.ts` を更新します。
 
 ```ts
 import { LowerCasePipe } from '@angular/common';
@@ -47,7 +49,7 @@ import { LowerCasePipe } from '@angular/common';
 </docs-step>
 
 <docs-step title="パイプをテンプレートに追加する">
-最後に、`app.component.ts` のテンプレートを更新して、`lowercase` パイプを含めます。
+最後に、`app.ts` のテンプレートを更新して、`lowercase` パイプを含めます。
 
 ```ts
 template: `{{username | lowercase }}`

@@ -37,7 +37,7 @@
 <docs-workflow>
 
 <docs-step title="`@placeholder`ブロックの追加">
-`app.component.ts`で、`@defer`ブロックに`@placeholder`ブロックを追加します。
+`app.ts`で、`@defer`ブロックに`@placeholder`ブロックを追加します。
 
 <docs-code language="angular-html" highlight="[3,4,5]">
 @defer {
@@ -70,7 +70,7 @@
 
 どちらのパラメーターも、ミリ秒(ms)または秒(s)の時間単位で指定されます。
 
-`@loading`ブロックに`minimum`パラメーターを`1s`、`after`パラメーターを`500ms`として含めるように`app.component.ts`を更新します。
+`@loading`ブロックに`minimum`パラメーターを`1s`、`after`パラメーターを`500ms`として含めるように`app.ts`を更新します。
 
 <docs-code language="angular-html" highlight="[5,6,7]">
 @defer {

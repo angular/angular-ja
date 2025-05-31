@@ -22,10 +22,10 @@ class HeroService {}
 次のステップは、それをDIで提供できるようにすることです。
 依存関係は、複数の場所で提供できます。
 
-* [**推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する。](#推奨-アプリケーションのルートレベルでprovidedInを使用して提供する)
-* [コンポーネントレベルで提供する。](#コンポーネントレベルで提供する)
-* [`ApplicationConfig` を使用してアプリケーションのルートレベルで提供する。](#applicationconfigを使用してアプリケーションのルートレベルで提供する)
-* [`NgModule` ベースのアプリケーション。](#ngmoduleベースのアプリケーション)
+- [**推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する](#推奨-アプリケーションのルートレベルでprovidedInを使用して提供する)
+- [コンポーネントレベルで提供する](#コンポーネントレベルで提供する)
+- [`ApplicationConfig` を使用してアプリケーションのルートレベルで提供する](#applicationconfigを使用してアプリケーションのルートレベルで提供する)
+- [`NgModule` ベースのアプリケーション](#ngmoduleベースのアプリケーション)
 
 ### **推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する
 
@@ -61,7 +61,7 @@ class HeroListComponent {}
 
 コンポーネントレベルでプロバイダーを登録すると、そのコンポーネントの新しいインスタンスごとに、サービスの新しいインスタンスが取得されます。
 
-Note: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
+NOTE: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
 
 ### `ApplicationConfig` を使用してアプリケーションのルートレベルで提供する
 
@@ -83,7 +83,7 @@ export const appConfig: ApplicationConfig = {
 bootstrapApplication(AppComponent, appConfig)
 </docs-code>
 
-Note: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
+NOTE: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
 
 ### `NgModule` ベースのアプリケーション
 
@@ -96,23 +96,24 @@ Note: `providers` を使用してサービスを宣言すると、サービス�
 
 ## 依存関係を注入する/消費する
 
-依存関係を注入する最も一般的な方法は、クラスのコンストラクターで宣言することです。Angularがコンポーネント、ディレクティブ、またはパイプクラスの新しいインスタンスを作成すると、コンストラクターのパラメーター型を見て、そのクラスに必要なサービスまたはその他の依存関係を判断します。たとえば、`HeroListComponent` が `HeroService` を必要とする場合、コンストラクターは次のようになります。
+Use Angular's `inject` function to retrieve dependencies.
 
-<docs-code language="typescript" highlight="[3]">
-@Component({ … })
-class HeroListComponent {
-  constructor(private service: HeroService) {}
+```ts
+import {inject, Component} from 'angular/core';
+
+@Component({/* ... */})
+export class UserProfile {
+  // You can use the `inject` function in property initializers.
+  private userClient = inject(UserClient);
+
+  constructor() {
+    // You can also use the `inject` function in a constructor.
+    const logger = inject(Logger);
+  }
 }
-</docs-code>
+```
 
-別のオプションは、[inject](api/core/inject) メソッドを使用することです。
-
-<docs-code language="typescript" highlight="[3]">
-@Component({ … })
-class HeroListComponent {
-  private service = inject(HeroService);
-}
-</docs-code>
+You can use the `inject` function in any [injection context](guide/di/dependency-injection-context). Most of the time, this is in a class property initializer or a class constructor for components, directives, services, and pipes.
 
 Angularがコンポーネントがサービスに依存していることを発見すると、最初にインジェクターにそのサービスの既存のインスタンスがあるかどうかを確認します。要求されたサービスインスタンスがまだ存在しない場合、インジェクターは登録されたプロバイダーを使用してインスタンスを作成し、サービスをAngularに返す前に、インジェクターに追加します。
 
@@ -127,9 +128,9 @@ serviceC[Service C]
 serviceD[Service D]
 end
 direction TB
-componentConstructor["Component <br> constructor(HeroService)"]
-heroService-->componentConstructor
-style componentConstructor text-align: left
+componentProperty["Component <br> heroService = inject(HeroService)"]
+heroService-->componentProperty
+style componentProperty text-align: left
 ```
 
 ## 次のステップ

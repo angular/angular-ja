@@ -1,6 +1,6 @@
 # 継承
 
-Tip: このガイドは、すでに[基本概念のガイド](essentials)を読んだことを前提としています。Angular初心者の方は、最初にそちらをお読みください。
+TIP: このガイドは、すでに[基本概念のガイド](essentials)を読んだことを前提としています。Angular初心者の方は、最初にそちらをお読みください。
 
 AngularコンポーネントはTypeScriptクラスであり、
 標準のJavaScript継承セマンティクスに従います。
@@ -20,9 +20,9 @@ export class CustomListbox extends ListboxBase {
 
 ## 他のコンポーネントとディレクティブの拡張
 
-コンポーネントが別のコンポーネントまたはディレクティブを拡張する場合、基底クラスのデコレーターで定義されたすべてのメタデータと、基底クラスのデコレートされたメンバーを継承します。
-これには、セレクター、テンプレート、スタイル、ホストバインディング、入力、出力、ライフサイクルメソッド、
-およびその他の設定が含まれます。
+コンポーネントが他のコンポーネントやディレクティブを継承すると、
+基底クラスのデコレーターで定義された一部のメタデータや、デコレーター付きメンバーを継承します。
+これには、ホストバインディング、入力プロパティ、出力プロパティ、ライフサイクルメソッドなどが含まれます。
 
 ```angular-ts
 @Component({
@@ -35,7 +35,7 @@ export class CustomListbox extends ListboxBase {
   },
 })
 export class ListboxBase {
-  @Input() value: string;
+  value = input.required<string>();
   handleKey(event: KeyboardEvent) {
     /* ... */
   }
@@ -51,7 +51,7 @@ export class ListboxBase {
   },
 })
 export class CustomListbox extends ListboxBase {
-  @Input() disabled = false;
+  disabled = input(false);
   focusActiveOption() {
     /* ... */
   }
@@ -67,8 +67,7 @@ export class CustomListbox extends ListboxBase {
 
 ### 注入された依存性の転送
 
-基底クラスが依存性の注入に依存している場合、
-子クラスはこれらの依存性を明示的に`super`に渡す必要があります。
+もし基底クラスがコンストラクターのパラメーターとして依存性を注入している場合、子クラスではその依存性を明示的にsuper()に渡す必要があります。
 
 ```ts
 @Component({ ... })

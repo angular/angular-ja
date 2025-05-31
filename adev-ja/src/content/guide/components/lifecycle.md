@@ -1,6 +1,6 @@
 # コンポーネントライフサイクル
 
-Tip: このガイドは、[基本概念のガイド](essentials) を既にお読みになっていることを前提としています。Angularを初めて使用する場合は、まずそちらをお読みください。
+TIP: このガイドは、[基本概念のガイド](essentials) を既にお読みになっていることを前提としています。Angularを初めて使用する場合は、まずそちらをお読みください。
 
 コンポーネントの**ライフサイクル**とは、コンポーネントの作成から破棄までの間に起こる一連のステップのことです。
 各ステップは、Angularがコンポーネントをレンダリングし、
@@ -72,7 +72,7 @@ Angularアプリケーション全体に関連するライフサイクルフッ�
       <td><strong>すべての</strong>コンポーネントがDOMにレンダリングされた次の時間に1回実行されます。</td>
     </tr>
     <tr>
-      <td><code>afterRender</code></td>
+      <td><code>afterEveryRender</code></td>
       <td><strong>すべての</strong>コンポーネントがDOMにレンダリングされるたびに実行されます。</td>
     </tr>
     <tr>
@@ -113,7 +113,7 @@ Angularアプリケーション全体に関連するライフサイクルフッ�
   /* ... */
 })
 export class UserProfile {
-  @Input() name: string = '';
+  name = input('');
 
   ngOnChanges(changes: SimpleChanges) {
     for (const inputName in changes) {
@@ -146,8 +146,8 @@ Angularは、コンポーネントがページに表示されなくなった場�
   /* ... */
 })
 export class UserProfile {
-  constructor(private destroyRef: DestroyRef) {
-    destroyRef.onDestroy(() => {
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
       console.log('UserProfile destruction');
     });
   }
@@ -219,16 +219,16 @@ Angularがコンポーネントのテンプレートの変更をチェックす�
 このメソッドで状態を変更しようとすると、
 [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
 
-### afterRender と afterNextRender
+### afterEveryRender と afterNextRender
 
-`afterRender` と `afterNextRender` 関数は、
+`afterEveryRender` と `afterNextRender` 関数は、
 Angularがページ上の*すべてのコンポーネント*をDOMにレンダリングし終えた後に呼び出される**レンダリングコールバック** を登録できます。
 
 これらの関数は、このガイドで説明した他のライフサイクルフックとは異なります。
 クラスメソッドではなく、コールバックを受け取るスタンドアロン関数です。
 レンダリングコールバックの実行は、特定のコンポーネントインスタンスに結び付けられるのではなく、アプリケーション全体のフックに結び付けられます。
 
-`afterRender` と `afterNextRender` は、
+`afterEveryRender` と `afterNextRender` は、
 [注入コンテキスト](guide/di/dependency-injection-context)（通常はコンポーネントのコンストラクター）
 で呼び出す必要があります。
 
@@ -237,9 +237,9 @@ AngularでDOMを操作する方法については、[DOM API の使用](guide/co
 
 レンダリングコールバックは、サーバーサイドレンダリング中またはビルド時の事前レンダリング中は実行されません。
 
-#### afterRender フェーズ
+#### afterEveryRender フェーズ
 
-`afterRender` または `afterNextRender` を使用する場合、
+`afterEveryRender` または `afterNextRender` を使用する場合、
 オプションで作業をフェーズに分割できます。
 フェーズを使用すると、DOM操作のシーケンスを制御でき、[レイアウトのスラッシング](https://web.dev/avoid-large-complex-layouts-and-layout-thrashing) を最小限に抑えるために、
 *書き込み*操作を*読み込み*操作の前にシーケンスできます。
@@ -254,7 +254,8 @@ export class UserProfile {
   private prevPadding = 0;
   private elementHeight = 0;
 
-  constructor(elementRef: ElementRef) {
+  constructor() {
+    private elementRef = inject(ElementRef);
     const nativeElement = elementRef.nativeElement;
 
     afterNextRender({
@@ -326,7 +327,7 @@ ngDoCheck-->ngAfterViewInit
 ngAfterContentInit-->ngAfterContentChecked
 ngAfterViewInit-->ngAfterViewChecked
 end
-CHANGE--レンダリング-->afterRender
+CHANGE--Rendering-->afterNextRender-->afterEveryRender
 ```
 
 ### 後続の更新
@@ -339,7 +340,7 @@ ngOnChanges-->ngDoCheck
 ngDoCheck-->ngAfterContentChecked;
 ngDoCheck-->ngAfterViewChecked
 end
-CHANGE--レンダリング-->afterRender
+CHANGE--Rendering-->afterEveryRender
 ```
 
 ### ディレクティブとの順序付け

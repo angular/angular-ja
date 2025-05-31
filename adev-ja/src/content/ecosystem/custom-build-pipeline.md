@@ -14,7 +14,7 @@ Angularアプリケーションを構築する際、Angular CLIを使用して�
 
 ## どのような選択肢がありますか？
 
-現在、[Vite プラグイン](https://www.npmjs.com/package/@analogjs/vite-plugin-angular)と[Rspack プラグイン](https://www.npmjs.com/package/@ng-rspack/build)を使用してカスタムビルドパイプラインを作成できる、十分にサポートされた2つのコミュニティツールがあります。どちらも、Angular CLIを強化する基盤となる抽象レイヤを使用しています。これらにより、柔軟なビルドパイプラインを作成できますが、手動でのメンテナンスが必要であり、自動化された更新の体験は得られません。
+Currently, there are two well supported community tools that enable you to create a custom build pipeline with a [Vite plugin](https://www.npmjs.com/package/@analogjs/vite-plugin-angular) and [Rspack plugin](https://www.npmjs.com/package/@nx/angular-rspack). Both of them use underlying abstractions that power the Angular CLI. They allow you to create a flexible build pipeline and require manual maintenance and no automated update experience.
 
 ### Rspack
 
@@ -22,7 +22,7 @@ Rspackは、webpackプラグインエコシステムとの互換性を提供す�
 
 プロジェクトがwebpackエコシステムに密接に結合されており、カスタムwebpack構成に大きく依存している場合は、Rspackを活用してビルド時間を改善できます。
 
-Angular Rspackの詳細については、プロジェクトの[ドキュメントWebサイト](https://angular-rspack.dev/guide/migration/from-webpack)を参照してください。
+Angular Rspackの詳細については、プロジェクトの[ドキュメントWebサイト](https://nx.dev/recipes/angular/rspack/introduction)を参照してください。
 
 ### Vite
 

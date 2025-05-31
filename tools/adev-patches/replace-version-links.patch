@@ -1,40 +1,13 @@
-diff --git a/adev/src/app/core/constants/versions.ts b/adev/src/app/core/constants/versions.ts
-index fcb60cbd77..f59ab93291 100644
---- a/adev/src/app/core/constants/versions.ts
-+++ b/adev/src/app/core/constants/versions.ts
-@@ -7,11 +7,11 @@
-  */
- 
- export const VERSIONS_CONFIG = {
--  aDevVersionsLinkPattern: 'https://{{prefix}}{{version}}angular.dev',
-+  aDevVersionsLinkPattern: 'https://{{prefix}}{{version}}angular.jp',
-   aioVersions: [
-     {
-       version: 'v18',
-       url: 'https://v18.angular.dev/overview',
-     },
-     {
-       version: 'v17',
-diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
-index 3da3517a8f..a2d80ea740 100644
---- a/adev/src/app/core/services/version-manager.service.ts
-+++ b/adev/src/app/core/services/version-manager.service.ts
-@@ -57,7 +57,7 @@ export class VersionManager {
-   private getRecentVersions(): Version[] {
-     return [
-       {
--        url: this.getAdevDocsUrl('next'),
-+        url: 'https://next.angular.dev/',
-         displayName: `next`,
-         version: 'next',
-       },
-@@ -68,7 +68,7 @@ export class VersionManager {
-       //   version: 'rc',
-       // },
-       {
--        url: 'https://angular.dev/',
-+        url: 'https://angular.jp/',
-         displayName: this.getVersion(this.currentMajorVersion),
-         version: this.currentVersionMode,
-       },
-
+diff --git a/adev/src/assets/others/versions.json b/adev/src/assets/others/versions.json
+index 44dad0e1ef..610fdab042 100644
+--- a/adev/src/assets/others/versions.json
++++ b/adev/src/assets/others/versions.json
+@@ -5,7 +5,7 @@
+   },
+   {
+     "version": "v20",
+-    "url": "https://v20.angular.dev/overview"
++    "url": "https://angular.jp/overview"
+   },
+   {
+     "version": "v19",

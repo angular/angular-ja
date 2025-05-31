@@ -73,7 +73,7 @@ expected '' to contain 'Test Tour of Heroes'.
 
 HELPFUL: `fixture.autoDetectChanges()`関数を代わりに使用することもできます。
 これは、フィクスチャのコンポーネントの状態を更新した後、自動変更検知を有効にする場合のみです。
-また、自動変更検知は`provideExperimentalZonelessChangeDetection`を使用する場合、デフォルトで有効になっており、オフにすることは推奨されません。
+また、自動変更検知は`provideZonelessChangeDetection`を使用する場合、デフォルトで有効になっており、オフにすることは推奨されません。
 
 次に、自動変更検知がどのように機能するかを示す3つのテストを示します。
 
@@ -425,7 +425,7 @@ Observableから最初の引用をフラッシュするには、[tick()](api/cor
 
 <docs-code header="app/dashboard/dashboard.component.html (excerpt)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.html" visibleRegion="dashboard-hero"/>
 
-`DashboardHeroComponent`は`*ngFor`リピーター内に表示され、各コンポーネントの`hero`入力プロパティはループする値に設定され、コンポーネントの`selected`イベントをリスンします。
+`DashboardHeroComponent`は`@for`ブロック内に表示され、各コンポーネントの`hero`入力プロパティはループする値に設定され、コンポーネントの`selected`イベントをリスンします。
 
 コンポーネントの完全な定義を次に示します。
 
@@ -574,7 +574,7 @@ Angularは、`HttpClient`に依存するコードをより効果的にテスト�
 `Router`は、そのURLを`HeroDetailComponent`へのルートと照合します。
 これは、ルーティング情報を持つ`ActivatedRoute`オブジェクトを作成し、`HeroDetailComponent`の新しいインスタンスに注入します。
 
-`HeroDetailComponent`のコンストラクターを次に示します。
+Here are the services injected into `HeroDetailComponent`:
 
 <docs-code header="app/hero/hero-detail.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ctor"/>
 
@@ -584,7 +584,7 @@ Angularは、`HttpClient`に依存するコードをより効果的にテスト�
 コンポーネントは、`ActivatedRoute.paramMap`の`id`プロパティを参照することはできません。
 コンポーネントは、`ActivatedRoute.paramMap`Observableを*購読*し、ライフタイム中に`id`が変更される場合に備えておく必要があります。
 
-<docs-code header="app/hero/hero-detail.component.ts (ngOnInit)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ng-on-init"/>
+<docs-code header="app/hero/hero-detail.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ctor"/>
 
 テストでは、異なるルートにナビゲートすることで、`HeroDetailComponent`が異なる`id`パラメーター値にどのように応答するかを調べることができます。
 

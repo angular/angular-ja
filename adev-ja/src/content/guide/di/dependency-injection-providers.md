@@ -63,7 +63,7 @@ Angularは、この場合の`providers`値を、次のように完全なプロ�
            highlight="[[3],[6]]">
 @Injectable()
 export class EvenBetterLogger extends Logger {
-  constructor(private userService: UserService) {}
+  private userService = inject(UserService);
 
   override log(message: string) {
     const name = this.userService.user.name;
@@ -90,7 +90,7 @@ Angular DIは、`UserService`依存関係を構成する方法を知っていま
 ]
 </docs-code>
 
-注: `useClass`を使用して`OldLogger`に`NewLogger`をエイリアス付けしないようにしてください。これは、2つの異なる`NewLogger`インスタンスが作成されるためです。
+NOTE: `useClass`を使用して`OldLogger`に`NewLogger`をエイリアス付けしないようにしてください。これは、2つの異なる`NewLogger`インスタンスが作成されるためです。
 
 ### ファクトリプロバイダー: useFactory
 
@@ -180,11 +180,12 @@ const MY_APP_CONFIG_VARIABLE: AppConfig = {
 providers: [{ provide: APP_CONFIG, useValue: MY_APP_CONFIG_VARIABLE }]
 </docs-code>
 
-これで、`@Inject()`パラメーターデコレーターを使用して、コンストラクターに構成オブジェクトを注入できます。
+Now, inject the configuration object in the constructor body with the `inject` function:
 
 <docs-code header="src/app/app.component.ts" language="typescript" highlight="[2]">
 export class AppComponent {
-  constructor(@Inject(APP_CONFIG) config: AppConfig) {
+  constructor() {
+    const config = inject(APP_CONFIG);
     this.title = config.title;
   }
 }
@@ -206,6 +207,6 @@ Angularがランタイムでインターフェースを見つけられないた�
 <docs-code header="src/app/app.component.ts" language="typescript" highlight="[3]">
 export class AppComponent {
   // インターフェースをパラメータータイプとして使用して注入することはできません
-  constructor(private config: AppConfig) {}
+  private config = inject(AppConfig);
 }
 </docs-code>

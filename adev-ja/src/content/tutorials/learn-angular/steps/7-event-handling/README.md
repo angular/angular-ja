@@ -2,6 +2,8 @@
 
 イベント処理は、ウェブアプリケーションにインタラクティブな機能をもたらします。開発者として、ボタンのクリック、フォームの送信など、ユーザーの操作に応答できます。
 
+NOTE: 詳しくは、[エッセンシャルガイドのユーザー操作の処理](/essentials/templates#handling-user-interaction)をご覧ください。
+
 このアクティビティでは、イベントハンドラーを追加する方法を学びます。
 
 <hr />
@@ -13,7 +15,7 @@ Angularでは、`()`という構文を使ってイベントにバインドしま
     ...
     template: `<button (click)="greet()">`
 })
-class AppComponent {
+class App {
     greet() {
         console.log('Hello, there 👋');
     }
@@ -27,7 +29,7 @@ class AppComponent {
 <docs-workflow>
 
 <docs-step title="イベントハンドラーを追加">
-`AppComponent`クラスに`onMouseOver`イベントハンドラー関数を追加します。以下のコードを実装に使用します。
+`App`クラスに`onMouseOver`イベントハンドラー関数を追加します。以下のコードを実装に使用します。
 
 ```ts
 onMouseOver() {
@@ -38,7 +40,7 @@ onMouseOver() {
 </docs-step>
 
 <docs-step title="テンプレートイベントにバインド">
-`app.component.ts`のテンプレートコードを更新し、`section`要素の`mouseover`イベントにバインドします。
+`app.t`のテンプレートコードを更新し、`section`要素の`mouseover`イベントにバインドします。
 
 ```angular-html
 <section (mouseover)="onMouseOver()">

@@ -2,7 +2,7 @@
 
 `HttpClient` には、データの読み込みとサーバーへの変更の適用に使用されるさまざまなHTTP動詞に対応するメソッドがあります。各メソッドは[RxJS `Observable`](https://rxjs.dev/guide/observable) を返し、これはサブスクライブされるとリクエストを送信し、サーバーが応答すると結果を発行します。
 
-Note: `HttpClient` によって作成された `Observable` は、何度でもサブスクライブでき、各サブスクライブごとに新しいバックエンドリクエストが行われます。
+NOTE: `HttpClient` によって作成された `Observable` は、何度でもサブスクライブでき、各サブスクライブごとに新しいバックエンドリクエストが行われます。
 
 リクエストメソッドに渡されるオプションオブジェクトを通じて、リクエストのさまざまなプロパティと返されるレスポンスタイプを調整できます。
 
@@ -20,7 +20,7 @@ http.get<Config>('/api/config').subscribe(config => {
 
 サーバーによって返されるデータが `Config` 型であることを指定するジェネリック型引数に注意してください。この引数は省略可能であり、省略すると、返されるデータは `Object` 型になります。
 
-Tip: 不確実な構造のデータや `undefined` または `null` の値を扱う場合、レスポンスタイプとして `Object` の代わりに `unknown` 型を使用することを検討してください。
+TIP: 不確実な構造のデータや `undefined` または `null` の値を扱う場合、レスポンスタイプとして `Object` の代わりに `unknown` 型を使用することを検討してください。
 
 CTIRICAL: リクエストメソッドのジェネリック型は、サーバーによって返されるデータに関する**アサーション**です。`HttpClient` は、実際の戻り値データがこの型と一致することを検証しません。
 
@@ -159,7 +159,7 @@ http.get<Config>('/api/config', {observe: 'response'}).subscribe(res => {
 
 進捗イベントは、デフォルトでは無効になっています（パフォーマンス上のコストがかかるため）が、`reportProgress` オプションを使用して有効にできます。
 
-Note: `HttpClient` のオプションの `fetch` 実装は、*アップロード*の進捗イベントを報告しません。
+NOTE: `HttpClient` のオプションの `fetch` 実装は、*アップロード*の進捗イベントを報告しません。
 
 イベントストリームを観察するには、`observe` オプションを `'events'` に設定します。
 
@@ -234,7 +234,7 @@ Tip: `async` パイプまたは `toSignal` 演算子を使用して `Observable`
 <docs-code language="ts">
 @Injectable({providedIn: 'root'})
 export class UserService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getUser(id: string): Observable<User> {
     return this.http.get<User>(`/api/user/${id}`);
@@ -256,13 +256,13 @@ import { AsyncPipe } from '@angular/common';
   `,
 })
 export class UserProfileComponent {
-  @Input() userId!: string;
+  userId = input.required<string>();
   user$!: Observable<User>;
 
-  constructor(private userService: UserService) {}
+  private userService = inject(UserService);
 
-  ngOnInit(): void {
-    this.user$ = this.userService.getUser(this.userId);
+  constructor(): void {
+    this.user$ = this.userService.getUser(this.userId());
   }
 }
 </docs-code>

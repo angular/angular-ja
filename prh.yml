@@ -195,7 +195,6 @@ rules:
   - expected: シグナル
     pattern:
       - Signals
-      - Signal
 
   - expected: 算出シグナル
     pattern:

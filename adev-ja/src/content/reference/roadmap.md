@@ -42,7 +42,7 @@
   We kicked off early prototyping of selectorless and we're still in early stages of planning. We'll share a request for comments when we have a design and we're ready for next steps.
   </docs-card>
   <docs-card title="Signal Forms" href="">
-  We plan to analyze existing feedback about Angular forms and design a solution which addresses developers' requirements and uses Signals for management of reactive state.
+  既存のAngularフォームに関するフィードバックを分析し、開発者の要件に対応しつつ、リアクティブな状態管理にシグナルを活用するソリューションの設計を計画しています。
   </docs-card>
   <docs-card title="Asynchronous reactivity" href="https://github.com/angular/angular/discussions/60121">
   To enable developers to handle asynchronous data flow with signals we developed the `resource` async primitive. Building on top of it, we introduced `httpResource` which allows you to send HTTP requests and receive your response as a signal.
@@ -89,7 +89,7 @@
   調査の進捗状況については、随時更新をお知らせします。
   </docs-card>
   <docs-card title="Signal debugging in Angular DevTools" href="">
-  With the evolution of Signals in Angular, we are working on a better tooling for debugging them. High on the priority list is a UI for inspecting and debugging signals.
+  Angularのシグナルの進化に伴い、シグナルのデバッグを支援するより良いツールの開発に取り組んでいます。最優先事項の1つは、シグナルの状態を確認・デバッグできるUIの提供です。
   </docs-card>
 </docs-card-container>
 
@@ -128,9 +128,9 @@
   In v19 we shipped the incremental hydration in developer preview mode, powered by `@defer` blocks. In Angular v20 we graduated it to stable!
   </docs-card>
   <docs-card title="Deliver Angular Signals" link="Completed in Q2 2025" href="https://github.com/angular/angular/discussions/49685">
-  This project rethinks the Angular reactivity model by introducing Signals as a reactivity primitive. The initial planning resulted in hundreds of discussions, conversations with developers, feedback sessions, user experience studies, and a series of RFCs, which received over 1,000 comments.
+  このプロジェクトは、Angularのリアクティビティモデルを再考し、リアクティビティのプリミティブとしてシグナルを導入しました。初期の計画段階では、数百件に及ぶディスカッションや開発者との対話、フィードバックセッション、ユーザー体験調査、そして1,000件以上のコメントが寄せられた一連のRFCが行われました。
 
-  In Angular v20 we graduated all the fundamental reactivity primitives to stable including signal, effect, linkedSignal, signal-based queries, and inputs.
+  Angular v20では、signal、effect、linkedSignal、signalベースのクエリやinputsなど、すべての基本的なリアクティビティプリミティブが安定版となりました。
   </docs-card>
   <docs-card title="Support two-dimensional drag-and-drop" link="Completed in Q2 2024" href="https://github.com/angular/components/issues/13372">
   As part of this project, we implemented mixed orientation support for the Angular CDK drag and drop. This is one of the repository's most highly requested features.

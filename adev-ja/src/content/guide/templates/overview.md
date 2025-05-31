@@ -3,7 +3,7 @@ Angularにおけるテンプレートとは、HTMLの断片です。
 テンプレート内で特別な構文を使用することで、Angularの多くの機能を活用できます。
 </docs-decorative-header>
 
-Tip: この包括的なガイドに進む前に、Angularの[基本概念](essentials/templates)をご覧ください。
+TIP: この包括的なガイドに進む前に、Angularの[基本概念](essentials/templates)をご覧ください。
 
 すべてのAngularコンポーネントには、コンポーネントがページにレンダリングする[DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)を定義する**テンプレート**があります。テンプレートを使用することで、Angularはデータが変化してもページを自動的に最新の状態に保つことができます。
 

@@ -32,8 +32,6 @@
 
 アプリケーションにリアクティブフォームディレクティブへのアクセス権を与えるには、必要なコンポーネントに `@angular/forms` ライブラリから `ReactiveFormsModule` をインポートします。
 
-例からの次のコードは、ルートモジュールでのセットアップを示しています。
-
 <docs-code-multifile>
     <docs-code header="dynamic-form.component.ts" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form.component.ts"/>
     <docs-code header="dynamic-form-question.component.ts" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form-question.component.ts"/>

@@ -111,7 +111,7 @@ export class UserProfile {
 }
 ```
 
-Tip: Angularコンポーネントの詳細については、[詳細なコンポーネントガイド](guide/components)を参照してください。
+TIP: Angularコンポーネントの詳細については、[詳細なコンポーネントガイド](guide/components)を参照してください。
 
 ## 次の手順
 

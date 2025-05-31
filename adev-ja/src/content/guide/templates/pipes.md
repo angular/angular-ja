@@ -4,7 +4,7 @@
 
 パイプは、Angularテンプレート式で、テンプレート内のデータを宣言的に変換することを可能にする特別な演算子です。パイプを使用すると、変換関数を一度宣言し、その変換を複数のテンプレートで使用できます。Angularのパイプは、[Unixパイプ](<https://en.wikipedia.org/wiki/Pipeline_(Unix)>)に着想を得て、縦棒文字(`|`)を使用します。
 
-Note: Angularのパイプ構文は、縦棒文字を[ビット単位のOR演算子](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR)に使用する標準的なJavaScriptとは異なります。Angularテンプレート式では、ビット単位の演算子はサポートされていません。
+NOTE: Angularのパイプ構文は、縦棒文字を[ビット単位のOR演算子](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR)に使用する標準的なJavaScriptとは異なります。Angularテンプレート式では、ビット単位の演算子はサポートされていません。
 
 Angularが提供するいくつかの組み込みパイプを使用した例を以下に示します。
 
@@ -161,7 +161,7 @@ export class AppComponent {
 
 ### パイプによる変更検知
 
-デフォルトでは、すべてのパイプは`pure`と見なされます。これは、プリミティブ入力値（`String`、`Number`、`Boolean`、`Symbol`など）または変更されたオブジェクト参照（`Array`、`Object`、`Function`、`Date`など）のみが実行されることを意味します。純粋なパイプは、Angularが渡された値が変更されていない場合に、変換関数を呼び出さないようにできるので、パフォーマンス上の利点があります。
+By default, all pipes are considered `pure`, which means that it only executes when a primitive input value (such as a `String`, `Number`, `Boolean`, or `Symbol`) or a object reference (such as `Array`, `Object`, `Function`, or `Date`) is changed. Pure pipes offer a performance advantage because Angular can avoid calling the transformation function if the passed value has not changed.
 
 その結果、オブジェクトプロパティや配列項目の変更は、オブジェクトまたは配列参照の全体が別のインスタンスに置き換えられない限り検出されません。このレベルの変更検知が必要な場合は、[配列やオブジェクト内の変更の検出](#detecting-change-within-arrays-or-objects)を参照してください。
 

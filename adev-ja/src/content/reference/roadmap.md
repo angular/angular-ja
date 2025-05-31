@@ -20,12 +20,11 @@
 ### 実験的に利用可能
 
 * [インクリメンタルハイドレーション](/guide/incremental-hydration)
-* [Zoneless変更検知](/guide/experimental/zoneless)
+* [Zoneless変更検知](/guide/zoneless)
 * [i18nブロックのハイドレーションサポート](/api/platform-browser/withI18nSupport)
 * [Resource API](/guide/signals/resource)
 * [Effect API](/api/core/effect)
 * [Linked Signal API](/guide/signals/linked-signal)
-* [ルートレベルのレンダリングモード](/guide/hybrid-rendering)
 
 ### 本番環境向け
 
@@ -38,6 +37,7 @@
 * [モデル入力](/guide/signals/model)
 * [シグナルクエリ](/guide/signals/queries)
 * [関数ベースの出力](/guide/components/output)
+* [ルートレベルのレンダリングモード](/guide/hybrid-rendering)
 
 ## Angular開発者体験の改善
 
@@ -62,7 +62,6 @@
   </docs-card>
   <docs-card title="HMR（ホットモジュールリプレースメント）の改善" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306">
   ホットモジュールリプレースメントを有効にすることで、より高速な編集/更新サイクルを目指しています。
-
   Angular v19では、CSSとテンプレートのHMRの初期サポートを提供しました。このプロジェクトを完了する前に、開発者のニーズに対応していることを確認するために、フィードバックの収集を続けます。
   </docs-card>
 </docs-card-container>
@@ -71,7 +70,7 @@
 
 <docs-card-container>
   <docs-card title="新しいCDKプリミティブ" href="">
-  [コンボボックス](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox)のWAI-ARIAデザインパターンに基づいてカスタムコンポーネントを作成しやすくするために、新しいCDKプリミティブに取り組んでいます。Angular v14では、このプロジェクトの一環として、安定した[メニューとダイアログプリミティブ](https://material.angular.io/cdk/categories)を、v15ではリストボックスを導入しました。
+  [コンボボックス](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox)のWAI-ARIAデザインパターンに基づいてカスタムコンポーネントを作成しやすくするために、新しいCDKプリミティブに取り組んでいます。Angular v14では、このプロジェクトの一環として、安定した[メニューとダイアログプリミティブ](https://material.angular.dev/cdk/categories)を、v15ではリストボックスを導入しました。
   </docs-card>
   <docs-card title="Angularコンポーネントのアクセシビリティ" href="">
   WCAGなどのアクセシビリティ基準に対してAngular Materialのコンポーネントを評価し、このプロセスから生じる問題を修正することに取り組んでいます。
@@ -98,7 +97,6 @@
 <docs-card-container>
   <docs-card title="インクリメンタルハイドレーションを有効にする" href="">
   v17では、ハイドレーションを開発者プレビューから卒業し、LCPで一貫して40〜50％の改善が見られました。それ以来、インクリメンタルハイドレーションのプロトタイプを作成し、ng-confでデモを公開しました。
-
   v19では、`@defer`ブロックによって実現されたインクリメンタルハイドレーションを開発者プレビューモードで提供しました。試してみて、<a href="https://github.com/angular/angular/issues">フィードバックを共有してください</a>！
   </docs-card>
   <docs-card title="サーバールート設定" href="">
@@ -157,7 +155,7 @@
   <docs-card title="Local template variables" link="Completed in Q3 2024">
   We've released the support for local template variables in Angular, see [`@let` docs](https://angular.dev/api/core/@let) for additional information.
   </docs-card>
-  <docs-card title="Angular Materialのカスタマイズを拡張する" link="2024年第2四半期に完了" href="https://material.angular.io/guide/theming">
+  <docs-card title="Angular Materialのカスタマイズを拡張する" link="2024年第2四半期に完了" href="https://material.angular.dev/guide/theming">
   Angular Materialコンポーネントのカスタマイズを向上させ、Material 3機能を有効にするために、トークンベースのテーマAPIを定義するためにGoogleのMaterial Designチームと協力しています。
 
   v17.2では、Angular Material 3の実験的なサポートを共有し、v18では安定版に卒業しました。
@@ -215,7 +213,7 @@
   <docs-card title="より良いスタックトレース" link="2022年第4四半期に完了" href="https://developer.chrome.com/blog/devtools-better-angular-debugging/">
   AngularとChrome DevToolsは、エラーメッセージのスタックトレースをより読みやすくするために協力しています。v15では、関連性のあるリンクされたスタックトレースをリリースしました。優先順位が低いイニシアチブとして、テンプレートのより正確な呼び出しフレーム名を提供することで、スタックトレースをより使いやすくする方法を探求していきます。
   </docs-card>
-  <docs-card title="MDC Webを統合することでAngular Materialコンポーネントを強化" link="2022年第4四半期に完了" href="https://material.angular.io/guide/mdc-migration">
+  <docs-card title="MDC Webを統合することでAngular Materialコンポーネントを強化" link="2022年第4四半期に完了" href="https://material.angular.dev/guide/mdc-migration">
   MDC Webは、GoogleのMaterial Designチームが作成したライブラリであり、Material Designコンポーネントを構築するための再利用可能なプリミティブを提供します。Angularチームは、これらのプリミティブをAngular Materialに組み込んでいます。MDC Webを使用すると、Angular MaterialはMaterial Design仕様にさらに準拠し、アクセシビリティが向上し、コンポーネントの品質が向上し、チームの速度が向上します。
   </docs-card>
   <docs-card title="オプションのNgModuleのAPIを実装する" link="2022年第4四半期に完了" href="https://blog.angular.dev/angular-v15-is-now-available-df7be7f2f4c8">
@@ -287,7 +285,7 @@
   <docs-card title="更新された入門ドキュメントによる開発者のオンボーディングの改善" link="2021年第1四半期に完了" href="tutorials">
   ユーザーの学習プロセスを再定義し、入門ドキュメントを更新します。Angularの利点、その機能の探索方法、および開発者ができるだけ短時間でフレームワークに習熟できるようにするガイダンスを明確に示します。
   </docs-card>
-  <docs-card title="コンポーネントハーネスのベストプラクティスを拡張する" link="2021年第1四半期に完了" href="https://material.angular.io/guide/using-component-harnesses">
+  <docs-card title="コンポーネントハーネスのベストプラクティスを拡張する" link="2021年第1四半期に完了" href="https://material.angular.dev/guide/using-component-harnesses">
   Angular CDKは、バージョン9でAngularにコンポーネントテストハーネスの概念を導入しました。テストハーネスにより、コンポーネントの作成者は、コンポーネントの相互作用をテストするためのサポートされているAPIを作成できます。このハーネスインフラストラクチャを改善し続け、ハーネスの使用に関するベストプラクティスを明確化しています。また、Google内部でより多くのハーネスの採用を促進しています。
   </docs-card>
   <docs-card title="コンテンツ投影のガイドを作成する" link="2021年第2四半期に完了" href="https://angular.io/docs">

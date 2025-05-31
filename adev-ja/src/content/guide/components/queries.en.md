@@ -1,6 +1,6 @@
 # Referencing component children with queries
 
-Tip: This guide assumes you've already read the [Essentials Guide](essentials). Read that first if you're new to Angular.
+TIP: This guide assumes you've already read the [Essentials Guide](essentials). Read that first if you're new to Angular.
 
 A component can define **queries** that find child elements and read values from their injectors.
 
@@ -146,7 +146,7 @@ export class UserProfile { }
 
 If a child query (`viewChild` or `contentChild`) does not find a result, its value is `undefined`. This may occur if the target element is hidden by a control flow statement like `@if` or `@for`. Because of this, the child queries return a signal that include `undefined` in their value type.
 
-If some cases, especially with `viewChild`, you know with certainty that a specific child is always available. In other cases, you may want to strictly enforce that a specific child is present. For these cases, you can use a *required query*.
+In some cases, especially with `viewChild`, you know with certainty that a specific child is always available. In other cases, you may want to strictly enforce that a specific child is present. For these cases, you can use a *required query*.
 
 ```angular-ts
 @Component({/* ... */})
@@ -156,7 +156,7 @@ export class CustomCard {
 }
 ```
 
-If a required query does not find a matching result, Angular reports an error. Because this guarantees that a result is available, require queries do not automatically include `undefined` in the signal's value type.
+If a required query does not find a matching result, Angular reports an error. Because this guarantees that a result is available, required queries do not automatically include `undefined` in the signal's value type.
 
 ## Query locators
 
@@ -186,7 +186,7 @@ Angular does not support CSS selectors as query locators.
 
 ### Queries and the injector tree
 
-Tip: See [Dependency Injection](guide/di) for background on providers and Angular's injection tree.
+TIP: See [Dependency Injection](guide/di) for background on providers and Angular's injection tree.
 
 For more advanced cases, you can use any `ProviderToken` as a locator. This lets you locate elements based on component and directive providers.
 
@@ -229,7 +229,8 @@ Developers most commonly use `read` to retrieve `ElementRef` and `TemplateRef`.
 
 ### Content descendants
 
-By default, content queries find only _direct_ children of the component and do not traverse into descendants.
+By default, `contentChildren` queries find only _direct_ children of the component and do not traverse into descendants.
+`contentChild` queries do traverse into descendants by default. 
 
 <docs-code language="angular-ts" highlight="[13, 14, 15, 16]">
 @Component({
@@ -237,7 +238,8 @@ By default, content queries find only _direct_ children of the component and do 
   /*...*/
 })
 export class CustomExpando {
-  toggle = contentChild(CustomToggle);
+  toggle = contentChildren(CustomToggle); // none found
+  // toggle = contentChild(CustomToggle); // found
 }
 
 @Component({
@@ -245,7 +247,6 @@ export class CustomExpando {
   template: `
     <custom-expando>
       <some-other-component>
-        <!-- custom-toggle will not be found! -->
         <custom-toggle>Show</custom-toggle>
       </some-other-component>
     </custom-expando>
@@ -254,12 +255,12 @@ export class CustomExpando {
 export class UserProfile { }
 </docs-code>
 
-In the example above, `CustomExpando` cannot find `<custom-toggle>` because it is not a direct child of `<custom-expando>`. By setting `descendants: true`, you configure the query to traverse all descendants in the same template. Queries, however, _never_ pierce into components to traverse elements in other templates.
+In the example above, `CustomExpando` cannot find `<custom-toggle>` with `contentChildren` because it is not a direct child of `<custom-expando>`. By setting `descendants: true`, you configure the query to traverse all descendants in the same template. Queries, however, _never_ pierce into components to traverse elements in other templates.
 
 View queries do not have this option because they _always_ traverse into descendants.
 
 ## Decorator-based queries
-Tip: While the Angular team recommends using the signal-based query function for new projects, the
+TIP: While the Angular team recommends using the signal-based query function for new projects, the
 original decorator-based query APIs remain fully supported.
 
 You can alternatively declare queries by adding the corresponding decorator to a property. Decorator-based queries behave the same way as signal-based queries except as described below.

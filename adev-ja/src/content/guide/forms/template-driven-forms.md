@@ -74,9 +74,9 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    このデモでは、`model`と`skills`のダミーデータを使用しています。
    実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
-1. アプリケーションは、フォーム機能を有効にし、作成されたフォームコンポーネントを登録します。
+1. The component enables the Forms feature by importing the `FormsModule` module.
 
-   <docs-code header="src/app/app.module.ts" language="typescript" path="adev/src/content/examples/forms/src/app/app.module.ts"/>
+   <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="imports"/>
 
 1. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
 
@@ -98,7 +98,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    <docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
 
 1. フォームでは、アクターのスキルを、`ActorFormComponent`で内部的に維持されている事前定義された`skills`リストから選択する必要があります。
-   Angularの[NgForOfディレクティブ](api/common/NgForOf "APIリファレンス")は、データ値を反復処理して、`<select>`要素に値を埋め込みます。
+   The Angular `@for` loop iterates over the data values to populate the `<select>` element.
 
    <docs-code header="src/app/actor-form/actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
 

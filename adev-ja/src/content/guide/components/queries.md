@@ -1,6 +1,6 @@
 # クエリによるコンポーネントの子要素への参照
 
-Tip: このガイドでは、[基本概念のガイド](essentials)を読んでいることを前提としています。Angularを初めて使う場合は、まずこちらをお読みください。
+TIP: このガイドでは、[基本概念のガイド](essentials)を読んでいることを前提としています。Angularを初めて使う場合は、まずこちらをお読みください。
 
 コンポーネントは、子要素を見つけてそのインジェクターから値を読み取る**クエリ**を定義できます。
 
@@ -186,7 +186,7 @@ Angularは、CSSセレクターをクエリロケーターとしてサポート�
 
 ### クエリとインジェクターツリー
 
-Tip: プロバイダーとAngularのインジェクションツリーについては、[依存性の注入](guide/di)を参照してください。
+TIP: プロバイダーとAngularのインジェクションツリーについては、[依存性の注入](guide/di)を参照してください。
 
 より高度なケースでは、ロケーターとして任意の`ProviderToken`を使用できます。これにより、コンポーネントとディレクティブのプロバイダーに基づいて要素を見つけることができます。
 
@@ -229,7 +229,8 @@ export class CustomExpando {
 
 ### コンテンツの子孫
 
-デフォルトでは、コンテンツクエリはコンポーネントの_直接_の子のみを見つけ、子孫にはトラバースしません。
+デフォルトでは、`contentChildren`クエリはコンポーネントの直接の子要素のみを検索し、子孫要素にはトラバースしません。  
+一方、`contentChild`クエリはデフォルトで子孫要素も検索します。
 
 <docs-code language="angular-ts" highlight="[13, 14, 15, 16]">
 @Component({
@@ -237,7 +238,8 @@ export class CustomExpando {
   /*...*/
 })
 export class CustomExpando {
-  toggle = contentChild(CustomToggle);
+  toggle = contentChildren(CustomToggle); // none found
+  // toggle = contentChild(CustomToggle); // found
 }
 
 @Component({
@@ -245,7 +247,6 @@ export class CustomExpando {
   template: `
     <custom-expando>
       <some-other-component>
-        <!-- custom-toggle will not be found! -->
         <custom-toggle>Show</custom-toggle>
       </some-other-component>
     </custom-expando>
@@ -254,12 +255,12 @@ export class CustomExpando {
 export class UserProfile { }
 </docs-code>
 
-上記の例では、`CustomExpando`は`<custom-toggle>`を見つけられません。これは、`<custom-expando>`の直接の子ではないためです。`descendants: true`を設定することで、同じテンプレート内のすべての子孫をトラバースするようにクエリを構成できます。ただし、クエリは他のテンプレートの要素をトラバースするためにコンポーネントを_決して_貫通することはありません。
+上記の例では、`CustomExpando` は `<custom-expando>` の直接の子要素ではないため、`contentChildren` を用いると `<custom-toggle>` を検出できません。`descendants: true` を設定することで、同じテンプレート内のすべての子孫を対象にクエリを実行するように設定できます。ただし、クエリはコンポーネントの境界を越えて、他のテンプレートの要素にアクセスすることは _決して_ ありません。
 
 ビュークエリにはこのオプションはありません。これは、常に子孫をトラバースするためです。
 
 ## デコレーターベースのクエリ
-Tip: Angularチームは新規プロジェクトにはシグナルベースのクエリ関数の使用を推奨していますが、
+TIP: Angularチームは新規プロジェクトにはシグナルベースのクエリ関数の使用を推奨していますが、
 元のデコレーターベースのクエリAPIは引き続き完全にサポートされています。
 
 代わりに、対応するデコレーターをプロパティに追加することでもクエリを宣言できます。デコレーターベースのクエリは、下記で説明する点を除いて、シグナルベースのクエリと同じように動作します。

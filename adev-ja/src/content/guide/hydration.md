@@ -75,6 +75,26 @@ bootstrapApplication(App, {
 });
 ```
 
+### How event replay works
+Event Replay is a feature that improves user experience by capturing user events that were triggered before the hydration process is complete. Then those events are replayed, ensuring none of that interaction was lost.
+
+The Event Replay is divided into three main phases:
+
+- **Capturing user interactions**<br>
+Prior to **Hydration**, Event Replay captures and stores all interactions that the user may perform, such as clicks and other browser native events.
+
+- **Storing events**<br>
+The **Event Contract** keeps in memory all the interactions recorded in the previous step, ensuring that they are not lost for later replay.
+
+- **Relaunch of events**<br>
+Once **Hydration** is complete, Angular re-invokes the captured events.
+
+Event replay supports _native browser events_, for example `click`, `mouseover`, and `focusin`. If you'd like to learn more about JSAction, the library that powers event replay, you can read more [on the readme](https://github.com/angular/angular/tree/main/packages/core/primitives/event-dispatch#readme).
+
+---
+
+This feature ensures a consistent user experience, preventing user actions performed before Hydration from being ignored. NOTE: if you have [incremental hydration](guide/incremental-hydration) enabled, event replay is automatically enabled under the hood.
+
 ## 制約 {#constraints}
 
 ハイドレーションは、ハイドレーションが無効な場合に存在しない、アプリケーションにいくつかの制約を課します。アプリケーションは、サーバーとクライアントの両方で同じDOM構造を生成する必要があります。ハイドレーションのプロセスは、DOMツリーが両方の場所で同じ構造を持つことを期待します。これには、Angularがサーバーでのレンダリング中に生成する空白やコメントノードも含まれます。これらの空白とノードは、サーバーサイドレンダリングプロセスによって生成されたHTMLに存在する必要があります。
@@ -103,7 +123,7 @@ IMPORTANT: サーバーサイドレンダリング操作によって生成され
 
 HTMLの有効性について不確かであれば、[構文バリデーター](https://validator.w3.org/)を使用して確認できます。
 
-Note: HTML標準では、テーブル内に `<tbody>` 要素を含めることは必須ではありませんが、モダンブラウザは `<tbody>` 要素を宣言していないテーブルに自動的に `<tbody>` 要素を作成します。この不一致を避けるために、ハイドレーションエラーを防ぐために常にテーブル内に `<tbody>` 要素を明示的に宣言してください。
+NOTE: HTML標準では、テーブル内に `<tbody>` 要素を含めることは必須ではありませんが、モダンブラウザは `<tbody>` 要素を宣言していないテーブルに自動的に `<tbody>` 要素を作成します。この不一致を避けるために、ハイドレーションエラーを防ぐために常にテーブル内に `<tbody>` 要素を明示的に宣言してください。
 
 ### 空白の保持構成
 

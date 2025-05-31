@@ -279,5 +279,5 @@ Angularは、構造ディレクティブ向けの特別な便利な構文をサ�
 
 `ng-template` が他のライブラリで使用される方法の例については、以下を確認してください。
 
-- [Angular Material のタブ](https://material.angular.io/components/tabs/overview) - タブがアクティブになるまで、DOMに何もレンダリングされません
-- [Angular Material のテーブル](https://material.angular.io/components/table/overview) - 開発者は、データをレンダリングするさまざまな方法を定義できます
+- [Angular Material のタブ](https://material.angular.dev/components/tabs/overview) - タブがアクティブになるまで、DOMに何もレンダリングされません
+- [Angular Material のテーブル](https://material.angular.dev/components/table/overview) - 開発者は、データをレンダリングするさまざまな方法を定義できます

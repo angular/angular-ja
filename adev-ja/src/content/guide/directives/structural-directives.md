@@ -73,7 +73,7 @@ ng generate directive select
 Angularは、ディレクティブクラスを作成し、テンプレートでディレクティブを識別するCSSセレクター`[select]`を指定します。
 </docs-step>
 <docs-step title="ディレクティブを構造化">
-`TemplateRef`と`ViewContainerRef`をインポートします。`TemplateRef`と`ViewContainerRef`をプライベート変数としてディレクティブコンストラクターにインジェクトします。
+`TemplateRef`と`ViewContainerRef`をインポートし、ディレクティブ内で`TemplateRef`と`ViewContainerRef`をプライベートプロパティとしてインジェクトします。
 
 ```ts
 import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
@@ -82,7 +82,8 @@ import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
   selector: '[select]',
 })
 export class SelectDirective {
-  constructor(private templateRef: TemplateRef, private ViewContainerRef: ViewContainerRef) {}
+  private templateRef = inject(TemplateRef);
+  private viewContainerRef = inject(ViewContainerRef);
 }
 
 ```

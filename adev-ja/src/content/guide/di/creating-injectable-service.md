@@ -105,7 +105,6 @@ export class HeroService {
 
 次の例では、`HeroListComponent`内で`HeroService`を指定しています。
 `heroService`の型は`HeroService`です。
-`HeroService`クラスはすでに`@Injectable`デコレーターで修飾されているため、Angularは`HeroService`型を依存性として認識します。
 
 <docs-code header="src/app/heroes/hero-list.component.ts" language="typescript">
 import { inject } from "@angular/core";

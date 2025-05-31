@@ -1,6 +1,6 @@
 # DOM API の使用
 
-Tip: このガイドは、[基本概念のガイド](essentials) をすでに読んでいることを前提としています。Angularを初めて使用する場合は、まずそちらをお読みください。
+TIP: このガイドは、[基本概念のガイド](essentials) をすでに読んでいることを前提としています。Angularを初めて使用する場合は、まずそちらをお読みください。
 
 Angularは、ほとんどのDOM作成、更新、および削除を自動的に処理します。
 ただし、コンポーネントのDOMと直接対話する必要がある場合もあるかもしれません。
@@ -9,7 +9,8 @@ Angularは、ほとんどのDOM作成、更新、および削除を自動的に�
 ```ts
 @Component({...})
 export class ProfilePhoto {
-  constructor(elementRef: ElementRef) {
+  constructor() {
+    const elementRef = inject(ElementRef);
     console.log(elementRef.nativeElement);
   }
 }
@@ -18,22 +19,23 @@ export class ProfilePhoto {
 `nativeElement` プロパティは、
 ホスト [Element](https://developer.mozilla.org/docs/Web/API/Element) インスタンスを参照します。
 
-Angularの `afterRender` および `afterNextRender` 関数を使用して、
+Angularの `afterEveryRender` および `afterNextRender` 関数を使用して、
 Angularがページのレンダリングを完了したときに実行される **レンダリングコールバック** を登録できます。
 
 ```ts
 @Component({...})
 export class ProfilePhoto {
-  constructor(elementRef: ElementRef) {
-    afterRender(() => {
-      // このコンポーネント内の最初の入力要素にフォーカスします。
+  constructor() {
+    const elementRef = inject(ElementRef);
+    afterEveryRender(() => {
+      // Focus the first input element in this component.
       elementRef.nativeElement.querySelector('input')?.focus();
     });
   }
 }
 ```
 
-`afterRender` および `afterNextRender` は、通常はコンポーネントのコンストラクターである
+`afterEveryRender` および `afterNextRender` は、通常はコンポーネントのコンストラクターである
 *注入コンテキスト*で呼び出される必要があります。
 
 **可能な限り、DOM 操作を直接行うことは避けてください。** 

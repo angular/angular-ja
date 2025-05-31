@@ -1,7 +1,5 @@
 # `linkedSignal`による依存状態
 
-IMPORTANT: `linkedSignal`は[開発者プレビュー](reference/releases#developer-preview)です。試用できますが、安定版になる前に変更される可能性があります。
-
 `signal`関数は、Angularコードで状態を保持するために使用できます。この状態は、他の状態に依存することがあります。例えば、ユーザーが注文の配送方法を選択できるコンポーネントを考えてみましょう。
 
 ```typescript
@@ -59,9 +57,24 @@ console.log(selectedOption()); // 'Email'
 上記の例では、`shippingOptions`が変更されると、`selectedOption`は常に最初のオプションに戻って更新されます。しかし、選択したオプションがリスト内にまだ存在する場合は、ユーザーの選択を維持したい場合があります。これを実現するには、別々の*ソース*と*算出*を使用して`linkedSignal`を作成できます。
 
 ```typescript
+interface ShippingMethod {
+  id: number;
+  name: string;
+}
+
 @Component({/* ... */})
 export class ShippingMethodPicker {
-  shippingOptions: Signal<ShippingMethod[]> = getShippingOptions();
+  constructor() {
+    this.changeShipping(2);
+    this.changeShippingOptions();
+    console.log(this.selectedOption()); // {"id":2,"name":"Postal Service"}
+  }
+
+  shippingOptions = signal<ShippingMethod[]>([
+    { id: 0, name: 'Ground' },
+    { id: 1, name: 'Air' },
+    { id: 2, name: 'Sea' },
+  ]);
 
   selectedOption = linkedSignal<ShippingMethod[], ShippingMethod>({
     // `selectedOption` is set to the `computation` result whenever this `source` changes.
@@ -69,12 +82,22 @@ export class ShippingMethodPicker {
     computation: (newOptions, previous) => {
       // If the newOptions contain the previously selected option, preserve that selection.
       // Otherwise, default to the first option.
-      return newOptions.find(opt => opt.id === previous?.value?.id) ?? newOptions[0];
-    }
+      return (
+        newOptions.find((opt) => opt.id === previous?.value.id) ?? newOptions[0]
+      );
+    },
   });
 
-  changeShipping(newOptionIndex: number) {
-    this.selectedOption.set(this.shippingOptions()[newOptionIndex]);
+  changeShipping(index: number) {
+    this.selectedOption.set(this.shippingOptions()[index]);
+  }
+
+  changeShippingOptions() {
+    this.shippingOptions.set([
+      { id: 0, name: 'Email' },
+      { id: 1, name: 'Sea' },
+      { id: 2, name: 'Postal Service' },
+    ]);
   }
 }
 ```
@@ -84,6 +107,8 @@ export class ShippingMethodPicker {
 `source`は、`computed`やコンポーネントの`input`などの任意のシグナルにできます。`source`の値が変更されると、`linkedSignal`は提供された`computation`の結果にその値を更新します。
 
 `computation`は、`source`の新しい値と`previous`オブジェクトを受け取る関数です。`previous`オブジェクトには、`previous.source`（`source`の以前の値）、`previous.value`（`computation`の以前の結果）の2つのプロパティがあります。これらの以前の値を使用して、計算の新しい結果を決定できます。
+
+HELPFUL: When using the `previous` parameter, it is necessary to provide the generic type arguments of `linkedSignal` explicitly. The first generic type corresponds with the type of `source` and the second generic type determines the output type of `computation`.  
 
 ## カスタムの等価比較
 

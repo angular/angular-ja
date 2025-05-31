@@ -2,7 +2,7 @@
 Angularシグナルは、アプリケーション全体で状態がどのように使用されているかを細かく追跡するシステムであり、フレームワークがレンダリングの更新を最適化することを可能にします。
 </docs-decorative-header>
 
-Tip: この包括的なガイドを読む前に、Angularの[基本概念](essentials/signals)をご覧ください。
+TIP: この包括的なガイドを読む前に、Angularの[基本概念](essentials/signals)をご覧ください。
 
 ## シグナルとは何か？
 
@@ -111,10 +111,10 @@ effect(() => {
 
 エフェクトは、ほとんどのアプリケーションコードでは必要ありませんが、特定の状況では役立つ場合があります。以下は、`effect`が適切なソリューションとなる状況の例です。
 
-* 表示されているデータとその変更をログに記録する。これは、分析やデバッグツールの目的で行います。
-* データを`window.localStorage`と同期させる。
-* テンプレート構文では表現できないカスタムDOM動作を追加する。
-* `<canvas>`、チャートライブラリ、またはその他のサードパーティUIライブラリにカスタムレンダリングを実行する。
+- 表示されているデータとその変更をログに記録する。これは、分析やデバッグツールの目的で行います。
+- データを`window.localStorage`と同期させる。
+- テンプレート構文では表現できないカスタムDOM動作を追加する。
+- `<canvas>`、チャートライブラリ、またはその他のサードパーティUIライブラリにカスタムレンダリングを実行する。
 
 <docs-callout critical title="エフェクトを使用しない場合">
 状態変更の伝播にエフェクトを使用することは避けてください。これは、`ExpressionChangedAfterItHasBeenChecked`エラー、無限の循環更新、または不要な変更検知サイクルが発生する可能性があります。
@@ -158,7 +158,7 @@ export class EffectiveCounterComponent {
 @Component({...})
 export class EffectiveCounterComponent {
   readonly count = signal(0);
-  constructor(private injector: Injector) {}
+  private injector = inject(Injector);
 
   initializeLogging(): void {
     effect(() => {

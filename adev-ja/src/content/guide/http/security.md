@@ -2,7 +2,7 @@
 
 `HttpClient` は、一般的な2つのHTTPセキュリティメカニズム (XSSI保護とXSRF/CSRF保護) のための組み込みサポートを提供します。
 
-Tip: APIに [Content Security Policy](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) を導入することも検討してください。
+TIP: APIに [Content Security Policy](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) を導入することも検討してください。
 
 ## XSSI 保護
 

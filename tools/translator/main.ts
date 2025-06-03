@@ -30,8 +30,9 @@ async function main() {
 
   const content = await readFile(file, 'utf-8');
   const prh = await readFile(resolve(rootDir, 'prh.yml'), 'utf-8');
+  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 
-  const translator = new GeminiTranslator(apiKey);
+  const translator = new GeminiTranslator(apiKey, model);
   const translated = await translator.translate(content, prh);
 
   console.log(translated);

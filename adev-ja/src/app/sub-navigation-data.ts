@@ -332,7 +332,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/overview',
           },
           {
-            label: 'Define routes',
+            label: 'ルートを定義する',
             path: 'guide/routing/define-routes',
             contentPath: 'guide/routing/define-routes',
           },

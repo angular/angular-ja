@@ -21,3 +21,18 @@ index 2c83a2ad4a..9d9b28112a 100644
 +}
 +      
 \ No newline at end of file
+diff --git a/adev/shared-docs/styles/_typography.scss b/adev/shared-docs/styles/_typography.scss
+index 1c4e2ce0e7..8e897e21f9 100644
+--- a/adev/shared-docs/styles/_typography.scss
++++ b/adev/shared-docs/styles/_typography.scss
+@@ -110,4 +110,10 @@
+     margin-block: 1rem;
+     transition: border-color 0.3s ease;
+   }
++
++  // https://github.com/angular/angular-ja/issues/1017
++  em {
++    font-style: normal;
++    font-weight: 700;
++  }
+ }

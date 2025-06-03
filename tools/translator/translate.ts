@@ -83,7 +83,7 @@ It doesn't cover application-level security, such as authentication and authoriz
       },
     });
 
-    chat.sendMessage({
+    await chat.sendMessage({
       message: [
         `これから翻訳作業を開始します。テキスト断片を入力するので、日本語に翻訳して出力してください。`,
       ],

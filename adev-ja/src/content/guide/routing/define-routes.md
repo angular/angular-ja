@@ -299,7 +299,7 @@ export const ROUTES: Route[] = [
     path: 'admin',
     providers: [
       AdminService,
-      {provide: ADMIN_API_KEY, useValue: '1234'},
+      {provide: ADMIN_API_KEY, useValue: '12345'},
     ],
     children: [
       {path: 'users', component: AdminUsersComponent},

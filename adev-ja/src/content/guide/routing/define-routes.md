@@ -1,12 +1,12 @@
-# Define routes
+# ルートを定義する
 
-Routes serve as the fundamental building blocks for navigation within an Angular app.
+ルートは、Angularアプリケーション内のナビゲーションのための基本的な構成要素として機能します。
 
-## What are routes?
+## ルートとは {#what-are-routes}
 
-In Angular, a **route** is an object that defines which component should render for a specific URL path or pattern, as well as additional configuration options about what happens when a user navigates to that URL.
+Angularでは、**ルート**は特定のURLパスまたはパターンに対してどのコンポーネントをレンダリングするか、およびユーザーがそのURLにナビゲートしたときに何が起こるかに関する追加の構成オプションを定義するオブジェクトです。
 
-Here is a basic example of a route:
+次にルートの基本的な例を示します。
 
 ```angular-ts
 import { AdminPage } from './app-admin/app-admin.component';
@@ -17,13 +17,13 @@ const adminPage = {
 }
 ```
 
-For this route, when a user visits the `/admin` path, the app will display the `AdminPage` component.
+このルートの場合、ユーザーが`/admin`パスにアクセスすると、アプリケーションは`AdminPage`コンポーネントを表示します。
 
-### Managing routes in your application
+### アプリケーションでルートを管理する {#managing-routes-in-your-application}
 
-Most projects define routes in a separate file that contains `routes` in the filename.
+ほとんどのプロジェクトでは、ファイル名に`routes`を含む別のファイルでルートを定義します。
 
-A collection of routes looks like this:
+ルートのコレクションは次のようになります。
 
 ```angular-ts
 import { Routes } from '@angular/router';
@@ -42,13 +42,13 @@ export const routes: Routes = [
 ];
 ```
 
-Tip: If you generated a project with Angular CLI, your routes are defined in `src/app/app.routes.ts`.
+Tip: Angular CLIでプロジェクトを生成した場合、ルートは`src/app/app.routes.ts`で定義されます。
 
-### Adding the router to your application
+### アプリケーションにルーターを追加する {#adding-the-router-to-your-application}
 
-When bootstrapping an Angular application without the Angular CLI, you can pass a configuration object that includes a `providers` array.
+Angular CLIなしでAngularアプリケーションをブートストラップする場合、`providers`配列を含む構成オブジェクトを渡すことができます。
 
-Inside of the `providers` array, you can add the Angular router to your application by adding a `provideRouter` function call with your routes.
+`providers`配列内で、`provideRouter`関数呼び出しとルートを追加することで、Angularルーターをアプリケーションに追加できます。
 
 ```angular-ts
 import { ApplicationConfig } from '@angular/core';
@@ -64,28 +64,28 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-## Route URL Paths
+## ルートURLパス {#route-url-paths}
 
-### Static URL Paths
+### 静的なURLパス {#static-url-paths}
 
-Static URL Paths refer to routes with predefined paths that don't change based on dynamic parameters. These are routes that match a `path` string exactly and have a fixed outcome.
+静的なURLパスとは、動的なパラメーターに基づいて変化しない、事前に定義されたパスを持つルートを指します。これらは`path`文字列に正確に一致し、固定された結果を持つルートです。
 
-Examples of this include:
+例としては次のものがあります。
 
 - "/admin"
 - "/blog"
 - "/settings/account"
 
-### Define URL Paths with Route Parameters
+### ルートパラメーターでURLパスを定義する {#define-url-paths-with-route-parameters}
 
-Parameterized URLs allow you to define dynamic paths that allow multiple URLs to the same component while dynamically displaying data based on parameters in the URL.
+パラメーター化されたURLを使用すると、複数のURLを同じコンポーネントに許可しながら、URL内のパラメーターに基づいてデータを動的に表示する動的なパスを定義できます。
 
-You can define this type of pattern by adding parameters to your route’s `path` string and prefixing each parameter with the colon (`:`) character.
+このタイプのパターンは、ルートの`path`文字列にパラメーターを追加し、各パラメーターの前にコロン(`:`)文字を付けることで定義できます。
 
-IMPORTANT: Parameters are distinct from information in the URL's [query string](https://en.wikipedia.org/wiki/Query_string).
-Learn more about [query parameters in Angular in this guide](/guide/routing/read-route-state#query-parameters).
+IMPORTANT: パラメーターは、URLの[クエリ文字列](https://en.wikipedia.org/wiki/Query_string)内の情報とは異なります。
+[このガイドでAngularのクエリパラメーターについて詳しく参照してください](/guide/routing/read-route-state#query-parameters)。
 
-The following example displays a user profile component based on the user id passed in through the URL.
+次の例は、URLを介して渡されたユーザーIDに基づいてユーザープロファイルコンポーネントを表示します。
 
 ```angular-ts
 import { Routes } from '@angular/router';
@@ -96,16 +96,16 @@ const routes: Routes = [
 ];
 ```
 
-In this example, URLs such as `/user/leeroy` and `/user/jenkins` render the `UserProfile` component. This component can then read the `id` parameter and use it to perform additional work, such as fetching data. See [reading route state guide](/guide/routing/read-route-state) for details on reading route parameters.
+この例では、`/user/leeroy`や`/user/jenkins`などのURLは`UserProfile`コンポーネントをレンダリングします。このコンポーネントは、`id`パラメーターを読み取り、それを使用してデータの取得などの追加作業を実行できます。[ルートパラメーターの読み取りの詳細については、ルート状態の読み取りガイドを参照してください](/guide/routing/read-route-state)。
 
-Valid route parameter names must start with a letter (a-z, A-Z) and can only contain:
+有効なルートパラメーター名は、文字(a-z、A-Z)で始まり、次のもののみを含めることができます。
 
-- Letters (a-z, A-Z)
-- Numbers (0-9)
-- Underscore (\_)
-- Hyphen (-)
+- 文字(a-z、A-Z)
+- 数字(0-9)
+- アンダーバー(\_)
+- ハイフン(-)
 
-You can also define paths with multiple parameters:
+複数のパラメーターを持つパスを定義できます。
 
 ```angular-ts
 import { Routes } from '@angular/router';
@@ -118,15 +118,15 @@ const routes: Routes = [
 ];
 ```
 
-With this new path, users can visit `/user/leeroy/youtube` and `/user/leeroy/bluesky` and see respective social media feeds based on the parameter for the user leeroy.
+この新しいパスにより、ユーザーは`/user/leeroy/youtube`や`/user/leeroy/bluesky`にアクセスし、ユーザーleeroyのパラメーターに基づいてそれぞれのソーシャルメディアフィードを見ることができます。
 
-See [Reading route state](/guide/routing/read-route-state) for details on reading route parameters.
+ルートパラメーターの読み取りの詳細については、[ルート状態の読み取り](/guide/routing/read-route-state)を参照してください。
 
-### Wildcards
+### ワイルドカード {#wildcards}
 
-When you need to catch all routes for a specific path, the solution is a wildcard route which is defined with the double asterisk (`**`).
+特定のパスのすべてのルートをキャッチする必要がある場合、解決策は二重アスタリスク(`**`)で定義されるワイルドカードルートです。
 
-A common example is defining a Page Not Found component.
+一般的な例は、ページが見つかりませんコンポーネントの定義です。
 
 ```angular-ts
 import { Home } from './home/home.component';
@@ -140,46 +140,46 @@ const routes: Routes = [
 ];
 ```
 
-In this routes array, the app displays the `NotFound` component when the user visits any path outside of `home` and `user/:id`.
+このルート配列では、ユーザーが`home`と`user/:id`以外のパスにアクセスすると、アプリケーションは`NotFound`コンポーネントを表示します。
 
-Tip: Wildcard routes are typically placed at the end of a routes array.
+Tip: ワイルドカードルートは通常、ルート配列の最後に配置されます。
 
-## How Angular matches URLs
+## AngularがURLを照合する方法 {#how-angular-matches-urls}
 
-When you define routes, the order is important because Angular uses a first-match wins strategy. This means that once Angular matches a URL with a route `path`, it stops checking any further routes. As a result, always put more specific routes before less specific routes.
+ルートを定義する際、Angularは最初の一致が優先される戦略を使用するため、順序が重要です。これは、AngularがURLをルート`path`と照合すると、それ以上ルートの確認を停止することを意味します。結果として、常に、より具体的なルートを、より具体的でないルートの前に配置してください。
 
-The following example shows routes defined from most-specific to least specific:
+次の例は、最も具体的なものから最も具体的でないものへと定義されたルートを示しています。
 
 ```angular-ts
 const routes: Routes = [
-  { path: '', component: HomeComponent },              // Empty path
-  { path: 'users/new', component: NewUserComponent },  // Static, most specific
-  { path: 'users/:id', component: UserDetailComponent }, // Dynamic
-  { path: 'users', component: UsersComponent },        // Static, less specific
-  { path: '**', component: NotFoundComponent }         // Wildcard - always last
+  { path: '', component: HomeComponent },              // 空のパス
+  { path: 'users/new', component: NewUserComponent },  // 静的、最も具体的
+  { path: 'users/:id', component: UserDetailComponent }, // 動的
+  { path: 'users', component: UsersComponent },        // 静的、具体的でない
+  { path: '**', component: NotFoundComponent }         // ワイルドカード - 常に最後
 ];
 ```
 
-If a user visits `/users/new`, Angular router would go through the following steps:
+ユーザーが`/users/new`にアクセスした場合、Angularルーターは次の手順を実行します。
 
-1. Checks `''` - doesn't match
-1. Checks `users/new` - matches! Stops here
-1. Never reaches `users/:id` even though it could match
-1. Never reaches `users`
-1. Never reaches `**`
+1. `''`をチェック - 一致しません
+1. `users/new`をチェック - 一致します！ここで停止します
+1. 一致する可能性があるにもかかわらず、`users/:id`には到達しません
+1. `users`には到達しません
+1. `**`には到達しません
 
-## Loading Route Component Strategies
+## ルートコンポーネントの読み込み戦略 {#loading-route-component-strategies}
 
-Understanding how and when components load in Angular routing is crucial for building responsive web applications. Angular offers two primary strategies to control component loading behavior:
+Angularルーティングでコンポーネントがどのように、いつ読み込まれるかを理解することは、応答性の高いWebアプリケーションを構築するために不可欠です。Angularは、コンポーネントの読み込み動作を制御するための2つの主要な戦略を提供します。
 
-1. **Eagerly loaded**: Components that are loaded immediately
-2. **Lazily loaded**: Components loaded only when needed
+1. **即時読み込み (Eagerly loaded)**: すぐに読み込まれるコンポーネント
+2. **遅延読み込み (Lazily loaded)**: 必要になったときにのみ読み込まれるコンポーネント
 
-Each approach offers distinct advantages for different scenarios.
+それぞれのアプローチは、異なるシナリオに対して明確な利点を提供します。
 
-### Eagerly loaded components
+### 即時読み込みされるコンポーネント {#eagerly-loaded-components}
 
-When you define a route with the `component` property, the referenced component is eagerly loaded as part of the same JavaScript bundle as the route configuration.
+`component`プロパティでルートを定義すると、参照されるコンポーネントは、ルート構成と同じJavaScriptバンドルの一部として即時読み込みされます。
 
 ```angular-ts
 import { Routes } from "@angular/router";
@@ -187,8 +187,8 @@ import { HomePage } from "./components/home/home-page"
 import { LoginPage } from "./components/auth/login-page"
 
 export const routes: Routes = [
-  // HomePage and LoginPage are both directly referenced in this config,
-  // so their code is eagerly included in the same JavaScript bundle as this file.
+  // HomePageとLoginPageはどちらもこの設定で直接参照されているため、
+  // そのコードはこのファイルと同じJavaScriptバンドルに即時含まれます。
   {
     path: "",
     component: HomePage
@@ -200,20 +200,20 @@ export const routes: Routes = [
 ]
 ```
 
-Eagerly loading route components like this means that the browser has to download and parse all of the JavaScript for these components as part of your initial page load, but the components are available to Angular immediately.
+このようにルートコンポーネントを即時読み込みすることは、ブラウザが初期ページ読み込みの一部としてこれらのコンポーネントのすべてのJavaScriptをダウンロードして解析する必要があることを意味しますが、コンポーネントはAngularですぐに利用できます。
 
-While including more JavaScript in your initial page load leads to slower initial load times, this can lead to more seamless transitions as the user navigates through an application.
+初期ページ読み込みに多くのJavaScriptを含めると初期読み込み時間は遅くなりますが、ユーザーがアプリケーション内を移動する際のよりシームレスな遷移につながる可能性があります。
 
-### Lazily loaded components
+### 遅延読み込みされるコンポーネント {#lazily-loaded-components}
 
-You can use the `loadComponent` property to lazily load the JavaScript for a route only at the point at which that route would become active.
+`loadComponent`プロパティを使用すると、そのルートがアクティブになる時点でのみ、ルートのJavaScriptを遅延読み込みできます。
 
 ```angular-ts
 import { Routes } from "@angular/router";
 
 export const routes: Routes = [
-  // The HomePage and LoginPage components are loaded lazily at the point at which
-  // their corresponding routes become active.
+  // HomePageとLoginPageコンポーネントは、
+  // 対応するルートがアクティブになった時点で遅延読み込みされます。
   {
     path: 'login',
     loadComponent: () => import('./components/auth/login-page')
@@ -225,21 +225,21 @@ export const routes: Routes = [
 ]
 ```
 
-The `loadComponent` property accepts a loader function that returns a Promise that resolves to an Angular component. In most cases, this function uses the standard [JavaScript dynamic import API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import). You can, however, use any arbitrary async loader function.
+`loadComponent`プロパティは、Angularコンポーネントに解決されるPromiseを返すローダー関数を受け入れます。ほとんどの場合、この関数は標準の[JavaScript動的インポートAPI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)を使用します。ただし、任意の非同期ローダー関数も使用できます。
 
-Lazily loading routes can significantly improve the load speed of your Angular application by removing large portions of JavaScript from the initial bundle. These portions of your code compile into separate JavaScript "chunks" that the router requests only when the user visits the corresponding route.
+遅延読み込みルートは、初期バンドルからJavaScriptの大部分を削除することで、Angularアプリケーションの読み込み速度を大幅に向上させることができます。これらのコード部分は、ユーザーが対応するルートにアクセスしたときにのみルーターが要求する個別のJavaScript「チャンク」にコンパイルされます。
 
-### Should I use an eager or a lazy route?
+### 即時ルートと遅延ルートのどちらを使用すべきか {#should-i-use-an-eager-or-a-lazy-route}
 
-There are many factors to consider when deciding on whether a route should be eager or lazy.
+ルートが即時読み込みか遅延読み込みかを決定する際には、多くの要素を考慮する必要があります。
 
-In general, eager loading is recommended for primary landing page(s) while other pages would be lazy-loaded.
+一般的に、プライマリランディングページには即時読み込みが推奨され、他のページは遅延読み込みされます。
 
-Note: While lazy routes have the upfront performance benefit of reducing the amount of initial data requested by the user, it adds future data requests that could be undesirable. This is particularly true when dealing with nested lazy loading at multiple levels, which can significantly impact performance.
+Note: 遅延ルートは、ユーザーが要求する初期データの量を減らすという先行的なパフォーマンス上の利点がありますが、望ましくない可能性のある将来のデータ要求を追加します。これは、複数のレベルでのネストされた遅延読み込みを扱う場合に特に当てはまり、パフォーマンスに大きな影響を与える可能性があります。
 
-## Redirects
+## リダイレクト {#redirects}
 
-You can define a route that redirects to another route instead of rendering a component:
+コンポーネントをレンダリングする代わりに、別のルートにリダイレクトするルートを定義できます。
 
 ```angular-ts
 import { BlogComponent } from './home/blog.component';
@@ -256,11 +256,11 @@ const routes: Routes = [
 ];
 ```
 
-If you modify or remove a route, some users may still click on out-of-date links or bookmarks to that route. You can add a redirect to direct those users to an appropriate alternative route instead of a "not found" page.
+ルートを変更または削除した場合でも、一部のユーザーは古いリンクやブックマークをクリックしてそのルートにアクセスする可能性があります。そのようなユーザーを「見つかりません」ページではなく、適切な代替ルートに誘導するためにリダイレクトを追加できます。
 
-## Page titles
+## ページタイトル {#page-titles}
 
-You can associate a **title** with each route. Angular automatically updates the [page title](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title) when a route activates. Always define appropriate page titles for your application, as these titles are necessary to create an accessible experience.
+各ルートには**タイトル**を関連付けることができます。ルートがアクティブになると、Angularは[ページタイトル](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)を自動的に更新します。アクセシブルな体験を作成するためにこれらのタイトルが必要となるため、アプリケーションに適切なページタイトルを常に定義してください。
 
 ```angular-ts
 import { Routes } from '@angular/router';
@@ -287,11 +287,11 @@ const routes: Routes = [
 ];
 ```
 
-## Route-level providers for dependency injection
+## 依存性の注入のためのルートレベルプロバイダー {#route-level-providers-for-dependency-injection}
 
-Each route has a `providers` property that lets you provide dependencies to that route's content via [dependency injection](/guide/di).
+各ルートには、[依存性の注入](/guide/di)を介してそのルートのコンテンツに依存性を提供する`providers`プロパティがあります。
 
-Common scenarios where this can be helpful include applications that have different services based on whether the user is an admin or not.
+これが役立つ一般的なシナリオには、ユーザーが管理者であるかどうかに基づいて異なるサービスを持つアプリケーションが含まれます。
 
 ```angular-ts
 export const ROUTES: Route[] = [
@@ -311,19 +311,19 @@ export const ROUTES: Route[] = [
 ];
 ```
 
-In this code sample, the `admin` path contains a protected data property of `ADMIN_API_KEY` that is only available to children within its section. As a result, no other paths will be able to access the data provided via `ADMIN_AP
+このコードサンプルでは、`admin`パスには`ADMIN_API_KEY`という保護されたデータプロパティが含まれており、そのセクション内の子にのみ利用できます。結果として、他のパスは`ADMIN_API_KEY`を介して提供されるデータにアクセスできません。
 
-See the [Dependency injection guide](/guide/di) for more information about providers and injection in Angular.
+Angularのプロバイダーと注入に関する詳細については、[依存性の注入ガイド](/guide/di)を参照してください。
 
-## Associating data with routes
+## ルートにデータを関連付ける {#associating-data-with-routes}
 
-Route data enables you to attach additional information to routes. You are able to configure how components behave based on this data.
+ルートデータを使用すると、ルートに追加情報を付加できます。このデータに基づいてコンポーネントの動作を設定できます。
 
-There are two ways to work with route data: static data that remains constant, and dynamic data that can change based on runtime conditions.
+ルートデータを扱う方法は2つあります。定数として保持される静的データと、実行時の条件に基づいて変化する動的データです。
 
-### Static data
+### 静的データ {#static-data}
 
-You can associate arbitrary static data with a route via the `data` property in order to centralize things like route-specific metadata (e.g., analytics tracking, permissions, etc.):
+`data`プロパティを介して任意の静的データをルートに関連付けることで、ルート固有のメタデータ（例: 分析トラッキング、権限など）を一元化できます。
 
 ```angular-ts
 import { Routes } from '@angular/router';
@@ -345,21 +345,21 @@ const routes: Routes = [
 ];
 ```
 
-In this code sample, the home and about page are configured with specific `analyticsId` which would then be used in their respective components for page tracking analytics.
+このコードサンプルでは、ホームページとアバウトページが特定の`analyticsId`で構成されており、それぞれのコンポーネントでページトラッキング分析に使用されます。
 
-You can read this static data by injecting the `ActivatedRoute`. See [Reading route state](/guide/routing/read-route-state) for details.
+この静的データは`ActivatedRoute`を注入することで読み取ることができます。詳細については、[ルート状態の読み取り](/guide/routing/read-route-state)を参照してください。
 
-### Dynamic data with data resolvers
+### データリゾルバーによる動的データ {#dynamic-data-with-data-resolvers}
 
-When you need to provide dynamic data to a route, check out the [guide on route data resolvers](/guide/router/route-data-resolvers).
+ルートに動的データを提供する必要がある場合は、[ルートデータリゾルバーに関するガイド](/guide/router/route-data-resolvers)を参照してください。
 
-## Nested Routes
+## ネストされたルート {#nested-routes}
 
-Nested routes, also known as child routes, are a common technique for managing more complex navigation routes where a component has a sub-view that changes based on the URL.
+ネストされたルートは、子ルートとも呼ばれ、URLに基づいてサブビューが変化する、より複雑なナビゲーションルートを管理するための一般的な手法です。
 
-<img alt="Diagram to illustrate nested routes" src="assets/images/guide/router/nested-routing-diagram.svg">
+<img alt="ネストされたルートを示す図" src="assets/images/guide/router/nested-routing-diagram.svg">
 
-You can add child routes to any route definition with the `children` property:
+`children`プロパティを使用して、任意のルート定義に子ルートを追加できます。
 
 ```angular-ts
 const routes: Routes = [
@@ -378,11 +378,11 @@ const routes: Routes = [
 ]
 ```
 
-The above example defines a route for a product page that allows a user to change whether the product info or reviews are displayed based on the url.
+上記の例では、ユーザーがURLに基づいて製品情報またはレビューのどちらを表示するかを変更できる製品ページのルートを定義しています。
 
-The `children` property accepts an array of `Route` objects.
+`children`プロパティは`Route`オブジェクトの配列を受け入れます。
 
-To display child routes, the parent component (`ProductComponent` in the example above) includes its own `<router-outlet>`.
+子ルートを表示するには、親コンポーネント（上記の例では`ProductComponent`）に独自の`<router-outlet>`を含めます。
 
 ```angular-html
 <!-- ProductComponent -->
@@ -392,8 +392,8 @@ To display child routes, the parent component (`ProductComponent` in the example
 </article>
 ```
 
-After adding child routes to the configuration and adding a `<router-outlet>` to the component, navigation between URLs that match the child routes updates only the nested outlet.
+設定に子ルートを追加し、コンポーネントに`<router-outlet>`を追加すると、子ルートに一致するURL間のナビゲーションは、ネストされたアウトレットのみを更新します。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Learn how to [display the contents of your routes with Outlets](/guide/routing/show-routes-with-outlets).
+[アウトレットでルートのコンテンツを表示する方法](/guide/routing/show-routes-with-outlets)を学びましょう。

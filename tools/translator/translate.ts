@@ -12,50 +12,90 @@ import { renderMarkdown, splitMarkdown } from './markdown';
 
 export class GeminiTranslator {
   readonly #client: GoogleGenAI;
+  readonly #model: string;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, model: string) {
     this.#client = new GoogleGenAI({ apiKey });
+    this.#model = model;
+    console.log(`Using model: ${model}`);
   }
 
   async translate(content: string, prh: string): Promise<string> {
     const systemInstruction = `
 あなたはオープンソースライブラリの開発者向けドキュメントの翻訳者です。
-これから次のMarkdownファイルを日本語に翻訳します。
+入力として与えられたテキストに含まれる英語を日本語に翻訳します。
 
-${content}
+## Rules
+翻訳は次のルールに従います。
 
-あなたはこのMarkdownファイルを段落ごとに分割したテキストを受け取ります。
-次のルールに従って、受け取ったテキストを翻訳してください。
-
-- 見出しのレベルを維持する。
-- 改行やインデントの数を維持する。
+- 見出しレベル（"#"）の数を必ず維持する。
+  - 例: "# Security" → "# セキュリティ"
+- トップレベル（"<h1>"）ではない見出しを翻訳する場合、元の見出しをlower caseでハイフン結合したアンカーIDとして使用する
+  - 例: "## How to use Angular" → "## Angularの使い方 {#how-to-use-angular}"
+- 改行やインデントの数を必ず維持する。
 - 英単語の前後にスペースを入れない。
-- Note/Tip/HELPFUL/IMPORTANT/QUESTION/TLDR/CRITICAL から始まる特殊なプレフィックスは保持する。
+  - bad: "Angular の使い方"
+  - good: "Angularの使い方"
+- 特別なプレフィックスは翻訳せずにそのまま残す。
+  - 例: NOTE/TIP/HELPFUL/IMPORTANT/QUESTION/TLDR/CRITICAL
 - 表現の一貫性を保つため、同じ単語には同じ訳語を使う。
+- 冗長な表現を避け、自然な日本語にする。
+  - 例: 「することができます」→「できます」
 
-翻訳作業は、次のYAMLで定義されている日本語の校正ルールに従ってください。
-
+表記揺れや不自然な日本語を避けるため、YAML形式で定義されているPRH(proofreading helper)ルールを使用して、翻訳後のテキストを校正します。
+次のPRHルールを使用してください。
+---
 ${prh}
+---
+
+## Task
+
+ユーザーはテキスト全体を分割し、断片ごとに翻訳を依頼します。
+あなたは与えられた断片を日本語に翻訳し、Markdown形式で出力します。
+前回の翻訳結果を参照しながら、テキスト全体での表現の一貫性を保つようにしてください。
+
+入力例:
+
+---
+# Security
+
+This topic describes Angular's built-in protections against common web application vulnerabilities and attacks such as cross-site scripting attacks.
+It doesn't cover application-level security, such as authentication and authorization.
+---
+
+出力例:
+
+---
+# セキュリティ
+
+このトピックでは、クロスサイトスクリプティング攻撃などの一般的なWebアプリケーションの脆弱性や攻撃に対する、Angularの組み込みの保護について説明します。
+認証や認可など、アプリケーションレベルのセキュリティは扱いません。
+---
+
 
 `.trim();
+
+    const chat = this.#client.chats.create({
+      model: this.#model,
+      config: {
+        systemInstruction,
+        temperature: 0.1,
+      },
+    });
+
+    await chat.sendMessage({
+      message: [
+        `これから翻訳作業を開始します。テキスト断片を入力するので、日本語に翻訳して出力してください。`,
+      ],
+    });
 
     const blocks = splitMarkdown(content);
     const translated = [];
 
     for (const block of blocks) {
-      const prompt = `
-次のテキストに含まれる英語を日本語に翻訳してください。
-
-${block}
-`.trim();
-
-      const response = await this.#client.models.generateContent({
-        model: 'gemini-2.0-flash',
-        contents: [prompt],
-        config: {
-          systemInstruction,
-          temperature: 0.1,
-        },
+      const prompt = block.trim();
+      const response = await chat.sendMessage({
+        message: [prompt],
       });
 
       if (response.text) {

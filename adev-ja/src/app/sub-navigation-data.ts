@@ -337,22 +337,22 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/define-routes',
           },
           {
-            label: 'Show routes with Outlets',
+            label: 'アウトレットにルートを表示する',
             path: 'guide/routing/show-routes-with-outlets',
             contentPath: 'guide/routing/show-routes-with-outlets',
           },
           {
-            label: 'Navigate to routes',
+            label: 'ルートへのナビゲーション',
             path: 'guide/routing/navigate-to-routes',
             contentPath: 'guide/routing/navigate-to-routes',
           },
           {
-            label: 'Read route state',
+            label: 'ルートの状態を読み取る',
             path: 'guide/routing/read-route-state',
             contentPath: 'guide/routing/read-route-state',
           },
           {
-            label: 'Other routing tasks',
+            label: 'その他のルーティングタスク',
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
           },

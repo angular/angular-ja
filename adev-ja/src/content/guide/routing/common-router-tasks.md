@@ -1,6 +1,6 @@
-# Other common Routing Tasks
+# その他の一般的なルーティングタスク
 
-This guide covers some other common tasks associated with using Angular router in your application.
+このガイドでは、アプリケーションでAngularルーターを使用する際によくあるその他のタスクについて説明します。
 
 ## ルート情報の取得
 
@@ -13,7 +13,7 @@ This guide covers some other common tasks associated with using Angular router i
 ルートを使用して、このタイプの情報をアプリケーションコンポーネントに渡します。
 これを行うには、`provideRouter` を使用した [withComponentInputBinding](api/router/withComponentInputBinding) 機能、または `RouterModule.forRoot` の `bindToComponentInputs` オプションを使用します。
 
-ルートから情報を入手するには:
+ルートから情報を取得するには:
 
 <docs-workflow>
 
@@ -31,14 +31,14 @@ providers: [
 
 <docs-step title="コンポーネントに `Input` を追加する">
 
-パラメータの名前と一致する `input()` プロパティを持つようにコンポーネントを更新します。
+パラメータ名と一致する `input()` プロパティを持つようにコンポーネントを更新します。
 
 ```ts
 id = input.required<string>()
 hero = computed(() => this.service.getHero(heroId));
 ```
 
-NOTE: すべてのルートデータを、キーと値のペアでコンポーネントの入力にバインドできます。静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータです。
+NOTE: 静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータなど、すべてのルートデータをキーと値のペアでコンポーネントの入力にバインドできます。
 親コンポーネントのルート情報を使用する場合は、ルーターの `paramsInheritanceStrategy` オプションを設定する必要があります。
 `withRouterConfig({paramsInheritanceStrategy: 'always'})`
 
@@ -46,7 +46,7 @@ NOTE: すべてのルートデータを、キーと値のペアでコンポー�
 
 </docs-workflow>
 
-## 404 ページの表示
+## 404 ページの表示 {#displaying-a-404-page}
 
 404ページを表示するには、[ワイルドカードルート](guide/routing/common-router-tasks#setting-up-wildcard-routes) を設定します。このルートの `component` プロパティは、404ページに使用したいコンポーネントに設定します。
 
@@ -59,9 +59,9 @@ const routes: Routes = [
 ```
 
 `path` が `**` の最後のルートは、ワイルドカードルートです。
-ルーターは、要求されたURLがリストの先頭にあるパスと一致しない場合、このルートを選択し、ユーザーを `PageNotFoundComponent` に送信します。
+ルーターは、要求されたURLがリストの先頭にあるパスと一致しない場合、このルートを選択し、ユーザーを `PageNotFoundComponent` にルーティングします。
 
-## 権限のないアクセスの防止
+## 権限のないアクセスの防止 {#preventing-unauthorized-access}
 
 ルートガードを使用して、ユーザーが権限なしでアプリケーションの特定の部分にナビゲートできないようにします。
 Angularでは、次のルートガードを使用できます。
@@ -96,7 +96,7 @@ export const yourGuardFunction: CanActivateFn = (
 ```
 
 ルーティングモジュールで、`routes` 構成の適切なプロパティを使用します。
-ここでは、`canActivate` は、ルーターに、この特定のルートへのナビゲーションを仲介するよう指示します。
+ここでは、`canActivate` は、ルーターに、この特定のルートへのナビゲーションを制御するよう指示します。
 
 ```ts
 {
@@ -187,7 +187,7 @@ export class AppComponent {}
 ルーターが新しいコンポーネントビューにナビゲートすると、ブラウザの場所と履歴が、そのビューのURLで更新されます。
 
 最新のHTML5ブラウザは、[history.pushState](https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries 'HTML5 browser history push-state') をサポートしています。これは、サーバーページのリクエストをトリガーせずに、ブラウザの場所と履歴を変更するテクニックです。
-ルーターは、ページロードが必要な場合と区別できない「自然な」URLを作成できます。
+ルーターは、サーバーページロードと区別できない「自然な」URLを作成できます。
 
 この「HTML5 pushState」スタイルの危機センターのURLを示します。
 
@@ -208,7 +208,7 @@ localhost:3002/src/#/crisis-center
 | プロバイダー              | 詳細                              |
 | :--------------------- | :----------------------------------- |
 | `PathLocationStrategy` | デフォルトの「HTML5 pushState」スタイル。 |
-| `HashLocationStrategy` | 「ハッシュ URL」スタイル。                |
+| `HashLocationStrategy` | 「ハッシュURL」スタイル。                |
 
 `RouterModule.forRoot()` 関数は、`LocationStrategy` を `PathLocationStrategy` に設定します。これにより、デフォルトの戦略になります。
 ブートストラッププロセス中にオーバーライドを使用して、`HashLocationStrategy` に切り替えることもできます。

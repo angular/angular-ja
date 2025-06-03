@@ -1,10 +1,10 @@
-# Navigate to routes
+# ルートへのナビゲーション
 
-The RouterLink directive is Angular's declarative approach to navigation. It allows you to use standard anchor elements (`<a>`) that seamlessly integrate with Angular's routing system.
+`RouterLink`ディレクティブは、Angularのナビゲーションに対する宣言的なアプローチです。これにより、Angularのルーティングシステムとシームレスに統合される標準のアンカー要素（`<a>`）を使用できます。
 
-## How to use RouterLink
+## RouterLinkの使い方 {#how-to-use-routerlink}
 
-Instead of using regular anchor elements `<a>` with an `href` attribute, you add a RouterLink directive with the appropriate path in order to leverage Angular routing.
+通常のアンカー要素`<a>`に`href`属性を使用する代わりに、Angularルーティングを活用するために、適切なパスを持つ`RouterLink`ディレクティブを追加します。
 
 ```angular-html
 <nav>
@@ -13,9 +13,9 @@ Instead of using regular anchor elements `<a>` with an `href` attribute, you add
 </nav>
 ```
 
-### Using absolute or relative links
+### 絶対リンクと相対リンクの使用 {#using-absolute-or-relative-links}
 
-**Relative URLs** in Angular routing allow you to define navigation paths relative to the current route's location. This is in contrast to **absolute URLs** which contain the full path with the protocol (e.g., `http://`) and the **root domain** (e.g., `google.com`).
+Angularルーティングにおける**相対URL**は、現在のルートの場所に対するナビゲーションパスを定義できます。これは、プロトコル（例: `http://`）と**ルートドメイン**（例: `google.com`）を含む完全なパスを持つ**絶対URL**とは対照的です。
 
 ```angular-html
 <!-- Absolute URL -->
@@ -25,13 +25,13 @@ Instead of using regular anchor elements `<a>` with an `href` attribute, you add
 <a href="/essentials">Angular Essentials Guide</a>
 ```
 
-In this example, the first example contains the full path with the protocol (i.e., `https://`) and the root domain (i.e., `angular.dev`) explicitly defined for the essentials page. In contrast, the second example assumes the user is already on the correct root domain for `/essentials`.
+この例では、最初の例は、基本概念ページに対してプロトコル（つまり`https://`）とルートドメイン（つまり`angular.dev`）が明示的に定義された完全なパスを含んでいます。対照的に、2番目の例は、ユーザーがすでに`/essentials`の正しいルートドメインにいることを前提としています。
 
-Generally speaking, relative URLs are preferred because they are more maintainable across applications because they don’t need to know their absolute position within the routing hierarchy.
+一般的に、相対URLは、ルーティング階層内での絶対位置を知る必要がないため、アプリケーション全体で保守しやすいため、推奨されます。
 
-### How relative URLs work
+### 相対URLの仕組み {#how-relative-urls-work}
 
-Angular routing has two syntaxes for defining relative URLs: strings and arrays.
+Angularルーティングには、相対URLを定義するための2つの構文があります。文字列と配列です。
 
 ```angular-html
 <!-- Navigates user to /dashboard -->
@@ -39,17 +39,17 @@ Angular routing has two syntaxes for defining relative URLs: strings and arrays.
 <a [routerLink]="['dashboard']">Dashboard</a>
 ```
 
-HELPFUL: Passing a string is the most common way to define relative URLs.
+HELPFUL: 文字列を渡すのが、相対URLを定義する最も一般的な方法です。
 
-When you need to define dynamic parameters in a relative URL, use the array syntax:
+相対URLで動的なパラメーターを定義する必要がある場合は、配列構文を使用します。
 
 ```angular-html
 <a [routerLink]="['user', currentUserId]">Current User</a>
 ```
 
-In addition, Angular routing allows you specify whether you want the path to be relative to the current URL or to the root domain based on whether the relative path is prefixed with a forward slash (`/`) or not.
+さらに、Angularルーティングでは、相対パスがスラッシュ（`/`）で始まるかどうかによって、パスを現在のURLに対する相対パスにするか、ルートドメインに対する相対パスにするかを指定できます。
 
-For example, if the user is on `example.com/settings`, here is how different relative paths can be defined for various scenarios:
+たとえば、ユーザーが`example.com/settings`にいる場合、さまざまなシナリオで異なる相対パスを定義する方法を次に示します。
 
 ```angular-html
 <!-- Navigates to /settings/notifications -->
@@ -61,13 +61,13 @@ For example, if the user is on `example.com/settings`, here is how different rel
 <a [routerLink]="['/team', teamId, 'user', userId]">Current User</a>”
 ```
 
-## Programmatic navigation to routes
+## ルートへのプログラムによるナビゲーション {#programmatic-navigation-to-routes}
 
-While `RouterLink` handles declarative navigation in templates, Angular provides programmatic navigation for scenarios where you need to navigate based on logic, user actions, or application state. By injecting `Router`, you can dynamically navigate to routes, pass parameters, and control navigation behavior in your TypeScript code.
+`RouterLink`がテンプレートでの宣言的なナビゲーションを処理する一方で、Angularはロジック、ユーザーアクション、またはアプリケーションの状態に基づいてナビゲートする必要があるシナリオのために、プログラムによるナビゲーションを提供します。`Router`を注入することで、ルートへ動的にナビゲートし、パラメーターを渡し、TypeScriptコードでナビゲーションの動作を制御できます。
 
-### `router.navigate()`
+### `router.navigate()` {#router-navigate}
 
-You can use the `router.navigate()` method to programmatically navigate between routes by specifying a URL path array.
+`router.navigate()`メソッドを使用して、URLパス配列を指定することで、ルート間をプログラムでナビゲートできます。
 
 ```angular-ts
 import { Router } from '@angular/router';
@@ -96,9 +96,9 @@ export class AppDashboard {
 }
 ```
 
-`router.navigate()` supports both simple and complex routing scenarios, allowing you to pass route parameters, [query parameters](/guide/routing/read-route-state#query-parameters), and control navigation behavior.
+`router.navigate()`は、シンプルおよび複雑なルーティングシナリオの両方をサポートしており、ルートパラメーター、[クエリパラメーター](/guide/routing/read-route-state#query-parameters)を渡し、ナビゲーションの動作を制御できます。
 
-You can also build dynamic navigation paths relative to your component’s location in the routing tree using the `relativeTo` option.
+また、`relativeTo`オプションを使用して、ルーティングツリー内のコンポーネントの場所に対する動的なナビゲーションパスを構築できます。
 
 ```angular-ts
 import { Router, ActivatedRoute } from '@angular/router';
@@ -132,9 +132,9 @@ export class UserDetailComponent {
 }
 ```
 
-### `router.navigateByUrl()`
+### `router.navigateByUrl()` {#router-navigatebyurl}
 
-The `router.navigateByUrl()` method provides a direct way to programmatically navigate using URL path strings rather than array segments. This method is ideal when you have a full URL path and need to perform absolute navigation, especially when working with externally provided URLs or deep linking scenarios.
+`router.navigateByUrl()`メソッドは、配列セグメントではなくURLパス文字列を使用してプログラムでナビゲートする直接的な方法を提供します。このメソッドは、完全なURLパスがあり、絶対ナビゲーションを実行する必要がある場合に最適です。特に、外部から提供されるURLやディープリンクのシナリオで役立ちます。
 
 ```angular-ts
 // Standard route navigation
@@ -150,7 +150,7 @@ router.navigateByUrl('/products/123?view=details#reviews');
 router.navigateByUrl('/search?category=books&sortBy=price');
 ```
 
-In the event you need to replace the current URL in history, `navigateByUrl` also accepts a configuration object that has a `replaceUrl` option.
+履歴内の現在のURLを置き換える必要がある場合、`navigateByUrl`は`replaceUrl`オプションを持つ設定オブジェクトも受け入れます。
 
 ```angular-ts
 // Replace current URL in history
@@ -159,6 +159,6 @@ router.navigateByUrl('/checkout', {
 });
 ```
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Learn how to [read route state](/guide/routing/read-route-state) to create responsive and context-aware components.
+レスポンシブでコンテキストを認識するコンポーネントを作成するために、[ルートの状態を読み取る](/guide/routing/read-route-state)方法を学びましょう。

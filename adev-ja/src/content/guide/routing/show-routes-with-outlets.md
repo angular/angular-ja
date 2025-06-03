@@ -1,10 +1,10 @@
-# Show routes with outlets
+# アウトレットにルートを表示する
 
-The `RouterOutlet` directive is a placeholder that marks the location where the router should render the component for the current URL.
+`RouterOutlet`ディレクティブは、ルーターが現在のURLに対応するコンポーネントをレンダリングする場所を示すプレースホルダーです。
 
 ```angular-html
 <app-header />
-<router-outlet />  <!-- Angular inserts your route content here -->
+<router-outlet />  <!-- Angularはここにルートコンテンツを挿入します -->
 <app-footer />
 ```
 
@@ -21,7 +21,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {}
 ```
 
-In this example, if an application has the following routes defined:
+この例では、アプリケーションに次のルートが定義されている場合:
 
 ```angular-ts
 import { Routes } from '@angular/router';
@@ -42,7 +42,7 @@ const routes: Routes = [
 ];
 ```
 
-When a user visits `/products`, Angular renders the following:
+ユーザーが`/products`にアクセスすると、Angularは次のようにレンダリングします。
 
 ```angular-html
 <app-header></app-header>
@@ -50,7 +50,7 @@ When a user visits `/products`, Angular renders the following:
 <app-footer></app-footer>
 ```
 
-If the user goes back to the home page, then Angular renders:
+ユーザーがホームページに戻ると、Angularは次のようにレンダリングします。
 
 ```angular-html
 <app-header></app-header>
@@ -58,30 +58,30 @@ If the user goes back to the home page, then Angular renders:
 <app-footer></app-footer>
 ```
 
-When displaying a route, the `<router-outlet>` element remains present in the DOM as a reference point for future navigations. Angular inserts routed content just after the outlet element as a sibling.
+ルートを表示するとき、`<router-outlet>`要素は将来のナビゲーションのための参照点としてDOMに存在し続けます。Angularはルーティングされたコンテンツをアウトレット要素の直後に兄弟要素として挿入します。
 
 ```angular-html
-<!-- Contents of the component's template -->
+<!-- コンポーネントのテンプレートの内容 -->
 <app-header />
 <router-outlet />
 <app-footer />
 ```
 
 ```angular-html
-<!-- Content rendered on the page when the user visits /admin -->
+<!-- ユーザーが/adminにアクセスしたときにページにレンダリングされるコンテンツ -->
 <app-header>...</app-header>
 <router-outlet></router-outlet>
 <app-admin-page>...</app-admin-page>
 <app-footer>...</app-footer>
 ```
 
-## Nesting routes with child routes
+## 子ルートでルートをネストする {#nesting-routes-with-child-routes}
 
-As your application grows more complex, you might want to create routes that are relative to a component other than your root component. This enables you to create experiences where only part of the application changes when the URL changes, as opposed to the users feeling like the entire page is refreshed.
+アプリケーションが複雑になるにつれて、ルートコンポーネント以外のコンポーネントに相対的なルートを作成したい場合があります。これにより、URLが変更されたときにアプリケーションの一部のみが変更されるような体験を作成でき、ユーザーがページ全体がリフレッシュされたように感じるのを避けることができます。
 
-These types of nested routes are called child routes. This means you're adding a second `<router-outlet>` to your app, because it is in addition to the `<router-outlet>` in AppComponent.
+これらの種類のネストされたルートは子ルートと呼ばれます。これは、`AppComponent`内の`<router-outlet>`に加えて、アプリケーションに2つ目の`<router-outlet>`を追加することを意味します。
 
-In this example, the `Settings` component will display the desired panel based on what the user selects. One of the unique things you’ll notice about child routes is that the component often has its own `<nav>` and `<router-outlet>`.
+この例では、`Settings`コンポーネントは、ユーザーが選択した内容に基づいて目的のパネルを表示します。子ルートについて気づくユニークな点の1つは、コンポーネントが独自の`<nav>`と`<router-outlet>`を持つことが多いことです。
 
 ```angular-html
 <h1>Settings</h1>
@@ -94,32 +94,32 @@ In this example, the `Settings` component will display the desired panel based o
 <router-outlet />
 ```
 
-A child route is like any other route, in that it needs both a `path` and a `component`. The one difference is that you place child routes in a children array within the parent route.
+子ルートは他のルートと同様に、`path`と`component`の両方が必要です。唯一の違いは、子ルートを親ルート内の`children`配列に配置することです。
 
 ```angular-ts
 const routes: Routes = [
   {
     path: 'settings-component',
-    component: SettingsComponent, // this is the component with the <router-outlet> in the template
+    component: SettingsComponent, // これはテンプレートに<router-outlet>を持つコンポーネントです
     children: [
       {
-        path: 'profile', // child route path
-        component: ProfileComponent, // child route component that the router renders
+        path: 'profile', // 子ルートのパス
+        component: ProfileComponent, // ルーターがレンダリングする子ルートコンポーネント
       },
       {
         path: 'security',
-        component: SecurityComponent, // another child route component that the router renders
+        component: SecurityComponent, // ルーターがレンダリングする別の子ルートコンポーネント
       },
     ],
   },
 ];
 ```
 
-Once both the `routes` and `<router-outlet>` are configured correctly, your application is now using nested routes!
+`routes`と`<router-outlet>`の両方が正しく設定されると、アプリケーションはネストされたルートを使用するようになります！
 
-## Secondary routes with named outlets
+## 名前付きアウトレットによるセカンダリールート {#secondary-routes-with-named-outlets}
 
-Pages may have multiple outlets— you can assign a name to each outlet to specify which content belongs to which outlet.
+ページには複数のアウトレットがある場合があります。各アウトレットに名前を割り当てて、どのコンテンツがどのアウトレットに属するかを指定できます。
 
 ```angular-html
 <app-header />
@@ -129,9 +129,9 @@ Pages may have multiple outlets— you can assign a name to each outlet to speci
 <app-footer />
 ```
 
-Each outlet must have a unique name. The name cannot be set or changed dynamically. By default, the name is `'primary'`.
+各アウトレットは一意の名前を持つ必要があります。名前は動的に設定または変更できません。デフォルトでは、名前は`'primary'`です。
 
-Angular matches the outlet's name to the `outlet` property defined on each route:
+Angularは、各ルートで定義された`outlet`プロパティにアウトレットの名前を一致させます。
 
 ```angular-ts
 {
@@ -141,18 +141,18 @@ Angular matches the outlet's name to the `outlet` property defined on each route
 }
 ```
 
-## Outlet lifecycle events
+## アウトレットのライフサイクルイベント {#outlet-lifecycle-events}
 
-There are four lifecycle events that a router outlet can emit:
+ルーターアウトレットが発行できるライフサイクルイベントは4つあります。
 
-| Event        | Description                                                              |
-| ------------ | ------------------------------------------------------------------------ |
-| `activate`   | When a new component is instantiated                                     |
-| `deactivate` | When a component is destroyed                                            |
-| `attach`     | When the `RouteReuseStrategy` instructs the outlet to attach the subtree |
-| `detach`     | When the `RouteReuseStrategy` instructs the outlet to detach the subtree |
+| イベント       | 説明                                           |
+| ------------ | ---------------------------------------------- |
+| `activate`   | 新しいコンポーネントがインスタンス化されたとき |
+| `deactivate` | コンポーネントが破棄されたとき                 |
+| `attach`     | `RouteReuseStrategy`がサブツリーをアタッチするようアウトレットに指示したとき |
+| `detach`     | `RouteReuseStrategy`がサブツリーをデタッチするようアウトレットに指示したとき |
 
-You can add event listeners with the standard event binding syntax:
+標準のイベントバインディング構文でイベントリスナーを追加できます。
 
 ```angular-html
 <router-outlet
@@ -163,8 +163,8 @@ You can add event listeners with the standard event binding syntax:
 />
 ```
 
-Check out the [API docs for RouterOutlet](/api/router/RouterOutlet?tab=api) if you’d like to learn more.
+詳細については、[RouterOutletのAPIドキュメント](/api/router/RouterOutlet?tab=api)を参照してください。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Learn how to [navigate to routes](/guide/routing/navigate-to-routes) with Angular Router.
+Angularルーターで[ルートへナビゲーションする](/guide/routing/navigate-to-routes)方法を学びましょう。

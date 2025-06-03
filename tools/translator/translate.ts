@@ -30,7 +30,8 @@ export class GeminiTranslator {
 
 - 見出しレベル（"#"）の数を必ず維持する。
   - 例: "# Security" → "# セキュリティ"
-- トップレベル（"<h1>"）ではない見出しを翻訳する場合、元の見出しをlower caseでハイフン結合したアンカーIDとして使用する
+- トップレベル（"<h1>"）以外の見出しに限り、元の見出しをlower caseでハイフン結合したアンカーIDとして使用する
+  - 例: "# Security" → "# セキュリティ"
   - 例: "## How to use Angular" → "## Angularの使い方 {#how-to-use-angular}"
 - 改行やインデントの数を必ず維持する。
 - 英単語の前後にスペースを入れない。

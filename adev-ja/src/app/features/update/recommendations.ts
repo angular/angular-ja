@@ -2492,7 +2492,7 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
-      '`createComponent` API を使用し、最初の `ng-content` にコンテンツを渡さない場合、デフォルトのフォールバックコンテンツのレンダリングを防ぐために、`projectableNode` として `document.createTextNode('')` を指定してください。',
+      '`createComponent` API を使用し、最初の `ng-content` にコンテンツを渡さない場合、デフォルトのフォールバックコンテンツのレンダリングを防ぐために、`projectableNode` として `document.createTextNode(\'\')` を指定してください。',
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,

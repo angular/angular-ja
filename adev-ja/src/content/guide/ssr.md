@@ -1,32 +1,32 @@
-# Server and hybrid rendering
+# サーバーとハイブリッドレンダリング
 
-Angular ships all applications as client-side rendered (CSR) by default. While this approach delivers a initial payload that's lightweight, it introduces trade-offs including slower load times, degraded performance metrics, and higher resource demands since the user's device performs most of the computations. As a result, many applications achieve significant performance improvements by integrating server-side rendering (SSR) into a hybrid rendering strategy.
+Angularはデフォルトですべてのアプリケーションをクライアントサイドレンダリング (CSR) として提供します。このアプローチは軽量な初期ペイロードを提供しますが、ユーザーのデバイスがほとんどの計算をするため、ロード時間の遅延、パフォーマンス指標の低下、リソース要件の増加といったトレードオフを伴います。その結果、多くのアプリケーションはサーバーサイドレンダリング (SSR) をハイブリッドレンダリング戦略に統合することで、大幅なパフォーマンス向上を実現しています。
 
-## What is hybrid rendering?
+## ハイブリッドレンダリングとは？ {#what-is-hybrid-rendering}
 
-Hybrid rendering allows developers to leverage the benefits of server-side rendering (SSR), pre-rendering (also known as "static site generation" or SSG) and client-side rendering (CSR) to optimize your Angular application. It gives you fine-grained control over how your different parts of your app is rendered to give your users the best experience possible.
+ハイブリッドレンダリングにより、開発者はサーバーサイドレンダリング (SSR)、プリレンダリング (「静的サイト生成」またはSSGとも呼ばれる)、およびクライアントサイドレンダリング (CSR) の利点を活用して、Angularアプリケーションを最適化できます。これにより、アプリケーションのさまざまな部分がどのようにレンダリングされるかをきめ細かく制御し、ユーザーに可能な限り最高のユーザー体験を提供できます。
 
-## Setting up hybrid rendering
+## ハイブリッドレンダリングのセットアップ {#setting-up-hybrid-rendering}
 
-You can create a **new** project with hybrid rendering by using the server-side rendering flag (i.e., `--ssr`) with the Angular CLI `ng new` command:
+Angular CLIの `ng new` コマンドでサーバーサイドレンダリングフラグ (つまり、`--ssr`) を使用すると、ハイブリッドレンダリングを有効にした**新しい**プロジェクトを作成できます。
 
 ```shell
 ng new --ssr
 ```
 
-You can also enable hybrid rendering by adding server-side rendering to an existing project with the `ng add` command:
+既存のプロジェクトにサーバーサイドレンダリングを追加して、ハイブリッドレンダリングを有効にできます。
 
 ```shell
 ng add @angular/ssr
 ```
 
-NOTE: By default, Angular prerenders your entire application and generates a server file. To disable this and create a fully static app, set `outputMode` to `static`. To enable SSR, update the server routes to use `RenderMode.Server`. For more details, see [`Server routing`](#server-routing) and [`Generate a fully static application`](#generate-a-fully-static-application).
+NOTE: デフォルトでは、Angularはアプリケーション全体をプリレンダリングし、サーバーファイルを生成します。これを無効にして完全に静的なアプリケーションを作成するには、`outputMode` を `static` に設定します。SSRを有効にするには、サーバーのルートを更新して `RenderMode.Server` を使用します。詳細については、[`サーバールーティング`](#server-routing) および [`完全に静的なアプリケーションを生成する`](#generate-a-fully-static-application) を参照してください。
 
-## Server routing
+## サーバールーティング {#server-routing}
 
-### Configuring server routes
+### サーバールートの設定 {#configuring-server-routes}
 
-You can create a server route config by declaring an array of [`ServerRoute`](api/ssr/ServerRoute 'API reference') objects. This configuration typically lives in a file named `app.routes.server.ts`.
+[`ServerRoute`](api/ssr/ServerRoute 'API reference') オブジェクトの配列を宣言することで、サーバールート設定を作成できます。この設定は通常、`app.routes.server.ts` というファイルに記述されます。
 
 ```typescript
 // app.routes.server.ts
@@ -34,25 +34,25 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
-    path: '', // This renders the "/" route on the client (CSR)
+    path: '', // これはクライアントで "/" ルートをレンダリングします (CSR)
     renderMode: RenderMode.Client,
   },
   {
-    path: 'about', // This page is static, so we prerender it (SSG)
+    path: 'about', // このページは静的なので、プリレンダリングします (SSG)
     renderMode: RenderMode.Prerender,
   },
   {
-    path: 'profile', // This page requires user-specific data, so we use SSR
+    path: 'profile', // このページはユーザー固有のデータを必要とするため、SSRを使用します
     renderMode: RenderMode.Server,
   },
   {
-    path: '**', // All other routes will be rendered on the server (SSR)
+    path: '**', // 他のすべてのルートはサーバーでレンダリングされます (SSR)
     renderMode: RenderMode.Server,
   },
 ];
 ```
 
-You can add this config to your application with [`provideServerRendering`](api/ssr/provideServerRendering 'API reference') using the [`withRoutes`](api/ssr/withRoutes 'API reference') function:
+この設定は、[`withRoutes`](api/ssr/withRoutes 'API reference') 関数を使用して [`provideServerRendering`](api/ssr/provideServerRendering 'API reference') でアプリケーションに追加できます。
 
 ```typescript
 import { provideServerRendering, withRoutes } from '@angular/ssr';
@@ -62,12 +62,12 @@ import { serverRoutes } from './app.routes.server';
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),
-    // ... other providers ...
+    // ... その他のプロバイダー ...
   ]
 };
 ```
 
-When using the [App shell pattern](ecosystem/service-workers/app-shell), you must specify the component to be used as the app shell for client-side rendered routes. To do this, use the [`withAppShell`](api/ssr/withAppShell 'API reference') fetaure:
+[App shellパターン](ecosystem/service-workers/app-shell)を使用する場合、クライアントサイドレンダリングされたルートのApp shellとして使用するコンポーネントを指定する必要があります。これを行うには、[`withAppShell`](api/ssr/withAppShell 'API reference') 機能を使用します。
 
 ```typescript
 import { provideServerRendering, withRoutes, withAppShell } from '@angular/ssr';
@@ -79,66 +79,66 @@ const serverConfig: ApplicationConfig = {
       withRoutes(serverRoutes),
       withAppShell(AppShellComponent),
     ),
-    // ... other providers ...
+    // ... その他のプロバイダー ...
   ]
 };
 ```
 
-### Rendering modes
+### レンダリングモード {#rendering-modes}
 
-The server routing configuration lets you specify how each route in your application should render by setting a [`RenderMode`](api/ssr/RenderMode 'API reference'):
+サーバールーティング設定では、[`RenderMode`](api/ssr/RenderMode 'API reference') を設定することで、アプリケーションの各ルートをどのようにレンダリングするかを指定できます。
 
-| Rendering mode      | Description                                                                                                 |
-| ------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Server (SSR)**    | Renders the application on the server for each request, sending a fully populated HTML page to the browser. |
-| **Client (CSR)**    | Renders the application in the browser. This is the default Angular behavior.                               |
-| **Prerender (SSG)** | Prerenders the application at build time, generating static HTML files for each route.                      |
+| レンダリングモード    | 説明                                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Server (SSR)**    | 各リクエストに対してアプリケーションをサーバーでレンダリングし、完全にデータが投入されたHTMLページをブラウザに送信します。 |
+| **Client (CSR)**    | アプリケーションをブラウザでレンダリングします。これはAngularのデフォルトの動作です。                               |
+| **Prerender (SSG)** | ビルド時にアプリケーションをプリレンダリングし、各ルートの静的HTMLファイルを生成します。                               |
 
-#### Choosing a rendering mode
+#### レンダリングモードの選択 {#choosing-a-rendering-mode}
 
-Each rendering mode has different benefits and drawbacks. You can choose rendering modes based on the specific needs of your application.
+各レンダリングモードには異なる利点と欠点があります。アプリケーションの特定のニーズに基づいてレンダリングモードを選択できます。
 
-##### Client-side rendering
+##### クライアントサイドレンダリング {#client-side-rendering}
 
-Client-side rendering has the simplest development model, as you can write code that assumes it always runs in a web browser. This lets you use a wide range of client-side libraries that also assume they run in a browser.
+クライアントサイドレンダリングは、常にWebブラウザで実行されることを前提としたコードを記述できるため、最もシンプルな開発モデルです。これにより、ブラウザで実行されることを前提とした幅広いクライアントサイドライブラリを使用できます。
 
-Client-side rendering generally has worse performance than other rendering modes, as it must download, parse, and execute your page's JavaScript before the user can see any rendered content. If your page fetches more data from the server as it renders, users also have to wait for those additional requests before they can view the complete content.
+クライアントサイドレンダリングは、ユーザーがレンダリングされたコンテンツを見る前にページのJavaScriptをダウンロード、解析、実行する必要があるため、一般的に他のレンダリングモードよりもパフォーマンスが劣ります。ページがレンダリング中にサーバーからさらにデータを取得する場合、ユーザーは完全なコンテンツを表示する前にそれらの追加リクエストを待つ必要があります。
 
-If your page is indexed by search crawlers, client-side rendering may negatively affect search engine optimization (SEO), as search crawlers have limits to how much JavaScript they execute when indexing a page.
+ページが検索クローラーによってインデックス付けされる場合、検索クローラーはページのインデックス付け時に実行するJavaScriptの量に制限があるため、クライアントサイドレンダリングは検索エンジン最適化 (SEO) に悪影響を与える可能性があります。
 
-When client-side rendering, the server does not need to do any work to render a page beyond serving static JavaScript assets. You may consider this factor if server cost is a concern.
+クライアントサイドレンダリングの場合、サーバーは静的なJavaScriptアセットを配信する以外に、ページをレンダリングするための作業をする必要がありません。サーバーコストが懸念される場合は、この要素を考慮してもよいでしょう。
 
-Applications that support installable, offline experiences with [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) can rely on client-side rendering without needing to communicate with a server.
+Service Workerによるインストール可能でオフラインのユーザー体験をサポートするアプリケーションは、サーバーと通信することなくクライアントサイドレンダリングに依存できます。
 
-##### Server-side rendering
+##### サーバーサイドレンダリング {#server-side-rendering}
 
-Server-side rendering offers faster page loads than client-side rendering. Instead of waiting for JavaScript to download and run, the server directly renders an HTML document upon receiving a request from the browser. The user experiences only the latency necessary for the server to fetch data and render the requested page. This mode also eliminates the need for additional network requests from the browser, as your code can fetch data during rendering on the server.
+サーバーサイドレンダリングは、クライアントサイドレンダリングよりも高速なページロードを提供します。JavaScriptのダウンロードと実行を待つ代わりに、サーバーはブラウザからのリクエストを受信すると、直接HTMLドキュメントをレンダリングします。ユーザーは、サーバーがデータを取得し、要求されたページをレンダリングするために必要な遅延のみを経験します。このモードでは、コードがサーバーでのレンダリング中にデータを取得できるため、ブラウザからの追加のネットワークリクエストも不要になります。
 
-Server-side rendering generally has excellent search engine optimization (SEO), as search crawlers receive a fully rendered HTML document.
+サーバーサイドレンダリングは、検索クローラーが完全にレンダリングされたHTMLドキュメントを受け取るため、一般的に優れた検索エンジン最適化 (SEO) を実現します。
 
-Server-side rendering requires you to author code that does not strictly depend on browser APIs and limits your selection of JavaScript libraries that assume they run in a browser.
+サーバーサイドレンダリングでは、ブラウザAPIに厳密に依存しないコードを作成する必要があり、ブラウザで実行されることを前提としたJavaScriptライブラリの選択が制限されます。
 
-When server-side rendering, your server runs Angular to produce an HTML response for every request which may increase server hosting costs.
+サーバーサイドレンダリングの場合、サーバーはAngularを実行してすべてのリクエストに対してHTMLレスポンスを生成するため、サーバーのホスティングコストが増加する可能性があります。
 
-##### Build-time prerendering
+##### ビルド時プリレンダリング {#build-time-prerendering}
 
-Prerendering offers faster page loads than both client-side rendering and server-side rendering. Because prerendering creates HTML documents at _build-time_, the server can directly respond to requests with the static HTML document without any additional work.
+プリレンダリングは、クライアントサイドレンダリングとサーバーサイドレンダリングの両方よりも高速なページロードを提供します。プリレンダリングは_ビルド時_にHTMLドキュメントを作成するため、サーバーは追加の作業なしに静的なHTMLドキュメントで直接リクエストに応答できます。
 
-Prerendering requires that all information necessary to render a page is available at _build-time_. This means that prerendered pages cannot include any data to the specific user loading the page. Prerendering is primarily useful for pages that are the same for all users of your application.
+プリレンダリングでは、ページをレンダリングするために必要なすべての情報が_ビルド時_に利用可能である必要があります。これは、プリレンダリングされたページに、ページをロードする特定のユーザーに関するデータを含めることができないことを意味します。プリレンダリングは、アプリケーションのすべてのユーザーにとって同じであるページに主に役立ちます。
 
-Because prerendering occurs at build-time, it may add significant time to your production builds. Using [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') to produce a large number of HTML documents may affect the total file size of your deployments, and thus lead to slower deployments.
+プリレンダリングはビルド時に行われるため、本番ビルドにかなりの時間を追加する可能性があります。[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') を使用して多数のHTMLドキュメントを生成すると、デプロイの合計ファイルサイズに影響を与え、デプロイが遅くなる可能性があります。
 
-Prerendering generally has excellent search engine optimization (SEO), as search crawlers receive a fully rendered HTML document.
+プリレンダリングは、検索クローラーが完全にレンダリングされたHTMLドキュメントを受け取るため、一般的に優れた検索エンジン最適化 (SEO) を実現します。
 
-Prerendering requires you to author code that does not strictly depend on browser APIs and limits your selection of JavaScript libraries that assume they run in a browser.
+プリレンダリングでは、ブラウザAPIに厳密に依存しないコードを作成する必要があり、ブラウザで実行されることを前提としたJavaScriptライブラリの選択が制限されます。
 
-Prerendering incurs extremely little overhead per server request, as your server responds with static HTML documents. Static files are also easily cached by Content Delivery Networks (CDNs), browsers, and intermediate caching layers for even faster subsequent page loads. Fully static sites can also be deployed solely through a CDN or static file server, eliminating the need to maintain a custom server runtime for your application. This enhances scalability by offloading work from an application web server, making it particularly beneficial for high-traffic applications.
+プリレンダリングは、サーバーが静的なHTMLドキュメントで応答するため、サーバーリクエストあたりのオーバーヘッドが非常に少なくなります。静的ファイルは、コンテンツデリバリーネットワーク (CDN)、ブラウザ、および中間キャッシュレイヤーによって簡単にキャッシュされ、その後のページロードをさらに高速化できます。完全に静的なサイトは、CDNまたは静的ファイルサーバーのみを介したデプロイもでき、アプリケーション用のカスタムサーバー実行時を維持する必要がなくなります。これにより、アプリケーションWebサーバーからの作業をオフロードすることでスケーラビリティが向上し、トラフィックの多いアプリケーションにとって特に有益です。
 
-NOTE: When using Angular service worker, the first request is server-rendered, but all subsequent requests are handled by the service worker and rendered client-side.
+NOTE: Angular Service Workerを使用する場合、最初のリクエストはサーバーレンダリングされますが、それ以降のすべてのリクエストはService Workerによって処理され、クライアントサイドでレンダリングされます。
 
-### Setting headers and status codes
+### ヘッダーとステータスコードの設定 {#setting-headers-and-status-codes}
 
-You can set custom headers and status codes for individual server routes using the `headers` and `status` properties in the `ServerRoute` configuration.
+`ServerRoute` 設定の `headers` および `status` プロパティを使用して、個々のサーバールートにカスタムヘッダーとステータスコードを設定できます。
 
 ```typescript
 // app.routes.server.ts
@@ -153,33 +153,33 @@ export const serverRoutes: ServerRoute[] = [
     },
     status: 201,
   },
-  // ... other routes
+  // ... その他のルート
 ];
 ```
 
-### Redirects
+### リダイレクト {#redirects}
 
-Angular handles redirects specified by the [`redirectTo`](api/router/Route#redirectTo 'API reference') property in route configurations, differently on the server-side.
+Angularは、ルート設定の [`redirectTo`](api/router/Route#redirectTo 'API reference') プロパティで指定されたリダイレクトを、サーバーサイドでは異なる方法で処理します。
 
-**Server-Side Rendering (SSR)**
-Redirects are performed using standard HTTP redirects (e.g., 301, 302) within the server-side rendering process.
+**サーバーサイドレンダリング (SSR)**
+リダイレクトは、サーバーサイドレンダリングプロセス内で標準的なHTTPリダイレクト (例: 301、302) を使用して実行されます。
 
-**Prerendering (SSG)**
-Redirects are implemented as "soft redirects" using [`<meta http-equiv="refresh">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#refresh) tags in the prerendered HTML.
+**プリレンダリング (SSG)**
+リダイレクトは、プリレンダリングされたHTML内の [`<meta http-equiv="refresh">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#refresh) タグを使用して「ソフトリダイレクト」として実装されます。
 
-### Customizing build-time prerendering (SSG)
+### ビルド時プリレンダリング (SSG) のカスタマイズ {#customizing-build-time-prerendering-ssg}
 
-When using [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference'), you can specify several configuration options to customize the prerendering and serving process.
+[`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') を使用する場合、プリレンダリングと提供プロセスをカスタマイズするためのいくつかの設定オプションを指定できます。
 
-#### Parameterized routes
+#### パラメーター化されたルート {#parameterized-routes}
 
-For each route with [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference'), you can specify a [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') function. This function lets you control which specific parameters produce separate prerendered documents.
+[`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') を持つ各ルートについて、[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') 関数を指定できます。この関数を使用すると、どの特定のパラメーターが個別のプリレンダリングされたドキュメントを生成するかを制御できます。
 
-The [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') function returns a `Promise` that resolves to an array of objects. Each object is a key-value map of route parameter name to value. For example, if you define a route like `post/:id`, `getPrerenderParams ` could return the array `[{id: 123}, {id: 456}]`, and thus render separate documents for `post/123` and `post/456`.
+[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') 関数は、オブジェクトの配列に解決される `Promise` を返します。各オブジェクトは、ルートパラメーター名から値へのキーと値のマップです。たとえば、`post/:id` のようなルートを定義した場合、`getPrerenderParams` は配列 `[{id: 123}, {id: 456}]` を返し、`post/123` と `post/456` の個別のドキュメントをレンダリングできます。
 
-The body of [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') can use Angular's [`inject`](api/core/inject 'API reference') function to inject dependencies and perform any work to determine which routes to prerender. This typically includes making requests to fetch data to construct the array of parameter values.
+[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') の本体は、Angularの [`inject`](api/core/inject 'API reference') 関数を使用して依存性を注入し、どのルートをプリレンダリングするかを決定するための任意の作業ができます。これには通常、パラメーター値の配列を構築するためにデータを取得するリクエストを行うことが含まれます。
 
-You can also use this function with catch-all routes (e.g., `/**`), where the parameter name will be `"**"` and the return value will be the segments of the path, such as `foo/bar`. These can be combined with other parameters (e.g., `/post/:id/**`) to handle more complex route configuration.
+この関数は、キャッチオールルート (例: `/**`) でも使用できます。この場合、パラメーター名は `"**"` となり、戻り値は `foo/bar` のようなパスのセグメントになります。これらは他のパラメーター (例: `/post/:id/**`) と組み合わせて、より複雑なルート設定を処理できます。
 
 ```ts
 // app.routes.server.ts
@@ -191,9 +191,9 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
       const dataService = inject(PostService);
-      const ids = await dataService.getIds(); // Assuming this returns ['1', '2', '3']
+      const ids = await dataService.getIds(); // これは ['1', '2', '3'] を返すと仮定します
 
-      return ids.map(id => ({ id })); // Generates paths like: /post/1, /post/2, /post/3
+      return ids.map(id => ({ id })); // /post/1, /post/2, /post/3 のようなパスを生成します
     },
   },
   {
@@ -203,25 +203,25 @@ export const serverRoutes: ServerRoute[] = [
       return [
         { id: '1', '**': 'foo/3' },
         { id: '2', '**': 'bar/4' },
-      ]; // Generates paths like: /post/1/foo/3, /post/2/bar/4
+      ]; // /post/1/foo/3, /post/2/bar/4 のようなパスを生成します
     },
   },
 ];
 ```
 
-Because [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') exclusively applies to [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference'), this function always runs at _build-time_. `getPrerenderParams` must not rely on any browser-specific or server-specific APIs for data.
+[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') は [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') にのみ適用されるため、この関数は常に_ビルド時_に実行されます。`getPrerenderParams` は、データのためにブラウザ固有またはサーバー固有のAPIに依存してはなりません。
 
-IMPORTANT: When using [`inject`](api/core/inject 'API reference') inside `getPrerenderParams`, please remember that `inject` must be used synchronously. It cannot be invoked within asynchronous callbacks or following any `await` statements. For more information, refer to [`runInInjectionContext`](api/core/runInInjectionContext).
+IMPORTANT: `getPrerenderParams` 内で `inject` を使用する場合、`inject` は同期的に使用する必要があることに注意してください。非同期コールバック内や `await` ステートメントの後に呼び出すことはできません。詳細については、[`runInInjectionContext`](api/core/runInInjectionContext) を参照してください。
 
-#### Fallback strategies
+#### フォールバック戦略 {#fallback-strategies}
 
-When using [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') mode, you can specify a fallback strategy to handle requests for paths that haven't been prerendered.
+[`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') モードを使用する場合、プリレンダリングされていないパスへのリクエストを処理するためのフォールバック戦略を指定できます。
 
-The available fallback strategies are:
+利用可能なフォールバック戦略は次のとおりです。
 
-- **Server:** Falls back to server-side rendering. This is the **default** behavior if no `fallback` property is specified.
-- **Client:** Falls back to client-side rendering.
-- **None:** No fallback. Angular will not handle requests for paths that are not prerendered.
+-   **Server:** サーバーサイドレンダリングにフォールバックします。これは、`fallback` プロパティが指定されていない場合の**デフォルト**の動作です。
+-   **Client:** クライアントサイドレンダリングにフォールバックします。
+-   **None:** フォールバックなし。Angularは、プリレンダリングされていないパスへのリクエストを処理しません。
 
 ```typescript
 // app.routes.server.ts
@@ -231,22 +231,22 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'post/:id',
     renderMode: RenderMode.Prerender,
-    fallback: PrerenderFallback.Client, // Fallback to CSR if not prerendered
+    fallback: PrerenderFallback.Client, // プリレンダリングされていない場合はCSRにフォールバック
     async getPrerenderParams() {
-      // This function returns an array of objects representing prerendered posts at the paths:
-      // `/post/1`, `/post/2`, and `/post/3`.
-      // The path `/post/4` will utilize the fallback behavior if it's requested.
+      // この関数は、/post/1、/post/2、/post/3 のパスで
+      // プリレンダリングされた投稿を表すオブジェクトの配列を返します。
+      // /post/4 のパスがリクエストされた場合、フォールバック動作が利用されます。
       return [{ id: 1 }, { id: 2 }, { id: 3 }];
     },
   },
 ];
 ```
 
-## Authoring server-compatible components
+## サーバー互換コンポーネントの作成 {#authoring-server-compatible-components}
 
-Some common browser APIs and capabilities might not be available on the server. Applications cannot make use of browser-specific global objects like `window`, `document`, `navigator`, or `location` as well as certain properties of `HTMLElement`.
+一部の一般的なブラウザAPIと機能は、サーバーでは利用できない場合があります。アプリケーションは、`window`、`document`、`navigator`、`location` などのブラウザ固有のグローバルオブジェクトや、`HTMLElement` の特定のプロパティを使用できません。
 
-In general, code which relies on browser-specific symbols should only be executed in the browser, not on the server. This can be enforced through the [`afterEveryRender`](api/core/afterEveryRender) and [`afterNextRender`](api/core/afterNextRender) lifecycle hooks. These are only executed on the browser and skipped on the server.
+一般に、ブラウザ固有のシンボルに依存するコードは、サーバーではなくブラウザでのみ実行されるべきです。これは、[`afterEveryRender`](api/core/afterEveryRender) および [`afterNextRender`](api/core/afterNextRender) ライフサイクルフックによって強制できます。これらはブラウザでのみ実行され、サーバーではスキップされます。
 
 ```angular-ts
 import { Component, ViewChild, afterNextRender } from '@angular/core';
@@ -260,20 +260,20 @@ export class MyComponent {
 
   constructor() {
     afterNextRender(() => {
-      // Safe to check `scrollHeight` because this will only run in the browser, not the server.
+      // これはサーバーではなくブラウザでのみ実行されるため、`scrollHeight` のチェックは安全です。
       console.log('content height: ' + this.contentRef.nativeElement.scrollHeight);
     });
   }
 }
 ```
 
-## Accessing Request and Response via DI
+## DIを介したリクエストとレスポンスへのアクセス {#accessing-request-and-response-via-di}
 
-The `@angular/core` package provides several tokens for interacting with the server-side rendering environment. These tokens give you access to crucial information and objects within your Angular application during SSR.
+`@angular/core` パッケージは、サーバーサイドレンダリング環境と対話するためのいくつかのトークンを提供します。これらのトークンにより、SSR中にAngularアプリケーション内で重要な情報とオブジェクトにアクセスできます。
 
-- **[`REQUEST`](api/core/REQUEST 'API reference'):** Provides access to the current request object, which is of type [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) from the Web API. This allows you to access headers, cookies, and other request information.
-- **[`RESPONSE_INIT`](api/core/RESPONSE_INIT 'API reference'):** Provides access to the response initialization options, which is of type [`ResponseInit`](https://developer.mozilla.org/en-US/docs/Web/API/Response/Response#parameters) from the Web API. This allows you to set headers and the status code for the response dynamically. Use this token to set headers or status codes that need to be determined at runtime.
-- **[`REQUEST_CONTEXT`](api/core/REQUEST_CONTEXT 'API reference'):** Provides access to additional context related to the current request. This context can be passed as the second parameter of the [`handle`](api/ssr/AngularAppEngine#handle 'API reference') function. Typically, this is used to provide additional request-related information that is not part of the standard Web API.
+-   **[`REQUEST`](api/core/REQUEST 'API reference'):** Web APIの [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) 型である現在のリクエストオブジェクトへのアクセスを提供します。これにより、ヘッダー、Cookie、その他のリクエスト情報にアクセスできます。
+-   **[`RESPONSE_INIT`](api/core/RESPONSE_INIT 'API reference'):** Web APIの [`ResponseInit`](https://developer.mozilla.org/en-US/docs/Web/API/Response/Response#parameters) 型であるレスポンス初期化オプションへのアクセスを提供します。これにより、レスポンスのヘッダーとステータスコードを動的に設定できます。このトークンを使用して、実行時に決定する必要があるヘッダーまたはステータスコードを設定します。
+-   **[`REQUEST_CONTEXT`](api/core/REQUEST_CONTEXT 'API reference'):** 現在のリクエストに関連する追加のコンテキストへのアクセスを提供します。このコンテキストは、[`handle`](api/ssr/AngularAppEngine#handle 'API reference') 関数の2番目のパラメーターとして渡すことができます。通常、これは標準のWeb APIの一部ではない追加のリクエスト関連情報を提供するために使用されます。
 
 ```angular-ts
 import { inject, REQUEST } from '@angular/core';
@@ -290,20 +290,20 @@ export class MyComponent {
 }
 ```
 
-IMPORTANT: The above tokens will be `null` in the following scenarios:
+IMPORTANT: 上記のトークンは、次のシナリオでは `null` になります。
 
-- During the build processes.
-- When the application is rendered in the browser (CSR).
-- When performing static site generation (SSG).
-- During route extraction in development (at the time of the request).
+-   ビルドプロセス中。
+-   アプリケーションがブラウザでレンダリングされるとき (CSR)。
+-   静的サイト生成 (SSG) を実行するとき。
+-   開発中のルート抽出時 (リクエスト時)。
 
-## Generate a fully static application
+## 完全に静的なアプリケーションを生成する {#generate-a-fully-static-application}
 
-By default, Angular prerenders your entire application and generates a server file for handling requests. This allows your app to serve pre-rendered content to users. However, if you prefer a fully static site without a server, you can opt out of this behavior by setting the `outputMode` to `static` in your `angular.json` configuration file.
+デフォルトでは、Angularはアプリケーション全体をプリレンダリングし、リクエストを処理するためのサーバーファイルを生成します。これにより、アプリケーションはプリレンダリングされたコンテンツをユーザーに提供できます。ただし、サーバーなしで完全に静的なサイトを希望する場合は、`angular.json` 設定ファイルで `outputMode` を `static` に設定することで、この動作を無効にできます。
 
-When `outputMode` is set to `static`, Angular generates pre-rendered HTML files for each route at build time, but it does not generate a server file or require a Node.js server to serve the app. This is useful for deploying to static hosting providers where a backend server is not needed.
+`outputMode` が `static` に設定されている場合、Angularはビルド時に各ルートのプリレンダリングされたHTMLファイルを生成しますが、サーバーファイルを生成したり、アプリケーションを提供するためにNode.jsサーバーを必要としたりしません。これは、バックエンドサーバーが不要な静的ホスティングプロバイダーにデプロイする場合に便利です。
 
-To configure this, update your `angular.json` file as follows:
+これを設定するには、`angular.json` ファイルを次のように更新します。
 
 ```json
 {
@@ -321,11 +321,11 @@ To configure this, update your `angular.json` file as follows:
 }
 ```
 
-## Caching data when using HttpClient
+## HttpClient使用時のデータキャッシュ {#caching-data-when-using-httpclient}
 
-[`HttpClient`](api/common/http/HttpClient) cached outgoing network requests when running on the server. This information is serialized and transferred to the browser as part of the initial HTML sent from the server. In the browser, `HttpClient` checks whether it has data in the cache and if so, reuses it instead of making a new HTTP request during initial application rendering. `HttpClient` stops using the cache once an application becomes [stable](api/core/ApplicationRef#isStable) while running in a browser.
+[`HttpClient`](api/common/http/HttpClient) は、サーバーで実行されているときに送信ネットワークリクエストをキャッシュします。この情報はシリアル化され、サーバーから送信される初期HTMLの一部としてブラウザに転送されます。ブラウザでは、`HttpClient` はキャッシュにデータがあるかどうかを確認し、ある場合は、初期アプリケーションレンダリング中に新しいHTTPリクエストを行う代わりにそれを再利用します。`HttpClient` は、ブラウザで実行中にアプリケーションが[安定](api/core/ApplicationRef#isStable)すると、キャッシュの使用を停止します。
 
-By default, `HttpClient` caches all `HEAD` and `GET` requests which don't contain `Authorization` or `Proxy-Authorization` headers. You can override those settings by using [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) when providing hydration.
+デフォルトでは、`HttpClient` は `Authorization` または `Proxy-Authorization` ヘッダーを含まないすべての `HEAD` および `GET` リクエストをキャッシュします。ハイドレーションを提供する際に [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) を使用して、これらの設定をオーバーライドできます。
 
 ```typescript
 bootstrapApplication(AppComponent, {
@@ -337,11 +337,11 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-## Configuring a server
+## サーバーの設定 {#configuring-a-server}
 
-### Node.js
+### Node.js {#node-js}
 
-The `@angular/ssr/node` extends `@angular/ssr` specifically for Node.js environments. It provides APIs that make it easier to implement server-side rendering within your Node.js application. For a complete list of functions and usage examples, refer to the [`@angular/ssr/node` API reference](api/ssr/node/AngularNodeAppEngine) API reference.
+`@angular/ssr/node` は、Node.js環境向けに `@angular/ssr` を拡張したものです。Node.jsアプリケーション内でサーバーサイドレンダリングを実装しやすくするAPIを提供します。関数と使用例の完全なリストについては、[`@angular/ssr/node` APIリファレンス](api/ssr/node/AngularNodeAppEngine) を参照してください。
 
 ```typescript
 // server.ts
@@ -358,21 +358,21 @@ app.use('*', (req, res, next) => {
       if (response) {
         writeResponseToNodeResponse(response, res);
       } else {
-        next(); // Pass control to the next middleware
+        next(); // 次のミドルウェアに制御を渡す
       }
     })
     .catch(next);
 });
 
 /**
- * The request handler used by the Angular CLI (dev-server and during build).
+ * Angular CLI (開発サーバーおよびビルド時) で使用されるリクエストハンドラー。
  */
 export const reqHandler = createNodeRequestHandler(app);
 ```
 
-### Non-Node.js
+### Node.js以外 {#non-node-js}
 
-The `@angular/ssr` provides essential APIs for server-side rendering your Angular application on platforms other than Node.js. It leverages the standard [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects from the Web API, enabling you to integrate Angular SSR into various server environments. For detailed information and examples, refer to the [`@angular/ssr` API reference](api/ssr/AngularAppEngine).
+`@angular/ssr` は、Node.js以外のプラットフォームでAngularアプリケーションをサーバーサイドレンダリングするための重要なAPIを提供します。Web APIの標準的な [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) および [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) オブジェクトを活用することで、さまざまなサーバー環境にAngular SSRを統合できます。詳細情報と例については、[`@angular/ssr` APIリファレンス](api/ssr/AngularAppEngine) を参照してください。
 
 ```typescript
 // server.ts
@@ -381,7 +381,7 @@ import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 const angularApp = new AngularAppEngine();
 
 /**
- * This is a request handler used by the Angular CLI (dev-server and during build).
+ * これは、Angular CLI (開発サーバーおよびビルド時) で使用されるリクエストハンドラーです。
  */
 export const reqHandler = createRequestHandler(async (req: Request) => {
   const res: Response|null = await angularApp.render(req);

@@ -504,7 +504,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'static query timing',
     action:
-      '`ViewChild`または`ContentChild`を使用する場合、開発者により多くの制御を提供するために、これらのクエリの解決方法を更新しています。結果が設定される前に変更検知が実行されることを指定する必要があります。例: `@ContentChild('foo', {static: false}) foo !: ElementRef;`。`ng update`はクエリを自動的に更新しますが、互換性のためにクエリを`static`にする傾向があります。<a href="https://angular.io/guide/static-query-migration">詳細については、angular.ioを参照してください</a>。',
+      '`ViewChild`または`ContentChild`を使用する場合、開発者により多くの制御を提供するために、これらのクエリの解決方法を更新しています。結果が設定される前に変更検知が実行されることを指定する必要があります。例: `@ContentChild(\'foo\', {static: false}) foo !: ElementRef;`。`ng update`はクエリを自動的に更新しますが、互換性のためにクエリを`static`にする傾向があります。<a href="https://angular.io/guide/static-query-migration">詳細については、angular.ioを参照してください</a>。',
   },
   {
     possibleIn: 800,

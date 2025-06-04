@@ -33,7 +33,7 @@ async function main() {
   const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 
   const translator = new GeminiTranslator(apiKey, model);
-  const translated = await translator.translate(content, prh);
+  const translated = await translator.translate(file, content, prh);
 
   console.log(translated);
   await writeTranslatedContent(file, translated, write);

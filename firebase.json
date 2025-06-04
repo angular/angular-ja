@@ -2,12 +2,7 @@
   "hosting": {
     "public": "build/dist/bin/adev/build/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
+    "trailingSlash": false,
     "headers": [
       {
         "source": "assets/images/tutorials/common/*.jpg",
@@ -23,7 +18,7 @@
         ]
       },
       {
-        "source": "*-[0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z].@(css|js)",
+        "source": "/**/*-[0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z].*",
         "headers": [
           {
             "key": "Cache-Control",
@@ -32,6 +27,33 @@
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "/[0-9a-f][0-9a-f][0-9a-f].[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].js",
+        "headers": [
+          {
+            "key": "Cross-Origin-Embedder-Policy",
+            "value": "require-corp"
+          }
+        ]
+      },
+      {
+        "source": "/@(ngsw-worker.js|ngsw.json)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+            {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public,max-age=300"
           }
         ]
       },
@@ -49,15 +71,6 @@
         ]
       },
       {
-        "source": "/*.js",
-        "headers": [
-          {
-            "key": "Cross-Origin-Embedder-Policy",
-            "value": "require-corp"
-          }
-        ]
-      },
-      {
         "source": "/**",
         "headers": [
           {
@@ -71,7 +84,12 @@
           }
         ]
       }
-    ],
-    "trailingSlash": false
-  }
+    ]
+  },
+  "rewrites": [
+    {
+      "source": "**",
+      "destination": "/index.html"
+    }
+  ]
 }

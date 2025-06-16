@@ -17,7 +17,8 @@
   },
   "packageManager": "yarn@1.22.10",
   "devDependencies": {
-    "@google/genai": "^0.8.0",
+    "@langchain/core": "0.3.58",
+    "@langchain/google-genai": "0.2.12",
     "@types/cli-progress": "^3.11.6",
     "@types/node": "20.14.10",
     "chokidar": "3.6.0",
@@ -25,6 +26,7 @@
     "consola": "3.2.3",
     "execa": "^9.3.0",
     "globby": "14.0.2",
+    "langchain": "0.3.28",
     "rxjs": "7.8.1",
     "sitemap": "8.0.0",
     "textlint": "^14.0.4",

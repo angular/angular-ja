@@ -17,7 +17,6 @@ AI搭載アプリケーションを構築。AIで開発を加速。
 
 NOTE: このページではGoogle AI製品との統合と例を紹介していますが、Genkitのようなツールはモデル非依存であり、独自のモデルを選択できます。多くの場合、これらの例とコードサンプルは他のサードパーティソリューションにも適用できます。
 
-```
 ## はじめに
 AI搭載アプリケーションの構築は、新しく急速に発展している分野です。どこから始め、どの技術を選択するかを決定するのは難しい場合があります。以下のセクションでは、選択できる3つのオプションを提供します。
 
@@ -45,7 +44,7 @@ GenkitとAngularで構築する方法の例を次に示します。
 * [FirebaseとGoogle Cloudでエージェントアプリを構築する（バリスタの例）](https://developers.google.com/solutions/learn/agentic-barista) - FirebaseとGoogle Cloudでエージェントコーヒー注文アプリケーションを構築する方法を学びます。この例では、Firebase AI LogicとGenkitを使用しています。
 
 ### Firebase AI LogicとAngularでAI搭載アプリケーションを構築する {#build-ai-powered-applications-with-firebase-ai-logic-and-angular}
-[Firebase AI Logic](https://firebase.google.com/products/vertex-ai-in-firebase)は、Vertex AI Gemini APIまたはImagen APIとウェブアプリケーションやモバイルアプリケーションから直接安全にやり取りする方法を提供します。これは、アプリケーションがフルスタックまたはクライアントサイド専用のいずれかであるため、Angular開発者にとって魅力的です。クライアントサイド専用アプリケーションを開発している場合、Firebase AI LogicはウェブアプリケーションにAIを組み込むのに適しています。
+[Firebase AI Logic](https://firebase.google.com/products/vertex-ai-in-firebase)は、Vertex AI Gemini APIやImagen APIとウェブアプリケーションやモバイルアプリケーションから直接安全にやり取りする方法を提供します。これは、アプリケーションがフルスタックまたはクライアントサイド専用のいずれかであるため、Angular開発者にとって魅力的です。クライアントサイド専用アプリケーションを開発している場合、Firebase AI LogicはウェブアプリケーションにAIを組み込むのに適しています。
 
 Firebase AI LogicとAngularで構築する方法の例を次に示します。
 * [Firebase AI Logic x Angularスターターキット](https://github.com/angular/examples/tree/main/vertex-ai-firebase-angular-example) - このスターターキットを使用して、タスクを実行できるチャットエージェントを備えたeコマースアプリケーションを構築します。Firebase AI LogicとAngularでの構築経験がない場合は、ここから始めましょう。
@@ -58,7 +57,6 @@ Firebase AI LogicとAngularで構築する方法の例を次に示します。
 * [AIテキストエディターAngularアプリテンプレート](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-text-editor) - このテンプレートを使用して、テキストの洗練、テキストの拡張、テキストの形式化などのAI搭載機能を備えた完全に機能するテキストエディターから始めましょう。これは、HTTP経由でのGemini API呼び出しの経験を積むのに良い出発点です。
 
 * [AIチャットボットアプリテンプレート](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-chatbot) - このテンプレートは、HTTP経由でGemini APIと通信するチャットボットユーザーインターフェースから始まります。
-```
 
 ## AIパターン実践: チャット応答のストリーミング {#ai-patterns-in-action-streaming-chat-responses}
 モデルから応答が受信されるにつれてテキストが表示されるのは、AIを使用するWebアプリケーションで一般的なUIパターンです。この非同期タスクはAngularの`resource` APIで実現できます。`resource`の`stream`プロパティは、時間の経過とともにシグナル値に更新を適用するために使用できる非同期関数を受け入れます。更新されるシグナルは、ストリーミングされるデータを表します。
@@ -135,8 +133,7 @@ APIキーを必要とするモデルAPIへのサーバーサイド接続には�
 
 ### 非決定論的な応答の処理 {#handling-non-deterministic-responses}
 モデルは非決定論的な結果を返す可能性があるため、アプリケーションはその点を考慮して設計する必要があります。アプリケーションの実装で利用できるいくつかの戦略を以下に示します。
-* より決定論的な、またはより非決定論的な応答のために、プロンプトとモデルパラメーター（[温度](https://ai.google.dev/gemini-api/docs/prompting-strategies)など）を調整します。
-[ai.google.dev](https://ai.google.dev/)の[プロンプト戦略セクション](https://ai.google.dev/gemini-api/docs/prompting-strategies)で詳細を確認できます。
+* より決定論的な、またはより非決定論的な応答のために、プロンプトとモデルパラメーター（[温度](https://ai.google.dev/gemini-api/docs/prompting-strategies)など）を調整します。[ai.google.dev](https://ai.google.dev/)の[プロンプト戦略セクション](https://ai.google.dev/gemini-api/docs/prompting-strategies)で詳細を確認できます。
 * ワークフローを進める前に人間が出力を検証する「ヒューマン・イン・ザ・ループ」戦略を使用します。オペレーター（人間または他のモデル）が出力を検証し、重要な決定を確認できるようにアプリケーションワークフローを構築します。
 * ツール（または関数）呼び出しとスキーマ制約を利用して、モデルの応答を事前定義された形式に誘導および制限し、応答の予測可能性を高めます。
 

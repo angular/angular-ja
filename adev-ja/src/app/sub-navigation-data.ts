@@ -619,7 +619,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     label: 'Build with AI',
     children: [
       {
-        label: 'Get Started',
+        label: 'はじめよう',
         path: 'ai',
         contentPath: 'ai/overview',
       },

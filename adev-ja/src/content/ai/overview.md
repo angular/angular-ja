@@ -1,65 +1,67 @@
 <!-- TODO: need an Angular + AI logo -->
-<docs-decorative-header title="Build with AI" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
-Build AI-powered apps. Develop faster with AI.
+<docs-decorative-header title="AIで構築" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
+AI搭載アプリケーションを構築。AIで開発を加速。
 </docs-decorative-header>
 
-Generative AI (GenAI) with large language models (LLMs) enables the creation of sophisticated and engaging application experiences, including personalized content, intelligent recommendations, media generation and comprehension, information summarization, and dynamic functionality.
+生成AI (GenAI)と大規模言語モデル (LLM)は、パーソナライズされたコンテンツ、インテリジェントなレコメンデーション、メディアの生成と理解、情報の要約、動的な機能など、高度で魅力的なアプリケーション体験の作成を可能にします。
 
-Developing features like these would have previously required deep domain expertise and significant engineering effort. However, new products and SDKs are lowering the barrier to entry. Angular is well-suited for integrating AI into your web application as a result of:
+このような機能の開発は、これまで深いドメイン知識と多大なエンジニアリング作業を必要としました。しかし、新しい製品とSDKが参入障壁を下げています。Angularは、以下の理由により、AIをウェブアプリケーションに統合するのに非常に適しています。
 
-* Angular's robust templating APIs enable the creation of dynamic, cleanly composed UIs made from generated content
-* Strong, signal-based architecture designed to dynamically manage data and state
-* Angular integrates seamlessly with AI SDKs and APIs
+* Angularの堅牢なテンプレートAPIにより、生成されたコンテンツから動的で整然と構成されたUIを作成できます
+* データと状態を動的に管理するために設計された、強力なシグナルベースのアーキテクチャ
+* AngularはAI SDKとAPIにシームレスに統合
 
-This guide demonstrates how you can use [Genkit](/ai#build-ai-powered-applications-with-genkit-and-angular), [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic), and the [Gemini API](https://ai.google.dev/) to infuse your Angular apps with AI today. This guide will jumpstart your AI-powered web app development journey by explaining how to begin integrating AI into Angular apps. This guide also shares resources, such as starter kits, example code, and recipes for common workflows, you can use to get up to speed quickly.
+このガイドでは、[Genkit](/ai#build-ai-powered-applications-with-genkit-and-angular)、[Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic)、および[Gemini API](https://ai.google.dev/)を使用して、AngularアプリケーションにAIを組み込む方法を示します。このガイドは、AngularアプリケーションにAIを統合する方法を説明することで、AI搭載ウェブアプリケーション開発の旅を加速させるでしょう。また、このガイドでは、迅速に習得できるスターターキット、サンプルコード、一般的なワークフローのレシピなどのリソースも共有しています。
 
-To get started, you should have a basic understanding of Angular. New to Angular? Try our [essentials guide](/essentials) or our [getting started tutorials](/tutorials).
+始めるには、Angularの基本的な理解が必要です。Angularは初めてですか？[必須ガイド](/essentials)または[入門チュートリアル](/tutorials)をお試しください。
 
-NOTE: While this page features integrations and examples with Google AI products, tools like Genkit are model agnostic and allow you to choose your own model. In many cases, the examples and code samples are applicable to other third-party solutions.
+NOTE: このページではGoogle AI製品との統合と例を紹介していますが、Genkitのようなツールはモデル非依存であり、独自のモデルを選択できます。多くの場合、これらの例とコードサンプルは他のサードパーティソリューションにも適用できます。
 
-## Getting Started
-Building AI-powered applications is a new and rapidly developing field. It can be challenging to decide where to start and which technologies to choose. The following section provides three options to choose from:
+```
+## はじめに
+AI搭載アプリケーションの構築は、新しく急速に発展している分野です。どこから始め、どの技術を選択するかを決定するのは難しい場合があります。以下のセクションでは、選択できる3つのオプションを提供します。
 
-1. *Genkit* gives you the choice of [supported model and interface with a unified API](https://firebase.google.com/docs/genkit) for building full-stack applications. Ideal for applications requiring sophisticated back-end AI logic, such as personalized recommendations.
+1. *Genkit*は、フルスタックアプリケーション構築のために、[サポートされているモデルと統合APIを備えたインターフェース](https://firebase.google.com/docs/genkit)の選択肢を提供します。パーソナライズされたレコメンデーションなど、高度なバックエンドAIロジックを必要とするアプリケーションに最適です。
 
-1. *Firebase AI Logic* provides a secure client-side API for Google's models to build client-side only applications or mobile apps. Best for interactive AI features directly in the browser, such as real-time text analysis or basic chatbots.
+1. *Firebase AI Logic*は、Googleのモデル向けに安全なクライアントサイドAPIを提供し、クライアントサイド専用アプリケーションやモバイルアプリケーションを構築できます。リアルタイムテキスト分析や基本的なチャットボットなど、ブラウザで直接インタラクティブなAI機能を利用するのに最適です。
 
-1. *Gemini API* enables you to build an application that uses the methods and functionality exposed through the API surface directly, best for full-stack applications. Suitable for applications needing direct control over AI models, like custom image generation or deep data processing.
+1. *Gemini API*を使用すると、APIサーフェスを通じて直接公開されるメソッドと機能を使用するアプリケーションを構築でき、フルスタックアプリケーションに最適です。カスタム画像生成やディープデータ処理など、AIモデルを直接制御する必要があるアプリケーションに適しています。
 
-### Build AI-powered applications with Genkit and Angular
-[Genkit](https://firebase.google.com/docs/genkit) is an open-source toolkit designed to help you build AI-powered features in web and mobile apps. It offers a unified interface for integrating AI models from Google, OpenAI, Anthropic, Ollama, and more, so you can explore and choose the best models for your needs. As a server-side solution, your web apps need a supported server environment, such as a node-based server in order to integrate with Genkit. Building a full-stack app using Angular SSR gives you the starting server-side code, for example. 
+### GenkitとAngularでAI搭載アプリケーションを構築する {#build-ai-powered-applications-with-genkit-and-angular}
+[Genkit](https://firebase.google.com/docs/genkit)は、ウェブアプリケーションやモバイルアプリケーションにAI搭載機能を構築するのに役立つように設計されたオープンソースツールキットです。Google、OpenAI、Anthropic、OllamaなどからのAIモデルを統合するための統合インターフェースを提供するため、ニーズに最適なモデルを探索して選択できます。サーバーサイドソリューションであるため、Genkitと統合するには、ウェブアプリケーションにはNode.jsベースのサーバーなどのサポートされているサーバー環境が必要です。たとえば、Angular SSRを使用してフルスタックアプリケーションを構築すると、サーバーサイドの開始コードが得られます。
 
-Here are examples of how to build with Genkit and Angular:
+GenkitとAngularで構築する方法の例を次に示します。
 
-* [Agentic Apps with Genkit and Angular starter-kit](https://github.com/angular/examples/tree/main/genkit-angular-starter-kit)— New to building with AI? Start here with a basic app that features an agentic workflow. Perfect place to start for your first AI building experience.
+* [GenkitとAngularのスターターキットを使用したエージェントアプリ](https://github.com/angular/examples/tree/main/genkit-angular-starter-kit)— AIでの構築は初めてですか？エージェントワークフローを備えた基本的なアプリケーションから始めましょう。初めてのAI構築体験に最適な場所です。
 
-* [Use Genkit in an Angular app](https://firebase.google.com/docs/genkit/angular)— Build a basic application that uses Genkit Flows, Angular and Gemini 2.0 Flash. This step-by-step walkthrough guides you through creating a full-stack Angular application with AI features.
+* [AngularアプリでGenkitを使用する](https://firebase.google.com/docs/genkit/angular)— Genkit Flows、Angular、Gemini 2.0 Flashを使用する基本的なアプリケーションを構築します。このステップバイステップのウォークスルーは、AI機能を備えたフルスタックAngularアプリケーションの作成をガイドします。
 
-* [Dynamic Story Generator app](https://github.com/angular/examples/tree/main/genkit-angular-story-generator)— Learn to build an agentic Angular app powered by Genkit, Gemini and Imagen 3 to dynamically generate a story based on user interaction featuring beautiful image panels to accompany the events that take place. Start here if you'd like to experiment with a more advanced use-case.
+* [動的ストーリー生成アプリ](https://github.com/angular/examples/tree/main/genkit-angular-story-generator)— Genkit、Gemini、Imagen 3を搭載したエージェントAngularアプリケーションを構築し、ユーザーインタラクションに基づいてストーリーを動的に生成し、発生するイベントに付随する美しい画像パネルを特徴とする方法を学びます。より高度なユースケースを試したい場合は、ここから始めましょう。
 
-  This example also has an in-depth video walkthrough of the functionality:
-    * [Watch "Building Agentic Apps with Angular and Genkit live!"](https://youtube.com/live/mx7yZoIa2n4?feature=share)
-    * [Watch "Building Agentic Apps with Angular and Genkit live! PT 2"](https://youtube.com/live/YR6LN5_o3B0?feature=share)
+  この例には、機能の詳細なビデオウォークスルーも含まれています。
+    * [「AngularとGenkitでエージェントアプリを構築するライブ！」を見る](https://youtube.com/live/mx7yZoIa2n4?feature=share)
+    * [「AngularとGenkitでエージェントアプリを構築するライブ！パート2」を見る](https://youtube.com/live/YR6LN5_o3B0?feature=share)
 
-* [Building Agentic apps with Firebase and Google Cloud (Barista Example)](https://developers.google.com/solutions/learn/agentic-barista) - Learn how to build an agentic coffee ordering app with Firebase and Google Cloud. This example uses both Firebase AI Logic and Genkit.
+* [FirebaseとGoogle Cloudでエージェントアプリを構築する（バリスタの例）](https://developers.google.com/solutions/learn/agentic-barista) - FirebaseとGoogle Cloudでエージェントコーヒー注文アプリケーションを構築する方法を学びます。この例では、Firebase AI LogicとGenkitを使用しています。
 
-### Build AI-powered applications with Firebase AI Logic and Angular
-[Firebase AI Logic](https://firebase.google.com/products/vertex-ai-in-firebase) provides a secure way to interact with Vertex AI Gemini API or Imagen API directly from your web and mobile apps. This is compelling for Angular developers since apps can be either full-stack or client-side only. If you are developing a client-side only application, Firebase AI Logic is a good fit for incorporating AI into your web apps.
+### Firebase AI LogicとAngularでAI搭載アプリケーションを構築する {#build-ai-powered-applications-with-firebase-ai-logic-and-angular}
+[Firebase AI Logic](https://firebase.google.com/products/vertex-ai-in-firebase)は、Vertex AI Gemini APIまたはImagen APIとウェブアプリケーションやモバイルアプリケーションから直接安全にやり取りする方法を提供します。これは、アプリケーションがフルスタックまたはクライアントサイド専用のいずれかであるため、Angular開発者にとって魅力的です。クライアントサイド専用アプリケーションを開発している場合、Firebase AI LogicはウェブアプリケーションにAIを組み込むのに適しています。
 
-Here is an example of how to build with Firebase AI Logic and Angular:
-* [Firebase AI Logic x Angular Starter Kit](https://github.com/angular/examples/tree/main/vertex-ai-firebase-angular-example) - Use this starter-kit to build an e-commerce application with a chat agent that can perform tasks. Start here if you do not have experience building with Firebase AI Logic and Angular.
+Firebase AI LogicとAngularで構築する方法の例を次に示します。
+* [Firebase AI Logic x Angularスターターキット](https://github.com/angular/examples/tree/main/vertex-ai-firebase-angular-example) - このスターターキットを使用して、タスクを実行できるチャットエージェントを備えたeコマースアプリケーションを構築します。Firebase AI LogicとAngularでの構築経験がない場合は、ここから始めましょう。
 
-  This example includes an [in-depth video walkthrough explaining the functionality and demonstrates how to add new features](https://youtube.com/live/4vfDz2al_BI).
+  この例には、[機能の説明と新機能の追加方法を示す詳細なビデオウォークスルー](https://youtube.com/live/4vfDz2al_BI)が含まれています。
 
-### Build AI-powered applications with Gemini API and Angular
-The [Gemini API](https://ai.google.dev/gemini-api/docs) provides access to state-of-the-art models from Google that supports audio, images, video, and text input. The models that are optimized for specific use cases, [learn more on the Gemini API documentation site](https://ai.google.dev/gemini-api/docs/models).
+### Gemini APIとAngularでAI搭載アプリケーションを構築する {#build-ai-powered-applications-with-gemini-api-and-angular}
+[Gemini API](https://ai.google.dev/gemini-api/docs)は、音声、画像、動画、テキスト入力をサポートするGoogleの最先端モデルへのアクセスを提供します。特定のユースケースに最適化されたモデルについては、[Gemini APIドキュメントサイトで詳細を確認してください](https://ai.google.dev/gemini-api/docs/models)。
 
-* [AI Text Editor Angular app template](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-text-editor) - Use this template to start with a fully functioning text editor with AI-powered features like refining text, expanding text and formalizing text. This is a good starting point to gain experience with calling the Gemini API via HTTP.
+* [AIテキストエディターAngularアプリテンプレート](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-text-editor) - このテンプレートを使用して、テキストの洗練、テキストの拡張、テキストの形式化などのAI搭載機能を備えた完全に機能するテキストエディターから始めましょう。これは、HTTP経由でのGemini API呼び出しの経験を積むのに良い出発点です。
 
-* [AI Chatbot app template](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-chatbot) - This template starts with a chatbot user interface that communicates with the Gemini API via HTTP. 
+* [AIチャットボットアプリテンプレート](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-chatbot) - このテンプレートは、HTTP経由でGemini APIと通信するチャットボットユーザーインターフェースから始まります。
+```
 
-## AI patterns in action: Streaming chat responses
-Having text appear as the response is received from the model is a common UI pattern for web apps using AI. You can achieve this asynchronous task with Angular's `resource` API. The `stream` property of `resource` accepts an asynchronous function you can use to apply updates to a signal value over time. The signal being updated represents the data being streamed.
+## AIパターン実践: チャット応答のストリーミング {#ai-patterns-in-action-streaming-chat-responses}
+モデルから応答が受信されるにつれてテキストが表示されるのは、AIを使用するWebアプリケーションで一般的なUIパターンです。この非同期タスクはAngularの`resource` APIで実現できます。`resource`の`stream`プロパティは、時間の経過とともにシグナル値に更新を適用するために使用できる非同期関数を受け入れます。更新されるシグナルは、ストリーミングされるデータを表します。
 
 ```ts
 characters = resource({
@@ -89,13 +91,13 @@ characters = resource({
 
 ```
 
-The `characters` member is updated asynchronously and can be displayed in the template.
+`characters`メンバーは非同期で更新され、テンプレートに表示できます。
 
 ```html
 <p>{{ characters.value() }}</p>
 ```
 
-On the server side, in `server.ts` for example, the defined endpoint sends the data to be streamed to the client. The following code uses the Gemini API but this technique is applicable to other tools and frameworks that support streaming responses from LLMs:
+サーバー側では、例えば`server.ts`で、定義されたエンドポイントがクライアントにストリーミングされるデータを送信します。以下のコードはGemini APIを使用していますが、この手法はLLMからのストリーミング応答をサポートする他のツールやフレームワークにも適用可能です。
 
 ```ts
  app.get("/api/stream-response", async (req, res) => {
@@ -110,36 +112,37 @@ On the server side, in `server.ts` for example, the defined endpoint sends the d
  });
 
 ```
-This example connects to the Gemini API but other APIs that support streaming responses can be used here as well. [You can find the complete example on the Angular Github](https://github.com/angular/examples/tree/main/streaming-example).
+この例はGemini APIに接続していますが、ストリーミング応答をサポートする他のAPIもここで使用できます。[完全な例はAngularのGithubで見つけることができます](https://github.com/angular/examples/tree/main/streaming-example)。
 
-## Best Practices
-### Connecting to model providers and keeping your API Credentials Secure
-When connecting to model providers, it is important to keep your API secrets safe. *Never put your API key in a file that ships to the client, such as `environments.ts`*.
+## ベストプラクティス
+### モデルプロバイダーへの接続とAPI認証情報の保護 {#connecting-to-model-providers-and-keeping-your-api-credentials-secure}
+モデルプロバイダーに接続する際は、APIシークレットを安全に保つことが重要です。*APIキーを`environments.ts`のようなクライアントに配布されるファイルに決して含めないでください*。
 
-Your application's architecture determines which AI APIs and tools to choose. Specifically, choose based on whether or not your application is client-side or server-side. Tools such as Firebase AI Logic provide a secure connection to the model APIs for client-side code. If you want to use a different API than Firerbase AI Logic or prefer to use a different model provider, consider creating a proxy-server or even [Cloud Functions for Firebase](https://firebase.google.com/docs/functions) to serve as a proxy and not expose your API keys.
+アプリケーションのアーキテクチャによって、選択するAI APIとツールが決まります。具体的には、アプリケーションがクライアントサイドかサーバーサイドかに基づいて選択します。Firebase AI Logicのようなツールは、クライアントサイドのコードに対してモデルAPIへの安全な接続を提供します。Firebase AI Logic以外のAPIを使用したい場合や、別のモデルプロバイダーを使用したい場合は、プロキシサーバー、あるいは[Cloud Functions for Firebase](https://firebase.google.com/docs/functions)をプロキシとして使用し、APIキーを公開しないことを検討してください。
 
-For an example of connecting using a client-side app, see the code:  [Firebase AI Logic Angular example repository](https://github.com/angular/examples/tree/main/vertex-ai-firebase-angular-example).
+クライアントサイドアプリケーションを使用した接続の例については、コード: [Firebase AI Logic Angular example repository](https://github.com/angular/examples/tree/main/vertex-ai-firebase-angular-example)を参照してください。
 
-For server-side connections to model APIs that require API keys, prefer using a secrets manager or environment variable, not `environments.ts`. You should follow standard best practices for securing API keys and credentials. Firebase now provides a new secrets manager with the latest updates from Firebase App Hosting. To learn more, [check out the official documentation](https://firebase.google.com/docs/app-hosting/configure).
+APIキーを必要とするモデルAPIへのサーバーサイド接続には、`environments.ts`ではなく、シークレットマネージャーまたは環境変数を使用することを推奨します。APIキーと認証情報を保護するための標準的なベストプラクティスに従う必要があります。Firebaseは、Firebase App Hostingの最新アップデートにより、新しいシークレットマネージャーを提供するようになりました。詳細については、[公式ドキュメントを確認してください](https://firebase.google.com/docs/app-hosting/configure)。
 
-For a server-side connection example in a full-stack application, see the code: [Angular AI Example (Genkit and Angular Story Generator) repository](https://github.com/angular/examples/tree/main/genkit-angular-story-generator).
+フルスタックアプリケーションにおけるサーバーサイド接続の例については、コード: [Angular AI Example (Genkit and Angular Story Generator) repository](https://github.com/angular/examples/tree/main/genkit-angular-story-generator)を参照してください。
 
-### Use Tool Calling to enhance apps
-If you want to build agentic workflows, where agents are able to act and use tools to solve problems based on prompts use "tool calling". Tool calling, also known as function calling, is a way to provide LLMs the ability to make requests back to the application that called it. As a developer, you define which tools are available and you are in control of how or when the tools are called.
+### ツール呼び出しを使用してアプリケーションを強化する {#use-tool-calling-to-enhance-apps}
+エージェントがプロンプトに基づいて問題を解決するために行動し、ツールを使用できるエージェントワークフローを構築したい場合は、「ツール呼び出し」を使用してください。ツール呼び出し（関数呼び出しとも呼ばれる）は、LLMにそれを呼び出したアプリケーションへリクエストを返す機能を提供する方法です。開発者として、どのツールが利用可能かを定義し、ツールがどのように、いつ呼び出されるかを制御します。
 
-Tool calling further enhances your web apps by expanding your AI integration further than a question and answer style chat bot. In fact, you can empower your model to request function calls using the function calling API of your model provider. The available tools can be used to perform more complex actions within the context of your application. 
+ツール呼び出しは、AI統合を質疑応答の形式のチャットボットよりもさらに拡張することで、ウェブアプリケーションをさらに強化します。実際、モデルプロバイダーの関数呼び出しAPIを使用して、モデルに関数呼び出しをリクエストさせることができます。利用可能なツールは、アプリケーションのコンテキスト内でより複雑なアクションを実行するために使用できます。
 
-In the [e-commerce example](https://github.com/angular/examples/blob/main/vertex-ai-firebase-angular-example/src/app/ai.service.ts#L88) of the [Angular examples repository](https://github.com/angular/examples), the LLM requests to make calls to functions for inventory in order to gain the necessary context to perform more complex tasks such as calculating how much a group of items in the store will cost. The scope of the available API is up to you as a developer just as is whether or not to call a function requested by the LLM. You remain in control of the flow of execution. You can expose specific functions of a service for example but not all functions of that service.
+[Angular examples repository](https://github.com/angular/examples)の[eコマースの例](https://github.com/angular/examples/blob/main/vertex-ai-firebase-angular-example/src/app/ai.service.ts#L88)では、LLMは、店舗内の商品のグループがいくらになるかを計算するなどのより複雑なタスクを実行するために必要なコンテキストを得るために、在庫に関する関数呼び出しをリクエストします。利用可能なAPIの範囲は、LLMによってリクエストされた関数を呼び出すかどうかも含め、開発者であるあなた次第です。実行フローの制御はあなたが保持します。例えば、サービスの一部の関数は公開できますが、そのサービスのすべての関数を公開する必要はありません。
 
-### Handling non-deterministic responses
-Because models can return non-deterministic results, your applications should be designed with that in mind. Here are a few strategies that you can use in your application implementation:
-* Adjust prompts and model parameters (such as [temperature](https://ai.google.dev/gemini-api/docs/prompting-strategies)) for more or less deterministic responses. You can [find out more in the prompting strategies section](https://ai.google.dev/gemini-api/docs/prompting-strategies) of [ai.google.dev](https://ai.google.dev/).
-* Use the "human in the loop" strategy where a human verifies outputs before proceeding in a workflow. Build your application workflows to allow operators (humans or other models) to verify outputs and confirm key decisions.
-* Employ tool (or function) calling and schema constraints to guide and restrict model responses to predefined formats, increasing response predictability.
+### 非決定論的な応答の処理 {#handling-non-deterministic-responses}
+モデルは非決定論的な結果を返す可能性があるため、アプリケーションはその点を考慮して設計する必要があります。アプリケーションの実装で利用できるいくつかの戦略を以下に示します。
+* より決定論的な、またはより非決定論的な応答のために、プロンプトとモデルパラメーター（[温度](https://ai.google.dev/gemini-api/docs/prompting-strategies)など）を調整します。
+[ai.google.dev](https://ai.google.dev/)の[プロンプト戦略セクション](https://ai.google.dev/gemini-api/docs/prompting-strategies)で詳細を確認できます。
+* ワークフローを進める前に人間が出力を検証する「ヒューマン・イン・ザ・ループ」戦略を使用します。オペレーター（人間または他のモデル）が出力を検証し、重要な決定を確認できるようにアプリケーションワークフローを構築します。
+* ツール（または関数）呼び出しとスキーマ制約を利用して、モデルの応答を事前定義された形式に誘導および制限し、応答の予測可能性を高めます。
 
-Even considering these strategies and techniques, sensible fallbacks should be incorporated in your application design. Follow existing standards of application resiliency. For example, it is not acceptable for an application to crash if a resource or API is not available. In that scenario, an error message is displayed to the user and, if applicable, options for next steps are also displayed. Building AI-powered applications requires the same consideration. Confirm that the response is aligned with the expected output and provide a "safe landing" in case it is not aligned by way of [graceful degradation](https://developer.mozilla.org/en-US/docs/Glossary/Graceful_degradation). This also applies to API outages for LLM providers.
+これらの戦略や技術を考慮しても、アプリケーション設計には適切なフォールバックを組み込む必要があります。アプリケーションの回復性に関する既存の標準に従ってください。例えば、リソースやAPIが利用できない場合にアプリケーションがクラッシュすることは許容されません。そのシナリオでは、エラーメッセージがユーザーに表示され、該当する場合は次のステップのオプションも表示されます。AIを活用したアプリケーションを構築する場合も、同様の考慮が必要です。応答が期待される出力と一致していることを確認し、一致しない場合は[グレースフルデグラデーション](https://developer.mozilla.org/en-US/docs/Glossary/Graceful_degradation)によって「安全な着地」を提供します。これは、LLMプロバイダーのAPI停止にも適用されます。
 
-Consider this example: The LLM provider is not responding. A potential strategy to handle the outage is:
-* Save the response from the user to used in a retry scenario (now or at a later time)
-* Alert the user to the outage with an appropriate message that doesn't reveal sensitive information
-* Resume the conversation at a later time once the services are available again.
+この例を考えてみましょう: LLMプロバイダーが応答していません。停止を処理するための潜在的な戦略は次のとおりです。
+* ユーザーからの応答を、再試行シナリオ（今すぐまたは後で）で使用するために保存します。
+* 機密情報を開示しない適切なメッセージで、ユーザーに停止を警告します。
+* サービスが再度利用できるようになったら、後で会話を再開します。

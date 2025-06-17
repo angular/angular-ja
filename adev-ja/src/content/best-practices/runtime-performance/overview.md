@@ -1,13 +1,13 @@
-# Runtime performance optimization
+# ランタイムパフォーマンスの最適化
 
-Fast rendering is critical for Angular and we've built the framework with a lot of optimizations in mind to help you develop performant apps. To better understand the performance of your app we offer [Angular DevTools](tools/devtools) and a [video guide](https://www.youtube.com/watch?v=FjyX_hkscII) on how to use Chrome DevTools for profiling. In this section we cover the most common performance optimization techniques.
+高速なレンダリングはAngularにとって不可欠であり、パフォーマンスの高いアプリケーションを開発できるよう、多くの最適化を念頭に置いてフレームワークを構築しました。アプリケーションのパフォーマンスをよりよく理解するために、[Angular DevTools](tools/devtools)と、Chrome DevToolsをプロファイリングに利用する方法についての[ビデオガイド](https://www.youtube.com/watch?v=FjyX_hkscII)を提供しています。このセクションでは、最も一般的なパフォーマンス最適化手法について説明します。
 
-**Change detection** is the process through which Angular checks to see whether your application state has changed, and if any DOM needs to be updated. At a high level, Angular walks your components from top to bottom, looking for changes. Angular runs its change detection mechanism periodically so that changes to the data model are reflected in an application’s view. Change detection can be triggered either manually or through an asynchronous event (for example, a user interaction or an XMLHttpRequest completion).
+**変更検知**は、Angularがアプリケーションの状態が変更されたか、およびDOMを更新する必要があるかを確認するプロセスです。大まかに言うと、Angularはコンポーネントを上から下へ辿り、変更を探します。Angularは変更検知メカニズムを定期的に実行し、データモデルへの変更がアプリケーションのビューに反映されるようにします。変更検知は、手動で、または非同期イベント（例えば、ユーザー操作やXMLHttpRequestの完了など）を介してトリガーできます。
 
-Change detection is highly optimized and performant, but it can still cause slowdowns if the application runs it too frequently.
+変更検知は高度に最適化されており、パフォーマンスが高いですが、アプリケーションが頻繁に実行しすぎると、依然として速度低下を引き起こす可能性があります。
 
-In this guide, you’ll learn how to control and optimize the change detection mechanism by skipping parts of your application and running change detection only when necessary.
+このガイドでは、アプリケーションの一部をスキップし、必要な場合にのみ変更検知を実行することで、変更検知メカニズムを制御および最適化する方法を学びます。
 
-Watch this video if you prefer to learn more about performance optimizations in a media format:
+メディア形式でパフォーマンス最適化について詳しく学びたい場合は、このビデオをご覧ください。
 
 <docs-video src="https://www.youtube.com/embed/f8sA-i6gkGQ"/>

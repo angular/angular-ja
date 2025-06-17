@@ -26,7 +26,8 @@ export async function createTranslationAgent(input: {
   const translator = new ChatGoogleGenerativeAI({
     apiKey: googleApiKey,
     model: translationModelName ?? defaultGeminiModel,
-    temperature: 0.5, // 翻訳の一貫性を重視
+    temperature: 0.2, // 翻訳の一貫性を重視
+    cache: false,
   });
   const translatorPrompt = PromptTemplate.fromTemplate(
     translatorPromptTemplate
@@ -37,6 +38,7 @@ export async function createTranslationAgent(input: {
     apiKey: googleApiKey,
     model: proofreaderModelName ?? defaultGeminiModel,
     temperature: 0.8, // エラー修正への柔軟性を持たせる
+    cache: false,
   });
   const proofreaderPrompt = PromptTemplate.fromTemplate(
     proofreaderPromptTemplate
@@ -90,6 +92,7 @@ const translatorPromptTemplate =
 
 ## 重要な注意事項
 
+- **テキスト全体をコードブロックとしてラップしないでください。**
 - **マークダウンの構造を絶対に変更しないでください**
 - **行数を絶対に変更しないでください** - 入力と出力の行数は必ず同じにしてください
 - **コードブロック内の内容は翻訳しないでください**
@@ -112,13 +115,11 @@ const translatorPromptTemplate =
   - bad: "Angular の使い方"
   - good: "Angularの使い方"
 
-翻訳されたテキストのみを返してください。他の説明や追加のテキストは含めないでください。テキスト全体をコードブロックとしてラップしないでください。
+翻訳されたテキストのみを返してください。他の説明や追加のテキストは含めないでください。
 
 ## 翻訳対象テキスト
 
-===
 {text}
-===
 ` as const;
 
 const proofreaderPromptTemplate =
@@ -137,7 +138,7 @@ const proofreaderPromptTemplate =
 9. **インデントやスペースを保持してください**
 10. **指摘されたエラーのみを修正してください**
 
-修正されたテキストのみを返してください。他の説明や追加のテキストは含めないでください。テキスト全体をコードブロックとしてラップしないでください。
+修正されたテキストのみを返してください。他の説明や追加のテキストは含めないでください。
 
 ## 校正エラー
 
@@ -145,7 +146,5 @@ const proofreaderPromptTemplate =
 
 ## 修正対象テキスト (\`temp.md\`)
 
-===
 {text}
-===
 ` as const;

@@ -1,62 +1,62 @@
-# Adding harness support for additional testing environments
+# テスト環境にハーネスサポートを追加する
 
-## Before you start
+## 始める前に {#before-you-start}
 
-TIP: This guide assumes you've already read the [component harnesses overview guide](guide/testing/component-harnesses-overview). Read that first if you're new to using component harnesses.
+TIP: このガイドは、すでに[コンポーネントハーネスの概要ガイド](guide/testing/component-harnesses-overview)を読んでいることを前提としています。コンポーネントハーネスの使用が初めての場合は、まずそちらをお読みください。
 
-### When does adding support for a test environment make sense?
+### テスト環境のサポートを追加するのはどのような場合ですか？ {#when-does-adding-support-for-a-test-environment-make-sense}
 
-To use component harnesses in the following environments, you can use Angular CDK's two built-in environments:
+以下の環境でコンポーネントハーネスを使用するには、Angular CDKの2つの組み込み環境を使用できます。
 
-- Unit tests
-- WebDriver end-to-end tests
+- 単体テスト
+- WebDriverエンドツーエンドテスト
 
-To use a supported testing environment, read the [Creating harnesses for your components guide](guide/testing/creating-component-harnesses).
+サポートされているテスト環境を使用するには、[コンポーネントのハーネスを作成するガイド](guide/testing/creating-component-harnesses)をお読みください。
 
-Otherwise, to add support for other environments, you need to define how to interact with a DOM element and how DOM interactions work in your environment. Continue reading to learn more.
+それ以外の場合、他の環境のサポートを追加するには、DOM要素との対話方法と、その環境でDOMの対話がどのように機能するかを定義する必要があります。詳細については、引き続きお読みください。
 
-### CDK Installation
+### CDKのインストール {#cdk-installation}
 
-The [Component Dev Kit (CDK)](https://material.angular.dev/cdk/categories) is a set of behavior primitives for building components. To use the component harnesses, first install `@angular/cdk` from npm. You can do this from your terminal using the Angular CLI:
+[Component Dev Kit (CDK)](https://material.angular.dev/cdk/categories)は、コンポーネントを構築するための動作プリミティブのセットです。コンポーネントハーネスを使用するには、まずnpmから`@angular/cdk`をインストールします。これは、Angular CLIを使用してターミナルから実行できます。
 
 <docs-code language="shell">
   ng add @angular/cdk
 </docs-code>
 
-## Creating a `TestElement` implementation
+TestElement実装の作成 {#creating-a-testelement-implementation}
 
-Every test environment must define a `TestElement` implementation. The `TestElement` interface serves as an environment-agnostic representation of a DOM element. It enables harnesses to interact with DOM elements regardless of the underlying environment. Because some environments don't support interacting with DOM elements synchronously (e.g. WebDriver), all `TestElement` methods are asynchronous, returning a `Promise` with the result of the operation.
+すべてのテスト環境は`TestElement`実装を定義する必要があります。`TestElement`インターフェースは、DOM要素の環境に依存しない表現の役割を果たします。これにより、ハーネスは基盤となる環境に関係なくDOM要素と対話できます。一部の環境ではDOM要素との同期的な対話がサポートされていないため（例: WebDriver）、すべての`TestElement`メソッドは非同期であり、操作の結果を`Promise`で返します。
 
-`TestElement` offers a number of methods to interact with the underlying DOM such as `blur()`, `click()`, `getAttribute()`, and more. See the [TestElement API reference page](/api/cdk/testing/TestElement) for the full list of methods.
+`TestElement`は、`blur()`、`click()`、`getAttribute()`など、基盤であるDOMと対話するための多数のメソッドを提供します。メソッドの完全なリストについては、[TestElement APIリファレンスページ](/api/cdk/testing/TestElement)を参照してください。
 
-The `TestElement` interface consists largely of methods that resemble methods available on `HTMLElement`. Similar methods exist in most test environments, which makes implementing the methods fairly straightforward. However, one important difference to note when implementing the `sendKeys` method, is that the key codes in the `TestKey` enum likely differ from the key codes used in the test environment. Environment authors should maintain a mapping from `TestKey` codes to the codes used in the particular testing environment.
+`TestElement`インターフェースは、主に`HTMLElement`で利用可能なメソッドに似たメソッドで構成されています。ほとんどのテスト環境には同様のメソッドが存在するため、それらのメソッドの実装は非常に簡単です。ただし、`sendKeys`メソッドを実装する際に注意すべき重要な違いは、`TestKey` enumのキーコードがテスト環境で使用されるキーコードと異なる可能性があることです。環境の作成者は、`TestKey`コードから特定のテスト環境で使用されるコードへのマッピングを維持する必要があります。
 
-The [UnitTestElement](/api/cdk/testing/testbed/UnitTestElement) and [SeleniumWebDriverElement](/api/cdk/testing/selenium-webdriver/SeleniumWebDriverElement) implementations in Angular CDK serve as good examples of implementations of this interface.
+Angular CDKの[UnitTestElement](/api/cdk/testing/testbed/UnitTestElement)と[SeleniumWebDriverElement](/api/cdk/testing/selenium-webdriver/SeleniumWebDriverElement)の実装は、このインターフェースの実装の良い例として機能します。
 
-## Creating a `HarnessEnvironment` implementation
+## `HarnessEnvironment`の実装を作成する {#creating-a-harnessenvironment-implementation}
 
-Test authors use `HarnessEnvironment` to create component harness instances for use in tests. `HarnessEnvironment` is an abstract class that must be extended to create a concrete subclass for the new environment. When supporting a new test environment, create a `HarnessEnvironment` subclass that adds concrete implementations for all abstract members.
+テスト作成者は、テストで使用するコンポーネントハーネスインスタンスを作成するために`HarnessEnvironment`を使用します。`HarnessEnvironment`は、新しい環境のための具象サブクラスを作成するために拡張されなければならない抽象クラスです。新しいテスト環境をサポートする場合、すべての抽象メンバーに具象実装を追加する`HarnessEnvironment`サブクラスを作成します。
 
-`HarnessEnvironment` has a generic type parameter: `HarnessEnvironment<E>`. This parameter, `E`, represents the raw element type of the environment. For example, this parameter is Element for unit test environments.
+`HarnessEnvironment`にはジェネリック型パラメータ`HarnessEnvironment<E>`があります。このパラメータ`E`は、環境の生要素型を表します。例えば、このパラメータは単体テスト環境では`Element`です。
 
-The following are the abstract methods that must be implemented:
+以下は、実装する必要がある抽象メソッドです。
 
 | Method                                                       | Description                                                                                                                                                          |
 | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `abstract getDocumentRoot(): E`                              | Gets the root element for the environment (e.g. `document.body`).                                                                                                    |
-| `abstract createTestElement(element: E): TestElement`        | Creates a `TestElement` for the given raw element.                                                                                                                   |
-| `abstract createEnvironment(element: E): HarnessEnvironment` | Creates a `HarnessEnvironment` rooted at the given raw element.                                                                                                      |
-| `abstract getAllRawElements(selector: string): Promise<E[]>` | Gets all of the raw elements under the root element of the environment matching the given selector.                                                                  |
-| `abstract forceStabilize(): Promise<void>`                   | Gets a `Promise` that resolves when the `NgZone` is stable. Additionally, if applicable, tells `NgZone` to stabilize (e.g. calling `flush()` in a `fakeAsync` test). |
-| `abstract waitForTasksOutsideAngular(): Promise<void>`       | Gets a `Promise` that resolves when the parent zone of `NgZone` is stable.                                                                                           |
+| `abstract getDocumentRoot(): E`                              | 環境のルート要素（例: `document.body`）を取得します。                                                                                                    |
+| `abstract createTestElement(element: E): TestElement`        | 指定された生要素の`TestElement`を作成します。                                                                                                                   |
+| `abstract createEnvironment(element: E): HarnessEnvironment` | 指定された生要素をルートとする`HarnessEnvironment`を作成します。                                                                                                      |
+| `abstract getAllRawElements(selector: string): Promise<E[]>` | 環境のルート要素の下にある、指定されたセレクターに一致するすべての生要素を取得します。                                                                  |
+| `abstract forceStabilize(): Promise<void>`                   | `NgZone`が安定したときに解決する`Promise`を取得します。さらに、該当する場合、`NgZone`に安定化を指示します（例: `fakeAsync`テストで`flush()`を呼び出す）。 |
+| `abstract waitForTasksOutsideAngular(): Promise<void>`       | `NgZone`の親ゾーンが安定したときに解決する`Promise`を取得します。                                                                                           |
 
-In addition to implementing the missing methods, this class should provide a way for test authors to get `ComponentHarness` instances. You should define a protected constructor and provide a static method called `loader` that returns a `HarnessLoader` instance. This allows test authors to write code like: `SomeHarnessEnvironment.loader().getHarness(...)`. Depending on the needs of the particular environment, the class may provide several different static methods or require arguments to be passed. (e.g. the `loader` method on `TestbedHarnessEnvironment` takes a `ComponentFixture`, and the class provides additional static methods called `documentRootLoader` and `harnessForFixture`).
+欠落しているメソッドを実装することに加えて、このクラスはテスト作成者が`ComponentHarness`インスタンスを取得する方法を提供する必要があります。保護されたコンストラクターを定義し、`HarnessLoader`インスタンスを返す`loader`という静的メソッドを提供する必要があります。これにより、テスト作成者は`SomeHarnessEnvironment.loader().getHarness(...)`のようなコードを記述できます。特定の環境のニーズに応じて、クラスはいくつかの異なる静的メソッドを提供したり、引数を渡すことを要求したりする場合があります。（例: `TestbedHarnessEnvironment`の`loader`メソッドは`ComponentFixture`を取り、クラスは`documentRootLoader`と`harnessForFixture`という追加の静的メソッドを提供します）。
 
-The [`TestbedHarnessEnvironment`](/api/cdk/testing/testbed/TestbedHarnessEnvironment) and [SeleniumWebDriverHarnessEnvironment](/api/cdk/testing/selenium-webdriver/SeleniumWebDriverHarnessEnvironment) implementations in Angular CDK serve as good examples of implementations of this interface.
+Angular CDKの[`TestbedHarnessEnvironment`](/api/cdk/testing/testbed/TestbedHarnessEnvironment)と[SeleniumWebDriverHarnessEnvironment](/api/cdk/testing/selenium-webdriver/SeleniumWebDriverHarnessEnvironment)の実装は、このインターフェースの実装の良い例として役立ちます。
 
-## Handling auto change detection
+## 自動での変更検知のハンドリング {#handling-auto-change-detection}
 
-In order to support the `manualChangeDetection` and parallel APIs, your environment should install a handler for the auto change detection status.
+`manualChangeDetection`と並列APIをサポートするために、お使いの環境は自動での変更検知ステータス用のハンドラーをインストールする必要があります。
 
-When your environment wants to start handling the auto change detection status it can call `handleAutoChangeDetectionStatus(handler)`. The handler function will receive a `AutoChangeDetectionStatus` which has two properties `isDisabled` and `onDetectChangesNow()`. See the [AutoChangeDetectionStatus API reference page](/api/cdk/testing/AutoChangeDetectionStatus) for more information.
-If your environment wants to stop handling auto change detection status it can call `stopHandlingAutoChangeDetectionStatus()`.
+お使いの環境が自動での変更検知ステータスのハンドリングを開始したい場合、`handleAutoChangeDetectionStatus(handler)`を呼び出すことができます。ハンドラー関数は、`isDisabled`と`onDetectChangesNow()`の2つのプロパティを持つ`AutoChangeDetectionStatus`を受け取ります。詳細については、[AutoChangeDetectionStatus APIリファレンスページ](/api/cdk/testing/AutoChangeDetectionStatus)を参照してください。
+お使いの環境が自動での変更検知ステータスのハンドリングを停止したい場合、`stopHandlingAutoChangeDetectionStatus()`を呼び出すことができます。

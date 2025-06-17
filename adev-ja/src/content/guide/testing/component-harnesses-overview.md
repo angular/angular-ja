@@ -1,12 +1,12 @@
-# Component harnesses overview
+# コンポーネントハーネスの概要
 
-A <strong>component harness</strong> is a class that allows tests to interact with components the way an end user does via a supported API. You can create test harnesses for any component, ranging from small reusable widgets to full pages.
+<strong>コンポーネントハーネス</strong>は、テストがサポートされているAPIを介してエンドユーザーと同じ方法でコンポーネントと対話できるようにするクラスです。小さな再利用可能なウィジェットからフルページまで、あらゆるコンポーネントのテストハーネスを作成できます。
 
-Harnesses offer several benefits:
+ハーネスにはいくつかの利点があります:
 
-- They make tests less brittle by insulating themselves against implementation details of a component, such as its DOM structure
-- They make tests become more readable and easier to maintain
-- They can be used across multiple testing environments
+- コンポーネントのDOM構造などの実装詳細から自身を隔離することで、テストの脆さを軽減します
+- テストの可読性を高め、保守を容易にします
+- 複数のテスト環境で使用できます
 
 <docs-code language="typescript">
 // Example of test with a harness for a component called MyButtonComponent
@@ -16,16 +16,16 @@ it('should load button with exact text', async () => {
 });
 </docs-code>
 
-Component harnesses are especially useful for shared UI widgets. Developers often write tests that depend on private implementation details of widgets, such as DOM structure and CSS classes. Those dependencies make tests brittle and hard to maintain. Harnesses offer an alternative— a supported API that interacts with the widget the same way an end-user does. Widget implementation changes now become less likely to break user tests. For example, [Angular Material](https://material.angular.dev/components/categories) provides a test harness for each component in the library.
+コンポーネントハーネスは、共有UIウィジェットに特に役立ちます。開発者は、DOM構造やCSSクラスなど、ウィジェットのプライベートな実装詳細に依存するテストを記述することがよくあります。これらの依存関係はテストを脆くし、保守を困難にします。ハーネスは代替手段を提供します。それは、エンドユーザーと同じ方法でウィジェットと対話するサポートされたAPIです。ウィジェットの実装変更がユーザーテストを壊す可能性は低くなります。例えば、[Angular Material](https://material.angular.dev/components/categories)は、ライブラリ内の各コンポーネントにテストハーネスを提供しています。
 
-Component harnesses support multiple testing environments. You can use the same harness implementation in both unit and end-to-end tests. Test authors only need to learn one API and component authors don't have to maintain separate unit and end-to-end test implementations.
+コンポーネントハーネスは複数のテスト環境をサポートしています。同じハーネス実装をユニットテストとエンドツーエンドテストの両方で使用できます。テスト作成者は1つのAPIを学ぶだけでよく、コンポーネント作成者は個別のユニットテストとエンドツーエンドテストの実装を保守する必要がありません。
 
-Many developers can be categorized by one of the following developer type categories: test authors, component harness authors, and harness environment authors. Use the table below to find the most relevant section in this guide based on these categories:
+多くの開発者は、以下の開発者タイプカテゴリーのいずれかに分類できます: テスト作成者、コンポーネントハーネス作成者、ハーネス環境作成者。以下の表を使用して、これらのカテゴリーに基づいてこのガイドの最も関連性の高いセクションを見つけてください:
 
-| Developer Type              | Description                                                                                                                                                                                                                                                                                            | Relevant Section                                                                                             |
-| :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| Test Authors                | Developers that use component harnesses written by someone else to test their application. For example, this could be an app developer who uses a third-party menu component and needs to interact with the menu in a unit test.                                                                       | [Using component harnesses in tests](guide/testing/using-component-harnesses)                                |
-| Component harness authors   | Developers who maintain some reusable Angular components and want to create a test harness for its users to use in their tests. For example, an author of a third party Angular component library or a developer who maintains a set of common components for a large Angular application.             | [Creating component harnesses for your components](guide/testing/creating-component-harnesses)               |
-| Harness environment authors | Developers who want to add support for using component harnesses in additional testing environments. For information on supported testing environments out-of-the-box, see the [test harness environments and loaders](guide/testing/using-component-harnesses#test-harness-environments-and-loaders). | [Adding support for additional testing environments](guide/testing/component-harnesses-testing-environments) |
+| 開発者タイプ              | 説明                                                                                                                                                                                                                                                                                            | 関連セクション                                                                                             |
+| :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| テスト作成者                | 他の誰かが作成したコンポーネントハーネスを使用してアプリケーションをテストする開発者。例えば、サードパーティのメニューコンポーネントを使用し、ユニットテストでそのメニューと対話する必要があるアプリケーション開発者などがこれに該当します。                                                                       | [テストでのコンポーネントハーネスの使用](guide/testing/using-component-harnesses)                                |
+| コンポーネントハーネス作成者   | 再利用可能なAngularコンポーネントを保守し、ユーザーがテストで使用するためのテストハーネスを作成したい開発者。例えば、サードパーティのAngularコンポーネントライブラリの作成者や、大規模なAngularアプリケーション向けに共通コンポーネントのセットを保守する開発者などがこれに該当します。             | [コンポーネントのコンポーネントハーネスの作成](guide/testing/creating-component-harnesses)               |
+| ハーネス環境作成者 | 追加のテスト環境でコンポーネントハーネスを使用するためのサポートを追加したい開発者。すぐに利用できるサポートされているテスト環境については、[テストハーネス環境とローダー](guide/testing/using-component-harnesses#test-harness-environments-and-loaders)を参照してください。 | [追加のテスト環境のサポートを追加する](guide/testing/component-harnesses-testing-environments) |
 
-For the full API reference, please see the [Angular CDK's component harness API reference page](/api#angular_cdk_testing).
+完全なAPIリファレンスについては、[Angular CDKのコンポーネントハーネスAPIリファレンスページ](/api#angular_cdk_testing)を参照してください。

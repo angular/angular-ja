@@ -2,6 +2,7 @@ import consola from 'consola';
 import assert from 'node:assert';
 import { readFile, writeFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
+import { cli } from 'textlint';
 import {
   cpRf,
   exists,
@@ -139,17 +140,61 @@ async function saveTranslation(
   file: string,
   content: string,
   forceWrite: boolean
-): Promise<void> {
+): Promise<string | null> {
   const outputFile = getLocalizedFilePath(file);
   const shouldSave = forceWrite || (await promptForSave(outputFile));
 
   if (!shouldSave) {
-    return;
+    consola.info('翻訳結果は保存されませんでした。');
+    return null;
   }
 
   await ensureEnglishFile(file);
   await writeFile(outputFile, content);
-  consola.success(`保存しました`);
+  consola.success(`翻訳結果を保存しました: ${outputFile}`);
+  return outputFile;
+}
+
+/**
+ * 翻訳ファイルと原文ファイルの行数比較バリデーション
+ */
+async function validateLineCount(
+  originalFile: string,
+  translatedFile: string
+): Promise<void> {
+  async function getLineCount(filePath: string) {
+    const content = await readFile(filePath, 'utf-8');
+    return content.split('\n').length;
+  }
+
+  const [originalLines, translatedLines] = await Promise.all([
+    getLineCount(originalFile),
+    getLineCount(translatedFile),
+  ]);
+
+  const lineDiff = Math.abs(originalLines - translatedLines);
+
+  if (lineDiff === 0) {
+    consola.success(`行数バリデーション: OK`);
+  } else {
+    consola.warn(
+      `行数バリデーション: 注意 - 原文: ${originalLines}行, 翻訳: ${translatedLines}行 (差分: ${lineDiff}行`
+    );
+  }
+}
+
+/**
+ * textlintの実行
+ */
+async function runTextlint(file: string): Promise<void> {
+  const ok = await cli.execute(`${file}`).then((code) => code === 0);
+  if (ok) {
+    consola.success(`textlint: OK`);
+  } else {
+    consola.warn(
+      `textlint: エラーが検出されました。修正が完了してから提出してください。`
+    );
+  }
 }
 
 /**
@@ -166,7 +211,17 @@ async function main() {
   const translated = await translateFile(file, googleApiKey, geminiModel);
 
   console.log(translated);
-  await saveTranslation(file, translated, !!write);
+  const savedFile = await saveTranslation(file, translated, !!write);
+  if (!savedFile) {
+    return;
+  }
+
+  // 翻訳結果の分析
+  consola.start(`翻訳結果を分析...`);
+  // 原文ファイルとの行数比較
+  await validateLineCount(getEnFilePath(savedFile), savedFile);
+  // textlintの実行
+  await runTextlint(savedFile);
 }
 
 main().catch((error) => {

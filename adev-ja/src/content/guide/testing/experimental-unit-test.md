@@ -1,16 +1,16 @@
-# Experimental unit testing system
+# 実験的なユニットテストシステム
 
-The Angular CLI provides an experimental unit test system that can use [Vitest](https://vitest.dev/) as a test runner.
+Angular CLIは、テストランナーとして[Vitest](https://vitest.dev/)を使用できる実験的なユニットテストシステムを提供します。
 
-IMPORTANT: This experimental unit testing system requires the use of the `application` build system.
-The `application` build system is the default for all newly created projects.
+IMPORTANT: この実験的なユニットテストシステムは、`application`ビルドシステムの使用を必要とします。
+`application`ビルドシステムは、新しく作成されるすべてのプロジェクトのデフォルトです。
 
-## Set up testing
+## テストのセットアップ {#set-up-testing}
 
-The Angular CLI includes the test system within a new project but must be configured before it can be used.
+Angular CLIは新しいプロジェクト内にテストシステムを含んでいますが、使用する前に設定が必要です。
 
-The project you create with the CLI is setup to use the `karma` test system by default.
-To change to the experimental unit test system, update the `test` target as follows:
+CLIで作成するプロジェクトは、デフォルトで`karma`テストシステムを使用するように設定されています。
+実験的なユニットテストシステムに変更するには、`test`ターゲットを次のように更新します。
 
 <docs-code language="json">
 "test": {
@@ -23,12 +23,12 @@ To change to the experimental unit test system, update the `test` target as foll
 }
 </docs-code>
 
-The `buildTarget` operates similarly to the option available to the development server.
-The `build` target configures build options for the tests.
-If the `development` build configuration is missing for a project or you need
-different options for testing, you can create and use a `testing` or similarly named build configuration.
+`buildTarget`は、開発サーバーで利用可能なオプションと同様に動作します。
+`build`ターゲットは、テストのビルドオプションを設定します。
+プロジェクトで`development`ビルド設定が不足している場合や、テスト用に異なるオプションが必要な場合は、
+`testing`または同様の名前のビルド設定を作成して使用できます。
 
-To execute the application's testing, just run the [`ng test`](cli/test) CLI command as before:
+アプリケーションのテストを実行するには、これまでと同様に[`ng test`](cli/test)CLIコマンドを実行するだけです。
 
 <docs-code language="shell">
 
@@ -36,9 +36,9 @@ ng test
 
 </docs-code>
 
-The `ng test` command builds the application in *watch mode*, and launches the configured runner.
+`ng test`コマンドは、アプリケーションを*ウォッチモード*でビルドし、設定されたランナーを起動します。
 
-The console output looks like below:
+コンソール出力は以下のようになります。
 
 <docs-code language="shell">
  ✓ spec-app-app.spec.js (2 tests) 31ms
@@ -51,15 +51,15 @@ The console output looks like below:
    Duration  1.16s (transform 628ms, setup 703ms, collect 64ms, tests 31ms, environment 188ms, prepare 33ms)
 </docs-code>
 
-Watch mode is enabled by default when using an interactive terminal and not running on CI.
+ウォッチモードは、対話型ターミナルを使用している場合、およびCIで実行していない場合に、デフォルトで有効になります。
 
-## Configuration
+## 設定 {#configuration}
 
-The Angular CLI takes care of the Vitest configuration for you. It constructs the full configuration in memory, based on options specified in the `angular.json` file.
-Directly customizing the underlying test runner configuration is currently not supported.
+Angular CLIがVitest設定を自動的に処理します。`angular.json`ファイルで指定されたオプションに基づいて、完全な設定をメモリ内で構築します。
+基盤となるテストランナー設定を直接カスタマイズすることは現在サポートされていません。
 
-## Bug reports
+## バグ報告 {#bug-reports}
 
-Report issues and feature requests on [GitHub](https://github.com/angular/angular-cli/issues).
+課題と機能リクエストは[GitHub](https://github.com/angular/angular-cli/issues)で報告してください。
 
-Please provide a minimal reproduction where possible to aid the team in addressing issues.
+チームが課題に対処できるよう、可能な場合は最小限の再現手順を提供してください。

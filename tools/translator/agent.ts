@@ -9,7 +9,8 @@ import { PromptTemplate } from '@langchain/core/prompts';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { createLinter, loadLinterFormatter, loadTextlintrc } from 'textlint';
 
-const defaultGeminiModel = 'gemini-2.5-flash-preview-05-20';
+// https://ai.google.dev/gemini-api/docs/models#model-variations
+const defaultGeminiModel = 'gemini-2.5-flash';
 
 export type TranslationAgentInput = {
   text: string;

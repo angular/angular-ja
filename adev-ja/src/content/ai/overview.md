@@ -3,6 +3,8 @@
 AI搭載アプリケーションを構築。AIで開発を加速。
 </docs-decorative-header>
 
+HELPFUL: お気に入りのAIパワードIDEで構築を始めたい方は、[プロンプトルールとベストプラクティス](/ai/develop-with-ai)をご確認ください。
+
 生成AI (GenAI)と大規模言語モデル (LLM)は、パーソナライズされたコンテンツ、インテリジェントなレコメンデーション、メディアの生成と理解、情報の要約、動的な機能など、高度で魅力的なアプリケーション体験の作成を可能にします。
 
 このような機能の開発は、これまで深いドメイン知識と多大なエンジニアリング作業を必要としました。しかし、新しい製品とSDKが参入障壁を下げています。Angularは、以下の理由により、AIをウェブアプリケーションに統合するのに非常に適しています。
@@ -11,7 +13,7 @@ AI搭載アプリケーションを構築。AIで開発を加速。
 * データと状態を動的に管理するために設計された、強力なシグナルベースのアーキテクチャ
 * AngularはAI SDKとAPIにシームレスに統合
 
-このガイドでは、[Genkit](/ai#build-ai-powered-applications-with-genkit-and-angular)、[Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic)、および[Gemini API](https://ai.google.dev/)を使用して、AngularアプリケーションにAIを組み込む方法を示します。このガイドは、AngularアプリケーションにAIを統合する方法を説明することで、AI搭載ウェブアプリケーション開発の旅を加速させるでしょう。また、このガイドでは、迅速に習得できるスターターキット、サンプルコード、一般的なワークフローのレシピなどのリソースも共有しています。
+このガイドでは、[Genkit](/ai#build-ai-powered-applications-with-genkit-and-angular)、[Firebase AI Logic](/ai#build-ai-powered-applications-with-firebase-ai-logic-and-angular)、および[Gemini API](/ai#build-ai-powered-applications-with-gemini-api-and-angular)を使用して、AngularアプリケーションにAIを組み込む方法を示します。このガイドは、AngularアプリケーションにAIを統合する方法を説明することで、AI搭載ウェブアプリケーション開発の旅を加速させるでしょう。また、このガイドでは、迅速に習得できるスターターキット、サンプルコード、一般的なワークフローのレシピなどのリソースも共有しています。
 
 始めるには、Angularの基本的な理解が必要です。Angularは初めてですか？[必須ガイド](/essentials)または[入門チュートリアル](/tutorials)をお試しください。
 
@@ -20,20 +22,20 @@ NOTE: このページではGoogle AI製品との統合と例を紹介してい�
 ## はじめに
 AI搭載アプリケーションの構築は、新しく急速に発展している分野です。どこから始め、どの技術を選択するかを決定するのは難しい場合があります。以下のセクションでは、選択できる3つのオプションを提供します。
 
-1. *Genkit*は、フルスタックアプリケーション構築のために、[サポートされているモデルと統合APIを備えたインターフェース](https://firebase.google.com/docs/genkit)の選択肢を提供します。パーソナライズされたレコメンデーションなど、高度なバックエンドAIロジックを必要とするアプリケーションに最適です。
+1. *Genkit*は、フルスタックアプリケーション構築のために、[サポートされているモデルと統合APIを備えたインターフェース](https://genkit.dev)の選択肢を提供します。パーソナライズされたレコメンデーションなど、高度なバックエンドAIロジックを必要とするアプリケーションに最適です。
 
 1. *Firebase AI Logic*は、Googleのモデル向けに安全なクライアントサイドAPIを提供し、クライアントサイド専用アプリケーションやモバイルアプリケーションを構築できます。リアルタイムテキスト分析や基本的なチャットボットなど、ブラウザで直接インタラクティブなAI機能を利用するのに最適です。
 
 1. *Gemini API*を使用すると、APIサーフェスを通じて直接公開されるメソッドと機能を使用するアプリケーションを構築でき、フルスタックアプリケーションに最適です。カスタム画像生成やディープデータ処理など、AIモデルを直接制御する必要があるアプリケーションに適しています。
 
 ### GenkitとAngularでAI搭載アプリケーションを構築する {#build-ai-powered-applications-with-genkit-and-angular}
-[Genkit](https://firebase.google.com/docs/genkit)は、ウェブアプリケーションやモバイルアプリケーションにAI搭載機能を構築するのに役立つように設計されたオープンソースツールキットです。Google、OpenAI、Anthropic、OllamaなどからのAIモデルを統合するための統合インターフェースを提供するため、ニーズに最適なモデルを探索して選択できます。サーバーサイドソリューションであるため、Genkitと統合するには、ウェブアプリケーションにはNode.jsベースのサーバーなどのサポートされているサーバー環境が必要です。たとえば、Angular SSRを使用してフルスタックアプリケーションを構築すると、サーバーサイドの開始コードが得られます。
+[Genkit](https://genkit.dev)は、ウェブアプリケーションやモバイルアプリケーションにAI搭載機能を構築するのに役立つように設計されたオープンソースツールキットです。Google、OpenAI、Anthropic、OllamaなどからのAIモデルを統合するための統合インターフェースを提供するため、ニーズに最適なモデルを探索して選択できます。サーバーサイドソリューションであるため、Genkitと統合するには、ウェブアプリケーションにはNode.jsベースのサーバーなどのサポートされているサーバー環境が必要です。たとえば、Angular SSRを使用してフルスタックアプリケーションを構築すると、サーバーサイドの開始コードが得られます。
 
 GenkitとAngularで構築する方法の例を次に示します。
 
 * [GenkitとAngularのスターターキットを使用したエージェントアプリ](https://github.com/angular/examples/tree/main/genkit-angular-starter-kit)— AIでの構築は初めてですか？エージェントワークフローを備えた基本的なアプリケーションから始めましょう。初めてのAI構築体験に最適な場所です。
 
-* [AngularアプリでGenkitを使用する](https://firebase.google.com/docs/genkit/angular)— Genkit Flows、Angular、Gemini 2.0 Flashを使用する基本的なアプリケーションを構築します。このステップバイステップのウォークスルーは、AI機能を備えたフルスタックAngularアプリケーションの作成をガイドします。
+* [AngularアプリでGenkitを使用する](https://genkit.dev/docs/angular/)— Genkit Flows、Angular、Gemini 2.0 Flashを使用する基本的なアプリケーションを構築します。このステップバイステップのウォークスルーは、AI機能を備えたフルスタックAngularアプリケーションの作成をガイドします。
 
 * [動的ストーリー生成アプリ](https://github.com/angular/examples/tree/main/genkit-angular-story-generator)— Genkit、Gemini、Imagen 3を搭載したエージェントAngularアプリケーションを構築し、ユーザーインタラクションに基づいてストーリーを動的に生成し、発生するイベントに付随する美しい画像パネルを特徴とする方法を学びます。より高度なユースケースを試したい場合は、ここから始めましょう。
 

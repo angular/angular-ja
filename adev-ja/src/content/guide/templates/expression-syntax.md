@@ -17,7 +17,6 @@ Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary
 | Array                  | `['Onion', 'Cheese', 'Garlic']` |
 | null                   | `null`                          |
 | Template string        | `` `Hello ${name}` ``           |
-| Tagged template string | `` tag`Hello ${name}` ``        |
 
 ### サポートされていないリテラル
 

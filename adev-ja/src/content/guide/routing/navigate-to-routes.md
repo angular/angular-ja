@@ -5,12 +5,19 @@
 ## RouterLinkの使い方 {#how-to-use-routerlink}
 
 通常のアンカー要素`<a>`に`href`属性を使用する代わりに、Angularルーティングを活用するために、適切なパスを持つ`RouterLink`ディレクティブを追加します。
-
-```angular-html
-<nav>
-  <a routerLink="/user-profile">User profile</a>
-  <a routerLink="/settings">Settings</a>
-</nav>
+```angular-ts
+import {RouterLink} from '@angular/router';
+@Component({
+  template: `
+    <nav>
+      <a routerLink="/user-profile">User profile</a>
+      <a routerLink="/settings">Settings</a>
+    </nav>
+  `
+  imports: [RouterLink],
+  ...
+})
+export class App {}
 ```
 
 ### 絶対リンクと相対リンクの使用 {#using-absolute-or-relative-links}

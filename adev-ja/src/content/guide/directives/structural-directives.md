@@ -90,13 +90,13 @@ export class SelectDirective {
 
 </docs-step>
 <docs-step title="'selectFrom'入力を追加">
-`selectFrom` `@Input()`プロパティを追加します。
+`selectFrom` `input()`プロパティを追加します。
 
 ```ts
 export class SelectDirective {
   // ...
 
-  @Input({required: true}) selectFrom!: DataSource;
+  selectFrom = input.required<DataSource>();
 }
 ```
 
@@ -201,9 +201,9 @@ Angularは、構造ディレクティブの省略記法を次の通常のバイ�
 // アサートしたいと考えています。
 @Directive(...)
 class ActorIsUser {
-  @Input() actor: User|Robot;
+  actor = input<User | Robot>();
 
-  static ngTemplateGuard_actor(dir: ActorIsUser, expr: User|Robot): expr is User {
+  static ngTemplateGuard_actor(dir: ActorIsUser, expr: User | Robot): expr is User {
     // 実際にはreturn文は不要ですが、
     // TypeScriptエラーを防ぐために含めています。
     return true;
@@ -218,7 +218,7 @@ class ActorIsUser {
 ```ts
 @Directive(...)
 class CustomIf {
-  @Input() condition!: any;
+  condition = input.required<boolean>();
 
   static ngTemplateGuard_condition: 'binding';
 }
@@ -242,7 +242,7 @@ export interface SelectTemplateContext<T> {
 export class SelectDirective<T> {
   // ディレクティブのジェネリック型`T`は、
   // 入力に渡される`DataSource`型から推測されます。
-  @Input({required: true}) selectFrom!: DataSource<T>;
+  selectFrom = input.required<DataSource<T>>();
 
   // ジェネリック型のディレクティブを使用して、コンテキストの型を絞り込みます。
   static ngTemplateContextGuard<T>(dir: SelectDirective<T>, ctx: any): ctx is SelectTemplateContext<T> {

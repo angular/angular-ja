@@ -59,7 +59,7 @@ const firstName = computed(() => userResource.value().firstName);
 const userId: Signal<string> = getUserId();
 
 const userResource = resource({
-  request: () => ({id: userId()}),
+  params: () => ({id: userId()}),
   loader: ({params, abortSignal}): Promise<User> => {
     // 与えられた`AbortSignal`がリクエストの中断を示している場合、
     // fetchは未処理のHTTPリクエストをキャンセルします。
@@ -78,7 +78,7 @@ const userResource = resource({
 const userId: Signal<string> = getUserId();
 
 const userResource = resource({
-  request: () => ({id: userId()}),
+  params: () => ({id: userId()}),
   loader: ({params}) => fetchUser(params),
 });
 
@@ -99,15 +99,19 @@ userResource.reload();
 | `isLoading` | リソースローダーが現在実行中かどうか。                                                               |
 | `status`    | 後述のリソースの特定の`ResourceStatus`。                                                   |
 
-The `status` signal provides a specific `ResourceStatus` that describes the state of the resource using a string constant.
+`status` シグナルは、文字列定数を使用してリソースの状態を説明する特定の `ResourceStatus` を提供します。
 
-| Status        | `value()`         | Description                                                                  |
+| ステータス        | `value()`         | 説明                                                                  |
 | ------------- | :---------------- | ---------------------------------------------------------------------------- |
-| `'idle'`      | `undefined`       | The resource has no valid request and the loader has not run.                |
-| `'error'`     | `undefined`       | The loader has encountered an error.                                         |
-| `'loading'`   | `undefined`       | The loader is running as a result of the `request` value changing.           |
-| `'reloading'` | Previous value    | The loader is running as a result calling of the resource's `reload` method. |
-| `'resolved'`  | Resolved value    | The loader has completed.                                                    |
-| `'local'`     | Locally set value | The resource's value has been set locally via `.set()` or `.update()`        |
+| `'idle'`      | `undefined`       | リソースに有効なリクエストがなく、ローダーが実行されていません。                |
+| `'error'`     | `undefined`       | ローダーの読み込みがエラーになりました。                                         |
+| `'loading'`   | `undefined`       | `params` 値の変更の結果としてローダーが実行中です。           |
+| `'reloading'` | 前の値    | リソースの `reload` メソッドの呼び出しの結果としてローダーが実行中です。 |
+| `'resolved'`  | 解決された値    | ローダーが完了しました。                                                    |
+| `'local'`     | ローカルに設定された値 | リソースの値が `.set()` または `.update()` を介してローカルに設定されています。        |
 
 この状態情報を使用して、ローディングインジケーターやエラーメッセージなどのユーザーインターフェース要素を条件付きで表示できます。
+
+## `httpResource` を使用したリアクティブデータ取得
+
+[`httpResource`](/guide/http/http-resource) は `HttpClient` のラッパーで、リクエストの状態とレスポンスをシグナルとして提供します。これはインターセプターを含むAngular HTTPスタックを通してHTTPリクエストを行います。

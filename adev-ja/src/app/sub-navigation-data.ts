@@ -352,6 +352,16 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/read-route-state',
           },
           {
+            label: 'ルートのリダイレクト',
+            path: 'guide/routing/redirecting-routes',
+            contentPath: 'guide/routing/redirecting-routes',
+          },
+          {
+            label: 'ガードによるルートアクセスの制御',
+            path: 'guide/routing/route-guards',
+            contentPath: 'guide/routing/route-guards',
+          },
+          {
             label: 'その他のルーティングタスク',
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
@@ -420,6 +430,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'リクエストの実行',
             path: 'guide/http/making-requests',
             contentPath: 'guide/http/making-requests',
+          },
+          {
+            label: 'httpResourceを使ったリアクティブなデータ取得',
+            path: 'guide/http/http-resource',
+            contentPath: 'guide/http/http-resource',
           },
           {
             label: 'リクエストとレスポンスへの介入',
@@ -623,6 +638,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'ai',
         contentPath: 'ai/overview',
       },
+      {
+        label: 'LLMプロンプトとAI IDEセットアップ',
+        path: 'ai/develop-with-ai',
+        contentPath: 'ai/develop-with-ai',
+      },
     ],
   },
   {
@@ -764,6 +784,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'best-practices/a11y',
       },
       {
+        label: 'Angularでの未処理のエラー',
+        path: 'best-practices/error-handling',
+        contentPath: 'best-practices/error-handling',
+      },
+      {
         label: 'パフォーマンス',
         children: [
           {
@@ -785,6 +810,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'コンポーネントサブツリーのスキップ',
             path: 'best-practices/skipping-subtrees',
             contentPath: 'best-practices/runtime-performance/skipping-subtrees',
+          },
+          {
+            label: 'Chrome DevToolsでのプロファイリング',
+            path: 'best-practices/profiling-with-chrome-devtools',
+            contentPath: 'best-practices/runtime-performance/profiling-with-chrome-devtools',
           },
           {label: 'Zoneless', path: 'guide/zoneless', contentPath: 'guide/zoneless'},
         ],

@@ -2595,6 +2595,28 @@ export const RECOMMENDATIONS: Step[] = [
     {
       possibleIn: 2000,
       necessaryAsOf: 2000,
+      level: ApplicationComplexity.Basic,
+      step: '20.0.0_rename_resource_request_to_param',
+      action: 'リソースで渡される`request`プロパティを`params`にリネームしてください。',
+    },
+    {
+      possibleIn: 2000,
+      necessaryAsOf: 2000,
+      level: ApplicationComplexity.Medium,
+      step: '20.0.0_rename_rxResource_loader_to_stream',
+      action: 'rxResourcesで渡される`loader`プロパティを`stream`にリネームしてください。',
+    },
+    {
+      possibleIn: 2000,
+      necessaryAsOf: 2000,
+      level: ApplicationComplexity.Basic,
+      step: '20.0.0_replace_ResourceStatus_by_corresponding_strings',
+      action:
+        '`ResourceStatus`はもはやenumではありません。代わりに対応する定数文字列値を使用してください。',
+    },
+    {
+      possibleIn: 2000,
+      necessaryAsOf: 2000,
       level: ApplicationComplexity.Advanced,
       step: '20.0.0_rename_provideExperimentalZonelessChangeDetection',
       action:
@@ -2711,5 +2733,13 @@ export const RECOMMENDATIONS: Step[] = [
       step: '20.0.0_review_date_pipe_formatter_Y_usage',
       action:
         '`DatePipe`の使用を見直してください。`Y`（週番号付け年）フォーマッターを`w`（週番号）を含めずに使用すると、疑わしいと検出されるようになりました。意図がそうであった場合は`y`（年）を使用するか、`Y`と一緒に`w`を含めてください。',
+    },
+    {
+      possibleIn: 2000,
+      necessaryAsOf: 2000,
+      level: ApplicationComplexity.Medium,
+      step: '20.0.0_handle_uncaught_listener_errors_in_tests',
+      action:
+        'テンプレートでは括弧が常に尊重されるようになりました。これは、null合体演算子が括弧内にネストされている場合にランタイムエラーを引き起こす可能性があります。例：`(foo?.bar).baz`は、`foo`がnullishの場合、ネイティブJavaScriptと同様にエラーを投げます。',
     },
 ];

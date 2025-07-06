@@ -11,7 +11,7 @@
 そのコンポーネントは、食料品アイテムの `id` を取得して、ユーザーに正しい情報を表示できるようにする必要があります。
 
 ルートを使用して、このタイプの情報をアプリケーションコンポーネントに渡します。
-これを行うには、`provideRouter` を使用した [withComponentInputBinding](api/router/withComponentInputBinding) 機能、または `RouterModule.forRoot` の `bindToComponentInputs` オプションを使用します。
+これを行うには、`provideRouter` を使用した [`withComponentInputBinding`](api/router/withComponentInputBinding) 機能、または `RouterModule.forRoot` の `bindToComponentInputs` オプションを使用します。
 
 ルートから情報を取得するには:
 
@@ -29,22 +29,38 @@ providers: [
 
 </docs-step>
 
-<docs-step title="コンポーネントに `Input` を追加する">
+<docs-step title="コンポーネントに `input` を追加する">
 
 パラメータ名と一致する `input()` プロパティを持つようにコンポーネントを更新します。
 
 ```ts
 id = input.required<string>()
-hero = computed(() => this.service.getHero(heroId));
+hero = computed(() => this.service.getHero(id));
 ```
+
+</docs-step>
+<docs-step title="Optional: Use a default value">
+`withComponentInputBinding` が有効な場合、ルーターは現在のルートに基づいてすべての入力に値を割り当てます。
+オプションのクエリパラメータが欠落している場合など、ルートデータが入力キーと一致しない場合、ルーターは `undefined` を割り当てます。
+入力がルートによって一致しない可能性がある場合は、`input` の型に `undefined` を含める必要があります。
+
+`input` の `transform` オプションを使用するか、`linkedSignal` でローカル状態を管理することで、デフォルト値を提供します。
+
+```ts
+id = input.required({
+  transform: (maybeUndefined: string | undefined) => maybeUndefined ?? '0',
+});
+// or
+id = input<string|undefined>();
+internalId = linkedSignal(() => this.id() ?? getDefaultId());
+```
+
+</docs-step>
+</docs-workflow>
 
 NOTE: 静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータなど、すべてのルートデータをキーと値のペアでコンポーネントの入力にバインドできます。
 親コンポーネントのルート情報を使用する場合は、ルーターの `paramsInheritanceStrategy` オプションを設定する必要があります。
 `withRouterConfig({paramsInheritanceStrategy: 'always'})`
-
-</docs-step>
-
-</docs-workflow>
 
 ## 404 ページの表示 {#displaying-a-404-page}
 
@@ -60,51 +76,6 @@ const routes: Routes = [
 
 `path` が `**` の最後のルートは、ワイルドカードルートです。
 ルーターは、要求されたURLがリストの先頭にあるパスと一致しない場合、このルートを選択し、ユーザーを `PageNotFoundComponent` にルーティングします。
-
-## 権限のないアクセスの防止 {#preventing-unauthorized-access}
-
-ルートガードを使用して、ユーザーが権限なしでアプリケーションの特定の部分にナビゲートできないようにします。
-Angularでは、次のルートガードを使用できます。
-
-<docs-pill-row>
-  <docs-pill href="api/router/CanActivateFn" title="`canActivate`"/>
-  <docs-pill href="api/router/CanActivateChildFn" title="`canActivateChild`"/>
-  <docs-pill href="api/router/CanDeactivateFn" title="`canDeactivate`"/>
-  <docs-pill href="api/router/CanMatchFn" title="`canMatch`"/>
-  <docs-pill href="api/router/ResolveFn" title="`resolve`"/>
-  <docs-pill href="api/router/CanLoadFn" title="`canLoad`"/>
-</docs-pill-row>
-
-ルートガードを使用するには、[コンポーネントレスルート](api/router/Route#componentless-routes) を使用することを検討してください。これにより、子ルートのガードが容易になります。
-
-ガードのファイルを作成します。
-
-```bash
-ng generate guard your-guard
-```
-
-ガードファイルに、使用するガード関数を追加します。
-次の例では、`canActivateFn` を使用してルートをガードしています。
-
-```ts
-export const yourGuardFunction: CanActivateFn = (
-  next: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
-) => {
-  // your  logic goes here
-}
-```
-
-ルーティングモジュールで、`routes` 構成の適切なプロパティを使用します。
-ここでは、`canActivate` は、ルーターに、この特定のルートへのナビゲーションを制御するよう指示します。
-
-```ts
-{
-  path: '/your-path',
-  component: YourComponent,
-  canActivate: [yourGuardFunction],
-}
-```
 
 ## リンクパラメータ配列 {#link-parameters-array}
 

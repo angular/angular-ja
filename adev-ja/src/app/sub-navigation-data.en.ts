@@ -352,6 +352,16 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/read-route-state',
           },
           {
+            label: 'Redirecting routes',
+            path: 'guide/routing/redirecting-routes',
+            contentPath: 'guide/routing/redirecting-routes',
+          },
+          {
+            label: 'Control route access with guards',
+            path: 'guide/routing/route-guards',
+            contentPath: 'guide/routing/route-guards',
+          },
+          {
             label: 'Other routing tasks',
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
@@ -420,6 +430,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'Making requests',
             path: 'guide/http/making-requests',
             contentPath: 'guide/http/making-requests',
+          },
+          {
+            label: 'Reactive data fetching with httpResource',
+            path: 'guide/http/http-resource',
+            contentPath: 'guide/http/http-resource',
           },
           {
             label: 'Intercepting requests and responses',
@@ -623,6 +638,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'ai',
         contentPath: 'ai/overview',
       },
+      {
+        label: 'LLM prompts and AI IDE setup',
+        path: 'ai/develop-with-ai',
+        contentPath: 'ai/develop-with-ai',
+      },
     ],
   },
   {
@@ -764,6 +784,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'best-practices/a11y',
       },
       {
+        label: 'Unhandled errors in Angular',
+        path: 'best-practices/error-handling',
+        contentPath: 'best-practices/error-handling',
+      },
+      {
         label: 'Performance',
         children: [
           {
@@ -785,6 +810,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'Skipping component subtrees',
             path: 'best-practices/skipping-subtrees',
             contentPath: 'best-practices/runtime-performance/skipping-subtrees',
+          },
+          {
+            label: 'Profiling with the Chrome DevTools',
+            path: 'best-practices/profiling-with-chrome-devtools',
+            contentPath: 'best-practices/runtime-performance/profiling-with-chrome-devtools',
           },
           {label: 'Zoneless', path: 'guide/zoneless', contentPath: 'guide/zoneless'},
         ],

@@ -11,3 +11,7 @@ Angularを理解するには、HTML、CSS、およびJavaScriptの基本的な�
 行き詰まったら、上部の「解答を表示」をクリックしてください。
 
 さあ、[始めましょう](/tutorials/learn-angular/1-components-in-angular)。
+
+## 開発でのAIの使用
+
+AI搭載IDEでこのチュートリアルに従っている場合は、[Angularプロンプトルールとベストプラクティスをチェックしてください](/ai/develop-with-ai)。

@@ -45,17 +45,17 @@ const routes: Routes = [
 ユーザーが`/products`にアクセスすると、Angularは次のようにレンダリングします。
 
 ```angular-html
-<app-header></app-header>
-<app-products></app-products>
-<app-footer></app-footer>
+<app-header />
+<app-products />
+<app-footer />
 ```
 
 ユーザーがホームページに戻ると、Angularは次のようにレンダリングします。
 
 ```angular-html
-<app-header></app-header>
-<app-home></app-home>
-<app-footer></app-footer>
+<app-header />
+<app-home />
+<app-footer />
 ```
 
 ルートを表示するとき、`<router-outlet>`要素は将来のナビゲーションのための参照点としてDOMに存在し続けます。Angularはルーティングされたコンテンツをアウトレット要素の直後に兄弟要素として挿入します。

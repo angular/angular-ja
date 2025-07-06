@@ -10,7 +10,7 @@
 
 `HttpClient` の使用のテストを開始するには、`TestBed` を構成してテストの設定に `provideHttpClient()` と `provideHttpClientTesting()` を含めます。これにより、`HttpClient` が実際のネットワークではなくテストバックエンドを使用するように構成されます。また、`HttpTestingController` も提供され、これを使用してテストバックエンドとやり取ります。そして、どのリクエストが行われたかについての期待を設定し、それらのリクエストに対するレスポンスを流します。`HttpTestingController` は、構成されたら `TestBed` から注入できます。
 
-`provideHttpClientTesting()` は `provideHttpCient()` の一部を上書きするため、`provideHttpClient()` を `provideHttpClientTesting()` の**前**に提供することに留意してください。これを逆に行うと、テストが壊れてしまう可能性があります。
+`provideHttpClientTesting()` は `provideHttpClient()` の一部を上書きするため、`provideHttpClient()` を `provideHttpClientTesting()` の**前**に提供することに留意してください。これを逆に行うと、テストが壊れてしまう可能性があります。
 
 <docs-code language="ts">
 TestBed.configureTestingModule({

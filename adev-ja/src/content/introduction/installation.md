@@ -110,6 +110,10 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
 
 これで、`Local`のパス（例：`http://localhost:4200`）にアクセスしてアプリケーションを確認できます。コーディングを楽しんでください！🎉
 
+### 開発でのAIの使用
+
+AI搭載IDEでの開発を開始するには、[Angularプロンプトルールとベストプラクティスをチェックしてください](/ai/develop-with-ai)。
+
 ## 次のステップ
 
 Angularプロジェクトを作成したので、[基本概念ガイド](/essentials)でAngularの詳細について学ぶか、詳しいガイドからトピックを選択してください！

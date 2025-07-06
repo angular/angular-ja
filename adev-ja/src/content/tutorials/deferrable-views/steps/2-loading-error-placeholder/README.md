@@ -8,7 +8,7 @@
       <td><code>@placeholder</code></td>
       <td>
         デフォルトでは、遅延ブロックはトリガーされる前にコンテンツをレンダリングしません。<code>@placeholder</code>は、遅延コンテンツの読み込み前に表示するコンテンツを宣言するオプションのブロックです。Angularは読み込みが完了した後、プレースホルダーを遅延コンテンツに置き換えます。このブロックはオプションですが、Angularチームは常にプレースホルダーを含めることを推奨しています。
-        <a href="https://angular.dev/guide/defer#triggers" target="_blank">
+        <a href="https://angular.dev/guide/templates/defer#triggers" target="_blank">
           遅延可能ビューの完全なドキュメントで詳細を確認してください
         </a>
       </td>

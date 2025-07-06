@@ -47,7 +47,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 @Component({ ... })
 export class UserProfileComponent {
   readonly userId: string;
-  private activatedRoute = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
 
   constructor() {
     // URLの例: https://www.angular.dev/users/123?role=admin&status=active#contact

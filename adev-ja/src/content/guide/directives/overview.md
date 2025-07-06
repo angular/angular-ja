@@ -23,7 +23,7 @@ Angularディレクティブの種類は以下のとおりです。
 | :------------------------------------------------------------ | :------------------------------------------------- |
 | [`NgClass`](#adding-and-removing-classes-with-ngclass)        | CSS クラスのセットを追加および削除します。             |
 | [`NgStyle`](#setting-inline-styles-with-ngstyle)              | HTML スタイルのセットを追加および削除します。             |
-| [`NgModel`](#displaying-and-updating-properties-with-ngmodel) | HTML フォーム要素に双方向データバインディングを追加します。 |
+| [`NgModel`](guide/forms/template-driven-forms)                | HTML フォーム要素に双方向データバインディングを追加します。 |
 
 HELPFUL: 組み込みディレクティブは、公開APIのみを使用します。他のディレクティブがアクセスできないプライベートAPIには、特別なアクセス権がありません。
 
@@ -92,40 +92,6 @@ HELPFUL: To add or remove a _single_ style, use [style bindings](guide/templates
 これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
 ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
 
-## `ngModel` を使用してプロパティを表示および更新する {#displaying-and-updating-properties-with-ngmodel}
-
-`NgModel` ディレクティブを使用して、データプロパティを表示し、ユーザーが変更を加えたときにそのプロパティを更新します。
-
-1. `FormsModule` をインポートし、AppComponentの `imports` リストに追加します。
-
-   <docs-code header="src/app/app.component.ts (FormsModule インポート)" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" visibleRegion="import-forms-module" />
-
-1. HTML `<form>` 要素に `[(ngModel)]` バインディングを追加して、プロパティ（ここでは `name`）に等しく設定します。
-
-   <docs-code header="src/app/app.component.html (NgModel の例)" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="NgModel-1"/>
-
-    この `[(ngModel)]` 構文は、データバインドプロパティのみを設定できます。
-
-構成をカスタマイズするには、拡張フォームを記述します。これにより、プロパティとイベントバインディングが分離されます。
-[プロパティバインディング](guide/templates/property-binding) を使用してプロパティを設定し、[イベントバインディング](guide/templates/event-listeners) を使用して変更に応答します。
-次の例では、`<input>` 値を大文字に変更します。
-
-<docs-code header="src/app/app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" visibleRegion="uppercase"/>
-
-以下は、大文字バージョンを含む、すべてのバリエーションが動作している様子です。
-
-<img alt="NgModel のバリエーション" src="assets/images/guide/built-in-directives/ng-model-anim.gif">
-
-### `NgModel` と値アクセサー
-
-`NgModel` ディレクティブは、[ControlValueAccessor](api/forms/ControlValueAccessor) によってサポートされている要素で機能します。
-Angularは、すべての基本的なHTMLフォーム要素に対して _値アクセサー_ を提供します。
-詳細については、[フォーム](guide/forms) を参照してください。
-
-`[(ngModel)]` を非フォームの組み込み要素またはサードパーティのカスタムコンポーネントに適用するには、値アクセサーを作成する必要があります。
-詳細については、[DefaultValueAccessor](api/forms/DefaultValueAccessor) に関するAPIドキュメントを参照してください。
-
-HELPFUL: Angularコンポーネントを作成する際、Angularの [双方向バインディング構文](guide/templates/two-way-binding#how-two-way-binding-works) に従って値とイベントプロパティに名前を付ければ、値アクセサーや `NgModel` は必要ありません。
 
 ## DOM 要素のないディレクティブをホストする
 

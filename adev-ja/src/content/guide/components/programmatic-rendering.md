@@ -2,9 +2,16 @@
 
 TIP: このガイドでは、[基本概念のガイド](essentials)をすでに読んでいることを前提としています。Angularを初めて使用する場合は、まずこのガイドを読んでください。
 
-コンポーネントはテンプレートで直接使用できるだけでなく、動的にもレンダリングできます。
-コンポーネントを動的にレンダリングする主な方法は2つあります。
+コンポーネントはテンプレートで直接使用できるだけでなく、プログラムで動的にもレンダリングできます。
+これは、コンポーネントが最初は不明で（そのためテンプレートで直接参照できない）、何らかの条件に依存する場合に便利です。
+
+コンポーネントをプログラムでレンダリングする主な方法は2つあります。
 テンプレートで`NgComponentOutlet`を使用するか、TypeScriptコードで`ViewContainerRef`を使用します。
+
+HELPFUL: 遅延読み込みのユースケース（たとえば、重いコンポーネントの読み込みを遅らせたい場合）については、
+組み込みの[`@defer`機能](/guide/templates/defer)の使用を検討してください。`@defer`機能により、
+`@defer`ブロック内のコンポーネント、ディレクティブ、パイプのコードを自動的に別のJavaScriptチャンクに
+抽出し、設定されたトリガーに基づいて必要な時にのみ読み込むことができます。
 
 ## NgComponentOutletを使用する
 
@@ -28,7 +35,7 @@ export class CustomDialog {
   user = input.required<User>();
 
   getBioComponent() {
-    return this.user.isAdmin ? AdminBio : StandardBio;
+    return this.user().isAdmin ? AdminBio : StandardBio;
   }
 }
 ```
@@ -95,9 +102,12 @@ export class InnerItem {
 
 ## コンポーネントの遅延読み込み
 
-上記で説明した`NgComponentOutlet`と`ViewContainerRef`の両方の方法を使用して、
-標準のJavaScript [動的インポート](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import)で
-遅延読み込みされるコンポーネントをレンダリングできます。
+HELPFUL: いくつかのコンポーネントを遅延読み込みしたい場合は、
+組み込みの[`@defer`機能](/guide/templates/defer)の使用を検討してください。
+
+あなたのユースケースが`@defer`機能でカバーされない場合は、
+`NgComponentOutlet`または`ViewContainerRef`を標準のJavaScript
+[動的インポート](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import)と一緒に使用できます。
 
 ```angular-ts
 @Component({

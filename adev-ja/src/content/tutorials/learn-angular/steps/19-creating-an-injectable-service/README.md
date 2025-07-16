@@ -16,10 +16,10 @@ NOTE: [エッセンシャルガイドの依存性の注入](/essentials/dependen
 
 <docs-code language="ts" highlight="[1, 2, 3]">
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 class UserService {
-    // データを取得して返すためのメソッド
+  // データを取得して返すためのメソッド
 }
 </docs-code>
 

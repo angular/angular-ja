@@ -15,7 +15,7 @@ NOTE: 詳しくは[アウトプットガイドのカスタムイベント](/guid
 <docs-code header="child.ts" language="ts">
 @Component({...})
 class Child {
-    incrementCountEvent = output<number>();
+  incrementCountEvent = output<number>();
 }
 </docs-code>
 
@@ -23,12 +23,12 @@ class Child {
 
 <docs-code header="child.ts" language="ts">
 class Child {
-    ...
+  ...
 
-    onClick() {
-        this.count++;
-        this.incrementCountEvent.emit(this.count);
-    }
+  onClick() {
+    this.count++;
+    this.incrementCountEvent.emit(this.count);
+  }
 
 }
 </docs-code>

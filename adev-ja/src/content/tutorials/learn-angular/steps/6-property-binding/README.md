@@ -25,7 +25,7 @@ NOTE: 詳しくは、[エッセンシャルガイドの動的なプロパティ�
 
 <docs-code highlight="[2]">
 export class App {
-    isEditable = true;
+  isEditable = true;
 }
 </docs-code>
 </docs-step>
@@ -35,8 +35,8 @@ export class App {
 
 <docs-code highlight="[3]" language="angular-ts">
 @Component({
-    ...
-    template: `<div [contentEditable]="isEditable"></div>`,
+  ...
+  template: `<div [contentEditable]="isEditable"></div>`,
 })
 </docs-code>
 </docs-step>

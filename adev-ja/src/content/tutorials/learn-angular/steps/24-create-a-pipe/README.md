@@ -38,7 +38,7 @@ export class StarPipe implements PipeTransform {
 
 ```ts
 @Pipe({
-    name: 'reverse'
+  name: 'reverse'
 })
 ```
 
@@ -50,15 +50,15 @@ export class StarPipe implements PipeTransform {
 
 <docs-code language="ts" highlight="[3,4,5,6,7,8,9]">
 export class ReversePipe implements PipeTransform {
-    transform(value: string): string {
-        let reverse = '';
+  transform(value: string): string {
+    let reverse = '';
 
-        for (let i = value.length - 1; i >= 0; i--) {
-            reverse += value[i];
-        }
-
-        return reverse;
+    for (let i = value.length - 1; i >= 0; i--) {
+      reverse += value[i];
     }
+
+    return reverse;
+  }
 
 }
 </docs-code>
@@ -70,9 +70,9 @@ export class ReversePipe implements PipeTransform {
 
 <docs-code language="angular-ts" highlight="[3,4]">
 @Component({
-    ...
-    template: `Reverse Machine: {{ word | reverse }}`
-    imports: [ReversePipe]
+  ...
+  template: `Reverse Machine: {{ word | reverse }}`
+  imports: [ReversePipe]
 })
 </docs-code>
 

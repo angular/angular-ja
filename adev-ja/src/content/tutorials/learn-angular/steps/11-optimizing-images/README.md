@@ -47,7 +47,7 @@ import { NgOptimizedImage } from '@angular/common';
     </li>
     ...
   `,
-  imports:[NgOptimizedImage],
+  imports: [NgOptimizedImage],
 })
 </docs-code>
 

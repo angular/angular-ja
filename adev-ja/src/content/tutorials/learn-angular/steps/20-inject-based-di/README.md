@@ -13,7 +13,7 @@ DIシステムから提供される値でクラスのプロパティを初期化
 <docs-code language="ts" highlight="[3]">
 @Component({...})
 class PetCareDashboard {
-    petRosterService = inject(PetRosterService);
+  petRosterService = inject(PetRosterService);
 }
 </docs-code>
 

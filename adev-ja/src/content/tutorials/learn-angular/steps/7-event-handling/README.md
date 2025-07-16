@@ -12,13 +12,13 @@ Angularでは、`()`という構文を使ってイベントにバインドしま
 
 ```angular-ts
 @Component({
-    ...
-    template: `<button (click)="greet()">`
+  ...
+  template: `<button (click)="greet()">`
 })
 class App {
-    greet() {
-        console.log('Hello, there 👋');
-    }
+  greet() {
+    console.log('Hello, there 👋');
+  }
 }
 ```
 
@@ -33,7 +33,7 @@ class App {
 
 ```ts
 onMouseOver() {
-    this.message = 'Way to go 🚀';
+  this.message = 'Way to go 🚀';
 }
 ```
 

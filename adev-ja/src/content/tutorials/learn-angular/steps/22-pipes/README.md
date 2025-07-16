@@ -14,12 +14,12 @@ NOTE: 詳しくは、[パイプの詳細ガイド](/guide/templates/pipes)をご
 import {UpperCasePipe} from '@angular/common';
 
 @Component({
-    ...
-    template: `{{ loudMessage | uppercase }}`,
-    imports:[UpperCasePipe],
+  ...
+  template: `{{ loudMessage | uppercase }}`,
+  imports: [UpperCasePipe],
 })
 class App {
-    loudMessage = 'we think you are doing great!'
+  loudMessage = 'we think you are doing great!'
 }
 </docs-code>
 
@@ -41,8 +41,8 @@ import { LowerCasePipe } from '@angular/common';
 
 <docs-code language="ts" highlight="[3]">
 @Component({
-    ...
-    imports: [LowerCasePipe]
+  ...
+  imports: [LowerCasePipe]
 })
 </docs-code>
 

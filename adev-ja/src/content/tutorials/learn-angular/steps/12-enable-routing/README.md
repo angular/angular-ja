@@ -39,7 +39,7 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers:[provideRouter(routes)],
+  providers: [provideRouter(routes)],
 };
 </docs-code>
 
@@ -64,7 +64,7 @@ import {RouterOutlet} from '@angular/router';
     </nav>
     <router-outlet />
   `,
-  imports:[RouterOutlet],
+  imports: [RouterOutlet],
 })
 export class App {}
 </docs-code>

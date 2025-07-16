@@ -21,7 +21,6 @@ NOTE: [基本的なルートの定義方法についての詳細ガイド](/guid
 
 ```ts
 import {Routes} from '@angular/router';
-
 import {Home} from './home/home';
 
 export const routes: Routes = [
@@ -46,10 +45,9 @@ export const routes: Routes = [
 
 <docs-code language="ts" highlight="[8]">
 import {Routes} from '@angular/router';
-
 import {Home} from './home/home';
 
-export const routes: Routes =[
+export const routes: Routes = [
   {
     path: '',
     title: 'App Home Page',

@@ -26,8 +26,8 @@ template: `{{ date | date:'medium' }}`;
 
 <docs-code language="ts" highlight="[3]">
 template: `
-    ...
-    <li>Number with "decimal" {{ num | number:"3.2-2" }}</li>
+  ...
+  <li>Number with "decimal" {{ num | number:"3.2-2" }}</li>
 `
 </docs-code>
 
@@ -41,8 +41,8 @@ NOTE: このフォーマットは何でしょう？`DecimalPipe` のパラメー
 
 <docs-code language="ts" highlight="[3]">
 template: `
-    ...
-    <li>Date with "date" {{ birthday | date: 'medium' }}</li>
+  ...
+  <li>Date with "date" {{ birthday | date: 'medium' }}</li>
 `
 </docs-code>
 
@@ -56,8 +56,8 @@ template: `
 
 <docs-code language="ts" highlight="[3]">
 template: `
-    ...
-    <li>Currency with "currency" {{ cost | currency }}</li>
+  ...
+  <li>Currency with "currency" {{ cost | currency }}</li>
 `
 </docs-code>
 

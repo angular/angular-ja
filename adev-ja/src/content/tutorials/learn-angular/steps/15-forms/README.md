@@ -37,7 +37,7 @@ import {FormsModule} from '@angular/forms';
 
 @Component({
   ...
-  imports:[FormsModule],
+  imports: [FormsModule],
 })
 export class User {}
 </docs-code>

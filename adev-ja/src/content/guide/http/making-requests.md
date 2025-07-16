@@ -198,18 +198,241 @@ http.post('/api/upload', myData, {
 
 ## リクエスト失敗の処理 {#handling-request-failure}
 
-HTTPリクエストは、次の2つの方法で失敗する可能性があります。
+HTTPリクエストは、次の3つの方法で失敗する可能性があります。
 
 * ネットワークエラーまたは接続エラーにより、リクエストがバックエンドサーバーに到達できない場合があります。
+* timeout オプションが設定されている場合に、リクエストが時間内に応答しませんでした。
 * バックエンドがリクエストを受け取りますが、処理に失敗し、エラーレスポンスを返す場合があります。
 
-`HttpClient` は、`HttpErrorResponse` に両方の種類のエラーを捕捉し、`Observable` のエラーチャネルを通じて返します。ネットワークエラーの `status` コードは `0` で、`error` は [`ProgressEvent`](https://developer.mozilla.org/docs/Web/API/ProgressEvent) のインスタンスです。バックエンドエラーの `status` コードは、バックエンドによって返された失敗したコードであり、`error` はエラーレスポンスです。レスポンスを調べて、エラーの原因とエラーを処理するための適切なアクションを特定します。
+`HttpClient` は、上記のすべての種類のエラーを `HttpErrorResponse` に捕捉し、`Observable` のエラーチャネルを通じて返します。ネットワークエラーとタイムアウトエラーの `status` コードは `0` で、`error` は [`ProgressEvent`](https://developer.mozilla.org/docs/Web/API/ProgressEvent) のインスタンスです。バックエンドエラーの `status` コードは、バックエンドによって返された失敗したコードであり、`error` はエラーレスポンスです。レスポンスを調べて、エラーの原因とエラーを処理するための適切なアクションを特定します。
 
 [RxJS ライブラリ](https://rxjs.dev/) は、エラー処理に役立つ演算子をいくつか提供しています。
 
 `catchError` 演算子を使用して、エラーレスポンスをUI用の値に変換できます。この値は、UIにエラーページまたは値を表示し、必要に応じてエラーの原因を捕捉します。
 
 ネットワークの中断など、一時的なエラーにより、予期せずリクエストが失敗することがあります。リクエストを再試行するだけで成功する場合があります。RxJSは、特定の条件下で失敗した `Observable` に自動的に再購読する、複数の*再試行*演算子を提供しています。たとえば、`retry()` 演算子は、指定された回数だけ自動的に再サブスクライブを試みます。
+
+### タイムアウト
+
+リクエストにタイムアウトを設定するには、他のリクエストオプションと一緒に `timeout` オプションをミリ秒数に設定できます。バックエンドリクエストが指定された時間内に完了しない場合、リクエストは中止され、エラーが発行されます。
+
+NOTE: タイムアウトは、バックエンドHTTPリクエスト自体にのみ適用されます。リクエスト処理チェーン全体のタイムアウトではありません。したがって、このオプションは、インターセプターによって導入される遅延の影響を受けません。
+
+<docs-code language="ts">
+http.get('/api/config', {
+  timeout: 3000,
+}).subscribe({
+  next: config => {
+    console.log('設定の取得に成功:', config);
+  },
+  error: err => {
+    // リクエストがタイムアウトした場合、エラーが発行されます。
+  }
+});
+</docs-code>
+
+## 高度な fetch オプション
+
+`withFetch()` プロバイダーを使用する場合、Angular の `HttpClient` は、パフォーマンスとユーザーエクスペリエンスを改善できる高度な fetch API オプションへのアクセスを提供します。これらのオプションは、fetch バックエンドを使用する場合にのみ利用できます。
+
+### Fetch オプション
+
+以下のオプションは、fetch バックエンドを使用する際のリクエスト動作を細かく制御します。
+
+#### Keep-alive 接続
+
+`keepalive` オプションにより、リクエストはそれを開始したページよりも長く存続できます。これは、ユーザーがページから移動した場合でも完了する必要がある分析やログリクエストに特に有用です。
+
+<docs-code language="ts">
+http.post('/api/analytics', analyticsData, {
+  keepalive: true
+}).subscribe();
+</docs-code>
+
+#### HTTP キャッシュ制御
+
+`cache` オプションは、リクエストがブラウザーの HTTP キャッシュとどのように相互作用するかを制御し、繰り返しリクエストのパフォーマンスを大幅に改善できます。
+
+<docs-code language="ts">
+//  新鮮度に関係なくキャッシュされたレスポンスを使用
+http.get('/api/config', {
+  cache: 'force-cache'
+}).subscribe(config => {
+  // ...
+});
+
+// 常にネットワークから取得、キャッシュをバイパス
+http.get('/api/live-data', {
+  cache: 'no-cache'
+}).subscribe(data => {
+  // ...
+});
+
+// キャッシュされたレスポンスのみを使用、キャッシュにない場合は失敗
+http.get('/api/static-data', {
+  cache: 'only-if-cached'
+}).subscribe(data => {
+  // ...
+});
+</docs-code>
+
+#### Core Web Vitals のためのリクエスト優先度
+
+`priority` オプションを使用すると、リクエストの相対的な重要度を示すことができ、ブラウザーがより良い Core Web Vitals スコアのためにリソースの読み込みを最適化するのに役立ちます。
+
+<docs-code language="ts">
+// 重要なリソースの高優先度
+http.get('/api/user-profile', {
+  priority: 'high'
+}).subscribe(profile => {
+  // ...
+});
+
+// 重要でないリソースの低優先度
+http.get('/api/recommendations', {
+  priority: 'low'
+}).subscribe(recommendations => {
+  // ...
+});
+
+// 自動優先度 (デフォルト) はブラウザーが決定
+http.get('/api/settings', {
+  priority: 'auto'
+}).subscribe(settings => {
+  // ...
+});
+</docs-code>
+
+利用可能な `priority` 値：
+- `'high'`: 高優先度、早期に読み込まれる（例：重要なユーザーデータ、above-the-fold コンテンツ）
+- `'low'`: 低優先度、リソースが利用可能なときに読み込まれる（例：分析、プリフェッチデータ）
+- `'auto'`: ブラウザーがリクエストコンテキストに基づいて優先度を決定（デフォルト）
+
+TIP: Largest Contentful Paint (LCP) に影響するリクエストには `priority: 'high'` を使用し、初期ユーザーエクスペリエンスに影響しないリクエストには `priority: 'low'` を使用してください。
+
+#### リクエストモード
+
+`mode` オプションは、リクエストがクロスオリジンリクエストを処理する方法を制御し、レスポンスタイプを決定します。
+
+<docs-code language="ts">
+// 同一オリジンリクエストのみ
+http.get('/api/local-data', {
+  mode: 'same-origin'
+}).subscribe(data => {
+  // ...
+});
+
+// CORS が有効なクロスオリジンリクエスト
+http.get('https://api.external.com/data', {
+  mode: 'cors'
+}).subscribe(data => {
+  // ...
+});
+
+// シンプルなクロスオリジンリクエストの No-CORS モード
+http.get('https://external-api.com/public-data', {
+  mode: 'no-cors'
+}).subscribe(data => {
+  // ...
+});
+</docs-code>
+
+利用可能な `mode` 値：
+- `'same-origin'`: 同一オリジンリクエストのみを許可、クロスオリジンリクエストは失敗
+- `'cors'`: CORS でクロスオリジンリクエストを許可（デフォルト）
+- `'no-cors'`: CORS なしでシンプルなクロスオリジンリクエストを許可、レスポンスは不透明
+
+TIP: クロスオリジンに行くべきでない機密リクエストには `mode: 'same-origin'` を使用してください。
+
+#### リダイレクト処理
+
+`redirect` オプションは、サーバーからのリダイレクトレスポンスを処理する方法を指定します。
+
+<docs-code language="ts">
+// リダイレクトを自動的に追跡（デフォルトの動作）
+http.get('/api/resource', {
+  redirect: 'follow'
+}).subscribe(data => {
+  // ...
+});
+
+// 自動リダイレクトを防ぐ
+http.get('/api/resource', {
+  redirect: 'manual'
+}).subscribe(response => {
+  // リダイレクトを手動で処理
+});
+
+// リダイレクトをエラーとして扱う
+http.get('/api/resource', {
+  redirect: 'error'
+}).subscribe({
+  next: data => {
+    // 成功レスポンス
+  },
+  error: err => {
+    // リダイレクトレスポンスはこのエラーハンドラーをトリガーします
+  }
+});
+</docs-code>
+
+利用可能な `redirect` 値：
+- `'follow'`: リダイレクトを自動的に追跡（デフォルト）
+- `'error'`: リダイレクトをエラーとして扱う
+- `'manual'`: リダイレクトを自動的に追跡せず、リダイレクトレスポンスを返す
+
+TIP: カスタムロジックでリダイレクトを処理する必要がある場合は `redirect: 'manual'` を使用してください。
+
+#### 認証情報の処理
+
+`credentials` オプションは、Cookie、認証ヘッダー、その他の認証情報がクロスオリジンリクエストと一緒に送信されるかどうかを制御します。これは認証シナリオで特に重要です。
+
+<docs-code language="ts">
+// クロスオリジンリクエストに認証情報を含める
+http.get('https://api.example.com/protected-data', {
+  credentials: 'include'
+}).subscribe(data => {
+  // ...
+});
+
+// 認証情報を送信しない（クロスオリジンのデフォルト）
+http.get('https://api.example.com/public-data', {
+  credentials: 'omit'
+}).subscribe(data => {
+  // ...
+});
+
+// 同一オリジンリクエストのみに認証情報を送信
+http.get('/api/user-data', {
+  credentials: 'same-origin'
+}).subscribe(data => {
+  // ...
+});
+
+// withCredentials は credentials 設定を上書きします
+http.get('https://api.example.com/data', {
+  credentials: 'omit',        // これは無視されます
+  withCredentials: true       // これにより credentials: 'include' が強制されます
+}).subscribe(data => {
+  // credentials: 'omit' にもかかわらず、リクエストは認証情報を含みます
+});
+
+// レガシーアプローチ（まだサポートされています）
+http.get('https://api.example.com/data', {
+  withCredentials: true
+}).subscribe(data => {
+  // credentials: 'include' と同等
+});
+</docs-code>
+
+IMPORTANT: `withCredentials` オプションは `credentials` オプションより優先されます。両方が指定されている場合、明示的な `credentials` 値に関係なく、`withCredentials: true` は常に `credentials: 'include'` になります。
+
+利用可能な `credentials` 値：
+- `'omit'`: 認証情報を送信しない
+- `'same-origin'`: 同一オリジンリクエストのみに認証情報を送信（デフォルト）
+- `'include'`: クロスオリジンリクエストでも常に認証情報を送信
+
+TIP: CORS をサポートする異なるドメインに認証 Cookie やヘッダーを送信する必要がある場合は `credentials: 'include'` を使用してください。混乱を避けるため、`credentials` と `withCredentials` オプションを混在させることは避けてください。
 
 ## Http `Observable`
 

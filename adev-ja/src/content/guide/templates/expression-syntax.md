@@ -73,9 +73,6 @@ Angularは、標準JavaScriptの次の演算子をサポートしています。
 | 論理積代入                    | `a &&= b`                                |
 | 論理和代入                    | `a \|\|= b`                              |
 | Nullish Coalescing Assignment | `a ??= b`                                |
-| typeof                        | `typeof 42`                              |
-| void                          | `void 1`                                 |
-| in                            | `'model' in car`                         |
 
 Angular式は、さらに次の非標準の演算子もサポートしています。
 

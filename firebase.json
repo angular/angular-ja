@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/dist/bin/adev/build/browser",
+    "public": "build/dist/bin/adev/dist/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "trailingSlash": false,
     "headers": [

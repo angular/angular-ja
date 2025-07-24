@@ -216,11 +216,11 @@ export const routes: Routes = [
   // their corresponding routes become active.
   {
     path: 'login',
-    loadComponent: () => import('./components/auth/login-page')
+    loadComponent: () => import('./components/auth/login-page').then(m => m.LoginPage)
   },
   {
     path: '',
-    loadComponent: () => import('./components/home/home-page')
+    loadComponent: () => import('./components/home/home-page').then(m => m.HomePage)
   }
 ]
 ```
@@ -351,7 +351,7 @@ You can read this static data by injecting the `ActivatedRoute`. See [Reading ro
 
 ### Dynamic data with data resolvers
 
-When you need to provide dynamic data to a route, check out the [guide on route data resolvers](/guide/router/route-data-resolvers).
+When you need to provide dynamic data to a route, check out the [guide on route data resolvers](/guide/routing/data-resolvers).
 
 ## Nested Routes
 
@@ -365,7 +365,7 @@ You can add child routes to any route definition with the `children` property:
 const routes: Routes = [
   {
     path: 'product/:id',
-    component: 'ProductComponent',
+    component: ProductComponent,
     children: [
       {
         path: 'info',

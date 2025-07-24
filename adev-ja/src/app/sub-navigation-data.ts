@@ -325,6 +325,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'ルーティング',
+        status: 'updated',
         children: [
           {
             label: '概要',
@@ -360,6 +361,16 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'ガードによるルートアクセスの制御',
             path: 'guide/routing/route-guards',
             contentPath: 'guide/routing/route-guards',
+          },
+          {
+            label: 'ルートデータリゾルバー',
+            path: 'guide/routing/data-resolvers',
+            contentPath: 'guide/routing/data-resolvers',
+          },
+          {
+            label: 'ライフサイクルとイベント',
+            path: 'guide/routing/lifecycle-and-events',
+            contentPath: 'guide/routing/lifecycle-and-events',
           },
           {
             label: 'その他のルーティングタスク',
@@ -632,6 +643,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   },
   {
     label: 'Build with AI',
+    status: 'new',
     children: [
       {
         label: 'はじめよう',
@@ -642,6 +654,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'LLMプロンプトとAI IDEセットアップ',
         path: 'ai/develop-with-ai',
         contentPath: 'ai/develop-with-ai',
+      },
+      {
+        label: 'Angular CLI MCPサーバーセットアップ',
+        path: 'ai/mcp',
+        contentPath: 'ai/mcp-server-setup',
       },
     ],
   },
@@ -755,8 +772,35 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'DevTools',
-        path: 'tools/devtools',
-        contentPath: 'tools/devtools',
+        children: [
+          {
+            label: '概要',
+            path: 'tools/devtools',
+            contentPath: 'tools/devtools/overview',
+          },
+          {
+            label: 'コンポーネント',
+            path: 'tools/devtools/component',
+            contentPath: 'tools/devtools/component',
+          },
+          {
+            label: 'プロファイラー',
+            path: 'tools/devtools/profiler',
+            contentPath: 'tools/devtools/profiler',
+          },
+          // TODO: create those guides
+          // The signal debugging docs should also be added to the signal section
+          // {
+          //   label: 'Signals',
+          //   path: 'tools/devtools/signals',
+          //   contentPath: 'tools/devtools/signals',
+          // },
+          // {
+          //   label: 'Router',
+          //   path: 'tools/devtools/router',
+          //   contentPath: 'tools/devtools/router',
+          // }
+        ],
       },
       {
         label: '言語サービス',
@@ -772,6 +816,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'スタイルガイド',
         path: 'style-guide',
         contentPath: 'best-practices/style-guide',
+        status: 'updated',
       },
       {
         label: 'セキュリティ',

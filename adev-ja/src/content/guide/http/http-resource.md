@@ -45,6 +45,8 @@ user = httpResource(() => ({
   priority: 'high',
   cache : 'force-cache',
   credentials: 'include',
+  referrer: 'no-referrer',
+  integrity: 'sha384-oqVuAfXRKap7fdgcCY5uykM6+R9GhEXAMPLEKEY='
 }));
 ```
 
@@ -54,7 +56,7 @@ The signals of the `httpResource` can be used in the template to control which e
 
 ```angular-html
 @if(user.hasValue()) {
-  <user-details user="[user.value()]">
+  <user-details [user]="user.value()">
 } @else if (user.error()) {
   <div>Could not load user information</div>
 } @else if (user.isLoading()) {

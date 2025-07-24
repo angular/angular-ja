@@ -325,6 +325,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'Routing',
+        status: 'updated',
         children: [
           {
             label: 'Overview',
@@ -360,6 +361,16 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'Control route access with guards',
             path: 'guide/routing/route-guards',
             contentPath: 'guide/routing/route-guards',
+          },
+          {
+            label: 'Route data resolvers',
+            path: 'guide/routing/data-resolvers',
+            contentPath: 'guide/routing/data-resolvers',
+          },
+          {
+            label: 'Lifecycle and events',
+            path: 'guide/routing/lifecycle-and-events',
+            contentPath: 'guide/routing/lifecycle-and-events',
           },
           {
             label: 'Other routing tasks',
@@ -632,6 +643,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   },
   {
     label: 'Build with AI',
+    status: 'new',
     children: [
       {
         label: 'Get Started',
@@ -642,6 +654,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'LLM prompts and AI IDE setup',
         path: 'ai/develop-with-ai',
         contentPath: 'ai/develop-with-ai',
+      },
+      {
+        label: 'Angular CLI MCP Server setup',
+        path: 'ai/mcp',
+        contentPath: 'ai/mcp-server-setup',
       },
     ],
   },
@@ -755,8 +772,35 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'DevTools',
-        path: 'tools/devtools',
-        contentPath: 'tools/devtools',
+        children: [
+          {
+            label: 'Overview',
+            path: 'tools/devtools',
+            contentPath: 'tools/devtools/overview',
+          },
+          {
+            label: 'Components',
+            path: 'tools/devtools/component',
+            contentPath: 'tools/devtools/component',
+          },
+          {
+            label: 'Profiler',
+            path: 'tools/devtools/profiler',
+            contentPath: 'tools/devtools/profiler',
+          },
+          // TODO: create those guides
+          // The signal debugging docs should also be added to the signal section
+          // {
+          //   label: 'Signals',
+          //   path: 'tools/devtools/signals',
+          //   contentPath: 'tools/devtools/signals',
+          // },
+          // {
+          //   label: 'Router',
+          //   path: 'tools/devtools/router',
+          //   contentPath: 'tools/devtools/router',
+          // }
+        ],
       },
       {
         label: 'Language Service',
@@ -772,6 +816,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Style Guide',
         path: 'style-guide',
         contentPath: 'best-practices/style-guide',
+        status: 'updated',
       },
       {
         label: 'Security',

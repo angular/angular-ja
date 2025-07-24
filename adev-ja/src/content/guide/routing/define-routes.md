@@ -216,11 +216,11 @@ export const routes: Routes = [
   // 対応するルートがアクティブになった時点で遅延読み込みされます。
   {
     path: 'login',
-    loadComponent: () => import('./components/auth/login-page')
+    loadComponent: () => import('./components/auth/login-page').then(m => m.LoginPage)
   },
   {
     path: '',
-    loadComponent: () => import('./components/home/home-page')
+    loadComponent: () => import('./components/home/home-page').then(m => m.HomePage)
   }
 ]
 ```
@@ -351,7 +351,7 @@ const routes: Routes = [
 
 ### データリゾルバーによる動的データ {#dynamic-data-with-data-resolvers}
 
-ルートに動的データを提供する必要がある場合は、[ルートデータリゾルバーに関するガイド](/guide/router/route-data-resolvers)を参照してください。
+ルートに動的データを提供する必要がある場合は、[ルートデータリゾルバーに関するガイド](/guide/routing/data-resolvers)を参照してください。
 
 ## ネストされたルート {#nested-routes}
 
@@ -365,7 +365,7 @@ const routes: Routes = [
 const routes: Routes = [
   {
     path: 'product/:id',
-    component: 'ProductComponent',
+    component: ProductComponent,
     children: [
       {
         path: 'info',

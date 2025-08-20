@@ -164,6 +164,39 @@ const resp = new HttpResponse({
 });
 </docs-code>
 
+## リダイレクト情報の操作
+
+`HttpClient` を `withFetch` プロバイダーと一緒に使用する場合、レスポンスには、そのレスポンスがリダイレクトの結果であるかどうかを示す `redirected` プロパティが含まれます。このプロパティはネイティブのFetch API仕様に沿っており、リダイレクトシナリオを処理するインターセプターで有用です。
+
+インターセプターは、リダイレクト情報にアクセスして作用できます。
+
+<docs-code language="ts">
+export function redirectTrackingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(tap(event => {
+    if (event.type === HttpEventType.Response && event.redirected) {
+      console.log('Request to', req.url, 'was redirected to', event.url);
+      // リダイレクトロジックの処理 - 分析の更新、セキュリティチェックなど
+    }
+  }));
+}
+</docs-code>
+
+また、リダイレクト情報を使用してインターセプターで条件付きロジックを実装することもできます。
+
+<docs-code language="ts">
+export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(tap(event => {
+    if (event.type === HttpEventType.Response && event.redirected) {
+      // ログインページにリダイレクトされたかどうかを確認する
+      if (event.url?.includes('/login')) {
+        // 認証リダイレクトを処理する
+        handleAuthRedirect();
+      }
+    }
+  }));
+}
+</docs-code>
+
 ## DI ベースのインターセプター {#di-based-interceptors}
 
 `HttpClient` は、注入可能なクラスとして定義され、DIシステムによって構成されるインターセプターもサポートしています。DIベースのインターセプターの機能は、関数型インターセプターと同じですが、構成方法が異なります。

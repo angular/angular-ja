@@ -262,11 +262,10 @@ const routes: Routes = [
 
 各ルートには**タイトル**を関連付けることができます。ルートがアクティブになると、Angularは[ページタイトル](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)を自動的に更新します。アクセシブルな体験を作成するためにこれらのタイトルが必要となるため、アプリケーションに適切なページタイトルを常に定義してください。
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
@@ -279,13 +278,25 @@ const routes: Routes = [
     component: AboutComponent,
     title: 'About Us'
   },
+];
+```
+
+ページの `title` プロパティは、[`ResolveFn`](/api/router/ResolveFn)を使用してリゾルバー関数に動的に設定できます。
+
+```ts
+const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
+const routes: Routes = [
+   ...
   {
     path: 'products',
     component: ProductsComponent,
-    title: 'Our Products'
+    title: titleResolver,
   }
 ];
+
 ```
+
+ルートタイトルは、[`TitleStrategy`](/api/router/TitleStrategy) 抽象クラスを継承するサービスを介しても設定できます。デフォルトでは、Angularは[`DefaultTitleStrategy`](/api/router/DefaultTitleStrategy)を使用します。
 
 ## 依存性の注入のためのルートレベルプロバイダー {#route-level-providers-for-dependency-injection}
 

@@ -19,7 +19,7 @@
 
 ### 前提条件
 
-- **Node.js** - [v20.11.1以降](/reference/versions)
+- **Node.js** - [v20.19.0以降](/reference/versions)
 - **テキストエディタ** - [Visual Studio Code](https://code.visualstudio.com/)を推奨
 - **ターミナル** - Angular CLIコマンドを実行するために必要
 - **開発ツール** - 開発ワークフローを改善するために、[Angular Language Service](/tools/language-service) をおすすめします
@@ -91,7 +91,7 @@ cd my-first-angular-app
 
 </docs-code>
 
-この時点で、すべての依存関係がインストールされているはずです（プロジェクト内に`node_modules`フォルダが存在することを確認できます）。次のコマンドを実行してプロジェクトを開始できます。
+この時点で、すべての依存関係がインストールされているはずです（プロジェクト内に`node_modules`フォルダの存在を確認できます）。次のコマンドを実行してプロジェクトを開始できます。
 
 <docs-code language="shell">
 

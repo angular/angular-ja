@@ -14,7 +14,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 @let name = user.name;
 @let greeting = 'Hello, ' + name;
 @let data = data$ | async;
-@let pi = 3.1459;
+@let pi = 3.14159;
 @let coordinates = {x: 50, y: 100};
 @let longExpression = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ' +
                       'sed do eiusmod tempor incididunt ut labore et dolore magna ' +

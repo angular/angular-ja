@@ -25,9 +25,26 @@ export class AppComponent {
 <p>Your color preference is dark.</p>
 ```
 
-Angularは、最初のレンダリング時に式を評価するだけでなく、式の値が変更されると、レンダリングされたコンテンツも更新します。
+時間の経過とともに変化するバインディングは、[シグナル](/guide/signals)から値を読み取る必要があります。Angularはテンプレートで読み取られたシグナルを追跡し、それらのシグナル値が変更されたときにレンダリングされたページを更新します。
 
-テーマの例を続けると、ユーザーがページの読み込み後に`theme`の値を`'light'`に変更するボタンをクリックした場合、ページはそれに応じて以下のように更新されます。
+```angular-ts
+@Component({
+  template: `
+    <!-- `welcomeMessage`が変更されても必ずしも更新されるわけではありません。 --> 
+    <p>{{ welcomeMessage }}</p> 
+
+    <p>Your color preference is {{ theme() }}.</p> <!-- `name`シグナルの値が変更されたとき、常に更新されます。 -->
+  `
+  ...
+})
+export class AppComponent {
+  welcomeMessage = "Welcome, enjoy this app that we built for you"; 
+  theme = signal('dark');
+}
+```
+詳細については、[シグナルガイド](/guide/signals)を参照してください。
+
+テーマの例を続けると、ユーザーがページの読み込み後に`theme`シグナルを`'light'`に更新するボタンをクリックした場合、ページはそれに応じて以下のように更新されます。
 
 ```angular-html
 <!-- Rendered Output -->
@@ -50,7 +67,7 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- ボタン要素のDOMオブジェクトの`disabled`プロパティをバインドします -->
-<button [disabled]="isFormValid">Save</button>
+<button [disabled]="isFormValid()">Save</button>
 ```
 
 この例では、`isFormValid`が変更されるたびに、Angularは`HTMLButtonElement`インスタンスの`disabled`プロパティを自動的に設定します。
@@ -61,7 +78,7 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- `MyListbox`コンポーネントインスタンスの`value`プロパティをバインドします。 -->
-<my-listbox [value]="mySelection" />
+<my-listbox [value]="mySelection()" />
 ```
 
 この例では、`mySelection`が変更されるたびに、Angularは`MyListbox`インスタンスの`value`プロパティを自動的に設定します。
@@ -70,7 +87,7 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- `NgOptimizedImage`ディレクティブの`ngSrc`プロパティにバインドします  -->
-<img [ngSrc]="profilePhotoUrl" alt="The current user's profile photo">
+<img [ngSrc]="profilePhotoUrl()" alt="The current user's profile photo">
 ```
 
 ### 属性
@@ -79,7 +96,7 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- `<ul>`要素の`role`属性をコンポーネントの`listRole`プロパティにバインドします。 -->
-<ul [attr.role]="listRole">
+<ul [attr.role]="listRole()">
 ```
 
 この例では、`listRole`が変更されるたびに、Angularは`setAttribute`を呼び出して`<ul>`要素の`role`属性を自動的に設定します。
@@ -92,13 +109,13 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- 画像要素のDOMオブジェクトの`alt`プロパティに値をバインドします。 -->
-<img src="profile-photo.jpg" alt="Profile photo of {{ firstName }}" >
+<img src="profile-photo.jpg" alt="Profile photo of {{ firstName() }}" >
 ```
 
 テキスト補間構文を使用して属性にバインドするには、属性名の前に`attr.`を付けます。
 
 ```angular-html
-<button attr.aria-label="Save changes to {{ objectType }}">
+<button attr.aria-label="Save changes to {{ objectType() }}">
 ```
 
 ## CSSクラスとスタイルプロパティのバインディング
@@ -111,7 +128,7 @@ CSSクラスバインディングを作成して、バインドされた値が[�
 
 ```angular-html
 <!-- `isExpanded`が真偽値の場合、`expanded`CSSクラスを追加します。 -->
-<ul [class.expanded]="isExpanded">
+<ul [class.expanded]="isExpanded()">
 ```
 
 `class`プロパティに直接バインドもできます。Angularは、3種類の値を受け付けます。
@@ -126,18 +143,18 @@ CSSクラスバインディングを作成して、バインドされた値が[�
 @Component({
   template: `
     <ul [class]="listClasses"> ... </ul>
-    <section [class]="sectionClasses"> ... </section>
-    <button [class]="buttonClasses"> ... </button>
+    <section [class]="sectionClasses()"> ... </section>
+    <button [class]="buttonClasses()"> ... </button>
   `,
   ...
 })
 export class UserProfile {
   listClasses = 'full-width outlined';
-  sectionClasses = ['expandable', 'elevated'];
-  buttonClasses = {
+  sectionClasses = signal(['expandable', 'elevated']);
+  buttonClasses = ({
     highlighted: true,
     embiggened: false,
-  };
+  });
 }
 ```
 
@@ -155,12 +172,12 @@ Angularは、有効なCSSクラス名ではない文字列値を無視します�
 
 ```angular-ts
 @Component({
-  template: `<ul class="list" [class]="listType" [class.expanded]="isExpanded"> ...`,
+  template: `<ul class="list" [class]="listType()" [class.expanded]="isExpanded()"> ...`,
   ...
 })
 export class Listbox {
-  listType = 'box';
-  isExpanded = true;
+  listType = signal('box');
+  isExpanded = signal(true);
 }
 ```
 
@@ -184,14 +201,14 @@ NOTE: クラスバインディングは、単一のキーでスペース区切�
 
 ```angular-html
 <!-- `isExpanded`プロパティに基づいてCSSの`display`プロパティを設定します。 -->
-<section [style.display]="isExpanded ? 'block' : 'none'">
+<section [style.display]="isExpanded() ? 'block' : 'none'">
 ```
 
 単位を受け付けるCSSプロパティについては、さらに単位を指定できます。
 
 ```angular-html
 <!-- `sectionHeightInPixels`プロパティに基づいてCSSの`height`プロパティをピクセル値に設定します。 -->
-<section [style.height.px]="sectionHeightInPixels">
+<section [style.height.px]="sectionHeightInPixels()">
 ```
 
 複数のスタイル値を1つのバインディングで設定もできます。Angularは、以下の種類の値を受け付けます。
@@ -204,17 +221,17 @@ NOTE: クラスバインディングは、単一のキーでスペース区切�
 ```angular-ts
 @Component({
   template: `
-    <ul [style]="listStyles"> ... </ul>
-    <section [style]="sectionStyles"> ... </section>
+    <ul [style]="listStyles()"> ... </ul>
+    <section [style]="sectionStyles()"> ... </section>
   `,
   ...
 })
 export class UserProfile {
-  listStyles = 'display: flex; padding: 8px';
-  sectionStyles = {
+  listStyles = signal('display: flex; padding: 8px');
+  sectionStyles = signal({
     border: '1px solid black',
     'font-weight': 'bold',
-  };
+  });
 }
 ```
 

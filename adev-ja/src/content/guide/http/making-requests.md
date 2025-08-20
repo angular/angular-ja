@@ -434,6 +434,51 @@ IMPORTANT: `withCredentials` オプションは `credentials` オプションよ
 
 TIP: CORSをサポートする異なるドメインに認証Cookieやヘッダーを送信する必要がある場合は `credentials: 'include'` を使用してください。混乱を避けるため、`credentials` と `withCredentials` オプションを混在させることは避けてください。
 
+#### Referrer
+
+`referrer` オプションを使用すると、リクエストと一緒に送信されるリファラー情報を制御できます。これは、プライバシーとセキュリティを考慮する上で重要です。
+
+<docs-code language="ts">
+// 特定のリファラーURLを送信
+http.get('/api/data', {
+  referrer: 'https://example.com/page'
+}).subscribe(data => {
+  // ...
+});
+
+// 現在のページをリファラーとして使用（デフォルトの動作）
+http.get('/api/analytics', {
+  referrer: 'about:client'
+}).subscribe(data => {
+  // ...
+});
+</docs-code>
+
+`referrer` オプションは以下を受け入れます。
+- 有効なURL文字列: 送信する特定のリファラーURLを設定
+- 空文字列 `''`: リファラー情報を送信しない
+- `'about:client'`: デフォルトのリファラー（現在のページのURL）を使用
+
+TIP: 参照元ページのURLを漏らしたくない機密リクエストには `referrer: ''` を使用してください。
+
+#### Integrity
+
+`integrity` オプションを使用すると、期待されるコンテンツの暗号化ハッシュを提供することで、レスポンスが改ざんされていないことを検証できます。これは、CDNからスクリプトやその他のリソースを読み込む際に特に有用です。
+
+<docs-code language="ts">
+// SHA-256ハッシュでレスポンスの整合性を検証
+http.get('/api/script.js', {
+  integrity: 'sha256-ABC123...',
+  responseType: 'text'
+}).subscribe(script => {
+  // スクリプトのコンテンツがハッシュに対して検証されます
+});
+</docs-code>
+
+IMPORTANT: `integrity` オプションには、レスポンスコンテンツと提供されたハッシュとの厳密な一致が必要です。コンテンツが一致しない場合、リクエストはネットワークエラーで失敗します。
+
+TIP: 外部ソースから重要なリソースを読み込む際は、それらが変更されていないことを確実にするため、サブリソースの整合性を使用してください。`openssl` などのツールを使用してハッシュを生成してください。
+
 ## Http `Observable`
 
 `HttpClient` の各リクエストメソッドは、要求されたレスポンス型の `Observable` を構築して返します。これらの `Observable` の仕組みを理解することは、`HttpClient` を使用する場合に重要です。

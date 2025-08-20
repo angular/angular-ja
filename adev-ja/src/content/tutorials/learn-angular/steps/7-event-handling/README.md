@@ -29,10 +29,10 @@ class App {
 <docs-workflow>
 
 <docs-step title="イベントハンドラーを追加">
-`App`クラスに`onMouseOver`イベントハンドラー関数を追加します。以下のコードを実装に使用します。
+`App`クラスに`showSecretMessage()`イベントハンドラー関数を追加します。以下のコードを実装に使用します。
 
 ```ts
-onMouseOver() {
+showSecretMessage() {
   this.message = 'Way to go 🚀';
 }
 ```
@@ -43,7 +43,7 @@ onMouseOver() {
 `app.t`のテンプレートコードを更新し、`section`要素の`mouseover`イベントにバインドします。
 
 ```angular-html
-<section (mouseover)="onMouseOver()">
+<section (mouseover)="showSecretMessage()">
 ```
 
 </docs-step>

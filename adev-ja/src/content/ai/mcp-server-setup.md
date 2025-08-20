@@ -12,7 +12,7 @@ ng mcp
 
 ### Cursor
 
-プロジェクトのルートに`.cursor/mcp.json`という名前のファイルを作成し、以下の設定を追加します。`~/.cursor/mcp.json`でグローバルに設定することもできます。
+プロジェクトのルートに`.cursor/mcp.json`という名前のファイルを作成し、以下の設定を追加します。`~/.cursor/mcp.json`でグローバルに設定できます。
 
 ```json
 {
@@ -111,7 +111,7 @@ JetBrains IDEs（IntelliJ IDEAやWebStormなど）では、JetBrains AI Assistan
 | `--local-only` | `boolean` | インターネット接続を必要としないツールのみを登録します。エディタまたはコーディングエージェントは引き続きネットワーク経由でデータを送信する場合があります。 | `false` |
 
 
-たとえば、VS Codeで読み取り専用モードでサーバーを実行する場合は、`mcp.json`を次のように更新します：
+たとえば、VS Codeにおいて読み取り専用モードでサーバーを実行する場合は、`mcp.json`を次のように更新します：
 
 ```json
 {

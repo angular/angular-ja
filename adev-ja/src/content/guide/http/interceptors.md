@@ -181,7 +181,7 @@ export function redirectTrackingInterceptor(req: HttpRequest<unknown>, next: Htt
 }
 </docs-code>
 
-また、リダイレクト情報を使用してインターセプターで条件付きロジックを実装することもできます。
+また、リダイレクト情報を使用してインターセプターで条件付きロジックを実装できます。
 
 <docs-code language="ts">
 export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {

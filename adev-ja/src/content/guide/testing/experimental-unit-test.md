@@ -18,7 +18,7 @@ CLIで作成するプロジェクトは、デフォルトで`karma`テストシ�
   "options": {
     "tsConfig": "tsconfig.spec.json",
     "runner": "vitest",
-    "buildTarget": "::development",
+    "buildTarget": "::development"
   }
 }
 </docs-code>

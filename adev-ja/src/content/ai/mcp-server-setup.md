@@ -1,4 +1,5 @@
 # Angular CLI MCPサーバーセットアップ
+
 Angular CLIには、開発環境のAIアシスタントがAngular CLIと対話できるようにする実験的な[Model Context Protocol (MCP) サーバー](https://modelcontextprotocol.io/)が含まれています。CLIによるコード生成、パッケージの追加などに対応しています。
 
 開始するには、ターミナルで次のコマンドを実行します。
@@ -17,7 +18,7 @@ ng mcp
   "servers": {
     "angular-cli": {
       "command": "npx",
-      "args": ["@angular/cli", "mcp"]
+      "args": ["-y", "@angular/cli", "mcp"]
     }
   }
 }
@@ -31,6 +32,7 @@ JetBrains IDEs（IntelliJ IDEAやWebStormなど）では、MCP Serverプラグ�
   "name": "Angular CLI",
   "command": "npx",
   "args": [
+    "-y",
     "@angular/cli",
     "mcp"
   ]
@@ -44,7 +46,7 @@ JetBrains IDEs（IntelliJ IDEAやWebStormなど）では、MCP Serverプラグ�
   "mcpServers": {
     "angular-cli": {
       "command": "npx",
-      "args": ["@angular/cli", "mcp"]
+      "args": ["-y", "@angular/cli", "mcp"]
     }
   }
 }
@@ -60,7 +62,7 @@ JetBrains IDEs（IntelliJ IDEAやWebStormなど）では、MCP Serverプラグ�
   "mcpServers": {
     "angular-cli": {
       "command": "npx",
-      "args": ["@angular/cli", "mcp"]
+      "args": ["-y", "@angular/cli", "mcp"]
     }
   }
 }

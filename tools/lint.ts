@@ -25,7 +25,7 @@ async function main() {
 
   const files = await getTranslatedFiles();
   const { stdout, failed } = await $$`textlint ${fix ? ['--fix'] : []} ${files}`;
-  consola.log(stdout.replace('textlint --fix [file]', 'yarn lint --fix'));
+  consola.log(stdout.replace('textlint --fix [file]', 'npm run lint -- --fix'));
 
   if (failed) {
     process.exit(1);

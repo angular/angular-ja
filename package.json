@@ -1,7 +1,7 @@
 {
   "name": "angular-ja",
   "version": "0.0.1",
-  "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/angular/angular-ja",
   "author": "Suguru Inatomi <suguru.inatomi@gmail.com>",
   "license": "MIT",
@@ -10,12 +10,12 @@
     "start": "tsx tools/watch.ts",
     "build": "tsx tools/build.ts",
     "lint": "tsx tools/lint.ts",
-    "test": "yarn test:patch",
+    "test": "pnpm run test:patch",
     "test:patch": "git apply -v --check --directory origin ./tools/adev-patches/*.patch",
     "update-origin": "tsx tools/update-origin.ts",
     "translate": "tsx --env-file=.env tools/translator/main.ts"
   },
-  "packageManager": "yarn@1.22.10",
+  "packageManager": "pnpm@10.15.0",
   "devDependencies": {
     "@langchain/core": "0.3.58",
     "@langchain/google-genai": "0.2.12",

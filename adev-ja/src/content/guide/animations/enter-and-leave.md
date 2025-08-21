@@ -9,7 +9,7 @@
 
 Angularは、アプリケーションの要素をアニメーション化するために`animate.enter`と`animate.leave`を提供します。これら2つの機能は、適切なタイミングでenterおよびleaveのCSSクラスを適用するか、サードパーティライブラリからアニメーションを適用する関数を呼び出します。`animate.enter`と`animate.leave`はディレクティブではありません。これらはAngularコンパイラによって直接サポートされる特別なAPIです。これらは要素に直接使用できるほか、ホストバインディングとしても使用できます。
 
-## `animate.enter` {#animate.enter}
+## `animate.enter`
 
 `animate.enter`はDOMに_入る_要素をアニメーション化するために使用できます。CSSクラスと、transformまたはキーフレームアニメーションのいずれかを使用して、enterアニメーションを定義できます。
 
@@ -31,7 +31,7 @@ NOTE: 要素で複数のキーフレームアニメーションまたはtransiti
     <docs-code header="src/app/enter-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.css"/>
 </docs-code-multifile>
 
-## `animate.leave` {#animate.leave}
+## `animate.leave`
 
 `animate.leave` を使用して、要素がDOMから_離れる_ときにアニメーションを適用できます。CSSクラスと、transformまたはキーフレームアニメーションのいずれかを使用して、離脱アニメーションを定義できます。
 

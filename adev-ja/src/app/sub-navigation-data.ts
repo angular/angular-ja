@@ -686,6 +686,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'ai/develop-with-ai',
       },
       {
+        label: '設計パターン',
+        path: 'ai/design-patterns',
+        contentPath: 'ai/design-patterns',
+      },
+      {
         label: 'Angular CLI MCPサーバーセットアップ',
         path: 'ai/mcp',
         contentPath: 'ai/mcp-server-setup',

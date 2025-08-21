@@ -373,19 +373,36 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/lifecycle-and-events',
           },
           {
+            label: 'ルーティングとナビゲーションのテスト',
+            path: 'guide/routing/testing',
+            contentPath: 'guide/routing/testing',
+            status: 'new',
+          },
+          {
             label: 'その他のルーティングタスク',
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
           },
-           {
+          {
             label: 'カスタムルートマッチの作成',
             path: 'guide/routing/routing-with-urlmatcher',
             contentPath: 'guide/routing/routing-with-urlmatcher',
           },
           {
+            label: 'レンダリング戦略',
+            path: 'guide/routing/rendering-strategies',
+            contentPath: 'guide/routing/rendering-strategies',
+            status: 'new',
+          },
+          {
             label: 'ルーターリファレンス',
             path: 'guide/routing/router-reference',
             contentPath: 'guide/routing/router-reference',
+          },
+          {
+            label: 'ルート遷移アニメーション',
+            path: 'guide/routing/route-transition-animations',
+            contentPath: 'guide/routing/route-transition-animations',
           },
         ],
       },
@@ -523,6 +540,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/testing/pipes',
           },
           {
+            label: 'ルーティングとナビゲーションのテスト',
+            path: 'guide/routing/testing',
+            contentPath: 'guide/routing/testing',
+            status: 'new',
+          },
+          {
             label: 'テストのデバッグ',
             path: 'guide/testing/debugging',
             contentPath: 'guide/testing/debugging',
@@ -619,18 +642,25 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
           },
         ],
       },
-       {
-        label: 'Animations',
+      {
+        label: 'アニメーション',
+        status: 'updated',
         children: [
           {
-            label: 'Animating your content',
+            label: 'コンテンツのアニメーション',
             path: 'guide/animations/css',
             contentPath: 'guide/animations/css',
           },
           {
-            label: 'Route transition animations',
-            path: 'guide/animations/route-animations',
-            contentPath: 'guide/animations/route-animations',
+            label: 'Enter and Leave アニメーション',
+            path: 'guide/animations/enter-and-leave',
+            contentPath: 'guide/animations/enter-and-leave',
+            status: 'new',
+          },
+          {
+            label: 'ルート遷移アニメーション',
+            path: 'guide/routing/route-transition-animations',
+            contentPath: 'guide/routing/route-transition-animations',
           },
         ],
       },
@@ -922,6 +952,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'ecosystem/rxjs-interop/output-interop',
             contentPath: 'ecosystem/rxjs-interop/output-interop',
           },
+          {
+            label: 'takeUntilDestroyedでの購読解除',
+            path: 'ecosystem/rxjs-interop/take-until-destroyed',
+            contentPath: 'ecosystem/rxjs-interop/take-until-destroyed',
+          },
         ],
       },
       {
@@ -973,6 +1008,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'カスタムビルドパイプライン',
         path: 'ecosystem/custom-build-pipeline',
         contentPath: 'ecosystem/custom-build-pipeline',
+      },
+      {
+        label: 'Tailwind',
+        path: 'guide/tailwind',
+        contentPath: 'guide/tailwind',
+        status: 'new',
       },
       {
         label: 'Angular Fire',
@@ -1142,6 +1183,10 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
           {
             label: '概要',
             path: 'cli/generate',
+          },
+          {
+            label: 'ai-config',
+            path: 'cli/generate/ai-config',
           },
           {
             label: 'app-shell',

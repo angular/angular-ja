@@ -50,8 +50,8 @@ $ git clone git@github.com:angular/angular-ja.git
 このリポジトリではsubmoduleを使って翻訳元リポジトリと統合しています。初回のビルド時にsubmoduleの同期やビルドディレクトリの初期化が行われます。15分ほどかかることがあるため、気長にお待ちください。
 
 ```
-$ yarn install
-$ yarn build
+$ pnpm install
+$ pnpm build
 ```
 
 ### 開発用サーバーを使った作業
@@ -59,7 +59,7 @@ $ yarn build
 開発用ローカルサーバーを起動すると、ビルド結果を確認しながら翻訳作業ができます。
 
 ```
-$ yarn start
+$ pnpm start
 ```
 
 - デフォルトでは `http://localhost:4200` でサーバーが立ち上がります
@@ -68,7 +68,7 @@ $ yarn start
 `start` コマンドでは、翻訳用にパッチが適用されたアプリケーションコードを含む `build` ディレクトリを初期化せずに再利用します。初期化して開始したい場合は、 `--init` オプションを指定してください。
 
 ```
-$ yarn start --init
+$ pnpm start --init
 ```
 
 ### 文体チェック・自動修正
@@ -76,7 +76,7 @@ $ yarn start --init
 textlintを使って文体チェックを行うことができます。次のコマンドで文体チェックを行い、自動修正を行うことができます。
 
 ```
-$ yarn lint [--fix]
+$ pnpm lint [--fix]
 ```
 
 
@@ -85,7 +85,7 @@ $ yarn lint [--fix]
 次のコマンドでデプロイ可能な生成物をビルドします。
 
 ```
-$ yarn build
+$ pnpm build
 ```
 
 ビルドが完了すると、 `build/dist/bin/adev/build` ディレクトリにビルド結果が出力されます。

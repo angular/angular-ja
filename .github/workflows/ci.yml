@@ -12,30 +12,34 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           submodules: true
+      - name: setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # 4.1.0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: '.node-version'
-          cache: yarn
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn test
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm run lint
+      - run: pnpm run test
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           submodules: true
+      - name: setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # 4.1.0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: '.node-version'
-          cache: yarn
+          cache: pnpm
       - uses: bazel-contrib/setup-bazel@0.15.0 # 0.15.0
         with:
           bazelisk-cache: true
           disk-cache: true
           repository-cache: true
-      - run: yarn install
-      - run: yarn build
+      - run: pnpm install
+      - run: pnpm run build
   # build-windows:
   #   runs-on: windows-latest
   #   steps:

@@ -349,9 +349,10 @@ export class CustomSlider {
     return this.internalValue;
   }
 
-set value(newValue: number) { this.internalValue = newValue; }
+  set value(newValue: number) { this.internalValue = newValue; }
 
-private internalValue = 0; }
+  private internalValue = 0;
+}
 </docs-code>
 
 パブリックセッターのみを定義することで、_書き込み専用_の入力を作成できます。
@@ -363,7 +364,8 @@ export class CustomSlider {
     this.internalValue = newValue;
   }
 
-private internalValue = 0; }
+  private internalValue = 0;
+}
 </docs-code>
 
 可能な場合は、**ゲッターとセッターの代わりに、入力変換を使用することをお勧めします。**

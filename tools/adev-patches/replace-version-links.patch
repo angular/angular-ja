@@ -12,10 +12,10 @@ index 44dad0e1ef..610fdab042 100644
    {
      "version": "v19",
 diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
-index 3e409a67e4..402879e788 100644
+index d4e9fb86ea..eaf7969333 100644
 --- a/adev/src/app/core/services/version-manager.service.ts
 +++ b/adev/src/app/core/services/version-manager.service.ts
-@@ -63,7 +63,7 @@ export class VersionManager {
+@@ -62,7 +62,7 @@ export class VersionManager {
    // which is the most up-to-date anyway.
    remoteVersions = httpResource(
      () => ({

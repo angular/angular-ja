@@ -266,10 +266,8 @@ While data resolvers prevent loading states within components, they introduce a 
 To improve user experience during resolver execution, you can listen to router events and show loading indicators:
 
 ```angular-ts
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -282,9 +280,7 @@ import { map } from 'rxjs';
 })
 export class App {
   private router = inject(Router);
-  isNavigating = toSignal(this.router.events.pipe(
-    map(() => !!this.router.getCurrentNavigation())
-  ));
+  isNavigating = computed(() => !!this.router.currentNavigation());
 }
 ```
 

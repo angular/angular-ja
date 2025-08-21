@@ -531,9 +531,8 @@ IMPORTANT: `click()`ヘルパー関数は、Angularのテストユーティリ�
 
 <docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test host setup)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host-setup"/>
 
-このテストモジュール設定は、3つの重要な違いを示しています。
+このテストモジュール設定は、2つの重要な違いを示しています。
 
-* `DashboardHeroComponent`と`TestHostComponent`の両方を*インポート*します
 * `DashboardHeroComponent`ではなく`TestHostComponent`を*作成*します
 * `TestHostComponent`は、バインディングで`DashboardHeroComponent.hero`を設定します
 
@@ -588,23 +587,6 @@ Here are the services injected into `HeroDetailComponent`:
 
 テストでは、異なるルートにナビゲートすることで、`HeroDetailComponent`が異なる`id`パラメーター値にどのように応答するかを調べることができます。
 
-### `RouterTestingHarness`によるテスト
-
-次に、観察された`id`が既存のヒーローを参照している場合に、コンポーネントの動作を示すテストを示します。
-
-<docs-code header="app/hero/hero-detail.component.spec.ts (existing id)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="route-good-id"/>
-
-HELPFUL: 後のセクションでは、`createComponent()`メソッドと`page`オブジェクトについて説明します。
-今のところ、直感的に理解してください。
-
-`id`が見つからない場合、コンポーネントは`HeroListComponent`にリダイレクトする必要があります。
-
-テストスイートの設定では、同じルーターハーネスが提供されました[上記を参照](#routing-component)。
-
-このテストは、コンポーネントが`HeroListComponent`へのナビゲーションを試みると予想しています。
-
-<docs-code header="app/hero/hero-detail.component.spec.ts (bad id)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="route-bad-id"/>
-
 ## ネストされたコンポーネントテスト
 
 コンポーネントテンプレートには、多くの場合、ネストされたコンポーネントが含まれています。そのテンプレートには、さらに多くのコンポーネントが含まれている場合があります。
@@ -637,17 +619,15 @@ HELPFUL: 後のセクションでは、`createComponent()`メソッドと`page`�
 スタブセレクターは、対応する実際のコンポーネントのセレクターと一致します。
 しかし、それらのテンプレートとクラスは空です。
 
-次に、`TestBed`設定内で、実際にする必要があるコンポーネント、ディレクティブ、パイプの横に宣言します。
+次に、`TestBed.overrideComponent`を使用してコンポーネントの`imports`をオーバーライドして宣言します。
 
 <docs-code header="app/app.component.spec.ts (TestBed stubs)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="testbed-stubs"/>
 
-`AppComponent`はテスト対象なので、当然、実際のバージョンを宣言します。
-
-残りはスタブです。
+HELPFUL: この例の`set`キーはコンポーネントの既存のimportsをすべて置き換えます。スタブだけでなく、すべての依存関係をimportするようにしてください。または、`remove`/`add`キーを使用してimportsを選択的に削除および追加できます。
 
 ### `NO_ERRORS_SCHEMA`
 
-2番目の方法では、`TestBed.schemas`メタデータに`NO_ERRORS_SCHEMA`を追加します。
+2番目の方法では、コンポーネントのメタデータオーバーライドに`NO_ERRORS_SCHEMA`を追加します。
 
 <docs-code header="app/app.component.spec.ts (NO_ERRORS_SCHEMA)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="no-errors-schema"/>
 
@@ -731,155 +711,6 @@ Angularコンパイラーは、`<app-banner>`要素に対して`BannerStubCompon
 次に、ポイントを強化するための`HeroDetailComponent`のテストをいくつか示します。
 
 <docs-code header="app/hero/hero-detail.component.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="selected-tests"/>
-
-## `compileComponents()`の呼び出し
-
-HELPFUL: CLI`ng test`コマンドでのみテストを実行している場合は、このセクションを無視してください。なぜなら、CLIはテストを実行する前にアプリケーションをコンパイルするからです。
-
-**CLI以外の環境**でテストを実行する場合、テストは次のようなメッセージで失敗する可能性があります。
-
-<docs-code hideCopy language="shell">
-
-Error: This test module uses the component BannerComponent
-which is using a "templateUrl" or "styleUrls", but they were never compiled.
-Please call "TestBed.compileComponents" before your test.
-
-</docs-code>
-
-問題の根本は、テストに関与するコンポーネントの少なくとも1つが、`BannerComponent`の次のバージョンで行われているように、外部テンプレートまたはCSSファイルを指定していることです。
-
-<docs-code header="app/banner/banner-external.component.ts (external template & css)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.ts"/>
-
-テストは、`TestBed`がコンポーネントの作成を試みたときに失敗します。
-
-<docs-code avoid header="app/banner/banner-external.component.spec.ts (setup that fails)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.spec.ts" visibleRegion="setup-may-fail"/>
-
-アプリケーションはコンパイルされていないことを思い出してください。
-そのため、`createComponent()`を呼び出すと、`TestBed`は暗黙的にコンパイルします。
-
-これは、ソースコードがメモリ内にある場合は問題ありません。
-しかし、`BannerComponent`は外部ファイルが必要であり、コンパイラーはファイルシステムからそれらを読み取る必要があります。これは本質的に*非同期*操作です。
-
-`TestBed`が続行することを許可すると、テストが実行され、コンパイラーが完了する前に、不可解な理由で失敗します。
-
-予防的なエラーメッセージは、`compileComponents()`で明示的にコンパイルするように指示しています。
-
-### `compileComponents()`は非同期です
-
-`compileComponents()`は、非同期テスト関数内で呼び出す必要があります。
-
-CRITICAL: テスト関数を非同期にするのを怠ると（たとえば、[waitForAsync()](#waitForAsync)の使用を忘れると）、次のようなエラーメッセージが表示されます。
-
-<docs-code hideCopy language="shell">
-
-Error: ViewDestroyedError: Attempt to use a destroyed view
-
-</docs-code>
-
-一般的なアプローチは、セットアップロジックを2つの別の`beforeEach()`関数に分割することです。
-
-| 関数                    | 詳細                       |
-| :----------------------- | :---------------------------- |
-| 非同期`beforeEach()` | コンポーネントをコンパイルする |
-| 同期`beforeEach()`  | 残りのセットアップを実行する  |
-
-### 非同期`beforeEach`
-
-最初の非同期`beforeEach`は、次のように記述します。
-
-<docs-code header="app/banner/banner-external.component.spec.ts (async beforeEach)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.spec.ts" visibleRegion="async-before-each"/>
-
-`TestBed.configureTestingModule()`メソッドは、`TestBed`クラスを返し、`compileComponents()`などの他の`TestBed`の静的メソッドへの呼び出しをチェーンすることができます。
-
-この例では、`BannerComponent`はコンパイルする必要がある唯一のコンポーネントです。
-他の例では、複数のコンポーネントでテストモジュールを設定し、さらに多くのコンポーネントを保持するアプリケーションモジュールをインポートする場合があります。
-それらのいずれかが外部ファイルが必要になる可能性があります。
-
-`TestBed.compileComponents`メソッドは、テストモジュールで設定されたすべてのコンポーネントを非同期的にコンパイルします。
-
-IMPORTANT: `compileComponents()`を呼び出した後、`TestBed`を再設定しないでください。
-
-`compileComponents()`を呼び出すと、現在の`TestBed`インスタンスがさらに設定されなくなります。
-`configureTestingModule()`や`override...`メソッドなど、`TestBed`の構成メソッドをさらに呼び出すことはできません。
-`TestBed`は、試行するとエラーをスローします。
-
-`compileComponents()`を、`TestBed.createComponent()`を呼び出す前の最後のステップにしてください。
-
-### 同期`beforeEach`
-
-2番目の、同期`beforeEach()`には、残りのセットアップ手順が含まれます。これには、コンポーネントの作成と、検査する要素のクエリが含まれます。
-
-<docs-code header="app/banner/banner-external.component.spec.ts (synchronous beforeEach)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.spec.ts" visibleRegion="sync-before-each"/>
-
-テストランナーは、最初の非同期`beforeEach`が終了するまで待ってから、2番目を呼び出します。
-
-### 統合された設定
-
-2つの`beforeEach()`関数を、1つの非同期`beforeEach()`に統合できます。
-
-`compileComponents()`メソッドはプロミスを返すため、同期セットアップタスクを*コンパイル後*に実行することができます。そのため、同期コードを`await`キーワードの後に移動します。この時点で、プロミスは解決されています。
-
-<docs-code header="app/banner/banner-external.component.spec.ts (one beforeEach)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.spec.ts" visibleRegion="one-before-each"/>
-
-### `compileComponents()`は安全です
-
-`compileComponents()`を呼び出しても、必要ない場合でも害はありません。
-
-CLIによって生成されたコンポーネントテストファイルは、`ng test`を実行しているときは不要ですが、`compileComponents()`を呼び出します。
-
-このガイドのテストでは、必要に応じてのみ`compileComponents`を呼び出します。
-
-## モジュールインポートによるセットアップ
-
-以前のコンポーネントテストでは、次のようにテストモジュールをいくつかの`declarations`で設定していました。
-
-<docs-code header="app/dashboard/dashboard-hero.component.spec.ts (configure TestBed)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="config-testbed"/>
-
-`DashboardComponent`はシンプルです。
-助けは必要ありません。
-しかし、より複雑なコンポーネントは、多くの場合、他のコンポーネント、ディレクティブ、パイプ、およびプロバイダーに依存しており、これらをテストモジュールにも追加する必要があります。
-
-幸いなことに、`TestBed.configureTestingModule`のパラメーターは、`@NgModule`デコレーターに渡されるメタデータと並行しているため、`providers`と`imports`も指定できます。
-
-`HeroDetailComponent`は、小さいサイズでシンプルな構造にもかかわらず、多くの助けを必要としています。
-デフォルトのテストモジュール`CommonModule`からサポートを受けることに加えて、次のようなものが必要です。
-
-* `FormsModule`の`NgModel`など、双方向データバインディングを有効にする
-* `shared`フォルダの`TitleCasePipe`
-* ルーターサービス
-* ヒーローのデータアクセスサービス
-
-1つのアプローチは、次の例のように、個々のピースからテストモジュールを設定することです。
-
-<docs-code header="app/hero/hero-detail.component.spec.ts (FormsModule setup)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="setup-forms-module"/>
-
-HELPFUL: `beforeEach()`が非同期であり、`TestBed.compileComponents`を呼び出していることに注意してください。なぜなら、`HeroDetailComponent`は外部テンプレートとcssファイルを持っているからです。
-
-[compileComponentsの呼び出し](#calling-compilecomponents)で説明されているように、これらのテストは、Angularがブラウザでそれらをコンパイルする必要がある、CLI以外の環境で実行することができます。
-
-### 共有モジュールのインポート
-
-多くのアプリケーションコンポーネントが`FormsModule`と`TitleCasePipe`を必要とするため、開発者は`SharedModule`を作成して、これらと他の頻繁に要求される部分を組み合わせました。
-
-テスト設定では、次の例のように、`SharedModule`も使用できます。
-
-<docs-code header="app/hero/hero-detail.component.spec.ts (SharedModule setup)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="setup-shared-module"/>
-
-これは少しタイトで小さく、インポートステートメントが少なくなります。この例では示されていません。
-
-### 機能モジュールのインポート
-
-`HeroDetailComponent`は、`SharedModule`など、相互依存する部分をさらにまとめた`HeroModule` [機能モジュール](guide/ngmodules/feature-modules)の一部です。
-次のような`HeroModule`をインポートするテスト設定を試してみましょう。
-
-<docs-code header="app/hero/hero-detail.component.spec.ts (HeroModule setup)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="setup-hero-module"/>
-
-`providers`の*テストダブル*のみが残ります。
-`HeroDetailComponent`の宣言でさえなくなっています。
-
-実際、宣言しようとすると、Angularはエラーをスローします。なぜなら、`HeroDetailComponent`は`HeroModule`と`TestBed`によって作成された`DynamicTestModule`の両方で宣言されているからです。
-
-HELPFUL: コンポーネントの機能モジュールをインポートすると、モジュール内に多くの相互依存関係があり、モジュールが小さい場合（機能モジュールは通常小さい）にテストを設定する最良の方法になる場合があります。
 
 ## コンポーネントプロバイダーのオーバーライド
 

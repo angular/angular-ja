@@ -373,6 +373,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/lifecycle-and-events',
           },
           {
+            label: 'Testing routing and navigation',
+            path: 'guide/routing/testing',
+            contentPath: 'guide/routing/testing',
+            status: 'new',
+          },
+          {
             label: 'Other routing tasks',
             path: 'guide/routing/common-router-tasks',
             contentPath: 'guide/routing/common-router-tasks',
@@ -383,9 +389,20 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/routing-with-urlmatcher',
           },
           {
+            label: 'Rendering strategies',
+            path: 'guide/routing/rendering-strategies',
+            contentPath: 'guide/routing/rendering-strategies',
+            status: 'new',
+          },
+          {
             label: 'Router reference',
             path: 'guide/routing/router-reference',
             contentPath: 'guide/routing/router-reference',
+          },
+          {
+            label: 'Route transition animations',
+            path: 'guide/routing/route-transition-animations',
+            contentPath: 'guide/routing/route-transition-animations',
           },
         ],
       },
@@ -523,6 +540,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/testing/pipes',
           },
           {
+            label: 'Testing routing and navigation',
+            path: 'guide/routing/testing',
+            contentPath: 'guide/routing/testing',
+            status: 'new',
+          },
+          {
             label: 'Debugging tests',
             path: 'guide/testing/debugging',
             contentPath: 'guide/testing/debugging',
@@ -621,6 +644,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'Animations',
+        status: 'updated',
         children: [
           {
             label: 'Animating your content',
@@ -628,9 +652,15 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/animations/css',
           },
           {
+            label: 'Enter and Leave animations',
+            path: 'guide/animations/enter-and-leave',
+            contentPath: 'guide/animations/enter-and-leave',
+            status: 'new',
+          },
+          {
             label: 'Route transition animations',
-            path: 'guide/animations/route-animations',
-            contentPath: 'guide/animations/route-animations',
+            path: 'guide/routing/route-transition-animations',
+            contentPath: 'guide/routing/route-transition-animations',
           },
         ],
       },
@@ -922,6 +952,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'ecosystem/rxjs-interop/output-interop',
             contentPath: 'ecosystem/rxjs-interop/output-interop',
           },
+          {
+            label: 'Unsubscribing with takeUntilDestroyed',
+            path: 'ecosystem/rxjs-interop/take-until-destroyed',
+            contentPath: 'ecosystem/rxjs-interop/take-until-destroyed',
+          },
         ],
       },
       {
@@ -973,6 +1008,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Custom build pipeline',
         path: 'ecosystem/custom-build-pipeline',
         contentPath: 'ecosystem/custom-build-pipeline',
+      },
+      {
+        label: 'Tailwind',
+        path: 'guide/tailwind',
+        contentPath: 'guide/tailwind',
+        status: 'new',
       },
       {
         label: 'Angular Fire',
@@ -1134,6 +1175,10 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
           {
             label: 'Overview',
             path: 'cli/generate',
+          },
+          {
+            label: 'ai-config',
+            path: 'cli/generate/ai-config',
           },
           {
             label: 'app-shell',

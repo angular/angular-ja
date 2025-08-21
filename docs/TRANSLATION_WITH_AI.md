@@ -7,7 +7,7 @@
 AI翻訳スクリプトの実装は `tools/translator` に配置されています。AI翻訳は以下の手順で実行します。
 
 ```
-$ yarn translate <翻訳元ファイル・ディレクトリ> [--write]
+$ pnpm translate <翻訳元ファイル・ディレクトリ> [--write]
 ```
 
 `--write` オプションを指定すると、確認なしに翻訳結果をファイルに書き出します。指定しない場合は、翻訳結果が標準出力に表示されたうえで、保存するかどうかを確認します。
@@ -15,7 +15,7 @@ $ yarn translate <翻訳元ファイル・ディレクトリ> [--write]
 例えば、以下のように実行します。
 
 ```
-$ yarn translate adev-ja/src/content/guide/components/content-projection.en.md
+$ pnpm translate adev-ja/src/content/guide/components/content-projection.en.md
 ```
 
 入力されたファイルが `*.en.md` である場合、出力されるファイルは `*.md` になります。すでにファイルがある場合は上書きされます。翻訳元ファイルが `*.md` である場合、出力は同じファイルになります。

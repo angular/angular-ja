@@ -19,12 +19,12 @@
 
 ### 実験的に利用可能
 
-* [Zoneless change detection](/guide/zoneless)
 * [Resource API](/guide/signals/resource)
 * [httpResource](/api/common/http/httpResource)
 
 ### 本番環境向け
 
+* [Zoneless change detection](/guide/zoneless)
 * [Linked Signal API](/guide/signals/linked-signal)
 * [Incremental hydration](/guide/incremental-hydration)
 * [Effect API](/api/core/effect)
@@ -54,7 +54,7 @@
 
   In v19 we introduced zoneless support in server-side rendering, addressed some edge cases, and created a schematic to scaffold zoneless projects. We transitioned <a href="https://fonts.google.com/">Google Fonts</a> to zoneless which improved performance, developer experience, and allowed us to identify gaps that we need to address before moving this feature to developer preview.
 
-  As of Angular v20, Zoneless Angular is now in developer preview and includes improvements in error handling and server-side rendering.
+  As of Angular v20.2, Zoneless Angular is now stable and includes improvements in error handling and server-side rendering.
   </docs-card>
   <docs-card title="シグナルとの統合" href="">
   フォーム、HTTP、ルーターなど、基本的なAngularパッケージとシグナルの統合を改善することに取り組んでいます。このプロジェクトの一環として、包括的な開発者エクスペリエンスを向上させるために、便利なシグナルベースのAPIまたはラッパーを導入する機会を探ります。

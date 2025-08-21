@@ -17,7 +17,7 @@ GitHub上で `angular/angular` リポジトリのコミットハッシュを入�
 1で入手したコミットハッシュを指定して、`angular/angular` リポジトリを更新します。
 
 ```sh
-$ yarn update-origin <commit-hash>
+$ pnpm update-origin <commit-hash>
 ```
 
 コミットハッシュを指定しない場合は、originの更新は行わず、現在のsubmoduleからファイルのコピーを再度実行します。

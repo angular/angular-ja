@@ -31,13 +31,13 @@ export GEMINI_MODEL="gemini-2.5-flash-preview-05-20"  # オプション
 
 ```bash
 # 基本的な使用方法
-yarn translate path/to/file.md
+pnpm run translate path/to/file.md
 
 # 確認なしで保存
-yarn translate -w path/to/file.md
+pnpm run translate -w path/to/file.md
 
 # ヘルプ表示
-yarn translate --help
+pnpm run translate --help
 ```
 
 ### オプション

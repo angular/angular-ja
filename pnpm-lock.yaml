@@ -38,6 +38,9 @@ importers:
       langchain:
         specifier: 0.3.28
         version: 0.3.28(@langchain/core@0.3.58(openai@5.13.1(zod@3.25.76)))(@langchain/google-genai@0.2.12(@langchain/core@0.3.58(openai@5.13.1(zod@3.25.76))))(openai@5.13.1(zod@3.25.76))
+      prh:
+        specifier: 5.4.4
+        version: 5.4.4
       rxjs:
         specifier: 7.8.1
         version: 7.8.1

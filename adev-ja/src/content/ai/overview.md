@@ -60,60 +60,6 @@ Firebase AI LogicとAngularで構築する方法の例を次に示します。
 
 * [AIチャットボットアプリテンプレート](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-chatbot) - このテンプレートは、HTTP経由でGemini APIと通信するチャットボットユーザーインターフェースから始まります。
 
-## AIパターン実践: チャット応答のストリーミング {#ai-patterns-in-action-streaming-chat-responses}
-モデルから応答が受信されるにつれてテキストが表示されるのは、AIを使用するWebアプリケーションで一般的なUIパターンです。この非同期タスクはAngularの`resource` APIで実現できます。`resource`の`stream`プロパティは、時間の経過とともにシグナル値に更新を適用するために使用できる非同期関数を受け入れます。更新されるシグナルは、ストリーミングされるデータを表します。
-
-```ts
-characters = resource({
-    stream: async () => {
-      const data = signal<{ value: string } | { error: unknown }>({
-        value: "",
-      });
-
-      fetch(this.url).then(async (response) => {
-        if (!response.body) return;
-        
-        for await (const chunk of response.body) {
-          const chunkText = this.decoder.decode(chunk);
-          data.update((prev) => {
-            if ("value" in prev) {
-              return { value: `${prev.value} ${chunkText}` };
-            } else {
-              return { error: chunkText };
-            }
-          });
-        }
-      });
-
-      return data;
-    },
-  });
-
-```
-
-`characters`メンバーは非同期で更新され、テンプレートに表示できます。
-
-```html
-<p>{{ characters.value() }}</p>
-```
-
-サーバー側では、例えば`server.ts`で、定義されたエンドポイントがクライアントにストリーミングされるデータを送信します。以下のコードはGemini APIを使用していますが、この手法はLLMからのストリーミング応答をサポートする他のツールやフレームワークにも適用可能です。
-
-```ts
- app.get("/api/stream-response", async (req, res) => {
-   ai.models.generateContentStream({
-     model: "gemini-2.0-flash",
-     contents: "Explain how AI works",
-   }).then(async (response) => {
-     for await (const chunk of response) {
-       res.write(chunk.text);
-     }
-   });
- });
-
-```
-この例はGemini APIに接続していますが、ストリーミング応答をサポートする他のAPIもここで使用できます。[完全な例はAngularのGithubで見つけることができます](https://github.com/angular/examples/tree/main/streaming-example)。
-
 ## ベストプラクティス
 ### モデルプロバイダーへの接続とAPI認証情報の保護 {#connecting-to-model-providers-and-keeping-your-api-credentials-secure}
 モデルプロバイダーに接続する際は、APIシークレットを安全に保つことが重要です。*APIキーを`environments.ts`のようなクライアントに配布されるファイルに決して含めないでください*。

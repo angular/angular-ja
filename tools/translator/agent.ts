@@ -112,6 +112,7 @@ const translatorPromptTemplate =
   - 例: "# Security" → "# セキュリティ" （"<h1>" の場合はアンカーIDなし）
   - 例: "## How to use Angular" → "## Angularの使い方 {{#how-to-use-angular}}"
   - 例: "### How to use Angular" → "### Angularの使い方 {{#how-to-use-angular}}"
+  - 例: "### \`foo.bar\`" → "### \`foo.bar\` {{#foobar}}" (ハイフン以外の記号はすべて削除)
 - **英単語の前後にスペースを入れないでください**
   - bad: "Angular の使い方"
   - good: "Angularの使い方"

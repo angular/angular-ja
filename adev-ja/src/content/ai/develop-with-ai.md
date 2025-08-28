@@ -31,7 +31,7 @@ Angular CLIには、開発環境のAIアシスタントがAngular CLIと連携�
 
 [**Angular CLI MCPサーバーのセットアップ方法を学ぶ**](/ai/mcp)
 
-## llms.txtによるコンテキスト提供 {#providing-context-with-llms.txt}
+## llms.txtによるコンテキスト提供 {#providing-context-with-llmstxt}
 `llms.txt`は、LLMがコンテンツをより良く理解し処理できるよう設計されたウェブサイト向けの提案されている標準です。Angularチームは、LLMおよびコード生成にLLMを使用するツールが、より良いモダンなAngularコードを作成できるようにするため、このファイルの2つのバージョンを開発しました。
 
 

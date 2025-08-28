@@ -1,20 +1,20 @@
-# Design patterns for AI SDKs and signal APIs
+# AI SDKとシグナルAPIのための設計パターン
 
-Interacting with AI and Large Language Model (LLM) APIs introduces unique challenges, such as managing asynchronous operations, handling streaming data, and designing a responsive user experience for potentially slow or unreliable network requests. Angular [signals](guide/signals) and the [`resource`](guide/signals/resource) API provide powerful tools to solve these problems elegantly.
+AIおよび大規模言語モデル (LLM) APIとの対話は、非同期操作の管理、ストリーミングデータの処理、そして潜在的に遅いまたは信頼性の低いネットワークリクエストに対する応答性の高いユーザー体験の設計といった、特有の課題を伴います。Angularの[シグナル](guide/signals)と[`resource`](guide/signals/resource) APIは、これらの問題をエレガントに解決するための強力なツールを提供します。
 
-## Triggering requests with signals
+## シグナルによるリクエストのトリガー {#triggering-requests-with-signals}
 
-A common pattern when working with user-provided prompts is to separate the user's live input from the submitted value that triggers the API call.
+ユーザーが提供するプロンプトを扱う際の一般的なパターンは、ユーザーのライブ入力と、API呼び出しをトリガーする送信値を分離することです。
 
-1. Store the user's raw input in one signal as they type
-2. When the user submits (e.g., by clicking a button), update a second signal with contents of the first signal.
-3. Use the second signal in the **`params`** field of your `resource`.
+1. ユーザーが入力する際に、生の入力を1つのシグナルに保存します。
+2. ユーザーが送信したとき（例: ボタンをクリックして）、最初のシグナルの内容で2番目のシグナルを更新します。
+3. 2番目のシグナルを`resource`の**`params`**フィールドで使用します。
 
-This setup ensures the resource's **`loader`** function only runs when the user explicitly submits their prompt, not on every keystroke. You can use additional signal parameters, like a `sessionId` or `userId` (which can be useful for creating persistent LLM sessions), in the `loader` field. This way, the request always uses these parameters' current values without re-triggering the asyncronous function defined in the `loader` field.
+この設定により、`resource`の**`loader`**関数は、ユーザーがプロンプトを明示的に送信したときにのみ実行され、すべてのキーストロークで実行されることはありません。`loader`フィールドでは、`sessionId`や`userId`のような追加のシグナルパラメータ（永続的なLLMセッションの作成に役立ちます）を使用できます。これにより、リクエストは常にこれらのパラメータの現在の値を使用し、`loader`フィールドで定義された非同期関数を再トリガーすることはありません。
 
-Many AI SDKs provide helper methods for making API calls. For example, the Genkit client library exposes a `runFlow` method for calling Genkit flows, which you can call from a resource's `loader`. For other APIs, you can use the [`httpResource`](guide/signals/resource#reactive-data-fetching-with-httpresource).
+多くのAI SDKは、API呼び出しをするためのヘルパーメソッドを提供しています。例えば、GenkitクライアントライブラリはGenkitフローを呼び出すための`runFlow`メソッドを公開しており、これを`resource`の`loader`から呼び出すことができます。他のAPIについては、[`httpResource`](guide/signals/resource#reactive-data-fetching-with-httpresource)を使用できます。
 
-The following example shows a `resource` that fetches parts of an AI-generated story. The `loader` is triggered only when the `storyInput` signal changes.
+以下の例は、AIが生成したストーリーの一部をフェッチする`resource`を示しています。`loader`は、`storyInput`シグナルが変更されたときにのみトリガーされます。
 
 ```ts
 // A resource that fetches three parts of an AI generated story
@@ -35,15 +35,15 @@ storyResource = resource({
 });
 ```
 
-## Preparing LLM data for templates
+## テンプレート用のLLMデータ準備 {#preparing-llm-data-for-templates}
 
-You can configure LLM APIs to return structured data. Strongly typing your `resource` to match the expected output from the LLM provides better type safety and editor autocompletion.
+LLM APIを設定して構造化データを返すことができます。`resource`をLLMからの期待される出力に厳密に型付けすることで、より良い型安全性とエディターのオートコンプリートが提供されます。
 
-To manage state derived from a resource, use a `computed` signal or `linkedSignal`. Because `linkedSignal` [provides access to prior values](guide/signals/linked-signal), it can serve a variety of AI-related use cases, including
-  * building a chat history
-  * preserving or customizing data that templates display while LLMs generate content
+リソースから派生した状態を管理するには、`computed`シグナルまたは`linkedSignal`を使用します。`linkedSignal`は[以前の値へのアクセスを提供する](guide/signals/linked-signal)ため、以下を含むさまざまなAI関連のユースケースに役立ちます。
+  * チャット履歴の構築
+  * LLMがコンテンツを生成している間、テンプレートが表示するデータを保持またはカスタマイズする
 
-In the example below, `storyParts` is a `linkedSignal` that appends the latest story parts returned from `storyResource` to the existing array of story parts.
+以下の例では、`storyParts`は`linkedSignal`であり、`storyResource`から返された最新のストーリーパーツを既存のストーリーパーツの配列に追加します。
 
 ```ts
 storyParts = linkedSignal<string[], string[]>({
@@ -59,16 +59,16 @@ storyParts = linkedSignal<string[], string[]>({
 });
 ```
 
-## Performance and user experience
+## パフォーマンスとユーザー体験 {#performance-and-user-experience}
 
-LLM APIs may be slower and more error-prone than conventional, more deterministic APIs. You can use several Angular features to build a performant and user-friendly interface.
+LLM APIは、従来のより決定論的なAPIよりも低速でエラーが発生しやすい場合があります。Angularのいくつかの機能を使用して、高性能でユーザーフレンドリーなインターフェースを構築できます。
 
-* **Scoped Loading:** place the `resource` in the component that directly uses the data. This helps limit change detection cycles (especially in zoneless applications) and prevents blocking other parts of your application. If data needs to be shared across multiple components, provide the `resource` from a service.  
-* **SSR and Hydration:** use Server-Side Rendering (SSR) with incremental hydration to render the initial page content quickly. You can show a placeholder for the AI-generated content and defer fetching the data until the component hydrates on the client.  
-* **Loading State:** use the `resource` `LOADING` [status](guide/signals/resource#resource-status) to show an indicator, like a spinner, while the request is in flight. This status covers both initial loads and reloads.  
-* **Error Handling and Retries:** use the `resource` [**`reload()`**](guide/signals/resource#reloading) method as a simple way for users to retry failed requests, may be more prevalent when relying on AI generated content.
+* **スコープ付きローディング:** データを直接使用するコンポーネントに`resource`を配置します。これにより、変更検知サイクル（特にゾーンレスアプリケーションで）を制限し、アプリケーションの他の部分がブロックされるのを防ぎます。データが複数のコンポーネント間で共有される必要がある場合は、サービスから`resource`を提供します。
+* **SSRとハイドレーション:** インクリメンタルハイドレーションを備えたサーバーサイドレンダリング (SSR) を使用して、初期ページコンテンツを素早くレンダリングします。AI生成コンテンツのプレースホルダーを表示し、コンポーネントがクライアントでハイドレートされるまでデータのフェッチを遅延させることができます。
+* **ローディング状態:** `resource`の`LOADING` [ステータス](guide/signals/resource#resource-status)を使用して、リクエスト処理中にスピナーのようなインジケーターを表示します。このステータスは、初期ロードとリロードの両方をカバーします。
+* **エラー処理と再試行:** `resource`の[**`reload()`**](guide/signals/resource#reloading)メソッドを、ユーザーが失敗したリクエストを再試行する簡単な方法として使用します。これはAI生成コンテンツに依存する場合により頻繁に発生する可能性があります。
 
-The following example demonstrates how to create a responsive UI to dynamically display an AI generated image with loading and retry functionality.
+次の例は、ローディングと再試行機能を備えたAI生成画像を動的に表示するレスポンシブUIを作成する方法を示しています。
 
 ```angular-html
 <!-- Display a loading spinner while the LLM generates the image -->
@@ -89,8 +89,8 @@ The following example demonstrates how to create a responsive UI to dynamically 
 ```
 
 
-## AI patterns in action: streaming chat responses
-Interfaces often display partial results from LLM-based APIs incrementally as response data arrives. Angular's resource API provides the ability to stream responses to support this type of pattern. The `stream` property of `resource` accepts an asyncronous function you can use to apply updates to a signal value over time. The signal being updated represents the data being streamed.
+## AIパターンを実践する: チャット応答のストリーミング {#ai-patterns-in-action-streaming-chat-responses}
+インターフェースは、LLMベースのAPIからの部分的な結果を、応答データが到着するにつれて段階的に表示することがよくあります。Angularのresource APIは、この種のパターンをサポートするために応答をストリーミングする機能を提供します。`resource`の`stream`プロパティは、時間の経過とともにシグナル値に更新を適用するために使用できる非同期関数を受け入れます。更新されるシグナルは、ストリーミングされるデータを表します。
 
 ```ts
 characters = resource({
@@ -120,7 +120,7 @@ characters = resource({
 });
 ```
 
-The `characters` member is updated asynchronously and can be displayed in the template.
+`characters`メンバーは非同期に更新され、テンプレートに表示できます。
 
 ```angular-html
 @if (characters.isLoading()) {
@@ -132,7 +132,7 @@ The `characters` member is updated asynchronously and can be displayed in the te
 }
 ```
 
-On the server side, in `server.ts` for example, the defined endpoint sends the data to be streamed to the client. The following code uses Gemini with the Genkit framework but this technique is applicable to other APIs that support streaming responses from LLMs:
+サーバー側では、例えば`server.ts`で、定義されたエンドポイントがストリーミングされるデータをクライアントに送信します。以下のコードはGenkitフレームワークでGeminiを使用していますが、この手法はLLMからのストリーミング応答をサポートする他のAPIにも適用できます。
 
 ```ts
 import { startFlowServer } from '@genkit-ai/express';

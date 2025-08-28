@@ -2,49 +2,49 @@
 ルーティングは、シングルページアプリケーションでユーザーが閲覧する内容を変更するのに役立ちます。
 </docs-decorative-header>
 
-Angular Router (`@angular/router`) is the official library for managing navigation in Angular applications and a core part of the framework. It is included by default in all projects created by Angular CLI.
+Angular Router (`@angular/router`) は、Angularアプリケーションでナビゲーションを管理するための公式ライブラリであり、フレームワークの核となる部分です。Angular CLIによって作成されたすべてのプロジェクトにデフォルトで含まれています。
 
-## Installation
+## インストール {#installation}
 
-Angular Router is included by default in all Angular projects setup with the Angular CLI `ng new` command.
+Angular Routerは、Angular CLIの`ng new`コマンドによりセットアップされたすべてのAngularプロジェクトにデフォルトで含まれています。
 
-### Prerequisite
+### 前提条件 {#prerequisite}
 
 - Angular CLI
 
-### Add to an existing project
+### 既存のプロジェクトに追加 {#add-to-an-existing-project}
 
-If your project does not include Angular Router, you can install it manually with the following command:
+プロジェクトにAngular Routerが含まれていない場合、以下のコマンドで手動インストールできます:
 
 ```bash
 ng add @angular/router
 ```
 
-The Angular CLI will then install all the necessary dependencies.
+Angular CLIが、必要なすべての依存関係をインストールします。
 
-## Why is routing necessary in a SPA?
+## SPAでルーティングが必要な理由 {#why-is-routing-necessary-in-a-spa}
 
-When you navigate to a URL in your web browser, the browser normally makes a network request to a web server and displays the returned HTML page. When you navigate to a different URL, such as clicking a link, the browser makes another network request and replaces the entire page with a new one.
+WebブラウザでURLに移動すると、ブラウザは通常、Webサーバーにネットワークリクエストを行い、返されたHTMLページを表示します。リンクをクリックするなどの別のURLに移動すると、ブラウザは別のネットワークリクエストを行い、ページ全体を新しいものに置き換えます。
 
-A single-page application (SPA) differs in that the browser only makes a request to a web server for the first page, the `index.html`. After that, a client-side router takes over, controlling which content displays based on the URL. When a user navigates to a different URL, the router updates the page's content in place without triggering a full-page reload.
+シングルページアプリケーション（SPA）は、ブラウザが最初のページである`index.html`に対してのみWebサーバーにリクエストを行う点で異なります。その後、クライアントサイドルーターが引き継ぎ、URLに基づいて表示するコンテンツを制御します。ユーザーが別のURLに移動すると、ルーターはページ全体のリロードをトリガーすることなく、その場でページコンテンツを更新します。
 
-## How Angular manages routing
+## Angularがルーティングを管理する方法 {#how-angular-manages-routing}
 
-Routing in Angular is comprised of three primary parts:
+Angularにおけるルーティングは、主に3つの要素で構成されています。
 
-1. **Routes** define which component displays when a user visits a specific URL.
-2. **Outlets** are placeholders in your templates that dynamically load and render components based on the active route.
-3. **Links** provide a way for users to navigate between different routes in your application without triggering a full page reload.
+1.  **ルート**は、ユーザーが特定のURLにアクセスしたときにどのコンポーネントを表示するかを定義します。
+2.  **アウトレット**は、アクティブなルートに基づいてコンポーネントを動的にロードおよびレンダリングする、テンプレート内のプレースホルダーです。
+3.  **リンク**は、フルページリロードをトリガーすることなく、アプリケーション内の異なるルート間をユーザーが移動するための手段を提供します。
 
-In addition, the Angular Routing library offers additional functionality such as:
+さらに、Angularルーティングライブラリは、次のような追加機能を提供します。
 
-- Nested routes
-- Programmatic navigation
-- Route params, queries and wildcards
-- Activated route information with `ActivatedRoute`
-- View transition effects
-- Navigation guards
+-   ネストされたルート
+-   プログラムによるナビゲーション
+-   ルートパラメーター、クエリ、ワイルドカード
+-   `ActivatedRoute`によるアクティブ化されたルート情報
+-   ビュートランジション効果
+-   ナビゲーションガード
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Learn about how you can [define routes using Angular router](/guide/routing/define-routes).
+[Angularルーターを使用してルートを定義する](/guide/routing/define-routes)方法について学びましょう。

@@ -21,7 +21,7 @@ jobs:
         with:
           node-version-file: '.node-version'
           cache: pnpm
-      - uses: bazel-contrib/setup-bazel@e403ad507104847c3539436f64a9e9eecc73eeec # 0.8.5
+      - uses: bazel-contrib/setup-bazel@4fd964a13a440a8aeb0be47350db2fc640f19ca8 # 0.15.0
         with:
           bazelisk-cache: true
           disk-cache: true

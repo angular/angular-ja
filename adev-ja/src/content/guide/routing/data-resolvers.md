@@ -1,27 +1,27 @@
-# Data resolvers
+# データリゾルバー
 
-Data resolvers allow you to fetch data before navigating to a route, ensuring that your components receive the data they need before rendering. This can help prevent the need for loading states and improve the user experience by pre-loading essential data.
+データリゾルバーを使用すると、ルートにナビゲートする前にデータをフェッチでき、コンポーネントが必要なデータをレンダリング前に確実に受け取るようにします。これにより、ローディング状態の必要性を防ぎ、重要なデータを事前に読み込むことでユーザー体験を向上させることができます。
 
-## What are data resolvers?
+## データリゾルバーとは？ {#what-are-data-resolvers}
 
-A data resolver is a service that implements the [`ResolveFn`](api/router/ResolveFn) function. It runs before a route activates and can fetch data from APIs, databases, or other sources. The resolved data becomes available to the component through the [`ActivatedRoute`](api/router/ActivatedRoute).
+データリゾルバーは、[`ResolveFn`](api/router/ResolveFn)関数を実装するサービスです。これは、ルートがアクティブになる前に実行され、API、データベース、またはその他のソースからデータをフェッチできます。解決されたデータは、[`ActivatedRoute`](api/router/ActivatedRoute)を介してコンポーネントで利用可能になります。
 
-## Why use data resolvers?
+## データリゾルバーを使用する理由 {#why-use-data-resolvers}
 
-Data resolvers solve common routing challenges:
+データリゾルバーは、一般的なルーティングの課題を解決します。
 
-- **Prevent empty states**: Components receive data immediately upon loading
-- **Better user experience**: No loading spinners for critical data
-- **Error handling**: Handle data fetching errors before navigation
-- **Data consistency**: Ensure required data is available before rendering which is important for SSR
+- **空の状態を防ぐ**: コンポーネントはロード時にすぐにデータを受け取ります
+- **より良いユーザー体験**: 重要なデータに対してローディングスピナーは表示されません
+- **エラー処理**: ナビゲーション前にデータ取得エラーを処理します
+- **データの一貫性**: レンダリング前に必要なデータが利用可能であることを保証します。これはSSRにとって重要です
 
-## Creating a resolver
+## リゾルバの作成 {#creating-a-resolver}
 
-You create a resolver by writing a function with the [`ResolveFn`](api/router/ResolveFn) type.
+リゾルバは、[`ResolveFn`](api/router/ResolveFn)型の関数を記述することで作成します。
 
-It receives the [`ActivatedRouteSnapshot`](api/router/ActivatedRouteSnapshot) and [`RouterStateSnapshot`](api/router/RouterStateSnapshot) as parameters.
+これは、[`ActivatedRouteSnapshot`](api/router/ActivatedRouteSnapshot)と[`RouterStateSnapshot`](api/router/RouterStateSnapshot)をパラメータとして受け取ります。
 
-Here is a resolver that gets the user information before rendering a route using the [`inject`](api/core/inject) function:
+以下は、[`inject`](api/core/inject)関数を使用してルートをレンダリングする前にユーザー情報を取得するリゾルバです。
 
 ```ts
 import { inject } from '@angular/core';
@@ -42,9 +42,9 @@ export const settingsResolver: ResolveFn<Settings> = (route: ActivatedRouteSnaps
 };
 ```
 
-## Configuring routes with resolvers
+## ルーティングにリゾルバーを設定する {#configuring-routes-with-resolvers}
 
-When you want to add one or more data resolvers to a route, you can add it under the `resolve` key in the route configuration. The [`Routes`](api/router/Routes) type defines the structure for route configurations:
+ルートに1つ以上のデータリゾルバーを追加したい場合は、ルート設定の`resolve`キーの下に追加できます。[`Routes`](api/router/Routes)型は、ルート設定の構造を定義します。
 
 ```ts
 import { Routes } from '@angular/router';
@@ -61,13 +61,13 @@ export const routes: Routes = [
 ];
 ```
 
-You can learn more about the [`resolve` configuration in the API docs](api/router/Route#resolve).
+[`resolve`設定の詳細については、APIドキュメントで確認できます。](api/router/Route#resolve)
 
-## Accessing resolved data in components
+## コンポーネントで解決済みデータにアクセスする {#accessing-resolved-data-in-components}
 
-### Using ActivatedRoute
+### ActivatedRouteを使用する {#using-activatedroute}
 
-You can access the resolved data in a component by accessing the snapshot data from the [`ActivatedRoute`](api/router/ActivatedRoute) using the [`signal`](api/core/signal) function:
+[`signal`](api/core/signal)関数を使用して[`ActivatedRoute`](api/router/ActivatedRoute)からスナップショットデータにアクセスすることで、コンポーネントで解決済みデータにアクセスできます。
 
 ```angular-ts
 import { Component, inject, computed } from '@angular/core';
@@ -90,9 +90,9 @@ export class UserDetail {
 }
 ```
 
-### Using withComponentInputBinding
+### withComponentInputBindingを使用する {#using-withcomponentinputbinding}
 
-A different approach to accessing the resolved data is to use [`withComponentInputBinding()`](api/router/withComponentInputBinding) when configuring your router with [`provideRouter`](api/router/provideRouter). This allows resolved data to be passed directly as component inputs:
+解決済みデータにアクセスする別のアプローチは、[`provideRouter`](api/router/provideRouter)でルーターを設定する際に[`withComponentInputBinding()`](api/router/withComponentInputBinding)を使用することです。これにより、解決済みデータをコンポーネントの入力として直接渡すことができます。
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -106,7 +106,7 @@ bootstrapApplication(App, {
 });
 ```
 
-With this configuration, you can define inputs in your component that match the resolver keys using the [`input`](api/core/input) function and [`input.required`](api/core/input#required) for required inputs:
+この設定により、[`input`](api/core/input)関数と、必須入力には[`input.required`](api/core/input#required)を使用して、リゾルバーキーと一致する入力をコンポーネントで定義できます。
 
 ```angular-ts
 import { Component, input } from '@angular/core';
@@ -125,21 +125,21 @@ export class UserDetail {
 }
 ```
 
-This approach provides better type safety and eliminates the need to inject `ActivatedRoute` just to access resolved data.
+このアプローチは、より優れた型安全性を提供し、解決済みデータにアクセスするためだけに`ActivatedRoute`を注入する必要がなくなります。
 
-## Error handling in resolvers
+## リゾルバーでのエラー処理 {#error-handling-in-resolvers}
 
-In the event of navigation failures, it is important to handle errors gracefully in your data resolvers. Otherwise, a `NavigationError` will occur and the navigation to the current route will fail which will lead to a poor experience for your users.
+ナビゲーションの失敗が発生した場合、データリゾルバーでエラーを適切に処理することが重要です。そうしないと、`NavigationError`が発生し、現在のルートへのナビゲーションが失敗し、ユーザーにとって不便な体験につながります。
 
-There are three primary ways to handle errors with data resolvers:
+データリゾルバーでエラーを処理する主な方法は3つあります。
 
-1. [Centralizing error handling in `withNavigationErrorHandler`](#centralize-error-handling-in-withnavigationerrorhandler)
-2. [Managing errors through a subscription to router events](#managing-errors-through-a-subscription-to-router-events)
-3. [Handling errors directly in the resolver](#handling-errors-directly-in-the-resolver)
+1. [withNavigationErrorHandlerでのエラー処理の一元化](#centralize-error-handling-in-withnavigationerrorhandler)
+2. [ルーターイベントのサブスクリプションによるエラー管理](#managing-errors-through-a-subscription-to-router-events)
+3. [リゾルバーでの直接的なエラー処理](#handling-errors-directly-in-the-resolver)
 
-### Centralize error handling in `withNavigationErrorHandler`
+### `withNavigationErrorHandler`でのエラー処理の一元化 {#centralize-error-handling-in-withnavigationerrorhandler}
 
-The [`withNavigationErrorHandler`](api/router/withNavigationErrorHandler) feature provides a centralized way to handle all navigation errors, including those from failed data resolvers. This approach keeps error handling logic in one place and prevents duplicate error handling code across resolvers.
+`withNavigationErrorHandler`機能は、失敗したデータリゾルバーからのエラーを含む、すべてのナビゲーションエラーを処理する一元的な方法を提供します。このアプローチにより、エラー処理ロジックが一箇所に保持され、リゾルバー間での重複したエラー処理コードが防止されます。
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -163,7 +163,7 @@ bootstrapApplication(App, {
 });
 ```
 
-With this configuration, your resolvers can focus on data fetching while letting the centralized handler manage error scenarios:
+この設定により、リゾルバーはデータ取得に集中でき、一元化されたハンドラーがエラーシナリオを管理できます。
 
 ```ts
 export const userResolver: ResolveFn<User> = (route) => {
@@ -174,9 +174,9 @@ export const userResolver: ResolveFn<User> = (route) => {
 };
 ```
 
-### Managing errors through a subscription to router events
+### ルーターイベントのサブスクリプションによるエラー管理 {#managing-errors-through-a-subscription-to-router-events}
 
-You can also handle resolver errors by subscribing to router events and listening for [`NavigationError`](api/router/NavigationError) events. This approach gives you more granular control over error handling and allows you to implement custom error recovery logic.
+ルーターイベントをサブスクライブし、`NavigationError`イベントをリッスンすることで、リゾルバーのエラーを処理できます。このアプローチにより、エラー処理をよりきめ細かく制御でき、カスタムのエラー回復ロジックを実装できます。
 
 ```angular-ts
 import { Component, inject, signal } from '@angular/core';
@@ -226,15 +226,15 @@ export class App {
 }
 ```
 
-This approach is particularly useful when you need to:
+このアプローチは、次のような場合に特に役立ちます。
 
-- Implement custom retry logic for failed navigation
-- Show specific error messages based on the type of failure
-- Track navigation failures for analytics purposes
+- 失敗したナビゲーションのカスタム再試行ロジックを実装する
+- 失敗の種類に基づいて特定のエラーメッセージを表示する
+- 分析目的でナビゲーションの失敗を追跡する
 
-### Handling errors directly in the resolver
+### リゾルバーでの直接的なエラー処理 {#handling-errors-directly-in-the-resolver}
 
-Here's an updated example of the `userResolver` that logs the error and navigates back to the generic `/users` page using the [`Router`](api/router/Router) service:
+以下は、エラーをログに記録し、`Router`サービスを使用して汎用的な`/users`ページにナビゲートし直す`userResolver`の更新された例です。
 
 ```ts
 import { inject } from '@angular/core';
@@ -257,13 +257,13 @@ export const userResolver: ResolveFn<User | RedirectCommand> = (route) => {
 };
 ```
 
-## Navigation loading considerations
+## ナビゲーションの読み込みに関する考慮事項 {#navigation-loading-considerations}
 
-While data resolvers prevent loading states within components, they introduce a different UX consideration: navigation is blocked while resolvers execute. Users may experience delays between clicking a link and seeing the new route, especially with slow network requests.
+データリゾルバーはコンポーネント内の読み込み状態を防ぎますが、別のUX上の考慮事項をもたらします。リゾルバーの実行中はナビゲーションがブロックされます。特にネットワークリクエストが遅い場合、ユーザーはリンクをクリックしてから新しいルートが表示されるまでに遅延を経験する可能性があります。
 
-### Providing navigation feedback
+### ナビゲーションフィードバックの提供 {#providing-navigation-feedback}
 
-To improve user experience during resolver execution, you can listen to router events and show loading indicators:
+リゾルバーの実行中のユーザー体験を向上させるには、ルーターイベントをリッスンして読み込みインジケーターを表示できます。
 
 ```angular-ts
 import { Component, inject } from '@angular/core';
@@ -286,13 +286,13 @@ export class App {
 }
 ```
 
-This approach ensures users receive visual feedback that navigation is in progress while resolvers fetch data.
+このアプローチにより、リゾルバーがデータをフェッチしている間、ナビゲーションが進行中であることをユーザーが視覚的にフィードバックとして受け取ることができます。
 
-## Best practices
+## ベストプラクティス {#best-practices}
 
-- **Keep resolvers lightweight**: Resolvers should fetch essential data only and not everything the page could possibly need
-- **Handle errors**: Always remember to handle errors gracefully to provide the best experience possible to users
-- **Use caching**: Consider caching resolved data to improve performance
-- **Consider navigation UX**: Implement loading indicators for resolver execution since navigation is blocked during data fetching
-- **Set reasonable timeouts**: Avoid resolvers that could hang indefinitely and block navigation
-- **Type safety**: Use TypeScript interfaces for resolved data
+- **リゾルバーを軽量に保つ**: リゾルバーは、ページが必要とする可能性のあるすべてのデータではなく、必要不可欠なデータのみをフェッチするようにしてください
+- **エラーを処理する**: ユーザーに可能な限り最高の体験を提供するために、常にエラーを適切に処理することを忘れないでください
+- **キャッシュを使用する**: パフォーマンスを向上させるために、解決されたデータをキャッシュすることを検討してください
+- **ナビゲーションUXを考慮する**: データフェッチ中にナビゲーションがブロックされるため、リゾルバー実行中にローディングインジケーターを実装してください
+- **適切なタイムアウトを設定する**: 無期限にハングしてナビゲーションをブロックする可能性のあるリゾルバーは避けてください
+- **型安全性**: 解決されたデータにはTypeScriptインターフェースを使用してください

@@ -1,10 +1,10 @@
-# Redirecting Routes
+# ルートのリダイレクト
 
-Route redirects allow you to automatically navigate users from one route to another. Think of it like mail forwarding, where mail intended for one address is sent to a different address. This is useful for handling legacy URLs, implementing default routes, or managing access control.
+ルートのリダイレクトを使用すると、ユーザーをあるルートから別のルートへ自動的にナビゲートできます。ある住所宛の郵便物が別の住所に転送される郵便転送のように考えてください。これは、レガシーURLの処理、デフォルトルートの実装、またはアクセスコントロールの管理に役立ちます。
 
-## How to configure redirects
+## リダイレクトの設定方法 {#how-to-configure-redirects}
 
-You can define redirects in your route configuration with the `redirectTo` property. This property accepts a string.
+ルート設定で`redirectTo`プロパティを使用してリダイレクトを定義できます。このプロパティは文字列を受け入れます。
 
 ```ts
 import { Routes } from '@angular/router';
@@ -22,28 +22,28 @@ const routes: Routes = [
 ];
 ```
 
-In this example, there are three redirects:
+この例では、3つのリダイレクトがあります。
 
-1. When a user visits the `/marketing` path, they are redirected to `/newsletter`.
-2. When a user visits any `/legacy-user/:id` path, they are routed to the corresponding `/users/:id` path.
-3. When a user visit any path that’s not defined in the router, they are redirected to the login page because of the `**` wildcard path definition.
+1. ユーザーが`/marketing`パスにアクセスすると、`/newsletter`にリダイレクトされます。
+2. ユーザーが`/legacy-user/:id`パスにアクセスすると、対応する`/users/:id`パスにルーティングされます。
+3. ユーザーがルーターで定義されていないパスにアクセスすると、`**`ワイルドカードパス定義によりログインページにリダイレクトされます。
 
-## Understanding `pathMatch`
+## `pathMatch`の理解
 
-The `pathMatch` property on routes enables developers to control how Angular matches a URL to routes.
+`pathMatch`プロパティは、AngularがURLをルートにどのように一致させるかを開発者が制御できるようにします。
 
-There are two values that `pathMatch` accepts:
+`pathMatch`が受け入れる値は2つあります。
 
-| Value      | Description                                  |
+| 値         | 説明                                         |
 | ---------- | -------------------------------------------- |
-| `'full'`   | The entire URL path must match exactly       |
-| `'prefix'` | Only the beginning of the URL needs to match |
+| `'full'`   | URLパス全体が完全に一致する必要があります    |
+| `'prefix'` | URLの先頭のみが一致する必要があります        |
 
-By default, all redirects use the `prefix` strategy.
+デフォルトでは、すべてのリダイレクトは`prefix`戦略を使用します。
 
-### `pathMatch: 'prefix'`
+### `pathMatch: 'prefix'` {#pathmatch-prefix}
 
-`pathMatch: 'prefix'` is the default strategy and ideal when you want Angular Router to match all subsequent routes when triggering a redirect.
+`pathMatch: 'prefix'`はデフォルトの戦略であり、リダイレクトをトリガーするときにAngular Routerが後続のすべてのルートに一致させたい場合に理想的です。
 
 ```ts
 export const routes: Routes = [
@@ -55,15 +55,15 @@ export const routes: Routes = [
 ];
 ```
 
-In this example, all routes that are prefixed with `news` are redirected to their `/blog` equivalents. Here are some examples where users are redirected when visiting the old `news` prefix:
+この例では、`news`でプレフィックスされたすべてのルートは、対応する`/blog`にリダイレクトされます。以下は、ユーザーが古い`news`プレフィックスにアクセスしたときにリダイレクトされる例です。
 
-- `/news` redirects to `/blog`
-- `/news/article` redirects to `/blog/article`
-- `/news/article/:id` redirects to `/blog/article/:id`
+- `/news` は `/blog` にリダイレクトされます
+- `/news/article` は `/blog/article` にリダイレクトされます
+- `/news/article/:id` は `/blog/article/:id` にリダイレクトされます
 
-### `pathMatch: 'full'`
+### `pathMatch: 'full'` {#pathmatch-full}
 
-On the other hand, `pathMatch: 'full'` is useful when you want Angular Router to only redirect a specific path.
+一方、`pathMatch: 'full'`は、Angular Routerに特定のパスのみをリダイレクトさせたい場合に役立ちます。
 
 ```ts
 export const routes: Routes = [
@@ -71,13 +71,13 @@ export const routes: Routes = [
 ];
 ```
 
-In this example, any time the user visits the root URL (i.e., `''`), the router redirects that user to the `'/dashboard'` page.
+この例では、ユーザーがルートURL（つまり`''`）にアクセスするたびに、ルーターはそのユーザーを`'/dashboard'`ページにリダイレクトします。
 
-Any subsequent pages (e.g., `/login`, `/about`, `/product/id`, etc.), are ignored and do not trigger a redirect.
+後続のページ（例: `/login`、`/about`、`/product/id`など）は無視され、リダイレクトはトリガーされません。
 
-TIP: Be careful when configuring a redirect on the root page (i.e., `"/"` or `""`). If you do not set `pathMatch: 'full'`, the router will redirect all URLs.
+TIP: ルートページ（つまり`"/"`または`""`）でリダイレクトを設定する際は注意してください。`pathMatch: 'full'`を設定しない場合、ルーターはすべてのURLをリダイレクトします。
 
-To further illustrate this, if the `news` example from the previous section used `pathMatch: 'full'` instead:
+これをさらに説明するために、前のセクションの`news`の例で`pathMatch: 'full'`を使用した場合：
 
 ```ts
 export const routes: Routes = [
@@ -85,20 +85,20 @@ export const routes: Routes = [
 ];
 ```
 
-This means that:
+これは次のことを意味します。
 
-1. Only the `/news` path will be redirected to `/blog`.
-2. Any subsequent segments such as `/news/articles` or `/news/articles/1` would not redirect with the new `/blog` prefix.
+1. `/news`パスのみが`/blog`にリダイレクトされます。
+2. `/news/articles`や`/news/articles/1`のような後続のセグメントは、新しい`/blog`プレフィックスでリダイレクトされません。
 
-## Conditional redirects
+## 条件付きリダイレクト {#conditional-redirects}
 
-The `redirectTo` property can also accept a function in order to add logic to how users are redirected.
+`redirectTo`プロパティは、ユーザーがリダイレクトされる方法にロジックを追加するために、関数を受け入れることもできます。
 
-The [function](api/router/RedirectFunction) only has access part of the [`ActivatedRouteSnapshot`](api/router/ActivatedRouteSnapshot) data since some data is not accurately known at the route matching phase. Examples include: resolved titles, lazy loaded components, etc.
+[関数](api/router/RedirectFunction)は、ルートマッチングフェーズでは一部のデータが正確に不明であるため、[`ActivatedRouteSnapshot`](api/router/ActivatedRouteSnapshot)データの一部のみにアクセスできます。例としては、解決されたタイトル、遅延読み込みされたコンポーネントなどがあります。
 
-It typically returns a string or [`URLTree`](api/router/UrlTree), but it can also return an observable or promise.
+通常、文字列または[`URLTree`](api/router/UrlTree)を返しますが、observableまたはpromiseを返すこともできます。
 
-Here is an example where the user is redirected to different menu based on the time of the day:
+以下は、時間帯に基づいてユーザーが異なるメニューにリダイレクトされる例です。
 
 ```ts
 import { Routes } from '@angular/router';
@@ -137,8 +137,8 @@ export const routes: Routes = [
 ];
 ```
 
-To learn more, check out [the API docs for the RedirectFunction](api/router/RedirectFunction).
+詳細については、[RedirectFunctionのAPIドキュメント](api/router/RedirectFunction)を参照してください。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-For more information about the `redirectTo` property, check out the [API docs](api/router/Route#redirectTo).
+`redirectTo`プロパティの詳細については、[APIドキュメント](api/router/Route#redirectTo)を参照してください。

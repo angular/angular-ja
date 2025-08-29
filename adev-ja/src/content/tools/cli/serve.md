@@ -1,13 +1,13 @@
-# Serving Angular apps for development
+# 開発用にAngularアプリケーションを配信する
 
-You can serve your Angular CLI application with the `ng serve` command.
-This will compile your application, skip unnecessary optimizations, start a devserver, and automatically rebuild and live reload any subsequent changes.
-You can stop the server by pressing `Ctrl+C`.
+Angular CLIアプリケーションは、`ng serve`コマンドで配信できます。
+これにより、アプリケーションがコンパイルされ、不要な最適化がスキップされ、開発サーバーが起動し、その後の変更が自動的に再ビルドおよびライブリロードされます。
+サーバーは`Ctrl+C`を押して停止できます。
 
-`ng serve` only executes the builder for the `serve` target in the default project as specified in `angular.json`.
-While any builder can be used here, the most common (and default) builder is `@angular-devkit/build-angular:dev-server`.
+`ng serve`は、`angular.json`で指定されたデフォルトプロジェクトの`serve`ターゲットのビルダーのみを実行します。
+ここでは任意のビルダーを使用できますが、最も一般的（かつデフォルト）なビルダーは`@angular-devkit/build-angular:dev-server`です。
 
-You can determine which builder is being used for a particular project by looking up the `serve` target for that project.
+特定のプロジェクトで使用されているビルダーは、そのプロジェクトの`serve`ターゲットを調べることで判断できます。
 
 <docs-code language="json">
 
@@ -29,15 +29,15 @@ You can determine which builder is being used for a particular project by lookin
 
 </docs-code>
 
-This page discusses usage and options of `@angular-devkit/build-angular:dev-server`.
+このページでは、`@angular-devkit/build-angular:dev-server`の使用法とオプションについて説明します。
 
-## Proxying to a backend server
+## バックエンドサーバーへのプロキシ {#proxying-to-a-backend-server}
 
-Use [proxying support](https://webpack.js.org/configuration/dev-server/#devserverproxy) to divert certain URLs to a backend server, by passing a file to the `--proxy-config` build option.
-For example, to divert all calls for `http://localhost:4200/api` to a server running on `http://localhost:3000/api`, take the following steps.
+[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserverproxy)を使用して、特定のURLをバックエンドサーバーに転送するには、`--proxy-config`ビルドオプションにファイルを渡します。
+例えば、`http://localhost:4200/api`へのすべての呼び出しを`http://localhost:3000/api`で実行されているサーバーに転送するには、以下の手順を実行します。
 
-1. Create a file `proxy.conf.json` in your project's `src/` folder.
-1. Add the following content to the new proxy file:
+1. プロジェクトの`src/`フォルダーに`proxy.conf.json`ファイルを作成します。
+1. 新しいプロキシファイルに以下の内容を追加します。
 
     <docs-code language="json">
 
@@ -50,7 +50,7 @@ For example, to divert all calls for `http://localhost:4200/api` to a server run
 
     </docs-code>
 
-1. In the CLI configuration file, `angular.json`, add the `proxyConfig` option to the `serve` target:
+1. CLI設定ファイル`angular.json`で、`serve`ターゲットに`proxyConfig`オプションを追加します。
 
     <docs-code language="json">
 
@@ -71,20 +71,20 @@ For example, to divert all calls for `http://localhost:4200/api` to a server run
 
     </docs-code>
 
-1. To run the development server with this proxy configuration, call `ng serve`.
+1. このプロキシ設定で開発サーバーを実行するには、`ng serve`を呼び出します。
 
-Edit the proxy configuration file to add configuration options; following are some examples.
-For a detailed description of all options, refer to the [webpack DevServer documentation](https://webpack.js.org/configuration/dev-server/#devserverproxy) when using `@angular-devkit/build-angular:browser`, or the [Vite DevServer documentation](https://vite.dev/config/server-options#server-proxy) when using `@angular-devkit/build-angular:browser-esbuild` or `@angular-devkit/build-angular:application`.
+プロキシ設定ファイルを編集して設定オプションを追加します。以下にいくつかの例を示します。
+すべてのオプションの詳細については、`@angular-devkit/build-angular:browser`を使用する場合は[webpack DevServerドキュメント](https://webpack.js.org/configuration/dev-server/#devserverproxy)を、または`@angular-devkit/build-angular:browser-esbuild`または`@angular-devkit/build-angular:application`を使用する場合は[Vite DevServerドキュメント](https://vite.dev/config/server-options#server-proxy)を参照してください。
 
-NOTE: If you edit the proxy configuration file, you must relaunch the `ng serve` process to make your changes effective.
+NOTE: プロキシ設定ファイルを編集した場合、変更を有効にするには`ng serve`プロセスを再起動する必要があります。
 
-## `localhost` resolution
+## `localhost`の解決 {#localhost-resolution}
 
-As of Node version 17, Node will _not_ always resolve `http://localhost:<port>` to `http://127.0.0.1:<port>`
-depending on each machine's configuration.
+Nodeバージョン17以降、Nodeは`http://localhost:<port>`を`http://127.0.0.1:<port>`に常に解決するとは限りません
+これは各マシンの設定に依存します。
 
-If you get an `ECONNREFUSED` error using a proxy targeting a `localhost` URL,
-you can fix this issue by updating the target from `http://localhost:<port>` to `http://127.0.0.1:<port>`.
+もし`localhost`URLをターゲットとするプロキシを使用している際に`ECONNREFUSED`エラーが発生した場合、
+ターゲットを`http://localhost:<port>`から`http://127.0.0.1:<port>`に更新することで、この問題を解決できます。
 
-See [the `http-proxy-middleware` documentation](https://github.com/chimurai/http-proxy-middleware#nodejs-17-econnrefused-issue-with-ipv6-and-localhost-705)
-for more information.
+[`http-proxy-middleware`のドキュメント`](https://github.com/chimurai/http-proxy-middleware#nodejs-17-econnrefused-issue-with-ipv6-and-localhost-705)を参照してください。
+詳細については。

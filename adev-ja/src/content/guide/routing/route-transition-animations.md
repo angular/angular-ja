@@ -1,19 +1,19 @@
-# Route transition animations
+# ルート遷移アニメーション
 
-Route transition animations enhance user experience by providing smooth visual transitions when navigating between different views in your Angular application. [Angular Router](/guide/routing/overview) includes built-in support for the browser's View Transitions API, enabling seamless animations between route changes in supported browsers.
+ルート遷移アニメーションは、Angularアプリケーション内の異なるビュー間を移動する際にスムーズな視覚的遷移を提供することで、ユーザー体験を向上させます。[Angular Router](/guide/routing/overview)は、ブラウザのView Transitions APIの組み込みサポートを含んでおり、サポートされているブラウザでルート変更間のシームレスなアニメーションを可能にします。
 
-HELPFUL: The Router's native View Transitions integration is currently in [developer preview](/reference/releases#developer-preview). Native View Transitions are a relatively new browser feature with limited support across all browsers.
+HELPFUL: RouterのネイティブView Transitions統合は現在[デベロッパープレビュー](/reference/releases#developer-preview)中です。ネイティブView Transitionsは比較的新しいブラウザ機能であり、すべてのブラウザでのサポートは限られています。
 
-## How View Transitions work
+## Viewトランジションの仕組み {#how-view-transitions-work}
 
-View transitions use the browser's native [`document.startViewTransition` API](https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition) to create smooth animations between different states of your application. The API works by:
+Viewトランジションは、ブラウザのネイティブな[`document.startViewTransition` API](https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition)を使用して、アプリケーションの異なる状態間でスムーズなアニメーションを作成します。このAPIは以下の手順で動作します。
 
-1. **Capturing the current state** - The browser takes a screenshot of the current page
-2. **Executing the DOM update** - Your callback function runs to update the DOM
-3. **Capturing the new state** - The browser captures the updated page state
-4. **Playing the transition** - The browser animates between the old and new states
+1. **現在の状態をキャプチャする** - ブラウザが現在のページのスクリーンショットを撮ります
+2. **DOMを更新する** - コールバック関数が実行され、DOMを更新します
+3. **新しい状態をキャプチャする** - ブラウザが更新されたページの状態をキャプチャします
+4. **トランジションを再生する** - ブラウザが古い状態と新しい状態の間をアニメーションします
 
-Here's the basic structure of the `startViewTransition` API:
+以下に、`startViewTransition` APIの基本的な構造を示します。
 
 ```ts
 document.startViewTransition(async () => {
@@ -21,24 +21,24 @@ document.startViewTransition(async () => {
 });
 ```
 
-For more details about the browser API, see the [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions).
+ブラウザAPIの詳細については、[Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions)を参照してください。
 
-## How the Router uses view transitions
+## Routerがビュー遷移をどのように使用するか {#how-the-router-uses-view-transitions}
 
-Angular Router integrates view transitions into the navigation lifecycle to create seamless route changes. During navigation, the Router:
+Angular Routerは、シームレスなルート変更を作成するために、ナビゲーションライフサイクルにビュー遷移を統合します。ナビゲーション中、Routerは以下を行います。
 
-1. **Completes navigation preparation** - Route matching, [lazy loading](/guide/routing/define-routes#lazily-loaded-components), [guards](/guide/routing/route-guards), and [resolvers](/guide/routing/data-resolvers) execute
-2. **Initiates the view transition** - Router calls `startViewTransition` when routes are ready for activation
-3. **Updates the DOM** - Router activates new routes and deactivates old ones within the transition callback
-4. **Finalizes the transition** - The transition Promise resolves when Angular completes rendering
+1. **ナビゲーションの準備を完了する** - ルートのマッチング、[遅延ロード](/guide/routing/define-routes#lazily-loaded-components)、[ガード](/guide/routing/route-guards)、および[リゾルバー](/guide/routing/data-resolvers)が実行されます
+2. **ビュー遷移を開始する** - ルートがアクティベーションの準備ができたときに、Routerは`startViewTransition`を呼び出します
+3. **DOMを更新する** - Routerは、遷移コールバック内で新しいルートをアクティブ化し、古いルートを非アクティブ化します
+4. **遷移を完了する** - Angularがレンダリングを完了すると、遷移Promiseが解決されます
 
-The Router's view transition integration acts as a [progressive enhancement](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement). When browsers don't support the View Transitions API, the Router performs normal DOM updates without animation, ensuring your application works across all browsers.
+Routerのビュー遷移統合は[プログレッシブエンハンスメント](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement)として機能します。ブラウザがView Transitions APIをサポートしていない場合、Routerはアニメーションなしで通常のDOMを更新し、アプリケーションがすべてのブラウザで動作することを保証します。
 
-## Enabling View Transitions in the Router
+## ルーターでのビュー遷移の有効化 {#enabling-view-transitions-in-the-router}
 
-Enable view transitions by adding the `withViewTransitions` feature to your [router configuration](/guide/routing/define-routes#adding-the-router-to-your-application). Angular supports both standalone and NgModule bootstrap approaches:
+ビュー遷移を有効にするには、`withViewTransitions`機能を[ルーター設定](/guide/routing/define-routes#adding-the-router-to-your-application)に追加します。Angularは、スタンドアロンとNgModuleの両方のブートストラップアプローチをサポートしています。
 
-### Standalone bootstrap
+### スタンドアロンブートストラップ {#standalone-bootstrap}
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -52,7 +52,7 @@ bootstrapApplication(MyApp, {
 });
 ```
 
-### NgModule bootstrap
+### NgModuleブートストラップ {#ngmodule-bootstrap}
 
 ```ts
 import { NgModule } from '@angular/core';
@@ -64,21 +64,21 @@ import { RouterModule } from '@angular/router';
 export class AppRouting {}
 ```
 
-[Try the "count" example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-2dnvtm?file=src%2Fmain.ts)
+[StackBlitzで「count」の例を試す](https://stackblitz.com/edit/stackblitz-starters-2dnvtm?file=src%2Fmain.ts)
 
-This example demonstrates how router navigation can replace direct `startViewTransition` calls for counter updates.
+この例は、カウンターの更新に対して、ルーターナビゲーションが直接の`startViewTransition`呼び出しを置き換えることができる方法を示しています。
 
-## Customizing transitions with CSS
+## CSSでトランジションをカスタマイズする {#customizing-transitions-with-css}
 
-You can customize view transitions using CSS to create unique animation effects. The browser creates separate transition elements that you can target with CSS selectors.
+CSSを使用してビューのトランジションをカスタマイズし、独自のアニメーション効果を作成できます。ブラウザは、CSSセレクターでターゲットできる個別のトランジション要素を作成します。
 
-To create custom transitions:
+カスタムトランジションを作成するには：
 
-1. **Add view-transition-name** - Assign unique names to elements you want to animate
-2. **Define global animations** - Create CSS animations in your global styles
-3. **Target transition pseudo-elements** - Use `::view-transition-old()` and `::view-transition-new()` selectors
+1. **view-transition-nameを追加する** - アニメーション化したい要素に一意の名前を割り当てる
+2. **グローバルアニメーションを定義する** - グローバルスタイルでCSSアニメーションを作成する
+3. **トランジション擬似要素をターゲットにする** - `::view-transition-old()`および`::view-transition-new()`セレクターを使用する
 
-Here's an example that adds a rotation effect to a counter element:
+カウンター要素に回転効果を追加する例を次に示します。
 
 ```css
 /* Define keyframe animations */
@@ -106,21 +106,21 @@ Here's an example that adds a rotation effect to a counter element:
 }
 ```
 
-IMPORTANT: Define view transition animations in your global styles file, not in component styles. Angular's [view encapsulation](/guide/components/styling#view-encapsulation) scopes component styles, which prevents them from targeting the transition pseudo-elements correctly.
+IMPORTANT: ビューのトランジションアニメーションは、コンポーネントスタイルではなく、グローバルスタイルファイルで定義してください。Angularの[ビューカプセル化](/guide/components/styling#view-encapsulation)はコンポーネントスタイルをスコープするため、トランジション擬似要素を正しくターゲットできなくなります。
 
-[Try the updated “count” example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-fwn4i7?file=src%2Fmain.ts)
+[StackBlitzで更新された「count」の例を試す](https://stackblitz.com/edit/stackblitz-starters-fwn4i7?file=src%2Fmain.ts)
 
-## Advanced transition control with onViewTransitionCreated
+## onViewTransitionCreatedによる高度なトランジション制御 {#advanced-transition-control-with-onviewtransitioncreated}
 
-The `withViewTransitions` feature accepts an options object with an `onViewTransitionCreated` callback for advanced control over view transitions. This callback:
+`withViewTransitions`機能は、ビュー遷移を高度に制御するための`onViewTransitionCreated`コールバックを含むオプションオブジェクトを受け入れます。このコールバックは次のとおりです。
 
-- Runs in an [injection context](/guide/di/dependency-injection-context#run-within-an-injection-context)
-- Receives a [`ViewTransitionInfo`](/api/router/ViewTransitionInfo) object containing:
-  - The `ViewTransition` instance from `startViewTransition`
-  - The [`ActivatedRouteSnapshot`](/api/router/ActivatedRouteSnapshot) for the route being navigated from
-  - The [`ActivatedRouteSnapshot`](/api/router/ActivatedRouteSnapshot) for the route being navigated to
+- [インジェクションコンテキスト](/guide/di/dependency-injection-context#run-within-an-injection-context)で実行されます
+- 以下を含む[`ViewTransitionInfo`](/api/router/ViewTransitionInfo)オブジェクトを受け取ります。
+  - `startViewTransition`からの`ViewTransition`インスタンス
+  - ナビゲート元のルートに対する[`ActivatedRouteSnapshot`](/api/router/ActivatedRouteSnapshot)
+  - ナビゲート先のルートに対する[`ActivatedRouteSnapshot`](/api/router/ActivatedRouteSnapshot)
 
-Use this callback to customize transition behavior based on navigation context. For example, you can skip transitions for specific navigation types:
+このコールバックを使用して、ナビゲーションコンテキストに基づいてトランジション動作をカスタマイズできます。たとえば、特定のナビゲーションタイプではトランジションをスキップできます。
 
 ```ts
 import { inject } from '@angular/core';
@@ -146,68 +146,68 @@ withViewTransitions({
 })
 ```
 
-This example skips the view transition when navigation only changes the [URL fragment or query parameters](/guide/routing/read-route-state#query-parameters) (such as anchor links within the same page). The `skipTransition()` method prevents the animation while still allowing the navigation to complete.
+この例では、ナビゲーションが[URLフラグメントまたはクエリパラメータ](/guide/routing/read-route-state#query-parameters)のみを変更する場合（同じページ内のアンカーリンクなど）にビュー遷移をスキップします。`skipTransition()`メソッドは、ナビゲーションの完了を許可しながらアニメーションを防止します。
 
-## Examples from the Chrome explainer adapted to Angular
+## Chrome ExplainerのAngularへの適応例 {#examples-from-the-chrome-explainer-adapted-to-angular}
 
-The following examples demonstrate various view transition techniques adapted from the Chrome team's documentation for use with Angular Router:
+以下の例は、ChromeチームのドキュメントからAngular Routerで使用するために適応された、さまざまなビュー遷移テクニックを示しています。
 
-### Transitioning elements don't need to be the same DOM element
+### 遷移する要素は同じDOM要素である必要はない {#transitioning-elements-dont-need-to-be-the-same-dom-element}
 
-Elements can transition smoothly between different DOM elements as long as they share the same `view-transition-name`.
+要素は、同じ`view-transition-name`を共有している限り、異なるDOM要素間をスムーズに遷移できます。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#transitioning_elements_dont_need_to_be_the_same_dom_element)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-dh8npr?file=src%2Fmain.ts)
 
-### Custom entry and exit animations
+### カスタムエントリー/イグジットアニメーション {#custom-entry-and-exit-animations}
 
-Create unique animations for elements entering and leaving the viewport during route transitions.
+ルート遷移中にビューポートに出入りする要素に対して、ユニークなアニメーションを作成します。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#custom_entry_and_exit_transitions)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-8kly3o)
 
-### Async DOM updates and waiting for content
+### 非同期DOM更新とコンテンツの待機 {#async-dom-updates-and-waiting-for-content}
 
-Angular Router prioritizes immediate transitions over waiting for additional content to load.
+Angular Routerは、追加コンテンツの読み込みを待つよりも、即時遷移を優先します。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#async_dom_updates_and_waiting_for_content)
 
-NOTE: Angular Router does not provide a way to delay view transitions. This design choice prevents pages from becoming non-interactive while waiting for additional content. As the Chrome documentation notes: "During this time, the page is frozen, so delays here should be kept to a minimum…in some cases it's better to avoid the delay altogether, and use the content you already have."
+NOTE: Angular Routerはビュー遷移を遅延させる方法を提供していません。この設計上の選択により、追加コンテンツを待っている間にページが非インタラクティブになるのを防ぎます。Chromeのドキュメントが指摘するように、「この間、ページはフリーズするため、ここでの遅延は最小限に抑えるべきです…場合によっては、遅延を完全に避け、すでに持っているコンテンツを使用する方が良いでしょう。」
 
-### Handle multiple view transition styles with view transition types
+### ビュー遷移タイプで複数のビュー遷移スタイルを処理する {#handle-multiple-view-transition-styles-with-view-transition-types}
 
-Use view transition types to apply different animation styles based on navigation context.
+ナビゲーションコンテキストに基づいて異なるアニメーションスタイルを適用するために、ビュー遷移タイプを使用します。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#view-transition-types)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-vxzcam)
 
-### Handle multiple view transition styles with a class name on the view transition root (deprecated)
+### ビュー遷移ルートのクラス名で複数のビュー遷移スタイルを処理する（非推奨） {#handle-multiple-view-transition-styles-with-a-class-name-on-the-view-transition-root-deprecated}
 
-This approach uses CSS classes on the transition root element to control animation styles.
+このアプローチは、遷移ルート要素のCSSクラスを使用してアニメーションスタイルを制御します。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#changing-on-navigation-type)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-nmnzzg?file=src%2Fmain.ts)
 
-### Transitioning without freezing other animations
+### 他のアニメーションをフリーズさせずに遷移する {#transitioning-without-freezing-other-animations}
 
-Maintain other page animations during view transitions to create more dynamic user experiences.
+ビュー遷移中に他のページアニメーションを維持し、よりダイナミックなユーザー体験を作成します。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#transitioning-without-freezing)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-76kgww)
 
-### Animating with JavaScript
+### JavaScriptでアニメーション化する {#animating-with-javascript}
 
-Control view transitions programmatically using JavaScript APIs for complex animation scenarios.
+複雑なアニメーションシナリオのために、JavaScript APIを使用してビュー遷移をプログラムで制御します。
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#animating-with-javascript)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-cklnkm)
 
-## Alternative: Angular Animations
+## 代替案: Angularアニメーション {#alternative-angular-animations}
 
-If you need broader browser support or more granular control over animations, you can use the [`@angular/animations`](/guide/animations) package instead of native view transitions. Angular's animation system works with router state changes and provides:
+より広範なブラウザサポートやアニメーションに対するよりきめ細かな制御が必要な場合は、ネイティブのビュー遷移の代わりに[`@angular/animations`](/guide/animations)パッケージを使用できます。Angularのアニメーションシステムはルーターの状態変更と連携し、以下を提供します。
 
-- **Universal browser support** - Works across all browsers that support Angular
-- **Fine-grained control** - Define complex animation sequences and timing
-- **Router integration** - Create animations based on route changes, URL patterns, or [`ActivatedRoute`](/api/router/ActivatedRoute) data
+- **ユニバーサルブラウザサポート** - Angularをサポートするすべてのブラウザで動作します
+- **きめ細かな制御** - 複雑なアニメーションシーケンスとタイミングを定義します
+- **ルーター統合** - ルート変更、URLパターン、または[`ActivatedRoute`](/api/router/ActivatedRoute)データに基づいてアニメーションを作成します
 
-Learn more about creating route-based animations with [animation triggers and transitions](/guide/animations/transition-and-triggers).
+ルートベースのアニメーションの作成については、[アニメーションのトリガーと遷移](/guide/animations/transition-and-triggers)で詳細を確認してください。

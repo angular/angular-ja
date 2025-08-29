@@ -1,139 +1,139 @@
-# Rendering strategies in Angular
+# Angularにおけるレンダリング戦略
 
-This guide helps you choose the right rendering strategy for different parts of your Angular application.
+このガイドは、Angularアプリケーションのさまざまな部分に対して適切なレンダリング戦略を選択するのに役立ちます。
 
-## What are rendering strategies?
+## レンダリング戦略とは？ {#what-are-rendering-strategies}
 
-Rendering strategies determine when and where your Angular application's HTML content is generated. Each strategy offers different trade-offs between initial page load performance, interactivity, SEO capabilities, and server resource usage.
+レンダリング戦略は、AngularアプリケーションのHTMLコンテンツがいつ、どこで生成されるかを決定します。各戦略は、初期ページ読み込みパフォーマンス、インタラクティブ性、SEO機能、およびサーバーリソース使用量の間で異なるトレードオフを提供します。
 
-Angular supports three primary rendering strategies:
+Angularは、主に3つのレンダリング戦略をサポートしています。
 
-- **Client-Side Rendering (CSR)** - Content is rendered entirely in the browser
-- **Static Site Generation (SSG/Prerendering)** - Content is pre-rendered at build time
-- **Server-Side Rendering (SSR)** - Content is rendered on the server for the initial request for a route
+- **クライアントサイドレンダリング (CSR)** - コンテンツは完全にブラウザでレンダリングされます
+- **静的サイト生成 (SSG/Prerendering)** - コンテンツはビルド時に事前レンダリングされます
+- **サーバーサイドレンダリング (SSR)** - コンテンツは、ルートへの最初のリクエスト時にサーバーでレンダリングされます
 
-## Client-Side Rendering (CSR)
+## クライアントサイドレンダリング (CSR)
 
-**CSR is Angular's default.** Content renders entirely in the browser after JavaScript loads.
+**CSRはAngularのデフォルトです。** コンテンツはJavaScriptの読み込み後にブラウザで完全にレンダリングされます。
 
-### When to use CSR
+### CSRを使用するタイミング {#when-to-use-csr}
 
-✅ It can be a good fit for:
+✅ 以下に適しています:
 
-- Interactive applications (dashboards, admin panels)
-- Real-time applications
-- Internal tools where SEO doesn't matter
-- Single-page applications with complex client-side state
+- インタラクティブなアプリケーション（ダッシュボード、管理パネル）
+- リアルタイムアプリケーション
+- SEOが重要でない社内ツール
+- 複雑なクライアントサイド状態を持つシングルページアプリケーション
 
-❌ When possible, consider avoiding it for:
+❌ 可能な場合は、以下での使用を避けてください:
 
-- Public-facing content that needs SEO
-- Pages where initial load performance is critical
+- SEOが必要な一般公開コンテンツ
+- 初期読み込みパフォーマンスが重要なページ
 
-### CSR trade-offs
+### CSRのトレードオフ {#csr-trade-offs}
 
-| Aspect            | Impact                                                   |
-| :---------------- | :------------------------------------------------------- |
-| **SEO**           | Poor - content not visible to crawlers until JS executes |
-| **Initial load**  | Slower - must download and execute JavaScript first      |
-| **Interactivity** | Immediate once loaded                                    |
-| **Server needs**  | Minimal outside of some configuration                    |
-| **Complexity**    | Simplest because it works with minimum configuration     |
+| 側面           | 影響                                                     |
+| :--------------- | :------------------------------------------------------- |
+| **SEO**          | 低い - JSが実行されるまでクローラーにコンテンツが表示されない |
+| **初期読み込み** | 遅い - 最初にJavaScriptをダウンロードして実行する必要がある      |
+| **インタラクティブ性** | 読み込み後すぐに利用可能                                 |
+| **サーバー要件** | 一部の設定を除き最小限                                   |
+| **複雑性**       | 最もシンプル - 最小限の設定で動作するため                  |
 
-## Static Site Generation (SSG/Prerendering)
+## 静的サイト生成 (SSG/プリレンダリング) {#static-site-generation-ssg-prerendering}
 
-**SSG pre-renders pages at build time** into static HTML files. The server sends pre-built HTML for the initial page load. After hydration, your app runs entirely in the browser like a traditional SPA - subsequent navigation, route changes, and API calls all happen client-side without server rendering.
+**SSGはビルド時にページを静的HTMLファイルとしてプリレンダリングします。** サーバーは初期ページロードのために事前に構築されたHTMLを送信します。ハイドレーション後、アプリケーションは従来のSPAのように完全にブラウザで実行されます。その後のナビゲーション、ルーティング変更、API呼び出しはすべて、サーバーレンダリングなしでクライアント側で行われます。
 
-### When to use SSG
+### SSGを使用するタイミング {#when-to-use-ssg}
 
-✅ It can be a good fit for:
+✅ 次のような場合に適しています:
 
-- Marketing pages and landing pages
-- Blog posts and documentation
-- Product catalogs with stable content
-- Content that doesn't change per-user
+- マーケティングページやランディングページ
+- ブログ記事やドキュメント
+- 安定したコンテンツを持つ製品カタログ
+- ユーザーごとに変化しないコンテンツ
 
-❌ When possible, consider avoiding it for:
+❌ 可能な場合は、次のような場合での使用を避けることを検討してください:
 
-- User-specific content
-- Frequently changing data
-- Real-time information
+- ユーザー固有のコンテンツ
+- 頻繁に変化するデータ
+- リアルタイム情報
 
-### SSG trade-offs
+### SSGのトレードオフ {#ssg-trade-offs}
 
-| Aspect              | Impact                                      |
+| 側面              | 影響                                      |
 | :------------------ | :------------------------------------------ |
-| **SEO**             | Excellent - full HTML available immediately |
-| **Initial load**    | Fastest - pre-generated HTML                |
-| **Interactivity**   | After hydration completes                   |
-| **Server needs**    | None for serving (CDN-friendly)             |
-| **Build time**      | Longer - generates all pages upfront        |
-| **Content updates** | Requires rebuild and redeploy               |
+| **SEO**             | 優れている - 完全なHTMLが即座に利用可能 |
+| **初期ロード**    | 最速 - 事前生成されたHTML                |
+| **インタラクティブ性**   | ハイドレーション完了後                   |
+| **サーバー要件**    | 提供には不要 (CDNフレンドリー)             |
+| **ビルド時間**      | 長い - すべてのページを事前に生成        |
+| **コンテンツ更新** | 再ビルドと再デプロイが必要               |
 
-📖 **Implementation:** See [Customizing build-time prerendering](guide/ssr#customizing-build-time-prerendering-ssg) in the SSR guide.
+📖 **実装:** SSRガイドの[ビルド時プリレンダリングのカスタマイズ](guide/ssr#customizing-build-time-prerendering-ssg)を参照してください。
 
-## Server-Side Rendering (SSR)
+## サーバーサイドレンダリング (SSR)
 
-**SSR generates HTML on the server for the initial request for a route**, providing dynamic content with good SEO. The server renders HTML and sends it to the client.
+**SSRは、ルートへの初回リクエスト時にサーバー上でHTMLを生成し、優れたSEOを備えた動的コンテンツを提供します。** サーバーはHTMLをレンダリングしてクライアントに送信します。
 
-Once the client renders the page, Angular [hydrates](/guide/hydration#what-is-hydration) the app and it then runs entirely in the browser like a traditional SPA - subsequent navigation, route changes, and API calls all happen client-side without additional server rendering.
+クライアントがページをレンダリングすると、Angularはアプリケーションを[ハイドレート](/guide/hydration#what-is-hydration)し、その後は従来のSPAのように完全にブラウザで実行されます。その後のナビゲーション、ルート変更、API呼び出しはすべて、追加のサーバーレンダリングなしでクライアント側で行われます。
 
-### When to use SSR
+### SSRを使用する場合 {#when-to-use-ssr}
 
-✅ It can be a good fit for:
+✅ 次の場合に適しています:
 
-- E-commerce product pages (dynamic pricing/inventory)
-- News sites and social media feeds
-- Personalized content that changes frequently
+- Eコマースの商品ページ (動的な価格設定/在庫)
+- ニュースサイトやソーシャルメディアフィード
+- 頻繁に変化するパーソナライズされたコンテンツ
 
-❌ When possible, consider avoiding it for:
+❌ 可能な場合は、次の場合に避けることを検討してください:
 
-- Static content (use SSG instead)
-- When server costs are a concern
+- 静的コンテンツ (代わりにSSGを使用)
+- サーバーコストが懸念される場合
 
-### SSR trade-offs
+### SSRのトレードオフ {#ssr-trade-offs}
 
-| Aspect              | Impact                                              |
+| 側面              | 影響                                              |
 | :------------------ | :-------------------------------------------------- |
-| **SEO**             | Excellent - full HTML for crawlers                  |
-| **Initial load**    | Fast - immediate content visibility                 |
-| **Interactivity**   | Delayed until hydration                             |
-| **Server needs**    | Requires server                                     |
-| **Personalization** | Full access to user context                         |
-| **Server costs**    | Higher - renders on the initial request for a route |
+| **SEO**             | 優れている - クローラー向けの完全なHTML                  |
+| **初回ロード**    | 高速 - コンテンツの即時表示                 |
+| **インタラクティブ性**   | ハイドレーションまで遅延                             |
+| **サーバー要件**    | サーバーが必要                                     |
+| **パーソナライゼーション** | ユーザーコンテキストへの完全なアクセス                         |
+| **サーバーコスト**    | 高い - ルートへの初回リクエスト時にレンダリング |
 
-📖 **Implementation:** See [Server routing](guide/ssr#server-routing) and [Authoring server-compatible components](guide/ssr#authoring-server-compatible-components) in the SSR guide.
+📖 **Implementation:** SSRガイドの[サーバールーティング](guide/ssr#server-routing)と[サーバー互換コンポーネントの作成](guide/ssr#authoring-server-compatible-components)を参照してください。
 
-## Choosing the Right Strategy
+## 適切な戦略の選択 {#choosing-the-right-strategy}
 
-### Decision matrix
+### 決定マトリクス {#decision-matrix}
 
-| If you need...             | Use this strategy | Why                                              |
+| 必要なもの...              | この戦略を使用      | 理由                                             |
 | :------------------------- | :---------------- | :----------------------------------------------- |
-| **SEO + Static content**   | SSG               | Pre-rendered HTML, fastest load                  |
-| **SEO + Dynamic content**  | SSR               | Fresh content on the initial request for a route |
-| **No SEO + Interactivity** | CSR               | Simplest, no server needed                       |
-| **Mixed requirements**     | Hybrid            | Different strategies per route                   |
+| **SEO + 静的コンテンツ**   | SSG               | 事前レンダリングされたHTML、最速の読み込み       |
+| **SEO + 動的コンテンツ**   | SSR               | ルートへの初回リクエストで最新のコンテンツ       |
+| **SEOなし + インタラクティブ性** | CSR               | 最もシンプル、サーバー不要                       |
+| **要件が混在**             | Hybrid            | ルートごとに異なる戦略                           |
 
-## Making SSR/SSG Interactive with Hydration
+## SSR/SSGをハイドレーションでインタラクティブにする {#making-ssr-ssg-interactive-with-hydration}
 
-When using SSR or SSG, Angular "hydrates" the server-rendered HTML to make it interactive.
+SSRまたはSSGを使用する場合、AngularはサーバーでレンダリングされたHTMLを「ハイドレート」してインタラクティブにします。
 
-**Available strategies:**
+**利用可能な戦略:**
 
-- **Full hydration** - Entire app becomes interactive at once (default)
-- **Incremental hydration** - Parts become interactive as needed (better performance)
-- **Event replay** - Captures clicks before hydration completes
+- **フルハイドレーション** - アプリケーション全体が一度にインタラクティブになります（デフォルト）
+- **インクリメンタルハイドレーション** - 必要な部分がインタラクティブになります（パフォーマンス向上）
+- **イベントリプレイ** - ハイドレーション完了前にクリックを捕捉します
 
-📖 **Learn more:**
+📖 **詳細はこちら:**
 
-- [Hydration guide](guide/hydration) - Complete hydration setup
-- [Incremental hydration](guide/incremental-hydration) - Advanced hydration with `@defer` blocks
+- [ハイドレーションガイド](guide/hydration) - 完全なハイドレーション設定
+- [インクリメンタルハイドレーション](guide/incremental-hydration) - `@defer`ブロックによる高度なハイドレーション
 
-## Next steps
+## 次のステップ {#next-steps}
 
 <docs-pill-row>
-  <docs-pill href="/guide/ssr" title="Server-Side Rendering"/>
-  <docs-pill href="/guide/hydration" title="Hydration"/>
-  <docs-pill href="/guide/incremental-hydration" title="Incremental Hydration"/>
+  <docs-pill href="/guide/ssr" title="サーバーサイドレンダリング"/>
+  <docs-pill href="/guide/hydration" title="ハイドレーション"/>
+  <docs-pill href="/guide/incremental-hydration" title="インクリメンタルハイドレーション"/>
 </docs-pill-row>

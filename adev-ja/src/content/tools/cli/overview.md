@@ -1,52 +1,52 @@
-# The Angular CLI
+# Angular CLI
 
-The Angular CLI is a command-line interface tool which allows you to scaffold, develop, test, deploy, and maintain Angular applications directly from a command shell.
+Angular CLIは、コマンドシェルから直接Angularアプリケーションをスキャフォールド、開発、テスト、デプロイ、保守できるコマンドラインインターフェースツールです。
 
-Angular CLI is published on npm as the `@angular/cli` package and includes a binary named `ng`. Commands invoking `ng` are using the Angular CLI.
+Angular CLIは、npmに`@angular/cli`パッケージとして公開されており、`ng`という名前のバイナリを含んでいます。`ng`を呼び出すコマンドはAngular CLIを使用しています。
 
-<docs-callout title="Try Angular without local setup">
+<docs-callout title="ローカルセットアップなしでAngularを試す">
 
-If you are new to Angular, you might want to start with [Try it now!](tutorials/learn-angular), which introduces the essentials of Angular in the context of a ready-made basic online store app for you to examine and modify.
-This standalone tutorial takes advantage of the interactive [StackBlitz](https://stackblitz.com) environment for online development.
-You don't need to set up your local environment until you're ready.
+Angularを初めて使用する場合は、[今すぐ試す！](tutorials/learn-angular)から始めることをお勧めします。これは、すぐに使える基本的なオンラインストアアプリケーションのコンテキストでAngularの要点を紹介し、確認および変更できます。
+このスタンドアロンチュートリアルは、オンライン開発のためのインタラクティブな[StackBlitz](https://stackblitz.com)環境を利用しています。
+準備が整うまで、ローカル環境をセットアップする必要はありません。
 
 </docs-callout>
 
 <docs-card-container>
-  <docs-card title="Getting Started" link="Get Started" href="tools/cli/setup-local">
-    Install Angular CLI to create and build your first app.
+  <docs-card title="はじめに" link="開始する" href="tools/cli/setup-local">
+    Angular CLIをインストールして、最初のアプリを作成およびビルドします。
   </docs-card>
-  <docs-card title="Command Reference" link="Learn More" href="cli">
-    Discover CLI commands to make you more productive with Angular.
+  <docs-card title="コマンドリファレンス" link="詳細を見る" href="cli">
+    Angularでより生産性を高めるCLIコマンドを発見します。
   </docs-card>
-  <docs-card title="Schematics" link="Learn More" href="tools/cli/schematics">
-    Create and run schematics to generate and modify source files in your application automatically.
+  <docs-card title="Schematics" link="詳細を見る" href="tools/cli/schematics">
+    Schematicsを作成および実行して、アプリケーションのソースファイルを自動的に生成および変更します。
   </docs-card>
-  <docs-card title="Builders" link="Learn More" href="tools/cli/cli-builder">
-    Create and run builders to perform complex transformations from your source code to generated build outputs.
+  <docs-card title="Builders" link="詳細を見る" href="tools/cli/cli-builder">
+    Buildersを作成および実行して、ソースコードから生成されたビルド出力への複雑な変換を実行します。
   </docs-card>
 </docs-card-container>
 
-## CLI command-language syntax
+## CLIコマンド言語構文 {#cli-command-language-syntax}
 
-Angular CLI roughly follows Unix/POSIX conventions for option syntax.
+Angular CLIは、オプション構文に関してUnix/POSIXの慣例にほぼ従っています。
 
-### Boolean options
+### 真偽値オプション {#boolean-options}
 
-Boolean options have two forms: `--this-option` sets the flag to `true`, `--no-this-option` sets it to `false`.
-You can also use `--this-option=false` or `--this-option=true`.
-If neither option is supplied, the flag remains in its default state, as listed in the reference documentation.
+真偽値オプションには2つの形式があります。`--this-option`はフラグを`true`に設定し、`--no-this-option`は`false`に設定します。
+`--this-option=false`または`--this-option=true`を使用できます。
+どちらのオプションも指定されていない場合、フラグは参照ドキュメントに記載されているデフォルトの状態のままになります。
 
-### Array options
+### 配列オプション {#array-options}
 
-Array options can be provided in two forms: `--option value1 value2` or `--option value1 --option value2`.
+配列オプションは2つの形式で指定できます。`--option value1 value2`または`--option value1 --option value2`。
 
-### Key/value options
+### キー/値オプション {#key-value-options}
 
-Some options like `--define` expect an array of `key=value` pairs as their values.
-Just like array options, key/value options can be provided in two forms:
-`--define 'KEY_1="value1"' KEY_2=true` or `--define 'KEY_1="value1"' --define KEY_2=true`.
+`--define`のような一部のオプションは、値として`key=value`ペアの配列を期待します。
+配列オプションと同様に、キー/値オプションは2つの形式で指定できます。
+`--define 'KEY_1="value1"' KEY_2=true`または`--define 'KEY_1="value1"' --define KEY_2=true`。
 
-### Relative paths
+### 相対パス {#relative-paths}
 
-Options that specify files can be given as absolute paths, or as paths relative to the current working directory, which is generally either the workspace or project root.
+ファイルを指定するオプションは、絶対パスとして、または現在の作業ディレクトリ（通常はワークスペースまたはプロジェクトのルート）に対する相対パスとして指定できます。

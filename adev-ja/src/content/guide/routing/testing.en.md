@@ -1,23 +1,23 @@
-# ルーティングとナビゲーションのテスト
+# Testing routing and navigation
 
-ルーティングとナビゲーションのテストは、ユーザーが異なるルート間を移動する際にアプリケーションが正しく動作することを保証するために不可欠です。このガイドでは、Angularアプリケーションにおけるルーティング機能のテストに関する様々な戦略について説明します。
+Testing routing and navigation is essential to ensure your application behaves correctly when users navigate between different routes. This guide covers various strategies for testing routing functionality in Angular applications.
 
-## 前提条件 {#prerequisites}
+## Prerequisites
 
-このガイドは、以下のツールとライブラリに精通していることを前提としています。
+This guide assumes you are familiar with the following tools and libraries:
 
-- **[Jasmine](https://jasmine.github.io/)** - テスト構文（`describe`、`it`、`expect`）を提供するJavaScriptテストフレームワーク
-- **[Karma](https://karma-runner.github.io/)** - ブラウザでテストを実行するテストランナー
-- **[Angular Testing Utilities](guide/testing)** - Angularに組み込まれているテストツール（[`TestBed`](api/core/testing/TestBed)、[`ComponentFixture`](api/core/testing/ComponentFixture)）
-- **[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)** - 組み込みのナビゲーションとコンポーネントテスト機能を備えた、ルーティングされたコンポーネントをテストするためのテストハーネス
+- **[Jasmine](https://jasmine.github.io/)** - JavaScript testing framework that provides the testing syntax (`describe`, `it`, `expect`)
+- **[Karma](https://karma-runner.github.io/)** - Test runner that executes tests in browsers
+- **[Angular Testing Utilities](guide/testing)** - Angular's built-in testing tools ([`TestBed`](api/core/testing/TestBed), [`ComponentFixture`](api/core/testing/ComponentFixture))
+- **[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)** - Test harness for testing routed components with built-in navigation and component testing capabilities
 
-## テストシナリオ {#testing-scenarios}
+## Testing scenarios
 
-### ルートパラメーター {#route-parameters}
+### Route parameters
 
-コンポーネントは、プロフィールページのユーザーIDのように、URLからのルートパラメーターに依存してデータを取得することがよくあります。
+Components often rely on route parameters from the URL to fetch data, like a user ID for a profile page.
 
-以下の例は、ルートからユーザーIDを表示する`UserProfile`コンポーネントをテストする方法を示しています。
+The following example shows how to test a `UserProfile` component that displays a user ID from the route.
 
 ```ts
 // user-profile.component.spec.ts
@@ -60,11 +60,11 @@ export class UserProfile {
 }
 ```
 
-### ルートガード {#route-guards}
+### Route guards
 
-ルートガードは、認証や権限などの条件に基づいてルートへのアクセスを制御します。ガードをテストする際は、依存関係のモックとナビゲーションの結果の検証に焦点を当てます。
+Route guards control access to routes based on conditions like authentication or permissions. When testing guards, focus on mocking dependencies and verifying navigation outcomes.
 
-以下の例は、認証されたユーザーのナビゲーションを許可し、認証されていないユーザーをログインページにリダイレクトする`authGuard`をテストします。
+The following example tests an `authGuard` that allows navigation for authenticated users and redirects unauthenticated users to a login page.
 
 ```ts
 // auth.guard.spec.ts
@@ -131,11 +131,11 @@ export const authGuard: CanActivateFn = () => {
 };
 ```
 
-### ルーターアウトレット {#router-outlets}
+### Router outlets
 
-ルーターアウトレットのテストは、本質的に[`Router`](api/router/Router)、アウトレット、および表示されるコンポーネント間の統合をテストしているため、より統合テストに近いものです。
+Router outlet tests are more of an integration test since you're essentially testing the integration between the [`Router`](api/router/Router), the outlet, and the components being displayed.
 
-異なるルートに対して異なるコンポーネントが表示されることを検証するテストを設定する方法の例を以下に示します。
+Here's an example of how to set up a test that verifies different components are displayed for different routes:
 
 ```ts
 // app.component.spec.ts
@@ -204,17 +204,17 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 export class App {}
 ```
 
-### ネストされたルート {#nested-routes}
+### Nested routes
 
-ネストされたルートをテストすることで、ネストされたURLにナビゲートしたときに親コンポーネントと子コンポーネントの両方が正しくレンダリングされることを保証します。ネストされたルートは複数のレイヤーを含むため、これは重要です。
+Testing nested routes ensures that both the parent and child components render correctly when navigating to nested URLs. This is important because nested routes involve multiple layers.
 
-以下を確認する必要があります。
+You need to verify that:
 
-1. 親コンポーネントが適切にレンダリングされること。
-2. 子コンポーネントがその内部にレンダリングされること。
-3. 両方のコンポーネントがそれぞれのルートデータにアクセスできることを確認すること。
+1. The parent component renders properly.
+2. The child component renders within it.
+3. Ensure that both components can access their respective route data.
 
-親子のルート構造をテストする例を以下に示します。
+Here's an example of testing a parent-child route structure:
 
 ```ts
 // nested-routes.spec.ts
@@ -274,13 +274,13 @@ export class Parent {}
 export class Child {}
 ```
 
-### クエリパラメーターとフラグメント {#query-parameters-and-fragments}
+### Query parameters and fragments
 
-クエリパラメーター（`?search=angular&category=web`など）とURLフラグメント（`#section1`など）は、どのコンポーネントがロードされるかには影響しませんが、コンポーネントの動作には影響を与える追加データをURLを通じて提供します。[`ActivatedRoute.queryParams`](api/router/ActivatedRoute#queryParams)を通じてクエリパラメーターを読み取るコンポーネントは、異なるパラメーターシナリオを正しく処理することを確認するためにテストする必要があります。
+Query parameters (like `?search=angular&category=web`) and URL fragments (like `#section1`) provide additional data through the URL that doesn't affect which component loads, but does affect how the component behaves. Components that read query parameters through [`ActivatedRoute.queryParams`](api/router/ActivatedRoute#queryParams) need to be tested to ensure they handle different parameter scenarios correctly.
 
-ルート定義の一部であるルートパラメーターとは異なり、クエリパラメーターはオプションであり、ルートナビゲーションをトリガーすることなく変更できます。これは、初期ロードと、クエリパラメーターが変更されたときのリアクティブな更新の両方をテストする必要があることを意味します。
+Unlike route parameters that are part of the route definition, query parameters are optional and can change without triggering route navigation. This means you need to test both the initial loading and the reactive updates when query parameters change.
 
-クエリパラメーターとフラグメントをテストする方法の例を以下に示します。
+Here's an example of how to test query parameters and fragments:
 
 ```ts
 // search.component.spec.ts
@@ -331,11 +331,11 @@ export class Search {
 }
 ```
 
-## ルーターテストのベストプラクティス {#best-practices-for-router-testing}
+## Best practices for router testing
 
-1.  **RouterTestingHarnessを使用する** - ルーティングされたコンポーネントをテストするには、よりクリーンなAPIを提供し、テストホストコンポーネントの必要性を排除する[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)を使用してください。これは、直接的なコンポーネントアクセス、組み込みのナビゲーション、およびより優れた型安全性を提供します。ただし、名前付きアウトレットのテストなど、カスタムホストコンポーネントを作成する必要がある一部のシナリオには適していません。
-2.  **外部の依存関係を慎重に処理する** - より現実的なテストのために、可能な場合は実際の実装を優先してください。実際の実装が実現不可能な場合（例：外部API）は、実際の動作を近似するフェイクを使用してください。モックやスタブは、テストを脆弱にし、信頼性を低下させる可能性があるため、最後の手段としてのみ使用してください。
-3.  **ナビゲーション状態をテストする** - URLの変更やコンポーネントのレンダリングを含む、ナビゲーションアクションと結果として生じるアプリケーション状態の両方を検証してください。
-4.  **非同期操作を処理する** - ルーターのナビゲーションは非同期です。テストでのタイミングを適切に処理するために、`async/await` または [`fakeAsync`](api/core/testing/fakeAsync) を使用してください。
-5.  **エラーシナリオをテストする** - アプリケーションがエッジケースを適切に処理することを確認するために、無効なルート、失敗したナビゲーション、およびガードによる拒否のテストを含めてください。
-6.  **Angularルーターをモックしない** - 代わりに、実際のルート設定を提供し、ハーネスを使用してナビゲートしてください。これにより、テストがより堅牢になり、Angularの内部更新で壊れる可能性が低くなります。また、モックは破壊的変更を隠す可能性があるため、ルーターが更新されたときに実際の問題を確実に捕捉できます。
+1. **Use RouterTestingHarness** - For testing routed components, use [`RouterTestingHarness`](api/router/testing/RouterTestingHarness) which provides a cleaner API and eliminates the need for test host components. It offers direct component access, built-in navigation, and better type safety. However, it isn't as suitable for some scenarios, such as testing named outlets, where you may need to create custom host components.
+2. **Handle external dependencies thoughtfully** - Prefer real implementations when possible for more realistic tests. If real implementations aren't feasible (e.g., external APIs), use fakes that approximate the real behavior. Use mocks or stubs only as a last resort, as they can make tests brittle and less reliable.
+3. **Test navigation state** - Verify both the navigation action and the resulting application state, including URL changes and component rendering.
+4. **Handle asynchronous operations** - Router navigation is asynchronous. Use `async/await` or [`fakeAsync`](api/core/testing/fakeAsync) to properly handle timing in your tests.
+5. **Test error scenarios** - Include tests for invalid routes, failed navigation, and guard rejections to ensure your application handles edge cases gracefully.
+6. **Do not mock Angular Router** - Instead, provide real route configurations and use the harness to navigate. This makes your tests more robust and less likely to break on internal Angular updates, while also ensuring you catch real issues when the router updates since mocks can hide breaking changes.

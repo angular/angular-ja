@@ -1,75 +1,75 @@
-# Router reference
+# ルーターリファレンス
 
-The following sections highlight some core router concepts and terminology.
+以下のセクションでは、いくつかの主要なルーターの概念と用語を取り上げています。
 
-## Router events
+## ルーターイベント {#router-events}
 
-During each navigation, the `Router` emits navigation events through the `Router.events` property.
-These events are shown in the following table.
+各ナビゲーション中に、`Router`は`Router.events`プロパティを通じてナビゲーションイベントを発行します。
+これらのイベントを次の表に示します。
 
-| Router event                                              | Details                                                                                                                                                                |
+| ルーターイベント                                          | 詳細                                                                                                                                                                |
 | :-------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`NavigationStart`](api/router/NavigationStart)           | Triggered when navigation starts.                                                                                                                                      |
-| [`RouteConfigLoadStart`](api/router/RouteConfigLoadStart) | Triggered before the `Router` lazy loads a route configuration.                                                                                                        |
-| [`RouteConfigLoadEnd`](api/router/RouteConfigLoadEnd)     | Triggered after a route has been lazy loaded.                                                                                                                          |
-| [`RoutesRecognized`](api/router/RoutesRecognized)         | Triggered when the Router parses the URL and the routes are recognized.                                                                                                |
-| [`GuardsCheckStart`](api/router/GuardsCheckStart)         | Triggered when the Router begins the Guards phase of routing.                                                                                                          |
-| [`ChildActivationStart`](api/router/ChildActivationStart) | Triggered when the Router begins activating a route's children.                                                                                                        |
-| [`ActivationStart`](api/router/ActivationStart)           | Triggered when the Router begins activating a route.                                                                                                                   |
-| [`GuardsCheckEnd`](api/router/GuardsCheckEnd)             | Triggered when the Router finishes the Guards phase of routing successfully.                                                                                           |
-| [`ResolveStart`](api/router/ResolveStart)                 | Triggered when the Router begins the Resolve phase of routing.                                                                                                         |
-| [`ResolveEnd`](api/router/ResolveEnd)                     | Triggered when the Router finishes the Resolve phase of routing successfully.                                                                                          |
-| [`ChildActivationEnd`](api/router/ChildActivationEnd)     | Triggered when the Router finishes activating a route's children.                                                                                                      |
-| [`ActivationEnd`](api/router/ActivationEnd)               | Triggered when the Router finishes activating a route.                                                                                                                 |
-| [`NavigationEnd`](api/router/NavigationEnd)               | Triggered when navigation ends successfully.                                                                                                                           |
-| [`NavigationCancel`](api/router/NavigationCancel)         | Triggered when navigation is canceled. This can happen when a Route Guard returns false during navigation, or redirects by returning a `UrlTree` or `RedirectCommand`. |
-| [`NavigationError`](api/router/NavigationError)           | Triggered when navigation fails due to an unexpected error.                                                                                                            |
-| [`Scroll`](api/router/Scroll)                             | Represents a scrolling event.                                                                                                                                          |
+| [`NavigationStart`](api/router/NavigationStart)           | ナビゲーションが開始されたときにトリガーされます。                                                                                                                   |
+| [`RouteConfigLoadStart`](api/router/RouteConfigLoadStart) | `Router`がルート設定を遅延読み込みする前にトリガーされます。                                                                                                             |
+| [`RouteConfigLoadEnd`](api/router/RouteConfigLoadEnd)     | ルートが遅延読み込みされた後にトリガーされます。                                                                                                                         |
+| [`RoutesRecognized`](api/router/RoutesRecognized)         | RouterがURLを解析し、ルートが認識されたときにトリガーされます。                                                                                                        |
+| [`GuardsCheckStart`](api/router/GuardsCheckStart)         | RouterがルーティングのGuardsフェーズを開始したときにトリガーされます。                                                                                                 |
+| [`ChildActivationStart`](api/router/ChildActivationStart) | Routerがルートの子をアクティブ化し始めたときにトリガーされます。                                                                                                       |
+| [`ActivationStart`](api/router/ActivationStart)           | Routerがルートをアクティブ化し始めたときにトリガーされます。                                                                                                           |
+| [`GuardsCheckEnd`](api/router/GuardsCheckEnd)             | RouterがルーティングのGuardsフェーズを正常に完了したときにトリガーされます。                                                                                           |
+| [`ResolveStart`](api/router/ResolveStart)                 | RouterがルーティングのResolveフェーズを開始したときにトリガーされます。                                                                                                |
+| [`ResolveEnd`](api/router/ResolveEnd)                     | RouterがルーティングのResolveフェーズを正常に完了したときにトリガーされます。                                                                                          |
+| [`ChildActivationEnd`](api/router/ChildActivationEnd)     | Routerがルートの子のアクティブ化を完了したときにトリガーされます。                                                                                                     |
+| [`ActivationEnd`](api/router/ActivationEnd)               | Routerがルートのアクティブ化を完了したときにトリガーされます。                                                                                                         |
+| [`NavigationEnd`](api/router/NavigationEnd)               | ナビゲーションが正常に終了したときにトリガーされます。                                                                                                               |
+| [`NavigationCancel`](api/router/NavigationCancel)         | ナビゲーションがキャンセルされたときにトリガーされます。これは、ナビゲーション中にルートガードがfalseを返すか、`UrlTree`または`RedirectCommand`を返すことによってリダイレクトされた場合に発生します。 |
+| [`NavigationError`](api/router/NavigationError)           | 予期せぬエラーによりナビゲーションが失敗したときにトリガーされます。                                                                                                   |
+| [`Scroll`](api/router/Scroll)                             | スクロールイベントを表します。                                                                                                                                         |
 
-When you enable the `withDebugTracing` feature, Angular logs these events to the console.
+`withDebugTracing`機能を有効にすると、Angularはこれらのイベントをコンソールにログ出力します。
 
-## Router terminology
+## ルーター用語 {#router-terminology}
 
-Here are the key `Router` terms and their meanings:
+主な`Router`用語とその意味を以下に示します。
 
-| Router part           | Details                                                                                                                                                                                                                                   |
+| ルーターの要素 | 詳細 |
 | :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Router`              | Displays the application component for the active URL. Manages navigation from one component to the next.                                                                                                                                 |
-| `provideRouter`       | provides the necessary service providers for navigating through application views.                                                                                                                                                        |
-| `RouterModule`        | A separate NgModule that provides the necessary service providers and directives for navigating through application views.                                                                                                                |
-| `Routes`              | Defines an array of Routes, each mapping a URL path to a component.                                                                                                                                                                       |
-| `Route`               | Defines how the router should navigate to a component based on a URL pattern. Most routes consist of a path and a component type.                                                                                                         |
-| `RouterOutlet`        | The directive \(`<router-outlet>`\) that marks where the router displays a view.                                                                                                                                                          |
-| `RouterLink`          | The directive for binding a clickable HTML element to a route. Clicking an element with a `routerLink` directive that's bound to a _string_ or a _link parameters array_ triggers a navigation.                                           |
-| `RouterLinkActive`    | The directive for adding/removing classes from an HTML element when an associated `routerLink` contained on or inside the element becomes active/inactive. It can also set the `aria-current` of an active link for better accessibility. |
-| `ActivatedRoute`      | A service that's provided to each route component that contains route specific information such as route parameters, static data, resolve data, global query parameters, and the global fragment.                                         |
-| `RouterState`         | The current state of the router including a tree of the currently activated routes together with convenience methods for traversing the route tree.                                                                                       |
-| Link parameters array | An array that the router interprets as a routing instruction. You can bind that array to a `RouterLink` or pass the array as an argument to the `Router.navigate` method.                                                                 |
-| Routing component     | An Angular component with a `RouterOutlet` that displays views based on router navigations.                                                                                                                                               |
+| `Router`              | アクティブなURLに対応するアプリケーションコンポーネントを表示します。あるコンポーネントから次のコンポーネントへのナビゲーションを管理します。 |
+| `provideRouter`       | アプリケーションビュー間をナビゲートするために必要なサービスプロバイダーを提供します。 |
+| `RouterModule`        | アプリケーションビュー間をナビゲートするために必要なサービスプロバイダーとディレクティブを提供する独立したNgModuleです。 |
+| `Routes`              | URLパスをコンポーネントにマッピングする`Route`の配列を定義します。 |
+| `Route`               | URLパターンに基づいてルーターがコンポーネントにナビゲートする方法を定義します。ほとんどのルートは、パスとコンポーネントタイプで構成されます。 |
+| `RouterOutlet`        | ルーターがビューを表示する場所を示すディレクティブ (`<router-outlet>`) です。 |
+| `RouterLink`          | クリック可能なHTML要素をルートにバインドするためのディレクティブです。_文字列_または_リンクパラメーター配列_にバインドされた`routerLink`ディレクティブを持つ要素をクリックすると、ナビゲーションがトリガーされます。 |
+| `RouterLinkActive`    | 関連する`routerLink`が要素内または要素上でアクティブ/非アクティブになったときに、HTML要素からクラスを追加/削除するためのディレクティブです。アクセシビリティ向上のため、アクティブなリンクの`aria-current`を設定することもできます。 |
+| `ActivatedRoute`      | ルートパラメーター、静的データ、解決済みデータ、グローバルクエリパラメーター、グローバルフラグメントなどのルート固有の情報を含む、各ルートコンポーネントに提供されるサービスです。 |
+| `RouterState`         | 現在アクティブなルートのツリーと、ルートツリーを走査するための便利なメソッドを含む、ルーターの現在の状態です。 |
+| リンクパラメーター配列 | ルーターがルーティング命令として解釈する配列です。この配列を`RouterLink`にバインドしたり、`Router.navigate`メソッドの引数として渡したりできます。 |
+| ルーティングコンポーネント | ルーターナビゲーションに基づいてビューを表示する、`RouterOutlet`を持つAngularコンポーネントです。 |
 
 ## `<base href>`
 
-The router uses the browser's [history.pushState](https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries 'HTML5 browser history push-state') for navigation.
-`pushState` lets you customize in-application URL paths; for example, `localhost:4200/crisis-center`.
-The in-application URLs can be indistinguishable from server URLs.
+ルーターは、ナビゲーションにブラウザの[history.pushState](https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries 'HTML5 browser history push-state')を使用します。
+`pushState`を使用すると、アプリケーション内のURLパスをカスタマイズできます。例: `localhost:4200/crisis-center`。
+アプリケーション内のURLは、サーバーURLと区別できない場合があります。
 
-Modern HTML5 browsers were the first to support `pushState` which is why many people refer to these URLs as "HTML5 style" URLs.
+最新のHTML5ブラウザが最初に`pushState`をサポートしたため、多くの人がこれらのURLを「HTML5スタイル」URLと呼んでいます。
 
-HELPFUL: HTML5 style navigation is the router default.
-In the [LocationStrategy and browser URL styles](#locationstrategy-and-browser-url-styles) section, learn why HTML5 style is preferable, how to adjust its behavior, and how to switch to the older hash \(`#`\) style, if necessary.
+HELPFUL: HTML5スタイルのナビゲーションはルーターのデフォルトです。
+[LocationStrategyとブラウザURLスタイル](#locationstrategy-and-browser-url-styles)のセクションで、HTML5スタイルが推奨される理由、その動作を調整する方法、必要に応じて古いハッシュ\(`#`\)スタイルに切り替える方法を学びましょう。
 
-You must add a [`<base href>` element](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href') to the application's `index.html` for `pushState` routing to work.
-The browser uses the `<base href>` value to prefix relative URLs when referencing CSS files, scripts, and images.
+`pushState`ルーティングを機能させるには、アプリケーションの`index.html`に[`<base href>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href')を追加する必要があります。
+ブラウザは、CSSファイル、スクリプト、画像を相対URLで参照する際に、`<base href>`の値をプレフィックスとして使用します。
 
-Add the `<base>` element just after the `<head>` tag.
-If the `app` folder is the application root, as it is for this application, set the `href` value in `index.html` as shown here.
+`<base>`要素は`<head>`タグの直後に追加します。
+`app`フォルダがこのアプリケーションのアプリケーションルートである場合、`index.html`の`href`値をここに示されているように設定します。
 
 <docs-code header="src/index.html (base-href)" path="adev/src/content/examples/router/src/index.html" visibleRegion="base-href"/>
 
-### HTML5 URLs and the `<base href>`
+### HTML5 URLと`<base href>` {#html5-urls-and-the-base-href}
 
-The guidelines that follow will refer to different parts of a URL.
-This diagram outlines what those parts refer to:
+以下のガイドラインでは、URLのさまざまな部分について言及します。
+この図は、それらの部分が何を参照しているかを示しています。
 
 <docs-code hideCopy language="text">
 foo://example.com:8042/over/there?name=ferret#nose
@@ -78,37 +78,37 @@ foo://example.com:8042/over/there?name=ferret#nose
 scheme    authority      path        query   fragment
 </docs-code>
 
-While the router uses the [HTML5 pushState](https://developer.mozilla.org/docs/Web/API/History_API#Adding_and_modifying_history_entries 'Browser history push-state') style by default, you must configure that strategy with a `<base href>`.
+ルーターはデフォルトで[HTML5 pushState](https://developer.mozilla.org/docs/Web/API/History_API#Adding_and_modifying_history_entries 'Browser history push-state')スタイルを使用しますが、その戦略を`<base href>`で設定する必要があります。
 
-The preferred way to configure the strategy is to add a [`<base href>` element](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href') tag in the `<head>` of the `index.html`.
+この戦略を設定する推奨される方法は、`index.html`の`<head>`に[`<base href>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href')タグを追加することです。
 
 ```angular-html
 <base href="/">
 ```
 
-Without that tag, the browser might not be able to load resources \(images, CSS, scripts\) when "deep linking" into the application.
+そのタグがないと、アプリケーションに「ディープリンク」した場合、ブラウザがリソース（画像、CSS、スクリプト）をロードできない可能性があります。
 
-Some developers might not be able to add the `<base>` element, perhaps because they don't have access to `<head>` or the `index.html`.
+一部の開発者は、`<head>`または`index.html`にアクセスできないなどの理由で、`<base>`要素を追加できない場合があります。
 
-Those developers can still use HTML5 URLs by taking the following two steps:
+そのような開発者でも、以下の2つの手順を実行することでHTML5 URLを使用できます。
 
-1. Provide the router with an appropriate `APP_BASE_HREF` value.
-1. Use root URLs \(URLs with an `authority`\) for all web resources: CSS, images, scripts, and template HTML files.
+1. ルーターに適切な`APP_BASE_HREF`値を提供します。
+2. すべてのWebリソース（CSS、画像、スクリプト、テンプレートHTMLファイル）にルートURL（`authority`を持つURL）を使用します。
 
-   - The `<base href>` `path` should end with a "/", as browsers ignore characters in the `path` that follow the right-most "`/`"
-   - If the `<base href>` includes a `query` part, the `query` is only used if the `path` of a link in the page is empty and has no `query`.
-     This means that a `query` in the `<base href>` is only included when using `HashLocationStrategy`.
+   - `<base href>`の`path`は"/"で終わる必要があります。ブラウザは、最も右の"/"に続く`path`内の文字を無視するためです。
+   - `<base href>`に`query`部分が含まれている場合、`query`は、ページ内のリンクの`path`が空で`query`がない場合にのみ使用されます。
+     これは、`<base href>`内の`query`が`HashLocationStrategy`を使用している場合にのみ含まれることを意味します。
 
-   - If a link in the page is a root URL \(has an `authority`\), the `<base href>` is not used.
-     In this way, an `APP_BASE_HREF` with an authority will cause all links created by Angular to ignore the `<base href>` value.
+   - ページ内のリンクがルートURL（`authority`を持つ）である場合、`<base href>`は使用されません。
+     このように、`authority`を持つ`APP_BASE_HREF`は、Angularによって作成されたすべてのリンクが`<base href>`の値を無視するようにします。
 
-   - A fragment in the `<base href>` is _never_ persisted
+   - `<base href>`内のフラグメントは_決して_保持されません。
 
-For more complete information on how `<base href>` is used to construct target URIs, see the [RFC](https://tools.ietf.org/html/rfc3986#section-5.2.2) section on transforming references.
+`<base href>`がターゲットURIの構築にどのように使用されるかについてのより完全な情報は、参照の変換に関する[RFC](https://tools.ietf.org/html/rfc3986#section-5.2.2)セクションを参照してください。
 
-### `HashLocationStrategy`
+### `HashLocationStrategy` {#hashlocationstrategy}
 
-Use `HashLocationStrategy` by providing the `useHash: true` in an object as the second argument of the `RouterModule.forRoot()` in the `AppModule`.
+`AppModule`の`RouterModule.forRoot()`の2番目の引数として、オブジェクト内で`useHash: true`を提供することで`HashLocationStrategy`を使用します。
 
 ```ts
 providers: [
@@ -116,4 +116,4 @@ providers: [
 ]
 ```
 
-When using `RouterModule.forRoot`, this is configured with the `useHash: true` in the second argument: `RouterModule.forRoot(routes, {useHash: true})`.
+`RouterModule.forRoot`を使用する場合、これは2番目の引数`RouterModule.forRoot(routes, {useHash: true})`で`useHash: true`を使用して設定されます。

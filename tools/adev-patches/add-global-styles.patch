@@ -8,7 +8,7 @@ index 2c83a2ad4a..9d9b28112a 100644
  @include xterm.xterm();
 +// adev-ja overrides
 +
-+docs-viewer {
++.docs-viewer {
 +    // `balance` is not good for Japanese headings.
 +    h1,
 +    h2,

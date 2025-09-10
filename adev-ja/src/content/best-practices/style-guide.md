@@ -189,7 +189,7 @@ export class UserProfile {
 }
 ```
 
-### Angularによって初期化されるプロパティには`readonly`を使用する {#use-readonly-on-properties-that-are-initialized-by-angular}
+### 変更されるべきでないプロパティには`readonly`を使用する {#use-readonly-for-properties-that-shouldnt-change}
 
 Angularによって初期化されるコンポーネントとディレクティブのプロパティを`readonly`としてマークします。
 これには、`input`、`model`、`output`、およびクエリによって初期化されるプロパティが含まれます。
@@ -200,6 +200,7 @@ readonlyアクセス修飾子は、Angularによって設定された値が上�
 export class UserProfile {
   readonly userId = input();
   readonly userSaved = output();
+  readonly userName = model();
 }
 ```
 

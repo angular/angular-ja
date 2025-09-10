@@ -71,6 +71,12 @@ const myComponentHarness = await loader.getHarness(MyComponent);
 const myComponentHarnesses = await loader.getHarnesses(MyComponent);
 </docs-code>
 
+`getHarness`と`getAllHarnesses`に加えて、`HarnessLoader`にはハーネスを検索するためのその他の有用なメソッドがいくつかあります。
+
+- `getHarnessAtIndex(...)`: 特定のインデックスで指定された条件に一致するコンポーネントのハーネスを取得します。
+- `countHarnesses(...)`: 指定された条件に一致するコンポーネントインスタンスの数をカウントします。
+- `hasHarness(...)`: 指定された条件に一致するコンポーネントインスタンスが少なくとも1つ存在するかどうかを確認します。
+
 例として、クリック時にダイアログを開く再利用可能なダイアログボタンコンポーネントを考えます。これには、それぞれに対応するハーネスを持つ以下のコンポーネントが含まれています。
 
 - `MyDialogButton` (`MyButton`と`MyDialog`を便利なAPIで構成)

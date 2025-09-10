@@ -5,6 +5,24 @@ Angular CLIは、テストランナーとして[Vitest](https://vitest.dev/)を�
 IMPORTANT: この実験的なユニットテストシステムは、`application`ビルドシステムの使用を必要とします。
 `application`ビルドシステムは、新しく作成されるすべてのプロジェクトのデフォルトです。
 
+## 依存関係のインストール {#installing-dependencies}
+
+新しいビルダーが動作するために、いくつかのパッケージが必要です。新しいパッケージをインストールするには、次のコマンドを実行します。
+
+<docs-code language="bash">
+
+npm install vitest jsdom --save-dev
+
+</docs-code>
+
+ワークスペース内の他のプロジェクトがKarmaを使用していない場合は、次のコマンドを実行して対応するパッケージをアンインストールします。
+
+<docs-code language="bash">
+
+npm uninstall karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter --save-dev
+
+</docs-code>
+
 ## テストのセットアップ {#set-up-testing}
 
 Angular CLIは新しいプロジェクト内にテストシステムを含んでいますが、使用する前に設定が必要です。

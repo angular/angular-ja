@@ -11,7 +11,7 @@ Angularは、アプリケーションの要素をアニメーション化する�
 
 ## `animate.enter`
 
-`animate.enter`はDOMに_入る_要素をアニメーション化するために使用できます。CSSクラスと、transformまたはキーフレームアニメーションのいずれかを使用して、enterアニメーションを定義できます。
+`animate.enter`はDOMに_入る_要素をアニメーション化するために使用できます。CSSクラスと、transitionまたはキーフレームアニメーションのいずれかを使用して、enterアニメーションを定義できます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.ts">
     <docs-code header="src/app/enter.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.ts" />
@@ -24,6 +24,8 @@ Angularは、アプリケーションの要素をアニメーション化する�
 NOTE: 要素で複数のキーフレームアニメーションまたはtransitionプロパティを使用している場合、Angularは最も長いアニメーションが完了した_後にのみ_すべてのクラスを削除します。
 
 `animate.enter`は、制御フローや動的式など、他のAngular機能と組み合わせて使用できます。`animate.enter`は、単一のクラス文字列（複数のクラスがスペースで区切られているもの）またはクラス文字列の配列を受け入れます。
+
+CSSトランジションの使用についての簡単な注意：キーフレームアニメーションの代わりにトランジションを使用することを選択した場合、`animate.enter`で要素に追加されるクラスは、トランジションがアニメーション_する先の_状態を表します。基本要素のCSSは、アニメーションが実行されないときの要素の外観であり、CSSトランジションの終了状態に似ている可能性があります。そのため、トランジションが機能するために適切な_from_状態を持つために、`@starting-style`と組み合わせる必要があります。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.ts">
     <docs-code header="src/app/enter-binding.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.ts" />
@@ -86,3 +88,12 @@ TestBedは、テスト環境でアニメーションを有効または無効に�
 これにより、テスト環境でのアニメーションが通常通りに動作するように設定されます。
 
 NOTE: 一部のテスト環境では、`animationstart`、`animationend`のようなアニメーションイベントや、それらに相当するトランジションイベントを発行しません。
+
+## Angularアニメーションについてさらに詳しく
+
+以下の項目にも興味があるかもしれません：
+
+<docs-pill-row>
+  <docs-pill href="guide/animations/css" title="CSSを使った複雑なアニメーション"/>
+  <docs-pill href="guide/routing/route-transition-animations" title="ルート遷移アニメーション"/>
+</docs-pill-row>

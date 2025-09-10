@@ -23,7 +23,7 @@ NOTE: [エッセンシャルガイドの制御フロー](/essentials/templates#c
     }
   `,
 })
-class App {
+export class App {
   isLoggedIn = true;
 }
 ```

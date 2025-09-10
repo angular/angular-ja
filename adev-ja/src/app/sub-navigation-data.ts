@@ -18,7 +18,7 @@ import ERRORS_NAV_DATA from '../../src/assets/content/reference/errors/routes.js
 import EXT_DIAGNOSTICS_NAV_DATA from '../../src/assets/content/reference/extended-diagnostics/routes.json';
 
 import {getApiNavigationItems} from './features/references/helpers/manifest.helper';
-import {DEFAULT_PAGES} from './core/enums/pages';
+import {DEFAULT_PAGES} from './core/constants/pages';
 
 interface SubNavigationData {
   docs: NavigationItem[];

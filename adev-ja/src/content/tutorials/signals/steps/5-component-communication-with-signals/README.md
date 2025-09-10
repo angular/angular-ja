@@ -1,15 +1,15 @@
-# Passing data to components with input signals
+# コンポーネントに入力シグナルでデータを渡す
 
-Now that you've learned [managing async data with signals](/tutorials/signals/4-managing-async-data-with-signals), let's explore Angular's signal-based `input()` API for passing data from parent to child components, making component data flow more reactive and efficient. If you're familiar with component props from other frameworks, inputs are the same idea.
+[シグナルで非同期データを管理する](/tutorials/signals/4-managing-async-data-with-signals)方法を学んだところで、親から子コンポーネントへデータを渡すためのAngularのシグナルベースの`input()` APIを探求し、コンポーネントのデータフローをよりリアクティブで効率的にしましょう。他のフレームワークのコンポーネントプロパティに慣れているなら、入力も同じ考え方です。
 
-In this activity, you'll add signal inputs to a product card component and see how parent data flows down reactively.
+このアクティビティでは、プロダクトカードコンポーネントにシグナル入力を追加し、親データがどのようにリアクティブに流れていくかを確認します。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Add signal inputs to ProductCard">
-Add signal `input()` functions to receive data in the `product-card` component.
+<docs-step title="ProductCardにシグナル入力を追加">
+`product-card`コンポーネントでデータを受け取るために、シグナル`input()`関数を追加します。
 
 ```ts
 // Add imports for signal inputs
@@ -21,11 +21,11 @@ price = input.required<number>();
 available = input<boolean>(true);
 ```
 
-Notice how `input.required()` creates an input that must be provided, while `input()` with a default value is optional.
+`input.required()`が必須の入力を作成するのに対し、デフォルト値を持つ`input()`はオプションであることに注目してください。
 </docs-step>
 
-<docs-step title="Connect inputs to the template">
-Update the template in `product-card` to display the signal input values.
+<docs-step title="入力をテンプレートに接続">
+`product-card`のテンプレートを更新して、シグナル入力値を表示します。
 
 ```html
 <div class="product-card">
@@ -41,11 +41,11 @@ Update the template in `product-card` to display the signal input values.
 </div>
 ```
 
-Input signals work just like regular signals in templates - call them as functions to access their values.
+入力シグナルは、テンプレート内で通常のシグナルと同じように機能します。関数として呼び出して値にアクセスします。
 </docs-step>
 
-<docs-step title="Connect parent signals to child inputs">
-Update the `product-card` usage in `app.ts` to pass dynamic signal values instead of static ones.
+<docs-step title="親シグナルを子入力に接続">
+`app.ts`内の`product-card`の使用箇所を更新し、静的な値の代わりに動的なシグナル値を渡すようにします。
 
 ```html
 <!-- Change from static values: -->
@@ -63,11 +63,11 @@ Update the `product-card` usage in `app.ts` to pass dynamic signal values instea
 />
 ```
 
-The square brackets `[]` create property bindings that pass the current signal values to the child.
+角括弧`[]`は、現在のシグナル値を子に渡すプロパティバインディングを作成します。
 </docs-step>
 
-<docs-step title="Test reactive updates">
-Add methods in `app.ts` to update the parent signals and see how the child component reacts automatically.
+<docs-step title="リアクティブな更新をテスト">
+`app.ts`にメソッドを追加して親シグナルを更新し、子コンポーネントがどのように自動的に反応するかを確認します。
 
 ```ts
 updateProduct() {
@@ -88,18 +88,18 @@ toggleAvailability() {
 </div>
 ```
 
-When parent signals change, the child component automatically receives and displays the new values!
+親シグナルが変更されると、子コンポーネントは自動的に新しい値を受け取り、表示します！
 </docs-step>
 
 </docs-workflow>
 
-Excellent! You've learned how signal inputs work:
+素晴らしい！シグナル入力の仕組みを学びました。
 
-- **Signal inputs** - Use `input()` and `input.required()` to receive data from parent components
-- **Reactive updates** - Child components automatically update when parent signal values change
-- **Type safety** - Signal inputs provide full TypeScript type checking
-- **Default values** - Optional inputs can have default values while required inputs must be provided
+- **シグナル入力** - 親コンポーネントからデータを受け取るために`input()`と`input.required()`を使用します
+- **リアクティブな更新** - 親シグナル値が変更されると、子コンポーネントは自動的に更新されます
+- **型安全性** - シグナル入力は完全なTypeScriptの型チェックを提供します
+- **デフォルト値** - オプションの入力はデフォルト値を持つことができ、必須の入力は提供されなければなりません
 
-Signal inputs make component communication more reactive and eliminate the need for `OnChanges` lifecycle hooks in many cases.
+シグナル入力はコンポーネント間の通信をよりリアクティブにし、多くの場合で`OnChanges`ライフサイクルフックの必要性を排除します。
 
-In the next lesson, you'll learn about [two-way binding with model signals](/tutorials/signals/6-two-way-binding-with-model-signals)!
+次のレッスンでは、[モデルシグナルによる双方向バインディング](/tutorials/signals/6-two-way-binding-with-model-signals)について学びます！

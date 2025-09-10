@@ -1,5 +1,5 @@
 {
   "openFiles": ["src/app/app.ts", "src/app/custom-checkbox.ts", "src/app/app.css"],
   "type": "editor",
-  "title": "modelシグナルによる双方向バインディング"
+  "title": "Two-way binding with model signals"
 }

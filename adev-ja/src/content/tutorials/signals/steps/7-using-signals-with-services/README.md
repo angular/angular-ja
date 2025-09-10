@@ -1,15 +1,15 @@
-# Using signals with services
+# サービスでシグナルを使用する
 
-Now that you've learned [two-way binding with model signals](/tutorials/signals/6-two-way-binding-with-model-signals), let's explore how to use signals with Angular services. Services are perfect for sharing reactive state across multiple components, and signals make this even more powerful by providing automatic change detection and clean reactive patterns.
+[モデルシグナルによる双方向バインディング](/tutorials/signals/6-two-way-binding-with-model-signals)を学習したので、Angularサービスでシグナルを使用する方法を見ていきましょう。サービスは複数のコンポーネント間でリアクティブな状態を共有するのに最適であり、シグナルは自動的な変更検知とクリーンなリアクティブパターンを提供することで、これをさらに強力にします。
 
-In this activity, you'll learn how to create a cart store with signals that allow the cart display component to react to state changes automatically.
+このアクティビティでは、カート表示コンポーネントが状態の変化に自動的に反応できるように、シグナルを使用してカートストアを作成する方法を学習します。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Add cart store signals">
-Add readonly and computed signals to make the cart state reactive in `cart-store.ts`.
+<docs-step title="カートストアシグナルを追加する" {#add-cart-store-signals}>
+`cart-store.ts`でカートの状態をリアクティブにするために、読み取り専用シグナルと計算済みシグナルを追加します。
 
 ```ts
 // Add the computed import
@@ -30,11 +30,11 @@ readonly totalPrice = computed(() => {
 });
 ```
 
-These signals allow components to reactively access cart data and computed totals. The `asReadonly()` method prevents external code from modifying the cart items directly, while `computed()` creates derived state that automatically updates when the source signal changes.
+これらのシグナルにより、コンポーネントはカートデータと計算された合計にリアクティブにアクセスできます。`asReadonly()`メソッドは外部コードがカートアイテムを直接変更するのを防ぎ、`computed()`はソースシグナルが変更されたときに自動的に更新される派生状態を作成します。
 </docs-step>
 
-<docs-step title="Complete the quantity update methods">
-The cart display component in `cart-display.ts` already uses the cart store signals in its template. Complete the quantity update methods to modify cart items:
+<docs-step title="数量更新メソッドを完成させる" {#complete-the-quantity-update-methods}>
+`cart-display.ts`のカート表示コンポーネントは、すでにテンプレートでカートストアシグナルを使用しています。カートアイテムを変更するための数量更新メソッドを完成させます。
 
 ```ts
 increaseQuantity(id: string) {
@@ -54,11 +54,11 @@ decreaseQuantity(id: string) {
 }
 ```
 
-These methods read the current cart state using `cartItems()` and update quantities through the store's methods. The UI automatically updates when the signals change!
+これらのメソッドは、`cartItems()`を使用して現在のカート状態を読み取り、ストアのメソッドを通じて数量を更新します。シグナルが変更されるとUIは自動的に更新されます！
 </docs-step>
 
-<docs-step title="Update the main app component">
-Update the main app component in `app.ts` to use the cart service and display the cart component.
+<docs-step title="メインアプリケーションコンポーネントを更新する" {#update-the-main-app-component}>
+`app.ts`のメインアプリケーションコンポーネントを更新して、カートサービスを使用し、カートコンポーネントを表示します。
 
 ```ts
 import {Component, inject} from '@angular/core';
@@ -93,11 +93,11 @@ export class App {
 
 </docs-workflow>
 
-Excellent! You've now learned how to use signals with services. Key concepts to remember:
+素晴らしい！サービスでシグナルを使用する方法を学びました。覚えておくべき主要な概念は次のとおりです。
 
-- **Service-level signals**: Services can use signals to manage reactive state
-- **Dependency injection**: Use `inject()` to access services with signals in components
-- **Computed signals in services**: Create derived state that updates automatically
-- **Readonly signals**: Expose read-only versions of signals to prevent external mutations
+- **サービスレベルシグナル**: サービスはシグナルを使用してリアクティブな状態を管理できます
+- **依存性の注入**: `inject()`を使用して、コンポーネントでシグナルを持つサービスにアクセスします
+- **サービス内の計算済みシグナル**: 自動的に更新される派生状態を作成します
+- **読み取り専用シグナル**: 外部からの変更を防ぐために、シグナルの読み取り専用バージョンを公開します
 
-In the next lesson, you'll learn about [how to use signals with directives](/tutorials/signals/8-using-signals-with-directives)!
+次のレッスンでは、[ディレクティブでシグナルを使用する方法](/tutorials/signals/8-using-signals-with-directives)について学習します！

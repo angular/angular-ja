@@ -1,15 +1,15 @@
-# Two-way binding with model signals
+# modelシグナルによる双方向バインディング
 
-Now that you've learned [passing data to components with input signals](/tutorials/signals/5-component-communication-with-signals), let's explore Angular's `model()` API for two-way binding. Model signals are perfect for UI components like checkboxes, sliders, or custom form controls where the component needs to both receive a value AND update it.
+[inputシグナルによるコンポーネントへのデータ受け渡し](/tutorials/signals/5-component-communication-with-signals)を学習したところで、Angularの`model()` APIを使った双方向バインディングについて見ていきましょう。modelシグナルは、チェックボックス、スライダー、カスタムフォームコントロールなど、コンポーネントが値を受け取ると同時に更新する必要があるUIコンポーネントに最適です。
 
-In this activity, you'll create a custom checkbox component that manages its own state while keeping the parent synchronized.
+このアクティビティでは、親と同期を保ちながら自身の状態を管理するカスタムチェックボックスコンポーネントを作成します。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Set up the custom checkbox with model signal">
-Create a model signal in the `custom-checkbox` component that can both receive and update the parent's value.
+<docs-step title="modelシグナルでカスタムチェックボックスを設定する" {#set-up-the-custom-checkbox-with-model-signal}>
+`custom-checkbox`コンポーネントに、親の値を送受信できるmodelシグナルを作成します。
 
 ```ts
 // Add imports for model signals
@@ -22,11 +22,11 @@ checked = model.required<boolean>();
 label = input<string>('');
 ```
 
-Unlike `input()` signals which are read-only, `model()` signals can be both read and written to.
+読み取り専用の`input()`シグナルとは異なり、`model()`シグナルは読み取りと書き込みの両方が可能です。
 </docs-step>
 
-<docs-step title="Create the checkbox template">
-Build the checkbox template that responds to clicks and updates its own model.
+<docs-step title="チェックボックスのテンプレートを作成する" {#create-the-checkbox-template}>
+クリックに応答し、自身のモデルを更新するチェックボックスのテンプレートを作成します。
 
 ```html
 <label class="custom-checkbox">
@@ -39,11 +39,11 @@ Build the checkbox template that responds to clicks and updates its own model.
 </label>
 ```
 
-The component reads from its model signal and has a method to update it.
+コンポーネントはmodelシグナルから読み取り、それを更新するメソッドを持っています。
 </docs-step>
 
-<docs-step title="Add the toggle method">
-Implement the toggle method that updates the model signal when the checkbox is clicked.
+<docs-step title="toggleメソッドを追加する" {#add-the-toggle-method}>
+チェックボックスがクリックされたときにmodelシグナルを更新するtoggleメソッドを実装します。
 
 ```ts
 toggle() {
@@ -52,11 +52,11 @@ toggle() {
 }
 ```
 
-When the child component calls `this.checked.set()`, it automatically propagates the change back to the parent. This is the key difference from `input()` signals.
+子コンポーネントが`this.checked.set()`を呼び出すと、変更は自動的に親に伝播されます。これが`input()`シグナルとの主な違いです。
 </docs-step>
 
-<docs-step title="Set up two-way binding in the parent">
-First, uncomment the model signal properties and methods in `app.ts`:
+<docs-step title="親で双方向バインディングを設定する" {#set-up-two-way-binding-in-the-parent}>
+まず、`app.ts`内のmodelシグナルプロパティとメソッドのコメントを解除します。
 
 ```ts
 // Parent signal models
@@ -74,14 +74,14 @@ resetAll() {
 }
 ```
 
-Then update the template:
+次に、テンプレートを更新します。
 
-Part 1. **Uncomment the checkboxes and add two-way binding:**
+パート1. **チェックボックスのコメントを解除し、双方向バインディングを追加します。**
 
-- Replace `___ADD_TWO_WAY_BINDING___` with `[(checked)]="agreedToTerms"` for the first checkbox
-- Replace `___ADD_TWO_WAY_BINDING___` with `[(checked)]="enableNotifications"` for the second
+- 最初のチェックボックスの`___ADD_TWO_WAY_BINDING___`を`[(checked)]="agreedToTerms"`に置き換えます。
+- 2番目のチェックボックスの`___ADD_TWO_WAY_BINDING___`を`[(checked)]="enableNotifications"`に置き換えます。
 
-Part 2. **Replace the `???` placeholders with @if blocks:**
+パート2. **`???`プレースホルダーを@ifブロックに置き換えます。**
 
 ```html
 @if (agreedToTerms()) {
@@ -91,38 +91,38 @@ Part 2. **Replace the `???` placeholders with @if blocks:**
 }
 ```
 
-Part 3. **Add click handlers to the buttons:**
+パート3. **ボタンにクリックハンドラーを追加します。**
 
 ```html
 <button (click)="toggleTermsFromParent()">Toggle Terms from Parent</button>
 <button (click)="resetAll()">Reset All</button>
 ```
 
-The `[(checked)]` syntax creates two-way binding - data flows down to the component AND changes flow back up to the parent by emitting an event that references the signal itself and does _not_ call the signal getter directly.
+`[(checked)]`構文は双方向バインディングを作成します。データはコンポーネントに流れ込み、変更はシグナル自体を参照するイベントを発行することで親に流れ戻ります。このとき、シグナルゲッターを直接呼び出すことは_ありません_。
 </docs-step>
 
-<docs-step title="Test the two-way binding">
-Interact with your app to see two-way binding in action:
+<docs-step title="双方向バインディングをテストする" {#test-the-two-way-binding}>
+アプリケーションを操作して、双方向バインディングの動作を確認します。
 
-1. **Click checkboxes** - Component updates its own state and notifies parent
-2. **Click "Toggle Terms from Parent"** - Parent updates propagate down to component
-3. **Click "Reset All"** - Parent resets both models and components update automatically
+1. **チェックボックスをクリックする** - コンポーネントは自身の状態を更新し、親に通知します。
+2. **「Toggle Terms from Parent」をクリックする** - 親の更新がコンポーネントに伝播されます。
+3. **「Reset All」をクリックする** - 親が両方のモデルをリセットし、コンポーネントが自動的に更新されます。
 
-Both the parent and child can update the shared state, and both stay in sync automatically!
+親と子の両方が共有状態を更新でき、両方とも自動的に同期を保ちます！
 </docs-step>
 
 </docs-workflow>
 
-Perfect! You've learned how model signals enable two-way binding:
+完璧です！modelシグナルがどのように双方向バインディングを可能にするかを学びました。
 
-- **Model signals** - Use `model()` and `model.required()` for values that can be both read and written
-- **Two-way binding** - Use `[(property)]` syntax to bind parent signals to child models
-- **Perfect for UI components** - Checkboxes, form controls, and widgets that need to manage their own state
-- **Automatic synchronization** - Parent and child stay in sync without manual event handling
+- **Modelシグナル** - 読み取りと書き込みの両方が可能な値には`model()`と`model.required()`を使用します。
+- **双方向バインディング** - 親シグナルを子モデルにバインドするには`[(property)]`構文を使用します。
+- **UIコンポーネントに最適** - チェックボックス、フォームコントロール、および自身の状態を管理する必要があるウィジェット。
+- **自動同期** - 手動のイベント処理なしで、親と子が同期を保ちます。
 
-**When to use `model()` vs `input()`:**
+**`model()`と`input()`の使い分け:**
 
-- Use `input()` for data that only flows down (display data, configuration)
-- Use `model()` for UI components that need to update their own value (form controls, toggles)
+- データが下方向にのみ流れる場合（表示データ、設定）は`input()`を使用します。
+- 自身の値を更新する必要があるUIコンポーネント（フォームコントロール、トグル）には`model()`を使用します。
 
-In the next lesson, you'll learn about [using signals with services](/tutorials/signals/7-using-signals-with-services)!
+次のレッスンでは、[サービスでのシグナルの使用](/tutorials/signals/7-using-signals-with-services)について学びます！

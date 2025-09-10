@@ -1,15 +1,15 @@
-# Query child elements with signal queries
+# シグナルクエリで子要素をクエリする
 
-Now that you've learned [how to use signals with directives](/tutorials/signals/8-using-signals-with-directives), let's explore signal-based query APIs. These provide a reactive way to access and interact with child components and directives. Both components and directives can perform queries while also being queried themselves. Unlike the traditional ViewChild, signal queries automatically update and provide type-safe access to child components and directives.
+[ディレクティブでのシグナルの使い方](/tutorials/signals/8-using-signals-with-directives)を学んだところで、シグナルベースのクエリAPIについて見ていきましょう。これらは、子コンポーネントやディレクティブにアクセスして操作するためのリアクティブな方法を提供します。コンポーネントとディレクティブの両方がクエリを実行でき、またそれら自身もクエリされることがあります。従来のViewChildとは異なり、シグナルクエリは自動的に更新され、子コンポーネントやディレクティブへの型安全なアクセスを提供します。
 
-In this activity, you'll add viewChild queries to interact with child components programmatically.
+このアクティビティでは、子コンポーネントとプログラムでやり取りするためにviewChildクエリを追加します。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Add viewChild import">
-First, add the `viewChild` import to access child components in `app.ts`.
+<docs-step title="viewChildのインポートを追加">
+まず、`app.ts`で子コンポーネントにアクセスするために`viewChild`のインポートを追加します。
 
 ```ts
 import {Component, signal, computed, viewChild, ChangeDetectionStrategy} from '@angular/core';
@@ -17,8 +17,8 @@ import {Component, signal, computed, viewChild, ChangeDetectionStrategy} from '@
 
 </docs-step>
 
-<docs-step title="Create viewChild queries">
-Add viewChild queries to the App component to access child components.
+<docs-step title="viewChildクエリを作成">
+AppコンポーネントにviewChildクエリを追加して、子コンポーネントにアクセスします。
 
 ```ts
 // Query APIs to access child components
@@ -26,11 +26,11 @@ firstProduct = viewChild(ProductCard);
 cartSummary = viewChild(CartSummary);
 ```
 
-These queries create signals that reference child component instances.
+これらのクエリは、子コンポーネントインスタンスを参照するシグナルを作成します。
 </docs-step>
 
-<docs-step title="Implement parent methods">
-Use the viewChild queries to call methods on child components in `app.ts`:
+<docs-step title="親メソッドを実装">
+viewChildクエリを使用して、`app.ts`で子コンポーネントのメソッドを呼び出します。
 
 ```ts
 showFirstProductDetails() {
@@ -50,17 +50,17 @@ initiateCheckout() {
 
 </docs-step>
 
-<docs-step title="Test the interactions">
-The control buttons should now work:
+<docs-step title="インタラクションをテスト">
+コントロールボタンが動作するようになりました。
 
-- **"Show First Product Details"** - Calls `highlight()` on the ProductCard
-- **"Initiate Checkout"** - Calls `initiateCheckout()` on the CartSummary
+- **"Show First Product Details"** - ProductCardで`highlight()`を呼び出します
+- **"Initiate Checkout"** - CartSummaryで`initiateCheckout()`を呼び出します
 
-Click the buttons to see how viewChild queries enable parent components to control child behavior.
+ボタンをクリックして、viewChildクエリが親コンポーネントによる子コンポーネントの動作制御をどのように可能にするかを確認してください。
 </docs-step>
 
 </docs-workflow>
 
-Perfect! You've learned how to use signal-based query APIs for child component interaction:
+完璧です！子コンポーネントのインタラクションのためにシグナルベースのクエリAPIを使用する方法を学びました。
 
-In the next lesson, you'll learn about [how to react to signal changes with effect](/tutorials/signals/10-reacting-to-signal-changes-with-effect)!
+次のレッスンでは、[effectでシグナルの変更に反応する方法](/tutorials/signals/10-reacting-to-signal-changes-with-effect)について学びます！

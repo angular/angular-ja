@@ -1,17 +1,17 @@
-# Deriving state with computed signals
+# 算出シグナルで状態を派生させる
 
-Now that you've learned [how to create and update signals](/tutorials/signals/1-creating-and-updating-your-first-signal), let's learn about computed signals. Computed signals are derived values that automatically update when their dependencies change. They're perfect for creating reactive calculations based on other signals.
+[シグナルの作成と更新方法](/tutorials/signals/1-creating-and-updating-your-first-signal)を学んだところで、算出シグナルについて学びましょう。算出シグナルは、依存関係が変更されると自動的に更新される派生値です。他のシグナルに基づいてリアクティブな計算を作成するのに最適です。
 
-In this activity, you'll learn how to use the `computed()` function to create derived state that updates automatically when the underlying signals change.
+このアクティビティでは、`computed()`関数を使用して、基になるシグナルが変更されたときに自動的に更新される派生状態を作成する方法を学びます。
 
-Let's enhance our user status system by adding computed values that derive information from our user status signal. The starter code now includes three status options: `'online'`, `'away'`, and `'offline'`.
+ユーザーの状態シグナルから情報を派生させる算出値を追加して、ユーザーの状態システムを強化しましょう。スターターコードには、`'online'`、`'away'`、`'offline'`の3つの状態オプションが含まれています。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Import computed function">
-Add `computed` to your existing imports.
+<docs-step title="computed関数をインポートする">
+既存のインポートに`computed`を追加します。
 
 ```ts
 // Add computed to existing imports
@@ -20,18 +20,18 @@ import {Component, signal, computed, ChangeDetectionStrategy} from '@angular/cor
 
 </docs-step>
 
-<docs-step title="Create a computed signal for notifications">
-Add a computed signal that determines if notifications should be enabled based on user status.
+<docs-step title="通知用の算出シグナルを作成する">
+ユーザーの状態に基づいて通知を有効にするかどうかを決定する算出シグナルを追加します。
 
 ```ts
 notificationsEnabled = computed(() => this.userStatus() === 'online');
 ```
 
-This computed signal will automatically recalculate whenever the `userStatus` signal changes. Notice how we call `this.userStatus()` inside the computed function to read the signal's value.
+この算出シグナルは、`userStatus`シグナルが変更されるたびに自動的に再計算されます。computed関数内で`this.userStatus()`を呼び出してシグナルの値を読み取っていることに注目してください。
 </docs-step>
 
-<docs-step title="Create a computed signal for a descriptive message">
-Add a computed signal that creates a descriptive message based on the user status.
+<docs-step title="説明メッセージ用の算出シグナルを作成する">
+ユーザーの状態に基づいて説明メッセージを作成する算出シグナルを追加します。
 
 ```ts
 statusMessage = computed(() => {
@@ -45,11 +45,11 @@ statusMessage = computed(() => {
 });
 ```
 
-This shows how computed signals can handle more complex logic with switch statements and string transformations.
+これは、算出シグナルがswitch文や文字列変換を使用して、より複雑なロジックを処理できることを示しています。
 </docs-step>
 
-<docs-step title="Create a computed signal that calculates working hours availability">
-Add a computed signal that calculates if the user is within their working hours.
+<docs-step title="勤務時間内の利用可能性を計算する算出シグナルを作成する">
+ユーザーが勤務時間内であるかどうかを計算する算出シグナルを追加します。
 
 ```ts
 isWithinWorkingHours = computed(() => {
@@ -60,13 +60,13 @@ isWithinWorkingHours = computed(() => {
 });
 ```
 
-This demonstrates how computed signals can perform calculations and combine multiple data sources. The value updates automatically when the `userStatus` changes.
+これは、算出シグナルが計算し、複数のデータソースを組み合わせることができることを示しています。`userStatus`が変更されると、値は自動的に更新されます。
 </docs-step>
 
-<docs-step title="Display the computed values in the template">
-The template already has placeholders showing "Loading...". Replace them with your computed signals:
+<docs-step title="テンプレートに算出値を表示する">
+テンプレートにはすでに「Loading...」と表示されるプレースホルダーがあります。これらを算出シグナルに置き換えてください。
 
-1. For notifications, replace `Loading...` with an @if block:
+1. 通知については、`Loading...`を@ifブロックに置き換えます。
 
 ```html
 @if (notificationsEnabled()) {
@@ -76,13 +76,13 @@ The template already has placeholders showing "Loading...". Replace them with yo
 }
 ```
 
-2. For the message, replace `Loading...` with:
+2. メッセージについては、`Loading...`を以下に置き換えます。
 
 ```html
 {{ statusMessage() }}
 ```
 
-3. For working hours, replace `Loading...` with an @if block:
+3. 勤務時間については、`Loading...`を@ifブロックに置き換えます。
 
 ```html
 @if (isWithinWorkingHours()) {
@@ -92,18 +92,18 @@ The template already has placeholders showing "Loading...". Replace them with yo
 }
 ```
 
-Notice how computed signals are called just like regular signals - with parentheses!
+算出シグナルは、通常のシグナルと同様に括弧を付けて呼び出されることに注目してください！
 </docs-step>
 
 </docs-workflow>
 
-Excellent! You've now learned how to create computed signals.
+素晴らしい！これで算出シグナルの作成方法を学びました。
 
-Here are some key points to remember:
+覚えておくべき重要な点がいくつかあります。
 
-- **Computed signals are reactive**: They automatically update when their dependencies change
-- **They're read-only**: You can't directly set computed values, they're derived from other signals
-- **They can contain complex logic**: Use them for calculations, transformations, and derived state
-- **They provide a way to make performant computations based on dynamic state**: Angular only recalculates them when their dependencies actually change
+- **算出シグナルはリアクティブです**: 依存関係が変更されると自動的に更新されます
+- **読み取り専用です**: 算出値を直接設定できません。これらは他のシグナルから派生します
+- **複雑なロジックを含めることができます**: 計算、変換、派生状態に使用します
+- **動的な状態に基づいてパフォーマンスの高い計算を提供します**: Angularは、依存関係が実際に変更された場合にのみ再計算します
 
-In the next lesson, you'll learn about [a different way to derive state with linkedSignals](/tutorials/signals/3-deriving-state-with-linked-signals)!
+次のレッスンでは、[linkedSignalsで状態を派生させる別の方法](/tutorials/signals/3-deriving-state-with-linked-signals)について学びます！

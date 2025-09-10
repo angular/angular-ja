@@ -6,5 +6,5 @@
     "src/app/app.css"
   ],
   "type": "editor",
-  "title": "コンポーネントに入力シグナルでデータを渡す"
+  "title": "Passing data to components with input signals"
 }

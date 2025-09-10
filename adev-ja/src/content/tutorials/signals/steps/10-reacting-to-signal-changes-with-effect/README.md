@@ -1,30 +1,30 @@
-# Reacting to signal changes with effect
+# effectでシグナル変更に反応する
 
-Now that you've learned [querying child elements with signal queries](/tutorials/signals/9-query-child-elements-with-signal-queries), let's explore how to react to signal changes with effects. Effects are functions that run automatically when their dependencies change, making them perfect for side effects like logging, DOM manipulation, or API calls.
+[シグナルクエリで子要素をクエリする](/tutorials/signals/9-query-child-elements-with-signal-queries)方法を学んだところで、effectでシグナル変更に反応する方法を探ってみましょう。effectは、依存関係が変更されると自動的に実行される関数であり、ロギング、DOM操作、API呼び出しなどの副作用に最適です。
 
-**Important: Effects should be the last API you reach for.** Always prefer `computed()` for derived values and `linkedSignal()` for values that can be both derived and manually set. If you find yourself copying data from one signal to another with an effect, it's a sign you should move your source-of-truth higher up and use `computed()` or `linkedSignal()` instead. Effects are best for syncing signal state to imperative, non-signal APIs.
+**Important: effectは、最後に頼るべきAPIです。** 派生値には常に`computed()`を、派生と手動設定の両方が可能な値には`linkedSignal()`を優先してください。effectを使ってあるシグナルから別のシグナルにデータをコピーしていることに気づいたら、それは真の情報源をより上位に移動し、代わりに`computed()`または`linkedSignal()`を使用すべきであるという兆候です。effectは、シグナル状態を命令型で非シグナルなAPIに同期させるのに最適です。
 
-In this activity, you'll learn how to use the `effect()` function appropriately for legitimate side effects that respond to signal changes.
+このアクティビティでは、シグナル変更に応答する正当な副作用に対して`effect()`関数を適切に使用する方法を学びます。
 
 <hr />
 
-You have a theme manager app with signals already set up. Now you'll add effects to automatically react to signal changes.
+シグナルがすでに設定されているテーママネージャーアプリケーションがあります。次に、シグナル変更に自動的に反応するようにeffectを追加します。
 
 <docs-workflow>
 
 <docs-step title="Import effect function">
-Add `effect` to your existing imports.
+既存のインポートに`effect`を追加します。
 
 ```ts
 // Add effect to existing imports
 import {Component, signal, computed, effect, ChangeDetectionStrategy} from '@angular/core';
 ```
 
-The `effect` function creates a reactive side effect that runs automatically when any signals it reads change.
+`effect`関数は、読み取ったシグナルが変更されると自動的に実行されるリアクティブな副作用を作成します。
 </docs-step>
 
 <docs-step title="Create an effect for local storage">
-Add an effect that automatically saves the theme to local storage when it changes.
+テーマが変更されたときに自動的にローカルストレージに保存するeffectを追加します。
 
 ```ts
 constructor() {
@@ -36,11 +36,11 @@ constructor() {
 }
 ```
 
-This effect runs whenever the theme signal changes, automatically persisting the user's preference.
+このeffectは、テーマシグナルが変更されるたびに実行され、ユーザーの設定を自動的に永続化します。
 </docs-step>
 
 <docs-step title="Create an effect for logging user activity">
-Add an effect that logs when the user logs in or out.
+ユーザーがログインまたはログアウトしたときにログを記録するeffectを追加します。
 
 ```ts
 constructor() {
@@ -55,11 +55,11 @@ constructor() {
 }
 ```
 
-This effect demonstrates how effects can read multiple signals and react to changes in any of them.
+このeffectは、effectが複数のシグナルを読み取り、それらのいずれかの変更に反応できることを示しています。
 </docs-step>
 
 <docs-step title="Create an effect with cleanup">
-Add an effect that sets up a timer and cleans up when the component is destroyed.
+タイマーを設定し、コンポーネントが破棄されたときにクリーンアップするeffectを追加します。
 
 ```ts
 constructor() {
@@ -80,31 +80,31 @@ constructor() {
 }
 ```
 
-This effect demonstrates how to clean up resources when effects are destroyed or re-run.
+このeffectは、effectが破棄または再実行されたときにリソースをクリーンアップする方法を示しています。
 </docs-step>
 
 <docs-step title="Test the effects">
-Open the browser console and interact with the app:
+ブラウザのコンソールを開き、アプリを操作します。
 
-- **Toggle Theme** - See localStorage saves and timer logs
-- **Login/Logout** - See user activity logging
-- **Watch Timer** - See periodic theme logging every 5 seconds
+- **テーマを切り替える** - ローカルストレージの保存とタイマーログを確認
+- **ログイン/ログアウト** - ユーザーアクティビティのログを確認
+- **タイマーを監視する** - 5秒ごとの定期的なテーマログを確認
 
-The effects run automatically whenever their tracked signals change!
+effectは、追跡しているシグナルが変更されるたびに自動的に実行されます！
 </docs-step>
 
 </docs-workflow>
 
-Excellent! You've now learned how to use effects with signals. Key concepts to remember:
+素晴らしい！これで、シグナルでeffectを使用する方法を学びました。覚えておくべき主要な概念は次のとおりです。
 
-- **Effects are reactive**: They automatically run when any signal they read changes
-- **Side effects only**: Perfect for logging, DOM manipulation, API calls, and syncing to imperative APIs
-- **Cleanup**: Use the `onCleanup` callback to clean up resources like timers or subscriptions
-- **Automatic tracking**: Effects automatically track which signals they read and re-run when those signals change
+- **effectはリアクティブである**: 読み取ったシグナルが変更されると自動的に実行されます
+- **副作用のみ**: ロギング、DOM操作、API呼び出し、命令型APIへの同期に最適です
+- **クリーンアップ**: `onCleanup`コールバックを使用して、タイマーやサブスクリプションなどのリソースをクリーンアップします
+- **自動追跡**: effectは、読み取ったシグナルを自動的に追跡し、それらのシグナルが変更されると再実行されます
 
-**Remember: Use effects sparingly!** The examples in this lesson (localStorage sync, logging, timers) are appropriate uses. Avoid effects for:
-- Deriving values from other signals - use `computed()` instead
-- Creating writable derived state - use `linkedSignal()` instead  
-- Copying data between signals - restructure to use a shared source of truth
+**Remember: effectは控えめに使用してください！** このレッスンでの例（localStorage同期、ロギング、タイマー）は適切な使用法です。effectを避けるべきケースは次のとおりです。
+- 他のシグナルから値を派生させる場合 - 代わりに`computed()`を使用してください
+- 書き込み可能な派生状態を作成する場合 - 代わりに`linkedSignal()`を使用してください  
+- シグナル間でデータをコピーする場合 - 共有された真の情報源を使用するように再構築してください
 
-Effects are powerful but should be your last resort when `computed()` and `linkedSignal()` can't solve your use case.
+effectは強力ですが、`computed()`と`linkedSignal()`でユースケースを解決できない場合の最後の手段であるべきです。

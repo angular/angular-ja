@@ -7,5 +7,5 @@
     "src/app/app.css"
   ],
   "type": "editor",
-  "title": "サービスでシグナルを使用する"
+  "title": "Using signals with services"
 }

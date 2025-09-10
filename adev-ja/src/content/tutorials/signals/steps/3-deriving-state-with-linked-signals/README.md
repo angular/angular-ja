@@ -1,17 +1,17 @@
-# Deriving state with linked signals
+# リンクシグナルによる状態の派生
 
-Now that you've learned [how to derive state with computed signals](/tutorials/signals/2-deriving-state-with-computed-signals), you created a computed signal for `notificationsEnabled` that automatically followed your user status. But what if users want to manually disable notifications even when they're online? That's where linked signals come in.
+[算出シグナルによる状態の派生方法](/tutorials/signals/2-deriving-state-with-computed-signals)を学んだ今、ユーザーのステータスに自動的に追従する`notificationsEnabled`の算出シグナルを作成しました。しかし、ユーザーがオンラインであっても手動で通知を無効にしたい場合はどうでしょうか？そこでリンクシグナルの出番です。
 
-Linked signals are writable signals that maintain a reactive connection to their source signals. They're perfect for creating state that normally follows a computation but can be overridden when needed.
+リンクシグナルは、ソースシグナルとのリアクティブな接続を維持する書き込み可能なシグナルです。通常は計算に従うが、必要に応じて上書きできる状態を作成するのに最適です。
 
-In this activity, you'll learn how `linkedSignal()` differs from `computed()` by enhancing the previous user status system's computed `notificationsEnabled` to a writable linked signal.
+この演習では、以前のユーザーの状態システムの算出シグナル`notificationsEnabled`を書き込み可能なリンクシグナルに拡張することで、`linkedSignal()`が`computed()`とどのように異なるかを学びます。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Import linkedSignal function">
-Add `linkedSignal` to your existing imports.
+<docs-step title="linkedSignal関数をインポートする">
+既存のインポートに`linkedSignal`を追加します。
 
 ```ts
 // Add linkedSignal to existing imports
@@ -20,8 +20,8 @@ import {Component, signal, computed, linkedSignal, ChangeDetectionStrategy} from
 
 </docs-step>
 
-<docs-step title="Convert computed to linkedSignal with the same expression">
-Replace the computed `notificationsEnabled` with a linkedSignal using the exact same expression:
+<docs-step title="computedを同じ式でlinkedSignalに変換する">
+算出シグナル`notificationsEnabled`を、まったく同じ式を使用してリンクシグナルに置き換えます。
 
 ```ts
 // Previously (from lesson 2):
@@ -31,11 +31,11 @@ Replace the computed `notificationsEnabled` with a linkedSignal using the exact 
 notificationsEnabled = linkedSignal(() => this.userStatus() === 'online');
 ```
 
-The expression is identical, but linkedSignal creates a writable signal. It will still automatically update when `userStatus` changes, but you can also set it manually.
+式は同じですが、linkedSignalは書き込み可能なシグナルを作成します。`userStatus`が変更されると自動的に更新されますが、手動で設定できます。
 </docs-step>
 
-<docs-step title="Add a method to manually toggle notifications">
-Add a method to demonstrate that linked signals can be written to directly:
+<docs-step title="通知を手動で切り替えるメソッドを追加する">
+リンクシグナルに直接書き込むことができることを示すメソッドを追加します。
 
 ```ts
 toggleNotifications() {
@@ -44,11 +44,11 @@ toggleNotifications() {
 }
 ```
 
-This is the key difference: computed signals are read-only, but linked signals can be updated manually while still maintaining their reactive connection.
+これが主な違いです。算出シグナルは読み取り専用ですが、リンクシグナルはリアクティブな接続を維持しながら手動で更新できます。
 </docs-step>
 
-<docs-step title="Update the template to add manual notification control">
-Update your template to add a toggle button for notifications:
+<docs-step title="テンプレートを更新して手動通知コントロールを追加する">
+テンプレートを更新して、通知用のトグルボタンを追加します。
 
 ```html
 <div class="status-info">
@@ -73,23 +73,23 @@ Update your template to add a toggle button for notifications:
 
 </docs-step>
 
-<docs-step title="Observe the reactive behavior">
-Now test the behavior:
+<docs-step title="リアクティブな動作を観察する">
+次に、動作をテストします。
 
-1. Change the user status - notice how `notificationsEnabled` updates automatically
-2. Manually toggle notifications - it overrides the computed value
-3. Change status again - the linked signal re-syncs with its computation
+1. ユーザーの状態を変更します。`notificationsEnabled`が自動的に更新されることに注目してください。
+2. 通知を手動で切り替えます。算出された値を上書きします。
+3. 再度ステータスを変更します。リンクシグナルは計算と再同期します。
 
-This demonstrates that linked signals maintain their reactive connection even after being manually set!
+これは、リンクシグナルが手動で設定された後でもリアクティブな接続を維持することを示しています！
 </docs-step>
 
 </docs-workflow>
 
-Excellent! You've learned the key differences between computed and linked signals:
+素晴らしい！算出シグナルとリンクシグナルの主な違いを学びました。
 
-- **Computed signals**: Read-only, always derived from other signals
-- **Linked signals**: Writable, can be both derived AND manually updated
-- **Use computed when**: The value should always be calculated
-- **Use linkedSignal when**: You need a default computation that can be overridden
+- **算出シグナル**: 読み取り専用で、常に他のシグナルから派生します
+- **リンクシグナル**: 書き込み可能で、派生と手動更新の両方が可能です
+- **算出シグナルを使用する場合**: 値が常に計算されるべきとき
+- **リンクシグナルを使用する場合**: 上書き可能なデフォルトの計算が必要なとき
 
-In the next lesson, you'll learn [how to manage async data with signals](/tutorials/signals/4-managing-async-data-with-signals)!
+次のレッスンでは、[シグナルで非同期データを管理する方法](/tutorials/signals/4-managing-async-data-with-signals)を学びます！

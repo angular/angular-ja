@@ -1,5 +1,5 @@
 {
   "openFiles": ["src/app/app.ts", "src/app/app.css"],
   "type": "editor",
-  "title": "Deriving state with linked signals"
+  "title": "リンクシグナルで状態を派生させる"
 }

@@ -1,12 +1,12 @@
-# Want to dive deeper into signals?
+# シグナルをさらに深く掘り下げたいですか？
 
-You can also learn more about signals with the following resources:
+以下のリソースでシグナルについてさらに学ぶことができます。
 
 <docs-card-container>
-  <docs-card title="Angular Signals Guide" href="guide/signals">
-  The official guide for Angular Signals.
+  <docs-card title="Angularシグナルガイド" href="guide/signals">
+  Angularシグナルの公式ガイドです。
   </docs-card>
-  <docs-card title="Angular's Roadmap" href="roadmap">
-  Read about Angular's open source roadmap including current, future and accomplished projects.
+  <docs-card title="Angularのロードマップ" href="roadmap">
+  現在、将来、そして達成されたプロジェクトを含む、Angularのオープンソースロードマップについて読むことができます。
   </docs-card>
 </docs-card-container>

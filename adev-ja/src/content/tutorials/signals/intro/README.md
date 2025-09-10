@@ -1,13 +1,13 @@
-# Learn Angular signals
+# Angularシグナルを学ぶ
 
-This interactive tutorial will teach you the fundamentals of Angular signals and how to use them to build reactive applications.
+このインタラクティブなチュートリアルでは、Angularシグナルの基礎と、それらを使用してリアクティブなアプリケーションを構築する方法を学びます。
 
-## How to use this tutorial
+## このチュートリアルの使い方 {#how-to-use-this-tutorial}
 
-This tutorial assumes you understand Angular's core concepts. If you're new to Angular, read our [essentials guide](/essentials).
+このチュートリアルは、Angularのコアコンセプトを理解していることを前提としています。Angularを初めて使用する場合は、[基本ガイド](/essentials)をお読みください。
 
-Each step represents a concept in Angular signals. You can do one, or all of them.
+各ステップは、Angular signalsのコンセプトを表しています。1つだけ実行することも、すべて実行できます。
 
-If you get stuck, click "Reveal answer" at the top.
+行き詰まった場合は、上部にある「Reveal answer」をクリックしてください。
 
-Alright, let's [get started](/tutorials/signals/1-creating-your-first-signal)!
+さあ、[始めましょう](/tutorials/signals/1-creating-your-first-signal)！

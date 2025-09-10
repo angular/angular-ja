@@ -1,15 +1,15 @@
-# Managing async data with signals using the Resources API
+# Resources APIでシグナルを使った非同期データの管理
 
-Now that you've learned [how to derive state with linked signals](/tutorials/signals/3-deriving-state-with-linked-signals), let's explore how to handle asynchronous data with the Resource API. The Resource API provides a powerful way to manage async operations using signals, with built-in loading states, error handling, and request management.
+[リンクされたシグナルで状態を派生させる方法](/tutorials/signals/3-deriving-state-with-linked-signals)を学んだところで、Resource APIを使って非同期データを処理する方法を探ってみましょう。Resource APIは、組み込みのローディング状態、エラー処理、リクエスト管理を備え、シグナルを使って非同期操作を管理する強力な方法を提供します。
 
-In this activity, you'll learn how to use the `resource()` function to load data asynchronously and how to handle different states of async operations by building a user profile loader that demonstrates the Resource API in action.
+このアクティビティでは、`resource()`関数を使ってデータを非同期にロードする方法と、Resource APIの動作を示すユーザープロファイルローダーを構築することで、非同期操作のさまざまな状態を処理する方法を学びます。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Import resource function and API">
-Add `resource` to your existing imports and import the fake API function.
+<docs-step title="resource関数とAPIをインポートする" {#import-resource-function-and-api}>
+既存のインポートに`resource`を追加し、フェイクAPI関数をインポートします。
 
 ```ts
 // Add resource to existing imports
@@ -20,8 +20,8 @@ import {loadUser} from './user-api';
 
 </docs-step>
 
-<docs-step title="Create a resource for user data">
-Add a property in the component class that creates a resource to load user data based on a user ID signal.
+<docs-step title="ユーザーデータ用のリソースを作成する" {#create-a-resource-for-user-data}>
+ユーザーIDシグナルに基づいてユーザーデータをロードするリソースを作成するプロパティをコンポーネントクラスに追加します。
 
 ```ts
 userId = signal(1);
@@ -34,8 +34,8 @@ userResource = resource({
 
 </docs-step>
 
-<docs-step title="Add methods to interact with the resource">
-Add methods to change the user ID and reload the resource.
+<docs-step title="リソースと対話するメソッドを追加する" {#add-methods-to-interact-with-the-resource}>
+ユーザーIDを変更し、リソースをリロードするメソッドを追加します。
 
 ```ts
 loadUser(id: number) {
@@ -47,24 +47,24 @@ reloadUser() {
 }
 ```
 
-Changing the params signal automatically triggers a reload, or you can manually reload with `reload()`.
+paramsシグナルを変更すると自動的にリロードがトリガーされます。または、`reload()`を使って手動でリロードできます。
 </docs-step>
 
-<docs-step title="Create computed signals for resource states">
-Add computed signals to access different states of the resource.
+<docs-step title="リソースの状態用の算出シグナルを作成する" {#create-computed-signals-for-resource-states}>
+リソースの異なる状態にアクセスするための算出シグナルを追加します。
 
 ```ts
 isLoading = computed(() => this.userResource.status() === 'loading');
 hasError = computed(() => this.userResource.status() === 'error');
 ```
 
-Resources provide a `status()` signal that can be 'loading', 'success', or 'error', a `value()` signal for the loaded data, and a `hasValue()` method that safely checks if data is available.
+リソースは、'loading'、'success'、または'error'になり得る`status()`シグナル、ロードされたデータ用の`value()`シグナル、そしてデータが利用可能かどうかを安全にチェックする`hasValue()`メソッドを提供します。
 </docs-step>
 
-<docs-step title="Wire up the buttons and display resource states">
-The template structure is already provided. Now connect everything:
+<docs-step title="ボタンを接続し、リソースの状態を表示する" {#wire-up-the-buttons-and-display-resource-states}>
+テンプレート構造はすでに提供されています。すべてを接続しましょう。
 
-Part 1. **Add click handlers to the buttons:**
+Part 1. **ボタンにクリックハンドラーを追加します。**
 
 ```html
 <button (click)="loadUser(1)">Load User 1</button>
@@ -73,7 +73,7 @@ Part 1. **Add click handlers to the buttons:**
 <button (click)="reloadUser()">Reload</button>
 ```
 
-Part 2. **Replace the placeholder with resource state handling:**
+Part 2. **プレースホルダーをリソースの状態処理に置き換えます。**
 
 ```html
 @if (isLoading()) {
@@ -88,23 +88,23 @@ Part 2. **Replace the placeholder with resource state handling:**
 }
 ```
 
-The resource provides different methods to check its state:
+リソースは、その状態をチェックするためのさまざまなメソッドを提供します。
 
-- `isLoading()` - true when fetching data
-- `hasError()` - true when an error occurred
-- `userResource.hasValue()` - true when data is available
-- `userResource.value()` - access the loaded data
-- `userResource.error()` - access error information
+- `isLoading()` - データフェッチ中にtrue
+- `hasError()` - エラー発生時にtrue
+- `userResource.hasValue()` - データが利用可能な場合にtrue
+- `userResource.value()` - ロードされたデータにアクセス
+- `userResource.error()` - エラー情報にアクセス
 
 </docs-step>
 
 </docs-workflow>
 
-Excellent! You've now learned how to use the Resource API with signals. Key concepts to remember:
+素晴らしい！これでResource APIをシグナルと組み合わせて使う方法を学びました。覚えておくべき重要な概念は次のとおりです。
 
-- **Resources are reactive**: They automatically reload when params change
-- **Built-in state management**: Resources provide `status()`, `value()`, and `error()` signals
-- **Automatic cleanup**: Resources handle request cancellation and cleanup automatically
-- **Manual control**: You can manually reload or abort requests when needed
+- **リソースはリアクティブです**: パラメータが変更されると自動的にリロードされます
+- **組み込みの状態管理**: リソースは`status()`、`value()`、`error()`シグナルを提供します
+- **自動クリーンアップ**: リソースはリクエストのキャンセルとクリーンアップを自動的に処理します
+- **手動制御**: 必要に応じて手動でリロードしたり、リクエストを中止したりできます
 
-In the next lesson, you'll learn [how to pass data to components with input signals](/tutorials/signals/5-component-communication-with-signals)!
+次のレッスンでは、[入力シグナルでコンポーネントにデータを渡す方法](/tutorials/signals/5-component-communication-with-signals)を学びます！

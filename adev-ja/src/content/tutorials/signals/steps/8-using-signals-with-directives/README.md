@@ -1,15 +1,15 @@
-# Using signals with directives
+# ディレクティブでのシグナルの使用
 
-Now that you've learned [using signals with services](/tutorials/signals/7-using-signals-with-services), let's explore how directives use signals. **The great news: signals work exactly the same in directives as they do in components!** The main difference is that since directives don't have templates, you'll primarily use signals in host bindings to reactively update the host element.
+[サービスでのシグナルの使用](/tutorials/signals/7-using-signals-with-services)を学んだところで、ディレクティブがどのようにシグナルを使用するかを探ってみましょう。**朗報です。シグナルはコンポーネントと同じようにディレクティブでもまったく同じように機能します！**主な違いは、ディレクティブにはテンプレートがないため、ホスト要素をリアクティブに更新するために、主にホストバインディングでシグナルを使用することです。
 
-In this activity, you'll build a highlight directive that demonstrates how signals create reactive behavior in directives.
+このアクティビティでは、シグナルがディレクティブでどのようにリアクティブな動作を作成するかを示すハイライトディレクティブを構築します。
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Set up signals just like in a component">
-Import the signal functions and create your reactive state. This works exactly the same as in components:
+<docs-step title="コンポーネントと同じようにシグナルを設定する">
+シグナル関数をインポートし、リアクティブな状態を作成します。これはコンポーネントとまったく同じように機能します。
 
 ```ts
 import {Directive, input, signal, computed} from '@angular/core';
@@ -42,11 +42,11 @@ export class HighlightDirective {
 }
 ```
 
-Notice how this is identical to component patterns - the only difference is we're in a `@Directive` instead of `@Component`.
+これがコンポーネントのパターンとまったく同じであることに注目してください。唯一の違いは、`@Component`ではなく`@Directive`内にいることです。
 </docs-step>
 
-<docs-step title="Use signals in host bindings">
-Since directives don't have templates, you'll use signals in **host bindings** to reactively update the host element. Add the `host` configuration and event handlers:
+<docs-step title="ホストバインディングでシグナルを使用する">
+ディレクティブにはテンプレートがないため、ホスト要素をリアクティブに更新するために**ホストバインディング**でシグナルを使用します。`host`設定とイベントハンドラーを追加します。
 
 ```ts
 @Directive({
@@ -70,11 +70,11 @@ export class HighlightDirective {
 }
 ```
 
-The host bindings automatically re-evaluate when the signals change - just like template bindings in components! When `isHovered` changes, the `backgroundStyle` computed signal recalculates, and the host binding updates the element's style.
+シグナルが変更されると、ホストバインディングは自動的に再評価されます。これはコンポーネントのテンプレートバインディングと同じです！`isHovered`が変更されると、`backgroundStyle`の計算済みシグナルが再計算され、ホストバインディングが要素のスタイルを更新します。
 </docs-step>
 
-<docs-step title="Use the directive in your template">
-Update the app template to demonstrate the reactive directive:
+<docs-step title="テンプレートでディレクティブを使用する">
+リアクティブなディレクティブをデモンストレーションするために、アプリのテンプレートを更新します。
 
 ```ts
 template: `
@@ -96,15 +96,15 @@ template: `
 `,
 ```
 
-The directive automatically applies reactive highlighting based on the signal inputs!
+ディレクティブは、シグナル入力に基づいてリアクティブなハイライトを自動的に適用します！
 </docs-step>
 
 </docs-workflow>
 
-Perfect! You've now seen how signals work with directives. Some key takeaways from this lesson are:
+完璧です！これで、シグナルがディレクティブでどのように機能するかを理解しました。このレッスンの主なポイントは次のとおりです。
 
-- **Signals are universal** - All signal APIs (`input()`, `signal()`, `computed()`, `effect()`) work the same in both directives and components
-- **Host bindings are the primary use case** - Since directives don't have templates, you use signals in host bindings to reactively modify the host element
-- **Same reactive patterns** - Signal updates trigger automatic re-evaluation of computed signals and host bindings, just like in component templates
+- **シグナルは普遍的** - すべてのシグナルAPI（`input()`、`signal()`、`computed()`、`effect()`）は、ディレクティブとコンポーネントの両方で同じように機能します
+- **ホストバインディングが主要なユースケース** - ディレクティブにはテンプレートがないため、ホスト要素をリアクティブに修正するためにホストバインディングでシグナルを使用します
+- **同じリアクティブパターン** - シグナル更新は、コンポーネントテンプレートと同じように、計算済みシグナルとホストバインディングの自動再評価をトリガーします
 
-In the next lesson, you'll [learn how to query child elements with signal queries](/tutorials/signals/9-query-child-elements-with-signal-queries)!
+次のレッスンでは、[シグナルクエリで子要素をクエリする方法](/tutorials/signals/9-query-child-elements-with-signal-queries)を学びます！

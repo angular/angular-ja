@@ -202,12 +202,3 @@ NOTE: Angular Routerはビュー遷移を遅延させる方法を提供してい
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#animating-with-javascript)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-cklnkm)
 
-## 代替案: Angularアニメーション {#alternative-angular-animations}
-
-より広範なブラウザサポートやアニメーションに対するよりきめ細かな制御が必要な場合は、ネイティブのビュー遷移の代わりに[`@angular/animations`](/guide/animations)パッケージを使用できます。Angularのアニメーションシステムはルーターの状態変更と連携し、以下を提供します。
-
-- **ユニバーサルブラウザサポート** - Angularをサポートするすべてのブラウザで動作します
-- **きめ細かな制御** - 複雑なアニメーションシーケンスとタイミングを定義します
-- **ルーター統合** - ルート変更、URLパターン、または[`ActivatedRoute`](/api/router/ActivatedRoute)データに基づいてアニメーションを作成します
-
-ルートベースのアニメーションの作成については、[アニメーションのトリガーと遷移](/guide/animations/transition-and-triggers)で詳細を確認してください。

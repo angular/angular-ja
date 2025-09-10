@@ -25,7 +25,7 @@ class User {
   ...
   template: `<app-user occupation="Angular Developer"></app-user>`
 })
-class App {}
+export class App {}
 </docs-code>
 
 `input` 関数は `InputSignal` を返します。値を読み取るには、そのシグナルを関数として呼び出します。

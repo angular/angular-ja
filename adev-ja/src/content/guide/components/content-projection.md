@@ -68,7 +68,7 @@ Angularは、このように渡されるコンポーネントの子要素を、�
 Angularのコンパイラは、ビルド時にすべての`<ng-content>`要素を処理します。
 実行時に`<ng-content>`の挿入や削除、変更はできません。ディレクティブやスタイル、任意の属性も`<ng-content>`には追加できません。
 
-`<ng-content>`を`@if`、`@for`、または`@switch`によって条件付きで含めるべきではありません。
+IMPORTANT: `<ng-content>`を`@if`、`@for`、または`@switch`によって条件付きで含めるべきではありません。
 Angularは常にレンダリングされたコンテンツのDOMノードをインスタンス化して作成します。
 その`<ng-content>`プレースホルダが非表示であってもです。コンポーネントコンテンツの条件付きレンダリングについては
 [テンプレートフラグメント](api/core/ng-template)を参照してください。
@@ -79,21 +79,48 @@ Angularは、CSSセレクターに基づいて、複数の異なる要素を異�
 上記のカードの例を拡張して、`select`属性を使用して、
 カードのタイトルと本文の2つのプレースホルダーを作成できます。
 
-```angular-html
-<!-- コンポーネントテンプレート -->
-<div class="card-shadow">
-  <ng-content select="card-title"></ng-content>
-  <div class="card-divider"></div>
-  <ng-content select="card-body"></ng-content>
-</div>
+```angular-ts
+@Component({
+  selector: 'card-title',
+  template: `<ng-content>card-title</ng-content>`,
+})
+export class CardTitle {}
+
+@Component({
+  selector: 'card-body',
+  template: `<ng-content>card-body</ng-content>`,
+})
+export class CardBody {}
 ```
 
-```angular-html
+```angular-ts
+<!-- コンポーネントテンプレート -->
+Component({
+  selector: 'custom-card',
+  template: `
+  <div class="card-shadow">
+    <ng-content select="card-title"></ng-content>
+    <div class="card-divider"></div>
+    <ng-content select="card-body"></ng-content>
+  </div>
+  `,
+})
+export class CustomCard {}
+```
+
+```angular-ts
 <!-- コンポーネントの利用 -->
-<custom-card>
-  <card-title>こんにちは</card-title>
-  <card-body>例へようこそ</card-body>
-</custom-card>
+@Component({
+  selector: 'app-root',
+  imports: [CustomCard, CardTitle, CardBody],
+  template: `
+    <custom-card>
+      <card-title>こんにちは</card-title>
+      <card-body>例へようこそ</card-body>
+    </custom-card>
+`,
+})
+export class App {}
 ```
 
 ```angular-html

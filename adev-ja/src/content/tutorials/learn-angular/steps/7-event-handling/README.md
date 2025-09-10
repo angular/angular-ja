@@ -15,7 +15,7 @@ Angularでは、`()`という構文を使ってイベントにバインドしま
   ...
   template: `<button (click)="greet()">`
 })
-class App {
+export class App {
   greet() {
     console.log('Hello, there 👋');
   }

@@ -4,24 +4,6 @@
 
 Angular Router (`@angular/router`) は、Angularアプリケーションでナビゲーションを管理するための公式ライブラリであり、フレームワークの核となる部分です。Angular CLIによって作成されたすべてのプロジェクトにデフォルトで含まれています。
 
-## インストール {#installation}
-
-Angular Routerは、Angular CLIの`ng new`コマンドによりセットアップされたすべてのAngularプロジェクトにデフォルトで含まれています。
-
-### 前提条件 {#prerequisite}
-
-- Angular CLI
-
-### 既存のプロジェクトに追加 {#add-to-an-existing-project}
-
-プロジェクトにAngular Routerが含まれていない場合、以下のコマンドで手動インストールできます:
-
-```bash
-ng add @angular/router
-```
-
-Angular CLIが、必要なすべての依存関係をインストールします。
-
 ## SPAでルーティングが必要な理由 {#why-is-routing-necessary-in-a-spa}
 
 WebブラウザでURLに移動すると、ブラウザは通常、Webサーバーにネットワークリクエストを行い、返されたHTMLページを表示します。リンクをクリックするなどの別のURLに移動すると、ブラウザは別のネットワークリクエストを行い、ページ全体を新しいものに置き換えます。

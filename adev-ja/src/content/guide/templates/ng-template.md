@@ -60,7 +60,7 @@ export class ItemCounter {
 
 [コンポーネントまたはディレクティブクエリAPI](/guide/components/queries) を使用して、テンプレートフラグメントへの参照を取得できます。
 
-たとえば、テンプレートにテンプレートフラグメントが1つだけ含まれている場合は、`@ViewChild` クエリを使用して `TemplateRef` オブジェクトを直接クエリできます。
+`viewChild` クエリを使用して `TemplateRef` オブジェクトを直接クエリできます。
 
 ```angular-ts
 @Component({
@@ -74,7 +74,7 @@ export class ItemCounter {
   `,
 })
 export class ComponentWithFragment {
-  @ViewChild(TemplateRef) myFragment: TemplateRef<unknown> | undefined;
+  templateRef = viewChild<TemplateRef<unknown>>(TemplateRef);
 }
 ```
 
@@ -98,10 +98,8 @@ export class ComponentWithFragment {
   `,
 })
 export class ComponentWithFragment {
-  // 名前でクエリを行う場合、`read` オプションを使用して、
-  // 要素に関連付けられている `TemplateRef` オブジェクトを取得したいことを指定できます。
-  @ViewChild('fragmentOne', {read: TemplateRef}) fragmentOne: TemplateRef<unknown> | undefined;
-  @ViewChild('fragmentTwo', {read: TemplateRef}) fragmentTwo: TemplateRef<unknown> | undefined;
+    fragmentOne = viewChild<TemplateRef<unknown>>('fragmentOne');
+    fragmentTwo = viewChild<TemplateRef<unknown>>('fragmentTwo');
 }
 ```
 
@@ -137,6 +135,7 @@ export class MyDirective {
 `@angular/common` の `NgTemplateOutlet` ディレクティブは、`TemplateRef` を受け取り、アウトレットに要素を持つ要素の**兄弟**としてフラグメントをレンダリングします。通常、`NgTemplateOutlet` は [`<ng-container>` 要素](/guide/templates/ng-container) で使用する必要があります。
 
 まず、`NgTemplateOutlet` をインポートします:
+
 ```typescript
 import { NgTemplateOutlet } from '@angular/common';
 ```

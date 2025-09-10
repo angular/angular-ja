@@ -144,6 +144,6 @@ HELPFUL: [browsersl.ist](https://browsersl.ist)を使用して、`browserslist`�
 
 ## Tailwindの設定 {#configuring-tailwind}
 
-Angularは[Tailwind](https://tailwindcss.com/)、ユーティリティファーストのCSSフレームワークをサポートしています。
+Angularは[Tailwind CSS](https://tailwindcss.com/)、ユーティリティファーストのCSSフレームワークをサポートしています。
 
-Angular CLIとの統合については、[Tailwindのドキュメント](https://tailwindcss.com/docs/installation/framework-guides/angular)を参照してください。
+Tailwind CSSをAngular CLIと統合するには、[AngularでのTailwind CSSの使用](guide/tailwind)を参照してください。

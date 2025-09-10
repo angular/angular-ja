@@ -6,17 +6,19 @@
  * found in the LICENSE file at https://angular.dev/license
  */
 
+import {isDevMode} from '@angular/core';
 import {NavigationItem} from '@angular/docs';
 
 // These 2 imports are expected to be red because they are generated a build time
 import FIRST_APP_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/first-app/routes.json';
 import LEARN_ANGULAR_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/learn-angular/routes.json';
 import DEFERRABLE_VIEWS_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/deferrable-views/routes.json';
+import SIGNALS_TUTORIAL_NAV_DATA from '../../src/assets/tutorials/signals/routes.json';
 import ERRORS_NAV_DATA from '../../src/assets/content/reference/errors/routes.json';
 import EXT_DIAGNOSTICS_NAV_DATA from '../../src/assets/content/reference/extended-diagnostics/routes.json';
 
-import {DefaultPage} from './core/enums/pages';
 import {getApiNavigationItems} from './features/references/helpers/manifest.helper';
+import {DEFAULT_PAGES} from './core/enums/pages';
 
 interface SubNavigationData {
   docs: NavigationItem[];
@@ -400,6 +402,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/router-reference',
           },
           {
+            label: 'ルートの動作のカスタマイズ',
+            path: 'guide/routing/customizing-route-behavior',
+            contentPath: 'guide/routing/customizing-route-behavior',
+            status: 'new',
+          },
+          {
             label: 'ルート遷移アニメーション',
             path: 'guide/routing/route-transition-animations',
             contentPath: 'guide/routing/route-transition-animations',
@@ -647,15 +655,15 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         status: 'updated',
         children: [
           {
-            label: 'コンテンツのアニメーション',
-            path: 'guide/animations/css',
-            contentPath: 'guide/animations/css',
-          },
-          {
             label: 'Enter and Leave アニメーション',
             path: 'guide/animations/enter-and-leave',
             contentPath: 'guide/animations/enter-and-leave',
             status: 'new',
+          },
+          {
+            label: '複雑なCSSアニメーション',
+            path: 'guide/animations/css',
+            contentPath: 'guide/animations/css',
           },
           {
             label: 'ルート遷移アニメーション',
@@ -915,26 +923,26 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'guide/ngmodules/overview',
       },
       {
-        label: 'アニメーション',
+        label: 'レガシーアニメーション',
         children: [
           {
             label: '概要',
-            path: 'guide/animations',
+            path: 'guide/legacy-animations',
             contentPath: 'guide/animations/overview',
           },
           {
             label: 'トランジションとトリガー',
-            path: 'guide/animations/transition-and-triggers',
+            path: 'guide/legacy-animations/transition-and-triggers',
             contentPath: 'guide/animations/transition-and-triggers',
           },
           {
             label: '複雑なシーケンス',
-            path: 'guide/animations/complex-sequences',
+            path: 'guide/legacy-animations/complex-sequences',
             contentPath: 'guide/animations/complex-sequences',
           },
           {
             label: '再利用可能なアニメーション',
-            path: 'guide/animations/reusable-animations',
+            path: 'guide/legacy-animations/reusable-animations',
             contentPath: 'guide/animations/reusable-animations',
           },
           {
@@ -1046,14 +1054,29 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
     ],
   },
+  ...(isDevMode()
+    ? [
+        {
+          label: 'Adev Dev Guide',
+          children: [
+            {
+              label: 'Kitchen Sink',
+              path: 'kitchen-sink',
+              contentPath: 'kitchen-sink',
+            },
+          ],
+        },
+      ]
+    : []),
 ];
 
 export const TUTORIALS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   FIRST_APP_TUTORIAL_NAV_DATA,
   LEARN_ANGULAR_TUTORIAL_NAV_DATA,
   DEFERRABLE_VIEWS_TUTORIAL_NAV_DATA,
+  SIGNALS_TUTORIAL_NAV_DATA,
   {
-    path: DefaultPage.TUTORIALS,
+    path: DEFAULT_PAGES.TUTORIALS,
     contentPath: 'tutorials/home',
     label: 'チュートリアル',
   },

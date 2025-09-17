@@ -6,10 +6,9 @@ import { parseArgs } from 'node:util';
 import { cpRf, exists } from './lib/fsutils';
 import { adevJaDir, rootDir } from './lib/workspace';
 
-const localizedFilePatterns = [
+const localizedFilePatterns: Array<string | readonly string[]> = [
   // Text contents
-  'src/content/**/*.md',
-  '!src/content/**/license.md',
+  ['src/content/**/*.md', '!src/content/**/license.md'],
   // Tutorial config files
   'src/content/tutorials/**/config.json',
   // Update home files
@@ -19,10 +18,10 @@ const localizedFilePatterns = [
   'src/app/features/update/update.component.ts',
   'src/app/features/update/update.component.html',
   // Application files
-  'src/app/sub-navigation-data.ts',
+  'src/app/routing/sub-navigation-data.ts',
   'src/app/core/layout/navigation/navigation.component.html',
   'shared-docs/components/table-of-contents/table-of-contents.component.html',
-  'shared-docs/components/cookie-popup/cookie-popup.component.html'
+  'shared-docs/components/cookie-popup/cookie-popup.component.html',
 ];
 
 async function main() {
@@ -50,20 +49,26 @@ async function resetOrigin(hash: string) {
 
 async function copyOriginFiles() {
   const adevDir = resolve(rootDir, 'origin/adev');
-  const adevFiles = await glob(localizedFilePatterns, {
-    cwd: adevDir,
-    caseSensitiveMatch: true,
-  });
 
   // adev-ja 内に同名ファイルの .en.xxx がある場合はそちらを上書きする
   // .en.xxx がない場合はそのままコピーする
-  for (const file of adevFiles) {
-    const src = resolve(adevDir, file);
-    const ext = extname(file);
-    const enFilePath = file.replace(`${ext}`, `.en${ext}`);
-    const isTranslated = await exists(resolve(adevJaDir, enFilePath));
-    const dest = resolve(adevJaDir, isTranslated ? enFilePath : file);
-    await cpRf(src, dest);
+  for (const pattern of localizedFilePatterns) {
+    const files = await glob(pattern, {
+      cwd: adevDir,
+      caseSensitiveMatch: true,
+    });
+    // 否定パターンではなくパターンに合致するファイルがまったくない場合はエラーとする。
+    if (files.length === 0) {
+      throw new Error(`No files matched: ${JSON.stringify(pattern)}`);
+    }
+    for (const file of files) {
+      const src = resolve(adevDir, file);
+      const ext = extname(file);
+      const enFilePath = file.replace(`${ext}`, `.en${ext}`);
+      const isTranslated = await exists(resolve(adevJaDir, enFilePath));
+      const dest = resolve(adevJaDir, isTranslated ? enFilePath : file);
+      await cpRf(src, dest);
+    }
   }
 }
 

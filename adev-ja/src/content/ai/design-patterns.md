@@ -97,7 +97,7 @@ characters = resource({
   stream: async () => {
     const data = signal<ResourceStreamItem<string>>({value: ''});
     // Calls a Genkit streaming flow using the streamFlow method
-    // expose by the Genkit client SDK
+    // exposed by the Genkit client SDK
     const response = streamFlow({
       url: '/streamCharacters',
       input: 10

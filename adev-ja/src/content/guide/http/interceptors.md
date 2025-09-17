@@ -197,6 +197,43 @@ export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHan
 }
 </docs-code>
 
+## レスポンスタイプの操作
+
+`withFetch` プロバイダーで `HttpClient` を使用する場合、レスポンスには、CORSポリシーとリクエストモードに基づいてブラウザがレスポンスを処理した方法を示す `type` プロパティが含まれます。このプロパティはネイティブFetch API仕様に準拠しており、CORSの問題をデバッグし、レスポンスのアクセス可能性を理解するための貴重な洞察を提供します。
+
+レスポンスの `type` プロパティは次の値を持つことができます：
+- `'basic'` - すべてのヘッダーにアクセス可能な同一オリジンレスポンス
+- `'cors'` - CORSヘッダーが適切に構成されたクロスオリジンレスポンス
+- `'opaque'` - CORSなしのクロスオリジンレスポンス、ヘッダーとボディが制限される場合があります
+- `'opaqueredirect'` - no-corsモードでリダイレクトされたリクエストからのレスポンス
+- `'error'` - ネットワークエラーが発生しました
+
+インターセプターは、CORSデバッグとエラー処理にレスポンスタイプ情報を使用できます：
+
+<docs-code language="ts">
+export function responseTypeInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(map(event => {
+    if (event.type === HttpEventType.Response) {
+      // 異なるレスポンスタイプを適切に処理します
+      switch (event.responseType) {
+        case 'opaque':
+          // レスポンスデータへのアクセスが制限されています
+          console.warn('CORSポリシーによりレスポンスデータが制限されています');
+          break;
+        case 'cors':
+        case 'basic':
+          // レスポンスデータへの完全なアクセス
+          break;
+        case 'error':
+          // ネットワークエラーを処理します
+          console.error('レスポンスでネットワークエラーが発生しました');
+          break;
+      }
+    }
+  }));
+}
+</docs-code>
+
 ## DI ベースのインターセプター {#di-based-interceptors}
 
 `HttpClient` は、注入可能なクラスとして定義され、DIシステムによって構成されるインターセプターもサポートしています。DIベースのインターセプターの機能は、関数型インターセプターと同じですが、構成方法が異なります。

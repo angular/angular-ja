@@ -1,9 +1,9 @@
 <docs-decorative-header title="Angularとは？" imgSrc="adev/src/assets/images/what_is_angular.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-<big style="margin-top: 2em">
+<p style="margin-top: 2em; font-size: larger;">
 Angularは、開発者が高速で信頼性の高いアプリケーションを構築できるようにするWebフレームワークです。
-</big>
+</p>
 
 Googleの専門チームによって管理されているAngularは、
 開発ワークフローを簡素化し効率化するためのツール、API、ライブラリの幅広いスイートを提供します。 

@@ -52,6 +52,20 @@ this.thumbDropped.emit({
 <custom-slider (valueChanged)="logValue($event)" />
 ```
 
+親コンポーネントでイベントデータを受け取ります:
+
+<docs-code language="ts" highlight="">
+@Component({
+ /*...*/
+})
+export class App {
+  logValue(value: number) {
+    ...
+  }
+}
+
+</docs-code>
+
 ## 出力名のカスタマイズ
 
 `output`関数は、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。

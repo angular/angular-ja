@@ -1,14 +1,15 @@
 diff --git a/adev/src/local-styles.scss b/adev/src/local-styles.scss
-index 2c83a2ad4a..9d9b28112a 100644
+index f3c266a1e2..bac1fb9f9b 100644
 --- a/adev/src/local-styles.scss
 +++ b/adev/src/local-styles.scss
-@@ -1,3 +1,17 @@
- @use './styles/xterm';
- 
- @include xterm.xterm();
+@@ -5,3 +5,21 @@
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
++
 +// adev-ja overrides
 +
-+.docs-viewer {
++.docs-viewer, adev-home {
 +    // `balance` is not good for Japanese headings.
 +    h1,
 +    h2,
@@ -18,9 +19,12 @@ index 2c83a2ad4a..9d9b28112a 100644
 +    h6 {
 +        word-break: auto-phrase;
 +    }
++
++    p {
++        word-break: auto-phrase;
++    }
 +}
-+      
-\ No newline at end of file
+
 diff --git a/adev/shared-docs/styles/_typography.scss b/adev/shared-docs/styles/_typography.scss
 index 1c4e2ce0e7..8e897e21f9 100644
 --- a/adev/shared-docs/styles/_typography.scss

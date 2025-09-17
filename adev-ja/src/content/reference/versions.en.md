@@ -9,7 +9,7 @@ This table covers [Angular versions under active support](reference/releases#act
 
 | Angular            | Node.js                             | TypeScript     | RxJS               |
 | ------------------ | ----------------------------------- | -------------- | ------------------ |
-| 20.2.x             | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.9.0 <6.0.0 | ^6.5.3 \|\| ^7.4.0 |
+| 20.2.x \|\| 20.3.x | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.9.0 <6.0.0 | ^6.5.3 \|\| ^7.4.0 |
 | 20.0.x \|\| 20.1.x | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.8.0 <5.9.0 | ^6.5.3 \|\| ^7.4.0 |
 | 19.2.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.5.0 <5.9.0 | ^6.5.3 \|\| ^7.4.0 |
 | 19.1.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.5.0 <5.8.0 | ^6.5.3 \|\| ^7.4.0 |
@@ -146,14 +146,14 @@ For example:
    * asynchronous activities to improve startup performance - use these options only
    * if you know what you are doing as it could result in hard to trace down bugs.
    */
-  // &lowbar;&lowbar;Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
-  // &lowbar;&lowbar;Zone_disable_on_property = true; // disable patch onProperty such as onclick
-  // &lowbar;&lowbar;zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+  // __Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
+  // __Zone_disable_on_property = true; // disable patch onProperty such as onclick
+  // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
   /*
    * in Edge developer tools, the addEventListener will also be wrapped by zone.js
    * with the following flag, it will bypass `zone.js` patch for Edge.
    */
-  // &lowbar;&lowbar;Zone_enable_cross_context_check = true;
+  // __Zone_enable_cross_context_check = true;
 </script>
 <!-- zone.js required by Angular -->
 <script src="node_modules/zone.js/bundles/zone.umd.js"></script>

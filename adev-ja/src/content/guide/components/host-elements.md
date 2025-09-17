@@ -67,7 +67,7 @@ export class CustomSlider {
 クラスメンバーに`@HostBinding`および`@HostListener`デコレーターを適用することにより、
 ホスト要素にバインドできます。
 
-`@HostBinding`を使用すると、ホストのプロパティと属性を、プロパティとメソッドにバインドできます。
+`@HostBinding`を使用すると、ホストのプロパティと属性を、プロパティとゲッターにバインドできます。
 
 ```angular-ts
 @Component({
@@ -78,7 +78,7 @@ export class CustomSlider {
   value: number = 0;
 
   @HostBinding('tabIndex')
-  getTabIndex() {
+  get tabIndex() {
     return this.disabled ? -1 : 0;
   }
 

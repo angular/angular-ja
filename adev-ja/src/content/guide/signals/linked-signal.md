@@ -106,7 +106,7 @@ export class ShippingMethodPicker {
 
 `source`は、`computed`やコンポーネントの`input`などの任意のシグナルにできます。`source`の値が変更されると、`linkedSignal`は提供された`computation`の結果にその値を更新します。
 
-`computation`は、`source`の新しい値と`previous`オブジェクトを受け取る関数です。`previous`オブジェクトには、`previous.source`（`source`の以前の値）、`previous.value`（`computation`の以前の結果）の2つのプロパティがあります。これらの以前の値を使用して、計算の新しい結果を決定できます。
+`computation`は、`source`の新しい値と`previous`オブジェクトを受け取る関数です。`previous`オブジェクトには、`previous.source`（`source`の以前の値）、`previous.value`（`linkedSignal`の以前の値）の2つのプロパティがあります。これらの以前の値を使用して、計算の新しい結果を決定できます。
 
 HELPFUL: When using the `previous` parameter, it is necessary to provide the generic type arguments of `linkedSignal` explicitly. The first generic type corresponds with the type of `source` and the second generic type determines the output type of `computation`.  
 

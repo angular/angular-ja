@@ -12,6 +12,8 @@ const localizedFilePatterns = [
   '!src/content/**/license.md',
   // Tutorial config files
   'src/content/tutorials/**/config.json',
+  // Update home files
+  'src/app/features/home/home.component.html',
   // Update guide files
   'src/app/features/update/recommendations.ts',
   'src/app/features/update/update.component.ts',

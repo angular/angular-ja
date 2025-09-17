@@ -43,7 +43,7 @@ const httpTesting = TestBed.inject(HttpTestingController);
 
 // `ConfigService` をロードして現在の構成を要求します。
 const service = TestBed.inject(ConfigService);
-const config$ = this.configService.getConfig<Config>();
+const config$ = service.getConfig<Config>();
 
 // `firstValueFrom` は `Observable` を購読し、HTTP リクエストを行い、
 // レスポンスの `Promise` を作成します。

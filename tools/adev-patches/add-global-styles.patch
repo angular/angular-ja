@@ -2,14 +2,14 @@ diff --git a/adev/src/local-styles.scss b/adev/src/local-styles.scss
 index f3c266a1e2..bac1fb9f9b 100644
 --- a/adev/src/local-styles.scss
 +++ b/adev/src/local-styles.scss
-@@ -5,3 +5,17 @@
+@@ -5,3 +5,21 @@
  @tailwind base;
  @tailwind components;
  @tailwind utilities;
 +
 +// adev-ja overrides
 +
-+.docs-viewer, .docs-app-main-content {
++.docs-viewer, adev-home {
 +    // `balance` is not good for Japanese headings.
 +    h1,
 +    h2,
@@ -17,6 +17,10 @@ index f3c266a1e2..bac1fb9f9b 100644
 +    h4,
 +    h5,
 +    h6 {
++        word-break: auto-phrase;
++    }
++
++    p {
 +        word-break: auto-phrase;
 +    }
 +}

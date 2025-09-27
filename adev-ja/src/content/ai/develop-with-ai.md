@@ -39,3 +39,6 @@ Angular CLIには、開発環境のAIアシスタントがAngular CLIと連携�
 * <a href="/context/llm-files/llms-full.txt" target="_blank">llms-full.txt</a> - Angularの動作方法とAngularアプリケーションの構築方法を記述した、より堅牢なコンパイル済みリソースセット。
 
 AngularアプリケーションにAIを統合する方法に関する詳細情報については、[概要ページ](/ai)もご確認ください。
+
+## Web Codegen Scorer
+Angularチームは[Web Codegen Scorer](https://github.com/angular/web-codegen-scorer)を開発し、オープンソース化しました。これは、AI生成ウェブコードの品質を評価・スコア化するためのツールです。このツールを使用して、Angular向けにLLM生成コードの精度を向上させるプロンプトの微調整など、AI生成コードに関するエビデンスベースの意思決定を行うことができます。これらのプロンプトは、AIツールのシステム指示として含めることも、プロンプトとともにコンテキストとして含めることもできます。また、このツールを使用して、異なるモデルが生成するコードの品質を比較したり、モデルやエージェントの進化に伴う品質の経時変化を監視したりすることもできます。

@@ -24,6 +24,12 @@ Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary
 | ------------ | ------------- |
 | RegExp       | `/\d+/`       |
 
+### サポートされていない値リテラル
+
+| Literal type | Example values |
+|--------------|----------------|
+| BigInt       | `1n`           |
+
 ## グローバル
 
 Angular式は、次の[グローバル](https://developer.mozilla.org/en-US/docs/Glossary/Global_object)をサポートしています。

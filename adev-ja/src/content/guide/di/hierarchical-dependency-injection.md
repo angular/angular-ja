@@ -232,7 +232,7 @@ export class SelfNoDataComponent {
 In this example, there is a parent provider and injecting the service will return the value, however, injecting the service with `self` and `optional` will return `null` because `self` tells the injector to stop searching in the current host element.
 
 別の例では、 `FlowerService` のプロバイダーを備えたコンポーネントクラスを示しています。
-この場合、インジェクターは現在の `ElementInjector` より先を見ずに、 `FlowerService` を見つけて、チューリップ <code>🌷</code> を返します。
+この場合、インジェクターは現在の `ElementInjector` より先を見ずに、 `FlowerService` を見つけて、チューリップ <code>&#x1F337;</code> を返します。
 
 <docs-code header="src/app/self/self.component.ts" path="adev/src/content/examples/resolution-modifiers/src/app/self/self.component.ts" visibleRegion="self-component"/>
 
@@ -240,17 +240,17 @@ In this example, there is a parent provider and injecting the service will retur
 
 `skipSelf` is the opposite of `self`.
 With `skipSelf`, Angular starts its search for a service in the parent `ElementInjector`, rather than in the current one.
-そのため、親 `ElementInjector` が `emoji` にシダ <code>🌿</code> 値を使用していたが、コンポーネントの `providers` 配列にカエデの葉 <code>🍁</code> が含まれている場合、Angular はカエデの葉 <code>🍁</code> を無視して、シダ <code>🌿</code> を使用します。
+そのため、親 `ElementInjector` が `emoji` にシダ <code>&#x1F33F;</code> 値を使用していたが、コンポーネントの `providers` 配列にカエデの葉 <code>&#x1F341;</code> が含まれている場合、Angular はカエデの葉 <code>&#x1F341;</code> を無視して、シダ <code>&#x1F33F;</code> を使用します。
 
 これをコードで確認するために、親コンポーネントが使用する `emoji` の次の値を想定します。これは、このサービスと同じです。
 
 <docs-code header="src/app/leaf.service.ts" language="typescript">
 export class LeafService {
-  emoji = '🌿';
+  emoji = '&#x1F33F;';
 }
 </docs-code>
 
-子コンポーネントに、異なる値、カエデの葉 <code>🍁</code> が含まれていると想像してください。ただし、親の値を使用したいとします。
+子コンポーネントに、異なる値、カエデの葉 <code>&#x1F341;</code> が含まれていると想像してください。ただし、親の値を使用したいとします。
 This is when you'd use `skipSelf`:
 
 <docs-code header="src/app/skipself/skipself.component.ts" language="typescript"
@@ -260,7 +260,7 @@ This is when you'd use `skipSelf`:
   templateUrl: './skipself.component.html',
   styleUrls: ['./skipself.component.css'],
   // Angular はこの LeafService インスタンスを無視します
-  providers: [{ provide: LeafService, useValue: { emoji: '🍁' } }]
+  providers: [{ provide: LeafService, useValue: { emoji: '&#x1F341;' } }]
 })
 export class SkipselfComponent {
   // Use skipSelf as inject option
@@ -268,7 +268,7 @@ export class SkipselfComponent {
 }
 </docs-code>
 
-この場合、 `emoji` に対して取得する値は、カエデの葉 <code>🍁</code> ではなく、シダ <code>🌿</code> になります。
+この場合、 `emoji` に対して取得する値は、カエデの葉 <code>&#x1F341;</code> ではなく、シダ <code>&#x1F33F;</code> になります。
 
 #### `skipSelf` option with `optional`
 
@@ -299,7 +299,7 @@ Use `host` as follows:
   templateUrl: './host.component.html',
   styleUrls: ['./host.component.css'],
   //  provide the service
-  providers: [{ provide: FlowerService, useValue: { emoji: '🌷' } }]
+  providers: [{ provide: FlowerService, useValue: { emoji: '&#x1F337;' } }]
 })
 export class HostComponent {
   // use host when injecting the service
@@ -307,7 +307,7 @@ export class HostComponent {
 }
 </docs-code>
 
-Since `HostComponent` has the `host` option , no matter what the parent of `HostComponent` might have as a `flower.emoji` value, the `HostComponent` will use tulip <code>🌷</code>.
+`HostComponent`に`host`オプションがあるため、`HostComponent`の親が`flower.emoji`にどのような値を持っていても、`HostComponent`はチューリップ<code>&#x1F337;</code>を使用します。
 
 ### Modifiers with constructor injection  
 
@@ -383,14 +383,14 @@ The following sections demonstrate `providers` and `viewProviders` along with wa
 
 ### アプリケーション構造の例
 
-この例では、 `emoji` の値が赤いハイビスカス <code>🌺</code> である、 `root` に提供される `FlowerService` があります。
+この例では、 `emoji` の値が赤いハイビスカス <code>&#x1F33A;</code> である、 `root` に提供される `FlowerService` があります。
 
 <docs-code header="src/app/flower.service.ts" language="typescript">
 @Injectable({
   providedIn: 'root'
 })
 export class FlowerService {
-  emoji = '🌺';
+  emoji = '&#x1F33A;';
 }
 </docs-code>
 
@@ -441,16 +441,16 @@ export class AppComponent  {
 ビューに出力されるのは次のとおりです。
 
 <docs-code language="shell">
-Emoji from FlowerService: 🌺
+Emoji from FlowerService: &#x1F33A;
 </docs-code>
 
 論理ツリーでは、これは次のように表されます。
 
 <docs-code language="html" highlight="[[1],[2],[4]]">
 <app-root @ApplicationConfig
-        @Inject(FlowerService) flower=>"🌺">
+        @Inject(FlowerService) flower=>"&#x1F33A;">
   <#VIEW>
-    <p>Emoji from FlowerService: {{flower.emoji}} (🌺)</p>
+    <p>Emoji from FlowerService: {{flower.emoji}} (&#x1F33A;)</p>
     <app-child>
       <#VIEW>
       </#VIEW>
@@ -491,7 +491,7 @@ Emoji from FlowerService: 🌺
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.css'],
   // プロバイダー配列を使用してサービスを提供します
-  providers: [{ provide: FlowerService, useValue: { emoji: '🌻' } }]
+  providers: [{ provide: FlowerService, useValue: { emoji: '&#x1F33B;' } }]
 })
 export class ChildComponent {
   // サービスを注入します
@@ -512,7 +512,7 @@ export class ChildComponent {
 
 <docs-code language="shell">
 Child Component
-Emoji from FlowerService: 🌻
+Emoji from FlowerService: &#x1F33B;
 </docs-code>
 
 論理ツリーでは、これは次のように表されます。
@@ -520,14 +520,14 @@ Emoji from FlowerService: 🌻
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-        @Inject(FlowerService) flower=>"🌺">
+        @Inject(FlowerService) flower=>"&#x1F33A;">
   <#VIEW>
-    <p>Emoji from FlowerService: {{flower.emoji}} (🌺)</p>
-    <app-child @Provide(FlowerService="🌻")
-               @Inject(FlowerService)=>"🌻"> <!-- 検索はここで終了します -->
+    <p>Emoji from FlowerService: {{flower.emoji}} (&#x1F33A;)</p>
+    <app-child @Provide(FlowerService="&#x1F33B;")
+               @Inject(FlowerService)=>"&#x1F33B;"> <!-- 検索はここで終了します -->
       <#VIEW> <!-- 検索はここで開始します -->
         <h2>Child Component</h2>
-        <p>Emoji from FlowerService: {{flower.emoji}} (🌻)</p>
+        <p>Emoji from FlowerService: {{flower.emoji}} (&#x1F33B;)</p>
       </#VIEW>
     </app-child>
   </#VIEW>
@@ -536,9 +536,9 @@ Emoji from FlowerService: 🌻
 </docs-code>
 
 `<app-child>` が `FlowerService` を要求すると、インジェクターは `<app-child>` に属する `<#VIEW>`（`@Component()` から注入されるため `<#VIEW>` が含まれています）から始めて、 `<app-child>` で終了します。
-この場合、 `FlowerService` は、 `<app-child>` の `providers` 配列で、ひまわり <code>🌻</code> を使用して解決されます。
+この場合、 `FlowerService` は、 `<app-child>` の `providers` 配列で、ひまわり <code>&#x1F33B;</code> を使用して解決されます。
 インジェクターは、インジェクターツリーをさらに検索する必要はありません。
-`FlowerService` を見つけるとすぐに停止し、赤いハイビスカス <code>🌺</code> は見えません。
+`FlowerService` を見つけるとすぐに停止し、赤いハイビスカス <code>&#x1F33A;</code> は見えません。
 
 ### `viewProviders` 配列を使用する
 
@@ -551,7 +551,7 @@ HELPFUL: ステップは `providers` 配列を使用する場合と同じです�
 自分で設定できる場合は、[サービスの可用性を変更する](#visibility-of-provided-tokens) に進んでください。
 
 デモのために、 `AnimalService` を作成して、 `viewProviders` を示します。
-最初に、 `emoji` プロパティがクジラ <code>🐳</code> である `AnimalService` を作成します。
+最初に、 `emoji` プロパティがクジラ <code>&#x1F433;</code> である `AnimalService` を作成します。
 
 <docs-code header="src/app/animal.service.ts" language="typescript">
 import { Injectable } from '@angular/core';
@@ -560,7 +560,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AnimalService {
-  emoji = '🐳';
+  emoji = '&#x1F433;';
 }
 </docs-code>
 
@@ -576,7 +576,7 @@ export class AppComponent {
 HELPFUL: `FlowerService` に関連するコードはすべてそのままにしておくことができます。これにより、 `AnimalService` との比較が可能になります。
 
 `viewProviders` 配列を追加し、 `<app-child>` クラスにも `AnimalService` を注入しますが、 `emoji` に異なる値を与えます。
-ここでは、犬 <code>🐶</code> の値があります。
+ここでは、犬 <code>&#x1F436;</code> の値があります。
 
 <docs-code header="src/app/child.component.ts" language="typescript"
            highlight="[[7],[11]]">
@@ -585,8 +585,8 @@ HELPFUL: `FlowerService` に関連するコードはすべてそのままにし�
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.css'],
   // サービスを提供します
-  providers: [{ provide: FlowerService, useValue: { emoji: '🌻' } }],
-  viewProviders: [{ provide: AnimalService, useValue: { emoji: '🐶' } }]
+  providers: [{ provide: FlowerService, useValue: { emoji: '&#x1F33B;' } }],
+  viewProviders: [{ provide: AnimalService, useValue: { emoji: '&#x1F436;' } }]
 })
 export class ChildComponent {
   // サービスを注入します
@@ -614,10 +614,10 @@ export class ChildComponent {
 <docs-code hideCopy language="shell">
 
 AppComponent
-Emoji from AnimalService: 🐳
+Emoji from AnimalService: &#x1F433;
 
 Child Component
-Emoji from AnimalService: 🐶
+Emoji from AnimalService: &#x1F436;
 
 </docs-code>
 
@@ -626,13 +626,13 @@ Emoji from AnimalService: 🐶
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-         @Inject(AnimalService) animal=>"🐳">
+         @Inject(AnimalService) animal=>"&#x1F433;">
   <#VIEW>
     <app-child>
-      <#VIEW @Provide(AnimalService="🐶")
-            @Inject(AnimalService=>"🐶")>
+      <#VIEW @Provide(AnimalService="&#x1F436;")
+            @Inject(AnimalService=>"&#x1F436;")>
        <!-- ^^viewProviders を使用すると、AnimalService は <#VIEW> で使用可能になります-->
-       <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
+       <p>Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)</p>
       </#VIEW>
     </app-child>
   </#VIEW>
@@ -641,7 +641,7 @@ Emoji from AnimalService: 🐶
 </docs-code>
 
 `FlowerService` の例と同様に、 `AnimalService` は `<app-child>` の `@Component()` デコレーターで提供されています。
-つまり、インジェクターは最初にコンポーネントの `ElementInjector` を調べるため、犬 <code>🐶</code> の `AnimalService` 値が見つかります。
+つまり、インジェクターは最初にコンポーネントの `ElementInjector` を調べるため、犬 <code>&#x1F436;</code> の `AnimalService` 値が見つかります。
 インジェクターは、 `ElementInjector` ツリーをさらに検索する必要も、 `ModuleInjector` を検索する必要もありません。
 
 ### `providers` と `viewProviders` の違い
@@ -710,43 +710,43 @@ export class InspectorComponent {
 ...
 Content projection
 
-Emoji from FlowerService: 🌻
-Emoji from AnimalService: 🐳
+Emoji from FlowerService: &#x1F33B;
+Emoji from AnimalService: &#x1F433;
 
-Emoji from FlowerService: 🌻
-Emoji from AnimalService: 🐶
+Emoji from FlowerService: &#x1F33B;
+Emoji from AnimalService: &#x1F436;
 
 </docs-code>
 
 これらの4つのバインディングは、 `providers` と `viewProviders` の違いを示しています。
-犬の絵文字 <code>🐶</code> は、 `ChildComponent` の `<#VIEW>` 内に宣言され、投影されたコンテンツには可視ではないことを覚えておいてください。
-代わりに、投影されたコンテンツには、クジラ <code>🐳</code> が表示されます。
+犬の絵文字 <code>&#x1F436;</code> は、 `ChildComponent` の `<#VIEW>` 内に宣言され、投影されたコンテンツには可視ではないことを覚えておいてください。
+代わりに、投影されたコンテンツには、クジラ <code>&#x1F433;</code> が表示されます。
 
-ただし、次の出力セクションでは `InspectorComponent` は `ChildComponent` の実際の子コンポーネントです。そして `InspectorComponent` は `<#VIEW>` の内側にあるため、 `AnimalService` を要求すると、犬 <code>🐶</code> が表示されます。
+ただし、次の出力セクションでは `InspectorComponent` は `ChildComponent` の実際の子コンポーネントです。そして `InspectorComponent` は `<#VIEW>` の内側にあるため、 `AnimalService` を要求すると、犬 <code>&#x1F436;</code> が表示されます。
 
 論理ツリー内の `AnimalService` は、次のようになります。
 
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-         @Inject(AnimalService) animal=>"🐳">
+         @Inject(AnimalService) animal=>"&#x1F433;">
   <#VIEW>
     <app-child>
-      <#VIEW @Provide(AnimalService="🐶")
-            @Inject(AnimalService=>"🐶")>
+      <#VIEW @Provide(AnimalService="&#x1F436;")
+            @Inject(AnimalService=>"&#x1F436;")>
         <!-- ^^viewProviders を使用すると、AnimalService は <#VIEW> で使用可能になります-->
-        <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
+        <p>Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)</p>
 
         <div class="container">
           <h3>Content projection</h3>
-          <app-inspector @Inject(AnimalService) animal=>"🐳">
-            <p>Emoji from AnimalService: {{animal.emoji}} (🐳)</p>
+          <app-inspector @Inject(AnimalService) animal=>"&#x1F433;">
+            <p>Emoji from AnimalService: {{animal.emoji}} (&#x1F433;)</p>
           </app-inspector>
         </div>
 
         <app-inspector>
-          <#VIEW @Inject(AnimalService) animal=>"🐶">
-            <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
+          <#VIEW @Inject(AnimalService) animal=>"&#x1F436;">
+            <p>Emoji from AnimalService: {{animal.emoji}} (&#x1F436;)</p>
           </#VIEW>
         </app-inspector>
       </#VIEW>
@@ -756,8 +756,8 @@ Emoji from AnimalService: 🐶
 
 </docs-code>
 
-`<app-inspector>` の投影されたコンテンツには、クジラ <code>🐳</code> が表示され、犬 <code>🐶</code> は表示されません。これは、犬 <code>🐶</code> が `<app-child>` の `<#VIEW>` の内側にあるためです。
-`<app-inspector>` は、 `<#VIEW>` の内側にある場合にのみ、犬 <code>🐶</code> を表示できます。
+`<app-inspector>` の投影されたコンテンツには、クジラ <code>&#x1F433;</code> が表示され、犬 <code>&#x1F436;</code> は表示されません。これは、犬 <code>&#x1F436;</code> が `<app-child>` の `<#VIEW>` の内側にあるためです。
+`<app-inspector>` は、 `<#VIEW>` の内側にある場合にのみ、犬 <code>&#x1F436;</code> を表示できます。
 
 ### 提供されたトークンの可視性
 
@@ -773,12 +773,12 @@ flower = inject(FlowerService, { skipSelf: true })
 
 With `skipSelf`, the `<app-child>` injector doesn't look to itself for the `FlowerService`.
 代わりに、インジェクターは `<app-root>` の `ElementInjector` で `FlowerService` の検索を開始し、何も見つかりません。
-次に、 `<app-child>` の `ModuleInjector` に戻り、 `<app-child>` と `<app-root>` が同じ `ModuleInjector` を共有しているため、赤いハイビスカス <code>🌺</code> 値が見つかります。
+次に、 `<app-child>` の `ModuleInjector` に戻り、 `<app-child>` と `<app-root>` が同じ `ModuleInjector` を共有しているため、赤いハイビスカス <code>&#x1F33A;</code> 値が見つかります。
 UIには次のように表示されます。
 
 <docs-code hideCopy language="shell">
 
-Emoji from FlowerService: 🌺
+Emoji from FlowerService: &#x1F33A;
 
 </docs-code>
 
@@ -787,10 +787,10 @@ Emoji from FlowerService: 🌺
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-        @Inject(FlowerService) flower=>"🌺">
+        @Inject(FlowerService) flower=>"&#x1F33A;">
   <#VIEW>
-    <app-child @Provide(FlowerService="🌻")>
-      <#VIEW @Inject(FlowerService, SkipSelf)=>"🌺">
+    <app-child @Provide(FlowerService="&#x1F33B;")>
+      <#VIEW @Inject(FlowerService, SkipSelf)=>"&#x1F33A;">
         <!-- SkipSelf を使用すると、インジェクターはツリー上の次のインジェクター（app-root）を調べます -->
       </#VIEW>
     </app-child>
@@ -799,18 +799,18 @@ Emoji from FlowerService: 🌺
 
 </docs-code>
 
-Though `<app-child>` provides the sunflower <code>🌻</code>, the application renders the red hibiscus <code>🌺</code> because `skipSelf` causes the current injector (`app-child`) to skip itself and look to its parent.
+`<app-child>`がひまわり<code>&#x1F33B;</code>を提供しているにもかかわらず、アプリケーションは赤いハイビスカス<code>&#x1F33A;</code>をレンダリングします。これは、`skipSelf`が現在のインジェクター（`app-child`）に自身をスキップして親を探すよう指示するためです。
 
-If you now add `host` (in addition to the `skipSelf`), the result will be `null`.
-This is because `host` limits the upper bound of the search to the `app-child` `<#VIEW>`.
+今度、（`skipSelf`に加えて）`host`を追加すると、結果は`null`になります。
+これは、`host`が検索の上限を`app-child`の`<#VIEW>`に制限するためです。
 論理ツリーでの考え方は次のとおりです。
 
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-        @Inject(FlowerService) flower=>"🌺">
+        @Inject(FlowerService) flower=>"&#x1F33A;">
   <#VIEW> <!-- ここで検索を終了して null を返します-->
-    <app-child @Provide(FlowerService="🌻")> <!-- ここで検索を開始します -->
+    <app-child @Provide(FlowerService="&#x1F33B;")> <!-- ここで検索を開始します -->
       <#VIEW inject(FlowerService, {skipSelf: true, host: true, optional:true})=>null>
       </#VIEW>
       </app-parent>
@@ -823,8 +823,8 @@ Here, the services and their values are the same, but `host` stops the injector 
 
 ### `skipSelf` and `viewProviders`
 
-覚えておいてください。 `<app-child>` は、 `viewProviders` 配列で `AnimalService` を提供し、その値は犬 <code>🐶</code> です。
-インジェクターは、 `<app-child>` の `ElementInjector` を `AnimalService` について調べるだけなので、クジラ <code>🐳</code> は見えません。
+覚えておいてください。 `<app-child>` は、 `viewProviders` 配列で `AnimalService` を提供し、その値は犬 <code>&#x1F436;</code> です。
+インジェクターは、 `<app-child>` の `ElementInjector` を `AnimalService` について調べるだけなので、クジラ <code>&#x1F433;</code> は見えません。
 
 As in the `FlowerService` example, if you add `skipSelf` to the `inject()` of `AnimalService`, the injector won't look in the  `ElementInjector` of the current `<app-child>` for the `AnimalService`.
 代わりに、インジェクターは `<app-root>` の `ElementInjector` で検索を開始します。
@@ -834,7 +834,7 @@ As in the `FlowerService` example, if you add `skipSelf` to the `inject()` of `A
   selector: 'app-child',
   …
   viewProviders: [
-    { provide: AnimalService, useValue: { emoji: '🐶' } },
+    { provide: AnimalService, useValue: { emoji: '&#x1F436;' } },
   ],
 })
 </docs-code>
@@ -844,11 +844,11 @@ The logical tree looks like this with `skipSelf` in `<app-child>`:
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-          @Inject(AnimalService=>"🐳")>
+          @Inject(AnimalService=>"&#x1F433;")>
   <#VIEW><!-- 検索はここで開始します -->
     <app-child>
-      <#VIEW @Provide(AnimalService="🐶")
-             @Inject(AnimalService, SkipSelf=>"🐳")>
+      <#VIEW @Provide(AnimalService="&#x1F436;")
+             @Inject(AnimalService, SkipSelf=>"&#x1F433;")>
         <!--Add skipSelf -->
       </#VIEW>
     </app-child>
@@ -857,20 +857,20 @@ The logical tree looks like this with `skipSelf` in `<app-child>`:
 
 </docs-code>
 
-With `skipSelf` in the `<app-child>`, the injector begins its search for the `AnimalService` in the `<app-root>` `ElementInjector` and finds whale <code>🐳</code>.
+`<app-child>`で`skipSelf`を使用すると、インジェクターは`<app-root>`の`ElementInjector`で`AnimalService`の検索を開始し、クジラ<code>&#x1F433;</code>を見つけます。
 
 ### `host` and `viewProviders`
 
-If you just use `host` for the injection of `AnimalService`, the result is dog <code>🐶</code> because the injector finds the `AnimalService` in the `<app-child>` `<#VIEW>` itself.
-The `ChildComponent` configures the `viewProviders` so that the dog emoji is provided as `AnimalService` value.
-You can also see `host` the `inject()`:
+`AnimalService`のインジェクションに`host`だけを使用する場合、インジェクターは`<app-child>`の`<#VIEW>`自体で`AnimalService`を見つけるため、結果は犬<code>&#x1F436;</code>になります。
+`ChildComponent`は`viewProviders`を設定し、犬の絵文字が`AnimalService`の値として提供されます。
+`inject()`で`host`を使用することもできます：
 
 <docs-code language="typescript" highlight="[[5],[9]]">
 @Component({
   selector: 'app-child',
   …
   viewProviders: [
-    { provide: AnimalService, useValue: { emoji: '🐶' } },
+    { provide: AnimalService, useValue: { emoji: '&#x1F436;' } },
   ]
 })
 export class ChildComponent {
@@ -883,11 +883,11 @@ export class ChildComponent {
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-          @Inject(AnimalService=>"🐳")>
+          @Inject(AnimalService=>"&#x1F433;")>
   <#VIEW>
     <app-child>
-      <#VIEW @Provide(AnimalService="🐶")
-             inject(AnimalService, {host: true}=>"🐶")> <!-- host stops search here -->
+      <#VIEW @Provide(AnimalService="&#x1F436;")
+             inject(AnimalService, {host: true}=>"&#x1F436;")> <!-- host stops search here -->
       </#VIEW>
     </app-child>
   </#VIEW>
@@ -895,7 +895,7 @@ export class ChildComponent {
 
 </docs-code>
 
-3番目の動物、ハリネズミ <code>🦔</code> を含む `viewProviders` 配列を、 `app.component.ts` の `@Component()` メタデータに追加します。
+3番目の動物、ハリネズミ <code>&#x1F994;</code> を含む `viewProviders` 配列を、 `app.component.ts` の `@Component()` メタデータに追加します。
 
 <docs-code language="typescript" highlight="[6]">
 @Component({
@@ -903,7 +903,7 @@ export class ChildComponent {
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ],
   viewProviders: [
-    { provide: AnimalService, useValue: { emoji: '🦔' } },
+    { provide: AnimalService, useValue: { emoji: '&#x1F994;' } },
   ],
 })
 
@@ -933,13 +933,13 @@ When `host` and `skipSelf` were applied to the `FlowerService`, which is in the 
 <docs-code language="html">
 
 <app-root @ApplicationConfig
-        @Inject(AnimalService=>"🐳")>
-  <#VIEW @Provide(AnimalService="🦔")
-         @Inject(AnimalService, @Optional)=>"🦔">
+        @Inject(AnimalService=>"&#x1F433;")>
+  <#VIEW @Provide(AnimalService="&#x1F994;")
+         @Inject(AnimalService, @Optional)=>"&#x1F994;">
     <!-- ^^skipSelf starts here,  host stops here^^ -->
     <app-child>
-      <#VIEW @Provide(AnimalService="🐶")
-             inject(AnimalService, {skipSelf:true, host: true, optional: true})=>"🦔">
+      <#VIEW @Provide(AnimalService="&#x1F436;")
+             inject(AnimalService, {skipSelf:true, host: true, optional: true})=>"&#x1F994;">
                <!-- Add skipSelf ^^-->
       </#VIEW>
       </app-child>
@@ -949,7 +949,7 @@ When `host` and `skipSelf` were applied to the `FlowerService`, which is in the 
 </docs-code>
 
 `skipSelf`, causes the injector to start its search for the `AnimalService` at the `<app-root>`, not the `<app-child>`, where the request originates, and `host` stops the search at the `<app-root>` `<#VIEW>`.
-`AnimalService` は `viewProviders` 配列を介して提供されるため、インジェクターは `<#VIEW>` でハリネズミ <code>🦔</code> を見つけます。
+`AnimalService` は `viewProviders` 配列を介して提供されるため、インジェクターは `<#VIEW>` でハリネズミ <code>&#x1F994;</code> を見つけます。
 
 ## 例： `ElementInjector` のユースケース
 

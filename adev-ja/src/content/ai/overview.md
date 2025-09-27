@@ -54,7 +54,7 @@ Firebase AI LogicとAngularで構築する方法の例を次に示します。
   この例には、[機能の説明と新機能の追加方法を示す詳細なビデオウォークスルー](https://youtube.com/live/4vfDz2al_BI)が含まれています。
 
 ### Gemini APIとAngularでAI搭載アプリケーションを構築する {#build-ai-powered-applications-with-gemini-api-and-angular}
-[Gemini API](https://ai.google.dev/gemini-api/docs)は、音声、画像、動画、テキスト入力をサポートするGoogleの最先端モデルへのアクセスを提供します。特定のユースケースに最適化されたモデルについては、[Gemini APIドキュメントサイトで詳細を確認してください](https://ai.google.dev/gemini-api/docs/models)。
+[Gemini API](https://ai.google.dev/gemini-api/docs)は、音声、画像、動画、テキスト入力をサポートするGoogleの最先端モデルへのアクセスを提供します。特定のユースケースに最適化されたこれらのモデルについては、[Gemini APIドキュメントサイトで詳細を確認してください](https://ai.google.dev/gemini-api/docs/models)。
 
 * [AIテキストエディターAngularアプリテンプレート](https://github.com/FirebaseExtended/firebase-framework-tools/tree/main/starters/angular/ai-text-editor) - このテンプレートを使用して、テキストの洗練、テキストの拡張、テキストの形式化などのAI搭載機能を備えた完全に機能するテキストエディターから始めましょう。これは、HTTP経由でのGemini API呼び出しの経験を積むのに良い出発点です。
 

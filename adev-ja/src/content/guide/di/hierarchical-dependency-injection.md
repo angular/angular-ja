@@ -863,7 +863,7 @@ The logical tree looks like this with `skipSelf` in `<app-child>`:
 
 `AnimalService`のインジェクションに`host`だけを使用する場合、インジェクターは`<app-child>`の`<#VIEW>`自体で`AnimalService`を見つけるため、結果は犬<code>&#x1F436;</code>になります。
 `ChildComponent`は`viewProviders`を設定し、犬の絵文字が`AnimalService`の値として提供されます。
-`inject()`で`host`を使用することもできます：
+`inject()`では`host`も使用できます：
 
 <docs-code language="typescript" highlight="[[5],[9]]">
 @Component({

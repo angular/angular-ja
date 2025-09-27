@@ -12,7 +12,7 @@ const $$ = $({
 export async function buildAdev() {
   const sh = $$({ cwd: buildDir });
   await sh`pnpm install --frozen-lockfile`;
-  await sh`pnpm bazel build //adev:build.production`;
+  await sh`pnpm bazel build //adev:build.production --config=release`;
 }
 
 export function serveAdev() {

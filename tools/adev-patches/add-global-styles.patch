@@ -1,11 +1,26 @@
+diff --git a/adev/shared-docs/styles/_typography.scss b/adev/shared-docs/styles/_typography.scss
+index 1c4e2ce0e7..8e897e21f9 100644
+--- a/adev/shared-docs/styles/_typography.scss
++++ b/adev/shared-docs/styles/_typography.scss
+@@ -110,4 +110,10 @@
+     margin-block: 1rem;
+     transition: border-color 0.3s ease;
+   }
++
++  // https://github.com/angular/angular-ja/issues/1017
++  em {
++    font-style: normal;
++    font-weight: 700;
++  }
+ }
 diff --git a/adev/src/local-styles.scss b/adev/src/local-styles.scss
-index f3c266a1e2..bac1fb9f9b 100644
+index 2c83a2ad4a..ef2da20372 100644
 --- a/adev/src/local-styles.scss
 +++ b/adev/src/local-styles.scss
-@@ -5,3 +5,21 @@
- @tailwind base;
- @tailwind components;
- @tailwind utilities;
+@@ -1,3 +1,21 @@
+ @use './styles/xterm';
+ 
+ @include xterm.xterm();
 +
 +// adev-ja overrides
 +
@@ -24,19 +39,3 @@ index f3c266a1e2..bac1fb9f9b 100644
 +        word-break: auto-phrase;
 +    }
 +}
-
-diff --git a/adev/shared-docs/styles/_typography.scss b/adev/shared-docs/styles/_typography.scss
-index 1c4e2ce0e7..8e897e21f9 100644
---- a/adev/shared-docs/styles/_typography.scss
-+++ b/adev/shared-docs/styles/_typography.scss
-@@ -110,4 +110,10 @@
-     margin-block: 1rem;
-     transition: border-color 0.3s ease;
-   }
-+
-+  // https://github.com/angular/angular-ja/issues/1017
-+  em {
-+    font-style: normal;
-+    font-weight: 700;
-+  }
- }

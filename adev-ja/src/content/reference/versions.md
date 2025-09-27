@@ -146,14 +146,14 @@ CLIを使用していない場合は、ホストWebページ（`index.html`）�
    * これらのオプションは、開始パフォーマンスを向上させるためだけに使用してください。
    * 追跡が難しいバグが発生する可能性があるため、どのような操作を行っているのかを理解している場合にのみ使用してください。
    */
-  // __Zone_disable_requestAnimationFrame = true; // requestAnimationFrame のパッチを無効にする
-  // __Zone_disable_on_property = true; // onclick などの onProperty のパッチを無効にする
-  // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // 指定したイベント名のパッチを無効にする
+  // &lowbar;&lowbar;Zone_disable_requestAnimationFrame = true; // requestAnimationFrame のパッチを無効にする
+  // &lowbar;&lowbar;Zone_disable_on_property = true; // onclick などの onProperty のパッチを無効にする
+  // &lowbar;&lowbar;zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // 指定したイベント名のパッチを無効にする
   /*
    * Edge 開発者ツールでは、addEventListener も zone.js によってラップされます。
    * 次のフラグを使用すると、Edge に対する zone.js のパッチをバイパスできます。
    */
-  // __Zone_enable_cross_context_check = true;
+  // &lowbar;&lowbar;Zone_enable_cross_context_check = true;
 </script>
 <!-- Angular で必要な zone.js -->
 <script src="node_modules/zone.js/bundles/zone.umd.js"></script>

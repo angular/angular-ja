@@ -151,7 +151,7 @@ CSSクラスバインディングを作成して、バインドされた値が[�
 export class UserProfile {
   listClasses = 'full-width outlined';
   sectionClasses = signal(['expandable', 'elevated']);
-  buttonClasses = ({
+  buttonClasses = signal({
     highlighted: true,
     embiggened: false,
   });

@@ -1,22 +1,8 @@
-diff --git a/adev/src/app/features/tutorial/tutorial.component.ts b/adev/src/app/features/tutorial/tutorial.component.ts
-index 5ed9051ae2..bb24ca4242 100644
---- a/adev/src/app/features/tutorial/tutorial.component.ts
-+++ b/adev/src/app/features/tutorial/tutorial.component.ts
-@@ -49,7 +49,7 @@ import {
- } from '../../editor/index';
- import {SplitResizerHandler} from './split-resizer-handler.service';
- import {PAGE_PREFIX} from '../../core/constants/pages';
- 
--const INTRODUCTION_LABEL = 'Introduction';
-+const INTRODUCTION_LABEL = 'イントロダクション';
- 
- @Component({
-   selector: 'adev-tutorial',
 diff --git a/adev/src/app/features/tutorial/tutorial.component.html b/adev/src/app/features/tutorial/tutorial.component.html
-index 31c1932aa1..ef362147ae 100644
+index d786c8fc23..f2931c0203 100644
 --- a/adev/src/app/features/tutorial/tutorial.component.html
 +++ b/adev/src/app/features/tutorial/tutorial.component.html
-@@ -60,11 +60,11 @@
+@@ -58,11 +58,11 @@
            (click)="answerRevealed() ? handleResetAnswer() : handleRevealAnswer()"
            [disabled]="!canRevealAnswer()"
            class="docs-reveal-answer-button adev-reveal-desktop-button docs-primary-btn"
@@ -31,7 +17,7 @@ index 31c1932aa1..ef362147ae 100644
          </button>
        }
  
-@@ -116,11 +116,11 @@
+@@ -112,11 +112,11 @@
              (click)="answerRevealed() ? handleResetAnswer() : handleRevealAnswer()"
              [disabled]="!canRevealAnswer()"
              class="docs-reveal-answer-button adev-reveal-mobile-button docs-primary-btn"
@@ -46,3 +32,16 @@ index 31c1932aa1..ef362147ae 100644
            </button>
          }
        </div>
+diff --git a/adev/src/app/features/tutorial/tutorial.component.ts b/adev/src/app/features/tutorial/tutorial.component.ts
+index 5824767d27..87df2f5ed7 100644
+--- a/adev/src/app/features/tutorial/tutorial.component.ts
++++ b/adev/src/app/features/tutorial/tutorial.component.ts
+@@ -50,7 +50,7 @@ import {SplitResizerHandler} from './split-resizer-handler.service';
+ import {PAGE_PREFIX} from '../../core/constants/pages';
+ import {TutorialNavigationList} from './tutorial-navigation-list';
+ 
+-const INTRODUCTION_LABEL = 'Introduction';
++const INTRODUCTION_LABEL = 'イントロダクション';
+ 
+ @Component({
+   selector: 'adev-tutorial',

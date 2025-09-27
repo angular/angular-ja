@@ -677,66 +677,6 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'guide/drag-drop',
         contentPath: 'guide/drag-drop',
       },
-      // TODO: unwrap to release Angular Aria docs.
-      ...(isDevMode()
-        ? [
-            {
-              label: 'Angular Aria',
-              children: [
-                {
-                  label: 'Overview',
-                  path: 'guide/aria/overview',
-                  contentPath: 'guide/aria/overview',
-                },
-                {
-                  label: 'Accordion',
-                  path: 'guide/aria/accordion',
-                  contentPath: 'guide/aria/accordion',
-                },
-                {
-                  label: 'Combobox',
-                  path: 'guide/aria/combobox',
-                  contentPath: 'guide/aria/combobox',
-                },
-                {
-                  label: 'Grid',
-                  path: 'guide/aria/grid',
-                  contentPath: 'guide/aria/grid',
-                },
-                {
-                  label: 'Listbox',
-                  path: 'guide/aria/listbox',
-                  contentPath: 'guide/aria/listbox',
-                },
-                {
-                  label: 'Menu',
-                  path: 'guide/aria/menu',
-                  contentPath: 'guide/aria/menu',
-                },
-                {
-                  label: 'Radio Group',
-                  path: 'guide/aria/radio',
-                  contentPath: 'guide/aria/radio',
-                },
-                {
-                  label: 'Tabs',
-                  path: 'guide/aria/tabs',
-                  contentPath: 'guide/aria/tabs',
-                },
-                {
-                  label: 'Toolbar',
-                  path: 'guide/aria/toolbar',
-                  contentPath: 'guide/aria/toolbar',
-                },
-                {
-                  label: 'Tree',
-                  path: 'guide/aria/tree',
-                  contentPath: 'guide/aria/tree',
-                },
-              ],
-            },
-          ]
-        : []),
     ],
   },
   {
@@ -1490,18 +1430,6 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Self-closing tags',
         path: 'reference/migrations/self-closing-tags',
         contentPath: 'reference/migrations/self-closing-tags',
-      },
-      {
-        label: 'NgClass to Class',
-        path: 'reference/migrations/ngclass-to-class',
-        contentPath: 'reference/migrations/ngclass-to-class',
-        status: 'new',
-      },
-      {
-        label: 'NgStyle to Style',
-        path: 'reference/migrations/ngstyle-to-style',
-        contentPath: 'reference/migrations/ngstyle-to-style',
-        status: 'new',
       },
     ],
   },

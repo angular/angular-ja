@@ -18,4 +18,7 @@ Angularチュートリアルへようこそ！これらのチュートリアル�
   <docs-card title="遅延可能ビュー" link="コーディングを開始" href="tutorials/deferrable-views" imgSrc="adev/src/assets/images/ang_illustrations-04.svg">
     Playground を使用
   </docs-card>
+  <docs-card title="シグナルフォームを学ぶ" link="コーディングを開始" href="tutorials/signal-forms" imgSrc="adev/src/assets/images/learn-angular-local.svg">
+    Playground を使用
+  </docs-card>
 </docs-card-container>

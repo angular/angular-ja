@@ -17,11 +17,31 @@ npm install @angular/aria
 
 例えば、ツールバーメニューを例に考えてみましょう。特定のロジックに結びついた「単純な」ボタンの列に見えるかもしれませんが、アクセシビリティに不慣れな人にとって、キーボードナビゲーションやスクリーンリーダーは多くの予期せぬ複雑さを加えます。
 
-```
-<!------------------------------------->
-<!-- INSERT EMBEDDED DEMO OF TOOLBAR -->
-<!------------------------------------->
-```
+<docs-tab-group>
+  <docs-tab label="Basic">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Material">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Retro">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
 
 この1つのシナリオでは、開発者は次の点を考慮する必要があります：
 
@@ -42,6 +62,7 @@ Angular Ariaには、一般的なインタラクティブパターンに対応�
 | [Grid](guide/aria/grid)                 | セル単位のキーボードナビゲーションを備えた2次元のデータ表示            |
 | [Listbox](guide/aria/listbox)           | キーボードナビゲーション付きの単一選択または複数選択のオプションリスト       |
 | [Menu](guide/aria/menu)                 | ネストされたサブメニューとキーボードショートカットを持つドロップダウンメニュー     |
+| [Menubar](guide/aria/menubar)           | 永続的なアプリケーションメニュー用の水平ナビゲーションバー            |
 | [Multiselect](guide/aria/multiselect)   | コンパクトな表示を持つ複数選択のドロップダウンパターン                   |
 | [Select](guide/aria/select)             | キーボードナビゲーション付きの単一選択のドロップダウンパターン             |
 | [Tabs](guide/aria/tabs)                 | 自動または手動のアクティベーションモードを持つタブ付きインターフェース         |
@@ -63,7 +84,7 @@ Angular Ariaは、カスタムスタイリングを施したWCAG準拠のアク�
 Angular Ariaはすべてのシナリオに適しているわけではありません:
 
 - **事前にスタイル付けされたコンポーネント** - カスタムスタイルなしで完成された見た目のコンポーネントが必要な場合は、代わりにAngular Materialを使用してください
-- **シンプルなフォーム** - <button>や<input type="radio">のようなネイティブHTMLフォームコントロールは、単純なユースケースに対して組み込みのアクセシビリティを提供します
+- **シンプルなフォーム** - `<button>`や`<input type="radio">`のようなネイティブHTMLフォームコントロールは、単純なユースケースに対して組み込みのアクセシビリティを提供します
 - **ラピッドプロトタイピング** - コンセプトを迅速に検証する場合、事前にスタイル付けされたコンポーネントライブラリは初期開発の時間を短縮します
 
 ## 次のステップ {#next-steps}

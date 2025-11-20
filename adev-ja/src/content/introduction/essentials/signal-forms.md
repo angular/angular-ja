@@ -8,7 +8,7 @@
 
 ## 最初のフォームを作成する {#creating-your-first-form}
 
-### 1. フォームモデルを作成する {#1-create-a-form-model}
+### 1. `signal()`でフォームモデルを作成する {#1-create-a-form-model-with-signal}
 
 すべてのフォームは、フォームのデータモデルを保持するシグナルを作成することから始まります:
 
@@ -24,19 +24,19 @@ const loginModel = signal<LoginData>({
 });
 ```
 
-### 2. フォームモデルを`form()`に渡す {#2-pass-the-form-model-to-form}
+### 2. フォームモデルを`form()`に渡して`FieldTree`を作成する {#2-pass-the-form-model-to-form-to-create-a-fieldtree}
 
 次に、フォームモデルを`form()`関数に渡して**フィールドツリー**を作成します。これはモデルの形状を反映したオブジェクト構造で、ドット記法でフィールドにアクセスできます:
 
 ```ts
-form(loginModel);
+const loginForm = form(loginModel);
 
 // Access fields directly by property name
 loginForm.email
 loginForm.password
 ```
 
-### 3. `[field]`ディレクティブで入力をバインドする {#3-bind-inputs-with-field-directive}
+### 3. `[field]`ディレクティブでHTML入力をバインドする {#3-bind-html-inputs-with-field-directive}
 
 次に、`[field]`ディレクティブを使用してHTMLの入力をフォームにバインドします。これにより、それらの間に双方向バインディングが作成されます:
 
@@ -45,19 +45,11 @@ loginForm.password
 <input type="password" [field]="loginForm.password" />
 ```
 
-その結果、ユーザーによる変更（フィールドへの入力など）は自動的にフォームを更新し、プログラムによる変更も表示される値を更新します:
-
-```ts
-// Update the value programmatically
-loginForm.email().value.set('alice@wonderland.com');
-
-// The model signal is also updated
-console.log(loginModel().email); // 'alice@wonderland.com'
-```
+その結果、ユーザーによる変更（フィールドへの入力など）は自動的にフォームを更新します。
 
 NOTE: `[field]`ディレクティブは、必要に応じて`required`、`disabled`、`readonly`などの属性のフィールドの状態も同期します。
 
-### 4. `value()`でフォームフィールドの値を読み取る {#4-read-form-field-values-with-value}
+### 4. `value()`でフィールドの値を読み取る {#4-read-field-values-with-value}
 
 フィールドを関数として呼び出すことで、フィールドの状態にアクセスできます。これにより、フィールドの値、バリデーションステータス、インタラクションの状態に対するリアクティブなシグナルを含む`FieldState`オブジェクトが返されます:
 
@@ -75,6 +67,22 @@ loginForm.email() // Returns FieldState with value(), valid(), touched(), etc.
 ```ts
 // Get the current value
 const currentEmail = loginForm.email().value();
+```
+
+### 5. `set()`でフィールドの値を更新する {#5-update-field-values-with-set}
+
+`value.set()`メソッドを使用して、プログラムからフィールドの値を更新できます。これにより、フィールドと基になるモデルシグナルの両方が更新されます:
+
+```ts
+// Update the value programmatically
+loginForm.email().value.set('alice@wonderland.com');
+```
+
+その結果、フィールドの値とモデルシグナルの両方が自動的に更新されます:
+
+```ts
+// The model signal is also updated
+console.log(loginModel().email); // 'alice@wonderland.com'
 ```
 
 完全な例は次のとおりです:
@@ -202,16 +210,17 @@ NOTE: 複数選択(`<select multiple>`)は、現時点では`[field]`ディレ�
 
 ## バリデーションと状態
 
-シグナルフォームには、フォームフィールドに適用できる組み込みのバリデーターが用意されています。バリデーションを追加するには、`form()`の第2引数にスキーマ関数を渡します。この関数は、フォームモデル内のフィールドを参照できる**FieldPath**パラメーターを受け取ります:
+シグナルフォームには、フォームフィールドに適用できる組み込みのバリデーターが用意されています。バリデーションを追加するには、`form()`の第2引数にスキーマ関数を渡します。この関数は、フォームモデル内のフィールドを参照できる**スキーマパス**パラメーターを受け取ります:
 
 ```ts
-const loginForm = form(loginModel, (fieldPath) => {
-  required(fieldPath.email);
-  email(fieldPath.email);
+const loginForm = form(loginModel, (schemaPath) => {
+  debounce(schemaPath.email, 500);
+  required(schemaPath.email);
+  email(schemaPath.email);
 });
 ```
 
-NOTE: FieldPathはデータの形状をミラーリングするだけで、値やその他の状態にアクセスできません。
+NOTE: スキーマパスパラメーターは、バリデーションルールを適用するためのフィールドへのパスを提供します。フィールドの値と状態にアクセスするには、フィールドツリー（`loginForm.email()`など）を使用してください。
 
 一般的なバリデーターには次のものがあります:
 
@@ -224,8 +233,8 @@ NOTE: FieldPathはデータの形状をミラーリングするだけで、値�
 バリデーターの第2引数にオプションオブジェクトを渡すことで、エラーメッセージをカスタマイズできます:
 
 ```ts
-required(p.email, { message: 'Email is required' });
-email(p.email, { message: 'Please enter a valid email address' });
+required(schemaPath.email, { message: 'Email is required' });
+email(schemaPath.email, { message: 'Please enter a valid email address' });
 ```
 
 各フォームフィールドは、シグナルを通じてそのバリデーション状態を公開します。たとえば、`field().valid()`をチェックしてバリデーションが成功したか、`field().touched()`をチェックしてユーザーが操作したかを確認し、`field().errors()`をチェックしてバリデーションエラーのリストを取得できます。
@@ -251,4 +260,4 @@ email(p.email, { message: 'Please enter a valid email address' });
 | `pending()`  | 非同期バリデーションが進行中の場合に`true`を返します                         |
 | `errors()`   | `kind`と`message`プロパティを持つバリデーションエラーの配列を返します       |
 
-TIP: ユーザーがフィールドを操作する前にバリデーションメッセージが表示されるのを避けるために、`field().touched()`がtrueになった後にのみエラーを表示してください。
+TIP: `debounce()`バリデーションルールを使用して、ユーザーが入力を停止するかフィールドを離れるまでエラー表示を遅延させます。これにより、ユーザーがまだ入力中にエラーが表示されるのを防ぎます。

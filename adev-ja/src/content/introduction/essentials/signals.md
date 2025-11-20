@@ -25,7 +25,7 @@ firstName.update(name => name.toUpperCase());
 
 Angularは、シグナルがどこで読み取られ、いつ更新されたかを追跡します。フレームワークはこの情報を使用して、新しい状態をDOMに更新するなど、追加の作業をします。時間の経過とともに変化するシグナル値に応答するこの機能は、*リアクティビティ*として知られています。
 
-## 算出式
+## 算出式 {#computed-expressions}
 
 `computed`は、他のシグナルに基づいて値を生成するシグナルです。
 
@@ -51,7 +51,7 @@ firstName.set('Jaime');
 console.log(firstNameCapitalized()); // JAIME
 ```
 
-## コンポーネントでシグナルを使う
+## コンポーネントでシグナルを使う {#using-signals-in-components}
 
 `signal`と`computed`をコンポーネント内で使用して、状態を作成および管理します。
 
@@ -70,7 +70,7 @@ export class UserProfile {
 
 TIP: Angularのシグナルについてもっと知りたいですか？[詳細なシグナルガイド](guide/signals)を参照してください。
 
-## 次の手順
+## 次の手順 {#next-step}
 
 動的なデータの宣言と管理方法を学習したので、テンプレート内でそのデータを使用する方法を学習する時間です。
 

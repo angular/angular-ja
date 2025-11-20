@@ -3,7 +3,7 @@
 
 オンラインスターターを使ってAngularをすぐに始めましょう。または、ターミナルを使ってローカルでも開始できます。
 
-## オンラインで試す
+## オンラインで試す {#play-online}
 
 プロジェクトを設定せずに、ブラウザでAngularを試したい場合は、オンラインサンドボックスを使うことができます。
 
@@ -13,43 +13,47 @@
   </docs-card>
 </docs-card-container>
 
-## ローカルに新しいプロジェクトを設定する
+## ローカルに新しいプロジェクトを設定する {#set-up-a-new-project-locally}
 
 新しいプロジェクトを開始する場合、Gitなどのツールを使用するために、ローカルにプロジェクトを作成するのが一般的です。
 
-### 前提条件
+### 前提条件 {#prerequisites}
 
 - **Node.js** - [v20.19.0以降](/reference/versions)
 - **テキストエディタ** - [Visual Studio Code](https://code.visualstudio.com/)を推奨
 - **ターミナル** - Angular CLIコマンドを実行するために必要
 - **開発ツール** - 開発ワークフローを改善するために、[Angular Language Service](/tools/language-service) をおすすめします
 
-### 手順
+### 手順 {#instructions}
 
 以下のガイドは、ローカルにAngularプロジェクトを設定する手順を説明します。
 
-#### Angular CLIをインストールする
+#### Angular CLIをインストールする {#install-angular-cli}
 
 ターミナルを開き（[Visual Studio Code](https://code.visualstudio.com/)を使用している場合は、[統合ターミナル](https://code.visualstudio.com/docs/editor/integrated-terminal)を開くことができます）、次のコマンドを実行します。
 
 <docs-code-multifile>
   <docs-code
     header="npm"
+    language="shell"
     >
     npm install -g @angular/cli
     </docs-code>
   <docs-code
     header="pnpm"
+    language="shell"
     >
     pnpm install -g @angular/cli
     </docs-code>
   <docs-code
     header="yarn"
+    language="shell"
     >
     yarn global add @angular/cli
     </docs-code>
   <docs-code
     header="bun"
+    language="shell"
     >
     bun install -g @angular/cli
     </docs-code>
@@ -58,15 +62,13 @@
 
 WindowsまたはUnixでこのコマンドを実行する際に問題が発生した場合は、[CLIドキュメント](/tools/cli/setup-local#install-the-angular-cli)を参照してください。
 
-#### 新しいプロジェクトを作成する
+#### 新しいプロジェクトを作成する {#create-a-new-project}
 
 ターミナルで、CLIコマンド`ng new`を実行し、目的のプロジェクト名を入力します。次の例では、`my-first-angular-app`というプロジェクト名を使用します。
 
-<docs-code language="shell">
-
+```shell
 ng new <project-name>
-
-</docs-code>
+```
 
 プロジェクトの設定に関するいくつかのオプションが表示されます。矢印キーとEnterキーを使ってナビゲートし、必要なオプションを選択します。
 
@@ -74,34 +76,30 @@ ng new <project-name>
 
 設定オプションを選択し、CLIがセットアップを実行すると、次のようなメッセージが表示されます。
 
-```shell
+```text
 ✔ Packages installed successfully.
     Successfully initialized git.
 ```
 
 これで、ローカルにプロジェクトを実行する準備が整いました！
 
-#### ローカルに新しいプロジェクトを実行する
+#### ローカルに新しいプロジェクトを実行する {#running-your-new-project-locally}
 
 ターミナルで、新しいAngularプロジェクトに切り替えます。
 
-<docs-code language="shell">
-
+```shell
 cd my-first-angular-app
-
-</docs-code>
+```
 
 この時点で、すべての依存関係がインストールされているはずです（プロジェクト内に`node_modules`フォルダの存在を確認できます）。次のコマンドを実行してプロジェクトを開始できます。
 
-<docs-code language="shell">
-
+```shell
 npm start
-
-</docs-code>
+```
 
 すべてが正常に完了すると、ターミナルに次のような確認メッセージが表示されます。
 
-```shell
+```text
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   ➜  Local:   http://localhost:4200/
@@ -110,10 +108,10 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
 
 これで、`Local`のパス（例：`http://localhost:4200`）にアクセスしてアプリケーションを確認できます。コーディングを楽しんでください！🎉
 
-### 開発でのAIの使用
+### 開発でのAIの使用 {#using-ai-for-development}
 
 AI搭載IDEでの開発を開始するには、[Angularプロンプトルールとベストプラクティスをチェックしてください](/ai/develop-with-ai)。
 
-## 次のステップ
+## 次のステップ {#next-steps}
 
-Angularプロジェクトを作成したので、[基本概念ガイド](/essentials)でAngularの詳細について学ぶか、詳しいガイドからトピックを選択してください！
+Angularプロジェクトを作成したので、[基本ガイド](/essentials)でAngularの詳細について学ぶか、詳しいガイドからトピックを選択してください！

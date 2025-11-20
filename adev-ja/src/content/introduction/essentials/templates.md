@@ -4,7 +4,7 @@ Angularのテンプレート構文を使用して、動的なユーザーイン�
 
 コンポーネントテンプレートは静的なHTMLだけではありません。コンポーネントクラスのデータを使用し、ユーザーインタラクションのハンドラーを設定できます。
 
-## 動的なテキストの表示
+## 動的なテキストの表示 {#showing-dynamic-text}
 
 Angularでは、*バインディング*によって、コンポーネントのテンプレートとそのデータ間に動的な接続が作成されます。この接続により、コンポーネントのデータの変更がレンダリングされたテンプレートに自動的に反映されます。
 
@@ -15,7 +15,7 @@ Angularでは、*バインディング*によって、コンポーネントの�
   selector: 'user-profile',
   template: `<h1>Profile for {{userName()}}</h1>`,
 })
-export class TodoListItem {
+export class UserProfile {
   userName = signal('pro_programmer_123');
 }
 ```
@@ -39,7 +39,7 @@ this.userName.set('cool_coder_789');
 <h1>Profile for cool_coder_789</h1>
 ```
 
-## 動的なプロパティと属性の設定
+## 動的なプロパティと属性の設定 {#setting-dynamic-properties-and-attributes}
 
 Angularは、角括弧を使用して動的な値をDOMプロパティにバインドすることをサポートしています。
 
@@ -47,7 +47,7 @@ Angularは、角括弧を使用して動的な値をDOMプロパティにバイ�
 @Component({
   /*...*/
   // `isValidUserId`の値に基づいて、ボタンの`disabled`プロパティを設定します。
-  template: `<button [disabled]="isValidUserId()">Save changes</button>`,
+  template: `<button [disabled]="!isValidUserId()">Save changes</button>`,
 })
 export class UserProfile {
   isValidUserId = signal(false);
@@ -63,7 +63,7 @@ export class UserProfile {
 
 バインドされた値が変更されると、AngularはDOMプロパティと属性を自動的に更新します。
 
-## ユーザーインタラクションの処理
+## ユーザーインタラクションの処理 {#handling-user-interaction}
 
 Angularを使用すると、括弧を使用してテンプレート内の要素にイベントリスナーを追加できます。
 
@@ -95,7 +95,7 @@ export class UserProfile {
 }
 ```
 
-## `@if`と`@for`による制御フロー
+## `@if`と`@for`による制御フロー {#control-flow-with-if-and-for}
 
 Angularの`@if`ブロックを使用して、テンプレートの一部を条件付きで非表示および表示できます。
 
@@ -138,7 +138,7 @@ Angularは、上記の例に示すように`track`キーワードを使用して
 
 TIP: Angularテンプレートの詳細を知りたい場合は、[詳細なテンプレートガイド](guide/templates)を参照してください。
 
-## 次の手順
+## 次の手順 {#next-step}
 
 アプリケーションに動的なデータとテンプレートが用意できたので、次は特定の要素を条件付きで非表示または表示したり、要素をループ処理したりするなど、テンプレートを強化する方法を学習します。
 

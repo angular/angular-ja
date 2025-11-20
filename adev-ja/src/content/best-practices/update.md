@@ -6,20 +6,20 @@ Angularアプリケーションを最新の状態に保つことで、最先端�
 
 このドキュメントには、Angularアプリケーションとライブラリを最新の状態に保つための情報とリソースが含まれています。
 
-バージョン管理ポリシーとプラクティス（サポートと非推奨のプラクティス、リリーススケジュールを含む）については、[Angular バージョン管理とリリース](reference/releases "Angular バージョン管理とリリース")をご覧ください。
+バージョン管理ポリシーとプラクティス（サポートと非推奨のプラクティス、リリーススケジュールを含む）については、[Angular バージョン管理とリリース](reference/releases 'Angular バージョン管理とリリース')をご覧ください。
 
-HELPFUL: 現在AngularJSを使用している場合は、[AngularJS からのアップグレード](https://angular.io/guide/upgrade "Angular JS からのアップグレード")をご覧ください。
-*AngularJS* は、Angularのすべてのv1.xバージョンを表します。
+HELPFUL: 現在AngularJSを使用している場合は、[AngularJS からのアップグレード](https://angular.io/guide/upgrade 'Angular JS からのアップグレード')をご覧ください。
+_AngularJS_ は、Angularのすべてのv1.xバージョンを表します。
 
 ## 新しいリリースの通知を受け取る
 
-新しいリリースが利用可能になったときに通知を受け取るには、Twitterで [@angular](https://x.com/angular "@angular on X (formerly Twitter)") をフォローするか、[Angular ブログ](https://blog.angular.dev "Angular ブログ")を購読してください。
+新しいリリースが利用可能になったときに通知を受け取るには、X (formerly Twitter)で [@angular](https://x.com/angular '@angular on X') をフォローするか、[Angular ブログ](https://blog.angular.dev 'Angular ブログ')を購読してください。
 
 ## 新しい機能について学ぶ
 
-何が新しくなったのか？何が変わったのか？最新のリリースに関する最も重要な情報をAngularブログの[リリースアナウンスメント]( https://blog.angular.dev/ "Angular ブログ - リリースアナウンスメント")で共有しています。
+何が新しくなったのか？何が変わったのか？最新のリリースに関する最も重要な情報をAngularブログの[リリースアナウンスメント](https://blog.angular.dev/ 'Angular ブログ - リリースアナウンスメント')で共有しています。
 
-バージョン別に整理された変更の完全なリストを確認するには、[Angularの変更履歴](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angularの変更履歴")をご覧ください。
+バージョン別に整理された変更の完全なリストを確認するには、[Angularの変更履歴](https://github.com/angular/angular/blob/main/CHANGELOG.md 'Angularの変更履歴')をご覧ください。
 
 ## Angular のバージョンを確認する
 
@@ -27,7 +27,7 @@ HELPFUL: 現在AngularJSを使用している場合は、[AngularJS からのア
 
 ## Angular の最新バージョンを見つける
 
-Angularの最新の安定したリリースバージョンは、"Version"の下にある[npm](https://www.npmjs.com/package/@angular/core "Angular on npm")に表示されます。たとえば、`16.2.4`です。
+Angularの最新の安定したリリースバージョンは、"Version"の下にある[npm](https://www.npmjs.com/package/@angular/core 'Angular on npm')に表示されます。たとえば、`16.2.4`です。
 
 また、CLIコマンド [`ng update`](cli/update) を使用して、Angularの最新バージョンを見つけることもできます。
 デフォルトでは、[`ng update`](cli/update)（追加の引数なし）は、使用可能なアップデートをリストします。
@@ -43,22 +43,22 @@ Angularアップデートガイドは、指定した現在のバージョンと�
 簡単なアップデートの場合は、CLIコマンド [`ng update`](cli/update) で十分です。
 追加の引数なしで、[`ng update`](cli/update)は、使用可能なアップデートをリストし、アプリケーションを最新バージョンにアップデートするための推奨される手順を提供します。
 
-[Angularのバージョン管理とリリース](reference/releases#versioning "Angular リリースプラクティス、バージョン管理")では、リリースのバージョン番号に基づいて期待できる変更レベルについて説明しています。
+[Angularのバージョン管理とリリース](reference/releases#versioning 'Angular リリースプラクティス、バージョン管理')では、リリースのバージョン番号に基づいて期待できる変更レベルについて説明しています。
 また、サポートされているアップデートパスについても説明しています。
 
 ## リソースの概要
 
-* リリースアナウンスメント:
-    [Angular ブログ - リリースに関する最近のアナウンスメント](https://blog.angular.dev/ "Angular ブログの最近のリリースに関するアナウンスメント")
+- リリースアナウンスメント:
+  [Angular ブログ - リリースに関する最近のアナウンスメント](https://blog.angular.dev/ 'Angular ブログの最近のリリースに関するアナウンスメント')
 
-* リリースの詳細:
-    [Angularの変更履歴](https://github.com/angular/angular/blob/main/CHANGELOG.md "Angularの変更履歴")
+- リリースの詳細:
+  [Angularの変更履歴](https://github.com/angular/angular/blob/main/CHANGELOG.md 'Angularの変更履歴')
 
-* アップデート手順:
-    [Angular アップデートガイド](update-guide)
+- アップデート手順:
+  [Angular アップデートガイド](update-guide)
 
-* アップデートコマンドリファレンス:
-    [Angular CLI `ng update` コマンドリファレンス](cli/update)
+- アップデートコマンドリファレンス:
+  [Angular CLI `ng update` コマンドリファレンス](cli/update)
 
-* バージョン管理、リリース、サポート、および非推奨のプラクティス:
-    [Angular バージョン管理とリリース](reference/releases "Angular バージョン管理とリリース")
+- バージョン管理、リリース、サポート、および非推奨のプラクティス:
+  [Angular バージョン管理とリリース](reference/releases 'Angular バージョン管理とリリース')

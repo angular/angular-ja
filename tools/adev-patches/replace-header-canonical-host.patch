@@ -1,0 +1,20 @@
+diff --git a/adev/src/app/core/services/header.service.ts b/adev/src/app/core/services/header.service.ts
+index ac27b818c4..3c087a04bb 100644
+--- a/adev/src/app/core/services/header.service.ts
++++ b/adev/src/app/core/services/header.service.ts
+@@ -3,13 +3,13 @@
+  * Copyright Google LLC All Rights Reserved.
+  *
+  * Use of this source code is governed by an MIT-style license that can be
+- * found in the LICENSE file at https://angular.dev/license
++ * found in the LICENSE file at https://angular.jp/license
+  */
+ 
+ import {DOCUMENT} from '@angular/common';
+ import {Injectable, inject} from '@angular/core';
+ 
+-const ANGULAR_DEV = 'https://angular.dev';
++const ANGULAR_DEV = 'https://angular.jp';
+ 
+ /**
+  * Information about the deployment of this application.

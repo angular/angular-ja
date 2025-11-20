@@ -68,9 +68,9 @@ set?: Partial<T>;
 | `overridePipe`           | 指定されたパイプクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                                                                                                                                             |
 
 |
-`inject` | 現在の `TestBed` インジェクターからサービスを取得します。`inject` 関数は、この目的には多くの場合で十分です。ただし、`inject` は、サービスを提供できない場合にエラーをスローします。 <br /> サービスがオプションの場合どうすればよいですか？ <br /> `TestBed.inject()` メソッドは、オプションの第 2 パラメーターとして、Angular がプロバイダーを見つけられない場合に返すオブジェクト（この例では `null`）を取ります。 <docs-code header="app/demo/demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="testbed-get-w-null"/> `TestBed.inject` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
+`inject` | 現在の `TestBed` インジェクターからサービスを取得します。`inject` 関数は、この目的には多くの場合で十分です。ただし、`inject` は、サービスを提供できない場合にエラーをスローします。 <br /> サービスがオプションの場合どうすればよいですか？ <br /> `TestBed.inject()` メソッドは、オプションの第2パラメーターとして、Angularがプロバイダーを見つけられない場合に返すオブジェクト（この例では `null`）を取ります。 <docs-code header="app/demo/demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="testbed-get-w-null"/> `TestBed.inject` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
 |
-`initTestEnvironment` | テストの実行全体でテスト環境を初期化します。 <br /> テストシムはこれを実行するため、自分で呼び出す必要はほとんどありません。 <br /> このメソッドは _ちょうど 1 回_ 呼び出します。テストの実行中にこのデフォルトを変更するには、最初に `resetTestEnvironment` を呼び出します。 <br /> Angular コンパイラーファクトリ、`PlatformRef`、およびデフォルトの Angular テストモジュールを指定します。ブラウザ以外のプラットフォームの代替手段は、`@angular/platform-<platform_name>/testing/<platform_name>` という一般的な形式で利用できます。 |
+`initTestEnvironment` | テストの実行全体でテスト環境を初期化します。 <br /> テストシムはこれを実行するため、自分で呼び出す必要はほとんどありません。 <br /> このメソッドは _ちょうど 1 回_ 呼び出します。テストの実行中にこのデフォルトを変更するには、最初に `resetTestEnvironment` を呼び出します。 <br /> Angularコンパイラーファクトリ、`PlatformRef`、およびデフォルトのAngularテストモジュールを指定します。ブラウザ以外のプラットフォームの代替手段は、`@angular/platform-<platform_name>/testing/<platform_name>` という一般的な形式で利用できます。 |
 | `resetTestEnvironment` | デフォルトのテストモジュールを含む、初期テスト環境をリセットします。 |
 
 `TestBed` インスタンスのメソッドのいくつかは、静的な `TestBed` _クラス_ メソッドではカバーされていません。

@@ -152,7 +152,7 @@ export class MyComponent {
 
 ### 子コンポーネントでのカスタムプロパティの設定 {#setting-custom-properties-on-children-compoents}
 
-または、[スタイルバインディング](guide/templates/binding#css-style-properties)を使用して、子コンポーネントのホスト要素にCSSカスタムプロパティを設定することもできます。
+また、[スタイルバインディング](guide/templates/binding#css-style-properties)を使用して、子コンポーネントのホスト要素にCSSカスタムプロパティを設定できます。
 
 ```angular-ts
 @Component({

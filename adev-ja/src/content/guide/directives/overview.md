@@ -67,7 +67,7 @@ HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` �
 完全な例では、ユーザーが `Refresh currentClasses` ボタンをクリックしたときに、`ngOnInit()` を使用して最初に `setCurrentClasses()` を呼び出します。
 これらの手順は、`ngClass` を実装するために必要ではありません。
 
-## `NgStyle` を使用してインラインスタイルを設定する
+## `NgStyle` を使用してインラインスタイルを設定する {#setting-inline-styles-with-ngstyle}
 
 HELPFUL: To add or remove a _single_ style, use [style bindings](guide/templates/binding#css-class-and-style-property-bindings) rather than `NgStyle`.
 

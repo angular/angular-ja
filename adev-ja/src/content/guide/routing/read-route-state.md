@@ -181,6 +181,43 @@ export class ProductListComponent implements OnInit {
 
 詳細については、[QueryParamsHandlingに関する公式ドキュメント](/api/router/QueryParamsHandling)を参照してください。
 
+### マトリックスパラメーター {#matrix-parameters}
+
+マトリックスパラメーターは、ルート全体に適用されるのではなく、特定のURLセグメントに属するオプションのパラメーターです。`?` の後に現れてグローバルに適用されるクエリパラメーターとは異なり、マトリックスパラメーターはセミコロン (`;`) を使用し、個々のパスセグメントにスコープされます。
+
+マトリックスパラメーターは、ルート定義やマッチング動作に影響を与えることなく、特定のルートセグメントに補助的なデータを渡す必要がある場合に役立ちます。クエリパラメーターと同様に、ルート設定で定義する必要はありません。
+
+```ts
+// URL形式: /path;key=value
+// 複数のパラメーター: /path;key1=value1;key2=value2
+
+// マトリックスパラメーターでナビゲート
+this.router.navigate(['/awesome-products', { view: 'grid', filter: 'new' }]);
+// 結果のURL: /awesome-products;view=grid;filter=new
+```
+
+**ActivatedRouteの使用**
+
+```ts
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component(/* ... */)
+export class AwesomeProducts  {
+  private route = inject(ActivatedRoute);
+
+  constructor() {
+    // paramsを介してマトリックスパラメーターにアクセス
+    this.route.params.subscribe((params) => {
+      const view = params['view']; // 例: 'grid'
+      const filter = params['filter']; // 例: 'new'
+    });
+  }
+}
+```
+
+NOTE: `ActivatedRoute`を使用する代わりに、`withComponentInputBinding`を使用する場合、マトリックスパラメーターはコンポーネント入力にもバインドされます。
+
 ## RouterLinkActiveでアクティブな現在のルートを検出する {#detect-active-current-route-with-routerlinkactive}
 
 `RouterLinkActive`ディレクティブを使用すると、現在の有効なルートに基づいてナビゲーション要素を動的にスタイル設定できます。これは、ユーザーにアクティブなルートが何かを知らせるために、ナビゲーション要素でよく使用されます。

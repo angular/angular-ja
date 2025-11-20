@@ -187,7 +187,7 @@ const routes: Routes = [
     children: [
       // /users/list - 保護されている
       { path: 'list', component: UserListComponent },
-      // /useres/detail/:id - 保護されている
+      // /users/detail/:id - 保護されている
       { path: 'detail/:id', component: UserDetailComponent }
     ]
   },

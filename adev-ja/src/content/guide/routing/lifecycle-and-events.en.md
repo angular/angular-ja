@@ -38,7 +38,7 @@ import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
 @Component({ ... })
 export class RouterEventsComponent {
   private readonly router = inject(Router);
-  
+
   constructor() {
     // Subscribe to router events and react to events
     this.router.events.pipe(takeUntilDestroyed()).subscribe((event: Event) => {
@@ -102,7 +102,7 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent {
   private router = inject(Router);
-  
+
   readonly loading = toSignal(
     this.router.events.pipe(
       map(() => !!this.router.getCurrentNavigation())
@@ -116,7 +116,7 @@ export class AppComponent {
 
 Track page views for analytics:
 
-```typescript
+```ts
 import { Component, inject, signal, effect } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -151,6 +151,7 @@ Handle navigation errors gracefully and provide user feedback:
 ```angular-ts
 import { Component, inject, signal } from '@angular/core';
 import { Router, NavigationStart, NavigationError, NavigationCancel, NavigationCancellationCode } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-error-handler',
@@ -176,7 +177,7 @@ export class ErrorHandlerComponent {
         this.errorMessage.set('Failed to load page. Please try again.');
       } else if (event instanceof NavigationCancel) {
         console.warn('Navigation cancelled:', event.reason);
-        if (event.reason === NavigationCancellationCode.GuardRejected) {
+        if (event.code === NavigationCancellationCode.GuardRejected) {
           this.errorMessage.set('Access denied. Please check your permissions.');
         }
       }

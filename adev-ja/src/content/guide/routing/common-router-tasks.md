@@ -11,7 +11,7 @@
 そのコンポーネントは、食料品アイテムの `id` を取得して、ユーザーに正しい情報を表示できるようにする必要があります。
 
 ルートを使用して、このタイプの情報をアプリケーションコンポーネントに渡します。
-これを行うには、`provideRouter` を使用した [`withComponentInputBinding`](api/router/withComponentInputBinding) 機能、または `RouterModule.forRoot` の `bindToComponentInputs` オプションを使用します。
+これを行うには、`provideRouter` を使用した `withComponentInputBinding` 機能、または `RouterModule.forRoot` の `bindToComponentInputs` オプションを使用します。
 
 ルートから情報を取得するには:
 
@@ -35,7 +35,7 @@ providers: [
 
 ```ts
 id = input.required<string>()
-hero = computed(() => this.service.getHero(id));
+hero = computed(() => this.service.getHero(id()));
 ```
 
 </docs-step>
@@ -60,7 +60,7 @@ internalId = linkedSignal(() => this.id() ?? getDefaultId());
 
 NOTE: 静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータなど、すべてのルートデータをキーと値のペアでコンポーネントの入力にバインドできます。
 親コンポーネントのルート情報を使用する場合は、ルーターの `paramsInheritanceStrategy` オプションを設定する必要があります。
-`withRouterConfig({paramsInheritanceStrategy: 'always'})`
+`withRouterConfig({paramsInheritanceStrategy: 'always'})` 。他の利用可能な設定の詳細については、[ルーター設定オプション](guide/routing/customizing-route-behavior#router-configuration-options)を参照してください。
 
 ## 404 ページの表示 {#displaying-a-404-page}
 
@@ -103,6 +103,8 @@ const routes: Routes = [
 ```angular-html
 <a [routerLink]="['/crisis-center', { foo: 'foo' }]">Crisis Center</a>
 ```
+
+この構文はマトリックスパラメータを渡します。これは、特定のURLセグメントに関連付けられたオプションのパラメータです。[マトリックスパラメータ](/guide/routing/read-route-state#matrix-parameters)の詳細をご覧ください。
 
 これらの3つの例は、ルーティングが1レベルのアプリケーションのニーズを満たしています。
 ただし、危機センターなどの子ルーターを使用すると、新しいリンク配列の選択肢が生まれます。

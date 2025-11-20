@@ -1,32 +1,20 @@
 # 注入コンテキスト
 
 依存性の注入 (DI) システムは、内部的に現在のインジェクターが利用可能なランタイムコンテキストに依存しています。
+
 これは、インジェクターは、このようなコンテキストでコードが実行される場合にのみ動作することを意味します。
 
 注入コンテキストは、次の状況で使用できます。
 
-* DIシステムによってインスタンス化されるクラス（`@Injectable` または `@Component` など）の構築（`constructor` を使用）中。
-* このようなクラスのフィールドのイニシャライザー。
-* `Provider` または `@Injectable` の `useFactory` に指定されたファクトリー関数。
-* `InjectionToken` に指定された `factory` 関数。
-* 注入コンテキストで実行されるスタックフレーム内。
+- DIシステムによってインスタンス化されるクラス（`@Injectable` または `@Component` など）の構築（`constructor` を使用）中。
+- このようなクラスのフィールドのイニシャライザー。
+- `Provider` または `@Injectable` の `useFactory` に指定されたファクトリー関数。
+- `InjectionToken` に指定された `factory` 関数。
+- 注入コンテキストで実行されるスタックフレーム内。
 
 注入コンテキストにいるかどうかを知ることで、[`inject`](api/core/inject) 関数を使用してインスタンスを注入できます。
 
-## クラスコンストラクター
-
-DIシステムがクラスをインスタンス化するたびに、注入コンテキスト内でインスタンス化されます。これは、フレームワーク自体によって処理されます。クラスのコンストラクターは、そのランタイムコンテキストで実行され、これにより [`inject`](api/core/inject) 関数を使用してトークンを注入できます。
-
-<docs-code language="typescript" highlight="[[3],[6]]">
-class MyComponent  {
-  private service1: Service1;
-  private service2: Service2 = inject(Service2); // コンテキスト内
-
-  constructor() {
-    this.service1 = inject(Service1) // コンテキスト内
-  }
-}
-</docs-code>
+NOTE: クラスコンストラクターとフィールドイニシャライザーでの `inject()` の基本的な使用例については、[概要ガイド](guide/di/overview#where-can-inject-be-used)を参照してください。
 
 ## コンテキスト内のスタックフレーム
 
@@ -66,7 +54,32 @@ export class HeroService {
 
 ## コンテキストのアサート
 
-Angularは、現在のコンテキストが注入コンテキストであることをアサートするための `assertInInjectionContext` ヘルパー関数を提供します。
+Angularは、現在のコンテキストが注入コンテキストであることをアサートし、そうでない場合は明確なエラーをスローするための `assertInInjectionContext` ヘルパー関数を提供します。呼び出し元の関数への参照を渡すと、エラーメッセージが正しいAPIエントリーポイントを指し示すようになります。これにより、デフォルトの汎用的な注入エラーよりも明確で実用的なメッセージが生成されます。
+
+```ts
+import { ElementRef, assertInInjectionContext, inject } from '@angular/core';
+
+export function injectNativeElement<T extends Element>(): T {
+    assertInInjectionContext(injectNativeElement);
+    return inject(ElementRef).nativeElement;
+}
+```
+
+このヘルパーは、**注入コンテキスト内から**（コンストラクター、フィールドイニシャライザー、プロバイダーファクトリー、または `runInInjectionContext` 経由で実行されるコード）呼び出すことができます。
+
+```ts
+import { Component, inject } from '@angular/core';
+import { injectNativeElement } from './dom-helpers';
+
+@Component({ /* … */ })
+export class PreviewCard {
+  readonly hostEl = injectNativeElement<HTMLElement>(); // フィールドイニシャライザーは注入コンテキスト内で実行されます。
+
+  onAction() {
+    const anotherRef = injectNativeElement<HTMLElement>(); // 失敗: 注入コンテキスト外で実行されます。
+  }
+}
+```
 
 ## コンテキスト外での DI の使用
 

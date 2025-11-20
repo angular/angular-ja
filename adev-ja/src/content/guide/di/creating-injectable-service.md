@@ -21,7 +21,7 @@ Angularは、アプリケーションロジックをサービスに分解し、�
 
 ブラウザコンソールにログ記録するサービスクラスの例を以下に示します。
 
-<docs-code header="src/app/logger.service.ts (class)" language="typescript">
+<docs-code header="logger.service.ts (class)" language="typescript">
 export class Logger {
   log(msg: unknown) { console.log(msg); }
   error(msg: unknown) { console.error(msg); }
@@ -33,23 +33,23 @@ export class Logger {
 たとえば、次の`HeroService`は`Logger`サービスに依存し、`BackendService`を使用してヒーローを取得します。
 そのサービスは、さらに`HttpClient`サービスに依存して、サーバーからヒーローを非同期に取得する場合があります。
 
-<docs-code header="src/app/hero.service.ts" language="typescript"
+<docs-code header="hero.service.ts" language="typescript"
            highlight="[7,8,12,13]">
 import { inject } from "@angular/core";
 
 export class HeroService {
-  private heroes: Hero[] = [];
+private heroes: Hero[] = [];
 
-  private backend = inject(BackendService);
-  private logger = inject(Logger);
+private backend = inject(BackendService);
+private logger = inject(Logger);
 
-  async getHeroes() {
-    // Fetch
-    this.heroes = await this.backend.getAll(Hero);
-    // Log
-    this.logger.log(`Fetched ${this.heroes.length} heroes.`);
-    return this.heroes;
-  }
+async getHeroes() {
+// Fetch
+this.heroes = await this.backend.getAll(Hero);
+// Log
+this.logger.log(`Fetched ${this.heroes.length} heroes.`);
+return this.heroes;
+}
 }
 </docs-code>
 
@@ -68,11 +68,11 @@ ng generate service heroes/hero
 
 このコマンドは、次のデフォルトの`HeroService`を作成します。
 
-<docs-code header="src/app/heroes/hero.service.ts (CLI-generated)" language="typescript">
+<docs-code header="heroes/hero.service.ts (CLI-generated)" language="typescript">
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+providedIn: 'root',
 })
 export class HeroService {}
 </docs-code>
@@ -82,18 +82,18 @@ export class HeroService {}
 
 ヒーローのモックデータを取得するために、`mock.heroes.ts`からヒーローを返す`getHeroes()`メソッドを追加します。
 
-<docs-code header="src/app/heroes/hero.service.ts" language="typescript">
+<docs-code header="heroes/hero.service.ts" language="typescript">
 import { Injectable } from '@angular/core';
 import { HEROES } from './mock-heroes';
 
 @Injectable({
-  // このサービスがルートアプリケーションインジェクターによって作成されることを宣言します。
-  providedIn: 'root',
+// このサービスがルートアプリケーションインジェクターによって作成されることを宣言します。
+providedIn: 'root',
 })
 export class HeroService {
-  getHeroes() {
-    return HEROES;
-  }
+getHeroes() {
+return HEROES;
+}
 }
 </docs-code>
 
@@ -106,17 +106,17 @@ export class HeroService {
 次の例では、`HeroListComponent`内で`HeroService`を指定しています。
 `heroService`の型は`HeroService`です。
 
-<docs-code header="src/app/heroes/hero-list.component.ts" language="typescript">
+<docs-code header="heroes/hero-list.component.ts" language="typescript">
 import { inject } from "@angular/core";
 
 export class HeroListComponent {
-  private heroService = inject(HeroService);
+private heroService = inject(HeroService);
 }
 </docs-code>
 
 コンポーネントのコンストラクターを使用しても同様に、サービスをコンポーネントに注入できます:
 
-<docs-code header="src/app/heroes/hero-list.component.ts (constructor signature)" language="typescript">
+<docs-code header="heroes/hero-list.component.ts (constructor signature)" language="typescript">
   constructor(private heroService: HeroService)
 </docs-code>
 
@@ -127,22 +127,22 @@ export class HeroListComponent {
 サービスが別のサービスに依存する場合、コンポーネントへの注入と同じパターンに従います。
 次の例では、`HeroService`は`Logger`サービスに依存して、そのアクティビティを報告します。
 
-<docs-code header="src/app/heroes/hero.service.ts" language="typescript"
+<docs-code header="heroes/hero.service.ts" language="typescript"
            highlight="[3,9,12]">
 import { inject, Injectable } from '@angular/core';
 import { HEROES } from './mock-heroes';
 import { Logger } from '../logger.service';
 
 @Injectable({
-  providedIn: 'root',
+providedIn: 'root',
 })
 export class HeroService {
-  private logger = inject(Logger);
+private logger = inject(Logger);
 
-  getHeroes() {
-    this.logger.log('Getting heroes.');
-    return HEROES;
-  }
+getHeroes() {
+this.logger.log('Getting heroes.');
+return HEROES;
+}
 }
 </docs-code>
 

@@ -2750,4 +2750,165 @@ export const RECOMMENDATIONS: Step[] = [
     action:
       'ルート設定がより厳密に検証されるようになりました。`redirectTo`と`canMatch`保護を組み合わせたルートはエラーを生成します。これらのプロパティはデフォルトで互いに互換性がないためです。',
   },
+  {
+    action:
+      "アプリケーションのプロジェクトディレクトリで、`ng update @angular/core@20 @angular/cli@21` を実行して、アプリケーションを Angular v21 に更新します。",
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 2100,
+    possibleIn: 2100,
+    step: '21.0.0_ng_update',
+  },
+
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Basic,
+    material: true,
+    step: 'update @angular/material',
+    action: '`ng update @angular/material@21` を実行します。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-update-signal-input-access-in-custom-elements',
+    action:
+      'Angular カスタム要素でシグナル入力を使用する場合、デコレーターベースの入力の動作に合わせて、プロパティアクセスを関数呼び出し（`elementRef.newInput()`）ではなく直接アクセス（`elementRef.newInput`）に更新してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-zone-scheduler-behavior-change',
+    action:
+      'ZoneJS ポリフィルなしで `provideZoneChangeDetection` を使用している場合、内部スケジューラーが常に有効になります。以前は無効なスケジューラーに依存していた動作が変わる可能性があるため、アプリケーションのタイミングを確認してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Basic,
+    step: '21.0.0-provide-zone-change-detection-required',
+    action:
+      "Zone ベースのアプリケーションは、アプリケーションのルートプロバイダーに `provideZoneChangeDetection()` を追加する必要があります。スタンドアロンアプリの場合は `bootstrapApplication` 呼び出しに、NgModule ベースのアプリの場合はルート `AppModule` の `providers` 配列に追加してください。自動マイグレーションがこれを処理するはずです。",
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-remove-interpolation-option',
+    action:
+      "@Component デコレーターから 'interpolation' プロパティを削除してください。Angular はデフォルトの '{{' と '}}' 補間マーカーのみをサポートするようになりました。",
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-remove-moduleid-property',
+    action:
+      "@Component デコレーターから 'moduleId' プロパティを削除してください。このプロパティはテンプレートとスタイルの相対URLを解決するために使用されていましたが、現在はモダンなビルドツールによって処理される機能です。",
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-ng-component-outlet-content-type-change',
+    action:
+      '`ngComponentOutletContent` 入力は `any[][]` から `Node[][]` に厳密に型付けされました。この入力に渡す値を新しい `Node[][] | undefined` 型に合わせて更新してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Basic,
+    step: '21.0.0-stricter-host-binding-type-checking',
+    action:
+      "ホストバインディングの型チェックがデフォルトで有効になり、新しいビルドエラーが表示される可能性があります。新しい型エラーを解決するか、`tsconfig.json` の `angularCompilerOptions` に `typeCheckHostBindings: false` を設定してください。",
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Basic,
+    step: '21.0.0-typescript-5.9-required',
+    action:
+      "プロジェクトの TypeScript バージョンを 5.9 以降に更新してください。通常、`ng update` コマンドがこれを自動的に処理します。",
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-remove-application-config-from-platform-browser',
+    action:
+      '`@angular/platform-browser` からの `ApplicationConfig` エクスポートは削除されました。代わりに `@angular/core` から `ApplicationConfig` を使用するようにインポートを更新してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-remove-ignore-changes-outside-zone-option',
+    action:
+      'ZoneJS を設定するための `ignoreChangesOutsideZone` オプションは使用できなくなりました。polyfills ファイルの ZoneJS 設定からこのオプションを削除してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-testbed-rethrows-errors-with-provideZoneChangeDetection',
+    action:
+      '`provideZoneChangeDetection` を使用するテストを更新してください。TestBed がエラーを再スローするようになりました。テストの根本的な問題を修正するか、最後の手段として `rethrowApplicationErrors: false` で TestBed を設定してこの動作を無効にしてください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-router-navigation-timing-changed',
+    action:
+      'ルーターナビゲーションのタイミングに依存するテストを更新してください。ナビゲーションが完了するまでに追加のマイクロタスクがかかる場合があります。アサーションを行う前にナビゲーションが完全に完了していることを確認してください。例えば、`fakeAsync` と `flush` を使用するか、Promises/Observables が解決されるのを待ちます。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-test-bed-provides-fake-platform-location',
+    action:
+      '`TestBed` を使用するテストは、新しいフェイク `PlatformLocation` の影響を受ける可能性があります。テストが失敗した場合は、`@angular/common/testing` から古い `MockPlatformLocation` を `{provide: PlatformLocation, useClass: MockPlatformLocation}` で `TestBed` 設定に提供してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-remove-upgrade-adapter',
+    action:
+      '`UpgradeAdapter` は削除されました。Angular/AngularJS ハイブリッドアプリケーションを更新して、代わりに `@angular/upgrade/static` パッケージの静的 API を使用してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-form-array-directive-conflict',
+    action:
+      '新しいスタンドアロン `formArray` ディレクティブが既存のカスタムディレクティブや入力と競合する可能性があります。リアクティブフォームを使用する要素で `FormArray` という名前のカスタムディレクティブや `formArray` という名前の入力の名前を変更して、競合を解決してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-ngmodulefactory-removed',
+    action:
+      '非推奨の `NgModuleFactory` は削除されました。`NgModuleFactory` を使用するコードを更新して、代わりに `NgModule` を直接使用してください。これは動的コンポーネントローディングシナリオで一般的です。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-emit-declaration-only-not-supported',
+    action:
+      '`emitDeclarationOnly` TypeScript コンパイラーオプションはサポートされていません。Angular コンパイラーが正しく機能するように、`tsconfig.json` ファイルでこれを無効にしてください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-lastsuccessfulnavigation-is-a-signal',
+    action:
+      'Router の `lastSuccessfulNavigation` プロパティがシグナルに変換されました。その値を取得するには、関数として呼び出す必要があります: `router.lastSuccessfulNavigation()`。',
+  },
 ];

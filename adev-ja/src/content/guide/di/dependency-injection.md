@@ -25,7 +25,7 @@ class HeroService {}
 - [**推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する](#preferred-at-the-application-root-level-using-providedin)
 - [コンポーネントレベルで提供する](#コンポーネントレベルで提供する)
 - [`ApplicationConfig` を使用してアプリケーションのルートレベルで提供する](#at-the-application-root-level-using-applicationconfig)
-- [`NgModule` ベースのアプリケーション](#ngmoduleベースのアプリケーション)
+- [`NgModule` ベースのアプリケーション](#ngmodule-based-applications)
 
 ### **推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する {#preferred-at-the-application-root-level-using-providedin}
 
@@ -85,7 +85,7 @@ bootstrapApplication(AppComponent, appConfig)
 
 NOTE: このようにサービスを宣言すると、`HeroService` は、サービスが使用されていなくても、常にアプリケーションに含まれます。
 
-### `NgModule` ベースのアプリケーション
+### `NgModule` ベースのアプリケーション {#ngmodule-based-applications}
 
 `@NgModule` ベースのアプリケーションは、`@NgModule` デコレーターの `providers` フィールドを使用して、アプリケーションレベルで使用可能なサービスまたはその他の `Injectable` を提供します。
 

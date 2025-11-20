@@ -21,7 +21,7 @@ CSSで背景画像を使用している場合は、[こちらから開始して�
 
 **NOTE: `NgOptimizedImage` ディレクティブはAngularバージョン15で安定版機能となりましたが、バックポートされており、バージョン13.4.0および14.3.0でも安定版機能として利用可能です。**
 
-## はじめに
+## はじめに {#getting-started}
 
 <docs-workflow>
 <docs-step title="`NgOptimizedImage`ディレクティブのインポート">
@@ -202,7 +202,7 @@ NgOptimizedImageには、アプリケーションの読み込みパフォーマ�
 
 画像オリジンに対する[`preconnect`リソースヒント](https://web.dev/preconnect-and-dns-prefetch)は、LCP画像が可能な限り迅速に読み込まれることを保証します。
 
-プリコネクトリンクは、[ローダー](#optional-set-up-a-loader)への引数として提供されたドメインに対して自動的に生成されます。画像オリジンを自動的に識別できない場合、またはLCP画像に対してプリコネクトリンクが検出されない場合、`NgOptimizedImage`は開発中に警告を表示します。その場合、`index.html`にリソースヒントを手動で追加する必要があります。ドキュメントの`<head>`内に、以下に示すように`rel="preconnect"`を持つ`link`タグを追加します。
+プリコネクトリンクは、[ローダー](#configuring-an-image-loader-for-ngoptimizedimage)への引数として提供されたドメインに対して自動的に生成されます。画像オリジンを自動的に識別できない場合、またはLCP画像に対してプリコネクトリンクが検出されない場合、`NgOptimizedImage`は開発中に警告を表示します。その場合、`index.html`にリソースヒントを手動で追加する必要があります。ドキュメントの`<head>`内に、以下に示すように`rel="preconnect"`を持つ`link`タグを追加します。
 
 ```html
 

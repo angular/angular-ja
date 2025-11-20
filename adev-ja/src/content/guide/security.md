@@ -51,7 +51,7 @@ Angularは、XSSのバグを体系的に阻止するために、すべての値�
 
 ### サニタイズとセキュリティコンテキスト {#sanitization-and-security-context}
 
-*サニタイズ*とは、信頼されていない値を検査して、DOMに挿入しても安全な値に変換することです。
+_サニタイズ_とは、信頼されていない値を検査して、DOMに挿入しても安全な値に変換することです。
 多くの場合、サニタイズは値をまったく変更しません。
 サニタイズはコンテキストに依存します。
 例えば、CSSでは無害な値も、URLでは危険な可能性があります。
@@ -72,7 +72,7 @@ Angularは、信頼されていない値をHTMLとURLに対してサニタイズ
 
 次のテンプレートは、`htmlSnippet`の値をバインディングします。1つは要素の内容に補間して、もう1つは要素の`innerHTML`プロパティにバインディングします。
 
-<docs-code header="src/app/inner-html-binding.component.html" path="adev/src/content/examples/security/src/app/inner-html-binding.component.html"/>
+<docs-code header="inner-html-binding.component.html" path="adev/src/content/examples/security/src/app/inner-html-binding.component.html"/>
 
 補間されたコンテンツは常にエスケープされます。HTMLは解釈されず、ブラウザは要素のテキストコンテンツに角括弧を表示します。
 
@@ -80,7 +80,7 @@ HTMLを解釈するには、`innerHTML`などのHTMLプロパティにバイン�
 攻撃者が制御する可能性のある値を`innerHTML`にバインディングすると、通常はXSSの脆弱性が発生します。
 たとえば、次のようにJavaScriptを実行できます。
 
-<docs-code header="src/app/inner-html-binding.component.ts (class)" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" visibleRegion="class"/>
+<docs-code header="inner-html-binding.component.ts (class)" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" visibleRegion="class"/>
 
 Angularは、値を安全ではないと認識し、自動的にサニタイズします。これにより、`script`要素は削除されますが、`<b>`要素などの安全なコンテンツは保持されます。
 
@@ -107,21 +107,21 @@ _注意してください_。
 
 値を信頼済みとしてマークするには、`DomSanitizer`を注入し、次のいずれかのメソッドを呼び出します。
 
-* `bypassSecurityTrustHtml`
-* `bypassSecurityTrustScript`
-* `bypassSecurityTrustStyle`
-* `bypassSecurityTrustUrl`
-* `bypassSecurityTrustResourceUrl`
+- `bypassSecurityTrustHtml`
+- `bypassSecurityTrustScript`
+- `bypassSecurityTrustStyle`
+- `bypassSecurityTrustUrl`
+- `bypassSecurityTrustResourceUrl`
 
 覚えておいてください。値が安全かどうかはコンテキストに依存します。そのため、値の使用方法に適したコンテキストを選択してください。
 次のテンプレートは、`javascript:alert(...)`呼び出しへのURLを`href`にバインディングする必要があるとします。
 
-<docs-code header="src/app/bypass-security.component.html (URL)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visibleRegion="URL"/>
+<docs-code header="bypass-security.component.html (URL)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visibleRegion="URL"/>
 
 通常、Angularは自動的にURLをサニタイズし、危険なコードを無効にし、開発モードではこの操作をコンソールにログ出力します。
 これを回避するには、`bypassSecurityTrustUrl`呼び出しを使用して、URL値を信頼済みURLとしてマークします。
 
-<docs-code header="src/app/bypass-security.component.ts (trust-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visibleRegion="trust-url"/>
+<docs-code header="bypass-security.component.ts (trust-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visibleRegion="trust-url"/>
 
 <img alt="信頼済みURLから作成されたアラートボックスを示すスクリーンショット" src="assets/images/guide/security/bypass-security-component.png#medium">
 
@@ -130,9 +130,9 @@ _注意してください_。
 `<iframe src>`属性はリソースURLセキュリティコンテキストです。なぜなら、信頼されていないソースは、たとえば、うっかりしたユーザーが実行する可能性のあるファイルダウンロードを密かに送り込むことができるからです。
 これを防ぐために、コンポーネントのメソッドを呼び出して信頼済みビデオURLを作成すると、Angularは`<iframe src>`へのバインディングを許可します。
 
-<docs-code header="src/app/bypass-security.component.html (iframe)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visibleRegion="iframe"/>
+<docs-code header="bypass-security.component.html (iframe)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visibleRegion="iframe"/>
 
-<docs-code header="src/app/bypass-security.component.ts (trust-video-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visibleRegion="trust-video-url"/>
+<docs-code header="bypass-security.component.ts (trust-video-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visibleRegion="trust-video-url"/>
 
 ### コンテンツセキュリティポリシー {#content-security-policy}
 
@@ -142,21 +142,19 @@ CSPを有効にするには、Webサーバーを構成して、適切な`Content
 
 まったく新しいAngularアプリケーションに必要な最小限のポリシーは次のとおりです。
 
-<docs-code language="text">
-
+```txt
 default-src 'self'; style-src 'self' 'nonce-randomNonceGoesHere'; script-src 'self' 'nonce-randomNonceGoesHere';
-
-</docs-code>
+```
 
 Angularアプリケーションを提供する際、サーバーは各リクエストのHTTPヘッダーに、ランダムに生成されたnonceを含める必要があります。
 このnonceをAngularに提供する必要があります。Angularは、`<style>`要素をレンダリングするためにnonceを使用します。
 Angularのnonceは、次の2つの方法のいずれかで設定できます。
 
+1. [ワークスペース構成](reference/configs/workspace-config#extra-build-and-test-options)で`autoCsp`オプションを`true`に設定します。
 1. ルートアプリケーション要素に`ngCspNonce`属性を設定します。`index.html`を作成するときに、ヘッダーと`index.html`の両方にnonceを追加できるサーバー側のテンプレートがある場合は、この方法を使用します。
-2. `CSP_NONCE`注入トークンを使用してnonceを提供します。実行時にnonceにアクセスでき、`index.html`をキャッシュする必要がある場合は、この方法を使用します。
+1. `CSP_NONCE`注入トークンを使用してnonceを提供します。実行時にnonceにアクセスでき、`index.html`をキャッシュする必要がある場合は、この方法を使用します。
 
-<docs-code language="typescript">
-
+```ts
 import {bootstrapApplication, CSP_NONCE} from '@angular/core';
 import {AppComponent} from './app/app.component';
 
@@ -166,8 +164,7 @@ bootstrapApplication(AppComponent, {
     useValue: globalThis.myRandomNonceValue
   }]
 });
-
-</docs-code>
+```
 
 <docs-callout title="一意のnonce">
 
@@ -175,6 +172,8 @@ bootstrapApplication(AppComponent, {
 攻撃者が将来のnonceを予測できる場合、CSPによって提供される保護を回避できます。
 
 </docs-callout>
+
+NOTE: アプリケーションの[クリティカルCSSをインライン化](/tools/cli/build#critical-css-inlining)したい場合、`CSP_NONCE`トークンは使用できません。`autoCsp`オプションを使用するか、ルートアプリケーション要素に`ngCspNonce`属性を設定してください。
 
 プロジェクトでnonceを生成できない場合は、`style-src`セクションに`'unsafe-inline'`を追加することで、インラインスタイルを許可できます。
 
@@ -209,45 +208,37 @@ Trusted Types対応のアプリケーションがTrusted Typesをサポートし
 | `angular#bundler`       | このポリシーは、Angular CLIバンドラーが、遅延チャンクファイルを生成する場合に使用されます。                                                                                                                                                                                                             |
 | `angular#unsafe-bypass` | このポリシーは、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)でセキュリティをバイパスするメソッド（`bypassSecurityTrustHtml`など）を使用するアプリケーションで使用されます。これらのメソッドを使用するアプリケーションは、このポリシーを有効にする必要があります。                                  |
 | `angular#unsafe-jit`    | このポリシーは、[Just-In-Time (JIT) コンパイラ](api/core/Compiler)で使用されます。アプリケーションがJITコンパイラと直接対話するか、[プラットフォームブラウザダイナミック](api/platform-browser-dynamic/platformBrowserDynamic)を使用してJITモードで実行されている場合は、このポリシーを有効にする必要があります。 |
-| `angular#unsafe-upgrade` | このポリシーは[@angular/upgrade](api/upgrade/static/UpgradeModule)パッケージで使用されます。アプリケーションが AngularJS ハイブリッドの場合、このポリシーを有効にする必要があります。 |
+| `angular#unsafe-upgrade` | このポリシーは[@angular/upgrade](api/upgrade/static/UpgradeModule)パッケージで使用されます。アプリケーションが AngularJS ハイブリッドの場合、このポリシーを有効にする必要があります。                                                                                                                           |
 
 Trusted TypesのHTTPヘッダーは、次の場所で構成する必要があります。
 
-* 本番環境のサービスインフラストラクチャ
-* Angular CLI（`ng serve`）、ローカル開発とエンドツーエンドテストのために`angular.json`ファイルの`headers`プロパティを使用
-* Karma（`ng test`）、ユニットテストのために`karma.config.js`ファイルの`customHeaders`プロパティを使用
+- 本番環境のサービスインフラストラクチャ
+- Angular CLI（`ng serve`）、ローカル開発とエンドツーエンドテストのために`angular.json`ファイルの`headers`プロパティを使用
+- Karma（`ng test`）、ユニットテストのために`karma.config.js`ファイルの`customHeaders`プロパティを使用
 
 Trusted TypesとAngular用に構成されたヘッダーの例を以下に示します。
 
-<docs-code language="html">
-
+```html
 Content-Security-Policy: trusted-types angular; require-trusted-types-for 'script';
-
-</docs-code>
+```
 
 Trusted TypesとAngularアプリケーション用に構成されたヘッダーの例で、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)でセキュリティをバイパスするメソッドをいずれか使用しています。
 
-<docs-code language="html">
-
+```html
 Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for 'script';
-
-</docs-code>
+```
 
 Trusted TypesとJITを使用するAngularアプリケーション用に構成されたヘッダーの例を以下に示します。
 
-<docs-code language="html">
-
+```html
 Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';
-
-</docs-code>
+```
 
 遅延読み込みモジュールを使用するAngularアプリケーション用に構成されたヘッダーの例を以下に示します。
 
-<docs-code language="html">
-
+```html
 Content-Security-Policy: trusted-types angular angular#bundler; require-trusted-types-for 'script';
-
-</docs-code>
+```
 
 <docs-callout title="コミュニティの貢献">
 
@@ -328,7 +319,7 @@ CSRF保護は、バックエンドのステートを変更する可能性のあ�
 
 次の例のように、`provideHttpClient`呼び出しに追加します。
 
-<docs-code language="ts">
+```ts
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
@@ -339,13 +330,13 @@ export const appConfig: ApplicationConfig = {
     ),
   ]
 };
-</docs-code>
+```
 
 ### XSRF保護の無効化 {#disabling-xsrf-protection}
 
 組み込みのXSRF保護メカニズムがアプリケーションで機能しない場合は、`withNoXsrfProtection`機能を使用して無効にできます。
 
-<docs-code language="ts">
+```ts
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
@@ -353,12 +344,12 @@ export const appConfig: ApplicationConfig = {
     ),
   ]
 };
-</docs-code>
+```
 
 Open Web Application Security Project（OWASP）のCSRFについては、[クロスサイトリクエストフォージェリ（CSRF）](https://owasp.org/www-community/attacks/csrf)と[クロスサイトリクエストフォージェリ（CSRF）防止チートシート](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)を参照してください。
 スタンフォード大学の論文[クロスサイトリクエストフォージェリに対する堅牢な防御](https://seclab.stanford.edu/websec/csrf/csrf.pdf)は、詳細な情報源です。
 
-また、Dave Smithの[AngularConnect 2016でのXSRFに関する講演](https://www.youtube.com/watch?v=9inczw6qtpY "Cross Site Request Funkery Securing Your Angular Apps From Evil Doers")も参照してください。
+また、Dave Smithの[AngularConnect 2016でのXSRFに関する講演](https://www.youtube.com/watch?v=9inczw6qtpY 'Cross Site Request Funkery Securing Your Angular Apps From Evil Doers')も参照してください。
 
 ### クロスサイトスクリプトインクルージョン（XSSI） {#cross-site-script-inclusion}
 

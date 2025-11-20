@@ -211,7 +211,7 @@ export const serverRoutes: ServerRoute[] = [
 
 Because [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') exclusively applies to [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference'), this function always runs at _build-time_. `getPrerenderParams` must not rely on any browser-specific or server-specific APIs for data.
 
-IMPORTANT: When using [`inject`](api/core/inject 'API reference') inside `getPrerenderParams`, please remember that `inject` must be used synchronously. It cannot be invoked within asynchronous callbacks or following any `await` statements. For more information, refer to [`runInInjectionContext`](api/core/runInInjectionContext).
+IMPORTANT: When using [`inject`](api/core/inject 'API reference') inside `getPrerenderParams`, please remember that `inject` must be used synchronously. It cannot be invoked within asynchronous callbacks or following any `await` statements. For more information, refer to `runInInjectionContext`.
 
 #### Fallback strategies
 
@@ -223,7 +223,7 @@ The available fallback strategies are:
 - **Client:** Falls back to client-side rendering.
 - **None:** No fallback. Angular will not handle requests for paths that are not prerendered.
 
-```typescript
+```ts
 // app.routes.server.ts
 import { RenderMode, PrerenderFallback, ServerRoute } from '@angular/ssr';
 
@@ -246,26 +246,58 @@ export const serverRoutes: ServerRoute[] = [
 
 Some common browser APIs and capabilities might not be available on the server. Applications cannot make use of browser-specific global objects like `window`, `document`, `navigator`, or `location` as well as certain properties of `HTMLElement`.
 
-In general, code which relies on browser-specific symbols should only be executed in the browser, not on the server. This can be enforced through the [`afterEveryRender`](api/core/afterEveryRender) and [`afterNextRender`](api/core/afterNextRender) lifecycle hooks. These are only executed on the browser and skipped on the server.
+In general, code which relies on browser-specific symbols should only be executed in the browser, not on the server. This can be enforced through the `afterEveryRender` and `afterNextRender` lifecycle hooks. These are only executed on the browser and skipped on the server.
 
 ```angular-ts
-import { Component, ViewChild, afterNextRender } from '@angular/core';
+import { Component, viewChild, afterNextRender } from '@angular/core';
 
 @Component({
   selector: 'my-cmp',
   template: `<span #content>{{ ... }}</span>`,
 })
 export class MyComponent {
-  @ViewChild('content') contentRef: ElementRef;
+  contentRef = viewChild.required<ElementRef>('content');
 
   constructor() {
     afterNextRender(() => {
       // Safe to check `scrollHeight` because this will only run in the browser, not the server.
-      console.log('content height: ' + this.contentRef.nativeElement.scrollHeight);
+      console.log('content height: ' + this.contentRef().nativeElement.scrollHeight);
     });
   }
 }
 ```
+
+## Setting providers on the server
+
+On the server side, top level provider values are set once when the application code is initially parsed and evaluated.
+This means that providers configured with `useValue` will keep their value across multiple requests, until the server application is restarted.
+
+If you want to generate a new value for each request, use a factory provider with `useFactory`. The factory function will run for every incoming request, ensuring that a new value is created and assigned to the token each time.
+
+## Accessing Document via DI
+
+When working with server-side rendering, you should avoid directly referencing browser-specific globals like `document`. Instead, use the [`DOCUMENT`](api/core/DOCUMENT) token to access the document object in a platform-agnostic way.
+
+```ts
+import { Injectable, inject, DOCUMENT } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class CanonicalLinkService {
+  private readonly document = inject(DOCUMENT);
+
+  // During server rendering, inject a <link rel="canonical"> tag
+  // so the generated HTML includes the correct canonical URL
+  setCanonical(href: string): void {
+    const link = this.document.createElement('link');
+    link.rel = 'canonical';
+    link.href = href;
+    this.document.head.appendChild(link);
+  }
+}
+
+```
+
+HELPFUL: For managing meta tags, Angular provides the `Meta` service.
 
 ## Accessing Request and Response via DI
 
@@ -323,18 +355,129 @@ To configure this, update your `angular.json` file as follows:
 
 ## Caching data when using HttpClient
 
-[`HttpClient`](api/common/http/HttpClient) cached outgoing network requests when running on the server. This information is serialized and transferred to the browser as part of the initial HTML sent from the server. In the browser, `HttpClient` checks whether it has data in the cache and if so, reuses it instead of making a new HTTP request during initial application rendering. `HttpClient` stops using the cache once an application becomes [stable](api/core/ApplicationRef#isStable) while running in a browser.
+`HttpClient` caches outgoing network requests when running on the server. This information is serialized and transferred to the browser as part of the initial HTML sent from the server. In the browser, `HttpClient` checks whether it has data in the cache and if so, reuses it instead of making a new HTTP request during initial application rendering. `HttpClient` stops using the cache once an application becomes [stable](api/core/ApplicationRef#isStable) while running in a browser.
 
-By default, `HttpClient` caches all `HEAD` and `GET` requests which don't contain `Authorization` or `Proxy-Authorization` headers. You can override those settings by using [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) when providing hydration.
+### Configuring the caching options
 
-```typescript
+You can customize how Angular caches HTTP responses during server‑side rendering (SSR) and reuses them during hydration by configuring `HttpTransferCacheOptions`.  
+This configuration is provided globally using `withHttpTransferCacheOptions` inside `provideClientHydration()`.
+
+By default, `HttpClient` caches all `HEAD` and `GET` requests which don't contain `Authorization` or `Proxy-Authorization` headers. You can override those settings by using `withHttpTransferCacheOptions` to the hydration configuration.
+
+```ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideClientHydration(
+      withHttpTransferCacheOptions({
+        includeHeaders: ['ETag', 'Cache-Control'],
+        filter: (req) => !req.url.includes('/api/profile'),
+        includePostRequests: true,
+        includeRequestsWithAuthHeaders: false,
+      }),
+    ),
+  ],
+});
+```
+
+---
+
+### `includeHeaders`
+
+Specifies which headers from the server response should be included in cached entries.  
+No headers are included by default.
+
+```ts
+withHttpTransferCacheOptions({
+  includeHeaders: ['ETag', 'Cache-Control'],
+});
+```
+
+IMPORTANT: Avoid including sensitive headers like authentication tokens. These can leak user‑specific data between requests.
+
+---
+
+### `includePostRequests`
+
+By default, only `GET` and `HEAD` requests are cached.  
+You can enable caching for `POST` requests when they are used as read operations such as GraphQL queries.
+
+```ts
+withHttpTransferCacheOptions({
+  includePostRequests: true,
+});
+```
+
+Use this only when `POST` requests are **idempotent** and safe to reuse between server and client renders.
+
+---
+
+### `includeRequestsWithAuthHeaders`
+
+Determines whether requests containing `Authorization` or `Proxy‑Authorization` headers are eligible for caching.  
+By default, these are excluded to prevent caching user‑specific responses.
+
+```ts
+withHttpTransferCacheOptions({
+  includeRequestsWithAuthHeaders: true,
+});
+```
+
+Enable only when authentication headers do **not** affect the response content (for example, public tokens for analytics APIs).
+
+### Per‑request overrides
+
+You can override caching behavior for a specific request using the `transferCache` request option.
+
+```ts
+// Include specific headers for this request
+http.get('/api/profile', { transferCache: { includeHeaders: ['CustomHeader'] } });
+```
+
+### Disabling caching
+
+You can disable HTTP caching of requests sent from the server either globally or individually.
+
+#### Globally
+
+To disable caching for all requests in your application, use the `withNoHttpTransferCache` feature:
+
+```ts
+import { bootstrapApplication, provideClientHydration, withNoHttpTransferCache } from '@angular/platform-browser';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideClientHydration(withNoHttpTransferCache())
+  ]
+});
+```
+
+#### `filter`
+
+You can also selectively disable caching for certain requests using the [`filter`](api/common/http/HttpTransferCacheOptions) option in `withHttpTransferCacheOptions`. For example, you can disable caching for a specific API endpoint:
+
+```ts
+import { bootstrapApplication, provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideClientHydration(withHttpTransferCacheOptions({
-      includePostRequests: true
+      filter: (req) => !req.url.includes('/api/sensitive-data')
     }))
   ]
 });
+```
+
+Use this option to exclude endpoints with user‑specific or dynamic data (for example `/api/profile`).
+
+#### Individually
+
+To disable caching for an individual request, you can specify the [`transferCache`](api/common/http/HttpRequest#transferCache) option in an `HttpRequest`.
+
+```ts
+httpClient.get('/api/sensitive-data', { transferCache: false });
 ```
 
 ## Configuring a server
@@ -343,7 +486,7 @@ bootstrapApplication(AppComponent, {
 
 The `@angular/ssr/node` extends `@angular/ssr` specifically for Node.js environments. It provides APIs that make it easier to implement server-side rendering within your Node.js application. For a complete list of functions and usage examples, refer to the [`@angular/ssr/node` API reference](api/ssr/node/AngularNodeAppEngine) API reference.
 
-```typescript
+```ts
 // server.ts
 import { AngularNodeAppEngine, createNodeRequestHandler, writeResponseToNodeResponse } from '@angular/ssr/node';
 import express from 'express';
@@ -374,7 +517,7 @@ export const reqHandler = createNodeRequestHandler(app);
 
 The `@angular/ssr` provides essential APIs for server-side rendering your Angular application on platforms other than Node.js. It leverages the standard [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) objects from the Web API, enabling you to integrate Angular SSR into various server environments. For detailed information and examples, refer to the [`@angular/ssr` API reference](api/ssr/AngularAppEngine).
 
-```typescript
+```ts
 // server.ts
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 

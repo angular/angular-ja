@@ -199,6 +199,12 @@ rules:
   - expected: 算出シグナル
     pattern:
       - 計算されたシグナル
+  
+  - expected: シグナルフォーム
+    pattern:
+      - Signal Forms
+      - シグナルForms
+      - Signalフォーム
 
   - expected: エフェクト
     pattern:

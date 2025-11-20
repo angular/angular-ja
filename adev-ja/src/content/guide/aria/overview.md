@@ -1,21 +1,21 @@
 <docs-decorative-header title="Angular Aria">
 </docs-decorative-header>
 
-## What is Angular Aria?
+## Angular Ariaとは？ {#what-is-angular-aria}
 
-Building accessible components seems straightforward, but implementing them according to the W3 Accessibility Guidelines requires significant effort and accessibility expertise.
+アクセシブルなコンポーネントの構築は一見簡単そうですが、W3Cアクセシビリティガイドラインに従って実装するには、多大な労力とアクセシビリティの専門知識が必要です。
 
-Angular Aria is a collection of headless, accessible directives that implement common WAI-ARIA patterns. The directives handle keyboard interactions, ARIA attributes, focus management, and screen reader support. All you have to do is provide the HTML structure, CSS styling, and business logic!
+Angular Ariaは、一般的なWAI-ARIAパターンを実装する、ヘッドレスでアクセシブルなディレクティブのコレクションです。ディレクティブはキーボードインタラクション、ARIA属性、フォーカス管理、スクリーンリーダーのサポートを処理します。あなたがすべきことは、HTML構造、CSSスタイリング、ビジネスロジックを提供することだけです！
 
-## Installation
+## インストール {#installation}
 
 ```shell
 npm install @angular/aria
 ```
 
-## Showcase
+## ショーケース {#showcase}
 
-For example, let's take a toolbar menu. While it may appear to be a "simple" row of buttons tied with specific logic, keyboard navigation and screen readers add a lot of unexpected complexity to those unfamiliar with accessibility.
+例えば、ツールバーメニューを例に考えてみましょう。特定のロジックに結びついた「単純な」ボタンの列に見えるかもしれませんが、アクセシビリティに不慣れな人にとって、キーボードナビゲーションやスクリーンリーダーは多くの予期せぬ複雑さを加えます。
 
 ```
 <!------------------------------------->
@@ -23,69 +23,69 @@ For example, let's take a toolbar menu. While it may appear to be a "simple" row
 <!------------------------------------->
 ```
 
-In this one scenario, developers need to consider:
+この1つのシナリオでは、開発者は次の点を考慮する必要があります：
 
-- **Keyboard navigation**. Users need to open the menu with Enter or Space, navigate options with arrow keys, select with Enter, and close with Escape.
-- **Screen readers** need to announce the menu's state, the number of options, and which option has focus.
-- **Focus management** needs to move logically between the trigger and menu items.
-- **Right-to-left languages** require the ability to navigate in reverse.
+- **キーボードナビゲーション**。ユーザーはEnterキーまたはSpaceキーでメニューを開き、矢印キーでオプションを移動し、Enterキーで選択し、Escapeキーで閉じる必要があります。
+- **スクリーンリーダー**は、メニューの状態、オプションの数、そしてどのオプションにフォーカスが当たっているかを読み上げる必要があります。
+- **フォーカス管理**は、トリガーとメニューアイテムの間で論理的に移動する必要があります。
+- **右から左へ記述する言語**は、逆方向にナビゲートする機能を必要とします。
 
-## What's included?
+## 含まれているもの {#whats-included}
 
-Angular Aria includes directives for common interactive patterns:
+Angular Ariaには、一般的なインタラクティブパターンに対応するディレクティブが含まれています:
 
-| Component                               | Description                                                            |
+| Component                               | 説明                                                                   |
 | --------------------------------------- | ---------------------------------------------------------------------- |
-| [Accordion](guide/aria/accordion)       | Collapsible content panels that can expand individually or exclusively |
-| [Autocomplete](guide/aria/autocomplete) | Text input with filtered suggestions that appear as users type         |
-| [Combobox](guide/aria/combobox)         | Primitive directive that coordinates a text input with a popup         |
-| [Grid](guide/aria/grid)                 | Two-dimensional data display with cell-by-cell keyboard navigation     |
-| [Listbox](guide/aria/listbox)           | Single or multi-select option lists with keyboard navigation           |
-| [Menu](guide/aria/menu)                 | Dropdown menus with nested submenus and keyboard shortcuts             |
-| [Multiselect](guide/aria/multiselect)   | Multiple-selection dropdown pattern with compact display               |
-| [Select](guide/aria/select)             | Single-selection dropdown pattern with keyboard navigation             |
-| [Tabs](guide/aria/tabs)                 | Tabbed interfaces with automatic or manual activation modes            |
-| [Toolbar](guide/aria/toolbar)           | Grouped sets of controls with logical keyboard navigation              |
-| [Tree](guide/aria/tree)                 | Hierarchical lists with expand/collapse functionality                  |
+| [Accordion](guide/aria/accordion)       | 個別に、または排他的に展開できる折りたたみ可能なコンテンツパネル         |
+| [Autocomplete](guide/aria/autocomplete) | ユーザーが入力するにつれて表示される、フィルタリングされたサジェスト付きのテキスト入力 |
+| [Combobox](guide/aria/combobox)         | テキスト入力とポップアップを連携させるプリミティブなディレクティブ             |
+| [Grid](guide/aria/grid)                 | セル単位のキーボードナビゲーションを備えた2次元のデータ表示            |
+| [Listbox](guide/aria/listbox)           | キーボードナビゲーション付きの単一選択または複数選択のオプションリスト       |
+| [Menu](guide/aria/menu)                 | ネストされたサブメニューとキーボードショートカットを持つドロップダウンメニュー     |
+| [Multiselect](guide/aria/multiselect)   | コンパクトな表示を持つ複数選択のドロップダウンパターン                   |
+| [Select](guide/aria/select)             | キーボードナビゲーション付きの単一選択のドロップダウンパターン             |
+| [Tabs](guide/aria/tabs)                 | 自動または手動のアクティベーションモードを持つタブ付きインターフェース         |
+| [Toolbar](guide/aria/toolbar)           | 論理的なキーボードナビゲーションを持つ、グループ化されたコントロールのセット     |
+| [Tree](guide/aria/tree)                 | 展開/折りたたみ機能を持つ階層的なリスト                                |
 
-Each component includes comprehensive documentation, working examples, and API references.
+各コンポーネントには、包括的なドキュメント、動作するサンプル、およびAPIリファレンスが含まれています。
 
-## When to use Angular Aria
+## Angular Ariaを使用する場面 {#when-to-use-angular-aria}
 
-Angular Aria works well when you need accessible interactive components that are WCAG compliant with custom styling. Examples include:
+Angular Ariaは、カスタムスタイリングを施したWCAG準拠のアクセシブルなインタラクティブコンポーネントが必要な場合にうまく機能します。例は次のとおりです:
 
-- **Building a design system** - Your team maintains a component library with specific visual standards that need accessible implementations
-- **Enterprise component libraries** - You're creating reusable components for multiple applications within an organization
-- **Custom brand requirements** - The interface needs to match precise design specifications that pre-styled component libraries cannot easily accommodate
+- **デザインシステムの構築** - チームが、アクセシブルな実装を必要とする特定の視覚的標準を持つコンポーネントライブラリを管理している場合
+- **エンタープライズコンポーネントライブラリ** - 組織内の複数のアプリケーション向けに再利用可能なコンポーネントを作成している場合
+- **カスタムブランド要件** - インターフェースが、事前にスタイル付けされたコンポーネントライブラリでは容易に対応できない、正確なデザイン仕様に一致する必要がある場合
 
-## When not to use Angular Aria
+## Angular Ariaを使用すべきでない場合 {#when-not-to-use-angular-aria}
 
-Angular Aria might not fit every scenario:
+Angular Ariaはすべてのシナリオに適しているわけではありません:
 
-- **Pre-styled components** - If you need components that look complete without custom styling, use Angular Material instead
-- **Simple forms** - Native HTML form controls like <button> and <input type="radio"> provide built-in accessibility for straightforward use cases
-- **Rapid prototyping** - When validating concepts quickly, pre-styled component libraries reduce initial development time
+- **事前にスタイル付けされたコンポーネント** - カスタムスタイルなしで完成された見た目のコンポーネントが必要な場合は、代わりにAngular Materialを使用してください
+- **シンプルなフォーム** - <button>や<input type="radio">のようなネイティブHTMLフォームコントロールは、単純なユースケースに対して組み込みのアクセシビリティを提供します
+- **ラピッドプロトタイピング** - コンセプトを迅速に検証する場合、事前にスタイル付けされたコンポーネントライブラリは初期開発の時間を短縮します
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Explore the component guides to find the pattern that fits your needs:
+コンポーネントガイドを調べて、ニーズに合ったパターンを見つけてください:
 
-**Search and selection**
+**検索と選択**
 
-- Autocomplete - Search and filter options as users type
-- Listbox - Select one or multiple items from a list
-- Select - Choose one option from a list of options
-- Multiselect - Choose one option from a list of options
+- Autocomplete - ユーザーの入力に応じてオプションを検索・フィルタリングします
+- Listbox - リストから1つまたは複数の項目を選択します
+- Select - オプションのリストから1つのオプションを選択します
+- Multiselect - オプションのリストから1つのオプションを選択します
 
-**Navigation and call to actions**
+**ナビゲーションとCTA**
 
-- Menu - Action menus with optional nested submenus
-- Tabs - Switch between related content panels
-- Toolbar - Group related controls and actions
+- Menu - ネスト可能なサブメニューを持つアクションメニュー
+- Tabs - 関連するコンテンツパネルを切り替えます
+- Toolbar - 関連するコントロールとアクションをグループ化します
 
-**Content organization**
+**コンテンツの構成**
 
-- Accordion - Show and hide sections of content
-- Tree - Display hierarchical data structures
-  Data display
-- Grid - Navigate and interact with tabular data
+- Accordion - コンテンツのセクションを表示・非表示にします
+- Tree - 階層的なデータ構造を表示します
+  データ表示
+- Grid - 表形式のデータをナビゲートし、操作します

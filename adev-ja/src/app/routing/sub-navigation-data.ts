@@ -428,7 +428,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/forms/overview',
           },
           {
-            label: 'Signalフォーム',
+            label: 'シグナルフォーム',
             status: 'new',
             children: [
               {

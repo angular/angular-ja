@@ -1,42 +1,42 @@
-<docs-decorative-header title="Forms with Angular Signals" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
+<docs-decorative-header title="Angularシグナルを使ったフォーム" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-CRITICAL: Signal Forms are [experimental](/reference/releases#experimental). The API may change in future releases. Avoid using experimental APIs in production applications without understanding the risks.
+CRITICAL: シグナルフォームは[実験的](/reference/releases#experimental)です。APIは将来のリリースで変更される可能性があります。リスクを理解せずに本番アプリケーションで実験的なAPIを使用することは避けてください。
 
-Signal Forms is an experimental library that allows you to manage form state in Angular applications by building on the reactive foundation of signals. With automatic two-way binding, type-safe field access, and schema-based validation, Signal Forms help you create robust forms.
+シグナルフォームは、シグナルのリアクティブな基盤の上に構築することで、Angularアプリケーションのフォーム状態を管理できる実験的なライブラリです。自動双方向バインディング、型安全なフィールドアクセス、スキーマベースのバリデーションにより、シグナルフォームは堅牢なフォームの作成を支援します。
 
-TIP: For a quick introduction to Signal Forms, see the [Signal Forms essentials guide](essentials/signal-forms).
+TIP: シグナルフォームの簡単な紹介については、[シグナルフォームエッセンシャルガイド](essentials/signal-forms)を参照してください。
 
-## Why Signal Forms?
+## なぜシグナルフォームなのか？ {#why-signal-forms}
 
-Building forms in web applications involves managing several interconnected concerns: tracking field values, validating user input, handling error states, and keeping the UI synchronized with your data model. Managing these concerns separately creates boilerplate code and complexity.
+Webアプリケーションにおけるフォームの構築には、フィールドの値の追跡、ユーザー入力の検証、エラーステートの処理、UIとデータモデルの同期といった、相互に関連するいくつかの懸念事項の管理が含まれます。これらの懸念事項を個別に管理すると、ボイラープレートコードと複雑さが生じます。
 
-Signal Forms address these challenges by:
+シグナルフォームは、以下の方法でこれらの課題に対処します:
 
-- **Synchronizing state automatically** - Automatically syncs the form data model with bound form fields
-- **Providing type safety** - Supports fully type safe schemas & bindings between your UI controls and data model
-- **Centralizing validation logic** - Define all validation rules in one place using a validation schema
+- **状態を自動的に同期** - フォームのデータモデルを、バインドされたフォームフィールドと自動的に同期します
+- **型安全性の提供** - UIコントロールとデータモデル間の完全に型安全なスキーマとバインディングをサポートします
+- **バリデーションロジックの集約** - バリデーションスキーマを使用して、すべてのバリデーションルールを1か所で定義します
 
-Signal Forms work best in new applications built with signals. If you're working with an existing application that uses reactive forms, or if you need production stability guarantees, reactive forms remain a solid choice.
+シグナルフォームは、シグナルを使用して構築された新しいアプリケーションで最適に機能します。リアクティブフォームを使用している既存のアプリケーションで作業している場合や、本番環境での安定性の保証が必要な場合は、リアクティブフォームが依然として確実な選択肢です。
 
 <!-- TODO: UNCOMMENT SECTION BELOW WHEN AVAILABLE -->
 <!-- NOTE: If you're coming from template or reactive forms, you may be interested in our [comparison guide](guide/forms/signal-forms/comparison). -->
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Signal Forms require:
+シグナルフォームには以下が必要です:
 
-- Angular v21 or higher
+- Angular v21以降
 
-## Setup
+## セットアップ {#setup}
 
-Signal Forms are already included in the `@angular/forms` package. Import the necessary functions and directives from `@angular/forms/signals`:
+シグナルフォームはすでに`@angular/forms`パッケージに含まれています。`@angular/forms/signals`から必要な関数とディレクティブをインポートします:
 
 ```ts
 import { form, Field, required, email } from '@angular/forms/signals'
 ```
 
-The `Field` directive must be imported into any component that binds form fields to HTML inputs:
+`Field`ディレクティブは、フォームフィールドをHTML入力にバインドするすべてのコンポーネントにインポートする必要があります:
 
 ```ts
 @Component({

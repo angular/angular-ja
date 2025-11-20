@@ -1,150 +1,150 @@
-# Angular AI Tutor
+# Angular AIチューター
 
-The Angular AI Tutor is designed to interactively guide you step-by-step through building a complete, modern Angular application from the ground up. You'll learn the latest patterns and best practices by building a real, tangible project: a **"Smart Recipe Box"** for creating and managing recipes.
+Angular AIチューターは、完全でモダンなAngularアプリケーションをゼロから構築する手順を、対話形式でステップバイステップにガイドします。レシピを作成・管理するための**「Smart Recipe Box」**という、実際に動く具体的なプロジェクトを構築することで、最新のパターンとベストプラクティスを学びます。
 
-Our goal is to foster critical thinking and help you retain what you learn. Instead of just giving you code, the tutor will explain concepts, show you examples, and then give you project-specific exercises to solve on your own.
+私たちの目標は、批判的思考を育み、学んだことの定着を助けることです。チューターは単にコードを与えるのではなく、コンセプトを説明し、例を示し、そして自力で解決するためのプロジェクト固有の演習問題を与えます。
 
-## Get Started
+## はじめに {#get-started}
 
-You can access the AI tutor via the [Angular MCP server](ai/mcp).
+[Angular MCP server](ai/mcp)経由でAIチューターにアクセスできます。
 
-1. [Install](ai/mcp#get-started) the Angular MCP server
-2. Create a new Angular project `ng new <project-name>`
-3. Navigate to your new project (`cd <project-name>`) in an AI-powered editor or tool, like the [Gemini CLI](https://geminicli.com/)
-4. Enter a prompt like `launch the Angular AI tutor`
-   ![A screenshot demonstrating how to launch the Angular AI Tutor in the Gemini CLI.](assets/images/launch-ai-tutor.png 'Launch the Angular AI Tutor')
+1. Angular MCPサーバーを[インストール](ai/mcp#get-started)します
+2. 新しいAngularプロジェクト `ng new <project-name>` を作成します
+3. [Gemini CLI](https://geminicli.com/)のようなAI搭載のエディターやツールで、新しいプロジェクト(`cd <project-name>`)に移動します
+4. `launch the Angular AI tutor`のようなプロンプトを入力します
+   ![Gemini CLIでAngular AI Tutorを起動する方法を示すスクリーンショット。](assets/images/launch-ai-tutor.png 'Angular AI Tutorを起動')
 
-## Using the AI Tutor
+## AIチューターの使い方 {#using-the-ai-tutor}
 
-Each module begins with a brief concept explanation.
-![A screenshot of the Angular AI Tutor presenting a brief concept explanation.](assets/images/ai-tutor-preview-1.png 'Angular AI Tutor explanation')
-If applicable, the tutor will present a code example to demonstrate the concept.
-![A screenshot of the Angular AI Tutor showing a code example.](assets/images/ai-tutor-preview-2.png 'Angular AI Tutor code example')
-The tutor will also provide an open-ended exercise to test your understanding.
-![A screenshot of the Angular AI Tutor providing an exercise.](assets/images/ai-tutor-preview-3.png 'Angular AI Tutor exercise')
-Finally, the tutor will check your work before moving onto the next module.
-![A screenshot of the Angular AI Tutor checking the user's work.](assets/images/ai-tutor-preview-4.png 'Angular AI Tutor check')
+各モジュールは、簡単な概念の説明から始まります。
+![Angular AIチューターが簡単な概念の説明を提示しているスクリーンショット。](assets/images/ai-tutor-preview-1.png 'Angular AIチューターの説明')
+該当する場合、チューターは概念を実証するためにコード例を提示します。
+![Angular AIチューターがコード例を表示しているスクリーンショット。](assets/images/ai-tutor-preview-2.png 'Angular AIチューターのコード例')
+また、チューターはあなたの理解度を試すための自由回答の演習も提供します。
+![Angular AIチューターが演習を提供しているスクリーンショット。](assets/images/ai-tutor-preview-3.png 'Angular AIチューターの演習')
+最後に、次のモジュールに進む前に、チューターがあなたの作業内容をチェックします。
+![Angular AIチューターがユーザーの作業内容をチェックしているスクリーンショット。](assets/images/ai-tutor-preview-4.png 'Angular AIチューターのチェック')
 
-## How It Works: The Learning Cycle
+## 仕組み: 学習サイクル {#how-it-works-the-learning-cycle}
 
-For each new topic, you'll follow a learning loop that emphasizes critical thinking to help you better retain what you learn.
+新しいトピックごとに、学んだことをよりよく定着させるために、クリティカルシンキングを重視した学習ループに従います。
 
-1. **Learn the Concept:** The tutor will briefly explain a core Angular feature and show you a generic code example to illustrate it.
-2. **Apply Your Knowledge:** You'll immediately get a hands-on exercise. The tutor presents these exercises at a high level with objectives and expected outcomes, encouraging you to think through the solution yourself.
-3. **Get Feedback & Support:** When you're ready, let the tutor know. It will **automatically read your project files** to verify your solution is correct. If you get stuck, you are in complete control. You can ask for a **"hint"** for more guidance, or get step-by-step instructions by typing **"detailed guide"** or **"step-by-step instructions."**
+1. **コンセプトを学ぶ:** チューターがAngularのコア機能を簡潔に説明し、それを説明するための汎用的なコード例を示します。
+2. **知識を応用する:** すぐにハンズオン演習が与えられます。チューターは、目的と期待される結果とともに、これらの演習を高いレベルで提示し、自分で解決策を考え抜くことを促します。
+3. **フィードバックとサポートを得る:** 準備ができたら、チューターに知らせてください。チューターは**自動的にプロジェクトファイルを読み込み**、あなたのソリューションが正しいか検証します。行き詰まった場合でも、完全にコントロールできます。より詳しいガイダンスを求めるために**「hint」**を要求したり、**「detailed guide」**または**「step-by-step instructions」**と入力してステップバイステップの説明を得ることができます。
 
-Once you've succeeded, the tutor will move directly to the next topic. You can also ask the tutor for more information on a topic or ask any related Angular questions at any time.
-
----
-
-## **Features & Commands**
-
-You are in control of your learning experience. Use these features at any time:
-
-### **Leave and Come Back**
-
-Feel free to take a break. Your progress is tied to your project's code. When you return for a new session, the tutor will automatically analyze your files to determine exactly where you left off, allowing you to seamlessly pick up right where you were.
-
-**Pro Tip:** We highly recommend using Git to save your progress. After completing a module, it's a great idea to commit your changes (e.g., `git commit -m "Complete Phase 1, Module 8"`). This acts as a personal checkpoint you can always return to.
-
-### **Adjust Your Experience Level**
-
-You can set your experience level to **Beginner (1-3)**, **Intermediate (4-7)**, or **Experienced (8-10)**. You can change this setting at any time during your session, and the tutor will immediately adapt its teaching style to match.
-
-**Example Prompts:**
-
-- "Set my experience level to beginner."
-- "Change my rating to 8."
-
-### **See the Full Learning Plan**
-
-Want to see the big picture or check how far you've come? Just ask for the table of contents.
-
-**Example Prompts:**
-
-- "Where are we?"
-- "Show the table of contents."
-- "Show the plan."
-
-The tutor will display the full learning plan and mark your current location.
-
-### **A Note on Styling**
-
-The tutor will apply basic styling to your application to keep things looking clean. You are highly encouraged to apply your own styling to make the app your own.
-
-### **Skip the Current Module**
-
-If you'd rather move on to the next topic in the learning path, you can ask the tutor to skip the current exercise.
-
-**Example Prompts:**
-
-- "Skip this section."
-- "Auto-complete this step for me."
-
-The tutor will ask for confirmation and then present you with the complete code solution for the current module and attempt to automatically apply any required updates to ensure you can continue smoothly with the next module.
-
-### **Jump to Any Topic**
-
-If you want to learn about a specific topic out of order (e.g., jump from the basics to forms), you can. The tutor will provide the necessary code to update your project to the correct starting point for the selected module and attempt to automatically apply any required updates.
-
-**Example Prompts:**
-
-- "Take me to the forms lesson."
-- "I want to learn about Route Guards now."
-- "Jump to the section on Services."
+成功すると、チューターはすぐに次のトピックに進みます。また、いつでもトピックに関する詳細情報をチューターに尋ねたり、関連するAngularの質問をしたりできます。
 
 ---
 
-## **Troubleshooting**
+## **機能とコマンド** {#features-commands}
 
-If the tutor doesn't respond correctly or you suspect an issue with your application, here are a few things to try:
+学習体験はあなた自身でコントロールできます。これらの機能はいつでも利用可能です:
 
-1. **Type "proceed":** This can often nudge the tutor to continue to the next step in the event it gets stuck.
-2. **Correct the Tutor:** If the tutor is mistaken about your progress (e.g., it says you're on Module 3 but you've completed Module 8), just tell it. For example: _"I'm actually on Module 8."_ The tutor will re-evaluate your code and adjust.
-3. **Verify Your UI:** If you want to confirm what your application's user interface should look like, just ask the tutor. For example: _"What should I see in my UI?"_
-4. **Reload the Browser Window:** A refresh can solve many issues related to your application.
-5. **Hard Restart the Browser:** Errors are sometimes only surfaced in the browser's developer console. A hard restart can help clear underlying issues related to the application.
-6. **Start a New Chat:** You can always start a new chat to remove the existing history and begin fresh. The tutor will read your files to find the latest step you were on.
+### **中断と再開** {#leave-and-come-back}
 
-## **Your Learning Journey: The Phased Path**
+自由に休憩を取ってください。進捗はプロジェクトのコードに紐づいています。新しいセッションのために戻ってくると、チューターが自動的にファイルを分析して中断した場所を正確に特定し、そこからシームレスに再開できます。
 
-You will build your application over a four-phase journey. You can follow this path from start to finish to create a complete, fully-functional Angular application. Each module builds logically upon the last, taking you from the basics to advanced, real-world features.
+**Pro Tip:** 進捗を保存するためにGitを使用することを強くお勧めします。モジュールを完了した後、変更をコミットすることをお勧めします（例: `git commit -m "Complete Phase 1, Module 8"`）。これは、いつでも戻ることができる個人的なチェックポイントとして機能します。
 
-**A Note on Automated Setup:** Some modules require a setup step, like creating interfaces or mock data. In these cases, the tutor will present you with the code and file instructions. You will be responsible for creating and modifying these files as instructed before the exercise begins.
+### **経験レベルの調整** {#adjust-your-experience-level}
 
-### **Phase 1: Angular Fundamentals**
+経験レベルを**初心者 (1-3)**、**中級者 (4-7)**、または**経験者 (8-10)**に設定できます。この設定はセッション中にいつでも変更でき、チューターはすぐに指導スタイルをそれに合わせて調整します。
 
-- **Module 1:** Getting Started
-- **Module 2:** Dynamic Text with Interpolation
-- **Module 3:** Event Listeners (`(click)`)
+**プロンプトの例:**
 
-### **Phase 2: State and Signals**
+- "経験レベルを初心者に設定してください。"
+- "評価を8に変更してください。"
 
-- **Module 4:** State Management with Writable Signals (Part 1: `set`)
-- **Module 5:** State Management with Writable Signals (Part 2: `update`)
-- **Module 6:** Computed Signals
+### **学習プラン全体を見る** {#see-the-full-learning-plan}
 
-### **Phase 3: Component Architecture**
+全体像を見たり、どこまで進んだかを確認したい場合は、目次をリクエストしてください。
 
-- **Module 7:** Template Binding (Properties & Attributes)
-- **Module 8:** Creating & Nesting Components
-- **Module 9:** Component Inputs with Signals
-- **Module 10:** Styling Components
-- **Module 11:** List Rendering with `@for`
-- **Module 12:** Conditional Rendering with `@if`
+**プロンプトの例:**
 
-### **Phase 4: Advanced Features & Architecture**
+- "今どこにいますか？"
+- "目次を表示してください。"
+- "プランを表示してください。"
 
-- **Module 13:** Two-Way Binding
-- **Module 14:** Services & Dependency Injection (DI)
-- **Module 15:** Basic Routing
-- **Module 16:** Introduction to Forms
-- **Module 17:** Intro to Angular Material
+チューターが学習プラン全体を表示し、現在地を示します。
+
+### **スタイリングに関する注意** {#a-note-on-styling}
+
+チューターは、アプリケーションに基本的なスタイリングを適用して、見た目をきれいに保ちます。独自のスタイリングを適用して、アプリケーションを自分だけのものにすることを強くお勧めします。
+
+### **現在のモジュールをスキップする** {#skip-the-current-module}
+
+学習パスの次のトピックに進みたい場合は、チューターに現在の演習をスキップするように依頼できます。
+
+**プロンプトの例:**
+
+- "このセクションをスキップしてください。"
+- "このステップを自動補完してください。"
+
+チューターが確認を求めます。その後、現在のモジュールの完全なコードソリューションを提示し、次のモジュールにスムーズに進めるように必要な更新を自動的に適用しようとします。
+
+### **任意のトピックにジャンプする** {#jump-to-any-topic}
+
+特定のトピックについて順序を無視して学習したい場合（例: 基本からフォームへジャンプする）、それも可能です。チューターは、選択したモジュールの正しい開始点にプロジェクトを更新するために必要なコードを提供し、必要な更新を自動的に適用しようと試みます。
+
+**プロンプトの例:**
+
+- "フォームのレッスンに連れて行ってください。"
+- "今すぐRoute Guardsについて学びたいです。"
+- "Serviceに関するセクションにジャンプしてください。"
 
 ---
 
-## **A Note on AI & Feedback**
+## **トラブルシューティング** {#troubleshooting}
 
-This tutor is powered by a Large Language Model (LLM). While we've worked hard to make it an expert, AIs can make mistakes. If you encounter an explanation or code example that seems incorrect, please let us know. You can correct the tutor, and it will use your feedback to adjust its response.
+チューターが正しく応答しない場合や、アプリケーションに問題があると思われる場合は、以下のことを試してみてください:
 
-For any technical bugs or feature requests, please [submit an issue](https://github.com/angular/angular-cli/issues).
+1. **"proceed"と入力する:** これにより、チューターがスタックした場合に次のステップに進むよう促すことができます。
+2. **チューターを訂正する:** チューターがあなたの進捗状況を誤解している場合(例: Module 8を完了しているのにModule 3にいると言われた場合)、それを伝えてください。例: _「実際にはModule 8にいます。」_ チューターはあなたのコードを再評価し、調整します。
+3. **UIを確認する:** アプリケーションのユーザーインターフェースがどのように見えるべきかを確認したい場合は、チューターに尋ねてください。例: _「UIには何が表示されるべきですか？」_
+4. **ブラウザウィンドウをリロードする:** リフレッシュすることで、アプリケーションに関連する多くの問題を解決できます。
+5. **ブラウザをハードリスタートする:** エラーはブラウザの開発者コンソールにしか表示されないことがあります。ハードリスタートは、アプリケーションに関連する根本的な問題を解消するのに役立ちます。
+6. **新しいチャットを開始する:** いつでも新しいチャットを開始して、既存の履歴を削除し、新たに始めることができます。チューターはあなたのファイルを読み込み、あなたがいた最新のステップを見つけ出します。
+
+## **学習の道のり：段階的なパス** {#your-learning-journey-the-phased-path}
+
+4つのフェーズにわたる道のりでアプリケーションを構築します。このパスを最初から最後までたどることで、完全で機能的なAngularアプリケーションを作成できます。各モジュールは前のモジュールの上に論理的に構築されており、基礎から高度で実践的な機能へと導きます。
+
+**自動セットアップに関する注意：** 一部のモジュールでは、インターフェースやモックデータの作成など、セットアップ手順が必要です。これらの場合、チューターがコードとファイルの手順を提示します。演習が始まる前に、指示に従ってこれらのファイルを作成・修正する責任があります。
+
+### **フェーズ1：Angularの基礎** {#phase-1-angular-fundamentals}
+
+- **モジュール1：** はじめに
+- **モジュール2：** 補間による動的テキスト
+- **モジュール3：** イベントリスナー (`(click)`)
+
+### **フェーズ2：状態とシグナル** {#phase-2-state-and-signals}
+
+- **モジュール4：** 書き込み可能なシグナルによる状態管理（パート1：`set`）
+- **モジュール5：** 書き込み可能なシグナルによる状態管理（パート2：`update`）
+- **モジュール6：** Computedシグナル
+
+### **フェーズ3：コンポーネントアーキテクチャ** {#phase-3-component-architecture}
+
+- **モジュール7：** テンプレートバインディング（プロパティと属性）
+- **モジュール8：** コンポーネントの作成とネスト
+- **モジュール9：** シグナルによるコンポーネント入力
+- **モジュール10：** コンポーネントのスタイリング
+- **モジュール11：** `@for`によるリストレンダリング
+- **モジュール12：** `@if`による条件付きレンダリング
+
+### **フェーズ4：高度な機能とアーキテクチャ** {#phase-4-advanced-features--architecture}
+
+- **モジュール13：** 双方向バインディング
+- **モジュール14：** サービスと依存性の注入（DI）
+- **モジュール15：** 基本的なルーティング
+- **モジュール16：** フォーム入門
+- **モジュール17：** Angular Material入門
+
+---
+
+## **AIとフィードバックに関する注意点** {#a-note-on-ai-feedback}
+
+このチューターは大規模言語モデル (LLM) を利用しています。エキスパートになるよう努力してきましたが、AIは間違いを犯すことがあります。もし不正確だと思われる説明やコード例に遭遇した場合は、お知らせください。チューターを訂正でき、そのフィードバックを元に応答を調整します。
+
+技術的なバグや機能リクエストについては、[issueを報告](https://github.com/angular/angular-cli/issues)してください。

@@ -1,6 +1,6 @@
 # コンポーネントのホスト要素
 
-TIP: このガイドでは、既に[基本概念のガイド](essentials)を読んでいることを前提としています。Angularを初めて使用する場合は、まずこちらをお読みください。
+TIP: このガイドでは、既に[基本ガイド](essentials)を読んでいることを前提としています。Angularを初めて使用する場合は、まずこちらをお読みください。
 
 Angularは、コンポーネントのセレクターに一致するすべてのHTML要素に対して、コンポーネントのインスタンスを作成します。
 コンポーネントのセレクターに一致するDOM要素は、そのコンポーネントの**ホスト要素**です。
@@ -35,9 +35,9 @@ export class ProfilePhoto {}
 
 上記の例では、`<profile-photo>`は`ProfilePhoto`コンポーネントのホスト要素です。
 
-## ホスト要素へのバインディング
+## ホスト要素へのバインディング {#binding-to-the-host-element}
 
-コンポーネントは、ホスト要素にプロパティ、属性、イベントをバインドできます。
+コンポーネントは、ホスト要素にプロパティ、属性、スタイル、イベントをバインドできます。
 これは、コンポーネントのテンプレート内の要素のバインディングと同じように動作しますが、
 `@Component`デコレーターの`host`プロパティで定義されます。
 
@@ -48,6 +48,7 @@ export class ProfilePhoto {}
     'role': 'slider',
     '[attr.aria-valuenow]': 'value',
     '[class.active]': 'isActive()',
+    '[style.background]' : `hasError() ? 'red' : 'green'`,
     '[tabIndex]': 'disabled ? -1 : 0',
     '(keydown)': 'updateValue($event)',
   },
@@ -56,20 +57,21 @@ export class CustomSlider {
   value: number = 0;
   disabled: boolean = false;
   isActive = signal(false);
+  hasError = signal(false);
   updateValue(event: KeyboardEvent) { /* ... */ }
 
   /* ... */
 }
 ```
 
-## `@HostBinding`および`@HostListener`デコレーター
+## `@HostBinding`および`@HostListener`デコレーター {#the-hostbinding-and-hostlistener-decorators}
 
 クラスメンバーに`@HostBinding`および`@HostListener`デコレーターを適用することにより、
 ホスト要素にバインドできます。
 
 `@HostBinding`を使用すると、ホストのプロパティと属性を、プロパティとゲッターにバインドできます。
 
-```angular-ts
+```ts
 @Component({
   /* ... */
 })
@@ -98,10 +100,12 @@ export class CustomSlider {
 }
 ```
 
-**常に`@HostBinding`と`@HostListener`よりも`host`プロパティの使用を優先してください。**
+<docs-callout critical title="Prefer using the `host` property over the decorators">
+  **常に`@HostBinding`と`@HostListener`よりも`host`プロパティの使用を優先してください。**
 これらのデコレーターは、下位互換性のためにのみ存在します。
+</docs-callout>
 
-## バインディングの衝突
+## バインディングの衝突 {#binding-collisions}
 
 テンプレートでコンポーネントを使用する場合、そのコンポーネントインスタンスの要素にバインディングを追加できます。
 コンポーネントは、同じプロパティまたは属性に対するホストバインディングを定義することもあります。
@@ -126,3 +130,58 @@ export class ProfilePhoto { /* ... */ }
 - 両方の値が静的な場合、インスタンスバインディングが優先されます。
 - 一方の値が静的で他方が動的な場合、動的な値が優先されます。
 - 両方の値が動的な場合、コンポーネントのホストバインディングが優先されます。
+
+## CSSカスタムプロパティを使用したスタイリング {#styling-with-css-custom-properties}
+
+開発者は、コンポーネントのスタイルを柔軟に設定できるようにするために、[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties)に頼ることがよくあります。
+このようなカスタムプロパティは、[スタイルバインディング](guide/templates/binding#css-style-properties)を使用してホスト要素に設定できます。
+
+```angular-ts
+@Component({
+  /* ... */
+  host: {
+    '[style.--my-background]': 'color()',
+  }
+})
+export class MyComponent {
+  color = signal('lightgreen');
+}
+```
+
+この例では、`--my-background` CSSカスタムプロパティが`color`シグナルにバインドされています。カスタムプロパティの値は、`color`シグナルが変更されるたびに自動的に更新されます。これは現在のコンポーネントと、このカスタムプロパティに依存するすべての子コンポーネントに影響します。
+
+### 子コンポーネントでのカスタムプロパティの設定 {#setting-custom-properties-on-children-compoents}
+
+または、[スタイルバインディング](guide/templates/binding#css-style-properties)を使用して、子コンポーネントのホスト要素にCSSカスタムプロパティを設定することもできます。
+
+```angular-ts
+@Component({
+  selector: 'my-component',
+  template: `<my-child [style.--my-background]="color()">`,
+})
+export class MyComponent {
+  color = signal('lightgreen');
+}
+```
+
+## ホスト要素の属性の注入 {#injecting-host-element-attributes}
+
+コンポーネントとディレクティブは、[`inject`](api/core/inject)関数とともに`HostAttributeToken`を使用して、ホスト要素から静的属性を読み取ることができます。
+
+```ts
+import { Component, HostAttributeToken, inject } from '@angular/core';
+
+@Component({
+  selector: 'app-button',
+  ...,
+})
+export class Button {
+  variation = inject(new HostAttributeToken('variation'));
+}
+```
+
+```angular-html
+<app-button variation="primary">Click me</app-button>
+```
+
+HELPFUL: `HostAttributeToken`は、注入がオプションとしてマークされていない限り、属性が欠けている場合にエラーをスローします。

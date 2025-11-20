@@ -7,15 +7,15 @@ TIP: 他のウェブフレームワークに精通している場合は、入力
 コンポーネントを使用する際に、一般的にいくつかのデータを渡したいことがあります。
 コンポーネントは、**入力**を宣言することで、受け入れるデータを指定します。
 
-<docs-code language="ts" highlight="[7]">
+```ts {highlight:[5]}
 import {Component, input} from '@angular/core';
 
-@Component({/*...*/})
+@Component({/_..._/})
 export class CustomSlider {
   // Declare an input named 'value' with a default value of zero.
   value = input(0);
 }
-</docs-code>
+```
 
 これにより、テンプレートのプロパティにバインドできます。
 
@@ -25,7 +25,7 @@ export class CustomSlider {
 
 入力にデフォルト値がある場合、TypeScriptはデフォルト値から型を推論します。
 
-```typescript
+```ts
 @Component({/*...*/})
 export class CustomSlider {
   // TypeScriptは、この入力が数値であると推論し、InputSignal<number>を返します。
@@ -37,7 +37,7 @@ export class CustomSlider {
 
 デフォルト値のない入力が設定されていない場合、その値は`undefined`になります。
 
-```typescript
+```ts
 @Component({/*...*/})
 export class CustomSlider {
   // `value`は設定されない可能性があるため、InputSignal<number | undefined>を生成します。
@@ -57,18 +57,18 @@ export class CustomSlider {
 
 `input`関数は`InputSignal`を返します。シグナルを呼び出すことで値を読み取ることができます。
 
-<docs-code language="ts" highlight="[5]">
-import {Component, input} from '@angular/core';
+```ts {highlight:[5]}
+import {Component, input, computed} from '@angular/core';
 
-@Component({/*...*/})
+@Component({/_..._/})
 export class CustomSlider {
-  // Declare an input named 'value' with a default value of zero. 
+  // Declare an input named 'value' with a default value of zero.
   value = input(0);
 
   // Create a computed expression that reads the value input
-  label = computed(() => `The slider's value is ${this.value()}`); 
+  label = computed(() => `The slider's value is ${this.value()}`);
 }
-</docs-code>
+```
 
 `input`関数によって作成されたシグナルは読み取り専用です。
 
@@ -76,13 +76,13 @@ export class CustomSlider {
 
 `input`の代わりに`input.required`を呼び出すことで、入力が`required`であることを宣言できます。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 @Component({/*...*/})
 export class CustomSlider {
   // Declare a required input named value. Returns an `InputSignal<number>`.
   value = input.required<number>();
 }
-</docs-code>
+```
 
 Angularは、テンプレートでコンポーネントを使用する際に、必須入力が_必ず_設定されていることを強制します。すべての必須入力を指定せずにコンポーネントを使用しようとすると、Angularはビルド時にエラーを報告します。
 
@@ -96,7 +96,7 @@ Angularは、テンプレートでコンポーネントを使用する際に、�
 
 入力がAngularによって設定されるときに、その値を変更する`transform`関数を指定できます。
 
-<docs-code language="ts" highlight="[6]">
+```ts {highlight:[6]}
 @Component({
   selector: 'custom-slider',
   /*...*/
@@ -108,7 +108,7 @@ export class CustomSlider {
 function trimString(value: string | undefined): string {
   return value?.trim() ?? '';
 }
-</docs-code>
+```
 
 ```angular-html
 <custom-slider [label]="systemVolume" />
@@ -143,15 +143,15 @@ function appendPx(value: number): string {
 
 Angularには、最も一般的な2つのシナリオのための2つの組み込み変換関数が含まれています。ブール値と数値への値の強制変換です。
 
-<docs-code language="ts">
+```ts
 import {Component, input, booleanAttribute, numberAttribute} from '@angular/core';
 
-@Component({/*...*/})
+@Component({/_..._/})
 export class CustomSlider {
-  disabled = input(false, {transform: booleanAttribute}); 
-  value = input(0, {transform: numberAttribute}); 
+  disabled = input(false, {transform: booleanAttribute});
+  value = input(0, {transform: numberAttribute});
 }
-</docs-code>
+```
 
 `booleanAttribute`は、属性の_存在_が「true」値を示す標準的なHTML[ブール属性](https://developer.mozilla.org/docs/Glossary/Boolean/HTML)の動作を模倣します。
 ただし、Angularの`booleanAttribute`は、リテラル文字列`"false"`をブール値`false`として扱います。
@@ -162,12 +162,12 @@ export class CustomSlider {
 
 `alias`オプションを指定して、テンプレートでの入力の名前を変更できます。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 @Component({/*...*/})
 export class CustomSlider {
   value = input(0, {alias: 'sliderValue'});
 }
-</docs-code>
+```
 
 ```angular-html
 <custom-slider [sliderValue]="50" />
@@ -185,7 +185,7 @@ export class CustomSlider {
 
 どちらの種類の入力も、値をプロパティにバインドすることを可能にします。しかし、**モデル入力は、コンポーネントの作者がプロパティに値を書き込むことを可能にします。**プロパティが双方向バインディングでバインドされている場合、新しい値はそのバインディングに伝播します。
 
-```typescript
+```ts
 @Component({ /* ... */})
 export class CustomSlider {
   // "value"という名前のモデル入力を定義します。
@@ -220,7 +220,7 @@ export class MediaControls {
 
 プレーンなJavaScriptプロパティをモデル入力にバインドできます。
 
-```angular-ts
+```ts
 @Component({
   /* ... */
   // `value`はモデル入力です。
@@ -238,7 +238,7 @@ export class MediaControls {
 
 コンポーネントまたはディレクティブでモデル入力を宣言すると、Angularはそのモデルに対応する[出力](guide/components/outputs)を自動的に作成します。出力の名前は、モデル入力の名前に「Change」が付いたものです。
 
-```angular-ts
+```ts
 @Directive({ /* ... */ })
 export class CustomCheckbox {
   // これにより、「checkedChange」という名前の出力が自動的に作成されます。
@@ -307,7 +307,7 @@ export class CustomSlider {
 
 Angularによって入力が設定されるときにその値を変更する`transform`関数を指定できます。この変換関数は、上記で説明したシグナルベースの入力の変換関数と同様に機能します。
 
-<docs-code language="ts" highlight="[6]">
+```ts {highlight:[6]}
 @Component({
   selector: 'custom-slider',
   ...
@@ -316,19 +316,21 @@ export class CustomSlider {
   @Input({transform: trimString}) label = '';
 }
 
-function trimString(value: string | undefined) { return value?.trim() ?? ''; }
-</docs-code>
+function trimString(value: string | undefined) {
+  return value?.trim() ?? '';
+}
+```
 
 #### 入力エイリアス
 
 `alias`オプションを指定して、テンプレートでの入力の名前を変更できます。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 @Component({...})
 export class CustomSlider {
   @Input({alias: 'sliderValue'}) value = 0;
 }
-</docs-code>
+```
 
 ```angular-html
 <custom-slider [sliderValue]="50" />
@@ -342,7 +344,7 @@ export class CustomSlider {
 
 デコレーターベースの入力を使用する場合、ゲッターとセッターで実装されたプロパティを入力にできます。
 
-<docs-code language="ts">
+```ts
 export class CustomSlider {
   @Input()
   get value(): number {
@@ -353,11 +355,11 @@ export class CustomSlider {
 
   private internalValue = 0;
 }
-</docs-code>
+```
 
 パブリックセッターのみを定義することで、_書き込み専用_の入力を作成できます。
 
-<docs-code language="ts">
+```ts
 export class CustomSlider {
   @Input()
   set value(newValue: number) {
@@ -366,7 +368,7 @@ export class CustomSlider {
 
   private internalValue = 0;
 }
-</docs-code>
+```
 
 可能な場合は、**ゲッターとセッターの代わりに、入力変換を使用することをお勧めします。**
 
@@ -376,22 +378,22 @@ export class CustomSlider {
 
 `@Input`デコレーターに加えて、`@Component`デコレーターの`inputs`プロパティを使用して、コンポーネントの入力を指定できます。これは、コンポーネントが基本クラスからプロパティを継承する場合に役立ちます。
 
-<docs-code language="ts" highlight="[4]">
+```ts {highlight:[4]}
 // `CustomSlider` inherits the `disabled` property from `BaseSlider`.
 @Component({
   ...,
   inputs: ['disabled'],
 })
 export class CustomSlider extends BaseSlider { }
-</docs-code>
+```
 
 文字列の後にコロンを付けてエイリアスを`inputs`リストに指定できます。
 
-<docs-code language="ts" highlight="[4]">
+```ts {highlight:[4]}
 // `CustomSlider` inherits the `disabled` property from `BaseSlider`.
 @Component({
   ...,
   inputs: ['disabled: sliderDisabled'],
 })
 export class CustomSlider extends BaseSlider { }
-</docs-code>
+```

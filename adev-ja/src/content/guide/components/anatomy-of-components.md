@@ -1,13 +1,13 @@
 <docs-decorative-header title="コンポーネントの構造" imgSrc="adev/src/assets/images/components.svg"> <!-- markdownlint-disable-line -->
 </docs-decorative-header>
 
-TIP: このガイドでは、すでに[基本概念のガイド](essentials)を読んでいることを前提としています。Angularを初めて使う場合は、まずそちらをお読みください。
+TIP: このガイドでは、すでに[基本ガイド](essentials)を読んでいることを前提としています。Angularを初めて使う場合は、まずそちらをお読みください。
 
 すべてのコンポーネントには次のものが必要です。
 
-* ユーザー入力の処理やサーバーからのデータ取得などの*動作*を定義するTypeScriptクラス
-* DOMにレンダリングされる内容を制御するHTMLテンプレート
-* HTMLでコンポーネントがどのように使用されるかを定義する[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)
+- ユーザー入力の処理やサーバーからのデータ取得などの*動作*を定義するTypeScriptクラス
+- DOMにレンダリングされる内容を制御するHTMLテンプレート
+- HTMLでコンポーネントがどのように使用されるかを定義する[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)
 
 TypeScriptクラスの上部に `@Component` [デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html) を追加することで、コンポーネントにAngular固有の情報を与えます。
 
@@ -51,14 +51,14 @@ export class ProfilePhoto { }
 
 `templateUrl`と`styleUrl`の両方は、コンポーネントが存在するディレクトリを基準とした相対パスです。
 
-## コンポーネントの使用
+## コンポーネントの使用 {#using-components}
 
-### `@Component`デコレーターでのインポート
+### `@Component`デコレーターでのインポート {#imports-in-the-component-decorator}
 
 コンポーネント、[ディレクティブ](guide/directives)、または[パイプ](guide/templates/pipes)を使用するには、
 `@Component`デコレーターの`imports`配列に追加する必要があります。
 
-```angular-ts
+```ts
 import {ProfilePhoto} from './profile-photo';
 
 @Component({
@@ -74,7 +74,7 @@ export class UserProfile { }
 
 IMPORTANT: 19.0.0より前のAngularバージョンでは、`standalone`オプションはデフォルトで`false`です。
 
-### テンプレートでのコンポーネントの表示
+### テンプレートでのコンポーネントの表示 {#showing-components-in-a-template}
 
 すべてのコンポーネントは[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)を定義します。
 
@@ -97,8 +97,8 @@ _他の_コンポーネントのテンプレートで一致するHTML要素を�
 export class ProfilePhoto { }
 
 @Component({
-  imports: [ProfilePhoto],
-  template: `<profile-photo />`
+imports: [ProfilePhoto],
+template: `<profile-photo />`
 })
 export class UserProfile { }
 </docs-code>
@@ -120,6 +120,5 @@ flowchart TD
     D[ProfilePic]
     E[UserBio]
 ```
-
 
 このツリー構造は、[依存性の注入](guide/di)や[子クエリ](guide/components/queries)など、他のいくつかのAngularの概念を理解する上で重要です。

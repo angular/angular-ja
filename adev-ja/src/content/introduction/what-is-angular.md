@@ -55,7 +55,7 @@
   </docs-card>
 </docs-card-container>
 
-<docs-card-container headerTitle="自信を持って出荷" headerImgSrc="adev/src/assets/images/rocket.svg">
+<docs-card-container headerTitle="自信を持ってデプロイ" headerImgSrc="adev/src/assets/images/rocket.svg">
   <docs-card title="Googleの巨大なモノレポに対してコミットごとに検証" href="https://cacm.acm.org/research/why-google-stores-billions-of-lines-of-code-in-a-single-repository/" link="Googleのモノレポについて学ぶ" titleIconName="sensors">
     <p>Angularのすべてのコミットは、無数の現実世界のシナリオを表す、Googleの内部コードリポジトリにある数十万のテストに対してチェックされます。</p>
     <p>Angularは、Google Cloudを含むGoogleの最大級の製品の安定性にコミットしています。このコミットメントにより、変更が十分にテストされ、後方互換性があり、可能な限り移行ツールが含まれることを保証します。</p>

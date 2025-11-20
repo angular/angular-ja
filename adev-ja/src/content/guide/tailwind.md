@@ -1,21 +1,21 @@
-# Using Tailwind CSS with Angular
+# AngularでTailwind CSSを使用する
 
-[Tailwind CSS](https://tailwindcss.com/) is a utility-first CSS framework that can be used to build modern websites without ever leaving your HTML. This guide will walk you through setting up Tailwind CSS in your Angular project.
+[Tailwind CSS](https://tailwindcss.com/)は、HTMLを離れることなくモダンなウェブサイトを構築するために使用できる、ユーティリティファーストのCSSフレームワークです。このガイドでは、AngularプロジェクトでTailwind CSSをセットアップする方法を説明します。
 
-## Setting up Tailwind CSS
+## Tailwind CSSのセットアップ {#setting-up-tailwind-css}
 
-### 1. Create an Angular project
+### 1. Angularプロジェクトを作成する {#create-an-angular-project}
 
-First, create a new Angular project if you don't have one set up already.
+まず、まだAngularプロジェクトをセットアップしていない場合は、新しいプロジェクトを作成します。
 
 ```shell
 ng new my-project
 cd my-project
 ```
 
-### 2. Install Tailwind CSS
+### 2. Tailwind CSSをインストールする {#install-tailwind-css}
 
-Next, open a terminal in your Angular project's root directory and run the following command to install Tailwind CSS and its peer dependencies:
+次に、Angularプロジェクトのルートディレクトリでターミナルを開き、次のコマンドを実行してTailwind CSSとそのpeer dependencyをインストールします:
 
 <docs-code-multifile>
   <docs-code header="npm" language="shell">
@@ -32,10 +32,10 @@ Next, open a terminal in your Angular project's root directory and run the follo
   </docs-code>
 </docs-code-multifile>
 
-### 3. Configure PostCSS Plugins
+### 3. PostCSSプラグインを設定する {#configure-postcss-plugins}
 
-Next, add a `.postcssrc.json` file in the file root of the project.
-Add the `@tailwindcss/postcss` plugin into your PostCSS configuration.
+次に、プロジェクトのファイルルートに`.postcssrc.json`ファイルを追加します。
+PostCSSの設定に`@tailwindcss/postcss`プラグインを追加します。
 
 <docs-code language="json" header=".postcssrc.json">
 {
@@ -45,25 +45,25 @@ Add the `@tailwindcss/postcss` plugin into your PostCSS configuration.
 }
 </docs-code>
 
-### 4. Import Tailwind CSS
+### 4. Tailwind CSSをインポートする {#import-tailwind-css}
 
-Add an `@import` to `./src/styles.css` that imports Tailwind CSS.
+Tailwind CSSをインポートする`@import`を`./src/styles.css`に追加します。
 
 <docs-code language="css" header="src/styles.css">
 @import "tailwindcss";
 </docs-code>
 
-If you're using SCSS, add `@use` to `./src/styles.scss`.
+SCSSを使用している場合は、`@use`を`./src/styles.scss`に追加します。
 
 <docs-code language="scss" header="src/styles.scss">
 @use "tailwindcss";
 </docs-code>
 
-### 5. Start using Tailwind in your project
+### 5. プロジェクトでTailwindを使い始める {#start-using-tailwind-in-your-project}
 
-You can now start using Tailwind's utility classes in your component templates to style your application.
+これで、コンポーネントのテンプレートでTailwindのユーティリティクラスを使用して、アプリケーションのスタイルを設定できるようになります。
 
-For example, you can add the following to your `app.html` file:
+たとえば、次の内容を`app.html`ファイルに追加できます:
 
 <docs-code language="html">
 <h1 class="text-3xl font-bold underline">
@@ -71,10 +71,10 @@ For example, you can add the following to your `app.html` file:
 </h1>
 </docs-code>
 
-### 6. Start using Tailwind in your project
+### 6. プロジェクトでTailwindを使い始める {#start-using-tailwind-in-your-project}
 
-Run your build process with `ng serve` and you should see the styled heading.
+`ng serve`でビルドプロセスを実行すると、スタイルが適用された見出しが表示されるはずです。
 
-## Additional Resources
+## その他のリソース {#additional-resources}
 
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Tailwind CSSドキュメント](https://tailwindcss.com/docs)

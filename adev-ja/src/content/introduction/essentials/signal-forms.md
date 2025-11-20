@@ -1,16 +1,16 @@
-<docs-decorative-header title="Forms with signals" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
-Signal Forms is built on Angular signals to provide a reactive, type-safe way to manage form state.
+<docs-decorative-header title="シグナルを使ったフォーム" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
+シグナルフォームはAngularのシグナルを基に構築されており、フォームの状態を管理するためのリアクティブで型安全な方法を提供します。
 </docs-decorative-header>
 
-Signal Forms manage form state using Angular signals to provide automatic synchronization between your data model and the UI.
+シグナルフォームはAngularのシグナルを使用してフォームの状態を管理し、データモデルとUI間の自動的な同期を提供します。
 
-This guide walks you through the core concepts to create forms with Signal Forms. Here's how it works:
+このガイドでは、シグナルフォームでフォームを作成するための中心的な概念を順を追って説明します。その仕組みは次のとおりです:
 
-## Creating your first form
+## 最初のフォームを作成する {#creating-your-first-form}
 
-### 1. Create a form model
+### 1. フォームモデルを作成する {#1-create-a-form-model}
 
-Every form starts by creating a signal that holds your form's data model:
+すべてのフォームは、フォームのデータモデルを保持するシグナルを作成することから始まります:
 
 ```ts
 interface LoginData {
@@ -24,9 +24,9 @@ const loginModel = signal<LoginData>({
 });
 ```
 
-### 2. Pass the form model to `form()`
+### 2. フォームモデルを`form()`に渡す {#2-pass-the-form-model-to-form}
 
-Then, you pass your form model into the `form()` function to create a **field tree** - an object structure that mirrors your model's shape, allowing you to access fields with dot notation:
+次に、フォームモデルを`form()`関数に渡して**フィールドツリー**を作成します。これはモデルの形状を反映したオブジェクト構造で、ドット記法でフィールドにアクセスできます:
 
 ```ts
 form(loginModel);
@@ -36,16 +36,16 @@ loginForm.email
 loginForm.password
 ```
 
-### 3. Bind inputs with `[field]` directive
+### 3. `[field]`ディレクティブで入力をバインドする {#3-bind-inputs-with-field-directive}
 
-Next, you bind your HTML inputs to the form using the `[field]` directive, which creates two-way binding between them:
+次に、`[field]`ディレクティブを使用してHTMLの入力をフォームにバインドします。これにより、それらの間に双方向バインディングが作成されます:
 
 ```html
 <input type="email" [field]="loginForm.email" />
 <input type="password" [field]="loginForm.password" />
 ```
 
-As a result, user changes (such as typing in the field) automatically updates the form, and any programmatic changes update the displayed value as well:
+その結果、ユーザーによる変更（フィールドへの入力など）は自動的にフォームを更新し、プログラムによる変更も表示される値を更新します:
 
 ```ts
 // Update the value programmatically
@@ -55,17 +55,17 @@ loginForm.email().value.set('alice@wonderland.com');
 console.log(loginModel().email); // 'alice@wonderland.com'
 ```
 
-NOTE: The `[field]` directive also syncs field state for attributes like `required`, `disabled`, and `readonly` when appropriate.
+NOTE: `[field]`ディレクティブは、必要に応じて`required`、`disabled`、`readonly`などの属性のフィールドの状態も同期します。
 
-### 4. Read form field values with `value()`
+### 4. `value()`でフォームフィールドの値を読み取る {#4-read-form-field-values-with-value}
 
-You can access field state by calling the field as a function. This returns a `FieldState` object containing reactive signals for the field's value, validation status, and interaction state:
+フィールドを関数として呼び出すことで、フィールドの状態にアクセスできます。これにより、フィールドの値、バリデーションステータス、インタラクションの状態に対するリアクティブなシグナルを含む`FieldState`オブジェクトが返されます:
 
 ```ts
 loginForm.email() // Returns FieldState with value(), valid(), touched(), etc.
 ```
 
-To read the field's current value, access the `value()` signal:
+フィールドの現在の値を読み取るには、`value()`シグナルにアクセスします:
 
 ```html
 <!-- Render form value that updates automatically as user types -->
@@ -77,7 +77,7 @@ To read the field's current value, access the `value()` signal:
 const currentEmail = loginForm.email().value();
 ```
 
-Here's a complete example:
+完全な例は次のとおりです:
 
 <docs-code-multifile preview path="adev/src/content/examples/signal-forms/src/login-simple/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/signal-forms/src/login-simple/app/app.ts"/>
@@ -85,13 +85,13 @@ Here's a complete example:
   <docs-code header="app.css" path="adev/src/content/examples/signal-forms/src/login-simple/app/app.css"/>
 </docs-code-multifile>
 
-## Basic usage
+## 基本的な使い方 {#basic-usage}
 
-The `[field]` directive works with all standard HTML input types. Here are the most common patterns:
+`[field]`ディレクティブは、すべての標準的なHTMLのinputタイプで動作します。以下は、最も一般的なパターンです:
 
-### Text inputs
+### テキスト入力 {#text-inputs}
 
-Text inputs work with various `type` attributes and textareas:
+テキスト入力は、さまざまな`type`属性やtextareaで動作します:
 
 ```html
 <!-- Text and email -->
@@ -99,18 +99,18 @@ Text inputs work with various `type` attributes and textareas:
 <input type="email" [field]="form.email" />
 ```
 
-#### Numbers
+#### 数値 {#numbers}
 
-Number inputs automatically convert between strings and numbers:
+数値入力は、文字列と数値を自動的に変換します:
 
 ```html
 <!-- Number - automatically converts to number type -->
 <input type="number" [field]="form.age" />
 ```
 
-#### Date and time
+#### 日付と時刻 {#date-and-time}
 
-Date inputs store values as `YYYY-MM-DD` strings, and time inputs use `HH:mm` format:
+日付入力は値を`YYYY-MM-DD`形式の文字列として保存し、時刻入力は`HH:mm`形式を使用します:
 
 ```html
 <!-- Date and time - stores as ISO format strings -->
@@ -118,24 +118,24 @@ Date inputs store values as `YYYY-MM-DD` strings, and time inputs use `HH:mm` fo
 <input type="time" [field]="form.eventTime" />
 ```
 
-If you need to convert date strings to Date objects, you can do so by passing the field value into `Date()`:
+日付文字列をDateオブジェクトに変換する必要がある場合は、フィールドの値を`Date()`に渡すことで変換できます:
 
 ```ts
 const dateObject = new Date(form.eventDate().value());
 ```
 
-#### Multiline text
+#### 複数行テキスト {#multiline-text}
 
-Textareas work the same way as text inputs:
+Textareaはテキスト入力と同じように動作します:
 
 ```html
 <!-- Textarea -->
 <textarea [field]="form.message" rows="4"></textarea>
 ```
 
-### Checkboxes
+### チェックボックス {#checkboxes}
 
-Checkboxes bind to boolean values:
+チェックボックスはブール値にバインドされます:
 
 ```html
 <!-- Single checkbox -->
@@ -145,9 +145,9 @@ Checkboxes bind to boolean values:
 </label>
 ```
 
-#### Multiple checkboxes
+#### 複数チェックボックス {#multiple-checkboxes}
 
-For multiple options, create a separate boolean `field` for each:
+複数のオプションがある場合は、それぞれに個別のブール値の`field`を作成します:
 
 ```html
 <label>
@@ -160,9 +160,9 @@ For multiple options, create a separate boolean `field` for each:
 </label>
 ```
 
-### Radio buttons
+### ラジオボタン {#radio-buttons}
 
-Radio buttons work similarly to checkboxes. As long as the radio buttons use the same `[field]` value, Signal Forms will automatically bind the same `name` attribute to all of them:
+ラジオボタンはチェックボックスと同様に動作します。ラジオボタンが同じ`[field]`値を使用している限り、シグナルフォームは自動的に同じ`name`属性をすべてのラジオボタンにバインドします:
 
 ```html
 <label>
@@ -175,11 +175,11 @@ Radio buttons work similarly to checkboxes. As long as the radio buttons use the
 </label>
 ```
 
-When a user selects a radio button, the form `field` stores the value from that radio button's `value` attribute. For example, selecting "Premium" sets `form.plan().value()` to `"premium"`.
+ユーザーがラジオボタンを選択すると、フォームの`field`にはそのラジオボタンの`value`属性の値が保存されます。例えば、「Premium」を選択すると、`form.plan().value()`は`"premium"`に設定されます。
 
-### Select dropdowns
+### selectドロップダウン {#select-dropdowns}
 
-Select elements work with both static and dynamic options:
+Select要素は、静的オプションと動的オプションの両方で動作します:
 
 ```html
 <!-- Static options -->
@@ -198,11 +198,11 @@ Select elements work with both static and dynamic options:
 </select>
 ```
 
-NOTE: Multiple select (`<select multiple>`) is not supported by the `[field]` directive at this time.
+NOTE: 複数選択(`<select multiple>`)は、現時点では`[field]`ディレクティブでサポートされていません。
 
-## Validation and state
+## バリデーションと状態
 
-Signal Forms provides built-in validators that you can apply to your form fields. To add validation, pass a schema function as the second argument to `form()`. This function receives a **FieldPath** parameter that allows you to reference the fields in your form model:
+シグナルフォームには、フォームフィールドに適用できる組み込みのバリデーターが用意されています。バリデーションを追加するには、`form()`の第2引数にスキーマ関数を渡します。この関数は、フォームモデル内のフィールドを参照できる**FieldPath**パラメーターを受け取ります:
 
 ```ts
 const loginForm = form(loginModel, (fieldPath) => {
@@ -211,26 +211,26 @@ const loginForm = form(loginModel, (fieldPath) => {
 });
 ```
 
-NOTE: FieldPath only mirrors the shape of your data and does not allow you to access value or any other state.
+NOTE: FieldPathはデータの形状をミラーリングするだけで、値やその他の状態にアクセスできません。
 
-Common validators include:
+一般的なバリデーターには次のものがあります:
 
-- **`required()`** - Ensures the field has a value
-- **`email()`** - Validates email format
-- **`min()`** / **`max()`** - Validates number ranges
-- **`minLength()`** / **`maxLength()`** - Validates string or collection length
-- **`pattern()`** - Validates against a regex pattern
+- **`required()`** - フィールドに値があることを保証します
+- **`email()`** - メール形式を検証します
+- **`min()`** / **`max()`** - 数値の範囲を検証します
+- **`minLength()`** / **`maxLength()`** - 文字列またはコレクションの長さを検証します
+- **`pattern()`** - 正規表現パターンに対して検証します
 
-You can also customize error messages by passing an options object as the second argument to the validator:
+バリデーターの第2引数にオプションオブジェクトを渡すことで、エラーメッセージをカスタマイズできます:
 
 ```ts
 required(p.email, { message: 'Email is required' });
 email(p.email, { message: 'Please enter a valid email address' });
 ```
 
-Each form field exposes its validation state through signals. For example, you can check `field().valid()` to see if validation passes, `field().touched()` to see if the user has interacted with it, and `field().errors()` to get the list of validation errors.
+各フォームフィールドは、シグナルを通じてそのバリデーション状態を公開します。たとえば、`field().valid()`をチェックしてバリデーションが成功したか、`field().touched()`をチェックしてユーザーが操作したかを確認し、`field().errors()`をチェックしてバリデーションエラーのリストを取得できます。
 
-Here's a complete example:
+以下に完全な例を示します:
 
 <docs-code-multifile preview path="adev/src/content/examples/signal-forms/src/login-validation/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/signal-forms/src/login-validation/app/app.ts"/>
@@ -238,17 +238,17 @@ Here's a complete example:
   <docs-code header="app.css" path="adev/src/content/examples/signal-forms/src/login-validation/app/app.css"/>
 </docs-code-multifile>
 
-### Field State Signals
+### フィールドの状態シグナル {#field-state-signals}
 
-Every `field()` provides these state signals:
+すべての`field()`は、これらの状態シグナルを提供します:
 
-| State        | Description                                                                |
+| 状態         | 説明                                                                       |
 | ------------ | -------------------------------------------------------------------------- |
-| `valid()`    | Returns `true` if the field passes all validation rules                    |
-| `touched()`  | Returns `true` if the user has focused and blurred the field               |
-| `dirty()`    | Returns `true` if the user has changed the value                           |
-| `disabled()` | Returns `true` if the field is disabled                                    |
-| `pending()`  | Returns `true` if async validation is in progress                          |
-| `errors()`   | Returns an array of validation errors with `kind` and `message` properties |
+| `valid()`    | フィールドがすべてのバリデーションルールをパスした場合に`true`を返します     |
+| `touched()`  | ユーザーがフィールドにフォーカスしてぼかした場合に`true`を返します           |
+| `dirty()`    | ユーザーが値を変更した場合に`true`を返します                               |
+| `disabled()` | フィールドが無効になっている場合に`true`を返します                           |
+| `pending()`  | 非同期バリデーションが進行中の場合に`true`を返します                         |
+| `errors()`   | `kind`と`message`プロパティを持つバリデーションエラーの配列を返します       |
 
-TIP: Show errors only after `field().touched()` is true to avoid displaying validation messages before the user has interacted with a field.
+TIP: ユーザーがフィールドを操作する前にバリデーションメッセージが表示されるのを避けるために、`field().touched()`がtrueになった後にのみエラーを表示してください。

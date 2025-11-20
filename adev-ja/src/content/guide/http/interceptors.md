@@ -12,15 +12,15 @@ TLDR: インターセプターは、再試行、キャッシュ、ロギング�
 
 インターセプターを使用して、さまざまな一般的なパターンを実装できます。たとえば、以下のようなものがあります。
 
-* 特定のAPIへの送信リクエストに認証ヘッダーを追加する。
-* 失敗したリクエストを指数関数的バックオフで再試行する。
-* レスポンスを一定時間キャッシュするか、変更によって無効になるまでキャッシュする。
-* レスポンスの解析をカスタマイズする。
-* サーバーの応答時間を測定してログに記録する。
-* ネットワーク操作が進行中の間、ローディングスピナーなどのUI要素を制御する。
-* 特定のタイムフレーム内で作成されたリクエストを収集してバッチ処理する。
-* 設定可能な期限またはタイムアウト後にリクエストを自動的に失敗させる。
-* サーバーを定期的にポーリングして結果を更新する。
+- 特定のAPIへの送信リクエストに認証ヘッダーを追加する。
+- 失敗したリクエストを指数関数的バックオフで再試行する。
+- レスポンスを一定時間キャッシュするか、変更によって無効になるまでキャッシュする。
+- レスポンスの解析をカスタマイズする。
+- サーバーの応答時間を測定してログに記録する。
+- ネットワーク操作が進行中の間、ローディングスピナーなどのUI要素を制御する。
+- 特定のタイムフレーム内で作成されたリクエストを収集してバッチ処理する。
+- 設定可能な期限またはタイムアウト後にリクエストを自動的に失敗させる。
+- サーバーを定期的にポーリングして結果を更新する。
 
 ## インターセプターの定義
 
@@ -28,12 +28,12 @@ TLDR: インターセプターは、再試行、キャッシュ、ロギング�
 
 たとえば、この `loggingInterceptor` は、リクエストを転送する前に、送信されるリクエストのURLを `console.log` にログに記録します。
 
-<docs-code language="ts">
+```ts
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   console.log(req.url);
   return next(req);
 }
-</docs-code>
+```
 
 このインターセプターが実際にリクエストをインターセプトするためには、`HttpClient` がインターセプターを使用するように構成する必要があります。
 
@@ -41,13 +41,13 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
 
 `HttpClient` を構成するときに使用するインターセプターのセットは、`withInterceptors` 機能を使用して、依存性の注入によって宣言します。
 
-<docs-code language="ts">
+```ts
 bootstrapApplication(AppComponent, {providers: [
   provideHttpClient(
     withInterceptors([loggingInterceptor, cachingInterceptor]),
   )
 ]});
-</docs-code>
+```
 
 構成したインターセプターは、プロバイダーにリストした順序でチェーンされます。上記の例では、`loggingInterceptor` がリクエストを処理し、`cachingInterceptor` に転送します。
 
@@ -55,7 +55,7 @@ bootstrapApplication(AppComponent, {providers: [
 
 インターセプターは、`next` から返される `HttpEvent` の `Observable` ストリームを変換して、レスポンスにアクセスしたり、レスポンスを操作したりできます。このストリームにはすべてのレスポンスイベントが含まれているため、最終的なレスポンスオブジェクトを識別するためには、各イベントの `.type` を調べる必要がある場合があります。
 
-<docs-code language="ts">
+```ts
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   return next(req).pipe(tap(event => {
     if (event.type === HttpEventType.Response) {
@@ -63,7 +63,7 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
     }
   }));
 }
-</docs-code>
+```
 
 TIP: インターセプターは、レスポンスストリームをリクエストオブジェクトをキャプチャするクロージャー内で変換するため、レスポンスを送信リクエストに自然に関連付けます。
 
@@ -73,11 +73,11 @@ TIP: インターセプターは、レスポンスストリームをリクエス
 
 たとえば、リクエストにヘッダーを追加するには、次のようにします。
 
-<docs-code language="ts">
+```ts
 const reqWithHeader = req.clone({
   headers: req.headers.set('X-New-Header', 'new header value'),
 });
-</docs-code>
+```
 
 この変更不能性により、ほとんどのインターセプターは、同じ `HttpRequest` がインターセプターチェーンに複数回送信された場合でも、べき等性を持つことができます。これは、リクエストが失敗後に再試行された場合など、いくつかの理由で発生する可能性があります。
 
@@ -85,11 +85,11 @@ CRITICAL: リクエストまたはレスポンスの本文は、深い変更か�
 
 ## インターセプターでの依存性の注入
 
-インターセプターは、インターセプターを登録したインジェクターの _注入コンテキスト_ で実行され、Angularの `inject` APIを使用して依存関係を取得できます。
+インターセプターは、インターセプターを登録したインジェクターの _注入コンテキスト_ で実行され、Angularの`inject` APIを使用して依存関係を取得できます。
 
 たとえば、アプリケーションに `AuthService` というサービスがあり、このサービスが送信リクエストの認証トークンを作成するとします。インターセプターは、このサービスを注入して使用できます。
 
-<docs-code language="ts">
+```ts
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
   // 現在の `AuthService` を注入して、認証トークンを取得します。
   const authToken = inject(AuthService).getAuthToken();
@@ -100,7 +100,7 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) 
   });
   return next(newReq);
 }
-</docs-code>
+```
 
 ## リクエストとレスポンスのメタデータ
 
@@ -112,9 +112,9 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) 
 
 特定のリクエストの `.context` マップに、キャッシュインターセプターがリクエストをキャッシュするかどうかを格納するには、キーとして機能する新しい `HttpContextToken` を定義します。
 
-<docs-code language="ts">
+```ts
 export const CACHING_ENABLED = new HttpContextToken<boolean>(() => true);
-</docs-code>
+```
 
 提供される関数は、明示的に値が設定されていないリクエストのトークンのデフォルト値を作成します。関数を用いることで、トークンの値がオブジェクトまたは配列である場合、各リクエストが独自のインスタンスを取得することが保証されます。
 
@@ -122,7 +122,7 @@ export const CACHING_ENABLED = new HttpContextToken<boolean>(() => true);
 
 インターセプターは、トークンを読み取り、その値に基づいてキャッシュロジックを適用するかどうかを選択できます。
 
-<docs-code language="ts">
+```ts
 export function cachingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   if (req.context.get(CACHING_ENABLED)) {
     // キャッシュロジックを適用する
@@ -132,17 +132,17 @@ export function cachingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
     return next(req);
   }
 }
-</docs-code>
+```
 
 ### リクエストの作成時のコンテキストトークンの設定
 
 `HttpClient` APIを介してリクエストを作成する際には、`HttpContextToken` の値を指定できます。
 
-<docs-code language="ts">
+```ts
 const data$ = http.get('/sensitive/data', {
   context: new HttpContext().set(CACHING_ENABLED, false),
 });
-</docs-code>
+```
 
 インターセプターは、リクエストの `HttpContext` からこれらの値を読み取ることができます。
 
@@ -158,11 +158,11 @@ const data$ = http.get('/sensitive/data', {
 
 `HttpResponse` コンストラクターを使用して、レスポンスを作成できます。
 
-<docs-code language="ts">
+```ts
 const resp = new HttpResponse({
   body: 'response body',
 });
-</docs-code>
+```
 
 ## リダイレクト情報の操作
 
@@ -170,7 +170,7 @@ const resp = new HttpResponse({
 
 インターセプターは、リダイレクト情報にアクセスして作用できます。
 
-<docs-code language="ts">
+```ts
 export function redirectTrackingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   return next(req).pipe(tap(event => {
     if (event.type === HttpEventType.Response && event.redirected) {
@@ -179,11 +179,11 @@ export function redirectTrackingInterceptor(req: HttpRequest<unknown>, next: Htt
     }
   }));
 }
-</docs-code>
+```
 
 また、リダイレクト情報を使用してインターセプターで条件付きロジックを実装できます。
 
-<docs-code language="ts">
+```ts
 export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   return next(req).pipe(tap(event => {
     if (event.type === HttpEventType.Response && event.redirected) {
@@ -195,7 +195,45 @@ export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHan
     }
   }));
 }
-</docs-code>
+```
+
+## レスポンスタイプの操作 {#working-with-response-types}
+
+`HttpClient` を `withFetch` プロバイダーと一緒に使用する場合、レスポンスには、CORSポリシーとリクエストモードに基づいてブラウザがレスポンスを処理した方法を示す `type` プロパティが含まれます。このプロパティはネイティブのFetch API仕様に沿っており、CORSの問題をデバッグしたり、レスポンスのアクセス可能性を理解したりするための貴重な洞察を提供します。
+
+レスポンスの `type` プロパティには、次の値を設定できます。
+
+- `'basic'` - 同一オリジンのレスポンスで、すべてのヘッダーにアクセス可能
+- `'cors'` - CORSヘッダーが適切に構成されたクロスオリジンレスポンス
+- `'opaque'` - CORSのないクロスオリジンレスポンスで、ヘッダーと本文が制限される場合がある
+- `'opaqueredirect'` - no-corsモードでリダイレクトされたリクエストからのレスポンス
+- `'error'` - ネットワークエラーが発生した
+
+インターセプターは、CORSのデバッグとエラー処理のためにレスポンスタイプ情報を使用できます。
+
+```ts
+export function responseTypeInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(map(event => {
+    if (event.type === HttpEventType.Response) {
+      // さまざまなレスポンスタイプを適切に処理する
+      switch (event.responseType) {
+        case 'opaque':
+          // レスポンスデータへのアクセスが制限されている
+          console.warn('Limited response data due to CORS policy');
+          break;
+        case 'cors':
+        case 'basic':
+          // レスポンスデータへのフルアクセス
+          break;
+        case 'error':
+          // ネットワークエラーを処理する
+          console.error('Network error in response');
+          break;
+      }
+    }
+  }));
+}
+```
 
 ## DI ベースのインターセプター {#di-based-interceptors}
 
@@ -203,7 +241,7 @@ export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHan
 
 DIベースのインターセプターは、`HttpInterceptor` インターフェースを実装する、注入可能なクラスです。
 
-<docs-code language="ts">
+```ts
 @Injectable()
 export class LoggingInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
@@ -211,11 +249,11 @@ export class LoggingInterceptor implements HttpInterceptor {
     return handler.handle(req);
   }
 }
-</docs-code>
+```
 
 DIベースのインターセプターは、依存性の注入のマルチプロバイダーによって構成されます。
 
-<docs-code language="ts">
+```ts
 bootstrapApplication(AppComponent, {providers: [
   provideHttpClient(
     // DI ベースのインターセプターは明示的に有効にする必要があります。
@@ -224,6 +262,6 @@ bootstrapApplication(AppComponent, {providers: [
 
   {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
 ]});
-</docs-code>
+```
 
 DIベースのインターセプターは、プロバイダーが登録された順序で実行されます。DI構成が複雑で階層的なアプリケーションでは、この順序を予測することは非常に難しい場合があります。

@@ -6,17 +6,17 @@
 
 `HttpClient` は `provideHttpClient` ヘルパー関数を使って提供されます。ほとんどのアプリケーションは、`app.config.ts` のアプリケーション `providers` にこれを含めます。
 
-<docs-code language="ts">
+```ts
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
   ]
 };
-</docs-code>
+```
 
 アプリケーションがNgModuleベースのブートストラップを使用している場合は、アプリケーションのNgModuleのプロバイダーに `provideHttpClient` を含めることができます。
 
-<docs-code language="ts">
+```ts
 @NgModule({
   providers: [
     provideHttpClient(),
@@ -24,17 +24,17 @@ export const appConfig: ApplicationConfig = {
   // ...その他のアプリケーション設定
 })
 export class AppModule {}
-</docs-code>
+```
 
 その後、`HttpClient` サービスを、コンポーネント、サービス、またはその他のクラスの依存関係として注入できます。
 
-<docs-code language="ts">
+```ts
 @Injectable({providedIn: 'root'})
 export class ConfigService {
   private http = inject(HttpClient);
   // このサービスは、`this.http` を介して HTTP リクエストを実行できるようになりました。
 }
-</docs-code>
+```
 
 ## `HttpClient` の機能の設定
 
@@ -42,7 +42,7 @@ export class ConfigService {
 
 ### `withFetch`
 
-<docs-code language="ts">
+```ts
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
@@ -50,7 +50,7 @@ export const appConfig: ApplicationConfig = {
     ),
   ]
 };
-</docs-code>
+```
 
 デフォルトでは、`HttpClient` は [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) APIを使ってリクエストを行います。`withFetch` 機能は、クライアントを [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API) APIを代わりに使うように切り替えます。
 

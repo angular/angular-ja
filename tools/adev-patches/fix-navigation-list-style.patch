@@ -1,0 +1,12 @@
+diff --git a/adev/shared-docs/components/navigation-list/navigation-list.component.scss b/adev/shared-docs/components/navigation-list/navigation-list.component.scss
+index 5e0b7a90ac..f48f54cb7c 100644
+--- a/adev/shared-docs/components/navigation-list/navigation-list.component.scss
++++ b/adev/shared-docs/components/navigation-list/navigation-list.component.scss
+@@ -50,6 +50,7 @@
+     overflow: hidden;
+     text-overflow: ellipsis;
+     text-wrap: balance;
++    word-break: auto-phrase;
+   }
+ 
+   .docs-nav-item-has-icon {

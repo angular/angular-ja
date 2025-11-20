@@ -8,17 +8,17 @@ In the example application, the `BannerComponent` presents static title text in 
 
 After a few changes, the `BannerComponent` presents a dynamic title by binding to the component's `title` property like this.
 
-<docs-code header="app/banner/banner.component.ts" path="adev/src/content/examples/testing/src/app/banner/banner.component.ts" visibleRegion="component"/>
+<docs-code header="banner.component.ts" path="adev/src/content/examples/testing/src/app/banner/banner.component.ts" visibleRegion="component"/>
 
 As minimal as this is, you decide to add a test to confirm that component actually displays the right content where you think it should.
 
 ### Query for the `<h1>`
 
-You'll write a sequence of tests that inspect the value of the `<h1>` element that wraps the *title* property interpolation binding.
+You'll write a sequence of tests that inspect the value of the `<h1>` element that wraps the _title_ property interpolation binding.
 
 You update the `beforeEach` to find that element with a standard HTML `querySelector` and assign it to the `h1` variable.
 
-<docs-code header="app/banner/banner.component.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/banner/banner.component.spec.ts" visibleRegion="setup"/>
+<docs-code header="banner.component.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/banner/banner.component.spec.ts" visibleRegion="setup"/>
 
 ### `createComponent()` does not bind data
 
@@ -27,7 +27,7 @@ Your instinct is to write a test that immediately inspects the `<h1>` like this:
 
 <docs-code path="adev/src/content/examples/testing/src/app/banner/banner.component.spec.ts" visibleRegion="expect-h1-default-v1"/>
 
-*That test fails* with the message:
+_That test fails_ with the message:
 
 <docs-code language="javascript">
 
@@ -51,9 +51,9 @@ Only then does the `<h1>` have the expected title.
 <docs-code path="adev/src/content/examples/testing/src/app/banner/banner.component.spec.ts" visibleRegion="expect-h1-default"/>
 
 Delayed change detection is intentional and useful.
-It gives the tester an opportunity to inspect and change the state of the component *before Angular initiates data binding and calls [lifecycle hooks](guide/components/lifecycle)*.
+It gives the tester an opportunity to inspect and change the state of the component _before Angular initiates data binding and calls [lifecycle hooks](guide/components/lifecycle)_.
 
-Here's another test that changes the component's `title` property *before* calling `fixture.detectChanges()`.
+Here's another test that changes the component's `title` property _before_ calling `fixture.detectChanges()`.
 
 <docs-code path="adev/src/content/examples/testing/src/app/banner/banner.component.spec.ts" visibleRegion="after-change"/>
 
@@ -65,11 +65,11 @@ Many testers prefer that the Angular test environment run change detection autom
 That's possible by configuring the `TestBed` with the `ComponentFixtureAutoDetect` provider.
 First import it from the testing utility library:
 
-<docs-code header="app/banner/banner.component.detect-changes.spec.ts (import)" path="adev/src/content/examples/testing/src/app/banner/banner.component.detect-changes.spec.ts" visibleRegion="import-ComponentFixtureAutoDetect"/>
+<docs-code header="banner.component.detect-changes.spec.ts (import)" path="adev/src/content/examples/testing/src/app/banner/banner.component.detect-changes.spec.ts" visibleRegion="import-ComponentFixtureAutoDetect"/>
 
 Then add it to the `providers` array of the testing module configuration:
 
-<docs-code header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect)" path="adev/src/content/examples/testing/src/app/banner/banner.component.detect-changes.spec.ts" visibleRegion="auto-detect"/>
+<docs-code header="banner.component.detect-changes.spec.ts (AutoDetect)" path="adev/src/content/examples/testing/src/app/banner/banner.component.detect-changes.spec.ts" visibleRegion="auto-detect"/>
 
 HELPFUL: You can also use the `fixture.autoDetectChanges()` function instead if you only want to enable automatic change detection
 after making updates to the state of the fixture's component. In addition, automatic change detection is on by default
@@ -77,7 +77,7 @@ when using `provideZonelessChangeDetection` and turning it off is not recommende
 
 Here are three tests that illustrate how automatic change detection works.
 
-<docs-code header="app/banner/banner.component.detect-changes.spec.ts (AutoDetect Tests)" path="adev/src/content/examples/testing/src/app/banner/banner.component.detect-changes.spec.ts" visibleRegion="auto-detect-tests"/>
+<docs-code header="banner.component.detect-changes.spec.ts (AutoDetect Tests)" path="adev/src/content/examples/testing/src/app/banner/banner.component.detect-changes.spec.ts" visibleRegion="auto-detect-tests"/>
 
 The first test shows the benefit of automatic change detection.
 
@@ -99,19 +99,19 @@ It won't read that property until you raise the element's `input` event by calli
 
 The following example demonstrates the proper sequence.
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (pipe test)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="title-case-pipe"/>
+<docs-code header="hero-detail.component.spec.ts (pipe test)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="title-case-pipe"/>
 
 ## Component with external files
 
-The preceding `BannerComponent` is defined with an *inline template* and *inline css*, specified in the `@Component.template` and `@Component.styles` properties respectively.
+The preceding `BannerComponent` is defined with an _inline template_ and _inline css_, specified in the `@Component.template` and `@Component.styles` properties respectively.
 
-Many components specify *external templates* and *external css* with the `@Component.templateUrl` and `@Component.styleUrls` properties respectively, as the following variant of `BannerComponent` does.
+Many components specify _external templates_ and _external css_ with the `@Component.templateUrl` and `@Component.styleUrls` properties respectively, as the following variant of `BannerComponent` does.
 
-<docs-code header="app/banner/banner-external.component.ts (metadata)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.ts" visibleRegion="metadata"/>
+<docs-code header="banner-external.component.ts (metadata)" path="adev/src/content/examples/testing/src/app/banner/banner-external.component.ts" visibleRegion="metadata"/>
 
 This syntax tells the Angular compiler to read the external files during component compilation.
 
-That's not a problem when you run the CLI `ng test` command because it *compiles the application before running the tests*.
+That's not a problem when you run the CLI `ng test` command because it _compiles the application before running the tests_.
 
 However, if you run the tests in a **non-CLI environment**, tests of this component might fail.
 For example, if you run the `BannerComponent` tests in a web coding environment such as [plunker](https://plnkr.co), you'll see a message like this one:
@@ -124,9 +124,9 @@ Please call "TestBed.compileComponents" before your test.
 
 </docs-code>
 
-You get this test failure message when the runtime environment compiles the source code *during the tests themselves*.
+You get this test failure message when the runtime environment compiles the source code _during the tests themselves_.
 
-To correct the problem, call `compileComponents()` as explained in the following [Calling compileComponents](#calling-compilecomponents) section.
+To correct the problem, call `compileComponents()`.
 
 ## Component with a dependency
 
@@ -135,13 +135,13 @@ Components often have service dependencies.
 The `WelcomeComponent` displays a welcome message to the logged-in user.
 It knows who the user is based on a property of the injected `UserService`:
 
-<docs-code header="app/welcome/welcome.component.ts" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.ts"/>
+<docs-code header="welcome.component.ts" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.ts"/>
 
 The `WelcomeComponent` has decision logic that interacts with the service, logic that makes this component worth testing.
 
 ### Provide service test doubles
 
-A *component-under-test* doesn't have to be provided with real services.
+A _component-under-test_ doesn't have to be provided with real services.
 
 Injecting the real `UserService` could be difficult.
 The real service might ask the user for login credentials and attempt to reach an authentication server.
@@ -154,8 +154,8 @@ The tests need access to the `UserService` injected into the `WelcomeComponent`.
 Angular has a hierarchical injection system.
 There can be injectors at multiple levels, from the root injector created by the `TestBed` down through the component tree.
 
-The safest way to get the injected service, the way that ***always works***,
-is to **get it from the injector of the *component-under-test***.
+The safest way to get the injected service, the way that **_always works_**,
+is to **get it from the injector of the _component-under-test_**.
 The component injector is a property of the fixture's `DebugElement`.
 
 <docs-code header="WelcomeComponent's injector" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.spec.ts" visibleRegion="injected-service"/>
@@ -166,21 +166,21 @@ HELPFUL: This is _usually_ not necessary. Services are often provided in the roo
 
 This is easier to remember and less verbose than retrieving a service using the fixture's `DebugElement`.
 
-In this test suite, the *only* provider of `UserService` is the root testing module, so it is safe to call `TestBed.inject()` as follows:
+In this test suite, the _only_ provider of `UserService` is the root testing module, so it is safe to call `TestBed.inject()` as follows:
 
 <docs-code header="TestBed injector" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.spec.ts" visibleRegion="inject-from-testbed" />
 
-HELPFUL: For a use case in which `TestBed.inject()` does not work, see the [*Override component providers*](#override-component-providers) section that explains when and why you must get the service from the component's injector instead.
+HELPFUL: For a use case in which `TestBed.inject()` does not work, see the [_Override component providers_](#override-component-providers) section that explains when and why you must get the service from the component's injector instead.
 
 ### Final setup and tests
 
 Here's the complete `beforeEach()`, using `TestBed.inject()`:
 
-<docs-code header="app/welcome/welcome.component.spec.ts" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.spec.ts" visibleRegion="setup"/>
+<docs-code header="welcome.component.spec.ts" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.spec.ts" visibleRegion="setup"/>
 
 And here are some tests:
 
-<docs-code header="app/welcome/welcome.component.spec.ts" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.spec.ts" visibleRegion="tests"/>
+<docs-code header="welcome.component.spec.ts" path="adev/src/content/examples/testing/src/app/welcome/welcome.component.spec.ts" visibleRegion="tests"/>
 
 The first is a sanity test; it confirms that the `UserService` is called and working.
 
@@ -197,14 +197,14 @@ The third test checks that the component displays the proper message when there 
 In this sample, the `AboutComponent` template hosts a `TwainComponent`.
 The `TwainComponent` displays Mark Twain quotes.
 
-<docs-code header="app/twain/twain.component.ts (template)" path="adev/src/content/examples/testing/src/app/twain/twain.component.ts" visibleRegion="template" />
+<docs-code header="twain.component.ts (template)" path="adev/src/content/examples/testing/src/app/twain/twain.component.ts" visibleRegion="template" />
 
 HELPFUL: The value of the component's `quote` property passes through an `AsyncPipe`.
 That means the property returns either a `Promise` or an `Observable`.
 
 In this example, the `TwainComponent.getQuote()` method tells you that the `quote` property returns an `Observable`.
 
-<docs-code header="app/twain/twain.component.ts (getQuote)" path="adev/src/content/examples/testing/src/app/twain/twain.component.ts" visibleRegion="get-quote"/>
+<docs-code header="twain.component.ts (getQuote)" path="adev/src/content/examples/testing/src/app/twain/twain.component.ts" visibleRegion="get-quote"/>
 
 The `TwainComponent` gets quotes from an injected `TwainService`.
 The component starts the returned `Observable` with a placeholder value \(`'...'`\), before the service can return its first quote.
@@ -220,7 +220,7 @@ In general, tests themselves should not make calls to remote servers.
 They should emulate such calls.
 The setup in this `app/twain/twain.component.spec.ts` shows one way to do that:
 
-<docs-code header="app/twain/twain.component.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/twain/twain.component.spec.ts" visibleRegion="setup"/>
+<docs-code header="twain.component.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/twain/twain.component.spec.ts" visibleRegion="setup"/>
 
 Focus on the spy.
 
@@ -232,7 +232,6 @@ Unlike the real `getQuote()` method, this spy bypasses the server and returns a 
 You can write many useful tests with this spy, even though its `Observable` is synchronous.
 
 HELPFUL: It is best to limit the usage of spies to only what is necessary for the test. Creating mocks or spies for more than what's necessary can be brittle. As the component and injectable evolves, the unrelated tests can fail because they no longer mock enough behaviors that would otherwise not affect the test.
-
 
 ### Async test with `fakeAsync()`
 
@@ -247,7 +246,7 @@ HELPFUL: The `it()` function receives an argument of the following form.
 
 <docs-code language="javascript">
 
-fakeAsync(() => { /*test body*/ })
+fakeAsync(() => { /_test body_/ })
 
 </docs-code>
 
@@ -256,7 +255,7 @@ The test body appears to be synchronous.
 There is no nested syntax \(like a `Promise.then()`\) to disrupt the flow of control.
 
 HELPFUL: Limitation: The `fakeAsync()` function won't work if the test body makes an `XMLHttpRequest` \(XHR\) call.
-XHR calls within a test are rare, but if you need to call XHR, see the [`waitForAsync()`](#waitForAsync) section.
+XHR calls within a test are rare, but if you need to call XHR, use `waitForAsync()`.
 
 IMPORTANT: Be aware that asynchronous tasks that happen inside the `fakeAsync` zone need to be manually executed with `flush` or `tick`. If you attempt to
 wait for them to complete (i.e. using `fixture.whenStable`) without using the
@@ -307,7 +306,7 @@ If you use the Angular CLI, configure this flag in `src/test.ts`.
 
 <docs-code language="typescript">
 
-[window as any]('&lowbar;&lowbar;zone&lowbar;symbol__fakeAsyncPatchLock') = true;
+[window as any]('__zone_symbol__fakeAsyncPatchLock') = true;
 import 'zone.js/testing';
 
 </docs-code>
@@ -324,23 +323,23 @@ You can also use RxJS scheduler in `fakeAsync()` just like using `setTimeout()` 
 
 By default, `fakeAsync()` supports the following macro tasks.
 
-* `setTimeout`
-* `setInterval`
-* `requestAnimationFrame`
-* `webkitRequestAnimationFrame`
-* `mozRequestAnimationFrame`
+- `setTimeout`
+- `setInterval`
+- `requestAnimationFrame`
+- `webkitRequestAnimationFrame`
+- `mozRequestAnimationFrame`
 
-If you run other macro tasks such as `HTMLCanvasElement.toBlob()`, an *"Unknown macroTask scheduled in fake async test"* error is thrown.
+If you run other macro tasks such as `HTMLCanvasElement.toBlob()`, an _"Unknown macroTask scheduled in fake async test"_ error is thrown.
 
 <docs-code-multifile>
-    <docs-code header="src/app/shared/canvas.component.spec.ts (failing)" path="adev/src/content/examples/testing/src/app/shared/canvas.component.spec.ts" visibleRegion="without-toBlob-macrotask"/>
-    <docs-code header="src/app/shared/canvas.component.ts" path="adev/src/content/examples/testing/src/app/shared/canvas.component.ts" visibleRegion="main"/>
+    <docs-code header="canvas.component.spec.ts (failing)" path="adev/src/content/examples/testing/src/app/shared/canvas.component.spec.ts" visibleRegion="without-toBlob-macrotask"/>
+    <docs-code header="canvas.component.ts" path="adev/src/content/examples/testing/src/app/shared/canvas.component.ts" visibleRegion="main"/>
 </docs-code-multifile>
 
 If you want to support such a case, you need to define the macro task you want to support in `beforeEach()`.
 For example:
 
-<docs-code header="src/app/shared/canvas.component.spec.ts (excerpt)" path="adev/src/content/examples/testing/src/app/shared/canvas.component.spec.ts" visibleRegion="enable-toBlob-macrotask"/>
+<docs-code header="canvas.component.spec.ts (excerpt)" path="adev/src/content/examples/testing/src/app/shared/canvas.component.spec.ts" visibleRegion="enable-toBlob-macrotask"/>
 
 HELPFUL: In order to make the `<canvas>` element Zone.js-aware in your app, you need to import the `zone-patch-canvas` patch \(either in `polyfills.ts` or in the specific file that uses `<canvas>`\):
 
@@ -354,7 +353,7 @@ However, you might be troubled by the fact that the real service doesn't quite b
 The real service sends requests to a remote server.
 A server takes time to respond and the response certainly won't be available immediately as in the previous two tests.
 
-Your tests will reflect the real world more faithfully if you return an *asynchronous* observable from the `getQuote()` spy like this.
+Your tests will reflect the real world more faithfully if you return an _asynchronous_ observable from the `getQuote()` spy like this.
 
 <docs-code path="adev/src/content/examples/testing/src/app/twain/twain.component.spec.ts" visibleRegion="async-setup"/>
 
@@ -369,7 +368,7 @@ This helper's observable emits the `data` value in the next turn of the JavaScri
 
 The [RxJS `defer()` operator](http://reactivex.io/documentation/operators/defer.html) returns an observable.
 It takes a factory function that returns either a promise or an observable.
-When something subscribes to *defer*'s observable, it adds the subscriber to a new observable created with that factory.
+When something subscribes to _defer_'s observable, it adds the subscriber to a new observable created with that factory.
 
 The `defer()` operator transforms the `Promise.resolve()` into a new observable that, like `HttpClient`, emits once and completes.
 Subscribers are unsubscribed after they receive the data value.
@@ -408,7 +407,6 @@ Instead of calling [tick()](api/core/testing/tick), it calls `fixture.whenStable
 The `fixture.whenStable()` returns a promise that resolves when the JavaScript engine's task queue becomes empty.
 In this example, the task queue becomes empty when the observable emits the first quote.
 
-
 ## Component with inputs and outputs
 
 A component with inputs and outputs typically appears inside the view template of a host component.
@@ -423,20 +421,20 @@ Clicking that hero tells the `DashboardComponent` that the user has selected the
 
 The `DashboardHeroComponent` is embedded in the `DashboardComponent` template like this:
 
-<docs-code header="app/dashboard/dashboard.component.html (excerpt)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.html" visibleRegion="dashboard-hero"/>
+<docs-code header="dashboard.component.html (excerpt)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.html" visibleRegion="dashboard-hero"/>
 
 The `DashboardHeroComponent` appears in an `@for` block, which sets each component's `hero` input property to the looping value and listens for the component's `selected` event.
 
 Here's the component's full definition:
 
-<docs-code header="app/dashboard/dashboard-hero.component.ts (component)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.ts" visibleRegion="component"/>
+<docs-code header="dashboard-hero.component.ts (component)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.ts" visibleRegion="component"/>
 
 While testing a component this simple has little intrinsic value, it's worth knowing how.
 Use one of these approaches:
 
-* Test it as used by `DashboardComponent`
-* Test it as a standalone component
-* Test it as used by a substitute for `DashboardComponent`
+- Test it as used by `DashboardComponent`
+- Test it as a standalone component
+- Test it as used by a substitute for `DashboardComponent`
 
 The immediate goal is to test the `DashboardHeroComponent`, not the `DashboardComponent`, so, try the second and third options.
 
@@ -444,7 +442,7 @@ The immediate goal is to test the `DashboardHeroComponent`, not the `DashboardCo
 
 Here's the meat of the spec file setup.
 
-<docs-code header="app/dashboard/dashboard-hero.component.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="setup"/>
+<docs-code header="dashboard-hero.component.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="setup"/>
 
 Notice how the setup code assigns a test hero \(`expectedHero`\) to the component's `hero` property, emulating the way the `DashboardComponent` would set it using the property binding in its repeater.
 
@@ -452,7 +450,7 @@ The following test verifies that the hero name is propagated to the template usi
 
 <docs-code path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="name-test"/>
 
-Because the [template](#dashboard-hero-component) passes the hero name through the Angular `UpperCasePipe`, the test must match the element value with the upper-cased name.
+Because the template passes the hero name through the Angular `UpperCasePipe`, the test must match the element value with the upper-cased name.
 
 ### Clicking
 
@@ -461,7 +459,7 @@ Clicking the hero should raise a `selected` event that the host component \(`Das
 <docs-code path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="click-test"/>
 
 The component's `selected` property returns an `EventEmitter`, which looks like an RxJS synchronous `Observable` to consumers.
-The test subscribes to it *explicitly* just as the host component does *implicitly*.
+The test subscribes to it _explicitly_ just as the host component does _implicitly_.
 
 If the component behaves as expected, clicking the hero's element should tell the component's `selected` property to emit the `hero` object.
 
@@ -475,7 +473,7 @@ It has Angular properties and methods that abstract interaction with the native 
 This test calls the `DebugElement.triggerEventHandler` with the "click" event name.
 The "click" event binding responds by calling `DashboardHeroComponent.click()`.
 
-The Angular `DebugElement.triggerEventHandler` can raise *any data-bound event* by its *event name*.
+The Angular `DebugElement.triggerEventHandler` can raise _any data-bound event_ by its _event name_.
 The second parameter is the event object passed to the handler.
 
 The test triggered a "click" event.
@@ -490,7 +488,7 @@ The `RouterLink` directive throws an error if the event object is missing.
 
 ### Click the element
 
-The following test alternative calls the native element's own `click()` method, which is perfectly fine for *this component*.
+The following test alternative calls the native element's own `click()` method, which is perfectly fine for _this component_.
 
 <docs-code path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="click-test-2"/>
 
@@ -498,29 +496,29 @@ The following test alternative calls the native element's own `click()` method, 
 
 Clicking a button, an anchor, or an arbitrary HTML element is a common test task.
 
-Make that consistent and straightforward by encapsulating the *click-triggering* process in a helper such as the following `click()` function:
+Make that consistent and straightforward by encapsulating the _click-triggering_ process in a helper such as the following `click()` function:
 
 <docs-code header="testing/index.ts (click helper)" path="adev/src/content/examples/testing/src/testing/index.ts" visibleRegion="click-event"/>
 
-The first parameter is the *element-to-click*.
+The first parameter is the _element-to-click_.
 If you want, pass a custom event object as the second parameter.
 The default is a partial [left-button mouse event object](https://developer.mozilla.org/docs/Web/API/MouseEvent/button) accepted by many handlers including the `RouterLink` directive.
 
 IMPORTANT: The `click()` helper function is **not** one of the Angular testing utilities.
-It's a function defined in *this guide's sample code*.
+It's a function defined in _this guide's sample code_.
 All of the sample tests use it.
 If you like it, add it to your own collection of helpers.
 
 Here's the previous test, rewritten using the click helper.
 
-<docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test with click helper)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="click-test-3"/>
+<docs-code header="dashboard-hero.component.spec.ts (test with click helper)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="click-test-3"/>
 
 ## Component inside a test host
 
 The previous tests played the role of the host `DashboardComponent` themselves.
 But does the `DashboardHeroComponent` work correctly when properly data-bound to a host component?
 
-<docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test host)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host"/>
+<docs-code header="dashboard-hero.component.spec.ts (test host)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host"/>
 
 The test host sets the component's `hero` input property with its test hero.
 It binds the component's `selected` event with its `onSelected` handler, which records the emitted hero in its `selectedHero` property.
@@ -529,12 +527,12 @@ Later, the tests will be able to check `selectedHero` to verify that the `Dashbo
 
 The setup for the `test-host` tests is similar to the setup for the stand-alone tests:
 
-<docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test host setup)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host-setup"/>
+<docs-code header="dashboard-hero.component.spec.ts (test host setup)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host-setup"/>
 
 This testing module configuration shows two important differences:
 
-* It *creates* the `TestHostComponent` instead of the `DashboardHeroComponent`
-* The `TestHostComponent` sets the `DashboardHeroComponent.hero` with a binding
+- It _creates_ the `TestHostComponent` instead of the `DashboardHeroComponent`
+- The `TestHostComponent` sets the `DashboardHeroComponent.hero` with a binding
 
 The `createComponent` returns a `fixture` that holds an instance of `TestHostComponent` instead of an instance of `DashboardHeroComponent`.
 
@@ -543,31 +541,31 @@ The query for the hero element \(`heroEl`\) still finds it in the test DOM, albe
 
 The tests themselves are almost identical to the stand-alone version:
 
-<docs-code header="app/dashboard/dashboard-hero.component.spec.ts (test-host)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host-tests"/>
+<docs-code header="dashboard-hero.component.spec.ts (test-host)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard-hero.component.spec.ts" visibleRegion="test-host-tests"/>
 
 Only the selected event test differs.
 It confirms that the selected `DashboardHeroComponent` hero really does find its way up through the event binding to the host component.
 
 ## Routing component
 
-A *routing component* is a component that tells the `Router` to navigate to another component.
-The `DashboardComponent` is a *routing component* because the user can navigate to the `HeroDetailComponent` by clicking on one of the *hero buttons* on the dashboard.
+A _routing component_ is a component that tells the `Router` to navigate to another component.
+The `DashboardComponent` is a _routing component_ because the user can navigate to the `HeroDetailComponent` by clicking on one of the _hero buttons_ on the dashboard.
 
 Angular provides test helpers to reduce boilerplate and more effectively test code which depends on `HttpClient`. The `provideRouter` function can be used directly in the test module as well.
 
-<docs-code header="app/dashboard/dashboard.component.spec.ts" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="router-harness"/>
+<docs-code header="dashboard.component.spec.ts" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="router-harness"/>
 
 The following test clicks the displayed hero and confirms that we navigate to the expected URL.
 
-<docs-code header="app/dashboard/dashboard.component.spec.ts (navigate test)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="navigate-test"/>
+<docs-code header="dashboard.component.spec.ts (navigate test)" path="adev/src/content/examples/testing/src/app/dashboard/dashboard.component.spec.ts" visibleRegion="navigate-test"/>
 
 ## Routed components
 
-A *routed component* is the destination of a `Router` navigation.
-It can be trickier to test, especially when the route to the component *includes parameters*.
-The `HeroDetailComponent` is a *routed component* that is the destination of such a route.
+A _routed component_ is the destination of a `Router` navigation.
+It can be trickier to test, especially when the route to the component _includes parameters_.
+The `HeroDetailComponent` is a _routed component_ that is the destination of such a route.
 
-When a user clicks a *Dashboard* hero, the `DashboardComponent` tells the `Router` to navigate to `heroes/:id`.
+When a user clicks a _Dashboard_ hero, the `DashboardComponent` tells the `Router` to navigate to `heroes/:id`.
 The `:id` is a route parameter whose value is the `id` of the hero to edit.
 
 The `Router` matches that URL to a route to the `HeroDetailComponent`.
@@ -575,15 +573,15 @@ It creates an `ActivatedRoute` object with the routing information and injects i
 
 Here are the services injected into `HeroDetailComponent`:
 
-<docs-code header="app/hero/hero-detail.component.ts (inject)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="inject"/>
+<docs-code header="hero-detail.component.ts (inject)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="inject"/>
 
 The `HeroDetail` component needs the `id` parameter so it can fetch the corresponding hero using the `HeroDetailService`.
 The component has to get the `id` from the `ActivatedRoute.paramMap` property which is an `Observable`.
 
 It can't just reference the `id` property of the `ActivatedRoute.paramMap`.
-The component has to *subscribe* to the `ActivatedRoute.paramMap` observable and be prepared for the `id` to change during its lifetime.
+The component has to _subscribe_ to the `ActivatedRoute.paramMap` observable and be prepared for the `id` to change during its lifetime.
 
-<docs-code header="app/hero/hero-detail.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ctor"/>
+<docs-code header="hero-detail.component.ts (constructor)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="ctor"/>
 
 Tests can explore how the `HeroDetailComponent` responds to different `id` parameter values by navigating to different routes.
 
@@ -595,9 +593,9 @@ The component tree can be very deep and sometimes the nested components play no 
 
 The `AppComponent`, for example, displays a navigation bar with anchors and their `RouterLink` directives.
 
-<docs-code header="app/app.component.html" path="adev/src/content/examples/testing/src/app/app.component.html"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/testing/src/app/app.component.html"/>
 
-To validate the links but not the navigation, you don't need the `Router` to navigate and you don't need the `<router-outlet>` to mark where the `Router` inserts *routed components*.
+To validate the links but not the navigation, you don't need the `Router` to navigate and you don't need the `<router-outlet>` to mark where the `Router` inserts _routed components_.
 
 The `BannerComponent` and `WelcomeComponent` \(indicated by `<app-banner>` and `<app-welcome>`\) are also irrelevant.
 
@@ -605,7 +603,7 @@ Yet any test that creates the `AppComponent` in the DOM also creates instances o
 
 If you neglect to declare them, the Angular compiler won't recognize the `<app-banner>`, `<app-welcome>`, and `<router-outlet>` tags in the `AppComponent` template and will throw an error.
 
-If you declare the real components, you'll also have to declare *their* nested components and provide for *all* services injected in *any* component in the tree.
+If you declare the real components, you'll also have to declare _their_ nested components and provide for _all_ services injected in _any_ component in the tree.
 
 This section describes two techniques for minimizing the setup.
 Use them, alone or in combination, to stay focused on testing the primary component.
@@ -614,14 +612,14 @@ Use them, alone or in combination, to stay focused on testing the primary compon
 
 In the first technique, you create and declare stub versions of the components and directive that play little or no role in the tests.
 
-<docs-code header="app/app.component.spec.ts (stub declaration)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="component-stubs"/>
+<docs-code header="app.component.spec.ts (stub declaration)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="component-stubs"/>
 
 The stub selectors match the selectors for the corresponding real components.
 But their templates and classes are empty.
 
-Then declare them by overriding the `imports` of your component using `TestBed.overrideComponent`. 
+Then declare them by overriding the `imports` of your component using `TestBed.overrideComponent`.
 
-<docs-code header="app/app.component.spec.ts (TestBed stubs)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="testbed-stubs"/>
+<docs-code header="app.component.spec.ts (TestBed stubs)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="testbed-stubs"/>
 
 HELPFUL: The `set` key in this example replaces all the exisiting imports on your component, make sure to imports all dependencies, not only the stubs. Alternatively you can use the `remove`/`add` keys to selectively remove and add imports.
 
@@ -629,7 +627,7 @@ HELPFUL: The `set` key in this example replaces all the exisiting imports on you
 
 In the second approach, add `NO_ERRORS_SCHEMA` to the metadata overrides of your component.
 
-<docs-code header="app/app.component.spec.ts (NO_ERRORS_SCHEMA)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="no-errors-schema"/>
+<docs-code header="app.component.spec.ts (NO_ERRORS_SCHEMA)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="no-errors-schema"/>
 
 The `NO_ERRORS_SCHEMA` tells the Angular compiler to ignore unrecognized elements and attributes.
 
@@ -642,19 +640,19 @@ You no longer need the stub components.
 
 ### Use both techniques together
 
-These are techniques for *Shallow Component Testing*, so-named because they reduce the visual surface of the component to just those elements in the component's template that matter for tests.
+These are techniques for _Shallow Component Testing_, so-named because they reduce the visual surface of the component to just those elements in the component's template that matter for tests.
 
 The `NO_ERRORS_SCHEMA` approach is the easier of the two but don't overuse it.
 
 The `NO_ERRORS_SCHEMA` also prevents the compiler from telling you about the missing components and attributes that you omitted inadvertently or misspelled.
 You could waste hours chasing phantom bugs that the compiler would have caught in an instant.
 
-The *stub component* approach has another advantage.
-While the stubs in *this* example were empty, you could give them stripped-down templates and classes if your tests need to interact with them in some way.
+The _stub component_ approach has another advantage.
+While the stubs in _this_ example were empty, you could give them stripped-down templates and classes if your tests need to interact with them in some way.
 
 In practice you will combine the two techniques in the same setup, as seen in this example.
 
-<docs-code header="app/app.component.spec.ts (mixed setup)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="mixed-setup"/>
+<docs-code header="app.component.spec.ts (mixed setup)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="mixed-setup"/>
 
 The Angular compiler creates the `BannerStubComponent` for the `<app-banner>` element and applies the `RouterLink` to the anchors with the `routerLink` attribute, but it ignores the `<app-welcome>` and `<router-outlet>` tags.
 
@@ -662,21 +660,21 @@ The Angular compiler creates the `BannerStubComponent` for the `<app-banner>` el
 
 A little more setup triggers the initial data binding and gets references to the navigation links:
 
-<docs-code header="app/app.component.spec.ts (test setup)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="test-setup"/>
+<docs-code header="app.component.spec.ts (test setup)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="test-setup"/>
 
 Three points of special interest:
 
-* Locate the anchor elements with an attached directive using `By.directive`
-* The query returns `DebugElement` wrappers around the matching elements
-* Each `DebugElement` exposes a dependency injector with the specific instance of the directive attached to that element
+- Locate the anchor elements with an attached directive using `By.directive`
+- The query returns `DebugElement` wrappers around the matching elements
+- Each `DebugElement` exposes a dependency injector with the specific instance of the directive attached to that element
 
 The `AppComponent` links to validate are as follows:
 
-<docs-code header="app/app.component.html (navigation links)" path="adev/src/content/examples/testing/src/app/app.component.html" visibleRegion="links"/>
+<docs-code header="app.component.html (navigation links)" path="adev/src/content/examples/testing/src/app/app.component.html" visibleRegion="links"/>
 
 Here are some tests that confirm those links are wired to the `routerLink` directives as expected:
 
-<docs-code header="app/app.component.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="tests"/>
+<docs-code header="app.component.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/app.component.spec.ts" visibleRegion="tests"/>
 
 ## Use a `page` object
 
@@ -685,14 +683,14 @@ The `HeroDetailComponent` is a simple view with a title, two hero fields, and tw
 But there's plenty of template complexity even in this simple form.
 
 <docs-code
-  path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.html" header="app/hero/hero-detail.component.html"/>
+  path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.html" header="hero-detail.component.html"/>
 
 Tests that exercise the component need …
 
-* To wait until a hero arrives before elements appear in the DOM
-* A reference to the title text
-* A reference to the name input box to inspect and set it
-* References to the two buttons so they can click them
+- To wait until a hero arrives before elements appear in the DOM
+- A reference to the title text
+- A reference to the name input box to inspect and set it
+- References to the two buttons so they can click them
 
 Even a small form such as this one can produce a mess of tortured conditional setup and CSS element selection.
 
@@ -700,29 +698,29 @@ Tame the complexity with a `Page` class that handles access to component propert
 
 Here is such a `Page` class for the `hero-detail.component.spec.ts`
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (Page)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="page"/>
+<docs-code header="hero-detail.component.spec.ts (Page)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="page"/>
 
 Now the important hooks for component manipulation and inspection are neatly organized and accessible from an instance of `Page`.
 
 A `createComponent` method creates a `page` object and fills in the blanks once the `hero` arrives.
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (createComponent)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="create-component"/>
+<docs-code header="hero-detail.component.spec.ts (createComponent)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="create-component"/>
 
 Here are a few more `HeroDetailComponent` tests to reinforce the point.
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="selected-tests"/>
+<docs-code header="hero-detail.component.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="selected-tests"/>
 
 ## Override component providers
 
 The `HeroDetailComponent` provides its own `HeroDetailService`.
 
-<docs-code header="app/hero/hero-detail.component.ts (prototype)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="prototype"/>
+<docs-code header="hero-detail.component.ts (prototype)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.ts" visibleRegion="prototype"/>
 
 It's not possible to stub the component's `HeroDetailService` in the `providers` of the `TestBed.configureTestingModule`.
-Those are providers for the *testing module*, not the component.
-They prepare the dependency injector at the *fixture level*.
+Those are providers for the _testing module_, not the component.
+They prepare the dependency injector at the _fixture level_.
 
-Angular creates the component with its *own* injector, which is a *child* of the fixture injector.
+Angular creates the component with its _own_ injector, which is a _child_ of the fixture injector.
 It registers the component's providers \(the `HeroDetailService` in this case\) with the child injector.
 
 A test cannot get to child injector services from the fixture injector.
@@ -735,25 +733,25 @@ There might not be a remote server to call.
 
 Fortunately, the `HeroDetailService` delegates responsibility for remote data access to an injected `HeroService`.
 
-<docs-code header="app/hero/hero-detail.service.ts (prototype)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.service.ts" visibleRegion="prototype"/>
+<docs-code header="hero-detail.service.ts (prototype)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.service.ts" visibleRegion="prototype"/>
 
-The [previous test configuration](#import-a-feature-module) replaces the real `HeroService` with a `TestHeroService` that intercepts server requests and fakes their responses.
+The previous test configuration replaces the real `HeroService` with a `TestHeroService` that intercepts server requests and fakes their responses.
 
 What if you aren't so lucky.
 What if faking the `HeroService` is hard?
 What if `HeroDetailService` makes its own server requests?
 
-The `TestBed.overrideComponent` method can replace the component's `providers` with easy-to-manage *test doubles* as seen in the following setup variation:
+The `TestBed.overrideComponent` method can replace the component's `providers` with easy-to-manage _test doubles_ as seen in the following setup variation:
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (Override setup)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="setup-override"/>
+<docs-code header="hero-detail.component.spec.ts (Override setup)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="setup-override"/>
 
-Notice that `TestBed.configureTestingModule` no longer provides a fake `HeroService` because it's [not needed](#spy-stub).
+Notice that `TestBed.configureTestingModule` no longer provides a fake `HeroService` because it's [not needed](#provide-a-spy-stub-herodetailservicespy).
 
 ### The `overrideComponent` method
 
 Focus on the `overrideComponent` method.
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (overrideComponent)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="override-component-method"/>
+<docs-code header="hero-detail.component.spec.ts (overrideComponent)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="override-component-method"/>
 
 It takes two arguments: the component type to override \(`HeroDetailComponent`\) and an override metadata object.
 The [override metadata object](guide/testing/utility-apis#metadata-override-object) is a generic defined as follows:
@@ -761,9 +759,9 @@ The [override metadata object](guide/testing/utility-apis#metadata-override-obje
 <docs-code language="javascript">
 
 type MetadataOverride<T> = {
-  add?: Partial<T>;
-  remove?: Partial<T>;
-  set?: Partial<T>;
+add?: Partial<T>;
+remove?: Partial<T>;
+set?: Partial<T>;
 };
 
 </docs-code>
@@ -783,7 +781,7 @@ providers?: any[];
 
 </docs-code>
 
-### Provide a *spy stub* (`HeroDetailServiceSpy`)
+### Provide a _spy stub_ (`HeroDetailServiceSpy`)
 
 This example completely replaces the component's `providers` array with a new array containing a `HeroDetailServiceSpy`.
 
@@ -793,13 +791,13 @@ It neither injects nor delegates to the lower level `HeroService` so there's no 
 The related `HeroDetailComponent` tests will assert that methods of the `HeroDetailService` were called by spying on the service methods.
 Accordingly, the stub implements its methods as spies:
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (HeroDetailServiceSpy)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="hds-spy"/>
+<docs-code header="hero-detail.component.spec.ts (HeroDetailServiceSpy)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="hds-spy"/>
 
 ### The override tests
 
 Now the tests can control the component's hero directly by manipulating the spy-stub's `testHero` and confirm that service methods were called.
 
-<docs-code header="app/hero/hero-detail.component.spec.ts (override tests)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="override-tests"/>
+<docs-code header="hero-detail.component.spec.ts (override tests)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="override-tests"/>
 
 ### More overrides
 

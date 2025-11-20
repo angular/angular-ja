@@ -1,57 +1,114 @@
+# コードカバレッジ {#code-coverage}
 
-# テストされているコードの量を確認する
-
-Angular CLIは、単体テストを実行し、コードカバレッジレポートを作成できます。
 コードカバレッジレポートは、単体テストで適切にテストされていないコードベースの箇所を示します。
 
-カバレッジレポートを生成するには、プロジェクトのルートで次のコマンドを実行します。
+## 前提条件 {#prerequisites}
 
-<docs-code language="shell">
-ng test --no-watch --code-coverage
-</docs-code>
+Vitestでコードカバレッジレポートを生成するには、`@vitest/coverage-v8` パッケージをインストールする必要があります。
 
-テストが完了すると、コマンドによってプロジェクトに新しい `/coverage` ディレクトリが作成されます。
-`index.html` ファイルを開くと、ソースコードとコードカバレッジ値を含むレポートが表示されます。
+<docs-code-multifile>
+  <docs-code header="npm" language="shell">
+    npm install --save-dev @vitest/coverage-v8
+  </docs-code>
+  <docs-code header="yarn" language="shell">
+    yarn add --dev @vitest/coverage-v8
+  </docs-code>
+  <docs-code header="pnpm" language="shell">
+    pnpm add -D @vitest/coverage-v8
+  </docs-code>
+  <docs-code header="bun" language="shell">
+    bun add --dev @vitest/coverage-v8
+  </docs-code>
+</docs-code-multifile>
 
-テストを実行するたびにコードカバレッジレポートを作成する場合は、Angular CLI構成ファイル `angular.json` に次のオプションを設定します。
+## レポートの生成 {#generating-a-report}
 
-<docs-code language="json">
-"test": {
-  "options": {
-    "codeCoverage": true
-  }
-}
-</docs-code>
+カバレッジレポートを生成するには、`ng test` コマンドに `--coverage` フラグを追加します。
 
-## コードカバレッジの強制
+```shell
+ng test --coverage
+```
 
-コードカバレッジのパーセンテージは、コードのどの程度がテストされているかを推定できます。
-チームが単体テストを行う最小限の量を決定した場合、Angular CLIでその最小限を強制できます。
+テストの実行後、コマンドによってプロジェクトに新しい `coverage/` ディレクトリが作成されます。`index.html` ファイルを開くと、ソースコードとコードカバレッジ値を含むレポートが表示されます。
 
-たとえば、コードベースのコードカバレッジを最低80% にしたいとします。
-これを有効にするには、[Karma](https://karma-runner.github.io) テストプラットフォーム構成ファイル `karma.conf.js` を開き、`coverageReporter:` キーに `check` プロパティを追加します。
+テストを実行するたびにコードカバレッジレポートを作成する場合は、`angular.json` ファイルで `coverage` オプションを `true` に設定できます。
 
-<docs-code language="javascript">
-coverageReporter: {
-  dir: require('path').join(__dirname, './coverage/<project-name>'),
-  subdir: '.',
-  reporters: [
-    { type: 'html' },
-    { type: 'text-summary' }
-  ],
-  check: {
-    global: {
-      statements: 80,
-      branches: 80,
-      functions: 80,
-      lines: 80
+```json
+{
+  "projects": {
+    "your-project-name": {
+      "architect": {
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "coverage": true
+          }
+        }
+      }
     }
   }
 }
-</docs-code>
+```
 
-HELPFUL: [テストガイド](guide/testing#configuration) で、Karma構成の作成と微調整について詳しく説明しています。
+## コードカバレッジのしきい値の強制 {#enforcing-code-coverage-thresholds}
 
-`check` プロパティによって、プロジェクトで単体テストを実行すると、最低80% のコードカバレッジが強制されます。
+コードカバレッジのパーセンテージは、コードのどの程度がテストされているかを推定できます。チームが単体テストを行う最小限の量を決定した場合、構成でその最小限を強制できます。
 
-[karma カバレッジドキュメント](https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md) で、カバレッジ構成オプションの詳細を確認してください。
+たとえば、コードベースのコードカバレッジを最低80%にしたいとします。これを有効にするには、`angular.json` ファイルに `coverageThresholds` オプションを追加します。
+
+```json
+{
+  "projects": {
+    "your-project-name": {
+      "architect": {
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "coverage": true,
+            "coverageThresholds": {
+              "statements": 80,
+              "branches": 80,
+              "functions": 80,
+              "lines": 80
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+これで、テストを実行したときにカバレッジが80%を下回ると、コマンドは失敗します。
+
+## 高度な設定 {#advanced-configuration}
+
+`angular.json` ファイルで、他にもいくつかのカバレッジオプションを設定できます。
+
+- `coverageInclude`: カバレッジレポートに含めるファイルのglobパターン。
+- `coverageReporters`: 使用するレポーターの配列（例: `html`、`lcov`、`json`）。
+- `coverageWatermarks`: HTMLレポーターの `[low, high]` ウォーターマークを指定するオブジェクト。レポートの色分けに影響を与える可能性があります。
+
+```json
+{
+  "projects": {
+    "your-project-name": {
+      "architect": {
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "coverage": true,
+            "coverageReporters": ["html", "lcov"],
+            "coverageWatermarks": {
+              "statements": [50, 80],
+              "branches": [50, 80],
+              "functions": [50, 80],
+              "lines": [50, 80]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```

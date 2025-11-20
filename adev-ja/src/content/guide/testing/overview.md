@@ -1,125 +1,203 @@
-# テスト
+# ユニットテスト
 
-Angularアプリケーションをテストすると、アプリケーションが期待どおりに動作していることを確認できます。
+Angularアプリケーションをテストすると、期待どおりに動作していることを確認できます。ユニットテストは、バグを早期に発見し、コード品質を確保し、安全なリファクタリングを促進するために不可欠です。
 
-## テストの設定
+NOTE: このガイドでは、新しいAngular CLIプロジェクトのデフォルトテスト設定に焦点を当てています。既存のプロジェクトをKarmaからVitestに移行する場合は、[KarmaからVitestへの移行ガイド](guide/testing/migrating-to-vitest)を参照してください。Vitestはデフォルトのテストランナーですが、Karmaは引き続き完全にサポートされています。Karmaを使用したテストについては、[Karmaテストガイド](guide/testing/karma)を参照してください。
 
-Angular CLIは、[Jasmineテストフレームワーク](https://jasmine.github.io)を使用してAngularアプリケーションをテストするために必要なものをすべてダウンロードしてインストールします。
+## テストの設定 {#set-up-for-testing}
 
-CLIで作成したプロジェクトは、すぐにテストできます。
-[`ng test`](cli/test) CLIコマンドを実行するだけです。
+Angular CLIは、[Vitestテストフレームワーク](https://vitest.dev)を使用してAngularアプリケーションをテストするために必要なものをすべてダウンロードしてインストールします。デフォルトでは、新しいプロジェクトには`vitest`と`jsdom`が含まれています。
 
-<docs-code language="shell">
+Vitestは、`jsdom`を使用してDOMをエミュレートするNode.js環境でユニットテストを実行します。これにより、ブラウザを起動するオーバーヘッドを回避して、テストの実行を高速化できます。`happy-dom`をインストールして`jsdom`を削除することで、代替として`happy-dom`を使用できます。CLIは`happy-dom`が存在する場合、自動的に検出して使用します。
 
+CLIで作成したプロジェクトは、すぐにテストできます。[`ng test`](cli/test) CLIコマンドを実行するだけです:
+
+```shell
 ng test
+```
 
-</docs-code>
+`ng test`コマンドはアプリケーションを_監視モード_でビルドし、[Vitestテストランナー](https://vitest.dev)を起動します。
 
-`ng test`コマンドはアプリケーションを*監視モード*でビルドし、
-[Karmaテストランナー](https://karma-runner.github.io)を起動します。
+コンソールの出力は次のようになります:
 
-コンソールの出力は次のようになります。
+```shell
+ ✓ src/app/app.spec.ts (3)
+   ✓ AppComponent should create the app
+   ✓ AppComponent should have as title 'my-app'
+   ✓ AppComponent should render title
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  18:18:01
+   Duration  2.46s (transform 615ms, setup 2ms, collect 2.21s, tests 5ms)
+```
 
-<docs-code language="shell">
+`ng test`コマンドは変更も監視します。これが実際にどのように機能するかを確認するには、`app.ts`を少し変更して保存します。テストが再び実行され、新しい結果がコンソールに表示されます。
 
-02 11 2022 09:08:28.605:INFO [karma-server]: Karma v6.4.1 server started at http://localhost:9876/
-02 11 2022 09:08:28.607:INFO [launcher]: Launching browsers Chrome with concurrency unlimited
-02 11 2022 09:08:28.620:INFO [launcher]: Starting browser Chrome
-02 11 2022 09:08:31.312:INFO [Chrome]: Connected on socket -LaEYvD2R7MdcS0-AAAB with id 31534482
-Chrome: Executed 3 of 3 SUCCESS (0.193 secs / 0.172 secs)
-TOTAL: 3 SUCCESS
+## 設定 {#configuration}
 
-</docs-code>
+Angular CLIは、Vitestの設定のほとんどを処理します。多くの一般的なユースケースでは、`angular.json`ファイルのオプションを直接変更することで、テストの動作を調整できます。
 
-ログの最後の行は、Karmaが3つのテストを実行し、すべてが合格したことを示しています。
+### 組み込み設定オプション {#built-in-configuration-options}
 
-テスト出力は、[Karma Jasmine HTMLレポーター](https://github.com/dfederm/karma-jasmine-html-reporter)を使用してブラウザに表示されます。
+`angular.json`ファイルの`test`ターゲットで次のオプションを変更できます:
 
-<img alt="Jasmine HTML Reporter in the browser" src="assets/images/guide/testing/initial-jasmine-html-reporter.png">
+- `include`: テストに含めるファイルのGlobパターン。デフォルトは`['**/*.spec.ts', '**/*.test.ts']`です。
+- `exclude`: テストから除外するファイルのGlobパターン。
+- `setupFiles`: テストの前に実行されるグローバルセットアップファイル（ポリフィルやグローバルモックなど）へのパスのリスト。
+- `providersFile`: テスト環境用のAngularプロバイダーのデフォルト配列をエクスポートするファイルへのパス。これは、テストに注入されるグローバルテストプロバイダーをセットアップするのに役立ちます。
+- `coverage`: コードカバレッジレポートを有効または無効にするブール値。デフォルトは`false`です。
+- `browsers`: テストを実行するブラウザ名の配列（例: `["chromium"]`）。ブラウザプロバイダーのインストールが必要です。
 
-テスト行をクリックしてそのテストのみを再実行するか、説明をクリックして選択したテストグループ（「テストスイート」）のテストを再実行します。
+たとえば、`src/test-providers.ts`ファイルを作成して、すべてのテストに`provideHttpClientTesting`を提供できます:
 
-一方、`ng test`コマンドは変更を監視しています。
+```typescript
+import { Provider } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-これが実際にどのように機能するかを確認するには、`app.component.ts`を少し変更して保存します。
-テストが再び実行され、ブラウザが更新され、新しいテスト結果が表示されます。
+const testProviders: Provider[] = [
+  provideHttpClient(),
+  provideHttpClientTesting(),
+];
 
-## 設定
+export default testProviders;
+```
 
-Angular CLIは、JasmineとKarmaの設定を処理します。Angular CLIは、`angular.json`ファイルで指定されたオプションに基づいて、メモリ内に完全な設定を構築します。
+次に、このファイルを`angular.json`で参照します:
 
-Karmaをカスタマイズする場合は、次のコマンドを実行して`karma.conf.js`を作成できます。
+```json
+{
+  "projects": {
+    "your-project-name": {
+      "architect": {
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "include": ["src/**/*.spec.ts"],
+            "setupFiles": ["src/test-setup.ts"],
+            "providersFile": "src/test-providers.ts",
+            "coverage": true,
+            "browsers": ["chromium"]
+          }
+        }
+      }
+    }
+  }
+}
+```
 
-<docs-code language="shell">
+### 高度: カスタムVitest設定 {#advanced-custom-vitest-configuration}
 
-ng generate config karma
+高度なユースケースでは、カスタムVitest設定ファイルを提供できます。
 
-</docs-code>
+IMPORTANT: カスタム設定を使用すると高度なオプションが有効になりますが、Angularチームは設定ファイルの特定の内容やその中で使用されるサードパーティプラグインについて直接サポートを提供していません。CLIは、適切な動作を保証するために特定のプロパティ（`test.projects`、`test.include`）を上書きします。
 
-HELPFUL: [Karma設定ガイド](http://karma-runner.github.io/6.4/config/configuration-file.html)でKarmaの設定について詳しく知ることができます。
+Vitest設定ファイル（例: `vitest-base.config.ts`）を作成し、`runnerConfig`オプションを使用して`angular.json`で参照できます。
 
-### その他のテストフレームワーク
+```json
+{
+  "projects": {
+    "your-project-name": {
+      "architect": {
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "runnerConfig": "vitest-base.config.ts"
+          }
+        }
+      }
+    }
+  }
+}
+```
 
-Angularアプリケーションは、他のテストライブラリとテストランナーでもユニットテストできます。
-各ライブラリとランナーには、それぞれ独自のインストール手順、構成、構文があります。
+CLIを使用して基本設定ファイルを生成できます:
 
-### テストファイル名と場所
+```shell
+ng generate config vitest
+```
 
-Angular CLIは、`src/app`フォルダ内に`AppComponent`のテストファイルを`app.component.spec.ts`という名前で生成しました。
+これにより、カスタマイズ可能な`vitest-base.config.ts`ファイルが作成されます。
 
-IMPORTANT: テストファイル拡張子は**`.spec.ts`でなければなりません**。これにより、ツールはファイルをテストを含むファイル（*spec*ファイルとも呼ばれる）として識別できます。
+HELPFUL: Vitestの設定について詳しくは、[Vitest設定ガイド](https://vitest.dev/config/)を参照してください。
 
-`app.component.ts`と`app.component.spec.ts`ファイルは、同じフォルダ内の兄弟です。
-ルートファイル名（`app.component`）は、両方のファイルで同じです。
+## コードカバレッジ {#code-coverage}
 
-あらゆる種類のテストファイルに対して、これらの2つの規則を独自のプロジェクトで採用してください。
+`ng test`コマンドに`--coverage`フラグを追加することで、コードカバレッジレポートを生成できます。レポートは`coverage/`ディレクトリに生成されます。
 
-#### テストするファイルの横にspecファイルを配置する
+前提条件、カバレッジしきい値の適用、高度な設定の詳細については、[コードカバレッジガイド](guide/testing/code-coverage)を参照してください。
 
-ユニットテストのspecファイルを、
-テストするアプリケーションソースコードファイルと同じフォルダに入れることをお勧めします。
+## ブラウザでのテストの実行 {#running-tests-in-a-browser}
 
-* このようなテストは簡単に検索できます。
-* アプリケーションの一部にテストがないかどうかをひと目で確認できます。
-* 近くのテストは、一部がコンテキストでどのように機能するかを示すことができます。
-* ソースを移動すると（不可避ですが）、テストも移動することを思い出します。
-* ソースファイルを名前変更すると（不可避ですが）、テストファイルの名前も変更することを思い出します。
+デフォルトのNode.js環境はほとんどのユニットテストで高速ですが、実際のブラウザでテストを実行できます。これは、ブラウザ固有のAPI（レンダリングなど）に依存するテストやデバッグに役立ちます。
 
-#### specファイルをテストフォルダに配置する
+ブラウザでテストを実行するには、最初にブラウザプロバイダーをインストールする必要があります。
+ニーズに基づいて、次のブラウザプロバイダーのいずれかを選択してください:
 
-アプリケーションの統合specは、
-フォルダとモジュールにまたがる複数の部分の相互作用をテストできます。
-それらは、特にどの部分にも属していないため、
-特定のファイルの横に自然な場所がありません。
+- **Playwright**: `@vitest/browser-playwright` (Chromium、Firefox、WebKit用)
+- **WebdriverIO**: `@vitest/browser-webdriverio` (Chrome、Firefox、Safari、Edge用)
+- **Preview**: `@vitest/browser-preview` (StackBlitzなどのWebcontainer環境用)
 
-多くの場合、それらに対して`tests`ディレクトリに適切なフォルダを作成する方が良いでしょう。
+<docs-code-multifile>
+  <docs-code header="npm" language="shell">
+    npm install --save-dev @vitest/browser-playwright playwright
+  </docs-code>
+  <docs-code header="yarn" language="shell">
+    yarn add --dev @vitest/browser-playwright playwright
+  </docs-code>
+  <docs-code header="pnpm" language="shell">
+    pnpm add -D @vitest/browser-playwright playwright
+  </docs-code>
+  <docs-code header="bun" language="shell">
+    bun add --dev @vitest/browser-playwright playwright
+  </docs-code>
+</docs-code-multifile>
 
-もちろん、テストヘルパーをテストするspecは、
-対応するヘルパーファイルの隣の`test`フォルダに入ります。
+プロバイダーがインストールされたら、`--browsers`フラグを使用してブラウザでテストを実行できます:
 
-## 継続的インテグレーションでのテスト
+```bash
+# Playwrightの例
+ng test --browsers=chromium
 
-プロジェクトをバグなしに保つ最良の方法の1つは、テストスイートを使用することですが、常にテストを実行することを忘れてしまうかもしれません。
+# WebdriverIOの例
+ng test --browsers=chrome
+```
 
-継続的インテグレーション（CI）サーバーを使用すると、プロジェクトリポジトリを設定して、すべてのコミットとプルリクエストでテストを実行できます。
+`CI`環境変数が設定されている場合、ヘッドレスモードが自動的に有効になります。それ以外の場合、テストはヘッド付きブラウザで実行されます。
 
-Angular CLIアプリケーションを継続的インテグレーション（CI）でテストするには、次のコマンドを実行します。
+## その他のテストフレームワーク {#other-test-frameworks}
 
-<docs-code language="shell">
-ng test --no-watch --no-progress --browsers=ChromeHeadless
-</docs-code>
+Angularアプリケーションは、他のテストライブラリとテストランナーでもユニットテストできます。各ライブラリとランナーには、それぞれ独自のインストール手順、設定、構文があります。
 
-## テストに関する追加情報
+## 継続的インテグレーションでのテスト {#testing-in-continuous-integration}
+
+堅牢なテストスイートは、継続的インテグレーション（CI）パイプラインの重要な部分です。CIサーバーを使用すると、プロジェクトリポジトリを設定して、すべてのコミットとプルリクエストでテストを実行できます。
+
+継続的インテグレーション（CI）サーバーでAngularアプリケーションをテストするには、通常、標準のテストコマンドを実行します:
+
+```shell
+ng test
+```
+
+ほとんどのCIサーバーは`CI=true`環境変数を設定しており、`ng test`はこれを検出します。これにより、適切な非対話型のシングルランモードでテストが自動的に実行されます。
+
+CIサーバーがこの変数を設定しない場合、または手動でシングルランモードを強制する必要がある場合は、`--no-watch`および`--no-progress`フラグを使用できます:
+
+```shell
+ng test --no-watch --no-progress
+```
+
+## テストに関する追加情報 {#more-information-on-testing}
 
 アプリケーションのテストを設定したら、次のテストガイドが役立つ場合があります。
 
-|                                                                    | 詳細 |
-|:---                                                                |:---     |
+|                                                                    | 詳細                                                                           |
+| :----------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | [コードカバレッジ](guide/testing/code-coverage)                       | テストがアプリケーションのどの部分をカバーしているか、および必要な量の指定方法。 |
 | [サービスのテスト](guide/testing/services)                         | アプリケーションで使用しているサービスのテスト方法。                                   |
 | [コンポーネントのテストの基本](guide/testing/components-basics)    | Angularコンポーネントのテストの基本。                                             |
 | [コンポーネントテストシナリオ](guide/testing/components-scenarios)  | さまざまな種類のコンポーネントテストシナリオとユースケース。                       |
 | [属性ディレクティブのテスト](guide/testing/attribute-directives) | 属性ディレクティブのテスト方法。                                            |
 | [パイプのテスト](guide/testing/pipes)                               | パイプのテスト方法。                                                                |
-| [テストのデバッグ](guide/testing/debugging)                            | 一般的なテストのバグ。                                                              |
+| [テストのデバッグ](guide/testing/debugging)                         | 一般的なテストのバグ。                                                              |
 | [ユーティリティAPIのテスト](guide/testing/utility-apis)                 | Angularのテスト機能。                                                         |
